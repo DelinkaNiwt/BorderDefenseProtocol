@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Battle Suit: Artemis -->
+  <Milira_Apparel_Artemis.label>战服：阿忒弥斯</Milira_Apparel_Artemis.label>
+  <!-- EN: Study the combat uniform of the Sky Elves. -->
+  <Milira_Apparel_Artemis.description>研究天空精灵用于战斗的服装。</Milira_Apparel_Artemis.description>
+  
+  <!-- EN: Milira Traditional Costume -->
+  <Milira_Apparel_I.label>米莉拉传统服装</Milira_Apparel_I.label>
+  <!-- EN: Study the classic traditional costumes of the sky elves. -->
+  <Milira_Apparel_I.description>研究天空精灵古老的传统服饰。</Milira_Apparel_I.description>
+  
+  <!-- EN: Milira Elegant Costume -->
+  <Milira_Apparel_II.label>米莉拉精致服装</Milira_Apparel_II.label>
+  <!-- EN: Study the elegant costume of Milira. -->
+  <Milira_Apparel_II.description>研究天空精灵的精致服饰。</Milira_Apparel_II.description>
+  
+  <!-- EN: Battle Suit: Valkyr -->
+  <Milira_Apparel_Valkyr.label>战服：瓦尔基里</Milira_Apparel_Valkyr.label>
+  <!-- EN: Study the combat uniform of the Sky Elves. -->
+  <Milira_Apparel_Valkyr.description>研究天空精灵用于战斗的服装。</Milira_Apparel_Valkyr.description>
+  
+  <!-- EN: Milira Blade -->
+  <Milira_Blade.label>米莉拉的战刀</Milira_Blade.label>
+  <!-- EN: Unlock the blade of Milira. -->
+  <Milira_Blade.description>解锁米莉拉的战刀。</Milira_Blade.description>
+  
+  <!-- EN: Milira Concept Weaponry -->
+  <Milira_ConceptWeaponry.label>米莉拉概念兵装</Milira_ConceptWeaponry.label>
+  <!-- EN: Research Milira concept weaponry that have not yet been fully deployed. -->
+  <Milira_ConceptWeaponry.description>研究尚未完全投入运用的概念兵装。</Milira_ConceptWeaponry.description>
+  
+  <!-- EN: Drone Control -->
+  <Milira_DroneControl.label>无人机遥控</Milira_DroneControl.label>
+  <!-- EN: Study how to control drones and float units in a distance. After finished this research, drones and float units become darftable. -->
+  <Milira_DroneControl.description>研究无人机的远程操控技术。研究完成后，无人机与浮游单元可以受到征召控制。</Milira_DroneControl.description>
+  
+  <!-- EN: Drones -->
+  <Milira_Drones.label>无人机</Milira_Drones.label>
+  <!-- EN: Research and manufacture drones capable of performing simple tasks. -->
+  <Milira_Drones.description>研究并制造能够完成简单工作的无人机。</Milira_Drones.description>
+  
+  <!-- EN: Efficient Photoelectric Transformation -->
+  <Milira_EffectivePhotoelectricTransform.label>高效光电转化</Milira_EffectivePhotoelectricTransform.label>
+  <!-- EN: Study more efficient photoelectric transforming facilities. By finishing this research, the power-generating efficiency of the Solar Energy Conversion Collection Tower will be substantially enhanced. -->
+  <Milira_EffectivePhotoelectricTransform.description>研究具有更高效率的光电转化设施。研究完成后，日凌聚光塔的发电效率大幅提高。</Milira_EffectivePhotoelectricTransform.description>
+  
+  <!-- EN: Field Theory -->
+  <Milira_FieldTheory.label>场理论</Milira_FieldTheory.label>
+  <!-- EN: Study the theory on the behavior of spatial force fields. -->
+  <Milira_FieldTheory.description>研究空间力场作用的理论学。</Milira_FieldTheory.description>
+  
+  <!-- EN: Field Trap -->
+  <Milira_FieldTrap.label>力场陷阱</Milira_FieldTrap.label>
+  <!-- EN: Study the traps utilizing spatial force fields to incapacitate enemies. -->
+  <Milira_FieldTrap.description>研究运用空间力场干扰敌人的陷阱。</Milira_FieldTrap.description>
+  
+  <Milira_ForceFieldAerocraft.label>力场飞行器</Milira_ForceFieldAerocraft.label>
+  <Milira_ForceFieldAerocraft.description>研究利用力场作用运行的飞行器。</Milira_ForceFieldAerocraft.description>
+  
+  <!-- EN: Small Float Unit -->
+  <Milira_FloatUnit.label>小型浮游单元</Milira_FloatUnit.label>
+  <!-- EN: Study the functional float units following the wielders. -->
+  <Milira_FloatUnit.description>研究可以跟随持有者行动的功能性浮游单元。</Milira_FloatUnit.description>
+  
+  <!-- EN: Float Unit -->
+  <Milira_FloatUnitII.label>大型浮游单元</Milira_FloatUnitII.label>
+  <!-- EN: Study heavier and more functional float units. -->
+  <Milira_FloatUnitII.description>研究载重量更大和功能性更强的浮游单元。</Milira_FloatUnitII.description>
+  
+  <!-- EN: Milira Warhammer -->
+  <Milira_Hammer.label>米莉拉的战锤</Milira_Hammer.label>
+  <!-- EN: Unlock hammer for Milira. -->
+  <Milira_Hammer.description>解锁米莉拉的战锤。</Milira_Hammer.description>
+  
+  <!-- EN: Heavy Ionic Weapon -->
+  <Milira_HeavyPlasmaWeapon.label>重型离子武器</Milira_HeavyPlasmaWeapon.label>
+  <!-- EN: Study then unlock mighty heavy ionic weapons. -->
+  <Milira_HeavyPlasmaWeapon.description>研究解锁威力巨大的离子武器。</Milira_HeavyPlasmaWeapon.description>
+  
+  <!-- EN: 激光武器 -->
+  <Milira_HeavyRayWeapon.label>激光武器</Milira_HeavyRayWeapon.label>
+  <!-- EN: 研究利用高能激光灼烧目标的能量武器。 -->
+  <Milira_HeavyRayWeapon.description>研究利用高能激光灼烧目标的能量武器。</Milira_HeavyRayWeapon.description>
+  
+  <!-- EN: Multiple Rocket Launcher -->
+  <Milira_HeavyRocketLauncher.label>联装火箭炮塔</Milira_HeavyRocketLauncher.label>
+  <!-- EN: Study auto-energized multiple rocket launcher. -->
+  <Milira_HeavyRocketLauncher.description>研究自供能的联装火箭炮塔。</Milira_HeavyRocketLauncher.description>
+  
+  <!-- EN: Improved Energy Transition -->
+  <Milira_ImprovedEnergyConcentrationCircuit.label>改良式聚热回路</Milira_ImprovedEnergyConcentrationCircuit.label>
+  <!-- EN: Research more efficient energy conversion circuits. By finishing this research, the Solar Energy Conversion Collection Tower will produce a slightly increased amount of solar fuel. -->
+  <Milira_ImprovedEnergyConcentrationCircuit.description>研究更高效的能量转换电路。研究完成后，日凌聚光塔产出的日光燃料略微增加。</Milira_ImprovedEnergyConcentrationCircuit.description>
+  
+  <!-- EN: Milira Lance -->
+  <Milira_Lance.label>米莉拉的骑枪</Milira_Lance.label>
+  <!-- EN: Unlock lance for Milira. -->
+  <Milira_Lance.description>解锁米莉拉的骑枪。</Milira_Lance.description>
+  
+  <!-- EN: Molecular Cleavage -->
+  <Milira_MolecularCleavage.label>分子切割</Milira_MolecularCleavage.label>
+  <!-- EN: Research precision techniques for processing materials at the molecular level to manufacture weapons and equipment. -->
+  <Milira_MolecularCleavage.description>研究在分子层面加工物料的精密技术以制造武器与装备。</Milira_MolecularCleavage.description>
+  
+  <!-- EN: Particle Corridor -->
+  <Milira_ParticleAcceleratorI.label>粒子回廊</Milira_ParticleAcceleratorI.label>
+  <!-- EN: Study the particle corridor. -->
+  <Milira_ParticleAcceleratorI.description>研究粒子回廊。</Milira_ParticleAcceleratorI.description>
+  
+  <!-- EN: Imporved Particle Corridor -->
+  <Milira_ParticleAcceleratorII.label>改良粒子回廊</Milira_ParticleAcceleratorII.label>
+  <!-- EN: Study the imporved particle corridor. -->
+  <Milira_ParticleAcceleratorII.description>研究改良粒子回廊。</Milira_ParticleAcceleratorII.description>
+  
+  <!-- EN: Focused Particle Corridor -->
+  <Milira_ParticleAcceleratorIII.label>集束粒子回廊</Milira_ParticleAcceleratorIII.label>
+  <!-- EN: Study the focused particle corridor. -->
+  <Milira_ParticleAcceleratorIII.description>研究集束集束粒子回廊。</Milira_ParticleAcceleratorIII.description>
+  
+  <!-- EN: Powered Sword -->
+  <Milira_PoweredSword.label>动力剑</Milira_PoweredSword.label>
+  <!-- EN: Unlock melee weapons powered by energy. -->
+  <Milira_PoweredSword.description>解锁能量动力驱动的近战武器。</Milira_PoweredSword.description>
+  
+  <!-- EN: Railgun -->
+  <Milira_RailGun.label>轨道炮</Milira_RailGun.label>
+  <!-- EN: Study then unlock kinetic weapons with potent armor-piercing and damage. -->
+  <Milira_RailGun.description>研究解锁具有高穿透与高伤害的动能武器。</Milira_RailGun.description>
+  
+  <!-- EN: 射线武器 -->
+  <Milira_RayWeapon.label>射线武器</Milira_RayWeapon.label>
+  <!-- EN: 研究利用高能射线灼烧目标的能量武器。 -->
+  <Milira_RayWeapon.description>研究利用高能射线灼烧目标的能量武器。</Milira_RayWeapon.description>
+  
+  <!-- EN: Composite Shield -->
+  <Milira_ShieldI.label>复合盾牌</Milira_ShieldI.label>
+  <!-- EN: Study lightweight composite shields. -->
+  <Milira_ShieldI.description>研究轻量化的复合盾牌。</Milira_ShieldI.description>
+  <!-- EN: You can craft handheld shields now.\n Pawns equipped with shields will gain a slowly regenerating stamina bar based on the shield's quality, material durability multiplier, and the wielder's melee skill, blocking incoming attacks from a certain angle in the front by consuming stamina points. The points consumed is decided by the damage, armor penetration, and the shield's own resistance to the attack type. \n\n When the stamina bar is emptied, the shield becomes unusable and requires a period of time to recover. The wielder will also fall into a brief shield break stun state. After the cooldown ends, the stamina bar will refill to maximum and the shield can be raised again.\n\n By raising the shield the wielder shall receive a shield-wielding debuff, and the recovering of the stamina points is diminished by 40%. -->
+  <Milira_ShieldI.discoveredLetterText>现在你可以制作手持的盾牌了。\n当人物装备盾牌时，会基于盾牌的品质、材料耐久乘数以及持有者的格斗技能获得一个能够缓慢回复的架势条，架势条不为空时持有者能够以消耗架势值为代价举盾防御面朝方向一定角度的攻击，防御时所消耗的架势值受到所防御攻击的伤害量、护甲穿透以及盾牌本身对于攻击方式抗性的影响。\n\n架势条被清空时盾牌将无法使用并需要一段时间的回复，持有者也会陷入短暂的破盾僵直状态；冷却结束后架势值将回复至满并可以重新举盾。\n\n持有者举盾时会受到持盾减益，并且架势值的自然回复速度降低至原来的40%。</Milira_ShieldI.discoveredLetterText>
+  <!-- EN: Shield and Stamina -->
+  <Milira_ShieldI.discoveredLetterTitle>盾牌与架势值</Milira_ShieldI.discoveredLetterTitle>
+  
+  <!-- EN: Composite Heavy Shield -->
+  <Milira_ShieldII.label>复合重型盾</Milira_ShieldII.label>
+  <!-- EN: Study the composite heavy shield. -->
+  <Milira_ShieldII.description>研究复合重型盾。</Milira_ShieldII.description>
+  
+  <!-- EN: Milira Sickle -->
+  <Milira_Sickle.label>米莉拉的战镰</Milira_Sickle.label>
+  <!-- EN: Unlock the sickle of Milira. -->
+  <Milira_Sickle.description>解锁米莉拉的战镰。</Milira_Sickle.description>
+  
+  <!-- EN: Milira Spear -->
+  <Milira_Spear.label>米莉拉的战矛</Milira_Spear.label>
+  <!-- EN: Unlock the spear of Milira. -->
+  <Milira_Spear.description>解锁米莉拉的战矛。</Milira_Spear.description>
+  
+  <!-- EN: Ionic Weapon -->
+  <Milira_StandardPlasmaWeapon.label>离子武器</Milira_StandardPlasmaWeapon.label>
+  <!-- EN: Study then unlock a series of ionic weapons. -->
+  <Milira_StandardPlasmaWeapon.description>研究解锁一系列离子武器。</Milira_StandardPlasmaWeapon.description>
+  
+  <!-- EN: Solar Furnace -->
+  <Milira_SunBlastFurnace_Build.label>太阳熔炉</Milira_SunBlastFurnace_Build.label>
+  <!-- EN: unlock the building of the solar furnace. -->
+  <Milira_SunBlastFurnace_Build.description>解锁太阳熔炉的建造。</Milira_SunBlastFurnace_Build.description>
+  
+  <!-- EN: Solar Furnace Forging -->
+  <Milira_SunBlastFurnace_Use.label>太阳熔炉锻造</Milira_SunBlastFurnace_Use.label>
+  <!-- EN: Study to forge with solar furnace. -->
+  <Milira_SunBlastFurnace_Use.description>学习如何使用太阳熔炉进行锻造。</Milira_SunBlastFurnace_Use.description>
+  
+  <!-- EN: Sun Bloom -->
+  <Milira_SunLightDaisyPlanting.label>日光花</Milira_SunLightDaisyPlanting.label>
+  <!-- EN: Study to plant sun blooms. -->
+  <Milira_SunLightDaisyPlanting.description>学习种植日光花。</Milira_SunLightDaisyPlanting.description>
+  
+  <!-- EN: Solar Fuel Refining -->
+  <Milira_SunLightFuelExtract.label>日光燃料精炼</Milira_SunLightFuelExtract.label>
+  <!-- EN: Study to refine solar fuel with sunlight fruit. -->
+  <Milira_SunLightFuelExtract.description>研究利用日光花果实精炼日光燃料的方法。</Milira_SunLightFuelExtract.description>
+  
+  <!-- EN: Molten-Salt Energy Station -->
+  <Milira_SunLightFuelGenerator.label>熔盐燃料站</Milira_SunLightFuelGenerator.label>
+  <!-- EN: Unlock the facility capable of autonomously generating solar fuel from sunlight. -->
+  <Milira_SunLightFuelGenerator.description>解锁能够依赖太阳能自动生产日光燃料的配套建筑设施。</Milira_SunLightFuelGenerator.description>
+  
+  <!-- EN: Sunlight Power Generator -->
+  <Milira_SunLightFuelPoweredGenerator.label>日光发电</Milira_SunLightFuelPoweredGenerator.label>
+  <!-- EN: Unlock the sunlight power generator. -->
+  <Milira_SunLightFuelPoweredGenerator.description>研究日光燃料发电技术。</Milira_SunLightFuelPoweredGenerator.description>
+  
+  <!-- EN: Informal Smelting of the Solar-Forged Steel -->
+  <Milira_SunPlateSteelSmelt.label>日盘钢土法冶炼</Milira_SunPlateSteelSmelt.label>
+  <!-- EN: Learn to smelt the solar-forged steel with unstable reactor chamber.\n\n Putting solar fuel into the reactor chambers made out of uranium and plasteel to react with the inner surface. Blasts caused by the energy releasing of the reaction will finally destroy the reactor chamber. -->
+  <Milira_SunPlateSteelSmelt.description>学习使用不稳定反应釜冶炼日盘钢。\n\n使用由玻璃钢和铀制成的反应釜冶炼，向其中加入日光燃料后与内壁反应；会由于反应过程中的能量剧烈释放造成不间断的爆炸最终炸毁反应釜。</Milira_SunPlateSteelSmelt.description>
+  
+  <!-- EN: Suspension System -->
+  <Milira_SuspensionSystem.label>悬挂系统</Milira_SuspensionSystem.label>
+  <!-- EN: Study the suspension system. -->
+  <Milira_SuspensionSystem.description>研究悬挂系统。</Milira_SuspensionSystem.description>
+  
+  <!-- EN: Milira Great Sword -->
+  <Milira_Sword.label>米莉拉的大剑</Milira_Sword.label>
+  <!-- EN: Unlock the great sword for Milira. -->
+  <Milira_Sword.description>解锁米莉拉的大剑。</Milira_Sword.description>
+  
+  <!-- EN: Milira Tailor Bench -->
+  <Milira_TailoringBench.label>缝纫工作台</Milira_TailoringBench.label>
+  <!-- EN: Study the tailor bench and printing of feather threads. -->
+  <Milira_TailoringBench.description>研究米莉拉的缝纫工作台和羽仿布打印技术。</Milira_TailoringBench.description>
+  
+  <!-- EN: Milira Traveller Food -->
+  <Milira_TravellerFood.label>旅行口粮</Milira_TravellerFood.label>
+  <!-- EN: Research compact rations suitable for travel and long-term preservation. -->
+  <Milira_TravellerFood.description>研究旅行时携带的，能够长期保存的小包装口粮。</Milira_TravellerFood.description>
+  
+  <!-- EN: Universal Workbench -->
+  <Milira_UniversalPrinter.label>通用工作台</Milira_UniversalPrinter.label>
+  <!-- EN: Study the universal workbench capable of printing a wide range of items and printing of lustrous steel. -->
+  <Milira_UniversalPrinter.description>研究米莉拉的打印工作台和辉钢打印技术。</Milira_UniversalPrinter.description>
+  
+</LanguageData>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 国王 -->
+  <Milian_Mechanoid_King.label>国王</Milian_Mechanoid_King.label>
+  <!-- EN: 型号为国王的米莉安。 -->
+  <Milian_Mechanoid_King.description>型号为国王的米莉安。</Milian_Mechanoid_King.description>
+  <!-- EN: left fist -->
+  <Milian_Mechanoid_King.tools.left_fist.label>左拳</Milian_Mechanoid_King.tools.left_fist.label>
+  <!-- EN: right fist -->
+  <Milian_Mechanoid_King.tools.right_fist.label>右拳</Milian_Mechanoid_King.tools.right_fist.label>
+  
+</LanguageData>

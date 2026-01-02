@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<BodyPartDef>
+		<defName>Milira_Wing</defName>
+		<label>wing</label>
+		<hitPoints>30</hitPoints>
+		<frostbiteVulnerability>2</frostbiteVulnerability>
+		<skinCovered>false</skinCovered>
+		<beautyRelated>true</beautyRelated>
+		<bleedRate>0.2</bleedRate>
+		<tags>
+			<li>MovingLimbSegment</li>
+		</tags>
+	</BodyPartDef>
+
+	<BodyPartDef>
+		<defName>Milira_Halo</defName>
+		<label>halo</label>
+		<conceptual>true</conceptual>
+	</BodyPartDef>
+
+	<!-- Bones -->
+	<BodyPartDef>
+		<defName>Milira_WingHumerus</defName>
+		<label>wing humerus</label>
+		<hitPoints>25</hitPoints>
+		<permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
+		<skinCovered>false</skinCovered>
+		<bleedRate>0</bleedRate>
+		<solid>true</solid>
+	</BodyPartDef>
+
+	<BodyPartDef>
+		<defName>Milira_WingRadius</defName>
+		<label>wing radius</label>
+		<hitPoints>15</hitPoints>
+		<permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
+		<skinCovered>false</skinCovered>
+		<bleedRate>0</bleedRate>
+		<solid>true</solid>
+		<tags>
+			<li>MovingLimbSegment</li>
+		</tags>
+	</BodyPartDef>
+
+	<BodyPartDef>
+		<defName>Milira_WingUlna</defName>
+		<label>wing ulna</label>
+		<hitPoints>20</hitPoints>
+		<permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
+		<skinCovered>false</skinCovered>
+		<bleedRate>0</bleedRate>
+		<solid>true</solid>
+		<tags>
+			<li>MovingLimbSegment</li>
+		</tags>
+	</BodyPartDef>
+
+	<BodyPartDef>
+		<defName>Milira_WingCarpus</defName>
+		<label>wing carpus</label>
+		<hitPoints>15</hitPoints>
+		<permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
+		<skinCovered>false</skinCovered>
+		<bleedRate>0</bleedRate>
+		<solid>true</solid>
+		<tags>
+			<li>MovingLimbSegment</li>
+		</tags>
+	</BodyPartDef>
+
+	<BodyPartDef>
+		<defName>Milira_WingCarpometacarpus</defName>
+		<label>wing carpometacarpus</label>
+		<hitPoints>10</hitPoints>
+		<permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
+		<skinCovered>false</skinCovered>
+		<bleedRate>0</bleedRate>
+		<solid>true</solid>
+		<tags>
+			<li>MovingLimbSegment</li>
+		</tags>
+	</BodyPartDef>
+
+	<BodyPartDef>
+		<defName>Milira_WingPhalanx</defName>
+		<label>wing phalanx</label>
+		<hitPoints>8</hitPoints>
+		<permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
+		<skinCovered>false</skinCovered>
+		<bleedRate>0</bleedRate>
+		<solid>true</solid>
+	</BodyPartDef>
+
+</Defs>

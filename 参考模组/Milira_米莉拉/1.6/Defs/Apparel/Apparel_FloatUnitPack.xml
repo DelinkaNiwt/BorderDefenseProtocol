@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<!-- 小型离子浮游单元背包 -->
+	<ThingDef ParentName="Milira_UtilityBase">
+		<thingClass>AncotLibrary.DeploymentPack_Pawn</thingClass>
+		<defName>Milira_FloatUnitPack</defName>
+		<label>small float unit pack</label>
+		<description>A backpack capable of deploying self-regulating small float units around. Float unit behaviour is controlled by switching between strike and follow modes.</description>
+		<descriptionHyperlinks>
+			<ThingDef>Milian_FloatUnit_SmallPlasmaGun</ThingDef>
+		</descriptionHyperlinks>
+		<techLevel>Ultra</techLevel>
+		<recipeMaker>
+			<researchPrerequisite>Milira_FloatUnit</researchPrerequisite>
+			<recipeUsers>
+				<li>Milira_DroneBench</li>
+			</recipeUsers>
+		</recipeMaker>
+		<costList>
+			<Milira_SolarCrystal>4</Milira_SolarCrystal>
+			<ComponentIndustrial>2</ComponentIndustrial>
+			<Milira_SplendidSteel>60</Milira_SplendidSteel>
+		</costList>
+		<comps>
+			<li Class="AncotLibrary.CompProperties_ApparelReloadable_DeployPawn">
+				<spawnPawnKind>Milian_FloatUnit_SmallPlasma</spawnPawnKind>
+				<costPerPawn>1</costPerPawn>
+				<maxPawnsToSpawn>2</maxPawnsToSpawn>
+				<spawnEffecter>Milian_ReleaseUnits</spawnEffecter>
+				<maxCharges>4</maxCharges>
+				<cooldownTicks>240</cooldownTicks>
+				<destroyOnEmpty>false</destroyOnEmpty>
+				<soundReload>Standard_Reload</soundReload>
+				<hotKey>Misc4</hotKey>
+				<chargeNoun>float unit</chargeNoun>
+				<ammoDef>Milira_SplendidSteel</ammoDef>
+				<ammoCountPerCharge>10</ammoCountPerCharge>
+				<displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+				<gizmoIconPath1>Milira/UI/FloatUnit_SmallPlasma_Defend</gizmoIconPath1>
+				<gizmoIconPath2>Milira/UI/FloatUnit_SmallPlasma_Sortie</gizmoIconPath2>
+			</li>
+		</comps>
+		<verbs>
+			<li>
+				<verbClass>AncotLibrary.Verb_DeployPawn</verbClass>
+				<label>release float unit</label>
+				<commandIcon>Milira/UI/ReleaseFloatUnit_SmallPlasma</commandIcon>
+				<violent>false</violent>
+				<hasStandardCommand>true</hasStandardCommand>
+				<targetable>false</targetable>
+				<nonInterruptingSelfCast>true</nonInterruptingSelfCast>
+				<onlyManualCast>True</onlyManualCast>
+			</li>
+		</verbs>
+		<graphicData>
+			<texPath>Milira/Apparel/Utility/FloatUnitPack_SmallPlasma/FloatUnitPack_SmallPlasma</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>1</drawSize>
+			<drawOffset>(0,0,0)</drawOffset>
+		</graphicData>
+		<tickerType>Normal</tickerType>
+		<statBases>
+			<WorkToMake>12000</WorkToMake>
+			<Mass>5.4</Mass>
+			<Flammability>0.4</Flammability>
+			<EquipDelay>1.5</EquipDelay>
+		</statBases>
+		<apparel>
+			<tags>
+				<li>Milira_FloatUnitPack</li>
+				<li>Milira_FloatUnitPack_smallPlasma</li>
+			</tags>
+			<wornGraphicData>
+				<renderUtilityAsPack>true</renderUtilityAsPack>
+			</wornGraphicData>
+			<wornGraphicPath>Milira/Apparel/Utility/FloatUnitPack_SmallPlasma/FloatUnitPack_SmallPlasma</wornGraphicPath>
+		</apparel>
+		<tradeTags>
+		</tradeTags>
+		<allowedArchonexusCount>1</allowedArchonexusCount>
+	</ThingDef>
+
+
+
+	<!-- 自律护盾浮游背包 -->
+	<ThingDef ParentName="Milira_UtilityBase">
+		<thingClass>AncotLibrary.DeploymentPack_Pawn</thingClass>
+		<defName>Milira_FloatUnitPack_Shield</defName>
+		<label>shield float unit pack</label>
+		<description>A backpack capable of deploying self-regulating shield float unit around. Float unit behaviour is controlled by switching between strike and follow modes.</description>
+		<descriptionHyperlinks>
+			<ThingDef>Milian_FloatUnit_Shield</ThingDef>
+		</descriptionHyperlinks>
+		<techLevel>Ultra</techLevel>
+		<recipeMaker>
+			<researchPrerequisite>Milira_FloatUnitII</researchPrerequisite>
+			<recipeUsers>
+				<li>Milira_DroneBench</li>
+			</recipeUsers>
+		</recipeMaker>
+		<costList>
+			<Milira_SolarCrystal>4</Milira_SolarCrystal>
+			<ComponentIndustrial>2</ComponentIndustrial>
+			<Milira_SplendidSteel>60</Milira_SplendidSteel>
+			<BroadshieldCore>2</BroadshieldCore>
+		</costList>
+		<comps>
+			<li Class="AncotLibrary.CompProperties_ApparelReloadable_DeployPawn">
+				<spawnPawnKind>Milian_FloatUnit_Shield</spawnPawnKind>
+				<sortie>false</sortie>
+				<costPerPawn>1</costPerPawn>
+				<maxPawnsToSpawn>1</maxPawnsToSpawn>
+				<spawnEffecter>Milian_ReleaseUnits</spawnEffecter>
+				<maxCharges>2</maxCharges>
+				<cooldownTicks>600</cooldownTicks>
+				<destroyOnEmpty>false</destroyOnEmpty>
+				<soundReload>Standard_Reload</soundReload>
+				<hotKey>Misc4</hotKey>
+				<chargeNoun>float unit</chargeNoun>
+				<ammoDef>BroadshieldCore</ammoDef>
+				<ammoCountPerCharge>1</ammoCountPerCharge>
+				<displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+				<gizmoIconPath1>Milira/UI/FloatUnit_SmallPlasma_Defend</gizmoIconPath1>
+				<gizmoIconPath2>Milira/UI/FloatUnit_SmallPlasma_Sortie</gizmoIconPath2>
+			</li>
+		</comps>
+		<verbs>
+			<li>
+				<verbClass>AncotLibrary.Verb_DeployPawn</verbClass>
+				<label>release float unit</label>
+				<commandIcon>Milira/UI/ReleaseFloatUnit_Shield</commandIcon>
+				<violent>false</violent>
+				<hasStandardCommand>true</hasStandardCommand>
+				<targetable>false</targetable>
+				<nonInterruptingSelfCast>true</nonInterruptingSelfCast>
+				<onlyManualCast>True</onlyManualCast>
+			</li>
+		</verbs>
+		<graphicData>
+			<texPath>Milira/Apparel/Utility/FloatUnitPack_Shield/FloatUnitPack_Shield</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>1</drawSize>
+			<drawOffset>(0,0,0)</drawOffset>
+		</graphicData>
+		<tickerType>Normal</tickerType>
+		<statBases>
+			<WorkToMake>12000</WorkToMake>
+			<Mass>4.2</Mass>
+			<Flammability>0.4</Flammability>
+			<EquipDelay>1.5</EquipDelay>
+		</statBases>
+		<apparel>
+			<tags>
+				<li>Milira_FloatUnitPack</li>
+				<li>Milira_FloatUnitPack_Shield</li>
+			</tags>
+			<wornGraphicData>
+				<renderUtilityAsPack>true</renderUtilityAsPack>
+			</wornGraphicData>
+			<wornGraphicPath>Milira/Apparel/Utility/FloatUnitPack_Shield/FloatUnitPack_Shield</wornGraphicPath>
+		</apparel>
+		<tradeTags>
+		</tradeTags>
+		<allowedArchonexusCount>1</allowedArchonexusCount>
+	</ThingDef>
+
+
+</Defs>

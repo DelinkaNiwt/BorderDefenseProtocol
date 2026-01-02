@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="UnfinishedBase">
+    <defName>Milira_UnfinishedWeapon_Melee</defName>
+    <label>unfinished weapon</label>
+    <description>An unfinished piece of a weapon.</description>
+    <graphicData>
+      <texPath>Milira/Item/Unfinished/UnfinishedWeapon_Melee</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <stuffCategories Inherit="false" />
+    <comps>
+      <li>
+        <compClass>CompColorable</compClass>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="UnfinishedBase">
+    <defName>Milira_UnfinishedDrone</defName>
+    <label>unfinished drone</label>
+    <description>An unfinished piece of a drone.</description>
+    <graphicData>
+      <texPath>Milira/Item/Unfinished/UnfinishedDrone</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <stuffCategories Inherit="false" />
+  </ThingDef>
+
+</Defs>

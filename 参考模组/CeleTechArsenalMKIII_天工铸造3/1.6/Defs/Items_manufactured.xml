@@ -1,0 +1,25 @@
+<Defs>
+<ThingDef ParentName="ResourceBase">
+    <defName>CMC_Gravcore</defName>
+    <label>CELEGRAV™ "Xuan Qiong" Phase Anti-gravity Core</label>
+    <description>Phase-field nexus of floating weapon systems. This self-stabilizing resonant cavity anti-gravity generator employs quantized graviton modulation to provide fundamental levitation fields for all floating platforms, while establishing reference coordinate systems for mounted weapons/engineering units.\n\nBoth design complexity and manufacturing precision exceed our current technological capabilities. Acquisition exclusively available through CAG merchant shuttles.</description>
+    <graphicData>
+      <texPath>Things/Others/CMC_PhasedGracCore</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <stackLimit>5</stackLimit>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <MarketValue>1200</MarketValue>
+      <Mass>25</Mass>
+      <Flammability>1</Flammability>
+      <DeteriorationRate>0</DeteriorationRate>
+    </statBases>
+    <thingCategories>
+      <li>ItemsMisc</li>
+    </thingCategories>
+    <thingSetMakerTags>
+      <li>RewardStandardCore</li>
+    </thingSetMakerTags>
+  </ThingDef>
+</Defs>

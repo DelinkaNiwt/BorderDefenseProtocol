@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <StatDef>
+    <defName>Ancot_ProjectileDamageMultiplier</defName>
+    <label>projectile damage multiplier</label>
+    <description>the damage of projectile fired by this creature will multiplied by this factor.</description>
+    <category>BasicsPawn</category>
+    <defaultBaseValue>1</defaultBaseValue>
+    <hideAtValue>1</hideAtValue>
+    <maxValue>999</maxValue>
+    <toStringStyle>PercentZero</toStringStyle>
+    <displayPriorityInCategory>3451</displayPriorityInCategory>
+  </StatDef>
+
+  <StatDef>
+    <defName>Ancot_ProjectileArmorPenetrationMultiplier</defName>
+    <label>projectile armor penetration multiplier</label>
+    <description>the armor penetration of projectile fired by this creature will multiplied by this factor.</description>
+    <category>BasicsPawn</category>
+    <defaultBaseValue>1</defaultBaseValue>
+    <hideAtValue>1</hideAtValue>
+    <maxValue>999</maxValue>
+    <toStringStyle>PercentZero</toStringStyle>
+    <displayPriorityInCategory>3452</displayPriorityInCategory>
+  </StatDef>
+
+
+
+  <!-- 远行队移动速度乘数（全局） -->
+  <StatDef>
+    <defName>Ancot_CaravanMoveSpeedFactor</defName>
+    <label>caravan move speed factor</label>
+    <description>the speed factor of this creature provide in caravan.</description>
+    <category>BasicsPawn</category>
+    <defaultBaseValue>1</defaultBaseValue>
+    <minValue>0.1</minValue>
+    <toStringStyle>PercentTwo</toStringStyle>
+    <displayPriorityInCategory>2498</displayPriorityInCategory><!-- 在爬行速度后面 -->
+  </StatDef>
+
+  <!--远行队额外载重-->
+  <StatDef>
+    <defName>Ancot_ExtraCaravanCarryCapacity</defName>
+    <label>extra carry capacity</label>
+    <description>extra carry capacity of this creature provide in caravan.</description>
+    <category>BasicsPawn</category>
+    <defaultBaseValue>0</defaultBaseValue>
+    <minValue>0</minValue>
+    <hideAtValue>0</hideAtValue>
+    <toStringStyle>FloatOne</toStringStyle>
+    <formatString>{0} kg</formatString>
+    <displayPriorityInCategory>2202</displayPriorityInCategory><!-- 在携带能力后面 -->
+  </StatDef>
+
+  <StatDef>
+    <defName>Ancot_MechRepairSpeed</defName>
+    <label>mech repair speed</label>
+    <description>A multiplier on how fast this creature can repair mechanoids.</description>
+    <category>BasicsPawn</category>
+    <defaultBaseValue>0</defaultBaseValue>
+    <minValue>0</minValue>
+    <hideAtValue>0</hideAtValue>
+    <showOnAnimals>false</showOnAnimals>
+    <toStringStyle>PercentZero</toStringStyle>
+    <capacityFactors>
+      <li>
+        <capacity>Manipulation</capacity>
+        <weight>1</weight>
+        <max>2</max>
+      </li>
+    </capacityFactors>
+    <displayPriorityInCategory>2497</displayPriorityInCategory>
+  </StatDef>
+
+  <StatDef>
+    <defName>Ancot_FieldForceResistance</defName>
+    <label>field force resistance</label>
+    <description>This creature's resistance to field force displacement effects.</description>
+    <category>BasicsPawn</category>
+    <defaultBaseValue>0</defaultBaseValue>
+    <minValue>0</minValue>
+    <maxValue>1</maxValue>
+    <hideAtValue>0</hideAtValue>
+    <neverDisabled>true</neverDisabled>
+    <toStringStyle>PercentZero</toStringStyle>
+    <displayPriorityInCategory>2496</displayPriorityInCategory>
+  </StatDef>
+  
+  <!--制造物品质量偏移-->
+  <StatDef>
+    <defName>Ancot_QualityOffset</defName>
+    <label>craft quality offset</label>
+    <description>This creature's quality offset when crafting items or constructing buildings.</description>
+    <category>PawnWork</category>
+    <defaultBaseValue>0</defaultBaseValue>
+    <minValue>0</minValue>
+    <maxValue>6</maxValue>
+    <hideAtValue>0</hideAtValue>
+    <toStringStyle>Integer</toStringStyle>
+    <showOnPlayerMechanoids>true</showOnPlayerMechanoids>
+    <showOnAnimals>false</showOnAnimals>
+    <displayPriorityInCategory>4999</displayPriorityInCategory>
+  </StatDef>
+</Defs>

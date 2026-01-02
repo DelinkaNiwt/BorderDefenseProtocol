@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <BodyDef>
+    <defName>Milira_DroneFreight</defName>
+    <label>freight unit</label>
+    <corePart>
+      <def>Ancot_DroneBody</def>
+      <height>Middle</height>
+      <depth>Outside</depth>
+      <groups>
+        <li>Torso</li>
+      </groups>
+      <parts>
+        <li>
+          <def>Ancot_DroneHearingSensor</def>
+          <coverage>0.045</coverage>
+          <height>Middle</height>
+          <depth>Inside</depth>
+          <groups>
+            <li>Torso</li>
+          </groups>
+        </li>
+        <li>
+          <def>Ancot_DroneSightSensor</def>
+          <coverage>0.045</coverage>
+          <height>Middle</height>
+          <depth>Inside</depth>
+          <groups>
+            <li>Torso</li>
+          </groups>
+        </li>
+        <li>
+          <def>Ancot_DroneCore</def>
+          <coverage>0.045</coverage>
+          <height>Middle</height>
+          <depth>Inside</depth>
+          <groups>
+            <li>Torso</li>
+          </groups>
+        </li>
+        <li>
+          <def>Ancot_DroneWheels</def>
+          <customLabel>right front wheels</customLabel>
+          <coverage>0.1</coverage>
+          <height>Middle</height>
+          <depth>Inside</depth>
+          <groups>
+            <li>Torso</li>
+          </groups>
+        </li>
+        <li>
+          <def>Ancot_DroneWheels</def>
+          <customLabel>right rear wheels</customLabel>
+          <coverage>0.1</coverage>
+          <height>Middle</height>
+          <depth>Inside</depth>
+          <groups>
+            <li>Torso</li>
+          </groups>
+        </li>
+        <li>
+          <def>Ancot_DroneWheels</def>
+          <customLabel>left front wheels</customLabel>
+          <coverage>0.1</coverage>
+          <height>Middle</height>
+          <depth>Inside</depth>
+          <groups>
+            <li>Torso</li>
+          </groups>
+        </li>
+        <li>
+          <def>Ancot_DroneWheels</def>
+          <customLabel>left rear wheels</customLabel>
+          <coverage>0.1</coverage>
+          <height>Middle</height>
+          <depth>Inside</depth>
+          <groups>
+            <li>Torso</li>
+          </groups>
+        </li>
+
+        <li>
+          <def>Ancot_DroneFrame</def>
+          <coverage>0.4</coverage>
+          <height>Top</height>
+          <groups>
+            <li>Torso</li>
+          </groups>
+          <parts>
+            <li>
+              <def>Ancot_DroneSuspension</def>
+              <customLabel>left suspension</customLabel>
+              <coverage>0.09</coverage>
+              <height>Top</height>
+              <depth>Outside</depth>
+              <groups>
+                <li>Torso</li>
+              </groups>
+            </li>
+            <li>
+              <def>Ancot_DroneSuspension</def>
+              <customLabel>right suspension</customLabel>
+              <coverage>0.09</coverage>
+              <height>Top</height>
+              <depth>Outside</depth>
+              <groups>
+                <li>Torso</li>
+              </groups>
+            </li>
+          </parts>
+        </li>
+      </parts>
+    </corePart>
+  </BodyDef>
+
+  <BodyDef>
+    <defName>Milira_DroneCleansweeper</defName>
+    <label>cleansweeper unit</label>
+    <corePart>
+      <def>Ancot_DroneBody</def>
+      <height>Middle</height>
+      <depth>Outside</depth>
+      <groups>
+        <li>Torso</li>
+      </groups>
+      <parts>
+        <li>
+          <def>Ancot_DroneHearingSensor</def>
+          <coverage>0.045</coverage>
+          <height>Middle</height>
+          <depth>Inside</depth>
+          <groups>
+            <li>Torso</li>
+          </groups>
+        </li>
+        <li>
+          <def>Ancot_DroneSightSensor</def>
+          <coverage>0.045</coverage>
+          <height>Middle</height>
+          <depth>Inside</depth>
+          <groups>
+            <li>Torso</li>
+          </groups>
+        </li>
+        <li>
+          <def>Ancot_DroneCore</def>
+          <coverage>0.045</coverage>
+          <height>Middle</height>
+          <depth>Inside</depth>
+          <groups>
+            <li>Torso</li>
+          </groups>
+        </li>
+        <li>
+          <def>Ancot_DroneWheels</def>
+          <customLabel>front wheels</customLabel>
+          <coverage>0.05</coverage>
+          <height>Middle</height>
+          <depth>Inside</depth>
+          <groups>
+            <li>Torso</li>
+          </groups>
+        </li>
+        <li>
+          <def>Ancot_DroneWheels</def>
+          <customLabel>right rear wheels</customLabel>
+          <coverage>0.05</coverage>
+          <height>Middle</height>
+          <depth>Inside</depth>
+          <groups>
+            <li>Torso</li>
+          </groups>
+        </li>
+        <li>
+          <def>Ancot_DroneWheels</def>
+          <customLabel>left rear wheels</customLabel>
+          <coverage>0.05</coverage>
+          <height>Middle</height>
+          <depth>Inside</depth>
+          <groups>
+            <li>Torso</li>
+          </groups>
+        </li>
+      </parts>
+    </corePart>
+  </BodyDef>
+
+
+</Defs>

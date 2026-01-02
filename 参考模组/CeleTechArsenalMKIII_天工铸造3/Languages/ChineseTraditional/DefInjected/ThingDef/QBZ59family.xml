@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <QBB_fivenine.label>QBB-59 班用機槍</QBB_fivenine.label>
+  <QBB_fivenine.description>基於QBZ-59突擊步槍研發的班用機槍，配備96發大容量彈鼓，自動模式一次發射48發。其瞄準鏡內置目標分析計算機，能夠在消滅當前目標後自動指示下一個目標。</QBB_fivenine.description>
+  <QBB_fivenine.tools.stock.label>槍托</QBB_fivenine.tools.stock.label>
+  <QBB_fivenine.tools.barrel.label>槍管</QBB_fivenine.tools.barrel.label>
+  <QBB_fivenine.verbs.Verb_Shoot.label>QBB-59 班用機槍</QBB_fivenine.verbs.Verb_Shoot.label>
+  
+  <QBZ_fivenine.label>QBZ-59 突擊步槍</QBZ_fivenine.label>
+  <QBZ_fivenine.description>專為飛船等近距離作戰環境研發的小口徑電荷突擊步槍，能夠以極高射速發射4毫米電荷覆能彈。雖然子彈口徑較小，單發威力有限，但憑借超高射速，它可以有效壓制敵人。</QBZ_fivenine.description>
+  <QBZ_fivenine.tools.stock.label>槍托</QBZ_fivenine.tools.stock.label>
+  <QBZ_fivenine.tools.barrel.label>槍管</QBZ_fivenine.tools.barrel.label>
+  <QBZ_fivenine.verbs.Verb_Shoot.label>QBZ-59 突擊步槍</QBZ_fivenine.verbs.Verb_Shoot.label>
+  
+  <QBU_fivenine.label>QBU-59 射手步槍</QBU_fivenine.label>
+  <QBU_fivenine.description>基於QBZ-59突擊步槍研發的射手步槍，配備加長槍管，使其在更遠距離上能夠準確命中目標，但也因此降低了射速。</QBU_fivenine.description>
+  <QBU_fivenine.tools.stock.label>槍托</QBU_fivenine.tools.stock.label>
+  <QBU_fivenine.tools.barrel.label>槍管</QBU_fivenine.tools.barrel.label>
+  <QBU_fivenine.verbs.Verb_Shoot.label>QBU-59 射手步槍</QBU_fivenine.verbs.Verb_Shoot.label>
+  
+</LanguageData>

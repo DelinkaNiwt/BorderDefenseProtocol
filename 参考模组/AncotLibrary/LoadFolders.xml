@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<loadFolders>
+	<v1.4>
+		<li>1.4</li>
+		<li>Content</li>
+	</v1.4>
+	<v1.5>
+		<li>1.5</li>
+		<li>Content</li>
+		<li IfModActive="Ludeon.RimWorld.Biotech">1.5/Mods/Biotech</li>
+	</v1.5>
+	<v1.6>
+		<li>1.6</li>
+		<li>Content</li>
+		<li IfModActive="Ludeon.RimWorld.Biotech">1.6/Mods/Biotech</li>
+	</v1.6>
+</loadFolders>

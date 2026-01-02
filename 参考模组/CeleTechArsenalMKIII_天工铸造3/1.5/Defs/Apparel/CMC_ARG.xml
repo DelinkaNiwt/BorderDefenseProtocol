@@ -1,0 +1,209 @@
+<Defs>	
+	<ThingDef ParentName="ArmorHelmetMakeableBase">
+		<defName>CMC_ARGoggles</defName>
+		<label>AR tactical goggles</label>
+		<description>An AR tactical goggles with nano-titanium crystalline lenses. Activated electro-optical layer projects augmented reality HUD with windage compensation algorithms and dynamic threat tagging, featuring NVG,thermal,EM spectrum tri-mode vision.</description>
+		<techLevel>Spacer</techLevel>
+		<tradeability>Sellable</tradeability>
+		<generateCommonality>0.25</generateCommonality>
+		<generateAllowChance>0</generateAllowChance>
+		<graphicData>
+			<texPath>Things/Apparel/Display/CMC_ARG_display</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>1.05</drawSize>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<costList>
+			<ComponentSpacer>4</ComponentSpacer>
+			<ComponentIndustrial>1</ComponentIndustrial>
+			<Plasteel>25</Plasteel>
+		</costList>
+		<statBases>
+			<WorkToMake>14250</WorkToMake>
+			<MaxHitPoints>180</MaxHitPoints>
+			<Mass>0.14</Mass>
+			<Flammability>0</Flammability>
+			<ArmorRating_Sharp>0.53</ArmorRating_Sharp>
+			<ArmorRating_Blunt>0.57</ArmorRating_Blunt>
+			<ArmorRating_Heat>0.1</ArmorRating_Heat>
+			<EquipDelay>12</EquipDelay>
+		</statBases>
+		<equippedStatOffsets>
+			<ShootingAccuracyPawn>4.0</ShootingAccuracyPawn>
+		</equippedStatOffsets>
+		<thingCategories Inherit='False'>
+			<li>ArmorHeadgear</li>
+		</thingCategories>
+		<thingSetMakerTags>
+			<li>RewardSpecial</li>
+		</thingSetMakerTags>
+		<apparel>
+		<immuneToToxGasExposure MayRequire="Ludeon.RimWorld.Biotech">true</immuneToToxGasExposure>
+			<bodyPartGroups>
+				<li>FullHead</li>
+			</bodyPartGroups>
+			<wornGraphicPath>Things/Apparel/Helmet/CMC_ARG</wornGraphicPath>
+			<useWornGraphicMask>true</useWornGraphicMask>
+			<layers>
+				<li>Overhead</li>
+			</layers>
+			<tags>
+				<li>SpacerMilitary</li>
+			</tags>
+			<defaultOutfitTags>
+				<li>Soldier</li>
+			</defaultOutfitTags>
+			<useDeflectMetalEffect>true</useDeflectMetalEffect>
+			<renderNodeProperties>
+				<li Class="TOT_DLL_test.PawnRenderNodeProperties_PowerArmourLight">
+					<debugLabel>Base</debugLabel>
+					<nodeClass>TOT_DLL_test.PawnRenderNode_PowerArmourLight</nodeClass>
+					<workerClass>TOT_DLL_test.PawnRenderNodeWorker_PowerArmourLight</workerClass>
+					<texPath>Things/Apparel/Helmet/CMC_ARG</texPath>
+					<baseLayer>64</baseLayer>
+					<rotDrawMode>Fresh, Rotting</rotDrawMode>
+					<overrideMeshSize>(1.2,1.2)</overrideMeshSize>
+					<parentTagDef>ApparelHead</parentTagDef>
+					<pawnType>Any</pawnType>
+				</li>
+				<li Class="TOT_DLL_test.PawnRenderNodeProperties_PowerArmourLight">
+					<debugLabel>Light</debugLabel>
+					<nodeClass>TOT_DLL_test.PawnRenderNode_PowerArmourLight</nodeClass>
+					<workerClass>TOT_DLL_test.PawnRenderNodeWorker_PowerArmourLight</workerClass>
+					<texPath>Things/Apparel/Helmet/CMC_ARGLight</texPath>
+					<baseLayer>64</baseLayer>
+					<rotDrawMode>Fresh, Rotting</rotDrawMode>
+					<overrideMeshSize>(1.2,1.2)</overrideMeshSize>
+					<parentTagDef>ApparelHead</parentTagDef>
+					<pawnType>Any</pawnType>
+					<shaderTypeDef>TransparentPostLight</shaderTypeDef>
+				</li>
+			</renderNodeProperties>
+		</apparel>
+		<recipeMaker>
+			<unfinishedThingDef>UnfinishedTechArmor</unfinishedThingDef>
+			<researchPrerequisite>CMCarmorII</researchPrerequisite>
+			<skillRequirements>
+				<Crafting>9</Crafting>
+			</skillRequirements>
+			<recipeUsers Inherit="False">
+				<li>FabricationBench</li>
+			</recipeUsers>
+		</recipeMaker>
+		<comps>
+			<!--li Class="CompProperties_CauseHediff_Apparel">
+				<hediff>CMC_AntiInvHediff</hediff>
+				<part>Brain</part>
+			</li-->
+		</comps>
+		<colorGenerator Class="ColorGenerator_Options">
+            <options>
+                <li>
+                    <only>(0.5,0.5,0.5)</only>
+                </li>
+            </options>
+        </colorGenerator>
+    </ThingDef>
+	
+	<ThingDef ParentName="ArmorHelmetMakeableBase">
+		<defName>CMC_ARGoggles_Cat</defName>
+		<label>CARG</label>
+		<description>meow.</description>
+		<techLevel>Spacer</techLevel>
+		<tradeability>Sellable</tradeability>
+		<generateCommonality>0.25</generateCommonality>
+		<generateAllowChance>0</generateAllowChance>
+		<graphicData>
+			<texPath>Things/Apparel/Display/CMC_ARGCat_display</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>1.05</drawSize>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<costList>
+			<Cloth>20</Cloth>
+			<ComponentSpacer>2</ComponentSpacer>
+			<ComponentIndustrial>1</ComponentIndustrial>
+			<Plasteel>25</Plasteel>
+			<SignalChip MayRequire="Ludeon.RimWorld.Biotech">2</SignalChip>
+		</costList>
+		<statBases>
+			<WorkToMake>14250</WorkToMake>
+			<MaxHitPoints>180</MaxHitPoints>
+			<Mass>0.14</Mass>
+			<Flammability>0</Flammability>
+			<ArmorRating_Sharp>0.53</ArmorRating_Sharp>
+			<ArmorRating_Blunt>0.57</ArmorRating_Blunt>
+			<ArmorRating_Heat>0.1</ArmorRating_Heat>
+			<EquipDelay>12</EquipDelay>
+		</statBases>
+		<equippedStatOffsets Inherit = "False">
+            <MechBandwidth MayRequire="Ludeon.RimWorld.Biotech">10</MechBandwidth>
+        </equippedStatOffsets>
+		<thingCategories Inherit='False'>
+			<li>ArmorHeadgear</li>
+		</thingCategories>
+		<thingSetMakerTags>
+			<li>RewardSpecial</li>
+		</thingSetMakerTags>
+		<apparel>
+		<immuneToToxGasExposure MayRequire="Ludeon.RimWorld.Biotech">true</immuneToToxGasExposure>
+			<bodyPartGroups>
+				<li>FullHead</li>
+			</bodyPartGroups>
+			<wornGraphicPath>Things/Apparel/Helmet/CMC_ARGCat</wornGraphicPath>
+			<useWornGraphicMask>true</useWornGraphicMask>
+			<layers>
+				<li>Overhead</li>
+			</layers>
+			<tags>
+				<li>SpacerMilitary</li>
+			</tags>
+			<defaultOutfitTags>
+				<li>Soldier</li>
+			</defaultOutfitTags>
+			<useDeflectMetalEffect>true</useDeflectMetalEffect>
+			<renderNodeProperties>
+				<li Class="TOT_DLL_test.PawnRenderNodeProperties_PowerArmourLight">
+					<debugLabel>Base</debugLabel>
+					<nodeClass>TOT_DLL_test.PawnRenderNode_PowerArmourLight</nodeClass>
+					<workerClass>TOT_DLL_test.PawnRenderNodeWorker_PowerArmourLight</workerClass>
+					<texPath>Things/Apparel/Helmet/CMC_ARGCat</texPath>
+					<baseLayer>64</baseLayer>
+					<rotDrawMode>Fresh, Rotting</rotDrawMode>
+					<overrideMeshSize>(1.2,1.2)</overrideMeshSize>
+					<parentTagDef>ApparelHead</parentTagDef>
+					<pawnType>Any</pawnType>
+				</li>
+				<li Class="TOT_DLL_test.PawnRenderNodeProperties_PowerArmourLight">
+					<debugLabel>Light</debugLabel>
+					<nodeClass>TOT_DLL_test.PawnRenderNode_PowerArmourLight</nodeClass>
+					<workerClass>TOT_DLL_test.PawnRenderNodeWorker_PowerArmourLight</workerClass>
+					<texPath>Things/Apparel/Helmet/CMC_ARGCatLight</texPath>
+					<baseLayer>64</baseLayer>
+					<rotDrawMode>Fresh, Rotting</rotDrawMode>
+					<overrideMeshSize>(1.2,1.2)</overrideMeshSize>
+					<parentTagDef>ApparelHead</parentTagDef>
+					<pawnType>Any</pawnType>
+					<shaderTypeDef>TransparentPostLight</shaderTypeDef>
+				</li>
+			</renderNodeProperties>
+		</apparel>
+		<recipeMaker>
+			<unfinishedThingDef>UnfinishedTechArmor</unfinishedThingDef>
+			<researchPrerequisite>CMCarmorII</researchPrerequisite>
+			<skillRequirements>
+				<Crafting>9</Crafting>
+			</skillRequirements>
+			<recipeUsers Inherit="False">
+				<li>FabricationBench</li>
+			</recipeUsers>
+		</recipeMaker>
+		<colorGenerator Class="ColorGenerator_Options">
+            <options>
+                <li>
+                    <only>(1,1,1)</only>
+                </li>
+            </options>
+        </colorGenerator>
+    </ThingDef>
+</Defs>

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: install Yao Guang chip -->
+  <InstallYG.label>植入【瑤光】戰術晶元</InstallYG.label>
+  <!-- EN: Install a Yao Guang chip. -->
+  <InstallYG.description>植入【瑤光】戰術晶元</InstallYG.description>
+  <!-- EN: Installing Yao Guang chip. -->
+  <InstallYG.jobString>植入【瑤光】戰術晶元</InstallYG.jobString>
+  
+  <!-- EN: remove Yao Guang chip -->
+  <RemoveYG.label>移除【瑤光】戰術晶元</RemoveYG.label>
+  <!-- EN: Remove the Yao Guang chip. -->
+  <RemoveYG.description>移除【瑤光】戰術晶元</RemoveYG.description>
+  <!-- EN: Removing Yao Guang chip. -->
+  <RemoveYG.jobString>移除【瑤光】戰術晶元</RemoveYG.jobString>
+  
+</LanguageData>

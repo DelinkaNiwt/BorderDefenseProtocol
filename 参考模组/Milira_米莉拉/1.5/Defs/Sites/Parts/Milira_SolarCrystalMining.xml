@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <SitePartDef>
+    <defName>Milira_SolarCrystalMining</defName>
+    <label>Discovered Solar Crystal Lump</label>
+    <workerClass>SitePartWorker_PreciousLump</workerClass>
+    <description>Intense solar activity has caused a large number of crystals to transform into solar crystal lump.</description>
+    <siteTexture>World/WorldObjects/Sites/GenericSite</siteTexture>
+    <expandingIconTexture>Milira/Icon/SolarCrystalMining</expandingIconTexture>
+    <forceExitAndRemoveMapCountdownDurationDays>5</forceExitAndRemoveMapCountdownDurationDays>
+    <mainPartAllThreatsLabel>unknown threat may appear</mainPartAllThreatsLabel>
+    <tags>
+      <li>Milira_SolarCrystalMining</li>
+    </tags>
+  </SitePartDef>
+
+  <GenStepDef>
+    <defName>Milira_SolarCrystalMining</defName>
+    <linkWithSite>Milira_SolarCrystalMining</linkWithSite>
+    <order>450</order>
+    <genStep Class="Milira.GenStep_SolarCrystalMining">
+      <crystalRadius>14~32</crystalRadius>
+      <crystalGroup>8~16</crystalGroup>
+      <crystalInGroup>1~3</crystalInGroup>
+    </genStep>
+  </GenStepDef>
+
+</Defs>

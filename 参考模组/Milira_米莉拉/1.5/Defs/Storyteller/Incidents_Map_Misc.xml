@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--耀斑时有概率发生的日凌晶开采任务-->
+  <IncidentDef>
+    <defName>Milira_SolarCrystalMining</defName>
+    <label>Solar Crystal Mining</label>
+    <category>Misc</category>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>Milira.IncidentWorker_SolarCrystalMining</workerClass>
+    <questScriptDef>Milira_SolarCrystalMining</questScriptDef>
+    <baseChance>0</baseChance>
+    <minRefireDays>45</minRefireDays>
+    <requireColonistsPresent>True</requireColonistsPresent>
+  </IncidentDef>
+
+  <IncidentDef>
+    <defName>Milira_MeteoriteImpact_SolarCrystal</defName>
+    <label>Meteoroid Impact</label>
+    <category>Misc</category>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>Milira.IncidentWorker_MeteoriteImpact_SolarCrystal</workerClass>
+    <baseChance>0.5</baseChance>
+    <letterLabel>Meteorite: Solar Crystal</letterLabel>
+    <letterText>A meteoroid comprises solar crystal is falling unto this field.</letterText>
+    <tale>MeteoriteImpact</tale>
+  </IncidentDef>
+
+  <!-- 教会征募队 -->
+  <IncidentDef>
+    <defName>Milira_CaravanArrivalChurchTributeCollector</defName>
+    <label>skyfeathered church collector caravan arrival</label>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>Milira.IncidentWorker_CaravanArrivalTributeCollector_Church</workerClass>
+    <category>FactionArrival</category>
+    <baseChance>0</baseChance> <!-- given by a special storyteller comp -->
+    <requireColonistsPresent>True</requireColonistsPresent>
+  </IncidentDef>
+
+
+</Defs>

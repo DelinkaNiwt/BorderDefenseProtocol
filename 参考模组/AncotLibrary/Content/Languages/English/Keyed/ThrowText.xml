@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <Ancot.TextMote_Block>block</Ancot.TextMote_Block>
+  <Ancot.TextMote_Break>break</Ancot.TextMote_Break>
+  <Ancot.TextMote_Penetrate>penetration</Ancot.TextMote_Penetrate>
+
+  <Ancot.TextMote_TendQuality>Tend quality: {0}</Ancot.TextMote_TendQuality>
+  <Ancot.TextMote_Dodge>Dodged</Ancot.TextMote_Dodge>
+
+</LanguageData>

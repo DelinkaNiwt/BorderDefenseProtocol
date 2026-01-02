@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Molten-Salt Energy Station -->
+  <Milira_SunLightFuelStation.label>熔盐燃料站</Milira_SunLightFuelStation.label>
+  <!-- EN: A Molten-Salt Energy Station surrounded by Milian Cluster. -->
+  <Milira_SunLightFuelStation.description>一处被米莉安集群守护着的熔盐燃料站。</Milira_SunLightFuelStation.description>
+  
+</LanguageData>

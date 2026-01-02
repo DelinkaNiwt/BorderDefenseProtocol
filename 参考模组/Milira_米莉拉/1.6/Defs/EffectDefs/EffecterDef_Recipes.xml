@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <EffecterDef>
+    <defName>Milira_SunBlastFurnaceBurning</defName>
+    <children>
+      <!--<li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <scale>0.3~0.7</scale>
+        <ticksBetweenMotes>20</ticksBetweenMotes>
+        <positionLerpFactor>0.6</positionLerpFactor>
+        <positionRadius>0.6</positionRadius>
+        <moteDef>Mote_CookBit</moteDef>
+      </li>-->
+
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>Milira_Mote_GiantExplosionInner</moteDef>
+        <scale>3~3</scale>
+        <spawnLocType>OnTarget</spawnLocType>
+      </li>
+
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>Milira_Fleck_HeatWaveDistortion</fleckDef>
+        <burstCount>1</burstCount>
+        <scale>1~1</scale>
+        <spawnLocType>OnTarget</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>Fleck_HeatDiffusion</fleckDef>
+        <burstCount>1</burstCount>
+        <scale>1~1</scale>
+        <spawnLocType>OnTarget</spawnLocType>
+      </li>
+
+      <!-- <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>Fleck_VaporizeGlow</fleckDef>
+        <burstCount>1</burstCount>
+        <scale>0.9~1.5</scale>
+        <ticksBetweenMotes>40</ticksBetweenMotes>
+        <spawnLocType>OnTarget</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>Fleck_VaporizeRays_A</fleckDef>
+        <burstCount>1</burstCount>
+        <scale>0.9~1.5</scale>
+        <ticksBetweenMotes>40</ticksBetweenMotes>
+        <rotationRate>30</rotationRate>
+        <spawnLocType>OnTarget</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>Fleck_VaporizeRays_B</fleckDef>
+        <burstCount>1</burstCount>
+        <scale>0.9~1.5</scale>
+        <ticksBetweenMotes>30</ticksBetweenMotes>
+        <rotationRate>-20</rotationRate>
+        <spawnLocType>OnTarget</spawnLocType>
+      </li> -->
+
+    </children>
+  </EffecterDef>
+
+
+</Defs>

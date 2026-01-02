@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <RecipeDef ParentName="BaseMechanoidResurrectionRecipe">
+    <defName>Milira_ResurrectMilian_Pawn</defName>
+    <label>Resurrect Milian (Pawn)</label>
+    <description>Resurrect an allied Milian Pawn whose body is not completely destroyed.</description>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>Corpses</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Milira_MilianReactor</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Milira_SplendidSteel</li>
+          </thingDefs>
+        </filter>
+        <count>60</count>
+      </li>
+      <!-- <li>
+        <filter>
+          <thingDefs>
+            <li>Milira_SunPlateSteel</li>
+          </thingDefs>
+        </filter>
+        <count>20</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Milira_SplendidSteel</li>
+          </thingDefs>
+        </filter>
+        <count>40</count>
+      </li> -->
+      <!-- <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>3</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Milira_FeatherThread</li>
+          </thingDefs>
+        </filter>
+        <count>10</count>
+      </li> -->
+      <!-- <li>
+        <filter>
+          <thingDefs>
+            <li>Milira_SolarCrystal</li>
+          </thingDefs>
+        </filter>
+        <count>4</count>
+      </li> -->
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Milian_NamePlate_Pawn</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Corpse_Milian_Mechanoid_PawnI</li>
+        <li>Corpse_Milian_Mechanoid_PawnII</li>
+        <li>Corpse_Milian_Mechanoid_PawnIII</li>
+        <li>Corpse_Milian_Mechanoid_PawnIV</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+  </RecipeDef>
+
+
+  <RecipeDef ParentName="BaseMechanoidResurrectionRecipe">
+    <defName>Milira_ResurrectMilian_Knight</defName>
+    <label>Resurrect Milian (Knight)</label>
+    <description>Resurrect an allied Milian Knight whose body is not completely destroyed.</description>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>Corpses</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Milira_MilianReactor</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Milira_SplendidSteel</li>
+          </thingDefs>
+        </filter>
+        <count>60</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Milian_NamePlate_Knight</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Corpse_Milian_Mechanoid_KnightI</li>
+        <li>Corpse_Milian_Mechanoid_KnightII</li>
+        <li>Corpse_Milian_Mechanoid_KnightIII</li>
+        <li>Corpse_Milian_Mechanoid_KnightIV</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+  </RecipeDef>
+
+
+  <RecipeDef ParentName="BaseMechanoidResurrectionRecipe">
+    <defName>Milira_ResurrectMilian_Bishop</defName>
+    <label>Resurrect Milian (Bishop)</label>
+    <description>Resurrect an allied Milian Bishop whose body is not completely destroyed.</description>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>Corpses</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Milira_MilianReactor</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Milira_SplendidSteel</li>
+          </thingDefs>
+        </filter>
+        <count>60</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Milian_NamePlate_Bishop</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Corpse_Milian_Mechanoid_BishopI</li>
+        <li>Corpse_Milian_Mechanoid_BishopII</li>
+        <li>Corpse_Milian_Mechanoid_BishopIII</li>
+        <li>Corpse_Milian_Mechanoid_BishopIV</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+  </RecipeDef>
+
+
+  <RecipeDef ParentName="BaseMechanoidResurrectionRecipe">
+    <defName>Milira_ResurrectMilian_Rook</defName>
+    <label>Resurrect Milian (Rook)</label>
+    <description>Resurrect an allied Milian Rook whose body is not completely destroyed.</description>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>Corpses</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Milira_MilianReactor</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Milira_SplendidSteel</li>
+          </thingDefs>
+        </filter>
+        <count>60</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Milian_NamePlate_Rook</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Corpse_Milian_Mechanoid_RookI</li>
+        <li>Corpse_Milian_Mechanoid_RookII</li>
+        <li>Corpse_Milian_Mechanoid_RookIII</li>
+        <li>Corpse_Milian_Mechanoid_RookIV</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+  </RecipeDef>
+
+</Defs>

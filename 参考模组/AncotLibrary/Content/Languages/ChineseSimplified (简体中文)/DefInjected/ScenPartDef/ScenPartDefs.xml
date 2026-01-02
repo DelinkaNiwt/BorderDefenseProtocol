@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: disable ancient ruins -->
+  <Ancot_AncientRuins.label>禁用远古遗迹</Ancot_AncientRuins.label>
+  
+  <!-- EN: starting people -->
+  <Ancot_ConfigurePawnsKindDefs.label>初始人员</Ancot_ConfigurePawnsKindDefs.label>
+  
+  <!-- EN: create quest -->
+  <Ancot_CreateQuest.label>创建任务</Ancot_CreateQuest.label>
+  
+  <!-- EN: start with drone -->
+  <Ancot_StartingDrone.label>初始携带无人机</Ancot_StartingDrone.label>
+  
+</LanguageData>

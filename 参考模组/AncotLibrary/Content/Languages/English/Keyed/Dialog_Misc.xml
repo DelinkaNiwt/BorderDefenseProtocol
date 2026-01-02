@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <Ancot.Answer>Answer</Ancot.Answer>
+  <Ancot.RingOff>ring off</Ancot.RingOff>
+  <Ancot.NerverMind>nerver mind</Ancot.NerverMind>
+
+  <Ancot.DroneSection>Drones</Ancot.DroneSection>
+  <Ancot.DroneTabTip>Switch to drone management interface.</Ancot.DroneTabTip>
+
+</LanguageData>

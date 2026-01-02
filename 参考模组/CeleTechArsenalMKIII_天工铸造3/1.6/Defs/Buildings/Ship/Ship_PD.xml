@@ -1,0 +1,118 @@
+<Defs>
+	<ThingDef ParentName="AutocannonTurret">
+    <defName>CMCS_PDBattery</defName>
+    <label>duel 12mm PD Battery</label>
+	<thingClass>TOT_DLL_test.Building_PDBattery</thingClass>
+    <description>.</description>
+    <uiIconPath>Things/Buildings/CMCS_PDT_UI</uiIconPath>
+	<graphicData>
+		<texPath>Things/Buildings/CMCS_PDT_Base</texPath>
+		<graphicClass>Graphic_Single</graphicClass>
+		<drawSize>(4.3,4.3)</drawSize>
+	</graphicData>
+	<size>(2,2)</size>
+    <statBases>
+	  <MaxHitPoints>2400</MaxHitPoints>
+	  <Flammability>0</Flammability>
+      <ShootingAccuracyTurret>1</ShootingAccuracyTurret>
+	  <WorkToBuild>18000</WorkToBuild>
+	  <Flammability>0</Flammability>
+    </statBases>
+	<drawerType>MapMeshAndRealTime</drawerType>
+	<tickerType>Normal</tickerType>
+	<killedLeavings>
+      <ChunkSlagSteel>2</ChunkSlagSteel>
+    </killedLeavings>
+    <costList>
+      <Steel>500</Steel>
+	  <Plasteel>180</Plasteel>
+      <ComponentIndustrial>12</ComponentIndustrial>
+	  <ComponentSpacer>4</ComponentSpacer>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>2500</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Refuelable">
+        <fuelLabel>Shots until barrel change</fuelLabel>
+        <fuelGizmoLabel>Barrel durability</fuelGizmoLabel>
+        <outOfFuelMessage>Needs new barrel</outOfFuelMessage>
+        <fuelFilter><thingDefs><li>Steel</li></thingDefs></fuelFilter>
+        <fuelCapacity>640</fuelCapacity>
+        <fuelMultiplier>2</fuelMultiplier>
+        <initialFuelPercent>1</initialFuelPercent>
+        <autoRefuelPercent>0.5</autoRefuelPercent>
+        <showFuelGizmo>true</showFuelGizmo>
+        <minimumFueledThreshold>1</minimumFueledThreshold>
+        <factorByDifficulty>true</factorByDifficulty>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelIconPath>UI/Overlays/Barrel</fuelIconPath>
+      </li>
+    </comps>
+	<damageMultipliers>
+	  <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <building>
+      <turretGunDef>Gun_CMCS_PD</turretGunDef>
+      <turretBurstCooldownTime>2.5</turretBurstCooldownTime>
+	  <turretTopDrawSize>4.22</turretTopDrawSize>
+    </building>
+    <researchPrerequisites>
+		  <li>CMCGunTurretsbasic</li>
+		  <li>CMC_EMweaponTech_IV</li>
+    </researchPrerequisites>
+	<designationCategory>CMC_DefensenProduction</designationCategory>
+	<placeWorkers Inherit="False">
+		<li>PlaceWorker_OnSubstructure</li>
+	</placeWorkers>
+	<modExtensions>
+      <li Class="TOT_DLL_test.TurretExtension_CMC">
+        <rotationSpeed>8</rotationSpeed>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>Gun_CMCS_PD</defName>
+    <label>auto cannon</label>
+    <description>A self-loading large-bore cannon designed to attach to a turret.</description>
+    <graphicData>
+      <texPath>Things/Buildings/CMCS_PDT_Top</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <AccuracyTouch>0.98</AccuracyTouch>
+      <AccuracyShort>0.92</AccuracyShort>
+      <AccuracyMedium>0.86</AccuracyMedium>
+      <AccuracyLong>0.85</AccuracyLong>
+      <RangedWeapon_Cooldown>3.5</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>40</Mass>
+      <Flammability>0</Flammability>
+		</statBases>
+				<weaponTags Inherit = "False">
+				<li>Weapon_CMCf</li>
+			</weaponTags>
+		<verbs>
+      <li>
+        <verbClass>TOT_DLL_test.Verb_ShootSwitchFire</verbClass>
+        <defaultProjectile>Bullet_HMG_API</defaultProjectile>
+        <warmupTime>0</warmupTime>
+        <range>43.9</range>
+        <burstShotCount>8</burstShotCount>
+		<ticksBetweenBurstShots>4</ticksBetweenBurstShots>
+        <soundCast>Sound_Cannon</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>12</muzzleFlashScale>
+        <consumeFuelPerShot>1</consumeFuelPerShot>
+      </li>
+    </verbs>
+  </ThingDef>
+</Defs>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <JobDef>
+    <defName>Ancot_SharpenWeapon</defName>
+    <driverClass>AncotLibrary.JobDriver_GainHediffSelf_Sharpen</driverClass>
+    <reportString>sharpening weapon.</reportString>
+    <playerInterruptible>false</playerInterruptible>
+  </JobDef>
+
+  <JobDef>
+    <defName>Ancot_EmergencyTend</defName>
+    <driverClass>AncotLibrary.JobDriver_EmergencyTend</driverClass>
+    <reportString>emergency tending TargetA.</reportString>
+    <playerInterruptible>true</playerInterruptible>
+  </JobDef>
+
+  <JobDef>
+    <defName>Ancot_DestroyItem</defName>
+    <driverClass>AncotLibrary.JobDriver_DestroyItem</driverClass>
+    <reportString>destroying TargetA.</reportString>
+    <playerInterruptible>true</playerInterruptible>
+  </JobDef>
+
+  <JobDef>
+    <defName>Ancot_Reload_ApparelReloadable</defName>
+    <driverClass>AncotLibrary.JobDriver_Reload_ApparelReloadable</driverClass>
+    <reportString>reloading TargetA.</reportString>
+    <suspendable>false</suspendable>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+
+  <JobDef>
+    <defName>Ancot_MechOperateDeepDrill</defName>
+    <driverClass>AncotLibrary.JobDriver_MechOperateDeepDrill</driverClass>
+    <reportString>drilling at TargetA.</reportString>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+
+  <JobDef>
+    <defName>Ancot_MechMeleeHunt</defName>
+    <driverClass>AncotLibrary.JobDriver_MechMeleeHunt</driverClass>
+    <reportString>hunting TargetA.</reportString>
+    <alwaysShowWeapon>true</alwaysShowWeapon>
+    <suspendable>false</suspendable>
+    <casualInterruptible>false</casualInterruptible>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+</Defs>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <CMCcannon.label>“青釭·燎原”速射電荷機炮塔</CMCcannon.label>
+  <CMCcannon.description>大口徑高射速電荷自動機炮塔。炮塔本身的裝甲可使其一定程度上可抵禦小口徑武器和爆炸造成的傷害。</CMCcannon.description>
+  <CMCcannon.comps.CompRefuelable.fuelGizmoLabel>炮管耐久</CMCcannon.comps.CompRefuelable.fuelGizmoLabel>
+  <CMCcannon.comps.CompRefuelable.fuelLabel>剩餘射擊次數</CMCcannon.comps.CompRefuelable.fuelLabel>
+  <CMCcannon.comps.CompRefuelable.outOfFuelMessage>需要更換炮管</CMCcannon.comps.CompRefuelable.outOfFuelMessage>
+  
+  <Gun_CMCcannon.label>自動電荷機炮</Gun_CMCcannon.label>
+  <Gun_CMCcannon.description>用於防空和壓制步兵大口徑電荷自動機炮。</Gun_CMCcannon.description>
+  <Gun_CMCcannon.verbs.Verb_Shoot.label>電荷彈</Gun_CMCcannon.verbs.Verb_Shoot.label>
+  
+  <CMC_Svcannon.label>“湛盧·追魂”電荷狙擊塔</CMC_Svcannon.label>
+  <CMC_Svcannon.description>安裝有比鄰星大學開發的先進光電和紅外傳感器的智能狙擊炮塔，發射能追蹤敵人的大口徑智能機炮彈。該炮塔也能識別和攻擊附件的敵對隱身目標（識別範圍為基礎射程的一半）。</CMC_Svcannon.description>
+  <CMC_Svcannon.comps.CompRefuelable.fuelGizmoLabel>炮管耐久</CMC_Svcannon.comps.CompRefuelable.fuelGizmoLabel>
+  <CMC_Svcannon.comps.CompRefuelable.fuelLabel>剩餘射擊次數</CMC_Svcannon.comps.CompRefuelable.fuelLabel>
+  <CMC_Svcannon.comps.CompRefuelable.outOfFuelMessage>需要更換炮管</CMC_Svcannon.comps.CompRefuelable.outOfFuelMessage>
+  
+  <Gun_CMCMSVcannon.label>電荷狙擊炮</Gun_CMCMSVcannon.label>
+  <Gun_CMCMSVcannon.description>能發射智能機炮彈的自動狙擊炮。</Gun_CMCMSVcannon.description>
+  <Gun_CMCMSVcannon.verbs.Verb_Shoot.label>電荷彈</Gun_CMCMSVcannon.verbs.Verb_Shoot.label>
+  
+</LanguageData>

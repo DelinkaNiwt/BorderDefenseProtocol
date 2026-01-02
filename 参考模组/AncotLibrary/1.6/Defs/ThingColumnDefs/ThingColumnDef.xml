@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!--ThingColumn版的label和icon-->
+  <AncotLibrary.ThingColumnDef Name="AL_Label"> 
+    <defName>Label</defName>
+    <label>name</label>
+    <workerClass>AncotLibrary.ThingColumnWorker_Label</workerClass>
+    <widthPriority>120</widthPriority>
+    <headerTip>Name</headerTip>
+    <sortable>true</sortable>
+  </AncotLibrary.ThingColumnDef>
+
+  <AncotLibrary.ThingColumnDef Name="AL_LabelWithIcon" ParentName="AL_Label">
+    <defName>LabelWithIcon</defName>
+    <showIcon>true</showIcon>
+  </AncotLibrary.ThingColumnDef>
+
+  <AncotLibrary.ThingColumnDef ParentName="AL_LabelWithIcon">
+    <defName>LabelShortWithIcon</defName>
+    <useLabelShort>true</useLabelShort>
+  </AncotLibrary.ThingColumnDef>
+
+  <!--thing版 info-->
+  <AncotLibrary.ThingColumnDef>
+    <defName>Info</defName>
+    <workerClass>AncotLibrary.ThingColumnWorker_Info</workerClass>
+    <headerTip>Info</headerTip>
+  </AncotLibrary.ThingColumnDef>
+
+  <!-- thing版gap-->
+  <AncotLibrary.ThingColumnDef>
+    <defName>GapTiny</defName>
+    <workerClass>AncotLibrary.ThingColumnWorker_Gap</workerClass>
+    <gap>4</gap>
+  </AncotLibrary.ThingColumnDef>
+
+  <AncotLibrary.ThingColumnDef>
+    <defName>GapSmall</defName>
+    <workerClass>AncotLibrary.ThingColumnWorker_Gap</workerClass>
+    <gap>10</gap>
+  </AncotLibrary.ThingColumnDef>
+
+  <AncotLibrary.ThingColumnDef>
+    <defName>Gap</defName>
+    <workerClass>AncotLibrary.ThingColumnWorker_Gap</workerClass>
+    <gap>17</gap>
+  </AncotLibrary.ThingColumnDef>
+
+  <AncotLibrary.ThingColumnDef>
+    <defName>GapWide</defName>
+    <workerClass>AncotLibrary.ThingColumnWorker_Gap</workerClass>
+    <gap>26</gap>
+  </AncotLibrary.ThingColumnDef>
+
+  <AncotLibrary.ThingColumnDef>
+    <defName>GapLarge</defName>
+    <workerClass>AncotLibrary.ThingColumnWorker_Gap</workerClass>
+    <gap>60</gap>
+  </AncotLibrary.ThingColumnDef>
+
+  <!-- Consumes the remaining space after every other column is at its optimal width -->
+  <AncotLibrary.ThingColumnDef>
+    <defName>RemainingSpace</defName>
+    <workerClass>AncotLibrary.ThingColumnWorker_RemainingSpace</workerClass>
+    <widthPriority>-1000</widthPriority>
+    <ignoreWhenCalculatingOptimalTableSize>true</ignoreWhenCalculatingOptimalTableSize>
+  </AncotLibrary.ThingColumnDef>
+</Defs>

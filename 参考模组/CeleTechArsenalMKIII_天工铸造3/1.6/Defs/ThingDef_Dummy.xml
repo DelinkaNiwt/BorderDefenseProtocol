@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ThingDef ParentName="EtherealThingBase">
+	<defName>CMC_SkillDummy</defName>
+	<label>skill pawnsaver dummy</label>
+	<graphicData>
+	  <texPath>Things/CMC_Void</texPath>
+	  <graphicClass>Graphic_Single</graphicClass>
+	</graphicData>
+	<thingClass>TOT_DLL_test.SkillDummy_Sword</thingClass>
+	<tickerType>Normal</tickerType>
+	<drawerType>MapMeshAndRealTime</drawerType>
+  </ThingDef>
+</Defs>

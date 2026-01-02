@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>  
+
+	<ThingDef ParentName="RoughPlantBase">
+		<defName>Milira_SunLightFruit</defName>
+		<label>Sunlight Fruit</label>
+		<description>The fruit of the Sun Bloom plant, with an extremely high energy density.</description>
+		<graphicData>
+			<texPath>Milira/Item/Raw</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<tickerType>Normal</tickerType>
+		<statBases>
+			<MarketValue>2.4</MarketValue>
+		</statBases>
+		<thingCategories>
+            <li>PlantMatter</li>
+        </thingCategories>
+		<ingestible>
+            <preferability>DesperateOnly</preferability>
+            <canAutoSelectAsFoodForCaravan>false</canAutoSelectAsFoodForCaravan>
+        </ingestible>
+		<comps>
+			<li Class="CompProperties_Rottable">
+				<daysToRotStart>60</daysToRotStart>
+				<rotDestroys>true</rotDestroys>
+			</li>
+			<li Class="CompProperties_Explosive">
+              <explosiveRadius>1.9</explosiveRadius>
+              <explosiveDamageType>Bomb</explosiveDamageType>
+              <explosiveExpandPerStackcount>0.05</explosiveExpandPerStackcount>
+              <startWickOnDamageTaken>
+                <li>Flame</li>
+                <li>Bomb</li>
+                <li>Milira_PlasmaBomb</li>
+                <li>Milira_PlasmaBombBig</li>
+              </startWickOnDamageTaken>
+              <startWickHitPointsPercent>0.333</startWickHitPointsPercent>
+              <preExplosionSpawnChance>1</preExplosionSpawnChance>
+              <wickTicks>10~30</wickTicks>
+            </li>
+		</comps>  
+	</ThingDef>
+
+
+</Defs>

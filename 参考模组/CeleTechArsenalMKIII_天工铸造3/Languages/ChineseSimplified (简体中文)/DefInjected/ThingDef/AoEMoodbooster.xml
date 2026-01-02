@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: CeleTech mood booster -->
+  <CMC_DECO_WIFI.label>远程情绪管控系统</CMC_DECO_WIFI.label>
+  <!-- EN: A device that improves everyone's mood nearby. -->
+  <CMC_DECO_WIFI.description>一个能提升周围人类情绪的电波发射器。</CMC_DECO_WIFI.description>
+  
+</LanguageData>

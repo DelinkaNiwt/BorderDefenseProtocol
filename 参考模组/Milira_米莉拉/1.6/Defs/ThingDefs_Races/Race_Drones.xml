@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="BasePawn" Name="Milira_BaseDrone" Abstract="True">
+    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+    <researchPrerequisites><li>Milira_Drones</li></researchPrerequisites>
+    <statBases>
+      <MarketValue>300</MarketValue>
+      <Mass>20</Mass>
+      <CarryingCapacity>100</CarryingCapacity>
+      <MaxHitPoints>100</MaxHitPoints>
+      <PsychicSensitivity>0</PsychicSensitivity>
+      <ToxicResistance>1</ToxicResistance>
+      <Flammability>0</Flammability>
+      <ComfyTemperatureMin>-200</ComfyTemperatureMin>
+      <ComfyTemperatureMax>500</ComfyTemperatureMax>
+      <MeatAmount>0</MeatAmount>
+      <Ancot_DroneEnduranceTime>48</Ancot_DroneEnduranceTime>
+      <Ancot_DroneRechargeTime>4</Ancot_DroneRechargeTime>
+      <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">1</ToxicEnvironmentResistance>
+      <WorkSpeedGlobal MayRequire="Ludeon.Rimworld.Biotech">0.3</WorkSpeedGlobal>
+    </statBases>
+    <receivesSignals>true</receivesSignals>
+    <tradeability>None</tradeability>
+    <race>
+      <intelligence>ToolUser</intelligence>
+      <thinkTreeMain>Ancot_Drone</thinkTreeMain>
+      <baseBodySize>1.0</baseBodySize>
+      <fleshType>Mechanoid</fleshType>
+      <needsRest>false</needsRest>
+      <hasGenders>false</hasGenders>
+      <foodType>None</foodType>
+      <lifeExpectancy>120</lifeExpectancy>
+      <bloodDef>Filth_MachineBits</bloodDef>
+      <nameGenerator MayRequire="Ludeon.RimWorld.Biotech">NamerMech</nameGenerator>
+      <soundCallIntervalRange>1000~2000</soundCallIntervalRange>
+      <soundCallIntervalFriendlyFactor>2</soundCallIntervalFriendlyFactor>
+      <thinkTreeConstant MayRequire="Ludeon.RimWorld.Biotech">MechConstant</thinkTreeConstant>
+      <mechWeightClass>Ancot_Drone</mechWeightClass>
+      <trainability>None</trainability>
+      <hideTrainingTab>true</hideTrainingTab>
+      <lifeStageAges>
+        <li>
+          <def>MechanoidFullyFormed</def>
+          <minAge>0</minAge>
+        </li>
+      </lifeStageAges>
+    </race>
+    <comps>
+      <li Class="CompProperties_CanBeDormant" />
+      <li Class="CompProperties_WakeUpDormant">
+        <wakeUpOnDamage>true</wakeUpOnDamage>
+        <wakeUpCheckRadius>30</wakeUpCheckRadius>
+        <wakeUpSound>MechanoidsWakeUp</wakeUpSound>
+      </li>
+    </comps>
+    <butcherProducts>
+      <Milira_SplendidSteel>3</Milira_SplendidSteel>
+    </butcherProducts>
+  </ThingDef>
+  <ThingDef Name="Milira_BaseDroneWork" ParentName="Milira_BaseDrone" Abstract="True">
+    <comps>
+      <li Class="AncotLibrary.CompProperties_Drone">
+        <compClass>Milira.CompDrone_Milira</compClass>
+        <initialWorkMode>Ancot_Work</initialWorkMode>
+      </li>
+    </comps>
+  </ThingDef>
+
+
+  <PawnKindDef Name="Milira_BaseDroneKind" Abstract="True">
+    <defaultFactionType>Milira_Faction</defaultFactionType>
+    <aiAvoidCover>true</aiAvoidCover>
+    <minGenerationAge MayRequire="Ludeon.Rimworld.Biotech">0</minGenerationAge>
+    <maxGenerationAge>50</maxGenerationAge>
+    <forceNormalGearQuality>true</forceNormalGearQuality>
+    <allowInMechClusters>false</allowInMechClusters>
+    <allowOldAgeInjuries>false</allowOldAgeInjuries>
+  </PawnKindDef>
+
+
+  <!-- ========================================================================================== -->
+  <!-- 运载单元 -->
+  <ThingDef ParentName="Milira_BaseDroneWork">
+    <defName>Milira_DroneFreight</defName>
+    <label>freight unit</label>
+    <description>A small self-driving flatbed capable of transporting goods, commonly seen in the cities of Milira.</description>
+    <statBases>
+      <MoveSpeed>2.8</MoveSpeed>
+      <ArmorRating_Sharp>0.2</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.1</ArmorRating_Blunt>
+      <ArmorRating_Heat>1.0</ArmorRating_Heat>
+    </statBases>
+    <race>
+      <hasCorpse>true</hasCorpse>
+      <body>Milira_DroneFreight</body>
+      <baseBodySize>1.0</baseBodySize>
+      <baseHealthScale>1.0</baseHealthScale>
+      <mechEnabledWorkTypes>
+        <li>Hauling</li>
+      </mechEnabledWorkTypes>
+    </race>
+		<costList>
+			<Milira_SplendidSteel>60</Milira_SplendidSteel>
+			<ComponentIndustrial>4</ComponentIndustrial>
+		</costList>
+    <statBases>
+			<CarryingCapacity>120</CarryingCapacity>
+    </statBases>
+    <tools Inherit="false">
+      <li>
+        <label>body</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>8</power>
+        <cooldownTime>2.4</cooldownTime>
+        <linkedBodyPartsGroup>Torso</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+      </li>
+    </tools>
+    <comps>
+    </comps>
+    <uiIconPath>Milira/Drone/Freight_east</uiIconPath>
+  </ThingDef>
+  <PawnKindDef ParentName="Milira_BaseDroneKind">
+    <defName>Milira_DroneFreight</defName>
+    <label>freight unit</label>
+    <combatPower>20</combatPower>
+    <race>Milira_DroneFreight</race>
+    <lifeStages>
+      <li>
+        <bodyGraphicData>
+          <texPath>Milira/Drone/Freight</texPath>
+          <maskPath>Milian/Mechanoid/Mask/Mask</maskPath>
+          <shaderType>CutoutWithOverlay</shaderType>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>1.2</drawSize>
+          <shadowData>
+            <volume>(0.6, 0.5, 0.6)</volume>
+            <offset>(0, 0, 0)</offset>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+  </PawnKindDef>
+
+  <!-- 清洁单元 -->
+  <ThingDef ParentName="Milira_BaseDroneWork">
+    <defName>Milira_DroneCleansweeper</defName>
+    <label>cleaning unit</label>
+    <description>A small household cleaning machine, commonly seen in the cities of Milira.</description>
+    <statBases>
+      <MoveSpeed>3.2</MoveSpeed>
+      <ArmorRating_Sharp>0.1</ArmorRating_Sharp>
+      <ArmorRating_Heat>1.0</ArmorRating_Heat>
+    </statBases>
+    <race>
+      <hasCorpse>true</hasCorpse>
+      <body>Milira_DroneCleansweeper</body>
+      <baseBodySize>0.3</baseBodySize>
+      <baseHealthScale>0.6</baseHealthScale>
+      <mechEnabledWorkTypes>
+        <li>Cleaning</li>
+      </mechEnabledWorkTypes>
+    </race>
+		<costList>
+			<Milira_SplendidSteel>40</Milira_SplendidSteel>
+			<ComponentIndustrial>4</ComponentIndustrial>
+		</costList>
+    <statBases>
+			<CarryingCapacity>10</CarryingCapacity>
+      <Mass>4</Mass>
+    </statBases>
+    <tools Inherit="false">
+      <li>
+        <label>body</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>6</power>
+        <cooldownTime>2.2</cooldownTime>
+        <linkedBodyPartsGroup>Torso</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+      </li>
+    </tools>
+    <comps>
+    </comps>
+    <uiIconPath>Milira/Drone/Cleansweeper_east</uiIconPath>
+  </ThingDef>
+  <PawnKindDef ParentName="Milira_BaseDroneKind">
+    <defName>Milira_DroneCleansweeper</defName>
+    <label>cleaning unit</label>
+    <combatPower>20</combatPower>
+    <race>Milira_DroneCleansweeper</race>
+    <lifeStages>
+      <li>
+        <bodyGraphicData>
+          <texPath>Milira/Drone/Cleansweeper</texPath>
+          <maskPath>Milian/Mechanoid/Mask/Mask</maskPath>
+          <shaderType>CutoutWithOverlay</shaderType>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>0.9</drawSize>
+          <shadowData>
+            <volume>(0.3, 0.2, 0.3)</volume>
+            <offset>(0, 0, 0)</offset>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+  </PawnKindDef>
+
+  <!-- 贮存单元 -->
+  <ThingDef ParentName="Milira_BaseDrone">
+    <defName>Milira_DroneStorage</defName>
+    <label>storage unit</label>
+    <description>A slow-moving cart capable of carrying large amounts of supplies, typically used for transporting baggage and carrying building materials.</description>
+    <statBases>
+      <MoveSpeed>1.6</MoveSpeed>
+      <ArmorRating_Sharp>0.4</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.2</ArmorRating_Blunt>
+      <ArmorRating_Heat>1.0</ArmorRating_Heat>
+      <Ancot_DroneEnduranceTime>140</Ancot_DroneEnduranceTime>
+      <Ancot_DroneRechargeTime>24</Ancot_DroneRechargeTime>
+    </statBases>
+    <race>
+      <hasCorpse>true</hasCorpse>
+      <body>Milira_DroneFreight</body>
+      <baseBodySize>3.8</baseBodySize>
+      <baseHealthScale>3.0</baseHealthScale>
+    </race>
+		<costList>
+			<Milira_SplendidSteel>180</Milira_SplendidSteel>
+			<ComponentIndustrial>8</ComponentIndustrial>
+		</costList>
+    <statBases>
+			<CarryingCapacity>120</CarryingCapacity>
+      <Mass>60</Mass>
+    </statBases>
+    <tools Inherit="false">
+      <li>
+        <label>body</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>18</power>
+        <cooldownTime>3.6</cooldownTime>
+        <linkedBodyPartsGroup>Torso</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+      </li>
+    </tools>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_TransporterCustom">
+        <haulGizmoTexPath>Milira/UI/MechHaul</haulGizmoTexPath>
+        <selectAllInGroupCommandTexPath>Milira/UI/GroupStorageUnit</selectAllInGroupCommandTexPath>
+        <massCapacity>180</massCapacity>
+        <restEffectiveness>0.8</restEffectiveness>
+        <canChangeAssignedThingsAfterStarting>true</canChangeAssignedThingsAfterStarting>
+      </li>
+      <li Class="AncotLibrary.CompProperties_Drone">
+        <compClass>Milira.CompDrone_Milira</compClass>
+        <initialWorkMode>Ancot_Recharge</initialWorkMode>
+      </li>
+    </comps>
+    <inspectorTabs>
+      <li>ITab_ContentsTransporter</li>
+    </inspectorTabs>
+    <uiIconPath>Milira/Drone/Storage_east</uiIconPath>
+  </ThingDef>
+  <PawnKindDef ParentName="Milira_BaseDroneKind">
+    <defName>Milira_DroneStorage</defName>
+    <label>storage unit</label>
+    <combatPower>30</combatPower>
+    <race>Milira_DroneStorage</race>
+    <lifeStages>
+      <li>
+        <bodyGraphicData>
+          <texPath>Milira/Drone/Storage</texPath>
+          <maskPath>Milian/Mechanoid/Mask/Mask</maskPath>
+          <shaderType>CutoutWithOverlay</shaderType>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>1.8</drawSize>
+          <shadowData>
+            <volume>(1.0, 0.6, 1.0)</volume>
+            <offset>(0, 0, 0)</offset>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+  </PawnKindDef>
+
+
+</Defs>

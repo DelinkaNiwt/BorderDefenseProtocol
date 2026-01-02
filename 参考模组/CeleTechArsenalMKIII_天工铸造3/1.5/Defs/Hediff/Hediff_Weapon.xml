@@ -1,0 +1,44 @@
+<Defs>
+	<HediffDef>
+	<hediffClass>HediffWithComps</hediffClass>
+    <defName>CTBladeBinded</defName>
+    <label>synchronization completed: CeleTech blade Δ</label>
+    <description>After binded with the blade, its owner completely manage the abilities enabled in the blade's persona core.</description>
+    <stages>
+      <li>
+		<statOffsets>
+			<MeleeDamageFactor>0.5</MeleeDamageFactor>
+		</statOffsets>
+      </li>
+    </stages>
+	<comps>
+        <li Class="HediffCompProperties_GiveAbility">
+          <abilityDefs>
+			<li>CMC_NeutronPluse</li>
+			<li>CMC_SelfSkip</li>
+          </abilityDefs>
+        </li>
+    </comps>
+  </HediffDef>
+  
+  <HediffDef>
+	<hediffClass>HediffWithComps</hediffClass>
+    <defName>NSwordBinded</defName>
+    <label>synchronization completed: CeleTech sword Δ</label>
+    <description>After binded with the sword, its owner completely manage the abilities enabled in the blade's persona core.</description>
+    <stages>
+      <li>
+		<statOffsets>
+			<MeleeDamageFactor>0.5</MeleeDamageFactor>
+		</statOffsets>
+      </li>
+    </stages>
+	<comps>
+        <li Class="HediffCompProperties_GiveAbility">
+          <abilityDefs>
+			<li>CMC_SelfSkip</li>
+          </abilityDefs>
+        </li>
+    </comps>
+  </HediffDef>
+</Defs>

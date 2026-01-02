@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <PawnTableDef>
+    <defName>Milian_ConfigTable</defName>
+    <workerClass>PawnTable_Mechs</workerClass>
+    <columns>
+      <li>LabelWithIcon</li>
+      <li>Milian_Equipment</li>
+      <li>GapSmall</li>
+      <li>Ancot_Apparel</li>
+      <li>GapTiny</li>
+      <li>Milian_AutoSuitUp</li>
+      <li>GapTiny</li>
+      <li>Overseer</li>
+      <li>ControlGroup</li>
+      <li>RemainingSpace</li>
+    </columns>
+  </PawnTableDef>
+
+  <!-- <PawnTableDef>
+    <defName>Milian_Work</defName>
+    <workerClass>PawnTable_Mechs</workerClass>
+    <columns>
+      <li>LabelWithIcon</li>
+      <li>Faction</li>
+      <li>CopyPasteWorkPriorities</li>
+      <li>RemainingSpace</li>
+    </columns>
+  </PawnTableDef> -->
+
+</Defs>

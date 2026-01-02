@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Allow colonist automatic suit up for milian. -->
+  <Milian_AutoSuitUp.headerTip>允许殖民者自动为当前米莉安更换服装。</Milian_AutoSuitUp.headerTip>
+  
+  <!-- EN: The weapon this pawn equipped with. -->
+  <Milian_Equipment.headerTip>这个单位装备的武器。</Milian_Equipment.headerTip>
+  
+</LanguageData>

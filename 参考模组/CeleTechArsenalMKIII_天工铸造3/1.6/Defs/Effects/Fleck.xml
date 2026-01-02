@@ -1,0 +1,344 @@
+<Defs>
+	<FleckDef ParentName="FleckBase_Thrown">
+		<defName>CMC_MYDE_AF_Fleck_HeatGlowBlue_Intense</defName>
+		<graphicData>
+		  <texPath>Things/Mote/LightningGlow</texPath>
+		  <shaderType>MoteGlow</shaderType>
+		</graphicData>
+		<altitudeLayer>FogOfWar</altitudeLayer>
+		<solidTime>0.05</solidTime>
+		<fadeOutTime>0.17</fadeOutTime>
+		<growthRate>-0.1</growthRate>
+	</FleckDef>
+	
+	<FleckDef ParentName="FleckBase">
+    <defName>CMC_SparkFlash</defName>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <solidTime>0.02</solidTime>
+    <fadeOutTime>0.02</fadeOutTime>
+    <graphicData>
+      <texPath>Things/Mote/SparkFlash</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+  </FleckDef>
+  
+  <FleckDef ParentName="FleckBase">
+    <defName>CMC_SparkFlash_Blue</defName>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <solidTime>1</solidTime>
+    <fadeOutTime>0.17</fadeOutTime>
+	<growthRate>-0.1</growthRate>
+    <graphicData>
+      <texPath>Things/Others/Flame_EXP</texPath>
+      <shaderType>MoteGlow</shaderType>
+	  <drawSize>1.8</drawSize>
+    </graphicData>
+  </FleckDef>
+  
+  <FleckDef ParentName="FleckBase">
+    <defName>CMC_TeleportExit</defName>
+    <altitudeLayer>MoteLow</altitudeLayer>
+    <solidTime></solidTime>
+    <fadeOutTime>1.35</fadeOutTime>
+	<growthRate>0.15</growthRate>
+    <graphicData>
+      <texPath>Things/Others/CMC_TeleportExit</texPath>
+      <shaderType>MoteGlow</shaderType>
+	  <drawSize>2</drawSize>
+	  <color>(0.16,0.93,0.93,0.89)</color>
+    </graphicData>
+  </FleckDef>
+  
+  <FleckDef ParentName="FleckBase">
+    <defName>CMC_TeleportSpawn</defName>
+    <altitudeLayer>MoteLow</altitudeLayer>
+    <solidTime></solidTime>
+    <fadeOutTime>2.17</fadeOutTime>
+	<growthRate>0.13</growthRate>
+    <graphicData>
+      <texPath>Things/Others/CMC_TeleportExit</texPath>
+      <shaderType>MoteGlow</shaderType>
+	  <drawSize>2</drawSize>
+	  <color>(0.16,0.93,0.93,0.89)</color>
+    </graphicData>
+  </FleckDef>
+  
+  <FleckDef ParentName="FleckBase">
+    <defName>CMC_SparkFlash_Blue_LongLasting</defName>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <solidTime>1</solidTime>
+    <fadeOutTime>1.27</fadeOutTime>
+	<growthRate>-0.1</growthRate>
+    <graphicData>
+      <texPath>Things/Others/Flame_EXP</texPath>
+      <shaderType>MoteGlow</shaderType>
+	  <drawSize>1.2</drawSize>
+    </graphicData>
+  </FleckDef>
+  
+  <FleckDef ParentName="FleckBase">
+    <defName>CMC_SparkFlash_Blue_Small</defName>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <fadeOutTime>0.15</fadeOutTime>
+    <graphicData>
+      <texPath>Things/Others/Smoke_Dark</texPath>
+      <shaderType>TransparentPostLight</shaderType>
+	  <drawSize>(0.06,0.25)</drawSize>
+    </graphicData>
+  </FleckDef>
+  
+  <FleckDef ParentName="FleckBase">
+    <defName>CMC_SparkFlash_Blue_LongLasting_Small</defName>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <fadeOutTime>0.23</fadeOutTime>
+    <graphicData>
+      <texPath>Things/Others/Smoke_Dark</texPath>
+      <shaderType>TransparentPostLight</shaderType>
+	  <drawSize>(0.06,0.25)</drawSize>
+    </graphicData>
+  </FleckDef>
+  
+  <FleckDef ParentName="FleckBase">
+    <defName>CMC_GunTail_Blue</defName>
+    <altitudeLayer>Projectile</altitudeLayer>
+	<fadeInTime>0.04</fadeInTime>
+    <solidTime>0.0</solidTime>
+    <fadeOutTime>0.24</fadeOutTime>
+    <graphicData>
+      <texPath>Things/Others/CMC_trace_XM</texPath>
+      <shaderType>MoteGlow</shaderType>
+	  <drawSize>(1,1)</drawSize>
+    </graphicData>
+  </FleckDef>
+  
+  <FleckDef ParentName="FleckBase_Thrown">
+		<defName>CMC_SmokeDark</defName>
+		<graphicData>
+			<texPath>Things/Mote/Smoke</texPath>
+			<renderInstanced>true</renderInstanced>
+			<color>(0.36,0.3,0.3)</color>
+		</graphicData>
+		<altitudeLayer>MoteOverhead</altitudeLayer>
+		<fadeInTime>0.50</fadeInTime>
+		<solidTime>3.14</solidTime>
+		<fadeOutTime>1</fadeOutTime>
+		<growthRate>0.4</growthRate>
+	</FleckDef>
+	
+	<FleckDef ParentName="FleckGlowDistortBackground">
+		<defName>CMC_ShockWave</defName>
+		<altitudeLayer>MoteOverhead</altitudeLayer>
+		<fadeInTime>0</fadeInTime>
+		<fadeOutTime>0.3</fadeOutTime>
+		<solidTime>0.33</solidTime>
+		<growthRate>40.0</growthRate>
+		<graphicData>
+		  <texPath>Things/Mote/Black</texPath>
+		  <shaderParameters>
+			<_distortionIntensity>0.05</_distortionIntensity>
+			<_brightnessMultiplier>1.15</_brightnessMultiplier>
+		  </shaderParameters>
+		  <drawSize>1.3</drawSize>
+		</graphicData>
+	</FleckDef>
+	  
+	<FleckDef ParentName="FleckBase">
+		<defName>CMC_Fleck_HitFlash</defName>
+		<altitudeLayer>MoteOverhead</altitudeLayer>
+		<fadeOutTime>0.04</fadeOutTime>
+		<fadeInTime>0</fadeInTime>
+		<solidTime>0</solidTime>
+		<growthRate>1.5</growthRate>
+		<graphicData>
+			<texPath>Things/Others/CMC_HitFlash</texPath>
+			<shaderType>MoteGlow</shaderType>
+			<renderInstanced>true</renderInstanced>
+			<drawSize>3.2</drawSize>
+		</graphicData>
+	</FleckDef>
+	
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>CMC_GunTail_Fire</defName>
+    <graphicData>
+      <texPath>Things/Mote/FireGlow</texPath>
+      <shaderType>MoteGlow</shaderType>
+	  <drawSize>(0.2,4)</drawSize>
+    </graphicData>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <fadeInTime>0</fadeInTime>
+    <solidTime>0.1</solidTime>
+    <fadeOutTime>0.6</fadeOutTime>
+    <growthRate>-0.1</growthRate>
+  </FleckDef>
+  
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>CMC_FireGlow</defName>
+    <graphicData>
+      <texPath>Things/Mote/FireGlow</texPath>
+      <shaderType>MoteGlow</shaderType>
+	  <drawSize>(0.3,1)</drawSize>
+    </graphicData>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <fadeInTime>0</fadeInTime>
+    <solidTime>0.1</solidTime>
+    <fadeOutTime>0.6</fadeOutTime>
+    <growthRate>-0.1</growthRate>
+  </FleckDef>
+  
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>CMC_FireGlow_Exp</defName>
+    <graphicData>
+      <texPath>Things/Others/Flame_EXP</texPath>
+      <shaderType>MoteGlow</shaderType>
+	  <drawSize>(0.01,0.3)</drawSize>
+    </graphicData>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <fadeInTime>0</fadeInTime>
+    <solidTime>0</solidTime>
+    <fadeOutTime>0.2</fadeOutTime>
+    <growthRate>0.9</growthRate>
+  </FleckDef>
+  
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>CMC_FireGlowFast</defName>
+    <graphicData>
+      <texPath>Things/Mote/FireGlow</texPath>
+      <shaderType>MoteGlow</shaderType>
+	  <drawSize>(0.3,1)</drawSize>
+    </graphicData>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <fadeInTime>0</fadeInTime>
+    <solidTime>0.1</solidTime>
+    <fadeOutTime>0.3</fadeOutTime>
+    <growthRate>-0.7</growthRate>
+  </FleckDef>
+  
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>CMC_Fleck_ProjectileSmoke_LongLasting</defName>
+    <graphicData>
+      <texPath>Things/Others/Smoke_Dark</texPath>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+    <altitudeLayer>FogOfWar</altitudeLayer>
+    <fadeInTime>0.1</fadeInTime>
+    <solidTime>0</solidTime>
+    <fadeOutTime>4</fadeOutTime>
+    <growthRate>-0.011</growthRate>
+  </FleckDef>
+  
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>CMC_Fleck_ProjectileSmoke_LongLastingGrow</defName>
+    <graphicData>
+      <texPath>Things/Others/Smoke_Dark</texPath>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+    <altitudeLayer>FogOfWar</altitudeLayer>
+    <fadeInTime>0.1</fadeInTime>
+    <solidTime>0</solidTime>
+    <fadeOutTime>4</fadeOutTime>
+    <growthRate>-0.81</growthRate>
+  </FleckDef>
+  
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>CMC_NeutronBurst</defName>
+    <graphicData>
+      <texPath>Things/Others/CMC_NB</texPath>
+      <shaderType>TransparentPostLight</shaderType>
+	  <drawSize>(0.5,0.1)</drawSize>
+    </graphicData>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <fadeInTime>0.1</fadeInTime>
+    <solidTime>0</solidTime>
+    <fadeOutTime>0.1</fadeOutTime>
+    <growthRate>3</growthRate>
+  </FleckDef>
+  
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>CMC_PulsingDistortionRing</defName>
+    <altitudeLayer>LowPlant</altitudeLayer>
+    <fadeInTime>0</fadeInTime>
+    <solidTime>0.7</solidTime>
+    <fadeOutTime>0.3</fadeOutTime>
+    <scalers>
+      <li>
+        <curve>
+          <points>
+              <li>(0,0.5)</li>
+              <li>(0.04,0.5506649)</li>
+              <li>(0.08,0.6083986)</li>
+              <li>(0.12,0.6601207)</li>
+              <li>(0.16,0.6927508)</li>
+              <li>(0.2,0.6932482)</li>
+              <li>(0.24,0.6573324)</li>
+              <li>(0.28,0.5968097)</li>
+              <li>(0.32,0.5250826)</li>
+              <li>(0.36,0.4555534)</li>
+              <li>(0.3999999,0.4016244)</li>
+              <li>(0.4399999,0.3766979)</li>
+              <li>(0.4799999,0.3844551)</li>
+              <li>(0.5199999,0.4151261)</li>
+              <li>(0.5599999,0.4617828)</li>
+              <li>(0.6,0.5174969)</li>
+              <li>(0.64,0.5753405)</li>
+              <li>(0.68,0.6283851)</li>
+              <li>(0.72,0.6697027)</li>
+              <li>(0.7600001,0.6923652)</li>
+              <li>(0.8000001,0.6905967)</li>
+              <li>(0.8400001,0.6676212)</li>
+              <li>(0.8800001,0.6302789)</li>
+              <li>(0.9200001,0.5853646)</li>
+              <li>(0.9600002,0.5396733)</li>
+              <li>(1,0.5)</li>
+          </points>
+        </curve>
+        <scaleAmt>1</scaleAmt>
+        <scaleTime>0.4</scaleTime>
+      </li>
+    </scalers>
+    <graphicData>
+      <graphicClass>Graphic_FleckPulse</graphicClass>
+      <texPath>Things/Others/Flame_EXP</texPath>
+      <shaderType>MoteLargeDistortionWave</shaderType>
+      <shaderParameters>
+        <_DistortionTex>/Things/Mote/PsychicDistortionCurrents</_DistortionTex>
+        <_NoiseTex>/Things/Mote/PsycastNoise</_NoiseTex>
+        <_distortionIntensity>0.05</_distortionIntensity>
+        <_brightnessMultiplier>0.65</_brightnessMultiplier>
+        <_noiseIntensity>1</_noiseIntensity>
+        <_ageToNoiseRatio>0</_ageToNoiseRatio>
+      </shaderParameters>
+      <drawSize>6.0</drawSize>
+    </graphicData>
+    <useAttachLink>True</useAttachLink>
+  </FleckDef>
+  
+  <FleckDef ParentName="FleckBase_RandomGraphic">
+    <defName>CMC_ExplosionSplatter</defName>
+    <altitudeLayer>MoteLow</altitudeLayer>
+    <solidTime>3</solidTime>
+    <fadeOutTime>1</fadeOutTime>
+    <randomGraphics>
+      <li>
+        <graphicClass>Graphic_Fleck</graphicClass>
+        <texPath>Things/Filth/Spatter/SpatterA</texPath>
+        <shaderType>TransparentPostLight</shaderType>
+        <color>(255, 213, 86, 70)</color>
+        <drawSize>(0.34, 0.33)</drawSize>
+      </li>
+      <li>
+        <graphicClass>Graphic_Fleck</graphicClass>
+        <texPath>Things/Filth/Spatter/SpatterB</texPath>
+        <shaderType>TransparentPostLight</shaderType>
+        <color>(255, 213, 86, 70)</color>
+        <drawSize>(0.37, 0.34)</drawSize>
+      </li>
+      <li>
+        <graphicClass>Graphic_Fleck</graphicClass>
+        <texPath>Things/Filth/Spatter/SpatterC</texPath>
+        <shaderType>TransparentPostLight</shaderType>
+        <color>(255, 213, 86, 70)</color>
+        <drawSize>(0.31, 0.37)</drawSize>
+      </li>
+    </randomGraphics>
+  </FleckDef>
+</Defs>

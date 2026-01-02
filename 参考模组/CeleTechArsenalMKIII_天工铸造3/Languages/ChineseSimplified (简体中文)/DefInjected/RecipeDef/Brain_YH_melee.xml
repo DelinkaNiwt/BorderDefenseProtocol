@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: install Yu Heng chip -->
+  <InstallYH.label>植入【玉衡】近战芯片</InstallYH.label>
+  <!-- EN: Install a Yu Heng chip. -->
+  <InstallYH.description>植入【玉衡】近战芯片</InstallYH.description>
+  <!-- EN: Installing Yu Heng chip. -->
+  <InstallYH.jobString>植入【玉衡】近战芯片</InstallYH.jobString>
+  
+  <!-- EN: remove Yu Heng chip -->
+  <RemoveYH.label>移除【玉衡】近战芯片</RemoveYH.label>
+  <!-- EN: Remove the Yu Heng chip. -->
+  <RemoveYH.description>移除【玉衡】近战芯片</RemoveYH.description>
+  <!-- EN: Removing Yu Heng chip. -->
+  <RemoveYH.jobString>移除【玉衡】近战芯片</RemoveYH.jobString>
+  
+</LanguageData>

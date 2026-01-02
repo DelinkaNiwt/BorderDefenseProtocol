@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: WIP request air strike -->
+  <CMC_AdvStrike.label> 敬请期待 //仁慈协议：镇魂曲//</CMC_AdvStrike.label>
+  <!-- EN: . -->
+  <CMC_AdvStrike.description>.</CMC_AdvStrike.description>
+  
+  <!-- EN: intelligent machining -->
+  <CMC_BasisHeavy.label>熔铸加工平台</CMC_BasisHeavy.label>
+  <!-- EN: Building multifunctional intelligent heavy-duty machine tools capable of manufacturing large components and missiles. -->
+  <CMC_BasisHeavy.description>建造工业级重型锻造设备，整合高温等离子熔炉与三维成型技术，用于铸造导弹推进舱、复合装甲板等大型军用构件。</CMC_BasisHeavy.description>
+  
+  <!-- EN: numarical control -->
+  <CMC_basisLight.label>先进数控平台</CMC_basisLight.label>
+  <!-- EN: Building multifunctional intelligent CNC machine tools capable of manufacturing and processing precision weapon components. -->
+  <CMC_basisLight.description>开发模块化智能数控机床，采用纳米级定位系统和自适应加工算法，可生产微型传感器、复合陶瓷枪管等精密武器组件，为后续武器研发提供核心制造能力。</CMC_basisLight.description>
+  
+  <!-- EN: WIP request gun ship -->
+  <CMC_BasisStrike.label> 敬请期待 //轨道防御协议//</CMC_BasisStrike.label>
+  <!-- EN: . -->
+  <CMC_BasisStrike.description>.</CMC_BasisStrike.description>
+  
+  <!-- EN: orbital trading -->
+  <CMC_BasisTrade.label>自助轨道贸易</CMC_BasisTrade.label>
+  <!-- EN: . -->
+  <CMC_BasisTrade.description>建造无人机起降平台和量子通信塔，与天工商盟的在轨贸易穿梭机进行贸易。</CMC_BasisTrade.description>
+  
+  <!-- EN: energy convergence -->
+  <CMC_DEWI.label>高能粒子聚焦</CMC_DEWI.label>
+  <!-- EN: Craft directed Energy Weapons (DEWs), which are advanced systems that use focused energy in the form of lasers or particle beams to destroy targets. Unlike traditional kinetic weapons, DEWs operate by delivering energy directly to a target at the speed of light, offering rapid response times and high precision. -->
+  <CMC_DEWI.description>研发兆瓦级激光发射器，通过衍射光学元件将能量聚焦为微米级光斑，配合自适应波长调节系统，可针对不同材质目标切换烧蚀模式。\n\n定向能系列：必定命中目标，但射程很短。</CMC_DEWI.description>
+  
+  <!-- EN: DEW tool -->
+  <CMC_DEWI_Sub.label>定向能量切割</CMC_DEWI_Sub.label>
+  <!-- EN: Based on the Schwartz-Lee lens focusing principle, a megawatt-class particle beam for industrial cutting has been developed. This technology enables millimeter-precision, non-explosive excavation of near-orbit celestial bodies and deep-planetary crust mineral veins, revolutionizing resource extraction methodologies. -->
+  <CMC_DEWI_Sub.description>基于希瓦尔特-李透镜聚焦原理，开发出用于工业切割的兆瓦级粒子光束。该技术允许对近地轨道天体与地壳深层矿脉进行毫米级精度的非爆破式开采，彻底革新了资源采集的作业方式。</CMC_DEWI_Sub.description>
+  
+  <!-- EN: heat dissipation module -->
+  <CMC_DEWII.label>热电循环装置</CMC_DEWII.label>
+  <!-- EN: During the laser weapon's operation, the emitted heat is converted into electrical energy using thermoelectric materials. This energy can be used to power other components of the weapon system or stored for later use, enhancing energy efficiency thus increasing rate of fire. -->
+  <CMC_DEWII.description>武器散热系统将余热转化为电能，形成越战越强的正反馈循环。\n\n定向能系列：必定命中目标，但射程很短。</CMC_DEWII.description>
+  
+  <!-- EN: adaptive focusing Lens -->
+  <CMC_DEWIII.label>弱点分析协议</CMC_DEWIII.label>
+  <!-- EN: Intelligent adaptive focusing lens dynamically adjust the laser beam's focal point and energy density based on the target's distance and material, allowing the energy to be precisely concentrated on the target's most vulnerable area, maximizing destructive power and penetration efficiency. -->
+  <CMC_DEWIII.description>通过毫米波扫描自动构建目标3D模型，激光束优先攻击焊缝、电路等关键节点，提供攻击效率。\n\n定向能系列：必定命中目标，但射程很短。</CMC_DEWIII.description>
+  
+  <!-- EN: EM-boost rounds -->
+  <CMC_EMweaponTech_I.label>电磁加速模块</CMC_EMweaponTech_I.label>
+  <!-- EN: Utilize magnetic fields to accelerate the bullet upon firing, significantly increasing velocity and penetration. -->
+  <CMC_EMweaponTech_I.description>在传统枪械结构中集成超导线圈阵列，通过电磁场对弹丸进行二次加速，显著提升穿甲能力，适用于对抗轻中型装甲目标。\n\n电磁动能武器系列：武器射程相对较远，子弹穿透力强，适合对抗高护甲敌人。</CMC_EMweaponTech_I.description>
+  
+  <!-- EN: phase-change cooling system -->
+  <CMC_EMweaponTech_II.label>相变冷却系统</CMC_EMweaponTech_II.label>
+  <!-- EN: Integrate phase-change alloys that absorb heat through phase transition during high-temperature conditions, rapidly reducing the system's temperature, increasing rate of fire. -->
+  <CMC_EMweaponTech_II.description>在武器散热结构中嵌入记忆合金层，利用固液相变过程高效吸收射击产生的高温热能，确保电磁武器在持续作战中的稳定性。\n\n电磁动能武器系列：武器射程相对较远，子弹穿透力强，适合对抗高护甲敌人。</CMC_EMweaponTech_II.description>
+  
+  <!-- EN: plasma acceleration -->
+  <CMC_EMweaponTech_III.label>等离子助推技术</CMC_EMweaponTech_III.label>
+  <!-- EN: Combine electromagnetic force with plasma jet propulsion, enabling the bullet to reach extreme hypersonic speeds while reducing air resistance and thermal energy loss, significantly enhancing both range and velocity. -->
+  <CMC_EMweaponTech_III.description>在电磁轨道末端注入高温等离子流，通过磁流体动力学效应降低空气阻力，使弹头突破传统物理极限，实现超远距离精准打击。\n\n电磁动能武器系列：武器射程相对较远，子弹穿透力强，适合对抗高护甲敌人。</CMC_EMweaponTech_III.description>
+  
+  <!-- EN: adaptive precision-controlled hypersonic rounds -->
+  <CMC_EMweaponTech_IV.label>动态路径演算</CMC_EMweaponTech_IV.label>
+  <!-- EN: Intelligent correction and energy regulation during flight can ensure precise targeting and effectively prevent excessive penetration, delivering the necessary harm to the target without passing through the back or causing excessive damage to the surrounding area. -->
+  <CMC_EMweaponTech_IV.description>弹头搭载AI芯片，实时计算障碍物拓扑结构，自动选择穿透路径。\n\n电磁加速-智能追踪武器系列：结合了电磁加速动能武器和智能武器的优点，射程远，穿透力强，能追踪敌人。</CMC_EMweaponTech_IV.description>
+  
+  <!-- EN: //XuanMing//protocol -->
+  <CMC_EMweaponTech_V.label>//武器协议：玄冥//</CMC_EMweaponTech_V.label>
+  <!-- EN: Craft the ultra-tech persona heavy sniper rifle "Xuanming". -->
+  <CMC_EMweaponTech_V.description>研发智能电磁步枪-玄冥。\n\n电磁加速-智能追踪武器系列：结合了电磁加速动能武器和智能武器的优点，射程远，穿透力强，能追踪敌人。</CMC_EMweaponTech_V.description>
+  
+  <!-- EN: Basic Anti-gravity Unit -->
+  <CMC_FloatingGunI.label>基础反重力单元</CMC_FloatingGunI.label>
+  <!-- EN: Core module for universal floating platforms utilizing miniaturized anti-gravity field technology. Supports modular interfaces for production or combat payloads, enabling multi-role mission adaptability.\n\nWarning: Shared tactical datalink with operator may cause system overload during direct attacks, potentially leading to detonation. EMP pulses inflict catastrophic damage to control systems before protective upgrades. -->
+  <CMC_FloatingGunI.description>基于微型化反重力场生成技术开发的通用浮游平台核心。可通过模块化接口搭载生产或作战单元，实现多功能任务适配。\n\n注意：浮游炮与操控者共享战术数据链，当操控者遭受直接攻击时可能引发系统过载，严重甚至可能发生爆炸。未升级防护前，EMP脉冲将对控制系统造成毁灭性损伤。</CMC_FloatingGunI.description>
+  
+  <!-- EN: Phased Anti-gravity Array -->
+  <CMC_FloatingGunII.label>反重力相控阵列</CMC_FloatingGunII.label>
+  <!-- EN: Multi-unit anti-gravity matrix with phase-synchronized control generates stable spherical force fields. Expanded payload capacity enables integration of heavy-caliber weapon systems, unlocking strategic-grade combat platforms. -->
+  <CMC_FloatingGunII.description>通过相位协同控制的多单元反重力矩阵，形成稳定球型力场结构。扩展的载重空间允许集成大口径武器系统，解锁具备战略价值的重型浮游作战平台。</CMC_FloatingGunII.description>
+  
+  <!-- EN: Hardware Overhaul -->
+  <CMC_FloatingGunIII.label>浮游炮硬件升级</CMC_FloatingGunIII.label>
+  <!-- EN: Installs EMP diversion modules and reinforced capacitor arrays. Significantly reduces EMP penetration damage while improving power conversion efficiency, drastically shortening recharge cycles and extending operational endurance. -->
+  <CMC_FloatingGunIII.description>安装电磁脉冲分流装置与强化电容阵列。大幅降低EMP对控制回路的穿透损伤，同时提升能源转换效率，显著缩短充能周期并延长持续作战时间。</CMC_FloatingGunIII.description>
+  
+  <!-- EN: Firmware Optimization -->
+  <CMC_FloatingGunIV.label>浮游炮软件升级</CMC_FloatingGunIV.label>
+  <!-- EN: Deploys adaptive power management algorithms. Dynamically regulates thruster output and weapon cooling cycles to maximize combat efficiency per energy unit, achieving strategic extension of deployment duration. -->
+  <CMC_FloatingGunIV.description>部署自适应能源管理算法。通过动态调节推进器功率分配与武器散热周期，优化每单位能量的作战效能，实现持续作战时间的战略性延长。</CMC_FloatingGunIV.description>
+  
+  <!-- EN: Bandwidth Expansion - Basic -->
+  <CMC_FloatingGunV.label>基础带宽增幅</CMC_FloatingGunV.label>
+  <!-- EN: Augments neural interface bandwidth to overcome single-operator limitations. +1 to maximum simultaneously controllable floating platforms. -->
+  <CMC_FloatingGunV.description>扩展神经交互信道带宽，突破单兵操控瓶颈。控制者最大浮游炮同步指挥数量+1。</CMC_FloatingGunV.description>
+  
+  <!-- EN: Bandwidth Expansion - Advanced -->
+  <CMC_FloatingGunVI.label>高级带宽增幅</CMC_FloatingGunVI.label>
+  <!-- EN: Upgrades quantum neural interface protocols for multi-target coordination. +1 to maximum simultaneously controllable floating platforms. -->
+  <CMC_FloatingGunVI.description>升级量子神经接口协议，实现多目标协同运算。控制者最大浮游炮同步指挥数量+1。</CMC_FloatingGunVI.description>
+  
+  <!-- EN: advnaced warheads -->
+  <CMC_Heavy_I.label>先进弹头</CMC_Heavy_I.label>
+  <!-- EN: Advanced multi-purpose warheads ensure flexibility in complex combat environments. -->
+  <CMC_Heavy_I.description>研发先进的多用途弹头，可对多种目标造成有效杀伤。</CMC_Heavy_I.description>
+  
+  <!-- EN: . -->
+  <CMC_Heavy_II.label>AI协同制导</CMC_Heavy_II.label>
+  <!-- EN: . -->
+  <CMC_Heavy_II.description>导弹搭载神经网络芯片，可自主规划攻击路线。</CMC_Heavy_II.description>
+  
+  <!-- EN: //Qiyao//protocol -->
+  <CMC_QYProtocol.label>//武器协议：七曜//</CMC_QYProtocol.label>
+  <!-- EN: Craft the ultra-tech persona laser rifle "Qiyao". -->
+  <CMC_QYProtocol.description>研发智能光谱武器"七曜"\n\n定向能系列：必定命中目标，但射程很短。</CMC_QYProtocol.description>
+  
+  <!-- EN: smart target analysis -->
+  <CMC_Smart_I.label>神经链接瞄准</CMC_Smart_I.label>
+  <!-- EN: Enable automatic locking onto the next priority target immediately after eliminating the current one. By utilizing multi-sensor fusion and AI algorithms, it rapidly evaluates target threat levels and positions, enabling seamless chain strikes and significantly enhancing combat efficiency. -->
+  <CMC_Smart_I.description>光学瞄具直连使用者脑机接口，自动计算风速、重力与目标运动轨迹，降低锁定时间。\n\n智能武器系列：子弹能追踪敌人，但追踪的射程一般较短，且伤害穿深会随距离衰减；武器的命中率和射手的智识水平相关。</CMC_Smart_I.description>
+  
+  <!-- EN: trajectory correction -->
+  <CMC_Smart_II.label>自主制导弹头</CMC_Smart_II.label>
+  <!-- EN: Craft smart weapons firing bullets equipped with miniature sensors, control chips, and RCS, allowing them to sense the target's position in real time and adjust their trajectory for precise strikes. -->
+  <CMC_Smart_II.description>微型涡喷引擎配合红外/雷达双模导引头，可精确摧毁热源目标。\n\n智能武器系列：子弹能追踪敌人，但追踪的射程一般较短，且伤害穿深会随距离衰减；武器的命中率和射手的智识水平相关。</CMC_Smart_II.description>
+  
+  <!-- EN: quantum radar-based WS -->
+  <CMC_Smart_III.label>量子成像雷达</CMC_Smart_III.label>
+  <!-- EN: . -->
+  <CMC_Smart_III.description>利用量子纠缠原理实现穿墙探测，可识别伪装目标并标记装甲薄弱点。\n\n智能武器系列：子弹能追踪敌人，但追踪的射程一般较短，且伤害穿深会随距离衰减；武器的命中率和射手的智识水平相关。</CMC_Smart_III.description>
+  
+  <!-- EN: //Taotie//protocol -->
+  <CMC_TaotieProtocol.label>//武器协议·饕餮//</CMC_TaotieProtocol.label>
+  <!-- EN: Craft the ultra-tech persona laser rifle "TaoTie". -->
+  <CMC_TaotieProtocol.description>研发重型粒子束步枪“饕餮”。</CMC_TaotieProtocol.description>
+  
+  <!-- EN: //Zhurong//protocol -->
+  <CMC_ZhurongProtocol.label>//武器协议·祝融//</CMC_ZhurongProtocol.label>
+  <!-- EN: . -->
+  <CMC_ZhurongProtocol.description>研发单兵等离子投射器“祝融”。</CMC_ZhurongProtocol.description>
+  
+  <!-- EN: armorI(WIP) -->
+  <CMCarmor.label>纳米编织</CMCarmor.label>
+  <!-- EN: Craft CMC clothes and light armors. -->
+  <CMCarmor.description>采用自修复碳纳米管编织技术，内嵌液态金属微囊。受击时，纳米纤维自动重构密度分布，将冲击力分散至全身；液态金属可瞬间填补破损区域。</CMCarmor.description>
+  
+  <!-- EN: armorII(WIP) -->
+  <CMCarmorII.label>动能转化</CMCarmorII.label>
+  <!-- EN: Craft CMC clothes and light armors. -->
+  <CMCarmorII.description>集成压电晶体矩阵的强化外骨骼系统，将承受的动能攻击转化为电能储存。</CMCarmorII.description>
+  
+  <!-- EN: armorIII(WIP) -->
+  <CMCarmorIII.label>相变装甲</CMCarmorIII.label>
+  <!-- EN: Craft CMC powered armors and personal shield. -->
+  <CMCarmorIII.description>应用超流体量子锁定技术，受击区域原子结构瞬间相变为中子简并态，瞬间提升硬度。</CMCarmorIII.description>
+  
+  <!-- EN: armorIV(WIP) -->
+  <CMCarmorIV.label>//械灵战甲协议//</CMCarmorIV.label>
+  <!-- EN: . -->
+  <CMCarmorIV.description>.</CMCarmorIV.description>
+  
+  <!-- EN: CMC combat chips -->
+  <CMCBio.label>//北斗·先进脑部插件//</CMCBio.label>
+  <!-- EN: Craft combat chips with specialized functions. -->
+  <CMCBio.description>开发能激发人脑潜能的先进脑部插件。</CMCBio.description>
+  
+  <!-- EN: turret technology II -->
+  <CMCGunTurrets.label>重型工事</CMCGunTurrets.label>
+  <!-- EN: Build advanced CMC turrets -->
+  <CMCGunTurrets.description>建造更大威力的固定式重型炮塔。</CMCGunTurrets.description>
+  
+  <!-- EN: turret technology I -->
+  <CMCGunTurretsbasic.label>基础防卫塔</CMCGunTurretsbasic.label>
+  <!-- EN: Build basic CMC turrets -->
+  <CMCGunTurretsbasic.description>建造基础型自动炮塔。</CMCGunTurretsbasic.description>
+  
+  <!-- EN: melee weaponI -->
+  <CMCmeleeI.label>先进单分子刃</CMCmeleeI.label>
+  <!-- EN: Build basic spacer melee weapons. -->
+  <CMCmeleeI.description>武器内置的晶体可以让刀锋高频振动，配合单分子镀层，轻松切开装甲。</CMCmeleeI.description>
+  
+  <!-- EN: melee weapon II -->
+  <CMCmeleeII.label>武器人格编程</CMCmeleeII.label>
+  <!-- EN: Build advanced spacer melee weapons. -->
+  <CMCmeleeII.description>在武器内置超级AI的下行链路，可以让使用者施展多种战技。</CMCmeleeII.description>
+  
+  <!-- EN: melee weapon II -->
+  <CMCmeleeIII.label>敬请期待 纳米零素刀刃</CMCmeleeIII.label>
+  <!-- EN: Build advanced spacer melee weapons. -->
+  <CMCmeleeIII.description>通过纳米机器人实时重构刀刃形态，针对不同材质自动切换锐化/钝化模式。</CMCmeleeIII.description>
+  
+  <!-- EN: power I -->
+  <CMCPowerI.label>裂变反应组</CMCPowerI.label>
+  <!-- EN: CMC basic power technology -->
+  <CMCPowerI.description>安全可靠的小型核裂变电池，适用于在极端条件下供能。</CMCPowerI.description>
+  
+  <!-- EN: power II -->
+  <CMCPowerII.label>//太虚·零点反应堆//</CMCPowerII.label>
+  <!-- EN: CMC standard power technology -->
+  <CMCPowerII.description>利用卡西米尔效应提取真空量子涨落能，提供近乎无限的能源。</CMCPowerII.description>
+  
+  <!-- EN: advanced defense technology -->
+  <CMCShield.label>//天罗·能量护盾//</CMCShield.label>
+  <!-- EN: Build advanced defense facilities including force-field shield and long-range cruise missile. -->
+  <CMCShield.description>建筑先进力场发生器，六边形能量单元构成动态防御网，可偏转99%实体弹药。</CMCShield.description>
+  
+</LanguageData>

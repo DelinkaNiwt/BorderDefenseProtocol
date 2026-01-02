@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ThingCategoryDef>
+    <defName>AmmoCategory_8x50mmMTSmart</defName>
+    <label>8x50mm MTS</label>
+    <parent>AmmoAdvanced</parent>
+    <iconPath>Things/Ammo/8x50mmUI</iconPath>
+  </ThingCategoryDef>
+  <CombatExtended.AmmoSetDef>
+    <defName>AmmoSet_8x50mmMTSmart</defName>
+    <label>8x50mm MTS</label>
+    <ammoTypes>
+      <Ammo_8x50mmMTSmart_Regular>Bullet_8x50mmMTSmart_Regular</Ammo_8x50mmMTSmart_Regular>
+      <Ammo_8x50mmMTSmart_HE>Bullet_8x50mmMTSmart_HE</Ammo_8x50mmMTSmart_HE>
+      <Ammo_8x50mmMTSmart_ATB>Bullet_8x50mmMTSmart_ATB</Ammo_8x50mmMTSmart_ATB>
+    </ammoTypes>
+  </CombatExtended.AmmoSetDef>
+  <ThingDef Class="CombatExtended.AmmoDef" Name="Ammo_8x50mmMTSmart_Base" ParentName="SpacerMediumAmmoBase" Abstract="True">
+    <description>8x50mm multi-task smart ammo by CeleTech</description>
+    <statBases>
+      <Mass>0.2</Mass>
+      <Bulk>0.1</Bulk>
+    </statBases>
+    <tradeTags>
+      <li>CE_AutoEnableTrade</li>
+      <li>CE_AutoEnableCrafting</li>
+    </tradeTags>
+    <thingCategories>
+      <li>AmmoCategory_8x50mmMTSmart</li>
+    </thingCategories>
+  </ThingDef>
+  <ThingDef Name="Bullet_8x50mmMTSmart_Base" ParentName="BaseBulletCE" Abstract="True">
+    <graphicData>
+      <texPath>Things/Projectile/Charge_Small</texPath>
+      <graphicClass>Verse.Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile Class="CombatExtended.ProjectilePropertiesCE">
+      <speed>135</speed>
+      <damageDef>Bullet</damageDef>
+      <dropsCasings>true</dropsCasings>
+    </projectile>
+  </ThingDef>
+  <ThingDef Class="CombatExtended.AmmoDef" ParentName="Ammo_8x50mmMTSmart_Base">
+    <defName>Ammo_8x50mmMTSmart_Regular</defName>
+    <label>8x50mmMTSmart R</label>
+    <graphicData>
+      <texPath>Things/Ammo/8x50mmSmart_MTS</texPath>
+      <graphicClass>Verse.Graphic_StackCount</graphicClass>
+    </graphicData>
+    <statBases>
+      <Mass>0.03</Mass>
+      <Bulk>0.022</Bulk>
+    </statBases>
+    <ammoClass>CMC_HomingBullet_AP</ammoClass>
+    <cookOffProjectile>Bullet_8x50mmMTSmart_Regular</cookOffProjectile>
+  </ThingDef>
+  <ThingDef ParentName="Bullet_8x50mmMTSmart_Base">
+    <defName>Bullet_8x50mmMTSmart_Regular</defName>
+    <projectile Class="CombatExtended.ProjectilePropertiesCE">
+      <damageAmountBase>18</damageAmountBase>
+      <armorPenetrationBlunt>87</armorPenetrationBlunt>
+      <armorPenetrationSharp>60</armorPenetrationSharp>
+      <secondaryDamage>
+        <li>
+          <def>EMP</def>
+          <amount>15</amount>
+        </li>
+      </secondaryDamage>
+    </projectile>
+  </ThingDef>
+  <RecipeDef ParentName="AmmoRecipeBase">
+    <defName>MakeAmmo_8x50mmMTSmart_Regular</defName>
+    <label>make 8x50mm MTSmart R cartridge x200</label>
+    <description>Craft 200 8x50mm MTSmart R cartridges.</description>
+    <jobString>Making 8x50mm MTSmart R cartridges.</jobString>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>FSX</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>25</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>50</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>FSX</li>
+        <li>ComponentSpacer</li>
+        <li>Plasteel</li>
+        <li>Steel</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Ammo_8x50mmMTSmart_Regular>200</Ammo_8x50mmMTSmart_Regular>
+    </products>
+    <workAmount>4000</workAmount>
+  </RecipeDef>
+  <ThingDef Class="CombatExtended.AmmoDef" ParentName="Ammo_8x50mmMTSmart_Base">
+    <defName>Ammo_8x50mmMTSmart_HE</defName>
+    <label>8x50mmMTSmart HE</label>
+    <graphicData>
+      <texPath>Things/Ammo/8x50mm_AP</texPath>
+      <graphicClass>Verse.Graphic_StackCount</graphicClass>
+    </graphicData>
+    <ammoClass>GrenadeHE</ammoClass>
+    <cookOffProjectile>Bullet_8x50mmMTSmart_HE</cookOffProjectile>
+  </ThingDef>
+  <ThingDef ParentName="Bullet_8x50mmMTSmart_Base">
+    <defName>Bullet_8x50mmMTSmart_HE</defName>
+    <projectile Class="CombatExtended.ProjectilePropertiesCE">
+      <damageAmountBase>25</damageAmountBase>
+      <damageDef>Bomb</damageDef>
+      <explosionRadius>1.5</explosionRadius>
+    </projectile>
+  </ThingDef>
+  <RecipeDef ParentName="AmmoRecipeBase">
+    <defName>MakeAmmo_8x50mmMTSmart_HE</defName>
+    <label>制作CMC_8x50mmSmart HE x200</label>
+    <description>制作200枚CMC_8x50mmSmart HE。</description>
+    <jobString>正在制作CMC_8x50mmSmart HE。</jobString>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>FSX</li>
+          </thingDefs>
+        </filter>
+        <count>15</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>50</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>FSX</li>
+        <li>Steel</li>
+        <li>ComponentSpacer</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Ammo_8x50mmMTSmart_HE>200</Ammo_8x50mmMTSmart_HE>
+    </products>
+    <workAmount>4000</workAmount>
+  </RecipeDef>
+  <ThingDef Class="CombatExtended.AmmoDef" ParentName="Ammo_8x50mmMTSmart_Base">
+    <defName>Ammo_8x50mmMTSmart_ATB</defName>
+    <label>8x50mm MTSmart ATB</label>
+    <graphicData>
+      <texPath>Things/Ammo/8x50mmSmart_MTS</texPath>
+      <graphicClass>Verse.Graphic_StackCount</graphicClass>
+    </graphicData>
+    <ammoClass>TranqNonLethal</ammoClass>
+    <cookOffProjectile>Bullet_8x50mmMTSmart_ATB</cookOffProjectile>
+  </ThingDef>
+  <ThingDef ParentName="Bullet_8x50mmMTSmart_Base">
+    <defName>Bullet_8x50mmMTSmart_ATB</defName>
+    <projectile Class="CombatExtended.ProjectilePropertiesCE">
+      <damageAmountBase>1</damageAmountBase>
+      <armorPenetrationBlunt>8</armorPenetrationBlunt>
+      <armorPenetrationSharp>65</armorPenetrationSharp>
+      <secondaryDamage>
+        <li>
+          <def>CMC_ATB</def>
+          <amount>100</amount>
+        </li>
+      </secondaryDamage>
+      <stoppingPower>0.1</stoppingPower>
+    </projectile>
+  </ThingDef>
+  <RecipeDef ParentName="AmmoRecipeBase">
+    <defName>MakeAmmo_8x50mmMTSmart_ATB</defName>
+    <label>制作CMC_8x50mmSmart ATB x50</label>
+    <description>制作50枚CMC_8x50mmSmart ATB。</description>
+    <jobString>正在制作CMC_8x50mmSmart ATB。</jobString>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Cloth</li>
+          </thingDefs>
+        </filter>
+        <count>25</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>50</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Cloth</li>
+        <li>Plasteel</li>
+        <li>ComponentSpacer</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Ammo_8x50mmMTSmart_ATB>50</Ammo_8x50mmMTSmart_ATB>
+    </products>
+    <workAmount>800</workAmount>
+  </RecipeDef>
+</Defs>

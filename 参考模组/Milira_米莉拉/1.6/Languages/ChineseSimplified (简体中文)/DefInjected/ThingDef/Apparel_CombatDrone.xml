@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: combat drone: EMP -->
+  <Milira_CombatDrone_EMPLauncher.label>浮游炮：脉冲榴弹</Milira_CombatDrone_EMPLauncher.label>
+  <!-- EN: A combat drone equipped with a pulse grenade launcher capable of paralysing mechanisms or turrets. Require long time to reload. -->
+  <Milira_CombatDrone_EMPLauncher.description>搭载了脉冲榴弹发射器的浮游炮，能够瘫痪机械装置或炮塔。装填时间较长。</Milira_CombatDrone_EMPLauncher.description>
+  
+  <!-- EN: Combat platform: energy bubble -->
+  <Milira_CombatDrone_EnergyBubble.label>浮游平台：防护泡</Milira_CombatDrone_EnergyBubble.label>
+  <!-- EN: A floating platform equipped with a shield generator can project a personal bubble shield to carrier. The personal bubble shield provided do not block shooting, but easier to be broke. -->
+  <Milira_CombatDrone_EnergyBubble.description>搭载了护盾发生器的浮游平台，能够为携带者投射一面个人护盾。提供的个人护盾不阻碍远程射击，但较容易被击破。</Milira_CombatDrone_EnergyBubble.description>
+  
+  <!-- EN: combat drone: incendiary grenade -->
+  <Milira_CombatDrone_IncendiaryGrenadeLauncher.label>浮游炮：燃烧榴弹</Milira_CombatDrone_IncendiaryGrenadeLauncher.label>
+  <!-- EN: A combat drone equipped with a incendiary grenade launcher capable of setting fire to an area. Require long time to reload. -->
+  <Milira_CombatDrone_IncendiaryGrenadeLauncher.description>搭载了燃烧榴弹发射器的浮游炮，能够点燃一片区域。装填时间较长。</Milira_CombatDrone_IncendiaryGrenadeLauncher.description>
+  
+  <!-- EN: Combat drone: long range particle -->
+  <Milira_CombatDrone_LongRangeParticleBlaster.label>浮游炮：长程粒子</Milira_CombatDrone_LongRangeParticleBlaster.label>
+  <!-- EN: a combat drone equipped with long range particle emitters that capable of firing longer-range cluster particle beams, requrie long time to reload. -->
+  <Milira_CombatDrone_LongRangeParticleBlaster.description>搭载了集束粒子发射器的浮游炮，能够发射射程较远的集束粒子束，装填时间较长。</Milira_CombatDrone_LongRangeParticleBlaster.description>
+  
+  <!-- EN: Combat platform: mech control unit -->
+  <Milira_CombatDrone_MechControlUnit.label>浮游平台：机控单元</Milira_CombatDrone_MechControlUnit.label>
+  <!-- EN: A floating platform providing additional computing power for mech control. Furthermore, it contains a sub-unit that can be released to command mechnoids in a distance. -->
+  <Milira_CombatDrone_MechControlUnit.description>提供额外算力用于控制机械体的浮游平台，包含一个可以释放的子单元用于远距离指挥机械体。</Milira_CombatDrone_MechControlUnit.description>
+  <!-- EN: mech control unit -->
+  <Milira_CombatDrone_MechControlUnit.comps.CompApparelReloadable_DeployPawn.chargeNoun>机控单元</Milira_CombatDrone_MechControlUnit.comps.CompApparelReloadable_DeployPawn.chargeNoun>
+  <!-- EN: on cooldown -->
+  <Milira_CombatDrone_MechControlUnit.comps.CompApparelReloadable_DeployPawn.cooldownGerund>冷却中</Milira_CombatDrone_MechControlUnit.comps.CompApparelReloadable_DeployPawn.cooldownGerund>
+  <!-- EN: release mech control unit -->
+  <Milira_CombatDrone_MechControlUnit.verbs.release_mech_control_unit.label>释放机控单元</Milira_CombatDrone_MechControlUnit.verbs.release_mech_control_unit.label>
+  
+  <!-- EN: Combat drone: minigun -->
+  <Milira_CombatDrone_MiniGun.label>浮游炮：近防机枪</Milira_CombatDrone_MiniGun.label>
+  <!-- EN: a combat drone equipped with close defence machine guns that capable of continuous fire at medium to close range. -->
+  <Milira_CombatDrone_MiniGun.description>搭载了近防机枪的浮游炮，能够在中近距离连续射击。</Milira_CombatDrone_MiniGun.description>
+  
+  <!-- EN: Combat drone: impact particle -->
+  <Milira_CombatDrone_ParticleImpactBlaster.label>浮游炮：冲击粒子</Milira_CombatDrone_ParticleImpactBlaster.label>
+  <!-- EN: A combat drone equipped with a particle blaster capable of firing small explosive particle clusters. -->
+  <Milira_CombatDrone_ParticleImpactBlaster.description>搭载了粒子冲击炮的浮游炮，能够发射小范围爆炸的粒子团。</Milira_CombatDrone_ParticleImpactBlaster.description>
+  
+  <!-- EN: Combat drone: quadruple rocket launcher -->
+  <Milira_CombatDrone_QuadrupleRocketLauncher.label>浮游炮：四联装火箭发射器</Milira_CombatDrone_QuadrupleRocketLauncher.label>
+  <!-- EN: A combat drone equipped with a quad rocket launcher, capable of firing four rockets at once, but less accurate. Require long time to reload. -->
+  <Milira_CombatDrone_QuadrupleRocketLauncher.description>搭载了四联装火箭发射器的浮游炮，能够一次性发射四枚火箭，但是不太精准。装填时间较长。</Milira_CombatDrone_QuadrupleRocketLauncher.description>
+  
+  <!-- EN: Combat drone: scatter particle -->
+  <Milira_CombatDrone_ScatterParticleBlaster.label>浮游炮：散射粒子</Milira_CombatDrone_ScatterParticleBlaster.label>
+  <!-- EN: a combat drone equipped with scattering particle emitters that capable of firing a large number of particle beams at once at close range, require long time to reload. -->
+  <Milira_CombatDrone_ScatterParticleBlaster.description>搭载了散射粒子发射器的浮游炮，能够在近距离一次性发射大量粒子束，装填时间较长。</Milira_CombatDrone_ScatterParticleBlaster.description>
+  
+  <!-- EN: Combat drone: stun impulse -->
+  <Milira_CombatDrone_StunImpulseLauncher.label>浮游炮：凝滞脉冲</Milira_CombatDrone_StunImpulseLauncher.label>
+  <!-- EN: A floating cannon equipped with a stun impulse launcher, capable of causing targets in an area to be stunned. Require extremely long time to reload. -->
+  <Milira_CombatDrone_StunImpulseLauncher.description>搭载了凝滞脉冲激发器的浮游炮，能够使一片区域内的单位陷入短暂迟滞或眩晕。装填时间极长。</Milira_CombatDrone_StunImpulseLauncher.description>
+  
+  <!-- EN: EMP grenade -->
+  <MiliraProjectile_CombatDrone_EMPLauncher.label>脉冲榴弹</MiliraProjectile_CombatDrone_EMPLauncher.label>
+  
+  <!-- EN: incendiary grenade -->
+  <MiliraProjectile_CombatDrone_IncendiaryGrenadeLauncher.label>燃烧榴弹</MiliraProjectile_CombatDrone_IncendiaryGrenadeLauncher.label>
+  
+  <!-- EN: rocket -->
+  <MiliraProjectile_CombatDrone_QuadrupleRocketLauncher.label>火箭弹</MiliraProjectile_CombatDrone_QuadrupleRocketLauncher.label>
+  
+  <!-- EN: stun impulse -->
+  <MiliraProjectile_CombatDrone_StunImpulseLauncher.label>凝滞脉冲</MiliraProjectile_CombatDrone_StunImpulseLauncher.label>
+  
+  <!-- EN: EMP launcher -->
+  <MiliraTurret_CombatDrone_EMPLauncher.label>脉冲榴弹发射器</MiliraTurret_CombatDrone_EMPLauncher.label>
+  <!-- EN: a launcher can fire EMP grenade. -->
+  <MiliraTurret_CombatDrone_EMPLauncher.description>能够抛投脉冲榴弹的发射器。</MiliraTurret_CombatDrone_EMPLauncher.description>
+  <!-- EN: EMP launcher -->
+  <MiliraTurret_CombatDrone_EMPLauncher.verbs.Verb_Shoot.label>脉冲榴弹发射器</MiliraTurret_CombatDrone_EMPLauncher.verbs.Verb_Shoot.label>
+  
+  <!-- EN: incendiary grenade launcher -->
+  <MiliraTurret_CombatDrone_IncendiaryGrenadeLauncher.label>燃烧榴弹发射器</MiliraTurret_CombatDrone_IncendiaryGrenadeLauncher.label>
+  <!-- EN: a launcher can fire incendiary grenade. -->
+  <MiliraTurret_CombatDrone_IncendiaryGrenadeLauncher.description>能够抛投燃烧榴弹的发射器。</MiliraTurret_CombatDrone_IncendiaryGrenadeLauncher.description>
+  <!-- EN: incendiary grenade launcher -->
+  <MiliraTurret_CombatDrone_IncendiaryGrenadeLauncher.verbs.Verb_Shoot.label>燃烧榴弹发射器</MiliraTurret_CombatDrone_IncendiaryGrenadeLauncher.verbs.Verb_Shoot.label>
+  
+  <!-- EN: long range particle blaster -->
+  <MiliraTurret_CombatDrone_LongRangeParticleBlaster.label>长程粒子发射器</MiliraTurret_CombatDrone_LongRangeParticleBlaster.label>
+  <!-- EN: a blaster that fire long range particle beam. -->
+  <MiliraTurret_CombatDrone_LongRangeParticleBlaster.description>能够发射集束粒子束的发射器。</MiliraTurret_CombatDrone_LongRangeParticleBlaster.description>
+  <!-- EN: long range particle blaster -->
+  <MiliraTurret_CombatDrone_LongRangeParticleBlaster.verbs.Verb_Shoot.label>长程粒子发射器</MiliraTurret_CombatDrone_LongRangeParticleBlaster.verbs.Verb_Shoot.label>
+  
+  <!-- EN: minigun -->
+  <MiliraTurret_CombatDrone_MiniGun.label>近防机枪</MiliraTurret_CombatDrone_MiniGun.label>
+  <!-- EN: a machine gun that capable of continuous fire at medium to close range. -->
+  <MiliraTurret_CombatDrone_MiniGun.description>能够在中近距离连续射击的自动机枪。</MiliraTurret_CombatDrone_MiniGun.description>
+  <!-- EN: minigun -->
+  <MiliraTurret_CombatDrone_MiniGun.verbs.Verb_Shoot.label>近防机枪</MiliraTurret_CombatDrone_MiniGun.verbs.Verb_Shoot.label>
+  
+  <!-- EN: particle impact blaster -->
+  <MiliraTurret_CombatDrone_ParticleImpactBlaster.label>浮游粒子冲击炮</MiliraTurret_CombatDrone_ParticleImpactBlaster.label>
+  <!-- EN: a blaster can fire impact particle. -->
+  <MiliraTurret_CombatDrone_ParticleImpactBlaster.description>能够发射粒子团的装置。</MiliraTurret_CombatDrone_ParticleImpactBlaster.description>
+  <!-- EN: particle impact blaster -->
+  <MiliraTurret_CombatDrone_ParticleImpactBlaster.verbs.Verb_Shoot.label>浮游粒子冲击炮</MiliraTurret_CombatDrone_ParticleImpactBlaster.verbs.Verb_Shoot.label>
+  
+  <!-- EN: quadruple rocket launcher -->
+  <MiliraTurret_CombatDrone_QuadrupleRocketLauncher.label>四联装火箭发射器</MiliraTurret_CombatDrone_QuadrupleRocketLauncher.label>
+  <!-- EN: a launcher fire four rocket. -->
+  <MiliraTurret_CombatDrone_QuadrupleRocketLauncher.description>能够一次性发射四枚火箭的发射器。装填时间较长。</MiliraTurret_CombatDrone_QuadrupleRocketLauncher.description>
+  <!-- EN: quadruple rocket launcher -->
+  <MiliraTurret_CombatDrone_QuadrupleRocketLauncher.verbs.Verb_Shoot.label>四联装火箭发射器</MiliraTurret_CombatDrone_QuadrupleRocketLauncher.verbs.Verb_Shoot.label>
+  
+  <!-- EN: scatter particle blaster -->
+  <MiliraTurret_CombatDrone_ScatterParticleBlaster.label>散射粒子发射器</MiliraTurret_CombatDrone_ScatterParticleBlaster.label>
+  <!-- EN: a blaster that fire scatter particle beams. -->
+  <MiliraTurret_CombatDrone_ScatterParticleBlaster.description>能够发射散射粒子的发射器。</MiliraTurret_CombatDrone_ScatterParticleBlaster.description>
+  <!-- EN: scatter particle blaster -->
+  <MiliraTurret_CombatDrone_ScatterParticleBlaster.verbs.Verb_ChargeShootMultiple.label>散射粒子</MiliraTurret_CombatDrone_ScatterParticleBlaster.verbs.Verb_ChargeShootMultiple.label>
+  
+  <!-- UNUSED -->
+  <MiliraTurret_CombatDrone_ScatterParticleBlaster.verbs.Verb_Shoot.label>散射粒子发射器</MiliraTurret_CombatDrone_ScatterParticleBlaster.verbs.Verb_Shoot.label>
+  
+  <!-- EN: stun impulse launcher -->
+  <MiliraTurret_CombatDrone_StunImpulseLauncher.label>凝滞脉冲激发器</MiliraTurret_CombatDrone_StunImpulseLauncher.label>
+  <!-- EN: a luncher can fire stun impulse. -->
+  <MiliraTurret_CombatDrone_StunImpulseLauncher.description>能够发射凝滞脉冲的激发器。</MiliraTurret_CombatDrone_StunImpulseLauncher.description>
+  <!-- EN: stun impulse launcher -->
+  <MiliraTurret_CombatDrone_StunImpulseLauncher.verbs.Verb_Shoot.label>凝滞脉冲激发器</MiliraTurret_CombatDrone_StunImpulseLauncher.verbs.Verb_Shoot.label>
+  
+</LanguageData>

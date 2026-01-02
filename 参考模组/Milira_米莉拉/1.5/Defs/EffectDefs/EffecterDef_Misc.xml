@@ -1,0 +1,1148 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <EffecterDef>
+    <defName>Milira_DropBeaconActivated</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>Milira_Building_BeaconActivated</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>Milira_DropBeaconDistortion</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>Milira_DropBeaconActivated</fleckDef>
+        <scale>0.8~1.2</scale>
+        <rotation>-45~-45</rotation>
+        <!-- <burstCount>1~1</burstCount> -->
+        <spawnLocType>OnSource</spawnLocType>
+        <!-- <ticksBetweenMotes>2</ticksBetweenMotes> -->
+        <!-- <maxMoteCount>8</maxMoteCount> -->
+        <!-- <speed>150~160</speed> -->
+        <!-- <angle>90~90</angle> -->
+        <!-- <absoluteAngle>true</absoluteAngle> -->
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>Milira_DropBeaconSignal</fleckDef>
+        <scale>5.0~5.0</scale>
+        <rotation>0~0</rotation>
+        <!-- <burstCount>1~1</burstCount> -->
+        <spawnLocType>OnSource</spawnLocType>
+        <!-- <ticksBetweenMotes>2</ticksBetweenMotes> -->
+        <!-- <maxMoteCount>8</maxMoteCount> -->
+        <speed>120~150</speed>
+        <angle>90~90</angle>
+        <absoluteAngle>true</absoluteAngle>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>SparkFlash</fleckDef>
+        <burstCount>1~1</burstCount>
+        <scale>1.3~2.5</scale>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <EffecterDef>
+    <defName>Milira_TrapRepulsiveActivated</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>Milira_Building_BeaconActivated</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>Milira_Building_TrapRepulsiveDistortion</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <EffecterDef>
+    <defName>Milira_TrapAttractiveActivated</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>Milira_Building_BeaconActivated</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>Milira_Building_TrapAttractiveDistortion</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- 探测激活器 -->
+  <EffecterDef>
+    <defName>Milira_ActivatorProximityTriggered</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>ActivatorProximityTriggered</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>Milira_Mote_ProximityScannerActivated</moteDef>
+        <burstCount>1~1</burstCount>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>SparkFlash</fleckDef>
+        <burstCount>1~1</burstCount>
+        <scale>2.3~2.5</scale>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- 国王循环调谐的开始特效 -->
+  <EffecterDef>
+    <defName>Milira_KingTuningBeginning</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>Milira_Promotion</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>Milira_KingTuningBeginningI</fleckDef>
+        <attachToSpawnThing>true</attachToSpawnThing>
+        <scale>1.0~1.0</scale>
+        <rotation>0~0</rotation>
+        <spawnLocType>OnSource</spawnLocType>
+        <positionOffset>(0,0,-0.4)</positionOffset>
+        <speed>4</speed>
+        <angle>90~90</angle>
+        <absoluteAngle>true</absoluteAngle>
+      </li>
+      <!-- <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>Milira_KingTuningBeginningII</fleckDef>
+        <scale>1.0~1.0</scale>
+        <rotation>0~0</rotation>
+        <spawnLocType>OnSource</spawnLocType>
+        <initialDelayTicks>120</initialDelayTicks>
+        <positionOffset>(0,0,0.8)</positionOffset>
+        <absoluteAngle>true</absoluteAngle>
+      </li> -->
+    </children>
+  </EffecterDef>
+
+  <!-- 飞行特效 -->
+  <EffecterDef>
+    <defName>Milira_BurstFly</defName>
+    <children>
+      <!-- <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>Deflect_Metal</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li> -->
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>Milira_Mote_SingleFeather</moteDef>
+        <burstCount>6~9</burstCount>
+        <scale>0.2~0.4</scale>
+        <speed>1~1.2</speed>
+        <!-- <angle>0~360</angle> -->
+        <rotation>30~90</rotation>
+        <rotationRate>30~100</rotationRate>
+        <positionRadius>0.01</positionRadius>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <scale>1.5~1.8</scale>
+        <spawnLocType>OnSource</spawnLocType>
+        <positionOffset>(0,0,0)</positionOffset>
+        <fleckDef>Milira_AirPuff</fleckDef>
+        <ticksBetweenMotes>1</ticksBetweenMotes>
+        <maxMoteCount>10</maxMoteCount>
+        <!-- <speed>4~5</speed> -->
+        <angle>0~180</angle>
+        <rotation>0~360</rotation>
+        <rotationRate>60~180</rotationRate>
+        <absoluteAngle>true</absoluteAngle>
+      </li>
+    </children>
+    <!-- <offsetTowardsTarget>0.9~0.9</offsetTowardsTarget> -->
+    <positionRadius>0.1</positionRadius>
+  </EffecterDef>
+
+
+  <!-- 米莉安推进器飞行特效 -->
+  <EffecterDef>
+    <defName>Milian_TurboBurst</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <scale>1.8~2.5</scale>
+        <spawnLocType>OnSource</spawnLocType>
+        <positionOffset>(0,0,0)</positionOffset>
+        <fleckDef>Milira_AirPuff</fleckDef>
+        <ticksBetweenMotes>1</ticksBetweenMotes>
+        <maxMoteCount>30</maxMoteCount>
+        <!-- <speed>4~5</speed> -->
+        <angle>0~180</angle>
+        <rotation>0~360</rotation>
+        <rotationRate>60~180</rotationRate>
+        <absoluteAngle>true</absoluteAngle>
+        <color>(0.71,0.88,0.90)</color>
+      </li>
+    </children>
+    <!-- <offsetTowardsTarget>0.9~0.9</offsetTowardsTarget> -->
+    <positionRadius>0.1</positionRadius>
+  </EffecterDef>
+
+
+  <EffecterDef>
+    <defName>Milian_TurboBurstLong</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <scale>1.8~2.5</scale>
+        <spawnLocType>OnSource</spawnLocType>
+        <positionOffset>(0,0,0)</positionOffset>
+        <fleckDef>Milira_AirPuff</fleckDef>
+        <ticksBetweenMotes>1</ticksBetweenMotes>
+        <maxMoteCount>240</maxMoteCount>
+        <!-- <speed>4~5</speed> -->
+        <angle>0~180</angle>
+        <rotation>0~360</rotation>
+        <rotationRate>60~180</rotationRate>
+        <absoluteAngle>true</absoluteAngle>
+        <color>(0.71,0.88,0.90)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <scale>0.8~1.5</scale>
+        <spawnLocType>OnSource</spawnLocType>
+        <!-- <positionOffset>(0,0,0)</positionOffset> -->
+        <moteDef>Milira_Mote_LongSparkThrown_Plasma</moteDef>
+        <burstCount>5~8</burstCount>
+        <ticksBetweenMotes>1</ticksBetweenMotes>
+        <maxMoteCount>240</maxMoteCount>
+        <speed>10~18</speed>
+        <angle>-30~30</angle>
+        <positionRadius>0.01</positionRadius>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <moteDef>Milira_SonicBoom</moteDef>
+        <initialDelayTicks>48</initialDelayTicks>
+        <ticksBetweenMotes>6</ticksBetweenMotes>
+        <maxMoteCount>1</maxMoteCount>
+        <burstCount>20~36</burstCount>
+        <scale>1.4~1.8</scale>
+        <speed>3~4.5</speed>
+        <!-- <angle>0~360</angle> -->
+        <rotation>150~270</rotation>
+        <rotationRate>90~150</rotationRate>
+        <positionRadius>0.01</positionRadius>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <moteDef>Milira_Mote_RookCharge</moteDef>
+        <initialDelayTicks>48</initialDelayTicks>
+        <ticksBetweenMotes>1</ticksBetweenMotes>
+        <maxMoteCount>240</maxMoteCount>
+        <burstCount>1</burstCount>
+        <scale>1~1</scale>
+        <rotation>180</rotation>
+        <positionRadius>0.01</positionRadius>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+    </children>
+    <!-- <offsetTowardsTarget>0.9~0.9</offsetTowardsTarget> -->
+    <positionRadius>0.1</positionRadius>
+  </EffecterDef>
+
+
+  <!-- 骑枪冲击 -->
+  <EffecterDef>
+    <defName>Milira_BurstFly_Lance</defName>
+    <children>
+      <!-- <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>Deflect_Metal</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li> -->
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>Milira_Mote_SingleFeather</moteDef>
+        <burstCount>6~9</burstCount>
+        <scale>0.2~0.4</scale>
+        <speed>1~1.2</speed>
+        <!-- <angle>0~360</angle> -->
+        <rotation>30~90</rotation>
+        <rotationRate>30~100</rotationRate>
+        <positionRadius>0.01</positionRadius>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <scale>1.5~1.8</scale>
+        <spawnLocType>OnSource</spawnLocType>
+        <positionOffset>(0,0,0)</positionOffset>
+        <fleckDef>Milira_AirPuff</fleckDef>
+        <ticksBetweenMotes>1</ticksBetweenMotes>
+        <maxMoteCount>10</maxMoteCount>
+        <!-- <speed>4~5</speed> -->
+        <angle>0~180</angle>
+        <rotation>0~360</rotation>
+        <rotationRate>60~180</rotationRate>
+        <absoluteAngle>true</absoluteAngle>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <moteDef>Milira_SonicBoom</moteDef>
+        <initialDelayTicks>48</initialDelayTicks>
+        <ticksBetweenMotes>6</ticksBetweenMotes>
+        <maxMoteCount>3</maxMoteCount>
+        <burstCount>10~16</burstCount>
+        <scale>1.4~1.8</scale>
+        <speed>1~1.2</speed>
+        <!-- <angle>0~360</angle> -->
+        <rotation>150~270</rotation>
+        <rotationRate>90~150</rotationRate>
+        <positionRadius>0.01</positionRadius>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+    </children>
+    <!-- <offsetTowardsTarget>0.9~0.9</offsetTowardsTarget> -->
+    <positionRadius>0.1</positionRadius>
+  </EffecterDef>
+
+  <ThingDef ParentName="MoteBase">
+    <defName>Milira_Mote_SingleFeather</defName>
+    <graphicData>
+      <texPath>Milira/Effect/SingleFeather</texPath>
+      <shaderType>TransparentPostLight</shaderType>
+    </graphicData>
+    <altitudeLayer>PawnUnused</altitudeLayer>
+    <mote>
+      <fadeInTime>0.02</fadeInTime>
+      <solidTime>0.8</solidTime>
+      <fadeOutTime>0.2</fadeOutTime>
+    </mote>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <defName>Milira_SonicBoom</defName>
+    <graphicData>
+      <texPath>Things/Mote/AirPuff</texPath>
+      <shaderType>TransparentPostLight</shaderType>
+    </graphicData>
+    <altitudeLayer>PawnUnused</altitudeLayer>
+    <mote>
+      <fadeInTime>0.02</fadeInTime>
+      <solidTime>0.8</solidTime>
+      <fadeOutTime>0.2</fadeOutTime>
+    </mote>
+  </ThingDef>
+
+
+  <!-- 冲锋破坏建筑特效 -->
+  <EffecterDef>
+    <defName>Milira_BuildingDestroy</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>Milira_AirPuff</fleckDef>
+        <burstCount>6~9</burstCount>
+        <scale>1.2~1.8</scale>
+        <speed>1~1.2</speed>
+        <angle>0~360</angle>
+        <rotation>30~90</rotation>
+        <rotationRate>30~100</rotationRate>
+        <positionRadius>2.0</positionRadius>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+    </children>
+    <positionRadius>1.5</positionRadius>
+  </EffecterDef>
+
+  <!-- 镰刀预备 -->
+  <EffecterDef>
+    <defName>Milira_SicklePreCast</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>Milira_Mote_SicklePre</moteDef>
+        <burstCount>1~1</burstCount>
+        <scale>6.0</scale>
+        <speed>0~0</speed>
+        <rotation>400~400</rotation>
+        <rotationRate>-500</rotationRate>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+    </children>
+  </EffecterDef>
+  <!-- 镰刀 -->
+  <EffecterDef>
+    <defName>Milira_SickleRotation</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>Milira_Mote_Sickle</moteDef>
+        <burstCount>1~1</burstCount>
+        <scale>6.0</scale>
+        <speed>0~0</speed>
+        <rotation>400~400</rotation>
+        <rotationRate>1000~1000</rotationRate>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <positionRadius>6.2</positionRadius>
+        <positionRadiusMin>5.9</positionRadiusMin>
+        <fleckDef>Milira_AirPuffII</fleckDef>
+        <burstCount>32~48</burstCount>
+        <speed>0.5</speed>
+        <scale>1.5~2.0</scale>
+        <angle>0~360</angle>
+        <positionLerpFactor>0.85</positionLerpFactor>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
+        <moteDef>Mote_LongSparkThrown</moteDef>
+        <chancePerTick>1</chancePerTick>
+        <burstCount>2~3</burstCount>
+        <!-- <positionOffset>(2,0,0)</positionOffset> -->
+        <scale>0.38~0.6</scale>
+        <speed>3~7</speed>
+        <angle>0~360</angle>
+        <positionRadius>0.01</positionRadius>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <ThingDef ParentName="MoteBase">
+    <defName>Milira_Mote_Sickle</defName>
+    <graphicData>
+      <texPath>Milira/Effect/Sickle_Effect</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(2,2)</drawSize>
+    </graphicData>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <mote>
+      <fadeInTime>0.02</fadeInTime>
+      <solidTime>0.35</solidTime>
+      <fadeOutTime>0.04</fadeOutTime>
+    </mote>
+  </ThingDef>
+  <ThingDef ParentName="MoteBase">
+    <defName>Milira_Mote_SicklePre</defName>
+    <graphicData>
+      <texPath>Milira/Effect/SicklePre_Effect</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(2,2)</drawSize>
+    </graphicData>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <mote>
+      <fadeInTime>0.08</fadeInTime>
+      <solidTime>0.05</solidTime>
+      <fadeOutTime>0.0</fadeOutTime>
+    </mote>
+  </ThingDef>
+
+
+  <!-- 大剑 -->
+  <EffecterDef>
+    <defName>Milira_TwoHandSwordWarmup</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <moteDef>Milira_Mote_LongSparkThrown_Plasma_SlowDiminish</moteDef>
+        <initialDelayTicks>0</initialDelayTicks>
+        <ticksBetweenMotes>7</ticksBetweenMotes>
+        <maxMoteCount>60</maxMoteCount>
+        <burstCount>2~3</burstCount>
+        <scale>1.4~2.0</scale>
+        <speed>-1.2~-0.6</speed>
+        <angle>0~0</angle>
+        <rotation>150~270</rotation>
+        <rotationRate>1000~1000</rotationRate>
+        <positionRadius>2.5</positionRadius>
+        <positionRadiusMin>1.2</positionRadiusMin>
+        <rotateTowardsTargetCenter>true</rotateTowardsTargetCenter>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <EffecterDef>
+    <defName>Milira_TwoHandSwordFire</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <positionRadius>1.5</positionRadius>
+        <moteDef>Milira_Mote_LongSparkThrown_Plasma</moteDef>
+        <burstCount>15~25</burstCount>
+        <speed>15~17</speed>
+        <scale>1.2~1.8</scale>
+        <angle>-19~19</angle>
+        <positionLerpFactor>0.8</positionLerpFactor>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <positionRadius>1.5</positionRadius>
+        <moteDef>Milira_Mote_LongSparkThrown_Plasma</moteDef>
+        <burstCount>12~18</burstCount>
+        <speed>22~28</speed>
+        <scale>1.2~1.8</scale>
+        <angle>-12~12</angle>
+        <positionLerpFactor>0.8</positionLerpFactor>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <ThingDef ParentName="MoteBase">
+    <defName>Mote_LongSparkThrown_TwoHandSword</defName>
+    <graphicData>
+      <texPath>Milira/Effect/LongSparkThrown_Plasma</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <mote>
+      <fadeInTime>0.5</fadeInTime>
+      <solidTime>0.8</solidTime>
+      <fadeOutTime>0.5</fadeOutTime>
+      <rotateTowardsMoveDirection>true</rotateTowardsMoveDirection>
+    </mote>
+  </ThingDef>
+
+  <!-- 投枪蓄力 -->
+  <!-- <EffecterDef>
+    <defName>Milira_SpearWarmup</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>Milira_Mote_SpearWarmupLightingEffect</moteDef>
+        <burstCount>1~1</burstCount>
+        <speed>0</speed>
+        <scale>1.0~1.0</scale>
+        <angle>0</angle>
+        <rotation>0</rotation>
+        <color>(1,1,1,0.5)</color>
+        <positionOffset>(1.07,0,0)</positionOffset>
+        <spawnLocType>OnSource</spawnLocType>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+      </li>
+    </children>
+  </EffecterDef> -->
+
+  <ThingDef ParentName="MoteBase">
+    <defName>Milira_Mote_SpearWarmupLightingEffect</defName>
+    <graphicData>
+      <texPath>Milira/Effect/Spear_Effect</texPath>
+      <shaderType>TransparentPostLight</shaderType>
+      <drawSize>4.0</drawSize>
+      <drawOffset>(0,0,0.1)</drawOffset>
+    </graphicData>
+    <altitudeLayer>PawnUnused</altitudeLayer>
+    <mote>
+      <fadeInTime>0</fadeInTime>
+      <solidTime>0</solidTime>
+      <fadeOutTime>1.5</fadeOutTime>
+      <growthRate>0.7</growthRate>
+      <rotateTowardsMoveDirection>true</rotateTowardsMoveDirection>
+    </mote>
+  </ThingDef>
+
+  <!-- 投枪发射 -->
+  <EffecterDef>
+    <defName>Milira_SpearFire</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <positionRadius>0.8</positionRadius>
+        <moteDef>Milira_Mote_LongSparkThrown_Plasma</moteDef>
+        <burstCount>12~18</burstCount>
+        <speed>22~28</speed>
+        <scale>1.2~1.8</scale>
+        <angle>168~192</angle>
+        <spawnLocType>OnSource</spawnLocType>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <positionRadius>1.5</positionRadius>
+        <moteDef>Milira_Mote_LongSparkThrown_Plasma</moteDef>
+        <burstCount>15~25</burstCount>
+        <speed>15~17</speed>
+        <scale>1.2~1.8</scale>
+        <angle>160~200</angle>
+        <positionLerpFactor>0.9</positionLerpFactor>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- 投枪飞行 -->
+  <EffecterDef>
+    <defName>Milira_Skill_SpearFlying</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <moteDef>Milira_Mote_LongSparkThrown_Plasma</moteDef>
+        <initialDelayTicks>0</initialDelayTicks>
+        <ticksBetweenMotes>7</ticksBetweenMotes>
+        <maxMoteCount>60</maxMoteCount>
+        <burstCount>2~3</burstCount>
+        <scale>1.4~2.0</scale>
+        <speed>0.6~1.2</speed>
+        <angle>0~0</angle>
+        <rotation>0</rotation>
+        <rotationRate>0</rotationRate>
+        <positionRadius>2.5</positionRadius>
+        <positionRadiusMin>0.8</positionRadiusMin>
+        <rotateTowardsTargetCenter>true</rotateTowardsTargetCenter>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <positionRadius>1.5</positionRadius>
+        <moteDef>Milira_Mote_LongSparkThrown_Plasma</moteDef>
+        <burstCount>85~285</burstCount>
+        <speed>15~17</speed>
+        <scale>1.2~1.8</scale>
+        <angle>160~200</angle>
+        <positionLerpFactor>0.9</positionLerpFactor>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- 战锤启动 -->
+  <EffecterDef>
+    <defName>Milira_HammerFire</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <positionRadius>0.8</positionRadius>
+        <moteDef>Milira_Mote_LongSparkThrown_Plasma</moteDef>
+        <burstCount>12~18</burstCount>
+        <speed>15~18</speed>
+        <scale>1.2~1.8</scale>
+        <angle>160~200</angle>
+        <spawnLocType>OnSource</spawnLocType>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <positionRadius>0.5</positionRadius>
+        <moteDef>Milira_Mote_LongSparkThrown_Plasma</moteDef>
+        <burstCount>15~25</burstCount>
+        <speed>10~15</speed>
+        <scale>1.2~1.8</scale>
+        <angle>140~220</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- 弓箭 -->
+  <EffecterDef>
+    <defName>Milira_BowWarmup</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>Milira_Mote_Bow_Charge</moteDef>
+        <!-- <initialDelayTicks>0</initialDelayTicks>
+        <ticksBetweenMotes>7</ticksBetweenMotes>
+        <maxMoteCount>60</maxMoteCount>
+        <burstCount>2~3</burstCount> -->
+        <!-- <scale>1.4~2.0</scale>
+        <speed>0.6~1.2</speed> -->
+        <angle>0~0</angle>
+        <rotation>0~0</rotation>
+        <positionRadius>0.01</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <EffecterDef>
+    <defName>Milira_BowFire</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>Milira_Mote_Bow_Fire</moteDef>
+        <speed>280</speed>
+        <angle>0~0</angle>
+        <rotation>0~0</rotation>
+        <absoluteAngle>true</absoluteAngle>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+    </children>
+  </EffecterDef>
+
+
+  <!-- 剑舞刀光 -->
+  <EffecterDef>
+    <defName>Milira_BladeSlashGhost</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
+        <fleckDef>Milira_Slash</fleckDef>
+        <chancePerTick>0.8</chancePerTick>
+        <burstCount>1</burstCount>
+        <color>(1,1,1,0.8)</color>
+        <scale>10.0~12.0</scale>
+        <speed>0.1</speed>
+        <angle>0~360</angle>
+        <spawnLocType>OnSource</spawnLocType>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+      </li>
+    </children>
+    <positionRadius>0.1</positionRadius>
+  </EffecterDef>
+
+  <!-- 剑舞刀光收尾 -->
+  <EffecterDef>
+    <defName>Milira_BladeSlashGhostEndUp</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>Milira_SlashLastLong</fleckDef>
+        <burstCount>6</burstCount>
+        <color>(1,1,1,0.6)</color>
+        <scale>15.0~18.0</scale>
+        <speed>0.1</speed>
+        <angle>0~360</angle>
+        <spawnLocType>OnSource</spawnLocType>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>Milira_SonicBoom</moteDef>
+        <burstCount>30~40</burstCount>
+        <color>(1,1,1,0.8)</color>
+        <scale>2.0~3.0</scale>
+        <speed>10~12</speed>
+        <angle>0~360</angle>
+        <rotation>150~270</rotation>
+        <rotationRate>90~150</rotationRate>
+        <positionRadius>0.01</positionRadius>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+    </children>
+    <positionRadius>0.1</positionRadius>
+  </EffecterDef>
+
+  <!-- 能量近战武器命中 -->
+  <EffecterDef>
+    <defName>Milira_SlashCharged</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>Milira_SlashCharged</fleckDef>
+        <burstCount>1</burstCount>
+        <color>(1,1,1,0.8)</color>
+        <scale>8.0~10.0</scale>
+        <speed>2</speed>
+        <angle>-20~20</angle>
+        <spawnLocType>OnSource</spawnLocType>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>Milira_Mote_LongSparkThrown_Plasma</moteDef>
+        <burstCount>9~15</burstCount>
+        <scale>0.8~1.2</scale>
+        <speed>10~12</speed>
+        <angle>-30~30</angle>
+        <positionRadius>0.5</positionRadius>
+        <spawnLocType>OnTarget</spawnLocType>
+      </li>
+    </children>
+    <positionRadius>0.1</positionRadius>
+  </EffecterDef>
+
+  <!-- 近战武器命中圆弧刀光 -->
+  <EffecterDef>
+    <defName>Milira_SlashArc</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_Random</subEffecterClass>
+        <children>
+          <li>
+            <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+            <fleckDef>Ancot_SlashGhostArc_Anticlockwise</fleckDef>
+            <randomWeight>1</randomWeight>
+            <burstCount>1</burstCount>
+            <color>(1,1,1,0.5)</color>
+            <scale>1.0~1.0</scale>
+            <rotation>-100~-80</rotation>
+            <spawnLocType>OnSource</spawnLocType>
+            <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+          </li>
+          <li>
+            <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+            <fleckDef>Ancot_SlashGhostArc_Clockwise</fleckDef>
+            <randomWeight>1</randomWeight>
+            <burstCount>1</burstCount>
+            <color>(1,1,1,0.5)</color>
+            <scale>1.0~1.0</scale>
+            <rotation>80~100</rotation>
+            <spawnLocType>OnSource</spawnLocType>
+            <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+          </li>
+        </children>
+      </li>
+    </children>
+    <positionRadius>0.1</positionRadius>
+  </EffecterDef>
+  
+  <!-- 近战武器命中圆弧刀光旋转 -->
+  <EffecterDef>
+    <defName>Milira_SlashArcRotation</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_Random</subEffecterClass>
+        <children>
+          <li>
+            <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+            <fleckDef>Ancot_SlashGhostArc_Anticlockwise</fleckDef>
+            <randomWeight>1</randomWeight>
+            <burstCount>1</burstCount>
+            <color>(1,1,1,0.5)</color>
+            <scale>1.0~1.0</scale>
+            <angle>-30~30</angle>
+            <rotation>0</rotation>
+            <rotationRate>-800</rotationRate>
+            <spawnLocType>OnSource</spawnLocType>
+            <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+          </li>
+          <li>
+            <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+            <fleckDef>Ancot_SlashGhostArc_Clockwise</fleckDef>
+            <randomWeight>1</randomWeight>
+            <burstCount>1</burstCount>
+            <color>(1,1,1,0.5)</color>
+            <scale>1.0~1.0</scale>
+            <angle>-30~30</angle>
+            <rotation>0</rotation>
+            <rotationRate>800</rotationRate>
+            <spawnLocType>OnSource</spawnLocType>
+            <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+          </li>
+        </children>
+      </li>
+    </children>
+    <positionRadius>0.1</positionRadius>
+  </EffecterDef>
+
+
+
+  <EffecterDef>
+    <defName>Milira_HeavyBombExplosion</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <spawnLocType>OnSource</spawnLocType>
+        <fleckDef>Milira_ShellCrater</fleckDef>
+        <scale>8</scale>
+      </li>
+      <!-- <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>Mote_GiantExplosion</moteDef>
+        <scale>1~1</scale>
+      </li> -->
+      <!-- <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>Mote_GiantExplosionInner</moteDef>
+        <scale>5~5</scale>
+      </li> -->
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <spawnLocType>OnSource</spawnLocType>
+        <fleckDef>Milira_DropPodDistortion</fleckDef>
+        <scale>1</scale>
+      </li>
+    </children>
+  </EffecterDef>
+
+
+  <EffecterDef>
+    <defName>Milira_BroadshieldActivation</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <spawnLocType>OnSource</spawnLocType>
+        <fleckDef>BroadshieldActivation</fleckDef>
+        <scale>1</scale>
+      </li>
+    </children>
+  </EffecterDef>
+
+
+  <ThingDef ParentName="MoteBase">
+    <defName>Mote_EnergySparkThrown_Fast</defName>
+    <graphicData>
+      <texPath>Milira/Effect/LongSparkThrown_Plasma</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <mote>
+      <fadeInTime>0</fadeInTime>
+      <solidTime>0</solidTime>
+      <fadeOutTime>0.1</fadeOutTime>
+      <rotateTowardsMoveDirection>true</rotateTowardsMoveDirection>
+    </mote>
+  </ThingDef>
+
+  <!-- 能量盾防御 -->
+  <EffecterDef>
+    <defName>Milira_EnergyShieldBlock</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>Mote_EnergySparkThrown_Fast</moteDef>
+        <burstCount>2~3</burstCount>
+        <scale>0.38~0.6</scale>
+        <speed>3~7</speed>
+        <angle>135~225</angle>
+        <positionRadius>0.01</positionRadius>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>Mote_EnergySparkThrown_Fast</moteDef>
+        <burstCount>1~4</burstCount>
+        <scale>0.38~0.6</scale>
+        <speed>7~14</speed>
+        <angle>135~225</angle>
+        <positionRadius>0.01</positionRadius>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+    </children>
+  </EffecterDef>
+
+
+
+  <!-- 迷彩破隐 -->
+  <EffecterDef>
+    <defName>Milian_CamouflageSwitch</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>Milira_Mote_PlasmaPuff_LastLong</moteDef>
+        <burstCount>2~5</burstCount>
+        <scale>1.0~1.4</scale>
+        <speed>1.2~2.4</speed>
+        <angle>135~225</angle>
+        <rotation>0~360</rotation>
+        <rotationRate>60~180</rotationRate>
+        <positionRadius>0.01</positionRadius>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+    </children>
+    <positionRadius>0.1</positionRadius>
+  </EffecterDef>
+
+
+  <EffecterDef>
+    <defName>Milian_ReleaseUnits</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>Milira_BeepA</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>Milira_Mote_PlasmaPuff_LastLong</moteDef>
+        <burstCount>18~24</burstCount>
+        <scale>1.0~1.4</scale>
+        <speed>3~5</speed>
+        <angle>0~360</angle>
+        <rotation>0~360</rotation>
+        <rotationRate>60~180</rotationRate>
+        <positionRadius>0.01</positionRadius>
+        <spawnLocType>OnSource</spawnLocType>
+        <color>(0.71,0.88,0.90)</color>
+      </li>
+    </children>
+    <!-- <offsetTowardsTarget>0.9~0.9</offsetTowardsTarget> -->
+    <positionRadius>0.1</positionRadius>
+  </EffecterDef>
+
+  <EffecterDef>
+    <defName>Milira_ConceptWeaponryActive</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>Milira_BuildingActive</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>Milira_Mote_PlasmaPuff_LastLong</moteDef>
+        <burstCount>40~60</burstCount>
+        <scale>1.0~1.4</scale>
+        <speed>4~6</speed>
+        <angle>0~360</angle>
+        <rotation>0~360</rotation>
+        <rotationRate>60~180</rotationRate>
+        <positionRadius>0.01</positionRadius>
+        <spawnLocType>OnSource</spawnLocType>
+        <color>(0.71,0.88,0.90)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <spawnLocType>OnSource</spawnLocType>
+        <fleckDef>Milira_DropPodDistortion</fleckDef>
+        <scale>0.2</scale>
+      </li>
+    </children>
+    <positionRadius>0.1</positionRadius>
+  </EffecterDef>
+
+
+  <!-- 兵升变的effecter=========================================================================================================================================== -->
+  <EffecterDef>
+    <defName>Milian_Promotion_Knight</defName>
+    <offsetMode>Free</offsetMode>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <scale>.5~.6</scale>
+        <ticksBetweenMotes>50</ticksBetweenMotes>
+        <rotation>0</rotation>
+        <rotationRate>0</rotationRate>
+        <positionRadius>0</positionRadius>
+        <fleckDef>Milian_PawnPromotion_Knight</fleckDef>
+        <attachToSpawnThing>true</attachToSpawnThing>
+        <absoluteAngle>True</absoluteAngle>
+        <fleckUsesAngleForVelocity>false</fleckUsesAngleForVelocity>
+        <spawnLocType>OnSource</spawnLocType>
+        <positionOffset>(0, 0, 1)</positionOffset>
+        <speed>0</speed>
+        <angle>0</angle>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <EffecterDef>
+    <defName>Milian_Promotion_Bishop</defName>
+    <offsetMode>Free</offsetMode>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <scale>.5~.6</scale>
+        <ticksBetweenMotes>50</ticksBetweenMotes>
+        <rotation>0</rotation>
+        <rotationRate>0</rotationRate>
+        <positionRadius>0</positionRadius>
+        <fleckDef>Milian_PawnPromotion_Bishop</fleckDef>
+        <attachToSpawnThing>true</attachToSpawnThing>
+        <absoluteAngle>True</absoluteAngle>
+        <fleckUsesAngleForVelocity>false</fleckUsesAngleForVelocity>
+        <spawnLocType>OnSource</spawnLocType>
+        <positionOffset>(0, 0, 1)</positionOffset>
+        <speed>0</speed>
+        <angle>0</angle>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <EffecterDef>
+    <defName>Milian_Promotion_Rook</defName>
+    <offsetMode>Free</offsetMode>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <scale>.5~.6</scale>
+        <ticksBetweenMotes>50</ticksBetweenMotes>
+        <rotation>0</rotation>
+        <rotationRate>0</rotationRate>
+        <positionRadius>0</positionRadius>
+        <fleckDef>Milian_PawnPromotion_Rook</fleckDef>
+        <attachToSpawnThing>true</attachToSpawnThing>
+        <absoluteAngle>True</absoluteAngle>
+        <fleckUsesAngleForVelocity>false</fleckUsesAngleForVelocity>
+        <spawnLocType>OnSource</spawnLocType>
+        <positionOffset>(0, 0, 1)</positionOffset>
+        <speed>0</speed>
+        <angle>0</angle>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <EffecterDef>
+    <defName>Milian_Promotion_Queen</defName>
+    <offsetMode>Free</offsetMode>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <scale>.5~.6</scale>
+        <ticksBetweenMotes>50</ticksBetweenMotes>
+        <rotation>0</rotation>
+        <rotationRate>0</rotationRate>
+        <positionRadius>0</positionRadius>
+        <fleckDef>Milian_PawnPromotion_Queen</fleckDef>
+        <attachToSpawnThing>true</attachToSpawnThing>
+        <absoluteAngle>True</absoluteAngle>
+        <fleckUsesAngleForVelocity>false</fleckUsesAngleForVelocity>
+        <spawnLocType>OnSource</spawnLocType>
+        <positionOffset>(0, 0, 1)</positionOffset>
+        <speed>0</speed>
+        <angle>0</angle>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <EffecterDef>
+    <defName>Milian_PointDefense</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>Milian_EnergyPulse</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>1~2</burstCount>
+        <angle>-10~10</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.1</speed>
+        <positionLerpFactor>0.45</positionLerpFactor>
+      </li>
+    </children>
+  </EffecterDef>
+  <EffecterDef>
+    <defName>Milian_PointDefense5x5</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>Milian_EnergyPulse</fleckDef>
+        <scale>1.6</scale>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>1</burstCount>
+        <angle>-10~10</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.1</speed>
+        <positionLerpFactor>0.45</positionLerpFactor>
+      </li>
+    </children>
+  </EffecterDef>
+
+
+</Defs>

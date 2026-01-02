@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+	<name>Milira Race</name>
+	<author>Ancot</author>
+	<supportedVersions>
+		<li>1.5</li>
+		<li>1.6</li>
+	</supportedVersions>
+	<description>The sky elves Milira.</description>
+	<packageId>Ancot.MiliraRace</packageId>
+	<modIconPath IgnoreIfNoMatchingField="True">Milira/Faction/Faction_Icon</modIconPath>
+	<modDependencies>
+		<li> 
+			<packageId>erdelf.HumanoidAlienRaces</packageId>
+			<displayName>Humanoid Alien Races 2.0</displayName>
+			<steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=839005762</steamWorkshopUrl>
+		</li>
+		<li> 
+			<packageId>Ancot.AncotLibrary</packageId>
+			<displayName>Ancot Library</displayName>
+			<steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2988801276</steamWorkshopUrl>
+		</li>
+		<li>
+			<packageId>Ludeon.RimWorld.Royalty</packageId>
+			<displayName>Royalty</displayName>
+		  </li>
+		  <li>
+			<packageId>Ludeon.RimWorld.Biotech</packageId>
+			<displayName>Biotech</displayName>
+		  </li>
+	</modDependencies>
+	<loadAfter>	
+		<li>erdelf.HumanoidAlienRaces</li>
+		<li>Ancot.AncotLibrary</li>
+	</loadAfter>
+	<incompatibleWith>
+		<li>ssulunge.KijinRace3</li>
+	</incompatibleWith>
+
+</ModMetaData>

@@ -1,0 +1,1236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_Fake_LaserRifle</defName>
+    <label>laser</label>
+    <graphicData>
+      <texPath>Things/CMC_Void</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <shaderType>MoteGlow</shaderType>
+      <drawSize>(1, 1)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_FakeBulletLaser</thingClass>
+	<projectile>
+	  <damageDef>Bullet</damageDef>
+      <speed>999</speed>
+	  <damageAmountBase>0</damageAmountBase>
+      <stoppingPower>0</stoppingPower>
+      <armorPenetrationBase></armorPenetrationBase>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_CMC_Fragments</defName>
+    <label>HE payload</label>
+    <graphicData>
+      <texPath>Things/Projectile/Fragment</texPath>
+      <graphicClass>Graphic_Random</graphicClass>
+      <drawSize>(0.23, 0.79)</drawSize>
+    </graphicData>
+	<thingClass>Projectile_Explosive</thingClass>
+    <projectile>
+      <damageDef>CMC_ModBomb</damageDef>
+      <explosionRadius>0.9</explosionRadius>
+	  <explosionEffect>CMC_Frag</explosionEffect>
+      <damageAmountBase>11</damageAmountBase>
+	  <stoppingPower>2.3</stoppingPower>
+      <armorPenetrationBase>0.37</armorPenetrationBase>
+      <speed>38</speed>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>CMC_Bullet_pistol</defName>
+    <label>bullet</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>(0.88, 1.15)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_ChargedNormal</thingClass>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>5</damageAmountBase>
+	  <stoppingPower>2.3</stoppingPower>
+	  <armorPenetrationBase>0.18</armorPenetrationBase>
+      <speed>70</speed>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>CMC_Bullet_pistolABC</defName>
+    <label>bullet</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>(0.88, 1.15)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_CNHitLimb</thingClass>
+    <projectile>
+      <damageDef>CMC_Blunt</damageDef>
+	  <damageAmountBase>4</damageAmountBase>
+	  <stoppingPower>5</stoppingPower>
+	  <armorPenetrationBase>0.18</armorPenetrationBase>
+      <speed>60</speed>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_QBZsmart</defName>
+    <label>smart assault rifle bullet</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_AssaultRifle_blue</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <shaderType>MoteGlow</shaderType>
+      <drawSize>(1, 1)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_ChargedNormal</thingClass>
+	<projectile>
+	  <damageDef>BulletAoE_Void</damageDef>
+      <speed>76</speed>
+      <explosionRadius>0.5</explosionRadius>
+      <screenShakeFactor>0</screenShakeFactor>
+	  <damageAmountBase>16</damageAmountBase>
+      <flyOverhead>false</flyOverhead>
+      <stoppingPower>0.4</stoppingPower>
+      <armorPenetrationBase>0.5</armorPenetrationBase>
+	  <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+	  <shadowSize>0</shadowSize>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_QSZ_Plasma</defName>
+    <label>plasma ball</label>
+    <graphicData>
+      <texPath>Things/CMC_Void</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <shaderType>MoteGlow</shaderType>
+      <drawSize>(0, 0)</drawSize>
+    </graphicData>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>22</damageAmountBase>
+      <armorPenetrationBase>0.2</armorPenetrationBase>
+      <speed>149</speed>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_QBZfivenine_MOD_X</defName>
+    <label>Charged assault rifle bullet</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_AssaultRifle_blue</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <shaderType>MoteGlow</shaderType>
+      <drawSize>(1, 1.3)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_ChargedNormal</thingClass>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>7</damageAmountBase>
+	  <armorPenetrationBase>0.33</armorPenetrationBase>
+      <speed>79</speed>
+	  <extraDamages>
+          <li>
+            <def>Flame</def>
+            <amount>6</amount>
+          </li>
+       </extraDamages>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_QBZfivenine</defName>
+    <label>Charged assault rifle bullet</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet</texPath>
+      <graphicClass>Graphic_Random</graphicClass>
+	  <shaderType>MoteGlow</shaderType>
+      <drawSize>(0.8, 0.99)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_ChargedNormal</thingClass>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>9</damageAmountBase>
+      <armorPenetrationBase>0.5</armorPenetrationBase>
+      <speed>84</speed>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_QBZfivenine_NL</defName>
+    <label>Charged assault rifle bullet</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_AssaultRifle_blue</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <shaderType>MoteGlow</shaderType>
+      <drawSize>(1, 1.3)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_CNHitLimb</thingClass>
+    <projectile>
+      <damageDef>CMC_Blunt</damageDef>
+      <damageAmountBase>10</damageAmountBase>
+      <armorPenetrationBase>0.19</armorPenetrationBase>
+      <speed>90</speed>
+    </projectile>
+  </ThingDef>
+
+	<ThingDef ParentName="BaseBullet">
+		<defName>Bullet_QBZ3oo</defName>
+		<label>charged bullet</label>
+		<graphicData>
+			<texPath>Things/Projectile/Bullet_AssaultRifle_blue</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>MoteGlow</shaderType>
+			<drawSize>(0.75, 0.89)</drawSize>
+		</graphicData>
+		<thingClass>TOT_DLL_test.Projectile_ChargedNormal</thingClass>
+		<projectile>
+			<damageDef>Bullet</damageDef>
+			<damageAmountBase>13</damageAmountBase>
+			<armorPenetrationBase>0.35</armorPenetrationBase>
+            <speed>70</speed>
+		</projectile>
+	</ThingDef>
+	
+	<ThingDef ParentName="BaseBullet">
+		<defName>Bullet_QBZ3oo_DPSR</defName>
+		<label>charged bullet</label>
+		<graphicData>
+			<texPath>Things/Projectile/Bullet_AssaultRifle_blue</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>MoteGlow</shaderType>
+			<drawSize>(0.75, 0.89)</drawSize>
+		</graphicData>
+		<thingClass>TOT_DLL_test.Projectile_ChargedNormal</thingClass>
+		<projectile>
+			<damageDef>Bullet</damageDef>
+			<damageAmountBase>3</damageAmountBase>
+			<armorPenetrationBase>0.18</armorPenetrationBase>
+            <speed>81</speed>
+			<extraDamages>
+				<li>
+					<def>Bullet</def>
+					<amount>3</amount>
+				</li>
+				<li>
+					<def>Bullet</def>
+					<amount>3</amount>
+				</li>
+				<li>
+					<def>Bullet</def>
+					<amount>3</amount>
+				</li>
+			</extraDamages>
+		</projectile>
+	</ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_QBUTOOE</defName>
+    <label>Charged sniper bullet</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_AssaultRifle_blue</texPath>
+	  <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(1, 1.5)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_ChargedNormal</thingClass>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <speed>100</speed>
+	  <damageAmountBase>32</damageAmountBase>
+      <armorPenetrationBase>0.79</armorPenetrationBase>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_QBUsixsix</defName>
+    <label>Charged sniper bullet</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_AssaultRifle_blue</texPath>
+	  <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(1.2, 2.9)</drawSize>
+    </graphicData>
+    <thingClass>TOT_DLL_test.Projectile_ExplosiveNormal</thingClass>
+    <projectile>
+      <damageDef>Bomb</damageDef>
+      <speed>100</speed>
+      <explosionRadius>1.2</explosionRadius>
+      <screenShakeFactor>0</screenShakeFactor>
+	  <damageAmountBase>25</damageAmountBase>
+      <stoppingPower>4</stoppingPower>
+      <armorPenetrationBase>0.92</armorPenetrationBase>
+	  <shadowSize>0</shadowSize>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_QBUsixsix_Smart</defName>
+    <label>hypersonic projectile</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_AssaultRifle_gold</texPath>
+	  <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(1.2, 2.9)</drawSize>
+    </graphicData>
+    <thingClass>TOT_DLL_test.Projectile_XM</thingClass>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>27</damageAmountBase>
+      <armorPenetrationBase>1.5</armorPenetrationBase>
+      <speed>110</speed>
+	  <extraDamages>
+          <li>
+            <def>Bomb</def>
+            <amount>6</amount>
+          </li>
+      </extraDamages>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_HMG_API</defName>
+    <label>Charged HMG bullet</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_HMG</texPath>
+	  <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(0.89, 1.5)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_ChargedNormal</thingClass>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <speed>106</speed>
+	  <damageAmountBase>18</damageAmountBase>
+      <stoppingPower>1.4</stoppingPower>
+      <armorPenetrationBase>1.0</armorPenetrationBase>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_XuanMing_Antientropy</defName>
+    <label>EML projectile</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_QLUX</texPath>
+	  <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(1.6, 2.53)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_XM</thingClass>
+    <projectile>
+      <damageDef>AntiEntropyBullet</damageDef>
+      <damageAmountBase>30</damageAmountBase>
+      <armorPenetrationBase>5</armorPenetrationBase>
+      <speed>124</speed>
+	  <extraDamages>
+		<li>
+            <def>EMP</def>
+            <amount>15</amount>
+        </li>
+        <li>
+            <def>Bullet</def>
+            <amount>10</amount>
+        </li>
+      </extraDamages>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_XuanMing</defName>
+    <label>EML projectile</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_QLUX</texPath>
+	  <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(1.2, 2)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_XM</thingClass>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>25</damageAmountBase>
+      <armorPenetrationBase>2</armorPenetrationBase>
+      <speed>130</speed>
+	  <extraDamages>
+          <li>
+            <def>EMP</def>
+            <amount>15</amount>
+          </li>
+      </extraDamages>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_ChargedShotGun_CMC</defName>
+    <label>shotgun bullet</label>
+    <graphicData>
+      <texPath>Things/Projectile/CMC_Shotgunbullet</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <shaderType>MoteGlow</shaderType>
+	  <drawSize>(0.6, 0.7)</drawSize>
+    </graphicData>
+    <thingClass>TOT_DLL_test.Projectile_Split</thingClass>
+    <projectile>
+	  <damageDef>Blunt</damageDef>
+	  <damageAmountBase>32</damageAmountBase>
+	  <stoppingPower>3</stoppingPower>
+	  <armorPenetrationBase>0.24</armorPenetrationBase>
+      <speed>76</speed>
+	  <extraDamages>
+		<li>
+            <def>EMP</def>
+            <amount>15</amount>
+        </li>
+      </extraDamages>
+    </projectile>
+	<modExtensions>
+      <li Class="TOT_DLL_test.ModExtension_Splitedbullet">
+        <BulletDef>Bullet_ShotGunSplited_CMC</BulletDef>
+		<SplitAmount>8</SplitAmount>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_ShotGunSplited_CMC</defName>
+    <label>shotgun bullet</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>(0.88, 1.15)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_ChargedNormal</thingClass>
+    <projectile>
+	  <damageDef>Blunt</damageDef>
+	  <damageAmountBase>4</damageAmountBase>
+	  <stoppingPower>3</stoppingPower>
+	  <armorPenetrationBase>0.24</armorPenetrationBase>
+      <speed>76</speed>
+	  <extraDamages>
+		<li>
+            <def>EMP</def>
+            <amount>8</amount>
+        </li>
+      </extraDamages>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_ChargedShotGun_CMC_Smart</defName>
+    <label>shotgun bullet</label>
+    <graphicData>
+      <texPath>Things/Projectile/CMC_Shotgunbullet</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <shaderType>MoteGlow</shaderType>
+	  <drawSize>(0.6, 0.7)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_Split</thingClass>
+    <projectile>
+	  <damageDef>Blunt</damageDef>
+	  <damageAmountBase>24</damageAmountBase>
+	  <stoppingPower>2.3</stoppingPower>
+	  <armorPenetrationBase>0.3</armorPenetrationBase>
+      <speed>76</speed>
+    </projectile>
+	<modExtensions>
+      <li Class="TOT_DLL_test.ModExtension_Splitedbullet">
+        <BulletDef>Bullet_ShotGunSplited_CMC</BulletDef>
+		<SplitAmount>6</SplitAmount>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_ChargedShotGun_CMC_Smart_B</defName>
+    <label>bullet</label>
+    <graphicData>
+      <texPath>Things/Projectile/CMC_Shotgunbullet</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <shaderType>MoteGlow</shaderType>
+	  <drawSize>(0.6, 0.7)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_PoiSSB</thingClass>
+    <projectile>
+	  <damageDef>Blunt</damageDef>
+	  <damageAmountBase>19</damageAmountBase>
+	  <stoppingPower>6</stoppingPower>
+	  <armorPenetrationBase>0.4</armorPenetrationBase>
+      <speed>81</speed>
+    </projectile>
+  </ThingDef>
+  
+ <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_WJ_SMG_smart</defName>
+    <label>SMG bullet</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_AssaultRifle_blue</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+	  <drawSize>(0.58, 1)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_PoiBullet</thingClass>
+    <projectile>
+	  <damageDef>Bullet</damageDef>
+      <speed>74</speed>
+	  <damageAmountBase>7</damageAmountBase>
+      <stoppingPower>0.26</stoppingPower>
+      <armorPenetrationBase>0.5</armorPenetrationBase>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_WJ_SMG_power</defName>
+    <label>SMG bullet</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_AssaultRifle_blue</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+	  <drawSize>(0.58, 1)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_ChargedNormal</thingClass>
+    <projectile>
+	  <damageDef>Bullet</damageDef>
+      <damageAmountBase>7</damageAmountBase>
+      <speed>81</speed>
+	  <stoppingPower>0.57</stoppingPower>
+	  <armorPenetrationBase>0.67</armorPenetrationBase>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_AR_smart</defName>
+    <label>bullet</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_AssaultRifle_blue</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+	  <drawSize>(0.69, 1.5)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_PoiBullet</thingClass>
+    <projectile>
+	  <damageDef>Bullet</damageDef>
+      <speed>79</speed>
+	  <damageAmountBase>9</damageAmountBase>
+      <stoppingPower>0.66</stoppingPower>
+      <armorPenetrationBase>0.46</armorPenetrationBase>
+    </projectile>
+  </ThingDef>
+  
+   <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_WJU</defName>
+    <label>smart sniper bullet</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_AssaultRifle_blue</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+	  <drawSize>(1.0, 1.2)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_PoiBullet</thingClass>
+    <projectile>
+	  <damageDef>Bullet</damageDef>
+      <speed>66</speed>
+	  <damageAmountBase>24</damageAmountBase>
+      <stoppingPower>1.8</stoppingPower>
+      <armorPenetrationBase>0.71</armorPenetrationBase>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_WJU_Flame</defName>
+    <label>smart bullet(Incendiary)</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_AssaultRifle_gold</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+	  <drawSize>(1.4, 1.4)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_PoiBullet</thingClass>
+    <projectile>
+      <damageDef>IgnisBullet</damageDef>
+      <speed>66</speed>
+      <shadowSize>0</shadowSize>
+	  <damageAmountBase>5</damageAmountBase>
+      <stoppingPower>1.4</stoppingPower>
+      <armorPenetrationBase>0.17</armorPenetrationBase>
+	  <screenShakeFactor>0</screenShakeFactor>
+	  <extraDamages>
+		<li>
+            <def>Flame</def>
+            <amount>5</amount>
+        </li>
+      </extraDamages>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_WJ_LMGsmart</defName>
+    <label>LMG bullet</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_AssaultRifle_blue</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+	  <drawSize>(0.69, 1.2)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_PoiBullet</thingClass>
+    <projectile>
+	  <damageDef>Bullet</damageDef>
+      <speed>66</speed>
+	  <damageAmountBase>20</damageAmountBase>
+      <stoppingPower>0.4</stoppingPower>
+      <armorPenetrationBase>0.65</armorPenetrationBase>
+    </projectile>
+  </ThingDef>
+  
+   <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_WJ_LMGNT</defName>
+    <label>LMG bullet</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_AssaultRifle_gold</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+	  <drawSize>(0.69, 1.2)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_ChargedNormal</thingClass>
+    <projectile>
+	  <damageDef>Bullet</damageDef>
+      <damageAmountBase>20</damageAmountBase>
+      <speed>75</speed>
+	  <stoppingPower>0.67</stoppingPower>
+	  <armorPenetrationBase>1.1</armorPenetrationBase>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_WJ_LMG_Thunder</defName>
+    <label>LMG bullet</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_AssaultRifle_gold</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+	  <drawSize>(0.89, 1.1)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_ChargedThunderer</thingClass>
+    <projectile>
+	  <damageDef>Bullet</damageDef>
+      <damageAmountBase>20</damageAmountBase>
+      <speed>80</speed>
+	  <stoppingPower>0.67</stoppingPower>
+	  <armorPenetrationBase>0.8</armorPenetrationBase>
+    </projectile>
+  </ThingDef>
+  
+  <!--EXPLOSIVES-->
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Projectile_QLUX</defName>
+    <label>Pulse</label>
+    <graphicData>
+      <texPath>Things/CMC_Void</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+	  <drawSize>(1, 1)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_PlasmaShell</thingClass>
+    <projectile>
+      <damageDef>Bomb</damageDef>
+      <speed>36</speed>
+      <explosionRadius>3.1</explosionRadius>
+      <screenShakeFactor>0.3</screenShakeFactor>
+	  <damageAmountBase>60</damageAmountBase>
+      <stoppingPower>1.1</stoppingPower>
+      <armorPenetrationBase>1.2</armorPenetrationBase>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Projectile_QLUX_GiantExplosion</defName>
+    <label>Pulse</label>
+    <graphicData>
+      <texPath>Things/CMC_Void</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+	  <drawSize>(1, 1)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.CMC_Projectile_ZRPlasmaPulse</thingClass>
+    <projectile>
+      <damageDef>Bomb</damageDef>
+      <speed>36</speed>
+      <explosionRadius>3.6</explosionRadius>
+      <screenShakeFactor>1.5</screenShakeFactor>
+	  <damageAmountBase>40</damageAmountBase>
+	  <soundExplode>Explosion_Rocket</soundExplode>
+      <stoppingPower>1.1</stoppingPower>
+      <armorPenetrationBase>2</armorPenetrationBase>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef>
+    <defName>CMC_LightRocketGrenade</defName>
+    <label>grenade</label>
+    <thingClass>TOT_DLL_test.Projectile_RocketUniversal</thingClass>
+    <category>Projectile</category>
+    <tickerType>Normal</tickerType>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <useHitPoints>False</useHitPoints>
+    <neverMultiSelect>True</neverMultiSelect>
+    <graphicData>
+      <texPath>Things/Projectile/CMC_GL</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.4</drawSize>
+    </graphicData>
+    <projectile>
+      <damageDef>CMC_ModBomb</damageDef>
+	  <explosionEffect>CMC_Rocket</explosionEffect>
+      <explosionRadius>1.9</explosionRadius>
+	  <screenShakeFactor>0</screenShakeFactor>
+      <speed>42</speed>
+      <damageAmountBase>21</damageAmountBase>
+      <soundExplode>Explosion_Rocket</soundExplode>
+    </projectile>
+	<modExtensions>
+      <li Class="TOT_DLL_test.ProjectileExtension_CMC">
+        <FleckFadeRange>0.273</FleckFadeRange>
+		<FluctrationIntensity>0.12</FluctrationIntensity>
+		<SpawnFilthnFleck>true</SpawnFilthnFleck>
+		<SpawnFleckDef>ThrowUsed_CMC_RocketLauncher</SpawnFleckDef>
+		<SpawnedSize>1.3</SpawnedSize>
+		<Exp2Range>7</Exp2Range>
+		<SpreadAngle>5</SpreadAngle>
+		<SpawnExp2FleckDef>CMC_RocketLauncher_EXP2Fleck</SpawnExp2FleckDef>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  <ThingDef  ParentName="BaseGrenadeProjectile">
+    <defName>CMC_40mmGrenade</defName>
+    <label>grenade</label>
+    <category>Projectile</category>
+    <tickerType>Normal</tickerType>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <useHitPoints>False</useHitPoints>
+    <neverMultiSelect>True</neverMultiSelect>
+    <graphicData>
+      <texPath>Things/Projectile/CMC_Grenade</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1</drawSize>
+    </graphicData>
+    <projectile>
+      <damageDef>CMC_ModBomb</damageDef>
+	  <explosionEffect>CMC_Rocket</explosionEffect>
+      <explosionRadius>2.9</explosionRadius>
+	  <screenShakeFactor>0</screenShakeFactor>
+      <speed>42</speed>
+      <damageAmountBase>20</damageAmountBase>
+	  <arcHeightFactor>1.32</arcHeightFactor>
+      <soundExplode>Explosion_Rocket</soundExplode>
+	  <explosionDelay>60</explosionDelay>
+	  <flyOverhead>true</flyOverhead>
+	  <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef  ParentName="BaseGrenadeProjectile">
+    <defName>CMC_40mmGrenade_EMP</defName>
+    <label>grenade</label>
+    <category>Projectile</category>
+    <tickerType>Normal</tickerType>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <useHitPoints>False</useHitPoints>
+    <neverMultiSelect>True</neverMultiSelect>
+    <graphicData>
+      <texPath>Things/Projectile/CMC_Grenade</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1</drawSize>
+    </graphicData>
+    <projectile>
+      <damageDef>EMP</damageDef>
+	  <explosionEffect>CMC_Rocket</explosionEffect>
+      <explosionRadius>4.9</explosionRadius>
+	  <screenShakeFactor>0</screenShakeFactor>
+      <speed>42</speed>
+      <damageAmountBase>20</damageAmountBase>
+	  <arcHeightFactor>1.32</arcHeightFactor>
+      <soundExplode>Explosion_Rocket</soundExplode>
+	  <explosionDelay>60</explosionDelay>
+	  <flyOverhead>true</flyOverhead>
+	  <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef>
+    <defName>CMC_HeavyRocket</defName>
+    <label>rocket</label>
+    <thingClass>TOT_DLL_test.Projectile_RocketUniversal</thingClass>
+    <category>Projectile</category>
+    <tickerType>Normal</tickerType>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <useHitPoints>False</useHitPoints>
+    <neverMultiSelect>True</neverMultiSelect>
+    <graphicData>
+      <texPath>Things/Projectile/CMC_Rocket_Heavy</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>2.1</drawSize>
+    </graphicData>
+    <projectile>
+      <damageDef>Bomb</damageDef>
+	  <explosionEffect>CMC_Rocket</explosionEffect>
+      <explosionRadius>2.9</explosionRadius>
+	  <screenShakeFactor>1.2</screenShakeFactor>
+      <speed>42</speed>
+      <damageAmountBase>25</damageAmountBase>
+      <soundExplode>Explosion_Rocket</soundExplode>
+	  <arcHeightFactor>1.32</arcHeightFactor>
+	  <flyOverhead>true</flyOverhead>
+	  <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+    </projectile>
+	<modExtensions>
+      <li Class="TOT_DLL_test.ProjectileExtension_CMC">
+        <FleckFadeRange>0.273</FleckFadeRange>
+		<FluctrationIntensity>0.12</FluctrationIntensity>
+		<SpawnFilthnFleck>true</SpawnFilthnFleck>
+		<SpawnFleckDef>ThrowUsed_CMC_RocketLauncher</SpawnFleckDef>
+		<SpawnedSize>1.3</SpawnedSize>
+		<Exp2Range>5</Exp2Range>
+		<SpreadAngle>8.5</SpreadAngle>
+		<SpawnExp2FleckDef>CMC_RocketLauncher_EXP2Fleck</SpawnExp2FleckDef>
+      </li>
+	  <li Class="TOT_DLL_test.ModExtentsion_Fragments">
+		<radius>5</radius>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  <ThingDef>
+    <defName>CMC_FF120Rocket</defName>
+    <label>rocket</label>
+    <thingClass>TOT_DLL_test.Projectile_RocketUniversal</thingClass>
+    <category>Projectile</category>
+    <tickerType>Normal</tickerType>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <useHitPoints>False</useHitPoints>
+    <neverMultiSelect>True</neverMultiSelect>
+    <graphicData>
+      <texPath>Things/Projectile/CMC_Rocket_Heavy</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.6</drawSize>
+    </graphicData>
+    <projectile>
+      <damageDef>Bomb</damageDef>
+	  <explosionEffect>CMC_Rocket</explosionEffect>
+      <explosionRadius>2.9</explosionRadius>
+	  <screenShakeFactor>1.2</screenShakeFactor>
+      <speed>50</speed>
+      <damageAmountBase>17</damageAmountBase>
+      <soundExplode>Explosion_Rocket</soundExplode>
+	  <flyOverhead>true</flyOverhead>
+	  <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+	  <postExplosionSpawnThingDef></postExplosionSpawnThingDef>
+    </projectile>
+	<modExtensions>
+      <li Class="TOT_DLL_test.ProjectileExtension_CMC">
+        <FleckFadeRange>0.273</FleckFadeRange>
+		<FluctrationIntensity>0.12</FluctrationIntensity>
+		<SpawnFilthnFleck>true</SpawnFilthnFleck>
+		<SpawnFleckDef>ThrowUsed_CMC_RocketLauncher</SpawnFleckDef>
+		<SpawnedSize>1.3</SpawnedSize>
+		<Exp2Range>5</Exp2Range>
+		<SpreadAngle>8.5</SpreadAngle>
+		<SpawnExp2FleckDef>CMC_RocketLauncher_EXP2Fleck</SpawnExp2FleckDef>
+      </li>
+	  <li Class="TOT_DLL_test.ModExtentsion_Fragments">
+		<radius>7</radius>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  <ThingDef>
+    <defName>CMC_90mmEMPRocket</defName>
+    <label>rocket</label>
+    <thingClass>TOT_DLL_test.Projectile_RocketUniversal</thingClass>
+    <category>Projectile</category>
+    <tickerType>Normal</tickerType>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <useHitPoints>False</useHitPoints>
+    <neverMultiSelect>True</neverMultiSelect>
+    <graphicData>
+      <texPath>Things/Projectile/CMC_Rocket_Heavy</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.6</drawSize>
+    </graphicData>
+    <projectile>
+      <damageDef>Stun</damageDef>
+	  <explosionEffect>CMC_Rocket</explosionEffect>
+      <explosionRadius>2.9</explosionRadius>
+	  <screenShakeFactor>1.2</screenShakeFactor>
+      <speed>50</speed>
+      <damageAmountBase>50</damageAmountBase>
+      <soundExplode>Explosion_Rocket</soundExplode>
+	  <flyOverhead>false</flyOverhead>
+	  <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+	  <postExplosionSpawnThingDef></postExplosionSpawnThingDef>
+    </projectile>
+	<modExtensions>
+      <li Class="TOT_DLL_test.ProjectileExtension_CMC">
+        <FleckFadeRange>0.273</FleckFadeRange>
+		<FluctrationIntensity>0.12</FluctrationIntensity>
+		<SpawnFilthnFleck>true</SpawnFilthnFleck>
+		<SpawnFleckDef>ThrowUsed_CMC_RocketLauncher</SpawnFleckDef>
+		<SpawnedSize>1.3</SpawnedSize>
+		<Exp2Range>5</Exp2Range>
+		<SpreadAngle>8.5</SpreadAngle>
+		<SpawnExp2FleckDef>CMC_RocketLauncher_EXP2Fleck</SpawnExp2FleckDef>
+      </li>
+	  <li Class="TOT_DLL_test.ModExtentsion_Fragments">
+		<radius>7</radius>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>CMC_Missile_HeavyATGM</defName>
+    <label>HJ-50 heavy ATGM missile</label>
+    <graphicData>
+      <texPath>Things/Projectile/ATGM_Proj</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>(2.3, 2.3)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_PoiMissile</thingClass>
+    <projectile>
+      <damageDef>Bomb</damageDef>
+      <speed>50</speed>
+      <explosionRadius>2.1</explosionRadius>
+	  <explosionEffect>CMC_Bomb</explosionEffect>
+      <screenShakeFactor>3</screenShakeFactor>
+	  <damageAmountBase>1190</damageAmountBase>
+      <flyOverhead>true</flyOverhead>
+      <stoppingPower>4</stoppingPower>
+      <armorPenetrationBase>6</armorPenetrationBase>
+	  <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+	  <shadowSize>0</shadowSize>
+    </projectile>
+	<modExtensions>
+      <li Class="TOT_DLL_test.ModExtentsion_Fragments">
+		<radius>7</radius>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>CMC_Missile_ATGM_Light</defName>
+    <label>HJ-53 light ATGM missile</label>
+    <graphicData>
+      <texPath>Things/Projectile/ATGM_Light_Proj</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>(1.8, 1.8)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_PoiMissile</thingClass>
+    <projectile>
+      <damageDef>Bomb</damageDef>
+      <speed>38</speed>
+      <explosionRadius>1</explosionRadius>
+	  <explosionEffect>CMC_Bomb</explosionEffect>
+      <screenShakeFactor>1</screenShakeFactor>
+	  <damageAmountBase>300</damageAmountBase>
+      <flyOverhead>true</flyOverhead>
+      <stoppingPower>2.4</stoppingPower>
+      <armorPenetrationBase>2.3</armorPenetrationBase>
+	  <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+	  <shadowSize>0</shadowSize>
+    </projectile>
+	<modExtensions>
+      <li Class="TOT_DLL_test.ModExtentsion_Fragments">
+		<radius>5</radius>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>CMC_Missile_AIGM_UAV</defName>
+    <label>XJ-7 AIGM missile</label>
+	<uiIconPath>UI/CMC_UAVAmmo</uiIconPath>
+    <graphicData>
+      <texPath>Things/Projectile/ATGM_Light_Proj</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>(1, 1)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_PoiMissile</thingClass>
+    <projectile>
+      <damageDef>Bomb</damageDef>
+      <speed>22</speed>
+      <explosionRadius>2.5</explosionRadius>
+	  <explosionEffect>CMC_Rocket</explosionEffect>
+      <screenShakeFactor>0</screenShakeFactor>
+	  <damageAmountBase>17</damageAmountBase>
+      <flyOverhead>true</flyOverhead>
+      <stoppingPower>2.4</stoppingPower>
+      <armorPenetrationBase>0.67</armorPenetrationBase>
+	  <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+	  <shadowSize>0</shadowSize>
+    </projectile>
+	<modExtensions>
+      <li Class="TOT_DLL_test.ModExtentsion_Fragments">
+		<radius>3</radius>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>CMC_Missile_AAM</defName>
+    <label>PL-X swarm missile</label>
+    <graphicData>
+      <texPath>Things/Projectile/CMC_AAM</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>(1.8, 1.8)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_PoiMissile</thingClass>
+    <projectile>
+      <damageDef>CMC_Bomb_AA</damageDef>
+      <speed>49</speed>
+      <screenShakeFactor>0</screenShakeFactor>
+	  <flyOverhead>true</flyOverhead>
+	  <damageAmountBase>19</damageAmountBase>
+	  <explosionEffect>CMC_Bomb</explosionEffect>
+	  <explosionRadius>3.2</explosionRadius>
+	  <arcHeightFactor>40</arcHeightFactor>
+      <stoppingPower>1.5</stoppingPower>
+      <armorPenetrationBase>0.5</armorPenetrationBase>
+	  <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>CMC_Missile_AAM_EMP</defName>
+    <label>PL-X swarm missile(EMP)</label>
+    <graphicData>
+      <texPath>Things/Projectile/CMC_AAM_EMP</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <shaderType>TransparentPostLight</shaderType>
+	  <drawSize>(1.8, 1.8)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_PoiMissile</thingClass>
+    <projectile>
+      <damageDef>EMP</damageDef>
+      <speed>47</speed>
+      <screenShakeFactor>0</screenShakeFactor>
+	  <flyOverhead>true</flyOverhead>
+	  <damageAmountBase>80</damageAmountBase>
+	  <explosionRadius>7.2</explosionRadius>
+	  <arcHeightFactor>40</arcHeightFactor>
+      <stoppingPower>1.5</stoppingPower>
+      <armorPenetrationBase>1.4</armorPenetrationBase>
+	  <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+    </projectile>
+  </ThingDef>
+  <!--Turret-->
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_CMC_CannonTurret</defName>
+    <label>autocannon shell</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_QLUX</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <shaderType>MoteGlow</shaderType>
+	  <drawSize>(0.95, 1.35)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_Grenade</thingClass>
+	<projectile>
+      <damageDef>Bomb</damageDef>
+      <speed>70</speed>
+      <screenShakeFactor>0</screenShakeFactor>
+	  <damageAmountBase>18</damageAmountBase>
+	  <explosionRadius>1.2</explosionRadius>
+      <stoppingPower>1.5</stoppingPower>
+      <armorPenetrationBase>0.3</armorPenetrationBase>
+	  <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_CMC_AutocannonTurret</defName>
+    <label>autocannon shell</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_HMG</texPath>
+	  <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(0.89, 1.5)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_ChargedNormal</thingClass>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <speed>103</speed>
+	  <damageAmountBase>24</damageAmountBase>
+      <stoppingPower>0.4</stoppingPower>
+      <armorPenetrationBase>1.12</armorPenetrationBase>
+    </projectile>
+  </ThingDef>
+  
+    <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_AutocannonTurretEMP</defName>
+    <label>accelerated magnet projectile(antimatter warhead with EMP cells)</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_QLUX</texPath>
+	  <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(2, 2.5)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.CMC_Projectile_EMPshell</thingClass>
+    <projectile>
+      <damageDef>Bomb</damageDef>
+      <speed>330</speed>
+	  <explosionEffect>CMC_Bomb</explosionEffect>
+      <screenShakeFactor>0</screenShakeFactor>
+	  <damageAmountBase>70</damageAmountBase>
+	  <explosionRadius>2.0</explosionRadius>
+      <stoppingPower>1.5</stoppingPower>
+      <armorPenetrationBase>1.9</armorPenetrationBase>
+	  <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+    </projectile>
+  </ThingDef>
+  <!--Misc-->
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_CMC_Flame</defName>
+    <label>Flame</label>
+    <graphicData>
+      <texPath>Things/CMC_Void</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <shaderType>TransparentPostLight</shaderType>
+	  <drawSize>(0.7, 1.9)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_Fire</thingClass>
+    <projectile>
+      <damageDef>CMC_Vaporize_Small</damageDef>
+      <speed>33</speed>
+      <explosionRadius>1.2</explosionRadius>
+	  <preExplosionSpawnThingDef>Filth_Fuel</preExplosionSpawnThingDef>
+      <preExplosionSpawnChance>0.6</preExplosionSpawnChance>
+      <ai_IsIncendiary>true</ai_IsIncendiary>
+      <arcHeightFactor>0.4</arcHeightFactor>
+      <shadowSize>0.9</shadowSize>
+	  <damageAmountBase>17</damageAmountBase>
+      <stoppingPower>1.4</stoppingPower>
+      <armorPenetrationBase>0.67</armorPenetrationBase>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_CMC_NGrenade</defName>
+    <label>neutron grenade</label>
+    <graphicData>
+      <texPath>Things/Projectile/CMC_Grenade</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>(1, 1)</drawSize>
+	  <shaderType>MoteGlow</shaderType>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_Grenade</thingClass>
+    <projectile>
+      <damageDef>NeutronBomb</damageDef>
+      <speed>30</speed>
+      <screenShakeFactor>0</screenShakeFactor>
+	  <damageAmountBase>30</damageAmountBase>
+	  <explosionRadius>3.2</explosionRadius>
+      <stoppingPower>1.5</stoppingPower>
+      <armorPenetrationBase>0.4</armorPenetrationBase>
+	  <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_CMC_SGrenade</defName>
+    <label>stun grenade</label>
+    <graphicData>
+      <texPath>Things/Projectile/CMC_Grenade_Stun</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>(1, 1)</drawSize>
+	  <shaderType>MoteGlow</shaderType>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_Grenade</thingClass>
+    <projectile>
+      <damageDef>Stun</damageDef>
+      <speed>30</speed>
+      <screenShakeFactor>0</screenShakeFactor>
+	  <damageAmountBase>25</damageAmountBase>
+	  <explosionRadius>3.2</explosionRadius>
+      <stoppingPower>2.7</stoppingPower>
+      <armorPenetrationBase>0.1</armorPenetrationBase>
+	  <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_CMC_NGrenade_Small</defName>
+    <label>neutron grenade</label>
+    <graphicData>
+      <texPath>Things/Projectile/CMC_Grenade</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>(0.6, 1)</drawSize>
+	  <shaderType>MoteGlow</shaderType>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_Grenade</thingClass>
+    <projectile>
+      <damageDef>NeutronBomb</damageDef>
+      <speed>36</speed>
+      <screenShakeFactor>0</screenShakeFactor>
+	  <damageAmountBase>5</damageAmountBase>
+	  <explosionRadius>1.6</explosionRadius>
+      <stoppingPower>1.5</stoppingPower>
+      <armorPenetrationBase>0.3</armorPenetrationBase>
+	  <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_CMC_SGrenade_Small</defName>
+    <label>stun grenade</label>
+    <graphicData>
+      <texPath>Things/Projectile/CMC_Grenade_Stun</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>(0.6, 1)</drawSize>
+	  <shaderType>MoteGlow</shaderType>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_Grenade</thingClass>
+    <projectile>
+      <damageDef>Stun</damageDef>
+      <speed>36</speed>
+      <screenShakeFactor>0</screenShakeFactor>
+	  <damageAmountBase>10</damageAmountBase>
+	  <explosionRadius>1.6</explosionRadius>
+      <stoppingPower>2.7</stoppingPower>
+      <armorPenetrationBase>0</armorPenetrationBase>
+	  <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+    </projectile>
+  </ThingDef>
+  
+ </Defs>

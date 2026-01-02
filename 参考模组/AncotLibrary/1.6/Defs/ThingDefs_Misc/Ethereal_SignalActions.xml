@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="SignalActionBase">
+    <defName>Ancot_SignalAction_FactionChange</defName>
+    <thingClass>AncotLibrary.SignalAction_FactionChange</thingClass>
+  </ThingDef>
+  
+  <ThingDef ParentName="SignalActionBase">
+    <defName>Ancot_SignalAction_EnemyWalkIn</defName>
+    <thingClass>AncotLibrary.SignalAction_EnemyWalkIn</thingClass>
+  </ThingDef>
+
+
+</Defs>

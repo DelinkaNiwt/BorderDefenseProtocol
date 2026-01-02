@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- <RaidStrategyDef>
+    <defName>Milira_RookIVSiege</defName>
+    <workerClass>Milira.RaidStrategyWorker_ImmediateAttack_RookIVSiege</workerClass>
+    <selectionWeightPerPointsCurve>
+      <points>
+        <li>(0, 1)</li>
+      </points>
+    </selectionWeightPerPointsCurve>
+    <selectionWeightCurvesPerFaction>
+      <li>
+        <faction>Milira_Faction</faction>
+        <selectionWeightPerPointsCurve>
+          <points>
+            <li>(0, 1)</li>
+          </points>
+        </selectionWeightPerPointsCurve>
+      </li>
+    </selectionWeightCurvesPerFaction>
+    <pointsFactorCurve>
+      <points>
+        <li>0, 1</li>
+      </points>
+    </pointsFactorCurve>
+    <arriveModes>
+      <li>EdgeWalkIn</li>
+    </arriveModes>
+    <letterLabelEnemy>Raid (Fortress)</letterLabelEnemy>
+    <arrivalTextEnemy>They are attacking immediately.</arrivalTextEnemy>
+    <letterLabelFriendly>Friendlies</letterLabelFriendly>
+    <arrivalTextFriendly>They are moving in to help you immediately.</arrivalTextFriendly>
+  </RaidStrategyDef> -->
+
+
+</Defs>

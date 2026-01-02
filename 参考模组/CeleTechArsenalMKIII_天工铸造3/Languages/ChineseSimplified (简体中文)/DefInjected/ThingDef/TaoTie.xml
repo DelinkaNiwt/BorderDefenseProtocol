@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Mote -->
+  <CMC_Laser_Stay_MoteRed.label>TODO</CMC_Laser_Stay_MoteRed.label>
+  
+  <!-- EN: <color=#FFAA00><i>QBZL-823 TaoTieII particle lance</i></color> -->
+  <CMC_TaoTie_Persona.label>&lt;color=#FFAA00>&lt;i>【饕餮】炼狱射线步枪Δ&lt;/i>&lt;/color></CMC_TaoTie_Persona.label>
+  <!-- EN: A prototype particle lance. Its reactor is replaced with a stabilized microscopic skipgate linked to the core of a nearby star. Its beam ignores any armor and cause explosions upon contact. -->
+  <CMC_TaoTie_Persona.description>一把跨时代的射线步枪，其发射的高能粒子束可以造成巨额伤害。该武器在近距离对抗装甲目标时极具优势。</CMC_TaoTie_Persona.description>
+  <!-- EN: stock -->
+  <CMC_TaoTie_Persona.tools.stock.label>TODO</CMC_TaoTie_Persona.tools.stock.label>
+  <!-- EN: barrel -->
+  <CMC_TaoTie_Persona.tools.barrel.label>枪管</CMC_TaoTie_Persona.tools.barrel.label>
+  <!-- EN: <color=#FFAA00><i>QBZL-823 TaoTieII particle lance</i></color> -->
+  <CMC_TaoTie_Persona.verbs.Verb_Laser_Sustain.label>TODO</CMC_TaoTie_Persona.verbs.Verb_Laser_Sustain.label>
+  
+  <!-- UNUSED -->
+  <CMC_TaoTie_Persona.verbs.Verb_Laser_Once.label>&lt;color=#FFAA00>&lt;i>【饕餮】炼狱射线步枪Δ&lt;/i>&lt;/color></CMC_TaoTie_Persona.verbs.Verb_Laser_Once.label>
+  
+</LanguageData>

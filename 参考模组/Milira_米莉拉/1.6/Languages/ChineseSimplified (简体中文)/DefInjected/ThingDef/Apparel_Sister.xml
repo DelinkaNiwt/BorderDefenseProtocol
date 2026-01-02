@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 米莉拉修女服（款式1） -->
+  <Milira_SisterDressI.label>米莉拉修女服（款式1）</Milira_SisterDressI.label>
+  <!-- EN: 一款修女服。 -->
+  <Milira_SisterDressI.description>一款修女服。</Milira_SisterDressI.description>
+  
+  <!-- EN: 米莉拉修女服（款式2） -->
+  <Milira_SisterDressII.label>米莉拉修女服（款式2）</Milira_SisterDressII.label>
+  <!-- EN: 一款修女服。 -->
+  <Milira_SisterDressII.description>一款修女服。</Milira_SisterDressII.description>
+  
+  <!-- EN: 米莉拉修女服（款式3） -->
+  <Milira_SisterDressIII.label>米莉拉修女服（款式3）</Milira_SisterDressIII.label>
+  <!-- EN: 一款修女服。 -->
+  <Milira_SisterDressIII.description>一款修女服。</Milira_SisterDressIII.description>
+  
+  <!-- EN: 米莉拉修女帽（款式1） -->
+  <Milira_SisterHatI.label>米莉拉修女帽（款式1）</Milira_SisterHatI.label>
+  <!-- EN: 修女服配套的帽子。 -->
+  <Milira_SisterHatI.description>修女服配套的帽子。</Milira_SisterHatI.description>
+  
+  <!-- EN: 米莉拉修女帽（款式2） -->
+  <Milira_SisterHatII.label>米莉拉修女帽（款式2）</Milira_SisterHatII.label>
+  <!-- EN: 修女服配套的帽子。 -->
+  <Milira_SisterHatII.description>修女服配套的帽子。</Milira_SisterHatII.description>
+  
+  <!-- EN: 米莉拉修女帽（款式3） -->
+  <Milira_SisterHatIII.label>米莉拉修女帽（款式3）</Milira_SisterHatIII.label>
+  <!-- EN: 修女服配套的帽子。 -->
+  <Milira_SisterHatIII.description>修女服配套的帽子。</Milira_SisterHatIII.description>
+  
+</LanguageData>

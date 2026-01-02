@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: QBZL-79P LMG -->
+  <CMC_PLaserLMG.label>QBB-79 脉冲通用机枪</CMC_PLaserLMG.label>
+  <!-- EN: A machine gun designed for combat inside spaceships, which utilizes continuous gas explosions to charge and release high-energy pulse lasers. It is capable of sustained rapid fire over a short period. The weapon is equipped with an intelligent aiming system that can automatically adjust the angle of its prism, allowing beam to bypass cover and accurately hit targets. After neutralizing the current target, it can quickly switch to attacking the next nearby target. -->
+  <CMC_PLaserLMG.description>一款为飞船内部作战，利用气体连续爆炸充能并释放高能脉冲激光的机枪，可以在短时间内连续射击。其装备的智能瞄具可以自行调整棱镜的角度，使激光排除掩体的干扰并准确命中目标，并在消灭当前目标后迅速瞄准下一个临近目标。</CMC_PLaserLMG.description>
+  <!-- EN: stock -->
+  <CMC_PLaserLMG.tools.stock.label>枪托</CMC_PLaserLMG.tools.stock.label>
+  <!-- EN: barrel -->
+  <CMC_PLaserLMG.tools.barrel.label>枪管</CMC_PLaserLMG.tools.barrel.label>
+  <!-- EN: QBZL-79P LMG -->
+  <CMC_PLaserLMG.verbs.Verb_ShootSwitchFire.label>TODO</CMC_PLaserLMG.verbs.Verb_ShootSwitchFire.label>
+  
+  <!-- UNUSED -->
+  <CMC_PLaserLMG.verbs.Verb_Laser_Once.label>QBB-79 脉冲通用机枪</CMC_PLaserLMG.verbs.Verb_Laser_Once.label>
+  
+  <!-- EN: QBZ-79P SMG -->
+  <CMC_PLaserSMG.label>QSZ-79 脉冲冲锋枪</CMC_PLaserSMG.label>
+  <!-- EN: A submachine gun with exceptional rate of fire and stability, highly effective at eliminating lightly armored targets in close quarters. This weapon has a broad range of users, from medical teams in urban worlds to storm troopers on the front lines of major battles. -->
+  <CMC_PLaserSMG.description>拥有卓越射速和稳定性的冲锋枪，在近距离能高效杀伤轻甲目标。该武器的受众十分广泛，从都市世界的医疗小组到大战前线的突击队士兵。</CMC_PLaserSMG.description>
+  <!-- EN: stock -->
+  <CMC_PLaserSMG.tools.stock.label>枪托</CMC_PLaserSMG.tools.stock.label>
+  <!-- EN: barrel -->
+  <CMC_PLaserSMG.tools.barrel.label>枪管</CMC_PLaserSMG.tools.barrel.label>
+  <!-- EN: QBZ-79P SMG -->
+  <CMC_PLaserSMG.verbs.Verb_ShootSwitchFire.label>TODO</CMC_PLaserSMG.verbs.Verb_ShootSwitchFire.label>
+  
+  <!-- UNUSED -->
+  <CMC_PLaserSMG.verbs.Verb_Laser_Once.label>QSZ-79 脉冲冲锋枪</CMC_PLaserSMG.verbs.Verb_Laser_Once.label>
+  
+  <!-- UNUSED -->
+  <CMC_QiyaoLaserLMG.verbs.Verb_Laser_Once.label>&lt;color=#FFAA00>&lt;i>「七曜」试作型脉冲步枪δ&lt;/i>&lt;/color></CMC_QiyaoLaserLMG.verbs.Verb_Laser_Once.label>
+  
+  <!-- EN: QSC-79 pistol -->
+  <CMM_PLaserpistol.label>QSC-79 脉冲手枪</CMM_PLaserpistol.label>
+  <!-- EN: . -->
+  <CMM_PLaserpistol.description>具备多目标攻击能力的激光手枪,也能汇聚光束打击同一目标。</CMM_PLaserpistol.description>
+  <!-- EN: grip -->
+  <CMM_PLaserpistol.tools.grip.label>TODO</CMM_PLaserpistol.tools.grip.label>
+  <!-- EN: barrel -->
+  <CMM_PLaserpistol.tools.barrel.label>枪管</CMM_PLaserpistol.tools.barrel.label>
+  <!-- EN: QSC-79 pistol -->
+  <CMM_PLaserpistol.verbs.Verb_Shoot.label>TODO</CMM_PLaserpistol.verbs.Verb_Shoot.label>
+  
+  <!-- UNUSED -->
+  <CMM_PLaserpistol.tools.stock.label>枪托</CMM_PLaserpistol.tools.stock.label>
+  <CMM_PLaserpistol.verbs.Verb_Laser_Once.label>QSC-79 脉冲激光手枪</CMM_PLaserpistol.verbs.Verb_Laser_Once.label>
+  
+</LanguageData>

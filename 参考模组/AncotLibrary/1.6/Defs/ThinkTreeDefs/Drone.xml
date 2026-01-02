@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThinkTreeDef>
+    <defName>Ancot_Drone</defName>
+    <thinkRoot Class="ThinkNode_Priority">
+      <subNodes>
+        <!-- Despawned -->
+        <li Class="ThinkNode_Subtree">
+          <treeDef>Despawned</treeDef>
+        </li>
+
+        <!-- Downed -->
+        <li Class="ThinkNode_Subtree">
+          <treeDef>Downed</treeDef>
+        </li>
+
+        <!-- Self-Shutdown -->
+        <li Class="AncotLibrary.ThinkNode_ConditionalLowEnergy_Drone" MayRequire="Ludeon.RimWorld.Biotech">
+          <subNodes>
+            <li Class="AncotLibrary.JobGiver_DroneSelfShutdown" />
+          </subNodes>
+        </li>
+        
+        <!-- Do a queued job -->
+        <li Class="ThinkNode_QueuedJob" />
+
+        <!-- Wait if drafted -->
+        <li Class="ThinkNode_ConditionalOfPlayerFaction">
+          <subNodes>
+            <li Class="ThinkNode_Tagger">
+              <tagToGive>DraftedOrder</tagToGive>
+              <subNodes>
+                <li Class="JobGiver_MoveToStandable" />
+                <li Class="JobGiver_Orders" />
+              </subNodes>
+            </li>
+          </subNodes>
+        </li>
+
+        <!-- Lord -->
+        <li Class="ThinkNode_Subtree">
+          <treeDef>LordDuty</treeDef>
+        </li>
+
+        <!-- Player mechs -->
+        <li Class="ThinkNode_ConditionalPlayerMech">
+          <subNodes>
+            <!-- Keep charging if we're already charging -->
+              <li Class="AncotLibrary.ThinkNode_ConditionalRecharging_Drone">
+                <subNodes>
+                  <li Class="AncotLibrary.JobGiver_GetDroneEnergy_Charger" />
+                </subNodes>
+              </li>
+              <!-- Work modes -->
+              <li Class="AncotLibrary.ThinkNode_ConditionalWorkMode_Drone" MayRequire="Ludeon.RimWorld.Biotech">
+                <workMode>Ancot_Work</workMode>
+                <subNodes>
+                  <li Class="JobGiver_SeekAllowedArea" />
+                  <li Class="AncotLibrary.JobGiver_GetDroneEnergy_Charger" />
+                  <li Class="JobGiver_Work">
+                    <emergency>true</emergency>
+                  </li>
+                  <li Class="JobGiver_Work" />
+                  <li Class="ThinkNode_ConditionalWorkMech"><!-- Combat mechs do patrolling -->
+                    <invert>true</invert>
+                    <subNodes>
+                      <li Class="JobGiver_AIFightEnemies">
+                        <targetAcquireRadius>65</targetAcquireRadius>
+                        <targetKeepRadius>72</targetKeepRadius>
+                      </li>
+                      <li Class="ThinkNode_Tagger">
+                        <tagToGive>MiscWork</tagToGive>
+                        <subNodes>
+                          <li Class="JobGiver_WanderColony">
+                            <maxDanger>Deadly</maxDanger>
+                            <reportStringOverride>Patrolling.</reportStringOverride>
+                          </li>
+                        </subNodes>
+                      </li>
+                    </subNodes>
+                  </li>
+                </subNodes>
+              </li>
+              <li Class="AncotLibrary.ThinkNode_ConditionalWorkMode_Drone" MayRequire="Ludeon.RimWorld.Biotech">
+                <workMode>Ancot_SelfShutdown</workMode>
+                <subNodes>
+                  <li Class="JobGiver_SeekAllowedArea" />
+                  <li Class="AncotLibrary.JobGiver_DroneSelfShutdown" />
+                </subNodes>
+              </li>
+              <li Class="AncotLibrary.ThinkNode_ConditionalWorkMode_Drone" MayRequire="Ludeon.RimWorld.Biotech">
+                <workMode>Ancot_Recharge</workMode>
+                <subNodes>
+                  <li Class="JobGiver_SeekAllowedArea" />
+                  <li Class="AncotLibrary.JobGiver_GetDroneEnergy_Charger">
+                    <forced>true</forced>
+                  </li>
+                  <li Class="AncotLibrary.JobGiver_GetDroneEnergy_SelfShutdown">
+                    <forced>true</forced>
+                  </li>
+                </subNodes>
+              </li>
+
+          </subNodes>
+        </li>
+
+        <!-- Non player controlled mechs fight nearby hostiles -->
+        <li Class="ThinkNode_ConditionalPlayerMech">
+          <invert>true</invert>
+          <subNodes>
+            <li Class="JobGiver_AIFightEnemies">
+              <targetAcquireRadius>30</targetAcquireRadius>
+              <targetKeepRadius>35</targetKeepRadius>
+            </li>
+          </subNodes>
+        </li>
+
+        <!-- Idle player mech -->
+        <li Class="ThinkNode_ConditionalPlayerMech">
+          <subNodes>
+            <li Class="ThinkNode_Tagger">
+              <tagToGive>Idle</tagToGive>
+              <subNodes>
+                <li Class="JobGiver_WanderColony">
+                  <maxDanger>None</maxDanger>
+                </li>
+              </subNodes>
+            </li>
+          </subNodes>
+        </li>
+
+        <!-- Idle -->
+        <li Class="ThinkNode_Tagger">
+          <tagToGive>Idle</tagToGive>
+          <subNodes>
+            <li Class="JobGiver_WanderAnywhere">
+              <maxDanger>Deadly</maxDanger>
+            </li>
+          </subNodes>
+        </li>
+        
+        <!-- Idle error -->
+        <li Class="JobGiver_IdleError"/>
+      </subNodes>
+    </thinkRoot>
+  </ThinkTreeDef>
+  
+</Defs>

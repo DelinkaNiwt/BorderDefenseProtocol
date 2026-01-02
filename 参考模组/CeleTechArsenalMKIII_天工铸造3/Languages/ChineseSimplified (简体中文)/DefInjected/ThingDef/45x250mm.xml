@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: CMC_Ammo_45x250mm APDS-EMP -->
+  <Ammo_CMC_Ammo_45x250mm_APDS-EMP.label>45x250mm 电磁脱穿弹</Ammo_CMC_Ammo_45x250mm_APDS-EMP.label>
+  <!-- EN: High caliber EM-shell -->
+  <Ammo_CMC_Ammo_45x250mm_APDS-EMP.description>大口径电磁炮弹</Ammo_CMC_Ammo_45x250mm_APDS-EMP.description>
+  
+  <!-- EN: CMC_Ammo_45x250mm HE -->
+  <Ammo_CMC_Ammo_45x250mm_HE.label>45x250mm 高爆弹</Ammo_CMC_Ammo_45x250mm_HE.label>
+  <!-- EN: High caliber EM-shell -->
+  <Ammo_CMC_Ammo_45x250mm_HE.description>大口径电磁炮弹</Ammo_CMC_Ammo_45x250mm_HE.description>
+  
+  <!-- EN: bullet -->
+  <Bullet_CMC_Ammo_45x250mm_APDS-EMP.label>45x250mm 电磁脱穿弹</Bullet_CMC_Ammo_45x250mm_APDS-EMP.label>
+  
+  <!-- EN: bullet -->
+  <Bullet_CMC_Ammo_45x250mm_HE.label>45x250mm 高爆弹</Bullet_CMC_Ammo_45x250mm_HE.label>
+  
+</LanguageData>

@@ -1,0 +1,91 @@
+<Defs>
+<ThingDef ParentName="BuildingBase">
+    <defName>CMCShieldGenerator</defName>
+	<thingClass>TOT_DLL_test.Building_FRShield</thingClass>
+    <label>force field generator</label>
+    <description>An advanced shielding device which projects a momentum repulsor field, blocking almost all incoming projectiles. However, the shield can be penetrated by laser.</description>
+    <size>(3,3)</size>
+    <statBases>
+	  <Mass>1240</Mass>
+      <MaxHitPoints>6000</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <MarketValue>2000</MarketValue>
+      <WorkToBuild>70000</WorkToBuild>
+    </statBases>
+	<killedLeavings>
+      <ChunkSlagSteel>2</ChunkSlagSteel>
+    </killedLeavings>
+    <graphicData>
+      <texPath>Things/Buildings/CMC_shield</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(3.3,3.3)</drawSize>
+      <shadowData>
+        <volume>(0.6, 0.4, 0.6)</volume>
+      </shadowData>
+      <damageData>
+        <rect>(0.2, 0.2, 0.6, 0.6)</rect>
+      </damageData>
+    </graphicData>
+	<uiIconPath>Things/Buildings/CMC_shield_UI</uiIconPath>
+    <uiIconScale>0.90</uiIconScale>
+	<minifiedDef>MinifiedThing</minifiedDef>
+	<altitudeLayer>Building</altitudeLayer>
+    <stealable>false</stealable>
+	<rotatable>false</rotatable>
+    <thingCategories>
+      <li>BuildingsSecurity</li>
+    </thingCategories>
+    <building>
+      <destroySound>BuildingDestroyed_Metal_Small</destroySound>
+    </building>
+    <placeWorkers>
+      <li>PlaceWorker_ShowProjectileInterceptorRadius</li>
+    </placeWorkers>
+    <comps>
+	    <li Class="CompProperties_Power">
+			<compClass>CompPowerTrader</compClass>
+			<basePowerConsumption>4090</basePowerConsumption>
+		</li>
+		<li Class="TOT_DLL_test.CompProperties_FullProjectileInterceptor">
+			<interceptGroundProjectiles>true</interceptGroundProjectiles>
+			<interceptAirProjectiles>true</interceptAirProjectiles>
+			<color>(0.2, 0.85, 0.85, 0.2)</color>
+			<reactivateEffect>BulletShieldGenerator_Reactivate</reactivateEffect>
+			<activeSound>BulletShield_Ambience</activeSound>
+			<hitPoints>5000</hitPoints>
+			<hitPointsRestoreInstantlyAfterCharge>false</hitPointsRestoreInstantlyAfterCharge>
+			<chargeDurationTicks>1800</chargeDurationTicks>
+			<minIdleAlpha>0.4</minIdleAlpha>
+			<gizmoTipKey>ProjectileInterceptorTip</gizmoTipKey>
+			<drawWithNoSelection>False</drawWithNoSelection>
+		</li>
+		<li Class="CompProperties_Flickable"/>
+		<li Class="CompProperties_Explosive">
+        <wickTicks>40</wickTicks>
+        <explosiveRadius>9.9</explosiveRadius>
+        <explosiveDamageType>EMP</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0</chanceNeverExplodeFromDamage>
+      </li>
+    </comps>
+	<passability>PassThroughOnly</passability>
+    <pathCost>0</pathCost>
+    <fillPercent>0.4</fillPercent>
+    <hasTooltip>true</hasTooltip>
+    <costList>
+	  <Steel>300</Steel>
+      <Plasteel>700</Plasteel>
+	  <ComponentSpacer>10</ComponentSpacer>
+	  <Silver>100</Silver>
+	  <Gold>20</Gold>
+	  <Uranium>100</Uranium>
+    </costList>
+	<researchPrerequisites>
+      <li>CMCShield</li>
+    </researchPrerequisites>
+	<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <designationCategory>CMC_DefensenProduction</designationCategory>
+    <constructionSkillPrerequisite>13</constructionSkillPrerequisite>
+	<tickerType>Normal</tickerType>
+	<drawerType>MapMeshAndRealTime</drawerType>
+  </ThingDef>
+</Defs>

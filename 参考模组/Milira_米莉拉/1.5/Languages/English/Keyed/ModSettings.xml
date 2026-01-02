@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+  <Milira.ModSetting_EventSwitch>Event switch</Milira.ModSetting_EventSwitch>
+  <Milira.ModSetting_DifficultyAdjustment>Difficulty adjustment</Milira.ModSetting_DifficultyAdjustment>
+  <Milira.ModSetting_Milian>Milian</Milira.ModSetting_Milian>
+  <Milira.ModSetting_DefaultSettings>Restore default settings</Milira.ModSetting_DefaultSettings>
+
+  <!-- 难度分级 -->
+  <Milira.DifficultyScaleSetting>Difficulty scale</Milira.DifficultyScaleSetting>
+  <Milira.Difficulty_Relax>relax</Milira.Difficulty_Relax>
+  <Milira.Difficulty_RelaxDesc>An almost effortless combat experience, suitable for players who want to enjoy the mod with ease.\n\nThreat points of milira faction raid multiplied by 20%.</Milira.Difficulty_RelaxDesc>
+  <Milira.Difficulty_Easy>easy</Milira.Difficulty_Easy>
+  <Milira.Difficulty_EasyDesc>A relaxed combat experience, with milira and high-level milians rarely appearing in raids. Suitable for players who want to experience the mod but do not prefer combat content.\n\nThreat points of milira faction raid multiplied by 60%.</Milira.Difficulty_EasyDesc>
+  <Milira.Difficulty_Normal>normal</Milira.Difficulty_Normal>
+  <Milira.Difficulty_NormalDesc>A genuine combat experience, with raid-related content in this mod designed for this difficulty. Suitable for players who have a certain understanding of vanilla combat mechanics and prefer combat.</Milira.Difficulty_NormalDesc>
+  <Milira.Difficulty_Hard>hard</Milira.Difficulty_Hard>
+  <Milira.Difficulty_HardDesc>A challenging combat experience, suitable for players who can already handle milira raids proficiently and are ready to face greater challenges.\n\nThreat points of milira faction raid multiplied by 120%.</Milira.Difficulty_HardDesc>
+  <Milira.Difficulty_Crazy>crazy</Milira.Difficulty_Crazy>
+  <Milira.Difficulty_CrazyDesc>A survival-in-the-cracks combat experience, with milira and high-level milians may appear in earlier raids. Let's say goodbye to the future of your colony.\n\nThreat points of milira faction raid multiplied by 150%.</Milira.Difficulty_CrazyDesc>
+  
+  <!-- 敌对米莉安配件概率 -->
+  <Milira.MilianModifySetting>Milian modify chance</Milira.MilianModifySetting>
+  <Milira.MilianModificationChance_Off>off</Milira.MilianModificationChance_Off>
+  <Milira.MilianModificationChance_OffDesc>Milian in raids do not have any modification components at all.</Milira.MilianModificationChance_OffDesc>
+  <Milira.MilianModificationChance_Small>Low</Milira.MilianModificationChance_Small>
+  <Milira.MilianModificationChance_SmallDesc>Milian in raids have a small number of modification components. Each Milian's component slot has a probability of 0% (at 0 raid points) to 30% (at 10,000 raid points) to be equipped with a modification component as raid points increase.</Milira.MilianModificationChance_SmallDesc>
+  <Milira.MilianModificationChance_Normal>Normal</Milira.MilianModificationChance_Normal>
+  <Milira.MilianModificationChance_NormalDesc>Milian in raids have a normal number of modification components. Each Milian's component slot has a probability of 0% (at 0 raid points) to 50% (at 10,000 raid points) to be equipped with a modification component as raid points increase.</Milira.MilianModificationChance_NormalDesc>
+  <Milira.MilianModificationChance_More>High</Milira.MilianModificationChance_More>
+  <Milira.MilianModificationChance_MoreDesc>Milian in raids have a large number of modification components. Each Milian's component slot has a probability of 0% (at 0 raid points) to 80% (at 10,000 raid points) to be equipped with a modification component as raid points increase.</Milira.MilianModificationChance_MoreDesc>
+  <Milira.MilianModificationChance_Full>Completed</Milira.MilianModificationChance_Full>
+  <Milira.MilianModificationChance_FullDesc>Milian in raids are fully equipped with modification components.</Milira.MilianModificationChance_FullDesc>
+
+  <!-- 米莉安配置界面 -->
+  <Milira.MilianTabEnable_Label>Milian config tab</Milira.MilianTabEnable_Label>
+  <Milira.MilianTabEnable_Desc>choose the available way to open milian config tab.</Milira.MilianTabEnable_Desc>
+  <Milira.MilianTab_Button>button</Milira.MilianTab_Button>
+  <Milira.MilianTab_Menu>menu</Milira.MilianTab_Menu>
+  <Milira.MilianTab_ButtonAndMenu>button and menu</Milira.MilianTab_ButtonAndMenu>
+
+  <!-- Overall -->
+  <MiliraRaceSetting_StoryOverall_Label>Enable Milira storyline</MiliraRaceSetting_StoryOverall_Label>
+  <MiliraRaceSetting_StoryOverall_Desc>Enable Milira storyline.</MiliraRaceSetting_StoryOverall_Desc>
+
+  <!-- Milian Cluster -->
+  <MiliraRaceSetting_MilianClusterInMap_Label>Enable Milian cluster threat events</MiliraRaceSetting_MilianClusterInMap_Label>
+  <MiliraRaceSetting_MilianClusterInMap_Desc>Enable Milian clusters dropping in colony map.</MiliraRaceSetting_MilianClusterInMap_Desc>
+
+  <!-- Milian outpost cluster -->
+  <MiliraRaceSetting_MilianSmallClusterInMap_Label>Enable Milian outpost threat events</MiliraRaceSetting_MilianSmallClusterInMap_Label>
+  <MiliraRaceSetting_MilianSmallClusterInMap_Desc>Enable Milian outpost clusters dropping in colony map.</MiliraRaceSetting_MilianSmallClusterInMap_Desc>
+
+  <MiliraRace_ModSetting_MilianHairColor_Label>Enable dyeing Milian hair</MiliraRace_ModSetting_MilianHairColor_Label>
+  <MiliraRace_ModSetting_MilianHairColor_Desc>If enabled, Milian hair color will change as the faction's mechanoid accent color. Save reloading is required. </MiliraRace_ModSetting_MilianHairColor_Desc>
+
+  <MiliraRace_ModSetting_MilianHairColorOffset_Label>Enable Milian hair color variation</MiliraRace_ModSetting_MilianHairColorOffset_Label>
+  <MiliraRace_ModSetting_MilianHairColorOffset_Desc>If enabled, Milian hair color will have a subtle shift based on the faction’s mechanoid accent color. Save reloading is required.</MiliraRace_ModSetting_MilianHairColorOffset_Desc>
+
+  <MiliraRace_ModSetting_MilianDrawHeadgear_Label>Draw milian headgear</MiliraRace_ModSetting_MilianDrawHeadgear_Label>
+  <MiliraRace_ModSetting_MilianDrawHeadgear_Desc>If enabled, milian headgear will be rendered.</MiliraRace_ModSetting_MilianDrawHeadgear_Desc>
+
+  <MiliraRace_ModSetting_MilianDisableWorksGestate_Label>Initially disable Millian work</MiliraRace_ModSetting_MilianDisableWorksGestate_Label>
+  <MiliraRace_ModSetting_MilianDisableWorksGestate_Desc>If enabled, the initial work settings for the milian made in gestator are set to all work types disabled. Enabling this setting requires completing the "Milian Work Permissions" technology to take effect.</MiliraRace_ModSetting_MilianDisableWorksGestate_Desc>
+
+  <MiliraRace_ModSetting_MilianDifficulty_EquipmentQuality_Label>Milian: Logistics Upgrade</MiliraRace_ModSetting_MilianDifficulty_EquipmentQuality_Label>
+  <MiliraRace_ModSetting_MilianDifficulty_EquipmentQuality_Desc>If enabled, assaulting Mlian would improve quality of their equipment as player’s wealth increases.\n Good at 300,000 wealth.\n Excellent at 600,000 wealth.\n Master at 900,000 wealth.\n Legendary at 1,500,000 wealth.</MiliraRace_ModSetting_MilianDifficulty_EquipmentQuality_Desc>
+
+  <MiliraRace_ModSetting_MilianDifficulty_EquipmentMaterial_Label>Milian: Elite Spawning</MiliraRace_ModSetting_MilianDifficulty_EquipmentMaterial_Label>
+  <MiliraRace_ModSetting_MilianDifficulty_EquipmentMaterial_Desc>If enabled, assaulting Milian would include elite pawn at a chance, the chance is increased as your current threat scale enlarges. \n 2% at 100% threat scale\n 6% at 220% threat scale\n 20% at 500% threat scale.</MiliraRace_ModSetting_MilianDifficulty_EquipmentMaterial_Desc>
+
+  <MiliraRace_ModSetting_MilianDifficulty_Promotion_Label>Mlian: Promotion</MiliraRace_ModSetting_MilianDifficulty_Promotion_Label>
+  <MiliraRace_ModSetting_MilianDifficulty_Promotion_Desc>If enabled, assaulting Milian will have the ability of Promotion.</MiliraRace_ModSetting_MilianDifficulty_Promotion_Desc>
+
+  <MiliraRace_ModSetting_MilianDifficulty_FastPromotion_Label>Milian: Synergistic Promotion </MiliraRace_ModSetting_MilianDifficulty_FastPromotion_Label>
+  <MiliraRace_ModSetting_MilianDifficulty_FastPromotion_Desc>If enabled, assaulting Milian would take 40% lesser time to use Promotion. </MiliraRace_ModSetting_MilianDifficulty_FastPromotion_Desc>
+
+  <MiliraRace_ModSetting_MilianDifficulty_WidePromotion_Label>Milian: Wide Range Promotion </MiliraRace_ModSetting_MilianDifficulty_WidePromotion_Label>
+  <MiliraRace_ModSetting_MilianDifficulty_WidePromotion_Desc>If enabled, assaulting Milian would have an infinite range to receive Promotion.</MiliraRace_ModSetting_MilianDifficulty_WidePromotion_Desc>
+
+  <MiliraRace_ModSetting_MilianDifficulty_ClusterResonator_Label>Milian Cluster: Resonator</MiliraRace_ModSetting_MilianDifficulty_ClusterResonator_Label>
+  <MiliraRace_ModSetting_MilianDifficulty_ClusterResonator_Desc>If enabled, resonator could appear in Milian cluster.</MiliraRace_ModSetting_MilianDifficulty_ClusterResonator_Desc>
+  
+  <MiliraRace_ModSetting_MilianDifficulty_ClusterFortress_Label>Milian Cluster: Fortress </MiliraRace_ModSetting_MilianDifficulty_ClusterFortress_Label>
+  <MiliraRace_ModSetting_MilianDifficulty_ClusterFortress_Desc>If enabled, maximum points of Milira cluster would alter to 50,000 rather than previous 10,000. (mods that’ve removed the raid points limit shall be used)</MiliraRace_ModSetting_MilianDifficulty_ClusterFortress_Desc>
+
+
+  <MiliraRace_ModSetting_MiliraDifficulty_TirelessFly_Label>Milira: Indefatigable Flight</MiliraRace_ModSetting_MiliraDifficulty_TirelessFly_Label>
+  <MiliraRace_ModSetting_MiliraDifficulty_TirelessFly_Desc>If enabled, assaulting Milira consumes no food nor rest needs when using Hyper-velocity Flight.</MiliraRace_ModSetting_MiliraDifficulty_TirelessFly_Desc>
+
+</LanguageData>

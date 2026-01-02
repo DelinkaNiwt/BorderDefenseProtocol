@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 聚能射线狙击枪 -->
+  <Milira_ConvergentRaySniper.label>聚能射线狙击枪</Milira_ConvergentRaySniper.label>
+  <!-- EN: 汇聚能量发射高能射线的便携式发射器，能够精准攻击远处的目标。存有能量时消耗全部能量发射集束射线。 -->
+  <Milira_ConvergentRaySniper.description>汇聚能量发射高能射线的便携式发射器，能够精准攻击远处的目标。存有能量时消耗全部能量发射集束射线。</Milira_ConvergentRaySniper.description>
+  <!-- EN: charged mode -->
+  <Milira_ConvergentRaySniper.comps.CompRangeWeaponVerbSwitch_EnergyPassive.verbProps.label>充能模式</Milira_ConvergentRaySniper.comps.CompRangeWeaponVerbSwitch_EnergyPassive.verbProps.label>
+  <!-- EN: stock -->
+  <Milira_ConvergentRaySniper.tools.stock.label>枪托</Milira_ConvergentRaySniper.tools.stock.label>
+  <!-- EN: barrel -->
+  <Milira_ConvergentRaySniper.tools.barrel.label>枪管</Milira_ConvergentRaySniper.tools.barrel.label>
+  <!-- EN: 聚能射线狙击枪 -->
+  <Milira_ConvergentRaySniper.verbs.Verb_ChargeShootMultiple_FullCharge.label>聚能射线狙击枪</Milira_ConvergentRaySniper.verbs.Verb_ChargeShootMultiple_FullCharge.label>
+  
+  <!-- EN: 脉冲激光机枪 -->
+  <Milira_LaserMG.label>脉冲激光机枪</Milira_LaserMG.label>
+  <!-- EN: 重型的脉冲激光发射器，能够发射激光扫射敌人。存有能量时能够不间断持续开火直到能量耗尽。能量为空时无法进行射击。 -->
+  <Milira_LaserMG.description>重型的脉冲激光发射器，能够发射激光扫射敌人。存有能量时能够持续射击直到能量耗尽。能量为空时无法进行射击。</Milira_LaserMG.description>
+  <!-- EN: stock -->
+  <Milira_LaserMG.tools.stock.label>枪托</Milira_LaserMG.tools.stock.label>
+  <!-- EN: barrel -->
+  <Milira_LaserMG.tools.barrel.label>枪管</Milira_LaserMG.tools.barrel.label>
+  <!-- EN: 脉冲激光机枪 -->
+  <Milira_LaserMG.verbs.Verb_ChargeShootSustained.label>脉冲激光机枪</Milira_LaserMG.verbs.Verb_ChargeShootSustained.label>
+  
+  <!-- EN: 射线手枪 -->
+  <Milira_RayPistol.label>射线手枪</Milira_RayPistol.label>
+  <!-- EN: 轻便的短程低功率射线发射器，操作简单易于瞄准，不怎么需要训练也可以使用，因此也成为许多非战斗人员的防身用武器。存有能量时预热时间大幅度缩短并且能够连续射击。 -->
+  <Milira_RayPistol.description>轻便的短程低功率射线发射器，操作简单易于瞄准，不怎么需要训练也可以使用，因此也成为许多非战斗人员的防身用武器。存有能量时预热时间大幅度缩短并且能够连续射击。</Milira_RayPistol.description>
+  <!-- EN: charged mode -->
+  <Milira_RayPistol.comps.CompRangeWeaponVerbSwitch_EnergyPassive.verbProps.label>充能模式</Milira_RayPistol.comps.CompRangeWeaponVerbSwitch_EnergyPassive.verbProps.label>
+  <!-- EN: stock -->
+  <Milira_RayPistol.tools.stock.label>枪托</Milira_RayPistol.tools.stock.label>
+  <!-- EN: barrel -->
+  <Milira_RayPistol.tools.barrel.label>枪管</Milira_RayPistol.tools.barrel.label>
+  <!-- EN: 射线手枪 -->
+  <Milira_RayPistol.verbs.Verb_ChargeShoot.label>射线手枪</Milira_RayPistol.verbs.Verb_ChargeShoot.label>
+  
+  <!-- EN: 射线步枪 -->
+  <Milira_RayRifle.label>射线步枪</Milira_RayRifle.label>
+  <!-- EN: 能够连续发射脉冲射线的便携式发射器，在各种环境里都有良好的战斗表现。存有能量时预热时间大幅度缩短并且能够连续射击。 -->
+  <Milira_RayRifle.description>能够连续发射脉冲射线的便携式发射器，在各种环境里都有良好的战斗表现。存有能量时预热时间大幅度缩短并且能够连续射击。</Milira_RayRifle.description>
+  <!-- EN: charged mode -->
+  <Milira_RayRifle.comps.CompRangeWeaponVerbSwitch_EnergyPassive.verbProps.label>充能模式</Milira_RayRifle.comps.CompRangeWeaponVerbSwitch_EnergyPassive.verbProps.label>
+  <!-- EN: stock -->
+  <Milira_RayRifle.tools.stock.label>枪托</Milira_RayRifle.tools.stock.label>
+  <!-- EN: barrel -->
+  <Milira_RayRifle.tools.barrel.label>枪管</Milira_RayRifle.tools.barrel.label>
+  <!-- EN: 射线步枪 -->
+  <Milira_RayRifle.verbs.Verb_ChargeShoot.label>射线步枪</Milira_RayRifle.verbs.Verb_ChargeShoot.label>
+  
+  <!-- EN: ray -->
+  <MiliraBullet_LaserMG.label>射线</MiliraBullet_LaserMG.label>
+  
+  <!-- EN: ray -->
+  <MiliraBullet_RayPistol.label>射线</MiliraBullet_RayPistol.label>
+  
+  <!-- EN: ray -->
+  <MiliraBullet_RayRifle.label>射线</MiliraBullet_RayRifle.label>
+  
+  <!-- EN: ray -->
+  <MiliraBullet_RaySniper.label>射线</MiliraBullet_RaySniper.label>
+  
+</LanguageData>

@@ -1,0 +1,190 @@
+using System;
+using System.Collections.Generic;
+using System.Xml;
+using Verse;
+
+namespace AlienRace;
+
+public class Scribe_NestedCollections
+{
+	public static void Look<TK, TV>(ref Dictionary<TK, HashSet<TV>> dict, string label, LookMode keyLookMode, LookMode valueLookMode, bool forceSave = false)
+	{
+		List<TK> keysWorkingList = null;
+		List<HashSet<TV>> valuesWorkingList = null;
+		if (Scribe.EnterNode(label))
+		{
+			try
+			{
+				if (Scribe.mode == LoadSaveMode.Saving && dict == null)
+				{
+					Scribe.saver.WriteAttribute("IsNull", "True");
+				}
+				else
+				{
+					if (Scribe.mode == LoadSaveMode.LoadingVars)
+					{
+						XmlAttribute xmlAttribute = Scribe.loader.curXmlParent.Attributes["IsNull"];
+						if (xmlAttribute != null && xmlAttribute.Value.ToLower() == "true")
+						{
+							dict = null;
+						}
+						else
+						{
+							dict = new Dictionary<TK, HashSet<TV>>();
+						}
+					}
+					if (Scribe.mode == LoadSaveMode.Saving || Scribe.mode == LoadSaveMode.LoadingVars)
+					{
+						keysWorkingList = new List<TK>();
+						valuesWorkingList = new List<HashSet<TV>>();
+						if (Scribe.mode == LoadSaveMode.Saving && dict != null)
+						{
+							foreach (KeyValuePair<TK, HashSet<TV>> item in dict)
+							{
+								keysWorkingList.Add(item.Key);
+								valuesWorkingList.Add(item.Value);
+							}
+						}
+					}
+					if (Scribe.mode == LoadSaveMode.Saving || dict != null)
+					{
+						Scribe_Collections.Look(ref keysWorkingList, "keys", keyLookMode);
+						Look(ref valuesWorkingList, "values", valueLookMode);
+					}
+					if (Scribe.mode == LoadSaveMode.Saving)
+					{
+						if (keysWorkingList != null)
+						{
+							keysWorkingList.Clear();
+							keysWorkingList = null;
+						}
+						if (valuesWorkingList != null)
+						{
+							valuesWorkingList.Clear();
+							valuesWorkingList = null;
+						}
+					}
+					bool flag = keyLookMode == LookMode.Reference || valueLookMode == LookMode.Reference;
+					if (((flag && Scribe.mode == LoadSaveMode.ResolvingCrossRefs) || (!flag && Scribe.mode == LoadSaveMode.LoadingVars)) && dict != null)
+					{
+						if (keysWorkingList == null)
+						{
+							Log.Error("Cannot fill dictionary because there are no keys. label=" + label);
+						}
+						else if (valuesWorkingList == null)
+						{
+							Log.Error("Cannot fill dictionary because there are no values. label=" + label);
+						}
+						else
+						{
+							if (keysWorkingList.Count != valuesWorkingList.Count)
+							{
+								Log.Error("Keys count does not match the values count while loading a dictionary (maybe keys and values were resolved during different passes?). Some elements will be skipped. keys=" + keysWorkingList.Count + ", values=" + valuesWorkingList.Count + ", label=" + label);
+							}
+							int num = Math.Min(keysWorkingList.Count, valuesWorkingList.Count);
+							for (int i = 0; i < num; i++)
+							{
+								if (keysWorkingList[i] == null)
+								{
+									Log.Error(string.Concat("Null key while loading dictionary of ", typeof(TK), " and ", typeof(TV), ". label=", label));
+								}
+								else
+								{
+									try
+									{
+										dict.Add(keysWorkingList[i], valuesWorkingList[i]);
+									}
+									catch (OutOfMemoryException)
+									{
+										throw;
+									}
+									catch (Exception ex2)
+									{
+										Log.Error("Exception in LookDictionary(label=" + label + "): " + ex2);
+									}
+								}
+							}
+						}
+					}
+					if (Scribe.mode == LoadSaveMode.PostLoadInit)
+					{
+						keysWorkingList?.Clear();
+						valuesWorkingList?.Clear();
+					}
+				}
+				return;
+			}
+			finally
+			{
+				Scribe.ExitNode();
+			}
+		}
+		if (Scribe.mode == LoadSaveMode.LoadingVars)
+		{
+			dict = null;
+		}
+	}
+
+	public static void Look<T>(ref List<HashSet<T>> list, string label, LookMode lookMode = LookMode.Undefined, params object[] ctorArgs)
+	{
+		if (lookMode == LookMode.Undefined && !Scribe_Universal.TryResolveLookMode(typeof(T), out lookMode))
+		{
+			Log.Error(string.Concat("LookList call with a list of ", typeof(T), " must have lookMode set explicitly."));
+		}
+		else
+		{
+			if (!Scribe.EnterNode(label))
+			{
+				return;
+			}
+			try
+			{
+				switch (Scribe.mode)
+				{
+				case LoadSaveMode.Saving:
+					if (list == null)
+					{
+						Scribe.saver.WriteAttribute("IsNull", "True");
+						break;
+					}
+					{
+						foreach (HashSet<T> hashSet in list)
+						{
+							HashSet<T> li2 = hashSet;
+							Scribe_Collections.Look(ref li2, "li");
+						}
+						break;
+					}
+				case LoadSaveMode.LoadingVars:
+				{
+					XmlNode curXmlParent = Scribe.loader.curXmlParent;
+					XmlAttribute xmlAttribute = curXmlParent.Attributes["IsNull"];
+					if (xmlAttribute != null && xmlAttribute.Value.ToLower() == "true")
+					{
+						if (lookMode == LookMode.Reference)
+						{
+							Scribe.loader.crossRefs.loadIDs.RegisterLoadIDListReadFromXml(null, null);
+						}
+						list = null;
+						break;
+					}
+					list = new List<HashSet<T>>(curXmlParent.ChildNodes.Count);
+					{
+						foreach (XmlNode _ in curXmlParent.ChildNodes)
+						{
+							HashSet<T> li = null;
+							Scribe_Collections.Look(ref li, "li");
+							list.Add(li);
+						}
+						break;
+					}
+				}
+				}
+			}
+			finally
+			{
+				Scribe.ExitNode();
+			}
+		}
+	}
+}

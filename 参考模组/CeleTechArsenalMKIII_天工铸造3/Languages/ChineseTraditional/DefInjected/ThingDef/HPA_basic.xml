@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Type XG-A powered armor -->
+  <CMC_HPA_Base.label>玄光-A型動力甲 基礎型</CMC_HPA_Base.label>
+  <!-- EN: Type XG-A is a heavy powered armor reinforced with neutronium armor plates, enable it to resist firepower from laser to projectiles. Its force shield with high recharge speed can provide sufficient protection against light-weapon projectiles. -->
+  <CMC_HPA_Base.description>安裝了零素裝甲板的重型動力甲，可以防護能量和動能武器。其安裝的力場護盾可以阻擋絕大多數輕武器射擊，同時無視EMP效果。</CMC_HPA_Base.description>
+  
+</LanguageData>

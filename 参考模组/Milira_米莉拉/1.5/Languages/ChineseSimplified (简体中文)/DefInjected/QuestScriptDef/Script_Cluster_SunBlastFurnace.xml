@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN:
+    <li>questDescription->A Milira ground workstation under our long-term monitoring has begun evacuation recently. The stationed Milira have left carrying most of the supplies, leaving behind a Milian cluster on guard for a sunblast furnace that hasn’t departed yet. This is the only chance to take action unto the sunblast furnace.\n\n Our objective is to destroy this furnace, never  leave a chance for it to return to the celestial city. Have you interest on the furnace, you can send your men into this battle and the furnace shall be at your disposal.\n\n This shall be a formidable engagement. The remaining Milian cluster will be at a considerable size though we have chosen a period for a most diminished defense force. Field artillery mobilized nearby will employ howitzers to conduct a saturated bombardment of the pre-scouted Milian cluster coordinate area. Artillery support will only be sustained for three rounds, leaving abundant time for retreating in case the Milian launch a counter-offensive. Subsequent operations demand our concerted efforts.\n\n The location of the workstation has been synchronized on your map. Pleaz make a prompt decision, as opportunities like this are rare. We will await your response within the allotted timeframe.\n\n This mission will elevate the Milian threat assessment.</li>
+  -->
+  <Milira_Cluster_SunBlastFurnace.questDescriptionRules.rulesStrings>
+    <li>questDescription->我们监视已久的一处米莉拉地面工作站已于近日开始撤离地面，驻守站点的米莉拉已经携带大部分物资先行离开，留下了一个米莉安战斗集群守护尚未搬离的太阳熔炉，这是对这座太阳熔炉展开行动的唯一机会。\n\n我们此次行动目的是摧毁这座太阳熔炉，决不能让它回到米莉拉的云端都市。如果你对太阳熔炉感兴趣，可以派遣队伍加入战场，战斗结束后这座熔炉可以交由你处置。\n\n这将是一场艰难的战斗。虽然我们已经选择了在米莉拉防守最为薄弱的时间段内展开进攻，但留守的米莉安集群仍然具有相当规模。附近调集的野战炮兵将使用榴弹炮对预先侦查标记的米莉安集群坐标区域展开饱和式炮击以支援这次行动。炮击支援最多只能持续三轮，否则炮营无法在米莉拉展开反击前安全撤退。之后的作战需要我们双方的共同努力。\n\n工作站的位置已同步到你方地图。请尽快做出决定，这样的机会并不多；我们会在允许的时间范围内等待你的答复。\n\n该任务会增加米莉拉威胁程度评估。</li>
+  </Milira_Cluster_SunBlastFurnace.questDescriptionRules.rulesStrings>
+  <!-- EN:
+    <li>questName->The Sunblast Furnace Compaign</li>
+  -->
+  <Milira_Cluster_SunBlastFurnace.questNameRules.rulesStrings>
+    <li>questName->太阳熔炉攻防战</li>
+  </Milira_Cluster_SunBlastFurnace.questNameRules.rulesStrings>
+  
+</LanguageData>

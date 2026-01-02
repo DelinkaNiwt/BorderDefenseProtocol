@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <PawnTableDef>
+    <defName>Milian_ConfigTable</defName>
+    <workerClass>PawnTable_Mechs</workerClass>
+    <columns>
+      <li>LabelWithIcon</li>
+      <li>Milian_HairColor</li>
+      <li>GapSmall</li>
+      <li>Milian_Equipment</li>
+      <li>GapSmall</li>
+      <li>Ancot_Apparel</li>
+      <li>GapTiny</li>
+      <li>Milian_AutoSuitUp</li>
+      <li>GapTiny</li>
+      <li>Overseer</li>
+      <li>ControlGroup</li>
+      <li>RemainingSpace</li>
+    </columns>
+  </PawnTableDef>
+
+  <PawnTableDef>
+    <defName>Milian_WorkSetting</defName>
+    <workerClass>PawnTable_Mechs</workerClass>
+    <columns>
+      <li>LabelWithIcon</li>
+      <li>Overseer</li>
+      <li>Milian_BillWorkerDisplay</li>
+      <li>CopyPasteWorkPriorities</li>
+      <li>RemainingSpace</li>
+    </columns>
+    <modExtensions>
+      <li Class="AncotLibrary.ModExtension_WorkTypeColumn"/>
+    </modExtensions>
+  </PawnTableDef>
+
+</Defs>

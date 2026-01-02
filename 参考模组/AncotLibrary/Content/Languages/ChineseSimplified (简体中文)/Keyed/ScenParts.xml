@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+  <!-- EN: Quest created -->
+  <Ancot.ScenPart_CreateQuest>已创建以下随机任务</Ancot.ScenPart_CreateQuest>
+  <!-- EN: Start with map -->
+  <Ancot.ScenPart_ForcedStartMap>以固定地图开局</Ancot.ScenPart_ForcedStartMap>
+
+
+</LanguageData>

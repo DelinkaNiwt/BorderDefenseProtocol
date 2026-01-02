@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <StatDef Name="Ancot_AerocraftStat" Abstract="true">
+    <category>Ancot_Aerocraft</category>
+    <showIfUndefined>false</showIfUndefined>
+  </StatDef>
+
+  <StatDef ParentName="Ancot_AerocraftStat">
+    <defName>Ancot_Aerocraft_MaxSpeed</defName>
+    <label>maximum speed</label>
+    <description>The maximum speed of this aerocraft.</description>
+    <defaultBaseValue>0</defaultBaseValue>
+    <minValue>0</minValue>
+    <toStringStyle>FloatOne</toStringStyle>
+    <toStringStyle>FloatTwo</toStringStyle>
+    <formatString>{0} c/s</formatString>
+    <displayPriorityInCategory>1000</displayPriorityInCategory>
+  </StatDef>
+
+  <StatDef ParentName="Ancot_AerocraftStat">
+    <defName>Ancot_Aerocraft_MinTurnRadius</defName>
+    <label>minimum turn radius</label>
+    <description>The minimum turn radius required for an aerocraft to complete a turn.</description>
+    <defaultBaseValue>0</defaultBaseValue>
+    <minValue>0</minValue>
+    <toStringStyle>FloatOne</toStringStyle>
+    <displayPriorityInCategory>990</displayPriorityInCategory>
+  </StatDef>
+
+  <StatDef ParentName="Ancot_AerocraftStat">
+    <defName>Ancot_Aerocraft_ArmorRating</defName>
+    <label>Armor</label>
+    <description>The protection given against damage.\n\nWhen taking damage, if the attacking weapon’s armor penetration value is greater than or equal to the armor rating, the full damage is applied. Otherwise, the damage is reduced by a percentage equal to the difference between the armor rating and the penetration value.\n\nFor example, with an attack that has 10% armor penetration, if the armor rating is 90%, the attack will only deal 20% of its original damage to the aircraft.</description>
+    <defaultBaseValue>0</defaultBaseValue>
+    <minValue>0</minValue>
+    <maxValue>10</maxValue>
+    <toStringStyle>PercentOne</toStringStyle>
+    <displayPriorityInCategory>980</displayPriorityInCategory>
+  </StatDef>
+
+
+</Defs>

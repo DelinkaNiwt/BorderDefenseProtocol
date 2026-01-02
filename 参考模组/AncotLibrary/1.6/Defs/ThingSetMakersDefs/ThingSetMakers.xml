@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingSetMakerDef>
+    <defName>Ancot_TraderStockCustom</defName>
+    <root Class="AncotLibrary.ThingSetMaker_TraderStockCustom">
+      <fixedParams>
+        <qualityGenerator>Trader</qualityGenerator>
+      </fixedParams>
+      <thingsIgnoreTradeability>
+        <li MayRequire="Ludeon.RimWorld.Odyssey">Fish_Salmon</li>
+        <li MayRequire="Ludeon.RimWorld.Odyssey">Fish_Bass</li>
+        <li MayRequire="Ludeon.RimWorld.Odyssey">Fish_Tilapia</li>
+        <li MayRequire="Ludeon.RimWorld.Odyssey">Fish_Cod</li>
+        <li MayRequire="Ludeon.RimWorld.Odyssey">Fish_Bluefish</li>
+        <li MayRequire="Ludeon.RimWorld.Odyssey">Fish_Guppy</li>
+        <li MayRequire="Ludeon.RimWorld.Odyssey">Fish_Frostfish</li>
+        <li MayRequire="Ludeon.RimWorld.Odyssey">Fish_Catfish</li>
+        <li MayRequire="Ludeon.RimWorld.Odyssey">Fish_Piranha</li>
+        <li MayRequire="Ludeon.RimWorld.Odyssey">Fish_Dogfish</li>
+        <li MayRequire="Ludeon.RimWorld.Odyssey">Fish_Marlin</li>
+        <li MayRequire="Ludeon.RimWorld.Odyssey">Fish_Tuna</li>
+        <li MayRequire="Ludeon.RimWorld.Odyssey">Fish_Flounder</li>
+      </thingsIgnoreTradeability>
+    </root>
+  </ThingSetMakerDef>
+
+</Defs>

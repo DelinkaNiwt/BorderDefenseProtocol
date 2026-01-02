@@ -1,0 +1,77 @@
+<Defs>
+<ThingDef>
+    <thingClass>TOT_DLL_test.Building_CMCTempControl</thingClass>
+    <category>Building</category>
+    <minifiedDef>MinifiedThing</minifiedDef>
+	<selectable>true</selectable>
+	<tickerType>Rare</tickerType>
+    <drawerType>RealtimeOnly</drawerType>
+    <defName>CMC_WallTempController</defName>
+    <label>I.T.C.V.S.</label>
+    <description>A third-generation space-grade thermal regulation device integrating a Quantum Entropy Regulation Core. Achieves molecular-level precision temperature control within ±0.1°C through phase-change nanofluid technology, while its resonant cavity initiates self-destruct protocols to prevent chain reactions when ambient temperatures exceed -100°C to 100°C thresholds.</description>
+    <rotatable>true</rotatable>
+    <graphicData>
+      <texPath>Things/Buildings/CMCTemp</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawOffsetNorth>(0,0,0.4)</drawOffsetNorth>
+      <drawOffsetSouth>(0,0,-0.4)</drawOffsetSouth>
+      <drawOffsetWest>(-0.4,0,0)</drawOffsetWest>
+      <drawOffsetEast>(0.4,0,0)</drawOffsetEast>
+      <damageData>
+        <enabled>false</enabled>
+      </damageData>
+    </graphicData>
+    <uiIconPath>Things/Buildings/CMCTemp_north</uiIconPath>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <costList>
+      <Steel>15</Steel>
+	  <Plasteel>30</Plasteel>
+      <ComponentIndustrial>3</ComponentIndustrial>
+	  <ComponentSpacer>1</ComponentSpacer>
+	  <Silver>50</Silver>
+    </costList>
+    <statBases>
+      <WorkToBuild>330</WorkToBuild>
+      <MaxHitPoints>300</MaxHitPoints>
+      <Mass>2</Mass>
+    </statBases>
+    <uiOrder>2991</uiOrder>
+    <passability>Standable</passability>
+    <terrainAffordanceNeeded IsNull="True" />
+    <pathCost>0</pathCost>
+    <overrideMinifiedRot>South</overrideMinifiedRot>
+    <minifiedDrawOffset>(0, 0, 0.2)</minifiedDrawOffset>
+    <building>
+      <isEdifice>false</isEdifice>
+      <isAttachment>true</isAttachment>
+    </building>
+    <placeWorkers>
+      <li>Placeworker_AttachedToWall</li>
+    </placeWorkers>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>240</basePowerConsumption>
+        <powerUpgrades>
+          <li>
+            <researchProject>MicroelectronicsBasics</researchProject>
+            <factor>0.5</factor>
+          </li>
+        </powerUpgrades>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>3</glowRadius>
+        <glowColor>(255,255,255,0)</glowColor>
+      </li>
+	  <li Class="CompProperties_TempControl"></li>
+	  <li Class="CompProperties_Breakdownable"></li>
+    </comps>
+	<designationCategory>CMC_DefensenProduction</designationCategory>
+	<thingCategories>
+      <li>BuildingsFurniture</li>
+    </thingCategories>
+	<researchPrerequisites>
+      <li>MicroelectronicsBasics</li>
+    </researchPrerequisites>
+  </ThingDef>
+</Defs>

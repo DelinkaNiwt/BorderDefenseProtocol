@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Tian Quan chip -->
+  <TianQuanChip.label>【天權】輔助晶元</TianQuanChip.label>
+  <!-- EN: A brain implant which boosts combat abilities. -->
+  <TianQuanChip.description>能自動適應使用者神經系統的晶元，以大幅提高其意識和學習能力。</TianQuanChip.description>
+  
+</LanguageData>

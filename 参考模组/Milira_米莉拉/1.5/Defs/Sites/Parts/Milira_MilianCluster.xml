@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- ===========集群=============================================================================== -->
+  <!-- 激活的 -->
+  <SitePartDef>
+    <defName>Milian_ClusterAwake</defName>
+    <label>Milian Cluster</label>
+    <description>A Milian cluster in this area.</description>
+    <workerClass>Milira.SitePartWorker_MilianCluster_Hostile</workerClass>
+    <siteTexture>World/WorldObjects/Sites/GenericSite</siteTexture>
+    <expandingIconTexture>Milira/Icon/MilianCluster</expandingIconTexture>
+    <arrivedLetter>This region hosts a comprehensive Milian combat cluster that includes combat units and various support facilities, bunkers.</arrivedLetter>
+    <arrivedLetterDef>NegativeEvent</arrivedLetterDef>
+    <wantsThreatPoints>true</wantsThreatPoints>
+    <minThreatPoints>400</minThreatPoints>
+    <minMapSize>(150,1,150)</minMapSize>
+    <tags>
+      <li>Milian_ClusterAwake</li>
+    </tags>
+  </SitePartDef>
+
+  <GenStepDef>
+    <defName>Milian_ClusterAwake</defName>
+    <linkWithSite>Milian_ClusterAwake</linkWithSite>
+    <order>620</order>
+    <genStep Class="Milira.GenStep_MilianCluster">
+      <forceNoConditionCauser>true</forceNoConditionCauser>
+      <extraRangeToRectOfInterest>0</extraRangeToRectOfInterest>
+      <dormant>false</dormant>
+    </genStep>
+  </GenStepDef>
+
+  <!-- 休眠的 -->
+  <SitePartDef>
+    <defName>Milian_ClusterDormant</defName>
+    <label>Milian Cluster</label>
+    <description>A Milian cluster in this area.</description>
+    <workerClass>Milira.SitePartWorker_MilianCluster_Hostile</workerClass>
+    <siteTexture>World/WorldObjects/Sites/GenericSite</siteTexture>
+    <expandingIconTexture>Milira/Icon/MilianCluster</expandingIconTexture>
+    <arrivedLetter>This region hosts a comprehensive Milian combat cluster that includes combat units and various support facilities, bunkers.</arrivedLetter>
+    <arrivedLetterDef>NegativeEvent</arrivedLetterDef>
+    <wantsThreatPoints>true</wantsThreatPoints>
+    <minThreatPoints>400</minThreatPoints>
+    <minMapSize>(150,1,150)</minMapSize>
+    <tags>
+      <li>Milian_ClusterDormant</li>
+    </tags>
+  </SitePartDef>
+
+  <GenStepDef>
+    <defName>Milian_ClusterDormant</defName>
+    <linkWithSite>Milian_ClusterDormant</linkWithSite>
+    <order>621</order>
+    <genStep Class="Milira.GenStep_MilianCluster">
+      <forceNoConditionCauser>true</forceNoConditionCauser>
+      <extraRangeToRectOfInterest>0</extraRangeToRectOfInterest>
+      <dormant>true</dormant>
+    </genStep>
+  </GenStepDef>
+
+
+  <!-- 有教会轰炸的集群 -->
+  <SitePartDef>
+    <defName>Milian_ClusterAwakeWithBombardment</defName>
+    <label>Milian Cluster</label>
+    <description>A Milian cluster in this area.</description>
+    <workerClass>Milira.SitePartWorker_MilianCluster_Hostile</workerClass>
+    <siteTexture>World/WorldObjects/Sites/GenericSite</siteTexture>
+    <expandingIconTexture>Milira/Icon/MilianCluster</expandingIconTexture>
+    <arrivedLetter>This region hosts a comprehensive Milian combat cluster that includes combat units and various support facilities, bunkers.</arrivedLetter>
+    <arrivedLetterDef>NegativeEvent</arrivedLetterDef>
+    <wantsThreatPoints>true</wantsThreatPoints>
+    <minThreatPoints>400</minThreatPoints>
+    <minMapSize>(175,1,175)</minMapSize>
+    <tags>
+      <li>Milian_ClusterAwakeWithBombardment</li>
+    </tags>
+  </SitePartDef>
+
+  <GenStepDef>
+    <defName>Milian_ClusterAwakeWithBombardment</defName>
+    <linkWithSite>Milian_ClusterAwakeWithBombardment</linkWithSite>
+    <order>622</order>
+    <genStep Class="Milira.GenStep_MilianClusterAwakeWithBombardment">
+      <forceNoConditionCauser>true</forceNoConditionCauser>
+      <extraRangeToRectOfInterest>0</extraRangeToRectOfInterest> <!-- Close to the thing we are guarding -->
+    </genStep>
+  </GenStepDef>
+
+</Defs>

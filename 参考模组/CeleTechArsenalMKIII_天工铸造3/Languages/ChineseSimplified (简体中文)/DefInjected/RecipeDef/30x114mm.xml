@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: make CMC_30x114mm APDS cartridge x500 -->
+  <MakeAmmo_CMC_30x114mm_APDS.label>TODO</MakeAmmo_CMC_30x114mm_APDS.label>
+  <!-- EN: Craft 500 CMC_30x114mm APDS cartridges. -->
+  <MakeAmmo_CMC_30x114mm_APDS.description>TODO</MakeAmmo_CMC_30x114mm_APDS.description>
+  <!-- EN: Making CMC_30x114mm APDS cartridges. -->
+  <MakeAmmo_CMC_30x114mm_APDS.jobString>TODO</MakeAmmo_CMC_30x114mm_APDS.jobString>
+  
+</LanguageData>

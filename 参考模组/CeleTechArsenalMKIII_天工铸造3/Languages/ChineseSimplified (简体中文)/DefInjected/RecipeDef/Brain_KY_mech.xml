@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: install KY-01 chip -->
+  <InstallKY.label>植入【开阳】战地机械师芯片</InstallKY.label>
+  <!-- EN: Install a Kai Yang chip. -->
+  <InstallKY.description>植入【开阳】战地机械师芯片</InstallKY.description>
+  <!-- EN: Installing Kai Yang chip. -->
+  <InstallKY.jobString>植入【开阳】战地机械师芯片</InstallKY.jobString>
+  
+  <!-- EN: remove KY-01 chip -->
+  <RemoveKY.label>移除【开阳】战地机械师芯片</RemoveKY.label>
+  <!-- EN: Remove the Kai Yang chip. -->
+  <RemoveKY.description>移除【开阳】战地机械师芯片</RemoveKY.description>
+  <!-- EN: Removing Kai Yang chip. -->
+  <RemoveKY.jobString>移除【开阳】战地机械师芯片</RemoveKY.jobString>
+  
+</LanguageData>

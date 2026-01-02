@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>Milira_MilianReactor</defName>
+    <label>Milian power core</label>
+    <description>The core power component of the Milian.</description>
+    <graphicData>
+      <texPath>Milira/Item/Resource/MilianReactor</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <!-- <drawSize>1.2</drawSize> -->
+    </graphicData>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Standard_Drop</soundInteract>
+    <soundDrop>Standard_Drop</soundDrop>
+    <tickerType>Normal</tickerType>
+    <stackLimit>5</stackLimit>
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <MarketValue>500</MarketValue>
+      <WorkToMake>2400</WorkToMake>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Mass>0.9</Mass>
+      <Flammability>0.2</Flammability>
+    </statBases>
+    <costList>
+      <Milira_SunPlateSteel>25</Milira_SunPlateSteel>
+      <Milira_SunLightFuel>50</Milira_SunLightFuel>
+      <ComponentIndustrial>3</ComponentIndustrial>
+    </costList>
+    <recipeMaker>
+      <workSpeedStat>DrugSynthesisSpeed</workSpeedStat>
+      <workSkill>Crafting</workSkill>
+      <recipeUsers>
+        <li>Milira_UniversalBench</li>
+      </recipeUsers>
+      <researchPrerequisite>Milira_MilianTech_Gestator</researchPrerequisite>
+      <skillRequirements>
+        <Crafting>8</Crafting>
+        <Intellectual>6</Intellectual>
+      </skillRequirements>
+      <bulkRecipeCount>5</bulkRecipeCount>
+    </recipeMaker>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+    <tradeability>Sellable</tradeability>
+    <techLevel>Spacer</techLevel>
+    <tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <explosiveRadius>7.9</explosiveRadius>
+        <explosiveDamageType>BombSuper</explosiveDamageType>
+        <explosiveExpandPerStackcount>0.4</explosiveExpandPerStackcount>
+        <startWickHitPointsPercent>0.7</startWickHitPointsPercent>
+        <chanceToStartFire>0.22</chanceToStartFire>
+        <damageFalloff>true</damageFalloff>
+        <explosionEffect>GiantExplosion</explosionEffect>
+        <explosionSound>Explosion_GiantBomb</explosionSound>
+        <wickTicks>60~120</wickTicks>
+      </li>
+    </comps>
+  </ThingDef>
+
+
+</Defs>

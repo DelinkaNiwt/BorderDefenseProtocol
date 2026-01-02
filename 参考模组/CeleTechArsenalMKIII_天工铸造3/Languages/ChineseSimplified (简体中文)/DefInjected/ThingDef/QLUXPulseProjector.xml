@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: <color=#FFAA00><i>QLU-X-ZHII pulse cannon</i></color> -->
+  <QLUX_Pulse_Projector_Persona.label>&lt;color=#FFAA00>&lt;i>【祝融】等离子炮Δ&lt;/i>&lt;/color></QLUX_Pulse_Projector_Persona.label>
+  <!-- EN: A prototype plasma cannon originated of QLU-X, with enhanced firepower. Its energy pulse can also emit EMP burst upon contact. -->
+  <QLUX_Pulse_Projector_Persona.description>QLU-X是21世纪80年代研发的单兵射流攻城炮，因其强大火力而被冠以火神祝融之名。 较长射程和高精度可以让其轻松压制敌阵地、防御工事和低机动目标。在瞄准目标前需要预热数秒，而后将释放出毁灭性的能量。其爆炸范围内的一切将被气化。</QLUX_Pulse_Projector_Persona.description>
+  <!-- EN: barrel -->
+  <QLUX_Pulse_Projector_Persona.tools.barrel.label>炮管</QLUX_Pulse_Projector_Persona.tools.barrel.label>
+  <!-- EN: <color=#FFAA00><i>QLU-X-ZHII pulse cannon</i></color> -->
+  <QLUX_Pulse_Projector_Persona.verbs.Verb_Shoot.label>【祝融】等离子炮Δ</QLUX_Pulse_Projector_Persona.verbs.Verb_Shoot.label>
+  
+</LanguageData>

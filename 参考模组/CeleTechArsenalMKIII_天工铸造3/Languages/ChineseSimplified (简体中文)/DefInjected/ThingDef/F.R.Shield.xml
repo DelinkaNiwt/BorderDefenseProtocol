@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: force field generator -->
+  <CMCShieldGenerator.label>“天罗”偏导护盾发生器</CMCShieldGenerator.label>
+  <!-- EN: An advanced shielding device which projects a momentum repulsor field, blocking almost all incoming projectiles. However, the shield can be penetrated by laser. -->
+  <CMCShieldGenerator.description>先进的斥力场偏导护盾发生器，能拦截几乎所有射弹，但仍能被高速射弹和激光武器穿透。</CMCShieldGenerator.description>
+  
+</LanguageData>

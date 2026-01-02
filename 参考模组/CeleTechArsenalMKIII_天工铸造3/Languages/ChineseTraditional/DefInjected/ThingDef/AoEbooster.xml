@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: CMC mood booster -->
+  <CMC_DECO_WIFI.label>遠程情緒管控系統</CMC_DECO_WIFI.label>
+  <!-- EN: A device that improves everyone's mood nearby. -->
+  <CMC_DECO_WIFI.description>一個能提升周圍人類情緒的電波發射器。</CMC_DECO_WIFI.description>
+  
+</LanguageData>

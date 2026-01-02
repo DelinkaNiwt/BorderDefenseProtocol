@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN:
+    <li>questDescription->We’ve found a Milira ground workstation set for sunblast furnace! Sunblast furnaces are key processing facilities that’s crucial for many extraordinary technology developments.\n\n This furnace is guarded by a huge Milian cluster.\n\n This mission will elevate the Milian threat assessment.</li>
+  -->
+  <Milira_SunBlastFurnace_WorldMap.questDescriptionRules.rulesStrings>
+    <li>questDescription->我们发现了一处米莉拉建立在地表的太阳熔炉工作站！太阳熔炉是米莉拉的重要生产设施，许多卓越的科学进展都离不开太阳熔炉的加工能力。\n\n这个太阳熔炉由一个庞大的米莉安集群守护着。\n\n该任务会增加米莉拉威胁程度评估。</li>
+  </Milira_SunBlastFurnace_WorldMap.questDescriptionRules.rulesStrings>
+  <!-- EN:
+    <li>questName->Sunblast Furnace</li>
+  -->
+  <Milira_SunBlastFurnace_WorldMap.questNameRules.rulesStrings>
+    <li>questName->太阳熔炉</li>
+  </Milira_SunBlastFurnace_WorldMap.questNameRules.rulesStrings>
+  
+</LanguageData>

@@ -1,0 +1,13 @@
+<Patch>
+	<Operation Class="PatchOperationSequence">
+    <operations>
+      <li Class="PatchOperationAdd">
+        <xpath>*/ThingDef[defName = "HiTechResearchBench"]/comps/li[@Class =
+          "CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+        <value>
+          <li>CMC_CommConsole</li>
+        </value>
+      </li>
+    </operations>
+  </Operation>
+</Patch>

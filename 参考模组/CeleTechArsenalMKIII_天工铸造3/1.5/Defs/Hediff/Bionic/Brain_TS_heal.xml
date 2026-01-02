@@ -1,0 +1,113 @@
+<Defs>
+	<HediffDef ParentName="ImplantHediffBase">
+    <defName>TianShu</defName>
+	<defaultLabelColor>(0, 1, 1)</defaultLabelColor>
+    <label>&lt;color=#1DD5EE&gt;&lt;i&gt;TS-D4 defense chip&lt;/i&gt;&lt;/color&gt;</label>
+    <labelNoun>a TS-D4 defense chip</labelNoun>
+    <description>A brain chip which can greatly reduce incoming damage. /n/n【Skill:Invincibility】Form a temporal nano-shield by overcharging the machinates and absorb damage.</description>
+    <descriptionHyperlinks><ThingDef>TianShuChip</ThingDef></descriptionHyperlinks>
+    <stages>
+      <li>
+	  <totalBleedFactor>0</totalBleedFactor>
+		<capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>0.12</offset>
+          </li>
+		</capMods>
+		<statOffsets>
+			<StaggerDurationFactor>-1</StaggerDurationFactor>
+			<IncomingDamageFactor>-0.5</IncomingDamageFactor>
+			<PainShockThreshold>0.75</PainShockThreshold>
+			<MoveSpeed>-0.1</MoveSpeed>
+		</statOffsets>
+      </li>
+    </stages>
+	<comps>
+        <li Class="HediffCompProperties_GiveAbility">
+          <abilityDefs>
+            <li>TOT_TS_Invincibility</li>
+          </abilityDefs>
+        </li>
+    </comps>
+    <spawnThingOnRemoved>TianShuChip</spawnThingOnRemoved>
+  </HediffDef>
+
+  <ThingDef ParentName="BodyPartProstheticCMCBase">
+    <defName>TianShuChip</defName>
+    <label>Tian Shu chip</label>
+    <description>A brain implant which boosts combat abilities.</description>
+    <descriptionHyperlinks><RecipeDef>InstallTS</RecipeDef></descriptionHyperlinks>
+	<statBases>
+		<WorkToMake>6000</WorkToMake>
+		<MarketValue>3200</MarketValue>
+		<Mass>0.2</Mass>
+	</statBases>
+    <thingSetMakerTags>
+      <li>RewardStandardLowFreq</li>
+    </thingSetMakerTags>
+    <costList>
+      <Steel>20</Steel>
+	  <Plasteel>40</Plasteel>
+	  <Gold>40</Gold>
+      <ComponentIndustrial>4</ComponentIndustrial>
+	  <ComponentSpacer>9</ComponentSpacer>
+	  <NanostructuringChip>1</NanostructuringChip>
+    </costList>
+    <techHediffsTags>
+      <li>CMC</li>
+    </techHediffsTags>
+	<recipeMaker>
+		  <researchPrerequisite>CMCBio</researchPrerequisite>
+		  <skillRequirements>
+			<Crafting>15</Crafting>
+		  </skillRequirements>
+		  <recipeUsers Inherit="False">
+			<li>FabricationBench</li>
+		  </recipeUsers>
+		  <displayPriority>200</displayPriority>
+	</recipeMaker>
+  </ThingDef>
+
+  <RecipeDef ParentName="SurgeryInstallImplantBase">
+    <defName>InstallTS</defName>
+    <label>install Tian Shu chip</label>
+    <description>Install a Tian Shu chip.</description>
+    <descriptionHyperlinks>
+      <ThingDef>TianShuChip</ThingDef>
+      <HediffDef>TianShu</HediffDef>
+    </descriptionHyperlinks>
+    <jobString>Installing Tian Shu chip.</jobString>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>TianShuChip</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>TianShuChip</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <appliedOnFixedBodyParts>
+      <li>Brain</li>
+    </appliedOnFixedBodyParts>
+    <addsHediff>TianShu</addsHediff>
+  </RecipeDef>
+
+  <RecipeDef ParentName="SurgeryRemoveImplantBase">
+    <defName>RemoveTS</defName>
+    <label>remove Tian Shu chip</label>
+    <description>Remove the Tian Shu chip.</description>
+    <descriptionHyperlinks>
+      <ThingDef>TianShuChip</ThingDef>
+      <HediffDef>TianShu</HediffDef>
+    </descriptionHyperlinks>
+    <jobString>Removing Tian Shu chip.</jobString>
+    <removesHediff>TianShu</removesHediff>
+  </RecipeDef>
+</Defs>

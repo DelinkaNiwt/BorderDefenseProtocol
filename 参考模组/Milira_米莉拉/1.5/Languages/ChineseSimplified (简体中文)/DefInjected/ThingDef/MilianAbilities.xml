@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: low-angle shield unit -->
+  <Milian_BroadShieldUnit.label>低角护盾单元</Milian_BroadShieldUnit.label>
+  <!-- EN: A floating shield unit that is deploying a shield field, capable of blocking bullets. -->
+  <Milian_BroadShieldUnit.description>正在展开护盾立场的浮游护盾单元，能够阻挡子弹。</Milian_BroadShieldUnit.description>
+  <!-- EN: Burnout in -->
+  <Milian_BroadShieldUnit.comps.CompDestroyAfterDelay.countdownLabel>Burnout in</Milian_BroadShieldUnit.comps.CompDestroyAfterDelay.countdownLabel>
+  
+  <!-- EN: Flying Low-Angle Shield Unit -->
+  <Milian_BroadShieldUnit_Proj.label>飞行中的低角护盾单元</Milian_BroadShieldUnit_Proj.label>
+  
+</LanguageData>

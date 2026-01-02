@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <PawnKindDef Name="Milira_ChurchBase" Abstract="True">
+    <race>Human</race>
+    <defaultFactionDef>Milira_AngelismChurch</defaultFactionDef>
+    <maxGenerationAge>80</maxGenerationAge>
+    <backstoryCryptosleepCommonality>0.08</backstoryCryptosleepCommonality>
+    <initialWillRange>10~13</initialWillRange>
+    <initialResistanceRange>12~32</initialResistanceRange>
+    <backstoryFiltersOverride>
+      <li>
+        <categories>
+          <li>ImperialRoyal</li>
+        </categories>
+      </li>
+    </backstoryFiltersOverride>
+    <royalTitleChance>1</royalTitleChance>
+    <titleRequired>Milira_ChurchTitleI</titleRequired>
+    <chemicalAddictionChance>0.05</chemicalAddictionChance>
+    <itemQuality>Good</itemQuality>
+    <!-- <itemQuality>Excellent</itemQuality> -->
+    <apparelIgnoreSeasons>true</apparelIgnoreSeasons>
+    <apparelTags>
+      <li>IndustrialBasic</li>
+    </apparelTags>
+    <apparelDisallowTags>
+      <li>Western</li>
+    </apparelDisallowTags>
+    <!-- <techHediffsChance>0.15</techHediffsChance>
+    <techHediffsMoney>500~1500</techHediffsMoney>
+    <techHediffsTags>
+      <li>Advanced</li>
+      <li>ImplantEmpireRoyal</li>
+      <li>ImplantEmpireCommon</li>
+    </techHediffsTags> -->
+    <techHediffsDisallowTags>
+      <li>PainCauser</li>
+    </techHediffsDisallowTags>
+    <disallowedTraits>
+      <li>Nudist</li>
+      <li>BodyPurist</li>
+    </disallowedTraits>
+    <useFactionXenotypes>false</useFactionXenotypes>
+    <xenotypeSet>
+      <xenotypeChances>
+        <Baseliner MayRequire="Ludeon.RimWorld.Biotech">0.6</Baseliner>
+        <Pigskin MayRequire="Ludeon.RimWorld.Biotech">0.08</Pigskin>
+        <Yttakin MayRequire="Ludeon.RimWorld.Biotech">0.08</Yttakin>
+        <Dirtmole MayRequire="Ludeon.RimWorld.Biotech">0.08</Dirtmole>
+        <Neanderthal MayRequire="Ludeon.RimWorld.Biotech">0.08</Neanderthal>
+        <Hussar MayRequire="Ludeon.RimWorld.Biotech">0.08</Hussar>
+      </xenotypeChances>
+    </xenotypeSet>
+  </PawnKindDef>
+
+  <PawnKindDef Name="Milira_ChurchLowerBase" ParentName="Milira_ChurchBase" Abstract="True">
+    <specificApparelRequirements>
+      <li>
+        <bodyPartGroup>UpperHead</bodyPartGroup>
+        <stuff>Milira_FeatherThread</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <stuff>Milira_FeatherThread</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>Legs</bodyPartGroup>
+        <stuff>Milira_FeatherThread</stuff>
+      </li>
+    </specificApparelRequirements>
+  </PawnKindDef>
+
+
+  <PawnKindDef Name="Milira_ChurchBase_Fighter" ParentName="Milira_ChurchBase" Abstract="True">
+    <maxGenerationAge>55</maxGenerationAge>
+    <backstoryCryptosleepCommonality>0.08</backstoryCryptosleepCommonality>
+    <backstoryFiltersOverride Inherit="false">
+      <li>
+        <categories>
+          <li>ImperialFighter</li>
+        </categories>
+      </li>
+    </backstoryFiltersOverride>
+    <styleItemTags>
+      <li>
+        <tag>Soldier</tag>
+        <baseWeight>1</baseWeight>
+        <weightFactor>1</weightFactor>
+      </li>
+    </styleItemTags>
+    <chemicalAddictionChance>0.1</chemicalAddictionChance>
+    <combatEnhancingDrugsChance>0.15</combatEnhancingDrugsChance>
+    <combatEnhancingDrugsCount>0~2</combatEnhancingDrugsCount>
+    <invNutrition>2.55</invNutrition>
+    <itemQuality>Normal</itemQuality>
+    <weaponMoney>1100~2500</weaponMoney>
+    <apparelAllowHeadgearChance>0.5</apparelAllowHeadgearChance>
+    <apparelMoney>1250~2500</apparelMoney>
+    <apparelTags>
+      <li>IndustrialBasic</li>
+      <li>IndustrialAdvanced</li>
+      <li>IndustrialMilitaryBasic</li>
+      <li>IndustrialMilitaryAdvanced</li>
+    </apparelTags>
+    <specificApparelRequirements>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <stuff>Milira_FeatherThread</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>Legs</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <stuff>Milira_FeatherThread</stuff>
+      </li>
+    </specificApparelRequirements>
+    <techHediffsChance>0.3</techHediffsChance>
+    <techHediffsMoney>1000~1500</techHediffsMoney>
+    <initialWillRange>10~13</initialWillRange>
+    <initialResistanceRange>12~32</initialResistanceRange>
+    <techHediffsRequired>
+      <li>DeathAcidifier</li>
+    </techHediffsRequired>
+    <biocodeWeaponChance>0.85</biocodeWeaponChance>
+    <disallowedTraits>
+      <li>BodyPurist</li>
+    </disallowedTraits>
+  </PawnKindDef>
+
+
+</Defs>

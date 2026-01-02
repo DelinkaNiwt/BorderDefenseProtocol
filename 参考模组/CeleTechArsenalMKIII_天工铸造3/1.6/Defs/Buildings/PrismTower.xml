@@ -1,0 +1,176 @@
+<Defs>
+	<ThingDef ParentName="BuildingBase">
+    <defName>CMC_LaserSniperTower</defName>
+	<tickerType>Normal</tickerType>
+    <label>“Chengying Lightweaver” prism tower</label>
+	<thingClass>Building_TurretGun</thingClass>
+	<drawerType>MapMeshAndRealTime</drawerType>
+    <description>A tall prism tower which can deflect powerful energized particle beam towards its enemy anywhere from distance.</description>
+    <uiIconPath>Things/Buildings/CMC_LaserTower_UI</uiIconPath>
+	<graphicData>
+        <texPath>Things/Buildings/CMC_LaserTower</texPath>
+        <graphicClass>Graphic_Single</graphicClass>
+        <drawSize>(4.3,4.3)</drawSize>
+		<drawOffset>(0,0.1,0.72)</drawOffset>
+    </graphicData>
+	<altitudeLayer>Building</altitudeLayer>
+	<rotatable>false</rotatable>
+	<size>(1,1)</size>
+    <statBases>
+	  <MaxHitPoints>1000</MaxHitPoints>
+	  <Flammability>0</Flammability>
+      <ShootingAccuracyTurret>1</ShootingAccuracyTurret>
+	  <WorkToBuild>12000</WorkToBuild>
+    </statBases>
+	<killedLeavings>
+      <ChunkSlagSteel>1</ChunkSlagSteel>
+      <Steel>20</Steel>
+    </killedLeavings>
+    <costList>
+      <Steel>250</Steel>
+	  <Plasteel>150</Plasteel>
+      <ComponentIndustrial>5</ComponentIndustrial>
+	  <ComponentSpacer>2</ComponentSpacer>
+	  <Uranium>20</Uranium>
+	  <Silver>50</Silver>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Forbiddable"/>
+	  <li Class="TOT_DLL_test.CompProperties_PrismTowerTop"/>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Breakdownable"/>
+	  <li Class="CompProperties_Glower">
+            <glowRadius>3</glowRadius>
+            <glowColor>(255,255,255,0)</glowColor>
+	  </li>
+	  <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>5500</basePowerConsumption>
+      </li>
+    </comps>
+	<damageMultipliers>
+	  <li>
+        <damageDef>EMP</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+	  <li>
+        <damageDef>Stun</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <building>
+      <turretGunDef>Gun_LaserSniper</turretGunDef>
+	  <turretTopDrawSize>1.2</turretTopDrawSize>
+      <turretBurstCooldownTime>2.5</turretBurstCooldownTime>
+    </building>
+    <researchPrerequisites>
+	  <li>CMCGunTurretsbasic</li>
+	  <li>CMC_DEWII</li>
+    </researchPrerequisites>
+	<designationCategory>CMC_DefensenProduction</designationCategory>
+	<placeWorkers>
+      <li>PlaceWorker_TurretTop</li>
+	  <li>TOT_DLL_test.PlaceWorker_ShowTurretRadius_VerbSupport</li>
+    </placeWorkers>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>Gun_LaserSniper</defName>
+    <label>laser(hidden)</label>
+    <description>An auto charged HMG equipped in the bunker, nightmare for light infantry.</description>
+    <graphicData>
+      <texPath>Things/CMC_Void</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1.8,1.8)</drawSize>
+    </graphicData>
+    <statBases>
+      <AccuracyTouch>1</AccuracyTouch>
+      <AccuracyShort>1</AccuracyShort>
+      <AccuracyMedium>1</AccuracyMedium>
+      <AccuracyLong>1</AccuracyLong>
+      <RangedWeapon_Cooldown>2.25</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>80</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>TOT_DLL_test.Verb_LaserShoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_Fake_LaserRifle</defaultProjectile>
+        <warmupTime>0.9</warmupTime>
+        <range>40</range>
+		<minRange>3.9</minRange>
+        <burstShotCount>1</burstShotCount>
+        <soundCast>SL</soundCast>
+        <soundCastTail>GunTail_Medium</soundCastTail>
+        <muzzleFlashScale>0</muzzleFlashScale>
+      </li>
+    </verbs>
+	        <weaponTags Inherit = "False">
+			<li>Weapon_CMCf</li>
+		</weaponTags>
+	<comps>
+      <li Class="TOT_DLL_test.CompProperties_LaserData_Instant">
+        <!--激光光束样式·注意这里跟持续激光不一样-->
+        <LaserLine_FleckDef>CMC_Laser_Stay_ScatterLaser</LaserLine_FleckDef>
+		<LaserLine_FleckDef2>CMC_Laser_Stay_ScatterLaser_B</LaserLine_FleckDef2>
+		<MuzzleGlow>CMC_Laser_MuzzleGlow</MuzzleGlow>
+        <!--光束末端的效果+基础大小-->
+        <LaserFleck_End>CMC_Laser_Stay_LaserEndSmall</LaserFleck_End>
+        <LaserFleck_End_Scale_Base>0.2</LaserFleck_End_Scale_Base>
+		<turretyoffset>1.9</turretyoffset>
+		<useyoffset>true</useyoffset>
+        <!--光束末端粒子的效果+基础大小+大小偏移量+数量+产生几率-->
+        <LaserFleck_Spark>CMC_Stay_Laser_Spark</LaserFleck_Spark>
+        <!--光束末端粒子的基础大小-->
+        <LaserFleck_Spark_Scale_Base>0.2</LaserFleck_Spark_Scale_Base>
+        <!--光束末端粒子大小偏移量-->
+        <LaserFleck_Spark_Scale_Deviation>0.04</LaserFleck_Spark_Scale_Deviation>
+        <!--光束末端粒子数量-->
+        <LaserFleck_Spark_Num>6</LaserFleck_Spark_Num>
+        <!--光束末端粒子产生几率-->
+        <LaserFleck_Spark_Spawn_Chance>1</LaserFleck_Spark_Spawn_Chance>
+        <!--这是开火时的音效-->
+        <SoundDef>PL</SoundDef>
+        <!--这是光束颜色调整（直接输入数值0-255）+不透明度（0-1）（如果是已经上好色的激光贴图的话，全部颜色写成255应该就行）-->
+        <Color_Red>46</Color_Red>
+        <Color_Green>223</Color_Green>
+        <Color_Blue>250</Color_Blue>
+        <Color_Alpha>1</Color_Alpha>
+        <!--这个是造成伤害的类型-->
+        <DamageDef>InfernoBeamPlus</DamageDef>
+        <!--这个是造成伤害的数值-->
+        <DamageNum>20</DamageNum>
+        <!--这个是护甲穿透-->
+        <DamageArmorPenetration>1</DamageArmorPenetration>
+        <!--是否同时造成第二种伤害-->
+        <IfSecondDamage>false</IfSecondDamage>
+        <!--伤害类型-->
+        <DamageDef_B>PlasmaBomb</DamageDef_B>
+        <!--伤害量-->
+        <DamageNum_B>1</DamageNum_B>
+        <!--这个是护甲穿透-->
+        <DamageArmorPenetration_B>1.3</DamageArmorPenetration_B>
+		<!--是否散射-->
+        <IfCanScatter>true</IfCanScatter>
+        <!--激光散射数量-->
+        <ScatterNum>3</ScatterNum>
+        <!--激光散射范围-->
+        <ScatterRadius>1</ScatterRadius>
+        <!--激光散射爆炸伤害类型-->
+        <ScatterExplosionDef>BulletAoE_Void</ScatterExplosionDef>
+        <!--激光散射爆炸伤害-->
+        <ScatterExplosionDamage>7</ScatterExplosionDamage>
+        <!--激光散射爆炸范围-->
+        <ScatterExplosionRadius>1.0</ScatterExplosionRadius>
+        <!--激光散射爆炸伤害穿透-->
+        <ScatterExplosionArmorPenetration>1.1</ScatterExplosionArmorPenetration>
+        <!--激光散射的间隔-->
+        <ScatterTickMax>15</ScatterTickMax>
+        <!--激光散射的特效-->
+        <LaserFleck_ScatterLaser>CMC_Laser_instant_ScatterLaser_void</LaserFleck_ScatterLaser>
+      </li>
+	</comps>
+  </ThingDef>
+</Defs>

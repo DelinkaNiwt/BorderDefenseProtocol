@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ThingCategoryDef>
+    <defName>AmmoCategory_CMC_12x65mmSmart</defName>
+    <label>12x65mm MTS</label>
+    <parent>AmmoAdvanced</parent>
+    <iconPath>Things/Ammo/12x65mmUI</iconPath>
+  </ThingCategoryDef>
+  <CombatExtended.AmmoSetDef>
+    <defName>AmmoSet_CMC_12x65mmSmart</defName>
+    <label>12x65mm MTS</label>
+    <ammoTypes>
+      <Ammo_CMC_12x65mmSmart_Regular>Bullet_CMC_12x65mmSmart_Regular</Ammo_CMC_12x65mmSmart_Regular>
+    </ammoTypes>
+  </CombatExtended.AmmoSetDef>
+  <ThingDef Class="CombatExtended.AmmoDef" Name="Ammo_CMC_12x65mmSmart_Base" ParentName="SpacerMediumAmmoBase" Abstract="True">
+    <description>12x65mm multi-task smart ammo by CeleTech</description>
+    <statBases>
+      <Mass>0.04</Mass>
+      <Bulk>0.034</Bulk>
+    </statBases>
+    <tradeTags>
+      <li>CE_AutoEnableTrade</li>
+      <li>CE_AutoEnableCrafting</li>
+    </tradeTags>
+    <thingCategories>
+      <li>AmmoCategory_CMC_12x65mmSmart</li>
+    </thingCategories>
+  </ThingDef>
+  <ThingDef Name="Bullet_CMC_12x65mmSmart_Base" ParentName="BaseBulletCE" Abstract="True">
+    <graphicData>
+      <texPath>Things/Projectile/Charge_Small</texPath>
+      <graphicClass>Verse.Graphic_Single</graphicClass>
+    </graphicData>
+	<thingClass>CeleTechXCE_DLL.ProjectileGuidedBulletCE</thingClass>
+    <projectile Class="CombatExtended.ProjectilePropertiesCE">
+      <speed>240</speed>
+      <damageDef>Bullet</damageDef>
+      <dropsCasings>true</dropsCasings>
+    </projectile>
+  </ThingDef>
+  <ThingDef Class="CombatExtended.AmmoDef" ParentName="Ammo_CMC_12x65mmSmart_Base">
+    <defName>Ammo_CMC_12x65mmSmart_Regular</defName>
+    <label>CMC_12x65mmSmart R</label>
+    <graphicData>
+      <texPath>Things/Ammo/12x65mm_R</texPath>
+      <graphicClass>Verse.Graphic_StackCount</graphicClass>
+    </graphicData>
+    <ammoClass>CMC_HomingHPVBullet_IE</ammoClass>
+    <cookOffProjectile>Bullet_CMC_12x65mmSmart_Regular</cookOffProjectile>
+  </ThingDef>
+  <ThingDef ParentName="Bullet_CMC_12x65mmSmart_Base">
+    <defName>Bullet_CMC_12x65mmSmart_Regular</defName>
+	<thingClass>CeleTechXCE_DLL.ProjectileGuidedBulletCE</thingClass>
+    <projectile Class="CombatExtended.ProjectilePropertiesCE">
+      <damageAmountBase>23</damageAmountBase>
+	  <armorPenetrationSharp>191</armorPenetrationSharp>
+	  <armorPenetrationBlunt>98</armorPenetrationBlunt>
+      <secondaryDamage>
+        <li>
+          <def>EMP</def>
+          <amount>15</amount>
+        </li>
+		<li>
+          <def>AntiEntropyBullet</def>
+          <amount>36</amount>
+        </li>
+      </secondaryDamage>
+    </projectile>
+  </ThingDef>
+  <RecipeDef ParentName="AmmoRecipeBase">
+    <defName>MakeAmmo_CMC_12x65mmSmart_Regular</defName>
+    <label>make CMC_12x65mmSmart R cartridge x500</label>
+    <description>Craft 500 CMC_12x65mmSmart R cartridges.</description>
+    <jobString>Making CMC_12x65mmSmart R cartridges.</jobString>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>25</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>50</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>ComponentSpacer</li>
+        <li>Plasteel</li>
+        <li>Steel</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Ammo_CMC_12x65mmSmart_Regular>100</Ammo_CMC_12x65mmSmart_Regular>
+    </products>
+    <workAmount>2000</workAmount>
+  </RecipeDef>
+</Defs>

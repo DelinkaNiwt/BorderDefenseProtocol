@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Boosted -->
+  <CMC_MechBuff.label>增能</CMC_MechBuff.label>
+  <!-- EN: This unit is boosted by neural booster. -->
+  <CMC_MechBuff.description>此單位已被神經增能器增強。</CMC_MechBuff.description>
+  
+</LanguageData>

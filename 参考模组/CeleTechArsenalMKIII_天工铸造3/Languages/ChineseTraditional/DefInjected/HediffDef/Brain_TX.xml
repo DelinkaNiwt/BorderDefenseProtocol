@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: <color=#1DD5EE><i>Tian Xuan combat chip</i></color> -->
+  <TianXuan.label>【天璇】神射手晶元</TianXuan.label>
+  <!-- EN: A chip that enhances the brain's neural activity to significantly improve the user's long-range combat capabilities, as well as amplifies consciousness and sight. -->
+  <TianXuan.description>一種能增強大腦神經活動的晶片，顯著提升使用者的遠程作戰能力，同時放大意識與視力。</TianXuan.description>
+  <!-- EN: a brain implant chip Tian Xuan -->
+  <TianXuan.labelNoun>天璇神射手晶元</TianXuan.labelNoun>
+  
+</LanguageData>

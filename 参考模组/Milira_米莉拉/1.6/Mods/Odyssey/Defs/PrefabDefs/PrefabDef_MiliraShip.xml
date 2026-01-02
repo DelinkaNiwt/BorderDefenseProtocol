@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <PrefabDef>
+    <defName>Milira_GravShip</defName>
+    <size>(19,17)</size>
+    <things>
+      <Milian_Gestator>
+        <position>(9, 0, 5)</position>
+      </Milian_Gestator>
+      <VacBarrier>
+        <rects>
+          <li>(7,8,7,8)</li>
+          <li>(14,8,14,8)</li>
+        </rects>
+        <relativeRotation>Clockwise</relativeRotation>
+      </VacBarrier>
+      <Milira_DroneBench>
+        <position>(13, 0, 9)</position>
+      </Milira_DroneBench>
+      <Door>
+        <rects>
+          <li>(5,4,5,4)</li>
+          <li>(5,12,5,12)</li>
+        </rects>
+        <relativeRotation>Clockwise</relativeRotation>
+        <stuff>Milira_SplendidSteel</stuff>
+      </Door>
+      <Milira_StableSunLightFuelBattery>
+        <rects>
+          <li>(11,5,12,5)</li>
+          <li>(5,10,5,10)</li>
+          <li>(13,10,13,10)</li>
+        </rects>
+      </Milira_StableSunLightFuelBattery>
+      <Stool>
+        <position>(10, 0, 9)</position>
+        <stuff>Milira_SplendidSteel</stuff>
+        <quality>Normal</quality>
+      </Stool>
+      <Milira_UniversalBench>
+        <position>(6, 0, 6)</position>
+        <relativeRotation>Opposite</relativeRotation>
+      </Milira_UniversalBench>
+      <Heater>
+        <rects>
+          <li>(6,7,6,7)</li>
+          <li>(12,9,12,9)</li>
+          <li>(16,9,16,9)</li>
+        </rects>
+      </Heater>
+      <GravshipHull>
+        <rects>
+          <li>(5,1,6,1)</li>
+          <li>(2,4,3,4)</li>
+          <li>(1,5,1,6)</li>
+          <li>(5,5,7,5)</li>
+          <li>(13,5,14,5)</li>
+          <li>(7,6,7,7)</li>
+          <li>(14,6,16,6)</li>
+          <li>(14,7,14,7)</li>
+          <li>(7,9,7,11)</li>
+          <li>(14,9,14,11)</li>
+          <li>(1,10,1,11)</li>
+          <li>(15,10,16,10)</li>
+          <li>(5,11,6,11)</li>
+          <li>(13,11,13,11)</li>
+          <li>(2,12,3,12)</li>
+          <li>(5,15,6,15)</li>
+        </rects>
+        <stuff>Milira_SplendidSteel</stuff>
+      </GravshipHull>
+      <GravshipHull>
+        <rects>
+          <li>(6,2,6,2)</li>
+          <li>(4,3,5,3)</li>
+          <li>(8,4,12,4)</li>
+          <li>(0,7,0,9)</li>
+          <li>(17,7,17,9)</li>
+          <li>(18,8,18,8)</li>
+          <li>(8,12,12,12)</li>
+          <li>(4,13,5,13)</li>
+          <li>(6,14,6,14)</li>
+        </rects>
+        <stuff>Milira_SunPlateSteel</stuff>
+      </GravshipHull>
+      <Milira_DroneRecharger>
+        <position>(15, 0, 9)</position>
+      </Milira_DroneRecharger>
+      <HiddenConduit>
+        <rects>
+          <li>(3,5,7,5)</li>
+          <li>(3,6,3,6)</li>
+          <li>(7,6,7,11)</li>
+          <li>(12,6,12,10)</li>
+          <li>(8,8,11,8)</li>
+          <li>(3,10,3,11)</li>
+          <li>(4,11,6,11)</li>
+        </rects>
+      </HiddenConduit>
+      <Bed>
+        <position>(16, 0, 7)</position>
+        <relativeRotation>Counterclockwise</relativeRotation>
+        <stuff>Milira_SplendidSteel</stuff>
+        <quality>Normal</quality>
+      </Bed>
+      <GravEngine>
+        <position>(2, 0, 8)</position>
+      </GravEngine>
+      <WallLamp>
+        <rects>
+          <li>(4,5,4,5)</li>
+          <li>(16,8,16,8)</li>
+          <li>(4,11,4,11)</li>
+        </rects>
+        <relativeRotation>Clockwise</relativeRotation>
+      </WallLamp>
+      <WallLamp>
+        <position>(10, 0, 5)</position>
+        <relativeRotation>Opposite</relativeRotation>
+      </WallLamp>
+      <WallLamp>
+        <position>(10, 0, 11)</position>
+      </WallLamp>
+      <Milira_TailoringBench>
+        <position>(6, 0, 10)</position>
+        <relativeRotation>Clockwise</relativeRotation>
+      </Milira_TailoringBench>
+      <ShelfSmall>
+        <rects>
+          <li>(8,7,8,7)</li>
+          <li>(10,7,10,7)</li>
+        </rects>
+        <stuff>Milira_SplendidSteel</stuff>
+      </ShelfSmall>
+      <ShelfSmall>
+        <position>(11, 0, 9)</position>
+        <relativeRotation>Opposite</relativeRotation>
+        <stuff>Milira_SplendidSteel</stuff>
+      </ShelfSmall>
+      <HiTechResearchBench>
+        <position>(10, 0, 10)</position>
+        <stuff>Milira_SplendidSteel</stuff>
+      </HiTechResearchBench>
+      <SmallThruster>
+        <positions>
+          <li>(5, 0, 0)</li>
+          <li>(4, 0, 2)</li>
+          <li>(4, 0, 14)</li>
+          <li>(5, 0, 16)</li>
+        </positions>
+        <relativeRotation>Clockwise</relativeRotation>
+      </SmallThruster>
+      <PilotConsole>
+        <position>(12, 0, 7)</position>
+        <relativeRotation>Opposite</relativeRotation>
+      </PilotConsole>
+      <EndTable>
+        <position>(16, 0, 8)</position>
+        <relativeRotation>Counterclockwise</relativeRotation>
+        <stuff>Milira_SplendidSteel</stuff>
+        <quality>Normal</quality>
+      </EndTable>
+      <Milian_Recharger>
+        <position>(4, 0, 8)</position>
+      </Milian_Recharger>
+      <OxygenPump>
+        <position>(9, 0, 5)</position>
+        <relativeRotation>Opposite</relativeRotation>
+      </OxygenPump>
+      <OxygenPump>
+        <rects>
+          <li>(2,6,2,6)</li>
+          <li>(2,10,2,10)</li>
+        </rects>
+        <relativeRotation>Counterclockwise</relativeRotation>
+      </OxygenPump>
+      <OxygenPump>
+        <rects>
+          <li>(15,9,15,9)</li>
+          <li>(9,11,9,11)</li>
+        </rects>
+      </OxygenPump>
+      <ChemfuelTank>
+        <positions>
+          <li>(2, 0, 5)</li>
+          <li>(2, 0, 10)</li>
+        </positions>
+      </ChemfuelTank>
+      <Shelf>
+        <position>(9, 0, 9)</position>
+        <relativeRotation>Opposite</relativeRotation>
+        <stuff>Milira_SplendidSteel</stuff>
+      </Shelf>
+    </things>
+    <terrain>
+      <Substructure>
+        <rects>
+          <li>(5,0,6,2)</li>
+          <li>(4,2,4,14)</li>
+          <li>(5,3,5,16)</li>
+          <li>(2,4,3,12)</li>
+          <li>(8,4,12,12)</li>
+          <li>(1,5,1,11)</li>
+          <li>(6,5,7,11)</li>
+          <li>(13,5,14,11)</li>
+          <li>(15,6,16,10)</li>
+          <li>(0,7,0,9)</li>
+          <li>(17,7,17,9)</li>
+          <li>(18,8,18,8)</li>
+          <li>(6,14,6,16)</li>
+        </rects>
+      </Substructure>
+    </terrain>
+  </PrefabDef>
+</Defs>

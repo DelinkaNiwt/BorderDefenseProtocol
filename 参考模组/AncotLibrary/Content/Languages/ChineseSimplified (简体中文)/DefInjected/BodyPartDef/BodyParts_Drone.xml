@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: body -->
+  <Ancot_DroneBody.label>机身</Ancot_DroneBody.label>
+  
+  <!-- EN: core -->
+  <Ancot_DroneCore.label>核心</Ancot_DroneCore.label>
+  
+  <!-- EN: foot -->
+  <Ancot_DroneFoot.label>腿</Ancot_DroneFoot.label>
+  
+  <!-- EN: frame -->
+  <Ancot_DroneFrame.label>框架</Ancot_DroneFrame.label>
+  
+  <!-- EN: sound sensor -->
+  <Ancot_DroneHearingSensor.label>听觉传感器</Ancot_DroneHearingSensor.label>
+  
+  <!-- EN: visual sensor -->
+  <Ancot_DroneSightSensor.label>视觉传感器</Ancot_DroneSightSensor.label>
+  
+  <!-- EN: suspension -->
+  <Ancot_DroneSuspension.label>悬架</Ancot_DroneSuspension.label>
+  
+  <!-- EN: wheels -->
+  <Ancot_DroneWheels.label>轮组</Ancot_DroneWheels.label>
+  
+</LanguageData>

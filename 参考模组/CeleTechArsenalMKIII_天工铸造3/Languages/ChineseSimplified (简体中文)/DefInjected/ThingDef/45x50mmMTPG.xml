@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Ammo_45x50mmMTPG HE -->
+  <Ammo_Ammo_45x50mmMTPG_HE.label>45x50mm可编程高爆榴弹</Ammo_Ammo_45x50mmMTPG_HE.label>
+  <!-- EN: TODO -->
+  <Ammo_Ammo_45x50mmMTPG_HE.description>高速榴弹（高爆）</Ammo_Ammo_45x50mmMTPG_HE.description>
+  
+  <!-- EN: Ammo_45x50mmMTPG S -->
+  <Ammo_Ammo_45x50mmMTPG_S.label>45x50mm可编程烟雾榴弹</Ammo_Ammo_45x50mmMTPG_S.label>
+  <!-- EN: TODO -->
+  <Ammo_Ammo_45x50mmMTPG_S.description>高速榴弹（烟雾）</Ammo_Ammo_45x50mmMTPG_S.description>
+  
+  <!-- EN: bullet -->
+  <Bullet_Ammo_45x50mmMTPG_HE.label>45x50mm可编程高爆榴弹</Bullet_Ammo_45x50mmMTPG_HE.label>
+  
+  <!-- EN: bullet -->
+  <Bullet_Ammo_45x50mmMTPG_S.label>45x50mm可编程烟雾榴弹</Bullet_Ammo_45x50mmMTPG_S.label>
+  
+</LanguageData>

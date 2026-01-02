@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Mote -->
+  <CMC_Laser_Stay_MoteBlue.label>TODO</CMC_Laser_Stay_MoteBlue.label>
+  
+  <!-- EN: QBUL-56 particle lance -->
+  <CMC_Shaped_Laser_Sniper.label>QBU-56 射线狙击枪</CMC_Shaped_Laser_Sniper.label>
+  <!-- EN: A heavy particle beam sniper that does large amount of damage over long range, able to penetrate shields. -->
+  <CMC_Shaped_Laser_Sniper.description>发射高能粒子射线的狙击枪，射程极远但需较长时间充能发射。其发射的高能射线能穿透护盾且总能命中敌人，在命中时会等离子化周围的空气造成小范围伤害。</CMC_Shaped_Laser_Sniper.description>
+  <!-- EN: stock -->
+  <CMC_Shaped_Laser_Sniper.tools.stock.label>枪托</CMC_Shaped_Laser_Sniper.tools.stock.label>
+  <!-- EN: barrel -->
+  <CMC_Shaped_Laser_Sniper.tools.barrel.label>枪管</CMC_Shaped_Laser_Sniper.tools.barrel.label>
+  <!-- EN: QBUL-56 particle lance -->
+  <CMC_Shaped_Laser_Sniper.verbs.Verb_Laser_Sustain.label>TODO</CMC_Shaped_Laser_Sniper.verbs.Verb_Laser_Sustain.label>
+  
+</LanguageData>

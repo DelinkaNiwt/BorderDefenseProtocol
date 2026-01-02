@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef Name="Milian_ShieldBase" ParentName="Milian_ApparelBase" Abstract="True">
+    <statBases>
+      <Mass>0.8</Mass>
+      <EquipDelay>1.6</EquipDelay>
+    </statBases>
+    <apparel>
+      <layers>
+        <li>Ancot_Shield</li>
+      </layers>
+      <tags>
+        <li>Milian_Shield</li>
+        <li>MilianApparel</li>
+      </tags>
+    </apparel>
+    <recipeMaker>
+      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+      <workSkill>Crafting</workSkill>
+      <effectWorking>Smith</effectWorking>
+      <soundWorking>Recipe_Smith</soundWorking>
+      <!-- <recipeUsers>
+        <li>Milira_SunBlastFurnace</li>
+      </recipeUsers> -->
+      <unfinishedThingDef>UnfinishedApparel</unfinishedThingDef>
+      <defaultIngredientFilter>
+        <categories>
+          <li>Root</li>
+        </categories>
+        <disallowedThingDefs>
+          <li>Gold</li>
+          <li>Silver</li>
+          <li>Jade</li>
+          <li>Uranium</li>
+        </disallowedThingDefs>
+      </defaultIngredientFilter>
+    </recipeMaker>
+    <thingCategories>
+      <li>Milian_Apparel_Utility</li>
+    </thingCategories>
+  </ThingDef>
+
+  <ThingDef ParentName="Milian_ShieldBase">
+    <defName>Milian_FeatherShapeShield</defName>
+    <label>Milian feather shield</label>
+    <description>A medium-sized shield commonly used by Milians, shaped like a feather. Cannot shoot while holding it.</description>
+    <tickerType>Normal</tickerType>
+    <costList>
+      <Milira_SunPlateSteel>10</Milira_SunPlateSteel>
+      <Plasteel>20</Plasteel>
+    </costList>
+    <costStuffCount>150</costStuffCount>
+    <stuffCategories>
+      <li>Metallic</li>
+    </stuffCategories>
+    <graphicData>
+      <texPath>Milian/Apparel/Shield/FeatherShape/FeatherShape</texPath>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>240</MaxHitPoints>
+      <Mass>5.8</Mass>
+      <WorkToMake>21000</WorkToMake>
+      <ArmorRating_Sharp>0.20</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.05</ArmorRating_Blunt>
+      <ArmorRating_Heat>0</ArmorRating_Heat>
+      <StuffEffectMultiplierArmor>0.5</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.2</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.1</StuffEffectMultiplierInsulation_Heat>
+      <!-- 盾牌 -->
+      <Ancot_PhysicalShieldBlockChance_Melee>1.0</Ancot_PhysicalShieldBlockChance_Melee>
+      <Ancot_PhysicalShieldBlockChance_Ranged>0.8</Ancot_PhysicalShieldBlockChance_Ranged>
+      <Ancot_PhysicalShieldMaxStamina>100</Ancot_PhysicalShieldMaxStamina>
+      <Ancot_PhysicalShieldBlockAngle>190</Ancot_PhysicalShieldBlockAngle>
+      <Ancot_PhysicalShieldStaminaRecoverRate>2.4</Ancot_PhysicalShieldStaminaRecoverRate>
+      <Ancot_PhysicalShieldStaminaRecoverRate_Holding>1.0</Ancot_PhysicalShieldStaminaRecoverRate_Holding>
+      <Ancot_PhysicalShieldBreakStance>3</Ancot_PhysicalShieldBreakStance>
+      <Ancot_PhysicalShieldResetTime>30</Ancot_PhysicalShieldResetTime>
+      <Ancot_PhysicalShieldStaminaCost_Melee>2.4</Ancot_PhysicalShieldStaminaCost_Melee>
+      <Ancot_PhysicalShieldStaminaCost_Ranged>2.0</Ancot_PhysicalShieldStaminaCost_Ranged>
+      <Ancot_PhysicalShieldStaminaCostThershold>0.3</Ancot_PhysicalShieldStaminaCostThershold>
+      <Ancot_PhysicalShieldStuffEffectMultiplier>1</Ancot_PhysicalShieldStuffEffectMultiplier>
+    </statBases>
+    <recipeMaker>
+      <researchPrerequisite>Milira_ShieldI</researchPrerequisite>
+    </recipeMaker>
+    <apparel>
+      <!-- <useWornGraphicMask>true</useWornGraphicMask> -->
+      <developmentalStageFilter>Child, Adult</developmentalStageFilter>
+      <bodyPartGroups>
+        <li>Torso</li>
+        <li>FullHead</li>
+        <li>Arms</li>
+        <li>Hands</li>
+        <li>Feet</li>
+        <li>Shoulders</li>
+        <li>Legs</li>
+      </bodyPartGroups>
+      <tags>
+        <li>Milian_FeatherShapeShield</li>
+        <li>Milian_Mechanoid_KnightII</li>
+      </tags>
+      <renderNodeProperties>
+        <li>
+          <debugLabel>Milian_FeatherShapeShield</debugLabel>
+          <nodeClass>AncotLibrary.PawnRenderNode_PhysicalShield_Apparel</nodeClass>
+          <workerClass>AncotLibrary.PawnRenderNodeWorker_PhysicalShield_Apparel</workerClass>
+          <baseLayer>-5</baseLayer>
+          <rotDrawMode>Fresh, Rotting</rotDrawMode>
+          <overrideMeshSize>(1.5,1.5)</overrideMeshSize>
+          <parentTagDef>ApparelBody</parentTagDef>
+          <pawnType>Any</pawnType>
+        </li>
+      </renderNodeProperties>
+    </apparel>
+    <equippedStatOffsets>
+    </equippedStatOffsets>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_AIShieldHolder_Incoming">
+        <shieldDurationTick>300</shieldDurationTick>
+        <refreshNextIncoming>true</refreshNextIncoming>
+      </li>
+      <li Class="AncotLibrary.CompProperties_PhysicalShield">
+        <gizmoLabel>rise shield</gizmoLabel>
+        <gizmoDesc>rise up shield.</gizmoDesc>
+        <graphicPath_Holding>Milian/Apparel/Shield/FeatherShape/FeatherShape_Holding</graphicPath_Holding>
+        <graphicPath_Ready>Milian/Apparel/Shield/FeatherShape/FeatherShape_Ready</graphicPath_Ready>
+        <graphicPath_Disabled>Milian/Apparel/Shield/FeatherShape/FeatherShape_Disabled</graphicPath_Disabled>
+        <blocksRangedWeapons>true</blocksRangedWeapons>
+        <holdShieldHediff>Ancot_HoldShield_Medium</holdShieldHediff>
+        <shieldBarColor>(0.75,0.75,0.75,0.8)</shieldBarColor>
+        <!-- <alwaysHoldShield>true</alwaysHoldShield> -->
+        <!-- <tools>
+          <li>
+            <label>羽型盾盾击</label>
+            <capacities>
+              <li>Blunt</li>
+            </capacities>
+            <power>40</power>
+            <cooldownTime>0.7</cooldownTime>
+            <extraMeleeDamages>
+              <li>
+                <def>Stun</def>
+                <amount>4</amount>
+                <chance>1.0</chance>
+              </li>
+            </extraMeleeDamages>
+          </li>
+        </tools> -->
+      </li>
+      <li Class="Milira.CompProperties_TargetableMilian">
+        <compClass>Milira.CompTargetable_Milian</compClass>
+        <ignoreQuestLodgerPawns>true</ignoreQuestLodgerPawns>
+        <targetableMilianPawnkinds>
+          <li>Milian_Mechanoid_KnightII</li>
+        </targetableMilianPawnkinds>
+      </li>
+    </comps>
+  </ThingDef>
+
+
+  <ThingDef ParentName="Milian_ShieldBase">
+    <defName>Milian_KnightShield</defName>
+    <label>Milian knight shield</label>
+    <description>A lightweight knight shield commonly used by Milian.</description>
+    <tickerType>Normal</tickerType>
+    <costList>
+      <Milira_SunPlateSteel>10</Milira_SunPlateSteel>
+      <Plasteel>10</Plasteel>
+    </costList>
+    <costStuffCount>90</costStuffCount>
+    <stuffCategories>
+      <li>Metallic</li>
+    </stuffCategories>
+    <graphicData>
+      <texPath>Milian/Apparel/Shield/KnightShield/KnightShield</texPath>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>180</MaxHitPoints>
+      <Mass>2.8</Mass>
+      <WorkToMake>18000</WorkToMake>
+      <ArmorRating_Sharp>0.20</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.05</ArmorRating_Blunt>
+      <ArmorRating_Heat>0</ArmorRating_Heat>
+      <StuffEffectMultiplierArmor>0.4</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.2</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.1</StuffEffectMultiplierInsulation_Heat>
+      <!-- 盾牌 -->
+      <Ancot_PhysicalShieldBlockChance_Melee>0.8</Ancot_PhysicalShieldBlockChance_Melee>
+      <Ancot_PhysicalShieldBlockChance_Ranged>0.5</Ancot_PhysicalShieldBlockChance_Ranged>
+      <Ancot_PhysicalShieldMaxStamina>75</Ancot_PhysicalShieldMaxStamina>
+      <Ancot_PhysicalShieldBlockAngle>120</Ancot_PhysicalShieldBlockAngle>
+      <Ancot_PhysicalShieldStaminaRecoverRate>3.6</Ancot_PhysicalShieldStaminaRecoverRate>
+      <Ancot_PhysicalShieldStaminaRecoverRate_Holding>1.5</Ancot_PhysicalShieldStaminaRecoverRate_Holding>
+      <Ancot_PhysicalShieldBreakStance>1</Ancot_PhysicalShieldBreakStance>
+      <Ancot_PhysicalShieldResetTime>18</Ancot_PhysicalShieldResetTime>
+      <Ancot_PhysicalShieldStaminaCost_Melee>2.8</Ancot_PhysicalShieldStaminaCost_Melee>
+      <Ancot_PhysicalShieldStaminaCost_Ranged>2.4</Ancot_PhysicalShieldStaminaCost_Ranged>
+      <Ancot_PhysicalShieldStaminaCostThershold>0.5</Ancot_PhysicalShieldStaminaCostThershold>
+      <Ancot_PhysicalShieldStuffEffectMultiplier>1</Ancot_PhysicalShieldStuffEffectMultiplier>
+    </statBases>
+    <recipeMaker>
+      <researchPrerequisite>Milira_ShieldI</researchPrerequisite>
+    </recipeMaker>
+    <apparel>
+      <developmentalStageFilter>Child, Adult</developmentalStageFilter>
+      <bodyPartGroups>
+        <li>Torso</li>
+        <li>Arms</li>
+        <li>Hands</li>
+        <li>Shoulders</li>
+      </bodyPartGroups>
+      <tags>
+        <li>Milian_KnightShield</li>
+        <li>Milian_ShieldSmall</li>
+        <li>Milian_Mechanoid_KnightIV</li>
+      </tags>
+      <renderNodeProperties>
+        <li>
+          <debugLabel>Milian_KnightShield</debugLabel>
+          <nodeClass>AncotLibrary.PawnRenderNode_PhysicalShield_Apparel</nodeClass>
+          <workerClass>AncotLibrary.PawnRenderNodeWorker_PhysicalShield_Apparel</workerClass>
+          <baseLayer>-5</baseLayer>
+          <rotDrawMode>Fresh, Rotting</rotDrawMode>
+          <overrideMeshSize>(1.5,1.5)</overrideMeshSize>
+          <parentTagDef>ApparelBody</parentTagDef>
+          <pawnType>Any</pawnType>
+        </li>
+      </renderNodeProperties>
+    </apparel>
+    <equippedStatOffsets>
+    </equippedStatOffsets>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_AIShieldHolder_Incoming">
+        <shieldDurationTick>120</shieldDurationTick>
+        <refreshNextIncoming>true</refreshNextIncoming>
+      </li>
+      <li Class="AncotLibrary.CompProperties_PhysicalShield">
+        <gizmoLabel>rise shield</gizmoLabel>
+        <gizmoDesc>rise up shield.</gizmoDesc>
+        <graphicPath_Holding>Milian/Apparel/Shield/KnightShield/KnightShield_Holding</graphicPath_Holding>
+        <graphicPath_Ready>Milian/Apparel/Shield/KnightShield/KnightShield_Ready</graphicPath_Ready>
+        <graphicPath_Disabled>Milian/Apparel/Shield/KnightShield/KnightShield_Disabled</graphicPath_Disabled>
+        <blocksRangedWeapons>false</blocksRangedWeapons>
+        <holdShieldHediff>Ancot_HoldShield_Small</holdShieldHediff>
+        <shieldBarColor>(0.75,0.75,0.75,0.8)</shieldBarColor>
+      </li>
+      <li Class="Milira.CompProperties_TargetableMilian">
+        <compClass>Milira.CompTargetable_Milian</compClass>
+        <ignoreQuestLodgerPawns>true</ignoreQuestLodgerPawns>
+        <targetableMilianPawnkinds>
+          <li>Milian_Mechanoid_KnightIV</li>
+        </targetableMilianPawnkinds>
+      </li>
+    </comps>
+  </ThingDef>
+
+
+  <ThingDef ParentName="Milian_ShieldBase">
+    <defName>Milian_RookShield</defName>
+    <label>Milian cyclops gate shield</label>
+    <description>A heavy shield commonly used by Milians, as thick and imposing as a massive city wall. The holder cannot shoot while holding it.</description>
+    <tickerType>Normal</tickerType>
+    <costList>
+      <Milira_SunPlateSteel>30</Milira_SunPlateSteel>
+      <Plasteel>50</Plasteel>
+    </costList>
+    <costStuffCount>450</costStuffCount>
+    <stuffCategories>
+      <li>Metallic</li>
+    </stuffCategories>
+    <graphicData>
+      <texPath>Milian/Apparel/Shield/RookShield/RookShield</texPath>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>400</MaxHitPoints>
+      <WorkToMake>48000</WorkToMake>
+      <Mass>14.5</Mass>
+      <ArmorRating_Sharp>0.50</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.35</ArmorRating_Blunt>
+      <ArmorRating_Heat>0.15</ArmorRating_Heat>
+      <StuffEffectMultiplierArmor>0.6</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.2</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.1</StuffEffectMultiplierInsulation_Heat>
+      <!-- 盾牌 -->
+      <Ancot_PhysicalShieldBlockChance_Melee>1.0</Ancot_PhysicalShieldBlockChance_Melee>
+      <Ancot_PhysicalShieldBlockChance_Ranged>1.0</Ancot_PhysicalShieldBlockChance_Ranged>
+      <Ancot_PhysicalShieldMaxStamina>150</Ancot_PhysicalShieldMaxStamina>
+      <Ancot_PhysicalShieldBlockAngle>220</Ancot_PhysicalShieldBlockAngle>
+      <Ancot_PhysicalShieldStaminaRecoverRate>2.0</Ancot_PhysicalShieldStaminaRecoverRate>
+      <Ancot_PhysicalShieldStaminaRecoverRate_Holding>0.8</Ancot_PhysicalShieldStaminaRecoverRate_Holding>
+      <Ancot_PhysicalShieldBreakStance>8</Ancot_PhysicalShieldBreakStance>
+      <Ancot_PhysicalShieldResetTime>90</Ancot_PhysicalShieldResetTime>
+      <Ancot_PhysicalShieldStaminaCost_Melee>1.5</Ancot_PhysicalShieldStaminaCost_Melee>
+      <Ancot_PhysicalShieldStaminaCost_Ranged>1.2</Ancot_PhysicalShieldStaminaCost_Ranged>
+      <Ancot_PhysicalShieldStaminaCostThershold>0.2</Ancot_PhysicalShieldStaminaCostThershold>
+      <Ancot_PhysicalShieldStuffEffectMultiplier>1</Ancot_PhysicalShieldStuffEffectMultiplier>
+    </statBases>
+    <recipeMaker>
+      <researchPrerequisite>Milira_ShieldII</researchPrerequisite>
+    </recipeMaker>
+    <apparel>
+      <developmentalStageFilter>Child, Adult</developmentalStageFilter>
+      <bodyPartGroups>
+        <li>Torso</li>
+        <li>FullHead</li>
+        <li>Arms</li>
+        <li>Hands</li>
+        <li>Feet</li>
+        <li>Shoulders</li>
+        <li>Legs</li>
+      </bodyPartGroups>
+      <tags>
+        <li>Milian_RookShield</li>
+        <li>Milian_Mechanoid_RookII</li>
+      </tags>
+      <renderNodeProperties>
+        <li>
+          <debugLabel>Milian_RookShield</debugLabel>
+          <nodeClass>AncotLibrary.PawnRenderNode_PhysicalShield_Apparel</nodeClass>
+          <workerClass>AncotLibrary.PawnRenderNodeWorker_PhysicalShield_Apparel</workerClass>
+          <baseLayer>-5</baseLayer>
+          <rotDrawMode>Fresh, Rotting</rotDrawMode>
+          <overrideMeshSize>(1.5,1.5)</overrideMeshSize>
+          <parentTagDef>ApparelBody</parentTagDef>
+          <pawnType>Any</pawnType>
+        </li>
+      </renderNodeProperties>
+    </apparel>
+    <equippedStatOffsets>
+      <MeleeDodgeChance>-5</MeleeDodgeChance>
+      <MoveSpeed>-0.8</MoveSpeed>
+    </equippedStatOffsets>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_AIShieldHolder_Incoming">
+        <shieldDurationTick>300</shieldDurationTick>
+        <refreshNextIncoming>true</refreshNextIncoming>
+      </li>
+      <li Class="AncotLibrary.CompProperties_PhysicalShield">
+        <gizmoLabel>rise shield</gizmoLabel>
+        <gizmoDesc>rise up shield.</gizmoDesc>
+        <graphicPath_Holding>Milian/Apparel/Shield/RookShield/RookShield_Holding</graphicPath_Holding>
+        <graphicPath_Ready>Milian/Apparel/Shield/RookShield/RookShield_Ready</graphicPath_Ready>
+        <graphicPath_Disabled>Milian/Apparel/Shield/RookShield/RookShield_Disabled</graphicPath_Disabled>
+        <blocksRangedWeapons>true</blocksRangedWeapons>
+        <holdShieldHediff>Ancot_HoldShield_Large</holdShieldHediff>
+        <shieldBarColor>(0.75,0.75,0.75,0.8)</shieldBarColor>
+        <alwaysHoldShield>true</alwaysHoldShield>        <!-- 一直持盾 -->
+      </li>
+      <li Class="Milira.CompProperties_TargetableMilian">
+        <compClass>Milira.CompTargetable_Milian</compClass>
+        <ignoreQuestLodgerPawns>true</ignoreQuestLodgerPawns>
+        <targetableMilianPawnkinds>
+          <li>Milian_Mechanoid_RookII</li>
+        </targetableMilianPawnkinds>
+      </li>
+    </comps>
+  </ThingDef>
+
+</Defs>

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<ThingCategoryDef>
+		<defName>Ammo6x36mmElectromagneticSmart</defName>
+		<label>6x36mm SmartEM-CMC</label>
+		<parent>AmmoAdvanced</parent>
+		<iconPath>Things/Ammo/6x36mmSmartUI</iconPath>
+	</ThingCategoryDef>
+
+	<!-- ==================== AmmoSet ========================== -->
+
+	<CombatExtended.AmmoSetDef>
+		<defName>AmmoSet_6x36mmElectromagneticS</defName>
+		<label>6x36mm Electromagnetic Smart</label>
+		<ammoTypes>
+			<Ammo_6x36mmElectromagneticS_AP>Bullet_6x36mmElectromagneticS_AP</Ammo_6x36mmElectromagneticS_AP>
+			<Ammo_6x36mmElectromagneticS_Ion>Bullet_6x36mmElectromagneticS_Ion</Ammo_6x36mmElectromagneticS_Ion>
+		</ammoTypes>
+		<similarTo>AmmoSet_ChargedRifle</similarTo>
+	</CombatExtended.AmmoSetDef>
+
+	<!-- ==================== Ammo ========================== -->
+
+	<ThingDef Class="CombatExtended.AmmoDef" Name="6x36mmElectromagneticSmartBase" ParentName="SpacerSmallAmmoBase" Abstract="True">
+		<description>Electromagnetic projectile ammunition used by advanced EM rifle systems.</description>
+		<statBases>
+			<Mass>0.016</Mass>
+			<Bulk>0.012</Bulk>
+		</statBases>
+		<tradeTags>
+			<li>CE_AutoEnableTrade</li>
+			<li>CE_AutoEnableCrafting_FabricationBench</li>
+		</tradeTags>
+		<thingCategories>
+			<li>Ammo6x36mmElectromagneticSmart</li>
+		</thingCategories>
+		<stackLimit>4000</stackLimit>
+	</ThingDef>
+
+	<ThingDef Class="CombatExtended.AmmoDef" ParentName="6x36mmElectromagneticSmartBase">
+		<defName>Ammo_6x36mmElectromagneticS_AP</defName>
+		<label>6x36mm Electromagnetic-Smart (AP)</label>
+		<graphicData>
+			<texPath>Things/Ammo/6x36mmSmart_AP</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<ammoClass>CMC_EMBullet_AP</ammoClass>
+	</ThingDef>
+
+	<ThingDef Class="CombatExtended.AmmoDef" ParentName="6x36mmElectromagneticSmartBase">
+		<defName>Ammo_6x36mmElectromagneticS_Ion</defName>
+		<label>6x36mm Electromagnetic-Smart (Ion)</label>
+		<graphicData>
+			<texPath>Things/Ammo/6x36mmSmart_EMP</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<ammoClass>CMC_EMBullet_Ion</ammoClass>
+		<generateAllowChance>0.4</generateAllowChance>
+	</ThingDef>
+
+	<!-- ================== Projectiles ================== -->
+
+	<ThingDef Name="Base6x36mmElectromagneticSmartBullet" ParentName="BaseBulletCE" Abstract="true">
+		<graphicData>
+			<texPath>Things/Projectile/Charged/ChargeShot</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<thingClass>CeleTechXCE_DLL.ProjectileGuidedBulletCE</thingClass>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<damageDef>Bullet</damageDef>
+			<speed>180</speed>
+		</projectile>
+	</ThingDef>
+
+	<ThingDef ParentName="Base6x36mmElectromagneticSmartBullet">
+		<defName>Bullet_6x36mmElectromagneticS_AP</defName>
+		<label>6x36mm Electromagnetic projectile (AP)</label>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<damageAmountBase>16</damageAmountBase>
+			<secondaryDamage>
+				<li>
+					<def>Bomb_Secondary</def>
+					<amount>3</amount>
+				</li>
+			</secondaryDamage>
+			<armorPenetrationSharp>20</armorPenetrationSharp>
+			<armorPenetrationBlunt>30</armorPenetrationBlunt>
+		</projectile>
+	</ThingDef>
+
+	<ThingDef ParentName="Base6x36mmElectromagneticSmartBullet">
+		<defName>Bullet_6x36mmElectromagneticS_Ion</defName>
+		<label>6x36mm Electromagnetic projectile (Ion)</label>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<damageAmountBase>16</damageAmountBase>
+			<secondaryDamage>
+				<li>
+					<def>EMP</def>
+					<amount>3</amount>
+				</li>
+			</secondaryDamage>
+			<armorPenetrationSharp>20</armorPenetrationSharp>
+			<armorPenetrationBlunt>30</armorPenetrationBlunt>
+			<empShieldBreakChance>1</empShieldBreakChance>
+		</projectile>
+	</ThingDef>
+
+	<!-- ==================== Recipes ========================== -->
+
+	<RecipeDef ParentName="ChargeAmmoRecipeBase">
+		<defName>MakeAmmo_6x36mmElectromagneticS_AP</defName>
+		<label>make 6x36mm Electromagnetic-Smart (AP) cartridge x400</label>
+		<description>Craft 400 6x36mm Electromagnetic-Smart (AP) cartridges.</description>
+		<jobString>Making 6x36mm Electromagnetic-Smart (AP) cartridges.</jobString>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Plasteel</li>
+					</thingDefs>
+				</filter>
+				<count>15</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>ComponentSpacer</li>
+					</thingDefs>
+				</filter>
+				<count>6</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Uranium</li>
+					</thingDefs>
+				</filter>
+				<count>8</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Plasteel</li>
+				<li>ComponentSpacer</li>
+				<li>Uranium</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<Ammo_6x36mmElectromagneticS_AP>400</Ammo_6x36mmElectromagneticS_AP>
+		</products>
+		<workAmount>7500</workAmount>
+	</RecipeDef>
+
+	<RecipeDef ParentName="ChargeAmmoRecipeBase">
+		<defName>MakeAmmo_6x36mmElectromagneticS_Ion</defName>
+		<label>make 6x36mm Electromagnetic-Smart (Ion) cartridge x400</label>
+		<description>Craft 400 6x36mm Electromagnetic-Smart (Ion) cartridges.</description>
+		<jobString>Making 6x36mm Electromagnetic-Smart (Ion) cartridges.</jobString>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Plasteel</li>
+					</thingDefs>
+				</filter>
+				<count>10</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>ComponentSpacer</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Uranium</li>
+					</thingDefs>
+				</filter>
+				<count>2</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Plasteel</li>
+				<li>ComponentSpacer</li>
+				<li>Uranium</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<Ammo_6x36mmElectromagneticS_Ion>400</Ammo_6x36mmElectromagneticS_Ion>
+		</products>
+		<workAmount>8200</workAmount>
+	</RecipeDef>
+
+</Defs>

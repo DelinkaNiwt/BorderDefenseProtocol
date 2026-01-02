@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: particle impact blaster -->
+  <Milian_ParticleBeamBlaster.label>粒子冲击炮</Milian_ParticleBeamBlaster.label>
+  <!-- EN: A lightweight particle impact gun with rapid-fire capabilities, its immense impact force can typically suppress most enemies and is also effective against buildings. -->
+  <Milian_ParticleBeamBlaster.description>具备高速连发能力的轻型粒子冲击炮，其巨大的冲击力通常能够压制大部分敌人，对建筑物也有不错的效果。</Milian_ParticleBeamBlaster.description>
+  <!-- EN: Barrel -->
+  <Milian_ParticleBeamBlaster.tools.Barrel.label>枪身</Milian_ParticleBeamBlaster.tools.Barrel.label>
+  <!-- EN: particle impact blaster -->
+  <Milian_ParticleBeamBlaster.verbs.Verb_ChargeShoot.label>粒子冲击炮</Milian_ParticleBeamBlaster.verbs.Verb_ChargeShoot.label>
+  
+  <!-- EN: Particle beam gun -->
+  <Milian_ParticleBeamGun.label>粒子光束枪</Milian_ParticleBeamGun.label>
+  <!-- EN: A firearm that uses a particle beam stream to inflict damage on targets. -->
+  <Milian_ParticleBeamGun.description>利用粒子束流对目标造成冲击的枪械。</Milian_ParticleBeamGun.description>
+  <!-- EN: Barrel -->
+  <Milian_ParticleBeamGun.tools.Barrel.label>枪身</Milian_ParticleBeamGun.tools.Barrel.label>
+  <!-- EN: Particle beam gun -->
+  <Milian_ParticleBeamGun.verbs.Verb_Shoot.label>粒子光束枪</Milian_ParticleBeamGun.verbs.Verb_Shoot.label>
+  
+  <!-- EN: pulse beam gun -->
+  <Milian_PulsedBeamGun.label>脉冲光束枪</Milian_PulsedBeamGun.label>
+  <!-- EN: A type of firearm capable of emitting pulsed beams. It has minimal lethal effect on organic matter but can disable electronic devices upon impact. -->
+  <Milian_PulsedBeamGun.description>能够发射脉冲束流的枪械。对有机体的杀伤效果极其有限，但能够瘫痪命中目标的电子设备。</Milian_PulsedBeamGun.description>
+  <!-- EN: Barrel -->
+  <Milian_PulsedBeamGun.tools.Barrel.label>枪身</Milian_PulsedBeamGun.tools.Barrel.label>
+  <!-- EN: pulse beam gun -->
+  <Milian_PulsedBeamGun.verbs.Verb_Shoot.label>脉冲光束枪</Milian_PulsedBeamGun.verbs.Verb_Shoot.label>
+  
+  <!-- EN: impact particle -->
+  <MilianBullet_ParticleBeamBlaster.label>冲击粒子团</MilianBullet_ParticleBeamBlaster.label>
+  
+  <!-- EN: impact particle charged -->
+  <MilianBullet_ParticleBeamBlasterCharged.label>负载冲击粒子团</MilianBullet_ParticleBeamBlasterCharged.label>
+  
+  <!-- EN: Particle beam -->
+  <MilianBullet_ParticleBeamGun.label>粒子束</MilianBullet_ParticleBeamGun.label>
+  
+  <!-- EN: pulse beam -->
+  <MilianBullet_PulsedBeamGun.label>脉冲光束</MilianBullet_PulsedBeamGun.label>
+  
+</LanguageData>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <CMC_RocketLauncher.label>FF120“焚風”無后座力炮</CMC_RocketLauncher.label>
+  <CMC_RocketLauncher.description>先進多用途單兵無后座力炮，可以發射破甲彈和多用途榴霰彈。由於其巨大的重量，裝填十分緩慢。</CMC_RocketLauncher.description>
+  <CMC_RocketLauncher.tools.barrel.label>炮管</CMC_RocketLauncher.tools.barrel.label>
+  <CMC_RocketLauncher.verbs.Verb_ShootOneUse.label>FF120“焚風”無后座力炮</CMC_RocketLauncher.verbs.Verb_ShootOneUse.label>
+  
+</LanguageData>

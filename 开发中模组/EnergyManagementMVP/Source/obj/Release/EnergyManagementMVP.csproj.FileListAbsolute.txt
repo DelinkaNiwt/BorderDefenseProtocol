@@ -1,0 +1,10 @@
+C:\NiwtDatas\Projects\RimworldModStudio\开发中模组\EnergyManagementMVP\1.6\Assemblies\EnergyManagementMVP.dll
+C:\NiwtDatas\Projects\RimworldModStudio\开发中模组\EnergyManagementMVP\1.6\Assemblies\EnergyManagementMVP.pdb
+C:\NiwtDatas\Projects\RimworldModStudio\开发中模组\EnergyManagementMVP\Source\obj\Release\EnergyManagementMVP.csproj.AssemblyReference.cache
+C:\NiwtDatas\Projects\RimworldModStudio\开发中模组\EnergyManagementMVP\Source\obj\Release\EnergyManagementMVP.GeneratedMSBuildEditorConfig.editorconfig
+C:\NiwtDatas\Projects\RimworldModStudio\开发中模组\EnergyManagementMVP\Source\obj\Release\EnergyManagementMVP.AssemblyInfoInputs.cache
+C:\NiwtDatas\Projects\RimworldModStudio\开发中模组\EnergyManagementMVP\Source\obj\Release\EnergyManagementMVP.AssemblyInfo.cs
+C:\NiwtDatas\Projects\RimworldModStudio\开发中模组\EnergyManagementMVP\Source\obj\Release\EnergyManagementMVP.csproj.CoreCompileInputs.cache
+C:\NiwtDatas\Projects\RimworldModStudio\开发中模组\EnergyManagementMVP\Source\obj\Release\EnergyMa.198C5C69.Up2Date
+C:\NiwtDatas\Projects\RimworldModStudio\开发中模组\EnergyManagementMVP\Source\obj\Release\EnergyManagementMVP.dll
+C:\NiwtDatas\Projects\RimworldModStudio\开发中模组\EnergyManagementMVP\Source\obj\Release\EnergyManagementMVP.pdb

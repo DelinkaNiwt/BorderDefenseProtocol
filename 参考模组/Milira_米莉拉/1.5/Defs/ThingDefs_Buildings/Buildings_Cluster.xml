@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>Milira_MilianCapsule</defName>
+    <label>Milira shard ark</label>
+    <description>A stasis chamber containing Milian. It will open immediately upon activation.</description>
+    <generateCommonality>1.5</generateCommonality>
+    <altitudeLayer>Building</altitudeLayer>
+    <pathCost>50</pathCost>
+    <blockWind>true</blockWind>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>1.0</fillPercent>
+    <tickerType>Normal</tickerType>
+    <rotatable>true</rotatable>
+    <stealable>false</stealable>
+    <selectable>true</selectable>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <repairEffect>ConstructMetal</repairEffect>
+    <forceDebugSpawnable>true</forceDebugSpawnable>
+    <receivesSignals>true</receivesSignals>
+    <isMechClusterThreat>true</isMechClusterThreat>
+    <size>(2,3)</size>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsMisc</li>
+    </thingCategories>
+    <statBases>
+      <MaxHitPoints>180</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <Beauty>60</Beauty>
+      <Mass>75</Mass>
+      <!-- <WorkToBuild>500</WorkToBuild> -->
+    </statBases>
+    <graphicData>
+      <texPath>Milira/Building/Buildings_Misc/MilianCapsule</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(3,3)</drawSize>
+      <shadowData>
+        <volume>(1.8, 0.7, 2.8)</volume>
+      </shadowData>
+    </graphicData>
+    <building>
+      <combatPower>300</combatPower>
+      <buildingTags>
+        <li>MiliraClusterMember</li>
+        <li>MiliraClusterCombatThreat</li>
+      </buildingTags>
+      <!-- <claimable>false</claimable> -->
+      <roofCollapseDamageMultiplier>0.2</roofCollapseDamageMultiplier>
+      <minMechClusterPoints>1000</minMechClusterPoints>
+      <destroySound>BuildingDestroyed_Metal_Medium</destroySound>
+    </building>
+    <costList>
+      <ComponentIndustrial>3</ComponentIndustrial>
+      <Plasteel>20</Plasteel>
+    </costList>
+    <killedLeavings>
+      <ChunkSlagSteel>1</ChunkSlagSteel>
+    </killedLeavings>
+    <damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <comps>
+      <li Class="CompProperties_CanBeDormant">
+        <awakeStateLabelKey>OpenedDaysAgo</awakeStateLabelKey>
+        <dormantStateLabelKey>DormantCompSealed</dormantStateLabelKey>
+      </li>
+      <li Class="CompProperties_WakeUpDormant">
+        <wakeUpSound>MechanoidsWakeUp</wakeUpSound>
+      </li>
+      <li Class="Milira.CompProperties_DelayedPawnSpawnOnWakeup">
+        <delayTicks>0</delayTicks>
+        <points>950</points>
+        <spawnableMilian>
+          <li>Milian_Mechanoid_PawnI</li>
+          <li>Milian_Mechanoid_PawnII</li>
+          <li>Milian_Mechanoid_PawnIII</li>
+          <li>Milian_Mechanoid_PawnIV</li>
+          <li>Milian_Mechanoid_KnightI</li>
+          <li>Milian_Mechanoid_KnightII</li>
+          <li>Milian_Mechanoid_KnightIII</li>
+          <li>Milian_Mechanoid_KnightIV</li>
+          <li>Milian_Mechanoid_BishopI</li>
+          <li>Milian_Mechanoid_BishopII</li>
+          <li>Milian_Mechanoid_RookI</li>
+          <li>Milian_Mechanoid_RookII</li>
+        </spawnableMilian>
+        <spawnSound>CryptosleepCasket_Eject</spawnSound>
+        <lordJob>LordJob_MechanoidsDefend</lordJob>
+        <shouldJoinParentLord>True</shouldJoinParentLord>
+      </li>
+      <li Class="Milira.CompProperties_EmptyStateGraphic">
+        <graphicData>
+          <texPath>Milira/Building/Buildings_Misc/MilianCapsule_Empty</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <drawSize>(3, 3)</drawSize>
+        </graphicData>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="MechBuildingBase">
+    <defName>Milira_DropBeaconCluster</defName>
+    <label>Milira glory beacon</label>
+    <description>A device capable of firing a signal into the sky. Once activated, it instantly calls for a squad of Milian to provide battlefield support.</description>
+    <generateCommonality>1.5</generateCommonality>
+    <size>(1,1)</size>
+    <pathCost>30</pathCost>
+    <tickerType>Normal</tickerType>
+    <fillPercent>0.25</fillPercent>
+    <receivesSignals>true</receivesSignals>
+    <drawerType>RealtimeOnly</drawerType>
+    <drawOffscreen>true</drawOffscreen>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsMisc</li>
+    </thingCategories>
+    <statBases>
+      <MaxHitPoints>240</MaxHitPoints>
+      <Mass>9</Mass>
+      <Flammability>0</Flammability>
+      <Beauty>60</Beauty>
+    </statBases>
+    <graphicData>
+      <texPath>Milira/Building/Buildings_Misc/Milira_DropBeaconCluster</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1.7,1.7)</drawSize>
+      <drawOffset>(0,0,0.1)</drawOffset>
+      <!-- <shaderType>TransparentPostLight</shaderType> -->
+      <shadowData>
+        <volume>(0.6, 0.4, 0.6)</volume>
+      </shadowData>
+      <damageData>
+        <rect>(0.3, 0.3, 0.4, 0.4)</rect>
+      </damageData>
+    </graphicData>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <building>
+      <combatPower>400</combatPower>
+      <buildingTags>
+        <li>MiliraClusterMember</li>
+        <li>MiliraClusterCombatThreat</li>
+      </buildingTags>
+      <!-- <claimable>false</claimable> -->
+      <minMechClusterPoints>1000</minMechClusterPoints>
+      <destroySound>BuildingDestroyed_Metal_Small</destroySound>
+    </building>
+    <comps>
+      <li Class="CompProperties_CanBeDormant">
+        <awakeStateLabelKey>DormantCompExpired</awakeStateLabelKey>
+        <dormantStateLabelKey>DormantCompBeacon</dormantStateLabelKey>
+      </li>
+      <li Class="CompProperties_WakeUpDormant">
+        <wakeUpSound>MechanoidsWakeUp</wakeUpSound>
+      </li>
+      <li Class="Milira.CompProperties_LightBeam">
+        <width>0.3</width>
+        <color>(0.98,0.98,0.82,0.8)</color>
+        <sound>EmpDisabled</sound>
+      </li>
+      <li Class="Milira.CompProperties_DelayedPawnSpawnOnWakeup">
+        <delayTicks>600</delayTicks>
+        <points>750~850</points>
+        <dropInPods>True</dropInPods>
+        <pawnSpawnRadius>3~6</pawnSpawnRadius>
+        <spawnEffecter>Milira_DropBeaconActivated</spawnEffecter>
+        <activatedMessageKey>The beacon calls a team of Milian and leaps into battle.</activatedMessageKey>
+        <spawnableMilian>
+          <li>Milian_Mechanoid_PawnI</li>
+          <li>Milian_Mechanoid_PawnII</li>
+          <li>Milian_Mechanoid_PawnIII</li>
+          <li>Milian_Mechanoid_PawnIV</li>
+          <li>Milian_Mechanoid_KnightI</li>
+          <li>Milian_Mechanoid_KnightII</li>
+          <li>Milian_Mechanoid_KnightIII</li>
+          <li>Milian_Mechanoid_KnightIV</li>
+          <li>Milian_Mechanoid_BishopI</li>
+          <li>Milian_Mechanoid_BishopII</li>
+          <li>Milian_Mechanoid_RookI</li>
+          <li>Milian_Mechanoid_RookII</li>
+        </spawnableMilian>
+        <lordJob>LordJob_MechanoidsDefend</lordJob>
+        <shouldJoinParentLord>true</shouldJoinParentLord>
+      </li>
+    </comps>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <resourcesFractionWhenDeconstructed>1</resourcesFractionWhenDeconstructed>
+    <costList>
+      <Milira_SunPlateSteel>15</Milira_SunPlateSteel>
+      <Milira_SolarCrystal>3</Milira_SolarCrystal>
+    </costList>
+  </ThingDef>
+
+
+  <ThingDef ParentName="MechBuildingBase">
+    <defName>Milira_ProjectionNode</defName>
+    <label>Cradol's Shadow</label>
+    <description>A self-sustaining projection unit that perpetually maintains the imagery of the ubiquitous banners seen in the Sky Metropolis, hovering above the cluster.</description>
+    <size>(1,1)</size>
+    <tickerType>Normal</tickerType>
+    <passability>PassThroughOnly</passability>
+    <pathCost>30</pathCost>
+    <stealable>true</stealable>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsMisc</li>
+    </thingCategories>
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <Mass>9</Mass>
+      <MarketValue>200</MarketValue>
+      <Beauty>60</Beauty>
+    </statBases>
+    <graphicData>
+      <texPath>Milira/Building/Buildings_Misc/ProjectionNode_Base</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <!-- <shaderType>TransparentPostLight</shaderType> -->
+      <drawSize>(2.5,2.5)</drawSize>
+      <drawOffset>(0,0,0.8)</drawOffset>
+      <shadowData>
+        <volume>(0.6, 0.4, 0.6)</volume>
+      </shadowData>
+      <damageData>
+        <rect>(0.2, 0.2, 0.6, 0.6)</rect>
+      </damageData>
+    </graphicData>
+    <drawOffscreen>true</drawOffscreen>
+    <altitudeLayer>Building</altitudeLayer>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <building>
+      <buildingTags>
+        <li>MiliraClusterMemberLamp</li>
+      </buildingTags>
+      <minDistanceToSameTypeOfBuilding>5</minDistanceToSameTypeOfBuilding>
+      <!-- <claimable>false</claimable> -->
+    </building>
+    <comps>
+      <li Class="CompProperties_Glower">
+        <glowRadius>3</glowRadius>
+        <glowColor>(255,255,255,0)</glowColor>
+      </li>
+      <li Class="AncotLibrary.CompProperties_AdditionalGraphic">
+        <floatAmplitude>0.2</floatAmplitude>
+        <floatSpeed>0.008</floatSpeed>
+        <graphicData>
+          <texPath>Milira/Building/Buildings_Misc/ProjectionNode_Projection</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <shaderType>TransparentPostLight</shaderType>
+          <drawSize>(2.5,10)</drawSize>
+          <drawOffset>(0,0,4.2)</drawOffset>
+        </graphicData>
+        <altitudeLayer>Skyfaller</altitudeLayer>
+      </li>
+    </comps>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <resourcesFractionWhenDeconstructed>1</resourcesFractionWhenDeconstructed>
+    <costList>
+      <Plasteel>22</Plasteel>
+      <ComponentIndustrial>1</ComponentIndustrial>
+    </costList>
+  </ThingDef>
+
+
+  <ThingDef Name="Milira_ResonatorBase" ParentName="MechBuildingBase" Abstract="True">
+    <defName>Milira_ResonatorBase</defName>
+    <label>Milira resonator</label>
+    <description>A self-powered building capable of providing resonance for specific ranks, protected by a small, low-angle shield, but itself extremely fragile.</description>
+    <size>(1,1)</size>
+    <tickerType>Normal</tickerType>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0</fillPercent>
+    <pathCost>30</pathCost>
+    <stealable>true</stealable>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsMisc</li>
+    </thingCategories>
+    <statBases>
+      <MaxHitPoints>75</MaxHitPoints>
+      <Mass>7.5</Mass>
+      <MarketValue>200</MarketValue>
+      <WorkToBuild>300</WorkToBuild>
+    </statBases>
+    <graphicData>
+      <texPath>Milira/Building/Buildings_Misc/Resonator_Base</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <!-- <shaderType>TransparentPostLight</shaderType> -->
+      <drawSize>(1.7,1.7)</drawSize>
+      <drawOffset>(0,0,0.3)</drawOffset>
+      <shadowData>
+        <volume>(0.6, 0.4, 0.6)</volume>
+      </shadowData>
+      <damageData>
+        <rect>(0.2, 0.2, 0.6, 0.6)</rect>
+      </damageData>
+    </graphicData>
+    <drawOffscreen>true</drawOffscreen>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <building>
+      <buildingTags>
+        <!-- <li>MiliraClusterMemberLamp</li> -->
+        <li>MiliraClusterMemberResonator</li>
+      </buildingTags>
+      <minDistanceToSameTypeOfBuilding>6</minDistanceToSameTypeOfBuilding>
+      <!-- <claimable>false</claimable> -->
+    </building>
+    <comps>
+      <li Class="CompProperties_Glower">
+        <glowRadius>2</glowRadius>
+        <glowColor>(255,255,255,0)</glowColor>
+      </li>
+      <li Class="CompProperties_ProjectileInterceptor">
+        <radius>1.3</radius>
+        <interceptGroundProjectiles>true</interceptGroundProjectiles>
+        <color>(0.4, 0.4, 0.4)</color>
+        <reactivateEffect>BulletShieldGenerator_Reactivate</reactivateEffect>
+        <activeSound>BulletShield_Ambience</activeSound>
+        <disarmedByEmpForTicks>0</disarmedByEmpForTicks>
+        <!-- <chargeIntervalTicks>600000</chargeIntervalTicks> -->
+        <!-- <chargeDurationTicks>60000</chargeDurationTicks> -->
+      </li>
+    </comps>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <resourcesFractionWhenDeconstructed>1</resourcesFractionWhenDeconstructed>
+    <costList>
+      <Plasteel>50</Plasteel>
+      <ComponentIndustrial>3</ComponentIndustrial>
+      <Milira_ResonatorCore>1</Milira_ResonatorCore>
+    </costList>
+  </ThingDef>
+
+  <!-- <ThingDef ParentName="Milira_ResonatorBase">
+    <defName>Milira_Resonator_Pawn</defName>
+    <building>
+      <buildingTags>
+        <li>Milira_Resonator_Pawn</li>
+      </buildingTags>
+    </building>
+    <comps>
+      <li Class="Milira.CompProperties_Resonator">
+        <onlyTargetMechs>true</onlyTargetMechs>
+        <resonatorTag>Milira_Resonator_Pawn</resonatorTag>
+        <hediff>Milian_ClassHediff_Pawn</hediff>
+        <appendString>Tune to: pawn</appendString>
+      </li>
+      <li Class="AncotLibrary.CompProperties_AdditionalGraphic">
+        <floatAmplitude>0.01</floatAmplitude>
+        <floatSpeed>0.02</floatSpeed>
+        <graphicData>
+          <texPath>Milira/Building/Buildings_Misc/Resonator_Pawn</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <shaderType>TransparentPostLight</shaderType>
+          <drawSize>(1.7,1.7)</drawSize>
+          <drawOffset>(0,0,0.3)</drawOffset>
+        </graphicData>
+        <altitudeLayer>PawnUnused</altitudeLayer>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="Milira_ResonatorBase">
+    <defName>Milira_Resonator_Knight</defName>
+    <building>
+      <buildingTags>
+        <li>Milira_Resonator_Knight</li>
+      </buildingTags>
+    </building>
+    <comps>
+      <li Class="Milira.CompProperties_Resonator">
+        <onlyTargetMechs>true</onlyTargetMechs>
+        <resonatorTag>Milira_Resonator_Knight</resonatorTag>
+        <hediff>Milian_ClassHediff_Knight</hediff>
+        <appendString>Tune to: knight</appendString>
+      </li>
+      <li Class="AncotLibrary.CompProperties_AdditionalGraphic">
+        <floatAmplitude>0.01</floatAmplitude>
+        <floatSpeed>0.02</floatSpeed>
+        <graphicData>
+          <texPath>Milira/Building/Buildings_Misc/Resonator_Knight</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <shaderType>TransparentPostLight</shaderType>
+          <drawSize>(1.7,1.7)</drawSize>
+          <drawOffset>(0,0,0.3)</drawOffset>
+        </graphicData>
+        <altitudeLayer>PawnUnused</altitudeLayer>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="Milira_ResonatorBase">
+    <defName>Milira_Resonator_Bishop</defName>
+    <building>
+      <buildingTags>
+        <li>Milira_Resonator_Bishop</li>
+      </buildingTags>
+    </building>
+    <comps>
+      <li Class="Milira.CompProperties_Resonator">
+        <onlyTargetMechs>true</onlyTargetMechs>
+        <resonatorTag>Milira_Resonator_Bishop</resonatorTag>
+        <hediff>Milian_ClassHediff_Bishop</hediff>
+        <appendString>Tune to: bishop</appendString>
+      </li>
+      <li Class="AncotLibrary.CompProperties_AdditionalGraphic">
+        <floatAmplitude>0.01</floatAmplitude>
+        <floatSpeed>0.02</floatSpeed>
+        <graphicData>
+          <texPath>Milira/Building/Buildings_Misc/Resonator_Bishop</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <shaderType>TransparentPostLight</shaderType>
+          <drawSize>(1.7,1.7)</drawSize>
+          <drawOffset>(0,0,0.3)</drawOffset>
+        </graphicData>
+        <altitudeLayer>PawnUnused</altitudeLayer>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="Milira_ResonatorBase">
+    <defName>Milira_Resonator_Rook</defName>
+    <building>
+      <buildingTags>
+        <li>Milira_Resonator_Rook</li>
+      </buildingTags>
+    </building>
+    <comps>
+      <li Class="Milira.CompProperties_Resonator">
+        <onlyTargetMechs>true</onlyTargetMechs>
+        <resonatorTag>Milira_Resonator_Rook</resonatorTag>
+        <hediff>Milian_ClassHediff_Rook</hediff>
+        <appendString>Tune to: rook</appendString>
+      </li>
+      <li Class="AncotLibrary.CompProperties_AdditionalGraphic">
+        <floatAmplitude>0.01</floatAmplitude>
+        <floatSpeed>0.02</floatSpeed>
+        <graphicData>
+          <texPath>Milira/Building/Buildings_Misc/Resonator_Rook</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <shaderType>TransparentPostLight</shaderType>
+          <drawSize>(1.7,1.7)</drawSize>
+          <drawOffset>(0,0,0.3)</drawOffset>
+        </graphicData>
+        <altitudeLayer>PawnUnused</altitudeLayer>
+      </li>
+    </comps>
+  </ThingDef> -->
+
+  <ThingDef ParentName="NonDeconstructibleAncientBuildingBase">
+    <defName>Milira_SolarCrystalDruse</defName>
+    <label>solar crystal druse</label>
+    <description>A naturally occurring crystal cluster formed by the influence of strong solar radiation, which can mine solar crystal from it.</description>
+    <size>(1,1)</size>
+    <passability>PassThroughOnly</passability>
+    <pathCost>30</pathCost>
+    <stealable>false</stealable>
+    <!-- <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsMisc</li>
+    </thingCategories> -->
+    <statBases>
+      <MaxHitPoints>65</MaxHitPoints>
+      <!-- <Mass>1.6</Mass> -->
+      <!-- <RoyalFavorValue>1</RoyalFavorValue> -->
+      <MarketValue>500</MarketValue>
+      <WorkToBuild>300</WorkToBuild>
+    </statBases>
+    <graphicData>
+      <texPath>Milira/Building/SolarCrystalDruse</texPath>
+      <graphicClass>Graphic_Random</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+      <drawSize>(1.6,1.6)</drawSize>
+      <drawOffset>(0,0,0)</drawOffset>
+      <!-- <shadowData>
+        <volume>(0.2, 0.2, 0.2)</volume>
+        <offset>(0, 0, -0.5)</offset>
+      </shadowData> -->
+      <damageData>
+        <rect>(0.2, 0.2, 0.6, 0.6)</rect>
+      </damageData>
+    </graphicData>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <building>
+      <deconstructible>true</deconstructible>
+      <claimable>true</claimable>
+      <buildingTags>
+        <li>MiliraClusterMemberGood</li>
+        <li>MechClusterMember</li>
+      </buildingTags>
+    </building>
+    <!-- <thingCategories> -->
+    <!-- <li>BuildingsSpecial</li> -->
+    <!-- </thingCategories> -->
+    <!-- <minifiedDef>MinifiedThing</minifiedDef> -->
+    <comps>
+      <li Class="CompProperties_Glower">
+        <glowRadius>2</glowRadius>
+        <glowColor>(235,233,184,0)</glowColor>
+      </li>
+    </comps>
+    <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+    <resourcesFractionWhenDeconstructed>1</resourcesFractionWhenDeconstructed>
+    <costList>
+      <Milira_SolarCrystal>4</Milira_SolarCrystal>
+    </costList>
+  </ThingDef>
+
+</Defs>

@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>Milira_HarrierFighter</defName>
+    <label>milira harrier fighter</label>
+    <description>A small fighter that uses force-field propulsion for flight and can perform vertical takeoffs and landings. Consumes a small amount of solar fuel to initiate liftoff, after which it can fly solely on its built-in fuel cell.\n\nEquipped with two particle autocannons, consuming 0.05 solar fuel per shot.</description>
+    <thingClass>AncotLibrary.Building_Aerocraft</thingClass>
+    <preventDroppingThingsOn>true</preventDroppingThingsOn>
+    <altitudeLayer>Building</altitudeLayer>
+    <pathCost>0</pathCost>
+    <blockWind>true</blockWind>
+    <drawOffscreen>true</drawOffscreen>
+    <seeThroughFog>true</seeThroughFog>
+    <passability>Standable</passability>
+    <fillPercent>0.5</fillPercent>
+    <size>(3,3)</size>
+    <drawHighlight>true</drawHighlight>
+    <highlightColor>(0.56, 0.62, 0.9)</highlightColor>
+    <uiIconScale>1</uiIconScale>
+    <drawDamagedOverlay>false</drawDamagedOverlay>
+    <graphicData>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <texPath>Milira/Building/Shuttle/Harrier</texPath>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(4,4)</drawSize>
+      <drawOffset>(0, 0, 0)</drawOffset>
+      <shadowData>
+        <volume>(0.8, 0.8, 2.2)</volume>
+        <offset>(-0.1, 0, 0)</offset>
+      </shadowData>
+      <damageData>
+        <rect>(0, 0, 0, 0)</rect>
+      </damageData>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>400</MaxHitPoints>
+      <Flammability>0.2</Flammability>
+      <WorkToBuild>36000</WorkToBuild>
+      <Comfort>0.65</Comfort>
+      <Ancot_Aerocraft_MaxSpeed>12</Ancot_Aerocraft_MaxSpeed>
+      <Ancot_Aerocraft_MinTurnRadius>3</Ancot_Aerocraft_MinTurnRadius>
+      <Ancot_Aerocraft_ArmorRating>0.8</Ancot_Aerocraft_ArmorRating>
+    </statBases>
+    <tickerType>Normal</tickerType>
+    <designationCategory>Odyssey</designationCategory>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+    <costList>
+      <Milira_SplendidSteel>280</Milira_SplendidSteel>
+      <Milira_SunPlateSteel>60</Milira_SunPlateSteel>
+      <ComponentIndustrial>35</ComponentIndustrial>
+      <Milira_StarshipBattery>1</Milira_StarshipBattery>
+    </costList>
+    <canOverlapZones>true</canOverlapZones>
+    <killedLeavings>
+      <Milira_SplendidSteel>60</Milira_SplendidSteel>
+      <Milira_ChunkSlag_SunPlateSteel>3</Milira_ChunkSlag_SunPlateSteel>
+      <ComponentIndustrial>8</ComponentIndustrial>
+    </killedLeavings>
+    <rotatable>true</rotatable>
+    <hasInteractionCell>true</hasInteractionCell>
+    <interactionCellOffset>(0, 0, -2)</interactionCellOffset>
+    <defaultPlacingRot>East</defaultPlacingRot>
+    <selectable>true</selectable>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+    <preventSkyfallersLandingOn>true</preventSkyfallersLandingOn>
+    <drawerType>RealtimeOnly</drawerType>
+    <repairEffect>ConstructMetal</repairEffect>
+    <forceDebugSpawnable>true</forceDebugSpawnable>
+    <building>
+      <combatPower>400</combatPower>
+      <expandHomeArea>false</expandHomeArea>
+      <destroySound>BuildingDestroyed_Metal_Big</destroySound>
+      <paintable>true</paintable>
+      <isInert>true</isInert>
+      <isEdifice>false</isEdifice>
+      <forcedCostLeavings>
+        <li MayRequire="Ludeon.RimWorld.Odyssey">Milira_StarshipBattery</li>
+      </forcedCostLeavings>
+    </building>
+    <inspectorTabs>
+      <li>AncotLibrary.ITab_ContentsAerocraft</li>
+    </inspectorTabs>
+    <researchPrerequisites>
+      <li>Milira_ForceFieldAerocraft</li>
+      <li>Milira_ParticleAcceleratorIII</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Shuttle">
+        <compClass>AncotLibrary.CompShuttleAerocraft</compClass>
+        <shipDef>Milira_HarrierFighter</shipDef>
+      </li>
+      <li Class="CompProperties_Launchable">
+        <compClass>AncotLibrary.CompLaunchableAerocraft</compClass>
+        <fuelPerTile>0.01</fuelPerTile>
+        <minFuelCost>10</minFuelCost>
+        <skyfallerLeaving>Milira_HarrierFighterLeaving</skyfallerLeaving>
+        <worldObjectDef>Milira_HarrierFighter</worldObjectDef>
+        <cooldownTicks>1500</cooldownTicks>
+        <fixedLaunchDistanceMax>165</fixedLaunchDistanceMax>
+        <cooldownEndedMessage>{0} is ready to launch again.</cooldownEndedMessage>
+      </li>
+      <li Class="CompProperties_Transporter">
+        <compClass>AncotLibrary.CompTransporterAerocraft</compClass>
+        <massCapacity>240</massCapacity>
+        <max1PerGroup>true</max1PerGroup>
+        <canChangeAssignedThingsAfterStarting>true</canChangeAssignedThingsAfterStarting>
+        <pawnLoadedSound>Shuttle_PawnLoaded</pawnLoadedSound>
+        <pawnExitSound>Shuttle_PawnExit</pawnExitSound>
+        <showMassInInspectString>true</showMassInInspectString>
+      </li>
+      <li Class="CompProperties_Refuelable">
+        <compClass>AncotLibrary.CompRefuelableAerocraft</compClass>
+        <fuelCapacity>100</fuelCapacity>
+        <targetFuelLevelConfigurable>true</targetFuelLevelConfigurable>
+        <initialConfigurableTargetFuelLevel>100</initialConfigurableTargetFuelLevel>
+        <fuelFilter>
+          <thingDefs>
+            <li>Milira_SunLightFuel</li>
+          </thingDefs>
+        </fuelFilter>
+        <fuelLabel>SolarFuel</fuelLabel>
+        <fuelGizmoLabel>SolarFuel</fuelGizmoLabel>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <autoRefuelPercent>1</autoRefuelPercent>
+        <showFuelGizmo>true</showFuelGizmo>
+        <drawOutOfFuelOverlay>false</drawOutOfFuelOverlay>
+        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+        <canEjectFuel>true</canEjectFuel>
+      </li>
+      <li Class="CompProperties_AmbientSound">
+        <sound>ShuttleIdle_Ambience</sound>
+      </li>
+      <li Class="AncotLibrary.CompProperties_Aerocraft">
+        <inflightGraphicData>
+          <graphicClass>Graphic_Single</graphicClass>
+          <texPath>Milira/Building/Shuttle/HarrierLaunched_north</texPath>
+          <shaderType>CutoutComplex</shaderType>
+          <drawSize>(4,4)</drawSize>
+        </inflightGraphicData>
+        <takeOffIconPath>Milira/Building/Shuttle/HarrierTakeOff</takeOffIconPath>
+        <landingIconPath>Milira/Building/Shuttle/HarrierLanding</landingIconPath>
+        <takeOffFuelCost>10</takeOffFuelCost>
+        <!-- <weaponSlotCellOffsets>
+          <li>(-1, 0, 0)</li>
+          <li>(1, 0, 0)</li>
+        </weaponSlotCellOffsets> -->
+        <fleckIntervalTicks>6</fleckIntervalTicks>
+        <takeOffEffect>Milian_HarrierFighterTakeOff</takeOffEffect>
+        <flightFlecks>
+          <li>
+            <fleckDef>Milira_AirPuffGlow</fleckDef>
+            <offset>(1.0,-0.1,-0.6)</offset>
+            <fleckColor>(0.4,0.8,1.0,0.6)</fleckColor>
+          </li>
+          <li>
+            <fleckDef>Milira_AirPuffGlow</fleckDef>
+            <offset>(-1.0,-0.1,-0.6)</offset>
+            <fleckColor>(0.4,0.8,1.0,0.6)</fleckColor>
+          </li>
+        </flightFlecks>
+      </li>
+      <li Class="AncotLibrary.CompProperties_TurretGun_Building">
+        <turretDef>MiliraTurret_HarrierFighter_MiniGun</turretDef>
+        <turretDrawScale>3</turretDrawScale>
+        <consumeChargeAmountPerShot>0.05</consumeChargeAmountPerShot>
+        <statLabelPostfix>1</statLabelPostfix>
+        <turretDrawOffset>(0.6, -0.3)</turretDrawOffset>
+      </li>
+      <li Class="AncotLibrary.CompProperties_TurretGun_Building">
+        <turretDef>MiliraTurret_HarrierFighter_MiniGun</turretDef>
+        <consumeChargeAmountPerShot>0.05</consumeChargeAmountPerShot>
+        <turretDrawScale>3</turretDrawScale>
+        <turretDrawOffset>(-0.6, -0.3)</turretDrawOffset>
+        <statLabelPostfix>2</statLabelPostfix>
+        <saveKeysPrefix>B</saveKeysPrefix>
+      </li>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>60</wickTicks>
+        <damageAmountBase>60</damageAmountBase>
+        <armorPenetrationBase>0.6</armorPenetrationBase>
+        <explosiveRadius>3.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <drawWick>false</drawWick>
+        <startWickHitPointsPercent>0.01</startWickHitPointsPercent>
+      </li>
+    </comps>
+    <placeWorkers>
+      <li>PlaceWorker_NotUnderRoof</li>
+    </placeWorkers>
+    <uiIconScale>0.8</uiIconScale>
+    <uiOrder>2600</uiOrder>
+  </ThingDef>
+
+  <TransportShipDef>
+    <defName>Milira_HarrierFighter</defName>
+    <label>milira harrier fighter</label>
+    <shipThing>Milira_HarrierFighter</shipThing>
+    <arrivingSkyfaller>Milira_HarrierFighterIncoming</arrivingSkyfaller>
+    <leavingSkyfaller>Milira_HarrierFighterLeaving</leavingSkyfaller>
+    <worldObject>Milira_HarrierFighter</worldObject>
+    <playerShuttle>true</playerShuttle>
+  </TransportShipDef>
+
+  <WorldObjectDef ParentName="ShuttleWorldObjectBase">
+    <defName>Milira_HarrierFighter</defName>
+    <label>milira harrier fighter</label>
+    <description>A small fighter that uses force-field propulsion for flight and can perform vertical takeoffs and landings. Consumes a small amount of solar fuel to initiate liftoff, after which it can fly solely on its built-in fuel cell.</description>
+    <expandingIconTexture>Milira/Building/Shuttle/Harrier_north</expandingIconTexture>
+    <expandingIconDrawSize>1</expandingIconDrawSize>
+    <expandingIconColor>(255,255,255)</expandingIconColor>
+    <rotateGraphicWhenTraveling>true</rotateGraphicWhenTraveling>
+    <modExtensions>
+      <li Class="AncotLibrary.WorldObjectShuttle_Extension">
+        <traveledPctStepPerTickFactor>3.0</traveledPctStepPerTickFactor>
+      </li>
+    </modExtensions>
+  </WorldObjectDef>
+
+
+  <!-- <ThingDef ParentName="BuildingBase">
+    <defName>Milira_FighterWeaponTest</defName>
+    <label>测试用机炮</label>
+    <description>.</description>
+    <thingClass>AncotLibrary.Building_AerocraftWeapon</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Milira/Building/Power/StarshipBattery</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(2.4, 2.4)</drawSize>
+      <drawOffset>(0,0,0.4)</drawOffset>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <uiIconScale>0.6</uiIconScale>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.2</fillPercent>
+    <pathCost>50</pathCost>
+    <rotatable>false</rotatable>
+    <blockWind>true</blockWind>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <tickerType>Normal</tickerType>
+    <thingCategories>
+      <li>BuildingsPower</li>
+    </thingCategories>
+    <statBases>
+      <MaxHitPoints>220</MaxHitPoints>
+      <WorkToBuild>2500</WorkToBuild>
+      <Mass>26</Mass>
+      <Flammability>1.0</Flammability>
+      <Beauty>2</Beauty>
+    </statBases>
+    <tickerType>Normal</tickerType>
+    <canOverlapZones>false</canOverlapZones>
+    <size>(1,1)</size>
+    <building>
+      <destroySound>BuildingDestroyed_Metal_Medium</destroySound>
+      <isEdifice>false</isEdifice>
+    </building>
+    <costList>
+      <Milira_SplendidSteel>180</Milira_SplendidSteel>
+      <Milira_StarshipBattery>1</Milira_StarshipBattery>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_TurretGun_Building">
+        <turretDef>MiliraTurret_HarrierFighter_MiniGun</turretDef>
+        <turretDrawScale>3</turretDrawScale>
+        <consumeChargeAmountPerShot>1</consumeChargeAmountPerShot>
+        <statLabelPostfix>1</statLabelPostfix>
+        <turretDrawOffset>(0, 0)</turretDrawOffset>
+      </li>
+      <li Class="AncotLibrary.CompProperties_ThingCarrier_Custom">
+        <fixedIngredient>Milira_SplendidSteel</fixedIngredient>
+        <startingIngredientCount>600</startingIngredientCount>
+        <maxIngredientCount>600</maxIngredientCount>
+      </li>
+    </comps>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <designationCategory>Power</designationCategory>
+    <uiOrder>2100</uiOrder>
+    <designationHotKey>Misc4</designationHotKey>
+    <constructEffect>ConstructMetal</constructEffect>
+    <researchPrerequisites>
+    </researchPrerequisites>
+    <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+    <placeWorkers>
+    </placeWorkers>
+  </ThingDef> -->
+
+  <!-- 鹞式战机机炮 -->
+  <ThingDef ParentName="Milira_CombatDroneTurretBase">
+    <defName>MiliraTurret_HarrierFighter_MiniGun</defName>
+    <label>particle minigun</label>
+    <description>a particle minigun installed on harrier fighter.</description>
+    <graphicData>
+      <texPath>Milira/Building/Shuttle/HarrierFighterMiniGun</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <Mass>8.2</Mass>
+      <AccuracyTouch>0.78</AccuracyTouch>
+      <AccuracyShort>0.65</AccuracyShort>
+      <AccuracyMedium>0.54</AccuracyMedium>
+      <AccuracyLong>0.42</AccuracyLong>
+      <RangedWeapon_Cooldown>4</RangedWeapon_Cooldown>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>AncotLibrary.Verb_TurretShoot</verbClass>
+        <defaultProjectile>MiliraBullet_HarrierFighterMiniGun</defaultProjectile>
+        <requireLineOfSight>false</requireLineOfSight>
+        <range>33.9</range>
+        <soundCast>Milira_Shot_ParticlePulse</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>3</muzzleFlashScale>
+        <defaultCooldownTime>4</defaultCooldownTime>
+        <burstShotCount>12</burstShotCount>
+        <ticksBetweenBurstShots>6</ticksBetweenBurstShots>
+      </li>
+    </verbs>
+  </ThingDef>
+  <ThingDef ParentName="MiliraBullet_ParticleBase">
+    <defName>MiliraBullet_HarrierFighterMiniGun</defName>
+    <label>particle beam</label>
+    <thingClass>AncotLibrary.Projectile_Aerocraft</thingClass>
+    <projectile>
+      <flyOverhead>true</flyOverhead>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>18</damageAmountBase>
+      <armorPenetrationBase>0.2</armorPenetrationBase>
+      <stoppingPower>0.8</stoppingPower>
+      <speed>125</speed>
+    </projectile>
+    <graphicData>
+      <texPath>Milira/ProjectileNew/Bullet_Particle</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>1.5</drawSize>
+    </graphicData>
+    <modExtensions>
+      <li Class = "AncotLibrary.Projectile_Aerocraft_Extension"/>
+    </modExtensions>
+  </ThingDef>
+
+</Defs>

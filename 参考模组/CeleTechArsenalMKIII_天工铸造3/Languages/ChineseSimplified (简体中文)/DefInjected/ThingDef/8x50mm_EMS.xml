@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 8x50mm MTSmart ATB -->
+  <Ammo_8x50mmMTSmart_ATB.label>8x50mm 制导麻醉弹</Ammo_8x50mmMTSmart_ATB.label>
+  <!-- EN: 8x50mm multi-task smart ammo by CeleTech -->
+  <Ammo_8x50mmMTSmart_ATB.description>能追踪目标的麻醉弹</Ammo_8x50mmMTSmart_ATB.description>
+  
+  <!-- EN: 8x50mmMTSmart HE -->
+  <Ammo_8x50mmMTSmart_HE.label>8x50mm 制导高爆弹</Ammo_8x50mmMTSmart_HE.label>
+  <!-- EN: 8x50mm multi-task smart ammo by CeleTech -->
+  <Ammo_8x50mmMTSmart_HE.description>能追踪目标的高爆弹</Ammo_8x50mmMTSmart_HE.description>
+  
+  <!-- EN: 8x50mmMTSmart R -->
+  <Ammo_8x50mmMTSmart_Regular.label>8x50mm 制导多用途弹</Ammo_8x50mmMTSmart_Regular.label>
+  <!-- EN: 8x50mm multi-task smart ammo by CeleTech -->
+  <Ammo_8x50mmMTSmart_Regular.description>能追踪目标的高爆穿甲/EMP弹</Ammo_8x50mmMTSmart_Regular.description>
+  
+  <!-- EN: bullet -->
+  <Bullet_8x50mmMTSmart_ATB.label>8x50mm 制导麻醉弹</Bullet_8x50mmMTSmart_ATB.label>
+  
+  <!-- EN: bullet -->
+  <Bullet_8x50mmMTSmart_HE.label>8x50mm 制导高爆弹</Bullet_8x50mmMTSmart_HE.label>
+  
+  <!-- EN: bullet -->
+  <Bullet_8x50mmMTSmart_Regular.label>8x50mm 制导多用途弹</Bullet_8x50mmMTSmart_Regular.label>
+  
+</LanguageData>

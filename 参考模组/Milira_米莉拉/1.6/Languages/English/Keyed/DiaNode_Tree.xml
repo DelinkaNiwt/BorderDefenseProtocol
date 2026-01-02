@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <Milira.MilianConfigTip>Milian Config</Milira.MilianConfigTip>
+
+  <Milira.MilianConfigGuide>Milian config guide</Milira.MilianConfigGuide>
+  <Milira.MilianConfigGuideDesc>A description of the milian configuration. You can view basic information about the milian configuration interface here.</Milira.MilianConfigGuideDesc>
+
+  <Milira.MilianConfigGuidePage0>-About Equipment Browsing-\nYou can view the weapon and apparels status of the milian in this configuration page. The small colored point at the top-left of the equipment icon represent the quality of the equipment.</Milira.MilianConfigGuidePage0>
+  <Milira.MilianConfigGuidePage1>-About Auto-Equip-\nYou can enable auto-equip for the milian in the interface. When this function is enabled, colonists capable of hauling will try to find suitable apparel for the milian in the storage area and equip it. The auto-equip system selects the optimal clothing based on armor value, quality, and maximum hit point, using a point-based system to choose the best option. Enabling this function will cause a certain level of computational load, so if you experience lag during gameplay, you can choose to enable or disable this feature as needed.</Milira.MilianConfigGuidePage1>
+  <Milira.MilianConfigGuidePage2>-About Equipment Switch-\nIn addition to assigning a colonist to change Milian's weapon, you can also click on a Milian's weapon slot in the Milian configuration interface. In the pop-up menu, select the weapon you want to switch to. After confirming, the Milian will attempt to perform a weapon switch. If you no longer wish to change the weapon after confirming, click the weapon slot again to find the option to cancel the switch, or interrupt the Milian's current job to cancel it.</Milira.MilianConfigGuidePage2>
+  <Milira.MilianConfigGuidePage3>-About Work Management-\nAfter unlocking the technology "Milian Work Permissions", a new button will appear on this tab. Click it to switch to the Milian Work Management tab to assign tasks.</Milira.MilianConfigGuidePage3>
+
+  <!-- 派系对话 -->
+  <Milira.TitleUpdate>Promotion for {0}</Milira.TitleUpdate>
+  <Milira.TitleUpdate_Disabled>no promotion available</Milira.TitleUpdate_Disabled>
+  <Milira.TitleUpdate_Success>{0} has successfully registered with {1} as a {2}. {0} now has the following privileges: {3}\n\nRemaining reputation points held by {0}: {4}.</Milira.TitleUpdate_Success>
+
+  <Milira.MilianHairColor_Copy>Copy {0}'s hair color to clipboard.</Milira.MilianHairColor_Copy>
+  <Milira.MilianHairColor_Paste>Paste hair color from clipboard.</Milira.MilianHairColor_Paste>
+
+</LanguageData>

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<ThingCategoryDef>
+		<defName>Ammo6x36mmElectromagnetic</defName>
+		<label>6x36mm EM-CMC</label>
+		<parent>AmmoAdvanced</parent>
+		<iconPath>Things/Ammo/6x36mmUI</iconPath>
+	</ThingCategoryDef>
+
+	<!-- ==================== AmmoSet ========================== -->
+
+	<CombatExtended.AmmoSetDef>
+		<defName>AmmoSet_6x36mmElectromagnetic</defName>
+		<label>6x36mm Electromagnetic</label>
+		<ammoTypes>
+			<Ammo_6x36mmElectromagnetic_AP>Bullet_6x36mmElectromagnetic_AP</Ammo_6x36mmElectromagnetic_AP>
+			<Ammo_6x36mmElectromagnetic_Ion>Bullet_6x36mmElectromagnetic_Ion</Ammo_6x36mmElectromagnetic_Ion>
+		</ammoTypes>
+		<similarTo>AmmoSet_ChargedRifle</similarTo>
+	</CombatExtended.AmmoSetDef>
+
+	<!-- ==================== Ammo ========================== -->
+
+	<ThingDef Class="CombatExtended.AmmoDef" Name="6x36mmElectromagneticBase" ParentName="SpacerSmallAmmoBase" Abstract="True">
+		<description>Electromagnetic projectile ammunition used by advanced EM rifle systems.</description>
+		<statBases>
+			<Mass>0.012</Mass>
+			<Bulk>0.012</Bulk>
+		</statBases>
+		<tradeTags>
+			<li>CE_AutoEnableTrade</li>
+			<li>CE_AutoEnableCrafting_FabricationBench</li>
+		</tradeTags>
+		<thingCategories>
+			<li>Ammo6x36mmElectromagnetic</li>
+		</thingCategories>
+		<stackLimit>4000</stackLimit>
+	</ThingDef>
+
+	<ThingDef Class="CombatExtended.AmmoDef" ParentName="6x36mmElectromagneticBase">
+		<defName>Ammo_6x36mmElectromagnetic_AP</defName>
+		<label>6x36mm Electromagnetic (AP)</label>
+		<graphicData>
+			<texPath>Things/Ammo/6x36mm_AP</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<ammoClass>CMC_EMBullet_AP</ammoClass>
+	</ThingDef>
+
+	<ThingDef Class="CombatExtended.AmmoDef" ParentName="6x36mmElectromagneticBase">
+		<defName>Ammo_6x36mmElectromagnetic_Ion</defName>
+		<label>6x36mm Electromagnetic (Ion)</label>
+		<graphicData>
+			<texPath>Things/Ammo/6x36mm_APEMP</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<ammoClass>CMC_EMBullet_Ion</ammoClass>
+		<generateAllowChance>0.4</generateAllowChance>
+	</ThingDef>
+
+	<!-- ================== Projectiles ================== -->
+
+	<ThingDef Name="Base6x36mmElectromagneticBullet" ParentName="BaseBulletCE" Abstract="true">
+		<graphicData>
+			<texPath>Things/Projectile/Charged/ChargeShot</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<damageDef>Bullet</damageDef>
+			<speed>180</speed>
+		</projectile>
+	</ThingDef>
+
+	<ThingDef ParentName="Base6x36mmElectromagneticBullet">
+		<defName>Bullet_6x36mmElectromagnetic_AP</defName>
+		<label>6x36mm Electromagnetic projectile (AP)</label>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<damageAmountBase>11</damageAmountBase>
+			<secondaryDamage>
+				<li>
+					<def>Bomb_Secondary</def>
+					<amount>3</amount>
+				</li>
+			</secondaryDamage>
+			<armorPenetrationSharp>45</armorPenetrationSharp>
+			<armorPenetrationBlunt>30</armorPenetrationBlunt>
+		</projectile>
+	</ThingDef>
+
+	<ThingDef ParentName="Base6x36mmElectromagneticBullet">
+		<defName>Bullet_6x36mmElectromagnetic_Ion</defName>
+		<label>6x36mm Electromagnetic projectile (Ion)</label>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<damageAmountBase>11</damageAmountBase>
+			<secondaryDamage>
+				<li>
+					<def>EMP</def>
+					<amount>3</amount>
+				</li>
+			</secondaryDamage>
+			<armorPenetrationSharp>45</armorPenetrationSharp>
+			<armorPenetrationBlunt>30</armorPenetrationBlunt>
+			<empShieldBreakChance>1</empShieldBreakChance>
+		</projectile>
+	</ThingDef>
+
+	<!-- ==================== Recipes ========================== -->
+
+	<RecipeDef ParentName="ChargeAmmoRecipeBase">
+		<defName>MakeAmmo_6x36mmElectromagnetic_AP</defName>
+		<label>make 6x36mm Electromagnetic (AP) cartridge x400</label>
+		<description>Craft 400 6x36mm Electromagnetic (AP) cartridges.</description>
+		<jobString>Making 6x36mm Electromagnetic (AP) cartridges.</jobString>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Plasteel</li>
+					</thingDefs>
+				</filter>
+				<count>10</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>ComponentSpacer</li>
+					</thingDefs>
+				</filter>
+				<count>6</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Uranium</li>
+					</thingDefs>
+				</filter>
+				<count>3</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Plasteel</li>
+				<li>ComponentSpacer</li>
+				<li>Uranium</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<Ammo_6x36mmElectromagnetic_AP>400</Ammo_6x36mmElectromagnetic_AP>
+		</products>
+		<workAmount>7500</workAmount>
+	</RecipeDef>
+
+	<RecipeDef ParentName="ChargeAmmoRecipeBase">
+		<defName>MakeAmmo_6x36mmElectromagnetic_Ion</defName>
+		<label>make 6x36mm Electromagnetic (Ion) cartridge x400</label>
+		<description>Craft 400 6x36mm Electromagnetic (Ion) cartridges.</description>
+		<jobString>Making 6x36mm Electromagnetic (Ion) cartridges.</jobString>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Plasteel</li>
+					</thingDefs>
+				</filter>
+				<count>10</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>ComponentSpacer</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Uranium</li>
+					</thingDefs>
+				</filter>
+				<count>2</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Plasteel</li>
+				<li>ComponentSpacer</li>
+				<li>Uranium</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<Ammo_6x36mmElectromagnetic_Ion>400</Ammo_6x36mmElectromagnetic_Ion>
+		</products>
+		<workAmount>8200</workAmount>
+	</RecipeDef>
+
+</Defs>

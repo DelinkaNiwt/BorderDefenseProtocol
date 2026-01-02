@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<HeadTypeDef ParentName="AverageBase">
+		<defName>MiliraHead0</defName>
+		<graphicPath>Milira/Pawn/Head/MiliraHead</graphicPath>
+		<gender>None</gender>
+	</HeadTypeDef>
+	
+	<HeadTypeDef ParentName="AverageBase">
+		<defName>MiliraHead1</defName>
+		<graphicPath>Milira/Pawn/Head/MiliraHead1</graphicPath>
+		<gender>None</gender>
+	</HeadTypeDef>
+
+	<!-- 以上的要改脸 -->
+
+	<HeadTypeDef ParentName="AverageBase">
+		<defName>MiliraHead2</defName>
+		<graphicPath>Milira/Pawn/Head/MiliraHead2</graphicPath>
+		<gender>None</gender>
+	</HeadTypeDef>
+
+	<HeadTypeDef ParentName="AverageBase">
+		<defName>MiliraHead3</defName>
+		<graphicPath>Milira/Pawn/Head/MiliraHead3</graphicPath>
+		<gender>None</gender>
+	</HeadTypeDef>
+
+	<HeadTypeDef ParentName="AverageBase">
+		<defName>MiliraHead4</defName>
+		<graphicPath>Milira/Pawn/Head/MiliraHead4</graphicPath>
+		<gender>None</gender>
+	</HeadTypeDef>
+
+	<HeadTypeDef ParentName="AverageBase">
+		<defName>MiliraHead5</defName>
+		<graphicPath>Milira/Pawn/Head/MiliraHead5</graphicPath>
+		<gender>None</gender>
+	</HeadTypeDef>
+
+
+
+
+   <!-- Milian============================================================================================================================ -->
+
+	<HeadTypeDef ParentName="AverageBase">
+		<defName>MilianHeadN1</defName>
+		<graphicPath>Milian/Pawn/Head/MilianHeadN1</graphicPath>
+		<gender>None</gender>
+	</HeadTypeDef>
+	
+	<HeadTypeDef ParentName="AverageBase">
+		<defName>MilianHeadN2</defName>
+		<graphicPath>Milian/Pawn/Head/MilianHeadN2</graphicPath>
+		<gender>None</gender>
+	</HeadTypeDef>
+	
+
+</Defs>

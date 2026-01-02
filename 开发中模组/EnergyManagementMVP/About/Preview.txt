@@ -1,0 +1,2 @@
+Placeholder for mod preview image.
+This is a text file as a placeholder. In production, replace with Preview.png (256x256 or 512x512).

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Defs>
+  
+  <AnimationDef>
+    <defName>Ancot_WeaponBlock</defName>
+    <durationTicks>30</durationTicks>
+    <animationParts>
+      <li>
+        <key>Root</key>
+        <value>
+          <workerClass>AncotLibrary.AnimationWorker_KeyframesRotate</workerClass>
+          <keyframes>
+            <li>
+              <tick>0</tick>
+              <offset>(0,0,0.1)</offset>
+              <angle>-5</angle>
+            </li>
+            <li>
+              <tick>10</tick>
+              <offset>(0,0,0.2)</offset>
+              <angle>0</angle>
+            </li>
+            <li>
+              <tick>20</tick>
+              <offset>(0,0,0.2)</offset>
+              <angle>10</angle>
+            </li>
+            <li>
+              <tick>30</tick>
+              <angle>0</angle>
+            </li>
+          </keyframes>
+        </value>
+      </li>
+    </animationParts>
+  </AnimationDef>
+  
+</Defs>

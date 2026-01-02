@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: I.T.C.V.S. -->
+  <CMC_WallTempController.label>I.T.C.V.S.温控通风系统</CMC_WallTempController.label>
+  <!-- EN: A third-generation space-grade thermal regulation device integrating a Quantum Entropy Regulation Core. Achieves molecular-level precision temperature control within ±0.1°C through phase-change nanofluid technology, while its resonant cavity initiates self-destruct protocols to prevent chain reactions when ambient temperatures exceed -100°C to 100°C thresholds. -->
+  <CMC_WallTempController.description>集成量子熵调控核心的第三代太空温控装置，通过相变纳米流体在分子层级实现±0.1℃的精密温控，但当环境温度超出-100℃~100℃阈值时，核心谐振腔将触发自毁协议防止连锁反应。</CMC_WallTempController.description>
+  
+</LanguageData>

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: <color=#1DD5EE><i>Yao Guang combat chip</i></color> -->
+  <YaoGuang.label>【摇光】战术芯片</YaoGuang.label>
+  <!-- EN: Under the chip's function, users can stimulate psychic abilities and achieve permanent optical invisibility, but will sacrifice some consciousness and attributes. The chip will be disrupted by EMP, causing the user to faint. -->
+  <YaoGuang.description>TODO</YaoGuang.description>
+  <!-- EN: a Yao Guang combat chip -->
+  <YaoGuang.labelNoun>TODO</YaoGuang.labelNoun>
+  
+</LanguageData>

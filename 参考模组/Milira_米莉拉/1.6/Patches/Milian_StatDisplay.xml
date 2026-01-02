@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/StatDef[defName="MiningSpeed"]/showOnPawnKind</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/StatDef[defName="MiningSpeed"]</xpath>
+			<value>
+				<showOnPawnKind>
+				</showOnPawnKind>
+			</value>
+		</nomatch>
+	</Operation>
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/StatDef[defName="MiningSpeed"]/showOnPawnKind</xpath>
+				<value>
+					<li>Milian_Mechanoid_PawnI</li>
+					<li>Milian_Mechanoid_PawnII</li>
+					<li>Milian_Mechanoid_PawnIII</li>
+					<li>Milian_Mechanoid_PawnIV</li>
+					<li>Milian_Mechanoid_BishopI</li>
+					<li>Milian_Mechanoid_BishopII</li>
+					<li>Milian_Mechanoid_BishopIII</li>
+					<li>Milian_Mechanoid_BishopIV</li>
+					<li>Milian_Mechanoid_KnightI</li>
+					<li>Milian_Mechanoid_KnightII</li>
+					<li>Milian_Mechanoid_KnightIII</li>
+					<li>Milian_Mechanoid_KnightIV</li>
+					<li>Milian_Mechanoid_RookI</li>
+					<li>Milian_Mechanoid_RookII</li>
+					<li>Milian_Mechanoid_RookIII</li>
+					<li>Milian_Mechanoid_RookIV</li>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/StatDef[defName="DeepDrillingSpeed"]/showOnPawnKind</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/StatDef[defName="DeepDrillingSpeed"]</xpath>
+			<value>
+				<showOnPawnKind>
+				</showOnPawnKind>
+			</value>
+		</nomatch>
+	</Operation>
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/StatDef[defName="DeepDrillingSpeed"]/showOnPawnKind</xpath>
+				<value>
+					<li>Milian_Mechanoid_PawnI</li>
+					<li>Milian_Mechanoid_PawnII</li>
+					<li>Milian_Mechanoid_PawnIII</li>
+					<li>Milian_Mechanoid_PawnIV</li>
+					<li>Milian_Mechanoid_BishopI</li>
+					<li>Milian_Mechanoid_BishopII</li>
+					<li>Milian_Mechanoid_BishopIII</li>
+					<li>Milian_Mechanoid_BishopIV</li>
+					<li>Milian_Mechanoid_KnightI</li>
+					<li>Milian_Mechanoid_KnightII</li>
+					<li>Milian_Mechanoid_KnightIII</li>
+					<li>Milian_Mechanoid_KnightIV</li>
+					<li>Milian_Mechanoid_RookI</li>
+					<li>Milian_Mechanoid_RookII</li>
+					<li>Milian_Mechanoid_RookIII</li>
+					<li>Milian_Mechanoid_RookIV</li>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/StatDef[defName="MiningYield"]/showOnPawnKind</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/StatDef[defName="MiningYield"]</xpath>
+			<value>
+				<showOnPawnKind>
+				</showOnPawnKind>
+			</value>
+		</nomatch>
+	</Operation>
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/StatDef[defName="MiningYield"]/showOnPawnKind</xpath>
+				<value>
+					<li>Milian_Mechanoid_PawnI</li>
+					<li>Milian_Mechanoid_PawnII</li>
+					<li>Milian_Mechanoid_PawnIII</li>
+					<li>Milian_Mechanoid_PawnIV</li>
+					<li>Milian_Mechanoid_BishopI</li>
+					<li>Milian_Mechanoid_BishopII</li>
+					<li>Milian_Mechanoid_BishopIII</li>
+					<li>Milian_Mechanoid_BishopIV</li>
+					<li>Milian_Mechanoid_KnightI</li>
+					<li>Milian_Mechanoid_KnightII</li>
+					<li>Milian_Mechanoid_KnightIII</li>
+					<li>Milian_Mechanoid_KnightIV</li>
+					<li>Milian_Mechanoid_RookI</li>
+					<li>Milian_Mechanoid_RookII</li>
+					<li>Milian_Mechanoid_RookIII</li>
+					<li>Milian_Mechanoid_RookIV</li>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/StatDef[defName="PlantWorkSpeed"]/showOnPawnKind</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/StatDef[defName="PlantWorkSpeed"]</xpath>
+			<value>
+				<showOnPawnKind>
+				</showOnPawnKind>
+			</value>
+		</nomatch>
+	</Operation>
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/StatDef[defName="PlantWorkSpeed"]/showOnPawnKind</xpath>
+				<value>
+					<li>Milian_Mechanoid_PawnI</li>
+					<li>Milian_Mechanoid_PawnII</li>
+					<li>Milian_Mechanoid_PawnIII</li>
+					<li>Milian_Mechanoid_PawnIV</li>
+					<li>Milian_Mechanoid_BishopI</li>
+					<li>Milian_Mechanoid_BishopII</li>
+					<li>Milian_Mechanoid_BishopIII</li>
+					<li>Milian_Mechanoid_BishopIV</li>
+					<li>Milian_Mechanoid_KnightI</li>
+					<li>Milian_Mechanoid_KnightII</li>
+					<li>Milian_Mechanoid_KnightIII</li>
+					<li>Milian_Mechanoid_KnightIV</li>
+					<li>Milian_Mechanoid_RookI</li>
+					<li>Milian_Mechanoid_RookII</li>
+					<li>Milian_Mechanoid_RookIII</li>
+					<li>Milian_Mechanoid_RookIV</li>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/StatDef[defName="PlantHarvestYield"]/showOnPawnKind</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/StatDef[defName="PlantHarvestYield"]</xpath>
+			<value>
+				<showOnPawnKind>
+				</showOnPawnKind>
+			</value>
+		</nomatch>
+	</Operation>
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/StatDef[defName="PlantHarvestYield"]/showOnPawnKind</xpath>
+				<value>
+					<li>Milian_Mechanoid_PawnI</li>
+					<li>Milian_Mechanoid_PawnII</li>
+					<li>Milian_Mechanoid_PawnIII</li>
+					<li>Milian_Mechanoid_PawnIV</li>
+					<li>Milian_Mechanoid_BishopI</li>
+					<li>Milian_Mechanoid_BishopII</li>
+					<li>Milian_Mechanoid_BishopIII</li>
+					<li>Milian_Mechanoid_BishopIV</li>
+					<li>Milian_Mechanoid_KnightI</li>
+					<li>Milian_Mechanoid_KnightII</li>
+					<li>Milian_Mechanoid_KnightIII</li>
+					<li>Milian_Mechanoid_KnightIV</li>
+					<li>Milian_Mechanoid_RookI</li>
+					<li>Milian_Mechanoid_RookII</li>
+					<li>Milian_Mechanoid_RookIII</li>
+					<li>Milian_Mechanoid_RookIV</li>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/StatDef[defName="DrugHarvestYield"]/showOnPawnKind</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/StatDef[defName="DrugHarvestYield"]</xpath>
+			<value>
+				<showOnPawnKind>
+				</showOnPawnKind>
+			</value>
+		</nomatch>
+	</Operation>
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/StatDef[defName="DrugHarvestYield"]/showOnPawnKind</xpath>
+				<value>
+					<li>Milian_Mechanoid_PawnI</li>
+					<li>Milian_Mechanoid_PawnII</li>
+					<li>Milian_Mechanoid_PawnIII</li>
+					<li>Milian_Mechanoid_PawnIV</li>
+					<li>Milian_Mechanoid_BishopI</li>
+					<li>Milian_Mechanoid_BishopII</li>
+					<li>Milian_Mechanoid_BishopIII</li>
+					<li>Milian_Mechanoid_BishopIV</li>
+					<li>Milian_Mechanoid_KnightI</li>
+					<li>Milian_Mechanoid_KnightII</li>
+					<li>Milian_Mechanoid_KnightIII</li>
+					<li>Milian_Mechanoid_KnightIV</li>
+					<li>Milian_Mechanoid_RookI</li>
+					<li>Milian_Mechanoid_RookII</li>
+					<li>Milian_Mechanoid_RookIII</li>
+					<li>Milian_Mechanoid_RookIV</li>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/StatDef[defName="HuntingStealth"]/showOnPawnKind</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/StatDef[defName="HuntingStealth"]</xpath>
+			<value>
+				<showOnPawnKind>
+				</showOnPawnKind>
+			</value>
+		</nomatch>
+	</Operation>
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/StatDef[defName="HuntingStealth"]/showOnPawnKind</xpath>
+				<value>
+					<li>Milian_Mechanoid_PawnI</li>
+					<li>Milian_Mechanoid_PawnII</li>
+					<li>Milian_Mechanoid_PawnIII</li>
+					<li>Milian_Mechanoid_PawnIV</li>
+					<li>Milian_Mechanoid_BishopI</li>
+					<li>Milian_Mechanoid_BishopII</li>
+					<li>Milian_Mechanoid_BishopIII</li>
+					<li>Milian_Mechanoid_BishopIV</li>
+					<li>Milian_Mechanoid_KnightI</li>
+					<li>Milian_Mechanoid_KnightII</li>
+					<li>Milian_Mechanoid_KnightIII</li>
+					<li>Milian_Mechanoid_KnightIV</li>
+					<li>Milian_Mechanoid_RookI</li>
+					<li>Milian_Mechanoid_RookII</li>
+					<li>Milian_Mechanoid_RookIII</li>
+					<li>Milian_Mechanoid_RookIV</li>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/StatDef[defName="ConstructionSpeed"]/showOnPawnKind</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/StatDef[defName="ConstructionSpeed"]</xpath>
+			<value>
+				<showOnPawnKind>
+				</showOnPawnKind>
+			</value>
+		</nomatch>
+	</Operation>
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/StatDef[defName="ConstructionSpeed"]/showOnPawnKind</xpath>
+				<value>
+					<li>Milian_Mechanoid_PawnI</li>
+					<li>Milian_Mechanoid_PawnII</li>
+					<li>Milian_Mechanoid_PawnIII</li>
+					<li>Milian_Mechanoid_PawnIV</li>
+					<li>Milian_Mechanoid_BishopI</li>
+					<li>Milian_Mechanoid_BishopII</li>
+					<li>Milian_Mechanoid_BishopIII</li>
+					<li>Milian_Mechanoid_BishopIV</li>
+					<li>Milian_Mechanoid_KnightI</li>
+					<li>Milian_Mechanoid_KnightII</li>
+					<li>Milian_Mechanoid_KnightIII</li>
+					<li>Milian_Mechanoid_KnightIV</li>
+					<li>Milian_Mechanoid_RookI</li>
+					<li>Milian_Mechanoid_RookII</li>
+					<li>Milian_Mechanoid_RookIII</li>
+					<li>Milian_Mechanoid_RookIV</li>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/StatDef[defName="ConstructSuccessChance"]/showOnPawnKind</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/StatDef[defName="ConstructSuccessChance"]</xpath>
+			<value>
+				<showOnPawnKind>
+				</showOnPawnKind>
+			</value>
+		</nomatch>
+	</Operation>
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/StatDef[defName="ConstructSuccessChance"]/showOnPawnKind</xpath>
+				<value>
+					<li>Milian_Mechanoid_PawnI</li>
+					<li>Milian_Mechanoid_PawnII</li>
+					<li>Milian_Mechanoid_PawnIII</li>
+					<li>Milian_Mechanoid_PawnIV</li>
+					<li>Milian_Mechanoid_BishopI</li>
+					<li>Milian_Mechanoid_BishopII</li>
+					<li>Milian_Mechanoid_BishopIII</li>
+					<li>Milian_Mechanoid_BishopIV</li>
+					<li>Milian_Mechanoid_KnightI</li>
+					<li>Milian_Mechanoid_KnightII</li>
+					<li>Milian_Mechanoid_KnightIII</li>
+					<li>Milian_Mechanoid_KnightIV</li>
+					<li>Milian_Mechanoid_RookI</li>
+					<li>Milian_Mechanoid_RookII</li>
+					<li>Milian_Mechanoid_RookIII</li>
+					<li>Milian_Mechanoid_RookIV</li>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+
+</Patch>

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 制作Ammo_45x50mmMTPG HE x50 -->
+  <MakeAmmo_Ammo_45x50mmMTPG_HE.label>TODO</MakeAmmo_Ammo_45x50mmMTPG_HE.label>
+  <!-- EN: 制作50枚Ammo_45x50mmMTPG HE。 -->
+  <MakeAmmo_Ammo_45x50mmMTPG_HE.description>TODO</MakeAmmo_Ammo_45x50mmMTPG_HE.description>
+  <!-- EN: 正在制作Ammo_45x50mmMTPG HE。 -->
+  <MakeAmmo_Ammo_45x50mmMTPG_HE.jobString>TODO</MakeAmmo_Ammo_45x50mmMTPG_HE.jobString>
+  
+  <!-- EN: 制作Ammo_45x50mmMTPG S x500 -->
+  <MakeAmmo_Ammo_45x50mmMTPG_S.label>TODO</MakeAmmo_Ammo_45x50mmMTPG_S.label>
+  <!-- EN: 制作500枚Ammo_45x50mmMTPG S。 -->
+  <MakeAmmo_Ammo_45x50mmMTPG_S.description>TODO</MakeAmmo_Ammo_45x50mmMTPG_S.description>
+  <!-- EN: 正在制作Ammo_45x50mmMTPG S。 -->
+  <MakeAmmo_Ammo_45x50mmMTPG_S.jobString>TODO</MakeAmmo_Ammo_45x50mmMTPG_S.jobString>
+  
+</LanguageData>

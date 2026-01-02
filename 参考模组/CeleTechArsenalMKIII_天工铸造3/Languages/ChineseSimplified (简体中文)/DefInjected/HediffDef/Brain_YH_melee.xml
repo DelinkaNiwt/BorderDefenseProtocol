@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: <color=#1DD5EE><i>Yu Heng combat chip</i></color> -->
+  <YuHeng.label>【玉衡】近战干员芯片</YuHeng.label>
+  <!-- EN: Significantly increase the user's physical defensive ability, and use the kinetic energy of incoming bullets to drive nanomachines in the body to enhance healing ability. -->
+  <YuHeng.description>TODO</YuHeng.description>
+  <!-- EN: a Yu Heng combat chip -->
+  <YuHeng.labelNoun>TODO</YuHeng.labelNoun>
+  
+</LanguageData>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  
+  <WorldObjectDef Name="Milira_GeneratedAsteroid_SolarCrystal" ParentName="ClaimableSpace" Abstract="True">
+    <worldObjectClass>BasicAsteroidMapParent</worldObjectClass>
+    <label>basic asteroid</label> <!-- hidden -->
+    <description>A vacstone asteroid that was towed into orbit around the planet as part of a mining operation long ago. Some of the rocks have turned into Solar Crystals under the influence of strong electromagnetic radiation. Most of the valuable resources have been depleted from this asteroid.\n\nThis location can be reached using transport pods, shuttles, or a gravship.</description>
+    <nameMaker>NamerWorldObject_AsteroidBasic</nameMaker>
+    <expandingIconTexture>Milira/Icon/AsteroidSolarCrystal</expandingIconTexture>
+    <overrideMapSize>(250,1,250)</overrideMapSize>
+    <mapGenerator>Milira_AsteroidBasic_SolarCrystal</mapGenerator>
+  </WorldObjectDef>
+
+  <WorldObjectDef ParentName="Milira_GeneratedAsteroid_SolarCrystal">
+    <defName>Milira_AsteroidBasic_SolarCrystal</defName>
+  </WorldObjectDef>
+
+  <WorldObjectDef ParentName="ClaimableSpace">
+    <defName>Milira_AsteroidSolarCrystal</defName>
+    <worldObjectClass>ResourceAsteroidMapParent</worldObjectClass>
+    <label>asteroid mining site</label> <!-- hidden -->
+    <description>A vacstone asteroid that was towed into orbit around the planet as part of a mining operation long ago. Some of the rocks have turned into Solar Crystals under the influence of strong electromagnetic radiation. This asteroid has only been partially mined.\n\nThis location can be reached using transport pods, shuttles, or a gravship.</description>
+    <expandingIconTexture>Milira/Icon/AsteroidSolarCrystal</expandingIconTexture>
+    <expandingShader>CutoutComplexUI</expandingShader>
+    <overrideMapSize>(250,1,250)</overrideMapSize>
+    <mapGenerator>Milira_Asteroid_SolarCrystal</mapGenerator>
+  </WorldObjectDef>
+
+  <!--测试用的开局生成1-2个基础类日凌晶小行星-->
+  <AncotLibrary.GeneratedLocationDef_Custom>
+    <defName>Milira_Asteroids_SolarCrystal</defName>
+    <worldObjectDef>Milira_AsteroidBasic_SolarCrystal</worldObjectDef>
+    <layerDef>Orbit</layerDef>
+    <preciousResources>
+      <li>MineableSteel</li>
+    </preciousResources>
+    <objectAmount>1~3</objectAmount>
+  </AncotLibrary.GeneratedLocationDef_Custom>
+</Defs>

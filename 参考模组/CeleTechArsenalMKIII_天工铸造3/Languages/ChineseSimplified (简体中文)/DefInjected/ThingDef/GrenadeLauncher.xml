@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: QBL-40 Grenade Launcher -->
+  <CMC_GrenadeLauncher.label>QBL-40 榴弹发射器</CMC_GrenadeLauncher.label>
+  <!-- EN: A squad support electromagnetic-propelled grenade launcher designed for long-range engagements. Capable of firing low-accuracy high-explosive grenades in bursts for suppressive fire, or single-shot EMP grenades with enhanced precision. The dual drum magazine system allows rapid ammunition switching to adapt to combat scenarios.\n\nThis weapon can fire over obstacles, but cannot automatically target enemies outside the operator's line of sight.\n\nThis heavy weapon system can be disabled in mod settings. However, due to its high production cost, it may not spawn naturally in standard raid events even with generation options enabled. -->
+  <CMC_GrenadeLauncher.description>班组火力支援用长距离电磁推进榴弹发射器，能以精度较低连发高爆榴弹以提供压制火力，或以高精度单发电磁干扰弹。双弹鼓的设计可以使其快速切换发射的弹药种类以适应不同环境。\n\n该武器能越墙射击，但装备者无法自动攻击视野范围外的目标。</CMC_GrenadeLauncher.description>
+  <!-- EN: stock -->
+  <CMC_GrenadeLauncher.tools.stock.label>枪托</CMC_GrenadeLauncher.tools.stock.label>
+  <!-- EN: barrel -->
+  <CMC_GrenadeLauncher.tools.barrel.label>枪管</CMC_GrenadeLauncher.tools.barrel.label>
+  <!-- EN: QBL-40 Grenade Launcher -->
+  <CMC_GrenadeLauncher.verbs.Verb_ShootCE.label>TODO</CMC_GrenadeLauncher.verbs.Verb_ShootCE.label>
+  
+  <!-- UNUSED -->
+  <CMC_GrenadeLauncher.verbs.Verb_Shoot.label>QBL-40 榴弹发射器</CMC_GrenadeLauncher.verbs.Verb_Shoot.label>
+  <CMC_GrenadeLauncher.comps.CompSecondaryVerb.description>射击模式切换</CMC_GrenadeLauncher.comps.CompSecondaryVerb.description>
+  <CMC_GrenadeLauncher.comps.CompSecondaryVerb.mainWeaponLabel>杀伤榴弹（连发）</CMC_GrenadeLauncher.comps.CompSecondaryVerb.mainWeaponLabel>
+  <CMC_GrenadeLauncher.comps.CompSecondaryVerb.secondaryWeaponLabel>EMP榴弹（单发）</CMC_GrenadeLauncher.comps.CompSecondaryVerb.secondaryWeaponLabel>
+  
+</LanguageData>

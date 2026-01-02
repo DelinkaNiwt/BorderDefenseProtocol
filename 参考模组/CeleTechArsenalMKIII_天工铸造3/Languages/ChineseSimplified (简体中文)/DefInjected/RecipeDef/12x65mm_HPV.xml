@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: make CMC_12x65mmSmart R cartridge x500 -->
+  <MakeAmmo_CMC_12x65mmSmart_Regular.label>TODO</MakeAmmo_CMC_12x65mmSmart_Regular.label>
+  <!-- EN: Craft 500 CMC_12x65mmSmart R cartridges. -->
+  <MakeAmmo_CMC_12x65mmSmart_Regular.description>TODO</MakeAmmo_CMC_12x65mmSmart_Regular.description>
+  <!-- EN: Making CMC_12x65mmSmart R cartridges. -->
+  <MakeAmmo_CMC_12x65mmSmart_Regular.jobString>TODO</MakeAmmo_CMC_12x65mmSmart_Regular.jobString>
+  
+</LanguageData>

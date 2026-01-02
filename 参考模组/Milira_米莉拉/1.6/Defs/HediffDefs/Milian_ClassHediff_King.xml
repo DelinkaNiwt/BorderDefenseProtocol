@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <HediffDef>
+    <defName>Milian_ClassHediff_King</defName>
+    <label>Chessman: King</label>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <maxSeverity>1</maxSeverity>
+    <initialSeverity>0.1</initialSeverity>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(240, 240, 0)</defaultLabelColor>
+    <description>Grants the power of a King.</description>
+    <comps>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/>
+    </comps>
+    <stages>
+      <li>
+        <minSeverity>0.01</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>0.50</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <minSeverity>0.25</minSeverity>
+        <label>Attune: Pawn</label>
+        <capMods>
+          <li>
+            <capacity>Manipulation</capacity>
+            <offset>0.64</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <AimingDelayFactor>-0.9</AimingDelayFactor>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>0.50</minSeverity>
+        <label>Attune: Knight</label>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>0.64</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <MeleeHitChance>24</MeleeHitChance>
+          <MoveSpeed>6.4</MoveSpeed>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>0.75</minSeverity>
+        <label>Attune: Bishop</label>
+        <capMods>
+        </capMods>
+        <statOffsets>
+          <ShootingAccuracyPawn>100</ShootingAccuracyPawn>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>1.0</minSeverity>
+        <label>Attune: Rook</label>
+        <capMods>
+        </capMods>
+        <statOffsets>
+          <IncomingDamageFactor>-0.85</IncomingDamageFactor>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+
+
+</Defs>

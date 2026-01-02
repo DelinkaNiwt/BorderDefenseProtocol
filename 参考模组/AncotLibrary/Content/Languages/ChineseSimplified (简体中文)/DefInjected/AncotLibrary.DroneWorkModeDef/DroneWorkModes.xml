@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: recharge -->
+  <Ancot_Recharge.label>充能</Ancot_Recharge.label>
+  <!-- EN: Go to rechargers and recharge, even if already well-charged. -->
+  <Ancot_Recharge.description>前往充电站处补充能量，完全充满后待机。</Ancot_Recharge.description>
+  
+  <!-- EN: dormant -->
+  <Ancot_SelfShutdown.label>休眠</Ancot_SelfShutdown.label>
+  <!-- EN: Go into a dormant state. -->
+  <Ancot_SelfShutdown.description>进入休眠状态。</Ancot_SelfShutdown.description>
+  
+  <!-- EN: work -->
+  <Ancot_Work.label>工作</Ancot_Work.label>
+  <!-- EN: Work autonomously according to mechanoid type. Automatically go to rechargers and recharge when needed. -->
+  <Ancot_Work.description>根据无人机的类型自主执行工作。如果有需要，则会自动前往充电站处补充能量。</Ancot_Work.description>
+  
+</LanguageData>

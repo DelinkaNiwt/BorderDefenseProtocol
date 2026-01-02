@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ApparelLayerDef>
+    <defName>Ancot_Shield</defName>
+    <label>Shield</label>
+    <drawOrder>500</drawOrder>
+  </ApparelLayerDef>
+
+  <ApparelLayerDef>
+    <defName>Ancot_Underwear</defName>
+    <label>underwear</label>
+    <drawOrder>-30</drawOrder>
+  </ApparelLayerDef>
+
+  <ApparelLayerDef>
+    <defName>Ancot_Pants</defName>
+    <label>pants</label>
+    <drawOrder>-25</drawOrder>
+  </ApparelLayerDef>
+  
+</Defs>

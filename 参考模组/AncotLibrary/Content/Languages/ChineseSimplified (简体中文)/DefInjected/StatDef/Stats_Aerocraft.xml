@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Armor -->
+  <Ancot_Aerocraft_ArmorRating.label>护甲</Ancot_Aerocraft_ArmorRating.label>
+  <!-- EN: The protection given against damage.\n\nWhen taking damage, if the attacking weapon’s armor penetration value is greater than or equal to the armor rating, the full damage is applied. Otherwise, the damage is reduced by a percentage equal to the difference between the armor rating and the penetration value.\n\nFor example, with an attack that has 10% armor penetration, if the armor rating is 90%, the attack will only deal 20% of its original damage to the aircraft. -->
+  <Ancot_Aerocraft_ArmorRating.description>抵御伤害的防护能力。\n\n受到伤害时，若攻击武器的护甲穿透值大于或等于护甲值，则受到全额伤害；反之，则对该次伤害拥有护甲值减去护甲穿透值的百分比伤害减免。\n\n例如，对于10%护甲穿透的攻击，若护甲等级为90%，则该次攻击对飞行器造成原来的20%伤害。</Ancot_Aerocraft_ArmorRating.description>
+
+  <!-- EN: maximum speed -->
+  <Ancot_Aerocraft_MaxSpeed.label>最大速度</Ancot_Aerocraft_MaxSpeed.label>
+  <!-- EN: The maximum speed of this aerocraft. -->
+  <Ancot_Aerocraft_MaxSpeed.description>这架飞行器的最大飞行速度。</Ancot_Aerocraft_MaxSpeed.description>
+  <!-- EN: {0} c/s -->
+  <Ancot_Aerocraft_MaxSpeed.formatString>{0} 格/秒</Ancot_Aerocraft_MaxSpeed.formatString>
+  
+  <!-- EN: minimum turn radius -->
+  <Ancot_Aerocraft_MinTurnRadius.label>最小转弯半径</Ancot_Aerocraft_MinTurnRadius.label>
+  <!-- EN: The minimum turn radius required for an aerocraft to complete a turn. -->
+  <Ancot_Aerocraft_MinTurnRadius.description>飞行器完成转弯所需的最小圆弧半径。</Ancot_Aerocraft_MinTurnRadius.description>
+  
+</LanguageData>

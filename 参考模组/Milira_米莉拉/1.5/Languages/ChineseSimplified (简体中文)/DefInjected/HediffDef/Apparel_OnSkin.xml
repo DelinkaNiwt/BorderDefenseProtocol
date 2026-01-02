@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: holding shield -->
+  <Ancot_HoldShield_ArtemisArmorII.label>持有投影盾</Ancot_HoldShield_ArtemisArmorII.label>
+  <!-- EN: this pawn is holding a shield. -->
+  <Ancot_HoldShield_ArtemisArmorII.description>这个单位正持有投影盾。</Ancot_HoldShield_ArtemisArmorII.description>
+  
+</LanguageData>

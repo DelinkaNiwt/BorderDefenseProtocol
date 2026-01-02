@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Cut -->
+  <Milira_CutAOE.label>切</Milira_CutAOE.label>
+  
+  <!-- EN: slash -->
+  <Milira_Slash.label>劈砍</Milira_Slash.label>
+  
+  <!-- EN: slash -->
+  <Milira_SlashArc.label>劈砍</Milira_SlashArc.label>
+  
+  <!-- EN: slash -->
+  <Milira_SlashCharged.label>劈砍</Milira_SlashCharged.label>
+  
+</LanguageData>

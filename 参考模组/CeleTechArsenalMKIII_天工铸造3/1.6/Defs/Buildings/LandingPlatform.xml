@@ -1,0 +1,51 @@
+<Defs>
+  <ThingDef ParentName="BuildingBase">
+    <defName>CMC_LandPlatform</defName>
+    <label>CAG stellar cargo platform</label>
+    <description>A standardized landing field for the CAG unmanned interstellar trade network. Equipped with auto-guidance beacons and dampening field generators to ensure precision landings and rapid cargo transfer under extreme planetary conditions.\n\n▲ CRITICAL OPERATIONAL PROTOCOLS ▲\n- Landing zone must maintain absolute clearance within designated area\n- Unmet clearance conditions trigger automated evasion protocol (shuttle recall)\n\n※ WARNING: Any obstructions (including low walls, trees, generators) activate collision-abort procedures.</description>
+	<thingClass>TOT_DLL_test.Building_LandingPlatform</thingClass>
+	<uiIconPath>Things/Buildings/LandingZone_UI</uiIconPath>
+    <tickerType>Normal</tickerType>
+	<size>(5,5)</size>
+    <drawerType>RealtimeOnly</drawerType>
+    <graphicData>
+      <texPath>Things/Buildings/LandingZone</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>5</drawSize>
+	  <drawOffset>(0,0,0)</drawOffset>
+    </graphicData>
+    <altitudeLayer>DoorMoveable</altitudeLayer>
+    <passability>Standable</passability>
+	<fillPercent>0</fillPercent>
+    <castEdgeShadows>true</castEdgeShadows>
+	<rotatable>false</rotatable>
+	<building>
+	  <isEdifice>false</isEdifice>
+      <destroySound>BuildingDestroyed_Metal_Medium</destroySound>
+    </building>
+	<costList>
+      <Steel>1000</Steel>
+	  <Plasteel>100</Plasteel>
+      <ComponentIndustrial>10</ComponentIndustrial>
+    </costList>
+    <constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+    <designationCategory>CMC_DefensenProduction</designationCategory>
+    <uiOrder>2420</uiOrder>
+	<clearBuildingArea>True</clearBuildingArea>
+    <statBases>
+      <MaxHitPoints>15000</MaxHitPoints>
+      <WorkToBuild>8000</WorkToBuild>
+      <Mass>250000</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+    <researchPrerequisites>
+      <li>CMC_BasisTrade</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>200</basePowerConsumption>
+      </li>
+    </comps>
+  </ThingDef>
+</Defs>

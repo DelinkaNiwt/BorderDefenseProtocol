@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+	<Operation Class="PatchOperationConditional">
+        <xpath>Defs/PawnTableDef[defName="Mechs"]/columns</xpath>
+        <match Class="PatchOperationSequence">
+            <operations>
+                <li Class="PatchOperationInsert">
+                    <xpath>Defs/PawnTableDef[defName="Mechs"]/columns/li[text()="DraftMech"]</xpath>
+                    <value>
+                        <li>Ancot_MechAutoFight</li>
+                    </value>
+                </li>
+            </operations>
+        </match>
+    </Operation>
+
+</Patch>

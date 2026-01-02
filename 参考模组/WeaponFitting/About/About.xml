@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+	<name>Weapon Fitting</name>
+	<author>Deko</author>
+	<supportedVersions>
+		<li>1.6</li>
+	</supportedVersions>
+	<description>Framework of Weapon Fitting.Use Weapon Fitting to Add Traits To Your Unique Weapons!</description>
+	<packageId>Deko.WeaponFitting</packageId>
+	<modDependencies>
+		<li>
+			<packageId>brrainz.harmony</packageId>
+			<displayName>harmony</displayName>
+			<steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2009463077</steamWorkshopUrl>
+		</li>
+		<li>
+			<packageId>Ludeon.RimWorld.Odyssey</packageId>
+			<displayName>Odyssey</displayName>
+		</li>
+		<li> 
+			<packageId>Ancot.AncotLibrary</packageId>
+			<displayName>Ancot Library</displayName>
+			<steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2988801276</steamWorkshopUrl>
+		</li>
+	</modDependencies>
+	<loadAfter>
+		<li>brrainz.harmony</li>
+		<li>Ancot.AncotLibrary</li>
+		<li>Ancot.KiiroRace</li>
+		<li>Ancot.MiliraRace</li>
+		<li>Albion.SparklingWorlds.Full</li>
+		<li>VanillaExpanded.VWE</li>
+		<li>avius.prisonlabor</li>
+	</loadAfter>
+
+</ModMetaData>

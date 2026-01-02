@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <Milira_CaravanTravelExplanation>Caravan speed up when only Milira included.</Milira_CaravanTravelExplanation>
+
+  <Milira_CompGenerator_SunLightFuel_Percentage>Next one until</Milira_CompGenerator_SunLightFuel_Percentage>
+
+  <Milira_EquipMilian>Equip {0_label} </Milira_EquipMilian>
+
+  <Milira_DressMilian>Dress Milian in {0_label}</Milira_DressMilian>
+
+  <Milira_StripMilian>Strip {0_label}</Milira_StripMilian>
+
+  <Milira_HumanizeMilian>Give this item to Milian</Milira_HumanizeMilian>
+
+  <Milira_Milian>Milian</Milira_Milian>
+
+  <Milira_NotEnoughSpace>Cannot use: Insufficient space</Milira_NotEnoughSpace>
+
+  <Milira.EquipWith>Equip with</Milira.EquipWith>
+  <Milira.CancelEquipWith>Cancel equip with</Milira.CancelEquipWith>
+  <Milira.NoAvailableEquipment>No available equipment</Milira.NoAvailableEquipment>
+
+  <Milira_ExitFortress>Exit Fortress</Milira_ExitFortress>
+  <Milira_ExitFortressDesc>Exit Fortress mode immediately, remaining resources will be returned.</Milira_ExitFortressDesc>
+
+  <Milira_FortressCarrierDesc>Maximium of resources that's automatically placed in {0} is determined by this carrier.</Milira_FortressCarrierDesc>
+  
+  <!--Letter of the wounded Angel -->
+  <Milira.LetterFallenAngel>Wounded Angel</Milira.LetterFallenAngel>
+  <Milira.LetterFallenAngelDesc>In a nearby place warped the Milira, grievously injured, her silver wings drooping limply in the front blemished with soil and gore, whereon the shivering feather rhythmizing along her feeble breath and the passing wind. </Milira.LetterFallenAngelDesc>
+
+  <!--Letter of the Wounded Angel returning -->
+  <Milira.LetterFallenAngleJoin>{0} desire to join</Milira.LetterFallenAngleJoin>
+  <Milira.LetterFallenAngleJoinDesc>{0} returned back and appreciated our former benevolence, as well as expressing her willing to join us.\n”I…want to learn more of you.” </Milira.LetterFallenAngleJoinDesc>
+  
+  <!--Alert of storyline banned in the opening -->
+  <Milira.StoryDisabled_ConditionFailed>Milira storyline disabled </Milira.StoryDisabled_ConditionFailed>
+  <Milira.StoryDisabled_ConditionFailed_Desc>The Sky Elves and the Skyfeathered Church shall coexist to start the storyline of Milira, and they are foes. Current world doesn’t match that condition, ergo tasks and events relating wont occur. </Milira.StoryDisabled_ConditionFailed_Desc>
+
+
+  <Milira.Resonate>Resonate</Milira.Resonate>
+  <Milira.ResonateDesc>Choose one milian class and resonate it tuning to level I.</Milira.ResonateDesc>
+  <Milira.None>None</Milira.None>
+  <Milira.Pawn>Pawn</Milira.Pawn>
+  <Milira.Knight>Knight</Milira.Knight>
+  <Milira.Bishop>Bishop</Milira.Bishop>
+  <Milira.Rook>Rook</Milira.Rook>
+
+
+  <Milira.AbilityHungerCost>hunger cost</Milira.AbilityHungerCost>
+  <Milira.AbilityRestCost>rest cost</Milira.AbilityRestCost>
+  <Milira.AbilityDisabled_Hunger>ability disabled: no enough hunger.</Milira.AbilityDisabled_Hunger>
+  <Milira.AbilityDisabled_Rest>ability disabled: no enough rest.</Milira.AbilityDisabled_Rest>
+  <Milira.AbilityDisabled_BodypartMissing>ability disabled: body part missing.</Milira.AbilityDisabled_BodypartMissing>
+
+  <!-- 发型切换 -->
+  <Milira.HairChange>hair change</Milira.HairChange>
+  <Milira.HairChangeDesc>To change the hair style of selected Milian.</Milira.HairChangeDesc>
+
+  <!-- 培育舱检查服装 -->
+  <Milian.CheckMilianApparelInGestator>Check Apparel</Milian.CheckMilianApparelInGestator>
+  <Milian.CheckMilianApparelInGestatorDesc>Check the types of apparels supported by the milian in the current gestate recipe</Milian.CheckMilianApparelInGestatorDesc>
+  <Milian.CheckMilianApparelInGestator_Disabled>Cannot check: no Milian is currently in gestating.</Milian.CheckMilianApparelInGestator_Disabled>
+  <Milian.CheckMilianApparelInGestatorText>The current Milian in the gestator is of type {0}. This model supports the following apparels:</Milian.CheckMilianApparelInGestatorText>
+  
+  <!-- 米莉安配置界面的tips -->
+  <Milira.ToMechTabTip>Switch to mech tab.</Milira.ToMechTabTip>
+  <Milira.ToMilianWorkManagementTabTip>Switch to milian worktab.</Milira.ToMilianWorkManagementTabTip>
+  <Milira.ToMilianConfigTabTip>Switch to milian equipment tab.</Milira.ToMilianConfigTabTip>
+
+</LanguageData>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="CMC_EMPsword" or defName="CMC_EMPsword_sevenstars"]/tools</xpath>
+          <value>
+            <tools>
+              <li Class="CombatExtended.ToolCE">
+                <label>edge</label>
+                <capacities>
+                  <li>Cut</li>
+                </capacities>
+                <surpriseAttack>
+                  <extraMeleeDamages>
+                    <li>
+                      <def>EMP</def>
+                      <amount>25</amount>
+                      <chance>15</chance>
+                    </li>
+                  </extraMeleeDamages>
+                </surpriseAttack>
+                <armorPenetrationBlunt>56</armorPenetrationBlunt>
+                <armorPenetrationSharp>100</armorPenetrationSharp>
+                <power>25</power>
+                <cooldownTime>0.87</cooldownTime>
+                <chanceFactor>0.8</chanceFactor>
+                <ensureLinkedBodyPartsGroupAlwaysUsable>True</ensureLinkedBodyPartsGroupAlwaysUsable>
+                <linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+              </li>
+			  <li Class="CombatExtended.ToolCE">
+                <label>point</label>
+                <capacities>
+                  <li>Stab</li>
+                </capacities>
+                <surpriseAttack>
+                  <extraMeleeDamages>
+                    <li>
+                      <def>EMP</def>
+                      <amount>45</amount>
+                      <chance>15</chance>
+                    </li>
+                  </extraMeleeDamages>
+                </surpriseAttack>
+                <armorPenetrationBlunt>56</armorPenetrationBlunt>
+                <armorPenetrationSharp>120</armorPenetrationSharp>
+                <power>25</power>
+                <cooldownTime>0.87</cooldownTime>
+                <chanceFactor>0.2</chanceFactor>
+                <ensureLinkedBodyPartsGroupAlwaysUsable>True</ensureLinkedBodyPartsGroupAlwaysUsable>
+                <linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+              </li>
+            </tools>
+          </value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="TangDao" or defName="TangDao_A" or defName="TangDao_B" or defName="TangDaoPersona"]/tools</xpath>
+          <value>
+            <tools>
+              <li Class="CombatExtended.ToolCE">
+                <label>edge</label>
+                <capacities>
+                  <li>Cut</li>
+                </capacities>
+                <surpriseAttack>
+                  <extraMeleeDamages>
+                    <li>
+                      <def>EMP</def>
+                      <amount>25</amount>
+                      <chance>60</chance>
+                    </li>
+                  </extraMeleeDamages>
+                </surpriseAttack>
+                <armorPenetrationBlunt>26</armorPenetrationBlunt>
+                <armorPenetrationSharp>144</armorPenetrationSharp>
+                <power>45</power>
+                <cooldownTime>0.87</cooldownTime>
+                <chanceFactor>1</chanceFactor>
+                <ensureLinkedBodyPartsGroupAlwaysUsable>True</ensureLinkedBodyPartsGroupAlwaysUsable>
+                <linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+              </li>
+            </tools>
+          </value>
+	</Operation>
+</Patch>

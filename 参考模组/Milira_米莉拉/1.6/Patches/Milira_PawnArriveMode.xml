@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+	<!-- 袭击到来模式 -->
+    <Operation Class="PatchOperationSequence">
+    <operations>
+      <li Class="PatchOperationAdd">
+        <xpath>*/PawnsArrivalModeDef[defName = "CenterDrop"]/selectionWeightCurvesPerFaction</xpath>
+        <value>
+          <li>
+            <faction>Milira_Faction</faction>
+              <selectionWeightPerPointsCurve>
+                <points>
+                  <li>(300, 0)</li>
+                  <li>(10000, 0)</li>
+                </points>
+            </selectionWeightPerPointsCurve>
+          </li>
+        </value>
+      </li>
+    </operations>
+  </Operation>
+
+
+  <Operation Class="PatchOperationSequence">
+    <operations>
+      <li Class="PatchOperationAdd">
+        <xpath>*/PawnsArrivalModeDef[defName = "RandomDrop"]/selectionWeightCurvesPerFaction</xpath>
+        <value>
+          <li>
+            <faction>Milira_Faction</faction>
+              <selectionWeightPerPointsCurve>
+                <points>
+                  <li>(300, 0)</li>
+                  <li>(10000, 0)</li>
+                </points>
+            </selectionWeightPerPointsCurve>
+          </li>
+        </value>
+      </li>
+    </operations>
+  </Operation>
+
+
+</Patch>

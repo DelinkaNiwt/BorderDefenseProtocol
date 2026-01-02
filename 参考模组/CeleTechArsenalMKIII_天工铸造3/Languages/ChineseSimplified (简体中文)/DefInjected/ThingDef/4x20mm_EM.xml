@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: CMC_4x20mmAmmo_R -->
+  <Ammo_CMC_4x20mmAmmo_Regular.label>4x20mm 通常弹</Ammo_CMC_4x20mmAmmo_Regular.label>
+  <!-- EN: TODO -->
+  <Ammo_CMC_4x20mmAmmo_Regular.description>高穿透性的电磁加速手枪弹</Ammo_CMC_4x20mmAmmo_Regular.description>
+  
+  <!-- EN: bullet -->
+  <Bullet_CMC_4x20mmAmmo_Regular.label>4x20mm 通常弹</Bullet_CMC_4x20mmAmmo_Regular.label>
+  
+</LanguageData>

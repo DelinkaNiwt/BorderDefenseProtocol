@@ -1,0 +1,1057 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+
+  <!-- 集群炮塔 -->
+
+
+    <!--小型离子炮塔======================================================================================-->
+    <ThingDef ParentName="BuildingBase">
+      <defName>MiliraTurret_Plasma</defName>
+      <label>small ionic turret</label>
+      <description>A self-powered small Ion Turret that fires ion beams capable of melting armor.</description>
+      <thingClass>Building_TurretGun</thingClass>
+      <drawerType>MapMeshAndRealTime</drawerType>
+      <graphicData>
+        <texPath>Milira/Building/Security/MiliraHeavyTurret_Base</texPath>
+        <graphicClass>Graphic_Single</graphicClass>
+        <drawSize>(1,1)</drawSize>
+        <drawOffset>(0,0,-0.16)</drawOffset>
+        <damageData>
+          <rect>(0.3,0.3,1.4,1.4)</rect>
+        </damageData>
+        <shadowData>
+          <volume>(0.5,0.15,0.7)</volume>
+          <offset>(0,0,-0.05)</offset>
+        </shadowData>
+      </graphicData>
+      <receivesSignals>true</receivesSignals>
+      <uiIconPath>Milira/Building/Security/MiliraTurretTop_Plasma</uiIconPath>
+      <uiIconScale>1.0</uiIconScale>
+      <altitudeLayer>Building</altitudeLayer>
+      <stealable>false</stealable>
+      <rotatable>false</rotatable>
+      <size>(1,1)</size>
+      <statBases>
+        <MaxHitPoints>150</MaxHitPoints>
+        <Flammability>0</Flammability>
+        <WorkToBuild>6000</WorkToBuild>
+        <Mass>15</Mass>
+        <Beauty>-15</Beauty>
+        <ShootingAccuracyTurret>1.00</ShootingAccuracyTurret>
+      </statBases>
+      <costList>
+        <Plasteel>100</Plasteel>
+        <Milira_SunPlateSteel>25</Milira_SunPlateSteel>
+        <Milira_SolarCrystal>5</Milira_SolarCrystal>
+        <ComponentSpacer>1</ComponentSpacer>
+        <Milira_SunLightFuel>100</Milira_SunLightFuel>
+      </costList>
+      <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+      <researchPrerequisites>
+        <li>Milira_StandardPlasmaWeapon</li>
+      </researchPrerequisites>
+      <damageMultipliers>
+        <li>
+          <damageDef>Flame</damageDef>
+          <multiplier>0</multiplier>
+        </li>
+        <li>
+          <damageDef>Milira_PlasmaBomb</damageDef>
+          <multiplier>0.5</multiplier>
+        </li>
+        <li>
+          <damageDef>Bomb</damageDef>
+          <multiplier>0.5</multiplier>
+        </li>
+      </damageMultipliers>
+      <tickerType>Normal</tickerType>
+      <comps>
+        <li Class="CompProperties_CanBeDormant" />
+        <li Class="CompProperties_WakeUpDormant">
+          <wakeUpSound>MechanoidsWakeUp</wakeUpSound>
+        </li>
+        <li Class="CompProperties_Stunnable">
+          <affectedDamageDefs>
+            <li>Stun</li>
+            <li>EMP</li>
+          </affectedDamageDefs>
+          <adaptableDamageDefs>
+            <li>EMP</li>
+          </adaptableDamageDefs>
+        </li>
+      </comps>
+      <passability>PassThroughOnly</passability>
+      <pathCost>50</pathCost>
+      <fillPercent>0.3</fillPercent>
+      <hasTooltip>true</hasTooltip>
+      <killedLeavings>
+        <ChunkSlagSteel>1</ChunkSlagSteel>
+      </killedLeavings>
+      <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+      <designationCategory>Security</designationCategory>
+      <building>
+        <combatPower>90</combatPower>
+        <buildingTags>
+          <li>MiliraClusterMember</li>
+          <li>MiliraClusterCombatThreat</li>
+        </buildingTags>
+        <ai_combatDangerous>true</ai_combatDangerous>
+        <turretGunDef>MiliraTurretGun_Plasma</turretGunDef>
+        <turretBurstCooldownTime>1.8</turretBurstCooldownTime>
+        <turretTopOffset>(0, 0.05)</turretTopOffset>
+        <turretTopDrawSize>1.0</turretTopDrawSize>
+        <soundAmbient>MechTurretBig_Call</soundAmbient>
+      </building>
+      <placeWorkers>
+        <li>PlaceWorker_TurretTop</li>
+        <li>PlaceWorker_ShowTurretRadius</li>
+      </placeWorkers>
+    </ThingDef>
+  
+    <ThingDef ParentName="BaseBullet">
+      <defName>MiliraBullet_TurretPlasma</defName>
+      <label>ionic beam</label>
+      <graphicData>
+        <texPath>Milira/ProjectileNew/Bullet_Plasma</texPath>
+        <graphicClass>Graphic_Single</graphicClass>
+        <shaderType>MoteGlow</shaderType>
+        <drawSize>1.0</drawSize>
+      </graphicData>
+      <projectile>
+        <damageDef>Milira_PlasmaBullet</damageDef>
+        <damageAmountBase>12</damageAmountBase>
+        <armorPenetrationBase>0.22</armorPenetrationBase>
+        <stoppingPower>0.6</stoppingPower>
+        <speed>95</speed>
+      </projectile>
+    </ThingDef>
+  
+    <ThingDef ParentName="BaseWeaponTurret">
+      <defName>MiliraTurretGun_Plasma</defName>
+      <label>small ionic gun</label>
+      <description>A small ionic gun mounted on a fixed turret.</description>
+      <graphicData>
+        <texPath>Milira/Building/Security/MiliraTurretTop_Plasma</texPath>
+        <graphicClass>Graphic_Single</graphicClass>
+      </graphicData>
+      <statBases>
+        <AccuracyTouch>0.8</AccuracyTouch>
+        <AccuracyShort>0.6</AccuracyShort>
+        <AccuracyMedium>0.5</AccuracyMedium>
+        <AccuracyLong>0.3</AccuracyLong>
+        <RangedWeapon_Cooldown>1.8</RangedWeapon_Cooldown>
+        <DeteriorationRate>0</DeteriorationRate>
+        <Mass>6.5</Mass>
+        <Flammability>0</Flammability>
+      </statBases>
+      <verbs>
+        <li>
+          <verbClass>Verb_Shoot</verbClass>
+          <defaultProjectile>MiliraBullet_TurretPlasma</defaultProjectile>
+          <warmupTime>0.6</warmupTime>
+          <range>44.9</range>
+          <ticksBetweenBurstShots>0</ticksBetweenBurstShots>
+          <burstShotCount>1</burstShotCount>
+          <soundCast>Milira_Shot_PlasmaRifle</soundCast>
+          <soundCastTail>GunTail_Heavy</soundCastTail>
+          <muzzleFlashScale>6</muzzleFlashScale>
+        </li>
+      </verbs>
+    </ThingDef>
+
+
+
+  <!--重型粒子冲击炮塔======================================================================================-->
+  <ThingDef ParentName="BuildingBase">
+    <defName>MiliraTurret_HeavyParticle</defName>
+    <label>heavy particle cannon turret</label>
+    <description>A self-powered heavy particle cannon turret that continuously fires high-impact particle charges.</description>
+    <thingClass>Building_TurretGun</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Milira/Building/Security/MiliraHeavyTurret_Base</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2,2)</drawSize>
+      <drawOffset>(0,0,-0.16)</drawOffset>
+      <damageData>
+        <rect>(0.3,0.3,1.4,1.4)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(1.5,0.35,1.4)</volume>
+        <offset>(0,0,-0.05)</offset>
+      </shadowData>
+    </graphicData>
+    <receivesSignals>true</receivesSignals>
+    <uiIconPath>Milira/Building/Security/MiliraHeavyTurretParticle_Top</uiIconPath>
+    <uiIconScale>1.0</uiIconScale>
+    <altitudeLayer>Building</altitudeLayer>
+    <stealable>false</stealable>
+    <rotatable>false</rotatable>
+    <isMechClusterThreat>true</isMechClusterThreat>
+    <size>(2,2)</size>
+    <statBases>
+      <MaxHitPoints>650</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <WorkToBuild>24000</WorkToBuild>
+      <Mass>80</Mass>
+      <Beauty>-15</Beauty>
+      <ShootingAccuracyTurret>1.00</ShootingAccuracyTurret>
+    </statBases>
+    <costList>
+      <Plasteel>300</Plasteel>
+      <Milira_SunPlateSteel>150</Milira_SunPlateSteel>
+      <Milira_SolarCrystal>30</Milira_SolarCrystal>
+      <ComponentSpacer>5</ComponentSpacer>
+      <Milira_StarshipBattery>1</Milira_StarshipBattery>
+    </costList>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <researchPrerequisites>
+      <li>Milira_HeavyParticleTurret</li>
+    </researchPrerequisites>
+    <damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+      <li>
+        <damageDef>Milira_PlasmaBomb</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Bomb</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+    </damageMultipliers>
+    <tickerType>Normal</tickerType>
+    <comps>
+      <li Class="CompProperties_CanBeDormant" />
+      <li Class="CompProperties_Initiatable" />
+      <li Class="CompProperties_WakeUpDormant">
+        <wakeUpSound>MechanoidsWakeUp</wakeUpSound>
+      </li>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>5.9</explosiveRadius>
+        <explosiveDamageType>Milira_PlasmaBomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.5</chanceNeverExplodeFromDamage>
+      </li>
+      <li Class="CompProperties_Stunnable">
+        <affectedDamageDefs>
+          <li>Stun</li>
+          <li>EMP</li>
+        </affectedDamageDefs>
+        <adaptableDamageDefs>
+          <li>EMP</li>
+        </adaptableDamageDefs>
+      </li>
+      <li Class="AncotLibrary.CompProperties_LeavingItemDestroyed">
+        <onlyNonPlayerLeaving>true</onlyNonPlayerLeaving>
+        <thingDefWithCommonalities>
+          <li>
+            <thingDef>Milira_StarshipBattery</thingDef>
+            <count>1</count>
+            <commonality>0.1</commonality>
+          </li>
+        </thingDefWithCommonalities>
+      </li>
+    </comps>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <fillPercent>0.5</fillPercent>
+    <hasTooltip>true</hasTooltip>
+    <killedLeavings>
+      <ChunkSlagSteel>1</ChunkSlagSteel>
+    </killedLeavings>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <designationCategory>Security</designationCategory>
+    <building>
+      <combatPower>260</combatPower>
+      <buildingTags>
+        <li>MiliraClusterMember</li>
+        <li>MiliraClusterCombatThreat</li>
+        <li>Milira_SmallCluster_SingleTurret</li>
+      </buildingTags>
+      <ai_combatDangerous>true</ai_combatDangerous>
+      <turretGunDef>MiliraTurretGun_HeavyParticle</turretGunDef>
+      <turretBurstCooldownTime>7.5</turretBurstCooldownTime>
+      <turretTopOffset>(0, 0.05)</turretTopOffset>
+      <turretTopDrawSize>2.0</turretTopDrawSize>
+      <soundAmbient>MechTurretBig_Call</soundAmbient>
+    </building>
+    <placeWorkers>
+      <li>PlaceWorker_TurretTop</li>
+      <li>PlaceWorker_ShowTurretRadius</li>
+    </placeWorkers>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>MiliraBullet_HeavyParticle</defName>
+    <label>impact particle charge</label>
+    <thingClass>Projectile_Explosive</thingClass>
+    <graphicData>
+      <texPath>Milira/ProjectileNew/Bullet_ParticleExplode</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>1.25</drawSize>
+    </graphicData>
+    <projectile>
+      <flyOverhead>false</flyOverhead>
+      <damageDef>Milira_ParticleBomb</damageDef>
+      <explosionRadius>1</explosionRadius>
+      <damageAmountBase>15</damageAmountBase>
+      <armorPenetrationBase>0.35</armorPenetrationBase>
+      <stoppingPower>1.0</stoppingPower>
+      <speed>85</speed>
+    </projectile>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>MiliraTurretGun_HeavyParticle</defName>
+    <label>heavy particle cannon</label>
+    <description>A heavy particle cannon mounted on a fixed turret.</description>
+    <graphicData>
+      <texPath>Milira/Building/Security/MiliraHeavyTurretParticle_Top</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <AccuracyLong>0.28</AccuracyLong>
+      <RangedWeapon_Cooldown>7.5</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>48</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>MiliraBullet_HeavyParticle</defaultProjectile>
+        <warmupTime>2.4</warmupTime>
+        <minRange>4.9</minRange>
+        <range>49.9</range>
+        <ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+        <burstShotCount>24</burstShotCount>
+        <forcedMissRadius>2.9</forcedMissRadius>
+        <soundCast>Shot_ChargeBlaster</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <stopBurstWithoutLos>false</stopBurstWithoutLos>
+        <muzzleFlashScale>9</muzzleFlashScale>
+        <ai_AvoidFriendlyFireRadius>6</ai_AvoidFriendlyFireRadius>
+        <ai_ProjectileLaunchingIgnoresMeleeThreats>true</ai_ProjectileLaunchingIgnoresMeleeThreats>
+      </li>
+    </verbs>
+  </ThingDef>
+
+
+
+
+  <!--重型电浆炮塔======================================================================================-->
+  <ThingDef ParentName="BuildingBase">
+    <defName>MiliraTurret_HeavyPlasma</defName>
+    <label>heavy plasma turret</label>
+    <description>A self-powered heavy plasma turret that fires plasma charges capable of melting armor.</description>
+    <thingClass>Building_TurretGun</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Milira/Building/Security/MiliraHeavyTurret_Base</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2,2)</drawSize>
+      <drawOffset>(0,0,-0.16)</drawOffset>
+      <damageData>
+        <rect>(0.3,0.3,1.4,1.4)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(1.5,0.35,1.4)</volume>
+        <offset>(0,0,-0.05)</offset>
+      </shadowData>
+    </graphicData>
+    <receivesSignals>true</receivesSignals>
+    <uiIconPath>Milira/Building/Security/MiliraHeavyTurretPlasma_Top</uiIconPath>
+    <uiIconScale>1.0</uiIconScale>
+    <altitudeLayer>Building</altitudeLayer>
+    <stealable>false</stealable>
+    <rotatable>false</rotatable>
+    <isMechClusterThreat>true</isMechClusterThreat>
+    <size>(2,2)</size>
+    <statBases>
+      <MaxHitPoints>650</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <WorkToBuild>24000</WorkToBuild>
+      <Mass>80</Mass>
+      <Beauty>-15</Beauty>
+      <ShootingAccuracyTurret>1.00</ShootingAccuracyTurret>
+    </statBases>
+    <costList>
+      <Plasteel>300</Plasteel>
+      <Milira_SunPlateSteel>150</Milira_SunPlateSteel>
+      <Milira_SolarCrystal>30</Milira_SolarCrystal>
+      <ComponentSpacer>5</ComponentSpacer>
+      <Milira_StarshipBattery>1</Milira_StarshipBattery>
+    </costList>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <researchPrerequisites>
+      <li>Milira_HeavyPlasmaTurret</li>
+    </researchPrerequisites>
+    <damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+      <li>
+        <damageDef>Milira_PlasmaBomb</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Bomb</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+    </damageMultipliers>
+    <tickerType>Normal</tickerType>
+    <comps>
+      <li Class="CompProperties_CanBeDormant" />
+      <li Class="CompProperties_Initiatable" />
+      <li Class="CompProperties_WakeUpDormant">
+        <wakeUpSound>MechanoidsWakeUp</wakeUpSound>
+      </li>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>5.9</explosiveRadius>
+        <explosiveDamageType>Milira_PlasmaBombBig</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.5</chanceNeverExplodeFromDamage>
+      </li>
+      <li Class="CompProperties_Stunnable">
+        <affectedDamageDefs>
+          <li>Stun</li>
+          <li>EMP</li>
+        </affectedDamageDefs>
+        <adaptableDamageDefs>
+          <li>EMP</li>
+        </adaptableDamageDefs>
+      </li>
+      <li Class="AncotLibrary.CompProperties_LeavingItemDestroyed">
+        <onlyNonPlayerLeaving>true</onlyNonPlayerLeaving>
+        <thingDefWithCommonalities>
+          <li>
+            <thingDef>Milira_StarshipBattery</thingDef>
+            <count>1</count>
+            <commonality>0.1</commonality>
+          </li>
+        </thingDefWithCommonalities>
+      </li>
+    </comps>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <fillPercent>0.5</fillPercent>
+    <hasTooltip>true</hasTooltip>
+    <killedLeavings>
+      <ChunkSlagSteel>1</ChunkSlagSteel>
+    </killedLeavings>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <designationCategory>Security</designationCategory>
+    <building>
+      <combatPower>260</combatPower>
+      <buildingTags>
+        <li>MiliraClusterMember</li>
+        <li>MiliraClusterCombatThreat</li>
+        <li>Milira_SmallCluster_SingleTurret</li>
+      </buildingTags>
+      <ai_combatDangerous>true</ai_combatDangerous>
+      <turretGunDef>MiliraTurretGun_HeavyPlasma</turretGunDef>
+      <turretBurstCooldownTime>10.8</turretBurstCooldownTime>
+      <turretTopOffset>(0, 0.05)</turretTopOffset>
+      <turretTopDrawSize>2.0</turretTopDrawSize>
+      <soundAmbient>MechTurretBig_Call</soundAmbient>
+    </building>
+    <placeWorkers>
+      <li>PlaceWorker_TurretTop</li>
+      <li>PlaceWorker_ShowTurretRadius</li>
+    </placeWorkers>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>MiliraBullet_HeavyPlasma</defName>
+    <label>plasma charge</label>
+    <thingClass>Milira.Projectile_ExplosiveWithPlasmaSmokeTrail</thingClass>
+    <graphicData>
+      <texPath>Milira/ProjectileNew/Bullet_PlasmaExplode</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>1.8</drawSize>
+    </graphicData>
+    <projectile>
+      <flyOverhead>false</flyOverhead>
+      <damageDef>Milira_PlasmaBombBig</damageDef>
+      <explosionRadius>4.2</explosionRadius>
+      <damageAmountBase>34</damageAmountBase>
+      <armorPenetrationBase>0.75</armorPenetrationBase>
+      <stoppingPower>1.8</stoppingPower>
+      <speed>75</speed>
+      <!--<explosionEffect>Milira_HeavyPlasmaExplosion</explosionEffect>-->
+    </projectile>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>MiliraTurretGun_HeavyPlasma</defName>
+    <label>heavy plasma cannon</label>
+    <description>A heavy plasma cannon mounted on a fixed turret.</description>
+    <graphicData>
+      <texPath>Milira/Building/Security/MiliraHeavyTurretPlasma_Top</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <AccuracyLong>0.28</AccuracyLong>
+      <RangedWeapon_Cooldown>10.8</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>48</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>MiliraBullet_HeavyPlasma</defaultProjectile>
+        <warmupTime>3.8</warmupTime>
+        <minRange>4.9</minRange>
+        <range>45.9</range>
+        <ticksBetweenBurstShots>0</ticksBetweenBurstShots>
+        <burstShotCount>1</burstShotCount>
+        <forcedMissRadius>2.1</forcedMissRadius>
+        <soundCast>Milira_Shot_HeavyPlasma</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <stopBurstWithoutLos>false</stopBurstWithoutLos>
+        <soundAiming>Milira_HeavyPlasma_Aiming</soundAiming>
+        <aimingTargetMote>Mote_HellsphereCannon_Target</aimingTargetMote>
+        <aimingLineMote>Mote_HellsphereCannon_Aim</aimingLineMote>
+        <aimingChargeMote>Mote_HellsphereCannon_Charge</aimingChargeMote>
+        <muzzleFlashScale>9</muzzleFlashScale>
+        <ai_AvoidFriendlyFireRadius>6</ai_AvoidFriendlyFireRadius>
+        <ai_ProjectileLaunchingIgnoresMeleeThreats>true</ai_ProjectileLaunchingIgnoresMeleeThreats>
+      </li>
+    </verbs>
+  </ThingDef>
+
+
+
+  <!--联装火箭炮塔======================================================================================-->
+  <ThingDef ParentName="BuildingBase">
+    <defName>MiliraTurret_HeavyRocketLauncher</defName>
+    <label>multiple rocket launcher</label>
+    <description>A multiple rocket launcher mounted on a fixed turret.</description>
+    <thingClass>Building_TurretGun</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Milira/Building/Security/MiliraHeavyTurret_Base</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2,2)</drawSize>
+      <drawOffset>(0,0,-0.16)</drawOffset>
+      <damageData>
+        <rect>(0.3,0.3,1.4,1.4)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(1.5,0.35,1.4)</volume>
+        <offset>(0,0,-0.05)</offset>
+      </shadowData>
+    </graphicData>
+    <receivesSignals>true</receivesSignals>
+    <uiIconPath>Milira/Building/Security/MiliraHeavyTurretHeavyRocketLauncher_Top</uiIconPath>
+    <uiIconScale>1.0</uiIconScale>
+    <altitudeLayer>Building</altitudeLayer>
+    <stealable>false</stealable>
+    <rotatable>false</rotatable>
+    <isMechClusterThreat>true</isMechClusterThreat>
+    <size>(2,2)</size>
+    <statBases>
+      <MaxHitPoints>650</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <WorkToBuild>24000</WorkToBuild>
+      <Mass>80</Mass>
+      <Beauty>-15</Beauty>
+      <ShootingAccuracyTurret>1.00</ShootingAccuracyTurret>
+    </statBases>
+    <costList>
+      <Plasteel>300</Plasteel>
+      <Milira_SunPlateSteel>150</Milira_SunPlateSteel>
+      <Milira_SolarCrystal>30</Milira_SolarCrystal>
+      <ComponentSpacer>5</ComponentSpacer>
+      <Milira_StarshipBattery>1</Milira_StarshipBattery>
+    </costList>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <researchPrerequisites>
+      <li>Milira_HeavyRocketLauncher</li>
+    </researchPrerequisites>
+    <damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+      <li>
+        <damageDef>Milira_PlasmaBomb</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Bomb</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+    </damageMultipliers>
+    <tickerType>Normal</tickerType>
+    <comps>
+      <li Class="CompProperties_CanBeDormant" />
+      <li Class="CompProperties_Initiatable" />
+      <li Class="CompProperties_WakeUpDormant">
+        <wakeUpSound>MechanoidsWakeUp</wakeUpSound>
+      </li>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>5.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.5</chanceNeverExplodeFromDamage>
+      </li>
+      <li Class="CompProperties_Stunnable">
+        <affectedDamageDefs>
+          <li>Stun</li>
+          <li>EMP</li>
+        </affectedDamageDefs>
+        <adaptableDamageDefs>
+          <li>EMP</li>
+        </adaptableDamageDefs>
+      </li>
+      <li Class="AncotLibrary.CompProperties_LeavingItemDestroyed">
+        <onlyNonPlayerLeaving>true</onlyNonPlayerLeaving>
+        <thingDefWithCommonalities>
+          <li>
+            <thingDef>Milira_StarshipBattery</thingDef>
+            <count>1</count>
+            <commonality>0.1</commonality>
+          </li>
+        </thingDefWithCommonalities>
+      </li>
+    </comps>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <fillPercent>0.5</fillPercent>
+    <hasTooltip>true</hasTooltip>
+    <killedLeavings>
+      <ChunkSlagSteel>1</ChunkSlagSteel>
+    </killedLeavings>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <designationCategory>Security</designationCategory>
+    <building>
+      <combatPower>260</combatPower>
+      <buildingTags>
+        <li>MiliraClusterMember</li>
+        <li>MiliraClusterCombatThreat</li>
+        <li>Milira_SmallCluster_SingleTurret</li>
+      </buildingTags>
+      <ai_combatDangerous>true</ai_combatDangerous>
+      <turretGunDef>MiliraTurretGun_HeavyRocketLauncher</turretGunDef>
+      <turretBurstCooldownTime>36</turretBurstCooldownTime>
+      <turretTopOffset>(0, 0.05)</turretTopOffset>
+      <turretTopDrawSize>2.0</turretTopDrawSize>
+      <soundAmbient>MechTurretBig_Call</soundAmbient>
+    </building>
+    <placeWorkers>
+      <li>PlaceWorker_TurretTop</li>
+      <li>PlaceWorker_ShowTurretRadius</li>
+    </placeWorkers>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>MiliraProjectile_HeavyRocket</defName>
+    <label>rocket</label>
+    <thingClass>Milira.Projectile_ExplosiveWithSmokeTrail</thingClass>
+    <graphicData>
+      <texPath>Milira/Projectile/MiliraProjectile_SmallRocketII</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+      <drawSize>1.5</drawSize>
+    </graphicData>
+    <projectile>
+      <flyOverhead>true</flyOverhead>
+      <damageDef>Bomb</damageDef>
+      <explosionRadius>2.5</explosionRadius>
+      <damageAmountBase>28</damageAmountBase>
+      <armorPenetrationBase>0.45</armorPenetrationBase>
+      <stoppingPower>8.0</stoppingPower>
+      <speed>48</speed>
+    </projectile>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>MiliraTurretGun_HeavyRocketLauncher</defName>
+    <label>multiple Rocket launcher</label>
+    <description>A multiple rocket launcher mounted on a fixed turret.</description>
+    <graphicData>
+      <texPath>Milira/Building/Security/MiliraHeavyTurretHeavyRocketLauncher_Top</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <AccuracyLong>0.66</AccuracyLong>
+      <RangedWeapon_Cooldown>36</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>52</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>MiliraProjectile_HeavyRocket</defaultProjectile>
+        <warmupTime>2.4</warmupTime>
+        <minRange>4.9</minRange>
+        <range>35.9</range>
+        <requireLineOfSight>false</requireLineOfSight>
+        <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+        <burstShotCount>8</burstShotCount>
+        <forcedMissRadius>9</forcedMissRadius>
+        <soundCast>Milira_Shot_Rocket</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>9</muzzleFlashScale>
+        <targetParams>
+          <onlyTargetDamagedThings>true</onlyTargetDamagedThings>
+        </targetParams>
+        <ai_RangedAlawaysShootGroundBelowTarget>true</ai_RangedAlawaysShootGroundBelowTarget>
+        <ai_AvoidFriendlyFireRadius>6</ai_AvoidFriendlyFireRadius>
+        <ai_ProjectileLaunchingIgnoresMeleeThreats>true</ai_ProjectileLaunchingIgnoresMeleeThreats>
+      </li>
+    </verbs>
+  </ThingDef>
+
+
+
+
+
+
+  <!--重型电磁加农炮塔======================================================================================-->
+  <ThingDef ParentName="BuildingBase">
+    <defName>MiliraTurret_HeavyRailGun</defName>
+    <label>heavy electromagnetic cannon turret</label>
+    <description>A self-powered heavy electromagnetic cannon turret that launches high-velocity electromagnetic rounds.</description>
+    <thingClass>Building_TurretGun</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Milira/Building/Security/MiliraHeavyTurret_Base</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2,2)</drawSize>
+      <drawOffset>(0,0,-0.16)</drawOffset>
+      <damageData>
+        <rect>(0.3,0.3,1.4,1.4)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(1.5,0.35,1.4)</volume>
+        <offset>(0,0,-0.05)</offset>
+      </shadowData>
+    </graphicData>
+    <receivesSignals>true</receivesSignals>
+    <uiIconPath>Milira/Building/Security/MiliraHeavyTurretRailGunCannon_Top</uiIconPath>
+    <uiIconScale>1.0</uiIconScale>
+    <altitudeLayer>Building</altitudeLayer>
+    <stealable>false</stealable>
+    <rotatable>false</rotatable>
+    <isMechClusterThreat>true</isMechClusterThreat>
+    <size>(2,2)</size>
+    <statBases>
+      <MaxHitPoints>650</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <WorkToBuild>24000</WorkToBuild>
+      <Mass>80</Mass>
+      <Beauty>-15</Beauty>
+      <ShootingAccuracyTurret>1.00</ShootingAccuracyTurret>
+    </statBases>
+    <costList>
+      <Plasteel>300</Plasteel>
+      <Milira_SunPlateSteel>150</Milira_SunPlateSteel>
+      <Milira_SolarCrystal>30</Milira_SolarCrystal>
+      <ComponentSpacer>5</ComponentSpacer>
+      <Milira_StarshipBattery>1</Milira_StarshipBattery>
+    </costList>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <researchPrerequisites>
+      <li>Milira_HeavyRailGunTurret</li>
+    </researchPrerequisites>
+    <damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+      <li>
+        <damageDef>Milira_PlasmaBomb</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Bomb</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <!-- <li>
+        <damageDef>EMP</damageDef>
+        <multiplier>0.5</multiplier>
+      </li> -->
+    </damageMultipliers>
+    <tickerType>Normal</tickerType>
+    <comps>
+      <li Class="CompProperties_CanBeDormant" />
+      <li Class="CompProperties_Initiatable" />
+      <li Class="CompProperties_WakeUpDormant">
+        <wakeUpSound>MechanoidsWakeUp</wakeUpSound>
+      </li>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>5.9</explosiveRadius>
+        <explosiveDamageType>Milira_PlasmaBombBig</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.5</chanceNeverExplodeFromDamage>
+      </li>
+      <li Class="CompProperties_Stunnable">
+        <affectedDamageDefs>
+          <li>Stun</li>
+          <li>EMP</li>
+        </affectedDamageDefs>
+        <adaptableDamageDefs>
+          <li>EMP</li>
+        </adaptableDamageDefs>
+      </li>
+      <li Class="AncotLibrary.CompProperties_LeavingItemDestroyed">
+        <onlyNonPlayerLeaving>true</onlyNonPlayerLeaving>
+        <thingDefWithCommonalities>
+          <li>
+            <thingDef>Milira_StarshipBattery</thingDef>
+            <count>1</count>
+            <commonality>0.1</commonality>
+          </li>
+        </thingDefWithCommonalities>
+      </li>
+    </comps>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <fillPercent>0.5</fillPercent>
+    <hasTooltip>true</hasTooltip>
+    <killedLeavings>
+      <ChunkSlagSteel>1</ChunkSlagSteel>
+    </killedLeavings>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <designationCategory>Security</designationCategory>
+    <building>
+      <combatPower>260</combatPower>
+      <buildingTags>
+        <li>MiliraClusterMember</li>
+        <li>MiliraClusterCombatThreat</li>
+        <li>Milira_SmallCluster_SingleTurret</li>
+      </buildingTags>
+      <ai_combatDangerous>true</ai_combatDangerous>
+      <turretGunDef>MiliraTurretGun_HeavyRailGun</turretGunDef>
+      <turretBurstCooldownTime>12.8</turretBurstCooldownTime>
+      <turretTopOffset>(0, 0.05)</turretTopOffset>
+      <turretTopDrawSize>2.0</turretTopDrawSize>
+      <soundAmbient>MechTurretBig_Call</soundAmbient>
+    </building>
+    <placeWorkers>
+      <li>PlaceWorker_TurretTop</li>
+      <li>PlaceWorker_ShowTurretRadius</li>
+    </placeWorkers>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>MiliraBullet_HeavyRailGun</defName>
+    <label>electromagnetic round</label>
+    <thingClass>Bullet</thingClass>
+    <graphicData>
+      <texPath>Things/Projectile/ChargeLanceShot</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+      <drawSize>2.4</drawSize>
+    </graphicData>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>30</damageAmountBase>
+      <armorPenetrationBase>1.2</armorPenetrationBase>
+      <stoppingPower>2.6</stoppingPower>
+      <speed>175</speed>
+      <extraDamages>
+        <li>
+          <def>Stun</def>
+          <amount>8</amount>
+        </li>
+      </extraDamages>
+    </projectile>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>MiliraTurretGun_HeavyRailGun</defName>
+    <label>heavy electromagnetic cannon</label>
+    <description>A heavy electromagnetic cannon mounted on a fixed turret.</description>
+    <graphicData>
+      <texPath>Milira/Building/Security/MiliraHeavyTurretRailGunCannon_Top</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <AccuracyLong>0.78</AccuracyLong>
+      <RangedWeapon_Cooldown>12.8</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>48</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>MiliraBullet_HeavyRailGun</defaultProjectile>
+        <warmupTime>3.8</warmupTime>
+        <minRange>4.9</minRange>
+        <range>47.9</range>
+        <ticksBetweenBurstShots>0</ticksBetweenBurstShots>
+        <burstShotCount>2</burstShotCount>
+        <soundCast>Milira_Shot_HeavyRasterCannon</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <stopBurstWithoutLos>false</stopBurstWithoutLos>
+        <soundAiming>Milira_HeavyPlasma_Aiming</soundAiming>
+        <muzzleFlashScale>9</muzzleFlashScale>
+        <ai_ProjectileLaunchingIgnoresMeleeThreats>true</ai_ProjectileLaunchingIgnoresMeleeThreats>
+      </li>
+    </verbs>
+  </ThingDef>
+
+
+
+
+  <!--重型光栅加农炮塔======================================================================================-->
+  <!-- <ThingDef ParentName="BuildingBase">
+    <defName>MiliraTurret_HeavyRasterCannon</defName>
+    <label>重型光栅加农炮塔</label>
+    <description>。</description>
+    <thingClass>Building_TurretGun</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Milira/Building/Security/MiliraHeavyTurret_Base</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2,2)</drawSize>
+      <drawOffset>(0,0,-0.16)</drawOffset>
+      <damageData>
+        <rect>(0.3,0.3,1.4,1.4)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(1.5,0.35,1.4)</volume>
+        <offset>(0,0,-0.05)</offset>
+      </shadowData>
+    </graphicData>
+    <receivesSignals>true</receivesSignals>
+    <uiIconPath>Milira/Building/Security/MiliraHeavyTurretRasterCannon_Top</uiIconPath>
+    <uiIconScale>1.0</uiIconScale>
+    <altitudeLayer>Building</altitudeLayer>
+    <stealable>false</stealable>
+    <rotatable>false</rotatable>
+    <isMechClusterThreat>true</isMechClusterThreat>
+    <size>(2,2)</size>
+    <statBases>
+      <MaxHitPoints>650</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <WorkToBuild>24000</WorkToBuild>
+      <Mass>80</Mass>
+      <Beauty>-15</Beauty>
+      <ShootingAccuracyTurret>1.00</ShootingAccuracyTurret>
+    </statBases>
+    <damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+      <li>
+        <damageDef>Milira_PlasmaBomb</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Bomb</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>EMP</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+    </damageMultipliers>
+    <tickerType>Normal</tickerType>
+    <comps>
+      <li Class="CompProperties_CanBeDormant" />
+      <li Class="CompProperties_WakeUpDormant">
+        <wakeUpSound>MechanoidsWakeUp</wakeUpSound>
+      </li>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>5.9</explosiveRadius>
+        <explosiveDamageType>Milira_PlasmaBomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.5</chanceNeverExplodeFromDamage>
+      </li>
+    </comps>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <fillPercent>0.5</fillPercent>
+    <hasTooltip>true</hasTooltip>
+    <killedLeavings>
+      <ChunkSlagSteel>1</ChunkSlagSteel>
+    </killedLeavings>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <designationCategory>Security</designationCategory>
+    <building>
+      <combatPower>260</combatPower>
+      <buildingTags>
+        <li>MiliraClusterMember</li>
+        <li>MiliraClusterCombatThreat</li>
+      </buildingTags>
+      <ai_combatDangerous>true</ai_combatDangerous>
+      <turretGunDef>MiliraTurretGun_RasterCannon</turretGunDef>
+      <turretBurstCooldownTime>0.5</turretBurstCooldownTime>
+      <turretTopOffset>(0, 0.05)</turretTopOffset>
+      <turretTopDrawSize>2.0</turretTopDrawSize>
+      <soundAmbient>MechTurretBig_Call</soundAmbient>
+    </building>
+    <placeWorkers>
+      <li>PlaceWorker_TurretTop</li>
+    </placeWorkers>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>MiliraTurretGun_RasterCannon</defName>
+    <label>重型光栅加农炮</label>
+    <description>。</description>
+    <graphicData>
+      <texPath>Milira/Building/Security/MiliraHeavyTurretRasterCannon_Top</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <AccuracyLong>0.28</AccuracyLong>
+      <RangedWeapon_Cooldown>0.5</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>48</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_ShootBeam</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <warmupTime>1.0</warmupTime>
+        <range>44.9</range>
+        <minRange>3.9</minRange>
+        <beamFullWidthRange>2.1</beamFullWidthRange>
+        <burstShotCount>100</burstShotCount>
+        <beamWidth>-2.2</beamWidth>
+        <ticksBetweenBurstShots>22</ticksBetweenBurstShots>
+        <beamDamageDef>Beam</beamDamageDef>
+        <soundCastTail>GunTail_Medium</soundCastTail>
+        <muzzleFlashScale>9</muzzleFlashScale>
+        <soundCastBeam>BeamGraser_Shooting</soundCastBeam>
+        <beamGroundFleckDef>Fleck_BeamBurn</beamGroundFleckDef>
+        <beamFleckChancePerTick>0.32</beamFleckChancePerTick>
+        <beamMaxDeviation>0</beamMaxDeviation>
+        <beamCurvature>0</beamCurvature>
+        <beamMoteDef>Mote_GraserBeamBase</beamMoteDef>
+        <beamEndEffecterDef>GraserBeam_End</beamEndEffecterDef>
+        <beamChanceToStartFire>0</beamChanceToStartFire>
+        <beamChanceToAttachFire>0</beamChanceToAttachFire>
+        <beamFireSizeRange>0</beamFireSizeRange>
+        <beamLineFleckDef>Fleck_BeamSpark</beamLineFleckDef>
+        <beamStartOffset>0</beamStartOffset>
+        <beamLineFleckChanceCurve>
+          <points>
+            <li>(0, 0)</li>
+            <li>(0.65, 0.4)</li>
+            <li>(1, 0.75)</li>
+          </points>
+        </beamLineFleckChanceCurve>
+      </li>
+    </verbs>
+  </ThingDef> -->
+
+
+</Defs>

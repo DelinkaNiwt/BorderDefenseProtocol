@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 米莉拉的光环 -->
+  <BodyPartGroupDef>
+    <defName>Milira_Halo</defName>
+    <label>halo</label>
+    <!-- <listOrder>1</listOrder> -->
+  </BodyPartGroupDef>
+
+  <BodyPartGroupDef>
+    <defName>Milira_WingAttackTool</defName>
+    <label>Wing</label>
+  </BodyPartGroupDef>
+
+  <BodyPartGroupDef>
+    <defName>Milira_Wings</defName>
+    <label>Wing</label>
+  </BodyPartGroupDef>
+
+
+</Defs>

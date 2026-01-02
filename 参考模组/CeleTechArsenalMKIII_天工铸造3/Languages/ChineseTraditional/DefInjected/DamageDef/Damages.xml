@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: anti-entropy bullet -->
+  <AntiEntropyBullet.label>反熵射彈</AntiEntropyBullet.label>
+  <!-- EN: {0} has been has been shot to death. -->
+  <AntiEntropyBullet.deathMessage>被反熵射彈射殺</AntiEntropyBullet.deathMessage>
+  
+  <!-- EN: Anesthetic bullet -->
+  <CMC_ATB.label>納米麻醉子彈</CMC_ATB.label>
+  <!-- EN: {0} has been shot to death. -->
+  <CMC_ATB.deathMessage>被納米麻醉子彈射殺</CMC_ATB.deathMessage>
+  
+  <!-- EN: bomb(air-burst) -->
+  <CMC_Bomb_AA.label>空爆彈藥</CMC_Bomb_AA.label>
+  <!-- EN: {0} has died in an explosion. -->
+  <CMC_Bomb_AA.deathMessage>被空爆彈藥炸死</CMC_Bomb_AA.deathMessage>
+  
+  <!-- EN: neurotoxin bullet -->
+  <CMC_NTB.label>神經毒素子彈</CMC_NTB.label>
+  <!-- EN: {0} has been shot to death. -->
+  <CMC_NTB.deathMessage>被神經毒素子彈射殺</CMC_NTB.deathMessage>
+  
+  <!-- EN: vaporize -->
+  <CMC_Vaporize_Small.label>蒸發</CMC_Vaporize_Small.label>
+  <!-- EN: {0} has been vaporized by extreme heat. -->
+  <CMC_Vaporize_Small.deathMessage>被高溫蒸發</CMC_Vaporize_Small.deathMessage>
+  
+  <!-- EN: inferno beam -->
+  <InfernoBeam.label>射線</InfernoBeam.label>
+  <!-- EN: {0} has been vaporized by extreme heat. -->
+  <InfernoBeam.deathMessage>被射線蒸發</InfernoBeam.deathMessage>
+  
+  <!-- EN: bomb -->
+  <NeutronBomb.label>中子彈</NeutronBomb.label>
+  <!-- EN: {0} has died in an explosion. -->
+  <NeutronBomb.deathMessage>被中子彈炸死</NeutronBomb.deathMessage>
+  
+  <!-- EN: radiation -->
+  <Radiation.label>輻射</Radiation.label>
+  <!-- EN: {0} has degraded to death. -->
+  <Radiation.deathMessage>被輻射殺死</Radiation.deathMessage>
+  
+</LanguageData>

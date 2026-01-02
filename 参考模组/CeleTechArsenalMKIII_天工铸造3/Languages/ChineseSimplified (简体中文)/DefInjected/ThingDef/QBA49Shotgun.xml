@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: QBA-49 shotgun -->
+  <CMC_QBAfournine.label>QBA-49 动能霰弹枪</CMC_QBAfournine.label>
+  <!-- EN: . -->
+  <CMC_QBAfournine.description>.</CMC_QBAfournine.description>
+  <!-- EN: Using grenade launcher to fire stun grenades that incapables enemy. -->
+  <CMC_QBAfournine.comps.CompSecondaryVerb.description>TODO</CMC_QBAfournine.comps.CompSecondaryVerb.description>
+  <!-- EN: stock -->
+  <CMC_QBAfournine.tools.stock.label>TODO</CMC_QBAfournine.tools.stock.label>
+  <!-- EN: barrel -->
+  <CMC_QBAfournine.tools.barrel.label>TODO</CMC_QBAfournine.tools.barrel.label>
+  <!-- EN: QBA-49 shotgun -->
+  <CMC_QBAfournine.verbs.Verb_Shoot.label>TODO</CMC_QBAfournine.verbs.Verb_Shoot.label>
+  
+</LanguageData>

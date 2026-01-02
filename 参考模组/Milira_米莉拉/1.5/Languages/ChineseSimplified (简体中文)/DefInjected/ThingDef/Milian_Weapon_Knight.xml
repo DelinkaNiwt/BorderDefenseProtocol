@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Knight halberd -->
+  <Milian_KnightHalberd.label>骑士剑枪</Milian_KnightHalberd.label>
+  <!-- EN: The standard halberd of the Milian knights, requiring the use of both hands to wield with great momentum and force. -->
+  <Milian_KnightHalberd.description>米莉安骑士的制式剑枪，需要依靠双手挥动，势大力沉。</Milian_KnightHalberd.description>
+  <!-- EN: point -->
+  <Milian_KnightHalberd.tools.point.label>刺</Milian_KnightHalberd.tools.point.label>
+  <!-- EN: blade -->
+  <Milian_KnightHalberd.tools.blade.label>刃</Milian_KnightHalberd.tools.blade.label>
+  
+  <!-- EN: Knight hammer -->
+  <Milian_KnightHammer.label>骑士锤</Milian_KnightHammer.label>
+  <!-- EN: The standard war hammer of the Milian knights, capable of causing dizziness in targets upon impact. -->
+  <Milian_KnightHammer.description>米莉安骑士的制式战锤，攻击时可以对目标造成眩晕。</Milian_KnightHammer.description>
+  <!-- EN: hammer -->
+  <Milian_KnightHammer.tools.hammer.label>锤</Milian_KnightHammer.tools.hammer.label>
+  
+  <!-- EN: Knight lance -->
+  <Milian_KnightLance.label>骑士骑枪</Milian_KnightLance.label>
+  <!-- EN: The standard lance of the Milian knights, capable of launching quick, high-penetrating attacks. -->
+  <Milian_KnightLance.description>米莉安骑士的制式骑枪，能够快速地发动高穿透的攻击。</Milian_KnightLance.description>
+  <!-- EN: point -->
+  <Milian_KnightLance.tools.point.label>刺</Milian_KnightLance.tools.point.label>
+  
+  <!-- EN: Knight sword -->
+  <Milian_KnightSword.label>骑士剑</Milian_KnightSword.label>
+  <!-- EN: The standard longsword of Milian knights, which can be wielded with one hand. Often used in coordination with a shield. -->
+  <Milian_KnightSword.description>米莉安骑士的制式长剑，单手就能挥动。经常和盾牌配合使用。</Milian_KnightSword.description>
+  <!-- EN: point -->
+  <Milian_KnightSword.tools.point.label>尖</Milian_KnightSword.tools.point.label>
+  <!-- EN: edge -->
+  <Milian_KnightSword.tools.edge.label>边</Milian_KnightSword.tools.edge.label>
+  
+</LanguageData>

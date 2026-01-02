@@ -1,0 +1,124 @@
+<Defs>
+	<HediffDef ParentName="ImplantHediffBase">
+    <defName>KaiYang</defName>
+	<defaultLabelColor>(0, 1, 1)</defaultLabelColor>
+    <label>&lt;color=#1DD5EE&gt;&lt;i&gt;KY-01 combat mechanitor chip&lt;/i&gt;&lt;/color&gt;</label>
+    <labelNoun>a KY-01 combat manchanitor chip</labelNoun>
+    <description>A chip designed for the ground-combat mechanitors, greatly enhancing its bandwidth and repairing speed.</description>
+    <descriptionHyperlinks><ThingDef>KaiYangChip</ThingDef></descriptionHyperlinks>
+    <stages>
+      <li>
+		<capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>0.5</offset>
+          </li>
+		</capMods>
+		<statOffsets>
+           <MechBandwidth>108</MechBandwidth>
+		   <MechRemoteRepairDistance>25</MechRemoteRepairDistance>
+		   <MechFormingSpeed>5</MechFormingSpeed>
+		   <MechRepairSpeed>8</MechRepairSpeed>
+         </statOffsets>
+      </li>
+    </stages>
+    <spawnThingOnRemoved>KaiYangChip</spawnThingOnRemoved>
+  </HediffDef>
+
+  <ThingDef ParentName="BodyPartProstheticCMCBase">
+    <defName>KaiYangChip</defName>
+    <label>&lt;color=#1DD5EE&gt;&lt;i&gt;KY-01 manchanitor brain chip&lt;/i&gt;&lt;/color&gt;</label>
+    <description>A brain implant which boosts combat abilities.</description>
+    <descriptionHyperlinks><RecipeDef>InstallKY</RecipeDef></descriptionHyperlinks>
+	<statBases>
+		<WorkToMake>6000</WorkToMake>
+		<MarketValue>3200</MarketValue>
+		<Mass>0.2</Mass>
+	</statBases>
+    <thingSetMakerTags>
+      <li>RewardStandardLowFreq</li>
+    </thingSetMakerTags>
+    <costList>
+      <Steel>20</Steel>
+	  <Plasteel>80</Plasteel>
+	  <Gold>120</Gold>
+      <ComponentIndustrial>4</ComponentIndustrial>
+	  <ComponentSpacer>12</ComponentSpacer>
+	  <NanostructuringChip>3</NanostructuringChip>
+    </costList>
+    <techHediffsTags>
+      <li>CMC</li>
+    </techHediffsTags>
+	<recipeMaker>
+		  <researchPrerequisite>CMCBio</researchPrerequisite>
+		  <skillRequirements>
+			<Crafting>15</Crafting>
+		  </skillRequirements>
+		  <recipeUsers Inherit="False">
+			<li>FabricationBench</li>
+		  </recipeUsers>
+		  <displayPriority>200</displayPriority>
+	</recipeMaker>
+  </ThingDef>
+
+  <RecipeDef ParentName="SurgeryInstallImplantBase">
+    <defName>InstallKY</defName>
+    <label>install KY-01 chip</label>
+    <description>Install a Kai Yang chip.</description>
+    <descriptionHyperlinks>
+      <ThingDef>KaiYangChip</ThingDef>
+      <HediffDef>KaiYang</HediffDef>
+    </descriptionHyperlinks>
+    <jobString>Installing Kai Yang chip.</jobString>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>KaiYangChip</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>KaiYangChip</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <appliedOnFixedBodyParts>
+      <li>Brain</li>
+    </appliedOnFixedBodyParts>
+    <addsHediff>KaiYang</addsHediff>
+  </RecipeDef>
+
+  <RecipeDef ParentName="SurgeryRemoveImplantBase">
+    <defName>RemoveKY</defName>
+    <label>remove KY-01 chip</label>
+    <description>Remove the Kai Yang chip.</description>
+    <descriptionHyperlinks>
+      <ThingDef>KaiYangChip</ThingDef>
+      <HediffDef>KaiYang</HediffDef>
+    </descriptionHyperlinks>
+    <jobString>Removing Kai Yang chip.</jobString>
+    <removesHediff>KaiYang</removesHediff>
+  </RecipeDef>
+  
+  <!--QuestScriptDef>
+    <defName>CMC_MechanitorStartingMech</defName>
+    <rootSelectionWeight>0</rootSelectionWeight>
+    <isRootSpecial>true</isRootSpecial>
+    <autoAccept>true</autoAccept>
+    <defaultHidden>true</defaultHidden>
+    <questContentRules>
+      <rulesStrings>
+        <li>arrivalLetterLabel->[mech_label] attached: [mechanitor_nameDef]</li>
+        <li>arrivalLetterText->A [mech_label] has dropped from orbit and is placing itself under the control of [mechanitor_nameDef].\n\nIt seems to have been attached to [mechanitor_possessive] mechlink and is eager to serve its purpose once again.</li>
+      </rulesStrings>
+    </questContentRules>
+    <root Class="QuestNode_Root_MechanitorStartingMech">
+      <mechTypes>
+        <li>Mech_Lifter</li>
+      </mechTypes>
+    </root>
+  </QuestScriptDef-->
+</Defs>

@@ -1,0 +1,111 @@
+<Defs>
+	<HediffDef ParentName="ImplantHediffBase">
+    <defName>YaoGuang</defName>
+	<defaultLabelColor>(0, 1, 1)</defaultLabelColor>
+    <label>&lt;color=#1DD5EE&gt;&lt;i&gt;Yao Guang combat chip&lt;/i&gt;&lt;/color&gt;</label>
+    <labelNoun>a Yao Guang combat chip</labelNoun>
+    <description>Under the chip's function, users can stimulate psychic abilities and achieve permanent optical invisibility, but will sacrifice some consciousness and attributes. The chip will be disrupted by EMP, causing the user to faint.</description>
+    <descriptionHyperlinks><ThingDef>YaoGuangChip</ThingDef></descriptionHyperlinks>
+    <stages>
+      <li>
+		<statOffsets>
+			<AimingDelayFactor>0.5</AimingDelayFactor>
+			<ShootingAccuracyPawn>-4.0</ShootingAccuracyPawn>
+			<RangedCooldownFactor>0.2</RangedCooldownFactor>
+			<MeleeDamageFactor>-0.3</MeleeDamageFactor>
+			<PsychicSensitivity>0.35</PsychicSensitivity>
+		</statOffsets>
+      </li>
+    </stages>
+	<comps>
+		<li Class="HediffCompProperties_ReactOnDamage">
+        <damageDefIncoming>EMP</damageDefIncoming>
+        <createHediff>BrainShock</createHediff>
+		</li>
+        <li Class="HediffCompProperties_GiveAbility">
+          <abilityDefs>
+            <li>TOT_Invisibility</li>
+          </abilityDefs>
+        </li>
+    </comps>
+    <spawnThingOnRemoved>YaoGuangChip</spawnThingOnRemoved>
+  </HediffDef>
+
+  <ThingDef ParentName="BodyPartProstheticCMCBase">
+    <defName>YaoGuangChip</defName>
+    <label>Yao Guang chip</label>
+    <description>A brain implant which boosts combat abilities.</description>
+    <descriptionHyperlinks><RecipeDef>InstallYG</RecipeDef></descriptionHyperlinks>
+	<statBases>
+		<WorkToMake>6000</WorkToMake>
+		<MarketValue>3200</MarketValue>
+		<Mass>0.2</Mass>
+	</statBases>
+    <thingSetMakerTags>
+      <li>RewardStandardLowFreq</li>
+    </thingSetMakerTags>
+    <costList>
+      <Steel>30</Steel>
+	  <Plasteel>45</Plasteel>
+	  <Gold>40</Gold>
+      <ComponentIndustrial>4</ComponentIndustrial>
+	  <ComponentSpacer>12</ComponentSpacer>
+	  <NanostructuringChip>1</NanostructuringChip>
+    </costList>
+    <techHediffsTags>
+      <li>CMC</li>
+    </techHediffsTags>
+	<recipeMaker>
+		  <researchPrerequisite>CMCBio</researchPrerequisite>
+		  <skillRequirements>
+			<Crafting>15</Crafting>
+		  </skillRequirements>
+		  <recipeUsers Inherit="False">
+			<li>FabricationBench</li>
+		  </recipeUsers>
+		  <displayPriority>200</displayPriority>
+	</recipeMaker>
+  </ThingDef>
+
+  <RecipeDef ParentName="SurgeryInstallImplantBase">
+    <defName>InstallYG</defName>
+    <label>install Yao Guang chip</label>
+    <description>Install a Yao Guang chip.</description>
+    <descriptionHyperlinks>
+      <ThingDef>YaoGuangChip</ThingDef>
+      <HediffDef>YaoGuang</HediffDef>
+    </descriptionHyperlinks>
+    <jobString>Installing Yao Guang chip.</jobString>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>YaoGuangChip</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>YaoGuangChip</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <appliedOnFixedBodyParts>
+      <li>Brain</li>
+    </appliedOnFixedBodyParts>
+    <addsHediff>YaoGuang</addsHediff>
+  </RecipeDef>
+
+  <RecipeDef ParentName="SurgeryRemoveImplantBase">
+    <defName>RemoveYG</defName>
+    <label>remove Yao Guang chip</label>
+    <description>Remove the Yao Guang chip.</description>
+    <descriptionHyperlinks>
+      <ThingDef>YaoGuangChip</ThingDef>
+      <HediffDef>YaoGuang</HediffDef>
+    </descriptionHyperlinks>
+    <jobString>Removing Yao Guang chip.</jobString>
+    <removesHediff>YaoGuang</removesHediff>
+  </RecipeDef>
+</Defs>

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: duel 12mm PD Battery -->
+  <CMCS_PDBattery.label>HPJ-20舰载小型点防炮塔</CMCS_PDBattery.label>
+  <!-- EN: . -->
+  <CMCS_PDBattery.description>只能搭载在星舰上的小型点防炮塔</CMCS_PDBattery.description>
+  
+  <!-- UNUSED -->
+  <CMCS_PDBattery.comps.CompRefuelable.fuelGizmoLabel>炮管耐久</CMCS_PDBattery.comps.CompRefuelable.fuelGizmoLabel>
+  <CMCS_PDBattery.comps.CompRefuelable.fuelLabel>更换炮管前的剩余射击数量</CMCS_PDBattery.comps.CompRefuelable.fuelLabel>
+  <CMCS_PDBattery.comps.CompRefuelable.outOfFuelMessage>需要更换炮管</CMCS_PDBattery.comps.CompRefuelable.outOfFuelMessage>
+  
+  <!-- EN: auto cannon -->
+  <Gun_CMCS_PD.label>点防电磁炮</Gun_CMCS_PD.label>
+  <!-- EN: A self-loading large-bore cannon designed to attach to a turret. -->
+  <Gun_CMCS_PD.description>高精度点防电磁炮</Gun_CMCS_PD.description>
+  <!-- EN: auto cannon -->
+  <Gun_CMCS_PD.verbs.Verb_ShootCE.label>TODO</Gun_CMCS_PD.verbs.Verb_ShootCE.label>
+  
+  <!-- UNUSED -->
+  <Gun_CMCS_PD.verbs.Verb_ShootSwitchFire.label>点防电磁炮</Gun_CMCS_PD.verbs.Verb_ShootSwitchFire.label>
+  
+</LanguageData>

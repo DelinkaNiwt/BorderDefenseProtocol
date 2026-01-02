@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <!-- EN: Tang Dao -->
+  <TangDao.label>唐刀</TangDao.label>
+  <!-- EN: A ultra tech blade which has a traditional look. -->
+  <TangDao.description>樣式復古的高科技零素材料刀刃。</TangDao.description>
+  <!-- EN: edge -->
+  <TangDao.tools.edge.label>刀刃</TangDao.tools.edge.label>
+</LanguageData>

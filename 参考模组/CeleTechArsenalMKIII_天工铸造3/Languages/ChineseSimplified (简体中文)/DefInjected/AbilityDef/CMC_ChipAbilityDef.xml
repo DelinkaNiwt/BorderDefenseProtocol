@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: invisibility -->
+  <TOT_Invisibility.label>TODO</TOT_Invisibility.label>
+  <!-- EN: invisibility -->
+  <TOT_Invisibility.description>TODO</TOT_Invisibility.description>
+  
+  <!-- EN: Invincibility -->
+  <TOT_TS_Invincibility.label>TODO</TOT_TS_Invincibility.label>
+  <!-- EN: the chip forms a nanite-shield around the user to immune most kinds of damage in a short period. -->
+  <TOT_TS_Invincibility.description>TODO</TOT_TS_Invincibility.description>
+  
+  <!-- EN: ranged combat boost activated -->
+  <TOT_TX_shootingbuff.label>TODO</TOT_TX_shootingbuff.label>
+  <!-- EN: The activated chip greatly boosts user's ranged combat performance. -->
+  <TOT_TX_shootingbuff.description>TODO</TOT_TX_shootingbuff.description>
+  
+  <!-- EN: melee combat boost activated -->
+  <TOT_YH_meleebuff.label>TODO</TOT_YH_meleebuff.label>
+  <!-- EN: The activated chip greatly improves user's melee combat skill. -->
+  <TOT_YH_meleebuff.description>TODO</TOT_YH_meleebuff.description>
+  
+</LanguageData>

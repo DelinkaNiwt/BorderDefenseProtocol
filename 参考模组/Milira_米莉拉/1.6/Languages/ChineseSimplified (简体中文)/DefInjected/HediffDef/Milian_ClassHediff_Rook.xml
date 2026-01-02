@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Chessman: Rook -->
+  <Milian_ClassHediff_Rook.label>执子：战车</Milian_ClassHediff_Rook.label>
+  <!-- EN: Grants the power of a Rook. -->
+  <Milian_ClassHediff_Rook.description>赋予「战车」权能。</Milian_ClassHediff_Rook.description>
+  <!-- EN: Tuning I -->
+  <Milian_ClassHediff_Rook.stages.Tuning_I.label>调谐I</Milian_ClassHediff_Rook.stages.Tuning_I.label>
+  <!-- EN: Tuning II -->
+  <Milian_ClassHediff_Rook.stages.Tuning_II.label>调谐II</Milian_ClassHediff_Rook.stages.Tuning_II.label>
+  <!-- EN: Tuning III -->
+  <Milian_ClassHediff_Rook.stages.Tuning_III.label>调谐III</Milian_ClassHediff_Rook.stages.Tuning_III.label>
+  <!-- EN: Tuning IV -->
+  <Milian_ClassHediff_Rook.stages.Tuning_IV.label>调谐IV</Milian_ClassHediff_Rook.stages.Tuning_IV.label>
+  
+</LanguageData>

@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+  <!-- EN: Event switch -->
+  <Milira.ModSetting_EventSwitch>事件开关</Milira.ModSetting_EventSwitch>
+  <!-- EN: Difficulty adjustment -->
+  <Milira.ModSetting_DifficultyAdjustment>难度调整</Milira.ModSetting_DifficultyAdjustment>
+  <!-- EN: Milian -->
+  <Milira.ModSetting_Milian>米莉安</Milira.ModSetting_Milian>
+  <!-- EN: Milira -->
+  <Milira.ModSetting_Milira>米莉拉</Milira.ModSetting_Milira>
+
+  <!-- 难度分级 -->
+  <!-- EN: Difficulty scale -->
+  <Milira.DifficultyScaleSetting>袭击难度</Milira.DifficultyScaleSetting>
+  <!-- EN: relax -->
+  <Milira.Difficulty_Relax>休闲</Milira.Difficulty_Relax>
+  <!-- EN: An almost effortless combat experience, suitable for players who want to enjoy the mod with ease.\n\nThreat points of milira faction raid multiplied by 20%. -->
+  <Milira.Difficulty_RelaxDesc>几乎没有任何难度的战斗体验，适合想要轻松体验模组的玩家。\n\n米莉拉派系袭击规模x20%。</Milira.Difficulty_RelaxDesc>
+  <!-- EN: easy -->
+  <Milira.Difficulty_Easy>简单</Milira.Difficulty_Easy>
+  <!-- EN: A relaxed combat experience, with milira and high-level milians rarely appearing in raids. Suitable for players who want to experience the mod but do not prefer combat content.\n\nThreat points of milira faction raid multiplied by 60%. -->
+  <Milira.Difficulty_EasyDesc>轻松的战斗体验，米莉拉与高级米莉安几乎不会出现在袭击中。适合想要体验模组但不偏好战斗内容的玩家。\n\n米莉拉派系袭击规模x60%。</Milira.Difficulty_EasyDesc>
+  <!-- EN: normal -->
+  <Milira.Difficulty_Normal>一般</Milira.Difficulty_Normal>
+  <!-- EN: A genuine combat experience, with raid-related content in this mod designed for this difficulty. Suitable for players who have a certain understanding of vanilla combat mechanics and prefer combat. -->
+  <Milira.Difficulty_NormalDesc>原汁原味的战斗体验，本模组的袭击相关内容按照该难度设计。适合对游戏原版战斗机制有一定了解并偏好战斗的玩家。</Milira.Difficulty_NormalDesc>
+  <!-- EN: hard -->
+  <Milira.Difficulty_Hard>困难</Milira.Difficulty_Hard>
+  <!-- EN: A challenging combat experience, suitable for players who can already handle milira raids proficiently and are ready to face greater challenges.\n\nThreat points of milira faction raid multiplied by 120%. -->
+  <Milira.Difficulty_HardDesc>充满挑战的战斗体验，适合已经能够熟练应对米莉拉袭击并准备好迎接挑战的玩家。\n\n米莉拉派系袭击规模x120%。</Milira.Difficulty_HardDesc>
+  <!-- EN: crazy -->
+  <Milira.Difficulty_Crazy>疯狂</Milira.Difficulty_Crazy>
+  <!-- EN: A survival-in-the-cracks combat experience, with milira and high-level milians may appear in earlier raids. Let's say goodbye to the future of your colony.\n\nThreat points of milira faction raid multiplied by 150%. -->
+  <Milira.Difficulty_CrazyDesc>夹缝生存的战斗体验，米莉拉与高级米莉安可能在更前期的袭击中出现。和殖民地的未来说再见吧。\n\n米莉拉派系袭击规模x150%。</Milira.Difficulty_CrazyDesc>
+
+  <!-- 敌对米莉安配件概率 -->
+  <!-- EN: Milian modify chance -->
+  <Milira.MilianModifySetting>米莉安改造概率</Milira.MilianModifySetting>
+  <!-- EN: off -->
+  <Milira.MilianModificationChance_Off>关闭</Milira.MilianModificationChance_Off>
+  <!-- EN: Milian in raids do not have any modification components at all. -->
+  <Milira.MilianModificationChance_OffDesc>袭击中的米莉安完全不会拥有改造配件。</Milira.MilianModificationChance_OffDesc>
+  <!-- EN: Low -->
+  <Milira.MilianModificationChance_Small>较少</Milira.MilianModificationChance_Small>
+  <!-- EN: Milian in raids have a small number of modification components. Each Milian's component slot has a probability of 0% (at 0 raid points) to 30% (at 10,000 raid points) to be equipped with a modification component as raid points increase. -->
+  <Milira.MilianModificationChance_SmallDesc>袭击中的米莉安拥有少量的改造配件，每个米莉安的每个装配槽随袭击点数增长，拥有0%(0)~30%(10000)的概率安装有配件。</Milira.MilianModificationChance_SmallDesc>
+  <!-- EN: Normal -->
+  <Milira.MilianModificationChance_Normal>一般</Milira.MilianModificationChance_Normal>
+  <!-- EN: Milian in raids have a normal number of modification components. Each Milian's component slot has a probability of 0% (at 0 raid points) to 50% (at 10,000 raid points) to be equipped with a modification component as raid points increase. -->
+  <Milira.MilianModificationChance_NormalDesc>袭击中的米莉安拥有改造配件，每个米莉安的每个装配槽随袭击点数增长，拥有0%(0)~50%(10000)的概率安装有配件。</Milira.MilianModificationChance_NormalDesc>
+  <!-- EN: High -->
+  <Milira.MilianModificationChance_More>较多</Milira.MilianModificationChance_More>
+  <!-- EN: Milian in raids have a large number of modification components. Each Milian's component slot has a probability of 0% (at 0 raid points) to 80% (at 10,000 raid points) to be equipped with a modification component as raid points increase. -->
+  <Milira.MilianModificationChance_MoreDesc>袭击中的米莉安拥有较多改造配件，每个米莉安的每个装配槽随袭击点数增长，拥有0%(0)~80%(10000)的概率安装有配件。</Milira.MilianModificationChance_MoreDesc>
+  <!-- EN: Completed -->
+  <Milira.MilianModificationChance_Full>完全</Milira.MilianModificationChance_Full>
+  <!-- EN: Milian in raids are fully equipped with modification components. -->
+  <Milira.MilianModificationChance_FullDesc>袭击中的米莉安拥有满配配件。</Milira.MilianModificationChance_FullDesc>
+
+  <!-- 米莉安配置界面 -->
+  <!-- EN: Milian config tab -->
+  <Milira.MilianTabEnable_Label>米莉安配置界面</Milira.MilianTabEnable_Label>
+  <!-- EN: choose the available way to open milian config tab. -->
+  <Milira.MilianTabEnable_Desc>选择打开米莉安配置界面的可用方式。</Milira.MilianTabEnable_Desc>
+  <!-- EN: button -->
+  <Milira.MilianTab_Button>TODO</Milira.MilianTab_Button>
+  <!-- EN: menu -->
+  <Milira.MilianTab_Menu>TODO</Milira.MilianTab_Menu>
+  <!-- EN: button and menu -->
+  <Milira.MilianTab_ButtonAndMenu>TODO</Milira.MilianTab_ButtonAndMenu>
+
+  <!-- EN: Enable dyeing Milian hair -->
+  <MiliraRace_ModSetting_MilianHairColor_Label>启用米莉安头发染色</MiliraRace_ModSetting_MilianHairColor_Label>
+  <!-- EN: If enabled, Milian hair color will change as the faction's mechanoid accent color. Save reloading is required.  -->
+  <MiliraRace_ModSetting_MilianHairColor_Desc>启用后，米莉安的发色将根据派系机械体突出颜色改变；需要重新加载存档。</MiliraRace_ModSetting_MilianHairColor_Desc>
+
+  <!-- EN: Player-Exclusive Milian Hair Color -->
+  <MiliraRace_ModSetting_MilianHairColor_PlayerColorOverride_Label>玩家米莉安专属发色</MiliraRace_ModSetting_MilianHairColor_PlayerColorOverride_Label>
+  <!-- EN: When enabled, each player’s Milian can have a unique hair color setting, independent of the faction mech color accent. Save reloading is required.\n\nMilians with this coloring enabled will have hair color variation disabled. -->
+  <MiliraRace_ModSetting_MilianHairColor_PlayerColorOverride_Desc>启用后，玩家方每个米莉安将可以使用独立于派系机械体突出颜色的单独发色设置；需要重新加载存档。\n\n启用该染色的米莉安将会禁用发色浮动。</MiliraRace_ModSetting_MilianHairColor_PlayerColorOverride_Desc>
+  
+  <!-- EN: Enable Milian hair color variation -->
+  <MiliraRace_ModSetting_MilianHairColorOffset_Label>启用米莉安发色浮动</MiliraRace_ModSetting_MilianHairColorOffset_Label>
+  <!-- EN: If enabled, Milian hair color will have a subtle shift based on the faction mechanoid accent color. Save reloading is required. -->
+  <MiliraRace_ModSetting_MilianHairColorOffset_Desc>启用后，米莉安的发色将基于派系机械体突出颜色略微浮动；需要重新加载存档。</MiliraRace_ModSetting_MilianHairColorOffset_Desc>
+
+  <!-- EN: Draw milian headgear -->
+  <MiliraRace_ModSetting_MilianDrawHeadgear_Label>绘制米莉安头部装备</MiliraRace_ModSetting_MilianDrawHeadgear_Label>
+  <!-- EN: If enabled, milian headgear will be rendered. -->
+  <MiliraRace_ModSetting_MilianDrawHeadgear_Desc>启用后，米莉安头部装备将会绘制。</MiliraRace_ModSetting_MilianDrawHeadgear_Desc>
+
+  <!-- EN: Initially disable Millian work -->
+  <MiliraRace_ModSetting_MilianDisableWorksGestate_Label>初始禁用米莉安工作</MiliraRace_ModSetting_MilianDisableWorksGestate_Label>
+  <!-- EN: If enabled, the initial work settings for the milian made in gestator are set to all work types disabled. Enabling this setting requires completing the "Milian Work Permissions" technology to take effect. -->
+  <MiliraRace_ModSetting_MilianDisableWorksGestate_Desc>启用后，培育完成的米莉安初始的工作设置为禁用全部工作类型。启用该设置需要完成“米莉安工作权限”科技以应用效果。</MiliraRace_ModSetting_MilianDisableWorksGestate_Desc>
+
+
+  <!-- Overall -->
+  <!-- EN: Enable Milira storyline -->
+  <MiliraRaceSetting_StoryOverall_Label>启用米莉拉剧情</MiliraRaceSetting_StoryOverall_Label>
+  <!-- EN: Enable Milira storyline. -->
+  <MiliraRaceSetting_StoryOverall_Desc>启用米莉拉剧情。</MiliraRaceSetting_StoryOverall_Desc>
+
+  <!-- Milian Cluster -->
+  <!-- EN: Enable Milian cluster threat events -->
+  <MiliraRaceSetting_MilianClusterInMap_Label>启用米莉安集群威胁事件</MiliraRaceSetting_MilianClusterInMap_Label>
+  <!-- EN: Enable Milian clusters dropping in colony map. -->
+  <MiliraRaceSetting_MilianClusterInMap_Desc>启用在殖民地地图内投放米莉安集群的事件。</MiliraRaceSetting_MilianClusterInMap_Desc>
+
+  <!-- Milian outpost cluster -->
+  <!-- EN: Enable Milian outpost threat events -->
+  <MiliraRaceSetting_MilianSmallClusterInMap_Label>启用米莉安前哨集群威胁事件</MiliraRaceSetting_MilianSmallClusterInMap_Label>
+  <!-- EN: Enable Milian outpost clusters dropping in colony map. -->
+  <MiliraRaceSetting_MilianSmallClusterInMap_Desc>启用在殖民地地图内投放米莉安前哨集群的事件。</MiliraRaceSetting_MilianSmallClusterInMap_Desc>
+
+  <!-- EN: Milian: Logistics Upgrade -->
+  <MiliraRace_ModSetting_MilianDifficulty_EquipmentQuality_Label>米莉安：后勤升级</MiliraRace_ModSetting_MilianDifficulty_EquipmentQuality_Label>
+  <!-- EN: If enabled, assaulting Mlian would improve quality of their equipment as player’s wealth increases.\n Good at 300,000 wealth.\n Excellent at 600,000 wealth.\n Master at 900,000 wealth.\n Legendary at 1,500,000 wealth. -->
+  <MiliraRace_ModSetting_MilianDifficulty_EquipmentQuality_Desc>启用后，袭击中的米莉安将随玩家财富值增高而逐渐提升装备品质。\n玩家财富大于30万时达到良好级；\n玩家财富大于60万时达到极佳级；\n玩家财富大于90万时达到大师级；\n玩家财富大于150万时达到传奇级。</MiliraRace_ModSetting_MilianDifficulty_EquipmentQuality_Desc>
+
+  <!-- EN: Milian: Elite Spawning -->
+  <MiliraRace_ModSetting_MilianDifficulty_EquipmentMaterial_Label>米莉安：精英化</MiliraRace_ModSetting_MilianDifficulty_EquipmentMaterial_Label>
+  <!-- EN: If enabled, assaulting Milian would include elite pawn at a chance, the chance is increased as your current threat scale enlarges. \n 2% at 100% threat scale\n 6% at 220% threat scale\n 20% at 500% threat scale. -->
+  <MiliraRace_ModSetting_MilianDifficulty_EquipmentMaterial_Desc>启用后，袭击中的米莉安将有一定几率出现精英单位，这个概率随威胁规模的提高而提高。\n威胁规模达到100%时，概率为2%；\n威胁规模达到220%时，概率为6%；\n威胁规模达到500%时，概率为20%。</MiliraRace_ModSetting_MilianDifficulty_EquipmentMaterial_Desc>
+
+  <!-- EN: Mlian: Promotion -->
+  <MiliraRace_ModSetting_MilianDifficulty_Promotion_Label>米莉安：升变</MiliraRace_ModSetting_MilianDifficulty_Promotion_Label>
+  <!-- EN: If enabled, assaulting Milian will have the ability of Promotion. -->
+  <MiliraRace_ModSetting_MilianDifficulty_Promotion_Desc>启用后，袭击中的米莉安士兵获得升变的能力。</MiliraRace_ModSetting_MilianDifficulty_Promotion_Desc>
+
+  <!-- EN: Milian: Synergistic Promotion  -->
+  <MiliraRace_ModSetting_MilianDifficulty_FastPromotion_Label>米莉安：协律升变</MiliraRace_ModSetting_MilianDifficulty_FastPromotion_Label>
+  <!-- EN: If enabled, assaulting Milian would take 40% lesser time to use Promotion.  -->
+  <MiliraRace_ModSetting_MilianDifficulty_FastPromotion_Desc>启用后，袭击中的米莉安士兵升变所需时间减少40%。</MiliraRace_ModSetting_MilianDifficulty_FastPromotion_Desc>
+
+  <!-- EN: Milian: Wide Range Promotion  -->
+  <MiliraRace_ModSetting_MilianDifficulty_WidePromotion_Label>米莉安：广域升变</MiliraRace_ModSetting_MilianDifficulty_WidePromotion_Label>
+  <!-- EN: If enabled, assaulting Milian would have an infinite range to receive Promotion. -->
+  <MiliraRace_ModSetting_MilianDifficulty_WidePromotion_Desc>启用后，袭击中的米莉安士兵可以接受升变的距离变为无限远。</MiliraRace_ModSetting_MilianDifficulty_WidePromotion_Desc>
+
+  <!-- EN: Milian Cluster: Resonator -->
+  <MiliraRace_ModSetting_MilianDifficulty_ClusterResonator_Label>米莉安集群：调谐</MiliraRace_ModSetting_MilianDifficulty_ClusterResonator_Label>
+  <!-- EN: If enabled, resonator could appear in Milian cluster. -->
+  <MiliraRace_ModSetting_MilianDifficulty_ClusterResonator_Desc>启用后，米莉安集群中可以出现谐振仪。</MiliraRace_ModSetting_MilianDifficulty_ClusterResonator_Desc>
+
+  <!-- EN: Milian Cluster: Fortress  -->
+  <MiliraRace_ModSetting_MilianDifficulty_ClusterFortress_Label>米莉安集群：要塞</MiliraRace_ModSetting_MilianDifficulty_ClusterFortress_Label>
+  <!-- EN: If enabled, maximum points of Milira cluster would alter to 50,000 rather than previous 10,000. (mods that’ve removed the raid points limit shall be used) -->
+  <MiliraRace_ModSetting_MilianDifficulty_ClusterFortress_Desc>启用后，米莉安集群点数上限由10000点更改为50000点（需要配合解除袭击点数上限的模组使用）。</MiliraRace_ModSetting_MilianDifficulty_ClusterFortress_Desc>
+
+
+  <!-- EN: Milira: Indefatigable Flight -->
+  <MiliraRace_ModSetting_MiliraDifficulty_TirelessFly_Label>米莉拉：不倦飞行</MiliraRace_ModSetting_MiliraDifficulty_TirelessFly_Label>
+  <!-- EN: If enabled, assaulting Milira consumes no food nor rest needs when using Hyper-velocity Flight. -->
+  <MiliraRace_ModSetting_MiliraDifficulty_TirelessFly_Desc>启用后，袭击中的米莉拉使用爆速飞行不再消耗饥饿值和休息值。</MiliraRace_ModSetting_MiliraDifficulty_TirelessFly_Desc>
+
+  <!-- EN: Apparel Restriction -->
+  <Milira.RaceRestrictedApparel_Label>服装限制</Milira.RaceRestrictedApparel_Label>
+  <!-- EN: Toggle apparel restrictions to decide whether milira is allowed to wear apparels outside of the designated set. -->
+  <Milira.RaceRestrictedApparel_Desc>开关服装限制以决定米莉拉是否可以着装规定以外的服装。</Milira.RaceRestrictedApparel_Desc>
+
+  <!-- UNUSED -->
+  <Milira.MilianWorkTabEnable_Label>米莉安工作界面</Milira.MilianWorkTabEnable_Label>
+  <Milira.MilianWorkTabEnable_Desc>选择打开米莉安工作界面的可用方式。</Milira.MilianWorkTabEnable_Desc>
+
+</LanguageData>

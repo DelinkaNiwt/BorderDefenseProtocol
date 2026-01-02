@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <HediffDef ParentName="DiseaseBase">
+    <defName>Milira_PlasmaMeltdown</defName>
+    <label>Plasma Meltdown</label>
+    <description>Armor of this pawn is melting due to the plasma attack intake.</description>
+    <hediffClass>AncotLibrary.HediffWithSeverityLabel</hediffClass>
+    <isBad>false</isBad>
+    <defaultLabelColor>(215, 100, 20)</defaultLabelColor>
+    <initialSeverity>0.01</initialSeverity>
+    <maxSeverity>1</maxSeverity>
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerSecond">
+        <severityPerSecond>-0.01</severityPerSecond>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <statOffsetsBySeverity>
+          <li>
+            <stat>ArmorRating_Sharp</stat>
+            <valueBySeverity>
+              <points>
+                <li>(0, 0)</li>
+                <li>(1, -1)</li>
+              </points>
+            </valueBySeverity>
+          </li>
+          <li>
+            <stat>ArmorRating_Blunt</stat>
+            <valueBySeverity>
+              <points>
+                <li>(0, 0)</li>
+                <li>(1, -0.5)</li>
+              </points>
+            </valueBySeverity>
+          </li>
+          <li>
+            <stat>ArmorRating_Heat</stat>
+            <valueBySeverity>
+              <points>
+                <li>(0, 0)</li>
+                <li>(1, -0.3)</li>
+              </points>
+            </valueBySeverity>
+          </li>
+        </statOffsetsBySeverity>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef ParentName="DiseaseBase">
+    <defName>Milira_PlasmaVulnerable</defName>
+    <label>vulnerable</label>
+    <description>This pawn is marked with a weak spot, taking increased damage.</description>
+    <isBad>false</isBad>
+    <defaultLabelColor>(215, 100, 20)</defaultLabelColor>
+    <initialSeverity>1</initialSeverity>
+    <maxSeverity>1</maxSeverity>
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerSecond">
+        <severityPerSecond>-0.02</severityPerSecond>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <statOffsets>
+          <IncomingDamageFactor>0.1</IncomingDamageFactor>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+		<defName>Milian_AdaptiveArmor</defName>
+		<label>Adaptive Armor</label>
+		<description>Defense of this pawn shall be increased based on the attack income.</description>
+		<hediffClass>AncotLibrary.HediffWithSeverityLabel</hediffClass>
+		<isBad>false</isBad>
+		<defaultLabelColor>(215, 100, 20)</defaultLabelColor>
+		<initialSeverity>0.01</initialSeverity>
+		<maxSeverity>1</maxSeverity>
+		<comps>
+			<li Class="HediffCompProperties_SeverityPerSecond">
+        <severityPerSecond>-0.025</severityPerSecond>
+      </li>
+			<li Class="HediffCompProperties_DisappearsOnDeath"/>
+		</comps>
+		<stages>
+      <li>
+        <statOffsetsBySeverity>
+          <li>
+            <stat>ArmorRating_Sharp</stat>
+            <valueBySeverity>
+              <points>
+                <li>(0, 0)</li>
+                <li>(1, 2.0)</li>
+              </points>
+            </valueBySeverity>
+          </li>
+          <li>
+            <stat>ArmorRating_Blunt</stat>
+            <valueBySeverity>
+              <points>
+                <li>(0, 0)</li>
+                <li>(1, 1.6)</li>
+              </points>
+            </valueBySeverity>
+          </li>
+          <li>
+            <stat>ArmorRating_Heat</stat>
+            <valueBySeverity>
+              <points>
+                <li>(0, 0)</li>
+                <li>(1, 0.8)</li>
+              </points>
+            </valueBySeverity>
+          </li>
+        </statOffsetsBySeverity>
+        <statFactorsBySeverity>
+          <li>
+            <stat>IncomingDamageFactor</stat>
+            <valueBySeverity>
+              <points>
+                <li>(0, 1)</li>
+                <li>(1, 0.5)</li>
+              </points>
+            </valueBySeverity>
+          </li>
+        </statFactorsBySeverity>
+      </li>
+    </stages>
+	</HediffDef>
+
+
+
+</Defs>

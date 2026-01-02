@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+  <!-- EN: post curve ({0}: {1}) -->
+  <Ancot.StatsReport_StatCurve>属性处理曲线（{0}: {1}）</Ancot.StatsReport_StatCurve>
+  <!-- EN: equipped factor ({0}: {1}) -->
+  <Ancot.StatsReport_StatEquipped>装备者属性乘数（{0}: {1}）</Ancot.StatsReport_StatEquipped>
+  <!-- EN: correction factor -->
+  <Ancot.StatsReport_CorrectionFactor>属性修正系数</Ancot.StatsReport_CorrectionFactor>
+  
+  <!-- EN: storyteller factor -->
+  <Ancot.StatsReport_StorytellerFactor>叙事者乘数</Ancot.StatsReport_StorytellerFactor>
+  <!-- EN: storyteller offset -->
+  <Ancot.StatsReport_StorytellerOffset>叙事者偏移</Ancot.StatsReport_StorytellerOffset>
+
+  <!-- EN: Size -->
+  <Ancot.ShieldSize>尺寸</Ancot.ShieldSize>
+  <!-- EN: The dimensions of this shield. -->
+  <Ancot.ShieldSizeDesc>这面盾牌的尺寸规格。</Ancot.ShieldSizeDesc>
+  <!-- EN: small -->
+  <Ancot.ShieldSize_Small>小型</Ancot.ShieldSize_Small>
+  <!-- EN: medium -->
+  <Ancot.ShieldSize_Medium>中型</Ancot.ShieldSize_Medium>
+  <!-- EN: large -->
+  <Ancot.ShieldSize_Large>大型</Ancot.ShieldSize_Large>
+
+</LanguageData>

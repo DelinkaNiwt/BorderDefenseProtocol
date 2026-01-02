@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- ====米莉安空投========================================================== -->
+  
+  <RoyalTitlePermitDef ParentName="DropResourcesBase">
+    <defName>Milira_ChurchPermit_DropMilian_PawnI</defName>
+    <label>Pawn I Drop</label>
+    <description>Request the airdrop of a Milian modeled Pawn I to join the colony (bandwidth usage: 3, requires mechanitor controling).</description>
+    <workerClass>AncotLibrary.RoyalTitlePermitWorker_DropPawn_join</workerClass>
+    <minTitle>Milira_ChurchTitleIII</minTitle>
+    <faction>Milira_AngelismChurch</faction>
+    <permitPointCost>1</permitPointCost>
+    <cooldownDays>120</cooldownDays>
+    <uiPosition>(0,6)</uiPosition>
+    <royalAid>
+      <pawnKindDef>Milian_Mechanoid_PawnI</pawnKindDef>
+      <pawnCount>1</pawnCount>
+      <favorCost>6</favorCost>
+    </royalAid>
+  </RoyalTitlePermitDef>
+
+  <RoyalTitlePermitDef ParentName="DropResourcesBase">
+    <defName>Milira_ChurchPermit_DropMilian_PawnIII</defName>
+    <label>Guard Drop</label>
+    <description>Request the airdrop of a Milian modeled Guard to join the colony (bandwidth usage: 4, requires mechanitor controling).</description>
+    <workerClass>AncotLibrary.RoyalTitlePermitWorker_DropPawn_join</workerClass>
+    <prerequisite>Milira_ChurchPermit_DropMilian_PawnI</prerequisite>
+    <minTitle>Milira_ChurchTitleIV</minTitle>
+    <faction>Milira_AngelismChurch</faction>
+    <permitPointCost>1</permitPointCost>
+    <cooldownDays>120</cooldownDays>
+    <uiPosition>(1,6)</uiPosition>
+    <royalAid>
+      <pawnKindDef>Milian_Mechanoid_PawnIII</pawnKindDef>
+      <pawnCount>1</pawnCount>
+      <favorCost>9</favorCost>
+    </royalAid>
+  </RoyalTitlePermitDef>
+
+  <RoyalTitlePermitDef ParentName="DropResourcesBase">
+    <defName>Milira_ChurchPermit_DropMilian_PawnII</defName>
+    <label>Pawn II Drop</label>
+    <description>Request the airdrop of a Milian modeled Pawn II to join the colony (bandwidth usage: 3, requires mechanitor controling).</description>
+    <workerClass>AncotLibrary.RoyalTitlePermitWorker_DropPawn_join</workerClass>
+    <minTitle>Milira_ChurchTitleIII</minTitle>
+    <faction>Milira_AngelismChurch</faction>
+    <permitPointCost>1</permitPointCost>
+    <cooldownDays>120</cooldownDays>
+    <uiPosition>(0,7)</uiPosition>
+    <royalAid>
+      <pawnKindDef>Milian_Mechanoid_PawnII</pawnKindDef>
+      <pawnCount>1</pawnCount>
+      <favorCost>6</favorCost>
+    </royalAid>
+  </RoyalTitlePermitDef>
+
+  <RoyalTitlePermitDef ParentName="DropResourcesBase">
+    <defName>Milira_ChurchPermit_DropMilian_KnightI</defName>
+    <label>Knight I Drop</label>
+    <description>Request the airdrop of a Milian modeled Knight I to join the colony (bandwidth usage: 4, requires mechanitor controling).</description>
+    <workerClass>AncotLibrary.RoyalTitlePermitWorker_DropPawn_join</workerClass>
+    <minTitle>Milira_ChurchTitleIII</minTitle>
+    <faction>Milira_AngelismChurch</faction>
+    <permitPointCost>1</permitPointCost>
+    <cooldownDays>120</cooldownDays>
+    <uiPosition>(0,8)</uiPosition>
+    <royalAid>
+      <pawnKindDef>Milian_Mechanoid_KnightI</pawnKindDef>
+      <pawnCount>1</pawnCount>
+      <favorCost>8</favorCost>
+    </royalAid>
+  </RoyalTitlePermitDef>
+  
+  <RoyalTitlePermitDef ParentName="DropResourcesBase">
+    <defName>Milira_ChurchPermit_DropMilian_KnightII</defName>
+    <label>Knight II Drop</label>
+    <description>Request the airdrop of a Milian modeled Knight II to join the colony (bandwidth usage: 5, requires mechanitor controling).</description>
+    <workerClass>AncotLibrary.RoyalTitlePermitWorker_DropPawn_join</workerClass>
+    <minTitle>Milira_ChurchTitleIII</minTitle>
+    <faction>Milira_AngelismChurch</faction>
+    <permitPointCost>1</permitPointCost>
+    <cooldownDays>120</cooldownDays>
+    <uiPosition>(1,8)</uiPosition>
+    <royalAid>
+      <pawnKindDef>Milian_Mechanoid_KnightII</pawnKindDef>
+      <pawnCount>1</pawnCount>
+      <favorCost>10</favorCost>
+    </royalAid>
+  </RoyalTitlePermitDef>
+  
+</Defs>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+  <!-- EN: Answer -->
+  <Ancot.Answer>接听</Ancot.Answer>
+  <!-- EN: ring off -->
+  <Ancot.RingOff>挂断</Ancot.RingOff>
+  <!-- EN: nerver mind -->
+  <Ancot.NerverMind>不用了</Ancot.NerverMind>
+
+  <!-- EN: Drones -->
+  <Ancot.DroneSection>无人机</Ancot.DroneSection>
+  <!-- EN: Switch to drone management interface. -->
+  <Ancot.DroneTabTip>切换到无人机管理界面。</Ancot.DroneTabTip>
+
+</LanguageData>

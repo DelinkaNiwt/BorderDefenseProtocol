@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!--用来记录要刷新的recipedef-->
+  <WeaponFitting.RecipeNeedsResolveDef>
+    <defName>WF_Fitting</defName>
+    <recipeDefs>
+      <li>WF_CopyFitting</li>
+      <li>WF_ResearchFitting_I</li>
+      <li>WF_ResearchFitting_II</li>
+      <li>WF_DisassembleWeapon</li>
+      <li>SmeltFitting</li>
+    </recipeDefs>
+  </WeaponFitting.RecipeNeedsResolveDef>
+
+  <RecipeDef Name="WF_AssembleFitting" Abstract="true">
+    <jobString>assemble fitting.</jobString>
+    <effectWorking>Cremate</effectWorking>
+    <soundWorking>Recipe_Cremate</soundWorking>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workerClass>AncotLibrary.RecipeWorker_CopyWeaponFitting</workerClass>
+    <unfinishedThingDef>UnfinishedFitting</unfinishedThingDef>
+    <products>
+      <!-- 置空，用recipeworker生成复制出来的配件 -->
+    </products>
+    <recipeUsers>
+      <li>TableMachining</li>
+    </recipeUsers>
+    
+  </RecipeDef>
+
+  <!--复制配件-->
+  <RecipeDef ParentName="WF_AssembleFitting">
+    <defName>WF_CopyFitting</defName>
+    <label>copy fitting</label>
+    <description>Manufactures identical fittings based on existing ones.</description>
+    <jobString>assemble fitting.</jobString>
+    <uiIconPath>AncotLibrary/Item/UniqueWeapon/WeaponFitting_Base</uiIconPath>
+    <workAmount>12800</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>Ancot_WeaponFitting</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>6</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>20</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>25</count>
+      </li>
+    </ingredients>
+    <recipeUsers>
+      <li>CraftingSpot</li>
+    </recipeUsers>
+    <fixedIngredientFilter>
+      <categories>
+        <li>Ancot_WeaponFitting</li>
+      </categories>
+    </fixedIngredientFilter>
+    <researchPrerequisite>WeaponFittings_II</researchPrerequisite>
+    <recipeUsers Inherit="False">
+      <li>FabricationBench</li>
+    </recipeUsers>
+  </RecipeDef>
+  <!--随 机 卡 池-->
+  <RecipeDef ParentName="WF_AssembleFitting">
+    <defName>WF_ResearchFitting_I</defName>
+    <label>research fitting</label>
+    <description>After research and production, randomly generates a non-personnel attachment case.\n\nGacha Pool.jpg</description>
+    <jobString>researching fittings</jobString>
+    <uiIconPath>AncotLibrary/Item/UniqueWeapon/WeaponFitting_Base</uiIconPath>
+    <workerClass>AncotLibrary.RecipeWorker_MakeRandomFittings</workerClass>
+    <workAmount>19200</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>6</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>25</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>30</count>
+      </li>
+    </ingredients>
+    <researchPrerequisite>WeaponFittings_I</researchPrerequisite>
+    <recipeUsers>
+      <li>FabricationBench</li>
+    </recipeUsers>
+  </RecipeDef>
+
+  <!--定 向 寻 访-->
+  <RecipeDef ParentName="WF_AssembleFitting">
+    <defName>WF_ResearchFitting_II</defName>
+    <label>targeted fitting research</label>
+    <description>Produces a compatible fitting for the input weapon based on its specifications, and returns the weapon after completion.\n\nSlightly higher cost but more stable output.\n\nTargeted Search.jpg</description>
+    <jobString>researching fittings</jobString>
+    <uiIconPath>AncotLibrary/Item/UniqueWeapon/WeaponFitting_Base</uiIconPath>
+    <workerClass>AncotLibrary.RecipeWorker_MakeRandomFittingFromWeapon</workerClass>
+    <workAmount>25600</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>Ancot_WeaponsModification</li>
+          </categories>
+        </filter>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>6</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>20</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>20</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <categories>
+        <li>Ancot_WeaponsModification</li>
+      </categories>
+    </fixedIngredientFilter>
+    <researchPrerequisite>WeaponFittings_II</researchPrerequisite>
+    <recipeUsers Inherit="False">
+      <li>FabricationBench</li>
+    </recipeUsers>
+  </RecipeDef>
+
+  <!--批量拆除武器，在高科技的时候返还枪械材料-->
+  <RecipeDef ParentName="WF_AssembleFitting">
+    <defName>WF_DisassembleWeapon</defName>
+    <label>disassemble weapon</label>
+    <description>Disassembles weapons with fittings and produces corresponding fitting cases.\n\nReturns partial weapon materials if advanced fitting technology is researched.</description>
+    <jobString>disassembling weapons</jobString>
+    <uiIconPath>AncotLibrary/Item/UniqueWeapon/WeaponFitting_Base</uiIconPath>
+    <workerClass>WeaponFitting.RecipeWork_DisassembleWeapon</workerClass>
+    <workAmount>6400</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <!--li>Ancot_WeaponsModification</li-->
+            <li>WeaponsUnique</li>
+          </categories>
+        </filter>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <categories>
+        <!--li>Ancot_WeaponsModification</li-->
+        <li>WeaponsUnique</li>
+      </categories>
+    </fixedIngredientFilter>
+    <researchPrerequisite>WeaponFittings_I</researchPrerequisite>
+    <recipeUsers>
+      <li>FabricationBench</li>
+    </recipeUsers>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>SmeltFitting</defName>
+    <label>smelt fitting</label>
+    <description>Use heat and strong electromagnets to break down fitting into useful resources.</description>
+    <jobString>Smelting fittings.</jobString>
+    <workAmount>1600</workAmount>
+    <workSpeedStat>SmeltingSpeed</workSpeedStat>
+    <effectWorking>Smelt</effectWorking>
+    <soundWorking>Recipe_Smelt</soundWorking>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>Ancot_WeaponFitting</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <categories>
+        <li>Ancot_WeaponFitting</li>
+      </categories>
+    </fixedIngredientFilter>
+    <products>
+      <Plasteel>8</Plasteel>
+      <Steel>15</Steel>
+    </products>
+    <recipeUsers>
+      <li>ElectricSmelter</li>
+    </recipeUsers>
+    <researchPrerequisite>WeaponFittings_I</researchPrerequisite>
+  </RecipeDef>
+
+</Defs>

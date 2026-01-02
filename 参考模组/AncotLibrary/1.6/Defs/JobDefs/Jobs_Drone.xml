@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <JobDef>
+    <defName>Ancot_DroneCharge</defName>
+    <driverClass>AncotLibrary.JobDriver_DroneCharge</driverClass>
+    <reportString>charging.</reportString>
+  </JobDef>
+
+  <JobDef>
+    <defName>Ancot_DroneSelfShutdown</defName>
+    <driverClass>AncotLibrary.JobDriver_DroneSelfShutdown</driverClass>
+    <reportString>dormant.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+    <neverShowWeapon>true</neverShowWeapon>
+  </JobDef>
+
+  <JobDef>
+    <defName>Ancot_RepairDrone</defName>
+    <driverClass>AncotLibrary.JobDriver_RepairDrone</driverClass>
+    <reportString>repairing TargetA.</reportString>
+  </JobDef>
+
+  <JobDef>
+    <defName>Ancot_HaulDroneToCharger</defName>
+    <driverClass>AncotLibrary.JobDriver_HaulDroneToCharger</driverClass>
+    <reportString>hauling TargetA to charger.</reportString>
+  </JobDef>
+
+</Defs>

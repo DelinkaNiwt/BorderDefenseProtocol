@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationTest">
+				<xpath>Defs/ResearchProjectDef[defName="Milira_Apparel_Sister"]</xpath>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ResearchProjectDef[defName="Milira_Apparel_Sister"]</xpath>
+				<value>
+					<techprintCount>1</techprintCount>
+                    <techprintCommonality>1</techprintCommonality>
+                    <techprintMarketValue>1200</techprintMarketValue>
+                    <heldByFactionCategoryTags>
+	                <li>Kiiro_Faction</li>
+	                <li>Milira_Faction</li>
+	                </heldByFactionCategoryTags>				
+				</value>
+			</li>
+		</operations>
+	</Operation>
+	
+	
+</Patch>

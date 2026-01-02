@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <AlienRace.ThingDef_AlienRace ParentName="Milira_Race">
+    <defName>Milian_Race</defName>
+    <label>Milian</label>
+    <description>Milian.</description>
+    <hiddenWhileUndiscovered>true</hiddenWhileUndiscovered>
+    <alienRace>
+      <generalSettings>
+        <alienPartGenerator>
+          <headTypes Inherit="false">
+            <li>MilianHeadN1</li>
+            <li>MilianHeadN2</li>
+          </headTypes>
+
+          <headOffset>(-0.09,0.05)</headOffset>
+          <customDrawSize>(1.0, 1.0)</customDrawSize>
+          <customHeadDrawSize>(1.0, 1.0)</customHeadDrawSize>
+          <customPortraitDrawSize>(1.0, 1.0)</customPortraitDrawSize>
+          <headBodyPartDef>Milian_Head</headBodyPartDef>
+          <atlasScale>4</atlasScale>
+          <borderScale>1</borderScale>
+
+          <bodyAddons Inherit="false">
+            <!-- 呆毛 -->
+            <li>
+              <name>milira ahoge</name>
+              <userCustomizable>true</userCustomizable>
+              <path>Milira/Pawn/BodyAddon/Ahoge/Ahoge</path>
+              <inFrontOfBody>true</inFrontOfBody>
+              <layerInvert>false</layerInvert>
+              <colorChannel>hair</colorChannel>
+              <defaultOffset>Center</defaultOffset>
+              <drawSize>1</drawSize>
+              <alignWithHead>true</alignWithHead>
+              <scaleWithPawnDrawsize>true</scaleWithPawnDrawsize>
+              <conditions>
+                <BodyPart>
+                  <bodyPart>Milian_Head</bodyPart>
+                </BodyPart>
+                <Posture>
+                  <drawnStanding>true</drawnStanding>
+                  <drawnInBed>true</drawnInBed>
+                  <drawnLaying>true</drawnLaying>
+                </Posture>
+                <RotStage>Fresh,Rotting</RotStage>
+              </conditions>
+              <offsets>
+                <west>
+                  <layerOffset>-0.25</layerOffset>
+                </west>
+                <south>
+                  <layerOffset>-0.25</layerOffset>
+                </south>
+                <north>
+                  <layerOffset>-0.25</layerOffset>
+                </north>
+                <east>
+                  <layerOffset>-0.25</layerOffset>
+                </east>
+              </offsets>
+            </li>
+
+            <li>
+              <name>milira hair</name>
+              <userCustomizable>true</userCustomizable>
+              <path>Milira/Pawn/Hair/HairMain/MiliraHair</path>
+              <inFrontOfBody>true</inFrontOfBody>
+              <layerInvert>false</layerInvert>
+              <colorChannel>hair</colorChannel>
+              <defaultOffset>Center</defaultOffset>
+              <drawSize>1</drawSize>
+              <alignWithHead>true</alignWithHead>
+              <scaleWithPawnDrawsize>true</scaleWithPawnDrawsize>
+              <conditions>
+                <BodyPart>
+                  <bodyPart>Milian_Head</bodyPart>
+                </BodyPart>
+                <Apparel>
+                  <hiddenUnderApparelTag>
+                  </hiddenUnderApparelTag>
+                </Apparel>
+                <Posture>
+                  <drawnStanding>true</drawnStanding>
+                  <drawnInBed>true</drawnInBed>
+                  <drawnLaying>true</drawnLaying>
+                </Posture>
+                <RotStage>Fresh,Rotting</RotStage>
+              </conditions>
+              <offsets>
+                <west>
+                  <layerOffset>-0.274</layerOffset>
+                </west>
+                <south>
+                  <layerOffset>-0.274</layerOffset>
+                </south>
+                <north>
+                  <layerOffset>-0.274</layerOffset>
+                </north>
+                <east>
+                  <layerOffset>-0.274</layerOffset>
+                </east>
+              </offsets>
+            </li>
+            <li>
+              <name>milira hair BG</name>
+              <userCustomizable>true</userCustomizable>
+              <path>Milira/Pawn/Hair/HairBackGround/MiliraHairBG</path>
+              <inFrontOfBody>false</inFrontOfBody>
+              <layerInvert>false</layerInvert>
+              <colorChannel>hair</colorChannel>
+              <defaultOffset>Center</defaultOffset>
+              <drawSize>1</drawSize>
+              <alignWithHead>true</alignWithHead>
+              <scaleWithPawnDrawsize>true</scaleWithPawnDrawsize>
+              <linkVariantIndexWithPrevious>true</linkVariantIndexWithPrevious>
+              <conditions>
+                <BodyPart>
+                  <bodyPart>Milian_Head</bodyPart>
+                </BodyPart>
+                <Apparel>
+                  <hiddenUnderApparelTag>
+                  </hiddenUnderApparelTag>
+                </Apparel>
+                <Posture>
+                  <drawnStanding>true</drawnStanding>
+                  <drawnInBed>false</drawnInBed>
+                  <drawnLaying>true</drawnLaying>
+                </Posture>
+                <RotStage>Fresh,Rotting</RotStage>
+              </conditions>
+              <offsets>
+                <west>
+                  <layerOffset>-0.275</layerOffset>
+                </west>
+                <south>
+                  <layerOffset>-0.299</layerOffset>
+                </south>
+                <north>
+                  <layerOffset>-0.275</layerOffset>
+                </north>
+                <east>
+                  <layerOffset>-0.275</layerOffset>
+                </east>
+              </offsets>
+            </li>
+
+          </bodyAddons>
+
+          <colorChannels Inherit="false">            <!--颜色设定-->
+            <li>
+              <name>skin</name>
+              <first Class="ColorGenerator_Options">
+                <options>
+                  <li>
+                    <weight>100</weight>
+                    <only>RGBA(255,255,255)</only>
+                  </li>
+                </options>
+              </first>
+              <second Class="ColorGenerator_Options">
+                <options>
+                  <!--原色-->
+                  <li>
+                    <weight>20</weight>
+                    <only>RGBA(255,255,255)</only>
+                  </li>
+                </options>
+              </second>
+            </li>
+            <li>
+              <name>hair</name>
+              <first Class="ColorGenerator_Options">
+                <options>
+                  <li>
+                    <weight>100</weight>
+                    <only>RGBA(255,255,255)</only>
+                  </li>
+                </options>
+              </first>
+              <second Class="ColorGenerator_Options">
+                <options>
+                  <li>
+                    <weight>100</weight>
+                    <only>RGB(255,255,255)</only>
+                  </li>
+                </options>
+              </second>
+            </li>
+          </colorChannels>
+
+        </alienPartGenerator>
+      </generalSettings>
+
+      <graphicPaths Inherit="false">
+        <head>Milian/Pawn/Head/</head>
+        <headMasks>Milian/Pawn/BlackMask/BlackMask</headMasks>
+        <body>
+          <ageGraphics>
+            <HumanlikeAdult>Milian/Pawn/Body/Naked_Female</HumanlikeAdult>
+            <Milira_HumanlikeTeenager>Milian/Pawn/Body/Naked_Female</Milira_HumanlikeTeenager>
+            <Milira_HumanlikePreTeenager>Milian/Pawn/Body/Naked_Female</Milira_HumanlikePreTeenager>
+            <Milira_HumanlikeChild>Milian/Pawn/Body/Naked_Child</Milira_HumanlikeChild>
+            <HumanlikeBaby>Milian/Pawn/Body/Naked_Baby</HumanlikeBaby>
+          </ageGraphics>
+        </body>
+        <bodyMasks>Milian/Pawn/BlackMask/BlackMask</bodyMasks>
+        <skeleton>Things/Pawn/Humanlike/Bodies/Dessicated/Dessicated_Thin</skeleton>
+      </graphicPaths>
+
+      <styleSettings Inherit="false">
+        <li>
+          <key>HairDef</key>
+          <value>
+            <hasStyle>true</hasStyle>
+            <styleTagsOverride>
+              <li>Milian_Style</li>
+            </styleTagsOverride>
+          </value>
+        </li>
+        <li>
+          <key>TattooDef</key>
+          <value>
+            <hasStyle>false</hasStyle>
+          </value>
+        </li>
+        <li>
+          <key>BeardDef</key>
+          <value>
+            <hasStyle>false</hasStyle>
+          </value>
+        </li>
+      </styleSettings>
+
+      <thoughtSettings>
+        <replacerList>
+
+        </replacerList>
+        <cannotReceiveThoughts>
+
+        </cannotReceiveThoughts>
+        <restrictedThoughts>
+        </restrictedThoughts>
+      </thoughtSettings>
+
+      <raceRestriction>
+        <weaponList>
+
+        </weaponList>
+        <!-- 后面要改回来 -->
+        <onlyUseRaceRestrictedApparel>false</onlyUseRaceRestrictedApparel>
+        <apparelList>
+          <!-- 贴身 -->
+          <li>Milian_Lining</li>
+          <!-- 夹层 -->
+          <li>Milian_LightArmor</li>
+          <li>Milian_GuardArmor</li>
+          <li>Milian_BishopCloak</li>
+          <li>Milian_PivotCloak</li>
+          <li>Milian_SilentHunterCloak</li>
+          <li>Milian_RangerArmor</li>
+          <li>Milian_GuardianArmor</li>
+          <li>Milian_StalkerArmor</li>
+          <li>Milian_PaladinArmor</li>
+          <li>Milian_RookArmor</li>
+          <li>Milian_CitadelArmor</li>
+          <li>Milian_StrikerArmor</li>
+          <li>Milian_FortressArmor</li>
+          <!-- 外套 -->
+          <li>Milian_GestateRobe</li>
+          <!-- 头饰 -->
+          <li>Milian_Goggle</li>
+          <li>Milian_GoggleArmored</li>
+          <li>Milian_BishopHeadset</li>
+          <li>Milian_PivotHeadSet</li>
+          <li>Milian_SilentHunterHood</li>
+          <li>Milian_KnightHeadset</li>
+          <li>Milian_KnightHeadsetII</li>
+          <li>Milian_KnightHeadsetIII</li>
+          <li>Milian_RookMask</li>
+          <li>Milian_StrikerHelmet</li>
+          <!-- 盾牌 -->
+          <li>Milian_FeatherShapeShield</li>
+          <li>Milian_KnightShield</li>
+          <li>Milian_RookShield</li>
+          <li MayRequire="Ancot.MilianModification">Milian_ShooterShield</li>
+        </apparelList>
+        <whiteApparelList>
+          <li>Apparel_PsychicInsanityLance</li>
+          <li>Apparel_PsychicShockLance</li>
+        </whiteApparelList>
+        <buildingList>
+
+        </buildingList>
+        <researchList>
+
+        </researchList>
+        <traitList>
+
+        </traitList>
+        <foodList>
+
+        </foodList>
+        <onlyHaveRaceRestrictedGenes>true</onlyHaveRaceRestrictedGenes>
+        <whiteGeneList>
+        </whiteGeneList>
+      </raceRestriction>
+    </alienRace>
+
+
+
+    <statBases Inherit="false">
+      <MarketValue>2500</MarketValue>
+      <Flammability>0</Flammability>
+      <MoveSpeed>4.6</MoveSpeed>
+      <MentalBreakThreshold>0.01</MentalBreakThreshold>
+      <ComfyTemperatureMax>250</ComfyTemperatureMax>
+      <ComfyTemperatureMin>-250</ComfyTemperatureMin>
+      <ImmunityGainSpeed>1.15</ImmunityGainSpeed>
+      <CarryingCapacity>100</CarryingCapacity>
+      <RoyalFavorValue MayRequire="Ludeon.RimWorld.Royalty">3</RoyalFavorValue>
+      <MeatAmount>0</MeatAmount>
+      <LeatherAmount>0</LeatherAmount>
+      <Mass>60</Mass>
+      <!--==-->
+      <GlobalLearningFactor>1.8</GlobalLearningFactor>
+      <PsychicSensitivity>0</PsychicSensitivity>
+      <AimingDelayFactor>1.0</AimingDelayFactor>
+      <PainShockThreshold>0.99</PainShockThreshold>
+      <GeneralLaborSpeed>1.0</GeneralLaborSpeed>      <!--=普通工作=-->
+      <DrugSynthesisSpeed>1.0</DrugSynthesisSpeed>
+      <MedicalTendSpeed>1.0</MedicalTendSpeed>
+      <MedicalTendQuality>1.0</MedicalTendQuality>
+      <MedicalSurgerySuccessChance>1.0</MedicalSurgerySuccessChance>
+      <!--==-->
+      <NegotiationAbility>1.5</NegotiationAbility>
+      <SellPriceFactor>1.0</SellPriceFactor>
+      <TradePriceImprovement>1.0</TradePriceImprovement>
+      <SocialImpact>1.0</SocialImpact>
+      <!--==-->
+      <WorkSpeedGlobal>1.0</WorkSpeedGlobal>      <!--=全局工作=-->
+      <EatingSpeed>1.0</EatingSpeed>
+      <ConstructionSpeed>1.0</ConstructionSpeed>
+      <ButcheryMechanoidEfficiency>1.0</ButcheryMechanoidEfficiency>
+      <ButcheryMechanoidSpeed>1.0</ButcheryMechanoidSpeed>
+      <SmeltingSpeed>1.0</SmeltingSpeed>
+      <ResearchSpeed>0.25</ResearchSpeed>
+      <MiningSpeed>1.0</MiningSpeed>
+      <MiningYield>1.0</MiningYield>
+      <!--==-->
+      <ButcheryFleshEfficiency>1.0</ButcheryFleshEfficiency>
+      <ButcheryFleshSpeed>1.0</ButcheryFleshSpeed>
+      <FoodPoisonChance>1.0</FoodPoisonChance>
+      <CookSpeed>0.8</CookSpeed>
+      <RestRateMultiplier>1.6</RestRateMultiplier>
+      <PlantWorkSpeed>1.0</PlantWorkSpeed>
+      <PlantHarvestYield>1.0</PlantHarvestYield>
+      <!--=护甲=-->
+      <ArmorRating_Sharp>0.2</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.1</ArmorRating_Blunt>
+      <ArmorRating_Heat>1.5</ArmorRating_Heat>
+      <!--==-->
+      <Fertility MayRequire="Ludeon.RimWorld.Biotech">0</Fertility>
+    </statBases>
+    <butcherProducts>
+      <Milira_SplendidSteel>20</Milira_SplendidSteel>
+      <ComponentIndustrial>1</ComponentIndustrial>
+    </butcherProducts>
+
+
+
+    <tools Inherit="false">
+      <li>
+        <label>Left fist</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>6</power>
+        <cooldownTime>1.4</cooldownTime>
+        <linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+        <chanceFactor>0.2</chanceFactor>
+      </li>
+      <li>
+        <label>Right fist</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>6</power>
+        <cooldownTime>1.4</cooldownTime>
+        <linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+        <chanceFactor>0.2</chanceFactor>
+      </li>
+    </tools>
+
+
+
+    <race Inherit="false">
+      <thinkTreeMain>Humanlike</thinkTreeMain>
+      <thinkTreeConstant>MiliraConstant</thinkTreeConstant>
+      <intelligence>Humanlike</intelligence>
+      <makesFootprints>true</makesFootprints>
+      <lifeExpectancy>2000</lifeExpectancy>
+      <leatherDef>Milira_FeatherThread</leatherDef>
+      <nameCategory>HumanStandard</nameCategory>
+      <hasGenders>false</hasGenders>
+      <needsRest>false</needsRest>
+      <canBecomeShambler>false</canBecomeShambler>
+      <body>Milian_Body</body>
+      <fleshType>Milian_Flesh</fleshType>
+      <bloodDef>Filth_MachineBits</bloodDef>
+      <renderTree>Humanlike</renderTree>
+      <baseBodySize>1.0</baseBodySize>
+      <baseHealthScale>1.2</baseHealthScale>
+      <foodType>None</foodType>
+      <gestationPeriodDays>90</gestationPeriodDays><!-- 在stat那边生育调到了0 -->
+      <hasMeat>false</hasMeat>
+      <corpseHiddenWhileUndiscovered>true</corpseHiddenWhileUndiscovered>
+      <bulletStaggerDelayTicks>35</bulletStaggerDelayTicks>
+      <nameGenerator>NamerPerson_Milira</nameGenerator>      <!--名字生成-->
+      <litterSizeCurve>
+        <points>
+          <li>(0.5, 0)</li>
+          <li>(1, 1)</li>
+          <li>(1.01, 0.02)</li>
+          <li>(3.5, 0)</li>
+        </points>
+      </litterSizeCurve>
+      <lifeStageAges>
+        <li Class="AlienRace.LifeStageAgeAlien">
+          <def>HumanlikeBaby</def>
+          <minAge>0</minAge>
+          <headOffset>(0.09, -0.11)</headOffset>
+        </li>
+        <li Class="AlienRace.LifeStageAgeAlien">
+          <def>Milira_HumanlikeChild</def>
+          <minAge>3</minAge>
+          <headOffset>(-0.00, 0.08)</headOffset>
+          <customDrawSize>(0.85,0.85)</customDrawSize>
+          <customPortraitDrawSize>(0.85,0.85)</customPortraitDrawSize>
+          <customHeadDrawSize>(0.85,0.85)</customHeadDrawSize>
+          <customPortraitHeadDrawSize>(0.85,0.85)</customPortraitHeadDrawSize>
+        </li>
+        <li Class="AlienRace.LifeStageAgeAlien" MayRequire="Ludeon.RimWorld.Biotech">
+          <def>Milira_HumanlikePreTeenager</def>
+          <minAge>15</minAge>          <!--10-->
+          <headOffset>(-0.04, 0.05)</headOffset>
+        </li>
+        <li Class="AlienRace.LifeStageAgeAlien">
+          <def>Milira_HumanlikeTeenager</def>
+          <minAge>25</minAge>
+          <headOffset>(-0.09, 0.05)</headOffset>
+          <customDrawSize>(0.9,0.9)</customDrawSize>
+          <customPortraitDrawSize>(0.9,0.9)</customPortraitDrawSize>
+          <customHeadDrawSize>(0.9,0.9)</customHeadDrawSize>
+          <customPortraitHeadDrawSize>(0.9,0.9)</customPortraitHeadDrawSize>
+        </li>
+        <li Class="AlienRace.LifeStageAgeAlien">
+          <def>HumanlikeAdult</def>
+          <minAge>75</minAge>
+        </li>
+      </lifeStageAges>
+      <lifeStageWorkSettings MayRequire="Ludeon.RimWorld.Biotech">
+        <Firefighter>0</Firefighter>
+        <Patient>0</Patient>
+        <Doctor>0</Doctor>
+        <PatientBedRest>0</PatientBedRest>
+        <Childcare MayRequire="Ludeon.RimWorld.Biotech">0</Childcare>
+        <BasicWorker>0</BasicWorker>
+        <Warden>0</Warden>
+        <Handling>0</Handling>
+        <Cooking>0</Cooking>
+        <Hunting>0</Hunting>
+        <Construction>0</Construction>
+        <Growing>0</Growing>
+        <Mining>0</Mining>
+        <PlantCutting>0</PlantCutting>
+        <Smithing>0</Smithing>
+        <Tailoring>0</Tailoring>
+        <Art>0</Art>
+        <Crafting>0</Crafting>
+        <Hauling>0</Hauling>
+        <Cleaning>0</Cleaning>
+        <Research>0</Research>
+      </lifeStageWorkSettings>
+      <soundMeleeHitPawn>Pawn_Melee_SmallScratch_HitPawn</soundMeleeHitPawn>
+      <soundMeleeHitBuilding>Pawn_Melee_SmallScratch_HitBuilding</soundMeleeHitBuilding>
+      <soundMeleeMiss>Pawn_Melee_SmallScratch_Miss</soundMeleeMiss>
+      <specialShadowData>
+        <volume>(0.3, 0.8, 0.4)</volume>
+        <offset>(0,0,-0.3)</offset>
+      </specialShadowData>
+      <ageGenerationCurve>
+        <points>
+          <li>(75,0)</li>
+          <li>(100,80)</li>
+          <li>(150,90)</li>
+          <li>(200,100)</li>
+          <li>(250,30)</li>
+          <li>(300,10)</li>
+          <li>(400,5)</li>
+          <li>(500,2)</li>
+          <li>(600,0)</li>
+        </points>
+      </ageGenerationCurve>
+      <hediffGiverSets>
+        <!-- <li>OrganicStandard</li>
+        <li>Human</li> -->
+      </hediffGiverSets>
+    </race>
+    <comps>
+    </comps>
+
+
+    <recipes>
+
+    </recipes>
+  </AlienRace.ThingDef_AlienRace>
+</Defs>

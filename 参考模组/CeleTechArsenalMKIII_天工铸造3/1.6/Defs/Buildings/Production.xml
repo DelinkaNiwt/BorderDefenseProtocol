@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <WorkGiverDef>
+    <defName>CMC_Operate</defName>
+    <label>Operate Machine</label>
+    <giverClass>WorkGiver_DoBill</giverClass>
+    <workType>Crafting</workType>
+    <priorityInType>140</priorityInType>
+    <fixedBillGiverDefs>
+      <li>CMC_TableMachining</li>
+	  <li>CMC_FacBench</li>
+    </fixedBillGiverDefs>
+    <verb>Operate</verb>
+    <gerund>Operating at</gerund>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <prioritizeSustains>true</prioritizeSustains>
+  </WorkGiverDef>
+  
+	<ThingDef ParentName="BenchBase" Name="CMC_BenchBase" Abstract="True">
+		<thingClass>Building_WorkTable</thingClass>
+		<castEdgeShadows>true</castEdgeShadows>
+		<staticSunShadowHeight>0.20</staticSunShadowHeight>
+		<altitudeLayer>Building</altitudeLayer>
+		<fillPercent>0.8</fillPercent>
+		<useHitPoints>True</useHitPoints>
+		<designationCategory>CMC_DefensenProduction</designationCategory>
+		<passability>PassThroughOnly</passability>
+		<pathCost>80</pathCost>
+		<hasInteractionCell>True</hasInteractionCell>
+		<surfaceType>Item</surfaceType>
+	  <inspectorTabs>
+			<li>ITab_Bills</li>
+		</inspectorTabs>
+		<building>
+			<spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
+			<paintable>true</paintable>
+		</building>
+		<constructEffect>ConstructMetal</constructEffect>
+		<comps>
+			<li Class="CompProperties_Flickable"/>
+			<li Class="CompProperties_AffectedByFacilities">
+				<linkableFacilities>
+					<li>CMCCabinet</li>
+					<li>ToolCabinet</li>
+				</linkableFacilities>
+			</li>
+		</comps>
+    <placeWorkers>
+      <li>PlaceWorker_ShowFacilitiesConnections</li>
+      <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+    </placeWorkers>
+	</ThingDef>
+	
+  <ThingDef ParentName="CMC_BenchBase">
+    <defName>CMC_TableMachining</defName>
+    <label>CMC workbench</label>
+    <description>A multifunctional intelligent CNC machine tools capable of manufacturing and processing precision weapon components.</description>
+    <graphicData>
+      <texPath>Things/Buildings/WeaponBench</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(5.1,3.1)</drawSize>
+	  <drawOffsetSouth>(0,0,0.03)</drawOffsetSouth>
+	  <drawOffsetNorth>(0,0,0.03)</drawOffsetNorth>
+	  <drawOffsetEast>(-0.02,0,-0.11)</drawOffsetEast>
+	  <drawOffsetWest>(0,0,-0.11)</drawOffsetWest>
+    </graphicData>
+    <designationCategory>CMC_DefensenProduction</designationCategory>
+    <costList>
+      <Steel>200</Steel>
+      <ComponentIndustrial>8</ComponentIndustrial>
+	    <ComponentSpacer>2</ComponentSpacer>
+    </costList>
+    <statBases>
+      <WorkToBuild>11451</WorkToBuild>
+      <MaxHitPoints>2500</MaxHitPoints>
+      <Flammability>0.25</Flammability>
+      <WorkTableWorkSpeedFactor>1.05</WorkTableWorkSpeedFactor>
+    </statBases>
+	  <recipes>
+	  </recipes>
+    <size>(3,2)</size>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+	<tickerType>Normal</tickerType>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <comps>
+		<li Class="CompProperties_Power">
+			<compClass>CompPowerTrader</compClass>
+			<shortCircuitInRain>false</shortCircuitInRain>
+			<basePowerConsumption>800</basePowerConsumption>
+		</li>
+		<li Class="TOT_DLL_test.CompProperties_BuildingDrawExtraFourRot">
+        <graphicDataExtra>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>TransparentPostLight</shaderType>
+			<texPath>Things/Buildings/WeaponBench_Visual/WeaponBench_Visual</texPath>
+			<drawSize>(5.1,3.1)</drawSize>
+			<drawOffsetSouth>(0,1,0.03)</drawOffsetSouth>
+			<drawOffsetNorth>(0,1,0.03)</drawOffsetNorth>
+			<drawOffsetEast>(-0.02,1,-0.11)</drawOffsetEast>
+			<drawOffsetWest>(0,1,-0.11)</drawOffsetWest> 
+        </graphicDataExtra>
+		</li>
+		<li Class="CompProperties_AffectedByFacilities">
+				<linkableFacilities>
+					<li>CMCCabinet</li>
+					<li>ToolCabinet</li>
+				</linkableFacilities>
+		</li>
+    </comps>
+	<researchPrerequisites>
+      <li>CMC_basisLight</li>
+    </researchPrerequisites>
+  </ThingDef>
+	
+  <ThingDef ParentName="CMC_BenchBase">
+    <defName>CMC_FacBench</defName>
+    <label>CMC facbrication bench</label>
+    <description>A multifunctional intelligent heavy-duty machine tools capable of manufacturing large components and missiles.</description>
+    <graphicData>
+      <texPath>Things/Buildings/FacBench</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(5.1,3.1)</drawSize>
+	  <drawOffsetSouth>(0,0,0.43)</drawOffsetSouth>
+	  <drawOffsetNorth>(0,0,0.22)</drawOffsetNorth>
+	  <drawOffsetEast>(-0.38,0,0)</drawOffsetEast>
+	  <drawOffsetWest>(0.38,0,0)</drawOffsetWest>
+    </graphicData>
+    <designationCategory>CMC_DefensenProduction</designationCategory>
+    <costList>
+      <Steel>300</Steel>
+      <ComponentIndustrial>10</ComponentIndustrial>
+	    <ComponentSpacer>3</ComponentSpacer>
+    </costList>
+    <statBases>
+      <WorkToBuild>11451</WorkToBuild>
+      <MaxHitPoints>2500</MaxHitPoints>
+      <Flammability>0.25</Flammability>
+      <WorkTableWorkSpeedFactor>1.05</WorkTableWorkSpeedFactor>
+    </statBases>
+	  <recipes>
+	  </recipes>
+    <size>(5,2)</size>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+	<tickerType>Normal</tickerType>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <comps>
+		<li Class="CompProperties_Power">
+			<compClass>CompPowerTrader</compClass>
+			<shortCircuitInRain>false</shortCircuitInRain>
+			<basePowerConsumption>1200</basePowerConsumption>
+		</li>
+		<li Class="TOT_DLL_test.CompProperties_BuildingDrawExtraFourRot">
+			<graphicDataExtra>
+				<graphicClass>Graphic_Multi</graphicClass>
+				<shaderType>TransparentPostLight</shaderType>
+				<texPath>Things/Buildings/FacBench_Visual</texPath>
+				<drawSize>(5.1,3.1)</drawSize>
+				<drawOffsetSouth>(0,0,0.43)</drawOffsetSouth>
+				<drawOffsetNorth>(0,0,0.22)</drawOffsetNorth>
+				<drawOffsetEast>(-0.38,0,0)</drawOffsetEast>
+				<drawOffsetWest>(0.38,0,0)</drawOffsetWest>
+			</graphicDataExtra>
+		</li>
+		<li Class="CompProperties_AffectedByFacilities">
+			<linkableFacilities>
+				<li>CMCCabinet</li>
+				<li>ToolCabinet</li>
+			</linkableFacilities>
+		</li>
+    </comps>
+	<researchPrerequisites>
+      <li>CMC_BasisHeavy</li>
+    </researchPrerequisites>
+  </ThingDef>
+  
+  <ThingDef ParentName="BuildingBase">
+    <defName>CMCCabinet</defName>
+    <label>CMC cabinet</label>
+    <description>.</description>
+    <graphicData>
+      <texPath>Things/Buildings/LinkedFacility</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(3,3)</drawSize>
+    </graphicData>
+    <designationCategory>CMC_DefensenProduction</designationCategory>
+    <costList>
+      <Steel>200</Steel>
+      <ComponentIndustrial>1</ComponentIndustrial>
+	    <ComponentSpacer>1</ComponentSpacer>
+    </costList>
+    <statBases>
+      <WorkToBuild>19198</WorkToBuild>
+      <MaxHitPoints>1000</MaxHitPoints>
+      <Flammability>0.25</Flammability>
+    </statBases>
+	  <recipes>
+	  </recipes>
+    <size>(2,2)</size>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+    <comps>
+		<li Class="CompProperties_Stunnable">
+			<useLargeEMPEffecter>true</useLargeEMPEffecter>
+			<affectedDamageDefs>
+			  <li>EMP</li>
+			</affectedDamageDefs>
+		</li>
+		<li Class="CompProperties_Power">
+			<compClass>CompPowerTrader</compClass>
+			<shortCircuitInRain>false</shortCircuitInRain>
+			<basePowerConsumption>50</basePowerConsumption>
+		</li>
+		<li Class="CompProperties_Facility">
+			<statOffsets>
+			  <WorkTableWorkSpeedFactor>0.15</WorkTableWorkSpeedFactor>
+			</statOffsets>
+			<maxSimultaneous>1</maxSimultaneous>
+		</li>
+		<li Class="TOT_DLL_test.CompProperties_BuildingDrawExtraFourRot">
+			<graphicDataExtra>
+				<graphicClass>Graphic_Single</graphicClass>
+				<shaderType>TransparentPostLight</shaderType>
+				<texPath>Things/Buildings/LinkedFacility_Light</texPath>
+				<drawSize>(3,3)</drawSize>
+				<drawOffset>(0,0.02,0)</drawOffset>
+			</graphicDataExtra>
+		</li>
+    </comps>
+	<researchPrerequisites>
+      <li>CMC_BasisHeavy</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+</Defs>	

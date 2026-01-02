@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>CeleTech Arsenal MKIII</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ThingDef[defName="CMC_RocketLauncher"]/tools</xpath>
+          <value>
+            <tools>
+              <li Class="CombatExtended.ToolCE">
+                <label>炮管</label>
+                <capacities>
+                  <li>Blunt</li>
+                </capacities>
+                <power>7</power>
+                <cooldownTime>2.02</cooldownTime>
+                <linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
+              </li>
+            </tools>
+          </value>
+        </li>
+        <li Class="CombatExtended.PatchOperationMakeGunCECompatible">
+          <defName>CMC_RocketLauncher</defName>
+          <statBases>
+            <Bulk>10.03</Bulk>
+            <TicksBetweenBurstShots>4</TicksBetweenBurstShots>
+            <SightsEfficiency>1.6</SightsEfficiency>
+            <SwayFactor>1.33</SwayFactor>
+            <ShotSpread>0.07</ShotSpread>
+            <Recoil>1.5</Recoil>
+            <MagazineCapacity>1</MagazineCapacity>
+            <ReloadSpeed>4.8</ReloadSpeed>
+            <AmmoGenPerMagOverride>1</AmmoGenPerMagOverride>
+          </statBases>
+          <Properties>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <recoilAmount>5</recoilAmount>
+            <circularError>0.58</circularError>
+            <hasStandardCommand>True</hasStandardCommand>
+            <warmupTime>2.01</warmupTime>
+            <range>65</range>
+            <muzzleFlashScale>24</muzzleFlashScale>
+            <recoilPattern>Regular</recoilPattern>
+            <defaultProjectile>Bullet_SPG9Rocket_HEAT</defaultProjectile>
+            <soundCast>RocketswarmLauncher_Fire</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <targetParams>
+              <canTargetLocations>True</canTargetLocations>
+              <canTargetItems>True</canTargetItems>
+            </targetParams>
+          </Properties>
+          <AmmoUser>
+            <magazineSize>1</magazineSize>
+            <AmmoGenPerMagOverride>1</AmmoGenPerMagOverride>
+            <reloadOneAtATime>True</reloadOneAtATime>
+            <ammoSet>AmmoSet_SPG9Rocket</ammoSet>
+          </AmmoUser>
+          <FireModes>
+            <aimedBurstShotCount>3</aimedBurstShotCount>
+          </FireModes>
+          <weaponTags>
+            <li>CE_AI_Launcher</li>
+            <li>Bipod_ATR</li>
+          </weaponTags>
+        </li>
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="CMC_RocketLauncher"]/equippedStatOffsets</xpath>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="CMC_RocketLauncher"]</xpath>
+            <value>
+              <equippedStatOffsets />
+            </value>
+          </nomatch>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ThingDef[defName="CMC_RocketLauncher"]/equippedStatOffsets</xpath>
+          <value>
+            <equippedStatOffsets>
+              <MoveSpeed>-0.75</MoveSpeed>
+              <RangedWeapon_DamageMultiplier>0.08</RangedWeapon_DamageMultiplier>
+            </equippedStatOffsets>
+          </value>
+        </li>
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="CMC_RocketLauncher"]/comps</xpath>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="CMC_RocketLauncher"]</xpath>
+            <value>
+              <comps />
+            </value>
+          </nomatch>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+</Patch>

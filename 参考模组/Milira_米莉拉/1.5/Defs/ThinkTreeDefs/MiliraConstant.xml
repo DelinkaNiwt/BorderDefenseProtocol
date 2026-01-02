@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThinkTreeDef>
+    <defName>MiliraConstant</defName>
+    <thinkRoot Class="ThinkNode_Priority">
+      <subNodes>
+        <!--=HumanlikeConstant=-->
+        <!-- Despawned -->
+        <li Class="ThinkNode_Subtree">
+          <treeDef>Despawned</treeDef>
+        </li>
+
+        <li Class="ThinkNode_ConditionalCanDoConstantThinkTreeJobNow">
+          <subNodes>
+            <!-- Flee explosion -->
+            <li Class="JobGiver_FleePotentialExplosion" />
+
+            <!-- Join auto joinable caravan -->
+            <li Class="ThinkNode_Subtree">
+              <treeDef>JoinAutoJoinableCaravan</treeDef>
+            </li>
+
+            <!-- Hostility response -->
+            <li Class="JobGiver_ConfigurableHostilityResponse" />
+          </subNodes>
+        </li>
+
+        <li Class="ThinkNode_ConditionalCanDoLordJobNow">
+          <subNodes>
+            <!-- Lord directives -->
+            <li Class="ThinkNode_Subtree">
+              <treeDef>LordDutyConstant</treeDef>
+            </li>
+          </subNodes>
+        </li>
+
+
+
+        <li Class="ThinkNode_ConditionalColonist">
+          <invert>true</invert>
+          <subNodes>
+            <li Class="ThinkNode_ConditionalHasAbility">
+              <ability>Milira_ShortFly</ability>
+              <subNodes>
+                <li Class="Milira.ThinkNode_ConditionalBodyPartAvailable">
+                  <requiredBodypartdefName>Milira_Wing</requiredBodypartdefName>
+                  <subNodes>
+                    <li Class="Milira.ThinkNode_ConditionalEquippedMelee">
+                      <subNodes>
+                        <li Class="Milira.ThinkNode_ConditionalHasUnobstructedEnemy">
+                          <detectionRadius>15.9</detectionRadius>
+                          <subNodes>
+                            <li Class="Milira.ThinkNode_ConditionalIsNotPanicFleeing">
+                              <subNodes>
+                                <li Class="Milira.ThinkNode_ConditionalHasEnoughHungerRestForAbility">
+                                  <abilityDef>Milira_ShortFly</abilityDef>
+                                  <subNodes>
+                                    <li Class="Milira.JobGiver_AIJumpToEnemy">
+                                      <ability>Milira_ShortFly</ability>
+                                      <detectionRadius>15.9</detectionRadius>
+                                      <minDistanceFromEnemy>5</minDistanceFromEnemy>
+                                    </li>
+                                  </subNodes>
+                                </li>
+                              </subNodes>
+                            </li>
+                          </subNodes>
+                        </li>
+                      </subNodes>
+                    </li>
+                    <li Class="ThinkNode_ConditionalTotalDamage">
+                      <thresholdPercent>0.05</thresholdPercent>
+                      <subNodes>
+                        <li Class="AncotLibrary.ThinkNode_ConditionalUnderCombatPressureIgnoreDowned">
+                          <maxThreatDistance>24</maxThreatDistance>
+                          <minCloseTargets>1</minCloseTargets>
+                          <subNodes>
+                            <li Class="ThinkNode_HarmedRecently">
+                              <thresholdTicks>60</thresholdTicks>
+                              <subNodes>
+                                <li Class="Milira.ThinkNode_ConditionalHasEnoughHungerRestForAbility">
+                                  <abilityDef>Milira_ShortFly</abilityDef>
+                                  <subNodes>
+                                    <li Class="Milira.JobGiver_AIJumpEscapeEnemiesRandom">
+                                      <ability>Milira_ShortFly</ability>
+                                      <minEscapeRangeFactor>0.6</minEscapeRangeFactor>
+                                      <maxEscapeRangeFactor>1.0</maxEscapeRangeFactor>
+                                    </li>
+                                  </subNodes>
+                                </li>
+                              </subNodes>
+                            </li>
+                          </subNodes>
+                        </li>
+                      </subNodes>
+                    </li>
+                  </subNodes>
+                </li>
+              </subNodes>
+            </li>
+          </subNodes>
+        </li>
+
+
+        <li Class="ThinkNode_ConditionalColonist">
+          <invert>true</invert>
+          <subNodes>
+            <li Class="AncotLibrary.ThinkNode_ConditionalHasAbility">
+              <ability>Milira_Skill_Lance</ability>
+              <includeTemporary>true</includeTemporary>
+              <subNodes>
+                <li Class="Milira.ThinkNode_ConditionalBodyPartAvailable">
+                  <requiredBodypartdefName>Milira_Wing</requiredBodypartdefName>
+                  <subNodes>
+                    <li Class="Milira.ThinkNode_ConditionalEquippedMelee">
+                      <subNodes>
+                        <li Class="AncotLibrary.ThinkNode_ConditionalWeaponEnergy">
+                          <subNodes>
+                            <li Class="Milira.ThinkNode_ConditionalHasUnobstructedEnemy">
+                              <detectionRadius>24.9</detectionRadius>
+                              <subNodes>
+                                <li Class="Milira.ThinkNode_ConditionalIsNotPanicFleeing">
+                                  <subNodes>
+                                    <li Class="Milira.ThinkNode_ConditionalHasEnoughHungerRestForAbility">
+                                      <abilityDef>Milira_Skill_Lance</abilityDef>
+                                      <subNodes>
+                                        <li Class="Milira.JobGiver_AIJumpToRandomEnemy">
+                                          <ability>Milira_Skill_Lance</ability>
+                                          <detectionRadius>24.9</detectionRadius>
+                                          <minDistanceFromEnemy>11.9</minDistanceFromEnemy>
+                                        </li>
+                                      </subNodes>
+                                    </li>
+                                  </subNodes>
+                                </li>
+                              </subNodes>
+                            </li>
+                          </subNodes>
+                        </li>
+                      </subNodes>
+                    </li>
+                  </subNodes>
+                </li>
+              </subNodes>
+            </li>
+          </subNodes>
+        </li>
+
+
+        <li Class="ThinkNode_ConditionalColonist">
+          <invert>true</invert>
+          <subNodes>
+            <li Class="AncotLibrary.ThinkNode_ConditionalHasAbility">
+              <ability>Milira_Skill_Hammer</ability>
+              <includeTemporary>true</includeTemporary>
+              <subNodes>
+                <li Class="Milira.ThinkNode_ConditionalBodyPartAvailable">
+                  <requiredBodypartdefName>Milira_Wing</requiredBodypartdefName>
+                  <subNodes>
+                    <li Class="Milira.ThinkNode_ConditionalEquippedMelee">
+                      <subNodes>
+                        <li Class="AncotLibrary.ThinkNode_ConditionalWeaponEnergy">
+                          <subNodes>
+                            <li Class="Milira.ThinkNode_ConditionalHasUnobstructedEnemy">
+                              <detectionRadius>23.9</detectionRadius>
+                              <subNodes>
+                                <li Class="Milira.ThinkNode_ConditionalIsNotPanicFleeing">
+                                  <subNodes>
+                                    <li Class="Milira.ThinkNode_ConditionalHasEnoughHungerRestForAbility">
+                                      <abilityDef>Milira_Skill_Hammer</abilityDef>
+                                      <subNodes>
+                                        <li Class="Milira.JobGiver_AIJumpToRandomEnemy">
+                                          <ability>Milira_Skill_Hammer</ability>
+                                          <detectionRadius>23.9</detectionRadius>
+                                          <minDistanceFromEnemy>5.9</minDistanceFromEnemy>
+                                        </li>
+                                      </subNodes>
+                                    </li>
+                                  </subNodes>
+                                </li>
+                              </subNodes>
+                            </li>
+                          </subNodes>
+                        </li>
+                      </subNodes>
+                    </li>
+                  </subNodes>
+                </li>
+              </subNodes>
+            </li>
+          </subNodes>
+        </li>
+
+        <li Class="ThinkNode_ConditionalColonist">
+          <invert>true</invert>
+          <subNodes>
+            <li Class="AncotLibrary.ThinkNode_ConditionalHasAbility">
+              <ability>Milira_Skill_Blade</ability>
+              <includeTemporary>true</includeTemporary>
+              <subNodes>
+                <li Class="Milira.ThinkNode_ConditionalBodyPartAvailable">
+                  <requiredBodypartdefName>Milira_Wing</requiredBodypartdefName>
+                  <subNodes>
+                    <li Class="Milira.ThinkNode_ConditionalEquippedMelee">
+                      <subNodes>
+                        <li Class="AncotLibrary.ThinkNode_ConditionalWeaponEnergy">
+                          <subNodes>
+                            <li Class="Milira.ThinkNode_ConditionalHasUnobstructedEnemy">
+                              <detectionRadius>15.9</detectionRadius>
+                              <subNodes>
+                                <li Class="Milira.ThinkNode_ConditionalIsNotPanicFleeing">
+                                  <subNodes>
+                                    <li Class="Milira.ThinkNode_ConditionalHasEnoughHungerRestForAbility">
+                                      <abilityDef>Milira_Skill_Blade</abilityDef>
+                                      <subNodes>
+                                        <li Class="Milira.JobGiver_AIJumpToRandomEnemy">
+                                          <ability>Milira_Skill_Blade</ability>
+                                          <detectionRadius>15.9</detectionRadius>
+                                          <minDistanceFromEnemy>8.9</minDistanceFromEnemy>
+                                        </li>
+                                      </subNodes>
+                                    </li>
+                                  </subNodes>
+                                </li>
+                              </subNodes>
+                            </li>
+                          </subNodes>
+                        </li>
+                      </subNodes>
+                    </li>
+                  </subNodes>
+                </li>
+              </subNodes>
+            </li>
+          </subNodes>
+        </li>
+
+
+        <li Class="ThinkNode_ConditionalColonist">
+          <invert>true</invert>
+          <subNodes>
+            <li Class="AncotLibrary.ThinkNode_ConditionalHasAbility">
+              <ability>Milira_Skill_Sickle</ability>
+              <includeTemporary>true</includeTemporary>
+              <subNodes>
+                <li Class="Milira.ThinkNode_ConditionalEquippedMelee">
+                  <subNodes>
+                    <li Class="AncotLibrary.ThinkNode_ConditionalWeaponEnergy">
+                      <subNodes>
+                        <li Class="Milira.ThinkNode_ConditionalHasUnobstructedEnemy">
+                          <detectionRadius>5.9</detectionRadius>
+                          <subNodes>
+                            <li Class="Milira.ThinkNode_ConditionalIsNotPanicFleeing">
+                              <subNodes>
+                                <li Class="AncotLibrary.ThinkNode_ConditionalUnderCombatPressureIgnoreDowned">
+                                  <maxThreatDistance>5.9</maxThreatDistance>
+                                  <minCloseTargets>4</minCloseTargets>
+                                  <subNodes>
+                                    <li Class="AncotLibrary.JobGiver_AICastAbilityOnSelf">
+                                      <ability>Milira_Skill_Sickle</ability>
+                                      <includeTemporary>true</includeTemporary>
+                                    </li>
+                                  </subNodes>
+                                </li>
+                              </subNodes>
+                            </li>
+                          </subNodes>
+                        </li>
+                      </subNodes>
+                    </li>
+                  </subNodes>
+                </li>
+              </subNodes>
+            </li>
+          </subNodes>
+        </li>
+
+
+        <li Class="ThinkNode_ConditionalColonist">
+          <invert>true</invert>
+          <subNodes>
+            <li Class="AncotLibrary.ThinkNode_ConditionalHasAbility">
+              <ability>Milira_Skill_Sword</ability>
+              <includeTemporary>true</includeTemporary>
+              <subNodes>
+                <li Class="AncotLibrary.ThinkNode_ConditionalWeaponEnergy">
+                  <subNodes>
+                    <li Class="ThinkNode_ConditionalHashIntervalTick">
+                      <interval>20</interval>
+                      <subNodes>
+                        <li Class="Milira.JobGiver_AICastTwoHandSwordSkill">
+                          <ability>Milira_Skill_Sword</ability>
+                          <includeTemporary>true</includeTemporary>
+                        </li>
+                      </subNodes>
+                    </li>
+                  </subNodes>
+                </li>
+              </subNodes>
+            </li>
+          </subNodes>
+        </li>
+
+
+        <li Class="ThinkNode_ConditionalColonist">
+          <invert>true</invert>
+          <subNodes>
+            <li Class="AncotLibrary.ThinkNode_ConditionalHasAbility">
+              <ability>Milira_Skill_Spear</ability>
+              <includeTemporary>true</includeTemporary>
+              <subNodes>
+                <li Class="AncotLibrary.ThinkNode_ConditionalWeaponEnergy">
+                  <subNodes>
+                    <li Class="ThinkNode_ConditionalHashIntervalTick">
+                      <interval>18</interval>
+                      <subNodes>
+                        <li Class="Milira.JobGiver_AICastTwoHandSwordSkill">
+                          <ability>Milira_Skill_Spear</ability>
+                          <includeTemporary>true</includeTemporary>
+                        </li>
+                      </subNodes>
+                    </li>
+                  </subNodes>
+                </li>
+              </subNodes>
+            </li>
+          </subNodes>
+        </li>
+
+      </subNodes>
+    </thinkRoot>
+  </ThinkTreeDef>
+
+
+
+</Defs>

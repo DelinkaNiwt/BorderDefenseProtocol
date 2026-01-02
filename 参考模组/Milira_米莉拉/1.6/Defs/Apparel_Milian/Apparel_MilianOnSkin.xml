@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThingDef Name="Milian_OnSkinBase" ParentName="Milian_ApparelBase" Abstract="True">
+		<statBases>
+			<Mass>0.8</Mass>
+			<EquipDelay>1.6</EquipDelay>
+		</statBases>
+		<apparel>
+			<layers>
+				<li>OnSkin</li>
+			</layers>
+			<tags>
+				<li>Milian_OnSkin</li>
+			</tags>
+		</apparel>
+		<thingCategories>
+			<li>Milian_Apparel_OnSkin</li>
+		</thingCategories>
+	</ThingDef>
+
+	<!--=======1级衣服============================================================================-->
+
+	<ThingDef Name="Milian_Lining" ParentName="Milian_OnSkinBase">
+		<defName>Milian_Lining</defName>
+		<label>Milian lining</label>
+		<description>Milian Undersuit. A form-fitting, soft armor designed to closely conform to Milian's body, offering a certain degree of protection.</description>
+		<costStuffCount>35</costStuffCount>
+		<stuffCategories>
+			<li>Leathery</li>
+			<li>Fabric</li>
+		</stuffCategories>
+		<graphicData>
+			<texPath>Milian/Apparel/Onskin/Lining/Lining</texPath>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToMake>3200</WorkToMake>
+			<ArmorRating_Sharp>0.0</ArmorRating_Sharp>
+			<ArmorRating_Blunt>0.2</ArmorRating_Blunt>
+			<ArmorRating_Heat>0.3</ArmorRating_Heat>
+			<StuffEffectMultiplierArmor>0.2</StuffEffectMultiplierArmor>
+			<StuffEffectMultiplierInsulation_Cold>0</StuffEffectMultiplierInsulation_Cold>
+			<StuffEffectMultiplierInsulation_Heat>0</StuffEffectMultiplierInsulation_Heat>
+		</statBases>
+		<apparel>
+			<!-- <useWornGraphicMask>true</useWornGraphicMask> -->
+			<developmentalStageFilter>Child, Adult</developmentalStageFilter>
+			<bodyPartGroups>
+				<li>Torso</li>
+			</bodyPartGroups>
+			<wornGraphicPath>Milian/Apparel/Onskin/Lining/Lining</wornGraphicPath>
+			<tags>
+				<li>Milian_Lining</li>
+				<li>Milian_Mechanoid_PawnI</li>
+				<li>Milian_Mechanoid_PawnII</li>
+				<li>Milian_Mechanoid_PawnIII</li>
+				<li>Milian_Mechanoid_PawnIV</li>
+				<li>Milian_Mechanoid_KnightI</li>
+				<li>Milian_Mechanoid_KnightII</li>
+				<li>Milian_Mechanoid_KnightIII</li>
+				<li>Milian_Mechanoid_KnightIV</li>
+				<li>Milian_Mechanoid_BishopI</li>
+				<li>Milian_Mechanoid_BishopII</li>
+				<li>Milian_Mechanoid_BishopIII</li>
+				<li>Milian_Mechanoid_BishopIV</li>
+				<li>Milian_Mechanoid_RookI</li>
+				<li>Milian_Mechanoid_RookII</li>
+				<li>Milian_Mechanoid_RookIII</li>
+				<li>Milian_Mechanoid_RookIV</li>
+			</tags>
+		</apparel>
+		<recipeMaker>
+			<recipeUsers Inherit="false">
+				<li>Milira_TailoringBench</li>
+			</recipeUsers>
+			<researchPrerequisites Inherit="false">
+				<li>Milira_TailoringBench</li>
+				<li>Milira_MilianTech_Gestator</li>
+			</researchPrerequisites>
+		</recipeMaker>
+		<equippedStatOffsets>
+		</equippedStatOffsets>
+		<comps>
+			<li Class="Milira.CompProperties_TargetableMilian">
+				<compClass>Milira.CompTargetable_Milian</compClass>
+				<ignoreQuestLodgerPawns>true</ignoreQuestLodgerPawns>
+				<targetableMilianPawnkinds>
+					<li>Milian_Mechanoid_PawnI</li>
+					<li>Milian_Mechanoid_PawnII</li>
+					<li>Milian_Mechanoid_PawnIII</li>
+					<li>Milian_Mechanoid_PawnIV</li>
+					<li>Milian_Mechanoid_KnightI</li>
+					<li>Milian_Mechanoid_KnightII</li>
+					<li>Milian_Mechanoid_KnightIII</li>
+					<li>Milian_Mechanoid_KnightIV</li>
+					<li>Milian_Mechanoid_BishopI</li>
+					<li>Milian_Mechanoid_BishopII</li>
+					<li>Milian_Mechanoid_BishopIII</li>
+					<li>Milian_Mechanoid_BishopIV</li>
+					<li>Milian_Mechanoid_RookI</li>
+					<li>Milian_Mechanoid_RookII</li>
+					<li>Milian_Mechanoid_RookIII</li>
+					<li>Milian_Mechanoid_RookIV</li>
+				</targetableMilianPawnkinds>
+			</li>
+		</comps>
+	</ThingDef>
+
+
+</Defs>

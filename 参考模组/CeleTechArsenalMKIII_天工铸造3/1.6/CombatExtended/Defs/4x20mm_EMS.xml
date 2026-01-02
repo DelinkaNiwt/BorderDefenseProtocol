@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ThingCategoryDef>
+    <defName>AmmoCategory_CMC_4x20mmsmartAmmo</defName>
+    <label>4x20mm MTS</label>
+    <parent>AmmoPistols</parent>
+    <iconPath>Things/Ammo/4x20mmUI</iconPath>
+  </ThingCategoryDef>
+  <CombatExtended.AmmoSetDef>
+    <defName>AmmoSet_CMC_4x20mmsmartAmmo</defName>
+    <label>4x20mm MTS</label>
+    <ammoTypes>
+      <Ammo_CMC_4x20mmsmartAmmo_Regular>Bullet_CMC_4x20mmsmartAmmo_Regular</Ammo_CMC_4x20mmsmartAmmo_Regular>
+    </ammoTypes>
+  </CombatExtended.AmmoSetDef>
+  <ThingDef Class="CombatExtended.AmmoDef" Name="Ammo_CMC_4x20mmsmartAmmo_Base" ParentName="SmallAmmoBase" Abstract="True">
+    <description>TODO</description>
+    <statBases>
+      <Mass>0.013</Mass>
+      <Bulk>0.02</Bulk>
+    </statBases>
+    <tradeTags>
+      <li>CE_AutoEnableTrade</li>
+      <li>CE_AutoEnableCrafting</li>
+    </tradeTags>
+    <thingCategories>
+      <li>AmmoCategory_CMC_4x20mmsmartAmmo</li>
+    </thingCategories>
+  </ThingDef>
+  <ThingDef Name="Bullet_CMC_4x20mmsmartAmmo_Base" ParentName="BaseBulletCE" Abstract="True">
+    <graphicData>
+      <texPath>Things/Projectile/Charge_Small</texPath>
+      <graphicClass>Verse.Graphic_Single</graphicClass>
+    </graphicData>
+	<thingClass>CeleTechXCE_DLL.ProjectileGuidedBulletCE</thingClass>
+    <projectile Class="CombatExtended.ProjectilePropertiesCE">
+      <speed>90</speed>
+      <damageDef>Bullet</damageDef>
+      <dropsCasings>true</dropsCasings>
+    </projectile>
+  </ThingDef>
+  <ThingDef Class="CombatExtended.AmmoDef" ParentName="Ammo_CMC_4x20mmsmartAmmo_Base">
+    <defName>Ammo_CMC_4x20mmsmartAmmo_Regular</defName>
+    <label>4x20mm MTS-R</label>
+    <graphicData>
+      <texPath>Things/Ammo/4x20mm_R</texPath>
+      <graphicClass>Verse.Graphic_StackCount</graphicClass>
+    </graphicData>
+    <ammoClass>CMC_HomingBullet_Regular</ammoClass>
+    <cookOffProjectile>Bullet_CMC_4x20mmsmartAmmo_Regular</cookOffProjectile>
+  </ThingDef>
+  <ThingDef ParentName="Bullet_CMC_4x20mmsmartAmmo_Base">
+    <defName>Bullet_CMC_4x20mmsmartAmmo_Regular</defName>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Verse.Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile Class="CombatExtended.ProjectilePropertiesCE">
+      <damageAmountBase>10</damageAmountBase>
+      <armorPenetrationBlunt>18</armorPenetrationBlunt>
+      <armorPenetrationSharp>20</armorPenetrationSharp>
+      <secondaryDamage>
+        <li>
+          <def>Bomb</def>
+          <amount>5</amount>
+        </li>
+      </secondaryDamage>
+    </projectile>
+  </ThingDef>
+  <RecipeDef ParentName="AmmoRecipeBase">
+    <defName>MakeAmmo_CMC_4x20mmsmartAmmo_Regular</defName>
+    <label>制作4x20mm MTS-R x500</label>
+    <description>制作500枚4x20mm MTS-R。</description>
+    <jobString>正在制作4x20mm MTS-R。</jobString>
+    <ingredients />
+    <fixedIngredientFilter>
+      <thingDefs />
+    </fixedIngredientFilter>
+    <products>
+      <Ammo_CMC_4x20mmsmartAmmo_Regular>500</Ammo_CMC_4x20mmsmartAmmo_Regular>
+    </products>
+    <workAmount>2000</workAmount>
+  </RecipeDef>
+</Defs>

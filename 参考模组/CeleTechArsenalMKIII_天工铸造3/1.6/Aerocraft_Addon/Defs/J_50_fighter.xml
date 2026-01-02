@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  
+  <ThingDef ParentName="MYDE_AerocraftFramework_XmlParent">
+    <defName>MYDE_CMC_J50X</defName>
+    <label>JX-02</label>
+    <description>An advanced fighter jet equipped with particle lance, multiply AA and cruise missiles. The jet is shielded with a force field and heavy armored.\n\nPilot:1,Max capacity:2.</description>
+    <thingClass>MYDE_AerocraftFramework.Building_Aerocraft_AsBaseThing</thingClass>
+    <uiIconPath>Things/Aerocraft/aerospacefighter/J50_UI</uiIconPath>
+    <graphicData>
+      <texPath>Things/Aerocraft/aerospacefighter/J50_Base</texPath>
+      <drawSize>(7.9,7.9)</drawSize>
+    </graphicData>
+	<damageMultipliers>
+      <li>
+        <damageDef>EMP</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+      <li>
+        <damageDef>Stun</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <statBases>
+      <MaxHitPoints>15000</MaxHitPoints>
+      <WorkToBuild>100000</WorkToBuild>
+      <Mass>31500</Mass>
+      <Beauty>300</Beauty>
+      <ShootingAccuracyTurret>0.97</ShootingAccuracyTurret>
+    </statBases>
+    <costList>
+	  <Steel>4000</Steel>
+	  <Plasteel>2800</Plasteel>
+	  <Uranium>800</Uranium>
+      <ComponentSpacer>18</ComponentSpacer>
+      <Chemfuel>1500</Chemfuel>
+	  <Gold>80</Gold>
+	  <Silver>120</Silver>
+    </costList>
+    <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
+    <minifiedDef>MYDE_AerocraftFramework_MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>MYDE_AerocraftFramework_Root</li>
+    </thingCategories>
+    <researchPrerequisites>
+      <li>MYDE_AF_Research_IntermediateAerocraft</li>
+    </researchPrerequisites>
+    <designationCategory>CMC_DefensenProduction</designationCategory>
+    <size>(7,7)</size>
+    <inspectorTabs>
+      <li>ITab_ContentsTransporter</li>
+    </inspectorTabs>
+    <comps>
+      <!--原版燃料-->
+      <li Class="CompProperties_Refuelable">
+        <!--<fuelLabel>Fuel</fuelLabel>-->
+        <!--<fuelGizmoLabel>Fuel</fuelGizmoLabel>-->
+        <outOfFuelMessage>Needs Fuel</outOfFuelMessage>
+        <fuelFilter>
+          <thingDefs>
+            <li>Uranium</li>
+          </thingDefs>
+        </fuelFilter>
+        <fuelCapacity>1800</fuelCapacity>
+        <fuelMultiplier>10</fuelMultiplier>
+        <initialFuelPercent>1</initialFuelPercent>
+        <autoRefuelPercent>0.4</autoRefuelPercent>
+        <showFuelGizmo>true</showFuelGizmo>
+        <minimumFueledThreshold>1</minimumFueledThreshold>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <targetFuelLevelConfigurable>true</targetFuelLevelConfigurable>
+        <initialConfigurableTargetFuelLevel>800</initialConfigurableTargetFuelLevel>
+      </li>
+      <!--本体的渲染+阴影-->
+      <li Class="MYDE_AerocraftFramework.CompProperties_Base_Thing">
+        <!--是否渲染-->
+        <If_Draw_Base>True</If_Draw_Base>
+        <!--飞行的大小变化-->
+        <Draw_ScaleIncreaseFactor_WhenFlying>0.3</Draw_ScaleIncreaseFactor_WhenFlying>
+        <!--本体的图层大小+高度-->
+        <Draw_Base_TexturePath>Things/Aerocraft/aerospacefighter/J50_Base</Draw_Base_TexturePath>
+        <Draw_Base_Scale>9</Draw_Base_Scale>
+        <Draw_Base_ExtraAltitudeLayerNum>0.8</Draw_Base_ExtraAltitudeLayerNum>
+        <!--是否制作阴影+阴影最大最下长度+阴影角度-->
+        <If_NeedDrawAllShadow>True</If_NeedDrawAllShadow>
+        <!--是否制作本体阴影+大小+图层+透明度-->
+        <If_DrawShadow_Base>true</If_DrawShadow_Base>
+        <Draw_Shadow_Base_Scale>9</Draw_Shadow_Base_Scale>
+        <Draw_Shadow_Base_HeightFactor>4</Draw_Shadow_Base_HeightFactor>
+        <Draw_Shadow_Base_ExtraAltitudeLayerNum>-0.5</Draw_Shadow_Base_ExtraAltitudeLayerNum>
+        <Draw_Shadow_Base_Transparency>0.5</Draw_Shadow_Base_Transparency>
+      </li>
+      <!--主武器渲染+阴影-->
+	  <li Class="MYDE_AerocraftFramework.CompProperties_Base_Weapon">
+        <!--枪械-->
+        <WeaponDef>CMC_J50_particleLance</WeaponDef>
+        <!--是否渲染-->
+        <If_Draw_Gun>True</If_Draw_Gun>
+        <!--枪的图层高度-->
+        <Draw_Gun_Scale>-1</Draw_Gun_Scale>
+        <Draw_Gun_ExtraAltitudeLayerNum>0.3</Draw_Gun_ExtraAltitudeLayerNum>
+        <!--是否制作枪械阴影+大小+图层+透明度-->
+        <If_DrawShadow_Gun>False</If_DrawShadow_Gun>
+        <Draw_Shadow_Gun_Scale>0.75</Draw_Shadow_Gun_Scale>
+        <Draw_Shadow_Gun_ExtraAltitudeLayerNum>-0.6</Draw_Shadow_Gun_ExtraAltitudeLayerNum>
+        <Draw_Shadow_Gun_Transparency>0.5</Draw_Shadow_Gun_Transparency>
+      </li>
+	  <li Class="MYDE_AerocraftFramework.CompProperties_GetExtraWeapon">
+        <ExtraWeaponDef>MYDE_AF_CMC_AeroFighter_WeaponGroup_missileVLS</ExtraWeaponDef>
+        <ExtraWeapon_Range>1.4</ExtraWeapon_Range>
+        <ExtraWeapon_Angle>110</ExtraWeapon_Angle>
+      </li>
+      <li Class="MYDE_AerocraftFramework.CompProperties_GetExtraWeapon">
+        <ExtraWeaponDef>MYDE_AF_CMC_AeroFighter_WeaponGroup_missileVLS</ExtraWeaponDef>
+        <ExtraWeapon_Range>1.4</ExtraWeapon_Range>
+        <ExtraWeapon_Angle>70</ExtraWeapon_Angle>
+      </li>
+	  <li Class="MYDE_AerocraftFramework.CompProperties_GetExtraWeapon">
+        <ExtraWeaponDef>MYDE_AF_CMC_AeroFighter_WeaponGroup_missileVLS_EMP</ExtraWeaponDef>
+        <ExtraWeapon_Range>1.4</ExtraWeapon_Range>
+        <ExtraWeapon_Angle>-70</ExtraWeapon_Angle>
+      </li>
+      <li Class="MYDE_AerocraftFramework.CompProperties_GetExtraWeapon">
+        <ExtraWeaponDef>MYDE_AF_CMC_AeroFighter_WeaponGroup_missileVLS</ExtraWeaponDef>
+        <ExtraWeapon_Range>1.4</ExtraWeapon_Range>
+        <ExtraWeapon_Angle>-110</ExtraWeapon_Angle>
+      </li>
+      <li Class="MYDE_AerocraftFramework.CompProperties_MoveToTargetAndHover">
+        <!--碰撞检测的最大移动距离-->
+        <Check_CollideMoveRangeMax>10</Check_CollideMoveRangeMax>
+        <!--起飞需要的预热时间-->
+        <Move_WarmUpTickMax>300</Move_WarmUpTickMax>
+        <!--是否需要转向，False则省略飞行器转向过程-->
+        <If_NeedTurnWhenMoving>True</If_NeedTurnWhenMoving>
+        <!--最大移动速度+转向时的移动速度-->
+        <MoveSpeed_Max>0.6</MoveSpeed_Max>
+        <MoveSpeed_Turning>0.15</MoveSpeed_Turning>
+        <!--默认盘旋设置 True为开 False为关-->
+        <Default_HoverSet>False</Default_HoverSet>
+        <!--盘旋的文字+图标-->
+        <If_ShowHover_Icon>False</If_ShowHover_Icon>
+        <!--起飞降落的图标切换·文字+图标-->
+        <TakeOffAndLanding_Icon_On_Label>Take off</TakeOffAndLanding_Icon_On_Label>
+        <TakeOffAndLanding_Icon_Off_Label>Landing</TakeOffAndLanding_Icon_Off_Label>
+        <TakeOffAndLanding_Icon_Description>Switching between takeoff and landing, the "Eclipse" FH-203 belongs to a fixed wing aerocraft and requires an unobstructed distance of more than 20 grids to launch and land. It can only attack during flight. After takeoff, move it with the right mouse button, right-click on Non-Player faction object to forcibly attack the target, right-click on our faction object to switch to follow mode.</TakeOffAndLanding_Icon_Description>
+        <TakeOffAndLanding_Icon_On_IconPath>AerocraftFramework/Icon/Up</TakeOffAndLanding_Icon_On_IconPath>
+        <TakeOffAndLanding_Icon_Off_IconPath>AerocraftFramework/Icon/Down</TakeOffAndLanding_Icon_Off_IconPath>
+        <!--盘旋的角速度+转向速度-->
+        <AngleChangePerTick_Hover>0.02</AngleChangePerTick_Hover>
+        <AngleChangePerTick_Turning>3</AngleChangePerTick_Turning>
+        <!--每Tick消耗燃料量 1 = 60燃料/秒 0.015 = 0.9燃料/秒-->
+        <FuelConsumePerTick>0.0001</FuelConsumePerTick>
+      </li>
+      <!--摧毁自爆-->
+      <li Class="MYDE_AerocraftFramework.CompProperties_DoExplosion_BySomeWays">
+        <!--被摧毁时是否自爆-->
+        <If_DoExplosion_WhenDestroy>True</If_DoExplosion_WhenDestroy>
+        <!--生命值归0的时候是否沿路径坠毁后自爆+坠毁距离-->
+        <If_Drop_WhenHitpointZero>True</If_Drop_WhenHitpointZero>
+        <Drop_Range>30</Drop_Range>
+        <!--这个是伤害，写多少就造成多少伤害，不是CompProperties_Explosive的乘数，其他的所有字段都跟原版的CompProperties_Explosive相同-->
+        <damageAmountBase>150</damageAmountBase>
+        <explosiveRadius>16.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+      </li>
+      <!--载人-->
+      <li Class="MYDE_AerocraftFramework.CompProperties_CarryPawn">
+        <!--最大载人量-->
+        <CarryPawnNumMax>2</CarryPawnNumMax>
+        <If_ChangeWeaponByPawnWeaponWhenCarry>False</If_ChangeWeaponByPawnWeaponWhenCarry>
+        <If_NeedPawnToControl>true</If_NeedPawnToControl>      
+        <NeedPawnToControl_Number>1</NeedPawnToControl_Number>
+        <If_ShowFastLordGizmos>True</If_ShowFastLordGizmos>
+        <Gizmos_CarryPawn_Label>Fast loading</Gizmos_CarryPawn_Label>
+        <Gizmos_CarryPawn_Description>Fast loading colonizers within the surrounding 5x5 range</Gizmos_CarryPawn_Description>
+        <Gizmos_CarryPawn_IconPath>Things/Aerocraft/aerospacefighter/J50_UI</Gizmos_CarryPawn_IconPath>
+        <CarryPawn_MaxRange>5</CarryPawn_MaxRange>
+      </li>
+      <!--跨地图-->
+      <li Class="CompProperties_Transporter">
+        <restEffectiveness>1.4</restEffectiveness>
+        <max1PerGroup>true</max1PerGroup>
+        <massCapacity>600</massCapacity>
+      </li>
+      <li Class="MYDE_AerocraftFramework.CompProperties_CanCrossMap">
+        <LeavingThingDef>CMC_MYDE_AF_Skyfalller_J50_CrossMapThing</LeavingThingDef>
+        <WorldObjectDef>CMC_MYDE_AF_WorldObject_J50_CrossMapThing</WorldObjectDef>
+        <TravelSpeed>0.001</TravelSpeed>
+        <!--燃料消耗乘数，10是每格10消耗，算上来回需要20燃料每格，原版空投舱近似于每格2燃料消耗，来回4燃料-->
+        <FuelConsumeBase>1</FuelConsumeBase>
+        <CrossMap_Label>Cross Map</CrossMap_Label>
+        <CrossMap_Description>Cross map, no open space can be selected as the target location. To avoid situations where it is impossible to return, please ensure that there is sufficient fuel for round-trip travel</CrossMap_Description>
+        <CrossMap_IconPath>AerocraftFramework/Icon/CrossMap</CrossMap_IconPath>
+        <DefaultThing_ToRefuel>Uranium</DefaultThing_ToRefuel>
+      </li>
+      <!--特效生成-->
+	  <li Class="MYDE_AerocraftFramework.CompProperties_SpawnFleck">
+        <!--生成的特效-->
+        <FleckDef>CMC_MYDE_AF_Fleck_Smoke</FleckDef>
+        <!--这个是播放特效的间隔-->
+        <Fleck_MakeFleckTickMax>2</Fleck_MakeFleckTickMax>
+        <!--这个是每隔多少Tick加一个播放次数-->
+        <Fleck_MakeFleck_AddNumTickMax>3</Fleck_MakeFleck_AddNumTickMax>
+        <!--这个是播放多少次特效-->
+        <Fleck_MakeFleckNum_Origin>4</Fleck_MakeFleckNum_Origin>
+        <Fleck_MakeFleckNum_Max>20</Fleck_MakeFleckNum_Max>
+        <!--这个是位置调整-->
+        <Fleck_Range_ToSetPosition>0</Fleck_Range_ToSetPosition>
+        <Fleck_Angle_ToSetPosition>0</Fleck_Angle_ToSetPosition>
+        <!--这个是特效贴图旋转角度-->
+        <Fleck_Rotation>-180~180</Fleck_Rotation>
+        <!--这个是特效飞行方向-->
+        <Fleck_Angle>-180~180</Fleck_Angle>
+        <!--这个是特效大小-->
+        <Fleck_Scale>4~6</Fleck_Scale>
+        <!--这个是特效飞行速度-->
+        <Fleck_Speed>70~75</Fleck_Speed>
+      </li>
+	  <!--手动发射东西-->
+      <!--li Class="MYDE_AerocraftFramework.CompProperties_ShootSomethingManual">
+        <ShootSomethingDef>Missile_AKDX</ShootSomethingDef>
+        <ShootSomething_Label>Launch AKD-X</ShootSomething_Label>
+        <ShootSomething_Description>Launch a AKD-X missile</ShootSomething_Description>
+        <ShootSomething_True_IconPath>Things/Projectile/AKD_UI</ShootSomething_True_IconPath>
+        <ShootSomething_False_IconPath>Things/Projectile/AKD_UI_loading</ShootSomething_False_IconPath>
+        <ShootSomething_Range>500</ShootSomething_Range>
+        <ShootSomething_ReloadTickMax>3000</ShootSomething_ReloadTickMax>
+      </li-->
+    </comps>
+    <uiOrder>400</uiOrder>
+  </ThingDef>
+  <!--跨地图-->
+  <ThingDef ParentName="SkyfallerBase">
+    <defName>CMC_MYDE_AF_Skyfalller_J50_CrossMapThing</defName>
+    <label>JX-02 (Leaving)</label>
+    <thingClass>MYDE_AerocraftFramework.Skyfaller_Aerocraft_Leaving</thingClass>
+    <altitudeLayer>Skyfaller</altitudeLayer>
+    <graphicData>
+      <texPath>Things/Aerocraft/aerospacefighter/J50_Base</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutFlying</shaderType>
+      <drawSize>11</drawSize>
+    </graphicData>
+    <skyfaller>
+      <movementType>Decelerate</movementType>
+      <reversed>true</reversed>
+      <shadow>Things/Skyfaller/SkyfallerShadowDropPod</shadow>
+      <shadowSize>(6, 6)</shadowSize>
+      <anticipationSound>DropPod_Leaving</anticipationSound>
+      <anticipationSoundTicks>-10</anticipationSoundTicks>
+      <ticksToImpactRange>
+        <min>-40</min>
+        <max>-15</max>
+      </ticksToImpactRange>
+    </skyfaller>
+  </ThingDef>
+  <WorldObjectDef>
+    <defName>CMC_MYDE_AF_WorldObject_J50_CrossMapThing</defName>
+    <label>J-50</label>
+    <description>J-50</description>
+    <worldObjectClass>MYDE_AerocraftFramework.WorldObject_CrossMapThing_Flying</worldObjectClass>
+    <texture>Things/Aerocraft/aerospacefighter/J50_UI</texture>
+    <expandingIconTexture>Things/Aerocraft/aerospacefighter/J50_UI</expandingIconTexture>
+    <useDynamicDrawer>true</useDynamicDrawer>
+    <expandingIcon>true</expandingIcon>
+    <expandingIconPriority>60</expandingIconPriority>
+    <rotateGraphicWhenTraveling>true</rotateGraphicWhenTraveling>
+    <expandMore>true</expandMore>
+    <allowCaravanIncidentsWhichGenerateMap>true</allowCaravanIncidentsWhichGenerateMap>
+  </WorldObjectDef>
+  
+  <ThingDef ParentName="MYDE_AerocraftFramework_WeaponBase_XmlParent">
+    <defName>CMC_J50_particleLance</defName>
+	<tradeability>None</tradeability>
+    <destroyOnDrop>true</destroyOnDrop>
+    <label>J50 particle lance</label>
+    <description>A powerful cannon which fires large focused beams of highly energized particles and cause massive damage.</description>
+    <graphicData>
+      <texPath>Things/Weapons/AF_DEW_JX02</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.1</drawSize>
+    </graphicData>
+    <uiIconScale>1</uiIconScale>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <statBases>
+      <Mass>151.5</Mass>
+      <RangedWeapon_Cooldown>2.3</RangedWeapon_Cooldown>
+    </statBases>
+	<costList>
+      <Steel>20</Steel>
+    </costList>
+    <verbs>
+      <li>
+        <verbClass>TOT_DLL_test.Verb_Laser_Sustain</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <warmupTime>0.3</warmupTime>
+        <range>500</range>
+        <!--这个是攻击次数-->
+        <burstShotCount>60</burstShotCount>
+        <!--这个是攻击间隔-->
+        <ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+        <soundCastTail>GunTail_Medium</soundCastTail>
+        <muzzleFlashScale>0</muzzleFlashScale>
+      </li>
+    </verbs>
+	<comps>
+      <li Class="TOT_DLL_test.CompProperties_LaserData_Sustain">
+        <!--激光光束样式-->
+        <LaserLine_MoteDef>CMC_Laser_Stay_MoteRed</LaserLine_MoteDef>
+        <!--光束末端的效果+基础大小-->
+        <LaserFleck_End>CMC_Laser_Stay_LaserEndLarge</LaserFleck_End>
+        <!--光束基础大小-->
+        <LaserFleck_End_Scale_Base>6.0</LaserFleck_End_Scale_Base>
+        <!--光束末端粒子的效果+基础大小+大小偏移量+数量+产生几率-->
+        <LaserFleck_Spark>CMC_Stay_Laser_Spark</LaserFleck_Spark>
+        <!--光束末端粒子的基础大小-->
+        <LaserFleck_Spark_Scale_Base>0.6</LaserFleck_Spark_Scale_Base>
+        <!--光束末端粒子大小偏移量-->
+        <LaserFleck_Spark_Scale_Deviation>0.3</LaserFleck_Spark_Scale_Deviation>
+        <!--光束末端粒子数量-->
+        <LaserFleck_Spark_Num>3</LaserFleck_Spark_Num>
+        <!--光束末端粒子产生几率-->
+        <LaserFleck_Spark_Spawn_Chance>1</LaserFleck_Spark_Spawn_Chance>
+        <!--这是开火时的音效-->
+        <SoundDef>TT</SoundDef>
+        <!--这是光束颜色调整（直接输入数值0-255）+不透明度（0-1）（如果是已经上好色的激光贴图的话，全部颜色写成255应该就行）-->
+        <Color_Red>255</Color_Red>
+        <Color_Green>255</Color_Green>
+        <Color_Blue>255</Color_Blue>
+        <Color_Alpha>1</Color_Alpha>
+        <!--这个是光束的起点偏移，用于适配不同枪械长度的出口位置-->
+        <StartPositionOffset_Range>0.8</StartPositionOffset_Range>
+        <!--这个是造成伤害的类型-->
+        <DamageDef>InfernoBeamPlus</DamageDef>
+        <!--这个是造成伤害的数值-->
+        <DamageNum>40</DamageNum>
+        <!--这个是护甲穿透-->
+        <DamageArmorPenetration>2</DamageArmorPenetration>
+        <!--是否同时造成第二种伤害-->
+        <IfSecondDamage>true</IfSecondDamage>
+        <!--伤害类型-->
+        <DamageDef_B>PlasmaBomb</DamageDef_B>
+        <!--伤害量-->
+        <DamageNum_B>2</DamageNum_B>
+        <!--这个是护甲穿透-->
+        <DamageArmorPenetration_B>0.3</DamageArmorPenetration_B>
+		<!--是否散射-->
+        <IfCanScatter>false</IfCanScatter>
+      </li>
+	</comps>  
+  </ThingDef>
+  
+  <!--main weapon-->
+  <ThingDef ParentName="MYDE_AerocraftFramework_WeaponBase_XmlParent">
+		<defName>CMC_J50_AAM</defName>
+		<tradeability>None</tradeability>
+    <destroyOnDrop>true</destroyOnDrop>
+		<label>PL-27X AAM</label>
+		<description>PL-27X multi-task swarm missile equipped on J50 and WJ50, very effective against flying objects.</description>
+		<graphicData>
+		  <texPath>Things/Projectile/CMC_AAM_UI</texPath>
+		  <graphicClass>Graphic_Single</graphicClass>
+		  <drawSize>(1.3,1.3)</drawSize>
+		</graphicData>
+		<costList>
+		  <Steel>150</Steel>
+		</costList>
+		<statBases>
+      <AccuracyTouch>0.98</AccuracyTouch>
+      <AccuracyShort>0.92</AccuracyShort>
+      <AccuracyMedium>0.96</AccuracyMedium>
+      <AccuracyLong>0.95</AccuracyLong>
+      <RangedWeapon_Cooldown>5</RangedWeapon_Cooldown>
+      <Mass>3150</Mass>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+		<hasStandardCommand>true</hasStandardCommand>
+		<warmupTime>0.5</warmupTime>
+        <defaultProjectile>CMC_Missile_AAM</defaultProjectile>
+		<forcedMissRadius>1.9</forcedMissRadius>
+        <range>169.9</range>
+        <burstShotCount>1</burstShotCount>
+		<minRange>9.9</minRange>
+        <targetParams>
+          <canTargetPawns>False</canTargetPawns>
+          <canTargetLocations>False</canTargetLocations>
+          <canTargetBuildings>True</canTargetBuildings>
+        </targetParams>
+        <soundCast>RocketswarmLauncher_Fire</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>0</muzzleFlashScale>
+		<soundAiming>HellsphereCannon_Aiming</soundAiming>
+      </li>
+    </verbs>
+  </ThingDef>
+  
+  <ThingDef ParentName="MYDE_AerocraftFramework_WeaponBase_XmlParent">
+		<defName>CMC_J50_AAM_EMP</defName>
+		<tradeability>None</tradeability>
+    <destroyOnDrop>true</destroyOnDrop>
+		<label>PL-27EX AAM</label>
+		<description>PL-27X multi-task swarm missile equipped with EMP pulse warhead.</description>
+		<graphicData>
+		  <texPath>Things/Projectile/CMC_AAM_EMP_UI</texPath>
+		  <graphicClass>Graphic_Single</graphicClass>
+		  <drawSize>(1.3,1.3)</drawSize>
+		</graphicData>
+		<costList>
+		  <Steel>150</Steel>
+		</costList>
+		<statBases>
+      <AccuracyTouch>0.98</AccuracyTouch>
+      <AccuracyShort>0.92</AccuracyShort>
+      <AccuracyMedium>0.96</AccuracyMedium>
+      <AccuracyLong>0.95</AccuracyLong>
+      <RangedWeapon_Cooldown>5</RangedWeapon_Cooldown>
+      <Mass>315</Mass>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+		<hasStandardCommand>true</hasStandardCommand>
+		<warmupTime>1.5</warmupTime>
+        <defaultProjectile>CMC_Missile_AAM_EMP</defaultProjectile>
+		<forcedMissRadius>1.9</forcedMissRadius>
+        <range>169.9</range>
+        <burstShotCount>1</burstShotCount>
+		<minRange>9.9</minRange>
+        <targetParams>
+          <canTargetPawns>False</canTargetPawns>
+          <canTargetLocations>False</canTargetLocations>
+          <canTargetBuildings>True</canTargetBuildings>
+        </targetParams>
+        <soundCast>RocketswarmLauncher_Fire</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>0</muzzleFlashScale>
+		<soundAiming>HellsphereCannon_Aiming</soundAiming>
+      </li>
+    </verbs>
+  </ThingDef>
+  
+  <!--secondary-->
+  <ThingDef ParentName="MYDE_AerocraftFramework_XmlParent">
+    <defName>MYDE_AF_CMC_AeroFighter_WeaponGroup_missileVLS</defName>
+    <label>PL-27X AAM(secondary weapon)</label>
+    <description>PL-27X AAM(secondary weapon)</description>
+    <thingClass>MYDE_AerocraftFramework.Building_Aerocraft_AsWeapon</thingClass>
+    <statBases>
+      <MaxHitPoints>2500</MaxHitPoints>
+      <WorkToBuild>1000</WorkToBuild>
+      <Mass>5</Mass>
+      <Beauty>5</Beauty>
+      <!--这个是精准度-->
+      <ShootingAccuracyTurret>0.99</ShootingAccuracyTurret>
+    </statBases>
+    <size>(1,1)</size>
+    <comps>
+      <!--本体的渲染+阴影-->
+      <li Class="MYDE_AerocraftFramework.CompProperties_Base_Thing">
+        <!--是否渲染-->
+        <If_Draw_Base>False</If_Draw_Base>
+        <!--是否制作阴影+阴影最大最下长度+阴影角度-->
+        <If_NeedDrawAllShadow>False</If_NeedDrawAllShadow>
+      </li>
+      <!--主武器渲染+阴影-->
+      <li Class="MYDE_AerocraftFramework.CompProperties_Base_Weapon">
+        <!--枪械-->
+        <WeaponDef>CMC_J50_AAM</WeaponDef>
+        <!--是否渲染-->
+        <If_Draw_Gun>False</If_Draw_Gun>
+      </li>
+	</comps>
+    <building>
+      <deconstructible>false</deconstructible>
+    </building>
+  </ThingDef>
+  
+  <ThingDef ParentName="MYDE_AerocraftFramework_XmlParent">
+    <defName>MYDE_AF_CMC_AeroFighter_WeaponGroup_missileVLS_EMP</defName>
+    <label>PL-X AAM(EMP)</label>
+    <description>PL-X AAM(EMP)</description>
+    <thingClass>MYDE_AerocraftFramework.Building_Aerocraft_AsWeapon</thingClass>
+    <statBases>
+      <MaxHitPoints>2500</MaxHitPoints>
+      <WorkToBuild>1000</WorkToBuild>
+      <Mass>5</Mass>
+      <Beauty>5</Beauty>
+      <!--这个是精准度-->
+      <ShootingAccuracyTurret>0.99</ShootingAccuracyTurret>
+    </statBases>
+    <size>(1,1)</size>
+    <comps>
+      <!--本体的渲染+阴影-->
+      <li Class="MYDE_AerocraftFramework.CompProperties_Base_Thing">
+        <!--是否渲染-->
+        <If_Draw_Base>False</If_Draw_Base>
+        <!--是否制作阴影+阴影最大最下长度+阴影角度-->
+        <If_NeedDrawAllShadow>False</If_NeedDrawAllShadow>
+      </li>
+      <!--主武器渲染+阴影-->
+      <li Class="MYDE_AerocraftFramework.CompProperties_Base_Weapon">
+        <!--枪械-->
+        <WeaponDef>CMC_J50_AAM_EMP</WeaponDef>
+        <!--是否渲染-->
+        <If_Draw_Gun>False</If_Draw_Gun>
+      </li>
+	</comps>
+    <building>
+      <deconstructible>false</deconstructible>
+    </building>
+  </ThingDef>
+  
+  <ThingDef ParentName="MoteBase">
+    <defName>MYDE_FlashingOfSwordEffect_Aero</defName>
+    <graphicData>
+      <texPath>Things/Projectile/CMC_lance</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <rotatable>false</rotatable>
+    <mote>
+      <fadeInTime>0.05</fadeInTime>
+      <!--淡入时间-->
+      <solidTime>0</solidTime>
+      <!--曝光时间-->
+      <fadeOutTime>0.62</fadeOutTime>
+      <!--淡出时间-->
+    </mote>
+	<drawOffscreen>true</drawOffscreen>
+  </ThingDef>
+  
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>CMC_MYDE_AF_Fleck_Smoke</defName>
+    <graphicData>
+      <texPath>Things/Mote/Smoke</texPath>
+      <renderInstanced>true</renderInstanced>
+      <!--<shaderType>Transparent</shaderType>-->
+    </graphicData>
+    <altitudeLayer>FogOfWar</altitudeLayer>
+    <fadeInTime>0.1</fadeInTime>
+    <solidTime>0</solidTime>
+    <fadeOutTime>0</fadeOutTime>
+    <growthRate>0.025</growthRate>
+  </FleckDef>
+</Defs>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+  <!-- EN: Promotion Available for {0}: {1} -->
+  <Milira.ChurchTitleLetter>{0}晋升可用：{1}</Milira.ChurchTitleLetter>
+  <!-- EN: {0} has accumulated enough reputation with {1} to be promoted to {2}. Assign {0} to use the comms console to contact {1}, or travel to a {1}'s settlement to register title. -->
+  <Milira.ChurchTitleLetterDesc>{0}在{1}积攒的声望已经可以晋升{2}。指派{0}使用通讯台练联系{1}，或是前往{1}定居点注册职位。</Milira.ChurchTitleLetterDesc>
+
+</LanguageData>

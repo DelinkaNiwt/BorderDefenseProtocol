@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Make solar fuel x10 -->
+  <Milira_MakeSunLightFuel.label>制作日光燃料x10</Milira_MakeSunLightFuel.label>
+  <!-- EN: Produce solar fuel out of sunlight fruit. -->
+  <Milira_MakeSunLightFuel.description>使用日光果实和化和燃料调和制作日光燃料。</Milira_MakeSunLightFuel.description>
+  <!-- EN: blending solar fuel. -->
+  <Milira_MakeSunLightFuel.jobString>调和日光燃料。</Milira_MakeSunLightFuel.jobString>
+  
+  <!-- EN: Print Feather Thread x30 -->
+  <Milira_PrintFeatherThread.label>打印羽仿布x30</Milira_PrintFeatherThread.label>
+  <!-- EN: Print feather threads on the Milira Universal Workbench. -->
+  <Milira_PrintFeatherThread.description>在米莉拉万用工作台打印羽仿布。</Milira_PrintFeatherThread.description>
+  <!-- EN: printing feather threads. -->
+  <Milira_PrintFeatherThread.jobString>打印羽仿布中。</Milira_PrintFeatherThread.jobString>
+  
+  <!-- EN: Print Lustrous Steel x100 -->
+  <Milira_PrintSplendidSteel.label>打印辉钢x100</Milira_PrintSplendidSteel.label>
+  <!-- EN: Print lustrous steel on the Milira Universal Workbench. -->
+  <Milira_PrintSplendidSteel.description>在米莉拉万用工作台打印辉钢。</Milira_PrintSplendidSteel.description>
+  <!-- EN: printing lustrous steel. -->
+  <Milira_PrintSplendidSteel.jobString>打印辉钢中。</Milira_PrintSplendidSteel.jobString>
+  
+  <!-- EN: Smelt Solar-Forged Steel x100 -->
+  <Milira_SmeltSunPlateSteel.label>熔炼日盘钢x100</Milira_SmeltSunPlateSteel.label>
+  <!-- EN: Smelt solar-forged steel on the solar furnace. -->
+  <Milira_SmeltSunPlateSteel.description>在太阳熔炉熔炼日盘钢。</Milira_SmeltSunPlateSteel.description>
+  <!-- EN: smelting solar-forged steel. -->
+  <Milira_SmeltSunPlateSteel.jobString>熔炼日盘钢中。</Milira_SmeltSunPlateSteel.jobString>
+  
+</LanguageData>

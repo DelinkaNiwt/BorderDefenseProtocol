@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>CeleTech Arsenal MKIII</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="CMC_ZGRangedShieldBelt"]/statBases</xpath>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="CMC_ZGRangedShieldBelt"]</xpath>
+            <value>
+              <statBases />
+            </value>
+          </nomatch>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ThingDef[defName="CMC_ZGRangedShieldBelt"]/statBases</xpath>
+          <value>
+            <statBases>
+              <MaxHitPoints>100</MaxHitPoints>
+              <Flammability>0</Flammability>
+              <DeteriorationRate>2</DeteriorationRate>
+              <Beauty>-3</Beauty>
+              <Mass>4.3</Mass>
+              <WorkToMake>74000</WorkToMake>
+              <EnergyShieldRechargeRate>3.2</EnergyShieldRechargeRate>
+              <EnergyShieldEnergyMax>4.5</EnergyShieldEnergyMax>
+              <EquipDelay>2</EquipDelay>
+            </statBases>
+          </value>
+        </li>
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="CMC_ZGRangedShieldBelt"]/equippedStatOffsets</xpath>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="CMC_ZGRangedShieldBelt"]</xpath>
+            <value>
+              <equippedStatOffsets />
+            </value>
+          </nomatch>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ThingDef[defName="CMC_ZGRangedShieldBelt"]/equippedStatOffsets</xpath>
+          <value>
+            <equippedStatOffsets>
+              <Suppressability>3</Suppressability>
+            </equippedStatOffsets>
+          </value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+</Patch>

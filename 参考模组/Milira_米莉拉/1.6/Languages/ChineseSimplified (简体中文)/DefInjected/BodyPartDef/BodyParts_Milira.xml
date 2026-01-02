@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: halo -->
+  <Milira_Halo.label>光环</Milira_Halo.label>
+  
+  <!-- EN: wing -->
+  <Milira_Wing.label>翼</Milira_Wing.label>
+  
+  <!-- EN: wing carpometacarpus -->
+  <Milira_WingCarpometacarpus.label>翼腕掌骨</Milira_WingCarpometacarpus.label>
+  
+  <!-- EN: wing carpus -->
+  <Milira_WingCarpus.label>翼腕骨</Milira_WingCarpus.label>
+  
+  <!-- EN: wing humerus -->
+  <Milira_WingHumerus.label>翼肱骨</Milira_WingHumerus.label>
+  
+  <!-- EN: wing phalanx -->
+  <Milira_WingPhalanx.label>翼指骨</Milira_WingPhalanx.label>
+  
+  <!-- EN: wing radius -->
+  <Milira_WingRadius.label>翼桡骨</Milira_WingRadius.label>
+  
+  <!-- EN: wing ulna -->
+  <Milira_WingUlna.label>翼尺骨</Milira_WingUlna.label>
+  
+</LanguageData>

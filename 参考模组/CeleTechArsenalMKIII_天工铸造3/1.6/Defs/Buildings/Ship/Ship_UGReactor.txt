@@ -1,0 +1,66 @@
+<Defs>
+  <ThingDef ParentName="BuildingBase">
+    <defName>CMCS_UGZPReactor</defName>
+	<thingClass>TOT_DLL_test.Building_UnderGroundZPR</thingClass>
+    <label>ZP-reactor group</label>
+    <description>.</description>
+    <size>(3,3)</size>
+	<uiIconPath>Things/Buildings/CMCS_ReactorHidden_UI</uiIconPath>
+	<tickerType>Normal</tickerType>
+	<altitudeLayer>DoorMoveable</altitudeLayer>
+    <passability>Standable</passability>
+    <drawerType>RealtimeOnly</drawerType>
+    <stealable>false</stealable>
+    <rotatable>false</rotatable>
+	<clearBuildingArea>true</clearBuildingArea>
+	<canOverlapZones>true</canOverlapZones>
+	<fillPercent>0</fillPercent>
+    <statBases>
+      <MaxHitPoints>3000</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <MarketValue>4000</MarketValue>
+      <WorkToBuild>600000</WorkToBuild>
+    </statBases>
+	<killedLeavings>
+      <ChunkSlagSteel>2</ChunkSlagSteel>
+    </killedLeavings>
+	<building>
+	  <ai_neverTrashThis>true</ai_neverTrashThis>
+      <destroySound>BuildingDestroyed_Metal_Medium</destroySound>
+    </building>
+    <costList>
+      <Steel>3000</Steel>
+	  <Plasteel>1500</Plasteel>
+      <ComponentIndustrial>60</ComponentIndustrial>
+	  <ComponentSpacer>30</ComponentSpacer>
+	  <Silver>300</Silver>
+	  <Gold>50</Gold>
+    </costList>
+    <graphicData>
+      <texPath>Things/Buildings/CMCS_ReactorHidden</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(3.8,3.8)</drawSize>
+    </graphicData>
+	<placeWorkers>
+      <li>PlaceWorker_OnSubstructure</li>
+    </placeWorkers>
+    <comps>
+	<li Class="CompProperties_Power">
+        <compClass>CompPowerPlant</compClass>
+        <basePowerConsumption>-80000</basePowerConsumption>
+        <transmitsPower>true</transmitsPower>
+        <soundAmbientProducingPower>ChemfuelFiredGenerator_Ambience</soundAmbientProducingPower>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+    </comps>
+	<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <designationCategory>CMC_DefensenProduction</designationCategory>
+    <uiOrder>2200</uiOrder>
+    <constructEffect>ConstructMetal</constructEffect>
+    <researchPrerequisites>
+      <li>CMCPowerII</li>
+    </researchPrerequisites>
+    <constructionSkillPrerequisite>14</constructionSkillPrerequisite>
+  </ThingDef>
+  
+</Defs>

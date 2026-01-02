@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Milian Cluster -->
+  <Milian_ClusterAwake.label>米莉安集群</Milian_ClusterAwake.label>
+  <!-- EN: A Milian cluster in this area. -->
+  <Milian_ClusterAwake.description>一处米莉安集群。</Milian_ClusterAwake.description>
+  <!-- EN: This region hosts a comprehensive Milian combat cluster that includes combat units and various support facilities, bunkers. -->
+  <Milian_ClusterAwake.arrivedLetter>这个地区有一个包含了战斗单位和各种支援设施、掩体的米莉安综合战斗集群。</Milian_ClusterAwake.arrivedLetter>
+  
+  <!-- EN: Milian Cluster -->
+  <Milian_ClusterAwakeWithBombardment.label>米莉安集群</Milian_ClusterAwakeWithBombardment.label>
+  <!-- EN: A Milian cluster in this area. -->
+  <Milian_ClusterAwakeWithBombardment.description>一处米莉安集群。</Milian_ClusterAwakeWithBombardment.description>
+  <!-- EN: This region hosts a comprehensive Milian combat cluster that includes combat units and various support facilities, bunkers. -->
+  <Milian_ClusterAwakeWithBombardment.arrivedLetter>这个地区有一个包含了战斗单位和各种支援设施、掩体的米莉安综合战斗集群。</Milian_ClusterAwakeWithBombardment.arrivedLetter>
+  
+  <!-- EN: Milian Cluster -->
+  <Milian_ClusterDormant.label>米莉安集群</Milian_ClusterDormant.label>
+  <!-- EN: A Milian cluster in this area. -->
+  <Milian_ClusterDormant.description>一处米莉安集群。</Milian_ClusterDormant.description>
+  <!-- EN: This region hosts a comprehensive Milian combat cluster that includes combat units and various support facilities, bunkers. -->
+  <Milian_ClusterDormant.arrivedLetter>这个地区有一个包含了战斗单位和各种支援设施、掩体的米莉安综合战斗集群。</Milian_ClusterDormant.arrivedLetter>
+  
+</LanguageData>

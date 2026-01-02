@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: favorites -->
+  <Favorites.label>TODO</Favorites.label>
+  
+  <!-- EN: Rename -->
+  <Rename.headerTip>TODO</Rename.headerTip>
+  
+  <!-- EN: fitting equipped on this weapon. -->
+  <WeaponFitting.headerTip>TODO</WeaponFitting.headerTip>
+  
+  <!-- EN: owner -->
+  <WeaponOwner.label>TODO</WeaponOwner.label>
+  
+</LanguageData>

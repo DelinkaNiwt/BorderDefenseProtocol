@@ -1,0 +1,296 @@
+<Defs>
+<ThingDef ParentName="ArmorHelmetMakeableBase">
+    <defName>CMC_GunDrone</defName>
+	<tickerType>Normal</tickerType>
+    <label>Jingwei-K floating LMG</label>
+    <description>The Jingwei-K LMG is a self-attack weapon system designed for agile combat and multi-role support.\n\nThis drone can automatically repair its user's equippments</description>
+    <thingCategories Inherit='False'>
+      <li>ArmorHeadgear</li>
+    </thingCategories>
+    <graphicData>
+      <texPath>Things/Apparel/Drone_Aux/CMC_MissileDrone_Display</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>1240</MaxHitPoints>
+      <Mass>0.1</Mass>
+      <MarketValue>1870</MarketValue>
+      <EquipDelay>0</EquipDelay>
+    </statBases>
+	<costList>
+		<Steel>40</Steel>
+		<ComponentSpacer>2</ComponentSpacer>
+		<ComponentIndustrial>1</ComponentIndustrial>
+		<Plasteel>15</Plasteel>
+	</costList>
+    <equippedStatOffsets>
+      <GlobalLearningFactor>0.15</GlobalLearningFactor>
+	  <WorkSpeedGlobal>0.15</WorkSpeedGlobal>
+    </equippedStatOffsets>
+    <generateCommonality>0</generateCommonality>
+    <apparel>
+        <countsAsClothingForNudity>false</countsAsClothingForNudity>
+	    <careIfWornByCorpse>false</careIfWornByCorpse>
+			<careIfDamaged>false</careIfDamaged>
+			<wearPerDay>0</wearPerDay>
+			<bodyPartGroups Inherit="false">
+				<li>Shoulders</li>
+			</bodyPartGroups>
+			<layers Inherit="false">
+				<li>Belt</li>
+			</layers>
+      <defaultOutfitTags>
+        <li>Soldier</li>
+      </defaultOutfitTags>
+	<renderNodeProperties>
+		<li Class="TOT_DLL_test.PawnRenderNodeProperties_UAV">
+			<debugLabel>CombatDrone</debugLabel>
+					<nodeClass>TOT_DLL_test.PawnRenderNode_UAV</nodeClass>
+					<workerClass>TOT_DLL_test.PawnRenderNodeWorker_UAV</workerClass>
+					<isApparel>true</isApparel>
+					<texPath>Things/Apparel/Drone_Aux/CMC_MissileDrone</texPath>
+					<baseLayer>100</baseLayer>
+					<rotDrawMode>Fresh, Rotting</rotDrawMode>
+					<overrideMeshSize>(1.5,1.5)</overrideMeshSize>
+					<parentTagDef>ApparelBody</parentTagDef>
+					<pawnType>Any</pawnType>
+					<shaderTypeDef>MoteGlow</shaderTypeDef>
+					<drawData>
+						<dataSouth>
+							<layer>-5</layer>
+						</dataSouth>
+					</drawData>		
+		</li>		
+	</renderNodeProperties>
+    </apparel>
+	<recipeMaker>
+			<unfinishedThingDef>UnfinishedTechArmor</unfinishedThingDef>
+			<researchPrerequisite>CMC_FloatingGunI</researchPrerequisite>
+			<skillRequirements>
+				<Crafting>9</Crafting>
+			</skillRequirements>
+			<recipeUsers Inherit="False">
+				<li>CMC_FacBench</li>		
+			</recipeUsers>
+	</recipeMaker>
+	<comps>
+		<li Class="TOT_DLL_test.CompProperties_UAV">
+		    <turretDef>CMCUAV_LMG</turretDef>
+			<angleOffset>-90</angleOffset>
+			<Xoffset>0.46</Xoffset>
+			<Yoffset>0.33</Yoffset>
+		</li>
+		<li Class="TOT_DLL_test.CompProperties_AutoRepair">
+			<ticksPerHeal>2400</ticksPerHeal>
+        </li>
+	</comps>
+	<colorGenerator Class="ColorGenerator_Options">
+            <options>
+                <li>
+                    <only>(0.5,0.5,0.5)</only>
+                </li>
+            </options>
+        </colorGenerator>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseWeaponTurret">
+		<defName>CMCUAV_LMG</defName>
+		<label>floating EM LMG</label>
+		<description>.</description>
+		<tradeability>None</tradeability>
+		<destroyOnDrop>true</destroyOnDrop>
+		<graphicData>
+			<texPath>Things/CMC_Void</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<statBases>
+			<Mass>1.2</Mass>
+			<AccuracyTouch>0.60</AccuracyTouch>
+			<AccuracyShort>0.80</AccuracyShort>
+			<AccuracyMedium>0.90</AccuracyMedium>
+			<AccuracyLong>0.85</AccuracyLong>
+		</statBases>
+		<verbs>
+			<li>
+				<verbClass>Verb_Shoot</verbClass>
+				<defaultProjectile>Bullet_WJ_SMG_power</defaultProjectile>
+				<requireLineOfSight>true</requireLineOfSight>
+				<range>29.9</range>
+				<soundCast>CMC_SSMGFire</soundCast>
+				<soundCastTail>GunTail_Heavy</soundCastTail>
+				<muzzleFlashScale>4</muzzleFlashScale>
+				<defaultCooldownTime>1.5</defaultCooldownTime>
+				<burstShotCount>3</burstShotCount>
+				<ticksBetweenBurstShots>6</ticksBetweenBurstShots>
+			</li>
+		</verbs>
+	</ThingDef>
+	
+<ThingDef ParentName="ArmorHelmetMakeableBase">
+    <defName>CMC_MissileDrone</defName>
+	<tickerType>Normal</tickerType>
+    <label>Jingwei-M floating Missile Drone Pod</label>
+    <description>The Jingwei-M Missile Drone Pod is a self-attack weapon system designed for agile combat and multi-role support. Equipped with advanced micro-propulsion technology and omnidirectional sensing systems, it hovers around its controller, providing precise firepower support while also performing equipment maintenance functions to ensure the controllerâ€™s operational efficiency on the battlefield.
+
+The drone pod features an intelligent analysis module, making it ideal for navigating complex terrain and rapidly changing combat scenarios. It can autonomously adjust its flight path, avoid obstacles, and maintain continuous target acquisition and engagement.
+
+Ammunition System:
+The Jingwei-M carries 24 Short-Range Defensive Missiles (SRDM). These missiles are equipped with advanced guidance systems, enabling precise target tracking and efficient strikes, even in complex battlefield environments. However, due to their limited warhead payload, SRDM missiles are best suited for engaging lightly armored or unarmored targets. After all missiles are expended, manual reloading is required to restore its combat capabilities.\n\nThis drone can automatically repair its user's equippments</description>
+    <thingCategories Inherit='False'>
+      <li>ArmorHeadgear</li>
+    </thingCategories>
+    <graphicData>
+      <texPath>Things/Apparel/Drone_Missile/CMC_MissileDrone_Display</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>1240</MaxHitPoints>
+      <Mass>0.1</Mass>
+      <MarketValue>1870</MarketValue>
+      <EquipDelay>0</EquipDelay>
+    </statBases>
+	<verbs>
+      <li>
+        <label>Launch SRDM</label>
+        <verbClass>Verb_LaunchProjectileStatic</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <onlyManualCast>True</onlyManualCast>
+        <range>49.9</range>
+		<minRange>9.9</minRange>
+        <forcedMissRadius>1.9</forcedMissRadius>
+        <warmupTime>3</warmupTime>
+        <noiseRadius>4</noiseRadius>
+        <ai_IsBuildingDestroyer>true</ai_IsBuildingDestroyer>
+        <soundCast>Shot_IncendiaryLauncher</soundCast>
+        <soundCastTail>GunTail_Medium</soundCastTail>
+        <muzzleFlashScale>4</muzzleFlashScale>
+        <drawHighlightWithLineOfSight>true</drawHighlightWithLineOfSight>
+        <targetParams>
+          <canTargetPawns>true</canTargetPawns>
+          <canTargetLocations>true</canTargetLocations>
+          <canTargetBuildings>true</canTargetBuildings>
+        </targetParams>
+        <defaultProjectile>CMC_Missile_AIGM_UAV</defaultProjectile>
+      </li>
+    </verbs>
+	<costList>
+		<Steel>40</Steel>
+		<ComponentSpacer>1</ComponentSpacer>
+		<ComponentIndustrial>1</ComponentIndustrial>
+		<Plasteel>15</Plasteel>
+	</costList>
+    <equippedStatOffsets>
+      <GlobalLearningFactor>0.15</GlobalLearningFactor>
+	  <WorkSpeedGlobal>0.15</WorkSpeedGlobal>
+    </equippedStatOffsets>
+    <generateCommonality>0</generateCommonality>
+    <apparel>
+        <countsAsClothingForNudity>false</countsAsClothingForNudity>
+	    <careIfWornByCorpse>false</careIfWornByCorpse>
+			<careIfDamaged>false</careIfDamaged>
+			<wearPerDay>0</wearPerDay>
+			<bodyPartGroups Inherit="false">
+				<li>Shoulders</li>
+			</bodyPartGroups>
+			<layers Inherit="false">
+				<li>Belt</li>
+			</layers>
+      <defaultOutfitTags>
+        <li>Soldier</li>
+      </defaultOutfitTags>
+	  <renderNodeProperties>
+				<li Class="TOT_DLL_test.PawnRenderNodeProperties_UAV">
+					<debugLabel>CombatDrone</debugLabel>
+					<nodeClass>TOT_DLL_test.PawnRenderNode_UAV</nodeClass>
+					<workerClass>TOT_DLL_test.PawnRenderNodeWorker_UAV</workerClass>
+					<isApparel>true</isApparel>
+					<texPath>Things/Apparel/Drone_Missile/CMC_MissileDrone</texPath>
+					<baseLayer>100</baseLayer>
+					<rotDrawMode>Fresh, Rotting</rotDrawMode>
+					<overrideMeshSize>(1.5,1.5)</overrideMeshSize>
+					<parentTagDef>ApparelBody</parentTagDef>
+					<pawnType>Any</pawnType>
+					<drawData>
+						<dataSouth>
+							<layer>-5</layer>
+						</dataSouth>
+					</drawData>
+				</li>
+			</renderNodeProperties>
+    </apparel>
+	<recipeMaker>
+			<unfinishedThingDef>UnfinishedTechArmor</unfinishedThingDef>
+			<researchPrerequisite>CMC_FloatingGunII</researchPrerequisite>
+			<skillRequirements>
+				<Crafting>9</Crafting>
+			</skillRequirements>
+			<recipeUsers Inherit="False">
+				<li>CMC_FacBench</li>		
+			</recipeUsers>
+	</recipeMaker>
+	<comps>
+		<li Class="TOT_DLL_test.CompProperties_UAV">
+		    <turretDef>CMCUAV_Gunturret</turretDef>
+			<angleOffset>-90</angleOffset>
+			<Xoffset>0.46</Xoffset>
+			<Yoffset>0.33</Yoffset>
+		</li>
+		<li Class="TOT_DLL_test.CompProperties_AutoRepair">
+			<ticksPerHeal>2400</ticksPerHeal>
+        </li>
+		<li Class="CompProperties_ApparelReloadable">
+			<maxCharges>24</maxCharges>
+			<ammoDef>Chemfuel</ammoDef>
+			<ammoCountPerCharge>20</ammoCountPerCharge>
+			<baseReloadTicks>60</baseReloadTicks>
+			<soundReload>Standard_Reload</soundReload>
+			<hotKey>Misc4</hotKey>
+			<chargeNoun>SRDM</chargeNoun>
+			<displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+        </li>
+	</comps>
+	<colorGenerator Class="ColorGenerator_Options">
+            <options>
+                <li>
+                    <only>(0.5,0.5,0.5)</only>
+                </li>
+            </options>
+        </colorGenerator>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseWeaponTurret">
+		<defName>CMCUAV_Gunturret</defName>
+		<label>floating MP</label>
+		<description>.</description>
+		<tradeability>None</tradeability>
+		<destroyOnDrop>true</destroyOnDrop>
+		<graphicData>
+			<texPath>Things/CMC_Void</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<statBases>
+			<Mass>1.2</Mass>
+			<AccuracyTouch>0.60</AccuracyTouch>
+			<AccuracyShort>0.80</AccuracyShort>
+			<AccuracyMedium>0.90</AccuracyMedium>
+			<AccuracyLong>0.85</AccuracyLong>
+		</statBases>
+		<verbs>
+			<li>
+				<verbClass>Verb_Shoot</verbClass>
+				<defaultProjectile>CMC_Missile_AIGM_UAV</defaultProjectile>
+				<requireLineOfSight>true</requireLineOfSight>
+				<range>49.9</range>
+				<minRange>9.9</minRange>
+				<soundCast>RocketswarmLauncher_Fire</soundCast>
+				<soundCastTail>GunTail_Heavy</soundCastTail>
+				<muzzleFlashScale>4</muzzleFlashScale>
+				<defaultCooldownTime>6.5</defaultCooldownTime>
+				<burstShotCount>2</burstShotCount>
+				<ticksBetweenBurstShots>30</ticksBetweenBurstShots>
+				<forcedMissRadius>1.9</forcedMissRadius>
+				<consumeFuelPerShot>1</consumeFuelPerShot>
+			</li>
+		</verbs>
+	</ThingDef>
+</Defs>

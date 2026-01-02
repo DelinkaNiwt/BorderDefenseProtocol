@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="MoteBase">
+    <defName>Milira_Mote_PlasmaPuff</defName>
+    <graphicData>
+      <texPath>Things/Mote/AirPuff</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <mote>
+      <fadeInTime>0.03</fadeInTime>
+      <solidTime>0.04</solidTime>
+      <fadeOutTime>0.13</fadeOutTime>
+      <collide>true</collide>
+    </mote>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <defName>Milira_Mote_PlasmaPuff_LastLong</defName>
+    <graphicData>
+      <texPath>Things/Mote/AirPuff</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <mote>
+      <fadeInTime>0.03</fadeInTime>
+      <solidTime>0.3</solidTime>
+      <fadeOutTime>0.23</fadeOutTime>
+      <collide>true</collide>
+    </mote>
+  </ThingDef>
+
+
+  <!-- ================================================================================= -->
+  <ThingDef ParentName="MoteBase">
+    <defName>Milira_Mote_LongSparkThrown_Plasma_Fast</defName>
+    <graphicData>
+      <texPath>Milira/Effect/LongSparkThrown_Plasma</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <mote>
+      <fadeInTime>0.03</fadeInTime>
+      <solidTime>0.04</solidTime>
+      <fadeOutTime>0.13</fadeOutTime>
+      <collide>true</collide>
+    </mote>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <defName>Milira_Mote_LongSparkThrown_Plasma</defName>
+    <graphicData>
+      <texPath>Milira/Effect/LongSparkThrown_Plasma</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <mote>
+      <fadeInTime>0.02</fadeInTime>
+      <solidTime>0.05</solidTime>
+      <fadeOutTime>0.2</fadeOutTime>
+      <collide>true</collide>
+      <rotateTowardsMoveDirection>true</rotateTowardsMoveDirection>
+    </mote>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <defName>Milira_Mote_LongSparkThrown_Plasma_Diminish</defName>
+    <graphicData>
+      <texPath>Milira/Effect/LongSparkThrown_Plasma</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <mote>
+      <fadeInTime>0.02</fadeInTime>
+      <solidTime>0.05</solidTime>
+      <fadeOutTime>0.2</fadeOutTime>
+      <growthRate>-2.4</growthRate>
+      <rotateTowardsMoveDirection>true</rotateTowardsMoveDirection>
+    </mote>
+  </ThingDef>
+  
+  <ThingDef ParentName="MoteBase">
+    <defName>Milira_Mote_LongSparkThrown_Plasma_Slow</defName>
+    <graphicData>
+      <texPath>Milira/Effect/LongSparkThrown_Plasma</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <mote>
+      <fadeInTime>0.5</fadeInTime>
+      <solidTime>0.8</solidTime>
+      <fadeOutTime>0.5</fadeOutTime>
+      <rotateTowardsMoveDirection>true</rotateTowardsMoveDirection>
+    </mote>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <defName>Milira_Mote_LongSparkThrown_Plasma_SlowDiminish</defName>
+    <graphicData>
+      <texPath>Milira/Effect/LongSparkThrown_Plasma</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <mote>
+      <fadeInTime>0.5</fadeInTime>
+      <solidTime>0.8</solidTime>
+      <fadeOutTime>0.5</fadeOutTime>
+      <growthRate>-0.5</growthRate>
+      <rotateTowardsMoveDirection>true</rotateTowardsMoveDirection>
+    </mote>
+  </ThingDef>
+
+
+
+  <!-- ================================================================================= -->
+  <ThingDef ParentName="MoteBase">
+    <defName>Milira_Mote_LongSparkThrown_Particle_Fast</defName>
+    <graphicData>
+      <texPath>Milira/Effect/LongSparkThrown_Particle</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <mote>
+      <fadeInTime>0.03</fadeInTime>
+      <solidTime>0.04</solidTime>
+      <fadeOutTime>0.13</fadeOutTime>
+      <collide>true</collide>
+    </mote>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <defName>Milira_Mote_LongSparkThrown_Particle</defName>
+    <graphicData>
+      <texPath>Milira/Effect/LongSparkThrown_Particle</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <mote>
+      <fadeInTime>0.02</fadeInTime>
+      <solidTime>0.05</solidTime>
+      <fadeOutTime>0.2</fadeOutTime>
+      <collide>true</collide>
+      <rotateTowardsMoveDirection>true</rotateTowardsMoveDirection>
+    </mote>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <defName>Milira_Mote_LongSparkThrown_Particle_Diminish</defName>
+    <graphicData>
+      <texPath>Milira/Effect/LongSparkThrown_Particle</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <mote>
+      <fadeInTime>0.02</fadeInTime>
+      <solidTime>0.05</solidTime>
+      <fadeOutTime>0.2</fadeOutTime>
+      <growthRate>-2.4</growthRate>
+      <rotateTowardsMoveDirection>true</rotateTowardsMoveDirection>
+    </mote>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <defName>Milira_Mote_LongSparkThrown_Particle_Slow</defName>
+    <graphicData>
+      <texPath>Milira/Effect/LongSparkThrown_Particle</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <mote>
+      <fadeInTime>0.5</fadeInTime>
+      <solidTime>0.8</solidTime>
+      <fadeOutTime>0.5</fadeOutTime>
+      <rotateTowardsMoveDirection>true</rotateTowardsMoveDirection>
+    </mote>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <defName>Milira_Mote_LongSparkThrown_Particle_SlowDiminish</defName>
+    <graphicData>
+      <texPath>Milira/Effect/LongSparkThrown_Particle</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <mote>
+      <fadeInTime>0.5</fadeInTime>
+      <solidTime>0.8</solidTime>
+      <fadeOutTime>0.5</fadeOutTime>
+      <growthRate>-0.5</growthRate>
+      <rotateTowardsMoveDirection>true</rotateTowardsMoveDirection>
+    </mote>
+  </ThingDef>
+
+  <!-- ======================================================================================== -->
+  <ThingDef ParentName="MoteBase">
+    <defName>Milira_Mote_LongSparkThrown_Fast</defName>
+    <graphicData>
+      <texPath>Milira/Effect/LongSparkThrown</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <mote>
+      <fadeInTime>0.03</fadeInTime>
+      <solidTime>0.04</solidTime>
+      <fadeOutTime>0.13</fadeOutTime>
+      <collide>true</collide>
+    </mote>
+  </ThingDef>
+  
+  <ThingDef ParentName="MoteBase">
+    <defName>Milira_Mote_LongSparkThrown</defName>
+    <graphicData>
+      <texPath>Milira/Effect/LongSparkThrown</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <mote>
+      <fadeInTime>0.02</fadeInTime>
+      <solidTime>0.05</solidTime>
+      <fadeOutTime>0.2</fadeOutTime>
+      <collide>true</collide>
+      <rotateTowardsMoveDirection>true</rotateTowardsMoveDirection>
+    </mote>
+  </ThingDef>
+
+</Defs>

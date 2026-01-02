@@ -1,0 +1,15 @@
+<Defs>
+  <ThoughtDef>
+    <defName>WIFISoothe</defName>
+    <workerClass>MYDE_CMC_Dll.ThoughtWorker_CMC_DECO_WIFI</workerClass>
+    <!--effectMultiplyingStat>PsychicSensitivity</effectMultiplyingStat-->
+    <developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
+    <stages>
+      <li>
+        <label>Free WIFI!</label>
+        <description>The psychic emanator makes me feel strange, but also very relaxed.</description>
+        <baseMoodEffect>3</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+</Defs>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: civilian terminal -->
+  <Milira_MilianHomeTerminal.label>家用终端</Milira_MilianHomeTerminal.label>
+  <!-- EN: This pawn is wearing a civilian terminal. -->
+  <Milira_MilianHomeTerminal.description>这个单位佩戴了家用终端。</Milira_MilianHomeTerminal.description>
+  
+</LanguageData>

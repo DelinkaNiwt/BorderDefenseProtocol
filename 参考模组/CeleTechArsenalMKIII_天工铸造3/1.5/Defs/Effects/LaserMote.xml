@@ -1,0 +1,149 @@
+<Defs>
+  
+  <!--持续激光的光束Mote+末尾特效+粒子特效-->
+  <ThingDef ParentName="MoteBase">
+    <defName>CMC_Laser_Stay_MoteI</defName>
+    <thingClass>MoteDualAttached</thingClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <!--这个是激光从0透明度到最大透明度的时间，可以做激光预热效果（光束从小变大），但伤害依旧正常运作，我也懒得写预热检测-->
+      <fadeInTime>0.2</fadeInTime>
+      <!--这个是激光从最大透明度到0透明度的时间，可以做激光的消散效果，但最好小于等于武器冷却时间-->
+      <fadeOutTime>0</fadeOutTime>
+      <solidTime>999999</solidTime>
+      <needsMaintenance>True</needsMaintenance>
+      <rotateTowardsTarget>True</rotateTowardsTarget>
+      <scaleToConnectTargets>true</scaleToConnectTargets>
+      <fadeOutUnmaintained>True</fadeOutUnmaintained>
+    </mote>
+    <drawOffscreen>true</drawOffscreen>
+    <graphicData>
+      <texPath>Things/Projectile/CMC_UDLaser</texPath>
+      <!--graphicClass>Graphic_Mote</graphicClass-->
+      <!--这个是生物科技Dlc的特效的class，实际效果是一闪一闪的，我不喜欢（瞎眼睛），所以改成了静态，有需要可以改回去-->
+      <graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
+      <shaderType>MoteBeam</shaderType>
+    </graphicData>
+  </ThingDef>
+  
+  <ThingDef ParentName="MoteBase">
+    <defName>CMC_Laser_Stay_MoteII</defName>
+    <thingClass>MoteDualAttached</thingClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <!--这个是激光从0透明度到最大透明度的时间，可以做激光预热效果（光束从小变大），但伤害依旧正常运作，我也懒得写预热检测-->
+      <fadeInTime>0.2</fadeInTime>
+      <!--这个是激光从最大透明度到0透明度的时间，可以做激光的消散效果，但最好小于等于武器冷却时间-->
+      <fadeOutTime>0</fadeOutTime>
+      <solidTime>999999</solidTime>
+      <needsMaintenance>True</needsMaintenance>
+      <rotateTowardsTarget>True</rotateTowardsTarget>
+      <scaleToConnectTargets>true</scaleToConnectTargets>
+      <fadeOutUnmaintained>True</fadeOutUnmaintained>
+    </mote>
+    <drawOffscreen>true</drawOffscreen>
+    <graphicData>
+      <texPath>Things/Projectile/CMC_UDLaser_Wide</texPath>
+      <!--graphicClass>Graphic_Mote</graphicClass-->
+      <!--这个是生物科技Dlc的特效的class，实际效果是一闪一闪的，我不喜欢（瞎眼睛），所以改成了静态，有需要可以改回去-->
+      <graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
+      <shaderType>MoteBeam</shaderType>
+    </graphicData>
+  </ThingDef>
+  
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>CMC_Laser_Stay_LaserEndSmall</defName>
+    <graphicData>
+      <texPath>Things/Mote/LightningGlow</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0</fadeInTime>
+    <solidTime>1</solidTime>
+    <fadeOutTime>0.3</fadeOutTime>
+  </FleckDef>
+  
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>CMC_Laser_Stay_LaserEndLarge</defName>
+    <graphicData>
+      <texPath>Things/Mote/LightningGlow</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0</fadeInTime>
+    <solidTime>0</solidTime>
+    <fadeOutTime>0.4</fadeOutTime>
+  </FleckDef>
+  
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>CMC_Stay_Laser_Spark</defName>
+    <graphicData>
+      <texPath>Things/Mote/SparkThrown</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0</fadeInTime>
+    <solidTime>0.0</solidTime>
+    <fadeOutTime>0.1</fadeOutTime>
+  </FleckDef>
+  
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>CMC_Laser_Stay_ScatterLaser</defName>
+    <graphicData>
+      <texPath>Things/Projectile/CMC_LaserWhite</texPath>
+      <shaderType>MoteGlow</shaderType>
+	</graphicData>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <fadeInTime>0.05</fadeInTime>
+    <solidTime>0.07</solidTime>
+    <fadeOutTime>0</fadeOutTime>
+  </FleckDef>
+  
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>CMC_Laser_Stay_ScatterLaser_B</defName>
+    <graphicData>
+      <texPath>Things/Projectile/CMC_LaserWhite_B</texPath>
+      <shaderType>MoteGlow</shaderType>
+	</graphicData>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <fadeInTime>0.05</fadeInTime>
+    <solidTime>0.07</solidTime>
+    <fadeOutTime>0</fadeOutTime>
+  </FleckDef>
+  
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>CMC_Laser_Stay_ScatterLaserBlue</defName>
+    <graphicData>
+      <texPath>Things/Projectile/CMC_Laser_Shaped</texPath>
+      <shaderType>MoteGlow</shaderType>
+	</graphicData>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <fadeInTime>0.05</fadeInTime>
+    <solidTime>0.07</solidTime>
+    <fadeOutTime>0</fadeOutTime>
+  </FleckDef>
+  
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>CMC_Laser_Stay_ScatterLaserBlueTurret</defName>
+    <graphicData>
+      <texPath>Things/Projectile/CMC_Laser_Shaped</texPath>
+      <shaderType>MoteGlow</shaderType>
+	</graphicData>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <fadeInTime>0</fadeInTime>
+    <solidTime>0</solidTime>
+    <fadeOutTime>0.1</fadeOutTime>
+  </FleckDef>
+  
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>CMC_Laser_MuzzleGlow</defName>
+    <graphicData>
+      <texPath>Things/Others/CMC_LightningGlow</texPath>
+      <shaderType>MoteGlow</shaderType>
+	</graphicData>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <fadeInTime>0.05</fadeInTime>
+    <solidTime>0.07</solidTime>
+    <fadeOutTime>0</fadeOutTime>
+  </FleckDef>
+</Defs>

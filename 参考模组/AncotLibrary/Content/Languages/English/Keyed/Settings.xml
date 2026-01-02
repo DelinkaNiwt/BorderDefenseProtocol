@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <Ancot.Change>change</Ancot.Change>
+
+  <Ancot.DefaultSetting>Restore Default Settings</Ancot.DefaultSetting>
+
+  <!-- 品质颜色 -->
+  <Ancot.QualityColorSetting>Quality Color</Ancot.QualityColorSetting>
+  <Ancot.QualityColorSettingDesc>Adjust the representative color of quality for apparel, weapons, etc., in mods that depend on this library.</Ancot.QualityColorSettingDesc>
+  <Ancot.DefaultSetting_QualityColor>Default Quality Color</Ancot.DefaultSetting_QualityColor>
+
+  <!-- Turret System -->
+  <Ancot.TurretSystemSetting>Turret System</Ancot.TurretSystemSetting>
+  <Ancot.TurretSystemSettingDesc>Settings related to the turret system, such as the wearable drone turrets in the milira race mod.</Ancot.TurretSystemSettingDesc>
+
+  <Ancot.TurretSystem_Indicator>Aiming Indicator Line</Ancot.TurretSystem_Indicator>
+  <Ancot.TurretSystem_IndicatorDesc>Displays the indicator line for turret aiming targets.</Ancot.TurretSystem_IndicatorDesc>
+
+  <Ancot.TurretSystem_IndicatorColor_Player>Player Indicator Line Color</Ancot.TurretSystem_IndicatorColor_Player>
+  <Ancot.TurretSystem_IndicatorColor_PlayerDesc>Determines the indicator line color when a player-controlled character is targeting with a turret.</Ancot.TurretSystem_IndicatorColor_PlayerDesc>
+
+  <Ancot.TurretSystem_IndicatorOnlyDrawSelected>Draw Only When Selected (Player)</Ancot.TurretSystem_IndicatorOnlyDrawSelected>
+  <Ancot.TurretSystem_IndicatorOnlyDrawSelectedDesc>Only draws the turret indicator line when a player-controlled character is selected.</Ancot.TurretSystem_IndicatorOnlyDrawSelectedDesc>
+
+  <Ancot.TurretSystem_IndicatorOnlyDrawSelected_NonPlayer>Draw Only When Selected (Non-Player)</Ancot.TurretSystem_IndicatorOnlyDrawSelected_NonPlayer>
+  <Ancot.TurretSystem_IndicatorOnlyDrawSelected_NonPlayerDesc>Only draws the turret indicator line when a non-player-controlled character is selected.</Ancot.TurretSystem_IndicatorOnlyDrawSelected_NonPlayerDesc>
+
+  <Ancot.TurretSystem_IndicatorOnlyDrawForced>Draw Only When Forced Targeting</Ancot.TurretSystem_IndicatorOnlyDrawForced>
+  <Ancot.TurretSystem_IndicatorOnlyDrawForcedDesc>For player character, only draws the turret indicator line when a forced target is assigned.</Ancot.TurretSystem_IndicatorOnlyDrawForcedDesc>
+
+  <Ancot.TurretSystem_Indicator_NonPlayer>Non-Player Aiming Indicator Line</Ancot.TurretSystem_Indicator_NonPlayer>
+  <Ancot.TurretSystem_Indicator_NonPlayerDesc>Displays the turret aiming indicator line for non-player-controlled characters.</Ancot.TurretSystem_Indicator_NonPlayerDesc>
+
+  <Ancot.TurretSystem_IndicatorColor_NonPlayer>Non-Player Indicator Line Color</Ancot.TurretSystem_IndicatorColor_NonPlayer>
+  <Ancot.TurretSystem_IndicatorColor_NonPlayerDesc>Determines the indicator line color when a non-player-controlled character is targeting with a turret.</Ancot.TurretSystem_IndicatorColor_NonPlayerDesc>
+
+  <!-- 武器额外渲染 -->
+  <Ancot.WeaponExtraRenderSetting>Extra Weapon Texture</Ancot.WeaponExtraRenderSetting>
+  <Ancot.WeaponExtraRenderSettingDesc>Settings for rendering additional overlays when holding a weapon, such as the scabbard in the Kiiro mod.</Ancot.WeaponExtraRenderSettingDesc>
+  <Ancot.WeaponExtraRender_Draw>Draw Additional Textures</Ancot.WeaponExtraRender_Draw>
+  <Ancot.WeaponExtraRender_DrawDesc>Whether to draw additional weapon textures.</Ancot.WeaponExtraRender_DrawDesc>
+
+  <!-- 着装方案预设 -->
+  <Ancot.ApparelPolicySettings>Apparel Policy Presets</Ancot.ApparelPolicySettings>
+  <Ancot.ApparelPolicySettingsDesc>Settings for preset apparel policies in race mods that depend on this library.</Ancot.ApparelPolicySettingsDesc>
+  <Ancot.ApparelPolicy_GenerateAtStart>Generate Apparel Policy at Start</Ancot.ApparelPolicy_GenerateAtStart>
+  <Ancot.ApparelPolicy_GenerateAtStartDesc>Whether to create the preset apparel policy for the race once when starting a new game.</Ancot.ApparelPolicy_GenerateAtStartDesc>
+  <Ancot.ApparelPolicy_AutoSetForColonist>Auto-Assign Race Apparel Policy</Ancot.ApparelPolicy_AutoSetForColonist>
+  <Ancot.ApparelPolicy_AutoSetForColonistDesc>Automatically assign the preset apparel policy for the corresponding race when recruited.</Ancot.ApparelPolicy_AutoSetForColonistDesc>
+  <Ancot.ApparelPolicy_Generate>Generate Preset Race Apparel Policy</Ancot.ApparelPolicy_Generate>
+
+  <!-- 无人机 -->
+  <Ancot.DroneSettings>Drone</Ancot.DroneSettings>
+  <Ancot.DroneSettingsDesc>Settings for the drone framework.</Ancot.DroneSettingsDesc>
+  <Ancot.Drone_TabAvailable>Drone Management Panel</Ancot.Drone_TabAvailable>
+  <Ancot.Drone_TabAvailableDesc>Choose how to access the drone management panel. Enabling the menu will add a drone panel button to the bottom menu; enabling the button will add a shortcut to the drone panel above the mech panel.</Ancot.Drone_TabAvailableDesc>
+
+</LanguageData>

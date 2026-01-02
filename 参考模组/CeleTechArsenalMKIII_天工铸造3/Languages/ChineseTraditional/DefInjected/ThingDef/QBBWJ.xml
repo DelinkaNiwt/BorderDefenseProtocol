@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: <color=#FFCC66><i>QBB85X WanJian smart LMG</i></color> -->
+  <W85XWJ.label>QBB-85“萬劍”智能通用機槍</W85XWJ.label>
+  <!-- EN: A smart LMG firing guide bullets, it can also switch mode to fire normal under emergency situations. -->
+  <W85XWJ.description>在先進的火控和光電加持下能以低射速發射追蹤彈藥精確消滅敵人的通用機槍，在危急時刻也能快速射擊。\n\n該武器的追蹤模式命中率僅受射手智識水平影響。</W85XWJ.description>
+  <!-- EN: Mode switch -->
+  <W85XWJ.comps.CompSecondaryVerb.description>模式切換</W85XWJ.comps.CompSecondaryVerb.description>
+  <!-- EN: Smart Mode -->
+  <W85XWJ.comps.CompSecondaryVerb.mainWeaponLabel>追蹤模式</W85XWJ.comps.CompSecondaryVerb.mainWeaponLabel>
+  <!-- EN: Burst Mode -->
+  <W85XWJ.comps.CompSecondaryVerb.secondaryWeaponLabel>爆發模式</W85XWJ.comps.CompSecondaryVerb.secondaryWeaponLabel>
+  <!-- EN: stock -->
+  <W85XWJ.tools.stock.label>槍托</W85XWJ.tools.stock.label>
+  <!-- EN: barrel -->
+  <W85XWJ.tools.barrel.label>槍管</W85XWJ.tools.barrel.label>
+  <!-- EN: <color=#FFCC66><i>QBB85X WanJian smart LMG</i></color> -->
+  <W85XWJ.verbs.Verb_Shoot.label>QBB-85“萬劍”智能通用機槍</W85XWJ.verbs.Verb_Shoot.label>
+  
+</LanguageData>

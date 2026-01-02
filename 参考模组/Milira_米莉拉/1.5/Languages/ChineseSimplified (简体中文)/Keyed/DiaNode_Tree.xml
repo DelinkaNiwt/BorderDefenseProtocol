@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <Milira.MilianConfigTip>米莉安配置</Milira.MilianConfigTip>
+
+  <Milira.MilianConfigGuide>米莉安配置指南</Milira.MilianConfigGuide>
+  <Milira.MilianConfigGuideDesc>一份关于米莉安配置界面的说明。你可以在这里查看关于米莉安配置界面的基本信息。</Milira.MilianConfigGuideDesc>
+
+  <Milira.MilianConfigGuidePage0>-关于装备浏览-\n你可以在配置页面查看米莉安的武器和服装情况。装备图案左上方不同颜色的小圆点表示装备品质。</Milira.MilianConfigGuidePage0>
+  <Milira.MilianConfigGuidePage1>-关于自动换装-\n你可以在界面中为米莉安设置开启自动换装。当该功能设置为开启时，能够执行搬运工作的殖民者将尝试在存储区内寻找适合当前米莉安的服装并为其更换。自动换装所依据的属性是护甲值、品质与最大耐久值，根据三者积分制选取当前最优服装进行更换。开启这一功能将会造成一定程度的运算负荷，当你觉得游玩过程存在卡顿情况时，可酌情开启或关闭这个功能。</Milira.MilianConfigGuidePage1>
+  <Milira.MilianConfigGuidePage2>-关于更换武器-\n除了指派殖民者为米莉安更换武器以外，你也可以在米莉安配置界面中点击一个米莉安的武器栏，在弹出的菜单中为它选择要更换的武器，确认后这个米莉安会尝试执行一次更换武器的操作。如果确认后不再想要更换武器，再次点击武器栏可以找到取消更换武器的选项，或打断米莉安当前工作来取消。</Milira.MilianConfigGuidePage2>
+  <Milira.MilianConfigGuidePage3>-关于工作管理-\n解锁科技“米莉安工作权限”后，该面板将会增加一个按钮，通过点击它跳转到米莉安工作管理面板进行工作安排。</Milira.MilianConfigGuidePage3>
+
+</LanguageData>

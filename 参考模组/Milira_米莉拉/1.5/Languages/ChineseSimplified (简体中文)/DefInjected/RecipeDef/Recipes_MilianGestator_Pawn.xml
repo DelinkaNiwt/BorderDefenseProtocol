@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Gestate Pawn I -->
+  <Milian_Mechanoid_PawnI.label>培育士兵I型</Milian_Mechanoid_PawnI.label>
+  <!-- EN: Gestate a Milian modeled Pawn I. -->
+  <Milian_Mechanoid_PawnI.description>培育一个型号为士兵I型的米莉安。</Milian_Mechanoid_PawnI.description>
+  <!-- EN: Gestating mech. -->
+  <Milian_Mechanoid_PawnI.jobString>培育机械体中。</Milian_Mechanoid_PawnI.jobString>
+  
+  <!-- EN: Gestate Pawn II -->
+  <Milian_Mechanoid_PawnII.label>培育士兵II型</Milian_Mechanoid_PawnII.label>
+  <!-- EN: Gestate a Milian modeled Pawn II. -->
+  <Milian_Mechanoid_PawnII.description>培育一个型号为士兵II型的米莉安。</Milian_Mechanoid_PawnII.description>
+  <!-- EN: Gestating mech. -->
+  <Milian_Mechanoid_PawnII.jobString>培育机械体中。</Milian_Mechanoid_PawnII.jobString>
+  
+  <!-- EN: Gestate Guard -->
+  <Milian_Mechanoid_PawnIII.label>培育禁卫军</Milian_Mechanoid_PawnIII.label>
+  <!-- EN: Gestate a Milian modeled Guard. -->
+  <Milian_Mechanoid_PawnIII.description>培育一个型号为禁卫军的米莉安。</Milian_Mechanoid_PawnIII.description>
+  <!-- EN: Gestating mech. -->
+  <Milian_Mechanoid_PawnIII.jobString>培育机械体中。</Milian_Mechanoid_PawnIII.jobString>
+  
+  <!-- EN: Gestate Captain -->
+  <Milian_Mechanoid_PawnIV.label>培育百夫长</Milian_Mechanoid_PawnIV.label>
+  <!-- EN: Gestate a Milian modeled Captain. -->
+  <Milian_Mechanoid_PawnIV.description>培育一个型号为百夫长的米莉安。</Milian_Mechanoid_PawnIV.description>
+  <!-- EN: Gestating mech. -->
+  <Milian_Mechanoid_PawnIV.jobString>培育机械体中。</Milian_Mechanoid_PawnIV.jobString>
+  
+</LanguageData>

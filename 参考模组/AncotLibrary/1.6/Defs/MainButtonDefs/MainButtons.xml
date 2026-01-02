@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <MainButtonDef>
+    <defName>Ancot_DronesTab</defName>
+    <label>drones</label>
+    <description>View and manage drones in the colony.</description>
+    <workerClass>AncotLibrary.MainButtonWorker_Drones</workerClass>
+    <tabWindowClass>AncotLibrary.MainTabWindow_Drones</tabWindowClass>
+    <order>47</order>
+    <closesWorldView>true</closesWorldView>
+  </MainButtonDef>
+
+
+</Defs>

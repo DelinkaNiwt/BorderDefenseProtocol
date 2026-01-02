@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: QBA-69 shotgun -->
+  <CMC_QBXninenine_CSG.label>QBA-69 智能自动霰弹枪</CMC_QBXninenine_CSG.label>
+  <!-- EN: This 2th-generation intelligent shotgun system is specifically engineered for urban warfare and starship boarding operations. Featuring a fully-automatic firing mechanism combined with high-capacity drum magazines, it achieves exceptional cyclic rate through rotating feed systems. The modular CQB configuration employs specialized "parent-projectile" ammunition with limited submunitions payload per round, resulting in reduced single-shot penetration capability. Its groundbreaking neuro-linked targeting computer implements real-time threat assessment algorithms to automatically designate optimal secondary targets within 0.3 seconds of neutralizing primary threats, providing visual tracking via tactical HUD. Equipped with smart ballistic correction modules, the weapon's scatter-shot accuracy demonstrates exponential correlation with operator's synaptic conductivity levels. Mandatory deployment protocol requires colonists with Intellectual Skill rating 10+ for optimal performance. The rotating feed mechanism ensures sustained suppressive fire while maintaining target acquisition continuity. -->
+  <CMC_QBXninenine_CSG.description>专为城市巷战与星际飞船接舷作战设计的第二代智能霰弹武器系统，采用全自动火控系统与高容量弹鼓设计，显著提升单位时间投射量。为符合CQB战术要求的模块化设计，单发母弹内集成的霰弹数量相对有限，导致单发侵彻效能有所降低。其革命性的神经链接式目标分析计算机能通过实时威胁评估算法，在消灭当前目标后自动切换至最优次级目标，并通过战术护目镜提供视觉指引。特别配备的智能弹道修正系统使其散射命中率与操作者的神经突触传导效率呈指数级正相关，强烈建议由具备智识技能等级10+的战术人员操控。</CMC_QBXninenine_CSG.description>
+  <!-- EN: stock -->
+  <CMC_QBXninenine_CSG.tools.stock.label>TODO</CMC_QBXninenine_CSG.tools.stock.label>
+  <!-- EN: barrel -->
+  <CMC_QBXninenine_CSG.tools.barrel.label>枪管</CMC_QBXninenine_CSG.tools.barrel.label>
+  <!-- EN: QBA-69 shotgun -->
+  <CMC_QBXninenine_CSG.verbs.Verb_ShootSwitchFire.label>TODO</CMC_QBXninenine_CSG.verbs.Verb_ShootSwitchFire.label>
+  
+</LanguageData>

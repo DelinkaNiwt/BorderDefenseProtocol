@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <IncidentDef>
+    <defName>Milira_SmallCluster_SingleTurret</defName>
+    <label>Milian Outpost Cluster</label>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>Milira.IncidentWorker_Milian_SmallCluster_SingleTurret</workerClass>
+    <letterLabel>Milian Outpost Cluster</letterLabel>
+    <letterText>An outpost cluster encompassing a turret that shall awaken after a short initiation and some combat units is deployed nearby. Deal with it quickly!\n Combat units will be awaken after being attacked.</letterText>
+    <letterDef>ThreatBig</letterDef>
+    <baseChance>2.0</baseChance>
+    <baseChanceWithRoyalty>1.4</baseChanceWithRoyalty>
+    <earliestDay>30</earliestDay>
+    <minRefireDays>45</minRefireDays>
+    <tags>
+      <li>Milira_SmallCluster_SingleTurret</li>
+    </tags>
+    <refireCheckTags>
+      <li>Milira_SmallCluster_SingleTurret</li>
+    </refireCheckTags>
+    <category>ThreatBig</category>
+    <pointsScaleable>true</pointsScaleable>
+    <minThreatPoints>800</minThreatPoints>
+    <tale>ShipPartCrash</tale>
+    <modExtensions>
+      <li Class="AncotLibrary.PawnkindWithCommonality_Extension">
+        <pawnkindsWithCommonality>
+          <li>
+            <pawnkindDef>Milian_Mechanoid_PawnI</pawnkindDef>
+            <commonality>1</commonality>
+          </li>
+          <li>
+            <pawnkindDef>Milian_Mechanoid_PawnII</pawnkindDef>
+            <commonality>0.1</commonality>
+          </li>
+          <li>
+            <pawnkindDef>Milian_Mechanoid_PawnIII</pawnkindDef>
+            <commonality>0.2</commonality>
+          </li>
+          <li>
+            <pawnkindDef>Milian_Mechanoid_KnightII</pawnkindDef>
+            <commonality>0.3</commonality>
+          </li>
+          <li>
+            <pawnkindDef>Milian_Mechanoid_KnightIV</pawnkindDef>
+            <commonality>0.1</commonality>
+          </li>
+          <li>
+            <pawnkindDef>Milian_Mechanoid_RookI</pawnkindDef>
+            <commonality>0.1</commonality>
+          </li>
+        </pawnkindsWithCommonality>
+      </li>
+    </modExtensions>
+  </IncidentDef>
+  
+  <!-- 仅通过米莉拉点数触发 -->
+  <IncidentDef>
+    <defName>Milira_MilianCluster</defName>
+    <label>Milian Cluster</label>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>Milira.IncidentWorker_MiliraCluster</workerClass>
+    <letterLabel>Milian Cluster</letterLabel>
+    <letterText>An intergrated Milian combat cluster encompassing assorted combat units, supporting facility and Shelters is deployed nearby, remaining dormant until been awaken or attacked.</letterText>
+    <letterDef>ThreatBig</letterDef>
+    <baseChance>1.9</baseChance>
+    <baseChanceWithRoyalty>1.9</baseChanceWithRoyalty>
+    <minRefireDays>27</minRefireDays><!-- 触发间隔，在incidentQueue中也生效 -->
+    <earliestDay>90</earliestDay>
+    <minThreatPoints>400</minThreatPoints>
+    <pointsScaleable>true</pointsScaleable>
+    <minPopulation>1</minPopulation>
+    <category>ThreatBig</category>
+  </IncidentDef>
+
+  <!-- 仅通过米莉拉点数触发 -->
+  <IncidentDef>
+    <defName>Milira_Raid</defName>
+    <label>Milira raid</label>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>Milira.IncidentWorker_RaidMilira</workerClass>
+    <baseChance>0</baseChance>
+    <minRefireDays>18</minRefireDays>
+    <earliestDay>20</earliestDay>
+    <category>ThreatBig</category>
+    <pointsScaleable>true</pointsScaleable>
+    <tale>Raid</tale>
+    <ignoreRecentSelectionWeighting>true</ignoreRecentSelectionWeighting>
+  </IncidentDef>
+
+
+
+</Defs>

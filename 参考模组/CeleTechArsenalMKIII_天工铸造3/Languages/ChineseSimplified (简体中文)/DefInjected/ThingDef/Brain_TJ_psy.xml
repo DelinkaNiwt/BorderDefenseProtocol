@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Tian Ji chip -->
+  <TianJiChip.label>【天玑】养护芯片</TianJiChip.label>
+  <!-- EN: A brain implant which can slowly cures the user's wounds. -->
+  <TianJiChip.description>自主维护植入者精神和身体机能的芯片，能促进快速恢复精神奔溃，并缓慢治疗伤疤。</TianJiChip.description>
+  
+</LanguageData>

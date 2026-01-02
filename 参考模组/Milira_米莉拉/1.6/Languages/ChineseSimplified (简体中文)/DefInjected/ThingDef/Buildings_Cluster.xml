@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Milira glory beacon -->
+  <Milira_DropBeaconCluster.label>辉煌信标</Milira_DropBeaconCluster.label>
+  <!-- EN: A device capable of firing a signal into the sky. Once activated, it instantly calls for a squad of Milian to provide battlefield support. -->
+  <Milira_DropBeaconCluster.description>一座能够向天空发射信标的装置。激活后立刻呼叫一队米莉安支援战场。</Milira_DropBeaconCluster.description>
+  <!-- EN: The beacon calls a team of Milian and leaps into battle. -->
+  <Milira_DropBeaconCluster.comps.CompDelayedPawnSpawnOnWakeup.activatedMessageKey>辉煌信标呼叫了一队米莉安支援战场。</Milira_DropBeaconCluster.comps.CompDelayedPawnSpawnOnWakeup.activatedMessageKey>
+  
+  <!-- EN: Milira shard ark -->
+  <Milira_MilianCapsule.label>碎片方舟</Milira_MilianCapsule.label>
+  <!-- EN: A stasis chamber containing Milian. It will open immediately upon activation. -->
+  <Milira_MilianCapsule.description>盛装着米莉安的舱室。激活时会立刻打开。</Milira_MilianCapsule.description>
+  
+  <!-- EN: Cradol's Shadow -->
+  <Milira_ProjectionNode.label>卡利多之影</Milira_ProjectionNode.label>
+  <!-- EN: A self-sustaining projection unit that perpetually maintains the imagery of the ubiquitous banners seen in the Sky Metropolis, hovering above the cluster. -->
+  <Milira_ProjectionNode.description>一个自供能的投影单元，持续不断地在上空维持着天空都市中随处可见的旌旗的影像。</Milira_ProjectionNode.description>
+  
+  <!-- EN: solar crystal druse -->
+  <Milira_SolarCrystalDruse.label>日凌晶簇</Milira_SolarCrystalDruse.label>
+  <!-- EN: A naturally occurring crystal cluster formed by the influence of strong solar radiation, which can mine solar crystal from it. -->
+  <Milira_SolarCrystalDruse.description>受到强辐射影响自然形成的晶簇，可以开采出日凌晶。</Milira_SolarCrystalDruse.description>
+  
+</LanguageData>

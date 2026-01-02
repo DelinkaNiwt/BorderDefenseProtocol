@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: sniper bullet -->
+  <Bullet_QS_ATB.label>狙擊槍子彈（麻醉）</Bullet_QS_ATB.label>
+  <Bullet_QS_Lethal.label>狙擊槍子彈（致死）</Bullet_QS_Lethal.label>
+  
+  <!-- EN: QBU-71-JW tactical sniper -->
+  <QBU71_QS.label>&lt;color=#5BC4E2&gt;&lt;i&gt;QBU-71J“九尾”低致命狙擊步槍&lt;/i&gt;&lt;/color&gt;</QBU71_QS.label>
+  <QBU71_QS.description>智能低致命狙擊步槍，內置生物特徵追蹤模塊。彈頭裝載納米級電擊纖維與鎮靜氣溶膠，通過膛線賦予的尾旋運動展開九道制導線束。擊中後3秒內使目標神經元超極化，實現兩個小時精確癱瘓。後坐力控制系統允許在1.2公裡外進行手術刀式非致命乾預。\n\n為特種執法設計的道德武器，能在擊穿防彈玻璃後仍維持非致命效能，窗框殘留的九道螺旋蝕痕成為其行動簽名。</QBU71_QS.description>
+  <QBU71_QS.tools.stock.label>槍托</QBU71_QS.tools.stock.label>
+  <QBU71_QS.tools.barrel.label>槍管</QBU71_QS.tools.barrel.label>
+  <QBU71_QS.verbs.Verb_Shoot.label>&lt;color=#5BC4E2&gt;&lt;i&gt;QBU-71J“九尾”低致命狙擊步槍&lt;/i&gt;&lt;/color&gt;</QBU71_QS.verbs.Verb_Shoot.label>
+  
+  <CMC_QBU71S.label>QBU-71 反器材狙擊槍</CMC_QBU71S.label>
+  <CMC_QBU71S.description>新一代智能反器材狙擊槍，先進的火控大幅提高了反應時間和射程，也可以引導子彈追蹤鎖定的敵人。特製的高射速子彈可以穿透力場護盾，其微型反物質戰鬥部也能在命中後造成劇烈的爆炸。美中不足的是，該槍十分笨重且後坐力巨大。</CMC_QBU71S.description>
+  <CMC_QBU71S.tools.stock.label>槍托</CMC_QBU71S.tools.stock.label>
+  <CMC_QBU71S.tools.barrel.label>槍管</CMC_QBU71S.tools.barrel.label>
+  <CMC_QBU71S.verbs.Verb_Shoot.label>QBU-71 反器材狙擊槍</CMC_QBU71S.verbs.Verb_Shoot.label>
+  
+</LanguageData>

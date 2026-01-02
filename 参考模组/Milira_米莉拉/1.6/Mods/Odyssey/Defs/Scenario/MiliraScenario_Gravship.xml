@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ScenarioDef ParentName="ScenarioBase">
+    <defName>Milira_Scenarios_Gravship</defName>
+    <label>Milira Gravship</label>
+    <description>The technology of grav engine are far more different from the force theories mastered by Milira. After a fortunate encounter with an gravship, young Milira began traveling while studying the engine. As usual, she docked the ship near an old and deserted orbital facility, expecting a mundane day. However, when she saw the active relay station, she realized she had entered the territory of the Mechnoid./n/nWhen the relay station began to roar, the milira, unable to leave in time, was marked for termination by the mechhive and she decided to deal with the trouble on her own.</description>
+    <scenario>
+      <summary>A Milira with her gravship hunted by mechanoids.</summary>
+      <playerFaction Inherit="False">
+        <def>PlayerFaction</def>
+        <factionDef>Milira_PlayerFaction</factionDef>
+      </playerFaction>
+      <parts Inherit="False">
+        
+        <!-- Layers -->
+        <li Class="ScenPart_PlanetLayer">
+          <def>PlanetLayerFixed</def>
+          <tag>Orbit</tag>
+          <layer>Orbit</layer>
+          <settingsDef>Orbit</settingsDef>
+          <hide>true</hide>
+          <connections>
+            <Surface>
+              <zoomMode>ZoomIn</zoomMode>
+            </Surface>
+          </connections>
+        </li>
+        
+        <!-- Game start dialog -->
+        <li Class="ScenPart_GameStartDialog">
+          <def>GameStartDialog</def>
+          <text>In the distance, the mechhive responded to the signal from the relay, and from now on, the mechnoids will relentlessly hunt you and your gravship down wherever you go.\n\nTo launch the gravship, select the pilot console, then select the launch command.\n\nOn the world map, select "view planet" to choose a landing spot on the planet.\n\nFrom now on, wherever you go, the mechanoids will eventually find you. To stop them, you must find and defeat the mechhive itself.</text>
+          <closeSound>GameStartSting</closeSound>
+        </li>
+
+        <!-- Config pages -->
+        <li Class="ScenPart_ConfigPage_ConfigureStartingPawns_KindDefs">
+          <def>ConfigurePawnsKindDefs</def>
+          <pawnChoiceCount>8</pawnChoiceCount>
+          <leftBehindPawnKind>Milira_Mechanitor_ForScenario</leftBehindPawnKind>
+          <kindCounts>
+            <li>
+              <kindDef>Milira_Mechanitor_ForScenario</kindDef>
+              <count>1</count>
+              <requiredAtStart>true</requiredAtStart>
+            </li>
+          </kindCounts>
+        </li>
+
+        <li Class="ScenPart_ForcedMap">
+          <def>ForcedMap</def>
+          <mapGenerator>OrbitalRelay</mapGenerator>
+          <layerDef>Orbit</layerDef>
+        </li>
+
+        <!-- Player starting stuff spawn method-->
+        <li Class="AncotLibrary.ScenPart_PlayerPawnsArriveMethod_GravShip">
+          <def>PlayerPawnsArriveMethod</def>
+          <sketch>Milira_Gravship</sketch>
+        </li>
+
+        <li Class="ScenPart_PursuingMechanoids">
+          <def>PursuingMechanoids</def>
+        </li>
+
+        <li Class="ScenPart_DisableQuest">
+          <def>DisableQuest</def>
+          <questDef>MechanoidSignal</questDef>
+        </li>
+
+        <!-- Starting research -->
+        <li Class="ScenPart_StartingResearch">
+          <def>StartingResearch</def>
+          <project>BasicGravtech</project>
+        </li>
+        <li Class="ScenPart_StartingResearch">
+          <def>StartingResearch</def>
+          <project>OrbitalTech</project>
+        </li>
+        <li Class="ScenPart_StartingResearch">
+          <def>StartingResearch</def>
+          <project>BiofuelRefining</project>
+        </li>
+        <li Class="ScenPart_StartingResearch">
+          <def>StartingResearch</def>
+          <project>Milira_Drones</project>
+        </li>
+        <li Class="ScenPart_StartingResearch">
+          <def>StartingResearch</def>
+          <project>Milira_DroneControl</project>
+        </li>
+
+        <!-- Player starting things -->
+        <li Class="Milira.ScenPart_StartingMilian">
+          <def>StartingMech</def>
+          <mechKind>Milian_Mechanoid_PawnI</mechKind>
+          <mechAmount>2</mechAmount>
+          <overseenByPlayerPawnChance>1</overseenByPlayerPawnChance>
+        </li>
+        <li Class="AncotLibrary.ScenPart_StartDrones">
+          <def>Ancot_StartingDrone</def>
+          <droneKind>Milira_DroneFreight</droneKind>
+          <droneAmount>2</droneAmount>
+        </li>
+        <li Class="AncotLibrary.ScenPart_StartDrones">
+          <def>Ancot_StartingDrone</def>
+          <droneKind>Milira_DroneStorage</droneKind>
+          <droneAmount>1</droneAmount>
+        </li>
+        <li Class="AncotLibrary.ScenPart_StartDrones">
+          <def>Ancot_StartingDrone</def>
+          <droneKind>Milira_DroneCleansweeper</droneKind>
+          <droneAmount>1</droneAmount>
+        </li>
+        <!-- <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>Chemfuel</thingDef>
+          <count>100</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>Milira_SunLightFuel</thingDef>
+          <count>100</count>
+        </li> -->
+        <li Class="ScenPart_StartingThing_Defined">          <!--日凌晶-->
+          <def>StartingThing_Defined</def>
+          <thingDef>Milira_SolarCrystal</thingDef>
+          <count>40</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">          <!--食物-->
+          <def>StartingThing_Defined</def>
+          <thingDef>Milira_TravellerFood</thingDef>
+          <count>40</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>MedicineIndustrial</thingDef>
+          <count>20</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>ComponentIndustrial</thingDef>
+          <count>20</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>Milira_SplendidSteel</thingDef>
+          <count>200</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>Milira_SunPlateSteel</thingDef>
+          <count>100</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">          <!--兜帽-->
+          <def>StartingThing_Defined</def>
+          <thingDef>Milira_Hood</thingDef>
+          <stuff>Milira_Feather</stuff>
+          <quality>Good</quality>
+          <count>1</count>
+        </li>
+
+        <!-- Scatter some things near player start -->
+        <li Class="ScenPart_ScatterThingsAnywhere">
+          <def>ScatterThingsNearPlayerStart</def>
+          <thingDef>Silver</thingDef>
+          <count>300</count>
+          <allowRoofed>false</allowRoofed>
+        </li>
+        <li Class="ScenPart_ScatterThingsAnywhere">
+          <def>ScatterThingsNearPlayerStart</def>
+          <thingDef>Steel</thingDef>
+          <count>500</count>
+          <allowRoofed>false</allowRoofed>
+        </li>
+        <li Class="ScenPart_ScatterThingsAnywhere">
+          <def>ScatterThingsNearPlayerStart</def>
+          <thingDef>GravlitePanel</thingDef>
+          <count>400</count>
+          <allowRoofed>false</allowRoofed>
+        </li>
+      </parts>
+    </scenario>
+  </ScenarioDef>
+
+</Defs>

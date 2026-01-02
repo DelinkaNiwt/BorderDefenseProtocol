@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="MealBase">
+    <defName>Milira_TravellerFood</defName>
+    <label>milira traveller ration</label>
+    <description>Compact rations designed for travel and long-term storage. The sugar content provides a brief energizing effect after consumption.</description>
+    <graphicData>
+      <texPath>Milira/Meal</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <stackLimit>30</stackLimit>
+    <statBases>
+      <DeteriorationRate>0.25</DeteriorationRate>
+      <MarketValue>8</MarketValue>
+      <Mass>0.08</Mass>
+      <WorkToMake>220</WorkToMake>
+      <Nutrition>0.3</Nutrition>
+    </statBases>
+    <ingestible>
+      <preferability>MealSimple</preferability>
+      <optimalityOffsetHumanlikes>-5</optimalityOffsetHumanlikes>
+      <optimalityOffsetFeedingAnimals>-100</optimalityOffsetFeedingAnimals>
+      <ingestEffect>EatVegetarian</ingestEffect>
+      <ingestSound>Meal_Eat</ingestSound>
+      <outcomeDoers>
+        <li Class="IngestionOutcomeDoer_OffsetNeed">
+          <need>Rest</need>
+          <offset>0.05</offset>
+        </li>
+      </outcomeDoers>
+    </ingestible>
+    <allowedArchonexusCount>10</allowedArchonexusCount>
+  </ThingDef>
+
+</Defs>

@@ -1,0 +1,219 @@
+<Defs>	
+	<ThingDef ParentName="ArmorHelmetMakeableBase">
+		<defName>CMChelmet</defName>
+		<label>XG helmet-R</label>
+		<description>A heavily-armored high-tech helmet with AR screen, it also includes a laser range finder coupled to a ballistic computer linked to the sights to ensure that the user aims the weapon accurately.</description>
+		<techLevel>Spacer</techLevel>
+		<tradeability>Sellable</tradeability>
+		<generateCommonality>0.25</generateCommonality>
+		<generateAllowChance>0</generateAllowChance>
+		<graphicData>
+			<texPath>Things/Apparel/Display/CMC_helmet_display</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>1.15</drawSize>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<costList>
+		    <Steel>40</Steel>
+			<ComponentSpacer>2</ComponentSpacer>
+			<ComponentIndustrial>1</ComponentIndustrial>
+			<Plasteel>55</Plasteel>
+			<Uranium>30</Uranium>
+		</costList>
+		<statBases>
+			<WorkToMake>29250</WorkToMake>
+			<MaxHitPoints>870</MaxHitPoints>
+			<Mass>4.8</Mass>
+			<Flammability>0</Flammability>
+			<ArmorRating_Sharp>1.03</ArmorRating_Sharp>
+			<ArmorRating_Blunt>1.57</ArmorRating_Blunt>
+			<ArmorRating_Heat>2</ArmorRating_Heat>
+			<Insulation_Cold>30</Insulation_Cold>
+			<Insulation_Heat>1000</Insulation_Heat>
+			<EquipDelay>12</EquipDelay>
+		</statBases>
+		<equippedStatOffsets>
+			<PainShockThreshold>0.05</PainShockThreshold>
+			<ShootingAccuracyPawn>4.0</ShootingAccuracyPawn>
+			<ToxicEnvironmentResistance>1</ToxicEnvironmentResistance>
+		</equippedStatOffsets>
+		<thingCategories Inherit='False'>
+			<li>ArmorHeadgear</li>
+		</thingCategories>
+		<thingSetMakerTags>
+			<li>RewardSpecial</li>
+		</thingSetMakerTags>
+		<apparel>
+		<immuneToToxGasExposure MayRequire="Ludeon.RimWorld.Biotech">true</immuneToToxGasExposure>
+			<bodyPartGroups>
+				<li>FullHead</li>
+			</bodyPartGroups>
+			<wornGraphicPath>Things/Apparel/Helmet/CMC_helmet</wornGraphicPath>
+			<useWornGraphicMask>true</useWornGraphicMask>
+			<layers>
+				<li>Overhead</li>
+			</layers>
+			<tags>
+				<li>SpacerMilitary</li>
+			</tags>
+			<defaultOutfitTags>
+				<li>Soldier</li>
+			</defaultOutfitTags>
+			<useDeflectMetalEffect>true</useDeflectMetalEffect>
+			<renderNodeProperties>
+				<li Class="TOT_DLL_test.PawnRenderNodeProperties_PowerArmourLight">
+					<debugLabel>Base</debugLabel>
+					<nodeClass>TOT_DLL_test.PawnRenderNode_PowerArmourLight</nodeClass>
+					<workerClass>TOT_DLL_test.PawnRenderNodeWorker_PowerArmourLight</workerClass>
+					<texPath>Things/Apparel/Helmet/CMC_helmet</texPath>
+					<baseLayer>64</baseLayer>
+					<rotDrawMode>Fresh, Rotting</rotDrawMode>
+					<overrideMeshSize>(1.5,1.5)</overrideMeshSize>
+					<parentTagDef>ApparelHead</parentTagDef>
+					<pawnType>Any</pawnType>
+				</li>
+				<li Class="TOT_DLL_test.PawnRenderNodeProperties_PowerArmourLight">
+					<debugLabel>Light</debugLabel>
+					<texPath>Things/Apparel/Helmet/CMC_HRLight</texPath>
+					<nodeClass>TOT_DLL_test.PawnRenderNode_PowerArmourLight</nodeClass>
+					<workerClass>TOT_DLL_test.PawnRenderNodeWorker_PowerArmourLight</workerClass>
+					<baseLayer>64</baseLayer>
+					<rotDrawMode>Fresh, Rotting</rotDrawMode>
+					<overrideMeshSize>(1.5,1.5)</overrideMeshSize>
+					<parentTagDef>ApparelHead</parentTagDef>
+					<pawnType>Any</pawnType>
+					<shaderTypeDef>MoteGlow</shaderTypeDef>
+				</li>
+			</renderNodeProperties>
+		</apparel>
+		<recipeMaker>
+			<unfinishedThingDef>UnfinishedTechArmor</unfinishedThingDef>
+			<researchPrerequisite>CMCarmorII</researchPrerequisite>
+			<skillRequirements>
+				<Crafting>9</Crafting>
+			</skillRequirements>
+			<recipeUsers Inherit="False">
+				<li>FabricationBench</li>
+			</recipeUsers>
+		</recipeMaker>
+		<colorGenerator Class="ColorGenerator_Options">
+            <options>
+                <li>
+                    <only>(1,1,1)</only>
+                </li>
+            </options>
+        </colorGenerator>
+    </ThingDef>
+	
+	<ThingDef ParentName="ArmorHelmetMakeableBase">
+		<defName>CMChelmetM</defName>
+		<label>CMC helmet-M</label>
+		<description>A fully-armored high-tech helmet providing.</description>
+		<techLevel>Spacer</techLevel>
+		<tradeability>Sellable</tradeability>
+		<generateCommonality>0.25</generateCommonality>
+		<generateAllowChance>0</generateAllowChance>
+		<graphicData>
+			<texPath>Things/Apparel/Display/CMC_helmetM_display</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>1.15</drawSize>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<costList>
+		    <Steel>40</Steel>
+			<ComponentSpacer>2</ComponentSpacer>
+			<ComponentIndustrial>1</ComponentIndustrial>
+			<Plasteel>65</Plasteel>
+			<Uranium>30</Uranium>
+		</costList>
+		<statBases>
+			<WorkToMake>31250</WorkToMake>
+			<MaxHitPoints>900</MaxHitPoints>
+			<Mass>7.5</Mass>
+			<Flammability>0</Flammability>
+			<ArmorRating_Sharp>1.59</ArmorRating_Sharp>
+			<ArmorRating_Blunt>1.57</ArmorRating_Blunt>
+			<ArmorRating_Heat>2</ArmorRating_Heat>
+			<Insulation_Cold>49</Insulation_Cold>
+			<Insulation_Heat>1200</Insulation_Heat>
+			<EquipDelay>6</EquipDelay>
+		</statBases>
+		<equippedStatOffsets>
+			<PainShockThreshold>0.25</PainShockThreshold>
+			<ToxicEnvironmentResistance>1</ToxicEnvironmentResistance>
+			<ShootingAccuracyPawn>2.0</ShootingAccuracyPawn>
+		</equippedStatOffsets>
+		<thingCategories Inherit='False'>
+			<li>ArmorHeadgear</li>
+		</thingCategories>
+		<thingSetMakerTags>
+			<li>RewardSpecial</li>
+		</thingSetMakerTags>
+		<apparel>
+		<immuneToToxGasExposure MayRequire="Ludeon.RimWorld.Biotech">true</immuneToToxGasExposure>
+			<bodyPartGroups>
+				<li>FullHead</li>
+			</bodyPartGroups>
+			<wornGraphicPath>Things/Apparel/Helmet/CMC_helmetM</wornGraphicPath>
+			<useWornGraphicMask>true</useWornGraphicMask>
+			<layers>
+				<li>Overhead</li>
+			</layers>
+			<tags>
+				<li>SpacerMilitary</li>
+				<li>RoyalTier2</li>
+				<li>RoyalTier3</li>
+				<li>RoyalTier4</li>
+				<li>RoyalTier5</li>
+				<li>RoyalTier6</li>
+				<li>RoyalTier7</li>
+			</tags>
+			<defaultOutfitTags>
+				<li>Soldier</li>
+			</defaultOutfitTags>
+			<useDeflectMetalEffect>false</useDeflectMetalEffect>
+			<renderNodeProperties>
+				<li Class="TOT_DLL_test.PawnRenderNodeProperties_PowerArmourLight">
+					<debugLabel>Base</debugLabel>
+					<nodeClass>TOT_DLL_test.PawnRenderNode_PowerArmourLight</nodeClass>
+					<workerClass>TOT_DLL_test.PawnRenderNodeWorker_PowerArmourLight</workerClass>
+					<texPath>Things/Apparel/Helmet/CMC_helmetM</texPath>
+					<baseLayer>64</baseLayer>
+					<rotDrawMode>Fresh, Rotting</rotDrawMode>
+					<overrideMeshSize>(1.5,1.5)</overrideMeshSize>
+					<parentTagDef>ApparelHead</parentTagDef>
+					<pawnType>Any</pawnType>
+				</li>
+				<li Class="TOT_DLL_test.PawnRenderNodeProperties_PowerArmourLight">
+					<debugLabel>Light</debugLabel>
+					<texPath>Things/Apparel/Helmet/CMC_HMLight</texPath>
+					<nodeClass>TOT_DLL_test.PawnRenderNode_PowerArmourLight</nodeClass>
+					<workerClass>TOT_DLL_test.PawnRenderNodeWorker_PowerArmourLight</workerClass>
+					<baseLayer>64</baseLayer>
+					<rotDrawMode>Fresh, Rotting</rotDrawMode>
+					<overrideMeshSize>(1.5,1.5)</overrideMeshSize>
+					<parentTagDef>ApparelHead</parentTagDef>
+					<pawnType>Any</pawnType>
+					<shaderTypeDef>MoteGlow</shaderTypeDef>
+				</li>
+			</renderNodeProperties>
+		</apparel>
+		<recipeMaker>
+			<unfinishedThingDef>UnfinishedTechArmor</unfinishedThingDef>
+			<researchPrerequisite>CMCarmorIII</researchPrerequisite>
+			<skillRequirements>
+				<Crafting>9</Crafting>
+			</skillRequirements>
+			<recipeUsers Inherit="False">
+				<li>FabricationBench</li>
+			</recipeUsers>
+		</recipeMaker>
+		<colorGenerator Class="ColorGenerator_Options">
+            <options>
+                <li>
+                    <only>(1,1,1)</only>
+                </li>
+            </options>
+        </colorGenerator>
+    </ThingDef>
+</Defs>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Muzzle Flash</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <success>Always</success>
+      <operations>
+	  <li Class="PatchOperationAddModExtension">
+          <xpath>Defs/ThingDef[defName="Gun_CMCRocketswarmLauncher"]</xpath>
+          <value>
+            <li Class="MuzzleFlash.MuzzleFlashProps">
+              <def>MF_StandardMuzzleFalsh</def>
+              <drawSize>(6,1.5)</drawSize>
+              <offsets>
+                <li>(1.04,0.81)</li>
+				<li>(1.04,-0.81)</li>
+				<li>(0.94,0.69)</li>
+				<li>(0.94,-0.69)</li>
+              </offsets>
+            </li>
+          </value>
+        </li>
+		<li Class="PatchOperationAddModExtension">
+          <xpath>Defs/ThingDef[defName="CMC_Gun_ML"]</xpath>
+          <value>
+            <li Class="MuzzleFlash.MuzzleFlashProps">
+              <def>MF_StandardMuzzleFalsh</def>
+              <drawSize>(6,1.5)</drawSize>
+              <offsets>
+                <li>(1.34,0)</li>
+              </offsets>
+            </li>
+          </value>
+        </li>
+		<li Class="PatchOperationAddModExtension">
+          <xpath>Defs/ThingDef[defName="CMC_QBXfiveseven_CSG" or defName="CMC_QBXninenine_CSG"]</xpath>
+          <value>
+            <li Class="MuzzleFlash.MuzzleFlashProps">
+              <def>MF_StandardMuzzleFalsh</def>
+              <drawSize>(2.8,2.8)</drawSize>
+              <offsets>
+                <li>(0.6,0)</li>
+              </offsets>
+            </li>
+          </value>
+        </li>
+		<li Class="PatchOperationAddModExtension">
+          <xpath>Defs/ThingDef[defName="CMC_QSZfiveseven" or defName="CMC_QSZfiveseven_NL" or defName="CMC_QSZfiveeight"]</xpath>
+          <value>
+            <li Class="MuzzleFlash.MuzzleFlashProps">
+              <def>MF_StandardMuzzleFalsh</def>
+              <drawSize>(1.2,0.5)</drawSize>
+              <offsets>
+                <li>(0.4,0.05)</li>
+              </offsets>
+            </li>
+          </value>
+        </li>
+		<li Class="PatchOperationAddModExtension">
+          <xpath>Defs/ThingDef[defName="Gun_CMCAntiInfantryCSG" or defName="CMC_QSZfiveseven_MODIII"]</xpath>
+          <value>
+            <li Class="MuzzleFlash.MuzzleFlashProps">
+              <def>MF_StandardMuzzleFalsh</def>
+              <drawSize>(1.7,0.5)</drawSize>
+              <offsets>
+                <li>(0.55,0)</li>
+              </offsets>
+            </li>
+          </value>
+        </li>
+		<li Class="PatchOperationAddModExtension">
+          <xpath>Defs/ThingDef[defName="CMC_GrenadeLauncher"]</xpath>
+          <value>
+            <li Class="MuzzleFlash.MuzzleFlashProps">
+              <def>MF_StandardMuzzleFalshTwo</def>
+              <drawSize>(1.22,1.05)</drawSize>
+              <offsets>
+                <li>(0.75,0)</li>
+              </offsets>
+            </li>
+          </value>
+        </li>
+		<li Class="PatchOperationAddModExtension">
+          <xpath>Defs/ThingDef[defName="Gun_CMCAntiInfantryCSG_B"]</xpath>
+          <value>
+            <li Class="MuzzleFlash.MuzzleFlashProps">
+              <def>MF_StandardMuzzleFalsh</def>
+              <drawSize>(3,4.99)</drawSize>
+              <offsets>
+                <li>(0.86,0)</li>
+              </offsets>
+            </li>
+          </value>
+        </li>
+		<li Class="PatchOperationAddModExtension">
+          <xpath>Defs/ThingDef[defName="CMC_RocketLauncher" or defName="CMC_HJX_ATGM"]</xpath>
+          <value>
+            <li Class="MuzzleFlash.MuzzleFlashProps">
+              <def>MF_CMC_RPG</def>
+              <drawSize>(2.8,1.79)</drawSize>
+              <offsets>
+                <li>(-3.06,0)</li>
+              </offsets>
+            </li>
+          </value>
+        </li>
+        <li Class="PatchOperationAddModExtension">
+          <xpath>Defs/ThingDef[defName="QBZ_fivenine" or defName="QBB_fivenine" or defName="QBZ_threeooE" or defName="QBZS85XWJ" or defName="QBZS85XWJ_MOD_X" or defName="W85XWJ" or defName="Gun_CMCAntiInfantryCSG_C" or defName="QBB_threeoo" or defName="QBZ_threeooED" or defName="QBZ_eightfiveAR" or defName="W85X_Thunderer"]</xpath>
+          <value>
+            <li Class="MuzzleFlash.MuzzleFlashProps">
+              <def>MF_CMC_PlasmaFlash</def>
+              <drawSize>(1.2,1.2)</drawSize>
+              <offsets>
+                <li>(0.66,0)</li>
+              </offsets>
+            </li>
+          </value>
+        </li>
+		<li Class="PatchOperationAddModExtension">
+          <xpath>Defs/ThingDef[defName="QBUS85XWJ" or defName="QBU71_QS" or defName="QBU_TOOE" or defName="CMC_QBU71S" or defName="CMC_QJZFivenine" or defName="QBUS85F"]</xpath>
+          <value>
+            <li Class="MuzzleFlash.MuzzleFlashProps">
+              <def>MF_CMC_PlasmaFlash</def>
+              <drawSize>(1.9,1.9)</drawSize>
+              <offsets>
+                <li>(1.12,0)</li>
+              </offsets>
+            </li>
+          </value>
+        </li>
+		<li Class="PatchOperationAddModExtension">
+          <xpath>Defs/ThingDef[defName="QBZ71_QS" or defName="QTS9_OICW"]</xpath>
+          <value>
+            <li Class="MuzzleFlash.MuzzleFlashProps">
+              <def>MF_CMC_PlasmaFlash</def>
+              <drawSize>(1.45,1.9)</drawSize>
+              <offsets>
+                <li>(0.967,0)</li>
+              </offsets>
+            </li>
+          </value>
+        </li>
+		<!-- Turret Guns-->
+		<li Class="PatchOperationAddModExtension">
+          <xpath>Defs/ThingDef[defName="QBZoneooneXuanMing" or defName="QBZoneooneXuanMing_Elite" or defName="QLUX_Pulse_Projector" or defName="QLUX_Pulse_Projector_Persona"]</xpath>
+          <value>
+            <li Class="MuzzleFlash.MuzzleFlashProps">
+              <def>MF_CMC_PlasmaFlash</def>
+              <drawSize>(3.2,3.2)</drawSize>
+              <offsets>
+                <li>(0.92,0)</li>
+              </offsets>
+            </li>
+          </value>
+        </li>
+        <li Class="PatchOperationAddModExtension">
+          <xpath>Defs/ThingDef[defName="Gun_CMCcannon"]</xpath>
+          <value>
+            <li Class="MuzzleFlash.MuzzleFlashProps">
+              <def>MF_CMC_PlasmaFlash</def>
+              <drawSize>(3.6,3.6)</drawSize>
+              <offsets>
+                <li>(1.99,0)</li>
+              </offsets>
+            </li>
+          </value>
+        </li>
+		<li Class="PatchOperationAddModExtension">
+          <xpath>Defs/ThingDef[defName="Gun_EMPCannon"]</xpath>
+          <value>
+            <li Class="MuzzleFlash.MuzzleFlashProps">
+              <def>MF_CMC_PlasmaFlash</def>
+              <drawSize>(5.5,3.6)</drawSize>
+              <offsets>
+                <li>(2.99,0)</li>
+              </offsets>
+            </li>
+          </value>
+        </li>
+		<li Class="PatchOperationAddModExtension">
+          <xpath>Defs/ThingDef[defName="Gun_CMCcannon_BF"]</xpath>
+          <value>
+            <li Class="MuzzleFlash.MuzzleFlashProps">
+              <def>MF_StandardMuzzleFalshThree</def>
+              <drawSize>(3.6,1.50)</drawSize>
+              <offsets>
+                <li>(3.59,0.15)</li>
+				<li>(3.59,-0.15)</li>
+              </offsets>
+            </li>
+          </value>
+        </li>
+		<li Class="PatchOperationAddModExtension">
+          <xpath>Defs/ThingDef[defName="Gun_EMPCannon_Huge"]</xpath>
+          <value>
+            <li Class="MuzzleFlash.MuzzleFlashProps">
+              <def>MF_CMC_PlasmaFlash</def>
+              <drawSize>(15.6,8.6)</drawSize>
+              <offsets>
+                <li>(9.99,0)</li>
+              </offsets>
+            </li>
+          </value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+</Patch>

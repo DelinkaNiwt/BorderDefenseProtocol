@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <MainButtonDef>
+    <defName>Milian_Config</defName>
+    <label>milian config</label>
+    <description>View and manage equipments of milian in the colony.</description>
+    <workerClass>Milira.MainButtonWorker_MilianConfig</workerClass>
+    <tabWindowClass>Milira.MainTabWindow_MilianConfig</tabWindowClass>
+    <order>46</order>
+    <closesWorldView>true</closesWorldView>
+  </MainButtonDef>
+
+  <MainButtonDef>
+    <defName>Milian_Work</defName>
+    <label>milian work</label>
+    <description>Choose which milian does what kinds of work, and in what order.</description>
+    <tabWindowClass>Milira.MainTabWindow_MilianWork</tabWindowClass>
+    <order>10</order>
+    <buttonVisible>false</buttonVisible>
+    <closesWorldView>true</closesWorldView>
+  </MainButtonDef>
+
+</Defs>

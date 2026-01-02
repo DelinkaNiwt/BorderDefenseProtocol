@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 4x20mm MTS-R -->
+  <Ammo_CMC_4x20mmsmartAmmo_Regular.label>4x20mm 制导-通常弹</Ammo_CMC_4x20mmsmartAmmo_Regular.label>
+  <!-- EN: TODO -->
+  <Ammo_CMC_4x20mmsmartAmmo_Regular.description>小口径制导弹药，可以追踪目标</Ammo_CMC_4x20mmsmartAmmo_Regular.description>
+  
+  <!-- EN: bullet -->
+  <Bullet_CMC_4x20mmsmartAmmo_Regular.label>4x20mm 制导-通常弹</Bullet_CMC_4x20mmsmartAmmo_Regular.label>
+  
+</LanguageData>

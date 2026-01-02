@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--一切的开始=====================================================================================================-->
+  
+  <IncidentDef>
+    <defName>Milira_FallenAngel_Drop</defName>
+    <label>Wounded Angel</label>
+    <category>Misc</category>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>Milira.IncidentWorker_GiveQuestExceptMiliraScenario</workerClass>
+    <questScriptDef>Milira_FallenAngel_Drop</questScriptDef>
+    <baseChance>0</baseChance>
+    <minRefireDays>99999</minRefireDays>
+    <requireColonistsPresent>True</requireColonistsPresent>
+  </IncidentDef>
+
+  <!---->
+  <IncidentDef>
+    <defName>Milira_FallenAngel_Return</defName>
+    <label>Milira Rejoin</label>
+    <category>Misc</category>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>Milira.IncidentWorker_GiveQuestExceptMiliraScenario</workerClass>
+    <questScriptDef>Milira_FallenAngel_Return</questScriptDef>
+    <baseChance>0</baseChance>
+    <minRefireDays>99999</minRefireDays>
+  </IncidentDef>
+
+  <IncidentDef>
+    <defName>Milira_FallenAngel_ToChurch</defName>
+    <label>Contacting of Church</label>
+    <category>Misc</category>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>Milira.IncidentWorker_GiveQuestExceptMiliraScenario</workerClass>
+    <questScriptDef>Milira_FallenAngel_ToChurch</questScriptDef>
+    <baseChance>0</baseChance>
+    <minRefireDays>99999</minRefireDays>
+  </IncidentDef>
+
+  <IncidentDef>
+    <defName>Milira_ChurchIntro</defName>
+    <label>Skyfeather Missionary</label>
+    <category>Misc</category>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>Milira.IncidentWorker_GiveQuestExceptMiliraScenario</workerClass>
+    <questScriptDef>Milira_ChurchIntro</questScriptDef>
+    <baseChance>0</baseChance>
+    <minRefireDays>99999</minRefireDays>
+  </IncidentDef>
+
+
+  <!--↑↑↑↑剧情的部分↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑-->
+
+
+</Defs>

@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="Milian_BaseMakeableGun">
+    <defName>Milian_BishopScepter</defName>
+    <label>Milian ritual staff</label>
+    <description>A ceremonial prop used by the Bishop. It can also emit a low-power particle beam.</description>
+    <techLevel>Spacer</techLevel>
+    <graphicData>
+      <texPath>Milian/Weapon/BishopScepter</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.5</drawSize>
+    </graphicData>
+    <tradeability>None</tradeability>
+    <smeltable>false</smeltable>
+    <relicChance>0</relicChance>
+    <generateCommonality>1.0</generateCommonality>
+    <statBases>
+      <MarketValue>500</MarketValue>
+      <Mass>1.8</Mass>
+      <WorkToMake>10800</WorkToMake>
+      <AccuracyTouch>0.90</AccuracyTouch>
+      <AccuracyShort>0.95</AccuracyShort>
+      <AccuracyMedium>0.95</AccuracyMedium>
+      <AccuracyLong>0.95</AccuracyLong>
+      <RangedWeapon_Cooldown>0.2</RangedWeapon_Cooldown>
+    </statBases>
+    <costList>
+      <Milira_SplendidSteel>60</Milira_SplendidSteel>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+    <recipeMaker>
+      <researchPrerequisites>
+        <li>Milira_ParticleAcceleratorI</li>
+        <li>Milira_MilianTech_BishopI</li>
+      </researchPrerequisites>
+    </recipeMaker>
+    <equippedStatOffsets>
+      <MechRemoteRepairDistance>16</MechRemoteRepairDistance>
+    </equippedStatOffsets>
+    <equippedAngleOffset>-35</equippedAngleOffset>
+    <weaponTags>
+      <li>Milian_BishopScepter</li>
+    </weaponTags>
+    <weaponClasses>
+      <li>RangedHeavy</li>
+    </weaponClasses>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <onlyManualCast>false</onlyManualCast>
+        <defaultProjectile>MilianBullet_ParticleBeamGun</defaultProjectile>
+        <ai_IsBuildingDestroyer>false</ai_IsBuildingDestroyer>
+        <warmupTime>1.5</warmupTime>
+        <range>27.9</range>
+        <burstShotCount>1</burstShotCount>
+        <ticksBetweenBurstShots>6</ticksBetweenBurstShots>
+        <requireLineOfSight>true</requireLineOfSight>
+        <soundCast>Milira_Shot_PlasmaRifle</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <noiseRadius>2</noiseRadius>
+        <muzzleFlashScale>5</muzzleFlashScale>
+        <canGoWild>true</canGoWild>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>Shaft</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>15</power>
+        <cooldownTime>1.6</cooldownTime>
+        <armorPenetration>0.2</armorPenetration>
+      </li>
+    </tools>
+    <comps>
+    </comps>
+  </ThingDef>
+
+
+
+
+  <ThingDef ParentName="Milian_BaseMakeableGun">
+    <defName>Milian_PivotScepter</defName>
+    <label>Milian pivot scepter</label>
+    <description>A guiding staff that marks enemy weaknesses for friendly forces.</description>
+    <techLevel>Spacer</techLevel>
+    <graphicData>
+      <texPath>Milian/Weapon/PivotScepter</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.5</drawSize>
+    </graphicData>
+    <tradeability>None</tradeability>
+    <smeltable>false</smeltable>
+    <relicChance>0</relicChance>
+    <generateCommonality>1.0</generateCommonality>
+    <statBases>
+      <MarketValue>500</MarketValue>
+      <Mass>1.8</Mass>
+      <WorkToMake>24000</WorkToMake>
+      <AccuracyTouch>0.90</AccuracyTouch>
+      <AccuracyShort>0.95</AccuracyShort>
+      <AccuracyMedium>0.95</AccuracyMedium>
+      <AccuracyLong>0.95</AccuracyLong>
+      <RangedWeapon_Cooldown>0.2</RangedWeapon_Cooldown>
+    </statBases>
+    <costList>
+      <Milira_SunPlateSteel>10</Milira_SunPlateSteel>
+      <Plasteel>40</Plasteel>
+      <Milira_SplendidSteel>60</Milira_SplendidSteel>
+      <Milira_SolarCrystal>5</Milira_SolarCrystal>
+      <ComponentSpacer>1</ComponentSpacer>
+    </costList>
+    <recipeMaker>
+      <researchPrerequisites>
+        <li>Milira_ParticleAcceleratorII</li>
+        <li>Milira_MilianTech_BishopIII</li>
+      </researchPrerequisites>
+    </recipeMaker>
+    <equippedStatOffsets>
+    </equippedStatOffsets>
+    <equippedAngleOffset>-35</equippedAngleOffset>
+    <weaponTags>
+      <li>Milian_PivotScepter</li>
+    </weaponTags>
+    <weaponClasses>
+      <li>RangedHeavy</li>
+    </weaponClasses>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <onlyManualCast>false</onlyManualCast>
+        <defaultProjectile>MiliraBullet_PivotScepter</defaultProjectile>
+        <ai_IsBuildingDestroyer>false</ai_IsBuildingDestroyer>
+        <warmupTime>1.5</warmupTime>
+        <range>27.9</range>
+        <burstShotCount>1</burstShotCount>
+        <ticksBetweenBurstShots>6</ticksBetweenBurstShots>
+        <requireLineOfSight>true</requireLineOfSight>
+        <soundCast>Milira_Shot_PlasmaRifle</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <noiseRadius>2</noiseRadius>
+        <muzzleFlashScale>5</muzzleFlashScale>
+        <canGoWild>false</canGoWild>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>Shaft</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>15</power>
+        <cooldownTime>1.6</cooldownTime>
+        <armorPenetration>0.2</armorPenetration>
+      </li>
+    </tools>
+    <comps>
+    </comps>
+  </ThingDef>
+  <ThingDef ParentName="BaseBullet">
+    <defName>MiliraBullet_PivotScepter</defName>
+    <label>ion beam</label>
+    <projectile>
+      <damageDef>Milira_PlasmaBullet_Vulnerable</damageDef>
+      <damageAmountBase>8</damageAmountBase>
+      <armorPenetrationBase>0.35</armorPenetrationBase>
+      <stoppingPower>0.7</stoppingPower>
+      <speed>105</speed>
+    </projectile>
+    <graphicData>
+      <texPath>Milira/ProjectileNew/Bullet_Plasma</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+      <drawSize>0.8</drawSize>
+    </graphicData>
+  </ThingDef>
+
+
+
+
+  <!--=长程集束粒子狙击枪=-->
+  <ThingDef ParentName="BaseBullet">
+    <defName>MilianBullet_ParticleLongRangeSniper</defName>
+    <label>focused particle beam</label>
+    <graphicData>
+      <texPath>Milira/ProjectileNew/Bullet_Particle</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>1.6</drawSize>
+    </graphicData>
+    <projectile>
+      <flyOverhead>false</flyOverhead>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>28</damageAmountBase>
+      <armorPenetrationBase>0.32</armorPenetrationBase>
+      <stoppingPower>2.0</stoppingPower>
+      <speed>275</speed>
+    </projectile>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>MilianBullet_ParticleLongRangeSniper_Charged</defName>
+    <label>focused particle beam</label>
+    <graphicData>
+      <texPath>Milira/ProjectileNew/Bullet_ParticleCharged</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>1.6</drawSize>
+    </graphicData>
+    <projectile>
+      <flyOverhead>false</flyOverhead>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>42</damageAmountBase>
+      <armorPenetrationBase>0.82</armorPenetrationBase>
+      <stoppingPower>2.5</stoppingPower>
+      <speed>275</speed>
+    </projectile>
+  </ThingDef>
+
+  <ThingDef ParentName="Milian_BaseMakeableGun">
+    <defName>Milian_ParticleLongRangeSniper</defName>
+    <label>Long-Range particle sniper rifle</label>
+    <description>A firearm that uses high-speed neutral particle clusters to inflict impact on targets.</description>
+    <techLevel>Spacer</techLevel>
+    <graphicData>
+      <texPath>Milian/Weapon/ParticleLongRangeSniper</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.0</drawSize>
+    </graphicData>
+    <tradeability>None</tradeability>
+    <smeltable>false</smeltable>
+    <relicChance>0</relicChance>
+    <generateCommonality>0.5</generateCommonality>
+    <equippedAngleOffset>45</equippedAngleOffset>
+    <tickerType>Normal</tickerType>
+    <statBases>
+      <Mass>6.5</Mass>
+      <WorkToMake>36000</WorkToMake>
+      <AccuracyTouch>0.65</AccuracyTouch>
+      <AccuracyShort>0.75</AccuracyShort>
+      <AccuracyMedium>0.85</AccuracyMedium>
+      <AccuracyLong>0.65</AccuracyLong>
+      <RangedWeapon_Cooldown>2.6</RangedWeapon_Cooldown>
+      <Ancot_WeaponMaxCharge>4</Ancot_WeaponMaxCharge>
+      <Ancot_WeaponChargeTick>1200</Ancot_WeaponChargeTick>
+      <Ancot_EnergyWeaponCorrectionFactor>1</Ancot_EnergyWeaponCorrectionFactor>
+      <Ancot_EnergyWeaponResetTime>1800</Ancot_EnergyWeaponResetTime>
+    </statBases>
+    <costList>
+      <Milira_SunPlateSteel>30</Milira_SunPlateSteel>
+      <Milira_SplendidSteel>120</Milira_SplendidSteel>
+      <Milira_SolarCrystal>6</Milira_SolarCrystal>
+      <ComponentIndustrial>8</ComponentIndustrial>
+    </costList>
+    <recipeMaker>
+      <researchPrerequisite>Milira_ParticleAcceleratorIII</researchPrerequisite>
+    </recipeMaker>
+    <equippedStatOffsets>
+    </equippedStatOffsets>
+    <weaponTags>
+      <li>Milian_ParticleLongRangeSniper</li>
+    </weaponTags>
+    <weaponClasses>
+      <li>RangedHeavy</li>
+    </weaponClasses>
+    <verbs>
+      <li>
+        <verbClass>AncotLibrary.Verb_ChargeShoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <onlyManualCast>false</onlyManualCast>
+        <defaultProjectile>MilianBullet_ParticleLongRangeSniper</defaultProjectile>
+        <ai_IsBuildingDestroyer>false</ai_IsBuildingDestroyer>
+        <warmupTime>4.5</warmupTime>
+        <range>47.9</range>
+        <burstShotCount>1</burstShotCount>
+        <ticksBetweenBurstShots>0</ticksBetweenBurstShots>
+        <requireLineOfSight>true</requireLineOfSight>
+        <soundCast>Milira_Shot_PlasmaRifle</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <noiseRadius>2</noiseRadius>
+        <muzzleFlashScale>5</muzzleFlashScale>
+        <canGoWild>false</canGoWild>
+        <aimingTargetMote>Milira_Mote_ParticleSniperTargeting</aimingTargetMote>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>Barrel</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>6</power>
+        <cooldownTime>1.6</cooldownTime>
+        <armorPenetration>0.2</armorPenetration>
+      </li>
+    </tools>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_WeaponCharge">
+        <projectileCharged>MilianBullet_ParticleLongRangeSniper_Charged</projectileCharged>
+        <chargeFireEffecter>Milira_ParticleChargeFire_Forward_Big</chargeFireEffecter>
+        <chargeOnResetRatio>1.0</chargeOnResetRatio>
+        <barColor>(0.86,0.87,0.70,0.8)</barColor>
+      </li>
+    </comps>
+  </ThingDef>
+
+
+
+
+</Defs>

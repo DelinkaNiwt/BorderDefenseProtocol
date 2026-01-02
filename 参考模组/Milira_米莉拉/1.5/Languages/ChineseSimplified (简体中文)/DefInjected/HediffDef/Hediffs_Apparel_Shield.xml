@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <Milian_KnightShield_Active.label>骑士盾防御</Milian_KnightShield_Active.label>
+  <Milian_KnightShield_Active.description>这个生物正在使用米莉安骑士盾防御。</Milian_KnightShield_Active.description>
+  
+  <Milian_FeatherShapeShield_Active.label>羽形盾防御</Milian_FeatherShapeShield_Active.label>
+  <Milian_FeatherShapeShield_Active.description>这个生物正在使用米莉安羽形盾防御。</Milian_FeatherShapeShield_Active.description>
+  
+  <Milian_RookShield_Active.label>独眼城门盾防御</Milian_RookShield_Active.label>
+  <Milian_RookShield_Active.description>这个生物正在使用米莉安独眼城门盾防御。</Milian_RookShield_Active.description>
+  
+</LanguageData>

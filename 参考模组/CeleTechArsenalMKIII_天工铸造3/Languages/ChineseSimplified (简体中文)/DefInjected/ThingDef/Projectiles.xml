@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: bullet -->
+  <Bullet_AR_smart.label>TODO</Bullet_AR_smart.label>
+  
+  <!-- EN: accelerated magnet projectile(antimatter warhead with EMP cells) -->
+  <Bullet_AutocannonTurretEMP.label>电磁炮射弹</Bullet_AutocannonTurretEMP.label>
+  
+  <!-- EN: shotgun bullet -->
+  <Bullet_ChargedShotGun_CMC.label>电荷霰弹</Bullet_ChargedShotGun_CMC.label>
+  
+  <!-- EN: shotgun bullet -->
+  <Bullet_ChargedShotGun_CMC_Smart.label>电荷霰弹</Bullet_ChargedShotGun_CMC_Smart.label>
+  
+  <!-- EN: bullet -->
+  <Bullet_ChargedShotGun_CMC_Smart_B.label>TODO</Bullet_ChargedShotGun_CMC_Smart_B.label>
+  
+  <!-- EN: autocannon shell -->
+  <Bullet_CMC_AutocannonTurret.label>电荷机炮弹</Bullet_CMC_AutocannonTurret.label>
+  
+  <!-- EN: autocannon shell -->
+  <Bullet_CMC_CannonTurret.label>TODO</Bullet_CMC_CannonTurret.label>
+  
+  <!-- EN: Flame -->
+  <Bullet_CMC_Flame.label>火焰</Bullet_CMC_Flame.label>
+  
+  <!-- EN: HE payload -->
+  <Bullet_CMC_Fragments.label>高爆杀伤部</Bullet_CMC_Fragments.label>
+  
+  <!-- EN: neutron grenade -->
+  <Bullet_CMC_NGrenade.label>TODO</Bullet_CMC_NGrenade.label>
+  
+  <!-- EN: neutron grenade -->
+  <Bullet_CMC_NGrenade_Small.label>TODO</Bullet_CMC_NGrenade_Small.label>
+  
+  <!-- EN: stun grenade -->
+  <Bullet_CMC_SGrenade.label>TODO</Bullet_CMC_SGrenade.label>
+  
+  <!-- EN: stun grenade -->
+  <Bullet_CMC_SGrenade_Small.label>TODO</Bullet_CMC_SGrenade_Small.label>
+  
+  <!-- EN: laser -->
+  <Bullet_Fake_LaserRifle.label>TODO</Bullet_Fake_LaserRifle.label>
+  
+  <!-- EN: Charged HMG bullet -->
+  <Bullet_HMG_API.label>TODO</Bullet_HMG_API.label>
+  
+  <!-- EN: shotgun bullet -->
+  <Bullet_QBAFourNine.label>TODO</Bullet_QBAFourNine.label>
+  
+  <!-- EN: shotgun bullet(over-charged) -->
+  <Bullet_QBAFourNine_Pulse.label>TODO</Bullet_QBAFourNine_Pulse.label>
+  
+  <!-- EN: Charged sniper bullet -->
+  <Bullet_QBUsixsix.label>不稳定电荷爆弹</Bullet_QBUsixsix.label>
+  
+  <!-- EN: hypersonic projectile -->
+  <Bullet_QBUsixsix_Smart.label>TODO</Bullet_QBUsixsix_Smart.label>
+  
+  <!-- EN: Charged sniper bullet -->
+  <Bullet_QBUTOOE.label>TODO</Bullet_QBUTOOE.label>
+  
+  <!-- EN: charged bullet -->
+  <Bullet_QBZ3oo.label>TODO</Bullet_QBZ3oo.label>
+  
+  <!-- EN: charged bullet -->
+  <Bullet_QBZ3oo_DPSR.label>TODO</Bullet_QBZ3oo_DPSR.label>
+  
+  <!-- EN: Charged assault rifle bullet -->
+  <Bullet_QBZfivenine.label>电荷步枪弹</Bullet_QBZfivenine.label>
+  
+  <!-- EN: Charged assault rifle bullet -->
+  <Bullet_QBZfivenine_NL.label>TODO</Bullet_QBZfivenine_NL.label>
+  
+  <!-- EN: Charged assault rifle bullet -->
+  <Bullet_QBZfivenine_Turret.label>TODO</Bullet_QBZfivenine_Turret.label>
+  
+  <!-- EN: smart assault rifle bullet -->
+  <Bullet_QBZsmart.label>智能电荷步枪弹</Bullet_QBZsmart.label>
+  
+  <!-- EN: plasma ball -->
+  <Bullet_QSZ_Plasma.label>TODO</Bullet_QSZ_Plasma.label>
+  
+  <!-- EN: shotgun bullet -->
+  <Bullet_ShotGunSplited_CMC.label>TODO</Bullet_ShotGunSplited_CMC.label>
+  
+  <!-- EN: LMG bullet -->
+  <Bullet_WJ_LMG_Thunder.label>TODO</Bullet_WJ_LMG_Thunder.label>
+  
+  <!-- EN: LMG bullet -->
+  <Bullet_WJ_LMGNT.label>智能机枪弹</Bullet_WJ_LMGNT.label>
+  
+  <!-- EN: LMG bullet -->
+  <Bullet_WJ_LMGsmart.label>智能机枪弹</Bullet_WJ_LMGsmart.label>
+  
+  <!-- EN: SMG bullet -->
+  <Bullet_WJ_SMG_power.label>智能冲锋枪弹</Bullet_WJ_SMG_power.label>
+  
+  <!-- EN: SMG bullet -->
+  <Bullet_WJ_SMG_smart.label>智能冲锋枪弹</Bullet_WJ_SMG_smart.label>
+  
+  <!-- EN: smart sniper bullet -->
+  <Bullet_WJU.label>追踪狙击弹</Bullet_WJU.label>
+  
+  <!-- EN: smart bullet(Incendiary) -->
+  <Bullet_WJU_Flame.label>TODO</Bullet_WJU_Flame.label>
+  
+  <!-- EN: EML projectile -->
+  <Bullet_XuanMing.label>磁轨步枪弹</Bullet_XuanMing.label>
+  
+  <!-- EN: EML projectile -->
+  <Bullet_XuanMing_Antientropy.label>磁轨步枪弹（反熵）</Bullet_XuanMing_Antientropy.label>
+  
+  <!-- EN: grenade -->
+  <CMC_40mmGrenade.label>TODO</CMC_40mmGrenade.label>
+  
+  <!-- EN: grenade -->
+  <CMC_40mmGrenade_EMP.label>TODO</CMC_40mmGrenade_EMP.label>
+  
+  <!-- EN: rocket -->
+  <CMC_90mmEMPRocket.label>TODO</CMC_90mmEMPRocket.label>
+  
+  <!-- EN: bullet -->
+  <CMC_Bullet_pistol.label>小口径无壳弹</CMC_Bullet_pistol.label>
+  
+  <!-- EN: bullet -->
+  <CMC_Bullet_pistolABC.label>TODO</CMC_Bullet_pistolABC.label>
+  
+  <!-- EN: rocket -->
+  <CMC_FF120Rocket.label>TODO</CMC_FF120Rocket.label>
+  
+  <!-- EN: rocket -->
+  <CMC_HeavyRocket.label>重型反步兵火箭</CMC_HeavyRocket.label>
+  
+  <!-- EN: grenade -->
+  <CMC_LightRocketGrenade.label>TODO</CMC_LightRocketGrenade.label>
+  
+  <!-- EN: HJ-53 -->
+  <CMC_Missile_ATGM_Light.label>红箭53 轻型反坦克导弹</CMC_Missile_ATGM_Light.label>
+  
+  <!-- EN: HJ-53(EMP) -->
+  <CMC_Missile_ATGM_Light_EMP.label>TODO</CMC_Missile_ATGM_Light_EMP.label>
+  
+  <!-- EN: HJ-50 heavy ATGM missile -->
+  <CMC_Missile_HeavyATGM.label>红箭50 重型反坦克导弹</CMC_Missile_HeavyATGM.label>
+  
+  <!-- EN: Pulse -->
+  <Projectile_QLUX.label>等离子脉冲</Projectile_QLUX.label>
+  
+  <!-- EN: Pulse -->
+  <Projectile_QLUX_GiantExplosion.label>等离子脉冲</Projectile_QLUX_GiantExplosion.label>
+  
+</LanguageData>

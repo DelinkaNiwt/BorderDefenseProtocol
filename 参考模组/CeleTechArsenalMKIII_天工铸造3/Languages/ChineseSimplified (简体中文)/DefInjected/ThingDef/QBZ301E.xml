@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: QBB-95C LMG -->
+  <QBB_threeoo.label>QBB-95 班用电磁机枪</QBB_threeoo.label>
+  <!-- EN: A LMG varient of QBZ-59.\n\nThis weapon can automatically switch target after neutralizing the current one. -->
+  <QBB_threeoo.description>QBZ-95C电磁步枪的班用机枪构型，加装了能实时分析目标状态的试做型智能瞄具，使其可以在消灭当前目标后迅速锁定邻近目标，以提供高效的压制火力。</QBB_threeoo.description>
+  <!-- EN: stock -->
+  <QBB_threeoo.tools.stock.label>枪托</QBB_threeoo.tools.stock.label>
+  <!-- EN: barrel -->
+  <QBB_threeoo.tools.barrel.label>枪管</QBB_threeoo.tools.barrel.label>
+  
+  <!-- UNUSED -->
+  <QBB_threeoo.verbs.Verb_Shoot.label>QBB-95 班用电磁机枪</QBB_threeoo.verbs.Verb_Shoot.label>
+  
+  <!-- EN: QBZ-95C AR -->
+  <QBZ_threeooE.label>QBZ-95 电磁突击步枪</QBZ_threeooE.label>
+  <!-- EN: Developed in the 2030s, QBZ-95C is a pioneer in charged assault rifles. Due to the limitation of technology, it is bulky, complicated and inaccurate. -->
+  <QBZ_threeooE.description>作为电荷武器的先驱之一，QBZ-95C由于当时的科技限制笨重、复杂且精度不佳，但却做为一款廉价的高穿甲武器很受边缘世界用户的欢迎。</QBZ_threeooE.description>
+  <!-- EN: stock -->
+  <QBZ_threeooE.tools.stock.label>枪托</QBZ_threeooE.tools.stock.label>
+  <!-- EN: barrel -->
+  <QBZ_threeooE.tools.barrel.label>枪管</QBZ_threeooE.tools.barrel.label>
+  <!-- EN: QBZ-95C AR -->
+  <QBZ_threeooE.verbs.Verb_ShootCE.label>TODO</QBZ_threeooE.verbs.Verb_ShootCE.label>
+  
+  <!-- UNUSED -->
+  <QBZ_threeooE.verbs.Verb_Shoot.label>QBZ-95 电磁步枪</QBZ_threeooE.verbs.Verb_Shoot.label>
+  
+  <!-- EN: QBZ-95ED Desert Expedition Rifle -->
+  <QBZ_threeooED.label>QBZ-95ED 电磁突击步枪 荒漠作战型</QBZ_threeooED.label>
+  <!-- EN: A specialized variant of the QBZ-95C Electromagnetic Rifle optimized for extreme planetary environments. Equipped with a thermal-regulation exoskeleton and ceramic-fragmenting rounds designed for high-efficiency soft target elimination. -->
+  <QBZ_threeooED.description>QBZ-95C电磁步枪的恶劣环境特化改型，加装了温控套件，子弹使用能分裂4个弹片的陶瓷分裂弹头以高效杀伤软目标。</QBZ_threeooED.description>
+  <!-- EN: stock -->
+  <QBZ_threeooED.tools.stock.label>枪托</QBZ_threeooED.tools.stock.label>
+  <!-- EN: barrel -->
+  <QBZ_threeooED.tools.barrel.label>枪管</QBZ_threeooED.tools.barrel.label>
+  <!-- EN: QBZ-95ED Desert Expedition Rifle -->
+  <QBZ_threeooED.verbs.Verb_Shoot.label>QBZ-95ED 电磁突击步枪 荒漠作战型</QBZ_threeooED.verbs.Verb_Shoot.label>
+  
+</LanguageData>

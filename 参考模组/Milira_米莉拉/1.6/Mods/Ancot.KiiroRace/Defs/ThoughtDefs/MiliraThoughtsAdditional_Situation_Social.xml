@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThoughtDef>
+    <defName>MiliraFriendly_Kiiro</defName>
+    <thoughtClass>Milira_Kiiro.Thought_MiliraFriendly</thoughtClass>
+    <workerClass>Milira_Kiiro.ThoughtWorker_MiliraFriendly</workerClass>
+    <validWhileDespawned>true</validWhileDespawned>
+    <stages>
+      <li>
+        <label>friendly</label>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>KiiroFriendly_Milira</defName>
+    <thoughtClass>Milira_Kiiro.Thought_KiiroFriendly</thoughtClass>
+    <workerClass>Milira_Kiiro.ThoughtWorker_KiiroFriendly</workerClass>
+    <validWhileDespawned>true</validWhileDespawned>
+    <stages>
+      <li>
+        <label>friendly</label>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+</Defs>

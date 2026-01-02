@@ -1,0 +1,148 @@
+<Defs>
+	<ThingDef ParentName="AutocannonTurret">
+    <defName>CMCcannon</defName>
+    <label>“Qinggang Barragefire” EM cannon turret</label>
+	<thingClass>TOT_DLL_test.Building_CMCTurretGun</thingClass>
+    <description>A charged rapid auto cannon equipped on a turret. It fires accurate bursts and does heavy damage to light-armored targets over range, but its barrel must be refurbished after use.</description>
+    <uiIconPath>Things/Buildings/CCUI</uiIconPath>
+	<graphicData>
+            <texPath>Things/Buildings/largebase</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <drawSize>(5,5)</drawSize>
+        </graphicData>
+	<size>(3,3)</size>
+    <statBases>
+	  <MaxHitPoints>1200</MaxHitPoints>
+	  <Flammability>0</Flammability>
+      <ShootingAccuracyTurret>0.83</ShootingAccuracyTurret>
+	  <WorkToBuild>9000</WorkToBuild>
+    </statBases>
+	<drawerType>MapMeshAndRealTime</drawerType>
+	<tickerType>Normal</tickerType>
+	<killedLeavings>
+      <ChunkSlagSteel>3</ChunkSlagSteel>
+      <Steel>60</Steel>
+      <Plasteel>10</Plasteel>
+    </killedLeavings>
+    <costList>
+      <Steel>500</Steel>
+	  <Plasteel>180</Plasteel>
+      <ComponentIndustrial>12</ComponentIndustrial>
+	  <ComponentSpacer>4</ComponentSpacer>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>5.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.8</chanceNeverExplodeFromDamage>
+      </li>
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>1050</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Refuelable">
+        <fuelLabel>Shots until barrel change</fuelLabel>
+        <fuelGizmoLabel>Barrel durability</fuelGizmoLabel>
+        <outOfFuelMessage>Needs new barrel</outOfFuelMessage>
+        <fuelFilter><thingDefs><li>Steel</li></thingDefs></fuelFilter>
+        <fuelCapacity>360</fuelCapacity>
+        <fuelMultiplier>2</fuelMultiplier>
+        <initialFuelPercent>1</initialFuelPercent>
+        <autoRefuelPercent>0.5</autoRefuelPercent>
+        <showFuelGizmo>true</showFuelGizmo>
+        <minimumFueledThreshold>1</minimumFueledThreshold>
+        <factorByDifficulty>true</factorByDifficulty>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelIconPath>UI/Overlays/Barrel</fuelIconPath>
+      </li>
+	  <li Class="CompProperties_AffectedByFacilities">
+        <linkableFacilities>
+          <li>CMC_FCradar</li>
+        </linkableFacilities>
+      </li>
+    </comps>
+	<damageMultipliers>
+      <li>
+        <damageDef>Bomb</damageDef>
+        <multiplier>0.3</multiplier>
+      </li>
+      <li>
+        <damageDef>Bullet</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+	  <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+	  <li>
+        <damageDef>EMP</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+	  <li>
+        <damageDef>Stun</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <building>
+      <turretGunDef>Gun_CMCcannon</turretGunDef>
+      <turretBurstCooldownTime>1.5</turretBurstCooldownTime>
+	  <turretTopDrawSize>5.3</turretTopDrawSize>
+	   <ai_combatDangerous>false</ai_combatDangerous>
+    </building>
+    <researchPrerequisites>
+      <li>HeavyTurrets</li>
+	  <li>CMCGunTurrets</li>
+    </researchPrerequisites>
+	<designationCategory>CMC_DefensenProduction</designationCategory>
+	<placeWorkers>
+	  <li>PlaceWorker_BandNode</li>
+    </placeWorkers>
+	<modExtensions>
+      <li Class="TOT_DLL_test.TurretExtension_CMC">
+        <rotationSpeed>2</rotationSpeed>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>Gun_CMCcannon</defName>
+    <label>charged auto cannon</label>
+    <description>A self-loading large-bore cannon designed to attach to a turret.</description>
+    <graphicData>
+      <texPath>Things/Buildings/CMC_plasmasword_top</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(3.8,3.8)</drawSize>
+    </graphicData>
+    <statBases>
+      <AccuracyTouch>0.98</AccuracyTouch>
+      <AccuracyShort>0.92</AccuracyShort>
+      <AccuracyMedium>0.86</AccuracyMedium>
+      <AccuracyLong>0.85</AccuracyLong>
+      <RangedWeapon_Cooldown>1.45</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>40</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+	        <weaponTags Inherit = "False">
+			<li>Weapon_CMCf</li>
+		</weaponTags>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>Bullet_CMC_AutocannonTurret</defaultProjectile>
+        <warmupTime>0</warmupTime>
+        <range>54.9</range>
+        <ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+        <burstShotCount>6</burstShotCount>
+        <soundCast>Sound_Cannon</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>12</muzzleFlashScale>
+        <consumeFuelPerShot>1</consumeFuelPerShot>
+      </li>
+    </verbs>
+  </ThingDef>
+</Defs>

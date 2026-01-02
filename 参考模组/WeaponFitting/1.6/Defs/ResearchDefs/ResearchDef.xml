@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ResearchProjectDef>
+    <defName>WeaponFittings_I</defName>
+    <label>basic fitting technology</label>
+    <description>Unlocks basic fitting technology.\n\nEnables basic fitting research and batch disassembly of specialized weapons at workbenches like machining tables.\n\nAdditionally, installing fittings and manual disassembly of specialized weapons don't require technology and can be accessed by selecting a colonist and right-clicking the corresponding menu option.</description>
+    <baseCost>1000</baseCost>
+    <techLevel>Industrial</techLevel>
+    <prerequisites>
+      <li>Machining</li>
+    </prerequisites>
+    <researchViewX>6.00</researchViewX>
+    <researchViewY>5.6</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>WeaponFittings_II</defName>
+    <label>advanced fitting technology</label>
+    <description>Unlocks advanced fitting technology.\n\nEnables targeted research at precision assembly benches.\n\nUnlocks fitting removal functionality - access by selecting a colonist and right-clicking a firearm, or by right-clicking the colonist to open the menu.\n\nDisassembling specialized firearms at workbenches returns some raw materials.</description>
+    <baseCost>2000</baseCost>
+    <techLevel>Industrial</techLevel>
+    <prerequisites>
+      <li>Fabrication</li>
+    </prerequisites>
+		<hiddenPrerequisites>
+			<li>WeaponFittings_I</li>
+		</hiddenPrerequisites>
+    <researchViewX>17.00</researchViewX>
+    <researchViewY>4.2</researchViewY>
+  </ResearchProjectDef>
+</Defs>

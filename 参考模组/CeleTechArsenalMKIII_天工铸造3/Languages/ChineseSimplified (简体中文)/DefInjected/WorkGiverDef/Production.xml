@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Operate Machine -->
+  <CMC_Operate.label>操作机器</CMC_Operate.label>
+  <!-- EN: Operating at -->
+  <CMC_Operate.gerund>正在操作</CMC_Operate.gerund>
+  <!-- EN: Operate -->
+  <CMC_Operate.verb>操作</CMC_Operate.verb>
+  
+</LanguageData>

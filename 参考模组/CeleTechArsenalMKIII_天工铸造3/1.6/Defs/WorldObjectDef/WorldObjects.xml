@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <WorldObjectDef>
+    <defName>CMC_EMLShell</defName>
+    <label>130MM EML Shell</label>
+    <description>.</description>
+    <worldObjectClass>TOT_DLL_test.WorldObject_EMLShell</worldObjectClass>
+    <texture>UI/EML_ShellWorldObject</texture>
+    <useDynamicDrawer>true</useDynamicDrawer>
+    <expandingIcon>true</expandingIcon>
+    <expandingIconTexture>UI/EML_ShellWorldObject</expandingIconTexture>
+    <expandingIconPriority>6</expandingIconPriority>
+  </WorldObjectDef>
+</Defs>

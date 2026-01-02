@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Next {0} {1} -->
+  <Ancot.NextSpawnedItemIn>下次{0}{1}</Ancot.NextSpawnedItemIn>
+
+  <!-- EN: fully grown -->
+  <Ancot.PlantGrowFully>完全生长</Ancot.PlantGrowFully>
+  <!-- EN: grow progress: {0} -->
+  <Ancot.PlantGrowProgress>生长进度：{0}</Ancot.PlantGrowProgress>
+  <!-- EN: sleeping, require light: {0} -->
+  <Ancot.PlantGrow_LightRequire>休眠中，需要光照：{0}</Ancot.PlantGrow_LightRequire>
+  <!-- EN: stopped grow for non-ideal temperature, require:  -->
+  <Ancot.PlantGrow_TempRequire>因非理想温度而停止生长，需要温度：</Ancot.PlantGrow_TempRequire>
+
+  <!-- EN: damage loading -->
+  <Ancot.LoadDamage>装填伤害</Ancot.LoadDamage>
+  <!-- EN: armor penetration loading -->
+  <Ancot.LoadArmorPenetration>装填护甲穿透</Ancot.LoadArmorPenetration>
+  <!-- EN: stopping power loading -->
+  <Ancot.LoadStoppingPower>装填抑止能力</Ancot.LoadStoppingPower>
+  <!-- EN: building damage factor loading -->
+  <Ancot.LoadBuildingDamageFactor>装填建筑伤害系数</Ancot.LoadBuildingDamageFactor>
+  <!-- EN: building damage factor passable loading -->
+  <Ancot.LoadBuildingDamageFactorPassable>装填建筑伤害系数（可通行）</Ancot.LoadBuildingDamageFactorPassable>
+  <!-- EN: building damage factor impassable loading -->
+  <Ancot.LoadBuildingDamageFactorImpassable>装填建筑伤害系数（不可通行）</Ancot.LoadBuildingDamageFactorImpassable>
+
+  <!-- EN: station owner: {0} -->
+  <Ancot.WorldObject_AssignableToPawn>站点领主:{0}</Ancot.WorldObject_AssignableToPawn>
+  <!-- EN: No station owner set -->
+  <Ancot.WorldObject_AssignableToPawn_NoBody>未设定站点领主</Ancot.WorldObject_AssignableToPawn_NoBody>
+
+  <!-- EN: This autofill amount determines the maximum amount of resources your colonists will automatically place in this {0}. -->
+  <Ancot.ThingCarrierAutofillDesc>这个自动填充量决定了你的殖民者将自动放置在这个{0}的最大资源量。</Ancot.ThingCarrierAutofillDesc>
+
+  <!-- UNUSED -->
+  <Ancot.DroneDraft_NotAvailable>{0}目前无法被征召。</Ancot.DroneDraft_NotAvailable>
+
+</LanguageData>

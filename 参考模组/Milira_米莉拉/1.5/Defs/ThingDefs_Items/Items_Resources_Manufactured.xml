@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>Milira_SolarCrystal</defName>
+    <label>Solar Crystal</label>
+    <description>The crystal that has undergone a change in properties due to excessive solar electromagnetic radiation.</description>
+    <graphicData>
+      <texPath>Milira/Item/Resource/SolarCrystal</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <drawSize>1.0</drawSize>
+    </graphicData>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Standard_Drop</soundInteract>
+    <soundDrop>Standard_Drop</soundDrop>
+    <stackLimit>50</stackLimit>
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <MarketValue>25</MarketValue>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Mass>0.1</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+    <costList>
+    </costList>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+    <tradeability>All</tradeability>
+    <techLevel>Spacer</techLevel>
+    <tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+  </ThingDef>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>Milira_SunLightFuel</defName>
+    <label>Solar Fuel</label>
+    <description>An extremely high-energy-density combustible liquid that requires proper storage.</description>
+    <possessionCount>20</possessionCount>
+    <tickerType>Normal</tickerType>
+    <graphicData>
+      <texPath>Milira/Item/Resource/SunLightFuel</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>0.85</drawSize>
+    </graphicData>
+    <costList>
+      <Chemfuel>10</Chemfuel>
+      <Milira_SunLightFruit>1</Milira_SunLightFruit>
+    </costList>
+    <stackLimit>75</stackLimit>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <intricate>true</intricate>    <!-- Not returned to player when product made of this is smelted. -->
+    <statBases>
+      <MaxHitPoints>40</MaxHitPoints>
+      <WorkToMake>2000</WorkToMake>
+      <MarketValue>8</MarketValue>
+      <Mass>0.04</Mass>
+      <Flammability>2.0</Flammability>
+      <DeteriorationRate>1.0</DeteriorationRate>
+    </statBases>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <explosiveRadius>2.4</explosiveRadius>
+        <explosiveDamageType>Flame</explosiveDamageType>
+        <explosiveExpandPerStackcount>0.05</explosiveExpandPerStackcount>
+        <startWickOnDamageTaken>
+          <li>Flame</li>
+        </startWickOnDamageTaken>
+        <startWickHitPointsPercent>0.333</startWickHitPointsPercent>
+        <preExplosionSpawnThingDef>Filth_Fuel</preExplosionSpawnThingDef>
+        <preExplosionSpawnChance>1</preExplosionSpawnChance>
+        <wickTicks>70~150</wickTicks>
+      </li>
+    </comps>
+    <!-- <recipeMaker>
+      <researchPrerequisite>Milira_SunLightFuelExtract</researchPrerequisite>
+      <bulkRecipeCount>10</bulkRecipeCount>
+    </recipeMaker> -->
+    <allowedArchonexusCount>100</allowedArchonexusCount>
+  </ThingDef>
+
+
+  <!-- <ThingDef>
+    <defName>Milira_EdificationFeather</defName>
+    <label>启迪之羽</label>
+    <description>沉淀着知识的特殊羽毛，包含了一位米莉拉的一生。</description>
+    <thingClass>ThingWithComps</thingClass>
+    <graphicData>
+      <texPath>Milira/Item/Resource/SunLightFuel</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <category>Item</category>
+    <selectable>true</selectable>
+    <tickerType>Normal</tickerType>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <MarketValue>1250</MarketValue>
+      <Mass>0.5</Mass>
+    </statBases>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <altitudeLayer>Item</altitudeLayer>
+    <useHitPoints>true</useHitPoints>
+    <comps>
+      <li Class="Milira.CompProperties_RandomSkillExp">
+        <compClass>Milira.CompRandomSkillExp</compClass>
+        <useLabel>使用启迪之羽</useLabel>
+        <useJob>UseItem</useJob>
+        <useDuration>30</useDuration>
+        <expPoints>4500</expPoints>
+        <interestChance>1.0</interestChance>
+      </li>
+    </comps>
+  </ThingDef> -->
+
+
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>Milira_StarshipBattery</defName>
+    <label>Milira Starship Battery</label>
+    <description>A fuel cell with enough capacity to support the interstellar travel of a small spacecraft. When installed in a turret, it can provide an almost perpetual energy supply.</description>
+    <graphicData>
+      <texPath>Milira/Item/Resource/StarshipBattery</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.0</drawSize>
+    </graphicData>
+    <costList>
+      <Milira_SolarCrystal>20</Milira_SolarCrystal>
+      <Milira_SunPlateSteel>65</Milira_SunPlateSteel>
+      <Milira_SunLightFuel>500</Milira_SunLightFuel>
+    </costList>
+    <recipeMaker>
+      <researchPrerequisites>
+        <li>Milira_SunBlastFurnace_Build</li>
+        <li>Milira_ParticleAcceleratorIII</li>
+      </researchPrerequisites>
+      <recipeUsers>
+        <li>Milira_SunBlastFurnace</li>
+      </recipeUsers>
+      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+      <workSkill>Crafting</workSkill>
+      <effectWorking>Milira_SunBlastFurnaceBurning</effectWorking>
+      <soundWorking>MiliraRecipe_SunBlastFurnace</soundWorking>
+      <skillRequirements>
+        <Crafting>12</Crafting>
+      </skillRequirements>
+    </recipeMaker>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Standard_Drop</soundInteract>
+    <soundDrop>Standard_Drop</soundDrop>
+    <stackLimit>5</stackLimit>
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <WorkToMake>4000</WorkToMake>
+      <MarketValue>1000</MarketValue>
+      <MaxHitPoints>300</MaxHitPoints>
+      <Mass>18</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+    <tradeability>Sellable</tradeability>
+    <techLevel>Spacer</techLevel>
+    <tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+  </ThingDef>
+
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>Milira_ResonatorCore</defName>
+    <label>Resonator core</label>
+    <description>The core component of the resonator device.</description>
+    <graphicData>
+      <texPath>Milira/Item/Resource/ResonatorCore</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.2</drawSize>
+    </graphicData>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Standard_Drop</soundInteract>
+    <soundDrop>Standard_Drop</soundDrop>
+    <stackLimit>5</stackLimit>
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <MarketValue>100</MarketValue>
+      <MaxHitPoints>300</MaxHitPoints>
+      <Mass>15</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+    <tradeability>All</tradeability>
+    <techLevel>Spacer</techLevel>
+    <tradeTags>
+      <li>Milira_ResonatorCore</li>
+    </tradeTags>
+    <comps>
+    </comps>
+  </ThingDef>
+
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>Milira_FurnaceCoreModel</defName>
+    <label>Sunblast Furnace Core Model</label>
+    <description>A model of the core component of the Sunblast Furnace, through the study of this model, one can understand the construction method of the Sunblast Furnace.</description>
+    <graphicData>
+      <texPath>Milira/Item/Resource/FurnaceCore</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.2</drawSize>
+    </graphicData>
+    <!-- <costList>
+      <Milira_SolarCrystal>20</Milira_SolarCrystal>
+      <Milira_SunPlateSteel>65</Milira_SunPlateSteel>
+      <Milira_SunLightFuel>500</Milira_SunLightFuel>
+    </costList>
+    <recipeMaker>
+      <researchPrerequisites>
+        <li>Milira_SunBlastFurnace_Build</li>
+        <li>Milira_CapacitorIII</li>
+      </researchPrerequisites>
+      <recipeUsers>
+        <li>Milira_SunBlastFurnace</li>
+      </recipeUsers>
+      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+      <workSkill>Crafting</workSkill>
+      <effectWorking>Milira_SunBlastFurnaceBurning</effectWorking>
+      <soundWorking>MiliraRecipe_SunBlastFurnace</soundWorking>
+      <skillRequirements>
+        <Crafting>12</Crafting>
+      </skillRequirements>
+    </recipeMaker> -->
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Standard_Drop</soundInteract>
+    <soundDrop>Standard_Drop</soundDrop>
+    <stackLimit>1</stackLimit>
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <!-- <WorkToMake>4000</WorkToMake> -->
+      <MarketValue>2000</MarketValue>
+      <MaxHitPoints>300</MaxHitPoints>
+      <Mass>15</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+    <tradeability>All</tradeability>
+    <techLevel>Spacer</techLevel>
+    <tradeTags Inherit="false">
+      <li>Milira_FurnaceCoreModel</li>
+    </tradeTags>
+    <comps>
+      <li Class="CompProperties_CompAnalyzableUnlockResearch">
+        <analysisID>23461329</analysisID>
+        <requiresMechanitor>false</requiresMechanitor>
+
+        <!-- Analyzable -->
+
+        <analysisDurationHours>1</analysisDurationHours>
+        <destroyedOnAnalyzed>false</destroyedOnAnalyzed>
+        <completedLetterLabel>{RESEARCH} unlocked.</completedLetterLabel>
+        <completedLetter>By studying the Sunblast Furnace core, {PAWN_labelShort} have learned the method of constructing a Sunblast Furnace! Now we can assign colonists to research the construction and related technologies of the Sunblast Furnace.</completedLetter>
+        <completedLetterDef>PositiveEvent</completedLetterDef>
+
+        <!-- Interactable -->
+
+        <activateTexPath>UI/Icons/Study</activateTexPath>
+
+        <activateLabelString>Reverse</activateLabelString>
+        <activateDescString>Reverse Engineering the Sunblast Furnace Core</activateDescString>
+        <jobString>Studying the Sunblast Furnace Core</jobString>
+        <guiLabelString>Selecting Researchers for the Sunblast Furnace Core</guiLabelString>
+        <inspectString>Capable of being researched by colonists</inspectString>
+
+        <targetingParameters>
+          <canTargetBuildings>false</canTargetBuildings>
+          <canTargetAnimals>false</canTargetAnimals>
+          <canTargetMechs>false</canTargetMechs>
+          <onlyTargetControlledPawns>true</onlyTargetControlledPawns>
+        </targetingParameters>
+      </li>
+    </comps>
+  </ThingDef>
+
+</Defs>

@@ -1,0 +1,106 @@
+<Defs>
+	<HediffDef ParentName="ImplantHediffBase">
+    <defName>TianQuan</defName>
+	<defaultLabelColor>(0, 1, 1)</defaultLabelColor>
+    <label>&lt;color=#1DD5EE&gt;&lt;i&gt;Tian Quan combat chip&lt;/i&gt;&lt;/color&gt;</label>
+    <labelNoun>a Tian Quan combat chip</labelNoun>
+    <description>Significantly improves non-combat attributes and learning abilities of the implantee, and does not conflict with other Beidou series chips. The chip has a special protective layer that makes it immune to EMP effects..</description>
+    <descriptionHyperlinks><ThingDef>TianQuanChip</ThingDef></descriptionHyperlinks>
+    <stages>
+      <li>
+	  	<capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+			<offset>0.1</offset>
+          </li>
+		</capMods>
+		<statOffsets>
+			<NegotiationAbility>0.40</NegotiationAbility>
+			<TradePriceImprovement>0.20</TradePriceImprovement>
+			<WorkSpeedGlobal>0.3</WorkSpeedGlobal>
+			<GlobalLearningFactor>0.2</GlobalLearningFactor>
+			<FilthRate>-1.0</FilthRate>
+		</statOffsets>
+      </li>
+    </stages>
+    <spawnThingOnRemoved>TianQuanChip</spawnThingOnRemoved>
+  </HediffDef>
+
+  <ThingDef ParentName="BodyPartProstheticCMCBase">
+    <defName>TianQuanChip</defName>
+    <label>Tian Quan chip</label>
+    <description>A brain implant which boosts combat abilities.</description>
+    <descriptionHyperlinks><RecipeDef>InstallTQ</RecipeDef></descriptionHyperlinks>
+	<statBases>
+		<WorkToMake>8000</WorkToMake>
+		<MarketValue>1500</MarketValue>
+		<Mass>0.2</Mass>
+	</statBases>
+    <thingSetMakerTags>
+      <li>RewardStandardLowFreq</li>
+    </thingSetMakerTags>
+    <costList>
+      <Steel>10</Steel>
+	  <Plasteel>75</Plasteel>
+	  <Gold>60</Gold>
+      <ComponentIndustrial>4</ComponentIndustrial>
+	  <ComponentSpacer>2</ComponentSpacer>
+	  <NanostructuringChip>1</NanostructuringChip>
+    </costList>
+    <techHediffsTags>
+      <li>CMC</li>
+    </techHediffsTags>
+	<recipeMaker>
+		  <researchPrerequisite>CMCBio</researchPrerequisite>
+		  <skillRequirements>
+			<Crafting>15</Crafting>
+		  </skillRequirements>
+		  <recipeUsers Inherit="False">
+			<li>FabricationBench</li>
+		  </recipeUsers>
+		  <displayPriority>200</displayPriority>
+	</recipeMaker>
+  </ThingDef>
+
+  <RecipeDef ParentName="SurgeryInstallImplantBase">
+    <defName>InstallTQ</defName>
+    <label>install Tian Quan chip</label>
+    <description>Install a Tian Quan chip.</description>
+    <descriptionHyperlinks>
+      <ThingDef>TianQuanChip</ThingDef>	
+      <HediffDef>TianQuan</HediffDef>
+    </descriptionHyperlinks>
+    <jobString>Installing Tian Quan chip.</jobString>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>TianQuanChip</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>TianQuanChip</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <appliedOnFixedBodyParts>
+      <li>Brain</li>
+    </appliedOnFixedBodyParts>
+    <addsHediff>TianQuan</addsHediff>
+  </RecipeDef>
+
+  <RecipeDef ParentName="SurgeryRemoveImplantBase">
+    <defName>RemoveTQ</defName>
+    <label>remove Tian Quan chip</label>
+    <description>Remove the Tian Quan chip.</description>
+    <descriptionHyperlinks>
+      <ThingDef>TianQuanChip</ThingDef>
+      <HediffDef>TianQuan</HediffDef>
+    </descriptionHyperlinks>
+    <jobString>Removing Tian Quan chip.</jobString>
+    <removesHediff>TianQuan</removesHediff>
+  </RecipeDef>
+</Defs>

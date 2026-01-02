@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: cleansweeper unit -->
+  <Milira_DroneCleansweeper.label>清洁单元</Milira_DroneCleansweeper.label>
+  <!-- EN: front wheels -->
+  <Milira_DroneCleansweeper.corePart.parts.front_wheels.customLabel>前轮组</Milira_DroneCleansweeper.corePart.parts.front_wheels.customLabel>
+  <!-- EN: right rear wheels -->
+  <Milira_DroneCleansweeper.corePart.parts.right_rear_wheels.customLabel>右后轮组</Milira_DroneCleansweeper.corePart.parts.right_rear_wheels.customLabel>
+  <!-- EN: left rear wheels -->
+  <Milira_DroneCleansweeper.corePart.parts.left_rear_wheels.customLabel>左后轮组</Milira_DroneCleansweeper.corePart.parts.left_rear_wheels.customLabel>
+  
+  <!-- EN: freight unit -->
+  <Milira_DroneFreight.label>运载单元</Milira_DroneFreight.label>
+  <!-- EN: right front wheels -->
+  <Milira_DroneFreight.corePart.parts.right_front_wheels.customLabel>右前轮组</Milira_DroneFreight.corePart.parts.right_front_wheels.customLabel>
+  <!-- EN: right rear wheels -->
+  <Milira_DroneFreight.corePart.parts.right_rear_wheels.customLabel>右后轮组</Milira_DroneFreight.corePart.parts.right_rear_wheels.customLabel>
+  <!-- EN: left front wheels -->
+  <Milira_DroneFreight.corePart.parts.left_front_wheels.customLabel>左前轮组</Milira_DroneFreight.corePart.parts.left_front_wheels.customLabel>
+  <!-- EN: left rear wheels -->
+  <Milira_DroneFreight.corePart.parts.left_rear_wheels.customLabel>左后轮组</Milira_DroneFreight.corePart.parts.left_rear_wheels.customLabel>
+  <!-- EN: left suspension -->
+  <Milira_DroneFreight.corePart.parts.Ancot_DroneFrame.parts.left_suspension.customLabel>左悬架</Milira_DroneFreight.corePart.parts.Ancot_DroneFrame.parts.left_suspension.customLabel>
+  <!-- EN: right suspension -->
+  <Milira_DroneFreight.corePart.parts.Ancot_DroneFrame.parts.right_suspension.customLabel>右悬架</Milira_DroneFreight.corePart.parts.Ancot_DroneFrame.parts.right_suspension.customLabel>
+  
+</LanguageData>

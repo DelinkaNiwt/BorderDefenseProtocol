@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: install Tian Quan chip -->
+  <InstallTQ.label>植入【天權】輔助晶元</InstallTQ.label>
+  <!-- EN: Install a Tian Quan chip. -->
+  <InstallTQ.description>植入【天權】輔助晶元</InstallTQ.description>
+  <!-- EN: Installing Tian Quan chip. -->
+  <InstallTQ.jobString>植入【天權】輔助晶元</InstallTQ.jobString>
+  
+  <!-- EN: remove Tian Quan chip -->
+  <RemoveTQ.label>移除【天權】輔助晶元</RemoveTQ.label>
+  <!-- EN: Remove the Tian Quan chip. -->
+  <RemoveTQ.description>移除【天權】輔助晶元</RemoveTQ.description>
+  <!-- EN: Removing Tian Quan chip. -->
+  <RemoveTQ.jobString>移除【天權】輔助晶元</RemoveTQ.jobString>
+  
+</LanguageData>

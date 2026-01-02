@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: synchronization completed: CeleTech blade Δ -->
+  <CTBladeBinded.label>同步完毕：唐刀</CTBladeBinded.label>
+  <!-- EN: After binded with the blade, its owner completely manage the abilities enabled in the blade's persona core. -->
+  <CTBladeBinded.description>绑定的武器将为使用者提供特殊的战技。</CTBladeBinded.description>
+  
+  <!-- EN: synchronization completed: CeleTech sword Δ -->
+  <NSwordBinded.label>同步完毕：汉剑</NSwordBinded.label>
+  <!-- EN: After binded with the sword, its owner completely manage the abilities enabled in the blade's persona core. -->
+  <NSwordBinded.description>绑定的武器将为使用者提供特殊的战技。</NSwordBinded.description>
+  
+</LanguageData>

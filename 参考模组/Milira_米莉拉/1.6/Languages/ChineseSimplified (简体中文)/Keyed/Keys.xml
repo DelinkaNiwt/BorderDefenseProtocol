@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <!-- EN: Caravan speed up when only Milira included. -->
+  <Milira_CaravanTravelExplanation>远行队成员均为米莉拉时旅行速度大幅提升。</Milira_CaravanTravelExplanation>
+
+  <!-- EN: Next one until -->
+  <Milira_CompGenerator_SunLightFuel_Percentage>距离下一</Milira_CompGenerator_SunLightFuel_Percentage>
+
+  <!-- EN: Equip {0_label}  -->
+  <Milira_EquipMilian>为{0_label}装备武器</Milira_EquipMilian>
+
+  <!-- EN: Dress Milian in {0_label} -->
+  <Milira_DressMilian>为米莉安着装{0_label}</Milira_DressMilian>
+
+  <!-- EN: Strip {0_label} -->
+  <Milira_StripMilian>为{0_label}卸下装备</Milira_StripMilian>
+
+  <!-- EN: Give this item to Milian -->
+  <Milira_HumanizeMilian>将此物给予米莉安</Milira_HumanizeMilian>
+
+  <!-- EN: Milian -->
+  <Milira_Milian>米莉安</Milira_Milian>
+
+  <!-- EN: Cannot use: Insufficient space -->
+  <Milira_NotEnoughSpace>无法使用：空间不足</Milira_NotEnoughSpace>
+
+  <!-- EN: Equip with -->
+  <Milira.EquipWith>装备</Milira.EquipWith>
+  <!-- EN: Cancel equip with -->
+  <Milira.CancelEquipWith>取消装备</Milira.CancelEquipWith>
+  <!-- EN: No available equipment -->
+  <Milira.NoAvailableEquipment>无适合装备</Milira.NoAvailableEquipment>
+
+  <!-- EN: Exit Fortress -->
+  <Milira_ExitFortress>退出炮塔</Milira_ExitFortress>
+  <!-- EN: Exit Fortress mode immediately, remaining resources will be returned. -->
+  <Milira_ExitFortressDesc>立刻退出炮塔模式，将返还炮塔剩余耐久等额的资源。</Milira_ExitFortressDesc>
+
+  <!-- EN: Maximium of resources that's automatically placed in {0} is determined by this carrier. -->
+  <Milira_FortressCarrierDesc>TODO</Milira_FortressCarrierDesc>
+  
+  <!--Letter of the wounded Angel -->
+  <!-- EN: Wounded Angel -->
+  <Milira.LetterFallenAngel>折翼天使</Milira.LetterFallenAngel>
+  <!-- EN: In a nearby place warped the Milira, grievously injured, her silver wings drooping limply in the front blemished with soil and gore, whereon the shivering feather rhythmizing along her feeble breath and the passing wind.  -->
+  <Milira.LetterFallenAngelDesc>身负重伤的米莉拉折跃到了附近。洁白的翅膀沾染着泥土与血迹耷拉在身前，其上的羽毛随着微弱呼吸的起伏与吹过的风轻轻颤动着。</Milira.LetterFallenAngelDesc>
+
+  <!--Letter of the Wounded Angel returning -->
+  <!-- EN: {0} desire to join -->
+  <Milira.LetterFallenAngleJoin>{0}想要加入</Milira.LetterFallenAngleJoin>
+  <!-- EN: {0} returned back and appreciated our former benevolence, as well as expressing her willing to join us.\n”I…want to learn more of you.”  -->
+  <Milira.LetterFallenAngleJoinDesc>{0}折返回来，对我们当初的善意表示了感谢，并表达了想要加入殖民地的意愿。\n“我……想要了解你们更多。”</Milira.LetterFallenAngleJoinDesc>
+  
+  <!--Alert of storyline banned in the opening -->
+  <!-- EN: Milira storyline disabled  -->
+  <Milira.StoryDisabled_ConditionFailed>米莉拉剧情已禁用</Milira.StoryDisabled_ConditionFailed>
+  <!-- EN: The Sky Elves and the Skyfeathered Church shall coexist to start the storyline of Milira, and they are foes. Current world doesn’t match that condition, ergo tasks and events relating wont occur.  -->
+  <Milira.StoryDisabled_ConditionFailed_Desc>米莉拉的剧情叙述需要派系：“天空精灵”和“天羽教会”同时存在，且两者互为敌对关系。在当前的世界中不满足如上条件，因此将无法出现米莉拉剧情相关的任务和事件。</Milira.StoryDisabled_ConditionFailed_Desc>
+
+
+  <!-- EN: Resonate -->
+  <Milira.Resonate>调谐</Milira.Resonate>
+  <!-- EN: Choose one milian class and resonate it tuning to level I. -->
+  <Milira.ResonateDesc>选择一种米莉安职阶，使其调谐等级达到I级。</Milira.ResonateDesc>
+  <!-- EN: None -->
+  <Milira.None>无</Milira.None>
+  <!-- EN: Pawn -->
+  <Milira.Pawn>士兵</Milira.Pawn>
+  <!-- EN: Knight -->
+  <Milira.Knight>骑士</Milira.Knight>
+  <!-- EN: Bishop -->
+  <Milira.Bishop>主教</Milira.Bishop>
+  <!-- EN: Rook -->
+  <Milira.Rook>战车</Milira.Rook>
+
+
+  <!-- EN: hunger cost -->
+  <Milira.AbilityHungerCost>饥饿度消耗</Milira.AbilityHungerCost>
+  <!-- EN: rest cost -->
+  <Milira.AbilityRestCost>休息值消耗</Milira.AbilityRestCost>
+  <!-- EN: ability disabled: no enough hunger. -->
+  <Milira.AbilityDisabled_Hunger>无法使用：饥饿度不足</Milira.AbilityDisabled_Hunger>
+  <!-- EN: ability disabled: no enough rest. -->
+  <Milira.AbilityDisabled_Rest>无法使用：休息值不足</Milira.AbilityDisabled_Rest>
+  <!-- EN: ability disabled: body part missing. -->
+  <Milira.AbilityDisabled_BodypartMissing>无法使用：身体部位缺失</Milira.AbilityDisabled_BodypartMissing>
+
+  <!-- 发型切换 -->
+  <!-- EN: hair change -->
+  <Milira.HairChange>切换发型</Milira.HairChange>
+  <!-- EN: To change the hair style of selected Milian. -->
+  <Milira.HairChangeDesc>更改当前米莉安的发型样式。</Milira.HairChangeDesc>
+
+  <!-- 培育舱检查服装 -->
+  <!-- EN: Check Apparel -->
+  <Milian.CheckMilianApparelInGestator>检查服装</Milian.CheckMilianApparelInGestator>
+  <!-- EN: Check the types of apparels supported by the milian in the current gestate recipe -->
+  <Milian.CheckMilianApparelInGestatorDesc>检查当前培育清单的米莉安能够支持的服装种类。</Milian.CheckMilianApparelInGestatorDesc>
+  <!-- EN: Cannot check: no Milian is currently in gestating. -->
+  <Milian.CheckMilianApparelInGestator_Disabled>无法查看：当前未培育米莉安。</Milian.CheckMilianApparelInGestator_Disabled>
+  <!-- EN: The current Milian in the gestator is of type {0}. This model supports the following apparels: -->
+  <Milian.CheckMilianApparelInGestatorText>当前培育的米莉安类型为{0}，该型号的米莉安能够支持下列服装：</Milian.CheckMilianApparelInGestatorText>
+  
+  <!-- 米莉安配置界面的tips -->
+  <!-- EN: Switch to mech tab. -->
+  <Milira.ToMechTabTip>切换至机械体面板。</Milira.ToMechTabTip>
+  <!-- EN: Switch to milian worktab. -->
+  <Milira.ToMilianWorkManagementTabTip>切换至米莉安工作管理面板。</Milira.ToMilianWorkManagementTabTip>
+  <!-- EN: Switch to milian equipment tab. -->
+  <Milira.ToMilianConfigTabTip>切换至米莉安装备面板。</Milira.ToMilianConfigTabTip>
+
+  <!-- UNUSED -->
+  <Milira.StatsReport_HomeTerminal>{0}使用家用终端而不是机控中枢控制机械体，家用终端的带宽支持上限为{1}。</Milira.StatsReport_HomeTerminal>
+
+</LanguageData>

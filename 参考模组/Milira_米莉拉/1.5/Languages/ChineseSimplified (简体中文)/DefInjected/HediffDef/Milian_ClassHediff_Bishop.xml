@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Chessman: Bishop -->
+  <Milian_ClassHediff_Bishop.label>执子：主教</Milian_ClassHediff_Bishop.label>
+  <!-- EN: Grants the power of a Bishop. -->
+  <Milian_ClassHediff_Bishop.description>赋予「主教」权能。</Milian_ClassHediff_Bishop.description>
+  <!-- EN: Tuning I -->
+  <Milian_ClassHediff_Bishop.stages.Tuning_I.label>调谐I</Milian_ClassHediff_Bishop.stages.Tuning_I.label>
+  <!-- EN: Tuning II -->
+  <Milian_ClassHediff_Bishop.stages.Tuning_II.label>调谐II</Milian_ClassHediff_Bishop.stages.Tuning_II.label>
+  <!-- EN: Tuning III -->
+  <Milian_ClassHediff_Bishop.stages.Tuning_III.label>调谐III</Milian_ClassHediff_Bishop.stages.Tuning_III.label>
+  <!-- EN: Tuning IV -->
+  <Milian_ClassHediff_Bishop.stages.Tuning_IV.label>调谐IV</Milian_ClassHediff_Bishop.stages.Tuning_IV.label>
+  
+</LanguageData>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<RecipeDef ParentName="CookMealBase">
+    <defName>Milira_MakeTravellerFood</defName>
+    <label>cook milira traveller ration x5</label>
+    <description>cook five portions of milira travel rations.</description>
+    <jobString>cook milira travel rations.</jobString>
+    <workSpeedStat>CookSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <workAmount>2000</workAmount>
+    <soundWorking>Recipe_CookMeal</soundWorking>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <!-- <ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass> -->
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>PlantFoodRaw</li>
+          </categories>
+        </filter>
+        <count>40</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Chocolate</li>
+          </thingDefs>
+        </filter>
+        <count>3</count>
+      </li>
+    </ingredients>
+    <products>
+      <Milira_TravellerFood>5</Milira_TravellerFood>
+    </products>
+    <skillRequirements>
+      <Cooking>5</Cooking>
+    </skillRequirements>
+	<recipeUsers>
+	  <li>FueledStove</li>
+	  <li>ElectricStove</li>
+	</recipeUsers>
+    <researchPrerequisite>Milira_TravellerFood</researchPrerequisite>
+    <displayPriority>1410</displayPriority>
+  </RecipeDef>
+
+
+</Defs>

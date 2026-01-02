@@ -1,0 +1,728 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThingCategoryDef>
+		<defName>Milira_InformationLetter</defName>
+		<label>church dossiers</label>
+		<parent>Ancot_ReadingMaterial</parent>
+	</ThingCategoryDef>
+
+  <ThingDef Name="Milira_InformationLetterClassI_Base" Abstract="true">
+    <defName>Milira_InformationLetterClassI_Base</defName>
+    <thingClass>ThingWithComps</thingClass>
+    <graphicData>
+      <texPath>Milira/Item/Letter/LetterI</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <category>Item</category>
+    <selectable>true</selectable>
+    <tickerType>Normal</tickerType>
+    <alwaysHaulable>true</alwaysHaulable>
+    <statBases>
+      <MaxHitPoints>10</MaxHitPoints>
+      <MarketValue>40</MarketValue>
+      <Flammability>1.0</Flammability>
+      <DeteriorationRate>1.0</DeteriorationRate>
+      <Mass>0.1</Mass>
+    </statBases>
+    <thingCategories>
+			<li>Milira_InformationLetter</li>
+		</thingCategories>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <altitudeLayer>Item</altitudeLayer>
+    <useHitPoints>true</useHitPoints>
+    <hiddenWhileUndiscovered>true</hiddenWhileUndiscovered>
+    <tradeTags>
+      <li>Milira_InformationLetterClassI</li>
+    </tradeTags>
+    <comps>
+    </comps>
+  </ThingDef>
+
+  <ThingDef Name="Milira_InformationLetterClassII_Base" ParentName="Milira_InformationLetterClassI_Base" Abstract="true">
+    <defName>Milira_InformationLetterClassII_Base</defName>
+    <graphicData>
+      <texPath>Milira/Item/Letter/LetterII</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <MarketValue>150</MarketValue>
+    </statBases>
+  </ThingDef>
+
+  <!-- ============教会卷宗============================================================================ -->
+  <!-- <ThingDef ParentName="Milira_InformationLetterClassI_Base">
+    <defName>Milira_InformationLetterI_A</defName>
+    <label>教会卷宗：米莉拉</label>
+    <description>记录了关于米莉拉的信息的卷宗。</description>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ReadLetter">
+        <compClass>AncotLibrary.CompReadLetter</compClass>
+        <useLabel>Read dossier</useLabel>
+        <useJob>UseItem</useJob>
+        <useDuration>120</useDuration>
+        <letterDef>NeutralEvent</letterDef>
+        <letterLabel>情报：米莉拉</letterLabel>
+        <letterText>记录了关于米莉拉的信息的卷宗。</letterText>
+        <oneUse>false</oneUse>
+      </li>
+    </comps>
+  </ThingDef> -->
+
+
+  <!-- 米莉拉 -->
+  <ThingDef ParentName="Milira_InformationLetterClassI_Base">
+    <defName>Milira_InformationLetterI_Milira</defName>
+    <label>Church Dossier: Milira</label>
+    <description>A dossier recording information about Milira.</description>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ReadDiaLog_Nested">
+        <useLabel>Read dossier</useLabel>
+        <useJob>UseItem</useJob>
+        <useDuration>120</useDuration>
+        <oneUse>false</oneUse>
+        <customDiaLog>
+          <li>
+            <content>A noble creature from the sky to the earth, a god we believe in. The Lord controls forces we do not know, and the development of science is far beyond common sense. We are as small as ants, but the Lord is willing to bestow on us the gift of knowledge, which must be the only salvation in this cruel and miserable world.</content>
+            <optionText>Finish</optionText>
+          </li>
+        </customDiaLog>
+      </li>
+    </comps>
+  </ThingDef>
+
+
+  <!-- 天羽教 -->
+  <ThingDef ParentName="Milira_InformationLetterClassI_Base">
+    <defName>Milira_InformationLetterI_ChurchIntrodction</defName>
+    <label>Church Dossier: Skyfeathered Church</label>
+    <description>A dossier recording information about the Skyfeathered Church.</description>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ReadDiaLog_Nested">
+        <useLabel>Read dossier</useLabel>
+        <useJob>UseItem</useJob>
+        <useDuration>120</useDuration>
+        <oneUse>false</oneUse>
+        <customDiaLog>
+          <li>
+            <content>The first-generation Pontiff established the organization to proclaim the greatness of the Lord and to shine His light upon more people in sorrow; the Church, named Skyfeathered, is in fact meant to signify 'Originally as slight as a feather, but gilded with the brilliance of the sky due to the existence of the Lord.'\nThe first Pontiff led the initial followers to establish a friendly connection with the Lord, which has continued to this day. The Lord has always taught and guided us, allowing us to find the meaning of life again in this rim world; yet the Lord has never asked for any form of repayment. We have nothing to repay, so spreading the grace given by the Lord to more people has become the original intention and purpose of the Church's establishment. With this vision, the Church has been passed down for more than a century, and will continue to carry on in the future.</content>
+            <optionText>Finish</optionText>
+          </li>
+        </customDiaLog>
+      </li>
+    </comps>
+  </ThingDef>
+
+
+  <!-- 太阳熔炉 -->
+  <ThingDef ParentName="Milira_InformationLetterClassI_Base">
+    <defName>Milira_InformationLetterI_SunBlastFurnace</defName>
+    <label>Church Dossier: Sunblast Furnace</label>
+    <description>A dossier recording information about the Sunblast Furnace.</description>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ReadDiaLog_Nested">
+        <useLabel>Read dossier</useLabel>
+        <useJob>UseItem</useJob>
+        <useDuration>120</useDuration>
+        <oneUse>false</oneUse>
+        <customDiaLog>
+          <li>
+            <content>The forge used by the Lord is driven by special fuel. When in use, it can reach extremely high temperatures and emit a dazzling light. It is said that when operating at full capacity, even the sun pales in comparison, which is likely how it got its name. The Lord has forged many items with the Sunblast Furnace, and it is rumored that even life can be born from it. \nThe Lord has established a forging camp on the ground, where we are also allowed to see its full appearance and learn the method of using the Sunblast Furnace. Some have implored the Lord to teach the casting technology of the Sunblast Furnace, but the Lord has always remained silent on this matter. \nThe use of the Sunblast Furnace without permission is strictly forbidden by the Lord. All actions involving the use of the Sunblast Furnace within the Church require the Lord's permission to proceed, and unauthorized use will provoke the Lord's wrath.</content>
+            <optionText>Finish</optionText>
+          </li>
+        </customDiaLog>
+      </li>
+    </comps>
+  </ThingDef>
+
+
+  <!-- 日光燃料 -->
+  <ThingDef ParentName="Milira_InformationLetterClassI_Base">
+    <defName>Milira_InformationLetterI_SunLightFuel</defName>
+    <label>Church Dossier: Solar Fuel</label>
+    <description>A dossier recording information about Solar Fuel.</description>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ReadDiaLog_Nested">
+        <useLabel>Read dossier</useLabel>
+        <useJob>UseItem</useJob>
+        <useDuration>120</useDuration>
+        <oneUse>false</oneUse>
+        <customDiaLog>
+          <li>
+            <content>A liquid fuel with an extremely high energy density, widely used in the Lord's world. We have tried to replace chemical fuel with solar fuel, but the excessive energy density often makes machines unable to withstand the energy released during combustion, and all experiments have ultimately failed. \nSolar fuel itself can be refined from sunlight fruit extract and chemical fuel in a certain ratio. This peculiar characteristic allows us to achieve mass production of solar fuel. In addition, the Lord also has a method of directly liquefying light energy into solar fuel in some form. \nIn the long-term exploration and learning process of how to use solar fuel, we have gradually explored its application methods in power generation and the smelting technology of solar-forged steel. We are still exploring how to develop and apply solar fuel in new fields.</content>
+            <optionText>Finish</optionText>
+          </li>
+        </customDiaLog>
+      </li>
+    </comps>
+  </ThingDef>
+
+
+  <!-- 日光花 -->
+  <ThingDef ParentName="Milira_InformationLetterClassI_Base">
+    <defName>Milira_InformationLetterI_SunLightFlower</defName>
+    <label>Church Dossier: Sun Bloom</label>
+    <description>A dossier recording information about the Sun Bloom.</description>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ReadDiaLog_Nested">
+        <useLabel>Read dossier</useLabel>
+        <useJob>UseItem</useJob>
+        <useDuration>120</useDuration>
+        <oneUse>false</oneUse>
+        <customDiaLog>
+          <li>
+            <content>A crop that can draw special energy from sunlight, and its sunlight fruit is one of the important raw materials for producing solar fuel. It is hard to imagine that many of the Lord's scientific discoveries rely on such a small flower. \nIt seems to be a common plant in the Lord's celestial metropolis and is occasionally distributed on the ground, but according to the Lord, the growth of Sun Blooms on the ground is not good. \nUnder the guidance of the Lord, we have learned to cultivate Sun Blooms and have established Sun Bloom gardens in towns with complete light conditions to supply the needs for making solar fuel.</content>
+            <optionText>Finish</optionText>
+          </li>
+        </customDiaLog>
+      </li>
+    </comps>
+  </ThingDef>
+
+
+  <!-- 日盘钢 -->
+  <ThingDef ParentName="Milira_InformationLetterClassI_Base">
+    <defName>Milira_InformationLetterI_SunPlateSteel</defName>
+    <label>Church Dossier: Solar-Forged Steel</label>
+    <description>A dossier recording information about Solar-Forged Steel.</description>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ReadDiaLog_Nested">
+        <useLabel>Read dossier</useLabel>
+        <useJob>UseItem</useJob>
+        <useDuration>120</useDuration>
+        <oneUse>false</oneUse>
+        <customDiaLog>
+          <li>
+            <content>Solar-forged steel is a hard, heat-resistant, and ductile metal material with a wide range of applications in various fields. The Lord can smelt this metal using the Sunblast Furnace, but we have not yet mastered this technology. \nHowever, through our long exploration of solar fuel, we have developed a method of refining solar-forged steel using a reactor vessel. Although the solar fuel involved in this production method of solar-forged steel will explode due to incomplete combustion, ultimately destroying the reactor vessel, we have finally achieved the production of solar-forged steel. \nThe physical properties of solar-forged steel make it extremely difficult to process with conventional tools. Even the Lord still needs to use the Sunblast Furnace to create items that require a large amount of solar-forged steel as raw materials. </content>
+            <optionText>Finish</optionText>
+          </li>
+        </customDiaLog>
+      </li>
+    </comps>
+  </ThingDef>
+
+
+  <!-- 日凌晶 -->
+  <ThingDef ParentName="Milira_InformationLetterClassI_Base">
+    <defName>Milira_InformationLetterI_SolarCrystal</defName>
+    <label>Church Dossier: Solar Crystal</label>
+    <description>A dossier recording information about solar crystals.</description>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ReadDiaLog_Nested">
+        <useLabel>Read dossier</useLabel>
+        <useJob>UseItem</useJob>
+        <useDuration>120</useDuration>
+        <oneUse>false</oneUse>
+        <customDiaLog>
+          <li>
+            <content>Solar crystals are a special type of crystal that undergoes a change in properties due to excessive electromagnetic radiation, forming a unique crystal with excellent physical properties. Due to the extremely harsh conditions required for their formation, they are almost impossible to naturally occur in the natural environment and are only likely to appear during periods of intense solar flare activity or in cosmic environments with strong electromagnetic radiation. \nSolar crystals have irreplaceable properties in materials science. Although their physical strength is Weak, they have an extremely low rate of energy loss when used as a medium for various forms of energy, which is why they are widely used by the Lord in the manufacture of various electronic components. \n     
+              In addition to being used as a manufacturing material, solar crystals also have high ornamental and collectible value. \n 
+              The Lord's celestial metropolis is rich in this type of crystal. It is speculated that there is an artificial interference method that can produce a large amount of solar crystals, but the Lord has never disclosed the relevant details to us.</content>
+            <optionText>Finish</optionText>
+          </li>
+        </customDiaLog>
+      </li>
+    </comps>
+  </ThingDef>
+
+
+  <!-- 米莉安 -->
+  <ThingDef ParentName="Milira_InformationLetterClassI_Base">
+    <defName>Milira_InformationLetterI_Milian</defName>
+    <label>Church Dossier: Milian</label>
+    <description>A dossier recording information about Milian.</description>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ReadDiaLog_Nested">
+        <useLabel>Read dossier</useLabel>
+        <useJob>UseItem</useJob>
+        <useDuration>120</useDuration>
+        <oneUse>false</oneUse>
+        <customDiaLog>
+          <li>
+            <content>The Lord created humanoid mechanical servitors in Her own image, bestowing upon them names close to His own. There are numerous models of Milians, each assigned to various classes, with each class conferring specific duties. \nMilians are formidable on the battlefield. Unlike mechanical bodies that lack coordination, they understand how to fight in tandem. Their way of thinking is akin to that of humans. \nEach Milian is powered by a dynamo furnace fueled by solar fuel; this high-pressure energy furnace can even sustain operation for a millennium. Their thinking is controlled by a special chip. \nThe Lord has deployed Milians alongside us to jointly fend off foreign enemies, and has instructed us in the maintenance, repair, and even resurrection of damaged Milians. However, the class permit chips that sustain the operation of Milians are provided directly by the Lord, and we have not been taught the method of their creation.</content>
+            <optionText>Finish</optionText>
+          </li>
+        </customDiaLog>
+      </li>
+    </comps>
+  </ThingDef>
+
+
+  <!-- 职阶许可 -->
+  <ThingDef ParentName="Milira_InformationLetterClassI_Base">
+    <defName>Milira_InformationLetterI_ClassPermission</defName>
+    <label>Church Dossier: Class Permits</label>
+    <description>A dossier recording information about Class Permits</description>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ReadDiaLog_Nested">
+        <useLabel>Read dossier</useLabel>
+        <useJob>UseItem</useJob>
+        <useDuration>120</useDuration>
+        <oneUse>false</oneUse>
+        <customDiaLog>
+          <li>
+            <content>Embedded within the Milian are authorization chips corresponding to various classes. These chips perform brain-like functions, determining the Milian's behavioral patterns and logical thinking. \nClass permits have strict distinctions between different classes, but they are universal among different models within the same class. The technology to manufacture class permits is far beyond our comprehension. \nThe overly intricate construction makes class permits extremely difficult to be intactly disassembled. The Church's engineers have tried to extract class permits when disassembling Milians, with very few successful attempts. Perhaps only the Creator of the Milians can do it perfectly.</content>
+            <optionText>Finish</optionText>
+          </li>
+        </customDiaLog>
+      </li>
+    </comps>
+  </ThingDef>
+
+
+  <!-- ==职阶==================================================================================================== -->
+  
+  <ThingDef ParentName="Milira_InformationLetterClassI_Base">
+    <defName>Milira_InformationLetterI_MilianClass_Pawn</defName>
+    <label>Church Dossier: Milian Pawn Class</label>
+    <description>A dossier recording information about the Milian Pawn class.</description>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ReadDiaLog_Nested">
+        <useLabel>Read dossier</useLabel>
+        <useJob>UseItem</useJob>
+        <useDuration>120</useDuration>
+        <oneUse>false</oneUse>
+        <customDiaLog>
+          <li>
+            <content>Milians of the Pawn class are numerous. Although individual capabilities are limited, they often appear in swarms on the battlefield, thus becoming an important part of the Milian forces' firepower. \nAt the same time, having a large number of Pawns is also a replenishment of Milian combat power. Once Milians of other classes are killed in battle, nearby Pawns can quickly fill the gap through promotion. The Milian forces are thus self-sustaining.</content>
+            <optionText>Finish</optionText>
+          </li>
+        </customDiaLog>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="Milira_InformationLetterClassI_Base">
+    <defName>Milira_InformationLetterI_MilianClass_Knight</defName>
+    <label>Church Dossier: Milian Knight Class</label>
+    <description>A dossier recording information about the Milian Knight Class.</description>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ReadDiaLog_Nested">
+        <useLabel>Read dossier</useLabel>
+        <useJob>UseItem</useJob>
+        <useDuration>120</useDuration>
+        <oneUse>false</oneUse>
+        <customDiaLog>
+          <li>
+            <content>The Milian with exceptional mobility has an extremely broad range of activity and is responsible for close combat and the protection of allies.</content>
+            <optionText>Finish</optionText>
+          </li>
+        </customDiaLog>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="Milira_InformationLetterClassI_Base">
+    <defName>Milira_InformationLetterI_MilianClass_Bishop</defName>
+    <label>Church Dossier: Bishop Class</label>
+    <description>A dossier recording information about the Milian Bishop class.</description>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ReadDiaLog_Nested">
+        <useLabel>Read dossier</useLabel>
+        <useJob>UseItem</useJob>
+        <useDuration>120</useDuration>
+        <oneUse>false</oneUse>
+        <customDiaLog>
+          <li>
+            <content>The battlefield logistics of Milian troops, a class that provides cover and support to allies. Individuals of the Bishop class are typically weak in combat capabilities, but they can assist other classes of allies to form a more powerful combat force.</content>
+            <optionText>Finish</optionText>
+          </li>
+        </customDiaLog>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="Milira_InformationLetterClassI_Base">
+    <defName>Milira_InformationLetterI_MilianClass_Rook</defName>
+    <label>Church Dossier: Milian Rook Class</label>
+    <description>A dossier recording information about the Milian Rook class.</description>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ReadDiaLog_Nested">
+        <useLabel>Read dossier</useLabel>
+        <useJob>UseItem</useJob>
+        <useDuration>120</useDuration>
+        <oneUse>false</oneUse>
+        <customDiaLog>
+          <li>
+            <content>Milians with thick armor are responsible for advancing the front line and absorbing enemy fire, not halting even amidst a barrage of gunfire. \nThough rarely seen in large numbers on the battlefield due to their costly price and maintenance, the presence of each Rook poses a significant deterrent to the enemy.</content>
+            <optionText>Finish</optionText>
+          </li>
+        </customDiaLog>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- ==职阶细分==================================================================================================== -->
+  <ThingDef ParentName="Milira_InformationLetterClassI_Base">
+    <defName>Milira_InformationLetterI_MilianClass_PawnI</defName>
+    <label>Church Dossier: Pawn I</label>
+    <description>A dossier recording information about Pawn I.</description>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ReadDiaLog_Nested">
+        <useLabel>Read dossier</useLabel>
+        <useJob>UseItem</useJob>
+        <useDuration>120</useDuration>
+        <oneUse>false</oneUse>
+        <customDiaLog>
+          <li>
+            <content>Belonging to the Pawn class, Pawn I is numerous. Individual combat power is poor, but they often appear in swarms on the battlefield.</content>
+            <optionText>Finish</optionText>
+          </li>
+        </customDiaLog>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="Milira_InformationLetterClassI_Base">
+    <defName>Milira_InformationLetterI_MilianClass_PawnII</defName>
+    <label>Church Dossier: Pawn II</label>
+    <description>A dossier recording information about Pawn II.</description>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ReadDiaLog_Nested">
+        <useLabel>Read dossier</useLabel>
+        <useJob>UseItem</useJob>
+        <useDuration>120</useDuration>
+        <oneUse>false</oneUse>
+        <customDiaLog>
+          <li>
+            <content>Belonging to the Pawn class, Pawn II usually appears on the battlefield as a support unit. Usually equipped with support-function drones.</content>
+            <optionText>Finish</optionText>
+          </li>
+        </customDiaLog>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="Milira_InformationLetterClassI_Base">
+    <defName>Milira_InformationLetterI_MilianClass_PawnIII</defName>
+    <label>Church Dossier: Guard</label>
+    <description>A dossier recording information about the Guard.</description>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ReadDiaLog_Nested">
+        <useLabel>Read dossier</useLabel>
+        <useJob>UseItem</useJob>
+        <useDuration>120</useDuration>
+        <oneUse>false</oneUse>
+        <customDiaLog>
+          <li>
+            <content>Belonging to the Pawn class, the Milian known as the Guard can provide considerable firepower coverage on the front battlefield when appearing in swarms, while also causing devastating strikes to defensive fortifications.</content>
+            <optionText>Finish</optionText>
+          </li>
+        </customDiaLog>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="Milira_InformationLetterClassI_Base">
+    <defName>Milira_InformationLetterI_MilianClass_PawnIV</defName>
+    <label>Church Dossier: Captain</label>
+    <description>A dossier recording information about the Captain.</description>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ReadDiaLog_Nested">
+        <useLabel>Read dossier</useLabel>
+        <useJob>UseItem</useJob>
+        <useDuration>120</useDuration>
+        <oneUse>false</oneUse>
+        <customDiaLog>
+          <li>
+            <content>Belonging to the Pawn class, the Milian known as the Captain usually appears in large-scale military operations. Usually equipped with heavy firepower drones, they are often capable of suppressing large groups of enemies in battles.</content>
+            <optionText>Finish</optionText>
+          </li>
+        </customDiaLog>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="Milira_InformationLetterClassI_Base">
+    <defName>Milira_InformationLetterI_MilianClass_KnightI</defName>
+    <label>Church Dossier: Knight I</label>
+    <description>A dossier recording information about Knight I.</description>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ReadDiaLog_Nested">
+        <useLabel>Read dossier</useLabel>
+        <useJob>UseItem</useJob>
+        <useDuration>120</useDuration>
+        <oneUse>false</oneUse>
+        <customDiaLog>
+          <li>
+            <content>Belonging to the Knight class, Knight I. Capable of continuously increasing its speed while on the move, the damage it can inflict is also enhanced as a result. It has extremely strong lethality in mass charges on vast plains, but its effectiveness is greatly reduced in narrow or obstacle-filled areas.</content>
+            <optionText>Finish</optionText>
+          </li>
+        </customDiaLog>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="Milira_InformationLetterClassI_Base">
+    <defName>Milira_InformationLetterI_MilianClass_KnightII</defName>
+    <label>Church Dossier: Knight II</label>
+    <description>A dossier recording information about Knight II.</description>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ReadDiaLog_Nested">
+        <useLabel>Read dossier</useLabel>
+        <useJob>UseItem</useJob>
+        <useDuration>120</useDuration>
+        <oneUse>false</oneUse>
+        <customDiaLog>
+          <li>
+            <content>Belonging to the Knight class, Knight II. It is more defensive than offensive, often forming the front line of the Milian forces alongside Rooks. The shield it wields is quite effective at defending against gunfire and projectiles, but it cannot effectively withstand the impact of heavy melee weapons.</content>
+            <optionText>Finish</optionText>
+          </li>
+        </customDiaLog>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="Milira_InformationLetterClassI_Base">
+    <defName>Milira_InformationLetterI_MilianClass_KnightIII</defName>
+    <label>Church Dossier: Outrider</label>
+    <description>A dossier recording information about the Outrider.</description>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ReadDiaLog_Nested">
+        <useLabel>Read dossier</useLabel>
+        <useJob>UseItem</useJob>
+        <useDuration>120</useDuration>
+        <oneUse>false</oneUse>
+        <customDiaLog>
+          <li>
+            <content>Belonging to the Knight class, the Milian known as the Outrider. Thanks to the armor equipped with thrusters that maintain a constant high-speed movement, it relies on rotor propulsion to launch swift back-and-forth charges at close to medium range, excelling at pursuit and entanglement.</content>
+            <optionText>Finish</optionText>
+          </li>
+        </customDiaLog>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="Milira_InformationLetterClassI_Base">
+    <defName>Milira_InformationLetterI_MilianClass_KnightIV</defName>
+    <label>Church Dossier: Paladin</label>
+    <description>A dossier recording information about the Paladin.</description>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ReadDiaLog_Nested">
+        <useLabel>Read dossier</useLabel>
+        <useJob>UseItem</useJob>
+        <useDuration>120</useDuration>
+        <oneUse>false</oneUse>
+        <customDiaLog>
+          <li>
+            <content>Belonging to the Knight class, the Milian known as the Paladin. It has comprehensive defensive capabilities, with an outer energy shield that is exceptionally effective at defending against low-impact projectiles. The shield it holds can also defend against projectiles and melee attacks to a certain extent. \nIt can engage opponents in melee combat and also prioritize throwing hammers that cause area-wide stun effects towards enemies near allies.</content>
+            <optionText>Finish</optionText>
+          </li>
+        </customDiaLog>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="Milira_InformationLetterClassI_Base">
+    <defName>Milira_InformationLetterI_MilianClass_BishopI</defName>
+    <label>Church Dossier: Bishop I</label>
+    <description>A dossier recording information about Bishop I.</description>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ReadDiaLog_Nested">
+        <useLabel>Read dossier</useLabel>
+        <useJob>UseItem</useJob>
+        <useDuration>120</useDuration>
+        <oneUse>false</oneUse>
+        <customDiaLog>
+          <li>
+            <content>Belonging to the Bishop class, Bishop I. Capable of providing long-range repair support to allies, when coordinated with Knights and Rooks, it can form an extremely solid frontline. \n     However, the Bishop Type I does not have high protective capabilities and requires allies to focus on its protection during combat.</content>
+            <optionText>Finish</optionText>
+          </li>
+        </customDiaLog>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="Milira_InformationLetterClassI_Base">
+    <defName>Milira_InformationLetterI_MilianClass_BishopII</defName>
+    <label>Church Dossier: Bishop II</label>
+    <description>A dossier recording information about Bishop II.</description>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ReadDiaLog_Nested">
+        <useLabel>Read dossier</useLabel>
+        <useJob>UseItem</useJob>
+        <useDuration>120</useDuration>
+        <oneUse>false</oneUse>
+        <customDiaLog>
+          <li>
+            <content>Belonging to the Bishop class, Bishop II. It can use a low-angle shield unit to support the front line or protect allies under attack. When the shield is deployed, it also generates a force field capable of pushing enemies away.</content>
+            <optionText>Finish</optionText>
+          </li>
+        </customDiaLog>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="Milira_InformationLetterClassI_Base">
+    <defName>Milira_InformationLetterI_MilianClass_BishopIII</defName>
+    <label>Church Dossier: Consul</label>
+    <description>A dossier recording information about Consul.</description>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ReadDiaLog_Nested">
+        <useLabel>Read dossier</useLabel>
+        <useJob>UseItem</useJob>
+        <useDuration>120</useDuration>
+        <oneUse>false</oneUse>
+        <customDiaLog>
+          <li>
+            <content>Belonging to the Bishop class, the Milian known as the Consul. It controls a multitude of autonomous floating units to restrain enemies and assist in attacks, and is also capable of marking enemy weaknesses for allies. Although its own combat capabilities are not outstanding, the swarm of floating units it releases when appearing in groups can exert considerable pressure on the battlefield.</content>
+            <optionText>Finish</optionText>
+          </li>
+        </customDiaLog>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="Milira_InformationLetterClassI_Base">
+    <defName>Milira_InformationLetterI_MilianClass_BishopIV</defName>
+    <label>Church Dossier: Cardinal</label>
+    <description>A dossier recording information about Cardinal</description>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ReadDiaLog_Nested">
+        <useLabel>Read dossier</useLabel>
+        <useJob>UseItem</useJob>
+        <useDuration>120</useDuration>
+        <oneUse>false</oneUse>
+        <customDiaLog>
+          <li>
+            <content>Belonging to the Bishop class, the Milian known as the Cardinal. It often enters the battlefield using optical camouflage to conceal its form, while maneuvering and flanking to launch stealthy attacks on the enemy from the side that are difficult to detect. \nAlthough it briefly exposes itself when firing, the Cardinal shall constantly seeks safe firing positions.</content>
+            <optionText>Finish</optionText>
+          </li>
+        </customDiaLog>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="Milira_InformationLetterClassI_Base">
+    <defName>Milira_InformationLetterI_MilianClass_RookI</defName>
+    <label>Church Dossier: Rook I</label>
+    <description>A dossier recording information about Rook I.</description>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ReadDiaLog_Nested">
+        <useLabel>Read dossier</useLabel>
+        <useJob>UseItem</useJob>
+        <useDuration>120</useDuration>
+        <oneUse>false</oneUse>
+        <customDiaLog>
+          <li>
+            <content>Belonging to the Rook class, Rook I. Equipped with a low-angle energy shield that can block incoming projectiles without hindering allied fire. \n          The low-angle shield is susceptible to electromagnetic interference but will recover shortly after a brief failure.</content>
+            <optionText>Finish</optionText>
+          </li>
+        </customDiaLog>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="Milira_InformationLetterClassI_Base">
+    <defName>Milira_InformationLetterI_MilianClass_RookII</defName>
+    <label>Church Dossier: Rook II</label>
+    <description>A dossier recording information about Rook II.</description>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ReadDiaLog_Nested">
+        <useLabel>Read dossier</useLabel>
+        <useJob>UseItem</useJob>
+        <useDuration>120</useDuration>
+        <oneUse>false</oneUse>
+        <customDiaLog>
+          <li>
+            <content>Belonging to the Rook class, the Milian Type II model wields an immensely thick shield akin to a city wall and is clad in heavy armor, capable of withstanding numerous attacks. This makes Rook II often impervious to frontal assaults.</content>
+            <optionText>Finish</optionText>
+          </li>
+        </customDiaLog>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="Milira_InformationLetterClassI_Base">
+    <defName>Milira_InformationLetterI_MilianClass_RookIII</defName>
+    <label>Church Dossier: Striker</label>
+    <description>A dossier recording information about the Striker.</description>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ReadDiaLog_Nested">
+        <useLabel>Read dossier</useLabel>
+        <useJob>UseItem</useJob>
+        <useDuration>120</useDuration>
+        <oneUse>false</oneUse>
+        <customDiaLog>
+          <li>
+            <content>Belonging to the Rook class, the Milian known as the Striker is more adept at penetrating enemy lines than holding their own, causing disruption and damage. Relying on thrusters, it can execute high-impact long-range charges, crushing and knocking away any obstacles in its path. \n      
+              Its armor adapts to incoming attacks, gradually accumulating resistance and ultimately reaching a state of near-immunity.</content>
+            <optionText>Finish</optionText>
+          </li>
+        </customDiaLog>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="Milira_InformationLetterClassI_Base">
+    <defName>Milira_InformationLetterI_MilianClass_RookIV</defName>
+    <label>Church Dossier: Eternal Fortress</label>
+    <description>A dossier recording information about the Eternal Fortress.</description>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ReadDiaLog_Nested">
+        <useLabel>Read dossier</useLabel>
+        <useJob>UseItem</useJob>
+        <useDuration>120</useDuration>
+        <oneUse>false</oneUse>
+        <customDiaLog>
+          <li>
+            <content>Belonging to the Rook class, the Milian known as the Unbreakable Fortress can set up heavy particle cannons on the edge of enemy lines using materials it carries. \nAfter a brief preparation period, the Unbreakable Fortress can continuously launch powerful indirect artillery strikes, making it formidable in siege warfare. Due to its high cost, it is not commonly seen on the battlefield, but a single Unbreakable Fortress can be decisive in the outcome of a battle.</content>
+            <optionText>Finish</optionText>
+          </li>
+        </customDiaLog>
+      </li>
+    </comps>
+  </ThingDef>
+
+
+
+  <!-- <ThingDef ParentName="Milira_InformationLetterClassI_Base">
+    <defName>Milira_InformationLetterI_B</defName>
+    <label>教会卷宗：测试</label>
+    <description>。</description>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ReadDiaLog_Nested">
+        <useLabel>Read dossier</useLabel>
+        <useJob>UseItem</useJob>
+        <useDuration>120</useDuration>
+        <oneUse>false</oneUse>
+        <customDiaLog>
+          <li>
+            <content>页面1</content>
+            <optionText>下一页</optionText>
+          </li>
+          <li>
+            <content>页面2</content>
+            <optionText>下一页</optionText>
+          </li>
+          <li>
+            <content>页面3</content>
+            <optionText>关闭</optionText>
+          </li>
+        </customDiaLog>
+      </li>
+    </comps>
+  </ThingDef> -->
+
+
+  <!-- ============教令密函============================================================================ -->
+  <!-- 国王 -->
+  <!-- <ThingDef ParentName="Milira_InformationLetterClassII_Base">
+    <defName>Milira_InformationLetterII_A</defName>
+    <label>教令密函：“国王”</label>
+    <description>记录了关于国王职阶的信息的卷宗。</description>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ReadLetter">
+        <compClass>AncotLibrary.CompReadLetter</compClass>
+        <useLabel>阅读密函</useLabel>
+        <useJob>UseItem</useJob>
+        <useDuration>300</useDuration>
+        <letterDef>NeutralEvent</letterDef>
+        <letterLabel>情报：国王</letterLabel>
+        <letterText>记录了关于国王职阶的信息的卷宗。</letterText>
+        <oneUse>false</oneUse>
+      </li>
+    </comps>
+  </ThingDef> -->
+
+</Defs>

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <!-- EN: Setting[Most of them don't require a restart of the game to take effect] -->
+  <Setting_CMC>武器生成设置[部分无需重启即可生效]</Setting_CMC>
+  <!-- EN: Non-player characters are in possession of CeleTech heavy weapons -->
+  <Setting1_CMC>非殖民者持有天工重型武器</Setting1_CMC>
+	  <!-- EN: Non-player characters are in possession of CeleTech conventional light weapons -->
+  <Setting3_CMC>非殖民者持有天工常规轻武器</Setting3_CMC>
+	  <!-- EN: Game numerical multiplier -->
+  <Setting_label1_CMC>游戏数值倍率</Setting_label1_CMC>
+	    <!-- EN: Bullet damage multiplier -->
+  <Setting5_CMC>子弹伤害倍率</Setting5_CMC>
+		<!-- EN: Bullet damage -->
+  <Setting5_1_CMC>子弹伤害</Setting5_1_CMC>
+		<!-- EN: Bullet armor piercing multiplier -->
+  <Setting6_CMC>子弹穿甲倍率</Setting6_CMC>
+		<!-- EN: Bullet armor piercing -->
+  <Setting6_1_CMC>子弹穿甲率</Setting6_1_CMC>
+		<!-- EN: Bullet explosion radius multiplier -->
+  <Setting7_CMC>子弹爆炸范围倍率</Setting7_CMC>
+		<!-- EN: Bullet explosion radius -->
+  <Setting7_1_CMC>子弹爆炸范围</Setting7_1_CMC>
+		
+		<!-- EN: Weapon cooldown piercing multiplier[The game needs to be restarted] -->
+  <Setting8_CMC>武器冷却倍率[重启游戏后生效]</Setting8_CMC>
+		<!-- EN: Weapon cooldown piercing[The game needs to be restarted] -->
+  <Setting8_1_CMC>武器冷却倍率[重启游戏后生效]</Setting8_1_CMC>
+		
+		<!-- EN: Weapon warmupTime multiplier -->
+  <Setting9_CMC>武器预热倍率</Setting9_CMC>
+		<!-- EN: Weapon warmupTime -->
+  <Setting9_1_CMC>武器预热倍率</Setting9_1_CMC>
+		
+		
+<!-- EN: Non-player characters are in possession of CeleTech heavy weapons -->
+  <Setting_D1_CMC>非殖民者持有天工重型武器</Setting_D1_CMC>
+<!-- EN: Non-player characters are in possession of CeleTech conventional light weapons -->
+  <Setting_D3_CMC>非殖民者持有天工常规轻武器</Setting_D3_CMC>
+
+</LanguageData>

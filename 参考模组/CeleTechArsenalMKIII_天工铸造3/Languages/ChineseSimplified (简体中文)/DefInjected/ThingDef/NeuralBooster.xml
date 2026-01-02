@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: neural booster -->
+  <CMC_AoEbooster.label>神经过载器</CMC_AoEbooster.label>
+  <!-- EN: A remote neural enhancement device. Any friendly units in its effect radius will move and work faster. -->
+  <CMC_AoEbooster.description>一个能提高周围所有生物意识和移动速度的远程神经过载器。</CMC_AoEbooster.description>
+  
+</LanguageData>

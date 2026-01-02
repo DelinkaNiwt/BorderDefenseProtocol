@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <SitePartDef>
+    <defName>Milira_SunBlastFurnace_InRoom</defName>
+    <label>Sunblast Furnace</label>
+    <description>A room with a sunblast furnace.</description>
+    <workerClass>SitePartWorker</workerClass>
+    <siteTexture>World/WorldObjects/Sites/GenericSite</siteTexture>
+    <expandingIconTexture>Milira/Icon/SunBlastFurnace_Icon</expandingIconTexture>
+    <forceExitAndRemoveMapCountdownDurationDays>6</forceExitAndRemoveMapCountdownDurationDays>
+    <tags>
+      <li>Milira_SunBlastFurnace_InRoom</li>
+    </tags>
+  </SitePartDef>
+
+  <GenStepDef>
+    <defName>Milira_SunBlastFurnace_InRoom</defName>
+    <linkWithSite>Milira_SunBlastFurnace_InRoom</linkWithSite>
+    <order>460</order>
+    <genStep Class="Milira.GenStep_SunBlastFurnace">
+      <count>1</count>
+      <nearMapCenter>true</nearMapCenter>
+    </genStep>
+  </GenStepDef>
+
+</Defs>

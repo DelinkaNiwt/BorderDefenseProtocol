@@ -1,0 +1,895 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ResearchTabDef>
+		<defName>Milira_ResearchTab</defName>
+		<label>Milira Tech</label>
+		<generalTitle>Milira Research Tab</generalTitle>
+		<generalDescription>Research projects concerning the Sky Elves: Milira.</generalDescription>
+	</ResearchTabDef>
+
+	<ResearchProjectTagDef>
+		<defName>MiliraRefugeeStart</defName>
+	</ResearchProjectTagDef>
+
+
+	<ResearchProjectDef>
+		<defName>Milira_UniversalPrinter</defName>
+		<label>Universal Workbench</label>
+		<description>Study the universal workbench capable of printing a wide range of items.</description>
+		<baseCost>2000</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>MicroelectronicsBasics</li>			<!-- 微电子 -->
+		</prerequisites>
+		<researchViewX>0</researchViewX>
+		<researchViewY>2.4</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+		<tags>
+			<li>MiliraRefugeeStart</li>
+		</tags>
+	</ResearchProjectDef>
+
+	<!--=米莉拉服装=-->
+	<ResearchProjectDef>
+		<defName>Milira_Apparel_I</defName>
+		<label>Milira Traditional Costume</label>
+		<description>Study the classic traditional costumes of the sky elves.</description>
+		<baseCost>350</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+		</prerequisites>
+		<researchViewX>0</researchViewX>
+		<researchViewY>0.6</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+		<tags>
+			<li>MiliraRefugeeStart</li>
+		</tags>
+	</ResearchProjectDef>
+
+	<!--=米莉拉精致服装=-->
+	<ResearchProjectDef>
+		<defName>Milira_Apparel_II</defName>
+		<label>Milira Elegant Costume</label>
+		<description>Study the elegant costume of Milira.</description>
+		<baseCost>1250</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>Milira_UniversalPrinter</li>
+			<li>Milira_Apparel_I</li>
+		</prerequisites>
+		<researchViewX>1</researchViewX>
+		<researchViewY>0.6</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+		<tags>
+			<li>MiliraRefugeeStart</li>
+		</tags>
+	</ResearchProjectDef>
+
+	<!--=米莉拉作战服装=-->
+	<ResearchProjectDef>
+		<defName>Milira_Apparel_Artemis</defName>
+		<label>Battle Suit: Artemis</label>
+		<description>Study the combat uniform of the Sky Elves.</description>
+		<baseCost>6000</baseCost>
+		<techLevel>Spacer</techLevel>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<requiredResearchFacilities>
+			<li>MultiAnalyzer</li>
+		</requiredResearchFacilities>
+		<prerequisites>
+			<li>Milira_Apparel_II</li>
+			<li>Milira_SunBlastFurnace_Use</li>
+		</prerequisites>
+		<hiddenPrerequisites>
+			<li>Milira_ParticleAcceleratorII</li>
+		</hiddenPrerequisites>
+		<researchViewX>5</researchViewX>
+		<researchViewY>0</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+		<!-- <techprintCount>1</techprintCount>
+	<techprintCommonality>1</techprintCommonality>
+	<techprintMarketValue>1200</techprintMarketValue>
+	<heldByFactionCategoryTags>
+		<li>Milira_Faction</li>
+	</heldByFactionCategoryTags> -->
+	</ResearchProjectDef>
+
+	<ResearchProjectDef>
+		<defName>Milira_Apparel_Valkyr</defName>
+		<label>Battle Suit: Valkyr</label>
+		<description>Study the combat uniform of the Sky Elves.</description>
+		<baseCost>6000</baseCost>
+		<techLevel>Spacer</techLevel>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<requiredResearchFacilities>
+			<li>MultiAnalyzer</li>
+		</requiredResearchFacilities>
+		<prerequisites>
+			<li>Milira_Apparel_II</li>
+			<li>Milira_SunBlastFurnace_Use</li>
+		</prerequisites>
+		<hiddenPrerequisites>
+			<li>Milira_ParticleAcceleratorII</li>
+		</hiddenPrerequisites>
+		<researchViewX>5</researchViewX>
+		<researchViewY>0.6</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+		<!-- <techprintCount>1</techprintCount>
+	<techprintCommonality>1</techprintCommonality>
+	<techprintMarketValue>1200</techprintMarketValue>
+	<heldByFactionCategoryTags>
+		<li>Milira_Faction</li>
+	</heldByFactionCategoryTags> -->
+	</ResearchProjectDef>
+
+
+
+	<!-- <ResearchProjectDef>
+	<defName>Milira_Bionics</defName>
+	<label>米莉拉义肢</label>
+	<description>研究米莉拉的义肢。</description>
+	<baseCost>800</baseCost>
+	<techLevel>Industrial</techLevel>
+	<prerequisites>
+		<li>Milira_UniversalPrinter</li>
+	</prerequisites>
+	<researchViewX>0</researchViewX>
+	<researchViewY>3.0</researchViewY>
+	<tab>Milira_ResearchTab</tab>
+	<tags>
+		<li>MiliraRefugeeStart</li>
+	</tags>
+</ResearchProjectDef> -->
+
+
+
+	<ResearchProjectDef>
+		<defName>Milira_SunLightFuelPoweredGenerator</defName>
+		<label>Sunlight Power Generator</label>
+		<description>Unlock the sunlight power generator.</description>
+		<baseCost>500</baseCost>
+		<techLevel>Spacer</techLevel>
+		<prerequisites>
+			<li>Electricity</li>
+			<li>Milira_SunLightFuelExtract</li>
+		</prerequisites>
+		<researchViewX>4</researchViewX>
+		<researchViewY>1.2</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+		<tags>
+			<li>MiliraRefugeeStart</li>
+		</tags>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef>
+		<defName>Milira_SunLightFuelGenerator</defName>
+		<label>Molten-Salt Energy Station</label>
+		<description>Unlock the facility capable of autonomously generating solar fuel from sunlight.</description>
+		<baseCost>1800</baseCost>
+		<techLevel>Spacer</techLevel>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<requiredResearchFacilities>
+			<li>MultiAnalyzer</li>
+		</requiredResearchFacilities>
+		<prerequisites>
+			<li>Fabrication</li>
+			<li>Milira_SunLightFuelPoweredGenerator</li>
+		</prerequisites>
+		<researchViewX>5</researchViewX>
+		<researchViewY>1.2</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+		<techprintCount>1</techprintCount>
+		<techprintCommonality>0.00001</techprintCommonality>
+		<techprintMarketValue>1200</techprintMarketValue>
+		<heldByFactionCategoryTags>
+			<li>Milira_Faction</li>
+		</heldByFactionCategoryTags>
+		<tags>
+			<li>MiliraRefugeeStart</li>
+		</tags>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef>
+		<defName>Milira_EffectivePhotoelectricTransform</defName>
+		<label>Efficient Photoelectric Transformation</label>
+		<description>Study more efficient photoelectric transforming facilities. By finishing this research, the power-generating efficiency of the Solar Energy Conversion Collection Tower will be substantially enhanced.</description>
+		<baseCost>1200</baseCost>
+		<techLevel>Spacer</techLevel>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<requiredResearchFacilities>
+			<li>MultiAnalyzer</li>
+		</requiredResearchFacilities>
+		<prerequisites>
+			<li>AdvancedFabrication</li>
+			<li>Milira_SunLightFuelGenerator</li>
+		</prerequisites>
+		<researchViewX>6</researchViewX>
+		<researchViewY>1.2</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+	</ResearchProjectDef>
+
+	<!-- todo -->
+	<!-- <ResearchProjectDef>
+		<defName>Milira_ImprovedEnergyConcentrationCircuit</defName>
+		<label>Improved Energy Transition</label>
+		<description>Research more efficient energy conversion circuits. By finishing this research, the Solar Energy Conversion Collection Tower will produce a slightly increased amount of solar fuel.</description>
+		<baseCost>1500</baseCost>
+		<techLevel>Spacer</techLevel>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<requiredResearchFacilities>
+			<li>MultiAnalyzer</li>
+		</requiredResearchFacilities>
+		<prerequisites>
+			<li>Milira_SunLightFuelGenerator</li>
+		</prerequisites>
+		<researchViewX>6</researchViewX>
+		<researchViewY>0.6</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+	</ResearchProjectDef> -->
+
+	<!-- 分子切割 -->
+	<ResearchProjectDef>
+		<defName>Milira_MolecularCleavage</defName>
+		<label>Molecular Cleavage</label>
+		<description>Research precision techniques for processing materials at the molecular level to manufacture weapons and equipment.</description>
+		<baseCost>1200</baseCost>
+		<techLevel>Spacer</techLevel>
+		<prerequisites>
+			<li>Milira_UniversalPrinter</li>
+		</prerequisites>
+		<researchViewX>1</researchViewX>
+		<researchViewY>3.0</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+	</ResearchProjectDef>
+
+	<!-- 动力剑 -->
+	<ResearchProjectDef>
+		<defName>Milira_PoweredSword</defName>
+		<label>Powered Sword</label>
+		<description>Unlock melee weapons powered by energy.</description>
+		<baseCost>1800</baseCost>
+		<techLevel>Spacer</techLevel>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<prerequisites>
+			<li>Milira_MolecularCleavage</li>
+			<li>Milira_ParticleAcceleratorI</li>
+		</prerequisites>
+		<researchViewX>3</researchViewX>
+		<researchViewY>3.0</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+	</ResearchProjectDef>
+
+	<!--太阳熔炉建造-->
+	<ResearchProjectDef>
+		<defName>Milira_SunBlastFurnace_Build</defName>
+		<label>Solar Furnace</label>
+		<description>unlock the building of the solar furnace.</description>
+		<baseCost>1200</baseCost>
+		<techLevel>Spacer</techLevel>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<requiredResearchFacilities>
+			<li>MultiAnalyzer</li>
+		</requiredResearchFacilities>
+		<prerequisites>
+			<li>Fabrication</li>
+			<li>Milira_SunLightFuelExtract</li>
+		</prerequisites>
+		<researchViewX>4</researchViewX>
+		<researchViewY>2.4</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+		<requiredAnalyzed>
+			<li>Milira_FurnaceCoreModel</li>
+		</requiredAnalyzed>
+		<tags>
+			<li>MiliraRefugeeStart</li>
+		</tags>
+	</ResearchProjectDef>
+
+	<!-- 太阳熔炉使用 -->
+	<ResearchProjectDef>
+		<defName>Milira_SunBlastFurnace_Use</defName>
+		<label>Solar Furnace Forging</label>
+		<description>Study to forge with solar furnace.</description>
+		<baseCost>450</baseCost>
+		<techLevel>Spacer</techLevel>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<requiredResearchFacilities>
+			<li>Milira_SunBlastFurnace</li>
+		</requiredResearchFacilities>
+		<prerequisites>
+			<!-- <li>Fabrication</li> -->
+			<li>Milira_SunLightFuelExtract</li>
+		</prerequisites>
+		<researchViewX>4</researchViewX>
+		<researchViewY>3.0</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+		<tags>
+			<li>MiliraRefugeeStart</li>
+		</tags>
+	</ResearchProjectDef>
+
+	<!-- 战矛 -->
+	<ResearchProjectDef>
+		<defName>Milira_Spear</defName>
+		<label>Milira Spear</label>
+		<description>Unlock the spear of Milira.</description>
+		<baseCost>1600</baseCost>
+		<techLevel>Spacer</techLevel>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<requiredResearchFacilities>
+			<li>MultiAnalyzer</li>
+		</requiredResearchFacilities>
+		<prerequisites>
+			<li>Milira_SunBlastFurnace_Use</li>
+		</prerequisites>
+		<hiddenPrerequisites>
+			<li>Milira_PoweredSword</li>
+		</hiddenPrerequisites>
+		<researchViewX>5</researchViewX>
+		<researchViewY>2.4</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+	</ResearchProjectDef>
+
+	<!-- 战镰 -->
+	<ResearchProjectDef>
+		<defName>Milira_Sickle</defName>
+		<label>Milira Sickle</label>
+		<description>Unlock the sickle of Milira.</description>
+		<baseCost>1600</baseCost>
+		<techLevel>Spacer</techLevel>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<requiredResearchFacilities>
+			<li>MultiAnalyzer</li>
+		</requiredResearchFacilities>
+		<prerequisites>
+			<li>Milira_SunBlastFurnace_Use</li>
+		</prerequisites>
+		<hiddenPrerequisites>
+			<li>Milira_PoweredSword</li>
+		</hiddenPrerequisites>
+		<researchViewX>6</researchViewX>
+		<researchViewY>2.4</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+	</ResearchProjectDef>
+
+	<!-- 战刀 -->
+	<ResearchProjectDef>
+		<defName>Milira_Blade</defName>
+		<label>Milira Blade</label>
+		<description>Unlock the blade of Milira.</description>
+		<baseCost>1600</baseCost>
+		<techLevel>Spacer</techLevel>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<requiredResearchFacilities>
+			<li>MultiAnalyzer</li>
+		</requiredResearchFacilities>
+		<prerequisites>
+			<li>Milira_SunBlastFurnace_Use</li>
+		</prerequisites>
+		<hiddenPrerequisites>
+			<li>Milira_PoweredSword</li>
+		</hiddenPrerequisites>
+		<researchViewX>7</researchViewX>
+		<researchViewY>2.4</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+	</ResearchProjectDef>
+
+	<!-- 战锤 -->
+	<ResearchProjectDef>
+		<defName>Milira_Hammer</defName>
+		<label>Milira Warhammer</label>
+		<description>Unlock hammer for Milira.</description>
+		<baseCost>1600</baseCost>
+		<techLevel>Spacer</techLevel>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<requiredResearchFacilities>
+			<li>MultiAnalyzer</li>
+		</requiredResearchFacilities>
+		<prerequisites>
+			<li>Milira_SunBlastFurnace_Use</li>
+		</prerequisites>
+		<hiddenPrerequisites>
+			<li>Milira_PoweredSword</li>
+		</hiddenPrerequisites>
+		<researchViewX>5</researchViewX>
+		<researchViewY>3.0</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+	</ResearchProjectDef>
+
+	<!-- 骑枪 -->
+	<ResearchProjectDef>
+		<defName>Milira_Lance</defName>
+		<label>Milira Lance</label>
+		<description>Unlock lance for Milira.</description>
+		<baseCost>1600</baseCost>
+		<techLevel>Spacer</techLevel>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<requiredResearchFacilities>
+			<li>MultiAnalyzer</li>
+		</requiredResearchFacilities>
+		<prerequisites>
+			<li>Milira_SunBlastFurnace_Use</li>
+		</prerequisites>
+		<hiddenPrerequisites>
+			<li>Milira_PoweredSword</li>
+		</hiddenPrerequisites>
+		<researchViewX>6</researchViewX>
+		<researchViewY>3.0</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+	</ResearchProjectDef>
+
+	<!-- 阔剑 -->
+	<ResearchProjectDef>
+		<defName>Milira_Sword</defName>
+		<label>Milira Great Sword</label>
+		<description>Unlock the great sword for Milira.</description>
+		<baseCost>1600</baseCost>
+		<techLevel>Spacer</techLevel>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<requiredResearchFacilities>
+			<li>MultiAnalyzer</li>
+		</requiredResearchFacilities>
+		<prerequisites>
+			<li>Milira_SunBlastFurnace_Use</li>
+		</prerequisites>
+		<hiddenPrerequisites>
+			<li>Milira_PoweredSword</li>
+		</hiddenPrerequisites>
+		<researchViewX>7</researchViewX>
+		<researchViewY>3.0</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+	</ResearchProjectDef>
+
+	<!-- 离子武器 -->
+	<ResearchProjectDef>
+		<defName>Milira_StandardPlasmaWeapon</defName>
+		<label>Ionic Weapon</label>
+		<description>Study then unlock a series of ionic weapons.</description>
+		<baseCost>2200</baseCost>
+		<techLevel>Spacer</techLevel>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<prerequisites>
+			<li>Milira_SunBlastFurnace_Use</li>
+		</prerequisites>
+		<hiddenPrerequisites>
+			<li>Milira_ParticleAcceleratorII</li>
+		</hiddenPrerequisites>
+		<researchViewX>5</researchViewX>
+		<researchViewY>3.6</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+	</ResearchProjectDef>
+
+	<!-- 重型离子武器 -->
+	<ResearchProjectDef>
+		<defName>Milira_HeavyPlasmaWeapon</defName>
+		<label>Heavy Ionic Weapon</label>
+		<description>Study then unlock mighty heavy ionic weapons.</description>
+		<baseCost>2800</baseCost>
+		<techLevel>Ultra</techLevel>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<requiredResearchFacilities>
+			<li>MultiAnalyzer</li>
+		</requiredResearchFacilities>
+		<prerequisites>
+			<li>Milira_StandardPlasmaWeapon</li>
+			<li>AdvancedFabrication</li>
+		</prerequisites>
+		<hiddenPrerequisites>
+			<li>Milira_ParticleAcceleratorIII</li>
+		</hiddenPrerequisites>
+		<researchViewX>6</researchViewX>
+		<researchViewY>3.6</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+	</ResearchProjectDef>
+
+	<!-- 重型电浆炮塔 -->
+	<ResearchProjectDef>
+		<defName>Milira_HeavyPlasmaTurret</defName>
+		<label>Heavy Plasma Turret</label>
+		<description>Study the auto-energized heavy plasma turret.</description>
+		<baseCost>3000</baseCost>
+		<techLevel>Ultra</techLevel>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<requiredResearchFacilities>
+			<li>MultiAnalyzer</li>
+		</requiredResearchFacilities>
+		<prerequisites>
+			<li>Milira_HeavyPlasmaWeapon</li>
+		</prerequisites>
+		<researchViewX>7</researchViewX>
+		<researchViewY>3.6</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+	</ResearchProjectDef>
+
+	<!-- 重型粒子冲击炮塔 -->
+	<ResearchProjectDef>
+		<defName>Milira_HeavyParticleTurret</defName>
+		<label>Heavy Particle Blast Turret</label>
+		<description>Study the auto-energized heavy particle blasting turret.</description>
+		<baseCost>3000</baseCost>
+		<techLevel>Ultra</techLevel>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<requiredResearchFacilities>
+			<li>MultiAnalyzer</li>
+		</requiredResearchFacilities>
+		<prerequisites>
+			<li>Milira_HeavyPlasmaWeapon</li>
+		</prerequisites>
+		<researchViewX>7</researchViewX>
+		<researchViewY>4.2</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+	</ResearchProjectDef>
+
+	<!-- 轨道炮 -->
+	<ResearchProjectDef>
+		<defName>Milira_RailGun</defName>
+		<label>Railgun</label>
+		<description>Study then unlock kinetic weapons with potent armor-piercing and damage.</description>
+		<baseCost>3500</baseCost>
+		<techLevel>Spacer</techLevel>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<requiredResearchFacilities>
+			<li>MultiAnalyzer</li>
+		</requiredResearchFacilities>
+		<prerequisites>
+			<li>Milira_SunBlastFurnace_Use</li>
+			<li>AdvancedFabrication</li>
+		</prerequisites>
+		<researchViewX>5</researchViewX>
+		<researchViewY>4.2</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+	</ResearchProjectDef>
+
+
+	<ResearchProjectDef>
+		<defName>Milira_HeavyRailGunTurret</defName>
+		<label>Heavy Electromagnetic Turret</label>
+		<description>Study auto-energized heavy electromagnetic turret.</description>
+		<baseCost>3000</baseCost>
+		<techLevel>Ultra</techLevel>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<requiredResearchFacilities>
+			<li>MultiAnalyzer</li>
+		</requiredResearchFacilities>
+		<prerequisites>
+			<li>Milira_RailGun</li>
+		</prerequisites>
+		<hiddenPrerequisites>
+			<li>Milira_ParticleAcceleratorIII</li>
+		</hiddenPrerequisites>
+		<researchViewX>6</researchViewX>
+		<researchViewY>4.2</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+	</ResearchProjectDef>
+
+
+	<ResearchProjectDef>
+		<defName>Milira_HeavyRocketLauncher</defName>
+		<label>Multiple Rocket Launcher</label>
+		<description>Study auto-energized multiple rocket launcher.</description>
+		<baseCost>4000</baseCost>
+		<techLevel>Ultra</techLevel>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<requiredResearchFacilities>
+			<li>MultiAnalyzer</li>
+		</requiredResearchFacilities>
+		<prerequisites>
+			<li>RocketswarmLauncher</li>
+		</prerequisites>
+		<researchViewX>7</researchViewX>
+		<researchViewY>5.4</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+	</ResearchProjectDef>
+
+
+	<!-- 日光花种植 -->
+	<ResearchProjectDef>
+		<defName>Milira_SunLightDaisyPlanting</defName>
+		<label>Sun Bloom</label>
+		<description>Study to plant sun blooms.</description>
+		<baseCost>400</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+		</prerequisites>
+		<researchViewX>0</researchViewX>
+		<researchViewY>1.8</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+	</ResearchProjectDef>
+
+	<!-- 日光燃料精炼 -->
+	<ResearchProjectDef>
+		<defName>Milira_SunLightFuelExtract</defName>
+		<label>Solar Fuel Refining</label>
+		<description>Study to refine solar fuel with sunlight fruit.</description>
+		<baseCost>650</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>Milira_SunLightDaisyPlanting</li>
+			<li>BiofuelRefining</li>
+		</prerequisites>
+		<researchViewX>2</researchViewX>
+		<researchViewY>1.8</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+	</ResearchProjectDef>
+
+	<!-- 日盘钢土法冶炼 -->
+	<ResearchProjectDef>
+		<defName>Milira_SunPlateSteelSmelt</defName>
+		<label>Informal Smelting of the Solar-Forged Steel</label>
+		<description>Learn to smelt the solar-forged steel with unstable reactor chamber.\n\n Putting solar fuel into the reactor chambers made out of uranium and plasteel to react with the inner surface. Blasts caused by the energy releasing of the reaction will finally destroy the reactor chamber.</description>
+		<baseCost>850</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>Milira_SunLightFuelExtract</li>
+		</prerequisites>
+		<researchViewX>4</researchViewX>
+		<researchViewY>3.6</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+	</ResearchProjectDef>
+
+	<!-- 粒子回廊 -->
+	<ResearchProjectDef>
+		<defName>Milira_ParticleAcceleratorI</defName>
+		<label>Particle Corridor</label>
+		<description>Study the particle corridor.</description>
+		<baseCost>800</baseCost>
+		<techLevel>Spacer</techLevel>
+		<prerequisites>
+			<li>Milira_UniversalPrinter</li>
+		</prerequisites>
+		<researchViewX>1</researchViewX>
+		<researchViewY>2.4</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef>
+		<defName>Milira_ParticleAcceleratorII</defName>
+		<label>Imporved Particle Corridor</label>
+		<description>Study the imporved particle corridor.</description>
+		<baseCost>1000</baseCost>
+		<techLevel>Spacer</techLevel>
+		<prerequisites>
+			<li>Milira_ParticleAcceleratorI</li>
+		</prerequisites>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<researchViewX>2</researchViewX>
+		<researchViewY>2.4</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef>
+		<defName>Milira_ParticleAcceleratorIII</defName>
+		<label>Focused Particle Corridor</label>
+		<description>Study the focused particle corridor.</description>
+		<baseCost>2000</baseCost>
+		<techLevel>Spacer</techLevel>
+		<prerequisites>
+			<li>Milira_ParticleAcceleratorII</li>
+		</prerequisites>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<requiredResearchFacilities>
+			<li>MultiAnalyzer</li>
+		</requiredResearchFacilities>
+		<researchViewX>3</researchViewX>
+		<researchViewY>2.4</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef>
+		<defName>Milira_ShieldI</defName>
+		<label>Composite Shield</label>
+		<description>Study lightweight composite shields.</description>
+		<baseCost>800</baseCost>
+		<techLevel>Spacer</techLevel>
+		<prerequisites>
+			<li>Milira_MolecularCleavage</li>
+		</prerequisites>
+		<researchViewX>2</researchViewX>
+		<researchViewY>3.6</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+		<tags>
+			<!-- <li>MiliraRefugeeStart</li> -->
+		</tags>
+		<discoveredLetterTitle>Shield and Stamina</discoveredLetterTitle>
+		<discoveredLetterText>You can craft handheld shields now.\n Pawns equipped with shields will gain a slowly regenerating stamina bar based on the shield's quality, material durability multiplier, and the wielder's melee skill, blocking incoming attacks from a certain angle in the front by consuming stamina points. The points consumed is decided by the damage, armor penetration, and the shield's own resistance to the attack type. \n\n When the stamina bar is emptied, the shield becomes unusable and requires a period of time to recover. The wielder will also fall into a brief shield break stun state. After the cooldown ends, the stamina bar will refill to maximum and the shield can be raised again.\n\n By raising the shield the wielder shall receive a shield-wielding debuff, and the recovering of the stamina points is diminished by 40%.</discoveredLetterText>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef>
+		<defName>Milira_ShieldII</defName>
+		<label>Composite Heavy Shield</label>
+		<description>Study the composite heavy shield.</description>
+		<baseCost>400</baseCost>
+		<techLevel>Spacer</techLevel>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<prerequisites>
+			<li>Milira_ShieldI</li>
+		</prerequisites>
+		<researchViewX>3</researchViewX>
+		<researchViewY>3.6</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef>
+		<defName>Milira_SuspensionSystem</defName>
+		<label>Suspension System</label>
+		<description>Study the suspension system.</description>
+		<baseCost>2000</baseCost>
+		<techLevel>Spacer</techLevel>
+		<prerequisites>
+			<li>Milira_UniversalPrinter</li>
+		</prerequisites>
+		<researchViewX>1</researchViewX>
+		<researchViewY>4.2</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef>
+		<defName>Milira_Booster</defName>
+		<label>Body-Mounted Thruster</label>
+		<description>Study wearable thruster mounted on the body.</description>
+		<baseCost>1200</baseCost>
+		<techLevel>Spacer</techLevel>
+		<prerequisites>
+			<li>Milira_SuspensionSystem</li>
+		</prerequisites>
+		<researchViewX>2</researchViewX>
+		<researchViewY>4.2</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef>
+		<defName>Milira_FloatUnit</defName>
+		<label>Small Float Unit</label>
+		<description>Study the functional float units following the wielders.</description>
+		<baseCost>800</baseCost>
+		<techLevel>Spacer</techLevel>
+		<prerequisites>
+			<li>Milira_UniversalPrinter</li>
+		</prerequisites>
+		<researchViewX>1</researchViewX>
+		<researchViewY>4.8</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef>
+		<defName>Milira_FloatUnitII</defName>
+		<label>Float Unit</label>
+		<description>Study heavier and more functional float units.</description>
+		<baseCost>1200</baseCost>
+		<techLevel>Spacer</techLevel>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<prerequisites>
+			<li>Milira_FloatUnit</li>
+		</prerequisites>
+		<researchViewX>2</researchViewX>
+		<researchViewY>4.8</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+	</ResearchProjectDef>
+
+	<!-- 浮游单元遥控 -->
+	<ResearchProjectDef>
+		<defName>Milira_FloatUnitControl</defName>
+		<label>Float Unit Control</label>
+		<description>Study how to control float units in a distance. After finished this research, float units become darftable.</description>
+		<baseCost>800</baseCost>
+		<techLevel>Spacer</techLevel>
+		<prerequisites>
+			<li>Milira_FloatUnit</li>
+		</prerequisites>
+		<researchViewX>2</researchViewX>
+		<researchViewY>5.4</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+	</ResearchProjectDef>
+
+	<!-- 辉钢 -->
+	<ResearchProjectDef>
+		<defName>Milira_SplendidSteelPrint</defName>
+		<label>Lustrous Steel</label>
+		<description>Study to print lustrous steel on the universal workbench.</description>
+		<baseCost>400</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>Milira_UniversalPrinter</li>
+		</prerequisites>
+		<researchViewX>1</researchViewX>
+		<researchViewY>1.2</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+	</ResearchProjectDef>
+
+	<!-- 羽仿布 -->
+	<ResearchProjectDef>
+		<defName>Milira_FeatherThreadPrint</defName>
+		<label>Feather Thread</label>
+		<description>Study to printing feather threads on the universal workbench.</description>
+		<baseCost>400</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>Milira_UniversalPrinter</li>
+		</prerequisites>
+		<researchViewX>2</researchViewX>
+		<researchViewY>1.2</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef>
+		<defName>Milira_FieldTheory</defName>
+		<label>Field Theory</label>
+		<description>Study the theory on the behavior of spatial force fields.</description>
+		<baseCost>1500</baseCost>
+		<techLevel>Spacer</techLevel>
+		<prerequisites>
+			<li>MicroelectronicsBasics</li>
+		</prerequisites>
+		<researchViewX>0</researchViewX>
+		<researchViewY>5.4</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef>
+		<defName>Milira_FieldTrap</defName>
+		<label>Field Trap</label>
+		<description>Study the traps utilizing spatial force fields to incapacitate enemies.</description>
+		<baseCost>1500</baseCost>
+		<techLevel>Spacer</techLevel>
+		<prerequisites>
+			<li>Milira_FieldTheory</li>
+			<li>Milira_UniversalPrinter</li>
+		</prerequisites>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<researchViewX>1</researchViewX>
+		<researchViewY>5.4</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+	</ResearchProjectDef>
+
+	<!-- <ResearchProjectDef>
+	<defName>Milira_FieldForceWeapon</defName>
+	<label>力场武器</label>
+	<description>研究空间力场远距离投放的可行性。</description>
+	<baseCost>3000</baseCost>
+	<techLevel>Spacer</techLevel>
+	<prerequisites>
+		<li>Milira_FieldTrap</li>
+		<li>Milira_SunBlastFurnace_Use</li>
+	</prerequisites>
+	<researchViewX>4</researchViewX>
+	<researchViewY>5.4</researchViewY>
+	<tab>Milira_ResearchTab</tab>
+</ResearchProjectDef>
+
+<ResearchProjectDef>
+	<defName>Milira_BlackHole</defName>
+	<label>黑洞引力场</label>
+	<description>研究吞噬一切的黑洞引力。</description>
+	<baseCost>3000</baseCost>
+	<techLevel>Spacer</techLevel>
+	<prerequisites>
+		<li>AdvancedFabrication</li>
+		<li>Milira_FieldForceWeapon</li>
+	</prerequisites>
+	<researchViewX>5</researchViewX>
+	<researchViewY>5.4</researchViewY>
+	<tab>Milira_ResearchTab</tab>
+</ResearchProjectDef> -->
+
+	<ResearchProjectDef>
+		<defName>Milira_ConceptWeaponry</defName>
+		<label>Milira Concept Weaponry</label>
+		<description>Research Milira concept weaponry that have not yet been fully deployed.</description>
+		<baseCost>6000</baseCost>
+		<techLevel>Spacer</techLevel>
+		<prerequisites>
+			<li>Milira_SunBlastFurnace_Use</li>
+			<li>AdvancedFabrication</li>
+		</prerequisites>
+		<hiddenPrerequisites>
+			<li>Milira_ParticleAcceleratorIII</li>
+			<li>Milira_FloatUnitII</li>
+			<li>Milira_SuspensionSystem</li>
+		</hiddenPrerequisites>
+		<researchViewX>5</researchViewX>
+		<researchViewY>4.8</researchViewY>
+		<tab>Milira_ResearchTab</tab>
+	</ResearchProjectDef>
+
+</Defs>

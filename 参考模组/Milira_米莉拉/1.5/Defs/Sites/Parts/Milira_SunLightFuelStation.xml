@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <SitePartDef>
+    <defName>Milira_SunLightFuelStation</defName>
+    <label>Molten-Salt Energy Station</label>
+    <description>A Molten-Salt Energy Station surrounded by Milian Cluster.</description>
+    <workerClass>SitePartWorker</workerClass>
+    <siteTexture>Milira/WorldObjects/SunLightFuelStation</siteTexture>
+    <expandingIconTexture>Milira/Icon/SunLightGatheringTower</expandingIconTexture>
+    <forceExitAndRemoveMapCountdownDurationDays>6</forceExitAndRemoveMapCountdownDurationDays>
+    <wantsThreatPoints>true</wantsThreatPoints>
+    <minThreatPoints>400</minThreatPoints>
+    <minMapSize>(175,1,175)</minMapSize>
+    <tags>
+      <li>Milira_SunLightFuelStation</li>
+    </tags>
+  </SitePartDef>
+
+  <GenStepDef>
+    <defName>Milira_SunLightFuelStation</defName>
+    <linkWithSite>Milira_SunLightFuelStation</linkWithSite>
+    <order>460</order>
+    <genStep Class="Milira.GenStep_SunLightFuelStation">
+      <count>1</count>
+      <nearMapCenter>true</nearMapCenter>
+    </genStep>
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>Milian_SunLightFuelStation_TechPrintRoom</defName>
+    <linkWithSite>Milira_SunLightFuelStation</linkWithSite>
+    <order>470</order>
+    <genStep Class="Milira.GenStep_SunLightFuelStation_TechPrintRoom">
+      <count>1</count>
+      <nearMapCenter>true</nearMapCenter>
+    </genStep>
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>Milian_SunLightFuelStation_ClusterAwake</defName>
+    <linkWithSite>Milira_SunLightFuelStation</linkWithSite>
+    <order>480</order>
+    <genStep Class="Milira.GenStep_MilianCluster">
+      <forceNoConditionCauser>true</forceNoConditionCauser>
+      <extraRangeToRectOfInterest>0</extraRangeToRectOfInterest>
+      <dormant>true</dormant>
+    </genStep>
+  </GenStepDef>
+
+</Defs>

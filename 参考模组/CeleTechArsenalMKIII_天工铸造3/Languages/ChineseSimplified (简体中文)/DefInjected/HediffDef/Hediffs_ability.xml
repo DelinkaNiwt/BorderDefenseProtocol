@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: damage absorbed -->
+  <CMC_DMGAbsorb.label>TODO</CMC_DMGAbsorb.label>
+  <!-- EN: damage is absorbed. -->
+  <CMC_DMGAbsorb.description>TODO</CMC_DMGAbsorb.description>
+  
+  <!-- EN: YH-chip boost activated -->
+  <CMC_MeleeBuff.label>玉衡芯片过载</CMC_MeleeBuff.label>
+  <!-- EN: The overloaded combat chip is rendering the user completely insensitive to pain and significantly enhancing its combat abilities. However, it also makes them more susceptible to injury. -->
+  <CMC_MeleeBuff.description>短时间内过载玉衡芯片，大幅提高格斗能力。</CMC_MeleeBuff.description>
+  
+  <!-- EN: TianShu chip nanite shield activated -->
+  <CMC_NsBuff.label>天枢护盾激活</CMC_NsBuff.label>
+  <!-- EN: the chip forms a shield around the user. -->
+  <CMC_NsBuff.description>纳米微械在使用者体表形成一层护盾，持续10秒。</CMC_NsBuff.description>
+  
+  <!-- EN: TX-chip boost activated -->
+  <CMC_RangedBuff.label>天璇芯片过载</CMC_RangedBuff.label>
+  <!-- EN: The overloaded combat chip is rendering the user completely insensitive to pain and significantly enhancing its combat abilities. However, it also makes them more susceptible to injury. -->
+  <CMC_RangedBuff.description>短时间内过载天璇芯片，大幅提高射击水准。</CMC_RangedBuff.description>
+  
+</LanguageData>

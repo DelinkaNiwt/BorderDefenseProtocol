@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<HediffDef Name="Milira_ApparelHediffBase" Abstract="true">
+		<label>Additional Rendering</label>
+		<description>Additional rendering.</description>
+		<hediffClass>HediffWithComps</hediffClass>
+		<stages>
+			<li>
+				<becomeVisible>false</becomeVisible>
+			</li>
+		</stages>
+		<comps>
+			<li Class="HediffCompProperties_RemoveIfApparelDropped"/>
+		</comps>
+		<isBad>false</isBad>
+	</HediffDef>
+
+	<HediffDef ParentName="Milira_ApparelHediffBase">
+		<defName>Milira_SunHat</defName>
+	</HediffDef>
+
+	<HediffDef ParentName="Milira_ApparelHediffBase">
+		<defName>Milira_Hood</defName>
+	</HediffDef>
+
+	<HediffDef>
+		<defName>Milira_FloatSystem</defName>
+		<label>Milira Floating System</label>
+		<description>This pawn is wearing a floating system.</description>
+		<hediffClass>HediffWithComps</hediffClass>
+		<stages>
+			<li>
+				<becomeVisible>false</becomeVisible>
+			</li>
+		</stages>
+		<comps>
+			<li Class="HediffCompProperties_RemoveIfApparelDropped"/>
+		</comps>
+		<isBad>false</isBad>
+	</HediffDef>
+
+	<HediffDef>
+		<defName>Milira_MilianHomeTerminal</defName>
+		<label>civilian terminal</label>
+		<description>This pawn is wearing a civilian terminal.</description>
+		<hediffClass>Milira.Hediff_HomeTerminal</hediffClass>
+		<isBad>false</isBad>
+		<defaultLabelColor>(215, 100, 20)</defaultLabelColor>
+		<initialSeverity>0.01</initialSeverity>
+		<maxSeverity>1</maxSeverity>
+		<comps>
+			<li Class="HediffCompProperties_RemoveIfApparelDropped"/>
+		</comps>
+		<stages>
+			<li>
+			</li>
+		</stages>
+	</HediffDef>
+
+
+
+
+</Defs>

@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <JobDef>
+    <defName>Milira_DressMilian</defName>
+    <driverClass>Milira.JobDriver_DressMilian</driverClass>
+    <reportString>Dressing TargetA with TargetB.</reportString>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+
+  <JobDef>
+    <defName>Milira_EquipMilian</defName>
+    <driverClass>Milira.JobDriver_EquipMilian</driverClass>
+    <reportString>Equipping TargetA with TargetB.</reportString>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+
+  <JobDef>
+    <defName>Milira_EquipMilianPre</defName>
+    <driverClass>JobDriver_UseItem</driverClass>
+    <reportString>Equipping TargetA.</reportString>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+
+  <!-- <JobDef>
+    <defName>Milira_EquipMilianTest</defName>
+    <driverClass>Milira.JobDriver_EquipMilianTest</driverClass>
+    <reportString>为TargetA装备TargetB中。</reportString>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef> -->
+
+  <!-- ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓卸下武器/衣服的job -->
+  <JobDef>
+    <defName>Milira_StripMilian_Apparel</defName>
+    <driverClass>Milira.JobDriver_StripMilian_Apparel</driverClass>
+    <reportString>Remove TargetB for TargetA.</reportString>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+
+  <JobDef>
+    <defName>Milira_StripMilian_Weapon</defName>
+    <driverClass>Milira.JobDriver_StripMilian_Weapon</driverClass>
+    <reportString>Remove TargetB for TargetA.</reportString>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+  <!-- ↑↑↑↑↑↑↑↑↑↑↑↑ -->
+
+  <JobDef>
+    <defName>Milira_HumanizeMilian</defName>
+    <driverClass>Milira.JobDriver_HumanizeMilian</driverClass>
+    <reportString>???</reportString>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+
+  
+</Defs>

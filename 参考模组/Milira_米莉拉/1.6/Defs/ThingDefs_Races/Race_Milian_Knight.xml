@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef Name="Milira_MilianBase_Knight" ParentName="Milira_BaseMilianWalkerA" Abstract="true">
+    <tools>
+      <li>
+        <label>left fist</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>12.0</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+      <li>
+        <label>right fist</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>12.0</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+    </tools>
+    <statBases>
+      <CarryingCapacity>150</CarryingCapacity>
+      <CaravanBonusSpeedFactor>1.1</CaravanBonusSpeedFactor>
+      <AimingDelayFactor>1.2</AimingDelayFactor>
+    </statBases>
+    <race>
+      <body>Milian_Body</body>
+      <soundMeleeHitPawn>Pawn_Melee_MechanoidBash_HitPawn</soundMeleeHitPawn>
+      <soundMeleeHitBuilding>Pawn_Melee_MechanoidBash_HitBuilding</soundMeleeHitBuilding>
+      <soundMeleeMiss>Pawn_Melee_Punch_Miss</soundMeleeMiss>
+      <hediffGiverSets>
+        <!-- <li>Milian_ClassHediffInitial_Knight</li> -->
+        <li>Milian_ClassHediffMaintain_Knight</li>
+      </hediffGiverSets>
+    </race>
+    <comps>
+      <li Class="Milira.CompProperties_GainHediffSpawn">
+        <hediffDef>Milian_ClassHediff_Knight</hediffDef>
+      </li>
+      <li Class="Milira.CompProperties_TargetableWeapon">
+				<compClass>Milira.CompTargetableWeapon</compClass>
+				<ignoreQuestLodgerPawns>true</ignoreQuestLodgerPawns>
+				<shouldBeRangeWeapon>false</shouldBeRangeWeapon>
+			</li>
+    </comps>
+  </ThingDef>
+
+
+
+  <!--=骑士I型===========================================================================================================================-->
+  <ThingDef ParentName="Milira_MilianBase_Knight">
+    <defName>Milian_Mechanoid_KnightI</defName>
+    <label>Knight I</label>
+    <description>Milian the knight I type.\n\nCan equipe with melee weapon.</description>
+    <statBases>
+      <MoveSpeed>4.0</MoveSpeed>
+      <MarketValue>1200</MarketValue>
+      <ArmorRating_Blunt>0.1</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.15</ArmorRating_Sharp>
+      <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">4</BandwidthCost>
+    </statBases>
+    <race>
+      <baseHealthScale>1.8</baseHealthScale>
+    </race>
+    <comps>
+      <li Class="Milira.CompProperties_SendPromotionRequest">
+        <promotionHediffType>Milian_PawnPromotion_KnightI</promotionHediffType>
+      </li>
+      <li Class="Milira.CompProperties_MilianKnightICharge">
+        <hediffDef>Milian_KnightI_KnightCharge</hediffDef>
+        <severityPerTick_Stop>0.3</severityPerTick_Stop>
+        <severityPerTick_Job>0.01</severityPerTick_Job>
+        <staggeredSeverityFactor>0.2</staggeredSeverityFactor>
+        <speedSeverityFactor>0.2</speedSeverityFactor>
+        <minSpeed>2.8</minSpeed>
+      </li>
+    </comps>
+    <uiIconPath>Milian/Mechanoid_uiIcon/KnightI</uiIconPath>
+  </ThingDef>
+
+  <PawnKindDef ParentName="BaseMilianKind_Mechanoid">
+    <defName>Milian_Mechanoid_KnightI</defName>
+    <label>Knight I</label>
+    <race>Milian_Mechanoid_KnightI</race>
+    <combatPower>216</combatPower>
+    <apparelRequired>
+      <li>Milian_RangerArmor</li>
+      <li>Milian_Lining</li>
+      <li>Milian_KnightHeadset</li>
+      <!-- <li>Milian_Booster</li> -->
+    </apparelRequired>
+    <weaponMoney>9999~9999</weaponMoney>
+    <weaponStuffOverride>Milira_SplendidSteel</weaponStuffOverride>
+    <weaponTags>
+      <li>Milian_KnightHalberd</li>
+    </weaponTags>
+    <techHediffsChance>1</techHediffsChance>
+    <techHediffsMoney>9999~9999</techHediffsMoney>
+  </PawnKindDef>
+
+
+
+
+  <!--=骑士II型===========================================================================================================================-->
+  <ThingDef ParentName="Milira_MilianBase_Knight">
+    <defName>Milian_Mechanoid_KnightII</defName>
+    <label>Knight II</label>
+    <description>Milian the knight II type.\n\nCan equipe with melee weapon.</description>
+    <statBases>
+      <MoveSpeed>4.0</MoveSpeed>
+      <MarketValue>1200</MarketValue>
+      <ArmorRating_Blunt>0.1</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.15</ArmorRating_Sharp>
+      <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">5</BandwidthCost>
+    </statBases>
+    <race>
+      <baseHealthScale>1.8</baseHealthScale>
+      <bulletStaggerDelayTicks>10</bulletStaggerDelayTicks><!-- 受伤抑制 -->
+    </race>
+    <comps>
+      <li Class="Milira.CompProperties_SendPromotionRequest">
+        <promotionHediffType>Milian_PawnPromotion_KnightII</promotionHediffType>
+      </li>
+    </comps>
+    <uiIconPath>Milian/Mechanoid_uiIcon/KnightII</uiIconPath>
+  </ThingDef>
+
+  <PawnKindDef ParentName="BaseMilianKind_Mechanoid">
+    <defName>Milian_Mechanoid_KnightII</defName>
+    <label>Knight II</label>
+    <race>Milian_Mechanoid_KnightII</race>
+    <combatPower>264</combatPower>
+    <apparelRequired>
+      <li>Milian_GuardianArmor</li>
+      <li>Milian_Lining</li>
+      <li>Milian_KnightHeadset</li>
+      <li>Milian_FeatherShapeShield</li>
+    </apparelRequired>
+    <weaponMoney>9999~9999</weaponMoney>
+    <weaponStuffOverride>Milira_SplendidSteel</weaponStuffOverride>
+    <weaponTags>
+      <li>Milian_KnightSword</li>
+    </weaponTags>
+    <techHediffsChance>1</techHediffsChance>
+    <techHediffsMoney>9999~9999</techHediffsMoney>
+  </PawnKindDef>
+
+
+
+
+  <!--=骑士III型===========================================================================================================================-->
+  <ThingDef ParentName="Milira_MilianBase_Knight">
+    <defName>Milian_Mechanoid_KnightIII</defName>
+    <label>Outrider</label>
+    <description>Milian the outrider type.\n\nCan equipe with melee weapon.</description>
+    <statBases>
+      <MoveSpeed>4.0</MoveSpeed>
+      <MarketValue>2400</MarketValue>
+      <ArmorRating_Blunt>0.15</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.25</ArmorRating_Sharp>
+      <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">7</BandwidthCost>
+    </statBases>
+    <race>
+      <baseHealthScale>2.0</baseHealthScale>
+      <thinkTreeConstant>MilianConstant</thinkTreeConstant>
+    </race>
+    <comps>
+      <li Class="Milira.CompProperties_SendPromotionRequest">
+        <promotionHediffType>Milian_PawnPromotion_KnightIII</promotionHediffType>
+      </li>
+    </comps>
+    <uiIconPath>Milian/Mechanoid_uiIcon/KnightIII</uiIconPath>
+  </ThingDef>
+
+  <PawnKindDef ParentName="BaseMilianKind_Mechanoid">
+    <defName>Milian_Mechanoid_KnightIII</defName>
+    <label>Outrider</label>
+    <race>Milian_Mechanoid_KnightIII</race>
+    <combatPower>384</combatPower>
+    <maxPerGroup>3</maxPerGroup>
+    <apparelRequired>
+      <li>Milian_StalkerArmor</li>
+      <li>Milian_Lining</li>
+      <li>Milian_KnightHeadsetII</li>
+    </apparelRequired>
+    <weaponMoney>9999~9999</weaponMoney>
+    <weaponStuffOverride>Milira_SplendidSteel</weaponStuffOverride>
+    <weaponTags>
+      <li>Milian_KnightLance</li>
+    </weaponTags>
+    <techHediffsChance>1</techHediffsChance>
+    <techHediffsMoney>9999~9999</techHediffsMoney>
+  </PawnKindDef>
+
+
+
+
+  <!--=骑士IV型===========================================================================================================================-->
+  <ThingDef ParentName="Milira_MilianBase_Knight">
+    <defName>Milian_Mechanoid_KnightIV</defName>
+    <label>Paladin</label>
+    <description>Milian the paladin type.\n\nCan equipe with melee weapon.</description>
+    <statBases>
+      <MoveSpeed>4.0</MoveSpeed>
+      <MarketValue>2400</MarketValue>
+      <ArmorRating_Blunt>0.25</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.25</ArmorRating_Sharp>
+      <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">7</BandwidthCost>
+    </statBases>
+    <race>
+      <baseHealthScale>2.0</baseHealthScale>
+      <bulletStaggerDelayTicks>10</bulletStaggerDelayTicks><!-- 受伤抑制 -->
+    </race>
+    <comps>
+      <li Class="Milira.CompProperties_SendPromotionRequest">
+        <promotionHediffType>Milian_PawnPromotion_KnightIV</promotionHediffType>
+      </li>
+      <li Class="AncotLibrary.CompProperties_TurretGun_Custom">
+        <turretDef>MiliraGun_KnightIV_Hammer</turretDef>
+        <angleOffset>-90</angleOffset>
+      </li>
+    </comps>
+    <uiIconPath>Milian/Mechanoid_uiIcon/KnightIV</uiIconPath>
+  </ThingDef>
+
+  <PawnKindDef ParentName="BaseMilianKind_Mechanoid">
+    <defName>Milian_Mechanoid_KnightIV</defName>
+    <label>Paladin</label>
+    <race>Milian_Mechanoid_KnightIV</race>
+    <combatPower>384</combatPower>
+    <maxPerGroup>3</maxPerGroup>
+    <apparelRequired>
+      <li>Milian_PaladinArmor</li>
+      <li>Milian_Lining</li>
+      <li>Milian_KnightHeadsetIII</li>
+      <li>Milian_KnightShield</li>
+    </apparelRequired>
+    <weaponMoney>9999~9999</weaponMoney>
+    <weaponStuffOverride>Milira_SplendidSteel</weaponStuffOverride>
+    <weaponTags>
+      <li>Milian_KnightHammer</li>
+    </weaponTags>
+    <techHediffsChance>1</techHediffsChance>
+    <techHediffsMoney>9999~9999</techHediffsMoney>
+  </PawnKindDef>
+
+
+  <!--帕拉丁飞锤-->
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>MiliraGun_KnightIV_Hammer</defName>
+    <label>Thrown hammer</label>
+    <description>Thrown hammer used by the Paladin.</description>
+    <tradeability>None</tradeability>
+    <destroyOnDrop>true</destroyOnDrop>
+    <graphicData>
+      <texPath>Milira/Null/null</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <Mass>2.8</Mass>
+      <AccuracyTouch>1.0</AccuracyTouch>
+      <AccuracyShort>0.85</AccuracyShort>
+      <AccuracyMedium>0.8</AccuracyMedium>
+      <AccuracyLong>0.8</AccuracyLong>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>MiliraProjectile_KnightIV_Hammer</defaultProjectile>
+        <requireLineOfSight>true</requireLineOfSight>
+        <range>15.9</range>
+        <soundCast>ThrowGrenade</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>0</muzzleFlashScale>
+        <!-- <warmupTime>1.8</warmupTime> -->
+        <minRange>5.9</minRange>
+        <forcedMissRadius>1.0</forcedMissRadius>
+        <defaultCooldownTime>15</defaultCooldownTime>
+        <linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+        <burstShotCount>1</burstShotCount>
+        <ticksBetweenBurstShots>12</ticksBetweenBurstShots>
+      </li>
+    </verbs>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>MiliraProjectile_KnightIV_Hammer</defName>
+    <label>Thrown Hammer</label>
+    <graphicData>
+      <texPath>Milian/Projectile/Projectile_Hammer</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.0</drawSize>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <thingClass>Projectile_Explosive</thingClass>
+    <projectile>
+      <damageDef>Ancot_StunExceptInstigatorFaction</damageDef>
+      <explosionRadius>2.5</explosionRadius>
+      <damageAmountBase>8</damageAmountBase>
+      <armorPenetrationBase>0.25</armorPenetrationBase>
+      <stoppingPower>5.0</stoppingPower>
+      <speed>46</speed>
+    </projectile>
+  </ThingDef>
+
+</Defs>

@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+  <!-- PlaceWorker提示 -->
+  <!-- EN: must place indoor and roofed. -->
+  <Ancot.MustPlaceIndoorRoofed>必须放置在有屋顶的室内。</Ancot.MustPlaceIndoorRoofed>
+  <!-- EN: There is only one building in this type can be built on map. -->
+  <Ancot.OnlyOneInMap>这张地图只能建造一个同类型建筑。</Ancot.OnlyOneInMap>
+
+  <!-- 能力提示 -->
+  <!-- EN: Can not use: no enough weapon charge. -->
+  <Ancot.NoWeaponAbilityCharge>无法使用：武器缺少充能。</Ancot.NoWeaponAbilityCharge>
+  <!-- EN: Can not use: the owner don't know how to use this ability. -->
+  <Ancot.Ability_OnlyRace>无法使用：持有者不懂得如何使用这项能力。</Ancot.Ability_OnlyRace>
+  <!-- EN: Can not use: no enough mech energy. -->
+  <Ancot.Ability_NoMechEnergy>无法使用：能量不足。</Ancot.Ability_NoMechEnergy>
+  <!-- EN: Energy cost: {0} -->
+  <Ancot.AbilityMechEnergyCost>消耗能量：{0}</Ancot.AbilityMechEnergyCost>
+  <!-- EN: Can not use: no enough space. -->
+  <Ancot.Ability_NoSpace>无法使用：空间不足。</Ancot.Ability_NoSpace>
+  <!-- EN: Can not use: shield is not ready. -->
+  <Ancot.Ability_NoEnergyShield>无法使用：能量护盾未准备就绪。</Ancot.Ability_NoEnergyShield>
+  <!-- EN: Can not use: no ready shield. -->
+  <Ancot.Ability_NoAvailableShield>无法使用：无可用盾牌。</Ancot.Ability_NoAvailableShield>
+  <!-- EN: Charge cost: {0} -->
+  <Ancot.AbilityChargeCost>消耗充能：{0}</Ancot.AbilityChargeCost>
+  <!-- EN: Can not use: no enough charge. -->
+  <Ancot.Ability_ChargeLow>无法使用：充能不足。</Ancot.Ability_ChargeLow>
+
+  <!-- EN: switch fire mode -->
+  <Ancot.SwitchVerb>切换射击</Ancot.SwitchVerb>
+  <!-- EN: switch to another fire mode. -->
+  <Ancot.SwitchVerbDesc>切换到另一射击模式。</Ancot.SwitchVerbDesc>
+  <!-- EN: Another fire mode can be used by this weapon. -->
+  <Ancot.VerbSwitchInfoDesc>这把武器可以使用的另一种射击模式。</Ancot.VerbSwitchInfoDesc>
+  <!-- EN: burst shot count -->
+  <Ancot.VerbSwitch_BurstShotCount>连射次数</Ancot.VerbSwitch_BurstShotCount>
+  <!-- EN: range -->
+  <Ancot.VerbSwitch_Range>射程</Ancot.VerbSwitch_Range>
+  <!-- EN: warmup time -->
+  <Ancot.VerbSwitch_WarmupTime>瞄准时间</Ancot.VerbSwitch_WarmupTime>
+  <!-- EN: second -->
+  <Ancot.Second>秒</Ancot.Second>
+  <!-- EN: cancel -->
+  <Ancot.Cancel>取消</Ancot.Cancel>
+  <!-- EN: true -->
+  <Ancot.True>是</Ancot.True>
+  <!-- EN: false -->
+  <Ancot.False>否</Ancot.False>
+  <!-- EN: finish -->
+  <Ancot.Finish>完成</Ancot.Finish>
+  <!-- EN: extra -->
+  <Ancot.Extra>额外</Ancot.Extra>
+
+  <!-- EN: /s -->
+  <Ancot.PerSecond>/s</Ancot.PerSecond>
+
+  <!-- EN: auto combat -->
+  <Ancot.AutoFight>自主战斗</Ancot.AutoFight>
+  <!-- EN: Set current machine to auto combat mode. -->
+  <Ancot.AutoFightDesc>将当前机械体设置为自主战斗模式。</Ancot.AutoFightDesc>
+
+  <!-- CompProperties_MechCarrier_Custom -->
+  <!-- 回收释放的单位 -->
+  <!-- EN: Have no target to recover. -->
+  <Ancot.MechCarrierNoPawnToRecover>没有可以回收的单位。</Ancot.MechCarrierNoPawnToRecover>
+
+  <!-- EN: recover {0} -->
+  <Ancot.MechCarrierRecover>回收{0}</Ancot.MechCarrierRecover>
+  <!-- EN: Recall all {1} that have been released, convert them back to {4} for storage. The amount of {4} recovered is related to the percentage of remaining health of {1}. When the health of the recovered {1} is full, {5} release cost can be recovered.\n\nRecover {1} will put the release capability into a long period of cooling. -->
+  <Ancot.MechCarrierRecoverDesc>召回已经部署的所有{1}，将它们回收并转化为{4}储存起来。回收获得的{4}数量与被回收{1}的剩余健康度百分比正相关，当被回收的{1}的健康度为满时，可以回收{5}部署消耗。\n\n回收{1}将会使部署能力进入长时间的冷却。</Ancot.MechCarrierRecoverDesc>
+
+  <!-- EN: follow -->
+  <Ancot.FloatUnit_Follow>跟随</Ancot.FloatUnit_Follow>
+  <!-- EN: Current mode is follow. The float unit will surround {0} and attempt to attack approaching enemies. -->
+  <Ancot.FloatUnit_FollowDesc>当前状态为跟随。浮游单元将会环绕在{0}周围并尝试攻击接近的敌人。</Ancot.FloatUnit_FollowDesc>
+
+  <!-- EN: Sortie -->
+  <Ancot.FloatUnitSortie>出击</Ancot.FloatUnitSortie>
+  <!-- EN: Current mode is sortie. The float unit will actively approach and attack {0}'s enemies. -->
+  <Ancot.FloatUnitSortieDesc>当前状态为出击。浮游单元将会主动接近并攻击{0}的敌人。</Ancot.FloatUnitSortieDesc>
+
+  <!-- EN: charge immediately -->
+  <Ancot.ChargeImmediately>瞬时充能</Ancot.ChargeImmediately>
+  <!-- EN: Immediately charges the held weapon, restoring energy based on weapon maximum charge multiplied by weapon's correction factor. -->
+  <Ancot.ChargeImmediatelyDesc>立刻为手持的武器充能一次，回复武器最大充能 * 修正系数的能量值。</Ancot.ChargeImmediatelyDesc>
+  <!-- EN: Can not use: cooldown. -->
+  <Ancot.ChargeImmediatelyReason>无法使用：正在冷却中。</Ancot.ChargeImmediatelyReason>
+
+  <!-- EN: turret -->
+  <Ancot.Turret>炮塔</Ancot.Turret>
+  <!-- EN: The weapon installed on this apparel. -->
+  <Ancot.TurretDescI>TODO</Ancot.TurretDescI>
+  <!-- EN: The weapon installed on this pawn. -->
+  <Ancot.TurretDescII>TODO</Ancot.TurretDescII>
+
+  <!-- EN: projectile charged -->
+  <Ancot.ProjectileCharged>充能子弹</Ancot.ProjectileCharged>
+  <!-- EN: the projectile fired by this weapon when energy is not empty. -->
+  <Ancot.ProjectileChargedDesc>这把武器在存有能量时发射的子弹。</Ancot.ProjectileChargedDesc>
+  <!-- EN: damage amount -->
+  <Ancot.ProjectileCharged_Damage>伤害</Ancot.ProjectileCharged_Damage>
+  <!-- EN: armor penetration -->
+  <Ancot.ProjectileCharged_ArmorPenetration>护甲穿透</Ancot.ProjectileCharged_ArmorPenetration>
+  <!-- EN: stopping power -->
+  <Ancot.ProjectileCharged_StoppingPower>抑制能力</Ancot.ProjectileCharged_StoppingPower>
+  <!-- EN: explosion radius -->
+  <Ancot.ProjectileCharged_ExplosionRadius>爆炸半径</Ancot.ProjectileCharged_ExplosionRadius>
+
+  <!-- EN: Disable ranged weapon -->
+  <Ancot.BlocksRangedWeapons>阻碍射击</Ancot.BlocksRangedWeapons>
+  <!-- EN: Whether ranged weapons can be used while defending with this shield. -->
+  <Ancot.BlocksRangedWeaponsDesc>使用这面盾牌进行防御时，是否阻碍射击。</Ancot.BlocksRangedWeaponsDesc>
+
+  <!-- 远行队 -->
+  <!-- EN: move speed factor provided by member -->
+  <Ancot.CaravanMoveSpeedFactor>远行队成员提供的移动速度乘数</Ancot.CaravanMoveSpeedFactor>
+
+  <!-- EN: Switch additional pattern style. -->
+  <Ancot.SwitchAdditionalGraphic>切换额外图案样式。</Ancot.SwitchAdditionalGraphic>
+
+  <!-- EN: Switch Weapon -->
+  <Ancot.SwitchWeapon>切换武器</Ancot.SwitchWeapon>
+  <!-- EN: Switch to the backup weapon. If the backup weapon slot is empty, the currently equipped weapon will be placed into the backup slot. -->
+  <Ancot.SwitchWeaponDesc>切换备用的武器。当备用武器栏位为空时，将手持武器放入备用武器栏位。</Ancot.SwitchWeaponDesc>
+
+  <!-- EN: Select the amount of resources to load. The next loading will not exceed the specified maximum load value. -->
+  <Ancot.ApparelReloadableDesc>选择资源装填数量。下次装填的资源数量将不会超过指定的最大装填值。</Ancot.ApparelReloadableDesc>
+
+  <!-- EN: Ancot Library version is too low -->
+  <Ancot.LowVersionWarning>Ancot Library版本过低</Ancot.LowVersionWarning>
+  <!-- EN: The mod: {0} requires Ancot Library version {1}, which is higher than the currently loaded Ancot Library version {2}, this may be caused by Steam Workshop failing to update Ancot Library properly after updating {0}.\n\nUsing Ancot Library version lower than required will cause some features in mod: {0} to malfunction. Please ensure that Ancot Library is properly updated. -->
+  <Ancot.LowVersionWarningDesc>模组{0}依赖的Ancot Library前置库版本为{1}，高于当前加载的Ancot Library版本{2}，\n这可能是Steam创意工坊在更新{0}后没有成功更新Ancot Library导致的。\n\n前置库版本低于要求版本将会导致模组{0}中的部分功能无法正常运行，请确认Ancot Library正确更新以正常游戏。</Ancot.LowVersionWarningDesc>
+  <!-- EN: Open Ancot Library Workshop page -->
+  <Ancot.LowVersionWarningOpenURL>打开Ancot Library工坊页面</Ancot.LowVersionWarningOpenURL>
+
+  <!-- Weapon Fitting Utility -->
+  <!-- EN: No weapon equipped -->
+  <Ancot.WeaponIsNull>未持有武器</Ancot.WeaponIsNull>
+  <!-- EN: Cannot modify {0} -->
+  <Ancot.WeaponCantUseTrait>无法改装{0}</Ancot.WeaponCantUseTrait>
+  <!-- EN: Fitting {0} cannot be installed alone -->
+  <Ancot.CantAddTraitAlone>配件{0}不能被单独安装</Ancot.CantAddTraitAlone>
+  <!-- EN: {0} has exceeded the fitting limit -->
+  <Ancot.TooManyTraits>{0}改装超过上限</Ancot.TooManyTraits>
+  <!-- EN: Fitting {0} does not exist -->
+  <Ancot.TraitNotExist>配件{0}不存在</Ancot.TraitNotExist>
+  <!-- EN: Disassemble {0} to retrieve all fittings -->
+  <Ancot.DisassembleWeaponForFitting>拆解{0}的全部配件</Ancot.DisassembleWeaponForFitting>
+  <!-- EN: Cannot remove fittings from {0} -->
+  <Ancot.CannotRemoveAllFittings>不能移除{0}的配件</Ancot.CannotRemoveAllFittings>
+  <!-- EN: Remove all fittings from {0} -->
+  <Ancot.RemoveAllFittings>移除{0}的所有配件</Ancot.RemoveAllFittings>
+  <!-- EN: {0} (Modifiable) -->
+  <Ancot.ModificationWeapon>{0}（可改造）</Ancot.ModificationWeapon>
+
+  <!-- EN: Gains Name {0} -->
+  <Ancot.WeaponGainsName>获得了名字{0}</Ancot.WeaponGainsName>
+  <!-- EN: Rename Weapon -->
+  <Ancot.RenameWeapon>重命名武器</Ancot.RenameWeapon>
+  <!-- EN: Not Favorite -->
+  <Ancot.AddToFavorites>未收藏</Ancot.AddToFavorites>
+  <!-- EN: click to add this to favorites -->
+  <Ancot.AddToFavorites_Desc>点击将使此武器加入收藏</Ancot.AddToFavorites_Desc>
+  <!-- EN: Favorite -->
+  <Ancot.RemoveFromFavorites>已收藏</Ancot.RemoveFromFavorites>
+  <!-- EN: click to remove this from favorites -->
+  <Ancot.RemoveFromFavorites_Desc>点击将使此武器移出收藏</Ancot.RemoveFromFavorites_Desc>
+  <!-- UNUSED -->
+  <Ancot.TurretDesc>安装在这个生物或服装上的武器。</Ancot.TurretDesc>
+
+</LanguageData>

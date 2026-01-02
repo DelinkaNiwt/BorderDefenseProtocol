@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs> 
+
+  <!--=战车片刃刀=-->
+  <ThingDef ParentName="Milian_BaseMakeableMelee">
+    <defName>Milian_RookBlade</defName>
+    <label>Rook mono-edge blade</label>
+    <description>The standard mono-edged blade of the Milian Rook.</description>
+    <techLevel>Spacer</techLevel>
+    <graphicData>
+      <texPath>Milian/Weapon/RookBlade</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.5</drawSize>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <costStuffCount>120</costStuffCount>
+		<stuffCategories>
+			<li>Metallic</li>
+		</stuffCategories>
+		<costList>
+			<Milira_SunPlateSteel>10</Milira_SunPlateSteel>
+      <Plasteel>50</Plasteel>
+      <Milira_SunLightFuel>20</Milira_SunLightFuel>
+		</costList>
+    <recipeMaker>
+      <researchPrerequisites>
+        <li>Milira_MilianTech_RookI</li>
+        <li>Milira_MolecularCleavage</li>
+      </researchPrerequisites>
+    </recipeMaker>
+    <tradeability>None</tradeability>
+    <smeltable>false</smeltable>
+    <!-- <destroyOnDrop>true</destroyOnDrop> -->
+    <relicChance>0</relicChance>
+    <generateCommonality>1.0</generateCommonality>
+    <statBases>
+      <MarketValue>1600</MarketValue>
+      <WorkToMake>18000</WorkToMake>
+      <Mass>12.0</Mass>
+    </statBases>
+    <equippedStatOffsets>
+    </equippedStatOffsets>
+    <equippedAngleOffset>-35</equippedAngleOffset>
+    <weaponTags>
+      <li>Milian_RookBlade</li>
+    </weaponTags>
+    <weaponClasses>
+      <li>MeleePiercer</li>
+    </weaponClasses>
+    <tools>
+      <li>
+        <label>blade</label>
+        <capacities>
+          <li>Cut</li>
+        </capacities>
+        <power>32</power>
+        <cooldownTime>3.5</cooldownTime>
+        <!-- <armorPenetration>0.35</armorPenetration> -->
+      </li>
+    </tools>
+    <comps>
+    </comps>
+  </ThingDef>
+
+
+  <!--=战车战身刀=-->
+  <ThingDef ParentName="Milian_BaseMakeableMelee">
+    <defName>Milian_RookBladeII</defName>
+    <label>Rook colossal blade</label>
+    <description>Standard colossal blade for the Milian Rook. Its exaggerated size and thickness make it versatile for both offense and defense.</description>
+    <techLevel>Spacer</techLevel>
+    <graphicData>
+      <texPath>Milian/Weapon/RookBladeII</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.5</drawSize>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <costStuffCount>160</costStuffCount>
+		<stuffCategories>
+			<li>Metallic</li>
+		</stuffCategories>
+		<costList>
+			<Milira_SunPlateSteel>30</Milira_SunPlateSteel>
+      <Plasteel>100</Plasteel>
+      <Milira_SunLightFuel>20</Milira_SunLightFuel>
+		</costList>
+    <recipeMaker>
+      <researchPrerequisites>
+        <li>Milira_MilianTech_RookIII</li>
+        <li>Milira_MolecularCleavage</li>
+      </researchPrerequisites>
+    </recipeMaker>
+    <tradeability>None</tradeability>
+    <smeltable>false</smeltable>
+    <!-- <destroyOnDrop>true</destroyOnDrop> -->
+    <relicChance>0</relicChance>
+    <generateCommonality>1.0</generateCommonality>
+    <statBases>
+      <MarketValue>1600</MarketValue>
+      <WorkToMake>21000</WorkToMake>
+      <Mass>15.0</Mass>
+    </statBases>
+    <equippedStatOffsets>
+    </equippedStatOffsets>
+    <equippedAngleOffset>15</equippedAngleOffset>
+    <weaponTags>
+      <li>Milian_RookBladeII</li>
+    </weaponTags>
+    <weaponClasses>
+      <li>MeleePiercer</li>
+    </weaponClasses>
+    <tools>
+      <li>
+        <label>blade</label>
+        <capacities>
+          <li>Milira_HitPointPriority</li>
+        </capacities>
+        <power>40</power>
+        <cooldownTime>3.5</cooldownTime>
+      </li>
+    </tools>
+    <comps>
+    </comps>
+  </ThingDef>
+
+</Defs>

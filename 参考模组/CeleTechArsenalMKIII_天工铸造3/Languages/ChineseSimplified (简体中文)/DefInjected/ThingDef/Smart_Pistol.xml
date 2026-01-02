@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: QSZ-58 EM pistol(modified) -->
+  <CMC_QSZfiveeightSmart.label>QSZ-58电磁手枪(智能套件)</CMC_QSZfiveeightSmart.label>
+  <!-- EN: . -->
+  <CMC_QSZfiveeightSmart.description>加装了智能瞄具和枪口目标装订器的QSZ-58，相比原型提升了近距离战斗的反应速度。\n\n• 模式切换：该武器可以在以高射速发射无制导子弹和以较低射速发射追踪弹之间切换。</CMC_QSZfiveeightSmart.description>
+  <!-- EN: grip -->
+  <CMC_QSZfiveeightSmart.tools.grip.label>握把</CMC_QSZfiveeightSmart.tools.grip.label>
+  <!-- EN: barrel -->
+  <CMC_QSZfiveeightSmart.tools.barrel.label>TODO</CMC_QSZfiveeightSmart.tools.barrel.label>
+  <!-- EN: QSZ-58 EM pistol(modified) -->
+  <CMC_QSZfiveeightSmart.verbs.Verb_Shoot.label>TODO</CMC_QSZfiveeightSmart.verbs.Verb_Shoot.label>
+  
+</LanguageData>

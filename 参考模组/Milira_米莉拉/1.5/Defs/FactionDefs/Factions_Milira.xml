@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<FactionDef ParentName="PlayerFactionBase">
+		<defName>Milira_PlayerFaction</defName>
+		<label>Milira Ground Survey Station</label>
+		<description>A new Milira Ground Survey Station, where should the storyteller guide it to?</description>
+		<!-- <settlementTexturePath>Kiiro/Faction/Faction_Icon</settlementTexturePath> -->
+		<categoryTag>Milira_PlayerFaction</categoryTag>
+		<colorSpectrum>
+			<li>(246,228,165)</li>
+		</colorSpectrum>
+		<isPlayer>true</isPlayer>
+		<basicMemberKind>Milira_Colonist</basicMemberKind>
+		<pawnSingular>Milira inhabitant</pawnSingular>
+		<pawnsPlural>Milira inhabitants</pawnsPlural>
+		<techLevel>Ultra</techLevel>
+		<allowedCultures>
+			<li>MiliraCulture</li>
+		</allowedCultures>
+		<disallowedMemes>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Nudism</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Blindsight</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Transhumanist</li>
+		</disallowedMemes>
+		<backstoryFilters>
+			<li>
+				<categories>
+					<li>Milira_General</li>
+				</categories>
+				<commonality>1</commonality>
+			</li>
+		</backstoryFilters>
+		<factionIconPath>Milira/Faction/Faction_Icon</factionIconPath>
+		<playerInitialSettlementNameMaker>NamerInitialSettlementColony</playerInitialSettlementNameMaker>
+		<factionNameMaker>NamerFactionOutlander</factionNameMaker>
+		<settlementNameMaker>NamerSettlementOutlander</settlementNameMaker>
+		<!-- <geneticVariance>1</geneticVariance> -->
+		<startingResearchTags>
+			<li>MiliraRefugeeStart</li>
+		</startingResearchTags>
+		<startingTechprintsResearchTags>
+			<li>MiliraRefugeeStart</li>
+		</startingTechprintsResearchTags>
+		<apparelStuffFilter>
+			<stuffCategoriesToAllow>
+				<li>Metallic</li>
+				<li>Fabric</li>
+			</stuffCategoriesToAllow>
+			<disallowedThingDefs>
+				<li>Synthread</li>
+				<li>Hyperweave</li>
+				<li>Silver</li>
+				<li>Gold</li>
+				<li>Uranium</li>
+			</disallowedThingDefs>
+		</apparelStuffFilter>
+	</FactionDef>
+
+	<FactionDef ParentName="FactionBase">
+		<defName>Milira_Faction</defName>
+		<label>Sky Elves</label>
+		<fixedName>Milira</fixedName>
+		<description>With ancient lineage and broad knowledge there lives the Sky Elves in the Celestial Metropolis and some stations on the ground.</description>
+		<colorSpectrum>
+			<li>(255,255,255)</li>
+		</colorSpectrum>
+		<categoryTag>Milira_Faction</categoryTag>
+		<requiredCountAtGameStart>1</requiredCountAtGameStart>
+		<maxConfigurableAtWorldCreation>1</maxConfigurableAtWorldCreation>
+		<pawnSingular>Milira</pawnSingular>
+		<pawnsPlural>Milira</pawnsPlural>
+		<listOrderPriority>241</listOrderPriority>
+		<settlementGenerationWeight>0.65</settlementGenerationWeight>
+		<canMakeRandomly>true</canMakeRandomly>
+		<canSiege>false</canSiege>
+		<canStageAttacks>false</canStageAttacks>
+		<autoFlee>false</autoFlee>
+		<leaderTitle>President</leaderTitle>
+		<factionIconPath>Milira/Faction/Faction_Icon</factionIconPath>
+		<factionNameMaker>NamerFactionOutlander</factionNameMaker>
+		<settlementNameMaker>NamerSettlementOutlander</settlementNameMaker>
+		<techLevel>Ultra</techLevel>
+		<earliestRaidDays>20</earliestRaidDays>		<!--  -->
+		<!-- <naturalEnemy>false</naturalEnemy> -->
+		<!-- <permanentEnemy>false</permanentEnemy> -->
+		<permanentEnemyToEveryoneExcept>
+			<li>Milira_PlayerFaction</li>
+		</permanentEnemyToEveryoneExcept>
+		<allowedCultures>
+			<li>MiliraCulture</li>
+		</allowedCultures>
+		<fixedLeaderKinds>
+			<li>Milira_President</li>
+		</fixedLeaderKinds>
+		<requiredMemes>
+			<!-- <li MayRequire="Ludeon.RimWorld.Ideology">FleshPurity</li> -->
+			<li MayRequire="Ludeon.RimWorld.Ideology">Collectivist</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Loyalist</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Structure_Ideological</li>
+		</requiredMemes>
+		<allowedMemes>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Collectivist</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Loyalist</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">FleshPurity</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">HumanPrimacy</li>
+		</allowedMemes>
+		<disallowedPrecepts>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Lovin_Prohibited</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Lovin_Horrible</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Lovin_SpouseOnly_Strict</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Lovin_SpouseOnly_Moderate</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Lovin_SpouseOnly_Mild</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Nudity_Female_UncoveredGroinChestHairOrFaceDisapproved</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Nudity_Female_UncoveredGroinChestOrHairDisapproved</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Nudity_Female_UncoveredGroinOrChestDisapproved</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Nudity_Female_UncoveredGroinDisapproved</li>
+		</disallowedPrecepts>
+		<!-- <xenotypeSet>
+		<xenotypeChances>
+		  <Baseliner MayRequire="Ludeon.RimWorld.Biotech">0.99</Baseliner>
+		</xenotypeChances>
+	</xenotypeSet> -->
+		<backstoryCategories>
+			<li>Milira_General</li>
+		</backstoryCategories>
+		<apparelStuffFilter>
+			<stuffCategoriesToAllow>
+				<li>Metallic</li>
+				<li>Fabric</li>
+				<li>Leathery</li>
+			</stuffCategoriesToAllow>
+			<disallowedThingDefs>
+				<li>Synthread</li>
+				<li>Hyperweave</li>
+				<li>Silver</li>
+				<li>Gold</li>
+				<li>Uranium</li>
+				<li>Milira_BloodStainedFeather</li>
+			</disallowedThingDefs>
+		</apparelStuffFilter>
+		<!-- <geneticVariance>0</geneticVariance> -->
+		<caravanTraderKinds>
+			<!-- <li>Caravan_Outlander_BulkGoods</li>
+		<li>Caravan_Outlander_CombatSupplier</li>
+		<li>Caravan_Outlander_Exotic</li>
+		<li>Caravan_Outlander_PirateMerchant</li> -->
+		</caravanTraderKinds>
+		<visitorTraderKinds>
+			<!-- <li>Visitor_Outlander_Standard</li> -->
+		</visitorTraderKinds>
+		<baseTraderKinds>
+			<li>Base_Milira_Standard</li>
+		</baseTraderKinds>
+		<allowedArrivalTemperatureRange>-55~70</allowedArrivalTemperatureRange>
+		<dropPodActive>Milira_ActiveDropPod</dropPodActive>
+		<dropPodIncoming>Milira_DropPodIncoming</dropPodIncoming>
+		<maxPawnCostPerTotalPointsCurve>
+			<points>
+				<li>(0,140)</li>
+				<li>(3000, 280)</li>
+				<li>(5000, 400)</li>
+				<li>(8000, 450)</li>
+				<li>(8500, 500)</li>
+				<li>(10000, 1000)</li>
+			</points>
+		</maxPawnCostPerTotalPointsCurve>
+		<pawnGroupMakers>
+			<!-- 全米莉拉 -->
+			<li>
+				<kindDef>Combat</kindDef>
+				<commonality>20</commonality>
+				<options>
+					<Milira_Valkyr>3</Milira_Valkyr>
+					<Milira_Artemis>6</Milira_Artemis>
+				</options>
+			</li>
+			<!-- 全米莉拉带大剑 -->
+			<li>
+				<kindDef>Combat</kindDef>
+				<commonality>10</commonality>
+				<options>
+					<Milira_Valkyr>3</Milira_Valkyr>
+					<Milira_Artemis>6</Milira_Artemis>
+					<Milira_Breacher>100</Milira_Breacher>
+				</options>
+			</li>
+			<!-- 士兵+战车 -->
+			<li>
+				<kindDef>Combat</kindDef>
+				<commonality>50</commonality>
+				<options>
+					<Milian_Mechanoid_PawnI>32</Milian_Mechanoid_PawnI>
+					<Milian_Mechanoid_PawnIII>12</Milian_Mechanoid_PawnIII>
+					<Milian_Mechanoid_PawnIV>8</Milian_Mechanoid_PawnIV>
+					<Milian_Mechanoid_RookI>4</Milian_Mechanoid_RookI>
+					<Milian_Mechanoid_RookII>4</Milian_Mechanoid_RookII>
+					<Milira_Artemis>1</Milira_Artemis>
+					<Milira_YoungWarrior>1</Milira_YoungWarrior>
+				</options>
+			</li>
+			<!-- 士兵+枢机+执政官 -->
+			<li>
+				<kindDef>Combat</kindDef>
+				<commonality>50</commonality>
+				<options>
+					<Milian_Mechanoid_PawnI>32</Milian_Mechanoid_PawnI>
+					<Milian_Mechanoid_PawnII>20</Milian_Mechanoid_PawnII>
+					<Milian_Mechanoid_PawnIII>12</Milian_Mechanoid_PawnIII>
+					<Milian_Mechanoid_PawnIV>8</Milian_Mechanoid_PawnIV>
+					<Milian_Mechanoid_BishopIII>2</Milian_Mechanoid_BishopIII>
+					<Milian_Mechanoid_BishopIV>5</Milian_Mechanoid_BishopIV>
+					<Milira_Artemis>1</Milira_Artemis>
+					<Milira_YoungWarrior>1</Milira_YoungWarrior>
+				</options>
+			</li>
+			<!-- 全骑士 -->
+			<li>
+				<kindDef>Combat</kindDef>
+				<commonality>60</commonality>
+				<options>
+					<Milian_Mechanoid_KnightI>8</Milian_Mechanoid_KnightI>
+					<Milian_Mechanoid_KnightII>4</Milian_Mechanoid_KnightII>
+					<Milian_Mechanoid_KnightIII>2</Milian_Mechanoid_KnightIII>
+					<Milian_Mechanoid_KnightIV>2</Milian_Mechanoid_KnightIV>
+					<Milira_Valkyr>1</Milira_Valkyr>
+				</options>
+			</li>
+			<!-- 士兵+骑士 -->
+			<li>
+				<kindDef>Combat</kindDef>
+				<commonality>80</commonality>
+				<options>
+					<Milian_Mechanoid_PawnI>32</Milian_Mechanoid_PawnI>
+					<Milian_Mechanoid_PawnII>20</Milian_Mechanoid_PawnII>
+					<Milian_Mechanoid_PawnIII>12</Milian_Mechanoid_PawnIII>
+					<Milian_Mechanoid_PawnIV>8</Milian_Mechanoid_PawnIV>
+					<Milian_Mechanoid_KnightI>8</Milian_Mechanoid_KnightI>
+					<Milian_Mechanoid_KnightII>8</Milian_Mechanoid_KnightII>
+					<Milian_Mechanoid_KnightIII>2</Milian_Mechanoid_KnightIII>
+					<Milian_Mechanoid_KnightIV>2</Milian_Mechanoid_KnightIV>
+					<Milira_Artemis>1</Milira_Artemis>
+					<Milira_Valkyr>1</Milira_Valkyr>
+					<Milira_YoungWarrior>1</Milira_YoungWarrior>
+				</options>
+			</li>
+			<!-- 士兵+骑士+主教 -->
+			<li>
+				<kindDef>Combat</kindDef>
+				<commonality>50</commonality>
+				<options>
+					<Milian_Mechanoid_PawnI>32</Milian_Mechanoid_PawnI>
+					<Milian_Mechanoid_PawnIII>9</Milian_Mechanoid_PawnIII>
+					<Milian_Mechanoid_KnightI>8</Milian_Mechanoid_KnightI>
+					<Milian_Mechanoid_KnightII>6</Milian_Mechanoid_KnightII>
+					<Milian_Mechanoid_KnightIII>3</Milian_Mechanoid_KnightIII>
+					<Milian_Mechanoid_KnightIV>3</Milian_Mechanoid_KnightIV>
+					<Milian_Mechanoid_BishopI>8</Milian_Mechanoid_BishopI>
+					<Milian_Mechanoid_BishopII>5</Milian_Mechanoid_BishopII>
+					<Milira_YoungWarrior>1</Milira_YoungWarrior>
+				</options>
+			</li>
+			<!-- 士兵+骑士+主教+战车 -->
+			<li>
+				<kindDef>Combat</kindDef>
+				<commonality>50</commonality>
+				<options>
+					<Milian_Mechanoid_PawnI>32</Milian_Mechanoid_PawnI>
+					<Milian_Mechanoid_PawnII>24</Milian_Mechanoid_PawnII>
+					<Milian_Mechanoid_PawnIII>9</Milian_Mechanoid_PawnIII>
+					<Milian_Mechanoid_PawnIV>2</Milian_Mechanoid_PawnIV>
+					<Milian_Mechanoid_KnightI>8</Milian_Mechanoid_KnightI>
+					<Milian_Mechanoid_KnightII>6</Milian_Mechanoid_KnightII>
+					<Milian_Mechanoid_KnightIII>1</Milian_Mechanoid_KnightIII>
+					<Milian_Mechanoid_KnightIV>1</Milian_Mechanoid_KnightIV>
+					<Milian_Mechanoid_BishopI>8</Milian_Mechanoid_BishopI>
+					<Milian_Mechanoid_BishopII>5</Milian_Mechanoid_BishopII>
+					<Milian_Mechanoid_RookI>1</Milian_Mechanoid_RookI>
+					<Milian_Mechanoid_RookII>1</Milian_Mechanoid_RookII>
+					<Milira_Artemis>1</Milira_Artemis>
+					<Milira_Valkyr>1</Milira_Valkyr>
+					<Milira_YoungWarrior>1</Milira_YoungWarrior>
+				</options>
+			</li>
+			<!-- 双要塞 -->
+			<li>
+				<kindDef>Combat</kindDef>
+				<commonality>30</commonality>
+				<options>
+					<Milian_Mechanoid_PawnI>32</Milian_Mechanoid_PawnI>
+					<Milian_Mechanoid_PawnII>24</Milian_Mechanoid_PawnII>
+					<Milian_Mechanoid_PawnIII>9</Milian_Mechanoid_PawnIII>
+					<Milian_Mechanoid_PawnIV>2</Milian_Mechanoid_PawnIV>
+					<Milian_Mechanoid_KnightI>8</Milian_Mechanoid_KnightI>
+					<Milian_Mechanoid_KnightII>6</Milian_Mechanoid_KnightII>
+					<Milian_Mechanoid_KnightIII>1</Milian_Mechanoid_KnightIII>
+					<Milian_Mechanoid_KnightIV>1</Milian_Mechanoid_KnightIV>
+					<Milian_Mechanoid_BishopI>5</Milian_Mechanoid_BishopI>
+					<Milian_Mechanoid_BishopII>30</Milian_Mechanoid_BishopII>
+					<Milian_Mechanoid_RookI>1</Milian_Mechanoid_RookI>
+					<Milian_Mechanoid_RookII>1</Milian_Mechanoid_RookII>
+					<Milian_Mechanoid_RookIV>100</Milian_Mechanoid_RookIV>
+					<Milira_YoungWarrior>1</Milira_YoungWarrior>
+				</options>
+			</li>
+			<!-- 士兵+骑士+战车 -->
+			<li>
+				<kindDef>Combat</kindDef>
+				<commonality>50</commonality>
+				<options>
+					<Milian_Mechanoid_PawnI>16</Milian_Mechanoid_PawnI>
+					<Milian_Mechanoid_PawnII>10</Milian_Mechanoid_PawnII>
+					<Milian_Mechanoid_PawnIII>8</Milian_Mechanoid_PawnIII>
+					<Milian_Mechanoid_PawnIV>2</Milian_Mechanoid_PawnIV>
+					<Milian_Mechanoid_KnightI>4</Milian_Mechanoid_KnightI>
+					<Milian_Mechanoid_KnightII>4</Milian_Mechanoid_KnightII>
+					<Milian_Mechanoid_KnightIII>1</Milian_Mechanoid_KnightIII>
+					<Milian_Mechanoid_KnightIV>1</Milian_Mechanoid_KnightIV>
+					<Milian_Mechanoid_RookI>1</Milian_Mechanoid_RookI>
+					<Milian_Mechanoid_RookII>1</Milian_Mechanoid_RookII>
+					<Milian_Mechanoid_RookIII>1</Milian_Mechanoid_RookIII>
+					<Milira_Valkyr>1</Milira_Valkyr>
+					<Milira_Artemis>1</Milira_Artemis>
+					<Milira_YoungWarrior>1</Milira_YoungWarrior>
+				</options>
+			</li>
+			<!-- 全家福 -->
+			<li>
+				<kindDef>Combat</kindDef>
+				<commonality>80</commonality>
+				<options>
+					<Milian_Mechanoid_PawnI>48</Milian_Mechanoid_PawnI>
+					<Milian_Mechanoid_PawnII>30</Milian_Mechanoid_PawnII>
+					<Milian_Mechanoid_PawnIII>10</Milian_Mechanoid_PawnIII>
+					<Milian_Mechanoid_PawnIV>1</Milian_Mechanoid_PawnIV>
+					<Milian_Mechanoid_KnightI>4</Milian_Mechanoid_KnightI>
+					<Milian_Mechanoid_KnightII>4</Milian_Mechanoid_KnightII>
+					<Milian_Mechanoid_KnightIII>1</Milian_Mechanoid_KnightIII>
+					<Milian_Mechanoid_KnightIV>1</Milian_Mechanoid_KnightIV>
+					<Milian_Mechanoid_RookI>1</Milian_Mechanoid_RookI>
+					<Milian_Mechanoid_RookII>1</Milian_Mechanoid_RookII>
+					<Milian_Mechanoid_RookIII>1</Milian_Mechanoid_RookIII>
+					<Milian_Mechanoid_RookIV>1</Milian_Mechanoid_RookIV>
+					<Milian_Mechanoid_BishopI>5</Milian_Mechanoid_BishopI>
+					<Milian_Mechanoid_BishopII>5</Milian_Mechanoid_BishopII>
+					<Milian_Mechanoid_BishopIII>1</Milian_Mechanoid_BishopIII>
+					<Milian_Mechanoid_BishopIV>1</Milian_Mechanoid_BishopIV>
+					<Milira_Valkyr>1</Milira_Valkyr>
+					<Milira_Artemis>1</Milira_Artemis>
+					<Milira_YoungWarrior>1</Milira_YoungWarrior>
+				</options>
+			</li>
+			<!-- 枢机主教 -->
+			<li>
+				<kindDef>Combat</kindDef>
+				<commonality>30</commonality>
+				<options>
+					<Milian_Mechanoid_PawnI>32</Milian_Mechanoid_PawnI>
+					<Milian_Mechanoid_PawnIII>9</Milian_Mechanoid_PawnIII>
+					<Milian_Mechanoid_KnightI>8</Milian_Mechanoid_KnightI>
+					<Milian_Mechanoid_KnightII>6</Milian_Mechanoid_KnightII>
+					<Milian_Mechanoid_BishopI>8</Milian_Mechanoid_BishopI>
+					<Milian_Mechanoid_BishopII>5</Milian_Mechanoid_BishopII>
+					<Milian_Mechanoid_BishopIV>5</Milian_Mechanoid_BishopIV>
+					<Milira_Artemis>1</Milira_Artemis>
+					<Milira_YoungWarrior>1</Milira_YoungWarrior>
+				</options>
+			</li>
+			<!-- 骑士+枢机 -->
+			<li>
+				<kindDef>Combat</kindDef>
+				<commonality>30</commonality>
+				<options>
+					<Milian_Mechanoid_KnightI>8</Milian_Mechanoid_KnightI>
+					<Milian_Mechanoid_KnightII>8</Milian_Mechanoid_KnightII>
+					<Milian_Mechanoid_KnightIII>2</Milian_Mechanoid_KnightIII>
+					<Milian_Mechanoid_KnightIV>2</Milian_Mechanoid_KnightIV>
+					<Milian_Mechanoid_BishopI>4</Milian_Mechanoid_BishopI>
+					<Milian_Mechanoid_BishopII>2</Milian_Mechanoid_BishopII>
+					<Milian_Mechanoid_BishopIV>5</Milian_Mechanoid_BishopIV>
+					<Milira_Valkyr>1</Milira_Valkyr>
+					<Milira_YoungWarrior>1</Milira_YoungWarrior>
+				</options>
+			</li>
+			<!-- 士兵+执政官+战车 -->
+			<li>
+				<kindDef>Combat</kindDef>
+				<commonality>50</commonality>
+				<options>
+					<Milian_Mechanoid_PawnI>16</Milian_Mechanoid_PawnI>
+					<Milian_Mechanoid_PawnIII>8</Milian_Mechanoid_PawnIII>
+					<Milian_Mechanoid_PawnIV>2</Milian_Mechanoid_PawnIV>
+					<Milian_Mechanoid_BishopI>4</Milian_Mechanoid_BishopI>
+					<Milian_Mechanoid_BishopIII>2</Milian_Mechanoid_BishopIII>
+					<Milian_Mechanoid_RookI>1</Milian_Mechanoid_RookI>
+					<Milian_Mechanoid_RookII>1</Milian_Mechanoid_RookII>
+					<Milian_Mechanoid_RookIII>1</Milian_Mechanoid_RookIII>
+					<Milira_Valkyr>1</Milira_Valkyr>
+					<Milira_YoungWarrior>1</Milira_YoungWarrior>
+				</options>
+			</li>
+			<!-- 士兵+骑士+执政官 -->
+			<li>
+				<kindDef>Combat</kindDef>
+				<commonality>50</commonality>
+				<options>
+					<Milian_Mechanoid_PawnI>32</Milian_Mechanoid_PawnI>
+					<Milian_Mechanoid_PawnIII>9</Milian_Mechanoid_PawnIII>
+					<Milian_Mechanoid_KnightII>6</Milian_Mechanoid_KnightII>
+					<Milian_Mechanoid_KnightIV>3</Milian_Mechanoid_KnightIV>
+					<Milian_Mechanoid_BishopI>8</Milian_Mechanoid_BishopI>
+					<Milian_Mechanoid_BishopII>5</Milian_Mechanoid_BishopII>
+					<Milian_Mechanoid_BishopIII>2</Milian_Mechanoid_BishopIII>
+					<Milira_Valkyr>1</Milira_Valkyr>
+					<Milira_YoungWarrior>1</Milira_YoungWarrior>
+				</options>
+			</li>
+			<!-- 无畏 -->
+			<li>
+				<kindDef>Combat</kindDef>
+				<commonality>30</commonality>
+				<options>
+					<Milian_Mechanoid_KnightI>8</Milian_Mechanoid_KnightI>
+					<Milian_Mechanoid_KnightIII>2</Milian_Mechanoid_KnightIII>
+					<Milian_Mechanoid_KnightIV>2</Milian_Mechanoid_KnightIV>
+					<Milian_Mechanoid_RookIII>10</Milian_Mechanoid_RookIII>
+					<Milira_Valkyr>1</Milira_Valkyr>
+					<Milira_YoungWarrior>1</Milira_YoungWarrior>
+				</options>
+			</li>
+			<!-- 无畏+枢机 -->
+			<li>
+				<kindDef>Combat</kindDef>
+				<commonality>30</commonality>
+				<options>
+					<Milian_Mechanoid_PawnI>16</Milian_Mechanoid_PawnI>
+					<Milian_Mechanoid_KnightII>2</Milian_Mechanoid_KnightII>
+					<Milian_Mechanoid_KnightIII>2</Milian_Mechanoid_KnightIII>
+					<Milian_Mechanoid_RookIII>5</Milian_Mechanoid_RookIII>
+					<Milian_Mechanoid_BishopIV>5</Milian_Mechanoid_BishopIV>
+					<Milira_Valkyr>1</Milira_Valkyr>
+					<Milira_YoungWarrior>1</Milira_YoungWarrior>
+				</options>
+			</li>
+			<!-- <li>
+			<kindDef>Peaceful</kindDef>
+			<options>
+				<Milira_Citizen>10</Milira_Citizen>
+			</options>
+		</li> -->
+			<li>
+				<kindDef>Settlement</kindDef>
+				<options>
+					<Milira_Citizen>25</Milira_Citizen>
+					<Milira_President>1</Milira_President>
+				</options>
+			</li>
+		</pawnGroupMakers>
+		<settlementTexturePath>World/WorldObjects/DefaultSettlement</settlementTexturePath>
+	</FactionDef>
+
+</Defs>

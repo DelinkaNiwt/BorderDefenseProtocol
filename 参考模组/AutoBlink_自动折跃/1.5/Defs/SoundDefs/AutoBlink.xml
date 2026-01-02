@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Defs>
+
+  <SoundDef>
+    <defName>AutoBlink_Skip_Small</defName>
+    <context>MapOnly</context>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Folder">
+            <clipFolderPath>Misc/AutoBlink_Skip_Small</clipFolderPath>
+          </li>
+        </grains>
+        <volumeRange>8~11</volumeRange>
+        <pitchRange>0.9~1.1</pitchRange>
+        <distRange>4~25</distRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <SoundDef>
+    <defName>AutoBlink_Skip_Exit_Small</defName>
+    <context>MapOnly</context>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Folder">
+            <clipFolderPath>Misc/AutoBlink_Skip_Exit_Small</clipFolderPath>
+          </li>
+        </grains>
+        <volumeRange>8~11</volumeRange>
+        <pitchRange>0.9~1.1</pitchRange>
+        <distRange>4~25</distRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+</Defs>

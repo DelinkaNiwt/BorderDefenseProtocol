@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: CeleTech blade -->
+  <TangDao.label>DS-01 原型单分子唐刀</TangDao.label>
+  <!-- EN: A ultra tech blade which has a traditional look. -->
+  <TangDao.description>样式复古的高科技刀刃，内置的肌肉刺激器可以增幅持有者的运动能力。</TangDao.description>
+  <!-- EN: edge -->
+  <TangDao.tools.edge.label>刀刃</TangDao.tools.edge.label>
+  
+  <!-- EN: CeleTech plasma blade:Chīwěn -->
+  <TangDao_A.label>DX-01「睚眦」共振单分子刃</TangDao_A.label>
+  <!-- EN: The "Chīwěn" wields Tang Dynasty elegance as a cosmic scalpel. Its laser edge ignits target with inextinguishable flames from ancient lore. -->
+  <TangDao_A.description>基于DS-01原型单分子唐刀的实用改进型号，相较于原型更加便携，高频共振的刀刃可以轻松穿透护甲。</TangDao_A.description>
+  <!-- EN: edge -->
+  <TangDao_A.tools.edge.label>单分子刃</TangDao_A.tools.edge.label>
+  
+  <!-- EN: CeleTech plasma blade:Chīwěn -->
+  <TangDao_B.label>DX-04「螭吻」等离子刃</TangDao_B.label>
+  <!-- EN: The "Chīwěn" wields Tang Dynasty elegance as a cosmic scalpel. Its laser edge ignits target with inextinguishable flames from ancient lore. -->
+  <TangDao_B.description>基于DS-01原型单分子唐刀的实用改进型号，刀刃命中后可以持续灼烧目标。</TangDao_B.description>
+  <!-- EN: edge -->
+  <TangDao_B.tools.edge.label>等离子刃</TangDao_B.tools.edge.label>
+  
+  <!-- EN: <color=#FFAA00><i>persona CeleTech blade</i></color> -->
+  <TangDaoPersona.label>&lt;color=#FFAA00>&lt;i>唐刀Δ&lt;/i>&lt;/color></TangDaoPersona.label>
+  <!-- EN: A ultra tech blade which has a traditional look. This weapon has an onboard persona that can bond to only a single person. The wielder and intelligent weapon can synchronize their reflexes and attack with frightening speed, accuracy, and creativity. Once bonded to a wielder, the weapon's persona will refuse to be wielded by anyone else. -->
+  <TangDaoPersona.description>改进后的生物识别唐刀，在与使用者绑定后会为其提供特殊的战技。如使用者掌握灵能，则击杀目标会回复少量精神力。</TangDaoPersona.description>
+  <!-- EN: edge -->
+  <TangDaoPersona.tools.edge.label>刀刃</TangDaoPersona.tools.edge.label>
+  
+</LanguageData>

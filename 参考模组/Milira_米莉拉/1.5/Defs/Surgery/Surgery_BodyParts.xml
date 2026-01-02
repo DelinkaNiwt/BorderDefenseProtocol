@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+<ThingDef ParentName="BodyPartProstheticMakeableBase">
+	<defName>Milira_ArtificialWing</defName>
+	<label>Milira artificial wing</label>
+	<description>Artificial wing crafted from feather thread.</description>
+	<descriptionHyperlinks>
+	  <RecipeDef>Milira_ArtificialWing_Install</RecipeDef>
+	</descriptionHyperlinks>
+	<techLevel>Industrial</techLevel>
+	<costList>
+		<Milira_SplendidSteel>30</Milira_SplendidSteel>
+		<Milira_FeatherThread>60</Milira_FeatherThread>
+	</costList>
+	<statBases>
+		<WorkToMake>8400</WorkToMake>
+		<Mass>0.1</Mass>
+	</statBases>
+	<recipeMaker>
+		<recipeUsers>
+		  <li>Milira_UniversalBench</li>
+		</recipeUsers>
+	</recipeMaker>
+</ThingDef>
+
+<ThingDef ParentName="BodyPartBionicBase">
+	<defName>Milira_BionicWing</defName>
+	<label>Milira Bionic Wing</label>
+	<description>a bionic wing.</description>
+	<descriptionHyperlinks>
+	  <RecipeDef>Milira_BionicWing_Install</RecipeDef>
+	</descriptionHyperlinks>
+	<techLevel>Industrial</techLevel>
+	<costList>
+		<Plasteel>30</Plasteel>
+		<ComponentIndustrial>6</ComponentIndustrial>
+		<Milira_Feather>45</Milira_Feather>
+	</costList>
+	<statBases>
+		<Mass>0.8</Mass>
+	</statBases>
+	<recipeMaker>
+		<recipeUsers Inherit="false">
+		  <li>Milira_UniversalBench</li>
+		</recipeUsers>
+		<!-- <researchPrerequisite inherit="false">Milira_Bionics</researchPrerequisite> -->
+	  </recipeMaker>
+</ThingDef>
+
+</Defs>

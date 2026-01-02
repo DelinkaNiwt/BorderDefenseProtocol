@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef Name="Milira_MilianBase_Rook" ParentName="Milira_BaseMilianWalkerB" Abstract="true">
+    <tools>
+      <li>
+        <label>left fist</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>18.0</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+      <li>
+        <label>right fist</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>18.0</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+    </tools>
+    <statBases>
+      <CarryingCapacity>200</CarryingCapacity>
+      <CaravanBonusSpeedFactor>1.3</CaravanBonusSpeedFactor>
+      <Ancot_FieldForceResistance>0.2</Ancot_FieldForceResistance>
+      <AimingDelayFactor>1.2</AimingDelayFactor>
+    </statBases>
+    <race>
+      <body>Milian_Body</body>
+      <soundMeleeHitPawn>Pawn_Melee_MechanoidBash_HitPawn</soundMeleeHitPawn>
+      <soundMeleeHitBuilding>Pawn_Melee_MechanoidBash_HitBuilding</soundMeleeHitBuilding>
+      <soundMeleeMiss>Pawn_Melee_Punch_Miss</soundMeleeMiss>
+      <bulletStaggerDelayTicks>0</bulletStaggerDelayTicks><!-- 受伤抑制 -->
+      <hediffGiverSets>
+        <li>Milian_ClassHediffMaintain_Rook</li>
+      </hediffGiverSets>
+    </race>
+    <comps>
+      <li Class="Milira.CompProperties_GainHediffSpawn">
+        <hediffDef>Milian_ClassHediff_Rook</hediffDef>
+      </li>
+      <li Class="Milira.CompProperties_TargetableWeapon">
+				<compClass>Milira.CompTargetableWeapon</compClass>
+				<ignoreQuestLodgerPawns>true</ignoreQuestLodgerPawns>
+				<shouldBeRangeWeapon>false</shouldBeRangeWeapon>
+			</li>
+    </comps>
+  </ThingDef>
+
+  <!--=战车I型===========================================================================================================================-->
+  <ThingDef ParentName="Milira_MilianBase_Rook">
+    <defName>Milian_Mechanoid_RookI</defName>
+    <label>Rook I</label>
+    <description>Milian the rook I type.\n\nCan equipe with melee weapon.</description>
+    <statBases>
+      <MoveSpeed>4.6</MoveSpeed>
+      <MarketValue>1600</MarketValue>
+      <ArmorRating_Blunt>0.25</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.35</ArmorRating_Sharp>
+      <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">8</BandwidthCost>
+    </statBases>
+    <race>
+      <body>Milian_Body</body>
+      <baseHealthScale>2.2</baseHealthScale>
+    </race>
+    <comps>
+      <li Class="Milira.CompProperties_SendPromotionRequest">
+        <promotionHediffType>Milian_PawnPromotion_RookI</promotionHediffType>
+      </li>
+      <li Class="CompProperties_ProjectileInterceptor">
+        <radius>3</radius>
+        <interceptGroundProjectiles>true</interceptGroundProjectiles>
+        <interceptNonHostileProjectiles>false</interceptNonHostileProjectiles>
+        <color>(0.92, 0.91, 0.76)</color>
+        <reactivateEffect>BulletShieldGenerator_Reactivate</reactivateEffect>
+        <activeSound>BulletShield_Ambience</activeSound>
+        <hitPoints>800</hitPoints>
+        <hitPointsRestoreInstantlyAfterCharge>true</hitPointsRestoreInstantlyAfterCharge>
+        <chargeDurationTicks>1800</chargeDurationTicks>
+        <rechargeHitPointsIntervalTicks>10</rechargeHitPointsIntervalTicks>
+        <minIdleAlpha>0.2</minIdleAlpha>
+        <drawWithNoSelection>True</drawWithNoSelection>
+        <disarmedByEmpForTicks>1500</disarmedByEmpForTicks>
+        <gizmoTipKey>ProjectileInterceptorTip</gizmoTipKey>
+      </li>
+    </comps>
+    <uiIconPath>Milian/Mechanoid_uiIcon/RookI</uiIconPath>
+  </ThingDef>
+
+  <PawnKindDef ParentName="BaseMilianKind_Mechanoid">
+    <defName>Milian_Mechanoid_RookI</defName>
+    <label>Rook I</label>
+    <race>Milian_Mechanoid_RookI</race>
+    <combatPower>408</combatPower>
+    <maxPerGroup>3</maxPerGroup>
+    <apparelRequired>
+      <li>Milian_RookArmor</li>
+      <li>Milian_Lining</li>
+      <li>Milian_RookMask</li>
+    </apparelRequired>
+    <weaponMoney>9999~9999</weaponMoney>
+    <weaponStuffOverride>Milira_SplendidSteel</weaponStuffOverride>
+    <weaponTags>
+      <li>Milian_RookBlade</li>
+    </weaponTags>
+    <techHediffsChance>1</techHediffsChance>
+    <techHediffsMoney>9999~9999</techHediffsMoney>
+  </PawnKindDef>
+
+
+
+
+  <!--=战车II型===========================================================================================================================-->
+  <ThingDef ParentName="Milira_MilianBase_Rook">
+    <defName>Milian_Mechanoid_RookII</defName>
+    <label>Rook II</label>
+    <description>Milian the rook II type.\n\nCan equipe with melee weapon.</description>
+    <statBases>
+      <MoveSpeed>4.6</MoveSpeed>
+      <MarketValue>1600</MarketValue>
+      <ArmorRating_Blunt>0.25</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.35</ArmorRating_Sharp>
+      <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">8</BandwidthCost>
+    </statBases>
+    <race>
+      <body>Milian_Body</body>
+      <baseHealthScale>2.2</baseHealthScale>
+    </race>
+    <comps>
+      <li Class="Milira.CompProperties_SendPromotionRequest">
+        <promotionHediffType>Milian_PawnPromotion_RookII</promotionHediffType>
+      </li>
+    </comps>
+    <uiIconPath>Milian/Mechanoid_uiIcon/RookII</uiIconPath>
+  </ThingDef>
+
+  <PawnKindDef ParentName="BaseMilianKind_Mechanoid">
+    <defName>Milian_Mechanoid_RookII</defName>
+    <label>Rook II</label>
+    <race>Milian_Mechanoid_RookII</race>
+    <combatPower>408</combatPower>
+    <maxPerGroup>2</maxPerGroup>
+    <apparelRequired>
+      <li>Milian_CitadelArmor</li>
+      <li>Milian_Lining</li>
+      <li>Milian_RookMask</li>
+      <li>Milian_RookShield</li>
+    </apparelRequired>
+    <weaponMoney>9999~9999</weaponMoney>
+    <weaponStuffOverride>Milira_SplendidSteel</weaponStuffOverride>
+    <weaponTags>
+      <!-- <li>Milian_RookBlade</li> -->
+    </weaponTags>
+    <techHediffsChance>1</techHediffsChance>
+    <techHediffsMoney>9999~9999</techHediffsMoney>
+  </PawnKindDef>
+
+
+
+
+  <!--=无畏战车===========================================================================================================================-->
+  <ThingDef ParentName="Milira_MilianBase_Rook">
+    <defName>Milian_Mechanoid_RookIII</defName>
+    <label>Striker</label>
+    <description>Milian the striker type.\n\nCan equipe with melee weapon.</description>
+    <statBases>
+      <MoveSpeed>4.6</MoveSpeed>
+      <MarketValue>3200</MarketValue>
+      <ArmorRating_Blunt>0.4</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.5</ArmorRating_Sharp>
+      <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">10</BandwidthCost>
+    </statBases>
+    <race>
+      <body>Milian_Body</body>
+      <baseHealthScale>2.5</baseHealthScale>
+      <thinkTreeConstant>MilianConstant</thinkTreeConstant>
+    </race>
+    <comps>
+      <li Class="Milira.CompProperties_SendPromotionRequest">
+        <promotionHediffType>Milian_PawnPromotion_RookIII</promotionHediffType>
+      </li>
+      <li Class="AncotLibrary.CompProperties_GetHediff_ApplyDamage">
+				<hediffDef>Milian_AdaptiveArmor</hediffDef>
+				<severityPerHit>0.01</severityPerHit>
+			</li>
+    </comps>
+    <uiIconPath>Milian/Mechanoid_uiIcon/RookIII</uiIconPath>
+  </ThingDef>
+
+  <PawnKindDef ParentName="BaseMilianKind_Mechanoid">
+    <defName>Milian_Mechanoid_RookIII</defName>
+    <label>Striker</label>
+    <race>Milian_Mechanoid_RookIII</race>
+    <combatPower>456</combatPower>
+    <maxPerGroup>2</maxPerGroup>
+    <apparelRequired>
+      <li>Milian_StrikerArmor</li>
+      <li>Milian_Lining</li>
+      <li>Milian_StrikerHelmet</li>
+    </apparelRequired>
+    <weaponMoney>9999~9999</weaponMoney>
+    <weaponStuffOverride>Milira_SplendidSteel</weaponStuffOverride>
+    <weaponTags>
+      <li>Milian_RookBladeII</li>
+    </weaponTags>
+    <techHediffsChance>1</techHediffsChance>
+    <techHediffsMoney>9999~9999</techHediffsMoney>
+    <abilities>
+      <li>Milian_RookCrash</li>
+    </abilities>
+  </PawnKindDef>
+
+
+  <!--=不落要塞===========================================================================================================================-->
+  <ThingDef ParentName="Milira_MilianBase_Rook">
+    <defName>Milian_Mechanoid_RookIV</defName>
+    <label>Eternal Fortress</label>
+    <description>Milian the eternal fortress type.\n\nCan equipe with melee weapon.</description>
+    <specialDisplayRadius>67.9</specialDisplayRadius>
+    <statBases>
+      <MoveSpeed>4.6</MoveSpeed>
+      <MarketValue>3200</MarketValue>
+      <ArmorRating_Blunt>0.15</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.2</ArmorRating_Sharp>
+      <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">12</BandwidthCost>
+    </statBases>
+    <race>
+      <body>Milian_Body</body>
+      <baseHealthScale>2.0</baseHealthScale>
+      <thinkTreeConstant>MilianConstant</thinkTreeConstant>
+    </race>
+    <comps>
+      <li Class="Milira.CompProperties_SendPromotionRequest">
+        <promotionHediffType>Milian_PawnPromotion_RookIV</promotionHediffType>
+      </li>
+      <li Class="AncotLibrary.CompProperties_ThingCarrier_Custom">
+        <fixedIngredient>Milira_SplendidSteel</fixedIngredient>
+        <startingIngredientCount>3000</startingIngredientCount>
+        <maxIngredientCount>3000</maxIngredientCount>
+      </li>
+      <li Class="Milira.CompProperties_FloatingSystem">
+        <floatAmplitude>0.05</floatAmplitude>
+        <floatSpeed>0.005</floatSpeed>
+        <graphicData>
+          <texPath>Milian/Apparel/Middle/FortressArmor/FortressArmor_Material</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <shaderType>CutoutComplex</shaderType>
+          <drawSize>(2.0,2.0)</drawSize>
+          <drawOffset>(0,0,0.3)</drawOffset>
+          <drawOffsetNorth>(0,1,-0.3)</drawOffsetNorth>
+          <drawOffsetEast>(0,1,-0.1)</drawOffsetEast>
+          <drawOffsetWest>(0,1,-0.1)</drawOffsetWest>
+          <!-- <drawOffsetSouth>(0,0,0)</drawOffsetSouth> -->
+        </graphicData>
+        <altitudeLayer>Projectile</altitudeLayer>
+      </li>
+    </comps>
+    <uiIconPath>Milian/Mechanoid_uiIcon/RookIV</uiIconPath>
+  </ThingDef>
+
+  <PawnKindDef ParentName="BaseMilianKind_Mechanoid">
+    <defName>Milian_Mechanoid_RookIV</defName>
+    <label>Eternal Fortress</label>
+    <race>Milian_Mechanoid_RookIV</race>
+    <combatPower>480</combatPower>
+    <maxPerGroup>1</maxPerGroup>
+    <apparelRequired>
+      <li>Milian_FortressArmor</li>
+      <li>Milian_Lining</li>
+      <li>Milian_RookMask</li>
+    </apparelRequired>
+    <weaponMoney>9999~9999</weaponMoney>
+    <weaponStuffOverride>Milira_SplendidSteel</weaponStuffOverride>
+    <weaponTags>
+      <!-- <li>Milian_RookBlade</li> -->
+    </weaponTags>
+    <techHediffsChance>1</techHediffsChance>
+    <techHediffsMoney>9999~9999</techHediffsMoney>
+    <abilities>
+      <li>Milira_Fortress</li>
+    </abilities>
+  </PawnKindDef>
+
+
+</Defs>

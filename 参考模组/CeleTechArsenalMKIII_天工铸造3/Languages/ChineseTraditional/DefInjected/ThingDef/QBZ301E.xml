@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: QBZ-301E-HT assault rifle -->
+  <QBZ_threeooE.label>QBZ-95 電磁突擊步槍</QBZ_threeooE.label>
+  <QBZ_threeooE.description>作為電荷武器的先驅之一，QBZ-95C由於當時的科技限制笨重、復雜且精度不佳，但卻做為一款廉價的高穿甲武器很受邊緣世界用戶的歡迎。</QBZ_threeooE.description>
+  <QBZ_threeooE.tools.stock.label>槍托</QBZ_threeooE.tools.stock.label>
+  <QBZ_threeooE.tools.barrel.label>槍管</QBZ_threeooE.tools.barrel.label>
+  <QBZ_threeooE.verbs.Verb_Shoot.label>QBZ-95 電磁步槍</QBZ_threeooE.verbs.Verb_Shoot.label>
+  
+  <QBB_threeoo.label>QBB-95 班用電磁機槍</QBB_threeoo.label>
+  <QBB_threeoo.description>QBZ-95C電磁步槍的班用機槍構型，加裝了能實時分析目標狀態的試做型智能瞄具，使其可以在消滅當前目標後迅速鎖定鄰近目標，以提供高效的壓制火力。</QBB_threeoo.description>
+  <QBB_threeoo.tools.stock.label>槍托</QBB_threeoo.tools.stock.label>
+  <QBB_threeoo.tools.barrel.label>槍管</QBB_threeoo.tools.barrel.label>
+  <QBB_threeoo.verbs.Verb_Shoot.label>QBB-95 班用電磁機槍</QBB_threeoo.verbs.Verb_Shoot.label>
+  
+  <QBZ_threeooED.label>QBZ-95ED 電磁突擊步槍 荒漠作戰型</QBZ_threeooED.label>
+  <QBZ_threeooED.description>QBZ-95C電磁步槍的惡劣環境特化改型，加裝了溫控套件，子彈使用能分裂4個彈片的陶瓷分裂彈頭以高效殺傷軟目標。</QBZ_threeooED.description>
+  <QBZ_threeooED.tools.stock.label>槍托</QBZ_threeooED.tools.stock.label>
+  <QBZ_threeooED.tools.barrel.label>槍管</QBZ_threeooED.tools.barrel.label>
+  <QBZ_threeooED.verbs.Verb_Shoot.label>QBZ-95ED 電磁突擊步槍 荒漠作戰型</QBZ_threeooED.verbs.Verb_Shoot.label>
+  
+</LanguageData>

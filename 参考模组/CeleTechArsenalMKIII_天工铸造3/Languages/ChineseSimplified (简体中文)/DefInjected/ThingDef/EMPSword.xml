@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: neutronium sword -->
+  <CMC_EMPsword.label>汉剑</CMC_EMPsword.label>
+  <!-- EN: An ultra-tech sword made from incredibly dense and strong material, able to piercing heavy armor. It generates an EMP pulse upon contact with its implanted EMP generator, making it. -->
+  <CMC_EMPsword.description>一把由极其坚硬致密的零素材料制成的传统剑刃，内置的EMP脉冲发生器可以在接触敌人时释放EMP脉冲</CMC_EMPsword.description>
+  <!-- EN: point -->
+  <CMC_EMPsword.tools.point.label>TODO</CMC_EMPsword.tools.point.label>
+  <!-- EN: edge -->
+  <CMC_EMPsword.tools.edge.label>TODO</CMC_EMPsword.tools.edge.label>
+  
+  <!-- EN: <color=#FFAA00><i>anti-entropy sword</i></color> -->
+  <CMC_EMPsword_sevenstars.label>&lt;color=#FFAA00>&lt;i>汉剑【七星】&lt;/i>&lt;/color></CMC_EMPsword_sevenstars.label>
+  <!-- EN: A modified neutronium sword with a inboard persona core, enable with user with abilities upon biocoding. -->
+  <CMC_EMPsword_sevenstars.description>改进升级过的汉剑，特制的反熵材料剑刃能造成无视护甲和乘伤的高额伤害。改剑会与装备者绑定，在击杀目标时会为其恢复。</CMC_EMPsword_sevenstars.description>
+  <!-- EN: point -->
+  <CMC_EMPsword_sevenstars.tools.point.label>TODO</CMC_EMPsword_sevenstars.tools.point.label>
+  <!-- EN: edge -->
+  <CMC_EMPsword_sevenstars.tools.edge.label>TODO</CMC_EMPsword_sevenstars.tools.edge.label>
+  
+</LanguageData>

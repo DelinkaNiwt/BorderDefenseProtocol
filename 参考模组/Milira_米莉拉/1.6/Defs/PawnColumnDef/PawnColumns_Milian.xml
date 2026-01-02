@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <PawnColumnDef>
+    <defName>Milian_AutoSuitUp</defName>
+    <sortable>true</sortable>
+    <headerIcon>Milira/UI/Icons/AutoSuitUp</headerIcon>
+    <headerTip>Allow colonist automatic suit up for this milian.</headerTip>
+    <workerClass>Milira.PawnColumnWorker_AutoSuitMilian</workerClass>
+    <paintable>true</paintable>
+  </PawnColumnDef>
+  
+  <PawnColumnDef>
+    <defName>Milian_BillWorkerDisplay</defName>
+    <sortable>true</sortable>
+    <headerIcon>Milira/UI/Icons/DisplayBillWorker</headerIcon>
+    <headerTip>Allow this milian display in bill worker setting.</headerTip>
+    <workerClass>Milira.PawnColumnWorker_BillWorkerDisplayMilian</workerClass>
+    <paintable>true</paintable>
+  </PawnColumnDef>
+
+  <PawnColumnDef ParentName="Ancot_Equipment">
+    <defName>Milian_Equipment</defName>
+    <workerClass>Milira.PawnColumnWorker_EquipmentMilian</workerClass>
+  </PawnColumnDef>
+
+  <PawnColumnDef>
+    <defName>Milian_HairColor</defName>
+    <sortable>false</sortable>
+    <headerIcon>Milira/UI/Icons/HairStyle</headerIcon>
+    <headerTip>The hair color of this milian. Click the color block to open hair style settings.</headerTip>
+    <workerClass>Milira.PawnColumnWorker_MilianHairColor</workerClass>
+    <paintable>true</paintable>
+  </PawnColumnDef>
+
+</Defs>

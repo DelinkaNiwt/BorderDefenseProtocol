@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Milira Floating System -->
+  <Milira_FloatSystem.label>米莉拉浮游系统</Milira_FloatSystem.label>
+  <!-- EN: This pawn is wearing a floating system. -->
+  <Milira_FloatSystem.description>这个单位穿戴了浮游系统。</Milira_FloatSystem.description>
+  
+  <!-- EN: Additional Rendering -->
+  <Milira_Hood.label>米莉拉头饰额外渲染</Milira_Hood.label>
+  <!-- EN: Additional rendering. -->
+  <Milira_Hood.description>头饰额外渲染。</Milira_Hood.description>
+  
+  <!-- EN: civilian terminal -->
+  <Milira_MilianHomeTerminal.label>家用终端</Milira_MilianHomeTerminal.label>
+  <!-- EN: This pawn is wearing a civilian terminal. -->
+  <Milira_MilianHomeTerminal.description>这个单位佩戴了家用终端。</Milira_MilianHomeTerminal.description>
+  
+  <!-- EN: Additional Rendering -->
+  <Milira_SunHat.label>米莉拉头饰额外渲染</Milira_SunHat.label>
+  <!-- EN: Additional rendering. -->
+  <Milira_SunHat.description>头饰额外渲染。</Milira_SunHat.description>
+  
+</LanguageData>

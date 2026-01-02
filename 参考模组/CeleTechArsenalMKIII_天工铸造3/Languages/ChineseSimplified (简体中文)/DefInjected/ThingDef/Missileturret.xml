@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Type-CX Missile launcher -->
+  <CMC_Gun_ML.label>导弹发射架</CMC_Gun_ML.label>
+  <!-- EN: A self-loading missile launcher designed to attach to a turret. -->
+  <CMC_Gun_ML.description>装备光电系统的自动导弹发射架，安装在炮塔上。</CMC_Gun_ML.description>
+  <!-- EN: Type-CX Missile launcher -->
+  <CMC_Gun_ML.verbs.Verb_Shoot.label>反坦克导弹</CMC_Gun_ML.verbs.Verb_Shoot.label>
+  
+  <!-- EN: ATGM -->
+  <CMC_MissileShell.label>TODO</CMC_MissileShell.label>
+  <!-- EN: An ultra-tech warhead powered by a grain of antimatter. Usually used by spacecraft or glitterworld war machines, it creates a huge explosion and starts fires around the target. Can be fired from mortars or installed as a trap. Explodes when damaged. -->
+  <CMC_MissileShell.description>TODO</CMC_MissileShell.description>
+  
+  <!-- EN: "Chunjun Armorrend" ATGM turret -->
+  <CMCML.label>"纯钧·贯甲"重型导弹发射塔</CMCML.label>
+  <!-- EN: A heavily armored auto turret,it fires ground-to-ground missiles.\n\nIts destruction by enemy attack may result in a giant explosion.\n\nIts missile can identify if its current target is downed or dead and switch to a nearby enemy instead. -->
+  <CMCML.description>六联装导弹防御塔，装备复合制导模式的红箭-50重型反坦克导弹，在雷达的引导下可自动索敌，也可手动瞄准。\n\n该炮塔在满弹时被摧毁时会导致大范围殉爆。\n\n该武器配备分导式集束弹头，弹体在命中前会释放多枚高爆反人员子弹药，通过预置破片矩阵对半径内的无防护目标实施饱和打击。\n\n导弹会因为目标进入烟雾或高速移动而丢失目标，当丢失目标或锁定的目标失去战斗力且导弹还在制导距离内时，引导头会自动搜索周围5格内的敌对目标。</CMCML.description>
+  <!-- EN: Ammo -->
+  <CMCML.comps.CompRefuelable.fuelGizmoLabel>弹药</CMCML.comps.CompRefuelable.fuelGizmoLabel>
+  <!-- EN: Shots until barrel change -->
+  <CMCML.comps.CompRefuelable.fuelLabel>剩余射击数</CMCML.comps.CompRefuelable.fuelLabel>
+  <!-- EN: Needs missile -->
+  <CMCML.comps.CompRefuelable.outOfFuelMessage>需要弹药</CMCML.comps.CompRefuelable.outOfFuelMessage>
+  
+  <!-- UNUSED -->
+  <Gun_CMCRocketswarmLauncher.verbs.Verb_Shoot.label>反坦克导弹</Gun_CMCRocketswarmLauncher.verbs.Verb_Shoot.label>
+  
+</LanguageData>

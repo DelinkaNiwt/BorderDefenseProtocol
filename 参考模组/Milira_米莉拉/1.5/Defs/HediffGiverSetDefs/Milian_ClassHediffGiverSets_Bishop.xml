@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <HediffGiverSetDef>
+    <defName>Milian_ClassHediffMaintain_Bishop</defName>
+    <hediffGivers>
+      <li Class="AncotLibrary.HediffGiver_KeepHediff">
+        <hediff>Milian_ClassHediff_Bishop</hediff>
+        <severityAmount>0.1</severityAmount>
+        <mtbHours>1</mtbHours>
+        <partsToAffect>
+          <li>Milian_Brain</li>
+        </partsToAffect>
+      </li>
+    </hediffGivers>
+  </HediffGiverSetDef>
+
+
+
+</Defs>

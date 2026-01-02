@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 太阳熔炉 -->
+  <RuleDef>
+    <defName>Milira_SunBlastFurnaceCell</defName>
+    <symbol>milira_SunBlastFurnaceCell</symbol>
+    <resolvers>
+      <li Class="SymbolResolver_GenericRoom">
+        <minRectSize>(3, 3)</minRectSize>
+        <interior>interior_milira_SunBlastFurnaceCell</interior>
+      </li>
+    </resolvers>
+  </RuleDef>
+
+  <RuleDef>
+    <defName>Interior_Milira_SunBlastFurnaceCell</defName>
+    <symbol>interior_milira_SunBlastFurnaceCell</symbol>
+    <resolvers>
+      <li Class="Milira.SymbolResolver_SunBlastFurnace" />
+    </resolvers>
+  </RuleDef>
+
+
+
+  <!-- 熔盐燃料站 -->
+  <RuleDef>
+    <defName>Milira_SunLightFuelStation</defName>
+    <symbol>milira_SunLightFuelStation</symbol>
+    <resolvers>
+      <li Class="Milira.SymbolResolver_SunLightFuelStation" />
+    </resolvers>
+  </RuleDef>
+
+  <RuleDef>
+    <defName>Milira_SunLightFuelStation_Integration</defName>
+    <symbol>milira_SunLightFuelStation_Integration</symbol>
+    <resolvers>
+      <li Class="Milira.SymbolResolver_SunLightFuelStation_Integration" />
+    </resolvers>
+  </RuleDef>
+
+  <RuleDef>
+    <defName>Milian_SunLightFuelStation_TechPrintRoom</defName>
+    <symbol>milian_SunLightFuelStation_TechPrintRoom</symbol>
+    <resolvers>
+      <li Class="SymbolResolver_GenericRoom">
+        <minRectSize>(3, 3)</minRectSize>
+        <interior>interior_milian_SunLightFuelStation_TechPrintRoom</interior>
+      </li>
+    </resolvers>
+  </RuleDef>
+
+  <RuleDef>
+    <defName>Interior_Milian_SunLightFuelStation_TechPrintRoom</defName>
+    <symbol>interior_milian_SunLightFuelStation_TechPrintRoom</symbol>
+    <resolvers>
+      <li Class="Milira.SymbolResolver_SunLightFuelStation_TechPrintRoom" />
+    </resolvers>
+  </RuleDef>
+
+</Defs>

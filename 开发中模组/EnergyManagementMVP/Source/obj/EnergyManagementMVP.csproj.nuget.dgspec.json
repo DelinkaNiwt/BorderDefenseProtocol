@@ -1,0 +1,59 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\NiwtDatas\\Projects\\RimworldModStudio\\开发中模组\\EnergyManagementMVP\\Source\\EnergyManagementMVP.csproj": {}
+  },
+  "projects": {
+    "C:\\NiwtDatas\\Projects\\RimworldModStudio\\开发中模组\\EnergyManagementMVP\\Source\\EnergyManagementMVP.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\开发中模组\\EnergyManagementMVP\\Source\\EnergyManagementMVP.csproj",
+        "projectName": "EnergyManagementMVP",
+        "projectPath": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\开发中模组\\EnergyManagementMVP\\Source\\EnergyManagementMVP.csproj",
+        "packagesPath": "C:\\Users\\Niwt\\.nuget\\packages\\",
+        "outputPath": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\开发中模组\\EnergyManagementMVP\\Source\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Niwt\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net472"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net472": {
+            "targetAlias": "net472",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "net472": {
+          "targetAlias": "net472",
+          "dependencies": {
+            "Lib.Harmony": {
+              "target": "Package",
+              "version": "[2.3.3, )"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

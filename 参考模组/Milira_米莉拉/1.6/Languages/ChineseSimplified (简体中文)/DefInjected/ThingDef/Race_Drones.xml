@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 清洁单元 -->
+  <Milira_DroneCleansweeper.label>清洁单元</Milira_DroneCleansweeper.label>
+  <!-- EN: 一台家用小型清洁机，在米莉拉的城市中随处可见。 -->
+  <Milira_DroneCleansweeper.description>一台家用小型清洁机，在米莉拉的城市中随处可见。</Milira_DroneCleansweeper.description>
+  <!-- EN: body -->
+  <Milira_DroneCleansweeper.tools.body.label>机身</Milira_DroneCleansweeper.tools.body.label>
+  
+  <!-- EN: 运载单元 -->
+  <Milira_DroneFreight.label>运载单元</Milira_DroneFreight.label>
+  <!-- EN: 能够搬运货物的小型自走平板车，在米莉拉的城市中随处可见。 -->
+  <Milira_DroneFreight.description>能够搬运货物的小型自走平板车，在米莉拉的城市中随处可见。</Milira_DroneFreight.description>
+  <!-- EN: body -->
+  <Milira_DroneFreight.tools.body.label>机身</Milira_DroneFreight.tools.body.label>
+  <!-- EN: 运载单元 -->
+  <Milira_DroneStorage.label>贮存单元</Milira_DroneStorage.label>
+  <!-- EN: 能够搬运货物的小型自走平板车，在米莉拉的城市中随处可见。 -->
+  <Milira_DroneStorage.description>能够存放大量物资的，移动缓慢的箱车，通常用于运输辎重和搬运建材。</Milira_DroneStorage.description>
+  <!-- EN: body -->
+  <Milira_DroneStorage.tools.body.label>机身</Milira_DroneStorage.tools.body.label>
+  
+</LanguageData>

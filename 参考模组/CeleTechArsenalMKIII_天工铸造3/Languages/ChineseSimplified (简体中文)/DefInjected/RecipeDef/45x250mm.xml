@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: make CMC_Ammo_45x250mm EEJ cartridge x500 -->
+  <MakeAmmo_CMC_Ammo_45x250mm_APDS-EMP.label>TODO</MakeAmmo_CMC_Ammo_45x250mm_APDS-EMP.label>
+  <!-- EN: Craft 500 CMC_Ammo_45x250mm EEJ cartridges. -->
+  <MakeAmmo_CMC_Ammo_45x250mm_APDS-EMP.description>TODO</MakeAmmo_CMC_Ammo_45x250mm_APDS-EMP.description>
+  <!-- EN: Making CMC_Ammo_45x250mm EEJ cartridges. -->
+  <MakeAmmo_CMC_Ammo_45x250mm_APDS-EMP.jobString>TODO</MakeAmmo_CMC_Ammo_45x250mm_APDS-EMP.jobString>
+  
+  <!-- EN: make CMC_Ammo_45x250mm HE cartridge x500 -->
+  <MakeAmmo_CMC_Ammo_45x250mm_HE.label>TODO</MakeAmmo_CMC_Ammo_45x250mm_HE.label>
+  <!-- EN: Craft 100 CMC_Ammo_45x250mm HE cartridges. -->
+  <MakeAmmo_CMC_Ammo_45x250mm_HE.description>TODO</MakeAmmo_CMC_Ammo_45x250mm_HE.description>
+  <!-- EN: Making CMC_Ammo_45x250mm HE cartridges. -->
+  <MakeAmmo_CMC_Ammo_45x250mm_HE.jobString>TODO</MakeAmmo_CMC_Ammo_45x250mm_HE.jobString>
+  
+</LanguageData>

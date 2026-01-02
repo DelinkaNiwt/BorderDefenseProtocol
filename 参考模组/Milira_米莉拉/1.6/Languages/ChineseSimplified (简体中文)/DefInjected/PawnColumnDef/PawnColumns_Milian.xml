@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Allow colonist automatic suit up for milian. -->
+  <Milian_AutoSuitUp.headerTip>允许殖民者自动为当前米莉安更换服装。</Milian_AutoSuitUp.headerTip>
+
+  <Milian_BillWorkerDisplay.headerTip>允许当前米莉安在清单指定工人列表中显示。</Milian_BillWorkerDisplay.headerTip>
+  
+  <!-- EN: The weapon this pawn equipped with. -->
+  <Milian_Equipment.headerTip>这个单位装备的武器。</Milian_Equipment.headerTip>
+
+  <Milian_HairColor.headerTip>米莉安的发色。点击色块可以打开发型设置。</Milian_HairColor.headerTip>
+  
+</LanguageData>

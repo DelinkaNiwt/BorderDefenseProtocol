@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <RecipeDef Name="Milian_GestatingRecipe_BaseRook" ParentName="Milian_GestatingRecipe" Abstract="true">
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Milian_NamePlate_Rook</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+  </RecipeDef>
+
+  <!-- 培育战车I型 -->
+  <RecipeDef ParentName="Milian_GestatingRecipe_BaseRook">
+    <defName>Milian_Mechanoid_RookI</defName>
+    <label>Gestate Rook I</label>
+    <description>Gestate a Milian modeled Rook I.</description>
+    <researchPrerequisite>Milira_MilianTech_RookI</researchPrerequisite>
+    <gestationCycles>5</gestationCycles>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Milira_SunPlateSteel</li>
+          </thingDefs>
+        </filter>
+        <count>60</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Milira_SplendidSteel</li>
+          </thingDefs>
+        </filter>
+        <count>150</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Milira_SolarCrystal</li>
+          </thingDefs>
+        </filter>
+        <count>8</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>12</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>4</count>
+      </li>
+    </ingredients>
+    <products>
+      <Milian_Mechanoid_RookI>1</Milian_Mechanoid_RookI>
+    </products>
+    <descriptionHyperlinks>
+      <ThingDef>Milian_Mechanoid_RookI</ThingDef>
+    </descriptionHyperlinks>
+  </RecipeDef>
+
+  <!-- 培育战车II型 -->
+  <RecipeDef ParentName="Milian_GestatingRecipe_BaseRook">
+    <defName>Milian_Mechanoid_RookII</defName>
+    <label>Gestate Rook II</label>
+    <description>Gestate a Milian modeled Rook II.</description>
+    <researchPrerequisite>Milira_MilianTech_RookII</researchPrerequisite>
+    <gestationCycles>5</gestationCycles>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Milira_SunPlateSteel</li>
+          </thingDefs>
+        </filter>
+        <count>60</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Milira_SplendidSteel</li>
+          </thingDefs>
+        </filter>
+        <count>180</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Milira_SolarCrystal</li>
+          </thingDefs>
+        </filter>
+        <count>4</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>8</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>4</count>
+      </li>
+    </ingredients>
+    <products>
+      <Milian_Mechanoid_RookII>1</Milian_Mechanoid_RookII>
+    </products>
+    <descriptionHyperlinks>
+      <ThingDef>Milian_Mechanoid_RookII</ThingDef>
+    </descriptionHyperlinks>
+  </RecipeDef>
+
+  <!-- 培育无畏战车 -->
+  <RecipeDef ParentName="Milian_GestatingRecipe_BaseRook">
+    <defName>Milian_Mechanoid_RookIII</defName>
+    <label>Gestate Striker</label>
+    <description>Gestate a Milian modeled Striker.</description>
+    <researchPrerequisite>Milira_MilianTech_RookIII</researchPrerequisite>
+    <gestationCycles>8</gestationCycles>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Milira_SunPlateSteel</li>
+          </thingDefs>
+        </filter>
+        <count>80</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Milira_SplendidSteel</li>
+          </thingDefs>
+        </filter>
+        <count>220</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Milira_SolarCrystal</li>
+          </thingDefs>
+        </filter>
+        <count>6</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>12</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>2</count>
+      </li>
+    </ingredients>
+    <products>
+      <Milian_Mechanoid_RookIII>1</Milian_Mechanoid_RookIII>
+    </products>
+    <descriptionHyperlinks>
+      <ThingDef>Milian_Mechanoid_RookIII</ThingDef>
+    </descriptionHyperlinks>
+  </RecipeDef>
+
+  <!-- 培育不落要塞 -->
+  <RecipeDef ParentName="Milian_GestatingRecipe_BaseRook">
+    <defName>Milian_Mechanoid_RookIV</defName>
+    <label>Gestate Eternal Fortress</label>
+    <description>Gestate a Milian modeled Eternal Fortress.</description>
+    <researchPrerequisite>Milira_MilianTech_RookIV</researchPrerequisite>
+    <gestationCycles>8</gestationCycles>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Milira_SunPlateSteel</li>
+          </thingDefs>
+        </filter>
+        <count>80</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Milira_SplendidSteel</li>
+          </thingDefs>
+        </filter>
+        <count>240</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Milira_SolarCrystal</li>
+          </thingDefs>
+        </filter>
+        <count>6</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>16</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>2</count>
+      </li>
+    </ingredients>
+    <products>
+      <Milian_Mechanoid_RookIV>1</Milian_Mechanoid_RookIV>
+    </products>
+    <descriptionHyperlinks>
+      <ThingDef>Milian_Mechanoid_RookIV</ThingDef>
+    </descriptionHyperlinks>
+  </RecipeDef>
+
+</Defs>

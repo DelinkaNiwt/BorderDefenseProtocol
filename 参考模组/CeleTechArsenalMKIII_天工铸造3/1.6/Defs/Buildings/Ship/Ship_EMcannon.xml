@@ -1,0 +1,157 @@
+<Defs>
+	<ThingDef ParentName="AutocannonTurret">
+    <defName>CMCS_EMcannon_M</defName>
+    <label>ship EML</label>
+	<thingClass>TOT_DLL_test.Building_PDBattery</thingClass>
+    <description>.</description>
+    <uiIconPath>Things/Buildings/CMCS_EMCannon_UI</uiIconPath>
+	<graphicData>
+		<texPath>Things/Buildings/CMCS_EMCannon_Base</texPath>
+		<graphicClass>Graphic_Single</graphicClass>
+		<drawSize>(5,5)</drawSize>
+	</graphicData>
+	<size>(3,3)</size>
+    <statBases>
+	  <MaxHitPoints>3600</MaxHitPoints>
+	  <Flammability>0</Flammability>
+      <ShootingAccuracyTurret>1</ShootingAccuracyTurret>
+	  <WorkToBuild>18000</WorkToBuild>
+    </statBases>
+	<drawerType>MapMeshAndRealTime</drawerType>
+	<tickerType>Normal</tickerType>
+	<killedLeavings>
+      <ChunkSlagSteel>3</ChunkSlagSteel>
+    </killedLeavings>
+    <costList>
+      <Steel>510</Steel>
+	  <Plasteel>200</Plasteel>
+      <ComponentIndustrial>8</ComponentIndustrial>
+	  <ComponentSpacer>6</ComponentSpacer>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>2500</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Refuelable">
+        <fuelLabel>Shots until barrel change</fuelLabel>
+        <fuelGizmoLabel>Barrel durability</fuelGizmoLabel>
+        <outOfFuelMessage>Needs new barrel</outOfFuelMessage>
+        <fuelFilter><thingDefs><li>Steel</li></thingDefs></fuelFilter>
+        <fuelCapacity>100</fuelCapacity>
+        <fuelMultiplier>0.5</fuelMultiplier>
+        <initialFuelPercent>1</initialFuelPercent>
+        <autoRefuelPercent>0.5</autoRefuelPercent>
+        <showFuelGizmo>true</showFuelGizmo>
+        <minimumFueledThreshold>1</minimumFueledThreshold>
+        <factorByDifficulty>true</factorByDifficulty>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelIconPath>UI/Overlays/Barrel</fuelIconPath>
+      </li>
+    </comps>
+	<damageMultipliers>
+      <li>
+        <damageDef>Bomb</damageDef>
+        <multiplier>0.3</multiplier>
+      </li>
+      <li>
+        <damageDef>Bullet</damageDef>
+        <multiplier>0.2</multiplier>
+      </li>
+	  <li>
+        <damageDef>EMP</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+	  <li>
+        <damageDef>Stun</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <building>
+      <turretGunDef>Gun_CMCS_EMCannon</turretGunDef>
+	  <turretTopDrawSize>5.4</turretTopDrawSize>
+      <turretBurstCooldownTime>8</turretBurstCooldownTime>
+    </building>
+    <researchPrerequisites>
+      <li>HeavyTurrets</li>
+	  <li>CMCGunTurrets</li>
+    </researchPrerequisites>
+	<designationCategory>CMC_DefensenProduction</designationCategory>
+	<placeWorkers Inherit="False">
+	  <li>PlaceWorker_OnSubstructure</li>
+    </placeWorkers>
+	<modExtensions>
+      <li Class="TOT_DLL_test.TurretExtension_CMC">
+        <rotationSpeed>6</rotationSpeed>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>Gun_CMCS_EMCannon</defName>
+    <label>ship EM-cannon</label>
+    <description>.</description>
+    <graphicData>
+      <texPath>Things/Buildings/CMCS_EMCannon</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(3.8,3.8)</drawSize>
+    </graphicData>
+    <statBases>
+      <AccuracyTouch>0.98</AccuracyTouch>
+      <AccuracyShort>0.92</AccuracyShort>
+      <AccuracyMedium>0.86</AccuracyMedium>
+      <AccuracyLong>0.85</AccuracyLong>
+      <RangedWeapon_Cooldown>0.5</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>40</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+	        <weaponTags Inherit = "False">
+			<li>Weapon_CMCf</li>
+		</weaponTags>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>Bullet_CMCS_EMC</defaultProjectile>
+		<requireLineOfSight>false</requireLineOfSight>
+        <warmupTime>0</warmupTime>
+        <minRange>23.9</minRange>
+        <range>500</range>
+        <burstShotCount>1</burstShotCount>
+        <soundCast>Sound_Cannonii</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>33</muzzleFlashScale>
+        <consumeFuelPerShot>1</consumeFuelPerShot>
+      </li>
+    </verbs>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_CMCS_EMC</defName>
+    <label>accelerated magnet projectile(antimatter warhead with EMP cells)</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_QLUX</texPath>
+	  <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(2, 2.5)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.CMC_Projectile_EMPshell</thingClass>
+    <projectile>
+      <damageDef>Bomb</damageDef>
+      <speed>280</speed>
+	  <flyOverhead>true</flyOverhead>
+	  <explosionEffect>CMC_Bomb</explosionEffect>
+      <screenShakeFactor>0</screenShakeFactor>
+	  <damageAmountBase>70</damageAmountBase>
+	  <explosionRadius>2.0</explosionRadius>
+      <stoppingPower>1.5</stoppingPower>
+      <armorPenetrationBase>1.9</armorPenetrationBase>
+	  <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+    </projectile>
+  </ThingDef>
+</Defs>

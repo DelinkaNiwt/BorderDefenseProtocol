@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 粒子散射炮 -->
+  <Milian_ParticleDiffusionBlaster.label>粒子散射炮</Milian_ParticleDiffusionBlaster.label>
+  <!-- EN: 在近距离喷发短程粒子束的便携式发射器。可以在散射模式与齐射模式切换，切换至散射模式时，开火会一次性消耗全部能量发射大量粒子团。 -->
+  <Milian_ParticleDiffusionBlaster.description>在近距离喷发短程粒子束的便携式发射器。可以在散射模式与齐射模式切换，切换至散射模式时，开火会一次性消耗全部能量发射大量粒子团。</Milian_ParticleDiffusionBlaster.description>
+  <!-- EN: Switch to volley mode. -->
+  <Milian_ParticleDiffusionBlaster.comps.CompRangeWeaponVerbSwitch.gizmoDesc1>切换至齐射模式。</Milian_ParticleDiffusionBlaster.comps.CompRangeWeaponVerbSwitch.gizmoDesc1>
+  <!-- EN: Switch to diffusion mode. -->
+  <Milian_ParticleDiffusionBlaster.comps.CompRangeWeaponVerbSwitch.gizmoDesc2>切换至散射模式。</Milian_ParticleDiffusionBlaster.comps.CompRangeWeaponVerbSwitch.gizmoDesc2>
+  <!-- EN: diffusion mode -->
+  <Milian_ParticleDiffusionBlaster.comps.CompRangeWeaponVerbSwitch.gizmoLabel1>散射模式</Milian_ParticleDiffusionBlaster.comps.CompRangeWeaponVerbSwitch.gizmoLabel1>
+  <!-- EN: volley mode -->
+  <Milian_ParticleDiffusionBlaster.comps.CompRangeWeaponVerbSwitch.gizmoLabel2>齐射模式</Milian_ParticleDiffusionBlaster.comps.CompRangeWeaponVerbSwitch.gizmoLabel2>
+  <!-- EN: Barrel -->
+  <Milian_ParticleDiffusionBlaster.tools.Barrel.label>枪管</Milian_ParticleDiffusionBlaster.tools.Barrel.label>
+  <!-- EN: 粒子散射炮 -->
+  <Milian_ParticleDiffusionBlaster.verbs.Verb_ChargeShootMultiple_FullCharge.label>粒子散射炮</Milian_ParticleDiffusionBlaster.verbs.Verb_ChargeShootMultiple_FullCharge.label>
+  
+  <!-- EN: 粒子光束机枪 -->
+  <Milian_ParticleLMG.label>粒子光束机枪</Milian_ParticleLMG.label>
+  <!-- EN: 能够连续发射粒子束的便携式发射器，能够进行火力压制。存有能量时开火所需要的预热时间大幅度缩短。 -->
+  <Milian_ParticleLMG.description>能够连续发射粒子束的便携式发射器，能够进行火力压制。存有能量时开火所需要的预热时间大幅度缩短。</Milian_ParticleLMG.description>
+  <!-- EN: rapid mode -->
+  <Milian_ParticleLMG.comps.CompRangeWeaponVerbSwitch_EnergyPassive.verbProps.label>速射模式</Milian_ParticleLMG.comps.CompRangeWeaponVerbSwitch_EnergyPassive.verbProps.label>
+  <!-- EN: Barrel -->
+  <Milian_ParticleLMG.tools.Barrel.label>枪管</Milian_ParticleLMG.tools.Barrel.label>
+  <!-- EN: 粒子光束机枪 -->
+  <Milian_ParticleLMG.verbs.Verb_ChargeShoot.label>粒子光束机枪</Milian_ParticleLMG.verbs.Verb_ChargeShoot.label>
+  
+  <!-- EN: 粒子冲锋枪 -->
+  <Milian_ParticleSMG.label>粒子冲锋枪</Milian_ParticleSMG.label>
+  <!-- EN: 能够连续发射粒子束的便携式发射器，常用于地形复杂的城市战。可以在连射模式和爆炸模式切换。切换至连射模式时，射击不会消耗充能。 -->
+  <Milian_ParticleSMG.description>能够连续发射粒子束的便携式发射器，常用于地形复杂的城市战。可以在连射模式和爆炸模式切换。切换至连射模式时，射击不会消耗充能。</Milian_ParticleSMG.description>
+  <!-- EN: Switch to blast mode. -->
+  <Milian_ParticleSMG.comps.CompRangeWeaponVerbSwitch.gizmoDesc1>切换至爆炸模式。</Milian_ParticleSMG.comps.CompRangeWeaponVerbSwitch.gizmoDesc1>
+  <!-- EN: Switch to rapid mode. -->
+  <Milian_ParticleSMG.comps.CompRangeWeaponVerbSwitch.gizmoDesc2>切换至连射模式。</Milian_ParticleSMG.comps.CompRangeWeaponVerbSwitch.gizmoDesc2>
+  <!-- EN: rapid mode -->
+  <Milian_ParticleSMG.comps.CompRangeWeaponVerbSwitch.gizmoLabel1>连射模式</Milian_ParticleSMG.comps.CompRangeWeaponVerbSwitch.gizmoLabel1>
+  <!-- EN: blast mode -->
+  <Milian_ParticleSMG.comps.CompRangeWeaponVerbSwitch.gizmoLabel2>爆炸模式</Milian_ParticleSMG.comps.CompRangeWeaponVerbSwitch.gizmoLabel2>
+  <!-- EN: Barrel -->
+  <Milian_ParticleSMG.tools.Barrel.label>枪管</Milian_ParticleSMG.tools.Barrel.label>
+  <!-- EN: 粒子冲锋枪 -->
+  <Milian_ParticleSMG.verbs.Verb_ChargeShoot.label>粒子冲锋枪</Milian_ParticleSMG.verbs.Verb_ChargeShoot.label>
+  
+  <!-- EN: explosive particle -->
+  <MiliraBullet_ExplosiveParticle.label>爆炸粒子</MiliraBullet_ExplosiveParticle.label>
+  
+  <!-- EN: particle beam -->
+  <MiliraBullet_ParticleLMG.label>粒子束流</MiliraBullet_ParticleLMG.label>
+  
+  <!-- EN: particle beam -->
+  <MiliraBullet_ParticleLMGCharged.label>粒子束流</MiliraBullet_ParticleLMGCharged.label>
+  
+  <!-- EN: particle beam -->
+  <MiliraBullet_ParticleRifle.label>粒子束流</MiliraBullet_ParticleRifle.label>
+  
+  <!-- EN: particle beam -->
+  <MiliraBullet_ParticleSMG.label>粒子束流</MiliraBullet_ParticleSMG.label>
+  
+</LanguageData>

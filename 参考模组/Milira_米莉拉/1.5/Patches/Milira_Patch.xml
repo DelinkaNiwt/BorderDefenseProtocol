@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <!-- 太阳熔炉研究 -->
+  <Operation Class="PatchOperationSequence">
+    <operations>
+      <li Class="PatchOperationAdd">
+        <xpath>*/ThingDef[defName = "HiTechResearchBench"]/comps/li[@Class = "CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+        <value>
+          <li>Milira_SunBlastFurnace</li>
+        </value>
+      </li>
+    </operations>
+  </Operation>
+
+
+  <Operation Class="PatchOperationSequence">
+    <operations>
+      <li Class="PatchOperationAdd">
+        <xpath>*/GenStepDef[defName = "PreciousLump"]/genStep/mineables</xpath>
+        <value>
+          <li>Milira_MineableSunPlateStell</li>
+        </value>
+      </li>
+    </operations>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+		<xpath>Defs/WorkGiverDef[defName = "Ancot_MechDrill"]/modExtensions/li[@Class = "AncotLibrary.ModExtension_MechList"]/mechs</xpath>
+		<value>
+			<li>Milian_Mechanoid_PawnI</li>
+			<li>Milian_Mechanoid_PawnII</li>
+			<li>Milian_Mechanoid_PawnIII</li>
+			<li>Milian_Mechanoid_PawnIV</li>
+			<li>Milian_Mechanoid_BishopI</li>
+			<li>Milian_Mechanoid_BishopII</li>
+			<li>Milian_Mechanoid_BishopIII</li>
+			<li>Milian_Mechanoid_BishopIV</li>
+			<li>Milian_Mechanoid_KnightI</li>
+			<li>Milian_Mechanoid_KnightII</li>
+			<li>Milian_Mechanoid_KnightIII</li>
+			<li>Milian_Mechanoid_KnightIV</li>
+			<li>Milian_Mechanoid_RookI</li>
+			<li>Milian_Mechanoid_RookII</li>
+			<li>Milian_Mechanoid_RookIII</li>
+			<li>Milian_Mechanoid_RookIV</li>
+		</value>
+	</Operation>
+  <!-- <Operation Class="PatchOperationAdd">
+		<xpath>Defs/WorkGiverDef[defName = "Ancot_MechMeleeHunt"]/modExtensions/li[@Class = "AncotLibrary.ModExtension_MechList"]/mechsRequireWeapon</xpath>
+		<value>
+			<li>Milian_Mechanoid_PawnI</li>
+			<li>Milian_Mechanoid_PawnII</li>
+			<li>Milian_Mechanoid_PawnIII</li>
+			<li>Milian_Mechanoid_PawnIV</li>
+			<li>Milian_Mechanoid_BishopI</li>
+			<li>Milian_Mechanoid_BishopII</li>
+			<li>Milian_Mechanoid_BishopIII</li>
+			<li>Milian_Mechanoid_BishopIV</li>
+			<li>Milian_Mechanoid_KnightI</li>
+			<li>Milian_Mechanoid_KnightII</li>
+			<li>Milian_Mechanoid_KnightIII</li>
+			<li>Milian_Mechanoid_KnightIV</li>
+			<li>Milian_Mechanoid_RookI</li>
+			<li>Milian_Mechanoid_RookII</li>
+			<li>Milian_Mechanoid_RookIII</li>
+			<li>Milian_Mechanoid_RookIV</li>
+		</value>
+	</Operation> -->
+
+
+</Patch>

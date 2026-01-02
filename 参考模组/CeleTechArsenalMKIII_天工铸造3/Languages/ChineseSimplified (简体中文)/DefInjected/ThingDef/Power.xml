@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: CMC geothermal generator -->
+  <CMC_AdvancedGeothermalGenerator.label>紧凑型地热发电站</CMC_AdvancedGeothermalGenerator.label>
+  <!-- EN: Produces electricity from geothermal steam geysers. Must be placed on a steam geyser. -->
+  <CMC_AdvancedGeothermalGenerator.description>优化了构型的地热发电站，效率小幅度提升的同时略微缩小了占地面积。</CMC_AdvancedGeothermalGenerator.description>
+  
+  <!-- EN: ZP-reactor group -->
+  <CMC_ZPReactor_Large.label>//太虚·零点反应炉//</CMC_ZPReactor_Large.label>
+  <!-- EN: A group of zero-point reactors. -->
+  <CMC_ZPReactor_Large.description>能直接从虚空抽取能量的零点反应炉。虽然其背后的原理对于边缘世界来说过于神秘，但天工铸造仍旧声明零点反应炉十分的安全。而作为最先进的舰船反应堆之一，同原理的舰载零点反应堆也被运用于驱逐舰和商船上。</CMC_ZPReactor_Large.description>
+  
+  <!-- EN: P.F.R. -->
+  <CMCPowerCellSmall.label>天工便携裂变反应炉</CMCPowerCellSmall.label>
+  <!-- EN: A portable fission fusion reactor uses uranium as fuel. If damaged(HP below 30%), the unit may generate a massive explosion. -->
+  <CMCPowerCellSmall.description>便携式的裂变反应炉，使用铀作为燃料。如果反应炉受损，可能会发生剧烈爆炸</CMCPowerCellSmall.description>
+  
+</LanguageData>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+    <!-- <AlienRace.RaceSettings>
+        <defName>Milira_RaceSettings</defName>
+        <pawnKindSettings>
+            <alienslavekinds>
+                <li>
+                    <kindDefs>
+                        <li>Milira_Colonist</li>
+                    </kindDefs>
+                    <chance>0.00001</chance>
+                </li>
+            </alienslavekinds>
+
+            <alienrefugeekinds>
+                <li>
+                    <kindDefs>
+                        <li>Milira_Refuge</li>
+                    </kindDefs>
+                    <chance>0.00001</chance>
+                </li>
+            </alienrefugeekinds>
+
+            <startingColonists>
+                <li>
+                    <pawnKindEntries>
+                        <li>
+                            <kindDefs>
+                                <li>Milira_Colonist</li>
+                            </kindDefs>
+                            <chance>0.00001</chance>
+                        </li>
+                    </pawnKindEntries>
+                    <factionDefs>
+                        <li>Milira_PlayerFaction</li>
+                    </factionDefs>
+                </li>
+            </startingColonists>
+
+            <alienwandererkinds>
+                <li>
+                    <pawnKindEntries>
+                        <li>
+                            <kindDefs>
+                                <li>Milira_Refuge</li>
+                            </kindDefs>
+                            <chance>0.00001</chance>
+                        </li>
+                    </pawnKindEntries>
+                    <factionDefs>
+                        <li>Milira_PlayerFaction</li>
+                    </factionDefs>
+                </li>
+            </alienwandererkinds>
+        </pawnKindSettings>
+    </AlienRace.RaceSettings> -->
+</Defs>

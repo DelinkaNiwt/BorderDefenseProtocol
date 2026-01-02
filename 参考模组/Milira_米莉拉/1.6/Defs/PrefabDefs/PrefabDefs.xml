@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+<PrefabDef>
+  <defName>Milira_SunBlastFurnace_InRoom</defName> <!-- rename -->
+  <size>(7,7)</size>
+  <things>
+    <Door>
+      <position>(1, 0, 0)</position>
+      <stuff>Milira_SunPlateSteel</stuff>
+    </Door>
+    <Milira_SunBlasterBoosterJar>
+      <position>(4, 0, 1)</position>
+      <relativeRotation>Clockwise</relativeRotation>
+    </Milira_SunBlasterBoosterJar>
+    <Milira_SunBlastFurnace>
+      <position>(3, 0, 3)</position>
+      <relativeRotation>Counterclockwise</relativeRotation>
+    </Milira_SunBlastFurnace>
+    <Wall>
+      <rects>
+        <li>(0,0,0,6)</li>
+        <li>(2,0,6,0)</li>
+        <li>(6,1,6,6)</li>
+        <li>(1,6,5,6)</li>
+      </rects>
+      <stuff>Milira_SunPlateSteel</stuff>
+    </Wall>
+  </things>
+  <terrain>
+    <SterileTile>
+      <rects>
+        <li>(0,0,6,6)</li>
+      </rects>
+    </SterileTile>
+  </terrain>
+</PrefabDef>
+
+
+<PrefabDef>
+  <defName>Milira_SunLightFuelStation</defName> <!-- rename -->
+  <size>(17,17)</size>
+  <things>
+    <Milira_SunLightGatheringTower>
+      <position>(8, 0, 8)</position>
+    </Milira_SunLightGatheringTower>
+    <Milira_Heliostat>
+      <rects>
+        <li>(5,0,5,0)</li>
+        <li>(7,0,7,0)</li>
+        <li>(9,0,9,0)</li>
+        <li>(11,0,11,0)</li>
+        <li>(2,2,2,2)</li>
+        <li>(4,2,4,2)</li>
+        <li>(6,2,6,2)</li>
+        <li>(8,2,8,2)</li>
+        <li>(10,2,10,2)</li>
+        <li>(12,2,12,2)</li>
+        <li>(14,2,14,2)</li>
+        <li>(2,4,2,4)</li>
+        <li>(4,4,4,4)</li>
+        <li>(6,4,6,4)</li>
+        <li>(8,4,8,4)</li>
+        <li>(10,4,10,4)</li>
+        <li>(12,4,12,4)</li>
+        <li>(14,4,14,4)</li>
+        <li>(0,5,0,5)</li>
+        <li>(16,5,16,5)</li>
+        <li>(2,6,2,6)</li>
+        <li>(4,6,4,6)</li>
+        <li>(12,6,12,6)</li>
+        <li>(14,6,14,6)</li>
+        <li>(0,7,0,7)</li>
+        <li>(16,7,16,7)</li>
+        <li>(2,8,2,8)</li>
+        <li>(4,8,4,8)</li>
+        <li>(12,8,12,8)</li>
+        <li>(14,8,14,8)</li>
+        <li>(0,9,0,9)</li>
+        <li>(16,9,16,9)</li>
+        <li>(2,10,2,10)</li>
+        <li>(4,10,4,10)</li>
+        <li>(12,10,12,10)</li>
+        <li>(14,10,14,10)</li>
+        <li>(0,11,0,11)</li>
+        <li>(16,11,16,11)</li>
+        <li>(2,12,2,12)</li>
+        <li>(4,12,4,12)</li>
+        <li>(6,12,6,12)</li>
+        <li>(8,12,8,12)</li>
+        <li>(10,12,10,12)</li>
+        <li>(12,12,12,12)</li>
+        <li>(14,12,14,12)</li>
+        <li>(2,14,2,14)</li>
+        <li>(4,14,4,14)</li>
+        <li>(6,14,6,14)</li>
+        <li>(8,14,8,14)</li>
+        <li>(10,14,10,14)</li>
+        <li>(12,14,12,14)</li>
+        <li>(14,14,14,14)</li>
+        <li>(5,16,5,16)</li>
+        <li>(7,16,7,16)</li>
+        <li>(9,16,9,16)</li>
+        <li>(11,16,11,16)</li>
+      </rects>
+    </Milira_Heliostat>
+  </things>
+</PrefabDef>
+
+
+<PrefabDef>
+  <defName>Milian_SunLightFuelStation_TechPrintRoom</defName> <!-- rename -->
+  <size>(5,5)</size>
+  <things>
+    <Door>
+      <position>(3, 0, 0)</position>
+      <stuff>Milira_SunPlateSteel</stuff>
+    </Door>
+    <Wall>
+      <rects>
+        <li>(0,0,2,0)</li>
+        <li>(4,0,4,4)</li>
+        <li>(0,1,0,4)</li>
+        <li>(1,4,3,4)</li>
+      </rects>
+      <stuff>Milira_SunPlateSteel</stuff>
+    </Wall>
+    <Techprint_Milira_SunLightFuelGenerator>
+      <position>(3, 0, 2)</position>
+    </Techprint_Milira_SunLightFuelGenerator>
+  </things>
+  <terrain>
+    <SterileTile>
+      <rects>
+        <li>(0,0,4,4)</li>
+      </rects>
+    </SterileTile>
+  </terrain>
+</PrefabDef>
+
+
+<PrefabDef>
+  <defName>Milira_SunBlastFurnace</defName> <!-- rename -->
+  <size>(8,10)</size>
+  <things>
+    <Table1x2c>
+      <position>(2, 0, 8)</position>
+      <relativeRotation>Clockwise</relativeRotation>
+      <stuff>Milira_SplendidSteel</stuff>
+      <quality>Normal</quality>
+    </Table1x2c>
+    <Door>
+      <position>(0, 0, 6)</position>
+      <relativeRotation>Clockwise</relativeRotation>
+      <stuff>Milira_SunPlateSteel</stuff>
+    </Door>
+    <Stool>
+      <position>(3, 0, 7)</position>
+      <stuff>Milira_SplendidSteel</stuff>
+      <quality>Normal</quality>
+    </Stool>
+    <Column>
+      <rects>
+        <li>(1,1,1,1)</li>
+        <li>(4,1,4,1)</li>
+        <li>(1,4,1,4)</li>
+        <li>(4,4,4,4)</li>
+        <li>(1,8,1,8)</li>
+        <li>(4,8,4,8)</li>
+      </rects>
+      <stuff>Milira_SplendidSteel</stuff>
+    </Column>
+    <Milira_SunBlasterBoosterJar>
+      <rects>
+        <li>(5,4,6,4)</li>
+        <li>(5,8,6,8)</li>
+      </rects>
+    </Milira_SunBlasterBoosterJar>
+    <Milira_SunBlastFurnace>
+      <position>(5, 0, 6)</position>
+      <relativeRotation>Clockwise</relativeRotation>
+    </Milira_SunBlastFurnace>
+    <Wall>
+      <rects>
+        <li>(0,0,5,0)</li>
+        <li>(0,1,0,5)</li>
+        <li>(5,1,5,3)</li>
+        <li>(6,3,7,3)</li>
+        <li>(7,4,7,9)</li>
+        <li>(0,7,0,9)</li>
+        <li>(1,9,6,9)</li>
+      </rects>
+      <stuff>Milira_SunPlateSteel</stuff>
+    </Wall>
+    <Shelf>
+      <position>(2, 0, 1)</position>
+      <stuff>Milira_SplendidSteel</stuff>
+    </Shelf>
+    <Shelf>
+      <position>(1, 0, 3)</position>
+      <relativeRotation>Clockwise</relativeRotation>
+      <stuff>Milira_SplendidSteel</stuff>
+    </Shelf>
+    <Shelf>
+      <position>(4, 0, 2)</position>
+      <relativeRotation>Counterclockwise</relativeRotation>
+      <stuff>Milira_SplendidSteel</stuff>
+    </Shelf>
+  </things>
+  <terrain>
+    <SterileTile>
+      <rects>
+        <li>(0,0,5,9)</li>
+        <li>(6,3,7,9)</li>
+      </rects>
+    </SterileTile>
+  </terrain>
+</PrefabDef>
+
+
+
+</Defs>

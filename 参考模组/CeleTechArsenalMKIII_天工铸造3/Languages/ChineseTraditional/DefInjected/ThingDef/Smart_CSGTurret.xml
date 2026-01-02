@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+ 
+  <CMC_CSGTurret.label>【青霜-甲】近程智能霰彈武器站</CMC_CSGTurret.label>
+  <CMC_CSGTurret.description>青霜武器站的一種近距離作戰武備模式，發射智能霰彈，能夠自動追蹤敵人，並同時攻擊多個目標。</CMC_CSGTurret.description>
+  <CMC_CSGTurret.comps.CompRefuelable.fuelGizmoLabel>炮管耐久</CMC_CSGTurret.comps.CompRefuelable.fuelGizmoLabel>
+  <CMC_CSGTurret.comps.CompRefuelable.fuelLabel>剩餘射擊次數</CMC_CSGTurret.comps.CompRefuelable.fuelLabel>
+  <CMC_CSGTurret.comps.CompRefuelable.outOfFuelMessage>需要更換炮管</CMC_CSGTurret.comps.CompRefuelable.outOfFuelMessage>
+  
+  <CMC_CSGTurret_B.label>【青霜-乙】雙聯裝狙擊武器站</CMC_CSGTurret_B.label>
+  <CMC_CSGTurret_B.description>青霜武器站的一種遠距離反步兵作戰武備模式，發射雙聯裝智能狙擊彈，能夠自動追蹤敵人，並同時攻擊兩個目標。</CMC_CSGTurret_B.description>
+  <CMC_CSGTurret_B.comps.CompRefuelable.fuelGizmoLabel>炮管耐久</CMC_CSGTurret_B.comps.CompRefuelable.fuelGizmoLabel>
+  <CMC_CSGTurret_B.comps.CompRefuelable.fuelLabel>剩餘射擊次數</CMC_CSGTurret_B.comps.CompRefuelable.fuelLabel>
+  <CMC_CSGTurret_B.comps.CompRefuelable.outOfFuelMessage>需要更換炮管</CMC_CSGTurret_B.comps.CompRefuelable.outOfFuelMessage>
+  
+  <CMC_CSGTurret_C.label>【青霜-丙】機槍武器站</CMC_CSGTurret_C.label>
+  <CMC_CSGTurret_C.description>青霜武器站底座的通用作戰武備模式，發射小口徑機槍彈。</CMC_CSGTurret_C.description>
+  <CMC_CSGTurret_C.comps.CompRefuelable.fuelGizmoLabel>炮管耐久</CMC_CSGTurret_C.comps.CompRefuelable.fuelGizmoLabel>
+  <CMC_CSGTurret_C.comps.CompRefuelable.fuelLabel>剩餘射擊次數</CMC_CSGTurret_C.comps.CompRefuelable.fuelLabel>
+  <CMC_CSGTurret_C.comps.CompRefuelable.outOfFuelMessage>需要更換炮管</CMC_CSGTurret_C.comps.CompRefuelable.outOfFuelMessage>
+  
+  <Gun_CMCAntiInfantryCSG.label>智能霰彈槍</Gun_CMCAntiInfantryCSG.label>
+  <Gun_CMCAntiInfantryCSG.description>發射數枚追蹤射彈的自動霰彈槍。</Gun_CMCAntiInfantryCSG.description>
+  <Gun_CMCAntiInfantryCSG.verbs.Verb_Shoot.label>智能霰彈槍</Gun_CMCAntiInfantryCSG.verbs.Verb_Shoot.label>
+  
+  <Gun_CMCAntiInfantryCSG_B.label>雙聯裝自動智能狙擊槍</Gun_CMCAntiInfantryCSG_B.label>
+  <Gun_CMCAntiInfantryCSG_B.description>發射追蹤射彈的雙聯裝自動智能狙擊槍。</Gun_CMCAntiInfantryCSG_B.description>
+  <Gun_CMCAntiInfantryCSG_B.verbs.Verb_Shoot.label>雙聯裝自動智能狙擊槍</Gun_CMCAntiInfantryCSG_B.verbs.Verb_Shoot.label>
+  
+  <Gun_CMCAntiInfantryCSG_C.label>電荷輕機槍</Gun_CMCAntiInfantryCSG_C.label>
+  <Gun_CMCAntiInfantryCSG_C.description>小口徑電荷機槍。</Gun_CMCAntiInfantryCSG_C.description>
+  <Gun_CMCAntiInfantryCSG_C.verbs.Verb_Shoot.label>電荷輕機槍</Gun_CMCAntiInfantryCSG_C.verbs.Verb_Shoot.label>
+  
+</LanguageData>

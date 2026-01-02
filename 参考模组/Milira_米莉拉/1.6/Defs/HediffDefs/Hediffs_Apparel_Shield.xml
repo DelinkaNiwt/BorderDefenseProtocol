@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<!-- 米莉安骑士盾 -->
+	<HediffDef>
+		<defName>Milian_KnightShield_Active</defName>
+		<label>knight shield up</label>
+		<hediffClass>HediffWithComps</hediffClass>
+		<isBad>false</isBad>
+		<maxSeverity>1</maxSeverity>
+		<initialSeverity>1</initialSeverity>
+		<everCurableByItem>false</everCurableByItem>
+		<defaultLabelColor>(240, 240, 240)</defaultLabelColor>
+		<description>this creature is defending with knight shield.</description>
+		<comps>
+			<li Class="HediffCompProperties_DisappearsOnDeath"/>
+			<li Class="HediffCompProperties_RemoveIfApparelDropped"/>
+		</comps>
+		<stages>
+			<li>
+				<capMods>
+				</capMods>
+				<statFactors>
+					<MoveSpeed>0.9</MoveSpeed>
+					<MeleeDamageFactor>0.8</MeleeDamageFactor>
+					<MeleeDodgeChance>0.6</MeleeDodgeChance>
+					<StaggerDurationFactor>0.9</StaggerDurationFactor>
+					<AimingDelayFactor>1.2</AimingDelayFactor>
+				</statFactors>
+			</li>
+		</stages>
+	</HediffDef>
+
+	<!-- 米莉安羽形盾 -->
+	<HediffDef>
+		<defName>Milian_FeatherShapeShield_Active</defName>
+		<label>featherShaped shield up</label>
+		<hediffClass>HediffWithComps</hediffClass>
+		<isBad>false</isBad>
+		<maxSeverity>1</maxSeverity>
+		<initialSeverity>1</initialSeverity>
+		<everCurableByItem>false</everCurableByItem>
+		<defaultLabelColor>(240, 240, 240)</defaultLabelColor>
+		<description>this creature is defending with featherShaped shield.</description>
+		<comps>
+			<li Class="HediffCompProperties_DisappearsOnDeath"/>
+			<li Class="HediffCompProperties_RemoveIfApparelDropped"/>
+			<!-- <li Class="HediffCompProperties_VerbGiver">
+        <tools>
+          <li>
+            <label>shield bash</label>
+            <capacities>
+              <li>Blunt</li>
+            </capacities>
+            <power>24</power>
+            <armorPenetration>0.2</armorPenetration>
+            <cooldownTime>2.6</cooldownTime>
+            <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+            <extraMeleeDamages>
+              <li>
+                <def>Stun</def>
+                <amount>2</amount>
+                <chance>0.3</chance>
+              </li>
+            </extraMeleeDamages>
+          </li>
+        </tools>
+      </li> -->
+		</comps>
+		<stages>
+			<li>
+				<capMods>
+				</capMods>
+				<statFactors>
+					<MoveSpeed>0.6</MoveSpeed>
+					<MeleeDamageFactor>0.6</MeleeDamageFactor>
+					<MeleeDodgeChance>0.4</MeleeDodgeChance>
+					<StaggerDurationFactor>0.5</StaggerDurationFactor>
+					<AimingDelayFactor>1.5</AimingDelayFactor>
+				</statFactors>
+			</li>
+		</stages>
+	</HediffDef>
+
+	<!-- 米莉安独眼城门盾 -->
+	<HediffDef>
+		<defName>Milian_RookShield_Active</defName>
+		<label>one eyed tower shield up</label>
+		<hediffClass>HediffWithComps</hediffClass>
+		<isBad>false</isBad>
+		<maxSeverity>1</maxSeverity>
+		<initialSeverity>1</initialSeverity>
+		<everCurableByItem>false</everCurableByItem>
+		<defaultLabelColor>(240, 240, 240)</defaultLabelColor>
+		<description>this creature is defending with cyclops gate shield.</description>
+		<comps>
+			<li Class="HediffCompProperties_DisappearsOnDeath"/>
+			<li Class="HediffCompProperties_RemoveIfApparelDropped"/>
+		</comps>
+		<stages>
+			<li>
+				<capMods>
+				</capMods>
+				<statFactors>
+					<MoveSpeed>0.4</MoveSpeed>
+					<MeleeHitChance>0.6</MeleeHitChance>
+					<MeleeDamageFactor>0.3</MeleeDamageFactor>
+					<MeleeDodgeChance>0</MeleeDodgeChance>
+					<StaggerDurationFactor>0</StaggerDurationFactor>
+					<AimingDelayFactor>1.8</AimingDelayFactor>
+				</statFactors>
+			</li>
+		</stages>
+	</HediffDef>
+
+</Defs>

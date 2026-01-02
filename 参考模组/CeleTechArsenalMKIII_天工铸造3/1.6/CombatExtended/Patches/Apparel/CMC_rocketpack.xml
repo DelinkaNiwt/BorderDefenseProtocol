@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>CeleTech Arsenal MKIII</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="CMC_rocketpack"]/statBases</xpath>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="CMC_rocketpack"]</xpath>
+            <value>
+              <statBases />
+            </value>
+          </nomatch>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ThingDef[defName="CMC_rocketpack"]/statBases</xpath>
+          <value>
+            <statBases>
+              <MaxHitPoints>200</MaxHitPoints>
+              <Flammability>0.4</Flammability>
+              <DeteriorationRate>2</DeteriorationRate>
+              <Beauty>-3</Beauty>
+              <ArmorRating_Sharp>9</ArmorRating_Sharp>
+              <ArmorRating_Blunt>65</ArmorRating_Blunt>
+              <WorkToMake>9000</WorkToMake>
+              <Mass>4.3</Mass>
+              <EquipDelay>2</EquipDelay>
+              <JumpRange>23.9</JumpRange>
+              <CarryingCapacity>25</CarryingCapacity>
+            </statBases>
+          </value>
+        </li>
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="CMC_rocketpack"]/equippedStatOffsets</xpath>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="CMC_rocketpack"]</xpath>
+            <value>
+              <equippedStatOffsets />
+            </value>
+          </nomatch>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ThingDef[defName="CMC_rocketpack"]/equippedStatOffsets</xpath>
+          <value>
+            <equippedStatOffsets>
+              <CarryWeight>80</CarryWeight>
+              <CarryBulk>40</CarryBulk>
+            </equippedStatOffsets>
+          </value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+</Patch>

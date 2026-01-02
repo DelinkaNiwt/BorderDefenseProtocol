@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8"?> 
+<LanguageData>
+  
+  <Ancot.NextSpawnedItemIn>Next {0} {1}</Ancot.NextSpawnedItemIn>
+
+  <Ancot.PlantGrowFully>fully grown</Ancot.PlantGrowFully>
+  <Ancot.PlantGrowProgress>grow progress: {0}</Ancot.PlantGrowProgress>
+  <Ancot.PlantGrow_LightRequire>sleeping, require light: {0}</Ancot.PlantGrow_LightRequire>
+  <Ancot.PlantGrow_TempRequire>stopped grow for non-ideal temperature, require: </Ancot.PlantGrow_TempRequire>
+
+  <Ancot.LoadDamage>damage loading</Ancot.LoadDamage>
+  <Ancot.LoadArmorPenetration>armor penetration loading</Ancot.LoadArmorPenetration>
+  <Ancot.LoadStoppingPower>stopping power loading</Ancot.LoadStoppingPower>
+  <Ancot.LoadBuildingDamageFactor>building damage factor loading</Ancot.LoadBuildingDamageFactor>
+  <Ancot.LoadBuildingDamageFactorPassable>building damage factor passable loading</Ancot.LoadBuildingDamageFactorPassable>
+  <Ancot.LoadBuildingDamageFactorImpassable>building damage factor impassable loading</Ancot.LoadBuildingDamageFactorImpassable>
+
+  <Ancot.WorldObject_AssignableToPawn>station owner: {0}</Ancot.WorldObject_AssignableToPawn>
+  <Ancot.WorldObject_AssignableToPawn_NoBody>No station owner set</Ancot.WorldObject_AssignableToPawn_NoBody>
+
+  <Ancot.ThingCarrierAutofillDesc>This autofill amount determines the maximum amount of resources your colonists will automatically place in this {0}.</Ancot.ThingCarrierAutofillDesc>
+
+</LanguageData>

@@ -1,0 +1,924 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef Name="Milira_StandardPlasmaWeaponBase" ParentName="BaseMakeableGun" Abstract="True">
+    <tickerType>Normal</tickerType>
+    <descriptionHyperlinks>
+      <HediffDef>Milira_PlasmaMeltdown</HediffDef>
+    </descriptionHyperlinks>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.4</drawSize>
+    </graphicData>
+    <recipeMaker>
+      <researchPrerequisite>Milira_StandardPlasmaWeapon</researchPrerequisite>
+      <recipeUsers Inherit="false">
+        <li>Milira_SunBlastFurnace</li>
+      </recipeUsers>
+    </recipeMaker>
+    <weaponTags>
+      <li>Milira_StandardPlasmaWeapon</li>
+    </weaponTags>
+    <tradeability>Sellable</tradeability>
+  </ThingDef>
+
+  <ThingDef Name="Milira_HeavyPlasmaWeaponBase" ParentName="BaseMakeableGun" Abstract="True">
+    <tickerType>Normal</tickerType>
+    <descriptionHyperlinks>
+      <HediffDef>Milira_PlasmaMeltdown</HediffDef>
+    </descriptionHyperlinks>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.4</drawSize>
+    </graphicData>
+    <recipeMaker>
+      <researchPrerequisite>Milira_HeavyPlasmaWeapon</researchPrerequisite>
+      <recipeUsers Inherit="false">
+        <li>Milira_SunBlastFurnace</li>
+      </recipeUsers>
+    </recipeMaker>
+    <comps>
+      <li Class="CompProperties_Biocodable"/>
+    </comps>
+    <weaponTags>
+      <li>Milira_HeavyPlasmaWeapon</li>
+    </weaponTags>
+    <tradeability>Sellable</tradeability>
+  </ThingDef>
+
+
+
+  <!-- 离子手枪============================================================================================= -->
+  <ThingDef ParentName="Milira_StandardPlasmaWeaponBase">
+    <defName>Milira_PlasmaPistol</defName>
+    <label>plasma pistol</label>
+    <description>A small launcher capable of quickly firing ion beams. The fired ion beams can melt the armor of target.\nChargeable.\nCan switch between rapid mode and scatter mode.</description>
+    <graphicData>
+      <texPath>Milira/Weapon/PlasmaPistol</texPath>
+    </graphicData>
+    <generateCommonality>1.0</generateCommonality>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <statBases>
+      <WorkToMake>60000</WorkToMake>
+      <Mass>1.2</Mass>
+      <AccuracyTouch>0.9</AccuracyTouch>
+      <AccuracyShort>0.9</AccuracyShort>
+      <AccuracyMedium>0.75</AccuracyMedium>
+      <AccuracyLong>0.15</AccuracyLong>
+      <RangedWeapon_Cooldown>0.5</RangedWeapon_Cooldown>
+      <Ancot_WeaponMaxCharge>10</Ancot_WeaponMaxCharge>
+      <Ancot_WeaponChargeTick>80</Ancot_WeaponChargeTick>
+      <Ancot_EnergyWeaponCorrectionFactor>1</Ancot_EnergyWeaponCorrectionFactor>
+      <Ancot_EnergyWeaponResetTime>1800</Ancot_EnergyWeaponResetTime>
+    </statBases>
+    <weaponTags>
+      <li>Milira_PlasmaPistol</li>
+    </weaponTags>
+    <costList>
+      <Milira_SunPlateSteel>15</Milira_SunPlateSteel>
+      <Plasteel>60</Plasteel>
+      <ComponentSpacer>1</ComponentSpacer>
+      <Milira_SolarCrystal>2</Milira_SolarCrystal>
+    </costList>
+    <recipeMaker>
+      <skillRequirements>
+        <Crafting>4</Crafting>
+        <Intellectual>4</Intellectual>
+      </skillRequirements>
+    </recipeMaker>
+    <verbs>
+      <li>
+        <verbClass>AncotLibrary.Verb_ChargeShoot</verbClass>
+        <isPrimary>true</isPrimary>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>MiliraBullet_PlasmaPistol</defaultProjectile>
+        <warmupTime>0.8</warmupTime>
+        <range>23.9</range>
+        <burstShotCount>3</burstShotCount>
+        <ticksBetweenBurstShots>6</ticksBetweenBurstShots>
+        <soundCast>Milira_Shot_PlasmaRifle</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>2</muzzleFlashScale>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>8</power>
+        <cooldownTime>1.7</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>6</power>
+        <cooldownTime>1.7</cooldownTime>
+      </li>
+    </tools>
+    <equippedStatOffsets>
+      <ShootingAccuracyPawn>6.0</ShootingAccuracyPawn>
+    </equippedStatOffsets>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_RangeWeaponVerbSwitch">
+        <gizmoOrder>0</gizmoOrder>
+        <gizmoLabel1>rapid mode</gizmoLabel1>
+        <gizmoLabel2>scatter mode</gizmoLabel2>
+        <gizmoDesc1>Switch to scatter mode.</gizmoDesc1>
+        <gizmoDesc2>Switch to rapid mode.</gizmoDesc2>
+        <aiInitialSwitchChance>0.5</aiInitialSwitchChance>
+        <verbProps>
+          <verbClass>AncotLibrary.Verb_ChargeShoot</verbClass>
+          <isPrimary>true</isPrimary>
+          <hasStandardCommand>true</hasStandardCommand>
+          <defaultProjectile>MiliraBullet_PlasmaPistol</defaultProjectile>
+          <warmupTime>1.8</warmupTime>
+          <range>14.9</range>
+          <burstShotCount>5</burstShotCount>
+          <ticksBetweenBurstShots>0</ticksBetweenBurstShots>
+          <soundCast>Milira_Shot_HeavyPlasma</soundCast>
+          <soundCastTail>GunTail_Heavy</soundCastTail>
+          <muzzleFlashScale>6</muzzleFlashScale>
+        </verbProps>
+      </li>
+      <li Class="AncotLibrary.CompProperties_WeaponCharge">
+        <projectileCharged>MiliraBullet_PlasmaPistolCharged</projectileCharged>
+        <chargeFireEffecter>Milira_PlasmaChargeFire_Forward</chargeFireEffecter>
+        <chargePerUse>1</chargePerUse>
+        <chargeOnResetRatio>1.0</chargeOnResetRatio>
+        <barColor>(0.71,0.88,0.90,0.8)</barColor>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>MiliraBullet_PlasmaPistol</defName>
+    <label>ion beam</label>
+    <projectile>
+      <damageDef>Milira_PlasmaBullet</damageDef>
+      <damageAmountBase>8</damageAmountBase>
+      <armorPenetrationBase>0.25</armorPenetrationBase>
+      <stoppingPower>0.7</stoppingPower>
+      <speed>105</speed>
+    </projectile>
+    <graphicData>
+      <texPath>Milira/ProjectileNew/Bullet_Plasma</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+      <drawSize>0.8</drawSize>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>MiliraBullet_PlasmaPistolCharged</defName>
+    <label>ionic beam</label>
+    <projectile>
+      <damageDef>Milira_PlasmaBullet</damageDef>
+      <damageAmountBase>10</damageAmountBase>
+      <armorPenetrationBase>0.35</armorPenetrationBase>
+      <stoppingPower>1.0</stoppingPower>
+      <speed>105</speed>
+    </projectile>
+    <graphicData>
+      <texPath>Milira/ProjectileNew/Bullet_Plasma</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+      <drawSize>0.8</drawSize>
+    </graphicData>
+  </ThingDef>
+
+
+
+  <!-- 离子步枪============================================================================================= -->
+  <ThingDef ParentName="Milira_StandardPlasmaWeaponBase">
+    <defName>Milira_PlasmaRifle</defName>
+    <label>plasma rifle</label>
+    <description>A portable launcher capable of quickly firing ion beams. The fired ion beams can melt the armor of target.\nChargeable.\nCan switch between focused mode and diffusion mode.</description>
+    <graphicData>
+      <texPath>Milira/Weapon/PlasmaRifle</texPath>
+    </graphicData>
+    <generateCommonality>1.0</generateCommonality>
+    <uiIconScale>1.2</uiIconScale>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <statBases>
+      <WorkToMake>90000</WorkToMake>
+      <Mass>3.2</Mass>
+      <AccuracyTouch>0.62</AccuracyTouch>
+      <AccuracyShort>0.85</AccuracyShort>
+      <AccuracyMedium>0.72</AccuracyMedium>
+      <AccuracyLong>0.65</AccuracyLong>
+      <RangedWeapon_Cooldown>1.5</RangedWeapon_Cooldown>
+      <Ancot_WeaponMaxCharge>20</Ancot_WeaponMaxCharge>
+      <Ancot_WeaponChargeTick>120</Ancot_WeaponChargeTick>
+      <Ancot_EnergyWeaponCorrectionFactor>1</Ancot_EnergyWeaponCorrectionFactor>
+      <Ancot_EnergyWeaponResetTime>1800</Ancot_EnergyWeaponResetTime>
+    </statBases>
+    <weaponTags>
+      <li>Milira_PlasmaRifle</li>
+    </weaponTags>
+    <costList>
+      <Milira_SunPlateSteel>75</Milira_SunPlateSteel>
+      <Plasteel>50</Plasteel>
+      <ComponentSpacer>3</ComponentSpacer>
+      <Milira_SolarCrystal>4</Milira_SolarCrystal>
+    </costList>
+    <recipeMaker>
+      <skillRequirements>
+        <Crafting>8</Crafting>
+        <Intellectual>6</Intellectual>
+      </skillRequirements>
+    </recipeMaker>
+    <verbs>
+      <li>
+        <verbClass>AncotLibrary.Verb_ChargeShoot</verbClass>
+        <isPrimary>true</isPrimary>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>MiliraBullet_PlasmaRifle</defaultProjectile>
+        <warmupTime>1.8</warmupTime>
+        <range>35.9</range>
+        <burstShotCount>5</burstShotCount>
+        <ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+        <soundCast>Milira_Shot_PlasmaRifle</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>3</muzzleFlashScale>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>8</power>
+        <cooldownTime>1.7</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>6</power>
+        <cooldownTime>1.7</cooldownTime>
+      </li>
+    </tools>
+    <equippedStatOffsets>
+      <ShootingAccuracyPawn>6.0</ShootingAccuracyPawn>
+    </equippedStatOffsets>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_RangeWeaponVerbSwitch">
+        <gizmoOrder>0</gizmoOrder>
+        <gizmoLabel1>focused mode</gizmoLabel1>
+        <gizmoLabel2>diffusion mode</gizmoLabel2>
+        <gizmoDesc1>Switch to diffusion mode.</gizmoDesc1>
+        <gizmoDesc2>Switch to focused mode.</gizmoDesc2>
+        <aiInitialSwitchChance>0.3</aiInitialSwitchChance>
+        <verbProps>
+          <verbClass>AncotLibrary.Verb_ChargeShoot</verbClass>
+          <isPrimary>true</isPrimary>
+          <hasStandardCommand>true</hasStandardCommand>
+          <defaultProjectile>MiliraBullet_PlasmaRifle</defaultProjectile>
+          <warmupTime>1.8</warmupTime>
+          <range>35.9</range>
+          <burstShotCount>5</burstShotCount>
+          <ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+          <soundCast>Milira_Shot_PlasmaRifle</soundCast>
+          <soundCastTail>GunTail_Heavy</soundCastTail>
+          <muzzleFlashScale>6</muzzleFlashScale>
+          <ai_AvoidFriendlyFireRadius>3</ai_AvoidFriendlyFireRadius>
+        </verbProps>
+      </li>
+      <li Class="AncotLibrary.CompProperties_WeaponCharge">
+        <projectileCharged>MiliraBullet_PlasmaRifleCharged</projectileCharged>
+        <projectileCharged_Switched>MiliraBullet_PlasmaRifleCharged_Switched</projectileCharged_Switched>
+        <chargeFireEffecter>Milira_PlasmaChargeFire_Forward</chargeFireEffecter>
+        <chargeOnResetRatio>1.0</chargeOnResetRatio>
+        <barColor>(0.71,0.88,0.90,0.8)</barColor>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>MiliraBullet_PlasmaRifle</defName>
+    <label>ion beam</label>
+    <projectile>
+      <damageDef>Milira_PlasmaBullet</damageDef>
+      <damageAmountBase>10</damageAmountBase>
+      <armorPenetrationBase>0.35</armorPenetrationBase>
+      <stoppingPower>1.2</stoppingPower>
+      <speed>125</speed>
+    </projectile>
+    <graphicData>
+      <texPath>Milira/ProjectileNew/Bullet_Plasma</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>MiliraBullet_PlasmaRifleCharged</defName>
+    <label>ion beam charged</label>
+    <thingClass>AncotLibrary.Projectile_Custom</thingClass>
+    <projectile>
+      <damageDef>Milira_PlasmaBullet</damageDef>
+      <damageAmountBase>16</damageAmountBase>
+      <armorPenetrationBase>0.45</armorPenetrationBase>
+      <stoppingPower>1.5</stoppingPower>
+      <speed>125</speed>
+    </projectile>
+    <graphicData>
+      <texPath>Milira/ProjectileNew/Bullet_PlasmaCharged</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+    </graphicData>
+    <modExtensions>
+      <li Class="AncotLibrary.Projectile_Custom_Extension">
+        <impactEffecter>Milira_PlasmaChargeHit</impactEffecter>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>MiliraBullet_PlasmaRifleCharged_Switched</defName>
+    <label>diffusion ion beam charged</label>
+    <thingClass>AncotLibrary.Projectile_ExplosiveCustom</thingClass>
+    <projectile>
+      <damageDef>Milira_PlasmaBomb</damageDef>
+      <explosionRadius>1</explosionRadius>
+      <damageAmountBase>12</damageAmountBase>
+      <armorPenetrationBase>0.45</armorPenetrationBase>
+      <stoppingPower>0.8</stoppingPower>
+      <speed>125</speed>
+    </projectile>
+    <graphicData>
+      <texPath>Milira/ProjectileNew/Bullet_PlasmaExplode</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+    </graphicData>
+    <modExtensions>
+      <li Class="AncotLibrary.Projectile_ExplosiveCustom_Extension">
+        <impactEffecter>Milira_PlasmaChargeHit</impactEffecter>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- 离子冲击炮============================================================================================= -->
+  <ThingDef ParentName="Milira_HeavyPlasmaWeaponBase">
+    <defName>Milira_PlasmaCannon</defName>
+    <label>plasma cannon</label>
+    <description>A portable launcher capable of firing ion clusters which can melt the armor of targets.\nChargeable.</description>
+    <graphicData>
+      <texPath>Milira/Weapon/PlasmaCannon</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.4</drawSize>
+    </graphicData>
+    <generateCommonality>0.3</generateCommonality>
+    <uiIconScale>1.2</uiIconScale>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <statBases>
+      <WorkToMake>90000</WorkToMake>
+      <Mass>6.6</Mass>
+      <AccuracyTouch>0.82</AccuracyTouch>
+      <AccuracyShort>0.85</AccuracyShort>
+      <AccuracyMedium>0.88</AccuracyMedium>
+      <AccuracyLong>0.75</AccuracyLong>
+      <RangedWeapon_Cooldown>1.5</RangedWeapon_Cooldown>
+      <Ancot_WeaponMaxCharge>3</Ancot_WeaponMaxCharge>
+      <Ancot_WeaponChargeTick>900</Ancot_WeaponChargeTick>
+      <Ancot_EnergyWeaponCorrectionFactor>0.8</Ancot_EnergyWeaponCorrectionFactor>
+      <Ancot_EnergyWeaponResetTime>2800</Ancot_EnergyWeaponResetTime>
+    </statBases>
+    <weaponTags>
+      <li>Milira_PlasmaCannon</li>
+    </weaponTags>
+    <costList>
+      <Milira_SunPlateSteel>125</Milira_SunPlateSteel>
+      <Plasteel>100</Plasteel>
+      <ComponentSpacer>5</ComponentSpacer>
+      <Milira_SolarCrystal>5</Milira_SolarCrystal>
+    </costList>
+    <recipeMaker>
+      <skillRequirements>
+        <Crafting>12</Crafting>
+        <Intellectual>10</Intellectual>
+      </skillRequirements>
+      <displayPriority>415</displayPriority>
+    </recipeMaker>
+    <verbs>
+      <li>
+        <verbClass>AncotLibrary.Verb_ChargeShoot</verbClass>
+        <targetParams>
+          <canTargetLocations>true</canTargetLocations>
+        </targetParams>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>MiliraBullet_PlasmaCannon</defaultProjectile>
+        <warmupTime>2.5</warmupTime>
+        <range>35.9</range>
+        <burstShotCount>1</burstShotCount>
+        <ticksBetweenBurstShots>0</ticksBetweenBurstShots>
+        <forcedMissRadius>1.0</forcedMissRadius>
+        <soundCast>Milira_Shot_HeavyPlasma</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>6</muzzleFlashScale>
+        <ai_AvoidFriendlyFireRadius>6</ai_AvoidFriendlyFireRadius>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>8</power>
+        <cooldownTime>1.7</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>6</power>
+        <cooldownTime>1.7</cooldownTime>
+      </li>
+    </tools>
+    <equippedStatOffsets>
+      <ShootingAccuracyPawn>6.0</ShootingAccuracyPawn>
+    </equippedStatOffsets>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_WeaponCharge">
+        <projectileCharged>MiliraBullet_PlasmaCannonCharged</projectileCharged>
+        <chargeFireEffecter>Milira_PlasmaChargeFire_Forward_Big</chargeFireEffecter>
+        <chargeOnResetRatio>1.0</chargeOnResetRatio>
+        <barColor>(0.71,0.88,0.90,0.8)</barColor>
+      </li>
+    </comps>
+  </ThingDef>
+  <ThingDef ParentName="BaseBullet">
+    <defName>MiliraBullet_PlasmaCannon</defName>
+    <label>impact plasma cluster</label>
+    <thingClass>AncotLibrary.Projectile_ExplosiveWithTrail</thingClass>    <!--Projectile_ExplosiveWithEMP-->
+    <projectile>
+      <damageDef>Milira_PlasmaBombBig</damageDef>
+      <explosionRadius>2.0</explosionRadius>
+      <damageAmountBase>12</damageAmountBase>
+      <armorPenetrationBase>0.25</armorPenetrationBase>
+      <stoppingPower>1.0</stoppingPower>
+      <speed>105</speed>
+    </projectile>
+    <graphicData>
+      <texPath>Milira/ProjectileNew/Bullet_PlasmaExplode</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1.2,1.2)</drawSize>
+      <shaderType>TransparentPostLight</shaderType>
+    </graphicData>
+    <modExtensions>
+      <li Class="AncotLibrary.ExplosiveProjectileExtension">
+        <doTrail>true</doTrail>
+        <trailFleck>Milira_AirPuffGlow</trailFleck>
+        <trailFreauency>1</trailFreauency>
+        <trailColor>(0.4,0.8,1.0)</trailColor>        <!--(0.6,0.8,1.0)-->
+      </li>
+    </modExtensions>
+  </ThingDef>
+  <ThingDef Name="MiliraBullet_PlasmaCannonCharged" ParentName="BaseBullet">
+    <defName>MiliraBullet_PlasmaCannonCharged</defName>
+    <label>impact plasma cluster charged</label>
+    <thingClass>AncotLibrary.Projectile_ExplosiveWithTrail</thingClass>    <!--Projectile_ExplosiveWithEMP-->
+    <projectile>
+      <damageDef>Milira_PlasmaBombBig</damageDef>
+      <explosionRadius>3.5</explosionRadius>
+      <damageAmountBase>42</damageAmountBase>
+      <armorPenetrationBase>0.45</armorPenetrationBase>
+      <stoppingPower>2.4</stoppingPower>
+      <speed>125</speed>
+    </projectile>
+    <graphicData>
+      <texPath>Milira/ProjectileNew/Bullet_PlasmaExplode</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1.5,1.5)</drawSize>
+      <shaderType>TransparentPostLight</shaderType>
+    </graphicData>
+    <modExtensions>
+      <li Class="AncotLibrary.ExplosiveProjectileExtension">
+        <doTrail>true</doTrail>
+        <trailFleck>Milira_AirPuffGlow</trailFleck>
+        <trailFreauency>1</trailFreauency>
+        <trailColor>(0.4,0.8,1.0)</trailColor>        <!--(0.6,0.8,1.0)-->
+        <doExtraExplosion>true</doExtraExplosion>
+        <extraExplosionCount>1</extraExplosionCount>
+        <extraExplosionDamageType>EMP</extraExplosionDamageType>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+
+  <!-- 离子急射机枪============================================================================================= -->
+  <ThingDef ParentName="Milira_HeavyPlasmaWeaponBase">
+    <defName>Milira_PlasmaMG</defName>
+    <label>plasma burst MG</label>
+    <description>A portable launcher capable of firing ion beams continuously. The fired ion beams can melt the armor of targets.\nChargeable.\nCan switch between fixed mode and burst mode.</description>
+    <graphicData>
+      <texPath>Milira/Weapon/PlasmaMiniGun</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.4</drawSize>
+    </graphicData>
+    <generateCommonality>0.3</generateCommonality>
+    <uiIconScale>1.2</uiIconScale>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <!-- <equippedAngleOffset>-15</equippedAngleOffset> -->
+    <statBases>
+      <WorkToMake>90000</WorkToMake>
+      <Mass>8.5</Mass>
+      <AccuracyTouch>0.90</AccuracyTouch>
+      <AccuracyShort>0.32</AccuracyShort>
+      <AccuracyMedium>0.25</AccuracyMedium>
+      <AccuracyLong>0.18</AccuracyLong>
+      <RangedWeapon_Cooldown>0.6</RangedWeapon_Cooldown>
+      <Ancot_WeaponMaxCharge>300</Ancot_WeaponMaxCharge>
+      <Ancot_WeaponChargeTick>120</Ancot_WeaponChargeTick>
+      <Ancot_EnergyWeaponCorrectionFactor>0.8</Ancot_EnergyWeaponCorrectionFactor>
+      <Ancot_EnergyWeaponResetTime>6000</Ancot_EnergyWeaponResetTime>
+    </statBases>
+    <weaponTags>
+      <li>Milira_PlasmaMG</li>
+    </weaponTags>
+    <costList>
+      <Milira_SunPlateSteel>125</Milira_SunPlateSteel>
+      <Plasteel>100</Plasteel>
+      <ComponentSpacer>5</ComponentSpacer>
+      <Milira_SolarCrystal>5</Milira_SolarCrystal>
+    </costList>
+    <recipeMaker>
+      <skillRequirements>
+        <Crafting>12</Crafting>
+        <Intellectual>10</Intellectual>
+      </skillRequirements>
+      <displayPriority>415</displayPriority>
+    </recipeMaker>
+    <verbs>
+      <li>
+        <verbClass>AncotLibrary.Verb_ChargeShoot</verbClass>
+        <isPrimary>true</isPrimary>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>MiliraBullet_PlasmaMG</defaultProjectile>
+        <warmupTime>0.8</warmupTime>
+        <range>34.9</range>
+        <burstShotCount>5</burstShotCount>
+        <ticksBetweenBurstShots>6</ticksBetweenBurstShots>
+        <soundCast>Milira_Shot_PlasmaRifle</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>3</muzzleFlashScale>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>8</power>
+        <cooldownTime>1.7</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>6</power>
+        <cooldownTime>1.7</cooldownTime>
+      </li>
+    </tools>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.8</MoveSpeed>
+    </equippedStatOffsets>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_RangeWeaponVerbSwitch">
+        <gizmoOrder>0</gizmoOrder>
+        <gizmoLabel1>fixed mode</gizmoLabel1>
+        <gizmoLabel2>burst mode</gizmoLabel2>
+        <gizmoDesc1>Switch to burst mode.</gizmoDesc1>
+        <gizmoDesc2>Switch to fixed mode.</gizmoDesc2>
+        <aiInitialSwitchChance>0.5</aiInitialSwitchChance>
+        <verbProps>
+          <verbClass>AncotLibrary.Verb_ChargeShoot</verbClass>
+          <isPrimary>true</isPrimary>
+          <targetParams>
+            <canTargetLocations>true</canTargetLocations>
+          </targetParams>
+          <hasStandardCommand>true</hasStandardCommand>
+          <defaultProjectile>MiliraBullet_PlasmaMG</defaultProjectile>
+          <warmupTime>6.8</warmupTime>
+          <range>34.9</range>
+          <burstShotCount>60</burstShotCount>
+          <ticksBetweenBurstShots>4</ticksBetweenBurstShots>
+          <soundCast>Milira_Shot_HeavyPlasma</soundCast>
+          <soundCastTail>GunTail_Heavy</soundCastTail>
+          <muzzleFlashScale>6</muzzleFlashScale>
+          <ai_AvoidFriendlyFireRadius>3</ai_AvoidFriendlyFireRadius>
+        </verbProps>
+      </li>
+      <li Class="AncotLibrary.CompProperties_WeaponCharge">
+        <projectileCharged>MiliraBullet_PlasmaMGCharged</projectileCharged>
+        <chargeFireEffecter>Milira_PlasmaChargeFire_Forward</chargeFireEffecter>
+        <chargeOnResetRatio>1.0</chargeOnResetRatio>
+        <barColor>(0.71,0.88,0.90,0.8)</barColor>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>MiliraBullet_PlasmaMG</defName>
+    <label>ion beam</label>
+    <projectile>
+      <damageDef>Milira_PlasmaBullet</damageDef>
+      <damageAmountBase>4</damageAmountBase>
+      <armorPenetrationBase>0.15</armorPenetrationBase>
+      <stoppingPower>0.4</stoppingPower>
+      <speed>85</speed>
+    </projectile>
+    <graphicData>
+      <texPath>Milira/ProjectileNew/Bullet_Plasma</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>MiliraBullet_PlasmaMGCharged</defName>
+    <label>ion beam charged</label>
+    <thingClass>AncotLibrary.Projectile_Custom</thingClass>
+    <projectile>
+      <damageDef>Milira_PlasmaBullet</damageDef>
+      <damageAmountBase>9</damageAmountBase>
+      <armorPenetrationBase>0.35</armorPenetrationBase>
+      <stoppingPower>0.8</stoppingPower>
+      <speed>105</speed>
+    </projectile>
+    <graphicData>
+      <texPath>Milira/ProjectileNew/Bullet_Plasma</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+    </graphicData>
+    <modExtensions>
+      <li Class="AncotLibrary.Projectile_Custom_Extension">
+        <impactEffecter>Milira_PlasmaChargeHit</impactEffecter>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+
+
+
+  <!-- 离子脉冲狙击枪============================================================================================= -->
+  <ThingDef ParentName="Milira_HeavyPlasmaWeaponBase">
+    <defName>Milira_PlasmaPulseSniperRifle</defName>
+    <label>plasma pulse sniper rifle</label>
+    <description>A portable emitter capable of firing high-precision ion beams. When energy is available, the warm-up time before firing is significantly reduced, and the emitted ion beams inflict plasma melt down.</description>
+    <graphicData>
+      <texPath>Milira/Weapon/PlasmaPulseSniperRifle</texPath>
+    </graphicData>
+    <generateCommonality>1.0</generateCommonality>
+    <uiIconScale>1.2</uiIconScale>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <equippedAngleOffset>45</equippedAngleOffset>
+    <statBases>
+      <WorkToMake>90000</WorkToMake>
+      <Mass>5.8</Mass>
+      <AccuracyTouch>1.00</AccuracyTouch>
+      <AccuracyShort>1.00</AccuracyShort>
+      <AccuracyMedium>0.96</AccuracyMedium>
+      <AccuracyLong>0.92</AccuracyLong>
+      <RangedWeapon_Cooldown>0.5</RangedWeapon_Cooldown>
+      <Ancot_WeaponMaxCharge>8</Ancot_WeaponMaxCharge>
+      <Ancot_WeaponChargeTick>600</Ancot_WeaponChargeTick>
+      <Ancot_EnergyWeaponCorrectionFactor>0.8</Ancot_EnergyWeaponCorrectionFactor>
+      <Ancot_EnergyWeaponResetTime>2400</Ancot_EnergyWeaponResetTime>
+    </statBases>
+    <weaponTags>
+      <li>Milira_PlasmaPulseSniperRifle</li>
+    </weaponTags>
+    <costList>
+      <Milira_SunPlateSteel>90</Milira_SunPlateSteel>
+      <Plasteel>50</Plasteel>
+      <ComponentSpacer>4</ComponentSpacer>
+      <Milira_SolarCrystal>4</Milira_SolarCrystal>
+    </costList>
+    <recipeMaker>
+      <skillRequirements>
+        <Crafting>10</Crafting>
+        <Intellectual>6</Intellectual>
+      </skillRequirements>
+    </recipeMaker>
+    <verbs>
+      <li>
+        <verbClass>AncotLibrary.Verb_ChargeShoot</verbClass>
+        <isPrimary>true</isPrimary>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>MiliraBullet_PlasmaPulseSniperRifle</defaultProjectile>
+        <warmupTime>2.8</warmupTime>
+        <range>31.9</range>
+        <burstShotCount>1</burstShotCount>
+        <ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+        <soundCast>Milira_Shot_PlasmaRifle</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>3</muzzleFlashScale>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>8</power>
+        <cooldownTime>1.7</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>6</power>
+        <cooldownTime>1.7</cooldownTime>
+      </li>
+    </tools>
+    <equippedStatOffsets>
+      <ShootingAccuracyPawn>8.0</ShootingAccuracyPawn>
+    </equippedStatOffsets>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_RangeWeaponVerbSwitch_EnergyPassive">
+        <verbProps>
+          <label>pulse mode</label>
+          <verbClass>AncotLibrary.Verb_ChargeShoot</verbClass>
+          <isPrimary>true</isPrimary>
+          <hasStandardCommand>true</hasStandardCommand>
+          <defaultProjectile>MiliraBullet_PlasmaPulseSniperRifleCharged</defaultProjectile>
+          <warmupTime>0.3</warmupTime>
+          <range>41.9</range>
+          <burstShotCount>1</burstShotCount>
+          <ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+          <soundCast>Milira_Shot_PlasmaPulse</soundCast>
+          <soundCastTail>GunTail_Heavy</soundCastTail>
+          <muzzleFlashScale>6</muzzleFlashScale>
+        </verbProps>
+      </li>
+      <li Class="AncotLibrary.CompProperties_WeaponCharge">
+        <projectileCharged>MiliraBullet_PlasmaPulseSniperRifleCharged</projectileCharged>
+        <chargeFireEffecter>Milira_PlasmaChargeFire_Backward_Big</chargeFireEffecter>
+        <chargeOnResetRatio>1.0</chargeOnResetRatio>
+        <barColor>(0.71,0.88,0.90,0.8)</barColor>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>MiliraBullet_PlasmaPulseSniperRifle</defName>
+    <label>ion beam</label>
+    <projectile>
+      <damageDef>Milira_PlasmaBullet</damageDef>
+      <damageAmountBase>12</damageAmountBase>
+      <armorPenetrationBase>0.35</armorPenetrationBase>
+      <stoppingPower>1.2</stoppingPower>
+      <speed>225</speed>
+    </projectile>
+    <graphicData>
+      <texPath>Milira/ProjectileNew/Bullet_Plasma</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>MiliraBullet_PlasmaPulseSniperRifleCharged</defName>
+    <label>ion beam charged</label>
+    <thingClass>AncotLibrary.Projectile_Custom</thingClass>
+    <projectile>
+      <damageDef>Milira_PlasmaBullet</damageDef>
+      <damageAmountBase>32</damageAmountBase>
+      <armorPenetrationBase>1.0</armorPenetrationBase>
+      <stoppingPower>1.5</stoppingPower>
+      <speed>300</speed>
+    </projectile>
+    <graphicData>
+      <texPath>Milira/ProjectileNew/Bullet_PlasmaCharged</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>1.6</drawSize>
+    </graphicData>
+    <modExtensions>
+      <li Class="AncotLibrary.Projectile_Custom_Extension">
+        <impactEffecter>Milira_PlasmaChargeHit</impactEffecter>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+
+  <!--<ThingDef ParentName="Milira_StandardParticleWeaponBase">
+    <defName>Milira_PlasmaMineLauncher</defName>
+    <label>离子地雷投射器</label>
+    <description>离子冲击炮。</description>
+    <graphicData>
+      <texPath>Milira/Weapon/PlasmaCannon</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>1.2</drawSize>
+    </graphicData>
+	<uiIconScale>1.2</uiIconScale>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <statBases>
+      <WorkToMake>10600</WorkToMake>
+      <Mass>4.6</Mass>
+      <AccuracyTouch>0.82</AccuracyTouch>
+      <AccuracyShort>0.85</AccuracyShort>
+      <AccuracyMedium>0.88</AccuracyMedium>
+      <AccuracyLong>0.75</AccuracyLong>
+      <RangedWeapon_Cooldown>1.5</RangedWeapon_Cooldown>
+    </statBases>
+	<weaponTags>
+	  <li>Milira_PlasmaCannon</li>
+	</weaponTags>
+    <costList>
+      <Milira_SunPlateSteel>90</Milira_SunPlateSteel>
+      <Plasteel>75</Plasteel>
+      <ComponentSpacer>4</ComponentSpacer>
+    </costList>
+    <recipeMaker>
+      <skillRequirements>
+        <Crafting>13</Crafting>
+      </skillRequirements>
+      <displayPriority>415</displayPriority>
+    </recipeMaker>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+		<targetParams>
+			<canTargetLocations>true</canTargetLocations>
+		</targetParams>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>MiliraBullet_MineLander</defaultProjectile>
+        <warmupTime>2.5</warmupTime>
+        <range>35.9</range>
+		<burstShotCount>60</burstShotCount>
+		<ticksBetweenBurstShots>0</ticksBetweenBurstShots>
+		<forcedMissRadius>11.5</forcedMissRadius>
+        <soundCast>Milira_Shot_HeavyPlasma</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>6</muzzleFlashScale>
+		<ai_AvoidFriendlyFireRadius>6</ai_AvoidFriendlyFireRadius>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>8</power>
+        <cooldownTime>1.7</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>6</power>
+        <cooldownTime>1.7</cooldownTime>
+      </li>
+    </tools>
+	<equippedStatOffsets>
+      <ShootingAccuracyPawn>6.0</ShootingAccuracyPawn>
+    </equippedStatOffsets>
+  </ThingDef>
+  <ThingDef ParentName="BaseBullet">
+    <defName>MiliraBullet_MineLander</defName>
+    <label>冲击离子团</label>
+	<thingClass>Projectile_Explosive</thingClass>
+    <projectile>
+      <damageDef>Milira_PlasmaBombBig</damageDef>
+	  <explosionRadius>0.1</explosionRadius>
+	  <explosionEffect>Milira_PlasmaExplosionEffect</explosionEffect>
+      <damageAmountBase>28</damageAmountBase>
+	  <armorPenetrationBase>0.45</armorPenetrationBase>
+	  <arcHeightFactor>1.5</arcHeightFactor>
+      <stoppingPower>2.4</stoppingPower>
+      <speed>65</speed>
+	  <postExplosionSpawnThingDef>TrapIED_HighExplosive</postExplosionSpawnThingDef>
+    </projectile>
+    <graphicData>
+      <texPath>Milira/Projectile/MiliraBullet_PlasmaCannon</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <shaderType>MoteGlow</shaderType>
+    </graphicData>
+  </ThingDef>-->
+
+
+
+
+</Defs>

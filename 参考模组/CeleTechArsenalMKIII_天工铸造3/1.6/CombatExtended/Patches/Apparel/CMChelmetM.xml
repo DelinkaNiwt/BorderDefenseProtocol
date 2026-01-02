@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>CeleTech Arsenal MKIII</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="CMChelmetM"]/statBases</xpath>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="CMChelmetM"]</xpath>
+            <value>
+              <statBases />
+            </value>
+          </nomatch>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ThingDef[defName="CMChelmetM"]/statBases</xpath>
+          <value>
+            <statBases>
+              <MaxHitPoints>900</MaxHitPoints>
+              <Flammability>0</Flammability>
+              <DeteriorationRate>2</DeteriorationRate>
+              <Beauty>-3</Beauty>
+              <WorkToMake>31250</WorkToMake>
+              <Mass>7.5</Mass>
+              <ArmorRating_Sharp>42</ArmorRating_Sharp>
+              <ArmorRating_Blunt>150</ArmorRating_Blunt>
+              <ArmorRating_Heat>150</ArmorRating_Heat>
+              <Insulation_Cold>49</Insulation_Cold>
+              <Insulation_Heat>1200</Insulation_Heat>
+              <EquipDelay>6</EquipDelay>
+            </statBases>
+          </value>
+        </li>
+        <li Class="PatchOperationAddModExtension">
+          <xpath>Defs/ThingDef[defName="CMChelmetM"]</xpath>
+          <value>
+            <li Class="CombatExtended.PartialArmorExt">
+              <stats />
+            </li>
+          </value>
+        </li>
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="CMChelmetM"]/equippedStatOffsets</xpath>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="CMChelmetM"]</xpath>
+            <value>
+              <equippedStatOffsets />
+            </value>
+          </nomatch>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ThingDef[defName="CMChelmetM"]/equippedStatOffsets</xpath>
+          <value>
+            <equippedStatOffsets>
+              <PainShockThreshold>0.25</PainShockThreshold>
+              <ToxicEnvironmentResistance>1</ToxicEnvironmentResistance>
+              <ShootingAccuracyPawn>2</ShootingAccuracyPawn>
+              <VacuumResistance>1</VacuumResistance>
+              <SmokeSensitivity>0</SmokeSensitivity>
+              <Suppressability>0.5</Suppressability>
+              <CarryWeight>10</CarryWeight>
+              <CarryBulk>10</CarryBulk>
+            </equippedStatOffsets>
+          </value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+</Patch>

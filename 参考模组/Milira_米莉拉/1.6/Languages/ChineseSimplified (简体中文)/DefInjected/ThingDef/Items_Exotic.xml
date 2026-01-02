@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: class permit: Bishop -->
+  <Milian_NamePlate_Bishop.label>职阶许可：主教</Milian_NamePlate_Bishop.label>
+  <!-- EN: A Milian identity recognition chip, engraved with the intricate circuits exclusive to the "Bishop" class. A Milian equipped with this chip gains the authority and resonance associated with the "Bishop" class. -->
+  <Milian_NamePlate_Bishop.description>米莉安的身份识别芯片，刻印着独属于“主教”职阶的复杂线路。搭载该芯片的米莉安可以获得“主教”职阶的权能并接受其同调。</Milian_NamePlate_Bishop.description>
+  
+  <!-- EN: class permit: King -->
+  <Milian_NamePlate_King.label>职阶许可：国王</Milian_NamePlate_King.label>
+  <!-- EN: A Milian identity recognition chip, engraved with the intricate circuits exclusive to the "King" class. A Milian equipped with this chip gains the authority and resonance associated with the "King" class. -->
+  <Milian_NamePlate_King.description>米莉安的身份识别芯片，刻印着独属于“国王”职阶的复杂线路。搭载该芯片的米莉安可以获得“国王”职阶的权能并接受其同调。</Milian_NamePlate_King.description>
+  
+  <!-- EN: class permit: Knight -->
+  <Milian_NamePlate_Knight.label>职阶许可：骑士</Milian_NamePlate_Knight.label>
+  <!-- EN: A Milian identity recognition chip, engraved with the intricate circuits exclusive to the "King" class. A Milian equipped with this chip gains the authority and resonance associated with the "Knight" class. -->
+  <Milian_NamePlate_Knight.description>米莉安的身份识别芯片，刻印着独属于“骑士”职阶的复杂线路。搭载该芯片的米莉安可以获得“骑士”职阶的权能并接受其同调。</Milian_NamePlate_Knight.description>
+  
+  <!-- EN: class permit: Pawn -->
+  <Milian_NamePlate_Pawn.label>职阶许可：士兵</Milian_NamePlate_Pawn.label>
+  <!-- EN: A Milian identity recognition chip, engraved with the intricate circuits exclusive to the "Pawn" class. A Milian equipped with this chip gains the authority and resonance associated with the "Pawn" class. -->
+  <Milian_NamePlate_Pawn.description>米莉安的身份识别芯片，刻印着独属于“士兵”职阶的复杂线路。搭载该芯片的米莉安可以获得“士兵”职阶的权能并接受其同调。</Milian_NamePlate_Pawn.description>
+  
+  <!-- EN: class permit: Queen -->
+  <Milian_NamePlate_Queen.label>职阶许可：王后</Milian_NamePlate_Queen.label>
+  <!-- EN: A Milian identity recognition chip, engraved with the intricate circuits exclusive to the "Queen" class. A Milian equipped with this chip gains the authority and resonance associated with the "Queen" class. -->
+  <Milian_NamePlate_Queen.description>米莉安的身份识别芯片，刻印着独属于“王后”职阶的复杂线路。搭载该芯片的米莉安可以获得“王后”职阶的权能并接受其同调。</Milian_NamePlate_Queen.description>
+  
+  <!-- EN: class permit: Rook -->
+  <Milian_NamePlate_Rook.label>职阶许可：战车</Milian_NamePlate_Rook.label>
+  <!-- EN: A Milian identity recognition chip, engraved with the intricate circuits exclusive to the "Rook" class. A Milian equipped with this chip gains the authority and resonance associated with the "Rook" class. -->
+  <Milian_NamePlate_Rook.description>米莉安的身份识别芯片，刻印着独属于“战车”职阶的复杂线路。搭载该芯片的米莉安可以获得“战车”职阶的权能并接受其同调。</Milian_NamePlate_Rook.description>
+  
+</LanguageData>

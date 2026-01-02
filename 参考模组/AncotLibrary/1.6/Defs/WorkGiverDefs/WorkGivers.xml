@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- <WorkGiverDef ParentName="HaulToBase">
+    <defName>Ancot_HaulToBuilding</defName>
+    <label>haul resource to building</label>
+    <giverClass>AncotLibrary.WorkGiver_HaulResourcesToBuilding</giverClass>
+  </WorkGiverDef> -->
+
+  <WorkGiverDef>
+    <defName>Ancot_HaulToMechCarrier_Custom</defName>
+    <label>haul resource to mech carrier</label>
+    <giverClass>AncotLibrary.WorkGiver_HaulResourcesToMechCarrier_Custom</giverClass>
+    <workType>Hauling</workType>
+    <verb>haul to</verb>
+    <gerund>hauling to</gerund>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <priorityInType>90</priorityInType>
+  </WorkGiverDef>
+
+  <WorkGiverDef>
+    <defName>Ancot_MechDrill</defName>
+    <label>drill at deep drill</label>
+    <giverClass>AncotLibrary.WorkGiver_MechDeepDrill</giverClass>
+    <workType>Mining</workType>
+    <priorityInType>50</priorityInType>
+    <verb>drill</verb>
+    <gerund>drilling</gerund>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <modExtensions>
+      <li Class="AncotLibrary.ModExtension_MechList">
+        <mechs>
+        </mechs>
+      </li>
+    </modExtensions>
+  </WorkGiverDef>
+
+  <WorkGiverDef>
+    <defName>Ancot_MechRepairMech</defName>
+    <label>repair mech</label>
+    <giverClass>AncotLibrary.WorkGiver_MechRepairMech</giverClass>
+    <workType>Smithing</workType>
+    <verb>repair</verb>
+    <gerund>repairing</gerund>
+    <priorityInType>200</priorityInType>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <modExtensions>
+      <li Class="AncotLibrary.ModExtension_MechList">
+        <mechs>
+        </mechs>
+      </li>
+    </modExtensions>
+  </WorkGiverDef>
+
+  <WorkGiverDef>
+    <defName>Ancot_MechMeleeHunt</defName>
+    <label>hunt</label>
+    <giverClass>AncotLibrary.WorkGiver_MechMeleeHunt</giverClass>
+    <workType>Hunting</workType>
+    <verb>hunt</verb>
+    <gerund>hunting</gerund>
+    <tagToGive>Fieldwork</tagToGive>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <modExtensions>
+      <li Class="AncotLibrary.ModExtension_MechList">
+        <mechs>
+        </mechs>
+        <mechsRequireWeapon>
+        </mechsRequireWeapon>
+      </li>
+    </modExtensions>
+  </WorkGiverDef>
+
+  <!-- Drone -->
+  <WorkGiverDef>
+    <defName>Ancot_RepairDrone</defName>
+    <label>repair mech</label>
+    <giverClass>AncotLibrary.WorkGiver_RepairDrone</giverClass>
+    <workType>Smithing</workType>
+    <verb>repair</verb>
+    <gerund>repairing</gerund>
+    <priorityInType>190</priorityInType>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <canBeDoneByMechs>true</canBeDoneByMechs>
+    <canBeDoneWhileDrafted>true</canBeDoneWhileDrafted>
+  </WorkGiverDef>
+
+  <WorkGiverDef>
+    <defName>Ancot_HaulDroneToCharger</defName>
+    <label>haul drone to charger</label>
+    <giverClass>AncotLibrary.WorkGiver_HaulDroneToCharger</giverClass>
+    <workType>Hauling</workType>
+    <verb>haul</verb>
+    <gerund>hauling</gerund>
+    <priorityInType>90</priorityInType>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <canBeDoneByMechs>false</canBeDoneByMechs>
+  </WorkGiverDef>
+
+
+</Defs>

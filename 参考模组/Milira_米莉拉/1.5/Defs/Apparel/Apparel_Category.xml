@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<ThingCategoryDef>
+		<defName>Milira_Apparel</defName>
+		<label>Milira Apparel</label>
+		<parent>Apparel</parent>
+	</ThingCategoryDef>
+
+	<!-- <ThingCategoryDef>
+		<defName>Milira_Apparel_Underwear</defName>
+		<label>米莉拉内衣</label>
+		<parent>Milira_Apparel</parent>
+	</ThingCategoryDef> -->
+
+	<ThingCategoryDef>
+		<defName>Milira_Apparel_OnSkin</defName>
+		<label>Milira OnSkin</label>
+		<parent>Milira_Apparel</parent>
+	</ThingCategoryDef>
+
+	<ThingCategoryDef>
+		<defName>Milira_Apparel_Middle</defName>
+		<label>Milira Middle</label>
+		<parent>Milira_Apparel</parent>
+	</ThingCategoryDef>
+
+	<ThingCategoryDef>
+		<defName>Milira_Apparel_Shell</defName>
+		<label>Milira Shell</label>
+		<parent>Milira_Apparel</parent>
+	</ThingCategoryDef>
+
+	<ThingCategoryDef>
+		<defName>Milira_Apparel_Overhead</defName>
+		<label>Milira Overhead</label>
+		<parent>Milira_Apparel</parent>
+	</ThingCategoryDef>
+	
+	<ThingCategoryDef>
+		<defName>Milira_Apparel_Utility</defName>
+		<label>Milira Utility</label>
+		<parent>Milira_Apparel</parent>
+	</ThingCategoryDef>
+
+	<ThingCategoryDef>
+		<defName>Milira_Apparel_CombatDrone</defName>
+		<label>Milira CombatDrone</label>
+		<parent>Milira_Apparel_Utility</parent>
+	</ThingCategoryDef>
+
+	<ThingCategoryDef>
+		<defName>Milira_Apparel_ConceptWeaponry</defName>
+		<label>Milira ConceptWeaponry</label>
+		<parent>Milira_Apparel_Utility</parent>
+	</ThingCategoryDef>
+	
+</Defs>

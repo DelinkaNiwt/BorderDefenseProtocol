@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: CMC Zero-point reactor -->
+  <CMC_ZPReactor_Large.label>//太虛·零點反應爐//</CMC_ZPReactor_Large.label>
+  <!-- EN: A zero-point reactor that draws energy from vacuum, the principle behind this energy source is unknown, but CMC states that it is safe to use. As one of the most advanced ship reactors, it is usually used on CMC trade ships and destroyers. -->
+  <CMC_ZPReactor_Large.description>能直接從虛空抽取能量的零點反應爐。雖然其背後的原理對於邊緣世界來說過於神秘，但天工鑄造仍舊聲明零點反應爐十分的安全。而作為最先進的艦船反應堆之一，同原理的艦載零點反應堆也被運用於驅逐艦和商船上。</CMC_ZPReactor_Large.description>
+  
+  <!-- EN: CMC portable fission reactor -->
+  <CMCPowerCellSmall.label>天工便攜裂變反應爐</CMCPowerCellSmall.label>
+  <!-- EN: A portable fission fusion reactor uses uranium as fuel. If damaged(HP below 30%), the unit may generate a massive explosion. -->
+  <CMCPowerCellSmall.description>便攜式的裂變反應爐，使用鈾作為燃料。如果反應爐受損，可能會發生劇烈爆炸</CMCPowerCellSmall.description>
+  
+</LanguageData>

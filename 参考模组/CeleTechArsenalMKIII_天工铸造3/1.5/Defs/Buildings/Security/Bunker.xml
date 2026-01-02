@@ -1,0 +1,143 @@
+<Defs>
+	<ThingDef ParentName="BuildingBase">
+    <defName>CMC_ReinforcedBunker</defName>
+    <label>"Xuanwu Abyssal"HMG bastion</label>
+	<thingClass>TOT_DLL_test.Building_Bunker</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+	<tickerType>Normal</tickerType>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <description>A subterranean bastion cloaked in neutron-charged plating, impervious to directed energy weapons including plasma cannons. When health drops below 25% or it is one holdfire mode, it descends for repairs - consuming 50 steel and quadruple power every 10 seconds to restore 100 HP. Though its suppressive fire lacks precision, the tortoise-shell armor renders it nigh indestructible against frontal assaults.</description>
+    <uiIconPath>Things/Buildings/CMC_ReinforcedBunker_UI</uiIconPath>
+	<graphicData>
+        <texPath>Things/Buildings/CMC_ReinforcedBunkerBase</texPath>
+        <graphicClass>Graphic_Single</graphicClass>
+        <drawSize>(4.8,4.8)</drawSize>
+    </graphicData>
+	<altitudeLayer>Building</altitudeLayer>
+	<size>(3,3)</size>
+    <statBases>
+	  <MaxHitPoints>10000</MaxHitPoints>
+	  <Flammability>0</Flammability>
+      <ShootingAccuracyTurret>0.87</ShootingAccuracyTurret>
+	  <WorkToBuild>12000</WorkToBuild>
+    </statBases>
+	<killedLeavings>
+      <ChunkSlagSteel>2</ChunkSlagSteel>
+      <Steel>60</Steel>
+    </killedLeavings>
+	<costStuffCount>1200</costStuffCount>
+	<stuffCategories>
+		<li>Metallic</li>
+		<li>Stony</li>
+	</stuffCategories>
+    <costList>
+      <Steel>500</Steel>
+	  <Plasteel>50</Plasteel>
+      <ComponentIndustrial>5</ComponentIndustrial>
+	  <ComponentSpacer>1</ComponentSpacer>
+	  <Uranium>20</Uranium>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Refuelable">
+        <fuelLabel>Shots until barrel change</fuelLabel>
+        <fuelGizmoLabel>Barrel durability</fuelGizmoLabel>
+        <outOfFuelMessage>Needs new barrel</outOfFuelMessage>
+        <fuelFilter><thingDefs><li>Steel</li></thingDefs></fuelFilter>
+        <fuelCapacity>2000</fuelCapacity>
+        <fuelMultiplier>10</fuelMultiplier>
+        <initialFuelPercent>1</initialFuelPercent>
+        <autoRefuelPercent>0.8</autoRefuelPercent>
+        <showFuelGizmo>true</showFuelGizmo>
+        <minimumFueledThreshold>1</minimumFueledThreshold>
+        <factorByDifficulty>true</factorByDifficulty>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelIconPath>UI/Overlays/Barrel</fuelIconPath>
+      </li>
+	  <li Class="CompProperties_AffectedByFacilities">
+        <linkableFacilities>
+          <li>CMC_FCradar</li>
+        </linkableFacilities>
+      </li>
+	  <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>200</basePowerConsumption>
+      </li>
+    </comps>
+	<damageMultipliers>
+	  <li>
+        <damageDef>Arrow</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+	  <li>
+        <damageDef>Vaporize</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+	  <li>
+        <damageDef>EMP</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+	  <li>
+        <damageDef>Stun</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <building>
+      <turretGunDef>Gun_BunkerHMG</turretGunDef>
+	  <turretTopDrawSize>1.2</turretTopDrawSize>
+      <turretBurstCooldownTime>1.5</turretBurstCooldownTime>
+    </building>
+    <researchPrerequisites>
+	  <li>CMCGunTurretsbasic</li>
+    </researchPrerequisites>
+	<designationCategory>CMC_DefensenProduction</designationCategory>
+	<placeWorkers>
+	  <li>PlaceWorker_BandNode</li>
+    </placeWorkers>
+	<modExtensions>
+      <li Class="TOT_DLL_test.TurretExtension_CMC">
+        <rotationSpeed>1</rotationSpeed>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>Gun_BunkerHMG</defName>
+    <label>charged heavy machine gun(hidden)</label>
+    <description>An auto charged HMG equipped in the bunker, nightmare for light infantry.</description>
+    <graphicData>
+      <texPath>Things/CMC_Void</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1.8,1.8)</drawSize>
+    </graphicData>
+    <statBases>
+      <AccuracyTouch>0.98</AccuracyTouch>
+      <AccuracyShort>0.62</AccuracyShort>
+      <AccuracyMedium>0.46</AccuracyMedium>
+      <AccuracyLong>0.35</AccuracyLong>
+      <RangedWeapon_Cooldown>0</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>70</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+	        <weaponTags Inherit = "False">
+			<li>Weapon_CMCf</li>
+		</weaponTags>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>Bullet_HMG_API</defaultProjectile>
+        <warmupTime>0</warmupTime>
+        <range>31.9</range>
+        <burstShotCount>18</burstShotCount>
+		<ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+        <soundCast>ChargeLance_Fire</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>33</muzzleFlashScale>
+        <consumeFuelPerShot>1</consumeFuelPerShot>
+      </li>
+    </verbs>
+  </ThingDef>
+</Defs>

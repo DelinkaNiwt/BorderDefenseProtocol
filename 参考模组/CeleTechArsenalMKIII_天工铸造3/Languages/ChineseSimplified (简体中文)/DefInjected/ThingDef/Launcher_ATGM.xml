@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: HJ-53 ATGM Launcher -->
+  <CMC_HJX_ATGM.label>HJ-53 单兵导弹发射装置</CMC_HJX_ATGM.label>
+  <!-- EN: An individual anti-tank missile launcher, equipped with HJ-53 light ATGM missile.\n\nThis weapon can fire over obstacles, but cannot automatically target enemies outside the operator's line of sight.\n\nThis weapon employs a multiple independently targetable cluster munition payload. Prior to terminal impact, the warhead deploys anti-personnel submunitions equipped with pre-fragmented sleeves, delivering saturation effects against soft targets within its blast radius.\n\nThis heavy weapon system can be disabled in mod settings. However, due to its high production cost, it may not spawn naturally in standard raid events even with generation options enabled. -->
+  <CMC_HJX_ATGM.description>先进的单兵发射装置，兼容HJ-53轻型反坦克导弹，可以跨越障碍攻击，但射手不会自动攻击其无法目视的目标。\n\n该武器配备分导式集束弹头，弹体在命中前会释放多枚高爆反人员子弹药，通过预置破片矩阵对半径内的无防护目标实施饱和打击。\n\n导弹会因为目标进入烟雾或高速移动而丢失目标，当丢失目标或锁定的目标失去战斗力且导弹还在制导距离内时，引导头会自动搜索周围5格内的敌对目标。\n\n重型武器可在模组设置中禁用生成逻辑，但由于其制造成本，即使启用生成选项，常规袭击事件中仍可能无法自然出现。</CMC_HJX_ATGM.description>
+  <!-- EN: barrel -->
+  <CMC_HJX_ATGM.tools.barrel.label>炮管</CMC_HJX_ATGM.tools.barrel.label>
+  <!-- EN: HJ-53 ATGM Launcher -->
+  <CMC_HJX_ATGM.verbs.Verb_Shoot.label>HJ-53 单兵导弹发射装置</CMC_HJX_ATGM.verbs.Verb_Shoot.label>
+  
+  <!-- EN: HJ-53 ATGM Launcher -->
+  <CMC_HJXModII_ATGM.label>HJ-53A 单兵导弹发射装置</CMC_HJXModII_ATGM.label>
+  <!-- EN: An individual anti-tank missile launcher, equipped with HJ-53 light ATGM missile.\n\nThis weapon can fire over obstacles, but cannot automatically target enemies outside the operator's line of sight.\n\nThis weapon employs a multiple independently targetable cluster munition payload. Prior to terminal impact, the warhead deploys anti-personnel submunitions equipped with pre-fragmented sleeves, delivering saturation effects against soft targets within its blast radius.\n\nThis heavy weapon system can be disabled in mod settings. However, due to its high production cost, it may not spawn naturally in standard raid events even with generation options enabled. -->
+  <CMC_HJXModII_ATGM.description>改进的导弹发射装置，拥有更长的射程。</CMC_HJXModII_ATGM.description>
+  <!-- EN: barrel -->
+  <CMC_HJXModII_ATGM.tools.barrel.label>炮管</CMC_HJXModII_ATGM.tools.barrel.label>
+  <!-- EN: HJ-53 ATGM Launcher -->
+  <CMC_HJXModII_ATGM.verbs.Verb_Shoot.label>HJ-53A 单兵导弹发射装置</CMC_HJXModII_ATGM.verbs.Verb_Shoot.label>
+  
+</LanguageData>

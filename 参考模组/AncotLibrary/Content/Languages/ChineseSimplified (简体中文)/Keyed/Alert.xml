@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+  <!-- 机械体自主作战的警告 -->
+  <!-- EN: mechnoid auto combat -->
+  <Ancot.Alert_MechAutoFight>机械体正在自主作战</Ancot.Alert_MechAutoFight>
+
+  <!-- EN: These mechnoids are combating autonomously -->
+  <Ancot.Alert_MechAutoFightDescPrefix>这些机械体正在自主作战</Ancot.Alert_MechAutoFightDescPrefix>
+  <!-- EN: They prioritize looking for threats on the map and trying to fight with them. Draft them to gain control. -->
+  <Ancot.Alert_MechAutoFightDesc>它们会优先在地图内寻找威胁并试图将其消灭。征召以获得控制权。</Ancot.Alert_MechAutoFightDesc>
+
+</LanguageData>

@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<RecipeDef>
+    <defName>Milira_MakeSunLightFuel</defName>
+    <label>Make solar fuel x10</label>
+    <description>Produce solar fuel out of sunlight fruit.</description>
+    <jobString>blending solar fuel.</jobString>
+    <effectWorking>Cremate</effectWorking>
+    <soundWorking>Recipe_Cremate</soundWorking>
+    <workAmount>2000</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Chemfuel</li>
+          </thingDefs>
+        </filter>
+        <count>30</count>
+      </li>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>Milira_SunLightFruit</li>
+          </thingDefs>
+        </filter>
+        <count>10</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Chemfuel</li>
+		    <li>Milira_SunLightFruit</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Milira_SunLightFuel>10</Milira_SunLightFuel>
+    </products>
+    <recipeUsers>
+      <li>BiofuelRefinery</li>
+    </recipeUsers>
+    <researchPrerequisite>Milira_SunLightFuelExtract</researchPrerequisite>
+  </RecipeDef>
+
+
+  <RecipeDef>
+    <defName>Milira_PrintSplendidSteel</defName>
+    <label>Print Lustrous Steel x100</label>
+    <description>Print lustrous steel on the Milira Universal Workbench.</description>
+    <jobString>printing lustrous steel.</jobString>
+    <effectWorking>Cremate</effectWorking>
+    <soundWorking>Recipe_Cremate</soundWorking>
+    <workAmount>3600</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>90</count>
+      </li>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>Milira_SunPlateSteel</li>
+          </thingDefs>
+        </filter>
+        <count>10</count>
+      </li>
+    </ingredients>
+    <products>
+      <Milira_SplendidSteel>100</Milira_SplendidSteel>
+    </products>
+	<recipeUsers>
+		<li>Milira_UniversalBench</li>
+	</recipeUsers>
+	<researchPrerequisite>Milira_UniversalPrinter</researchPrerequisite>
+  </RecipeDef>
+
+
+  <RecipeDef>
+    <defName>Milira_PrintFeatherThread</defName>
+    <label>Print Feather Thread x30</label>
+    <description>Print feather threads on the Milira Universal Workbench.</description>
+    <jobString>printing feather threads.</jobString>
+    <effectWorking>Cremate</effectWorking>
+    <soundWorking>Recipe_Cremate</soundWorking>
+    <workAmount>2000</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <ingredients>
+		<li>
+		  <filter>
+			<categories>
+			  <li>Leathers</li>
+			  <li>Textiles</li>
+			  <li>Wools</li>
+			</categories>
+		  </filter>
+		  <count>50</count>
+		</li>
+	  </ingredients>
+	  <fixedIngredientFilter>
+		<categories>
+			<li>Leathers</li>
+			<li>Textiles</li>
+			<li>Wools</li>
+		</categories>
+		<disallowedThingDefs>
+		  <li>Milira_FeatherThread</li>
+		  <li>Leather_Human</li>
+		  <li>Milira_BloodStainedFeather</li>
+		  <li>Milira_Feather</li>
+		</disallowedThingDefs>
+	  </fixedIngredientFilter>
+    <products>
+      <Milira_FeatherThread>30</Milira_FeatherThread>
+    </products>
+	<recipeUsers>
+		<li>Milira_TailoringBench</li>
+	</recipeUsers>
+	<researchPrerequisite>Milira_TailoringBench</researchPrerequisite>
+  </RecipeDef>
+
+
+  <RecipeDef>
+    <defName>Milira_SmeltSunPlateSteel</defName>
+    <label>Smelt Solar-Forged Steel x100</label>
+    <description>Smelt solar-forged steel on the solar furnace.</description>
+    <jobString>smelting solar-forged steel.</jobString>
+    <effectWorking>Milira_SunBlastFurnaceBurning</effectWorking>
+		<soundWorking>MiliraRecipe_SunBlastFurnace</soundWorking>
+    <workAmount>2000</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>150</count>
+      </li>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>Milira_SunLightFuel</li>
+          </thingDefs>
+        </filter>
+        <count>30</count>
+      </li>
+    </ingredients>
+    <products>
+      <Milira_SunPlateSteel>100</Milira_SunPlateSteel>
+    </products>
+	<recipeUsers>
+		<li>Milira_SunBlastFurnace</li>
+	</recipeUsers>
+	<researchPrerequisite>Milira_SunBlastFurnace_Build</researchPrerequisite>
+  </RecipeDef>
+	
+
+  <RecipeDef>
+    <defName>Milira_ExtractMetalFromSlag_SunPlateSteel</defName>
+    <label>smelt metal from slag</label>
+    <description>Use heat and strong electromagnets to extract useful metal from slag chunks.</description>
+    <jobString>Smelting metal from slag.</jobString>
+    <workAmount>600</workAmount>
+    <workSpeedStat>SmeltingSpeed</workSpeedStat>
+    <effectWorking>Smelt</effectWorking>
+    <soundWorking>Recipe_Smelt</soundWorking>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Milira_ChunkSlag_SunPlateSteel</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Milira_ChunkSlag_SunPlateSteel</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Milira_SunPlateSteel>5</Milira_SunPlateSteel>
+      <Milira_SplendidSteel>12</Milira_SplendidSteel>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>Milira_ExtractMetalFromSlag</defName>
+    <label>smelt metal from slag</label>
+    <description>Use heat and strong electromagnets to extract useful metal from slag chunks.</description>
+    <jobString>Smelting metal from slag.</jobString>
+    <workAmount>200</workAmount>
+    <workSpeedStat>SmeltingSpeed</workSpeedStat>
+    <effectWorking>Smelt</effectWorking>
+    <soundWorking>Recipe_Smelt</soundWorking>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ChunkSlagSteel</li>
+            <li>ChunkMechanoidSlag</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <Steel>15</Steel>
+    </products>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>ChunkSlagSteel</li>
+        <li>ChunkMechanoidSlag</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>Milira_ExtractMetalFromSlag_Bulk</defName>
+    <label>smelt metal from slag x3</label>
+    <description>Use heat and strong electromagnets to extract useful metal from slag chunks.</description>
+    <jobString>Smelting metal from slag.</jobString>
+    <workAmount>500</workAmount>
+    <workSpeedStat>SmeltingSpeed</workSpeedStat>
+    <effectWorking>Smelt</effectWorking>
+    <soundWorking>Recipe_Smelt</soundWorking>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ChunkSlagSteel</li>
+            <li>ChunkMechanoidSlag</li>
+          </thingDefs>
+        </filter>
+        <count>3</count>
+      </li>
+    </ingredients>
+    <products>
+      <Steel>45</Steel>
+    </products>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>ChunkSlagSteel</li>
+        <li>ChunkMechanoidSlag</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+  </RecipeDef>
+
+
+</Defs>

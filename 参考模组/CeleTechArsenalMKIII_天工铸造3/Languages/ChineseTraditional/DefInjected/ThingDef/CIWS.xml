@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <CMCcannon_BF.label>“倚天”電磁近防系統</CMCcannon_BF.label>
+  <CMCcannon_BF.description>四聯裝30mm電磁近防系統，可以追蹤高速目標。</CMCcannon_BF.description>
+  <CMCcannon_BF.comps.CompRefuelable.fuelGizmoLabel>炮管耐久</CMCcannon_BF.comps.CompRefuelable.fuelGizmoLabel>
+  <CMCcannon_BF.comps.CompRefuelable.fuelLabel>剩餘射擊次數</CMCcannon_BF.comps.CompRefuelable.fuelLabel>
+  <CMCcannon_BF.comps.CompRefuelable.outOfFuelMessage>需要更換炮管</CMCcannon_BF.comps.CompRefuelable.outOfFuelMessage>
+  
+  <Gun_CMCcannon.label>近防炮</Gun_CMCcannon.label>
+  <Gun_CMCcannon.description>用於防空和壓制步兵大口徑電荷自動機炮。</Gun_CMCcannon.description>
+  <Gun_CMCcannon.verbs.Verb_Shoot.label>電荷彈</Gun_CMCcannon.verbs.Verb_Shoot.label>
+  
+</LanguageData>

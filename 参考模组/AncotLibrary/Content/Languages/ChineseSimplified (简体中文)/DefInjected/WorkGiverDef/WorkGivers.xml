@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: haul drone to charger -->
+  <Ancot_HaulDroneToCharger.label>搬运无人机至充电站</Ancot_HaulDroneToCharger.label>
+  <!-- EN: hauling -->
+  <Ancot_HaulDroneToCharger.gerund>搬运中</Ancot_HaulDroneToCharger.gerund>
+  <!-- EN: haul -->
+  <Ancot_HaulDroneToCharger.verb>搬运</Ancot_HaulDroneToCharger.verb>
+  
+  <!-- EN: haul resource to mech carrier -->
+  <Ancot_HaulToMechCarrier_Custom.label>搬运资源至机械载体</Ancot_HaulToMechCarrier_Custom.label>
+  <!-- EN: hauling to -->
+  <Ancot_HaulToMechCarrier_Custom.gerund>搬运至</Ancot_HaulToMechCarrier_Custom.gerund>
+  <!-- EN: haul to -->
+  <Ancot_HaulToMechCarrier_Custom.verb>搬运至</Ancot_HaulToMechCarrier_Custom.verb>
+  
+  <!-- EN: drill at deep drill -->
+  <Ancot_MechDrill.label>操作深钻井</Ancot_MechDrill.label>
+  <!-- EN: drilling -->
+  <Ancot_MechDrill.gerund>钻探</Ancot_MechDrill.gerund>
+  <!-- EN: drill -->
+  <Ancot_MechDrill.verb>钻探</Ancot_MechDrill.verb>
+  
+  <!-- EN: hunt -->
+  <Ancot_MechMeleeHunt.label>狩猎</Ancot_MechMeleeHunt.label>
+  <!-- EN: hunting -->
+  <Ancot_MechMeleeHunt.gerund>狩猎</Ancot_MechMeleeHunt.gerund>
+  <!-- EN: hunt -->
+  <Ancot_MechMeleeHunt.verb>狩猎</Ancot_MechMeleeHunt.verb>
+  
+  <!-- EN: repair mech -->
+  <Ancot_MechRepairMech.label>维修机械体</Ancot_MechRepairMech.label>
+  <!-- EN: repairing -->
+  <Ancot_MechRepairMech.gerund>维修中</Ancot_MechRepairMech.gerund>
+  <!-- EN: repair -->
+  <Ancot_MechRepairMech.verb>维修</Ancot_MechRepairMech.verb>
+  
+  <!-- EN: repair mech -->
+  <Ancot_RepairDrone.label>维修无人机</Ancot_RepairDrone.label>
+  <!-- EN: repairing -->
+  <Ancot_RepairDrone.gerund>维修中</Ancot_RepairDrone.gerund>
+  <!-- EN: repair -->
+  <Ancot_RepairDrone.verb>维修</Ancot_RepairDrone.verb>
+  
+</LanguageData>

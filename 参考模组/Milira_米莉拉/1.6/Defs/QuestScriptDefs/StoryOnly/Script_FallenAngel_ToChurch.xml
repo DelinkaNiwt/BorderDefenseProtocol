@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <QuestScriptDef>
+    <defName>Milira_FallenAngel_ToChurch</defName>
+    <isRootSpecial>true</isRootSpecial>
+    <expireDaysRange>3~5</expireDaysRange>
+    <defaultChallengeRating>1</defaultChallengeRating>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->The Skyfeather Contact</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+
+        <!-- Asker is faction leader -->
+        <li>questDescription(asker_factionLeader==True)-> [asker_nameDef], [asker_faction_leaderTitle] of [asker_faction_name] has contacted us, claiming a reported warp energy fluctuations of Milira near our location with the interest in learning more about that Milira.  As [asker_nameDef] says, by handing over this Milira to [asker_faction_name], they will provide us abundant supplies in exchange.\n\n By accepting this exchange, a shuttle shall arrive at the colony within two hours to retrieve the Milira.\n\n This quest will elevate the Mirian threat assessment.</li>
+
+      </rulesStrings>
+    </questDescriptionRules>
+
+    <root Class="QuestNode_Sequence">
+      <nodes>
+
+        <!-- 判断剧情设置 -->
+        <li Class="Milira.QuestNode_ModSettingOn">
+          <modSettingSwitch>MiliraRace_ModSetting_StoryOverall</modSettingSwitch>
+        </li>
+        
+        <!-- 获取唯一单位 -->
+        <li Class="Milira.QuestNode_GetPawn_FallenAngel">
+          <storeAs>fallenAngle</storeAs>
+        </li>
+
+        <!-- 获取有特定单位的地图 -->
+        <li Class="QuestNode_GetMapOf">
+          <mapOf>$fallenAngle</mapOf>
+        </li>
+
+        <!-- End if map removed before the quest is accepted -->
+        <li Class="QuestNode_End">
+          <inSignal>map.MapRemoved</inSignal>
+          <outcome>Fail</outcome>
+          <signalListenMode>NotYetAcceptedOnly</signalListenMode>
+        </li>
+
+        <!-- 确定派系为教会并选定首领为任务发起者 -->
+        <li Class="AncotLibrary.QuestNode_GetSpecificFaction">
+          <factionDef>Milira_AngelismChurch</factionDef>
+          <storeFactionAs>askerFaction</storeFactionAs>
+          <storeFactionLeaderAs>asker</storeFactionLeaderAs>
+        </li>
+
+        <!-- 任务唯一性 -->
+        <li Class="QuestNode_QuestUnique">
+          <tag>Milira_FallenAngel_ToChurch</tag>
+          <faction>$askerFaction</faction>
+        </li>
+
+        <!-- 确定奖励量 -->
+        <li Class="QuestNode_Set">
+          <name>rewardValue</name>
+          <value>8000</value>
+        </li>
+
+        <!-- 这里设定了选择的奖励，还需要设置给予奖励的节点 -->
+        <!-- <li Class="Milira.QuestNode_ChurchRewardForFallenAngel">
+        </li> -->
+
+
+        <!-- 这里要定义需要特定的pawn -->
+        <!-- Shuttle -->
+        <li Class="QuestNode_ShuttleDelay">
+          <delayTicks>3500</delayTicks>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_SubScript">
+                <def>Util_TransportShip_Pickup</def>
+                <parms>
+                  <leaveDelayTicks>60000</leaveDelayTicks>
+                  <leaveImmediatelyWhenSatisfied>true</leaveImmediatelyWhenSatisfied>
+                  <requiredPawns>$fallenAngle</requiredPawns>                  <!-- 指定唯一需要的单位 -->
+                  <minAge>0</minAge>
+                </parms>
+              </li>
+
+              <li Class="QuestNode_Letter">
+                <label TKey="LetterLabelShuttleArrived">Shuttle Arrived</label>
+                <text TKey="LetterTextShuttleArrived">The shuttle scheduled to retrieve the Milira has arrived.</text>
+                <lookTargets>$pickupShipThing</lookTargets>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+        <!-- Shuttle destroyed -->
+        <li Class="QuestNode_Signal">
+          <inSignal>pickupShipThing.Destroyed</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label TKey="LetterLabelShuttleDestroyed">Shuttle Destroyed</label>
+                <text TKey="LetterTextShuttleDestroyed">The shuttle scheduled to retrieve the Milira has been destroyed.</text>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+        <!-- Shuttle sent away -->
+        <li Class="QuestNode_Signal">
+          <inSignal>pickupShipThing.SentSatisfied</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Delay">
+                <delayTicks>$(randInt(300,600))</delayTicks>
+                <node Class="QuestNode_Sequence">
+                  <nodes>
+                    <!-- <li Class="QuestNode_GiveRewards">
+                      <parms>
+                        <allowGoodwill>false</allowGoodwill>
+                        <allowRoyalFavor>true</allowRoyalFavor>
+                        <thingRewardRequired>true</thingRewardRequired>
+                        <thingRewardItemsOnly>true</thingRewardItemsOnly>
+                      </parms>
+                    </li> -->
+                    <li Class="Milira.QuestNode_ChurchRewardForFallenAngel">
+                      <letterLabel TKey="letterLabelReward">Quest Completed</letterLabel>
+                      <letterText TKey="letterTextReward">You’ve handed over the Wounded Milira to the Church. Rewards will be sent via drop pod.</letterText>
+                    </li>
+                    <li Class="QuestNode_SendSignals">
+                      <outSignals>QuestEnd</outSignals>
+                    </li>
+                    <li Class="QuestNode_End">
+                      <outcome>Success</outcome>
+                    </li>
+                  </nodes>
+                </node>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+        <li Class="QuestNode_Signal">
+          <inSignal>pickupShipThing.SentUnsatisfied</inSignal>
+          <node Class="QuestNode_End">
+            <outcome>Fail</outcome>
+          </node>
+        </li>
+        
+        <!-- <li Class="AncotLibrary.QuestNode_AddThingToList">
+          <name>thingsToDrop</name>
+          <thing>Apparel_PsychicShockLance</thing>
+        </li>
+
+        <li Class="QuestNode_DropPods">
+          <inSignal>QuestEnd</inSignal>
+          <useTradeDropSpot>true</useTradeDropSpot>
+          <contents>$thingsToDrop</contents>
+        </li> -->
+
+        <!-- 增加米莉拉威胁点并清除存储的pawn信息 -->
+        <li Class="Milira.QuestNode_IncreaseMiliraThreatPoint">
+          <inSignal>QuestEnd</inSignal>
+          <miliraThreatPoint>20</miliraThreatPoint>
+        </li>
+        <li Class="Milira.QuestNode_ClearPawnInGameComponent">
+          <inSignal>QuestEnd</inSignal>
+        </li>
+
+      </nodes>
+    </root>
+  </QuestScriptDef>
+
+</Defs>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: CMC shield generator -->
+  <CMCShieldGenerator.label>“天羅”偏導護盾發生器</CMCShieldGenerator.label>
+  <!-- EN: An advanced shielding device which projects a momentum repulsor field, blocking all incoming projectiles. The device runs on its own reactor which makes it unaffected by solar flares. However, the shield can be disabled by EMP pulse or penetrated by laser. -->
+  <CMCShieldGenerator.description>先進的斥力場偏導護盾發生器，能攔截幾乎所有射彈，但仍能被高速射彈和激光武器穿透。</CMCShieldGenerator.description>
+</LanguageData>

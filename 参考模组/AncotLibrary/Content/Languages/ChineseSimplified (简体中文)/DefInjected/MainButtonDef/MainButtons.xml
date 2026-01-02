@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: drones -->
+  <Ancot_DronesTab.label>无人机</Ancot_DronesTab.label>
+  <!-- EN: View and manage drones in the colony. -->
+  <Ancot_DronesTab.description>查看和管理殖民地的无人机。</Ancot_DronesTab.description>
+  
+</LanguageData>

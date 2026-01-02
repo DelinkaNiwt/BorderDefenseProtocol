@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: PF120 P.E.A.R.L. -->
+  <CMC_RocketLauncher.label>PF120 便携式电磁辅助无后座力炮</CMC_RocketLauncher.label>
+  <!-- EN: A portable EM-assisted recoilless launcher utilizing electromagnetic rail acceleration for extended range compared to conventional models, though incapable of firing over obstacles.\n\nEquipped with multiple independently targetable cluster warheads that deploy anti-personnel submunitions prior to impact, delivering saturation strikes via pre-fragmented matrices against unarmored targets within radius.\n\nThis weapon can be disabled from equipping by non-colonist pawns in mod settings. Due to its significant production cost, it may not spawn naturally in standard raid events even with generation options enabled. -->
+  <CMC_RocketLauncher.description>依靠电磁轨道加速炮弹的无后坐力炮，射程比一般无后坐力炮更远，但是不能翻越障碍物。\n\n该武器配备分导式集束弹头，弹体在命中前会释放多枚高爆反人员子弹药，通过预置破片矩阵对半径内的无防护目标实施饱和打击。\n\n重型武器可在模组设置中禁用生成逻辑，但由于其制造成本，即使启用生成选项，常规袭击事件中仍可能无法自然出现。</CMC_RocketLauncher.description>
+  <!-- EN: barrel -->
+  <CMC_RocketLauncher.tools.barrel.label>炮管</CMC_RocketLauncher.tools.barrel.label>
+  <!-- EN: PF120 P.E.A.R.L. -->
+  <CMC_RocketLauncher.verbs.Verb_Shoot.label>TODO</CMC_RocketLauncher.verbs.Verb_Shoot.label>
+  
+</LanguageData>

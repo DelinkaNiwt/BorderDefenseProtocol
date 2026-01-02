@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 30x114mm Electromagnetic APDS -->
+  <Ammo_CMC_30x114mm_APDS.label>30x114mm 电磁脱穿弹</Ammo_CMC_30x114mm_APDS.label>
+  <!-- EN: TODO -->
+  <Ammo_CMC_30x114mm_APDS.description>大口径电磁加速脱穿弹</Ammo_CMC_30x114mm_APDS.description>
+  
+  <!-- EN: bullet -->
+  <Bullet_CMC_30x114mm_APDS.label>30x114mm 电磁脱穿弹</Bullet_CMC_30x114mm_APDS.label>
+  
+</LanguageData>

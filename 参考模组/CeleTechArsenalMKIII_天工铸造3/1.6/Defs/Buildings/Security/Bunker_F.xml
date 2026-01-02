@@ -1,0 +1,169 @@
+<Defs>
+	<ThingDef ParentName="BuildingBase" MayRequire="Ludeon.RimWorld.Anomaly">
+    <defName>CMC_ReinforcedBunker_Fire</defName>
+    <label>"Xuanwu Abyssal"flame bastion</label>
+	<thingClass>TOT_DLL_test.Building_Bunker</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+	<tickerType>Normal</tickerType>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <description>A subterranean bastion cloaked in neutron-charged plating, impervious to directed energy weapons including plasma cannons. When health drops below 25% or it is one holdfire mode, it descends for repairs - consuming 50 steel and quadruple power every 10 seconds to restore 100 HP. Though its suppressive fire lacks precision, the tortoise-shell armor renders it nigh indestructible against frontal assaults.</description>
+    <uiIconPath>Things/Buildings/CMC_ReinforcedBunker_UI</uiIconPath>
+	<graphicData>
+        <texPath>Things/Buildings/CMC_ReinforcedBunkerBase</texPath>
+        <graphicClass>Graphic_Single</graphicClass>
+        <drawSize>(4.8,4.8)</drawSize>
+    </graphicData>
+	<altitudeLayer>Building</altitudeLayer>
+	<size>(3,3)</size>
+    <statBases>
+	  <MaxHitPoints>10000</MaxHitPoints>
+	  <Flammability>0</Flammability>
+      <ShootingAccuracyTurret>0.87</ShootingAccuracyTurret>
+	  <WorkToBuild>12000</WorkToBuild>
+    </statBases>
+	<killedLeavings>
+      <ChunkSlagSteel>2</ChunkSlagSteel>
+      <Steel>60</Steel>
+    </killedLeavings>
+	<costStuffCount>1200</costStuffCount>
+	<stuffCategories>
+		<li>Metallic</li>
+		<li>Stony</li>
+	</stuffCategories>
+    <costList>
+      <Steel>500</Steel>
+	  <Plasteel>50</Plasteel>
+      <ComponentIndustrial>5</ComponentIndustrial>
+	  <ComponentSpacer>1</ComponentSpacer>
+	  <Uranium>20</Uranium>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Breakdownable"/>
+	  <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>720</basePowerConsumption>
+      </li>
+	  <li Class="CompProperties_Refuelable">
+        <fuelLabel>Shots until barrel change</fuelLabel>
+        <fuelGizmoLabel>Storage</fuelGizmoLabel>
+        <outOfFuelMessage>Needs steel</outOfFuelMessage>
+        <fuelFilter><thingDefs><li>Steel</li></thingDefs></fuelFilter>
+        <fuelCapacity>500</fuelCapacity>
+        <fuelMultiplier>10</fuelMultiplier>
+        <initialFuelPercent>1</initialFuelPercent>
+        <autoRefuelPercent>0.8</autoRefuelPercent>
+        <showFuelGizmo>true</showFuelGizmo>
+        <minimumFueledThreshold>1</minimumFueledThreshold>
+        <factorByDifficulty>true</factorByDifficulty>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelIconPath>UI/Overlays/Barrel</fuelIconPath>
+      </li>
+    </comps>
+	<damageMultipliers>
+	  <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+	  <li>
+        <damageDef>Vaporize</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+    </damageMultipliers>
+    <building>
+      <turretGunDef>Gun_Bunker_Fireblaster</turretGunDef>
+	  <turretTopDrawSize>1.2</turretTopDrawSize>
+      <turretBurstCooldownTime>0.1</turretBurstCooldownTime>
+    </building>
+    <researchPrerequisites>
+	  <li>CMCGunTurretsbasic</li>
+    </researchPrerequisites>
+	<designationCategory>CMC_DefensenProduction</designationCategory>
+	<placeWorkers>
+	  <li>PlaceWorker_BandNode</li>
+    </placeWorkers>
+	<modExtensions>
+      <li Class="TOT_DLL_test.TurretExtension_CMC">
+        <rotationSpeed>5</rotationSpeed>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseWeaponTurret" MayRequire="Ludeon.RimWorld.Anomaly">
+    <defName>Gun_Bunker_Fireblaster</defName>
+    <label>charged heavy machine gun(hidden)</label>
+    <description>An auto charged HMG equipped in the bunker, nightmare for light infantry.</description>
+    <graphicData>
+      <texPath>Things/CMC_Void</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1.8,1.8)</drawSize>
+    </graphicData>
+    <statBases>
+      <AccuracyTouch>0.98</AccuracyTouch>
+      <AccuracyShort>0.62</AccuracyShort>
+      <AccuracyMedium>0.46</AccuracyMedium>
+      <AccuracyLong>0.35</AccuracyLong>
+      <RangedWeapon_Cooldown>0</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>70</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+	        <weaponTags Inherit = "False">
+			<li>Weapon_CMCf</li>
+		</weaponTags>
+    <verbs>
+      <li Class="TOT_DLL_test.VerbProp_Flame">
+        <verbClass>TOT_DLL_test.Verb_PlasmaIncinerator</verbClass>
+		<MotedDef>CMC_Mote_IncineratorBurstWeak</MotedDef>
+        <hasStandardCommand>true</hasStandardCommand>
+        <warmupTime>0.33</warmupTime>
+        <range>21</range>
+        <beamFullWidthRange>7</beamFullWidthRange>
+        <burstShotCount>40</burstShotCount>
+        <showBurstShotStats>false</showBurstShotStats>
+        <requireLineOfSight>true</requireLineOfSight>
+        <beamWidth>4</beamWidth>
+        <ticksBetweenBurstShots>1</ticksBetweenBurstShots>
+        <beamDamageDef>CMC_Vaporize_Plasma</beamDamageDef>
+        <soundCastTail>GunTail_Medium</soundCastTail>
+        <muzzleFlashScale>0</muzzleFlashScale>
+        <soundCastBeam>Flamethrower_Firing</soundCastBeam>
+        <beamGroundFleckDef>Fleck_IncineratorBeamBurn</beamGroundFleckDef>
+        <beamFleckChancePerTick>0.8</beamFleckChancePerTick>
+        <beamMaxDeviation>0.5</beamMaxDeviation>
+        <beamCurvature>0</beamCurvature>
+        <beamEndEffecterDef>IncineratorBeam_End</beamEndEffecterDef> 
+        <beamChanceToStartFire>1</beamChanceToStartFire>
+        <beamFireSizeRange>0.85~0.95</beamFireSizeRange>
+        <beamStartOffset>.5</beamStartOffset>
+        <beamHitsNeighborCells>true</beamHitsNeighborCells>
+        <beamCantHitWithinMinRange>true</beamCantHitWithinMinRange>
+        <beamHitsNeighborCellsRequiresLOS>true</beamHitsNeighborCellsRequiresLOS>
+        <beamSetsGroundOnFire>true</beamSetsGroundOnFire>
+        <ai_BeamIsIncendiary>false</ai_BeamIsIncendiary>
+        <beamLineFleckDef>CMC_PulsingDistortionRing</beamLineFleckDef>
+        <highlightColor>(0, 255, 255)</highlightColor>
+		<secondaryHighlightColor>(255, 255, 255)</secondaryHighlightColor>
+        <beamLineFleckChanceCurve>
+          <points>
+            <li>(0, 0)</li>
+            <li>(0.65, 0.02)</li>
+            <li>(1, .5)</li>
+          </points>
+        </beamLineFleckChanceCurve>
+        <targetParams>
+          <canTargetLocations>true</canTargetLocations>
+        </targetParams>
+        <flammabilityAttachFireChanceCurve>
+          <points>
+            <li>(0.6, 0)</li>
+            <li>(0.7, 0.2)</li>
+            <li>(1.2, 0.8)</li>
+          </points>
+        </flammabilityAttachFireChanceCurve>
+        <rangedFireRulepack>Combat_RangedFlamethrower</rangedFireRulepack>
+      </li>
+    </verbs>
+  </ThingDef>
+</Defs>

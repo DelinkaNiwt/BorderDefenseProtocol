@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN:
+    <li>questDescription->[discoveryMethod] the location of an asteroid orbiting the planet. It contains significant amounts of [resource], and potentially other resources as well.\n\nOrbital miners steer asteroids into orbit so that they can be mined and the ore sold to orbital traders. You do not detect any signs of life from this asteroid.\n\nYou can reach the asteroid with transport pods, shuttles, or a gravship. Equip your colonists with sufficient orbital apparel before departing.</li>
+  -->
+  <Milira_OpportunitySite_Asteroid_SolarCrystal.questDescriptionRules.rulesStrings>
+    <li>questDescription->[discoveryMethod]一颗围绕行星运行的小行星位置。其内含有大量的[resource]，部分岩体受到电磁辐射晶化，可能还有其他资源。\n\n轨道矿工会将小行星引入近地轨道，以便采矿并将矿石售卖给轨道交易商。你没有探测到小行星上的任何生命迹象。\n\n你可以用运输舱、穿梭机或逆重飞船抵达小行星。出发前请为殖民者配备足够的轨道作业防护装备。</li>
+  </Milira_OpportunitySite_Asteroid_SolarCrystal.questDescriptionRules.rulesStrings>
+    
+  <!-- EN:
+    <li>questName->[resource] Asteroid</li>
+  -->
+  <Milira_OpportunitySite_Asteroid_SolarCrystal.questNameRules.rulesStrings>
+    <li>questName->{RESOURCE}小行星</li>
+  </Milira_OpportunitySite_Asteroid_SolarCrystal.questNameRules.rulesStrings>
+  <!-- EN: You have discovered -->
+  <Milira_OpportunitySite_Asteroid_SolarCrystal.root.nodes.IsSet.elseNode.nodes.Set.value.slateRef>你已经发现了</Milira_OpportunitySite_Asteroid_SolarCrystal.root.nodes.IsSet.elseNode.nodes.Set.value.slateRef>
+  
+</LanguageData>

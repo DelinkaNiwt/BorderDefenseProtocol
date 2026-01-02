@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: QBU-31 EM-sniper -->
+  <QBU_TOOE.label>QBU-31“震夔”电磁狙击枪</QBU_TOOE.label>
+  <!-- EN: The first-generation high-precision electromagnetic sniper rifle is renowned for its exceptional bullet accuracy and penetration depth. However, due to technological limitations, the weapon is extraordinarily bulky. -->
+  <QBU_TOOE.description>第一代高精度电磁狙击枪，以其卓越的子弹精度和穿透力而闻名。然而，由于技术限制，这款武器异常笨重。</QBU_TOOE.description>
+  <!-- EN: stock -->
+  <QBU_TOOE.tools.stock.label>枪托</QBU_TOOE.tools.stock.label>
+  <!-- EN: barrel -->
+  <QBU_TOOE.tools.barrel.label>枪管</QBU_TOOE.tools.barrel.label>
+  <!-- EN: QBU-31 EM-sniper -->
+  <QBU_TOOE.verbs.Verb_ShootCE.label>TODO</QBU_TOOE.verbs.Verb_ShootCE.label>
+  
+  <!-- UNUSED -->
+  <QBU_TOOE.verbs.Verb_Shoot.label>电磁狙击弹</QBU_TOOE.verbs.Verb_Shoot.label>
+  
+</LanguageData>

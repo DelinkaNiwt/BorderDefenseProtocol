@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: CMC mood booster -->
+  <CMC_WallTempController.label>I.T.C.V.S.溫控通風系統</CMC_WallTempController.label>
+  <!-- EN: A device that improves everyone's mood nearby. -->
+  <CMC_WallTempController.description>整合量子熵調控核心的第三代太空溫控裝置，透過相變奈米流體在分子層級實現±0.1℃的精密溫控，但當環境溫度超出-100℃~100℃閾值時，核心諧振腔將觸發自毀協議防止連鎖反應。</CMC_WallTempController.description>
+  
+</LanguageData>

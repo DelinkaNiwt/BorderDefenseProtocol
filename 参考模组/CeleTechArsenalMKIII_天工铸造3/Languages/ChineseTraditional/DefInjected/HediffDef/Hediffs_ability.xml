@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: YuHeng chip boost activated -->
+  <CMC_MeleeBuff.label>玉衡晶元過載</CMC_MeleeBuff.label>
+  <!-- EN: the chip is boosting this person's close combat abilities. -->
+  <CMC_MeleeBuff.description>短時間內過載玉衡晶元，大幅提高格鬥能力。</CMC_MeleeBuff.description>
+  
+  <!-- EN: TianShu chip nanite shield activated -->
+  <CMC_NsBuff.label>天樞護盾激活</CMC_NsBuff.label>
+  <!-- EN: the chip forms a shield around the user. -->
+  <CMC_NsBuff.description>納米微械在使用者體表形成一層護盾，持續10秒。</CMC_NsBuff.description>
+  
+  <!-- EN: TianXuan chip boost activated -->
+  <CMC_RangedBuff.label>天璇晶元過載</CMC_RangedBuff.label>
+  <!-- EN: the chip is boosting this person's shooting abilities. -->
+  <CMC_RangedBuff.description>短時間內過載天璇晶元，大幅提高射擊水準。</CMC_RangedBuff.description>
+  
+</LanguageData>

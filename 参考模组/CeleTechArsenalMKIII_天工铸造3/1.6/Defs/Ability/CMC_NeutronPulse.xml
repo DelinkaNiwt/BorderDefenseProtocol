@@ -1,0 +1,60 @@
+<Defs>
+   <AbilityDef>
+    <defName>CMC_NeutronPluse</defName>
+    <label>neutron pulse</label>
+    <description>The weapon releases a deadly pulse of accelerated neutrons.\n\nOnly cause damage to pawns.</description>
+    <iconPath>UI/UI_NPulse</iconPath>
+    <cooldownTicksRange>6000</cooldownTicksRange>
+    <aiCanUse>true</aiCanUse>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <range>7.9</range>
+      <warmupTime>1</warmupTime>
+      <soundCast>ChargeLance_Fire</soundCast>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="TOT_DLL_test.CompProperties_AoEFist">
+	  <compClass>TOT_DLL_test.CompAbilityEffect_AoEFist</compClass>
+        <range>7.9</range>
+        <lineWidthEnd>9</lineWidthEnd>
+		<SpawnFleck>CMC_NeutronBurst</SpawnFleck>
+      </li>
+    </comps>
+  </AbilityDef>
+  
+  <EffecterDef>
+    <defName>CMC_PulseWave</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
+        <positionRadius>0.15</positionRadius>
+        <fleckDef>CMC_SparkFlash_Blue</fleckDef>
+        <chancePerTick>0.9</chancePerTick>
+        <speed>13.5</speed>
+        <scale>2.3~2.7</scale>
+        <angle>-15~15</angle>
+        <positionLerpFactor>0.85</positionLerpFactor>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
+        <positionRadius>0.6</positionRadius>
+        <fleckDef>CMC_SparkFlash</fleckDef>
+        <chancePerTick>0.56</chancePerTick>
+		<scale>1.2~1.4</scale>
+        <positionLerpFactor>0.65</positionLerpFactor>
+      </li>
+	  <li>
+        <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
+        <positionRadius>0.6</positionRadius>
+        <fleckDef>CMC_SparkFlash</fleckDef>
+        <chancePerTick>0.76</chancePerTick>
+		<scale>1.8~1.9</scale>
+        <positionLerpFactor>0.65</positionLerpFactor>
+      </li>
+    </children>
+  </EffecterDef>
+</Defs>

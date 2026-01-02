@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN:
+    <li>questDescription->The Skyfeathered Church has contacted us in wish that we could help to annihilate a nearby team of Milian, offering a commensurable remuneration for us. The coordinates has been marked on our map.</li>
+  -->
+  <Milira_Milian_WorldMap.questDescriptionRules.rulesStrings>
+    <li>questDescription->天羽教会已经联系过我们。他们希望我们能够帮助消灭附近的一队米莉安，为此他们愿意提供相应的回报。这队米莉安的位置已经同步到地图。</li>
+  </Milira_Milian_WorldMap.questDescriptionRules.rulesStrings>
+  <!-- EN:
+    <li>questName->Milian Marching</li>
+  -->
+  <Milira_Milian_WorldMap.questNameRules.rulesStrings>
+    <li>questName->米莉安行军</li>
+  </Milira_Milian_WorldMap.questNameRules.rulesStrings>
+  <!-- EN: Quest Completed -->
+  <Milira_Milian_WorldMap.root.nodes.siteAllEnemiesDefeated.node.nodes.Letter.label.slateRef>任务完成</Milira_Milian_WorldMap.root.nodes.siteAllEnemiesDefeated.node.nodes.Letter.label.slateRef>
+  <!-- EN: You’ve successfully annihilated the Milian team. Rewards have been sent. -->
+  <Milira_Milian_WorldMap.root.nodes.siteAllEnemiesDefeated.node.nodes.Letter.text.slateRef>你已经成功消灭这队米莉安。任务回报已送达。</Milira_Milian_WorldMap.root.nodes.siteAllEnemiesDefeated.node.nodes.Letter.text.slateRef>
+  
+</LanguageData>

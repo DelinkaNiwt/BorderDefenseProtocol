@@ -1,0 +1,104 @@
+<Defs>
+<HediffDef>
+    <defName>CMC_MechBuff</defName>
+    <label>neural boost activated</label>
+    <description>This unit is boosted by neural booster.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.52, 1, 0.95)</defaultLabelColor>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>480</disappearsAfterTicks>
+        <showRemainingTime>false</showRemainingTime>
+      </li>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/>
+      <li Class="HediffCompProperties_Link">
+        <requireLinkOnOtherPawn>false</requireLinkOnOtherPawn>
+      </li>
+    </comps>
+    <stages>
+      <li>
+	    <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>0.30</offset>
+          </li>
+        </capMods>
+		<hungerRateFactorOffset>-0.20</hungerRateFactorOffset>
+        <statFactors>
+          <MoveSpeed>1.5</MoveSpeed>
+        </statFactors>
+      </li>
+    </stages>
+    <isBad>false</isBad>
+  </HediffDef>
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>CMC_AoEbooster</defName>
+    <label>neural booster</label>
+    <description>A remote neural enhancement device. Any friendly units in its effect radius will move and work faster.</description>
+    <tickerType>Normal</tickerType>
+    <drawerType>RealtimeOnly</drawerType>
+    <fillPercent>0.1</fillPercent>
+    <graphicData>
+      <texPath>Things/Buildings/CMC_Booster</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+	<clearBuildingArea>false</clearBuildingArea>
+    <passability>PassThroughOnly</passability>
+	<rotatable>false</rotatable>
+    <building>
+	  <destroySound>BuildingDestroyed_Metal_Medium</destroySound>
+	  <isEdifice>false</isEdifice>
+	  <canBuildNonEdificesUnder>true</canBuildNonEdificesUnder>
+      <ai_chillDestination>false</ai_chillDestination>
+      <buildingTags>
+        <li>BuildingsJoy</li>
+      </buildingTags>
+    </building>
+	<costList>
+      <Steel>40</Steel>
+	  <Plasteel>100</Plasteel>
+      <ComponentIndustrial>10</ComponentIndustrial>
+	  <ComponentSpacer>2</ComponentSpacer>
+	  <Silver>10</Silver>
+	  <Gold>3</Gold>
+    </costList>
+    <constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+    <designationCategory>CMC_DefensenProduction</designationCategory>
+    <uiOrder>2420</uiOrder>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsMisc</li>
+    </thingCategories>
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <WorkToBuild>8000</WorkToBuild>
+      <Mass>25</Mass>
+      <Flammability>0.5</Flammability>
+    </statBases>
+    <size>(1,1)</size>
+    <researchPrerequisites>
+      <li>CMC_BasisHeavy</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>200</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_CauseHediff_AoE">
+        <range>9.9</range>
+        <onlyTargetMechs>False</onlyTargetMechs>
+        <hediff>CMC_MechBuff</hediff>
+        <activeSound>MechBooster_Working</activeSound>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+    </comps>
+    <placeWorkers>
+      <li>PlaceWorker_ShowCauseHediffAoE</li>
+    </placeWorkers>
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+  </ThingDef>
+
+</Defs>

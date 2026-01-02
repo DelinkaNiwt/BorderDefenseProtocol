@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: <color=#FFAA00><i>QBZ-101-XM EM-Rifle</i></color> -->
+  <QBZoneooneXuanMing_Elite.label>&lt;color=#FFAA00>&lt;i>「玄冥」试作型射手步枪Δ&lt;/i>&lt;/color></QBZoneooneXuanMing_Elite.label>
+  <!-- EN: The heavy sniper rifle "Xuanming" is named after the ancient mythical deity of cold and destruction, symbolizing the icy and relentless lethality of its zero-point energy-compressed projectiles. Utilizing vacuum zero-point energy technology to power its ammunition, the rifle also features an integrated intelligent tracking module capable of automatically locking onto and precisely following targets. -->
+  <QBZoneooneXuanMing_Elite.description>“玄冥”是由20mm防空炮改进而来的单兵武器，搭载绝密型号的试验弹药，其发射的逆熵爆破射弹可以在小范围内造成熵减并将目标温度降至绝对零度，使任何装甲转变为玻色-爱因斯坦凝聚态并失去刚性。弹头内置超导环流场解构分子键弱化其结构使后续打击效果更佳。 这把武器内置人格系统，在首次被使用后绑定。\n\n"铸廿毫米镇星铳'玄冥'，由防空巨炮化龙点睛。其逆熵破界弹贯入敌躯时，九幽冥气喷薄，瞬息凝目标于太虚寒境，金汤甲胄化露；后继弹丸借势直捣黄龙，破障效率激增三倍。此铳藏器魂于膛线，初战饮血即认主，枪鸣如夔牛低吼：'冻骨为路，破界为途'"。</QBZoneooneXuanMing_Elite.description>
+  <!-- EN: stock -->
+  <QBZoneooneXuanMing_Elite.tools.stock.label>枪托</QBZoneooneXuanMing_Elite.tools.stock.label>
+  <!-- EN: barrel -->
+  <QBZoneooneXuanMing_Elite.tools.barrel.label>枪管</QBZoneooneXuanMing_Elite.tools.barrel.label>
+  <!-- EN: <color=#FFAA00><i>QBZ-101-XM EM-Rifle</i></color> -->
+  <QBZoneooneXuanMing_Elite.verbs.Verb_ShootCE.label>TODO</QBZoneooneXuanMing_Elite.verbs.Verb_ShootCE.label>
+  
+  <!-- UNUSED -->
+  <QBZoneooneXuanMing_Elite.verbs.Verb_Shoot.label>&lt;color=#FFAA00>&lt;i>「玄冥」试作型射手步枪Δ&lt;/i>&lt;/color></QBZoneooneXuanMing_Elite.verbs.Verb_Shoot.label>
+  
+</LanguageData>

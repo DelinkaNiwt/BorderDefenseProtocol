@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!--设计界面-->
+  <DesignationCategoryDef>
+    <defName>CMC_DefensenProduction</defName>
+    <label>C.M.C.</label>
+    <order>11</order>
+    <specialDesignatorClasses>
+      <li>Designator_Cancel</li>
+      <li>Designator_Deconstruct</li>
+	  <li>TOT_DLL_test.Designator_PaintGun</li>
+    </specialDesignatorClasses>
+  </DesignationCategoryDef>
+</Defs>

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: <color=#FFAA00><i>QMZ-102SL Pulse LMG</i></color> -->
+  <CMC_QiyaoLaserLMG.label>&lt;color=#FFAA00>&lt;i>「七曜」试作型脉冲步枪δ&lt;/i>&lt;/color></CMC_QiyaoLaserLMG.label>
+  <!-- EN: An experimental high-rate-of-fire pulse beam rifle, powered by an unstable zero-point energy storage cell, capable of dealing devastating damage to lightly-armored targets. Due to the instability of the energy excitation, the weapon emits beams with a random spectrum, and the damage fluctuates with the wavelength, thus earning the name 'Mirage Dragon'. Equipped with a psionic scope, it projects target imagery directly into the user's cerebral cortex, analyzing target status in real-time and automatically locking onto the next nearby target after neutralizing the current one. -->
+  <CMC_QiyaoLaserLMG.description>一款试验型高射速脉冲步枪，采用不稳定零点储能管进行充能，能有效对轻甲目标造成毁灭性打击。由于激发能量的不稳定性，武器发射出的光束频谱随机变化。其配备的灵能瞄具能将目标影像直接投射到使用者的大脑皮层，实时分析目标状态，在消灭当前目标后能自动锁定下一个临近目标。</CMC_QiyaoLaserLMG.description>
+  <!-- EN: stock -->
+  <CMC_QiyaoLaserLMG.tools.stock.label>枪托</CMC_QiyaoLaserLMG.tools.stock.label>
+  <!-- EN: barrel -->
+  <CMC_QiyaoLaserLMG.tools.barrel.label>枪管</CMC_QiyaoLaserLMG.tools.barrel.label>
+  <!-- EN: <color=#FFAA00><i>QMZ-102SL Pulse LMG</i></color> -->
+  <CMC_QiyaoLaserLMG.verbs.Verb_ShootSwitchFire.label>TODO</CMC_QiyaoLaserLMG.verbs.Verb_ShootSwitchFire.label>
+  
+</LanguageData>

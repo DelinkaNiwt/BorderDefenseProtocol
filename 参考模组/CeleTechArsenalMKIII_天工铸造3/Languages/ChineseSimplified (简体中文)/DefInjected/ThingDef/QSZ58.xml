@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: QSZ-58 EM pistol -->
+  <CMC_QSZfiveeight.label>QSZ-58电磁手枪</CMC_QSZfiveeight.label>
+  <!-- EN: A compact sidearm firing large-caliber electromagnetic rifle rounds. Limited capacitor capacity and shorter rails significantly reduce effective range and accuracy compared to rifles using identical ammunition, while retaining the round's stopping power.\n\nServes as an emergency backup weapon for heavy firearms. -->
+  <CMC_QSZfiveeight.description>发射大口径电磁步枪弹的紧凑型武器，受限于电容尺寸导致有效射程与精度不如同弹种步枪，但保留了弹道破坏力，适合作为重型火力的应急备用武器。</CMC_QSZfiveeight.description>
+  <!-- EN: grip -->
+  <CMC_QSZfiveeight.tools.grip.label>握把</CMC_QSZfiveeight.tools.grip.label>
+  <!-- EN: barrel -->
+  <CMC_QSZfiveeight.tools.barrel.label>TODO</CMC_QSZfiveeight.tools.barrel.label>
+  <!-- EN: QSZ-58 EM pistol -->
+  <CMC_QSZfiveeight.verbs.Verb_ShootCE.label>TODO</CMC_QSZfiveeight.verbs.Verb_ShootCE.label>
+  
+</LanguageData>

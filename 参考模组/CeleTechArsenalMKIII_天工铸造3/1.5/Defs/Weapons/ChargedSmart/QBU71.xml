@@ -1,0 +1,214 @@
+<Defs>
+    <ThingDef ParentName="TOT_Weapons">
+    <defName>CMC_QBU71S</defName>
+    <label>QBU-71 sniper</label>
+    <description>A smart anti-vehicle sniper firing high-penetration projectiles. Its specially designed hypersonic projectiles are able to penetrate shields.</description>
+    <uiIconPath>Things/Weapons/QBUSO_UI</uiIconPath>
+	<graphicData>
+      <texPath>Things/Weapons/QBUSO</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>(1.7,1.7)</drawSize>
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <generateCommonality>0</generateCommonality>
+    <weaponClasses>
+      <li>RangedHeavy</li>
+	  <li>LongShots</li>
+    </weaponClasses>
+    <weaponTags Inherit="False">
+	  <li>SpacerGun</li>
+	  <li>GunHeavy</li>
+    </weaponTags>
+    <tradeTags>
+      <li>WeaponRanged</li>
+    </tradeTags>
+    <statBases>
+      <WorkToMake>60000</WorkToMake>
+      <Mass>10.6</Mass>
+      <RangedWeapon_Cooldown>3.6</RangedWeapon_Cooldown>
+	  <AccuracyTouch>1</AccuracyTouch>
+      <AccuracyShort>1</AccuracyShort>
+      <AccuracyMedium>1</AccuracyMedium>
+      <AccuracyLong>1</AccuracyLong>
+    </statBases>
+	<equippedStatOffsets>
+      <MoveSpeed>-0.8</MoveSpeed>
+	  <RangedWeapon_DamageMultiplier>0.1</RangedWeapon_DamageMultiplier>
+    </equippedStatOffsets>
+    <costList>
+      <Steel>115</Steel>
+	  <Plasteel>82</Plasteel>
+      <ComponentIndustrial>4</ComponentIndustrial>
+	  <ComponentSpacer>6</ComponentSpacer>
+	  <Chemfuel>20</Chemfuel>
+	  <Gold>2</Gold>
+    </costList>
+    <recipeMaker>
+      <skillRequirements>
+        <Crafting>9</Crafting>
+      </skillRequirements>
+      <researchPrerequisites>
+		<li>CMC_EMweaponTech_IV</li>
+		<li>CMC_Heavy_I</li>
+	  </researchPrerequisites>
+      <displayPriority>510</displayPriority>
+    </recipeMaker>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+		<burstShotCount>1</burstShotCount>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_QBUsixsix_Smart</defaultProjectile>
+        <warmupTime>2.76</warmupTime>
+        <range>500</range>
+        <soundCast>SSii</soundCast>
+		<soundCastTail>GunTail_Medium</soundCastTail>
+        <muzzleFlashScale>19</muzzleFlashScale>
+      </li>
+    </verbs>
+	<comps>
+	  <li Class="TOT_DLL_test.CompProperties_ColorSaver"></li>
+    </comps>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>13</power>
+        <cooldownTime>2</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>14</power>
+        <cooldownTime>2</cooldownTime>
+      </li>
+    </tools>
+  </ThingDef>
+  
+	<ThingDef ParentName="TOT_Weapons">
+    <defName>QBU71_QS</defName>
+    <label>&lt;color=#5BC4E2&gt;&lt;i&gt;QBU-71J:Nine Tails&lt;/i&gt;&lt;/color&gt;</label>
+    <description>An intelligent less-lethal sniper rifle with integrated biometric tracking. Projectiles load nanoscale electroshock fibers and sedative aerosol, deploying nine guidance filaments through rifling-induced spin. Induces neuronal hyperpolarization within 3 seconds of impact for precise 15-minute paralysis. Recoil mitigation system enables surgical non-lethal interventions at 1.2km range.\n\nDesigned for spec-ops policing, this weapon can penetrate bulletproof glass while maintaining non-lethal efficacy. Its signature spiral etchings - nine helical grooves radiating from impact points - serve as forensic markers.</description>
+    <uiIconPath>Things/Weapons/QBUSO_wraith_UI</uiIconPath>
+	<graphicData>
+      <texPath>Things/Weapons/QBUSO_wraith</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>(1.7,1.7)</drawSize>
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <generateCommonality>0</generateCommonality>
+    <weaponClasses>
+      <li>RangedHeavy</li>
+	  <li>LongShots</li>
+    </weaponClasses>
+    <weaponTags Inherit="False">
+	  <li>SpacerGun</li>
+    </weaponTags>
+    <tradeTags>
+      <li>WeaponRanged</li>
+    </tradeTags>
+    <statBases>
+      <WorkToMake>60000</WorkToMake>
+      <Mass>8.4</Mass>
+      <RangedWeapon_Cooldown>6.5</RangedWeapon_Cooldown>
+	  <AccuracyTouch>1</AccuracyTouch>
+      <AccuracyShort>1</AccuracyShort>
+      <AccuracyMedium>1</AccuracyMedium>
+      <AccuracyLong>1</AccuracyLong>
+    </statBases>
+    <costList>
+      <Steel>25</Steel>
+	  <Plasteel>180</Plasteel>
+      <ComponentIndustrial>13</ComponentIndustrial>
+	  <ComponentSpacer>8</ComponentSpacer>
+	  <Chemfuel>30</Chemfuel>
+	  <Gold>5</Gold>
+    </costList>
+    <recipeMaker>
+      <skillRequirements>
+        <Crafting>11</Crafting>
+      </skillRequirements>
+      <researchPrerequisite>CMC_EMweaponTech_IV</researchPrerequisite>
+      <displayPriority>510</displayPriority>
+	  <recipeUsers Inherit="False">
+		<li>FabricationBench</li>
+	  </recipeUsers>
+    </recipeMaker>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+		<burstShotCount>1</burstShotCount>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_QS_ATB</defaultProjectile>
+        <warmupTime>5.2</warmupTime>
+        <range>500</range>
+        <soundCast>SSii</soundCast>
+		<soundCastTail>GunTail_Medium</soundCastTail>
+        <muzzleFlashScale>9</muzzleFlashScale>
+      </li>
+    </verbs>
+	<comps>
+	  <li Class="TOT_DLL_test.CompProperties_ColorSaver"></li>
+    </comps>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>13</power>
+        <cooldownTime>2</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>14</power>
+        <cooldownTime>2</cooldownTime>
+      </li>
+    </tools>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_QS_ATB</defName>
+    <label>sniper bullet</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_AssaultRifle_gold</texPath>
+	  <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(1, 1)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_PoiBullet</thingClass>
+    <projectile>
+	  <damageDef>CMC_ATB</damageDef>
+      <damageAmountBase>5</damageAmountBase>
+      <armorPenetrationBase>2</armorPenetrationBase>
+      <speed>50</speed>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_QS_Lethal</defName>
+    <label>sniper bullet</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_AssaultRifle_gold</texPath>
+	  <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(1, 1)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_PoiBullet</thingClass>
+    <projectile>
+	  <damageDef>CMC_LethalBullet</damageDef>
+      <damageAmountBase>5</damageAmountBase>
+      <armorPenetrationBase>2</armorPenetrationBase>
+      <speed>50</speed>
+    </projectile>
+  </ThingDef>
+</Defs>

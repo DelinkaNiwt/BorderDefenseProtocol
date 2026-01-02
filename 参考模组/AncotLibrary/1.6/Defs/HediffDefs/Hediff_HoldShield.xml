@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <HediffDef>
+    <defName>Ancot_HoldShield_Small</defName>
+    <label>holding small shield</label>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <maxSeverity>1</maxSeverity>
+    <initialSeverity>1</initialSeverity>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(220, 220, 220)</defaultLabelColor>
+    <description>this pawn is holding a small shield.</description>
+    <comps>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/>
+      <li Class="HediffCompProperties_RemoveIfApparelDropped"/>
+    </comps>
+    <stages>
+      <li>
+        <capMods>
+        </capMods>
+        <statFactors>
+          <MoveSpeed>0.9</MoveSpeed>
+          <MeleeDamageFactor>0.8</MeleeDamageFactor>
+          <MeleeDodgeChance>0.6</MeleeDodgeChance>
+          <StaggerDurationFactor>0.9</StaggerDurationFactor>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>Ancot_HoldShield_Medium</defName>
+    <label>holding medium shield</label>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <maxSeverity>1</maxSeverity>
+    <initialSeverity>1</initialSeverity>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(220, 220, 220)</defaultLabelColor>
+    <description>this pawn is holding a medium shield.</description>
+    <comps>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/>
+      <li Class="HediffCompProperties_RemoveIfApparelDropped"/>
+      <!-- <li Class="HediffCompProperties_VerbGiver">
+        <tools>
+          <li>
+            <label>shield bash</label>
+            <capacities>
+              <li>Blunt</li>
+            </capacities>
+            <power>24</power>
+            <armorPenetration>0.2</armorPenetration>
+            <cooldownTime>2.6</cooldownTime>
+            <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+            <extraMeleeDamages>
+              <li>
+                <def>Stun</def>
+                <amount>2</amount>
+                <chance>0.3</chance>
+              </li>
+            </extraMeleeDamages>
+          </li>
+        </tools>
+      </li> -->
+    </comps>
+    <stages>
+      <li>
+        <capMods>
+        </capMods>
+        <statFactors>
+          <MoveSpeed>0.6</MoveSpeed>
+          <MeleeDamageFactor>0.6</MeleeDamageFactor>
+          <MeleeDodgeChance>0.4</MeleeDodgeChance>
+          <StaggerDurationFactor>0.5</StaggerDurationFactor>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>Ancot_HoldShield_Large</defName>
+    <label>holding large shield</label>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <maxSeverity>1</maxSeverity>
+    <initialSeverity>1</initialSeverity>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(220, 220, 220)</defaultLabelColor>
+    <description>this pawn is holding a large shield.</description>
+    <comps>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/>
+      <li Class="HediffCompProperties_RemoveIfApparelDropped"/>
+    </comps>
+    <stages>
+      <li>
+        <capMods>
+        </capMods>
+        <statFactors>
+          <MoveSpeed>0.4</MoveSpeed>
+          <MeleeHitChance>0.6</MeleeHitChance>
+          <MeleeDamageFactor>0.3</MeleeDamageFactor>
+          <MeleeDodgeChance>0</MeleeDodgeChance>
+          <StaggerDurationFactor>0</StaggerDurationFactor>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>Ancot_HoldShield_Mechanoid</defName>
+    <label>holding shield</label>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <maxSeverity>1</maxSeverity>
+    <initialSeverity>1</initialSeverity>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(190, 190, 190)</defaultLabelColor>
+    <description>this pawn is holding a shield.</description>
+    <comps>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/>
+      <li Class="HediffCompProperties_RemoveIfApparelDropped"/>
+    </comps>
+    <stages>
+      <li>
+        <capMods>
+        </capMods>
+        <statFactors>
+          <MoveSpeed>0.6</MoveSpeed>
+          <MeleeDamageFactor>0.6</MeleeDamageFactor>
+          <MeleeDodgeChance>0.4</MeleeDodgeChance>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+
+
+</Defs>

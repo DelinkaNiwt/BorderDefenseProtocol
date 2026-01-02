@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <TipSetDef>
+    <defName>MiliraTips</defName>
+    <tips>
+      <li TKey="Milira_Race">Milira: sky elves, ancient creatures that soar in the sky.</li>
+      <li TKey="Milira_Cradol">Cradol: the sky city of Mirila, floating among the clouds.</li>
+      <li TKey="Milira_Church">Skyfeather Church: A group of believers who worship sky elves as their lord, seemingly breaking with their lord after an incident.</li>
+      <li TKey="Milira_ChurchQuest">After reaching a certain position in the skyfeather church, one may be able to participate in the church's military operations.</li>
+      <li TKey="Milira_SunBlastFurnace">Saids that when the sunblast furnace is in use, the light emitted can be seen from kilometers away.</li>
+      <li TKey="Milira_Milian">Milian is operated and maintained without waste. Clean energy!</li>
+      <li TKey="Milira_Feather">Milira moults every year. The lost feathers can be used to sew clothes, and the texture is quite good.</li>
+      <li TKey="Milira_KnightCharge">Use a barricade to stop knight milian charge, or trip it up!</li>
+      <li TKey="Milira_MilianEMP">Perhaps due to the peculiarities of the energy supply and drive circuit, milian is completely immune to EMP interference.</li>
+      <li TKey="Milira_MilianEquipment">Milian can only wear the right type of equipment.</li>
+      <li TKey="Milira_MilianEquipmentRepair">The mechanitor were also able to maintain Milian's armor while repairing.</li>
+      <li TKey="Milira_ThreatPoint">Milira Threat Assessment: Represents how dangerous the colony is in milira's eyes. As rating increases, milira will gradually increase the intensity of attacks. Actions such as damaging milira's facilities and completing church missions will increase the rating.</li>
+      <li TKey="Milira_InformationLetter">The church dossiers may provide important clues. Try collecting and reading it!</li>
+      <li TKey="Milira_MilianDisassembly">Disassembling milian will return the body materials and the equipments.</li>
+      <li TKey="Milira_MiliraStory">The story of milira requires the involvement of both the Milira faction and the Skyfeather Church faction.</li>
+    </tips>
+  </TipSetDef>
+  
+</Defs>

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 制作4x20mm MTS-R x500 -->
+  <MakeAmmo_CMC_4x20mmsmartAmmo_Regular.label>TODO</MakeAmmo_CMC_4x20mmsmartAmmo_Regular.label>
+  <!-- EN: 制作500枚4x20mm MTS-R。 -->
+  <MakeAmmo_CMC_4x20mmsmartAmmo_Regular.description>TODO</MakeAmmo_CMC_4x20mmsmartAmmo_Regular.description>
+  <!-- EN: 正在制作4x20mm MTS-R。 -->
+  <MakeAmmo_CMC_4x20mmsmartAmmo_Regular.jobString>TODO</MakeAmmo_CMC_4x20mmsmartAmmo_Regular.jobString>
+  
+</LanguageData>

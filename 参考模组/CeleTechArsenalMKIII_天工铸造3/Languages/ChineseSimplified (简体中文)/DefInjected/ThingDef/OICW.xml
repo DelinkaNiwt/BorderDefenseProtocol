@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: QTS-17 OICW -->
+  <QBZ71_QS.label>QTS-17 单兵综合作战武器</QBZ71_QS.label>
+  <!-- EN: An individual weapon system that accomodates a grenade launcher, a large-caliber assault rifle and an advanced balistic computer. -->
+  <QBZ71_QS.description>单兵作战武器系统，集成了单发榴弹和大口径电磁步枪。</QBZ71_QS.description>
+  <!-- EN: switch between rifle and grenade launcher -->
+  <QBZ71_QS.comps.CompSecondaryAmmo.description>TODO</QBZ71_QS.comps.CompSecondaryAmmo.description>
+  <!-- EN: use rifle -->
+  <QBZ71_QS.comps.CompSecondaryAmmo.mainWeaponLabel>TODO</QBZ71_QS.comps.CompSecondaryAmmo.mainWeaponLabel>
+  <!-- EN: use grenade launcher -->
+  <QBZ71_QS.comps.CompSecondaryAmmo.secondaryWeaponLabel>TODO</QBZ71_QS.comps.CompSecondaryAmmo.secondaryWeaponLabel>
+  <!-- EN: stock -->
+  <QBZ71_QS.tools.stock.label>枪托</QBZ71_QS.tools.stock.label>
+  <!-- EN: barrel -->
+  <QBZ71_QS.tools.barrel.label>枪管</QBZ71_QS.tools.barrel.label>
+  <!-- EN: QTS-17 OICW -->
+  <QBZ71_QS.verbs.Verb_ShootCE.label>TODO</QBZ71_QS.verbs.Verb_ShootCE.label>
+  
+  <!-- UNUSED -->
+  <QBZ71_QS.comps.CompSecondaryVerb_Rework.description>在步枪和榴弹发射器间切换</QBZ71_QS.comps.CompSecondaryVerb_Rework.description>
+  <QBZ71_QS.comps.CompSecondaryVerb_Rework.mainWeaponLabel>使用步枪</QBZ71_QS.comps.CompSecondaryVerb_Rework.mainWeaponLabel>
+  <QBZ71_QS.comps.CompSecondaryVerb_Rework.secondaryWeaponLabel>使用榴弹发射器</QBZ71_QS.comps.CompSecondaryVerb_Rework.secondaryWeaponLabel>
+  <QBZ71_QS.verbs.Verb_Shoot.label>QTS-7单兵综合作战武器</QBZ71_QS.verbs.Verb_Shoot.label>
+  
+  <!-- EN: QTS-19 OICW -->
+  <QTS9_OICW.label>QTS-19 先进单兵综合作战武器</QTS9_OICW.label>
+  <!-- EN: An individual weapon system that accomodates a grenade launcher, a large-caliber assault rifle and an advanced balistic computer. -->
+  <QTS9_OICW.description>先进的单兵作战武器系统，集成了弹匣电磁榴弹发射器和大口径电磁步枪，在远距离作战极为有效。</QTS9_OICW.description>
+  <!-- EN: switch between rifle and grenade launcher -->
+  <QTS9_OICW.comps.CompSecondaryAmmo.description>TODO</QTS9_OICW.comps.CompSecondaryAmmo.description>
+  <!-- EN: use rifle -->
+  <QTS9_OICW.comps.CompSecondaryAmmo.mainWeaponLabel>TODO</QTS9_OICW.comps.CompSecondaryAmmo.mainWeaponLabel>
+  <!-- EN: use grenade launcher -->
+  <QTS9_OICW.comps.CompSecondaryAmmo.secondaryWeaponLabel>TODO</QTS9_OICW.comps.CompSecondaryAmmo.secondaryWeaponLabel>
+  <!-- EN: stock -->
+  <QTS9_OICW.tools.stock.label>枪托</QTS9_OICW.tools.stock.label>
+  <!-- EN: barrel -->
+  <QTS9_OICW.tools.barrel.label>枪管</QTS9_OICW.tools.barrel.label>
+  <!-- EN: QTS-19 OICW -->
+  <QTS9_OICW.verbs.Verb_ShootCE.label>TODO</QTS9_OICW.verbs.Verb_ShootCE.label>
+  
+  <!-- UNUSED -->
+  <QTS9_OICW.comps.CompSecondaryVerb_Rework.description>在步枪和榴弹发射器间切换</QTS9_OICW.comps.CompSecondaryVerb_Rework.description>
+  <QTS9_OICW.comps.CompSecondaryVerb_Rework.mainWeaponLabel>使用步枪</QTS9_OICW.comps.CompSecondaryVerb_Rework.mainWeaponLabel>
+  <QTS9_OICW.comps.CompSecondaryVerb_Rework.secondaryWeaponLabel>使用榴弹发射器</QTS9_OICW.comps.CompSecondaryVerb_Rework.secondaryWeaponLabel>
+  <QTS9_OICW.verbs.Verb_Shoot.label>QTS-9单兵综合作战武器</QTS9_OICW.verbs.Verb_Shoot.label>
+  
+</LanguageData>

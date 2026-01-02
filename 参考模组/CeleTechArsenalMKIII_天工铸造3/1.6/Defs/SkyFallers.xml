@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	
+	<ThingDef Abstract="True" Name="CMC_TSBuildingBase">
+		<category>Building</category>
+		<thingClass>Building</thingClass>
+		<soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+		<selectable>true</selectable>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+		<repairEffect>Repair</repairEffect>
+		<leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+		<filthLeaving>Filth_RubbleBuilding</filthLeaving>
+		<statBases>
+		  <SellPriceFactor>0.70</SellPriceFactor>
+		</statBases>
+		<blockWind>true</blockWind>
+		<passability>Impassable</passability>
+	</ThingDef>
+	
+	
+	<ThingDef Abstract="True" Name="CMC_TSSkyfaller">
+		<category>Ethereal</category>
+		<useHitPoints>false</useHitPoints>
+		<thingClass>TOT_DLL_test.Skyfaller_TSShip</thingClass>
+		<drawOffscreen>true</drawOffscreen>
+		<tickerType>Normal</tickerType>
+		<altitudeLayer>Skyfaller</altitudeLayer>
+		<drawerType>RealtimeOnly</drawerType>
+		<size>(5,5)</size>
+		<graphicData>
+		  <texPath>Things/Skyfaller/TradeShuttle_Skyfaller</texPath>
+		  <graphicClass>Graphic_Single</graphicClass>
+		  <drawSize>5</drawSize>
+		  <drawOffset>(0,0,0.6)</drawOffset>
+		</graphicData>
+		<skyfaller>
+		  <movementType>Decelerate</movementType>
+		  <!--shadow>Things/Skyfaller/TradeShadow</shadow>
+		  <shadowSize>(6.5,2.5)</shadowSize-->
+		  <motesPerCell>1</motesPerCell>
+		</skyfaller>
+	  </ThingDef>
+	  
+	<!--Material UTS-->
+  <ThingDef ParentName="CMC_TSBuildingBase">
+    <defName>CMC_TraderShuttle</defName>
+    <description>A trade shuttle.</description>
+    <label>trader ship</label>
+    <graphicData>
+      <texPath>Things/Skyfaller/TradeShuttle</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>5</drawSize>
+      <shadowData>
+        <volume>(4.1, 1.0, 1.8)</volume>
+        <offset>(0, 0, -0.1)</offset>
+      </shadowData>
+	  <drawOffset>(0,0,0.6)</drawOffset>
+    </graphicData>
+    <uiIconPath>Things/Skyfaller/TradeShuttle</uiIconPath>
+    <statBases>
+      <MaxHitPoints>4000</MaxHitPoints>
+      <Flammability>1</Flammability>
+    </statBases>
+    <killedLeavings>
+      <Steel>100</Steel>
+      <Plasteel>200</Plasteel>
+      <ComponentIndustrial>12</ComponentIndustrial>
+      <ComponentSpacer>4</ComponentSpacer>
+    </killedLeavings>
+    <altitudeLayer>Building</altitudeLayer>
+    <fillPercent>1.0</fillPercent>
+    <tickerType>Normal</tickerType>
+    <size>(5,5)</size>
+    <rotatable>false</rotatable>
+    <comps>
+      <li Class="TOT_DLL_test.CompProperties_TraderShuttle">
+        <landAnimation>CMCTS_ShipIncoming</landAnimation>
+        <takeoffAnimation>CMCTS_ShipLeaving</takeoffAnimation>
+        <soundThud>CMC_SoundThud</soundThud>
+      </li>
+    </comps>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+    <building>
+      <claimable>false</claimable>
+    </building>
+  </ThingDef>
+
+  <ThingDef ParentName="CMC_TSSkyfaller">
+    <defName>CMCTS_ShipIncoming</defName>
+    <label>trader ship (incoming)</label>
+    <skyfaller>
+	  <shadow/>
+      <anticipationSound>CMC_ShipsSoundLanding</anticipationSound>
+      <anticipationSoundTicks>360</anticipationSoundTicks>
+      <ticksToImpactRange>360</ticksToImpactRange>
+      			<angleCurve>
+				<points>
+					<li>(0,-60)</li>
+					<li>(1,-90)</li>
+				</points>
+			</angleCurve>
+			<rotationCurve>
+				<points>
+					<li>(0,-30)</li>
+					<li>(0.5,-5)</li>
+					<li>(0.9,-5)</li>
+					<li>(0.95,0)</li>
+				</points>
+			</rotationCurve>
+			<zPositionCurve>
+				<points>
+					<li>(0.95,2.5)</li>
+					<li>(1,0)</li>
+				</points>
+			</zPositionCurve>
+			<speedCurve>
+				<points>
+					<li>(0,1)</li>
+					<li>(0.95,0.1)</li>
+				</points>
+			</speedCurve>
+
+    </skyfaller>
+  </ThingDef>
+
+  <ThingDef ParentName="CMC_TSSkyfaller">
+    <defName>CMCTS_ShipLeaving</defName>
+    <label>trader ship (leaving)</label>
+    <skyfaller>
+	  <shadow/>
+      <movementType>Accelerate</movementType>
+      <reversed>true</reversed>
+      <anticipationSound>CMC_ShipsSoundTakeoff</anticipationSound>
+	  <anticipationSoundTicks>-150</anticipationSoundTicks>
+	  <ticksToImpactRange>-150~-150</ticksToImpactRange>
+      <moteSpawnTime>0.05</moteSpawnTime>
+			<angleCurve>
+				<points>
+					<li>(0,90)</li>
+					<li>(0.5,70)</li>
+				</points>
+			</angleCurve>
+			<rotationCurve>
+				<points>
+					<li>(0,0)</li>
+					<li>(0.15,10)</li>
+					<li>(0.5,-20)</li>
+				</points>
+			</rotationCurve>
+			<zPositionCurve>
+				<points>
+					<li>(0,0)</li>
+					<li>(0.08,2)</li>
+				</points>
+			</zPositionCurve>
+			<speedCurve>
+				<points>
+					<li>(0,0.2)</li>
+					<li>(1,1.4)</li>
+				</points>
+			</speedCurve>
+    </skyfaller>
+  </ThingDef>
+  
+  <!--Arsenal UTS-->
+	<ThingDef Abstract="True" Name="CMC_TSSkyfaller_A">
+		<category>Ethereal</category>
+		<useHitPoints>false</useHitPoints>
+		<thingClass>TOT_DLL_test.Skyfaller_TSShip</thingClass>
+		<drawOffscreen>true</drawOffscreen>
+		<tickerType>Normal</tickerType>
+		<altitudeLayer>Skyfaller</altitudeLayer>
+		<drawerType>RealtimeOnly</drawerType>
+		<size>(5,5)</size>
+		<graphicData>
+		  <texPath>Things/Skyfaller/TradeShuttle_A_Skyfaller</texPath>
+		  <graphicClass>Graphic_Single</graphicClass>
+		  <drawSize>5</drawSize>
+		  <drawOffset>(0,0,0.6)</drawOffset>
+		</graphicData>
+		<skyfaller>
+		  <movementType>Decelerate</movementType>
+		  <motesPerCell>1</motesPerCell>
+		</skyfaller>
+	  </ThingDef>
+
+  <ThingDef ParentName="CMC_TSBuildingBase">
+    <defName>CMC_TraderShuttle_A</defName>
+    <description>A trade shuttle.</description>
+    <label>trader ship</label>
+    <graphicData>
+      <texPath>Things/Skyfaller/TradeShuttle_A</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>5</drawSize>
+      <shadowData>
+        <volume>(4.1, 1.0, 1.8)</volume>
+        <offset>(0, 0, -0.1)</offset>
+      </shadowData>
+	  <drawOffset>(0,0,0.6)</drawOffset>
+    </graphicData>
+    <uiIconPath>Things/Skyfaller/TradeShuttle</uiIconPath>
+    <statBases>
+      <MaxHitPoints>4000</MaxHitPoints>
+      <Flammability>1</Flammability>
+    </statBases>
+    <killedLeavings>
+      <Steel>100</Steel>
+      <Plasteel>200</Plasteel>
+      <ComponentIndustrial>12</ComponentIndustrial>
+      <ComponentSpacer>4</ComponentSpacer>
+    </killedLeavings>
+    <altitudeLayer>Building</altitudeLayer>
+    <fillPercent>1.0</fillPercent>
+    <tickerType>Normal</tickerType>
+    <size>(5,5)</size>
+    <rotatable>false</rotatable>
+    <comps>
+      <li Class="TOT_DLL_test.CompProperties_TraderShuttle">
+        <landAnimation>CMCTS_ShipIncoming_A</landAnimation>
+        <takeoffAnimation>CMCTS_ShipLeaving_A</takeoffAnimation>
+        <soundThud>CMC_SoundThud</soundThud>
+      </li>
+    </comps>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+    <building>
+      <claimable>false</claimable>
+    </building>
+  </ThingDef>
+
+  <ThingDef ParentName="CMC_TSSkyfaller_A">
+    <defName>CMCTS_ShipIncoming_A</defName>
+    <label>trader ship (incoming)</label>
+    <skyfaller>
+	  <movementType>Decelerate</movementType>
+      <anticipationSound>CMC_ShipsSoundLanding</anticipationSound>
+      <anticipationSoundTicks>360</anticipationSoundTicks>
+      <ticksToImpactRange>360</ticksToImpactRange>
+      			<angleCurve>
+				<points>
+					<li>(0,-60)</li>
+					<li>(1,-90)</li>
+				</points>
+			</angleCurve>
+			<rotationCurve>
+				<points>
+					<li>(0,-30)</li>
+					<li>(0.5,-5)</li>
+					<li>(0.9,-5)</li>
+					<li>(0.95,0)</li>
+				</points>
+			</rotationCurve>
+			<zPositionCurve>
+				<points>
+					<li>(0.95,2.5)</li>
+					<li>(1,0)</li>
+				</points>
+			</zPositionCurve>
+			<speedCurve>
+				<points>
+					<li>(0,1)</li>
+					<li>(0.95,0.1)</li>
+				</points>
+			</speedCurve>
+
+    </skyfaller>
+  </ThingDef>
+
+  <ThingDef ParentName="CMC_TSSkyfaller_A">
+    <defName>CMCTS_ShipLeaving_A</defName>
+    <label>trader ship (leaving)</label>
+    <skyfaller>
+      <movementType>Accelerate</movementType>
+      <reversed>true</reversed>
+      <anticipationSound>CMC_ShipsSoundTakeoff</anticipationSound>
+	  <anticipationSoundTicks>-150</anticipationSoundTicks>
+	  <ticksToImpactRange>-150~-150</ticksToImpactRange>
+      <moteSpawnTime>0.05</moteSpawnTime>
+			<angleCurve>
+				<points>
+					<li>(0,90)</li>
+					<li>(0.5,70)</li>
+				</points>
+			</angleCurve>
+			<rotationCurve>
+				<points>
+					<li>(0,0)</li>
+					<li>(0.15,10)</li>
+					<li>(0.5,-20)</li>
+				</points>
+			</rotationCurve>
+			<zPositionCurve>
+				<points>
+					<li>(0,0)</li>
+					<li>(0.08,2)</li>
+				</points>
+			</zPositionCurve>
+			<speedCurve>
+				<points>
+					<li>(0,0.2)</li>
+					<li>(1,1.4)</li>
+				</points>
+			</speedCurve>
+    </skyfaller>
+  </ThingDef>
+  
+  <!--Slave UTS-->
+	<ThingDef Abstract="True" Name="CMC_TSSkyfaller_S">
+		<category>Ethereal</category>
+		<useHitPoints>false</useHitPoints>
+		<thingClass>TOT_DLL_test.Skyfaller_TSShip</thingClass>
+		<drawOffscreen>true</drawOffscreen>
+		<tickerType>Normal</tickerType>
+		<altitudeLayer>Skyfaller</altitudeLayer>
+		<drawerType>RealtimeOnly</drawerType>
+		<size>(5,5)</size>
+		<graphicData>
+		  <texPath>Things/Skyfaller/TradeShuttle_S_Skyfaller</texPath>
+		  <graphicClass>Graphic_Single</graphicClass>
+		  <drawSize>5</drawSize>
+		  <drawOffset>(0,0,0.6)</drawOffset>
+		</graphicData>
+		<skyfaller>
+		  <movementType>Decelerate</movementType>
+		  <motesPerCell>1</motesPerCell>
+		</skyfaller>
+	  </ThingDef>
+
+  <ThingDef ParentName="CMC_TSBuildingBase">
+    <defName>CMC_TraderShuttle_S</defName>
+    <description>A trade shuttle.</description>
+    <label>trader ship</label>
+    <graphicData>
+      <texPath>Things/Skyfaller/TradeShuttle_S</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>5</drawSize>
+      <shadowData>
+        <volume>(4.1, 1.0, 1.8)</volume>
+        <offset>(0, 0, -0.1)</offset>
+      </shadowData>
+	  <drawOffset>(0,0,0.6)</drawOffset>
+    </graphicData>
+    <uiIconPath>Things/Skyfaller/TradeShuttle</uiIconPath>
+    <statBases>
+      <MaxHitPoints>4000</MaxHitPoints>
+      <Flammability>1</Flammability>
+    </statBases>
+    <killedLeavings>
+      <Steel>100</Steel>
+      <Plasteel>200</Plasteel>
+      <ComponentIndustrial>12</ComponentIndustrial>
+      <ComponentSpacer>4</ComponentSpacer>
+    </killedLeavings>
+    <altitudeLayer>Building</altitudeLayer>
+    <fillPercent>1.0</fillPercent>
+    <tickerType>Normal</tickerType>
+    <size>(5,5)</size>
+    <rotatable>false</rotatable>
+    <comps>
+      <li Class="TOT_DLL_test.CompProperties_TraderShuttle">
+        <landAnimation>CMCTS_ShipIncoming_S</landAnimation>
+        <takeoffAnimation>CMCTS_ShipLeaving_S</takeoffAnimation>
+        <soundThud>CMC_SoundThud</soundThud>
+      </li>
+    </comps>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+    <building>
+      <claimable>false</claimable>
+    </building>
+  </ThingDef>
+
+  <ThingDef ParentName="CMC_TSSkyfaller_S">
+    <defName>CMCTS_ShipIncoming_S</defName>
+    <label>trader ship (incoming)</label>
+    <skyfaller>
+	  <movementType>Decelerate</movementType>
+      <anticipationSound>CMC_ShipsSoundLanding</anticipationSound>
+      <anticipationSoundTicks>360</anticipationSoundTicks>
+      <ticksToImpactRange>360</ticksToImpactRange>
+      			<angleCurve>
+				<points>
+					<li>(0,-60)</li>
+					<li>(1,-90)</li>
+				</points>
+			</angleCurve>
+			<rotationCurve>
+				<points>
+					<li>(0,-30)</li>
+					<li>(0.5,-5)</li>
+					<li>(0.9,-5)</li>
+					<li>(0.95,0)</li>
+				</points>
+			</rotationCurve>
+			<zPositionCurve>
+				<points>
+					<li>(0.95,2.5)</li>
+					<li>(1,0)</li>
+				</points>
+			</zPositionCurve>
+			<speedCurve>
+				<points>
+					<li>(0,1)</li>
+					<li>(0.95,0.1)</li>
+				</points>
+			</speedCurve>
+
+    </skyfaller>
+  </ThingDef>
+
+  <ThingDef ParentName="CMC_TSSkyfaller_S">
+    <defName>CMCTS_ShipLeaving_S</defName>
+    <label>trader ship (leaving)</label>
+    <skyfaller>
+      <movementType>Accelerate</movementType>
+      <reversed>true</reversed>
+      <anticipationSound>CMC_ShipsSoundTakeoff</anticipationSound>
+	  <anticipationSoundTicks>-150</anticipationSoundTicks>
+	  <ticksToImpactRange>-150~-150</ticksToImpactRange>
+      <moteSpawnTime>0.05</moteSpawnTime>
+			<angleCurve>
+				<points>
+					<li>(0,90)</li>
+					<li>(0.5,70)</li>
+				</points>
+			</angleCurve>
+			<rotationCurve>
+				<points>
+					<li>(0,0)</li>
+					<li>(0.15,10)</li>
+					<li>(0.5,-20)</li>
+				</points>
+			</rotationCurve>
+			<zPositionCurve>
+				<points>
+					<li>(0,0)</li>
+					<li>(0.08,2)</li>
+				</points>
+			</zPositionCurve>
+			<speedCurve>
+				<points>
+					<li>(0,0.2)</li>
+					<li>(1,1.4)</li>
+				</points>
+			</speedCurve>
+    </skyfaller>
+  </ThingDef>
+
+</Defs>

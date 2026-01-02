@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="MoteBase">
+    <defName>Milira_Mote_GiantExplosionInner</defName>
+    <graphicData>
+      <texPath>Things/Mote/PowerBeam</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <drawOffscreen>true</drawOffscreen>
+    <mote>
+      <fadeInTime>0.01</fadeInTime>
+      <solidTime>0</solidTime>
+      <fadeOutTime>1.2</fadeOutTime>
+      <growthRate>175</growthRate>
+    </mote>
+  </ThingDef>
+  
+  
+  <!-- 探测激活器 -->
+  <ThingDef ParentName="MoteBase">
+    <defName>Milira_Mote_ProximityScannerRadius</defName>
+    <mote>
+      <fadeInTime>0.1</fadeInTime>
+      <solidTime>999999999</solidTime>
+      <fadeOutTime>0.8</fadeOutTime>
+      <needsMaintenance>True</needsMaintenance>
+    </mote>
+    <drawOffscreen>true</drawOffscreen>
+    <graphicData>
+      <texPath>Things/Mote/ActivatorProximityRadius</texPath>
+      <shaderType>MoteProximityScannerRadius</shaderType>
+      <color>(0.98,0.98,0.82,0.15)</color>
+      <drawSize>30</drawSize>
+      <shaderParameters>
+        <_smokeScrollSpeed>0.1</_smokeScrollSpeed>
+        <_rotationSpeed>0.08</_rotationSpeed>
+        <_smokeAmount>0.3</_smokeAmount>
+        <_MainTex>/Things/Mote/ActivatorProximityRadius</_MainTex>
+        <_ScanTex>/Things/Mote/ActivatorProximityScanning</_ScanTex>
+        <_SmokeTex>/Things/Mote/SmokeTiled</_SmokeTex>
+      </shaderParameters>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <defName>Milira_Mote_ProximityScannerActivated</defName>
+    <graphicData>
+      <graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
+      <texPath>Things/Mote/BrightFlash</texPath>
+      <color>(0.98,0.98,0.82,0.5)</color>
+      <shaderType>MoteGlowPulse</shaderType>
+      <shaderParameters>
+        <_Interval>0.04</_Interval>
+      </shaderParameters>
+      <drawSize>4</drawSize>
+    </graphicData>
+    <thingClass>MoteThrownAttached</thingClass>
+    <altitudeLayer>MetaOverlays</altitudeLayer>
+    <mote>
+      <fadeInTime>0.25</fadeInTime>
+      <solidTime>1.32</solidTime>
+      <fadeOutTime>0.5</fadeOutTime>
+      <growthRate>2.0</growthRate>
+    </mote>
+  </ThingDef>
+  
+  <ThingDef ParentName="MoteBase">
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <defName>Milira_Mote_ActivatorProximityGlow</defName>
+    <mote>
+      <fadeInTime>0.1</fadeInTime>
+      <solidTime>999999999</solidTime>
+      <fadeOutTime>0.5</fadeOutTime>
+      <needsMaintenance>True</needsMaintenance>
+    </mote>
+    <graphicData>
+      <drawSize>1.1</drawSize>
+      <drawOffset>(0,0,0.65)</drawOffset>
+      <color>(255,255,255,150)</color>
+      <texPath>Things/Mote/BrightFlash</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+  </ThingDef>
+
+
+
+  <!-- 粒子狙瞄准 -->
+  <ThingDef ParentName="MoteBase">
+    <defName>Milira_Mote_SniperTarget</defName>
+    <thingClass>MoteAttached</thingClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <drawOffscreen>true</drawOffscreen>
+    <mote>
+      <fadeInTime>0.5</fadeInTime>
+      <fadeOutTime>0.2</fadeOutTime>
+      <solidTime>99999</solidTime>
+      <!-- <growthRate>-0.08</growthRate> -->
+      <collide>true</collide>
+      <needsMaintenance>True</needsMaintenance>
+      <fadeOutUnmaintained>True</fadeOutUnmaintained>
+    </mote>
+    <graphicData>
+      <texPath>Milira/Effect/SniperTarget</texPath>
+      <graphicClass>Graphic_Mote</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(2.0, 2.0)</drawSize>
+      <shaderParameters>
+        <_brightnessMultiplier>1.2</_brightnessMultiplier>
+      </shaderParameters>
+    </graphicData>
+  </ThingDef>
+
+  <!-- 投枪蓄力 -->
+  <ThingDef ParentName="MoteBase">
+    <defName>Milira_Mote_Spear_Charge</defName>
+    <thingClass>MoteAttached</thingClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.65</fadeInTime>
+      <fadeOutTime>0.3</fadeOutTime>
+      <solidTime>999999</solidTime>
+      <growthRate>0.08</growthRate>
+      <needsMaintenance>True</needsMaintenance>
+    </mote>
+    <graphicData>
+      <texPath>Milira/Effect/Spear_Effect</texPath>
+      <graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
+      <drawSize>8.0</drawSize>
+      <drawOffset>(0,0,0.1)</drawOffset>
+      <shaderType>MoteGlow</shaderType>
+      <!-- <shaderParameters>
+        <_RandomTex>/Milira/Effect/Spear_Effect</_RandomTex>
+        <_FlickerFrequency>0.45</_FlickerFrequency>
+        <_FlickerAmount>10.6</_FlickerAmount>
+        <_InnerCircleIntensity>0.1</_InnerCircleIntensity>
+        <_InnerCircleSize>0.4</_InnerCircleSize>
+        <_InnerCircleShimmerAmount>0.14</_InnerCircleShimmerAmount>
+      </shaderParameters> -->
+    </graphicData>
+  </ThingDef>
+
+  <!-- 弓箭蓄力 -->
+  <ThingDef ParentName="MoteBase">
+    <defName>Milira_Mote_Bow_Charge</defName>
+    <thingClass>MoteAttached</thingClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.65</fadeInTime>
+      <fadeOutTime>0.3</fadeOutTime>
+      <solidTime>999999</solidTime>
+      <growthRate>0.08</growthRate>
+      <!-- <needsMaintenance>True</needsMaintenance> -->
+      <!-- <rotateTowardsMoveDirection>true</rotateTowardsMoveDirection> -->
+    </mote>
+    <graphicData>
+      <texPath>Milira/Effect/Bow_Effect</texPath>
+      <graphicClass>Graphic_Mote</graphicClass>
+      <drawSize>8.0</drawSize>
+      <drawOffset>(0,0,0.1)</drawOffset>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <defName>Milira_Mote_Bow_Fire</defName>
+    <graphicData>
+      <texPath>Milira/Effect/Bow_Fire</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>16.0</drawSize>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <drawOffscreen>true</drawOffscreen>
+    <mote>
+      <fadeInTime>0.01</fadeInTime>
+      <solidTime>4</solidTime>
+      <fadeOutTime>1.2</fadeOutTime>
+    </mote>
+  </ThingDef>
+
+  <!-- 无畏冲锋 -->
+  <ThingDef ParentName="MoteBase">
+    <defName>Milira_Mote_RookCharge</defName>
+    <graphicData>
+      <texPath>Milira/Effect/RookShield_Effect</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>4.0</drawSize>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <drawOffscreen>true</drawOffscreen>
+    <mote>
+      <fadeInTime>0</fadeInTime>
+      <solidTime>0.01</solidTime>
+      <fadeOutTime>0.02</fadeOutTime>
+      <!-- <collide>true</collide> -->
+      <!-- <needsMaintenance>true</needsMaintenance> -->
+      <!-- <rotateTowardsMoveDirection>true</rotateTowardsMoveDirection> -->
+    </mote>
+  </ThingDef>
+
+
+</Defs>

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<PawnKindDef ParentName="RoyalBase">
+		<defName>Milira_Church_Pope</defName>
+		<label>Pontiff</label>
+		<factionLeader>true</factionLeader>
+		<titleRequired>Milira_ChurchTitleVIII</titleRequired>
+		<combatPower>135</combatPower>
+		<apparelMoney>9999</apparelMoney>
+		<specificApparelRequirements>
+			<li>
+				<bodyPartGroup>UpperHead</bodyPartGroup>
+				<requiredTag>RoyalTier7</requiredTag>
+				<stuff>Gold</stuff>
+			</li>
+			<li>
+				<bodyPartGroup>Torso</bodyPartGroup>
+				<apparelLayer>Shell</apparelLayer>
+				<requiredTag>RoyalTier6</requiredTag>
+				<color>(128, 0, 32)</color>
+			</li>
+			<li>
+				<bodyPartGroup>Torso</bodyPartGroup>
+				<apparelLayer>Middle</apparelLayer>
+				<requiredTag>RoyalTier5</requiredTag>
+				<color>(95, 20, 133)</color>
+			</li>
+			<li>
+				<bodyPartGroup>Torso</bodyPartGroup>
+				<apparelLayer>OnSkin</apparelLayer>
+				<requiredTag>RoyalTier2</requiredTag>
+				<color>(95, 20, 133)</color>
+			</li>
+			<li>
+				<bodyPartGroup>Torso</bodyPartGroup>
+				<stuff>Hyperweave</stuff>
+			</li>
+			<li>
+				<bodyPartGroup>Legs</bodyPartGroup>
+				<stuff>Hyperweave</stuff>
+			</li>
+		</specificApparelRequirements>
+		<techHediffsChance>1</techHediffsChance>
+		<techHediffsMoney>3000~4000</techHediffsMoney>
+		<techHediffsMaxAmount>3</techHediffsMaxAmount>
+		<initialWillRange>16~19</initialWillRange>
+		<initialResistanceRange>38~58</initialResistanceRange>
+		<useFactionXenotypes>false</useFactionXenotypes>
+		<xenotypeSet>
+			<xenotypeChances>
+				<Neanderthal MayRequire="Ludeon.RimWorld.Biotech">0.05</Neanderthal>
+				<Hussar MayRequire="Ludeon.RimWorld.Biotech">0.05</Hussar>
+				<Genie MayRequire="Ludeon.RimWorld.Biotech">0.05</Genie>
+				<Sanguophage MayRequire="Ludeon.RimWorld.Biotech">0.25</Sanguophage>
+			</xenotypeChances>
+		</xenotypeSet>
+	</PawnKindDef>
+
+
+	<!-- 教团军 -->
+	<!-- <PawnKindDef Name="Milira_Church_ImperialFighterBase" Abstract="True">
+    <race>Human</race>
+    <defaultFactionType>Milira_AngelismChurch</defaultFactionType>
+    <maxGenerationAge>55</maxGenerationAge>
+    <minGenerationAge>25</minGenerationAge>
+    <backstoryCryptosleepCommonality>0.08</backstoryCryptosleepCommonality>
+    <backstoryFiltersOverride>
+      <li>
+        <categories>
+          <li>ImperialFighter</li>
+        </categories>
+      </li>
+    </backstoryFiltersOverride>
+    <styleItemTags>
+      <li>
+        <tag>Soldier</tag>
+        <baseWeight>1</baseWeight>
+        <weightFactor>1</weightFactor>
+      </li>
+    </styleItemTags>
+    <chemicalAddictionChance>0.1</chemicalAddictionChance>
+    <combatEnhancingDrugsChance>0.15</combatEnhancingDrugsChance>
+    <combatEnhancingDrugsCount>0~2</combatEnhancingDrugsCount>
+    <invNutrition>2.55</invNutrition>
+    <itemQuality>Normal</itemQuality>
+    <weaponMoney>1100~2500</weaponMoney>
+    <apparelAllowHeadgearChance>0.5</apparelAllowHeadgearChance>
+    <apparelMoney>1250~2500</apparelMoney>
+    <apparelTags>
+      <li>IndustrialBasic</li>
+      <li>IndustrialAdvanced</li>
+      <li>IndustrialMilitaryBasic</li>
+      <li>IndustrialMilitaryAdvanced</li>
+    </apparelTags>
+    <apparelDisallowTags>
+      <li>Western</li>
+    </apparelDisallowTags>
+    <specificApparelRequirements>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <stuff>Cloth</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>Legs</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <stuff>Cloth</stuff>
+      </li>
+    </specificApparelRequirements>
+    <techHediffsChance>0.3</techHediffsChance>
+    <techHediffsMoney>1000~1500</techHediffsMoney>
+    <techHediffsRequired>
+      <li>DeathAcidifier</li>
+    </techHediffsRequired>
+    <biocodeWeaponChance>0.15</biocodeWeaponChance>
+    <disallowedTraits>
+      <li>BodyPurist</li>
+    </disallowedTraits>
+  </PawnKindDef>
+
+
+	<PawnKindDef Name="Milira_Church_CataphractBase" Abstract="True" ParentName="Milira_Church_ImperialFighterBase">
+    <maxGenerationAge>40</maxGenerationAge>
+    <apparelMoney>7000~10000</apparelMoney>
+    <techHediffsMoney>1000~4000</techHediffsMoney>
+    <techHediffsMaxAmount>4</techHediffsMaxAmount>
+    <allowRoyalRoomRequirements>False</allowRoyalRoomRequirements>
+  </PawnKindDef> -->
+
+	<!-- 教堂甲胄骑士 -->
+	<!-- <PawnKindDef ParentName="Milira_Church_CataphractBase">
+    <defName>Milira_Church_Cataphract</defName>
+    <label>church cataphract</label>
+    <royalTitleChance>0.1</royalTitleChance>
+    <titleSelectOne>
+      <li>Milira_ChurchTitleII</li>
+      <li>Milira_ChurchTitleIII</li>
+    </titleSelectOne>
+    <combatPower>150</combatPower>
+    <weaponTags>
+      <li>GunHeavy</li>
+      <li>SpacerGun</li>
+    </weaponTags>
+    <apparelColor>(250,250,250)</apparelColor>
+    <apparelRequired>
+      <li>Apparel_ArmorHelmetCataphract</li>
+      <li>Apparel_ArmorCataphract</li>
+    </apparelRequired>
+    <specificApparelRequirements Inherit="False">
+      <li>
+        <bodyPartGroup>UpperHead</bodyPartGroup>
+        <alternateTagChoices>
+          <li>
+            <tag>Gunlink</tag>
+            <chance>0.2</chance>
+          </li>
+        </alternateTagChoices>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <stuff>Synthread</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>Legs</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <stuff>Synthread</stuff>
+      </li>
+    </specificApparelRequirements>
+    <techHediffsTags>
+      <li>Advanced</li>
+      <li>ImplantEmpireCommon</li>
+    </techHediffsTags>
+    <techHediffsRequired>
+      <li>ArmorskinGland</li>
+    </techHediffsRequired>
+    <skills>
+      <li>
+        <skill>Shooting</skill>
+        <range>8~12</range>
+      </li>
+    </skills>
+    <disallowedTraits>
+      <li>Brawler</li>
+    </disallowedTraits>
+    <initialWillRange>4~6</initialWillRange>
+    <initialResistanceRange>17~26</initialResistanceRange>
+    <useFactionXenotypes>false</useFactionXenotypes>
+    <xenotypeSet>
+      <xenotypeChances>
+        <Neanderthal MayRequire="Ludeon.RimWorld.Biotech">0.03</Neanderthal>
+        <Hussar MayRequire="Ludeon.RimWorld.Biotech">0.4</Hussar>
+        <Genie MayRequire="Ludeon.RimWorld.Biotech">0.03</Genie>
+      </xenotypeChances>
+    </xenotypeSet>
+  </PawnKindDef> -->
+
+</Defs>

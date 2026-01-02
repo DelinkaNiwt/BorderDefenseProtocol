@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <CMC_FCradar.label>“太行”火控雷達</CMC_FCradar.label>
+  <CMC_FCradar.description>雙面有源相控陣雷達，能為周圍的炮塔提供數據鏈支持，大幅提高其射擊精度。\n\n鏈接後部分自動炮塔解鎖手動瞄準功能。</CMC_FCradar.description>
+  
+  <CMC_CICAESA_Radar.label>“昆侖”雷達陣列</CMC_CICAESA_Radar.label>
+  <CMC_CICAESA_Radar.description>巨大的相控陣雷達陣列，能乾擾敵人對基地的精確定位，同時引導我方導彈對空和對地攻擊。\n\n建造後解鎖全圖導彈武器自動開火，同時防止中心空投。</CMC_CICAESA_Radar.description>
+  
+</LanguageData>

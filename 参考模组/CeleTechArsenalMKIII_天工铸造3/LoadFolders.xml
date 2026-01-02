@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<loadFolders>
+    <v1.5>
+		<li IfModActive="MYDE.AerocraftFramework">1.5/Aerocraft_Addon</li>
+		<li IfModActive="IssacZhuang.MuzzleFlash">1.5/MuzzleDef_Extra</li>
+		<li>1.5</li>
+		<li>/</li>
+    </v1.5>
+	<v1.6>
+		<li IfModActive="CETeam.CombatExtended">1.6/CombatExtended</li>
+		<li IfModActive="IssacZhuang.MuzzleFlash">1.6/MuzzleDef_Extra</li>
+		<li>1.6</li>
+		<li>/</li>
+    </v1.6>
+</loadFolders>

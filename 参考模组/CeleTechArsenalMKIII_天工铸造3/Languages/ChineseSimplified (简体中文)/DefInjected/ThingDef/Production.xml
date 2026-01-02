@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: CMC facbrication bench -->
+  <CMC_FacBench.label>熔铸加工平台</CMC_FacBench.label>
+  <!-- EN: A multifunctional intelligent heavy-duty machine tools capable of manufacturing large components and missiles. -->
+  <CMC_FacBench.description>工业级重型锻造设备，整合高温等离子熔炉与三维成型技术，用于铸造导弹推进舱、复合装甲板等大型军用构件。</CMC_FacBench.description>
+  
+  <!-- EN: CMC workbench -->
+  <CMC_TableMachining.label>纳米数控平台</CMC_TableMachining.label>
+  <!-- EN: A multifunctional intelligent CNC machine tools capable of manufacturing and processing precision weapon components. -->
+  <CMC_TableMachining.description>模块化智能数控机床，采用纳米级定位系统和自适应加工算法，可生产微型传感器、复合陶瓷枪管等精密武器组件。</CMC_TableMachining.description>
+  
+  <!-- EN: CMC cabinet -->
+  <CMCCabinet.label>TODO</CMCCabinet.label>
+  <!-- EN: . -->
+  <CMCCabinet.description>TODO</CMCCabinet.description>
+  
+</LanguageData>

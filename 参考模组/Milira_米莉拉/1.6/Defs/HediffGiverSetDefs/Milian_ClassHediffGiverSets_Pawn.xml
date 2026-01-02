@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 士兵-完成 -->
+  <!-- <HediffGiverSetDef>
+    <defName>Milian_ClassHediffInitial_Pawn</defName>
+    <hediffGivers>
+      <li Class="HediffGiver_Birthday">
+        <hediff>Milian_ClassHediff_Pawn</hediff>
+        <ageFractionChanceCurve>
+          <points>
+            <li>(0, 1.0)</li>
+          </points>
+        </ageFractionChanceCurve>
+        <partsToAffect>
+          <li>Milian_Brain</li>
+        </partsToAffect>
+        <averageSeverityPerDayBeforeGeneration>1</averageSeverityPerDayBeforeGeneration>
+      </li>
+    </hediffGivers>
+  </HediffGiverSetDef> -->
+
+  <HediffGiverSetDef>
+    <defName>Milian_ClassHediffMaintain_Pawn</defName>
+    <hediffGivers>
+      <li Class="AncotLibrary.HediffGiver_KeepHediff">
+        <hediff>Milian_ClassHediff_Pawn</hediff>
+        <severityAmount>0.1</severityAmount>
+        <mtbHours>1</mtbHours>
+        <partsToAffect>
+          <li>Milian_Brain</li>
+        </partsToAffect>
+      </li>
+    </hediffGivers>
+  </HediffGiverSetDef>
+
+  <HediffGiverSetDef>
+    <defName>Milian_HediffInitial_FloatUnit</defName>
+    <hediffGivers>
+      <li Class="HediffGiver_Birthday">
+        <hediff>Milian_FloatUnit</hediff>
+        <ageFractionChanceCurve>
+          <points>
+            <li>(0, 1.0)</li>
+          </points>
+        </ageFractionChanceCurve>
+        <!-- <partsToAffect>
+          <li>Milian_Brain</li>
+        </partsToAffect> -->
+        <averageSeverityPerDayBeforeGeneration>1</averageSeverityPerDayBeforeGeneration>
+      </li>
+    </hediffGivers>
+  </HediffGiverSetDef>
+
+
+
+</Defs>

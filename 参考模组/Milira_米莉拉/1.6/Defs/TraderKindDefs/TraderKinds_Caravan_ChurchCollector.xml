@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <TraderKindDef>
+    <defName>Milira_Church_Caravan_TributeCollector</defName>
+    <label>Church Tribute Collector</label>
+    <requestable>true</requestable>
+    <commonality>1</commonality>
+    <tradeCurrency>Favor</tradeCurrency>
+    <faction>Milira_AngelismChurch</faction>
+    <hideThingsNotWillingToTrade>True</hideThingsNotWillingToTrade>
+    <stockGenerators>
+      <!-- Buying -->
+      <li Class="StockGenerator_BuySlaves" />
+      <!-- <li Class="StockGenerator_BuySingleDef">
+        <thingDef>Milira_SolarCrystalDruse</thingDef>
+      </li> -->
+      <li Class="StockGenerator_BuySingleDef">
+        <thingDef>Milian_NamePlate_King</thingDef>
+      </li>
+      <li Class="StockGenerator_BuySingleDef">
+        <thingDef>Milian_NamePlate_Queen</thingDef>
+      </li>
+      <li Class="StockGenerator_BuySingleDef">
+        <thingDef>Milian_NamePlate_Bishop</thingDef>
+      </li>
+      <li Class="StockGenerator_BuySingleDef">
+        <thingDef>Milian_NamePlate_Knight</thingDef>
+      </li>
+      <li Class="StockGenerator_BuySingleDef">
+        <thingDef>Milian_NamePlate_Rook</thingDef>
+      </li>
+      <li Class="StockGenerator_BuySingleDef">
+        <thingDef>Milian_NamePlate_Pawn</thingDef>
+      </li>
+      <li Class="StockGenerator_BuySingleDef">
+        <thingDef>Milira_BloodStainedFeather</thingDef>
+      </li>
+      <li Class="StockGenerator_BuySingleDef">
+        <thingDef>Milira_Feather</thingDef>
+      </li>
+    </stockGenerators>
+  </TraderKindDef>
+
+</Defs>

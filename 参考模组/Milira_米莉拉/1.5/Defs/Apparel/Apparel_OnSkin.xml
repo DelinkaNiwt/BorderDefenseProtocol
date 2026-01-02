@@ -1,0 +1,799 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThingDef Name="Milira_OnSkinBase" ParentName="Milira_ApparelBase" Abstract="True">
+		<statBases>
+			<Mass>0.8</Mass>
+			<EquipDelay>1.6</EquipDelay>
+		</statBases>
+		<apparel>
+			<layers>
+				<li>OnSkin</li>
+			</layers>
+			<tags>
+				<li>Milira_OnSkin</li>
+			</tags>
+		</apparel>
+		<thingCategories>
+			<li>Milira_Apparel_OnSkin</li>
+		</thingCategories>
+	</ThingDef>
+
+	<ThingDef Name="Milira_OnSkinBaseI" ParentName="Milira_OnSkinBase" Abstract="True">
+		<recipeMaker>
+			<researchPrerequisite>Milira_Apparel_I</researchPrerequisite>
+			<recipeUsers>
+				<li>Milira_UniversalBench</li>
+			</recipeUsers>
+		</recipeMaker>
+	</ThingDef>
+
+	<ThingDef Name="Milira_OnSkinBaseII" ParentName="Milira_OnSkinBase" Abstract="True">
+		<recipeMaker>
+			<researchPrerequisite>Milira_Apparel_II</researchPrerequisite>
+			<recipeUsers>
+				<li>Milira_UniversalBench</li>
+			</recipeUsers>
+		</recipeMaker>
+	</ThingDef>
+
+	<!-- 太阳熔炉清单（盔甲） -->
+	<ThingDef Name="Milira_OnSkinBase_Furnace" ParentName="Milira_OnSkinBase" Abstract="True">
+		<techLevel>Spacer</techLevel>
+		<recipeMaker>
+			<effectWorking>Milira_SunBlastFurnaceBurning</effectWorking>
+			<soundWorking>MiliraRecipe_SunBlastFurnace</soundWorking>
+			<recipeUsers>
+				<li>Milira_SunBlastFurnace</li>
+			</recipeUsers>
+		</recipeMaker>
+		<apparel>
+			<developmentalStageFilter>Child, Adult</developmentalStageFilter>
+			<wearPerDay>0</wearPerDay>
+			<bodyPartGroups>
+				<li>Torso</li>
+				<li>Legs</li>
+				<li>Arms</li>
+				<li>Neck</li>
+				<li>Shoulders</li>
+				<li>Feet</li>
+				<li>Hands</li>
+				<li>Milira_Wings</li>
+			</bodyPartGroups>
+			<layers>
+				<li>Shell</li>
+			</layers>
+			<drawData>
+				<dataNorth>
+					<layer>40</layer>
+				</dataNorth>
+			</drawData>
+		</apparel>
+	</ThingDef>
+
+
+	<!--1级衣服====================================================================================================-->
+
+	<ThingDef Name="Milira_TraditionalDress" ParentName="Milira_OnSkinBaseI" Abstract="true">
+		<description>The traditional clothing of the Sky Elves. Long ago, almost every Milira wore similar attire, which was once very popular. Today, with the diversification of clothing choices, it is no longer in vogue. However, it is still favored by some for its convenience and the fact that it does not hinder movement.</description>
+		<costStuffCount>80</costStuffCount>
+		<stuffCategories>
+			<li>Leathery</li>
+			<li>Fabric</li>
+		</stuffCategories>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToMake>9000</WorkToMake>
+			<ArmorRating_Sharp>0.20</ArmorRating_Sharp>
+			<StuffEffectMultiplierArmor>0.05</StuffEffectMultiplierArmor>
+			<StuffEffectMultiplierInsulation_Cold>0.4</StuffEffectMultiplierInsulation_Cold>
+			<StuffEffectMultiplierInsulation_Heat>0.6</StuffEffectMultiplierInsulation_Heat>
+			<Insulation_Cold>10</Insulation_Cold>
+			<Insulation_Heat>10</Insulation_Heat>
+		</statBases>
+		<apparel>
+			<useWornGraphicMask>true</useWornGraphicMask>
+			<developmentalStageFilter>Child, Adult</developmentalStageFilter>
+			<bodyPartGroups>
+				<li>Torso</li>
+				<li>Legs</li>
+			</bodyPartGroups>
+			<tags>
+				<li>Milira_DailyWear</li>
+				<li>Milira_Daily</li>
+			</tags>
+			<layers>
+				<li>Shell</li>
+			</layers>
+			<drawData>
+				<dataNorth>
+					<layer>40</layer>
+				</dataNorth>
+			</drawData>
+		</apparel>
+		<recipeMaker>
+			<recipeUsers>
+				<li>ElectricTailoringBench</li>
+				<li>HandTailoringBench</li>
+			</recipeUsers>
+		</recipeMaker>
+	</ThingDef>
+
+	<ThingDef ParentName="Milira_TraditionalDress">
+		<defName>Milira_BasicDressI</defName>
+		<label>Milira traditional attire (Style 1)</label>
+		<graphicData>
+			<texPath>Milira/Apparel/Onskin/BasicDress/BasicDress</texPath>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<apparel>
+			<wornGraphicPath>Milira/Apparel/Onskin/BasicDress/BasicDress</wornGraphicPath>
+		</apparel>
+	</ThingDef>
+
+	<ThingDef ParentName="Milira_TraditionalDress">
+		<defName>Milira_BasicDressII</defName>
+		<label>Milira traditional attire (Style 2)</label>
+		<graphicData>
+			<texPath>Milira/Apparel/Onskin/BasicDressII/BasicDressII</texPath>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<apparel>
+			<wornGraphicPath>Milira/Apparel/Onskin/BasicDressII/BasicDressII</wornGraphicPath>
+		</apparel>
+	</ThingDef>
+
+	<ThingDef ParentName="Milira_TraditionalDress">
+		<defName>Milira_BasicDressIII</defName>
+		<label>Milira traditional attire (Style 3)</label>
+		<graphicData>
+			<texPath>Milira/Apparel/Onskin/BasicDressIII/BasicDressIII</texPath>
+		</graphicData>
+		<apparel>
+			<useWornGraphicMask>false</useWornGraphicMask>
+			<wornGraphicPath>Milira/Apparel/Onskin/BasicDressIII/BasicDressIII</wornGraphicPath>
+		</apparel>
+	</ThingDef>
+
+
+
+	<!--2级衣服====================================================================================================-->
+
+	<ThingDef Name="Milira_DelicateDress" ParentName="Milira_OnSkinBaseII" Abstract="true">
+		<costStuffCount>150</costStuffCount>
+		<stuffCategories>
+			<li>Leathery</li>
+			<li>Fabric</li>
+		</stuffCategories>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToMake>12000</WorkToMake>
+			<ArmorRating_Sharp>0.10</ArmorRating_Sharp>
+			<ArmorRating_Blunt>0.10</ArmorRating_Blunt>
+			<ArmorRating_Heat>0.20</ArmorRating_Heat>
+			<StuffEffectMultiplierArmor>0.05</StuffEffectMultiplierArmor>
+			<StuffEffectMultiplierInsulation_Cold>0.4</StuffEffectMultiplierInsulation_Cold>
+			<StuffEffectMultiplierInsulation_Heat>0.3</StuffEffectMultiplierInsulation_Heat>
+			<Insulation_Cold>8</Insulation_Cold>
+			<Insulation_Heat>5</Insulation_Heat>
+		</statBases>
+		<apparel>
+			<developmentalStageFilter>Child, Adult</developmentalStageFilter>
+		</apparel>
+		<equippedStatOffsets>
+		</equippedStatOffsets>
+	</ThingDef>
+
+
+
+	<ThingDef Name="Milira_DelicateDressA" ParentName="Milira_DelicateDress">
+		<defName>Milira_DelicateDressA</defName>
+		<label>Milira academy uniform (Style 1)</label>
+		<description>A neat shirt paired with a refreshing black skirt, the uniform worn by young Milira during their studies at the academy.</description>
+		<graphicData>
+			<texPath>Milira/Apparel/Onskin/DelicateDressA/DelicateDressA</texPath>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<apparel>
+			<useWornGraphicMask>true</useWornGraphicMask>
+			<developmentalStageFilter>Child, Adult</developmentalStageFilter>
+			<bodyPartGroups>
+				<li>Torso</li>
+				<li>Legs</li>
+			</bodyPartGroups>
+			<wornGraphicPath>Milira/Apparel/Onskin/DelicateDressA/DelicateDressA</wornGraphicPath>
+			<tags>
+				<li>Milira_DailyWear</li>
+				<li>Milira_Daily</li>
+			</tags>
+		</apparel>
+		<equippedStatOffsets>
+			<GlobalLearningFactor>0.1</GlobalLearningFactor>
+		</equippedStatOffsets>
+	</ThingDef>
+
+
+	<ThingDef ParentName="Milira_DelicateDressA">
+		<defName>Milira_DelicateDressA_II</defName>
+		<label>Milira academy uniform (Style 2)</label>
+		<graphicData>
+			<texPath>Milira/Apparel/Onskin/DelicateDressA_II/DelicateDressA_II</texPath>
+		</graphicData>
+		<apparel>
+			<wornGraphicPath>Milira/Apparel/Onskin/DelicateDressA_II/DelicateDressA_II</wornGraphicPath>
+		</apparel>
+	</ThingDef>
+
+
+	<ThingDef ParentName="Milira_DelicateDress">
+		<defName>Milira_DelicateDressB</defName>
+		<label>Milira elegance gown</label>
+		<description>The gown chosen by Milira for attending important events. Somewhat inconvenient for movement due to its long skirt design.</description>
+		<graphicData>
+			<texPath>Milira/Apparel/Onskin/DelicateDressB/DelicateDressB</texPath>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<apparel>
+			<useWornGraphicMask>true</useWornGraphicMask>
+			<developmentalStageFilter>Child, Adult</developmentalStageFilter>
+			<bodyPartGroups>
+				<li>Torso</li>
+				<li>Legs</li>
+			</bodyPartGroups>
+			<wornGraphicPath>Milira/Apparel/Onskin/DelicateDressB/DelicateDressB</wornGraphicPath>
+			<tags>
+				<li>Milira_DailyWear</li>
+				<li>Milira_Daily</li>
+			</tags>
+		</apparel>
+		<equippedStatOffsets>
+			<SocialImpact>0.3</SocialImpact>
+			<MoveSpeed>-0.2</MoveSpeed>
+		</equippedStatOffsets>
+	</ThingDef>
+
+
+	<ThingDef ParentName="Milira_DelicateDress">
+		<defName>Milira_DelicateDressC</defName>
+		<label>Milira black bodycon dress</label>
+		<description>A form-fitting black dress that accentuates the wearer's graceful figure.</description>
+		<graphicData>
+			<texPath>Milira/Apparel/Onskin/DelicateDressC/DelicateDressC</texPath>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<apparel>
+			<useWornGraphicMask>true</useWornGraphicMask>
+			<developmentalStageFilter>Child, Adult</developmentalStageFilter>
+			<bodyPartGroups>
+				<li>Torso</li>
+				<li>Legs</li>
+			</bodyPartGroups>
+			<wornGraphicPath>Milira/Apparel/Onskin/DelicateDressC/DelicateDressC</wornGraphicPath>
+			<tags>
+				<li>Milira_DailyWear</li>
+				<li>Milira_Daily</li>
+			</tags>
+		</apparel>
+		<equippedStatOffsets>
+			<SocialImpact>0.2</SocialImpact>
+		</equippedStatOffsets>
+	</ThingDef>
+
+
+	<ThingDef ParentName="Milira_DelicateDress">
+		<defName>Milira_DelicateDressD</defName>
+		<label>Milira fashionable casual wear</label>
+		<description>Trendsetting casual attire that emphasizes a sense of comfort and ease in wearing.</description>
+		<graphicData>
+			<texPath>Milira/Apparel/Onskin/DelicateDressD/DelicateDressD</texPath>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<apparel>
+			<useWornGraphicMask>true</useWornGraphicMask>
+			<developmentalStageFilter>Child, Adult</developmentalStageFilter>
+			<bodyPartGroups>
+				<li>Torso</li>
+				<li>Legs</li>
+			</bodyPartGroups>
+			<wornGraphicPath>Milira/Apparel/Onskin/DelicateDressD/DelicateDressD</wornGraphicPath>
+			<tags>
+				<li>Milira_DailyWear</li>
+				<li>Milira_Daily</li>
+			</tags>
+		</apparel>
+		<equippedStatOffsets>
+			<SocialImpact>0.2</SocialImpact>
+		</equippedStatOffsets>
+	</ThingDef>
+
+
+	<ThingDef ParentName="Milira_DelicateDress">
+		<defName>Milira_DelicateDressE</defName>
+		<label>Milira corset skirt</label>
+		<description>A fitted dress that pairs with a leather corset and a petticoat.</description>
+		<graphicData>
+			<texPath>Milira/Apparel/Onskin/DelicateDressE/DelicateDressE</texPath>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<apparel>
+			<useWornGraphicMask>true</useWornGraphicMask>
+			<developmentalStageFilter>Child, Adult</developmentalStageFilter>
+			<bodyPartGroups>
+				<li>Torso</li>
+				<li>Legs</li>
+			</bodyPartGroups>
+			<wornGraphicPath>Milira/Apparel/Onskin/DelicateDressE/DelicateDressE</wornGraphicPath>
+			<tags>
+				<li>Milira_DailyWear</li>
+				<li>Milira_Daily</li>
+			</tags>
+		</apparel>
+		<equippedStatOffsets>
+		</equippedStatOffsets>
+	</ThingDef>
+
+	<!-- <ThingDef ParentName="Milira_DelicateDress">
+		<defName>Milira_DelicateDressF</defName>
+		<label>Milira corset skirt</label>
+		<description>A fitted dress that pairs with a leather corset and a petticoat.</description>
+		<graphicData>
+			<texPath>Milira/Apparel/Onskin/DelicateDressF/DelicateDressF</texPath>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<apparel>
+			<useWornGraphicMask>true</useWornGraphicMask>
+			<developmentalStageFilter>Child, Adult</developmentalStageFilter>
+			<bodyPartGroups>
+				<li>Torso</li>
+				<li>Legs</li>
+			</bodyPartGroups>
+			<wornGraphicPath>Milira/Apparel/Onskin/DelicateDressF/DelicateDressF</wornGraphicPath>
+			<tags>
+				<li>Milira_DailyWear</li>
+				<li>Milira_Daily</li>
+			</tags>
+		</apparel>
+		<equippedStatOffsets>
+		</equippedStatOffsets>
+	</ThingDef> -->
+
+
+	<!-- 旅行斗篷 -->
+	<ThingDef ParentName="Milira_OnSkinBaseII">
+		<defName>Milira_Cloak</defName>
+		<label>Milira traveller cloak</label>
+		<description>A sturdy and durable cloak with a wide and convenient design that allows the wearer to easily tuck their wings underneath. It is a common garment for Milira travelers who come to the ground.</description>
+		<costStuffCount>180</costStuffCount>
+		<stuffCategories>
+			<li>Leathery</li>
+			<li>Fabric</li>
+		</stuffCategories>
+		<graphicData>
+			<texPath>Milira/Apparel/Onskin/Cloak/Cloak</texPath>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>300</MaxHitPoints>
+			<WorkToMake>18000</WorkToMake>
+			<ArmorRating_Sharp>0.40</ArmorRating_Sharp>
+			<ArmorRating_Blunt>0.40</ArmorRating_Blunt>
+			<ArmorRating_Heat>0.20</ArmorRating_Heat>
+			<StuffEffectMultiplierArmor>0.25</StuffEffectMultiplierArmor>
+			<StuffEffectMultiplierInsulation_Cold>0.6</StuffEffectMultiplierInsulation_Cold>
+			<StuffEffectMultiplierInsulation_Heat>0.6</StuffEffectMultiplierInsulation_Heat>
+			<Insulation_Cold>15</Insulation_Cold>
+			<Insulation_Heat>15</Insulation_Heat>
+		</statBases>
+		<apparel>
+			<useWornGraphicMask>true</useWornGraphicMask>
+			<developmentalStageFilter>Child, Adult</developmentalStageFilter>
+			<bodyPartGroups>
+				<li>Torso</li>
+				<li>Legs</li>
+				<li>Arms</li>
+				<li>Neck</li>
+				<li>Shoulders</li>
+				<li>Feet</li>
+				<li>Hands</li>
+				<li>Milira_Wings</li>
+			</bodyPartGroups>
+			<wornGraphicPath>Milira/Apparel/Onskin/Cloak/Cloak</wornGraphicPath>
+			<tags>
+				<li>Milira_Cloak</li>
+			</tags>
+			<layers>
+				<li>Shell</li>
+			</layers>
+			<drawData>
+				<dataNorth>
+					<layer>40</layer>
+				</dataNorth>
+			</drawData>
+		</apparel>
+		<comps>
+		</comps>
+		<equippedStatOffsets>
+		</equippedStatOffsets>
+	</ThingDef>
+
+	<!-- 巡旅行装 -->
+	<ThingDef ParentName="Milira_OnSkinBaseII">
+		<defName>Milira_PathfinderCloak</defName>
+		<label>Milira Pathfinder Cloak</label>
+		<description>A full outfit made of durable leather, suitable for wilderness patrols and travel. Commonly worn during exploration or investigative missions. The included belt and pouches slightly increase carrying capacity.\n\nThe outfit is equipped with basic bandages for emergency wound dressing. Requires cloth to refill.</description>
+		<costStuffCount>120</costStuffCount>
+		<stuffCategories>
+			<li>Leathery</li>
+			<li>Fabric</li>
+		</stuffCategories>
+		<costList>
+			<Milira_FeatherThread>80</Milira_FeatherThread>
+		</costList>
+		<graphicData>
+			<texPath>Milira/Apparel/Onskin/PathfinderCloak/PathfinderCloak</texPath>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>320</MaxHitPoints>
+			<WorkToMake>24000</WorkToMake>
+			<ArmorRating_Sharp>0.6</ArmorRating_Sharp>
+			<ArmorRating_Blunt>0.40</ArmorRating_Blunt>
+			<ArmorRating_Heat>0.20</ArmorRating_Heat>
+			<StuffEffectMultiplierArmor>0.2</StuffEffectMultiplierArmor>
+			<StuffEffectMultiplierInsulation_Cold>0.6</StuffEffectMultiplierInsulation_Cold>
+			<StuffEffectMultiplierInsulation_Heat>0.6</StuffEffectMultiplierInsulation_Heat>
+			<Insulation_Cold>18</Insulation_Cold>
+			<Insulation_Heat>12</Insulation_Heat>
+		</statBases>
+		<apparel>
+			<useWornGraphicMask>true</useWornGraphicMask>
+			<developmentalStageFilter>Child, Adult</developmentalStageFilter>
+			<bodyPartGroups>
+				<li>Torso</li>
+				<li>Legs</li>
+				<li>Arms</li>
+				<li>Neck</li>
+				<li>Shoulders</li>
+				<li>Feet</li>
+				<li>Hands</li>
+				<li>Milira_Wings</li>
+			</bodyPartGroups>
+			<wornGraphicPath>Milira/Apparel/Onskin/PathfinderCloak/PathfinderCloak</wornGraphicPath>
+			<tags>
+				<li>Milira_PathfinderCloak</li>
+			</tags>
+			<layers>
+				<li>Shell</li>
+			</layers>
+			<drawData>
+				<dataNorth>
+					<layer>40</layer>
+				</dataNorth>
+			</drawData>
+		</apparel>
+		<comps>
+			<li Class="AncotLibrary.CompProperties_ApparelReloadable_Custom">
+				<maxCharges>5</maxCharges>
+				<ammoDef>Cloth</ammoDef>
+				<ammoCountPerCharge>5</ammoCountPerCharge>
+				<baseReloadTicks>60</baseReloadTicks>
+				<soundReload>Standard_Reload</soundReload>
+				<hotKey>Misc4</hotKey>
+				<chargeNoun>bandage</chargeNoun>
+				<displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+				<maxReloadConfigurable>false</maxReloadConfigurable>
+				<showResourceBar>false</showResourceBar>
+				<verbGizmoDesc>Apply bandages for emergency treatment.</verbGizmoDesc>
+				<verbGizmoOverrideColor>(1,1,1)</verbGizmoOverrideColor>
+			</li>
+		</comps>
+		<verbs>
+			<li Class="AncotLibrary.VerbProperties_Job">
+				<label>emergency tend</label>
+				<verbClass>AncotLibrary.Verb_EmergencyTend</verbClass>
+				<commandIcon>AncotLibrary/Gizmos/Bandage_Tend</commandIcon>
+				<violent>false</violent>
+				<targetable>false</targetable>
+				<hasStandardCommand>true</hasStandardCommand>
+				<nonInterruptingSelfCast>true</nonInterruptingSelfCast>
+				<onlyManualCast>true</onlyManualCast>
+				<jobDef>Ancot_EmergencyTend</jobDef>
+				<jobNum>1</jobNum>
+			</li>
+		</verbs>
+		<equippedStatOffsets>
+			<CarryingCapacity>20</CarryingCapacity>
+			<Ancot_ExtraCaravanCarryCapacity>5</Ancot_ExtraCaravanCarryCapacity>
+		</equippedStatOffsets>
+	</ThingDef>
+
+
+
+	<!-- 战甲========================================================================================================= -->
+	<ThingDef ParentName="Milira_OnSkinBase_Furnace">
+		<defName>Milira_ValkyrArmor</defName>
+		<label>Milira valkyrie armor</label>
+		<description>An armor with a very ancient design, continuing the style of armor that the Sky Elves have been using for a long time. Thanks to the material science and advanced technology of the Ultimate Age, this suit of armor possesses an exaggerated protective capability that does not match its old-fashioned appearance, and can even recognize and be immune to friendly fire.</description>
+		<costList>
+			<Plasteel>100</Plasteel>
+			<Milira_SolarCrystal>10</Milira_SolarCrystal>
+			<Milira_SunPlateSteel>240</Milira_SunPlateSteel>
+			<Milira_SunLightFuel>50</Milira_SunLightFuel>
+			<ComponentSpacer>4</ComponentSpacer>
+		</costList>
+		<costStuffCount>120</costStuffCount>
+		<stuffCategories>
+			<li>Metallic</li>
+		</stuffCategories>
+		<graphicData>
+			<texPath>Milira/Apparel/Onskin/ValkyrArmor/ValkyrArmor</texPath>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>650</MaxHitPoints>
+			<WorkToMake>48000</WorkToMake>
+			<Mass>5.6</Mass>
+			<ArmorRating_Sharp>0.90</ArmorRating_Sharp>
+			<ArmorRating_Blunt>0.50</ArmorRating_Blunt>
+			<ArmorRating_Heat>0.80</ArmorRating_Heat>
+			<StuffEffectMultiplierArmor>0.35</StuffEffectMultiplierArmor>
+			<StuffEffectMultiplierInsulation_Cold>0.65</StuffEffectMultiplierInsulation_Cold>
+			<StuffEffectMultiplierInsulation_Heat>0.5</StuffEffectMultiplierInsulation_Heat>
+			<Insulation_Cold>32</Insulation_Cold>
+			<Insulation_Heat>20</Insulation_Heat>
+		</statBases>
+		<apparel>
+			<useWornGraphicMask>true</useWornGraphicMask>
+			<wornGraphicPath>Milira/Apparel/Onskin/ValkyrArmor/ValkyrArmor</wornGraphicPath>
+			<tags>
+				<li>Milira_ValkyrArmor</li>
+				<li>Milira_Valkyr</li>
+			</tags>
+		</apparel>
+		<equippedStatOffsets>
+			<MeleeDodgeChance>12.0</MeleeDodgeChance>
+			<MoveSpeed>0.4</MoveSpeed>
+			<IncomingDamageFactor>-0.08</IncomingDamageFactor>
+			<PainShockThreshold>0.4</PainShockThreshold>
+			<MeleeDamageFactor>0.25</MeleeDamageFactor>
+			<Ancot_WeaponMaxChargeFactor>0.2</Ancot_WeaponMaxChargeFactor>
+			<Ancot_WeaponChargeTickFactor>-0.1</Ancot_WeaponChargeTickFactor>
+		</equippedStatOffsets>
+		<recipeMaker>
+			<researchPrerequisite>Milira_Apparel_Valkyr</researchPrerequisite>
+		</recipeMaker>
+		<comps>
+			<li Class="AncotLibrary.CompProperties_AvoidAllyDamage"/>
+		</comps>
+	</ThingDef>
+
+	<ThingDef Name="Milira_ArtemisArmorBase" ParentName="Milira_OnSkinBase_Furnace" Abstract="true">
+		<tickerType>Normal</tickerType>
+		<statBases>
+			<MaxHitPoints>650</MaxHitPoints>
+			<WorkToMake>24000</WorkToMake>
+			<Mass>2.5</Mass>
+			<ArmorRating_Sharp>0.30</ArmorRating_Sharp>
+			<ArmorRating_Blunt>0.50</ArmorRating_Blunt>
+			<ArmorRating_Heat>0.30</ArmorRating_Heat>
+			<StuffEffectMultiplierArmor>0.35</StuffEffectMultiplierArmor>
+			<StuffEffectMultiplierInsulation_Cold>0.6</StuffEffectMultiplierInsulation_Cold>
+			<StuffEffectMultiplierInsulation_Heat>0.6</StuffEffectMultiplierInsulation_Heat>
+			<Insulation_Cold>16</Insulation_Cold>
+			<Insulation_Heat>10</Insulation_Heat>
+		</statBases>
+		<apparel>
+			<useWornGraphicMask>true</useWornGraphicMask>
+			<tags>
+				<li>Milira_ArtemisArmor</li>
+				<li>Milira_Artemis</li>
+			</tags>
+		</apparel>
+		<recipeMaker>
+			<researchPrerequisite>Milira_Apparel_Artemis</researchPrerequisite>
+		</recipeMaker>
+	</ThingDef>
+
+	<ThingDef ParentName="Milira_ArtemisArmorBase">
+		<defName>Milira_ArtemisArmor</defName>
+		<label>Milira Artemis Armor (Assault)</label>
+		<description>A lightweight armor designed for ease of movement, facilitating the wearer's ability to engage in combat. The built-in energy circuitry within the armor allows for rapid energy replenishment of energy-storing ranged weapons during attacks.</description>
+		<costList>
+			<Plasteel>80</Plasteel>
+			<Milira_SolarCrystal>20</Milira_SolarCrystal>
+			<Milira_SunPlateSteel>150</Milira_SunPlateSteel>
+			<Milira_SunLightFuel>50</Milira_SunLightFuel>
+			<ComponentSpacer>6</ComponentSpacer>
+		</costList>
+		<costStuffCount>220</costStuffCount>
+		<stuffCategories>
+			<li>Leathery</li>
+			<li>Fabric</li>
+		</stuffCategories>
+		<graphicData>
+			<texPath>Milira/Apparel/Onskin/ArtemisArmor/ArtemisArmor</texPath>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<apparel>
+			<wornGraphicPath>Milira/Apparel/Onskin/ArtemisArmor/ArtemisArmor</wornGraphicPath>
+		</apparel>
+		<equippedStatOffsets>
+			<Ancot_WeaponMaxChargeFactor>0.5</Ancot_WeaponMaxChargeFactor>
+			<RangedCooldownFactor>-0.2</RangedCooldownFactor>
+			<PainShockThreshold>0.1</PainShockThreshold>
+		</equippedStatOffsets>
+		<comps>
+			<li Class="AncotLibrary.CompProperties_ChargeWeaponImmediately">
+				<chargeCooldownTime>300</chargeCooldownTime>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="Milira_ArtemisArmorBase">
+		<defName>Milira_ArtemisArmorII</defName>
+		<label>Milira Artemis Armor (Defence)</label>
+		<description>A lightweight armor designed for ease of movement, facilitating the wearer's ability to engage in combat.The built-in energy circuitry within the armor allows the wearer to deploy an energy shield to deflect incoming attacks.</description>
+		<costList>
+			<Plasteel>80</Plasteel>
+			<Milira_SolarCrystal>20</Milira_SolarCrystal>
+			<Milira_SunPlateSteel>150</Milira_SunPlateSteel>
+			<Milira_SunLightFuel>50</Milira_SunLightFuel>
+			<ComponentSpacer>6</ComponentSpacer>
+		</costList>
+		<costStuffCount>220</costStuffCount>
+		<stuffCategories>
+			<li>Leathery</li>
+			<li>Fabric</li>
+		</stuffCategories>
+		<graphicData>
+			<texPath>Milira/Apparel/Onskin/ArtemisArmorII/ArtemisArmorII</texPath>
+		</graphicData>
+		<apparel>
+			<wornGraphicPath>Milira/Apparel/Onskin/ArtemisArmorII/ArtemisArmorII</wornGraphicPath>
+		</apparel>
+		<statBases>
+			<!-- 盾牌 -->
+			<Ancot_PhysicalShieldBlockChance_Melee>1.0</Ancot_PhysicalShieldBlockChance_Melee>
+			<Ancot_PhysicalShieldBlockChance_Ranged>1.0</Ancot_PhysicalShieldBlockChance_Ranged>
+			<Ancot_PhysicalShieldMaxStamina>50</Ancot_PhysicalShieldMaxStamina>
+			<Ancot_PhysicalShieldBlockAngle>120</Ancot_PhysicalShieldBlockAngle>
+			<Ancot_PhysicalShieldStaminaRecoverRate>3.6</Ancot_PhysicalShieldStaminaRecoverRate>
+			<Ancot_PhysicalShieldStaminaRecoverRate_Holding>1.6</Ancot_PhysicalShieldStaminaRecoverRate_Holding>
+			<Ancot_PhysicalShieldBreakStance>0.5</Ancot_PhysicalShieldBreakStance>
+			<Ancot_PhysicalShieldResetTime>20</Ancot_PhysicalShieldResetTime>
+			<Ancot_PhysicalShieldStaminaCost_Melee>3.2</Ancot_PhysicalShieldStaminaCost_Melee>
+			<Ancot_PhysicalShieldStaminaCost_Ranged>1.8</Ancot_PhysicalShieldStaminaCost_Ranged>
+			<Ancot_PhysicalShieldStaminaCostThershold>0.5</Ancot_PhysicalShieldStaminaCostThershold>
+			<Ancot_PhysicalShieldStuffEffectMultiplier>0</Ancot_PhysicalShieldStuffEffectMultiplier>
+		</statBases>
+		<equippedStatOffsets Inherit="false">
+			<Ancot_WeaponChargeTickFactor>-0.4</Ancot_WeaponChargeTickFactor>
+			<RangedCooldownFactor>-0.2</RangedCooldownFactor>
+			<PainShockThreshold>0.1</PainShockThreshold>
+		</equippedStatOffsets>
+		<comps>
+			<li Class="AncotLibrary.CompProperties_AIShieldHolder_Incoming">
+				<shieldDurationTick>120</shieldDurationTick>
+				<refreshNextIncoming>true</refreshNextIncoming>
+			</li>
+			<li Class="AncotLibrary.CompProperties_PhysicalShield">
+				<gizmoLabel>rise energy shield</gizmoLabel>
+				<gizmoDesc>rise up energy shield.</gizmoDesc>
+				<blockEffecter>Milira_EnergyShieldBlock</blockEffecter>
+				<breakEffecter>Milira_EnergyShieldBlock</breakEffecter>
+				<affectedByStuff>false</affectedByStuff>
+				<blocksRangedWeapons>false</blocksRangedWeapons>
+				<holdShieldHediff>Ancot_HoldShield_ArtemisArmorII</holdShieldHediff>
+				<shieldBarColor>(0.75,0.75,0.75,0.8)</shieldBarColor>
+			</li>
+		</comps>
+	</ThingDef>
+	<HediffDef>
+		<defName>Ancot_HoldShield_ArtemisArmorII</defName>
+		<label>holding shield</label>
+		<hediffClass>HediffWithComps</hediffClass>
+		<isBad>false</isBad>
+		<maxSeverity>1</maxSeverity>
+		<initialSeverity>1</initialSeverity>
+		<everCurableByItem>false</everCurableByItem>
+		<defaultLabelColor>(240, 240, 0)</defaultLabelColor>
+		<description>this pawn is holding a shield.</description>
+		<comps>
+			<li Class="HediffCompProperties_DisappearsOnDeath"/>
+		</comps>
+		<stages>
+			<li>
+				<capMods>
+				</capMods>
+				<statFactors>
+					<MoveSpeed>0.8</MoveSpeed>
+				</statFactors>
+			</li>
+		</stages>
+		<renderNodeProperties>
+			<li>
+				<debugLabel>Milian_ArtemisArmorII_Shield</debugLabel>
+				<nodeClass>PawnRenderNode</nodeClass>
+				<workerClass>PawnRenderNodeWorker_FlipWhenCrawling</workerClass>
+				<texPath>Milira/Apparel/Onskin/ArtemisArmorII/ArtemisArmorIIShield</texPath>
+				<shaderTypeDef>MoteGlow</shaderTypeDef>
+				<overrideMeshSize>(1.5,1.5)</overrideMeshSize>
+				<color>(1,1,1,0.7)</color>
+				<parentTagDef>Root</parentTagDef>
+				<pawnType>Any</pawnType>
+				<rotDrawMode>Fresh, Rotting</rotDrawMode>
+				<baseLayer>75</baseLayer>
+				<drawData>
+					<defaultData>
+						<layer>100</layer>
+					</defaultData>
+					<dataNorth>
+						<layer>-20</layer>
+					</dataNorth>
+				</drawData>
+			</li>
+		</renderNodeProperties>
+	</HediffDef>
+
+
+	<ThingDef ParentName="Milira_OnSkinBase_Furnace">
+		<defName>Milira_DaedalusArmor</defName>
+		<label>Milira daedalus armor</label>
+		<description>An armor designed for commanding Milians on the battlefield, with internal circuits that enable the wearer to sense the location and status of each Milian and issue real-time instructions.The armor is equipped with a shield that can withstand a projectile attack and quickly Regenerate its shield energy.</description>
+		<tickerType>Normal</tickerType>
+		<costList>
+			<Plasteel>150</Plasteel>
+			<Milira_SolarCrystal>50</Milira_SolarCrystal>
+			<Milira_SunPlateSteel>100</Milira_SunPlateSteel>
+			<Milira_SunLightFuel>50</Milira_SunLightFuel>
+			<ComponentSpacer>8</ComponentSpacer>
+		</costList>
+		<costStuffCount>120</costStuffCount>
+		<stuffCategories>
+			<li>Metallic</li>
+		</stuffCategories>
+		<graphicData>
+			<texPath>Milira/Apparel/Onskin/DaedalusArmor/DaedalusArmor</texPath>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>650</MaxHitPoints>
+			<WorkToMake>24000</WorkToMake>
+			<ArmorRating_Sharp>0.40</ArmorRating_Sharp>
+			<ArmorRating_Blunt>0.40</ArmorRating_Blunt>
+			<ArmorRating_Heat>0.20</ArmorRating_Heat>
+			<StuffEffectMultiplierArmor>0.35</StuffEffectMultiplierArmor>
+			<StuffEffectMultiplierInsulation_Cold>0.7</StuffEffectMultiplierInsulation_Cold>
+			<StuffEffectMultiplierInsulation_Heat>0.5</StuffEffectMultiplierInsulation_Heat>
+			<Insulation_Cold>24</Insulation_Cold>
+			<Insulation_Heat>18</Insulation_Heat>
+			<EnergyShieldRechargeRate>0.25</EnergyShieldRechargeRate>
+			<EnergyShieldEnergyMax>0.01</EnergyShieldEnergyMax>
+		</statBases>
+		<apparel>
+			<useWornGraphicMask>true</useWornGraphicMask>
+			<mechanitorApparel>true</mechanitorApparel>
+			<wornGraphicPath>Milira/Apparel/Onskin/DaedalusArmor/DaedalusArmor</wornGraphicPath>
+			<tags>
+				<li>Milira_Daedalus</li>
+				<li>Milira_DaedalusArmor</li>
+			</tags>
+		</apparel>
+		<recipeMaker>
+			<researchPrerequisite>Milira_Apparel_Daedalus</researchPrerequisite>
+		</recipeMaker>
+		<comps>
+			<li Class="CompProperties_Shield">
+				<blocksRangedWeapons>false</blocksRangedWeapons>
+				<minDrawSize>1.8</minDrawSize>
+				<maxDrawSize>1.8</maxDrawSize>
+				<energyOnReset>1</energyOnReset>
+				<startingTicksToReset>60</startingTicksToReset>
+			</li>
+		</comps>
+		<equippedStatOffsets>
+			<MechBandwidth>30</MechBandwidth>
+			<WorkSpeedGlobalOffsetMech>0.1</WorkSpeedGlobalOffsetMech>
+		</equippedStatOffsets>
+	</ThingDef>
+
+</Defs>

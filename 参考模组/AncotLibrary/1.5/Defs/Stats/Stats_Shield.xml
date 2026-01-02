@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <StatDef Name="Ancot_PhysicalShield" Abstract="true">
+    <category>Ancot_Shield</category>
+    <showIfUndefined>false</showIfUndefined>
+  </StatDef>
+
+  <!-- 架势值 -->
+  <StatDef ParentName="Ancot_PhysicalShield">
+    <defName>Ancot_PhysicalShieldMaxStamina</defName>
+    <label>Max stamina</label>
+    <description>The maximum stamina this shield can consume when used for defense before it is broken.</description>
+    <defaultBaseValue>100</defaultBaseValue>
+    <minValue>1</minValue>
+    <roundValue>true</roundValue>
+    <toStringStyle>Integer</toStringStyle>
+    <showNonAbstract>true</showNonAbstract>
+    <displayPriorityInCategory>1000</displayPriorityInCategory>
+    <parts>
+      <li Class="AncotLibrary.StatPart_StuffStaminaFactor">
+        <multiplierStat>Ancot_PhysicalShieldStuffEffectMultiplier</multiplierStat>
+      </li>
+      <li Class="StatPart_Quality">
+        <factorAwful>0.8</factorAwful>
+        <factorPoor>0.9</factorPoor>
+        <factorNormal>1</factorNormal>
+        <factorGood>1.1</factorGood>
+        <factorExcellent>1.2</factorExcellent>
+        <factorMasterwork>1.4</factorMasterwork>
+        <factorLegendary>1.65</factorLegendary>
+      </li>
+    </parts>
+  </StatDef>
+
+  <!-- 架势回复速率 -->
+  <StatDef Name="Ancot_PhysicalShieldStaminaRecoverRate" ParentName="Ancot_PhysicalShield">
+    <defName>Ancot_PhysicalShieldStaminaRecoverRate</defName>
+    <label>Stamina recover rate</label>
+    <description>Rate of stamina regeneration while the shield is equipped but not actively used for defense.</description>
+    <defaultBaseValue>2</defaultBaseValue>
+    <minValue>0</minValue>
+    <formatString>{0}/s</formatString>
+    <toStringStyle>FloatTwo</toStringStyle>
+    <showNonAbstract>true</showNonAbstract>
+    <displayPriorityInCategory>990</displayPriorityInCategory>
+    <parts>
+      <li Class="AncotLibrary.StatPart_ApparelWearerStatFactor">
+        <stat>Ancot_StaminaRecoveryRateFactor</stat>
+      </li>
+    </parts>
+  </StatDef>
+  <!-- 架势回复速率（持盾） -->
+  <StatDef ParentName="Ancot_PhysicalShieldStaminaRecoverRate">
+    <defName>Ancot_PhysicalShieldStaminaRecoverRate_Holding</defName>
+    <label>Stamina recover rate (defence)</label>
+    <description>Rate of stamina regeneration while holding this shield to block.</description>
+    <displayPriorityInCategory>989</displayPriorityInCategory>
+  </StatDef>
+
+  <!-- 架势消耗阈值百分比 -->
+  <StatDef ParentName="Ancot_PhysicalShield">
+    <defName>Ancot_PhysicalShieldStaminaCostThershold</defName>
+    <label>Stamina cost thershold</label>
+    <description>When using this shield to block, the maximum percentage of stamina that can be consumed by a single attack.</description>
+    <minValue>0</minValue>
+    <maxValue>1</maxValue>
+    <defaultBaseValue>0.5</defaultBaseValue>
+    <toStringStyle>PercentZero</toStringStyle>
+    <showIfUndefined>false</showIfUndefined>
+    <displayPriorityInCategory>980</displayPriorityInCategory>
+  </StatDef>
+
+  <!-- 架势消耗率 -->
+  <StatDef Name="Ancot_PhysicalShieldStaminaCost" ParentName="Ancot_PhysicalShield" Abstract="true">
+    <minValue>0</minValue>
+    <defaultBaseValue>2</defaultBaseValue>
+    <toStringStyle>FloatTwo</toStringStyle>
+    <!-- <formatString>{0}/s</formatString> -->
+    <showIfUndefined>false</showIfUndefined>
+    <displayPriorityInCategory>69</displayPriorityInCategory>
+    <parts>
+      <li Class="AncotLibrary.StatPart_StatCurve">
+        <stat>ArmorRating_Sharp</stat>
+        <curve>
+          <points>
+            <li>(0.0, 2)</li>
+            <li>(0.5, 1.4)</li>
+            <li>(2.0, 0.5)</li>
+          </points>
+        </curve>
+      </li>
+    </parts>
+  </StatDef>
+  <StatDef ParentName="Ancot_PhysicalShieldStaminaCost">
+    <defName>Ancot_PhysicalShieldStaminaCost_Melee</defName>
+    <label>Stamina cost factor (melee)</label>
+    <description>The stamina consumption factor for this shield when blocking melee attack.\n\nStamina cost is calculated as:\nStamina cost = Damage × Armor penetration (%) × Stamina cost factor (melee)</description>
+    <displayPriorityInCategory>970</displayPriorityInCategory>
+  </StatDef>
+  <StatDef ParentName="Ancot_PhysicalShieldStaminaCost">
+    <defName>Ancot_PhysicalShieldStaminaCost_Ranged</defName>
+    <label>Stamina cost factor (ranged)</label>
+    <description>The stamina consumption factor for this shield when blocking ranged attack.\n\nStamina cost is calculated as:\nStamina cost = Damage × Armor penetration (%) × Stamina cost factor (ranged)</description>
+    <displayPriorityInCategory>960</displayPriorityInCategory>
+  </StatDef>
+
+  <!-- 防御角度 -->
+  <StatDef ParentName="Ancot_PhysicalShield">
+    <defName>Ancot_PhysicalShieldBlockAngle</defName>
+    <label>Defence angle</label>
+    <description>The angle range of attacks that can be blocked when using this shield for defense, relative to the direction faced.</description>
+    <defaultBaseValue>90</defaultBaseValue>
+    <minValue>0</minValue>
+    <formatString>{0}°</formatString>
+    <toStringStyle>Integer</toStringStyle>
+    <showNonAbstract>true</showNonAbstract>
+    <displayPriorityInCategory>950</displayPriorityInCategory>
+  </StatDef>
+
+  <!-- 格挡率 -->
+  <StatDef Name="Ancot_PhysicalShieldBlockChance" ParentName="Ancot_PhysicalShield" Abstract="true">
+    <minValue>0</minValue>
+    <maxValue>1</maxValue>
+    <defaultBaseValue>0.5</defaultBaseValue>
+    <toStringStyle>PercentZero</toStringStyle>
+    <!-- <formatString>{0}/s</formatString> -->
+    <showIfUndefined>false</showIfUndefined>
+    <displayPriorityInCategory>69</displayPriorityInCategory>
+    <parts>
+      <li Class="StatPart_Quality">
+        <factorAwful>0.6</factorAwful>
+        <factorPoor>0.8</factorPoor>
+        <factorNormal>1</factorNormal>
+        <factorGood>1.1</factorGood>
+        <factorExcellent>1.25</factorExcellent>
+        <factorMasterwork>1.5</factorMasterwork>
+        <factorLegendary>1.6</factorLegendary>
+      </li>
+    </parts>
+  </StatDef>
+  <StatDef ParentName="Ancot_PhysicalShieldBlockChance">
+    <defName>Ancot_PhysicalShieldBlockChance_Melee</defName>
+    <label>Block chance (melee)</label>
+    <description>Chance of blocking melee attacks while using this shield for defense.</description>
+    <displayPriorityInCategory>940</displayPriorityInCategory>
+  </StatDef>
+  <StatDef ParentName="Ancot_PhysicalShieldBlockChance">
+    <defName>Ancot_PhysicalShieldBlockChance_Ranged</defName>
+    <label>Block chance (ranged)</label>
+    <description>Chance of blocking ranged attacks while using this shield for defense.</description>
+    <displayPriorityInCategory>930</displayPriorityInCategory>
+  </StatDef>
+
+  <!-- 破盾冷却 -->
+  <StatDef ParentName="Ancot_PhysicalShield">
+    <defName>Ancot_PhysicalShieldResetTime</defName>
+    <label>Reset time</label>
+    <description>The time interval required to fully regenerate stamina and resume blocking when the stamina of this shield is depleted.</description>
+    <defaultBaseValue>20</defaultBaseValue>
+    <minValue>0</minValue>
+    <formatString>{0}s</formatString>
+    <toStringStyle>FloatOne</toStringStyle>
+    <showNonAbstract>true</showNonAbstract>
+    <displayPriorityInCategory>920</displayPriorityInCategory>
+  </StatDef>
+
+  <!-- 破盾硬直 -->
+  <StatDef ParentName="Ancot_PhysicalShield">
+    <defName>Ancot_PhysicalShieldBreakStance</defName>
+    <label>Break stance time</label>
+    <description>The duration of stagger when the stamina of this shield is depleted.</description>
+    <defaultBaseValue>5</defaultBaseValue>
+    <minValue>0</minValue>
+    <formatString>{0}s</formatString>
+    <toStringStyle>FloatOne</toStringStyle>
+    <showNonAbstract>true</showNonAbstract>
+    <displayPriorityInCategory>910</displayPriorityInCategory>
+  </StatDef>
+
+  <!-- 材料系数 -->
+  <StatDef ParentName="Ancot_PhysicalShield">
+    <defName>Ancot_PhysicalShieldStuffEffectMultiplier</defName>
+    <label>Material effect multiplier</label>
+    <description>The multiplier that modifies this shield's attributes based on its crafting material.</description>
+    <minValue>0</minValue>
+    <maxValue>10</maxValue>
+    <defaultBaseValue>1.0</defaultBaseValue>
+    <toStringStyle>PercentZero</toStringStyle>
+    <showIfUndefined>false</showIfUndefined>
+    <displayPriorityInCategory>900</displayPriorityInCategory>
+  </StatDef>
+    
+
+</Defs>

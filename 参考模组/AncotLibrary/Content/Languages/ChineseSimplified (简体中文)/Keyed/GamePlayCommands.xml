@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+  <!-- EN: toggle turret -->
+  <Ancot.CommandToggleTurret>开关炮塔</Ancot.CommandToggleTurret>
+  <!-- EN: Toggle turret being able to fire at will.\n\nWhen disabled, the turret will not automatically fire unless a target is manually designated. -->
+  <Ancot.CommandToggleTurretDesc>开关炮塔的自动开火模式。\n\n禁用时，除非强制指定攻击目标，否则炮塔不会自动开火。</Ancot.CommandToggleTurretDesc>
+
+  <!-- EN: position promotion -->
+  <Ancot.RoyalTitleUpdate>职位晋升</Ancot.RoyalTitleUpdate>
+  <!-- EN: Select the colonist who will promote to new position. -->
+  <Ancot.RoyalTitleUpdateDesc>选择要晋升职位的殖民者。</Ancot.RoyalTitleUpdateDesc>
+
+  <!-- EN: This drone has enough power to operate for {0} more. Drag the slider to set the recharge threshold. The drone will attempt to recharge when its energy falls below the threshold. The current recharge threshold is {1}.\n\nWhen the energy is depleted, the drone will enter dormant state. -->
+  <Ancot.DroneTip_Power>此无人机剩余的能量还能维持运行{0}。拖动滑块以设置充能阈值，当能量低于阈值时，此无人机会尝试进行充能。当前充能阈值为{1}。\n\n能量耗尽时，此无人机会进入休眠状态。</Ancot.DroneTip_Power>
+  <!-- EN: Enable auto-repair. Colonists responsible for Smithing will repair the drone when it gets damaged. -->
+  <Ancot.DroneTip_AutoRepair>应用自动维修。负责锻造工作的殖民者会在此无人机受损时对其进行维修。</Ancot.DroneTip_AutoRepair>sleep
+  <!-- EN: Switch the drone's work mode. -->
+  <Ancot.DroneTip_WorkMode>切换此无人机的工作模式。</Ancot.DroneTip_WorkMode>
+
+  <!-- EN: Load transport group of {0} -->
+  <Ancot.CommandLoadTransporter>装载运输组：{0}</Ancot.CommandLoadTransporter>
+  <!-- EN: Defines the selected transporter(s) as a transport group. Opens the loading dialog so you can decide who and what should be loaded inside. -->
+  <Ancot.CommandLoadTransporterDesc>将选中的运输舱定义为一个组别。打开装载对话框来设置所装载的货物及人员。</Ancot.CommandLoadTransporterDesc>
+
+  <!-- EN: Load -->
+  <Ancot.CommandLoadTransporterSingle>装载</Ancot.CommandLoadTransporterSingle>
+  <!-- EN: Opens the loading dialog so you can decide who and what should be loaded inside. -->
+  <Ancot.CommandLoadTransporterSingleDesc>打开装载对话框，以便你可以确定装载内容里有哪些人和物。</Ancot.CommandLoadTransporterSingleDesc>
+
+  <!-- EN: Select transport group -->
+  <Ancot.CommandSelectAllTransporters>选择运输组</Ancot.CommandSelectAllTransporters>
+  <!-- EN: Select all transporters in this transport group. -->
+  <Ancot.CommandSelectAllTransportersDesc>选择本运输组内的所有运输舱。</Ancot.CommandSelectAllTransportersDesc>
+
+  <!-- EN: Select next in transport group -->
+  <Ancot.CommandSelectNextTransporter>选择下一个运输舱</Ancot.CommandSelectNextTransporter>
+  <!-- EN: Select next transporter in this transport group. -->
+  <Ancot.CommandSelectNextTransporterDesc>选择本运输组中的下一个运输舱。</Ancot.CommandSelectNextTransporterDesc>
+
+  <!-- EN: Select previous in transport group -->
+  <Ancot.CommandSelectPreviousTransporter>选择上一个运输舱</Ancot.CommandSelectPreviousTransporter>
+  <!-- EN: Select previous transporter in this transport group. -->
+  <Ancot.CommandSelectPreviousTransporterDesc>选择本运输组中的上一个运输舱。</Ancot.CommandSelectPreviousTransporterDesc>
+
+  <!-- EN: Pick up item -->
+  <Ancot.HaulToTransporter>拾取物品</Ancot.HaulToTransporter>
+  <!-- EN: Pick up the target item and put into this creature's transporter. -->
+  <Ancot.HaulToTransporterDesc>将目标物品放入这个单位的运输舱。</Ancot.HaulToTransporterDesc>
+  
+  <!-- 飞行器 -->
+  <!-- EN: Take Off -->
+  <Ancot.AerocraftTakeOff>升空</Ancot.AerocraftTakeOff>
+  <!-- EN: Consumes {0}x {1} to take off. -->
+  <Ancot.AerocraftTakeOffDesc>消耗{0}x{1}升空。</Ancot.AerocraftTakeOffDesc>
+  <!-- EN: Land -->
+  <Ancot.AerocraftLanding>降落</Ancot.AerocraftLanding>
+  <!-- EN: Land at the designated location. -->
+  <Ancot.AerocraftLandingDesc>降落到指定位置。</Ancot.AerocraftLandingDesc>
+  <!-- EN: Pilot required. -->
+  <Ancot.AerocraftDisabled_RequirePilot>需要驾驶员。</Ancot.AerocraftDisabled_RequirePilot>
+  <!-- EN: Fuel required. -->
+  <Ancot.AerocraftDisabled_RequireFuel>需要燃料。</Ancot.AerocraftDisabled_RequireFuel>
+
+</LanguageData>

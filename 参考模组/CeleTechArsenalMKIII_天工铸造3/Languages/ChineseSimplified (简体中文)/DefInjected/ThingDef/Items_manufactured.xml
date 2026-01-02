@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: CELEGRAV™ "Xuan Qiong" Phase Anti-gravity Core -->
+  <CMC_Gravcore.label>CELEGRAV™「玄穹」相位反重力核心</CMC_Gravcore.label>
+  <!-- EN: Phase-field nexus of floating weapon systems. This self-stabilizing resonant cavity anti-gravity generator employs quantized graviton modulation to provide fundamental levitation fields for all floating platforms, while establishing reference coordinate systems for mounted weapons/engineering units.\n\nBoth design complexity and manufacturing precision exceed our current technological capabilities. Acquisition exclusively available through CAG merchant shuttles. -->
+  <CMC_Gravcore.description>浮游武器系统的相位场中枢，采用自稳定谐振腔设计的反重力发生器。通过量子化重力子调制，为全系列浮游炮提供基础悬浮力场，并为所有外挂武器/工程单元提供基准定位坐标系。\n\n核心的设计难度和加工精度都远超了我们能达到的水平，因此仅可向天工商盟贸易穿梭机购买。</CMC_Gravcore.description>
+  
+</LanguageData>

@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--==-->
+  <ThingDef Name="Milira_BeltBase" ParentName="ApparelNoQualityBase" Abstract="True">
+    <recipeMaker>
+      <recipeUsers Inherit="false">
+        <li>Milira_UniversalBench</li>
+      </recipeUsers>
+      <unfinishedThingDef>UnfinishedPack</unfinishedThingDef>
+      <useIngredientsForColor>false</useIngredientsForColor>
+      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+      <workSkill>Crafting</workSkill>
+      <effectWorking>Smith</effectWorking>
+      <soundWorking>Recipe_Smith</soundWorking>
+      <skillRequirements>
+        <Crafting>5</Crafting>
+      </skillRequirements>
+      <displayPriority>340</displayPriority>
+    </recipeMaker>
+    <techLevel>Spacer</techLevel>
+    <apparel>
+      <tags>
+      </tags>
+      <countsAsClothingForNudity>false</countsAsClothingForNudity>
+      <scoreOffset>4</scoreOffset>
+      <careIfWornByCorpse>false</careIfWornByCorpse>
+      <careIfDamaged>false</careIfDamaged>
+      <wearPerDay>0</wearPerDay>
+      <bodyPartGroups>
+        <li>Waist</li>
+      </bodyPartGroups>
+      <layers>
+        <li>Belt</li>
+      </layers>
+    </apparel>
+    <thingCategories>
+      <li>Milira_Apparel_Utility</li>
+    </thingCategories>
+  </ThingDef>
+
+
+  <ThingDef ParentName="Milira_BeltBase">
+    <defName>Milira_Apparel_PlasmaShockGrenade</defName>
+    <label>plasma shock grenade belt</label>
+    <description>a series of grenades worn around the waist. When thrown, it explode and melt-down armor of targets.</description>
+    <graphicData>
+      <texPath>Milira/Apparel/Belt/Belt_PlasmaShockGrenade/Belt_PlasmaShockGrenade</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costList>
+      <Milira_SunPlateSteel>30</Milira_SunPlateSteel>
+      <Milira_SplendidSteel>60</Milira_SplendidSteel>
+      <ComponentSpacer>3</ComponentSpacer>
+      <Milira_SunLightFuel>30</Milira_SunLightFuel>
+    </costList>
+    <tickerType>Normal</tickerType>
+    <statBases>
+      <WorkToMake>12000</WorkToMake>
+      <Mass>1.2</Mass>
+      <Flammability>0.4</Flammability>
+      <EquipDelay>2</EquipDelay>
+      <RangedWeapon_Cooldown>0.1</RangedWeapon_Cooldown>
+    </statBases>
+    <comps>
+      <li Class="CompProperties_ApparelReloadable">
+        <maxCharges>3</maxCharges>
+        <ammoDef>Milira_SunLightFuel</ammoDef>
+			  <ammoCountPerCharge>10</ammoCountPerCharge>
+        <baseReloadTicks>60</baseReloadTicks>
+        <soundReload>Standard_Reload</soundReload>
+        <hotKey>Misc4</hotKey>
+        <chargeNoun>grenade</chargeNoun>
+        <displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+      </li>
+    </comps>
+    <verbs>
+      <li>
+        <label>throw plasma shock grenade</label>
+        <verbClass>Verb_LaunchProjectileStatic</verbClass>
+        <targetParams>
+          <canTargetLocations>true</canTargetLocations>
+        </targetParams>
+        <hasStandardCommand>true</hasStandardCommand>
+        <onlyManualCast>false</onlyManualCast>
+        <range>18.9</range>
+        <warmupTime>0.1</warmupTime>
+        <forcedMissRadius>1.0</forcedMissRadius>
+        <soundCast>ThrowGrenade</soundCast>
+        <drawHighlightWithLineOfSight>true</drawHighlightWithLineOfSight>
+        <defaultProjectile>MiliraProj_PlasmaShockGrenade</defaultProjectile>
+        <rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
+      </li>
+    </verbs>
+    <recipeMaker>
+      <skillRequirements>
+        <Crafting>6</Crafting>
+      </skillRequirements>
+      <researchPrerequisite>Milira_StandardPlasmaWeapon</researchPrerequisite>
+    </recipeMaker>
+    <generateAllowChance>1.0</generateAllowChance>
+    <apparel>
+      <wornGraphicPath>Milira/Apparel/Belt/Belt_PlasmaShockGrenade/Belt_PlasmaShockGrenade</wornGraphicPath>
+      <tags>
+        <li>Milira_PlasmaShockGrenade</li>
+      </tags>
+    </apparel>
+  </ThingDef>
+  <ThingDef ParentName="BaseGrenadeProjectile">
+    <defName>MiliraProj_PlasmaShockGrenade</defName>
+    <label>plasma shock grenade</label>
+    <thingClass>Projectile_Explosive</thingClass>
+    <graphicData>
+      <texPath>Milira/ProjectileNew/Proj_PlasmaShockGrenade</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>Milira_PlasmaBombBig</damageDef>
+      <explosionRadius>2.6</explosionRadius>
+      <damageAmountBase>40</damageAmountBase>
+      <armorPenetrationBase>0.45</armorPenetrationBase>
+      <stoppingPower>1.8</stoppingPower>
+      <speed>22</speed>
+      <explosionDelay>100</explosionDelay>
+      <!-- <explosionEffect>Milira_TrapRepulsiveActivated</explosionEffect> -->
+    </projectile>
+  </ThingDef>
+
+
+  <ThingDef ParentName="Milira_BeltBase">
+    <defName>Milira_Apparel_RepulsiveGrenade</defName>
+    <label>Repulsive Grenade Belt</label>
+    <description>a series of grenades worn around the waist. When thrown, it can repel units within a certain range.</description>
+    <graphicData>
+      <texPath>Milira/Apparel/Belt/Belt_RepulsiveGrenade/Belt_RepulsiveGrenade</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costList>
+      <Milira_SplendidSteel>60</Milira_SplendidSteel>
+      <ComponentIndustrial>6</ComponentIndustrial>
+      <Milira_SunLightFuel>30</Milira_SunLightFuel>
+    </costList>
+    <tickerType>Normal</tickerType>
+    <statBases>
+      <WorkToMake>12000</WorkToMake>
+      <Mass>1.2</Mass>
+      <Flammability>0.4</Flammability>
+      <EquipDelay>2</EquipDelay>
+      <RangedWeapon_Cooldown>0.1</RangedWeapon_Cooldown>
+    </statBases>
+    <comps>
+      <li Class="CompProperties_ApparelReloadable">
+        <maxCharges>3</maxCharges>
+        <ammoDef>Milira_SunLightFuel</ammoDef>
+			  <ammoCountPerCharge>10</ammoCountPerCharge>
+        <baseReloadTicks>60</baseReloadTicks>
+        <soundReload>Standard_Reload</soundReload>
+        <hotKey>Misc4</hotKey>
+        <chargeNoun>grenade</chargeNoun>
+        <displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+      </li>
+    </comps>
+    <verbs>
+      <li>
+        <label>throw repulsive grenade</label>
+        <verbClass>Verb_LaunchProjectileStatic</verbClass>
+        <targetParams>
+          <canTargetLocations>true</canTargetLocations>
+        </targetParams>
+        <hasStandardCommand>true</hasStandardCommand>
+        <onlyManualCast>false</onlyManualCast>
+        <range>18.9</range>
+        <warmupTime>0.1</warmupTime>
+        <forcedMissRadius>1.0</forcedMissRadius>
+        <soundCast>ThrowGrenade</soundCast>
+        <drawHighlightWithLineOfSight>true</drawHighlightWithLineOfSight>
+        <defaultProjectile>MiliraProj_RepulsiveGrenade</defaultProjectile>
+        <rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
+      </li>
+    </verbs>
+    <recipeMaker>
+      <skillRequirements>
+        <Crafting>6</Crafting>
+      </skillRequirements>
+      <researchPrerequisite>Milira_FieldTrap</researchPrerequisite>
+    </recipeMaker>
+    <generateAllowChance>1.0</generateAllowChance>
+    <apparel>
+      <wornGraphicPath>Milira/Apparel/Belt/Belt_RepulsiveGrenade/Belt_RepulsiveGrenade</wornGraphicPath>
+      <tags>
+        <li>Milira_RepulsiveGrenade</li>
+      </tags>
+    </apparel>
+  </ThingDef>
+  <ThingDef ParentName="BaseGrenadeProjectile">
+    <defName>MiliraProj_RepulsiveGrenade</defName>
+    <label>Repulsive Grenade</label>
+    <thingClass>AncotLibrary.Projectile_Repulsive</thingClass>
+    <graphicData>
+      <texPath>Milira/ProjectileNew/Proj_RepulsiveGrenade</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <explosionRadius>4.5</explosionRadius>
+      <speed>22</speed>
+      <damageAmountBase>8</damageAmountBase>
+      <armorPenetrationBase>1.0</armorPenetrationBase>
+      <explosionDelay>100</explosionDelay>
+      <explosionEffect>Milira_TrapRepulsiveActivated</explosionEffect>
+    </projectile>
+    <modExtensions>
+      <li Class="AncotLibrary.FieldForceProjectile_Extension">
+        <removeHediffsAffected>
+          <li>Milian_KnightI_KnightCharge</li>
+        </removeHediffsAffected>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+
+
+  <ThingDef ParentName="Milira_BeltBase">
+    <defName>Milira_Apparel_AttractiveGrenade</defName>
+    <label>gravitational grenade belt</label>
+    <description>a series of grenades worn around the waist. When thrown, it can attract units within a certain range towards the center.</description>
+    <graphicData>
+      <texPath>Milira/Apparel/Belt/Belt_AttractiveGrenade/Belt_AttractiveGrenade</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costList>
+      <Milira_SplendidSteel>60</Milira_SplendidSteel>
+      <ComponentIndustrial>6</ComponentIndustrial>
+      <Milira_SunLightFuel>30</Milira_SunLightFuel>
+    </costList>
+    <tickerType>Normal</tickerType>
+    <statBases>
+      <WorkToMake>12000</WorkToMake>
+      <Mass>1.2</Mass>
+      <Flammability>0.4</Flammability>
+      <EquipDelay>2</EquipDelay>
+      <RangedWeapon_Cooldown>0.1</RangedWeapon_Cooldown>
+    </statBases>
+    <comps>
+      <li Class="CompProperties_ApparelReloadable">
+        <maxCharges>3</maxCharges>
+        <ammoDef>Milira_SunLightFuel</ammoDef>
+			  <ammoCountPerCharge>10</ammoCountPerCharge>
+        <baseReloadTicks>60</baseReloadTicks>
+        <soundReload>Standard_Reload</soundReload>
+        <hotKey>Misc4</hotKey>
+        <chargeNoun>grenade</chargeNoun>
+        <displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+      </li>
+    </comps>
+    <verbs>
+      <li>
+        <label>throw gravitational grenade</label>
+        <verbClass>Verb_LaunchProjectileStatic</verbClass>
+        <targetParams>
+          <canTargetLocations>true</canTargetLocations>
+        </targetParams>
+        <hasStandardCommand>true</hasStandardCommand>
+        <onlyManualCast>false</onlyManualCast>
+        <range>18.9</range>
+        <warmupTime>0.1</warmupTime>
+        <forcedMissRadius>1.0</forcedMissRadius>
+        <soundCast>ThrowGrenade</soundCast>
+        <drawHighlightWithLineOfSight>true</drawHighlightWithLineOfSight>
+        <defaultProjectile>MiliraProj_AttractiveGrenade</defaultProjectile>
+        <rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
+      </li>
+    </verbs>
+    <recipeMaker>
+      <skillRequirements>
+        <Crafting>6</Crafting>
+      </skillRequirements>
+      <researchPrerequisite>Milira_FieldTrap</researchPrerequisite>
+    </recipeMaker>
+    <generateAllowChance>1.0</generateAllowChance>
+    <apparel>
+      <wornGraphicPath>Milira/Apparel/Belt/Belt_AttractiveGrenade/Belt_AttractiveGrenade</wornGraphicPath>
+      <tags>
+        <li>Milira_AttractiveGrenade</li>
+      </tags>
+    </apparel>
+  </ThingDef>
+  <ThingDef ParentName="BaseGrenadeProjectile">
+    <defName>MiliraProj_AttractiveGrenade</defName>
+    <label>gravitational grenade</label>
+    <thingClass>AncotLibrary.Projectile_Gravitational</thingClass>
+    <graphicData>
+      <texPath>Milira/ProjectileNew/Proj_AttractiveGrenade</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <explosionRadius>8.5</explosionRadius>
+      <speed>22</speed>
+      <damageAmountBase>6</damageAmountBase>
+      <armorPenetrationBase>1.0</armorPenetrationBase>
+      <explosionDelay>100</explosionDelay>
+      <explosionEffect>Milira_TrapAttractiveActivated</explosionEffect>
+    </projectile>
+    <modExtensions>
+      <li Class="AncotLibrary.FieldForceProjectile_Extension">
+        <removeHediffsAffected>
+          <li>Milian_KnightI_KnightCharge</li>
+        </removeHediffsAffected>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+
+
+</Defs>

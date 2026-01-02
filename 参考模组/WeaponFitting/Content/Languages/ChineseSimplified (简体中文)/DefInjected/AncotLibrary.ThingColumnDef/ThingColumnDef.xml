@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: favorites -->
+  <Favorites.label>收藏</Favorites.label>
+  
+  <!-- EN: Rename -->
+  <Rename.headerTip>重命名</Rename.headerTip>
+  
+  <!-- EN: fitting equipped on this weapon. -->
+  <WeaponFitting.headerTip>装配在这把武器上的配件</WeaponFitting.headerTip>
+  
+  <!-- EN: owner -->
+  <WeaponOwner.label>武器持有者</WeaponOwner.label>
+  
+</LanguageData>

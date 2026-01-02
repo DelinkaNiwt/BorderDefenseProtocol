@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <Setting_CMC>武器生成設定[部分無需重啟即可生效]</Setting_CMC>
+  <Setting1_CMC>非殖民者持有天工重型武器</Setting1_CMC>
+	  <Setting3_CMC>非殖民者持有天工常規輕武器</Setting3_CMC>
+	  <Setting_label1_CMC>游戲數值倍率</Setting_label1_CMC>
+	    <Setting5_CMC>子彈傷害倍率</Setting5_CMC>
+		<Setting5_1_CMC>子彈傷害</Setting5_1_CMC>
+		<Setting6_CMC>子彈穿甲倍率</Setting6_CMC>
+		<Setting6_1_CMC>子彈穿甲率</Setting6_1_CMC>
+		<Setting7_CMC>子彈爆炸範圍倍率</Setting7_CMC>
+		<Setting7_1_CMC>子彈爆炸範圍</Setting7_1_CMC>
+		
+		<Setting8_CMC>武器冷卻倍率[重啟游戲後生效]</Setting8_CMC>
+		<Setting8_1_CMC>武器冷卻倍率[重啟游戲後生效]</Setting8_1_CMC>
+		
+		<Setting9_CMC>武器預熱倍率</Setting9_CMC>
+		<Setting9_1_CMC>武器預熱倍率</Setting9_1_CMC>
+		
+		
+<Setting_D1_CMC>非殖民者持有天工重型武器</Setting_D1_CMC>
+<Setting_D3_CMC>非殖民者持有天工常規輕武器</Setting_D3_CMC>
+
+</LanguageData>

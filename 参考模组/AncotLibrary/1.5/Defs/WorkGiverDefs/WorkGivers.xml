@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- <WorkGiverDef ParentName="HaulToBase"> -->
+  <WorkGiverDef>
+    <defName>Ancot_HaulToMechCarrier_Custom</defName>
+    <label>haul resource to mech carrier</label>
+    <giverClass>AncotLibrary.WorkGiver_HaulResourcesToMechCarrier_Custom</giverClass>
+    <workType>Hauling</workType>
+    <verb>haul to</verb>
+    <gerund>hauling to</gerund>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <priorityInType>90</priorityInType>
+  </WorkGiverDef>
+
+  <WorkGiverDef>
+    <defName>Ancot_MechDrill</defName>
+    <label>drill at deep drill</label>
+    <giverClass>AncotLibrary.WorkGiver_MechDeepDrill</giverClass>
+    <workType>Mining</workType>
+    <priorityInType>50</priorityInType>
+    <verb>drill</verb>
+    <gerund>drilling</gerund>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <canBeDoneByMutants>false</canBeDoneByMutants>
+    <modExtensions>
+      <li Class="AncotLibrary.ModExtension_MechList">
+        <mechs>
+        </mechs>
+      </li>
+    </modExtensions>
+  </WorkGiverDef>
+
+  <WorkGiverDef>
+    <defName>Ancot_MechMeleeHunt</defName>
+    <label>hunt</label>
+    <giverClass>AncotLibrary.WorkGiver_MechMeleeHunt</giverClass>
+    <workType>Hunting</workType>
+    <verb>hunt</verb>
+    <gerund>hunting</gerund>
+    <tagToGive>Fieldwork</tagToGive>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <modExtensions>
+      <li Class="AncotLibrary.ModExtension_MechList">
+        <mechs>
+        </mechs>
+        <mechsRequireWeapon>
+        </mechsRequireWeapon>
+        <healthPercent>0.6</healthPercent>
+      </li>
+    </modExtensions>
+  </WorkGiverDef>
+
+
+</Defs>

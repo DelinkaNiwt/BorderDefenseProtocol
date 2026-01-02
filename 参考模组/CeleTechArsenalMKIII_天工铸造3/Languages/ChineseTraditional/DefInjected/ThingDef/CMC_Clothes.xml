@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: CMC combat suit -->
+  <CMC_Uniform.label>【天鑄】納米戰衣</CMC_Uniform.label>
+  <!-- EN: A combat uniform which can insulate extreme heat and provide sufficient protection. -->
+  <CMC_Uniform.description>由納米材料製成的緊身戰鬥服，能抵禦極端溫度。</CMC_Uniform.description>
+  
+  <CMC_Uniform_MKII.label>【天鑄】乾員風衣</CMC_Uniform_MKII.label>
+  <!-- EN: A combat uniform which can insulate extreme heat and provide sufficient protection. -->
+  <CMC_Uniform_MKII.description>為天工外勤乾員設計的納米材料風衣，裝備有限次數的光學隱身裝置，以提高穿著者的生存率。\n\n光學隱身裝置最多可使用三次，需要白銀作為冷卻劑。</CMC_Uniform_MKII.description>
+  <CMC_Uniform_MKII.verbs.TOT_DLL_test.Verb_Invisible>光學隱身</CMC_Uniform_MKII.verbs.TOT_DLL_test.Verb_Invisible>
+  
+  <CMChelmet_Hood.label>【天鑄】乾員兜帽（遠程）</CMChelmet_Hood.label>
+  <!-- EN: A combat uniform which can insulate extreme heat and provide sufficient protection. -->
+  <CMChelmet_Hood.description>為天工外勤乾員設計的納米材料戰術兜帽，裝備內置零素裝甲板和鏈接火控計算機的屏顯以協助遠程作戰。</CMChelmet_Hood.description>
+  
+  <CMC_ZGRangedShieldBelt.label>【止戈】力場護盾</CMC_ZGRangedShieldBelt.label>
+  <!-- EN: A combat uniform which can insulate extreme heat and provide sufficient protection. -->
+  <CMC_ZGRangedShieldBelt.description>“止戈”是一款高速充能且免疫EMP的護盾腰帶，其生成的力場護盾在允許穿著者向外射擊的同時有小概率將來襲傷害降至1點。</CMC_ZGRangedShieldBelt.description>
+  
+  <CMC_MissileDrone.label>【精衛-填海】導彈浮游炮</CMC_MissileDrone.label>
+  <!-- EN: A combat uniform which can insulate extreme heat and provide sufficient protection. -->
+  <CMC_MissileDrone.description>精衛-M 導彈浮游炮是一款專為戰場靈活作戰設計的自主攻擊型武器系統，其搭載有先進的微型推進裝置和多向感應系統，能夠懸浮於控制者周圍並自主鎖定敵方目標，同時維修控制者的裝備。該武器適用於復雜地形和快速變換的戰鬥環境。
+
+浮游炮攜帶有24發短程自衛飛彈（SRDM），該導彈先進的制導系統使其能夠精準追蹤目標並進行高效攻擊。然而，SRDM戰鬥部裝藥量較少，火力有限，主要針對輕裝甲目標或非裝甲敵人。\n導彈在消耗完後需要手動補充。</CMC_MissileDrone.description>
+
+  <CMC_GunDrone.label>【精衛-銜微】電磁浮游炮</CMC_GunDrone.label>
+  <CMC_GunDrone.description>精衛-K 電荷機槍浮游炮是一款專為戰場靈活作戰設計的自主攻擊型武器系統，其搭載有先進的微型推進裝置和多向感應系統，能夠懸浮於控制者周圍並自主鎖定敵方目標，同時維修控制者的裝備。該武器適用於復雜地形和快速變換的戰鬥環境。</CMC_GunDrone.description>
+</LanguageData>

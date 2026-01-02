@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Solar fuel power generator -->
+  <Milira_SunLightFuelPoweredGenerator.label>日光燃料发电机</Milira_SunLightFuelPoweredGenerator.label>
+  <!-- EN: Generates electricity by consuming solar fuel. It requires fuel to operate. -->
+  <Milira_SunLightFuelPoweredGenerator.description>通过消耗日光燃料发电。需要添加燃料才能运行。</Milira_SunLightFuelPoweredGenerator.description>
+  
+  <Milira_StableSunLightFuelBattery.label>稳定日光燃料电池</Milira_StableSunLightFuelBattery.label>
+  <Milira_StableSunLightFuelBattery.description>一枚稳定的，近乎恒燃的燃料电池。厚重的外壳保护和反应规模有效控制使得其即使受到损伤也很难发生爆炸。</Milira_StableSunLightFuelBattery.description>
+  
+</LanguageData>

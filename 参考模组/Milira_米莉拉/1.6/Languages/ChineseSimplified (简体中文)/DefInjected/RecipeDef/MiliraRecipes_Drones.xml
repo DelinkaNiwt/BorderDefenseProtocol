@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 组装清洁单元 -->
+  <Milira_MakeDrone_Cleansweeper.label>组装清洁单元</Milira_MakeDrone_Cleansweeper.label>
+  <!-- EN: 组装一个清洁单元。 -->
+  <Milira_MakeDrone_Cleansweeper.description>组装一个清洁单元。</Milira_MakeDrone_Cleansweeper.description>
+  <!-- EN: assemble drone. -->
+  <Milira_MakeDrone_Cleansweeper.jobString>组装无人机</Milira_MakeDrone_Cleansweeper.jobString>
+  
+  <!-- EN: 组装运载单元 -->
+  <Milira_MakeDrone_Freight.label>组装运载单元</Milira_MakeDrone_Freight.label>
+  <!-- EN: 组装一个运载单元。 -->
+  <Milira_MakeDrone_Freight.description>组装一个运载单元。</Milira_MakeDrone_Freight.description>
+  <!-- EN: assemble drone. -->
+  <Milira_MakeDrone_Freight.jobString>组装无人机</Milira_MakeDrone_Freight.jobString>
+  
+  <!-- EN: 组装运载单元 -->
+  <Milira_MakeDrone_Storage.label>组装贮存单元</Milira_MakeDrone_Storage.label>
+  <!-- EN: 组装一个运载单元。 -->
+  <Milira_MakeDrone_Storage.description>组装一个贮存单元。</Milira_MakeDrone_Storage.description>
+  <!-- EN: assemble drone. -->
+  <Milira_MakeDrone_Storage.jobString>组装无人机</Milira_MakeDrone_Storage.jobString>
+  
+</LanguageData>

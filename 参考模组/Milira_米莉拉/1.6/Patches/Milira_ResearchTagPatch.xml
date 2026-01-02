@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ResearchProjectDef[defName="Stonecutting"]/tags</xpath>
+				<value>
+					<li>MiliraRefugeeStart</li>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ResearchProjectDef[defName="PassiveCooler"]/tags</xpath>
+				<value>
+					<li>MiliraRefugeeStart</li>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ResearchProjectDef[defName="ComplexFurniture"]/tags</xpath>
+				<value>
+					<li>MiliraRefugeeStart</li>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ResearchProjectDef[defName="ComplexClothing"]/tags</xpath>
+				<value>
+					<li>MiliraRefugeeStart</li>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+
+<!-- 锻造 -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ResearchProjectDef[defName="Smithing"]/tags</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ResearchProjectDef[defName="Smithing"]</xpath>
+			<value>
+				<tags></tags>
+			</value>
+		</nomatch>
+	</Operation>
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ResearchProjectDef[defName="Smithing"]/tags</xpath>
+				<value>
+					<li>MiliraRefugeeStart</li>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+
+	<!-- 机械加工 -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ResearchProjectDef[defName="Machining"]/tags</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ResearchProjectDef[defName="Machining"]</xpath>
+			<value>
+				<tags></tags>
+			</value>
+		</nomatch>
+	</Operation>
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ResearchProjectDef[defName="Machining"]/tags</xpath>
+				<value>
+					<li>MiliraRefugeeStart</li>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+
+</Patch>

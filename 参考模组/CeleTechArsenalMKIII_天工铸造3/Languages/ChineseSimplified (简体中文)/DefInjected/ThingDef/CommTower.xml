@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: long-range quantum communication tower -->
+  <CMC_CommTower.label>远程量子通信塔</CMC_CommTower.label>
+  <!-- EN: An interstellar communication node based on quantum entanglement.Its "Heavenly Secret" Quantum Communication Core disregards planetary curvature and physical obstacles, instantly synchronizing information between planetary surfaces and deep space. This technology sustains communications among the Heavenly Industry Commerce League's orbital merchant ships, interstellar destroyers, and ground stations.\n\nOnce constructed, it enables communication with the CAG trade fleet to request dispatch of autonomous trade shuttles or purchase security services. -->
+  <CMC_CommTower.description>以量子纠缠为基石的星际通讯节点。其「天机」量子通信核心无视行星曲率与物理阻隔，瞬间同步信息于地表与深空。天工商盟的轨道商船、星际驱逐舰和地面站之间的通信皆赖此维系。\n\n建造后与天工商盟的贸易船队通信，请求其派遣贸易无人穿梭机，或购买安全服务。</CMC_CommTower.description>
+  
+</LanguageData>

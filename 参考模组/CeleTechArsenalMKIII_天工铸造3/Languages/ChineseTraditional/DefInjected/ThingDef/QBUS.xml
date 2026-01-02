@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: <color=#FFCC66><i>QBZS-85X XiangJian</i></color> -->
+  <QBUS85XWJ.label>QBUS-85 智能射手步槍</QBUS85XWJ.label>
+  <!-- EN: A smart sniper, it fires guided bullets which can accurately hit moving target at long range regardless of weather conditions. -->
+  <QBUS85XWJ.description>發射追蹤子彈的半自動射手步槍，可以在遠距離命中移動目標。對步兵較為有效。\n\n該武器的追蹤模式命中率僅受射手智識水平影響，且子彈傷害穿深隨距離衰減。</QBUS85XWJ.description>
+  <!-- EN: stock -->
+  <QBUS85XWJ.tools.stock.label>槍托</QBUS85XWJ.tools.stock.label>
+  <!-- EN: barrel -->
+  <QBUS85XWJ.tools.barrel.label>槍管</QBUS85XWJ.tools.barrel.label>
+  <!-- EN: <color=#FFCC66><i>QBZS-85X XiangJian</i></color> -->
+  <QBUS85XWJ.verbs.Verb_Shoot.label>QBUS-85 智能射手步槍</QBUS85XWJ.verbs.Verb_Shoot.label>
+  
+  <QBUS85F.label>&lt;color=#5BC4E2&gt;&lt;i&gt;QBUS-85F“離火”智能戰術射手步槍&lt;/i&gt;&lt;/color&gt;</QBUS85F.label>
+  <!-- EN: A smart sniper, it fires guided bullets which can accurately hit moving target at long range regardless of weather conditions. -->
+  <QBUS85F.description>基於QBUS-85打造的智能射手步槍，槍管採用碳化鎢-陶瓷復合鍍層以承受穿甲燃燒彈的極端膛壓。配備智能熱感瞄準鏡，可自動識別目標裝甲薄弱點並標記易燃區域。彈匣內裝填的貧鈾穿甲燃燒彈（API）在擊穿目標後，內置白磷燃燒劑會引發明火，對生物目標造成持續性灼燒傷害。</QBUS85F.description>
+  <!-- EN: stock -->
+  <QBUS85F.tools.stock.label>槍托</QBUS85F.tools.stock.label>
+  <!-- EN: barrel -->
+  <QBUS85F.tools.barrel.label>槍管</QBUS85F.tools.barrel.label>
+  <!-- EN: <color=#FFCC66><i>QBZS-85X XiangJian</i></color> -->
+  <QBUS85F.verbs.Verb_Shoot.label>&lt;color=#5BC4E2&gt;&lt;i&gt;QBUS-85F“離火”智能戰術射手步槍&lt;/i&gt;&lt;/color&gt;</QBUS85F.verbs.Verb_Shoot.label>
+  
+</LanguageData>

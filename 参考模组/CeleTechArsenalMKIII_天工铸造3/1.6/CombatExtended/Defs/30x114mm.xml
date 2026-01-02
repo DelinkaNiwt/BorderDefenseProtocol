@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ThingCategoryDef>
+    <defName>AmmoCategory_CMC_30x114mm</defName>
+    <label>30x114mm Electromagnetic</label>
+    <parent>AmmoAdvanced</parent>
+    <iconPath>Things/Ammo/30x114mmUI</iconPath>
+  </ThingCategoryDef>
+  <CombatExtended.AmmoSetDef>
+    <defName>AmmoSet_CMC_30x114mm</defName>
+    <label>30x114mm Electromagnetic</label>
+    <ammoTypes>
+      <Ammo_CMC_30x114mm_APDS>Bullet_CMC_30x114mm_APDS</Ammo_CMC_30x114mm_APDS>
+    </ammoTypes>
+  </CombatExtended.AmmoSetDef>
+  <ThingDef Class="CombatExtended.AmmoDef" Name="Ammo_CMC_30x114mm_Base" ParentName="SpacerMediumAmmoBase" Abstract="True">
+    <description>TODO</description>
+    <statBases>
+      <Mass>0.07</Mass>
+      <Bulk>0.05</Bulk>
+    </statBases>
+    <tradeTags>
+      <li>CE_AutoEnableTrade</li>
+      <li>CE_AutoEnableCrafting</li>
+    </tradeTags>
+    <thingCategories>
+      <li>AmmoCategory_CMC_30x114mm</li>
+    </thingCategories>
+  </ThingDef>
+  <ThingDef Name="Bullet_CMC_30x114mm_Base" ParentName="BaseBulletCE" Abstract="True">
+    <graphicData>
+      <texPath>Things/Projectile/ChargeLanceShot</texPath>
+      <graphicClass>Verse.Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile Class="CombatExtended.ProjectilePropertiesCE">
+      <speed>240</speed>
+      <damageDef>Bullet</damageDef>
+      <dropsCasings>true</dropsCasings>
+    </projectile>
+  </ThingDef>
+  <ThingDef Class="CombatExtended.AmmoDef" ParentName="Ammo_CMC_30x114mm_Base">
+    <defName>Ammo_CMC_30x114mm_APDS</defName>
+    <label>30x114mm Electromagnetic APDS</label>
+    <graphicData>
+      <texPath>Things/Ammo/30x114mm_APDS</texPath>
+      <graphicClass>Verse.Graphic_StackCount</graphicClass>
+    </graphicData>
+    <ammoClass>Sabot</ammoClass>
+    <cookOffProjectile>Bullet_CMC_30x114mm_APDS</cookOffProjectile>
+  </ThingDef>
+  <ThingDef ParentName="Bullet_CMC_30x114mm_Base">
+    <defName>Bullet_CMC_30x114mm_APDS</defName>
+    <projectile Class="CombatExtended.ProjectilePropertiesCE">
+      <damageAmountBase>25</damageAmountBase>
+      <armorPenetrationBlunt>100</armorPenetrationBlunt>
+      <armorPenetrationSharp>78</armorPenetrationSharp>
+      <secondaryDamage>
+        <li>
+          <def>EMP</def>
+          <amount>12</amount>
+        </li>
+      </secondaryDamage>
+    </projectile>
+  </ThingDef>
+  <RecipeDef ParentName="AmmoRecipeBase">
+    <defName>MakeAmmo_CMC_30x114mm_APDS</defName>
+    <label>make CMC_30x114mm APDS cartridge x500</label>
+    <description>Craft 500 CMC_30x114mm APDS cartridges.</description>
+    <jobString>Making CMC_30x114mm APDS cartridges.</jobString>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Uranium</li>
+          </thingDefs>
+        </filter>
+        <count>20</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>50</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>12</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Uranium</li>
+        <li>Plasteel</li>
+        <li>ComponentSpacer</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Ammo_CMC_30x114mm_APDS>500</Ammo_CMC_30x114mm_APDS>
+    </products>
+    <workAmount>2000</workAmount>
+  </RecipeDef>
+</Defs>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Solar fuel power generator -->
+  <Milira_SunLightFuelPoweredGenerator.label>日光燃料发电机</Milira_SunLightFuelPoweredGenerator.label>
+  <!-- EN: Generates electricity by consuming solar fuel. It requires fuel to operate. -->
+  <Milira_SunLightFuelPoweredGenerator.description>通过消耗日光燃料发电。需要添加燃料才能运行。</Milira_SunLightFuelPoweredGenerator.description>
+  
+</LanguageData>

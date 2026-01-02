@@ -1,0 +1,73 @@
+<Defs>
+<ThingDef ParentName="BuildingBase">
+    <defName>CMC_DECO_WIFI</defName>
+    <label>CeleTech mood booster</label>
+    <description>A device that improves everyone's mood nearby.</description>
+    <graphicData>
+      <texPath>Things/Buildings/Moodbooster</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1</drawSize>
+	  <drawOffset>(0,0,0.35)</drawOffset>
+    </graphicData>
+    <uiIconScale>1</uiIconScale>
+	<rotatable>false</rotatable>
+    <thingCategories>
+      <li>BuildingsJoy</li>
+    </thingCategories>
+	<costList>
+      <Steel>40</Steel>
+	  <Plasteel>100</Plasteel>
+      <ComponentIndustrial>10</ComponentIndustrial>
+	  <ComponentSpacer>2</ComponentSpacer>
+	  <Silver>10</Silver>
+	  <Gold>3</Gold>
+    </costList>
+	<designationCategory>CMC_DefensenProduction</designationCategory>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>150</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+	  <li>
+        <compClass>CompQuality</compClass>
+      </li>
+	  <li Class="CompProperties_Art">
+        <nameMaker>NamerArtFurniture</nameMaker>
+        <descriptionMaker>ArtDescription_Furniture</descriptionMaker>
+        <minQualityForArtistic>Excellent</minQualityForArtistic>
+      </li>
+    </comps>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+	<clearBuildingArea>false</clearBuildingArea>
+    <building>
+      <destroySound>BuildingDestroyed_Metal_Medium</destroySound>
+	  <isEdifice>false</isEdifice>
+	  <canBuildNonEdificesUnder>true</canBuildNonEdificesUnder>
+    </building>
+    <statBases>
+      <MarketValue>800</MarketValue>
+      <MaxHitPoints>200</MaxHitPoints>
+      <Flammability>1</Flammability>
+      <Beauty>72</Beauty>
+      <Mass>1.5</Mass>
+      <WorkToBuild>7500</WorkToBuild>
+    </statBases>
+    <thingSetMakerTags>
+      <li>RewardStandardCore</li>
+    </thingSetMakerTags>
+    <fillPercent>0.1</fillPercent>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <pathCost>0</pathCost>
+    <passability>PassThroughOnly</passability>
+    <canOverlapZones>true</canOverlapZones>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <tradeability>Sellable</tradeability>
+    <tickerType>Normal</tickerType>
+	<specialDisplayRadius>10</specialDisplayRadius>
+	<researchPrerequisites>
+	  <li>CMC_BasisHeavy</li>
+    </researchPrerequisites>
+  </ThingDef>
+  
+</Defs>

@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef Name="FieldTrapBase" ParentName="TrapIEDBase" Abstract="true">
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <tickerType>Normal</tickerType>
+    <researchPrerequisites>
+      <li>Milira_FieldTrap</li>
+    </researchPrerequisites>
+    <costList>
+      <Milira_SplendidSteel>20</Milira_SplendidSteel>
+      <Milira_SunLightFuel>10</Milira_SunLightFuel>
+    </costList>
+    <designationHotKey>Misc7</designationHotKey>
+    <building>
+      <combatPower>5</combatPower>
+      <buildingTags>
+        <li>MiliraClusterMember</li>
+        <li>MiliraClusterCombatThreat</li>
+      </buildingTags>
+      <trapPeacefulWildAnimalsSpringChanceFactor>0.01</trapPeacefulWildAnimalsSpringChanceFactor>
+      <minDistanceToSameTypeOfBuilding>8</minDistanceToSameTypeOfBuilding>
+    </building>
+  </ThingDef>
+
+  <ThingDef ParentName="FieldTrapBase">
+    <defName>Milira_TrapRepulsive</defName>
+    <label>milira repulsion trap</label>
+    <thingClass>AncotLibrary.Building_TrapRepulsive</thingClass>
+    <description>A trap that, upon activation, instantly applies a repulsive force field over a large area centered around itself.</description>
+    <graphicData>
+      <texPath>Milira/Building/Security/FieldTrap_Repulsive</texPath>
+      <drawSize>(2,2)</drawSize>
+    </graphicData>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_RepulsiveTrap">
+        <range>10.9</range>
+        <distance>11.9</distance>
+        <onlyTargetHostile>true</onlyTargetHostile>
+        <explosionEffect>Milira_TrapRepulsiveActivated</explosionEffect>
+        <startWickHitPointsPercent>0.2</startWickHitPointsPercent>
+        <wickTicks>15</wickTicks>
+        <signalTag>CompCanBeDormant.WakeUp</signalTag>
+        <startWickOnDamageTaken>
+          <li>Bullet</li>
+          <li>Arrow</li>
+          <li>ArrowHighVelocity</li>
+        </startWickOnDamageTaken>
+        <removeHediffsAffected>
+          <li>Milian_KnightI_KnightCharge</li>
+        </removeHediffsAffected>
+      </li>
+    </comps>
+    <specialDisplayRadius>4.9</specialDisplayRadius>
+    <placeWorkers Inherit="false">
+    </placeWorkers>
+    <modExtensions>
+      <li Class="AncotLibrary.TrapAreaSpringRaduis_Extension">
+        <springRadius>4.9</springRadius>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <ThingDef ParentName="FieldTrapBase">
+    <defName>Milira_TrapAttractive</defName>
+    <label>milira gravity trap</label>
+    <thingClass>AncotLibrary.Building_TrapAttractive</thingClass>
+    <description>A trap that, upon activation, instantly applies a gravitational field over a large area centered around itself.</description>
+    <graphicData>
+      <texPath>Milira/Building/Security/FieldTrap_Attractive</texPath>
+      <drawSize>(2,2)</drawSize>
+    </graphicData>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_GravitationalTrap">
+        <range>11.9</range>
+        <distance>7.9</distance>
+        <onlyTargetHostile>true</onlyTargetHostile>
+        <explosionEffect>Milira_TrapAttractiveActivated</explosionEffect>
+        <startWickHitPointsPercent>0.2</startWickHitPointsPercent>
+        <wickTicks>15</wickTicks>
+        <signalTag>CompCanBeDormant.WakeUp</signalTag>
+        <startWickOnDamageTaken>
+          <li>Bullet</li>
+          <li>Arrow</li>
+          <li>ArrowHighVelocity</li>
+        </startWickOnDamageTaken>
+        <removeHediffsAffected>
+          <li>Milian_KnightI_KnightCharge</li>
+        </removeHediffsAffected>
+      </li>
+      <li Class="AncotLibrary.CompProperties_AdditionalGraphic">
+        <floatAmplitude>0.2</floatAmplitude>
+        <floatSpeed>0.008</floatSpeed>
+        <graphicData>
+          <texPath>Milira/Building/Security/MiliraTurretTop_Plasma</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <shaderType>MoteGlow</shaderType>
+          <drawSize>(2,2)</drawSize>
+          <drawOffset>(0,0,0)</drawOffset>
+        </graphicData>
+        <altitudeLayer>Skyfaller</altitudeLayer>
+      </li>
+    </comps>
+    <specialDisplayRadius>7.9</specialDisplayRadius>
+    <placeWorkers Inherit="false">
+    </placeWorkers>
+    <modExtensions>
+      <li Class="AncotLibrary.TrapAreaSpringRaduis_Extension">
+        <springRadius>7.9</springRadius>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+
+</Defs>

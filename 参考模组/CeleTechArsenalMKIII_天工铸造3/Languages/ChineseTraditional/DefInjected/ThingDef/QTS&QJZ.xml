@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <QTS9_OICW.label>QTS-9 先進單兵綜合作戰武器</QTS9_OICW.label>
+  <QTS9_OICW.description>先進的單兵作戰武器系統，集成了彈匣電磁榴彈發射器和大口徑電磁步槍，在遠距離作戰極為有效。</QTS9_OICW.description>
+  <QTS9_OICW.tools.stock.label>槍托</QTS9_OICW.tools.stock.label>
+  <QTS9_OICW.tools.barrel.label>槍管</QTS9_OICW.tools.barrel.label>
+  <QTS9_OICW.verbs.Verb_Shoot.label>QTS-9單兵綜合作戰武器</QTS9_OICW.verbs.Verb_Shoot.label>
+  
+   <QBZ71_QS.label>QTS-7 單兵綜合作戰武器</QBZ71_QS.label>
+  <QBZ71_QS.description>單兵作戰武器系統，集成了單發榴彈和大口徑電磁步槍。</QBZ71_QS.description>
+  <QBZ71_QS.tools.stock.label>槍托</QBZ71_QS.tools.stock.label>
+  <QBZ71_QS.tools.barrel.label>槍管</QBZ71_QS.tools.barrel.label>
+  <QBZ71_QS.verbs.Verb_Shoot.label>QTS-7單兵綜合作戰武器</QBZ71_QS.verbs.Verb_Shoot.label>
+  
+  <CMC_QJZFivenine.label>QJZ-59 電磁重機槍</CMC_QJZFivenine.label>
+  <CMC_QJZFivenine.description>大口徑電磁機槍，雖然能單兵攜帶，但會嚴重影響機動性。</CMC_QJZFivenine.description>
+  <CMC_QJZFivenine.tools.stock.label>槍托</CMC_QJZFivenine.tools.stock.label>
+  <CMC_QJZFivenine.tools.barrel.label>槍管</CMC_QJZFivenine.tools.barrel.label>
+  <CMC_QJZFivenine.verbs.Verb_Shoot.label>QJZ-59 電磁重機槍</CMC_QJZFivenine.verbs.Verb_Shoot.label>
+  
+</LanguageData>

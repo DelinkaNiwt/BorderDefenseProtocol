@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Mote -->
+  <CMC_Laser_Stay_MoteNarrow.label>TODO</CMC_Laser_Stay_MoteNarrow.label>
+  
+  <!-- UNUSED -->
+  <CMC_Shaped_Laser_Sniper.verbs.Verb_Shoot.label>QBU-56 射线狙击枪</CMC_Shaped_Laser_Sniper.verbs.Verb_Shoot.label>
+  
+  <!-- EN: QBZL-55 particle beam rifle -->
+  <CMC_ShapedLaserRifle.label>QBZ-55 射线步枪</CMC_ShapedLaserRifle.label>
+  <!-- EN: First generation of particle beam rifle, which is able to penetrate its target with energized particle. It is very effective against close-ranged targets. -->
+  <CMC_ShapedLaserRifle.description>对单个目标连续发射三束高能粒子射线的步枪，射线能穿透护盾且总能命中敌人，在命中时会等离子化周围的空气造成小范围伤害。</CMC_ShapedLaserRifle.description>
+  <!-- EN: stock -->
+  <CMC_ShapedLaserRifle.tools.stock.label>枪托</CMC_ShapedLaserRifle.tools.stock.label>
+  <!-- EN: barrel -->
+  <CMC_ShapedLaserRifle.tools.barrel.label>枪管</CMC_ShapedLaserRifle.tools.barrel.label>
+  <!-- EN: QBZL-55 particle beam rifle -->
+  <CMC_ShapedLaserRifle.verbs.Verb_Laser_Sustain.label>TODO</CMC_ShapedLaserRifle.verbs.Verb_Laser_Sustain.label>
+  
+  <!-- UNUSED -->
+  <CMC_ShapedLaserRifle.verbs.Verb_Shoot.label>QBZL-55 射线步枪</CMC_ShapedLaserRifle.verbs.Verb_Shoot.label>
+  
+  <!-- EN: Mote -->
+  <MYDE_FlashingOfSwordEffect.label>TODO</MYDE_FlashingOfSwordEffect.label>
+  
+</LanguageData>

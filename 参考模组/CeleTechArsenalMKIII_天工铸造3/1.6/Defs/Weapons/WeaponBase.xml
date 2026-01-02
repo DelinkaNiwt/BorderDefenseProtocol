@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <ThingDef Name="TOT_Weapons" ParentName="BaseMakeableGun" Abstract="True">
+        <thingCategories Inherit = "False">
+            <li>TOT_Weapons_Cat</li>
+        </thingCategories>
+        <thingSetMakerTags Inherit = "False">
+            <li>RewardStandardMidFreq</li>
+        </thingSetMakerTags>
+        <weaponTags Inherit = "False">
+            <li>Weapon_CMCf</li>
+        </weaponTags>
+        <recipeMaker>
+            <recipeUsers Inherit = "False">
+                <li>CMC_TableMachining</li>
+            </recipeUsers>
+            <workSkill>Crafting</workSkill>
+        </recipeMaker>
+        <statBases>
+            <SellPriceFactor>1.5</SellPriceFactor>
+        </statBases>
+		<drawerType>MapMeshAndRealTime</drawerType>
+    </ThingDef>
+    <ThingDef Name="TOT_BaseGun" ParentName="BaseGun" Abstract="True">
+        <weaponTags Inherit = "False">
+            <li>Weapon_CMCf</li>
+        </weaponTags>
+    </ThingDef>
+    <ThingDef Name="TOT_WeaponsNoQuality" ParentName="BaseGun" Abstract="True">
+        <thingCategories Inherit = "False">
+            <li>TOT_Weapons_Cat</li>
+        </thingCategories>
+        <thingSetMakerTags Inherit = "False">
+            <li>RewardStandardMidFreq</li>
+        </thingSetMakerTags>
+        <weaponTags Inherit = "False">
+            <li>Weapon_CMCf</li>
+        </weaponTags>
+        <recipeMaker>
+            <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+            <workSkill>Crafting</workSkill>
+            <effectWorking>Smith</effectWorking>
+            <soundWorking>Recipe_Smith</soundWorking>
+            <recipeUsers>
+                <li>CMC_TableMachining</li>
+            </recipeUsers>
+            <unfinishedThingDef>UnfinishedGun</unfinishedThingDef>
+        </recipeMaker>
+        <statBases>
+            <SellPriceFactor>1.25</SellPriceFactor>
+        </statBases>
+		<drawerType>MapMeshAndRealTime</drawerType>
+    </ThingDef>
+</Defs>

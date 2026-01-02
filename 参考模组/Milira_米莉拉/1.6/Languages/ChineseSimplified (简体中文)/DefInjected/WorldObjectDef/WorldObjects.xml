@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: basic asteroid -->
+  <Milira_AsteroidBasic_SolarCrystal.label>贫瘠小行星</Milira_AsteroidBasic_SolarCrystal.label>
+  <!-- EN: A vacstone asteroid that was towed into orbit around the planet as part of a mining operation long ago. Most of the valuable resources have been depleted from this asteroid.\n\nThis location can be reached using transport pods, shuttles, or a gravship. -->
+  <Milira_AsteroidBasic_SolarCrystal.description>一颗被牵引到该星球轨道上的岩质小行星，源自很久以前的采矿作业；部分岩体在强烈的电磁辐射影响下转变为了日凌晶体。此小行星上的大部分有价值资源已被开采殆尽。\n\n可通过运输舱、穿梭机或逆重飞船抵达此地。</Milira_AsteroidBasic_SolarCrystal.description>
+  
+  <!-- EN: asteroid mining site -->
+  <Milira_AsteroidSolarCrystal.label>小行星采矿点</Milira_AsteroidSolarCrystal.label>
+  <!-- EN: A vacstone asteroid that was towed into orbit around the planet as part of a mining operation long ago. This asteroid has only been partially mined.\n\nThis location can be reached using transport pods, shuttles, or a gravship. -->
+  <Milira_AsteroidSolarCrystal.description>一颗被牵引到该星球轨道上的岩质小行星，源自很久以前的采矿作业；部分岩体在强烈的电磁辐射影响下转变为了日凌晶体。该小行星只被部分开采过。\n\n可通过运输舱、穿梭机或逆重飞船抵达此地。</Milira_AsteroidSolarCrystal.description>
+  
+</LanguageData>

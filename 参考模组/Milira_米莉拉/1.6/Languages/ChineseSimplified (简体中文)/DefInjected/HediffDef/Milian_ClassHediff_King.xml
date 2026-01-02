@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Chessman: King -->
+  <Milian_ClassHediff_King.label>执子：国王</Milian_ClassHediff_King.label>
+  <!-- EN: Grants the power of a King. -->
+  <Milian_ClassHediff_King.description>赋予「国王」权能。</Milian_ClassHediff_King.description>
+  <!-- EN: Attune: Pawn -->
+  <Milian_ClassHediff_King.stages.Attune_Pawn.label>同调：士兵</Milian_ClassHediff_King.stages.Attune_Pawn.label>
+  <!-- EN: Attune: Knight -->
+  <Milian_ClassHediff_King.stages.Attune_Knight.label>同调：骑士</Milian_ClassHediff_King.stages.Attune_Knight.label>
+  <!-- EN: Attune: Bishop -->
+  <Milian_ClassHediff_King.stages.Attune_Bishop.label>同调：主教</Milian_ClassHediff_King.stages.Attune_Bishop.label>
+  <!-- EN: Attune: Rook -->
+  <Milian_ClassHediff_King.stages.Attune_Rook.label>同调：战车</Milian_ClassHediff_King.stages.Attune_Rook.label>
+  
+</LanguageData>

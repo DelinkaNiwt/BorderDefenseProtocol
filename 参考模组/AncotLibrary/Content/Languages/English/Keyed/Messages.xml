@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <Ancot.MessagePermitDropPawn_join>{FACTION_name} has already dropped the required pawn nearby.</Ancot.MessagePermitDropPawn_join>
+
+  <Ancot.MessagePermitPerformed>{FACTION_name} has fulfilled the permit requirement at specified location.</Ancot.MessagePermitPerformed>
+
+  <Ancot.NoApparelToMend>{0} have no apparel satisfied to be repaired.</Ancot.NoApparelToMend>
+
+  <Ancot.targetNeedNoTend>Selected target does not need to be tended.</Ancot.targetNeedNoTend>
+
+  <Ancot.DropEquipmentOnHediffRemoved>Removed {1} from {0}, causing {2} dropped on ground.</Ancot.DropEquipmentOnHediffRemoved>
+
+  <Ancot.ApparelPolicyGenerateFailed_MustInGame>Failed to generate apparel policy: must be used in an active save.</Ancot.ApparelPolicyGenerateFailed_MustInGame>
+  <Ancot.ApparelPolicyGenerateSuccess>Apparel policy created: {0}.</Ancot.ApparelPolicyGenerateSuccess>
+
+</LanguageData>

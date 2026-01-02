@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: correction factor -->
+  <Ancot_EnergyWeaponCorrectionFactor.label>修正系数</Ancot_EnergyWeaponCorrectionFactor.label>
+  <!-- EN: The multiplier that modifies this energy weapon's attributes based on external conditions. -->
+  <Ancot_EnergyWeaponCorrectionFactor.description>这把能量武器受到外部条件影响而改变属性的乘数。</Ancot_EnergyWeaponCorrectionFactor.description>
+  
+  <!-- EN: reset time -->
+  <Ancot_EnergyWeaponResetTime.label>重置时间</Ancot_EnergyWeaponResetTime.label>
+  <!-- EN: The time required to recover energy when the weapon is fully depleted. -->
+  <Ancot_EnergyWeaponResetTime.description>武器能量用尽时，回复能量需要的时间。</Ancot_EnergyWeaponResetTime.description>
+  <!-- EN: {0} s -->
+  <Ancot_EnergyWeaponResetTime.formatString>{0} 秒</Ancot_EnergyWeaponResetTime.formatString>
+  
+  <!-- EN: charge interval -->
+  <Ancot_WeaponChargeTick.label>能量武器充能间隔</Ancot_WeaponChargeTick.label>
+  <!-- EN: Time required by each auto recharge of this weapon. -->
+  <Ancot_WeaponChargeTick.description>这把武器每次自动充能需要的时间。</Ancot_WeaponChargeTick.description>
+  <!-- EN: {0} s -->
+  <Ancot_WeaponChargeTick.formatString>{0} 秒</Ancot_WeaponChargeTick.formatString>
+  
+  <!-- EN: max charge -->
+  <Ancot_WeaponMaxCharge.label>能量武器最大充能</Ancot_WeaponMaxCharge.label>
+  <!-- EN: The max charge of this weapon. -->
+  <Ancot_WeaponMaxCharge.description>这把武器能够储存的最大能量。</Ancot_WeaponMaxCharge.description>
+  
+</LanguageData>

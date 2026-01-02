@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Prototype XiHe flameblaster -->
+  <PrototypeXiHe.label>Q-1“羲和”輕型噴火器</PrototypeXiHe.label>
+  <!-- EN: A light spacer burst-oriented flamethrower with long range, very efficient against organism -->
+  <PrototypeXiHe.description>單兵使用的輕型短距離脈沖噴火器，能在短距離內快速地進行小範圍攻擊。該武器對有機體十分有效，也能燒穿大部分機械族裝甲。</PrototypeXiHe.description>
+  <!-- EN: barrel -->
+  <PrototypeXiHe.tools.barrel.label>噴管</PrototypeXiHe.tools.barrel.label>
+  <!-- EN: Prototype XiHe flameblaster -->
+  <PrototypeXiHe.verbs.Verb_Shoot.label>試驗型羲和脈沖噴火器</PrototypeXiHe.verbs.Verb_Shoot.label>
+  
+</LanguageData>

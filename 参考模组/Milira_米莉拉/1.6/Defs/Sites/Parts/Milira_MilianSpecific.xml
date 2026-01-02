@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+<!-- =固定队列================================================================================================================================= -->
+
+<!-- 游骑兵 -->
+  <SitePartDef>
+    <defName>Milira_MilianSpecific_Ranger</defName>
+    <label>Milian ranger squad</label>
+    <description>a group of milian ranger squad is in this area.</description>
+    <workerClass>SitePartWorker</workerClass>
+    <siteTexture>World/WorldObjects/Sites/GenericSite</siteTexture>
+    <expandingIconTexture>Milira/Icon/MilianSpecific/Knight_Ranger</expandingIconTexture>
+    <forceExitAndRemoveMapCountdownDurationDays>6</forceExitAndRemoveMapCountdownDurationDays>
+    <wantsThreatPoints>true</wantsThreatPoints>
+    <minThreatPoints>400</minThreatPoints>
+    <minMapSize>(150,1,150)</minMapSize>
+    <tags>
+      <li>Milira_Milian_WorldMap</li>
+      <li>Milira_MilianSpecific_Ranger</li>
+    </tags>
+  </SitePartDef>
+
+  <GenStepDef>
+    <defName>Milira_MilianSpecific_Ranger</defName>
+    <linkWithSite>Milira_MilianSpecific_Ranger</linkWithSite>
+    <order>460</order>
+    <genStep Class="AncotLibrary.GenStep_GenPawnAroundMapCenter_Attack">
+      <factionDef>Milira_Faction</factionDef>
+      <!-- <pawnkindsRequired>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_KnightI</pawnkindDef>
+          <amount>20</amount>
+        </li>
+      </pawnkindsRequired> -->
+      <pawnkindsWithCommonality>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_KnightI</pawnkindDef>
+          <commonality>1</commonality>
+        </li>
+      </pawnkindsWithCommonality>
+    </genStep>
+  </GenStepDef>
+
+
+  <!-- 戍卫军 -->
+  <SitePartDef>
+    <defName>Milira_MilianSpecific_Garrison</defName>
+    <label>milian garrison</label>
+    <description>a group of milian ranger squad is in this area.</description>
+    <workerClass>SitePartWorker</workerClass>
+    <siteTexture>World/WorldObjects/Sites/GenericSite</siteTexture>
+    <expandingIconTexture>Milira/Icon/MilianSpecific/Pawn_Garrison</expandingIconTexture>
+    <forceExitAndRemoveMapCountdownDurationDays>6</forceExitAndRemoveMapCountdownDurationDays>
+    <wantsThreatPoints>true</wantsThreatPoints>
+    <minThreatPoints>400</minThreatPoints>
+    <minMapSize>(150,1,150)</minMapSize>
+    <tags>
+      <li>Milira_Milian_WorldMap</li>
+      <li>Milira_MilianSpecific_Garrison</li>
+    </tags>
+  </SitePartDef>
+
+  <GenStepDef>
+    <defName>Milira_MilianSpecific_Garrison</defName>
+    <linkWithSite>Milira_MilianSpecific_Garrison</linkWithSite>
+    <order>460</order>
+    <genStep Class="AncotLibrary.GenStep_GenPawnAroundMapCenter_Attack">
+      <factionDef>Milira_Faction</factionDef>
+      <pawnkindsRequired>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_PawnIV</pawnkindDef>
+          <amount>1</amount>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_PawnIII</pawnkindDef>
+          <amount>8</amount>
+        </li>
+      </pawnkindsRequired>
+      <pawnkindsWithCommonality>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_PawnI</pawnkindDef>
+          <commonality>1</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_PawnII</pawnkindDef>
+          <commonality>0.1</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_PawnIII</pawnkindDef>
+          <commonality>0.4</commonality>
+        </li>
+      </pawnkindsWithCommonality>
+    </genStep>
+  </GenStepDef>
+
+
+  <!-- 炮击小队 -->
+  <SitePartDef>
+    <defName>Milira_MilianSpecific_Artillery</defName>
+    <label>milian artillery squad</label>
+    <description>a group of milian artillery squad is in this area.</description>
+    <workerClass>SitePartWorker</workerClass>
+    <siteTexture>World/WorldObjects/Sites/GenericSite</siteTexture>
+    <expandingIconTexture>Milira/Icon/MilianSpecific/Rook_Artillery</expandingIconTexture>
+    <forceExitAndRemoveMapCountdownDurationDays>6</forceExitAndRemoveMapCountdownDurationDays>
+    <wantsThreatPoints>true</wantsThreatPoints>
+    <minThreatPoints>400</minThreatPoints>
+    <minMapSize>(150,1,150)</minMapSize>
+    <tags>
+      <li>Milira_Milian_WorldMap</li>
+      <li>Milira_MilianSpecific_Artillery</li>
+    </tags>
+  </SitePartDef>
+
+  <GenStepDef>
+    <defName>Milira_MilianSpecific_Artillery</defName>
+    <linkWithSite>Milira_MilianSpecific_Artillery</linkWithSite>
+    <order>460</order>
+    <genStep Class="AncotLibrary.GenStep_GenPawnAroundMapCenter_Defend">
+      <factionDef>Milira_Faction</factionDef>
+      <pawnkindsRequired>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_RookIV</pawnkindDef>
+          <amount>1</amount>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_BishopII</pawnkindDef>
+          <amount>1</amount>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_BishopI</pawnkindDef>
+          <amount>4</amount>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_PawnIII</pawnkindDef>
+          <amount>10</amount>
+        </li>
+      </pawnkindsRequired>
+      <pawnkindsWithCommonality>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_PawnIII</pawnkindDef>
+          <commonality>1</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_BishopI</pawnkindDef>
+          <commonality>0.3</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_RookI</pawnkindDef>
+          <commonality>0.4</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_BishopII</pawnkindDef>
+          <commonality>0.1</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_RookIV</pawnkindDef>
+          <commonality>0.1</commonality>
+        </li>
+      </pawnkindsWithCommonality>
+    </genStep>
+  </GenStepDef>
+
+
+  <!-- 游击队 -->
+  <SitePartDef>
+    <defName>Milira_MilianSpecific_Guerrilla</defName>
+    <label>milian guerrilla squad</label>
+    <description>a group of milian guerrilla squad is in this area.</description>
+    <workerClass>SitePartWorker</workerClass>
+    <siteTexture>World/WorldObjects/Sites/GenericSite</siteTexture>
+    <expandingIconTexture>Milira/Icon/MilianSpecific/Bishop_Guerrilla</expandingIconTexture>
+    <forceExitAndRemoveMapCountdownDurationDays>6</forceExitAndRemoveMapCountdownDurationDays>
+    <wantsThreatPoints>true</wantsThreatPoints>
+    <minThreatPoints>400</minThreatPoints>
+    <minMapSize>(150,1,150)</minMapSize>
+    <tags>
+      <li>Milira_Milian_WorldMap</li>
+      <li>Milira_MilianSpecific_Guerrilla</li>
+    </tags>
+  </SitePartDef>
+
+  <GenStepDef>
+    <defName>Milira_MilianSpecific_Guerrilla</defName>
+    <linkWithSite>Milira_MilianSpecific_Guerrilla</linkWithSite>
+    <order>460</order>
+    <genStep Class="AncotLibrary.GenStep_GenPawnAroundMapCenter_Attack">
+      <factionDef>Milira_Faction</factionDef>
+      <pawnkindsRequired>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_BishopIV</pawnkindDef>
+          <amount>1</amount>
+        </li>
+      </pawnkindsRequired>
+      <pawnkindsWithCommonality>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_BishopIV</pawnkindDef>
+          <commonality>0.4</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_PawnI</pawnkindDef>
+          <commonality>1</commonality>
+        </li>
+      </pawnkindsWithCommonality>
+    </genStep>
+  </GenStepDef>
+
+
+  <!-- 骑士团 -->
+  <SitePartDef>
+    <defName>Milira_MilianSpecific_Templar</defName>
+    <label>milian order of knights</label>
+    <description>milian order of knights squad is in this area.</description>
+    <workerClass>SitePartWorker</workerClass>
+    <siteTexture>World/WorldObjects/Sites/GenericSite</siteTexture>
+    <expandingIconTexture>Milira/Icon/MilianSpecific/Knight_Templar</expandingIconTexture>
+    <forceExitAndRemoveMapCountdownDurationDays>6</forceExitAndRemoveMapCountdownDurationDays>
+    <wantsThreatPoints>true</wantsThreatPoints>
+    <minThreatPoints>400</minThreatPoints>
+    <minMapSize>(150,1,150)</minMapSize>
+    <tags>
+      <li>Milira_Milian_WorldMap</li>
+      <li>Milira_MilianSpecific_Templar</li>
+    </tags>
+  </SitePartDef>
+
+  <GenStepDef>
+    <defName>Milira_MilianSpecific_Templar</defName>
+    <linkWithSite>Milira_MilianSpecific_Templar</linkWithSite>
+    <order>460</order>
+    <genStep Class="AncotLibrary.GenStep_GenPawnAroundMapCenter_Attack">
+      <factionDef>Milira_Faction</factionDef>
+      <pawnkindsRequired>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_KnightI</pawnkindDef>
+          <amount>5</amount>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_KnightII</pawnkindDef>
+          <amount>5</amount>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_KnightIII</pawnkindDef>
+          <amount>2</amount>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_KnightIV</pawnkindDef>
+          <amount>2</amount>
+        </li>
+      </pawnkindsRequired>
+      <pawnkindsWithCommonality>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_KnightI</pawnkindDef>
+          <commonality>1</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_KnightII</pawnkindDef>
+          <commonality>1</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_KnightIII</pawnkindDef>
+          <commonality>0.2</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_KnightIV</pawnkindDef>
+          <commonality>0.2</commonality>
+        </li>
+      </pawnkindsWithCommonality>
+    </genStep>
+  </GenStepDef>
+
+
+  <!-- 陆行舰队 -->
+  <SitePartDef>
+    <defName>Milira_MilianSpecific_Fleet</defName>
+    <label>milian land fleet</label>
+    <description>a group of milian ranger squad is in this area.</description>
+    <workerClass>SitePartWorker</workerClass>
+    <siteTexture>World/WorldObjects/Sites/GenericSite</siteTexture>
+    <expandingIconTexture>Milira/Icon/MilianSpecific/Bishop_Fleet</expandingIconTexture>
+    <forceExitAndRemoveMapCountdownDurationDays>6</forceExitAndRemoveMapCountdownDurationDays>
+    <wantsThreatPoints>true</wantsThreatPoints>
+    <minThreatPoints>400</minThreatPoints>
+    <minMapSize>(150,1,150)</minMapSize>
+    <tags>
+      <li>Milira_Milian_WorldMap</li>
+      <li>Milira_MilianSpecific_Fleet</li>
+    </tags>
+  </SitePartDef>
+
+  <GenStepDef>
+    <defName>Milira_MilianSpecific_Fleet</defName>
+    <linkWithSite>Milira_MilianSpecific_Fleet</linkWithSite>
+    <order>460</order>
+    <genStep Class="AncotLibrary.GenStep_GenPawnAroundMapCenter_Attack">
+      <factionDef>Milira_Faction</factionDef>
+      <pawnkindsRequired>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_BishopIII</pawnkindDef>
+          <amount>1</amount>
+        </li>
+      </pawnkindsRequired>
+      <pawnkindsWithCommonality>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_BishopIII</pawnkindDef>
+          <commonality>1</commonality>
+        </li>
+      </pawnkindsWithCommonality>
+    </genStep>
+  </GenStepDef>
+
+
+  <!-- 盾卫组 -->
+  <SitePartDef>
+    <defName>Milira_MilianSpecific_Wall</defName>
+    <label>milian shield guardians</label>
+    <description>a group of milian shield guardians is in this area.</description>
+    <workerClass>SitePartWorker</workerClass>
+    <siteTexture>World/WorldObjects/Sites/GenericSite</siteTexture>
+    <expandingIconTexture>Milira/Icon/MilianSpecific/Rook_Wall</expandingIconTexture>
+    <forceExitAndRemoveMapCountdownDurationDays>6</forceExitAndRemoveMapCountdownDurationDays>
+    <wantsThreatPoints>true</wantsThreatPoints>
+    <minThreatPoints>400</minThreatPoints>
+    <minMapSize>(150,1,150)</minMapSize>
+    <tags>
+      <li>Milira_Milian_WorldMap</li>
+      <li>Milira_MilianSpecific_Wall</li>
+    </tags>
+  </SitePartDef>
+
+  <GenStepDef>
+    <defName>Milira_MilianSpecific_Wall</defName>
+    <linkWithSite>Milira_MilianSpecific_Wall</linkWithSite>
+    <order>460</order>
+    <genStep Class="AncotLibrary.GenStep_GenPawnAroundMapCenter_Attack">
+      <factionDef>Milira_Faction</factionDef>
+      <pawnkindsRequired>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_RookII</pawnkindDef>
+          <amount>3</amount>
+        </li>
+      </pawnkindsRequired>
+      <pawnkindsWithCommonality>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_RookII</pawnkindDef>
+          <commonality>0.4</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_KnightII</pawnkindDef>
+          <commonality>0.2</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_PawnIII</pawnkindDef>
+          <commonality>1</commonality>
+        </li>
+      </pawnkindsWithCommonality>
+    </genStep>
+  </GenStepDef>
+
+
+  <!-- 破袭小队 -->
+  <SitePartDef>
+    <defName>Milira_MilianSpecific_Raider</defName>
+    <label>milian raider squad</label>
+    <description>a group of milian raider squad is in this area.</description>
+    <workerClass>SitePartWorker</workerClass>
+    <siteTexture>World/WorldObjects/Sites/GenericSite</siteTexture>
+    <expandingIconTexture>Milira/Icon/MilianSpecific/Rook_Raider</expandingIconTexture>
+    <forceExitAndRemoveMapCountdownDurationDays>6</forceExitAndRemoveMapCountdownDurationDays>
+    <wantsThreatPoints>true</wantsThreatPoints>
+    <minThreatPoints>400</minThreatPoints>
+    <minMapSize>(150,1,150)</minMapSize>
+    <tags>
+      <li>Milira_Milian_WorldMap</li>
+      <li>Milira_MilianSpecific_Raider</li>
+    </tags>
+  </SitePartDef>
+
+  <GenStepDef>
+    <defName>Milira_MilianSpecific_Raider</defName>
+    <linkWithSite>Milira_MilianSpecific_Raider</linkWithSite>
+    <order>460</order>
+    <genStep Class="AncotLibrary.GenStep_GenPawnAroundMapCenter_Attack">
+      <factionDef>Milira_Faction</factionDef>
+      <pawnkindsRequired>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_RookIII</pawnkindDef>
+          <amount>2</amount>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_KnightIII</pawnkindDef>
+          <amount>3</amount>
+        </li>
+      </pawnkindsRequired>
+      <pawnkindsWithCommonality>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_RookIII</pawnkindDef>
+          <commonality>0.1</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_KnightIII</pawnkindDef>
+          <commonality>0.2</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_BishopI</pawnkindDef>
+          <commonality>1</commonality>
+        </li>
+      </pawnkindsWithCommonality>
+    </genStep>
+  </GenStepDef>
+
+</Defs>

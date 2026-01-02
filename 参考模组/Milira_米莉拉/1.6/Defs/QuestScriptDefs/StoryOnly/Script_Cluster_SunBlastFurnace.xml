@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 太阳熔炉攻防战 -->
+  <QuestScriptDef MayRequire="Ludeon.RimWorld.Royalty">
+    <defName>Milira_Cluster_SunBlastFurnace</defName>
+    <rootSelectionWeight>40</rootSelectionWeight>
+    <!-- <rootMinProgressScore>10</rootMinProgressScore> -->
+    <rootMinPoints>0</rootMinPoints>
+    <minRefireDays>999999</minRefireDays>
+    <defaultChallengeRating>3</defaultChallengeRating>
+    <autoAccept>true</autoAccept>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->The Sunblast Furnace Compaign</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->A Milira ground workstation under our long-term monitoring has begun evacuation recently. The stationed Milira have left carrying most of the supplies, leaving behind a Milian cluster on guard for a sunblast furnace that hasn’t departed yet. This is the only chance to take action unto the sunblast furnace.\n\n Our objective is to destroy this furnace, never  leave a chance for it to return to the celestial city. Have you interest on the furnace, you can send your men into this battle and the furnace shall be at your disposal.\n\n This shall be a formidable engagement. The remaining Milian cluster will be at a considerable size though we have chosen a period for a most diminished defense force. Field artillery mobilized nearby will employ howitzers to conduct a saturated bombardment of the pre-scouted Milian cluster coordinate area. Artillery support will only be sustained for three rounds, leaving abundant time for retreating in case the Milian launch a counter-offensive. Subsequent operations demand our concerted efforts.\n\n The location of the workstation has been synchronized on your map. Pleaz make a prompt decision, as opportunities like this are rare. We will await your response within the allotted timeframe.\n\n This mission will elevate the Milian threat assessment.</li>
+      </rulesStrings>
+    </questDescriptionRules>
+    <questAvailableLetterDef>PositiveEvent</questAvailableLetterDef><!-- PositiveEvent -->
+    <root Class="QuestNode_Sequence">
+      <nodes>
+
+        <!-- 判断剧情设置 -->
+        <li Class="Milira.QuestNode_ModSettingOn">
+          <modSettingSwitch>MiliraRace_ModSetting_StoryOverall</modSettingSwitch>
+        </li>
+
+        <!-- 判断教会派系存在且不为敌对 -->
+        <li Class="AncotLibrary.QuestNode_IsFactionRelationKind">
+          <factionRelationKind>Hostile</factionRelationKind>
+          <invert>true</invert>
+          <factionDefs>
+            <li>Milira_AngelismChurch</li>
+          </factionDefs>
+        </li>
+
+        <li Class="QuestNode_GetMap" />
+
+        <!-- 判断米莉拉派系存在且敌对 -->
+        <li Class="AncotLibrary.QuestNode_IsFactionRelationKind">
+          <factionRelationKind>Hostile</factionRelationKind>
+          <invert>false</invert>
+          <factionDefs>
+            <li>Milira_Faction</li>
+          </factionDefs>
+        </li>
+
+        <!-- 判断研究完成 -->
+        <li Class="AncotLibrary.QuestNode_IsResearchFinished">
+          <researchProjectDefs>
+            <li>MicroelectronicsBasics</li>
+          </researchProjectDefs>
+        </li>
+
+        <!-- 判断爵位满足 -->
+        <li Class="AncotLibrary.QuestNode_IsRoyalTitleSatisfed">
+          <royalTitleDefs>
+            <li>Milira_ChurchTitleV</li>
+            <li>Milira_ChurchTitleVI</li>
+            <li>Milira_ChurchTitleVII</li>
+            <li>Milira_ChurchTitleVIII</li>
+            <li>Milira_ChurchTitleIX</li>
+            <li>Milira_ChurchTitleX</li>
+            <li>Milira_ChurchTitleXI</li>
+          </royalTitleDefs>
+          <factionDef>Milira_AngelismChurch</factionDef>
+        </li>
+
+        <!-- 固定10000点 -->
+        <li Class="QuestNode_EvaluateSimpleCurve">
+          <value>$points</value>
+          <storeAs>points</storeAs>
+          <curve>
+            <points>
+              <li>   35,  10000</li>
+              <li>  400,  10000</li>
+              <li> 1000,  10000</li>
+              <li> 2000,  10000</li>
+              <li> 3000,  10000</li>
+              <li> 4000,  10000</li>
+              <li> 5000,  10000</li>
+              <li>10000, 10000</li>
+            </points>
+          </curve>
+        </li>
+
+
+        <li Class="QuestNode_GetSiteTile">
+          <storeAs>siteTile</storeAs>
+          <preferCloserTiles>true</preferCloserTiles>
+        </li>
+
+        <!-- 确定派系为教会并选定首领为任务发起者并把派系加入到involvedFaction -->
+        <li Class="AncotLibrary.QuestNode_GetSpecificFaction">
+          <factionDef>Milira_AngelismChurch</factionDef>
+          <storeFactionAs>askerFaction</storeFactionAs>
+          <storeFactionLeaderAs>asker</storeFactionLeaderAs>
+        </li>
+
+        <li Class="QuestNode_ViolentQuestsAllowed">
+          <node Class="QuestNode_Set">
+            <name>siteThreatChance</name>
+            <value>1</value>
+          </node>
+          <elseNode Class="QuestNode_Set">
+            <name>siteThreatChance</name>
+            <value>0</value>
+          </elseNode>          
+        </li>
+
+        <li Class="QuestNode_GetSitePartDefsByTagsAndFaction">
+          <storeAs>sitePartDefs</storeAs>
+          <storeFactionAs>siteFaction</storeFactionAs>
+          <sitePartsTags>
+            <li>
+              <tag>Milira_SunBlastFurnace_InRoom</tag>
+            </li>
+            <li>
+              <tag>Milian_ClusterAwakeWithBombardment</tag>
+              <chance>$siteThreatChance</chance>
+            </li>
+            <li>
+              <tag>Milira_ChurchAssist_Troops</tag>
+              <chance>$siteThreatChance</chance>
+            </li>
+          </sitePartsTags>
+        </li>
+
+        <li Class="QuestNode_GetDefaultSitePartsParams">
+          <tile>$siteTile</tile>
+          <faction>$siteFaction</faction>
+          <sitePartDefs>$sitePartDefs</sitePartDefs>
+          <storeSitePartsParamsAs>sitePartsParams</storeSitePartsParamsAs>
+        </li>
+
+        <li Class="QuestNode_SubScript">
+          <def>Util_GenerateSite</def>
+          <parms>
+            <hiddenSitePartsPossible>true</hiddenSitePartsPossible>
+          </parms>
+        </li>
+        
+        <li Class="QuestNode_SpawnWorldObjects">
+          <worldObjects>$site</worldObjects>
+          <defsToExcludeFromHyperlinks>Human</defsToExcludeFromHyperlinks>
+        </li>
+
+        <li Class="QuestNode_WorldObjectTimeout">
+          <worldObject>$site</worldObject>
+          <isQuestTimeout>true</isQuestTimeout>
+          <delayTicks>$(randInt(3,4)*60000)</delayTicks>
+          <inSignalDisable>site.MapGenerated</inSignalDisable>
+          <node Class="QuestNode_End">
+            <outcome>Fail</outcome>
+            <sendStandardLetter>true</sendStandardLetter>
+          </node>
+        </li>
+
+        <li Class="QuestNode_NoWorldObject">
+          <worldObject>$site</worldObject>
+          <node Class="QuestNode_End" />
+        </li>
+
+        <!-- 增加米莉拉威胁点 -->
+        <li Class="Milira.QuestNode_IncreaseMiliraThreatPoint">
+          <inSignal>site.MapGenerated</inSignal>
+          <miliraThreatPoint>25</miliraThreatPoint>
+        </li>
+      </nodes>
+    </root>
+  </QuestScriptDef>
+</Defs>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <AncotLibrary.DroneWorkModeDef>
+    <defName>Ancot_Work</defName>
+    <label>work</label>
+    <uiOrder>200</uiOrder>
+    <description>Work autonomously according to mechanoid type. Automatically go to rechargers and recharge when needed.</description>
+    <iconPath>AncotLibrary/UI/Work</iconPath>
+  </AncotLibrary.DroneWorkModeDef>
+
+  <AncotLibrary.DroneWorkModeDef>
+    <defName>Ancot_Recharge</defName>
+    <label>recharge</label>
+    <uiOrder>300</uiOrder>
+    <description>Go to rechargers and recharge, even if already well-charged.</description>
+    <iconPath>AncotLibrary/UI/Recharge</iconPath>
+  </AncotLibrary.DroneWorkModeDef>
+
+  <AncotLibrary.DroneWorkModeDef>
+    <defName>Ancot_SelfShutdown</defName>
+    <label>dormant</label>
+    <uiOrder>400</uiOrder>
+    <description>Go into a dormant state.</description>
+    <iconPath>AncotLibrary/UI/SelfShutdown</iconPath>
+  </AncotLibrary.DroneWorkModeDef>
+
+
+</Defs>

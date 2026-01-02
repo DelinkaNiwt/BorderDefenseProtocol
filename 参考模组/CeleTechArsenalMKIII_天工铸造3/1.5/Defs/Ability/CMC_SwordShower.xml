@@ -1,0 +1,35 @@
+<Defs>
+   <AbilityDef>
+    <defName>CMC_SwordShower</defName>
+    <label>psychic sword shower</label>
+    <description>.</description>
+    <iconPath>UI/UI_SwordShower</iconPath>
+	<jobDef>CastAbilityOnThingUninterruptible</jobDef>
+    <targetRequired>False</targetRequired>
+    <canUseAoeToGetTargets>False</canUseAoeToGetTargets>
+	<cooldownTicksRange>120000~120000</cooldownTicksRange>
+	<warmupMoteSocialSymbol>UI/UI_SwordShower</warmupMoteSocialSymbol>
+	<showPsycastEffects>False</showPsycastEffects>
+    <aiCanUse>true</aiCanUse>
+    <verbProperties>
+	  <verbClass>Verb_CastAbility</verbClass>
+      <warmupTime>3.5</warmupTime>
+      <range>9.9</range>
+      <drawAimPie>true</drawAimPie>
+      <requireLineOfSight>False</requireLineOfSight>
+      <targetParams>
+        <canTargetSelf>true</canTargetSelf>
+        <canTargetPawns>false</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetAnimals>false</canTargetAnimals>
+        <canTargetHumans>false</canTargetHumans>
+        <canTargetMechs>false</canTargetMechs>
+      </targetParams>
+    </verbProperties>
+	<comps>
+      <li Class="TOT_DLL_test.CompProperties_AbilitySwordShower">
+        <compClass>TOT_DLL_test.CompAbilityEffect_SwordShower</compClass>
+      </li>
+    </comps>
+  </AbilityDef>
+</Defs>

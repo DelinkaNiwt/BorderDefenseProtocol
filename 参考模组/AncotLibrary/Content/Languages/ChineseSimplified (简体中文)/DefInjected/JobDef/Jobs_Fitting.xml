@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: disassembling TargetA. -->
+  <Ancot_DisassembleWeaponForFitting.reportString>拆解TargetA</Ancot_DisassembleWeaponForFitting.reportString>
+  
+  <!-- EN: Removing TargetA 's Traits. -->
+  <Ancot_RemoveAllFittings.reportString>移除TargetA的所有配件</Ancot_RemoveAllFittings.reportString>
+  
+  <!-- EN: Using TargetA. -->
+  <Ancot_UseWeaponFittingSelf.reportString>使用TargetA</Ancot_UseWeaponFittingSelf.reportString>
+  
+</LanguageData>

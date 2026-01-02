@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: <color=#1DD5EE><i>Kai Yang combat chip</i></color> -->
+  <KaiYang.label>【開陽】戰地機械師晶元</KaiYang.label>
+  <!-- EN: A chip designed for the mechanitor. -->
+  <KaiYang.description>為戰地機械師量身打造的腦部晶元，可以大幅提高帶寬上限。</KaiYang.description>
+  <!-- EN: a Kai Yang combat chip -->
+  <KaiYang.labelNoun>【開陽】戰地機械師晶元</KaiYang.labelNoun>
+  
+</LanguageData>

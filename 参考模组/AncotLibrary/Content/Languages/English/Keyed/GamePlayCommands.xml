@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <Ancot.CommandToggleTurret>toggle turret</Ancot.CommandToggleTurret>
+  <Ancot.CommandToggleTurretDesc>Toggle turret being able to fire at will.\n\nWhen disabled, the turret will not automatically fire unless a target is manually designated.</Ancot.CommandToggleTurretDesc>
+
+  <Ancot.RoyalTitleUpdate>position promotion</Ancot.RoyalTitleUpdate>
+  <Ancot.RoyalTitleUpdateDesc>Select the colonist who will promote to new position.</Ancot.RoyalTitleUpdateDesc>
+
+  <Ancot.DroneTip_Power>This drone has enough power to operate for {0} more. Drag the slider to set the recharge threshold. The drone will attempt to recharge when its energy falls below the threshold. The current recharge threshold is {1}.\n\nWhen the energy is depleted, the drone will enter dormant state.</Ancot.DroneTip_Power>
+  <Ancot.DroneTip_AutoRepair>Enable auto-repair. Colonists responsible for Smithing will repair the drone when it gets damaged.</Ancot.DroneTip_AutoRepair>sleep
+  <Ancot.DroneTip_WorkMode>Switch the drone's work mode.</Ancot.DroneTip_WorkMode>
+
+  <Ancot.CommandLoadTransporter>Load transport group of {0}</Ancot.CommandLoadTransporter>
+  <Ancot.CommandLoadTransporterDesc>Defines the selected transporter(s) as a transport group. Opens the loading dialog so you can decide who and what should be loaded inside.</Ancot.CommandLoadTransporterDesc>
+
+  <Ancot.CommandLoadTransporterSingle>Load</Ancot.CommandLoadTransporterSingle>
+  <Ancot.CommandLoadTransporterSingleDesc>Opens the loading dialog so you can decide who and what should be loaded inside.</Ancot.CommandLoadTransporterSingleDesc>
+
+  <Ancot.CommandSelectAllTransporters>Select transport group</Ancot.CommandSelectAllTransporters>
+  <Ancot.CommandSelectAllTransportersDesc>Select all transporters in this transport group.</Ancot.CommandSelectAllTransportersDesc>
+
+  <Ancot.CommandSelectNextTransporter>Select next in transport group</Ancot.CommandSelectNextTransporter>
+  <Ancot.CommandSelectNextTransporterDesc>Select next transporter in this transport group.</Ancot.CommandSelectNextTransporterDesc>
+
+  <Ancot.CommandSelectPreviousTransporter>Select previous in transport group</Ancot.CommandSelectPreviousTransporter>
+  <Ancot.CommandSelectPreviousTransporterDesc>Select previous transporter in this transport group.</Ancot.CommandSelectPreviousTransporterDesc>
+
+  <Ancot.HaulToTransporter>Pick up item</Ancot.HaulToTransporter>
+  <Ancot.HaulToTransporterDesc>Pick up the target item and put into this creature's transporter.</Ancot.HaulToTransporterDesc>
+  
+  <!-- 飞行器 -->
+  <Ancot.AerocraftTakeOff>Take Off</Ancot.AerocraftTakeOff>
+  <Ancot.AerocraftTakeOffDesc>Consumes {0}x {1} to take off.</Ancot.AerocraftTakeOffDesc>
+  <Ancot.AerocraftLanding>Land</Ancot.AerocraftLanding>
+  <Ancot.AerocraftLandingDesc>Land at the designated location.</Ancot.AerocraftLandingDesc>
+  <Ancot.AerocraftDisabled_RequirePilot>Pilot required.</Ancot.AerocraftDisabled_RequirePilot>
+  <Ancot.AerocraftDisabled_RequireFuel>Fuel required.</Ancot.AerocraftDisabled_RequireFuel>
+
+</LanguageData>

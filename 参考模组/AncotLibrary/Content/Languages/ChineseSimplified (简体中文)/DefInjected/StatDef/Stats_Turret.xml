@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: turret rotate speed -->
+  <Ancot_TurretRotateSpeed.label>炮塔旋转速度</Ancot_TurretRotateSpeed.label>
+  <!-- EN: The turret's rotation speed towards the target. -->
+  <Ancot_TurretRotateSpeed.description>炮塔在瞄准一个目标时，转向目标方向的旋转速度。</Ancot_TurretRotateSpeed.description>
+  <!-- EN: {0}°/s -->
+  <Ancot_TurretRotateSpeed.formatString>{0}°/s</Ancot_TurretRotateSpeed.formatString>
+  
+  <!-- EN: turret shoot angle limit -->
+  <Ancot_TurretShootAngleLimit.label>炮塔射角</Ancot_TurretShootAngleLimit.label>
+  <!-- EN: The angle range within which the turret can continue to aim and fire after starting the shot. -->
+  <Ancot_TurretShootAngleLimit.description>炮塔开始射击后，在多少角度范围内可以持续瞄准射击。</Ancot_TurretShootAngleLimit.description>
+  <!-- EN: {0}° -->
+  <Ancot_TurretShootAngleLimit.formatString>{0}°</Ancot_TurretShootAngleLimit.formatString>
+  
+  <!-- EN: turret warm up time -->
+  <Ancot_TurretWarmUpTime.label>炮塔瞄准时间</Ancot_TurretWarmUpTime.label>
+  <!-- EN: How long this turret takes to shoot after choosing a target. -->
+  <Ancot_TurretWarmUpTime.description>选定目标后需要多长时间瞄准</Ancot_TurretWarmUpTime.description>
+  <!-- EN: {0} s -->
+  <Ancot_TurretWarmUpTime.formatString>{0}秒</Ancot_TurretWarmUpTime.formatString>
+  
+</LanguageData>

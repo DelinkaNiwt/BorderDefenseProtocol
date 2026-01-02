@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Milira Gravship -->
+  <Milira_Scenarios_Gravship.label>米莉拉逆重飞船</Milira_Scenarios_Gravship.label>
+  <!-- EN: 逆重引擎的技术原理和米莉拉掌握的场力作用理论相去甚远。机缘巧合获得一艘逆重飞船后，年轻的米莉拉便一边驾驶着它四处旅行一边研究引擎的原理。如往日一般将飞船停靠在一处古旧无人的轨道设施旁，本以为将要度过稀松平常一天的米莉拉看见运转中的中继器时才意识到自己闯入了机械族的领地。当中继器开始轰鸣作响，来不及离开的米莉拉已经被机械族锁定为入侵者，而她准备独自解决麻烦。\n\nNote: This is a difficult scenario and is not recommended for new players. -->
+  <Milira_Scenarios_Gravship.description>逆重引擎的技术原理和米莉拉掌握的场力作用理论相去甚远。机缘巧合获得一艘逆重飞船后，年轻的米莉拉便一边驾驶着它四处旅行一边研究引擎的原理。如往日一般将飞船停靠在一处古旧无人的轨道设施旁，本以为将要度过稀松平常一天的米莉拉看见运转中的中继器时才意识到自己闯入了机械族的领地。\n\n当中继器开始轰鸣作响，来不及离开的米莉拉已经被机械族锁定为入侵者，而她准备独自解决麻烦。</Milira_Scenarios_Gravship.description>
+  <!-- EN: 逆重引擎的技术原理和米莉拉掌握的场力作用理论相去甚远。机缘巧合获得一艘逆重飞船后，年轻的米莉拉便一边驾驶着它四处旅行一边研究引擎的原理。如往日一般将飞船停靠在一处古旧无人的轨道设施旁，本以为将要度过稀松平常一天的米莉拉看见运转中的中继器时才意识到自己闯入了机械族的领地。当中继器开始轰鸣作响，来不及离开的米莉拉已经被机械族锁定为入侵者，而她准备独自解决麻烦。\n\nNote: This is a difficult scenario and is not recommended for new players. -->
+  <Milira_Scenarios_Gravship.scenario.description>逆重引擎的技术原理和米莉拉掌握的场力作用理论相去甚远。机缘巧合获得一艘逆重飞船后，年轻的米莉拉便一边驾驶着它四处旅行一边研究引擎的原理。如往日一般将飞船停靠在一处古旧无人的轨道设施旁，本以为将要度过稀松平常一天的米莉拉看见运转中的中继器时才意识到自己闯入了机械族的领地。\n\n当中继器开始轰鸣作响，来不及离开的米莉拉已经被机械族锁定为入侵者，而她准备独自解决麻烦。</Milira_Scenarios_Gravship.scenario.description>
+  <!-- EN: Milira Gravship -->
+  <Milira_Scenarios_Gravship.scenario.name>米莉拉逆重飞船</Milira_Scenarios_Gravship.scenario.name>
+  <!-- EN: A Milira with her gravship hunted by mechanoids. -->
+  <Milira_Scenarios_Gravship.scenario.summary>米莉拉和她的逆重飞船遭机械族追杀。</Milira_Scenarios_Gravship.scenario.summary>
+
+  <Milira_Scenarios_Gravship.scenario.parts.GameStartDialog.text>远方的机械主巢响应着中继器的信号，从现在开始，机械族将会无休止地追杀你和你的逆重飞船到任何地方。\n\n你可以选择发射逆重飞船：选择飞船控制台，然后点击「发射」指令；在世界地图上，使用「查看星球」以选择一个降落点。</Milira_Scenarios_Gravship.scenario.parts.GameStartDialog.text>
+</LanguageData>

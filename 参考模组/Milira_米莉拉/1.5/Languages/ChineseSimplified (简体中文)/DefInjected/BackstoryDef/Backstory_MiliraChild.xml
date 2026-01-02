@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: [PAWN_nameDef] endured her simple and uneventful childhood in Cradol. -->
+  <Milira_BackstoryChild_01.description>[PAWN_nameDef]在卡利多度过了自己朴实无华的童年。</Milira_BackstoryChild_01.description>
+  <!-- EN: Milira Metropolis Child -->
+  <Milira_BackstoryChild_01.title>米莉拉 都市小孩</Milira_BackstoryChild_01.title>
+  <!-- EN: Metropolis Child -->
+  <Milira_BackstoryChild_01.titleShort>都市小孩</Milira_BackstoryChild_01.titleShort>
+  
+  <!-- EN: [PAWN_nameDef] came to the ground at an early age. As the sentences of the elders telling the dangers of the ground, [PAWN_nameDef] always traveled with her identity concealed. -->
+  <Milira_BackstoryChild_02.description>[PAWN_nameDef]在很小的时候就来到了地面。族里的长者慎重地叮嘱过[PAWN_nameDef]地面对于天空精灵的危险，[PAWN_nameDef]将此牢记于心，一直谨慎地隐藏着自己的身份旅行着。</Milira_BackstoryChild_02.description>
+  <!-- EN: Milira Young Earth Traveler -->
+  <Milira_BackstoryChild_02.title>米莉拉 年轻的地上旅者</Milira_BackstoryChild_02.title>
+  <!-- EN: Young Earth Traveler -->
+  <Milira_BackstoryChild_02.titleShort>年轻的地上旅者</Milira_BackstoryChild_02.titleShort>
+  
+  <!-- EN: [PAWN_nameDef] didn’t move. As all the housework done by Milian, [PAWN_nameDef] shall do nothing. With the situation continuing, [PAWN_nameDef] sometimes would think that, she would find her interests one day maybe. -->
+  <Milira_BackstoryChild_03.description>[PAWN_nameDef]一点也不想动。米莉安能够完成全部的家务活，而[PAWN_nameDef]什么都不需要做。这种情况可能会一直持续下去，直到自己找到兴趣所在吧；[PAWN_nameDef]有的时候会像这样思考着。</Milira_BackstoryChild_03.description>
+  <!-- EN: Milira Slacker -->
+  <Milira_BackstoryChild_03.title>米莉拉 懒虫</Milira_BackstoryChild_03.title>
+  <!-- EN: Slacker -->
+  <Milira_BackstoryChild_03.titleShort>懒虫</Milira_BackstoryChild_03.titleShort>
+  
+  <!-- EN: [PAWN_nameDef] studied in the academy for long, where she snatch a glimpse of the vast ocean of knowledge. -->
+  <Milira_BackstoryChild_04.description>[PAWN_nameDef]在学院学习过很长一段时间。广阔的知识海洋在这里得以被窥见一二。</Milira_BackstoryChild_04.description>
+  <!-- EN: Milira Academy Student -->
+  <Milira_BackstoryChild_04.title>米莉拉 学院学生</Milira_BackstoryChild_04.title>
+  <!-- EN: Academy Student -->
+  <Milira_BackstoryChild_04.titleShort>学院学生</Milira_BackstoryChild_04.titleShort>
+  
+  <!-- EN: [PAWN_nameDef] went to the ground in objection to the persuading of the elders after a plain and tedious time in Cradol. How curious a kid. -->
+  <Milira_BackstoryChild_05.description>在卡利多度过了枯燥乏味的一段时间后，[PAWN_nameDef]不顾族内长者的劝说坚持要前往地面探索新鲜事物；小孩的好奇心爆发起来真是拦不住。</Milira_BackstoryChild_05.description>
+  <!-- EN: Milira Rebellious Child -->
+  <Milira_BackstoryChild_05.title>米莉拉 叛逆小孩</Milira_BackstoryChild_05.title>
+  <!-- EN: Rebellious Child -->
+  <Milira_BackstoryChild_05.titleShort>叛逆小孩</Milira_BackstoryChild_05.titleShort>
+  
+  <!-- EN: [PAWN_nameDef] spoiled all days in the library, trying to read the abstruse sentences on most of the books. -->
+  <Milira_BackstoryChild_06.description>[PAWN_nameDef]整天泡在藏书室里。尽管很多藏书对[PAWN_nameDef]来说尽是晦涩难懂的文字，但[PAWN_nameDef]尝试着努力去阅读它。</Milira_BackstoryChild_06.description>
+  <!-- EN: Milira Bookworm -->
+  <Milira_BackstoryChild_06.title>米莉拉 小书虫</Milira_BackstoryChild_06.title>
+  <!-- EN: Bookworm -->
+  <Milira_BackstoryChild_06.titleShort>小书虫</Milira_BackstoryChild_06.titleShort>
+  
+</LanguageData>

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: “Zhanlu Soulhunter” 20mm EML -->
+  <CMC_Svcannon.label>“湛卢·追魂”电荷狙击塔</CMC_Svcannon.label>
+  <!-- EN: Equipped with advanced electro-optical and infrared sensors, this smart sniper turret launches large-caliber smart autocannon rounds capable of tracking enemies. The system can also identify and engage nearby hostile stealth targets. -->
+  <CMC_Svcannon.description>安装有比邻星大学开发的先进光电和红外传感器的智能狙击炮塔，发射能追踪敌人的大口径智能机炮弹。该炮塔也能识别和攻击附件的敌对隐身目标（识别范围为基础射程的一半）。</CMC_Svcannon.description>
+  
+  <!-- UNUSED -->
+  <CMC_Svcannon.comps.CompRefuelable.fuelGizmoLabel>炮管耐久</CMC_Svcannon.comps.CompRefuelable.fuelGizmoLabel>
+  <CMC_Svcannon.comps.CompRefuelable.fuelLabel>剩余射击次数</CMC_Svcannon.comps.CompRefuelable.fuelLabel>
+  <CMC_Svcannon.comps.CompRefuelable.outOfFuelMessage>需要更换炮管</CMC_Svcannon.comps.CompRefuelable.outOfFuelMessage>
+  
+  <!-- EN: auto cannon -->
+  <Gun_CMCMSVcannon.label>电荷狙击炮</Gun_CMCMSVcannon.label>
+  <!-- EN: A self-loading large-bore cannon designed to attach to a turret. -->
+  <Gun_CMCMSVcannon.description>能发射智能机炮弹的自动狙击炮。</Gun_CMCMSVcannon.description>
+  <!-- EN: auto cannon -->
+  <Gun_CMCMSVcannon.verbs.Verb_ShootCE.label>TODO</Gun_CMCMSVcannon.verbs.Verb_ShootCE.label>
+  
+  <!-- UNUSED -->
+  <Gun_CMCMSVcannon.verbs.Verb_Shoot.label>电荷弹</Gun_CMCMSVcannon.verbs.Verb_Shoot.label>
+  
+</LanguageData>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <RenderSkipFlagDef>
+    <defName>Ancot_Hair</defName>
+  </RenderSkipFlagDef>
+
+  <RenderSkipFlagDef>
+    <defName>Ancot_Tail</defName>
+  </RenderSkipFlagDef>
+
+  <RenderSkipFlagDef>
+    <defName>Ancot_Ear</defName>
+  </RenderSkipFlagDef>
+
+  <RenderSkipFlagDef>
+    <defName>Ancot_HairAhoge</defName>
+  </RenderSkipFlagDef>
+
+</Defs>

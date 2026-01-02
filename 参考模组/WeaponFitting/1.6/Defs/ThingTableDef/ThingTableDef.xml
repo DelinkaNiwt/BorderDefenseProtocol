@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <AncotLibrary.ThingTableDef>
+    <defName>FC_WeaponFitting</defName>
+    <workerClass>WeaponFitting.ThingTable_WeaponFitting</workerClass>
+    <columns>
+      <li>LabelWithIcon</li>
+      <li>GapTiny</li>
+      <li>Info</li>
+      <li>GapTiny</li>
+      <li>Rename</li>
+      <li>GapTiny</li>
+      <li>WeaponOwner</li>
+      <li>GapSmall</li>
+      <li>WeaponFitting</li><!--之后魔改成配件版本-->
+      <li>GapSmall</li>
+      <li>Favorites</li>
+      <li>GapTiny</li>
+      <li>RemainingSpace</li>
+    </columns>
+  </AncotLibrary.ThingTableDef>
+</Defs>

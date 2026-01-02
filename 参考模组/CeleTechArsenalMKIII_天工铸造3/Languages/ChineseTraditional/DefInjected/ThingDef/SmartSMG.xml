@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: <color=#FFCC66><i>QSZ-85-X XiuJian smart SMG</i></color> -->
+  <QBZS85XWJ.label>QSZ-85 智能沖鋒槍</QBZS85XWJ.label>
+  <!-- EN: A smart SMG developed by CMC in the 2080s, equipped with the latest fire control system and micro guided bullets. One significant feature of this SMG is its ability to trace moving target regardless of weather conditions. -->
+  <QBZS85XWJ.description>開發於21世紀80年代的智能沖鋒槍，裝備了當時最先進的火控系統和微型追蹤射彈，可以在復雜條件下追蹤並命中敵人。\n\n該武器的追蹤模式命中率僅受射手智識水平影響，且在追蹤模式下穿深減半，傷害略微降低。</QBZS85XWJ.description>
+  <!-- EN: Mode switch -->
+  <QBZS85XWJ.comps.CompSecondaryVerb.description>切換射擊模式</QBZS85XWJ.comps.CompSecondaryVerb.description>
+  
+  <QBZS85XWJ.comps.CompSecondaryVerb.mainWeaponLabel>追蹤模式</QBZS85XWJ.comps.CompSecondaryVerb.mainWeaponLabel>
+  <!-- EN: Burst Mode -->
+  <QBZS85XWJ.comps.CompSecondaryVerb.secondaryWeaponLabel>爆發模式</QBZS85XWJ.comps.CompSecondaryVerb.secondaryWeaponLabel>
+  <!-- EN: stock -->
+  <QBZS85XWJ.tools.stock.label>槍托</QBZS85XWJ.tools.stock.label>
+  <!-- EN: barrel -->
+  <QBZS85XWJ.tools.barrel.label>槍管</QBZS85XWJ.tools.barrel.label>
+  <!-- EN: <color=#FFCC66><i>QSZ-85-X XiuJian smart SMG</i></color> -->
+  <QBZS85XWJ.verbs.Verb_Shoot.label>QSZ-85 智能沖鋒槍</QBZS85XWJ.verbs.Verb_Shoot.label>
+  
+</LanguageData>

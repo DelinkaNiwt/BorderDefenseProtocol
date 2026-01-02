@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <BodyDef>
+    <defName>Milira_FloatUnit</defName>
+    <label>float unit</label>
+    <corePart>
+      <def>Milian_FloatUnit_Body</def>
+      <height>Middle</height>
+      <depth>Outside</depth>
+      <groups>
+        <li>Torso</li>
+      </groups>
+      <parts>
+        <li>
+          <def>Milian_FloatUnit_Armor</def>
+          <coverage>0.045</coverage>
+          <height>Top</height>
+          <groups>
+            <li>Torso</li>
+          </groups>
+          <parts>
+            <li>
+              <def>Milian_FloatUnit_Thruster</def>
+              <customLabel>left thruster</customLabel>
+              <coverage>0.09</coverage>
+              <height>Top</height>
+              <depth>Inside</depth>
+              <groups>
+                <li>Torso</li>
+              </groups>
+            </li>
+            <li>
+              <def>Milian_FloatUnit_Thruster</def>
+              <customLabel>right thruster</customLabel>
+              <coverage>0.09</coverage>
+              <height>Top</height>
+              <depth>Inside</depth>
+              <groups>
+                <li>Torso</li>
+              </groups>
+            </li>
+          </parts>
+        </li>
+        <li>
+          <def>Milian_FloatUnit_Armor</def>
+          <coverage>0.045</coverage>
+          <height>Top</height>
+          <groups>
+            <li>Torso</li>
+          </groups>
+          <parts>
+            <li>
+              <def>Milian_FloatUnit_Armor</def>
+              <coverage>0.02</coverage>
+              <height>Top</height>
+              <depth>Inside</depth>
+              <groups>
+                <li>Torso</li>
+              </groups>
+              <parts>
+                <li>
+                  <def>Milian_FloatUnit_Len</def>
+                  <coverage>0.04</coverage>
+                  <height>Top</height>
+                  <depth>Inside</depth>
+                  <groups>
+                    <li>Torso</li>
+                  </groups>
+                </li>
+                <li>
+                  <def>Milian_FloatUnit_Sensor</def>
+                  <coverage>0.04</coverage>
+                  <height>Top</height>
+                  <depth>Inside</depth>
+                  <groups>
+                    <li>Torso</li>
+                  </groups>
+                </li>
+                <li>
+                  <def>Milian_FloatUnit_Core</def>
+                  <coverage>0.02</coverage>
+                  <height>Top</height>
+                  <depth>Inside</depth>
+                  <groups>
+                    <li>Torso</li>
+                  </groups>
+                </li>
+              </parts>
+            </li>
+          </parts>
+        </li>
+      </parts>
+    </corePart>
+  </BodyDef>
+
+
+</Defs>

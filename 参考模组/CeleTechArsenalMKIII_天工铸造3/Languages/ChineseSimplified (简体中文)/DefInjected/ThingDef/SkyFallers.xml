@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: trader ship -->
+  <CMC_TraderShuttle.label>TODO</CMC_TraderShuttle.label>
+  <!-- EN: A trade shuttle. -->
+  <CMC_TraderShuttle.description>TODO</CMC_TraderShuttle.description>
+  
+  <!-- EN: trader ship -->
+  <CMC_TraderShuttle_A.label>TODO</CMC_TraderShuttle_A.label>
+  <!-- EN: A trade shuttle. -->
+  <CMC_TraderShuttle_A.description>TODO</CMC_TraderShuttle_A.description>
+  
+  <!-- EN: trader ship -->
+  <CMC_TraderShuttle_S.label>TODO</CMC_TraderShuttle_S.label>
+  <!-- EN: A trade shuttle. -->
+  <CMC_TraderShuttle_S.description>TODO</CMC_TraderShuttle_S.description>
+  
+  <!-- EN: trader ship (incoming) -->
+  <CMCTS_ShipIncoming.label>TODO</CMCTS_ShipIncoming.label>
+  
+  <!-- EN: trader ship (incoming) -->
+  <CMCTS_ShipIncoming_A.label>TODO</CMCTS_ShipIncoming_A.label>
+  
+  <!-- EN: trader ship (incoming) -->
+  <CMCTS_ShipIncoming_S.label>TODO</CMCTS_ShipIncoming_S.label>
+  
+  <!-- EN: trader ship (leaving) -->
+  <CMCTS_ShipLeaving.label>TODO</CMCTS_ShipLeaving.label>
+  
+  <!-- EN: trader ship (leaving) -->
+  <CMCTS_ShipLeaving_A.label>TODO</CMCTS_ShipLeaving_A.label>
+  
+  <!-- EN: trader ship (leaving) -->
+  <CMCTS_ShipLeaving_S.label>TODO</CMCTS_ShipLeaving_S.label>
+  
+</LanguageData>

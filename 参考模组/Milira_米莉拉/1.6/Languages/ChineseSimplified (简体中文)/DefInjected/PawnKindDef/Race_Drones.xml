@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 清洁单元 -->
+  <Milira_DroneCleansweeper.label>清洁单元</Milira_DroneCleansweeper.label>
+  
+  <!-- EN: 运载单元 -->
+  <Milira_DroneFreight.label>运载单元</Milira_DroneFreight.label>
+  <Milira_DroneStorage.label>贮存单元</Milira_DroneStorage.label>
+  
+</LanguageData>

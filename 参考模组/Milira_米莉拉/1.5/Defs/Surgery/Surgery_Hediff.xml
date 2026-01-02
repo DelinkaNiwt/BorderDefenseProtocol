@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+<HediffDef ParentName="AddedBodyPartBase">
+	<defName>Milira_ArtificialWing_Installed</defName>
+	<label>Artificial Wing</label>
+	<labelNoun>An artificial wing</labelNoun>
+	<description>Installed artificial wings, not flexible prosthetics that’s barely able to manage flight.</description>
+	<descriptionHyperlinks>
+	  <ThingDef>Milira_ArtificialWing</ThingDef>
+	</descriptionHyperlinks>
+	<spawnThingOnRemoved>Milira_ArtificialWing</spawnThingOnRemoved>
+	<woundAnchorRange>0</woundAnchorRange>
+	<addedPartProps>
+		<solid>true</solid>
+		<partEfficiency>0.7</partEfficiency>
+		<betterThanNatural>false</betterThanNatural>
+	</addedPartProps>
+</HediffDef>
+
+  <HediffDef ParentName="AddedBodyPartBase">
+    <defName>Milira_BionicWing_Installed</defName>
+    <label>Bionic Wing</label>
+    <labelNoun>A bionic wing</labelNoun>
+    <description>Installed bionic wing.</description>
+    <descriptionHyperlinks>
+	  <ThingDef>Milira_BionicWing</ThingDef>
+	</descriptionHyperlinks>
+    <spawnThingOnRemoved>Milira_BionicWing</spawnThingOnRemoved>
+    <woundAnchorRange>0</woundAnchorRange>
+    <addedPartProps>
+      <solid>true</solid>
+      <partEfficiency>1.0</partEfficiency>
+      <betterThanNatural>false</betterThanNatural>
+    </addedPartProps>
+  </HediffDef>
+
+</Defs>

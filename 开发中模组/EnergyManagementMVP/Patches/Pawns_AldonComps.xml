@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!--
+  为所有人类殖民者添加Aldon能量组件
+  包括能量容器组件和权限组件
+  -->
+
+  <!-- 添加能量容器组件到所有人类 -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef[defName="Human"]/comps</xpath>
+    <value>
+      <li Class="Aldon.Energy.AldonEnergyCompProperties" />
+    </value>
+  </Operation>
+
+  <!-- 添加权限组件到所有人类 -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef[defName="Human"]/comps</xpath>
+    <value>
+      <li Class="Aldon.Energy.AldonPermissionCompProperties" />
+    </value>
+  </Operation>
+
+</Patch>

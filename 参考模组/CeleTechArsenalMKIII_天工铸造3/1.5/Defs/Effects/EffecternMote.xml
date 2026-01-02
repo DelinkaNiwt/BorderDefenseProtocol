@@ -1,0 +1,517 @@
+<Defs>
+   <FleckDef ParentName="FleckBase_Thrown">
+    <defName>CMC_Fleck_ProjectileSmoke</defName>
+    <graphicData>
+      <texPath>Things/Mote/Smoke</texPath>
+      <renderInstanced>true</renderInstanced>
+      <!--<shaderType>Transparent</shaderType>-->
+    </graphicData>
+    <altitudeLayer>FogOfWar</altitudeLayer>
+    <fadeInTime>0.1</fadeInTime>
+    <solidTime>0</solidTime>
+    <fadeOutTime>2</fadeOutTime>
+    <growthRate>-0.008</growthRate>
+  </FleckDef>
+
+   <FleckDef ParentName="FleckBase">
+    <defName>CMC_mFlashHollow_Fast</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <solidTime>0.03</solidTime>
+    <fadeOutTime>0.1</fadeOutTime>
+    <graphicData>
+      <texPath>Things/Mote/FlashHollow</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <growthRate>386.9</growthRate>
+  </FleckDef>
+
+  <FleckDef ParentName="FleckBase">
+    <defName>CMC_mFlashHollow_Red_Fast</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <solidTime>0.03</solidTime>
+    <fadeOutTime>0.1</fadeOutTime>
+    <graphicData>
+      <texPath>Things/Mote/FlashHollow</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <color>(0.9, 0.3, 0.25)</color>
+    </graphicData>
+    <growthRate>386.9</growthRate>
+  </FleckDef>
+  
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>Fleck_HeatDiffusion_CMC</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.02</fadeInTime>
+    <fadeOutTime>0.3</fadeOutTime>
+    <solidTime>0</solidTime>
+    <growthRate>42.25</growthRate>
+    <graphicData>
+      <texPath>Things/Mote/HeatDiffusion</texPath>
+      <graphicClass>Graphic_FleckPulse</graphicClass>
+      <color>(255, 252, 196, 1.0)</color>
+      <shaderType>MoteHeatDiffusion</shaderType>
+      <shaderParameters>
+        <_MultiplyTex>/Things/Mote/RadiationDistortion_A</_MultiplyTex>
+        <_texBScale>0.2</_texBScale>
+        <_texBScrollSpeed>-0.5</_texBScrollSpeed>
+        <_Intensity>13</_Intensity>
+        <_Clip>0</_Clip>
+      </shaderParameters>
+      <drawSize>(12, 12)</drawSize>
+    </graphicData>
+  </FleckDef>
+
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>CMC_Small_Fleck_VaporizeRays_A</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fleckSystemClass>FleckSystemThrown</fleckSystemClass>
+    <fadeInTime>0.02</fadeInTime>
+    <fadeOutTime>0.06</fadeOutTime>
+    <solidTime>0</solidTime>
+    <graphicData>
+      <texPath>Things/Mote/VaporizeExplosionRays_A</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(20, 20)</drawSize>
+    </graphicData>
+  </FleckDef>
+
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>CMC_Small_Fleck_VaporizeRays_B</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fleckSystemClass>FleckSystemThrown</fleckSystemClass>
+    <fadeInTime>0.02</fadeInTime>
+    <fadeOutTime>0.06</fadeOutTime>
+    <solidTime>0</solidTime>
+    <graphicData>
+      <texPath>Things/Mote/VaporizeExplosionRays_B</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(20, 20)</drawSize>
+    </graphicData>
+  </FleckDef>
+  
+  <EffecterDef>
+    <defName>CMC_Small_Vaporize_Heatwave</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>Fleck_HeatDiffusion_CMC</fleckDef>
+        <burstCount>1</burstCount>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+    </children>
+  </EffecterDef>
+  
+ <EffecterDef>
+    <defName>CMC_Bomb</defName>
+    <children>
+	  <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>CMC_mFlashHollow_Red_Fast</fleckDef>
+        <burstCount>1</burstCount>
+        <rotationRate>60</rotationRate>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>Fleck_VaporizeCenterFlash</fleckDef>
+        <burstCount>6</burstCount>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+	  <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>CMC_SmokeDark</fleckDef>
+		<positionRadius>7.4</positionRadius>
+        <burstCount>15</burstCount>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+	  <li>
+			<subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+			<fleckDef>DustPuff</fleckDef>
+			<positionRadius>4.4</positionRadius>
+			<burstCount>2~6</burstCount>
+			<speed>1.6~1.75</speed>
+			<scale>0.5~2.3</scale>
+			<spawnLocType>OnSource</spawnLocType>
+		</li>
+		<li>
+			<subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+			<fleckDef>CMC_AreaEffect</fleckDef>
+			<burstCount>1</burstCount>
+			<spawnLocType>OnSource</spawnLocType>
+		</li>
+      <li>
+			<subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+			<fleckDef>SparkFlash</fleckDef>
+			<burstCount>2~6</burstCount>
+			<spawnLocType>BetweenTouchingCells</spawnLocType>
+			<positionLerpFactor>0.49</positionLerpFactor>
+			<scale>2.5~3.5</scale>
+      </li>
+      <li>
+			<subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+			<moteDef>Mote_SparkThrown</moteDef>
+			<burstCount>20~36</burstCount>
+			<spawnLocType>BetweenTouchingCells</spawnLocType>
+			<positionLerpFactor>2.49</positionLerpFactor>
+			<scale>0.64~0.84</scale>
+			<airTime>0.38~0.46</airTime>
+			<rotationRate>-180~180</rotationRate>
+			<speed>5.2~44</speed>
+			<angle>0~360</angle>
+			<positionRadius>0.08</positionRadius>
+      </li>
+    </children>
+  </EffecterDef>
+  
+  <EffecterDef>
+    <defName>CMC_Rocket</defName>
+    <children>
+		<li>
+			<subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+			<fleckDef>Fleck_VaporizeCenterFlash</fleckDef>
+			<burstCount>1</burstCount>
+			<scale>1.5~2.0</scale>
+			<spawnLocType>OnSource</spawnLocType>
+		</li>
+		<li>
+			<subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+			<fleckDef>DustPuff</fleckDef>
+			<positionRadius>4.4</positionRadius>
+			<burstCount>2~6</burstCount>
+			<speed>1.6~1.75</speed>
+			<scale>0.5~2.3</scale>
+			<spawnLocType>OnSource</spawnLocType>
+		</li>
+		<li>
+			<subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+			<moteDef>Mote_SparkThrown</moteDef>
+			<burstCount>10~16</burstCount>
+			<spawnLocType>BetweenTouchingCells</spawnLocType>
+			<positionLerpFactor>2.49</positionLerpFactor>
+			<scale>0.34~0.64</scale>
+			<airTime>0.18~0.39</airTime>
+			<rotationRate>-180~180</rotationRate>
+			<speed>7.2~24</speed>
+			<angle>0~360</angle>
+			<positionRadius>0.08</positionRadius>
+      </li>
+    </children>
+  </EffecterDef>
+  
+  <EffecterDef>
+    <defName>CMC_Frag</defName>
+    <children>
+		<li>
+			<subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+			<fleckDef>DustPuff</fleckDef>
+			<positionRadius>0.4</positionRadius>
+			<burstCount>2~6</burstCount>
+			<speed>1.6~1.75</speed>
+			<scale>2.5~3.3</scale>
+			<spawnLocType>OnSource</spawnLocType>
+		</li>
+    </children>
+  </EffecterDef>
+  
+  <EffecterDef>
+    <defName>CMC_AABomb</defName>
+    <children>
+    <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>Fleck_VaporizeCenterFlash</fleckDef>
+        <burstCount>1</burstCount>
+		<scale>2.5~3.0</scale>
+        <spawnLocType>OnSource</spawnLocType>
+	</li>
+	<li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>DustPuff</fleckDef>
+        <positionRadius>0.1</positionRadius>
+        <burstCount>3~5</burstCount>
+        <speed>0.6~0.75</speed>
+        <scale>1.5~2.3</scale>
+        <spawnLocType>OnSource</spawnLocType>
+    </li>
+    <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>ExplosionFlash</fleckDef>
+        <burstCount>1~1</burstCount>
+        <scale>3.0~3.0</scale>
+        <spawnLocType>OnSource</spawnLocType>
+    </li>
+    </children>
+  </EffecterDef>
+  
+  <FleckDef ParentName="FleckGlowDistortBackground" Name="FleckPsycastAreaEffect"> 
+    <defName>CMC_AreaEffect</defName>
+    <altitudeLayer>MoteLow</altitudeLayer>
+    <fadeInTime>0</fadeInTime>
+    <fadeOutTime>0.23</fadeOutTime>
+    <solidTime>0</solidTime>
+    <growthRate>60</growthRate>
+    <graphicData>
+      <texPath>Things/Mote/Black</texPath>
+      <shaderParameters>
+        <_distortionIntensity>0.1</_distortionIntensity>
+        <_brightnessMultiplier>1.25</_brightnessMultiplier>
+      </shaderParameters>
+      <drawSize>0.3</drawSize>
+    </graphicData>
+  </FleckDef>
+  
+  <ThingDef ParentName="MoteBase">
+    <defName>CMC_Aim</defName>
+    <thingClass>MoteDualAttached</thingClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0</fadeInTime>
+      <fadeOutTime>1.2</fadeOutTime>
+      <solidTime>999999</solidTime>
+      <needsMaintenance>True</needsMaintenance>
+      <rotateTowardsTarget>True</rotateTowardsTarget>
+      <scaleToConnectTargets>True</scaleToConnectTargets>
+      <fadeOutUnmaintained>True</fadeOutUnmaintained>
+    </mote>
+    <graphicData>
+      <texPath>Things/Others/CMC_ZR_Aim</texPath>
+      <graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
+	  <shaderType>MoteHellfireCannon_Aim</shaderType>
+      <shaderParameters>
+        <_DistortionTex>/Things/Mote/Cloudy_C</_DistortionTex>
+        <_NumFrames>10</_NumFrames>
+        <_FramesPerSec>0.3</_FramesPerSec>
+        <_DistortionScrollSpeed>1.35</_DistortionScrollSpeed>
+        <_Intensity>3</_Intensity>
+        <_DistortionScale>0.092</_DistortionScale>
+      </shaderParameters>
+      <drawSize>(3, 0.9)</drawSize>
+    </graphicData>
+  </ThingDef>
+  
+  <ThingDef ParentName="MoteBase"  MayRequire="Ludeon.RimWorld.Anomaly">
+    <defName>CMC_Mote_IncineratorBurst</defName>
+    <thingClass>MoteDualAttached</thingClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <isSaveable>false</isSaveable>
+    <mote>
+      <fadeInTime>0</fadeInTime>
+      <fadeOutTime>1</fadeOutTime>
+      <solidTime>999999</solidTime>
+      <needsMaintenance>True</needsMaintenance>
+      <rotateTowardsTarget>True</rotateTowardsTarget>
+      <scaleToConnectTargets>False</scaleToConnectTargets>
+      <fadeOutUnmaintained>True</fadeOutUnmaintained>
+    </mote>
+    <drawOffscreen>true</drawOffscreen>
+    <graphicData>
+      <texPath>Things/Mote/IncineratorFlameSheet</texPath>
+      <graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
+      <shaderType>MoteIncineratorBeam</shaderType>
+	  <color>(0.7, 0.7, 0.7)</color>
+      <shaderParameters>
+        <_GradientTex>/Things/Others/IncineratorBeamGradient_Blue</_GradientTex>
+        <_AgeScalarNoise>/Things/Mote/IncineratorBeamAgeNoise</_AgeScalarNoise>
+        <_ScrollSpeedA>-4</_ScrollSpeedA>
+        <_ScrollSpeedB>3</_ScrollSpeedB>
+        <_Intensity>0.4</_Intensity>
+        <_NumFrames>12</_NumFrames>
+        <_FramesPerSec>24</_FramesPerSec>
+      </shaderParameters>
+      <drawSize>10</drawSize>
+    </graphicData>
+  </ThingDef>
+  
+  <ThingDef ParentName="MoteBase"  MayRequire="Ludeon.RimWorld.Anomaly">
+    <defName>CMC_Mote_IncineratorBurstWeak</defName>
+    <thingClass>MoteDualAttached</thingClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <isSaveable>false</isSaveable>
+    <mote>
+      <fadeInTime>0</fadeInTime>
+      <fadeOutTime>1</fadeOutTime>
+      <solidTime>999999</solidTime>
+      <needsMaintenance>True</needsMaintenance>
+      <rotateTowardsTarget>True</rotateTowardsTarget>
+      <scaleToConnectTargets>False</scaleToConnectTargets>
+      <fadeOutUnmaintained>True</fadeOutUnmaintained>
+    </mote>
+    <drawOffscreen>true</drawOffscreen>
+    <graphicData>
+      <texPath>Things/Mote/IncineratorFlameSheet</texPath>
+      <graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
+      <shaderType>MoteIncineratorBeam</shaderType>
+	  <color>(0.7, 0.7, 0.7)</color>
+      <shaderParameters>
+        <_GradientTex>/Things/Others/IncineratorBeamGradient_Mix</_GradientTex>
+        <_AgeScalarNoise>/Things/Mote/IncineratorBeamAgeNoise</_AgeScalarNoise>
+        <_ScrollSpeedA>-4</_ScrollSpeedA>
+        <_ScrollSpeedB>3</_ScrollSpeedB>
+        <_Intensity>0.4</_Intensity>
+        <_NumFrames>12</_NumFrames>
+        <_FramesPerSec>24</_FramesPerSec>
+      </shaderParameters>
+      <drawSize>10</drawSize>
+    </graphicData>
+  </ThingDef>
+  
+  <ThingDef ParentName="MoteBase">
+    <thingClass>MoteAttached</thingClass>
+	<defName>CMC_Mote_ChipBoosted</defName>
+    <altitudeLayer>Item</altitudeLayer>
+    <mote>
+      <fadeInTime>3</fadeInTime>
+      <fadeOutTime>3</fadeOutTime>
+      <solidTime>999999</solidTime>
+      <needsMaintenance>True</needsMaintenance>
+	  <fadeOutUnmaintained>True</fadeOutUnmaintained>
+	  <attachedToHead>True</attachedToHead>
+    </mote>
+	<graphicData>
+      <graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
+	  <drawSize>1</drawSize>
+      <texPath>Things/Others/CMC_Hediff_boosted</texPath>
+      <color>(0.1, 1, 1, 1)</color>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+	</ThingDef>
+	
+	<ThingDef ParentName="MoteBase">
+	<defName>CMC_Mote_SwordShowerPawnBG</defName>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <mote>
+      <fadeInTime>1.3</fadeInTime>
+      <fadeOutTime>1.3</fadeOutTime>
+      <solidTime>999999</solidTime>
+      <needsMaintenance>True</needsMaintenance>
+	  <fadeOutUnmaintained>True</fadeOutUnmaintained>
+	  <attachedToHead>True</attachedToHead>
+    </mote>
+	<graphicData>
+      <graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
+	  <drawSize>1.9</drawSize>
+      <texPath>Things/Others/CMC_Mote_SS</texPath>
+      <color>(1, 1, 1, 1)</color>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+  </ThingDef>
+  
+  <ThingDef ParentName="MoteBase">
+	<defName>CMC_Mote_SWTargetLocked</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+	<thingClass>MoteAttached</thingClass>
+    <mote>
+      <fadeInTime>0</fadeInTime>
+      <fadeOutTime>0</fadeOutTime>
+      <solidTime>999999</solidTime>
+      <needsMaintenance>True</needsMaintenance>
+	  <fadeOutUnmaintained>True</fadeOutUnmaintained>
+    </mote>
+	<graphicData>
+	  <drawSize>1.5</drawSize>
+      <texPath>Things/Others/CMC_Locked</texPath>
+      <color>(1, 1, 1, 1)</color>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+  </ThingDef>
+  
+  <ThingDef ParentName="MoteBase">
+	<defName>CMC_Mote_MissileLocked</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+	<!--thingClass>MoteAttached</thingClass-->
+	<thingClass>TOT_DLL_test.Mote_ScaleAndRotate</thingClass>
+	<tickerType>Normal</tickerType>
+    <mote>
+      <fadeInTime>0</fadeInTime>
+      <fadeOutTime>0</fadeOutTime>
+      <solidTime>999999</solidTime>
+      <needsMaintenance>True</needsMaintenance>
+	  <fadeOutUnmaintained>True</fadeOutUnmaintained>
+	  <growthRate>0.4</growthRate>
+    </mote>
+	<graphicData>
+	  <drawSize>4.5</drawSize>
+      <texPath>Things/Others/CMC_Locked_Colored</texPath>
+      <color>(1, 1, 1, 1)</color>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+  </ThingDef>
+  
+  <EffecterDef>
+	<defName>CMC_ZPReactor_GenPowereffecter</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
+        <fleckDef>PlainFlash</fleckDef>
+        <burstCount>1</burstCount>
+        <chancePerTick>0.01</chancePerTick>
+        <chancePeriodTicks>31</chancePeriodTicks>
+        <scale>10</scale>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
+        <fleckDef>PlainFlash</fleckDef>
+        <initialDelayTicks>660</initialDelayTicks>
+        <burstCount>1</burstCount>
+        <chancePerTick>.003</chancePerTick>
+        <chancePeriodTicks>47</chancePeriodTicks>
+        <scale>6</scale>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
+        <positionRadius>2</positionRadius>
+        <fleckDef>CMC_ZPEnergyCrackle</fleckDef>
+        <chancePerTick>.01</chancePerTick>
+        <chancePeriodTicks>17</chancePeriodTicks>
+        <burstCount>1~4</burstCount>
+        <scale>.15~.25</scale>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+    </children>
+	</EffecterDef>
+	
+	<FleckDef ParentName="FleckBase_RandomGraphic_Thrown">
+    <defName>CMC_ZPEnergyCrackle</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.0</fadeInTime>
+    <solidTime>.1</solidTime>
+    <fadeOutTime>.1</fadeOutTime>
+    <growthRate>-.125</growthRate>
+    <randomGraphics>
+      <li>
+        <graphicClass>Graphic_FleckPulse</graphicClass>
+        <texPath>Things/Mote/EnergyCrackleA</texPath>
+        <shaderType>MoteGlowPulse</shaderType>
+        <renderInstanced>true</renderInstanced>
+        <shaderParameters>
+          <_Color>(1, .8, .9, 1)</_Color>
+          <_Interval>0.02</_Interval>
+        </shaderParameters>
+        <drawSize>12.0</drawSize>
+      </li>
+      <li>
+        <graphicClass>Graphic_FleckPulse</graphicClass>
+        <texPath>Things/Mote/EnergyCrackleB</texPath>
+        <shaderType>MoteGlowPulse</shaderType>
+        <renderInstanced>true</renderInstanced>
+        <shaderParameters>
+          <_Color>(1, .8, .9, 1)</_Color>
+          <_Interval>0.02</_Interval>
+        </shaderParameters>
+        <drawSize>12.0</drawSize>
+      </li>
+      <li>
+        <graphicClass>Graphic_FleckPulse</graphicClass>
+        <texPath>Things/Mote/EnergyCrackleC</texPath>
+        <shaderType>MoteGlowPulse</shaderType>
+        <renderInstanced>true</renderInstanced>
+        <shaderParameters>
+          <_Color>(1, .8, .9, 1)</_Color>
+          <_Interval>0.02</_Interval>
+        </shaderParameters>
+        <drawSize>12.0</drawSize>
+      </li>
+    </randomGraphics>
+  </FleckDef>
+</Defs>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <CMC_TaoTie_Persona.label>&lt;color=#FFAA00&gt;&lt;i&gt;【饕餮】煉獄射線步槍Δ&lt;/i&gt;&lt;/color&gt;</CMC_TaoTie_Persona.label>
+  <!-- EN: A powerful prototype rifle, which fires large focused beams of highly energized particles and cause massive damage. It is extremely effective against armored targets at close range. -->
+  <CMC_TaoTie_Persona.description>一把跨時代的射線步槍，其發射的高能粒子束可以造成巨額傷害。該武器在近距離對抗裝甲目標時極具優勢。</CMC_TaoTie_Persona.description>
+  <!-- EN: barrel -->
+  <CMC_TaoTie_Persona.tools.barrel.label>槍管</CMC_TaoTie_Persona.tools.barrel.label>
+  <!-- EN: <color=#FF0000><i>QBZL-822 TaoTie inferno lance</i></color> -->
+  <CMC_TaoTie_Persona.verbs.Verb_Laser_Once.label>&lt;color=#FFAA00&gt;&lt;i&gt;【饕餮】煉獄射線步槍Δ&lt;/i&gt;&lt;/color&gt;</CMC_TaoTie_Persona.verbs.Verb_Laser_Once.label>
+</LanguageData>

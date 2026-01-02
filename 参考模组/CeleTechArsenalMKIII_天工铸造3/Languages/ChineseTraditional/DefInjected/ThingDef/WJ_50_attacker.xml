@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: WJ-50 (Leaving) -->
+  <CMC_MYDE_AF_Skyfalller_WJ50_CrossMapThing.label>WJ-50（離開）</CMC_MYDE_AF_Skyfalller_WJ50_CrossMapThing.label>
+  
+  <!-- EN: WJ-50 arsenal wingman -->
+  <MYDE_CMC_WJ50X.label>WJ-50“朱雀”武庫僚機</MYDE_CMC_WJ50X.label>
+  <!-- EN: As an AI-controlled arsenal attacker, WJ-50 scarifies its maneuverability and speed to load more anti-drone swarm missiles in bombing bays and VLSs. -->
+  <MYDE_CMC_WJ50X.description>由AI控制的武庫攻擊機，以作為J50彈藥庫的延申。 WJ-50犧牲了機動性和機載護盾換取了更多空間以安裝反蜂群導彈武器艙和垂發裝置。</MYDE_CMC_WJ50X.description>
+  <!-- EN: Needs Fuel -->
+  <MYDE_CMC_WJ50X.comps.CompRefuelable.outOfFuelMessage>燃料耗盡</MYDE_CMC_WJ50X.comps.CompRefuelable.outOfFuelMessage>
+  <!-- EN: Switching between takeoff and landing, the "Eclipse" FH-203 belongs to a fixed wing aerocraft and requires an unobstructed distance of more than 20 grids to launch and land. It can only attack during flight. After takeoff, move it with the right mouse button, right-click on Non-Player faction object to forcibly attack the target, right-click on our faction object to switch to follow mode. -->
+  <MYDE_CMC_WJ50X.comps.Comp_MoveToTargetAndHover.TakeOffAndLanding_Icon_Description>垂直起降</MYDE_CMC_WJ50X.comps.Comp_MoveToTargetAndHover.TakeOffAndLanding_Icon_Description>
+  <!-- EN: Take off -->
+  <MYDE_CMC_WJ50X.comps.Comp_MoveToTargetAndHover.TakeOffAndLanding_Icon_On_Label>垂直起降</MYDE_CMC_WJ50X.comps.Comp_MoveToTargetAndHover.TakeOffAndLanding_Icon_On_Label>
+  <!-- EN: Cross map, no open space can be selected as the target location. To avoid situations where it is impossible to return, please ensure that there is sufficient fuel for round-trip travel -->
+  <MYDE_CMC_WJ50X.comps.Comp_CanCrossMap.CrossMap_Description>跨地圖飛行</MYDE_CMC_WJ50X.comps.Comp_CanCrossMap.CrossMap_Description>
+  <!-- EN: Cross Map -->
+  <MYDE_CMC_WJ50X.comps.Comp_CanCrossMap.CrossMap_Label>跨地圖飛行</MYDE_CMC_WJ50X.comps.Comp_CanCrossMap.CrossMap_Label>
+  
+</LanguageData>

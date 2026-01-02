@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: milira gravity trap -->
+  <Milira_TrapAttractive.label>引力陷阱</Milira_TrapAttractive.label>
+  <!-- EN: A trap that, upon activation, instantly applies a gravitational field over a large area centered around itself. -->
+  <Milira_TrapAttractive.description>能够在激发瞬间对以自身为圆心的大范围施加引力场的陷阱。</Milira_TrapAttractive.description>
+  
+  <!-- EN: milira repulsion trap -->
+  <Milira_TrapRepulsive.label>斥力陷阱</Milira_TrapRepulsive.label>
+  <!-- EN: A trap that, upon activation, instantly applies a repulsive force field over a large area centered around itself. -->
+  <Milira_TrapRepulsive.description>能够在激发瞬间对以自身为圆心的大范围施加斥力场的陷阱。</Milira_TrapRepulsive.description>
+  
+</LanguageData>

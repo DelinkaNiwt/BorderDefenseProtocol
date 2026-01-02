@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 不要使用 -->
+  <Milian_Mechanoid_ForDisassembly.label>不要使用</Milian_Mechanoid_ForDisassembly.label>
+  <!-- EN: 这是一个永远都不应该被使用的配方。如果你看见这个制作配方，请无视它。 -->
+  <Milian_Mechanoid_ForDisassembly.description>这是一个永远都不应该被使用的配方。如果你看见这个制作配方，请无视它。</Milian_Mechanoid_ForDisassembly.description>
+  <!-- EN: Gestating mech. -->
+  <Milian_Mechanoid_ForDisassembly.jobString>培育机械体中。</Milian_Mechanoid_ForDisassembly.jobString>
+  
+</LanguageData>

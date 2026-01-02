@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: range dodge chance -->
+  <Ancot_RangeDodgeChance.label>远程闪避率</Ancot_RangeDodgeChance.label>
+  <!-- EN: Chance to dodge a range attack that would've otherwise hit. -->
+  <Ancot_RangeDodgeChance.description>闪避子弹或箭矢等远程攻击的几率。</Ancot_RangeDodgeChance.description>
+  
+  <!-- EN: stamina recovery rate factor -->
+  <Ancot_StaminaRecoveryRateFactor.label>架势回复速率乘数</Ancot_StaminaRecoveryRateFactor.label>
+  <!-- EN: A multiplier on how fast the stamina recover of this creature when equipping with a shield. -->
+  <Ancot_StaminaRecoveryRateFactor.description>装备盾牌时，架势值回复速率的乘数。</Ancot_StaminaRecoveryRateFactor.description>
+  
+</LanguageData>

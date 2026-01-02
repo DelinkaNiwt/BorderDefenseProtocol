@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <ThingDef Name="Milira_RayWeaponBase" ParentName="BaseMakeableGun" Abstract="True">
+    <tickerType>Normal</tickerType>
+    <recipeMaker>
+      <researchPrerequisite>Milira_RayWeapon</researchPrerequisite>
+      <recipeUsers Inherit="false">
+        <li>Milira_UniversalBench</li>
+      </recipeUsers>
+    </recipeMaker>
+    <weaponTags>
+      <li>Milira_RayWeapon</li>
+    </weaponTags>
+    <tradeability>Sellable</tradeability>
+  </ThingDef>
+  <ThingDef Name="Milira_HeavyRayWeaponBase" ParentName="BaseMakeableGun" Abstract="True">
+    <tickerType>Normal</tickerType>
+    <recipeMaker>
+      <researchPrerequisite>Milira_HeavyRayWeapon</researchPrerequisite>
+      <recipeUsers Inherit="false">
+        <li>Milira_SunBlastFurnace</li>
+      </recipeUsers>
+    </recipeMaker>
+    <weaponTags>
+      <li>Milira_HeavyRayWeapon</li>
+    </weaponTags>
+    <tradeability>Sellable</tradeability>
+  </ThingDef>
+
+  <ThingDef Name="MiliraBullet_Ray" ParentName="BaseBullet" Abstract="True">
+    <label>ray</label>
+    <thingClass>AncotLibrary.Beam</thingClass>
+    <projectile>
+      <damageDef>Milira_Ray</damageDef>
+      <beamMoteDef>Milira_Mote_LaserPulse</beamMoteDef>
+      <stoppingPower>0.2</stoppingPower>
+      <speed>325</speed>
+      <beamStartOffset>1</beamStartOffset>
+    </projectile>
+    <graphicData>
+      <texPath>Milira/Null/null</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+      <drawSize>1.0</drawSize>
+    </graphicData>
+    <modExtensions>
+      <li Class="AncotLibrary.Projectile_Custom_Extension">
+        <impactEffecter>Milira_PlasmaChargeFire_Backward_Big</impactEffecter>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- ==================================================================================================================== -->
+
+  <!-- 射线手枪============================================================================================= -->
+  <ThingDef ParentName="Milira_RayWeaponBase">
+    <defName>Milira_RayPistol</defName>
+    <label>Ray Pistol</label>
+    <description>A lightweight, short-range low-power ray emitter. Easy to aim and use with minimal training, making it a common weapon for non-combat personnel. When energy is available, it can shoot continuously with a shortened warm-up time.</description>
+    <graphicData>
+      <texPath>Milira/Weapon/RayPistol</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.2</drawSize>
+    </graphicData>
+    <uiIconScale>1.0</uiIconScale>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <generateCommonality>0.8</generateCommonality>
+    <statBases>
+      <WorkToMake>34000</WorkToMake>
+      <Mass>1.4</Mass>
+      <AccuracyTouch>1.0</AccuracyTouch>
+      <AccuracyShort>1.0</AccuracyShort>
+      <AccuracyMedium>1.0</AccuracyMedium>
+      <AccuracyLong>1.0</AccuracyLong>
+      <RangedWeapon_Cooldown>0.6</RangedWeapon_Cooldown>
+      <Ancot_WeaponMaxCharge>15</Ancot_WeaponMaxCharge>
+      <Ancot_WeaponChargeTick>180</Ancot_WeaponChargeTick>
+      <Ancot_EnergyWeaponCorrectionFactor>1.0</Ancot_EnergyWeaponCorrectionFactor>
+      <Ancot_EnergyWeaponResetTime>900</Ancot_EnergyWeaponResetTime>
+    </statBases>
+    <weaponTags>
+      <li>Milira_RayPistol</li>
+    </weaponTags>
+    <costList>
+      <Milira_SunPlateSteel>10</Milira_SunPlateSteel>
+      <Milira_SplendidSteel>50</Milira_SplendidSteel>
+      <Milira_SolarCrystal>2</Milira_SolarCrystal>
+      <ComponentIndustrial>4</ComponentIndustrial>
+    </costList>
+    <recipeMaker>
+      <skillRequirements>
+        <Crafting>4</Crafting>
+      </skillRequirements>
+      <researchPrerequisite>Milira_ParticleAcceleratorII</researchPrerequisite>
+      <displayPriority>415</displayPriority>
+    </recipeMaker>
+    <verbs>
+      <li>
+        <verbClass>AncotLibrary.Verb_ChargeShoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>MiliraBullet_RayPistol</defaultProjectile>
+        <warmupTime>1.8</warmupTime>
+        <range>21.9</range>
+        <burstShotCount>1</burstShotCount>
+        <ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+        <soundCast>Milira_Shot_RayRifle</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>8</muzzleFlashScale>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>8</power>
+        <cooldownTime>1.7</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>6</power>
+        <cooldownTime>1.7</cooldownTime>
+      </li>
+    </tools>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_RangeWeaponVerbSwitch_EnergyPassive">
+        <verbProps>
+          <label>charged mode</label>
+          <verbClass>AncotLibrary.Verb_ChargeShoot</verbClass>
+          <isPrimary>true</isPrimary>
+          <hasStandardCommand>true</hasStandardCommand>
+          <defaultProjectile>MiliraBullet_RayPistol</defaultProjectile>
+          <warmupTime>0.6</warmupTime>
+          <range>21.9</range>
+          <burstShotCount>3</burstShotCount>
+          <ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+          <soundCast>Milira_Shot_RayRifle</soundCast>
+          <soundCastTail>GunTail_Heavy</soundCastTail>
+          <muzzleFlashScale>8</muzzleFlashScale>
+        </verbProps>
+      </li>
+      <li Class="AncotLibrary.CompProperties_WeaponCharge">
+        <projectileCharged>MiliraBullet_RayPistol</projectileCharged>
+        <chargeFireEffecter>Milira_PlasmaChargeFire_Forward_Big</chargeFireEffecter>
+        <chargeOnResetRatio>1.0</chargeOnResetRatio>
+        <barColor>(0.71,0.88,0.90,0.8)</barColor>
+      </li>
+    </comps>
+  </ThingDef>
+  <ThingDef ParentName="MiliraBullet_Ray">
+    <defName>MiliraBullet_RayPistol</defName>
+    <projectile>
+      <damageAmountBase>6</damageAmountBase>
+      <armorPenetrationBase>0.40</armorPenetrationBase>
+    </projectile>
+  </ThingDef>
+
+  <!-- 射线步枪============================================================================================= -->
+  <ThingDef ParentName="Milira_RayWeaponBase">
+    <defName>Milira_RayRifle</defName>
+    <label>Ray Rifle</label>
+    <description>A portable emitter that continuously fires pulse rays. Performs well in various situation. Can shoot continuously with a shortened warm-up time when energy is available.</description>
+    <graphicData>
+      <texPath>Milira/Weapon/RayRifle</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.3</drawSize>
+    </graphicData>
+    <uiIconScale>1.0</uiIconScale>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <generateCommonality>0.4</generateCommonality>
+    <statBases>
+      <WorkToMake>38000</WorkToMake>
+      <Mass>4.6</Mass>
+      <AccuracyTouch>1.0</AccuracyTouch>
+      <AccuracyShort>1.0</AccuracyShort>
+      <AccuracyMedium>1.0</AccuracyMedium>
+      <AccuracyLong>1.0</AccuracyLong>
+      <RangedWeapon_Cooldown>2.2</RangedWeapon_Cooldown>
+      <Ancot_WeaponMaxCharge>30</Ancot_WeaponMaxCharge>
+      <Ancot_WeaponChargeTick>240</Ancot_WeaponChargeTick>
+      <Ancot_EnergyWeaponCorrectionFactor>1.0</Ancot_EnergyWeaponCorrectionFactor>
+      <Ancot_EnergyWeaponResetTime>1920</Ancot_EnergyWeaponResetTime>
+    </statBases>
+    <weaponTags>
+      <li>Milira_RayRifle</li>
+    </weaponTags>
+    <costList>
+      <Milira_SunPlateSteel>30</Milira_SunPlateSteel>
+      <Milira_SplendidSteel>90</Milira_SplendidSteel>
+      <Milira_SolarCrystal>4</Milira_SolarCrystal>
+      <ComponentIndustrial>15</ComponentIndustrial>
+    </costList>
+    <recipeMaker>
+      <skillRequirements>
+        <Crafting>4</Crafting>
+      </skillRequirements>
+      <displayPriority>415</displayPriority>
+    </recipeMaker>
+    <verbs>
+      <li>
+        <verbClass>AncotLibrary.Verb_ChargeShoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>MiliraBullet_RayRifle</defaultProjectile>
+        <warmupTime>2.8</warmupTime>
+        <range>31.9</range>
+        <burstShotCount>1</burstShotCount>
+        <ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+        <soundCast>Milira_Shot_RayRifle</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>8</muzzleFlashScale>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>8</power>
+        <cooldownTime>1.7</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>6</power>
+        <cooldownTime>1.7</cooldownTime>
+      </li>
+    </tools>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_RangeWeaponVerbSwitch_EnergyPassive">
+        <verbProps>
+          <label>charged mode</label>
+          <verbClass>AncotLibrary.Verb_ChargeShoot</verbClass>
+          <isPrimary>true</isPrimary>
+          <hasStandardCommand>true</hasStandardCommand>
+          <defaultProjectile>MiliraBullet_RayRifle</defaultProjectile>
+          <warmupTime>2.2</warmupTime>
+          <range>31.9</range>
+          <burstShotCount>10</burstShotCount>
+          <ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+          <soundCast>Milira_Shot_RayRifle</soundCast>
+          <soundCastTail>GunTail_Heavy</soundCastTail>
+          <muzzleFlashScale>8</muzzleFlashScale>
+        </verbProps>
+      </li>
+      <li Class="AncotLibrary.CompProperties_WeaponCharge">
+        <projectileCharged>MiliraBullet_RayRifle</projectileCharged>
+        <chargeFireEffecter>Milira_PlasmaChargeFire_Forward_Big</chargeFireEffecter>
+        <chargeOnResetRatio>1.0</chargeOnResetRatio>
+        <barColor>(0.71,0.88,0.90,0.8)</barColor>
+      </li>
+    </comps>
+  </ThingDef>
+  <ThingDef ParentName="MiliraBullet_Ray">
+    <defName>MiliraBullet_RayRifle</defName>
+    <projectile>
+      <damageAmountBase>9</damageAmountBase>
+      <armorPenetrationBase>0.45</armorPenetrationBase>
+    </projectile>
+  </ThingDef>
+
+  <!-- 聚能射线狙击枪============================================================================================= -->
+  <ThingDef ParentName="Milira_RayWeaponBase">
+    <defName>Milira_ConvergentRaySniper</defName>
+    <label>Convergent Sniper Rifle</label>
+    <description>A portable energy weapon that fires high-energy rays with pinpoint accuracy. Consumes all energy to fire a concentrated ray when energy is available.</description>
+    <graphicData>
+      <texPath>Milira/Weapon/RaySniperRifle</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.2</drawSize>
+    </graphicData>
+    <uiIconScale>1.0</uiIconScale>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <generateCommonality>0.5</generateCommonality>
+    <equippedAngleOffset>45</equippedAngleOffset>
+    <statBases>
+      <WorkToMake>42000</WorkToMake>
+      <Mass>4.2</Mass>
+      <AccuracyTouch>1.0</AccuracyTouch>
+      <AccuracyShort>1.0</AccuracyShort>
+      <AccuracyMedium>1.0</AccuracyMedium>
+      <AccuracyLong>1.0</AccuracyLong>
+      <RangedWeapon_Cooldown>2.2</RangedWeapon_Cooldown>
+      <Ancot_WeaponMaxCharge>5</Ancot_WeaponMaxCharge>
+      <Ancot_WeaponChargeTick>120</Ancot_WeaponChargeTick>
+      <Ancot_EnergyWeaponCorrectionFactor>0.5</Ancot_EnergyWeaponCorrectionFactor>
+      <Ancot_EnergyWeaponResetTime>600</Ancot_EnergyWeaponResetTime>
+    </statBases>
+    <weaponTags>
+      <li>Milira_ConvergentRaySniper</li>
+    </weaponTags>
+    <costList>
+      <Milira_SunPlateSteel>30</Milira_SunPlateSteel>
+      <Milira_SplendidSteel>80</Milira_SplendidSteel>
+      <Milira_SolarCrystal>6</Milira_SolarCrystal>
+      <ComponentIndustrial>12</ComponentIndustrial>
+    </costList>
+    <recipeMaker>
+      <skillRequirements>
+        <Crafting>4</Crafting>
+      </skillRequirements>
+      <displayPriority>415</displayPriority>
+    </recipeMaker>
+    <verbs>
+      <li Class="AncotLibrary.VerbProperties_Custom">
+        <verbClass>AncotLibrary.Verb_ChargeShootMultiple_FullCharge</verbClass>
+          <isPrimary>true</isPrimary>
+          <hasStandardCommand>true</hasStandardCommand>
+          <defaultProjectile>MiliraBullet_RaySniper</defaultProjectile>
+          <warmupTime>2.5</warmupTime>
+          <range>37.9</range>
+          <bulletPerBurstShot>1</bulletPerBurstShot>
+          <burstShotCount>1</burstShotCount>
+          <ticksBetweenBurstShots>0</ticksBetweenBurstShots>
+          <soundCast>Milira_Shot_RayRifle</soundCast>
+          <soundCastTail>GunTail_Heavy</soundCastTail>
+          <muzzleFlashScale>6</muzzleFlashScale>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>8</power>
+        <cooldownTime>1.7</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>6</power>
+        <cooldownTime>1.7</cooldownTime>
+      </li>
+    </tools>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_RangeWeaponVerbSwitch_EnergyPassive">
+        <verbProps Class="AncotLibrary.VerbProperties_Custom">
+          <label>charged mode</label>
+          <verbClass>AncotLibrary.Verb_ChargeShootMultiple_FullCharge</verbClass>
+          <isPrimary>true</isPrimary>
+          <hasStandardCommand>true</hasStandardCommand>
+          <defaultProjectile>MiliraBullet_RaySniper</defaultProjectile>
+          <warmupTime>2.5</warmupTime>
+          <range>41.9</range>
+          <fullChargeShot>true</fullChargeShot>
+          <bulletPerBurstShot>1</bulletPerBurstShot>
+          <burstShotCount>1</burstShotCount>
+          <ticksBetweenBurstShots>0</ticksBetweenBurstShots>
+          <soundCast>Milira_Shot_HeavyPlasma</soundCast>
+          <soundCastTail>GunTail_Heavy</soundCastTail>
+          <muzzleFlashScale>8</muzzleFlashScale>
+          <aimingTargetMote>Milira_Mote_RaySniperTargeting</aimingTargetMote>
+        </verbProps>
+      </li>
+      <li Class="AncotLibrary.CompProperties_WeaponCharge">
+        <projectileCharged>MiliraBullet_RaySniper</projectileCharged>
+        <chargeFireEffecter>Milira_PlasmaChargeFire_Forward_Big</chargeFireEffecter>
+        <chargeOnResetRatio>1.0</chargeOnResetRatio>
+        <barColor>(0.71,0.88,0.90,0.8)</barColor>
+      </li>
+    </comps>
+  </ThingDef>
+  <ThingDef ParentName="MiliraBullet_Ray">
+    <defName>MiliraBullet_RaySniper</defName>
+    <projectile>
+      <damageAmountBase>12</damageAmountBase>
+      <armorPenetrationBase>0.52</armorPenetrationBase>
+    </projectile>
+  </ThingDef>
+
+  <!-- 脉冲激光机枪============================================================================================= -->
+  <ThingDef ParentName="Milira_HeavyRayWeaponBase">
+    <defName>Milira_LaserMG</defName>
+    <label>Pulse Laser Machine Gun</label>
+    <description>A heavy pulse laser emitter capable of continuously firing laser to sweep across enemies. While energy is available, it can maintain a sustain barrage. Cannot fire when energy depleted.</description>
+    <graphicData>
+      <texPath>Milira/Weapon/RayMiniGun</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.5</drawSize>
+    </graphicData>
+    <uiIconScale>1.0</uiIconScale>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <generateCommonality>0.8</generateCommonality>
+    <statBases>
+      <WorkToMake>90000</WorkToMake>
+      <Mass>12.8</Mass>
+      <AccuracyTouch>1.0</AccuracyTouch>
+      <AccuracyShort>1.0</AccuracyShort>
+      <AccuracyMedium>1.0</AccuracyMedium>
+      <AccuracyLong>1.0</AccuracyLong>
+      <RangedWeapon_Cooldown>5.6</RangedWeapon_Cooldown>
+      <Ancot_WeaponMaxCharge>80</Ancot_WeaponMaxCharge>
+      <Ancot_WeaponChargeTick>120</Ancot_WeaponChargeTick>
+      <Ancot_EnergyWeaponCorrectionFactor>0.8</Ancot_EnergyWeaponCorrectionFactor>
+      <Ancot_EnergyWeaponResetTime>1500</Ancot_EnergyWeaponResetTime>
+    </statBases>
+    <weaponTags>
+      <li>Milira_LaserMG</li>
+    </weaponTags>
+    <costList>
+      <Milira_SunPlateSteel>115</Milira_SunPlateSteel>
+      <Plasteel>120</Plasteel>
+      <ComponentSpacer>4</ComponentSpacer>
+      <Milira_SolarCrystal>8</Milira_SolarCrystal>
+    </costList>
+    <recipeMaker>
+      <skillRequirements>
+        <Crafting>4</Crafting>
+      </skillRequirements>
+      <displayPriority>415</displayPriority>
+    </recipeMaker>
+    <verbs>
+      <li Class="AncotLibrary.VerbProperties_Custom">
+        <verbClass>AncotLibrary.Verb_ChargeShootSustained</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>MiliraBullet_LaserMG</defaultProjectile>
+        <warmupTime>2.5</warmupTime>
+        <range>34.9</range>
+        <burstShotCount>9999</burstShotCount>
+        <ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+        <disableWhenChargeEmpty>true</disableWhenChargeEmpty>
+        <soundCast>Milira_Shot_RayRifle</soundCast>
+        <soundCastTail>GunTail_Medium</soundCastTail>
+        <muzzleFlashScale>9</muzzleFlashScale>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>8</power>
+        <cooldownTime>1.7</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>6</power>
+        <cooldownTime>1.7</cooldownTime>
+      </li>
+    </tools>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_SustainedShoot" />
+      <li Class="AncotLibrary.CompProperties_WeaponCharge">
+        <chargeFireEffecter>Milira_PlasmaChargeFire_Forward_Big</chargeFireEffecter>
+        <chargeOnResetRatio>1.0</chargeOnResetRatio>
+        <barColor>(0.71,0.88,0.90,0.8)</barColor>
+      </li>
+    </comps>
+  </ThingDef>
+  <ThingDef ParentName="MiliraBullet_Ray">
+    <defName>MiliraBullet_LaserMG</defName>
+    <projectile>
+      <damageAmountBase>6</damageAmountBase>
+      <armorPenetrationBase>0.45</armorPenetrationBase>
+    </projectile>
+  </ThingDef>
+
+
+
+</Defs>

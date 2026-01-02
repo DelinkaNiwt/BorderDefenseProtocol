@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: make 6x36mm Electromagnetic (AP) cartridge x400 -->
+  <MakeAmmo_6x36mmElectromagnetic_AP.label>TODO</MakeAmmo_6x36mmElectromagnetic_AP.label>
+  <!-- EN: Craft 400 6x36mm Electromagnetic (AP) cartridges. -->
+  <MakeAmmo_6x36mmElectromagnetic_AP.description>TODO</MakeAmmo_6x36mmElectromagnetic_AP.description>
+  <!-- EN: Making 6x36mm Electromagnetic (AP) cartridges. -->
+  <MakeAmmo_6x36mmElectromagnetic_AP.jobString>TODO</MakeAmmo_6x36mmElectromagnetic_AP.jobString>
+  
+  <!-- EN: make 6x36mm Electromagnetic (Ion) cartridge x400 -->
+  <MakeAmmo_6x36mmElectromagnetic_Ion.label>TODO</MakeAmmo_6x36mmElectromagnetic_Ion.label>
+  <!-- EN: Craft 400 6x36mm Electromagnetic (Ion) cartridges. -->
+  <MakeAmmo_6x36mmElectromagnetic_Ion.description>TODO</MakeAmmo_6x36mmElectromagnetic_Ion.description>
+  <!-- EN: Making 6x36mm Electromagnetic (Ion) cartridges. -->
+  <MakeAmmo_6x36mmElectromagnetic_Ion.jobString>TODO</MakeAmmo_6x36mmElectromagnetic_Ion.jobString>
+  
+</LanguageData>

@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: magnet projectile -->
+  <Bullet_AutocannonTurretEMP.label>電磁炮射彈</Bullet_AutocannonTurretEMP.label>
+  
+  <!-- EN: shotgun bullet -->
+  <Bullet_ChargedShotGun_CMC.label>電荷霰彈</Bullet_ChargedShotGun_CMC.label>
+  <Bullet_ChargedShotGun_CMC_Smart.label>電荷霰彈</Bullet_ChargedShotGun_CMC_Smart.label>
+  
+  <!-- EN: autocannon shell -->
+  <Bullet_CMC_AutocannonTurret.label>電荷機炮彈</Bullet_CMC_AutocannonTurret.label>
+  
+  <!-- EN: Flame -->
+  <Bullet_CMC_Flame.label>火焰</Bullet_CMC_Flame.label>
+  
+  <!-- EN: EML projectile -->
+  <Bullet_CMC_HMG.label>磁軌機槍子彈</Bullet_CMC_HMG.label>
+  
+  <!-- EN: Charged sniper bullet -->
+  <Bullet_QBUsixsix.label>不穩定電荷爆彈</Bullet_QBUsixsix.label>
+  
+  <!-- EN: Charged assault rifle bullet -->
+  <Bullet_QBZfivenine.label>電荷步槍彈</Bullet_QBZfivenine.label>
+  
+  <!-- EN: Smart assault rifle bullet -->
+  <Bullet_QBZsmart.label>智能電荷步槍彈</Bullet_QBZsmart.label>
+  
+  <!-- EN: smart LMG bullet -->
+  <Bullet_WJ_LMGNT.label>智能機槍彈</Bullet_WJ_LMGNT.label>
+  
+  <!-- EN: smart LMG bullet -->
+  <Bullet_WJ_LMGsmart.label>智能機槍彈</Bullet_WJ_LMGsmart.label>
+  
+  <!-- EN: SMG bullet -->
+  <Bullet_WJ_SMG_power.label>智能沖鋒槍彈</Bullet_WJ_SMG_power.label>
+  
+  <!-- EN: SMG bullet -->
+  <Bullet_WJ_SMG_smart.label>智能沖鋒槍彈</Bullet_WJ_SMG_smart.label>
+  
+  <!-- EN: smart sniper bullet -->
+  <Bullet_WJU.label>追蹤狙擊彈</Bullet_WJU.label>
+  
+  <!-- EN: EML projectile -->
+  <Bullet_XuanMing.label>磁軌步槍彈</Bullet_XuanMing.label>
+  
+  <!-- EN: EML projectile(anti-entropy) -->
+  <Bullet_XuanMing_Antientropy.label>磁軌步槍彈（反熵）</Bullet_XuanMing_Antientropy.label>
+  
+  <!-- EN: rocket -->
+  <CMC_HeavyRocket.label>重型反步兵火箭</CMC_HeavyRocket.label>
+  
+  <!-- EN: PL-X multi-task swarm missile -->
+  <CMC_Missile_AAM.label>霹靂X 多用途蜂群導彈</CMC_Missile_AAM.label>
+  
+  <!-- EN: HJ-53 light ATGM missile -->
+  <CMC_Missile_ATGM_Light.label>紅箭53 輕型反坦克導彈</CMC_Missile_ATGM_Light.label>
+  
+  <!-- EN: HJ-50 heavy ATGM missile -->
+  <CMC_Missile_HeavyATGM.label>紅箭50 重型反坦克導彈</CMC_Missile_HeavyATGM.label>
+  
+  <!-- EN: Pulse -->
+  <Projectile_QLUX.label>等離子脈沖</Projectile_QLUX.label>
+  <Projectile_QLUX_GiantExplosion.label>等離子脈沖</Projectile_QLUX_GiantExplosion.label>
+  
+</LanguageData>

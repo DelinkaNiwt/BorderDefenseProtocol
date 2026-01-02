@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThingDef Name="Milian_UtilityBase" ParentName="Milian_ApparelBase" Abstract="True">
+		<statBases>
+			<Mass>9.5</Mass>
+			<EquipDelay>3.6</EquipDelay>
+		</statBases>
+		<apparel>
+			<wearPerDay>0</wearPerDay>
+			<countsAsClothingForNudity>false</countsAsClothingForNudity>
+			<careIfWornByCorpse>false</careIfWornByCorpse>
+      		<careIfDamaged>false</careIfDamaged>
+			<layers>
+				<li>Belt</li>
+			</layers>
+			<tags Inherit="false">
+				<li>Milian_Utility</li>
+			</tags>
+		</apparel>
+		<thingCategories>
+			<li>Milian_Apparel_Utility</li>
+		</thingCategories>
+	</ThingDef>
+
+	<ThingDef ParentName="Milian_UtilityBase">
+		<defName>Milira_Booster</defName>
+		<label>Twin-Rotor Propulsion System</label>
+		<description>An external attachment equipped with two rotors powered by solar fuel, which enables the wearer to undertake long-distance travel.</description>
+		<tickerType>Normal</tickerType>
+		<costList>
+			<Milira_SunPlateSteel>20</Milira_SunPlateSteel>
+			<Plasteel>80</Plasteel>
+			<Milira_SolarCrystal>6</Milira_SolarCrystal>
+			<ComponentIndustrial>4</ComponentIndustrial>
+			<ComponentSpacer>1</ComponentSpacer>
+			<Milira_SunLightFuel>50</Milira_SunLightFuel>
+		</costList>
+		<graphicData>
+			<texPath>Milian/Apparel/Utility/Booster/Booster</texPath>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToMake>24000</WorkToMake>
+			<JumpRange>29.9</JumpRange>
+		</statBases>
+		<apparel>
+			<!-- <useWornGraphicMask>true</useWornGraphicMask> -->
+			<wornGraphicData>
+				<renderUtilityAsPack>true</renderUtilityAsPack>
+			</wornGraphicData>
+			<developmentalStageFilter>Child, Adult</developmentalStageFilter>
+			<bodyPartGroups>
+				<li>Torso</li>
+			</bodyPartGroups>
+			<wornGraphicPath>Milian/Apparel/Utility/Booster/Booster</wornGraphicPath>
+			<drawData>
+				<dataSouth>
+					<layer>-5</layer>
+				</dataSouth>
+				<dataNorth>
+					<layer>80</layer>
+				</dataNorth>
+			</drawData>
+			<tags>
+				<li>Milira_Booster</li>
+			</tags>
+		</apparel>
+		<recipeMaker>
+			<researchPrerequisite>Milira_Booster</researchPrerequisite>
+		</recipeMaker>
+		<equippedStatOffsets>
+		</equippedStatOffsets>
+		<comps Inherit="false">
+			<li Class="CompProperties_ApparelReloadable">
+				<maxCharges>5</maxCharges>
+				<ammoDef>Milira_SunLightFuel</ammoDef>
+				<ammoCountPerCharge>10</ammoCountPerCharge>
+				<baseReloadTicks>60</baseReloadTicks>
+				<soundReload>Standard_Reload</soundReload>
+				<hotKey>Misc4</hotKey>
+				<chargeNoun>jump</chargeNoun>
+				<displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+			</li>
+		</comps>
+		<verbs>
+			<li>
+				<verbClass>Milira.Verb_MiliraJump</verbClass>
+				<label>jump</label>
+				<violent>false</violent>
+				<hasStandardCommand>true</hasStandardCommand>
+				<onlyManualCast>True</onlyManualCast>
+				<forceNormalTimeSpeed>false</forceNormalTimeSpeed>
+				<warmupTime>0.6</warmupTime>
+				<warmupEffecter>JumpWarmupEffect</warmupEffecter>
+				<requireLineOfSight>true</requireLineOfSight>
+				<flightEffecterDef>Milian_TurboBurst</flightEffecterDef>
+				<soundLanding>JumpPackLand</soundLanding>
+				<targetParams>
+					<canTargetLocations>true</canTargetLocations>
+					<canTargetPawns>true</canTargetPawns>
+					<canTargetBuildings>false</canTargetBuildings>
+				</targetParams>
+			</li>
+		</verbs>
+	</ThingDef>
+
+</Defs>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+  <!-- EN: support apparel -->
+  <Milian.SupportApparel>支持服装</Milian.SupportApparel>
+  <!-- EN: The types of apparels supported by this Milian model. -->
+  <Milian.SupportApparelDesc>这个型号的米莉安支持的服装种类。</Milian.SupportApparelDesc>
+
+</LanguageData>

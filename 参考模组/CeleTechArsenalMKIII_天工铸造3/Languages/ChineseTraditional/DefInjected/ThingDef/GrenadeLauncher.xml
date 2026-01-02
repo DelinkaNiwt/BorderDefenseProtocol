@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <CMC_GrenadeLauncher.label>QBL-40 電磁榴彈機槍</CMC_GrenadeLauncher.label>
+  <!-- EN: A heavy anti-vehicle sniper developed in 2060s, its 20mm unstable charged-shots explodes violently upon contact with objects. -->
+  <CMC_GrenadeLauncher.description>班組火力支援用長距離電磁推進榴彈發射器，能連發以提供壓制火力，但精度較低。雙彈鼓的設計可以使其快速切換發射的彈藥種類以適應不同環境。</CMC_GrenadeLauncher.description>
+  <!-- EN: stock -->
+  <CMC_GrenadeLauncher.comps.CompSecondaryVerb.description>彈藥切換</CMC_GrenadeLauncher.comps.CompSecondaryVerb.description>
+  <!-- EN: Smart Mode -->
+  <CMC_GrenadeLauncher.comps.CompSecondaryVerb.mainWeaponLabel>中子殺傷榴彈</CMC_GrenadeLauncher.comps.CompSecondaryVerb.mainWeaponLabel>
+  <!-- EN: Burst Mode -->
+  <CMC_GrenadeLauncher.comps.CompSecondaryVerb.secondaryWeaponLabel>震爆榴彈</CMC_GrenadeLauncher.comps.CompSecondaryVerb.secondaryWeaponLabel>
+  
+  <CMC_GrenadeLauncher.tools.stock.label>槍托</CMC_GrenadeLauncher.tools.stock.label>
+  <!-- EN: barrel -->
+  <CMC_GrenadeLauncher.tools.barrel.label>槍管</CMC_GrenadeLauncher.tools.barrel.label>
+  <!-- EN: QBU-66 charged sniper -->
+  <CMC_GrenadeLauncher.verbs.Verb_Shoot.label>QBL-40 電磁榴彈機槍</CMC_GrenadeLauncher.verbs.Verb_Shoot.label>
+  
+</LanguageData>

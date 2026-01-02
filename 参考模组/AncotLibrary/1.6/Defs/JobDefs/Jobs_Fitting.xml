@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <JobDef>
+    <defName>Ancot_UseWeaponFittingSelf</defName>
+    <driverClass>AncotLibrary.JobDriver_UseFitting_EquipOwner</driverClass>
+    <reportString>Using TargetA.</reportString>
+    <playerInterruptible>true</playerInterruptible>
+  </JobDef>
+  
+  <JobDef>
+    <defName>Ancot_DisassembleWeaponForFitting</defName>
+    <driverClass>AncotLibrary.JobDriver_DisassembleWeaponForFitting</driverClass>
+    <reportString>disassembling TargetA.</reportString>
+    <playerInterruptible>true</playerInterruptible>
+  </JobDef>
+
+  <JobDef>
+    <defName>Ancot_RemoveAllFittings</defName>
+    <driverClass>AncotLibrary.JobDriver_RemoveAllFittings</driverClass>
+    <reportString>Removing TargetA 's Traits.</reportString>
+    <playerInterruptible>true</playerInterruptible>
+  </JobDef>
+</Defs>

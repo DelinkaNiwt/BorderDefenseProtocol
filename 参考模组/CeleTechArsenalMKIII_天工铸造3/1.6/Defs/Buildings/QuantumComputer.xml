@@ -1,0 +1,67 @@
+<Defs>
+  <ThingDef ParentName="BuildingBase">
+    <defName>CMC_CommConsole</defName>
+    <label>//Primordial Axis·Entropy//</label>
+	<thingClass>TOT_DLL_test.Building_QuantumComputer</thingClass>
+    <description>Cast from the River Chart and Luo Writing mechanisms, its form resembles a bronze armillary sphere concealing Nine Chapters of Mathematical Art. While the core AI "Entropy" remains dormant, celestial navigation and instant communication functions operate flawlessly. As trigrams rotate, the bridge becomes a microcosmos where battlefield intelligence traverses continents in moments.</description>
+    <tickerType>Normal</tickerType>
+	<size>(2,2)</size>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <fillPercent>0.8</fillPercent>
+    <graphicData>
+      <texPath>Things/Buildings/CMC_Beacon</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>2.46875</drawSize>
+	  <drawOffset>(0,0,0)</drawOffset>
+    </graphicData>
+	<rotatable>false</rotatable>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <castEdgeShadows>true</castEdgeShadows>
+    <building>
+      <destroySound>BuildingDestroyed_Metal_Medium</destroySound>
+	  <paintable>true</paintable>
+    </building>
+	<costList>
+      <Steel>40</Steel>
+	  <Plasteel>40</Plasteel>
+      <ComponentIndustrial>10</ComponentIndustrial>
+	  <ComponentSpacer>2</ComponentSpacer>
+	  <Silver>30</Silver>
+	  <Gold>10</Gold>
+    </costList>
+    <constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+    <designationCategory>CMC_DefensenProduction</designationCategory>
+    <uiOrder>2420</uiOrder>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsMisc</li>
+    </thingCategories>
+    <statBases>
+      <MaxHitPoints>260</MaxHitPoints>
+      <WorkToBuild>8000</WorkToBuild>
+      <Mass>25</Mass>
+      <Flammability>0.5</Flammability>
+    </statBases>
+    <researchPrerequisites>
+      <li>MicroelectronicsBasics</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>400</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+	  <li Class="CompProperties_Facility">
+        <statOffsets>
+          <ResearchSpeedFactor>0.25</ResearchSpeedFactor>
+        </statOffsets>
+        <maxSimultaneous>1</maxSimultaneous>
+      </li>
+    </comps>
+    <placeWorkers>
+      <li>PlaceWorker_ShowFacilitiesConnections</li>
+    </placeWorkers>
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+  </ThingDef>
+</Defs>

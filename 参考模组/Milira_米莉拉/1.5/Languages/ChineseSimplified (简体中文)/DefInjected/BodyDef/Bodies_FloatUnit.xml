@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: float unit -->
+  <Milira_FloatUnit.label>浮游单元</Milira_FloatUnit.label>
+  <!-- EN: left thruster -->
+  <Milira_FloatUnit.corePart.parts.Milian_FloatUnit_Armor-0.parts.left_thruster.customLabel>左推进器</Milira_FloatUnit.corePart.parts.Milian_FloatUnit_Armor-0.parts.left_thruster.customLabel>
+  <!-- EN: right thruster -->
+  <Milira_FloatUnit.corePart.parts.Milian_FloatUnit_Armor-0.parts.right_thruster.customLabel>右推进器</Milira_FloatUnit.corePart.parts.Milian_FloatUnit_Armor-0.parts.right_thruster.customLabel>
+  
+</LanguageData>

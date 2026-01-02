@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>CeleTech Arsenal MKIII</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="CMC_Uniform_MKII"]/statBases</xpath>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="CMC_Uniform_MKII"]</xpath>
+            <value>
+              <statBases />
+            </value>
+          </nomatch>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ThingDef[defName="CMC_Uniform_MKII"]/statBases</xpath>
+          <value>
+            <statBases>
+              <MaxHitPoints>1200</MaxHitPoints>
+              <Flammability>1</Flammability>
+              <DeteriorationRate>2</DeteriorationRate>
+              <Beauty>-3</Beauty>
+              <ArmorRating_Sharp>5.8</ArmorRating_Sharp>
+              <ArmorRating_Blunt>105</ArmorRating_Blunt>
+              <ArmorRating_Heat>1.5</ArmorRating_Heat>
+              <WorkToMake>31000</WorkToMake>
+              <Mass>1.01</Mass>
+              <Insulation_Cold>40</Insulation_Cold>
+              <Insulation_Heat>190</Insulation_Heat>
+              <EquipDelay>1.5</EquipDelay>
+            </statBases>
+          </value>
+        </li>
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="CMC_Uniform_MKII"]/equippedStatOffsets</xpath>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="CMC_Uniform_MKII"]</xpath>
+            <value>
+              <equippedStatOffsets />
+            </value>
+          </nomatch>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ThingDef[defName="CMC_Uniform_MKII"]/equippedStatOffsets</xpath>
+          <value>
+            <equippedStatOffsets />
+          </value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+</Patch>

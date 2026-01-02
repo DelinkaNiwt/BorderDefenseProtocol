@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Info -->
+  <Info.headerTip>信息</Info.headerTip>
+  
+  <!-- EN: name -->
+  <Label.label>名字</Label.label>
+  <!-- EN: Name -->
+  <Label.headerTip>名字</Label.headerTip>
+  
+  <!-- EN: name -->
+  <LabelShortWithIcon.label>名字</LabelShortWithIcon.label>
+  <!-- EN: Name -->
+  <LabelShortWithIcon.headerTip>名字</LabelShortWithIcon.headerTip>
+  
+  <!-- EN: name -->
+  <LabelWithIcon.label>名字</LabelWithIcon.label>
+  <!-- EN: Name -->
+  <LabelWithIcon.headerTip>名字</LabelWithIcon.headerTip>
+  
+</LanguageData>

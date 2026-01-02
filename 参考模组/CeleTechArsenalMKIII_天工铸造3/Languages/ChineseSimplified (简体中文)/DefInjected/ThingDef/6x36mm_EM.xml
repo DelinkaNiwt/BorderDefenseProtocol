@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 6x36mm Electromagnetic (AP) -->
+  <Ammo_6x36mmElectromagnetic_AP.label>6x36mm 电磁穿甲弹</Ammo_6x36mmElectromagnetic_AP.label>
+  <!-- EN: Electromagnetic projectile ammunition used by advanced EM rifle systems. -->
+  <Ammo_6x36mmElectromagnetic_AP.description>穿甲步枪弹，击中后能发生爆炸</Ammo_6x36mmElectromagnetic_AP.description>
+  
+  <!-- EN: 6x36mm Electromagnetic (Ion) -->
+  <Ammo_6x36mmElectromagnetic_Ion.label>6x36mm 电磁聚能弹</Ammo_6x36mmElectromagnetic_Ion.label>
+  <!-- EN: Electromagnetic projectile ammunition used by advanced EM rifle systems. -->
+  <Ammo_6x36mmElectromagnetic_Ion.description>聚能步枪弹，击中时能产生电磁脉冲</Ammo_6x36mmElectromagnetic_Ion.description>
+  
+  <!-- EN: 6x36mm Electromagnetic projectile (AP) -->
+  <Bullet_6x36mmElectromagnetic_AP.label>6x36mm 电磁穿甲弹</Bullet_6x36mmElectromagnetic_AP.label>
+  
+  <!-- EN: 6x36mm Electromagnetic projectile (Ion) -->
+  <Bullet_6x36mmElectromagnetic_Ion.label>6x36mm 电磁聚能弹</Bullet_6x36mmElectromagnetic_Ion.label>
+  
+</LanguageData>

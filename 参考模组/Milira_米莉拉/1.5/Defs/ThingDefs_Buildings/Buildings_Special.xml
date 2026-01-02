@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <!-- <ThingDef ParentName="BuildingBase">
+        <defName>Milira_BlackHole</defName>
+        <label>黑洞demo</label>
+        <description>。</description>
+        <graphicData>
+          <texPath>Milira/Building/Buildings_Misc/SunBlasterBoosterJar</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>(1.5,1.5)</drawSize>
+          <drawOffset>(0,0,0.3)</drawOffset>
+        </graphicData>
+        <tickerType>Normal</tickerType>
+        <uiIconScale>0.8</uiIconScale>
+        <altitudeLayer>BuildingOnTop</altitudeLayer>
+        <passability>PassThroughOnly</passability>
+        <castEdgeShadows>false</castEdgeShadows>
+        <staticSunShadowHeight>0.35</staticSunShadowHeight>
+        <fillPercent>0.5</fillPercent>
+        <canOverlapZones>false</canOverlapZones>
+        <pathCost>42</pathCost>
+        <statBases>
+          <MaxHitPoints>100</MaxHitPoints>
+          <WorkToBuild>1800</WorkToBuild>
+          <Mass>20</Mass>
+          <Flammability>0.5</Flammability>
+        </statBases>
+        <size>(1,1)</size>
+        <costList>
+          <Milira_SunPlateSteel>125</Milira_SunPlateSteel>
+          <ComponentSpacer>2</ComponentSpacer>
+        </costList>
+        <building>
+          <destroySound>BuildingDestroyed_Metal_Small</destroySound>
+        </building>
+        <designationCategory>Misc</designationCategory>
+        <minifiedDef>MinifiedThing</minifiedDef>
+        <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+        <specialDisplayRadius>30</specialDisplayRadius>
+        <thingCategories>
+          <li>BuildingsMisc</li>
+        </thingCategories>
+        <comps>
+          <li Class="AncotLibrary.CompProperties_SustainableAttractive">
+            <range>30</range>
+            <damageRange>3</damageRange>
+            <distance>3</distance>
+            <intervalTick>60</intervalTick>
+          </li>
+        </comps>
+        <designationHotKey>Misc6</designationHotKey>
+      </ThingDef> -->
+
+</Defs>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <CMC_TableMachining.label>納米數控平臺</CMC_TableMachining.label>
+  <CMC_TableMachining.description>模塊化智能數控機床，採用納米級定位系統和自適應加工演算法，可生產微型傳感器、復合陶瓷槍管等精密武器組件。</CMC_TableMachining.description>
+  
+  <CMC_FacBench.label>熔鑄加工平臺</CMC_FacBench.label>
+  <CMC_FacBench.description>工業級重型鍛造設備，整合高溫等離子熔爐與三維成型技術，用於鑄造導彈推進艙、復合裝甲板等大型軍用構件。</CMC_FacBench.description>
+  
+</LanguageData>

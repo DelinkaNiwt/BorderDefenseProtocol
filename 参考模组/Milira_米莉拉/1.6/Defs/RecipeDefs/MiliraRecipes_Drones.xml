@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <RecipeDef Name="Milira_MakeDroneBase" Abstract="true">
+    <jobString>assemble drone.</jobString>
+    <effectWorking>Cremate</effectWorking>
+    <soundWorking>Recipe_Cremate</soundWorking>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workerClass>AncotLibrary.Recipe_AssembleDrone</workerClass>
+    <unfinishedThingDef>Milira_UnfinishedDrone</unfinishedThingDef>
+    <products>
+      <!-- 置空，用recipeworker生成无人机 -->
+    </products>
+    <recipeUsers>
+      <li>Milira_DroneBench</li>
+    </recipeUsers>
+    <researchPrerequisite>Milira_Drones</researchPrerequisite>
+  </RecipeDef>
+
+  <RecipeDef ParentName="Milira_MakeDroneBase">
+    <defName>Milira_MakeDrone_Freight</defName>
+    <label>assemble freight unit</label>
+    <description>assemble a freight unit.</description>
+    <uiIconThing>Milira_DroneFreight</uiIconThing>
+    <workAmount>12800</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Milira_SplendidSteel</li>
+          </thingDefs>
+        </filter>
+        <count>60</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>4</count>
+      </li>
+    </ingredients>
+    <modExtensions>
+      <li Class="AncotLibrary.ModExtension_AssembleDrone">
+        <droneKind>Milira_DroneFreight</droneKind>
+      </li>
+    </modExtensions>
+  </RecipeDef>
+
+  <RecipeDef ParentName="Milira_MakeDroneBase">
+    <defName>Milira_MakeDrone_Cleansweeper</defName>
+    <label>assemble cleaning unit</label>
+    <description>assemble a cleaning unit.</description>
+    <workAmount>12800</workAmount>
+    <uiIconThing>Milira_DroneCleansweeper</uiIconThing>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Milira_SplendidSteel</li>
+          </thingDefs>
+        </filter>
+        <count>40</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>4</count>
+      </li>
+    </ingredients>
+    <modExtensions>
+      <li Class="AncotLibrary.ModExtension_AssembleDrone">
+        <droneKind>Milira_DroneCleansweeper</droneKind>
+      </li>
+    </modExtensions>
+  </RecipeDef>
+
+  <RecipeDef ParentName="Milira_MakeDroneBase">
+    <defName>Milira_MakeDrone_Storage</defName>
+    <label>assemble storage unit</label>
+    <description>assemble a storage unit.</description>
+    <workAmount>18000</workAmount>
+    <uiIconThing>Milira_DroneStorage</uiIconThing>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Milira_SplendidSteel</li>
+          </thingDefs>
+        </filter>
+        <count>180</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>8</count>
+      </li>
+    </ingredients>
+    <modExtensions>
+      <li Class="AncotLibrary.ModExtension_AssembleDrone">
+        <droneKind>Milira_DroneStorage</droneKind>
+      </li>
+    </modExtensions>
+  </RecipeDef>
+
+</Defs>

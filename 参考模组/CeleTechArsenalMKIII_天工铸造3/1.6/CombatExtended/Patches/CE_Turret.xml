@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!--CMCcannon-->
+	<Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="CMCcannon"]/thingClass</xpath>
+        <value>
+            <thingClass>CombatExtended.Building_TurretGunCE</thingClass>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="CMCcannon"]/statBases</xpath>
+        <value>
+            <Bulk>1500</Bulk>
+        </value>
+    </Operation>
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>/Defs/ThingDef[defName="CMCcannon"]</xpath>
+        <value>
+            <li Class="CombatExtended.NonSnapTurretExtension">
+			<speed>1.25</speed>
+			<angleWeightMultiplier>1</angleWeightMultiplier>
+			</li>
+		</value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="CMCcannon"]/statBases/ShootingAccuracyTurret</xpath>
+        <value>
+            <ShootingAccuracyTurret>1.00</ShootingAccuracyTurret>
+            <AimingAccuracy>0.50</AimingAccuracy>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>/Defs/ThingDef[defName="CMCcannon"]/comps/li[@Class="CompProperties_Refuelable"]</xpath>
+    </Operation>
+	
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>Gun_CMCcannon</defName>
+        <statBases>
+            <Bulk>120</Bulk>
+            <SightsEfficiency>1.9</SightsEfficiency>
+            <ShotSpread>0</ShotSpread>
+            <SwayFactor>0</SwayFactor>
+        </statBases>
+        <Properties>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <defaultProjectile>Bullet_CMC_30x114mm_APDS</defaultProjectile>
+            <warmupTime>0.5</warmupTime>
+            <recoilAmount>0</recoilAmount>
+            <range>90</range>
+            <ticksBetweenBurstShots>3</ticksBetweenBurstShots>
+            <burstShotCount>10</burstShotCount>
+            <soundCast>Sound_Cannon</soundCast>
+            <soundCastTail>GunTail_Light</soundCastTail>
+            <muzzleFlashScale>30</muzzleFlashScale>
+            <targetParams>
+				<canTargetLocations>true</canTargetLocations>
+			</targetParams>
+        </Properties>
+        <AmmoUser>
+            <magazineSize>1000</magazineSize>
+            <reloadTime>12</reloadTime>
+            <ammoSet>AmmoSet_CMC_30x114mm</ammoSet>
+        </AmmoUser>
+        <FireModes>
+            <aiAimMode>AimedShot</aiAimMode>
+            <noSnapshot>true</noSnapshot>
+            <aiUseBurstMode>true</aiUseBurstMode>
+        </FireModes>
+    </Operation>
+	
+	<!--CMCcannon_BF-->
+	<Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="CMCcannon_BF"]/thingClass</xpath>
+        <value>
+            <thingClass>CombatExtended.Building_TurretGunCE</thingClass>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="CMCcannon_BF"]/statBases</xpath>
+        <value>
+            <Bulk>1500</Bulk>
+        </value>
+    </Operation>
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>/Defs/ThingDef[defName="CMCcannon_BF"]</xpath>
+        <value>
+            <li Class="CombatExtended.NonSnapTurretExtension">
+			<speed>1.25</speed>
+			<angleWeightMultiplier>1</angleWeightMultiplier>
+			</li>
+		</value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="CMCcannon_BF"]/statBases/ShootingAccuracyTurret</xpath>
+        <value>
+            <ShootingAccuracyTurret>1.00</ShootingAccuracyTurret>
+            <AimingAccuracy>1</AimingAccuracy>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>/Defs/ThingDef[defName="CMCcannon_BF"]/comps/li[@Class="CompProperties_Refuelable"]</xpath>
+    </Operation>
+	<Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Gun_CMCcannon_BF"]/verbs/li/verbClass</xpath>
+        <value>
+			<verbClass>Verb_Shoot</verbClass>
+        </value>
+    </Operation>
+	
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>Gun_CMCcannon_BF</defName>
+        <statBases>
+            <Bulk>180</Bulk>
+            <SightsEfficiency>4</SightsEfficiency>
+            <ShotSpread>0</ShotSpread>
+            <SwayFactor>0</SwayFactor>
+        </statBases>
+		<Properties>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <defaultProjectile>Bullet_CMC_30x114mm_APDS</defaultProjectile>
+            <warmupTime>0.5</warmupTime>
+            <recoilAmount>0</recoilAmount>
+            <range>100</range>
+            <ticksBetweenBurstShots>2</ticksBetweenBurstShots>
+            <burstShotCount>24</burstShotCount>
+            <soundCast>Sound_Cannon</soundCast>
+            <soundCastTail>GunTail_Light</soundCastTail>
+            <muzzleFlashScale>30</muzzleFlashScale>
+            <targetParams>
+				<canTargetLocations>true</canTargetLocations>
+			</targetParams>
+        </Properties>
+        <AmmoUser>
+            <magazineSize>4000</magazineSize>
+            <reloadTime>12</reloadTime>
+            <ammoSet>AmmoSet_CMC_30x114mm</ammoSet>
+        </AmmoUser>
+        <FireModes>
+            <aiAimMode>AimedShot</aiAimMode>
+            <noSnapshot>true</noSnapshot>
+            <aiUseBurstMode>true</aiUseBurstMode>
+        </FireModes>
+    </Operation>
+	
+	<!--CMC_Svcannon-->
+	<Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="CMC_Svcannon"]/thingClass</xpath>
+        <value>
+            <thingClass>CombatExtended.Building_TurretGunCE</thingClass>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="CMC_Svcannon"]/statBases</xpath>
+        <value>
+            <Bulk>1500</Bulk>
+        </value>
+    </Operation>
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>/Defs/ThingDef[defName="CMC_Svcannon"]</xpath>
+        <value>
+            <li Class="CombatExtended.NonSnapTurretExtension">
+			<speed>1.25</speed>
+			<angleWeightMultiplier>1</angleWeightMultiplier>
+			</li>
+		</value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="CMC_Svcannon"]/statBases/ShootingAccuracyTurret</xpath>
+        <value>
+            <ShootingAccuracyTurret>1.00</ShootingAccuracyTurret>
+            <AimingAccuracy>1</AimingAccuracy>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>/Defs/ThingDef[defName="CMC_Svcannon"]/comps/li[@Class="CompProperties_Refuelable"]</xpath>
+    </Operation>
+	<!--Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Gun_CMCMSVcannon"]/verbs/li/verbClass</xpath>
+        <value>
+			<verbClass>Verb_Shoot</verbClass>
+        </value>
+    </Operation-->
+	
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>Gun_CMCMSVcannon</defName>
+        <statBases>
+            <Bulk>180</Bulk>
+            <SightsEfficiency>1.2</SightsEfficiency>
+            <ShotSpread>0</ShotSpread>
+            <SwayFactor>0</SwayFactor>
+        </statBases>
+		<Properties>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <defaultProjectile>Bullet_CMC_12x80mmSmart_Regular</defaultProjectile>
+            <warmupTime>0.57</warmupTime>
+            <recoilAmount>0.5</recoilAmount>
+            <range>72</range>
+            <burstShotCount>1</burstShotCount>
+            <soundCast>Sound_Cannon</soundCast>
+            <soundCastTail>GunTail_Light</soundCastTail>
+            <muzzleFlashScale>30</muzzleFlashScale>
+            <targetParams>
+				<canTargetLocations>true</canTargetLocations>
+			</targetParams>
+        </Properties>
+        <AmmoUser>
+            <magazineSize>240</magazineSize>
+            <reloadTime>2.6</reloadTime>
+            <ammoSet>AmmoSet_CMC_12x80mmSmart</ammoSet>
+        </AmmoUser>
+        <FireModes>
+            <aiAimMode>AimedShot</aiAimMode>
+            <noSnapshot>true</noSnapshot>
+            <aiUseBurstMode>true</aiUseBurstMode>
+        </FireModes>
+    </Operation>
+	
+	<!--EMcannon-->
+	<Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="CMC_EMcannon"]/thingClass</xpath>
+        <value>
+            <thingClass>CombatExtended.Building_TurretGunCE</thingClass>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="CMC_EMcannon"]/statBases</xpath>
+        <value>
+            <Bulk>1500</Bulk>
+        </value>
+    </Operation>
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>/Defs/ThingDef[defName="CMC_EMcannon"]</xpath>
+        <value>
+            <li Class="CombatExtended.NonSnapTurretExtension">
+			<speed>1.25</speed>
+			<angleWeightMultiplier>1</angleWeightMultiplier>
+			</li>
+		</value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="CMC_EMcannon"]/statBases/ShootingAccuracyTurret</xpath>
+        <value>
+            <ShootingAccuracyTurret>1.00</ShootingAccuracyTurret>
+            <AimingAccuracy>1</AimingAccuracy>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>/Defs/ThingDef[defName="CMC_EMcannon"]/comps/li[@Class="CompProperties_Refuelable"]</xpath>
+    </Operation>
+	<Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Gun_EMPCannon"]/verbs/li/verbClass</xpath>
+        <value>
+			<verbClass>Verb_Shoot</verbClass>
+        </value>
+    </Operation>
+	
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>Gun_EMPCannon</defName>
+        <statBases>
+            <Bulk>180</Bulk>
+            <SightsEfficiency>1.2</SightsEfficiency>
+            <ShotSpread>0</ShotSpread>
+            <SwayFactor>0</SwayFactor>
+        </statBases>
+		<Properties>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <defaultProjectile>Bullet_CMC_Ammo_45x250mm_HE</defaultProjectile>
+            <warmupTime>0</warmupTime>
+            <recoilAmount>0.5</recoilAmount>
+            <range>250</range>
+            <burstShotCount>1</burstShotCount>
+            <soundCast>Sound_Cannonii</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>30</muzzleFlashScale>
+            <targetParams>
+				<canTargetLocations>true</canTargetLocations>
+			</targetParams>
+        </Properties>
+        <AmmoUser>
+            <magazineSize>60</magazineSize>
+            <reloadTime>10.6</reloadTime>
+            <ammoSet>AmmoSet_CMC_Ammo_45x250mm</ammoSet>
+        </AmmoUser>
+        <FireModes>
+            <aiAimMode>AimedShot</aiAimMode>
+            <noSnapshot>true</noSnapshot>
+            <aiUseBurstMode>true</aiUseBurstMode>
+        </FireModes>
+    </Operation>
+	
+	<Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="CMCS_EMcannon_M"]/thingClass</xpath>
+        <value>
+            <thingClass>CombatExtended.Building_TurretGunCE</thingClass>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="CMCS_EMcannon_M"]/statBases</xpath>
+        <value>
+            <Bulk>1500</Bulk>
+        </value>
+    </Operation>
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>/Defs/ThingDef[defName="CMCS_EMcannon_M"]</xpath>
+        <value>
+            <li Class="CombatExtended.NonSnapTurretExtension">
+			<speed>1.25</speed>
+			<angleWeightMultiplier>1</angleWeightMultiplier>
+			</li>
+		</value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="CMCS_EMcannon_M"]/statBases/ShootingAccuracyTurret</xpath>
+        <value>
+            <ShootingAccuracyTurret>1.00</ShootingAccuracyTurret>
+            <AimingAccuracy>1</AimingAccuracy>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>/Defs/ThingDef[defName="CMCS_EMcannon_M"]/comps/li[@Class="CompProperties_Refuelable"]</xpath>
+    </Operation>
+	
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>Gun_CMCS_EMCannon</defName>
+        <statBases>
+            <Bulk>180</Bulk>
+            <SightsEfficiency>1.2</SightsEfficiency>
+            <ShotSpread>0</ShotSpread>
+            <SwayFactor>0</SwayFactor>
+        </statBases>
+		<Properties>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <defaultProjectile>Bullet_CMC_Ammo_45x250mm_HE</defaultProjectile>
+            <warmupTime>0</warmupTime>
+            <recoilAmount>0.5</recoilAmount>
+            <range>250</range>
+            <burstShotCount>1</burstShotCount>
+            <soundCast>Sound_Cannonii</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>30</muzzleFlashScale>
+            <targetParams>
+				<canTargetLocations>true</canTargetLocations>
+			</targetParams>
+        </Properties>
+        <AmmoUser>
+            <magazineSize>60</magazineSize>
+            <reloadTime>10.6</reloadTime>
+            <ammoSet>AmmoSet_CMC_Ammo_45x250mm</ammoSet>
+        </AmmoUser>
+        <FireModes>
+            <aiAimMode>AimedShot</aiAimMode>
+            <noSnapshot>true</noSnapshot>
+            <aiUseBurstMode>true</aiUseBurstMode>
+        </FireModes>
+    </Operation>
+	
+	<Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="CMCS_PDBattery"]/thingClass</xpath>
+        <value>
+            <thingClass>CombatExtended.Building_TurretGunCE</thingClass>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="CMCS_PDBattery"]/statBases</xpath>
+        <value>
+            <Bulk>1500</Bulk>
+        </value>
+    </Operation>
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>/Defs/ThingDef[defName="CMCS_PDBattery"]</xpath>
+        <value>
+            <li Class="CombatExtended.NonSnapTurretExtension">
+			<speed>1.25</speed>
+			<angleWeightMultiplier>1</angleWeightMultiplier>
+			</li>
+		</value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="CMCS_PDBattery"]/statBases/ShootingAccuracyTurret</xpath>
+        <value>
+            <ShootingAccuracyTurret>1.00</ShootingAccuracyTurret>
+            <AimingAccuracy>1</AimingAccuracy>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>/Defs/ThingDef[defName="CMCS_PDBattery"]/comps/li[@Class="CompProperties_Refuelable"]</xpath>
+    </Operation>
+	
+	<Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Gun_CMCS_PD"]/verbs/li/verbClass</xpath>
+        <value>
+			<verbClass>Verb_Shoot</verbClass>
+        </value>
+    </Operation>
+	
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>Gun_CMCS_PD</defName>
+        <statBases>
+            <Bulk>180</Bulk>
+            <SightsEfficiency>1</SightsEfficiency>
+            <ShotSpread>0.34</ShotSpread>
+            <SwayFactor>0.7</SwayFactor>
+        </statBases>
+		<Properties>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <defaultProjectile>Bullet_CMC_12x80mmSmart_Regular</defaultProjectile>
+            <warmupTime>0</warmupTime>
+            <recoilAmount>0.5</recoilAmount>
+            <range>80</range>
+            <burstShotCount>8</burstShotCount>
+			<ticksBetweenBurstShots>4</ticksBetweenBurstShots>
+            <soundCast>Sound_Cannon</soundCast>
+			<soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>30</muzzleFlashScale>
+        </Properties>
+        <AmmoUser>
+            <magazineSize>300</magazineSize>
+            <reloadTime>3.6</reloadTime>
+            <ammoSet>AmmoSet_CMC_12x80mmSmart</ammoSet>
+        </AmmoUser>
+        <FireModes>
+            <aiAimMode>AimedShot</aiAimMode>
+            <noSnapshot>true</noSnapshot>
+            <aiUseBurstMode>true</aiUseBurstMode>
+        </FireModes>
+    </Operation>
+	
+	<Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="CMC_CSGTurret" or defName="CMC_CSGTurret_B" or defName="CMC_CSGTurret_C"]/thingClass</xpath>
+        <value>
+            <thingClass>CombatExtended.Building_TurretGunCE</thingClass>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="CMC_CSGTurret" or defName="CMC_CSGTurret_B" or defName="CMC_CSGTurret_C"]/statBases</xpath>
+        <value>
+            <Bulk>60</Bulk>
+        </value>
+    </Operation>
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>/Defs/ThingDef[defName="CMC_CSGTurret" or defName="CMC_CSGTurret_B" or defName="CMC_CSGTurret_C"]</xpath>
+        <value>
+            <li Class="CombatExtended.NonSnapTurretExtension">
+			<speed>2.35</speed>
+			<angleWeightMultiplier>1</angleWeightMultiplier>
+			</li>
+		</value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="CMC_CSGTurret" or defName="CMC_CSGTurret_B" or defName="CMC_CSGTurret_C"]/statBases/ShootingAccuracyTurret</xpath>
+        <value>
+            <ShootingAccuracyTurret>0.88</ShootingAccuracyTurret>
+            <AimingAccuracy>1</AimingAccuracy>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>/Defs/ThingDef[defName="CMC_CSGTurret" or defName="CMC_CSGTurret_B" or defName="CMC_CSGTurret_C"]/comps/li[@Class="CompProperties_Refuelable"]</xpath>
+    </Operation>
+	<!--Operation Class="PatchOperationRemove">
+        <xpath>/Defs/ThingDef[defName="CMC_CSGTurret_B"]/placeWorkers/li[@Class="TOT_DLL_test.PlaceWorker_ShowTurretRadius_VerbSupport"]</xpath>
+    </Operation-->
+	<Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Gun_CMCAntiInfantryCSG" or defName="Gun_CMCAntiInfantryCSG_B" or defName="Gun_CMCAntiInfantryCSG_C"]/verbs/li/verbClass</xpath>
+        <value>
+			<verbClass>Verb_Shoot</verbClass>
+        </value>
+    </Operation>
+	
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>Gun_CMCAntiInfantryCSG</defName>
+        <statBases>
+            <Bulk>60</Bulk>
+            <SightsEfficiency>1</SightsEfficiency>
+            <ShotSpread>0.02</ShotSpread>
+            <SwayFactor>0.7</SwayFactor>
+        </statBases>
+		<Properties>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <defaultProjectile>Bullet_23x75mmR_Buck</defaultProjectile>
+            <warmupTime>0</warmupTime>
+            <recoilAmount>0.5</recoilAmount>
+            <range>36.5</range>
+            <burstShotCount>3</burstShotCount>
+			<ticksBetweenBurstShots>2</ticksBetweenBurstShots>
+			<soundCast>Shot_Shotgun</soundCast>
+			<soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>30</muzzleFlashScale>
+        </Properties>
+        <AmmoUser>
+            <magazineSize>300</magazineSize>
+            <reloadTime>3.6</reloadTime>
+            <ammoSet>AmmoSet_23x75mmR</ammoSet>
+        </AmmoUser>
+        <FireModes>
+            <aiAimMode>AimedShot</aiAimMode>
+            <noSnapshot>true</noSnapshot>
+            <aiUseBurstMode>true</aiUseBurstMode>
+        </FireModes>
+    </Operation>
+	
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>Gun_CMCAntiInfantryCSG_B</defName>
+        <statBases>
+            <Bulk>60</Bulk>
+            <SightsEfficiency>1</SightsEfficiency>
+            <ShotSpread>0.02</ShotSpread>
+            <SwayFactor>0.7</SwayFactor>
+        </statBases>
+		<Properties>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <defaultProjectile>Bullet_8x50mmMTSmart_Regular</defaultProjectile>
+            <warmupTime>0</warmupTime>
+            <recoilAmount>0.5</recoilAmount>
+            <range>36.5</range>
+            <burstShotCount>3</burstShotCount>
+			<ticksBetweenBurstShots>2</ticksBetweenBurstShots>
+			<soundCast>Shot_Shotgun</soundCast>
+			<soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>30</muzzleFlashScale>
+        </Properties>
+        <AmmoUser>
+            <magazineSize>180</magazineSize>
+            <reloadTime>3.6</reloadTime>
+            <ammoSet>AmmoSet_8x50mmMTSmart</ammoSet>
+        </AmmoUser>
+        <FireModes>
+            <aiAimMode>AimedShot</aiAimMode>
+            <noSnapshot>true</noSnapshot>
+            <aiUseBurstMode>true</aiUseBurstMode>
+        </FireModes>
+    </Operation>
+	
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>Gun_CMCAntiInfantryCSG_C</defName>
+        <statBases>
+            <Bulk>60</Bulk>
+            <SightsEfficiency>1</SightsEfficiency>
+            <ShotSpread>0.02</ShotSpread>
+            <SwayFactor>0.7</SwayFactor>
+        </statBases>
+		<Properties>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <defaultProjectile>Bullet_6x36mmElectromagnetic_AP</defaultProjectile>
+            <warmupTime>0</warmupTime>
+            <recoilAmount>0.5</recoilAmount>
+            <range>36.5</range>
+            <burstShotCount>3</burstShotCount>
+			<ticksBetweenBurstShots>2</ticksBetweenBurstShots>
+			<soundCast>Shot_Shotgun</soundCast>
+			<soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>30</muzzleFlashScale>
+        </Properties>
+        <AmmoUser>
+            <magazineSize>600</magazineSize>
+            <reloadTime>3.6</reloadTime>
+            <ammoSet>AmmoSet_6x36mmElectromagnetic</ammoSet>
+        </AmmoUser>
+        <FireModes>
+            <aiAimMode>AimedShot</aiAimMode>
+            <noSnapshot>true</noSnapshot>
+            <aiUseBurstMode>true</aiUseBurstMode>
+        </FireModes>
+    </Operation>
+	
+	<!--Bunker-->
+	<!--Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="CMC_ReinforcedBunker"]/thingClass</xpath>
+        <value>
+            <thingClass>CombatExtended.Building_TurretGunCE</thingClass>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="CMC_ReinforcedBunker"]/statBases</xpath>
+        <value>
+            <Bulk>1500</Bulk>
+        </value>
+    </Operation>
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>/Defs/ThingDef[defName="CMC_ReinforcedBunker"]</xpath>
+        <value>
+            <li Class="CombatExtended.NonSnapTurretExtension">
+			<speed>1.25</speed>
+			<angleWeightMultiplier>1</angleWeightMultiplier>
+			</li>
+		</value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="CMC_ReinforcedBunker"]/statBases/ShootingAccuracyTurret</xpath>
+        <value>
+            <ShootingAccuracyTurret>1.00</ShootingAccuracyTurret>
+            <AimingAccuracy>1</AimingAccuracy>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>/Defs/ThingDef[defName="CMC_ReinforcedBunker"]/comps/li[@Class="CompProperties_Refuelable"]</xpath>
+    </Operation>
+	<Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Gun_BunkerHMG"]/verbs/li/verbClass</xpath>
+        <value>
+			<verbClass>Verb_Shoot</verbClass>
+        </value>
+    </Operation>
+	
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>Gun_BunkerHMG</defName>
+        <statBases>
+            <Bulk>180</Bulk>
+            <SightsEfficiency>0.4</SightsEfficiency>
+            <ShotSpread>0.09</ShotSpread>
+            <SwayFactor>0</SwayFactor>
+        </statBases>
+		<Properties>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <defaultProjectile>Bullet_8x50mmElectromagnetic_AP</defaultProjectile>
+            <warmupTime>0.5</warmupTime>
+            <recoilAmount>0</recoilAmount>
+            <range>80</range>
+            <burstShotCount>18</burstShotCount>
+			<ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+			<soundCast>ChargeLance_Fire</soundCast>
+            <soundCastTail>GunTail_Light</soundCastTail>
+            <muzzleFlashScale>30</muzzleFlashScale>
+            <targetParams>
+				<canTargetLocations>true</canTargetLocations>
+			</targetParams>
+        </Properties>
+        <AmmoUser>
+            <magazineSize>4800</magazineSize>
+            <reloadTime>12</reloadTime>
+            <ammoSet>AmmoSet_8x50mmElectromagnetic</ammoSet>
+        </AmmoUser>
+        <FireModes>
+            <aiAimMode>AimedShot</aiAimMode>
+            <noSnapshot>true</noSnapshot>
+            <aiUseBurstMode>true</aiUseBurstMode>
+        </FireModes>
+    </Operation-->
+</Patch>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 天羽的传教士 -->
+  <Milira_ChurchIntro.label>天羽的传教士</Milira_ChurchIntro.label>
+  
+  <!-- EN: 折翼天使 -->
+  <Milira_FallenAngel_Drop.label>折翼天使</Milira_FallenAngel_Drop.label>
+  
+  <!-- EN: 米莉拉加入 -->
+  <Milira_FallenAngel_Return.label>米莉拉加入</Milira_FallenAngel_Return.label>
+  
+  <!-- EN: 教会接洽 -->
+  <Milira_FallenAngel_ToChurch.label>教会接洽</Milira_FallenAngel_ToChurch.label>
+  
+</LanguageData>

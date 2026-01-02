@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: <color=#1DD5EE><i>Tian Ji combat chip</i></color> -->
+  <TianJi.label>【天璣】治療晶元</TianJi.label>
+  <!-- EN: A chip that slowly cures the user's wounds. -->
+  <TianJi.description>安裝於大腦之中的晶元，可以調動納米微械加速使用者新陳代謝，並治愈使用者的傷口。\n\n該晶元每3秒自動停止異常精神狀況。</TianJi.description>
+  <!-- EN: a brain implant chip Tian Ji -->
+  <TianJi.labelNoun>【天璣】治療晶元</TianJi.labelNoun>
+  
+</LanguageData>

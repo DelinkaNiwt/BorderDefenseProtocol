@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <RecipeDef ParentName="SurgeryInstallBodyPartArtificialBase">
+	<defName>Milira_ArtificialWing_Install</defName>
+	<label>Install Artificial Wing</label>
+	<description>Install Artificial Wing for Milira.</description>
+	<descriptionHyperlinks>
+      <ThingDef>Milira_ArtificialWing</ThingDef>
+      <HediffDef>Milira_ArtificialWing_Installed</HediffDef>
+    </descriptionHyperlinks>
+	<workerClass>Recipe_InstallArtificialBodyPart</workerClass>
+	<jobString>Installing Artificial Wing for Milira.</jobString>
+	<workAmount>3000</workAmount>
+	<skillRequirements>
+		<Medicine>6</Medicine>
+	</skillRequirements>
+	<ingredients>
+		<li>
+			<filter>
+				<thingDefs>
+					<li>Milira_ArtificialWing</li>
+				</thingDefs>
+			</filter>
+			<count>1</count>
+		</li>
+		<li>
+			<filter>
+				<categories>
+					<li>Medicine</li>
+				</categories>
+			</filter>
+			<count>2</count>
+		</li>
+	</ingredients>
+	<fixedIngredientFilter>
+		<categories>
+			<li>Medicine</li>
+		</categories>
+		<thingDefs>
+			<li>Milira_ArtificialWing</li>
+		</thingDefs>
+	</fixedIngredientFilter>
+	<appliedOnFixedBodyParts>
+		<li>Milira_Wing</li>
+	</appliedOnFixedBodyParts>
+	<addsHediff>Milira_ArtificialWing_Installed</addsHediff>
+  </RecipeDef>
+
+  <RecipeDef ParentName="SurgeryInstallBodyPartArtificialBase">
+	<defName>Milira_BionicWing_Install</defName>
+	<label>Install Bionic Wing</label>
+	<description>Install bionic wing for Milira.</description>
+	<descriptionHyperlinks>
+      <ThingDef>Milira_BionicWing</ThingDef>
+      <HediffDef>Milira_BionicWing_Installed</HediffDef>
+    </descriptionHyperlinks>
+	<workerClass>Recipe_InstallArtificialBodyPart</workerClass>
+	<jobString>Installing bionic wing for Milira.</jobString>
+	<workAmount>4800</workAmount>
+	<skillRequirements>
+		<Medicine>8</Medicine>
+	</skillRequirements>
+	<ingredients>
+		<li>
+			<filter>
+				<thingDefs>
+					<li>Milira_BionicWing</li>
+				</thingDefs>
+			</filter>
+			<count>1</count>
+		</li>
+		<li>
+			<filter>
+				<categories>
+					<li>Medicine</li>
+				</categories>
+			</filter>
+			<count>2</count>
+		</li>
+	</ingredients>
+	<fixedIngredientFilter>
+		<categories>
+			<li>Medicine</li>
+		</categories>
+		<thingDefs>
+			<li>Milira_BionicWing</li>
+		</thingDefs>
+	</fixedIngredientFilter>
+	<appliedOnFixedBodyParts>
+		<li>Milira_Wing</li>
+	</appliedOnFixedBodyParts>
+	<addsHediff>Milira_BionicWing_Installed</addsHediff>
+  </RecipeDef>
+
+</Defs>

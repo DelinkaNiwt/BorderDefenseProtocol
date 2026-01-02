@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+  <!-- EN: change -->
+  <Ancot.Change>更改</Ancot.Change>
+
+  <!-- EN: Restore Default Settings -->
+  <Ancot.DefaultSetting>恢复默认设置</Ancot.DefaultSetting>
+
+  <!-- 品质颜色 -->
+  <!-- EN: Quality Color -->
+  <Ancot.QualityColorSetting>品质颜色</Ancot.QualityColorSetting>
+  <!-- EN: Adjust the representative color of quality for apparel, weapons, etc., in mods that depend on this library. -->
+  <Ancot.QualityColorSettingDesc>调整依赖本库的模组中服装、武器等品质的代表色。</Ancot.QualityColorSettingDesc>
+  <!-- EN: Default Quality Color -->
+  <Ancot.DefaultSetting_QualityColor>恢复默认品质颜色</Ancot.DefaultSetting_QualityColor>
+
+  <!-- Turret System -->
+  <!-- EN: Turret System -->
+  <Ancot.TurretSystemSetting>副炮系统</Ancot.TurretSystemSetting>
+  <!-- EN: Settings related to the turret system, such as the wearable drone turrets in the milira race mod. -->
+  <Ancot.TurretSystemSettingDesc>关于副炮功能的设置，例如米莉拉模组中的穿戴式浮游炮。</Ancot.TurretSystemSettingDesc>
+
+  <!-- EN: Aiming Indicator Line -->
+  <Ancot.TurretSystem_Indicator>瞄准指示线</Ancot.TurretSystem_Indicator>
+  <!-- EN: Displays the indicator line for turret aiming targets. -->
+  <Ancot.TurretSystem_IndicatorDesc>显示副炮瞄准目标的指示线。</Ancot.TurretSystem_IndicatorDesc>
+
+  <!-- EN: Player Indicator Line Color -->
+  <Ancot.TurretSystem_IndicatorColor_Player>玩家单位指示线颜色</Ancot.TurretSystem_IndicatorColor_Player>
+  <!-- EN: Determines the indicator line color when a player-controlled character is targeting with a turret. -->
+  <Ancot.TurretSystem_IndicatorColor_PlayerDesc>决定玩家操控的单位拥有的副炮瞄准目标时的指示线颜色。</Ancot.TurretSystem_IndicatorColor_PlayerDesc>
+
+  <!-- EN: Draw Only When Selected (Player) -->
+  <Ancot.TurretSystem_IndicatorOnlyDrawSelected>仅选中时绘制（玩家）</Ancot.TurretSystem_IndicatorOnlyDrawSelected>
+  <!-- EN: Only draws the turret indicator line when a player-controlled character is selected. -->
+  <Ancot.TurretSystem_IndicatorOnlyDrawSelectedDesc>仅当选中玩家操控的单位时绘制其副炮的指示线。</Ancot.TurretSystem_IndicatorOnlyDrawSelectedDesc>
+
+  <!-- EN: Draw Only When Selected (Non-Player) -->
+  <Ancot.TurretSystem_IndicatorOnlyDrawSelected_NonPlayer>仅选中时绘制（非玩家）</Ancot.TurretSystem_IndicatorOnlyDrawSelected_NonPlayer>
+  <!-- EN: Only draws the turret indicator line when a non-player-controlled character is selected. -->
+  <Ancot.TurretSystem_IndicatorOnlyDrawSelected_NonPlayerDesc>仅当选中非玩家操控的单位时绘制其副炮的指示线。</Ancot.TurretSystem_IndicatorOnlyDrawSelected_NonPlayerDesc>
+
+  <!-- EN: Draw Only When Forced Targeting -->
+  <Ancot.TurretSystem_IndicatorOnlyDrawForced>仅指定目标时绘制</Ancot.TurretSystem_IndicatorOnlyDrawForced>
+  <!-- EN: For player character, only draws the turret indicator line when a forced target is assigned. -->
+  <Ancot.TurretSystem_IndicatorOnlyDrawForcedDesc>对于玩家单位，仅当为副炮强制指定攻击目标时绘制指示线。</Ancot.TurretSystem_IndicatorOnlyDrawForcedDesc>
+
+  <!-- EN: Non-Player Aiming Indicator Line -->
+  <Ancot.TurretSystem_Indicator_NonPlayer>非玩家单位瞄准指示线</Ancot.TurretSystem_Indicator_NonPlayer>
+  <!-- EN: Displays the turret aiming indicator line for non-player-controlled characters. -->
+  <Ancot.TurretSystem_Indicator_NonPlayerDesc>显示非玩家操控的单位拥有的副炮瞄准目标的指示线。</Ancot.TurretSystem_Indicator_NonPlayerDesc>
+
+  <!-- EN: Non-Player Indicator Line Color -->
+  <Ancot.TurretSystem_IndicatorColor_NonPlayer>非玩家单位指示线颜色</Ancot.TurretSystem_IndicatorColor_NonPlayer>
+  <!-- EN: Determines the indicator line color when a non-player-controlled character is targeting with a turret. -->
+  <Ancot.TurretSystem_IndicatorColor_NonPlayerDesc>决定非玩家操控的单位拥有的副炮瞄准目标时的指示线颜色。</Ancot.TurretSystem_IndicatorColor_NonPlayerDesc>
+
+  <!-- 武器额外渲染 -->
+  <!-- EN: Extra Weapon Texture -->
+  <Ancot.WeaponExtraRenderSetting>武器额外渲染</Ancot.WeaponExtraRenderSetting>
+  <!-- EN: Settings for rendering additional overlays when holding a weapon, such as the scabbard in the Kiiro mod. -->
+  <Ancot.WeaponExtraRenderSettingDesc>关于手持武器时绘制额外贴图的设置，例如绮罗模组中的剑鞘。</Ancot.WeaponExtraRenderSettingDesc>
+  <!-- EN: Draw Additional Textures -->
+  <Ancot.WeaponExtraRender_Draw>绘制额外贴图</Ancot.WeaponExtraRender_Draw>
+  <!-- EN: Whether to draw additional weapon textures. -->
+  <Ancot.WeaponExtraRender_DrawDesc>是否绘制额外的武器贴图。</Ancot.WeaponExtraRender_DrawDesc>
+
+  <!-- 着装方案预设 -->
+  <!-- EN: Apparel Policy Presets -->
+  <Ancot.ApparelPolicySettings>着装方案预设</Ancot.ApparelPolicySettings>
+  <!-- EN: Settings for preset apparel policies in race mods that depend on this library. -->
+  <Ancot.ApparelPolicySettingsDesc>关于依赖本库的种族模组预设着装方案的设置。</Ancot.ApparelPolicySettingsDesc>
+  <!-- EN: Generate Apparel Policy at Start -->
+  <Ancot.ApparelPolicy_GenerateAtStart>初始创建着装方案</Ancot.ApparelPolicy_GenerateAtStart>
+  <!-- EN: Whether to create the preset apparel policy for the race once when starting a new game. -->
+  <Ancot.ApparelPolicy_GenerateAtStartDesc>是否在开始新游戏时创建一次种族的预设着装方案。</Ancot.ApparelPolicy_GenerateAtStartDesc>
+  <!-- EN: Auto-Assign Race Apparel Policy -->
+  <Ancot.ApparelPolicy_AutoSetForColonist>自动设置种族着装方案</Ancot.ApparelPolicy_AutoSetForColonist>
+  <!-- EN: Automatically assign the preset apparel policy for the corresponding race when recruited. -->
+  <Ancot.ApparelPolicy_AutoSetForColonistDesc>招募时自动设定对应的预设种族着装方案。</Ancot.ApparelPolicy_AutoSetForColonistDesc>
+  <!-- EN: Generate Preset Race Apparel Policy -->
+  <Ancot.ApparelPolicy_Generate>生成预设种族着装方案</Ancot.ApparelPolicy_Generate>
+
+  <!-- 无人机 -->
+  <!-- EN: Drone -->
+  <Ancot.DroneSettings>无人机</Ancot.DroneSettings>
+  <!-- EN: Settings for the drone framework. -->
+  <Ancot.DroneSettingsDesc>关于无人机框架的设置。</Ancot.DroneSettingsDesc>
+  <!-- EN: Drone Management Panel -->
+  <Ancot.Drone_TabAvailable>无人机管理面板</Ancot.Drone_TabAvailable>
+  <!-- EN: Choose how to access the drone management panel. Enabling the menu will add a drone panel button to the bottom menu; enabling the button will add a shortcut to the drone panel above the mech panel. -->
+  <Ancot.Drone_TabAvailableDesc>选择访问无人机管理面板的方式。其中，启用菜单栏会在底部菜单中增加无人机面板按钮；启用按钮会在机械体面板上方增加跳转至无人机面板的按钮。</Ancot.Drone_TabAvailableDesc>
+
+  <!-- UNUSED -->
+  <Ancot.TabAvailable_Button>按钮</Ancot.TabAvailable_Button>
+  <Ancot.TabAvailable_Menu>菜单栏</Ancot.TabAvailable_Menu>
+  <Ancot.TabAvailable_ButtonAndMenu>按钮和菜单栏</Ancot.TabAvailable_ButtonAndMenu>
+
+</LanguageData>

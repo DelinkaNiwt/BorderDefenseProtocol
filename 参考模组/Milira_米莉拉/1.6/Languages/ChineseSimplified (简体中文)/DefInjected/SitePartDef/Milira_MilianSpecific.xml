@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: milian artillery squad -->
+  <Milira_MilianSpecific_Artillery.label>米莉安炮击小队</Milira_MilianSpecific_Artillery.label>
+  <!-- EN: a group of milian artillery squad is in this area. -->
+  <Milira_MilianSpecific_Artillery.description>一队米莉安炮击小队。</Milira_MilianSpecific_Artillery.description>
+  
+  <!-- EN: milian land fleet -->
+  <Milira_MilianSpecific_Fleet.label>米莉安陆行舰队</Milira_MilianSpecific_Fleet.label>
+  <!-- EN: a group of milian ranger squad is in this area. -->
+  <Milira_MilianSpecific_Fleet.description>一小队米莉安陆行舰队。</Milira_MilianSpecific_Fleet.description>
+  
+  <!-- EN: milian garrison -->
+  <Milira_MilianSpecific_Garrison.label>米莉安戍卫军</Milira_MilianSpecific_Garrison.label>
+  <!-- EN: a group of milian ranger squad is in this area. -->
+  <Milira_MilianSpecific_Garrison.description>一小队米莉安戍卫军。</Milira_MilianSpecific_Garrison.description>
+  
+  <!-- EN: milian guerrilla squad -->
+  <Milira_MilianSpecific_Guerrilla.label>米莉安游击队</Milira_MilianSpecific_Guerrilla.label>
+  <!-- EN: a group of milian guerrilla squad is in this area. -->
+  <Milira_MilianSpecific_Guerrilla.description>一小队米莉安游击队。</Milira_MilianSpecific_Guerrilla.description>
+  
+  <!-- EN: milian raider squad -->
+  <Milira_MilianSpecific_Raider.label>米莉安破袭小队</Milira_MilianSpecific_Raider.label>
+  <!-- EN: a group of milian raider squad is in this area. -->
+  <Milira_MilianSpecific_Raider.description>一小队米莉安破袭小队。</Milira_MilianSpecific_Raider.description>
+  
+  <!-- EN: Milian ranger squad -->
+  <Milira_MilianSpecific_Ranger.label>米莉安游骑兵小队</Milira_MilianSpecific_Ranger.label>
+  <!-- EN: a group of milian ranger squad is in this area. -->
+  <Milira_MilianSpecific_Ranger.description>一小队米莉安游骑兵。</Milira_MilianSpecific_Ranger.description>
+  
+  <!-- EN: milian order of knights -->
+  <Milira_MilianSpecific_Templar.label>米莉安骑士团</Milira_MilianSpecific_Templar.label>
+  <!-- EN: milian order of knights squad is in this area. -->
+  <Milira_MilianSpecific_Templar.description>一小队米莉安骑士团。</Milira_MilianSpecific_Templar.description>
+  
+  <!-- EN: milian shield guardians -->
+  <Milira_MilianSpecific_Wall.label>米莉安盾卫组</Milira_MilianSpecific_Wall.label>
+  <!-- EN: a group of milian shield guardians is in this area. -->
+  <Milira_MilianSpecific_Wall.description>一小队米莉安盾卫组。</Milira_MilianSpecific_Wall.description>
+  
+</LanguageData>

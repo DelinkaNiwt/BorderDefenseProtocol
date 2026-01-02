@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <StatCategoryDef>
+    <defName>Ancot_Shield</defName>
+    <label>Shield</label>
+    <displayOrder>39</displayOrder>
+    <displayAllByDefault>true</displayAllByDefault>
+  </StatCategoryDef>
+
+  <StatCategoryDef>
+    <defName>Ancot_EnergyWeapon</defName>
+    <label>Energy weapon</label>
+    <displayOrder>49</displayOrder>
+    <displayAllByDefault>true</displayAllByDefault>
+  </StatCategoryDef>
+  
+  <StatCategoryDef>
+    <defName>Ancot_Weapon_RangedLoad</defName>
+    <label>Weapon (ranged load)</label>
+    <displayOrder>45</displayOrder>
+  </StatCategoryDef>
+
+
+</Defs>

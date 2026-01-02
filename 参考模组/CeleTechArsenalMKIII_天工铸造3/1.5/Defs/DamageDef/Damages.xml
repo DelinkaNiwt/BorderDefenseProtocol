@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <DamageDef Name="CMC_ModBomb">
+    <defName>CMC_ModBomb</defName>
+    <label>bomb</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>true</externalViolence>
+    <isExplosive>true</isExplosive>
+    <deathMessage>{0} has died in an explosion.</deathMessage>
+    <hediff>Shredded</hediff>
+    <hediffSolid>Crack</hediffSolid>
+    <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+    <impactSoundType>Blunt</impactSoundType>
+    <armorCategory>Sharp</armorCategory>
+    <minDamageToFragment>15</minDamageToFragment>
+    <defaultDamage>50</defaultDamage>
+    <defaultStoppingPower>0.5</defaultStoppingPower>
+    <defaultArmorPenetration>0.10</defaultArmorPenetration>
+    <buildingDamageFactorImpassable>4</buildingDamageFactorImpassable>
+    <buildingDamageFactorPassable>2</buildingDamageFactorPassable>
+    <plantDamageFactor>4</plantDamageFactor>
+    <corpseDamageFactor>0.5</corpseDamageFactor>
+    <explosionAffectOutsidePartsOnly>false</explosionAffectOutsidePartsOnly>
+    <explosionHeatEnergyPerCell>5</explosionHeatEnergyPerCell>
+    <explosionCellFleck>DustPuff</explosionCellFleck>
+    <explosionColorCenter>(205, 205, 205)</explosionColorCenter>
+    <explosionColorEdge>(75, 75, 75)</explosionColorEdge>
+    <soundExplosion>Explosion_Bomb</soundExplosion>
+    <combatLogRules>Damage_Bomb</combatLogRules>
+  </DamageDef>
+  
+  <DamageDef Name="BulletAoE_Void">
+    <defName>BulletAoE_Void</defName>
+    <label>bullet</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>true</externalViolence>
+    <isExplosive>true</isExplosive>
+    <deathMessage>{0} has been shot to death.</deathMessage>
+    <hediff>Shredded</hediff>
+    <hediffSolid>Crack</hediffSolid>
+    <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+    <impactSoundType>Blunt</impactSoundType>
+    <armorCategory>Sharp</armorCategory>
+    <minDamageToFragment>15</minDamageToFragment>
+    <defaultDamage>20</defaultDamage>
+    <defaultStoppingPower>0</defaultStoppingPower>
+    <defaultArmorPenetration>0.10</defaultArmorPenetration>
+    <buildingDamageFactorImpassable>0.2</buildingDamageFactorImpassable>
+    <buildingDamageFactorPassable>0.1</buildingDamageFactorPassable>
+    <plantDamageFactor>0.6</plantDamageFactor>
+    <corpseDamageFactor>0.2</corpseDamageFactor>
+    <explosionAffectOutsidePartsOnly>false</explosionAffectOutsidePartsOnly>
+    <explosionHeatEnergyPerCell>5</explosionHeatEnergyPerCell>
+    <explosionCellFleck>BlastDry</explosionCellFleck>
+    <explosionColorCenter>(0, 0, 0,0)</explosionColorCenter>
+    <explosionColorEdge>(0, 0, 0,0)</explosionColorEdge>
+    <soundExplosion>Explosion_Bomb</soundExplosion>
+	<hasForcefulImpact>false</hasForcefulImpact>
+    <canInterruptJobs>false</canInterruptJobs>
+  </DamageDef>
+  
+  <DamageDef>
+    <defName>CMC_NTB</defName>
+    <label>mechanite bullet(lethal)</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>true</externalViolence>
+    <deathMessage>{0} has been shot to death.</deathMessage>
+    <hediff>Gunshot</hediff>
+	<additionalHediffs>
+      <li>
+        <hediff>ToxicBuildup</hediff>
+        <severityPerDamageDealt>0.46</severityPerDamageDealt>
+        <victimSeverityScaling>ToxicResistance</victimSeverityScaling>
+        <inverseStatScaling>true</inverseStatScaling>
+        <victimSeverityScalingByInvBodySize>false</victimSeverityScalingByInvBodySize>
+      </li>
+    </additionalHediffs>
+    <harmAllLayersUntilOutside>false</harmAllLayersUntilOutside>
+    <impactSoundType>Bullet</impactSoundType>
+    <armorCategory></armorCategory>
+    <overkillPctToDestroyPart>0~0.7</overkillPctToDestroyPart>
+    <isRanged>true</isRanged>
+    <makesAnimalsFlee>false</makesAnimalsFlee>
+  </DamageDef>
+  
+  <DamageDef>
+    <defName>CMC_ATB</defName>
+    <label>mechanite bullet(anesthetic)</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>false</externalViolence>
+    <deathMessage>{0} has been shot to death.</deathMessage>
+    <hediff>Gunshot</hediff>
+	<additionalHediffs>
+      <li>
+        <hediff>SMAnesthetic</hediff>
+		<severityPerDamageDealt>1</severityPerDamageDealt>
+		<victimSeverityScalingByInvBodySize>false</victimSeverityScalingByInvBodySize>
+      </li>
+    </additionalHediffs>
+    <harmAllLayersUntilOutside>false</harmAllLayersUntilOutside>
+    <impactSoundType>Bullet</impactSoundType>
+    <armorCategory></armorCategory>
+    <overkillPctToDestroyPart>0~0.7</overkillPctToDestroyPart>
+    <isRanged>true</isRanged>
+    <makesAnimalsFlee>false</makesAnimalsFlee>
+  </DamageDef>
+  
+  <DamageDef>
+    <defName>CMC_LethalBullet</defName>
+    <label>mechanite bullet(Lethal)</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>true</externalViolence>
+    <deathMessage>{0} has been shot to death.</deathMessage>
+    <hediff>Gunshot</hediff>
+	<additionalHediffs>
+      <li>
+        <hediff>SMLethal</hediff>
+		<severityPerDamageDealt>1</severityPerDamageDealt>
+		<victimSeverityScalingByInvBodySize>false</victimSeverityScalingByInvBodySize>
+      </li>
+    </additionalHediffs>
+    <harmAllLayersUntilOutside>false</harmAllLayersUntilOutside>
+    <impactSoundType>Bullet</impactSoundType>
+    <armorCategory>Sharp</armorCategory>
+    <overkillPctToDestroyPart>0~0.7</overkillPctToDestroyPart>
+    <isRanged>true</isRanged>
+    <makesAnimalsFlee>false</makesAnimalsFlee>
+  </DamageDef>
+  
+  <DamageDef>
+    <defName>InfernoBeam</defName>
+    <label>inferno beam</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>true</externalViolence>
+    <deathMessage>{0} has been vaporized by laser beam.</deathMessage>
+    <hediff>BeamWound</hediff>
+	<additionalHediffs>
+      <li>
+        <hediff>PlasmaBurn</hediff>
+		<severityPerDamageDealt>1</severityPerDamageDealt>
+      </li>
+    </additionalHediffs>
+    <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+    <impactSoundType>Bullet</impactSoundType>
+    <armorCategory>Heat</armorCategory>
+    <overkillPctToDestroyPart>0~0.7</overkillPctToDestroyPart>
+    <isRanged>true</isRanged>
+    <makesAnimalsFlee>true</makesAnimalsFlee>
+    <defaultDamage>10</defaultDamage>
+    <defaultArmorPenetration>4</defaultArmorPenetration>
+    <buildingDamageFactorImpassable>3</buildingDamageFactorImpassable>
+    <buildingDamageFactorPassable>3</buildingDamageFactorPassable>
+	<hasForcefulImpact>false</hasForcefulImpact>
+    <canInterruptJobs>false</canInterruptJobs>
+  </DamageDef>
+  
+  <DamageDef>
+    <defName>InfernoBeamPlus</defName>
+    <label>inferno beam</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>false</externalViolence>
+    <deathMessage>{0} has been vaporized by laser beam.</deathMessage>
+    <hediff>BeamWound</hediff>
+	<additionalHediffs>
+      <li>
+        <hediff>PlasmaBurn</hediff>
+		<severityPerDamageDealt>1</severityPerDamageDealt>
+      </li>
+    </additionalHediffs>
+    <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+    <impactSoundType>Bullet</impactSoundType>
+    <armorCategory></armorCategory>
+    <overkillPctToDestroyPart>0~0.7</overkillPctToDestroyPart>
+    <isRanged>true</isRanged>
+    <makesAnimalsFlee>true</makesAnimalsFlee>
+    <defaultDamage>10</defaultDamage>
+    <defaultArmorPenetration>4</defaultArmorPenetration>
+    <buildingDamageFactorImpassable>5</buildingDamageFactorImpassable>
+    <buildingDamageFactorPassable>5</buildingDamageFactorPassable>
+	<hasForcefulImpact>false</hasForcefulImpact>
+    <canInterruptJobs>false</canInterruptJobs>
+  </DamageDef>
+  
+  <DamageDef>
+    <defName>AntiEntropyBullet</defName>
+    <label>anti-entropy bullet</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>false</externalViolence>
+    <deathMessage>{0} has been has been shot to death.</deathMessage>
+    <hediff>Shredded</hediff>
+    <hediffSolid>Crack</hediffSolid>
+	<additionalHediffs>
+      <li>
+        <hediff>FrostBite</hediff>
+		<severityPerDamageDealt>1</severityPerDamageDealt>
+      </li>
+	  <li>
+        <hediff>weakening</hediff>
+		<severityPerDamageDealt>0.001</severityPerDamageDealt>
+      </li>
+    </additionalHediffs>
+    <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+    <impactSoundType>Bullet</impactSoundType>
+    <armorCategory></armorCategory>
+    <overkillPctToDestroyPart>0~0.7</overkillPctToDestroyPart>
+    <isRanged>true</isRanged>
+    <makesAnimalsFlee>true</makesAnimalsFlee>
+    <defaultDamage>100</defaultDamage>
+    <defaultArmorPenetration>2</defaultArmorPenetration>
+    <buildingDamageFactorImpassable>4</buildingDamageFactorImpassable>
+    <buildingDamageFactorPassable>4</buildingDamageFactorPassable>
+	<hasForcefulImpact>false</hasForcefulImpact>
+    <canInterruptJobs>false</canInterruptJobs>
+  </DamageDef>
+  
+  <DamageDef>
+    <defName>IgnisBullet</defName>
+    <label>API bullet</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>false</externalViolence>
+    <deathMessage>{0} has been has been shot to death.</deathMessage>
+    <hediff>Shredded</hediff>
+    <hediffSolid>Crack</hediffSolid>
+	<additionalHediffs>
+	  <li>
+        <hediff>PlasmaBurn</hediff>
+		<severityPerDamageDealt>0.1</severityPerDamageDealt>
+      </li>
+    </additionalHediffs>
+    <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+    <impactSoundType>Bullet</impactSoundType>
+    <armorCategory></armorCategory>
+    <overkillPctToDestroyPart>0~0.7</overkillPctToDestroyPart>
+    <isRanged>true</isRanged>
+    <makesAnimalsFlee>true</makesAnimalsFlee>
+    <defaultDamage>100</defaultDamage>
+    <defaultArmorPenetration>0.25</defaultArmorPenetration>
+    <buildingDamageFactorImpassable>0.1</buildingDamageFactorImpassable>
+    <buildingDamageFactorPassable>0.1</buildingDamageFactorPassable>
+	<hasForcefulImpact>false</hasForcefulImpact>
+    <canInterruptJobs>false</canInterruptJobs>
+  </DamageDef>
+  
+  <DamageDef Name="StunBomb">
+    <defName>NeutronBomb</defName>
+    <label>neutron bomb</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>true</externalViolence>
+	<externalViolenceForMechanoids>false</externalViolenceForMechanoids>
+    <isExplosive>true</isExplosive>
+    <deathMessage>{0} has died in an explosion.</deathMessage>
+    <hediff>Shredded</hediff>
+    <hediffSolid>Crack</hediffSolid>
+	<additionalHediffs>
+	  <li>
+        <hediff>weakening</hediff>
+		<severityPerDamageDealt>0.001</severityPerDamageDealt>
+      </li>
+    </additionalHediffs>
+    <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+    <impactSoundType>Blunt</impactSoundType>
+    <armorCategory></armorCategory>
+    <minDamageToFragment>12</minDamageToFragment>
+    <defaultDamage>20</defaultDamage>
+    <defaultStoppingPower>29.5</defaultStoppingPower>
+    <defaultArmorPenetration>0</defaultArmorPenetration>
+    <buildingDamageFactorImpassable>0</buildingDamageFactorImpassable>
+    <buildingDamageFactorPassable>0</buildingDamageFactorPassable>
+    <plantDamageFactor>100</plantDamageFactor>
+    <corpseDamageFactor>0</corpseDamageFactor>
+    <explosionAffectOutsidePartsOnly>false</explosionAffectOutsidePartsOnly>
+    <explosionHeatEnergyPerCell>5</explosionHeatEnergyPerCell>
+    <explosionCellFleck>BlastDry</explosionCellFleck>
+    <explosionColorEdge>(1, 1, 1, 1)</explosionColorEdge>
+    <explosionColorCenter>(0, 255, 255,1)</explosionColorCenter>
+    <soundExplosion>Sound_boomNT</soundExplosion>
+    <combatLogRules>Damage_Bomb</combatLogRules>
+  </DamageDef>
+  
+  <DamageDef>
+    <defName>PlasmaBomb</defName>
+    <label>plasma bomb</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>true</externalViolence>
+	<externalViolenceForMechanoids>false</externalViolenceForMechanoids>
+    <isExplosive>true</isExplosive>
+    <deathMessage>{0} has died in an explosion.</deathMessage>
+    <hediff>Shredded</hediff>
+    <hediffSolid>Crack</hediffSolid>
+	<additionalHediffs>
+	  <li>
+        <hediff>weakening</hediff>
+		<severityPerDamageDealt>0.001</severityPerDamageDealt>
+      </li>
+    </additionalHediffs>
+    <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+    <impactSoundType>Blunt</impactSoundType>
+    <armorCategory>Heat</armorCategory>
+    <minDamageToFragment>12</minDamageToFragment>
+    <defaultDamage>20</defaultDamage>
+    <defaultStoppingPower>29.5</defaultStoppingPower>
+    <defaultArmorPenetration>0</defaultArmorPenetration>
+    <buildingDamageFactorImpassable>10</buildingDamageFactorImpassable>
+    <buildingDamageFactorPassable>10</buildingDamageFactorPassable>
+    <plantDamageFactor>100</plantDamageFactor>
+    <corpseDamageFactor>0</corpseDamageFactor>
+    <explosionAffectOutsidePartsOnly>false</explosionAffectOutsidePartsOnly>
+    <explosionHeatEnergyPerCell>5</explosionHeatEnergyPerCell>
+    <explosionCellFleck>BlastDry</explosionCellFleck>
+    <explosionColorEdge>(1, 1, 1, 1)</explosionColorEdge>
+    <explosionColorCenter>(0, 255, 255,1)</explosionColorCenter>
+    <soundExplosion>Sound_boomE</soundExplosion>
+    <combatLogRules>Damage_Bomb</combatLogRules>
+  </DamageDef>
+  
+  <DamageDef Name="Radiation">
+    <defName>Radiation</defName>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <label>radiation</label>
+    <hasForcefulImpact>false</hasForcefulImpact>
+    <makesBlood>false</makesBlood>
+    <canInterruptJobs>false</canInterruptJobs>
+    <externalViolence>true</externalViolence>
+    <deathMessage>{0} has degraded to death.</deathMessage>
+    <hediff>DD</hediff>
+    <armorCategory></armorCategory>
+    <defaultDamage>10</defaultDamage>
+    <defaultArmorPenetration>2</defaultArmorPenetration>
+  </DamageDef>
+  
+  <DamageDef>
+    <defName>CMC_Vaporize_Small</defName>
+    <workerClass>DamageWorker_Flame</workerClass>
+    <label>flame</label>
+    <hasForcefulImpact>false</hasForcefulImpact>
+    <makesBlood>false</makesBlood>
+    <canInterruptJobs>false</canInterruptJobs>
+    <externalViolence>true</externalViolence>
+    <deathMessage>{0} has burned to death.</deathMessage>
+    <hediff>Burn</hediff>
+    <armorCategory></armorCategory>
+    <minDamageToFragment>15</minDamageToFragment>
+    <defaultDamage>10</defaultDamage>
+    <defaultArmorPenetration>0</defaultArmorPenetration>
+    <explosionHeatEnergyPerCell>15</explosionHeatEnergyPerCell>
+    <explosionCellFleck>BlastFlame</explosionCellFleck>
+    <explosionColorCenter>(1, 0.7, 0.7)</explosionColorCenter>
+    <explosionColorEdge>(1, 1, 0.7)</explosionColorEdge>
+    <soundExplosion>Explosion_Flame</soundExplosion>
+    <combatLogRules>Damage_Flame</combatLogRules>
+    <canUseDeflectMetalEffect>false</canUseDeflectMetalEffect>
+    <scaleDamageToBuildingsBasedOnFlammability>true</scaleDamageToBuildingsBasedOnFlammability>
+  </DamageDef>
+  
+  <DamageDef>
+    <defName>CMC_Vaporize_Plasma</defName>
+    <workerClass>DamageWorker_Flame</workerClass>
+    <label>flame</label>
+    <hasForcefulImpact>true</hasForcefulImpact>
+    <makesBlood>false</makesBlood>
+    <canInterruptJobs>true</canInterruptJobs>
+    <externalViolence>true</externalViolence>
+    <deathMessage>{0} has burned to death.</deathMessage>
+    <hediff>Burn</hediff>
+    <armorCategory>Heat</armorCategory>
+    <minDamageToFragment>15</minDamageToFragment>
+    <defaultDamage>5 </defaultDamage>
+    <defaultArmorPenetration>1.3</defaultArmorPenetration>
+	<defaultStoppingPower>0.9</defaultStoppingPower>
+    <buildingDamageFactorImpassable>4</buildingDamageFactorImpassable>
+    <buildingDamageFactorPassable>4</buildingDamageFactorPassable>
+	<plantDamageFactor>10</plantDamageFactor>
+    <corpseDamageFactor>10</corpseDamageFactor>
+    <explosionHeatEnergyPerCell>15</explosionHeatEnergyPerCell>
+    <explosionCellFleck>BlastFlame</explosionCellFleck>
+    <explosionColorCenter>(1, 1, 1)</explosionColorCenter>
+    <explosionColorEdge>(0.1, 1, 1)</explosionColorEdge>
+    <soundExplosion>Explosion_Flame</soundExplosion>
+    <combatLogRules>Damage_Flame</combatLogRules>
+    <canUseDeflectMetalEffect>false</canUseDeflectMetalEffect>
+    <scaleDamageToBuildingsBasedOnFlammability>true</scaleDamageToBuildingsBasedOnFlammability>
+  </DamageDef>
+  
+  <DamageDef Name="Bomb">
+    <defName>CMC_Bomb_AA</defName>
+    <label>bomb(air-burst)</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>true</externalViolence>
+    <isExplosive>true</isExplosive>
+    <deathMessage>{0} has died in an explosion.</deathMessage>
+    <hediff>Shredded</hediff>
+    <hediffSolid>Crack</hediffSolid>
+    <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+    <impactSoundType>Blunt</impactSoundType>
+    <armorCategory>Sharp</armorCategory>
+    <minDamageToFragment>15</minDamageToFragment>
+    <defaultDamage>10</defaultDamage>
+    <defaultStoppingPower>0.5</defaultStoppingPower>
+    <defaultArmorPenetration>0.10</defaultArmorPenetration>
+    <buildingDamageFactorImpassable>60</buildingDamageFactorImpassable>
+    <buildingDamageFactorPassable>60</buildingDamageFactorPassable>
+    <plantDamageFactor>0.1</plantDamageFactor>
+    <corpseDamageFactor>0.1</corpseDamageFactor>
+    <explosionAffectOutsidePartsOnly>false</explosionAffectOutsidePartsOnly>
+    <explosionHeatEnergyPerCell>5</explosionHeatEnergyPerCell>
+    <explosionCellFleck>BlastDry</explosionCellFleck>
+    <explosionColorCenter>(255, 255, 255, 1)</explosionColorCenter>
+    <explosionColorEdge>(255, 255, 255, 1)</explosionColorEdge>
+    <soundExplosion>Explosion_Bomb</soundExplosion>
+    <combatLogRules>Damage_Bomb</combatLogRules>
+  </DamageDef>
+  
+  <DamageDef Name="Bomb_Laser">
+    <defName>Bomb_Laser</defName>
+    <label>bomb</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>true</externalViolence>
+    <isExplosive>true</isExplosive>
+    <deathMessage>{0} has died in an explosion.</deathMessage>
+    <hediff>Shredded</hediff>
+    <hediffSolid>Crack</hediffSolid>
+    <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+    <impactSoundType>Blunt</impactSoundType>
+    <armorCategory>Sharp</armorCategory>
+    <minDamageToFragment>15</minDamageToFragment>
+    <defaultDamage>20</defaultDamage>
+    <defaultStoppingPower>0.5</defaultStoppingPower>
+    <defaultArmorPenetration>0.10</defaultArmorPenetration>
+    <buildingDamageFactorImpassable>0.2</buildingDamageFactorImpassable>
+    <buildingDamageFactorPassable>0.1</buildingDamageFactorPassable>
+    <plantDamageFactor>0.6</plantDamageFactor>
+    <corpseDamageFactor>0.2</corpseDamageFactor>
+    <explosionAffectOutsidePartsOnly>false</explosionAffectOutsidePartsOnly>
+    <explosionHeatEnergyPerCell>5</explosionHeatEnergyPerCell>
+    <explosionCellFleck>BlastDry</explosionCellFleck>
+    <explosionColorCenter>(1, 1, 1,1)</explosionColorCenter>
+    <explosionColorEdge>(100, 255, 255,1)</explosionColorEdge>
+    <soundExplosion>Explosion_Bomb</soundExplosion>
+    <combatLogRules>Damage_Bomb</combatLogRules>
+  </DamageDef>
+  
+  <DamageDef Name="Bomb_Laser_Red">
+    <defName>Bomb_Laser_Red</defName>
+    <label>bomb</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>true</externalViolence>
+    <isExplosive>true</isExplosive>
+    <deathMessage>{0} has died in an explosion.</deathMessage>
+    <hediff>Shredded</hediff>
+    <hediffSolid>Crack</hediffSolid>
+    <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+    <impactSoundType>Blunt</impactSoundType>
+    <armorCategory></armorCategory>
+    <minDamageToFragment>15</minDamageToFragment>
+    <defaultDamage>20</defaultDamage>
+    <defaultStoppingPower>0.5</defaultStoppingPower>
+    <defaultArmorPenetration>0.10</defaultArmorPenetration>
+    <buildingDamageFactorImpassable>0.2</buildingDamageFactorImpassable>
+    <buildingDamageFactorPassable>0.1</buildingDamageFactorPassable>
+    <plantDamageFactor>0</plantDamageFactor>
+    <corpseDamageFactor>0</corpseDamageFactor>
+    <explosionAffectOutsidePartsOnly>false</explosionAffectOutsidePartsOnly>
+    <explosionHeatEnergyPerCell>5</explosionHeatEnergyPerCell>
+    <explosionCellFleck>BlastDry</explosionCellFleck>
+    <explosionColorCenter>(1, 1, 1,1)</explosionColorCenter>
+    <explosionColorEdge>(1, 1, 1,1)</explosionColorEdge>
+    <soundExplosion>Explosion_Bomb</soundExplosion>
+    <combatLogRules>Damage_Bomb</combatLogRules>
+  </DamageDef>
+  
+  <DamageDef Name="BluntBase">
+    <defName>CMC_Blunt</defName>
+    <label>blunt</label>
+    <workerClass>DamageWorker_Blunt</workerClass>
+    <externalViolence>true</externalViolence>
+    <deathMessage>{0} has been beaten to death.</deathMessage>
+    <hediff>Crush</hediff>
+    <hediffSkin>Bruise</hediffSkin>
+    <hediffSolid>Crack</hediffSolid>
+    <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+    <impactSoundType>Blunt</impactSoundType>
+    <armorCategory>Blunt</armorCategory>
+    <overkillPctToDestroyPart>1~1</overkillPctToDestroyPart>
+    <buildingDamageFactor>0.3</buildingDamageFactor>
+    <bluntStunDuration>2.0</bluntStunDuration>
+    <bluntInnerHitChance>0.1</bluntInnerHitChance>
+    <bluntInnerHitDamageFractionToConvert>0.1~0.2</bluntInnerHitDamageFractionToConvert>
+    <bluntInnerHitDamageFractionToAdd>0.2~0.35</bluntInnerHitDamageFractionToAdd>
+    <bluntStunChancePerDamagePctOfCorePartToHeadCurve>
+      <points>
+        <li>(0.04, 0.20)</li>
+        <li>(0.5, 1)</li>
+      </points>
+    </bluntStunChancePerDamagePctOfCorePartToHeadCurve>
+    <bluntStunChancePerDamagePctOfCorePartToBodyCurve>
+      <points>
+        <li>(0.4, 0)</li>
+        <li>(0.9, 0.15)</li>
+      </points>
+    </bluntStunChancePerDamagePctOfCorePartToBodyCurve>
+  </DamageDef>
+</Defs>

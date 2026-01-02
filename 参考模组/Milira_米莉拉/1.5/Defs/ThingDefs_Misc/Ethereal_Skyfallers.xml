@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+
+  <ThingDef ParentName="SkyfallerBase">
+    <defName>Milira_CorePartIncoming</defName>
+    <label>Milira Cluster Module (in descent)</label>
+    <size>(2, 2)</size>
+	<graphicData>
+      <texPath>Milira/Skyfaller/DropPodIncoming</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+      <drawSize>24</drawSize>
+	  <drawOffset>(0,0,5)</drawOffset>
+    </graphicData>
+    <skyfaller>
+      <shadow>Things/Skyfaller/SkyfallerShadowRectangle</shadow>
+      <shadowSize>(0, 0)</shadowSize>
+	  <movementType>Accelerate</movementType>
+	  <speed>2.0</speed>
+      <angleCurve>
+        <points>
+          <li>(0,0)</li>
+          <li>(1,0)</li>
+        </points>
+      </angleCurve>
+	  <ticksToImpactRange>320~350</ticksToImpactRange>
+      <!-- <explosionRadius>4.5</explosionRadius>
+      <explosionDamage>Bomb</explosionDamage> -->
+      <cameraShake>1</cameraShake>
+      <metalShrapnelCountRange><min>0</min><max>0</max></metalShrapnelCountRange>
+      <rubbleShrapnelCountRange><min>0</min><max>0</max></rubbleShrapnelCountRange>
+    </skyfaller>
+  </ThingDef>
+  
+  
+  <ThingDef Name="MiliraDropPodIncoming" ParentName="SkyfallerBase">
+    <defName>Milira_DropPodIncoming</defName>
+    <label>Milira fold jump (in descent)</label>
+    <thingClass>DropPodIncoming</thingClass>
+    <graphicData>
+      <texPath>Milira/Skyfaller/DropPodIncoming</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+      <drawSize>18</drawSize>
+      <drawOffset>(0,0,4)</drawOffset>
+    </graphicData>
+    <skyfaller>
+      <movementType>Accelerate</movementType>
+      <angleCurve>
+        <points>
+          <li>(0,0)</li>
+          <li>(1,0)</li>
+        </points>
+      </angleCurve>
+	  <speed>2.5</speed>
+	  <!-- <speedCurve> -->
+        <!-- <points> -->
+          <!-- <li>(0,2)</li> -->
+          <!-- <li>(1,3)</li> -->
+        <!-- </points> -->
+      <!-- </speedCurve> -->
+	  <ticksToImpactRange>360~480</ticksToImpactRange>
+	  <fadeInTicks>60</fadeInTicks>
+	  <cameraShake>1</cameraShake>
+      <shadow>Things/Skyfaller/SkyfallerShadowDropPod</shadow>
+      <shadowSize>(0, 0)</shadowSize>
+      <anticipationSound>DropPod_Fall</anticipationSound>
+      <anticipationSoundTicks>100</anticipationSoundTicks>
+      <impactSound>DropPod_Impact</impactSound>
+      <motesPerCell>0</motesPerCell>
+    </skyfaller>
+  </ThingDef>
+  
+  <ThingDef ParentName="ActiveDropPod">
+    <defName>Milira_ActiveDropPod</defName>
+	<thingClass>Milira.Milira_ActiveDropPod</thingClass>
+    <soundOpen>DropPod_Open_Mechanoid</soundOpen>
+    <graphicData>
+      <texPath>Milira/Null/null</texPath>
+    </graphicData>
+  </ThingDef>
+
+  <!-- 教会的支援炮击 -->
+  <ThingDef Name="Milira_ChurchBombardmentI" ParentName="SkyfallerBase">
+    <defName>Milira_ChurchBombardmentI</defName>
+    <label>supporting artillery fire</label>
+    <size>(2, 2)</size>
+    <graphicData>
+      <texPath>Milira/Skyfaller/Milira_Bombardment</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Transparent</shaderType>
+      <drawSize>4</drawSize>
+      <drawOffset>(0,0,0)</drawOffset>
+    </graphicData>
+    <skyfaller>
+      <movementType>Accelerate</movementType>
+      <hitRoof>false</hitRoof>
+      <angleCurve>
+        <points>
+          <li>(0,-30)</li>
+          <li>(1,-30)</li>
+        </points>
+      </angleCurve>
+      <speed>1.5</speed>
+      <ticksToImpactRange>420~460</ticksToImpactRange>
+      <fadeInTicks>60</fadeInTicks>
+      <cameraShake>2</cameraShake>
+      <shadow>Things/Skyfaller/SkyfallerShadowDropPod</shadow>
+      <shadowSize>(0, 0)</shadowSize>
+      <anticipationSound>Bombardment_PreImpact</anticipationSound>
+      <anticipationSoundTicks>100</anticipationSoundTicks>
+      <impactSound>DropPod_Impact</impactSound>
+      <motesPerCell>0</motesPerCell>
+      <explosionRadius>5.6</explosionRadius>
+      <explosionDamage>Bomb</explosionDamage>
+      <rotateGraphicTowardsDirection>true</rotateGraphicTowardsDirection>
+    </skyfaller>
+  </ThingDef>
+
+  <ThingDef ParentName="Milira_ChurchBombardmentI">
+    <defName>Milira_ChurchBombardmentII</defName>
+    <skyfaller>
+      <ticksToImpactRange>800~840</ticksToImpactRange>
+    </skyfaller>
+  </ThingDef>
+
+  <ThingDef ParentName="Milira_ChurchBombardmentI">
+    <defName>Milira_ChurchBombardmentIII</defName>
+    <skyfaller>
+      <ticksToImpactRange>1500~1540</ticksToImpactRange>
+    </skyfaller>
+  </ThingDef>
+
+
+</Defs>

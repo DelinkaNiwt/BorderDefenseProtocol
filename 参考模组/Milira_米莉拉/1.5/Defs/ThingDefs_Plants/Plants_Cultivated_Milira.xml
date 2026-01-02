@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="PlantBase">
+    <defName>Milira_SunLightFlower</defName>
+    <label>sun bloom</label>
+    <description>A crop that draws special energy from sunlight and can bear fruit with a high energy density. Widely distributed across the skycity of Milira, thriving in the lands closest to the sunlight.</description>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Nutrition>0.2</Nutrition>
+    </statBases>
+    <graphicData>
+      <texPath>Milira/Plant/Milira_SunLightFlower</texPath>
+      <graphicClass>Graphic_Random</graphicClass>
+    </graphicData>
+    <selectable>true</selectable>
+    <pathCost>25</pathCost>
+    <ingestible />
+    <plant>
+      <fertilityMin>0.50</fertilityMin>
+      <fertilitySensitivity>0.5</fertilitySensitivity>
+      <growDays>14</growDays>
+      <dieIfLeafless>true</dieIfLeafless>
+      <harvestTag>Standard</harvestTag>
+      <harvestAfterGrowth>0.2</harvestAfterGrowth>
+      <harvestFailable>false</harvestFailable>
+      <!-- <neverBlightable>true</neverBlightable> -->
+      <dieIfNoSunlight>false</dieIfNoSunlight>
+      <maxMeshCount>4</maxMeshCount>
+      <harvestedThingDef>Milira_SunLightFruit</harvestedThingDef>
+      <harvestYield>3</harvestYield>
+      <sowTags>
+        <li>Ground</li>
+        <li>Hydroponic</li>
+      </sowTags>
+      <sowMinSkill>8</sowMinSkill>
+      <topWindExposure>0.1</topWindExposure>
+      <immatureGraphicPath>Milira/Plant/Milira_SunLightFlowerImmature</immatureGraphicPath>
+      <visualSizeRange>0.5~1.0</visualSizeRange>
+      <wildOrder>2</wildOrder>
+      <sowResearchPrerequisites>
+        <li>Milira_SunLightDaisyPlanting</li>
+      </sowResearchPrerequisites>
+    </plant>
+    <comps>
+      <li Class="CompProperties_Glower">
+        <glowRadius>1.5</glowRadius>
+        <glowColor>(216,215,143,0)</glowColor>
+      </li>
+    </comps>
+  </ThingDef>
+
+
+
+</Defs>

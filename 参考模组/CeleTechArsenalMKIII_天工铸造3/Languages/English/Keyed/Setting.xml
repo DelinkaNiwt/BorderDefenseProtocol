@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <Setting_CMC>Setting[Most of them don't require a restart of the game to take effect]</Setting_CMC>
+  <Setting1_CMC>Non-player characters are in possession of CeleTech heavy weapons</Setting1_CMC>
+	  <Setting3_CMC>Non-player characters are in possession of CeleTech conventional light weapons</Setting3_CMC>
+	  <Setting_label1_CMC>Game numerical multiplier</Setting_label1_CMC>
+	    <Setting5_CMC>Bullet damage multiplier</Setting5_CMC>
+		<Setting5_1_CMC>Bullet damage</Setting5_1_CMC>
+		<Setting6_CMC>Bullet armor piercing multiplier</Setting6_CMC>
+		<Setting6_1_CMC>Bullet armor piercing</Setting6_1_CMC>
+		<Setting7_CMC>Bullet explosion radius multiplier</Setting7_CMC>
+		<Setting7_1_CMC>Bullet explosion radius</Setting7_1_CMC>
+		
+		<Setting8_CMC>Weapon cooldown piercing multiplier[The game needs to be restarted]</Setting8_CMC>
+		<Setting8_1_CMC>Weapon cooldown piercing[The game needs to be restarted]</Setting8_1_CMC>
+		
+		<Setting9_CMC>Weapon warmupTime multiplier</Setting9_CMC>
+		<Setting9_1_CMC>Weapon warmupTime</Setting9_1_CMC>
+		
+		
+<Setting_D1_CMC>Non-player characters are in possession of CeleTech heavy weapons</Setting_D1_CMC>
+<Setting_D3_CMC>Non-player characters are in possession of CeleTech conventional light weapons</Setting_D3_CMC>
+
+</LanguageData>
+

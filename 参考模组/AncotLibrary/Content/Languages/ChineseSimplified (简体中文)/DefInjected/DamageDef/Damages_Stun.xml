@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: stun -->
+  <Ancot_StunExceptInstigator.label>眩晕</Ancot_StunExceptInstigator.label>
+  <!-- EN: {0} has been stunned to death. -->
+  <Ancot_StunExceptInstigator.deathMessage>{0}被眩晕致死。</Ancot_StunExceptInstigator.deathMessage>
+  
+  <!-- EN: stun -->
+  <Ancot_StunExceptInstigatorFaction.label>眩晕</Ancot_StunExceptInstigatorFaction.label>
+  <!-- EN: {0} has been stunned to death. -->
+  <Ancot_StunExceptInstigatorFaction.deathMessage>{0}被眩晕致死。</Ancot_StunExceptInstigatorFaction.deathMessage>
+  
+</LanguageData>

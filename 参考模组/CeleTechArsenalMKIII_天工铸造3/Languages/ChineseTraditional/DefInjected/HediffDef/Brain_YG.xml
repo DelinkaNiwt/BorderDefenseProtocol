@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: <color=#1DD5EE><i>Yao Guang combat chip</i></color> -->
+  <YaoGuang.label>【搖光】戰術晶元</YaoGuang.label>
+  <!-- EN: Under the chip's function, users can stimulate psychic abilities and achieve permanent optical invisibility, but will sacrifice some consciousness and attributes. The chip will be disrupted by EMP, causing the user to faint. -->
+  <YaoGuang.description>在該晶片的作用下，使用者能夠激發精神能力並實現永久的光學隱形，但會犧牲一些意識和屬性。該晶片會受到EMP乾擾，導致使用者昏迷。</YaoGuang.description>
+  <!-- EN: a Yao Guang combat chip -->
+  <YaoGuang.labelNoun>搖光戰術晶元</YaoGuang.labelNoun>
+  
+</LanguageData>

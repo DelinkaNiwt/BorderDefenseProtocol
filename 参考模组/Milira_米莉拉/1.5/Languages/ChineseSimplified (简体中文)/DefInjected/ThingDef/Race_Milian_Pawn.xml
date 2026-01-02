@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Pawn I -->
+  <Milian_Mechanoid_PawnI.label>士兵I型</Milian_Mechanoid_PawnI.label>
+  <!-- EN: Milian the pawn I type.\n\nCan equipe with range weapon. -->
+  <Milian_Mechanoid_PawnI.description>型号为士兵I型的米莉安。\n\n可以装备远程武器。</Milian_Mechanoid_PawnI.description>
+  <!-- EN: left fist -->
+  <Milian_Mechanoid_PawnI.tools.left_fist.label>左拳</Milian_Mechanoid_PawnI.tools.left_fist.label>
+  <!-- EN: right fist -->
+  <Milian_Mechanoid_PawnI.tools.right_fist.label>右拳</Milian_Mechanoid_PawnI.tools.right_fist.label>
+  
+  <!-- EN: Pawn II -->
+  <Milian_Mechanoid_PawnII.label>士兵II型</Milian_Mechanoid_PawnII.label>
+  <!-- EN: Milian the pawn II type.\n\nCan equipe with small combat drone.\n\nCan equipe with range weapon. -->
+  <Milian_Mechanoid_PawnII.description>型号为士兵II型的米莉安。\n可以装备小型浮游炮。\n\n可以装备远程武器。</Milian_Mechanoid_PawnII.description>
+  <!-- EN: left fist -->
+  <Milian_Mechanoid_PawnII.tools.left_fist.label>左拳</Milian_Mechanoid_PawnII.tools.left_fist.label>
+  <!-- EN: right fist -->
+  <Milian_Mechanoid_PawnII.tools.right_fist.label>右拳</Milian_Mechanoid_PawnII.tools.right_fist.label>
+  
+  <!-- EN: Guard -->
+  <Milian_Mechanoid_PawnIII.label>禁卫军</Milian_Mechanoid_PawnIII.label>
+  <!-- EN: Milian the guard type.\n\nCan equipe with range weapon. -->
+  <Milian_Mechanoid_PawnIII.description>型号为禁卫军的米莉安。\n\n可以装备远程武器。</Milian_Mechanoid_PawnIII.description>
+  <!-- EN: left fist -->
+  <Milian_Mechanoid_PawnIII.tools.left_fist.label>左拳</Milian_Mechanoid_PawnIII.tools.left_fist.label>
+  <!-- EN: right fist -->
+  <Milian_Mechanoid_PawnIII.tools.right_fist.label>右拳</Milian_Mechanoid_PawnIII.tools.right_fist.label>
+  
+  <!-- EN: Captain -->
+  <Milian_Mechanoid_PawnIV.label>百夫长</Milian_Mechanoid_PawnIV.label>
+  <!-- EN: Milian the captain type.\n\nCan equipe with small or large combat drone.\n\nCan equipe with range weapon. -->
+  <Milian_Mechanoid_PawnIV.description>型号为百夫长的米莉安。\n可以装备小型或大型浮游炮。\n\n可以装备远程武器。</Milian_Mechanoid_PawnIV.description>
+  <!-- EN: left fist -->
+  <Milian_Mechanoid_PawnIV.tools.left_fist.label>左拳</Milian_Mechanoid_PawnIV.tools.left_fist.label>
+  <!-- EN: right fist -->
+  <Milian_Mechanoid_PawnIV.tools.right_fist.label>右拳</Milian_Mechanoid_PawnIV.tools.right_fist.label>
+  
+</LanguageData>

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+  <Milira.HandOverFallenAngel>hand over {0}</Milira.HandOverFallenAngel>
+  <Milira.HandOverFallenAngelDesc>hand over {0} from the caravan to the milira ground survey station.</Milira.HandOverFallenAngelDesc>
+  
+  
+  <Milira.SwitchFly>flight status</Milira.SwitchFly>
+  <Milira.SwitchFlyDesc>When drafted, {0} can switch to flight mode. While in flight, movement speed is greatly increased and terrain penalties are ignored. Melee and ranged dodge rates are improved, but shooting accuracy is slightly reduced.\n\nMaintaining flight mode consumes additional hunger. Flight cannot be sustained if hunger falls below 10%.</Milira.SwitchFlyDesc>
+  <Milira.SwitchFly_Never>never</Milira.SwitchFly_Never>
+  <Milira.SwitchFly_OnlyForMove>move only</Milira.SwitchFly_OnlyForMove>
+  <Milira.SwitchFly_Always>always</Milira.SwitchFly_Always>
+
+  <Milira.SwitchFly_NeverDesc>current mode: never</Milira.SwitchFly_NeverDesc>
+  <Milira.SwitchFly_OnlyForMoveDesc>current mode: move only</Milira.SwitchFly_OnlyForMoveDesc>
+  <Milira.SwitchFly_AlwaysDesc>current mode: always</Milira.SwitchFly_AlwaysDesc>
+
+</LanguageData>

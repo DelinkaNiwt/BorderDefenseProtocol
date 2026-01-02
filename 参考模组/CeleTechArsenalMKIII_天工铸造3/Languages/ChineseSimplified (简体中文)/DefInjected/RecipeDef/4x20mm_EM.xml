@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: make CMC_4x20mmAmmo  x500 -->
+  <MakeAmmo_CMC_4x20mmAmmo_Regular.label>TODO</MakeAmmo_CMC_4x20mmAmmo_Regular.label>
+  <!-- EN: make 500 CMC_4x20mmAmmo. -->
+  <MakeAmmo_CMC_4x20mmAmmo_Regular.description>TODO</MakeAmmo_CMC_4x20mmAmmo_Regular.description>
+  <!-- EN: making CMC_4x20mmAmmo. -->
+  <MakeAmmo_CMC_4x20mmAmmo_Regular.jobString>TODO</MakeAmmo_CMC_4x20mmAmmo_Regular.jobString>
+  
+</LanguageData>

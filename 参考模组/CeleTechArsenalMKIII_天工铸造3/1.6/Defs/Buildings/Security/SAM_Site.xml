@@ -1,0 +1,183 @@
+<Defs>
+	<ThingDef ParentName="AutocannonTurret">
+    <defName>CMC_SAML</defName>
+    <label>SAM turret</label>
+	<thingClass>TOT_DLL_test.Building_CMCTurretGun_AAAS</thingClass>
+    <description>.</description>
+    <uiIconPath>Things/Buildings/CMC_SAM_UI</uiIconPath>
+	<graphicData>
+        <texPath>Things/Buildings/largebase_SAM</texPath>
+        <graphicClass>Graphic_Single</graphicClass>
+        <drawSize>(5.1,5.1)</drawSize>
+    </graphicData>
+	<size>(3,3)</size>
+	<drawerType>MapMeshAndRealTime</drawerType>
+    <altitudeLayer>Building</altitudeLayer>
+    <stealable>false</stealable>
+    <rotatable>true</rotatable>
+	<tickerType>Normal</tickerType>
+    <techLevel>Spacer</techLevel>
+    <statBases>
+	  <MaxHitPoints>4000</MaxHitPoints>
+	  <Flammability>1.5</Flammability>
+      <ShootingAccuracyTurret>0.2</ShootingAccuracyTurret>
+	  <WorkToBuild>8000</WorkToBuild>
+    </statBases>
+	<killedLeavings>
+      <ChunkSlagSteel>2</ChunkSlagSteel>
+      <Steel>30</Steel>
+      <Plasteel>10</Plasteel>
+    </killedLeavings>
+    <costList>
+      <Steel>1200</Steel>
+	  <Plasteel>320</Plasteel>
+      <ComponentIndustrial>8</ComponentIndustrial>
+	  <ComponentSpacer>10</ComponentSpacer>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>0</wickTicks>
+        <explosiveRadius>9.9</explosiveRadius>
+		<explosiveExpandPerFuel>2</explosiveExpandPerFuel>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0</chanceNeverExplodeFromDamage>
+      </li>
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>3300</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Refuelable">
+        <fuelLabel>Shots until barrel change</fuelLabel>
+        <fuelGizmoLabel>Ammo</fuelGizmoLabel>
+        <outOfFuelMessage>Needs missile</outOfFuelMessage>
+        <fuelFilter><thingDefs><li>CMC_MissileShell</li></thingDefs></fuelFilter>
+        <fuelCapacity>96</fuelCapacity>
+        <fuelMultiplier>1</fuelMultiplier>
+        <initialFuelPercent>1</initialFuelPercent>
+        <autoRefuelPercent>0.99</autoRefuelPercent>
+        <showFuelGizmo>true</showFuelGizmo>
+        <minimumFueledThreshold>1</minimumFueledThreshold>
+        <factorByDifficulty>false</factorByDifficulty>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelIconPath>UI/Overlays/Barrel</fuelIconPath>
+      </li>
+    </comps>
+	<damageMultipliers>
+      <li>
+        <damageDef>Bomb</damageDef>
+        <multiplier>1.2</multiplier>
+      </li>
+      <li>
+        <damageDef>Bullet</damageDef>
+        <multiplier>0.8</multiplier>
+      </li>
+	  <li>
+        <damageDef>EMP</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+	  <li>
+        <damageDef>Stun</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <building>
+      <turretGunDef>CMC_Gun_SAML</turretGunDef>
+      <turretBurstCooldownTime>2</turretBurstCooldownTime>
+	  <turretTopDrawSize>5</turretTopDrawSize>
+    </building>
+    <researchPrerequisites>
+      <li>CMC_Heavy_II</li>
+	  <li>CMCGunTurrets</li>
+    </researchPrerequisites>
+	<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <placeWorkers Inherit="False">
+        <li>PlaceWorker_TurretTop</li>
+    </placeWorkers>
+	<modExtensions>
+      <li Class="TOT_DLL_test.TurretExtension_CMC">
+        <rotationSpeed>3</rotationSpeed>
+      </li>
+	  <li Class="TOT_DLL_test.DefExtensions"/>
+    </modExtensions>
+	<designationCategory>CMC_DefensenProduction</designationCategory>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>CMC_Gun_SAML</defName>
+    <label>Type-CX Missile launcher</label>
+    <description>A self-loading missile launcher designed to attach to a turret.</description>
+    <graphicData>
+      <texPath>Things/Buildings/CMC_SAMTop</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(5,5)</drawSize>
+    </graphicData>
+    <statBases>
+      <AccuracyTouch>1</AccuracyTouch>
+      <AccuracyShort>1</AccuracyShort>
+      <AccuracyMedium>1</AccuracyMedium>
+      <AccuracyLong>1</AccuracyLong>
+      <RangedWeapon_Cooldown>2.25</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>400</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+	        <weaponTags Inherit = "False">
+			<li>Weapon_CMCf</li>
+		</weaponTags>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>CMC_SAM_Proj</defaultProjectile>
+        <range>150</range>
+		<forcedMissRadius>0.1</forcedMissRadius>
+        <burstShotCount>2</burstShotCount>
+		<ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+		<requireLineOfSight>false</requireLineOfSight>
+        <soundCast>Sound_rocketlauncher_heavy</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>74</muzzleFlashScale>
+        <consumeFuelPerShot>1</consumeFuelPerShot>
+		<targetParams>
+          <canTargetPawns>true</canTargetPawns>
+          <canTargetLocations>true</canTargetLocations>
+          <canTargetBuildings>true</canTargetBuildings>
+        </targetParams>
+      </li>
+    </verbs>
+  </ThingDef>
+  <ThingDef ParentName="BaseBullet">
+        <defName>CMC_SAM_Proj</defName>
+        <label>HJ-53</label>
+        <graphicData>
+            <texPath>Things/CMC_Void</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <drawSize>(1.8, 1.8)</drawSize>
+        </graphicData>
+        <thingClass>TOT_DLL_test.Projectile_PoiMissile_Interceptor</thingClass>
+        <projectile>
+            <damageDef>Bomb</damageDef>
+            <speed>140</speed>
+            <explosionRadius>1</explosionRadius>
+            <explosionEffect>CMC_Bomb</explosionEffect>
+            <screenShakeFactor>0</screenShakeFactor>
+            <damageAmountBase>10</damageAmountBase>
+            <flyOverhead>true</flyOverhead>
+            <armorPenetrationBase>0.3</armorPenetrationBase>
+            <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+            <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+            <soundAmbient>MortarRound_Ambient</soundAmbient>
+            <shadowSize>0</shadowSize>
+        </projectile>
+		<comps>
+            <li Class="TOT_DLL_test.CompProperties_AnimatedDraw_Projectile_Inregular">
+                <texturePath>Things/Projectile/CMC_ATGM_Light</texturePath>
+                <totalFrames>12</totalFrames>
+                <ticksPerFrame>3</ticksPerFrame>
+                <DrawSize>(0.35,1.35)</DrawSize>
+            </li>
+        </comps>
+    </ThingDef>
+</Defs>

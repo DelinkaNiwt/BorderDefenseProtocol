@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<!-- === ThingDef
+To add automatic blink to specific races, animals or mechanoids, insert the following into each ThingDef’s comps section -->
+
+<ThingDef ParentName="LightMechanoid">
+  <defName>Mech_JumpLifter</defName>
+  <label>jump lifter</label>
+    …  
+  
+  <comps>
+    <li Class="AutoBlink.CompProperties_AutoBlink">
+      <!-- ====== Basic settings for AutoBlink ====== -->
+        <!-- Minimum distance required to trigger blink (initial default).
+                If the target is closer than this, no blink will occur.
+                This initial value is adjustable via a gizmo slider in-game. -->
+        <minDistanceToBlink>10</minDistanceToBlink>
+
+        <!-- Maximum blink distance. -->
+        <maxDistanceToBlink>60</maxDistanceToBlink>
+
+        <!-- Cooldown between blinks, in ticks -->
+        <blinkIntervalTicks>180</blinkIntervalTicks>
+
+        <!-- Optional: Delay (in ticks) after determining blink eligibility before executing the blink.
+                If set to 0, blinking happens as soon as possible, but the check runs every 12 ticks for performance reasons,
+                so there will be a small inherent delay. -->
+        <delayAfterEligibleTicks>60</delayAfterEligibleTicks>
+
+        <!-- Optional: How many cells before the target to blink from.
+                In this example, blink 3 cells before the destination, then walk the final 3 cells.
+                If set to 0, blink directly to the destination cell. -->
+        <cellsBeforeTarget>3</cellsBeforeTarget>
+
+        <!-- Optional: Stun duration after blink, in ticks -->
+        <postBlinkStanceTicks>10</postBlinkStanceTicks>
+
+        <!-- Optional: Initial value for auto-blink while drafted or idle.
+                This is the initial value and can be changed from the gizmo detail window unless drawGizmo is set to false. -->
+        <defaultAutoBlinkDrafted>false</defaultAutoBlinkDrafted>
+        <defaultAutoBlinkIdle>true</defaultAutoBlinkIdle>
+
+        <!-- Optional: Initial value for Jump As Far As Possible.
+                This is the initial value and can be changed from the gizmo detail window unless drawGizmo is set to false.-->
+        <defaultJumpAsFarAsPossible>true</defaultJumpAsFarAsPossible>
+
+        <!-- Optional: If false, non-player faction pawns can use AutoBlink. Defaults to true if not specified -->
+        <playerFactionOnly>false</playerFactionOnly>
+
+        <!-- Optional: List of jobs that allow auto-blink.
+                When this list is used, auto-blink only triggers while performing listed jobs.
+                Use either this or excludedJobDefs, not both. Using both is not an error but unnecessary. -->
+        <allowedJobDefs>
+          <li>AttackMelee</li>
+        </allowedJobDefs>
+
+        <!-- Optional: List of jobs that disable auto-blink.
+                Auto-blink will not trigger while performing any of the jobs listed here. -->
+        <excludedJobDefs>
+          <li>GotoWander</li>
+          <li>Carried</li>
+        </excludedJobDefs>
+
+      <!-- ====== Gizmo settings ====== -->
+        <!-- If false, the gizmo button will be hidden.
+                Also disables interaction via multi-selection, and settings will be locked to what's defined in the Def. -->
+        <drawGizmo>true</drawGizmo>
+
+        <!-- Optional: Label displayed on the gizmo button. If not set, AutoBlink.AutoBlink_Label will be used -->
+        <gizmoLabel>Teleport</gizmoLabel>
+        <!-- Optional: Path to the gizmo button icon -->
+        <gizmoIconPath>UI/Commands/AutoBlink</gizmoIconPath>
+
+      <!-- ====== Sound and visual effect settings ====== -->
+        <!-- Effects played on the origin cell before blinking -->
+        <!-- SoundDefs -->
+        <preBlinkSoundDefs>
+          <li>AutoBlink_Skip_Small</li>
+        </preBlinkSoundDefs>
+        <!-- MoteDefs -->
+        <preBlinkMoteDefs>
+          <!-- leave empty if none -->
+        </preBlinkMoteDefs>
+        <!-- EffecterDefs -->
+        <preBlinkEffecterDefs>
+          <li>Skip_Entry</li>
+        </preBlinkEffecterDefs>
+
+        <!-- Effects played on the destination cell after blinking -->
+        <!-- SoundDefs -->
+        <postBlinkSoundDefs>
+          <li>AutoBlink_Skip_Exit_Small</li>
+        </postBlinkSoundDefs>
+        <!-- MoteDefs -->
+        <postBlinkMoteDefs>
+        </postBlinkMoteDefs>
+        <!-- EffecterDefs -->
+        <postBlinkEffecterDefs>
+          <li>Skip_ExitNoDelay</li>
+        </postBlinkEffecterDefs>
+      
+
+    </li>
+  </comps>
+</ThingDef>
+
+
+
+<!-- === HediffDef
+Use<hediffClass>HediffWithComps</hediffClass> and add the same CompProperties under <comps>, but reference the Hediff-specific class: -->
+
+<HediffDef>
+  <hediffClass>HediffWithComps</hediffClass>
+  <defName>Hediff_AutoBlink</defName>
+  <label>AutoBlinkHediff</label>
+  <description>uwu.</description>
+  <isBad>false</isBad>
+
+  <comps>
+    <li Class="AutoBlink.HediffCompProperties_AutoBlink">
+      <delayAfterEligibleTicks>60</delayAfterEligibleTicks>
+      <cellsBeforeTarget>3</cellsBeforeTarget>
+      <blinkIntervalTicks>180</blinkIntervalTicks>
+        ~~~~ other settings ~~~~
+    </li>
+  </comps>
+</HediffDef>
+<!-- All of the same fields used in CompProperties_AutoBlink apply here unchanged. -->
+
+
+<!-- === GeneDef
+Use<geneClass>AutoBlink.Gene_AutoBlink</geneClass> and put the properties under <modExtensions> instead of <comps>, referencing the gene extension class: -->
+
+<GeneDef>
+  <defName>Gene_AutoBlink</defName>
+  <geneClass>AutoBlink.Gene_AutoBlink</geneClass>
+  <label>AutoBlinkGene</label>
+  <labelShortAdj>AutoBlinkGene</labelShortAdj>
+  <displayCategory>Ability</displayCategory>
+  <description>uwu.</description>
+  <iconPath>UI/Commands/AutoBlink</iconPath>
+  <marketValueFactor>1</marketValueFactor>
+  <biostatCpx>1</biostatCpx>
+  <biostatMet>1</biostatMet>
+
+  <modExtensions>
+    <li Class="AutoBlink.GeneExtension_AutoBlink">
+      <delayAfterEligibleTicks>60</delayAfterEligibleTicks>
+      <cellsBeforeTarget>3</cellsBeforeTarget>
+      <blinkIntervalTicks>180</blinkIntervalTicks>
+        ~~~~ other settings ~~~~
+    </li>
+  </modExtensions>
+</GeneDef>
+<!-- Again, you can reuse all the same settings from CompProperties_AutoBlink. -->

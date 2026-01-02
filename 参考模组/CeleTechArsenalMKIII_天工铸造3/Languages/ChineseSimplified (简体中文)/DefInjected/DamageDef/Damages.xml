@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: anti-entropy bullet -->
+  <AntiEntropyBullet.label>反熵射弹</AntiEntropyBullet.label>
+  <!-- EN: {0} has been has been shot to death. -->
+  <AntiEntropyBullet.deathMessage>{0}被反熵射弹射杀</AntiEntropyBullet.deathMessage>
+  
+  <!-- EN: bomb -->
+  <Bomb_Laser.label>激光</Bomb_Laser.label>
+  <!-- EN: {0} has died in an explosion. -->
+  <Bomb_Laser.deathMessage>{0}被激光抹除</Bomb_Laser.deathMessage>
+  
+  <!-- EN: bomb -->
+  <Bomb_Laser_Red.label>激光</Bomb_Laser_Red.label>
+  <!-- EN: {0} has died in an explosion. -->
+  <Bomb_Laser_Red.deathMessage>激光</Bomb_Laser_Red.deathMessage>
+  
+  <!-- EN: bullet -->
+  <BulletAoE_Void.label>激光</BulletAoE_Void.label>
+  <!-- EN: {0} has been shot to death. -->
+  <BulletAoE_Void.deathMessage>{0}被激光抹除</BulletAoE_Void.deathMessage>
+  
+  <!-- EN: mechanite bullet(anesthetic) -->
+  <CMC_ATB.label>纳米麻醉子弹</CMC_ATB.label>
+  <!-- EN: {0} has been shot to death. -->
+  <CMC_ATB.deathMessage>{0}被纳米麻醉子弹射杀</CMC_ATB.deathMessage>
+  
+  <!-- EN: blunt -->
+  <CMC_Blunt.label>钝头弹</CMC_Blunt.label>
+  <!-- EN: {0} has been beaten to death. -->
+  <CMC_Blunt.deathMessage>{0}被钝头弹射杀</CMC_Blunt.deathMessage>
+  
+  <!-- EN: bomb(air-burst) -->
+  <CMC_Bomb_AA.label>空爆弹药</CMC_Bomb_AA.label>
+  <!-- EN: {0} has died in an explosion. -->
+  <CMC_Bomb_AA.deathMessage>{0}被空爆弹药炸死</CMC_Bomb_AA.deathMessage>
+  
+  <!-- EN: mechanite bullet(Lethal) -->
+  <CMC_LethalBullet.label>TODO</CMC_LethalBullet.label>
+  <!-- EN: {0} has been shot to death. -->
+  <CMC_LethalBullet.deathMessage>TODO</CMC_LethalBullet.deathMessage>
+  
+  <!-- EN: bomb -->
+  <CMC_ModBomb.label>炸伤</CMC_ModBomb.label>
+  <!-- EN: {0} has died in an explosion. -->
+  <CMC_ModBomb.deathMessage>{0}被炸死了</CMC_ModBomb.deathMessage>
+  
+  <!-- EN: mechanite bullet(lethal) -->
+  <CMC_NTB.label>神经毒素子弹</CMC_NTB.label>
+  <!-- EN: {0} has been shot to death. -->
+  <CMC_NTB.deathMessage>{0}被神经毒素子弹射杀</CMC_NTB.deathMessage>
+  
+  <!-- EN: flame -->
+  <CMC_Vaporize_Plasma.label>TODO</CMC_Vaporize_Plasma.label>
+  <!-- EN: {0} has burned to death. -->
+  <CMC_Vaporize_Plasma.deathMessage>TODO</CMC_Vaporize_Plasma.deathMessage>
+  
+  <!-- EN: flame -->
+  <CMC_Vaporize_Small.label>蒸发</CMC_Vaporize_Small.label>
+  <!-- EN: {0} has burned to death. -->
+  <CMC_Vaporize_Small.deathMessage>{0}被高温蒸发</CMC_Vaporize_Small.deathMessage>
+  
+  <!-- EN: API bullet -->
+  <IgnisBullet.label>TODO</IgnisBullet.label>
+  <!-- EN: {0} has been has been shot to death. -->
+  <IgnisBullet.deathMessage>TODO</IgnisBullet.deathMessage>
+  
+  <!-- EN: inferno beam -->
+  <InfernoBeam.label>射线</InfernoBeam.label>
+  <!-- EN: {0} has been vaporized by laser beam. -->
+  <InfernoBeam.deathMessage>{0}被射线蒸发</InfernoBeam.deathMessage>
+  
+  <!-- EN: inferno beam -->
+  <InfernoBeamPlus.label>TODO</InfernoBeamPlus.label>
+  <!-- EN: {0} has been vaporized by laser beam. -->
+  <InfernoBeamPlus.deathMessage>TODO</InfernoBeamPlus.deathMessage>
+  
+  <!-- EN: neutron bomb -->
+  <NeutronBomb.label>中子弹</NeutronBomb.label>
+  <!-- EN: {0} has died in an explosion. -->
+  <NeutronBomb.deathMessage>{0}被中子弹炸死</NeutronBomb.deathMessage>
+  
+  <!-- EN: plasma bomb -->
+  <PlasmaBomb.label>TODO</PlasmaBomb.label>
+  <!-- EN: {0} has died in an explosion. -->
+  <PlasmaBomb.deathMessage>TODO</PlasmaBomb.deathMessage>
+  
+  <!-- EN: radiation -->
+  <Radiation.label>辐射</Radiation.label>
+  <!-- EN: {0} has degraded to death. -->
+  <Radiation.deathMessage>{0}被辐射杀死</Radiation.deathMessage>
+  
+</LanguageData>

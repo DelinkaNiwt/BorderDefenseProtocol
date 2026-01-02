@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: reinforced bunker -->
+  <CMC_ReinforcedBunker.label>“玄武·淵甲”機槍地堡</CMC_ReinforcedBunker.label>
+  <!-- EN: A self-powered underground HMG bunker reinforced with neutronium armor, enable it to resist firepower that would turn buildings made of any other materials into ashes. -->
+  <CMC_ReinforcedBunker.description>重型裝甲碉堡，表層覆蓋充能中子鍍層，可抵禦等離子炮等高能直射攻擊。當生命值低於25%或手動停火時，碉堡會降入地下維修，每10秒消耗50鋼鐵和4倍電力，修復100點生命值。雖然基礎攻擊力較低且命中率不佳，但外層裝甲能有效抵擋直射火力，面對大規模攻勢仍能保持穩固防禦。。</CMC_ReinforcedBunker.description>
+  <CMC_ReinforcedBunker.comps.CompRefuelable.fuelGizmoLabel>材料儲備</CMC_ReinforcedBunker.comps.CompRefuelable.fuelGizmoLabel>
+  <CMC_ReinforcedBunker.comps.CompRefuelable.fuelLabel>剩餘射擊數</CMC_ReinforcedBunker.comps.CompRefuelable.fuelLabel>
+  <CMC_ReinforcedBunker.comps.CompRefuelable.outOfFuelMessage>需要更換槍管</CMC_ReinforcedBunker.comps.CompRefuelable.outOfFuelMessage>
+  
+  <Gun_BunkerHMG.label>自動電荷重機槍（隱藏式）</Gun_BunkerHMG.label>
+  <Gun_BunkerHMG.description>裝配於地堡下的自動電荷重機槍，輕步兵的噩夢。</Gun_BunkerHMG.description>
+  <Gun_BunkerHMG.verbs.Verb_Shoot.label>自動電荷重機槍</Gun_BunkerHMG.verbs.Verb_Shoot.label>
+  
+</LanguageData>

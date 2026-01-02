@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <CTBladeBinded.label>同步完畢：唐刀</CTBladeBinded.label>
+  <!-- EN: cells degrades due to radiation. -->
+  <CTBladeBinded.description>綁定的武器將為使用者提供特殊的戰技。</CTBladeBinded.description>
+  <NSwordBinded.label>同步完畢：漢劍</NSwordBinded.label>
+  <!-- EN: cells degrades due to radiation. -->
+  <NSwordBinded.description>綁定的武器將為使用者提供特殊的戰技。</NSwordBinded.description>
+  
+  <!-- EN: radiation degardation -->
+  <DD.label>輻射</DD.label>
+  <!-- EN: Degardation caused by neutron radiation. -->
+  <DD.description>目標正受到輻射</DD.description>
+  <!-- EN: {0} in the {1} -->
+  <DD.labelNounPretty>輻射</DD.labelNounPretty>
+  
+  <!-- EN: radiation degradation -->
+  <Degradation.label>輻射</Degradation.label>
+  <!-- EN: cells degrades due to radiation. -->
+  <Degradation.description>受害者的細胞受輻射影響死亡。</Degradation.description>
+  
+  <!-- EN: frost bite -->
+  <FrostBite.label>噬骨</FrostBite.label>
+  <!-- EN: Ionized molecules cause body to catch fire. -->
+  <FrostBite.description>反熵彈命中使目標受到持續傷害</FrostBite.description>
+  
+  <CMC_HealingSE.label>治療副作用</CMC_HealingSE.label>
+  <!-- EN: Ionized molecules cause body to catch fire. -->
+  <CMC_HealingSE.description>納米微械治療帶來的輕微副作用。</CMC_HealingSE.description>
+  
+  <!-- EN: plasma burn -->
+  <PlasmaBurn.label>焚身</PlasmaBurn.label>
+  <!-- EN: Ionized molecules cause body to catch fire. -->
+  <PlasmaBurn.description>周圍等離子態的粒子導致持續性的灼燒</PlasmaBurn.description>
+  
+  <!-- EN: mechanites anesthesia -->
+  <SMAnesthetic.label>納米微械麻醉</SMAnesthetic.label>
+  <!-- EN: Anesthetic renders creatures unconscious. -->
+  <SMAnesthetic.description>子彈註入的納米微械導致神經性的麻醉</SMAnesthetic.description>
+  <!-- EN: sedated -->
+  <SMAnesthetic.stages.sedated.label>麻醉</SMAnesthetic.stages.sedated.label>
+  <SMAnesthetic.stages.sedative_kicking_in.label>被麻醉中</SMAnesthetic.stages.sedative_kicking_in.label>
+  
+  <!-- EN: weakening -->
+  <weakening.label>裂解</weakening.label>
+  <!-- EN: Weakened Intermolecular forces causes pawns to take more damage. -->
+  <weakening.description>分子間力被削弱，導致目標受到更多傷害。</weakening.description>
+  <!-- EN: weakening -->
+  <weakening.labelNoun>裂解</weakening.labelNoun>
+  
+</LanguageData>

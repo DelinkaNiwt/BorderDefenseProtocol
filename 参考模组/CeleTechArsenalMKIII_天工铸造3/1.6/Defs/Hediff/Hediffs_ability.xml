@@ -1,0 +1,99 @@
+<Defs>
+	<HediffDef>
+    <defName>CMC_RangedBuff</defName>
+    <label>TX-chip boost activated</label>
+    <description>The overloaded combat chip is rendering the user completely insensitive to pain and significantly enhancing its combat abilities. However, it also makes them more susceptible to injury.</description>
+	<hediffClass>HediffWithComps</hediffClass>
+    <stages>
+      <li>
+        <statOffsets>
+          <ShootingAccuracyPawn>3</ShootingAccuracyPawn>
+          <AimingDelayFactor>-0.33</AimingDelayFactor>
+		  <RangedCooldownFactor>-0.67</RangedCooldownFactor>
+		  <IncomingDamageFactor>1.5</IncomingDamageFactor>
+        </statOffsets>
+		<painFactor>0</painFactor>
+      </li>
+    </stages>
+	<comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>7200~7200</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+	  <li Class="HediffCompProperties_DisappearsOnDeath"/>
+      <li Class="TOT_DLL_test.HediffCompProperties_BoostedEffect">
+		<R>255</R>
+		<G>255</G>
+		<B>255</B>
+	  </li>
+    </comps>
+	</HediffDef>
+	
+	<HediffDef>
+	<hediffClass>HediffWithComps</hediffClass>
+    <defName>CMC_MeleeBuff</defName>
+    <label>YH-chip boost activated</label>
+    <description>The overloaded combat chip is rendering the user completely insensitive to pain and significantly enhancing its combat abilities. However, it also makes them more susceptible to injury.</description>
+    <stages>
+      <li>
+        <statOffsets>
+          <MeleeHitChance>100</MeleeHitChance>
+          <MeleeDodgeChance>100</MeleeDodgeChance>
+		  <IncomingDamageFactor>1.5</IncomingDamageFactor>
+        </statOffsets>
+        <painFactor>0</painFactor>
+      </li>
+    </stages>
+	<comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>7200~7200</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/>
+	  <li Class="TOT_DLL_test.HediffCompProperties_BoostedEffect"/>
+    </comps>
+	</HediffDef>
+	
+    <HediffDef>
+	<hediffClass>HediffWithComps</hediffClass>
+    <defName>CMC_NsBuff</defName>
+    <label>TianShu chip nanite shield activated</label>
+    <description>the chip forms a shield around the user.</description>
+    <stages>
+      <li>
+        <statFactors>
+          <IncomingDamageFactor>0</IncomingDamageFactor>
+        </statFactors>
+      </li>
+    </stages>
+	<comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>1800~1800</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/>
+    </comps>
+	</HediffDef>
+	
+	<HediffDef>
+	<hediffClass>HediffWithComps</hediffClass>
+    <defName>CMC_DMGAbsorb</defName>
+    <label>damage absorbed</label>
+    <description>damage is absorbed.</description>
+    <stages>
+      <li>
+        <statFactors>
+          <IncomingDamageFactor>0</IncomingDamageFactor>
+        </statFactors>
+      </li>
+    </stages>
+	<comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>180~180</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/>
+    </comps>
+	</HediffDef>
+	
+</Defs>

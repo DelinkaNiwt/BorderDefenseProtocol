@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <SitePartDef>
+    <defName>Milira_MilianDefend</defName>
+    <label>Encamped Milian</label>
+    <description>A group of Milian temporarily resting here.</description>
+    <workerClass>SitePartWorker</workerClass>
+    <siteTexture>World/WorldObjects/Sites/GenericSite</siteTexture>
+    <expandingIconTexture>Milira/Icon/Milian</expandingIconTexture>
+    <forceExitAndRemoveMapCountdownDurationDays>6</forceExitAndRemoveMapCountdownDurationDays>
+    <wantsThreatPoints>true</wantsThreatPoints>
+    <minThreatPoints>400</minThreatPoints>
+    <minMapSize>(150,1,150)</minMapSize>
+    <tags>
+      <li>Milira_Milian_WorldMap</li>
+      <li>Milira_MilianDefend</li>
+    </tags>
+  </SitePartDef>
+
+  <GenStepDef>
+    <defName>Milira_MilianDefend</defName>
+    <linkWithSite>Milira_MilianDefend</linkWithSite>
+    <order>460</order>
+    <genStep Class="AncotLibrary.GenStep_GenPawnAroundMapCenter_Defend">
+      <!-- <fixedPoint>10000</fixedPoint> -->
+      <factionDef>Milira_Faction</factionDef>
+      <pawnkindsWithCommonality>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_PawnI</pawnkindDef>
+          <commonality>1</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_PawnII</pawnkindDef>
+          <commonality>0.1</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_PawnIII</pawnkindDef>
+          <commonality>0.5</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_PawnIV</pawnkindDef>
+          <commonality>0.1</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_KnightII</pawnkindDef>
+          <commonality>0.2</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_KnightIV</pawnkindDef>
+          <commonality>0.1</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_BishopI</pawnkindDef>
+          <commonality>0.1</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_BishopIV</pawnkindDef>
+          <commonality>0.05</commonality>
+        </li>
+      </pawnkindsWithCommonality>
+    </genStep>
+  </GenStepDef>
+
+
+  <SitePartDef>
+    <defName>Milira_MilianAttack</defName>
+    <label>Encamped Milian</label>
+    <description>A group of Milian temporarily resting here.</description>
+    <workerClass>SitePartWorker</workerClass>
+    <siteTexture>World/WorldObjects/Sites/GenericSite</siteTexture>
+    <expandingIconTexture>Milira/Icon/Milian</expandingIconTexture>
+    <forceExitAndRemoveMapCountdownDurationDays>6</forceExitAndRemoveMapCountdownDurationDays>
+    <wantsThreatPoints>true</wantsThreatPoints>
+    <minThreatPoints>400</minThreatPoints>
+    <minMapSize>(150,1,150)</minMapSize>
+    <tags>
+      <li>Milira_Milian_WorldMap</li>
+      <li>Milira_MilianAttack</li>
+    </tags>
+  </SitePartDef>
+
+  <GenStepDef>
+    <defName>Milira_MilianAttack</defName>
+    <linkWithSite>Milira_MilianAttack</linkWithSite>
+    <order>460</order>
+    <genStep Class="AncotLibrary.GenStep_GenPawnAroundMapCenter_Attack">
+      <!-- <fixedPoint>10000</fixedPoint> -->
+      <factionDef>Milira_Faction</factionDef>
+      <canTimeoutOrFlee>false</canTimeoutOrFlee>
+      <pawnkindsWithCommonality>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_PawnI</pawnkindDef>
+          <commonality>1</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_PawnII</pawnkindDef>
+          <commonality>0.1</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_PawnIII</pawnkindDef>
+          <commonality>0.2</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_KnightI</pawnkindDef>
+          <commonality>0.3</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_KnightII</pawnkindDef>
+          <commonality>0.3</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_KnightIV</pawnkindDef>
+          <commonality>0.1</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_BishopII</pawnkindDef>
+          <commonality>0.1</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_BishopIII</pawnkindDef>
+          <commonality>0.1</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_RookI</pawnkindDef>
+          <commonality>0.1</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Milian_Mechanoid_RookII</pawnkindDef>
+          <commonality>0.1</commonality>
+        </li>
+      </pawnkindsWithCommonality>
+    </genStep>
+  </GenStepDef>
+
+</Defs>

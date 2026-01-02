@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Chessman: Knight -->
+  <Milian_ClassHediff_Knight.label>执子：骑士</Milian_ClassHediff_Knight.label>
+  <!-- EN: Grants the power of a knight. -->
+  <Milian_ClassHediff_Knight.description>赋予「骑士」权能。</Milian_ClassHediff_Knight.description>
+  <!-- EN: Tuning I -->
+  <Milian_ClassHediff_Knight.stages.Tuning_I.label>调谐I</Milian_ClassHediff_Knight.stages.Tuning_I.label>
+  <!-- EN: Tuning II -->
+  <Milian_ClassHediff_Knight.stages.Tuning_II.label>调谐II</Milian_ClassHediff_Knight.stages.Tuning_II.label>
+  <!-- EN: Tuning III -->
+  <Milian_ClassHediff_Knight.stages.Tuning_III.label>调谐III</Milian_ClassHediff_Knight.stages.Tuning_III.label>
+  <!-- EN: Tuning IV -->
+  <Milian_ClassHediff_Knight.stages.Tuning_IV.label>调谐IV</Milian_ClassHediff_Knight.stages.Tuning_IV.label>
+  
+  <!-- EN: Ranks Breaking Charge -->
+  <Milian_KnightI_ChargeAfterHit.label>陷阵冲锋</Milian_KnightI_ChargeAfterHit.label>
+  <!-- EN: Ranks Breaking Charge. -->
+  <Milian_KnightI_ChargeAfterHit.description>。</Milian_KnightI_ChargeAfterHit.description>
+  
+  <!-- EN: Charge -->
+  <Milian_KnightI_KnightCharge.label>冲锋</Milian_KnightI_KnightCharge.label>
+  <!-- EN: This pawn is becoming more powerful based on movement. -->
+  <Milian_KnightI_KnightCharge.description>这个单位正在随着移动获得增幅。</Milian_KnightI_KnightCharge.description>
+  
+  <!-- UNUSED -->
+  <Milian_KnightI_KnightCharge.stages._10.label>10%</Milian_KnightI_KnightCharge.stages._10.label>
+  <Milian_KnightI_KnightCharge.stages._20.label>20%</Milian_KnightI_KnightCharge.stages._20.label>
+  <Milian_KnightI_KnightCharge.stages._30.label>30%</Milian_KnightI_KnightCharge.stages._30.label>
+  <Milian_KnightI_KnightCharge.stages._40.label>40%</Milian_KnightI_KnightCharge.stages._40.label>
+  <Milian_KnightI_KnightCharge.stages._50.label>50%</Milian_KnightI_KnightCharge.stages._50.label>
+  <Milian_KnightI_KnightCharge.stages._60.label>60%</Milian_KnightI_KnightCharge.stages._60.label>
+  <Milian_KnightI_KnightCharge.stages._70.label>70%</Milian_KnightI_KnightCharge.stages._70.label>
+  <Milian_KnightI_KnightCharge.stages._90-0.label>90%</Milian_KnightI_KnightCharge.stages._90-0.label>
+  <Milian_KnightI_KnightCharge.stages._90-1.label>90%</Milian_KnightI_KnightCharge.stages._90-1.label>
+  <Milian_KnightI_KnightCharge.stages._100.label>100%</Milian_KnightI_KnightCharge.stages._100.label>
+  
+</LanguageData>

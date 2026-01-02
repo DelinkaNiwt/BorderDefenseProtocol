@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: J-50 (Leaving) -->
+  <CMC_MYDE_AF_Skyfalller_Y50_CrossMapThing.label>Y-50（起飛）</CMC_MYDE_AF_Skyfalller_Y50_CrossMapThing.label>
+  
+  <!-- EN: Y50 CIWS -->
+  <CMC_Y50_CIWS.label>近防系統</CMC_Y50_CIWS.label>
+  <!-- EN: CIWS equipped on Y-50. -->
+  <CMC_Y50_CIWS.description>裝備在Y-50“帝江”武裝空天運輸機機腹炮塔內的近防系統</CMC_Y50_CIWS.description>
+  <!-- EN: Y50 CIWS -->
+  <CMC_Y50_CIWS.verbs.Verb_Shoot.label>近防系統射彈</CMC_Y50_CIWS.verbs.Verb_Shoot.label>
+  
+  <!-- EN: Y-50 transport aerospace aircraft -->
+  <MYDE_CMC_Y50X.label>Y-50“帝江”武裝空天運輸機</MYDE_CMC_Y50X.label>
+  <!-- EN: . -->
+  <MYDE_CMC_Y50X.description>安裝了厚重裝甲和護盾的運輸機，其安裝的無人機生成設施可以安裝並彈射數架自殺式無人機</MYDE_CMC_Y50X.description>
+  <!-- EN: Needs Fuel -->
+  <MYDE_CMC_Y50X.comps.CompRefuelable.outOfFuelMessage>燃料耗盡</MYDE_CMC_Y50X.comps.CompRefuelable.outOfFuelMessage>
+  <!-- EN: Switching between takeoff and landing, the "Eclipse" FH-203 belongs to a fixed wing aerocraft and requires an unobstructed distance of more than 20 grids to launch and land. It can only attack during flight. After takeoff, move it with the right mouse button, right-click on Non-Player faction object to forcibly attack the target, right-click on our faction object to switch to follow mode. -->
+  <MYDE_CMC_Y50X.comps.Comp_MoveToTargetAndHover.TakeOffAndLanding_Icon_Description>垂直起飛</MYDE_CMC_Y50X.comps.Comp_MoveToTargetAndHover.TakeOffAndLanding_Icon_Description>
+  <!-- EN: Take off -->
+  <MYDE_CMC_Y50X.comps.Comp_MoveToTargetAndHover.TakeOffAndLanding_Icon_On_Label>垂直起飛</MYDE_CMC_Y50X.comps.Comp_MoveToTargetAndHover.TakeOffAndLanding_Icon_On_Label>
+  <!-- EN: Fast loading colonizers within the surrounding 5x5 range -->
+  <MYDE_CMC_Y50X.comps.Comp_CarryPawn.Gizmos_CarryPawn_Description>在範圍內快速裝載乘員</MYDE_CMC_Y50X.comps.Comp_CarryPawn.Gizmos_CarryPawn_Description>
+  <!-- EN: Fast loading -->
+  <MYDE_CMC_Y50X.comps.Comp_CarryPawn.Gizmos_CarryPawn_Label>快速裝載</MYDE_CMC_Y50X.comps.Comp_CarryPawn.Gizmos_CarryPawn_Label>
+  <!-- EN: Cross map, no open space can be selected as the target location. To avoid situations where it is impossible to return, please ensure that there is sufficient fuel for round-trip travel -->
+  <MYDE_CMC_Y50X.comps.Comp_CanCrossMap.CrossMap_Description>跨地圖飛行</MYDE_CMC_Y50X.comps.Comp_CanCrossMap.CrossMap_Description>
+  <!-- EN: Cross Map -->
+  <MYDE_CMC_Y50X.comps.Comp_CanCrossMap.CrossMap_Label>跨地圖飛行</MYDE_CMC_Y50X.comps.Comp_CanCrossMap.CrossMap_Label>
+  
+</LanguageData>

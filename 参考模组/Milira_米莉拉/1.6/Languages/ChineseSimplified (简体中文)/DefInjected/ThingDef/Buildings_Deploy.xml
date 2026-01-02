@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Eternal fortress -->
+  <Milian_Fortress.label>米莉安不落要塞</Milian_Fortress.label>
+  <!-- EN: A sturdy siege turret capable of targeting distant enemies over complex terrain. It consumes lustrous steel during attacks.\n\nEach 1% of Sharp armor rate grants 0.45% non-explosive damage reduction in Fortress Mode, up to 90%. -->
+  <Milian_Fortress.description>坚固的攻城炮塔，能够越过复杂的地形攻击远处的敌人。攻击时会消耗资源。\n\n不落要塞每1%利器护甲转化为0.3%伤害减免（对爆炸伤害无效），最多获得60%。</Milian_Fortress.description>
+  
+  <!-- EN: particle Bolt -->
+  <MilianBullet_HeavyPlasma.label>电浆团</MilianBullet_HeavyPlasma.label>
+  
+  <!-- EN: Heavy particle cannon -->
+  <MilianFortressGun_HeavyPlasma.label>重型粒子炮</MilianFortressGun_HeavyPlasma.label>
+  <!-- EN: A heavy particle cannon. -->
+  <MilianFortressGun_HeavyPlasma.description>笨重的大型发射器，能够发射威力巨大的粒子团。</MilianFortressGun_HeavyPlasma.description>
+  <!-- EN: Heavy particle cannon -->
+  <MilianFortressGun_HeavyPlasma.verbs.Verb_Shoot_Fortress.label>重型粒子炮</MilianFortressGun_HeavyPlasma.verbs.Verb_Shoot_Fortress.label>
+  
+  <!-- EN: glory beacon -->
+  <Milira_DropBeacon.label>辉煌信标</Milira_DropBeacon.label>
+  <!-- EN: A device capable of firing a signal into the sky. Once activated, it instantly calls for a squad of Milian to provide battlefield support. -->
+  <Milira_DropBeacon.description>一座能够向天空发射信标的装置。激活后立刻呼叫一队米莉安支援战场。</Milira_DropBeacon.description>
+  <!-- EN: disabled -->
+  <Milira_DropBeacon.comps.CompDestroyAfterDelay.countdownLabel>失效</Milira_DropBeacon.comps.CompDestroyAfterDelay.countdownLabel>
+  <!-- EN: The beacon calls a team of Milian and leaps into battle. -->
+  <Milira_DropBeacon.comps.CompDelayedPawnSpawnOnWakeup.activatedMessageKey>辉煌信标呼叫了一队米莉安支援战场。</Milira_DropBeacon.comps.CompDelayedPawnSpawnOnWakeup.activatedMessageKey>
+  
+</LanguageData>

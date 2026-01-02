@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: install Tian Ji chip -->
+  <InstallTJ.label>植入【天璣】治療晶元</InstallTJ.label>
+  <!-- EN: Install a Tian Ji chip. -->
+  <InstallTJ.description>植入【天璣】治療晶元</InstallTJ.description>
+  <!-- EN: Installing Tian Ji chip. -->
+  <InstallTJ.jobString>植入【天璣】治療晶元</InstallTJ.jobString>
+  
+  <!-- EN: remove Tian Ji chip -->
+  <RemoveTJ.label>移除【天璣】治療晶元</RemoveTJ.label>
+  <!-- EN: Remove the Tian Ji chip. -->
+  <RemoveTJ.description>移除【天璣】治療晶元</RemoveTJ.description>
+  <!-- EN: Removing Tian Ji chip. -->
+  <RemoveTJ.jobString>移除【天璣】治療晶元</RemoveTJ.jobString>
+  
+</LanguageData>

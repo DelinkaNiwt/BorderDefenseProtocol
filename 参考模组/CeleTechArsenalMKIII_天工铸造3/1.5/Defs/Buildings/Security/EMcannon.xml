@@ -1,0 +1,379 @@
+<Defs>
+	<ThingDef ParentName="AutocannonTurret">
+    <defName>CMC_EMcannon</defName>
+    <label>"Longyuan Thundercore" EML turret</label>
+	<thingClass>TOT_DLL_test.Building_CMCTurretGun</thingClass>
+    <description>A heavy electro-magnetic launcher mounted on a turret capable of firing 76mm anti-vehicle shell. Its large-caliber projectiles do heavy damage over significant ranges, and causing various EMP bursts upon hit.\n\nTurret rotation speed: 60°/sec.</description>
+    <uiIconPath>Things/Buildings/EMPCUI</uiIconPath>
+	<graphicData>
+            <texPath>Things/Buildings/largebase</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <drawSize>(5,5)</drawSize>
+        </graphicData>
+	<size>(3,3)</size>
+    <statBases>
+	  <MaxHitPoints>1200</MaxHitPoints>
+	  <Flammability>0</Flammability>
+      <ShootingAccuracyTurret>1</ShootingAccuracyTurret>
+	  <WorkToBuild>8000</WorkToBuild>
+    </statBases>
+	<drawerType>MapMeshAndRealTime</drawerType>
+	<tickerType>Normal</tickerType>
+	<killedLeavings>
+      <ChunkSlagSteel>3</ChunkSlagSteel>
+      <Steel>60</Steel>
+      <Plasteel>10</Plasteel>
+    </killedLeavings>
+    <costList>
+      <Steel>510</Steel>
+	  <Plasteel>200</Plasteel>
+      <ComponentIndustrial>8</ComponentIndustrial>
+	  <ComponentSpacer>6</ComponentSpacer>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>1</wickTicks>
+        <explosiveRadius>1.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.2</chanceNeverExplodeFromDamage>
+      </li>
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>1500</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Refuelable">
+        <fuelLabel>Shots until barrel change</fuelLabel>
+        <fuelGizmoLabel>Barrel durability</fuelGizmoLabel>
+        <outOfFuelMessage>Needs new barrel</outOfFuelMessage>
+        <fuelFilter><thingDefs><li>Steel</li></thingDefs></fuelFilter>
+        <fuelCapacity>100</fuelCapacity>
+        <fuelMultiplier>0.5</fuelMultiplier>
+        <initialFuelPercent>1</initialFuelPercent>
+        <autoRefuelPercent>0.5</autoRefuelPercent>
+        <showFuelGizmo>true</showFuelGizmo>
+        <minimumFueledThreshold>1</minimumFueledThreshold>
+        <factorByDifficulty>true</factorByDifficulty>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelIconPath>UI/Overlays/Barrel</fuelIconPath>
+      </li>
+	  <li Class="CompProperties_AffectedByFacilities">
+        <linkableFacilities>
+          <li>CMC_FCradar</li>
+        </linkableFacilities>
+      </li>
+    </comps>
+	<damageMultipliers>
+      <li>
+        <damageDef>Bomb</damageDef>
+        <multiplier>0.3</multiplier>
+      </li>
+      <li>
+        <damageDef>Bullet</damageDef>
+        <multiplier>0.2</multiplier>
+      </li>
+	  <li>
+        <damageDef>EMP</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+	  <li>
+        <damageDef>Stun</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <building>
+      <turretGunDef>Gun_EMPCannon</turretGunDef>
+	  <turretTopDrawSize>5.4</turretTopDrawSize>
+      <turretBurstCooldownTime>8</turretBurstCooldownTime>
+    </building>
+    <researchPrerequisites>
+      <li>HeavyTurrets</li>
+	  <li>CMCGunTurrets</li>
+    </researchPrerequisites>
+	<designationCategory>CMC_DefensenProduction</designationCategory>
+	<placeWorkers Inherit="False">
+	  <li>PlaceWorker_BandNode</li>
+    </placeWorkers>
+	<modExtensions>
+      <li Class="TOT_DLL_test.TurretExtension_CMC">
+        <rotationSpeed>1</rotationSpeed>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>Gun_EMPCannon</defName>
+    <label>charged auto cannon</label>
+    <description>A self-loading large-bore electro-magnetic launcher designed to attach to a turret.</description>
+    <graphicData>
+      <texPath>Things/Buildings/CMC_EMcannon_top</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(3.8,3.8)</drawSize>
+    </graphicData>
+    <statBases>
+      <AccuracyTouch>0.98</AccuracyTouch>
+      <AccuracyShort>0.92</AccuracyShort>
+      <AccuracyMedium>0.86</AccuracyMedium>
+      <AccuracyLong>0.85</AccuracyLong>
+      <RangedWeapon_Cooldown>0.5</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>40</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+	        <weaponTags Inherit = "False">
+			<li>Weapon_CMCf</li>
+		</weaponTags>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>Bullet_AutocannonTurretEMP</defaultProjectile>
+        <warmupTime>0</warmupTime>
+        <minRange>7.9</minRange>
+        <range>91.9</range>
+        <burstShotCount>1</burstShotCount>
+        <soundCast>Sound_Cannonii</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>33</muzzleFlashScale>
+        <consumeFuelPerShot>1</consumeFuelPerShot>
+      </li>
+    </verbs>
+  </ThingDef>
+  
+  <ThingDef ParentName="AutocannonTurret">
+    <defName>CMC_EMcannon_Huge</defName>
+    <label>"Longyuan Thunderstrike"130mm EML</label>
+	<thingClass>TOT_DLL_test.Building_CMCTurretGun</thingClass>
+    <description>Serving as standardized armament for interstellar merchant vessels and destroyers, this naval gun launches 30+ Mach guided projectiles capable of instantly vaporizing targets. However, the absence of large-caliber shipborne capacitor systems results in significantly constrained rates of fire and turret traverse speeds.</description>
+    <uiIconPath>Things/Buildings/CMC_LaserSTop_UI</uiIconPath>
+	<graphicData>
+            <texPath>Things/Buildings/CMC_HugeBase</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <drawSize>(14.5,14.5)</drawSize>
+        </graphicData>
+	<size>(7,7)</size>
+    <statBases>
+	  <MaxHitPoints>12000</MaxHitPoints>
+	  <Flammability>0</Flammability>
+      <ShootingAccuracyTurret>1</ShootingAccuracyTurret>
+	  <WorkToBuild>8000</WorkToBuild>
+    </statBases>
+	<drawerType>MapMeshAndRealTime</drawerType>
+	<tickerType>Normal</tickerType>
+	<killedLeavings>
+      <ChunkSlagSteel>7</ChunkSlagSteel>
+      <Steel>60</Steel>
+      <Plasteel>30</Plasteel>
+    </killedLeavings>
+    <costList>
+      <Steel>6000</Steel>
+	  <Plasteel>2500</Plasteel>
+      <ComponentIndustrial>75</ComponentIndustrial>
+	  <ComponentSpacer>45</ComponentSpacer>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>1</wickTicks>
+        <explosiveRadius>19.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.2</chanceNeverExplodeFromDamage>
+      </li>
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>10000</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Refuelable">
+        <fuelLabel>Shots until barrel change</fuelLabel>
+        <fuelGizmoLabel>Barrel durability</fuelGizmoLabel>
+        <outOfFuelMessage>Needs new barrel</outOfFuelMessage>
+        <fuelFilter><thingDefs><li>CMC_300mmEMLShell</li></thingDefs></fuelFilter>
+        <fuelCapacity>12</fuelCapacity>
+        <fuelMultiplier>1</fuelMultiplier>
+        <initialFuelPercent>1</initialFuelPercent>
+        <autoRefuelPercent>0.75</autoRefuelPercent>
+        <showFuelGizmo>true</showFuelGizmo>
+        <minimumFueledThreshold>1</minimumFueledThreshold>
+        <factorByDifficulty>false</factorByDifficulty>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelIconPath>Things/Others/EMLShell/EMLShell_c</fuelIconPath>
+      </li>
+	  <li Class="CompProperties_AffectedByFacilities">
+        <linkableFacilities>
+          <li>CMC_FCradar</li>
+        </linkableFacilities>
+      </li>
+    </comps>
+	<damageMultipliers>
+      <li>
+        <damageDef>Bomb</damageDef>
+        <multiplier>0.3</multiplier>
+      </li>
+      <li>
+        <damageDef>Bullet</damageDef>
+        <multiplier>0.2</multiplier>
+      </li>
+	  <li>
+        <damageDef>EMP</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+	  <li>
+        <damageDef>Stun</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <building>
+      <turretGunDef>Gun_EMPCannon_Huge</turretGunDef>
+	  <turretTopDrawSize>14.5</turretTopDrawSize>
+      <turretBurstCooldownTime>30</turretBurstCooldownTime>
+    </building>
+    <researchPrerequisites>
+      <li>SniperTurret</li>
+	  <li>CMCGunTurrets</li>
+    </researchPrerequisites>
+	<designationCategory>CMC_DefensenProduction</designationCategory>
+	<placeWorkers Inherit="False"></placeWorkers>
+	<modExtensions>
+      <li Class="TOT_DLL_test.TurretExtension_CMC">
+        <rotationSpeed>0.15</rotationSpeed>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>Gun_EMPCannon_Huge</defName>
+    <label>130mm EML</label>
+    <description>A self-loading large-bore electro-magnetic launcher designed to attach to a turret.</description>
+    <graphicData>
+      <texPath>Things/Buildings/CMC_LaserSTop</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+	<recoilPower>40</recoilPower>
+    <statBases>
+      <AccuracyTouch>0.98</AccuracyTouch>
+      <AccuracyShort>0.92</AccuracyShort>
+      <AccuracyMedium>0.86</AccuracyMedium>
+      <AccuracyLong>0.85</AccuracyLong>
+      <RangedWeapon_Cooldown>0.5</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>25400</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>Bullet_AutocannonTurretEMP_Huge</defaultProjectile>
+        <warmupTime>0</warmupTime>
+		<requireLineOfSight>false</requireLineOfSight>
+        <minRange>19.9</minRange>
+        <range>500</range>
+        <burstShotCount>1</burstShotCount>
+        <soundCast>Sound_Cannonii</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>33</muzzleFlashScale>
+        <consumeFuelPerShot>1</consumeFuelPerShot>
+		<targetParams>
+          <canTargetPawns>true</canTargetPawns>
+          <canTargetLocations>true</canTargetLocations>
+          <canTargetBuildings>true</canTargetBuildings>
+        </targetParams>
+      </li>
+    </verbs>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_AutocannonTurretEMP_Huge</defName>
+    <label>accelerated magnet projectile(antimatter warhead with EMP cells)</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_QLUX</texPath>
+	  <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(4, 4.5)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_GigaEMPShell</thingClass>
+    <projectile>
+      <damageDef>Bomb</damageDef>
+      <speed>400</speed>
+	  <flyOverhead>true</flyOverhead>
+	  <explosionEffect>CMC_Bomb</explosionEffect>
+      <screenShakeFactor>2.11</screenShakeFactor>
+	  <damageAmountBase>1190</damageAmountBase>
+	  <explosionRadius>5.56</explosionRadius>
+      <stoppingPower>1.5</stoppingPower>
+      <armorPenetrationBase>4</armorPenetrationBase>
+	  <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="ResourceBase">
+    <defName>CMC_300mmEMLShell</defName>
+    <label>EML Shell</label>
+    <description>130MM EML shell.</description>
+    <uiIconPath>Things/Others/EMLShell/EMLShell_c</uiIconPath>
+	<graphicData>
+      <texPath>Things/Others/EMLShell</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+	  <drawSize>(3.1,3.1)</drawSize>
+    </graphicData>
+    <tradeability>Buyable</tradeability>
+	<soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Standard_Drop</soundDrop>
+    <tickerType>Normal</tickerType>
+    <stackLimit>12</stackLimit>
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Mass>1.25</Mass>
+      <Flammability>1.0</Flammability>
+      <DeteriorationRate>0</DeteriorationRate>
+	  <MarketValue>270</MarketValue>
+    </statBases>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+    <tradeTags>
+      <li>CMC_MissilePod</li>
+    </tradeTags>
+    <techLevel>Spacer</techLevel>
+	<costList>
+      <Steel>75</Steel>
+	  <Plasteel>50</Plasteel>
+	  <Uranium>20</Uranium>
+	  <ComponentSpacer>1</ComponentSpacer>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <explosiveRadius>8.9</explosiveRadius>
+        <explosiveDamageType>BombSuper</explosiveDamageType>
+        <explosiveExpandPerStackcount>0.4</explosiveExpandPerStackcount>
+        <startWickHitPointsPercent>0.7</startWickHitPointsPercent>
+        <chanceToStartFire>0.22</chanceToStartFire>
+        <damageFalloff>true</damageFalloff>
+        <explosionEffect>GiantExplosion</explosionEffect>
+        <explosionSound>Explosion_GiantBomb</explosionSound>
+        <wickTicks>0</wickTicks>
+      </li>
+    </comps>
+	<recipeMaker>
+      <researchPrerequisite>CMCGunTurrets</researchPrerequisite>
+      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+      <effectWorking>Cook</effectWorking>
+      <soundWorking>Recipe_Machining</soundWorking>
+      <workAmount>100</workAmount>
+	  <productCount>1</productCount>
+      <targetCountAdjustment>12</targetCountAdjustment>
+      <workSkill>Crafting</workSkill>
+      <recipeUsers>
+        <li>CMC_FacBench</li>
+      </recipeUsers>
+      <skillRequirements>
+        <Crafting>8</Crafting>
+      </skillRequirements>
+      <displayPriority>100</displayPriority>
+    </recipeMaker>
+  </ThingDef>
+</Defs>

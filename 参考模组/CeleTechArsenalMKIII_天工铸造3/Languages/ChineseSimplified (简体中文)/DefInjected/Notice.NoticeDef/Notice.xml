@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: //CELETECH 10/10/2025 Update Notice// -->
+  <CMC_Update_10102025.label>CELETECH天工铸造 2025/10/10 更新通知</CMC_Update_10102025.label>
+  <CMC_Update_10102025.description>为mod大部分武器、炮塔和全部护甲添加了Combat Extended适配（注意激光武器暂时未使用弹药但能在CE环境正常使用）。</CMC_Update_10102025.description>
+  
+</LanguageData>

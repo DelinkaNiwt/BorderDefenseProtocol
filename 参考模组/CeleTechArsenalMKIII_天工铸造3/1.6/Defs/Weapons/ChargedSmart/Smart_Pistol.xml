@@ -1,0 +1,73 @@
+<Defs>
+	<ThingDef ParentName="TOT_Weapons">
+    <defName>CMC_QSZfiveeightSmart</defName>
+    <label>QSZ-58 EM pistol(modified)</label>
+    <description>.</description>
+    <graphicData>
+      <texPath>Things/Weapons/QSZfiveeight_Smart</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>(0.72,0.72)</drawSize>
+    </graphicData>
+	<uiIconPath>Things/Weapons/QSZfiveeight_Smart_UI</uiIconPath>
+    <uiIconScale>1.1</uiIconScale>
+    <soundInteract>Interact_Autopistol</soundInteract>
+    <recipeMaker>
+      <researchPrerequisite>CMC_Smart_II</researchPrerequisite>
+      <skillRequirements>
+        <Crafting>6</Crafting>
+      </skillRequirements>
+      <displayPriority>405</displayPriority>
+    </recipeMaker>
+    <weaponTags>
+      <li>SpacerGun</li>
+	  <li>CMC_PDW</li>
+    </weaponTags>
+    <weaponClasses>
+      <li>RangedLight</li>
+    </weaponClasses>
+    <statBases>
+      <WorkToMake>5000</WorkToMake>
+      <Mass>1.3</Mass>
+      <AccuracyTouch>0.98</AccuracyTouch>
+      <AccuracyShort>0.92</AccuracyShort>
+      <AccuracyMedium>0.85</AccuracyMedium>
+      <AccuracyLong>0.83</AccuracyLong>
+      <RangedWeapon_Cooldown>0.24</RangedWeapon_Cooldown>
+	  <MarketValue>1800</MarketValue>
+    </statBases>
+    <costList>
+      <ComponentSpacer>2</ComponentSpacer>
+	  <CMC_QSZfiveeight>1</CMC_QSZfiveeight>
+    </costList>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_AR_smart</defaultProjectile>
+        <warmupTime>0.6</warmupTime>
+        <range>24.9</range>
+		<burstShotCount>1</burstShotCount>
+        <soundCast>CMC_PistolFire</soundCast>
+        <soundCastTail>GunTail_Light</soundCastTail>
+        <muzzleFlashScale>9</muzzleFlashScale>
+      </li>
+    </verbs>
+	<comps>
+	  <li Class="TOT_DLL_test.CompProperties_ColorSaver"></li>
+	  <li Class="TOT_DLL_test.CompPreperties_SmartWeapon">
+		<DamageDeductionRange>14</DamageDeductionRange>
+		<MinDamageMultiplier>0.63</MinDamageMultiplier>
+	  </li>
+	</comps>
+    <tools>
+      <li>
+        <label>grip</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>9</power>
+        <cooldownTime>2</cooldownTime>
+      </li>
+    </tools>
+  </ThingDef>
+</Defs>

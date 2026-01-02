@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Patch>
+
+    <Operation Class="PatchOperationReplace">
+        <xpath> /Defs/ThingDef[defName="QBZ71_QS" or defName="QTS9_OICW" or defName="QBU_TOOE" or defName="QBZ_fivenine" or defName="QBB_fivenine" or defName="QBU_fivenine" or defName="QBZ_threeooE" or defName="QBB_threeoo" or defName="QBZ_threeooED" or defName="QBZS85XWJ" or defName="QSZ85_M" or defName="QBZ_eightfiveAR" or defName="QBUS85XWJ" or defName="QBUS85F" or defName="CMC_QBU71S" or defName="QBU71_QS" or defName="CMC_PLaserSMG" or defName="CMC_QiyaoLaserLMG" or defName="CMC_ShapedLaserRifle" or defName="CMC_Shaped_Laser_Sniper" or defName="CMC_TaoTie_Persona" or defName="CMC_QBAfournine" or defName="CMC_QBXfiveseven_CSG" or defName="CMC_QBXninenine_CSG"]/tools
+                    </xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>stock</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>12</power>
+                    <cooldownTime>1.55</cooldownTime>
+                    <chanceFactor>1.5</chanceFactor>
+                    <armorPenetrationBlunt>2.755</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
+                </li>
+                <li Class="CombatExtended.ToolCE">
+                    <label>barrel</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>5</power>
+                    <cooldownTime>2.02</cooldownTime>
+                    <armorPenetrationBlunt>1.630</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationReplace">
+        <xpath> /Defs/ThingDef[defName="CMC_QJZFivenine" or defName="QBZoneooneXuanMing_Elite" or defName="W85XWJ" or defName="W85X_Thunderer" or defName="CMC_PLaserLMG" or defName="CMC_GrenadeLauncher"]/tools
+                    </xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>stock</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>16</power>
+                    <cooldownTime>1.55</cooldownTime>
+                    <chanceFactor>1.5</chanceFactor>
+                    <armorPenetrationBlunt>2.755</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
+                </li>
+                <li Class="CombatExtended.ToolCE">
+                    <label>barrel</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>20</power>
+                    <cooldownTime>2.02</cooldownTime>
+                    <armorPenetrationBlunt>3.630</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationReplace">
+        <xpath> /Defs/ThingDef[defName="CMC_HJX_ATGM" or defName="CMC_HJXModII_ATGM" or defName="CMC_RocketLauncher" or defName="PrototypeXiHe" or defName="QLUX_Pulse_Projector_Persona"]/tools
+                    </xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>barrel</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>7</power>
+                    <cooldownTime>2.02</cooldownTime>
+                    <armorPenetrationBlunt>1.630</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationReplace">
+        <xpath> /Defs/ThingDef[defName="CMC_QSZfiveeight" or defName="CMC_QSZfiveeightSmart" or defName="CMM_PLaserpistol"or defName="CMC_QSZfiveseven" or defName="CMC_QSZfiveseven_NL" or defName="CMC_QSZfiveseven_MODIII"]/tools
+                    </xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>grip</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>8</power>
+                    <cooldownTime>1.55</cooldownTime>
+                    <chanceFactor>1.5</chanceFactor>
+                    <armorPenetrationBlunt>2.755</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
+                </li>
+                <li Class="CombatExtended.ToolCE">
+                    <label>barrel</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>5</power>
+                    <cooldownTime>2.02</cooldownTime>
+                    <armorPenetrationBlunt>1.630</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+
+</Patch>

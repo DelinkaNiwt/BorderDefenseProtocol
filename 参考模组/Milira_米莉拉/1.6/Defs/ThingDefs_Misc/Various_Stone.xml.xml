@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="ChunkBase">
+    <defName>Milira_ChunkSlag_SunPlateSteel</defName>
+    <label>solar-forged steel slag chunk</label>
+    <description>A chunk of solar-forged steel slag. While it's useless in its current form, it can be smelted at sunblast furnace to recover some resources.</description>
+    <graphicData>
+      <texPath>AncotLibrary/Item/Chunk/ChunkSlag</texPath>
+      <graphicClass>Graphic_Random</graphicClass>
+      <color>(246,244,209)</color>
+    </graphicData>
+    <statBases>
+      <Mass>6</Mass>
+    </statBases>
+    <soundDrop>ChunkSlag_Drop</soundDrop>
+    <thingCategories>
+      <li>Chunks</li>
+    </thingCategories>
+    <smeltable>true</smeltable>
+    <smeltProducts>
+      <Milira_SunPlateSteel>5</Milira_SunPlateSteel>
+      <Milira_SplendidSteel>12</Milira_SplendidSteel>
+    </smeltProducts>
+  </ThingDef>
+
+
+</Defs>

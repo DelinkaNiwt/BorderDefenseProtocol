@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef Name="Milira_MilianBase_Pawn" ParentName="Milira_BaseMilianWalkerA" Abstract="true">
+    <tools>
+      <li>
+        <label>left fist</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>6.0</power>
+        <cooldownTime>1.6</cooldownTime>
+        <linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+      <li>
+        <label>right fist</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>6.0</power>
+        <cooldownTime>1.6</cooldownTime>
+        <linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+    </tools>
+    <statBases>
+      <MeleeDamageFactor>0.9</MeleeDamageFactor>
+    </statBases>
+    <race>
+      <body>Milian_Body</body>
+      <soundMeleeHitPawn>Pawn_Melee_MechanoidBash_HitPawn</soundMeleeHitPawn>
+      <soundMeleeHitBuilding>Pawn_Melee_MechanoidBash_HitBuilding</soundMeleeHitBuilding>
+      <soundMeleeMiss>Pawn_Melee_Punch_Miss</soundMeleeMiss>
+      <hediffGiverSets>
+        <!-- <li>Milian_ClassHediffInitial_Pawn</li> -->
+        <li>Milian_ClassHediffMaintain_Pawn</li>
+      </hediffGiverSets>
+    </race>
+    <comps>
+      <li Class="Milira.CompProperties_PromotionGraphic">
+        <drawAdditionalGraphicDefault>false</drawAdditionalGraphicDefault>
+        <floatAmplitude>0.15</floatAmplitude>
+        <floatSpeed>0.1</floatSpeed>
+        <flickerSpeed>0.1</flickerSpeed>
+        <altitudeLayer>Skyfaller</altitudeLayer>
+        <graphicData>
+          <texPath>Milira/Effect/Promotion/Promotion_Knight</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <shaderType>TransparentPostLight</shaderType>
+          <drawOffset>(0,0,0.75)</drawOffset>
+        </graphicData>
+      </li>
+      <li Class="Milira.CompProperties_GainHediffSpawn">
+        <hediffDef>Milian_ClassHediff_Pawn</hediffDef>
+      </li>
+      <li Class="Milira.CompProperties_TargetableWeapon">
+				<compClass>Milira.CompTargetableWeapon</compClass>
+				<ignoreQuestLodgerPawns>true</ignoreQuestLodgerPawns>
+			</li>
+    </comps>
+  </ThingDef>
+
+
+
+  <!--=士兵I型===========================================================================================================================-->
+  <ThingDef ParentName="Milira_MilianBase_Pawn">
+    <defName>Milian_Mechanoid_PawnI</defName>
+    <label>Pawn I</label>
+    <description>Milian the pawn I type.\n\nCan equipe with range weapon.</description>
+    <statBases>
+      <MoveSpeed>4.25</MoveSpeed>
+      <MarketValue>800</MarketValue>
+      <ArmorRating_Blunt>0.1</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.1</ArmorRating_Sharp>
+      <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">3</BandwidthCost>
+    </statBases>
+    <race>
+      <baseHealthScale>1.2</baseHealthScale>
+    </race>
+    <comps>
+    </comps>
+    <uiIconPath>Milian/Mechanoid_uiIcon/PawnI</uiIconPath>
+  </ThingDef>
+
+  <PawnKindDef ParentName="BaseMilianKind_Mechanoid">
+    <defName>Milian_Mechanoid_PawnI</defName>
+    <label>Pawn I</label>
+    <race>Milian_Mechanoid_PawnI</race>
+    <combatPower>144</combatPower>
+    <apparelRequired>
+      <li>Milian_LightArmor</li>
+      <li>Milian_Lining</li>
+      <li>Milian_Goggle</li>
+    </apparelRequired>
+    <weaponMoney>9999~9999</weaponMoney>
+    <weaponTags>
+      <li>Milian_ParticleBeamGun</li>
+    </weaponTags>
+    <techHediffsChance>1</techHediffsChance>
+    <techHediffsMoney>9999~9999</techHediffsMoney>
+  </PawnKindDef>
+
+
+
+
+  <!--=士兵II型===========================================================================================================================-->
+  <ThingDef ParentName="Milira_MilianBase_Pawn">
+    <defName>Milian_Mechanoid_PawnII</defName>
+    <label>Pawn II</label>
+    <description>Milian the pawn II type.\n\nCan equipe with small combat drone.\n\nCan equipe with range weapon.</description>
+    <statBases>
+      <MoveSpeed>4.25</MoveSpeed>
+      <MarketValue>800</MarketValue>
+      <ArmorRating_Blunt>0.1</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.1</ArmorRating_Sharp>
+      <AimingDelayFactor>1.2</AimingDelayFactor>
+      <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">3</BandwidthCost>
+    </statBases>
+    <race>
+      <baseHealthScale>1.2</baseHealthScale>
+    </race>
+    <comps>
+    </comps>
+    <uiIconPath>Milian/Mechanoid_uiIcon/PawnI</uiIconPath>
+  </ThingDef>
+
+  <PawnKindDef ParentName="BaseMilianKind_Mechanoid">
+    <defName>Milian_Mechanoid_PawnII</defName>
+    <label>Pawn II</label>
+    <race>Milian_Mechanoid_PawnII</race>
+    <combatPower>144</combatPower>
+    <maxPerGroup>6</maxPerGroup>
+    <apparelRequired>
+      <li>Milian_LightArmor</li>
+      <li>Milian_Lining</li>
+      <li>Milian_Goggle</li>
+    </apparelRequired>
+    <apparelTags>
+      <li>Milira_CombatDrone_RaidAvailable_PawnII</li>
+    </apparelTags>
+    <weaponMoney>9999~9999</weaponMoney>
+    <weaponTags>
+      <li>Milian_PulsedBeamGun</li>
+    </weaponTags>
+    <techHediffsChance>1</techHediffsChance>
+    <techHediffsMoney>9999~9999</techHediffsMoney>
+  </PawnKindDef>
+
+
+  <!--=士兵III型===========================================================================================================================-->
+  <ThingDef ParentName="Milira_MilianBase_Pawn">
+    <defName>Milian_Mechanoid_PawnIII</defName>
+    <label>Guard</label>
+    <description>Milian the guard type.\n\nCan equipe with range weapon.</description>
+    <statBases>
+      <MoveSpeed>4.25</MoveSpeed>
+      <MarketValue>1200</MarketValue>
+      <ArmorRating_Blunt>0.15</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.2</ArmorRating_Sharp>
+      <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">4</BandwidthCost>
+    </statBases>
+    <tools Inherit="false">
+      <li>
+        <label>left fist</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>8.0</power>
+        <cooldownTime>1.6</cooldownTime>
+        <linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+      <li>
+        <label>right fist</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>8.0</power>
+        <cooldownTime>1.6</cooldownTime>
+        <linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+    </tools>
+    <race>
+      <baseHealthScale>1.4</baseHealthScale>
+    </race>
+    <comps>
+    </comps>
+    <uiIconPath>Milian/Mechanoid_uiIcon/PawnIII</uiIconPath>
+  </ThingDef>
+
+  <PawnKindDef ParentName="BaseMilianKind_Mechanoid">
+    <defName>Milian_Mechanoid_PawnIII</defName>
+    <label>Guard</label>
+    <race>Milian_Mechanoid_PawnIII</race>
+    <combatPower>216</combatPower>
+    <apparelRequired>
+      <li>Milian_GuardArmor</li>
+      <li>Milian_Lining</li>
+      <li>Milian_Goggle</li>
+    </apparelRequired>
+    <weaponMoney>9999~9999</weaponMoney>
+    <weaponTags>
+      <li>Milian_ParticleBeamBlaster</li>
+      <li>Milian_ParticleDiffusionBlaster</li>
+      <li>Milian_ParticleSMG</li>
+      <li>Milian_ParticleLMG</li>
+      <li>Milira_RayPistol</li>
+      <li>Milira_RayRifle</li>
+    </weaponTags>
+    <techHediffsChance>1</techHediffsChance>
+    <techHediffsMoney>9999~9999</techHediffsMoney>
+  </PawnKindDef>
+
+
+
+
+  <!--=士兵IV型===========================================================================================================================-->
+  <ThingDef ParentName="Milira_MilianBase_Pawn">
+    <defName>Milian_Mechanoid_PawnIV</defName>
+    <label>Captain</label>
+    <description>Milian the captain type.\n\nCan equipe with small or large combat drone.\n\nCan equipe with range weapon.</description>
+    <statBases>
+      <MoveSpeed>4.25</MoveSpeed>
+      <MarketValue>1600</MarketValue>
+      <ArmorRating_Blunt>0.18</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.3</ArmorRating_Sharp>
+      <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">6</BandwidthCost>
+    </statBases>
+    <tools Inherit="false">
+      <li>
+        <label>left fist</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>8.0</power>
+        <cooldownTime>1.6</cooldownTime>
+        <linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+      <li>
+        <label>right fist</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>8.0</power>
+        <cooldownTime>1.6</cooldownTime>
+        <linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+    </tools>
+    <race>
+      <baseHealthScale>1.5</baseHealthScale>
+    </race>
+    <comps>
+      <li Class="Milira.CompProperties_MechCommandRadius">
+        <mechCommandRadius>24.9</mechCommandRadius>
+			</li>
+    </comps>
+    <uiIconPath>Milian/Mechanoid_uiIcon/PawnIV</uiIconPath>
+  </ThingDef>
+
+  <PawnKindDef ParentName="BaseMilianKind_Mechanoid">
+    <defName>Milian_Mechanoid_PawnIV</defName>
+    <label>Captain</label>
+    <race>Milian_Mechanoid_PawnIV</race>
+    <combatPower>288</combatPower>
+    <maxPerGroup>3</maxPerGroup>
+    <apparelRequired>
+      <li>Milian_GuardArmor</li>
+      <li>Milian_Lining</li>
+      <li>Milian_GoggleArmored</li>
+      <li>Milira_CapacitorII</li>
+    </apparelRequired>
+    <apparelTags>
+      <li>Milira_CombatDrone_Large</li>
+    </apparelTags>
+    <weaponMoney>9999~9999</weaponMoney>
+    <weaponTags>
+      <li>Milian_ParticleBeamBlaster</li>
+      <li>Milian_ParticleLMG</li>
+      <li>Milira_RayRifle</li>
+    </weaponTags>
+    <techHediffsChance>1</techHediffsChance>
+    <techHediffsMoney>9999~9999</techHediffsMoney>
+  </PawnKindDef>
+
+</Defs>

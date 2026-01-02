@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!--ThingDef>
+    <defName>WF_CopyFitting_Test</defName>
+    <thingClass>ThingWithComps</thingClass>
+    <graphicData>
+      <texPath>AncotLibrary/Item/UniqueWeapon/WeaponFitting_Base</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <category>Item</category>
+    <selectable>true</selectable>
+    <tickerType>Normal</tickerType>
+    <alwaysHaulable>true</alwaysHaulable>
+    <statBases>
+      <MaxHitPoints>10</MaxHitPoints>
+      <MarketValue>40</MarketValue>
+      <Flammability>1.0</Flammability>
+      <DeteriorationRate>1.0</DeteriorationRate>
+      <Mass>0.1</Mass>
+    </statBases>
+    <thingCategories>
+		<li>Ancot_WeaponFitting</li>
+	</thingCategories>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <altitudeLayer>Item</altitudeLayer>
+    <useHitPoints>true</useHitPoints>
+    <hiddenWhileUndiscovered>false</hiddenWhileUndiscovered>
+    <comps>
+    </comps>
+  </ThingDef-->
+
+  <ThingDef ParentName="UnfinishedBase">
+    <defName>UnfinishedFitting</defName>
+    <label>unfinished fitting</label>
+    <description>An unfinished fitting.</description>
+    <graphicData>
+      <texPath>WeaponFittings/Item/Unfinished/UnfinishedWeaponFitting</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <stuffCategories Inherit="false" />
+  </ThingDef>
+</Defs>

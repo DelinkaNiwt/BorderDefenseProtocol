@@ -1,0 +1,38 @@
+<Defs>
+   <HediffDef>
+	<hediffClass>HediffWithComps</hediffClass>
+    <defName>CMC_AntiInvHediff</defName>
+    <label>Anti inv</label>
+    <description>Give antiinv ability</description>
+	<comps>
+        <li Class="HediffCompProperties_GiveAbility">
+          <abilityDefs>
+			<li>CMC_AntiInvScan</li>
+          </abilityDefs>
+        </li>
+    </comps>
+  </HediffDef>
+  
+   <AbilityDef>
+    <defName>CMC_AntiInvScan</defName>
+    <label>Scan</label>
+    <description>Scanning and spotting invisible targets within sight.</description>
+    <iconPath>UI/UI_REye</iconPath>
+    <cooldownTicksRange>6000</cooldownTicksRange>
+    <aiCanUse>true</aiCanUse>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <warmupTime>1</warmupTime>
+      <soundCast>ShipReactor_Startup</soundCast>
+      <targetParams>
+		<canTargetPawns>true</canTargetPawns>
+		<canTargetLocations>false</canTargetLocations>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="TOT_DLL_test.CompProperties_AntiInv">
+	  <compClass>TOT_DLL_test.CompAbilityEffect_AntiInv</compClass>
+      </li>
+    </comps>
+  </AbilityDef>
+</Defs>

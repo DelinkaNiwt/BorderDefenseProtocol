@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: in flight -->
+  <Milira_InFlight.label>飞行</Milira_InFlight.label>
+  <!-- EN: this milira is in flight. -->
+  <Milira_InFlight.description>这个米莉拉正处于飞行状态。</Milira_InFlight.description>
+  
+</LanguageData>

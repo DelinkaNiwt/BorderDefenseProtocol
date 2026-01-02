@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <CMC_GunColorPicker>change camo</CMC_GunColorPicker>
+  <CMC_GunColorPickerDesciption>You can customise CeleTech weapons' camouflage color by clicking a color and a pawn equipping a CeleTech gun as main weapon.\nsome weapons are not customisable.</CMC_GunColorPickerDesciption>
+  <MessageMustSelectCMCGun>select PAWN equipped with CeleTech weapon</MessageMustSelectCMCGun>
+  <CMC.ChangeSize>adjust shield size</CMC.ChangeSize>
+  <CMC.ChangeSizeDesc>adjust shield size</CMC.ChangeSizeDesc>
+  <CMC.ChangeSizeTitle>adjust shield size</CMC.ChangeSizeTitle>
+  <CMC.ChangeSizeDescription>current radius: {0}\nrange: 20 ~ 60 tiles</CMC.ChangeSizeDescription>
+  <CMC.ShieldSize>current radius: {0}\n</CMC.ShieldSize>
+  <Message_AESASetUp>The deployment of the "Kunlun" AESA radar is complete, and the anti-tank missile turret will gain automatic attack capability.</Message_AESASetUp>
+  <Message_Destroyed>The "Kunlun" AESA radar has been shut down, and the anti-tank missile turret will lose its automatic attack capability.</Message_Destroyed>
+  <StatEnergyWeaponDMG_Label>energy pulse damage</StatEnergyWeaponDMG_Label>
+  <StatEnergyWeaponDMG_Desc>{0}</StatEnergyWeaponDMG_Desc>
+  <StatEnergyWeaponDMG_Text>damage caused by an energy pulse:{0}\n</StatEnergyWeaponDMG_Text>
+  <StatEnergyWeaponAP_Label>energy pulse penetration</StatEnergyWeaponAP_Label>
+  <StatEnergyWeaponAP_Desc>{0}</StatEnergyWeaponAP_Desc>
+  <StatEnergyWeaponAP_Text>energy pulse penetration:{0}\n</StatEnergyWeaponAP_Text>
+  <StatEnergyWeaponDMG2_Label>extra damage</StatEnergyWeaponDMG2_Label>
+  <StatEnergyWeaponDMG2_Desc>{0}</StatEnergyWeaponDMG2_Desc>
+  <StatEnergyWeaponDMG2_Text>extra damage amount:{0}\n</StatEnergyWeaponDMG2_Text>
+  <StatEnergyWeaponAP2_Label>extra damage penetration</StatEnergyWeaponAP2_Label>
+  <StatEnergyWeaponAP2_Desc>{0}</StatEnergyWeaponAP2_Desc>
+  <StatEnergyWeaponAP2_Text>extra damage penetration:{0}\n</StatEnergyWeaponAP2_Text>
+  <StatEnergyWeaponDMG3Radius_Label>scatter radius</StatEnergyWeaponDMG3Radius_Label>
+  <StatEnergyWeaponDMG3Radius_Desc>{0}</StatEnergyWeaponDMG3Radius_Desc>
+  <StatEnergyWeaponDMG3Radius_Text>laser scatter radius:{0}</StatEnergyWeaponDMG3Radius_Text>
+  <StatShootNum_Label>salvo size</StatShootNum_Label>
+  <StatShootNum_Desc>{0}</StatShootNum_Desc>
+  <StatShootNum_Text>Salvo size of this mounted weapon is{0}, ammo consumption is also multiplies by this value.</StatShootNum_Text>
+  
+  <Message_MissileLostTarget>A missile lost its intended target.</Message_MissileLostTarget>
+  
+  <CMC_TradeShipName>Celestial Artisan Guild - UTS</CMC_TradeShipName>
+  <CMC_TradeShipCoolDown>//Call UTS cooldown:{0}//</CMC_TradeShipCoolDown>
+  <CMC_TraderShipsSendAway>send away</CMC_TraderShipsSendAway>
+  <CMC_TraderShipsSendAwayDesc>Send away unmaned-trader shuttle.</CMC_TraderShipsSendAwayDesc>
+  <CMC_LandingZoneBlocked>landing zone blocked:</CMC_LandingZoneBlocked>
+  <CMC_BlockedBy>landing zone is blocked by {0}</CMC_BlockedBy>
+  <Message_CMC_TraderLanded>UTS arrived, landing.</Message_CMC_TraderLanded>
+  <Message_CMC_TraderCantLanded>UTS is unable to land, leaving. You need at least one powered and cleared landing platform.</Message_CMC_TraderCantLanded>
+  
+  <CMC_CallAuxTrader>call supply UTS</CMC_CallAuxTrader>
+  <CMC_CallArsTrader>call arsenal UTS</CMC_CallArsTrader>
+  <Message_CMC_TraderCD>On cooldown, {0} hours left.</Message_CMC_TraderCD>
+  
+  <Stat_CMCDMGDrange_Label>attenuation distance</Stat_CMCDMGDrange_Label>
+  <Stat_CMCDMGDrange_Desc>{0}</Stat_CMCDMGDrange_Desc>
+  <Stat_CMCDMGDrange_Text>Projectile damage and penetration attenuation starts from:{0}\nDamage: Inverse-square decay\nPenetration: Inverse-cube decay</Stat_CMCDMGDrange_Text>
+  <StatMinDamageMultiplier_Label>damage floor ratio</StatMinDamageMultiplier_Label>
+  <StatMinDamageMultiplier_Desc>{0}</StatMinDamageMultiplier_Desc>
+  <StatMinDamageMultiplier_Text>damage floor ratio:{0}</StatMinDamageMultiplier_Text>
+  <StatMinPeneMultiplier_Label>penetration floor ratio</StatMinPeneMultiplier_Label>
+  <StatMinPeneMultiplier_Desc>{0}</StatMinPeneMultiplier_Desc>
+  <StatMinPeneMultiplier_Text>penetration floor ratio:{0}</StatMinPeneMultiplier_Text>
+  
+  <CMC.TempControlIsBlocked>I.T.C.V.S.is blocked by impassable building.</CMC.TempControlIsBlocked>
+  
+  <CMC.ScanMap>Radar Illumination</CMC.ScanMap>
+	<CMC.ScanMapDesc>Utilizes Kunlun radar to illuminate designated AO, enabling long-range artillery and cruise missiles to autonomously engage hostile targets within the zone.</CMC.ScanMapDesc>
+	<CMC.ScanMapStop>Terminate Radar Illumination</CMC.ScanMapStop>
+	<CMC.ScanMapStopDesc>Radar illumination terminated in AO {0}.</CMC.ScanMapStopDesc>
+	<CMC.ScanMapStopDescDefault>Radar illumination terminated in current AO.</CMC.ScanMapStopDescDefault>
+	<CMC_Targeting>Kunlun radar providing real-time fire control data for AO {0}. Hostile target tracking active.</CMC_Targeting>
+	<CMC_TargetingDefault>Kunlun radar providing real-time fire control data for current AO. Hostile target tracking active.</CMC_TargetingDefault>
+	<CMC.ScanMapFailed>Fire control request denied. Non-hostile faction signature detected in AO. IFF verification failed.</CMC.ScanMapFailed>
+	
+	<CMC_CommandTargetMapFromWorld>switch to Low-Voltage Direct Fire Mode</CMC_CommandTargetMapFromWorld>
+<CMC_CommandTarggetMapFromWorldDesc>Current: Indirect Fire (attacks radar-locked map tile targets). After switching: Attacks in-map targets.\n\nMagnetic rails fully charged to accelerate projectiles to first cosmic velocity. Turret cooling and auto-loading systems operating at full power.</CMC_CommandTarggetMapFromWorldDesc>
+
+<CMC_CommandTargetWorldFromMap>switch to High-Voltage Indirect Fire Mode</CMC_CommandTargetWorldFromMap>
+<CMC_CommandTarggetWorldFromMapDesc>Current: Direct Fire (attacks in-map targets). After switching: Attacks radar-locked map tile targets.\n\nMagnetic rails partially charged. All turret subsystems operating in low-power mode.</CMC_CommandTarggetWorldFromMapDesc>
+<CMC_CommandTargetWorldFromMap>Switch to Low-Voltage Direct Fire Mode</CMC_CommandTargetWorldFromMap>
+  <CMC_CommandTarggetWorldFromMapDesc>Current: Indirect Fire (attacks radar-locked map tile targets). After switching: Attacks in-map targets.\n\nMagnetic rails fully charged. All turret subsystems operating in high-power mode.</CMC_CommandTarggetWorldFromMapDesc>
+  
+<Command_CMC_ReleaseUAV>release floating gun</Command_CMC_ReleaseUAV>
+  <!--Command_CMCReleaseUAV_Desc>勾选后释放浮游炮，使其进入攻击或协助模式，将持续使用电容储量。禁止选项后浮游炮会返回并充电。</Command_CMCReleaseUAV_Desc-->
+  <Command_CMC_AutoReleaseUAV>auto-release</Command_CMC_AutoReleaseUAV>
+  <Command_CMC_AutoReleaseUAV_Desc>if toggled, floating guns will auto release in combat, but they cannot automatically return to hanger.</Command_CMC_AutoReleaseUAV_Desc>
+  <CMC_UAVGizmoA>energy</CMC_UAVGizmoA>
+  <CMC_UAVGizmoA_Destroyed>disabled</CMC_UAVGizmoA_Destroyed>
+  <CMC_UAVGizmoB>energy stored in capacitor array, consume inflight.</CMC_UAVGizmoB>
+  <CMC_FailedToWear_ExceedNumLimit>Unable to equip, floating guns reach maximum bandwidth.</CMC_FailedToWear_ExceedNumLimit>
+  <Command_CMC_CallBACKUAV>return to hanger</Command_CMC_CallBACKUAV>
+  <Command_CMCUAVDrawRadius>render weapon radius</Command_CMCUAVDrawRadius>
+  <Command_CMCUAVDrawRadiusDesc>Render floating guns'attack radius, may cause lagging. Turn off if large number of active floating guns existed.</Command_CMCUAVDrawRadiusDesc>
+</LanguageData>

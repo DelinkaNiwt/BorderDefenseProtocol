@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <RoyalTitleDef Abstract="True" Name="Milira_BaseChurchTitle">
+    <tags>
+      <li>Milira_ChurchTitle</li>
+    </tags>
+    <awardThought>GainedTitle</awardThought>
+    <lostThought>LostTitle</lostThought>
+  </RoyalTitleDef>
+
+  <RoyalTitleDef ParentName="Milira_BaseChurchTitle">
+    <defName>Milira_ChurchTitleI</defName>
+    <label>Follower</label>
+    <description>Follower of the Skyfeathered Church.</description>
+    <seniority>0</seniority>
+    <favorCost>1</favorCost>
+    <changeHeirQuestPoints>1000</changeHeirQuestPoints>
+    <commonality>1</commonality>
+    <allowDignifiedMeditationFocus>False</allowDignifiedMeditationFocus>
+    <awardWorkerClass>RoyalTitleAwardWorker_Instant</awardWorkerClass>
+    <permits>
+      <li>TradeSettlement</li>
+      <li>TradeCaravan</li>
+      <li>TradeOrbital</li>
+    </permits>
+  </RoyalTitleDef>
+
+  <RoyalTitleDef ParentName="Milira_BaseChurchTitle">
+    <defName>Milira_ChurchTitleII</defName>
+    <label>Apprentice Adept</label>
+    <description>apprentice adept of the Skyfeathered Church.</description>
+    <seniority>100</seniority>
+    <favorCost>8</favorCost>
+    <recruitmentResistanceOffset>3</recruitmentResistanceOffset>
+    <changeHeirQuestPoints>1000</changeHeirQuestPoints>
+    <commonality>0.6</commonality>
+    <permitPointsAwarded>1</permitPointsAwarded>
+    <awardWorkerClass>RoyalTitleAwardWorker_Instant</awardWorkerClass>
+  </RoyalTitleDef>
+
+  <RoyalTitleDef ParentName="Milira_BaseChurchTitle">
+    <defName>Milira_ChurchTitleIII</defName>
+    <label>Adept</label>
+    <description>adept of the Skyfeathered Church.</description>
+    <seniority>200</seniority>
+    <favorCost>12</favorCost>
+    <minExpectation>Moderate</minExpectation>
+    <requiredMinimumApparelQuality>Normal</requiredMinimumApparelQuality>
+    <recruitmentResistanceOffset>10</recruitmentResistanceOffset>
+    <canBeInherited>True</canBeInherited>
+    <changeHeirQuestPoints>1200</changeHeirQuestPoints>
+    <commonality>0.4</commonality>
+    <permitPointsAwarded>1</permitPointsAwarded>
+    <awardWorkerClass>RoyalTitleAwardWorker_Instant</awardWorkerClass>
+  </RoyalTitleDef>
+
+  <RoyalTitleDef ParentName="Milira_BaseChurchTitle">
+    <defName>Milira_ChurchTitleIV</defName>
+    <label>Deacon</label>
+    <description>deacon of the Skyfeathered Church.</description>
+    <seniority>300</seniority>
+    <favorCost>48</favorCost>
+    <minExpectation>SkyHigh</minExpectation>
+    <requiredMinimumApparelQuality>Normal</requiredMinimumApparelQuality>
+    <recruitmentResistanceOffset>20</recruitmentResistanceOffset>
+    <canBeInherited>True</canBeInherited>
+    <changeHeirQuestPoints>1600</changeHeirQuestPoints>
+    <commonality>0.3</commonality>
+    <permitPointsAwarded>3</permitPointsAwarded>
+    <awardWorkerClass>RoyalTitleAwardWorker_Instant</awardWorkerClass>
+  </RoyalTitleDef>
+
+  <RoyalTitleDef ParentName="Milira_BaseChurchTitle">
+    <defName>Milira_ChurchTitleV</defName>
+    <label>Priest</label>
+    <description>priest of the Skyfeathered Church.</description>
+    <seniority>400</seniority>
+    <favorCost>64</favorCost>
+    <minExpectation>SkyHigh</minExpectation>
+    <requiredMinimumApparelQuality>Normal</requiredMinimumApparelQuality>
+    <recruitmentResistanceOffset>30</recruitmentResistanceOffset>
+    <canBeInherited>True</canBeInherited>
+    <changeHeirQuestPoints>2200</changeHeirQuestPoints>
+    <commonality>0.2</commonality>
+    <permitPointsAwarded>4</permitPointsAwarded>
+    <awardWorkerClass>RoyalTitleAwardWorker_Instant</awardWorkerClass>
+  </RoyalTitleDef>
+  
+  <RoyalTitleDef ParentName="Milira_BaseChurchTitle">
+    <defName>Milira_ChurchTitleVI</defName>
+    <label>Bishop</label>
+    <description>bishop of the Skyfeathered Church.</description>
+    <seniority>500</seniority>
+    <favorCost>84</favorCost>
+    <minExpectation>Noble</minExpectation>
+    <requiredMinimumApparelQuality>Normal</requiredMinimumApparelQuality>
+    <recruitmentResistanceOffset>45</recruitmentResistanceOffset>
+    <canBeInherited>True</canBeInherited>
+    <changeHeirQuestPoints>2800</changeHeirQuestPoints>
+    <commonality>0.1</commonality>
+    <permitPointsAwarded>5</permitPointsAwarded>
+    <awardWorkerClass>RoyalTitleAwardWorker_Instant</awardWorkerClass>
+  </RoyalTitleDef>
+
+  <RoyalTitleDef ParentName="Milira_BaseChurchTitle">
+    <defName>Milira_ChurchTitleVII</defName>
+    <label>Cardinal</label>
+    <description>cardinal of the Skyfeathered Church.</description>
+    <seniority>600</seniority>
+    <favorCost>150</favorCost>
+    <minExpectation>Noble</minExpectation>
+    <requiredMinimumApparelQuality>Normal</requiredMinimumApparelQuality>
+    <recruitmentResistanceOffset>55</recruitmentResistanceOffset>
+    <canBeInherited>True</canBeInherited>
+    <changeHeirQuestPoints>3500</changeHeirQuestPoints>
+    <commonality>0</commonality>
+    <permitPointsAwarded>6</permitPointsAwarded>
+    <awardWorkerClass>RoyalTitleAwardWorker_Instant</awardWorkerClass>
+  </RoyalTitleDef>
+
+  <RoyalTitleDef ParentName="Milira_BaseChurchTitle">
+    <defName>Milira_ChurchTitleVIII</defName>
+    <label>Pontiff</label>
+    <description>pontiff of the Skyfeathered Church.</description>
+    <seniority>1000</seniority>
+    <requiredMinimumApparelQuality>Normal</requiredMinimumApparelQuality>
+    <recruitmentResistanceOffset>75</recruitmentResistanceOffset>
+    <changeHeirQuestPoints>1000</changeHeirQuestPoints>
+    <commonality>0</commonality>
+    <!-- <permitPointsAwarded>2</permitPointsAwarded> -->
+    <awardWorkerClass>RoyalTitleAwardWorker_Instant</awardWorkerClass>
+  </RoyalTitleDef>
+
+</Defs>

@@ -1,0 +1,228 @@
+<Defs>
+<ThingDef ParentName="BuildingBase">
+    <defName>CMC_AdvancedGeothermalGenerator</defName>
+    <label>CMC geothermal generator</label>
+    <description>Produces electricity from geothermal steam geysers. Must be placed on a steam geyser.</description>
+    <thingClass>TOT_DLL_test.Building_CMCAdvancedGeoThermoGen</thingClass>
+    <drawerType>RealtimeOnly</drawerType>
+	<uiIconPath>Things/Buildings/CMC_ThermoGen_UI</uiIconPath>
+    <graphicData>
+      <texPath>Things/Buildings/CMC_ThermoGen</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(6,9.4)</drawSize>
+	  <drawOffset>(0,0.1,1.7)</drawOffset>
+      <damageData>
+        <rect>(0.3,0,5.4,6)</rect>
+      </damageData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>Impassable</passability>
+    <blockWind>false</blockWind>
+    <scatterableOnMapGen>false</scatterableOnMapGen>
+    <fillPercent>1</fillPercent>
+    <blockLight>false</blockLight>
+    <canOverlapZones>false</canOverlapZones>
+    <statBases>
+      <MaxHitPoints>2500</MaxHitPoints>
+      <WorkToBuild>80000</WorkToBuild>
+      <Flammability>0</Flammability>
+      <Beauty>10</Beauty>
+    </statBases>
+    <tickerType>Normal</tickerType>
+    <size>(4,4)</size>
+    <costList>
+      <Steel>400</Steel>
+      <ComponentIndustrial>10</ComponentIndustrial>
+	  <ComponentSpacer>1</ComponentSpacer>
+    </costList>
+    <bringAlongOnGravship>false</bringAlongOnGravship>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerPlantSteam</compClass>
+        <basePowerConsumption>-4500</basePowerConsumption>
+        <transmitsPower>true</transmitsPower>
+      </li>
+      <li Class="CompProperties_Stunnable">
+        <useLargeEMPEffecter>true</useLargeEMPEffecter>
+        <empChancePerTick>0.7</empChancePerTick>
+        <affectedDamageDefs>
+          <li>EMP</li>
+        </affectedDamageDefs>
+      </li>
+      <li Class="CompProperties_AmbientSound">
+        <sound>GeothermalPlant_Ambience</sound>
+        <disabledOnUnpowered>true</disabledOnUnpowered>
+      </li>
+    </comps>
+    <rotatable>false</rotatable>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <designationCategory>CMC_DefensenProduction</designationCategory>
+    <uiOrder>2110</uiOrder>
+    <placeWorkers>
+      <li>PlaceWorker_OnSteamGeyser</li>
+      <li>PlaceWorker_InvalidOverSubstructure</li>
+    </placeWorkers>
+    <building>
+      <ai_chillDestination>false</ai_chillDestination>
+      <destroySound>BuildingDestroyed_Metal_Big</destroySound>
+    </building>
+    <constructEffect>ConstructMetal</constructEffect>
+    <researchPrerequisites>
+		<li>GeothermalPower</li>
+		<li>CMCPowerI</li>
+	</researchPrerequisites>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+  </ThingDef>
+
+ <ThingDef ParentName="BuildingBase">
+    <defName>CMCPowerCellSmall</defName>
+    <label>P.F.R.</label>
+    <description>A portable fission fusion reactor uses uranium as fuel. If damaged(HP below 30%), the unit may generate a massive explosion.</description>
+    <size>(1,1)</size>
+	<tickerType>Normal</tickerType>
+	<altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <stealable>true</stealable>
+    <fillPercent>0.5</fillPercent>
+    <pathCost>12</pathCost>
+    <rotatable>false</rotatable>
+    <statBases>
+      <MaxHitPoints>800</MaxHitPoints>
+      <Flammability>2.5</Flammability>
+      <Mass>45</Mass>
+      <MarketValue>100</MarketValue>
+      <WorkToBuild>12000</WorkToBuild>
+    </statBases>
+	<killedLeavings>
+      <ChunkSlagSteel>1</ChunkSlagSteel>
+    </killedLeavings>
+	<building>
+      <destroySound>BuildingDestroyed_Metal_Medium</destroySound>
+    </building>
+    <costList>
+      <Steel>150</Steel>
+      <ComponentIndustrial>4</ComponentIndustrial>
+	  <ComponentSpacer>1</ComponentSpacer>
+	  <Silver>20</Silver>
+    </costList>
+    <graphicData>
+      <texPath>Things/Buildings/CMCPR</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1.4,1.4)</drawSize>
+      <shadowData>
+        <volume>(0.6, 0.4, 0.6)</volume>
+      </shadowData>
+      <damageData>
+        <rect>(0.2, 0.2, 0.6, 0.6)</rect>
+      </damageData>
+    </graphicData>
+    <thingClass>Building</thingClass>
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <comps>
+	<li Class="CompProperties_Power">
+        <compClass>CompPowerPlant</compClass>
+        <basePowerConsumption>-9000</basePowerConsumption>
+        <transmitsPower>true</transmitsPower>
+        <soundAmbientProducingPower>ChemfuelFiredGenerator_Ambience</soundAmbientProducingPower>
+      </li>
+      <li Class="CompProperties_Flickable" />
+      <li Class="CompProperties_Refuelable">
+        <fuelConsumptionRate>2.0</fuelConsumptionRate>
+        <fuelCapacity>120.0</fuelCapacity>
+        <fuelFilter>
+          <thingDefs>
+            <li>Uranium</li>
+          </thingDefs>
+        </fuelFilter>
+        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+      </li>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>0</wickTicks>
+        <explosiveRadius>3.9</explosiveRadius>
+        <explosiveDamageType>Vaporize</explosiveDamageType>
+        <explodeOnKilled>true</explodeOnKilled>
+        <startWickHitPointsPercent>0.3</startWickHitPointsPercent>
+        <extraInspectStringKey>ExplosionOnDamageWarning</extraInspectStringKey>
+      </li>
+    </comps>
+	<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <designationCategory>CMC_DefensenProduction</designationCategory>
+    <uiOrder>2100</uiOrder>
+    <constructEffect>ConstructMetal</constructEffect>
+    <researchPrerequisites>
+      <li>CMCPowerI</li>
+    </researchPrerequisites>
+    <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
+	<thingCategories>
+      <li>BuildingsSpecial</li>
+    </thingCategories>
+  </ThingDef>
+  
+  <ThingDef ParentName="BuildingBase">
+    <defName>CMC_ZPReactor_Large</defName>
+	<thingClass>TOT_DLL_test.BuildingZPR</thingClass>
+    <label>ZP-reactor group</label>
+    <description>A group of zero-point reactors.</description>
+    <size>(3,3)</size>
+	<uiIconPath>Things/Buildings/CMC_ZPGenerator</uiIconPath>
+	<tickerType>Normal</tickerType>
+	<altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <stealable>false</stealable>
+    <fillPercent>0.5</fillPercent>
+    <pathCost>12</pathCost>
+    <rotatable>false</rotatable>
+    <statBases>
+      <MaxHitPoints>3000</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <MarketValue>10000</MarketValue>
+      <WorkToBuild>399999</WorkToBuild>
+    </statBases>
+	<killedLeavings>
+      <ChunkSlagSteel>1</ChunkSlagSteel>
+    </killedLeavings>
+	<building>
+      <destroySound>BuildingDestroyed_Metal_Medium</destroySound>
+    </building>
+    <costList>
+      <Steel>3000</Steel>
+	  <Plasteel>1500</Plasteel>
+      <ComponentIndustrial>60</ComponentIndustrial>
+	  <ComponentSpacer>30</ComponentSpacer>
+	  <Silver>300</Silver>
+	  <Gold>50</Gold>
+    </costList>
+    <graphicData>
+      <texPath>Things/Buildings/CMC_ZPGenerator</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(4.8,7.2)</drawSize>
+	  <drawOffset>(0,0.1,1.7)</drawOffset>
+    </graphicData>
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+    <comps>
+	<li Class="CompProperties_Power">
+        <compClass>CompPowerPlant</compClass>
+        <basePowerConsumption>-80000</basePowerConsumption>
+        <transmitsPower>true</transmitsPower>
+        <soundAmbientProducingPower>ChemfuelFiredGenerator_Ambience</soundAmbientProducingPower>
+      </li>
+      <li Class="CompProperties_Flickable" />
+      <li Class="CompProperties_Glower">
+            <glowRadius>7</glowRadius>
+            <glowColor>(255,255,255,0)</glowColor>
+	  </li>
+    </comps>
+	<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <designationCategory>CMC_DefensenProduction</designationCategory>
+    <uiOrder>2200</uiOrder>
+    <constructEffect>ConstructMetal</constructEffect>
+    <researchPrerequisites>
+      <li>CMCPowerII</li>
+    </researchPrerequisites>
+    <constructionSkillPrerequisite>16</constructionSkillPrerequisite>
+  </ThingDef>
+  
+</Defs>

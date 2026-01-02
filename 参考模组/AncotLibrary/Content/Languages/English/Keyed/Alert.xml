@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 机械体自主作战的警告 -->
+  <Ancot.Alert_MechAutoFight>mechnoid auto combat</Ancot.Alert_MechAutoFight>
+
+  <Ancot.Alert_MechAutoFightDescPrefix>These mechnoids are combating autonomously</Ancot.Alert_MechAutoFightDescPrefix>
+  <Ancot.Alert_MechAutoFightDesc>They prioritize looking for threats on the map and trying to fight with them. Draft them to gain control.</Ancot.Alert_MechAutoFightDesc>
+
+</LanguageData>

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: <color=#1DD5EE><i>Yu Heng combat chip</i></color> -->
+  <YuHeng.label>【玉衡】近戰乾員晶元</YuHeng.label>
+  <!-- EN: Significantly increase the user's physical defensive ability, and use the kinetic energy of incoming bullets to drive nanomachines in the body to enhance healing ability. -->
+  <YuHeng.description>顯著提高使用者的物理防禦能力，並利用來襲子彈的動能驅動體內的納米機器以增強治療能力。</YuHeng.description>
+  <!-- EN: a Yu Heng combat chip -->
+  <YuHeng.labelNoun>玉衡近戰乾員晶元</YuHeng.labelNoun>
+  
+</LanguageData>

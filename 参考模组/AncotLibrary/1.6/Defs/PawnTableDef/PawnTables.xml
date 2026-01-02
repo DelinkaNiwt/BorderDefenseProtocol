@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <PawnTableDef>
+    <defName>Ancot_MechWork</defName>
+    <workerClass>PawnTable_Mechs</workerClass>
+    <columns>
+      <li>LabelWithIcon</li>
+      <li MayRequire="Ludeon.Rimworld.Biotech">Overseer</li>
+      <li>CopyPasteWorkPriorities</li>
+      <li>RemainingSpace</li>
+    </columns>
+    <modExtensions>
+      <li Class="AncotLibrary.ModExtension_WorkTypeColumn"/>
+    </modExtensions>
+  </PawnTableDef>
+
+  <PawnTableDef>
+    <defName>Ancot_Drones</defName>
+    <workerClass>AncotLibrary.PawnTable_Drones</workerClass>
+    <columns>
+      <li>LabelWithIcon</li>
+      <li>GapSmall</li>
+      <li>Ancot_DraftDrone</li>
+      <li>Ancot_DroneEnergy</li>
+      <li>Ancot_DroneAutoRepair</li>
+      <li>GapTiny</li>
+      <li>Ancot_DroneWorkMode</li>
+      <li>GapWide</li>
+      <li>Ancot_DroneAllowedAreaDrone</li>
+      <!-- <li>RemainingSpace</li> -->
+    </columns>
+  </PawnTableDef>
+
+
+</Defs>

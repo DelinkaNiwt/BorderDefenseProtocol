@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+  <!-- EN: {FACTION_name} has already dropped the required pawn nearby. -->
+  <Ancot.MessagePermitDropPawn_join>{FACTION_name}已经在附近投下了指定的单位。</Ancot.MessagePermitDropPawn_join>
+
+  <!-- EN: {FACTION_name} has fulfilled the permit requirement at specified location. -->
+  <Ancot.MessagePermitPerformed>{FACTION_name}已经在指定位置履行了许可要求。</Ancot.MessagePermitPerformed>
+
+  <!-- EN: {0} have no apparel satisfied to be repaired. -->
+  <Ancot.NoApparelToMend>{0}没有满足条件的衣物可以修补。</Ancot.NoApparelToMend>
+
+  <!-- EN: Selected target does not need to be tended. -->
+  <Ancot.targetNeedNoTend>选取的目标不需要包扎。</Ancot.targetNeedNoTend>
+
+  <!-- EN: Removed {1} from {0}, causing {2} dropped on ground. -->
+  <Ancot.DropEquipmentOnHediffRemoved>{0}移除了{1}，导致{2}掉落。</Ancot.DropEquipmentOnHediffRemoved>
+
+  <!-- EN: Failed to generate apparel policy: must be used in an active save. -->
+  <Ancot.ApparelPolicyGenerateFailed_MustInGame>着装方案生成失败：必须在存档中使用。</Ancot.ApparelPolicyGenerateFailed_MustInGame>
+  <!-- EN: Apparel policy created: {0}. -->
+  <Ancot.ApparelPolicyGenerateSuccess>已创建着装方案：{0}。</Ancot.ApparelPolicyGenerateSuccess>
+
+</LanguageData>

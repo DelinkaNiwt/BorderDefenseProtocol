@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThoughtDef>
+    <defName>MiliraHateWearingBloodStain</defName>
+    <thoughtClass>Milira.Thought_MiliraHateWearingBloodStain</thoughtClass>
+    <workerClass>Milira.ThoughtWorker_MiliraHateWearingBloodStain</workerClass>
+    <validWhileDespawned>true</validWhileDespawned>
+    <stages>
+      <li>
+        <label>wearing costumes made of bloodstained feathers</label>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+
+  <ThoughtDef>
+    <defName>Milira_KnowledgeExchange</defName>
+    <durationDays>3</durationDays>
+    <stackLimit>5</stackLimit>
+    <stackedEffectMultiplier>0.8</stackedEffectMultiplier>
+    <developmentalStageFilter>Child, Adult</developmentalStageFilter>
+    <stages>
+      <li>
+        <label>knowledge exchange</label>
+        <description>have a knowledge exchange with others recently which let me have new ideas.</description>
+        <baseMoodEffect>3</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+
+</Defs>

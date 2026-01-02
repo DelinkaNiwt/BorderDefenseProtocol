@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Promotion: Bishop -->
+  <Milian_PawnPromotion_BishopI.label>升变：主教</Milian_PawnPromotion_BishopI.label>
+  <!-- EN: This pawn is preparing to be promoted to the targeted rank. -->
+  <Milian_PawnPromotion_BishopI.description>该单位正在准备升变至目标职阶。</Milian_PawnPromotion_BishopI.description>
+  <!-- EN: 0% -->
+  <Milian_PawnPromotion_BishopI.stages._0.label>0%</Milian_PawnPromotion_BishopI.stages._0.label>
+  <!-- EN: 25% -->
+  <Milian_PawnPromotion_BishopI.stages._25.label>25%</Milian_PawnPromotion_BishopI.stages._25.label>
+  <!-- EN: 50% -->
+  <Milian_PawnPromotion_BishopI.stages._50.label>50%</Milian_PawnPromotion_BishopI.stages._50.label>
+  <!-- EN: 75% -->
+  <Milian_PawnPromotion_BishopI.stages._75.label>75%</Milian_PawnPromotion_BishopI.stages._75.label>
+  <!-- EN: 99% -->
+  <Milian_PawnPromotion_BishopI.stages._99.label>99%</Milian_PawnPromotion_BishopI.stages._99.label>
+  
+  <!-- EN: Promotion: Bishop -->
+  <Milian_PawnPromotion_BishopII.label>升变：主教</Milian_PawnPromotion_BishopII.label>
+  <!-- EN: This pawn is preparing to be promoted to the targeted rank. -->
+  <Milian_PawnPromotion_BishopII.description>该单位正在准备升变至目标职阶。</Milian_PawnPromotion_BishopII.description>
+  <!-- EN: 0% -->
+  <Milian_PawnPromotion_BishopII.stages._0.label>0%</Milian_PawnPromotion_BishopII.stages._0.label>
+  <!-- EN: 25% -->
+  <Milian_PawnPromotion_BishopII.stages._25.label>25%</Milian_PawnPromotion_BishopII.stages._25.label>
+  <!-- EN: 50% -->
+  <Milian_PawnPromotion_BishopII.stages._50.label>50%</Milian_PawnPromotion_BishopII.stages._50.label>
+  <!-- EN: 75% -->
+  <Milian_PawnPromotion_BishopII.stages._75.label>75%</Milian_PawnPromotion_BishopII.stages._75.label>
+  <!-- EN: 99% -->
+  <Milian_PawnPromotion_BishopII.stages._99.label>99%</Milian_PawnPromotion_BishopII.stages._99.label>
+  
+  <!-- EN: Promotion: Bishop -->
+  <Milian_PawnPromotion_BishopIII.label>升变：主教</Milian_PawnPromotion_BishopIII.label>
+  <!-- EN: This pawn is preparing to be promoted to the targeted rank. -->
+  <Milian_PawnPromotion_BishopIII.description>该单位正在准备升变至目标职阶。</Milian_PawnPromotion_BishopIII.description>
+  <!-- EN: 0% -->
+  <Milian_PawnPromotion_BishopIII.stages._0.label>0%</Milian_PawnPromotion_BishopIII.stages._0.label>
+  <!-- EN: 25% -->
+  <Milian_PawnPromotion_BishopIII.stages._25.label>25%</Milian_PawnPromotion_BishopIII.stages._25.label>
+  <!-- EN: 50% -->
+  <Milian_PawnPromotion_BishopIII.stages._50.label>50%</Milian_PawnPromotion_BishopIII.stages._50.label>
+  <!-- EN: 75% -->
+  <Milian_PawnPromotion_BishopIII.stages._75.label>75%</Milian_PawnPromotion_BishopIII.stages._75.label>
+  <!-- EN: 99% -->
+  <Milian_PawnPromotion_BishopIII.stages._99.label>99%</Milian_PawnPromotion_BishopIII.stages._99.label>
+  
+  <!-- EN: Promotion: Bishop -->
+  <Milian_PawnPromotion_BishopIV.label>升变：主教</Milian_PawnPromotion_BishopIV.label>
+  <!-- EN: This pawn is preparing to be promoted to the targeted rank. -->
+  <Milian_PawnPromotion_BishopIV.description>该单位正在准备升变至目标职阶。</Milian_PawnPromotion_BishopIV.description>
+  <!-- EN: 0% -->
+  <Milian_PawnPromotion_BishopIV.stages._0.label>0%</Milian_PawnPromotion_BishopIV.stages._0.label>
+  <!-- EN: 25% -->
+  <Milian_PawnPromotion_BishopIV.stages._25.label>25%</Milian_PawnPromotion_BishopIV.stages._25.label>
+  <!-- EN: 50% -->
+  <Milian_PawnPromotion_BishopIV.stages._50.label>50%</Milian_PawnPromotion_BishopIV.stages._50.label>
+  <!-- EN: 75% -->
+  <Milian_PawnPromotion_BishopIV.stages._75.label>75%</Milian_PawnPromotion_BishopIV.stages._75.label>
+  <!-- EN: 99% -->
+  <Milian_PawnPromotion_BishopIV.stages._99.label>99%</Milian_PawnPromotion_BishopIV.stages._99.label>
+  
+  <!-- EN: Promotion: Knight -->
+  <Milian_PawnPromotion_KnightI.label>升变：骑士</Milian_PawnPromotion_KnightI.label>
+  <!-- EN: This pawn is preparing to be promoted to the targeted rank. -->
+  <Milian_PawnPromotion_KnightI.description>该单位正在准备升变至目标职阶。</Milian_PawnPromotion_KnightI.description>
+  <!-- EN: 0% -->
+  <Milian_PawnPromotion_KnightI.stages._0.label>0%</Milian_PawnPromotion_KnightI.stages._0.label>
+  <!-- EN: 25% -->
+  <Milian_PawnPromotion_KnightI.stages._25.label>25%</Milian_PawnPromotion_KnightI.stages._25.label>
+  <!-- EN: 50% -->
+  <Milian_PawnPromotion_KnightI.stages._50.label>50%</Milian_PawnPromotion_KnightI.stages._50.label>
+  <!-- EN: 75% -->
+  <Milian_PawnPromotion_KnightI.stages._75.label>75%</Milian_PawnPromotion_KnightI.stages._75.label>
+  <!-- EN: 99% -->
+  <Milian_PawnPromotion_KnightI.stages._99.label>99%</Milian_PawnPromotion_KnightI.stages._99.label>
+  
+  <!-- EN: Promotion: Knight -->
+  <Milian_PawnPromotion_KnightII.label>升变：骑士</Milian_PawnPromotion_KnightII.label>
+  <!-- EN: This pawn is preparing to be promoted to the targeted rank. -->
+  <Milian_PawnPromotion_KnightII.description>该单位正在准备升变至目标职阶。</Milian_PawnPromotion_KnightII.description>
+  <!-- EN: 0% -->
+  <Milian_PawnPromotion_KnightII.stages._0.label>0%</Milian_PawnPromotion_KnightII.stages._0.label>
+  <!-- EN: 25% -->
+  <Milian_PawnPromotion_KnightII.stages._25.label>25%</Milian_PawnPromotion_KnightII.stages._25.label>
+  <!-- EN: 50% -->
+  <Milian_PawnPromotion_KnightII.stages._50.label>50%</Milian_PawnPromotion_KnightII.stages._50.label>
+  <!-- EN: 75% -->
+  <Milian_PawnPromotion_KnightII.stages._75.label>75%</Milian_PawnPromotion_KnightII.stages._75.label>
+  <!-- EN: 99% -->
+  <Milian_PawnPromotion_KnightII.stages._99.label>99%</Milian_PawnPromotion_KnightII.stages._99.label>
+  
+  <!-- EN: Promotion: Knight -->
+  <Milian_PawnPromotion_KnightIII.label>升变：骑士</Milian_PawnPromotion_KnightIII.label>
+  <!-- EN: This pawn is preparing to be promoted to the targeted rank. -->
+  <Milian_PawnPromotion_KnightIII.description>该单位正在准备升变至目标职阶。</Milian_PawnPromotion_KnightIII.description>
+  <!-- EN: 0% -->
+  <Milian_PawnPromotion_KnightIII.stages._0.label>0%</Milian_PawnPromotion_KnightIII.stages._0.label>
+  <!-- EN: 25% -->
+  <Milian_PawnPromotion_KnightIII.stages._25.label>25%</Milian_PawnPromotion_KnightIII.stages._25.label>
+  <!-- EN: 50% -->
+  <Milian_PawnPromotion_KnightIII.stages._50.label>50%</Milian_PawnPromotion_KnightIII.stages._50.label>
+  <!-- EN: 75% -->
+  <Milian_PawnPromotion_KnightIII.stages._75.label>75%</Milian_PawnPromotion_KnightIII.stages._75.label>
+  <!-- EN: 99% -->
+  <Milian_PawnPromotion_KnightIII.stages._99.label>99%</Milian_PawnPromotion_KnightIII.stages._99.label>
+  
+  <!-- EN: Promotion: Knight -->
+  <Milian_PawnPromotion_KnightIV.label>升变：骑士</Milian_PawnPromotion_KnightIV.label>
+  <!-- EN: This pawn is preparing to be promoted to the targeted rank. -->
+  <Milian_PawnPromotion_KnightIV.description>该单位正在准备升变至目标职阶。</Milian_PawnPromotion_KnightIV.description>
+  <!-- EN: 0% -->
+  <Milian_PawnPromotion_KnightIV.stages._0.label>0%</Milian_PawnPromotion_KnightIV.stages._0.label>
+  <!-- EN: 25% -->
+  <Milian_PawnPromotion_KnightIV.stages._25.label>25%</Milian_PawnPromotion_KnightIV.stages._25.label>
+  <!-- EN: 50% -->
+  <Milian_PawnPromotion_KnightIV.stages._50.label>50%</Milian_PawnPromotion_KnightIV.stages._50.label>
+  <!-- EN: 75% -->
+  <Milian_PawnPromotion_KnightIV.stages._75.label>75%</Milian_PawnPromotion_KnightIV.stages._75.label>
+  <!-- EN: 99% -->
+  <Milian_PawnPromotion_KnightIV.stages._99.label>99%</Milian_PawnPromotion_KnightIV.stages._99.label>
+  
+  <!-- EN: Promotion: Queen -->
+  <Milian_PawnPromotion_Queen.label>升变：王后</Milian_PawnPromotion_Queen.label>
+  <!-- EN: This pawn is preparing to be promoted to the targeted rank. -->
+  <Milian_PawnPromotion_Queen.description>该单位正在准备升变至目标职阶。</Milian_PawnPromotion_Queen.description>
+  <!-- EN: 0% -->
+  <Milian_PawnPromotion_Queen.stages._0.label>0%</Milian_PawnPromotion_Queen.stages._0.label>
+  <!-- EN: 25% -->
+  <Milian_PawnPromotion_Queen.stages._25.label>25%</Milian_PawnPromotion_Queen.stages._25.label>
+  <!-- EN: 50% -->
+  <Milian_PawnPromotion_Queen.stages._50.label>50%</Milian_PawnPromotion_Queen.stages._50.label>
+  <!-- EN: 75% -->
+  <Milian_PawnPromotion_Queen.stages._75.label>75%</Milian_PawnPromotion_Queen.stages._75.label>
+  <!-- EN: 99% -->
+  <Milian_PawnPromotion_Queen.stages._99.label>99%</Milian_PawnPromotion_Queen.stages._99.label>
+  
+  <!-- EN: Promotion: Rook -->
+  <Milian_PawnPromotion_RookI.label>升变：战车</Milian_PawnPromotion_RookI.label>
+  <!-- EN: This pawn is preparing to be promoted to the targeted rank. -->
+  <Milian_PawnPromotion_RookI.description>该单位正在准备升变至目标职阶。</Milian_PawnPromotion_RookI.description>
+  <!-- EN: 0% -->
+  <Milian_PawnPromotion_RookI.stages._0.label>0%</Milian_PawnPromotion_RookI.stages._0.label>
+  <!-- EN: 25% -->
+  <Milian_PawnPromotion_RookI.stages._25.label>25%</Milian_PawnPromotion_RookI.stages._25.label>
+  <!-- EN: 50% -->
+  <Milian_PawnPromotion_RookI.stages._50.label>50%</Milian_PawnPromotion_RookI.stages._50.label>
+  <!-- EN: 75% -->
+  <Milian_PawnPromotion_RookI.stages._75.label>75%</Milian_PawnPromotion_RookI.stages._75.label>
+  <!-- EN: 99% -->
+  <Milian_PawnPromotion_RookI.stages._99.label>99%</Milian_PawnPromotion_RookI.stages._99.label>
+  
+  <!-- EN: Promotion: Rook -->
+  <Milian_PawnPromotion_RookII.label>升变：战车</Milian_PawnPromotion_RookII.label>
+  <!-- EN: This pawn is preparing to be promoted to the targeted rank. -->
+  <Milian_PawnPromotion_RookII.description>该单位正在准备升变至目标职阶。</Milian_PawnPromotion_RookII.description>
+  <!-- EN: 0% -->
+  <Milian_PawnPromotion_RookII.stages._0.label>0%</Milian_PawnPromotion_RookII.stages._0.label>
+  <!-- EN: 25% -->
+  <Milian_PawnPromotion_RookII.stages._25.label>25%</Milian_PawnPromotion_RookII.stages._25.label>
+  <!-- EN: 50% -->
+  <Milian_PawnPromotion_RookII.stages._50.label>50%</Milian_PawnPromotion_RookII.stages._50.label>
+  <!-- EN: 75% -->
+  <Milian_PawnPromotion_RookII.stages._75.label>75%</Milian_PawnPromotion_RookII.stages._75.label>
+  <!-- EN: 99% -->
+  <Milian_PawnPromotion_RookII.stages._99.label>99%</Milian_PawnPromotion_RookII.stages._99.label>
+  
+  <!-- EN: Promotion: Rook -->
+  <Milian_PawnPromotion_RookIII.label>升变：战车</Milian_PawnPromotion_RookIII.label>
+  <!-- EN: This pawn is preparing to be promoted to the targeted rank. -->
+  <Milian_PawnPromotion_RookIII.description>该单位正在准备升变至目标职阶。</Milian_PawnPromotion_RookIII.description>
+  <!-- EN: 0% -->
+  <Milian_PawnPromotion_RookIII.stages._0.label>0%</Milian_PawnPromotion_RookIII.stages._0.label>
+  <!-- EN: 25% -->
+  <Milian_PawnPromotion_RookIII.stages._25.label>25%</Milian_PawnPromotion_RookIII.stages._25.label>
+  <!-- EN: 50% -->
+  <Milian_PawnPromotion_RookIII.stages._50.label>50%</Milian_PawnPromotion_RookIII.stages._50.label>
+  <!-- EN: 75% -->
+  <Milian_PawnPromotion_RookIII.stages._75.label>75%</Milian_PawnPromotion_RookIII.stages._75.label>
+  <!-- EN: 99% -->
+  <Milian_PawnPromotion_RookIII.stages._99.label>99%</Milian_PawnPromotion_RookIII.stages._99.label>
+  
+  <!-- EN: Promotion: Rook -->
+  <Milian_PawnPromotion_RookIV.label>升变：战车</Milian_PawnPromotion_RookIV.label>
+  <!-- EN: This pawn is preparing to be promoted to the targeted rank. -->
+  <Milian_PawnPromotion_RookIV.description>该单位正在准备升变至目标职阶。</Milian_PawnPromotion_RookIV.description>
+  <!-- EN: 0% -->
+  <Milian_PawnPromotion_RookIV.stages._0.label>0%</Milian_PawnPromotion_RookIV.stages._0.label>
+  <!-- EN: 25% -->
+  <Milian_PawnPromotion_RookIV.stages._25.label>25%</Milian_PawnPromotion_RookIV.stages._25.label>
+  <!-- EN: 50% -->
+  <Milian_PawnPromotion_RookIV.stages._50.label>50%</Milian_PawnPromotion_RookIV.stages._50.label>
+  <!-- EN: 75% -->
+  <Milian_PawnPromotion_RookIV.stages._75.label>75%</Milian_PawnPromotion_RookIV.stages._75.label>
+  <!-- EN: 99% -->
+  <Milian_PawnPromotion_RookIV.stages._99.label>99%</Milian_PawnPromotion_RookIV.stages._99.label>
+  
+</LanguageData>

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: <color=#1DD5EE><i>Tian Quan combat chip</i></color> -->
+  <TianQuan.label>【天權】輔助晶元</TianQuan.label>
+  <!-- EN: Significantly improves non-combat attributes and learning abilities of the implantee, and does not conflict with other Beidou series chips. The chip has a special protective layer that makes it immune to EMP effects.. -->
+  <TianQuan.description>顯著提升植入者的非戰鬥屬性和學習能力，並且不會與其他北斗系列晶片發生衝突。此晶片擁有特殊的保護層，使其免受EMP效應的影響。</TianQuan.description>
+  <!-- EN: a Tian Quan combat chip -->
+  <TianQuan.labelNoun>天權輔助晶元</TianQuan.labelNoun>
+  
+</LanguageData>

@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: QBB-59 LMG -->
+  <QBB_fivenine.label>QBB-59 电磁班用机枪</QBB_fivenine.label>
+  <!-- EN: A light Machine Gun Variant of QBZ-59C. It provides fire support for squads.\n\nThis weapon can automatically switch target after neutralizing the current one. -->
+  <QBB_fivenine.description>基于QBZ-59突击步枪研发的班用机枪，配备96发大容量弹鼓，自动模式一次发射48发。\n\n武器内置目标分析计算机，能够在消灭当前目标后自动指示下一个目标。</QBB_fivenine.description>
+  <!-- EN: stock -->
+  <QBB_fivenine.tools.stock.label>枪托</QBB_fivenine.tools.stock.label>
+  <!-- EN: barrel -->
+  <QBB_fivenine.tools.barrel.label>枪管</QBB_fivenine.tools.barrel.label>
+  <!-- EN: QBB-59 LMG -->
+  <QBB_fivenine.verbs.Verb_ShootCE.label>TODO</QBB_fivenine.verbs.Verb_ShootCE.label>
+  
+  <!-- UNUSED -->
+  <QBB_fivenine.verbs.Verb_Shoot.label>QBB-59 电磁班用机枪</QBB_fivenine.verbs.Verb_Shoot.label>
+  
+  <!-- EN: QBU-59 marksman rifle -->
+  <QBU_fivenine.label>QBU-59 电磁射手步枪</QBU_fivenine.label>
+  <!-- EN: This marksman rifle is developed from the QBZ-59 assault rifle, featuring an extended barrel for accurate hits at longer distances, though it comes at the cost of reduced rate of fire. -->
+  <QBU_fivenine.description>基于QBZ-59突击步枪研发的射手步枪，配备加长枪管，使其在更远距离上能够准确命中目标，但也因此降低了射速。</QBU_fivenine.description>
+  <!-- EN: stock -->
+  <QBU_fivenine.tools.stock.label>枪托</QBU_fivenine.tools.stock.label>
+  <!-- EN: barrel -->
+  <QBU_fivenine.tools.barrel.label>枪管</QBU_fivenine.tools.barrel.label>
+  <!-- EN: QBU-59 marksman rifle -->
+  <QBU_fivenine.verbs.Verb_ShootCE.label>TODO</QBU_fivenine.verbs.Verb_ShootCE.label>
+  
+  <!-- UNUSED -->
+  <QBU_fivenine.verbs.Verb_Shoot.label>QBU-59 电磁射手步枪</QBU_fivenine.verbs.Verb_Shoot.label>
+  
+  <!-- EN: QBZ-59 AR -->
+  <QBZ_fivenine.label>QBZ-59 电磁突击步枪</QBZ_fivenine.label>
+  <!-- EN: A small-caliber charged assault rifle specifically developed for close-quarters combat environments such as spaceships, capable of firing 4mm charged rounds at an extremely high rate of fire. Although the caliber is small and the power of individual shots is limited, the weapon's exceptionally high rate of fire allows it to effectively suppress enemies. -->
+  <QBZ_fivenine.description>专为飞船等近距离作战环境研发的小口径电荷突击步枪，能够以极高射速发射4毫米电荷覆能弹。虽然子弹口径较小，单发威力有限，但凭借超高射速，它可以有效压制敌人。</QBZ_fivenine.description>
+  <!-- EN: stock -->
+  <QBZ_fivenine.tools.stock.label>枪托</QBZ_fivenine.tools.stock.label>
+  <!-- EN: barrel -->
+  <QBZ_fivenine.tools.barrel.label>枪管</QBZ_fivenine.tools.barrel.label>
+  <!-- EN: QBZ-59 AR -->
+  <QBZ_fivenine.verbs.Verb_ShootCE.label>TODO</QBZ_fivenine.verbs.Verb_ShootCE.label>
+  
+  <!-- UNUSED -->
+  <QBZ_fivenine.verbs.Verb_Shoot.label>QBZ-59 电磁突击步枪</QBZ_fivenine.verbs.Verb_Shoot.label>
+  
+</LanguageData>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<ThingDef ParentName="ApparelBase">
+		<defName>CMC_ZGRangedShieldBelt</defName>
+		<label>Type-ZG shield belt MKII</label>
+		<description>Type'ZhiGe' is a fast-recharge EMP-proof shield belt allowing its wearer to use ranged weapons. It has a small chance to reduce incoming damage to 1.</description>
+		<thingClass>Apparel</thingClass>
+		<tickerType>Normal</tickerType>
+		<recipeMaker>
+			<unfinishedThingDef>UnfinishedBelt</unfinishedThingDef>
+			<researchPrerequisites>
+				<li>CMCarmorII</li>
+				<li>ShieldBelt</li>
+			</researchPrerequisites>
+			<skillRequirements>
+				<Crafting>8</Crafting>
+			</skillRequirements>
+			<recipeUsers Inherit="False">
+				<li>CMC_FacBench</li>		
+			</recipeUsers>
+			<workSkill>Crafting</workSkill>
+		</recipeMaker>
+		<colorGenerator Class="ColorGenerator_Options">
+			<options>
+				<li>
+					<weight>10</weight>
+					<only>(0.85,0.85,0.85)</only>
+				</li>
+			</options>
+		</colorGenerator>
+		<costList>
+			<ComponentIndustrial>2</ComponentIndustrial>
+			<ComponentSpacer>8</ComponentSpacer>
+			<Steel>50</Steel>
+			<Plasteel>60</Plasteel>
+		</costList>
+		<graphicData>
+			<texPath>Things/Apparel/Display/CMC_Belt</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<thingSetMakerTags>
+			<li>RewardStandardMidFreq</li>
+			<li>RewardStandardQualitySuper</li>
+		</thingSetMakerTags>
+		<statBases>
+			<Mass>4.3</Mass>
+			<WorkToMake>74000</WorkToMake>
+			<Flammability>0</Flammability>
+			<EnergyShieldRechargeRate>3.2</EnergyShieldRechargeRate>
+			<EnergyShieldEnergyMax>4</EnergyShieldEnergyMax>
+			<EquipDelay>2</EquipDelay>
+		</statBases>
+		<thingCategories>
+			<li>ApparelUtility</li>
+		</thingCategories>
+		<tradeability>Sellable</tradeability>
+		<tradeTags>
+			<li>Armor</li>
+		</tradeTags>
+		<generateAllowChance>0</generateAllowChance>
+		<apparel>
+			<careIfWornByCorpse>false</careIfWornByCorpse>
+			<careIfDamaged>false</careIfDamaged>
+			<countsAsClothingForNudity>false</countsAsClothingForNudity>
+			<bodyPartGroups>
+				<li>Waist</li>
+			</bodyPartGroups>
+			<layers>
+				<li>Belt</li>
+			</layers>
+			<tags>
+				<li>SpacerMilitary</li>
+				<li>RoyalTier2</li>
+				<li>RoyalTier3</li>
+				<li>RoyalTier4</li>
+				<li>RoyalTier5</li>
+				<li>RoyalTier6</li>
+				<li>RoyalTier7</li>
+			</tags>
+		</apparel>
+		<comps>
+			<li Class="TOT_DLL_test.CompProperties_CMCShield">
+				<blocksRangedWeapons>false</blocksRangedWeapons>
+			</li>
+		</comps>
+	</ThingDef>
+	
+	<ThingDef ParentName="ApparelBase">
+		<defName>CMC_ZGRangedShieldBelt_MKI</defName>
+		<label>Type-ZG shield belt MKI</label>
+		<description>A basic design of ranged shield belt.</description>
+		<thingClass>Apparel</thingClass>
+		<tickerType>Normal</tickerType>
+		<recipeMaker>
+			<unfinishedThingDef>UnfinishedBelt</unfinishedThingDef>
+			<researchPrerequisites>
+				<li>CMCarmor</li>
+				<li>ShieldBelt</li>
+			</researchPrerequisites>
+			<skillRequirements>
+				<Crafting>8</Crafting>
+			</skillRequirements>
+			<recipeUsers Inherit="False">
+				<li>CMC_FacBench</li>		
+			</recipeUsers>
+			<workSkill>Crafting</workSkill>
+		</recipeMaker>
+		<colorGenerator Class="ColorGenerator_Options">
+			<options>
+				<li>
+					<weight>10</weight>
+					<only>(0.5,0.5,0.5)</only>
+				</li>
+			</options>
+		</colorGenerator>
+		<costList>
+			<ComponentIndustrial>4</ComponentIndustrial>
+			<ComponentSpacer>1</ComponentSpacer>
+			<Steel>75</Steel>
+			<Plasteel>10</Plasteel>
+		</costList>
+		<graphicData>
+			<texPath>Things/Apparel/Display/CMC_Belt</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<thingSetMakerTags>
+			<li>RewardStandardMidFreq</li>
+			<li>RewardStandardQualitySuper</li>
+		</thingSetMakerTags>
+		<statBases>
+			<Mass>4.3</Mass>
+			<WorkToMake>74000</WorkToMake>
+			<Flammability>0</Flammability>
+			<EnergyShieldRechargeRate>2.5</EnergyShieldRechargeRate>
+			<EnergyShieldEnergyMax>1.5</EnergyShieldEnergyMax>
+			<EquipDelay>2</EquipDelay>
+		</statBases>
+		<thingCategories>
+			<li>ApparelUtility</li>
+		</thingCategories>
+		<tradeability>Sellable</tradeability>
+		<tradeTags>
+			<li>Armor</li>
+		</tradeTags>
+		<generateAllowChance>0</generateAllowChance>
+		<apparel>
+			<careIfWornByCorpse>false</careIfWornByCorpse>
+			<careIfDamaged>false</careIfDamaged>
+			<countsAsClothingForNudity>false</countsAsClothingForNudity>
+			<bodyPartGroups>
+				<li>Waist</li>
+			</bodyPartGroups>
+			<layers>
+				<li>Belt</li>
+			</layers>
+			<tags>
+				<li>SpacerMilitary</li>
+				<li>RoyalTier2</li>
+				<li>RoyalTier3</li>
+				<li>RoyalTier4</li>
+				<li>RoyalTier5</li>
+				<li>RoyalTier6</li>
+				<li>RoyalTier7</li>
+			</tags>
+		</apparel>
+		<comps>
+			<li Class="CompProperties_Shield">
+				<blocksRangedWeapons>false</blocksRangedWeapons>
+			</li>
+		</comps>
+	</ThingDef>
+</Defs>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: charging. -->
+  <Ancot_DroneCharge.reportString>充电中。</Ancot_DroneCharge.reportString>
+  
+  <!-- EN: dormant. -->
+  <Ancot_DroneSelfShutdown.reportString>休眠中。</Ancot_DroneSelfShutdown.reportString>
+  
+  <!-- EN: hauling TargetA to charger. -->
+  <Ancot_HaulDroneToCharger.reportString>搬运TargetA至充电站。</Ancot_HaulDroneToCharger.reportString>
+  
+  <!-- EN: repairing TargetA. -->
+  <Ancot_RepairDrone.reportString>维修TargetA。</Ancot_RepairDrone.reportString>
+  
+</LanguageData>

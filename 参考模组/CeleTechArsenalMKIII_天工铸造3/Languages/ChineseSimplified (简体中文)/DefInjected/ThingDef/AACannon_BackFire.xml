@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 4*30mm EM-CIWS -->
+  <CMCcannon_BF.label>“倚天”电磁近防系统</CMCcannon_BF.label>
+  <!-- EN: A charged Close-in weapon system equipped on a turret. It fires accurate bursts and does heavy damage to light-armored targets over range, but its barrel must be refurbished after use. -->
+  <CMCcannon_BF.description>四联装30mm电磁近防系统，可以追踪高速目标。</CMCcannon_BF.description>
+  
+  <!-- UNUSED -->
+  <CMCcannon_BF.comps.CompRefuelable.fuelGizmoLabel>炮管耐久</CMCcannon_BF.comps.CompRefuelable.fuelGizmoLabel>
+  <CMCcannon_BF.comps.CompRefuelable.fuelLabel>剩余射击次数</CMCcannon_BF.comps.CompRefuelable.fuelLabel>
+  <CMCcannon_BF.comps.CompRefuelable.outOfFuelMessage>需要更换炮管</CMCcannon_BF.comps.CompRefuelable.outOfFuelMessage>
+  
+  <!-- EN: charged auto cannon -->
+  <Gun_CMCcannon_BF.label>TODO</Gun_CMCcannon_BF.label>
+  <!-- EN: A self-loading large-bore cannon designed to attach to a turret. -->
+  <Gun_CMCcannon_BF.description>TODO</Gun_CMCcannon_BF.description>
+  <!-- EN: charged auto cannon -->
+  <Gun_CMCcannon_BF.verbs.Verb_ShootCE.label>TODO</Gun_CMCcannon_BF.verbs.Verb_ShootCE.label>
+  
+</LanguageData>

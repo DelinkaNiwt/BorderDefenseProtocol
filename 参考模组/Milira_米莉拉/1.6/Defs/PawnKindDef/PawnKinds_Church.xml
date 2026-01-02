@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <PawnKindDef ParentName="Milira_ChurchBase">
+		<defName>Milira_Church_Pope</defName>
+		<label>Pontiff</label>
+		<factionLeader>true</factionLeader>
+		<titleRequired>Milira_ChurchTitleVIII</titleRequired>
+		<combatPower>135</combatPower>
+		<apparelMoney>9999</apparelMoney>
+		<specificApparelRequirements>
+			<li>
+				<bodyPartGroup>UpperHead</bodyPartGroup>
+				<requiredTag>RoyalTier7</requiredTag>
+				<stuff>Gold</stuff>
+			</li>
+			<li>
+				<bodyPartGroup>Torso</bodyPartGroup>
+				<apparelLayer>Shell</apparelLayer>
+				<requiredTag>RoyalTier6</requiredTag>
+				<color>(128, 0, 32)</color>
+			</li>
+			<li>
+				<bodyPartGroup>Torso</bodyPartGroup>
+				<apparelLayer>Middle</apparelLayer>
+				<requiredTag>RoyalTier5</requiredTag>
+				<color>(95, 20, 133)</color>
+			</li>
+			<li>
+				<bodyPartGroup>Torso</bodyPartGroup>
+				<apparelLayer>OnSkin</apparelLayer>
+				<requiredTag>RoyalTier2</requiredTag>
+				<color>(95, 20, 133)</color>
+			</li>
+			<li>
+				<bodyPartGroup>Torso</bodyPartGroup>
+				<stuff>Hyperweave</stuff>
+			</li>
+			<li>
+				<bodyPartGroup>Legs</bodyPartGroup>
+				<stuff>Hyperweave</stuff>
+			</li>
+		</specificApparelRequirements>
+		<techHediffsChance>1</techHediffsChance>
+		<techHediffsMoney>3000~4000</techHediffsMoney>
+		<techHediffsMaxAmount>3</techHediffsMaxAmount>
+		<initialWillRange>16~19</initialWillRange>
+		<initialResistanceRange>38~58</initialResistanceRange>
+		<useFactionXenotypes>false</useFactionXenotypes>
+		<xenotypeSet>
+			<xenotypeChances>
+				<Neanderthal MayRequire="Ludeon.RimWorld.Biotech">0.05</Neanderthal>
+				<Hussar MayRequire="Ludeon.RimWorld.Biotech">0.05</Hussar>
+				<Genie MayRequire="Ludeon.RimWorld.Biotech">0.05</Genie>
+				<Sanguophage MayRequire="Ludeon.RimWorld.Biotech">0.25</Sanguophage>
+			</xenotypeChances>
+		</xenotypeSet>
+	</PawnKindDef>
+
+  <PawnKindDef ParentName="Milira_ChurchLowerBase">
+    <defName>Milira_Church_Adept</defName>
+    <label>Skyfeathered Adept</label>
+    <trader>true</trader>
+    <titleRequired>Milira_ChurchTitleIII</titleRequired>
+    <combatPower>45</combatPower>
+    <apparelAllowHeadgearChance>0.5</apparelAllowHeadgearChance>
+    <specificApparelRequirements>
+      <li>
+        <bodyPartGroup>UpperHead</bodyPartGroup>
+        <requiredTag>RoyalTier3</requiredTag>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <requiredTag>RoyalTier2</requiredTag>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <alternateTagChoices>
+          <li>
+            <tag>Cape</tag>
+            <chance>0.3</chance>
+          </li>
+        </alternateTagChoices>
+      </li>
+    </specificApparelRequirements>
+    <isFighter>false</isFighter>
+    <weaponTags>
+      <li>SimpleGun</li>
+    </weaponTags>
+    <weaponMoney>1100~3500</weaponMoney>
+    <apparelMoney>1250~2500</apparelMoney>
+    <apparelTags>
+      <li>IndustrialBasic</li>
+      <li>IndustrialAdvanced</li>
+      <li>IndustrialMilitaryBasic</li>
+      <li>IndustrialMilitaryAdvanced</li>
+    </apparelTags>
+    <apparelColor>(200,200,200)</apparelColor>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="Milira_ChurchBase_Fighter">
+    <defName>Milira_Church_Trooper</defName>
+    <label>Skyfeathered Trooper</label>
+    <combatPower>100</combatPower>
+    <apparelAllowHeadgearChance>0.8</apparelAllowHeadgearChance>
+    <apparelRequired>
+      <li>Apparel_AdvancedHelmet</li>
+    </apparelRequired>
+    <specificApparelRequirements>
+      <li>
+        <bodyPartGroup>UpperHead</bodyPartGroup>
+        <apparelLayer>Overhead</apparelLayer>
+        <stuff>Milira_SplendidSteel</stuff>
+      </li>
+    </specificApparelRequirements>
+    <weaponMoney>2600~3100</weaponMoney>
+    <biocodeWeaponChance>0.8</biocodeWeaponChance>
+    <weaponTags>
+      <li>IndustrialGunAdvanced</li>
+      <li>Milian_ParticleSMG</li>
+      <li>Milian_ParticleDiffusionBlaster</li>
+      <li>Milian_ParticleLMG</li>
+      <li>Milian_ParticleBeamBlaster</li>
+    </weaponTags>
+    <apparelColor>(200,200,200)</apparelColor>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="Milira_ChurchBase_Fighter">
+    <defName>Milira_Church_Janissary</defName>
+    <label>Skyfeathered Guard</label>
+    <combatPower>140</combatPower>
+    <apparelAllowHeadgearChance>0.8</apparelAllowHeadgearChance>
+    <apparelRequired>
+      <li>Apparel_ArmorHelmetRecon</li>
+      <li>Apparel_ArmorRecon</li>
+    </apparelRequired>
+    <specificApparelRequirements>
+      <li>
+        <bodyPartGroup>UpperHead</bodyPartGroup>
+        <alternateTagChoices>
+          <li>
+            <tag>Gunlink</tag>
+            <chance>0.2</chance>
+          </li>
+        </alternateTagChoices>
+      </li>
+    </specificApparelRequirements>
+    <skills>
+      <li>
+        <skill>Shooting</skill>
+        <range>6~10</range>
+      </li>
+    </skills>
+    <weaponMoney>2600~3100</weaponMoney>
+    <biocodeWeaponChance>0.8</biocodeWeaponChance>
+    <weaponTags>
+      <li>IndustrialGunAdvanced</li>
+      <li>SpacerGun</li>
+      <li>SniperRifle</li>
+      <li>Milian_ParticleSMG</li>
+      <li>Milian_ParticleLMG</li>
+    </weaponTags>
+    <apparelColor>(100,100,100)</apparelColor>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="Milira_ChurchBase_Fighter">
+    <defName>Milira_Church_Warrior</defName>
+    <label>Skyfeathered Warrior</label>
+    <combatPower>80</combatPower>
+    <apparelAllowHeadgearChance>0.8</apparelAllowHeadgearChance>
+    <apparelRequired>
+      <li>Apparel_AdvancedHelmet</li>
+      <li>Apparel_ShieldBelt</li>
+    </apparelRequired>
+    <specificApparelRequirements>
+      <li>
+        <bodyPartGroup>UpperHead</bodyPartGroup>
+        <apparelLayer>Overhead</apparelLayer>
+        <stuff>Milira_SplendidSteel</stuff>
+      </li>
+    </specificApparelRequirements>
+    <weaponMoney>2600~3100</weaponMoney>
+    <biocodeWeaponChance>0.8</biocodeWeaponChance>
+    <weaponTags>
+      <li>UltratechMelee</li>
+    </weaponTags>
+    <apparelColor>(80,80,80)</apparelColor>
+  </PawnKindDef>
+  
+  <PawnKindDef ParentName="Milira_ChurchBase_Fighter">
+    <defName>Milira_Church_Knight</defName>
+    <label>Church Knight</label>
+    <combatPower>150</combatPower>
+    <titleRequired>Milira_ChurchTitleII</titleRequired>
+    <apparelAllowHeadgearChance>1.0</apparelAllowHeadgearChance>
+    <apparelMoney>6000~9000</apparelMoney>
+    <apparelRequired>
+      <li>Apparel_PowerArmorHelmet</li>
+      <li>Apparel_PowerArmor</li>
+    </apparelRequired>
+    <apparelTags>
+      <li>Milira_CombatDrone_RaidAvailable_PawnII</li>
+    </apparelTags>
+    <skills>
+      <li>
+        <skill>Shooting</skill>
+        <range>4~10</range>
+      </li>
+    </skills>
+    <weaponMoney>2600~3100</weaponMoney>
+    <biocodeWeaponChance>0.8</biocodeWeaponChance>
+    <weaponTags>
+      <li>Milian_ParticleSMG</li>
+      <li>Milian_ParticleLMG</li>
+      <li>GunHeavy</li>
+      <li>SpacerGun</li>
+    </weaponTags>
+    <apparelColor>(220,220,220)</apparelColor>
+  </PawnKindDef>
+
+  <PawnKindDef Name="Milira_Church_Cataphract" ParentName="Milira_ChurchBase_Fighter">
+    <defName>Milira_Church_Cataphract</defName>
+    <label>Church Cataphract</label>
+    <combatPower>180</combatPower>
+    <itemQuality>Excellent</itemQuality>
+    <titleRequired>Milira_ChurchTitleIII</titleRequired>
+    <apparelAllowHeadgearChance>1.0</apparelAllowHeadgearChance>
+    <apparelMoney>6000~9000</apparelMoney>
+    <apparelRequired>
+      <li>Apparel_ArmorHelmetCataphract</li>
+      <li>Apparel_ArmorCataphract</li>
+    </apparelRequired>
+    <apparelTags>
+      <li>Milira_CombatDrone_Large</li>
+    </apparelTags>
+    <skills>
+      <li>
+        <skill>Shooting</skill>
+        <range>8~12</range>
+      </li>
+    </skills>
+    <weaponMoney>2600~5600</weaponMoney>
+    <biocodeWeaponChance>1.0</biocodeWeaponChance>
+    <weaponTags>
+      <li>Milian_ParticleLMG</li>
+      <li>Milira_MagneticRailRifle</li>
+      <li>Milira_HandRailGun</li>
+      <li>Milira_PlasmaRifle</li>
+    </weaponTags>
+    <techHediffsRequired>
+      <li>ArmorskinGland</li>
+    </techHediffsRequired>
+    <apparelColor>(250,250,250)</apparelColor>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="Milira_Church_Cataphract">
+    <defName>Milira_Church_CataphractMelee</defName>
+    <apparelRequired>
+      <li>Milira_CombatDrone_EnergyBubble</li>
+      <li>Apparel_ShieldBelt</li>
+    </apparelRequired>
+    <skills Inherit="false">
+      <li>
+        <skill>Melee</skill>
+        <range>8~12</range>
+      </li>
+    </skills>
+    <weaponMoney>2600~5600</weaponMoney>
+    <biocodeWeaponChance>1.0</biocodeWeaponChance>
+    <weaponTags Inherit="false">
+      <li>Milira_PoweredMelee</li>
+    </weaponTags>
+    <techHediffsRequired>
+      <li>ArmorskinGland</li>
+    </techHediffsRequired>
+    <apparelColor>(250,250,250)</apparelColor>
+  </PawnKindDef>
+
+</Defs>

@@ -1,0 +1,73 @@
+<Defs>
+	<ThingDef ParentName="TOT_WeaponsNoQuality">
+    <defName>CMC_QSZfiveeight</defName>
+    <label>QSZ-58 EM pistol</label>
+    <description>A compact sidearm firing large-caliber electromagnetic rifle rounds. Limited capacitor capacity and shorter rails significantly reduce effective range and accuracy compared to rifles using identical ammunition, while retaining the round's stopping power.\n\nServes as an emergency backup weapon for heavy firearms.</description>
+    <graphicData>
+      <texPath>Things/Weapons/QSZfiveeight</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>(0.72,0.72)</drawSize>
+    </graphicData>
+	<uiIconPath>Things/Weapons/QSZfiveeight_UI</uiIconPath>
+    <uiIconScale>1.1</uiIconScale>
+    <soundInteract>Interact_Autopistol</soundInteract>
+    <recipeMaker>
+      <researchPrerequisite>CMC_basisLight</researchPrerequisite>
+      <skillRequirements>
+        <Crafting>4</Crafting>
+      </skillRequirements>
+      <displayPriority>405</displayPriority>
+    </recipeMaker>
+    <weaponTags>
+      <li>SpacerGun</li>
+	  <li>CMC_PDW</li>
+    </weaponTags>
+    <weaponClasses>
+      <li>RangedLight</li>
+    </weaponClasses>
+    <statBases>
+      <WorkToMake>5000</WorkToMake>
+      <Mass>1.0</Mass>
+      <AccuracyTouch>0.98</AccuracyTouch>
+      <AccuracyShort>0.92</AccuracyShort>
+      <AccuracyMedium>0.85</AccuracyMedium>
+      <AccuracyLong>0.83</AccuracyLong>
+      <RangedWeapon_Cooldown>0.2</RangedWeapon_Cooldown>
+	  <MarketValue>1600</MarketValue>
+    </statBases>
+    <costList>
+      <Steel>75</Steel>
+      <ComponentIndustrial>10</ComponentIndustrial>
+	  <Chemfuel>15</Chemfuel>
+    </costList>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_QBZ3oo</defaultProjectile>
+        <warmupTime>0.6</warmupTime>
+        <range>19.9</range>
+		<burstShotCount>1</burstShotCount>
+        <soundCast>CMC_PistolFire</soundCast>
+        <soundCastTail>GunTail_Light</soundCastTail>
+        <muzzleFlashScale>9</muzzleFlashScale>
+      </li>
+    </verbs>
+	<comps>
+		<li Class="TOT_DLL_test.CompProperties_WeaponRenderStatic">
+			<TexturePath>Things/Weapons/QSZfiveeight_Light</TexturePath>
+			<TexturePath_Camo>Things/Weapons/QSZfiveeightm</TexturePath_Camo>
+		</li>
+    </comps>
+    <tools>
+      <li>
+        <label>grip</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>9</power>
+        <cooldownTime>2</cooldownTime>
+      </li>
+    </tools>
+  </ThingDef>
+</Defs>

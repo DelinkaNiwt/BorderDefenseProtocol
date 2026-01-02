@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 8x50mm Electromagnetic (AP) -->
+  <Ammo_8x50mmElectromagnetic_AP.label>8x50mm 电磁穿甲弹</Ammo_8x50mmElectromagnetic_AP.label>
+  <!-- EN: High power electromagnetic projectile ammunition used by advanced railgun battle rifles, machineguns and sniper rifles. -->
+  <Ammo_8x50mmElectromagnetic_AP.description>大口径穿甲步枪弹，击中后能发生爆炸</Ammo_8x50mmElectromagnetic_AP.description>
+  
+  <!-- EN: 8x50mm Electromagnetic (Ion) -->
+  <Ammo_8x50mmElectromagnetic_Ion.label>8x50mm 电磁聚能弹</Ammo_8x50mmElectromagnetic_Ion.label>
+  <!-- EN: High power electromagnetic projectile ammunition used by advanced railgun battle rifles, machineguns and sniper rifles. -->
+  <Ammo_8x50mmElectromagnetic_Ion.description>大口径聚能步枪弹，击中后能发生EMP爆炸</Ammo_8x50mmElectromagnetic_Ion.description>
+  
+  <!-- EN: 8x50mm Electromagnetic projectile (AP) -->
+  <Bullet_8x50mmElectromagnetic_AP.label>8x50mm 电磁穿甲弹</Bullet_8x50mmElectromagnetic_AP.label>
+  
+  <!-- EN: 8x50mm Electromagnetic projectile (Ion) -->
+  <Bullet_8x50mmElectromagnetic_Ion.label>8x50mm 电磁聚能弹</Bullet_8x50mmElectromagnetic_Ion.label>
+  
+</LanguageData>

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Milian analytic headset -->
+  <Milian_BishopHeadset.label>米莉安分析耳机</Milian_BishopHeadset.label>
+  <!-- EN: A headset that helps Milian collect information and better analyze the battlefield situation. -->
+  <Milian_BishopHeadset.description>能够帮助收集信息，更好地分析战场形势的头部装备。</Milian_BishopHeadset.description>
+  
+  <!-- EN: Milian goggle -->
+  <Milian_Goggle.label>米莉安目镜</Milian_Goggle.label>
+  <!-- EN: Headgear designed to protect Milian's visual sensors. -->
+  <Milian_Goggle.description>为视觉传感器提供防护的头部装备。</Milian_Goggle.description>
+  
+  <!-- EN: Milian armored goggle -->
+  <Milian_GoggleArmored.label>米莉安装甲目镜</Milian_GoggleArmored.label>
+  <!-- EN: Headgear designed to protect Milian's visual sensors, with enhanced protective capabilities over the standard version. -->
+  <Milian_GoggleArmored.description>为视觉传感器提供防护的头部装备。</Milian_GoggleArmored.description>
+  
+  <!-- EN: Milian communication headset -->
+  <Milian_KnightHeadset.label>米莉安通讯耳机</Milian_KnightHeadset.label>
+  <!-- EN: A headset that stabilizes signal transmission to ensure uninterrupted real-time communication on the battlefield. -->
+  <Milian_KnightHeadset.description>能够稳定信号传输，更好地实时通讯的头部装备。</Milian_KnightHeadset.description>
+  
+  <!-- EN: Milian sports headset -->
+  <Milian_KnightHeadsetII.label>米莉安运动耳机</Milian_KnightHeadsetII.label>
+  <!-- EN: A sports headset that stabilizes signal transmission and improves wind resistance over the standard version. -->
+  <Milian_KnightHeadsetII.description>能够稳定信号传输，更好地实时通讯的头部装备。</Milian_KnightHeadsetII.description>
+  
+  <!-- EN: Milian horned crown -->
+  <Milian_KnightHeadsetIII.label>米莉安角形头冠</Milian_KnightHeadsetIII.label>
+  <!-- EN: A headgear designed to provide protection for Paladin's head. -->
+  <Milian_KnightHeadsetIII.description>提供防护的头部装备。</Milian_KnightHeadsetIII.description>
+  
+  <!-- EN: Milian pivot headset -->
+  <Milian_PivotHeadSet.label>米莉安中枢耳机</Milian_PivotHeadSet.label>
+  <!-- EN: A headset that helps Milian thinking and better analyze the battlefield situation. -->
+  <Milian_PivotHeadSet.description>能够辅助思考，更好地分析战场形势的头部装备。</Milian_PivotHeadSet.description>
+  
+  <!-- EN: Milian rook mask -->
+  <Milian_RookMask.label>米莉安冲击面具</Milian_RookMask.label>
+  <!-- EN: A mask designed to provide protection for the head of Rook. -->
+  <Milian_RookMask.description>提供防护的面罩。</Milian_RookMask.description>
+  
+  <!-- EN: Milian silent hunter hood -->
+  <Milian_SilentHunterHood.label>米莉安寂静猎手兜帽</Milian_SilentHunterHood.label>
+  <!-- EN: A hood designed to provide protection for the head of Cardinal, sacrificing some protective performance to accommodate the ability to bend light. -->
+  <Milian_SilentHunterHood.description>有一定防护能力的兜帽。</Milian_SilentHunterHood.description>
+  
+  <!-- EN: Milian striker helmet -->
+  <Milian_StrikerHelmet.label>米莉安撞角头盔</Milian_StrikerHelmet.label>
+  <!-- EN: A helmet with a ram designed to provide protection for the head of Striker. -->
+  <Milian_StrikerHelmet.description>提供防护的带角全盔。</Milian_StrikerHelmet.description>
+  
+</LanguageData>

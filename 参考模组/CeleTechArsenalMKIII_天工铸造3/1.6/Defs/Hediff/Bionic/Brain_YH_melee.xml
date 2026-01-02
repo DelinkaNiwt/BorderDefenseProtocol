@@ -1,0 +1,118 @@
+<Defs>
+	<HediffDef ParentName="ImplantHediffBase">
+    <defName>YuHeng</defName>
+	<defaultLabelColor>(0, 1, 1)</defaultLabelColor>
+    <label>&lt;color=#1DD5EE&gt;&lt;i&gt;Yu Heng combat chip&lt;/i&gt;&lt;/color&gt;</label>
+    <labelNoun>a Yu Heng combat chip</labelNoun>
+    <description>Significantly increase the user's physical defensive ability, and use the kinetic energy of incoming bullets to drive nanomachines in the body to enhance healing ability.</description>
+    <descriptionHyperlinks><ThingDef>YuHengChip</ThingDef></descriptionHyperlinks>
+    <stages>
+      <li>
+	  <totalBleedFactor>0.3</totalBleedFactor>
+		<capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>0.20</offset>
+          </li>
+		</capMods>
+		<statOffsets>
+			<ShootingAccuracyPawn>-15.0</ShootingAccuracyPawn>
+			<Flammability>-1</Flammability>
+			<StaggerDurationFactor>-0.2</StaggerDurationFactor>
+			<MoveSpeed>3</MoveSpeed>
+			<PainShockThreshold>0.75</PainShockThreshold>
+			<MeleeDamageFactor>1.2</MeleeDamageFactor>
+		</statOffsets>
+      </li>
+    </stages>
+	<comps>
+        <li Class="HediffCompProperties_GiveAbility">
+          <abilityDefs>
+            <li>TOT_YH_meleebuff</li>
+          </abilityDefs>
+        </li>
+    </comps>
+    <spawnThingOnRemoved>YuHengChip</spawnThingOnRemoved>
+  </HediffDef>
+
+  <ThingDef ParentName="BodyPartProstheticCMCBase">
+    <defName>YuHengChip</defName>
+    <label>Yu Heng chip</label>
+    <description>A brain implant which boosts melee combat abilities.</description>
+    <descriptionHyperlinks><RecipeDef>InstallYH</RecipeDef></descriptionHyperlinks>
+	<statBases>
+		<WorkToMake>6000</WorkToMake>
+		<MarketValue>3000</MarketValue>
+		<Mass>0.2</Mass>
+	</statBases>
+    <thingSetMakerTags>
+      <li>RewardStandardLowFreq</li>
+    </thingSetMakerTags>
+    <costList>
+      <Steel>30</Steel>
+	  <Plasteel>45</Plasteel>
+	  <Gold>40</Gold>
+      <ComponentIndustrial>4</ComponentIndustrial>
+	  <ComponentSpacer>8</ComponentSpacer>
+	  <NanostructuringChip>1</NanostructuringChip>
+    </costList>
+    <techHediffsTags>
+      <li>CMC</li>
+    </techHediffsTags>
+	<recipeMaker>
+		  <researchPrerequisite>CMCBio</researchPrerequisite>
+		  <skillRequirements>
+			<Crafting>15</Crafting>
+		  </skillRequirements>
+		  <recipeUsers Inherit="False">
+			<li>FabricationBench</li>
+		  </recipeUsers>
+		  <displayPriority>200</displayPriority>
+	</recipeMaker>
+  </ThingDef>
+
+  <RecipeDef ParentName="SurgeryInstallImplantBase">
+    <defName>InstallYH</defName>
+    <label>install Yu Heng chip</label>
+    <description>Install a Yu Heng chip.</description>
+    <descriptionHyperlinks>
+      <ThingDef>YuHengChip</ThingDef>
+      <HediffDef>YuHeng</HediffDef>
+    </descriptionHyperlinks>
+    <jobString>Installing Yu Heng chip.</jobString>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>YuHengChip</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>YuHengChip</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <appliedOnFixedBodyParts>
+      <li>Brain</li>
+    </appliedOnFixedBodyParts>
+    <addsHediff>YuHeng</addsHediff>
+	<incompatibleWithHediffTags>
+	  <li>TianXuan</li>
+    </incompatibleWithHediffTags>
+  </RecipeDef>
+
+  <RecipeDef ParentName="SurgeryRemoveImplantBase">
+    <defName>RemoveYH</defName>
+    <label>remove Yu Heng chip</label>
+    <description>Remove the Yu Heng chip.</description>
+    <descriptionHyperlinks>
+      <ThingDef>YuHengChip</ThingDef>
+      <HediffDef>YuHeng</HediffDef>
+    </descriptionHyperlinks>
+    <jobString>Removing Yu Heng chip.</jobString>
+    <removesHediff>YuHeng</removesHediff>
+  </RecipeDef>
+</Defs>

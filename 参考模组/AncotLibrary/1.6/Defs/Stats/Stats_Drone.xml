@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <StatDef Name="Ancot_DroneStatBase" ParentName="MechStatBase" Abstract="True">
+    <hideAtValue>0</hideAtValue>
+    <minValue>0</minValue>
+  </StatDef>
+
+  <StatDef ParentName="Ancot_DroneStatBase">
+    <defName>Ancot_DroneEnduranceTime</defName>
+    <label>endurance time</label>
+    <description>The duration the drone can operate from a full charge until the energy is depleted.</description>
+    <defaultBaseValue>0</defaultBaseValue>
+    <formatString>{0} hour</formatString>
+    <toStringStyle>Integer</toStringStyle>
+    <displayPriorityInCategory>2496</displayPriorityInCategory>
+  </StatDef>
+
+  <StatDef ParentName="Ancot_DroneStatBase">
+    <defName>Ancot_DroneRechargeTime</defName>
+    <label>recharge time</label>
+    <description>The time it takes for the drone to recharge to full after its energy is depleted.</description>
+    <defaultBaseValue>0</defaultBaseValue>
+    <formatString>{0} hour</formatString>
+    <toStringStyle>Integer</toStringStyle>
+    <displayPriorityInCategory>2495</displayPriorityInCategory>
+  </StatDef>
+
+</Defs>

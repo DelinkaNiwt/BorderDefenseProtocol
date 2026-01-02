@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <StatDef>
+    <defName>Ancot_TurretRotateSpeed</defName>
+    <label>turret rotate speed</label>
+    <description>The turret's rotation speed towards the target.</description>
+    <category>Building</category>
+    <defaultBaseValue>60</defaultBaseValue>
+    <minValue>0</minValue>
+    <toStringStyle>FloatOne</toStringStyle>
+    <formatString>{0}°/s</formatString>
+    <showIfUndefined>false</showIfUndefined>
+    <scenarioRandomizable>true</scenarioRandomizable>
+    <displayPriorityInCategory>2000</displayPriorityInCategory>
+  </StatDef>
+
+  <StatDef>
+    <defName>Ancot_TurretShootAngleLimit</defName>
+    <label>turret shoot angle limit</label>
+    <description>The angle range within which the turret can continue to aim and fire after starting the shot.</description>
+    <category>Building</category>
+    <defaultBaseValue>10</defaultBaseValue>
+    <minValue>0</minValue>
+    <toStringStyle>FloatOne</toStringStyle>
+    <formatString>{0}°</formatString>
+    <showIfUndefined>false</showIfUndefined>
+    <scenarioRandomizable>true</scenarioRandomizable>
+    <displayPriorityInCategory>1999</displayPriorityInCategory>
+  </StatDef>
+
+  <!-- 副炮用的 -->
+  <StatDef>
+    <defName>Ancot_TurretWarmUpTime</defName>
+    <label>turret warm up time</label>
+    <description>How long this turret takes to shoot after choosing a target.</description>
+    <category>PawnCombat</category>
+    <defaultBaseValue>0</defaultBaseValue>
+    <minValue>0</minValue>
+    <toStringStyle>FloatOne</toStringStyle>
+    <formatString>{0} s</formatString>
+    <showIfUndefined>false</showIfUndefined>
+    <scenarioRandomizable>true</scenarioRandomizable>
+    <displayPriorityInCategory>1999</displayPriorityInCategory>
+  </StatDef>
+</Defs>

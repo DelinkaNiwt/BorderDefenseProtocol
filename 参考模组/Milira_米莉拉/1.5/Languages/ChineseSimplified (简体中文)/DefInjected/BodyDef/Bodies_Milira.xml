@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Milira -->
+  <Milira_Body.label>米莉拉</Milira_Body.label>
+  <!-- EN: left lung -->
+  <Milira_Body.corePart.parts.left_lung.customLabel>左肺</Milira_Body.corePart.parts.left_lung.customLabel>
+  <!-- EN: right lung -->
+  <Milira_Body.corePart.parts.right_lung.customLabel>右肺</Milira_Body.corePart.parts.right_lung.customLabel>
+  <!-- EN: left kidney -->
+  <Milira_Body.corePart.parts.left_kidney.customLabel>左肾</Milira_Body.corePart.parts.left_kidney.customLabel>
+  <!-- EN: right kidney -->
+  <Milira_Body.corePart.parts.right_kidney.customLabel>右肾</Milira_Body.corePart.parts.right_kidney.customLabel>
+  <!-- EN: halo -->
+  <Milira_Body.corePart.parts.Neck.parts.Head.parts.halo.customLabel>光环</Milira_Body.corePart.parts.Neck.parts.Head.parts.halo.customLabel>
+  <!-- EN: left eye -->
+  <Milira_Body.corePart.parts.Neck.parts.Head.parts.left_eye.customLabel>左眼</Milira_Body.corePart.parts.Neck.parts.Head.parts.left_eye.customLabel>
+  <!-- EN: right eye -->
+  <Milira_Body.corePart.parts.Neck.parts.Head.parts.right_eye.customLabel>右眼</Milira_Body.corePart.parts.Neck.parts.Head.parts.right_eye.customLabel>
+  <!-- EN: left ear -->
+  <Milira_Body.corePart.parts.Neck.parts.Head.parts.left_ear.customLabel>左耳</Milira_Body.corePart.parts.Neck.parts.Head.parts.left_ear.customLabel>
+  <!-- EN: right ear -->
+  <Milira_Body.corePart.parts.Neck.parts.Head.parts.right_ear.customLabel>右耳</Milira_Body.corePart.parts.Neck.parts.Head.parts.right_ear.customLabel>
+  <!-- EN: left shoulder -->
+  <Milira_Body.corePart.parts.left_shoulder.customLabel>左肩</Milira_Body.corePart.parts.left_shoulder.customLabel>
+  <!-- EN: left clavicle -->
+  <Milira_Body.corePart.parts.left_shoulder.parts.left_clavicle.customLabel>左锁骨</Milira_Body.corePart.parts.left_shoulder.parts.left_clavicle.customLabel>
+  <!-- EN: left arm -->
+  <Milira_Body.corePart.parts.left_shoulder.parts.left_arm.customLabel>左臂</Milira_Body.corePart.parts.left_shoulder.parts.left_arm.customLabel>
+  <!-- EN: left humerus -->
+  <Milira_Body.corePart.parts.left_shoulder.parts.left_arm.parts.left_humerus.customLabel>左肱骨</Milira_Body.corePart.parts.left_shoulder.parts.left_arm.parts.left_humerus.customLabel>
+  <!-- EN: left radius -->
+  <Milira_Body.corePart.parts.left_shoulder.parts.left_arm.parts.left_radius.customLabel>左桡骨</Milira_Body.corePart.parts.left_shoulder.parts.left_arm.parts.left_radius.customLabel>
+  <!-- EN: left hand -->
+  <Milira_Body.corePart.parts.left_shoulder.parts.left_arm.parts.left_hand.customLabel>左手</Milira_Body.corePart.parts.left_shoulder.parts.left_arm.parts.left_hand.customLabel>
+  <!-- EN: left pinky -->
+  <Milira_Body.corePart.parts.left_shoulder.parts.left_arm.parts.left_hand.parts.left_pinky.customLabel>左小指</Milira_Body.corePart.parts.left_shoulder.parts.left_arm.parts.left_hand.parts.left_pinky.customLabel>
+  <!-- EN: left ring finger -->
+  <Milira_Body.corePart.parts.left_shoulder.parts.left_arm.parts.left_hand.parts.left_ring_finger.customLabel>左无名指</Milira_Body.corePart.parts.left_shoulder.parts.left_arm.parts.left_hand.parts.left_ring_finger.customLabel>
+  <!-- EN: left middle finger -->
+  <Milira_Body.corePart.parts.left_shoulder.parts.left_arm.parts.left_hand.parts.left_middle_finger.customLabel>左中指</Milira_Body.corePart.parts.left_shoulder.parts.left_arm.parts.left_hand.parts.left_middle_finger.customLabel>
+  <!-- EN: left index finger -->
+  <Milira_Body.corePart.parts.left_shoulder.parts.left_arm.parts.left_hand.parts.left_index_finger.customLabel>左食指</Milira_Body.corePart.parts.left_shoulder.parts.left_arm.parts.left_hand.parts.left_index_finger.customLabel>
+  <!-- EN: left thumb -->
+  <Milira_Body.corePart.parts.left_shoulder.parts.left_arm.parts.left_hand.parts.left_thumb.customLabel>左拇指</Milira_Body.corePart.parts.left_shoulder.parts.left_arm.parts.left_hand.parts.left_thumb.customLabel>
+  <!-- EN: right shoulder -->
+  <Milira_Body.corePart.parts.right_shoulder.customLabel>右肩</Milira_Body.corePart.parts.right_shoulder.customLabel>
+  <!-- EN: right clavicle -->
+  <Milira_Body.corePart.parts.right_shoulder.parts.right_clavicle.customLabel>右锁骨</Milira_Body.corePart.parts.right_shoulder.parts.right_clavicle.customLabel>
+  <!-- EN: right arm -->
+  <Milira_Body.corePart.parts.right_shoulder.parts.right_arm.customLabel>右臂</Milira_Body.corePart.parts.right_shoulder.parts.right_arm.customLabel>
+  <!-- EN: right humerus -->
+  <Milira_Body.corePart.parts.right_shoulder.parts.right_arm.parts.right_humerus.customLabel>右肱骨</Milira_Body.corePart.parts.right_shoulder.parts.right_arm.parts.right_humerus.customLabel>
+  <!-- EN: right radius -->
+  <Milira_Body.corePart.parts.right_shoulder.parts.right_arm.parts.right_radius.customLabel>右桡骨</Milira_Body.corePart.parts.right_shoulder.parts.right_arm.parts.right_radius.customLabel>
+  <!-- EN: right hand -->
+  <Milira_Body.corePart.parts.right_shoulder.parts.right_arm.parts.right_hand.customLabel>右手</Milira_Body.corePart.parts.right_shoulder.parts.right_arm.parts.right_hand.customLabel>
+  <!-- EN: right pinky -->
+  <Milira_Body.corePart.parts.right_shoulder.parts.right_arm.parts.right_hand.parts.right_pinky.customLabel>右小指</Milira_Body.corePart.parts.right_shoulder.parts.right_arm.parts.right_hand.parts.right_pinky.customLabel>
+  <!-- EN: right ring finger -->
+  <Milira_Body.corePart.parts.right_shoulder.parts.right_arm.parts.right_hand.parts.right_ring_finger.customLabel>右无名指</Milira_Body.corePart.parts.right_shoulder.parts.right_arm.parts.right_hand.parts.right_ring_finger.customLabel>
+  <!-- EN: right middle finger -->
+  <Milira_Body.corePart.parts.right_shoulder.parts.right_arm.parts.right_hand.parts.right_middle_finger.customLabel>右中指</Milira_Body.corePart.parts.right_shoulder.parts.right_arm.parts.right_hand.parts.right_middle_finger.customLabel>
+  <!-- EN: right index finger -->
+  <Milira_Body.corePart.parts.right_shoulder.parts.right_arm.parts.right_hand.parts.right_index_finger.customLabel>右食指</Milira_Body.corePart.parts.right_shoulder.parts.right_arm.parts.right_hand.parts.right_index_finger.customLabel>
+  <!-- EN: right thumb -->
+  <Milira_Body.corePart.parts.right_shoulder.parts.right_arm.parts.right_hand.parts.right_thumb.customLabel>右拇指</Milira_Body.corePart.parts.right_shoulder.parts.right_arm.parts.right_hand.parts.right_thumb.customLabel>
+  <!-- EN: right wing -->
+  <Milira_Body.corePart.parts.right_wing.customLabel>右翼</Milira_Body.corePart.parts.right_wing.customLabel>
+  <!-- EN: right wing humerus -->
+  <Milira_Body.corePart.parts.right_wing.parts.right_wing_humerus.customLabel>右翼肱骨</Milira_Body.corePart.parts.right_wing.parts.right_wing_humerus.customLabel>
+  <!-- EN: right wing radius -->
+  <Milira_Body.corePart.parts.right_wing.parts.right_wing_radius.customLabel>右翼桡骨</Milira_Body.corePart.parts.right_wing.parts.right_wing_radius.customLabel>
+  <!-- EN: right wing ulna -->
+  <Milira_Body.corePart.parts.right_wing.parts.right_wing_ulna.customLabel>右翼尺骨</Milira_Body.corePart.parts.right_wing.parts.right_wing_ulna.customLabel>
+  <!-- EN: right wing carpus -->
+  <Milira_Body.corePart.parts.right_wing.parts.right_wing_carpus.customLabel>右翼腕骨</Milira_Body.corePart.parts.right_wing.parts.right_wing_carpus.customLabel>
+  <!-- EN: right wing carpometacarpus -->
+  <Milira_Body.corePart.parts.right_wing.parts.right_wing_carpus.parts.right_wing_carpometacarpus.customLabel>右翼腕掌骨</Milira_Body.corePart.parts.right_wing.parts.right_wing_carpus.parts.right_wing_carpometacarpus.customLabel>
+  <!-- EN: right wing first phalanx -->
+  <Milira_Body.corePart.parts.right_wing.parts.right_wing_carpus.parts.right_wing_carpometacarpus.parts.right_wing_first_phalanx.customLabel>右翼大指骨</Milira_Body.corePart.parts.right_wing.parts.right_wing_carpus.parts.right_wing_carpometacarpus.parts.right_wing_first_phalanx.customLabel>
+  <!-- EN: right wing second phalanx -->
+  <Milira_Body.corePart.parts.right_wing.parts.right_wing_carpus.parts.right_wing_carpometacarpus.parts.right_wing_second_phalanx.customLabel>右翼副指骨</Milira_Body.corePart.parts.right_wing.parts.right_wing_carpus.parts.right_wing_carpometacarpus.parts.right_wing_second_phalanx.customLabel>
+  <!-- EN: left wing -->
+  <Milira_Body.corePart.parts.left_wing.customLabel>左翼</Milira_Body.corePart.parts.left_wing.customLabel>
+  <!-- EN: left wing humerus -->
+  <Milira_Body.corePart.parts.left_wing.parts.left_wing_humerus.customLabel>左翼肱骨</Milira_Body.corePart.parts.left_wing.parts.left_wing_humerus.customLabel>
+  <!-- EN: left wing radius -->
+  <Milira_Body.corePart.parts.left_wing.parts.left_wing_radius.customLabel>左翼桡骨</Milira_Body.corePart.parts.left_wing.parts.left_wing_radius.customLabel>
+  <!-- EN: left wing ulna -->
+  <Milira_Body.corePart.parts.left_wing.parts.left_wing_ulna.customLabel>左翼尺骨</Milira_Body.corePart.parts.left_wing.parts.left_wing_ulna.customLabel>
+  <!-- EN: left wing carpus -->
+  <Milira_Body.corePart.parts.left_wing.parts.left_wing_carpus.customLabel>左翼腕骨</Milira_Body.corePart.parts.left_wing.parts.left_wing_carpus.customLabel>
+  <!-- EN: left wing carpometacarpus -->
+  <Milira_Body.corePart.parts.left_wing.parts.left_wing_carpus.parts.left_wing_carpometacarpus.customLabel>左翼腕掌骨</Milira_Body.corePart.parts.left_wing.parts.left_wing_carpus.parts.left_wing_carpometacarpus.customLabel>
+  <!-- EN: left wing first phalanx -->
+  <Milira_Body.corePart.parts.left_wing.parts.left_wing_carpus.parts.left_wing_carpometacarpus.parts.left_wing_first_phalanx.customLabel>左翼大指骨</Milira_Body.corePart.parts.left_wing.parts.left_wing_carpus.parts.left_wing_carpometacarpus.parts.left_wing_first_phalanx.customLabel>
+  <!-- EN: left wing second phalanx -->
+  <Milira_Body.corePart.parts.left_wing.parts.left_wing_carpus.parts.left_wing_carpometacarpus.parts.left_wing_second_phalanx.customLabel>左翼副指骨</Milira_Body.corePart.parts.left_wing.parts.left_wing_carpus.parts.left_wing_carpometacarpus.parts.left_wing_second_phalanx.customLabel>
+  <!-- EN: left leg -->
+  <Milira_Body.corePart.parts.left_leg.customLabel>左腿</Milira_Body.corePart.parts.left_leg.customLabel>
+  <!-- EN: left femur -->
+  <Milira_Body.corePart.parts.left_leg.parts.left_femur.customLabel>左股骨</Milira_Body.corePart.parts.left_leg.parts.left_femur.customLabel>
+  <!-- EN: left tibia -->
+  <Milira_Body.corePart.parts.left_leg.parts.left_tibia.customLabel>左胫骨</Milira_Body.corePart.parts.left_leg.parts.left_tibia.customLabel>
+  <!-- EN: left foot -->
+  <Milira_Body.corePart.parts.left_leg.parts.left_foot.customLabel>左足</Milira_Body.corePart.parts.left_leg.parts.left_foot.customLabel>
+  <!-- EN: left little toe -->
+  <Milira_Body.corePart.parts.left_leg.parts.left_foot.parts.left_little_toe.customLabel>左小趾</Milira_Body.corePart.parts.left_leg.parts.left_foot.parts.left_little_toe.customLabel>
+  <!-- EN: left fourth toe -->
+  <Milira_Body.corePart.parts.left_leg.parts.left_foot.parts.left_fourth_toe.customLabel>左次小趾</Milira_Body.corePart.parts.left_leg.parts.left_foot.parts.left_fourth_toe.customLabel>
+  <!-- EN: left middle toe -->
+  <Milira_Body.corePart.parts.left_leg.parts.left_foot.parts.left_middle_toe.customLabel>左三趾</Milira_Body.corePart.parts.left_leg.parts.left_foot.parts.left_middle_toe.customLabel>
+  <!-- EN: left second toe -->
+  <Milira_Body.corePart.parts.left_leg.parts.left_foot.parts.left_second_toe.customLabel>左二趾</Milira_Body.corePart.parts.left_leg.parts.left_foot.parts.left_second_toe.customLabel>
+  <!-- EN: left big toe -->
+  <Milira_Body.corePart.parts.left_leg.parts.left_foot.parts.left_big_toe.customLabel>左大拇趾</Milira_Body.corePart.parts.left_leg.parts.left_foot.parts.left_big_toe.customLabel>
+  <!-- EN: right leg -->
+  <Milira_Body.corePart.parts.right_leg.customLabel>右腿</Milira_Body.corePart.parts.right_leg.customLabel>
+  <!-- EN: right femur -->
+  <Milira_Body.corePart.parts.right_leg.parts.right_femur.customLabel>右股骨</Milira_Body.corePart.parts.right_leg.parts.right_femur.customLabel>
+  <!-- EN: right tibia -->
+  <Milira_Body.corePart.parts.right_leg.parts.right_tibia.customLabel>右胫骨</Milira_Body.corePart.parts.right_leg.parts.right_tibia.customLabel>
+  <!-- EN: right foot -->
+  <Milira_Body.corePart.parts.right_leg.parts.right_foot.customLabel>右足</Milira_Body.corePart.parts.right_leg.parts.right_foot.customLabel>
+  <!-- EN: right little toe -->
+  <Milira_Body.corePart.parts.right_leg.parts.right_foot.parts.right_little_toe.customLabel>右小趾</Milira_Body.corePart.parts.right_leg.parts.right_foot.parts.right_little_toe.customLabel>
+  <!-- EN: right fourth toe -->
+  <Milira_Body.corePart.parts.right_leg.parts.right_foot.parts.right_fourth_toe.customLabel>右次小趾</Milira_Body.corePart.parts.right_leg.parts.right_foot.parts.right_fourth_toe.customLabel>
+  <!-- EN: right middle toe -->
+  <Milira_Body.corePart.parts.right_leg.parts.right_foot.parts.right_middle_toe.customLabel>右三趾</Milira_Body.corePart.parts.right_leg.parts.right_foot.parts.right_middle_toe.customLabel>
+  <!-- EN: right second toe -->
+  <Milira_Body.corePart.parts.right_leg.parts.right_foot.parts.right_second_toe.customLabel>右二趾</Milira_Body.corePart.parts.right_leg.parts.right_foot.parts.right_second_toe.customLabel>
+  <!-- EN: right big toe -->
+  <Milira_Body.corePart.parts.right_leg.parts.right_foot.parts.right_big_toe.customLabel>右大拇趾</Milira_Body.corePart.parts.right_leg.parts.right_foot.parts.right_big_toe.customLabel>
+  
+</LanguageData>

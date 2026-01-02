@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: “Chengying Lightweaver” prism tower -->
+  <CMC_LaserSniperTower.label>“承影·流光”光棱塔</CMC_LaserSniperTower.label>
+  <!-- EN: A tall prism tower which can deflect powerful energized particle beam towards its enemy anywhere from distance. -->
+  <CMC_LaserSniperTower.description>高耸的自动防御设施，能接收附近其他光棱塔的能量并将攻击功率成倍增加。</CMC_LaserSniperTower.description>
+  
+  <!-- EN: laser(hidden) -->
+  <Gun_LaserSniper.label>“承影·流光”光棱塔</Gun_LaserSniper.label>
+  <!-- EN: An auto charged HMG equipped in the bunker, nightmare for light infantry. -->
+  <Gun_LaserSniper.description>光棱塔</Gun_LaserSniper.description>
+  <!-- EN: laser(hidden) -->
+  <Gun_LaserSniper.verbs.Verb_LaserShoot.label>TODO</Gun_LaserSniper.verbs.Verb_LaserShoot.label>
+  
+</LanguageData>

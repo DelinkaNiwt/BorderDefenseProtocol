@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+    
+    <!-- EN: milian gestator -->
+    <Milian_Gestator.label>米莉安培育舱</Milian_Gestator.label>
+    <!-- EN: a facility that gestate and resurrect milian. -->
+    <Milian_Gestator.description>能够培育和复活米莉安的设施。</Milian_Gestator.description>
+    
+    <!-- EN: Solar reflector -->
+    <Milira_Heliostat.label>日凌定日镜</Milira_Heliostat.label>
+    <!-- EN: A lens placed near the Solar Energy Conversion Collection Tower to enhance its production efficiency. It becomes ineffective when covered by a roof. -->
+    <Milira_Heliostat.description>放置在日凌聚光塔附近可以提高其生产效率的镜片。被屋顶覆盖时无法生效。</Milira_Heliostat.description>
+    
+    <!-- EN: milira sunblast furnace -->
+    <Milira_SunBlastFurnace.label>太阳熔炉</Milira_SunBlastFurnace.label>
+    <!-- EN: A furnace capable of forging Milira's advanced armor and weapons. -->
+    <Milira_SunBlastFurnace.description>能够完成米莉拉高级装甲或武器锻造的熔炉。</Milira_SunBlastFurnace.description>
+    
+    <!-- EN: Solar energy conversion collection tower -->
+    <Milira_SunLightGatheringTower.label>日凌聚光塔</Milira_SunLightGatheringTower.label>
+    <!-- EN: In conjunction with the Solar Reflector, this tower can convert solar energy into solar fuel. Additionally, the waste heat can be transformed into electrical energy. It must be constructed outdoors. -->
+    <Milira_SunLightGatheringTower.description>配合日凌定日镜可以将太阳能转化成日光燃料的高塔，同时余热也可以转换成电能。需要露天建造。</Milira_SunLightGatheringTower.description>
+    
+    <!-- EN: Milira universal workbench -->
+    <Milira_UniversalBench.label>米莉拉万用工作台</Milira_UniversalBench.label>
+    <!-- EN: A versatile workbench with an integrated material printer capable of manufacturing almost any item. -->
+    <Milira_UniversalBench.description>多功能的工作台，安装的打印机几乎可以制造任何物品。</Milira_UniversalBench.description>
+    
+    <!-- EN: Unstable reactor vessel -->
+    <Milira_UnstableReactor.label>不稳定反应釜</Milira_UnstableReactor.label>
+    <!-- EN: A reaction container used for rudimentary smelting of solar-forged steel. Fill it with solar fuel to initiate the process. It may explode during the reaction. -->
+    <Milira_UnstableReactor.description>用于土法冶炼日盘钢的反应容器。填入日光燃料以开始运作。发生反应时会爆炸。</Milira_UnstableReactor.description>
+    
+</LanguageData>

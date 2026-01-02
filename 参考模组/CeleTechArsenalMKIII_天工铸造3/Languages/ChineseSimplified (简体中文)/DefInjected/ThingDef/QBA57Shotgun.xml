@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: QBA-57 smart shotgun -->
+  <CMC_QBXfiveseven_CSG.label>QBA-57 智能霰弹枪</CMC_QBXfiveseven_CSG.label>
+  <!-- EN: This advanced smart combat shotgun system is specifically engineered for engaging clustered targets in confined spaces. While operating at limited range, it delivers exceptional ballistic precision. Upon impact with designated targets, its intelligent munitions deploy directional charges to release 8 micro-pellets, proving particularly effective against rapidly advancing hostile units. Notably, the weapon's scatter-shot accuracy directly correlates with the operator's cognitive aptitude. Operational deployment is strictly recommended for colonists demonstrating Intellectual Skills rating above 10. -->
+  <CMC_QBXfiveseven_CSG.description>专为狭窄空间对抗集群目标研发的先进智能战斗霰弹枪系统。该武器虽然射程较短，但具有极高的射击精度。其智能弹药在锁定目标后，会通过定向爆破释放出8枚微型霰弹，可有效遏制高速逼近的敌方目标。特别值得注意的是，该武器的散射命中率与操作者的神经认知水平呈正相关，强烈建议配备认知技能等级10以上的作战人员操作。</CMC_QBXfiveseven_CSG.description>
+  <!-- EN: stock -->
+  <CMC_QBXfiveseven_CSG.tools.stock.label>TODO</CMC_QBXfiveseven_CSG.tools.stock.label>
+  <!-- EN: barrel -->
+  <CMC_QBXfiveseven_CSG.tools.barrel.label>枪管</CMC_QBXfiveseven_CSG.tools.barrel.label>
+  <!-- EN: QBA-57 smart shotgun -->
+  <CMC_QBXfiveseven_CSG.verbs.Verb_Shoot.label>TODO</CMC_QBXfiveseven_CSG.verbs.Verb_Shoot.label>
+  
+  <!-- UNUSED -->
+  <CMC_QBXfiveseven_CSG.tools.grip.label>枪托</CMC_QBXfiveseven_CSG.tools.grip.label>
+  
+</LanguageData>

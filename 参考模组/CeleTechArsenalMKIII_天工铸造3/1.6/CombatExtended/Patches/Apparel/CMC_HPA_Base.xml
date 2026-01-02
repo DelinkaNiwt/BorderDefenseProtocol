@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>CeleTech Arsenal MKIII</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="CMC_HPA_Base"]/statBases</xpath>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="CMC_HPA_Base"]</xpath>
+            <value>
+              <statBases />
+            </value>
+          </nomatch>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ThingDef[defName="CMC_HPA_Base"]/statBases</xpath>
+          <value>
+            <statBases>
+              <MaxHitPoints>4000</MaxHitPoints>
+              <Flammability>0</Flammability>
+              <DeteriorationRate>0</DeteriorationRate>
+              <Beauty>0</Beauty>
+              <WorkToMake>105000</WorkToMake>
+              <Mass>12.5</Mass>
+              <ArmorRating_Sharp>32</ArmorRating_Sharp>
+              <ArmorRating_Blunt>127</ArmorRating_Blunt>
+              <ArmorRating_Heat>2</ArmorRating_Heat>
+              <Insulation_Cold>70</Insulation_Cold>
+              <Insulation_Heat>1200</Insulation_Heat>
+              <EquipDelay>15</EquipDelay>
+            </statBases>
+          </value>
+        </li>
+        <li Class="PatchOperationAddModExtension">
+          <xpath>Defs/ThingDef[defName="CMC_HPA_Base"]</xpath>
+          <value>
+            <li Class="CombatExtended.PartialArmorExt">
+              <stats>
+                <li>
+                  <ArmorRating_Sharp>1.25</ArmorRating_Sharp>
+                  <parts>
+                    <li>Torso</li>
+                    <li>Neck</li>
+                    <li>Shoulder</li>
+                    <li>Waist</li>
+                    <li>Ribcage</li>
+                    <li>Sternum</li>
+                    <li>Pelvis</li>
+                    <li>Spine</li>
+                    <li>Stomach</li>
+                    <li>Heart</li>
+                    <li>Lung</li>
+                    <li>Kidney</li>
+                    <li>Liver</li>
+                    <li>Clavicle</li>
+                    <li>Arm</li>
+                    <li>Humerus</li>
+                    <li>Radius</li>
+                    <li>Femur</li>
+                    <li>Tibia</li>
+                  </parts>
+                </li>
+                <li>
+                  <ArmorRating_Sharp>0.95</ArmorRating_Sharp>
+                  <parts>
+                    <li>Hand</li>
+                    <li>Finger</li>
+                    <li>Foot</li>
+                    <li>Toe</li>
+                  </parts>
+                </li>
+              </stats>
+            </li>
+          </value>
+        </li>
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="CMC_HPA_Base"]/equippedStatOffsets</xpath>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="CMC_HPA_Base"]</xpath>
+            <value>
+              <equippedStatOffsets />
+            </value>
+          </nomatch>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ThingDef[defName="CMC_HPA_Base"]/equippedStatOffsets</xpath>
+          <value>
+            <equippedStatOffsets>
+              <MentalBreakThreshold>-0.25</MentalBreakThreshold>
+              <MoveSpeed>0.5</MoveSpeed>
+              <VacuumResistance>1</VacuumResistance>
+              <ReloadSpeed>1.5</ReloadSpeed>
+              <CarryBulk>80</CarryBulk>
+              <CarryWeight>65</CarryWeight>
+            </equippedStatOffsets>
+          </value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+</Patch>

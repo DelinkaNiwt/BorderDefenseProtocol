@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+    
+    <!-- EN: Disassembling a shield unit. -->
+    <Milian_DisassembleBroadShieldUnit.reportString>正在拆解一个护盾单元。</Milian_DisassembleBroadShieldUnit.reportString>
+    
+    <!-- EN: moving. -->
+    <Milian_Fortress.reportString>移动中。</Milian_Fortress.reportString>
+    
+    <!-- EN: releasing units. -->
+    <Milian_ReleaseUnits.reportString>释放浮游单元中。</Milian_ReleaseUnits.reportString>
+    
+    <!-- EN: repairing TargetA. -->
+    <Milian_RepairMechRemote.reportString>修理TargetA中。</Milian_RepairMechRemote.reportString>
+    
+    <!-- EN: Dressing TargetA with TargetB. -->
+    <Milira_DressMilian.reportString>为TargetA着装TargetB中。</Milira_DressMilian.reportString>
+    
+    <!-- EN: extracting TargetB from TargetA. -->
+    <Milira_EmptySunLightFuelContainer.reportString>从TargetA中提取TargetB。</Milira_EmptySunLightFuelContainer.reportString>
+    
+    <!-- EN: Equipping TargetA with TargetB. -->
+    <Milira_EquipMilian.reportString>为TargetA装备TargetB中。</Milira_EquipMilian.reportString>
+    
+    <!-- EN: Equipping TargetA. -->
+    <Milira_EquipMilianPre.reportString>为TargetA装备武器中。</Milira_EquipMilianPre.reportString>
+    
+    <!-- EN: ??? -->
+    <Milira_HumanizeMilian.reportString>???</Milira_HumanizeMilian.reportString>
+    
+    <!-- EN: Remove TargetB for TargetA. -->
+    <Milira_StripMilian_Apparel.reportString>为TargetA卸下TargetB中。</Milira_StripMilian_Apparel.reportString>
+    
+    <!-- EN: Remove TargetB for TargetA. -->
+    <Milira_StripMilian_Weapon.reportString>为TargetA卸下TargetB中。</Milira_StripMilian_Weapon.reportString>
+    
+    <!-- EN: Synaesthesiaing with TargetA. -->
+    <Milira_SynaesthesiaHarmonicFrequency.reportString>与TargetA通感。</Milira_SynaesthesiaHarmonicFrequency.reportString>
+    
+</LanguageData>

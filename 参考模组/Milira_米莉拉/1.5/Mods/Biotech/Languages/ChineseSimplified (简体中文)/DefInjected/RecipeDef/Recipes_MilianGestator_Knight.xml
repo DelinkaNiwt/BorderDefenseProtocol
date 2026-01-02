@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+    
+    <!-- EN: Gestate Knight I -->
+    <Milian_Mechanoid_KnightI.label>培育骑士I型</Milian_Mechanoid_KnightI.label>
+    <!-- EN: Gestate a Milian modeled Knight I. -->
+    <Milian_Mechanoid_KnightI.description>培育一个型号为骑士I型的米莉安。</Milian_Mechanoid_KnightI.description>
+    <!-- EN: Gestating mech. -->
+    <Milian_Mechanoid_KnightI.jobString>培育机械体中。</Milian_Mechanoid_KnightI.jobString>
+    
+    <!-- EN: Gestate Knight II -->
+    <Milian_Mechanoid_KnightII.label>培育骑士II型</Milian_Mechanoid_KnightII.label>
+    <!-- EN: Gestate a Milian modeled Knight II. -->
+    <Milian_Mechanoid_KnightII.description>培育一个型号为骑士II型的米莉安。</Milian_Mechanoid_KnightII.description>
+    <!-- EN: Gestating mech. -->
+    <Milian_Mechanoid_KnightII.jobString>培育机械体中。</Milian_Mechanoid_KnightII.jobString>
+    
+    <!-- EN: Gestate Outrider -->
+    <Milian_Mechanoid_KnightIII.label>培育征战骑士</Milian_Mechanoid_KnightIII.label>
+    <!-- EN: Gestate a Milian modeled Outrider. -->
+    <Milian_Mechanoid_KnightIII.description>培育一个型号为征战骑士的米莉安。</Milian_Mechanoid_KnightIII.description>
+    <!-- EN: Gestating mech. -->
+    <Milian_Mechanoid_KnightIII.jobString>培育机械体中。</Milian_Mechanoid_KnightIII.jobString>
+    
+    <!-- EN: Gestate Paladin -->
+    <Milian_Mechanoid_KnightIV.label>培育帕拉丁</Milian_Mechanoid_KnightIV.label>
+    <!-- EN: Gestate a Milian modeled Paladin. -->
+    <Milian_Mechanoid_KnightIV.description>培育一个型号为帕拉丁的米莉安。</Milian_Mechanoid_KnightIV.description>
+    <!-- EN: Gestating mech. -->
+    <Milian_Mechanoid_KnightIV.jobString>培育机械体中。</Milian_Mechanoid_KnightIV.jobString>
+    
+</LanguageData>

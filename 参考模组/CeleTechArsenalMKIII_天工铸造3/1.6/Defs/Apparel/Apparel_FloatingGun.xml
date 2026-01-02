@@ -1,0 +1,524 @@
+<Defs>
+	<!--UAV Guns-->
+	<ThingDef ParentName="BaseWeaponTurret">
+		<defName>CMCUAV_LMG</defName>
+		<label>Escort Floating Auto-cannon</label>
+		<description>A miniaturized smart cannon compatible with armed floating platforms.</description>
+		<tradeability>None</tradeability>
+		<destroyOnDrop>true</destroyOnDrop>
+		<graphicData>
+			<texPath>Things/CMC_Void</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<statBases>
+			<Mass>1.2</Mass>
+			<AccuracyTouch>0.60</AccuracyTouch>
+			<AccuracyShort>0.80</AccuracyShort>
+			<AccuracyMedium>0.90</AccuracyMedium>
+			<AccuracyLong>0.85</AccuracyLong>
+		</statBases>
+		<verbs>
+			<li>
+				<verbClass>TOT_DLL_test.Verb_Shoot_UAV</verbClass>
+				<defaultProjectile>Bullet_WJ_SMG_smart</defaultProjectile>
+				<requireLineOfSight>true</requireLineOfSight>
+				<range>32.9</range>
+				<soundCast>CMC_SSMGFire</soundCast>
+				<soundCastTail>GunTail_Heavy</soundCastTail>
+				<muzzleFlashScale>4</muzzleFlashScale>
+				<defaultCooldownTime>2.5</defaultCooldownTime>
+				<burstShotCount>3</burstShotCount>
+				<ticksBetweenBurstShots>6</ticksBetweenBurstShots>
+			</li>
+		</verbs>
+	</ThingDef>
+	
+	<ThingDef ParentName="BaseWeaponTurret">
+		<defName>CMCUAV_Pistol</defName>
+		<label>Escort Floating EM-Pistol</label>
+		<description>Compact Gauss acceleration weapon for engineering platforms. Fires 4mm depleted uranium penetrators, designed for rapid neutralization of close-range threats.</description>
+		<tradeability>None</tradeability>
+		<destroyOnDrop>true</destroyOnDrop>
+		<graphicData>
+			<texPath>Things/CMC_Void</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<statBases>
+			<Mass>1.2</Mass>
+			<AccuracyTouch>0.60</AccuracyTouch>
+			<AccuracyShort>0.80</AccuracyShort>
+			<AccuracyMedium>0.90</AccuracyMedium>
+			<AccuracyLong>0.85</AccuracyLong>
+		</statBases>
+		<verbs>
+			<li>
+				<verbClass>TOT_DLL_test.Verb_Shoot_UAV</verbClass>
+				<hasStandardCommand>true</hasStandardCommand>
+				<defaultProjectile>Bullet_QBZ3oo</defaultProjectile>
+				<defaultCooldownTime>0.5</defaultCooldownTime>
+				<burstShotCount>2</burstShotCount>
+				<ticksBetweenBurstShots>12</ticksBetweenBurstShots>
+				<range>23.9</range>
+				<burstShotCount>1</burstShotCount>
+				<soundCast>CMC_PistolFire</soundCast>
+				<soundCastTail>GunTail_Light</soundCastTail>
+				<muzzleFlashScale>9</muzzleFlashScale>
+			</li>
+		</verbs>
+	</ThingDef>
+	
+	<ThingDef ParentName="BaseWeaponTurret">
+		<defName>CMCUAV_LaserPulse</defName>
+		<label>Escort Floating Laser</label>
+		<description>A miniaturized pulse laser focusing array compatible with armed floating platforms.</description>
+		<tradeability>None</tradeability>
+		<destroyOnDrop>true</destroyOnDrop>
+		<graphicData>
+			<texPath>Things/CMC_Void</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<statBases>
+			<Mass>1.2</Mass>
+			<AccuracyTouch>0.60</AccuracyTouch>
+			<AccuracyShort>0.80</AccuracyShort>
+			<AccuracyMedium>0.90</AccuracyMedium>
+			<AccuracyLong>0.85</AccuracyLong>
+		</statBases>
+		<verbs>
+			<li>
+				<verbClass>TOT_DLL_test.Verb_Laser_Instant_UAV</verbClass>
+				<defaultProjectile>Bullet_Fake_LaserRifle</defaultProjectile>
+				<hasStandardCommand>true</hasStandardCommand>
+				<requireLineOfSight>true</requireLineOfSight>
+				<range>25.9</range>
+				<burstShotCount>6</burstShotCount>
+				<ticksBetweenBurstShots>15</ticksBetweenBurstShots>
+				<soundCast>PL</soundCast>
+				<soundCastTail>GunTail_Heavy</soundCastTail>
+				<muzzleFlashScale>0</muzzleFlashScale>
+				<defaultCooldownTime>3.25</defaultCooldownTime>
+			</li>
+		</verbs>
+		<comps>
+		  <li Class="TOT_DLL_test.CompProperties_LaserData_Instant">
+			<LaserLine_FleckDef>CMC_Laser_Stay_ScatterLaser</LaserLine_FleckDef>
+			<LaserLine_FleckDef2>CMC_Laser_Stay_ScatterLaser_B</LaserLine_FleckDef2>
+			<MuzzleGlow>CMC_Laser_MuzzleGlow</MuzzleGlow>
+			<LaserFleck_End>CMC_Laser_Stay_LaserEndSmall</LaserFleck_End>
+			<LaserFleck_End_Scale_Base>0.2</LaserFleck_End_Scale_Base>
+			<LaserFleck_Spark>CMC_Stay_Laser_Spark</LaserFleck_Spark>
+			<LaserFleck_Spark_Scale_Base>0.5</LaserFleck_Spark_Scale_Base>
+			<LaserFleck_Spark_Scale_Deviation>0.3</LaserFleck_Spark_Scale_Deviation>
+			<LaserFleck_Spark_Num>3</LaserFleck_Spark_Num>
+			<LaserFleck_Spark_Spawn_Chance>1</LaserFleck_Spark_Spawn_Chance>
+			<SoundDef>PL</SoundDef>
+			<Color_Red>0</Color_Red>
+			<Color_Green>255</Color_Green>
+			<Color_Blue>255</Color_Blue>
+			<Color_Alpha>0.3</Color_Alpha>
+			<StartPositionOffset_Range>0.7</StartPositionOffset_Range>
+			<DamageDef>InfernoBeam</DamageDef>
+			<DamageNum>15</DamageNum>
+			<DamageArmorPenetration>0.7</DamageArmorPenetration>
+			<IfSecondDamage>true</IfSecondDamage>
+			<DamageDef_B>Flame</DamageDef_B>
+			<DamageNum_B>3</DamageNum_B>
+			<DamageArmorPenetration_B>0.3</DamageArmorPenetration_B>
+			<IfCanScatter>true</IfCanScatter>
+			<ScatterNum>1</ScatterNum>
+			<ScatterRadius>0.3</ScatterRadius>
+			<ScatterExplosionDef>BulletAoE_Void</ScatterExplosionDef>
+			<ScatterExplosionDamage>7</ScatterExplosionDamage>
+			<ScatterExplosionRadius>1.0</ScatterExplosionRadius>
+			<ScatterExplosionArmorPenetration>1.5</ScatterExplosionArmorPenetration>
+			<ScatterTickMax>60</ScatterTickMax>
+			<LaserFleck_ScatterLaser>CMC_Laser_instant_ScatterLaser_void</LaserFleck_ScatterLaser>
+			<RandomRGB>false</RandomRGB>
+		  </li>
+		</comps>
+	</ThingDef>
+	
+	<!--UAV-->
+	<ThingDef ParentName="ApparelNoQualityBase">
+		<defName>CMC_GunDrone</defName>
+		<tickerType>Normal</tickerType>
+		<label>X-02 "Jingwei" Floating cannon</label>
+		<description>An AI-powered escort weapon system designed for protecting non-combat personnel. Equipped with micro anti-gravity/ion propulsion and multi-directional sensor arrays, it autonomously hovers around the operator to detect and lock onto threats in real-time. Effective in complex terrains and dynamic battlefields, its auxiliary analysis module also enhances operator productivity.\n\n※ Note: Both hovering and weapon discharge consume capacitor energy. When depleted, it automatically returns for charging and suspends combat functions. Improving item quality or researching subsequent technologies reduces charging time and expands capacitor capacity.</description>
+		<tickerType>Normal</tickerType>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<thingCategories Inherit='False'>
+		  <li>ArmorHeadgear</li>
+		</thingCategories>
+		<thingClass>TOT_DLL_test.Apparel_FloatingGunRework</thingClass>
+		<graphicData>
+		  <texPath>Things/Apparel/Drone_Aux/CMC_MissileDrone_Display</texPath>
+		  <graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<statBases>
+		  <MaxHitPoints>1240</MaxHitPoints>
+		  <Mass>0.1</Mass>
+		  <MarketValue>1870</MarketValue>
+		  <EquipDelay>0</EquipDelay>
+		</statBases>
+		<costList>
+			<Steel>75</Steel>
+			<ComponentSpacer>2</ComponentSpacer>
+			<ComponentIndustrial>4</ComponentIndustrial>
+			<Plasteel>25</Plasteel>
+			<CMC_Gravcore>1</CMC_Gravcore>
+		</costList>
+		<equippedStatOffsets></equippedStatOffsets>
+		<generateCommonality>0</generateCommonality>
+		<apparel>
+			<countsAsClothingForNudity>false</countsAsClothingForNudity>
+			<careIfWornByCorpse>false</careIfWornByCorpse>
+			<careIfDamaged>false</careIfDamaged>
+			<wearPerDay>10</wearPerDay>
+			<bodyPartGroups Inherit="false">
+				<li>Shoulders</li>
+			</bodyPartGroups>
+			<layers Inherit="false">
+				<li>Belt</li>
+			</layers>
+		  <defaultOutfitTags>
+			<li>Soldier</li>
+		  </defaultOutfitTags>
+		  <renderNodeProperties>
+			<li Class="TOT_DLL_test.PawnRenderNodeProperties_UAVRework">
+				<debugLabel>CombatDrone</debugLabel>
+				<nodeClass>TOT_DLL_test.PawnRenderNode_UAVRework</nodeClass>
+				<workerClass>TOT_DLL_test.PawnRenderNodeWorker_UAVRework</workerClass>
+				<texPath>Things/Apparel/Drone_Aux/CMC_MissileDrone</texPath>
+				<baseLayer>99</baseLayer>
+				<overrideMeshSize>(1.1,1.1)</overrideMeshSize>
+				<pawnType>Any</pawnType>
+				<shaderTypeDef>CutoutComplex</shaderTypeDef>			
+			</li>
+			<li Class="TOT_DLL_test.PawnRenderNodeProperties_UAVRework">
+				<debugLabel>gloweffect</debugLabel>
+				<nodeClass>TOT_DLL_test.PawnRenderNode_UAVRework</nodeClass>
+				<workerClass>TOT_DLL_test.PawnRenderNodeWorker_UAVRework</workerClass>
+				<texPath>Things/Apparel/Drone_Aux/CMC_MissileDrone_Light</texPath>
+				<baseLayer>100</baseLayer>
+				<overrideMeshSize>(1.1,1.1)</overrideMeshSize>
+				<pawnType>Any</pawnType>
+				<shaderTypeDef>MoteGlow</shaderTypeDef>
+				<useforcedColor>false</useforcedColor>
+			</li>
+			<li Class="TOT_DLL_test.PawnRenderNodeProperties_UAVRework">
+				<debugLabel>shadow</debugLabel>
+				<nodeClass>TOT_DLL_test.PawnRenderNode_UAVRework</nodeClass>
+				<workerClass>TOT_DLL_test.PawnRenderNodeWorker_UAVRework</workerClass>
+				<texPath>Things/Apparel/CMC_UAV_Shadow</texPath>
+				<baseLayer>-100</baseLayer>
+				<rotDrawMode>Fresh, Rotting</rotDrawMode>
+				<overrideMeshSize>(1.1,1.1)</overrideMeshSize>
+				<pawnType>Any</pawnType>
+				<shaderTypeDef>Transparent</shaderTypeDef>
+				<useforcedColor>false</useforcedColor>
+				<drawData>
+					<dataNorth><offset>(0,0,-0.6)</offset></dataNorth>
+					<dataEast><offset>(0,0,-0.6)</offset></dataEast>
+					<dataSouth><offset>(0,0,-0.6)</offset></dataSouth>
+				</drawData>	
+			</li>
+		</renderNodeProperties>
+		</apparel>
+		<recipeMaker>
+				<unfinishedThingDef>UnfinishedTechArmor</unfinishedThingDef>
+				<researchPrerequisite>CMC_FloatingGunII</researchPrerequisite>
+				<skillRequirements>
+					<Crafting>9</Crafting>
+				</skillRequirements>
+				<recipeUsers Inherit="False">
+					<li>CMC_FacBench</li>		
+				</recipeUsers>
+		</recipeMaker>
+		<comps  Inherit="false">
+			<li Class="TOT_DLL_test.CompProperties_FloatGunRework">
+				<FloatingGunGraphicData>
+				  <graphicClass>Graphic_Multi</graphicClass>
+				  <shaderType>CutoutComplex</shaderType>
+				  <texPath>Things/Apparel/Drone_Aux/CMC_MissileDrone</texPath>
+				  <drawSize>(1.1,1.1)</drawSize>
+				</FloatingGunGraphicData>
+				<turretDef>CMCUAV_LMG</turretDef>
+				<saveKeysPrefix>CMCUAV</saveKeysPrefix>
+			</li>
+			<li>
+				<compClass>CompColorable</compClass>
+			</li>
+			<li Class="CompProperties_Forbiddable"/>
+		</comps>
+		<colorGenerator Class="ColorGenerator_Options">
+      <options>
+        <li>
+          <weight>10</weight>
+          <only>(0.33,0.33,0.33,1)</only>
+        </li>
+        <li>
+          <weight>10</weight>
+          <only>(0.65,0.65,0.65,1)</only>
+        </li>
+        <li>
+          <weight>6</weight>
+          <min>(0.3,0.3,0.3,1)</min>
+          <max>(0.5,0.5,0.5,1)</max>
+        </li>
+        <li>
+          <weight>10</weight>
+          <only>(0.9,0.9,0.9,1)</only>
+        </li>
+      </options>
+    </colorGenerator>
+  </ThingDef>
+  
+  <ThingDef ParentName="ApparelNoQualityBase">
+		<defName>CMC_LaserDrone</defName>
+		<tickerType>Normal</tickerType>
+		<label>X-02L "Jinwu" Floating Energy Cannon</label>
+		<description>An X-01 platform upgrade specialized for anti-swarm combat. Retains anti-gravity propulsion and multi-directional sensors while featuring high-capacity capacitors and long-range pulse laser emitters. Maintains stable levitation in complex environments to automatically identify high-value targets and execute precision strikes.\n\n"Jinwu"'s high-energy laser beams offer exceptional armor penetration, but plasma detonations upon impact may affect friendly units within 1.5-tile radius. Strict engagement distance control is required.\n\n※ Note: Both hovering and weapon discharge consume capacitor energy. When depleted, it automatically returns for charging and suspends combat functions. Improving item quality or researching subsequent technologies reduces charging time and expands capacitor capacity.</description>
+		<tickerType>Normal</tickerType>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<thingCategories Inherit='False'>
+		  <li>ArmorHeadgear</li>
+		</thingCategories>
+		<thingClass>TOT_DLL_test.Apparel_FloatingGunRework</thingClass>
+		<graphicData>
+		  <texPath>Things/Apparel/Drone_Aux/CMC_MissileDrone_Display</texPath>
+		  <graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<statBases>
+		  <MaxHitPoints>1240</MaxHitPoints>
+		  <Mass>0.1</Mass>
+		  <MarketValue>1870</MarketValue>
+		  <EquipDelay>0</EquipDelay>
+		</statBases>
+		<costList>
+			<Steel>75</Steel>
+			<ComponentSpacer>2</ComponentSpacer>
+			<ComponentIndustrial>4</ComponentIndustrial>
+			<Plasteel>25</Plasteel>
+			<CMC_Gravcore>1</CMC_Gravcore>
+		</costList>
+		<equippedStatOffsets></equippedStatOffsets>
+		<generateCommonality>0</generateCommonality>
+		<apparel>
+			<countsAsClothingForNudity>false</countsAsClothingForNudity>
+			<careIfWornByCorpse>false</careIfWornByCorpse>
+			<careIfDamaged>false</careIfDamaged>
+			<wearPerDay>10</wearPerDay>
+			<bodyPartGroups Inherit="false">
+				<li>Shoulders</li>
+			</bodyPartGroups>
+			<layers Inherit="false">
+				<li>Belt</li>
+			</layers>
+		  <defaultOutfitTags>
+			<li>Soldier</li>
+		  </defaultOutfitTags>
+		  <renderNodeProperties>
+			<li Class="TOT_DLL_test.PawnRenderNodeProperties_UAVRework">
+				<debugLabel>CombatDrone</debugLabel>
+				<nodeClass>TOT_DLL_test.PawnRenderNode_UAVRework</nodeClass>
+				<workerClass>TOT_DLL_test.PawnRenderNodeWorker_UAVRework</workerClass>
+				<texPath>Things/Apparel/Drone_Laser/CMC_MissileDrone</texPath>
+				<baseLayer>99</baseLayer>
+				<overrideMeshSize>(1.1,1.1)</overrideMeshSize>
+				<pawnType>Any</pawnType>
+				<shaderTypeDef>CutoutComplex</shaderTypeDef>			
+			</li>
+			<li Class="TOT_DLL_test.PawnRenderNodeProperties_UAVRework">
+				<debugLabel>gloweffect</debugLabel>
+				<nodeClass>TOT_DLL_test.PawnRenderNode_UAVRework</nodeClass>
+				<workerClass>TOT_DLL_test.PawnRenderNodeWorker_UAVRework</workerClass>
+				<texPath>Things/Apparel/Drone_Laser/CMC_MissileDrone_Light</texPath>
+				<baseLayer>100</baseLayer>
+				<overrideMeshSize>(1.1,1.1)</overrideMeshSize>
+				<pawnType>Any</pawnType>
+				<shaderTypeDef>MoteGlow</shaderTypeDef>
+				<useforcedColor>false</useforcedColor>
+			</li>
+			<li Class="TOT_DLL_test.PawnRenderNodeProperties_UAVRework">
+				<debugLabel>shadow</debugLabel>
+				<nodeClass>TOT_DLL_test.PawnRenderNode_UAVRework</nodeClass>
+				<workerClass>TOT_DLL_test.PawnRenderNodeWorker_UAVRework</workerClass>
+				<texPath>Things/Apparel/CMC_UAV_Shadow</texPath>
+				<baseLayer>-100</baseLayer>
+				<overrideMeshSize>(1.1,1.1)</overrideMeshSize>
+				<pawnType>Any</pawnType>
+				<shaderTypeDef>Transparent</shaderTypeDef>
+				<useforcedColor>false</useforcedColor>
+				<drawData>
+					<dataNorth><offset>(0,0,-0.6)</offset></dataNorth>
+					<dataEast><offset>(0,0,-0.6)</offset></dataEast>
+					<dataSouth><offset>(0,0,-0.6)</offset></dataSouth>
+				</drawData>	
+			</li>
+		</renderNodeProperties>
+		</apparel>
+		<recipeMaker>
+				<unfinishedThingDef>UnfinishedTechArmor</unfinishedThingDef>
+				<researchPrerequisite>CMC_FloatingGunII</researchPrerequisite>
+				<skillRequirements>
+					<Crafting>9</Crafting>
+				</skillRequirements>
+				<recipeUsers Inherit="False">
+					<li>CMC_FacBench</li>		
+				</recipeUsers>
+		</recipeMaker>
+		<comps  Inherit="false">
+			<li Class="TOT_DLL_test.CompProperties_FloatGunRework">
+				<FloatingGunGraphicData>
+				  <graphicClass>Graphic_Multi</graphicClass>
+				  <shaderType>CutoutComplex</shaderType>
+				  <texPath>Things/Apparel/Drone_Aux/CMC_MissileDrone</texPath>
+				  <drawSize>(1.1,1.1)</drawSize>
+				</FloatingGunGraphicData>
+				<BatteryLifeTick>8100</BatteryLifeTick>
+				<turretDef>CMCUAV_LaserPulse</turretDef>
+				<RadiusColor>Cyan</RadiusColor>
+				<saveKeysPrefix>CMCUAVL</saveKeysPrefix>
+			</li>
+			<li>
+				<compClass>CompColorable</compClass>
+			</li>
+			<li Class="CompProperties_Forbiddable"/>
+		</comps>
+		<colorGenerator Class="ColorGenerator_Options">
+      <options>
+        <li>
+          <weight>10</weight>
+          <only>(0.33,0.33,0.33,1)</only>
+        </li>
+        <li>
+          <weight>10</weight>
+          <only>(0.65,0.65,0.65,1)</only>
+        </li>
+        <li>
+          <weight>6</weight>
+          <min>(0.3,0.3,0.3,1)</min>
+          <max>(0.5,0.5,0.5,1)</max>
+        </li>
+        <li>
+          <weight>10</weight>
+          <only>(0.9,0.9,0.9,1)</only>
+        </li>
+      </options>
+    </colorGenerator>
+  </ThingDef>
+  
+  <ThingDef ParentName="ApparelNoQualityBase">
+		<defName>CMC_EngineerDrone</defName>
+		<tickerType>Normal</tickerType>
+		<label>X-01 "Gou Mang" Engineering Floating Platform</label>
+		<description>Specialized floating platform designed for field maintenance and engineering operations. Features exceptionally long endurance and rapid recharge cycles due to reduced standard payload capacity. Equipped with long-range nanomechanical maintenance systems capable of repairing operator's gear and other drones within the same series.\n\nIntegrated multi-function engineering manipulator (nano-welding/circuit repair/equipment disassembly) with micro rail accelerator for self-defense.</description>
+		<tickerType>Normal</tickerType>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<thingCategories Inherit='False'>
+		  <li>ArmorHeadgear</li>
+		</thingCategories>
+		<thingClass>TOT_DLL_test.Apparel_FloatingGunRework</thingClass>
+		<graphicData>
+		  <texPath>Things/Apparel/Drone_Repair/CMC_MissileDrone_Display</texPath>
+		  <graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<statBases>
+		  <MaxHitPoints>1240</MaxHitPoints>
+		  <Mass>0.1</Mass>
+		  <MarketValue>1870</MarketValue>
+		  <EquipDelay>0</EquipDelay>
+		</statBases>
+		<costList>
+			<Steel>45</Steel>
+			<ComponentSpacer>1</ComponentSpacer>
+			<ComponentIndustrial>4</ComponentIndustrial>
+			<Plasteel>15</Plasteel>
+			<CMC_Gravcore>1</CMC_Gravcore>
+		</costList>
+		<equippedStatOffsets>
+		  <WorkSpeedGlobal>0.15</WorkSpeedGlobal>
+		</equippedStatOffsets>
+		<generateCommonality>0</generateCommonality>
+		<apparel>
+			<countsAsClothingForNudity>false</countsAsClothingForNudity>
+			<careIfWornByCorpse>false</careIfWornByCorpse>
+			<careIfDamaged>false</careIfDamaged>
+			<wearPerDay>10</wearPerDay>
+			<bodyPartGroups Inherit="false">
+				<li>Shoulders</li>
+			</bodyPartGroups>
+			<layers Inherit="false">
+				<li>Belt</li>
+			</layers>
+		  <defaultOutfitTags>
+			<li>Soldier</li>
+		  </defaultOutfitTags>
+		  <renderNodeProperties>
+			<li Class="TOT_DLL_test.PawnRenderNodeProperties_UAVRework">
+				<debugLabel>CombatDrone</debugLabel>
+				<nodeClass>TOT_DLL_test.PawnRenderNode_UAVRework</nodeClass>
+				<workerClass>TOT_DLL_test.PawnRenderNodeWorker_UAVRework</workerClass>
+				<texPath>Things/Apparel/Drone_Repair/CMC_MissileDrone</texPath>
+				<baseLayer>99</baseLayer>
+				<overrideMeshSize>(1,1)</overrideMeshSize>
+				<pawnType>Any</pawnType>
+				<shaderTypeDef>CutoutComplex</shaderTypeDef>			
+			</li>
+			<li Class="TOT_DLL_test.PawnRenderNodeProperties_UAVRework">
+				<debugLabel>shadow</debugLabel>
+				<nodeClass>TOT_DLL_test.PawnRenderNode_UAVRework</nodeClass>
+				<workerClass>TOT_DLL_test.PawnRenderNodeWorker_UAVRework</workerClass>
+				<texPath>Things/Apparel/CMC_UAV_Shadow</texPath>
+				<baseLayer>-100</baseLayer>
+				<overrideMeshSize>(1,1)</overrideMeshSize>
+				<pawnType>Any</pawnType>
+				<shaderTypeDef>Transparent</shaderTypeDef>
+				<useforcedColor>false</useforcedColor>
+				<drawData>
+					<dataNorth><offset>(0,0,-0.5)</offset></dataNorth>
+					<dataEast><offset>(0,0,-0.5)</offset></dataEast>
+					<dataSouth><offset>(0,0,-0.5)</offset></dataSouth>
+				</drawData>	
+			</li>
+		</renderNodeProperties>
+		</apparel>
+		<recipeMaker>
+				<unfinishedThingDef>UnfinishedTechArmor</unfinishedThingDef>
+				<researchPrerequisite>CMC_FloatingGunI</researchPrerequisite>
+				<skillRequirements>
+					<Crafting>9</Crafting>
+				</skillRequirements>
+				<recipeUsers Inherit="False">
+					<li>CMC_FacBench</li>		
+				</recipeUsers>
+		</recipeMaker>
+		<comps  Inherit="false">
+			<li Class="TOT_DLL_test.CompProperties_FloatGunRework">
+				<FloatingGunGraphicData>
+				  <graphicClass>Graphic_Multi</graphicClass>
+				  <shaderType>CutoutComplex</shaderType>
+				  <texPath>Things/Apparel/Drone_Aux/CMC_MissileDrone</texPath>
+				  <drawSize>(1,1)</drawSize>
+				</FloatingGunGraphicData>
+				<BatteryLifeTick>24000</BatteryLifeTick>
+				<ChargingSpeedMutiplier>3</ChargingSpeedMutiplier>
+				<turretDef>CMCUAV_Pistol</turretDef>
+				<RadiusColor>Cyan</RadiusColor>
+				<saveKeysPrefix>CMCUAVL</saveKeysPrefix>
+			</li>
+			<li>
+				<compClass>CompColorable</compClass>
+			</li>
+			<li Class="CompProperties_Forbiddable"/>
+		</comps>
+		<colorGenerator Class="ColorGenerator_Options">
+      <options>
+        <li>
+          <weight>10</weight>
+          <only>(0.9,0.9,0.9,1)</only>
+        </li>
+      </options>
+    </colorGenerator>
+  </ThingDef>
+</Defs>

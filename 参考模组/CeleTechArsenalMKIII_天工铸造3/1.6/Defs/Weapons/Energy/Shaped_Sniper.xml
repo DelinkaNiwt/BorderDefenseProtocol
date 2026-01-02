@@ -1,0 +1,172 @@
+<Defs>
+	<FleckDef ParentName="FleckBase_Thrown">
+		<defName>CMC_Laser_Stay_ScatterLaser_Test</defName>
+		<graphicData>
+		  <texPath>Things/Projectile/CMC_LaserWhite</texPath>
+		  <shaderType>TransparentPostLight</shaderType>
+		</graphicData>
+		<altitudeLayer>Projectile</altitudeLayer>
+		<fadeInTime>0</fadeInTime>
+		<solidTime>0</solidTime>
+		<fadeOutTime>0.2</fadeOutTime>
+	</FleckDef>
+	
+	<ThingDef ParentName="MoteBase">
+    <defName>CMC_Laser_Stay_MoteBlue</defName>
+    <thingClass>MoteDualAttached</thingClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.1</fadeInTime>
+      <fadeOutTime>0</fadeOutTime>
+      <solidTime>999999</solidTime>
+      <needsMaintenance>True</needsMaintenance>
+      <rotateTowardsTarget>True</rotateTowardsTarget>
+      <scaleToConnectTargets>True</scaleToConnectTargets>
+      <fadeOutUnmaintained>True</fadeOutUnmaintained>
+    </mote>
+    <graphicData>
+      <texPath>Things/Mote/GraserBeam</texPath>
+      <graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
+	  <color>(0, 0.95, 0.95)</color>
+	  <drawSize>(0.58, 1)</drawSize>
+      <shaderType>MoteBeam</shaderType>
+      <shaderParameters>
+        <_ExtraTexA>/Things/Mote/BeamSecondaryNoise_A</_ExtraTexA>
+        <_ExtraTexB>/Things/Mote/BeamSecondaryNoise_B</_ExtraTexB>
+        <_ScrollSpeedA>-4 </_ScrollSpeedA>
+        <_ScrollSpeedB>3</_ScrollSpeedB>
+        <_Intensity>2</_Intensity>
+      </shaderParameters>
+    </graphicData>
+    <drawOffscreen>true</drawOffscreen>
+  </ThingDef>
+
+	<ThingDef ParentName="TOT_Weapons">
+    <defName>CMC_Shaped_Laser_Sniper</defName>
+    <label>QBUL-56 particle lance</label>
+    <description>A heavy particle beam sniper that does large amount of damage over long range, able to penetrate shields.</description>
+    <uiIconPath>Things/Weapons/CMC_SLS_UI</uiIconPath>
+	<graphicData>
+      <texPath>Things/Weapons/CMC_SLS</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.4</drawSize>
+    </graphicData>
+    <uiIconScale>1</uiIconScale>
+    <soundInteract>Interact_Rifle</soundInteract>
+	<recipeMaker>
+      <researchPrerequisites>
+		<li>CMC_DEWII</li>
+		<li>CMC_Heavy_I</li>
+	  </researchPrerequisites>
+      <skillRequirements>
+        <Crafting>17</Crafting>
+      </skillRequirements>
+    </recipeMaker>
+    <statBases>
+	<WorkToMake>46000</WorkToMake>
+      <Mass>12.7</Mass>
+      <RangedWeapon_Cooldown>1.99</RangedWeapon_Cooldown>
+	  <MarketValue>3800</MarketValue>
+    </statBases>
+	<costList>
+      <Steel>75</Steel>
+	  <Plasteel>150</Plasteel>
+      <ComponentIndustrial>11</ComponentIndustrial>
+	  <ComponentSpacer>6</ComponentSpacer>
+      <Silver>30</Silver>
+    </costList>
+		<weaponClasses>
+      <li>Ultratech</li>
+	  <li>RangedLight</li>
+    </weaponClasses>
+    <verbs>
+      <li>
+        <verbClass>TOT_DLL_test.Verb_Laser_Sustain</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <warmupTime>1.03</warmupTime>
+        <range>52</range>
+        <!--这个是攻击次数-->
+        <burstShotCount>90</burstShotCount>
+        <!--这个是攻击间隔-->
+        <ticksBetweenBurstShots>3</ticksBetweenBurstShots>
+        <soundCastTail>GunTail_Medium</soundCastTail>
+        <muzzleFlashScale>0</muzzleFlashScale>
+      </li>
+    </verbs>
+	<comps>
+      <li Class="TOT_DLL_test.CompProperties_LaserData_Sustain">
+        <!--激光光束样式-->
+        <LaserLine_MoteDef>CMC_Laser_Stay_MoteBlue</LaserLine_MoteDef>
+        <!--光束末端的效果+基础大小-->
+        <LaserFleck_End>CMC_Laser_Stay_LaserEndLarge_TT</LaserFleck_End>
+        <!--光束基础大小-->
+        <LaserFleck_End_Scale_Base>8.0</LaserFleck_End_Scale_Base>
+        <!--光束末端粒子的效果+基础大小+大小偏移量+数量+产生几率-->
+        <LaserFleck_Spark>CMC_Stay_Laser_Spark</LaserFleck_Spark>
+        <!--光束末端粒子的基础大小-->
+        <LaserFleck_Spark_Scale_Base>0.3</LaserFleck_Spark_Scale_Base>
+        <!--光束末端粒子大小偏移量-->
+        <LaserFleck_Spark_Scale_Deviation>0.2</LaserFleck_Spark_Scale_Deviation>
+        <!--光束末端粒子数量-->
+        <LaserFleck_Spark_Num>3</LaserFleck_Spark_Num>
+        <!--光束末端粒子产生几率-->
+        <LaserFleck_Spark_Spawn_Chance>0.4</LaserFleck_Spark_Spawn_Chance>
+        <!--这是开火时的音效-->
+        <SoundDef>TT</SoundDef>
+        <!--这是光束颜色调整（直接输入数值0-255）+不透明度（0-1）（如果是已经上好色的激光贴图的话，全部颜色写成255应该就行）-->
+        <Color_Red>255</Color_Red>
+        <Color_Green>255</Color_Green>
+        <Color_Blue>255</Color_Blue>
+        <Color_Alpha>1</Color_Alpha>
+        <!--这个是光束的起点偏移，用于适配不同枪械长度的出口位置-->
+        <StartPositionOffset_Range>0.9</StartPositionOffset_Range>
+        <!--这个是造成伤害的类型-->
+        <DamageDef>InfernoBeam</DamageDef>
+        <!--这个是造成伤害的数值-->
+        <DamageNum>4</DamageNum>
+        <!--这个是护甲穿透-->
+        <DamageArmorPenetration>0.8</DamageArmorPenetration>
+      </li>
+	  <li Class="TOT_DLL_test.CompProperties_ColorSaver"></li>
+    </comps>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>13</power>
+        <cooldownTime>2</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>20</power>
+        <cooldownTime>2</cooldownTime>
+		<extraMeleeDamages>
+          <li>
+            <def>Flame</def>
+            <amount>10</amount>
+            <chance>0.6</chance>
+          </li>
+		</extraMeleeDamages>
+      </li>
+    </tools>
+	</ThingDef>
+	
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>CMC_Laser_instant_ScatterLaser_void</defName>
+    <graphicData>
+      <texPath>Things/CMC_Void</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <fadeInTime>0</fadeInTime>
+    <solidTime>0</solidTime>
+    <fadeOutTime>0.3</fadeOutTime>
+  </FleckDef>
+	
+</Defs>

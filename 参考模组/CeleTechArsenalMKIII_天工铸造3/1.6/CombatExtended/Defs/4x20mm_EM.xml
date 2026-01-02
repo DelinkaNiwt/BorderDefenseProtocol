@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ThingCategoryDef>
+    <defName>AmmoCategory_CMC_4x20mmAmmo</defName>
+    <label>4x20mm Electromagnetic</label>
+    <parent>AmmoPistols</parent>
+    <iconPath>Things/Ammo/4x20mmUI</iconPath>
+  </ThingCategoryDef>
+  <CombatExtended.AmmoSetDef>
+    <defName>AmmoSet_CMC_4x20mmAmmo</defName>
+    <label>4x20mm Electromagnetic</label>
+    <ammoTypes>
+      <Ammo_CMC_4x20mmAmmo_Regular>Bullet_CMC_4x20mmAmmo_Regular</Ammo_CMC_4x20mmAmmo_Regular>
+    </ammoTypes>
+  </CombatExtended.AmmoSetDef>
+  <ThingDef Class="CombatExtended.AmmoDef" Name="Ammo_CMC_4x20mmAmmo_Base" ParentName="MediumAmmoBase" Abstract="True">
+    <description>TODO</description>
+    <statBases>
+      <Mass>0.013</Mass>
+      <Bulk>0.02</Bulk>
+    </statBases>
+    <tradeTags>
+      <li>CE_AutoEnableTrade</li>
+      <li>CE_AutoEnableCrafting</li>
+    </tradeTags>
+    <thingCategories>
+      <li>AmmoCategory_CMC_4x20mmAmmo</li>
+    </thingCategories>
+  </ThingDef>
+  <ThingDef Name="Bullet_CMC_4x20mmAmmo_Base" ParentName="BaseBulletCE" Abstract="True">
+    <graphicData>
+      <texPath>Things/Projectile/Charge_Small</texPath>
+      <graphicClass>Verse.Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile Class="CombatExtended.ProjectilePropertiesCE">
+      <speed>90</speed>
+      <damageDef>Bullet</damageDef>
+      <dropsCasings>true</dropsCasings>
+    </projectile>
+  </ThingDef>
+  <ThingDef Class="CombatExtended.AmmoDef" ParentName="Ammo_CMC_4x20mmAmmo_Base">
+    <defName>Ammo_CMC_4x20mmAmmo_Regular</defName>
+    <label>CMC_4x20mmAmmo_R</label>
+    <graphicData>
+      <texPath>Things/Ammo/4x20mm_R</texPath>
+      <graphicClass>Verse.Graphic_StackCount</graphicClass>
+    </graphicData>
+    <ammoClass>CMC_EMBullet_R</ammoClass>
+    <cookOffProjectile>Bullet_CMC_4x20mmAmmo_Regular</cookOffProjectile>
+  </ThingDef>
+  <ThingDef ParentName="Bullet_CMC_4x20mmAmmo_Base">
+    <defName>Bullet_CMC_4x20mmAmmo_Regular</defName>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Verse.Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile Class="CombatExtended.ProjectilePropertiesCE">
+      <damageAmountBase>8</damageAmountBase>
+      <armorPenetrationBlunt>15</armorPenetrationBlunt>
+      <armorPenetrationSharp>24</armorPenetrationSharp>
+      <secondaryDamage>
+        <li>
+          <def>Bomb</def>
+          <amount>3</amount>
+        </li>
+      </secondaryDamage>
+    </projectile>
+  </ThingDef>
+  <RecipeDef ParentName="AmmoRecipeBase">
+    <defName>MakeAmmo_CMC_4x20mmAmmo_Regular</defName>
+    <label>make CMC_4x20mmAmmo  x500</label>
+    <description>make 500 CMC_4x20mmAmmo.</description>
+    <jobString>making CMC_4x20mmAmmo.</jobString>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>20</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Uranium</li>
+          </thingDefs>
+        </filter>
+        <count>10</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>2</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Steel</li>
+        <li>Uranium</li>
+        <li>ComponentIndustrial</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Ammo_CMC_4x20mmAmmo_Regular>500</Ammo_CMC_4x20mmAmmo_Regular>
+    </products>
+    <workAmount>2000</workAmount>
+  </RecipeDef>
+</Defs>

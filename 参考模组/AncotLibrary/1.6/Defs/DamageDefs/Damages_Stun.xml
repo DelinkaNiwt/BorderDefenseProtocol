@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <DamageDef ParentName="Stun">
+    <defName>Ancot_StunExceptInstigatorFaction</defName>
+    <label>stun</label>
+    <workerClass>AncotLibrary.DamageWorker_StunExceptInstigatorFaction</workerClass>
+    <externalViolence>true</externalViolence>
+    <deathMessage>{0} has been stunned to death.</deathMessage>
+    <defaultDamage>20</defaultDamage>
+    <explosionCellFleck>BlastDry</explosionCellFleck>
+    <soundExplosion>Explosion_Stun</soundExplosion>
+    <combatLogRules>Damage_Stun</combatLogRules>
+    <causeStun>true</causeStun>
+  </DamageDef>
+
+  <DamageDef ParentName="Stun">
+    <defName>Ancot_StunExceptInstigator</defName>
+    <label>stun</label>
+    <workerClass>AncotLibrary.DamageWorker_StunExceptInstigator</workerClass>
+    <externalViolence>true</externalViolence>
+    <deathMessage>{0} has been stunned to death.</deathMessage>
+    <defaultDamage>20</defaultDamage>
+    <explosionCellFleck>BlastDry</explosionCellFleck>
+    <soundExplosion>Explosion_Stun</soundExplosion>
+    <combatLogRules>Damage_Stun</combatLogRules>
+    <causeStun>true</causeStun>
+  </DamageDef>
+
+  
+</Defs>

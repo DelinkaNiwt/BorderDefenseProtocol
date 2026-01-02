@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: CAG stellar cargo platform -->
+  <CMC_LandPlatform.label>星际货运平台</CMC_LandPlatform.label>
+  <!-- EN: A standardized landing field for the CAG unmanned interstellar trade network. Equipped with auto-guidance beacons and dampening field generators to ensure precision landings and rapid cargo transfer under extreme planetary conditions.\n\n▲ CRITICAL OPERATIONAL PROTOCOLS ▲\n- Landing zone must maintain absolute clearance within designated area\n- Unmet clearance conditions trigger automated evasion protocol (shuttle recall)\n\n※ WARNING: Any obstructions (including low walls, trees, generators) activate collision-abort procedures. -->
+  <CMC_LandPlatform.description>为天工商盟（CAG）无人化星际贸易系统设计的标准化着陆场。配备自动导引信标和缓冲力场发生器，确保穿梭机在极端环境下的精确降落与货物快速装卸。\n\n▲ 关键操作协议 ▲\n- 着陆区需保持占地范围内的绝对净空\n- 未满足净空条件时，穿梭机将启动自动避险协议返航\n\n※ 警告：任何掩体（包括矮墙、树木、发电机组）都会触发防碰撞中断程序</CMC_LandPlatform.description>
+  
+</LanguageData>

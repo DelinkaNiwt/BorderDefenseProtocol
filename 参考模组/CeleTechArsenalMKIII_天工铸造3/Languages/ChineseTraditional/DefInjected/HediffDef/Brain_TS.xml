@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: <color=#1DD5EE><i>Tian Shu combat chip</i></color> -->
+  <TianShu.label>【天樞】防禦晶元</TianShu.label>
+  <!-- EN: A brain chip which can greatly reduce incoming damage. -->
+  <TianShu.description>一種能大幅減少來自外部的傷害的腦部晶片。</TianShu.description>
+  <!-- EN: a Tian Shu combat chip -->
+  <TianShu.labelNoun>天樞防禦晶元</TianShu.labelNoun>
+  
+</LanguageData>

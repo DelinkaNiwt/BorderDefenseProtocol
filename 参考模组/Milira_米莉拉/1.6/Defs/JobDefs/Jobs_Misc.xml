@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <JobDef>
+    <defName>Milira_ConsumeTravelRation</defName>
+    <driverClass>Milira.JobDriver_ConsumeTravelRation</driverClass>
+    <reportString>Consuming travel ration.</reportString>
+  </JobDef>
+  
+</Defs>

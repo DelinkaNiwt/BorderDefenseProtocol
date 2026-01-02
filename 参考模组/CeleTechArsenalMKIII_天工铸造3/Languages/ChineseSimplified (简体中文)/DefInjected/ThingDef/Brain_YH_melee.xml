@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Yu Heng chip -->
+  <YuHengChip.label>【玉衡】近战芯片</YuHengChip.label>
+  <!-- EN: A brain implant which boosts melee combat abilities. -->
+  <YuHengChip.description>可以大幅提高使用者反应速度以提高其格斗能力，也可以主动过载芯片使其能力在短时间内进一步提升。</YuHengChip.description>
+  
+</LanguageData>

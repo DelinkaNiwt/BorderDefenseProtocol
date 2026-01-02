@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <QuestScriptDef>
+    <defName>Milira_FallenAngel_Drop</defName>
+    <autoAccept>true</autoAccept>
+    <defaultCharity>true</defaultCharity>
+    <successHistoryEvent MayRequire="Ludeon.RimWorld.Ideology">CharityFulfilled_RefugeePodCrash</successHistoryEvent>
+    <failedOrExpiredHistoryEvent MayRequire="Ludeon.RimWorld.Ideology">CharityRefused_RefugeePodCrash</failedOrExpiredHistoryEvent>
+    <defaultHidden>true</defaultHidden>
+    <isRootSpecial>true</isRootSpecial>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->The Wounded Angel</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->A severely injured Milira has warped nearby. </li>
+      </rulesStrings>
+    </questDescriptionRules>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+
+        <!-- 判断剧情设置 -->
+        <li Class="Milira.QuestNode_ModSettingOn">
+          <modSettingSwitch>MiliraRace_ModSetting_StoryOverall</modSettingSwitch>
+        </li>
+        
+        <!-- 空投单位 -->
+        <li Class="Milira.QuestNode_Root_FallenAngel" />
+
+      </nodes>
+    </root>
+  </QuestScriptDef>
+
+</Defs>

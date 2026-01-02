@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ThingCategoryDef>
+    <defName>TOT_Weapons_Cat</defName>
+    <label>CMC Weapons</label>
+    <parent>WeaponsRanged</parent>
+  </ThingCategoryDef>
+</Defs>

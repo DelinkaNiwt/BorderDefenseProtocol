@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <QBU_TOOE.label>QBU-31“震夔”電磁狙擊槍</QBU_TOOE.label>
+  <QBU_TOOE.description>第一代高精度電磁狙擊槍，以其卓越的子彈精度和穿透力而聞名。然而，由於技術限制，這款武器異常笨重。</QBU_TOOE.description>
+  <QBU_TOOE.tools.stock.label>槍托</QBU_TOOE.tools.stock.label>
+  <QBU_TOOE.tools.barrel.label>槍管</QBU_TOOE.tools.barrel.label>
+  <QBU_TOOE.verbs.Verb_Shoot.label>電磁狙擊彈</QBU_TOOE.verbs.Verb_Shoot.label>
+  
+</LanguageData>

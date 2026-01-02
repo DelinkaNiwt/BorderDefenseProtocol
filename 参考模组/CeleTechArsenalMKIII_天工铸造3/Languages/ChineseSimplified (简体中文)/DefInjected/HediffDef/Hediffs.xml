@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: healing side effect -->
+  <CMC_HealingSE.label>治疗副作用</CMC_HealingSE.label>
+  <!-- EN: mechanites just healed the user and caused minor side effects. -->
+  <CMC_HealingSE.description>纳米微械治疗带来的轻微副作用。</CMC_HealingSE.description>
+  
+  <!-- EN: radiation degardation -->
+  <DD.label>辐射</DD.label>
+  <!-- EN: Degardation caused by neutron radiation. -->
+  <DD.description>目标正受到辐射</DD.description>
+  <!-- EN: {0} in the {1} -->
+  <DD.labelNounPretty>辐射</DD.labelNounPretty>
+  
+  <!-- EN: radiation degradation -->
+  <Degradation.label>辐射</Degradation.label>
+  <!-- EN: cells degrades due to radiation. -->
+  <Degradation.description>受害者的细胞受辐射影响死亡。</Degradation.description>
+  
+  <!-- EN: frost bite -->
+  <FrostBite.label>噬骨</FrostBite.label>
+  <!-- EN: cooled to absolute zero. -->
+  <FrostBite.description>反熵弹命中使目标受到持续伤害</FrostBite.description>
+  
+  <!-- EN: plasma burn -->
+  <PlasmaBurn.label>焚身</PlasmaBurn.label>
+  <!-- EN: Ionized molecules cause body to catch fire. -->
+  <PlasmaBurn.description>周围等离子态的粒子导致持续性的灼烧</PlasmaBurn.description>
+  
+  <!-- EN: mechanites anesthesia -->
+  <SMAnesthetic.label>纳米微械麻醉</SMAnesthetic.label>
+  <!-- EN: Celestial-tech mechanites injected to this creature's blood cause unconscious. -->
+  <SMAnesthetic.description>子弹注入的纳米微械导致神经性的麻醉</SMAnesthetic.description>
+  <!-- EN: sedated -->
+  <SMAnesthetic.stages.sedated.label>麻醉</SMAnesthetic.stages.sedated.label>
+  <!-- EN: sedative kicking in -->
+  <SMAnesthetic.stages.sedative_kicking_in.label>被麻醉中</SMAnesthetic.stages.sedative_kicking_in.label>
+  
+  <!-- EN: fatal mechanites injection -->
+  <SMLethal.label>TODO</SMLethal.label>
+  <!-- EN: Celestial-tech mechanites overdose caused a fatal result. -->
+  <SMLethal.description>TODO</SMLethal.description>
+  <!-- EN: mechanites overdose -->
+  <SMLethal.stages.mechanites_overdose.label>TODO</SMLethal.stages.mechanites_overdose.label>
+  <!-- EN: neural system breaking down -->
+  <SMLethal.stages.neural_system_breaking_down.label>TODO</SMLethal.stages.neural_system_breaking_down.label>
+  
+  <!-- EN: weakened -->
+  <weakening.label>裂解</weakening.label>
+  <!-- EN: Weakened Intermolecular forces causes this pawn to take more damage. -->
+  <weakening.description>TODO</weakening.description>
+  <!-- EN: weakened -->
+  <weakening.labelNoun>TODO</weakening.labelNoun>
+  
+</LanguageData>

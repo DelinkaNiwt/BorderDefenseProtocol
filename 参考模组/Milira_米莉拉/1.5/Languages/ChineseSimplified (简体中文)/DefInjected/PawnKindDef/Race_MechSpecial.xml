@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: autonomous ion float unit -->
+  <Milian_AutonomousFloatUnit.label>自律浮游单元</Milian_AutonomousFloatUnit.label>
+  <!-- EN: autonomous ion float unit -->
+  <Milian_AutonomousFloatUnit.labelPlural>自律浮游单元</Milian_AutonomousFloatUnit.labelPlural>
+  
+  <!-- EN: mech control unit -->
+  <Milian_FloatUnit_MechControl.label>机控浮游单元</Milian_FloatUnit_MechControl.label>
+  <!-- EN: mech control units -->
+  <Milian_FloatUnit_MechControl.labelPlural>机控浮游单元</Milian_FloatUnit_MechControl.labelPlural>
+  
+  <!-- EN: shield float unit -->
+  <Milian_FloatUnit_Shield.label>护盾浮游单元</Milian_FloatUnit_Shield.label>
+  <!-- EN: shield float unit -->
+  <Milian_FloatUnit_Shield.labelPlural>护盾浮游单元</Milian_FloatUnit_Shield.labelPlural>
+  
+  <!-- EN: small ion float unit -->
+  <Milian_FloatUnit_SmallPlasma.label>小型离子浮游单元</Milian_FloatUnit_SmallPlasma.label>
+  <!-- EN: small ion float unit -->
+  <Milian_FloatUnit_SmallPlasma.labelPlural>小型离子浮游单元</Milian_FloatUnit_SmallPlasma.labelPlural>
+  
+</LanguageData>

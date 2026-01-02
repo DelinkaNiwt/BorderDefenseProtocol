@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <CMC_LaserSniperTower.label>“承影·流光”光棱塔</CMC_LaserSniperTower.label>
+  <CMC_LaserSniperTower.description>高聳的自動防禦設施，能接收附近其他光棱塔的能量並將攻擊功率成倍增加。</CMC_LaserSniperTower.description>
+  
+  <Gun_LaserSniper.label>“承影·流光”光棱塔</Gun_LaserSniper.label>
+  <Gun_LaserSniper.description>光棱塔</Gun_LaserSniper.description>
+  <Gun_LaserSniper.verbs.TOT_DLL_test.Verb_LaserShoot.label>光棱塔</Gun_LaserSniper.verbs.TOT_DLL_test.Verb_LaserShoot.label>
+  
+</LanguageData>

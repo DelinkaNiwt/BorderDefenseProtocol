@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 米莉拉鹞式战机 -->
+  <Milira_HarrierFighter.label>米莉拉鹞式战机</Milira_HarrierFighter.label>
+  <!-- EN: . -->
+  <Milira_HarrierFighter.description>利用场力作用飞行的小型战机，可以垂直起降。消耗少量日光燃料启动升空后可以只依赖内置的燃料电池飞行。</Milira_HarrierFighter.description>
+  
+</LanguageData>

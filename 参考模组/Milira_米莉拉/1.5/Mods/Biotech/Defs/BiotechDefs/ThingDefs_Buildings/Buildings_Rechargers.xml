@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="BaseMechCharger">
+    <defName>Milian_Recharger</defName>
+    <label>Milian Energy Station</label>
+    <thingClass>Building_MechCharger</thingClass>
+    <description>A facility capable of charging Milian.</description>
+    <graphicData>
+      <texPath>Milira/Building/Production/MilianRecharger</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2.2,2.2)</drawSize>
+      <shadowData>
+        <volume>(0.5, 0.5, 0.5)</volume>
+      </shadowData>
+    </graphicData>
+    <uiIconPath>Milira/Building/Production/MilianRecharger</uiIconPath>
+    <uiIconScale>1.4</uiIconScale>
+    <interactionCellOffset>(0,0,0)</interactionCellOffset>
+    <passability>PassThroughOnly</passability>
+    <rotatable>false</rotatable>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsProduction</li>
+    </thingCategories>
+    <statBases>
+      <MaxHitPoints>280</MaxHitPoints>
+      <WorkToBuild>12000</WorkToBuild>
+      <Mass>25</Mass>
+      <Flammability>0.5</Flammability>
+    </statBases>
+    <size>(1,1)</size>
+    <building>
+      <requiredMechWeightClasses>
+        <li>Medium</li>
+      </requiredMechWeightClasses>
+      <!-- <barDrawData>
+        <north>
+          <preRotationOffset>(-0.01598358,0.0255661)</preRotationOffset>
+          <size>(0.5505219,0.1139069)</size>
+        </north>
+        <south>
+          <preRotationOffset>(0.006927488,-0.02323151)</preRotationOffset>
+          <size>(0.5479813,0.1345978)</size>
+        </south>
+        <east>
+          <preRotationOffset>(0.1157379,-0.006530767)</preRotationOffset>
+          <size>(0.4481201,0.1160278)</size>
+        </east>
+        <west>
+          <preRotationOffset>(-0.1114426,-0.005119322)</preRotationOffset>
+          <size>(0.4646759,0.1281815)</size>
+        </west>
+      </barDrawData> -->
+    </building>
+    <costList>
+      <Milira_SplendidSteel>150</Milira_SplendidSteel>
+      <Milira_SunPlateSteel>25</Milira_SunPlateSteel>
+      <Milira_SolarCrystal>8</Milira_SolarCrystal>
+      <ComponentIndustrial>3</ComponentIndustrial>
+    </costList>
+    <researchPrerequisites>
+      <li>Milira_MilianTech_Recharger</li>
+    </researchPrerequisites>
+    <comps Inherit="false">
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_WasteProducer">
+        <showContentsInInspectPane>false</showContentsInInspectPane>
+      </li>
+      <li Class="CompProperties_ThingContainer">
+        <compClass>CompThingContainer</compClass>
+        <stackLimit>5</stackLimit>
+        <drawContainedThing>false</drawContainedThing>
+        <dropEffecterDef>MechChargerWasteRemoved</dropEffecterDef>
+      </li>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>240</basePowerConsumption>
+      </li>
+    </comps>
+  </ThingDef>
+
+</Defs>

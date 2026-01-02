@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: //Primordial Axis·Entropy// -->
+  <CMC_CommConsole.label>//太初枢机·熵//</CMC_CommConsole.label>
+  <!-- EN: Cast from the River Chart and Luo Writing mechanisms, its form resembles a bronze armillary sphere concealing Nine Chapters of Mathematical Art. While the core AI "Entropy" remains dormant, celestial navigation and instant communication functions operate flawlessly. As trigrams rotate, the bridge becomes a microcosmos where battlefield intelligence traverses continents in moments. -->
+  <CMC_CommConsole.description>铸河洛天机盘，形若青铜浑仪暗藏九章算数。其核心蛰伏未醒之器灵「熵」，然星图推演、千里传音诸般神通如常。卦象流转间，舰桥自成小周天，万里战报瞬息可至。</CMC_CommConsole.description>
+  
+</LanguageData>

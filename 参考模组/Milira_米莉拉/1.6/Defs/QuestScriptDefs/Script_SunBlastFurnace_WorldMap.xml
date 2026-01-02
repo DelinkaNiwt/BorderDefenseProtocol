@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 太阳熔炉站点 -->
+  <QuestScriptDef>
+    <defName>Milira_SunBlastFurnace_WorldMap</defName>
+    <rootSelectionWeight>0.7</rootSelectionWeight>
+    <rootMinProgressScore>20</rootMinProgressScore>
+    <minRefireDays>65</minRefireDays>
+    <autoAccept>true</autoAccept>
+    <defaultChallengeRating>3</defaultChallengeRating>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->Sunblast Furnace</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->We’ve found a Milira ground workstation set for sunblast furnace! Sunblast furnaces are key processing facilities that’s crucial for many extraordinary technology developments.\n\n This furnace is guarded by a huge Milian cluster.\n\n This mission will elevate the Milian threat assessment.</li>
+      </rulesStrings>
+    </questDescriptionRules>
+    <questAvailableLetterDef>PositiveEvent</questAvailableLetterDef>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+
+        <!-- 判断米莉拉派系存在且敌对 -->
+        <li Class="AncotLibrary.QuestNode_IsFactionRelationKind">
+          <factionRelationKind>Hostile</factionRelationKind>
+          <invert>false</invert>
+          <factionDefs>
+            <li>Milira_Faction</li>
+          </factionDefs>
+        </li>
+
+        <!-- 固定10000点 -->
+        <li Class="QuestNode_EvaluateSimpleCurve">
+          <value>$points</value>
+          <storeAs>points</storeAs>
+          <curve>
+            <points>
+              <li>   35,  10000</li>
+              <li>  400,  10000</li>
+              <li> 1000,  10000</li>
+              <li> 2000,  10000</li>
+              <li> 3000,  10000</li>
+              <li> 4000,  10000</li>
+              <li> 5000,  10000</li>
+              <li>10000, 10000</li>
+            </points>
+          </curve>
+        </li>
+
+        <li Class="QuestNode_GetMap" />
+
+        <li Class="QuestNode_GetSiteTile">
+          <storeAs>siteTile</storeAs>
+          <preferCloserTiles>true</preferCloserTiles>
+        </li>
+
+        <li Class="QuestNode_ViolentQuestsAllowed">
+          <node Class="QuestNode_Set">
+            <name>siteThreatChance</name>
+            <value>1</value>
+          </node>
+          <elseNode Class="QuestNode_Set">
+            <name>siteThreatChance</name>
+            <value>0</value>
+          </elseNode>          
+        </li>
+
+        <li Class="QuestNode_GetSitePartDefsByTagsAndFaction">
+          <storeAs>sitePartDefs</storeAs>
+          <storeFactionAs>siteFaction</storeFactionAs>
+          <sitePartsTags>
+            <li>
+              <tag>Milira_SunBlastFurnace_InRoom</tag>
+            </li>
+            <li>
+              <tag>Milian_ClusterAwake</tag>
+              <chance>$siteThreatChance</chance>
+            </li>
+          </sitePartsTags>
+        </li>
+
+        <li Class="QuestNode_GetDefaultSitePartsParams">
+          <tile>$siteTile</tile>
+          <faction>$siteFaction</faction>
+          <sitePartDefs>$sitePartDefs</sitePartDefs>
+          <storeSitePartsParamsAs>sitePartsParams</storeSitePartsParamsAs>
+        </li>
+
+        <li Class="QuestNode_SubScript">
+          <def>Util_GenerateSite</def>
+          <parms>
+            <hiddenSitePartsPossible>true</hiddenSitePartsPossible>
+          </parms>
+        </li>
+        
+        <li Class="QuestNode_SpawnWorldObjects">
+          <worldObjects>$site</worldObjects>
+          <defsToExcludeFromHyperlinks>Human</defsToExcludeFromHyperlinks>
+        </li>
+
+        <li Class="QuestNode_WorldObjectTimeout">
+          <worldObject>$site</worldObject>
+          <isQuestTimeout>true</isQuestTimeout>
+          <delayTicks>$(randInt(10,30)*60000)</delayTicks>
+          <inSignalDisable>site.MapGenerated</inSignalDisable>
+          <node Class="QuestNode_End">
+            <outcome>Fail</outcome>
+            <sendStandardLetter>true</sendStandardLetter>
+          </node>
+        </li>
+
+        <li Class="QuestNode_NoWorldObject">
+          <worldObject>$site</worldObject>
+          <node Class="QuestNode_End" />
+        </li>
+
+        <!-- 增加米莉拉威胁点 -->
+        <li Class="Milira.QuestNode_IncreaseMiliraThreatPoint">
+          <inSignal>site.MapGenerated</inSignal>
+          <miliraThreatPoint>30</miliraThreatPoint>
+        </li>
+      </nodes>
+    </root>
+  </QuestScriptDef>
+</Defs>

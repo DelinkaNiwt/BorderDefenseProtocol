@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Aerocraft -->
+  <Ancot_Aerocraft.label>飞行器</Ancot_Aerocraft.label>
+  
+  <!-- EN: Energy weapon -->
+  <Ancot_EnergyWeapon.label>能量武器</Ancot_EnergyWeapon.label>
+  
+  <!-- EN: Shield -->
+  <Ancot_Shield.label>盾牌</Ancot_Shield.label>
+  
+  <!-- EN: Weapon (ranged load) -->
+  <Ancot_Weapon_RangedLoad.label>武器（远程装填）</Ancot_Weapon_RangedLoad.label>
+  
+</LanguageData>

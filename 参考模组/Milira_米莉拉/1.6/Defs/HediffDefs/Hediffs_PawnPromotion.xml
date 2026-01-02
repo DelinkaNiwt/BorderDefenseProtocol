@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <HediffDef Name="Milian_PawnPromotionBase" Abstract="True">
+    <defName>Milian_PawnPromotionBase</defName>
+    <!-- <label>升变</label> -->
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <maxSeverity>1</maxSeverity>
+    <!-- 有致命才有显示百分比 -->
+    <!-- <lethalSeverity>1.01</lethalSeverity> -->
+    <minSeverity>0.01</minSeverity>
+    <initialSeverity>0.01</initialSeverity>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(240, 60, 0)</defaultLabelColor>
+    <description>This pawn is preparing to be promoted to the targeted rank.</description>
+    <comps>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>50.0</severityPerDay>        <!--大约20秒-->
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <minSeverity>0.01</minSeverity>
+        <label>0%</label>
+        <statFactors>
+          <IncomingDamageFactor>0.9</IncomingDamageFactor>
+        </statFactors>
+        <capMods>
+        </capMods>
+      </li>
+      <li>
+        <minSeverity>0.25</minSeverity>
+        <label>25%</label>
+        <statFactors>
+          <IncomingDamageFactor>0.75</IncomingDamageFactor>
+        </statFactors>
+        <capMods>
+        </capMods>
+      </li>
+      <li>
+        <minSeverity>0.50</minSeverity>
+        <label>50%</label>
+        <statFactors>
+          <IncomingDamageFactor>0.55</IncomingDamageFactor>
+        </statFactors>
+        <capMods>
+        </capMods>
+      </li>
+      <li>
+        <minSeverity>0.75</minSeverity>
+        <label>75%</label>
+        <statFactors>
+          <IncomingDamageFactor>0.35</IncomingDamageFactor>
+        </statFactors>
+        <capMods>
+        </capMods>
+      </li>
+      <li>
+        <minSeverity>0.95</minSeverity>
+        <label>99%</label>
+        <statFactors>
+          <IncomingDamageFactor>0.1</IncomingDamageFactor>
+        </statFactors>
+        <capMods>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- 骑士 -->
+  <HediffDef ParentName="Milian_PawnPromotionBase">
+    <defName>Milian_PawnPromotion_KnightI</defName>
+    <label>Promotion: Knight</label>
+    <comps>
+      <li Class="Milira.HediffCompProperties_Promotion">
+        <hediffAddon>Milian_ClassHediff_Pawn</hediffAddon>
+        <promotionPawnkind>Milian_Mechanoid_KnightI</promotionPawnkind>
+        <lordJob>LordJob_MechanoidsDefend</lordJob>
+        <shouldJoinParentLord>true</shouldJoinParentLord>
+        <fleck>Milira_Promotion_Knight</fleck>
+        <promotionSound>Milira_Promotion</promotionSound>
+      </li>
+      <li Class="HediffCompProperties_Effecter">
+        <stateEffecter>Milian_Promotion_Knight</stateEffecter>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef ParentName="Milian_PawnPromotionBase">
+    <defName>Milian_PawnPromotion_KnightII</defName>
+    <label>Promotion: Knight</label>
+    <comps>
+      <li Class="Milira.HediffCompProperties_Promotion">
+        <hediffAddon>Milian_ClassHediff_Pawn</hediffAddon>
+        <promotionPawnkind>Milian_Mechanoid_KnightII</promotionPawnkind>
+        <lordJob>LordJob_MechanoidsDefend</lordJob>
+        <shouldJoinParentLord>true</shouldJoinParentLord>
+        <fleck>Milira_Promotion_Knight</fleck>
+        <promotionSound>Milira_Promotion</promotionSound>
+      </li>
+      <li Class="HediffCompProperties_Effecter">
+        <stateEffecter>Milian_Promotion_Knight</stateEffecter>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef ParentName="Milian_PawnPromotionBase">
+    <defName>Milian_PawnPromotion_KnightIII</defName>
+    <label>Promotion: Knight</label>
+    <comps>
+      <li Class="Milira.HediffCompProperties_Promotion">
+        <hediffAddon>Milian_ClassHediff_Pawn</hediffAddon>
+        <promotionPawnkind>Milian_Mechanoid_KnightIII</promotionPawnkind>
+        <lordJob>LordJob_MechanoidsDefend</lordJob>
+        <shouldJoinParentLord>true</shouldJoinParentLord>
+        <fleck>Milira_Promotion_Knight</fleck>
+        <promotionSound>Milira_Promotion</promotionSound>
+      </li>
+      <li Class="HediffCompProperties_Effecter">
+        <stateEffecter>Milian_Promotion_Knight</stateEffecter>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef ParentName="Milian_PawnPromotionBase">
+    <defName>Milian_PawnPromotion_KnightIV</defName>
+    <label>Promotion: Knight</label>
+    <comps>
+      <li Class="Milira.HediffCompProperties_Promotion">
+        <hediffAddon>Milian_ClassHediff_Pawn</hediffAddon>
+        <promotionPawnkind>Milian_Mechanoid_KnightIV</promotionPawnkind>
+        <lordJob>LordJob_MechanoidsDefend</lordJob>
+        <shouldJoinParentLord>true</shouldJoinParentLord>
+        <fleck>Milira_Promotion_Knight</fleck>
+        <promotionSound>Milira_Promotion</promotionSound>
+      </li>
+      <li Class="HediffCompProperties_Effecter">
+        <stateEffecter>Milian_Promotion_Knight</stateEffecter>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <!-- 主教 -->
+  <HediffDef ParentName="Milian_PawnPromotionBase">
+    <defName>Milian_PawnPromotion_BishopI</defName>
+    <label>Promotion: Bishop</label>
+    <comps>
+      <li Class="Milira.HediffCompProperties_Promotion">
+        <hediffAddon>Milian_ClassHediff_Pawn</hediffAddon>
+        <promotionPawnkind>Milian_Mechanoid_BishopI</promotionPawnkind>
+        <lordJob>LordJob_MechanoidsDefend</lordJob>
+        <shouldJoinParentLord>true</shouldJoinParentLord>
+        <fleck>Milira_Promotion_Bishop</fleck>
+        <promotionSound>Milira_Promotion</promotionSound>
+      </li>
+      <li Class="HediffCompProperties_Effecter">
+        <stateEffecter>Milian_Promotion_Bishop</stateEffecter>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef ParentName="Milian_PawnPromotionBase">
+    <defName>Milian_PawnPromotion_BishopII</defName>
+    <label>Promotion: Bishop</label>
+    <comps>
+      <li Class="Milira.HediffCompProperties_Promotion">
+        <hediffAddon>Milian_ClassHediff_Pawn</hediffAddon>
+        <promotionPawnkind>Milian_Mechanoid_BishopII</promotionPawnkind>
+        <lordJob>LordJob_MechanoidsDefend</lordJob>
+        <shouldJoinParentLord>true</shouldJoinParentLord>
+        <fleck>Milira_Promotion_Bishop</fleck>
+        <promotionSound>Milira_Promotion</promotionSound>
+      </li>
+      <li Class="HediffCompProperties_Effecter">
+        <stateEffecter>Milian_Promotion_Bishop</stateEffecter>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef ParentName="Milian_PawnPromotionBase">
+    <defName>Milian_PawnPromotion_BishopIII</defName>
+    <label>Promotion: Bishop</label>
+    <comps>
+      <li Class="Milira.HediffCompProperties_Promotion">
+        <hediffAddon>Milian_ClassHediff_Pawn</hediffAddon>
+        <promotionPawnkind>Milian_Mechanoid_BishopIII</promotionPawnkind>
+        <lordJob>LordJob_MechanoidsDefend</lordJob>
+        <shouldJoinParentLord>true</shouldJoinParentLord>
+        <fleck>Milira_Promotion_Bishop</fleck>
+        <promotionSound>Milira_Promotion</promotionSound>
+      </li>
+      <li Class="HediffCompProperties_Effecter">
+        <stateEffecter>Milian_Promotion_Bishop</stateEffecter>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef ParentName="Milian_PawnPromotionBase">
+    <defName>Milian_PawnPromotion_BishopIV</defName>
+    <label>Promotion: Bishop</label>
+    <comps>
+      <li Class="Milira.HediffCompProperties_Promotion">
+        <hediffAddon>Milian_ClassHediff_Pawn</hediffAddon>
+        <promotionPawnkind>Milian_Mechanoid_BishopIV</promotionPawnkind>
+        <lordJob>LordJob_MechanoidsDefend</lordJob>
+        <shouldJoinParentLord>true</shouldJoinParentLord>
+        <fleck>Milira_Promotion_Bishop</fleck>
+        <promotionSound>Milira_Promotion</promotionSound>
+      </li>
+      <li Class="HediffCompProperties_Effecter">
+        <stateEffecter>Milian_Promotion_Bishop</stateEffecter>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <!-- 战车 -->
+  <HediffDef ParentName="Milian_PawnPromotionBase">
+    <defName>Milian_PawnPromotion_RookI</defName>
+    <label>Promotion: Rook</label>
+    <comps>
+      <li Class="Milira.HediffCompProperties_Promotion">
+        <hediffAddon>Milian_ClassHediff_Pawn</hediffAddon>
+        <promotionPawnkind>Milian_Mechanoid_RookI</promotionPawnkind>
+        <lordJob>LordJob_MechanoidsDefend</lordJob>
+        <shouldJoinParentLord>true</shouldJoinParentLord>
+        <fleck>Milira_Promotion_Rook</fleck>
+        <promotionSound>Milira_Promotion</promotionSound>
+      </li>
+      <li Class="HediffCompProperties_Effecter">
+        <stateEffecter>Milian_Promotion_Rook</stateEffecter>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef ParentName="Milian_PawnPromotionBase">
+    <defName>Milian_PawnPromotion_RookII</defName>
+    <label>Promotion: Rook</label>
+    <comps>
+      <li Class="Milira.HediffCompProperties_Promotion">
+        <hediffAddon>Milian_ClassHediff_Pawn</hediffAddon>
+        <promotionPawnkind>Milian_Mechanoid_RookII</promotionPawnkind>
+        <lordJob>LordJob_MechanoidsDefend</lordJob>
+        <shouldJoinParentLord>true</shouldJoinParentLord>
+        <fleck>Milira_Promotion_Rook</fleck>
+        <promotionSound>Milira_Promotion</promotionSound>
+      </li>
+      <li Class="HediffCompProperties_Effecter">
+        <stateEffecter>Milian_Promotion_Rook</stateEffecter>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef ParentName="Milian_PawnPromotionBase">
+    <defName>Milian_PawnPromotion_RookIII</defName>
+    <label>Promotion: Rook</label>
+    <comps>
+      <li Class="Milira.HediffCompProperties_Promotion">
+        <hediffAddon>Milian_ClassHediff_Pawn</hediffAddon>
+        <promotionPawnkind>Milian_Mechanoid_RookIII</promotionPawnkind>
+        <lordJob>LordJob_MechanoidsDefend</lordJob>
+        <shouldJoinParentLord>true</shouldJoinParentLord>
+        <fleck>Milira_Promotion_Rook</fleck>
+        <promotionSound>Milira_Promotion</promotionSound>
+      </li>
+      <li Class="HediffCompProperties_Effecter">
+        <stateEffecter>Milian_Promotion_Rook</stateEffecter>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef ParentName="Milian_PawnPromotionBase">
+    <defName>Milian_PawnPromotion_RookIV</defName>
+    <label>Promotion: Rook</label>
+    <comps>
+      <li Class="Milira.HediffCompProperties_Promotion">
+        <hediffAddon>Milian_ClassHediff_Pawn</hediffAddon>
+        <promotionPawnkind>Milian_Mechanoid_RookIV</promotionPawnkind>
+        <lordJob>LordJob_MechanoidsDefend</lordJob>
+        <shouldJoinParentLord>true</shouldJoinParentLord>
+        <fleck>Milira_Promotion_Rook</fleck>
+        <promotionSound>Milira_Promotion</promotionSound>
+      </li>
+      <li Class="HediffCompProperties_Effecter">
+        <stateEffecter>Milian_Promotion_Rook</stateEffecter>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <!-- 王后 -->
+  <HediffDef ParentName="Milian_PawnPromotionBase">
+    <defName>Milian_PawnPromotion_Queen</defName>
+    <label>Promotion: Queen</label>
+    <comps>
+      <li Class="Milira.HediffCompProperties_Promotion">
+        <hediffAddon>Milian_ClassHediff_Pawn</hediffAddon>
+        <promotionPawnkind>Milian_Mechanoid_PawnI</promotionPawnkind>
+        <lordJob>LordJob_MechanoidsDefend</lordJob>
+        <shouldJoinParentLord>true</shouldJoinParentLord>
+        <fleck>Milira_Promotion_Queen</fleck>
+        <promotionSound>Milira_Promotion</promotionSound>
+      </li>
+      <li Class="HediffCompProperties_Effecter">
+        <stateEffecter>Milian_Promotion_Queen</stateEffecter>
+      </li>
+    </comps>
+  </HediffDef>
+
+</Defs>

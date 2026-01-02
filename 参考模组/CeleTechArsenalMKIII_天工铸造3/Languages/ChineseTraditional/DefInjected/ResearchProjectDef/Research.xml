@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <!-- 天工系（精密製造科技） -->
+  <CMC_basisLight.label>先進數控平臺</CMC_basisLight.label>
+  <CMC_basisLight.description>開發模塊化智能數控機床，採用納米級定位系統和自適應加工演算法，可生產微型傳感器、復合陶瓷槍管等精密武器組件，為後續武器研發提供核心製造能力。</CMC_basisLight.description>
+  
+  <CMC_BasisHeavy.label>熔鑄加工平臺</CMC_BasisHeavy.label>
+  <CMC_BasisHeavy.description>建造工業級重型鍛造設備，整合高溫等離子熔爐與三維成型技術，用於鑄造導彈推進艙、復合裝甲板等大型軍用構件。</CMC_BasisHeavy.description>
+
+  <!-- 雷霆系（電磁武器技術） -->
+  <CMC_EMweaponTech_I.label>電磁加速模塊</CMC_EMweaponTech_I.label>
+  <CMC_EMweaponTech_I.description>在傳統槍械結構中集成超導線圈陣列，通過電磁場對彈丸進行二次加速，顯著提升穿甲能力，適用於對抗輕中型裝甲目標。</CMC_EMweaponTech_I.description>
+  
+  <CMC_EMweaponTech_II.label>相變冷卻系統</CMC_EMweaponTech_II.label>
+  <CMC_EMweaponTech_II.description>在武器散熱結構中嵌入記憶合金層，利用固液相變過程高效吸收射擊產生的高溫熱能，確保電磁武器在持續作戰中的穩定性。</CMC_EMweaponTech_II.description>
+  
+  <CMC_EMweaponTech_III.label>等離子助推技術</CMC_EMweaponTech_III.label>
+  <CMC_EMweaponTech_III.description>在電磁軌道末端註入高溫等離子流，通過磁流體動力學效應降低空氣阻力，使彈頭突破傳統物理極限，實現超遠距離精準打擊。</CMC_EMweaponTech_III.description>
+  
+  <CMC_EMweaponTech_IV.label>動態路徑演算</CMC_EMweaponTech_IV.label>
+  <CMC_EMweaponTech_IV.description>彈頭搭載AI晶元，實時計算障礙物拓撲結構，自動選擇穿透路徑。</CMC_EMweaponTech_IV.description>
+  
+  <CMC_EMweaponTech_V.label>//武器協議：玄冥//</CMC_EMweaponTech_V.label>
+  <CMC_EMweaponTech_V.description>研發智能電磁步槍-玄冥。</CMC_EMweaponTech_V.description>
+
+  <!-- 靈智系（智能火控系統） -->
+  <CMC_Smart_I.label>神經鏈接瞄準</CMC_Smart_I.label>
+  <CMC_Smart_I.description>光學瞄具直連使用者腦機介面，自動計算風速、重力與目標運動軌跡，降低鎖定時間。</CMC_Smart_I.description>
+  
+  <CMC_Smart_II.label>自主制導彈頭</CMC_Smart_II.label>
+  <CMC_Smart_II.description>微型渦噴引擎配合紅外/雷達雙模導引頭，可精確摧毀熱源目標。</CMC_Smart_II.description>
+  
+  <CMC_Smart_III.label>量子成像雷達</CMC_Smart_III.label>    
+  <CMC_Smart_III.description>利用量子糾纏原理實現穿牆探測，可識別1公裡內偽裝目標，並標記16處裝甲薄弱點。</CMC_Smart_III.description>
+
+  <!-- 離火系（定向能武器） -->
+  <CMC_DEWI.label>高能粒子聚焦</CMC_DEWI.label>    
+  <CMC_DEWI.description>研發兆瓦級激光發射器，通過衍射光學元件將能量聚焦為微米級光斑，配合自適應波長調節系統，可針對不同材質目標切換燒蝕模式。</CMC_DEWI.description>
+  
+  <CMC_DEWII.label>熱電循環裝置</CMC_DEWII.label>    
+  <CMC_DEWII.description>武器散熱系統將餘熱轉化為電能，形成越戰越強的正反饋循環。</CMC_DEWII.description>
+  
+  <CMC_DEWIII.label>弱點分析協議</CMC_DEWIII.label>    
+  <CMC_DEWIII.description>通過毫米波掃描自動構建目標3D模型，激光束優先攻擊焊縫、電路等關鍵節點，提供攻擊效率。</CMC_DEWIII.description>
+  
+  <CMC_QYProtocol.label>//武器協議：七曜//</CMC_QYProtocol.label>    
+  <CMC_QYProtocol.description>研發智能光譜武器"七曜"</CMC_QYProtocol.description>
+
+  <!-- 破軍系（重型火力） -->
+  <CMC_Heavy_I.label>先進彈頭</CMC_Heavy_I.label>    
+  <CMC_Heavy_I.description>研發先進的多用途彈頭，可對多種目標造成有效殺傷。</CMC_Heavy_I.description>
+  
+  <CMC_Heavy_II.label>AI協同制導</CMC_Heavy_II.label>    
+  <CMC_Heavy_II.description>導彈搭載神經網路晶元，可自主規劃攻擊路線。</CMC_Heavy_II.description>
+  
+  <CMC_FloatingGunI.label>//浮游機炮·銜微//</CMC_FloatingGunI.label>
+  <CMC_FloatingGunI.description>電磁機槍平臺，專門壓制輕型機動單位。</CMC_FloatingGunI.description>
+
+  <CMC_FloatingGunII.label>//導彈巢·填海//</CMC_FloatingGunII.label>
+  <CMC_FloatingGunII.description>蜂群導彈發射平臺，裝備24發導彈。</CMC_FloatingGunII.description>
+
+  <CMCGunTurretsbasic.label>基礎防衛塔</CMCGunTurretsbasic.label>    
+  <CMCGunTurretsbasic.description>建造基礎型自動炮塔。</CMCGunTurretsbasic.description>
+  
+  <CMCGunTurrets.label>重型工事</CMCGunTurrets.label>    
+  <CMCGunTurrets.description>建造更大威力的固定式重型炮塔。</CMCGunTurrets.description>
+  
+  <CMCShield.label>//天羅·能量護盾//</CMCShield.label>    
+  <CMCShield.description>建築先進力場發生器，六邊形能量單元構成動態防禦網，可偏轉99%實體彈藥。</CMCShield.description>
+  
+  <CMC_TaotieProtocol.label>//武器協議·饕餮//</CMC_TaotieProtocol.label>
+  <CMC_TaotieProtocol.description>研發重型粒子束步槍“饕餮”。</CMC_TaotieProtocol.description>
+
+  <CMC_ZhurongProtocol.label>//武器協議·祝融//</CMC_ZhurongProtocol.label>
+  <CMC_ZhurongProtocol.description>研發單兵等離子投射器“祝融”。</CMC_ZhurongProtocol.description>
+
+  <CMCmeleeI.label>先進單分子刃</CMCmeleeI.label>
+  <CMCmeleeI.description>武器內置的晶體可以讓刀鋒高頻振動，配合單分子鍍層，輕松切開裝甲。</CMCmeleeI.description>
+  
+  <CMCmeleeII.label>武器人格編程</CMCmeleeII.label>
+  <CMCmeleeII.description>在武器內置超級AI的下行鏈路，可以讓使用者施展多種戰技。</CMCmeleeII.description>
+  
+  <CMCmeleeIII.label>納米零素刀刃</CMCmeleeIII.label>
+  <CMCmeleeIII.description>通過納米機器人實時重構刀刃形態，針對不同材質自動切換銳化/鈍化模式。</CMCmeleeIII.description>
+  
+  <CMCBio.label>//北鬥·先進腦部插件//</CMCBio.label>
+  <CMCBio.description>開發能激發人腦潛能的先進腦部插件。</CMCBio.description>
+
+  <CMCPowerI.label>裂變反應組</CMCPowerI.label>
+  <CMCPowerI.description>安全可靠的小型核裂變電池，適用於在極端條件下供能。</CMCPowerI.description>
+  
+  <CMCPowerII.label>//太虛·零點反應堆//</CMCPowerII.label>
+  <CMCPowerII.description>利用卡西米爾效應提取真空量子漲落能，提供近乎無限的能源。</CMCPowerII.description>
+</LanguageData>

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: BB-01Z "Chaofeng" Pulse Jetpack -->
+  <CMC_rocketpack.label>BB-01Z「嘲风」脉冲推进背包</CMC_rocketpack.label>
+  <!-- EN: CMC individual mobility system. Equipped with vectored pulse engines enabling rapid vertical ascent, short-range bursts, and tactical jumps. Significantly enhances battlefield maneuverability and positioning options. -->
+  <CMC_rocketpack.description>单兵机动增强装备。装备矢量脉冲引擎，提供短时爆发推力，允许穿戴者进行快速垂直升空、短距离冲刺及战术跳跃。显著提升战场机动性与战术选择空间。</CMC_rocketpack.description>
+  <!-- EN: jump -->
+  <CMC_rocketpack.comps.CompApparelReloadable.chargeNoun>TODO</CMC_rocketpack.comps.CompApparelReloadable.chargeNoun>
+  <!-- EN: on cooldown -->
+  <CMC_rocketpack.comps.CompApparelReloadable.cooldownGerund>TODO</CMC_rocketpack.comps.CompApparelReloadable.cooldownGerund>
+  <!-- EN: jump -->
+  <CMC_rocketpack.verbs.jump.label>TODO</CMC_rocketpack.verbs.jump.label>
+  
+  <!-- EN: Type-ZG shield belt MKII -->
+  <CMC_ZGRangedShieldBelt.label>BX-02「止戈」个人力场护盾发生器</CMC_ZGRangedShieldBelt.label>
+  <!-- EN: Type'ZhiGe' is a fast-recharge EMP-proof shield belt allowing its wearer to use ranged weapons. It has a small chance to reduce incoming damage to 1. -->
+  <CMC_ZGRangedShieldBelt.description>BX-02「止戈」是一款高速充能且免疫EMP的护盾腰带，其生成的力场护盾在允许穿着者向外射击的同时有小概率将来袭伤害降至1点。</CMC_ZGRangedShieldBelt.description>
+  
+  <!-- EN: Type-ZG shield belt MKI -->
+  <CMC_ZGRangedShieldBelt_MKI.label>BX-01「缠虚」个人离子护盾发生器</CMC_ZGRangedShieldBelt_MKI.label>
+  <!-- EN: A basic design of ranged shield belt. -->
+  <CMC_ZGRangedShieldBelt_MKI.description>BX-01「缠虚」是一款高速充能的护盾腰带，其生成的能量护盾能允许穿着者向外射击，但不能免疫EMP。</CMC_ZGRangedShieldBelt_MKI.description>
+  
+</LanguageData>

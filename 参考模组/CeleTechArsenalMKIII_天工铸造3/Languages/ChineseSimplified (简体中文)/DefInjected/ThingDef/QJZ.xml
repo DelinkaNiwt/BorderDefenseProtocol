@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: QJZ-59 EM-heavy machine gun -->
+  <CMC_QJZFivenine.label>QJZ-59 电磁重机枪</CMC_QJZFivenine.label>
+  <!-- EN: High-caliber electromagnetic heavy machine gun with portable deployment capability. While operable by a single operator, its 12.5kg mass imposes severe mobility penalties during tactical maneuvers. -->
+  <CMC_QJZFivenine.description>大口径电磁机枪，虽然能单兵携带，但会严重影响机动性。\n\n重型武器可在模组设置中禁用生成逻辑，但由于其制造成本，即使启用生成选项，常规袭击事件中仍可能无法自然出现。</CMC_QJZFivenine.description>
+  <!-- EN: stock -->
+  <CMC_QJZFivenine.tools.stock.label>枪托</CMC_QJZFivenine.tools.stock.label>
+  <!-- EN: barrel -->
+  <CMC_QJZFivenine.tools.barrel.label>枪管</CMC_QJZFivenine.tools.barrel.label>
+  <!-- EN: QJZ-59 EM-heavy machine gun -->
+  <CMC_QJZFivenine.verbs.Verb_ShootCE.label>TODO</CMC_QJZFivenine.verbs.Verb_ShootCE.label>
+  
+  <!-- UNUSED -->
+  <CMC_QJZFivenine.verbs.Verb_Shoot.label>QJZ-59 电磁重机枪</CMC_QJZFivenine.verbs.Verb_Shoot.label>
+  
+</LanguageData>

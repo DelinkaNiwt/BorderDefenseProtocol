@@ -1,0 +1,129 @@
+<Defs>
+	<HediffDef ParentName="ImplantHediffBase">
+    <defName>TianJi</defName>
+	<defaultLabelColor>(0, 1, 1)</defaultLabelColor>
+    <label>&lt;color=#1DD5EE&gt;&lt;i&gt;TJ-A3 combat medical chip&lt;/i&gt;&lt;/color&gt;</label>
+    <labelNoun>a TJ-A3 combat medical chip</labelNoun>
+    <description>TianJi-A3 is a combat medical chip which supports its user physically and psychologically. Upon installation, the chip can automatically calm its user down from abnormal mental state and slowly cure the user's injuries.</description>
+    <descriptionHyperlinks><ThingDef>TianJiChip</ThingDef></descriptionHyperlinks>
+    <stages>
+      <li>
+        <painFactor>0.8</painFactor>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>0.50</offset>
+          </li>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>0.35</offset>
+          </li>
+          <li>
+            <capacity>Sight</capacity>
+            <offset>0.15</offset>
+          </li>
+          <li>
+            <capacity>BloodFiltration</capacity>
+            <offset>1.50</offset>
+          </li>
+          <li>
+            <capacity>BloodPumping</capacity>
+            <offset>0.35</offset>
+          </li>
+           <li>
+            <capacity>Metabolism</capacity>
+            <offset>0.40</offset>
+          </li>
+          <li>
+            <capacity>Breathing</capacity>
+            <offset>0.40</offset>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+	<comps>
+      <li Class="HediffCompProperties_HealPermanentWounds" />
+	  <li Class="TOT_DLL_test.HediffCompProperties_AutoStopMentalState" />
+	  <li Class="TOT_DLL_test.HediffCompProperties_AutoHeal" />
+    </comps>
+    <spawnThingOnRemoved>TianJiChip</spawnThingOnRemoved>
+  </HediffDef>
+
+  <ThingDef ParentName="BodyPartProstheticCMCBase">
+    <defName>TianJiChip</defName>
+    <label>Tian Ji chip</label>
+    <description>A brain implant which can slowly cures the user's wounds.</description>
+    <descriptionHyperlinks><RecipeDef>InstallTJ</RecipeDef></descriptionHyperlinks>
+	<statBases>
+		<WorkToMake>6000</WorkToMake>
+		<MarketValue>3000</MarketValue>
+		<Mass>0.1</Mass>
+	</statBases>
+    <thingSetMakerTags>
+      <li>RewardStandardLowFreq</li>
+    </thingSetMakerTags>
+    <costList>
+      <Steel>20</Steel>
+	  <Plasteel>80</Plasteel>
+	  <Gold>40</Gold>
+      <ComponentIndustrial>4</ComponentIndustrial>
+	  <ComponentSpacer>8</ComponentSpacer>
+	  <NanostructuringChip>1</NanostructuringChip>
+    </costList>
+    <techHediffsTags>
+      <li>CMC</li>
+    </techHediffsTags>
+	<recipeMaker>
+		  <researchPrerequisite>CMCBio</researchPrerequisite>
+		  <skillRequirements>
+			<Crafting>14</Crafting>
+		  </skillRequirements>
+		  <recipeUsers Inherit="False">
+			<li>FabricationBench</li>
+		  </recipeUsers>
+		  <displayPriority>200</displayPriority>
+	</recipeMaker>
+  </ThingDef>
+
+  <RecipeDef ParentName="SurgeryInstallImplantBase">
+    <defName>InstallTJ</defName>
+    <label>install TJ chip</label>
+    <description>Install a Tian Ji chip.</description>
+    <descriptionHyperlinks>
+      <ThingDef>TianJiChip</ThingDef>
+      <HediffDef>TianJi</HediffDef>
+    </descriptionHyperlinks>
+    <jobString>Installing Tian Ji chip.</jobString>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>TianJiChip</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>TianJiChip</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <appliedOnFixedBodyParts>
+      <li>Brain</li>
+    </appliedOnFixedBodyParts>
+    <addsHediff>TianJi</addsHediff>
+  </RecipeDef>
+
+  <RecipeDef ParentName="SurgeryRemoveImplantBase">
+    <defName>RemoveTJ</defName>
+    <label>remove Tian Ji chip</label>
+    <description>Remove the Tian Ji chip.</description>
+    <descriptionHyperlinks>
+      <ThingDef>TianJiChip</ThingDef>
+      <HediffDef>TianJi</HediffDef>
+    </descriptionHyperlinks>
+    <jobString>Removing Tian Ji chip.</jobString>
+    <removesHediff>TianJi</removesHediff>
+  </RecipeDef>
+</Defs>

@@ -1,0 +1,60 @@
+<Defs>
+<ThingDef ParentName="BuildingBase">
+    <defName>CMC_CommTower</defName>
+    <label>long-range quantum communication tower</label>
+	<description>An interstellar communication node based on quantum entanglement.Its "Heavenly Secret" Quantum Communication Core disregards planetary curvature and physical obstacles, instantly synchronizing information between planetary surfaces and deep space. This technology sustains communications among the Heavenly Industry Commerce League's orbital merchant ships, interstellar destroyers, and ground stations.\n\nOnce constructed, it enables communication with the CAG trade fleet to request dispatch of autonomous trade shuttles or purchase security services.</description>
+    <thingClass>TOT_DLL_test.Building_CMCCommTower</thingClass>
+	<uiIconPath>Things/Buildings/CommTower_UI</uiIconPath>
+    <tickerType>Normal</tickerType>
+    <graphicData>
+      <texPath>Things/Buildings/CommTower</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2,8)</drawSize>
+	    <drawOffset>(0,1,2.85)</drawOffset>
+      <shadowData>
+        <volume>(0.3, 0.2, 0.3)</volume>
+        <offset>(0,0,-0.1)</offset>
+      </shadowData>
+      <damageData>
+        <rect>(0.2,0.2,0.6,0.6)</rect>
+      </damageData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <statBases>
+      <MaxHitPoints>1500</MaxHitPoints>
+      <WorkToBuild>18000</WorkToBuild>
+      <Flammability>0.05</Flammability>
+    </statBases>
+    <size>(2,2)</size>
+    <drawerType>RealtimeOnly</drawerType>
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+    <fillPercent>0.90</fillPercent>
+    <costList>
+      <Steel>160</Steel>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+    <building>
+      <destroySound>BuildingDestroyed_Metal_Big</destroySound>
+    </building>
+    <specialDisplayRadius MayRequire="ludeon.rimworld.biotech">25</specialDisplayRadius>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>1000</basePowerConsumption>
+        <transmitsPower>true</transmitsPower>
+        <soundAmbientProducingPower>ScannerLongRangeMineral_Ambience</soundAmbientProducingPower>
+      </li>
+    </comps>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <designationCategory>CMC_DefensenProduction</designationCategory>
+    <rotatable>false</rotatable>
+    <passability>PassThroughOnly</passability>
+    <canOverlapZones>true</canOverlapZones>
+    <placeWorkers>
+      <li>PlaceWorker_NotUnderRoof</li>
+    </placeWorkers>
+    <researchPrerequisites>
+      <li>CMC_BasisTrade</li>
+    </researchPrerequisites>
+  </ThingDef>
+</Defs>

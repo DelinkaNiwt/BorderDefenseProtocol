@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Encamped Milian -->
+  <Milira_MilianAttack.label>驻扎的米莉安</Milira_MilianAttack.label>
+  <!-- EN: A group of Milian temporarily resting here. -->
+  <Milira_MilianAttack.description>一队暂时停歇在这里的米莉安。</Milira_MilianAttack.description>
+  
+  <!-- EN: Encamped Milian -->
+  <Milira_MilianDefend.label>驻扎的米莉安</Milira_MilianDefend.label>
+  <!-- EN: A group of Milian temporarily resting here. -->
+  <Milira_MilianDefend.description>一队暂时停歇在这里的米莉安。</Milira_MilianDefend.description>
+  
+</LanguageData>

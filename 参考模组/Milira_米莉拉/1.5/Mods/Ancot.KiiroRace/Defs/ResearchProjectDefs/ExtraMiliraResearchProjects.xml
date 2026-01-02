@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+<ResearchProjectDef>
+	<defName>Milira_Apparel_Sister</defName>
+	<label>Angel sisters Project!</label>
+	<description>study sisters dresses.</description>
+	<baseCost>550</baseCost>
+	<techLevel>Industrial</techLevel>
+	<prerequisites>
+		<li>Milira_Apparel_II</li>
+		<li>Kiiro_Apparel_II</li>
+	</prerequisites>
+	<researchViewX>2</researchViewX>
+	<researchViewY>0</researchViewY>
+	<tab>Milira_ResearchTab</tab>
+</ResearchProjectDef>
+
+
+</Defs>

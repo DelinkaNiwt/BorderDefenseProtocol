@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Milira Artemis Armor (Assault) -->
+  <Milira_ArtemisArmor.label>米莉拉阿忒弥斯战甲（突击）</Milira_ArtemisArmor.label>
+  <!-- EN: A lightweight armor designed for ease of movement, facilitating the wearer's ability to engage in combat. The built-in energy circuitry within the armor allows for rapid energy replenishment of energy-storing ranged weapons during attacks. -->
+  <Milira_ArtemisArmor.description>灵活的轻型装甲，能够方便穿戴者射击。装甲内置的能量回路使得穿戴者在使用蓄能远程武器时能够得到快速的能量补充。</Milira_ArtemisArmor.description>
+  
+  <!-- EN: Milira Artemis Armor (Defence) -->
+  <Milira_ArtemisArmorII.label>米莉拉阿忒弥斯战甲（防护）</Milira_ArtemisArmorII.label>
+  <!-- EN: A lightweight armor designed for ease of movement, facilitating the wearer's ability to engage in combat.The built-in energy circuitry within the armor allows the wearer to deploy an energy shield to deflect incoming attacks. -->
+  <Milira_ArtemisArmorII.description>灵活的轻型装甲，能够方便穿戴者射击。装甲内置的能量回路使得穿戴者可以使用一面能量盾抵挡攻击。</Milira_ArtemisArmorII.description>
+  <!-- EN: rise up energy shield. -->
+  <Milira_ArtemisArmorII.comps.CompPhysicalShield.gizmoDesc>展开能量盾以防御来自正面的攻击。</Milira_ArtemisArmorII.comps.CompPhysicalShield.gizmoDesc>
+  <!-- EN: rise energy shield -->
+  <Milira_ArtemisArmorII.comps.CompPhysicalShield.gizmoLabel>展开能量盾</Milira_ArtemisArmorII.comps.CompPhysicalShield.gizmoLabel>
+  
+  <!-- EN: Milira traditional attire (Style 1) -->
+  <Milira_BasicDressI.label>米莉拉传统服饰（款式1）</Milira_BasicDressI.label>
+  <!-- EN: The traditional clothing of the Sky Elves. Long ago, almost every Milira wore similar attire, which was once very popular. Today, with the diversification of clothing choices, it is no longer in vogue. However, it is still favored by some for its convenience and the fact that it does not hinder movement. -->
+  <Milira_BasicDressI.description>天空精灵们的传统服饰。在很久以前几乎每一位米莉拉都穿着类似的装束，在服装多样化的今天已经不再流行，但仍然因为穿着简便不影响活动而受到一部分人的青睐。</Milira_BasicDressI.description>
+  
+  <!-- EN: Milira traditional attire (Style 2) -->
+  <Milira_BasicDressII.label>米莉拉传统服饰（款式2）</Milira_BasicDressII.label>
+  <!-- EN: The traditional clothing of the Sky Elves. Long ago, almost every Milira wore similar attire, which was once very popular. Today, with the diversification of clothing choices, it is no longer in vogue. However, it is still favored by some for its convenience and the fact that it does not hinder movement. -->
+  <Milira_BasicDressII.description>天空精灵们的传统服饰。在很久以前几乎每一位米莉拉都穿着类似的装束，在服装多样化的今天已经不再流行，但仍然因为穿着简便不影响活动而受到一部分人的青睐。</Milira_BasicDressII.description>
+  
+  <!-- EN: Milira traditional attire (Style 3) -->
+  <Milira_BasicDressIII.label>米莉拉传统服饰（款式3）</Milira_BasicDressIII.label>
+  <!-- EN: The traditional clothing of the Sky Elves. Long ago, almost every Milira wore similar attire, which was once very popular. Today, with the diversification of clothing choices, it is no longer in vogue. However, it is still favored by some for its convenience and the fact that it does not hinder movement. -->
+  <Milira_BasicDressIII.description>天空精灵们的传统服饰。在很久以前几乎每一位米莉拉都穿着类似的装束，在服装多样化的今天已经不再流行，但仍然因为穿着简便不影响活动而受到一部分人的青睐。</Milira_BasicDressIII.description>
+  
+  <!-- EN: Milira traveller cloak -->
+  <Milira_Cloak.label>米莉拉旅行斗篷</Milira_Cloak.label>
+  <!-- EN: A sturdy and durable cloak with a wide and convenient design that allows the wearer to easily tuck their wings underneath. It is a common garment for Milira travelers who come to the ground. -->
+  <Milira_Cloak.description>结实耐用、宽大方便的斗篷，能将翅膀收入到斗篷下。米莉拉地上旅者们常穿的服装。</Milira_Cloak.description>
+  
+  <!-- EN: Milira daedalus armor -->
+  <Milira_DaedalusArmor.label>米莉拉代达罗斯战甲</Milira_DaedalusArmor.label>
+  <!-- EN: An armor designed for commanding Milians on the battlefield, with internal circuits that enable the wearer to sense the location and status of each Milian and issue real-time instructions.The armor is equipped with a shield that can withstand a projectile attack and quickly Regenerate its shield energy. -->
+  <Milira_DaedalusArmor.description>用于在战场上指挥米莉安的装甲，集成在内部的回路能够帮助穿戴者感知到每一名米莉安的位置和状况并实时下达指令。战甲拥有一面能够抵挡一次投射物并快速回复的护盾。</Milira_DaedalusArmor.description>
+  
+  <!-- EN: Milira academy uniform (Style 1) -->
+  <Milira_DelicateDressA.label>米莉拉学院制服（领结）</Milira_DelicateDressA.label>
+  <!-- EN: A neat shirt paired with a refreshing black skirt, the uniform worn by young Milira during their studies at the academy. -->
+  <Milira_DelicateDressA.description>整洁的衬衫和清爽的黑色短裙，青年的米莉拉在学院进修时会着装的制服。</Milira_DelicateDressA.description>
+  
+  <!-- EN: Milira academy uniform (Style 2) -->
+  <Milira_DelicateDressA_II.label>米莉拉学院制服（领带）</Milira_DelicateDressA_II.label>
+  <!-- EN: A neat shirt paired with a refreshing black skirt, the uniform worn by young Milira during their studies at the academy. -->
+  <Milira_DelicateDressA_II.description>整洁的衬衫和清爽的黑色短裙，青年的米莉拉在学院进修时会着装的制服。</Milira_DelicateDressA_II.description>
+  
+  <!-- EN: Milira elegance gown -->
+  <Milira_DelicateDressB.label>米莉拉典雅礼服</Milira_DelicateDressB.label>
+  <!-- EN: The gown chosen by Milira for attending important events. Somewhat inconvenient for movement due to its long skirt design. -->
+  <Milira_DelicateDressB.description>出席重要场合时会选择着装的礼服。长裙有些不方便行动。</Milira_DelicateDressB.description>
+  
+  <!-- EN: Milira black bodycon dress -->
+  <Milira_DelicateDressC.label>米莉拉黑色连体裙</Milira_DelicateDressC.label>
+  <!-- EN: A form-fitting black dress that accentuates the wearer's graceful figure. -->
+  <Milira_DelicateDressC.description>紧身的黑色连体裙。</Milira_DelicateDressC.description>
+  
+  <!-- EN: Milira fashionable casual wear -->
+  <Milira_DelicateDressD.label>米莉拉时尚休闲装</Milira_DelicateDressD.label>
+  <!-- EN: Trendsetting casual attire that emphasizes a sense of comfort and ease in wearing. -->
+  <Milira_DelicateDressD.description>氛围感轻松的休闲装。设计前卫。</Milira_DelicateDressD.description>
+  
+  <!-- EN: Milira corset skirt -->
+  <Milira_DelicateDressE.label>米莉拉束腰衬裙</Milira_DelicateDressE.label>
+  <!-- EN: A fitted dress that pairs with a leather corset and a petticoat. -->
+  <Milira_DelicateDressE.description>搭配了皮质束腰和衬裙的修身连衣裙。</Milira_DelicateDressE.description>
+  
+  <!-- EN: 米莉拉巡旅行装 -->
+  <Milira_PathfinderCloak.label>米莉拉巡旅行装</Milira_PathfinderCloak.label>
+  <!-- EN: 以坚韧皮革制成的，适合野外巡游与旅行的成套装束，是进行探索或调查时的常备服装。配备的皮带和置物包能够略微增加携带能力。\n\n服装配备有简易绷带，可作应急包扎之用。需要填充布。 -->
+  <Milira_PathfinderCloak.description>以坚韧皮革制成的，适合野外巡游与旅行的成套装束，是进行探索或调查时的常备服装。配备的皮带和置物包能够略微增加携带能力。\n\n服装配备有简易绷带，可作应急包扎之用。需要填充布。</Milira_PathfinderCloak.description>
+  <!-- EN: bandage -->
+  <Milira_PathfinderCloak.comps.CompApparelReloadable_Custom.chargeNoun>绷带</Milira_PathfinderCloak.comps.CompApparelReloadable_Custom.chargeNoun>
+  <Milira_PathfinderCloak.comps.CompApparelReloadable_Custom.verbGizmoDesc>使用绷带进行紧急包扎。</Milira_PathfinderCloak.comps.CompApparelReloadable_Custom.verbGizmoDesc>
+  <!-- EN: on cooldown -->
+  <Milira_PathfinderCloak.comps.CompApparelReloadable_Custom.cooldownGerund>冷却中</Milira_PathfinderCloak.comps.CompApparelReloadable_Custom.cooldownGerund>
+  <!-- EN: 紧急包扎 -->
+  <Milira_PathfinderCloak.verbs.0.label>紧急包扎</Milira_PathfinderCloak.verbs.0.label>
+  
+  <!-- EN: Milira valkyrie armor -->
+  <Milira_ValkyrArmor.label>米莉拉瓦尔基里战甲</Milira_ValkyrArmor.label>
+  <!-- EN: An armor with a very ancient design, continuing the style of armor that the Sky Elves have been using for a long time. Thanks to the material science and advanced technology of the Ultimate Age, this suit of armor possesses an exaggerated protective capability that does not match its old-fashioned appearance, and can even recognize and be immune to friendly fire. -->
+  <Milira_ValkyrArmor.description>造型相当古老的甲胄，也许是延续自天空精灵们很早就在使用的盔甲风格。得益于极致时代的材料学与先进的科学技术，这副甲胄拥有与古旧的外形并不相衬的夸张防护能力，甚至还能识别并免疫来自己方的误伤。</Milira_ValkyrArmor.description>
+  
+</LanguageData>

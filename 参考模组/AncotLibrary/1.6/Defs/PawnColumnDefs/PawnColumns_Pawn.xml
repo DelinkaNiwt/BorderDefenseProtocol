@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <PawnColumnDef Name="Ancot_Equipment">
+    <defName>Ancot_Equipment</defName>
+    <headerIcon>AncotLibrary/Icons/Equipment</headerIcon>
+    <headerTip>The weapon this pawn equipped with.</headerTip>
+    <workerClass>AncotLibrary.PawnColumnWorker_Equipment</workerClass>
+    <width>30</width>
+  </PawnColumnDef>
+
+  <PawnColumnDef>
+    <defName>Ancot_Apparel</defName>
+    <headerIcon>AncotLibrary/Icons/Apparel</headerIcon>
+    <headerTip>The apparel this pawn is wearing.</headerTip>
+    <workerClass>AncotLibrary.PawnColumnWorker_Apparel</workerClass>
+    <width>150</width>
+  </PawnColumnDef>
+
+  <!-- drones -->
+  <PawnColumnDef>
+    <defName>Ancot_DroneAutoRepair</defName>
+    <headerIcon>AncotLibrary/Gizmos/AutoRepair_On</headerIcon>
+    <headerTip>Toggle drone auto-repair.</headerTip>
+    <workerClass>AncotLibrary.PawnColumnWorker_DroneAutoRepair</workerClass>
+    <width>30</width>
+  </PawnColumnDef>
+
+  <PawnColumnDef>
+    <defName>Ancot_DroneEnergy</defName>
+    <headerIcon>AncotLibrary/Icons/Battery</headerIcon>
+    <headerTip>Check the remaining battery life of the drone.</headerTip>
+    <workerClass>AncotLibrary.PawnColumnWorker_DroneEnergy</workerClass>
+  </PawnColumnDef>
+
+  <PawnColumnDef>
+    <defName>Ancot_DroneWorkMode</defName>
+    <headerIcon>AncotLibrary/Icons/Hammer</headerIcon>
+    <headerTip>Set the drone's working mode.</headerTip>
+    <workerClass>AncotLibrary.PawnColumnWorker_DroneWorkMode</workerClass>
+    <width>30</width>
+  </PawnColumnDef>
+
+  <PawnColumnDef ParentName="AllowedArea">
+    <defName>Ancot_DroneAllowedAreaDrone</defName>
+    <headerTip>Allowed areas only apply for drones in work and recharge modes.</headerTip>
+    <workerClass>AncotLibrary.PawnColumnWorker_DroneAllowedArea</workerClass>
+    <sortable>false</sortable>
+  </PawnColumnDef>
+
+  <PawnColumnDef>
+    <defName>Ancot_DraftDrone</defName>
+    <headerIcon>AncotLibrary/Icons/Equipment</headerIcon>
+    <headerTip>Draft drone.</headerTip>
+    <workerClass>AncotLibrary.PawnColumnWorker_DraftDrone</workerClass>
+    <paintable>true</paintable>
+  </PawnColumnDef>
+
+
+</Defs>

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN:
+    <li>questDescription->The skyfeathered church has contacted us in wish that we could annihilate a Milian cluster deployed nearby, offering a commensurate remuneration for us. Coordinates of the cluster has been synchronized on the map.\n\n The Milian cluster is an integrated combat group encompassing combat units, assorted supporting facilities and shield covers. Be cautious.\n\n This mission will elevate the Milian threat assessment.</li>
+  -->
+  <Milira_Cluster_WorldMap.questDescriptionRules.rulesStrings>
+    <li>questDescription->天羽教会已经联系过我们。他们希望我们能前去摧毁被部署在附近的一处米莉安集群，为此他们愿意提供相应的回报。集群的位置已经同步到地图。\n\n米莉安集群是一个包含了战斗单位和各种支援设施、掩体的综合战斗集团，请务必慎重应对。\n\n该任务会增加米莉拉威胁程度评估。</li>
+  </Milira_Cluster_WorldMap.questDescriptionRules.rulesStrings>
+  <!-- EN:
+    <li>questName->milian cluster threat</li>
+  -->
+  <Milira_Cluster_WorldMap.questNameRules.rulesStrings>
+    <li>questName->米莉安集群威胁</li>
+  </Milira_Cluster_WorldMap.questNameRules.rulesStrings>
+  <!-- EN: Quest Completed -->
+  <Milira_Cluster_WorldMap.root.nodes.siteAllEnemiesDefeated.node.nodes.Letter.label.slateRef>任务完成</Milira_Cluster_WorldMap.root.nodes.siteAllEnemiesDefeated.node.nodes.Letter.label.slateRef>
+  <!-- EN: You’ve destroyed the Milian cluster. Rewards have been sent. -->
+  <Milira_Cluster_WorldMap.root.nodes.siteAllEnemiesDefeated.node.nodes.Letter.text.slateRef>你已经成功摧毁米莉安集群。任务回报已送达。</Milira_Cluster_WorldMap.root.nodes.siteAllEnemiesDefeated.node.nodes.Letter.text.slateRef>
+  
+</LanguageData>

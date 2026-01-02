@@ -1,0 +1,23 @@
+<Defs>
+  <FleckDef ParentName="FleckBase">
+    <defName>ThrowUsed_CMC_RocketLauncher</defName>
+    <altitudeLayer>PawnUnused</altitudeLayer>
+    <solidTime>1.2</solidTime>
+    <graphicData>
+      <texPath>Things/Weapons/CMC_RLSingleuse_Empty</texPath>
+      <shaderType>Cutout</shaderType>
+    </graphicData>
+  </FleckDef>
+  
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>CMC_RocketLauncher_EXP2Fleck</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <solidTime>0.42</solidTime>
+	<fadeOutTime>0.06</fadeOutTime>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_AssaultRifle_gold</texPath>
+      <shaderType>TransparentPostLight</shaderType>
+	  <drawSize>(0.27, 0.3)</drawSize>
+    </graphicData>
+  </FleckDef>
+</Defs>

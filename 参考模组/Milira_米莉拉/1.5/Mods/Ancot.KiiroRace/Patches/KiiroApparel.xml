@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Milira_Race"]/alienRace/raceRestriction/apparelList</xpath>
+				<value>
+					<li>Milira_SisterDressI</li>
+                    <li>Milira_SisterDressII</li>		
+                    <li>Milira_SisterDressIII</li>		
+                    <li>Milira_SisterHatI</li>		
+                    <li>Milira_SisterHatII</li>		
+                    <li>Milira_SisterHatIII</li>		
+				</value>
+			</li>
+		</operations>
+	</Operation>
+	
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Milira_Race"]/alienRace/raceRestriction/whiteApparelList</xpath>
+				<value>
+					<li>Kiiro_HandWarmer</li>
+		            <li>Kiiro_CoolSleeves</li>
+		            <li>Kiiro_Woundplast</li>
+		            <li>Kiiro_PaperFoldingPendantStar</li>
+		            <li>Kiiro_PaperFoldingPendantCross</li>
+		            <li>Kiiro_PaperFoldingPendantHeart</li>	
+				</value>
+			</li>
+		</operations>
+	</Operation>
+
+
+</Patch>
+

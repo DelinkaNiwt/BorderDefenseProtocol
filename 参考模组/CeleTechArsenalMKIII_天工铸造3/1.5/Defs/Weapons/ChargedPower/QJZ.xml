@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <ThingDef ParentName="TOT_Weapons">
+    <defName>CMC_QJZFivenine</defName>
+    <label>QJZ-59 EM-heavy machine gun</label>
+    <description>High-caliber electromagnetic heavy machine gun with portable deployment capability. While operable by a single operator, its 12.5kg mass imposes severe mobility penalties during tactical maneuvers.</description>
+	<uiIconPath>Things/Weapons/QJZ_59_UI</uiIconPath>
+    <graphicData>
+      <texPath>Things/Weapons/QJZ_59</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2.3,2.3)</drawSize>
+    </graphicData>
+    <soundInteract>Interact_ChargeLance</soundInteract>
+    <recipeMaker>
+      <researchPrerequisite>CMC_EMweaponTech_III</researchPrerequisite>
+      <skillRequirements>
+        <Crafting>6</Crafting>
+      </skillRequirements>
+    </recipeMaker>
+    <thingSetMakerTags>
+      <li>RewardStandardQualitySuper</li>
+  </thingSetMakerTags>
+    <statBases>
+      <WorkToMake>25000</WorkToMake>
+      <Mass>12.5</Mass>
+      <AccuracyTouch>0.87</AccuracyTouch>
+      <AccuracyShort>0.51</AccuracyShort>
+      <AccuracyMedium>0.43</AccuracyMedium>
+      <AccuracyLong>0.38</AccuracyLong>
+      <RangedWeapon_Cooldown>2.5</RangedWeapon_Cooldown>
+    </statBases>
+    <costList>
+      <Steel>120</Steel>
+	  <Plasteel>80</Plasteel>
+      <ComponentIndustrial>8</ComponentIndustrial>
+	  <ComponentSpacer>4</ComponentSpacer>
+      <Chemfuel>45</Chemfuel>
+    </costList>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.9</MoveSpeed>
+	  <RangedWeapon_DamageMultiplier>0.08</RangedWeapon_DamageMultiplier>
+    </equippedStatOffsets>
+    <weaponClasses>
+      <li>RangedHeavy</li>
+    </weaponClasses>
+    <weaponTags>
+      <li>SpacerGun</li>
+	  <li>CMC_Charged_HMG</li>
+	  <li>GunHeavy</li>
+    </weaponTags>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_HMG_API</defaultProjectile>
+        <warmupTime>1.8</warmupTime>
+        <range>43.5</range>
+        <burstShotCount>12</burstShotCount>
+        <ticksBetweenBurstShots>9</ticksBetweenBurstShots>
+        <soundCast>ChargeLance_Fire</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>9</muzzleFlashScale>
+      </li>
+    </verbs>
+    <comps>
+	  <li Class="TOT_DLL_test.CompProperties_ColorSaver"></li>
+	</comps>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>15</power>
+        <cooldownTime>2</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>20</power>
+        <cooldownTime>2</cooldownTime>
+      </li>
+    </tools>
+  </ThingDef>
+
+</Defs>

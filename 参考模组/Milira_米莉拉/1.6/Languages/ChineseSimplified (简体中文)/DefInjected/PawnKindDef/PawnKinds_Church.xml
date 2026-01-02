@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <Milira_Church_Adept.label>天羽修士</Milira_Church_Adept.label>
+  
+  <Milira_Church_Cataphract.label>教堂甲胄骑士</Milira_Church_Cataphract.label>
+  
+  <Milira_Church_CataphractMelee.label>教堂甲胄骑士</Milira_Church_CataphractMelee.label>
+  
+  <Milira_Church_Janissary.label>天羽教会军近卫</Milira_Church_Janissary.label>
+  
+  <Milira_Church_Knight.label>教堂骑士</Milira_Church_Knight.label>
+  
+  <!-- EN: Pontiff -->
+  <Milira_Church_Pope.label>教宗</Milira_Church_Pope.label>
+  
+  <Milira_Church_Trooper.label>天羽教会军士兵</Milira_Church_Trooper.label>
+  
+  <Milira_Church_Warrior.label>天羽教会军武士</Milira_Church_Warrior.label>
+  
+</LanguageData>

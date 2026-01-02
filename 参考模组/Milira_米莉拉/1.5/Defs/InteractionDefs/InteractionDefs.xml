@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <InteractionDef>
+    <defName>Milira_KnowledgeExchange</defName>
+    <label>knowledge communication</label>
+    <workerClass>Milira.InteractionWorker_KnowledgeExchange</workerClass>
+    <symbol>Milira/Effect/SpeechSymbols/KnowledgeExchange</symbol>
+    <initiatorThought>Milira_KnowledgeExchange</initiatorThought>
+    <recipientThought>Milira_KnowledgeExchange</recipientThought>
+    <initiatorXpGainSkill>Intellectual</initiatorXpGainSkill>
+    <initiatorXpGainAmount>800</initiatorXpGainAmount>
+    <recipientXpGainSkill>Intellectual</recipientXpGainSkill>
+    <recipientXpGainAmount>300</recipientXpGainAmount>
+    <logRulesInitiator>
+      <rulesStrings>
+        <li>r_logentry->[INITIATOR_nameDef] and [RECIPIENT_nameDef] discuss [object] together.</li>
+
+        <li>object->instrument maintenance</li>
+        <li>object->furniture cleaning</li>
+        <li>object->math</li>
+        <li>object->astrophysics</li>
+        <li>object->zoology</li>
+        <li>object->climatic origin</li>
+        <li>object->archotech</li>
+        <li>object->Operating principle of mechnoids</li>
+        <li>object->sculpt a figurine</li>
+        <li>object->hair care</li>
+        <li>object->chemicals</li>
+        <li>object->geological formation</li>
+        <li>object->mineralogy</li>
+        <li>object->medical</li>
+        <li>object->electrical signal transmission</li>
+        <li>object->telecommunication</li>
+      </rulesStrings>
+    </logRulesInitiator>
+  </InteractionDef>
+
+
+</Defs>

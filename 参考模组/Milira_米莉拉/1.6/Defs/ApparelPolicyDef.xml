@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <AncotLibrary.ApparelPolicyDef>
+    <defName>Milira_ApparelPolicy</defName>
+    <label>Milira</label>
+    <race>Milira_Race</race>
+    <apparelCategories>
+      <li>Milira_Apparel</li>
+    </apparelCategories>
+    <excludeApparelCategories>
+      <li>Milian_Apparel</li>
+    </excludeApparelCategories>
+    <includeApparelUtility>true</includeApparelUtility>
+  </AncotLibrary.ApparelPolicyDef>
+
+</Defs>

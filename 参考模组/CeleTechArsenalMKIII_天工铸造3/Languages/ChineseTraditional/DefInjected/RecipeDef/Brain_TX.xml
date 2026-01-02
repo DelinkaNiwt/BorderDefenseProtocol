@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: install Tian Xuan chip -->
+  <InstallTX.label>植入【天璇】射手晶元</InstallTX.label>
+  <!-- EN: Install a Tian Xuan chip. -->
+  <InstallTX.description>植入【天璇】射手晶元</InstallTX.description>
+  <!-- EN: Installing Tian Xuan chip. -->
+  <InstallTX.jobString>植入【天璇】射手晶元</InstallTX.jobString>
+  
+  <!-- EN: remove Tian Xuan chip -->
+  <RemoveTX.label>移除【天璇】射手晶元</RemoveTX.label>
+  <!-- EN: Remove the Tian Xuan chip. -->
+  <RemoveTX.description>移除【天璇】射手晶元</RemoveTX.description>
+  <!-- EN: Removing Tian Xuan chip. -->
+  <RemoveTX.jobString>移除【天璇】射手晶元</RemoveTX.jobString>
+  
+</LanguageData>

@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: QBZ-76 smart AR -->
+  <QBZ_eightfiveAR.label>QBZ-76 智能双模式步枪</QBZ_eightfiveAR.label>
+  <!-- EN: As the successor to QBZ-59 series, this weapon integrates dual-band fire-control radar array, enabling seamless transition between L-band long-range precision guidance and K-band CQB situational awareness. Functions as a semi-auto sniper platform in extended mode, while activating auto mode for close quarters..\n\nThis weapon's accuracy at smart mode is based on users's intellectual skill ONLY. -->
+  <QBZ_eightfiveAR.description>作为QBZ-59系列的迭代升级型，本武器集成双频火控雷达阵列，可无缝切换L波段远程精确制导与K波段近距态势感知。远距离模式下作为半自动精确射手武器平台运作；近距离启用全自动模式作为突击步枪使用。\n\n该武器的追踪模式命中率仅受射手智识水平影响，且在追踪模式下穿深减半，伤害略微降低。</QBZ_eightfiveAR.description>
+  <!-- EN: mode switch -->
+  <QBZ_eightfiveAR.comps.CompSecondaryVerb_Rework.description>切换射击模式</QBZ_eightfiveAR.comps.CompSecondaryVerb_Rework.description>
+  <!-- EN: Sniper -->
+  <QBZ_eightfiveAR.comps.CompSecondaryVerb_Rework.mainWeaponLabel>精确模式</QBZ_eightfiveAR.comps.CompSecondaryVerb_Rework.mainWeaponLabel>
+  <!-- EN: Suppression -->
+  <QBZ_eightfiveAR.comps.CompSecondaryVerb_Rework.secondaryWeaponLabel>爆发模式</QBZ_eightfiveAR.comps.CompSecondaryVerb_Rework.secondaryWeaponLabel>
+  <!-- EN: stock -->
+  <QBZ_eightfiveAR.tools.stock.label>枪托</QBZ_eightfiveAR.tools.stock.label>
+  <!-- EN: barrel -->
+  <QBZ_eightfiveAR.tools.barrel.label>枪管</QBZ_eightfiveAR.tools.barrel.label>
+  <!-- EN: QBZ-76 smart AR -->
+  <QBZ_eightfiveAR.verbs.Verb_ShootCE.label>TODO</QBZ_eightfiveAR.verbs.Verb_ShootCE.label>
+  
+  <!-- UNUSED -->
+  <QBZ_eightfiveAR.verbs.Verb_Shoot.label>QBZ-76 智能双模式步枪</QBZ_eightfiveAR.verbs.Verb_Shoot.label>
+  
+  <!-- EN: QSZ-85 smart SMG -->
+  <QBZS85XWJ.label>QSZ-85 智能冲锋枪</QBZS85XWJ.label>
+  <!-- EN: A smart SMG designed for close-range combat, equipped with the latest fire control system and micro guided bullets. However, guided bullet has lower penetration due to loss of kinetic energy during its flight. \n\nMode Switch:Firing guided bullets that track targets/ high-penetration charged bullets at high rate.\n\nThis weapon's accuracy at smart mode is based on users's intellectual skill ONLY. -->
+  <QBZS85XWJ.description>集成了初代神经络火控系统与微型制导弹药的尖端单兵武器，能在浓烟/电磁干扰等恶劣环境中维持索敌精度。\n\n▲ 双模作战协议 ▲\n• 追踪模式：命中率完全依赖射手智识（穿甲效能降低50%，伤害小幅削减，伤害穿深随距离下降明显）\n• 爆发模式：常规弹道射击，但保留了人工智能模式切换</QBZS85XWJ.description>
+  <!-- EN: mode switch -->
+  <QBZS85XWJ.comps.CompSecondaryVerb_Rework.description>切换火控模式</QBZS85XWJ.comps.CompSecondaryVerb_Rework.description>
+  <!-- EN: Smart -->
+  <QBZS85XWJ.comps.CompSecondaryVerb_Rework.mainWeaponLabel>追踪模式</QBZS85XWJ.comps.CompSecondaryVerb_Rework.mainWeaponLabel>
+  <!-- EN: Burst -->
+  <QBZS85XWJ.comps.CompSecondaryVerb_Rework.secondaryWeaponLabel>常规模式</QBZS85XWJ.comps.CompSecondaryVerb_Rework.secondaryWeaponLabel>
+  <!-- EN: stock -->
+  <QBZS85XWJ.tools.stock.label>TODO</QBZS85XWJ.tools.stock.label>
+  <!-- EN: barrel -->
+  <QBZS85XWJ.tools.barrel.label>TODO</QBZS85XWJ.tools.barrel.label>
+  <!-- EN: QSZ-85 smart SMG -->
+  <QBZS85XWJ.verbs.Verb_ShootCE.label>TODO</QBZS85XWJ.verbs.Verb_ShootCE.label>
+  
+  <!-- EN: QSZ-85 smart SMG(CEMF) -->
+  <QSZ85_M.label>QSZ-85M 舰用智能冲锋枪</QSZ85_M.label>
+  <!-- EN: A variant of the QSZ-85 that delivers enhanced firepower in close quarters combat.\n\nThis weapon's smart-mode accuracy depends SOLELY on the user's intellectual skill. -->
+  <QSZ85_M.description>为星际陆战队舱内CQB特化的改装型号。移除常规弹道射击模式并升级制导核心，使追踪弹射速提升33%。紧凑枪身优化过道转向能力，防跳壳设计避免精密设备损伤。</QSZ85_M.description>
+  <!-- EN: stock -->
+  <QSZ85_M.tools.stock.label>TODO</QSZ85_M.tools.stock.label>
+  <!-- EN: barrel -->
+  <QSZ85_M.tools.barrel.label>TODO</QSZ85_M.tools.barrel.label>
+  <!-- EN: QSZ-85 smart SMG(CEMF) -->
+  <QSZ85_M.verbs.Verb_ShootCE.label>TODO</QSZ85_M.verbs.Verb_ShootCE.label>
+  
+  <!-- EN: <color=#5BC4E2><i>QBB-85T:Zheng the thunderer</i></color> -->
+  <W85X_Thunderer.label>&lt;color=#5BC4E2>&lt;i>QBB-85T「狰」特种机枪&lt;/i>&lt;/color></W85X_Thunderer.label>
+  <!-- EN: QBB-85Z smart minigun channels the power of primordial thunder. Its positive charge rounds may trigger EMP bursts to cripple machines, with a chance to summon ancient lightning storms. The five-tailed feeding system sustains relentless firepower across all combat scenarios. -->
+  <W85X_Thunderer.description>特种机枪「狰」融合雷霆之力，以阳电子湮灭弹头撕裂战场。其弹着点可能引发EMP爆炸（命中后10%几率触发）瘫痪机械，更可召来上古雷暴焚灭生灵（命中后10%几率触发），先进的五尾仿生供弹系统确保火力永续。</W85X_Thunderer.description>
+  <!-- EN: stock -->
+  <W85X_Thunderer.tools.stock.label>枪托</W85X_Thunderer.tools.stock.label>
+  <!-- EN: barrel -->
+  <W85X_Thunderer.tools.barrel.label>枪管</W85X_Thunderer.tools.barrel.label>
+  <!-- EN: <color=#5BC4E2><i>QBB-85T:Zheng the thunderer</i></color> -->
+  <W85X_Thunderer.verbs.Verb_Shoot.label>&lt;color=#5BC4E2>&lt;i>QBB-85T「狰」特种机枪&lt;/i>&lt;/color></W85X_Thunderer.verbs.Verb_Shoot.label>
+  
+  <!-- EN: QBB-85 LMG -->
+  <W85XWJ.label>QBB-85 智能通用机枪</W85XWJ.label>
+  <!-- EN: A smart LMG fires guide bullets, it can also switch mode to fire normal bullets under emergency situations, an implanted target-switvhing system can track its targets' health state and automatically choose a new target if the current target is down.\n\nMode Switch:Firing guided bullets that track targets(Halved penetration and reduced damage)/normal bullets at higher rate.\n\nThis weapon's accuracy at smart mode is based on users's intellectual skill. -->
+  <W85XWJ.description>在先进的火控和光电加持下能以低射速发射追踪弹药精确消灭敌人的通用机枪，在危急时刻也能快速射击。\n\n该武器的追踪模式命中率仅受射手智识水平影响。</W85XWJ.description>
+  <!-- EN: Mode switch -->
+  <W85XWJ.comps.CompSecondaryVerb_Rework.description>切换火控模式</W85XWJ.comps.CompSecondaryVerb_Rework.description>
+  <!-- EN: Smart Mode -->
+  <W85XWJ.comps.CompSecondaryVerb_Rework.mainWeaponLabel>追踪模式</W85XWJ.comps.CompSecondaryVerb_Rework.mainWeaponLabel>
+  <!-- EN: Burst Mode -->
+  <W85XWJ.comps.CompSecondaryVerb_Rework.secondaryWeaponLabel>爆发模式</W85XWJ.comps.CompSecondaryVerb_Rework.secondaryWeaponLabel>
+  <!-- EN: stock -->
+  <W85XWJ.tools.stock.label>枪托</W85XWJ.tools.stock.label>
+  <!-- EN: barrel -->
+  <W85XWJ.tools.barrel.label>枪管</W85XWJ.tools.barrel.label>
+  <!-- EN: QBB-85 LMG -->
+  <W85XWJ.verbs.Verb_ShootCE.label>TODO</W85XWJ.verbs.Verb_ShootCE.label>
+  
+</LanguageData>

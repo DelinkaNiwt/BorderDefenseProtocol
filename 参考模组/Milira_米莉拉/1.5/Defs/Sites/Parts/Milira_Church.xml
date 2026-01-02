@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <SitePartDef>
+    <defName>Milira_ChurchAssist_Troops</defName>
+    <label>Skyfeathered Church: Coordinated Combat</label>
+    <description>The Church will fight alongside you.</description>
+    <workerClass>Milira.SitePartWorker_ChurchBombardment</workerClass>
+    <siteTexture>World/WorldObjects/Sites/GenericSite</siteTexture>
+    <expandingIconTexture>World/WorldObjects/Expanding/Sites/Prisoner</expandingIconTexture>
+    <forceExitAndRemoveMapCountdownDurationDays>6</forceExitAndRemoveMapCountdownDurationDays>
+    <tags>
+      <li>Milira_ChurchAssist_Troops</li>
+    </tags>
+  </SitePartDef>
+
+  <GenStepDef>
+    <defName>Milira_ChurchAssist_Troops</defName>
+    <linkWithSite>Milira_ChurchAssist_Troops</linkWithSite>
+    <order>460</order>
+    <genStep Class="Milira.GenStep_ChurchAssist_Troops">
+      <fixedPoint>10000</fixedPoint>
+    </genStep>
+  </GenStepDef>
+
+</Defs>

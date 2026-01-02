@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: ray -->
+  <Milira_Ray.label>射线</Milira_Ray.label>
+  <!-- EN: {0} has been shot to death. -->
+  <Milira_Ray.deathMessage>{0}被射死了。</Milira_Ray.deathMessage>
+  
+</LanguageData>

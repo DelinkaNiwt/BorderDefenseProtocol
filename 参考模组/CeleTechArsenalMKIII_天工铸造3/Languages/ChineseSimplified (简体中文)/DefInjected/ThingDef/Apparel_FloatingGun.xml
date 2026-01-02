@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: X-01 "Gou Mang" Engineering Floating Platform -->
+  <CMC_EngineerDrone.label>X-01「句芒」工程浮游炮</CMC_EngineerDrone.label>
+  <!-- EN: Specialized floating platform designed for field maintenance and engineering operations. Features exceptionally long endurance and rapid recharge cycles due to reduced standard payload capacity. Equipped with long-range nanomechanical maintenance systems capable of repairing operator's gear and other drones within the same series.\n\nIntegrated multi-function engineering manipulator (nano-welding/circuit repair/equipment disassembly) with micro rail accelerator for self-defense. -->
+  <CMC_EngineerDrone.description>专为野外维修与工程作业设计的特种浮游平台。由于标准载荷较低，其续航时间极长且充电较快。采用远程纳米微械维护系统，可以修复控制者的装备以及同序列内的其他浮游炮。\n\n装备多功能工程机械臂（纳米焊接/电路修复/设备拆解），并集成微型电磁加速器作为自卫武器。</CMC_EngineerDrone.description>
+  
+  <!-- EN: X-02 "Jingwei" Floating cannon -->
+  <CMC_GunDrone.label>X-02「精卫」浮游机炮</CMC_GunDrone.label>
+  <!-- EN: An AI-powered escort weapon system designed for protecting non-combat personnel. Equipped with micro anti-gravity/ion propulsion and multi-directional sensor arrays, it autonomously hovers around the operator to detect and lock onto threats in real-time. Effective in complex terrains and dynamic battlefields, its auxiliary analysis module also enhances operator productivity.\n\n※ Note: Both hovering and weapon discharge consume capacitor energy. When depleted, it automatically returns for charging and suspends combat functions. Improving item quality or researching subsequent technologies reduces charging time and expands capacitor capacity. -->
+  <CMC_GunDrone.description>专为保护非战斗人员设计的人工智能随行武器系统。搭载微型逆重力/离子电推进装置及多向感应阵列，可自主悬浮于控制者周围，实时侦测并锁定威胁目标。适用于复杂地形与动态战场，其辅助分析模块还能提升控制者的工作效率。\n\n※ 注意：悬浮移动与武器射击均消耗电容能量，电量耗尽时自动返航充电并暂停作战功能。通过提升该物品品质或研究后续科技，可缩短充电时间并扩展电容容量。</CMC_GunDrone.description>
+  
+  <!-- EN: X-02L "Jinwu" Floating Energy Cannon -->
+  <CMC_LaserDrone.label>X-02L「金乌」浮游能量炮</CMC_LaserDrone.label>
+  <!-- EN: An X-01 platform upgrade specialized for anti-swarm combat. Retains anti-gravity propulsion and multi-directional sensors while featuring high-capacity capacitors and long-range pulse laser emitters. Maintains stable levitation in complex environments to automatically identify high-value targets and execute precision strikes.\n\n"Jinwu"'s high-energy laser beams offer exceptional armor penetration, but plasma detonations upon impact may affect friendly units within 1.5-tile radius. Strict engagement distance control is required.\n\n※ Note: Both hovering and weapon discharge consume capacitor energy. When depleted, it automatically returns for charging and suspends combat functions. Improving item quality or researching subsequent technologies reduces charging time and expands capacitor capacity. -->
+  <CMC_LaserDrone.description>基于X-01平台升级的反蜂群作战特化型。保留逆重力推进与多向感应系统，换装高容量电容阵列及远程脉冲激光发射器。可在复杂环境中保持稳定悬浮，自动识别高价值目标并实施精准打击。\n\n「金乌」发射的高能激光束具有卓越护甲穿透性，但命中时引发的等离子爆炸可能波及半径1.5格内的友方单位，需严格管控交战距离。\n\n※ 注意：悬浮移动与武器射击均消耗电容能量，电量耗尽时自动返航充电并暂停作战功能。通过提升该物品品质或研究后续科技，可缩短充电时间并扩展电容容量。</CMC_LaserDrone.description>
+  
+  <!-- EN: Escort Floating Laser -->
+  <CMCUAV_LaserPulse.label>随行浮游激光</CMCUAV_LaserPulse.label>
+  <!-- EN: A miniaturized pulse laser focusing array compatible with armed floating platforms. -->
+  <CMCUAV_LaserPulse.description>小型化的脉冲激光聚焦阵列，适配武装浮游平台。</CMCUAV_LaserPulse.description>
+  <!-- EN: Escort Floating Laser -->
+  <CMCUAV_LaserPulse.verbs.Verb_Laser_Instant_UAV.label>TODO</CMCUAV_LaserPulse.verbs.Verb_Laser_Instant_UAV.label>
+  
+  <!-- EN: Escort Floating Auto-cannon -->
+  <CMCUAV_LMG.label>随行浮游机炮</CMCUAV_LMG.label>
+  <!-- EN: A miniaturized smart cannon compatible with armed floating platforms. -->
+  <CMCUAV_LMG.description>小型化的智能机炮，适配武装浮游平台。</CMCUAV_LMG.description>
+  <!-- EN: Escort Floating Auto-cannon -->
+  <CMCUAV_LMG.verbs.Verb_Shoot_UAV.label>TODO</CMCUAV_LMG.verbs.Verb_Shoot_UAV.label>
+  
+  <!-- EN: Escort Floating EM-Pistol -->
+  <CMCUAV_Pistol.label>TODO</CMCUAV_Pistol.label>
+  <!-- EN: Compact Gauss acceleration weapon for engineering platforms. Fires 4mm depleted uranium penetrators, designed for rapid neutralization of close-range threats. -->
+  <CMCUAV_Pistol.description>TODO</CMCUAV_Pistol.description>
+  <!-- EN: Escort Floating EM-Pistol -->
+  <CMCUAV_Pistol.verbs.Verb_Shoot_UAV.label>TODO</CMCUAV_Pistol.verbs.Verb_Shoot_UAV.label>
+  
+</LanguageData>

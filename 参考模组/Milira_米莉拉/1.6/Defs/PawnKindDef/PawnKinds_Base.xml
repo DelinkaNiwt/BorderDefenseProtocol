@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<PawnKindDef Name="Milira_PawnBase" Abstract="True">
+		<race>Milira_Race</race>
+		<fixedGender>Female</fixedGender>
+		<defaultFactionType>Milira_Faction</defaultFactionType>
+		<backstoryCryptosleepCommonality>0</backstoryCryptosleepCommonality>
+		<invNutrition>3</invNutrition>
+		<gearHealthRange>0.8~1.0</gearHealthRange>
+		<apparelIgnoreSeasons>true</apparelIgnoreSeasons>
+		<maxGenerationAge>300</maxGenerationAge>
+		<minGenerationAge>75</minGenerationAge>
+		<initialWillRange>60~90</initialWillRange>
+		<initialResistanceRange>60~90</initialResistanceRange>
+		<styleItemTags>
+			<li>
+				<tag>Milira</tag>
+				<baseWeight>1</baseWeight>
+				<weightFactor>1</weightFactor>
+			</li>
+		</styleItemTags>
+		<abilities>
+			<li>Milira_ShortFly</li>
+		</abilities>
+		<xenotypeSet>
+			<xenotypeChances>
+				<Baseliner MayRequire="Ludeon.RimWorld.Biotech">1</Baseliner>
+				<Dirtmole MayRequire="Ludeon.RimWorld.Biotech">0</Dirtmole>
+				<Genie MayRequire="Ludeon.RimWorld.Biotech">0</Genie>
+				<Hussar MayRequire="Ludeon.RimWorld.Biotech">0</Hussar>
+				<Sanguophage MayRequire="Ludeon.RimWorld.Biotech">0</Sanguophage>
+				<Neanderthal MayRequire="Ludeon.RimWorld.Biotech">0</Neanderthal>
+				<Pigskin MayRequire="Ludeon.RimWorld.Biotech">0</Pigskin>
+				<Impid MayRequire="Ludeon.RimWorld.Biotech">0</Impid>
+				<Waster MayRequire="Ludeon.RimWorld.Biotech">0</Waster>
+				<Yttakin MayRequire="Ludeon.RimWorld.Biotech">0</Yttakin>
+				<Highmate MayRequire="Ludeon.RimWorld.Biotech">0</Highmate>
+			</xenotypeChances>
+		</xenotypeSet>
+		<useFactionXenotypes>false</useFactionXenotypes>
+
+		<flyingAnimationFramePathPrefix>Things/Pawn/Animal/Chicken/Chicken_Flying_</flyingAnimationFramePathPrefix>
+    <flyingAnimationFrameCount>8</flyingAnimationFrameCount>
+    <flyingAnimationTicksPerFrame>2</flyingAnimationTicksPerFrame>
+    <flyingAnimationDrawSize>2.4</flyingAnimationDrawSize>
+    <flyingAnimationDrawSizeIsMultiplier>true</flyingAnimationDrawSizeIsMultiplier>
+    <flyingAnimationInheritColors>true</flyingAnimationInheritColors>
+	</PawnKindDef>
+
+
+	<PawnKindDef Name="Milian_PawnBase" Abstract="True">
+		<defName>Milian_Base</defName>
+		<race>Milian_Race</race>
+		<defaultFactionType>Milira_Faction</defaultFactionType>
+		<backstoryCryptosleepCommonality>0</backstoryCryptosleepCommonality>
+		<invNutrition>3</invNutrition>
+		<gearHealthRange>0.8~1.0</gearHealthRange>
+		<apparelIgnoreSeasons>true</apparelIgnoreSeasons>
+		<maxGenerationAge>1000</maxGenerationAge>
+		<minGenerationAge>0</minGenerationAge>
+		<initialWillRange>60~90</initialWillRange>
+		<initialResistanceRange>60~90</initialResistanceRange>
+		<styleItemTags>
+			<li>
+				<tag>Milira</tag>
+				<baseWeight>1</baseWeight>
+				<weightFactor>1</weightFactor>
+			</li>
+		</styleItemTags>
+	</PawnKindDef>
+
+</Defs>

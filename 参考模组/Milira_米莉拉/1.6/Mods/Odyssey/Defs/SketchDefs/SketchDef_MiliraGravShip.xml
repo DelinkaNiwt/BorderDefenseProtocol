@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>  
+  <SketchResolverDef>
+    <defName>Milira_Gravship</defName>
+    <label>milira gravShip</label>
+    <isRoot>true</isRoot>
+    <resolver Class="AncotLibrary.SketchResolver_Prefab">
+      <prefab>Milira_GravShip</prefab>
+    </resolver>
+  </SketchResolverDef>
+</Defs>

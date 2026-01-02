@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: teleport(portal beam) -->
+  <CMC_SelfSkip.label>TODO</CMC_SelfSkip.label>
+  <!-- EN: After sending the signal from the blade, portal beam equipped on a nearby star destroyer skips the target to a desired position not too far from its starting point. -->
+  <CMC_SelfSkip.description>TODO</CMC_SelfSkip.description>
+  
+</LanguageData>

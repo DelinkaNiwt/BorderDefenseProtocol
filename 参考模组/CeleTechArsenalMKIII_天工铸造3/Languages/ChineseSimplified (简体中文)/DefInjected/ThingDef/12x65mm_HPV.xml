@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: CMC_12x65mmSmart R -->
+  <Ammo_CMC_12x65mmSmart_Regular.label>TODO</Ammo_CMC_12x65mmSmart_Regular.label>
+  <!-- EN: 12x65mm multi-task smart ammo by CeleTech
+\n\n聚能电荷弹:
+\n带电粒子集中在子弹尖端，子弹击中后的电子射流极大增强了破甲能力，但是抑制能力较弱。
+\n\n使用者: -->
+  <Ammo_CMC_12x65mmSmart_Regular.description>TODO</Ammo_CMC_12x65mmSmart_Regular.description>
+  
+  <!-- EN: bullet -->
+  <Bullet_CMC_12x65mmSmart_Regular.label>TODO</Bullet_CMC_12x65mmSmart_Regular.label>
+  
+</LanguageData>

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Hemostat -->
+  <CMC_BleedProof.label>止血剂</CMC_BleedProof.label>
+  <!-- EN: The armour injects a hemostatic agent to control bleeding. -->
+  <CMC_BleedProof.description>护甲会定期注入止血剂以防止流血。</CMC_BleedProof.description>
+  <!-- EN: Armour -->
+  <CMC_BleedProof.stages.Armour.label>护甲</CMC_BleedProof.stages.Armour.label>
+  
+</LanguageData>

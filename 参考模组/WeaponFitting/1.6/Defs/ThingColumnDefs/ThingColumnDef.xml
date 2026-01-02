@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <AncotLibrary.ThingColumnDef>
+    <defName>WeaponFitting</defName>
+    <headerIcon>AncotLibrary/Icons/Spanner</headerIcon>
+    <headerTip>fitting equipped on this weapon.</headerTip>
+    <workerClass>WeaponFitting.ThingColumnWorker_WeaponFitting</workerClass>
+    <width>120</width>
+  </AncotLibrary.ThingColumnDef>
+
+  <AncotLibrary.ThingColumnDef>
+    <defName>WeaponOwner</defName>
+    <label>owner</label>
+    <workerClass>WeaponFitting.ThingColumnWorker_WeaponOwner</workerClass>
+    <groupable>true</groupable>
+    <showIcon>true</showIcon>
+  </AncotLibrary.ThingColumnDef>
+
+  <AncotLibrary.ThingColumnDef>
+    <defName>Favorites</defName>
+    <label>favorites</label>
+    <workerClass>WeaponFitting.ThingColumnWorker_Star</workerClass>
+  </AncotLibrary.ThingColumnDef>
+
+  <AncotLibrary.ThingColumnDef>
+    <defName>Rename</defName>
+    <workerClass>WeaponFitting.ThingColumnWorker_Rename</workerClass>
+    <headerTip>Rename</headerTip>
+  </AncotLibrary.ThingColumnDef>
+</Defs>

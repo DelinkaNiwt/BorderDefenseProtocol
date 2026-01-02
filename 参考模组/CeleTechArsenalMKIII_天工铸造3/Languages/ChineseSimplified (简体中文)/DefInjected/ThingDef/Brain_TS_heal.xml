@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Tian Shu chip -->
+  <TianShuChip.label>【天枢】防御芯片</TianShuChip.label>
+  <!-- EN: A brain implant which boosts combat abilities. -->
+  <TianShuChip.description>能向使用者体内注入纳米机械并通过神经系统控制其活动的脑插，可以使用纳米机械硬化受击部位皮肤以减少所受伤害。</TianShuChip.description>
+  
+</LanguageData>

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <ThingCategoryDef>
+		<defName>Ancot_ReadingMaterial</defName>
+		<label>reading material</label>
+		<parent>Items</parent>
+	</ThingCategoryDef>
+
+	<ThingCategoryDef>
+	    <defName>Ancot_WeaponFitting</defName>
+		<label>weapon fitting</label>
+		<parent>Items</parent>
+	</ThingCategoryDef>
+
+    <ThingCategoryDef>
+        <defName>Ancot_WeaponsModification</defName>
+        <label>modification weapons</label>
+        <parent>Weapons</parent>
+    </ThingCategoryDef>
+</Defs>

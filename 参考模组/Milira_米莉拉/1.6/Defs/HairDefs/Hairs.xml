@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <StyleItemCategoryDef>
+      <defName>Milira_Style</defName>
+      <label>Milira Hairstyle</label>
+    </StyleItemCategoryDef>
+	
+	
+	<HairDef>
+		<defName>Milira_Null</defName>
+		<label>Milira Hairstyle</label>
+		<hairGender>Any</hairGender>
+		<texPath>Milira/Pawn/Hair/Null/Null</texPath>
+		<category>Milira_Style</category>
+		<styleTags>
+			<li>Milira_Style</li>
+		</styleTags>
+	</HairDef>
+
+
+</Defs>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <PawnColumnDef>
+    <defName>Ancot_MechAutoFight</defName>
+    <label>auto combat</label>
+    <workerClass>AncotLibrary.PawnColumnWorker_AutoFightMech</workerClass>
+    <paintable>true</paintable>
+  </PawnColumnDef>
+
+
+</Defs>

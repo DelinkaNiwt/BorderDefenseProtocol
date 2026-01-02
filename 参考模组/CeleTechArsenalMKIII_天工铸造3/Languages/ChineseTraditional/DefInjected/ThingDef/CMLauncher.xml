@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Missile launcher -->
+  <Artillery_CMCPlasmaMortar.label>巡航導彈</Artillery_CMCPlasmaMortar.label>
+  <!-- EN: A self-loading missile launcher designed to attach to a turret. -->
+  <Artillery_CMCPlasmaMortar.description>裝備於炮塔上的巡航導彈架</Artillery_CMCPlasmaMortar.description>
+  <!-- EN: Missile launcher -->
+  <Artillery_CMCPlasmaMortar.verbs.Verb_Shoot.label>巡航導彈</Artillery_CMCPlasmaMortar.verbs.Verb_Shoot.label>
+  
+  <!-- EN: CMC HJ-41 auto missile turret -->
+  <CMC_Turret_AutoPlasmaMortar.label>"莫邪"自動巡航導彈發射器</CMC_Turret_AutoPlasmaMortar.label>
+  <!-- EN: A heavy CMC charged automatic turret, it fires ground-to-ground missiles. -->
+  <CMC_Turret_AutoPlasmaMortar.description>裝備三聯裝巡航導彈的重型自動炮塔，可以越過建築射擊，並追蹤移動目標。\n\n當前目標失去戰鬥力時會嘗試更換目標，如無可用目標會命中附近位置。</CMC_Turret_AutoPlasmaMortar.description>
+  <CMC_Turret_AutoPlasmaMortar.comps.CompRefuelable.fuelGizmoLabel>彈藥</CMC_Turret_AutoPlasmaMortar.comps.CompRefuelable.fuelGizmoLabel>
+  <!-- EN: Shots until barrel change -->
+  <CMC_Turret_AutoPlasmaMortar.comps.CompRefuelable.fuelLabel>剩餘射擊數</CMC_Turret_AutoPlasmaMortar.comps.CompRefuelable.fuelLabel>
+  <!-- EN: Needs missile -->
+  <CMC_Turret_AutoPlasmaMortar.comps.CompRefuelable.outOfFuelMessage>需要彈藥</CMC_Turret_AutoPlasmaMortar.comps.CompRefuelable.outOfFuelMessage>
+  
+</LanguageData>

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: neutronium sword -->
+  <CMC_EMPsword.label>漢劍</CMC_EMPsword.label>
+  <!-- EN: A ultra-tech sword made from incredibly dense and strong material. It is able to generate EMP pulse upon contact with a implanted EMP generator. -->
+  <CMC_EMPsword.description>一把由極其堅硬緻密的零素材料製成的傳統劍刃，內置的EMP脈沖發生器可以在接觸敵人時釋放EMP脈沖</CMC_EMPsword.description>
+  <!-- EN: point -->
+  <CMC_EMPsword.tools.point.label>劍尖</CMC_EMPsword.tools.point.label>
+  <!-- EN: edge -->
+  <CMC_EMPsword.tools.edge.label>劍刃</CMC_EMPsword.tools.edge.label>
+  
+  <!-- EN: anti-entropy sword -->
+  <CMC_EMPsword_sevenstars.label>&lt;color=#FFAA00&gt;&lt;i&gt;漢劍【七星】&lt;/i&gt;&lt;/color&gt;</CMC_EMPsword_sevenstars.label>
+  <!-- EN: A modified neutronium sword, . -->
+  <CMC_EMPsword_sevenstars.description>改進升級過的漢劍，特製的反熵材料劍刃能造成無視護甲和乘傷的高額傷害。改劍會與裝備者綁定，在擊殺目標時會為其恢復。</CMC_EMPsword_sevenstars.description>
+  <!-- EN: point -->
+  <CMC_EMPsword_sevenstars.tools.point.label>劍尖</CMC_EMPsword_sevenstars.tools.point.label>
+  <!-- EN: edge -->
+  <CMC_EMPsword_sevenstars.tools.edge.label>劍刃</CMC_EMPsword_sevenstars.tools.edge.label>
+  
+</LanguageData>

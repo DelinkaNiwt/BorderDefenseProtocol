@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: QSZ-57 PDW -->
+  <CMC_QSZfiveseven.label>QSZ-57PDW(基础型)</CMC_QSZfiveseven.label>
+  <!-- EN: A personal-defense weapon based on ancient blowback-operated self-loading pistol. It is light to carry and quick to fire, which makes it popular among pilots and frontier explorers. Its speciallized bullets can delay targets' motion.\n\nThis weapon can automatically switch fire towards another enemy when its current target is down. -->
+  <CMC_QSZfiveseven.description>采用传统火药技术的单兵自卫武器，轻量化设计使其成为飞行员与开拓者的理想选择。有效射程有限，但特制的小口径弹药能高效阻滞近身敌人。\n\n该武器会扫射临近的数个敌对目标。</CMC_QSZfiveseven.description>
+  <!-- EN: grip -->
+  <CMC_QSZfiveseven.tools.grip.label>握把</CMC_QSZfiveseven.tools.grip.label>
+  <!-- EN: barrel -->
+  <CMC_QSZfiveseven.tools.barrel.label>TODO</CMC_QSZfiveseven.tools.barrel.label>
+  <!-- EN: QSZ-57 PDW -->
+  <CMC_QSZfiveseven.verbs.Verb_ShootCE.label>TODO</CMC_QSZfiveseven.verbs.Verb_ShootCE.label>
+  
+  <!-- UNUSED -->
+  <CMC_QSZfiveseven.verbs.Verb_Shoot.label>QSZ-57PDW(基础型)</CMC_QSZfiveseven.verbs.Verb_Shoot.label>
+  
+  <!-- EN: QSZ-57 carbine -->
+  <CMC_QSZfiveseven_MODIII.label>QSZ-57 卡宾枪</CMC_QSZfiveseven_MODIII.label>
+  <!-- EN: Upgraded variant featuring integrated grenade launcher and magnetic rail system. Extended frame accommodates fixed stock and high-capacity caseless drum magazine. Renowned for exceptional ergonomics and cost-effective ammunition, it's widely deployed from civilian alien-hunting expeditions to Proxima Centauri security details.\n\n• Burst-fires at multiple adjacent hostiles\n• Smart targeting prioritizes limb shots to impair mobility. -->
+  <CMC_QSZfiveseven_MODIII.description>加装榴弹发射器和磁轨的改进型号，由于长度限制的放宽而采用了固定式枪托和更大容量的无壳弹弹鼓。由于优秀的人体工学和廉价的弹药，该枪受到用户的广泛好评，从民间异星狩猎探险队到比邻星的安保警卫都是它的受众。\n\n该武器会扫射临近的数个敌对目标，智能弹道计算机会优先瞄准四肢。</CMC_QSZfiveseven_MODIII.description>
+  <!-- EN: grip -->
+  <CMC_QSZfiveseven_MODIII.tools.grip.label>握把</CMC_QSZfiveseven_MODIII.tools.grip.label>
+  <!-- EN: barrel -->
+  <CMC_QSZfiveseven_MODIII.tools.barrel.label>TODO</CMC_QSZfiveseven_MODIII.tools.barrel.label>
+  <!-- EN: QSZ-57 carbine -->
+  <CMC_QSZfiveseven_MODIII.verbs.Verb_ShootCE.label>TODO</CMC_QSZfiveseven_MODIII.verbs.Verb_ShootCE.label>
+  
+  <!-- EN: QSZ-57B -->
+  <CMC_QSZfiveseven_NL.label>QSZ-57PDW(AI辅助型)</CMC_QSZfiveseven_NL.label>
+  <!-- EN: Modified version of QSZ-57, an auxiliary ballistic computer equipped on its side helps to aim targets' limbs. Its speciallized bullets can delay targets' motion.\n\n\n\nThis weapon can automatically switch fire towards another enemy when its current target is down. -->
+  <CMC_QSZfiveseven_NL.description>集成弹道计算机的改进型号，显著提升命中敌人四肢的概率。特制弹药在阻滞效果基础上新增致残特性。\n\n• 高概率击伤四肢降低移动能力\n• 降低致命部位损毁几率\n• 对机械族单位伤害效率减半\n\n该武器会扫射临近的数个敌对目标，智能弹道计算机会优先瞄准四肢。</CMC_QSZfiveseven_NL.description>
+  <!-- EN: grip -->
+  <CMC_QSZfiveseven_NL.tools.grip.label>握把</CMC_QSZfiveseven_NL.tools.grip.label>
+  <!-- EN: barrel -->
+  <CMC_QSZfiveseven_NL.tools.barrel.label>TODO</CMC_QSZfiveseven_NL.tools.barrel.label>
+  <!-- EN: QSZ-57B -->
+  <CMC_QSZfiveseven_NL.verbs.Verb_ShootCE.label>TODO</CMC_QSZfiveseven_NL.verbs.Verb_ShootCE.label>
+  
+</LanguageData>

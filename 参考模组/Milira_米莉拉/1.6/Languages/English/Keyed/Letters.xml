@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+  <Milira.ChurchTitleLetter>Promotion Available for {0}: {1}</Milira.ChurchTitleLetter>
+  <Milira.ChurchTitleLetterDesc>{0} has accumulated enough reputation with {1} to be promoted to {2}. Assign {0} to use the comms console to contact {1}, or travel to a {1}'s settlement to register title.</Milira.ChurchTitleLetterDesc>
+
+</LanguageData>

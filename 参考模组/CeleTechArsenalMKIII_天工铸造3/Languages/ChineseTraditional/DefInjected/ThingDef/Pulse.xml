@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <CMC_PLaserLMG.label>QBB-79 脈沖機槍</CMC_PLaserLMG.label>
+  <CMC_PLaserLMG.description>一款為飛船內部作戰，利用氣體連續爆炸充能並釋放高能脈沖激光的機槍，可以在短時間內連續射擊。其裝備的智能瞄具可以自行調整棱鏡的角度，使激光排除掩體的乾擾並準確命中目標，並在消滅當前目標後迅速瞄準下一個臨近目標。</CMC_PLaserLMG.description>
+  <CMC_PLaserLMG.tools.stock.label>槍托</CMC_PLaserLMG.tools.stock.label>
+  <CMC_PLaserLMG.tools.barrel.label>槍管</CMC_PLaserLMG.tools.barrel.label>
+  <CMC_PLaserLMG.verbs.Verb_Laser_Once.label>QBB-79 脈沖機槍</CMC_PLaserLMG.verbs.Verb_Laser_Once.label>
+  
+  <CMC_PLaserSMG.label>QSZ-79 脈沖SMG</CMC_PLaserSMG.label>
+  <CMC_PLaserSMG.description>擁有卓越射速和穩定性的沖鋒槍，在近距離能高效殺傷輕甲目標。該武器的受眾十分廣泛，從都市世界的醫療小組到大戰前線的突擊隊士兵。</CMC_PLaserSMG.description>
+  <CMC_PLaserSMG.tools.stock.label>槍托</CMC_PLaserSMG.tools.stock.label>
+  <CMC_PLaserSMG.tools.barrel.label>槍管</CMC_PLaserSMG.tools.barrel.label>
+  <CMC_PLaserSMG.verbs.Verb_Laser_Once.label>QSZ-79 脈沖SMG</CMC_PLaserSMG.verbs.Verb_Laser_Once.label>
+  
+  <CMM_PLaserpistol.label>QSC-79 脈沖手槍</CMM_PLaserpistol.label>
+  <CMM_PLaserpistol.description>具備多目標攻擊能力的激光手槍,也能匯聚光束打擊同一目標。</CMM_PLaserpistol.description>
+  <CMM_PLaserpistol.tools.stock.label>槍托</CMM_PLaserpistol.tools.stock.label>
+  <CMM_PLaserpistol.tools.barrel.label>槍管</CMM_PLaserpistol.tools.barrel.label>
+  <CMM_PLaserpistol.verbs.Verb_Laser_Once.label>QSC-79 脈沖激光手槍</CMM_PLaserpistol.verbs.Verb_Laser_Once.label>
+  
+  <CMC_QiyaoLaserLMG.label>&lt;color=#FFAA00&gt;&lt;i&gt;【七曜】先進脈沖步槍δ&lt;/i&gt;&lt;/color&gt;</CMC_QiyaoLaserLMG.label>
+  <CMC_QiyaoLaserLMG.description>一款試驗型高射速脈沖步槍，採用不穩定零點儲能管進行充能，能有效對輕甲目標造成毀滅性打擊。由於激發能量的不穩定性，武器發射出的光束頻譜隨機變化。其配備的靈能瞄具能將目標影像直接投射到使用者的大腦皮層，實時分析目標狀態，在消滅當前目標後能自動鎖定下一個臨近目標。</CMC_QiyaoLaserLMG.description>
+  <CMC_QiyaoLaserLMG.tools.stock.label>槍托</CMC_QiyaoLaserLMG.tools.stock.label>
+  <CMC_QiyaoLaserLMG.tools.barrel.label>槍管</CMC_QiyaoLaserLMG.tools.barrel.label>
+  <CMC_QiyaoLaserLMG.verbs.Verb_Laser_Once.label>&lt;color=#FFAA00&gt;&lt;i&gt;【七曜】先進脈沖步槍δ&lt;/i&gt;&lt;/color&gt;</CMC_QiyaoLaserLMG.verbs.Verb_Laser_Once.label>
+  
+</LanguageData>

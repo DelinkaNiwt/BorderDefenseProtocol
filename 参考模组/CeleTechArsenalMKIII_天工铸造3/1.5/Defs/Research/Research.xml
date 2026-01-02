@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+    <ResearchTabDef>
+        <defName>CMC_Research</defName>
+        <label>C.M.C.</label>
+    </ResearchTabDef>
+
+    <ResearchProjectDef Name="CMC_ResearchProjectBase" Abstract="true">
+    <techLevel>Spacer</techLevel>
+    <tab>CMC_Research</tab>
+	<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+	<requiredResearchFacilities>
+      <li>CMC_CommConsole</li>
+    </requiredResearchFacilities>
+    </ResearchProjectDef>
+    <!--T0-->
+    <ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMC_basisLight</defName>
+        <label>numarical control</label>
+        <description>Building multifunctional intelligent CNC machine tools capable of manufacturing and processing precision weapon components.</description>
+        <prerequisites>
+            <li>MicroelectronicsBasics</li>
+        </prerequisites>
+        <baseCost>1200</baseCost>
+        <researchViewX>0</researchViewX>
+        <researchViewY>0</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMC_BasisHeavy</defName>
+        <label>intelligent machining</label>
+        <description>Building multifunctional intelligent heavy-duty machine tools capable of manufacturing large components and missiles.</description>
+        <prerequisites>
+			<li>MicroelectronicsBasics</li>
+        </prerequisites>
+        <baseCost>2000</baseCost>
+        <researchViewX>0</researchViewX>
+        <researchViewY>3.5</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMC_BasisTrade</defName>
+        <label>orbital trading</label>
+        <description>.</description>
+        <prerequisites>
+			<li>CMC_basisLight</li>
+        </prerequisites>
+        <baseCost>2000</baseCost>
+        <researchViewX>0</researchViewX>
+        <researchViewY>0.7</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMC_BasisStrike</defName>
+        <label>WIP request gun ship</label>
+        <description>.</description>
+        <prerequisites>
+			<li>CMC_BasisTrade</li>
+        </prerequisites>
+        <baseCost>12000</baseCost>
+        <researchViewX>0</researchViewX>
+        <researchViewY>1.4</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMC_AdvStrike</defName>
+        <label>WIP request air strike</label>
+        <description>.</description>
+        <prerequisites>
+			<li>CMC_BasisStrike</li>
+        </prerequisites>
+        <baseCost>60000</baseCost>
+        <researchViewX>0</researchViewX>
+        <researchViewY>2.1</researchViewY>
+    </ResearchProjectDef>
+	
+	<!--EM Tech-->
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMC_EMweaponTech_I</defName>
+        <label>EM-boost rounds</label>
+        <description>Utilize magnetic fields to accelerate the bullet upon firing, significantly increasing velocity and penetration.</description>
+        <prerequisites>
+            <li>CMC_basisLight</li>
+        </prerequisites>
+        <baseCost>2000</baseCost>
+        <researchViewX>1</researchViewX>
+        <researchViewY>0</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMC_EMweaponTech_II</defName>
+        <label>phase-change cooling system</label>
+        <description>Integrate phase-change alloys that absorb heat through phase transition during high-temperature conditions, rapidly reducing the system's temperature, increasing rate of fire.</description>
+        <prerequisites>
+            <li>CMC_EMweaponTech_I</li>
+        </prerequisites>
+        <baseCost>2000</baseCost>
+        <researchViewX>2</researchViewX>
+        <researchViewY>0</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMC_EMweaponTech_III</defName>
+        <label>plasma acceleration</label>
+        <description>Combine electromagnetic force with plasma jet propulsion, enabling the bullet to reach extreme hypersonic speeds while reducing air resistance and thermal energy loss, significantly enhancing both range and velocity.</description>
+        <prerequisites>
+            <li>CMC_EMweaponTech_II</li>
+        </prerequisites>
+        <baseCost>3000</baseCost>
+        <researchViewX>3</researchViewX>
+        <researchViewY>0</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMC_EMweaponTech_IV</defName>
+        <label>adaptive precision-controlled hypersonic rounds</label>
+        <description>Intelligent correction and energy regulation during flight can ensure precise targeting and effectively prevent excessive penetration, delivering the necessary harm to the target without passing through the back or causing excessive damage to the surrounding area.</description>
+        <prerequisites>
+		    <li>CMC_Smart_III</li>
+            <li>CMC_EMweaponTech_III</li>
+        </prerequisites>
+        <baseCost>3000</baseCost>
+        <researchViewX>4</researchViewX>
+        <researchViewY>0.35</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMC_EMweaponTech_V</defName>
+        <label>//XuanMing//protocol</label>
+		<techLevel>Ultra</techLevel>
+        <description>Craft the ultra-tech persona heavy sniper rifle "Xuanming".</description>
+        <prerequisites>
+            <li>CMC_EMweaponTech_IV</li>
+        </prerequisites>
+        <baseCost>12000</baseCost>
+        <researchViewX>5</researchViewX>
+        <researchViewY>0.35</researchViewY>
+    </ResearchProjectDef>
+	
+	<!--smart-->	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMC_Smart_I</defName>
+        <label>smart target analysis</label>
+        <description>Enable automatic locking onto the next priority target immediately after eliminating the current one. By utilizing multi-sensor fusion and AI algorithms, it rapidly evaluates target threat levels and positions, enabling seamless chain strikes and significantly enhancing combat efficiency.</description>
+        <prerequisites>
+            <li>CMC_basisLight</li>
+        </prerequisites>
+        <baseCost>2000</baseCost>
+        <researchViewX>1</researchViewX>
+        <researchViewY>0.7</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMC_Smart_II</defName>
+        <label>trajectory correction</label>
+        <description>Craft smart weapons firing bullets equipped with miniature sensors, control chips, and RCS, allowing them to sense the target's position in real time and adjust their trajectory for precise strikes.</description>
+        <prerequisites>
+            <li>CMC_Smart_I</li>
+        </prerequisites>
+        <baseCost>2000</baseCost>
+        <researchViewX>2</researchViewX>
+        <researchViewY>0.7</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMC_Smart_III</defName>
+        <label>quantum radar-based WS</label>
+        <description>.</description>
+        <prerequisites>
+            <li>CMC_Smart_II</li>
+        </prerequisites>
+        <baseCost>2000</baseCost>
+        <researchViewX>3</researchViewX>
+        <researchViewY>0.5</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMC_Smart_IIIS</defName>
+        <label>TR component miniaturization</label>
+        <description>Reducing seeker size enables development of small-caliber rapid-fire smart weapons.</description>
+        <prerequisites>
+            <li>CMC_Smart_III</li>
+        </prerequisites>
+        <baseCost>1600</baseCost>
+        <researchViewX>3</researchViewX>
+        <researchViewY>0.9</researchViewY>
+    </ResearchProjectDef>
+	<!--DEWS-->
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMC_DEWI</defName>
+        <label>energy convergence</label>
+        <description>Craft directed Energy Weapons (DEWs), which are advanced systems that use focused energy in the form of lasers or particle beams to destroy targets. Unlike traditional kinetic weapons, DEWs operate by delivering energy directly to a target at the speed of light, offering rapid response times and high precision.</description>
+        <prerequisites>
+            <li>CMC_basisLight</li>
+        </prerequisites>
+        <baseCost>4000</baseCost>
+        <researchViewX>1</researchViewX>
+        <researchViewY>1.4</researchViewY>
+    </ResearchProjectDef>	
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMC_DEWII</defName>
+        <label>heat dissipation module</label>
+        <description>During the laser weapon's operation, the emitted heat is converted into electrical energy using thermoelectric materials. This energy can be used to power other components of the weapon system or stored for later use, enhancing energy efficiency thus increasing rate of fire.</description>
+        <prerequisites>
+            <li>CMC_DEWI</li>
+        </prerequisites>
+        <baseCost>2000</baseCost>
+        <researchViewX>3</researchViewX>
+        <researchViewY>1.4</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMC_DEWIII</defName>
+        <label>adaptive focusing Lens</label>
+        <description>Intelligent adaptive focusing lens dynamically adjust the laser beam's focal point and energy density based on the target's distance and material, allowing the energy to be precisely concentrated on the target's most vulnerable area, maximizing destructive power and penetration efficiency.</description>
+        <prerequisites>
+            <li>CMC_DEWII</li>
+			<li>CMC_Smart_III</li>
+        </prerequisites>
+        <baseCost>2000</baseCost>
+        <researchViewX>4</researchViewX>
+        <researchViewY>1.05</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMC_QYProtocol</defName>
+        <label>//Qiyao//protocol</label>
+		<techLevel>Ultra</techLevel>
+        <description>Craft the ultra-tech persona laser rifle "Qiyao".</description>
+        <prerequisites>
+            <li>CMC_DEWIII</li>
+        </prerequisites>
+        <baseCost>12000</baseCost>
+        <researchViewX>5</researchViewX>
+        <researchViewY>1.05</researchViewY>
+    </ResearchProjectDef>
+	
+	<!--Heavy-->
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMC_Heavy_I</defName>
+        <label>advnaced warheads</label>
+        <description>Advanced multi-purpose warheads ensure flexibility in complex combat environments.</description>
+        <prerequisites>
+            <li>CMC_Smart_I</li>
+        </prerequisites>
+        <baseCost>2000</baseCost>
+        <researchViewX>2</researchViewX>
+        <researchViewY>2.1</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMC_Heavy_II</defName>
+        <label>AI-aux guidance system</label>
+        <description>By integrating an AI-assisted fire control system into the launcher, the launched missiles can achieve exceptional precision.</description>
+        <prerequisites>
+            <li>CMC_Heavy_I</li>
+        </prerequisites>
+        <baseCost>2000</baseCost>
+        <researchViewX>3</researchViewX>
+        <researchViewY>2.1</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMC_TaotieProtocol</defName>
+        <label>//Taotie//protocol</label>
+        <description>Craft the ultra-tech persona laser rifle "TaoTie".</description>
+        <prerequisites>
+            <li>CMC_Heavy_II</li>
+			<li>CMC_DEWII</li>
+        </prerequisites>
+        <baseCost>12000</baseCost>
+        <researchViewX>4</researchViewX>
+        <researchViewY>1.75</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMC_ZhurongProtocol</defName>
+        <label>//Zhurong//protocol</label>
+        <description>.</description>
+        <prerequisites>
+            <li>CMC_Heavy_II</li>
+        </prerequisites>
+        <baseCost>12000</baseCost>
+        <researchViewX>5</researchViewX>
+        <researchViewY>2.1</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMCmeleeI</defName>
+        <label>melee weaponI</label>
+        <description>Build basic spacer melee weapons.</description>
+        <prerequisites>
+            <li>CMC_basisLight</li>
+        </prerequisites>
+        <baseCost>2000</baseCost>
+        <researchViewX>1</researchViewX>
+        <researchViewY>2.8</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMCmeleeII</defName>
+        <label>melee weapon II</label>
+        <description>Build advanced spacer melee weapons.</description>
+        <prerequisites>
+            <li>CMCmeleeI</li>
+        </prerequisites>
+        <baseCost>8000</baseCost>
+        <researchViewX>2</researchViewX>
+        <researchViewY>2.8</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMCmeleeIII</defName>
+        <label>melee weapon II</label>
+        <description>Build advanced spacer melee weapons.</description>
+        <prerequisites>
+            <li>CMCmeleeII</li>
+        </prerequisites>
+        <baseCost>8000</baseCost>
+        <researchViewX>4</researchViewX>
+        <researchViewY>2.8</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMC_FloatingGunI</defName>
+        <label>floating gun system</label>
+        <description>Build basic retrofitted charged weapons based on mech-technology.</description>
+        <prerequisites>
+            <li>CMC_BasisHeavy</li>
+        </prerequisites>
+        <baseCost>4000</baseCost>
+        <researchViewX>1</researchViewX>
+        <researchViewY>3.5</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMC_FloatingGunII</defName>
+        <label>floating missile pod</label>
+        <description>With deeper understanding of cutting-edged mechanoid technology, we forged our weapons to adapt the changing battlefield.</description>
+        <prerequisites>
+			<li>CMC_FloatingGunI</li>
+			<li>CMC_Heavy_I</li>
+        </prerequisites>
+        <baseCost>4000</baseCost>
+        <researchViewX>3</researchViewX>
+        <researchViewY>3.5</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMC_MechI</defName>
+        <label>mech I(WIP)</label>
+        <description>WIP</description>
+        <prerequisites>
+            <li>CMC_BasisHeavy</li>
+			<li>CMCBio</li>
+        </prerequisites>
+        <baseCost>1000</baseCost>
+        <researchViewX>1</researchViewX>
+        <researchViewY>4.2</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMC_MechII</defName>
+        <label>mech II(WIP)</label>
+        <description>WIP</description>
+        <prerequisites>
+            <li>CMC_MechI</li>
+        </prerequisites>
+        <baseCost>2000</baseCost>
+        <researchViewX>2</researchViewX>
+        <researchViewY>4.2</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMC_MechIII</defName>
+        <label>mech III(WIP)</label>
+        <description>WIP</description>
+        <prerequisites>
+            <li>CMC_MechII</li>
+        </prerequisites>
+        <baseCost>2000</baseCost>
+        <researchViewX>3</researchViewX>
+        <researchViewY>4.2</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMC_MechIV</defName>
+        <label>mech IV(WIP)</label>
+        <description>WIP</description>
+        <prerequisites>
+            <li>CMC_MechIII</li>
+        </prerequisites>
+        <baseCost>4000</baseCost>
+        <researchViewX>4</researchViewX>
+        <researchViewY>4.2</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMCGunTurretsbasic</defName>
+        <label>turret technology I</label>
+        <description>Build basic CMC turrets</description>
+        <prerequisites>
+			<li>CMC_BasisHeavy</li>
+			<li>GunTurrets</li>
+        </prerequisites>
+        <baseCost>2000</baseCost>
+        <researchViewX>1</researchViewX>
+        <researchViewY>5.6</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMCGunTurrets</defName>
+        <label>turret technology II</label>
+        <description>Build advanced CMC turrets</description>
+        <prerequisites>
+			<li>CMCGunTurretsbasic</li>
+        </prerequisites>
+        <baseCost>2000</baseCost>
+        <researchViewX>2</researchViewX>
+        <researchViewY>5.6</researchViewY>
+    </ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMCShield</defName>
+        <label>advanced defense technology</label>
+        <description>Build advanced defense facilities including force-field shield and long-range cruise missile.</description>
+        <prerequisites>
+            <li>CMCGunTurrets</li>
+        </prerequisites>
+        <baseCost>6000</baseCost>
+        <researchViewX>4</researchViewX>
+        <researchViewY>5.6</researchViewY>
+    </ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMCarmor</defName>
+        <label>armorI(WIP)</label>
+        <description>Craft CMC clothes and light armors.</description>
+        <prerequisites>
+			<li>CMC_BasisHeavy</li>
+        </prerequisites>
+        <baseCost>2000</baseCost>
+        <researchViewX>1</researchViewX>
+        <researchViewY>4.9</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMCarmorII</defName>
+        <label>armorII(WIP)</label>
+        <description>Craft CMC clothes and light armors.</description>
+        <prerequisites>
+			<li>CMCarmor</li>
+        </prerequisites>
+        <baseCost>2000</baseCost>
+        <researchViewX>2</researchViewX>
+        <researchViewY>4.9</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMCarmorIII</defName>
+        <label>armorIII(WIP)</label>
+        <description>Craft CMC powered armors and personal shield.</description>
+        <prerequisites>
+			<li>CMCarmorII</li>
+			<li>PoweredArmor</li>
+        </prerequisites>
+        <baseCost>4000</baseCost>
+        <researchViewX>3</researchViewX>
+        <researchViewY>4.9</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMCarmorIV</defName>
+        <label>armorIV(WIP)</label>
+        <description>.</description>
+        <prerequisites>
+			<li>CMCarmorIII</li>
+			<li>CMC_MechIV</li>
+        </prerequisites>
+        <baseCost>8000</baseCost>
+        <researchViewX>5</researchViewX>
+        <researchViewY>4.9</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMCBio</defName>
+        <label>CMC combat chips</label>
+        <description>Craft combat chips with specialized functions.</description>
+        <prerequisites>
+			<li>Bionics</li>
+        </prerequisites>
+        <baseCost>3000</baseCost>
+        <researchViewX>0</researchViewX>
+        <researchViewY>4.2</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMCPowerI</defName>
+        <label>power I</label>
+        <description>CMC basic power technology</description>
+        <prerequisites>
+		    <li>CMC_BasisHeavy</li>
+			<li>Electricity</li>
+        </prerequisites>
+        <baseCost>2000</baseCost>
+        <researchViewX>1</researchViewX>
+        <researchViewY>6.3</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="CMC_ResearchProjectBase">
+        <defName>CMCPowerII</defName>
+        <label>power II</label>
+        <description>CMC standard power technology</description>
+        <prerequisites>
+			<li>CMCPowerI</li>
+        </prerequisites>
+        <baseCost>4000</baseCost>
+        <researchViewX>2</researchViewX>
+        <researchViewY>6.3</researchViewY>
+    </ResearchProjectDef>
+</Defs>

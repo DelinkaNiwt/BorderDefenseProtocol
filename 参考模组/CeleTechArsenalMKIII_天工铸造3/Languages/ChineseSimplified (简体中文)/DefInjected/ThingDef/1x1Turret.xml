@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: QS weapon station-CAP -->
+  <CMC_CSGTurret.label>【青霜-甲】近程智能霰弹武器站</CMC_CSGTurret.label>
+  <!-- EN: A close-quarters anti-personnel combat mode of the QS weapon station, it fires intelligent shrapnel rounds that can track enemies and simultaneously engage multiple targets. -->
+  <CMC_CSGTurret.description>青霜武器站的一种近距离作战武备模式，发射智能霰弹，能够自动追踪敌人，并同时攻击多个目标。</CMC_CSGTurret.description>
+  
+  <!-- UNUSED -->
+  <CMC_CSGTurret.comps.CompRefuelable.fuelGizmoLabel>炮管耐久</CMC_CSGTurret.comps.CompRefuelable.fuelGizmoLabel>
+  <CMC_CSGTurret.comps.CompRefuelable.fuelLabel>剩余射击次数</CMC_CSGTurret.comps.CompRefuelable.fuelLabel>
+  <CMC_CSGTurret.comps.CompRefuelable.outOfFuelMessage>需要更换炮管</CMC_CSGTurret.comps.CompRefuelable.outOfFuelMessage>
+  
+  <!-- EN: QS weapon station-LRSS -->
+  <CMC_CSGTurret_B.label>【青霜-乙】双联装狙击武器站</CMC_CSGTurret_B.label>
+  <!-- EN: A small auto shotgun turret that fires guided bullets, commonly used in base defense.\n\n4 guided bullets are fired simultaneously, attacking multiple close targets. -->
+  <CMC_CSGTurret_B.description>青霜武器站的一种远距离反步兵作战武备模式，发射双联装智能狙击弹，能够自动追踪敌人，并同时攻击两个目标。</CMC_CSGTurret_B.description>
+  
+  <!-- UNUSED -->
+  <CMC_CSGTurret_B.comps.CompRefuelable.fuelGizmoLabel>炮管耐久</CMC_CSGTurret_B.comps.CompRefuelable.fuelGizmoLabel>
+  <CMC_CSGTurret_B.comps.CompRefuelable.fuelLabel>剩余射击次数</CMC_CSGTurret_B.comps.CompRefuelable.fuelLabel>
+  <CMC_CSGTurret_B.comps.CompRefuelable.outOfFuelMessage>需要更换炮管</CMC_CSGTurret_B.comps.CompRefuelable.outOfFuelMessage>
+  
+  <!-- EN: QS weapon station-LMG -->
+  <CMC_CSGTurret_C.label>【青霜-丙】机枪武器站</CMC_CSGTurret_C.label>
+  <!-- EN: The general-purpose mode of the Qingshuang weapon station base, it fires small-caliber machine gun rounds. -->
+  <CMC_CSGTurret_C.description>青霜武器站底座的通用作战武备模式，发射小口径机枪弹。</CMC_CSGTurret_C.description>
+  
+  <!-- UNUSED -->
+  <CMC_CSGTurret_C.comps.CompRefuelable.fuelGizmoLabel>炮管耐久</CMC_CSGTurret_C.comps.CompRefuelable.fuelGizmoLabel>
+  <CMC_CSGTurret_C.comps.CompRefuelable.fuelLabel>剩余射击次数</CMC_CSGTurret_C.comps.CompRefuelable.fuelLabel>
+  <CMC_CSGTurret_C.comps.CompRefuelable.outOfFuelMessage>需要更换炮管</CMC_CSGTurret_C.comps.CompRefuelable.outOfFuelMessage>
+  
+  <!-- EN: CAPWS -->
+  <Gun_CMCAntiInfantryCSG.label>智能霰弹枪</Gun_CMCAntiInfantryCSG.label>
+  <!-- EN: A self-loading charged shotgun attached to a small weapon station. -->
+  <Gun_CMCAntiInfantryCSG.description>发射数枚追踪射弹的自动霰弹枪。</Gun_CMCAntiInfantryCSG.description>
+  <!-- EN: CAPWS -->
+  <Gun_CMCAntiInfantryCSG.verbs.Verb_ShootCE.label>TODO</Gun_CMCAntiInfantryCSG.verbs.Verb_ShootCE.label>
+  
+  <!-- UNUSED -->
+  <Gun_CMCAntiInfantryCSG.verbs.Verb_Shoot.label>智能霰弹枪</Gun_CMCAntiInfantryCSG.verbs.Verb_Shoot.label>
+  
+  <!-- EN: auto gun -->
+  <Gun_CMCAntiInfantryCSG_B.label>双联装自动智能狙击枪</Gun_CMCAntiInfantryCSG_B.label>
+  <!-- EN: A self-loading charged shotgun attached to a small auto weapon station.\n\nIt shots 2 guided slugs each time, attacking multiple targets. -->
+  <Gun_CMCAntiInfantryCSG_B.description>发射追踪射弹的双联装自动智能狙击枪。</Gun_CMCAntiInfantryCSG_B.description>
+  <!-- EN: auto gun -->
+  <Gun_CMCAntiInfantryCSG_B.verbs.Verb_ShootCE.label>TODO</Gun_CMCAntiInfantryCSG_B.verbs.Verb_ShootCE.label>
+  
+  <!-- EN: LMG -->
+  <Gun_CMCAntiInfantryCSG_C.label>电荷轻机枪</Gun_CMCAntiInfantryCSG_C.label>
+  <!-- EN: An auto charged LMG. -->
+  <Gun_CMCAntiInfantryCSG_C.description>小口径电荷机枪。</Gun_CMCAntiInfantryCSG_C.description>
+  <!-- EN: LMG -->
+  <Gun_CMCAntiInfantryCSG_C.verbs.Verb_ShootCE.label>TODO</Gun_CMCAntiInfantryCSG_C.verbs.Verb_ShootCE.label>
+  
+  <!-- UNUSED -->
+  <Gun_CMCAntiInfantryCSG_C.verbs.Verb_Shoot.label>电荷轻机枪</Gun_CMCAntiInfantryCSG_C.verbs.Verb_Shoot.label>
+  
+</LanguageData>

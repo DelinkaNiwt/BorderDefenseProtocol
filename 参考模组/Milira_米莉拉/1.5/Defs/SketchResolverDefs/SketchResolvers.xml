@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <SketchResolverDef>
+    <defName>Milira_Cluster</defName>
+    <isRoot>true</isRoot>
+    <resolver Class="Milira.SketchResolver_MiliraCluster" />
+  </SketchResolverDef>
+
+  <SketchResolverDef>
+    <defName>Milira_ClusterWalls</defName>
+    <isRoot>true</isRoot>
+    <resolver Class="Milira.SketchResolver_MiliraClusterWalls" />
+  </SketchResolverDef>
+
+</Defs>

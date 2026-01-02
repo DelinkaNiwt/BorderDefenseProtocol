@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="RockBase">
+    <defName>Milira_MineableSunPlateStell</defName>
+    <label>Entombed Solar-Forged Steel</label>
+    <description>Compacted Solar-Forged Steel Deposits.</description>
+    <graphicData>
+      <texPath>Things/Building/Linked/RockFlecked_Atlas</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <color>(235,233,184)</color>
+      <colorTwo>(190,188,133)</colorTwo>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>6000</MaxHitPoints>
+    </statBases>
+    <building>
+      <isResourceRock>true</isResourceRock>
+      <mineableThing>Milira_SunPlateSteel</mineableThing>
+      <mineableYield>20</mineableYield>
+      <mineableScatterCommonality>0.01</mineableScatterCommonality>
+      <mineableScatterLumpSizeRange>2~5</mineableScatterLumpSizeRange>
+      <veinMineable>true</veinMineable>
+    </building>
+  </ThingDef>
+
+
+</Defs>

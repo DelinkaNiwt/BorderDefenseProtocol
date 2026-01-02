@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Defs>
+
+  <SoundDef>
+    <defName>MiliraRecipe_SunBlastFurnace</defName>  
+    <sustain>True</sustain>  
+    <context>MapOnly</context>
+    <priorityMode>PrioritizeNearest</priorityMode>  
+    <subSounds>
+      <li>
+        <muteWhenPaused>True</muteWhenPaused>      
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>Milira/SunBlastFlame</clipPath>
+          </li>
+        </grains>      
+        <volumeRange>25~35</volumeRange>      
+        <pitchRange>0.9541177~1.091765</pitchRange>      
+        <sustainLoop>true</sustainLoop>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+
+</Defs>

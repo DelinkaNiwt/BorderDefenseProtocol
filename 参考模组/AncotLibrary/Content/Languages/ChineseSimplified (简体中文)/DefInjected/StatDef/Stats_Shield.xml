@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Defence angle -->
+  <Ancot_PhysicalShieldBlockAngle.label>防御角度</Ancot_PhysicalShieldBlockAngle.label>
+  <!-- EN: The angle range of attacks that can be blocked when using this shield for defense, relative to the direction faced. -->
+  <Ancot_PhysicalShieldBlockAngle.description>使用这面盾牌进行防御时，以面朝方向为基准，能够格挡攻击的角度范围。</Ancot_PhysicalShieldBlockAngle.description>
+  <!-- EN: {0}° -->
+  <Ancot_PhysicalShieldBlockAngle.formatString>{0}°</Ancot_PhysicalShieldBlockAngle.formatString>
+  
+  <!-- EN: Block chance (melee) -->
+  <Ancot_PhysicalShieldBlockChance_Melee.label>近战格挡率</Ancot_PhysicalShieldBlockChance_Melee.label>
+  <!-- EN: Chance of blocking melee attacks while using this shield for defense. -->
+  <Ancot_PhysicalShieldBlockChance_Melee.description>使用这面盾牌进行防御，受到近战攻击时能够格挡的概率。</Ancot_PhysicalShieldBlockChance_Melee.description>
+  
+  <!-- EN: Block chance (ranged) -->
+  <Ancot_PhysicalShieldBlockChance_Ranged.label>远程格挡率</Ancot_PhysicalShieldBlockChance_Ranged.label>
+  <!-- EN: Chance of blocking ranged attacks while using this shield for defense. -->
+  <Ancot_PhysicalShieldBlockChance_Ranged.description>使用这面盾牌进行防御，受到远程攻击时能够格挡的概率。</Ancot_PhysicalShieldBlockChance_Ranged.description>
+  
+  <!-- EN: Break stance time -->
+  <Ancot_PhysicalShieldBreakStance.label>破盾硬直</Ancot_PhysicalShieldBreakStance.label>
+  <!-- EN: The duration of stagger when the stamina of this shield is depleted. -->
+  <Ancot_PhysicalShieldBreakStance.description>使用这面盾牌进行防御，架势值耗尽时，持有者陷入僵直的时间。</Ancot_PhysicalShieldBreakStance.description>
+  <!-- EN: {0}s -->
+  <Ancot_PhysicalShieldBreakStance.formatString>{0}秒</Ancot_PhysicalShieldBreakStance.formatString>
+  
+  <!-- EN: Max stamina -->
+  <Ancot_PhysicalShieldMaxStamina.label>架势值</Ancot_PhysicalShieldMaxStamina.label>
+  <!-- EN: The maximum stamina this shield can consume when used for defense before it is broken. -->
+  <Ancot_PhysicalShieldMaxStamina.description>使用这面盾牌进行防御，被击破前所能消耗的架势上限。</Ancot_PhysicalShieldMaxStamina.description>
+  
+  <!-- EN: Reset time -->
+  <Ancot_PhysicalShieldResetTime.label>破盾冷却</Ancot_PhysicalShieldResetTime.label>
+  <!-- EN: The time interval required to fully regenerate stamina and resume blocking when the stamina of this shield is depleted. -->
+  <Ancot_PhysicalShieldResetTime.description>使用这面盾牌进行防御，架势值耗尽时，架势回复至满并可以重新进行防御的时间间隔。</Ancot_PhysicalShieldResetTime.description>
+  <!-- EN: {0}s -->
+  <Ancot_PhysicalShieldResetTime.formatString>{0}秒</Ancot_PhysicalShieldResetTime.formatString>
+  
+  <!-- EN: Stamina cost factor (melee) -->
+  <Ancot_PhysicalShieldStaminaCost_Melee.label>架势消耗率（近战）</Ancot_PhysicalShieldStaminaCost_Melee.label>
+  <!-- EN: The stamina consumption factor for this shield when blocking melee attack.\n\nStamina cost is calculated as:\nStamina cost = Damage × Armor penetration (%) × Stamina cost factor (melee) -->
+  <Ancot_PhysicalShieldStaminaCost_Melee.description>使用这面盾牌进行防御，格挡一次近战攻击时所消耗架势的乘数。\n架势的消耗计算公式为：\n\n架势值消耗 = 攻击的伤害量 x 攻击的护甲穿透(%) x 架势值消耗乘数（近战）\n\n超过架势消耗阈值则按照阈值消耗计算。</Ancot_PhysicalShieldStaminaCost_Melee.description>
+  
+  <!-- EN: Stamina cost factor (ranged) -->
+  <Ancot_PhysicalShieldStaminaCost_Ranged.label>架势消耗率（远程）</Ancot_PhysicalShieldStaminaCost_Ranged.label>
+  <!-- EN: The stamina consumption factor for this shield when blocking ranged attack.\n\nStamina cost is calculated as:\nStamina cost = Damage × Armor penetration (%) × Stamina cost factor (ranged) -->
+  <Ancot_PhysicalShieldStaminaCost_Ranged.description>使用这面盾牌进行防御，格挡一次远程攻击时所消耗架势的乘数。\n架势的消耗计算公式为：\n\n架势值消耗 = 攻击的伤害量 x 攻击的护甲穿透(%) x 架势值消耗乘数（远程）\n\n超过架势消耗阈值则按照阈值消耗计算。</Ancot_PhysicalShieldStaminaCost_Ranged.description>
+  
+  <!-- EN: Stamina cost thershold -->
+  <Ancot_PhysicalShieldStaminaCostThershold.label>架势消耗阈值百分比</Ancot_PhysicalShieldStaminaCostThershold.label>
+  <!-- EN: When using this shield to block, the maximum percentage of stamina that can be consumed by a single attack. -->
+  <Ancot_PhysicalShieldStaminaCostThershold.description>使用这面盾牌进行防御，格挡单次攻击时消耗的最大架势值百分比。</Ancot_PhysicalShieldStaminaCostThershold.description>
+  
+  <!-- EN: Stamina recover rate -->
+  <Ancot_PhysicalShieldStaminaRecoverRate.label>架势回复速率</Ancot_PhysicalShieldStaminaRecoverRate.label>
+  <!-- EN: Rate of stamina regeneration while the shield is equipped but not actively used for defense. -->
+  <Ancot_PhysicalShieldStaminaRecoverRate.description>持有这面盾牌并且未进行防御时，架势值的回复速率。</Ancot_PhysicalShieldStaminaRecoverRate.description>
+  <!-- EN: {0}/s -->
+  <Ancot_PhysicalShieldStaminaRecoverRate.formatString>{0}/秒</Ancot_PhysicalShieldStaminaRecoverRate.formatString>
+  
+  <!-- EN: Stamina recover rate (defence) -->
+  <Ancot_PhysicalShieldStaminaRecoverRate_Holding.label>架势回复速率（持盾）</Ancot_PhysicalShieldStaminaRecoverRate_Holding.label>
+  <!-- EN: Rate of stamina regeneration while holding this shield to block. -->
+  <Ancot_PhysicalShieldStaminaRecoverRate_Holding.description>使用这面盾牌进行防御时，架势值的回复速率。</Ancot_PhysicalShieldStaminaRecoverRate_Holding.description>
+  <!-- EN: {0}/s -->
+  <Ancot_PhysicalShieldStaminaRecoverRate_Holding.formatString>{0}/秒</Ancot_PhysicalShieldStaminaRecoverRate_Holding.formatString>
+  
+  <!-- EN: Material effect multiplier -->
+  <Ancot_PhysicalShieldStuffEffectMultiplier.label>材料系数</Ancot_PhysicalShieldStuffEffectMultiplier.label>
+  <!-- EN: The multiplier that modifies this shield's attributes based on its crafting material. -->
+  <Ancot_PhysicalShieldStuffEffectMultiplier.description>这块盾牌属性受制作材质影响产生属性偏移的乘数。</Ancot_PhysicalShieldStuffEffectMultiplier.description>
+  
+</LanguageData>

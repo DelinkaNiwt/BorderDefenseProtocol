@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Type-CX Missile launcher -->
+  <CMC_Gun_SAML.label>FK-60防空导弹发射架</CMC_Gun_SAML.label>
+  <!-- EN: A self-loading missile launcher designed to attach to a turret. -->
+  <CMC_Gun_SAML.description>安装在FLS-03「玄蜂」要地防空系统上的发射架，需要人工装填弹药</CMC_Gun_SAML.description>
+  <!-- EN: Type-CX Missile launcher -->
+  <CMC_Gun_SAML.verbs.Verb_Shoot.label>FK-X防空导弹发射系统</CMC_Gun_SAML.verbs.Verb_Shoot.label>
+  
+  <!-- EN: HJ-53 -->
+  <CMC_SAM_Proj.label>FK-60短程防空导弹</CMC_SAM_Proj.label>
+  
+  <!-- EN: SAM turret -->
+  <CMC_SAML.label>FLS-03「玄蜂」要地防空系统</CMC_SAML.label>
+  <!-- EN: . -->
+  <CMC_SAML.description>一款采用26联装FK-60发射单元的短程定点防空系统。依赖外部防空雷达进行目标分配与火控引导，单发导弹对高速目标的迎头拦截率约为35%。其特色在于采用高过载矢量导弹，对实施高机动变轨的飞行器有良好拦截效果。但系统再装填时间较长，且火力通道有限，无法有效抵抗饱和攻击。</CMC_SAML.description>
+  <!-- EN: Ammo -->
+  <CMC_SAML.comps.CompRefuelable.fuelGizmoLabel>防空导弹</CMC_SAML.comps.CompRefuelable.fuelGizmoLabel>
+  <!-- EN: Shots until barrel change -->
+  <CMC_SAML.comps.CompRefuelable.fuelLabel>防空导弹在{0}次射击后耗尽。</CMC_SAML.comps.CompRefuelable.fuelLabel>
+  <!-- EN: Needs missile -->
+  <CMC_SAML.comps.CompRefuelable.outOfFuelMessage>需要装填弹药</CMC_SAML.comps.CompRefuelable.outOfFuelMessage>
+  
+</LanguageData>

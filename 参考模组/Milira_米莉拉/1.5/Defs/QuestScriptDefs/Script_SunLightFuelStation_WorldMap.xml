@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 熔盐燃料站 -->
+  <QuestScriptDef>
+    <defName>Milira_SunLightFuelStation_WorldMap</defName>
+    <rootSelectionWeight>0.8</rootSelectionWeight>
+    <rootMinProgressScore>10</rootMinProgressScore>
+    <minRefireDays>45</minRefireDays>
+    <autoAccept>true</autoAccept>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->Molten-salt Energy Station</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->We’ve observed a molten-salt energy station, a huge, integrated energy facility utilized for transferring luminous energy into solar fuel as well as generating electricity. It’s important energy source for Milira.\n\n A Milira cluster is on guard of this station.\n\n This mission will elevate the Milian threat assessment.</li>
+      </rulesStrings>
+    </questDescriptionRules>
+    <questAvailableLetterDef>PositiveEvent</questAvailableLetterDef>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+
+        <!-- 判断米莉拉派系存在且敌对 -->
+        <li Class="AncotLibrary.QuestNode_IsFactionRelationKind">
+          <factionRelationKind>Hostile</factionRelationKind>
+          <invert>false</invert>
+          <factionDefs>
+            <li>Milira_Faction</li>
+          </factionDefs>
+        </li>
+
+        <li Class="QuestNode_SubScript">
+          <def>Util_RandomizePointsChallengeRating</def>
+          <parms>
+            <selectionWeightOneStar>0.15</selectionWeightOneStar>
+            <selectionWeightTwoStar>0.4</selectionWeightTwoStar>
+            <selectionWeightThreeStar>0.3</selectionWeightThreeStar>
+          </parms>
+        </li>
+
+        <li Class="QuestNode_EvaluateSimpleCurve">
+          <value>$points</value>
+          <storeAs>points</storeAs>
+          <curve>
+            <points>
+              <li>   35,  4000</li>
+              <li> 4000,  4000</li>
+              <li> 5000,  5000</li>
+              <li>10000, 10000</li>
+            </points>
+          </curve>
+        </li>
+
+        <li Class="QuestNode_GetMap" />
+
+        <li Class="QuestNode_GetSiteTile">
+          <storeAs>siteTile</storeAs>
+          <preferCloserTiles>true</preferCloserTiles>
+        </li>
+
+        <li Class="QuestNode_QuestUnique">
+          <tag>Milira_Cluster_WorldMap</tag>
+          <faction>$askerFaction</faction>
+        </li>
+
+        <li Class="QuestNode_ViolentQuestsAllowed">
+          <node Class="QuestNode_Set">
+            <name>siteThreatChance</name>
+            <value>1</value>
+          </node>
+          <elseNode Class="QuestNode_Set">
+            <name>siteThreatChance</name>
+            <value>0</value>
+          </elseNode>          
+        </li>
+
+        <!-- 设定地点派系 -->
+        <li Class="QuestNode_Set">
+          <name>siteFaction</name>
+          <value>Milira_Faction</value>
+        </li>
+
+        <li Class="QuestNode_Set">
+          <name>sitePartsTags</name>
+          <value>
+            <li>
+              <tag>Milira_SunLightFuelStation</tag>
+              <chance>$siteThreatChance</chance>
+            </li>
+          </value>
+        </li>
+
+        <li Class="QuestNode_GetSitePartDefsByTagsAndFaction">
+          <storeAs>sitePartDefs</storeAs>
+          <!-- <storeFactionAs>siteFaction</storeFactionAs> -->
+          <sitePartsTags>$sitePartsTags</sitePartsTags>
+        </li>
+
+        <li Class="QuestNode_GetDefaultSitePartsParams">
+          <tile>$siteTile</tile>
+          <faction>$siteFaction</faction>
+          <sitePartDefs>$sitePartDefs</sitePartDefs>
+          <storeSitePartsParamsAs>sitePartsParams</storeSitePartsParamsAs>
+        </li>
+
+        <li Class="QuestNode_SubScript">
+          <def>Util_GenerateSite</def>
+          <parms>
+            <hiddenSitePartsPossible>true</hiddenSitePartsPossible>
+          </parms>
+        </li>
+        
+        <li Class="QuestNode_SpawnWorldObjects">
+          <worldObjects>$site</worldObjects>
+          <defsToExcludeFromHyperlinks>Human</defsToExcludeFromHyperlinks>
+        </li>
+
+        <li Class="QuestNode_WorldObjectTimeout">
+          <worldObject>$site</worldObject>
+          <isQuestTimeout>true</isQuestTimeout>
+          <delayTicks>$(randInt(10,30)*60000)</delayTicks>
+          <inSignalDisable>site.MapGenerated</inSignalDisable>
+          <node Class="QuestNode_End">
+            <outcome>Fail</outcome>
+            <sendStandardLetter>true</sendStandardLetter>
+          </node>
+        </li>
+
+        <li Class="QuestNode_NoWorldObject">
+          <worldObject>$site</worldObject>
+          <node Class="QuestNode_End" />
+        </li>
+
+        <!-- 增加米莉拉威胁点 -->
+        <li Class="Milira.QuestNode_IncreaseMiliraThreatPoint">
+          <inSignal>site.MapGenerated</inSignal>
+          <miliraThreatPoint>20</miliraThreatPoint>
+        </li>
+
+      </nodes>
+    </root>
+  </QuestScriptDef>
+</Defs>

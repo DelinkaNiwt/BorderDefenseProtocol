@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: drop pod -->
+  <Milira_ActiveDropPod.label>空投舱</Milira_ActiveDropPod.label>
+  
+  <!-- EN: supporting artillery fire -->
+  <Milira_ChurchBombardmentI.label>支援炮击</Milira_ChurchBombardmentI.label>
+  
+  <!-- EN: supporting artillery fire -->
+  <Milira_ChurchBombardmentII.label>支援炮击</Milira_ChurchBombardmentII.label>
+  
+  <!-- EN: supporting artillery fire -->
+  <Milira_ChurchBombardmentIII.label>支援炮击</Milira_ChurchBombardmentIII.label>
+  
+  <!-- EN: Milira Cluster Module (in descent) -->
+  <Milira_CorePartIncoming.label>米莉拉集群组件（下落中）</Milira_CorePartIncoming.label>
+  
+  <!-- EN: Milira fold jump (in descent) -->
+  <Milira_DropPodIncoming.label>米莉拉折跃（下落中）</Milira_DropPodIncoming.label>
+  
+</LanguageData>

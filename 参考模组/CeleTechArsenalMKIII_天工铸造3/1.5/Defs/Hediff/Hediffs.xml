@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+    <HediffDef ParentName="DiseaseBase">
+    <defName>SMAnesthetic</defName>
+    <label>mechanites anesthesia</label>
+    <description>Celestial-tech mechanites injected to this creature's blood cause unconscious.</description>
+    <isBad>true</isBad>
+    <initialSeverity>1</initialSeverity>
+    <maxSeverity>1</maxSeverity>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>45000~45000</disappearsAfterTicks>
+      </li>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-5</severityPerDay>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <label>sedated</label>
+        <painFactor>0</painFactor>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <setMax>0.01</setMax>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <minSeverity>0.98</minSeverity>
+        <label>sedative kicking in</label>
+        <painFactor>0</painFactor>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <setMax>0.7</setMax>
+          </li>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>-0.2</offset>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+  
+  <HediffDef ParentName="DiseaseBase">
+    <defName>SMLethal</defName>
+    <label>fatal mechanites injection</label>
+    <description>Celestial-tech mechanites overdose caused a fatal result.</description>
+    <isBad>true</isBad>
+    <initialSeverity>1</initialSeverity>
+    <maxSeverity>1</maxSeverity>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>12000~12000</disappearsAfterTicks>
+      </li>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-5</severityPerDay>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <label>mechanites overdose</label>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <setMax>0</setMax>
+          </li>
+        </capMods>
+      </li>
+	  <li>
+        <minSeverity>0.99</minSeverity>
+        <label>neural system breaking down</label>
+        <painFactor>0</painFactor>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <setMax>0.5</setMax>
+          </li>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>-0.3</offset>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+ 
+  <HediffDef>
+   <hediffClass>HediffWithComps</hediffClass>
+    <defName>weakening</defName>
+    <label>weakened</label>
+    <labelNoun>weakened</labelNoun>
+	<initialSeverity>0.1</initialSeverity>
+    <maxSeverity>1</maxSeverity>
+    <description>Weakened Intermolecular forces causes this pawn to take more damage.</description>
+	  <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>6000~6000</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+    </comps>
+	<stages>
+      <li>
+		<statOffsets>
+			<IncomingDamageFactor>0.1</IncomingDamageFactor>
+		</statOffsets>
+      </li>
+	  <li>
+        <minSeverity>0.25</minSeverity>
+		<statOffsets>
+			<IncomingDamageFactor>0.4</IncomingDamageFactor>
+		</statOffsets>
+      </li>
+	   <li>
+        <minSeverity>0.5</minSeverity>
+		<statOffsets>
+			<IncomingDamageFactor>0.8</IncomingDamageFactor>
+		</statOffsets>
+      </li>
+	  <li>
+        <minSeverity>0.75</minSeverity>
+		<statOffsets>
+			<IncomingDamageFactor>1.6</IncomingDamageFactor>
+		</statOffsets>
+      </li>
+	  <li>
+        <minSeverity>0.95</minSeverity>
+		<statOffsets>
+			<IncomingDamageFactor>3.2</IncomingDamageFactor>
+		</statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+  
+  <HediffDef>
+   <hediffClass>HediffWithComps</hediffClass>
+    <defName>CMC_HealingSE</defName>
+    <label>healing side effect</label>
+	<initialSeverity>1</initialSeverity>
+    <maxSeverity>1</maxSeverity>
+    <description>mechanites just healed the user and caused minor side effects.</description>
+	<comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>900~900</disappearsAfterTicks>
+        <showRemainingTime>false</showRemainingTime>
+      </li>
+    </comps>
+	<stages>
+      <li>
+		<capMods>
+		  <li>
+            <capacity>Consciousness</capacity>
+            <setMax>0.8</setMax>
+          </li>
+          <li>
+            <capacity>Manipulation</capacity>
+            <offset>-0.2</offset>
+          </li>
+          <li>
+            <capacity>Breathing</capacity>
+            <offset>-0.35</offset>
+          </li>
+		  <li>
+            <capacity>Sight</capacity>
+            <offset>-0.65</offset>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+  
+  <HediffDef>
+   <hediffClass>HediffWithComps</hediffClass>
+    <defName>PlasmaBurn</defName>
+    <label>plasma burn</label>
+	<initialSeverity>0.1</initialSeverity>
+    <maxSeverity>1</maxSeverity>
+    <description>Ionized molecules cause body to catch fire.</description>
+	<comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>600~600</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+	  <li Class="TOT_DLL_test.HediffCompProperties_ConstancyDamage">
+		<DamageTickMax>60</DamageTickMax>
+		<DamageNum>4</DamageNum>
+		<DamageArmorPenetration>1.2</DamageArmorPenetration>
+		<DamageDef>Burn</DamageDef>
+      </li>
+	  <li Class="HediffCompProperties_DisappearsOnDeath"/>
+    </comps>
+  </HediffDef>
+  
+  <HediffDef>
+   <hediffClass>HediffWithComps</hediffClass>
+    <defName>FrostBite</defName>
+    <label>frost bite</label>
+	<initialSeverity>0.1</initialSeverity>
+    <maxSeverity>1</maxSeverity>
+    <description>cooled to absolute zero.</description>
+	<comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>1200~1200</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+	  <li Class="TOT_DLL_test.HediffCompProperties_ConstancyDamage">
+		<DamageTickMax>60</DamageTickMax>
+		<DamageNum>24</DamageNum>
+		<DamageArmorPenetration></DamageArmorPenetration>
+		<DamageDef>Bomb</DamageDef>
+      </li>
+	  <li Class="HediffCompProperties_DisappearsOnDeath"/>
+    </comps>
+  </HediffDef>
+  
+   <HediffDef>
+   <hediffClass>HediffWithComps</hediffClass>
+    <defName>Degradation</defName>
+    <label>radiation degradation</label>
+	<initialSeverity>1</initialSeverity>
+    <maxSeverity>1</maxSeverity>
+    <description>cells degrades due to radiation.</description>
+	<comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>300~300</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+	  <li Class="MYDE_CMC_Dll.HediffCompProperties_ConstancyDamage">
+		<DamageTickMax>60</DamageTickMax>
+		<DamageNum>6</DamageNum>
+		<DamageArmorPenetration></DamageArmorPenetration>
+		<DamageDef>Radiation</DamageDef>
+      </li>
+    </comps>
+  </HediffDef>
+  
+   <HediffDef ParentName="BurnBase">
+    <defName>DD</defName>
+    <label>radiation degardation</label>
+    <description>Degardation caused by neutron radiation.</description>
+    <injuryProps>
+      <destroyedLabel>Degraded</destroyedLabel>
+      <destroyedOutLabel>Degraded</destroyedOutLabel>
+    </injuryProps>
+  </HediffDef>
+
+</Defs>

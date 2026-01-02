@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <RulePackDef>
+    <defName>Milira_LeaderTitleMaker_Church</defName>
+    <rulePack>
+      <rulesStrings>
+        <li>r_leaderTitle->Pontiff</li>
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+
+  <RulePackDef>
+    <defName>Milira_LeaderTitleMaker_Milira</defName>
+    <rulePack>
+      <rulesStrings>
+        <li>r_leaderTitle->President</li>
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+
+
+</Defs>

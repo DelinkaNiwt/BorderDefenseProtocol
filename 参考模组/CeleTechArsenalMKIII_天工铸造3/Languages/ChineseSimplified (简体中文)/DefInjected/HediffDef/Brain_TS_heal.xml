@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: <color=#1DD5EE><i>TS-D4 defense chip</i></color> -->
+  <TianShu.label>【天枢】防御芯片</TianShu.label>
+  <!-- EN: A brain chip which can greatly reduce incoming damage. /n/n【Skill:Invincibility】Form a temporal nano-shield by overcharging the machinates and absorb damage. -->
+  <TianShu.description>TODO</TianShu.description>
+  <!-- EN: a TS-D4 defense chip -->
+  <TianShu.labelNoun>TODO</TianShu.labelNoun>
+  
+</LanguageData>

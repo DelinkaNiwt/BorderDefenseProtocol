@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: accelerated magnet projectile(antimatter warhead with EMP cells) -->
+  <Bullet_CMCS_EMC.label>电磁炮弹</Bullet_CMCS_EMC.label>
+  
+  <!-- EN: ship EML -->
+  <CMCS_EMcannon_M.label>HPJ-57舰载电磁炮</CMCS_EMcannon_M.label>
+  <!-- EN: . -->
+  <CMCS_EMcannon_M.description>舰载电磁炮，可以越墙射击。</CMCS_EMcannon_M.description>
+  
+  <!-- UNUSED -->
+  <CMCS_EMcannon_M.comps.CompRefuelable.fuelGizmoLabel>炮管耐久</CMCS_EMcannon_M.comps.CompRefuelable.fuelGizmoLabel>
+  <CMCS_EMcannon_M.comps.CompRefuelable.fuelLabel>更换炮管前的剩余射击数量</CMCS_EMcannon_M.comps.CompRefuelable.fuelLabel>
+  <CMCS_EMcannon_M.comps.CompRefuelable.outOfFuelMessage>需要更换炮管</CMCS_EMcannon_M.comps.CompRefuelable.outOfFuelMessage>
+  
+  <!-- EN: ship EM-cannon -->
+  <Gun_CMCS_EMCannon.label>舰载电磁炮</Gun_CMCS_EMCannon.label>
+  <!-- EN: . -->
+  <Gun_CMCS_EMCannon.description>舰载电磁炮</Gun_CMCS_EMCannon.description>
+  <!-- EN: ship EM-cannon -->
+  <Gun_CMCS_EMCannon.verbs.Verb_ShootCE.label>TODO</Gun_CMCS_EMCannon.verbs.Verb_ShootCE.label>
+  
+  <!-- UNUSED -->
+  <Gun_CMCS_EMCannon.verbs.Verb_Shoot.label>舰载电磁炮</Gun_CMCS_EMCannon.verbs.Verb_Shoot.label>
+  
+</LanguageData>

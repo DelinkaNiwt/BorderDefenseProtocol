@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Artificial Wing -->
+  <Milira_ArtificialWing_Installed.label>羽仿翼</Milira_ArtificialWing_Installed.label>
+  <!-- EN: Installed artificial wings, not flexible prosthetics that’s barely able to manage flight. -->
+  <Milira_ArtificialWing_Installed.description>已安装的羽仿翼。不太灵活的假肢，也能勉强完成飞行。</Milira_ArtificialWing_Installed.description>
+  <!-- EN: An artificial wing -->
+  <Milira_ArtificialWing_Installed.labelNoun>一片羽仿翼</Milira_ArtificialWing_Installed.labelNoun>
+  
+  <!-- EN: Bionic Wing -->
+  <Milira_BionicWing_Installed.label>仿生翼</Milira_BionicWing_Installed.label>
+  <!-- EN: Installed bionic wing. -->
+  <Milira_BionicWing_Installed.description>已安装的仿生翼。</Milira_BionicWing_Installed.description>
+  <!-- EN: A bionic wing -->
+  <Milira_BionicWing_Installed.labelNoun>一片仿生翼</Milira_BionicWing_Installed.labelNoun>
+  
+</LanguageData>

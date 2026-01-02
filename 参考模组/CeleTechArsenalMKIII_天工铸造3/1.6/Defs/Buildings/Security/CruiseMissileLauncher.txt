@@ -1,0 +1,153 @@
+<Defs>
+<ThingDef ParentName="BuildingBase">
+    <defName>CMC_Turret_AutoPlasmaMortar</defName>
+    <label>SwarmRocketL</label>
+    <description>A self-loading, automatic quadruple-cruise missile vertical launcher. It can hit its locked targets at any distance, over walls.</description>
+    <thingClass>TOT_DLL_test.Building_CMCTurretMissile</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Things/Buildings/CMC_MLbase</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(5.7,5.7)</drawSize>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <stealable>false</stealable>
+	<rotatable>true</rotatable>
+    <size>(3,3)</size>
+    <killedLeavings>
+      <ChunkSlagSteel>1</ChunkSlagSteel>
+      <Plasteel>10</Plasteel>
+    </killedLeavings>
+	<passability>PassThroughOnly</passability>
+    <pathCost>0</pathCost>
+    <fillPercent>0.4</fillPercent>
+    <hasTooltip>false</hasTooltip>
+    <costList>
+	  <Steel>300</Steel>
+      <Plasteel>700</Plasteel>
+	  <ComponentSpacer>10</ComponentSpacer>
+	  <Silver>100</Silver>
+	  <Gold>20</Gold>
+	  <Uranium>100</Uranium>
+    </costList>
+	<researchPrerequisites>
+      <li>CMCShield</li>
+    </researchPrerequisites>
+    <tickerType>Normal</tickerType>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <statBases>
+      <MaxHitPoints>6000</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <Mass>3000</Mass>
+      <ShootingAccuracyTurret>0.8</ShootingAccuracyTurret>
+      <Beauty>200</Beauty>
+	  <WorkToBuild>16000</WorkToBuild>
+    </statBases>
+    <damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+	<designationCategory>CMC_DefensenProduction</designationCategory>
+    <constructionSkillPrerequisite>13</constructionSkillPrerequisite>
+    <building>
+      <turretGunDef>Artillery_CMCPlasmaMortar</turretGunDef>
+      <turretTopDrawSize>5.8</turretTopDrawSize>
+	  <turretBurstCooldownTime>26</turretBurstCooldownTime>
+    </building>
+    <uiIconPath>Things/Buildings/CMC_MortarUI</uiIconPath>
+	<comps>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>9.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+      </li>
+	  <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>17500</basePowerConsumption>
+      </li>
+	  <li Class="CompProperties_Refuelable">
+        <fuelLabel>Shots until barrel change</fuelLabel>
+        <fuelGizmoLabel>Ammo</fuelGizmoLabel>
+        <outOfFuelMessage>Needs missile</outOfFuelMessage>
+        <fuelFilter><thingDefs><li>Steel</li></thingDefs></fuelFilter>
+        <fuelCapacity>44</fuelCapacity>
+        <fuelMultiplier>0.05</fuelMultiplier>
+        <initialFuelPercent>1</initialFuelPercent>
+        <autoRefuelPercent>0.5</autoRefuelPercent>
+        <showFuelGizmo>true</showFuelGizmo>
+        <minimumFueledThreshold>1</minimumFueledThreshold>
+        <factorByDifficulty>false</factorByDifficulty>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelIconPath>UI/Overlays/Barrel</fuelIconPath>
+      </li>
+    </comps>
+	<modExtensions>
+      <li Class="TOT_DLL_test.TurretExtension_CMC">
+        <rotationSpeed>0.6</rotationSpeed>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseArtilleryWeapon">
+    <defName>Artillery_CMCPlasmaMortar</defName>
+    <label>cruise missile launcher</label>
+    <graphicData>
+      <texPath>Things/Buildings/CMC_duelplasmasword_top</texPath>
+    </graphicData>
+    <uiIconScale>1</uiIconScale>
+	<weaponTags  Inherit="False">
+      <li>TurretGun</li>
+	  <li>Artillery</li>
+    </weaponTags>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>Projectile_PlasmaPulse</defaultProjectile>
+        <ai_AvoidFriendlyFireRadius>10</ai_AvoidFriendlyFireRadius>
+        <warmupTime>0</warmupTime>
+		<burstShotCount>11</burstShotCount>
+			<ticksBetweenBurstShots>60</ticksBetweenBurstShots>
+        <minRange>19.9</minRange>
+        <range>500</range>
+		<forcedMissRadius>4.9</forcedMissRadius>
+        <soundCast>Mortar_LaunchA</soundCast>
+        <soundCastTail>GunTail_Light</soundCastTail>
+        <muzzleFlashScale>16</muzzleFlashScale>
+        <requireLineOfSight>false</requireLineOfSight>
+		<consumeFuelPerShot>1</consumeFuelPerShot>
+		<targetParams>
+			<canTargetLocations>true</canTargetLocations>
+			<canTargetPawns>true</canTargetPawns>
+		</targetParams>
+      </li>
+    </verbs>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Projectile_PlasmaPulse</defName>
+    <label>cruise missile</label>
+    <graphicData>
+      <texPath>Things/Projectile/AKF_Proj</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <shaderType>TransparentPostLight</shaderType>
+	  <drawSize>(1, 1.8)</drawSize>
+    </graphicData>
+	<thingClass>TOT_DLL_test.Projectile_CruiseProjSTarget</thingClass>
+    <projectile>
+      <damageDef>PlasmaBomb</damageDef>
+      <speed>19</speed>
+      <screenShakeFactor>0</screenShakeFactor>
+	  <flyOverhead>true</flyOverhead>
+	  <damageAmountBase>80</damageAmountBase>
+	  <explosionEffect>CMC_Bomb</explosionEffect>
+	  <explosionRadius>3.2</explosionRadius>
+      <stoppingPower>1.5</stoppingPower>
+      <armorPenetrationBase>1.4</armorPenetrationBase>
+	  <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+    </projectile>
+  </ThingDef>
+</Defs>

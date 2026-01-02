@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <DamageDef>
+    <defName>Milira_PlasmaBomb</defName>
+    <label>Plasma Blast</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>true</externalViolence>
+    <isExplosive>true</isExplosive>
+    <deathMessage>{0} has died in an explosion.</deathMessage>
+    <hediff>Shredded</hediff>
+    <hediffSolid>Crack</hediffSolid>
+    <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+    <impactSoundType>Blunt</impactSoundType>
+    <armorCategory>Sharp</armorCategory>
+    <defaultDamage>12</defaultDamage>
+    <minDamageToFragment>4</minDamageToFragment>
+    <defaultStoppingPower>1.8</defaultStoppingPower>
+    <defaultArmorPenetration>0.15</defaultArmorPenetration>
+    <buildingDamageFactorImpassable>1.2</buildingDamageFactorImpassable>
+    <buildingDamageFactorPassable>1.2</buildingDamageFactorPassable>
+    <plantDamageFactor>1.2</plantDamageFactor>
+    <corpseDamageFactor>0.5</corpseDamageFactor>
+    <explosionAffectOutsidePartsOnly>false</explosionAffectOutsidePartsOnly>
+    <explosionHeatEnergyPerCell>0</explosionHeatEnergyPerCell>
+    <explosionCellFleck>BlastDry</explosionCellFleck>
+    <explosionColorCenter>(180, 225, 229)</explosionColorCenter>
+    <explosionColorEdge>(200, 225, 229)</explosionColorEdge>
+    <soundExplosion>Explosion_EMP</soundExplosion>
+    <combatLogRules>Damage_Bomb</combatLogRules>
+    <additionalHediffs>
+      <li>
+        <hediff>Milira_PlasmaMeltdown</hediff>
+        <victimSeverityScalingByInvBodySize>true</victimSeverityScalingByInvBodySize>
+        <severityPerDamageDealt>0.005</severityPerDamageDealt>
+      </li>
+    </additionalHediffs>
+  </DamageDef>
+
+  <DamageDef>
+    <defName>Milira_PlasmaBombBig</defName>
+    <label>Plasma Blast</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>true</externalViolence>
+    <isExplosive>true</isExplosive>
+    <deathMessage>{0} has died in an explosion.</deathMessage>
+    <hediff>Shredded</hediff>
+    <hediffSolid>Crack</hediffSolid>
+    <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+    <impactSoundType>Blunt</impactSoundType>
+    <armorCategory>Sharp</armorCategory>
+    <defaultDamage>12</defaultDamage>
+    <minDamageToFragment>4</minDamageToFragment>
+    <defaultStoppingPower>1.8</defaultStoppingPower>
+    <defaultArmorPenetration>0.15</defaultArmorPenetration>
+    <buildingDamageFactorImpassable>1.2</buildingDamageFactorImpassable>
+    <buildingDamageFactorPassable>1.2</buildingDamageFactorPassable>
+    <plantDamageFactor>1.2</plantDamageFactor>
+    <corpseDamageFactor>0.5</corpseDamageFactor>
+    <explosionAffectOutsidePartsOnly>false</explosionAffectOutsidePartsOnly>
+    <explosionHeatEnergyPerCell>0</explosionHeatEnergyPerCell>
+    <explosionCellFleck>BlastDry</explosionCellFleck>
+    <explosionColorCenter>(180, 225, 229)</explosionColorCenter>
+    <explosionColorEdge>(200, 225, 229)</explosionColorEdge>
+    <soundExplosion>Milira_Explosion_Plasma</soundExplosion>
+    <combatLogRules>Damage_Bomb</combatLogRules>
+    <additionalHediffs>
+      <li>
+        <hediff>Milira_PlasmaMeltdown</hediff>
+        <victimSeverityScalingByInvBodySize>true</victimSeverityScalingByInvBodySize>
+        <severityPerDamageDealt>0.008</severityPerDamageDealt>
+      </li>
+    </additionalHediffs>
+  </DamageDef>
+
+  <DamageDef>
+    <defName>Milira_PlasmaBullet</defName>
+    <label>Plasma Beam</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>true</externalViolence>
+    <deathMessage>{0} has been shot to death.</deathMessage>
+    <hediff>Gunshot</hediff>
+    <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+    <impactSoundType>Bullet</impactSoundType>
+    <armorCategory>Sharp</armorCategory>
+    <overkillPctToDestroyPart>0~0.7</overkillPctToDestroyPart>
+    <isRanged>true</isRanged>
+    <makesAnimalsFlee>true</makesAnimalsFlee>
+    <additionalHediffs>
+      <li>
+        <hediff>Milira_PlasmaMeltdown</hediff>
+        <victimSeverityScalingByInvBodySize>true</victimSeverityScalingByInvBodySize>
+        <severityPerDamageDealt>0.003</severityPerDamageDealt>
+      </li>
+    </additionalHediffs>
+  </DamageDef>
+
+
+  <!-- 叠易伤用 -->
+  <DamageDef>
+    <defName>Milira_PlasmaBullet_Vulnerable</defName>
+    <label>Plasma Beam</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>true</externalViolence>
+    <deathMessage>{0} has been shot to death.</deathMessage>
+    <hediff>Gunshot</hediff>
+    <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+    <impactSoundType>Bullet</impactSoundType>
+    <armorCategory>Sharp</armorCategory>
+    <overkillPctToDestroyPart>0~0.7</overkillPctToDestroyPart>
+    <isRanged>true</isRanged>
+    <makesAnimalsFlee>true</makesAnimalsFlee>
+    <additionalHediffs>
+      <li>
+        <hediff>Milira_PlasmaVulnerable</hediff>
+        <victimSeverityScalingByInvBodySize>true</victimSeverityScalingByInvBodySize>
+        <severityPerDamageDealt>1.0</severityPerDamageDealt>
+      </li>
+    </additionalHediffs>
+  </DamageDef>
+
+
+  <DamageDef>
+    <defName>Milira_PlasmaBomb_TwoHandSword</defName>
+    <label>Plasma Blast</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>true</externalViolence>
+    <isExplosive>true</isExplosive>
+    <deathMessage>{0} has died in an explosion.</deathMessage>
+    <hediff>Shredded</hediff>
+    <hediffSolid>Crack</hediffSolid>
+    <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+    <impactSoundType>Blunt</impactSoundType>
+    <armorCategory>Heat</armorCategory>
+    <defaultDamage>60</defaultDamage>
+    <minDamageToFragment>8</minDamageToFragment>
+    <defaultStoppingPower>12</defaultStoppingPower>
+    <defaultArmorPenetration>1.2</defaultArmorPenetration>
+    <buildingDamageFactorImpassable>30</buildingDamageFactorImpassable>
+    <buildingDamageFactorPassable>30</buildingDamageFactorPassable>
+    <plantDamageFactor>10</plantDamageFactor>
+    <corpseDamageFactor>5</corpseDamageFactor>
+    <explosionAffectOutsidePartsOnly>false</explosionAffectOutsidePartsOnly>
+    <explosionHeatEnergyPerCell>0</explosionHeatEnergyPerCell>
+    <explosionCellFleck>BlastDry</explosionCellFleck>
+    <explosionColorCenter>(180, 225, 229)</explosionColorCenter>
+    <explosionColorEdge>(200, 225, 229)</explosionColorEdge>
+    <soundExplosion>Explosion_EMP</soundExplosion>
+    <combatLogRules>Damage_Bomb</combatLogRules>
+    <additionalHediffs>
+      <li>
+        <hediff>Milira_PlasmaMeltdown</hediff>
+        <victimSeverityScalingByInvBodySize>true</victimSeverityScalingByInvBodySize>
+        <severityPerDamageDealt>0.02</severityPerDamageDealt>
+      </li>
+    </additionalHediffs>
+  </DamageDef>
+
+
+
+  <DamageDef>
+    <defName>Milira_RailGunBullet</defName>
+    <label>Railgun Bullet</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>true</externalViolence>
+    <deathMessage>{0} has been shot to death.</deathMessage>
+    <hediff>Gunshot</hediff>
+    <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+    <impactSoundType>Bullet</impactSoundType>
+    <armorCategory>Sharp</armorCategory>
+    <overkillPctToDestroyPart>0~0.7</overkillPctToDestroyPart>
+    <buildingDamageFactorImpassable>2.0</buildingDamageFactorImpassable>
+    <buildingDamageFactorPassable>4.0</buildingDamageFactorPassable>
+    <isRanged>true</isRanged>
+    <makesAnimalsFlee>true</makesAnimalsFlee>
+  </DamageDef>
+
+  <DamageDef>
+    <defName>Milira_KineticBomb</defName>
+    <label>Kinetic Blast</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>true</externalViolence>
+    <isExplosive>true</isExplosive>
+    <deathMessage>{0} has died in an explosion.</deathMessage>
+    <hediff>Shredded</hediff>
+    <hediffSolid>Crack</hediffSolid>
+    <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+    <impactSoundType>Blunt</impactSoundType>
+    <armorCategory>Sharp</armorCategory>
+    <defaultDamage>12</defaultDamage>
+    <minDamageToFragment>999</minDamageToFragment>
+    <defaultStoppingPower>1.8</defaultStoppingPower>
+    <defaultArmorPenetration>0.15</defaultArmorPenetration>
+    <buildingDamageFactorImpassable>2.0</buildingDamageFactorImpassable>
+    <buildingDamageFactorPassable>4.0</buildingDamageFactorPassable>
+    <plantDamageFactor>1.2</plantDamageFactor>
+    <corpseDamageFactor>0.5</corpseDamageFactor>
+    <explosionAffectOutsidePartsOnly>false</explosionAffectOutsidePartsOnly>
+    <explosionHeatEnergyPerCell>0</explosionHeatEnergyPerCell>
+    <explosionCellFleck>BlastDry</explosionCellFleck>
+    <soundExplosion>Explosion_Stun</soundExplosion>
+    <combatLogRules>Damage_Bomb</combatLogRules>
+  </DamageDef>
+
+</Defs>

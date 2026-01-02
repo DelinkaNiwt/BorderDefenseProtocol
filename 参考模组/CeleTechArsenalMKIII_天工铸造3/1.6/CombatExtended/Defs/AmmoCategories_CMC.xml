@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<CombatExtended.AmmoCategoryDef>
+		<defName>CMC_EMBullet_AP</defName>
+		<label>EM-rail(AP/EMP)</label>
+		<description>Electromagnetic rail-launched armor-piercing round, capable of both hard and soft kill. Penetrates heavy armor and releases EMP to disable electronics.</description>
+	</CombatExtended.AmmoCategoryDef>
+	
+	<CombatExtended.AmmoCategoryDef>
+		<defName>CMC_EMBullet_Ion</defName>
+		<label>EM-rail(Ion)</label>
+		<description>Electromagnetic rail-launched ion round, disrupts target integrity and electronics through ionization, highly effective against shields.</description>
+	</CombatExtended.AmmoCategoryDef>
+	
+	<CombatExtended.AmmoCategoryDef>
+		<defName>CMC_EMBullet_R</defName>
+		<label>EM-rail(standard)</label>
+		<description>Standard Electromagnetic rail-launched round, able to penetrate heavy armor.</description>
+	</CombatExtended.AmmoCategoryDef>
+	
+	<CombatExtended.AmmoCategoryDef>
+		<defName>CMC_HomingBullet_AP</defName>
+		<label>homing-AP/EMP</label>
+		<description>Homing armor-piercing round with trajectory adjustment capability for precision hits, combined with EMP effect for dual damage.</description>
+	</CombatExtended.AmmoCategoryDef>
+	
+	
+	<CombatExtended.AmmoCategoryDef>
+		<defName>CMC_HomingBullet_Regular</defName>
+		<label>homing</label>
+		<description>Standard homing ammunition, locks onto and tracks targets via built-in sensors, ideal for engaging high-speed moving units.</description>
+	</CombatExtended.AmmoCategoryDef>
+	
+	<CombatExtended.AmmoCategoryDef>
+		<defName>CMC_HomingHPVBullet</defName>
+		<label>hypersonic</label>
+		<description>Hypersonic homing projectile, penetrates enemy defenses with extreme velocity, causing massive damage via kinetic energy.</description>
+	</CombatExtended.AmmoCategoryDef>
+	
+	<CombatExtended.AmmoCategoryDef>
+		<defName>CMC_HomingHPVBullet_IE</defName>
+		<label>hypersonic(inverse entropy)</label>
+		<description>Hypersonic homing projectile utilizing inverse entropy technology, self-adjusts in flight to counter precision loss from entropy, achieving near-perfect hit rate.</description>
+	</CombatExtended.AmmoCategoryDef>
+</Defs>

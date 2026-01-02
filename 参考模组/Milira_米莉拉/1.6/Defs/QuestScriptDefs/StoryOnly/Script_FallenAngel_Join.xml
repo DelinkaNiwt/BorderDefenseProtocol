@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <QuestScriptDef>
+    <defName>Milira_FallenAngel_Return</defName>
+    <autoAccept>true</autoAccept>
+    <defaultHidden>true</defaultHidden>
+    <isRootSpecial>true</isRootSpecial>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->Milira joins</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription-></li>
+      </rulesStrings>
+    </questDescriptionRules>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+
+        <!-- 判断剧情设置 -->
+        <li Class="Milira.QuestNode_ModSettingOn">
+          <modSettingSwitch>MiliraRace_ModSetting_StoryOverall</modSettingSwitch>
+        </li>
+      
+        <li Class="Milira.QuestNode_Root_FallenMiliraJoin_WalkIn" />
+
+      </nodes>
+    </root>
+  </QuestScriptDef>
+
+</Defs>

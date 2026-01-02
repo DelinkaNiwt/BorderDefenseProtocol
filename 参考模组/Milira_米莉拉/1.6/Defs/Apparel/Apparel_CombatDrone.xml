@@ -1,0 +1,1397 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThingDef Name="Milira_CombatDroneBase" ParentName="Milira_UtilityBase" Abstract="true">
+		<techLevel>Spacer</techLevel>
+		<tickerType>Normal</tickerType>
+		<recipeMaker>
+			<unfinishedThingDef>UnfinishedPack</unfinishedThingDef>
+			<recipeUsers Inherit="false">
+				<li>Milira_DroneBench</li>
+			</recipeUsers>
+			<workSkill>Crafting</workSkill>
+		</recipeMaker>
+		<graphicData>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>1.5</drawSize>
+			<drawOffset>(0,0,0)</drawOffset>
+		</graphicData>
+		<statBases>
+			<WorkToMake>30000</WorkToMake>
+			<Mass>0.2</Mass>
+			<Flammability>0.4</Flammability>
+			<EquipDelay>1.5</EquipDelay>
+		</statBases>
+		<thingCategories>
+			<li>Milira_Apparel_CombatDrone</li>
+		</thingCategories>
+		<equippedStatOffsets>
+		</equippedStatOffsets>
+		<apparel>
+			<countsAsClothingForNudity>false</countsAsClothingForNudity>
+			<careIfWornByCorpse>false</careIfWornByCorpse>
+			<careIfDamaged>false</careIfDamaged>
+			<wearPerDay>0</wearPerDay>
+			<bodyPartGroups Inherit="false">
+				<li>Shoulders</li>
+			</bodyPartGroups>
+			<layers Inherit="false">
+				<li>Belt</li>
+			</layers>
+		</apparel>
+		<tradeability>Sellable</tradeability>
+		<tradeTags>
+		</tradeTags>
+		<comps>
+		</comps>
+	</ThingDef>
+
+	<ThingDef Name="Milira_CombatDrone_Standard" ParentName="Milira_CombatDroneBase" Abstract="true">
+		<recipeMaker>
+			<researchPrerequisites Inherit="false">
+				<li>Milira_FloatUnit</li>
+			</researchPrerequisites>
+		</recipeMaker>
+		<apparel>
+			<tags>
+				<li>Milira_CombatDrone_Standard</li>
+				<li>Milian_Mechanoid_PawnII</li>
+				<li>Milian_Mechanoid_PawnIV</li>
+				<li>Milian_Mechanoid_BishopIII</li>
+			</tags>
+		</apparel>
+		<comps>
+			<li Class="Milira.CompProperties_DressMilian">
+				<useJob>UseItem</useJob>
+				<useDuration>0</useDuration>
+				<warmupMote>Mote_ResurrectAbility</warmupMote>
+			</li>
+			<li Class="Milira.CompProperties_TargetEffect_DressMilian" />
+			<li Class="Milira.CompProperties_TargetableMilian">
+				<compClass>Milira.CompTargetable_Milian</compClass>
+				<ignoreQuestLodgerPawns>true</ignoreQuestLodgerPawns>
+				<targetableMilianPawnkinds>
+					<li>Milian_Mechanoid_PawnII</li>
+					<li>Milian_Mechanoid_PawnIV</li>
+					<li>Milian_Mechanoid_BishopIII</li>
+				</targetableMilianPawnkinds>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef Name="Milira_CombatDrone_Large" ParentName="Milira_CombatDroneBase" Abstract="true">
+		<recipeMaker>
+			<researchPrerequisites Inherit="false">
+				<li>Milira_FloatUnitII</li>
+			</researchPrerequisites>
+		</recipeMaker>
+		<apparel>
+			<tags>
+				<li>Milira_CombatDrone_Large</li>
+				<li>Milian_Mechanoid_PawnIV</li>
+			</tags>
+		</apparel>
+		<comps>
+			<li Class="Milira.CompProperties_DressMilian">
+				<useJob>UseItem</useJob>
+				<useDuration>0</useDuration>
+				<warmupMote>Mote_ResurrectAbility</warmupMote>
+			</li>
+			<li Class="Milira.CompProperties_TargetEffect_DressMilian" />
+			<li Class="Milira.CompProperties_TargetableMilian">
+				<compClass>Milira.CompTargetable_Milian</compClass>
+				<ignoreQuestLodgerPawns>true</ignoreQuestLodgerPawns>
+				<targetableMilianPawnkinds>
+					<li>Milian_Mechanoid_PawnIV</li>
+				</targetableMilianPawnkinds>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef Name="Milira_CombatDroneTurretBase" ParentName="BaseWeaponTurret" Abstract="true">
+		<tradeability>None</tradeability>
+		<destroyOnDrop>true</destroyOnDrop>
+		<statBases>
+			<Ancot_TurretWarmUpTime>1.0</Ancot_TurretWarmUpTime>
+		</statBases>
+		<graphicData>
+			<texPath>Milira/Null/null</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+	</ThingDef>
+
+	<!-- ======================================================================================================================================================================================= -->
+
+
+	<!-- 脉冲榴弹 -->
+	<ThingDef ParentName="Milira_CombatDrone_Standard">
+		<defName>Milira_CombatDrone_EMPLauncher</defName>
+		<label>combat drone: EMP</label>
+		<description>A combat drone equipped with a pulse grenade launcher capable of paralysing mechanisms or turrets. Require long time to reload.</description>
+		<recipeMaker>
+			<skillRequirements>
+				<Crafting>6</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+		<costList>
+			<Milira_SolarCrystal>2</Milira_SolarCrystal>
+			<ComponentIndustrial>2</ComponentIndustrial>
+			<Milira_SplendidSteel>40</Milira_SplendidSteel>
+			<Milira_SunLightFuel>10</Milira_SunLightFuel>
+		</costList>
+		<graphicData>
+			<texPath>Milira/Apparel/CombatDrone/EMPLauncher/EMPLauncher</texPath>
+		</graphicData>
+		<statBases>
+			<WorkToMake>12000</WorkToMake>
+			<Mass>0.4</Mass>
+			<Flammability>0.4</Flammability>
+			<EquipDelay>1.5</EquipDelay>
+		</statBases>
+		<apparel>
+			<tags>
+				<li>Milira_CombatDrone_RaidAvailable_PawnII</li>
+			</tags>
+			<renderNodeProperties>
+				<li Class="AncotLibrary.PawnRenderNodeProperties_TurretGun_Custom">
+					<debugLabel>Milira_CombatDrone_EMPLauncher</debugLabel>
+					<nodeClass>AncotLibrary.PawnRenderNode_TurretGun_Custom</nodeClass>
+					<workerClass>AncotLibrary.PawnRenderNodeWorker_TurretGun_Custom</workerClass>
+					<combatDrone>true</combatDrone>
+					<isApparel>true</isApparel>
+					<texPath>Milira/Apparel/CombatDrone/EMPLauncher/EMPLauncher</texPath>
+					<baseLayer>100</baseLayer>
+					<rotDrawMode>Fresh, Rotting</rotDrawMode>
+					<overrideMeshSize>(1.5,1.5)</overrideMeshSize>
+					<parentTagDef>ApparelBody</parentTagDef>
+					<pawnType>Any</pawnType>
+					<drawData>
+						<dataSouth>
+							<layer>-5</layer>
+						</dataSouth>
+					</drawData>
+				</li>
+			</renderNodeProperties>
+		</apparel>
+		<comps>
+			<li Class="AncotLibrary.CompProperties_TurretGun_Custom">
+				<turretDef>MiliraTurret_CombatDrone_EMPLauncher</turretDef>
+				<angleOffset>-90</angleOffset>
+				<attackUndrafted>false</attackUndrafted>
+				<float_xAxis>
+					<floatAmplitude>0.05</floatAmplitude>
+					<floatSpeed>0.003</floatSpeed>
+				</float_xAxis>
+				<float_yAxis>
+					<floatAmplitude>0.1</floatAmplitude>
+					<floatSpeed>0.02</floatSpeed>
+				</float_yAxis>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="Milira_CombatDroneTurretBase">
+		<defName>MiliraTurret_CombatDrone_EMPLauncher</defName>
+		<label>EMP launcher</label>
+		<description>a launcher can fire EMP grenade.</description>
+		<statBases>
+			<Mass>1.2</Mass>
+			<AccuracyTouch>0.60</AccuracyTouch>
+			<AccuracyShort>0.80</AccuracyShort>
+			<AccuracyMedium>0.90</AccuracyMedium>
+			<AccuracyLong>0.85</AccuracyLong>
+			<RangedWeapon_Cooldown>24</RangedWeapon_Cooldown>
+		</statBases>
+		<verbs>
+			<li>
+				<verbClass>Verb_Shoot</verbClass>
+				<defaultProjectile>MiliraProjectile_CombatDrone_EMPLauncher</defaultProjectile>
+				<requireLineOfSight>true</requireLineOfSight>
+				<range>29.9</range>
+				<targetParams>
+					<canTargetLocations>true</canTargetLocations>
+				</targetParams>
+				<soundCast>Mortar_LaunchA</soundCast>
+				<soundCastTail>GunTail_Heavy</soundCastTail>
+				<muzzleFlashScale>4</muzzleFlashScale>
+				<minRange>2.5</minRange>
+				<forcedMissRadius>0.1</forcedMissRadius>
+				<defaultCooldownTime>23</defaultCooldownTime>
+				<burstShotCount>1</burstShotCount>
+				<ticksBetweenBurstShots>0</ticksBetweenBurstShots>
+			</li>
+		</verbs>
+	</ThingDef>
+	<ThingDef ParentName="BaseBullet">
+		<defName>MiliraProjectile_CombatDrone_EMPLauncher</defName>
+		<label>EMP grenade</label>
+		<graphicData>
+			<texPath>Milira/Projectile/MiliraProjectile_EMPLauncher</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>2.0</drawSize>
+			<shaderType>TransparentPostLight</shaderType>
+		</graphicData>
+		<thingClass>Projectile_Explosive</thingClass>
+		<projectile>
+			<damageDef>EMP</damageDef>
+			<flyOverhead>True</flyOverhead>
+			<explosionRadius>2.5</explosionRadius>
+			<damageAmountBase>40</damageAmountBase>
+			<armorPenetrationBase>0</armorPenetrationBase>
+			<stoppingPower>2.0</stoppingPower>
+			<speed>80</speed>
+		</projectile>
+	</ThingDef>
+
+
+	<!-- 燃烧榴弹 -->
+	<ThingDef ParentName="Milira_CombatDrone_Standard">
+		<defName>Milira_CombatDrone_IncendiaryGrenadeLauncher</defName>
+		<label>combat drone: incendiary grenade</label>
+		<description>A combat drone equipped with a incendiary grenade launcher capable of setting fire to an area. Require long time to reload.</description>
+		<recipeMaker>
+			<skillRequirements>
+				<Crafting>6</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+		<costList>
+			<Milira_SolarCrystal>2</Milira_SolarCrystal>
+			<ComponentIndustrial>2</ComponentIndustrial>
+			<Milira_SplendidSteel>40</Milira_SplendidSteel>
+			<Milira_SunLightFuel>10</Milira_SunLightFuel>
+		</costList>
+		<graphicData>
+			<texPath>Milira/Apparel/CombatDrone/IncendiaryGrenadeLauncher/IncendiaryGrenadeLauncher</texPath>
+		</graphicData>
+		<statBases>
+			<WorkToMake>12000</WorkToMake>
+			<Mass>0.4</Mass>
+			<Flammability>0.4</Flammability>
+			<EquipDelay>1.5</EquipDelay>
+		</statBases>
+		<apparel>
+			<tags>
+				<li>Milira_CombatDrone_RaidAvailable_PawnII</li>
+			</tags>
+			<renderNodeProperties>
+				<li Class="AncotLibrary.PawnRenderNodeProperties_TurretGun_Custom">
+					<debugLabel>Milira_CombatDrone_IncendiaryGrenadeLauncher</debugLabel>
+					<nodeClass>AncotLibrary.PawnRenderNode_TurretGun_Custom</nodeClass>
+					<workerClass>AncotLibrary.PawnRenderNodeWorker_TurretGun_Custom</workerClass>
+					<combatDrone>true</combatDrone>
+					<isApparel>true</isApparel>
+					<texPath>Milira/Apparel/CombatDrone/IncendiaryGrenadeLauncher/IncendiaryGrenadeLauncher</texPath>
+					<baseLayer>100</baseLayer>
+					<rotDrawMode>Fresh, Rotting</rotDrawMode>
+					<overrideMeshSize>(1.5,1.5)</overrideMeshSize>
+					<parentTagDef>ApparelBody</parentTagDef>
+					<pawnType>Any</pawnType>
+					<drawData>
+						<dataSouth>
+							<layer>-5</layer>
+						</dataSouth>
+					</drawData>
+				</li>
+			</renderNodeProperties>
+		</apparel>
+		<comps>
+			<li Class="AncotLibrary.CompProperties_TurretGun_Custom">
+				<turretDef>MiliraTurret_CombatDrone_IncendiaryGrenadeLauncher</turretDef>
+				<angleOffset>-90</angleOffset>
+				<attackUndrafted>false</attackUndrafted>
+				<float_xAxis>
+					<floatAmplitude>0.05</floatAmplitude>
+					<floatSpeed>0.003</floatSpeed>
+				</float_xAxis>
+				<float_yAxis>
+					<floatAmplitude>0.1</floatAmplitude>
+					<floatSpeed>0.02</floatSpeed>
+				</float_yAxis>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="Milira_CombatDroneTurretBase">
+		<defName>MiliraTurret_CombatDrone_IncendiaryGrenadeLauncher</defName>
+		<label>incendiary grenade launcher</label>
+		<description>a launcher can fire incendiary grenade.</description>
+		<statBases>
+			<Mass>1.2</Mass>
+			<AccuracyTouch>0.60</AccuracyTouch>
+			<AccuracyShort>0.80</AccuracyShort>
+			<AccuracyMedium>0.90</AccuracyMedium>
+			<AccuracyLong>0.85</AccuracyLong>
+			<RangedWeapon_Cooldown>24</RangedWeapon_Cooldown>
+		</statBases>
+		<verbs>
+			<li>
+				<verbClass>Verb_Shoot</verbClass>
+				<defaultProjectile>MiliraProjectile_CombatDrone_IncendiaryGrenadeLauncher</defaultProjectile>
+				<requireLineOfSight>true</requireLineOfSight>
+				<range>29.9</range>
+				<targetParams>
+					<canTargetLocations>true</canTargetLocations>
+				</targetParams>
+				<soundCast>Mortar_LaunchA</soundCast>
+				<soundCastTail>GunTail_Heavy</soundCastTail>
+				<muzzleFlashScale>4</muzzleFlashScale>
+				<minRange>2.5</minRange>
+				<forcedMissRadius>0.1</forcedMissRadius>
+				<defaultCooldownTime>23</defaultCooldownTime>
+				<burstShotCount>1</burstShotCount>
+				<ticksBetweenBurstShots>0</ticksBetweenBurstShots>
+			</li>
+		</verbs>
+	</ThingDef>
+	<ThingDef ParentName="BaseBullet">
+		<defName>MiliraProjectile_CombatDrone_IncendiaryGrenadeLauncher</defName>
+		<label>incendiary grenade</label>
+		<graphicData>
+			<texPath>Things/Projectile/ShellIncendiary</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>0.5</drawSize>
+			<shaderType>TransparentPostLight</shaderType>
+		</graphicData>
+		<thingClass>Projectile_Explosive</thingClass>
+		<projectile>
+			<damageDef>Flame</damageDef>
+			<flyOverhead>True</flyOverhead>
+			<explosionRadius>2.9</explosionRadius>
+			<preExplosionSpawnThingDef>Filth_Fuel</preExplosionSpawnThingDef>
+			<preExplosionSpawnChance>0.55</preExplosionSpawnChance>
+			<damageAmountBase>10</damageAmountBase>
+			<soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+			<soundExplode>MortarIncendiary_Explode</soundExplode>
+			<stoppingPower>2.0</stoppingPower>
+			<speed>65</speed>
+			<ai_IsIncendiary>true</ai_IsIncendiary>
+		</projectile>
+	</ThingDef>
+
+
+	<!-- 凝滞脉冲 -->
+	<ThingDef ParentName="Milira_CombatDrone_Standard">
+		<defName>Milira_CombatDrone_StunImpulseLauncher</defName>
+		<label>Combat drone: stun impulse</label>
+		<description>A floating cannon equipped with a stun impulse launcher, capable of causing targets in an area to be stunned. Require extremely long time to reload.</description>
+		<recipeMaker>
+			<skillRequirements>
+				<Crafting>8</Crafting>
+			</skillRequirements>
+			<researchPrerequisites>
+				<li>Milira_MilianTech_BishopIII</li>
+			</researchPrerequisites>
+		</recipeMaker>
+		<costList>
+			<Milira_SolarCrystal>2</Milira_SolarCrystal>
+			<ComponentIndustrial>2</ComponentIndustrial>
+			<Milira_SplendidSteel>40</Milira_SplendidSteel>
+			<Milira_SunLightFuel>10</Milira_SunLightFuel>
+		</costList>
+		<graphicData>
+			<texPath>Milira/Apparel/CombatDrone/StunImpulseLauncher/StunImpulseLauncher</texPath>
+		</graphicData>
+		<statBases>
+			<WorkToMake>12000</WorkToMake>
+			<Mass>0.4</Mass>
+			<Flammability>0.4</Flammability>
+			<EquipDelay>1.5</EquipDelay>
+		</statBases>
+		<apparel>
+			<tags>
+				<li>Milira_CombatDrone_StunImpulseLauncher</li>
+			</tags>
+			<renderNodeProperties>
+				<li Class="AncotLibrary.PawnRenderNodeProperties_TurretGun_Custom">
+					<debugLabel>Milira_CombatDrone_StunImpulseLauncher</debugLabel>
+					<nodeClass>AncotLibrary.PawnRenderNode_TurretGun_Custom</nodeClass>
+					<workerClass>AncotLibrary.PawnRenderNodeWorker_TurretGun_Custom</workerClass>
+					<combatDrone>true</combatDrone>
+					<isApparel>true</isApparel>
+					<texPath>Milira/Apparel/CombatDrone/StunImpulseLauncher/StunImpulseLauncher</texPath>
+					<baseLayer>100</baseLayer>
+					<rotDrawMode>Fresh, Rotting</rotDrawMode>
+					<overrideMeshSize>(1.5,1.5)</overrideMeshSize>
+					<parentTagDef>ApparelBody</parentTagDef>
+					<pawnType>Any</pawnType>
+					<drawData>
+						<dataSouth>
+							<layer>-5</layer>
+						</dataSouth>
+					</drawData>
+				</li>
+			</renderNodeProperties>
+		</apparel>
+		<comps>
+			<li Class="AncotLibrary.CompProperties_TurretGun_Custom">
+				<turretDef>MiliraTurret_CombatDrone_StunImpulseLauncher</turretDef>
+				<angleOffset>-90</angleOffset>
+				<attackUndrafted>false</attackUndrafted>
+				<float_xAxis>
+					<floatAmplitude>0.05</floatAmplitude>
+					<floatSpeed>0.003</floatSpeed>
+				</float_xAxis>
+				<float_yAxis>
+					<floatAmplitude>0.1</floatAmplitude>
+					<floatSpeed>0.02</floatSpeed>
+				</float_yAxis>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="Milira_CombatDroneTurretBase">
+		<defName>MiliraTurret_CombatDrone_StunImpulseLauncher</defName>
+		<label>stun impulse launcher</label>
+		<description>a luncher can fire stun impulse.</description>
+		<statBases>
+			<Mass>1.2</Mass>
+			<AccuracyTouch>0.60</AccuracyTouch>
+			<AccuracyShort>0.80</AccuracyShort>
+			<AccuracyMedium>0.90</AccuracyMedium>
+			<AccuracyLong>0.85</AccuracyLong>
+			<RangedWeapon_Cooldown>60</RangedWeapon_Cooldown>
+		</statBases>
+		<verbs>
+			<li>
+				<verbClass>Verb_Shoot</verbClass>
+				<defaultProjectile>MiliraProjectile_CombatDrone_StunImpulseLauncher</defaultProjectile>
+				<requireLineOfSight>true</requireLineOfSight>
+				<range>29.9</range>
+				<targetParams>
+					<canTargetLocations>true</canTargetLocations>
+				</targetParams>
+				<soundCast>Milira_Shot_StunImpulse</soundCast>
+				<soundCastTail>GunTail_Heavy</soundCastTail>
+				<muzzleFlashScale>4</muzzleFlashScale>
+				<minRange>2.5</minRange>
+				<forcedMissRadius>1.6</forcedMissRadius>
+				<defaultCooldownTime>59</defaultCooldownTime>
+				<burstShotCount>3</burstShotCount>
+				<ticksBetweenBurstShots>8</ticksBetweenBurstShots>
+			</li>
+		</verbs>
+	</ThingDef>
+	<ThingDef ParentName="BaseBullet">
+		<defName>MiliraProjectile_CombatDrone_StunImpulseLauncher</defName>
+		<label>stun impulse</label>
+		<graphicData>
+			<texPath>Milira/Null/null</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<!-- <drawSize>0.5</drawSize>
+			<shaderType>TransparentPostLight</shaderType> -->
+		</graphicData>
+		<thingClass>AncotLibrary.Projectile_ExplosiveWithTrail</thingClass>
+		<projectile>
+			<damageDef>Ancot_StunExceptInstigatorFaction</damageDef>
+			<explosionRadius>1.9</explosionRadius>
+			<damageAmountBase>6</damageAmountBase>
+			<soundExplode>Explosion_EMP</soundExplode>
+			<stoppingPower>10.0</stoppingPower>
+			<speed>80</speed>
+		</projectile>
+		<modExtensions>
+			<li Class="AncotLibrary.ExplosiveProjectileExtension">
+				<doTrail>true</doTrail>
+				<trailFleck>Milira_AirPuffGlow_Angled</trailFleck>
+				<trailFreauency>1</trailFreauency>
+				<!-- <trailColor>(0.4,0.8,1.0)</trailColor> -->
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+
+	<!-- 冲击粒子 -->
+	<ThingDef ParentName="Milira_CombatDrone_Standard">
+		<defName>Milira_CombatDrone_ParticleImpactBlaster</defName>
+		<label>Combat drone: impact particle</label>
+		<description>A combat drone equipped with a particle blaster capable of firing small explosive particle clusters.</description>
+		<recipeMaker>
+			<skillRequirements>
+				<Crafting>6</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+		<costList>
+			<Milira_SolarCrystal>2</Milira_SolarCrystal>
+			<ComponentIndustrial>2</ComponentIndustrial>
+			<Milira_SplendidSteel>40</Milira_SplendidSteel>
+			<Milira_SunLightFuel>10</Milira_SunLightFuel>
+		</costList>
+		<graphicData>
+			<texPath>Milira/Apparel/CombatDrone/ParticleImpactBlaster/ParticleImpactBlaster</texPath>
+		</graphicData>
+		<statBases>
+			<WorkToMake>12000</WorkToMake>
+			<Mass>0.4</Mass>
+			<Flammability>0.4</Flammability>
+			<EquipDelay>1.5</EquipDelay>
+		</statBases>
+		<apparel>
+			<tags>
+				<li>Milira_CombatDrone_RaidAvailable_PawnII</li>
+			</tags>
+			<renderNodeProperties>
+				<li Class="AncotLibrary.PawnRenderNodeProperties_TurretGun_Custom">
+					<debugLabel>Milira_CombatDrone_ParticleImpactBlaster</debugLabel>
+					<nodeClass>AncotLibrary.PawnRenderNode_TurretGun_Custom</nodeClass>
+					<workerClass>AncotLibrary.PawnRenderNodeWorker_TurretGun_Custom</workerClass>
+					<combatDrone>true</combatDrone>
+					<isApparel>true</isApparel>
+					<texPath>Milira/Apparel/CombatDrone/ParticleImpactBlaster/ParticleImpactBlaster</texPath>
+					<baseLayer>100</baseLayer>
+					<rotDrawMode>Fresh, Rotting</rotDrawMode>
+					<overrideMeshSize>(1.5,1.5)</overrideMeshSize>
+					<parentTagDef>ApparelBody</parentTagDef>
+					<pawnType>Any</pawnType>
+					<drawData>
+						<dataSouth>
+							<layer>-5</layer>
+						</dataSouth>
+					</drawData>
+				</li>
+			</renderNodeProperties>
+		</apparel>
+		<comps>
+			<li Class="AncotLibrary.CompProperties_TurretGun_Custom">
+				<turretDef>MiliraTurret_CombatDrone_ParticleImpactBlaster</turretDef>
+				<angleOffset>-90</angleOffset>
+				<attackUndrafted>false</attackUndrafted>
+				<float_xAxis>
+					<floatAmplitude>0.05</floatAmplitude>
+					<floatSpeed>0.003</floatSpeed>
+				</float_xAxis>
+				<float_yAxis>
+					<floatAmplitude>0.1</floatAmplitude>
+					<floatSpeed>0.02</floatSpeed>
+				</float_yAxis>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="Milira_CombatDroneTurretBase">
+		<defName>MiliraTurret_CombatDrone_ParticleImpactBlaster</defName>
+		<label>particle impact blaster</label>
+		<description>a blaster can fire impact particle.</description>
+		<statBases>
+			<Mass>1.2</Mass>
+			<AccuracyTouch>0.60</AccuracyTouch>
+			<AccuracyShort>0.80</AccuracyShort>
+			<AccuracyMedium>0.90</AccuracyMedium>
+			<AccuracyLong>0.85</AccuracyLong>
+			<RangedWeapon_Cooldown>5</RangedWeapon_Cooldown>
+		</statBases>
+		<verbs>
+			<li>
+				<verbClass>Verb_Shoot</verbClass>
+				<defaultProjectile>MilianBullet_ParticleBeamBlasterCharged</defaultProjectile>
+				<requireLineOfSight>true</requireLineOfSight>
+				<range>24.9</range>
+				<targetParams>
+					<canTargetLocations>true</canTargetLocations>
+				</targetParams>
+				<soundCast>Shot_ChargeBlaster</soundCast>
+				<soundCastTail>GunTail_Heavy</soundCastTail>
+				<muzzleFlashScale>4</muzzleFlashScale>
+				<minRange>2.5</minRange>
+				<forcedMissRadius>0.1</forcedMissRadius>
+				<defaultCooldownTime>4</defaultCooldownTime>
+				<burstShotCount>1</burstShotCount>
+				<ticksBetweenBurstShots>0</ticksBetweenBurstShots>
+				<ai_AvoidFriendlyFireRadius>4</ai_AvoidFriendlyFireRadius>
+			</li>
+		</verbs>
+	</ThingDef>
+
+
+	<!-- 散射粒子 -->
+	<ThingDef ParentName="Milira_CombatDrone_Standard">
+		<defName>Milira_CombatDrone_ScatterParticleBlaster</defName>
+		<label>Combat drone: scatter particle</label>
+		<description>a combat drone equipped with scattering particle emitters that capable of firing a large number of particle beams at once at close range, require long time to reload.</description>
+		<recipeMaker>
+			<skillRequirements>
+				<Crafting>6</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+		<costList>
+			<Milira_SolarCrystal>2</Milira_SolarCrystal>
+			<ComponentIndustrial>2</ComponentIndustrial>
+			<Milira_SplendidSteel>40</Milira_SplendidSteel>
+			<Milira_SunLightFuel>10</Milira_SunLightFuel>
+		</costList>
+		<graphicData>
+			<texPath>Milira/Apparel/CombatDrone/ScatterParticleBlaster/ScatterParticleBlaster</texPath>
+		</graphicData>
+		<statBases>
+			<WorkToMake>12000</WorkToMake>
+			<Mass>0.4</Mass>
+			<Flammability>0.4</Flammability>
+			<EquipDelay>1.5</EquipDelay>
+		</statBases>
+		<apparel>
+			<tags>
+				<li>Milira_CombatDrone_RaidAvailable_PawnII</li>
+			</tags>
+			<renderNodeProperties>
+				<li Class="AncotLibrary.PawnRenderNodeProperties_TurretGun_Custom">
+					<debugLabel>Milira_CombatDrone_ScatterParticleBlaster</debugLabel>
+					<nodeClass>AncotLibrary.PawnRenderNode_TurretGun_Custom</nodeClass>
+					<workerClass>AncotLibrary.PawnRenderNodeWorker_TurretGun_Custom</workerClass>
+					<combatDrone>true</combatDrone>
+					<isApparel>true</isApparel>
+					<texPath>Milira/Apparel/CombatDrone/ScatterParticleBlaster/ScatterParticleBlaster</texPath>
+					<baseLayer>100</baseLayer>
+					<rotDrawMode>Fresh, Rotting</rotDrawMode>
+					<overrideMeshSize>(1.5,1.5)</overrideMeshSize>
+					<parentTagDef>ApparelBody</parentTagDef>
+					<pawnType>Any</pawnType>
+					<drawData>
+						<dataSouth>
+							<layer>-5</layer>
+						</dataSouth>
+					</drawData>
+				</li>
+			</renderNodeProperties>
+		</apparel>
+		<comps>
+			<li Class="AncotLibrary.CompProperties_TurretGun_Custom">
+				<turretDef>MiliraTurret_CombatDrone_ScatterParticleBlaster</turretDef>
+				<angleOffset>-90</angleOffset>
+				<attackUndrafted>false</attackUndrafted>
+				<float_xAxis>
+					<floatAmplitude>0.05</floatAmplitude>
+					<floatSpeed>0.003</floatSpeed>
+				</float_xAxis>
+				<float_yAxis>
+					<floatAmplitude>0.1</floatAmplitude>
+					<floatSpeed>0.02</floatSpeed>
+				</float_yAxis>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="Milira_CombatDroneTurretBase">
+		<defName>MiliraTurret_CombatDrone_ScatterParticleBlaster</defName>
+		<label>scatter particle blaster</label>
+		<description>a blaster that fire scatter particle beams.</description>
+		<statBases>
+			<Mass>1.2</Mass>
+			<AccuracyTouch>0.85</AccuracyTouch>
+			<AccuracyShort>0.65</AccuracyShort>
+			<AccuracyMedium>0.32</AccuracyMedium>
+			<AccuracyLong>0.01</AccuracyLong>
+			<RangedWeapon_Cooldown>10</RangedWeapon_Cooldown>
+		</statBases>
+		<verbs>
+			<li Class="AncotLibrary.VerbProperties_Custom">
+				<verbClass>AncotLibrary.Verb_ChargeShootMultiple</verbClass>
+				<defaultProjectile>MilianBullet_ParticleBeamGun</defaultProjectile>
+				<requireLineOfSight>true</requireLineOfSight>
+				<range>11.9</range>
+				<soundCast>Shot_ChargeBlaster</soundCast>
+				<soundCastTail>GunTail_Heavy</soundCastTail>
+				<muzzleFlashScale>4</muzzleFlashScale>
+				<defaultCooldownTime>9</defaultCooldownTime>
+				<bulletPerBurstShot>5</bulletPerBurstShot>
+				<burstShotCount>1</burstShotCount>
+				<ticksBetweenBurstShots>0</ticksBetweenBurstShots>
+			</li>
+		</verbs>
+	</ThingDef>
+
+
+	<!-- 长程粒子 -->
+	<ThingDef ParentName="Milira_CombatDrone_Standard">
+		<defName>Milira_CombatDrone_LongRangeParticleBlaster</defName>
+		<label>Combat drone: long range particle</label>
+		<description>a combat drone equipped with long range particle emitters that capable of firing longer-range cluster particle beams, requrie long time to reload.</description>
+		<recipeMaker>
+			<skillRequirements>
+				<Crafting>6</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+		<costList>
+			<Milira_SolarCrystal>2</Milira_SolarCrystal>
+			<ComponentIndustrial>2</ComponentIndustrial>
+			<Milira_SplendidSteel>40</Milira_SplendidSteel>
+			<Milira_SunLightFuel>10</Milira_SunLightFuel>
+		</costList>
+		<graphicData>
+			<texPath>Milira/Apparel/CombatDrone/LongRangeParticleBlaster/LongRangeParticleBlaster</texPath>
+		</graphicData>
+		<statBases>
+			<WorkToMake>12000</WorkToMake>
+			<Mass>0.4</Mass>
+			<Flammability>0.4</Flammability>
+			<EquipDelay>1.5</EquipDelay>
+		</statBases>
+		<apparel>
+			<tags>
+				<li>Milira_CombatDrone_RaidAvailable_PawnII</li>
+			</tags>
+			<renderNodeProperties>
+				<li Class="AncotLibrary.PawnRenderNodeProperties_TurretGun_Custom">
+					<debugLabel>Milira_CombatDrone_LongRangeParticleBlaster</debugLabel>
+					<nodeClass>AncotLibrary.PawnRenderNode_TurretGun_Custom</nodeClass>
+					<workerClass>AncotLibrary.PawnRenderNodeWorker_TurretGun_Custom</workerClass>
+					<combatDrone>true</combatDrone>
+					<isApparel>true</isApparel>
+					<texPath>Milira/Apparel/CombatDrone/LongRangeParticleBlaster/LongRangeParticleBlaster</texPath>
+					<baseLayer>100</baseLayer>
+					<rotDrawMode>Fresh, Rotting</rotDrawMode>
+					<overrideMeshSize>(1.5,1.5)</overrideMeshSize>
+					<parentTagDef>ApparelBody</parentTagDef>
+					<pawnType>Any</pawnType>
+					<drawData>
+						<dataSouth>
+							<layer>-5</layer>
+						</dataSouth>
+					</drawData>
+				</li>
+			</renderNodeProperties>
+		</apparel>
+		<comps>
+			<li Class="AncotLibrary.CompProperties_TurretGun_Custom">
+				<turretDef>MiliraTurret_CombatDrone_LongRangeParticleBlaster</turretDef>
+				<angleOffset>-90</angleOffset>
+				<attackUndrafted>false</attackUndrafted>
+				<float_xAxis>
+					<floatAmplitude>0.05</floatAmplitude>
+					<floatSpeed>0.003</floatSpeed>
+				</float_xAxis>
+				<float_yAxis>
+					<floatAmplitude>0.1</floatAmplitude>
+					<floatSpeed>0.02</floatSpeed>
+				</float_yAxis>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="Milira_CombatDroneTurretBase">
+		<defName>MiliraTurret_CombatDrone_LongRangeParticleBlaster</defName>
+		<label>long range particle blaster</label>
+		<description>a blaster that fire long range particle beam.</description>
+		<statBases>
+			<Mass>1.2</Mass>
+			<AccuracyTouch>1.0</AccuracyTouch>
+			<AccuracyShort>1.0</AccuracyShort>
+			<AccuracyMedium>1.0</AccuracyMedium>
+			<AccuracyLong>0.95</AccuracyLong>
+			<RangedWeapon_Cooldown>6.5</RangedWeapon_Cooldown>
+		</statBases>
+		<verbs>
+			<li>
+				<verbClass>Verb_Shoot</verbClass>
+				<defaultProjectile>MiliraBullet_ParticleLMGCharged</defaultProjectile>
+				<requireLineOfSight>true</requireLineOfSight>
+				<range>31.9</range>
+				<soundCast>Shot_ChargeBlaster</soundCast>
+				<soundCastTail>GunTail_Heavy</soundCastTail>
+				<muzzleFlashScale>4</muzzleFlashScale>
+				<defaultCooldownTime>5.5</defaultCooldownTime>
+				<burstShotCount>1</burstShotCount>
+				<ticksBetweenBurstShots>0</ticksBetweenBurstShots>
+				<canGoWild>false</canGoWild>
+			</li>
+		</verbs>
+	</ThingDef>
+
+
+
+
+	<!-- 防护泡 -->
+	<ThingDef ParentName="Milira_CombatDrone_Standard">
+		<defName>Milira_CombatDrone_EnergyBubble</defName>
+		<label>Combat platform: energy bubble</label>
+		<description>A floating platform equipped with a shield generator can project a personal bubble shield to carrier. The personal bubble shield provided do not block shooting, but easier to be broke.</description>
+		<recipeMaker>
+			<skillRequirements>
+				<Crafting>6</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+		<costList>
+			<Milira_SolarCrystal>3</Milira_SolarCrystal>
+			<ComponentIndustrial>2</ComponentIndustrial>
+			<Milira_SplendidSteel>30</Milira_SplendidSteel>
+			<Milira_SunLightFuel>20</Milira_SunLightFuel>
+		</costList>
+		<graphicData>
+			<texPath>Milira/Apparel/CombatDrone/EnergyBubble/EnergyBubble</texPath>
+		</graphicData>
+		<statBases>
+			<WorkToMake>12000</WorkToMake>
+			<Mass>0.4</Mass>
+			<Flammability>0.4</Flammability>
+			<EquipDelay>1.5</EquipDelay>
+			<EnergyShieldRechargeRate>0.2</EnergyShieldRechargeRate>
+			<EnergyShieldEnergyMax>1.2</EnergyShieldEnergyMax>
+		</statBases>
+		<apparel>
+			<tags>
+				<li>Milira_CombatDrone_EnergyBubble</li>
+				<li>Milira_CombatDrone_RaidAvailable_PawnII</li>
+			</tags>
+			<renderNodeProperties>
+				<li Class="AncotLibrary.PawnRenderNodeProperties_CombatPlatform">
+					<debugLabel>Milira_CombatDrone_EnergyBubble</debugLabel>
+					<nodeClass>AncotLibrary.PawnRenderNode_CombatPlatform</nodeClass>
+					<workerClass>AncotLibrary.PawnRenderNodeWorker_CombatPlatform</workerClass>
+					<combatDrone>true</combatDrone>
+					<isApparel>true</isApparel>
+					<drawUndrafted>false</drawUndrafted>
+					<texPath>Milira/Apparel/CombatDrone/EnergyBubble/EnergyBubble</texPath>
+					<baseLayer>100</baseLayer>
+					<rotDrawMode>Fresh, Rotting</rotDrawMode>
+					<overrideMeshSize>(1.5,1.5)</overrideMeshSize>
+					<parentTagDef>ApparelBody</parentTagDef>
+					<pawnType>Any</pawnType>
+					<drawData>
+						<dataSouth>
+							<layer>-5</layer>
+						</dataSouth>
+					</drawData>
+				</li>
+			</renderNodeProperties>
+		</apparel>
+		<comps>
+			<li Class="CompProperties_Shield">
+				<blocksRangedWeapons>false</blocksRangedWeapons>
+				<minDrawSize>1.8</minDrawSize>
+				<maxDrawSize>2.0</maxDrawSize>
+				<energyLossPerDamage>0.05</energyLossPerDamage>
+				<energyOnReset>1</energyOnReset>
+			</li>
+			<li Class="AncotLibrary.CompProperties_CombatPlatform">
+				<float_xAxis>
+					<floatAmplitude>0.05</floatAmplitude>
+					<floatSpeed>0.003</floatSpeed>
+				</float_xAxis>
+				<float_yAxis>
+					<floatAmplitude>0.1</floatAmplitude>
+					<floatSpeed>0.02</floatSpeed>
+				</float_yAxis>
+			</li>
+		</comps>
+	</ThingDef>
+
+
+
+
+
+
+
+
+
+
+	<!-- ======================================================================================================================================================================================= -->
+
+	<!-- 四联装火箭 -->
+	<ThingDef ParentName="Milira_CombatDrone_Large">
+		<defName>Milira_CombatDrone_QuadrupleRocketLauncher</defName>
+		<label>Combat drone: quadruple rocket launcher</label>
+		<description>A combat drone equipped with a quad rocket launcher, capable of firing four rockets at once, but less accurate. Require long time to reload.</description>
+		<recipeMaker>
+			<skillRequirements>
+				<Crafting>10</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+		<costList>
+			<Milira_SolarCrystal>2</Milira_SolarCrystal>
+			<ComponentIndustrial>4</ComponentIndustrial>
+			<ComponentSpacer>1</ComponentSpacer>
+			<Milira_SunPlateSteel>10</Milira_SunPlateSteel>
+			<Plasteel>40</Plasteel>
+			<Milira_SplendidSteel>60</Milira_SplendidSteel>
+			<Milira_SunLightFuel>35</Milira_SunLightFuel>
+		</costList>
+		<graphicData>
+			<texPath>Milira/Apparel/CombatDrone/QuadrupleRocketLauncher/QuadrupleRocketLauncher</texPath>
+		</graphicData>
+		<statBases>
+			<WorkToMake>30000</WorkToMake>
+			<Mass>3.0</Mass>
+			<Flammability>0.4</Flammability>
+			<EquipDelay>1.5</EquipDelay>
+		</statBases>
+		<apparel>
+			<renderNodeProperties>
+				<li Class="AncotLibrary.PawnRenderNodeProperties_TurretGun_Custom">
+					<debugLabel>Milira_CombatDrone_QuadrupleRocketLauncher</debugLabel>
+					<nodeClass>AncotLibrary.PawnRenderNode_TurretGun_Custom</nodeClass>
+					<workerClass>AncotLibrary.PawnRenderNodeWorker_TurretGun_Custom</workerClass>
+					<combatDrone>true</combatDrone>
+					<isApparel>true</isApparel>
+					<texPath>Milira/Apparel/CombatDrone/QuadrupleRocketLauncher/QuadrupleRocketLauncher</texPath>
+					<baseLayer>100</baseLayer>
+					<rotDrawMode>Fresh, Rotting</rotDrawMode>
+					<overrideMeshSize>(1.5,1.5)</overrideMeshSize>
+					<parentTagDef>ApparelBody</parentTagDef>
+					<pawnType>Any</pawnType>
+					<drawData>
+						<dataSouth>
+							<layer>-5</layer>
+						</dataSouth>
+					</drawData>
+				</li>
+			</renderNodeProperties>
+		</apparel>
+		<comps>
+			<li Class="AncotLibrary.CompProperties_TurretGun_Custom">
+				<turretDef>MiliraTurret_CombatDrone_QuadrupleRocketLauncher</turretDef>
+				<angleOffset>-90</angleOffset>
+				<attackUndrafted>false</attackUndrafted>
+				<float_xAxis>
+					<floatAmplitude>0.04</floatAmplitude>
+					<floatSpeed>0.0018</floatSpeed>
+				</float_xAxis>
+				<float_yAxis>
+					<floatAmplitude>0.08</floatAmplitude>
+					<floatSpeed>0.012</floatSpeed>
+				</float_yAxis>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="Milira_CombatDroneTurretBase">
+		<defName>MiliraTurret_CombatDrone_QuadrupleRocketLauncher</defName>
+		<label>quadruple rocket launcher</label>
+		<description>a launcher fire four rocket.</description>
+		<statBases>
+			<Mass>2.8</Mass>
+			<AccuracyTouch>0.90</AccuracyTouch>
+			<AccuracyShort>0.75</AccuracyShort>
+			<AccuracyMedium>0.67</AccuracyMedium>
+			<AccuracyLong>0.45</AccuracyLong>
+			<RangedWeapon_Cooldown>45</RangedWeapon_Cooldown>
+		</statBases>
+		<verbs>
+			<li>
+				<verbClass>Verb_Shoot</verbClass>
+				<defaultProjectile>MiliraProjectile_CombatDrone_QuadrupleRocketLauncher</defaultProjectile>
+				<requireLineOfSight>true</requireLineOfSight>
+				<range>31.9</range>
+				<soundCast>Milira_Shot_Rocket</soundCast>
+				<soundCastTail>GunTail_Heavy</soundCastTail>
+				<muzzleFlashScale>4</muzzleFlashScale>
+				<minRange>4.5</minRange>
+				<targetParams>
+					<canTargetLocations>true</canTargetLocations>
+				</targetParams>
+				<forcedMissRadius>4</forcedMissRadius>
+				<defaultCooldownTime>44</defaultCooldownTime>
+				<linkedBodyPartsGroup>Torso</linkedBodyPartsGroup>
+				<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+				<burstShotCount>4</burstShotCount>
+				<ticksBetweenBurstShots>12</ticksBetweenBurstShots>
+				<ai_RangedAlawaysShootGroundBelowTarget>true</ai_RangedAlawaysShootGroundBelowTarget>
+				<ai_AvoidFriendlyFireRadius>6</ai_AvoidFriendlyFireRadius>
+			</li>
+		</verbs>
+	</ThingDef>
+	<ThingDef Name="MiliraProjectile_CombatDrone_QuadrupleRocketLauncher" ParentName="BaseBullet">
+		<defName>MiliraProjectile_CombatDrone_QuadrupleRocketLauncher</defName>
+		<label>rocket</label>
+		<graphicData>
+			<texPath>Milira/Projectile/MiliraProjectile_SmallRocketII</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>2</drawSize>
+			<shaderType>TransparentPostLight</shaderType>
+		</graphicData>
+		<thingClass>Milira.Projectile_ExplosiveWithSmokeTrail</thingClass>
+		<projectile>
+			<damageDef>Bomb</damageDef>
+			<!-- <flyOverhead>True</flyOverhead> -->
+			<explosionRadius>2.0</explosionRadius>
+			<damageAmountBase>28</damageAmountBase>
+			<armorPenetrationBase>0.25</armorPenetrationBase>
+			<stoppingPower>1.4</stoppingPower>
+			<speed>45</speed>
+		</projectile>
+	</ThingDef>
+
+
+	<!-- 近防机枪 -->
+	<ThingDef ParentName="Milira_CombatDrone_Large">
+		<defName>Milira_CombatDrone_MiniGun</defName>
+		<label>Combat drone: minigun</label>
+		<description>a combat drone equipped with close defence machine guns that capable of continuous fire at medium to close range.</description>
+		<recipeMaker>
+			<skillRequirements>
+				<Crafting>10</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+		<costList>
+			<Milira_SolarCrystal>2</Milira_SolarCrystal>
+			<ComponentIndustrial>4</ComponentIndustrial>
+			<ComponentSpacer>1</ComponentSpacer>
+			<Milira_SunPlateSteel>10</Milira_SunPlateSteel>
+			<Plasteel>40</Plasteel>
+			<Milira_SplendidSteel>60</Milira_SplendidSteel>
+			<Milira_SunLightFuel>35</Milira_SunLightFuel>
+		</costList>
+		<graphicData>
+			<texPath>Milira/Apparel/CombatDrone/MiniGun/MiniGun</texPath>
+		</graphicData>
+		<statBases>
+			<WorkToMake>30000</WorkToMake>
+			<Mass>3.0</Mass>
+			<Flammability>0.4</Flammability>
+			<EquipDelay>1.5</EquipDelay>
+		</statBases>
+		<apparel>
+			<tags>
+				<li>Milira_CombatDrone_MiniGun</li>
+			</tags>
+			<renderNodeProperties>
+				<li Class="AncotLibrary.PawnRenderNodeProperties_TurretGun_Custom">
+					<debugLabel>Milira_CombatDrone_MiniGun</debugLabel>
+					<nodeClass>AncotLibrary.PawnRenderNode_TurretGun_Custom</nodeClass>
+					<workerClass>AncotLibrary.PawnRenderNodeWorker_TurretGun_Custom</workerClass>
+					<combatDrone>true</combatDrone>
+					<isApparel>true</isApparel>
+					<texPath>Milira/Apparel/CombatDrone/MiniGun/MiniGun</texPath>
+					<baseLayer>100</baseLayer>
+					<rotDrawMode>Fresh, Rotting</rotDrawMode>
+					<overrideMeshSize>(1.5,1.5)</overrideMeshSize>
+					<parentTagDef>ApparelBody</parentTagDef>
+					<pawnType>Any</pawnType>
+					<drawData>
+						<dataSouth>
+							<layer>-5</layer>
+						</dataSouth>
+					</drawData>
+				</li>
+			</renderNodeProperties>
+		</apparel>
+		<comps>
+			<li Class="AncotLibrary.CompProperties_TurretGun_Custom">
+				<turretDef>MiliraTurret_CombatDrone_MiniGun</turretDef>
+				<angleOffset>-90</angleOffset>
+				<attackUndrafted>false</attackUndrafted>
+				<float_xAxis>
+					<floatAmplitude>0.04</floatAmplitude>
+					<floatSpeed>0.0018</floatSpeed>
+				</float_xAxis>
+				<float_yAxis>
+					<floatAmplitude>0.08</floatAmplitude>
+					<floatSpeed>0.012</floatSpeed>
+				</float_yAxis>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="Milira_CombatDroneTurretBase">
+		<defName>MiliraTurret_CombatDrone_MiniGun</defName>
+		<label>minigun</label>
+		<description>a machine gun that capable of continuous fire at medium to close range.</description>
+		<statBases>
+			<Mass>1.2</Mass>
+			<AccuracyTouch>0.56</AccuracyTouch>
+			<AccuracyShort>0.45</AccuracyShort>
+			<AccuracyMedium>0.34</AccuracyMedium>
+			<AccuracyLong>0.22</AccuracyLong>
+			<RangedWeapon_Cooldown>12</RangedWeapon_Cooldown>
+		</statBases>
+		<verbs>
+			<li>
+				<verbClass>Verb_Shoot</verbClass>
+				<defaultProjectile>Bullet_Minigun</defaultProjectile>
+				<requireLineOfSight>true</requireLineOfSight>
+				<range>27.9</range>
+				<soundCast>Shot_Minigun</soundCast>
+				<soundCastTail>GunTail_Heavy</soundCastTail>
+				<muzzleFlashScale>3</muzzleFlashScale>
+				<defaultCooldownTime>11</defaultCooldownTime>
+				<burstShotCount>24</burstShotCount>
+				<ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+			</li>
+		</verbs>
+	</ThingDef>
+
+
+
+	<!-- 浮游平台：机控单元 -->
+	<ThingDef ParentName="Milira_CombatDrone_Large">
+		<defName>Milira_CombatDrone_MechControlUnit</defName>
+		<label>Combat platform: mech control unit</label>
+		<description>A floating platform providing additional computing power for mech control. Furthermore, it contains a sub-unit that can be released to command mechnoids in a distance.</description>
+		<generateCommonality>0.00001</generateCommonality>
+		<recipeMaker>
+			<skillRequirements>
+				<Crafting>10</Crafting>
+			</skillRequirements>
+			<researchPrerequisites>
+				<li>Milira_DroneControl</li>
+				<li>Milira_Apparel_MechControl</li>
+			</researchPrerequisites>
+		</recipeMaker>
+		<costList>
+			<Milira_SolarCrystal>4</Milira_SolarCrystal>
+			<Milira_SplendidSteel>120</Milira_SplendidSteel>
+			<Plasteel>20</Plasteel>
+			<Milira_SunLightFuel>30</Milira_SunLightFuel>
+		</costList>
+		<graphicData>
+			<texPath>Milira/Apparel/CombatDrone/MechControlUnit/MechControlUnit</texPath>
+		</graphicData>
+		<statBases>
+			<WorkToMake>30000</WorkToMake>
+			<Mass>3.0</Mass>
+			<Flammability>0.4</Flammability>
+			<EquipDelay>1.5</EquipDelay>
+		</statBases>
+		<apparel>
+			<tags Inherit="false">
+				<li>Milira_CombatDrone_MechControlUnit</li>
+			</tags>
+			<renderNodeProperties>
+				<li Class="AncotLibrary.PawnRenderNodeProperties_CombatPlatform">
+					<debugLabel>Milira_CombatDrone_MechControlUnit</debugLabel>
+					<nodeClass>AncotLibrary.PawnRenderNode_CombatPlatform</nodeClass>
+					<workerClass>AncotLibrary.PawnRenderNodeWorker_CombatPlatform</workerClass>
+					<combatDrone>true</combatDrone>
+					<isApparel>true</isApparel>
+					<drawUndrafted>false</drawUndrafted>
+					<texPath>Milira/Apparel/CombatDrone/MechControlUnit/MechControlUnit</texPath>
+					<baseLayer>100</baseLayer>
+					<rotDrawMode>Fresh, Rotting</rotDrawMode>
+					<overrideMeshSize>(1.5,1.5)</overrideMeshSize>
+					<parentTagDef>ApparelBody</parentTagDef>
+					<pawnType>Any</pawnType>
+					<drawData>
+						<dataSouth>
+							<layer>-5</layer>
+						</dataSouth>
+					</drawData>
+				</li>
+			</renderNodeProperties>
+		</apparel>
+		<equippedStatOffsets>
+			<MechBandwidth>6</MechBandwidth>
+		</equippedStatOffsets>
+		<verbs>
+			<li>
+				<verbClass>AncotLibrary.Verb_DeployPawn</verbClass>
+				<label>release mech control unit</label>
+				<commandIcon>Milira/UI/ReleaseFloatUnit_MechControl</commandIcon>
+				<violent>false</violent>
+				<hasStandardCommand>true</hasStandardCommand>
+				<targetable>false</targetable>
+				<nonInterruptingSelfCast>true</nonInterruptingSelfCast>
+				<onlyManualCast>True</onlyManualCast>
+			</li>
+		</verbs>
+		<comps Inherit="false">
+			<li Class="CompProperties_Forbiddable"/>
+			<li Class="AncotLibrary.CompProperties_ApparelReloadable_DeployPawn">
+				<spawnPawnKind>Milian_FloatUnit_MechControl</spawnPawnKind>
+				<sortie>false</sortie>
+				<showSortieSwitchGizmo>false</showSortieSwitchGizmo>
+				<costPerPawn>1</costPerPawn>
+				<maxPawnsToSpawn>1</maxPawnsToSpawn>
+				<spawnEffecter>Milian_ReleaseUnits</spawnEffecter>
+				<maxCharges>1</maxCharges>
+				<cooldownTicks>240</cooldownTicks>
+				<destroyOnEmpty>false</destroyOnEmpty>
+				<soundReload>Standard_Reload</soundReload>
+				<hotKey>Misc4</hotKey>
+				<chargeNoun>mech control unit</chargeNoun>
+				<ammoDef>Milira_SplendidSteel</ammoDef>
+				<ammoCountPerCharge>20</ammoCountPerCharge>
+				<displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+			</li>
+			<li Class="AncotLibrary.CompProperties_CombatPlatform">
+				<float_xAxis>
+					<floatAmplitude>0.04</floatAmplitude>
+					<floatSpeed>0.0018</floatSpeed>
+				</float_xAxis>
+				<float_yAxis>
+					<floatAmplitude>0.08</floatAmplitude>
+					<floatSpeed>0.012</floatSpeed>
+				</float_yAxis>
+			</li>
+		</comps>
+	</ThingDef>
+
+
+
+	<!-- 磁轨炮 -->
+	<!-- <ThingDef ParentName="Milira_CombatDrone_Large">
+		<defName>Milira_CombatDrone_Railgun</defName>
+		<label>浮游炮：电磁狙击</label>
+		<description>搭载了电磁炮的浮游炮，能够狙击远距离的目标。装填时间较长。</description>
+		<recipeMaker>
+			<skillRequirements>
+				<Crafting>10</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+		<costList>
+			<Milira_SolarCrystal>2</Milira_SolarCrystal>
+			<ComponentIndustrial>2</ComponentIndustrial>
+			<Milira_SplendidSteel>40</Milira_SplendidSteel>
+			<Milira_SunLightFuel>10</Milira_SunLightFuel>
+		</costList>
+		<graphicData>
+			<texPath>Milira/Apparel/CombatDrone/ScatterParticleBlaster/ScatterParticleBlaster</texPath>
+		</graphicData>
+		<statBases>
+			<WorkToMake>30000</WorkToMake>
+			<Mass>3.0</Mass>
+			<Flammability>0.4</Flammability>
+			<EquipDelay>1.5</EquipDelay>
+		</statBases>
+		<apparel>
+			<renderNodeProperties>
+				<li Class="AncotLibrary.PawnRenderNodeProperties_TurretGun_Custom">
+					<debugLabel>Milira_CombatDrone_Railgun</debugLabel>
+					<nodeClass>AncotLibrary.PawnRenderNode_TurretGun_Custom</nodeClass>
+					<workerClass>AncotLibrary.PawnRenderNodeWorker_TurretGun_Custom</workerClass>
+					<combatDrone>true</combatDrone>
+					<isApparel>true</isApparel>
+					<texPath>Milira/Apparel/CombatDrone/ScatterParticleBlaster/ScatterParticleBlaster</texPath>
+					<baseLayer>100</baseLayer>
+					<rotDrawMode>Fresh, Rotting</rotDrawMode>
+					<overrideMeshSize>(1.5,1.5)</overrideMeshSize>
+					<parentTagDef>ApparelBody</parentTagDef>
+					<pawnType>Any</pawnType>
+					<drawData>
+						<dataSouth>
+							<layer>-5</layer>
+						</dataSouth>
+					</drawData>
+				</li>
+			</renderNodeProperties>
+		</apparel>
+		<comps>
+			<li Class="AncotLibrary.CompProperties_TurretGun_Custom">
+				<turretDef>MiliraTurret_CombatDrone_Railgun</turretDef>
+				<angleOffset>-90</angleOffset>
+				<attackUndrafted>false</attackUndrafted>
+				<float_xAxis>
+					<floatAmplitude>0.04</floatAmplitude>
+					<floatSpeed>0.0018</floatSpeed>
+				</float_xAxis>
+				<float_yAxis>
+					<floatAmplitude>0.08</floatAmplitude>
+					<floatSpeed>0.012</floatSpeed>
+				</float_yAxis>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="Milira_CombatDroneTurretBase">
+		<defName>MiliraTurret_CombatDrone_Railgun</defName>
+		<label>电磁狙击</label>
+		<description>能够在中近距离连续射击的自动机枪。</description>
+		<tradeability>None</tradeability>
+		<destroyOnDrop>true</destroyOnDrop>
+		<graphicData>
+			<texPath>Milira/Null/null</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<statBases>
+			<Mass>1.2</Mass>
+			<AccuracyTouch>0.65</AccuracyTouch>
+			<AccuracyShort>0.75</AccuracyShort>
+			<AccuracyMedium>0.90</AccuracyMedium>
+			<AccuracyLong>0.95</AccuracyLong>
+		</statBases>
+		<verbs>
+			<li>
+				<verbClass>Verb_Shoot</verbClass>
+				<defaultProjectile>MiliraBullet_MagneticRailRifle</defaultProjectile>
+				<requireLineOfSight>true</requireLineOfSight>
+				<range>39.9</range>
+				<soundCast>Milira_Shot_MagneticRailRifle</soundCast>
+        		<soundCastTail>GunTail_Heavy</soundCastTail>
+				<muzzleFlashScale>3</muzzleFlashScale>
+				<defaultCooldownTime>12</defaultCooldownTime>
+				<burstShotCount>1</burstShotCount>
+				<ticksBetweenBurstShots>0</ticksBetweenBurstShots>
+				<canGoWild>false</canGoWild>
+			</li>
+		</verbs>
+	</ThingDef> -->
+
+
+
+
+	<!-- 军团护盾 -->
+	<!-- <ThingDef ParentName="Milira_CombatDrone_Standard">
+		<defName>Milira_CombatDrone_ProjectileInterceptor</defName>
+		<label>Combat platform: projectile interceptor</label>
+		<description>A floating platform equipped with a shield generator can project a personal bubble shield to carrier. The personal bubble shield provided do not block shooting, but easier to be broke.</description>
+		<recipeMaker>
+			<skillRequirements>
+				<Crafting>6</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+		<costList>
+			<Milira_SolarCrystal>3</Milira_SolarCrystal>
+			<ComponentIndustrial>2</ComponentIndustrial>
+			<Milira_SplendidSteel>30</Milira_SplendidSteel>
+			<Milira_SunLightFuel>20</Milira_SunLightFuel>
+		</costList>
+		<graphicData>
+			<texPath>Milira/Apparel/CombatDrone/EnergyBubble/EnergyBubble</texPath>
+		</graphicData>
+		<statBases>
+			<WorkToMake>12000</WorkToMake>
+			<Mass>0.4</Mass>
+			<Flammability>0.4</Flammability>
+			<EquipDelay>1.5</EquipDelay>
+			<EnergyShieldRechargeRate>0.1</EnergyShieldRechargeRate>
+			<EnergyShieldEnergyMax>1.0</EnergyShieldEnergyMax>
+		</statBases>
+		<apparel>
+			<renderNodeProperties>
+				<li Class="AncotLibrary.PawnRenderNodeProperties_CombatPlatform">
+					<debugLabel>Milira_CombatDrone_ProjectileInterceptor</debugLabel>
+					<nodeClass>AncotLibrary.PawnRenderNode_CombatPlatform</nodeClass>
+					<workerClass>AncotLibrary.PawnRenderNodeWorker_CombatPlatform</workerClass>
+					<combatDrone>true</combatDrone>
+					<isApparel>true</isApparel>
+					<drawUndrafted>false</drawUndrafted>
+					<texPath>Milira/Apparel/CombatDrone/EnergyBubble/EnergyBubble</texPath>
+					<baseLayer>100</baseLayer>
+					<rotDrawMode>Fresh, Rotting</rotDrawMode>
+					<overrideMeshSize>(1.5,1.5)</overrideMeshSize>
+					<parentTagDef>ApparelBody</parentTagDef>
+					<pawnType>Any</pawnType>
+					<drawData>
+						<dataSouth>
+							<layer>-5</layer>
+						</dataSouth>
+					</drawData>
+				</li>
+			</renderNodeProperties>
+		</apparel>
+		<comps>
+			<li Class="AncotLibrary.CompProperties_ProjectileInterceptor_Apparel">
+				<mechShieldType>Milian_ProjectileInterceptor</mechShieldType>
+				<hitPointBase>500</hitPointBase>
+			</li>
+			<li Class="AncotLibrary.CompProperties_CombatPlatform">
+				<float_xAxis>
+					<floatAmplitude>0.05</floatAmplitude>
+					<floatSpeed>0.003</floatSpeed>
+				</float_xAxis>
+				<float_yAxis>
+					<floatAmplitude>0.1</floatAmplitude>
+					<floatSpeed>0.02</floatSpeed>
+				</float_yAxis>
+			</li>
+			<li Class="CompProperties_ApparelReloadable">
+				<maxCharges>100</maxCharges>
+				<ammoDef>Milira_SunLightFuel</ammoDef>
+				<ammoCountPerCharge>1</ammoCountPerCharge>
+				<baseReloadTicks>60</baseReloadTicks>
+				<soundReload>Standard_Reload</soundReload>
+				<hotKey>Misc4</hotKey>
+				<chargeNoun>日光燃料</chargeNoun>
+				<displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+			</li>
+		</comps>
+	</ThingDef> -->
+
+
+</Defs>

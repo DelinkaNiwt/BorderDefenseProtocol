@@ -1,0 +1,811 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--==-->
+  <ThingDef Name="Milira_UtilityBase" ParentName="ApparelNoQualityBase" Abstract="True">
+    <recipeMaker>
+      <recipeUsers Inherit="false">
+        <li>Milira_UniversalBench</li>
+      </recipeUsers>
+      <unfinishedThingDef>UnfinishedPack</unfinishedThingDef>
+      <useIngredientsForColor>false</useIngredientsForColor>
+      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+      <workSkill>Crafting</workSkill>
+      <effectWorking>Smith</effectWorking>
+      <soundWorking>Recipe_Smith</soundWorking>
+      <skillRequirements>
+        <Crafting>9</Crafting>
+      </skillRequirements>
+      <displayPriority>340</displayPriority>
+    </recipeMaker>
+    <techLevel>Spacer</techLevel>
+    <apparel>
+      <tags>
+      </tags>
+      <countsAsClothingForNudity>false</countsAsClothingForNudity>
+      <scoreOffset>4</scoreOffset>
+      <careIfWornByCorpse>false</careIfWornByCorpse>
+      <careIfDamaged>false</careIfDamaged>
+      <wearPerDay>0</wearPerDay>
+      <bodyPartGroups>
+        <li>Torso</li>
+      </bodyPartGroups>
+      <layers>
+        <li>Belt</li>
+      </layers>
+    </apparel>
+    <generateAllowChance>0.15</generateAllowChance>
+    <thingCategories>
+      <li>Milira_Apparel_Utility</li>
+    </thingCategories>
+  </ThingDef>
+
+  <ThingDef ParentName="Milira_UtilityBase">
+    <defName>Milira_PsychicDefensePendant</defName>
+    <label>Milira psychic defense pendant</label>
+    <description>An accessory designed to ward off psychic influences.</description>
+    <techLevel>Ultra</techLevel>
+    <recipeMaker Inherit="false">
+      <!-- <unfinishedThingDef>UnfinishedApparel</unfinishedThingDef>
+      <researchPrerequisites>
+        <li>Milira_Apparel_II</li>
+      </researchPrerequisites>
+      <recipeUsers>
+        <li>Milira_SunBlastFurnace</li>
+      </recipeUsers>
+      <workSkill>Crafting</workSkill>
+      <skillRequirements>
+        <Crafting>6</Crafting>
+      </skillRequirements> -->
+    </recipeMaker>
+    <costList>
+      <Milira_SolarCrystal>10</Milira_SolarCrystal>
+      <Plasteel>20</Plasteel>
+    </costList>
+    <graphicData>
+      <texPath>Milira/Apparel/Utility/PsychicDefensePendant/PsychicDefensePendant</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1</drawSize>
+      <drawOffset>(0,0,0)</drawOffset>
+    </graphicData>
+    <statBases>
+      <WorkToMake>30000</WorkToMake>
+      <Mass>0.2</Mass>
+      <Flammability>0.4</Flammability>
+      <EquipDelay>1.5</EquipDelay>
+    </statBases>
+    <thingCategories>
+      <li>ApparelUtility</li>
+    </thingCategories>
+    <equippedStatOffsets>
+      <PsychicSensitivity>-2.0</PsychicSensitivity>
+    </equippedStatOffsets>
+    <apparel>
+      <countsAsClothingForNudity>false</countsAsClothingForNudity>
+      <careIfWornByCorpse>false</careIfWornByCorpse>
+      <careIfDamaged>false</careIfDamaged>
+      <wearPerDay>0</wearPerDay>
+      <bodyPartGroups Inherit="false">
+        <li>Neck</li>
+      </bodyPartGroups>
+      <layers Inherit="false">
+        <li>Middle</li>
+      </layers>
+    </apparel>
+    <tradeability>Sellable</tradeability>
+    <tradeTags>
+    </tradeTags>
+    <comps>
+    </comps>
+  </ThingDef>
+
+
+  <!-- 辉煌信标 -->
+  <ThingDef ParentName="Milira_UtilityBase">
+    <thingClass>AncotLibrary.DeploymentPack_Thing</thingClass>
+    <defName>Milira_DropBeaconPack</defName>
+    <label>Milira Portable glory beacon</label>
+    <description>A portable, one-time use beacon, Upon deployment, after a brief delay, it calls in a squad of Milians to support the battlefield.</description>
+    <techLevel>Spacer</techLevel>
+    <recipeMaker Inherit="false">
+    </recipeMaker>
+    <costList>
+      <Milira_SolarCrystal>8</Milira_SolarCrystal>
+      <ComponentSpacer>3</ComponentSpacer>
+      <Plasteel>80</Plasteel>
+    </costList>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ApparelReloadable_DeployThing">
+        <thingToDeploy>Milira_DropBeacon</thingToDeploy>
+        <deployFleck>Milira_DropPodDistortion</deployFleck>
+        <deploySound>Milira_BuildingActive</deploySound>
+        <maxCharges>1</maxCharges>
+        <!-- <replenishAfterCooldown>true</replenishAfterCooldown>
+        <baseReloadTicks>600</baseReloadTicks> -->
+        <deployCooldown>10</deployCooldown>
+        <destroyOnEmpty>true</destroyOnEmpty>
+        <soundReload>Standard_Reload</soundReload>
+        <hotKey>Misc4</hotKey>
+        <chargeNoun>Beacon</chargeNoun>
+        <displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+      </li>
+    </comps>
+    <verbs>
+      <li>
+        <verbClass>AncotLibrary.Verb_DeployThing</verbClass>
+        <label>deploy glory beacon</label>
+        <commandIcon>Milira/Building/Buildings_Misc/Milira_DropBeacon</commandIcon>
+        <violent>false</violent>
+        <hasStandardCommand>true</hasStandardCommand>
+        <targetable>false</targetable>
+        <nonInterruptingSelfCast>true</nonInterruptingSelfCast>
+        <onlyManualCast>True</onlyManualCast>
+      </li>
+    </verbs>
+    <graphicData>
+      <texPath>Milira/Apparel/Utility/DropBeaconPack/DropBeaconPack</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1</drawSize>
+      <drawOffset>(0,0,0)</drawOffset>
+    </graphicData>
+    <tickerType>Normal</tickerType>
+    <statBases>
+      <WorkToMake>12000</WorkToMake>
+      <Mass>5.4</Mass>
+      <Flammability>0.4</Flammability>
+      <EquipDelay>1.5</EquipDelay>
+    </statBases>
+    <apparel>
+      <tags>
+        <li>Milira_DropBeaconPack</li>
+      </tags>
+      <!--<wornGraphicPath>Kiiro/Apparel/Null/Null</wornGraphicPath>-->
+    </apparel>
+    <tradeTags>
+    </tradeTags>
+    <allowedArchonexusCount>1</allowedArchonexusCount>
+  </ThingDef>
+
+
+  <!-- 谐振仪 -->
+  <ThingDef Name="Milira_ResonatorPack_Base" ParentName="Milira_UtilityBase" Abstract="True">
+    <thingClass>AncotLibrary.DeploymentPack_Thing</thingClass>
+    <description>A lightweight resonator that is easy to carry and deploy. Its range and protective capabilities have been compromised for the sake of portability, and it stores only enough energy to support its operation for a limited time. Upon use, it deploys a resonator at the location, which attunes with Milians of the same rank within its range.The resonator will self-destruct after 30 seconds of deployment.</description>
+    <techLevel>Spacer</techLevel>
+    <costList>
+      <Milira_SolarCrystal>20</Milira_SolarCrystal>
+      <ComponentSpacer>5</ComponentSpacer>
+      <Plasteel>100</Plasteel>
+      <Milira_ResonatorCore>4</Milira_ResonatorCore>
+    </costList>
+    <comps>
+    </comps>
+    <recipeMaker>
+      <recipeUsers Inherit="false">
+        <li>Milira_UniversalBench</li>
+      </recipeUsers>
+      <researchPrerequisite>Milira_MilianTech_ResonatorPack</researchPrerequisite>
+    </recipeMaker>
+    <graphicData>
+      <texPath>Milira/Apparel/Utility/ResonatorPack/ResonatorPack</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1</drawSize>
+      <drawOffset>(0,0,0)</drawOffset>
+    </graphicData>
+    <tickerType>Normal</tickerType>
+    <statBases>
+      <WorkToMake>12000</WorkToMake>
+      <Mass>5.4</Mass>
+      <Flammability>0.4</Flammability>
+      <EquipDelay>1.5</EquipDelay>
+    </statBases>
+    <apparel>
+      <tags>
+        <li>Milira_ResonatorPack</li>
+      </tags>
+      <!--<wornGraphicPath>Kiiro/Apparel/Null/Null</wornGraphicPath>-->
+    </apparel>
+    <tradeTags>
+    </tradeTags>
+    <allowedArchonexusCount>1</allowedArchonexusCount>
+  </ThingDef>
+
+  <!-- <ThingDef ParentName="Milira_ResonatorPack_Base">
+    <defName>Milira_ResonatorPack_Pawn</defName>
+    <label>Milira portable resonator (pawn)</label>
+    <costList>
+      <Milian_NamePlate_Pawn>10</Milian_NamePlate_Pawn>
+    </costList>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ApparelReloadable_DeployThing">
+        <thingToDeploy>Milira_CarriedResonator_Pawn</thingToDeploy>
+        <deployFleck>Milira_DropPodDistortion</deployFleck>
+        <deploySound>Milira_BuildingActive</deploySound>
+        <maxCharges>4</maxCharges>
+        <ammoDef>Milira_ResonatorCore</ammoDef>
+			  <ammoCountPerCharge>1</ammoCountPerCharge>
+        <destroyOnEmpty>false</destroyOnEmpty>
+        <soundReload>Standard_Reload</soundReload>
+        <hotKey>Misc4</hotKey>
+        <chargeNoun>resonator</chargeNoun>
+        <displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+      </li>
+    </comps>
+    <verbs>
+      <li>
+        <verbClass>AncotLibrary.Verb_DeployThing</verbClass>
+        <label>deploy resonator (pawn)</label>
+        <commandIcon>Milira/Building/Buildings_Misc/Resonator_BaseCarried</commandIcon>
+        <violent>false</violent>
+        <hasStandardCommand>true</hasStandardCommand>
+        <targetable>false</targetable>
+        <nonInterruptingSelfCast>true</nonInterruptingSelfCast>
+        <onlyManualCast>True</onlyManualCast>
+      </li>
+    </verbs>
+    <apparel>
+      <tags>
+        <li>Milira_ResonatorPack_Pawn</li>
+      </tags>
+    </apparel>
+  </ThingDef>
+
+  <ThingDef ParentName="Milira_ResonatorPack_Base">
+    <defName>Milira_ResonatorPack_Knight</defName>
+    <label>Milira portable resonator (knight)</label>
+    <costList>
+      <Milian_NamePlate_Knight>10</Milian_NamePlate_Knight>
+    </costList>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ApparelReloadable_DeployThing">
+        <thingToDeploy>Milira_CarriedResonator_Knight</thingToDeploy>
+        <deployFleck>Milira_DropPodDistortion</deployFleck>
+        <deploySound>Milira_BuildingActive</deploySound>
+        <maxCharges>4</maxCharges>
+        <ammoDef>Milira_ResonatorCore</ammoDef>
+			  <ammoCountPerCharge>1</ammoCountPerCharge>
+        <destroyOnEmpty>false</destroyOnEmpty>
+        <soundReload>Standard_Reload</soundReload>
+        <hotKey>Misc4</hotKey>
+        <chargeNoun>resonator</chargeNoun>
+        <displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+      </li>
+    </comps>
+    <verbs>
+      <li>
+        <verbClass>AncotLibrary.Verb_DeployThing</verbClass>
+        <label>deploy resonator (knight)</label>
+        <commandIcon>Milira/Building/Buildings_Misc/Resonator_BaseCarried</commandIcon>
+        <violent>false</violent>
+        <hasStandardCommand>true</hasStandardCommand>
+        <targetable>false</targetable>
+        <nonInterruptingSelfCast>true</nonInterruptingSelfCast>
+        <onlyManualCast>True</onlyManualCast>
+      </li>
+    </verbs>
+    <apparel>
+      <tags>
+        <li>Milira_ResonatorPack_Knight</li>
+      </tags>
+    </apparel>
+  </ThingDef>
+
+  <ThingDef ParentName="Milira_ResonatorPack_Base">
+    <defName>Milira_ResonatorPack_Bishop</defName>
+    <label>Milira portable resonator (bishop)</label>
+    <costList>
+      <Milian_NamePlate_Bishop>10</Milian_NamePlate_Bishop>
+    </costList>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ApparelReloadable_DeployThing">
+        <thingToDeploy>Milira_CarriedResonator_Bishop</thingToDeploy>
+        <deployFleck>Milira_DropPodDistortion</deployFleck>
+        <deploySound>Milira_BuildingActive</deploySound>
+        <maxCharges>4</maxCharges>
+        <ammoDef>Milira_ResonatorCore</ammoDef>
+			  <ammoCountPerCharge>1</ammoCountPerCharge>
+        <destroyOnEmpty>false</destroyOnEmpty>
+        <soundReload>Standard_Reload</soundReload>
+        <hotKey>Misc4</hotKey>
+        <chargeNoun>resonator</chargeNoun>
+        <displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+      </li>
+    </comps>
+    <verbs>
+      <li>
+        <verbClass>AncotLibrary.Verb_DeployThing</verbClass>
+        <label>deploy resonator (bishop)</label>
+        <commandIcon>Milira/Building/Buildings_Misc/Resonator_BaseCarried</commandIcon>
+        <violent>false</violent>
+        <hasStandardCommand>true</hasStandardCommand>
+        <targetable>false</targetable>
+        <nonInterruptingSelfCast>true</nonInterruptingSelfCast>
+        <onlyManualCast>True</onlyManualCast>
+      </li>
+    </verbs>
+    <apparel>
+      <tags>
+        <li>Milira_ResonatorPack_Bishop</li>
+      </tags>
+    </apparel>
+  </ThingDef>
+
+  <ThingDef ParentName="Milira_ResonatorPack_Base">
+    <defName>Milira_ResonatorPack_Rook</defName>
+    <label>Milira portable resonator (rook)</label>
+    <costList>
+      <Milian_NamePlate_Rook>10</Milian_NamePlate_Rook>
+    </costList>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_ApparelReloadable_DeployThing">
+        <thingToDeploy>Milira_CarriedResonator_Rook</thingToDeploy>
+        <deployFleck>Milira_DropPodDistortion</deployFleck>
+        <deploySound>Milira_BuildingActive</deploySound>
+        <maxCharges>4</maxCharges>
+        <ammoDef>Milira_ResonatorCore</ammoDef>
+			  <ammoCountPerCharge>1</ammoCountPerCharge>
+        <destroyOnEmpty>false</destroyOnEmpty>
+        <soundReload>Standard_Reload</soundReload>
+        <hotKey>Misc4</hotKey>
+        <chargeNoun>resonator</chargeNoun>
+        <displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+      </li>
+    </comps>
+    <verbs>
+      <li>
+        <verbClass>AncotLibrary.Verb_DeployThing</verbClass>
+        <label>deploy resonator (rook)</label>
+        <commandIcon>Milira/Building/Buildings_Misc/Resonator_BaseCarried</commandIcon>
+        <violent>false</violent>
+        <hasStandardCommand>true</hasStandardCommand>
+        <targetable>false</targetable>
+        <nonInterruptingSelfCast>true</nonInterruptingSelfCast>
+        <onlyManualCast>True</onlyManualCast>
+      </li>
+    </verbs>
+    <apparel>
+      <tags>
+        <li>Milira_ResonatorPack_Rook</li>
+      </tags>
+    </apparel>
+  </ThingDef> -->
+
+
+  <!-- 电容=================================================================================================== -->
+
+  <ThingDef Name="Milira_ChargeableWeaponUtilityBase" ParentName="Milira_UtilityBase" Abstract="true">
+    <techLevel>Spacer</techLevel>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1</drawSize>
+      <drawOffset>(0,0,0)</drawOffset>
+    </graphicData>
+    <statBases>
+      <Mass>0.8</Mass>
+      <EquipDelay>1.5</EquipDelay>
+    </statBases>
+    <apparel>
+      <tags>
+        <li>Milira_ChargeableWeaponUtility</li>
+        <li>Milian_Mechanoid_PawnIII</li>
+        <li>Milian_Mechanoid_PawnIV</li>
+        <li>Milian_Mechanoid_BishopIV</li>
+      </tags>
+      <wornGraphicData>
+        <renderUtilityAsPack>true</renderUtilityAsPack>
+      </wornGraphicData>
+      <bodyPartGroups Inherit="false">
+        <li>Waist</li>
+      </bodyPartGroups>
+    </apparel>
+    <comps>
+      <li Class="Milira.CompProperties_DressMilian">
+        <useJob>UseItem</useJob>
+        <useDuration>0</useDuration>
+        <warmupMote>Mote_ResurrectAbility</warmupMote>
+      </li>
+      <li Class="Milira.CompProperties_TargetEffect_DressMilian" />
+      <li Class="Milira.CompProperties_TargetableMilian">
+        <compClass>Milira.CompTargetable_Milian</compClass>
+        <ignoreQuestLodgerPawns>true</ignoreQuestLodgerPawns>
+        <targetableMilianPawnkinds>
+          <li>Milian_Mechanoid_PawnIII</li>
+          <li>Milian_Mechanoid_PawnIV</li>
+          <li>Milian_Mechanoid_BishopIV</li>
+        </targetableMilianPawnkinds>
+      </li>
+      <li Class="AncotLibrary.CompProperties_EnergyWeaponHyperlinks" />
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="Milira_ChargeableWeaponUtilityBase">
+    <defName>Milira_CapacitorI</defName>
+    <label>Milira mini capacitor</label>
+    <description>A small, portable expansion capacitor that can slightly increase the maximum charge capacity of energy weapons, but at the cost of a slight reduction in charge rate.</description>
+    <comps>
+    </comps>
+    <graphicData>
+      <texPath>Milira/Apparel/Utility/CapacitorI/CapacitorI</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1</drawSize>
+      <drawOffset>(0,0,0)</drawOffset>
+    </graphicData>
+    <costList>
+      <Milira_SolarCrystal>1</Milira_SolarCrystal>
+      <ComponentIndustrial>2</ComponentIndustrial>
+      <Milira_SplendidSteel>60</Milira_SplendidSteel>
+    </costList>
+    <statBases>
+      <WorkToMake>12000</WorkToMake>
+    </statBases>
+    <recipeMaker>
+      <researchPrerequisite>Milira_ParticleAcceleratorI</researchPrerequisite>
+    </recipeMaker>
+    <apparel>
+      <tags>
+        <li>Milira_CapacitorI</li>
+      </tags>
+      <wornGraphicPath>Milira/Apparel/Utility/CapacitorI/CapacitorI</wornGraphicPath>
+    </apparel>
+    <tradeTags>
+    </tradeTags>
+    <allowedArchonexusCount>1</allowedArchonexusCount>
+    <equippedStatOffsets>
+      <Ancot_WeaponMaxChargeFactor>0.1</Ancot_WeaponMaxChargeFactor>
+      <Ancot_WeaponChargeTickFactor>0.05</Ancot_WeaponChargeTickFactor>
+    </equippedStatOffsets>
+  </ThingDef>
+
+  <ThingDef ParentName="Milira_ChargeableWeaponUtilityBase">
+    <defName>Milira_CapacitorII</defName>
+    <label>Milira expansion capacitor</label>
+    <description>A medium-sized, portable expansion capacitor that enhances the maximum charge capacity of energy weapons, but reduces the charge rate.</description>
+    <comps>
+    </comps>
+    <graphicData>
+      <texPath>Milira/Apparel/Utility/CapacitorII/CapacitorII</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1</drawSize>
+      <drawOffset>(0,0,0)</drawOffset>
+    </graphicData>
+    <costList>
+      <Milira_SolarCrystal>2</Milira_SolarCrystal>
+      <ComponentIndustrial>3</ComponentIndustrial>
+      <Milira_SplendidSteel>80</Milira_SplendidSteel>
+    </costList>
+    <statBases>
+      <WorkToMake>12000</WorkToMake>
+    </statBases>
+    <recipeMaker>
+      <researchPrerequisite>Milira_ParticleAcceleratorII</researchPrerequisite>
+    </recipeMaker>
+    <apparel>
+      <tags>
+        <li>Milira_CapacitorII</li>
+      </tags>
+      <wornGraphicPath>Milira/Apparel/Utility/CapacitorII/CapacitorII</wornGraphicPath>
+    </apparel>
+    <tradeTags>
+    </tradeTags>
+    <allowedArchonexusCount>1</allowedArchonexusCount>
+    <equippedStatOffsets>
+      <Ancot_WeaponMaxChargeFactor>0.25</Ancot_WeaponMaxChargeFactor>
+      <Ancot_WeaponChargeTickFactor>0.1</Ancot_WeaponChargeTickFactor>
+    </equippedStatOffsets>
+  </ThingDef>
+
+  <ThingDef ParentName="Milira_ChargeableWeaponUtilityBase">
+    <defName>Milira_CapacitorIII</defName>
+    <label>Milira nuclear capacitor</label>
+    <description>A high-energy-density, portable expansion capacitor that significantly increases the maximum charge capacity of energy weapons, but severely reduces the charging rate.</description>
+    <comps>
+    </comps>
+    <graphicData>
+      <texPath>Milira/Apparel/Utility/CapacitorIII/CapacitorIII</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1</drawSize>
+      <drawOffset>(0,0,0)</drawOffset>
+    </graphicData>
+    <costList>
+      <Milira_SolarCrystal>4</Milira_SolarCrystal>
+      <ComponentSpacer>2</ComponentSpacer>
+      <Plasteel>80</Plasteel>
+    </costList>
+    <statBases>
+      <WorkToMake>12000</WorkToMake>
+    </statBases>
+    <recipeMaker>
+      <researchPrerequisite>Milira_ParticleAcceleratorIII</researchPrerequisite>
+    </recipeMaker>
+    <apparel>
+      <tags>
+        <li>Milira_CapacitorIII</li>
+      </tags>
+      <wornGraphicPath>Milira/Apparel/Utility/CapacitorIII/CapacitorIII</wornGraphicPath>
+    </apparel>
+    <tradeTags>
+    </tradeTags>
+    <allowedArchonexusCount>1</allowedArchonexusCount>
+    <equippedStatOffsets>
+      <Ancot_WeaponMaxChargeFactor>0.4</Ancot_WeaponMaxChargeFactor>
+      <Ancot_WeaponChargeTickFactor>0.2</Ancot_WeaponChargeTickFactor>
+    </equippedStatOffsets>
+  </ThingDef>
+
+
+  <!-- 能量聚集器=================================================================================================== -->
+
+  <ThingDef ParentName="Milira_ChargeableWeaponUtilityBase">
+    <defName>Milira_ChargeAccumulatorI</defName>
+    <label>Milira energy congregator</label>
+    <description>A small, portable energy congregator that sacrifices the maximum charge capacity of energy weapons in exchange for a slight increase in charge rate.</description>
+    <comps>
+    </comps>
+    <graphicData>
+      <texPath>Milira/Apparel/Utility/AccumulatorI/AccumulatorI</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1</drawSize>
+      <drawOffset>(0,0,0)</drawOffset>
+    </graphicData>
+    <costList>
+      <Milira_SolarCrystal>1</Milira_SolarCrystal>
+      <ComponentIndustrial>2</ComponentIndustrial>
+      <Milira_SplendidSteel>60</Milira_SplendidSteel>
+    </costList>
+    <statBases>
+      <WorkToMake>12000</WorkToMake>
+    </statBases>
+    <recipeMaker>
+      <researchPrerequisite>Milira_ParticleAcceleratorI</researchPrerequisite>
+    </recipeMaker>
+    <apparel>
+      <tags>
+        <li>Milira_ChargeAccumulatorI</li>
+      </tags>
+      <wornGraphicPath>Milira/Apparel/Utility/AccumulatorI/AccumulatorI</wornGraphicPath>
+    </apparel>
+    <tradeTags>
+    </tradeTags>
+    <allowedArchonexusCount>1</allowedArchonexusCount>
+    <equippedStatOffsets>
+      <Ancot_WeaponMaxChargeFactor>-0.1</Ancot_WeaponMaxChargeFactor>
+      <Ancot_WeaponChargeTickFactor>-0.1</Ancot_WeaponChargeTickFactor>
+    </equippedStatOffsets>
+  </ThingDef>
+
+  <ThingDef ParentName="Milira_ChargeableWeaponUtilityBase">
+    <defName>Milira_ChargeAccumulatorII</defName>
+    <label>Milira energy congregator M2</label>
+    <description>A portable energy congregator that sacrifices the maximum charge capacity of energy weapons in exchange for increase in charge rate.</description>
+    <comps>
+    </comps>
+    <graphicData>
+      <texPath>Milira/Apparel/Utility/AccumulatorII/AccumulatorII</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1</drawSize>
+      <drawOffset>(0,0,0)</drawOffset>
+    </graphicData>
+    <statBases>
+      <WorkToMake>12000</WorkToMake>
+    </statBases>
+    <costList>
+      <Milira_SolarCrystal>2</Milira_SolarCrystal>
+      <ComponentIndustrial>3</ComponentIndustrial>
+      <Milira_SplendidSteel>80</Milira_SplendidSteel>
+    </costList>
+    <recipeMaker>
+      <researchPrerequisite>Milira_ParticleAcceleratorII</researchPrerequisite>
+    </recipeMaker>
+    <apparel>
+      <tags>
+        <li>Milira_ChargeAccumulatorII</li>
+      </tags>
+      <wornGraphicPath>Milira/Apparel/Utility/AccumulatorII/AccumulatorII</wornGraphicPath>
+    </apparel>
+    <tradeTags>
+    </tradeTags>
+    <allowedArchonexusCount>1</allowedArchonexusCount>
+    <equippedStatOffsets>
+      <Ancot_WeaponMaxChargeFactor>-0.25</Ancot_WeaponMaxChargeFactor>
+      <Ancot_WeaponChargeTickFactor>-0.2</Ancot_WeaponChargeTickFactor>
+    </equippedStatOffsets>
+  </ThingDef>
+
+  <ThingDef ParentName="Milira_ChargeableWeaponUtilityBase">
+    <defName>Milira_ChargeAccumulatorIII</defName>
+    <label>Milira energy congregator M3</label>
+    <description>A portable energy congregator that significantly increases the charge rate of energy weapons in exchange for maximum charge capacity.</description>
+    <comps>
+    </comps>
+    <graphicData>
+      <texPath>Milira/Apparel/Utility/AccumulatorIII/AccumulatorIII</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1</drawSize>
+      <drawOffset>(0,0,0)</drawOffset>
+    </graphicData>
+    <statBases>
+      <WorkToMake>12000</WorkToMake>
+    </statBases>
+    <costList>
+      <Milira_SolarCrystal>4</Milira_SolarCrystal>
+      <ComponentSpacer>2</ComponentSpacer>
+      <Plasteel>80</Plasteel>
+    </costList>
+    <recipeMaker>
+      <researchPrerequisite>Milira_ParticleAcceleratorIII</researchPrerequisite>
+    </recipeMaker>
+    <apparel>
+      <tags>
+        <li>Milira_ChargeAccumulatorIII</li>
+      </tags>
+      <wornGraphicPath>Milira/Apparel/Utility/AccumulatorIII/AccumulatorIII</wornGraphicPath>
+    </apparel>
+    <tradeTags>
+    </tradeTags>
+    <allowedArchonexusCount>1</allowedArchonexusCount>
+    <equippedStatOffsets>
+      <Ancot_WeaponMaxChargeFactor>-0.6</Ancot_WeaponMaxChargeFactor>
+      <Ancot_WeaponChargeTickFactor>-0.45</Ancot_WeaponChargeTickFactor>
+    </equippedStatOffsets>
+  </ThingDef>
+
+
+  <ThingDef ParentName="ApparelNoQualityBase">
+    <defName>Milira_SupercomputingPack</defName>
+    <label>Milira supercomputing pack</label>
+    <description>A backpack containing a small supercomputer, used for assisting in the control of mechanoid.</description>
+    <techLevel>Ultra</techLevel>
+    <recipeMaker>
+      <unfinishedThingDef>UnfinishedPack</unfinishedThingDef>
+      <researchPrerequisite>Milira_Apparel_MechControl</researchPrerequisite>
+      <recipeUsers>
+        <li>Milira_UniversalBench</li>
+      </recipeUsers>
+      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+      <workSkill>Crafting</workSkill>
+      <effectWorking>Smith</effectWorking>
+      <soundWorking>Recipe_Machining</soundWorking>
+      <skillRequirements>
+        <Crafting>6</Crafting>
+      </skillRequirements>
+    </recipeMaker>
+    <costList>
+      <Milira_SplendidSteel>120</Milira_SplendidSteel>
+      <Milira_SolarCrystal>8</Milira_SolarCrystal>
+      <ComponentIndustrial>12</ComponentIndustrial>
+    </costList>
+    <graphicData>
+      <texPath>Milira/Apparel/Utility/SupercomputingPack/SupercomputingPack</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1</drawSize>
+    </graphicData>
+    <tickerType>Normal</tickerType>
+    <statBases>
+      <WorkToMake>12000</WorkToMake>
+      <Mass>2.4</Mass>
+      <Flammability>0.4</Flammability>
+      <EquipDelay>1.5</EquipDelay>
+    </statBases>
+    <thingCategories>
+      <li>ApparelUtility</li>
+    </thingCategories>
+    <equippedStatOffsets>
+      <MechBandwidth>12</MechBandwidth>
+      <WorkSpeedGlobalOffsetMech>0.2</WorkSpeedGlobalOffsetMech>
+    </equippedStatOffsets>
+    <apparel>
+      <countsAsClothingForNudity>false</countsAsClothingForNudity>
+      <scoreOffset>4</scoreOffset>
+      <mechanitorApparel>true</mechanitorApparel>
+      <careIfWornByCorpse>false</careIfWornByCorpse>
+      <careIfDamaged>false</careIfDamaged>
+      <wearPerDay>0</wearPerDay>
+      <bodyPartGroups>
+        <li>Waist</li>
+      </bodyPartGroups>
+      <layers>
+        <li>Belt</li>
+      </layers>
+      <wornGraphicPath>Milira/Apparel/Utility/SupercomputingPack/SupercomputingPack</wornGraphicPath>
+      <wornGraphicData>
+        <renderUtilityAsPack>true</renderUtilityAsPack>
+      </wornGraphicData>
+      <drawData>
+        <scale>1.25</scale>
+        <dataSouth>
+          <layer>-60</layer>
+        </dataSouth>
+        <dataNorth>
+          <layer>60</layer>
+        </dataNorth>
+      </drawData>
+    </apparel>
+    <tradeability>Sellable</tradeability>
+    <tradeTags>
+    </tradeTags>
+  </ThingDef>
+
+  <ThingDef ParentName="ApparelNoQualityBase">
+    <defName>Milira_DaedalusWings</defName>
+    <label>Milira daedalus wings</label>
+    <description>An auxiliary system suspended on body to assist in commanding Milians, and also enhances the wearer's ability to repair and maintain mechanical entities.</description>
+    <techLevel>Ultra</techLevel>
+    <recipeMaker>
+      <unfinishedThingDef>UnfinishedPack</unfinishedThingDef>
+      <researchPrerequisites>
+        <li>Milira_SuspensionSystem</li>
+        <li>Milira_Apparel_Daedalus</li>
+      </researchPrerequisites>
+      <recipeUsers>
+        <li>Milira_SunBlastFurnace</li>
+      </recipeUsers>
+      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+      <workSkill>Crafting</workSkill>
+      <effectWorking>Milira_SunBlastFurnaceBurning</effectWorking>
+      <soundWorking>MiliraRecipe_SunBlastFurnace</soundWorking>
+      <skillRequirements>
+        <Crafting>6</Crafting>
+      </skillRequirements>
+    </recipeMaker>
+    <costList>
+      <Milira_SolarCrystal>40</Milira_SolarCrystal>
+      <Milira_SunPlateSteel>40</Milira_SunPlateSteel>
+      <Plasteel>80</Plasteel>
+      <Milira_SunLightFuel>40</Milira_SunLightFuel>
+      <ComponentIndustrial>12</ComponentIndustrial>
+    </costList>
+    <graphicData>
+      <texPath>Milira/Apparel/Utility/DaedalusWings/DaedalusWings</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1</drawSize>
+      <drawOffset>(0,0,0)</drawOffset>
+    </graphicData>
+    <tickerType>Normal</tickerType>
+    <statBases>
+      <WorkToMake>30000</WorkToMake>
+      <Mass>3.4</Mass>
+      <Flammability>0.4</Flammability>
+      <EquipDelay>1.5</EquipDelay>
+    </statBases>
+    <thingCategories>
+      <li>ApparelUtility</li>
+    </thingCategories>
+    <equippedStatOffsets>
+      <MechControlGroups>4</MechControlGroups>
+      <MechBandwidth>20</MechBandwidth>
+      <MechRepairSpeed>0.4</MechRepairSpeed>
+    </equippedStatOffsets>
+    <apparel>
+      <countsAsClothingForNudity>false</countsAsClothingForNudity>
+      <scoreOffset>4</scoreOffset>
+      <mechanitorApparel>true</mechanitorApparel>
+      <careIfWornByCorpse>false</careIfWornByCorpse>
+      <careIfDamaged>false</careIfDamaged>
+      <wearPerDay>0</wearPerDay>
+      <bodyPartGroups>
+        <li>Torso</li>
+      </bodyPartGroups>
+      <layers>
+        <li>Belt</li>
+      </layers>
+      <wornGraphicPath>Milira/Apparel/Utility/DaedalusWings/DaedalusWings</wornGraphicPath>
+      <wornGraphicData>
+        <renderUtilityAsPack>true</renderUtilityAsPack>
+      </wornGraphicData>
+      <drawData>
+        <scale>1.25</scale>
+        <dataSouth>
+          <layer>-100</layer>
+        </dataSouth>
+        <dataNorth>
+          <layer>100</layer>
+        </dataNorth>
+      </drawData>
+    </apparel>
+    <tradeability>Sellable</tradeability>
+    <tradeTags>
+    </tradeTags>
+  </ThingDef>
+
+
+</Defs>

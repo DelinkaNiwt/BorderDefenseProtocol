@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: <color=#FFAA00><i>QBZ-101AE-XM EM-Rifle</i></color> -->
+  <QBZoneooneXuanMing_Elite.label>&lt;color=#FFAA00&gt;&lt;i&gt;【玄冥】先進射手步槍Δ&lt;/i&gt;&lt;/color&gt;</QBZoneooneXuanMing_Elite.label>
+  <!-- EN: A top-secret prototype based on XuanMing EM-Rifle, firing experimental anti-entropy projectiles, cooling targets down to absolute zero.\n	\n	This weapon has an onboard persona that can bond to only a single person. The wielder and intelligent weapon can synchronize their reflexes and attack with frightening speed, accuracy, and creativity. Once bonded to a wielder, the weapon's persona will refuse to be wielded by anyone else. -->
+  <QBZoneooneXuanMing_Elite.description>“玄冥”是由20mm防空炮改進而來的單兵武器，搭載絕密型號的試驗彈藥，其發射的逆熵爆破射彈可以在小範圍內造成熵減並將目標溫度降至絕對零度，使任何裝甲轉變為玻色-愛因斯坦凝聚態並失去剛性。彈頭內置超導環流場解構分子鍵弱化其結構使後續打擊效果更佳。 這把武器內置人格系統，在首次被使用後綁定。\n\n"鑄廿毫米鎮星銃'玄冥'，由防空巨炮化龍點睛。其逆熵破界彈貫入敵軀時，九幽冥氣噴薄，瞬息凝目標於太虛寒境，金湯甲胄化露；後繼彈丸借勢直搗黃龍，破障效率激增三倍。此銃藏器魂於膛線，初戰飲血即認主，槍鳴如夔牛低吼：'凍骨為路，破界為途'"。</QBZoneooneXuanMing_Elite.description>
+  <!-- EN: stock -->
+  <QBZoneooneXuanMing_Elite.tools.stock.label>槍托</QBZoneooneXuanMing_Elite.tools.stock.label>
+  <!-- EN: barrel -->
+  <QBZoneooneXuanMing_Elite.tools.barrel.label>槍管</QBZoneooneXuanMing_Elite.tools.barrel.label>
+  <!-- EN: <color=#FFAA00><i>QBZ-101AE-XM EM-Rifle</i></color> -->
+  <QBZoneooneXuanMing_Elite.verbs.Verb_Shoot.label>&lt;color=#FFAA00&gt;&lt;i&gt;【玄冥】先進射手步槍Δ&lt;/i&gt;&lt;/color&gt;</QBZoneooneXuanMing_Elite.verbs.Verb_Shoot.label>
+  
+</LanguageData>

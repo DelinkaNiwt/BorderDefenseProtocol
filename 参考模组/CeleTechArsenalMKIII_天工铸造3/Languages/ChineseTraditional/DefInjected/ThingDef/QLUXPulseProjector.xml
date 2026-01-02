@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <QLUX_Pulse_Projector_Persona.label>&lt;color=#FFAA00&gt;&lt;i&gt;【祝融】等離子炮Δ&lt;/i&gt;&lt;/color&gt;</QLUX_Pulse_Projector_Persona.label>
+  <!-- EN: Named after Zhu Rong, the god of fire for its devastating power, QLU-X is a powerful pulse projector used by PLA in 2080s.Due to its high accuracy and long range of fire, QLU-X is able to easily suppress enemy battle positions, bunkers and slower targets. It must hold a bead on its target for several seconds while charging, before it releases a devastating tsunami of power. The explosion is capable of melting concrete in its blast radius. The heat of the explosion will ignite anything nearby. It cannot fire at close-up targets to prevent friendly fire. -->
+  <QLUX_Pulse_Projector_Persona.description>QLU-X是21世紀80年代研發的單兵射流攻城炮，因其強大火力而被冠以火神祝融之名。 較長射程和高精度可以讓其輕松壓制敵陣地、防禦工事和低機動目標。在瞄準目標前需要預熱數秒，而後將釋放出毀滅性的能量。其爆炸範圍內的一切將被氣化。</QLUX_Pulse_Projector_Persona.description>
+  <!-- EN: barrel -->
+  <QLUX_Pulse_Projector_Persona.tools.barrel.label>炮管</QLUX_Pulse_Projector_Persona.tools.barrel.label>
+  <!-- EN: <color=#FF0000><i>QLU-X Pulse Projector</i></color> -->
+  <QLUX_Pulse_Projector_Persona.verbs.Verb_Shoot.label>【祝融】等離子炮Δ</QLUX_Pulse_Projector_Persona.verbs.Verb_Shoot.label>
+  
+</LanguageData>

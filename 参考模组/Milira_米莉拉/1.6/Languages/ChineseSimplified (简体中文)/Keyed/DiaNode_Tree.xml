@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+  <!-- EN: Milian Config -->
+  <Milira.MilianConfigTip>米莉安配置</Milira.MilianConfigTip>
+
+  <!-- EN: Milian config guide -->
+  <Milira.MilianConfigGuide>米莉安配置指南</Milira.MilianConfigGuide>
+  <!-- EN: A description of the milian configuration. You can view basic information about the milian configuration interface here. -->
+  <Milira.MilianConfigGuideDesc>一份关于米莉安配置界面的说明。你可以在这里查看关于米莉安配置界面的基本信息。</Milira.MilianConfigGuideDesc>
+
+  <!-- EN: -About Equipment Browsing-\nYou can view the weapon and apparels status of the milian in this configuration page. The small colored point at the top-left of the equipment icon represent the quality of the equipment. -->
+  <Milira.MilianConfigGuidePage0>-关于装备浏览-\n你可以在配置页面查看米莉安的武器和服装情况。装备图案左上方不同颜色的小圆点表示装备品质。</Milira.MilianConfigGuidePage0>
+  <!-- EN: -About Auto-Equip-\nYou can enable auto-equip for the milian in the interface. When this function is enabled, colonists capable of hauling will try to find suitable apparel for the milian in the storage area and equip it. The auto-equip system selects the optimal clothing based on armor value, quality, and maximum hit point, using a point-based system to choose the best option. Enabling this function will cause a certain level of computational load, so if you experience lag during gameplay, you can choose to enable or disable this feature as needed. -->
+  <Milira.MilianConfigGuidePage1>-关于自动换装-\n你可以在界面中为米莉安设置开启自动换装。当该功能设置为开启时，能够执行搬运工作的殖民者将尝试在存储区内寻找适合当前米莉安的服装并为其更换。自动换装所依据的属性是护甲值、品质与最大耐久值，根据三者积分制选取当前最优服装进行更换。开启这一功能将会造成一定程度的运算负荷，当你觉得游玩过程存在卡顿情况时，可酌情开启或关闭这个功能。</Milira.MilianConfigGuidePage1>
+  <!-- EN: -About Equipment Switch-\nIn addition to assigning a colonist to change Milian's weapon, you can also click on a Milian's weapon slot in the Milian configuration interface. In the pop-up menu, select the weapon you want to switch to. After confirming, the Milian will attempt to perform a weapon switch. If you no longer wish to change the weapon after confirming, click the weapon slot again to find the option to cancel the switch, or interrupt the Milian's current job to cancel it. -->
+  <Milira.MilianConfigGuidePage2>-关于更换武器-\n除了指派殖民者为米莉安更换武器以外，你也可以在米莉安配置界面中点击一个米莉安的武器栏，在弹出的菜单中为它选择要更换的武器，确认后这个米莉安会尝试执行一次更换武器的操作。如果确认后不再想要更换武器，再次点击武器栏可以找到取消更换武器的选项，或打断米莉安当前工作来取消。</Milira.MilianConfigGuidePage2>
+  <!-- EN: -About Work Management-\nAfter unlocking the technology "Milian Work Permissions", a new button will appear on this tab. Click it to switch to the Milian Work Management tab to assign tasks. -->
+  <Milira.MilianConfigGuidePage3>-关于工作管理-\n解锁科技“米莉安工作权限”后，该面板将会增加一个按钮，通过点击它跳转到米莉安工作管理面板进行工作安排。</Milira.MilianConfigGuidePage3>
+
+  <!-- 派系对话 -->
+  <!-- EN: Promotion for {0} -->
+  <Milira.TitleUpdate>{0}职位晋升</Milira.TitleUpdate>
+  <!-- EN: no promotion available -->
+  <Milira.TitleUpdate_Disabled>没有需要晋升的职位</Milira.TitleUpdate_Disabled>
+  <!-- EN: {0} has successfully registered with {1} as a {2}. {0} now has the following privileges: {3}\n\nRemaining reputation points held by {0}: {4}. -->
+  <Milira.TitleUpdate_Success>{0}已经在{1}成功注册成为{2}。{0}现在拥有以下权限：{3}\n\n{0}当前持有的声望剩余{4}。</Milira.TitleUpdate_Success>
+
+  <!-- EN: Copy {0}'s hair color to clipboard. -->
+  <Milira.MilianHairColor_Copy>复制{0}的发色至剪切板。</Milira.MilianHairColor_Copy>
+  <!-- EN: Paste hair color from clipboard. -->
+  <Milira.MilianHairColor_Paste>从剪切板粘贴发色。</Milira.MilianHairColor_Paste>
+
+</LanguageData>

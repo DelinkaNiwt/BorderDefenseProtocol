@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+<ThingDef Name="Milira_OnSkinBaseMaid" ParentName="Milira_OnSkinBase" Abstract="True">
+	<recipeMaker>
+		<researchPrerequisite>Milira_Apparel_Sister</researchPrerequisite>
+		<recipeUsers>
+			<li>Milira_UniversalBench</li>
+		</recipeUsers>
+	</recipeMaker>
+	<statBases>
+		<MaxHitPoints>180</MaxHitPoints>
+		<WorkToMake>7200</WorkToMake>
+		<ArmorRating_Sharp>0.10</ArmorRating_Sharp>
+        <ArmorRating_Blunt>0.10</ArmorRating_Blunt>
+        <ArmorRating_Heat>0.12</ArmorRating_Heat>
+		<StuffEffectMultiplierArmor>0.15</StuffEffectMultiplierArmor>
+		<Insulation_Cold>8</Insulation_Cold>
+        <Insulation_Heat>6</Insulation_Heat>
+		<StuffEffectMultiplierInsulation_Cold>0.30</StuffEffectMultiplierInsulation_Cold>
+		<StuffEffectMultiplierInsulation_Heat>0.30</StuffEffectMultiplierInsulation_Heat>
+	</statBases>
+	<costList>
+		<DevilstrandCloth>45</DevilstrandCloth>
+	</costList>
+	<costStuffCount>145</costStuffCount>
+	<stuffCategories>
+		<li>Fabric</li>
+		<li>Leathery</li>
+	</stuffCategories>
+	<apparel>
+	    <useWornGraphicMask>true</useWornGraphicMask>
+		<layers>
+			<li>Ancot_Pants</li>
+			<li>Middle</li>
+			<li>Shell</li>
+		</layers>
+		<drawData>
+			<dataNorth><layer>40</layer></dataNorth>
+		</drawData>
+		<tags>
+			<li>Milira_OnSkin</li>
+			<li>Milira_Sister</li>
+		</tags>
+		<bodyPartGroups>
+			<li>Torso</li>
+			<li>Legs</li>
+			<li>Arms</li>
+			<li>Neck</li>
+			<li>Shoulders</li>
+			<li>Feet</li>
+			<li>Hands</li>
+		</bodyPartGroups>
+	</apparel>
+</ThingDef>
+
+<ThingDef Name="Milira_OverheadBaseMaid" ParentName="Milira_OverheadBase" Abstract="True">
+	<recipeMaker>
+		<researchPrerequisite>Milira_Apparel_Sister</researchPrerequisite>
+		<recipeUsers>
+			<li>Milira_UniversalBench</li>
+		</recipeUsers>
+	</recipeMaker>
+	<costList>
+		<DevilstrandCloth>15</DevilstrandCloth>
+	</costList>
+	<costStuffCount>35</costStuffCount>
+	<stuffCategories>
+		<li>Fabric</li>
+		<li>Leathery</li>
+	</stuffCategories>
+	<statBases>
+		<MaxHitPoints>100</MaxHitPoints>
+		<WorkToMake>4800</WorkToMake>
+		<StuffEffectMultiplierArmor>0.1</StuffEffectMultiplierArmor>
+		<StuffEffectMultiplierInsulation_Cold>0.1</StuffEffectMultiplierInsulation_Cold>
+		<StuffEffectMultiplierInsulation_Heat>0.1</StuffEffectMultiplierInsulation_Heat>
+	</statBases>
+	<apparel>
+	    <useWornGraphicMask>true</useWornGraphicMask>
+		<tags>
+			<li>Milira_OverHead</li>
+			<li>Milira_Maid</li>
+		</tags>
+		<bodyPartGroups>
+			<li>UpperHead</li>
+		</bodyPartGroups>
+	</apparel>
+</ThingDef>
+
+
+
+<ThingDef ParentName="Milira_OnSkinBaseMaid">
+	<defName>Milira_SisterDressI</defName>
+	<label>Milira Sister dress (style 1)</label>
+	<description>A sister dress.</description>
+	<graphicData>
+		<texPath>Milira/Apparel/Onskin/SisterDressI/SisterDressI</texPath>
+	</graphicData>
+	<apparel>
+		<wornGraphicPath>Milira/Apparel/Onskin/SisterDressI/SisterDressI</wornGraphicPath>
+	</apparel>
+	<equippedStatOffsets>
+	</equippedStatOffsets>
+</ThingDef>
+
+<ThingDef ParentName="Milira_OverheadBaseMaid">
+	<defName>Milira_SisterHatI</defName>
+	<label>Milira Sister hat (style 1)</label>
+	<description>A sister hat.</description>
+	<costStuffCount>25</costStuffCount>
+	<graphicData>
+		<texPath>Milira/Apparel/OverHead/SisterHatI/SisterHatI</texPath>
+	</graphicData>
+	<apparel>
+		<wornGraphicPath>Milira/Apparel/OverHead/SisterHatI/SisterHatI</wornGraphicPath>
+	</apparel>
+	<equippedStatOffsets>
+		<MentalBreakThreshold>-0.02</MentalBreakThreshold>
+		<SocialImpact>0.05</SocialImpact>
+	</equippedStatOffsets>
+</ThingDef>
+
+
+<ThingDef ParentName="Milira_OnSkinBaseMaid">
+	<defName>Milira_SisterDressII</defName>
+	<label>Milira Sister dress (style 2)</label>
+	<description>A sister dress.</description>
+	<graphicData>
+		<texPath>Milira/Apparel/Onskin/SisterDressII/SisterDressII</texPath>
+	</graphicData>
+	<apparel>
+		<wornGraphicPath>Milira/Apparel/Onskin/SisterDressII/SisterDressII</wornGraphicPath>
+	</apparel>
+	<equippedStatOffsets>
+	</equippedStatOffsets>
+</ThingDef>
+
+<ThingDef ParentName="Milira_OverheadBaseMaid">
+	<defName>Milira_SisterHatII</defName>
+	<label>Milira Sister hat (style 2)</label>
+	<description>A sister hat.</description>
+	<costStuffCount>25</costStuffCount>
+	<graphicData>
+		<texPath>Milira/Apparel/OverHead/SisterHatII/SisterHatII</texPath>
+	</graphicData>
+	<apparel>
+		<wornGraphicPath>Milira/Apparel/OverHead/SisterHatII/SisterHatII</wornGraphicPath>
+	</apparel>
+	<equippedStatOffsets>
+		<MentalBreakThreshold>-0.02</MentalBreakThreshold>
+		<SocialImpact>0.05</SocialImpact>
+	</equippedStatOffsets>
+</ThingDef>
+
+<ThingDef ParentName="Milira_OnSkinBaseMaid">
+	<defName>Milira_SisterDressIII</defName>
+	<label>Milira Sister dress (style 3)</label>
+	<description>A sister dress.</description>
+	<graphicData>
+		<texPath>Milira/Apparel/Onskin/SisterDressIII/SisterDressIII</texPath>
+	</graphicData>
+	<apparel>
+		<wornGraphicPath>Milira/Apparel/Onskin/SisterDressIII/SisterDressIII</wornGraphicPath>
+	</apparel>
+	<equippedStatOffsets>
+	</equippedStatOffsets>
+</ThingDef>
+
+<ThingDef ParentName="Milira_OverheadBaseMaid">
+	<defName>Milira_SisterHatIII</defName>
+	<label>Milira Sister hat (style 3)</label>
+	<description>A sister hat.</description>
+	<costStuffCount>25</costStuffCount>
+	<graphicData>
+		<texPath>Milira/Apparel/OverHead/SisterHatIII/SisterHatIII</texPath>
+	</graphicData>
+	<apparel>
+		<wornGraphicPath>Milira/Apparel/OverHead/SisterHatIII/SisterHatIII</wornGraphicPath>
+	</apparel>
+	<equippedStatOffsets>
+		<MentalBreakThreshold>-0.02</MentalBreakThreshold>
+		<SocialImpact>0.05</SocialImpact>
+	</equippedStatOffsets>
+</ThingDef>
+
+
+</Defs>

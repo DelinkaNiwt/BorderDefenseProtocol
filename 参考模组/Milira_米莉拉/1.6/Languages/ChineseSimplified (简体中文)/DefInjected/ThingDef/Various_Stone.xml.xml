@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: solar-forged steel slag chunk -->
+  <Milira_ChunkSlag_SunPlateSteel.label>日盘钢残骸</Milira_ChunkSlag_SunPlateSteel.label>
+  <!-- EN: A chunk of solar-forged steel slag. While it's useless in its current form, it can be smelted to recover some resources. -->
+  <Milira_ChunkSlag_SunPlateSteel.description>一块日盘钢的残骸。虽然其目前的形态毫无用处，但可以通过在太阳熔炉熔炼回收金属资源。</Milira_ChunkSlag_SunPlateSteel.description>
+  
+</LanguageData>

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+  <!-- EN: hand over {0} -->
+  <Milira.HandOverFallenAngel>移交{0}</Milira.HandOverFallenAngel>
+  <!-- EN: hand over {0} from the caravan to the milira ground survey station. -->
+  <Milira.HandOverFallenAngelDesc>将远行队中的{0}交给米莉拉地面考察站。</Milira.HandOverFallenAngelDesc>
+  
+  
+  <!-- EN: flight status -->
+  <Milira.SwitchFly>飞行状态</Milira.SwitchFly>
+  <!-- EN: When drafted, {0} can switch to flight mode. While in flight, movement speed is greatly increased and terrain penalties are ignored. Melee and ranged dodge rates are improved, but shooting accuracy is slightly reduced.\n\nMaintaining flight mode consumes additional hunger. Flight cannot be sustained if hunger falls below 10%. -->
+  <Milira.SwitchFlyDesc>征召时，{0}可以切换行动模式为飞行。处于飞行状态时，移动能力大幅提升且无视地形减速，近战与远程闪避率提升，射击精度略微下降。\n\n维持飞行状态每秒需要额外消耗0.1%饱食度。饱食度低于10%时无法飞行。</Milira.SwitchFlyDesc>
+  <!-- EN: never -->
+  <Milira.SwitchFly_Never>从不</Milira.SwitchFly_Never>
+  <!-- EN: move only -->
+  <Milira.SwitchFly_OnlyForMove>仅移动</Milira.SwitchFly_OnlyForMove>
+  <!-- EN: always -->
+  <Milira.SwitchFly_Always>总是</Milira.SwitchFly_Always>
+
+  <!-- EN: current mode: never -->
+  <Milira.SwitchFly_NeverDesc>当前选择：从不</Milira.SwitchFly_NeverDesc>
+  <!-- EN: current mode: move only -->
+  <Milira.SwitchFly_OnlyForMoveDesc>当前选择：仅移动</Milira.SwitchFly_OnlyForMoveDesc>
+  <!-- EN: current mode: always -->
+  <Milira.SwitchFly_AlwaysDesc>当前选择：总是</Milira.SwitchFly_AlwaysDesc>
+
+</LanguageData>

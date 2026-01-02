@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+    
+    <!-- EN: Battle Suit: Daedalus -->
+    <Milira_Apparel_Daedalus.label>战服：代达罗斯</Milira_Apparel_Daedalus.label>
+    <!-- EN: Study the combat uniform of the Sky Elves. -->
+    <Milira_Apparel_Daedalus.description>研究天空精灵用于战斗的服装。</Milira_Apparel_Daedalus.description>
+    
+    <!-- EN: Milira Mech Control -->
+    <Milira_Apparel_MechControl.label>米莉拉机械控制</Milira_Apparel_MechControl.label>
+    <!-- EN: Study the mech control technology of the Sky Elves. -->
+    <Milira_Apparel_MechControl.description>研究天空精灵控制机械的技术。</Milira_Apparel_MechControl.description>
+    
+    <!-- EN: Milian Combat Privilege -->
+    <Milira_MilianTech_AutoFight.label>米莉安战斗权限</Milira_MilianTech_AutoFight.label>
+    <!-- EN: Study the combat privileges of milian with which milian could deal with threats under auto-combat mode. -->
+    <Milira_MilianTech_AutoFight.description>研究米莉安战斗权限。研究完成后，米莉安可以使用自主作战模式应对威胁。</Milira_MilianTech_AutoFight.description>
+    <!-- EN: You’ve unlocked the combat privilege of Milian. Choose a Milian to switch it into auto-fight mode. Under this mode Milian would make annihilating of foes in the map their priority, autonomously utilizing shields, floating units and special abilities wielded.\n\n Milian could be out of range the mechanitor able to control by raising the energy consumption by 25%. By drafting you can immediately regain control of chosen Milian, however to end their autonomous combat you shall switch the auto-fight mode off.\n\n Milian shall never conserved resources carried. Consider carefully whether should you switch auto-fight mode on for Milian to fight. -->
+    <Milira_MilianTech_AutoFight.discoveredLetterText>你已经解锁了米莉安的战斗权限，现在可以在选中米莉安时为其切换到自动战斗模式了。在自动战斗模式下，米莉安以消灭地图中的敌人作为第一要务，并且会自行根据情况使用携带的盾牌、浮游炮以及特殊能力。\n\n处于自动战斗模式的米莉安可以离开机械师控制范围，但同时电量消耗会提高25%/天；你可以征召以立刻获得当前选中米莉安的指挥权，但想要结束米莉安自动战斗则必须将自动战斗模式切换为关闭。\n\n米莉安在自动战斗时不会节省资源。慎重考虑是否为依赖携带资源作战的米莉安开启自动战斗模式。</Milira_MilianTech_AutoFight.discoveredLetterText>
+    <!-- EN: Milian Autonomous Combat -->
+    <Milira_MilianTech_AutoFight.discoveredLetterTitle>米莉安自动战斗</Milira_MilianTech_AutoFight.discoveredLetterTitle>
+    
+    <!-- EN: Milian: Bishop I -->
+    <Milira_MilianTech_BishopI.label>米莉安：主教I型</Milira_MilianTech_BishopI.label>
+    <!-- EN: Study Milian Bishop I with repair ability and its accompanying equipment. -->
+    <Milira_MilianTech_BishopI.description>研究拥有维修能力的米莉安主教I型以及相关装备。</Milira_MilianTech_BishopI.description>
+    
+    <!-- EN: Milian: Bishop II -->
+    <Milira_MilianTech_BishopII.label>米莉安：主教II型</Milira_MilianTech_BishopII.label>
+    <!-- EN: Study Milian Bishop II with support ability and its accompanying equipment. -->
+    <Milira_MilianTech_BishopII.description>研究拥有支援能力的米莉安主教II型以及相关装备。</Milira_MilianTech_BishopII.description>
+    
+    <!-- EN: Milian: Consul -->
+    <Milira_MilianTech_BishopIII.label>米莉安：执政官</Milira_MilianTech_BishopIII.label>
+    <!-- EN: Study Milian Consul which operates with multiple autonomous units in battle and its accompanying equipment. -->
+    <Milira_MilianTech_BishopIII.description>研究使用复数自律单元作战的米莉安执政官以及相关装备。</Milira_MilianTech_BishopIII.description>
+    
+    <!-- EN: Milian: Cardinal -->
+    <Milira_MilianTech_BishopIV.label>米莉安：枢机主教</Milira_MilianTech_BishopIV.label>
+    <!-- EN: Study Milian Cardinal with good capacities in infiltration and covert operations and its accompanying equipment. -->
+    <Milira_MilianTech_BishopIV.description>研究擅长潜伏和隐秘作战的米莉安枢机主教以及相关装备。</Milira_MilianTech_BishopIV.description>
+    
+    <!-- EN: Milian Gestator -->
+    <Milira_MilianTech_Gestator.label>米莉安培育舱</Milira_MilianTech_Gestator.label>
+    <!-- EN: Study the gestator for gestating and resurrecting Milian. -->
+    <Milira_MilianTech_Gestator.description>研究可用于培育和复活米莉安的建筑设施。</Milira_MilianTech_Gestator.description>
+    <!-- EN: You can gestate your own Milian now. Milian are anthropomorphous mechanics divided into several class permissions.\n\n To gestate Milian, you shall gain the corresponding permission chips that you never could craft and only to be gained through trade or possibly by disassembling Milian. \n\n You may choose different armor or weapons for Milian depending on its class permission whose supported type shall be listed in the detailed description of each Milian. \n\n-Change Weaponry-\nChoose a colonist then right click the Milian you want to change weaponry, and choose to equip weapon for Milian in the context menu then find your desire weaponry.\n\n-Change Apparel-\nChoose an colonist then right click the apparel you desire and choose to equip apparel for Milian in the context menu then find your desire Milian. \n\n-Remove Armor or Weaponry-\nChoose a colonist and right click the Milian, and choose to unequip Milian with equipment in the context menu then find your desire apparel or weaponry. -->
+    <Milira_MilianTech_Gestator.discoveredLetterText>现在你可以培育自己的米莉安了。米莉安是由米莉拉仿造自身样貌创造的人形机械体，根据职能区别划分有数个职阶。\n\n培育米莉安需要用到对应职阶的许可芯片。这种芯片无法制造，你可以通过贸易或是拆解米莉安概率获取。\n\n你可以为米莉安更换装甲和武器。不同的米莉安能够支持的装甲类型和武器类型也不一样，相关信息会在各个米莉安型号的描述中详细列出。\n		\n-更换武器-\n选中一位殖民者并右键想要更换武器的米莉安，在弹出的菜单里选中“为米莉安装备武器”的选项后选择想要装备的武器。\n		\n-更换服装-\n选中一位殖民者并右键想要为米莉安更换的服装，在弹出的菜单里选中“为米莉安着装服装”的选项后选择想要更换服装的米莉安。\n		\n-卸下服装或武器-\n选中一位殖民者并右键米莉安，在弹出的菜单里选中“为米莉安卸下装备”后选择想要卸载的服装或武器。</Milira_MilianTech_Gestator.discoveredLetterText>
+    <!-- EN: Milian -->
+    <Milira_MilianTech_Gestator.discoveredLetterTitle>米莉安</Milira_MilianTech_Gestator.discoveredLetterTitle>
+    
+    <!-- EN: Milian: Knight I -->
+    <Milira_MilianTech_KnightI.label>米莉安：骑士I型</Milira_MilianTech_KnightI.label>
+    <!-- EN: Study Milian Knight I with good capacities in guerrilla warfare and raids, along with its accompanying equipment. -->
+    <Milira_MilianTech_KnightI.description>研究擅长游击和突袭的米莉安骑士I型以及相关装备。</Milira_MilianTech_KnightI.description>
+    
+    <!-- EN: Milian: Knight II -->
+    <Milira_MilianTech_KnightII.label>米莉安：骑士II型</Milira_MilianTech_KnightII.label>
+    <!-- EN: Study Milian Knight II with balanced defense and offense capacities and its accompanying equipment. -->
+    <Milira_MilianTech_KnightII.description>研究兼顾防御和进攻的米莉安骑士II型以及相关装备。</Milira_MilianTech_KnightII.description>
+    
+    <!-- EN: Milian: Outrider -->
+    <Milira_MilianTech_KnightIII.label>米莉安：征战骑士</Milira_MilianTech_KnightIII.label>
+    <!-- EN: Study Milian Outrider with good capacities in charging and offense and its accompanying equipment. -->
+    <Milira_MilianTech_KnightIII.description>研究擅长突进和进攻的米莉安征战骑士以及相关装备。</Milira_MilianTech_KnightIII.description>
+    
+    <!-- EN: Milian: Paladin -->
+    <Milira_MilianTech_KnightIV.label>米莉安：帕拉丁</Milira_MilianTech_KnightIV.label>
+    <!-- EN: Study Milian Paladin with good capacities in support and defense and its accompanying equipment. -->
+    <Milira_MilianTech_KnightIV.description>研究擅长支援和防御的米莉安帕拉丁以及相关装备。</Milira_MilianTech_KnightIV.description>
+    
+    <!-- EN: Milian: Pawn I -->
+    <Milira_MilianTech_PawnI.label>米莉安：士兵I型</Milira_MilianTech_PawnI.label>
+    <!-- EN: Study Milian Pawn I as basic shooter and its accompanying equipment. -->
+    <Milira_MilianTech_PawnI.description>研究作为基础射手的米莉安士兵I型以及相关装备。</Milira_MilianTech_PawnI.description>
+    
+    <!-- EN: Milian: Pawn II -->
+    <Milira_MilianTech_PawnII.label>米莉安：士兵II型</Milira_MilianTech_PawnII.label>
+    <!-- EN: Study Milian Pawn II as support shooter and its accompanying equipment. -->
+    <Milira_MilianTech_PawnII.description>研究作为支援射手的米莉安士兵II型以及相关装备。</Milira_MilianTech_PawnII.description>
+    
+    <!-- EN: Milian: Guard -->
+    <Milira_MilianTech_PawnIII.label>米莉安：禁卫军</Milira_MilianTech_PawnIII.label>
+    <!-- EN: Study Milian Guard as elite shooter and its accompanying equipment. -->
+    <Milira_MilianTech_PawnIII.description>研究作为中坚射手的米莉安禁卫军以及相关装备。</Milira_MilianTech_PawnIII.description>
+    
+    <!-- EN: Milian: Captain -->
+    <Milira_MilianTech_PawnIV.label>米莉安：百夫长</Milira_MilianTech_PawnIV.label>
+    <!-- EN: Study Milian Captain with commanding ability and its accompanying equipment. -->
+    <Milira_MilianTech_PawnIV.description>研究拥有指挥能力的米莉安百夫长以及相关装备。</Milira_MilianTech_PawnIV.description>
+    
+    <!-- EN: Milian Power Station -->
+    <Milira_MilianTech_Recharger.label>米莉安能源站</Milira_MilianTech_Recharger.label>
+    <!-- EN: Study the charging building facilities of Milian. -->
+    <Milira_MilianTech_Recharger.description>研究米莉安的充能建筑设施。</Milira_MilianTech_Recharger.description>
+    
+    <!-- EN: Milian: Rook I -->
+    <Milira_MilianTech_RookI.label>米莉安：战车I型</Milira_MilianTech_RookI.label>
+    <!-- EN: Study Milian Rook I equipped with projectile interceptor and its accompanying equipment. -->
+    <Milira_MilianTech_RookI.description>研究携带能量护盾的米莉安战车I型以及相关装备。</Milira_MilianTech_RookI.description>
+    
+    <!-- EN: Milian: Rook II -->
+    <Milira_MilianTech_RookII.label>米莉安：战车II型</Milira_MilianTech_RookII.label>
+    <!-- EN: Study Milian Rook II which place extreme emphasis on defense and its accompanying equipment. -->
+    <Milira_MilianTech_RookII.description>研究极端注重防御的米莉安战车II型以及相关装备。</Milira_MilianTech_RookII.description>
+    
+    <!-- EN: Milian: Striker -->
+    <Milira_MilianTech_RookIII.label>米莉安：无畏战车</Milira_MilianTech_RookIII.label>
+    <!-- EN: Study Milian Striker with good capacities in front lines pushing and defense and its accompanying equipment. -->
+    <Milira_MilianTech_RookIII.description>研究擅长推进战线和防御的米莉安无畏战车以及相关装备。</Milira_MilianTech_RookIII.description>
+    
+    <!-- EN: Milian: Eternal Fortress -->
+    <Milira_MilianTech_RookIV.label>米莉安：不落要塞</Milira_MilianTech_RookIV.label>
+    <!-- EN: Study Milian Eternal Fortress which can transform into a fortified fortress in battle and its accompanying equipment. -->
+    <Milira_MilianTech_RookIV.description>研究能够变形为稳固要塞作战的米莉安不落要塞以及相关装备。</Milira_MilianTech_RookIV.description>
+    
+    <!-- EN: Milian work management -->
+    <Milira_MilianTech_WorkManagement.label>米莉安工作权限</Milira_MilianTech_WorkManagement.label>
+    <!-- EN: Study milian work permissions. By finishing this research, milians can be assigned work types and priorities. -->
+    <Milira_MilianTech_WorkManagement.description>研究米莉安工作权限。研究完成后，米莉安可以被安排工作种类与优先级。</Milira_MilianTech_WorkManagement.description>
+    <!-- EN: You have unlocked milian work permissions. Now you can switch to the milian work management tab via the button in the Milian configuration tab to assign tasks. -->
+    <Milira_MilianTech_WorkManagement.discoveredLetterText>你已经解锁了米莉安的工作权限，现在可以通过米莉安配置界面的按钮切换至米莉安工作管理界面进行工作安排了。</Milira_MilianTech_WorkManagement.discoveredLetterText>
+    <!-- EN: milian work management -->
+    <Milira_MilianTech_WorkManagement.discoveredLetterTitle>米莉安工作权限</Milira_MilianTech_WorkManagement.discoveredLetterTitle>
+    
+</LanguageData>

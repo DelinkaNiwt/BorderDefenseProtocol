@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <!-- EN: change camo -->
+  <CMC_GunColorPicker>武器涂装</CMC_GunColorPicker>
+  <!-- EN: You can customise CeleTech weapons' camouflage color by clicking a color and a pawn equipping a CeleTech gun as main weapon.\nsome weapons are not customisable. -->
+  <CMC_GunColorPickerDesciption>选择当前装备天工武器的小人可更换其武器涂装颜色。\n近战在内的特殊武器涂装无法换色。</CMC_GunColorPickerDesciption>
+  <!-- EN: select PAWN equipped with CeleTech weapon -->
+  <MessageMustSelectCMCGun>请选择天工武器（需装备为主武器）</MessageMustSelectCMCGun>
+  <!-- EN: adjust shield size -->
+  <CMC.ChangeSize>更改护盾半径</CMC.ChangeSize>
+  <!-- EN: adjust shield size -->
+  <CMC.ChangeSizeDesc>更改护盾半径</CMC.ChangeSizeDesc>
+  <!-- EN: adjust shield size -->
+  <CMC.ChangeSizeTitle>更改护盾半径</CMC.ChangeSizeTitle>
+  <!-- EN: current radius: {0}\nrange: 20 ~ 60 tiles -->
+  <CMC.ChangeSizeDescription>当前半径: {0}\n范围（20-60格）</CMC.ChangeSizeDescription>
+  <!-- EN: current radius: {0}\n -->
+  <CMC.ShieldSize>护盾当前半径: {0}\n</CMC.ShieldSize>
+  <!-- EN: The deployment of the "Kunlun" AESA radar is complete, and the anti-tank missile turret will gain automatic attack capability. -->
+  <Message_AESASetUp>“昆仑”雷达部署完成，反坦克导弹塔将获得自动攻击能力。</Message_AESASetUp>
+  <!-- EN: The "Kunlun" AESA radar has been shut down, and the anti-tank missile turret will lose its automatic attack capability. -->
+  <Message_Destroyed>“昆仑”雷达已停机，反坦克导弹塔将失去自动攻击能力。</Message_Destroyed>
+  <!-- EN: energy pulse damage -->
+  <StatEnergyWeaponDMG_Label>能量伤害</StatEnergyWeaponDMG_Label>
+  <!-- EN: {0} -->
+  <StatEnergyWeaponDMG_Desc>{0}</StatEnergyWeaponDMG_Desc>
+  <!-- EN: damage caused by an energy pulse:{0}\n -->
+  <StatEnergyWeaponDMG_Text>能量伤害数值:{0}\n</StatEnergyWeaponDMG_Text>
+  <!-- EN: energy pulse penetration -->
+  <StatEnergyWeaponAP_Label>穿深</StatEnergyWeaponAP_Label>
+  <!-- EN: {0} -->
+  <StatEnergyWeaponAP_Desc>{0}</StatEnergyWeaponAP_Desc>
+  <!-- EN: energy pulse penetration:{0}\n -->
+  <StatEnergyWeaponAP_Text>能量武器穿深:{0}\n</StatEnergyWeaponAP_Text>
+  <!-- EN: extra damage -->
+  <StatEnergyWeaponDMG2_Label>额外伤害</StatEnergyWeaponDMG2_Label>
+  <!-- EN: {0} -->
+  <StatEnergyWeaponDMG2_Desc>{0}</StatEnergyWeaponDMG2_Desc>
+  <!-- EN: extra damage amount:{0}\n -->
+  <StatEnergyWeaponDMG2_Text>额外伤害数值:{0}\n</StatEnergyWeaponDMG2_Text>
+  <!-- EN: extra damage penetration -->
+  <StatEnergyWeaponAP2_Label>额外伤害穿深</StatEnergyWeaponAP2_Label>
+  <!-- EN: {0} -->
+  <StatEnergyWeaponAP2_Desc>{0}</StatEnergyWeaponAP2_Desc>
+  <!-- EN: extra damage penetration:{0}\n -->
+  <StatEnergyWeaponAP2_Text>额外伤害穿深:{0}\n</StatEnergyWeaponAP2_Text>
+  <!-- EN: scatter radius -->
+  <StatEnergyWeaponDMG3Radius_Label>溅射范围</StatEnergyWeaponDMG3Radius_Label>
+  <!-- EN: {0} -->
+  <StatEnergyWeaponDMG3Radius_Desc>{0}</StatEnergyWeaponDMG3Radius_Desc>
+  <!-- EN: laser scatter radius:{0} -->
+  <StatEnergyWeaponDMG3Radius_Text>溅射范围:{0}\n此范围内会随机发生爆炸</StatEnergyWeaponDMG3Radius_Text>
+  <!-- EN: salvo size -->
+  <StatShootNum_Label>齐射弹药数</StatShootNum_Label>
+  <!-- EN: {0} -->
+  <StatShootNum_Desc>{0}</StatShootNum_Desc>
+  <!-- EN: Salvo size of this mounted weapon is{0}, ammo consumption is also multiplies by this value. -->
+  <StatShootNum_Text>装备的武器每次齐射{0}发弹药, 弹药消耗也会乘以此系数。</StatShootNum_Text>
+  
+  <!-- EN: A missile lost its intended target. -->
+  <Message_MissileLostTarget>导弹目标丢失</Message_MissileLostTarget>
+  
+  <!-- EN: Celestial Artisan Guild - UTS -->
+  <CMC_TradeShipName>天工商盟-无人贸易穿梭机</CMC_TradeShipName>
+  <!-- EN: //Call UTS cooldown:{0}// -->
+  <CMC_TradeShipCoolDown>//呼叫贸易穿梭机冷却时间:{0}小时//</CMC_TradeShipCoolDown>
+  <!-- EN: send away -->
+  <CMC_TraderShipsSendAway>返航</CMC_TraderShipsSendAway>
+  <!-- EN: Send away unmaned-trader shuttle. -->
+  <CMC_TraderShipsSendAwayDesc>使无人贸易穿梭机返回运输中枢</CMC_TraderShipsSendAwayDesc>
+  <!-- EN: landing zone blocked: -->
+  <CMC_LandingZoneBlocked>着陆区被侵入:</CMC_LandingZoneBlocked>
+  <!-- EN: landing zone is blocked by {0} -->
+  <CMC_BlockedBy>{0}</CMC_BlockedBy>
+  <!-- EN: UTS arrived, landing. -->
+  <Message_CMC_TraderLanded>无人贸易穿梭机已抵达，降落中，注意清空降落区。</Message_CMC_TraderLanded>
+  <!-- EN: UTS is unable to land, leaving. You need at least one powered and cleared landing platform. -->
+  <Message_CMC_TraderCantLanded>无人贸易穿梭机自主降落程序执行失败，已返航。至少需要一个通电的空旷降落平台。</Message_CMC_TraderCantLanded>
+  
+  <!-- EN: call supply UTS -->
+  <CMC_CallAuxTrader>呼叫补给无人穿梭机</CMC_CallAuxTrader>
+  <!-- EN: call arsenal UTS -->
+  <CMC_CallArsTrader>呼叫军需无人穿梭机</CMC_CallArsTrader>
+  <!-- EN: On cooldown, {0} hours left. -->
+  <Message_CMC_TraderCD>当前选项冷却中，{0}小时后可使用。</Message_CMC_TraderCD>
+  
+  <!-- EN: attenuation distance -->
+  <Stat_CMCDMGDrange_Label>衰减距离</Stat_CMCDMGDrange_Label>
+  <!-- EN: {0} -->
+  <Stat_CMCDMGDrange_Desc>{0}</Stat_CMCDMGDrange_Desc>
+  <!-- EN: Projectile damage and penetration attenuation starts from:{0}\nDamage: Inverse-square decay\nPenetration: Inverse-cube decay -->
+  <Stat_CMCDMGDrange_Text>命中{0}格以外目标的子弹将受到伤害和穿深衰减\n伤害衰减:伤害与距离的平方成反比\n穿深衰减:穿深与距离的立方成反比</Stat_CMCDMGDrange_Text>
+  <!-- EN: damage floor ratio -->
+  <StatMinDamageMultiplier_Label>保底伤害比例</StatMinDamageMultiplier_Label>
+  <!-- EN: {0} -->
+  <StatMinDamageMultiplier_Desc>{0}</StatMinDamageMultiplier_Desc>
+  <!-- EN: damage floor ratio:{0} -->
+  <StatMinDamageMultiplier_Text>保底伤害比例:{0}</StatMinDamageMultiplier_Text>
+  <!-- EN: penetration floor ratio -->
+  <StatMinPeneMultiplier_Label>保底穿深比例</StatMinPeneMultiplier_Label>
+  <!-- EN: {0} -->
+  <StatMinPeneMultiplier_Desc>{0}</StatMinPeneMultiplier_Desc>
+  <!-- EN: penetration floor ratio:{0} -->
+  <StatMinPeneMultiplier_Text>保底穿深比例:{0}</StatMinPeneMultiplier_Text>
+  
+  <!-- EN: I.T.C.V.S.is blocked by impassable building. -->
+  <CMC.TempControlIsBlocked>I.T.C.V.S.温控被遮挡无法工作</CMC.TempControlIsBlocked>
+  
+  <!-- EN: Radar Illumination -->
+  <CMC.ScanMap>雷达照射</CMC.ScanMap>
+	<!-- EN: Utilizes Kunlun radar to illuminate designated AO, enabling long-range artillery and cruise missiles to autonomously engage hostile targets within the zone. -->
+  <CMC.ScanMapDesc>使用「昆仑」雷达对地图上的某一区域进行照射，允许远程火炮和巡航导弹自主攻击区域内敌对目标。</CMC.ScanMapDesc>
+	<!-- EN: Terminate Radar Illumination -->
+  <CMC.ScanMapStop>停止雷达照射</CMC.ScanMapStop>
+	<!-- EN: Radar illumination terminated in AO {0}. -->
+  <CMC.ScanMapStopDesc>对{0}区域停止雷达照射。</CMC.ScanMapStopDesc>
+	<!-- EN: Radar illumination terminated in current AO. -->
+  <CMC.ScanMapStopDescDefault>对当前区域停止雷达照射。</CMC.ScanMapStopDescDefault>
+	<!-- EN: Kunlun radar providing real-time fire control data for AO {0}. Hostile target tracking active. -->
+  <CMC_Targeting>「昆仑」雷达正在提供{0}区域的精确火控数据，敌对目标信息持续检测中。</CMC_Targeting>
+	<!-- EN: Kunlun radar providing real-time fire control data for current AO. Hostile target tracking active. -->
+  <CMC_TargetingDefault>“昆仑”雷达正在提供当前区域的精确火控数据，敌对目标信息持续检测中。</CMC_TargetingDefault>
+	<!-- EN: Fire control request denied. Non-hostile faction signature detected in AO. IFF verification failed. -->
+  <CMC.ScanMapFailed>火控照射请求失败，检测到当前区域有非敌对派系信号，敌我识别未通过。</CMC.ScanMapFailed>
+	
+	<!-- EN: switch to Low-Voltage Direct Fire Mode -->
+  <CMC_CommandTargetMapFromWorld>切换到低压平射模式</CMC_CommandTargetMapFromWorld>
+<!-- EN: Current: Indirect Fire (attacks radar-locked map tile targets). After switching: Attacks in-map targets.\n\nMagnetic rails fully charged to accelerate projectiles to first cosmic velocity. Turret cooling and auto-loading systems operating at full power. -->
+  <CMC_CommandTarggetMapFromWorldDesc>当前为曲射模式，攻击雷达锁定的地图格目标；模式切换后将攻击地图内目标。\n\n磁轨完全充能以将炮弹加速至第一宇宙速度，炮塔散热和自动装填系统正以满功率模式工作。</CMC_CommandTarggetMapFromWorldDesc>
+
+<!-- EN: switch to High-Voltage Indirect Fire Mode -->
+  <CMC_CommandTargetWorldFromMap>切换到高压曲射模式</CMC_CommandTargetWorldFromMap>
+<!-- EN: Current: Direct Fire (attacks in-map targets). After switching: Attacks radar-locked map tile targets.\n\nMagnetic rails partially charged. All turret subsystems operating in low-power mode. -->
+  <CMC_CommandTarggetWorldFromMapDesc>当前为平射模式，攻击地图内目标；模式切换后将攻击雷达锁定的地图格目标。\n\n磁轨部分充能，炮塔各系统正以低功率模式工作。</CMC_CommandTarggetWorldFromMapDesc>
+<!-- EN: Switch to Low-Voltage Direct Fire Mode -->
+  <CMC_CommandTargetWorldFromMap>切换到高压曲射模式</CMC_CommandTargetWorldFromMap>
+  <!-- EN: Current: Indirect Fire (attacks radar-locked map tile targets). After switching: Attacks in-map targets.\n\nMagnetic rails fully charged. All turret subsystems operating in high-power mode. -->
+  <CMC_CommandTarggetWorldFromMapDesc>当前为平射模式，攻击地图内目标；模式切换后将攻击雷达锁定的地图格目标。\n\n磁轨部分充能，炮塔各系统正以低功率模式工作。</CMC_CommandTarggetWorldFromMapDesc>
+  
+<!-- EN: release floating gun -->
+  <Command_CMC_ReleaseUAV>释放浮游炮</Command_CMC_ReleaseUAV>
+  <!--Command_CMCReleaseUAV_Desc>勾选后释放浮游炮，使其进入攻击或协助模式，将持续使用电容储量。禁止选项后浮游炮会返回并充电。</Command_CMCReleaseUAV_Desc-->
+  <!-- EN: auto-release -->
+  <Command_CMC_AutoReleaseUAV>浮游炮自律释放</Command_CMC_AutoReleaseUAV>
+  <!-- EN: if toggled, floating guns will auto release in combat, but they cannot automatically return to hanger. -->
+  <Command_CMC_AutoReleaseUAV_Desc>勾选后浮游炮将会在征兆或交战时自动释放，但在电量耗尽前不会自动回收。</Command_CMC_AutoReleaseUAV_Desc>
+  <!-- EN: energy -->
+  <CMC_UAVGizmoA>浮游炮能量</CMC_UAVGizmoA>
+  <!-- EN: disabled -->
+  <CMC_UAVGizmoA_Destroyed>已瘫痪</CMC_UAVGizmoA_Destroyed>
+  <!-- EN: energy stored in capacitor array, consume inflight. -->
+  <CMC_UAVGizmoB>浮游炮电容阵列的储电量，飞行时会持续消耗。</CMC_UAVGizmoB>
+  <!-- EN: Unable to equip, floating guns reach maximum bandwidth. -->
+  <CMC_FailedToWear_ExceedNumLimit>浮游炮数量达到上限，无法继续携带。</CMC_FailedToWear_ExceedNumLimit>
+  <!-- EN: return to hanger -->
+  <Command_CMC_CallBACKUAV>召回浮游炮</Command_CMC_CallBACKUAV>
+  <!-- EN: render weapon radius -->
+  <Command_CMCUAVDrawRadius>渲染范围</Command_CMCUAVDrawRadius>
+  <!-- EN: Render floating guns'attack radius, may cause lagging. Turn off if large number of active floating guns existed. -->
+  <Command_CMCUAVDrawRadiusDesc>渲染浮游炮武器范围，动态渲染易造成卡顿，在数量多时建议关闭。</Command_CMCUAVDrawRadiusDesc>
+</LanguageData>

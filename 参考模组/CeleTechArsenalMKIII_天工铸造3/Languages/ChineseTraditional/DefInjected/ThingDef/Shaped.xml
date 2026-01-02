@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: QBZL-55 Laser Rifle -->
+  <CMC_ShapedLaserRifle.label>QBZ-55 射線步槍</CMC_ShapedLaserRifle.label>
+  <!-- EN: First generation of laser rifle, its aiming system ensures that its gamma laser beam can always hit target. It takes time to cause damage.Unable to damage buildings. -->
+  <CMC_ShapedLaserRifle.description>對單個目標連續發射三束高能粒子射線的步槍，射線能穿透護盾且總能命中敵人，在命中時會等離子化周圍的空氣造成小範圍傷害。</CMC_ShapedLaserRifle.description>
+  <!-- EN: stock -->
+  <CMC_ShapedLaserRifle.tools.stock.label>槍托</CMC_ShapedLaserRifle.tools.stock.label>
+  <!-- EN: barrel -->
+  <CMC_ShapedLaserRifle.tools.barrel.label>槍管</CMC_ShapedLaserRifle.tools.barrel.label>
+  <!-- EN: QBZL-55 Laser Rifle -->
+  <CMC_ShapedLaserRifle.verbs.Verb_Shoot.label>QBZL-55 射線步槍</CMC_ShapedLaserRifle.verbs.Verb_Shoot.label>
+  
+  <CMC_Shaped_Laser_Sniper.label>QBU-56 射線狙擊槍</CMC_Shaped_Laser_Sniper.label>
+  <!-- EN: First generation of laser rifle, its aiming system ensures that its gamma laser beam can always hit target. It takes time to cause damage.Unable to damage buildings. -->
+  <CMC_Shaped_Laser_Sniper.description>發射高能粒子射線的狙擊槍，射程極遠但需較長時間充能發射。其發射的高能射線能穿透護盾且總能命中敵人，在命中時會等離子化周圍的空氣造成小範圍傷害。</CMC_Shaped_Laser_Sniper.description>
+  <!-- EN: stock -->
+  <CMC_Shaped_Laser_Sniper.tools.stock.label>槍托</CMC_Shaped_Laser_Sniper.tools.stock.label>
+  <!-- EN: barrel -->
+  <CMC_Shaped_Laser_Sniper.tools.barrel.label>槍管</CMC_Shaped_Laser_Sniper.tools.barrel.label>
+  <!-- EN: QBZL-55 Laser Rifle -->
+  <CMC_Shaped_Laser_Sniper.verbs.Verb_Shoot.label>QBU-56 射線狙擊槍</CMC_Shaped_Laser_Sniper.verbs.Verb_Shoot.label>
+  
+</LanguageData>

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: CeleTechΔ nano-uniform -->
+  <CMC_Uniform.label>BD-03S「蜕影」纳米战衣</CMC_Uniform.label>
+  <!-- EN: A nano-material tight-fitting combat uniform which can insulate extreme heat and provide sufficient protection. -->
+  <CMC_Uniform.description>由高强度纳米材料制成的紧身战斗服，能抵御极端温度并屏蔽热信号，其内部安装的肌肉刺激器可以大幅增幅使用者的反应能力。</CMC_Uniform.description>
+  
+  <!-- EN: CeleTechΔ operator nano-armor -->
+  <CMC_Uniform_MKII.label>BD-03Y「掠影」光学隐身风衣</CMC_Uniform_MKII.label>
+  <!-- EN: A combat coat designed for CMC Operators, it has in-built optical camouflage device to maximize wearer's survivability. -->
+  <CMC_Uniform_MKII.description>为天工外勤干员设计的纳米材料风衣，装备有限次数的光学隐身装置，以提高穿着者的生存率。\n\n光学隐身装置最多可使用三次，需要白银作为冷却剂。</CMC_Uniform_MKII.description>
+  <!-- EN: coolant -->
+  <CMC_Uniform_MKII.comps.CompApparelReloadable.chargeNoun>TODO</CMC_Uniform_MKII.comps.CompApparelReloadable.chargeNoun>
+  <!-- EN: on cooldown -->
+  <CMC_Uniform_MKII.comps.CompApparelReloadable.cooldownGerund>TODO</CMC_Uniform_MKII.comps.CompApparelReloadable.cooldownGerund>
+  <!-- EN: optical camouflage -->
+  <CMC_Uniform_MKII.comps.Comp_ApparelHediffAdder.Label>TODO</CMC_Uniform_MKII.comps.Comp_ApparelHediffAdder.Label>
+  
+</LanguageData>

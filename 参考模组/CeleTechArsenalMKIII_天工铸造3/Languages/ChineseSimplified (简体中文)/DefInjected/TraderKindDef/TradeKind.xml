@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Celestial Artisan Guild -->
+  <CMC_OrbitalTrader_Materials.label>天工商盟</CMC_OrbitalTrader_Materials.label>
+  <CMC_OrbitalTrader_Materials.description>运载材料的人工智能运输船队。</CMC_OrbitalTrader_Materials.description>
+  
+  <!-- EN: C.G.C.F. -->
+  <CMC_OrbitalTrader_Slaves.label>TODO</CMC_OrbitalTrader_Slaves.label>
+  
+  <!-- EN: CeleTech Arsenal -->
+  <CMC_OrbitalTrader_Weapons.label>TODO</CMC_OrbitalTrader_Weapons.label>
+  
+</LanguageData>

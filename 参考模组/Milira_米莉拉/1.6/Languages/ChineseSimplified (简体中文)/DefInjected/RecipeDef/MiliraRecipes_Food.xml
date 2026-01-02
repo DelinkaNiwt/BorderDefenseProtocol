@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: cook milira traveller ration x5 -->
+  <Milira_MakeTravellerFood.label>制作米莉拉旅行口粮 x5</Milira_MakeTravellerFood.label>
+  <!-- EN: cook five portions of milira travel rations. -->
+  <Milira_MakeTravellerFood.description>制作5份米莉拉旅行口粮。</Milira_MakeTravellerFood.description>
+  <!-- EN: cook milira travel rations. -->
+  <Milira_MakeTravellerFood.jobString>制作米莉拉旅行口粮。</Milira_MakeTravellerFood.jobString>
+  
+</LanguageData>

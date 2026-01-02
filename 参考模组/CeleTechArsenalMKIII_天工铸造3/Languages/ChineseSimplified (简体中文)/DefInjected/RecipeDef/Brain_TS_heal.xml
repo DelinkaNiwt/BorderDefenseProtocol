@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: install Tian Shu chip -->
+  <InstallTS.label>植入【天枢】防御芯片</InstallTS.label>
+  <!-- EN: Install a Tian Shu chip. -->
+  <InstallTS.description>植入【天枢】防御芯片</InstallTS.description>
+  <!-- EN: Installing Tian Shu chip. -->
+  <InstallTS.jobString>植入【天枢】防御芯片</InstallTS.jobString>
+  
+  <!-- EN: remove Tian Shu chip -->
+  <RemoveTS.label>移除【天枢】防御芯片</RemoveTS.label>
+  <!-- EN: Remove the Tian Shu chip. -->
+  <RemoveTS.description>移除【天枢】防御芯片</RemoveTS.description>
+  <!-- EN: Removing Tian Shu chip. -->
+  <RemoveTS.jobString>移除【天枢】防御芯片</RemoveTS.jobString>
+  
+</LanguageData>

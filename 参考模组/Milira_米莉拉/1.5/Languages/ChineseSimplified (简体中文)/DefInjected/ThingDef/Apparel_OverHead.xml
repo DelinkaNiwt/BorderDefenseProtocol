@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Milira artemis eye -->
+  <Milira_ArtemisHelmet.label>米莉拉阿忒弥斯之眼</Milira_ArtemisHelmet.label>
+  <!-- EN: A head-worn device that aids the wearer in aiming, improving shooting accuracy while significantly reducing the aiming time. It also provides a certain level of protection. -->
+  <Milira_ArtemisHelmet.description>能够辅助瞄准的头部设备，提高射击精准度的同时也能够大幅度降低穿戴者的瞄准时间。也具备一定防护能力。</Milira_ArtemisHelmet.description>
+  
+  <!-- EN: Milira daedalus crown -->
+  <Milira_DaedalusHelmet.label>米莉拉代达罗斯之冠</Milira_DaedalusHelmet.label>
+  <!-- EN: A head-worn device that assists in commanding Milians and also slightly enhances the wearer's ability to maintain and repair machinery. -->
+  <Milira_DaedalusHelmet.description>辅助指挥米莉安的头部装备，还能少量提升穿戴者的机械维护和整备能力。</Milira_DaedalusHelmet.description>
+  
+  <!-- EN: Milira traveller hood -->
+  <Milira_Hood.label>米莉拉旅行兜帽</Milira_Hood.label>
+  <!-- EN: A hood often worn by Milira when traveling to the ground. The special design of the hood allows the halo on the head of Milira to be visually concealed. -->
+  <Milira_Hood.description>米莉拉地上旅者常常佩戴的兜帽。兜帽特殊的设计可以使米莉拉的光环在视觉上隐藏起来。</Milira_Hood.description>
+  
+  <!-- EN: Milira civilian terminal headset -->
+  <Milira_MilianHomeTerminal.label>米莉拉家用终端</Milira_MilianHomeTerminal.label>
+  <!-- EN: A civilian terminal headset that allows the wearer to control several milian. Due to the limited computing power of the chip integrated in the terminal, the maximum amount of bandwidth supported by the terminal is 10 if the wearer does not have mechlink implant. -->
+  <Milira_MilianHomeTerminal.description>一枚民用终端耳机，佩戴者能够借此指挥少量米莉安。由于集成在终端内的芯片算力有限，在佩戴者未拥有机控中枢时，该终端支持的最大带宽数量为10。</Milira_MilianHomeTerminal.description>
+  
+  <!-- EN: Milira phase control matrix -->
+  <Milira_PhaseControlMatrix.label>米莉拉相控矩阵</Milira_PhaseControlMatrix.label>
+  <!-- EN: A head-mounted device for assisting in the command and management of mechanoids. -->
+  <Milira_PhaseControlMatrix.description>辅助指挥与管理机械体的头戴设备。</Milira_PhaseControlMatrix.description>
+  
+  <!-- EN: Milira plush beret -->
+  <Milira_PlushBeret.label>米莉拉毛绒贝雷帽</Milira_PlushBeret.label>
+  <!-- EN: A beret with a plush, furry trim around the edge. -->
+  <Milira_PlushBeret.description>有着毛绒绒边缘的贝雷帽。</Milira_PlushBeret.description>
+  
+  <!-- EN: Milira sunglasses -->
+  <Milira_Sunglasses.label>米莉拉墨镜</Milira_Sunglasses.label>
+  <!-- EN: A pair of sunglasses that make the wearer look incredibly cool. -->
+  <Milira_Sunglasses.description>一副酷酷墨镜。</Milira_Sunglasses.description>
+  
+  <!-- EN: Milira sunglasses (forehead) -->
+  <Milira_SunglassesII.label>米莉拉墨镜（额头）</Milira_SunglassesII.label>
+  <!-- EN: A pair of sunglasses that make the wearer look incredibly cool. -->
+  <Milira_SunglassesII.description>一副酷酷墨镜。</Milira_SunglassesII.description>
+  
+  <!-- EN: Milira sun hat -->
+  <Milira_SunHat.label>米莉拉阳帽</Milira_SunHat.label>
+  <!-- EN: A wide-brimmed sun hat that exudes a relaxed and comfortable atmosphere when worn. -->
+  <Milira_SunHat.description>充满轻松惬意氛围的宽边阳帽。</Milira_SunHat.description>
+  
+  <!-- EN: Milira synesthesia headset -->
+  <Milira_SynesthesiaHeadset.label>米莉拉机械通感仪</Milira_SynesthesiaHeadset.label>
+  <!-- EN: A head-mounted device for synesthesia with mechanoid, capable of enhancing mechanoid's combat capability based on the mechanitor's consciousness. -->
+  <Milira_SynesthesiaHeadset.description>用于与机械体通感连接的头戴设备，可以基于机械师的意识增强机械体的战斗能力。</Milira_SynesthesiaHeadset.description>
+  
+  <!-- EN: Milira valkyrie helmet -->
+  <Milira_ValkyrHelmet.label>米莉拉瓦尔基里战盔</Milira_ValkyrHelmet.label>
+  <!-- EN: An ancient-looking helmet that may continue the armor style that the Sky Elves have been using for a long time. Thanks to the material science and advanced technology of the Ultimate Age, this helmet possesses exaggerated protective capabilities that do not match its old-fashioned appearance. -->
+  <Milira_ValkyrHelmet.description>造型相当古老的头盔，也许是延续自天空精灵们很早就在使用的盔甲风格。得益于极致时代的材料学与先进的科学技术，这副头盔拥有与古旧的外形并不相衬的夸张防护能力。</Milira_ValkyrHelmet.description>
+  
+</LanguageData>

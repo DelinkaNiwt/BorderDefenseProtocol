@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: accelerated magnet projectile(antimatter warhead with EMP cells) -->
+  <Bullet_AutocannonTurretEMP_Huge.label>TODO</Bullet_AutocannonTurretEMP_Huge.label>
+  
+  <!-- EN: EML Shell -->
+  <CMC_300mmEMLShell.label>TODO</CMC_300mmEMLShell.label>
+  <!-- EN: 130MM EML shell. -->
+  <CMC_300mmEMLShell.description>TODO</CMC_300mmEMLShell.description>
+  
+  <!-- EN: "Longyuan Thundercore" EML turret -->
+  <CMC_EMcannon.label>“龙渊·雷枢”45mm电磁炮</CMC_EMcannon.label>
+  <!-- EN: A heavy electro-magnetic launcher mounted on a turret capable of firing 76mm anti-vehicle shell. Its large-caliber projectiles do heavy damage over significant ranges, and causing various EMP bursts upon hit.\n\nTurret rotation speed: 60°/sec. -->
+  <CMC_EMcannon.description>重型自动电磁炮”龙渊·雷枢“发射的大口径射弹可以在远距离重创目标，接触时附带EMP效果</CMC_EMcannon.description>
+  
+  <!-- UNUSED -->
+  <CMC_EMcannon.comps.CompRefuelable.fuelGizmoLabel>炮管耐久</CMC_EMcannon.comps.CompRefuelable.fuelGizmoLabel>
+  <CMC_EMcannon.comps.CompRefuelable.fuelLabel>剩余射击次数</CMC_EMcannon.comps.CompRefuelable.fuelLabel>
+  <CMC_EMcannon.comps.CompRefuelable.outOfFuelMessage>需要更换炮管</CMC_EMcannon.comps.CompRefuelable.outOfFuelMessage>
+  
+  <!-- EN: "Longyuan Thunderstrike"130mm EML -->
+  <CMC_EMcannon_Huge.label>“龙渊·镇海”130mm电磁舰炮</CMC_EMcannon_Huge.label>
+  <!-- EN: Serving as standardized armament for interstellar merchant vessels and destroyers, this naval gun launches 30+ Mach guided projectiles capable of instantly vaporizing targets. However, the absence of large-caliber shipborne capacitor systems results in significantly constrained rates of fire and turret traverse speeds. -->
+  <CMC_EMcannon_Huge.description>作为星际商船与驱逐舰的标准化武装，该型舰炮发射的30马赫级制导炮弹可瞬间击碎目标，但因缺乏大口径舰载电容系统，导致射速与炮塔转向速率显著受限。</CMC_EMcannon_Huge.description>
+  <!-- EN: Barrel durability -->
+  <CMC_EMcannon_Huge.comps.CompRefuelable.fuelGizmoLabel>炮管耐久</CMC_EMcannon_Huge.comps.CompRefuelable.fuelGizmoLabel>
+  <!-- EN: Shots until barrel change -->
+  <CMC_EMcannon_Huge.comps.CompRefuelable.fuelLabel>剩余射击次数</CMC_EMcannon_Huge.comps.CompRefuelable.fuelLabel>
+  <!-- EN: Needs new barrel -->
+  <CMC_EMcannon_Huge.comps.CompRefuelable.outOfFuelMessage>需要更换炮管</CMC_EMcannon_Huge.comps.CompRefuelable.outOfFuelMessage>
+  
+  <!-- EN: charged auto cannon -->
+  <Gun_EMPCannon.label>自动电磁炮</Gun_EMPCannon.label>
+  <!-- EN: A self-loading large-bore electro-magnetic launcher designed to attach to a turret. -->
+  <Gun_EMPCannon.description>炮塔上安装的重型自动装填电磁加农炮</Gun_EMPCannon.description>
+  <!-- EN: charged auto cannon -->
+  <Gun_EMPCannon.verbs.Verb_ShootCE.label>TODO</Gun_EMPCannon.verbs.Verb_ShootCE.label>
+  
+  <!-- UNUSED -->
+  <Gun_EMPCannon.verbs.Verb_Shoot.label>自动电磁炮</Gun_EMPCannon.verbs.Verb_Shoot.label>
+  
+  <!-- EN: 130mm EML -->
+  <Gun_EMPCannon_Huge.label>舰载电磁炮</Gun_EMPCannon_Huge.label>
+  <!-- EN: A self-loading large-bore electro-magnetic launcher designed to attach to a turret. -->
+  <Gun_EMPCannon_Huge.description>炮塔上安装的重型自动装填电磁加农炮</Gun_EMPCannon_Huge.description>
+  <!-- EN: 130mm EML -->
+  <Gun_EMPCannon_Huge.verbs.Verb_ShootWorld.label>TODO</Gun_EMPCannon_Huge.verbs.Verb_ShootWorld.label>
+  
+  <!-- UNUSED -->
+  <Gun_EMPCannon_Huge.verbs.Verb_Shoot.label>自动电磁炮</Gun_EMPCannon_Huge.verbs.Verb_Shoot.label>
+  
+</LanguageData>

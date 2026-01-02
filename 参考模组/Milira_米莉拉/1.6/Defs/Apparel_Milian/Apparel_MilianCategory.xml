@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<ThingCategoryDef>
+		<defName>Milian_Apparel</defName>
+		<label>Milian Apparel</label>
+		<parent>Milira_Apparel</parent>
+	</ThingCategoryDef>
+
+	<ThingCategoryDef>
+		<defName>Milian_Apparel_OnSkin</defName>
+		<label>Milian OnSkin</label>
+		<parent>Milian_Apparel</parent>
+	</ThingCategoryDef>
+
+	<ThingCategoryDef>
+		<defName>Milian_Apparel_Middle</defName>
+		<label>Milian Middle</label>
+		<parent>Milian_Apparel</parent>
+	</ThingCategoryDef>
+
+	<ThingCategoryDef>
+		<defName>Milian_Apparel_Shell</defName>
+		<label>Milian Shell</label>
+		<parent>Milian_Apparel</parent>
+	</ThingCategoryDef>
+
+	<ThingCategoryDef>
+		<defName>Milian_Apparel_Overhead</defName>
+		<label>Milian Overhead</label>
+		<parent>Milian_Apparel</parent>
+	</ThingCategoryDef>
+	
+	<ThingCategoryDef>
+		<defName>Milian_Apparel_Utility</defName>
+		<label>Milian Utility</label>
+		<parent>Milian_Apparel</parent>
+	</ThingCategoryDef>
+	
+</Defs>

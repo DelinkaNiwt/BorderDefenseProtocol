@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <HediffDef>
+    <defName>Milian_KingTuningWeak</defName>
+    <label>Disordered Tuning</label>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <maxSeverity>1.0</maxSeverity>
+    <minSeverity>0</minSeverity>
+    <initialSeverity>1.0</initialSeverity>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(240, 60, 0)</defaultLabelColor>
+    <description>This pawn is currently in a state of unstable tuning.</description>
+    <comps>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>1200</disappearsAfterTicks>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <minSeverity>0.01</minSeverity>
+        <statFactors>
+          <IncomingDamageFactor>1.5</IncomingDamageFactor>
+          <ArmorRating_Sharp>0.8</ArmorRating_Sharp>
+          <ArmorRating_Blunt>0.8</ArmorRating_Blunt>
+          <ArmorRating_Heat>0.5</ArmorRating_Heat>
+          <MoveSpeed>0.75</MoveSpeed>
+        </statFactors>
+        <capMods>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>Milian_KingCommand</defName>
+    <label>Command of King</label>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <maxSeverity>1.0</maxSeverity>
+    <minSeverity>0</minSeverity>
+    <initialSeverity>1.0</initialSeverity>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(240, 60, 0)</defaultLabelColor>
+    <description>This pawn is under the command of King.</description>
+    <comps>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>240</disappearsAfterTicks>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <minSeverity>0.01</minSeverity>
+        <statFactors>
+          <IncomingDamageFactor>0.8</IncomingDamageFactor>
+        </statFactors>
+        <capMods>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+
+
+
+  <HediffDef>
+    <defName>Milira_MilianAutoFightHint</defName>
+    <label>Auto Combat</label>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <maxSeverity>1.0</maxSeverity>
+    <minSeverity>0</minSeverity>
+    <initialSeverity>1.0</initialSeverity>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(0.6,0.8,0.6)</defaultLabelColor>
+    <description>This Milian has been granted the privileges of autonomous combat. Milian under this mode shall search for and trying to eliminate possible threats disregarding the control range of the mechanitor. Activity energy consumption shall increase 25% per day under this mode. \n Draft to regain control of the Milian.</description>
+    <comps>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/>
+    </comps>
+    <stages>
+    </stages>
+  </HediffDef>
+
+
+  <HediffDef>
+    <defName>Milian_FloatUnit</defName>
+    <label>float unit</label>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <maxSeverity>1.0</maxSeverity>
+    <minSeverity>0</minSeverity>
+    <initialSeverity>1.0</initialSeverity>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(0.6,0.8,0.6)</defaultLabelColor>
+    <description>this pawn is a float unit.</description>
+    <comps>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/>
+    </comps>
+    <stages>
+      <li>
+        <statFactors>
+          <StaggerDurationFactor>0</StaggerDurationFactor>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+</Defs>

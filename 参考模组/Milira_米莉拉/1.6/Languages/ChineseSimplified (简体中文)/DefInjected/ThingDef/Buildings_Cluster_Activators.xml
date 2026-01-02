@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Milian scheduled activator -->
+  <Milira_ActivatorCountdown.label>米莉安定时激活器</Milira_ActivatorCountdown.label>
+  <!-- EN: A timer-based activation device. Upon the end of the countdown, it will awaken nearby dormant Milian and cluster structures. -->
+  <Milira_ActivatorCountdown.description>一个定时激活装置。倒计时结束后，它将唤醒附近休眠的米莉安和集群建筑。</Milira_ActivatorCountdown.description>
+  
+  <!-- EN: Milian proximity detector -->
+  <Milira_ActivatorProximity.label>米莉安接近探测器</Milira_ActivatorProximity.label>
+  <!-- EN: A device that detects approaching objects. Once activated, it will awaken nearby dormant Milian and cluster structures. -->
+  <Milira_ActivatorProximity.description>一个会探测接近物体的装置。激活后，它将唤醒附近休眠的米莉安和集群建筑。</Milira_ActivatorProximity.description>
+  
+</LanguageData>

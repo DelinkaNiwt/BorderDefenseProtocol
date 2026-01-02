@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Type-BH EML turret -->
+  <CMC_EMcannon.label>“龍淵·雷樞”45mm電磁炮</CMC_EMcannon.label>
+  <!-- EN: Type-BH BaiHong is a heavy electro-magnetic launcher turret. Its large-caliber projectiles do heavy damage over significant ranges, and causing various EMP bursts. -->
+  <CMC_EMcannon.description>重型自動電磁炮”龍淵·雷樞“發射的大口徑射彈可以在遠距離重創目標，接觸時附帶EMP效果</CMC_EMcannon.description>
+  <!-- EN: Barrel durability -->
+  <CMC_EMcannon.comps.CompRefuelable.fuelGizmoLabel>炮管耐久</CMC_EMcannon.comps.CompRefuelable.fuelGizmoLabel>
+  <!-- EN: Shots until barrel change -->
+  <CMC_EMcannon.comps.CompRefuelable.fuelLabel>剩餘射擊次數</CMC_EMcannon.comps.CompRefuelable.fuelLabel>
+  <!-- EN: Needs new barrel -->
+  <CMC_EMcannon.comps.CompRefuelable.outOfFuelMessage>需要更換炮管</CMC_EMcannon.comps.CompRefuelable.outOfFuelMessage>
+  
+  <!-- EN: charged auto cannon -->
+  <Gun_EMPCannon.label>自動電磁炮</Gun_EMPCannon.label>
+  <!-- EN: A self-loading large-bore cannon designed to attach to a turret. -->
+  <Gun_EMPCannon.description>炮塔上安裝的重型自動裝填電磁加農炮</Gun_EMPCannon.description>
+  <!-- EN: charged auto cannon -->
+  <Gun_EMPCannon.verbs.Verb_Shoot.label>自動電磁炮</Gun_EMPCannon.verbs.Verb_Shoot.label>
+  
+  <CMC_EMcannon_Huge.label>“龍淵·鎮海”130mm電磁艦炮</CMC_EMcannon_Huge.label>
+  <!-- EN: Type-BH BaiHong is a heavy electro-magnetic launcher turret. Its large-caliber projectiles do heavy damage over significant ranges, and causing various EMP bursts. -->
+  <CMC_EMcannon_Huge.description>作為星際商船與驅逐艦的標準化武裝，該型艦炮發射的30馬赫級制導炮彈可瞬間擊碎目標，但因缺乏大口徑艦載電容系統，導致射速與炮塔轉向速率顯著受限。</CMC_EMcannon_Huge.description>
+  <!-- EN: Barrel durability -->
+  <CMC_EMcannon_Huge.comps.CompRefuelable.fuelGizmoLabel>炮管耐久</CMC_EMcannon_Huge.comps.CompRefuelable.fuelGizmoLabel>
+  <!-- EN: Shots until barrel change -->
+  <CMC_EMcannon_Huge.comps.CompRefuelable.fuelLabel>剩餘射擊次數</CMC_EMcannon_Huge.comps.CompRefuelable.fuelLabel>
+  <!-- EN: Needs new barrel -->
+  <CMC_EMcannon_Huge.comps.CompRefuelable.outOfFuelMessage>需要更換炮管</CMC_EMcannon_Huge.comps.CompRefuelable.outOfFuelMessage>
+  
+  <!-- EN: charged auto cannon -->
+  <Gun_EMPCannon.label>艦載電磁炮</Gun_EMPCannon.label>
+  <!-- EN: A self-loading large-bore cannon designed to attach to a turret. -->
+  <Gun_EMPCannon.description>炮塔上安裝的重型自動裝填電磁加農炮</Gun_EMPCannon.description>
+  <!-- EN: charged auto cannon -->
+  <Gun_EMPCannon.verbs.Verb_Shoot.label>自動電磁炮</Gun_EMPCannon.verbs.Verb_Shoot.label>
+  
+</LanguageData>

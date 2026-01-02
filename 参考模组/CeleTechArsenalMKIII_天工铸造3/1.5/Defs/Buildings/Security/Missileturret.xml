@@ -1,0 +1,217 @@
+<Defs>
+	<ThingDef ParentName="AutocannonTurret">
+    <defName>CMCML</defName>
+    <label>"Chunjun Armorrend" ATGM turret</label>
+	<thingClass>TOT_DLL_test.Building_CMCTurretMissile</thingClass>
+    <description>A heavily armored auto turret,it fires ground-to-ground missiles.\n\nIts destruction by enemy attack may result in a giant explosion.\n\nIts missile can identify if its current target is downed or dead and switch to a nearby enemy instead.</description>
+    <uiIconPath>Things/Buildings/MLUI</uiIconPath>
+	<graphicData>
+        <texPath>Things/Buildings/CMC_MLbase</texPath>
+        <graphicClass>Graphic_Multi</graphicClass>
+        <drawSize>(5.1,5.1)</drawSize>
+    </graphicData>
+	<size>(3,3)</size>
+	<drawerType>MapMeshAndRealTime</drawerType>
+    <altitudeLayer>Building</altitudeLayer>
+    <stealable>false</stealable>
+    <rotatable>true</rotatable>
+	<tickerType>Normal</tickerType>
+    <techLevel>Spacer</techLevel>
+    <statBases>
+	  <MaxHitPoints>4000</MaxHitPoints>
+	  <Flammability>1.5</Flammability>
+      <ShootingAccuracyTurret>0.2</ShootingAccuracyTurret>
+	  <WorkToBuild>8000</WorkToBuild>
+    </statBases>
+	<killedLeavings>
+      <ChunkSlagSteel>2</ChunkSlagSteel>
+      <Steel>30</Steel>
+      <Plasteel>10</Plasteel>
+    </killedLeavings>
+    <costList>
+      <Steel>1200</Steel>
+	  <Plasteel>320</Plasteel>
+      <ComponentIndustrial>8</ComponentIndustrial>
+	  <ComponentSpacer>10</ComponentSpacer>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>0</wickTicks>
+        <explosiveRadius>9.9</explosiveRadius>
+		<explosiveExpandPerFuel>2</explosiveExpandPerFuel>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0</chanceNeverExplodeFromDamage>
+      </li>
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>3300</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Refuelable">
+        <fuelLabel>Shots until barrel change</fuelLabel>
+        <fuelGizmoLabel>Ammo</fuelGizmoLabel>
+        <outOfFuelMessage>Needs missile</outOfFuelMessage>
+        <fuelFilter><thingDefs><li>CMC_MissileShell</li></thingDefs></fuelFilter>
+        <fuelCapacity>6</fuelCapacity>
+        <fuelMultiplier>1</fuelMultiplier>
+        <initialFuelPercent>1</initialFuelPercent>
+        <autoRefuelPercent>0.99</autoRefuelPercent>
+        <showFuelGizmo>true</showFuelGizmo>
+        <minimumFueledThreshold>1</minimumFueledThreshold>
+        <factorByDifficulty>false</factorByDifficulty>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelIconPath>UI/Overlays/Barrel</fuelIconPath>
+      </li>
+    </comps>
+	<damageMultipliers>
+      <li>
+        <damageDef>Bomb</damageDef>
+        <multiplier>1.2</multiplier>
+      </li>
+      <li>
+        <damageDef>Bullet</damageDef>
+        <multiplier>0.8</multiplier>
+      </li>
+	  <li>
+        <damageDef>EMP</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+	  <li>
+        <damageDef>Stun</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <building>
+      <turretGunDef>CMC_Gun_ML</turretGunDef>
+      <turretBurstCooldownTime>10</turretBurstCooldownTime>
+	  <turretTopDrawSize>5</turretTopDrawSize>
+    </building>
+    <researchPrerequisites>
+      <li>CMC_Heavy_II</li>
+	  <li>CMCGunTurrets</li>
+    </researchPrerequisites>
+	<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <placeWorkers Inherit="False">
+        <li>PlaceWorker_TurretTop</li>
+    </placeWorkers>
+	<modExtensions>
+      <li Class="TOT_DLL_test.TurretExtension_CMC">
+        <rotationSpeed>0.6</rotationSpeed>
+      </li>
+    </modExtensions>
+	<designationCategory>CMC_DefensenProduction</designationCategory>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>CMC_Gun_ML</defName>
+    <label>Type-CX Missile launcher</label>
+    <description>A self-loading missile launcher designed to attach to a turret.</description>
+    <graphicData>
+      <texPath>Things/Buildings/CMC_MissileLauncherTop_6</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(4,4)</drawSize>
+    </graphicData>
+    <statBases>
+      <AccuracyTouch>1</AccuracyTouch>
+      <AccuracyShort>1</AccuracyShort>
+      <AccuracyMedium>1</AccuracyMedium>
+      <AccuracyLong>1</AccuracyLong>
+      <RangedWeapon_Cooldown>18.5</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>40</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+	        <weaponTags Inherit = "False">
+			<li>Weapon_CMCf</li>
+		</weaponTags>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+		<forcedMissRadius>0.1</forcedMissRadius>
+        <defaultProjectile>CMC_Missile_HeavyATGM</defaultProjectile>
+        <warmupTime>4.2</warmupTime>
+        <minRange>15.9</minRange>
+        <range>500</range>
+        <burstShotCount>1</burstShotCount>
+		<requireLineOfSight>false</requireLineOfSight>
+        <soundCast>Sound_rocketlauncher_heavy</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>74</muzzleFlashScale>
+        <consumeFuelPerShot>1</consumeFuelPerShot>
+		<targetParams>
+          <canTargetPawns>true</canTargetPawns>
+          <canTargetLocations>true</canTargetLocations>
+          <canTargetBuildings>true</canTargetBuildings>
+        </targetParams>
+      </li>
+    </verbs>
+  </ThingDef>
+  
+  <ThingDef ParentName="ResourceBase">
+    <defName>CMC_MissileShell</defName>
+    <label>ATGM</label>
+    <description>An ultra-tech warhead powered by a grain of antimatter. Usually used by spacecraft or glitterworld war machines, it creates a huge explosion and starts fires around the target. Can be fired from mortars or installed as a trap. Explodes when damaged.</description>
+    <uiIconPath>Things/Others/CMC_MissilePod/CMC_MissilePod_c</uiIconPath>
+	<graphicData>
+      <texPath>Things/Others/CMC_MissilePod</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+	  <drawSize>(3,3)</drawSize>
+    </graphicData>
+    <tradeability>Buyable</tradeability>
+	<soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Standard_Drop</soundDrop>
+    <tickerType>Normal</tickerType>
+    <stackLimit>4</stackLimit>
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Mass>1.25</Mass>
+      <Flammability>1.0</Flammability>
+      <DeteriorationRate>0</DeteriorationRate>
+	  <MarketValue>270</MarketValue>
+    </statBases>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+    <tradeTags>
+      <li>CMC_MissilePod</li>
+    </tradeTags>
+    <techLevel>Spacer</techLevel>
+	<costList>
+      <Steel>100</Steel>
+      <Chemfuel>300</Chemfuel>
+	  <ComponentIndustrial>15</ComponentIndustrial>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <explosiveRadius>8.9</explosiveRadius>
+        <explosiveDamageType>BombSuper</explosiveDamageType>
+        <explosiveExpandPerStackcount>0.4</explosiveExpandPerStackcount>
+        <startWickHitPointsPercent>0.7</startWickHitPointsPercent>
+        <chanceToStartFire>0.22</chanceToStartFire>
+        <damageFalloff>true</damageFalloff>
+        <explosionEffect>GiantExplosion</explosionEffect>
+        <explosionSound>Explosion_GiantBomb</explosionSound>
+        <wickTicks>0</wickTicks>
+      </li>
+    </comps>
+	<recipeMaker>
+      <researchPrerequisite>CMCGunTurrets</researchPrerequisite>
+      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+      <effectWorking>Cook</effectWorking>
+      <soundWorking>Recipe_Machining</soundWorking>
+      <workAmount>100</workAmount>
+	  <productCount>4</productCount>
+      <targetCountAdjustment>12</targetCountAdjustment>
+      <workSkill>Crafting</workSkill>
+      <recipeUsers>
+        <li>CMC_FacBench</li>
+      </recipeUsers>
+      <skillRequirements>
+        <Crafting>8</Crafting>
+      </skillRequirements>
+      <displayPriority>100</displayPriority>
+    </recipeMaker>
+  </ThingDef>
+</Defs>

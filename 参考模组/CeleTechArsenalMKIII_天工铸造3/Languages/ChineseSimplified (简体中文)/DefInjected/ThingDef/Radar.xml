@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: "KunLun"AESA -->
+  <CMC_CICAESA_Radar.label>「昆仑」巨型雷达阵列</CMC_CICAESA_Radar.label>
+  <!-- EN: A large phased-array radar that detects and tracks mutiple ground and air targets. It is able to provide guidance for all ground-to-ground and anti-aircraft missiles placed nearby, while obstucting hostile central drops. -->
+  <CMC_CICAESA_Radar.description>巨大的相控阵雷达阵列，能干扰敌人对基地的精确定位，同时引导我方导弹对空和对地攻击。\n\n建造后解锁全图导弹武器自动开火，同时防止中心空投。</CMC_CICAESA_Radar.description>
+  
+  <!-- EN: "E'Mei"AESA -->
+  <CMC_CICAESA_Radar_Small.label>「峨眉」小型相控阵雷达</CMC_CICAESA_Radar_Small.label>
+  <!-- EN: . -->
+  <CMC_CICAESA_Radar_Small.description>小型化的相控阵雷达，能引导我方导弹对空和对地攻击，需要消耗大量电力。</CMC_CICAESA_Radar_Small.description>
+  
+  <!-- EN: "TaiHang"fire-control radar -->
+  <CMC_FCradar.label>「太行」火控雷达</CMC_FCradar.label>
+  <!-- EN: A large double-sided phased-array radar, able to significantly increase accuracy of specific types of CMC turrets nearby. -->
+  <CMC_FCradar.description>双面有源相控阵雷达，能为周围的炮塔提供数据链支持，大幅提高其射击精度。\n\n链接后部分自动炮塔解锁手动瞄准功能。</CMC_FCradar.description>
+  
+</LanguageData>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<HediffDef>
+		<defName>Milira_MilianHomeTerminal</defName>
+		<label>civilian terminal</label>
+		<description>This pawn is wearing a civilian terminal.</description>
+		<hediffClass>Milira.Hediff_HomeTerminal</hediffClass>
+		<isBad>false</isBad>
+		<defaultLabelColor>(215, 100, 20)</defaultLabelColor>
+		<initialSeverity>0.01</initialSeverity>
+		<maxSeverity>1</maxSeverity>
+		<comps>
+			<li Class="HediffCompProperties_RemoveIfApparelDropped"/>
+		</comps>
+		<stages>
+			<li>
+			</li>
+		</stages>
+	</HediffDef>
+
+
+
+
+</Defs>

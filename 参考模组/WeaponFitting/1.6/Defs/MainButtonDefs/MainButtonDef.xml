@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <MainButtonDef>
+    <defName>WeaponFitting</defName>
+    <label>weapon fitting</label>
+    <description>View and manage equipments of milian in the colony.</description>
+    <workerClass>WeaponFitting.MainButtonWorker_WeaponFittings</workerClass>
+    <tabWindowClass>WeaponFitting.MainTabWindow_WeaponFitting</tabWindowClass>
+    <order>47</order>
+    <closesWorldView>true</closesWorldView>
+  </MainButtonDef>
+
+</Defs>

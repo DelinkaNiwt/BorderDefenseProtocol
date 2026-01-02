@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ThingCategoryDef>
+    <defName>AmmoCategory_Ammo_45x50mmMTPG</defName>
+    <label>45x50mm MTP Grenade</label>
+    <parent>AmmoGrenades</parent>
+    <iconPath>Things/Ammo/45mmMTPGUI</iconPath>
+  </ThingCategoryDef>
+  <CombatExtended.AmmoSetDef>
+    <defName>AmmoSet_Ammo_45x50mmMTPG</defName>
+    <label>45x50mm MTP Grenade</label>
+    <ammoTypes>
+      <Ammo_Ammo_45x50mmMTPG_HE>Bullet_Ammo_45x50mmMTPG_HE</Ammo_Ammo_45x50mmMTPG_HE>
+      <Ammo_Ammo_45x50mmMTPG_S>Bullet_Ammo_45x50mmMTPG_S</Ammo_Ammo_45x50mmMTPG_S>
+    </ammoTypes>
+  </CombatExtended.AmmoSetDef>
+  <ThingDef Class="CombatExtended.AmmoDef" Name="Ammo_Ammo_45x50mmMTPG_Base" ParentName="SpacerAmmoBase" Abstract="True">
+    <description>TODO</description>
+    <statBases>
+      <Mass>0.69</Mass>
+      <Bulk>0.5</Bulk>
+    </statBases>
+    <tradeTags>
+      <li>CE_AutoEnableTrade</li>
+      <li>CE_AutoEnableCrafting</li>
+    </tradeTags>
+    <thingCategories>
+      <li>AmmoCategory_Ammo_45x50mmMTPG</li>
+    </thingCategories>
+  </ThingDef>
+  <ThingDef Name="Bullet_Ammo_45x50mmMTPG_Base" ParentName="BaseBulletCE" Abstract="True">
+    <graphicData>
+      <texPath>Things/Projectile/Grenades/Firefoam</texPath>
+      <graphicClass>Verse.Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile Class="CombatExtended.ProjectilePropertiesCE">
+      <speed>75</speed>
+      <damageDef>Bomb</damageDef>
+      <dropsCasings>false</dropsCasings>
+    </projectile>
+  </ThingDef>
+  <ThingDef Class="CombatExtended.AmmoDef" ParentName="Ammo_Ammo_45x50mmMTPG_Base">
+    <defName>Ammo_Ammo_45x50mmMTPG_HE</defName>
+    <label>Ammo_45x50mmMTPG HE</label>
+    <graphicData>
+      <texPath>Things/Ammo/45mmMTPG_HE</texPath>
+      <graphicClass>Verse.Graphic_StackCount</graphicClass>
+    </graphicData>
+    <ammoClass>ExplosiveAP</ammoClass>
+    <cookOffProjectile>Bullet_Ammo_45x50mmMTPG_HE</cookOffProjectile>
+  </ThingDef>
+  <ThingDef ParentName="Bullet_Ammo_45x50mmMTPG_Base">
+    <defName>Bullet_Ammo_45x50mmMTPG_HE</defName>
+    <projectile Class="CombatExtended.ProjectilePropertiesCE">
+      <damageAmountBase>120</damageAmountBase>
+      <damageDef>Bomb</damageDef>
+      <explosionRadius>3</explosionRadius>
+    </projectile>
+    <comps>
+      <li Class="CombatExtended.CompProperties_ExplosiveCE">
+        <damageAmountBase>60</damageAmountBase>
+        <explosiveDamageType>EMP</explosiveDamageType>
+        <explosiveRadius>1.9</explosiveRadius>
+      </li>
+    </comps>
+  </ThingDef>
+  <RecipeDef ParentName="AmmoRecipeBase">
+    <defName>MakeAmmo_Ammo_45x50mmMTPG_HE</defName>
+    <label>制作Ammo_45x50mmMTPG HE x50</label>
+    <description>制作50枚Ammo_45x50mmMTPG HE。</description>
+    <jobString>正在制作Ammo_45x50mmMTPG HE。</jobString>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>FSX</li>
+          </thingDefs>
+        </filter>
+        <count>15</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>60</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>FSX</li>
+        <li>ComponentIndustrial</li>
+        <li>Plasteel</li>
+        <li>ComponentSpacer</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Ammo_Ammo_45x50mmMTPG_HE>50</Ammo_Ammo_45x50mmMTPG_HE>
+    </products>
+    <workAmount>8000</workAmount>
+  </RecipeDef>
+  <ThingDef Class="CombatExtended.AmmoDef" ParentName="Ammo_Ammo_45x50mmMTPG_Base">
+    <defName>Ammo_Ammo_45x50mmMTPG_S</defName>
+    <label>Ammo_45x50mmMTPG S</label>
+    <graphicData>
+      <texPath>Things/Ammo/30x114mm_APDS</texPath>
+      <graphicClass>Verse.Graphic_StackCount</graphicClass>
+    </graphicData>
+    <ammoClass>Smoke</ammoClass>
+    <cookOffProjectile>Bullet_Ammo_45x50mmMTPG_S</cookOffProjectile>
+  </ThingDef>
+  <ThingDef ParentName="Bullet_Ammo_45x50mmMTPG_Base">
+    <defName>Bullet_Ammo_45x50mmMTPG_S</defName>
+    <projectile Class="CombatExtended.ProjectilePropertiesCE">
+      <damageAmountBase>5</damageAmountBase>
+      <damageDef>Bomb</damageDef>
+      <explosionRadius>5</explosionRadius>
+      <postExplosionGasType>BlindSmoke</postExplosionGasType>
+    </projectile>
+    <comps>
+      <li Class="CombatExtended.CompProperties_ExplosiveCE">
+        <damageAmountBase>10</damageAmountBase>
+        <explosiveDamageType>Extinguish</explosiveDamageType>
+        <explosiveRadius>8</explosiveRadius>
+      </li>
+    </comps>
+  </ThingDef>
+  <RecipeDef ParentName="AmmoRecipeBase">
+    <defName>MakeAmmo_Ammo_45x50mmMTPG_S</defName>
+    <label>制作Ammo_45x50mmMTPG S x500</label>
+    <description>制作500枚Ammo_45x50mmMTPG S。</description>
+    <jobString>正在制作Ammo_45x50mmMTPG S。</jobString>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>15</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>20</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>60</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>ComponentIndustrial</li>
+        <li>Steel</li>
+        <li>Plasteel</li>
+        <li>ComponentSpacer</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Ammo_Ammo_45x50mmMTPG_S>50</Ammo_Ammo_45x50mmMTPG_S>
+    </products>
+    <workAmount>8000</workAmount>
+  </RecipeDef>
+</Defs>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="CMM_PLaserpistol"]/verbs/li/range</xpath>
+          <value>
+            <range>27.9</range>
+          </value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="CMC_PLaserSMG"]/verbs/li/range</xpath>
+          <value>
+            <range>36.9</range>
+          </value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="CMC_PLaserLMG"]/verbs/li/range</xpath>
+          <value>
+            <range>42.9</range>
+          </value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="CMC_QiyaoLaserLMG"]/verbs/li/range</xpath>
+          <value>
+            <range>51.9</range>
+          </value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="CMC_ShapedLaserRifle"]/verbs/li/range</xpath>
+          <value>
+            <range>47.9</range>
+          </value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="CMC_Shaped_Laser_Sniper"]/verbs/li/range</xpath>
+          <value>
+            <range>68.9</range>
+          </value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="CMC_TaoTie_Persona"]/verbs/li/range</xpath>
+          <value>
+            <range>49.9</range>
+          </value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Gun_LaserSniper"]/verbs/li/range</xpath>
+          <value>
+            <range>79.9</range>
+          </value>
+	</Operation>
+</Patch>

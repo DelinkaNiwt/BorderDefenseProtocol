@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN:
+    <li>questDescription->We’ve observed a molten-salt energy station, a huge, integrated energy facility utilized for transferring luminous energy into solar fuel as well as generating electricity. It’s important energy source for Milira.\n\n A Milira cluster is on guard of this station.\n\n This mission will elevate the Milian threat assessment.</li>
+  -->
+  <Milira_SunLightFuelStation_WorldMap.questDescriptionRules.rulesStrings>
+    <li>questDescription->我们发现了一处米莉拉建立在地表的熔盐燃料站！熔盐燃料站是一个庞大的、由多个建筑共同组成的用于将光能转化成日光燃料的能源设施，在转化燃料的同时还能输出电能供给使用，是米莉拉重要的能源来源。\n\n此处熔盐燃料站由一个米莉安集群守护着。\n\n该任务会增加米莉拉威胁程度评估。</li>
+  </Milira_SunLightFuelStation_WorldMap.questDescriptionRules.rulesStrings>
+  <!-- EN:
+    <li>questName->Molten-salt Energy Station</li>
+  -->
+  <Milira_SunLightFuelStation_WorldMap.questNameRules.rulesStrings>
+    <li>questName->熔盐燃料站</li>
+  </Milira_SunLightFuelStation_WorldMap.questNameRules.rulesStrings>
+  
+</LanguageData>

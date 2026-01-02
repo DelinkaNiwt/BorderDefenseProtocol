@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: PL-X AAM -->
+  <CMC_J50_AAM.label>霹靂X 多用途蜂群導彈</CMC_J50_AAM.label>
+  <!-- EN: PL-X multi-task swarm missile equipped on J50 and WJ50, very effective against flying objects. -->
+  <CMC_J50_AAM.description>設計用來對抗無人機蜂群的導彈，能有效對抗多種目標，裝備於J-50和WJ-50上</CMC_J50_AAM.description>
+  <!-- EN: PL-X AAM -->
+  <CMC_J50_AAM.verbs.Verb_Shoot.label>霹靂X 多用途蜂群導彈</CMC_J50_AAM.verbs.Verb_Shoot.label>
+  
+  <!-- EN: J50 particle lance -->
+  <CMC_J50_particleLance.label>粒子光矛</CMC_J50_particleLance.label>
+  <!-- EN: A powerful cannon which fires large focused beams of highly energized particles and cause massive damage. -->
+  <CMC_J50_particleLance.description>定向發射大量高能粒子的主炮，能造成巨大毀傷，對於建築尤其有效。</CMC_J50_particleLance.description>
+  <!-- EN: J50 particle lance -->
+  <CMC_J50_particleLance.verbs.Verb_Laser_Once.label>粒子光矛</CMC_J50_particleLance.verbs.Verb_Laser_Once.label>
+  
+  <!-- EN: J-50 (Leaving) -->
+  <CMC_MYDE_AF_Skyfalller_J50_CrossMapThing.label>J-50（飛離）</CMC_MYDE_AF_Skyfalller_J50_CrossMapThing.label>
+  
+  <!-- EN: AKD-X missile -->
+  <Missile_AKDX.label>AKD-X 巡航導彈</Missile_AKDX.label>
+  
+  <!-- EN: PL-X AAM(secondary weapon) -->
+  <MYDE_AF_CMC_AeroFighter_WeaponGroup_missileVLS.label>霹靂X 多用途蜂群導彈（副武器倉）</MYDE_AF_CMC_AeroFighter_WeaponGroup_missileVLS.label>
+  <!-- EN: PL-X AAM(secondary weapon) -->
+  <MYDE_AF_CMC_AeroFighter_WeaponGroup_missileVLS.description>霹靂X 多用途蜂群導彈（副武器倉）</MYDE_AF_CMC_AeroFighter_WeaponGroup_missileVLS.description>
+  
+  <!-- EN: J-50 aerospace fighter -->
+  <MYDE_CMC_J50X.label>J-50X 空天戰機</MYDE_CMC_J50X.label>
+  <!-- EN: . -->
+  <MYDE_CMC_J50X.description>一款能垂直起降並獨立出入大氣層的空優戰鬥機，機腹裝備一座全向粒子光矛炮塔和全向AKD-X 巡航導彈架作為主武器，也掛載了蜂群導彈弔艙。需要一名飛行員操作，也可再搭載一名武器操作員。</MYDE_CMC_J50X.description>
+  <!-- EN: Needs Fuel -->
+  <MYDE_CMC_J50X.comps.CompRefuelable.outOfFuelMessage>反應堆燃料不足</MYDE_CMC_J50X.comps.CompRefuelable.outOfFuelMessage>
+  <!-- EN: Switching between takeoff and landing, the "Eclipse" FH-203 belongs to a fixed wing aerocraft and requires an unobstructed distance of more than 20 grids to launch and land. It can only attack during flight. After takeoff, move it with the right mouse button, right-click on Non-Player faction object to forcibly attack the target, right-click on our faction object to switch to follow mode. -->
+  <MYDE_CMC_J50X.comps.Comp_MoveToTargetAndHover.TakeOffAndLanding_Icon_Description>垂直起降</MYDE_CMC_J50X.comps.Comp_MoveToTargetAndHover.TakeOffAndLanding_Icon_Description>
+  <!-- EN: Take off -->
+  <MYDE_CMC_J50X.comps.Comp_MoveToTargetAndHover.TakeOffAndLanding_Icon_On_Label>垂直起降</MYDE_CMC_J50X.comps.Comp_MoveToTargetAndHover.TakeOffAndLanding_Icon_On_Label>
+  <!-- EN: Fast loading colonizers within the surrounding 5x5 range -->
+  <MYDE_CMC_J50X.comps.Comp_CarryPawn.Gizmos_CarryPawn_Description>可於5*5的範圍內快速載人登機</MYDE_CMC_J50X.comps.Comp_CarryPawn.Gizmos_CarryPawn_Description>
+  <!-- EN: Fast loading -->
+  <MYDE_CMC_J50X.comps.Comp_CarryPawn.Gizmos_CarryPawn_Label>快速載人</MYDE_CMC_J50X.comps.Comp_CarryPawn.Gizmos_CarryPawn_Label>
+  <!-- EN: Cross map, no open space can be selected as the target location. To avoid situations where it is impossible to return, please ensure that there is sufficient fuel for round-trip travel -->
+  <MYDE_CMC_J50X.comps.Comp_CanCrossMap.CrossMap_Description>跨地圖飛行</MYDE_CMC_J50X.comps.Comp_CanCrossMap.CrossMap_Description>
+  <!-- EN: Cross Map -->
+  <MYDE_CMC_J50X.comps.Comp_CanCrossMap.CrossMap_Label>跨地圖飛行</MYDE_CMC_J50X.comps.Comp_CanCrossMap.CrossMap_Label>
+  <!-- EN: Launch a AKD-X missile -->
+  <MYDE_CMC_J50X.comps.Comp_ShootSomethingManual.ShootSomething_Description>發射AKD-X 巡航導彈</MYDE_CMC_J50X.comps.Comp_ShootSomethingManual.ShootSomething_Description>
+  <!-- EN: Launch AKD-X -->
+  <MYDE_CMC_J50X.comps.Comp_ShootSomethingManual.ShootSomething_Label>發射AKD-X 巡航導彈</MYDE_CMC_J50X.comps.Comp_ShootSomethingManual.ShootSomething_Label>
+  
+  <!-- EN: Mote -->
+  <MYDE_FlashingOfSwordEffect_Aero.label>特效</MYDE_FlashingOfSwordEffect_Aero.label>
+  
+</LanguageData>

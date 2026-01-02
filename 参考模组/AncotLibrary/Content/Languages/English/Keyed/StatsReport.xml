@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <Ancot.StatsReport_StatCurve>post curve ({0}: {1})</Ancot.StatsReport_StatCurve>
+  <Ancot.StatsReport_StatEquipped>equipped factor ({0}: {1})</Ancot.StatsReport_StatEquipped>
+  <Ancot.StatsReport_CorrectionFactor>correction factor</Ancot.StatsReport_CorrectionFactor>
+  
+  <Ancot.StatsReport_StorytellerFactor>storyteller factor</Ancot.StatsReport_StorytellerFactor>
+  <Ancot.StatsReport_StorytellerOffset>storyteller offset</Ancot.StatsReport_StorytellerOffset>
+
+  <Ancot.ShieldSize>Size</Ancot.ShieldSize>
+  <Ancot.ShieldSizeDesc>The dimensions of this shield.</Ancot.ShieldSizeDesc>
+  <Ancot.ShieldSize_Small>small</Ancot.ShieldSize_Small>
+  <Ancot.ShieldSize_Medium>medium</Ancot.ShieldSize_Medium>
+  <Ancot.ShieldSize_Large>large</Ancot.ShieldSize_Large>
+
+</LanguageData>

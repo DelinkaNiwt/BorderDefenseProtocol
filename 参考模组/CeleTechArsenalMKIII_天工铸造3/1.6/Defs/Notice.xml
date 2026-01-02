@@ -1,0 +1,8 @@
+<Defs>
+    <Notice.NoticeDef>
+        <defName>CMC_Update_10102025</defName>
+        <label>//CELETECH 10/10/2025 Update Notice//</label>
+        <description>Patched most of the weapons,turrets and all apparels for Combat Extented.(Lasers are not replaced with CE verb and ammo system, but they are still functional in CE environment)</description>
+        <key>2025101016</key>
+    </Notice.NoticeDef>
+</Defs>

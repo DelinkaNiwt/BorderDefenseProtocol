@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>CeleTech Arsenal MKIII</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="CMC_ARGoggles"]/statBases</xpath>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="CMC_ARGoggles"]</xpath>
+            <value>
+              <statBases />
+            </value>
+          </nomatch>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ThingDef[defName="CMC_ARGoggles"]/statBases</xpath>
+          <value>
+            <statBases>
+              <MaxHitPoints>180</MaxHitPoints>
+              <Flammability>0</Flammability>
+              <DeteriorationRate>2</DeteriorationRate>
+              <Beauty>-3</Beauty>
+              <WorkToMake>14250</WorkToMake>
+              <Mass>0.14</Mass>
+              <ArmorRating_Sharp>12</ArmorRating_Sharp>
+              <ArmorRating_Blunt>0</ArmorRating_Blunt>
+              <ArmorRating_Heat>0</ArmorRating_Heat>
+              <EquipDelay>12</EquipDelay>
+            </statBases>
+          </value>
+        </li>
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="CMC_ARGoggles"]/equippedStatOffsets</xpath>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="CMC_ARGoggles"]</xpath>
+            <value>
+              <equippedStatOffsets />
+            </value>
+          </nomatch>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ThingDef[defName="CMC_ARGoggles"]/equippedStatOffsets</xpath>
+          <value>
+            <equippedStatOffsets>
+              <ShootingAccuracyPawn>4</ShootingAccuracyPawn>
+              <NightVisionEfficiency>4</NightVisionEfficiency>
+              <AimingAccuracy>1.5</AimingAccuracy>
+              <SmokeSensitivity>0.9</SmokeSensitivity>
+              <Suppressability>0.15</Suppressability>
+            </equippedStatOffsets>
+          </value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+</Patch>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <MapGeneratorDef ParentName="SpaceMapGenerator">
+    <defName>Milira_AsteroidBasic_SolarCrystal</defName>
+    <label>asteroid</label>
+    <genSteps>
+      <li>AsteroidBasic</li>
+      <li>AsteroidBasicTransportPods</li>
+      <li>MechShipChunk_Asteroid</li>
+      <li>RockChunks</li>
+      <li>Milira_Asteroid_SolarCrystal</li>
+    </genSteps>
+  </MapGeneratorDef>
+
+  <MapGeneratorDef ParentName="SpaceMapGenerator">
+    <defName>Milira_Asteroid_SolarCrystal</defName>
+    <label>asteroid</label>
+    <genSteps>
+      <li>Asteroid</li>
+      <li>AsteroidBasicTransportPods</li>
+      <li>MechShipChunk_Asteroid</li>
+      <li>RockChunks</li>
+      <li>Milira_Asteroid_SolarCrystal</li>
+    </genSteps>
+  </MapGeneratorDef>
+
+  <GenStepDef>
+    <order>900</order>
+    <defName>Milira_Asteroid_SolarCrystal</defName>
+    <genStep Class="Milira.GenStep_ScatterSolarCrystalAsteroid">
+      <minSpacing>5</minSpacing>
+      <validators>
+        <li Class="ScattererValidator_TerrainDef">
+          <radius>1</radius>
+          <terrainDef>Vacstone_Rough</terrainDef>
+        </li>
+        <li Class="ScattererValidator_Roof">
+          <radius>1</radius>
+          <roofDef IsNull="True"/> <!-- No roof -->
+        </li>
+      </validators>
+      <crystalGroup>5~10</crystalGroup>
+      <crystalInGroup>1~3</crystalInGroup>
+    </genStep>
+  </GenStepDef>
+</Defs>

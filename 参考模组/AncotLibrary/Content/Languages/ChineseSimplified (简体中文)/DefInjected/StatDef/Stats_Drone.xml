@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: endurance time -->
+  <Ancot_DroneEnduranceTime.label>续航时长</Ancot_DroneEnduranceTime.label>
+  <!-- EN: The duration the drone can operate from a full charge until the energy is depleted. -->
+  <Ancot_DroneEnduranceTime.description>这个无人机能量充满后运行至能量耗尽的时长。</Ancot_DroneEnduranceTime.description>
+  <!-- EN: {0} hour -->
+  <Ancot_DroneEnduranceTime.formatString>{0}时</Ancot_DroneEnduranceTime.formatString>
+  
+  <!-- EN: recharge time -->
+  <Ancot_DroneRechargeTime.label>充能时长</Ancot_DroneRechargeTime.label>
+  <!-- EN: The time it takes for the drone to recharge to full after its energy is depleted. -->
+  <Ancot_DroneRechargeTime.description>这个无人机能量耗尽后充能至满的时长。</Ancot_DroneRechargeTime.description>
+  <!-- EN: {0} hour -->
+  <Ancot_DroneRechargeTime.formatString>{0}时</Ancot_DroneRechargeTime.formatString>
+  
+</LanguageData>

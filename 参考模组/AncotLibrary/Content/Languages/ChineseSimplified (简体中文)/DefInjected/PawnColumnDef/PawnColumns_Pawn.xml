@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: The apparel this pawn is wearing. -->
+  <Ancot_Apparel.headerTip>这个单位着装的服饰。</Ancot_Apparel.headerTip>
+  
+  <!-- EN: Draft drone. -->
+  <Ancot_DraftDrone.headerTip>征召无人机。</Ancot_DraftDrone.headerTip>
+  
+  <!-- EN: allowed area -->
+  <Ancot_DroneAllowedAreaDrone.label>允许活动区域</Ancot_DroneAllowedAreaDrone.label>
+  <!-- EN: Allowed areas only apply for drones in work and recharge modes. -->
+  <Ancot_DroneAllowedAreaDrone.headerTip>允许活动区域仅对处于“工作”和“充电”行动模式的无人机有效。</Ancot_DroneAllowedAreaDrone.headerTip>
+  
+  <!-- EN: Toggle drone auto-repair. -->
+  <Ancot_DroneAutoRepair.headerTip>开关无人机自动维修。</Ancot_DroneAutoRepair.headerTip>
+  
+  <!-- EN: Check the remaining battery life of the drone. -->
+  <Ancot_DroneEnergy.headerTip>查看无人机剩余续航时长。</Ancot_DroneEnergy.headerTip>
+  
+  <!-- EN: Set the drone's working mode. -->
+  <Ancot_DroneWorkMode.headerTip>设置无人机工作模式。</Ancot_DroneWorkMode.headerTip>
+  
+  <!-- EN: The weapon this pawn equipped with. -->
+  <Ancot_Equipment.headerTip>这个单位装备的武器。</Ancot_Equipment.headerTip>
+  
+</LanguageData>

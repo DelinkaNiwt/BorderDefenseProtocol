@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: cut charged -->
+  <Milira_SlashCharged.label>斩击</Milira_SlashCharged.label>
+  <!-- EN: {0} has been cut to death. -->
+  <Milira_SlashCharged.deathMessage>{0}被斩击致死。</Milira_SlashCharged.deathMessage>
+  
+</LanguageData>

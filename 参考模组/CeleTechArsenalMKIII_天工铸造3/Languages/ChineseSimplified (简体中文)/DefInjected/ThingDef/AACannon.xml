@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: “Qinggang Barragefire” EM cannon turret -->
+  <CMCcannon.label>“青釭·燎原”速射电荷机炮塔</CMCcannon.label>
+  <!-- EN: A charged rapid auto cannon equipped on a turret. It fires accurate bursts and does heavy damage to light-armored targets over range, but its barrel must be refurbished after use. -->
+  <CMCcannon.description>大口径高射速电荷自动机炮塔。炮塔本身的装甲可使其一定程度上可抵御小口径武器和爆炸造成的伤害。</CMCcannon.description>
+  
+  <!-- UNUSED -->
+  <CMCcannon.comps.CompRefuelable.fuelGizmoLabel>炮管耐久</CMCcannon.comps.CompRefuelable.fuelGizmoLabel>
+  <CMCcannon.comps.CompRefuelable.fuelLabel>剩余射击次数</CMCcannon.comps.CompRefuelable.fuelLabel>
+  <CMCcannon.comps.CompRefuelable.outOfFuelMessage>需要更换炮管</CMCcannon.comps.CompRefuelable.outOfFuelMessage>
+  
+  <!-- EN: charged auto cannon -->
+  <Gun_CMCcannon.label>近防炮</Gun_CMCcannon.label>
+  <!-- EN: A self-loading large-bore cannon designed to attach to a turret. -->
+  <Gun_CMCcannon.description>用于防空和压制步兵大口径电荷自动机炮。</Gun_CMCcannon.description>
+  <!-- EN: charged auto cannon -->
+  <Gun_CMCcannon.verbs.Verb_ShootCE.label>TODO</Gun_CMCcannon.verbs.Verb_ShootCE.label>
+  
+  <!-- UNUSED -->
+  <Gun_CMCcannon.verbs.Verb_Shoot.label>电荷弹</Gun_CMCcannon.verbs.Verb_Shoot.label>
+  
+</LanguageData>

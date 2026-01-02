@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: invisibility -->
+  <TOT_Invisibility.label>光學隱身</TOT_Invisibility.label>
+  <!-- EN: invisibility -->
+  <TOT_Invisibility.description>環繞著的納米機械投影使使用者隱身。</TOT_Invisibility.description>
+  
+  <!-- EN: Invincibility -->
+  <TOT_TS_Invincibility.label>傷害吸收</TOT_TS_Invincibility.label>
+  <!-- EN: the chip forms a nanite-shield around the user to immune all kinds of damage in a short period. -->
+  <TOT_TS_Invincibility.description>納米機械護盾將短時間內吸收絕大部分類型的傷害。</TOT_TS_Invincibility.description>
+  
+  <!-- EN: combat boost ranged -->
+  <TOT_TX_shootingbuff.label>遠程決戰指令</TOT_TX_shootingbuff.label>
+  <!-- EN: boost ranged combat performance. -->
+  <TOT_TX_shootingbuff.description>過載的戰術晶元將提升遠程作戰的效率，但也大幅提高受到的傷害。</TOT_TX_shootingbuff.description>
+  
+  <!-- EN: combat boost melee -->
+  <TOT_YH_meleebuff.label>近程決戰指令</TOT_YH_meleebuff.label>
+  <!-- EN: combat boost melee. -->
+  <TOT_YH_meleebuff.description>過載的戰術晶元將提升近距離作戰的效率，但也大幅提高受到的傷害。</TOT_YH_meleebuff.description>
+  
+  <CMC_SelfSkip.label>超時空傳送</CMC_SelfSkip.label>
+  <!-- EN: combat boost melee. -->
+  <CMC_SelfSkip.description>使用傳送光束在短距離內無視障礙物傳送。</CMC_SelfSkip.description>
+  
+  <CMC_NeutronPluse.label>中子洪流</CMC_NeutronPluse.label>
+  <!-- EN: combat boost melee. -->
+  <CMC_NeutronPluse.description>在短距離內爆發出扇形的致命中子束，橫掃所有生命體。</CMC_NeutronPluse.description>
+  
+  <CMC_StellarPortal_Summon.label>星辰折躍</CMC_StellarPortal_Summon.label>
+  <!-- EN: combat boost melee. -->
+  <CMC_StellarPortal_Summon.description>在一定範圍內召喚7座能量炮塔。</CMC_StellarPortal_Summon.description>
+  
+</LanguageData>

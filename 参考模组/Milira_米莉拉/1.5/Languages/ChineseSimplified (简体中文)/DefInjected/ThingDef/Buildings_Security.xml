@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: impact particle charge -->
+  <MiliraBullet_HeavyParticle.label>冲击粒子团</MiliraBullet_HeavyParticle.label>
+  
+  <!-- EN: plasma charge -->
+  <MiliraBullet_HeavyPlasma.label>电浆团</MiliraBullet_HeavyPlasma.label>
+  
+  <!-- EN: electromagnetic round -->
+  <MiliraBullet_HeavyRailGun.label>电磁弹</MiliraBullet_HeavyRailGun.label>
+  
+  <!-- EN: ionic beam -->
+  <MiliraBullet_TurretPlasma.label>离子束</MiliraBullet_TurretPlasma.label>
+  
+  <!-- EN: rocket -->
+  <MiliraProjectile_HeavyRocket.label>火箭弹</MiliraProjectile_HeavyRocket.label>
+  
+  <!-- EN: heavy particle cannon turret -->
+  <MiliraTurret_HeavyParticle.label>重型粒子冲击炮塔</MiliraTurret_HeavyParticle.label>
+  <!-- EN: A self-powered heavy particle cannon turret that continuously fires high-impact particle charges. -->
+  <MiliraTurret_HeavyParticle.description>自供能的重型粒子冲击炮塔，连续发射具有高冲击力的粒子团。</MiliraTurret_HeavyParticle.description>
+  
+  <!-- EN: heavy plasma turret -->
+  <MiliraTurret_HeavyPlasma.label>重型电浆炮塔</MiliraTurret_HeavyPlasma.label>
+  <!-- EN: A self-powered heavy plasma turret that fires plasma charges capable of melting armor. -->
+  <MiliraTurret_HeavyPlasma.description>自供能的重型电浆炮塔，发射能够融毁护甲的电浆团。</MiliraTurret_HeavyPlasma.description>
+  
+  <!-- EN: heavy electromagnetic cannon turret -->
+  <MiliraTurret_HeavyRailGun.label>重型电磁加农炮塔</MiliraTurret_HeavyRailGun.label>
+  <!-- EN: A self-powered heavy electromagnetic cannon turret that launches high-velocity electromagnetic rounds. -->
+  <MiliraTurret_HeavyRailGun.description>自供能的重型电磁加农炮塔，发射高速的电磁弹。</MiliraTurret_HeavyRailGun.description>
+  
+  <!-- EN: multiple rocket launcher -->
+  <MiliraTurret_HeavyRocketLauncher.label>联装火箭炮塔</MiliraTurret_HeavyRocketLauncher.label>
+  <!-- EN: A multiple rocket launcher mounted on a fixed turret. -->
+  <MiliraTurret_HeavyRocketLauncher.description>自供能的联装火箭炮塔，发射覆盖一片区域的火箭弹。</MiliraTurret_HeavyRocketLauncher.description>
+  
+  <!-- EN: small ionic turret -->
+  <MiliraTurret_Plasma.label>小型离子炮塔</MiliraTurret_Plasma.label>
+  <!-- EN: A self-powered small Ion Turret that fires ion beams capable of melting armor. -->
+  <MiliraTurret_Plasma.description>自供能的小型离子炮塔，发射能够融毁护甲的离子束。</MiliraTurret_Plasma.description>
+  
+  <!-- EN: heavy particle cannon -->
+  <MiliraTurretGun_HeavyParticle.label>重型粒子冲击炮</MiliraTurretGun_HeavyParticle.label>
+  <!-- EN: A heavy particle cannon mounted on a fixed turret. -->
+  <MiliraTurretGun_HeavyParticle.description>装载在固定炮塔上的重型粒子冲击炮。</MiliraTurretGun_HeavyParticle.description>
+  <!-- EN: heavy particle cannon -->
+  <MiliraTurretGun_HeavyParticle.verbs.Verb_Shoot.label>重型粒子冲击炮</MiliraTurretGun_HeavyParticle.verbs.Verb_Shoot.label>
+  
+  <!-- EN: heavy plasma cannon -->
+  <MiliraTurretGun_HeavyPlasma.label>重型电浆炮</MiliraTurretGun_HeavyPlasma.label>
+  <!-- EN: A heavy plasma cannon mounted on a fixed turret. -->
+  <MiliraTurretGun_HeavyPlasma.description>装载在固定炮塔上的重型电浆炮。</MiliraTurretGun_HeavyPlasma.description>
+  <!-- EN: heavy plasma cannon -->
+  <MiliraTurretGun_HeavyPlasma.verbs.Verb_Shoot.label>重型电浆炮</MiliraTurretGun_HeavyPlasma.verbs.Verb_Shoot.label>
+  
+  <!-- EN: heavy electromagnetic cannon -->
+  <MiliraTurretGun_HeavyRailGun.label>重型电磁加农炮</MiliraTurretGun_HeavyRailGun.label>
+  <!-- EN: A heavy electromagnetic cannon mounted on a fixed turret. -->
+  <MiliraTurretGun_HeavyRailGun.description>装载在固定炮塔上的重型电磁加农炮。</MiliraTurretGun_HeavyRailGun.description>
+  <!-- EN: heavy electromagnetic cannon -->
+  <MiliraTurretGun_HeavyRailGun.verbs.Verb_Shoot.label>重型电磁加农炮</MiliraTurretGun_HeavyRailGun.verbs.Verb_Shoot.label>
+  
+  <!-- EN: multiple Rocket launcher -->
+  <MiliraTurretGun_HeavyRocketLauncher.label>联装火箭发射器</MiliraTurretGun_HeavyRocketLauncher.label>
+  <!-- EN: A multiple rocket launcher mounted on a fixed turret. -->
+  <MiliraTurretGun_HeavyRocketLauncher.description>装载在固定炮塔上的联装火箭发射器。</MiliraTurretGun_HeavyRocketLauncher.description>
+  <!-- EN: multiple Rocket launcher -->
+  <MiliraTurretGun_HeavyRocketLauncher.verbs.Verb_Shoot.label>联装火箭发射器</MiliraTurretGun_HeavyRocketLauncher.verbs.Verb_Shoot.label>
+  
+  <!-- EN: small ionic gun -->
+  <MiliraTurretGun_Plasma.label>小型离子炮</MiliraTurretGun_Plasma.label>
+  <!-- EN: A small ionic gun mounted on a fixed turret. -->
+  <MiliraTurretGun_Plasma.description>装载在固定炮塔上的小型离子炮。</MiliraTurretGun_Plasma.description>
+  <!-- EN: small ionic gun -->
+  <MiliraTurretGun_Plasma.verbs.Verb_Shoot.label>小型离子炮</MiliraTurretGun_Plasma.verbs.Verb_Shoot.label>
+  
+</LanguageData>

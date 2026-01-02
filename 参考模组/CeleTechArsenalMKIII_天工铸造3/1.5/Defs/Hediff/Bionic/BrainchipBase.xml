@@ -1,0 +1,16 @@
+<Defs>
+  <ThingDef Name="BodyPartProstheticCMCBase" ParentName="BodyPartBase" Abstract="True">
+    <techLevel>Spacer</techLevel>
+    <thingCategories>
+      <li>BodyPartsProsthetic</li>
+    </thingCategories>
+    <graphicData>
+      <texPath>Things/Others/CMCChip</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.60</drawSize>
+    </graphicData>
+    <recipeMaker>
+      <displayPriority>600</displayPriority>
+    </recipeMaker>
+  </ThingDef>
+</Defs>

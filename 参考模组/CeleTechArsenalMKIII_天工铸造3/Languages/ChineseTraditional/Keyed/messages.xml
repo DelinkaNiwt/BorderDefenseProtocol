@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <CMC_GunColorPicker>武器塗裝</CMC_GunColorPicker>
+  <CMC_GunColorPickerDesciption>選擇當前裝備天工武器的小人可更換其武器塗裝顏色。\n近戰在內的特殊武器塗裝無法換色。</CMC_GunColorPickerDesciption>
+  <MessageMustSelectCMCGun>請選擇天工武器（需裝備為主武器）</MessageMustSelectCMCGun>
+  <CMC.ChangeSize>更改護盾半徑</CMC.ChangeSize>
+  <CMC.ChangeSizeDesc>更改護盾半徑</CMC.ChangeSizeDesc>
+  <CMC.ChangeSizeTitle>更改護盾半徑</CMC.ChangeSizeTitle>
+  <CMC.ChangeSizeDescription>當前半徑: {0}\n範圍（20-60格）</CMC.ChangeSizeDescription>
+  <CMC.ShieldSize>護盾當前半徑: {0}\n</CMC.ShieldSize>
+  <Message_AESASetUp>“昆侖”雷達部署完成，反坦克導彈塔將獲得自動攻擊能力。</Message_AESASetUp>
+  <Message_Destroyed>“昆侖”雷達已停機，反坦克導彈塔將失去自動攻擊能力。</Message_Destroyed>
+  <StatEnergyWeaponDMG_Label>能量傷害</StatEnergyWeaponDMG_Label>
+  <StatEnergyWeaponDMG_Desc>{0}</StatEnergyWeaponDMG_Desc>
+  <StatEnergyWeaponDMG_Text>能量傷害數值:{0}\n</StatEnergyWeaponDMG_Text>
+  <StatEnergyWeaponAP_Label>穿深</StatEnergyWeaponAP_Label>
+  <StatEnergyWeaponAP_Desc>{0}</StatEnergyWeaponAP_Desc>
+  <StatEnergyWeaponAP_Text>能量武器穿深:{0}\n</StatEnergyWeaponAP_Text>
+  <StatEnergyWeaponDMG2_Label>額外傷害</StatEnergyWeaponDMG2_Label>
+  <StatEnergyWeaponDMG2_Desc>{0}</StatEnergyWeaponDMG2_Desc>
+  <StatEnergyWeaponDMG2_Text>額外傷害數值:{0}\n</StatEnergyWeaponDMG2_Text>
+  <StatEnergyWeaponAP2_Label>額外傷害穿深</StatEnergyWeaponAP2_Label>
+  <StatEnergyWeaponAP2_Desc>{0}</StatEnergyWeaponAP2_Desc>
+  <StatEnergyWeaponAP2_Text>額外傷害穿深:{0}\n</StatEnergyWeaponAP2_Text>
+  <StatEnergyWeaponDMG3Radius_Label>濺射範圍</StatEnergyWeaponDMG3Radius_Label>
+  <StatEnergyWeaponDMG3Radius_Desc>{0}</StatEnergyWeaponDMG3Radius_Desc>
+  <StatEnergyWeaponDMG3Radius_Text>濺射範圍:{0}\n此範圍內會隨機發生爆炸</StatEnergyWeaponDMG3Radius_Text>
+  <StatShootNum_Label>齊射彈藥數</StatShootNum_Label>
+  <StatShootNum_Desc>{0}</StatShootNum_Desc>
+  <StatShootNum_Text>裝備的武器每次齊射{0}發彈藥, 彈藥消耗也會乘以此系數。</StatShootNum_Text>
+  
+  <Message_MissileLostTarget>導彈目標丟失</Message_MissileLostTarget>
+  
+  <CMC_TradeShipName>天工商盟-無人貿易太空梭</CMC_TradeShipName>
+  <CMC_TradeShipCoolDown>//呼叫貿易太空梭冷卻時間:{0}//</CMC_TradeShipCoolDown>
+  <CMC_TraderShipsSendAway>返航</CMC_TraderShipsSendAway>
+  <CMC_TraderShipsSendAwayDesc>使無人貿易太空梭返回運輸中樞</CMC_TraderShipsSendAwayDesc>
+  <CMC_LandingZoneBlocked>著陸區被侵入:</CMC_LandingZoneBlocked>
+  <CMC_BlockedBy>{0}</CMC_BlockedBy>
+  <Message_CMC_TraderLanded>無人貿易太空梭已抵達</Message_CMC_TraderLanded>
+  <UTSLeavingIn>返航時間：{0}</UTSLeavingIn>
+  <Message_CMC_TraderCantLanded>無人貿易太空梭无法降落，已离开。至少需要一个通电的空旷降落平台。</Message_CMC_TraderCantLanded>
+  
+  <Stat_CMCDMGDrange_Label>衰減距離</Stat_CMCDMGDrange_Label>
+  <Stat_CMCDMGDrange_Desc>{0}</Stat_CMCDMGDrange_Desc>
+  <Stat_CMCDMGDrange_Text>命中{0}格以外目標的子彈將受到傷害和穿深衰減\n傷害衰減:傷害與距離的平方成反比\n穿深衰減:穿深與距離的立方成反比</Stat_CMCDMGDrange_Text>
+  <StatMinDamageMultiplier_Label>保底傷害比例</StatMinDamageMultiplier_Label>
+  <StatMinDamageMultiplier_Desc>{0}</StatMinDamageMultiplier_Desc>
+  <StatMinDamageMultiplier_Text>保底傷害比例:{0}</StatMinDamageMultiplier_Text>
+  <StatMinPeneMultiplier_Label>保底穿深比例</StatMinPeneMultiplier_Label>
+  <StatMinPeneMultiplier_Desc>{0}</StatMinPeneMultiplier_Desc>
+  <StatMinPeneMultiplier_Text>保底穿深比例:{0}</StatMinPeneMultiplier_Text>
+  
+  <CMC.TempControlIsBlocked>I.T.C.V.S.温控被遮挡无法工作</CMC.TempControlIsBlocked>
+  
+  <CMC.ScanMap>雷達照射</CMC.ScanMap>
+<CMC.ScanMapDesc>使用「崑崙」雷達對指定戰區進行照射，允許遠程武器自主攻擊區域內敵對目標。</CMC.ScanMapDesc>
+<CMC.ScanMapStop>終止雷達照射</CMC.ScanMapStop>
+<CMC.ScanMapStopDesc>已終止{0}戰區雷達照射。</CMC.ScanMapStopDesc>
+<CMC.ScanMapStopDescDefault>已終止當前戰區雷達照射。</CMC.ScanMapStopDescDefault>
+<CMC_Targeting>「崑崙」雷達正為{0}戰區提供即時火控數據，持續偵測敵對目標。</CMC_Targeting>
+<CMC_TargetingDefault>「崑崙」雷達正為當前戰區提供即時火控數據，持續偵測敵對目標。</CMC_TargetingDefault>
+<CMC.ScanMapFailed>火控請求駁回，偵測到戰區內存在非敵對派系訊號，敵我識別驗證失敗。</CMC.ScanMapFailed>
+
+<CMC_CommandTargetMapFromWorld>切換至低壓平射模式</CMC_CommandTargetMapFromWorld>
+<CMC_CommandTarggetMapFromWorldDesc>當前為曲射模式（攻擊雷達鎖定的地圖格目標）；切換後將攻擊地圖內目標。\n磁軌全充能加速炮彈至第一宇宙速度，炮塔散熱與自動裝填系統滿功率運行中。</CMC_CommandTarggetMapFromWorldDesc>
+<CMC_CommandTargetWorldFromMap>切換至高壓曲射模式</CMC_CommandTargetWorldFromMap>
+<CMC_CommandTarggetWorldFromMapDesc>當前為平射模式（攻擊地圖內目標）；切換後將攻擊雷達鎖定的地圖格目標。\n磁軌部分充能，炮塔各系統低功率模式運行中。</CMC_CommandTarggetWorldFromMapDesc>
+
+<Command_CMC_ReleaseUAV>釋放浮游炮</Command_CMC_ReleaseUAV>
+<!--Command_CMCReleaseUAV_Desc>勾選後釋放浮游炮，使其進入攻擊或協助模式，將持續使用電容儲量。禁止選項後浮游炮會返回並充電。</Command_CMCReleaseUAV_Desc-->
+<Command_CMC_AutoReleaseUAV>浮游炮自律釋放</Command_CMC_AutoReleaseUAV>
+<Command_CMC_AutoReleaseUAV_Desc>勾選後浮游炮將會在徵兆或交戰時自動釋放，但在電量耗盡前不會自動回收。</Command_CMC_AutoReleaseUAV_Desc>
+<CMC_UAVGizmoA>浮游炮能量</CMC_UAVGizmoA>
+<CMC_UAVGizmoA_Destroyed>已癱瘓</CMC_UAVGizmoA_Destroyed>
+<CMC_UAVGizmoB>浮游炮電容陣列的儲電量，飛行時會持續消耗。</CMC_UAVGizmoB>
+<CMC_FailedToWear_ExceedNumLimit>浮游炮數量達到上限，無法繼續攜帶。</CMC_FailedToWear_ExceedNumLimit>
+<Command_CMC_CallBACKUAV>召回浮游炮</Command_CMC_CallBACKUAV>
+<Command_CMCUAVDrawRadius>渲染範圍</Command_CMCUAVDrawRadius>
+<Command_CMCUAVDrawRadiusDesc>渲染浮游炮武器範圍，動態渲染易造成卡頓，在數量多時建議關閉。</Command_CMCUAVDrawRadiusDesc>
+</LanguageData>

@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- ==基类======================================================================================== -->
+
+  <ThingDef Name="Milian_FloatUnitBase" ParentName="LightMechanoid" Abstract="true">
+    <!-- <selectable>false</selectable> -->
+    <race>
+      <hasCorpse>false</hasCorpse>
+      <body>Milira_FloatUnit</body>
+      <bulletStaggerDelayTicks>0</bulletStaggerDelayTicks>
+      <baseBodySize>0.2</baseBodySize>
+      <!-- <deathAction Class="DeathActionProperties_Vanish">
+        <workerClass>DeathActionWorker_Vanish</workerClass>
+        <fleck>PlainFlash</fleck>
+        <filth>Filth_TwistedFlesh</filth>
+        <filthCountRange>1~3</filthCountRange>
+      </deathAction> -->
+      <lifeStageAges>
+        <li>
+          <def>MechanoidFullyFormed</def>
+          <minAge>0</minAge>
+        </li>
+      </lifeStageAges>
+      <thinkTreeConstant>Milian_AutoFloatUnitConstant</thinkTreeConstant>
+      <baseHealthScale>1.0</baseHealthScale>
+    </race>
+    <tools Inherit="false">
+      <li>
+        <label>body</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>2</power>
+        <cooldownTime>0.4</cooldownTime>
+        <linkedBodyPartsGroup>Torso</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+      </li>
+    </tools>
+    <comps Inherit="false">
+      <li Class="CompProperties_CanBeDormant" />
+      <li Class="CompProperties_WakeUpDormant">
+        <wakeUpOnDamage>true</wakeUpOnDamage>
+        <wakeUpCheckRadius>30</wakeUpCheckRadius>
+        <wakeUpSound>MechanoidsWakeUp</wakeUpSound>
+      </li>
+      <li Class="AncotLibrary.CompProperties_CommandTerminal">
+      </li>
+      <li Class="AncotLibrary.CompProperties_Draftable">
+        <compClass>Milira.CompDraftable_FloatUnit</compClass>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <PawnKindDef Name="Milian_FloatUnitKindBase" ParentName="LightMechanoidKind" Abstract="true">
+    <allowInMechClusters>false</allowInMechClusters>
+    <forceNoDeathNotification>true</forceNoDeathNotification>
+    <forceDeathOnDowned>true</forceDeathOnDowned>
+    <lifeStages>
+      <li>
+        <bodyGraphicData>
+          <texPath>Milian/Mechanoid/FloatUnit/FloatUnitBase</texPath>
+          <maskPath>Milian/Mechanoid/Mask/Mask</maskPath>
+          <shaderType>CutoutWithOverlay</shaderType>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>0.2</drawSize>
+          <shadowData>
+            <volume>(0.2, 0.3, 0.2)</volume>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>      
+  </PawnKindDef>
+
+  <!-- ========================================================================================== -->
+
+  <ThingDef ParentName="Milian_FloatUnitBase">
+    <defName>Milian_AutonomousFloatUnit</defName>
+    <label>autonomous ion float unit</label>
+    <description>a kind of float units capable of firing ion beams at enemy.</description>
+    <descriptionHyperlinks>
+      <ThingDef>Milian_AutonomousFloatUnit_PlasmaBlaster</ThingDef>
+    </descriptionHyperlinks>
+    <statBases>
+      <MoveSpeed>8.5</MoveSpeed>
+    </statBases>
+    <specialDisplayRadius>21.9</specialDisplayRadius>
+    <race>
+      <hasCorpse>false</hasCorpse>
+      <body>Milira_FloatUnit</body>
+      <bulletStaggerDelayTicks>0</bulletStaggerDelayTicks>
+      <baseBodySize>0.2</baseBodySize>
+      <baseHealthScale>0.8</baseHealthScale>
+    </race>
+    <tools Inherit="false">
+      <li>
+        <label>body</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>2</power>
+        <cooldownTime>0.4</cooldownTime>
+        <linkedBodyPartsGroup>Torso</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+      </li>
+    </tools>
+    <comps>
+      <li Class="CompProperties_MechPowerCell">
+        <totalPowerTicks>12500</totalPowerTicks>
+      </li>
+      <li Class="AncotLibrary.CompProperties_TurretGun_Custom">
+        <turretDef>Milian_AutonomousFloatUnit_PlasmaBlaster</turretDef>
+        <angleOffset>-90</angleOffset>
+        <autoAttack>false</autoAttack>
+        <renderNodeProperties>
+          <li Class="AncotLibrary.PawnRenderNodeProperties_TurretGun_Custom">
+            <nodeClass>AncotLibrary.PawnRenderNode_TurretGun_Custom</nodeClass>
+            <workerClass>AncotLibrary.PawnRenderNodeWorker_TurretGun_Custom</workerClass>
+            <overrideMeshSize>(1, 1)</overrideMeshSize>
+            <parentTagDef>Body</parentTagDef>
+            <baseLayer>30</baseLayer>
+            <pawnType>Any</pawnType>
+            <drawData>
+              <dataWest>
+                <rotationOffset>180</rotationOffset>
+              </dataWest>
+            </drawData>
+          </li>
+        </renderNodeProperties>
+      </li>
+    </comps>
+    <uiIconPath>Milian/Mechanoid/FloatUnit/FloatUnit</uiIconPath>
+  </ThingDef>
+  
+  <PawnKindDef ParentName="Milian_FloatUnitKindBase">
+    <defName>Milian_AutonomousFloatUnit</defName>
+    <label>autonomous ion float unit</label>
+    <labelPlural>autonomous ion float unit</labelPlural>
+    <race>Milian_AutonomousFloatUnit</race> 
+  </PawnKindDef>
+
+
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>Milian_AutonomousFloatUnit_PlasmaBlaster</defName>
+    <label>autonomous plasma blaster float unit</label>
+    <description>a kind of float unit capable of firing ion beams at enemy.</description>
+    <tradeability>None</tradeability>
+    <destroyOnDrop>true</destroyOnDrop>
+    <graphicData>
+      <texPath>Milian/Mechanoid/FloatUnit/FloatUnit</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <Mass>1.2</Mass>
+      <AccuracyTouch>0.80</AccuracyTouch>
+      <AccuracyShort>0.60</AccuracyShort>
+      <AccuracyMedium>0.45</AccuracyMedium>
+      <AccuracyLong>0.25</AccuracyLong>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>MiliraBullet_AutonomousFloatUnit_ParticleBlaster</defaultProjectile>
+        <requireLineOfSight>true</requireLineOfSight>
+        <range>21.9</range>
+        <soundCast>Milira_Shot_PlasmaRifle</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>4</muzzleFlashScale>
+        <defaultCooldownTime>1.8</defaultCooldownTime>
+        <linkedBodyPartsGroup>Torso</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+        <burstShotCount>1</burstShotCount>
+        <ticksBetweenBurstShots>0</ticksBetweenBurstShots>
+      </li>
+    </verbs>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>MiliraBullet_AutonomousFloatUnit_ParticleBlaster</defName>
+    <label>ion beam</label>
+    <graphicData>
+      <texPath>Milira/Projectile/MiliraBullet_PiecesEMPGun</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+      <drawSize>1.0</drawSize>
+    </graphicData>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>8</damageAmountBase>
+      <armorPenetrationBase>0.18</armorPenetrationBase>
+      <stoppingPower>0.6</stoppingPower>
+      <speed>82</speed>
+    </projectile>
+  </ThingDef>
+
+  <!-- ========================================================================================== -->
+
+  <ThingDef ParentName="Milian_FloatUnitBase">
+    <defName>Milian_FloatUnit_SmallPlasma</defName>
+    <label>small ion float unit</label>
+    <description>a kind of float unit capable of firing ion beams at enemy.</description>
+    <descriptionHyperlinks>
+      <ThingDef>Milian_FloatUnit_SmallPlasmaGun</ThingDef>
+    </descriptionHyperlinks>
+    <statBases>
+      <MoveSpeed>6.5</MoveSpeed>
+    </statBases>
+    <specialDisplayRadius>11.9</specialDisplayRadius>
+    <race>
+      <hasCorpse>false</hasCorpse>
+      <body>Milira_FloatUnit</body>
+      <bulletStaggerDelayTicks>0</bulletStaggerDelayTicks>
+      <baseBodySize>0.1</baseBodySize>
+      <baseHealthScale>0.5</baseHealthScale>
+    </race>
+    <tools Inherit="false">
+      <li>
+        <label>body</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>2</power>
+        <cooldownTime>0.4</cooldownTime>
+        <linkedBodyPartsGroup>Torso</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+      </li>
+    </tools>
+    <comps>
+      <li Class="CompProperties_MechPowerCell">
+        <totalPowerTicks>7500</totalPowerTicks>
+      </li>
+      <li Class="AncotLibrary.CompProperties_TurretGun_Custom">
+        <turretDef>Milian_FloatUnit_SmallPlasmaGun</turretDef>
+        <angleOffset>-90</angleOffset>
+        <autoAttack>false</autoAttack>
+        <renderNodeProperties>
+          <li Class="AncotLibrary.PawnRenderNodeProperties_TurretGun_Custom">
+            <nodeClass>AncotLibrary.PawnRenderNode_TurretGun_Custom</nodeClass>
+            <workerClass>AncotLibrary.PawnRenderNodeWorker_TurretGun_Custom</workerClass>
+            <overrideMeshSize>(1.5, 1.5)</overrideMeshSize>
+            <parentTagDef>Body</parentTagDef>
+            <baseLayer>30</baseLayer>
+            <pawnType>Any</pawnType>
+            <drawData>
+              <dataWest>
+                <rotationOffset>180</rotationOffset>
+              </dataWest>
+            </drawData>
+          </li>
+        </renderNodeProperties>
+      </li>
+    </comps>
+    <uiIconPath>Milian/Mechanoid/FloatUnit/FloatUnit_Small</uiIconPath>
+    <uiIconScale>3.0</uiIconScale>
+  </ThingDef>
+  
+  <PawnKindDef ParentName="Milian_FloatUnitKindBase">
+    <defName>Milian_FloatUnit_SmallPlasma</defName>
+    <label>small ion float unit</label>
+    <labelPlural>small ion float unit</labelPlural>
+    <race>Milian_FloatUnit_SmallPlasma</race> 
+  </PawnKindDef>
+
+
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>Milian_FloatUnit_SmallPlasmaGun</defName>
+    <label>small ion float unit</label>
+    <description>a kind of float unit capable of firing ion beams at enemy.</description>
+    <tradeability>None</tradeability>
+    <destroyOnDrop>true</destroyOnDrop>
+    <graphicData>
+      <texPath>Milian/Mechanoid/FloatUnit/FloatUnit_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <Mass>0.8</Mass>
+      <AccuracyTouch>0.85</AccuracyTouch>
+      <AccuracyShort>0.62</AccuracyShort>
+      <AccuracyMedium>0.35</AccuracyMedium>
+      <AccuracyLong>0.1</AccuracyLong>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>MiliraBullet_FloatUnit_SmallPlasmaGun</defaultProjectile>
+        <requireLineOfSight>true</requireLineOfSight>
+        <range>11.9</range>
+        <soundCast>Milira_Shot_PlasmaRifle</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>3</muzzleFlashScale>
+        <defaultCooldownTime>1.2</defaultCooldownTime>
+        <linkedBodyPartsGroup>Torso</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+        <burstShotCount>1</burstShotCount>
+        <ticksBetweenBurstShots>0</ticksBetweenBurstShots>
+      </li>
+    </verbs>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>MiliraBullet_FloatUnit_SmallPlasmaGun</defName>
+    <label>ion beam</label>
+    <graphicData>
+      <texPath>Milira/Projectile/MiliraBullet_PiecesEMPGun</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+      <drawSize>0.8</drawSize>
+    </graphicData>
+    <projectile>
+      <flyOverhead>false</flyOverhead>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>5</damageAmountBase>
+      <armorPenetrationBase>0.15</armorPenetrationBase>
+      <stoppingPower>0.3</stoppingPower>
+      <speed>68</speed>
+    </projectile>
+  </ThingDef>
+
+
+
+  <!-- ========================================================================================== -->
+
+  <ThingDef ParentName="Milian_FloatUnitBase">
+    <defName>Milian_FloatUnit_Shield</defName>
+    <label>shield float unit</label>
+    <description>a slow float unit with a low-angle shield.</description>
+    <statBases>
+      <MoveSpeed>1.5</MoveSpeed>
+    </statBases>
+    <race>
+      <hasCorpse>false</hasCorpse>
+      <body>Milira_FloatUnit</body>
+      <bulletStaggerDelayTicks>0</bulletStaggerDelayTicks>
+      <baseBodySize>0.2</baseBodySize>
+      <renderTree>Milian_FloatUnit_Shield</renderTree>
+      <thinkTreeConstant>Milian_AutoFloatUnitConstant_Shield</thinkTreeConstant>
+      <baseHealthScale>1.0</baseHealthScale>
+    </race>
+    <tools Inherit="false">
+      <li>
+        <label>body</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>2</power>
+        <cooldownTime>2.0</cooldownTime>
+        <linkedBodyPartsGroup>Torso</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+      </li>
+    </tools>
+    <comps>
+      <li Class="CompProperties_MechPowerCell">
+        <totalPowerTicks>5000</totalPowerTicks>
+      </li>
+      <!-- <li Class="AncotLibrary.CompProperties_TurretGun_Custom">
+        <turretDef>Milian_FloatUnit_SmallPlasmaGun</turretDef>
+        <angleOffset>-90</angleOffset>
+        <autoAttack>false</autoAttack>
+        <renderNodeProperties>
+          <li Class="AncotLibrary.PawnRenderNodeProperties_TurretGun_Custom">
+            <nodeClass>AncotLibrary.PawnRenderNode_TurretGun_Custom</nodeClass>
+            <workerClass>AncotLibrary.PawnRenderNodeWorker_TurretGun_Custom</workerClass>
+            <overrideMeshSize>(1.5, 1.5)</overrideMeshSize>
+            <parentTagDef>Body</parentTagDef>
+            <baseLayer>30</baseLayer>
+            <pawnType>Any</pawnType>
+            <drawData>
+              <dataWest>
+                <rotationOffset>180</rotationOffset>
+              </dataWest>
+            </drawData>
+          </li>
+        </renderNodeProperties>
+      </li> -->
+      <li Class="CompProperties_ProjectileInterceptor">
+        <radius>6.9</radius>
+        <interceptGroundProjectiles>true</interceptGroundProjectiles>
+        <interceptNonHostileProjectiles>false</interceptNonHostileProjectiles>
+        <color>(0.92, 0.91, 0.76)</color>
+        <reactivateEffect>BulletShieldGenerator_Reactivate</reactivateEffect>
+        <activeSound>BulletShield_Ambience</activeSound>
+        <hitPoints>3000</hitPoints>
+        <hitPointsRestoreInstantlyAfterCharge>true</hitPointsRestoreInstantlyAfterCharge>
+        <chargeDurationTicks>1200</chargeDurationTicks><!-- 20s -->
+        <rechargeHitPointsIntervalTicks>15</rechargeHitPointsIntervalTicks>
+        <minIdleAlpha>0.3</minIdleAlpha>
+        <drawWithNoSelection>True</drawWithNoSelection>
+        <disarmedByEmpForTicks>600</disarmedByEmpForTicks>
+        <gizmoTipKey>ProjectileInterceptorTip</gizmoTipKey>
+      </li>
+    </comps>
+    <uiIconPath>Milian/Mechanoid/FloatUnit/ShieldUnit/ShieldUnit_south</uiIconPath>
+    <uiIconScale>3.0</uiIconScale>
+  </ThingDef>
+  
+  <PawnKindDef ParentName="Milian_FloatUnitKindBase">
+    <defName>Milian_FloatUnit_Shield</defName>
+    <label>shield float unit</label>
+    <labelPlural>shield float unit</labelPlural>
+    <race>Milian_FloatUnit_Shield</race>
+    <!-- <lifeStages Inherit="false">
+      <li>
+        <bodyGraphicData>
+          <texPath>Milian/Mechanoid/FloatUnit/ShieldUnit/ShieldUnit</texPath>
+          <maskPath>Milian/Mechanoid/Mask/Mask</maskPath>
+          <shaderType>CutoutWithOverlay</shaderType>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>3.0</drawSize>
+          <shadowData>
+            <volume>(0.2, 0.3, 0.2)</volume>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>  -->
+  </PawnKindDef>
+
+
+  <!-- ========================================================================================== -->
+  <!-- 机控浮游单元 -->
+  <ThingDef ParentName="Milian_FloatUnitBase">
+    <defName>Milian_FloatUnit_MechControl</defName>
+    <label>mech control unit</label>
+    <description>a kind of float unit capable of controlling mechnoids.</description>
+    <statBases>
+      <MoveSpeed>6.5</MoveSpeed>
+    </statBases>
+    <race>
+      <hasCorpse>false</hasCorpse>
+      <body>Milira_FloatUnit</body>
+      <bulletStaggerDelayTicks>0</bulletStaggerDelayTicks>
+      <baseBodySize>0.1</baseBodySize>
+      <baseHealthScale>1.0</baseHealthScale>
+      <renderTree>Milian_FloatUnit_MechControl</renderTree>
+      <thinkTreeConstant>Milian_AutoFloatUnitConstant_Shield</thinkTreeConstant>
+    </race>
+    <tools Inherit="false">
+      <li>
+        <label>body</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>2</power>
+        <cooldownTime>0.4</cooldownTime>
+        <linkedBodyPartsGroup>Torso</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+      </li>
+    </tools>
+    <comps>
+      <li Class="CompProperties_MechPowerCell">
+        <totalPowerTicks>7500</totalPowerTicks>
+      </li>
+      <li Class="Milira.CompProperties_MechCommandRadius">
+        <mechCommandRadius>9.9</mechCommandRadius>
+			</li>
+    </comps>
+    <uiIconPath>Milian/Mechanoid/FloatUnit/MechControlUnit</uiIconPath>
+    <uiIconScale>2.0</uiIconScale>
+  </ThingDef>
+  
+  <PawnKindDef ParentName="Milian_FloatUnitKindBase">
+    <defName>Milian_FloatUnit_MechControl</defName>
+    <label>mech control unit</label>
+    <labelPlural>mech control units</labelPlural>
+    <race>Milian_FloatUnit_MechControl</race> 
+  </PawnKindDef>
+
+
+</Defs>

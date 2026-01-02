@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: sniper bullet -->
+  <Bullet_QS_ATB.label>狙击枪子弹（麻醉）</Bullet_QS_ATB.label>
+  
+  <!-- EN: sniper bullet -->
+  <Bullet_QS_Lethal.label>狙击枪子弹（致死）</Bullet_QS_Lethal.label>
+  
+  <!-- EN: QBU-71 sniper -->
+  <CMC_QBU71S.label>QBU-71 反器材狙击枪</CMC_QBU71S.label>
+  <!-- EN: A smart anti-vehicle sniper firing high-penetration projectiles. Its specially designed hypersonic projectiles are able to penetrate shields. -->
+  <CMC_QBU71S.description>新一代智能反器材狙击枪，先进的火控大幅提高了反应时间和射程，也可以引导子弹追踪锁定的敌人。特制的高射速子弹可以穿透力场护盾，其微型反物质战斗部也能在命中后造成剧烈的爆炸。美中不足的是，该枪十分笨重且后坐力巨大。\n\n重型武器可在模组设置中禁用生成逻辑，但由于其制造成本，即使启用生成选项，常规袭击事件中仍可能无法自然出现。</CMC_QBU71S.description>
+  <!-- EN: stock -->
+  <CMC_QBU71S.tools.stock.label>枪托</CMC_QBU71S.tools.stock.label>
+  <!-- EN: barrel -->
+  <CMC_QBU71S.tools.barrel.label>枪管</CMC_QBU71S.tools.barrel.label>
+  <!-- EN: QBU-71 sniper -->
+  <CMC_QBU71S.verbs.Verb_ShootCE.label>TODO</CMC_QBU71S.verbs.Verb_ShootCE.label>
+  
+  <!-- UNUSED -->
+  <CMC_QBU71S.verbs.Verb_Shoot.label>QBU-71 反器材狙击枪</CMC_QBU71S.verbs.Verb_Shoot.label>
+  
+  <!-- EN: <color=#5BC4E2><i>QBU-71J:Nine Tails</i></color> -->
+  <QBU71_QS.label>&lt;color=#5BC4E2>&lt;i>QBU-71J「九尾」低致命狙击步枪&lt;/i>&lt;/color></QBU71_QS.label>
+  <!-- EN: An intelligent less-lethal sniper rifle with integrated biometric tracking. Projectiles load nanoscale electroshock fibers and sedative aerosol, deploying nine guidance filaments through rifling-induced spin. Induces neuronal hyperpolarization within 3 seconds of impact for precise 15-minute paralysis. Recoil mitigation system enables surgical non-lethal interventions at 1.2km range.\n\nDesigned for spec-ops policing, this weapon can penetrate bulletproof glass while maintaining non-lethal efficacy. Its signature spiral etchings - nine helical grooves radiating from impact points - serve as forensic markers. -->
+  <QBU71_QS.description>智能低致命狙击步枪，内置生物特征追踪模块。弹头装载纳米级电击纤维与镇静气溶胶，通过膛线赋予的尾旋运动展开九道制导线束。击中后3秒内使目标神经元超极化，实现两个小时精确瘫痪。后坐力控制系统允许在1.2公里外进行手术刀式非致命干预。\n\n为特种执法设计的道德武器，能在击穿防弹玻璃后仍维持非致命效能，窗框残留的九道螺旋蚀痕成为其行动签名。</QBU71_QS.description>
+  <!-- EN: stock -->
+  <QBU71_QS.tools.stock.label>枪托</QBU71_QS.tools.stock.label>
+  <!-- EN: barrel -->
+  <QBU71_QS.tools.barrel.label>枪管</QBU71_QS.tools.barrel.label>
+  <!-- EN: <color=#5BC4E2><i>QBU-71J:Nine Tails</i></color> -->
+  <QBU71_QS.verbs.Verb_ShootCE.label>TODO</QBU71_QS.verbs.Verb_ShootCE.label>
+  
+  <!-- UNUSED -->
+  <QBU71_QS.verbs.Verb_Shoot.label>&lt;color=#5BC4E2>&lt;i>QBU-71J“九尾”低致命狙击步枪&lt;/i>&lt;/color></QBU71_QS.verbs.Verb_Shoot.label>
+  
+  <!-- EN: QBUS-85F:Emberclasp -->
+  <QBUS85F.label>&lt;color=#5BC4E2>&lt;i>QBUS-85F“离火”智能战术射手步枪&lt;/i>&lt;/color></QBUS85F.label>
+  <!-- EN: A smart marksman rifle based on QBUS-85. The barrel features a tungsten carbide-ceramic composite coating to withstand the extreme chamber pressure of armor-piercing incendiary rounds. Equipped with a smart thermal imaging scope that automatically identifies armored weak points and flags combustible zones. Loaded with depleted uranium armor-piercing incendiary (API) ammunition, which ignites white phosphorus upon penetration to inflict sustained thermal damage on organic targets. -->
+  <QBUS85F.description>基于QBUS-85打造的智能射手步枪，枪管采用碳化钨-陶瓷复合镀层以承受穿甲燃烧弹的极端膛压。配备智能热感瞄准镜，可自动识别目标装甲薄弱点并标记易燃区域。弹匣内装填的贫铀穿甲燃烧弹（API）在击穿目标后，内置白磷燃烧剂会引发明火，对生物目标造成持续性灼烧伤害。</QBUS85F.description>
+  <!-- EN: stock -->
+  <QBUS85F.tools.stock.label>枪托</QBUS85F.tools.stock.label>
+  <!-- EN: barrel -->
+  <QBUS85F.tools.barrel.label>枪管</QBUS85F.tools.barrel.label>
+  <!-- EN: QBUS-85F:Emberclasp -->
+  <QBUS85F.verbs.Verb_ShootCE.label>TODO</QBUS85F.verbs.Verb_ShootCE.label>
+  
+  <!-- UNUSED -->
+  <QBUS85F.verbs.Verb_Shoot.label>&lt;color=#5BC4E2>&lt;i>QBUS-85F“离火”智能战术射手步枪&lt;/i>&lt;/color></QBUS85F.verbs.Verb_Shoot.label>
+  
+  <!-- EN: QBUS-85 smart sniper -->
+  <QBUS85XWJ.label>QBUS-85 智能射手步枪</QBUS85XWJ.label>
+  <!-- EN: A smart marksman rifle, it fires guided bullets which can accurately hit moving target at long range.\n\nThis weapon's accuracy is based on users's intellectual skill ONLY. -->
+  <QBUS85XWJ.description>发射追踪子弹的半自动射手步枪，可以在远距离命中移动目标。对步兵较为有效。\n\n该武器的追踪模式命中率仅受射手智识水平影响，且子弹伤害穿深随距离衰减。</QBUS85XWJ.description>
+  <!-- EN: stock -->
+  <QBUS85XWJ.tools.stock.label>枪托</QBUS85XWJ.tools.stock.label>
+  <!-- EN: barrel -->
+  <QBUS85XWJ.tools.barrel.label>枪管</QBUS85XWJ.tools.barrel.label>
+  <!-- EN: QBUS-85 smart sniper -->
+  <QBUS85XWJ.verbs.Verb_ShootCE.label>TODO</QBUS85XWJ.verbs.Verb_ShootCE.label>
+  
+  <!-- UNUSED -->
+  <QBUS85XWJ.verbs.Verb_Shoot.label>QBUS-85 智能射手步枪</QBUS85XWJ.verbs.Verb_Shoot.label>
+  
+</LanguageData>

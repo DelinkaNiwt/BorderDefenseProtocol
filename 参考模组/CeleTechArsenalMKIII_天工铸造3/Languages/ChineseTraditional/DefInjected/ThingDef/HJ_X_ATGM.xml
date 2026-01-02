@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: HJ-X ATGM -->
+  <CMC_HJX_ATGM.label>紅箭-53 ATGM</CMC_HJX_ATGM.label>
+  <!-- EN: An individual anti-tank missile launcher, equipped with HJ-53 light ATGM missile. -->
+  <CMC_HJX_ATGM.description>先進的單兵輕型反坦克導彈。\n\n導彈鎖定的目標失去戰鬥力且導彈還在制導距離內時，引導頭會自動搜索周圍5格內的敵隊目標，或避開原目標擊中附近的空地。</CMC_HJX_ATGM.description>
+  <!-- EN: barrel -->
+  <CMC_HJX_ATGM.tools.barrel.label>炮管</CMC_HJX_ATGM.tools.barrel.label>
+  <!-- EN: HJ-X ATGM -->
+  <CMC_HJX_ATGM.verbs.Verb_Shoot.label>紅箭-53輕型反坦克導彈</CMC_HJX_ATGM.verbs.Verb_Shoot.label>
+  
+</LanguageData>

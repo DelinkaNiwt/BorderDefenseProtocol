@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Rocket -->
+  <CMC_RocketShell.label>TODO</CMC_RocketShell.label>
+  <!-- EN: CMC rocket shell. -->
+  <CMC_RocketShell.description>TODO</CMC_RocketShell.description>
+  
+  <!-- EN: "Ganjiang Infernowave"rocket launcher -->
+  <CMC_RocketswarmLauncher.label>"干将·焚云"集群火箭发射塔</CMC_RocketswarmLauncher.label>
+  <!-- EN: A stationary launch platform armed with four devastating high-explosive rockets. Capable of arching projectiles over terrain obstacles to strike entrenched targets, though the absence of guidance systems results in significant trajectory deviation. Recommended for saturation bombardment against area targets. -->
+  <CMC_RocketswarmLauncher.description>固定式发射装置，可一次性发射四枚高爆火箭弹。火箭通过抛物线弹道越过障碍物攻击目标，但无制导系统导致远距离命中率较低。建议用于对集群目标的区域覆盖轰炸。\n\n该武器配备分导式集束弹头，弹体在命中前会释放多枚高爆反人员子弹药，通过预置破片矩阵对半径内的无防护目标实施饱和打击。\n\n导弹会因为目标进入烟雾或高速移动而丢失目标，当丢失目标或锁定的目标失去战斗力且导弹还在制导距离内时，引导头会自动搜索周围5格内的敌对目标。</CMC_RocketswarmLauncher.description>
+  <!-- EN: Rockets -->
+  <CMC_RocketswarmLauncher.comps.CompRefuelable.fuelGizmoLabel>弹药</CMC_RocketswarmLauncher.comps.CompRefuelable.fuelGizmoLabel>
+  <!-- EN: Rockets -->
+  <CMC_RocketswarmLauncher.comps.CompRefuelable.fuelLabel>剩余射击数</CMC_RocketswarmLauncher.comps.CompRefuelable.fuelLabel>
+  <!-- EN: no ammo -->
+  <CMC_RocketswarmLauncher.comps.CompRefuelable.outOfFuelMessage>需要弹药</CMC_RocketswarmLauncher.comps.CompRefuelable.outOfFuelMessage>
+  
+  <!-- EN: rocket launcher -->
+  <Gun_CMCRocketswarmLauncher.label>火箭发射架</Gun_CMCRocketswarmLauncher.label>
+  <!-- EN: A rocket launcher designed to attach to a turret. -->
+  <Gun_CMCRocketswarmLauncher.description>安装在炮塔上的44联装直射火箭发射架。</Gun_CMCRocketswarmLauncher.description>
+  <!-- EN: rocket launcher -->
+  <Gun_CMCRocketswarmLauncher.verbs.Verb_RocketShoot.label>TODO</Gun_CMCRocketswarmLauncher.verbs.Verb_RocketShoot.label>
+  
+</LanguageData>

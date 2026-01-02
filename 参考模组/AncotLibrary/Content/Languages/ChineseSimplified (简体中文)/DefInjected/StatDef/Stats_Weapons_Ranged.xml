@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: energy weapon charge interval factor -->
+  <Ancot_WeaponChargeTickFactor.label>能量武器充能间隔乘数</Ancot_WeaponChargeTickFactor.label>
+  <!-- EN: The charge interval of energy weapon will multiplied by this factor. -->
+  <Ancot_WeaponChargeTickFactor.description>武器充能间隔的时间会乘以这个值。</Ancot_WeaponChargeTickFactor.description>
+  
+  <!-- EN: energy weapon max charge factor -->
+  <Ancot_WeaponMaxChargeFactor.label>能量武器最大充能乘数</Ancot_WeaponMaxChargeFactor.label>
+  <!-- EN: The max charge of energy weapon will multiplied by this factor. -->
+  <Ancot_WeaponMaxChargeFactor.description>这把武器能够储存的最大能量会乘以这个值。</Ancot_WeaponMaxChargeFactor.description>
+  
+</LanguageData>

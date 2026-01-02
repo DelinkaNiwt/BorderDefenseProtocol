@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: AR tactical goggle -->
+  <CMC_ARGoggles.label>BD-03X「掠影」AR目镜</CMC_ARGoggles.label>
+  <!-- EN: An AR tactical goggles with nano-titanium crystalline lenses. Activated electro-optical layer projects augmented reality HUD with windage compensation algorithms and dynamic threat tagging, featuring NVG,thermal,EM spectrum tri-mode vision. -->
+  <CMC_ARGoggles.description>纳米钛晶镀层镜片可抵挡轻武器和弹片直击，通电后激活增强现实战术界面。内置弹道风偏补偿算法与动态威胁标记系统，支持夜视,热成像,电磁频谱三模切换。</CMC_ARGoggles.description>
+  
+  <!-- EN: BD-03X-M AR goggle -->
+  <CMC_ARGoggles_Cat.label>BD-03C「探机」机控AR目镜</CMC_ARGoggles_Cat.label>
+  <!-- EN: Tactical variant with integrated mechanosensory array. Features dual-band scanning "cat ear" structures housing tri-sensor modules (vibration/thermal/magnetic) for real-time diagnostics overlay. -->
+  <CMC_ARGoggles_Cat.description>集成机械传感阵列的特勤型号。双频扫描猫耳结构内置带宽增幅器。</CMC_ARGoggles_Cat.description>
+  
+  <!-- EN: BD-01Y "Xuangang" Power Armor (Standard) -->
+  <CMC_HPA_Base.label>BD-01Y「玄罡」基础型动力甲</CMC_HPA_Base.label>
+  <!-- EN: CMC standard power armor. Features lightweight nullium plating providing balanced protection against small-arms kinetic and energy fire at close range. Maintains high tactical mobility suitable for assault and recon operations.\n\nThe armor's inner layer contains pressurized hemostatic compound that automatically deploys to prevent bleeding. -->
+  <CMC_HPA_Base.description>CMC地面探索队标准动力装甲。装备轻量化零素装甲板，提供均衡的防护，有效抵御单兵动能与能量武器的近距离射击。在保证基础防御的同时维持了较高的战术机动性，适合突击与侦察任务。\n\n该护甲装备内置止血剂。</CMC_HPA_Base.description>
+  
+  <!-- EN: BD-02Y "Zhenyue" Heavy Power Armor -->
+  <CMC_HPA_Heavy.label>BD-02Y「镇岳」重型动力甲</CMC_HPA_Heavy.label>
+  <!-- EN: CMC heavy assault armor. Utilizes thickened nullium plates for superior defense against kinetic/energy weapons (up to certain heavy arms). Reduced mobility for increased survivability. Designed for breaching fortified positions and defensive emplacements.\n\nThis armor has a hemostatic agent.\n\nThe armor's inner layer contains pressurized hemostatic compound that automatically deploys to prevent bleeding. -->
+  <CMC_HPA_Heavy.description>CMC地面探索队重型动力装甲。采用加厚零素装甲板，显著提升对动能、能量武器（包括部分重武器）的防护等级。牺牲部分机动性换取更强的生存能力，专为突破坚固防线和阵地防御设计。\n\n该护甲装备内置止血剂。</CMC_HPA_Heavy.description>
+  
+  <!-- EN: XG helmet-R -->
+  <CMChelmet.label>BD-01X「玄罡」通用型动力头盔</CMChelmet.label>
+  <!-- EN: A heavily-armored high-tech helmet with AR screen, it also includes a laser range finder coupled to a ballistic computer linked to the sights to ensure that the user aims the weapon accurately. -->
+  <CMChelmet.description>集成第三代火控雷达与神经辅助弹道预测系统，表层采用碳化硼-石墨烯复合装甲的动力甲头盔。具备三级环境密封系统，可抵御高温及生化污染物。穿戴者通过脑机接口同步获取实时弹道轨迹投影。</CMChelmet.description>
+  
+  <!-- EN: CMC helmet-M -->
+  <CMChelmetM.label>BD-02X「镇岳」重型动力头盔</CMChelmetM.label>
+  <!-- EN: A fully-armored high-tech helmet providing. -->
+  <CMChelmetM.description>多层堆叠式复合陶瓷装甲提供全方向的高防护能力。全息感知阵列通过分布式传感器实现360°战场建模，代价是移除火控组件导致射击辅助功能受限。</CMChelmetM.description>
+  
+</LanguageData>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!-- 任务的开始 -->
+  <PawnKindDef ParentName="Milira_PawnBase">
+    <defName>Milira_FallenAngel</defName>
+    <label>Grounded Milira</label>
+    <combatPower>20</combatPower>
+    <itemQuality>Normal</itemQuality>
+    <isFighter>false</isFighter>
+    <factionLeader>false</factionLeader>
+    <apparelMoney>
+      <min>500</min>
+      <max>1000</max>
+    </apparelMoney>
+    <apparelTags>
+      <li>Milira_Daily</li>
+    </apparelTags>
+    <apparelRequired>
+    </apparelRequired>
+    <forcedTraits>
+      <GreatMemory>0</GreatMemory>
+      <NaturalMood>2</NaturalMood>
+    </forcedTraits>
+    <apparelAllowHeadgearChance>0</apparelAllowHeadgearChance>
+    <weaponTags>
+    </weaponTags>
+    <backstoryCategories>
+      <li>Milira_General</li>
+    </backstoryCategories>
+    <inventoryOptions>
+    </inventoryOptions>
+  </PawnKindDef>
+
+</Defs>

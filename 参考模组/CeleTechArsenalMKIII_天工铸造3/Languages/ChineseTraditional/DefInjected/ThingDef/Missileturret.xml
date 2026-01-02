@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <CMC_Gun_ML.label>導彈發射架</CMC_Gun_ML.label>
+  <CMC_Gun_ML.description>裝備光電系統的自動導彈發射架，安裝在炮塔上。</CMC_Gun_ML.description>
+  <CMC_Gun_ML.verbs.Verb_Shoot.label>反坦克導彈</CMC_Gun_ML.verbs.Verb_Shoot.label>
+  
+  <CMCML.label>"純鈞·貫甲"重型導彈發射塔</CMCML.label>
+  <!-- EN: A heavy CMC charged automatic turret, it fires ground-to-ground missiles. --><CMCML.description>六聯裝導彈防禦塔，裝備復合制導模式的紅箭-50重型反坦克導彈，在雷達的引導下可自動索敵，也可手動瞄準。\n該炮塔被摧毀時會導致大範圍殉爆。\n導彈鎖定的目標失去戰鬥力且導彈還在制導距離內時，引導頭會自動搜索周圍5格內的敵對目標。\n“雖復傾城量金，珠玉竭河猶不能得”</CMCML.description>
+  <CMCML.comps.CompRefuelable.fuelGizmoLabel>彈藥</CMCML.comps.CompRefuelable.fuelGizmoLabel>
+  <CMCML.comps.CompRefuelable.fuelLabel>剩餘射擊數</CMCML.comps.CompRefuelable.fuelLabel>
+  <CMCML.comps.CompRefuelable.outOfFuelMessage>需要彈藥</CMCML.comps.CompRefuelable.outOfFuelMessage>
+  
+  <Gun_CMCRocketswarmLauncher.label>火箭發射架</Gun_CMCRocketswarmLauncher.label>
+  <Gun_CMCRocketswarmLauncher.description>安裝在炮塔上的44聯裝直射火箭發射架。</Gun_CMCRocketswarmLauncher.description>
+  <Gun_CMCRocketswarmLauncher.verbs.Verb_Shoot.label>反坦克導彈</Gun_CMCRocketswarmLauncher.verbs.Verb_Shoot.label>
+  
+  <CMC_RocketswarmLauncher.label>"乾將·焚雲"集群火箭發射塔</CMC_RocketswarmLauncher.label>
+  <CMC_RocketswarmLauncher.description>固定式發射裝置，可一次性發射四枚高爆火箭彈。火箭通過拋物線彈道越過障礙物攻擊目標，但無制導系統導致遠距離命中率較低。建議用於對集群目標的區域覆蓋轟炸。。</CMC_RocketswarmLauncher.description>
+  <CMC_RocketswarmLauncher.comps.CompRefuelable.fuelGizmoLabel>彈藥</CMC_RocketswarmLauncher.comps.CompRefuelable.fuelGizmoLabel>
+  <CMC_RocketswarmLauncher.comps.CompRefuelable.fuelLabel>剩餘射擊數</CMC_RocketswarmLauncher.comps.CompRefuelable.fuelLabel>
+  <CMC_RocketswarmLauncher.comps.CompRefuelable.outOfFuelMessage>需要彈藥</CMC_RocketswarmLauncher.comps.CompRefuelable.outOfFuelMessage>
+  
+</LanguageData>

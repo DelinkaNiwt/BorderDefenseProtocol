@@ -1,0 +1,20 @@
+<Defs>
+<HediffDef>
+    <defName>CMC_BleedProof</defName>
+	<hediffClass>HediffWithComps</hediffClass>
+	<defaultLabelColor>(102, 102, 255)</defaultLabelColor>
+    <label>Hemostat</label>
+    <description>The armour injects a hemostatic agent to control bleeding.</description>
+    <stages>
+      <li>
+        <label>Armour</label>
+        <totalBleedFactor>0.0</totalBleedFactor>
+        <painOffset>0.1</painOffset>
+      </li>
+    </stages>
+	<isBad>false</isBad>
+	<comps>
+      <li Class="HediffCompProperties_RemoveIfApparelDropped"></li>
+    </comps>
+  </HediffDef>
+</Defs>

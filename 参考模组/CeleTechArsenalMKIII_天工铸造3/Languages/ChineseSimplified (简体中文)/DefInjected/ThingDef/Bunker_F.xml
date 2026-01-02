@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: "Xuanwu Abyssal"flame bastion -->
+  <CMC_ReinforcedBunker_Fire.label>“玄武·渊甲”喷火器地堡</CMC_ReinforcedBunker_Fire.label>
+  <!-- EN: A subterranean bastion cloaked in neutron-charged plating, impervious to directed energy weapons including plasma cannons. When health drops below 25% or it is one holdfire mode, it descends for repairs - consuming 50 steel and quadruple power every 10 seconds to restore 100 HP. Though its suppressive fire lacks precision, the tortoise-shell armor renders it nigh indestructible against frontal assaults. -->
+  <CMC_ReinforcedBunker_Fire.description>安装有重型装甲的喷火器碉堡，当生命值低于25%或手动停火时，碉堡会降入地下维修，每10秒消耗50钢铁和4倍电力，修复100点生命值。</CMC_ReinforcedBunker_Fire.description>
+  <!-- EN: Storage -->
+  <CMC_ReinforcedBunker_Fire.comps.CompRefuelable.fuelGizmoLabel>材料储备</CMC_ReinforcedBunker_Fire.comps.CompRefuelable.fuelGizmoLabel>
+  <!-- EN: Shots until barrel change -->
+  <CMC_ReinforcedBunker_Fire.comps.CompRefuelable.fuelLabel>材料储配</CMC_ReinforcedBunker_Fire.comps.CompRefuelable.fuelLabel>
+  <!-- EN: Needs steel -->
+  <CMC_ReinforcedBunker_Fire.comps.CompRefuelable.outOfFuelMessage>需要添加材料</CMC_ReinforcedBunker_Fire.comps.CompRefuelable.outOfFuelMessage>
+  
+  <!-- EN: charged heavy machine gun(hidden) -->
+  <Gun_Bunker_Fireblaster.label>喷火器（隐藏式）</Gun_Bunker_Fireblaster.label>
+  <!-- EN: An auto charged HMG equipped in the bunker, nightmare for light infantry. -->
+  <Gun_Bunker_Fireblaster.description>装配于地堡下的自动喷火器，可以攻击大群的敌人。</Gun_Bunker_Fireblaster.description>
+  <!-- EN: charged heavy machine gun(hidden) -->
+  <Gun_Bunker_Fireblaster.verbs.Verb_PlasmaIncinerator.label>TODO</Gun_Bunker_Fireblaster.verbs.Verb_PlasmaIncinerator.label>
+  
+</LanguageData>

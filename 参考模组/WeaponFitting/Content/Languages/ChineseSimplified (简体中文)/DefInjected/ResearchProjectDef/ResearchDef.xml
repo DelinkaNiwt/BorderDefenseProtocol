@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: basic fitting technology -->
+  <WeaponFittings_I.label>基础配件科技</WeaponFittings_I.label>
+  <!-- EN: Unlocks basic fitting technology.\n\nEnables basic fitting research and batch disassembly of specialized weapons at workbenches like machining tables.\n\nAdditionally, installing fittings and manual disassembly of specialized weapons don't require technology and can be accessed by selecting a colonist and right-clicking the corresponding menu option. -->
+  <WeaponFittings_I.description>解锁基础的配件科技。\n\n解锁在机械加工台等工作台进行基础的配件研发工作和批量特化武器拆解工作。\n\n此外，安装配件和手动拆解特化武器并不需要科技，可以通过选定小人后右键打开对应菜单选项进行操作。</WeaponFittings_I.description>
+  
+  <!-- EN: advanced fitting technology -->
+  <WeaponFittings_II.label>高级配件科技</WeaponFittings_II.label>
+  <!-- EN: Unlocks advanced fitting technology.\n\nEnables targeted research at precision assembly benches.\n\nUnlocks fitting removal functionality - access by selecting a colonist and right-clicking a firearm, or by right-clicking the colonist to open the menu.\n\nDisassembling specialized firearms at workbenches returns some raw materials. -->
+  <WeaponFittings_II.description>解锁进阶的配件科技。\n\n解锁在精密装配台进行定向研发工作。\n\n解锁卸载配件功能，可以通过选中小人后右键对应枪械或右键该小人打开菜单后进行操作。\n\n工作台上拆解特化枪械可以返回部分原材料。</WeaponFittings_II.description>
+  
+</LanguageData>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+
+  <ThingDef ParentName="BuildingBase" Name="Milira_MedalBase" Abstract="True">
+    <thingClass>Building_Art</thingClass>
+    <castEdgeShadows>true</castEdgeShadows>
+    <altitudeLayer>PawnState</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <useHitPoints>true</useHitPoints>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <fillPercent>0.5</fillPercent>
+    <rotatable>false</rotatable>
+    <thingCategories>
+      <li>BuildingsArt</li>
+    </thingCategories>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(0.5,0.5)</drawSize>
+      <drawOffset>(0,0,-0.25)</drawOffset>
+      <shaderType>CutoutComplex</shaderType>
+      <shadowData>
+        <volume>(0.2, 0.2, 0.2)</volume>
+        <offset>(0,0,0)</offset>
+      </shadowData>
+    </graphicData>
+    <statBases>
+      <Flammability>1.0</Flammability>
+      <SellPriceFactor>1.40</SellPriceFactor>
+      <MeditationFocusStrength>0.0</MeditationFocusStrength>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Mass>0.5</Mass>
+      <WorkToMake>1800</WorkToMake>
+    </statBases>
+    <building>
+      <isEdifice>false</isEdifice>
+      <ai_chillDestination>false</ai_chillDestination>
+      <canPlaceOverWall>true</canPlaceOverWall>
+    </building>
+    <comps>
+      <li>
+        <compClass>CompQuality</compClass>
+      </li>
+    </comps>
+    <inspectorTabs>
+      <li>ITab_Art</li>
+    </inspectorTabs>
+    <tradeTags>
+      <li>Art</li>
+    </tradeTags>
+    <recipeMaker>
+      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+      <workSkill>Artistic</workSkill>
+      <unfinishedThingDef>UnfinishedSculpture</unfinishedThingDef>
+      <effectWorking>Sculpt</effectWorking>
+      <soundWorking>Recipe_Sculpt</soundWorking>
+      <recipeUsers>
+        <li>TableSculpting</li>
+      </recipeUsers>
+      <defaultIngredientFilter>
+        <categories>
+          <li>Root</li>
+        </categories>
+        <disallowedThingDefs>
+          <li>Gold</li>
+          <li>Silver</li>
+          <li>Plasteel</li>
+          <li>Jade</li>
+          <li>Uranium</li>
+        </disallowedThingDefs>
+      </defaultIngredientFilter>
+    </recipeMaker>
+    <stuffCategories>
+      <li>Metallic</li>
+      <li>Woody</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <costStuffCount>100</costStuffCount>
+  </ThingDef>
+
+
+  <!-- <ThingDef ParentName="Milira_MedalBase">
+    <defName>Milira_QueenMedal</defName>
+    <label>王后纪念章</label>
+    <description>王后的纪念章。上面精心雕刻着一枚王后棋子图案。</description>
+    <graphicData>
+      <texPath>Milira/Building/SouvenirMedal/Medal_Queen</texPath>
+    </graphicData>
+    <statBases>
+      <Beauty>500</Beauty>
+    </statBases>
+	<costList>
+	  <MiliraPieces_NamePlate_Queen>1</MiliraPieces_NamePlate_Queen>
+    </costList>
+  </ThingDef>
+  
+  <ThingDef ParentName="Milira_MedalBase">
+    <defName>Milira_KingMedal</defName>
+    <label>国王纪念章</label>
+    <description>国王的纪念章。上面精心雕刻着一枚国王棋子图案。</description>
+    <graphicData>
+      <texPath>Milira/Building/SouvenirMedal/Medal_Queen</texPath>
+    </graphicData>
+    <statBases>
+      <Beauty>500</Beauty>
+    </statBases>
+	<costList>
+	  <MiliraPieces_NamePlate_King>1</MiliraPieces_NamePlate_King>
+    </costList>
+  </ThingDef>
+  
+  <ThingDef ParentName="Milira_MedalBase">
+    <defName>Milira_RookMedal</defName>
+    <label>战车纪念章</label>
+    <description>战车的纪念章。上面精心雕刻着一枚战车棋子图案。</description>
+    <graphicData>
+      <texPath>Milira/Building/SouvenirMedal/Medal_Queen</texPath>
+    </graphicData>
+    <statBases>
+      <Beauty>500</Beauty>
+    </statBases>
+	<costList>
+	  <MiliraPieces_NamePlate_Rook>30</MiliraPieces_NamePlate_Rook>
+    </costList>
+  </ThingDef>
+  
+  <ThingDef ParentName="Milira_MedalBase">
+    <defName>Milira_BishopMedal</defName>
+    <label>主教纪念章</label>
+    <description>主教的纪念章。上面精心雕刻着一枚主教棋子图案。</description>
+    <graphicData>
+      <texPath>Milira/Building/SouvenirMedal/Medal_Queen</texPath>
+    </graphicData>
+    <statBases>
+      <Beauty>500</Beauty>
+    </statBases>
+	<costList>
+	  <MiliraPieces_NamePlate_Bishop>60</MiliraPieces_NamePlate_Bishop>
+    </costList>
+  </ThingDef>
+  
+  <ThingDef ParentName="Milira_MedalBase">
+    <defName>Milira_KnightMedal</defName>
+    <label>骑士纪念章</label>
+    <description>骑士的纪念章。上面精心雕刻着一枚骑士棋子图案。</description>
+    <graphicData>
+      <texPath>Milira/Building/SouvenirMedal/Medal_Queen</texPath>
+    </graphicData>
+    <statBases>
+      <Beauty>500</Beauty>
+    </statBases>
+	<costList>
+	  <MiliraPieces_NamePlate_Knight>60</MiliraPieces_NamePlate_Knight>
+    </costList>
+  </ThingDef>
+  
+  <ThingDef ParentName="Milira_MedalBase">
+    <defName>Milira_PawnMedal</defName>
+    <label>士兵纪念章</label>
+    <description>士兵的纪念章。上面精心雕刻着一枚士兵棋子图案。</description>
+    <graphicData>
+      <texPath>Milira/Building/SouvenirMedal/Medal_Queen</texPath>
+    </graphicData>
+    <statBases>
+      <Beauty>500</Beauty>
+    </statBases>
+	<costList>
+	  <MiliraPieces_NamePlate_Pawn>100</MiliraPieces_NamePlate_Pawn>
+    </costList>
+  </ThingDef> -->
+
+
+</Defs>

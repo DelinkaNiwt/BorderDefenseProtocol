@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ScenarioDef>
+    <defName>Milira_Scenarios</defName>
+    <label>Milira's Solitary Travel Adventure</label>
+    <description>The daily drifting clouds and the rising and setting of the sun eventually become tiresome. After reading all the books in the library, the young Milira decides to leave the Cradol where she has lived for over a century and go to the ground to explore the things described in the books alone.</description>
+    <scenario>
+      <summary>The young Milira leaves Cradol and heads to the ground alone.</summary>
+      <playerFaction>
+        <def>PlayerFaction</def>
+        <factionDef>Milira_PlayerFaction</factionDef>
+      </playerFaction>
+      <parts>
+
+        <!-- Config pages -->
+        <li Class="ScenPart_ConfigPage_ConfigureStartingPawns_KindDefs">
+          <def>ConfigurePawnsKindDefs</def>
+          <pawnChoiceCount>8</pawnChoiceCount>
+          <leftBehindPawnKind>Milira_Mechanitor_ForScenario</leftBehindPawnKind>
+          <kindCounts>
+            <li>
+              <kindDef>Milira_Mechanitor_ForScenario</kindDef>
+              <count>1</count>
+              <requiredAtStart>true</requiredAtStart>
+            </li>
+          </kindCounts>
+        </li>
+
+        <!-- Player starting stuff spawn method-->
+        <li Class="ScenPart_PlayerPawnsArriveMethod">
+          <def>PlayerPawnsArriveMethod</def>
+          <method>Standing</method>
+        </li>
+
+        <!-- 开局机械体 -->
+        <!-- <li Class="Milira.ScenPart_StartingMilian">
+          <def>StartingMech</def>
+          <mechKind>Milian_Mechanoid_PawnI</mechKind>
+          <overseenByPlayerPawnChance>1</overseenByPlayerPawnChance>
+        </li> -->
+        <li Class="Milira.ScenPart_StartingMilian">
+          <def>StartingMech</def>
+          <mechKind>Milian_Mechanoid_KnightII</mechKind>
+          <overseenByPlayerPawnChance>1</overseenByPlayerPawnChance>
+        </li>
+
+        <!-- Player starting things -->
+        <li Class="ScenPart_StartingThing_Defined">          <!--充电站-->
+          <def>StartingThing_Defined</def>
+          <thingDef>Milian_Recharger</thingDef>
+          <count>1</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">          <!--充电站-->
+          <def>StartingThing_Defined</def>
+          <thingDef>Milira_UniversalBench</thingDef>
+          <count>1</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">          <!--日盘钢-->
+          <def>StartingThing_Defined</def>
+          <thingDef>Milira_SunPlateSteel</thingDef>
+          <count>150</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">          <!--日凌晶-->
+          <def>StartingThing_Defined</def>
+          <thingDef>Milira_SolarCrystal</thingDef>
+          <count>25</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">          <!--零部件-->
+          <def>StartingThing_Defined</def>
+          <thingDef>ComponentIndustrial</thingDef>
+          <count>25</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">          <!--燃料-->
+          <def>StartingThing_Defined</def>
+          <thingDef>Milira_SunLightFuel</thingDef>
+          <count>100</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">          <!--食物-->
+          <def>StartingThing_Defined</def>
+          <thingDef>MealSurvivalPack</thingDef>
+          <count>20</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">          <!--医药-->
+          <def>StartingThing_Defined</def>
+          <thingDef>MedicineIndustrial</thingDef>
+          <count>20</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">          <!--睡袋-->
+          <def>StartingThing_Defined</def>
+          <thingDef>Bedroll</thingDef>
+          <stuff>Cloth</stuff>
+          <count>1</count>
+        </li>
+
+        <li Class="ScenPart_StartingThing_Defined">          <!--兜帽-->
+          <def>StartingThing_Defined</def>
+          <thingDef>Milira_Hood</thingDef>
+          <stuff>Milira_Feather</stuff>
+          <quality>Good</quality>
+          <count>1</count>
+        </li>
+
+        <li Class="ScenPart_StartingThing_Defined">          <!--小离子浮游单元背包-->
+          <def>StartingThing_Defined</def>
+          <thingDef>Milira_FloatUnitPack</thingDef>
+          <count>1</count>
+        </li>
+
+        <!-- Scatter some things near player start -->
+        <li Class="ScenPart_ScatterThingsNearPlayerStart">
+          <def>ScatterThingsNearPlayerStart</def>
+          <thingDef>Steel</thingDef>
+          <count>320</count>
+        </li>
+        <li Class="ScenPart_ScatterThingsNearPlayerStart">
+          <def>ScatterThingsNearPlayerStart</def>
+          <thingDef>WoodLog</thingDef>
+          <count>500</count>
+        </li>
+        <li Class="ScenPart_ScatterThingsNearPlayerStart">
+          <def>ScatterThingsNearPlayerStart</def>
+          <thingDef>Plasteel</thingDef>
+          <count>240</count>
+        </li>
+
+        <!-- Scatter some things anywhere -->
+        <li Class="ScenPart_ScatterThingsAnywhere">
+          <def>ScatterThingsAnywhere</def>
+          <thingDef>ShipChunk</thingDef>
+          <allowRoofed>false</allowRoofed>
+          <count>8</count>
+        </li>
+        <li Class="ScenPart_ScatterThingsAnywhere">
+          <def>ScatterThingsAnywhere</def>
+          <thingDef>Steel</thingDef>
+          <count>220</count>
+        </li>
+        
+        <!-- 禁止开局机械芯片 -->
+        <li Class="ScenPart_DisableMapGen">
+          <def>DisableExostriderRemains</def>
+        </li>
+
+      </parts>
+    </scenario>
+
+
+
+  </ScenarioDef>
+
+</Defs>

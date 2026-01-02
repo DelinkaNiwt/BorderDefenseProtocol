@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef Name="Milira_RailGunWeaponBase" ParentName="BaseMakeableGun" Abstract="True">
+    <recipeMaker>
+      <researchPrerequisite>Milira_RailGun</researchPrerequisite>
+      <recipeUsers Inherit="false">
+        <li>Milira_SunBlastFurnace</li>
+      </recipeUsers>
+    </recipeMaker>
+    <weaponTags>
+      <li>Milira_RailGun</li>
+    </weaponTags>
+    <tradeability>Sellable</tradeability>
+  </ThingDef>
+
+  <ThingDef ParentName="Milira_RailGunWeaponBase">
+    <defName>Milira_MagneticRailRifle</defName>
+    <label>magnetic rail rifle</label>
+    <description>A weapon that uses electromagnetic force to accelerate bullets on long rails; the bullets fired have tremendous kinetic energy.</description>
+    <graphicData>
+      <texPath>Milira/Weapon/MagneticRailRifle</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.2</drawSize>
+    </graphicData>
+    <uiIconScale>1.2</uiIconScale>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <generateCommonality>0.8</generateCommonality>
+    <statBases>
+      <WorkToMake>90000</WorkToMake>
+      <Mass>3.8</Mass>
+      <AccuracyTouch>0.62</AccuracyTouch>
+      <AccuracyShort>0.77</AccuracyShort>
+      <AccuracyMedium>0.86</AccuracyMedium>
+      <AccuracyLong>0.90</AccuracyLong>
+      <RangedWeapon_Cooldown>1.0</RangedWeapon_Cooldown>
+    </statBases>
+    <weaponTags>
+      <li>Milira_MagneticRailRifle</li>
+    </weaponTags>
+    <costList>
+      <Milira_SunPlateSteel>25</Milira_SunPlateSteel>
+      <Plasteel>100</Plasteel>
+      <ComponentSpacer>3</ComponentSpacer>
+    </costList>
+    <recipeMaker>
+      <skillRequirements>
+        <Crafting>12</Crafting>
+        <Intellectual>10</Intellectual>
+      </skillRequirements>
+      <displayPriority>415</displayPriority>
+    </recipeMaker>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>MiliraBullet_MagneticRailRifle</defaultProjectile>
+        <warmupTime>2.8</warmupTime>
+        <range>44.9</range>
+        <burstShotCount>1</burstShotCount>
+        <ticksBetweenBurstShots>0</ticksBetweenBurstShots>
+        <soundCast>Milira_Shot_MagneticRailRifle</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>5</muzzleFlashScale>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>8</power>
+        <cooldownTime>1.7</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>6</power>
+        <cooldownTime>1.7</cooldownTime>
+      </li>
+    </tools>
+    <comps>
+    </comps>
+    <equippedStatOffsets>
+      <ShootingAccuracyPawn>6.0</ShootingAccuracyPawn>
+    </equippedStatOffsets>
+  </ThingDef>
+  <ThingDef ParentName="BaseBullet">
+    <defName>MiliraBullet_MagneticRailRifle</defName>
+    <label>magnetic round</label>
+    <thingClass>Bullet</thingClass>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>28</damageAmountBase>
+      <armorPenetrationBase>0.55</armorPenetrationBase>
+      <stoppingPower>2.6</stoppingPower>
+      <speed>175</speed>
+      <extraDamages>
+        <li>
+          <def>Stun</def>
+          <amount>2</amount>
+        </li>
+      </extraDamages>
+    </projectile>
+    <graphicData>
+      <texPath>Milira/ProjectileNew/Bullet_RailGun</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+      <drawSize>1.0</drawSize>
+    </graphicData>
+  </ThingDef>
+
+
+  <ThingDef ParentName="Milira_RailGunWeaponBase">
+    <defName>Milira_HandRailGun</defName>
+    <label>hand railgun</label>
+    <description>A weapon that uses electromagnetic force to accelerate steel bolts on long rails; the bolts fired possess immense kinetic energy. The impact upon hitting generates a shockwave that affects the surrounding area and behind the target, causing 50% bullet damage.</description>
+    <graphicData>
+      <texPath>Milira/Weapon/HandRailGun</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.4</drawSize>
+    </graphicData>
+    <uiIconScale>1.2</uiIconScale>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <equippedAngleOffset>45</equippedAngleOffset>
+    <generateCommonality>0.3</generateCommonality>
+    <statBases>
+      <WorkToMake>90000</WorkToMake>
+      <Mass>9.5</Mass>
+      <AccuracyTouch>0.62</AccuracyTouch>
+      <AccuracyShort>0.78</AccuracyShort>
+      <AccuracyMedium>0.82</AccuracyMedium>
+      <AccuracyLong>0.75</AccuracyLong>
+      <RangedWeapon_Cooldown>4.2</RangedWeapon_Cooldown>
+    </statBases>
+    <weaponTags>
+      <li>Milira_HandRailGun</li>
+    </weaponTags>
+    <costList>
+      <Milira_SunPlateSteel>125</Milira_SunPlateSteel>
+      <Plasteel>125</Plasteel>
+      <ComponentSpacer>5</ComponentSpacer>
+    </costList>
+    <recipeMaker>
+      <skillRequirements>
+        <Crafting>14</Crafting>
+        <Intellectual>16</Intellectual>
+      </skillRequirements>
+      <displayPriority>415</displayPriority>
+    </recipeMaker>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>MiliraBullet_HandRailGun</defaultProjectile>
+        <warmupTime>4.8</warmupTime>
+        <range>51.9</range>
+        <burstShotCount>1</burstShotCount>
+        <ticksBetweenBurstShots>0</ticksBetweenBurstShots>
+        <soundCast>Milira_Shot_HeavyRasterCannon</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>5</muzzleFlashScale>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>18</power>
+        <cooldownTime>2.9</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>10</power>
+        <cooldownTime>1.8</cooldownTime>
+      </li>
+    </tools>
+    <comps>
+    </comps>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.8</MoveSpeed>
+    </equippedStatOffsets>
+  </ThingDef>
+  <ThingDef ParentName="BaseBullet">
+    <defName>MiliraBullet_HandRailGun</defName>
+    <label>steel bolt</label>
+    <thingClass>Milira.RailGunBullet</thingClass>
+    <projectile>
+      <damageDef>Milira_RailGunBullet</damageDef>
+      <damageAmountBase>45</damageAmountBase>
+      <armorPenetrationBase>0.85</armorPenetrationBase>
+      <stoppingPower>5.6</stoppingPower>
+      <speed>225</speed>
+      <extraDamages>
+        <li>
+          <def>Stun</def>
+          <amount>2</amount>
+        </li>
+      </extraDamages>
+    </projectile>
+    <graphicData>
+      <texPath>Milira/ProjectileNew/Bullet_RailGun</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>1.5</drawSize>
+    </graphicData>
+    <modExtensions>
+      <li Class="AncotLibrary.Projectile_Custom_Extension">
+        <impactEffecter>Milira_HandRailGunHit</impactEffecter>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+
+
+
+
+</Defs>

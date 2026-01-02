@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--=国王===========================================================================================================================-->
+  <!-- <ThingDef ParentName="Milira_BaseMilianWalkerA">
+    <defName>Milian_Mechanoid_King</defName>
+    <label>King</label>
+    <description>Milian the King type.</description>
+    <statBases>
+      <MoveSpeed>4.6</MoveSpeed>
+      <ArmorRating_Blunt>0.35</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.5</ArmorRating_Sharp>
+      <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">1</BandwidthCost>
+    </statBases>
+    <race>
+      <body>Milian_Body</body>
+      <baseHealthScale>5.0</baseHealthScale>
+      <soundMeleeHitPawn>Pawn_Melee_MechanoidBash_HitPawn</soundMeleeHitPawn>
+      <soundMeleeHitBuilding>Pawn_Melee_MechanoidBash_HitBuilding</soundMeleeHitBuilding>
+      <soundMeleeMiss>Pawn_Melee_Punch_Miss</soundMeleeMiss>
+      <bulletStaggerDelayTicks>0</bulletStaggerDelayTicks>
+    </race>
+    <tools>
+      <li>
+        <label>left fist</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>12.0</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+      <li>
+        <label>right fist</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>12.0</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+    </tools>
+    <comps>
+      <li Class="Milira.CompProperties_ClassAmplificationLoop">
+        <effecter>Milira_KingTuningBeginning</effecter>
+        <amplificationTickDuration>1200</amplificationTickDuration>
+        <graphicData>
+          <texPath>Milira/Effect/Promotion/Promotion_King</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <shaderType>TransparentPostLight</shaderType>
+          <drawSize>1.2</drawSize>
+          <drawOffset>(0,0,1.0)</drawOffset>
+        </graphicData>
+        <floatAmplitude>0.1</floatAmplitude>
+        <floatSpeed>0.06</floatSpeed>
+        <altitudeLayer>Skyfaller</altitudeLayer>
+      </li>
+      <li Class="Milira.CompProperties_KingCauseHediffAoE">
+        <hediff>Milian_KingCommand</hediff>
+        <timeInterval>240</timeInterval>
+      </li>
+      <li Class="Milira.CompProperties_GainHediffSpawn">
+        <hediffDef>Milian_ClassHediff_King</hediffDef>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <PawnKindDef ParentName="BaseMilianKind_Mechanoid">
+    <defName>Milian_Mechanoid_King</defName>
+    <label>King</label>
+    <race>Milian_Mechanoid_King</race>
+    <combatPower>500</combatPower>
+    <maxPerGroup>1</maxPerGroup>
+    <apparelRequired>
+      <li>Milian_RookArmor</li>
+      <li>Milian_Lining</li>
+      <li>Milian_RookMask</li>
+    </apparelRequired>
+    <weaponMoney>9999~9999</weaponMoney>
+    <weaponTags>
+      <li>Milian_ParticleBeamBlaster</li>
+    </weaponTags>
+    <techHediffsChance>1</techHediffsChance>
+    <techHediffsMoney>9999~9999</techHediffsMoney>
+  </PawnKindDef> -->
+
+
+
+</Defs>

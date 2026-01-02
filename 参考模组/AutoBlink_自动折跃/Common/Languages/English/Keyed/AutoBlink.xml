@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <AutoBlink.AutoBlink_Label>Auto Blink</AutoBlink.AutoBlink_Label>
+  <AutoBlink.AutoBlink_Desc>Left-click to manually target.\nRight-click to toggle automatic blink.\nShift + Right-click to open detailed settings window.</AutoBlink.AutoBlink_Desc>
+
+  <AutoBlink.Drafted_Label>Drafted</AutoBlink.Drafted_Label>
+  <AutoBlink.Idle_Label>Idle</AutoBlink.Idle_Label>
+  <AutoBlink.JumpAsFarAsPossible_Label>Jump As Far As Possible</AutoBlink.JumpAsFarAsPossible_Label>
+
+  <AutoBlink.MinDist_Format>Min Dist: {0}</AutoBlink.MinDist_Format>
+</LanguageData>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <SoundDef Abstract="True" Name="TraderShipsSound">
+  </SoundDef>
+  <SoundDef ParentName="TraderShipsSound">
+    <defName>CMC_ShipsSoundLanding</defName>  
+    <context>MapOnly</context>
+    <maxSimultaneous>4</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>Shuttles/Land</clipPath>
+          </li>
+        </grains>      
+        <volumeRange>23~29</volumeRange>
+        <pitchRange>0.983~1.33</pitchRange>
+        <muteWhenPaused>True</muteWhenPaused>
+      </li>
+    </subSounds>
+    <priorityMode>PrioritizeNearest</priorityMode>
+  </SoundDef>
+  
+  <SoundDef ParentName="TraderShipsSound">
+    <defName>CMC_ShipsSoundTakeoff</defName>  
+    <context>MapOnly</context>
+    <maxSimultaneous>4</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>Shuttles/Takeoff</clipPath>
+          </li>
+        </grains>      
+        <volumeRange>25~29</volumeRange>
+        <pitchRange>0.983~1.33</pitchRange>
+        <muteWhenPaused>True</muteWhenPaused>
+      </li>
+    </subSounds>
+    <priorityMode>PrioritizeNearest</priorityMode>
+  </SoundDef>
+
+  <SoundDef ParentName="TraderShipsSound">
+    <defName>CMC_SoundThud</defName>  
+    <context>MapOnly</context>
+    <maxSimultaneous>4</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>Shuttles/Thud</clipPath>
+          </li>
+        </grains>      
+        <volumeRange>25~25</volumeRange>
+        <pitchRange>0.93~1.07</pitchRange>
+        <muteWhenPaused>True</muteWhenPaused>
+      </li>
+    </subSounds>
+    <priorityMode>PrioritizeNearest</priorityMode>
+  </SoundDef>
+</Defs>

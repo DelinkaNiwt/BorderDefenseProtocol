@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: destroying TargetA. -->
+  <Ancot_DestroyItem.reportString>正在销毁TargetA。</Ancot_DestroyItem.reportString>
+  
+  <!-- EN: emergency tending TargetA. -->
+  <Ancot_EmergencyTend.reportString>正在紧急治疗TargetA。</Ancot_EmergencyTend.reportString>
+  
+  <!-- EN: picking up TargetA. -->
+  <Ancot_HaulToOwnTransporter.reportString>正在拾取TargetA。</Ancot_HaulToOwnTransporter.reportString>
+  
+  <!-- EN: hunting TargetA. -->
+  <Ancot_MechMeleeHunt.reportString>正在狩猎TargetA。</Ancot_MechMeleeHunt.reportString>
+  
+  <!-- EN: drilling at TargetA. -->
+  <Ancot_MechOperateDeepDrill.reportString>正在钻探TargetA。</Ancot_MechOperateDeepDrill.reportString>
+  
+  <!-- EN: repairing TargetA. -->
+  <Ancot_MechRepairMech.reportString>正在维修TargetA。</Ancot_MechRepairMech.reportString>
+  
+  <!-- EN: reloading TargetA. -->
+  <Ancot_Reload_ApparelReloadable.reportString>正在装载TargetA。</Ancot_Reload_ApparelReloadable.reportString>
+  
+  <!-- EN: sharpening weapon. -->
+  <Ancot_SharpenWeapon.reportString>正在磨砺武器。</Ancot_SharpenWeapon.reportString>
+  
+</LanguageData>

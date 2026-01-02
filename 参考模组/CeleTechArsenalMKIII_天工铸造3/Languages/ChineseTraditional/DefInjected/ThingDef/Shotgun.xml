@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <CMC_QBXfiveseven_CSG.label>QBX-57C 智能電荷霰彈槍</CMC_QBXfiveseven_CSG.label>
+  <CMC_QBXfiveseven_CSG.description>一次發射9發射彈打擊射程內的單個敵人，射彈將會追蹤敵人。\n\n該武器的追蹤命中率僅受射手智識水平影響。</CMC_QBXfiveseven_CSG.description>
+  <CMC_QBXfiveseven_CSG.tools.grip.label>槍托</CMC_QBXfiveseven_CSG.tools.grip.label>
+  <CMC_QBXfiveseven_CSG.tools.barrel.label>槍管</CMC_QBXfiveseven_CSG.tools.barrel.label>
+  <CMC_QBXfiveseven_CSG.verbs.TOT_DLL_test.Verb_MultiShoot.label>射彈</CMC_QBXfiveseven_CSG.verbs.TOT_DLL_test.Verb_MultiShoot.label>
+  
+  <CMC_QBXninenine_CSG.label>QBX-69C 智能電荷霰彈槍</CMC_QBXninenine_CSG.label>
+  <CMC_QBXninenine_CSG.description>基於QBX-57C改進而來、更為先進的電荷霰彈槍，優化了射速和射彈數量。\n\n該武器的追蹤命中率僅受射手智識水平影響。</CMC_QBXninenine_CSG.description>
+  <CMC_QBXninenine_CSG.tools.barrel.label>槍管</CMC_QBXninenine_CSG.tools.barrel.label>
+  <CMC_QBXninenine_CSG.verbs.TOT_DLL_test.Verb_MultiShoot.label>射彈</CMC_QBXninenine_CSG.verbs.TOT_DLL_test.Verb_MultiShoot.label>
+</LanguageData>

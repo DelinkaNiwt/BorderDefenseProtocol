@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: weapon fitting:attachable -->
+  <Ancot_WeaponFitting_Attachable.label>武器配件：副炮</Ancot_WeaponFitting_Attachable.label>
+  
+  <!-- EN: weapon fitting:beamWeapon -->
+  <Ancot_WeaponFitting_BeamWeapon.label>武器配件：光束武器</Ancot_WeaponFitting_BeamWeapon.label>
+  
+  <!-- EN: weapon fitting:bladelink -->
+  <Ancot_WeaponFitting_Bladelink.label>人格武器核心</Ancot_WeaponFitting_Bladelink.label>
+  
+  <!-- EN: weapon fitting:bow -->
+  <Ancot_WeaponFitting_Bow.label>武器配件：弓</Ancot_WeaponFitting_Bow.label>
+  
+  <!-- EN: weapon fitting:bullet -->
+  <Ancot_WeaponFitting_Bullet.label>武器配件：子弹</Ancot_WeaponFitting_Bullet.label>
+  
+  <!-- EN: weapon fitting:burstfire -->
+  <Ancot_WeaponFitting_BurstFire.label>武器配件：连射武器</Ancot_WeaponFitting_BurstFire.label>
+  
+  <!-- EN: weapon fitting:gun -->
+  <Ancot_WeaponFitting_Gun.label>武器配件：枪械</Ancot_WeaponFitting_Gun.label>
+  
+  <!-- EN: weapon fitting:lowstoppingpower -->
+  <Ancot_WeaponFitting_LowStoppingPower.label>武器配件：低抑制武器</Ancot_WeaponFitting_LowStoppingPower.label>
+  
+  <!-- EN: weapon fitting:others -->
+  <Ancot_WeaponFitting_Others.label>武器配件：其他</Ancot_WeaponFitting_Others.label>
+  
+  <!-- EN: weapon fitting:pistol -->
+  <Ancot_WeaponFitting_Pistol.label>武器配件：手枪</Ancot_WeaponFitting_Pistol.label>
+  
+  <!-- EN: weapon fitting:pulseCharge -->
+  <Ancot_WeaponFitting_PulseCharge.label>武器配件：电荷武器</Ancot_WeaponFitting_PulseCharge.label>
+  
+  <!-- EN: weapon fitting:rifle -->
+  <Ancot_WeaponFitting_Rifle.label>武器配件：步枪</Ancot_WeaponFitting_Rifle.label>
+  
+  <!-- EN: weapon fitting:scoped -->
+  <Ancot_WeaponFitting_Scoped.label>武器配件：瞄准镜</Ancot_WeaponFitting_Scoped.label>
+  
+  <!-- EN: weapon fitting:shotgun -->
+  <Ancot_WeaponFitting_Shotgun.label>武器配件：霰弹枪</Ancot_WeaponFitting_Shotgun.label>
+  
+  <!-- EN: weapon fitting:sighted -->
+  <Ancot_WeaponFitting_Sighted.label>武器配件：瞄具</Ancot_WeaponFitting_Sighted.label>
+  
+</LanguageData>

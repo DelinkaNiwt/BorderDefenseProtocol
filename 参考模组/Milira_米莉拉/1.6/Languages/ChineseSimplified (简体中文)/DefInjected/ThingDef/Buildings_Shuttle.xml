@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: milira harrier fighter -->
+  <Milira_HarrierFighter.label>米莉拉鹞式战机</Milira_HarrierFighter.label>
+  <!-- EN: A small fighter that uses force-field propulsion for flight and can perform vertical takeoffs and landings. Consumes a small amount of solar fuel to initiate liftoff, after which it can fly solely on its built-in fuel cell. -->
+  <Milira_HarrierFighter.description>利用场力作用飞行的小型战机，可以垂直起降。消耗少量日光燃料启动升空后可以只依赖内置的燃料电池飞行。\n\n装有两门粒子机炮，每次开火消耗0.05日光燃料。</Milira_HarrierFighter.description>
+  <!-- EN: {0} is ready to launch again. -->
+  <Milira_HarrierFighter.comps.CompLaunchableAerocraft.cooldownEndedMessage>{0}已经准备好再次发射。</Milira_HarrierFighter.comps.CompLaunchableAerocraft.cooldownEndedMessage>
+  <!-- EN: SolarFuel -->
+  <Milira_HarrierFighter.comps.CompRefuelableAerocraft.fuelGizmoLabel>日光燃料</Milira_HarrierFighter.comps.CompRefuelableAerocraft.fuelGizmoLabel>
+  <!-- EN: SolarFuel -->
+  <Milira_HarrierFighter.comps.CompRefuelableAerocraft.fuelLabel>日光燃料</Milira_HarrierFighter.comps.CompRefuelableAerocraft.fuelLabel>
+  
+  <!-- UNUSED -->
+  <Milira_HarrierFighter.comps.CompLaunchable.cooldownEndedMessage>{0}已准备好再次发射。</Milira_HarrierFighter.comps.CompLaunchable.cooldownEndedMessage>
+  
+  <!-- EN: particle beam -->
+  <MiliraBullet_HarrierFighterMiniGun.label>粒子束</MiliraBullet_HarrierFighterMiniGun.label>
+  
+  <!-- EN: particle minigun -->
+  <MiliraTurret_HarrierFighter_MiniGun.label>粒子机炮</MiliraTurret_HarrierFighter_MiniGun.label>
+  <!-- EN: a particle minigun installed on harrier fighter. -->
+  <MiliraTurret_HarrierFighter_MiniGun.description>一门安装在鹞式战机上的粒子机炮。</MiliraTurret_HarrierFighter_MiniGun.description>
+  <!-- EN: particle minigun -->
+  <MiliraTurret_HarrierFighter_MiniGun.verbs.Verb_TurretShoot.label>粒子机炮</MiliraTurret_HarrierFighter_MiniGun.verbs.Verb_TurretShoot.label>
+  
+</LanguageData>

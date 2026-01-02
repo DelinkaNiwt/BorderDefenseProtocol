@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <ThingDef ParentName="TOT_Weapons">
+    <defName>QBZoneooneXuanMing_Elite</defName>
+    <label>&lt;color=#FFAA00&gt;&lt;i&gt;QBZ-101-XM EM-Rifle&lt;/i&gt;&lt;/color&gt;</label>
+    <description>The heavy sniper rifle "Xuanming" is named after the ancient mythical deity of cold and destruction, symbolizing the icy and relentless lethality of its zero-point energy-compressed projectiles. Utilizing vacuum zero-point energy technology to power its ammunition, the rifle also features an integrated intelligent tracking module capable of automatically locking onto and precisely following targets.</description>
+    <uiIconPath>Things/Weapons/Z_Iconic_QBZoneooneXuanMing_Zenith_UI</uiIconPath>
+	<graphicData>
+      <texPath>Things/Weapons/Z_Iconic_QBZoneooneXuanMing_Zenith</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1.56,1.56)</drawSize>
+    </graphicData>
+	<drawerType>MapMeshAndRealTime</drawerType>
+	<tickerType>Normal</tickerType>
+	<useHitPoints>false</useHitPoints>
+	<smeltable>false</smeltable>
+    <soundInteract>Interact_ChargeLance</soundInteract>
+	<generateCommonality>0</generateCommonality>
+    <recipeMaker>
+      <researchPrerequisite>CMC_EMweaponTech_V</researchPrerequisite>
+      <skillRequirements>
+        <Crafting>14</Crafting>
+      </skillRequirements>
+    </recipeMaker>
+    <thingSetMakerTags>
+      <li>RewardStandardQualitySuper</li>
+  </thingSetMakerTags>
+    <statBases>
+      <WorkToMake>60000</WorkToMake>
+      <Mass>11.2</Mass>
+      <AccuracyTouch>0.95</AccuracyTouch>
+      <AccuracyShort>0.93</AccuracyShort>
+      <AccuracyMedium>0.90</AccuracyMedium>
+      <AccuracyLong>0.91</AccuracyLong>
+      <RangedWeapon_Cooldown>1.6</RangedWeapon_Cooldown>
+	  <Flammability>0</Flammability>
+	  <DeteriorationRate>0</DeteriorationRate>
+	  <MarketValue>12800</MarketValue>
+    </statBases>
+    <costList>
+      <Steel>75</Steel>
+	  <Plasteel>300</Plasteel>
+      <ComponentIndustrial>15</ComponentIndustrial>
+	  <ComponentSpacer>30</ComponentSpacer>
+      <Chemfuel>50</Chemfuel>
+	  <Gold>10</Gold>
+	  <AIPersonaCore>1</AIPersonaCore>
+    </costList>
+	<comps>
+	  <li Class="CompProperties_BladelinkWeapon" MayRequire="Ludeon.RimWorld.Royalty">
+        <biocodeOnEquip>true</biocodeOnEquip>
+      </li>
+      <li Class="CompProperties_Art">
+        <nameMaker>NamerArtWeapon</nameMaker>
+        <descriptionMaker>ArtDescription_WeaponMelee</descriptionMaker>
+        <minQualityForArtistic>Excellent</minQualityForArtistic>
+      </li>
+	  <li Class="TOT_DLL_test.CompProperties_WeaponRenderStatic">
+			<TexturePath_Camo>Things/Weapons/Z_Iconic_QBZoneooneXuanMing_Zenithm</TexturePath_Camo>
+	   </li>
+	   <li Class="TOT_DLL_test.CompProperties_WeaponRenderDynamic">
+			<TexturePath>Things/Weapons/XM_LightDynamic</TexturePath>
+			<totalFrames>4</totalFrames>
+			<ticksPerFrame>10</ticksPerFrame>
+	   </li>
+    </comps>
+	<weaponClasses>
+      <li>Ultratech</li>
+	  <li>RangedHeavy</li>
+	  <li>LongShots</li>
+    </weaponClasses>
+    <weaponTags>
+      <li>SpacerGun</li>
+    </weaponTags>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_XuanMing_Antientropy</defaultProjectile>
+        <warmupTime>1.99</warmupTime>
+        <range>53</range>
+        <burstShotCount>3</burstShotCount>
+		<ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+        <soundCast>STii</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>9</muzzleFlashScale>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>22</power>
+        <cooldownTime>3</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>29</power>
+        <cooldownTime>2.2</cooldownTime>
+      </li>
+    </tools>
+  </ThingDef>
+</Defs>

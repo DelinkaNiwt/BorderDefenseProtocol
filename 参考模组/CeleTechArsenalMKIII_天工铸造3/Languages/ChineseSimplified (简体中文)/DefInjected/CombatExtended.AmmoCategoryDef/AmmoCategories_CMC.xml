@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: EM-rail(AP/EMP) -->
+  <CMC_EMBullet_AP.label>穿甲磁轨弹</CMC_EMBullet_AP.label>
+  <!-- EN: Electromagnetic rail-launched armor-piercing round, capable of both hard and soft kill. Penetrates heavy armor and releases EMP to disable electronics. -->
+  <CMC_EMBullet_AP.description>电磁轨道发射的穿甲弹，兼具动能穿透与电磁脉冲破坏效果。</CMC_EMBullet_AP.description>
+  
+  <!-- EN: EM-rail(Ion) -->
+  <CMC_EMBullet_Ion.label>离子磁轨弹</CMC_EMBullet_Ion.label>
+  <!-- EN: Electromagnetic rail-launched ion round, disrupts target integrity and electronics through ionization, highly effective against shields. -->
+  <CMC_EMBullet_Ion.description>电磁轨道发射的离子弹，通过电离效应瘫痪电子设备同时产生爆炸。</CMC_EMBullet_Ion.description>
+  
+  <CMC_EMBullet_R.label>磁轨弹</CMC_EMBullet_R.label>
+  <!-- EN: Electromagnetic rail-launched ion round, disrupts target integrity and electronics through ionization, highly effective against shields. -->
+  <CMC_EMBullet_R.description>标准磁轨弹药，穿深高但后效差。</CMC_EMBullet_R.description>
+  
+  <!-- EN: homing-AP/EMP -->
+  <CMC_HomingBullet_AP.label>制导穿甲弹</CMC_HomingBullet_AP.label>
+  <!-- EN: Homing armor-piercing round with trajectory adjustment capability for precision hits, combined with EMP effect for dual damage. -->
+  <CMC_HomingBullet_AP.description>具备自主寻的能力的穿甲弹，兼具EMP破坏效果。</CMC_HomingBullet_AP.description>
+  
+  <!-- EN: homing -->
+  <CMC_HomingBullet_Regular.label>制导通常弹</CMC_HomingBullet_Regular.label>
+  <!-- EN: Standard homing ammunition, locks onto and tracks targets via built-in sensors, ideal for engaging high-speed moving units. -->
+  <CMC_HomingBullet_Regular.description>标准制导弹药，通过内置传感器锁定并追踪目标。</CMC_HomingBullet_Regular.description>
+  
+  <!-- EN: hypersonic -->
+  <CMC_HomingHPVBullet.label>制导滑翔弹</CMC_HomingHPVBullet.label>
+  <!-- EN: Hypersonic homing projectile, penetrates enemy defenses with extreme velocity, causing massive damage via kinetic energy. -->
+  <CMC_HomingHPVBullet.description>高超声速制导弹药，以极端速度突破敌方防御。</CMC_HomingHPVBullet.description>
+  
+  <!-- EN: hypersonic(inverse entropy) -->
+  <CMC_HomingHPVBullet_IE.label>制导逆熵滑翔弹</CMC_HomingHPVBullet_IE.label>
+  <!-- EN: Hypersonic homing projectile utilizing inverse entropy technology, self-adjusts in flight to counter precision loss from entropy, achieving near-perfect hit rate. -->
+  <CMC_HomingHPVBullet_IE.description>采用逆熵技术的高超声速弹药，在飞行中自我优化弹道。</CMC_HomingHPVBullet_IE.description>
+  
+</LanguageData>

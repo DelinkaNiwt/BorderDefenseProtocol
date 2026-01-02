@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <CMC_Bullet_pistol.label>手槍彈</CMC_Bullet_pistol.label>
+  
+  <CMC_QSZfiveseven.label>QSZ-57 單兵自衛武器</CMC_QSZfiveseven.label>
+  <CMC_QSZfiveseven.description>基於過時的火藥武器改進而來的單兵自衛武器，其非常輕便靈活的特性深受飛行員和開拓者們的喜愛。雖然射程很近，但其特製的子彈可以有效阻滯靠近的敵人。\n\n該武器會掃射臨近的數個敵對目標。</CMC_QSZfiveseven.description>
+  <CMC_QSZfiveseven.tools.grip.label>握把</CMC_QSZfiveseven.tools.grip.label>
+  <CMC_QSZfiveseven.verbs.Verb_Shoot.label>QSZ-57PDW</CMC_QSZfiveseven.verbs.Verb_Shoot.label>
+  
+  <CMC_QSZfiveseven_NL.label>QSZ-57A 單兵自衛武器 AI輔助型</CMC_QSZfiveseven_NL.label>
+  <CMC_QSZfiveseven_NL.description>QSZ-57的改進型，裝備的輔助彈道計算機可以大幅提升子彈命中敵人四肢的概率，其特製的子彈也可以有效阻滯靠近的敵人。\n\n子彈會有更高概率擊中敵人的四肢以降低其移動力，並降低摧毀部位的概率。但是，該武器面對機械族傷害效果減半。\n\n該武器會掃射臨近的數個敵對目標。</CMC_QSZfiveseven_NL.description>
+  <CMC_QSZfiveseven_NL.tools.grip.label>握把</CMC_QSZfiveseven_NL.tools.grip.label>
+  <CMC_QSZfiveseven_NL.Verb_Shoot.label>QSZ-57A 單兵自衛武器 AI輔助型</CMC_QSZfiveseven_NL.Verb_Shoot.label>
+  
+  <CMC_QSZfiveseven_MODIII.label>QSZ-57D 卡賓槍</CMC_QSZfiveseven_MODIII.label>
+  <CMC_QSZfiveseven_MODIII.description>QSZ-57加裝了卡賓套件的改進型。</CMC_QSZfiveseven_MODIII.description>
+  <CMC_QSZfiveseven_MODIII.tools.grip.label>握把</CMC_QSZfiveseven_MODIII.tools.grip.label>
+  <CMC_QSZfiveseven_MODIII.Verb_Shoot.label>QSZ-57D 卡賓槍</CMC_QSZfiveseven_MODIII.Verb_Shoot.label>
+</LanguageData>
