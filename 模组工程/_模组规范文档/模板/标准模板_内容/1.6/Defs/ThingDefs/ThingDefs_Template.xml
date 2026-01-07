@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 标准模板 - ThingDefs 示例
+
+     此文件展示标准模组中的ThingDef定义方式。
+     可以创建多个文件来组织不同类型的物品。
+
+     文件命名建议：
+     - ThingDefs_Weapons.xml      （武器）
+     - ThingDefs_Buildings.xml    （建筑）
+     - ThingDefs_Items.xml        （物品）
+     - ThingDefs_Apparel.xml      （服装）
+     等等
+-->
+
+<Defs>
+
+  <!-- ======== 示例1：带组件的高级物品 ======== -->
+  <ThingDef>
+    <defName>YourModPrefix_AdvancedItem</defName>
+    <label>advanced item</label>
+    <description>An item demonstrating component usage and more complex configuration.</description>
+
+    <thingClass>ThingWithComps</thingClass>
+    <category>Item</category>
+    <selectable>true</selectable>
+
+    <stackLimit>5</stackLimit>
+    <mass>1.0</mass>
+
+    <graphicData>
+      <texPath>Things/Item/Advanced</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1</drawSize>
+    </graphicData>
+
+    <statBases>
+      <MarketValue>150</MarketValue>
+      <Mass>1</Mass>
+    </statBases>
+
+    <!-- 组件配置 -->
+    <comps>
+      <!-- 例如：可破坏性 -->
+      <li Class="CompProperties_Breakdownable" />
+    </comps>
+  </ThingDef>
+
+  <!-- ======== 示例2：带能力的建筑 ======== -->
+  <ThingDef>
+    <defName>YourModPrefix_FunctionalBuilding</defName>
+    <label>functional building</label>
+    <description>A building that provides utility to your colony.</description>
+
+    <thingClass>Building</thingClass>
+    <category>Building</category>
+    <selectable>true</selectable>
+    <drawerType>MapMeshAndRealTime</drawerType>
+
+    <size>(3,3)</size>
+    <passability>PassThroughOnly</passability>
+    <rotatable>false</rotatable>
+
+    <graphicData>
+      <texPath>Things/Building/Functional</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(3,3)</drawSize>
+    </graphicData>
+
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Flammability>0.2</Flammability>
+      <Beauty>1</Beauty>
+      <MarketValue>300</MarketValue>
+    </statBases>
+
+    <costList>
+      <Steel>50</Steel>
+      <Wood>60</Wood>
+      <Gold>10</Gold>
+    </costList>
+
+    <!-- 通电建筑示例 -->
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>50</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable" />
+      <li Class="CompProperties_Breakdownable" />
+    </comps>
+
+    <!-- 工作台或生产相关 -->
+    <hasInteractionCell>true</hasInteractionCell>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+  </ThingDef>
+
+  <!-- 删除上述示例并添加你自己的定义 -->
+
+</Defs>

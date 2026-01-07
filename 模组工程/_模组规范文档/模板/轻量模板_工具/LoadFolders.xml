@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- LoadFolders.xml 配置说明：
+
+     此文件控制游戏在加载模组时选择哪些文件夹。
+
+     基本结构：
+     - <loadFolders> 是根元素
+     - <v1.6> 表示RimWorld 1.6版本
+     - <li> 表示要加载的文件夹路径
+     - IfModActive="..." 表示条件加载，仅当指定DLC/模组激活时加载
+
+     加载顺序规则：
+     1. 后面的内容会覆盖前面的内容
+     2. 条件加载应该放在最后，以便覆盖基础内容
+
+     常见的IfModActive值：
+     - Ludeon.RimWorld.Royalty     （贵族DLC）
+     - Ludeon.RimWorld.Biotech     （生物技术DLC）
+     - Ludeon.RimWorld.Ideology    （意识形态DLC）
+     - Ludeon.RimWorld.Odyssey     （奥德赛DLC）
+     - Ludeon.RimWorld.Anomaly     （异常DLC）
+-->
+
+<loadFolders>
+  <v1.6>
+    <!-- 加载1.6版本文件夹中的所有内容 -->
+    <li>1.6</li>
+  </v1.6>
+</loadFolders>

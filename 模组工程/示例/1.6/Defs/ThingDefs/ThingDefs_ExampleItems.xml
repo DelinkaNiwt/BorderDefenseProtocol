@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  示例：ThingDefs - 物品定义
+
+  此文件展示如何创建最基本的RimWorld定义：ThingDef（物品）。
+
+  ThingDef可以用来定义：
+  - 武器
+  - 建筑
+  - 物品
+  - 植物
+  - 动物
+  - 等等
+
+  本示例使用模组前缀 "Example_" 来避免与其他模组冲突。
+  参考：RimWorld模组命名规范
+-->
+
+<Defs>
+
+  <!-- ============================================
+       示例1：简单的物品（例如：零件）
+       ============================================ -->
+  <ThingDef>
+    <defName>Example_Component_Basic</defName>
+    <label>basic component</label>
+    <description>A simple component used in basic recipes. This is the most fundamental item in the example mod.</description>
+
+    <!-- 物品类型和分类 -->
+    <thingClass>ThingWithComps</thingClass>
+    <category>Item</category>
+    <selectable>true</selectable>
+
+    <!-- 堆叠和重量 -->
+    <stackLimit>10</stackLimit>
+    <mass>0.1</mass>
+
+    <!-- 贴图定义 -->
+    <graphicData>
+      <texPath>Things/Item/BasicComponent</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>0.9</drawSize>
+    </graphicData>
+
+    <!-- 游戏内统计属性 -->
+    <statBases>
+      <MarketValue>20</MarketValue>
+      <Mass>0.1</Mass>
+    </statBases>
+
+    <!-- 物品标签（用于配方等处引用） -->
+    <thingCategories>
+      <li>Components</li>
+    </thingCategories>
+  </ThingDef>
+
+  <!-- ============================================
+       示例2：可放置的建筑（例如：工作台）
+       ============================================ -->
+  <ThingDef>
+    <defName>Example_Building_SimpleWorkbench</defName>
+    <label>simple workbench</label>
+    <description>A basic workbench where colonists can craft items. This demonstrates a functional building with work interaction.</description>
+
+    <!-- 建筑特定属性 -->
+    <thingClass>Building</thingClass>
+    <category>Building</category>
+    <selectable>true</selectable>
+    <drawerType>MapMeshAndRealTime</drawerType>
+
+    <!-- 建筑尺寸和通行性 -->
+    <size>(2,2)</size>
+    <passability>PassThroughOnly</passability>
+    <rotatable>true</rotatable>
+
+    <!-- 贴图 -->
+    <graphicData>
+      <texPath>Things/Building/SimpleWorkbench</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(2,2)</drawSize>
+      <shadowData>
+        <volume>(0.3, 0.5, 0.3)</volume>
+        <offset>(0, 0, -0.5)</offset>
+      </shadowData>
+    </graphicData>
+
+    <!-- 建筑统计属性 -->
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Flammability>0.3</Flammability>
+      <Beauty>0</Beauty>
+      <MarketValue>150</MarketValue>
+    </statBases>
+
+    <!-- 建筑成本（建造所需资源） -->
+    <costList>
+      <Steel>20</Steel>
+      <Wood>30</Wood>
+    </costList>
+
+    <!-- 工作台配置：允许殖民者在此工作 -->
+    <hasInteractionCell>true</hasInteractionCell>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+
+    <!-- 组件配置 -->
+    <comps>
+      <!-- 使其可损坏 -->
+      <li Class="CompProperties_Breakdownable" />
+      <!-- 使其可照亮 -->
+      <li Class="CompProperties_Flickable" />
+    </comps>
+
+    <!-- 声音效果 -->
+    <soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+  </ThingDef>
+
+  <!-- ============================================
+       示例3：武器（近战）
+       ============================================ -->
+  <ThingDef>
+    <defName>Example_Weapon_SimpleMelee</defName>
+    <label>simple blade</label>
+    <description>A basic melee weapon. Perfect for close combat situations.</description>
+
+    <thingClass>ThingWithComps</thingClass>
+    <category>Item</category>
+    <selectable>true</selectable>
+
+    <stackLimit>1</stackLimit>
+    <mass>0.5</mass>
+
+    <graphicData>
+      <texPath>Things/Weapon/SimpleBlade</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+
+    <statBases>
+      <MarketValue>80</MarketValue>
+      <Mass>0.5</Mass>
+      <MeleeWeapon_AverageDPS>8</MeleeWeapon_AverageDPS>
+    </statBases>
+
+    <!-- 武器定义 -->
+    <equipmentType>Primary</equipmentType>
+    <techLevel>Medieval</techLevel>
+
+    <!-- 武器规范 -->
+    <weaponClasses>
+      <li>Melee</li>
+    </weaponClasses>
+
+    <!-- 近战伤害配置 -->
+    <tools>
+      <li>
+        <label>blade</label>
+        <capacities>
+          <li>Cut</li>
+          <li>Blunt</li>
+        </capacities>
+        <power>12</power>
+        <cooldownTime>1.2</cooldownTime>
+      </li>
+    </tools>
+  </ThingDef>
+
+  <!-- ============================================
+       示例4：武器（远程）
+       ============================================ -->
+  <ThingDef>
+    <defName>Example_Weapon_SimpleGun</defName>
+    <label>simple rifle</label>
+    <description>A basic firearm for ranged combat.</description>
+
+    <thingClass>ThingWithComps</thingClass>
+    <category>Item</category>
+    <selectable>true</selectable>
+
+    <stackLimit>1</stackLimit>
+    <mass>3.5</mass>
+
+    <graphicData>
+      <texPath>Things/Weapon/SimpleGun</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+
+    <statBases>
+      <MarketValue>200</MarketValue>
+      <RangedWeapon_Cooldown>1.0</RangedWeapon_Cooldown>
+    </statBases>
+
+    <!-- 远程武器定义 -->
+    <equipmentType>Primary</equipmentType>
+    <techLevel>Industrial</techLevel>
+
+    <weaponClasses>
+      <li>Ranged</li>
+    </weaponClasses>
+
+    <!-- 远程伤害配置 -->
+    <Verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>Example_Projectile_SimpleBullet</defaultProjectile>
+        <warmupTime>0.8</warmupTime>
+        <range>25</range>
+        <burstShotCount>1</burstShotCount>
+      </li>
+    </Verbs>
+
+    <!-- 弹药消耗 -->
+    <ammoUser>
+      <ammoType>Bullets</ammoType>
+      <ammoGenPerShotCount>1</ammoGenPerShotCount>
+    </ammoUser>
+
+    <components>
+      <li Class="CompProperties_AmmoUser">
+        <ammoType>Bullets</ammoType>
+      </li>
+    </components>
+  </ThingDef>
+
+  <!-- ============================================
+       示例5：弹药（在远程武器中使用）
+       ============================================ -->
+  <ThingDef>
+    <defName>Example_Projectile_SimpleBullet</defName>
+    <label>simple bullet</label>
+    <description>Ammunition for simple rifles.</description>
+
+    <thingClass>ProjectileCE</thingClass>
+    <category>Projectile</category>
+    <graphicData>
+      <texPath>Things/Projectile/SimpleBullet</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1</drawSize>
+    </graphicData>
+
+    <!-- 弹药伤害 -->
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>8</damageAmountBase>
+      <armorPenetrationBase>0.2</armorPenetrationBase>
+      <speed>60</speed>
+    </projectile>
+  </ThingDef>
+
+  <!--
+    提示：继续在此文件中添加更多ThingDef定义。
+
+    相关文件参考：
+    - RimWorld Defs 分类规范 - 了解如何组织不同类型的定义
+    - RimWorld模组命名规范 - 遵循命名约定
+    - 参考资源/模组资源 - 查看现有模组如何定义相似内容
+  -->
+
+</Defs>

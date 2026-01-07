@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <!-- 完整模板用于大型系统、种族定义或框架模组 -->
+  <name>My Complete System Mod</name>
+  <author>Your Name</author>
+  <description>A comprehensive mod providing complete systems like races, faction structures, or game-changing frameworks. This template includes full source code, multiple versions, and extensive DLC support.</description>
+
+  <modVersion>1.0.0</modVersion>
+
+  <!-- 完整模板支持多个版本 -->
+  <supportedVersions>
+    <li>1.4</li>
+    <li>1.5</li>
+    <li>1.6</li>
+  </supportedVersions>
+
+  <!-- 完整模板可能依赖框架类模组 -->
+  <dependencies>
+    <!-- <li>Ludeon.RimWorld.Royalty</li> -->
+    <!-- <li>Ludeon.RimWorld.Biotech</li> -->
+  </dependencies>
+
+  <packageId>your.complete.modid</packageId>
+
+</ModMetaData>

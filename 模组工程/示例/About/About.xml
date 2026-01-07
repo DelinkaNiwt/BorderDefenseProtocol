@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <!--
+    RimWorld 模组示例 - About.xml
+
+    本示例展示了标准的模组元数据配置。
+    这是所有RimWorld模组的必需文件。
+  -->
+
+  <name>RimWorld Mod Example</name>
+  <author>RimWorld Modding Community</author>
+  <description>
+    A comprehensive example mod demonstrating best practices in RimWorld modding.
+
+    This example includes:
+    - Proper directory structure
+    - Standard configuration files
+    - Organized Def files
+    - Multi-version support
+    - Documentation structure
+
+    Use this as a reference when creating your own mods.
+  </description>
+
+  <modVersion>1.0.0</modVersion>
+
+  <!--
+    支持的RimWorld版本
+    此示例仅支持1.6，但可扩展为支持多个版本
+  -->
+  <supportedVersions>
+    <li>1.6</li>
+  </supportedVersions>
+
+  <!--
+    模组依赖关系（可选）
+    如果你的模组依赖其他模组或DLC，在此列出
+  -->
+  <dependencies>
+    <!-- 示例：
+    <li>Ludeon.RimWorld.Royalty</li>
+    <li>Ludeon.RimWorld.Biotech</li>
+    -->
+  </dependencies>
+
+  <!--
+    模组包ID
+    应为唯一值，避免与其他模组冲突
+    推荐格式：yourname.modname 或 YourName.ModName
+  -->
+  <packageId>rimworldmodexample.examplemod</packageId>
+
+  <!--
+    Steam工坊ID（发布后自动生成）
+    首次发布时可留空，上传到Steam工坊后会自动生成
+  -->
+  <!-- <publishedFileID></publishedFileID> -->
+
+  <!--
+    加载顺序控制（可选）
+    指定此模组应在哪些模组之前/之后加载
+  -->
+  <loadBefore>
+    <!-- <li>SomeOtherMod</li> -->
+  </loadBefore>
+
+  <loadAfter>
+    <!-- <li>AnotherMod</li> -->
+  </loadAfter>
+
+</ModMetaData>

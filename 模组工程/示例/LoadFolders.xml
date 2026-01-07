@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  LoadFolders.xml 配置文件
+
+  此文件控制RimWorld在加载模组时选择哪些文件夹。
+
+  核心概念：
+  - 每个RimWorld版本有一个条目（如 <v1.6>）
+  - 每个版本条目中，<li> 标签指定要加载的文件夹
+  - IfModActive 属性用于条件加载，仅当特定DLC/模组激活时才加载
+
+  加载顺序很重要：
+  - 后面的内容会覆盖前面的内容
+  - 条件加载应放在最后，以正确覆盖基础内容
+
+  示例模组目录结构说明：
+  - Content/        - 所有版本间共享的资源（图片、语言文件等）
+  - 1.6/            - 版本1.6特定的内容
+  - Defs/           - 游戏定义文件（XML）
+  - Languages/      - 游戏内文本本地化
+-->
+
+<loadFolders>
+
+  <!-- RimWorld 1.6 版本配置 -->
+  <v1.6>
+    <!-- 步骤1：加载共享资源 -->
+    <li>Content</li>
+
+    <!-- 步骤2：加载版本特定内容 -->
+    <li>1.6</li>
+
+    <!--
+      步骤3：条件加载DLC特定内容
+      仅当用户已激活相应DLC时，这些文件夹才会被加载
+      常见的DLC ID：
+      - Ludeon.RimWorld.Royalty     （贵族）
+      - Ludeon.RimWorld.Biotech     （生物技术）
+      - Ludeon.RimWorld.Ideology    （意识形态）
+      - Ludeon.RimWorld.Odyssey     （奥德赛）
+      - Ludeon.RimWorld.Anomaly     （异常）
+    -->
+    <!-- 示例（取消注释以启用）:
+    <li IfModActive="Ludeon.RimWorld.Royalty">1.6/Mods/Royalty</li>
+    <li IfModActive="Ludeon.RimWorld.Biotech">1.6/Mods/Biotech</li>
+    -->
+
+  </v1.6>
+
+  <!--
+    扩展到其他版本
+    如果要支持1.5或1.4，在此添加相应配置：
+
+  <v1.5>
+    <li>Content</li>
+    <li>1.5</li>
+    <li IfModActive="Ludeon.RimWorld.Royalty">1.5/Mods/Royalty</li>
+  </v1.5>
+
+  <v1.4>
+    <li>Content</li>
+    <li>1.4</li>
+  </v1.4>
+  -->
+
+</loadFolders>

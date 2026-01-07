@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  LoadFolders.xml 配置模板
+
+  本文件控制RimWorld在加载模组时选择哪些文件夹。
+  支持：
+  - 按游戏版本加载不同内容
+  - 按DLC/模组激活状态条件加载
+  - 跨版本共享资源
+
+  使用说明：
+  1. 复制此文件到你的模组的根目录
+  2. 根据你的模组结构修改版本和路径
+  3. 如果仅支持单个版本（如1.6），可以简化配置
+
+  详细说明参考：模组规范文档 > 01_模组目录结构标准规范.md
+-->
+
+<!--
+  ========================================
+  【最简单】单版本模组（仅支持1.6）
+  ========================================
+-->
+
+<!--
+<loadFolders>
+  <v1.6>
+    <li>1.6</li>
+  </v1.6>
+</loadFolders>
+-->
+
+<!--
+  ========================================
+  【标准】多版本 + 共享资源
+  ========================================
+
+  加载顺序说明：
+  1. 先加载Content/（基础共享资源）
+  2. 再加载版本特定目录（版本覆盖共享的）
+  3. 最后加载DLC特定内容（DLC覆盖版本的）
+-->
+
+<!--
+<loadFolders>
+  <v1.5>
+    <li>Content</li>
+    <li>1.5</li>
+    <li IfModActive="Ludeon.RimWorld.Royalty">1.5/Mods/Royalty</li>
+    <li IfModActive="Ludeon.RimWorld.Biotech">1.5/Mods/Biotech</li>
+  </v1.5>
+  <v1.6>
+    <li>Content</li>
+    <li>1.6</li>
+    <li IfModActive="Ludeon.RimWorld.Royalty">1.6/Mods/Royalty</li>
+    <li IfModActive="Ludeon.RimWorld.Biotech">1.6/Mods/Biotech</li>
+    <li IfModActive="Ludeon.RimWorld.Odyssey">1.6/Mods/Odyssey</li>
+  </v1.6>
+</loadFolders>
+-->
+
+<!--
+  ========================================
+  【完整】多版本 + 完整DLC支持
+  ========================================
+-->
+
+<!--
+<loadFolders>
+  <v1.4>
+    <li>Content</li>
+    <li>1.4</li>
+  </v1.4>
+  <v1.5>
+    <li>Content</li>
+    <li>1.5</li>
+    <li IfModActive="Ludeon.RimWorld.Royalty">1.5/Mods/Royalty</li>
+    <li IfModActive="Ludeon.RimWorld.Biotech">1.5/Mods/Biotech</li>
+    <li IfModActive="Ludeon.RimWorld.Ideology">1.5/Mods/Ideology</li>
+  </v1.5>
+  <v1.6>
+    <li>Content</li>
+    <li>1.6</li>
+    <li IfModActive="Ludeon.RimWorld.Royalty">1.6/Mods/Royalty</li>
+    <li IfModActive="Ludeon.RimWorld.Biotech">1.6/Mods/Biotech</li>
+    <li IfModActive="Ludeon.RimWorld.Ideology">1.6/Mods/Ideology</li>
+    <li IfModActive="Ludeon.RimWorld.Odyssey">1.6/Mods/Odyssey</li>
+    <li IfModActive="Ludeon.RimWorld.Anomaly">1.6/Mods/Anomaly</li>
+  </v1.6>
+</loadFolders>
+-->
+
+<!-- ============================================
+     推荐使用的标准配置（复制这个）
+     ============================================ -->
+
+<loadFolders>
+  <!-- 1.6 版本配置 -->
+  <v1.6>
+    <!-- 【顺序很重要】基础共享内容最先加载 -->
+    <li>Content</li>
+
+    <!-- 版本特定内容（会覆盖Content中同名文件） -->
+    <li>1.6</li>
+
+    <!-- DLC条件加载（按需添加） -->
+    <li IfModActive="Ludeon.RimWorld.Royalty">1.6/Mods/Royalty</li>
+    <li IfModActive="Ludeon.RimWorld.Biotech">1.6/Mods/Biotech</li>
+    <li IfModActive="Ludeon.RimWorld.Ideology">1.6/Mods/Ideology</li>
+    <li IfModActive="Ludeon.RimWorld.Odyssey">1.6/Mods/Odyssey</li>
+    <li IfModActive="Ludeon.RimWorld.Anomaly">1.6/Mods/Anomaly</li>
+  </v1.6>
+
+  <!-- 1.5 版本配置（可选，如需支持） -->
+  <!--
+  <v1.5>
+    <li>Content</li>
+    <li>1.5</li>
+    <li IfModActive="Ludeon.RimWorld.Royalty">1.5/Mods/Royalty</li>
+    <li IfModActive="Ludeon.RimWorld.Biotech">1.5/Mods/Biotech</li>
+    <li IfModActive="Ludeon.RimWorld.Ideology">1.5/Mods/Ideology</li>
+  </v1.5>
+  -->
+
+  <!-- 1.4 版本配置（可选，如需支持） -->
+  <!--
+  <v1.4>
+    <li>Content</li>
+    <li>1.4</li>
+  </v1.4>
+  -->
+</loadFolders>
+
+<!--
+  ========================================
+  【标签说明】
+  ========================================
+
+  <v1.6>
+    RimWorld版本标签。1.4/1.5/1.6对应游戏版本。
+    游戏加载时会根据当前版本选择对应标签。
+
+  <li>
+    加载项。代表一个文件夹路径。
+    加载顺序很重要：后加载的会覆盖先加载的。
+
+  <li>Content</li>
+    加载Content/文件夹。通常放在最前面。
+    这里是各版本共享的资源（图片、配置等）。
+
+  <li>1.6</li>
+    加载1.6/文件夹。版本特定的内容。
+    会覆盖Content/中的同名文件。
+
+  <li IfModActive="...">路径</li>
+    条件加载。仅当指定的DLC或模组激活时加载。
+    示例：
+      <li IfModActive="Ludeon.RimWorld.Biotech">1.6/Mods/Biotech</li>
+    这表示：如果生物技术DLC激活，才加载1.6/Mods/Biotech/文件夹
+
+  ========================================
+  【DLC PackageId 参考】
+  ========================================
+
+  官方DLC：
+    Ludeon.RimWorld.Royalty       贵族DLC
+    Ludeon.RimWorld.Biotech       生物技术DLC
+    Ludeon.RimWorld.Ideology      意识形态DLC
+    Ludeon.RimWorld.Odyssey       奥德赛DLC
+    Ludeon.RimWorld.Anomaly       异常DLC
+
+  常见第三方框架：
+    VanillaExpanded.VWE           原版扩展框架
+    CETeam.CombatExtended         战斗扩展
+
+  ========================================
+  【加载顺序原则】
+  ========================================
+
+  ✓ 正确的顺序：
+    <li>Content</li>         基础（所有版本共用）
+    <li>1.6</li>             版本特定（覆盖基础）
+    <li IfModActive="...">   DLC特定（最后加载，优先级最高）
+
+  ✗ 错误的顺序（会导致DLC补丁被覆盖）：
+    <li IfModActive="...">
+    <li>1.6</li>
+    <li>Content</li>
+
+  原因：DLC内容应该有最高优先级（最后加载）
+
+  ========================================
+  【常见配置情景】
+  ========================================
+
+  【场景1】仅支持1.6，仅XML内容
+    <loadFolders>
+      <v1.6>
+        <li>1.6</li>
+      </v1.6>
+    </loadFolders>
+
+  【场景2】支持1.5和1.6，有共享资源
+    <loadFolders>
+      <v1.5>
+        <li>Content</li>
+        <li>1.5</li>
+      </v1.5>
+      <v1.6>
+        <li>Content</li>
+        <li>1.6</li>
+      </v1.6>
+    </loadFolders>
+
+  【场景3】支持1.6和Biotech DLC
+    <loadFolders>
+      <v1.6>
+        <li>Content</li>
+        <li>1.6</li>
+        <li IfModActive="Ludeon.RimWorld.Biotech">1.6/Mods/Biotech</li>
+      </v1.6>
+    </loadFolders>
+
+  【场景4】支持1.4/1.5/1.6，完整DLC支持
+    <loadFolders>
+      <v1.4>
+        <li>Content</li>
+        <li>1.4</li>
+      </v1.4>
+      <v1.5>
+        <li>Content</li>
+        <li>1.5</li>
+        <li IfModActive="Ludeon.RimWorld.Royalty">1.5/Mods/Royalty</li>
+        <li IfModActive="Ludeon.RimWorld.Biotech">1.5/Mods/Biotech</li>
+      </v1.5>
+      <v1.6>
+        <li>Content</li>
+        <li>1.6</li>
+        <li IfModActive="Ludeon.RimWorld.Royalty">1.6/Mods/Royalty</li>
+        <li IfModActive="Ludeon.RimWorld.Biotech">1.6/Mods/Biotech</li>
+        <li IfModActive="Ludeon.RimWorld.Odyssey">1.6/Mods/Odyssey</li>
+      </v1.6>
+    </loadFolders>
+
+  ========================================
+  【常见错误及解决】
+  ========================================
+
+  错误：游戏加载错误的版本
+  原因：版本标签不对（<v1.7>不存在）
+  解决：确保标签是 v1.4, v1.5, 或 v1.6
+
+  错误：DLC特定内容没有加载
+  原因：IfModActive的PackageId写错了
+  解决：复制正确的PackageId，大小写敏感
+
+  错误：共享资源被版本特定覆盖了
+  原因：加载顺序错误（版本放在Content前面）
+  解决：Content要放在最前面
+
+  错误：模组在游戏中找不到
+  原因：LoadFolders.xml语法错误或缺失
+  解决：验证XML格式，确保文件存在于模组根目录
+
+-->
