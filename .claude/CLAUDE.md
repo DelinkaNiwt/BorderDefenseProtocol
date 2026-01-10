@@ -4,6 +4,7 @@
 1. 最新版本：1.6.4633
 2. DLC列表（5个）：
 3. 游戏根目录路径：“C:\NiwtGames\Steam\steamapps\common\RimWorld”
+4. 游戏程序集路径：“C:\NiwtGames\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed”
 
 # 词汇释义
 1. 日期：yyyy-mm-dd

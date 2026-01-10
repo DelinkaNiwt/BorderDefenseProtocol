@@ -1,0 +1,6 @@
+C:\NiwtDatas\Projects\RimworldModStudio\模组工程\ProjectTrion_Framework\Source\ProjectTrion\obj\Debug\ProjectTrion.csproj.AssemblyReference.cache
+C:\NiwtDatas\Projects\RimworldModStudio\模组工程\ProjectTrion_Framework\Source\ProjectTrion\obj\Debug\ProjectTrion.csproj.CoreCompileInputs.cache
+C:\NiwtDatas\Projects\RimworldModStudio\模组工程\ProjectTrion_Framework\1.6\Assemblies\ProjectTrion.dll
+C:\NiwtDatas\Projects\RimworldModStudio\模组工程\ProjectTrion_Framework\1.6\Assemblies\ProjectTrion.pdb
+C:\NiwtDatas\Projects\RimworldModStudio\模组工程\ProjectTrion_Framework\Source\ProjectTrion\obj\Debug\ProjectTrion.dll
+C:\NiwtDatas\Projects\RimworldModStudio\模组工程\ProjectTrion_Framework\Source\ProjectTrion\obj\Debug\ProjectTrion.pdb

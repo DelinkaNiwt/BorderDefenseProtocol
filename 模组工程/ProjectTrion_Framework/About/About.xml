@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <!--
+    ProjectTrion Framework - About.xml
+    Trion能量管理系统底层框架模组
+
+    这是一个纯框架模组，仅定义接口和通用机制。
+    所有具体实现由应用层模组提供。
+  -->
+
+  <name>ProjectTrion Framework</name>
+  <author>Niwt</author>
+  <description>
+ProjectTrion框架 - 为RimWorld提供可扩展的能量管理和战斗体系统的纯框架模组。
+
+ProjectTrion是一个轻量级、模块化框架，提供以下功能：
+  • 灵活的Trion能量管理（容量、消耗、恢复、泄漏）
+  • 战斗体生命周期管理（创建、激活、摧毁）
+  • 伤害拦截和虚拟伤害系统
+  • 组件挂载和外设管理
+  • 基于策略模式的无限可扩展性
+
+本框架仅包含接口定义和通用机制。
+所有具体实现由应用层模组提供。
+
+**核心设计原则：**
+  - 框架纯净性：无应用层代码或具体实现
+  - 完全可扩展性：无需修改框架即可支持无限的单位类型
+  - 策略模式：由应用层决定策略选择和参数值
+  - 虚拟战斗系统：战斗体与肉身完全分离
+
+**主要特性：**
+  • ILifecycleStrategy接口提供无限扩展性
+  • CompTrion组件负责能量管理
+  • TriggerMount系统用于组件挂载
+  • 基于Harmony的伤害拦截机制
+  • 完整的序列化支持（存档/读档）
+
+**目标版本：** RimWorld v1.6.4633
+**所需DLC：** 无
+**状态：** 框架 v0.6（代码交付就绪）
+
+框架设计文档：参见docs/目录
+  </description>
+
+  <modVersion>0.6</modVersion>
+
+  <!-- 支持的RimWorld版本 -->
+  <supportedVersions>
+    <li>1.6</li>
+  </supportedVersions>
+
+  <!-- 模组依赖关系（框架无强制依赖）
+  <dependencies>
+  
+  </dependencies>
+ -->
+ 
+  <!-- 模组包ID（唯一标识） -->
+  <packageId>ProjectTrion.Framework</packageId>
+
+  <!-- 加载顺序控制 -->
+  <!-- 框架应该在所有应用层模组之前加载 -->
+  <loadBefore>
+    <!-- 应用层模组应在此处列出，例如：
+    <li>ProjectTrion.HumanCombatBody</li>
+    <li>ProjectTrion.TrionArmy</li>
+    -->
+  </loadBefore>
+
+</ModMetaData>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8B5C5E7A-3F4C-4D8E-9A1B-7C2D5E8F9A0B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ProjectTrion</RootNamespace>
+    <AssemblyName>ProjectTrion</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\1.6\Assemblies\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\1.6\Assemblies\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+  <!-- RimWorld程序集引用 -->
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+
+    <!-- RimWorld核心程序集 -->
+    <Reference Include="Assembly-CSharp">
+      <HintPath>C:\NiwtGames\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+
+    <Reference Include="UnityEngine">
+      <HintPath>C:\NiwtGames\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>C:\NiwtGames\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+
+    <!-- Harmony - 内置在 Assembly-CSharp 中，无需直接引用 -->
+    <!-- 注意：Harmony 补丁类将通过动态反射在运行时加载 -->
+  </ItemGroup>
+
+  <!-- 源代码文件 -->
+  <ItemGroup>
+    <!-- Core接口定义 -->
+    <Compile Include="Core\ILifecycleStrategy.cs" />
+    <Compile Include="Core\CombatBodySnapshot.cs" />
+
+    <!-- Components组件 -->
+    <Compile Include="Components\CompTrion.cs" />
+    <Compile Include="Components\CompProperties_Trion.cs" />
+    <Compile Include="Components\TriggerMount.cs" />
+    <Compile Include="Components\TriggerMountDef.cs" />
+
+    <!-- Harmony补丁 - 由应用层实现 -->
+    <!-- Harmony补丁需要直接引用HarmonyLib，框架不包含补丁实现 -->
+    <!-- 应用层应参考HarmonyPatches/文件夹中的模板实现具体的补丁 -->
+
+    <!-- 工具函数 -->
+    <Compile Include="Utilities\TrionUtil.cs" />
+    <Compile Include="Utilities\VitalPartUtil.cs" />
+
+    <!-- GameParts游戏逻辑 -->
+    <Compile Include="GameParts\TrionDefOf.cs" />
+    <Compile Include="GameParts\TrionDefGenerator.cs" />
+
+    <!-- 模组入口 -->
+    <Compile Include="ProjectTrion_Mod.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <!-- 生成后事件：复制到正确的输出目录 -->
+  <Target Name="AfterBuild">
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="..\..\1.6\Assemblies\" />
+  </Target>
+
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
