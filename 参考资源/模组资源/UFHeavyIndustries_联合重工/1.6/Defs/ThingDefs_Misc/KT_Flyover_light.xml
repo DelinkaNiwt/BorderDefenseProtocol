@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ThingDef Parent="EtherealThingBase">
+    <defName>KT_FlyOver_Bomber</defName>
+    <label>KT_FlyOver_Bomber</label>
+    <thingClass>SRA.FlyOver</thingClass>
+    <tickerType>Normal</tickerType>
+    <drawerType>RealtimeOnly</drawerType>
+    <graphicData>
+      <!-- <texPath>ArachnaeSwarm/Weapon/ARA_Weapon_Empty</texPath> -->
+      <texPath>Things/FlyOverThing/KT_Bomber</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+      <drawSize>(28,28)</drawSize>
+      <color>(255,255,255,255)</color>
+    </graphicData>
+    <castEdgeShadows>false</castEdgeShadows>
+    <staticSunShadowHeight>0</staticSunShadowHeight>
+    <skyfaller>
+      <shadow>Things/FlyOverThing/KT_EMPTY</shadow>
+      <shadowSize>(0, 0)</shadowSize>
+      <motesPerCell>0</motesPerCell>
+      <floatingSound></floatingSound>
+      <impactSound></impactSound>
+    </skyfaller>
+    <modExtensions>
+      <li Class="SRA.FlyOverShadowExtension">
+        <customShadowPath>Things/FlyOverThing/KT_EMPTY</customShadowPath>
+        <useCustomShadow>true</useCustomShadow>
+        <shadowIntensity>0.8</shadowIntensity>
+        <minShadowAlpha>0</minShadowAlpha>
+        <maxShadowAlpha>0</maxShadowAlpha>
+        <minShadowScale>0</minShadowScale>
+        <maxShadowScale>0</maxShadowScale>
+      </li>
+    </modExtensions>
+    <seeThroughFog>true</seeThroughFog>
+    <useHitPoints>false</useHitPoints>
+    <selectable>false</selectable>
+    <alwaysHaulable>false</alwaysHaulable>
+    <altitudeLayer>MetaOverlays</altitudeLayer>
+    <comps>
+	  <!-- 入场音效 -->
+      <li Class="SRA.CompProperties_PlaySoundOnSpawn">
+        <sound>KT_flyby</sound>
+      </li>
+	<!-- 扫射 -->
+      <li Class="SRA.CompProperties_GroundStrafing">
+        <projectileDef>KT_FlyOver_Bomber_bullet</projectileDef>
+        <range>120</range>
+    
+        <!-- 横向偏移配置（左右） -->
+        <lateralOffsetDistance>18</lateralOffsetDistance>
+        <lateralInitialOffsetAngle>0</lateralInitialOffsetAngle>
+        <lateralMaxOffsetAngle>0</lateralMaxOffsetAngle>
+        <lateralAngleIncrement>0</lateralAngleIncrement>
+        <lateralOffsetMode>Alternating</lateralOffsetMode>
+        
+        <!-- 纵向偏移配置（前后） -->
+        <longitudinalInitialOffset>25</longitudinalInitialOffset>
+        <longitudinalMinOffset>0</longitudinalMinOffset>
+        <longitudinalMaxOffset>0</longitudinalMaxOffset>
+        <longitudinalOffsetMode>Fixed</longitudinalOffsetMode>
+
+        <!-- 视觉效果 -->
+        <spawnOffsetEffect>true</spawnOffsetEffect>
+        <offsetEffectDef>Mote_SparkSimple</offsetEffectDef>
+      </li>
+	  <!-- 攻击范围内目标 -->
+      <li Class="SRA.CompProperties_SectorSurveillance">
+        <projectileDef>KT_FlyOver_Bomber_bullet</projectileDef>
+        <sectorAngle>30</sectorAngle>      <!-- 扇形角度 -->
+        <sectorRange>120</sectorRange>      <!-- 射程 -->
+        <shotCount>1</shotCount>           <!-- 发射次数 -->
+        <shotInterval>2</shotInterval>   <!-- 发射间隔 -->
+        <maxProjectiles>6</maxProjectiles><!-- 最大射弹数量限制-->
+    
+        <!-- 横向偏移配置（左右） -->
+        <lateralOffsetDistance>18</lateralOffsetDistance>
+        <lateralInitialOffsetAngle>0</lateralInitialOffsetAngle>
+        <lateralMaxOffsetAngle>0</lateralMaxOffsetAngle>
+        <lateralAngleIncrement>0</lateralAngleIncrement>
+        <lateralOffsetMode>Alternating</lateralOffsetMode>
+        
+        <!-- 纵向偏移配置（前后） -->
+        <longitudinalInitialOffset>25</longitudinalInitialOffset>
+        <longitudinalMinOffset>0</longitudinalMinOffset>
+        <longitudinalMaxOffset>0</longitudinalMaxOffset>
+        <longitudinalOffsetMode>Fixed</longitudinalOffsetMode>
+
+        <!-- 视觉效果 -->
+        <spawnOffsetEffect>true</spawnOffsetEffect>
+        <offsetEffectDef>Mote_SparkSimple</offsetEffectDef>
+      </li>
+    </comps>
+  </ThingDef>
+  
+  <ThingDef>
+        <defName>KT_FlyOver_Bomber_bullet</defName>
+        <label>KT_FlyOver_Bomber_bullet</label>
+        <thingClass>SRA.Projectile_MultiExplosive</thingClass>
+        <category>Projectile</category>
+        <tickerType>Normal</tickerType>
+        <altitudeLayer>Projectile</altitudeLayer>
+        <graphicData>
+            <texPath>Things/Projectile/Bullet_doommissile</texPath> <!-- 子弹贴图路径 -->
+            <graphicClass>Graphic_Single</graphicClass> <!-- 使用单一图形 -->
+      		<drawSize>(2)</drawSize>
+        </graphicData>
+        <projectile>
+            <damageDef>EMP</damageDef>
+			<flyOverhead>true</flyOverhead>
+            <explosionRadius>6</explosionRadius>
+            <speed>180</speed>
+            <damageAmountBase>350</damageAmountBase>
+            <arcHeightFactor>0</arcHeightFactor>
+            <soundExplode>Explosion_Rocket</soundExplode>
+			<armorPenetrationBase>2.5</armorPenetrationBase>
+        </projectile>
+		<modExtensions>
+		  <li Class="SRA.TailBulletDef">
+       		 <tailFleckDef>KT_Fleck_Smoke_Tail</tailFleckDef>
+			 <fleckDelayTicks>35</fleckDelayTicks><!-- 出膛后多久出现轨迹 -->
+			 <fleckMakeFleckNum>1</fleckMakeFleckNum>
+			 <!--FloatRangefleckAngle>90</FloatRangefleckAngle -->
+     	  </li>
+        <li Class="SRA.MultiExplosiveExtension">
+        <multiexplosions>
+          <li>
+            <radius>6</radius>
+            <damageDef>KTBLUEBomb</damageDef>
+            <damageAmount>350</damageAmount>
+            <armorPenetration>1.5</armorPenetration>
+            <explosionSound>KT_explosion</explosionSound>
+            <explosionDamageFalloff>true</explosionDamageFalloff><!-- 默认true -->
+            <onlyAntiHostile>false</onlyAntiHostile> <!-- 智能弹药：这个爆炸只伤害敌对目标，默认false -->
+            <!-- 现阶段就支持这么多参数 -->
+          </li>
+		  <li>
+			<radius>4</radius>
+			<damageDef>EMP</damageDef>
+			<damageAmount>60</damageAmount>
+			<armorPenetration>8</armorPenetration>
+			<explosionSound>Explosion_EMP</explosionSound>
+			<explosionDamageFalloff>true</explosionDamageFalloff>
+			<onlyAntiHostile>true</onlyAntiHostile>
+		  </li>
+        </multiexplosions>
+      </li>
+    </modExtensions>
+  </ThingDef>	
+  
+  
+  
+  <ThingDef Parent="EtherealThingBase">
+    <defName>KT_FlyOver_AX</defName>
+    <label>KT_FlyOver_AX</label>
+    <thingClass>SRA.FlyOver</thingClass>
+    <tickerType>Normal</tickerType>
+    <drawerType>RealtimeOnly</drawerType>
+    <graphicData>
+      <!-- <texPath>ArachnaeSwarm/Weapon/ARA_Weapon_Empty</texPath> -->
+      <texPath>Things/FlyOverThing/KT_AX</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+      <drawSize>(12,12)</drawSize>
+      <color>(255,255,255,255)</color>
+    </graphicData>
+    <castEdgeShadows>false</castEdgeShadows>
+    <staticSunShadowHeight>0</staticSunShadowHeight>
+    <skyfaller>
+      <shadow>Things/FlyOverThing/KT_EMPTY</shadow>
+      <shadowSize>(0, 0)</shadowSize>
+      <motesPerCell>0</motesPerCell>
+      <floatingSound></floatingSound>
+      <impactSound></impactSound>
+    </skyfaller>
+    <modExtensions>
+      <li Class="SRA.FlyOverShadowExtension">
+        <customShadowPath>Things/FlyOverThing/KT_EMPTY</customShadowPath>
+        <useCustomShadow>true</useCustomShadow>
+        <shadowIntensity>0.8</shadowIntensity>
+        <minShadowAlpha>0</minShadowAlpha>
+        <maxShadowAlpha>0</maxShadowAlpha>
+        <minShadowScale>0</minShadowScale>
+        <maxShadowScale>0</maxShadowScale>
+      </li>
+    </modExtensions>
+    <seeThroughFog>true</seeThroughFog>
+    <useHitPoints>false</useHitPoints>
+    <selectable>false</selectable>
+    <alwaysHaulable>false</alwaysHaulable>
+    <altitudeLayer>MetaOverlays</altitudeLayer>
+    <comps>
+	<!-- 入场音效 -->
+      <li Class="SRA.CompProperties_PlaySoundOnSpawn">
+        <sound>KT_flyby_II</sound>
+      </li>
+	<!-- 扫射 -->
+      <li Class="SRA.CompProperties_GroundStrafing">
+        <projectileDef>KT_Bullet_FlyOver_AX</projectileDef>
+        <range>120</range>
+    
+        <!-- 横向偏移配置（左右） -->
+        <lateralOffsetDistance>0</lateralOffsetDistance>
+        <lateralInitialOffsetAngle>0</lateralInitialOffsetAngle>
+        <lateralMaxOffsetAngle>0</lateralMaxOffsetAngle>
+        <lateralAngleIncrement>0</lateralAngleIncrement>
+        <lateralOffsetMode>Alternating</lateralOffsetMode>
+        
+        <!-- 纵向偏移配置（前后） -->
+        <longitudinalInitialOffset>15</longitudinalInitialOffset>
+        <longitudinalMinOffset>0</longitudinalMinOffset>
+        <longitudinalMaxOffset>0</longitudinalMaxOffset>
+        <longitudinalOffsetMode>Fixed</longitudinalOffsetMode>
+
+        <!-- 视觉效果 -->
+        <spawnOffsetEffect>true</spawnOffsetEffect>
+        <offsetEffectDef>Mote_SparkSimple</offsetEffectDef>
+      </li>
+	  <!-- 攻击范围内目标 -->
+      <li Class="SRA.CompProperties_SectorSurveillance">
+        <projectileDef>KT_Bullet_FlyOver_AX_rocket</projectileDef>
+        <sectorAngle>30</sectorAngle>      <!-- 扇形角度 -->
+        <sectorRange>90</sectorRange>      <!-- 射程 -->
+        <shotCount>1</shotCount>           <!-- 发射次数 -->
+        <shotInterval>2</shotInterval>   <!-- 发射间隔 -->
+        <maxProjectiles>4</maxProjectiles><!-- 最大射弹数量限制-->
+    
+        <!-- 横向偏移配置（左右） -->
+        <lateralOffsetDistance>0</lateralOffsetDistance>
+        <lateralInitialOffsetAngle>0</lateralInitialOffsetAngle>
+        <lateralMaxOffsetAngle>0</lateralMaxOffsetAngle>
+        <lateralAngleIncrement>0</lateralAngleIncrement>
+        <lateralOffsetMode>Alternating</lateralOffsetMode>
+        
+        <!-- 纵向偏移配置（前后） -->
+        <longitudinalInitialOffset>15</longitudinalInitialOffset>
+        <longitudinalMinOffset>0</longitudinalMinOffset>
+        <longitudinalMaxOffset>0</longitudinalMaxOffset>
+        <longitudinalOffsetMode>Fixed</longitudinalOffsetMode>
+
+        <!-- 视觉效果 -->
+        <spawnOffsetEffect>true</spawnOffsetEffect>
+        <offsetEffectDef>Mote_SparkSimple</offsetEffectDef>
+      </li>
+    </comps>
+  </ThingDef>
+
+
+  <ThingDef>
+        <defName>KT_Bullet_FlyOver_AX</defName>
+        <label>KT_Bullet_FlyOver_AX</label>
+        <thingClass>Projectile_Explosive</thingClass>
+        <category>Projectile</category>
+        <tickerType>Normal</tickerType>
+        <altitudeLayer>Projectile</altitudeLayer>
+        <graphicData>
+            <texPath>Things/Projectile/Bullet_100MM</texPath> <!-- 子弹贴图路径 -->
+            <graphicClass>Graphic_Single</graphicClass> <!-- 使用单一图形 -->
+			<shaderType>MoteGlow</shaderType>
+      		<drawSize>(1.2)</drawSize>
+        </graphicData>
+        <projectile>
+            <damageDef>Bomb</damageDef>
+            <explosionRadius>1.5</explosionRadius>
+            <speed>400</speed>
+            <damageAmountBase>90</damageAmountBase>
+            <arcHeightFactor>0</arcHeightFactor>
+            <soundExplode>Explosion_Rocket</soundExplode>
+			<flyOverhead>false</flyOverhead>
+			<armorPenetrationBase>2.0</armorPenetrationBase>
+        </projectile>
+		
+	<comps>
+      <li Class="SRA.CompProperties_PlaySoundOnSpawn">
+        <sound>KT_AX_CANNON</sound>
+      </li>
+    </comps>
+  </ThingDef>	
+  
+  <ThingDef>
+        <defName>KT_Bullet_FlyOver_AX_rocket</defName>
+        <label>KT_Bullet_FlyOver_AX_rocket</label>
+        <thingClass>SRA.Projectile_MultiExplosive</thingClass>
+        <category>Projectile</category>
+        <tickerType>Normal</tickerType>
+        <altitudeLayer>Projectile</altitudeLayer>
+        <graphicData>
+            <texPath>Things/Projectile/Bullet_doommissile</texPath> <!-- 子弹贴图路径 -->
+            <graphicClass>Graphic_Single</graphicClass> <!-- 使用单一图形 -->
+      		<drawSize>(2)</drawSize>
+        </graphicData>
+        <projectile>
+            <damageDef>EMP</damageDef>
+			<flyOverhead>true</flyOverhead>
+            <explosionRadius>4</explosionRadius>
+            <speed>180</speed>
+            <damageAmountBase>200</damageAmountBase>
+            <arcHeightFactor>0</arcHeightFactor>
+            <soundExplode>Explosion_Rocket</soundExplode>
+			<armorPenetrationBase>2.5</armorPenetrationBase>
+        </projectile>
+		<modExtensions>
+		  <li Class="SRA.TailBulletDef">
+       		 <tailFleckDef>KT_Fleck_Smoke_Tail</tailFleckDef>
+			 <fleckDelayTicks>5</fleckDelayTicks><!-- 出膛后多久出现轨迹 -->
+			 <!--FloatRangefleckAngle>90</FloatRangefleckAngle -->
+     	  </li>
+        <li Class="SRA.MultiExplosiveExtension">
+        <multiexplosions>
+		  <li>
+			<radius>4</radius>
+			<damageDef>EMP</damageDef>
+			<damageAmount>60</damageAmount>
+			<armorPenetration>8</armorPenetration>
+			<explosionSound>Explosion_EMP</explosionSound>
+			<explosionDamageFalloff>true</explosionDamageFalloff>
+			<onlyAntiHostile>true</onlyAntiHostile>
+		  </li>
+          <li>
+            <radius>4</radius>
+            <damageDef>KTBLUEBomb</damageDef>
+            <damageAmount>200</damageAmount>
+            <armorPenetration>1.5</armorPenetration>
+            <explosionSound>Explosion_Rocket</explosionSound>
+            <explosionDamageFalloff>true</explosionDamageFalloff><!-- 默认true -->
+            <onlyAntiHostile>false</onlyAntiHostile> <!-- 智能弹药：这个爆炸只伤害敌对目标，默认false -->
+            <!-- 现阶段就支持这么多参数 -->
+          </li>
+        </multiexplosions>
+      </li>
+    </modExtensions>
+  </ThingDef>	
+  
+  
+    <ThingDef Parent="EtherealThingBase">
+    <defName>KT_FlyOver_Supportship</defName>
+    <label>KT_FlyOver_Supportship</label>
+    <thingClass>SRA.FlyOver</thingClass>
+    <tickerType>Normal</tickerType>
+    <drawerType>RealtimeOnly</drawerType>
+    <graphicData>
+      <!-- <texPath>ArachnaeSwarm/Weapon/ARA_Weapon_Empty</texPath> -->
+      <texPath>Things/FlyOverThing/KT_Supportship</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+      <drawSize>(64,64)</drawSize>
+      <color>(255,255,255,255)</color>
+    </graphicData>
+    <castEdgeShadows>false</castEdgeShadows>
+    <staticSunShadowHeight>0</staticSunShadowHeight>
+    <skyfaller>
+      <shadow>Things/FlyOverThing/KT_EMPTY</shadow>
+      <shadowSize>(0, 0)</shadowSize>
+      <motesPerCell>0</motesPerCell>
+      <floatingSound></floatingSound>
+      <impactSound></impactSound>
+    </skyfaller>
+    <modExtensions>
+      <li Class="SRA.FlyOverShadowExtension">
+        <customShadowPath>Things/FlyOverThing/KT_EMPTY</customShadowPath>
+        <useCustomShadow>true</useCustomShadow>
+        <shadowIntensity>0.8</shadowIntensity>
+        <minShadowAlpha>0</minShadowAlpha>
+        <maxShadowAlpha>0</maxShadowAlpha>
+        <minShadowScale>0</minShadowScale>
+        <maxShadowScale>0</maxShadowScale>
+      </li>
+    </modExtensions>
+    <seeThroughFog>true</seeThroughFog>
+    <useHitPoints>false</useHitPoints>
+    <selectable>false</selectable>
+    <alwaysHaulable>false</alwaysHaulable>
+    <altitudeLayer>MetaOverlays</altitudeLayer>
+    <comps><!-- 扫射 -->
+      <li Class="SRA.CompProperties_GroundStrafing">
+        <projectileDef>KT_Bullet_FlyOver_Supportship</projectileDef>
+        <range>120</range>
+    
+        <!-- 横向偏移配置（左右） -->
+        <lateralOffsetDistance>25</lateralOffsetDistance>
+        <lateralInitialOffsetAngle>0</lateralInitialOffsetAngle>
+        <lateralMaxOffsetAngle>0</lateralMaxOffsetAngle>
+        <lateralAngleIncrement>0</lateralAngleIncrement>
+        <lateralOffsetMode>Alternating</lateralOffsetMode>
+        
+        <!-- 纵向偏移配置（前后） -->
+        <longitudinalInitialOffset>25</longitudinalInitialOffset>
+        <longitudinalMinOffset>5</longitudinalMinOffset>
+        <longitudinalMaxOffset>0</longitudinalMaxOffset>
+        <longitudinalOffsetMode>Fixed</longitudinalOffsetMode>
+
+        <!-- 视觉效果 -->
+        <spawnOffsetEffect>true</spawnOffsetEffect>
+        <offsetEffectDef>Mote_SparkSimple</offsetEffectDef>
+      </li>
+	  <!-- 攻击范围内目标 -->
+      <li Class="SRA.CompProperties_SectorSurveillance">
+        <projectileDef>KT_Bullet_FlyOver_Supportship</projectileDef>
+        <sectorAngle>360</sectorAngle>      <!-- 扇形角度 -->
+        <sectorRange>110</sectorRange>      <!-- 射程 -->
+        <shotCount>4</shotCount>           <!-- 发射次数 -->
+        <shotInterval>2</shotInterval>   <!-- 发射间隔 -->
+        <maxProjectiles>60</maxProjectiles><!-- 最大射弹数量限制-->
+    
+        <!-- 横向偏移配置（左右） -->
+        <lateralOffsetDistance>25</lateralOffsetDistance>
+        <lateralInitialOffsetAngle>0</lateralInitialOffsetAngle>
+        <lateralMaxOffsetAngle>0</lateralMaxOffsetAngle>
+        <lateralAngleIncrement>0</lateralAngleIncrement>
+        <lateralOffsetMode>Alternating</lateralOffsetMode>
+        
+        <!-- 纵向偏移配置（前后） -->
+        <longitudinalInitialOffset>25</longitudinalInitialOffset>
+        <longitudinalMinOffset>5</longitudinalMinOffset>
+        <longitudinalMaxOffset>0</longitudinalMaxOffset>
+        <longitudinalOffsetMode>Fixed</longitudinalOffsetMode>
+
+        <!-- 视觉效果 -->
+        <spawnOffsetEffect>true</spawnOffsetEffect>
+        <offsetEffectDef>Mote_SparkSimple</offsetEffectDef>
+      </li>
+	  
+	  <!-- 攻击范围内目标 -->
+      <li Class="SRA.CompProperties_SectorSurveillance">
+        <projectileDef>KT_Bullet_FlyOver_AX_rocket</projectileDef>
+        <sectorAngle>360</sectorAngle>      <!-- 扇形角度 -->
+        <sectorRange>180</sectorRange>      <!-- 射程 -->
+        <shotCount>2</shotCount>           <!-- 发射次数 -->
+        <shotInterval>10</shotInterval>   <!-- 发射间隔 -->
+        <maxProjectiles>12</maxProjectiles><!-- 最大射弹数量限制-->
+    
+        <!-- 横向偏移配置（左右） -->
+        <lateralOffsetDistance>25</lateralOffsetDistance>
+        <lateralInitialOffsetAngle>0</lateralInitialOffsetAngle>
+        <lateralMaxOffsetAngle>0</lateralMaxOffsetAngle>
+        <lateralAngleIncrement>0</lateralAngleIncrement>
+        <lateralOffsetMode>Alternating</lateralOffsetMode>
+        
+        <!-- 纵向偏移配置（前后） -->
+        <longitudinalInitialOffset>25</longitudinalInitialOffset>
+        <longitudinalMinOffset>5</longitudinalMinOffset>
+        <longitudinalMaxOffset>0</longitudinalMaxOffset>
+        <longitudinalOffsetMode>Fixed</longitudinalOffsetMode>
+
+        <!-- 视觉效果 -->
+        <spawnOffsetEffect>true</spawnOffsetEffect>
+        <offsetEffectDef>Mote_SparkSimple</offsetEffectDef>
+      </li>
+	  
+	  <!-- 攻击范围内目标 -->
+      <li Class="SRA.CompProperties_SectorSurveillance">
+        <projectileDef>KT_Bullet_FlyOver_AX</projectileDef>
+        <sectorAngle>360</sectorAngle>      <!-- 扇形角度 -->
+        <sectorRange>180</sectorRange>      <!-- 射程 -->
+        <shotCount>1</shotCount>           <!-- 发射次数 -->
+        <shotInterval>0.5</shotInterval>   <!-- 发射间隔 -->
+        <maxProjectiles>120</maxProjectiles><!-- 最大射弹数量限制-->
+    
+        <!-- 横向偏移配置（左右） -->
+        <lateralOffsetDistance>20</lateralOffsetDistance>
+        <lateralInitialOffsetAngle>0</lateralInitialOffsetAngle>
+        <lateralMaxOffsetAngle>0</lateralMaxOffsetAngle>
+        <lateralAngleIncrement>0</lateralAngleIncrement>
+        <lateralOffsetMode>Alternating</lateralOffsetMode>
+        
+        <!-- 纵向偏移配置（前后） -->
+        <longitudinalInitialOffset>45</longitudinalInitialOffset>
+        <longitudinalMinOffset>5</longitudinalMinOffset>
+        <longitudinalMaxOffset>0</longitudinalMaxOffset>
+        <longitudinalOffsetMode>Fixed</longitudinalOffsetMode>
+
+        <!-- 视觉效果 -->
+        <spawnOffsetEffect>true</spawnOffsetEffect>
+        <offsetEffectDef>Mote_SparkSimple</offsetEffectDef>
+      </li>
+    </comps>
+  </ThingDef>
+  
+  <ThingDef>
+        <defName>KT_Bullet_FlyOver_Supportship</defName>
+        <label>KT_Bullet_FlyOver_Supportship</label>
+        <thingClass>Projectile_Explosive</thingClass>
+        <category>Projectile</category>
+        <tickerType>Normal</tickerType>
+        <altitudeLayer>Projectile</altitudeLayer>
+        <graphicData>
+            <texPath>Things/Projectile/Bullet_381MM</texPath> <!-- 子弹贴图路径 -->
+            <graphicClass>Graphic_Single</graphicClass> <!-- 使用单一图形 -->
+			<shaderType>MoteGlow</shaderType>
+      		<drawSize>(3.5)</drawSize>
+        </graphicData>
+        <projectile>
+            <damageDef>Bomb</damageDef>
+            <explosionRadius>6</explosionRadius>
+            <speed>180</speed>
+            <damageAmountBase>250</damageAmountBase>
+            <arcHeightFactor>0</arcHeightFactor>
+            <soundExplode>Explosion_Rocket</soundExplode>
+			<flyOverhead>false</flyOverhead>
+			<armorPenetrationBase>3</armorPenetrationBase>
+        </projectile>
+  </ThingDef>
+  
+  <ThingDef Parent="EtherealThingBase">
+    <defName>KT_FlyOver_AX_5000KG</defName>
+    <label>KT_FlyOver_AX_5000KG</label>
+    <thingClass>SRA.FlyOver</thingClass>
+    <tickerType>Normal</tickerType>
+    <drawerType>RealtimeOnly</drawerType>
+    <graphicData>
+      <!-- <texPath>ArachnaeSwarm/Weapon/ARA_Weapon_Empty</texPath> -->
+      <texPath>Things/FlyOverThing/KT_AX</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+      <drawSize>(12,12)</drawSize>
+      <color>(255,255,255,255)</color>
+    </graphicData>
+    <castEdgeShadows>false</castEdgeShadows>
+    <staticSunShadowHeight>0</staticSunShadowHeight>
+    <skyfaller>
+      <shadow>Things/FlyOverThing/KT_EMPTY</shadow>
+      <shadowSize>(0, 0)</shadowSize>
+      <motesPerCell>0</motesPerCell>
+      <floatingSound></floatingSound>
+      <impactSound></impactSound>
+    </skyfaller>
+    <modExtensions>
+      <li Class="SRA.FlyOverShadowExtension">
+        <customShadowPath>Things/FlyOverThing/KT_EMPTY</customShadowPath>
+        <useCustomShadow>true</useCustomShadow>
+        <shadowIntensity>0.8</shadowIntensity>
+        <minShadowAlpha>0</minShadowAlpha>
+        <maxShadowAlpha>0</maxShadowAlpha>
+        <minShadowScale>0</minShadowScale>
+        <maxShadowScale>0</maxShadowScale>
+      </li>
+    </modExtensions>
+    <seeThroughFog>true</seeThroughFog>
+    <useHitPoints>false</useHitPoints>
+    <selectable>false</selectable>
+    <alwaysHaulable>false</alwaysHaulable>
+    <altitudeLayer>MetaOverlays</altitudeLayer>
+    <comps>
+	  <!-- 入场音效 -->
+      <li Class="SRA.CompProperties_PlaySoundOnSpawn">
+        <sound>KT_flyby_II</sound>
+      </li>
+	<!-- 扫射 -->
+      <li Class="SRA.CompProperties_GroundStrafing">
+        <projectileDef>KT_Bullet_FlyOver_AX_5000KG</projectileDef>
+        <range>64</range>
+    
+        <!-- 横向偏移配置（左右） -->
+        <lateralOffsetDistance>0</lateralOffsetDistance>
+        <lateralInitialOffsetAngle>0</lateralInitialOffsetAngle>
+        <lateralMaxOffsetAngle>0</lateralMaxOffsetAngle>
+        <lateralAngleIncrement>0</lateralAngleIncrement>
+        <lateralOffsetMode>Alternating</lateralOffsetMode>
+        
+        <!-- 纵向偏移配置（前后） -->
+        <longitudinalInitialOffset>15</longitudinalInitialOffset>
+        <longitudinalMinOffset>0</longitudinalMinOffset>
+        <longitudinalMaxOffset>0</longitudinalMaxOffset>
+        <longitudinalOffsetMode>Fixed</longitudinalOffsetMode>
+
+        <!-- 视觉效果 -->
+        <spawnOffsetEffect>true</spawnOffsetEffect>
+        <offsetEffectDef>Mote_SparkSimple</offsetEffectDef>
+      </li>
+    </comps>
+  </ThingDef>
+  
+  <ThingDef>
+        <defName>KT_Bullet_FlyOver_AX_5000KG</defName>
+        <label>KT_Bullet_FlyOver_AX_5000KG</label>
+        <thingClass>SRA.Projectile_MultiExplosive</thingClass>
+        <category>Projectile</category>
+        <tickerType>Normal</tickerType>
+        <altitudeLayer>Projectile</altitudeLayer>
+        <graphicData>
+            <texPath>Things/Projectile/Bullet_doombomb</texPath> <!-- 子弹贴图路径 -->
+            <graphicClass>Graphic_Single</graphicClass> <!-- 使用单一图形 -->
+      		<drawSize>(4)</drawSize>
+        </graphicData>
+        <projectile>
+            <damageDef>EMP</damageDef>
+			<flyOverhead>true</flyOverhead>
+            <explosionRadius>25</explosionRadius>
+            <speed>90</speed>
+            <damageAmountBase>8000</damageAmountBase>
+            <arcHeightFactor>0</arcHeightFactor>
+            <soundExplode>Explosion_Rocket</soundExplode>
+			<armorPenetrationBase>2.5</armorPenetrationBase>
+        </projectile>
+		<modExtensions>
+		  <li Class="SRA.TailBulletDef">
+       		 <tailFleckDef>KT_Fleck_Smoke_Tail</tailFleckDef>
+			 <fleckDelayTicks>10</fleckDelayTicks><!-- 出膛后多久出现轨迹 -->
+			 <!--FloatRangefleckAngle>90</FloatRangefleckAngle -->
+     	  </li>
+        <li Class="SRA.MultiExplosiveExtension">
+        <multiexplosions>
+		  <li>
+			<radius>20</radius>
+			<damageDef>EMP</damageDef>
+			<damageAmount>800</damageAmount>
+			<armorPenetration>8</armorPenetration>
+			<explosionSound>Explosion_EMP</explosionSound>
+			<explosionDamageFalloff>true</explosionDamageFalloff>
+			<onlyAntiHostile>true</onlyAntiHostile>
+		  </li>
+          <li>
+            <radius>25</radius>
+            <damageDef>KTBLUEBomb</damageDef>
+            <damageAmount>8000</damageAmount>
+            <armorPenetration>8</armorPenetration>
+            <explosionSound>KT_AX5000KG</explosionSound>
+            <explosionDamageFalloff>true</explosionDamageFalloff><!-- 默认true -->
+            <onlyAntiHostile>false</onlyAntiHostile> <!-- 智能弹药：这个爆炸只伤害敌对目标，默认false -->
+            <!-- 现阶段就支持这么多参数 -->
+          </li>
+        </multiexplosions>
+      </li>
+    </modExtensions>
+  </ThingDef>
+</Defs>

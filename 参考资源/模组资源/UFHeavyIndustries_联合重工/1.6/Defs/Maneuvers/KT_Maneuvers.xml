@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ToolCapacityDef>
+    <defName>KT_Melee_AOE</defName>
+    <label>Cut</label>
+  </ToolCapacityDef>
+  
+  <ManeuverDef>
+    <defName>KT_Melee_AOE</defName>
+    <requiredCapacity>KT_Melee_AOE</requiredCapacity>
+    <verb>
+      <verbClass>SRA.Verb_MeleeAttackDamage_AOE</verbClass>
+      <meleeDamageDef>Cut</meleeDamageDef>
+    </verb>
+    <logEntryDef>MeleeAttack</logEntryDef>
+    <combatLogRulesHit>Maneuver_Slash_MeleeHit</combatLogRulesHit>
+    <combatLogRulesDeflect>Maneuver_Slash_MeleeDeflect</combatLogRulesDeflect>
+    <combatLogRulesMiss>Maneuver_Slash_MeleeMiss</combatLogRulesMiss>
+    <combatLogRulesDodge>Maneuver_Slash_MeleeDodge</combatLogRulesDodge>
+		<modExtensions>
+      <li Class="SRA.MeleeAttackAOE_Extension">
+        <angle>240</angle>
+        <radius>1.5</radius>
+        <maxHitTarget>6</maxHitTarget>
+      </li>
+			<li Class="SRA.Effecter_Extension">
+        <effcterDef>KT_SlashArc</effcterDef>
+      </li>
+    </modExtensions>
+  </ManeuverDef>
+
+  <ToolCapacityDef>
+    <defName>KT_Melee_AOE_pink</defName>
+    <label>Cut</label>
+  </ToolCapacityDef>
+  <ManeuverDef>
+    <defName>KT_Melee_AOE_pink</defName>
+    <requiredCapacity>KT_Melee_AOE_pink</requiredCapacity>
+    <verb>
+      <verbClass>SRA.Verb_MeleeAttackDamage_AOE</verbClass>
+      <meleeDamageDef>Cut</meleeDamageDef>
+    </verb>
+    <logEntryDef>MeleeAttack</logEntryDef>
+    <combatLogRulesHit>Maneuver_Slash_MeleeHit</combatLogRulesHit>
+    <combatLogRulesDeflect>Maneuver_Slash_MeleeDeflect</combatLogRulesDeflect>
+    <combatLogRulesMiss>Maneuver_Slash_MeleeMiss</combatLogRulesMiss>
+    <combatLogRulesDodge>Maneuver_Slash_MeleeDodge</combatLogRulesDodge>
+		<modExtensions>
+      <li Class="SRA.MeleeAttackAOE_Extension">
+        <angle>180</angle>
+        <radius>1.5</radius>
+        <maxHitTarget>6</maxHitTarget>
+      </li>
+			<li Class="SRA.Effecter_Extension">
+        <effcterDef>KT_SlashArc_pink</effcterDef>
+      </li>
+    </modExtensions>
+  </ManeuverDef>
+  
+  <ToolCapacityDef>
+    <defName>KT_Melee_AOE_II</defName>
+    <label>Cut</label>
+  </ToolCapacityDef>
+  <ManeuverDef>
+    <defName>KT_Melee_AOE_II</defName>
+    <requiredCapacity>KT_Melee_AOE_II</requiredCapacity>
+    <verb>
+      <verbClass>SRA.Verb_MeleeAttackDamage_AOE</verbClass>
+      <meleeDamageDef>Cut</meleeDamageDef>
+    </verb>
+    <logEntryDef>MeleeAttack</logEntryDef>
+    <combatLogRulesHit>Maneuver_Slash_MeleeHit</combatLogRulesHit>
+    <combatLogRulesDeflect>Maneuver_Slash_MeleeDeflect</combatLogRulesDeflect>
+    <combatLogRulesMiss>Maneuver_Slash_MeleeMiss</combatLogRulesMiss>
+    <combatLogRulesDodge>Maneuver_Slash_MeleeDodge</combatLogRulesDodge>
+		<modExtensions>
+      <li Class="SRA.MeleeAttackAOE_Extension">
+        <angle>120</angle>
+        <radius>2.5</radius>
+        <maxHitTarget>8</maxHitTarget>
+      </li>
+			<li Class="SRA.Effecter_Extension">
+        <effcterDef>KT_SlashArc_Big</effcterDef>
+      </li>
+    </modExtensions>
+  </ManeuverDef>
+  
+  <ToolCapacityDef>
+    <defName>KT_Melee_hammer_AOE</defName>
+    <label>Blunt</label>
+  </ToolCapacityDef>
+  
+  <ManeuverDef>
+    <defName>KT_Melee_hammer_AOE</defName>
+    <requiredCapacity>KT_Melee_hammer_AOE</requiredCapacity>
+    <verb>
+      <verbClass>SRA.Verb_MeleeAttackDamage_AOE</verbClass>
+      <meleeDamageDef>Blunt</meleeDamageDef>
+    </verb>
+    <logEntryDef>MeleeAttack</logEntryDef>
+    <combatLogRulesHit>Maneuver_Slash_MeleeHit</combatLogRulesHit>
+    <combatLogRulesDeflect>Maneuver_Slash_MeleeDeflect</combatLogRulesDeflect>
+    <combatLogRulesMiss>Maneuver_Slash_MeleeMiss</combatLogRulesMiss>
+    <combatLogRulesDodge>Maneuver_Slash_MeleeDodge</combatLogRulesDodge>
+		<modExtensions>
+      <li Class="SRA.MeleeAttackAOE_Extension">
+        <angle>240</angle>
+        <radius>2.0</radius>
+        <maxHitTarget>6</maxHitTarget>
+      </li>
+    </modExtensions>
+  </ManeuverDef>
+  
+  <ToolCapacityDef>
+    <defName>KT_Melee_AOE_yellow</defName>
+    <label>Cut</label>
+  </ToolCapacityDef>
+  <ManeuverDef>
+    <defName>KT_Melee_AOE_yellow</defName>
+    <requiredCapacity>KT_Melee_AOE_yellow</requiredCapacity>
+    <verb>
+      <verbClass>SRA.Verb_MeleeAttackDamage_AOE</verbClass>
+      <meleeDamageDef>Cut</meleeDamageDef>
+    </verb>
+    <logEntryDef>MeleeAttack</logEntryDef>
+    <combatLogRulesHit>Maneuver_Slash_MeleeHit</combatLogRulesHit>
+    <combatLogRulesDeflect>Maneuver_Slash_MeleeDeflect</combatLogRulesDeflect>
+    <combatLogRulesMiss>Maneuver_Slash_MeleeMiss</combatLogRulesMiss>
+    <combatLogRulesDodge>Maneuver_Slash_MeleeDodge</combatLogRulesDodge>
+		<modExtensions>
+      <li Class="SRA.MeleeAttackAOE_Extension">
+        <angle>180</angle>
+        <radius>2</radius>
+        <maxHitTarget>6</maxHitTarget>
+      </li>
+			<li Class="SRA.Effecter_Extension">
+        <effcterDef>KT_SlashArc_yellow</effcterDef>
+      </li>
+    </modExtensions>
+  </ManeuverDef>
+
+</Defs>

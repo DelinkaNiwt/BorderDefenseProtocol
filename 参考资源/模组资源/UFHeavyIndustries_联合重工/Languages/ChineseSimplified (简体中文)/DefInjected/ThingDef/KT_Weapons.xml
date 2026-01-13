@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData> 
+  <KT_Pistol.label>「和平缔造者」P-3激光手枪</KT_Pistol.label>
+  <KT_Pistol.description>史册记载，该类型武器是联合舰队旗下仆从公约国安保体系下最低一级武器，此型号为人形生物设计，反应速度快，可以快速三连发射击。考虑到存在不法分子盗窃武器的可能，威力被严格限制，确保无法对联合公民的头发丝构成破坏，保证她们在仆从国旅游时的好心情。</KT_Pistol.description>
+  <Bullet_KT_Pistol.label>「和平缔造者」P-3激光手枪</Bullet_KT_Pistol.label>
+  
+  <KT_SMG.label>「极光」SMG-99激光冲锋枪</KT_SMG.label>
+  <KT_SMG.description>拥有极高射速的激光冲锋枪，体积小巧，反应速度快，因此常被用于仆从公约国舰船船舱内使用。考虑到存在不法分子盗窃武器的可能，威力被严格限制，确保无法对联合公民的头发丝构成破坏，保证她们在仆从国旅游时的好心情。</KT_SMG.description>
+  <Bullet_KT_SMG.label>「极光」SMG-99激光冲锋枪</Bullet_KT_SMG.label>
+  
+  <KT_HSMG.label>「反转者」09P重型激光冲锋枪</KT_HSMG.label>
+  <KT_HSMG.description>曾经有一位前往公约国旅游的联合舰娘在游玩时，由于不熟悉当地武器结构将武器拿反拍照留念的照片在公约国互联网爆火，当事人知晓后非常生气并重新设计了该武器，并要求公约国必须抛弃原有的版本，将该型号作为它们的制式武器版本使用。</KT_HSMG.description>
+  <Bullet_KT_HSMG.label>「反转者」09P重型激光冲锋枪</Bullet_KT_HSMG.label>
+  
+  <KT_AR.label>「解放者」AR-210激光步枪</KT_AR.label>
+  <KT_AR.description>公约国装备数量最多的激光步枪，更大的体积换来了更好的射击精度。</KT_AR.description>
+  <Bullet_KT_AR.label>「解放者」AR-210激光步枪</Bullet_KT_AR.label>
+  
+  <KT_LMG.label>「盟友」MG-12激光轻机枪</KT_LMG.label>
+  <KT_LMG.description>火力强大的激光轻机枪，但会对使用者造成一定的移速影响。</KT_LMG.description>
+  <Bullet_KT_LMG.label>「盟友」MG-12激光轻机枪</Bullet_KT_LMG.label>
+  
+  <KT_HMG.label>「执行者」MG-85激光重机枪</KT_HMG.label>
+  <KT_HMG.description>使用重型激光枪管和超级电容的重型激光武器，武器使用者必须严格筛选且需要在武器中安装定位器确保不会丢失，因为该武器已经可以在联合舰娘的衣服上留下污渍，难以清洗。</KT_HMG.description>
+  <Bullet_KT_HMG.label>「执行者」MG-85激光重机枪</Bullet_KT_HMG.label>
+ 
+  <KT_Sniper.label>「红点」R-67重型激光狙击枪</KT_Sniper.label>
+  <KT_Sniper.description>与以往强调隐蔽的狙击枪不同，这款重型激光狙击枪在射击后会留下非常明显的痕迹，并附带猛烈的爆炸，可以给予敌人强大的压迫力，（虽然更多原因是联合舰队不希望仆从国拥有太多精度高同时又隐蔽的武器）。</KT_Sniper.description>
+  <Bullet_KT_Sniper.label>「红点」R-67重型激光狙击枪</Bullet_KT_Sniper.label>
+  
+  <KT_HEAVYLASERCANNON.label>「龙焰」LC-9重型激光炮</KT_HEAVYLASERCANNON.label>
+  <KT_HEAVYLASERCANNON.description>威力强劲的肩扛式激光炮，命中后产生巨大爆炸，射手需要自行控制射击距离，小心误伤。</KT_HEAVYLASERCANNON.description>
+  <Bullet_KT_HEAVYLASERCANNON.label>「龙焰」LC-9重型激光炮</Bullet_KT_HEAVYLASERCANNON.label>
+  
+  <KT_Plasma_Pistol.label>「焦痕」P-35等离子手枪</KT_Plasma_Pistol.label>
+  <KT_Plasma_Pistol.description>小型等离子手枪，精度有限但可以造成爆炸并附带小范围EMP，内置了一个非常忠诚的AI，使得该武器无过热风险。</KT_Plasma_Pistol.description>
+  <Bullet_KT_Plasma_Pistol.label>「焦痕」P-35等离子手枪</Bullet_KT_Plasma_Pistol.label>
+
+  <KT_Sword.label>「和平」S-2长剑</KT_Sword.label>
+  <KT_Sword.description>公约国加入联合舰队后，会将大部分原有的武器熔炼重铸为一把把长剑，作为仪式武器分发给军队留作纪念，该武器攻击会附带EMP效果。</KT_Sword.description>
+  
+  <KT_Energy_sword.label>「典范」ES-15等离子腕剑</KT_Energy_sword.label>
+  <KT_Energy_sword.description>某公约国使用的等离子近战武器，攻击附带EMP，但其种族手部结构应该与人类有较大不同，人类使用起来不是很顺手，而且据说因为误触导致该国士兵四肢残疾率提升了10%，好在义肢销量增加了30%弥补了损失。</KT_Energy_sword.description>
+  
+  <KT_SPEAR.label>&lt;color=#FFAA00&gt;&lt;i&gt;「献忠」SPEAR-9矛枪&lt;/i&gt;&lt;/color&gt;</KT_SPEAR.label>
+  <KT_SPEAR.description>一种融合了长矛与激光枪的特殊武器，无论是远程狙击还是近战都游刃有余，拿在手上能感受到祂的伟力，使用者将跑得更快。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;传说这种武器，是由我们那位超维存在仿照祂在另一宇宙游历时所见的一种武器所设计的。祂只会将这份武器图纸赐予最为忠诚的殖民者。&lt;/i&gt;&lt;/color&gt;</KT_SPEAR.description>
+  <Bullet_KT_SPEAR.label>「献忠」SPEAR-9矛枪</Bullet_KT_SPEAR.label>
+  
+  <KTLaserArraygun.label>&lt;color=#FFAA00&gt;&lt;i&gt;「暴徒」LAS-235激光阵列枪&lt;/i&gt;&lt;/color&gt;</KTLaserArraygun.label>
+  <KTLaserArraygun.description>该武器的原理其实是并排放置了数十个激光击发阵列同时开火，火力强大但有效射程很短，一旦超出有效距离精准度会断崖式下降。由于使用环境均为极近距离作战，为此枪口处特别安装了小型等离子刺刀。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;该武器遭受非法改装，威力远超原始型号，同时使用者会受到影响变的不可阻挡。&lt;/i&gt;&lt;/color&gt;</KTLaserArraygun.description>
+  <Bullet_KTLaserArraygun.label>「暴徒」LAS-235激光阵列枪</Bullet_KTLaserArraygun.label>
+  
+  <KT_Plasmagun.label>&lt;color=#FFAA00&gt;&lt;i&gt;「焦土」PLAS-6等离子步枪&lt;/i&gt;&lt;/color&gt;</KT_Plasmagun.label>
+  <KT_Plasmagun.description>可以连续发射等离子弹药的步枪，且保持了EMP效果，但威力略有下降，面对集群敌人时该武器十分有效。</KT_Plasmagun.description>
+  <Bullet_KT_Plasmagun.label>「焦土」PLAS-6等离子步枪</Bullet_KT_Plasmagun.label>
+  
+  <KT_WSGW.label>&lt;color=#FFAA00&gt;&lt;i&gt;「凯特猫」127MM手持舰炮&lt;/i&gt;&lt;/color&gt;</KT_WSGW.label>
+  <KT_WSGW.description>这款重量夸张，造型怪异的武器显然不是为我们这种体型的生物设计的，但该武器据说是某款早在联合战争（我们其实也并不知道这场战争是什么）之前就已经退役的舰娘手持火炮，炮弹压缩技术可以使其发射与其体积完全不符的巨型炮弹。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;\n\n&lt;color=#FFDF4B&gt;&lt;i&gt;这件武器对于我们常人来说拿着就已经十分勉强了，也许超维存在想看我们笨拙的摔倒才允许我们使用吧。&lt;/i&gt;&lt;/color&gt;</KT_WSGW.description>
+  <Bullet_KT_WSGW.label>「凯特猫」152MM手持舰炮</Bullet_KT_WSGW.label>
+  
+  
+  <KT_Powerarmor.label>「枪骑兵」PA-22重型动力装甲</KT_Powerarmor.label>
+  <KT_Powerarmor.description>公约国士兵标准动力装甲，拥有良好的三防以及生命维持系统，该型号为类人生物设计。这款动力装甲可以显著提高使用者的奔跑速度，手部的稳定补偿器也可以显著提升使用者的武器精准度。\n同时我们的超维存在特别照顾本星球殖民者，为此动力甲加装了一门内置8发通用弹药的肩炮，使用了舰娘舰装同款炮弹压缩技术，使其可以发射120mm高爆弹或EMP电浆炮弹</KT_Powerarmor.description>
+  
+  <KT_helmet.label>「枪骑兵」PA-22重型动力头盔</KT_helmet.label>
+  <KT_helmet.description>PA-22动力装甲的标准制式头盔，集成了生命维持系统，辅助瞄准系统，可以有效减少射击瞄准时间，但头盔体积庞大，被士兵戏称为马桶头。</KT_helmet.description>
+  
+  <KT_helmet_shark_teeth.label>「枪骑兵」PA-22重型动力头盔(鲨鱼牙)</KT_helmet_shark_teeth.label>
+  <KT_helmet_shark_teeth.description>PA-22动力头盔的特殊涂装版，鲨鱼牙使穿戴者看起来更具攻击性。</KT_helmet_shark_teeth.description>
+  
+  <Proj_120mm.label>120MM高爆弹</Proj_120mm.label>
+  <Proj_plasmabullet.label>EMP电浆炮</Proj_plasmabullet.label>
+  
+  <KT_DoomLauncher.label>「最后警告」DL-1湮灭发射器</KT_DoomLauncher.label>
+  <KT_DoomLauncher.description>使用了与湮灭炮同样的技术，在进行了一定轻量化减配后，造就了这款疯狂的武器。发射后需要超长时间装填，而且杀伤范围极大，有可能误伤发射者，因此每一次发射都需要谨慎考虑。\n\n&lt;color=#FFDF4B&gt;&lt;i&gt;该武器的应该来自某个不太在意士兵性命的公约国。&lt;/i&gt;&lt;/color&gt;</KT_DoomLauncher.description>
+  <Bullet_KT_DoomLauncher.label>「最后警告」DL-1湮灭发射器</Bullet_KT_DoomLauncher.label>
+  
+  
+  <KT_Boltgun.label>「天鹰」BR-3爆弹步枪</KT_Boltgun.label>
+  <KT_Boltgun.description>使用火箭推进式弹药的重型实弹步枪，超大的扳机指环和巨大的重量表明这是一款为穿着动力装甲的人员配备的武器。</KT_Boltgun.description>
+  <Bullet_KT_Boltgun.label>「天鹰」BR-3爆弹步枪</Bullet_KT_Boltgun.label>
+  
+  <KT_BoltgunP.label>&lt;color=#FFAA00&gt;&lt;i&gt;「金座」BR-5精工爆弹步枪&lt;/i&gt;&lt;/color&gt;</KT_BoltgunP.label>
+  <KT_BoltgunP.description>加装了装饰用瞄准镜和长枪管的精工型号爆弹枪，弹药涂满了海豹油使得威力显著增强。虽然联合对枪械涂装有着严格的限制，但使用者还是找到了漏洞在枪上打上了一个至善印章来表达自己的忠诚与信仰。\n\n&lt;color=#FFDF4B&gt;&lt;i&gt;血祭T督，颅献善座！&lt;/i&gt;&lt;/color&gt;</KT_BoltgunP.description>
+  <Bullet_KT_BoltgunP.label>「金座」BR-5精工爆弹步枪</Bullet_KT_BoltgunP.label>
+  
+  <KT_Rumbler.label>&lt;color=#FFAA00&gt;&lt;i&gt;「雷鸣者」M-26迫击炮&lt;/i&gt;&lt;/color&gt;</KT_Rumbler.label>
+  <KT_Rumbler.description>这款单兵迫击炮已经是轻量化的极限，使用奇特的弹夹供弹，一次可以发射三枚80mm迫击炮炮弹进行毁灭性的轰炸，且爆炸还会释放大量有毒物气体。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;毒气附带&lt;/i&gt;&lt;/color&gt;\n\n&lt;color=#FFDF4B&gt;&lt;i&gt;传说开炮瞬间抱住炮管猛甩，能赋予炮弹额外的作用力，从而实现更广阔的火力覆盖。&lt;/i&gt;&lt;/color&gt;</KT_Rumbler.description>
+  <Bullet_KT_Rumbler.label>「雷鸣者」M-26迫击炮</Bullet_KT_Rumbler.label>
+  
+  <KT_Tranquilizer.label>「努凯里亚」T-1麻醉步枪</KT_Tranquilizer.label>
+  <KT_Tranquilizer.description>该武器一次性可以射出数十枚麻醉针，快速麻翻目标且尽量不伤及性命（只要目标不迎面倒下导致扎在身上的针筒造成二次伤害）。理论上能麻翻大多数会动的东西，甚至是机械体。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;传说生产该枪械的公约国曾经麻翻了另一名舰娘公约国的深海舰娘士兵，属实不可思议。&lt;/i&gt;&lt;/color&gt;</KT_Tranquilizer.description>
+  <Bullet_KT_Tranquilizer.label>「努凯里亚」T-1麻醉步枪</Bullet_KT_Tranquilizer.label>
+  <BulletTranquilizer.label>麻醉标</BulletTranquilizer.label>
+  
+  
+  <KT_Special_SMG.label>&lt;color=#ffe400>&lt;i>「圆环使者」摄金冲锋枪&lt;/i>&lt;/color></KT_Special_SMG.label>
+  <KT_Special_SMG.description>一把为造型独特的定制冲锋枪，使用者身体结构应该与人型生物有较大不同，因此使用起来略微困难。该武器使用极为特殊的子弹，填充了一种名为摄魂金晶（以下简称摄金）的特殊水晶，命中敌人后碎裂的水晶会削弱敌人，使其更容易受到伤害。\n\n&lt;color=#ffe400>&lt;i>摄金弹在泰坦的合金外壳上迸裂，金色碎芒如水银般瞬间蔓延覆盖全身。那曾抵御过舰炮轰击的装甲，光泽肉眼可见地急速黯淡。&lt;/i>&lt;/color>\n\n&lt;color=#FFAA00>&lt;i>持续攻击可以叠加易伤DEBUFF&lt;/i>&lt;/color></KT_Special_SMG.description>
+   <KT_Bullet_Special_SMG.label>摄金弹</KT_Bullet_Special_SMG.label>
+  
+   <KT_Folding_fan.label>&lt;color=#f589ad>&lt;i>「绯月轮」等离子折扇&lt;/i>&lt;/color></KT_Folding_fan.label>
+  <!-- EN: KT_Folding_fan -->
+  <KT_Folding_fan.description>一把为显赫人物量身定制的武器。平时是合拢的折扇，形态优雅；激活时，扇面将由绚烂的等离子体凝聚成锋锐的光刃，于无声挥洒间决断目标。\n\n&lt;color=#f589ad>&lt;i>她执扇轻摇，等离子微光如流萤翩跹。刺客的刀锋尚未迫近，便化作星尘消散在晚风里。"今夜月色太好。"她垂眸轻笑，"不该见红的。"&lt;/i>&lt;/color>\n\n&lt;color=#FFAA00>&lt;i>近战拥有AOE效果&lt;/i>&lt;/color>\n&lt;color=#FFAA00>&lt;i>攻击附带EMP&lt;/i>&lt;/color></KT_Folding_fan.description>
+  
+   <KT_Splitter_Gun.label>&lt;color=#16d5ec>&lt;i>「幽蓝精灵」等离子分裂炮&lt;/i>&lt;/color></KT_Splitter_Gun.label>
+  <KT_Splitter_Gun.description>一把体积庞大的等离子武器，命中敌人后弹头会分裂为数个小型弹头，可以覆盖一大片区域，但特别的地方在于使用了智能弹药，不会对友军和中立单位造成伤害。\n\n&lt;color=#16d5ec>&lt;i>等离子武器？分裂弹头？？无友伤智能弹药？？？这是怎么可能结合到一起的？"&lt;/i>&lt;/color>\n\n&lt;color=#FFAA00>&lt;i>分裂弹头&lt;/i>&lt;/color>\n&lt;color=#FFAA00>&lt;i>攻击附带EMP&lt;/i>&lt;/color>\n&lt;color=#FFAA00>&lt;i>无友军伤害&lt;/i>&lt;/color></KT_Splitter_Gun.description>
+  <KT_Bullet_Splitter_Gun.label>电浆分裂弹</KT_Bullet_Splitter_Gun.label>
+  <KT_Bullet_Splitter_Gun_bulletLaunches.label>电浆分裂弹</KT_Bullet_Splitter_Gun_bulletLaunches.label>
+  
+  <KT_Bow_Great.label>&lt;color=#af6e43>&lt;i>「射杀恋人的那天」巨弓（极差）&lt;/i>&lt;/color></KT_Bow_Great.label>
+  <KT_Bow_Great.description>一把因超维存在一时兴起而改造的神秘巨弓\n\n&lt;color=#af6e43>&lt;i>帝国老爷，食带便啦！&lt;/i>&lt;/color></KT_Bow_Great.description>
+  <KT_Super_Arrow_Great.label>弓箭（真的极差哦~）</KT_Super_Arrow_Great.label>
+  <KT_Super_Arrow_Great.label>弓箭（真的极差哦~）</KT_Super_Arrow_Great.label>
+  
+  <KT_SK_Powerarmor.label>「星际卫士」圣神颠佬战士装甲</KT_SK_Powerarmor.label>
+  <KT_SK_Powerarmor.description>防护性能卓越，内置了喷气背包的超级动力盔甲，但是女性禁止穿戴，一旦被发现会被视为异端行为，并遭受包括且不限于枪毙，重炮火力覆盖，轨道轰炸，歼星武器的处决。\n\n&lt;color=#ffe400>&lt;i>获得了强大的数值，但是代价呢...&lt;/i>&lt;/color>\n\n&lt;color=#FFAA00&gt;&lt;i&gt;只有不限制服装的物种可以穿戴此盔甲，有限制的需要使用CE MOD强制穿戴&lt;/i&gt;&lt;/color&gt;</KT_SK_Powerarmor.description>
+  
+  <KT_SK_helmet.label>「星际卫士」圣神颠佬战士头盔</KT_SK_helmet.label>
+  <KT_SK_helmet.description>防护性能卓越，内置了喷气背包的超级动力盔甲，但是女性禁止穿戴，一旦被发现会被视为异端行为，并遭受包括且不限于枪毙，重炮火力覆盖，轨道轰炸，歼星武器的处决。\n\n&lt;color=#ffe400>&lt;i>获得了强大的数值，但是代价呢...&lt;/i>&lt;/color>\n\n&lt;color=#FFAA00&gt;&lt;i&gt;只有不限制服装的物种可以穿戴此盔甲，有限制的需要使用CE MOD强制穿戴&lt;/i&gt;&lt;/color&gt;</KT_SK_helmet.description>
+  
+  <KT_SKGUN.label>&lt;color=#ff8484>&lt;i>「星际卫士」颠佬激光枪&lt;/i>&lt;/color></KT_SKGUN.label>
+  <KT_SKGUN.description>威力巨大但只能射出粉色激光的颠佬战士专用武器。\n\n&lt;color=#ff8484>&lt;i>谁都希望激光是绿色的，但粉色也没什么不好...&lt;/i>&lt;/color></KT_SKGUN.description>
+  <Bullet_KT_SKGUN.label>「星际卫士」颠佬激光枪</Bullet_KT_SKGUN.label>
+  
+  <KT_Assassingun.label>&lt;color=#c6c6c6>&lt;i>「名铳」安倍切&lt;/i>&lt;/color></KT_Assassingun.label>
+  <KT_Assassingun.description>一把看似简陋却不知为何威力巨大的土制霰弹枪，它背后的传奇故事已不可知。\n\n&lt;color=#c6c6c6>&lt;i>敞开心扉。&lt;/i>&lt;/color></KT_Assassingun.description>
+  <KT_Bullet_Assassingun.label>「名铳」安倍切</KT_Bullet_Assassingun.label>
+  
+  <KT_101Rifle.label>&lt;color=#e78d00>&lt;i>「建构」101%命中率步枪&lt;/i>&lt;/color></KT_101Rifle.label>
+  <KT_101Rifle.description>这把步枪的使用者曾经是一位联合舰娘儿童，她在一次公约国旅行中的射击体验项目中输给了该国特种兵，愤怒的她当场制作了这把101%命中率的步枪并重新赢得了比赛。\n\n&lt;color=#e78d00>&lt;i>只需要赋予这把武器一些因果律就行。&lt;/i>&lt;/color>\n\n&lt;color=#FFAA00>&lt;i>该武器发射后必定命中&lt;/i>&lt;/color>\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;</KT_101Rifle.description>
+  <KT_Bullet_101Rifle.label>因果律子弹</KT_Bullet_101Rifle.label>
+  
+  <KT_Hammer.label>「奥克」H-2动力锤</KT_Hammer.label>
+  <KT_Hammer.description>这把动力锤本来是购买「武天使」涡喷飞行背包会免费赠送的配件，但边缘奸商选择将其拆开售卖。\n\n&lt;color=#FFAA00>&lt;i>近战拥有AOE效果&lt;/i>&lt;/color>\n&lt;color=#FFAA00>&lt;i>攻击附带EMP&lt;/i>&lt;/color></KT_Hammer.description>
+  
+  <KT_ChainSword.label>&lt;color=#FFAA00&gt;&lt;i&gt;「屠戮者」CS-1链锯剑&lt;/i&gt;&lt;/color&gt;</KT_ChainSword.label>
+  <KT_ChainSword.description>这把巨大的链锯剑装备有单分子锯条，可以轻松破开重装甲，使用者可以选择大范围挥砍或对单体目标进行残暴的输出。\n\n&lt;color=#FFDF4B&gt;&lt;i&gt;血祭T督，颅献善座！&lt;/i&gt;&lt;/color&gt;\n\n&lt;color=#FFAA00>&lt;i>当前为单体输出模式，更高的破甲与极高输出频率&lt;/i>&lt;/color>\n&lt;color=#FFAA00>&lt;i>攻击附带EMP&lt;/i>&lt;/color></KT_ChainSword.description>
+  
+  <KT_ChainSword_AOE.label>&lt;color=#FFAA00&gt;&lt;i&gt;「屠戮者」CS-1链锯剑（劈砍）&lt;/i&gt;&lt;/color&gt;</KT_ChainSword_AOE.label>
+  <KT_ChainSword_AOE.description>这把巨大的链锯剑装备有单分子锯条，可以轻松破开重装甲，使用者可以选择大范围挥砍或对单体目标进行残暴的输出。\n\n&lt;color=#FFDF4B&gt;&lt;i&gt;血祭T督，颅献善座！&lt;/i&gt;&lt;/color&gt;\n\n&lt;color=#FFAA00>&lt;i>当前为劈砍模式，AOE近战&lt;/i>&lt;/color>\n&lt;color=#FFAA00>&lt;i>攻击附带EMP&lt;/i>&lt;/color></KT_ChainSword_AOE.description>
+  
+  <KT_Analnail.label>达因斯尼夫</KT_Analnail.label>
+  <KT_Analnail.description>古老型号的动能发射器，听说只有三流的龙骑兵驾驶员或翅膀断成八节的米莉拉才躲不开，而且只配备了一发弹药。\n\n&lt;color=#fff000&gt;&lt;i&gt;炮弹飞行一定距离后会贯穿命中的第一个单位以及其后方单位，因此要造成最大的贯穿效果请瞄准最前方的单位。&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;45°不可逃逸区（炮弹命中修正）&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;击退效果&lt;/i&gt;&lt;/color&gt;</KT_Analnail.description>
+</LanguageData>

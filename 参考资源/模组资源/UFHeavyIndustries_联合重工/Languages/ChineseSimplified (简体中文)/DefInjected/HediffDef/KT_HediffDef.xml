@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <KT_Backpack_Hediff.label>承伤立场</KT_Backpack_Hediff.label>
+  <KT_Backpack_Hediff.description>这个单位装备了铁光环，所以可以格挡来袭的伤害。\n-设计上这个状态可以使角色格挡低于35点的伤害，护盾生效期间单次伤害最高不会超过35，高于承伤部分扣除铁光环承伤值，承伤值归零后需要重新充能才可再次使用。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;举例1：攻击伤害100，强制伤害为35，扣除35免疫值，减少立场背包承伤值10点，抵消本次攻击。&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;举例2：攻击伤害40，扣除35免疫值，减少立场背包承伤值5点，抵消本次攻击。&lt;/i&gt;&lt;/color&gt;</KT_Backpack_Hediff.description>
+
+  
+  <!-- EN: KT_battlewalker_Hediff -->
+  <KT_battlewalker_Hediff.label>「先锋」承伤立场</KT_battlewalker_Hediff.label>
+  <!-- EN: KT_battlewalker_Hediff -->
+  <KT_battlewalker_Hediff.description>这台「先锋」战斗步行机装备了铁光环，所以可以格挡来袭的伤害。\n-设计上这个状态可以使角色格挡低于35点的伤害，护盾生效期间单次伤害最高不会超过60，高于承伤部分扣除铁光环承伤值，承伤值归零后需要重新充能才可再次使用。\n\n&lt;color=#FFAA00>&lt;i>举例1：攻击伤害100，强制伤害为60，扣除35免疫值，减少立场护盾承伤值25点，抵消本次攻击。&lt;/i>&lt;/color>\n&lt;color=#FFAA00>&lt;i>举例2：攻击伤害55，扣除35免疫值，减少立场护盾承伤值20点，抵消本次攻击。&lt;/i>&lt;/color></KT_battlewalker_Hediff.description>
+  
+  <KT_AG_TANK_Hediff.label>「海啸」承伤立场</KT_AG_TANK_Hediff.label>
+  <KT_AG_TANK_Hediff.description>这台「海啸」坦克装备了铁光环，所以可以格挡来袭的伤害。\n-设计上这个状态可以使角色格挡低于35点的伤害，护盾生效期间单次伤害最高不会超过80，高于承伤部分扣除铁光环承伤值，承伤值归零后需要重新充能才可再次使用。\n\n&lt;color=#FFAA00>&lt;i>举例1：攻击伤害100，强制伤害为80，扣除35免疫值，减少立场护盾承伤值45点，抵消本次攻击。&lt;/i>&lt;/color>\n&lt;color=#FFAA00>&lt;i>举例2：攻击伤害55，扣除35免疫值，减少立场护盾承伤值20点，抵消本次攻击。&lt;/i>&lt;/color></KT_AG_TANK_Hediff.description>
+  
+   <KT_BCG_Hediff.label>「家猫」承伤立场</KT_BCG_Hediff.label>
+  <KT_BCG_Hediff.description>这台生化猫娘装备了铁光环，所以可以格挡来袭的伤害。\n-设计上这个状态可以使角色格挡低于15点的伤害，护盾生效期间单次伤害最高不会超过40，高于承伤部分扣除铁光环承伤值，承伤值归零后需要重新充能才可再次使用。\n\n&lt;color=#FFAA00>&lt;i>举例1：攻击伤害100，强制伤害为40，扣除15免疫值，减少立场护盾承伤值25点，抵消本次攻击。&lt;/i>&lt;/color>\n&lt;color=#FFAA00>&lt;i>举例2：攻击伤害35，扣除15免疫值，减少立场护盾承伤值20点，抵消本次攻击。&lt;/i>&lt;/color></KT_BCG_Hediff.description>
+  
+  <KT_Special_SMG_crystal.label>摄金碎片</KT_Special_SMG_crystal.label>
+  <KT_Special_SMG_crystal.description>碎片覆盖在这个单位上，使其更容易受伤</KT_Special_SMG_crystal.description>
+  
+  <KT_Light_Air_Strike.label>「指挥者」低空支援引导芯片</KT_Light_Air_Strike.label>
+  <KT_Light_Air_Strike.description>将该芯片植入使用者的大脑后可以使其获得指引远程空中支援的能力，使用者只需要快速眨眼就可以确认打击指令，因此只要此芯片存在于大脑中就不可以乱眨眼。同时因为飞行器本质上也是一种机械体,因此该芯片可以一定程度上增强机械师的能力。\n\n\n&lt;color=#FFAA00&gt;&lt;i&gt;解锁技能：&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;「低空支援」AX-飞鹅攻击机支援&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;「低空支援」AX-飞鹅攻击机5000KG航弹&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;「低空支援」女武神轰炸机支援&lt;/i&gt;&lt;/color&gt;</KT_Light_Air_Strike.description>
+  
+  <KT_Heavy_Air_Strike.label>「死亡赋予者」高轨支援引导芯片</KT_Heavy_Air_Strike.label>
+  <KT_Heavy_Air_Strike.description>将该芯片植入使用者的大脑后可以使其获得指引轨道舰队支援的能力，使用者只需要快速眨眼就可以确认打击指令，因此只要此芯片存在于大脑中就不可以乱眨眼。同时因为飞行器本质上也是一种机械体,因此该芯片可以一定程度上增强机械师的能力。\n\n\n&lt;color=#FFAA00&gt;&lt;i&gt;解锁技能：&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;「轨道支援」星球压制舰轨道支援&lt;/i&gt;&lt;/color&gt;</KT_Heavy_Air_Strike.description>
+  
+  <KT_medical.label>「第二春」自愈芯片</KT_medical.label>
+  <KT_medical.description>该芯片能强化使用者的生命力，能逐渐愈合看似永久的损伤。\n\n- 损伤或失去的躯体会自动修复</KT_medical.description>
+  
+  <KT_ChainSword_hediff.label>链锯剑</KT_ChainSword_hediff.label>
+  <KT_ChainSword_hediff.description>注意看，这单位装备了这么大一把链锯剑，太哈人了。</KT_ChainSword_hediff.description>
+</LanguageData>

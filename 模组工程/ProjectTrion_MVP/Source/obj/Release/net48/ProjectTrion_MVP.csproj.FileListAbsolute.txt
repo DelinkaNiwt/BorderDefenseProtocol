@@ -1,0 +1,6 @@
+C:\NiwtDatas\Projects\RimworldModStudio\模组工程\ProjectTrion_MVP\Source\obj\Release\net48\ProjectTrion_MVP.csproj.AssemblyReference.cache
+C:\NiwtDatas\Projects\RimworldModStudio\模组工程\ProjectTrion_MVP\Source\obj\Release\net48\ProjectTrion_MVP.GeneratedMSBuildEditorConfig.editorconfig
+C:\NiwtDatas\Projects\RimworldModStudio\模组工程\ProjectTrion_MVP\Source\obj\Release\net48\ProjectTrion_MVP.csproj.CoreCompileInputs.cache
+C:\NiwtDatas\Projects\RimworldModStudio\模组工程\ProjectTrion_MVP\1.6\Assemblies\net48\ProjectTrion_MVP.dll
+C:\NiwtDatas\Projects\RimworldModStudio\模组工程\ProjectTrion_MVP\Source\obj\Release\net48\ProjectT.E46DD838.Up2Date
+C:\NiwtDatas\Projects\RimworldModStudio\模组工程\ProjectTrion_MVP\Source\obj\Release\net48\ProjectTrion_MVP.dll

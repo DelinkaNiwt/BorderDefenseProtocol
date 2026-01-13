@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- meditative -->
+
+  <JoyGiverDef>
+    <defName>UseKT_Tactical_Terminal</defName>
+    <giverClass>JoyGiver_InteractBuildingInteractionCell</giverClass>
+    <baseChance>2</baseChance>
+    <thingDefs>
+      <li>KT_Tactical_Terminal</li>
+    </thingDefs>
+    <jobDef>UseKT_Tactical_Terminal</jobDef>
+    <joyKind>KT_Tactical_Terminal</joyKind>
+    <requiredCapacities>
+      <li>Sight</li>
+    </requiredCapacities>
+  </JoyGiverDef>
+  
+</Defs>

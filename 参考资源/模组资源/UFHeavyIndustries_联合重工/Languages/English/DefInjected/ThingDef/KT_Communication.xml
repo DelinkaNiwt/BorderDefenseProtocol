@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: KT_Communication -->
+  <KT_Communication.label>Integrated Communication Terminal</KT_Communication.label>
+  <!-- EN: KT_Communication -->
+  <KT_Communication.description>This terminal integrates multiple functions including shop communication and directing long-range fire support, enabling global delivery without leaving home.\n\n&lt;color=#FFAA00>&lt;i>Right-click the structure to activate trade communication&lt;/i>&lt;/color></KT_Communication.description>
+  
+  <!-- EN: KT_duckmazon_express_AG_TANK -->
+  <KT_duckmazon_express_AG_TANK.label>Duckmazon Battle-Damaged Express Box (Hover Tank)</KT_duckmazon_express_AG_TANK.label>
+  <!-- EN: KT_duckmazon_express_AG_TANK -->
+  <KT_duckmazon_express_AG_TANK.description>Hover tank express packaging box. Severely damaged externally due to violent transportation, but the contents should be fine. The interior space is much larger than the exterior suggests, but will become useless after unsealing.\n\n&lt;color=#ffe400>&lt;i>Rumor has it this courier company lost a delivery belonging to a Great Being but refused compensation. In anger, they were trapped in this game by the Great Being, doomed to eternal suffering.&lt;/i>&lt;/color>\n\n&lt;color=#FFAA00>&lt;i>Requires Mechanic to open&lt;/i>&lt;/color></KT_duckmazon_express_AG_TANK.description>
+  <!-- EN: Open the parcel box -->
+  <KT_duckmazon_express_AG_TANK.comps.CompUsable.useLabel>TODO</KT_duckmazon_express_AG_TANK.comps.CompUsable.useLabel>
+  
+  <!-- EN: KT_UF_Express_main_autogun -->
+  <KT_UF_Express_main_autogun.label>UF Express Package (Vanguard Autocannon Type)</KT_UF_Express_main_autogun.label>
+  <!-- EN: KT_UF_Express_main_autogun -->
+  <KT_UF_Express_main_autogun.description>Express packaging box for the Vanguard-class Combat Walker. The interior space is much larger than the exterior suggests, but will become useless after unsealing.\n\n&lt;color=#FFAA00>&lt;i>Requires Mechanic to open&lt;/i>&lt;/color></KT_UF_Express_main_autogun.description>
+  <!-- EN: Open the parcel box -->
+  <KT_UF_Express_main_autogun.comps.CompUsable.useLabel>TODO</KT_UF_Express_main_autogun.comps.CompUsable.useLabel>
+  
+  <!-- EN: KT_UF_Express_main_gatling_gun -->
+  <KT_UF_Express_main_gatling_gun.label>UF Express Package (Vanguard Gatling Type)</KT_UF_Express_main_gatling_gun.label>
+  <!-- EN: KT_UF_Express_main_gatling_gun -->
+  <KT_UF_Express_main_gatling_gun.description>Express packaging box for the Vanguard-class Combat Walker. The interior space is much larger than the exterior suggests, but will become useless after unsealing.\n\n&lt;color=#FFAA00>&lt;i>Requires Mechanic to open&lt;/i>&lt;/color></KT_UF_Express_main_gatling_gun.description>
+  <!-- EN: Open the parcel box -->
+  <KT_UF_Express_main_gatling_gun.comps.CompUsable.useLabel>TODO</KT_UF_Express_main_gatling_gun.comps.CompUsable.useLabel>
+  
+  <!-- EN: KT_UF_Express_main_gun -->
+  <KT_UF_Express_main_gun.label>UF Express Package (Vanguard Artillery Type)</KT_UF_Express_main_gun.label>
+  <!-- EN: KT_UF_Express_main_gun -->
+  <KT_UF_Express_main_gun.description>Express packaging box for the Vanguard-class Combat Walker. The interior space is much larger than the exterior suggests, but will become useless after unsealing.\n\n&lt;color=#FFAA00>&lt;i>Requires Mechanic to open&lt;/i>&lt;/color></KT_UF_Express_main_gun.description>
+  <!-- EN: Open the parcel box -->
+  <KT_UF_Express_main_gun.comps.CompUsable.useLabel>TODO</KT_UF_Express_main_gun.comps.CompUsable.useLabel>
+  
+</LanguageData>

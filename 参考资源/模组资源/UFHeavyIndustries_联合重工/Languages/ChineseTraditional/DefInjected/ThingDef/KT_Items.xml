@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <KTNutrientPaste.label>三明治</KTNutrientPaste.label>
+  <KTNutrientPaste.description>3D打印的三明治，但味道非常不错，相当于一份精致食物。</KTNutrientPaste.description>
+  
+  <KT_Backpack.label>「铁光环」承伤立场背包</KT_Backpack.label>
+  <KT_Backpack.description>与护盾完全不同的承伤立场背包。\n-设计上这个状态可以使角色格挡低于35点的伤害，护盾生效期间单次伤害最高不会超过45，高于承伤部分扣除铁光环承伤值，承伤值归零后需要重新充能才可再次使用。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;举例：攻击伤害100，强制伤害为45，扣除35免疫值，减少立场背包承伤值10点，抵消本次攻击。&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;举例2：攻击伤害40，扣除35免疫值，减少立场背包承伤值5点，抵消本次攻击。&lt;/i&gt;&lt;/color&gt;</KT_Backpack.description>
+  
+  <KT_SAG.label>「灵眼」科学分析眼镜</KT_SAG.label>
+  <KT_SAG.description>采用了联合舰队游乐设施同款技术逆向开发的高级分析眼镜，可以对目标进行多维度的分析。同时该护目镜也可以计算枪械弹道，增加命中率和减少瞄准时间。</KT_SAG.description>
+  
+  <KT_HeavyShield.label>「卫士」SH-12海军盾牌</KT_HeavyShield.label>
+  <KT_HeavyShield.description>一面巨大的盾牌，使用者可以通过背面的屏幕观察目标，且盾牌侧面的开槽可适应各种类型的武器，常在狭窄的舰船内使用。</KT_HeavyShield.description>
+  
+  <KT_Light_Air_Strike_Chip.label>&lt;color=#ff4600>&lt;i>「指挥者」低空支援引导芯片&lt;/i&gt;&lt;/color&gt;</KT_Light_Air_Strike_Chip.label>
+  <KT_Light_Air_Strike_Chip.description>将该芯片植入使用者的大脑后可以使其获得指引远程空中支援的能力，使用者只需要快速眨眼就可以确认打击指令，因此只要此芯片存在于大脑中就不可以乱眨眼。同时因为飞行器本质上也是一种机械体,因此该芯片可以一定程度上增强机械师的能力。\n\n\n&lt;color=#FFAA00&gt;&lt;i&gt;解锁技能：&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;「低空支援」AX-飞鹅攻击机支援&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;「低空支援」AX-飞鹅攻击机5000KG航弹&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;「低空支援」女武神轰炸机支援&lt;/i&gt;&lt;/color&gt;</KT_Light_Air_Strike_Chip.description>
+  
+  <KT_Heavy_Air_Strike_Chip.label>&lt;color=#ffe400>&lt;i>「死亡赋予者」高轨支援引导芯片&lt;/i&gt;&lt;/color&gt;</KT_Heavy_Air_Strike_Chip.label>
+  <KT_Heavy_Air_Strike_Chip.description>将该芯片植入使用者的大脑后可以使其获得指引轨道舰队支援的能力，使用者只需要快速眨眼就可以确认打击指令，因此只要此芯片存在于大脑中就不可以乱眨眼。同时因为飞行器本质上也是一种机械体,因此该芯片可以一定程度上增强机械师的能力。\n\n\n&lt;color=#FFAA00&gt;&lt;i&gt;解锁技能：&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;「轨道支援」星球压制舰轨道支援&lt;/i&gt;&lt;/color&gt;</KT_Heavy_Air_Strike_Chip.description>
+  
+  <KT_medical_Chip.label>&lt;color=#00aa00>&lt;i>「第二春」自愈芯片&lt;/i&gt;&lt;/color&gt;</KT_medical_Chip.label>
+  <KT_medical_Chip.description>该芯片能强化使用者的生命力，能逐渐愈合看似永久的损伤。\n\n- 损伤或失去的躯体会自动修复\n- 每秒恢复0.5点生命值</KT_medical_Chip.description>
+  
+  <KT_steel.label>沐烬钢</KT_steel.label>
+  <KT_steel.description>一种分配给公约国使用的二等合金材料，强度极高却几乎感受不到重量，有传闻是用舰娘搓澡产生的污垢提炼的。</KT_steel.description>
+  
+  <TurbojetBackpack.label>「武天使」涡喷飞行背包</TurbojetBackpack.label>
+  <TurbojetBackpack.description>这款飞行背包本是为促进家庭和睦设计的。在多物种公约国，当飞行种族与不可飞行种族通婚时，它可以帮助后者实现伴飞。然而在边缘世界，某个土著教会却对它产生了浓厚的兴趣。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;飞行背包提供多种助飞模式且内置了一款特殊护盾，可以帮助使用者免疫近战和极端地形伤害（免疫8以下的伤害），更重要的是它还有一个额外的行李舱可以帮助使用者储存例如解馋小零食，罕见样本，炫酷岩石等物品。&lt;/i&gt;&lt;/color&gt;\n\n&lt;color=#FFAA00&gt;&lt;i&gt;极高的大地图移动速度&lt;/i&gt;&lt;/color&gt;</TurbojetBackpack.description>
+  
+  <Projectile_BezierMissile.label>贝塞尔振荡导弹</Projectile_BezierMissile.label>
+  
+  <TurbojetBackpack_Armed.label>「武天使」涡喷飞行背包-武装型</TurbojetBackpack_Armed.label>
+  <TurbojetBackpack_Armed.description>这台武天使进行了额外改装，在拥有更强的护盾的情况下还额外装备了2门自动炮塔和导弹发射器，且因为重量提升，飞行性能略逊于标准型号且禁止使用涡喷冲刺。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;飞行背包提供多种助飞模式且内置了一款特殊护盾，可以帮助使用者免疫近战和极端地形伤害（免疫15以下的伤害），更重要的是它还有一个额外的行李舱可以帮助使用者储存例如解馋小零食，罕见样本，炫酷岩石等物品。&lt;/i&gt;&lt;/color&gt;\n\n&lt;color=#FFAA00&gt;&lt;i&gt;极高的大地图移动速度&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;自动炮塔&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;震荡导弹发射器&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;点防御导弹系统&lt;/i&gt;&lt;/color&gt;</TurbojetBackpack_Armed.description>
+ 
+</LanguageData>

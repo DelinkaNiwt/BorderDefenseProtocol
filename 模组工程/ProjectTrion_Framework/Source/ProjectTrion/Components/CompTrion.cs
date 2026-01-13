@@ -634,10 +634,11 @@ namespace ProjectTrion.Components
 
             var sb = new System.Text.StringBuilder();
             sb.AppendLine($"Trion容量: {_capacity}");
-            sb.AppendLine($"占用: {_reserved}, 消耗: {_consumed}, 可用: {Available}");
+            sb.Append($"占用: {_reserved}, 消耗: {_consumed}, 可用: {Available}");
             if (_isInCombat)
             {
-                sb.AppendLine($"战斗体状态：激活中");
+                sb.AppendLine();
+                sb.Append("战斗体状态：激活中");
             }
 
             return sb.ToString();

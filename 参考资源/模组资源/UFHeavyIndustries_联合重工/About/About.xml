@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ModMetaData>
+  <name>联合重工-UF Heavy Industries</name>
+  <author>善良海豹</author>
+  <packageId>KindSeal.LOL</packageId>
+  <supportedVersions>
+    <li>1.6</li>
+    <li>1.7</li>
+    <li>1.8</li>
+    <li>1.9</li>
+  </supportedVersions>
+  
+  <description>
+    善良的联合舰娘北宅又获得了地球时间差不多几百万年的短暂假期，于是她来到边缘世界体验生活。这个周期的她非常喜欢造大舰巨炮，但苦于现有的势力都没有满足其要求的型号，于是她自创了一个善良铸造厂用于生产销售她定制的产品。
+  </description>
+  
+  <modDependencies>
+    <li>
+      <packageId>brrainz.harmony</packageId>
+      <displayName>Harmony</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+      <downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+    </li>
+	<li>
+      <packageId>Ludeon.RimWorld.Biotech</packageId>
+      <displayName>Biotech</displayName>
+      <steamWorkshopUrl>https://store.steampowered.com/app/1826140/RimWorld__Biotech/?curator_clanid=25160263</steamWorkshopUrl>
+    </li>
+	<li>
+      <packageId>DiZhuan.SRALib</packageId>
+      <displayName>SRALib</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/3565275325</steamWorkshopUrl>
+    </li>
+  </modDependencies>
+  
+  <loadAfter>
+    <li>brrainz.harmony</li>
+	<li>Ludeon.RimWorld</li>
+    <li>DiZhuan.SRALib</li>
+  </loadAfter>
+</ModMetaData>

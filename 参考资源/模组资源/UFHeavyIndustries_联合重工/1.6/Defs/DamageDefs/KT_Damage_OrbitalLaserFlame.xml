@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<!--自由电子激光灼伤类型-->
+	<DamageDef>
+		<defName>FreeElectronLaserFlame</defName>
+		<label>Free Electron Laser Flame</label>
+		<workerClass>DamageWorker_Flame</workerClass>
+		<description>艾登的激光，超级烫</description>
+		<deathMessage>{0} 被轨道激光熔融。</deathMessage>
+		<combatLogRules>Damage_Flame</combatLogRules>
+		<!--音效定义-->
+		<impactSoundType>Blunt</impactSoundType>
+		<soundExplosion>Explosion_Vaporize</soundExplosion>
+		<!--伤害类型为外源性爆炸-->
+		<externalViolence>true</externalViolence>
+		<isExplosive>true</isExplosive>
+		<!--对生物体表造成高温点燃-->
+		<hediff>Burn</hediff>
+		<makesBlood>false</makesBlood>
+		<hasForcefulImpact>true</hasForcefulImpact>
+		<harmAllLayersUntilOutside>false</harmAllLayersUntilOutside>
+		<explosionAffectOutsidePartsOnly>true</explosionAffectOutsidePartsOnly>
+		<!--对建筑结构造成冲击崩落-->
+		<hediffSolid>Crack</hediffSolid>
+		<plantDamageFactor>15</plantDamageFactor>
+		<corpseDamageFactor>0.15</corpseDamageFactor>
+		<buildingDamageFactorPassable>15</buildingDamageFactorPassable>
+		<buildingDamageFactorImpassable>15</buildingDamageFactorImpassable>
+		<scaleDamageToBuildingsBasedOnFlammability>false</scaleDamageToBuildingsBasedOnFlammability>
+		<!--惊扰生物-->
+		<canInterruptJobs>true</canInterruptJobs>
+		<makesAnimalsFlee>true</makesAnimalsFlee>
+		<!--甲弹对抗参数-->
+		<armorCategory>Heat</armorCategory>
+		<defaultArmorPenetration>15</defaultArmorPenetration>
+		<!--造伤效果参数-->
+		<defaultDamage>1000</defaultDamage>
+		<minDamageToFragment>100</minDamageToFragment>
+		<defaultStoppingPower>100</defaultStoppingPower>
+		<explosionHeatEnergyPerCell>100</explosionHeatEnergyPerCell>
+		<!--爆炸特效参数-->
+		<explosionCellFleck>Fleck_Vaporize</explosionCellFleck>
+		<explosionColorCenter>(0.4, 1, 1)</explosionColorCenter>
+		<explosionColorEdge>(0.4, 0.8, 0.8)</explosionColorEdge>
+		<expolosionPropagationSpeed>1</expolosionPropagationSpeed>
+	</DamageDef>
+</Defs>

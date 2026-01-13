@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<!--AT立场受激特效-->
+	<ThingDef ParentName="MoteBase">
+		<defName>Mote_ATFieldOctagon</defName>
+		<thingClass>ATFieldGenerator.Mote_ATFieldOctagon</thingClass>
+		<!--材质数据-->
+		<altitudeLayer>MoteOverhead</altitudeLayer>
+		<mote>
+			<solidTime>0.15</solidTime>
+		</mote>
+		<graphicData>
+			<drawSize>4</drawSize>
+			<shaderType>MoteGlow</shaderType>
+			<texPath>Things/Effect/ATFieldOctagon</texPath>
+		</graphicData>
+		<!--拓展属性-->
+		<modExtensions>
+			<li Class="ATFieldGenerator.ATFieldMoteExtension">
+				<!-- 播放时长 -->
+				<duration>0.15</duration>
+				<!--颜色列表-->
+				<colors>
+					<li>(1.0, 1.0, 1.0, 0.75)</li>
+					<li>(0.0, 0.5, 1.0, 0.75)</li>
+					<li>(0.2, 1.0, 0.2, 0.75)</li>
+					<li>(1.0, 0.2, 0.2, 0.75)</li>
+				</colors>
+			</li>
+		</modExtensions>
+	</ThingDef>
+</Defs>

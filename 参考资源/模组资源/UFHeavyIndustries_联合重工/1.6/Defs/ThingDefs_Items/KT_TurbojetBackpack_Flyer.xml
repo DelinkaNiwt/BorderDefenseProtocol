@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<!--涡喷跳跃者-->
+	<ThingDef ParentName="PawnFlyerBase">
+		<defName>PawnFlyer_Turbojet_Jump</defName>
+		<label>涡喷跳跃者</label>
+		<thingClass>TurbojetBackpack.PawnFlyer_Turbojet</thingClass>
+		<!--材质设置-->
+		<seeThroughFog>true</seeThroughFog>
+		<drawerType>RealtimeOnly</drawerType>
+		<!--飞行速度-->
+		<pawnFlyer>
+			<flightSpeed>50</flightSpeed>
+			<heightFactor>10</heightFactor>
+		</pawnFlyer>
+		<!--战斗参数-->
+		<modExtensions>
+			<li Class="TurbojetBackpack.TurbojetExtension">
+				<stunAmount>30</stunAmount>
+				<pushDistance>10</pushDistance>
+				<damageAmount>25</damageAmount>
+				<landingSound>Explosion_EMP</landingSound>
+				<landingDamageRadius>3.5</landingDamageRadius>
+			</li>
+		</modExtensions>
+	</ThingDef>
+	<!--涡喷冲刺者-->
+	<ThingDef ParentName="PawnFlyerBase">
+		<defName>PawnFlyer_Turbojet_Dash</defName>
+		<label>涡喷冲刺者</label>
+		<thingClass>TurbojetBackpack.PawnFlyer_TurbojetFlat</thingClass>
+		<!--材质设置-->
+		<seeThroughFog>true</seeThroughFog>
+		<drawerType>RealtimeOnly</drawerType>
+		<!--飞行速度-->
+		<pawnFlyer>
+			<flightSpeed>75</flightSpeed>
+			<heightFactor>0</heightFactor>
+		</pawnFlyer>
+		<!--巡航参数-->
+		<modExtensions>
+			<li Class="TurbojetBackpack.TurbojetExtension">
+				<stunAmount>30</stunAmount>
+				<pushDistance>25</pushDistance>
+				<damageAmount>25</damageAmount>
+				<landingSound>Explosion_EMP</landingSound>
+				<collisionScanRadius>2.5</collisionScanRadius>
+			</li>
+		</modExtensions>
+	</ThingDef>
+</Defs>

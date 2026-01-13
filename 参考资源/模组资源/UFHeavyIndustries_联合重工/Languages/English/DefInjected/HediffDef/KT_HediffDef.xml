@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <KT_Backpack_Hediff.label>Damage Absorption Field</KT_Backpack_Hediff.label>
+  <KT_Backpack_Hediff.description>This unit is equipped with an Iron Halo, allowing it to block incoming damage.\n- Designed to enable the character to block damage below 35 points. While the shield is active, single instance damage will not exceed 35. Damage above the absorption threshold deducts from the Iron Halo's absorption value. Once the absorption value reaches zero, it requires recharging before it can be used again.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Example 1: Attack damage 100, forced damage 35, deduct 35 immunity value, reduce field backpack absorption value by 10 points, negating this attack.&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;Example 2: Attack damage 40, deduct 35 immunity value, reduce field backpack absorption value by 5 points, negating this attack.&lt;/i&gt;&lt;/color&gt;</KT_Backpack_Hediff.description>
+
+  
+  <!-- EN: KT_battlewalker_Hediff -->
+  <KT_battlewalker_Hediff.label>"Vanguard" Damage Absorption Field</KT_battlewalker_Hediff.label>
+  <!-- EN: KT_battlewalker_Hediff -->
+  <KT_battlewalker_Hediff.description>This "Vanguard" Combat Walker is equipped with an Iron Halo, allowing it to block incoming damage.\n- Designed to enable the unit to block damage below 35 points. While the shield is active, single instance damage will not exceed 60. Damage above the absorption threshold deducts from the Iron Halo's absorption value. Once the absorption value reaches zero, it requires recharging before it can be used again.\n\n&lt;color=#FFAA00>&lt;i>Example 1: Attack damage 100, forced damage 60, deduct 35 immunity value, reduce field shield absorption value by 25 points, negating this attack.&lt;/i>&lt;/color>\n&lt;color=#FFAA00>&lt;i>Example 2: Attack damage 55, deduct 35 immunity value, reduce field shield absorption value by 20 points, negating this attack.&lt;/i>&lt;/color></KT_battlewalker_Hediff.description>
+  
+  <KT_AG_TANK_Hediff.label>"Tsunami" Damage Absorption Field</KT_AG_TANK_Hediff.label>
+  <KT_AG_TANK_Hediff.description>This "Tsunami" Tank is equipped with an Iron Halo, allowing it to block incoming damage.\n- Designed to enable the unit to block damage below 35 points. While the shield is active, single instance damage will not exceed 80. Damage above the absorption threshold deducts from the Iron Halo's absorption value. Once the absorption value reaches zero, it requires recharging before it can be used again.\n\n&lt;color=#FFAA00>&lt;i>Example 1: Attack damage 100, forced damage 80, deduct 35 immunity value, reduce field shield absorption value by 45 points, negating this attack.&lt;/i>&lt;/color>\n&lt;color=#FFAA00>&lt;i>Example 2: Attack damage 55, deduct 35 immunity value, reduce field shield absorption value by 20 points, negating this attack.&lt;/i>&lt;/color></KT_AG_TANK_Hediff.description>
+
+</LanguageData>

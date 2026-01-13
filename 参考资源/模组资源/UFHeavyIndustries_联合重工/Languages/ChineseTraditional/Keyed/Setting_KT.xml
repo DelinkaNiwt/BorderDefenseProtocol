@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <Setting_KT>武器/炮塔设置[部分无需重启即可生效]</Setting_KT>
+	    <Setting5_KT>子弹伤害倍率</Setting5_KT>
+		<Setting5_1_KT>子弹伤害</Setting5_1_KT>
+		<Setting6_KT>子弹穿甲倍率</Setting6_KT>
+		<Setting6_1_KT>子弹穿甲率</Setting6_1_KT>
+		<Setting7_KT>子弹爆炸范围倍率</Setting7_KT>
+		<Setting7_1_KT>子弹爆炸范围</Setting7_1_KT>
+		
+		<Setting8_KT>武器冷却倍率[重启游戏后生效]</Setting8_KT>
+		<Setting8_1_KT>武器冷却倍率[重启游戏后生效]</Setting8_1_KT>
+		
+		<Setting9_KT>武器预热倍率</Setting9_KT>
+		<Setting9_1_KT>武器预热倍率</Setting9_1_KT>
+</LanguageData>

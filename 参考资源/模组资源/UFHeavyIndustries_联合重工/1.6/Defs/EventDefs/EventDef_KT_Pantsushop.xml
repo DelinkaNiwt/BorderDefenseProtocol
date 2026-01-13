@@ -1,0 +1,1103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <SRA.EventDef>
+    <defName>KT_EVENT_PANTSU_SHOP_0</defName>
+    <label>KT_HIDE</label>
+    <hiddenWindow>true</hiddenWindow>
+    <characterName></characterName>
+    <description></description>
+    <dismissEffects>
+      <li>
+	    <conditions>
+          <li Class="SRA.Condition_VariableNotEqual">
+            <name>KT_EVENT_first_encounter</name>
+            <value>1</value>
+          </li>
+        </conditions>
+        <effects>
+          <li Class="SRA.Effect_OpenCustomUI">
+            <defName>KT_EVENT_PANTSU_SHOP_1</defName>
+          </li>
+        </effects>
+      </li>
+	  <li>
+	    <conditions>
+          <li Class="SRA.Condition_VariableEquals">
+            <name>KT_EVENT_first_encounter</name>
+            <value>1</value>
+          </li>
+        </conditions>
+        <effects>
+          <li Class="SRA.Effect_OpenCustomUI">
+            <defName>KT_EVENT_PANTSU_SHOP_11</defName>
+          </li>
+        </effects>
+      </li>
+    </dismissEffects>
+  </SRA.EventDef>
+  
+  <SRA.EventDef>
+    <defName>KT_EVENT_PANTSU_SHOP_1</defName>
+    <label>KT_PANTSU_SHOP_TITLE</label>
+    <portraitPath>KT_UI/Events/Portraits/KT_Ella</portraitPath>
+    <characterName>KT_PANTSU_SHOP_ELLA</characterName>
+	<eventUIConfig>KT_EventUIConfig</eventUIConfig>
+	<windowType>SRA.Dialog_NewLayoutDisplay</windowType>
+	
+    <descriptions>
+      <li>KT_DESC_PANTSU_SHOP_1</li>
+    </descriptions>
+    <options>
+      <li>
+        <label>KT_OPTION_PANTSU_SHOP_1_1</label>
+        <optionEffects>
+          <li>
+            <effects>
+              <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_2</defName>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+    </options>
+  </SRA.EventDef>
+  
+  <SRA.EventDef>
+    <defName>KT_EVENT_PANTSU_SHOP_2</defName>
+    <label>KT_PANTSU_SHOP_TITLE</label>
+    <portraitPath>KT_UI/Events/Portraits/KT_Ella</portraitPath>
+    <characterName>KT_PANTSU_SHOP_ELLA</characterName>
+	<eventUIConfig>KT_EventUIConfig</eventUIConfig>
+	<windowType>SRA.Dialog_NewLayoutDisplay</windowType>
+    <descriptions>
+      <li>KT_DESC_PANTSU_SHOP_2</li>
+    </descriptions>
+    <options>
+      <li>
+        <label>KT_OPTION_PANTSU_SHOP_2_1</label>
+        <optionEffects>
+          <li>
+            <effects>
+              <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_3</defName>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+    </options>
+  </SRA.EventDef>
+
+  <SRA.EventDef>
+    <defName>KT_EVENT_PANTSU_SHOP_3</defName>
+    <label>KT_PANTSU_SHOP_TITLE</label>
+    <portraitPath>KT_UI/Events/Portraits/KT_Ella</portraitPath>
+    <characterName>KT_PANTSU_SHOP_ELLA</characterName>
+    <windowType>SRA.Dialog_NewLayoutDisplay</windowType>
+	<eventUIConfig>KT_EventUIConfig</eventUIConfig>
+    <descriptions>
+      <li>KT_DESC_PANTSU_SHOP_3</li>
+    </descriptions>
+    <options>
+      <li>
+        <label>KT_OPTION_PANTSU_SHOP_3_1</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_4</defName>
+              </li>
+			  <li Class="SRA.Effect_SetVariable">
+                <name>KT_EVENT_first_encounter</name>
+                <value>1</value>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+    </options>
+  </SRA.EventDef> 
+  
+  <SRA.EventDef>
+    <defName>KT_EVENT_PANTSU_SHOP_4</defName>
+    <label>KT_PANTSU_SHOP_TITLE</label>
+    <portraitPath>KT_UI/Events/Portraits/SRA_UF_Honour_Guard_Frigate</portraitPath>
+    <characterName>KT_PANTSU_SHOP_EDEN</characterName>
+    <windowType>SRA.Dialog_NewLayoutDisplay</windowType>
+	<eventUIConfig>KT_EventUIConfig</eventUIConfig>
+    <descriptions>
+      <li>KT_DESC_PANTSU_SHOP_4</li>
+    </descriptions>
+    <options>
+      <li>
+        <label>KT_OPTION_PANTSU_SHOP_4_1</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_5</defName>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+    </options>
+  </SRA.EventDef> 
+  
+  <SRA.EventDef>
+    <defName>KT_EVENT_PANTSU_SHOP_5</defName>
+    <label>KT_PANTSU_SHOP_TITLE</label>
+    <portraitPath>KT_UI/Events/Portraits/SRA_UF_Honour_Guard_Frigate</portraitPath>
+    <characterName>KT_PANTSU_SHOP_EDEN</characterName>
+    <windowType>SRA.Dialog_NewLayoutDisplay</windowType>
+	<eventUIConfig>KT_EventUIConfig</eventUIConfig>
+    <descriptions>
+      <li>KT_DESC_PANTSU_SHOP_5</li>
+    </descriptions>
+    <options>
+      <li>
+        <label>KT_OPTION_PANTSU_SHOP_5_1</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_6</defName>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_5_2</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_7</defName>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_5_3</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_8</defName>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_5_4</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_9</defName>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_5_5</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_10</defName>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+    </options>
+  </SRA.EventDef> 
+  
+  <SRA.EventDef>
+    <defName>KT_EVENT_PANTSU_SHOP_6</defName>
+    <label>KT_PANTSU_SHOP_TITLE</label>
+    <portraitPath>KT_UI/Events/Portraits/SRA_UF_Honour_Guard_Frigate</portraitPath>
+    <characterName>KT_PANTSU_SHOP_EDEN</characterName>
+    <windowType>SRA.Dialog_NewLayoutDisplay</windowType>
+	<eventUIConfig>KT_EventUIConfig</eventUIConfig>
+    <descriptions>
+      <li>KT_DESC_PANTSU_SHOP_6</li>
+    </descriptions>
+    <options>
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_5_2</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_7</defName>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_5_3</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_8</defName>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_5_4</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_9</defName>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_5_5</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_10</defName>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+    </options>
+  </SRA.EventDef>  
+  
+  <SRA.EventDef>
+    <defName>KT_EVENT_PANTSU_SHOP_7</defName>
+    <label>KT_PANTSU_SHOP_TITLE</label>
+    <portraitPath>KT_UI/Events/Portraits/SRA_UF_Honour_Guard_Frigate</portraitPath>
+    <characterName>KT_PANTSU_SHOP_EDEN</characterName>
+    <windowType>SRA.Dialog_NewLayoutDisplay</windowType>
+	<eventUIConfig>KT_EventUIConfig</eventUIConfig>
+    <descriptions>
+      <li>KT_DESC_PANTSU_SHOP_6</li>
+    </descriptions>
+    <options>
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_5_1</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_6</defName>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_5_3</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_8</defName>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_5_4</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_9</defName>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_5_5</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_10</defName>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+    </options>
+  </SRA.EventDef>
+  
+  <SRA.EventDef>
+    <defName>KT_EVENT_PANTSU_SHOP_8</defName>
+    <label>KT_PANTSU_SHOP_TITLE</label>
+    <portraitPath>KT_UI/Events/Portraits/SRA_UF_Honour_Guard_Frigate</portraitPath>
+    <characterName>KT_PANTSU_SHOP_EDEN</characterName>
+    <windowType>SRA.Dialog_NewLayoutDisplay</windowType>
+	<eventUIConfig>KT_EventUIConfig</eventUIConfig>
+    <descriptions>
+      <li>KT_DESC_PANTSU_SHOP_8</li>
+    </descriptions>
+    <options>
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_5_1</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_6</defName>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_5_2</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_7</defName>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_5_4</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_9</defName>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_5_5</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_10</defName>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+    </options>
+  </SRA.EventDef>
+  
+  <SRA.EventDef>
+    <defName>KT_EVENT_PANTSU_SHOP_9</defName>
+    <label>KT_PANTSU_SHOP_TITLE</label>
+    <portraitPath>KT_UI/Events/Portraits/SRA_UF_Honour_Guard_Frigate</portraitPath>
+    <characterName>KT_PANTSU_SHOP_EDEN</characterName>
+    <windowType>SRA.Dialog_NewLayoutDisplay</windowType>
+	<eventUIConfig>KT_EventUIConfig</eventUIConfig>
+    <descriptions>
+      <li>KT_DESC_PANTSU_SHOP_9</li>
+    </descriptions>
+	
+    <options>
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_5_1</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_6</defName>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_5_2</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_7</defName>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_5_3</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_8</defName>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_5_5</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_10</defName>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+    </options>
+  </SRA.EventDef>
+  
+  <SRA.EventDef>
+    <defName>KT_EVENT_PANTSU_SHOP_10</defName>
+    <label>KT_PANTSU_SHOP_TITLE</label>
+    <portraitPath>KT_UI/Events/Portraits/SRA_UF_Honour_Guard_Frigate</portraitPath>
+    <characterName>KT_PANTSU_SHOP_EDEN</characterName>
+    <windowType>SRA.Dialog_NewLayoutDisplay</windowType>
+	<eventUIConfig>KT_EventUIConfig</eventUIConfig>
+    <descriptions>
+      <li>KT_DESC_PANTSU_SHOP_10</li>
+    </descriptions>
+	
+	<immediateEffects>
+      <li>
+        <effects>
+          <!-- 为防止报错，购买变量都需要是先设置0 -->
+          <li Class="SRA.Effect_SetVariable">
+            <name>KT_Purchase_time_trade</name>
+            <value>0</value>
+          </li>
+          <li Class="SRA.Effect_SetVariable">
+              <name>KT_Purchase_time_mecha_vanguard</name>
+			  <value>0</value>
+          </li>
+		  <li Class="SRA.Effect_SetVariable">
+              <name>KT_Purchase_time_mecha_AGT</name>
+			  <value>0</value>
+         </li>
+        </effects>
+      </li>
+    </immediateEffects>
+	
+    <options>
+	  <li>
+        <label>KT_BYE</label>
+        <optionEffects>
+          <li>
+            <effects>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+    </options>
+  </SRA.EventDef>
+  
+  <SRA.EventDef>
+    <defName>KT_EVENT_PANTSU_SHOP_11</defName>
+    <label>KT_PANTSU_SHOP_TITLE</label>
+    <portraitPath>KT_UI/Events/Portraits/SRA_UF_Honour_Guard_Frigate</portraitPath>
+    <characterName>KT_PANTSU_SHOP_EDEN</characterName>
+    <windowType>SRA.Dialog_NewLayoutDisplay</windowType>
+	<eventUIConfig>KT_EventUIConfig</eventUIConfig>
+    <descriptions>
+      <li>KT_DESC_PANTSU_SHOP_11_1</li>
+	  <li>KT_DESC_PANTSU_SHOP_11_2</li>
+	  <li>KT_DESC_PANTSU_SHOP_11_3</li>
+	  <li>KT_DESC_PANTSU_SHOP_11_4</li>
+	  <li>KT_DESC_PANTSU_SHOP_11_5</li>
+    </descriptions>
+	
+	<immediateEffects>
+      <li>
+        <effects>
+          <!-- 当前时间变量 -->
+          <li Class="SRA.Effect_StoreTicksPassed">
+            <variableName>KT_Current_time_trade</variableName>
+          </li>
+        </effects>
+      </li>
+	  <li>
+        <effects>
+		<!-- 当前时间减去购买时间变量 -->
+		  <li Class="SRA.Effect_ModifyVariable">
+            <name>KT_Current_time_trade</name>
+            <valueVariableName>KT_Purchase_time_trade</valueVariableName>
+            <operation>Subtract</operation>
+          </li>
+        </effects>
+      </li>
+    </immediateEffects>
+    <options>
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_11_1</label>
+		<disabledReason>KT_OPTION_PANTSU_SHOP_11_1_disabled</disabledReason>
+		<!-- 60000一天 -->
+		<conditions>
+          <li Class="SRA.Condition_VariableGreaterThanOrEqual">
+            <name>KT_Current_time_trade</name>
+            <value>60000</value>
+          </li>
+        </conditions>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_12</defName>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_11_2</label>
+		<disabledReason>KT_OPTION_PANTSU_SHOP_11_2_disabled</disabledReason>
+		<conditions>
+          <li Class="SRA.Condition_HasResearchProject">
+            <researchProject>KT_Mecha_tech</researchProject>
+          </li>
+        </conditions>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_13</defName>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+	  <li>
+        <label>NONEED</label>
+        <optionEffects>
+          <li>
+            <effects>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+    </options>
+  </SRA.EventDef>
+  
+  <SRA.EventDef>
+    <defName>KT_EVENT_PANTSU_SHOP_12</defName>
+    <label>KT_PANTSU_SHOP_TITLE</label>
+    <portraitPath>KT_UI/Events/Portraits/SRA_UF_Honour_Guard_Frigate</portraitPath>
+    <characterName>KT_PANTSU_SHOP_EDEN</characterName>
+    <windowType>SRA.Dialog_NewLayoutDisplay</windowType>
+	<eventUIConfig>KT_EventUIConfig</eventUIConfig>
+    <descriptions>
+      <li>KT_DESC_PANTSU_SHOP_12_1</li>
+	  <li>KT_DESC_PANTSU_SHOP_12_2</li>
+    </descriptions>
+	
+    <options>
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_12_1</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_SpawnOrbitTrader">
+                <traderKindDef>KT_material_Trader</traderKindDef>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+			  <!-- 购买后的时间变量 -->
+              <li Class="SRA.Effect_StoreTicksPassed">
+                <variableName>KT_Purchase_time_trade</variableName>
+              </li>
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_12_2</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_SpawnOrbitTrader">
+                <traderKindDef>KT_food_Trader</traderKindDef>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+			  <!-- 购买后的时间变量 -->
+              <li Class="SRA.Effect_StoreTicksPassed">
+                <variableName>KT_Purchase_time_trade</variableName>
+              </li>
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_12_3</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_SpawnOrbitTrader">
+                <traderKindDef>KT_armament_Trader</traderKindDef>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+			  <!-- 购买后的时间变量 -->
+              <li Class="SRA.Effect_StoreTicksPassed">
+                <variableName>KT_Purchase_time_trade</variableName>
+              </li>
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+	  
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_12_4</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_SpawnOrbitTrader">
+                <traderKindDef>KT_slave_Trader</traderKindDef>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+			  <!-- 购买后的时间变量 -->
+              <li Class="SRA.Effect_StoreTicksPassed">
+                <variableName>KT_Purchase_time_trade</variableName>
+              </li>
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+	  
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_12_6</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_SpawnOrbitTrader">
+                <traderKindDef>KT_medic_Trader</traderKindDef>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+			  <!-- 购买后的时间变量 -->
+              <li Class="SRA.Effect_StoreTicksPassed">
+                <variableName>KT_Purchase_time_trade</variableName>
+              </li>
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+	  
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_12_5</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_SpawnOrbitTrader">
+                <traderKindDef>KT_pantsushop_Trader</traderKindDef>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+			  <!-- 购买后的时间变量 -->
+              <li Class="SRA.Effect_StoreTicksPassed">
+                <variableName>KT_Purchase_time_trade</variableName>
+              </li>
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+	  
+	  <li>
+        <label>GOBACK</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_11</defName>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+    </options>
+  </SRA.EventDef>
+  
+  <SRA.EventDef>
+    <defName>KT_EVENT_PANTSU_SHOP_13</defName>
+    <label>KT_PANTSU_SHOP_TITLE</label>
+    <portraitPath>KT_UI/Events/Portraits/SRA_UF_Honour_Guard_Frigate</portraitPath>
+    <characterName>KT_PANTSU_SHOP_EDEN</characterName>
+    <windowType>SRA.Dialog_NewLayoutDisplay</windowType>
+	<eventUIConfig>KT_EventUIConfig</eventUIConfig>
+    <descriptions>
+      <li>KT_DESC_PANTSU_SHOP_13</li>
+    </descriptions>
+	
+	<immediateEffects>
+      <li>
+        <effects>
+          <!-- 当前时间变量先锋级 -->
+          <li Class="SRA.Effect_StoreTicksPassed">
+            <variableName>KT_Current_time_mecha_vanguard</variableName>
+          </li>
+        </effects>
+      </li>
+	  <li>
+        <effects>
+		<!-- 当前时间减去购买时间变量先锋级 -->
+		  <li Class="SRA.Effect_ModifyVariable">
+            <name>KT_Current_time_mecha_vanguard</name>
+            <valueVariableName>KT_Purchase_time_mecha_vanguard</valueVariableName>
+            <operation>Subtract</operation>
+          </li>
+        </effects>
+      </li>
+	  
+	  <li>
+        <effects>
+          <!-- 当前时间变量坦克 -->
+          <li Class="SRA.Effect_StoreTicksPassed">
+            <variableName>KT_Current_time_mecha_AGT</variableName>
+          </li>
+        </effects>
+      </li>
+	  <li>
+        <effects>
+		<!-- 当前时间减去购买时间变量先锋级 -->
+		  <li Class="SRA.Effect_ModifyVariable">
+            <name>KT_Current_time_mecha_AGT</name>
+            <valueVariableName>KT_Purchase_time_mecha_AGT</valueVariableName>
+            <operation>Subtract</operation>
+          </li>
+        </effects>
+      </li>
+    </immediateEffects>
+	
+    <options>
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_13_1</label>
+		<disabledReason>KT_OPTION_PANTSU_SHOP_13_1_disabled</disabledReason>
+		<!-- 60000一天，先锋级CD5天 -->
+		<conditions>
+          <li Class="SRA.Condition_VariableGreaterThanOrEqual">
+            <name>KT_Current_time_mecha_vanguard</name>
+            <value>300000</value>
+          </li>
+        </conditions>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_14</defName>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_13_2</label>
+		<disabledReason>KT_OPTION_PANTSU_SHOP_13_2_disabled</disabledReason>
+		<!-- 60000一天，坦克CD3天 -->
+		<conditions>
+          <li Class="SRA.Condition_VariableGreaterThanOrEqual">
+            <name>KT_Current_time_mecha_AGT</name>
+            <value>180000</value>
+          </li>
+        </conditions>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_15</defName>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+	  
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_13_3</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_16</defName>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+	  <li>
+        <label>GOBACK</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_11</defName>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+    </options>
+  </SRA.EventDef>
+  <!-- 购买先锋级 -->
+  <SRA.EventDef>
+    <defName>KT_EVENT_PANTSU_SHOP_14</defName>
+    <label>KT_PANTSU_SHOP_TITLE</label>
+    <portraitPath>KT_UI/Events/Portraits/SRA_UF_Honour_Guard_Frigate</portraitPath>
+    <characterName>KT_PANTSU_SHOP_EDEN</characterName>
+    <windowType>SRA.Dialog_NewLayoutDisplay</windowType>
+	<eventUIConfig>KT_EventUIConfig</eventUIConfig>
+    <descriptions>
+      <li>KT_DESC_PANTSU_SHOP_14</li>
+    </descriptions>
+	
+	
+    <options>
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_14_1</label>
+		<disabledReason>SILVERNOTENOUGH</disabledReason>
+		<conditions>
+          <li Class="SRA.Condition_HasThing">
+            <thingDef>Silver</thingDef>
+            <count>20000</count>
+          </li>
+        </conditions>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_SpawnSkyfaller">
+                <skyfaller>UF_Express_vanguard_main_gun_Incoming</skyfaller>
+                <useTradeDropSpot>true</useTradeDropSpot>
+              </li>
+			  <li Class="SRA.Effect_TakeThing">
+                <thingDef>Silver</thingDef>
+                <count>20000</count>
+              </li>
+			  <li Class="SRA.Effect_ShowMessage">
+                <message>KT_MESSAGE_PANTSU_SHOP_14_1</message>
+                <messageTypeDef>PositiveEvent</messageTypeDef>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+			  
+			  <!-- 购买后的时间变量 -->
+              <li Class="SRA.Effect_StoreTicksPassed">
+                <variableName>KT_Purchase_time_mecha_vanguard</variableName>
+              </li>
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+	
+	  <li>
+        <label>GOBACK</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_13</defName>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+    </options>
+  </SRA.EventDef>
+  
+  <SRA.EventDef>
+    <defName>KT_EVENT_PANTSU_SHOP_15</defName>
+    <label>KT_PANTSU_SHOP_TITLE</label>
+    <portraitPath>KT_UI/Events/Portraits/SRA_UF_Honour_Guard_Frigate</portraitPath>
+    <characterName>KT_PANTSU_SHOP_EDEN</characterName>
+    <windowType>SRA.Dialog_NewLayoutDisplay</windowType>
+	<eventUIConfig>KT_EventUIConfig</eventUIConfig>
+    <descriptions>
+      <li>KT_DESC_PANTSU_SHOP_15</li>
+    </descriptions>
+	
+	
+    <options>
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_15_1</label>
+		<disabledReason>SILVERNOTENOUGH</disabledReason>
+		<conditions>
+          <li Class="SRA.Condition_HasThing">
+            <thingDef>Silver</thingDef>
+            <count>10000</count>
+          </li>
+        </conditions>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_SpawnSkyfaller">
+                <skyfaller>Duckmazon_AGT_Incoming</skyfaller>
+                <useTradeDropSpot>true</useTradeDropSpot>
+              </li>
+			  <li Class="SRA.Effect_TakeThing">
+                <thingDef>Silver</thingDef>
+                <count>10000</count>
+              </li>
+			  <li Class="SRA.Effect_ShowMessage">
+                <message>KT_MESSAGE_PANTSU_SHOP_15_1</message>
+                <messageTypeDef>PositiveEvent</messageTypeDef>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+			  
+			  <!-- 购买后的时间变量 -->
+              <li Class="SRA.Effect_StoreTicksPassed">
+                <variableName>KT_Purchase_time_mecha_AGT</variableName>
+              </li>
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+	  <li>
+        <label>GOBACK</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_13</defName>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+    </options>
+  </SRA.EventDef>
+  
+<SRA.EventDef>
+    <defName>KT_EVENT_PANTSU_SHOP_16</defName>
+    <label>KT_PANTSU_SHOP_TITLE</label>
+    <portraitPath>KT_UI/Events/Portraits/SRA_UF_Honour_Guard_Frigate</portraitPath>
+    <characterName>KT_PANTSU_SHOP_EDEN</characterName>
+    <windowType>SRA.Dialog_NewLayoutDisplay</windowType>
+	<eventUIConfig>KT_EventUIConfig</eventUIConfig>
+    <descriptions>
+      <li>KT_DESC_PANTSU_SHOP_16</li>
+    </descriptions>
+	
+	
+    <options>
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_16_1</label>
+		<disabledReason>SILVERNOTENOUGH</disabledReason>
+		<conditions>
+          <li Class="SRA.Condition_HasThing">
+            <thingDef>Silver</thingDef>
+            <count>5000</count>
+          </li>
+        </conditions>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_SpawnSkyfaller">
+                <skyfaller>Humanoid_Express_BIO_CATGIRL_fabricor_Incoming</skyfaller>
+                <useTradeDropSpot>true</useTradeDropSpot>
+              </li>
+			  <li Class="SRA.Effect_TakeThing">
+                <thingDef>Silver</thingDef>
+                <count>5000</count>
+              </li>
+			  <li Class="SRA.Effect_ShowMessage">
+                <message>KT_MESSAGE_PANTSU_SHOP_16_1</message>
+                <messageTypeDef>PositiveEvent</messageTypeDef>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+	  <li>
+        <label>KT_OPTION_PANTSU_SHOP_16_2</label>
+		<disabledReason>SILVERNOTENOUGH</disabledReason>
+		<conditions>
+          <li Class="SRA.Condition_HasThing">
+            <thingDef>Silver</thingDef>
+            <count>5000</count>
+          </li>
+        </conditions>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_SpawnSkyfaller">
+                <skyfaller>Humanoid_Express_BIO_CATGIRL_logistics_Incoming</skyfaller>
+                <useTradeDropSpot>true</useTradeDropSpot>
+              </li>
+			  <li Class="SRA.Effect_TakeThing">
+                <thingDef>Silver</thingDef>
+                <count>5000</count>
+              </li>
+			  <li Class="SRA.Effect_ShowMessage">
+                <message>KT_MESSAGE_PANTSU_SHOP_16_1</message>
+                <messageTypeDef>PositiveEvent</messageTypeDef>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+	  <li>
+        <label>GOBACK</label>
+        <optionEffects>
+          <li>
+            <effects>
+			  <li Class="SRA.Effect_OpenCustomUI">
+                <defName>KT_EVENT_PANTSU_SHOP_13</defName>
+              </li>
+              <li Class="SRA.Effect_CloseDialog" />
+            </effects>
+          </li>
+        </optionEffects>
+      </li>
+    </options>
+  </SRA.EventDef>
+</Defs>
+

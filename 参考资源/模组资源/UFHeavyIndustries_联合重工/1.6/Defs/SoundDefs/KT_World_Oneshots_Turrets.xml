@@ -1,0 +1,768 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Defs>
+	<SoundDef>
+		<defName>Pocket20MMACRound</defName>
+		<context>MapOnly</context>
+        <maxSimultaneous>1</maxSimultaneous>
+       <subSounds>
+         <li>
+           <grains>
+             <li Class="AudioGrain_Clip">
+             <clipPath>Pocket20MMACRound</clipPath>
+          </li>
+        </grains>      
+        <pitchRange>0.83~1.15</pitchRange>
+        <volumeRange>35~35</volumeRange>  
+      </li>
+     </subSounds>
+  </SoundDef>
+  
+  <SoundDef>
+		<defName>KTLMRound</defName>
+		<context>MapOnly</context>
+        <maxSimultaneous>1</maxSimultaneous>
+       <subSounds>
+         <li>
+           <grains>
+             <li Class="AudioGrain_Clip">
+             <clipPath>KTLMRound</clipPath>
+          </li>
+        </grains>      
+        <pitchRange>0.83~1.15</pitchRange>
+        <volumeRange>35~35</volumeRange>  
+      </li>
+     </subSounds>
+  </SoundDef>
+  
+  <SoundDef>
+		<defName>KT57MMRound</defName>
+		<context>MapOnly</context>
+        <maxSimultaneous>1</maxSimultaneous>
+       <subSounds>
+         <li>
+           <grains>
+             <li Class="AudioGrain_Clip">
+             <clipPath>KT57MMRound</clipPath>
+          </li>
+        </grains>      
+        <pitchRange>0.83~1.15</pitchRange>
+        <volumeRange>35~35</volumeRange>  
+      </li>
+     </subSounds>
+  </SoundDef>
+   
+  <SoundDef>
+		<defName>KTRAILGUNRound</defName>
+		<context>MapOnly</context>
+        <maxSimultaneous>3</maxSimultaneous>
+       <subSounds>
+         <li>
+           <grains>
+             <li Class="AudioGrain_Clip">
+             <clipPath>KTRAILGUNRound</clipPath>
+          </li>
+        </grains>      
+        <pitchRange>0.83~1.15</pitchRange>
+        <volumeRange>45~50</volumeRange>  
+      </li>
+     </subSounds>
+  </SoundDef>
+  
+  <SoundDef>
+		<defName>KT_rocket</defName>
+		<context>MapOnly</context>
+        <maxSimultaneous>1</maxSimultaneous>
+       <subSounds>
+         <li>
+           <grains>
+             <li Class="AudioGrain_Clip">
+             <clipPath>KT_rocket</clipPath>
+          </li>
+        </grains>      
+        <pitchRange>0.83~1.15</pitchRange>
+        <volumeRange>45~50</volumeRange>  
+      </li>
+     </subSounds>
+  </SoundDef>
+  
+  <SoundDef>
+		<defName>KTRAILAUTOGUNRound</defName>
+		<context>MapOnly</context>
+        <maxSimultaneous>3</maxSimultaneous>
+       <subSounds>
+         <li>
+           <grains>
+             <li Class="AudioGrain_Clip">
+             <clipPath>KTRAILAUTOGUNRound</clipPath>
+          </li>
+        </grains>      
+        <pitchRange>0.83~1.15</pitchRange>
+        <volumeRange>45~50</volumeRange>  
+      </li>
+     </subSounds>
+  </SoundDef>
+ 
+   <SoundDef>
+		<defName>KTPLASMACANNONRound</defName>
+		<context>MapOnly</context>
+        <maxSimultaneous>3</maxSimultaneous>
+       <subSounds>
+         <li>
+           <grains>
+             <li Class="AudioGrain_Clip">
+             <clipPath>KTPLASMACANNONRound</clipPath>
+          </li>
+        </grains>      
+        <pitchRange>0.83~1.15</pitchRange>
+        <volumeRange>45~50</volumeRange>  
+      </li>
+     </subSounds>
+  </SoundDef>
+  
+     <SoundDef>
+		<defName>KT_tachyon_lance_fire</defName>
+		<context>MapOnly</context>
+        <maxSimultaneous>1</maxSimultaneous>
+       <subSounds>
+         <li>
+           <grains>
+             <li Class="AudioGrain_Clip">
+             <clipPath>KT_tachyon_lance_fire</clipPath>
+          </li>
+        </grains>      
+        <pitchRange>0.90~1.25</pitchRange>
+        <volumeRange>100~150</volumeRange>  
+      </li>
+     </subSounds>
+  </SoundDef>
+  
+  <SoundDef>
+    <defName>KTNONESOUND</defName>
+    <context>MapOnly</context> 
+    <maxSimultaneous>0</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Folder">
+            <clipFolderPath>Weapon/RocketswarmLauncher/Explosion</clipFolderPath>
+          </li>
+        </grains>
+        <volumeRange>0</volumeRange>
+        <pitchRange>0~0</pitchRange>
+      </li>
+    </subSounds>
+  </SoundDef> 
+  
+  	<SoundDef>
+        <defName>KTSound_Cannonii</defName>
+        <context>MapOnly</context>
+        <eventNames />
+        <maxSimultaneous>1</maxSimultaneous>
+        <subSounds>
+            <li>
+                <grains>
+                    <li Class="AudioGrain_Clip">
+                        <clipPath>KTcannonii</clipPath>
+                    </li>
+                </grains>
+                <pitchRange>
+                    <min>2</min>
+                    <max>2.112391</max>
+                </pitchRange>
+                <paramMappings>
+                    <li>
+                        <inParam Class="SoundParamSource_CameraAltitude" />
+                        <outParam Class="SoundParamTarget_PropertyLowPass">
+                            <filterProperty>Cutoff</filterProperty>
+                        </outParam>
+                        <paramUpdateMode>Constant</paramUpdateMode>
+                        <curve>
+                            <points>
+                                <li>
+                                    <loc>
+                                        <x>17.08957</x>
+                                        <y>21001.8</y>
+                                    </loc>
+                                </li>
+                                <li>
+                                    <loc>
+                                        <x>24.77761</x>
+                                        <y>121201.95</y>
+                                    </loc>
+                                </li>
+                                <li>
+                                    <loc>
+                                        <x>32.786</x>
+                                        <y>7168.717</y>
+                                    </loc>
+                                </li>
+                                <li>
+                                    <loc>
+                                        <x>45.91975</x>
+                                        <y>42120.358</y>
+                                    </loc>
+                                </li>
+                                <li>
+                                    <loc>
+                                        <x>66.10088</x>
+                                        <y>2557.69</y>
+                                    </loc>
+                                </li>
+                            </points>
+                        </curve>
+                    </li>
+                </paramMappings>
+                <filters>
+                    <li Class="SoundFilterLowPass">
+                        <cutoffFrequency>10000</cutoffFrequency>
+                        <lowpassResonaceQ>1</lowpassResonaceQ>
+                    </li>
+                </filters>
+                <sustainLoop>False</sustainLoop>
+            </li>
+        </subSounds>
+    </SoundDef>
+	
+  <SoundDef>
+    <defName>KT_Beamflashlight_light</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>KT_Beamflashlight_light</clipPath>
+          </li>
+        </grains>
+        <volumeRange>25</volumeRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+  
+  <SoundDef>
+    <defName>KT_blastercannon</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>KT_blastercannon</clipPath>
+          </li>
+        </grains>
+        <volumeRange>120</volumeRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+  
+  <SoundDef>
+    <defName>KT_Boltgun</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>KT_Boltgun</clipPath>
+          </li>
+        </grains>
+        <volumeRange>40</volumeRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+  
+  <SoundDef>
+    <defName>KT_AUTOCANNON</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>KT_AUTOCANNON</clipPath>
+          </li>
+        </grains>
+        <volumeRange>50</volumeRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+  
+  <SoundDef>
+    <defName>KT_AUTOCANNON_II</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>KT_AUTOCANNON_II</clipPath>
+          </li>
+        </grains>
+        <volumeRange>50</volumeRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+  <SoundDef>
+    <defName>KT_AUTOCANNON_III</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>KT_AUTOCANNON_III</clipPath>
+          </li>
+        </grains>
+        <volumeRange>50</volumeRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+  <SoundDef>
+    <defName>KT_Massivecannon</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>KT_Massivecannon</clipPath>
+          </li>
+        </grains>
+        <volumeRange>120</volumeRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+  
+  <SoundDef>
+    <defName>KT_Railgun</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>KT_Railgun</clipPath>
+          </li>
+        </grains>
+        <volumeRange>120</volumeRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+  
+  <SoundDef>
+    <defName>KT_Railgun_II</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>KT_Railgun_II</clipPath>
+          </li>
+        </grains>
+        <volumeRange>220</volumeRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+  
+  
+  <SoundDef>
+    <defName>KT_Largecannon</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>KT_Largecannon</clipPath>
+          </li>
+        </grains>
+        <volumeRange>120</volumeRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+  
+  <SoundDef>
+    <defName>KT_Largecannon_II</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>KT_Largecannon_II</clipPath>
+          </li>
+        </grains>
+        <volumeRange>120</volumeRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+  
+  <SoundDef>
+    <defName>KT_Largecannon_III</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>KT_Largecannon_III</clipPath>
+          </li>
+        </grains>
+        <volumeRange>120</volumeRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+  
+  <SoundDef>
+    <defName>KT_Largecannon_V</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>KT_Largecannon_V</clipPath>
+          </li>
+        </grains>
+        <volumeRange>120</volumeRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+  
+  <SoundDef>
+    <defName>KT_AUTOCANNON_IV</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>KT_AUTOCANNON_IV</clipPath>
+          </li>
+        </grains>
+        <volumeRange>120</volumeRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+  <SoundDef>
+    <defName>KT_AUTOCANNON_V</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>KT_AUTOCANNON_V</clipPath>
+          </li>
+        </grains>
+        <volumeRange>120</volumeRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+  
+  <SoundDef>
+    <defName>KT_AUTOCANNON_VI</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>KT_AUTOCANNON_VI</clipPath>
+          </li>
+        </grains>
+        <volumeRange>50</volumeRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+  
+  <SoundDef>
+    <defName>KT_AUTOCANNON_VII</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>KT_AUTOCANNON_VII</clipPath>
+          </li>
+        </grains>
+        <volumeRange>50</volumeRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+  
+  <SoundDef>
+    <defName>KT_gunshot</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>KT_gunshot</clipPath>
+          </li>
+        </grains>
+        <volumeRange>120</volumeRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+  
+  <SoundDef>
+    <defName>KT_gunshot_II</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>KT_gunshot_II</clipPath>
+          </li>
+        </grains>
+        <volumeRange>120</volumeRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+  
+  <SoundDef>
+    <defName>KT_gunshot_III</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>KT_gunshot_III</clipPath>
+          </li>
+        </grains>
+        <volumeRange>120</volumeRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+  
+  <SoundDef>
+    <defName>KT_gunshot_IV</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>KT_gunshot_IV</clipPath>
+          </li>
+        </grains>
+        <volumeRange>120</volumeRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+  
+  <SoundDef>
+    <defName>KT_Beamflashlight_heavy</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>KT_Beamflashlight_heavy</clipPath>
+          </li>
+        </grains>
+        <volumeRange>40</volumeRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+  
+  
+  <SoundDef>
+    <defName>Pawn_KT_BIO_CATGIRL_Wounded</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>Pawn_KT_BIO_CATGIRL_Wounded</clipPath>
+          </li>
+        </grains>
+        <volumeRange>35</volumeRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+  <SoundDef>
+    <defName>Pawn_KT_BIO_CATGIRL_Death</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>Pawn_KT_BIO_CATGIRL_Death</clipPath>
+          </li>
+        </grains>
+        <volumeRange>35</volumeRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+  <SoundDef>
+    <defName>Pawn_KT_BIO_CATGIRL_Call</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>Pawn_KT_BIO_CATGIRL_Call</clipPath>
+          </li>
+        </grains>
+        <volumeRange>35</volumeRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+  <!-- 全图听到的音效 -->
+  <SoundDef>
+    <defName>KT_flyby</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>2</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>KT_flyby</clipPath>
+          </li>
+        </grains>
+        <volumeRange>55</volumeRange>
+        <pitchRange>0.9~1.1</pitchRange>
+        <onCamera>True</onCamera>
+      </li>
+    </subSounds>
+  </SoundDef>
+  
+  <SoundDef>
+    <defName>KT_flyby_II</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>2</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>KT_flyby_II</clipPath>
+          </li>
+        </grains>
+        <volumeRange>55</volumeRange>
+        <pitchRange>0.9~1.1</pitchRange>
+        <onCamera>True</onCamera>
+      </li>
+    </subSounds>
+  </SoundDef>
+  
+  <SoundDef>
+    <defName>KT_Largecannon_IV</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>2</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>KT_Largecannon_IV</clipPath>
+          </li>
+        </grains>
+        <volumeRange>55</volumeRange>
+        <pitchRange>0.9~1.1</pitchRange>
+        <onCamera>True</onCamera>
+      </li>
+    </subSounds>
+  </SoundDef>
+  
+  
+
+  
+  <SoundDef>
+    <defName>KT_AX_CANNON</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>KT_AUTOCANNON</clipPath>
+          </li>
+        </grains>
+        <volumeRange>55</volumeRange>
+        <pitchRange>0.9~1.1</pitchRange>
+        <onCamera>True</onCamera>
+      </li>
+    </subSounds>
+  </SoundDef>
+  <SoundDef>
+    <defName>KT_alarm</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>KT_alarm</clipPath>
+          </li>
+        </grains>
+        <volumeRange>55</volumeRange>
+        <pitchRange>0.9~1.1</pitchRange>
+        <onCamera>True</onCamera>
+      </li>
+    </subSounds>
+  </SoundDef>
+  <SoundDef>
+    <defName>KT_AX5000KG</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>KT_AX5000KG</clipPath>
+          </li>
+        </grains>
+        <volumeRange>55</volumeRange>
+        <pitchRange>0.9~1.1</pitchRange>
+        <onCamera>True</onCamera>
+      </li>
+    </subSounds>
+  </SoundDef>
+  
+  <SoundDef>
+    <defName>KT_explosion</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>KT_explosion</clipPath>
+          </li>
+        </grains>
+        <volumeRange>50</volumeRange>
+        <pitchRange>0.8~1.0</pitchRange>
+        <onCamera>True</onCamera>
+      </li>
+    </subSounds>
+  </SoundDef>
+  
+  <SoundDef>
+    <defName>KT_hissing</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>KT_hissing</clipPath>
+          </li>
+        </grains>
+        <volumeRange>50</volumeRange>
+        <pitchRange>0.8~1.0</pitchRange>
+        <onCamera>True</onCamera>
+      </li>
+    </subSounds>
+  </SoundDef>
+</Defs>

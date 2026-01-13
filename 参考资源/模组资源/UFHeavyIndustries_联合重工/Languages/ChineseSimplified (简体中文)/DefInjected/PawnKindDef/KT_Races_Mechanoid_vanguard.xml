@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: KT_Main_battlewalker -->
+  <KT_Main_battlewalker.label>「先锋」战斗步行机</KT_Main_battlewalker.label>
+  <KT_Main_battlewalker.description>某公约国使用的中小型无人步行机，可以选择多种挂载方案应对不同的战术需求，同时护盾发生器和承伤立场可以很好的弥补机体脆弱的问题，在某些极端情况下甚至可以正面抗下一轮来自舰娘的火力打击</KT_Main_battlewalker.description>
+  
+  <!-- EN: KT_Main_battlewalker_PawnKind_main_autogun -->
+  <KT_Main_battlewalker_PawnKind_main_autogun.label>「先锋」战斗步行机</KT_Main_battlewalker_PawnKind_main_autogun.label>
+  
+  <!-- EN: KT_Main_battlewalker_PawnKind_main_gatling -->
+  <KT_Main_battlewalker_PawnKind_main_gatling.label>「先锋」战斗步行机</KT_Main_battlewalker_PawnKind_main_gatling.label>
+  
+  <KT_BIO_CATGIRL_fabricor.label>「操作型」联合生化猫娘</KT_BIO_CATGIRL_fabricor.label>
+  <KT_BIO_CATGIRL_logistics.label>「后勤型」联合生化猫娘</KT_BIO_CATGIRL_logistics.label>
+</LanguageData>

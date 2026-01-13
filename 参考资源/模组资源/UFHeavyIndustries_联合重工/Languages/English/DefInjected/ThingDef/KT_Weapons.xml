@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData> 
+<KT_Pistol.label>"Peacemaker" P-3 Laser Pistol</KT_Pistol.label>
+  <KT_Pistol.description>Historical records indicate that this type of weapon is the lowest tier in the security system of the UF Fleet's subordinate Pact Nations. This model is designed for humanoid beings, with fast response time and rapid triple-shot capability. Considering the possibility of criminal theft, its power is strictly limited to ensure it cannot damage even a single strand of a UF citizen's hair, guaranteeing their good mood while traveling in vassal states.</KT_Pistol.description>
+  <Bullet_KT_Pistol.label>"Peacemaker" P-3 Laser Pistol</Bullet_KT_Pistol.label>
+  
+  <KT_SMG.label>"Aurora" SMG-99 Laser Submachine Gun</KT_SMG.label>
+  <KT_SMG.description>A laser submachine gun with extremely high rate of fire, compact size, and fast response time, often used aboard Pact Nation ships. Considering the possibility of criminal theft, its power is strictly limited to ensure it cannot damage even a single strand of a UF citizen's hair, guaranteeing their good mood while traveling in vassal states.</KT_SMG.description>
+  <Bullet_KT_SMG.label>"Aurora" SMG-99 Laser Submachine Gun</Bullet_KT_SMG.label>
+  
+  <KT_AR.label>"Liberator" AR-210 Laser Rifle</KT_AR.label>
+  <KT_AR.description>The most widely equipped laser rifle among Pact Nations, with larger size trading for better shooting accuracy.</KT_AR.description>
+  <Bullet_KT_AR.label>"Liberator" AR-210 Laser Rifle</Bullet_KT_AR.label>
+  
+  <KT_LMG.label>"Ally" MG-12 Laser Light Machine Gun</KT_LMG.label>
+  <KT_LMG.description>A powerful laser light machine gun, but it somewhat affects the user's movement speed.</KT_LMG.description>
+  <Bullet_KT_LMG.label>"Ally" MG-12 Laser Light Machine Gun</Bullet_KT_LMG.label>
+  
+  <KT_HMG.label>"Executor" MG-85 Laser Heavy Machine Gun</KT_HMG.label>
+  <KT_HMG.description>A heavy laser weapon using heavy laser barrels and super capacitors. Users must be strictly screened and require locators installed in the weapon to prevent loss, as this weapon can already leave stains on UF shipgirls' clothing that are difficult to clean.</KT_HMG.description>
+  <Bullet_KT_HMG.label>"Executor" MG-85 Laser Heavy Machine Gun</Bullet_KT_HMG.label>
+  
+  <KT_Sniper.label>"Red Dot" R-67 Heavy Laser Sniper Rifle</KT_Sniper.label>
+  <KT_Sniper.description>Unlike previous sniper rifles that emphasized stealth, this heavy laser sniper rifle leaves very obvious traces after firing and is accompanied by violent explosions, delivering powerful pressure to enemies (though the main reason is that the UF doesn't want vassal states to possess too many highly accurate and concealed weapons).</KT_Sniper.description>
+  <Bullet_KT_Sniper.label>"Red Dot" R-67 Heavy Laser Sniper Rifle</Bullet_KT_Sniper.label>
+  
+  <KT_HEAVYLASERCANNON.label>"Dragon Flame" LC-9 Heavy Laser Cannon</KT_HEAVYLASERCANNON.label>
+  <KT_HEAVYLASERCANNON.description>A powerful shoulder-mounted laser cannon that creates massive explosions upon impact. The shooter needs to control the firing distance carefully to avoid friendly fire.</KT_HEAVYLASERCANNON.description>
+  <Bullet_KT_HEAVYLASERCANNON.label>"Dragon Flame" LC-9 Heavy Laser Cannon</Bullet_KT_HEAVYLASERCANNON.label>
+  
+  <KT_Plasma_Pistol.label>"Scorch Mark" P-35 Plasma Pistol</KT_Plasma_Pistol.label>
+  <KT_Plasma_Pistol.description>A small plasma pistol with limited accuracy but capable of causing explosions and with small-area EMP effects. Built with a very loyal AI, making this weapon free from overheating risks.</KT_Plasma_Pistol.description>
+  <Bullet_KT_Plasma_Pistol.label>"Scorch Mark" P-35 Plasma Pistol</Bullet_KT_Plasma_Pistol.label>
+
+  <KT_Sword.label>"Peace" S-2 Longsword</KT_Sword.label>
+  <KT_Sword.description>After Pact Nations join the UF, they melt down most of their original weapons and recast them into longswords, distributing them as ceremonial weapons to the military as souvenirs. This weapon's attacks附带EMP effects.</KT_Sword.description>
+  
+  <KT_Energy_sword.label>"Paragon" ES-15 Plasma Wrist Sword</KT_Energy_sword.label>
+  <KT_Energy_sword.description>A plasma melee weapon used by a certain Pact Nation, with attacks that with EMP effects. However, the hand structure of its race seems quite different from humans, making it awkward for human use. Reportedly, accidental activation has increased limb disability rates by 10% among that nation's soldiers, though fortunately prosthetic sales have increased by 30% to offset the losses.</KT_Energy_sword.description>
+  
+  <KTLaserArraygun.label>&lt;color=#FFAA00&gt;&lt;i&gt;"Thug" LAS-235 Laser Array Gun&lt;/i&gt;&lt;/color&gt;</KTLaserArraygun.label>
+  <KTLaserArraygun.description>This weapon utilizes dozens of laser arrays placed side by side, firing simultaneously. While powerful, it has a very short effective range. Accuracy plummets beyond this range. Because it's primarily used in close-quarters combat, a small plasma bayonet is specially installed at the muzzle. </KTLaserArraygun.description>
+  <Bullet_KTLaserArraygun.label>"Thug" LAS-235 Laser Array Gun</Bullet_KTLaserArraygun.label>
+
+  <KT_Plasmagun.label>&lt;color=#FFAA00&gt;&lt;i&gt;"Scorched Earth" PLAS-6 Plasma Rifle&lt;/i&gt;&lt;/color&gt;</KT_Plasmagun.label>
+  <KT_Plasmagun.description>This rifle can fire continuous plasma rounds while retaining the EMP effect, though with slightly reduced power. This weapon is very effective against clustered enemies. </KT_Plasmagun.description>
+  <Bullet_KT_Plasmagun.label>"Scorched Earth" PLAS-6 Plasma Rifle</Bullet_KT_Plasmagun.label>
+
+  <KT_WSGW.label>&lt;color=#FFAA00&gt;&lt;i&gt;"KetCat" 127MM Handheld Naval Cannon&lt;/i&gt;&lt;/color&gt;</KT_WSGW.label>
+  <KT_WSGW.description>This incredibly heavy and bizarrely shaped weapon is clearly not designed for creatures of our size. However, it's said to be a handheld cannon from a shipgirl that was retired long before the United War (we don't actually know what that war was). Its shell compression technology allows it to fire shells that are completely disproportionate to its size. \n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can shoot over walls&lt;/i&gt;&lt;/color&gt;\n\n&lt;color=#FFDF4B&gt;&lt;i&gt;This weapon is already quite difficult for us ordinary humans to wield. Perhaps the extradimensional beings want to see us fall clumsily before allowing us to use it.&lt;/i&gt;&lt;/color&gt;</KT_WSGW.description>
+  <Bullet_KT_WSGW.label>"Ket Cat" 152mm Handheld Naval Cannon</Bullet_KT_WSGW.label>
+  
+  <KT_SPEAR.label>&lt;color=#FFAA00&gt;&lt;i&gt;"Loyalty" SPEAR-9 Spear Gun&lt;/i&gt;&lt;/color&gt;</KT_SPEAR.label>
+  <KT_SPEAR.description>A special weapon combining a spear and laser gun, equally effective in long-range sniping and close combat. When held, one can feel His great power, and the user will run faster.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Legend has it that this weapon was designed by our super-dimensional being based on a weapon he saw while traveling in another universe. He only gave this weapon's blueprint to the most loyal colonists.&lt;/i&gt;&lt;/color&gt;</KT_SPEAR.description>
+  <Bullet_KT_SPEAR.label>"Loyalty" SPEAR-9 Spear Gun</Bullet_KT_SPEAR.label>
+  
+  <KT_Powerarmor.label>"Lancer" PA-22 Heavy Power Armor</KT_Powerarmor.label>
+  <KT_Powerarmor.description>Standard power armor for Pact Nation soldiers, featuring excellent CBRN protection and life support systems, designed for humanoid species. This power armor significantly enhances the wearer's running speed, and the hand stabilizer compensators also markedly improve weapon accuracy.\nAdditionally, our hyperdimensional entity has specially accommodated this planet's colonists by equipping this power armor with a built-in shoulder cannon with 8 rounds of universal ammunition, utilizing the same shell compression technology as shipgirl equipment, enabling it to fire 120mm high-explosive shells or EMP plasma shells.</KT_Powerarmor.description>
+  
+  <KT_helmet.label>"Lancer" PA-22 Heavy Power Helmet</KT_helmet.label>
+  <KT_helmet.description>Standard issue helmet for the PA-22 power armor, integrated with life support systems and assisted aiming systems that effectively reduce aiming time. However, the helmet's bulky size has earned it the nickname "toilet head" among soldiers.</KT_helmet.description>
+  
+  <KT_helmet_shark_teeth.label>"Lancer" PA-22 Heavy Power Helmet (Shark Teeth)</KT_helmet_shark_teeth.label>
+  <KT_helmet_shark_teeth.description>Special painted version of the PA-22 power helmet. The shark teeth design makes the wearer appear more aggressive.</KT_helmet_shark_teeth.description>
+
+  
+  <Proj_120mm.label>120mm High-Explosive Shell</Proj_120mm.label>
+  <Proj_plasmabullet.label>EMP Plasma Shell</Proj_plasmabullet.label>
+  
+  <KT_DoomLauncher.label>"Final Warning" DL-1 Annihilation Launcher</KT_DoomLauncher.label>
+  <KT_DoomLauncher.description>This insane weapon utilizes the same technology as the Annihilation Cannon, but with some lightweighting and downsizing. It takes an incredibly long time to reload after firing, and its wide range of impact can cause accidental damage to the launcher, so every shot must be carefully considered.\n\n&lt;color=#FFDF4B&gt;&lt;i&gt;This weapon likely originated from a Pact nation that doesn't care much about the lives of its soldiers.&lt;/i&gt;&lt;/color&gt;    </KT_DoomLauncher.description>
+  <Bullet_KT_DoomLauncher.label>"Final Warning" DL-1 Annihilation Launcher</Bullet_KT_DoomLauncher.label>
+  
+  <KT_Boltgun.label>"Aquila" BR-3 Bolt Rifle</KT_Boltgun.label>
+  <KT_Boltgun.description>A heavy solid-propellant rifle using rocket-propelled ammunition. The oversized trigger guard and substantial weight indicate this weapon is intended for personnel wearing power armor.</KT_Boltgun.description>
+  <Bullet_KT_Boltgun.label>"Aquila" BR-3 Bolt Rifle</Bullet_KT_Boltgun.label>
+  
+  <KT_BoltgunP.label>&lt;color=#FFAA00&gt;&lt;i&gt;"Golden Throne" BR-5 Master-Crafted Bolt Rifle&lt;/i&gt;&lt;/color&gt;</KT_BoltgunP.label>
+  <KT_BoltgunP.description>A master-crafted boltgun variant fitted with decorative optics and an extended barrel. The ammunition is coated with seal oil, significantly enhancing its potency. Although the United Fleet imposes strict regulations on firearm embellishment, the user found a loophole to affix a Perfection Seal onto the weapon, expressing their loyalty and devotion.\n\n&lt;color=#FFDF4B&gt;&lt;i&gt;Blood for the T-Du! Skulls for the Throne of Virtue!&lt;/i&gt;&lt;/color&gt;</KT_BoltgunP.description>
+  <Bullet_KT_BoltgunP.label>"Golden Throne" BR-5 Master-Crafted Bolt Rifle</Bullet_KT_BoltgunP.label>
+  
+  <KT_Tranquilizer.label>"Nuceria" T-1 Tranquilizer Rifle</KT_Tranquilizer.label>
+  <KT_Tranquilizer.description>This weapon can fire dozens of tranquilizer darts in a single volley, rapidly incapacitating targets while minimizing lethal risk (provided targets don't collapse forward and suffer secondary injuries from embedded syringes). Theoretically effective against most mobile entities, even mechanoids.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Legend claims the Pact Nation that produced this firearm once subdued an Abyssal shipgirl soldier from another shipgirl Pact Nation—truly remarkable.&lt;/i&gt;&lt;/color&gt;</KT_Tranquilizer.description>
+  <Bullet_KT_Tranquilizer.label>"Nuceria" T-1 Tranquilizer Rifle</Bullet_KT_Tranquilizer.label>
+  <BulletTranquilizer.label>Tranq Dart</BulletTranquilizer.label>
+</LanguageData>

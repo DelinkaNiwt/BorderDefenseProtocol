@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <KT20MMACTurret.label>「死神」三联装12.7MM自动机枪</KT20MMACTurret.label>
+  <KT20MMACTurret.description>高射速自动机枪塔，拥有三根炮管。可以轻松撕碎一切来犯之敌。</KT20MMACTurret.description>
+  
+  <Bullet_20MMAC.label>「死神」三联装12.7MM自动机枪</Bullet_20MMAC.label>
+  
+  <Gun_20MMAC.label>「死神」三联装12.7MM自动机枪</Gun_20MMAC.label>
+  <Gun_20MMAC.description>高射速自动机枪塔，拥有三根炮管。可以轻松撕碎一切来犯之敌。</Gun_20MMAC.description>
+  
+  <KT100MMCANNON.label>「重锤」100MM自动舰炮</KT100MMCANNON.label>
+  <KT100MMCANNON.description>这门100MM炮塔反应迅速，可以自动对敌对目标实施火力打击，常被出现于小型战舰作为主炮或大型战舰副炮使用。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;</KT100MMCANNON.description>
+  
+  <Gun_KT100MMCANNON.label>「重锤」100MM自动舰炮</Gun_KT100MMCANNON.label>
+  <Gun_KT100MMCANNON.description>重巡级战舰所使用的主炮，威力巨大，但传闻存在一些超级战舰会将这种尺寸的火炮当副炮使用。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;</Gun_KT100MMCANNON.description>
+  
+  <Bullet_KT100MMCANNON.label>「重锤」100MM自动舰炮炮弹</Bullet_KT100MMCANNON.label>
+  <Bullet_KT100MMCANNON.description>100MM炮弹</Bullet_KT100MMCANNON.description>
+  
+  
+  <KT203MMCANNON.label>「裁决」双联203MM自动舰炮</KT203MMCANNON.label>
+  <KT203MMCANNON.description>重巡级战舰所使用的主炮，威力巨大，但传闻存在一些超级战舰会将这种尺寸的火炮当副炮使用。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;</KT203MMCANNON.description>
+  
+  <Gun_KT203MMCANNON.label>「裁决」203MM自动舰炮</Gun_KT203MMCANNON.label>
+  <Gun_KT203MMCANNON.description>重巡级战舰所使用的主炮，威力巨大，但传闻存在一些超级战舰会将这种尺寸的火炮当副炮使用。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;</Gun_KT203MMCANNON.description>
+  
+  <Bullet_KT203MMCANNON.label>「裁决」203MM自动舰炮炮弹</Bullet_KT203MMCANNON.label>
+  <Bullet_KT203MMCANNON.description>203MM炮弹</Bullet_KT203MMCANNON.description>
+  
+  <KT381MMCANNON.label>「诺斯顿」三联装381MM自动舰炮</KT381MMCANNON.label>
+  <KT381MMCANNON.description>口径巨大的重型舰载火炮，最早是维内托级战列舰的主炮，一次打击便可覆盖一整片区域。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;</KT381MMCANNON.description>
+  
+  <Gun_KT381MMCANNON.label>「诺斯顿」三联装381MM自动舰炮</Gun_KT381MMCANNON.label>
+  <Gun_KT381MMCANNON.description>口径巨大的重型舰载火炮，最早是维内托级战列舰的主炮，一次打击便可覆盖一整片区域。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;</Gun_KT381MMCANNON.description>
+  
+  <Bullet_KT381MMCANNON.label>「诺斯顿」381MM自动舰炮炮弹</Bullet_KT381MMCANNON.label>
+  <Bullet_KT381MMCANNON.description>381MM炮弹</Bullet_KT381MMCANNON.description>
+   
+  <KTROCKETTurret.label>「穹顶」火箭弹幕发射器</KTROCKETTurret.label>
+  <KTROCKETTurret.description>精度较低，但可快速对目标区域进行火力覆盖的小型火箭弹幕发射器。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;</KTROCKETTurret.description>
+  
+  <Bullet_KTROCKET.label>「穹顶」火箭弹幕发射器炮弹</Bullet_KTROCKET.label>
+  
+  <Gun_KTROCKET.label>「穹顶」火箭弹幕发射器</Gun_KTROCKET.label>
+  <Gun_KTROCKET.description>精度较低，但可快速对目标区域进行火力覆盖的小型火箭弹幕发射器。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;</Gun_KTROCKET.description>
+  
+  <KTRAILGUN.label>「长钉」120MM磁轨炮</KTRAILGUN.label>
+  <KTRAILGUN.description>非常精准的大型舰载磁轨炮，伤害极高。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;45°不可逃逸区（炮弹命中修正）&lt;/i&gt;&lt;/color&gt;</KTRAILGUN.description>
+  
+  <Gun_KTRAILGUN.label>「长钉」120MM磁轨炮</Gun_KTRAILGUN.label>
+  <Gun_KTRAILGUN.description>非常精准的大型舰载磁轨炮，伤害极高。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;45°不可逃逸区（炮弹命中修正）&lt;/i&gt;&lt;/color&gt;</Gun_KTRAILGUN.description>
+  
+  <Bullet_KTRAILGUN.label>「长钉」120MM磁轨炮炮弹</Bullet_KTRAILGUN.label>
+  <Bullet_KTRAILGUN.description>「长钉」120MM磁轨炮炮弹</Bullet_KTRAILGUN.description>
+
+  <KTBEAMCANNON.label>「白昼」射线防御炮</KTBEAMCANNON.label>
+  <KTBEAMCANNON.description>射程较近，但极为精准的射线防御炮塔，而且可以穿透护盾。</KTBEAMCANNON.description>
+  
+  <Bullet_KTBEAMCANNON.label>「白昼」射线防御炮</Bullet_KTBEAMCANNON.label>
+  <Bullet_KTBEAMCANNON.description>「白昼」射线防御炮</Bullet_KTBEAMCANNON.description>
+  
+  <Gun_KTBEAMCANNON.label>「白昼」射线防御炮</Gun_KTBEAMCANNON.label>
+  <Gun_KTBEAMCANNON.description>射程较近，但极为精准的射线防御炮塔，而且可以穿透护盾。</Gun_KTBEAMCANNON.description>
+  
+  <KTMGX94D.label>「海啸」金属风暴系统</KTMGX94D.label>
+  <KTMGX94D.description>可以瞬间倾泻大量弹药的金属风暴系统，可以瞬间撕碎进入其射程的敌对单位</KTMGX94D.description>
+  
+  <Bullet_KTMGX94D.label>「海啸」金属风暴系统</Bullet_KTMGX94D.label>
+  <Bullet_KTMGX94D.description>「海啸」金属风暴系统</Bullet_KTMGX94D.description>
+  
+  <Gun_KTMGX94D.label>「海啸」金属风暴系统</Gun_KTMGX94D.label>
+  <Gun_KTMGX94D.description>可以瞬间倾泻大量弹药的金属风暴系统，可以瞬间撕碎进入其射程的敌对单位</Gun_KTMGX94D.description>
+  <Gun_KTMGX94D.label>「海啸」金属风暴系统</Gun_KTMGX94D.label>
+  
+  <KT57MMCANNON.label>「镰刀」57MM哨戒机炮</KT57MMCANNON.label>
+  <KT57MMCANNON.description>中口径速射机炮，装备高爆弹。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;</KT57MMCANNON.description>
+  
+  <Bullet_KT57MMCANNON.label>「镰刀」57MM哨戒机炮</Bullet_KT57MMCANNON.label>
+  <Bullet_KT57MMCANNON.description>「镰刀」57MM哨戒机炮</Bullet_KT57MMCANNON.description>
+  
+  <Gun_KT57MMCANNON.label>「镰刀」57MM哨戒机炮</Gun_KT57MMCANNON.label>
+  <Gun_KT57MMCANNON.description>中口径速射机炮，装备高爆弹\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;</Gun_KT57MMCANNON.description>
+  
+  <KTLM.label>「浮木」巡飞弹发射器</KTLM.label>
+  <KTLM.description>我们对一只从航天基地发射桥上捕获的鲁鲁鸟使用了克隆技术和裂解扫描仪，得以批量为这种小型巡飞弹发射器安装一个核心湿件，但精度不算特别好。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;</KTLM.description>
+  
+  <Bullet_KTLM.label>「浮木」巡飞弹</Bullet_KTLM.label>
+  
+  <Gun_KTLM.label>「浮木」巡飞弹发射器</Gun_KTLM.label>
+  <Gun_KTLM.description>我们对一只从航天基地发射桥上捕获的鲁鲁鸟使用了克隆技术和裂解扫描仪，得以批量为这种小型巡飞弹发射器安装一个核心湿件，但精度不算特别好。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;</Gun_KTLM.description>
+  
+  <KTMEGARAILCANNON.label>「神箭」480MM磁轨炮</KTMEGARAILCANNON.label>
+  <KTMEGARAILCANNON.description>实验性巨型磁轨炮，可以洞穿目前已知的任何装甲，能耗巨大。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;45°不可逃逸区（炮弹命中修正）&lt;/i&gt;&lt;/color&gt;</KTMEGARAILCANNON.description>
+  
+  <Gun_KTMEGARAILCANNON.label>「神箭」480MM磁轨炮</Gun_KTMEGARAILCANNON.label>
+  <Gun_KTMEGARAILCANNON.description>巨型磁轨炮，可以洞穿目前已知的任何装甲，能耗巨大。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;45°不可逃逸区（炮弹命中修正）&lt;/i&gt;&lt;/color&gt;</Gun_KTMEGARAILCANNON.description>
+  
+  <Bullet_KTMEGARAILCANNON.label>「神箭」480MM磁轨炮炮弹</Bullet_KTMEGARAILCANNON.label>
+  <Bullet_KTMEGARAILCANNON.description>「神箭」480MM磁轨炮炮弹</Bullet_KTMEGARAILCANNON.description>
+  
+  <KTEMPMORTAR.label>「止息」EMP迫击炮</KTEMPMORTAR.label>
+  <KTEMPMORTAR.description>远距离自动迫击炮，命中后产生大范围EMP，瘫痪机械目标。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;</KTEMPMORTAR.description>
+  
+  <Bullet_KTEMPMORTAR.label>「止息」EMP迫击炮炮弹</Bullet_KTEMPMORTAR.label>
+  
+  <Gun_KTEMPMORTAR.label>「止息」EMP迫击炮</Gun_KTEMPMORTAR.label>
+  <Gun_KTEMPMORTAR.description>远距离自动迫击炮，命中后产生大范围EMP，瘫痪机械目标。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;</Gun_KTEMPMORTAR.description>
+  
+  <KTDOOMCANNON.label>「末日」800MM湮灭炮</KTDOOMCANNON.label>
+  <KTDOOMCANNON.description>无需多言，一切都将湮灭。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;</KTDOOMCANNON.description>
+  
+  <Gun_KTDOOMCANNON.label>「末日」800MM湮灭炮</Gun_KTDOOMCANNON.label>
+  <Gun_KTDOOMCANNON.description>无需多言，一切都将湮灭。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;</Gun_KTDOOMCANNON.description>
+  
+  <Bullet_KTDOOMCANNON.label>「末日」800MM湮灭炮</Bullet_KTDOOMCANNON.label>
+  <Bullet_KTDOOMCANNON.description>800MM炮弹</Bullet_KTDOOMCANNON.description>
+  
+  <KTShieldGeneratorBullets.label>「地平线」低角护盾</KTShieldGeneratorBullets.label>
+  <KTShieldGeneratorBullets.description>大范围的低角护盾，用于拦截地面火力，体型小巧轻便，你可以将其放置在任何地方，例如桌子，饮水机甚至是直接黏在天花板上。\n&lt;color=#FFAA00&gt;&lt;i&gt;由于是单向护盾，我方炮塔必须置于护盾内部才可正常使用。&lt;/i&gt;&lt;/color&gt;</KTShieldGeneratorBullets.description>
+  <KTShieldGeneratorMortar.label>「天际线」高角护盾</KTShieldGeneratorMortar.label>
+  <KTShieldGeneratorMortar.description>大范围的高角护盾，用于拦截迫击炮类武器的火力，体型小巧轻便，你可以将其放置在任何地方，例如桌子，饮水机甚至是直接黏在天花板上。\n&lt;color=#FFAA00&gt;&lt;i&gt;
+  由于是单向护盾，我方炮塔必须置于护盾内部才可正常使用。&lt;/i&gt;&lt;/color&gt;</KTShieldGeneratorMortar.description>
+  
+   <KTRAILAUTOGUN.label>「毒刺」80MM磁轨速射炮</KTRAILAUTOGUN.label>
+  <KTRAILAUTOGUN.description>大型电磁速射炮炮塔，精准度极高。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;有概率穿透路径上的敌人&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;显示的射程圈有BUG，无法显示实际射程&lt;/i&gt;&lt;/color&gt;</KTRAILAUTOGUN.description>
+  
+  <Gun_KTRAILAUTOGUN.label>「毒刺」80MM磁轨速射炮</Gun_KTRAILAUTOGUN.label>
+  <Gun_KTRAILAUTOGUN.description>大型电磁速射炮炮塔，精准度极高。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;有概率穿透路径上的敌人&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;显示的射程圈有BUG，无法显示实际射程&lt;/i&gt;&lt;/color&gt;</Gun_KTRAILAUTOGUN.description>
+  
+  <Bullet_KTRAILAUTOGUN.label>「毒刺」80MM磁轨速射炮炮弹</Bullet_KTRAILAUTOGUN.label>
+  <Bullet_KTRAILAUTOGUN.description>「毒刺」80MM磁轨炮炮弹</Bullet_KTRAILAUTOGUN.description>
+  
+  <KTPLASMACANNON.label>「泰坦」180MM电浆炮</KTPLASMACANNON.label>
+  <KTPLASMACANNON.description>实验型电浆武器，虽然直击威力以及精度逊于实弹武器，但是拥有更大的波及范围以及附带EMP效果，最重要的是这类武器无需装填，只要保证电力即可持续输出。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;EMP附带&lt;/i&gt;&lt;/color&gt;</KTPLASMACANNON.description>
+  
+  <Gun_KTPLASMACANNON.label>「泰坦」180MM电浆炮</Gun_KTPLASMACANNON.label>
+  <Gun_KTPLASMACANNON.description>实验型电浆武器，虽然直击威力以及精度逊于实弹武器，但是拥有更大的波及范围以及附带EMP效果，最重要的是这类武器无需装填，只要保证电力即可持续输出。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;EMP附带&lt;/i&gt;&lt;/color&gt;</Gun_KTPLASMACANNON.description>
+  
+  <Bullet_KTPLASMACANNON.label>「泰坦」180MM电浆炮</Bullet_KTPLASMACANNON.label>
+  <Bullet_KTPLASMACANNON.description>180MM电浆炮</Bullet_KTPLASMACANNON.description>
+  
+  <KTPLASMAAC.label>「激流」80MM电浆速射炮</KTPLASMAAC.label>
+  <KTPLASMAAC.description>实验型电浆武器，虽然直击威力以及精度逊于实弹武器，但是拥有更大的波及范围以及附带EMP效果，最重要的是这类武器无需装填，只要保证电力即可持续输出。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;EMP附带&lt;/i&gt;&lt;/color&gt;</KTPLASMAAC.description>
+  
+  <Gun_KTPLASMAAC.label>「激流」80MM电浆速射炮</Gun_KTPLASMAAC.label>
+  <Gun_KTPLASMAAC.description>实验型电浆武器，虽然直击威力以及精度逊于实弹武器，但是拥有更大的波及范围以及附带EMP效果，最重要的是这类武器无需装填，只要保证电力即可持续输出。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;EMP附带&lt;/i&gt;&lt;/color&gt;</Gun_KTPLASMAAC.description>
+  
+  <Bullet_KTPLASMAAC.label>「激流」80MM电浆速射炮</Bullet_KTPLASMAAC.label>
+  <Bullet_KTPLASMAAC.description>80MM电浆速射炮</Bullet_KTPLASMAAC.description>
+  
+  <KT_Turret_Tachyon_Lances.label>「耀斑」快子光矛</KT_Turret_Tachyon_Lances.label>
+  <KT_Turret_Tachyon_Lances.description>某群星时代武器的超级减配版，常被用于采矿作业。可以发射一条强大的快子光束并波及路径上的单位，因此请严格限制该武器的射角，确保发射路径上没有其他重要单位。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作（推荐纯手操）&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;不可阻挡&lt;/i&gt;&lt;/color&gt;</KT_Turret_Tachyon_Lances.description>
+  
+  <KT_TurretGun_Tachyon_Lances.label>「耀斑」快子光矛</KT_TurretGun_Tachyon_Lances.label>
+  <KT_TurretGun_Tachyon_Lances.description>某群星时代武器的超级减配版，常被用于采矿作业。可以发射一条强大的快子光束并波及路径上的单位，因此请严格限制该武器的射角，确保发射路径上没有其他重要单位。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作（推荐纯手操）&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;不可阻挡&lt;/i&gt;&lt;/color&gt;</KT_TurretGun_Tachyon_Lances.description>
+  
+  <KT_Tachyon_LancesBeam.label>「耀斑」快子光矛</KT_Tachyon_LancesBeam.label>
+  <KT_Tachyon_LancesBeam.description>「耀斑」快子光矛</KT_Tachyon_LancesBeam.description>
+  
+  <KTSHOTGUN.label>「平息」霰弹炮塔</KTSHOTGUN.label>
+  <KTSHOTGUN.description>适合末端防御的霰弹枪炮塔，特质的弹丸可以对机械单位造成短暂EMP效果，对常规单位也有很好的抑止能力，并且有概率造成其眩晕。</KTSHOTGUN.description>
+  
+  <Bullet_KTSHOTGUN.label>「平息」霰弹炮塔</Bullet_KTSHOTGUN.label>
+  <Bullet_KTSHOTGUN.description>适合末端防御的霰弹枪炮塔，特质的弹丸可以对机械单位造成短暂EMP效果，对常规单位也有很好的抑止能力，并且有概率造成其眩晕。</Bullet_KTSHOTGUN.description>
+  
+  <Gun_KTSHOTGUN.label>「平息」霰弹炮塔</Gun_KTSHOTGUN.label>
+  <Gun_KTSHOTGUN.description>可以瞬间倾泻大量弹药的金属风暴系统，可以瞬间撕碎进入其射程的敌对单位</Gun_KTSHOTGUN.description>
+  
+
+    <KTLASERTURRET.label>「耀光」重型激光炮</KTLASERTURRET.label>
+  <KTLASERTURRET.description>特殊的激光武器，命中后会瞬间引爆目标附近的物质造成巨大爆炸，并且会产生EMP（我编不下去了）。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;EMP附带&lt;/i&gt;&lt;/color&gt;</KTLASERTURRET.description>
+  
+  <Gun_KTLASERTURRET.label>「耀光」重型激光炮</Gun_KTLASERTURRET.label>
+  <Gun_KTLASERTURRET.description>特殊的激光武器，命中后会瞬间引爆目标附近的物质造成巨大爆炸，并且会产生EMP（我编不下去了）。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;EMP附带&lt;/i&gt;&lt;/color&gt;</Gun_KTLASERTURRET.description>
+  
+  <Bullet_KTLASERTURRET.label>「耀光」重型激光炮</Bullet_KTLASERTURRET.label>
+  <Bullet_KTLASERTURRET.description>「耀光」重型激光炮</Bullet_KTLASERTURRET.description>
+  
+  <KTMACHINEGUN.label>「哨兵」重机枪炮塔</KTMACHINEGUN.label>
+  <KTMACHINEGUN.description>全自动重机枪炮塔，配备了一块防御盾牌，使其拥有远超同级别炮塔的防护能力。</KTMACHINEGUN.description>
+  
+  <Bullet_KTMACHINEGUN.label>「哨兵」重机枪炮塔</Bullet_KTMACHINEGUN.label>
+  <Bullet_KTMACHINEGUN.description>「哨兵」重机枪炮塔</Bullet_KTMACHINEGUN.description>
+  
+  <Gun_KTMACHINEGUN.label>「哨兵」重机枪炮塔</Gun_KTMACHINEGUN.label>
+  <Gun_KTMACHINEGUN.description>全自动重机枪炮塔，配备了一块防御盾牌，使其拥有远超同级别炮塔的防护能力。</Gun_KTMACHINEGUN.description>
+  <Gun_KTMACHINEGUN.label>「哨兵」重机枪炮塔</Gun_KTMACHINEGUN.label>
+  
+  <KTTranquilizerTurret.label>「安乐」麻醉炮塔</KTTranquilizerTurret.label>
+  <KTTranquilizerTurret.description>该炮塔一次性可以射出数枚麻醉针，快速麻翻目标且尽量不伤及性命（只要目标不迎面倒下导致扎在身上的针筒造成二次伤害）。理论上能麻翻大多数会动的东西，甚至是机械体。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;</KTTranquilizerTurret.description>
+  
+  <Bullet_KTTranquilizerTurret.label>「安乐」麻醉炮塔</Bullet_KTTranquilizerTurret.label>
+  <Bullet_KTTranquilizerTurret.description>「安乐」麻醉炮塔</Bullet_KTTranquilizerTurret.description>
+  
+  <Gun_KTTranquilizerTurret.label>「安乐」麻醉炮塔</Gun_KTTranquilizerTurret.label>
+  <Gun_KTTranquilizerTurret.description>该炮塔一次性可以射出数枚麻醉针，快速麻翻目标且尽量不伤及性命（只要目标不迎面倒下导致扎在身上的针筒造成二次伤害）。理论上能麻翻大多数会动的东西，甚至是机械体，但炮塔无法区分目标是否能被麻翻，可能会浪费弹药。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;</Gun_KTTranquilizerTurret.description>
+  <Gun_KTTranquilizerTurret.label>「安乐」麻醉炮塔</Gun_KTTranquilizerTurret.label>
+  
+  
+  <KTGRANTAUTOCANNON.label>「飓风」40管30MM机炮</KTGRANTAUTOCANNON.label>
+  <KTGRANTAUTOCANNON.description>将两门20管30MM机炮并联在一座大型炮塔上的绿皮设计，使用穿甲弹。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;</KTGRANTAUTOCANNON.description>
+  
+  <Gun_KTGRANTAUTOCANNON.label>「飓风」40管30MM机炮</Gun_KTGRANTAUTOCANNON.label>
+  <Gun_KTGRANTAUTOCANNON.description>将两门20管30MM机炮并联在一座大型炮塔上的绿皮设计，使用穿甲弹。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;</Gun_KTGRANTAUTOCANNON.description>
+  
+  <Bullet_KTGRANTAUTOCANNON.label>「飓风」40管30MM机炮</Bullet_KTGRANTAUTOCANNON.label>
+  <Bullet_KTGRANTAUTOCANNON.description>30MM机炮</Bullet_KTGRANTAUTOCANNON.description>
+  
+  <KT_FirefigherTurret.label>「熄火者」多管消防火箭炮</KT_FirefigherTurret.label>
+  <KT_FirefigherTurret.description>仅用于消防的远程火箭炮，需要手动选择灭火区域，多枚泡沫火箭弹会覆盖着火区域。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;纯手动操作&lt;/i&gt;&lt;/color&gt;</KT_FirefigherTurret.description>
+  
+  <Gun_KT_Firefigher.label>「熄火者」多管消防火箭炮</Gun_KT_Firefigher.label>
+  <Gun_KT_Firefigher.description>仅用于消防的远程火箭炮，需要手动选择灭火区域，多枚泡沫火箭弹会覆盖着火区域。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;纯手动操作&lt;/i&gt;&lt;/color&gt;</Gun_KT_Firefigher.description>
+  
+  <KT_Firefigher_BULLET.label>泡沫火箭弹</KT_Firefigher_BULLET.label>
+  <KT_Firefigher_BULLET.description>泡沫火箭弹</KT_Firefigher_BULLET.description>
+  
+  <KT_LARGEAUTOCANNON.label>「巨蟒」双联25MM自动机炮</KT_LARGEAUTOCANNON.label>
+  <KT_LARGEAUTOCANNON.description>搭配有两门25mm自动机炮的炮塔，用于应对高速移动的中小型单位。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;</KT_LARGEAUTOCANNON.description>
+  
+  <Gun_KT_LARGEAUTOCANNON.label>「巨蟒」双联25MM自动机炮</Gun_KT_LARGEAUTOCANNON.label>
+  <Gun_KT_LARGEAUTOCANNON.description>搭配有两门25mm自动机炮的炮塔，用于应对高速移动的中小型单位。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;</Gun_KT_LARGEAUTOCANNON.description>
+  
+  <Bullet_KT_LARGEAUTOCANNON.label>「巨蟒」双联25MM自动机炮</Bullet_KT_LARGEAUTOCANNON.label>
+  <Bullet_KT_LARGEAUTOCANNON.description>「巨蟒」双联25MM自动机炮</Bullet_KT_LARGEAUTOCANNON.description>
+  
+  <KTNarcotic_MORTAR.label>「冰红茶」麻醉迫击炮</KTNarcotic_MORTAR.label>
+  <KTNarcotic_MORTAR.description>通过最大程度提纯精神叶，制造可使人快速麻痹的烟雾，但消散速度极快，无法制造持续性烟雾。\n该型迫击炮依然有一定致死几率，或因不幸头部直击炮弹砸死，或因浓度过高导致瞬间死亡。\n至于为什么机械体也可以被麻痹，因此真实原理可能另有玄机...\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;</KTNarcotic_MORTAR.description>
+  
+  <KTNarcotic_MORTAR_BULLET.label>「冰红茶」麻醉迫击炮炮弹</KTNarcotic_MORTAR_BULLET.label>
+  
+  <Gun_KTNarcotic_MORTAR.label>「冰红茶」麻醉迫击炮</Gun_KTNarcotic_MORTAR.label>
+  <Gun_KTNarcotic_MORTAR.description>通过最大程度提纯精神叶，制造可使人快速麻痹的烟雾，但消散速度极快，无法制造持续性烟雾。\n该型迫击炮依然有一定致死几率，或因不幸头部直击炮弹砸死，或因浓度过高导致瞬间死亡。\n至于为什么机械体也可以被麻痹，因此真实原理可能另有玄机...\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;</Gun_KTNarcotic_MORTAR.description>
+  
+  
+  <KT_Turret_ElectromagneticCannon.label>「洛伦兹之矛」三联装重型磁轨炮</KT_Turret_ElectromagneticCannon.label>
+  <KT_Turret_ElectromagneticCannon.description>这款电磁炮是各种意义上的巨兽，炮弹的贯穿力足以击穿任何敌人且几乎无法闪避。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;45°不可逃逸区（炮弹命中修正）&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;贯穿攻击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;击退效果&lt;/i&gt;&lt;/color&gt;</KT_Turret_ElectromagneticCannon.description>
+  <Bullet_ElectromagneticCannon.label>「洛伦兹之矛」三联装重型磁轨炮</Bullet_ElectromagneticCannon.label>
+  
+  <Gun_ElectromagneticCannon.label>「洛伦兹之矛」三联装重型磁轨炮</Gun_ElectromagneticCannon.label>
+  <Gun_ElectromagneticCannon.description>这款电磁炮是各种意义上的巨兽，炮弹的贯穿力足以击穿任何敌人且几乎无法闪避。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;45°不可逃逸区（炮弹命中修正）&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;贯穿攻击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;击退效果&lt;/i&gt;&lt;/color&gt;</Gun_ElectromagneticCannon.description>
+  
+  <!-- 建筑类别：装饰品 -->
+  <KT_kebabseal.label>「装饰」海豹烧烤架</KT_kebabseal.label>
+  <KT_kebabseal.description>烧烤架上有一只巨大的海豹，但散发的味道十分难闻，而且旁边写字条上着&lt;color=#FFAA00&gt;&lt;i&gt;“有毒别吃！”&lt;/i&gt;&lt;/color&gt;\n\n&lt;color=#FF0000&gt;&lt;i&gt;闲着没事千万别放在室内，会有不好的事情发生。&lt;/i&gt;&lt;/color&gt;</KT_kebabseal.description>
+  
+  <KT_ammobox.label>「装饰」弹药箱</KT_ammobox.label>
+  <KT_ammobox.description>为了安全起见，里面的炮弹都被替换成了等比例泡沫玩具。</KT_ammobox.description>
+  
+  <KT_missile_racks.label>「装饰」导弹架</KT_missile_racks.label>
+  <KT_missile_racks.description>装饰品导弹，战斗部里只有沙子，但你不知道的是我们的祖先其实曾用超大号的导弹殖民船来登陆新世界。</KT_missile_racks.description>
+  
+   <KT_Sandbox_Table.label>「装饰」战术全息投影桌</KT_Sandbox_Table.label>
+  <KT_Sandbox_Table.description>这张高科技桌子播放着与殖民地当前情况毫无关系的全息投影，但会显得我们很科幻。</KT_Sandbox_Table.description>
+  
+   <KT_Tactical_Terminal.label>「娱乐」战术终端</KT_Tactical_Terminal.label>
+  <KT_Tactical_Terminal.description>战术终端可以干很多事，操控轨道激光，发射恒星级导弹，开启九级权限层厕所门等等。但我们的这款只内置了大量游戏，被殖民者用作游戏机，不过你依然可以配合一些看起来很高科技的装饰打造一个娱乐用途的战略指挥室</KT_Tactical_Terminal.description>
+  
+  <KT_Barricade.label>「防御」战术路障</KT_Barricade.label>
+  <KT_Barricade.description>这款坚固路障可以为人员提供掩体，自带光源，用于阻挡射入的子弹，长得也比较顺眼，唯一的问题是这个路障的来源公约国国民应该身高普遍偏高，好在边缘处有一级踏板可以让殖民者使用。路障会像栅栏一样阻挡部分动物。</KT_Barricade.description>
+  
+  <KT_wallTV.label>「娱乐」壁挂显示屏</KT_wallTV.label>
+  <KT_wallTV.description>壁挂显示屏可以为殖民者直观的展示各种数据，但99%的时候被殖民者当作电视机使用。</KT_wallTV.description>
+  
+  <!-- 建筑类别：功能类 -->
+  <KT_UFGenerator_small.label>小型超维发电站</KT_UFGenerator_small.label>
+  <KT_UFGenerator_small.description>其实这个装置内部没有任何科技结构，完全是实心的铁块，发电效果完全是直连超维存在产生的，外壳只是个装饰。</KT_UFGenerator_small.description>
+  <KT_UFGenerator.label>超维发电站</KT_UFGenerator.label>
+  <KT_UFGenerator.description>其实这个装置内部没有任何科技结构，完全是实心的铁块，发电效果完全是直连超维存在产生的，外壳只是个装饰。</KT_UFGenerator.description>
+  
+  <KT_Workbench.label>3D打印工作台</KT_Workbench.label>
+  <KT_Workbench.description>根据史书记载的操作手册，这个工作台理论上只要有对应的资源就可以打印任何东西，甚至是活物！但由于公约国条约限制，公约国只能使用联合总部允许的设计图纸，但不知道是哪个恶趣味的超维存在让边缘世界的这个工作台还能打印三明治。\n&lt;color=#FFAA00&gt;&lt;i&gt;顺带一提，我们环世界的殖民者非常喜欢看3D打印的过程，所以机器工作中他们寸步不离。&lt;/i&gt;&lt;/color&gt;</KT_Workbench.description>
+  
+  <KT_SWorkbench.label>3D打印工作台(装备)</KT_SWorkbench.label>
+  <KT_SWorkbench.description>除了尺寸大小，与另一大型3D打印工作台几乎没有任何区别，但这台被专门用于打印服饰类的装备。（其实是MOD作者嫌一台机器生产的东西太多，翻着累）\n&lt;color=#FFAA00&gt;&lt;i&gt;顺带一提，我们环世界的殖民者非常喜欢看3D打印的过程，所以机器工作中他们寸步不离。&lt;/i&gt;&lt;/color&gt;</KT_SWorkbench.description>
+  
+  <KT_Maintenance_Station.label>纳米维修站</KT_Maintenance_Station.label>
+  <KT_Maintenance_Station.description>该建筑名义上会从顶部飞出维修的纳米机器人为范围内且划分为居住区的建筑物品进行持续性维修和耐久度增幅，虽然本质上依然只是个会发光的铁盒子，内部没有任何科技结构。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;该建筑会将物品和建筑耐久度提高为原耐久的1.5倍+200（例如500血量的墙壁会被增幅为1200）。&lt;/i&gt;&lt;/color&gt;\n\n&lt;color=#FFAA00&gt;&lt;i&gt;玩家阵营殖民者身上的装备可以自动维修，但耐久值需要放置在地面上才会增加。&lt;/i&gt;&lt;/color&gt;</KT_Maintenance_Station.description>
+  
+  <KT_Holographic_logo.label>「装饰」全息投影（标志）</KT_Holographic_logo.label>
+  <KT_Holographic_logo.description>曾经各种公约国使用过的标志，超维存在也不记得他们曾经是什么势力，只是觉得好看就做了出来</KT_Holographic_logo.description>
+  
+  <KT_Holographic_logo_small.label>「装饰」全息投影（小型标志）</KT_Holographic_logo_small.label>
+  <KT_Holographic_logo_small.description>曾经各种公约国使用过的标志，超维存在也不记得他们曾经是什么势力，只是觉得好看就做了出来</KT_Holographic_logo_small.description>
+  
+  <KT_Holographic_advertisement.label>「装饰」全息投影（广告）</KT_Holographic_advertisement.label>
+  <KT_Holographic_advertisement.description>胡扯的广告，笨蛋才信。</KT_Holographic_advertisement.description>
+  
+  <KT_ATFieldGenerator.label>「天幕」AT立场护盾</KT_ATFieldGenerator.label>
+  <KT_ATFieldGenerator.description>这款护盾可以自行调节大小，拦截大部分类型的攻击，矢量反射（能反弹大部分射弹武器），内部禁止爆炸， 偏移轨道空投（但轨道贸易空降仓也会被偏移），禁止坑道兽和虫群一类袭击从护盾内产生（甚至已经有钻出提示，调整护盾范围后依然能偏移），拦截折跃进入，抵御太阳耀斑。</KT_ATFieldGenerator.description>
+</LanguageData>

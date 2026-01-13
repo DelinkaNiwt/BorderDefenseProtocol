@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ThingDef ParentName="SkyfallerBase">
+    <defName>UF_Express_vanguard_main_gun_Incoming</defName>
+    <label>UF_Express_vanguard_Incoming (incoming)</label>
+    <size>(3, 3)</size>
+    <graphicData>
+      <texPath>Things/Building/KT_UF_Express_falling</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Transparent</shaderType>
+      <drawSize>(5, 10)</drawSize>
+    </graphicData>
+    <skyfaller>
+	  <anticipationSound>DropPod_Fall_Mechanoid</anticipationSound>
+      <shadowSize>(7, 7)</shadowSize>
+      <spawnThing>KT_UF_Express_main_gun</spawnThing>
+      <rotateGraphicTowardsDirection>true</rotateGraphicTowardsDirection>
+      <speed>0.7</speed>
+    </skyfaller>
+  </ThingDef>
+  
+  <ThingDef ParentName="SkyfallerBase">
+    <defName>UF_Express_vanguard_main_autogun_Incoming</defName>
+    <label>UF_Express_vanguard_Incoming (incoming)</label>
+    <size>(3, 3)</size>
+    <graphicData>
+      <texPath>Things/Building/KT_UF_Express_falling</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Transparent</shaderType>
+      <drawSize>(5, 10)</drawSize>
+    </graphicData>
+    <skyfaller>
+      <anticipationSound>DropPod_Fall_Mechanoid</anticipationSound>
+      <shadowSize>(7, 7)</shadowSize>
+      <spawnThing>KT_UF_Express_main_autogun</spawnThing>
+      <rotateGraphicTowardsDirection>true</rotateGraphicTowardsDirection>
+      <speed>0.7</speed>
+    </skyfaller>
+  </ThingDef>
+  
+  <ThingDef ParentName="SkyfallerBase">
+    <defName>UF_Express_vanguard_main_gatling_gun_Incoming</defName>
+    <label>UF_Express_vanguard_Incoming (incoming)</label>
+    <size>(3, 3)</size>
+    <graphicData>
+      <texPath>Things/Building/KT_UF_Express_falling</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Transparent</shaderType>
+      <drawSize>(5, 10)</drawSize>
+    </graphicData>
+    <skyfaller>
+      <anticipationSound>DropPod_Fall_Mechanoid</anticipationSound>
+      <shadowSize>(7, 7)</shadowSize>
+      <spawnThing>KT_UF_Express_main_gatling_gun</spawnThing>
+      <rotateGraphicTowardsDirection>true</rotateGraphicTowardsDirection>
+      <speed>0.7</speed>
+    </skyfaller>
+  </ThingDef>
+  
+  <ThingDef ParentName="SkyfallerBase">
+    <defName>Duckmazon_AGT_Incoming</defName>
+    <label>Duckmazon_AGT_Incoming (incoming)</label>
+    <size>(2, 2)</size>
+    <graphicData>
+      <texPath>Things/Building/KT_duckmazon_express_falling</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Transparent</shaderType>
+      <drawSize>(4, 8)</drawSize>
+    </graphicData>
+    <skyfaller>
+      <anticipationSound>DropPod_Fall_Mechanoid</anticipationSound>
+      <shadowSize>(7, 7)</shadowSize>
+      <spawnThing>KT_duckmazon_express_AG_TANK</spawnThing>
+      <rotateGraphicTowardsDirection>true</rotateGraphicTowardsDirection>
+      <speed>0.7</speed>
+    </skyfaller>
+  </ThingDef>
+  
+  
+  <ThingDef ParentName="SkyfallerBase">
+    <defName>Humanoid_Express_BIO_CATGIRL_fabricor_Incoming</defName>
+    <label>Humanoid_Express_BIO_CATGIRL_fabricor_Incoming (incoming)</label>
+    <size>(1, 1)</size>
+    <graphicData>
+      <texPath>Things/Building/KT_Humanoid_Express_falling</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Transparent</shaderType>
+      <drawSize>(2, 4)</drawSize>
+    </graphicData>
+    <skyfaller>
+      <anticipationSound>DropPod_Fall_Mechanoid</anticipationSound>
+      <shadowSize>(3, 3)</shadowSize>
+      <spawnThing>KT_Humanoid_Express_BIO_CATGIRL_fabricor</spawnThing>
+      <rotateGraphicTowardsDirection>true</rotateGraphicTowardsDirection>
+      <speed>0.8</speed>
+    </skyfaller>
+  </ThingDef>
+  
+  <ThingDef ParentName="SkyfallerBase">
+    <defName>Humanoid_Express_BIO_CATGIRL_logistics_Incoming</defName>
+    <label>Humanoid_Express_BIO_CATGIRL_logistics_Incoming (incoming)</label>
+    <size>(1, 1)</size>
+    <graphicData>
+      <texPath>Things/Building/KT_Humanoid_Express_falling</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Transparent</shaderType>
+      <drawSize>(2, 4)</drawSize>
+    </graphicData>
+    <skyfaller>
+      <anticipationSound>DropPod_Fall_Mechanoid</anticipationSound>
+      <shadowSize>(3, 3)</shadowSize>
+      <spawnThing>KT_Humanoid_Express_BIO_CATGIRL_logistics</spawnThing>
+      <rotateGraphicTowardsDirection>true</rotateGraphicTowardsDirection>
+      <speed>0.8</speed>
+    </skyfaller>
+  </ThingDef>
+</Defs>

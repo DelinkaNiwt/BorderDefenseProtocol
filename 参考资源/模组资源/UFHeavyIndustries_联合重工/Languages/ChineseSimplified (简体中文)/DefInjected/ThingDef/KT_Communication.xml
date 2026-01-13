@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: KT_Communication -->
+  <KT_Communication.label>综合通讯终端</KT_Communication.label>
+  <!-- EN: KT_Communication -->
+  <KT_Communication.description>该终端集成了与商店通讯，指挥远程火力打击等多种功能，可实现足不出户全球速递。\n\n&lt;color=#FFAA00>&lt;i>右键建筑即可激活贸易通讯&lt;/i>&lt;/color></KT_Communication.description>
+  
+  <!-- EN: KT_duckmazon_express_AG_TANK -->
+  <KT_duckmazon_express_AG_TANK.label>鸭马逊战损快递盒（悬浮坦克）</KT_duckmazon_express_AG_TANK.label>
+  <!-- EN: KT_duckmazon_express_AG_TANK -->
+  <KT_duckmazon_express_AG_TANK.description>悬浮坦克快递包装盒，因为暴力运输外表破损严重，但货物应该没有什么问题，内部空间远比外表巨大，但拆封后就会失效。\n\n&lt;color=#ffe400>&lt;i>传闻这家快递公司丢失了伟大存在的快递却不给赔偿，一气之下他们被伟大存在困在这款游戏中，永世不得超生。&lt;/i>&lt;/color>\n\n&lt;color=#FFAA00>&lt;i>需要机械师开启&lt;/i>&lt;/color></KT_duckmazon_express_AG_TANK.description>
+  <!-- EN: Open the parcel box -->
+  <KT_duckmazon_express_AG_TANK.comps.CompUsable.useLabel>TODO</KT_duckmazon_express_AG_TANK.comps.CompUsable.useLabel>
+  
+  <!-- EN: KT_UF_Express_main_autogun -->
+  <KT_UF_Express_main_autogun.label>联合速运快递盒（先锋级机炮型）</KT_UF_Express_main_autogun.label>
+  <!-- EN: KT_UF_Express_main_autogun -->
+  <KT_UF_Express_main_autogun.description>先锋级战斗步行机的快递包装盒，内部空间远比外表巨大，但拆封后就会失效。\n\n&lt;color=#FFAA00>&lt;i>需要机械师开启&lt;/i>&lt;/color></KT_UF_Express_main_autogun.description>
+  <!-- EN: Open the parcel box -->
+  <KT_UF_Express_main_autogun.comps.CompUsable.useLabel>TODO</KT_UF_Express_main_autogun.comps.CompUsable.useLabel>
+  
+  <!-- EN: KT_UF_Express_main_gatling_gun -->
+  <KT_UF_Express_main_gatling_gun.label>联合速运快递盒（先锋级加特林型）</KT_UF_Express_main_gatling_gun.label>
+  <!-- EN: KT_UF_Express_main_gatling_gun -->
+  <KT_UF_Express_main_gatling_gun.description>先锋级战斗步行机的快递包装盒，内部空间远比外表巨大，但拆封后就会失效。\n\n&lt;color=#FFAA00>&lt;i>需要机械师开启&lt;/i>&lt;/color></KT_UF_Express_main_gatling_gun.description>
+  <!-- EN: Open the parcel box -->
+  <KT_UF_Express_main_gatling_gun.comps.CompUsable.useLabel>TODO</KT_UF_Express_main_gatling_gun.comps.CompUsable.useLabel>
+  
+  <!-- EN: KT_UF_Express_main_gun -->
+  <KT_UF_Express_main_gun.label>联合速运快递盒（先锋级重炮型）</KT_UF_Express_main_gun.label>
+  <!-- EN: KT_UF_Express_main_gun -->
+  <KT_UF_Express_main_gun.description>先锋级战斗步行机的快递包装盒，内部空间远比外表巨大，但拆封后就会失效。\n\n&lt;color=#FFAA00>&lt;i>需要机械师开启&lt;/i>&lt;/color></KT_UF_Express_main_gun.description>
+  <!-- EN: Open the parcel box -->
+  <KT_UF_Express_main_gun.comps.CompUsable.useLabel>TODO</KT_UF_Express_main_gun.comps.CompUsable.useLabel>
+  
+   <KT_Humanoid_Express_BIO_CATGIRL_fabricor.label>保密发货快递包装（生活用品）</KT_Humanoid_Express_BIO_CATGIRL_fabricor.label>
+  <!-- EN: KT_UF_Express_main_gun -->
+  <KT_Humanoid_Express_BIO_CATGIRL_fabricor.description>信息加密的快递，完全不知道里面装了什么呢，上面只写了内容为生活物品。\n\n&lt;color=#FFAA00>&lt;i>需要机械师开启&lt;/i>&lt;/color></KT_Humanoid_Express_BIO_CATGIRL_fabricor.description>
+  
+    <KT_Humanoid_Express_BIO_CATGIRL_logistics.label>保密发货快递包装（生活用品）</KT_Humanoid_Express_BIO_CATGIRL_logistics.label>
+  <!-- EN: KT_UF_Express_main_gun -->
+  <KT_Humanoid_Express_BIO_CATGIRL_logistics.description>信息加密的快递，完全不知道里面装了什么呢，上面只写了内容为生活物品。\n\n&lt;color=#FFAA00>&lt;i>需要机械师开启&lt;/i>&lt;/color></KT_Humanoid_Express_BIO_CATGIRL_logistics.description>
+</LanguageData>

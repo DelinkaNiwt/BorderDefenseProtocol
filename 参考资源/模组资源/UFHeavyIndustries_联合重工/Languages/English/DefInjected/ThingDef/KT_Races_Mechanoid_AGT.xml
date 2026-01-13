@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: KT_AG_TANK -->
+  <KT_AG_TANK.label>"Tsunami" Light Anti-gravity Unmanned Tank</KT_AG_TANK.label>
+  <!-- EN: KT_AG_TANK -->
+  <KT_AG_TANK.description>A light anti-gravity vehicle developed and equipped by a certain Pact Nation. It is not slowed down by any terrain, equipped with a powerful triple-shot rapid-fire main cannon, though its close-defense firepower is limited to a single light machine gun.</KT_AG_TANK.description>
+  <!-- EN: Trample -->
+  <KT_AG_TANK.tools.Trample.label>Trample</KT_AG_TANK.tools.Trample.label>
+  
+  <!-- EN: KT_AG_TANK_LMG -->
+  <KT_AG_TANK_LMG.label>"Wave" Light Machine Gun</KT_AG_TANK_LMG.label>
+  <!-- EN: KT_AG_TANK_LMG -->
+  <KT_AG_TANK_LMG.description>Light machine gun with limited lethality, but better than nothing.</KT_AG_TANK_LMG.description>
+  <!-- EN: KT_AG_TANK_LMG -->
+  <KT_AG_TANK_LMG.verbs.Verb_Shoot.label>Trample</KT_AG_TANK_LMG.verbs.Verb_Shoot.label>
+  
+  <!-- EN: KT_AG_TANK_Turret -->
+  <KT_AG_TANK_Turret.label>"Howler" 105MM Main Cannon</KT_AG_TANK_Turret.label>
+  <!-- EN: KT_AG_TANK_Turret -->
+  <KT_AG_TANK_Turret.description>Light tank main cannon capable of triple-shot rapid fire with powerful firepower.</KT_AG_TANK_Turret.description>
+  <!-- EN: Trample -->
+  <KT_AG_TANK_Turret.tools.Trample.label>Trample</KT_AG_TANK_Turret.tools.Trample.label>
+  <!-- EN: KT_AG_TANK_Turret -->
+  <KT_AG_TANK_Turret.verbs.Verb_Shoot.label>Trample</KT_AG_TANK_Turret.verbs.Verb_Shoot.label>
+  
+  <!-- EN: KT_Bullet_AG_TANK_LMG -->
+  <KT_Bullet_AG_TANK_LMG.label>"Wave" Light Machine Gun</KT_Bullet_AG_TANK_LMG.label>
+  <KT_Bullet_AG_TANK_LMG.description>"Wave" Light Machine Gun</KT_Bullet_AG_TANK_LMG.description>
+  
+  <!-- EN: KT_Bullet_AG_TANK_Turret -->
+  <KT_Bullet_AG_TANK_Turret.label>"Howler" 105MM Main Cannon</KT_Bullet_AG_TANK_Turret.label>
+  <KT_Bullet_AG_TANK_Turret.description>"Howler" 105MM Main Cannon</KT_Bullet_AG_TANK_Turret.description>
+  
+  <!-- EN: Proj_KT_AGT_AP -->
+  <Proj_KT_AGT_AP.label>Armor-Piercing Shell</Proj_KT_AGT_AP.label>
+  
+</LanguageData>

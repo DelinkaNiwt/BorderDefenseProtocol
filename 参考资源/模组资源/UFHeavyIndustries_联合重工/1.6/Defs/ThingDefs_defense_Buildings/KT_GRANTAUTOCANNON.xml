@@ -1,0 +1,166 @@
+<Defs>
+	<ThingDef ParentName="KT_AutocannonTurret">
+    <defName>KTGRANTAUTOCANNON</defName>
+    <label>KTGRANTAUTOCANNON</label>
+	<thingClass>SRA.Building_TurretGunHasSpeed</thingClass>
+    <description>KTGRANTAUTOCANNON</description>
+    <uiIconPath>Things/Building/Security/KTGRANTAUTOCANNON_Ico</uiIconPath>
+	<uiOrder>1900</uiOrder> <!-- UI栏顺序 -->
+	<graphicData>
+		<texPath>Things/Building/Security/KT381MMCANNON_Base</texPath>
+		<graphicClass>Graphic_Single</graphicClass>
+		<drawSize>(12,12)</drawSize>
+	</graphicData>
+	<size>(5,5)</size>
+    <statBases>
+	  <MaxHitPoints>5000</MaxHitPoints>
+	  <Flammability>0</Flammability>
+      <ShootingAccuracyTurret>1</ShootingAccuracyTurret>
+	  <WorkToBuild>2400</WorkToBuild>
+    </statBases>
+	<drawerType>MapMeshAndRealTime</drawerType>
+	<tickerType>Normal</tickerType>
+	<killedLeavings>
+      <ChunkSlagSteel>3</ChunkSlagSteel>
+    </killedLeavings>
+    <costList>
+      <Steel>1500</Steel>
+	  <Plasteel>200</Plasteel>
+      <ComponentIndustrial>13</ComponentIndustrial>
+	  <ComponentSpacer>8</ComponentSpacer>
+    </costList>
+    <comps>
+	  <li Class="SRA.CompProperties_ForceTargetable" /><!-- 善良手操 -->
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>3000</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Refuelable"> <!-- 应该是可以补给 -->
+        <fuelLabel>Shots until barrel change</fuelLabel>
+        <fuelGizmoLabel>Barrel durability</fuelGizmoLabel>
+        <outOfFuelMessage>Needs new barrel</outOfFuelMessage>
+        <fuelFilter><thingDefs><li>Steel</li></thingDefs></fuelFilter>
+        <fuelCapacity>4000</fuelCapacity>
+        <fuelMultiplier>5</fuelMultiplier>
+        <initialFuelPercent>1</initialFuelPercent>
+        <autoRefuelPercent>0.5</autoRefuelPercent>
+        <showFuelGizmo>true</showFuelGizmo>
+        <minimumFueledThreshold>1</minimumFueledThreshold>
+        <factorByDifficulty>false</factorByDifficulty>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelIconPath>KT_UI/UI_OUTAMMO</fuelIconPath>
+      </li>
+    </comps>
+
+    <building>
+      <turretGunDef>Gun_KTGRANTAUTOCANNON</turretGunDef>
+	  <ai_combatDangerous>true</ai_combatDangerous> <!-- AI认为它具有危险性 -->
+	  <turretTopDrawSize>15</turretTopDrawSize>
+	  <turretTopOffset>(0, 0.1)</turretTopOffset>
+      <turretBurstCooldownTime>2</turretBurstCooldownTime>
+    </building>
+    <researchPrerequisites>
+      <li>KT_Base_t2_Artillery_turret</li>
+    </researchPrerequisites>
+	<designationCategory>KT_designation_group</designationCategory> <!-- 指定分类：联合 -->
+	
+    <modExtensions>
+	   <li Class="SRA.ModExt_HasSpeedTurret">
+		 <speed>1.8</speed>
+	   </li>
+  	</modExtensions>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>Gun_KTGRANTAUTOCANNON</defName>
+    <label>Gun_KTGRANTAUTOCANNON</label>
+    <description>Gun_KTGRANTAUTOCANNON</description>
+    <graphicData>
+      <texPath>Things/Building/Security/KTGRANTAUTOCANNON</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(3.8,3.8)</drawSize>
+    </graphicData>
+    <statBases>
+      <AccuracyTouch>0.90</AccuracyTouch>
+      <AccuracyShort>0.85</AccuracyShort>
+      <AccuracyMedium>0.84</AccuracyMedium>
+      <AccuracyLong>0.82</AccuracyLong>
+      <RangedWeapon_Cooldown>2</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>80</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+	<verbs>
+      <li>
+        <verbClass>SRA.Verb_ShootWithOffset</verbClass> <!-- 射击行为 -->
+        <hasStandardCommand>true</hasStandardCommand> <!-- 标准命令 -->
+        <defaultProjectile>Bullet_KTGRANTAUTOCANNON</defaultProjectile> <!-- 默认子弹 -->
+        <warmupTime>0.5</warmupTime> <!-- 预热时间 -->
+		<requireLineOfSight>false</requireLineOfSight><!-- 只能直线射击 -->
+		<minRange>20</minRange>
+        <range>160</range> <!-- 射程 -->
+        <burstShotCount>40</burstShotCount> <!-- 每次射击子弹数量 -->
+		<ticksBetweenBurstShots>2</ticksBetweenBurstShots>
+        <soundCast>KT_AUTOCANNON</soundCast> <!-- 射击音效 -->
+        <soundCastTail>GunTail_Heavy</soundCastTail> <!-- 尾音效 -->
+        <muzzleFlashScale>80</muzzleFlashScale> <!-- 火光规模 -->
+        <consumeFuelPerShot>1</consumeFuelPerShot> <!-- 每发子弹消耗的燃料 -->
+		<targetParams>
+			<canTargetLocations>true</canTargetLocations>
+		</targetParams>
+		<forcedMissRadius>0.1</forcedMissRadius>
+      </li>
+    </verbs>
+	<weaponTags>
+	  <li>KT_weapon</li>
+    </weaponTags>
+	<modExtensions>
+      <li Class="MuzzleFlash.MuzzleFlashProps" MayRequire="IssacZhuang.MuzzleFlash">
+         <def>MF_StandardMuzzleFalsh</def>
+         <drawSize>(2)</drawSize>
+         <offsets>
+           <li>(4.0,0.55)</li>
+		   <li>(4.0,-0.55)</li>
+         </offsets>
+         <isAlternately>true</isAlternately>
+     </li>
+	 <li Class="SRA.ModExtension_ShootWithOffset">
+         <offsets>
+           <li>(0.6,-4.9)</li><!-- 第一个参数是东西。第二个参数为南北（负数为朝北） -->
+		   <li>(-0.6,-4.9)</li>
+         </offsets>
+     </li>
+   </modExtensions>
+  </ThingDef>
+  
+  
+  <ThingDef>
+        <defName>Bullet_KTGRANTAUTOCANNON</defName>
+        <label>KTGRANTAUTOCANNON</label>
+        <thingClass>Projectile_Explosive</thingClass>
+        <category>Projectile</category>
+        <tickerType>Normal</tickerType>
+        <altitudeLayer>Projectile</altitudeLayer>
+        <graphicData>
+            <texPath>Things/Projectile/Bullet_100MM</texPath> <!-- 子弹贴图路径 -->
+            <graphicClass>Graphic_Single</graphicClass> <!-- 使用单一图形 -->
+			<shaderType>MoteGlow</shaderType>
+      		<drawSize>(1.5)</drawSize>
+        </graphicData>
+        <projectile>
+            <damageDef>KTBomb_EMPTY</damageDef>
+            <explosionRadius>0.8</explosionRadius>
+			<stoppingPower>1.5</stoppingPower>
+            <speed>900</speed>
+            <damageAmountBase>35</damageAmountBase>
+            <arcHeightFactor>0</arcHeightFactor>
+			<flyOverhead>true</flyOverhead>
+			<soundExplode>KTNONESOUND</soundExplode>
+			<armorPenetrationBase>1.35</armorPenetrationBase>
+        </projectile>
+  </ThingDef>	
+
+</Defs>

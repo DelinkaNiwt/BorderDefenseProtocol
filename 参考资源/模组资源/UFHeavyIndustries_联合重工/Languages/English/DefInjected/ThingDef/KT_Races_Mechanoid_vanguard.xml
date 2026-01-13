@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+<!-- EN: KT_Battle_walker_main_autogun -->
+  <KT_Battle_walker_main_autogun.label>"Iron Boot" 57MM Autocannon</KT_Battle_walker_main_autogun.label>
+  <!-- EN: KT_Battle_walker_main_autogun -->
+  <KT_Battle_walker_main_autogun.description>Optional autocannon for the Vanguard-class Walker, capable of suppressing infantry clusters.</KT_Battle_walker_main_autogun.description>
+  <!-- EN: Trample -->
+  <KT_Battle_walker_main_autogun.tools.Trample.label>Stomp</KT_Battle_walker_main_autogun.tools.Trample.label>
+  <!-- EN: KT_Battle_walker_main_autogun -->
+  <KT_Battle_walker_main_autogun.verbs.Verb_Shoot.label>Stomp</KT_Battle_walker_main_autogun.verbs.Verb_Shoot.label>
+  
+  <!-- EN: KT_Battle_walker_main_gatling_gun -->
+  <KT_Battle_walker_main_gatling_gun.label>"Vulcan" 14.5MM Gatling Gun</KT_Battle_walker_main_gatling_gun.label>
+  <!-- EN: KT_Battle_walker_main_gatling_gun -->
+  <KT_Battle_walker_main_gatling_gun.description>Optional heavy machine gun for the Vanguard-class Walker, suitable for engaging lightly armored units.</KT_Battle_walker_main_gatling_gun.description>
+  <!-- EN: Trample -->
+  <KT_Battle_walker_main_gatling_gun.tools.Trample.label>Stomp</KT_Battle_walker_main_gatling_gun.tools.Trample.label>
+  <!-- EN: KT_Battle_walker_main_gatling_gun -->
+  <KT_Battle_walker_main_gatling_gun.verbs.Verb_Shoot.label>Stomp</KT_Battle_walker_main_gatling_gun.verbs.Verb_Shoot.label>
+  
+  <!-- EN: KT_Bullet_Battle_walker_main_autogun -->
+  <KT_Bullet_Battle_walker_main_autogun.label>"Iron Boot" 57MM Autocannon</KT_Bullet_Battle_walker_main_autogun.label>
+  <KT_Bullet_Battle_walker_main_autogun.description>"Iron Boot" 57MM Autocannon</KT_Bullet_Battle_walker_main_autogun.description>
+  
+  <!-- EN: KT_Bullet_Battle_walker_main_gatling_gun -->
+  <KT_Bullet_Battle_walker_main_gatling_gun.label>"Vulcan" 14.5MM Gatling Gun</KT_Bullet_Battle_walker_main_gatling_gun.label>
+  
+  <!-- EN: KT_Bullet_Main_battlewalker_machinegunn -->
+  <KT_Bullet_Main_battlewalker_machinegunn.label>"Guard Dog" Anti-Personnel Machine Gun</KT_Bullet_Main_battlewalker_machinegunn.label>
+  <KT_Bullet_Main_battlewalker_machinegunn.description>"Guard Dog" Anti-Personnel Machine Gun</KT_Bullet_Main_battlewalker_machinegunn.description>
+  
+  <!-- EN: KT_Bullet_Main_battlewalker_main_gun -->
+  <KT_Bullet_Main_battlewalker_main_gun.label>"Warhammer" 203MM Main Cannon</KT_Bullet_Main_battlewalker_main_gun.label>
+  <KT_Bullet_Main_battlewalker_main_gun.description>"Warhammer" 203MM Main Cannon</KT_Bullet_Main_battlewalker_main_gun.description>
+  
+  <!-- EN: KT_Main_battlewalker -->
+  <KT_Main_battlewalker.label>"Vanguard" Combat Walker</KT_Main_battlewalker.label>
+  <!-- EN: KT_Main_battlewalker -->
+  <KT_Main_battlewalker.description>A small to medium-sized unmanned walker used by a certain Pact Nation. Standard equipment includes powerful annihilation missiles, anti-personnel machine guns, and EMP mortars. It can be equipped with various loadouts to adapt to different tactical requirements. Its shield generator and damage absorption field effectively compensate for the frame's fragility, and in extreme situations, it can even withstand a volley of fire from a shipgirl.</KT_Main_battlewalker.description>
+  <!-- EN: Trample -->
+  <KT_Main_battlewalker.tools.Trample.label>Trample</KT_Main_battlewalker.tools.Trample.label>
+  
+  <!-- EN: KT_Main_battlewalker_EMPlauncher -->
+  <KT_Main_battlewalker_EMPlauncher.label>"Lullaby" EMP Mortar</KT_Main_battlewalker_EMPlauncher.label>
+  <!-- EN: KT_Main_battlewalker_EMPlauncher -->
+  <KT_Main_battlewalker_EMPlauncher.description>Standard EMP indirect fire weapon for the Vanguard-class Walker, used to suppress large areas of mechanical units.</KT_Main_battlewalker_EMPlauncher.description>
+  <!-- EN: KT_Main_battlewalker_EMPlauncher -->
+
+  
+  <!-- EN: KT_Main_battlewalker_machinegun -->
+  <KT_Main_battlewalker_machinegun.label>"Guard Dog" Anti-Personnel Machine Gun</KT_Main_battlewalker_machinegun.label>
+  <!-- EN: KT_Main_battlewalker_machinegun -->
+  <KT_Main_battlewalker_machinegun.description>Standard anti-personnel heavy machine gun for the Vanguard-class Walker, using fierce firepower to prevent light targets from approaching.</KT_Main_battlewalker_machinegun.description>
+  <!-- EN: KT_Main_battlewalker_machinegun -->
+  
+  <!-- EN: KT_Main_battlewalker_main_gun -->
+  <KT_Main_battlewalker_main_gun.label>"Warhammer" 203MM Main Cannon</KT_Main_battlewalker_main_gun.label>
+  <!-- EN: KT_Main_battlewalker_main_gun -->
+  <KT_Main_battlewalker_main_gun.description>Optional long-range artillery mount for the Vanguard-class Walker, giving it the capability to engage heavy units directly. The shells explode twice upon impact, increasing the lethal radius.</KT_Main_battlewalker_main_gun.description>
+  <!-- EN: Trample -->
+  <KT_Main_battlewalker_main_gun.tools.Trample.label>Trample</KT_Main_battlewalker_main_gun.tools.Trample.label>
+  <!-- EN: KT_Main_battlewalker_main_gun -->
+  <KT_Main_battlewalker_main_gun.verbs.Verb_Shoot.label>Trample</KT_Main_battlewalker_main_gun.verbs.Verb_Shoot.label>
+  
+
+  <Proj_kt_doommissile.label>Annihilation Missile</Proj_kt_doommissile.label>
+  
+</LanguageData>

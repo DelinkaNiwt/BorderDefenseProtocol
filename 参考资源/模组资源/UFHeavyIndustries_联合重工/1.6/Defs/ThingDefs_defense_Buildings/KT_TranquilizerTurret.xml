@@ -1,0 +1,166 @@
+<Defs>
+    <!-- 定义炮塔物品： -->
+    <ThingDef ParentName="BuildingBase">
+        <defName>KTTranquilizerTurret</defName> <!-- 定义名称为  -->
+        <label>KTTranquilizerTurret</label> <!-- 显示名称 -->
+        <description>KTTranquilizerTurret</description> <!-- 描述 -->
+        <uiOrder>1600</uiOrder> <!-- UI栏顺序 -->
+        <thingClass>Building_TurretGun</thingClass> <!-- 定义为炮塔 -->
+        
+        <size>(1,1)</size>
+        <drawerType>MapMeshAndRealTime</drawerType> <!-- 绘制类型：地图网格和实时 -->
+        
+        <graphicData>
+			<texPath>Things/Building/Security/KT_Base_Small</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(3,3)</drawSize>
+		</graphicData>
+
+        <castEdgeShadows>False</castEdgeShadows> <!-- 是否渲染阴影 -->
+        <minifiedDef>MinifiedThing</minifiedDef> <!-- 最小化后的定义 -->
+        <uiIconPath>Things/Building/Security/KTTranquilizerTurret_Ico</uiIconPath> <!-- 图标路径 -->
+
+        <altitudeLayer>Building</altitudeLayer> <!-- 图形的显示层级 -->
+        <stealable>false</stealable> <!-- 不可盗窃 -->
+        <rotatable>true</rotatable> <!-- 不可旋转 -->
+        
+        <thingCategories>
+            <li>BuildingsSecurity</li> <!-- 建筑类别：安全 -->
+        </thingCategories>
+        
+        <statBases>
+            <MaxHitPoints>200</MaxHitPoints> <!-- 最大生命值 -->
+            <Flammability>0</Flammability> <!-- 可燃性 -->
+            <WorkToBuild>150</WorkToBuild> <!-- 建造所需工作时间 -->
+            <Mass>50</Mass> <!-- 质量 -->
+            <Beauty>-15</Beauty> <!-- 美观度 -->
+            <ShootingAccuracyTurret>1</ShootingAccuracyTurret> <!-- 射击精度 -->
+        </statBases>
+
+        <tickerType>Normal</tickerType> <!-- 每次更新的计时器类型 -->
+        
+        <comps>
+		  <li Class="SRA.CompProperties_ForceTargetable" /><!-- 善良手操 -->	
+          <li Class="CompProperties_Forbiddable"/>
+            <li Class="CompProperties_Power">
+              <compClass>CompPowerTrader</compClass>
+              <basePowerConsumption>50</basePowerConsumption>
+            </li>
+            <li Class="CompProperties_Flickable"/>
+            <li Class="CompProperties_Breakdownable"/>
+            <li Class="CompProperties_Refuelable"> <!-- 应该是可以补给 -->
+              <fuelLabel>Shots until barrel change</fuelLabel>
+              <fuelGizmoLabel>Barrel durability</fuelGizmoLabel>
+              <outOfFuelMessage>Needs new barrel</outOfFuelMessage>
+              <fuelFilter><thingDefs><li>Steel</li></thingDefs></fuelFilter>
+              <fuelCapacity>80</fuelCapacity>
+              <fuelMultiplier>2</fuelMultiplier>
+              <initialFuelPercent>1</initialFuelPercent>
+              <autoRefuelPercent>0.5</autoRefuelPercent>
+              <showFuelGizmo>true</showFuelGizmo>
+              <minimumFueledThreshold>1</minimumFueledThreshold>
+              <factorByDifficulty>false</factorByDifficulty>
+              <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+              <fuelIconPath>KT_UI/UI_OUTAMMO</fuelIconPath>
+            </li>
+    </comps>
+        
+        <passability>PassThroughOnly</passability> <!-- 只能穿透 -->
+        <pathCost>50</pathCost> <!-- 建筑路径成本 -->
+        <fillPercent>0.5</fillPercent> <!-- 填充度 -->
+        <hasTooltip>true</hasTooltip> <!-- 是否显示工具提示 -->
+        
+        
+        <costList>
+            <Steel>250</Steel> <!-- 钢铁 200 单位 -->
+            <ComponentIndustrial>7</ComponentIndustrial> <!-- 工业组件 10 个 -->
+        </costList>
+        
+        <generateCommonality>0</generateCommonality>
+        <tradeability>None</tradeability>
+
+        <constructionSkillPrerequisite>7</constructionSkillPrerequisite> <!-- 建造技能需求 -->
+        <terrainAffordanceNeeded>Light</terrainAffordanceNeeded> <!-- 需要轻型地形 -->
+        <designationCategory>KT_designation_group</designationCategory> <!-- 指定分类：安全 -->
+        
+
+        <building>
+            <ai_combatDangerous>true</ai_combatDangerous> <!-- AI认为它具有危险性 -->
+            <turretGunDef>Gun_KTTranquilizerTurret</turretGunDef> <!-- 定义使用的枪械 -->
+            <deconstructible>true</deconstructible>
+            <paintable>true</paintable> <!-- 是否可以涂漆：可以 -->
+            <turretTopDrawSize>4.5</turretTopDrawSize>
+            <turretTopOffset>(0.05, 0)</turretTopOffset>
+            <turretBurstCooldownTime>1.2</turretBurstCooldownTime> <!-- 炮塔射击冷却时间 -->
+            <combatPower>50</combatPower>
+        </building>
+		
+        <researchPrerequisites>
+            <li>KT_Base_t0_turret</li>
+        </researchPrerequisites>
+		
+        <placeWorkers>
+            <li>PlaceWorker_TurretTop</li> <!-- 放置工作：炮塔顶部 -->
+            <li>PlaceWorker_ShowTurretRadius</li>
+        </placeWorkers>
+        
+    </ThingDef>
+
+	<ThingDef ParentName="BaseBullet">
+    <defName>Bullet_KTTranquilizerTurret</defName>
+    <label>Bullet_KTTranquilizerTurret</label>
+    <projectile>
+      <damageDef>BulletTranquilizer</damageDef>
+      <damageAmountBase>4</damageAmountBase>
+      <stoppingPower>7</stoppingPower>
+      <speed>100</speed>
+    </projectile>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Tranquilizer</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>(0.5)</drawSize>
+    </graphicData>
+  </ThingDef>
+
+    <ThingDef ParentName="BaseWeaponTurret">
+        <defName>Gun_KTTranquilizerTurret</defName> <!-- 武器名称 -->
+        <label>Gun_KTTranquilizerTurret</label> <!-- 武器标签 -->
+        <description></description> <!-- 武器描述 -->
+        <graphicData>
+            <texPath>Things/Building/Security/KTTranquilizerTurret</texPath> <!-- 武器贴图路径 -->
+            <graphicClass>Graphic_Single</graphicClass> <!-- 使用单一图形 -->
+            <shaderType>CutoutComplex</shaderType>
+			<drawSize>(2)</drawSize>
+        </graphicData>
+        <soundInteract>Interact_Rifle</soundInteract> <!-- 使用时音效 -->
+        <tradeability>None</tradeability> <!-- 不能交易 -->
+        <destroyOnDrop>true</destroyOnDrop> <!-- 掉落时销毁 -->
+        <generateCommonality>0</generateCommonality>
+        <statBases>
+            <AccuracyTouch>0.90</AccuracyTouch> <!-- 近距离精度 -->
+            <AccuracyShort>0.85</AccuracyShort> <!-- 短程精度 -->
+            <AccuracyMedium>0.80</AccuracyMedium> <!-- 中程精度 -->
+            <AccuracyLong>0.75</AccuracyLong> <!-- 长程精度 -->
+            <RangedWeapon_Cooldown>3</RangedWeapon_Cooldown> <!-- 冷却时间 -->
+            <Mass>10</Mass> <!-- 质量 -->
+            <Flammability>0</Flammability> <!-- 不可燃 -->
+            <DeteriorationRate>0</DeteriorationRate> <!-- 不会腐烂 -->
+        </statBases>
+        <verbs>
+            <li>
+                <verbClass>Verb_Shoot</verbClass> <!-- 射击行为 -->
+                <hasStandardCommand>true</hasStandardCommand> <!-- 标准命令 -->
+                <defaultProjectile>Bullet_KTTranquilizerTurret</defaultProjectile> <!-- 默认子弹 -->
+                <warmupTime>1.5</warmupTime> <!-- 预热时间 -->
+				<requireLineOfSight>true</requireLineOfSight><!-- 能不能曲射 -->
+                <range>24</range> <!-- 射程 -->
+                <burstShotCount>8</burstShotCount> <!-- 每次射击子弹数量 -->
+                <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+                <soundCast>Bow_Recurve</soundCast> <!-- 射击音效 -->
+                <soundCastTail>GunTail_Light</soundCastTail> <!-- 尾音效 -->
+                <muzzleFlashScale>12</muzzleFlashScale> <!-- 火光规模 -->
+                <consumeFuelPerShot>1</consumeFuelPerShot> <!-- 每发子弹消耗的燃料 -->
+            </li>
+        </verbs>
+    </ThingDef>
+</Defs>

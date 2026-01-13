@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<!--等离子爆燃伤害类型-->
+	<DamageDef>
+		<defName>PlasmaBlast</defName>
+		<label>Plasma Blast(等离子爆燃)</label>
+		<workerClass>DamageWorker_Vaporize</workerClass>
+		<description>(等离子爆燃的简介)</description>
+		<deathMessage>{0} was burned in the explosion of high temperature plasma.(在高温等离子体的冲击下燃烧。)</deathMessage>
+		<combatLogRules>Damage_Flame</combatLogRules>
+		<!--音效定义-->
+		<impactSoundType>Blunt</impactSoundType>
+		<soundExplosion>Explosion_EMP</soundExplosion>
+		<!--伤害类型为外源性爆炸-->
+		<externalViolence>true</externalViolence>
+		<isExplosive>true</isExplosive>
+		<!--对生物体表造成高温爆轰-->
+		<hediff>Burn</hediff>
+		<makesBlood>false</makesBlood>
+		<hasForcefulImpact>true</hasForcefulImpact>
+		<harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+		<explosionAffectOutsidePartsOnly>true</explosionAffectOutsidePartsOnly>
+		<!--对建筑结构造成冲击崩落-->
+		<hediffSolid>Crack</hediffSolid>
+		<plantDamageFactor>50</plantDamageFactor>
+		<corpseDamageFactor>0.1</corpseDamageFactor>
+		<buildingDamageFactorPassable>5</buildingDamageFactorPassable>
+		<buildingDamageFactorImpassable>15</buildingDamageFactorImpassable>
+		<scaleDamageToBuildingsBasedOnFlammability>false</scaleDamageToBuildingsBasedOnFlammability>
+		<!--惊扰生物-->
+		<canInterruptJobs>true</canInterruptJobs>
+		<makesAnimalsFlee>true</makesAnimalsFlee>
+		<!--甲弹对抗参数-->
+		<armorCategory>Heat</armorCategory>
+		<defaultArmorPenetration>5</defaultArmorPenetration>
+		<!--造伤效果参数-->
+		<defaultDamage>500</defaultDamage>
+		<minDamageToFragment>50</minDamageToFragment>
+		<defaultStoppingPower>50</defaultStoppingPower>
+		<explosionHeatEnergyPerCell>500</explosionHeatEnergyPerCell>
+		<!--爆炸特效参数-->
+		<explosionCellFleck>BlastFlame</explosionCellFleck>
+		<explosionColorCenter>(0.4, 1, 1)</explosionColorCenter>
+		<explosionColorEdge>(0.4, 0.8, 0.8)</explosionColorEdge>
+		<expolosionPropagationSpeed>1</expolosionPropagationSpeed>
+	</DamageDef>
+	<!--核光焰点燃伤害类型-->
+	<DamageDef>
+		<defName>NuclearFlame</defName>
+		<label>Nuclear Flame(核光焰点燃)</label>
+		<workerClass>DamageWorker_NuclearFlame</workerClass>
+		<description>(核光焰点燃的简介)</description>
+		<deathMessage>{0} was ignited under the scorching light of the nuclear fireball.(被核火球的炽热光芒点燃)</deathMessage>
+		<combatLogRules>Damage_Flame</combatLogRules>
+		<!--音效定义-->
+		<impactSoundType>Blunt</impactSoundType>
+		<soundExplosion>Explosion_EMP</soundExplosion>
+		<!--伤害类型为外源性爆炸-->
+		<externalViolence>true</externalViolence>
+		<isExplosive>true</isExplosive>
+		<!--对生物体表造成高温点燃-->
+		<hediff>Burn</hediff>
+		<makesBlood>false</makesBlood>
+		<hasForcefulImpact>true</hasForcefulImpact>
+		<harmAllLayersUntilOutside>false</harmAllLayersUntilOutside>
+		<explosionAffectOutsidePartsOnly>true</explosionAffectOutsidePartsOnly>
+		<!--对建筑结构造成冲击崩落-->
+		<hediffSolid>Crack</hediffSolid>
+		<plantDamageFactor>1.5</plantDamageFactor>
+		<corpseDamageFactor>0.1</corpseDamageFactor>
+		<buildingDamageFactorPassable>0.1</buildingDamageFactorPassable>
+		<buildingDamageFactorImpassable>0.1</buildingDamageFactorImpassable>
+		<scaleDamageToBuildingsBasedOnFlammability>true</scaleDamageToBuildingsBasedOnFlammability>
+		<!--惊扰生物-->
+		<canInterruptJobs>true</canInterruptJobs>
+		<makesAnimalsFlee>true</makesAnimalsFlee>
+		<!--甲弹对抗参数-->
+		<armorCategory>Heat</armorCategory>
+		<defaultArmorPenetration>0.5</defaultArmorPenetration>
+		<!--造伤效果参数-->
+		<defaultDamage>50</defaultDamage>
+		<minDamageToFragment>5</minDamageToFragment>
+		<defaultStoppingPower>5</defaultStoppingPower>
+		<explosionHeatEnergyPerCell>50</explosionHeatEnergyPerCell>
+		<!--爆炸特效参数-->
+		<explosionCellFleck>BlastEMP</explosionCellFleck>
+		<explosionColorCenter>(0.4, 1, 1)</explosionColorCenter>
+		<explosionColorEdge>(0.4, 0.8, 0.8)</explosionColorEdge>
+		<expolosionPropagationSpeed>1</expolosionPropagationSpeed>
+	</DamageDef>
+</Defs>

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+<!-- EN: KT_armament_Trader -->
+  <KT_armament_Trader.label>Arms Dealer</KT_armament_Trader.label>
+  
+  <!-- EN: KT_food_Trader -->
+  <KT_food_Trader.label>Food Trader</KT_food_Trader.label>
+  
+  <!-- EN: KT_material_Trader -->
+  <KT_material_Trader.label>Material Supplier</KT_material_Trader.label>
+  
+  <!-- EN: KT_pantsushop_Trader -->
+  <KT_pantsushop_Trader.label>Pantsu Transport Ship</KT_pantsushop_Trader.label>
+  
+  <!-- EN: KT_slave_Trader -->
+  <KT_slave_Trader.label>Talent Trade Ship</KT_slave_Trader.label>
+</LanguageData>

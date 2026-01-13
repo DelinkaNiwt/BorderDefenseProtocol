@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <HediffDef><!-- 承伤背包 -->
+    <defName>KT_Backpack_Hediff</defName>
+    <label>KT_Backpack_Hediff</label>
+    <hediffClass>HediffWithComps</hediffClass>
+    <description>KT_Backpack_Hediff</description>
+	<defaultLabelColor>(75, 200, 255)</defaultLabelColor>
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <comps>
+      <li Class="SRA.HediffCompProperties_SRABarrier">
+        <maxBarrier>30</maxBarrier>
+        <DamageTakenMult>1</DamageTakenMult><!-- 小于等于0则无敌 -->
+        <DamageTakenMax>45</DamageTakenMax><!-- 小于等于0则不工作 -->
+        <DamageTakenReduce>35</DamageTakenReduce><!-- 小于等于0则不工作 -->
+        <regenRate>2</regenRate>
+        <regenDelay>0</regenDelay>
+        <rechargeCooldown>10</rechargeCooldown>
+        <RemoveWhenDestroy>false</RemoveWhenDestroy><!-- 是否在护盾被击毁时设状态程度为0 -->
+        <priority>2000</priority><!-- 承伤优先级，越大越先，int -->
+      </li>
+	  <li Class="HediffCompProperties_RemoveIfApparelDropped" />
+    </comps>
+    <stages>
+      <li>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef><!-- 步行机 -->
+    <defName>KT_battlewalker_Hediff</defName>
+    <label>KT_battlewalker_Hediff</label>
+    <hediffClass>HediffWithComps</hediffClass>
+    <description>KT_battlewalker_Hediff</description>
+	<defaultLabelColor>(75, 200, 255)</defaultLabelColor>
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <comps>
+      <li Class="SRA.HediffCompProperties_SRABarrier">
+        <maxBarrier>600</maxBarrier>
+        <DamageTakenMult>1</DamageTakenMult><!-- 小于等于0则无敌 -->
+        <DamageTakenMax>60</DamageTakenMax><!-- 小于等于0则不工作 -->
+        <DamageTakenReduce>35</DamageTakenReduce><!-- 小于等于0则不工作 -->
+        <regenRate>5</regenRate>
+        <regenDelay>0</regenDelay>
+        <rechargeCooldown>10</rechargeCooldown>
+        <RemoveWhenDestroy>false</RemoveWhenDestroy><!-- 是否在护盾被击毁时设状态程度为0 -->
+        <priority>2000</priority><!-- 承伤优先级，越大越先，int -->
+      </li>
+	  <li Class="SRA.HediffCompProperties_WeaponSwitcher">
+         <gizmoIconPath>KT_UI/UI_Weapon_selection</gizmoIconPath>
+         <linkedWeapons>
+           <li>KT_Battle_walker_main_autogun</li>
+           <li>KT_Battle_walker_main_gatling_gun</li>
+		   <li>KT_Main_battlewalker_main_gun</li>
+         </linkedWeapons>
+      </li>
+    </comps>
+    <stages>
+      <li>
+      </li>
+    </stages>
+  </HediffDef>
+  
+   <HediffDef><!-- 坦克 -->
+    <defName>KT_AG_TANK_Hediff</defName>
+    <label>KT_AG_TANK_Hediff</label>
+    <hediffClass>HediffWithComps</hediffClass>
+    <description>KT_AG_TANK_Hediff</description>
+	<defaultLabelColor>(75, 200, 255)</defaultLabelColor>
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <comps>
+      <li Class="SRA.HediffCompProperties_SRABarrier">
+        <maxBarrier>480</maxBarrier>
+        <DamageTakenMult>1</DamageTakenMult><!-- 小于等于0则无敌 -->
+        <DamageTakenMax>80</DamageTakenMax><!-- 小于等于0则不工作 -->
+        <DamageTakenReduce>35</DamageTakenReduce><!-- 小于等于0则不工作 -->
+        <regenRate>5</regenRate>
+        <regenDelay>0</regenDelay>
+        <rechargeCooldown>10</rechargeCooldown>
+        <RemoveWhenDestroy>false</RemoveWhenDestroy><!-- 是否在护盾被击毁时设状态程度为0 -->
+        <priority>2000</priority><!-- 承伤优先级，越大越先，int -->
+      </li>
+	  <li Class="SRA.HediffCompProperties_IgnoreTerrainCost"/><!-- 飞起来 -->
+	  <li Class="SRA.HediffCompProperties_WeaponSwitcher">
+         <gizmoIconPath>KT_UI/UI_Weapon_selection</gizmoIconPath>
+         <linkedWeapons>
+           <li>KT_AG_TANK_Turret</li>
+           <li>KT_AG_TANK_turret_Rocket</li>
+		   <li>KT_AG_TANK_turret_AAGUN</li>
+         </linkedWeapons>
+      </li>
+    </comps>
+    <stages>
+      <li>
+      </li>
+    </stages>
+  </HediffDef>
+  
+  <HediffDef><!-- 猫娘 -->
+    <defName>KT_BCG_Hediff</defName>
+    <label>KT_BCG_Hediff</label>
+    <hediffClass>HediffWithComps</hediffClass>
+    <description>KT_BCG_Hediff</description>
+	<defaultLabelColor>(75, 200, 255)</defaultLabelColor>
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <comps>
+      <li Class="SRA.HediffCompProperties_SRABarrier">
+        <maxBarrier>80</maxBarrier>
+        <DamageTakenMult>1</DamageTakenMult><!-- 小于等于0则无敌 -->
+        <DamageTakenMax>40</DamageTakenMax><!-- 小于等于0则不工作 -->
+        <DamageTakenReduce>15</DamageTakenReduce><!-- 小于等于0则不工作 -->
+        <regenRate>5</regenRate>
+        <regenDelay>0</regenDelay>
+        <rechargeCooldown>8</rechargeCooldown>
+        <RemoveWhenDestroy>false</RemoveWhenDestroy><!-- 是否在护盾被击毁时设状态程度为0 -->
+        <priority>2000</priority><!-- 承伤优先级，越大越先，int -->
+      </li>
+	  <li Class="SRA.HediffCompProperties_IgnoreTerrainCost"/><!-- 飞起来 -->
+	  <li Class="SRA.HediffCompProperties_WeaponSwitcher">
+         <gizmoIconPath>KT_UI/UI_Weapon_selection</gizmoIconPath>
+         <linkedWeapons>
+           <li>KT_BIO_CATGIRL_Meleeweapon</li>
+           <li>KT_BIO_CATGIRL_Machinegun</li>
+		   <li>KT_BIO_CATGIRL_Grenadelauncher</li>
+           <li>KT_BIO_CATGIRL_Railgun</li>
+         </linkedWeapons>
+      </li>
+    </comps>
+    <stages>
+      <li>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defName>KT_Special_SMG_crystal</defName>
+    <label>KT_Special_SMG_crystal</label>
+    <labelNoun>weakened</labelNoun>
+	<initialSeverity>0.1</initialSeverity>
+    <maxSeverity>1</maxSeverity>
+	<defaultLabelColor>(255, 228, 0)</defaultLabelColor>
+    <description>Shrapnel fragments have embedded themselves in this unit, rendering it more vulnerable to injury.</description>
+
+	
+	  <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>6000~6000</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+    </comps>
+	<stages>
+      <li>
+		<statOffsets>
+			<IncomingDamageFactor>0.3</IncomingDamageFactor>
+		</statOffsets>
+      </li>
+	  <li>
+        <minSeverity>0.25</minSeverity>
+		<statOffsets>
+			<IncomingDamageFactor>0.8</IncomingDamageFactor>
+		</statOffsets>
+      </li>
+	   <li>
+        <minSeverity>0.5</minSeverity>
+		<statOffsets>
+			<IncomingDamageFactor>1.5</IncomingDamageFactor>
+		</statOffsets>
+      </li>
+	  <li>
+        <minSeverity>0.75</minSeverity>
+		<statOffsets>
+			<IncomingDamageFactor>2.4</IncomingDamageFactor>
+		</statOffsets>
+      </li>
+	  <li>
+        <minSeverity>0.95</minSeverity>
+		<statOffsets>
+			<IncomingDamageFactor>3.5</IncomingDamageFactor>
+		</statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+  
+  <HediffDef Parent="HediffBase">
+    <defName>KT_ChainSword_hediff</defName>
+    <label>Chain Sword</label>
+    <description>This unit is equipped with such a huge chain sword, it's terrifying.</description>
+    <isBad>false</isBad>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0,1,1)</defaultLabelColor>
+    <comps>
+      <li Class="SRA.HediffCompProperties_WeaponSwitcher">
+         <gizmoIconPath>KT_UI/UI_Weapon_ChainSword</gizmoIconPath>
+         <linkedWeapons>
+           <li>KT_ChainSword</li>
+           <li>KT_ChainSword_AOE</li>
+         </linkedWeapons>
+      </li>
+    </comps>
+  </HediffDef>
+  
+  <HediffDef>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defName>KT_SealMG_curse</defName>
+    <label>巨镰诅咒</label>
+    <labelNoun>weakened</labelNoun>
+	<initialSeverity>0.1</initialSeverity>
+    <maxSeverity>1</maxSeverity>
+	<defaultLabelColor>(0, 255, 255)</defaultLabelColor>
+    <description>Shrapnel fragments have embedded themselves in this unit, rendering it more vulnerable to injury.</description>
+
+	
+	  <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>6000~6000</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+    </comps>
+	<stages>
+      <li>
+		<statOffsets>
+			<IncomingDamageFactor>0.3</IncomingDamageFactor>
+		</statOffsets>
+      </li>
+	  <li>
+        <minSeverity>0.25</minSeverity>
+		<statOffsets>
+			<IncomingDamageFactor>0.8</IncomingDamageFactor>
+		</statOffsets>
+      </li>
+	   <li>
+        <minSeverity>0.5</minSeverity>
+		<statOffsets>
+			<IncomingDamageFactor>1.5</IncomingDamageFactor>
+		</statOffsets>
+      </li>
+	  <li>
+        <minSeverity>0.75</minSeverity>
+		<statOffsets>
+			<IncomingDamageFactor>2.4</IncomingDamageFactor>
+		</statOffsets>
+      </li>
+	  <li>
+        <minSeverity>0.95</minSeverity>
+		<statOffsets>
+			<IncomingDamageFactor>3.5</IncomingDamageFactor>
+		</statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+  
+  <HediffDef Parent="HediffBase">
+    <defName>KT_Sealweapon_hediff</defName>
+    <label>战利品巨镰</label>
+    <description>天哪！战利品系列武器，哈人</description>
+    <isBad>false</isBad>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0,1,1)</defaultLabelColor>
+    <comps>
+      <li Class="SRA.HediffCompProperties_WeaponSwitcher">
+         <gizmoIconPath>KT_UI/UI_Weapon_Sealweapon</gizmoIconPath>
+         <linkedWeapons>
+           <li>KT_SealMG</li>
+           <li>KT_SealRailgun</li>
+		   <li>KT_SealScythe</li>
+         </linkedWeapons>
+      </li>
+    </comps>
+  </HediffDef>
+</Defs>
+
+  

@@ -1,0 +1,1384 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Defs>
+  <ThingDef ParentName="KT_BaseMakeableGun" Name="KT_Pistol">
+    <defName>KT_Pistol</defName>
+    <label>KT_Pistol</label>
+    <description>KT_Pistol</description>
+    <graphicData>
+      <texPath>Things/Weapons/KT_Pistol</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+    <tradeTags>
+	   <li>WeaponRanged</li>
+	</tradeTags>
+    <generateAllowChance>0</generateAllowChance>
+    <generateCommonality>0</generateCommonality>
+    <relicChance>0</relicChance>
+    <statBases>
+      <WorkToMake>3000</WorkToMake>
+      <Mass>1</Mass>
+      <AccuracyTouch>0.90</AccuracyTouch>
+      <AccuracyShort>0.85</AccuracyShort>
+      <AccuracyMedium>0.75</AccuracyMedium>
+      <AccuracyLong>0.60</AccuracyLong>
+      <RangedWeapon_Cooldown>1</RangedWeapon_Cooldown>
+    </statBases>
+	
+	<comps>
+	  <li Class="SRA.CompProperties_WeaponRenderDynamic">
+		<TexturePath>Things/Weapons/KT_Pistol_light</TexturePath>
+		<totalFrames>1</totalFrames>
+		<ticksPerFrame>1</ticksPerFrame>
+	  </li>
+    </comps>
+	<drawerType>MapMeshAndRealTime</drawerType>
+	
+    <costList>
+      <Plasteel>10</Plasteel>
+      <Steel>60</Steel>
+	  <ComponentIndustrial>1</ComponentIndustrial>
+    </costList>
+    <recipeMaker>
+      <researchPrerequisite>KT_Base_Workbench</researchPrerequisite>
+      <skillRequirements>
+        <Crafting>5</Crafting>
+      </skillRequirements>
+      <recipeUsers Inherit="True">
+        <li>KT_Workbench</li>
+      </recipeUsers>
+      <displayPriority>500</displayPriority>
+    </recipeMaker>
+    <techLevel>Spacer</techLevel>
+    <weaponTags>
+      <li>SimpleGun</li>
+      <li>WeaponBeamRepeater</li>
+	  <li>KT_weapon</li>
+    </weaponTags>
+
+    <weaponClasses>
+      <li>RangedLight</li>
+    </weaponClasses>
+	
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_KT_Pistol</defaultProjectile>
+        <warmupTime>0.2</warmupTime>
+        <range>20</range>
+        <burstShotCount>3</burstShotCount>
+        <ticksBetweenBurstShots>3</ticksBetweenBurstShots>
+        <soundCast>KT_Beamflashlight_light</soundCast>
+        <soundCastTail>GunTail_Medium</soundCastTail>
+        <muzzleFlashScale>2</muzzleFlashScale>
+        <aimingChargeMote>Mote_BeamRepeater_Charge</aimingChargeMote>
+        <aimingChargeMoteOffset>0.1</aimingChargeMoteOffset>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>barrels</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>10</power>
+        <cooldownTime>0.8</cooldownTime>
+      </li>
+    </tools>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_KT_Pistol</defName>
+    <label>Bullet_KT_Pistol</label>
+    <thingClass>SRA.Projectile_BeamWithEffect</thingClass>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_KT_flashlight</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>KT_Beamflashlight</damageDef>
+      <damageAmountBase>10</damageAmountBase>
+      <beamMoteDef>KT_Beamflashlight</beamMoteDef>
+      <beamStartOffset>0.5</beamStartOffset>
+      <armorPenetrationBase>0.40</armorPenetrationBase>
+    </projectile>
+	
+	
+	<modExtensions>
+        <li Class="SRA.Projectile_BeamWithEffect_Extension">
+          <impactEffecter>KT_Laserhit</impactEffecter>
+        </li>
+    </modExtensions>
+  </ThingDef>
+
+  <ThingDef ParentName="KT_BaseMakeableGun" Name="KT_SMG">
+    <defName>KT_SMG</defName>
+    <label>KT_SMG</label>
+    <description>KT_SMG</description>
+    <graphicData>
+      <texPath>Things/Weapons/KT_SMG</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+    <tradeTags>
+	   <li>WeaponRanged</li>
+	</tradeTags>
+    <generateAllowChance>0</generateAllowChance>
+    <generateCommonality>0</generateCommonality>
+    <relicChance>0</relicChance>
+    <statBases>
+      <WorkToMake>7000</WorkToMake>
+      <Mass>2</Mass>
+      <AccuracyTouch>0.85</AccuracyTouch>
+      <AccuracyShort>0.75</AccuracyShort>
+      <AccuracyMedium>0.65</AccuracyMedium>
+      <AccuracyLong>0.55</AccuracyLong>
+      <RangedWeapon_Cooldown>0.6</RangedWeapon_Cooldown>
+    </statBases>
+    <costList>
+      <Plasteel>15</Plasteel>
+      <Steel>80</Steel>
+	  <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+	
+	<comps>
+	  <li Class="SRA.CompProperties_WeaponRenderDynamic">
+		<TexturePath>Things/Weapons/KT_SMG_light</TexturePath>
+		<totalFrames>1</totalFrames>
+		<ticksPerFrame>1</ticksPerFrame>
+	  </li>
+    </comps>
+	<drawerType>MapMeshAndRealTime</drawerType>
+	
+    <recipeMaker>
+      <researchPrerequisite>KT_Base_Workbench</researchPrerequisite>
+      <skillRequirements>
+        <Crafting>5</Crafting>
+      </skillRequirements>
+      <recipeUsers Inherit="True">
+        <li>KT_Workbench</li>
+      </recipeUsers>
+      <displayPriority>500</displayPriority>
+    </recipeMaker>
+    <techLevel>Spacer</techLevel>
+    <weaponTags>
+      <li>SimpleGun</li>
+      <li>WeaponBeamRepeater</li>
+	  <li>KT_weapon</li>
+    </weaponTags>
+
+    <weaponClasses>
+      <li>RangedLight</li>
+    </weaponClasses>
+	
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_KT_SMG</defaultProjectile>
+        <warmupTime>0.4</warmupTime>
+        <range>20</range>
+		<burstShotCount>5</burstShotCount>
+        <ticksBetweenBurstShots>3</ticksBetweenBurstShots>
+        <soundCast>KT_Beamflashlight_light</soundCast>
+        <soundCastTail>GunTail_Medium</soundCastTail>
+        <muzzleFlashScale>2</muzzleFlashScale>
+        <aimingChargeMote>Mote_BeamRepeater_Charge</aimingChargeMote>
+        <aimingChargeMoteOffset>0.1</aimingChargeMoteOffset>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>barrels</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>12</power>
+        <cooldownTime>0.8</cooldownTime>
+      </li>
+    </tools>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_KT_SMG</defName>
+    <label>Bullet_KT_SMG</label>
+    <thingClass>SRA.Projectile_BeamWithEffect</thingClass>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_KT_flashlight</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>KT_Beamflashlight</damageDef>
+      <damageAmountBase>7</damageAmountBase>
+      <beamMoteDef>KT_Beamflashlight</beamMoteDef>
+      <beamStartOffset>0.5</beamStartOffset>
+      <armorPenetrationBase>0.40</armorPenetrationBase>
+    </projectile>
+	<modExtensions>
+        <li Class="SRA.Projectile_BeamWithEffect_Extension">
+          <impactEffecter>KT_Laserhit</impactEffecter>
+        </li>
+    </modExtensions>
+  </ThingDef>
+  
+   <ThingDef ParentName="KT_BaseMakeableGun" Name="KT_HSMG">
+    <defName>KT_HSMG</defName>
+    <label>KT_HSMG</label>
+    <description>KT_HSMG</description>
+    <graphicData>
+      <texPath>Things/Weapons/KT_09P</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+    <tradeTags>
+	   <li>WeaponRanged</li>
+	</tradeTags>
+    <generateAllowChance>0</generateAllowChance>
+    <generateCommonality>0</generateCommonality>
+    <relicChance>0</relicChance>
+    <statBases>
+      <WorkToMake>9000</WorkToMake>
+      <Mass>3</Mass>
+      <AccuracyTouch>0.90</AccuracyTouch>
+      <AccuracyShort>0.80</AccuracyShort>
+      <AccuracyMedium>0.70</AccuracyMedium>
+      <AccuracyLong>0.60</AccuracyLong>
+      <RangedWeapon_Cooldown>0.7</RangedWeapon_Cooldown>
+    </statBases>
+    <costList>
+      <Plasteel>20</Plasteel>
+      <Steel>100</Steel>
+	  <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+    <recipeMaker>
+      <researchPrerequisite>KT_Base_t1_weapon</researchPrerequisite>
+      <skillRequirements>
+        <Crafting>5</Crafting>
+      </skillRequirements>
+      <recipeUsers Inherit="True">
+        <li>KT_Workbench</li>
+      </recipeUsers>
+      <displayPriority>500</displayPriority>
+    </recipeMaker>
+    <techLevel>Spacer</techLevel>
+    <weaponTags>
+      <li>SimpleGun</li>
+	  <li>KT_weapon</li>
+      <li>WeaponBeamRepeater</li>
+    </weaponTags>
+    <comps>
+	  <li Class="SRA.CompProperties_WeaponRenderDynamic">
+		<TexturePath>Things/Weapons/KT_09P_light</TexturePath>
+		<totalFrames>1</totalFrames>
+		<ticksPerFrame>1</ticksPerFrame>
+	  </li>
+    </comps>
+	<drawerType>MapMeshAndRealTime</drawerType>
+    <weaponClasses>
+      <li>RangedLight</li>
+    </weaponClasses>
+	
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_KT_HSMG</defaultProjectile>
+        <warmupTime>0.6</warmupTime>
+        <range>22</range>
+		<burstShotCount>3</burstShotCount>
+        <ticksBetweenBurstShots>3</ticksBetweenBurstShots>
+        <soundCast>KT_Beamflashlight_heavy</soundCast>
+        <soundCastTail>GunTail_Medium</soundCastTail>
+        <muzzleFlashScale>2</muzzleFlashScale>
+        <aimingChargeMote>Mote_BeamRepeater_Charge</aimingChargeMote>
+        <aimingChargeMoteOffset>0.1</aimingChargeMoteOffset>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>barrels</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>12</power>
+        <cooldownTime>1.1</cooldownTime>
+      </li>
+    </tools>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_KT_HSMG</defName>
+    <label>Bullet_KT_HSMG</label>
+    <thingClass>SRA.Projectile_BeamWithEffect</thingClass>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_KT_flashlight</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>KT_Beamflashlight</damageDef>
+      <damageAmountBase>15</damageAmountBase>
+      <beamMoteDef>KT_Beamflashlight_heavy</beamMoteDef>
+      <beamStartOffset>0.5</beamStartOffset>
+      <armorPenetrationBase>0.50</armorPenetrationBase>
+	  <stoppingPower>0.9</stoppingPower>
+    </projectile>
+	
+	<modExtensions>
+        <li Class="SRA.Projectile_BeamWithEffect_Extension">
+          <impactEffecter>KT_Laserhit_large</impactEffecter>
+        </li>
+    </modExtensions>	
+  </ThingDef>
+  
+  
+  <!-- 步枪 -->
+  <ThingDef ParentName="KT_BaseMakeableGun" Name="KT_AR">
+    <defName>KT_AR</defName>
+    <label>KT_AR</label>
+    <description>KT_AR</description>
+    <graphicData>
+      <texPath>Things/Weapons/KT_AR</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+    <tradeTags>
+	   <li>WeaponRanged</li>
+	</tradeTags>
+    <generateAllowChance>0</generateAllowChance>
+    <generateCommonality>0</generateCommonality>
+    <relicChance>0</relicChance>
+    <statBases>
+      <WorkToMake>10000</WorkToMake>
+      <Mass>5</Mass>
+      <AccuracyTouch>0.95</AccuracyTouch>
+      <AccuracyShort>0.85</AccuracyShort>
+      <AccuracyMedium>0.75</AccuracyMedium>
+      <AccuracyLong>0.65</AccuracyLong>
+      <RangedWeapon_Cooldown>1</RangedWeapon_Cooldown>
+    </statBases>
+	<comps>
+	  <li Class="SRA.CompProperties_WeaponRenderDynamic">
+		<TexturePath>Things/Weapons/KT_AR_light</TexturePath>
+		<totalFrames>1</totalFrames>
+		<ticksPerFrame>1</ticksPerFrame>
+	  </li>
+    </comps>
+	<drawerType>MapMeshAndRealTime</drawerType>
+    <costList>
+      <Plasteel>35</Plasteel>
+      <Steel>100</Steel>
+	  <ComponentIndustrial>3</ComponentIndustrial>
+    </costList>
+	
+    <recipeMaker>
+      <researchPrerequisite>KT_Base_t1_weapon</researchPrerequisite>
+      <skillRequirements>
+        <Crafting>7</Crafting>
+      </skillRequirements>
+      <recipeUsers Inherit="True">
+        <li>KT_Workbench</li>
+      </recipeUsers>
+      <displayPriority>500</displayPriority>
+    </recipeMaker>
+    <techLevel>Spacer</techLevel>
+    <weaponTags>
+      <li>AssaultRifle</li>
+      <li>WeaponBeamRepeater</li>
+	  <li>KT_weapon</li>
+    </weaponTags>
+
+    <weaponClasses>
+      <li>RangedLight</li>
+    </weaponClasses>
+	
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_KT_AR</defaultProjectile>
+        <warmupTime>0.8</warmupTime>
+        <range>37</range>
+		<burstShotCount>3</burstShotCount>
+        <ticksBetweenBurstShots>3</ticksBetweenBurstShots>
+        <soundCast>KT_Beamflashlight_light</soundCast>
+        <soundCastTail>GunTail_Medium</soundCastTail>
+        <muzzleFlashScale>6</muzzleFlashScale>
+        <aimingChargeMote>Mote_BeamRepeater_Charge</aimingChargeMote>
+        <aimingChargeMoteOffset>0.1</aimingChargeMoteOffset>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>12</power>
+        <cooldownTime>2</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>12</power>
+        <cooldownTime>2</cooldownTime>
+      </li>
+    </tools>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_KT_AR</defName>
+    <label>Bullet_KT_AR</label>
+    <thingClass>SRA.Projectile_BeamWithEffect</thingClass>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_KT_flashlight</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>KT_Beamflashlight</damageDef>
+      <damageAmountBase>14</damageAmountBase>
+      <beamMoteDef>KT_Beamflashlight</beamMoteDef>
+      <beamStartOffset>0.5</beamStartOffset>
+      <armorPenetrationBase>0.75</armorPenetrationBase>
+	  <stoppingPower>0.8</stoppingPower>
+    </projectile>
+	<modExtensions>
+        <li Class="SRA.Projectile_BeamWithEffect_Extension">
+          <impactEffecter>KT_Laserhit</impactEffecter>
+        </li>
+    </modExtensions>
+  </ThingDef>
+  
+   <!-- 轻机枪 -->
+  <ThingDef ParentName="KT_BaseMakeableGun" Name="KT_LMG">
+    <defName>KT_LMG</defName>
+    <label>KT_LMG</label>
+    <description>KT_LMG</description>
+    <graphicData>
+      <texPath>Things/Weapons/KT_LMG</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>1.1</drawSize> <!-- 贴图大小 -->
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+    <tradeTags>
+	   <li>WeaponRanged</li>
+	</tradeTags>
+    <generateAllowChance>0</generateAllowChance>
+    <generateCommonality>0</generateCommonality>
+    <relicChance>0</relicChance>
+    <statBases>
+      <WorkToMake>20000</WorkToMake>
+      <Mass>9</Mass>
+      <AccuracyTouch>0.90</AccuracyTouch>
+      <AccuracyShort>0.80</AccuracyShort>
+      <AccuracyMedium>0.70</AccuracyMedium>
+      <AccuracyLong>0.60</AccuracyLong>
+      <RangedWeapon_Cooldown>1.7</RangedWeapon_Cooldown>
+    </statBases>
+	<comps>
+	  <li Class="SRA.CompProperties_WeaponRenderDynamic">
+		<TexturePath>Things/Weapons/KT_LMG_light</TexturePath>
+		<totalFrames>1</totalFrames>
+		<ticksPerFrame>1</ticksPerFrame>
+	  </li>
+    </comps>
+	<drawerType>MapMeshAndRealTime</drawerType>
+    <costList>
+      <Plasteel>45</Plasteel>
+      <Steel>180</Steel>
+	  <ComponentIndustrial>5</ComponentIndustrial>
+    </costList>
+	
+    <recipeMaker>
+      <researchPrerequisite>KT_Base_t1_weapon</researchPrerequisite>
+      <skillRequirements>
+        <Crafting>7</Crafting>
+      </skillRequirements>
+      <recipeUsers Inherit="True">
+        <li>KT_Workbench</li>
+      </recipeUsers>
+      <displayPriority>500</displayPriority>
+    </recipeMaker>
+    <techLevel>Spacer</techLevel>
+    <weaponTags>
+      <li>WeaponBeamRepeater</li>
+	  <li>KT_weapon</li>
+    </weaponTags>
+
+    <weaponClasses>
+      <li>RangedHeavy</li>
+    </weaponClasses>
+	
+	<equippedStatOffsets>
+      <MoveSpeed>-0.10</MoveSpeed>
+    </equippedStatOffsets>
+	
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_KT_LMG</defaultProjectile>
+        <warmupTime>1.5</warmupTime>
+        <range>37</range>
+		<burstShotCount>18</burstShotCount>
+        <ticksBetweenBurstShots>6</ticksBetweenBurstShots>
+        <soundCast>KT_Beamflashlight_light</soundCast>
+        <soundCastTail>GunTail_Medium</soundCastTail>
+        <muzzleFlashScale>6</muzzleFlashScale>
+        <aimingChargeMote>Mote_BeamRepeater_Charge</aimingChargeMote>
+        <aimingChargeMoteOffset>0.1</aimingChargeMoteOffset>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>15</power>
+        <cooldownTime>2.3</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>15</power>
+        <cooldownTime>2.3</cooldownTime>
+      </li>
+    </tools>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_KT_LMG</defName>
+    <label>Bullet_KT_LMG</label>
+    <thingClass>SRA.Projectile_BeamWithEffect</thingClass>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_KT_flashlight</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>KT_Beamflashlight</damageDef>
+      <damageAmountBase>10</damageAmountBase>
+      <beamMoteDef>KT_Beamflashlight</beamMoteDef>
+      <beamStartOffset>0.5</beamStartOffset>
+      <armorPenetrationBase>0.75</armorPenetrationBase>
+	  <stoppingPower>0.8</stoppingPower>
+    </projectile>
+	<modExtensions>
+        <li Class="SRA.Projectile_BeamWithEffect_Extension">
+          <impactEffecter>KT_Laserhit</impactEffecter>
+        </li>
+    </modExtensions>
+  </ThingDef>
+  
+  <!-- 重机枪 -->
+  <ThingDef ParentName="KT_BaseMakeableGun" Name="KT_HMG">
+    <defName>KT_HMG</defName>
+    <label>KT_HMG</label>
+    <description>KT_HMG</description>
+    <graphicData>
+      <texPath>Things/Weapons/KT_HMG</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>1.3</drawSize> <!-- 贴图大小 -->
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+    <tradeTags>
+	   <li>WeaponRanged</li>
+	</tradeTags>
+    <generateAllowChance>0</generateAllowChance>
+    <generateCommonality>0</generateCommonality>
+    <relicChance>0</relicChance>
+    <statBases>
+      <WorkToMake>45000</WorkToMake>
+      <Mass>15</Mass>
+      <AccuracyTouch>0.85</AccuracyTouch>
+      <AccuracyShort>0.80</AccuracyShort>
+      <AccuracyMedium>0.75</AccuracyMedium>
+      <AccuracyLong>0.70</AccuracyLong>
+      <RangedWeapon_Cooldown>2</RangedWeapon_Cooldown>
+    </statBases>
+	<comps>
+	  <li Class="SRA.CompProperties_WeaponRenderDynamic">
+		<TexturePath>Things/Weapons/KT_HMG_light</TexturePath>
+		<totalFrames>1</totalFrames>
+		<ticksPerFrame>1</ticksPerFrame>
+	  </li>
+    </comps>
+	<drawerType>MapMeshAndRealTime</drawerType>
+    <costList>
+      <Plasteel>80</Plasteel>
+      <Steel>300</Steel>
+	  <ComponentIndustrial>6</ComponentIndustrial>
+	  <ComponentSpacer>1</ComponentSpacer>
+    </costList>
+	
+    <recipeMaker>
+      <researchPrerequisite>KT_Base_t2_weapon</researchPrerequisite>
+      <skillRequirements>
+        <Crafting>7</Crafting>
+      </skillRequirements>
+      <recipeUsers Inherit="True">
+        <li>KT_Workbench</li>
+      </recipeUsers>
+      <displayPriority>500</displayPriority>
+    </recipeMaker>
+    <techLevel>Spacer</techLevel>
+    <weaponTags>
+      <li>WeaponBeamRepeater</li>
+	  <li>KT_weapon</li>
+    </weaponTags>
+
+    <weaponClasses>
+      <li>RangedHeavy</li>
+    </weaponClasses>
+	
+	<equippedStatOffsets>
+      <MoveSpeed>-0.25</MoveSpeed>
+    </equippedStatOffsets>
+	
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_KT_HMG</defaultProjectile>
+        <warmupTime>1.8</warmupTime>
+        <range>55</range>
+		<burstShotCount>30</burstShotCount>
+        <ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+        <soundCast>KT_Beamflashlight_heavy</soundCast>
+        <soundCastTail>GunTail_Medium</soundCastTail>
+        <muzzleFlashScale>8</muzzleFlashScale>
+        <aimingChargeMote>Mote_BeamRepeater_Charge</aimingChargeMote>
+        <aimingChargeMoteOffset>0.1</aimingChargeMoteOffset>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>15</power>
+        <cooldownTime>2.3</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>15</power>
+        <cooldownTime>2.3</cooldownTime>
+      </li>
+    </tools>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_KT_HMG</defName>
+    <label>Bullet_KT_HMG</label>
+    <thingClass>SRA.Projectile_BeamWithEffect</thingClass>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_KT_flashlight</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>KT_Beamflashlight</damageDef>
+      <damageAmountBase>17</damageAmountBase>
+      <beamMoteDef>KT_Beamflashlight_heavy</beamMoteDef>
+      <beamStartOffset>0.5</beamStartOffset>
+      <armorPenetrationBase>1.00</armorPenetrationBase>
+	  <stoppingPower>1.0</stoppingPower>
+    </projectile>
+	
+	<modExtensions>
+        <li Class="SRA.Projectile_BeamWithEffect_Extension">
+          <impactEffecter>KT_Laserhit_large</impactEffecter>
+        </li>
+    </modExtensions>
+  </ThingDef>
+  
+   <!-- 狙 -->
+  <ThingDef ParentName="KT_BaseMakeableGun" Name="KT_Sniper">
+    <defName>KT_Sniper</defName>
+    <label>KT_Sniper</label>
+    <description>KT_Sniper</description>
+    <graphicData>
+      <texPath>Things/Weapons/KT_Sniper</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>1.3</drawSize> <!-- 贴图大小 -->
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+    
+    <generateAllowChance>0</generateAllowChance>
+    <generateCommonality>0</generateCommonality>
+    <relicChance>0</relicChance>
+    <statBases>
+      <WorkToMake>45000</WorkToMake>
+      <Mass>10</Mass>
+      <AccuracyTouch>1</AccuracyTouch>
+      <AccuracyShort>1</AccuracyShort>
+      <AccuracyMedium>1</AccuracyMedium>
+      <AccuracyLong>1</AccuracyLong>
+      <RangedWeapon_Cooldown>2</RangedWeapon_Cooldown>
+    </statBases>
+	<comps>
+	  <li Class="SRA.CompProperties_WeaponRenderDynamic">
+		<TexturePath>Things/Weapons/KT_Sniper_light</TexturePath>
+		<totalFrames>1</totalFrames>
+		<ticksPerFrame>1</ticksPerFrame>
+	  </li>
+    </comps>
+	<drawerType>MapMeshAndRealTime</drawerType>
+    <costList>
+      <Plasteel>100</Plasteel>
+      <Steel>150</Steel>
+	  <ComponentIndustrial>7</ComponentIndustrial>
+	  <ComponentSpacer>2</ComponentSpacer>
+    </costList>
+	
+    <recipeMaker>
+      <researchPrerequisite>KT_Base_t2_weapon</researchPrerequisite>
+      <skillRequirements>
+        <Crafting>9</Crafting>
+      </skillRequirements>
+      <recipeUsers Inherit="True">
+        <li>KT_Workbench</li>
+      </recipeUsers>
+      <displayPriority>500</displayPriority>
+    </recipeMaker>
+    <techLevel>Spacer</techLevel>
+    <weaponTags>
+      <li>WeaponBeamRepeater</li>
+	  <li>KT_weapon</li>
+    </weaponTags>
+    <tradeTags>
+	   <li>WeaponRanged</li>
+	</tradeTags>
+    <weaponClasses>
+      <li>LongShots</li>
+	  <li>RangedHeavy</li>
+    </weaponClasses>
+	
+	<equippedStatOffsets>
+      <MoveSpeed>-0.10</MoveSpeed>
+    </equippedStatOffsets>
+	
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_KT_Sniper</defaultProjectile>
+        <warmupTime>2</warmupTime>
+        <range>140</range>
+		<burstShotCount>1</burstShotCount>
+        <soundCast>KT_Beamflashlight_heavy</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>8</muzzleFlashScale>
+        <aimingChargeMote>Mote_BeamRepeater_Charge</aimingChargeMote>
+        <aimingChargeMoteOffset>0.1</aimingChargeMoteOffset>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>15</power>
+        <cooldownTime>2.3</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>15</power>
+        <cooldownTime>2.3</cooldownTime>
+      </li>
+    </tools>
+  </ThingDef>
+  
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_KT_Sniper</defName>
+    <label>Bullet_KT_Sniper</label>
+    <thingClass>SRA.Projectile_MultiExplosive_Beam</thingClass>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_KT_flashlight</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>KT_Beamflashlight</damageDef>
+	  <explosionRadius>1</explosionRadius>
+      <damageAmountBase>60</damageAmountBase>
+      <beamMoteDef>KT_Beamflashlight_heavy</beamMoteDef>
+      <beamStartOffset>0</beamStartOffset>
+      <armorPenetrationBase>1.5</armorPenetrationBase>
+	  <stoppingPower>1</stoppingPower>
+    </projectile>
+    <modExtensions>
+      <li Class="SRA.MultiExplosive_BeamExtension">
+        <MultiExplosive_Beams>
+          <li>
+            <radius>1</radius>
+            <damageDef>KTREDomb</damageDef>
+            <damageAmount>50</damageAmount>
+            <armorPenetration>0.8</armorPenetration>
+            <explosionSound>Explosion_Bomb</explosionSound>
+            <explosionDamageFalloff>true</explosionDamageFalloff><!-- 默认true -->
+            <onlyAntiHostile>false</onlyAntiHostile> <!-- 智能弹药：这个爆炸只伤害敌对目标，默认false -->
+          </li>
+        </MultiExplosive_Beams>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  <!-- 激光冲击炮 -->
+  <ThingDef ParentName="KT_BaseMakeableGun" Name="KT_HEAVYLASERCANNON">
+    <defName>KT_HEAVYLASERCANNON</defName>
+    <label>KT_HEAVYLASERCANNON</label>
+    <description>KT_HEAVYLASERCANNON</description>
+    <graphicData>
+      <texPath>Things/Weapons/KT_HEAVYLASERCANNON</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>1.5</drawSize> <!-- 贴图大小 -->
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+    
+    <generateAllowChance>0</generateAllowChance>
+    <generateCommonality>0</generateCommonality>
+    <relicChance>0</relicChance>
+    <statBases>
+      <WorkToMake>60000</WorkToMake>
+      <Mass>15</Mass>
+      <AccuracyTouch>0.8</AccuracyTouch>
+      <AccuracyShort>0.8</AccuracyShort>
+      <AccuracyMedium>0.7</AccuracyMedium>
+      <AccuracyLong>0.65</AccuracyLong>
+      <RangedWeapon_Cooldown>3.2</RangedWeapon_Cooldown>
+    </statBases>
+	<comps>
+	  <li Class="SRA.CompProperties_WeaponRenderDynamic">
+		<TexturePath>Things/Weapons/KT_HEAVYLASERCANNON_light</TexturePath>
+		<totalFrames>1</totalFrames>
+		<ticksPerFrame>1</ticksPerFrame>
+	  </li>
+    </comps>
+	<drawerType>MapMeshAndRealTime</drawerType>
+    <costList>
+      <Plasteel>150</Plasteel>
+      <Steel>300</Steel>
+	  <ComponentIndustrial>10</ComponentIndustrial>
+	  <ComponentSpacer>3</ComponentSpacer>
+	  <Gold>5</Gold>
+    </costList>
+	
+    <recipeMaker>
+      <researchPrerequisite>KT_Base_t3_weapon</researchPrerequisite>
+      <skillRequirements>
+        <Crafting>11</Crafting>
+      </skillRequirements>
+      <recipeUsers Inherit="True">
+        <li>KT_Workbench</li>
+      </recipeUsers>
+      <displayPriority>500</displayPriority>
+    </recipeMaker>
+    <techLevel>Spacer</techLevel>
+    <weaponTags>
+      <li>WeaponBeamRepeater</li>
+	  <li>KT_weapon</li>
+    </weaponTags>
+
+    <weaponClasses>
+      <li>LongShots</li>
+	  <li>RangedHeavy</li>
+    </weaponClasses>
+	
+	<equippedStatOffsets>
+      <MoveSpeed>-0.30</MoveSpeed>
+    </equippedStatOffsets>
+	
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_KT_HEAVYLASERCANNON</defaultProjectile>
+        <warmupTime>3.5</warmupTime>
+        <range>65</range>
+		<burstShotCount>1</burstShotCount>
+        <soundCast>KT_Beamflashlight_heavy</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>15</muzzleFlashScale>
+        <aimingChargeMote>Mote_BeamRepeater_Charge</aimingChargeMote>
+        <aimingChargeMoteOffset>0.1</aimingChargeMoteOffset>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>15</power>
+        <cooldownTime>2.3</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>15</power>
+        <cooldownTime>2.3</cooldownTime>
+      </li>
+    </tools>
+  </ThingDef>
+  
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_KT_HEAVYLASERCANNON</defName>
+    <label>Bullet_KT_HEAVYLASERCANNON</label>
+    <thingClass>SRA.Projectile_MultiExplosive_Beam</thingClass>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_KT_flashlight</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>KT_Beamflashlight</damageDef>
+	  <explosionRadius>3</explosionRadius>
+      <damageAmountBase>120</damageAmountBase>
+      <beamMoteDef>KT_Beamflashlight_heavy</beamMoteDef>
+      <beamStartOffset>0</beamStartOffset>
+      <armorPenetrationBase>1.1</armorPenetrationBase>
+	  <stoppingPower>1.5</stoppingPower>
+    </projectile>
+    
+    <modExtensions>
+      <li Class="SRA.MultiExplosive_BeamExtension">
+        <MultiExplosive_Beams>
+          <li>
+            <radius>3</radius>
+            <damageDef>KTREDomb</damageDef>
+            <damageAmount>110</damageAmount>
+            <armorPenetration>1.0</armorPenetration>
+            <explosionSound>Explosion_Bomb</explosionSound>
+            <explosionDamageFalloff>true</explosionDamageFalloff><!-- 默认true -->
+            <onlyAntiHostile>false</onlyAntiHostile> <!-- 智能弹药：这个爆炸只伤害敌对目标，默认false -->
+          </li>
+        </MultiExplosive_Beams>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  
+  <!-- 最后警告 -->
+  <ThingDef ParentName="KT_BaseMakeableGun" Name="KT_DoomLauncher">
+    <defName>KT_DoomLauncher</defName>
+    <label>KT_DoomLauncher</label>
+    <description>KT_DoomLauncher</description>
+    <graphicData>
+      <texPath>Things/Weapons/KT_DoomLauncher</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>2</drawSize> <!-- 贴图大小 -->
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+    <tradeTags>
+	   <li>WeaponRanged</li>
+	</tradeTags>
+    <generateAllowChance>0</generateAllowChance>
+    <generateCommonality>0</generateCommonality>
+    <relicChance>0</relicChance>
+    <statBases>
+      <WorkToMake>80000</WorkToMake>
+      <Mass>25</Mass>
+      <AccuracyTouch>0.9</AccuracyTouch>
+      <AccuracyShort>0.9</AccuracyShort>
+      <AccuracyMedium>0.9</AccuracyMedium>
+      <AccuracyLong>0.9</AccuracyLong>
+      <RangedWeapon_Cooldown>25</RangedWeapon_Cooldown>
+    </statBases>
+	
+	<comps>
+	  <li Class="SRA.CompProperties_WeaponRenderDynamic">
+		<TexturePath>Things/Weapons/KT_DoomLauncher_light</TexturePath>
+		<totalFrames>1</totalFrames>
+		<ticksPerFrame>1</ticksPerFrame>
+	  </li>
+    </comps>
+	
+	<drawerType>MapMeshAndRealTime</drawerType>
+    <costList>
+      <Plasteel>200</Plasteel>
+      <Steel>400</Steel>
+	  <ComponentIndustrial>15</ComponentIndustrial>
+	  <ComponentSpacer>10</ComponentSpacer>
+	  <Gold>5</Gold>
+    </costList>
+	
+    <recipeMaker>
+      <researchPrerequisite>KT_Base_t3_weapon</researchPrerequisite>
+      <skillRequirements>
+        <Crafting>10</Crafting>
+      </skillRequirements>
+      <recipeUsers Inherit="True">
+        <li>KT_Workbench</li>
+      </recipeUsers>
+      <displayPriority>500</displayPriority>
+    </recipeMaker>
+    <techLevel>Spacer</techLevel>
+    <weaponTags>
+	  <li>KT_weapon</li>
+    </weaponTags>
+
+    <weaponClasses>
+      <li>LongShots</li>
+	  <li>RangedHeavy</li>
+    </weaponClasses>
+	
+	<equippedStatOffsets>
+      <MoveSpeed>-0.55</MoveSpeed>
+    </equippedStatOffsets>
+	
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass> <!-- 射击行为 -->
+        <hasStandardCommand>true</hasStandardCommand> <!-- 标准命令 -->
+        <defaultProjectile>Bullet_KT_DoomLauncher</defaultProjectile> <!-- 默认子弹 -->
+        <warmupTime>0.5</warmupTime> <!-- 预热时间 -->
+		<minRange>15</minRange>
+        <range>55</range> <!-- 射程 -->
+        <burstShotCount>1</burstShotCount> <!-- 每次射击子弹数量 -->
+        <soundCast>KT_Largecannon</soundCast> <!-- 射击音效 -->
+        <soundCastTail>GunTail_Heavy</soundCastTail> <!-- 尾音效 -->
+        <muzzleFlashScale>120</muzzleFlashScale> <!-- 火光规模 -->
+        <consumeFuelPerShot>1</consumeFuelPerShot> <!-- 每发子弹消耗的燃料 -->
+		<forcedMissRadius>1</forcedMissRadius>
+		<targetParams>
+			<canTargetLocations>true</canTargetLocations>
+		</targetParams>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>15</power>
+        <cooldownTime>3.3</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>15</power>
+        <cooldownTime>3.3</cooldownTime>
+      </li>
+    </tools>
+  </ThingDef>
+  
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_KT_DoomLauncher</defName>
+    <label>Bullet_KT_DoomLauncher</label>
+    <thingClass>Projectile_Explosive</thingClass>
+        <category>Projectile</category>
+        <tickerType>Normal</tickerType>
+        <altitudeLayer>Projectile</altitudeLayer>
+        <graphicData>
+            <texPath>Things/Projectile/Bullet_381MM</texPath> <!-- 子弹贴图路径 -->
+            <graphicClass>Graphic_Single</graphicClass> <!-- 使用单一图形 -->
+			<shaderType>MoteGlow</shaderType>
+      		<drawSize>(4)</drawSize>
+        </graphicData>
+        <projectile>
+            <damageDef>Bomb</damageDef>
+			<flyOverhead>true</flyOverhead>
+            <explosionRadius>20</explosionRadius>
+            <speed>150</speed>
+            <damageAmountBase>2500</damageAmountBase>
+            <arcHeightFactor>0</arcHeightFactor>
+            <soundExplode>Explosion_Rocket</soundExplode>
+			<armorPenetrationBase>2</armorPenetrationBase>
+			<stoppingPower>10</stoppingPower>
+        </projectile>
+  </ThingDef>
+  
+  
+  <!-- 爆弹枪 -->
+  <ThingDef ParentName="KT_BaseMakeableGun" Name="KT_Boltgun">
+    <defName>KT_Boltgun</defName>
+    <label>KT_Boltgun</label>
+    <description>KT_Boltgun</description>
+    <graphicData>
+      <texPath>Things/Weapons/KT_Boltgun</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>1.2</drawSize> <!-- 贴图大小 -->
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+    <tradeTags>
+	   <li>WeaponRanged</li>
+	</tradeTags>
+    <generateAllowChance>0</generateAllowChance>
+    <generateCommonality>0</generateCommonality>
+    <relicChance>0</relicChance>
+    <statBases>
+      <WorkToMake>70000</WorkToMake>
+      <Mass>10</Mass>
+      <AccuracyTouch>0.9</AccuracyTouch>
+      <AccuracyShort>0.85</AccuracyShort>
+      <AccuracyMedium>0.75</AccuracyMedium>
+      <AccuracyLong>0.65</AccuracyLong>
+      <RangedWeapon_Cooldown>1.3</RangedWeapon_Cooldown>
+    </statBases>
+	
+    <costList>
+      <Plasteel>150</Plasteel>
+      <Steel>250</Steel>
+	  <ComponentIndustrial>8</ComponentIndustrial>
+	  <ComponentSpacer>2</ComponentSpacer>
+	  <Gold>8</Gold>
+    </costList>
+	
+    <recipeMaker>
+      <researchPrerequisite>KT_Base_t3_weapon</researchPrerequisite>
+      <skillRequirements>
+        <Crafting>10</Crafting>
+      </skillRequirements>
+      <recipeUsers Inherit="True">
+        <li>KT_Workbench</li>
+      </recipeUsers>
+      <displayPriority>500</displayPriority>
+    </recipeMaker>
+    <techLevel>Spacer</techLevel>
+    <weaponTags>
+      <li>WeaponBeamRepeater</li>
+	  <li>KT_weapon</li>
+    </weaponTags>
+
+    <weaponClasses>
+      <li>LongShots</li>
+	  <li>RangedHeavy</li>
+    </weaponClasses>
+	
+	<equippedStatOffsets>
+      <MoveSpeed>-0.15</MoveSpeed>
+    </equippedStatOffsets>
+	<comps>
+	  <li Class="SRA.CompProperties_WeaponRenderDynamic">
+		<TexturePath>Things/Weapons/KT_Boltgun_light</TexturePath>
+		<totalFrames>1</totalFrames>
+		<ticksPerFrame>1</ticksPerFrame>
+	  </li>
+    </comps>
+	<drawerType>MapMeshAndRealTime</drawerType>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_KT_Boltgun</defaultProjectile>
+        <warmupTime>1.2</warmupTime>
+        <range>50</range>
+		<burstShotCount>6</burstShotCount>
+		<ticksBetweenBurstShots>12</ticksBetweenBurstShots>
+        <soundCast>KT_Boltgun</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>35</muzzleFlashScale>
+		<forcedMissRadius>0.3</forcedMissRadius>
+      </li>
+    </verbs>
+	<modExtensions>
+      <li Class="MuzzleFlash.MuzzleFlashProps" MayRequire="IssacZhuang.MuzzleFlash">
+        <def>MF_StandardMuzzleFalsh</def>
+        <drawSize>(0.75)</drawSize>
+        <offsets>
+          <li>(0.4,0)</li>
+        </offsets>
+        <isAlternately>true</isAlternately>
+      </li>
+    </modExtensions>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>12</power>
+        <cooldownTime>1.5</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>12</power>
+        <cooldownTime>1.2</cooldownTime>
+      </li>
+    </tools>
+  </ThingDef>
+  
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_KT_Boltgun</defName>
+    <label>Bullet_KT_Boltgun</label>
+    <thingClass>Projectile_Explosive</thingClass>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_kt_small_II</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>1.1</drawSize> <!-- 贴图大小 -->
+    </graphicData>
+    <projectile>
+      <damageDef>Bomb</damageDef>
+        <explosionRadius>0.8</explosionRadius>
+        <speed>180</speed>
+        <damageAmountBase>40</damageAmountBase>
+        <arcHeightFactor>0</arcHeightFactor>
+        <soundExplode>Explosion_Rocket</soundExplode>
+		<flyOverhead>false</flyOverhead>
+		<armorPenetrationBase>1.2</armorPenetrationBase>
+		<stoppingPower>1.2</stoppingPower>
+    </projectile>
+  </ThingDef>
+  
+  <!-- 麻醉步枪 -->
+  <ThingDef ParentName="KT_BaseMakeableGun" Name="KT_Tranquilizer">
+    <defName>KT_Tranquilizer</defName>
+    <label>KT_Tranquilizer</label>
+    <description>KT_Tranquilizer</description>
+    <graphicData>
+      <texPath>Things/Weapons/KT_Tranquilizer</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>1.1</drawSize> <!-- 贴图大小 -->
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+    <tradeTags>
+	   <li>WeaponRanged</li>
+	</tradeTags>
+    <generateAllowChance>0</generateAllowChance>
+    <generateCommonality>0</generateCommonality>
+    <relicChance>0</relicChance>
+    <statBases>
+      <WorkToMake>15000</WorkToMake>
+      <Mass>12</Mass>
+      <AccuracyTouch>0.88</AccuracyTouch>
+      <AccuracyShort>0.82</AccuracyShort>
+      <AccuracyMedium>0.75</AccuracyMedium>
+      <AccuracyLong>0.70</AccuracyLong>
+      <RangedWeapon_Cooldown>2.5</RangedWeapon_Cooldown>
+    </statBases>
+	<comps>
+	  <li Class="SRA.CompProperties_WeaponRenderDynamic">
+		<TexturePath>Things/Weapons/KT_Tranquilizer_light</TexturePath>
+		<totalFrames>1</totalFrames>
+		<ticksPerFrame>1</ticksPerFrame>
+	  </li>
+    </comps>
+	<drawerType>MapMeshAndRealTime</drawerType>
+    <costList>
+      <Steel>200</Steel>
+	  <Plasteel>20</Plasteel>
+	  <Chemfuel>50</Chemfuel>
+	  <ComponentIndustrial>4</ComponentIndustrial>
+    </costList>
+	
+    <recipeMaker>
+      <researchPrerequisite>KT_Base_Workbench</researchPrerequisite>
+      <skillRequirements>
+        <Crafting>7</Crafting>
+      </skillRequirements>
+      <recipeUsers Inherit="True">
+        <li>KT_Workbench</li>
+      </recipeUsers>
+      <displayPriority>500</displayPriority>
+    </recipeMaker>
+    <techLevel>Spacer</techLevel>
+    <weaponTags>
+      <li>WeaponBeamRepeater</li>
+	  <li>KT_weapon</li>
+    </weaponTags>
+
+    <weaponClasses>
+      <li>RangedHeavy</li>
+    </weaponClasses>
+	
+	<equippedStatOffsets>
+      <MoveSpeed>-0.25</MoveSpeed>
+    </equippedStatOffsets>
+	
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_KT_Tranquilizer</defaultProjectile>
+        <warmupTime>1.6</warmupTime>
+        <range>27</range>
+		<burstShotCount>10</burstShotCount>
+        <ticksBetweenBurstShots>12</ticksBetweenBurstShots>
+        <soundCast>Bow_Recurve</soundCast>
+        <soundCastTail>GunTail_Medium</soundCastTail>
+        <muzzleFlashScale>2</muzzleFlashScale>
+        <aimingChargeMote>Mote_BeamRepeater_Charge</aimingChargeMote>
+        <aimingChargeMoteOffset>0.1</aimingChargeMoteOffset>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>15</power>
+        <cooldownTime>2.3</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>15</power>
+        <cooldownTime>2.3</cooldownTime>
+      </li>
+    </tools>
+  </ThingDef>
+  
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_KT_Tranquilizer</defName>
+    <label>Bullet_KT_Tranquilizer</label>
+    <projectile>
+      <damageDef>BulletTranquilizer</damageDef>
+      <damageAmountBase>2</damageAmountBase>
+      <stoppingPower>5</stoppingPower>
+      <speed>100</speed>
+    </projectile>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Tranquilizer</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>(0.5)</drawSize>
+    </graphicData>
+  </ThingDef>
+  
+  
+</Defs>

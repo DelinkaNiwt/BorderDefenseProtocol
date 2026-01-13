@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<!--阴影粒子-->
+	<ThingDef ParentName="MoteBase">
+		<defName>TurbojetShadow</defName>
+		<altitudeLayer>MoteLow</altitudeLayer>
+		<mote>
+			<growthRate>0</growthRate>
+			<solidTime>0.05</solidTime>
+			<fadeInTime>0.05</fadeInTime>
+			<fadeOutTime>0.05</fadeOutTime>
+		</mote>
+		<graphicData>
+			<drawSize>1.5</drawSize>
+			<color>(0,0,0,0.3)</color>
+			<shaderType>Mote</shaderType>
+			<texPath>Things/Apparel/KT_Jetpack/TurbojetShadow</texPath>
+		</graphicData>
+	</ThingDef>
+	<!--扬尘粒子-->
+	<ThingDef ParentName="MoteBase">
+		<defName>TurbojetSmoke</defName>
+		<altitudeLayer>MoteLow</altitudeLayer>
+		<mote>
+			<solidTime>0.2</solidTime>
+			<growthRate>-3</growthRate>
+			<fadeInTime>0.05</fadeInTime>
+			<fadeOutTime>0.75</fadeOutTime>
+		</mote>
+		<graphicData>
+			<color>(0.75,0.75,0.75,0.75)</color>
+			<texPath>Things/Apparel/KT_Jetpack/TurbojetSmoke</texPath>
+			<shaderType>TransparentPostLight</shaderType>
+		</graphicData>
+	</ThingDef>
+	<!--喷流粒子-->
+	<ThingDef ParentName="MoteBase">
+		<defName>Mote_TurbojetFlame_Red</defName>
+		<altitudeLayer>Projectile</altitudeLayer>
+		<mote>
+			<solidTime>0.2</solidTime>
+			<growthRate>-3</growthRate>
+			<fadeInTime>0.05</fadeInTime>
+			<fadeOutTime>0.75</fadeOutTime>
+		</mote>
+		<graphicData>
+			<color>(1,0.5,0,0.55)</color>
+			<texPath>Things/Apparel/KT_Jetpack/TurbojetFlame</texPath>
+			<shaderType>TransparentPostLight</shaderType>
+		</graphicData>
+	</ThingDef>
+	<ThingDef ParentName="MoteBase">
+		<defName>Mote_TurbojetFlame_Orange</defName>
+		<altitudeLayer>Projectile</altitudeLayer>
+		<mote>
+			<solidTime>0.2</solidTime>
+			<growthRate>-3</growthRate>
+			<fadeInTime>0.05</fadeInTime>
+			<fadeOutTime>0.75</fadeOutTime>
+		</mote>
+		<graphicData>
+			<color>(1,0.6,0,0.5)</color>
+			<texPath>Things/Apparel/KT_Jetpack/TurbojetFlame</texPath>
+			<shaderType>TransparentPostLight</shaderType>
+		</graphicData>
+	</ThingDef>
+	<ThingDef ParentName="MoteBase">
+		<defName>Mote_TurbojetFlame_White</defName>
+		<altitudeLayer>Projectile</altitudeLayer>
+		<mote>
+			<solidTime>0.2</solidTime>
+			<growthRate>-3</growthRate>
+			<fadeInTime>0.05</fadeInTime>
+			<fadeOutTime>0.75</fadeOutTime>
+		</mote>
+		<graphicData>
+			<color>(1,1,1,0.25)</color>
+			<texPath>Things/Apparel/KT_Jetpack/TurbojetFlame</texPath>
+			<shaderType>TransparentPostLight</shaderType>
+		</graphicData>
+	</ThingDef>
+	<!--残骸喷流-->
+	<FleckDef ParentName="FleckBase">
+		<defName>Fleck_ADSInterceptSpark</defName>
+		<solidTime>0.15</solidTime>
+		<fadeInTime>0.05</fadeInTime>
+		<fadeOutTime>0.3</fadeOutTime>
+		<altitudeLayer>MoteOverhead</altitudeLayer>
+		<fleckSystemClass>FleckSystemThrown</fleckSystemClass>
+		<graphicData>
+			<drawSize>2.5</drawSize>
+			<color>(255,220,150,100)</color>
+			<shaderType>MoteGlow</shaderType>
+			<texPath>Things/Mote/SparkFlash</texPath>
+		</graphicData>
+	</FleckDef>
+	<!--尾迹烟柱-->
+	<FleckDef ParentName="FleckBase_Thrown">
+		<defName>MissileSmoke</defName>
+		<solidTime>1.5</solidTime>
+		<fadeInTime>0.5</fadeInTime>
+		<fadeOutTime>3</fadeOutTime>
+		<growthRate>0.01</growthRate>
+		<altitudeLayer>MoteOverhead</altitudeLayer>
+		<graphicData>
+			<texPath>Things/Mote/Smoke</texPath>
+			<renderInstanced>true</renderInstanced>
+		</graphicData>
+	</FleckDef>
+</Defs>

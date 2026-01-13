@@ -1,0 +1,165 @@
+<Defs>
+	<ThingDef ParentName="KT_AutocannonTurret">
+    <defName>KTMEGARAILCANNON</defName>
+    <label>KTMEGARAILCANNON</label>
+	<thingClass>SRA.Building_TurretGunHasSpeed</thingClass>
+	<modExtensions>
+	   <li Class="SRA.ModExt_HasSpeedTurret"><!-- SRA炮塔转速 -->
+		 <speed>1.0</speed>
+	   </li>
+  	</modExtensions>
+    <description>KTMEGARAILCANNON</description>
+    <uiIconPath>Things/Building/Security/KTMEGARAILCANNON_Ico</uiIconPath>
+	<uiOrder>2000</uiOrder> <!-- UI栏顺序 -->
+	<graphicData>
+		<texPath>Things/Building/Security/KT381MMCANNON_Base</texPath>
+		<graphicClass>Graphic_Single</graphicClass>
+		<drawSize>(17,17)</drawSize>
+	</graphicData>
+	<size>(7,7)</size>
+    <statBases>
+	  <MaxHitPoints>7200</MaxHitPoints>
+	  <Flammability>0</Flammability>
+      <ShootingAccuracyTurret>1</ShootingAccuracyTurret>
+	  <WorkToBuild>3000</WorkToBuild>
+    </statBases>
+	<drawerType>MapMeshAndRealTime</drawerType>
+	<tickerType>Normal</tickerType>
+	<killedLeavings>
+      <ChunkSlagSteel>3</ChunkSlagSteel>
+    </killedLeavings>
+    <costList>
+      <KT_steel>400</KT_steel>
+      <ComponentIndustrial>40</ComponentIndustrial>
+	  <ComponentSpacer>20</ComponentSpacer>
+    </costList>
+    <comps>
+	  <li Class="SRA.CompProperties_ForceTargetable" /><!-- 善良手操 -->	
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>10000</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Refuelable"> <!-- 应该是可以补给 -->
+        <fuelLabel>Shots until barrel change</fuelLabel>
+        <fuelGizmoLabel>Barrel durability</fuelGizmoLabel>
+        <outOfFuelMessage>Needs new barrel</outOfFuelMessage>
+        <fuelFilter><thingDefs><li>ComponentSpacer</li></thingDefs></fuelFilter>
+        <fuelCapacity>25</fuelCapacity>
+        <fuelMultiplier>1</fuelMultiplier>
+        <initialFuelPercent>1</initialFuelPercent>
+        <autoRefuelPercent>0.5</autoRefuelPercent>
+        <showFuelGizmo>true</showFuelGizmo>
+        <minimumFueledThreshold>1</minimumFueledThreshold>
+        <factorByDifficulty>false</factorByDifficulty>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelIconPath>KT_UI/UI_OUTAMMO</fuelIconPath>
+      </li>
+    </comps>
+
+    <building>
+      <turretGunDef>Gun_KTMEGARAILCANNON</turretGunDef>
+	  <ai_combatDangerous>true</ai_combatDangerous> <!-- AI认为它具有危险性 -->
+	  <turretTopDrawSize>17</turretTopDrawSize>
+	   <turretTopOffset>(0, 0)</turretTopOffset>
+      <turretBurstCooldownTime>12</turretBurstCooldownTime>
+    </building>
+    <researchPrerequisites>
+      <li>KT_Base_t3_rail_turret</li>
+    </researchPrerequisites>
+	<designationCategory>KT_designation_group</designationCategory> <!-- 指定分类：联合 -->
+
+
+	
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>Gun_KTMEGARAILCANNON</defName>
+    <label>Gun_KTMEGARAILCANNON</label>
+    <description>Gun_KTMEGARAILCANNON</description>
+    <graphicData>
+      <texPath>Things/Building/Security/KTMEGARAILCANNON</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(25,25)</drawSize>
+    </graphicData>
+    <statBases>
+      <AccuracyTouch>1</AccuracyTouch>
+      <AccuracyShort>1</AccuracyShort>
+      <AccuracyMedium>1</AccuracyMedium>
+      <AccuracyLong>1</AccuracyLong>
+      <RangedWeapon_Cooldown>12</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>120</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+	<verbs>
+      <li>
+        <verbClass>SRA.Verb_ShootWithOffset</verbClass> <!-- 射击行为 -->
+        <hasStandardCommand>true</hasStandardCommand> <!-- 标准命令 -->
+        <defaultProjectile>Bullet_KTMEGARAILCANNON</defaultProjectile> <!-- 默认子弹 -->
+        <warmupTime>5.5</warmupTime> <!-- 预热时间 -->
+		<requireLineOfSight>false</requireLineOfSight><!-- 只能直线射击 -->
+		<minRange>30</minRange>
+        <range>500</range> <!-- 射程 -->
+        <burstShotCount>1</burstShotCount> <!-- 每次射击子弹数量 -->
+        <soundCast>KTRAILGUNRound</soundCast> <!-- 射击音效 -->
+        <soundCastTail>GunTail_Heavy</soundCastTail> <!-- 尾音效 -->
+        <muzzleFlashScale>100</muzzleFlashScale> <!-- 火光规模 -->
+        <consumeFuelPerShot>1</consumeFuelPerShot> <!-- 每发子弹消耗的燃料 -->
+      </li>
+    </verbs>
+	<weaponTags>
+	  	  <li>KT_weapon</li>
+   	</weaponTags>
+	<modExtensions>
+      <li Class="MuzzleFlash.MuzzleFlashProps" MayRequire="IssacZhuang.MuzzleFlash">
+         <def>MF_ChargedMuzzleFalsh</def>
+         <drawSize>(5)</drawSize>
+         <offsets>
+           <li>(3,0)</li>
+         </offsets>
+         <isAlternately>true</isAlternately>
+     </li>
+	 <li Class="SRA.ModExtension_ShootWithOffset">
+         <offsets>
+           <li>(0,-4)</li><!-- 第一个参数是东西（负数为东）。第二个参数为南北（负数为朝北） -->
+         </offsets>
+     </li>		
+   </modExtensions>
+  </ThingDef>
+  
+  <ThingDef>
+        <defName>Bullet_KTMEGARAILCANNON</defName>
+        <label>KTMEGARAILCANNON</label>
+        <thingClass>ECT.Projectile_GuidedCartridge</thingClass>
+        <category>Projectile</category>
+        <tickerType>Normal</tickerType>
+        <altitudeLayer>Projectile</altitudeLayer>
+        <graphicData>
+            <texPath>Things/Projectile/Bullet_381MM</texPath> <!-- 子弹贴图路径 -->
+            <graphicClass>Graphic_Single</graphicClass> <!-- 使用单一图形 -->
+			<shaderType>MoteGlow</shaderType>
+      		<drawSize>(6)</drawSize>
+        </graphicData>
+		<projectile>
+            <damageDef>KTBomb_EMPTY</damageDef>
+            <explosionRadius>1.5</explosionRadius>
+            <speed>250</speed>
+            <damageAmountBase>3000</damageAmountBase>
+            <arcHeightFactor>0</arcHeightFactor>
+            <soundExplode>KTNONESOUND</soundExplode>
+			<flyOverhead>true</flyOverhead>
+			<armorPenetrationBase>10</armorPenetrationBase>
+			<stoppingPower>10</stoppingPower>
+        </projectile>
+		<modExtensions>
+			<li Class="ECT.ModExtension_GuidedCartridge">
+				<!-- 修正角度 -->
+				<maxHomingAngle>45</maxHomingAngle>
+			</li>
+		</modExtensions>
+  </ThingDef>	
+
+</Defs>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+	<!--Comp_HNGT_OrbitalBombardment-->
+	<HNGT_TargeterBusy>"Fire Control Computer Busy"</HNGT_TargeterBusy>
+	<HNGT_NoOtherMap>"Fire Control System Target List Empty"</HNGT_NoOtherMap>
+	<HNGT_CooldownLeft>System cooling down, {0} seconds remaining.</HNGT_CooldownLeft>
+	<HNGT_LocationInvalid>"Fire Control System Cannot Lock Onto This Area"</HNGT_LocationInvalid>
+	<HNGT_TurretAlreadyFiring>"Launching Intercontinental Ballistic Attack"</HNGT_TurretAlreadyFiring>
+	<HNGT_InterMapBombardment_Label>"Intercontinental Ballistic Attack"</HNGT_InterMapBombardment_Label>
+	<HNGT_InterMapBombardment_Desc>Launch a precise intercontinental ballistic attack on other targets across the planet.</HNGT_InterMapBombardment_Desc>
+	<!--WorldObject_GlobalAttackDevice-->
+	<HNGT_GlobalAttackArrived>{0} has arrived over {1}, entering terminal phase and beginning atmospheric re-entry.</HNGT_GlobalAttackArrived>
+</LanguageData>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <Setting_KT>Weapons/Turrets Settings [Some take effect without restarting]</Setting_KT>
+        <Setting5_KT>Bullet Damage Multiplier</Setting5_KT>
+        <Setting5_1_KT>Bullet Damage</Setting5_1_KT>
+        <Setting6_KT>Bullet Armour Penetration Multiplier</Setting6_KT>
+		<Setting6_1_KT>Bullet Armour Penetration Rate</Setting6_1_KT>
+        <Setting7_KT>Bullet Explosion Radius Multiplier</Setting7_KT>
+        <Setting7_1_KT>Bullet Explosion Radius</Setting7_1_KT>
+		
+		<Setting8_KT>Weapon cooldown multiplier [takes effect after restarting the game]</Setting8_KT>
+        <Setting8_1_KT>Weapon cooldown multiplier [takes effect after restarting the game]</Setting8_1_KT>
+		
+		<Setting9_KT>Weapon Warm-Up Multiplier</Setting9_KT>
+        <Setting9_1_KT>Weapon Warm-Up Multiplier</Setting9_1_KT>
+</LanguageData>

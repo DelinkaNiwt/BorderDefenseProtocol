@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>0Harmony</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <TargetFramework>net472</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>12.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace />
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="exhelper_linux_x86_64.so" />
+    <None Remove="exhelper_linux_arm64.so" />
+    <None Remove="exhelper_macos_x86_64.dylib" />
+    <None Remove="exhelper_macos_arm64.dylib" />
+    <None Remove="ILRepack.List" />
+    <EmbeddedResource Include="exhelper_linux_x86_64.so" LogicalName="exhelper_linux_x86_64.so" />
+    <EmbeddedResource Include="exhelper_linux_arm64.so" LogicalName="exhelper_linux_arm64.so" />
+    <EmbeddedResource Include="exhelper_macos_x86_64.dylib" LogicalName="exhelper_macos_x86_64.dylib" />
+    <EmbeddedResource Include="exhelper_macos_arm64.dylib" LogicalName="exhelper_macos_arm64.dylib" />
+    <EmbeddedResource Include="ILRepack.List" LogicalName="ILRepack.List" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Core" />
+  </ItemGroup>
+</Project>

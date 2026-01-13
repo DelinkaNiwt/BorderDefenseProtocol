@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+	<SRABarrierTitle>-屏障</SRABarrierTitle>
+  	<SRA_BarrierStatus>屏障状态</SRA_BarrierStatus>
+  	<SRA_BarrierValue>{0}/{1}</SRA_BarrierValue>
+  	<SRA_BarrierRecharging>充能中: {0}秒</SRA_BarrierRecharging>
+  	<SRA_BarrierRegen>回复: {0}/秒</SRA_BarrierRegen>
+	<SRABarrierTooltip>屏障可以阻挡受到的伤害。\n\n-屏障具有屏障效率，所受到的伤害会在与屏障效率相乘后再用于计算损失的屏障值。\n-屏障会计算单位的承伤乘数，并与屏障效率乘算。当承伤乘数高于100%时，则不会参与计算。\n-某些屏障具有充能冷却。如果屏障被完全摧毁，就会进入充能冷却。冷却时间大于0时，冷却完成会立即充满护盾。\n-某些屏障具有损伤上限，受到的伤害不会高于这个上限。仅当此值大于0时才生效。\n-某些屏障具有损伤降低，受到的伤害会降低对应的值。仅当此值大于0时才生效。\n\n-回复延迟：{0}\n-充能冷却：{1}\n-屏障效率：{2}\n-损伤上限：{3}\n-损伤降低：{4}</SRABarrierTooltip>
+	<SRA_RegenTipExtra>-每秒再生 {0} 点生命值。</SRA_RegenTipExtra>
+
+
+    <OrbitalStrikePowerBeam>轨道激光打击</OrbitalStrikePowerBeam>
+	<FEL_ResearchRequired>艾登：“你不把对应的科技研究了，我是不会给你用的哦~”</FEL_ResearchRequired>
+	<LaserInvalidTarget>“无效目标，火控系统无法完成锁定。”</LaserInvalidTarget>
+	<OrbitalStrikeNoOtherMap>“火控系统未载入有效数据。”</OrbitalStrikeNoOtherMap>
+	<cooldownLeftSeconds>“照射指令冷却中，剩余时间: {0} 秒。”</cooldownLeftSeconds>
+	<OrbitalStrikePowerBeamDesc>“呼叫一次轨道激光打击。”</OrbitalStrikePowerBeamDesc>
+	<OrbitalStrikeMessage>“{0} 火控系统已装载路径数据，锁定 {1} 区域，开始照射作业。”</OrbitalStrikeMessage>
+	<SelectBeamStartpoint>“保险解除，请指定照射起点坐标。”</SelectBeamStartpoint>
+	<SelectBeamEndpoint>“扳机解锁，请指定照射终点坐标。”</SelectBeamEndpoint>
+	
+	<Holographic.LabelNext>“切换影像”</Holographic.LabelNext>
+	<Holographic.DescNext>“手动切换到下一个全息影像。”</Holographic.DescNext>
+	<Holographic.LabelAutoplay>“自动循环”</Holographic.LabelAutoplay>
+	<Holographic.DescAutoplay>“开启或关闭自动循环播放。”</Holographic.DescAutoplay>
+	<Holographic.DisableReasonNoPower>“全息投影供电不足！”</Holographic.DisableReasonNoPower>
+	<Holographic.DisableReasonChanging>“正在切换全息投影。”</Holographic.DisableReasonChanging>
+	
+	<!--矢量反射-->
+	<ATField_ReflectMode_Label>矢量反射</ATField_ReflectMode_Label>
+	<ATField_ReflectMode_Desc>将AT立场的相位矢量反转，这会极大的降低AT立场的刚度，但翻转的空间矢量会将攻击物反射回发射点。</ATField_ReflectMode_Desc>
+	<!--释能抑制-->
+	<ATField_SuppressExplosions_Label>释能抑制</ATField_SuppressExplosions_Label>
+	<ATField_SuppressExplosions_Desc>此模式下AT立场会抑制范围内一切高能量释放，不论是外来的天基饱和轰炸还是内部的热核地雷均难以造成内部破坏。</ATField_SuppressExplosions_Desc>
+	<!--通行管制-->
+	<ATField_RedirectSkyfall_Label>无差别通行管制</ATField_RedirectSkyfall_Label>
+	<ATField_RedirectSkyfall_Desc>将AT立场投射向高层大气以偏转空降设备的落点，或是在大气中产生刚性空间断层直接撞毁空降设备。\n\n（&lt;color=#FFAA00&gt;&lt;i&gt;通行管制开启时，将无差别偏转空投包括友军和商品，关闭时，只偏转敌对空投&lt;/i&gt;&lt;/color&gt;）</ATField_RedirectSkyfall_Desc>
+	<!--折跃拒止-->
+	<ATField_AntiTeleport_Label>无差别折跃拒止</ATField_AntiTeleport_Label>
+	<ATField_TeleportIntercepted>“异常空间波动已被AT立场拒止。”</ATField_TeleportIntercepted>
+	<ATField_AntiTeleport_Desc>利用AT立场强行压制范围内空间，使立场内空间维持低能级稳态，将试图折跃进入立场内部的目标直接放逐。\n\n（&lt;color=#FFAA00&gt;&lt;i&gt;折跃拒止开启时，将无差别拦截折越，关闭时，关闭时只拦截敌意折越&lt;/i&gt;&lt;/color&gt;）</ATField_AntiTeleport_Desc>
+	<!--控制面板-->
+	<ATField_Energy_Label>AT立场容量</ATField_Energy_Label>
+	<ATField_Rebooting>AT立场重启中: {0}s</ATField_Rebooting>
+	<ATField_Radius_Label>AT立场半径: {0}m</ATField_Radius_Label>
+	<ATField_Break_Warning>“警告：AT立场过饱和击穿，系统停机。”</ATField_Break_Warning>
+	
+	<!--涡喷跳跃-->
+	<CannotJumpToRoof>“落点上方存在障碍”</CannotJumpToRoof>
+	<CannotJumpUnderRoof>“起点上方存在障碍”</CannotJumpUnderRoof>
+	<CannotFlyThroughWall>“冲刺路径无视野”</CannotFlyThroughWall>
+	<MessageJumpTargetInvalid>“落点区域不可通行”</MessageJumpTargetInvalid>
+	<!--撞击模式-->
+	<Turbojet_CombatMode_Label>撞击模式</Turbojet_CombatMode_Label>
+	<Turbojet_CombatMode_Desc>开启后涡喷跳跃和涡喷冲刺可以使用护盾造成额外的击退和击晕。</Turbojet_CombatMode_Desc>
+	<!--飞行指令：步行-->
+	<Turbojet_Mode_Off_Label>飞行指令：步行</Turbojet_Mode_Off_Label>
+	<Turbojet_Mode_Off_Desc>涡喷发动机停止运行，不再产生任何推力。</Turbojet_Mode_Off_Desc>
+	<!--飞行指令：助推-->
+	<Turbojet_Mode_HoverMove_Label>飞行指令：助推</Turbojet_Mode_HoverMove_Label>
+	<Turbojet_Mode_HoverMove_Desc>涡喷发动机怠速运行，仅在移动中低空飞行。（但无法直接飞跃屋顶）\n-可以飞跃深水区，真空等地形且\n-不受任何地形减速\n-可以在屋顶下移动</Turbojet_Mode_HoverMove_Desc>
+	<!--飞行指令：滞空-->
+	<Turbojet_Mode_HoverAlways_Label>飞行指令：滞空</Turbojet_Mode_HoverAlways_Label>
+	<Turbojet_Mode_HoverAlways_Desc>涡喷发动机额定运行，实现持续的空中飞行。（但无法直接飞跃屋顶）\n-无视墙体，可以悬停在深水区，真空等地形\n-不受任何地形减速\n-滞空状态不会被危险地形伤害，不会触发地雷\n-无法在屋顶下移动</Turbojet_Mode_HoverAlways_Desc>
+	<!--气动护盾-->
+	<Turbojet_Shield_Recharging>过载重启</Turbojet_Shield_Recharging>
+	<Turbojet_Shield_Status>护盾容量：{0} / {1}</Turbojet_Shield_Status>
+	
+	<SRAWeaponSwitcherLabel>武器/模式切换</SRAWeaponSwitcherLabel>
+	<SRAWeaponSwitcherDesc>切换武器的类型或者模式。</SRAWeaponSwitcherDesc>
+	
+	<!--主动防御-->
+	<Turbojet_ADS_Label>点防御导弹</Turbojet_ADS_Label>
+	<Turbojet_ADS_Desc>开关点防御导弹系统，启动后会自动发射点防御导弹拦截高角炮弹。</Turbojet_ADS_Desc>
+</LanguageData>

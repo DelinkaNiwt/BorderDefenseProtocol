@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <Operation Class="PatchOperationFindMod">
+        <mods>
+          <li>Kiiro Race</li>
+        </mods>
+		<match Class="PatchOperationSequence">
+		  <success>Always</success>
+		  <operations>
+		  <li Class="PatchOperationAdd">
+			<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Kiiro_Race"]/alienRace/raceRestriction/apparelList</xpath>
+			<value>
+			  <li>KT_Kiiro</li>
+			</value>
+		  </li>
+		  <li Class="PatchOperationAdd">
+			<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Kiiro_Race"]/alienRace/raceRestriction/whiteApparelList</xpath>
+			<value>
+			  <li>TurbojetBackpack</li>
+			  <li>KT_Backpack</li>
+			</value>
+		  </li>
+		  </operations>
+		</match>
+	</Operation>
+	
+	<Operation Class="PatchOperationFindMod">
+        <mods>
+          <li>Milira Race</li>
+        </mods>
+		<match Class="PatchOperationSequence">
+		  <success>Always</success>
+		  <operations>
+		  <li Class="PatchOperationAdd">
+			<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Milira_Race"]/alienRace/raceRestriction/apparelList</xpath>
+			<value>
+			  <li>KT_Milira</li>
+          	  <li>TurbojetBackpack_kindseal</li>
+			</value>
+		  </li>
+		  <li Class="PatchOperationAdd">
+			<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Milira_Race"]/alienRace/raceRestriction/whiteApparelList</xpath>
+			<value>
+			  <li>TurbojetBackpack</li>
+			  <li>KT_Backpack</li>
+			</value>
+		  </li>
+		  </operations>
+		</match>
+	</Operation>
+	
+	<Operation Class="PatchOperationFindMod">
+        <mods>
+          <li>Wolfein Race</li>
+        </mods>
+		<match Class="PatchOperationSequence">
+		  <success>Always</success>
+		  <operations>
+		  <li Class="PatchOperationAdd">
+			<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Wolfein_Race"]/alienRace/raceRestriction/apparelList</xpath>
+			<value>
+			  <li>KT_Wolfein</li>
+			</value>
+		  </li>
+		  
+		  <li Class="PatchOperationAdd">
+			<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Wolfein_Race"]/alienRace/raceRestriction/whiteApparelList</xpath>
+			<value>
+			  <li>TurbojetBackpack</li>
+			  <li>KT_Backpack</li>
+			</value>
+		  </li>
+		  </operations>
+		</match>
+	</Operation>
+	
+	<Operation Class="PatchOperationFindMod">
+        <mods>
+          <li>Miho, the celestial fox</li>
+        </mods>
+		<match Class="PatchOperationSequence">
+		  <success>Always</success>
+		  <operations>
+		  <li Class="PatchOperationAdd">
+			<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]/alienRace/raceRestriction/apparelList</xpath>
+			<value>
+			  <li>KT_Fox</li>
+			</value>
+		  </li>
+		  
+		  <li Class="PatchOperationAdd">
+			<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]/alienRace/raceRestriction/whiteApparelList</xpath>
+			<value>
+			  <li>TurbojetBackpack</li>
+			  <li>KT_Backpack</li>
+			</value>
+		  </li>
+		  </operations>
+		</match>
+	</Operation>
+</Patch>

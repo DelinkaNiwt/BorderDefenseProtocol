@@ -1,0 +1,163 @@
+<Defs>
+	<ThingDef ParentName="KT_AutocannonTurret">
+    <defName>KT100MMCANNON</defName>
+    <label>KT100MMCANNON</label>
+	<thingClass>SRA.Building_TurretGunHasSpeed</thingClass>
+	<modExtensions>
+	   <li Class="SRA.ModExt_HasSpeedTurret"><!-- SRA炮塔转速 -->
+		 <speed>1.8</speed>
+	   </li>
+  	</modExtensions>
+		
+    <description>KT100MMCANNON</description>
+    <uiIconPath>Things/Building/Security/KT100MMCANNON_Ico</uiIconPath>
+	<uiOrder>1800</uiOrder> <!-- UI栏顺序 -->
+	<graphicData>
+		<texPath>Things/Building/Security/KT100MMCANNON_Base</texPath>
+		<graphicClass>Graphic_Single</graphicClass>
+		<drawSize>(6,6)</drawSize>
+	</graphicData>
+	<size>(3,3)</size>
+    <statBases>
+	  <MaxHitPoints>3600</MaxHitPoints>
+	  <Flammability>0</Flammability>
+      <ShootingAccuracyTurret>1</ShootingAccuracyTurret>
+	  <WorkToBuild>1800</WorkToBuild>
+    </statBases>
+	<drawerType>MapMeshAndRealTime</drawerType>
+	<tickerType>Normal</tickerType>
+	<killedLeavings>
+      <ChunkSlagSteel>3</ChunkSlagSteel>
+    </killedLeavings>
+    <costList>
+      <Steel>500</Steel>
+	  <Plasteel>80</Plasteel>
+      <ComponentIndustrial>5</ComponentIndustrial>
+	  <ComponentSpacer>2</ComponentSpacer>
+    </costList>
+    <comps>
+	  <li Class="SRA.CompProperties_ForceTargetable" /><!-- 善良手操 -->	
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>1000</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Refuelable"> <!-- 应该是可以补给 -->
+        <fuelLabel>Shots until barrel change</fuelLabel>
+        <fuelGizmoLabel>Barrel durability</fuelGizmoLabel>
+        <outOfFuelMessage>Needs new barrel</outOfFuelMessage>
+        <fuelFilter><thingDefs><li>Steel</li></thingDefs></fuelFilter>
+        <fuelCapacity>100</fuelCapacity>
+        <fuelMultiplier>0.5</fuelMultiplier>
+        <initialFuelPercent>1</initialFuelPercent>
+        <autoRefuelPercent>0.5</autoRefuelPercent>
+        <showFuelGizmo>true</showFuelGizmo>
+        <minimumFueledThreshold>1</minimumFueledThreshold>
+        <factorByDifficulty>false</factorByDifficulty>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelIconPath>KT_UI/UI_OUTAMMO</fuelIconPath>
+      </li>
+    </comps>
+
+    <building>
+      <turretGunDef>Gun_KT100MMCANNON</turretGunDef>
+	  <ai_combatDangerous>true</ai_combatDangerous> <!-- AI认为它具有危险性 -->
+	  <turretTopDrawSize>6</turretTopDrawSize>
+      <turretBurstCooldownTime>5</turretBurstCooldownTime>
+    </building>
+    <researchPrerequisites>
+      <li>KT_Base_t2_Artillery_turret</li>
+    </researchPrerequisites>
+	<designationCategory>KT_designation_group</designationCategory> <!-- 指定分类：联合 -->
+
+	
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>Gun_KT100MMCANNON</defName>
+    <label>Gun_KT100MMCANNON</label>
+    <description>Gun_KT100MMCANNON</description>
+    <graphicData>
+      <texPath>Things/Building/Security/KT100MMCANNON</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(3.8,3.8)</drawSize>
+    </graphicData>
+    <statBases>
+      <AccuracyTouch>0.90</AccuracyTouch>
+      <AccuracyShort>0.88</AccuracyShort>
+      <AccuracyMedium>0.84</AccuracyMedium>
+      <AccuracyLong>0.80</AccuracyLong>
+      <RangedWeapon_Cooldown>5</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>40</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+	<verbs>
+      <li>
+        <verbClass>SRA.Verb_ShootWithOffset</verbClass> <!-- 射击行为 -->
+        <hasStandardCommand>true</hasStandardCommand> <!-- 标准命令 -->
+        <defaultProjectile>Bullet_KT100MMCANNON</defaultProjectile> <!-- 默认子弹 -->
+        <warmupTime>1</warmupTime> <!-- 预热时间 -->
+		<requireLineOfSight>false</requireLineOfSight><!-- 只能直线射击 -->
+		<minRange>20</minRange>
+        <range>500</range> <!-- 射程 -->
+        <burstShotCount>1</burstShotCount> <!-- 每次射击子弹数量 -->
+        <soundCast>KTSound_Cannonii</soundCast> <!-- 射击音效 -->
+        <soundCastTail>GunTail_Heavy</soundCastTail> <!-- 尾音效 -->
+        <muzzleFlashScale>40</muzzleFlashScale> <!-- 火光规模 -->
+        <consumeFuelPerShot>1</consumeFuelPerShot> <!-- 每发子弹消耗的燃料 -->
+		<forcedMissRadius>0.1</forcedMissRadius>
+		<targetParams>
+			<canTargetLocations>true</canTargetLocations>
+		</targetParams>
+      </li>
+    </verbs>
+	<weaponTags>
+	  <li>KT_weapon</li>
+    </weaponTags>
+	<modExtensions>
+      <li Class="MuzzleFlash.MuzzleFlashProps" MayRequire="IssacZhuang.MuzzleFlash">
+         <def>MF_StandardMuzzleFalsh</def>
+         <drawSize>(2)</drawSize>
+         <offsets>
+           <li>(2.2,0)</li>
+         </offsets>
+         <isAlternately>true</isAlternately>
+     </li>
+	 <li Class="SRA.ModExtension_ShootWithOffset">
+         <offsets>
+           <li>(0,-2.8)</li>
+         </offsets>
+     </li>	
+   </modExtensions>
+  </ThingDef>
+  
+  <ThingDef>
+        <defName>Bullet_KT100MMCANNON</defName>
+        <label>KT100MMCANNON</label>
+        <thingClass>Projectile_Explosive</thingClass>
+        <category>Projectile</category>
+        <tickerType>Normal</tickerType>
+        <altitudeLayer>Projectile</altitudeLayer>
+        <graphicData>
+            <texPath>Things/Projectile/Bullet_100MM</texPath> <!-- 子弹贴图路径 -->
+            <graphicClass>Graphic_Single</graphicClass> <!-- 使用单一图形 -->
+			<shaderType>MoteGlow</shaderType>
+      		<drawSize>(2)</drawSize>
+        </graphicData>
+        <projectile>
+            <damageDef>Bomb</damageDef>
+            <explosionRadius>2</explosionRadius>
+			<stoppingPower>1</stoppingPower>
+            <speed>200</speed>
+            <damageAmountBase>100</damageAmountBase>
+			<armorPenetrationBase>1.1</armorPenetrationBase>
+            <arcHeightFactor>0</arcHeightFactor>
+            <soundExplode>Explosion_Rocket</soundExplode>
+			<flyOverhead>true</flyOverhead>
+        </projectile>
+  </ThingDef>	
+
+</Defs>

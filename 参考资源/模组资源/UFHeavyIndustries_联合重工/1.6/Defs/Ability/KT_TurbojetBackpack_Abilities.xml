@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<!--涡喷跳跃技能-->
+	<AbilityDef>
+		<defName>TurbojetJump_Ability</defName>
+		<label>Turbojet Jump</label>
+		<description>Activates the turbojet engine to perform a highly mobile leap, allowing direct traversal over walls while ignoring terrain obstacles.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;When collision mode is activated, this skill can knock aside hostile units and cause stun. Based on melee skill and equipped weapon stats, it inflicts large-area AOE damage to units at the landing point.&lt;/i&gt;&lt;/color&gt;</description>
+		<!--材质设置-->
+		<iconPath>KT_UI/UI_TurbojetJump</iconPath>
+		<displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+		<!--派系设置-->
+		<hostile>false</hostile>
+		<aiCanUse>false</aiCanUse>
+		<!--参数拓展-->
+		<modExtensions>
+			<!--扬尘效果-->
+			<li Class="TurbojetBackpack.TurbojetAbilityExtension">
+				<moteScale>5</moteScale>
+				<moteCount>15</moteCount>
+				<moteSpread>2.5</moteSpread>
+				<moteDef>TurbojetSmoke</moteDef>
+				<warmupSound>JumpPackPreLaunch</warmupSound>
+			</li>
+		</modExtensions>
+		<!--技能属性-->
+		<jobDef>CastJump</jobDef>
+		<cooldownTicksRange>100</cooldownTicksRange>
+		<verbProperties>
+			<!--技能音效-->
+			<soundCast>JumpPackLand</soundCast>
+			<!--技能属性-->
+			<range>50</range>
+			<label>jump</label>
+			<warmupTime>0.1</warmupTime>
+			<forceNormalTimeSpeed>false</forceNormalTimeSpeed>
+			<!--技能逻辑-->
+			<violent>false</violent>
+			<requireLineOfSight>false</requireLineOfSight>
+			<verbClass>TurbojetBackpack.Verb_TurbojetJump</verbClass>
+			<targetParams>
+				<canTargetPawns>false</canTargetPawns>
+				<canTargetLocations>true</canTargetLocations>
+				<canTargetBuildings>false</canTargetBuildings>
+			</targetParams>
+		</verbProperties>
+	</AbilityDef>
+	<!--涡喷冲刺技能-->
+	<AbilityDef>
+		<defName>TurbojetDash_Ability</defName>
+		<label>Turboje tDash</label>
+		<description>Activates the engine to perform a low-altitude high-speed dash. Can be used under roofs, but cannot pass through walls.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;When collision mode is activated, this skill can knock aside hostile units and cause stun. Based on melee skill and equipped weapon stats, it inflicts small-area AOE damage to units struck along the path.&lt;/i&gt;&lt;/color&gt;</description>
+		<!--材质设置-->
+		<iconPath>KT_UI/UI_TurbojetDash</iconPath>
+		<displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+		<!--派系设置-->
+		<hostile>false</hostile> 
+		<aiCanUse>false</aiCanUse>
+		<!--参数拓展-->
+		<modExtensions>
+			<!--扬尘效果-->
+			<li Class="TurbojetBackpack.TurbojetAbilityExtension">
+				<moteScale>5</moteScale>
+				<moteCount>15</moteCount>
+				<moteSpread>2.5</moteSpread>
+				<moteDef>TurbojetSmoke</moteDef>
+				<warmupSound>JumpPackPreLaunch</warmupSound>
+			</li>
+		</modExtensions>
+		<!--技能属性-->
+		<jobDef>CastJump</jobDef>
+		<cooldownTicksRange>100</cooldownTicksRange>
+		<verbProperties>
+			<!--技能音效-->
+			<soundCast>JumpPackLand</soundCast>
+			<!--技能属性-->
+			<range>80</range>
+			<label>dash</label>
+			<warmupTime>0.1</warmupTime>
+			<forceNormalTimeSpeed>false</forceNormalTimeSpeed>
+			<!--技能逻辑-->
+			<violent>false</violent>
+			<requireLineOfSight>true</requireLineOfSight>
+			<verbClass>TurbojetBackpack.Verb_TurbojetDash</verbClass>
+			<targetParams>
+				<canTargetPawns>false</canTargetPawns>
+				<canTargetLocations>true</canTargetLocations>
+				<canTargetBuildings>false</canTargetBuildings>
+			</targetParams>
+		</verbProperties>
+	</AbilityDef>
+	
+	
+   <HediffDef Parent="HediffBase">
+    <defName>KT_JETPACK_TURRET</defName>
+    <label>武天使-自卫机炮</label>
+    <description>这个这台改装过的武天使拥有2门自动机炮，太哈人了。</description>
+    <isBad>false</isBad>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0,1,1)</defaultLabelColor>
+    <comps>
+      <li Class="SRA.HediffCompProperties_TopTurret">
+        <turretDef>KT_JETPACK_TURRET_GUN</turretDef>
+        <angleOffset>-90</angleOffset>
+        <autoAttack>true</autoAttack>
+      </li>
+	  <li Class="HediffCompProperties_RemoveIfApparelDropped" />
+    </comps>
+  </HediffDef>
+  
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>KT_JETPACK_TURRET_GUN</defName>
+    <label>武天使-自卫机炮</label>
+    <description>武天使-自卫机炮</description>
+    <tradeability>None</tradeability>
+    <destroyOnDrop>true</destroyOnDrop>
+    <graphicData>
+      <texPath>Things/FlyOverThing/KT_EMPTY</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <Mass>0.1</Mass>
+      <AccuracyTouch>0.90</AccuracyTouch>
+      <AccuracyShort>0.80</AccuracyShort>
+      <AccuracyMedium>0.75</AccuracyMedium>
+      <AccuracyLong>0.70</AccuracyLong>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>KT_JETPACK_TURRET_Bullet</defaultProjectile>
+        <range>75</range>
+		<minRange>7</minRange>
+		<soundCast>KT_AUTOCANNON_III</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>2</muzzleFlashScale>
+        <defaultCooldownTime>2</defaultCooldownTime>
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+        <ticksBetweenBurstShots>18</ticksBetweenBurstShots>
+        <burstShotCount>4</burstShotCount>
+      </li>
+    </verbs>
+  </ThingDef>
+  
+  <ThingDef>
+        <defName>KT_JETPACK_TURRET_Bullet</defName>
+        <label>武天使-自卫机炮</label>
+        <thingClass>SRA.Projectile_MultiExplosive</thingClass>
+        <category>Projectile</category>
+        <tickerType>Normal</tickerType>
+        <altitudeLayer>Projectile</altitudeLayer>
+        <graphicData>
+            <texPath>Things/Projectile/Bullet_cannon</texPath> <!-- 子弹贴图路径 -->
+            <graphicClass>Graphic_Single</graphicClass> <!-- 使用单一图形 -->
+			<shaderType>MoteGlow</shaderType>
+      		<drawSize>(1.2)</drawSize>
+        </graphicData>
+        <projectile>
+            <damageDef>KTBomb_with_effect</damageDef>
+            <explosionRadius>1.2</explosionRadius>
+			<stoppingPower>5</stoppingPower>
+            <speed>120</speed>
+            <damageAmountBase>65</damageAmountBase>
+            <arcHeightFactor>0</arcHeightFactor>
+            <soundExplode>Explosion_Rocket</soundExplode>
+			<flyOverhead>false</flyOverhead>
+			<armorPenetrationBase>1.2</armorPenetrationBase>
+        </projectile>
+		
+		<modExtensions>
+		 <li Class="SRA.TailBulletDef">
+       		   <tailFleckDef>KT_Fleck_Smoke_Tail_II</tailFleckDef>
+      	 	   <fleckMakeFleckTickMax>10</fleckMakeFleckTickMax><!-- 疑似无效 -->
+			   <fleckDelayTicks>2</fleckDelayTicks><!-- 出膛后多久出现轨迹 -->
+			   <fleckMakeFleckNum>1</fleckMakeFleckNum>
+     	 </li>
+         <li Class="SRA.MultiExplosiveExtension">
+          <multiexplosions>
+          <li>
+            <radius>1.2</radius>
+            <damageDef>KTBomb_with_effect</damageDef>
+            <damageAmount>65</damageAmount>
+            <armorPenetration>1.2</armorPenetration>
+            <explosionSound>Explosion_Rocket</explosionSound>
+            <explosionDamageFalloff>true</explosionDamageFalloff><!-- 默认true -->
+            <onlyAntiHostile>false</onlyAntiHostile> <!-- 智能弹药：这个爆炸只伤害敌对目标，默认false -->
+            <!-- 现阶段就支持这么多参数 -->
+          </li>
+        </multiexplosions>
+      </li>
+    </modExtensions>
+  </ThingDef>	
+</Defs>

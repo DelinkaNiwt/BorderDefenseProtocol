@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <FleckDef ParentName="FleckBase">
+    <defName>KT_BlastDry</defName>
+    <graphicData>
+      <texPath>Things/Mote/BlastDry</texPath>
+      <shaderType>TransparentPostLight</shaderType>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+	<fadeInTime>0.1</fadeInTime>
+    <solidTime>0</solidTime>
+    <fadeOutTime>0.5</fadeOutTime>
+  </FleckDef>
+  
+  <FleckDef ParentName="FleckBase">
+    <defName>KT_EMPTY</defName>
+    <graphicData>
+      <texPath>Things/Mote/KTempty</texPath>
+      <shaderType>TransparentPostLight</shaderType>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+	<fadeInTime>0</fadeInTime>
+    <solidTime>0</solidTime>
+    <fadeOutTime>0</fadeOutTime>
+  </FleckDef>
+  
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>KT_Fleck_Smoke_Tail</defName>
+    <fadeInTime>0</fadeInTime>
+    <solidTime>.1</solidTime>
+    <fadeOutTime>.2</fadeOutTime>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <growthRate>4</growthRate>
+    <graphicData>
+      <texPath>Things/Mote/Smoke</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>1</drawSize>
+      <color>(1,1,1,1)</color>
+    </graphicData>
+  </FleckDef>
+  
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>KT_Fleck_Smoke_Tail_II</defName>
+    <fadeInTime>0</fadeInTime>
+    <solidTime>.1</solidTime>
+    <fadeOutTime>.2</fadeOutTime>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <growthRate>5</growthRate>
+    <graphicData>
+      <texPath>Things/Mote/Smoke</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>0.4</drawSize>
+      <color>(1,0.7,0,1)</color>
+    </graphicData>
+  </FleckDef>
+  
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>KT_Fleck_blue_particle_Tail</defName>
+    <fadeInTime>0</fadeInTime>
+    <solidTime>.1</solidTime>
+    <fadeOutTime>.25</fadeOutTime>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <growthRate>4</growthRate>
+    <graphicData>
+      <texPath>Things/Mote/KT_small_particle</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>1</drawSize>
+      <color>(0,1,1,1)</color>
+    </graphicData>
+  </FleckDef>
+  
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>KT_Fleck_blue_particle_Tail_II</defName>
+    <fadeInTime>0</fadeInTime>
+    <solidTime>.1</solidTime>
+    <fadeOutTime>.1</fadeOutTime>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <growthRate>4</growthRate>
+    <graphicData>
+      <texPath>Things/Mote/KT_small_particle</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>0.7</drawSize>
+      <color>(0,1,1,1)</color>
+    </graphicData>
+  </FleckDef>
+  
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>KT_Fleck_blue_ring_Tail</defName>
+    <fadeInTime>0</fadeInTime>
+    <solidTime>.05</solidTime>
+    <fadeOutTime>.01</fadeOutTime>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <growthRate>4</growthRate>
+    <graphicData>
+      <texPath>Things/Mote/KT_small_ring</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>0.5</drawSize>
+      <color>(0,1,1,1)</color>
+    </graphicData>
+  </FleckDef>
+  </Defs>

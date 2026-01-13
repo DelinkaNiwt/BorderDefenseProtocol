@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Defs>	
+   <ThingDef ParentName="KT_Weapon_unmanufacturable" Name="KT_SealMG">
+    <defName>KT_SealMG</defName>
+    <label>「战利品」巨镰机枪</label>
+    <description>「战利品」巨镰模块收起状态，现在它是一把骇人的机枪。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;持续射击可以削弱敌人，使其受到更多伤害&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;无视承伤和护甲&lt;/i&gt;&lt;/color&gt;</description>
+    <graphicData>
+      <texPath>Things/Weapons/KT_SealMG</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>3</drawSize> <!-- 贴图大小 -->
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+    <tradeability>None</tradeability>
+    <relicChance>0</relicChance>
+    <statBases>
+      <WorkToMake>75000</WorkToMake>
+      <Mass>25</Mass>
+      <AccuracyTouch>1</AccuracyTouch>
+      <AccuracyShort>1</AccuracyShort>
+      <AccuracyMedium>1</AccuracyMedium>
+      <AccuracyLong>1</AccuracyLong>
+      <RangedWeapon_Cooldown>2.5</RangedWeapon_Cooldown>
+    </statBases>
+	<comps>
+	  <li Class="SRA.CompProperties_WeaponRenderDynamic">
+		<TexturePath>Things/Weapons/KT_SealMG_light</TexturePath>
+		<totalFrames>1</totalFrames>
+		<ticksPerFrame>1</ticksPerFrame>
+	  </li>
+	  <li Class="SRA.CompProperties_WeaponHediffGiver">
+		<hediff>KT_Sealweapon_hediff</hediff>
+	  </li>
+    </comps>
+	<drawerType>MapMeshAndRealTime</drawerType>
+    <costList>
+      <KT_steel>1500</KT_steel>
+    </costList>
+	
+    <techLevel>Spacer</techLevel>
+    <weaponTags>
+	  <li>KT_weapon</li>
+	  <li>KT_SealMG</li>
+    </weaponTags>
+
+    <weaponClasses>
+      <li>LongShots</li>
+	  <li>RangedHeavy</li>
+    </weaponClasses>
+	
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>KT_Bullet_SealMG</defaultProjectile>
+        <warmupTime>0.5</warmupTime>
+        <range>70</range>
+		<burstShotCount>16</burstShotCount>
+		<ticksBetweenBurstShots>3</ticksBetweenBurstShots>
+        <soundCast>KT_gunshot</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>40</muzzleFlashScale>
+      </li>
+    </verbs>
+	<modExtensions>
+      <li Class="MuzzleFlash.MuzzleFlashProps" MayRequire="IssacZhuang.MuzzleFlash">
+        <def>MF_StandardMuzzleFalsh</def>
+        <drawSize>(1.2)</drawSize>
+        <offsets>
+          <li>(1.1,0)</li>
+        </offsets>
+        <isAlternately>true</isAlternately>
+      </li>
+    </modExtensions>
+    <tools>
+      <li>
+        <label>point</label>
+        <capacities>
+          <li>Stab</li>
+        </capacities>
+        <power>50</power>
+        <cooldownTime>0.8</cooldownTime>
+        <armorPenetration>1.2</armorPenetration>
+      </li>
+      <li>
+        <label>edge</label>
+        <capacities>
+          <li>Cut</li>
+        </capacities>
+        <power>35</power>
+        <cooldownTime>0.4</cooldownTime>
+        <armorPenetration>0.7</armorPenetration>
+      </li>
+    </tools>
+  </ThingDef>
+  
+
+  <ThingDef ParentName="BaseBullet">
+		<defName>KT_Bullet_SealMG</defName>
+		<label>KT_Bullet_SealMG</label>
+		<thingClass>SRA.Projectile_BulletWithEffect</thingClass>
+		<graphicData>
+			<texPath>Things/Projectile/Bullet_100MM</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>TransparentPostLight</shaderType>
+			<drawSize>1.2</drawSize>
+		</graphicData>
+		<projectile>
+			<damageDef>KT_SEALBullet</damageDef>
+			<damageAmountBase>35</damageAmountBase>
+			<armorPenetrationBase>2</armorPenetrationBase>
+			<stoppingPower>5</stoppingPower>
+			<speed>120</speed>
+			<extraDamages>
+				<li>
+					<def>KT_SealMG_curse</def>
+					<amount>24</amount>
+				</li>
+			</extraDamages>
+		</projectile>
+    	<modExtensions>
+      		<li Class="SRA.Projectile_BulletWithEffect_Extension">
+        		<impactEffecter>KT_SealMG_curse_Hit</impactEffecter>
+    		</li>
+    	</modExtensions>
+  </ThingDef>
+  <!-- 重磁轨 -->
+  <ThingDef ParentName="KT_Weapon_unmanufacturable" Name="KT_SealRailgun">
+    <defName>KT_SealRailgun</defName>
+    <label>「战利品」巨镰重磁轨炮</label>
+    <description>「战利品」巨镰展开状态，此时的它是一把重型磁轨枪。\n\n&lt;color=#fff000&gt;&lt;i&gt;炮弹飞行一定距离后会贯穿命中的第一个单位以及其后方单位，因此要造成最大的贯穿效果请瞄准最前方的单位。&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;45°不可逃逸区（炮弹命中修正）&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;击退效果&lt;/i&gt;&lt;/color&gt;</description>
+    <graphicData>
+      <texPath>Things/Weapons/KT_SealRailgun</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>3</drawSize> <!-- 贴图大小 -->
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+    <tradeability>None</tradeability>
+    <generateAllowChance>0</generateAllowChance>
+    <generateCommonality>0</generateCommonality>
+    <relicChance>0</relicChance>
+    <statBases>
+      <WorkToMake>75000</WorkToMake>
+      <Mass>25</Mass>
+      <AccuracyTouch>0.95</AccuracyTouch>
+      <AccuracyShort>0.85</AccuracyShort>
+      <AccuracyMedium>0.80</AccuracyMedium>
+      <AccuracyLong>0.75</AccuracyLong>
+      <RangedWeapon_Cooldown>1.5</RangedWeapon_Cooldown>
+    </statBases>
+	<comps>
+	  <li Class="SRA.CompProperties_WeaponRenderDynamic">
+		<TexturePath>Things/Weapons/KT_SealRailgun_light</TexturePath>
+		<totalFrames>1</totalFrames>
+		<ticksPerFrame>1</ticksPerFrame>
+	  </li>
+	  <li Class="SRA.CompProperties_WeaponHediffGiver">
+		<hediff>KT_Sealweapon_hediff</hediff>
+	  </li>
+    </comps>
+	<drawerType>MapMeshAndRealTime</drawerType>
+    <costList>
+      <KT_steel>1500</KT_steel>
+    </costList>
+	
+    <techLevel>Spacer</techLevel>
+    <weaponTags>
+	  <li>KT_weapon</li>
+    </weaponTags>
+
+    <weaponClasses>
+      <li>LongShots</li>
+	  <li>RangedHeavy</li>
+    </weaponClasses>
+	
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>KT_Bullet_SealRailgun</defaultProjectile>
+        <warmupTime>1.0</warmupTime>
+        <range>180</range>
+		<minRange>10</minRange>
+		<burstShotCount>1</burstShotCount>
+        <soundCast>KT_Railgun_II</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>40</muzzleFlashScale>
+      </li>
+    </verbs>
+
+    <tools>
+      <li>
+        <label>point</label>
+        <capacities>
+          <li>Stab</li>
+        </capacities>
+        <power>50</power>
+        <cooldownTime>0.8</cooldownTime>
+        <armorPenetration>1.2</armorPenetration>
+      </li>
+      <li>
+        <label>edge</label>
+        <capacities>
+          <li>Cut</li>
+        </capacities>
+        <power>35</power>
+        <cooldownTime>0.4</cooldownTime>
+        <armorPenetration>0.7</armorPenetration>
+      </li>
+    </tools>
+  </ThingDef>
+  
+	<ThingDef>
+		<defName>KT_Bullet_SealRailgun</defName>
+		<label>KT_Bullet_SealRailgun</label>
+		<thingClass>ECT.Projectile_HeavyArmourPiercer</thingClass>
+		<!--材质数据-->
+		<altitudeLayer>Projectile</altitudeLayer>
+		<graphicData>
+			<drawSize>(2.5,7.5)</drawSize>
+			<shaderType>MoteGlow</shaderType>
+			<graphicClass>Graphic_Single</graphicClass>
+			<texPath>Things/Projectile/Bullet_ElectromagneticCannon</texPath>
+		</graphicData>
+		<!--基本属性-->
+		<tickerType>Normal</tickerType>
+		<category>Projectile</category>
+		<projectile>
+			<speed>300</speed>
+			<damageDef>Bomb</damageDef>
+			<flyOverhead>true</flyOverhead>
+			<stoppingPower>30</stoppingPower>
+			<arcHeightFactor>0</arcHeightFactor>
+			<explosionRadius>2.5</explosionRadius>
+			<damageAmountBase>300</damageAmountBase>
+			<soundExplode>Explosion_Rocket</soundExplode>
+			<armorPenetrationBase>10</armorPenetrationBase>
+		</projectile>
+		<modExtensions>
+			<li Class="ECT.ModExtension_HeavyArmourPiercer">
+				<!--击穿杀伤效果-->
+				<!--击晕时长-->
+				<stunDuration>150</stunDuration>
+				<!--扫掠半径-->
+				<hitWidthRadius>2.5</hitWidthRadius>
+				<!--逃逸角度-->
+				<maxHomingAngle>10</maxHomingAngle>
+				<!--造伤次数-->
+				<maxHitsPerTarget>3</maxHitsPerTarget>
+				<!--击退距离-->
+				<knockbackDistance>7</knockbackDistance>
+				<!--冲击火花效果-->
+				<!--喷射夹角-->
+				<sparkSpreadAngle>5</sparkSpreadAngle>
+				<!--火花数量-->
+				<sparkCountRange>10~15</sparkCountRange>
+				<!--火花速度-->
+				<sparkSpeedRange>50~75</sparkSpeedRange>
+				<!--击穿音效-->
+				<skimHitSound>BulletImpact_Metal</skimHitSound>
+				<!--火花粒子-->
+				<sparkFleckDef>Fleck_ImpactSpark</sparkFleckDef>
+				<!--摩擦电弧效果-->
+				<!--电弧宽度-->
+				<lightningWidth>1.5</lightningWidth>
+				<!--电弧长度-->
+				<lightningLength>6</lightningLength>
+				<!--噪声系数-->
+				<lightningVariance>1</lightningVariance>
+				<!--电弧时长-->
+				<lightningDuration>15</lightningDuration>
+				<!--延伸速度-->
+				<lightningGrowthTicks>5</lightningGrowthTicks>
+			</li>
+		</modExtensions>
+  </ThingDef>
+	
+	
+  <ThingDef ParentName="KT_MeleeWeapon_unmanufacturable">
+    <defName>KT_SealScythe</defName>
+    <label>「战利品」巨镰</label>
+    <description>「战利品」巨镰的完全展开状态，此时它是名副其实的巨镰。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;攻击附带AOE&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;攻击附带EMP&lt;/i&gt;&lt;/color&gt;</description>
+    <soundInteract>Interact_MonoSword</soundInteract>
+    <meleeHitSound>MeleeHit_MonoSword</meleeHitSound>
+	<techLevel>Ultra</techLevel>
+	<generateCommonality>0</generateCommonality>
+    <statBases>
+	  <WorkToMake>30000</WorkToMake>
+      <Mass>25</Mass>
+    </statBases>
+	<tradeability>None</tradeability>
+    <weaponTags>
+	  <li>KT_weapon</li>
+    </weaponTags>
+	
+	<costList>
+	 <KT_steel>1500</KT_steel>
+	</costList>
+
+    <comps>
+	  <li Class="SRA.CompProperties_WeaponRenderDynamic">
+		<TexturePath>Things/Weapons/KT_SealScythe_light</TexturePath>
+		<totalFrames>1</totalFrames>
+		<ticksPerFrame>1</ticksPerFrame>
+	  </li>
+	  <li Class="SRA.CompProperties_WeaponHediffGiver">
+		<hediff>KT_Sealweapon_hediff</hediff>
+	  </li>
+    </comps>
+    <burnableByRecipe>false</burnableByRecipe>
+
+
+    <generateAllowChance>0</generateAllowChance>
+    <generateCommonality>0</generateCommonality>
+    <relicChance>0</relicChance>
+    <weaponClasses>
+      <li>Melee</li>
+    </weaponClasses>
+    <thingSetMakerTags>
+      <li>RewardStandardMidFreq</li>
+    </thingSetMakerTags>
+    <smeltable>false</smeltable>
+	<uiIconPath>Things/Weapons/KT_SealScythe_icon</uiIconPath>
+    <graphicData>
+      <texPath>Things/Weapons/KT_SealScythe</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>3</drawSize> <!-- 贴图大小 -->
+    </graphicData>
+	<equippedAngleOffset>-40</equippedAngleOffset>
+    <tools>
+		<li>
+			<label>edge</label>
+			<capacities>
+				<li>KT_Melee_AOE_II</li>
+			</capacities>
+			<power>100</power>
+			<cooldownTime>0.3</cooldownTime>
+			<armorPenetration>5</armorPenetration>
+			<extraMeleeDamages>
+          		<li>
+            		<def>EMP</def>
+        			<amount>50</amount>
+        		</li>
+			</extraMeleeDamages>
+		</li>
+		<li>
+			<label>edge</label>
+			<capacities>
+				<li>KT_Melee_AOE</li>
+			</capacities>
+			<power>120</power>
+			<cooldownTime>0.4</cooldownTime>
+			<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+			<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+			<armorPenetration>5</armorPenetration>
+			<extraMeleeDamages>
+          		<li>
+            		<def>EMP</def>
+        			<amount>50</amount>
+        		</li>
+			</extraMeleeDamages>
+		</li>
+	</tools>
+	
+  </ThingDef>
+
+</Defs>

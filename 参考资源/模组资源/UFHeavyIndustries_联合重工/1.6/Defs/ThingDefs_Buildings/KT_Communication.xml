@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+   <!--熔融废墟流淌管理器-->
+	<ThingDef ParentName="EtherealThingBase">
+		<defName>LaserLiquationRuins</defName>
+		<selectable>false</selectable>
+		<tickerType>Normal</tickerType>
+		<thingClass>FreeElectronOrbitalLaser.MoltenFlowProcess</thingClass>
+	</ThingDef>
+	
+	<ThingDef ParentName="OrbitalStrikeBase" Class="FreeElectronOrbitalLaser.ThingDef_FreeElectronLaserBeam">
+		<defName>FreeElectronOrbitalLaserBeam</defName>
+		<label>联合护卫舰轨道激光</label>
+		<selectable>false</selectable>
+		<tickerType>Normal</tickerType>
+		<thingClass>FreeElectronOrbitalLaser.FreeElectronLaserBeam</thingClass>
+		<!--杀伤半径-->
+		<effectRadius>15</effectRadius>
+		<!--造伤密度-->
+		<strikesPerTick>50</strikesPerTick>
+		<!--内光晕尺寸-->
+		<haloScaleInner>75</haloScaleInner>
+		<!--外光晕尺寸-->
+		<haloScaleOuter>100</haloScaleOuter>
+		<!--护甲穿透-->
+		<armorPenetration>1500</armorPenetration>
+		<!--伤害类型-->
+		<damageDef>FreeElectronLaserFlame</damageDef>
+		<!--热造伤区间-->
+		<flameDamageAmountRange>500~1000</flameDamageAmountRange>
+		<!--对尸体热造伤区间-->
+		<corpseFlameDamageAmountRange>1~5</corpseFlameDamageAmountRange>
+		<!--工作组件-->
+		<comps>
+			<!--屏幕抖动幅度参数-->
+			<li Class="CompProperties_CameraShaker">
+				<mag>0.05</mag>
+			</li>
+			<!--光柱视觉音效参数-->
+			<li Class="CompProperties_OrbitalBeam">
+				<width>10</width>
+				<color>(100, 255, 255, 240)</color>
+				<sound>OrbitalBeam</sound>
+			</li>
+			<!--大气层散射变色参数-->
+			<li Class="CompProperties_AffectsSky">
+				<skyColors>
+					<sky>(255, 220, 220)</sky>
+					<shadow>(200, 180, 180)</shadow>
+					<overlay>(255, 255, 255)</overlay>
+					<saturation>2.5</saturation>
+				</skyColors>
+			</li>
+		</comps>
+	</ThingDef>
+
+   <ThingDef ParentName="BuildingBase"><!-- 超维直连大脑，联合替代思考 -->
+    <defName>KT_Communication</defName>
+    <label>KT_Communication</label>
+    <description>KT_Communication</description>
+    <surfaceType>None</surfaceType> <!-- 表面类型 -->
+    <uiOrder>2400</uiOrder> <!-- UI栏顺序 -->
+	<uiIconScale>1</uiIconScale> <!-- ui图标比例 -->
+	<uiIconPath>Things/Building/KT_Communication</uiIconPath>
+    <graphicData> <!-- 图形数据 -->
+      <texPath>Things/Building/KT_Communication</texPath> <!-- 贴图路径 -->
+      <graphicClass>Graphic_Multi</graphicClass> <!-- 图形类 -->
+	  <drawSize>(2)</drawSize> <!-- 贴图大小 -->
+    </graphicData>
+    <statBases> <!-- 统计基础 -->
+      <MaxHitPoints>500</MaxHitPoints> <!-- 最大生命值 -->
+      <WorkToBuild>4500</WorkToBuild> <!-- 工作量 -->
+      <Flammability>0</Flammability> <!-- 易燃性 -->
+      <Beauty>10</Beauty> <!-- 美观 -->
+	  <Mass>80</Mass>
+    </statBases>
+    <size>(2,2)</size> <!-- 尺寸 --> 
+	<costList>
+      <Steel>2500</Steel>
+	  <Plasteel>250</Plasteel>
+      <ComponentIndustrial>10</ComponentIndustrial>
+	  <ComponentSpacer>3</ComponentSpacer>
+	  <Gold>20</Gold>
+    </costList>
+	<thingCategories>
+        <li>BuildingsMisc</li>
+    </thingCategories>
+    <minifiedDef>MinifiedThing</minifiedDef>
+	<constructionSkillPrerequisite>6</constructionSkillPrerequisite> <!-- 施工技能先决条件 -->
+	<altitudeLayer>Building</altitudeLayer> <!-- 图层高度 -->
+    <passability>Standable</passability> <!-- 通过性 -->
+    <blockWind>false</blockWind> <!-- 气流阻挡 -->
+
+    <coversFloor>false</coversFloor> <!-- 覆盖地板 -->
+    <rotatable>true</rotatable> <!-- 可旋转 -->
+    <selectable>true</selectable> <!-- 可选择 -->
+	<useStuffTerrainAffordance>false</useStuffTerrainAffordance> <!-- 使用地形承受能力 -->
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded> <!-- 需要地形承受能力，石材所需的承担特质 -->
+    <holdsRoof>false</holdsRoof> <!-- 支撑屋顶 -->
+    <designationCategory>KT_designation_group</designationCategory> <!-- UI栏位置 -->
+    <castEdgeShadows>True</castEdgeShadows> <!-- 投射边缘阴影 -->
+    <blockLight>false</blockLight> <!-- 光线遮挡 -->
+	<fertility>0</fertility> <!-- 肥沃 -->
+	<building> <!-- 建筑 -->
+	  <isEdifice>true</isEdifice> <!-- 是建筑 -->
+	  <paintable>true</paintable> <!-- 可涂漆 -->
+	  <ai_chillDestination>false</ai_chillDestination> <!-- ai冷却目的地 -->
+	</building>
+	<researchPrerequisites>
+	  <li>KT_Communication_tech</li>
+    </researchPrerequisites>
+	<specialDisplayRadius>35</specialDisplayRadius>
+	<tickerType>Normal</tickerType>
+    <drawerType>MapMeshAndRealTime</drawerType>
+	<comps>
+	  <li Class="SRA.CompProperties_BuildingDrawExtraFourRot">
+			<graphicDataExtra>
+				<graphicClass>Graphic_Multi</graphicClass>
+				<shaderType>TransparentPostLight</shaderType>
+				<texPath>Things/Building/KT_Communication_Light</texPath>
+				<drawSize>(2,2)</drawSize>
+			</graphicDataExtra>
+	  </li>
+	  <li Class="SRA.CompProperties_OpenCustomUI">
+        <uiDefName>KT_EVENT_PANTSU_SHOP_0</uiDefName>
+        <label>打开通讯</label>
+      </li>
+	  <!--能耗参数-->
+	  <li Class="CompProperties_Power">
+		<compClass>CompPowerTrader</compClass>
+		<basePowerConsumption>1000</basePowerConsumption>
+	  </li>
+	  <!--激光指令参数-->
+	  <li Class="FreeElectronOrbitalLaser.CompProperties_FreeElectronOrbitalLaser">
+		<!--激光束移动速度-->
+		<ticksPerCell>5</ticksPerCell>
+		<!--激光束最小持续时间-->
+		<durationTicks>500</durationTicks>
+		<!--激光束指令冷却时间-->
+		<cooldownSeconds>120</cooldownSeconds>
+		<!--自由电子激光束-->
+		<beamThingDef>FreeElectronOrbitalLaserBeam</beamThingDef>
+		<!--熔融废墟扩散规模-->
+		<lavaPoolSize>1</lavaPoolSize>
+		<!--熔融废墟开始冷却时间-->
+		<lavaCoolDelay>5~15</lavaCoolDelay>
+		<!--熔融废墟流淌管理器-->
+		<lavaThingDef>LaserLiquationRuins</lavaThingDef>
+		<!--熔融废墟流淌频率-->
+		<lavaExpandIntervalTicks>5</lavaExpandIntervalTicks>
+		<!--熔融废墟流淌速度-->
+		<lavaExpandCellsPerInterval>1</lavaExpandCellsPerInterval>
+		<!--非法访问提示-->
+		<disabledReasonKey>FEL_ResearchRequired</disabledReasonKey>
+		<!--权限解锁需求-->
+		<requiredResearch>KT_Orbital_bombardment_tech</requiredResearch>
+	  </li>
+	</comps>
+   </ThingDef> 
+   
+   <ThingDef ParentName="BuildingBase" Name ="KT_Express_box" Abstract="True">
+		<altitudeLayer>Building</altitudeLayer>
+		<thingClass>Building</thingClass>
+		<selectable>true</selectable>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<passability>PassThroughOnly</passability>
+		<category>Building</category>
+		<rotatable>true</rotatable>
+		<blockLight>true</blockLight>
+		<soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+		<building>
+			<claimable>true</claimable>
+			<deconstructible>true</deconstructible>
+			<alwaysDeconstructible>false</alwaysDeconstructible>
+			<deconstructible>false</deconstructible>
+		</building>
+		<fillPercent>1</fillPercent>
+		<pathCost>150</pathCost>
+	</ThingDef>
+
+	<ThingDef ParentName="KT_Express_box" Name ="KT_Express_box_Impassable" Abstract="True">
+		<passability>Impassable</passability>
+		<blockWind>true</blockWind>
+		<tradeability>None</tradeability>
+		<building>
+			<alwaysDeconstructible>false</alwaysDeconstructible>
+		</building>
+	</ThingDef>
+	<!-- 重炮型 -->
+   <ThingDef ParentName="KT_Express_box_Impassable" MayRequire="Ludeon.RimWorld.Biotech">
+		<defName>KT_UF_Express_main_gun</defName>
+		<label>KT_UF_Express_main_gun</label>
+		<description>KT_UF_Express_main_gun</description>
+		<rotatable>true</rotatable>
+		<graphicData>
+      		<texPath>Things/Building/KT_UF_Express</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+      		<drawSize>(5,5)</drawSize>
+			<drawOffset>(0,0,0.3)</drawOffset> <!-- 绘制偏移北 -->
+		</graphicData>
+		<uiIconPath>Things/Building/KT_UF_Express</uiIconPath>
+		<uiIconScale>1</uiIconScale>
+    	<castEdgeShadows>false</castEdgeShadows>
+		<size>(3,3)</size>
+		<rotatable>false</rotatable> <!-- 可旋转 -->
+		<statBases>
+		    <MarketValue>180</MarketValue>
+			<WorkToBuild>100</WorkToBuild>
+			<MaxHitPoints>5000</MaxHitPoints>
+			<Mass>100</Mass>
+		</statBases>
+		<comps>
+			<li Class="CompProperties_Usable" MayRequire="Ludeon.RimWorld.Biotech">
+				<useJob>TriggerObject</useJob>
+				<useLabel>Open the parcel box</useLabel>
+			</li>
+			<li Class="SRA.CompProperties_UseEffect_ActivateMech" MayRequire="Ludeon.RimWorld.Biotech">
+				<compClass>SRA.CompUseEffect_ActivateMech</compClass>
+				<pawnKindDef>KT_Main_battlewalker</pawnKindDef>
+				<requireMechanitor>true</requireMechanitor>
+			</li>
+			<li Class="CompProperties_UseEffectDestroySelf" MayRequire="Ludeon.RimWorld.Biotech">
+				<delayTicks>120</delayTicks>
+				<spawnKilledLeavings>false</spawnKilledLeavings>
+			</li>
+			<li Class="CompProperties_Glower">
+                <glowRadius>7</glowRadius>
+                <glowColor>(252,255,255,0)</glowColor>
+            </li>
+		</comps>
+	</ThingDef>
+	
+	<ThingDef ParentName="KT_Express_box_Impassable" MayRequire="Ludeon.RimWorld.Biotech">
+		<defName>KT_UF_Express_main_autogun</defName>
+		<label>KT_UF_Express_main_autogun</label>
+		<description>KT_UF_Express_main_autogun</description>
+		<rotatable>true</rotatable>
+		<graphicData>
+      		<texPath>Things/Building/KT_UF_Express</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+      		<drawSize>(5,5)</drawSize>
+			<drawOffset>(0,0,0.3)</drawOffset> <!-- 绘制偏移北 -->
+		</graphicData>
+		<uiIconPath>Things/Building/KT_UF_Express</uiIconPath>
+		<uiIconScale>1</uiIconScale>
+    	<castEdgeShadows>false</castEdgeShadows>
+		<size>(3,3)</size>
+		<rotatable>false</rotatable> <!-- 可旋转 -->
+		<statBases>
+		    <MarketValue>180</MarketValue>
+			<WorkToBuild>100</WorkToBuild>
+			<MaxHitPoints>5000</MaxHitPoints>
+			<Mass>100</Mass>
+		</statBases>
+		<comps>
+			<li Class="CompProperties_Usable" MayRequire="Ludeon.RimWorld.Biotech">
+				<useJob>TriggerObject</useJob>
+				<useLabel>Open the parcel box</useLabel>
+			</li>
+			<li Class="SRA.CompProperties_UseEffect_ActivateMech" MayRequire="Ludeon.RimWorld.Biotech">
+				<compClass>SRA.CompUseEffect_ActivateMech</compClass>
+				<pawnKindDef>KT_Main_battlewalker_PawnKind_main_autogun</pawnKindDef>
+				<requireMechanitor>true</requireMechanitor>
+			</li>
+			<li Class="CompProperties_UseEffectDestroySelf" MayRequire="Ludeon.RimWorld.Biotech">
+				<delayTicks>120</delayTicks>
+				<spawnKilledLeavings>false</spawnKilledLeavings>
+			</li>
+			<li Class="CompProperties_Glower">
+                <glowRadius>7</glowRadius>
+                <glowColor>(252,255,255,0)</glowColor>
+            </li>
+		</comps>
+	</ThingDef>
+	
+	<ThingDef ParentName="KT_Express_box_Impassable" MayRequire="Ludeon.RimWorld.Biotech">
+		<defName>KT_UF_Express_main_gatling_gun</defName>
+		<label>KT_UF_Express_main_gatling_gun</label>
+		<description>KT_UF_Express_main_gatling_gun</description>
+		<rotatable>true</rotatable>
+		<graphicData>
+      		<texPath>Things/Building/KT_UF_Express</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+      		<drawSize>(5,5)</drawSize>
+			<drawOffset>(0,0,0.3)</drawOffset> <!-- 绘制偏移北 -->
+		</graphicData>
+		<uiIconPath>Things/Building/KT_UF_Express</uiIconPath>
+		<uiIconScale>1</uiIconScale>
+    	<castEdgeShadows>false</castEdgeShadows>
+		<size>(3,3)</size>
+		<rotatable>false</rotatable> <!-- 可旋转 -->
+		<statBases>
+		    <MarketValue>180</MarketValue>
+			<WorkToBuild>100</WorkToBuild>
+			<MaxHitPoints>5000</MaxHitPoints>
+			<Mass>100</Mass>
+		</statBases>
+		<comps>
+			<li Class="CompProperties_Usable" MayRequire="Ludeon.RimWorld.Biotech">
+				<useJob>TriggerObject</useJob>
+				<useLabel>Open the parcel box</useLabel>
+			</li>
+			<li Class="SRA.CompProperties_UseEffect_ActivateMech" MayRequire="Ludeon.RimWorld.Biotech">
+				<compClass>SRA.CompUseEffect_ActivateMech</compClass>
+				<pawnKindDef>KT_Main_battlewalker_PawnKind_main_gatling</pawnKindDef>
+				<requireMechanitor>true</requireMechanitor>
+			</li>
+			<li Class="CompProperties_UseEffectDestroySelf" MayRequire="Ludeon.RimWorld.Biotech">
+				<delayTicks>120</delayTicks>
+				<spawnKilledLeavings>false</spawnKilledLeavings>
+			</li>
+			<li Class="CompProperties_Glower">
+                <glowRadius>7</glowRadius>
+                <glowColor>(252,255,255,0)</glowColor>
+            </li>
+		</comps>
+	</ThingDef>
+	
+	
+	<ThingDef ParentName="KT_Express_box_Impassable" MayRequire="Ludeon.RimWorld.Biotech">
+		<defName>KT_duckmazon_express_AG_TANK</defName>
+		<label>KT_duckmazon_express_AG_TANK</label>
+		<description>KT_duckmazon_express_AG_TANK</description>
+		<rotatable>true</rotatable>
+		<graphicData>
+      		<texPath>Things/Building/KT_duckmazon_express</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+      		<drawSize>(3,3)</drawSize>
+			<drawOffset>(0,0,0.2)</drawOffset> <!-- 绘制偏移北 -->
+		</graphicData>
+		<uiIconPath>Things/Building/KT_duckmazon_express</uiIconPath>
+		<uiIconScale>1</uiIconScale>
+    	<castEdgeShadows>false</castEdgeShadows>
+		<size>(2,2)</size>
+		<rotatable>false</rotatable> <!-- 可旋转 -->
+		<statBases>
+		    <MarketValue>180</MarketValue>
+			<WorkToBuild>100</WorkToBuild>
+			<MaxHitPoints>5000</MaxHitPoints>
+			<Mass>100</Mass>
+		</statBases>
+		<comps>
+			<li Class="CompProperties_Usable" MayRequire="Ludeon.RimWorld.Biotech">
+				<useJob>TriggerObject</useJob>
+				<useLabel>Open the parcel box</useLabel>
+			</li>
+			<li Class="SRA.CompProperties_UseEffect_ActivateMech" MayRequire="Ludeon.RimWorld.Biotech">
+				<compClass>SRA.CompUseEffect_ActivateMech</compClass>
+				<pawnKindDef>KT_AG_TANK</pawnKindDef>
+				<requireMechanitor>true</requireMechanitor>
+			</li>
+			<li Class="CompProperties_UseEffectDestroySelf" MayRequire="Ludeon.RimWorld.Biotech">
+				<delayTicks>120</delayTicks>
+				<spawnKilledLeavings>false</spawnKilledLeavings>
+			</li>
+			<li Class="CompProperties_Glower">
+                <glowRadius>7</glowRadius>
+                <glowColor>(252,255,255,0)</glowColor>
+            </li>
+		</comps>
+	</ThingDef>
+	
+	<ThingDef ParentName="KT_Express_box_Impassable" MayRequire="Ludeon.RimWorld.Biotech">
+		<defName>KT_Humanoid_Express_BIO_CATGIRL_fabricor</defName>
+		<label>KT_Humanoid_Express_BIO_CATGIRL_fabricor</label>
+		<description>KT_Humanoid_Express_BIO_CATGIRL_fabricor</description>
+		<rotatable>true</rotatable>
+		<graphicData>
+      		<texPath>Things/Building/KT_Humanoid_Express</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+      		<drawSize>(3,3)</drawSize>
+			<drawOffset>(0,0,0.2)</drawOffset> <!-- 绘制偏移北 -->
+		</graphicData>
+		<uiIconPath>Things/Building/KT_Humanoid_Express</uiIconPath>
+		<uiIconScale>1</uiIconScale>
+    	<castEdgeShadows>false</castEdgeShadows>
+		<size>(2,1)</size>
+		<rotatable>false</rotatable> <!-- 可旋转 -->
+		<statBases>
+		    <MarketValue>180</MarketValue>
+			<WorkToBuild>100</WorkToBuild>
+			<MaxHitPoints>5000</MaxHitPoints>
+			<Mass>100</Mass>
+		</statBases>
+		<comps>
+			<li Class="CompProperties_Usable" MayRequire="Ludeon.RimWorld.Biotech">
+				<useJob>TriggerObject</useJob>
+				<useLabel>Open the parcel box</useLabel>
+			</li>
+			<li Class="SRA.CompProperties_UseEffect_ActivateMech" MayRequire="Ludeon.RimWorld.Biotech">
+				<compClass>SRA.CompUseEffect_ActivateMech</compClass>
+				<pawnKindDef>KT_BIO_CATGIRL_fabricor</pawnKindDef>
+				<requireMechanitor>true</requireMechanitor>
+			</li>
+			<li Class="CompProperties_UseEffectDestroySelf" MayRequire="Ludeon.RimWorld.Biotech">
+				<delayTicks>120</delayTicks>
+				<spawnKilledLeavings>false</spawnKilledLeavings>
+			</li>
+			<li Class="CompProperties_Glower">
+                <glowRadius>7</glowRadius>
+                <glowColor>(252,255,255,0)</glowColor>
+            </li>
+		</comps>
+	</ThingDef>
+	
+	<ThingDef ParentName="KT_Express_box_Impassable" MayRequire="Ludeon.RimWorld.Biotech">
+		<defName>KT_Humanoid_Express_BIO_CATGIRL_logistics</defName>
+		<label>KT_Humanoid_Express_BIO_CATGIRL_logistics</label>
+		<description>KT_Humanoid_Express_BIO_CATGIRL_logistics</description>
+		<rotatable>true</rotatable>
+		<graphicData>
+      		<texPath>Things/Building/KT_Humanoid_Express</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+      		<drawSize>(3,3)</drawSize>
+			<drawOffset>(0,0,0.2)</drawOffset> <!-- 绘制偏移北 -->
+		</graphicData>
+		<uiIconPath>Things/Building/KT_Humanoid_Express</uiIconPath>
+		<uiIconScale>1</uiIconScale>
+    	<castEdgeShadows>false</castEdgeShadows>
+		<size>(2,1)</size>
+		<rotatable>false</rotatable> <!-- 可旋转 -->
+		<statBases>
+		    <MarketValue>180</MarketValue>
+			<WorkToBuild>100</WorkToBuild>
+			<MaxHitPoints>5000</MaxHitPoints>
+			<Mass>100</Mass>
+		</statBases>
+		<comps>
+			<li Class="CompProperties_Usable" MayRequire="Ludeon.RimWorld.Biotech">
+				<useJob>TriggerObject</useJob>
+				<useLabel>Open the parcel box</useLabel>
+			</li>
+			<li Class="SRA.CompProperties_UseEffect_ActivateMech" MayRequire="Ludeon.RimWorld.Biotech">
+				<compClass>SRA.CompUseEffect_ActivateMech</compClass>
+				<pawnKindDef>KT_BIO_CATGIRL_logistics</pawnKindDef>
+				<requireMechanitor>true</requireMechanitor>
+			</li>
+			<li Class="CompProperties_UseEffectDestroySelf" MayRequire="Ludeon.RimWorld.Biotech">
+				<delayTicks>120</delayTicks>
+				<spawnKilledLeavings>false</spawnKilledLeavings>
+			</li>
+			<li Class="CompProperties_Glower">
+                <glowRadius>7</glowRadius>
+                <glowColor>(252,255,255,0)</glowColor>
+            </li>
+		</comps>
+	</ThingDef>
+</Defs>

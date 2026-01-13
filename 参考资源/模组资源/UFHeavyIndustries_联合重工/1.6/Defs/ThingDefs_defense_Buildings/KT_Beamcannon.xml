@@ -1,0 +1,181 @@
+<Defs>
+  <ThingDef ParentName="BuildingBase">
+        <defName>KTBEAMCANNON</defName> 
+        <label>KTBEAMCANNON</label> <!-- 显示名称 -->
+        <description>KTBEAMCANNON.</description> <!-- 描述 -->
+        <thingClass>SRA.Building_TurretGunHasSpeed</thingClass>
+		<modExtensions>
+	      <li Class="SRA.ModExt_HasSpeedTurret"><!-- SRA炮塔转速 -->
+		    <speed>2.8</speed>
+	      </li>
+  	    </modExtensions>
+        <uiOrder>1700</uiOrder> <!-- UI栏顺序 -->
+        <size>(2,2)</size>
+        <drawerType>MapMeshAndRealTime</drawerType> <!-- 绘制类型：地图网格和实时 -->
+        
+        <graphicData>
+		   <texPath>Things/Building/Security/Pocket20MMACBase</texPath>
+		   <graphicClass>Graphic_Single</graphicClass>
+		   <drawSize>(4.3,4.3)</drawSize>
+	    </graphicData>
+
+        <castEdgeShadows>False</castEdgeShadows> <!-- 是否渲染阴影 -->
+        <minifiedDef>MinifiedThing</minifiedDef> <!-- 最小化后的定义 -->
+        <uiIconPath>Things/Building/Security/KTBEAMCANNON_Ico</uiIconPath> <!-- 图标路径 -->
+
+        <altitudeLayer>Building</altitudeLayer> <!-- 图形的显示层级 -->
+        <stealable>false</stealable> <!-- 不可盗窃 -->
+        <rotatable>true</rotatable> <!-- 不可旋转 -->
+        
+        <thingCategories>
+            <li>BuildingsSecurity</li> <!-- 建筑类别：安全 -->
+        </thingCategories>
+        
+        <statBases>
+            <MaxHitPoints>1000</MaxHitPoints> <!-- 最大生命值 -->
+            <Flammability>0</Flammability> <!-- 可燃性 -->
+            <WorkToBuild>800</WorkToBuild> <!-- 建造所需工作时间 -->
+            <Mass>120</Mass> <!-- 质量 -->
+            <Beauty>15</Beauty> <!-- 美观度 -->
+            <ShootingAccuracyTurret>1</ShootingAccuracyTurret> <!-- 射击精度 -->
+        </statBases>
+
+        <tickerType>Normal</tickerType> <!-- 每次更新的计时器类型 -->
+        
+        <comps Inherit="False">
+            <li Class="CompProperties_Power">
+                <compClass>CompPowerTrader</compClass> <!-- 需要电力 -->
+                <basePowerConsumption>450</basePowerConsumption> <!-- 基础电力消耗 -->
+            </li>
+            <li Class="CompProperties_Flickable"/>
+        </comps>
+        
+        <passability>PassThroughOnly</passability> <!-- 只能穿透 -->
+        <pathCost>50</pathCost> <!-- 建筑路径成本 -->
+        <fillPercent>0.5</fillPercent> <!-- 填充度 -->
+        <hasTooltip>true</hasTooltip> <!-- 是否显示工具提示 -->
+        
+        
+        <costList>
+            <Steel>250</Steel> <!-- 钢铁 200 单位 -->
+			<Plasteel>60</Plasteel>
+            <ComponentIndustrial>8</ComponentIndustrial> <!-- 工业组件 10 个 -->
+        </costList>
+        
+        <generateCommonality>0</generateCommonality>
+        <tradeability>None</tradeability>
+
+        <constructionSkillPrerequisite>5</constructionSkillPrerequisite> <!-- 建造技能需求 -->
+        <terrainAffordanceNeeded>Light</terrainAffordanceNeeded> <!-- 需要轻型地形 -->
+        <designationCategory>KT_designation_group</designationCategory> <!-- 指定分类：安全 -->
+
+        <building>
+            <ai_combatDangerous>true</ai_combatDangerous> <!-- AI认为它具有危险性 -->
+            <turretGunDef>Gun_KTBEAMCANNON</turretGunDef> <!-- 定义使用的枪械 -->
+            <deconstructible>true</deconstructible>
+            <paintable>true</paintable> <!-- 是否可以涂漆：可以 -->
+            <turretTopDrawSize>2.7</turretTopDrawSize>
+            <turretTopOffset>(0, 0.4)</turretTopOffset>
+            <turretBurstCooldownTime>0.1</turretBurstCooldownTime> <!-- 炮塔射击冷却时间 -->
+            <combatPower>60</combatPower>
+			<turretTopDrawSize>3</turretTopDrawSize>
+	        <turretTopOffset>(0, 0)</turretTopOffset>
+        </building>
+		
+        <researchPrerequisites>
+            <li>KT_Base_t1_turret</li>
+        </researchPrerequisites>
+        
+        <placeWorkers>
+            <li>PlaceWorker_TurretTop</li> <!-- 放置工作：炮塔顶部 -->
+        </placeWorkers>
+        
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>Gun_KTBEAMCANNON</defName>
+    <label>Gun_KTBEAMCANNON</label>
+    <description>Gun_KTBEAMCANNON</description>
+    <graphicData>
+         <texPath>Things/Building/Security/KTBEAMCANNON</texPath> <!-- 武器贴图路径 -->
+        <graphicClass>Graphic_Single</graphicClass> <!-- 使用单一图形 -->
+        <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <statBases>
+            <AccuracyTouch>1</AccuracyTouch> <!-- 近距离精度 -->
+            <AccuracyShort>1</AccuracyShort> <!-- 短程精度 -->
+            <AccuracyMedium>1</AccuracyMedium> <!-- 中程精度 -->
+            <AccuracyLong>1</AccuracyLong> <!-- 长程精度 -->
+            <RangedWeapon_Cooldown>0.1</RangedWeapon_Cooldown> <!-- 冷却时间 -->
+            <Mass>15</Mass> <!-- 质量 -->
+            <Flammability>0.2</Flammability> <!-- 不可燃 -->
+            <DeteriorationRate>0</DeteriorationRate> <!-- 不会腐烂 -->
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>SRA.Verb_ShootWithOffset</verbClass>
+        <defaultProjectile>Bullet_KTBEAMCANNON</defaultProjectile>
+        <hasStandardCommand>true</hasStandardCommand>
+        <warmupTime>0</warmupTime>
+        <range>45</range>
+		<burstShotCount>3</burstShotCount> 
+        <soundCast>Shot_BeamRepeater</soundCast>
+        <soundCastTail>GunTail_Medium</soundCastTail>
+        <muzzleFlashScale>9</muzzleFlashScale>
+        <aimingChargeMote>Mote_BeamRepeater_Charge</aimingChargeMote>
+        <aimingChargeMoteOffset>0</aimingChargeMoteOffset>
+      </li>
+    </verbs>
+  </ThingDef>
+  
+  
+  
+  
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_KTBEAMCANNON</defName>
+    <label>Bullet_KTBEAMCANNON</label>
+    <thingClass>Beam</thingClass>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>KTBeamBypassShields</damageDef>
+      <damageAmountBase>25</damageAmountBase>
+	  <stoppingPower>1</stoppingPower>
+      <beamMoteDef>Beam_KTBEAMCANNON</beamMoteDef>
+      <beamStartOffset>0</beamStartOffset>
+      <armorPenetrationBase>2</armorPenetrationBase>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="MoteBase">
+    <defName>Beam_KTBEAMCANNON</defName>
+    <thingClass>MoteDualAttached</thingClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.1</fadeInTime>
+      <fadeOutTime>0.1</fadeOutTime>
+      <solidTime>0.1</solidTime>
+      <rotateTowardsTarget>True</rotateTowardsTarget>
+      <scaleToConnectTargets>True</scaleToConnectTargets>
+    </mote>
+    <drawOffscreen>true</drawOffscreen>
+    <graphicData>
+      <texPath>Things/Mote/GraserBeam</texPath>
+      <graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
+      <shaderType>MoteBeam</shaderType>
+      <shaderParameters>
+        <_ExtraTexA>/Things/Mote/BeamSecondaryNoise_A</_ExtraTexA>
+        <_ExtraTexB>/Things/Mote/BeamSecondaryNoise_B</_ExtraTexB>
+        <_ScrollSpeedA>0</_ScrollSpeedA>
+        <_ScrollSpeedB>0</_ScrollSpeedB>
+        <_Intensity>2</_Intensity>
+      </shaderParameters>
+    </graphicData>
+  </ThingDef>
+
+
+</Defs>
+

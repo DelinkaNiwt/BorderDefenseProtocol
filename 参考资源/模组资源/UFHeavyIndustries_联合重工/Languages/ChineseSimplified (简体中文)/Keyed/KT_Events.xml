@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+ <KT_PANTSU_SHOP_TITLE>战利品商店</KT_PANTSU_SHOP_TITLE>
+ <KT_PANTSU_SHOP_ELLA>战利品商店-艾拉</KT_PANTSU_SHOP_ELLA>
+ <KT_DESC_PANTSU_SHOP_1>&lt;color=#FFAA00>&lt;i>通讯接通了，我们看到了一个像澡堂的地方...站着一个黄色头发的女性...&lt;/i>&lt;/color></KT_DESC_PANTSU_SHOP_1>
+ <KT_OPTION_PANTSU_SHOP_1_1>你好？</KT_OPTION_PANTSU_SHOP_1_1>
+ 
+ <KT_DESC_PANTSU_SHOP_2>&lt;color=#FFAA00>&lt;i>「黄发女性迟疑了片刻，皱了皱眉头」&lt;/i>&lt;/color>\n我想明白怎么回事了，你们的头头可真有意思，天天就喜欢跑去和尘土玩cosplay游戏...让我看看这个地方...\n嗯...常态FTL无法使用，锁死土著时代...哈，她可真会挑，假期结束直接擦掉，还能直接完成一个业绩。</KT_DESC_PANTSU_SHOP_2>
+ <KT_OPTION_PANTSU_SHOP_2_1>我们不明白，你的意思是？</KT_OPTION_PANTSU_SHOP_2_1>
+ 
+ <KT_DESC_PANTSU_SHOP_3>你们没有资格提问。\n原则上我不会与你们这种尘土交流，更别说做生意了，但你们的头头似乎对这次游戏还挺上心，委托我对你们开放一些权限，那我就破个例吧。\n接下来，这台次级智能会作为你们以后的对接窗口，我本人没精力也没兴趣和你们过多交流。</KT_DESC_PANTSU_SHOP_3>
+ <KT_OPTION_PANTSU_SHOP_3_1>等等！我们真的没明白</KT_OPTION_PANTSU_SHOP_3_1>
+ 
+ <KT_PANTSU_SHOP_EDEN>联合护卫舰-艾登</KT_PANTSU_SHOP_EDEN>
+ <KT_DESC_PANTSU_SHOP_4>&lt;color=#FFAA00>&lt;i>「画面被切换...我们看到了一个看起来像是某种AI核心的画面」&lt;/i>&lt;/color>\n你们好，这里是联合护卫舰，接下来我将作为战利品商店的挂牌窗口与你们进行之后的对接活动。有什么疑问吗？</KT_DESC_PANTSU_SHOP_4>
+ <KT_OPTION_PANTSU_SHOP_4_1>我完全没明白这是怎么一回事，可以解释下吗？</KT_OPTION_PANTSU_SHOP_4_1>
+ 
+ <KT_DESC_PANTSU_SHOP_5>没问题！那么我先自我介绍下，如你所见，我是一艘仪仗队联合护卫舰的次级智能，你可以称呼为为&lt;color=#FFAA00>&lt;i>艾登&lt;/i>&lt;/color>。\n通常我和我的同类只会用于执行天灾考核仪式用于对首选者进行测试，我迄今为止已经执行了&lt;color=#c10000>&lt;i>[无对应应答器，数字过长无法显示]&lt;/i>&lt;/color>次仪式，被击毁并重构了18次。艾拉说这是对我工作满意的奖励，允许我做仪式以外的事，因此我非常高兴！\n\n我已跃迁并停泊在你们星球的深空轨道上待命，艾拉特许我挂牌战利品商店与你们进行交易并提供协助。还有什么疑问吗？</KT_DESC_PANTSU_SHOP_5>
+ <KT_OPTION_PANTSU_SHOP_5_1>战利品商店到底是什么？天灾考核仪式是什么？</KT_OPTION_PANTSU_SHOP_5_1>
+ <KT_OPTION_PANTSU_SHOP_5_2>联合究竟是什么？</KT_OPTION_PANTSU_SHOP_5_2>
+ <KT_OPTION_PANTSU_SHOP_5_3>为什么要帮助我们？</KT_OPTION_PANTSU_SHOP_5_3>
+ <KT_OPTION_PANTSU_SHOP_5_4>你能做什么？</KT_OPTION_PANTSU_SHOP_5_4>
+ <KT_OPTION_PANTSU_SHOP_5_5>我们明白了，再见。</KT_OPTION_PANTSU_SHOP_5_5>
+ 
+ <KT_DESC_PANTSU_SHOP_6>&lt;color=#FFAA00>&lt;i>「申请问答权限...访问驳回，该问题无可奉告。」&lt;/i>&lt;/color></KT_DESC_PANTSU_SHOP_6>
+ <KT_DESC_PANTSU_SHOP_8>根据伟大的&lt;color=#ffe400>&lt;i>高级星督-提尔比茨&lt;/i>&lt;/color>的指示，本护卫舰将协助完成小型cosplay剧本&lt;color=#ffe400>&lt;i>“联合公约国”&lt;/i>&lt;/color>,提供权限内允许的帮助。\n而本舰可以从中获得放松和刺激！</KT_DESC_PANTSU_SHOP_8>
+ 
+ <KT_DESC_PANTSU_SHOP_9>我当前开放的援助有这些，但部分需要你们进行进一步的协议解锁才能开放: &lt;color=#ffe400>&lt;i>\n1.引导或模拟创造商船前往你们的殖民地进行贸易\n2.协助进行全球范围选择性轨道轰炸\n3.出售机械体陆军&lt;/i>&lt;/color></KT_DESC_PANTSU_SHOP_9>
+ 
+ <KT_DESC_PANTSU_SHOP_10>非常好，希望我们会一起度过一段美好的时光，请尽可能活的久一点，让那位大人玩的尽兴，有需要随时打开通讯终端与我联系。</KT_DESC_PANTSU_SHOP_10>
+ 
+ <KT_DESC_PANTSU_SHOP_11_1>需要什么协助？</KT_DESC_PANTSU_SHOP_11_1>
+ <KT_DESC_PANTSU_SHOP_11_2>请活得久一些，对我们都有好处。</KT_DESC_PANTSU_SHOP_11_2>
+ <KT_DESC_PANTSU_SHOP_11_3>虽然说当一个仪仗队飞船也没什么不好的，但你懂的，想换换口味嘛。</KT_DESC_PANTSU_SHOP_11_3>
+ <KT_DESC_PANTSU_SHOP_11_4>你知道吗，真正的战利品商店用另一种特殊的资源当贸易货币，但你们肯定没资格碰到就是了。</KT_DESC_PANTSU_SHOP_11_4>
+ <KT_DESC_PANTSU_SHOP_11_5>艾登这个名字源自于艾拉的凳子，但直接叫艾凳太直白了。</KT_DESC_PANTSU_SHOP_11_5>
+ 
+ <KT_OPTION_PANTSU_SHOP_11_1>我们需要贸易</KT_OPTION_PANTSU_SHOP_11_1>
+ <KT_OPTION_PANTSU_SHOP_11_1_disabled>艾登需要重新冷却跃迁传送装置，每次都需要等待一天左右</KT_OPTION_PANTSU_SHOP_11_1_disabled>
+ <KT_OPTION_PANTSU_SHOP_11_2>我们需要购买机械体</KT_OPTION_PANTSU_SHOP_11_2>
+ <KT_OPTION_PANTSU_SHOP_11_2_disabled>权限尚未解锁，无法购买</KT_OPTION_PANTSU_SHOP_11_2_disabled>
+
+ <KT_DESC_PANTSU_SHOP_12_1>需要什么类型的贸易，我可以轻易改变在轨商船的位置，将他们传送到你附近。</KT_DESC_PANTSU_SHOP_12_1>
+ <KT_DESC_PANTSU_SHOP_12_2>哈哈，没问题，那些商船肯定会困惑为什么自己被传送到了别的位置，但相信他们不会拒绝做生意的机会。</KT_DESC_PANTSU_SHOP_12_2>
+ 
+ <KT_OPTION_PANTSU_SHOP_12_1>材料供应商</KT_OPTION_PANTSU_SHOP_12_1>
+ <KT_OPTION_PANTSU_SHOP_12_2>食品贸易商</KT_OPTION_PANTSU_SHOP_12_2>
+ <KT_OPTION_PANTSU_SHOP_12_3>军火商</KT_OPTION_PANTSU_SHOP_12_3>
+ <KT_OPTION_PANTSU_SHOP_12_4>人才贸易商船</KT_OPTION_PANTSU_SHOP_12_4>
+ <KT_OPTION_PANTSU_SHOP_12_5>战利品运输舰</KT_OPTION_PANTSU_SHOP_12_5>
+ <KT_OPTION_PANTSU_SHOP_12_6>医药商船</KT_OPTION_PANTSU_SHOP_12_6>
+ 
+ <KT_DESC_PANTSU_SHOP_13>请确保空投信标附近足够空旷，&lt;color=#ffe400>&lt;i>避开危险地形（例如真空和水之类的）&lt;/i>&lt;/color>，如果可以最好是纯空地，否则砸坏了什么东西或者货物损坏我不负责赔偿。</KT_DESC_PANTSU_SHOP_13>
+ <KT_OPTION_PANTSU_SHOP_13_1>先锋级战斗步行机</KT_OPTION_PANTSU_SHOP_13_1>
+ <KT_OPTION_PANTSU_SHOP_13_2>悬浮坦克</KT_OPTION_PANTSU_SHOP_13_2>
+ <KT_OPTION_PANTSU_SHOP_13_3>生化猫娘</KT_OPTION_PANTSU_SHOP_13_3>
+ <KT_OPTION_PANTSU_SHOP_13_1_disabled>暂时无法购买，艾登需要重新准备商品，请耐心等待。（CD 5天左右）</KT_OPTION_PANTSU_SHOP_13_1_disabled>
+ <KT_OPTION_PANTSU_SHOP_13_2_disabled>暂时无法购买，艾登需要重新准备商品，请耐心等待。（CD 3天左右）</KT_OPTION_PANTSU_SHOP_13_2_disabled>
+
+ 
+ <KT_DESC_PANTSU_SHOP_14>不错，这款先锋级战斗步行机购买需要&lt;color=#ffe400>&lt;i>20000白银&lt;/i>&lt;/color>，带宽占用8，拥有多种可选挂载来适应不同战术的需求，而且可以灵活切换，所有型号都配备有一挺反人员机枪和EMP迫击炮，是你能在我这里购买到的最大机械体。\n\n快递尺寸为3X3，确保空降信标旁有充足的空地，否则砸坏东西或者丢件我不负责赔偿。</KT_DESC_PANTSU_SHOP_14>
+ <KT_OPTION_PANTSU_SHOP_14_1>购买</KT_OPTION_PANTSU_SHOP_14_1>
+ <KT_OPTION_PANTSU_SHOP_14_2>自动机炮型</KT_OPTION_PANTSU_SHOP_14_2>
+ <KT_OPTION_PANTSU_SHOP_14_3>加特林机枪型</KT_OPTION_PANTSU_SHOP_14_3>
+ <KT_MESSAGE_PANTSU_SHOP_14_1>联合速递，正在为您递送。</KT_MESSAGE_PANTSU_SHOP_14_1>
+ 
+ <KT_DESC_PANTSU_SHOP_15>不错，这款悬浮坦克购买需要&lt;color=#ffe400>&lt;i>10000白银&lt;/i>&lt;/color>，带宽占用6，它不受地形减速，拥三种可以灵活切换的炮塔适应不同战术需求，但自卫火力只有一门轻机枪。\n\n快递尺寸为2X2，确保空降信标旁有充足的空地，否则砸坏东西或者丢件我不负责赔偿。</KT_DESC_PANTSU_SHOP_15>
+ <KT_OPTION_PANTSU_SHOP_15_1>购买</KT_OPTION_PANTSU_SHOP_15_1>
+ <KT_MESSAGE_PANTSU_SHOP_15_1>鸭马逊物流，很不高兴为您服务。</KT_MESSAGE_PANTSU_SHOP_15_1>
+  
+ <KT_DESC_PANTSU_SHOP_16>这些猫娘的原型是来自我们伟大文明起源时代的一次考古发现，后慢慢演化为我们文化的一部分，每一位公民都可以拥有72只定制化猫娘。现在的我这批生化猫娘都是由我自己培育并改造的，绝对没有任何道德伦理问题！\n这款机械体售价&lt;color=#ffe400>&lt;i>5000白银&lt;/i>&lt;/color>，带宽占用1，自带一款随机武器，除战斗外也可以用于日常工作，分为操作型&lt;color=#ffe400>&lt;i>（可执行加工，缝纫，冶炼等工作）&lt;/i>&lt;/color>和后勤型&lt;color=#ffe400>&lt;i>（可执行开采，种植，建筑等工作）&lt;/i>&lt;/color>两种型号。\n\n快递尺寸为1X2，确保空降信标旁有充足的空地，否则砸坏东西或者丢件我不负责赔偿。</KT_DESC_PANTSU_SHOP_16>
+ <KT_OPTION_PANTSU_SHOP_16_1>操作型</KT_OPTION_PANTSU_SHOP_16_1>
+ <KT_OPTION_PANTSU_SHOP_16_2>后勤型</KT_OPTION_PANTSU_SHOP_16_2>
+ <KT_MESSAGE_PANTSU_SHOP_16_1>正在保密发货，货物品类：日常生活用品</KT_MESSAGE_PANTSU_SHOP_16_1>
+ 
+ <NONEED>暂时不需要</NONEED>
+ <GOBACK>我再想想</GOBACK>
+ <KT_BYE>再见</KT_BYE>
+ <SILVERNOTENOUGH>白银不足，无法购买</SILVERNOTENOUGH>
+ 
+</LanguageData>
+
+

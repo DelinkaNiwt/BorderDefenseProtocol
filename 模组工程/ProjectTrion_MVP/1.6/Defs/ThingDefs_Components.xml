@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ======================== 基础定义 ======================== -->
+  <!-- Trion组件基础类 - 所有组件的父类 -->
+  <ThingDef Name="TrionComponentBase" Abstract="true">
+    <category>Item</category>
+    <tickerType>Normal</tickerType>
+    <useHitPoints>true</useHitPoints>
+    <destroyable>true</destroyable>
+    <rotatable>false</rotatable>
+    <stackLimit>1</stackLimit>
+  </ThingDef>
+
+  <!-- ======================== 弧月（近战武器） ======================== -->
+  <ThingDef ParentName="TrionComponentBase">
+    <defName>TrionComponent_ArcBlade</defName>
+    <label>弧月</label>
+    <description>Trion能量驱动的近战刃具。可发出弧形能量切割，极其锋利。\n\n占用值：10 Reserved\n消耗：1 Trion/60Tick</description>
+    <thingClass>ProjectTrion_MVP.TrionComponent_ArcBlade</thingClass>
+    <graphicData>
+      <texPath>Things/Pawn/Humanlike/TrionComponents/ArcBlade</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <modExtensions>
+      <li Class="ProjectTrion_MVP.TriggerComponentExt">
+        <reservedCost>10</reservedCost>
+        <trionCost>1</trionCost>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- ======================== 护盾（防御） ======================== -->
+  <ThingDef ParentName="TrionComponentBase">
+    <defName>TrionComponent_Shield</defName>
+    <label>护盾</label>
+    <description>Trion能量形成的防御护盾。可以吸收大量伤害，激活后在使用者周围形成能量罩。\n\n占用值：15 Reserved\n消耗：2 Trion/60Tick</description>
+    <thingClass>ProjectTrion_MVP.TrionComponent_Shield</thingClass>
+    <graphicData>
+      <texPath>Things/Pawn/Humanlike/TrionComponents/Shield</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <modExtensions>
+      <li Class="ProjectTrion_MVP.TriggerComponentExt">
+        <reservedCost>15</reservedCost>
+        <trionCost>2</trionCost>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- ======================== 炸裂弹（远程武器） ======================== -->
+  <ThingDef ParentName="TrionComponentBase">
+    <defName>TrionComponent_ExplosiveBullet</defName>
+    <label>炸裂弹</label>
+    <description>Trion能量驱动的爆炸弹药。可以发射能量弹丸，在目标处引发爆炸。\n\n占用值：12 Reserved\n消耗：1.5 Trion/60Tick</description>
+    <thingClass>ProjectTrion_MVP.TrionComponent_ExplosiveBullet</thingClass>
+    <graphicData>
+      <texPath>Things/Pawn/Humanlike/TrionComponents/ExplosiveBullet</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <modExtensions>
+      <li Class="ProjectTrion_MVP.TriggerComponentExt">
+        <reservedCost>12</reservedCost>
+        <trionCost>1.5</trionCost>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- ======================== 变色龙（隐身/规避） ======================== -->
+  <ThingDef ParentName="TrionComponentBase">
+    <defName>TrionComponent_Chameleon</defName>
+    <label>变色龙</label>
+    <description>Trion能量驱动的隐身系统。激活后大幅降低敌人的检测概率，增加规避能力。\n\n占用值：8 Reserved\n消耗：1.2 Trion/60Tick</description>
+    <thingClass>ProjectTrion_MVP.TrionComponent_Chameleon</thingClass>
+    <graphicData>
+      <texPath>Things/Pawn/Humanlike/TrionComponents/Chameleon</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <modExtensions>
+      <li Class="ProjectTrion_MVP.TriggerComponentExt">
+        <reservedCost>8</reservedCost>
+        <trionCost>1.2</trionCost>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- ======================== 脱离（紧急逃脱） ======================== -->
+  <ThingDef ParentName="TrionComponentBase">
+    <defName>TrionComponent_BailOut</defName>
+    <label>脱离</label>
+    <description>Trion能量驱动的紧急脱离装置。当Trion能量耗尽或战斗体激活时，可以触发自动脱离传送。\n\n占用值：20 Reserved\n消耗：0.5 Trion/60Tick</description>
+    <thingClass>ProjectTrion_MVP.TrionComponent_BailOut</thingClass>
+    <graphicData>
+      <texPath>Things/Pawn/Humanlike/TrionComponents/BailOut</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <modExtensions>
+      <li Class="ProjectTrion_MVP.TriggerComponentExt">
+        <reservedCost>20</reservedCost>
+        <trionCost>0.5</trionCost>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- ======================== Trion腺体（植入物） ======================== -->
+  <HediffDef>
+    <defName>Hediff_TrionGland</defName>
+    <label>Trion腺体</label>
+    <description>Trion能量腺体。植入后自动为使用者附加Trion能量管理系统。</description>
+    <hediffClass>ProjectTrion_MVP.Hediff_TrionGland</hediffClass>
+    <defaultLabelColor>(0.8, 0.8, 1)</defaultLabelColor>
+    <maxSeverity>1</maxSeverity>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <label>active</label>
+      </li>
+    </stages>
+    <addedPartProps>
+      <partEfficiency>1</partEfficiency>
+    </addedPartProps>
+  </HediffDef>
+
+  <!-- ======================== Trion检测仪（建筑） ======================== -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>Building_TrionDetector</defName>
+    <label>Trion检测仪</label>
+    <description>用于扫描和初始化Pawn的Trion天赋等级。首次扫描时随机生成天赋（S-E），重算Trion容量。</description>
+    <graphicData>
+      <texPath>Things/Building/TrionDetector</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(3, 3)</drawSize>
+    </graphicData>
+    <thingClass>ProjectTrion_MVP.Building_TrionDetector</thingClass>
+    <category>Building</category>
+    <building>
+      <defaultStorageSettings>
+        <priority>Critical</priority>
+      </defaultStorageSettings>
+    </building>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Flammability>0.5</Flammability>
+      <WorkToBuild>1000</WorkToBuild>
+    </statBases>
+    <costList>
+      <Steel>50</Steel>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Forbiddable" />
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>100</basePowerConsumption>
+      </li>
+    </comps>
+    <designationCategory>Production</designationCategory>
+  </ThingDef>
+
+</Defs>

@@ -1,0 +1,142 @@
+<Defs>
+  <ThingDef ParentName="BuildingBase">
+    <defName>KT_Turret_Tachyon_Lances</defName>
+    <label>KT_Turret_Tachyon_Lances</label>
+    <description>KT_Turret_Tachyon_Lances</description>
+	<thingClass>SRA.Building_TurretGunHasSpeed</thingClass>
+	<modExtensions>
+	   <li Class="SRA.ModExt_HasSpeedTurret"><!-- SRA炮塔转速 -->
+		 <speed>0.3</speed>
+	   </li>
+  	</modExtensions>
+    <drawerType>MapMeshAndRealTime</drawerType>
+	<uiOrder>2200</uiOrder> <!-- UI栏顺序 -->
+	<graphicData>
+		<texPath>Things/Building/Security/KT381MMCANNON_Base</texPath>
+		<graphicClass>Graphic_Single</graphicClass>
+		<drawSize>(20,20)</drawSize>
+		<damageData>
+        <rect>(0.3,0.3,1.4,1.4)</rect>
+      </damageData>
+	</graphicData>
+	
+    <castEdgeShadows>false</castEdgeShadows>
+    <receivesSignals>true</receivesSignals>
+    <uiIconPath>Things/Building/Security/KTTachyon_Lances_Ico</uiIconPath>
+    <altitudeLayer>Building</altitudeLayer>
+    <stealable>false</stealable>
+    <size>(9,9)</size>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <fillPercent>0.4</fillPercent>
+    <tickerType>Normal</tickerType>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <comps>
+      <li Class="CompProperties_AmbientSound">
+        <sound>MechTurretBig_Call</sound>
+      </li>
+      <li Class="SRA.CompProperties_ForceTargetable" /><!-- 善良手操 -->
+	  <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>20000</basePowerConsumption>
+      </li>
+    </comps>
+    <damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+      <li>
+        <damageDef>Bomb</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>EMP</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+    </damageMultipliers>
+    <statBases>
+      <MaxHitPoints>15000</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <WorkToBuild>3200</WorkToBuild>
+      <Mass>30</Mass>
+      <ShootingAccuracyTurret>1</ShootingAccuracyTurret>
+      <Beauty>20</Beauty>
+    </statBases>
+    <building>
+      <combatPower>5000</combatPower>
+      <turretGunDef>KT_TurretGun_Tachyon_Lances</turretGunDef>
+	  <turretTopDrawSize>25</turretTopDrawSize>
+      <turretTopOffset>(0, -0.1)</turretTopOffset>
+      <turretBurstWarmupTime>1.0</turretBurstWarmupTime>
+      <turretBurstCooldownTime>15.0</turretBurstCooldownTime>
+	</building>
+    <costList>
+	  <KT_steel>1000</KT_steel>
+      <ComponentIndustrial>80</ComponentIndustrial>
+	  <ComponentSpacer>50</ComponentSpacer>
+    </costList>
+	
+    <researchPrerequisites>
+      <li>KT_Base_t4_energy_turret</li>
+    </researchPrerequisites>
+	<designationCategory>KT_designation_group</designationCategory> <!-- 指定分类：联合 -->
+	
+    <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
+	  <placeWorkers>
+      <li>PlaceWorker_TurretTop</li>
+    </placeWorkers>
+    <designationHotKey>Misc2</designationHotKey>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseArtilleryWeapon">
+    <defName>KT_TurretGun_Tachyon_Lances</defName>
+    <label>KT_TurretGun_Tachyon_Lances</label>
+    <description>KT_TurretGun_Tachyon_Lances</description>
+    <graphicData>
+      <texPath>Things/Building/Security/KTTachyon_Lances</texPath>
+    </graphicData>
+    <uiIconScale>1.25</uiIconScale>
+    <verbs>
+      <li Class="SRA.VerbProperties_KT_Tachyon_Lances">
+        <verbClass>SRA.Verb_KT_Tachyon_Lances</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <range>500</range>
+		<minRange>25</minRange>
+        <warmupTime>6</warmupTime>
+        <burstShotCount>1</burstShotCount>
+        <ticksBetweenBurstShots>2</ticksBetweenBurstShots>
+        <soundCast>KT_tachyon_lance_fire</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <requireLineOfSight>false</requireLineOfSight>
+        <targetParams>
+          <canTargetLocations>true</canTargetLocations>
+        </targetParams>
+        <pathWidth>1</pathWidth>
+        <damageDef>KTWHITEBomb</damageDef>
+        <damageAmount>8000</damageAmount>
+        <armorPenetration>2</armorPenetration>
+        <beamDefName>KT_Tachyon_LancesBeam</beamDefName>
+      </li>
+    </verbs>
+  </ThingDef>
+  
+  
+  <ThingDef ParentName="MoteBase">
+    <defName>KT_Tachyon_LancesBeam</defName>
+    <thingClass>SRA.KT_Tachyon_LancesBeam</thingClass>
+    <label>KT_Tachyon_LancesBeam</label>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <graphicData>
+      <texPath>Things/Mote/PowerBeam</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <drawOffscreen>true</drawOffscreen>
+    <mote>
+      <fadeInTime>0.5</fadeInTime>
+      <solidTime>9.3</solidTime>
+      <fadeOutTime>1.0</fadeOutTime>
+    </mote>
+  </ThingDef>	
+
+</Defs>

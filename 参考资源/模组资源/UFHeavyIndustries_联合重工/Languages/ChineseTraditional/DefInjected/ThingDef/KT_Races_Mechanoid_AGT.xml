@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: KT_AG_TANK -->
+  <KT_AG_TANK.label>「海啸」轻型悬浮无人坦克</KT_AG_TANK.label>
+  <!-- EN: KT_AG_TANK -->
+  <KT_AG_TANK.description>某公约国研发装备的轻型反重力载具，任何地形都不会使其减速，可以切换三连发主炮，四联高射机炮或火箭发射器（魔法），但近卫火力仅有一门轻机枪。</KT_AG_TANK.description>
+  <!-- EN: Trample -->
+  <KT_AG_TANK.tools.Trample.label>碾压</KT_AG_TANK.tools.Trample.label>
+  
+  <!-- EN: KT_AG_TANK_LMG -->
+  <KT_AG_TANK_LMG.label>「波浪」轻机枪</KT_AG_TANK_LMG.label>
+  <!-- EN: KT_AG_TANK_LMG -->
+  <KT_AG_TANK_LMG.description>轻型机枪，杀伤力有限，但总比没有好。</KT_AG_TANK_LMG.description>
+  <!-- EN: KT_AG_TANK_LMG -->
+  <KT_AG_TANK_LMG.verbs.Verb_Shoot.label>碾压</KT_AG_TANK_LMG.verbs.Verb_Shoot.label>
+  
+  <!-- EN: KT_AG_TANK_Turret -->
+  <KT_AG_TANK_Turret.label>「湮灭」105MM主炮</KT_AG_TANK_Turret.label>
+  <!-- EN: KT_AG_TANK_Turret -->
+  <KT_AG_TANK_Turret.description>轻型坦克主炮，可以三连发速射，火力强大。</KT_AG_TANK_Turret.description>
+  <!-- EN: Trample -->
+  <KT_AG_TANK_Turret.tools.Trample.label>碾压</KT_AG_TANK_Turret.tools.Trample.label>
+  <!-- EN: KT_AG_TANK_Turret -->
+  <KT_AG_TANK_Turret.verbs.Verb_Shoot.label>碾压</KT_AG_TANK_Turret.verbs.Verb_Shoot.label>
+  
+  <!-- EN: KT_Bullet_AG_TANK_LMG -->
+  <KT_Bullet_AG_TANK_LMG.label>「波浪」轻机枪</KT_Bullet_AG_TANK_LMG.label>
+  <KT_Bullet_AG_TANK_LMG.description>「波浪」轻机枪</KT_Bullet_AG_TANK_LMG.description>
+  
+  <!-- EN: KT_Bullet_AG_TANK_Turret -->
+  <KT_Bullet_AG_TANK_Turret.label>「湮灭」105MM主炮</KT_Bullet_AG_TANK_Turret.label>
+  <KT_Bullet_AG_TANK_Turret.description>「湮灭」105MM主炮</KT_Bullet_AG_TANK_Turret.description>
+  
+  <KT_AG_TANK_turret_AAGUN.label>「粉碎者」四联20MM机炮</KT_AG_TANK_turret_AAGUN.label>
+  <KT_AG_TANK_turret_AAGUN.description>配备有四联机炮，可以有效屠杀中轻型装甲目标，也许未来会添加防空功能，但目前就传统的高炮平放。</KT_AG_TANK_turret_AAGUN.description>
+  <KT_Bullet_AG_TANK_Turret_AAGUN.label>「粉碎者」四联20MM高射机炮</KT_Bullet_AG_TANK_Turret_AAGUN.label>
+  <KT_Bullet_AG_TANK_Turret_AAGUN.description>「粉碎者」四联20MM高射机炮</KT_Bullet_AG_TANK_Turret_AAGUN.description>
+  
+  <KT_AG_TANK_turret_Rocket.label>「铁幕」火箭炮发射器</KT_AG_TANK_turret_Rocket.label>
+  <KT_AG_TANK_turret_Rocket.description>可以一次发射致死量火箭弹的骇人存在。</KT_AG_TANK_turret_Rocket.description>
+  <KT_Bullet_AG_TANK_Turret_Rocket.label>「铁幕」火箭炮发射器</KT_Bullet_AG_TANK_Turret_Rocket.label>
+  <KT_Bullet_AG_TANK_Turret_Rocket.description>「铁幕」火箭炮发射器</KT_Bullet_AG_TANK_Turret_Rocket.description>
+  <!-- EN: Proj_KT_AGT_AP -->
+  <Proj_KT_AGT_AP.label>穿甲弹</Proj_KT_AGT_AP.label>
+  
+</LanguageData>

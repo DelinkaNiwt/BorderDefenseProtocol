@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+<KT20MMACTurret.label>"Reaper" Triple 12.5mm Auto-Defense Turret</KT20MMACTurret.label>
+  <KT20MMACTurret.description>A 12.5mm high-rate-of-fire electric charge auto-cannon turret with three barrels. Can easily shred any incoming enemy.</KT20MMACTurret.description>
+  
+  <Bullet_20MMAC.label>"Reaper" Triple 12.5mm Auto-Defense Turret Shell</Bullet_20MMAC.label>
+  
+  <Gun_20MMAC.label>"Reaper" Triple 12.5mm Auto-Defense Turret</Gun_20MMAC.label>
+  <Gun_20MMAC.description>A 12.5mm high-rate-of-fire electric charge auto-cannon turret with three barrels. Can easily shred any incoming enemy.</Gun_20MMAC.description>
+
+  
+  <KT100MMCANNON.label>"Sledgehammer" 100mm Auto Naval Cannon</KT100MMCANNON.label>
+  <KT100MMCANNON.description>This 100mm turret reacts swiftly, automatically delivering firepower against hostile targets. Often appears as main armament on small warships or secondary armament on large warships.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can shoot over walls&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated&lt;/i&gt;&lt;/color&gt;</KT100MMCANNON.description>
+  
+  <Gun_KT100MMCANNON.label>"Sledgehammer" 100mm Auto Naval Cannon</Gun_KT100MMCANNON.label>
+  <Gun_KT100MMCANNON.description>Main cannon used by heavy cruiser-class warships, extremely powerful. Rumored that some super battleships use this caliber as secondary armament.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can shoot over walls&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated&lt;/i&gt;&lt;/color&gt;</Gun_KT100MMCANNON.description>
+  
+  <Bullet_KT100MMCANNON.label>"Sledgehammer" 100mm Auto Naval Cannon Shell</Bullet_KT100MMCANNON.label>
+  <Bullet_KT100MMCANNON.description>100mm artillery shell</Bullet_KT100MMCANNON.description>
+  
+  
+  <KT203MMCANNON.label>"Judgment" Twin 203mm Auto Naval Cannon</KT203MMCANNON.label>
+  <KT203MMCANNON.description>Main cannon used by heavy cruiser-class warships, extremely powerful. Rumored that some super battleships use this caliber as secondary armament.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can shoot over walls&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated&lt;/i&gt;&lt;/color&gt;</KT203MMCANNON.description>
+  
+  <Gun_KT203MMCANNON.label>"Judgment" 203mm Auto Naval Cannon</Gun_KT203MMCANNON.label>
+  <Gun_KT203MMCANNON.description>Main cannon used by heavy cruiser-class warships, extremely powerful. Rumored that some super battleships use this caliber as secondary armament.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can shoot over walls&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated&lt;/i&gt;&lt;/color&gt;</Gun_KT203MMCANNON.description>
+  
+  <Bullet_KT203MMCANNON.label>"Judgment" 203mm Auto Naval Cannon Shell</Bullet_KT203MMCANNON.label>
+  <Bullet_KT203MMCANNON.description>203mm artillery shell</Bullet_KT203MMCANNON.description>
+  
+  <KT381MMCANNON.label>"Noston" Triple 381mm Auto Naval Cannon</KT381MMCANNON.label>
+  <KT381MMCANNON.description>A massive heavy naval artillery piece, originally the main gun of the Vittorio Veneto-class battleships. A single strike can cover an entire area.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can shoot over walls&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated&lt;/i&gt;&lt;/color&gt;</KT381MMCANNON.description>
+  
+  <Gun_KT381MMCANNON.label>"Noston" Triple 381mm Auto Naval Cannon</Gun_KT381MMCANNON.label>
+  <Gun_KT381MMCANNON.description>A massive heavy naval artillery piece, originally the main gun of the Vittorio Veneto-class battleships. A single strike can cover an entire area.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can shoot over walls&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated&lt;/i&gt;&lt;/color&gt;</Gun_KT381MMCANNON.description>
+  
+  <Bullet_KT381MMCANNON.label>"Noston" 381mm Auto Naval Cannon Shell</Bullet_KT381MMCANNON.label>
+  <Bullet_KT381MMCANNON.description>381mm artillery shell</Bullet_KT381MMCANNON.description>
+   
+  <KTROCKETTurret.label>"Dome" Rocket Barrage Launcher</KTROCKETTurret.label>
+  <KTROCKETTurret.description>A small rocket barrage launcher with low accuracy but capable of quickly saturating the target area with firepower.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can shoot over walls&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated&lt;/i&gt;&lt;/color&gt;</KTROCKETTurret.description>
+  
+  <Bullet_KTROCKET.label>"Dome" Rocket Barrage Launcher Rocket</Bullet_KTROCKET.label>
+  
+  <Gun_KTROCKET.label>"Dome" Rocket Barrage Launcher</Gun_KTROCKET.label>
+  <Gun_KTROCKET.description>A small rocket barrage launcher with low accuracy but capable of quickly saturating the target area with firepower.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can shoot over walls&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated&lt;/i&gt;&lt;/color&gt;</Gun_KTROCKET.description>
+  
+  <KTRAILGUN.label>"Spike" 120mm Railgun</KTRAILGUN.label>
+  <KTRAILGUN.description>A very accurate large naval railgun with extremely high damage.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can shoot over walls&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated&lt;/i&gt;&lt;/color&gt;</KTRAILGUN.description>
+  
+  <Gun_KTRAILGUN.label>"Spike" 120mm Railgun</Gun_KTRAILGUN.label>
+  <Gun_KTRAILGUN.description>A very accurate large naval railgun with extremely high damage.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can shoot over walls&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated&lt;/i&gt;&lt;/color&gt;</Gun_KTRAILGUN.description>
+  
+  <Bullet_KTRAILGUN.label>"Spike" 120mm Railgun Projectile</Bullet_KTRAILGUN.label>
+  <Bullet_KTRAILGUN.description>"Spike" 120mm Railgun Projectile</Bullet_KTRAILGUN.description>
+
+  <KTBEAMCANNON.label>"Daybeam" Ray Defense Cannon</KTBEAMCANNON.label>
+  <KTBEAMCANNON.description>A ray defense turret with relatively short range but extreme accuracy, capable of penetrating shields.</KTBEAMCANNON.description>
+  
+  <Bullet_KTBEAMCANNON.label>"Daybeam" Ray Defense Cannon</Bullet_KTBEAMCANNON.label>
+  <Bullet_KTBEAMCANNON.description>"Daybeam" Ray Defense Cannon</Bullet_KTBEAMCANNON.description>
+  
+  <Gun_KTBEAMCANNON.label>"Daybeam" Ray Defense Cannon</Gun_KTBEAMCANNON.label>
+  <Gun_KTBEAMCANNON.description>A ray defense turret with relatively short range but extreme accuracy, capable of penetrating shields.</Gun_KTBEAMCANNON.description>
+  
+  <KTMGX94D.label>"Tsunami" Metal Storm System</KTMGX94D.label>
+  <KTMGX94D.description>A metal storm system that can instantly unleash massive amounts of ammunition, capable of shredding any hostile unit entering its range.</KTMGX94D.description>
+  
+  <Bullet_KTMGX94D.label>"Tsunami" Metal Storm System</Bullet_KTMGX94D.label>
+  <Bullet_KTMGX94D.description>"Tsunami" Metal Storm System</Bullet_KTMGX94D.description>
+  
+  <Gun_KTMGX94D.label>"Tsunami" Metal Storm System</Gun_KTMGX94D.label>
+  <Gun_KTMGX94D.description>A metal storm system that can instantly unleash massive amounts of ammunition, capable of shredding any hostile unit entering its range.</Gun_KTMGX94D.description>
+  <Gun_KTMGX94D.label>"Tsunami" Metal Storm System</Gun_KTMGX94D.label>
+  
+  <KT57MMCANNON.label>"Scythe" 57mm Sentry Auto-cannon</KT57MMCANNON.label>
+  <KT57MMCANNON.description>A medium-caliber rapid-fire auto-cannon equipped with high-explosive rounds.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated&lt;/i&gt;&lt;/color&gt;</KT57MMCANNON.description>
+  
+  <Bullet_KT57MMCANNON.label>"Scythe" 57mm Sentry Auto-cannon</Bullet_KT57MMCANNON.label>
+  <Bullet_KT57MMCANNON.description>"Scythe" 57mm Sentry Auto-cannon</Bullet_KT57MMCANNON.description>
+  
+  <Gun_KT57MMCANNON.label>"Scythe" 57mm Sentry Auto-cannon</Gun_KT57MMCANNON.label>
+  <Gun_KT57MMCANNON.description>A medium-caliber rapid-fire auto-cannon equipped with high-explosive rounds\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated&lt;/i&gt;&lt;/color&gt;</Gun_KT57MMCANNON.description>
+  
+  <KTLM.label>"Driftwood" Loitering Munition Launcher</KTLM.label>
+  <KTLM.description>We used cloning technology and a crack scanner on a Lulu bird captured from a spaceport launch bridge, enabling mass production of these small loitering munition launchers with a core wetware installation, though accuracy isn't particularly great.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can shoot over walls&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated&lt;/i&gt;&lt;/color&gt;</KTLM.description>
+  
+  <Bullet_KTLM.label>"Driftwood" Loitering Munition</Bullet_KTLM.label>
+  
+  <Gun_KTLM.label>"Driftwood" Loitering Munition Launcher</Gun_KTLM.label>
+  <Gun_KTLM.description>We used cloning technology and a crack scanner on a Lulu bird captured from a spaceport launch bridge, enabling mass production of these small loitering munition launchers with a core wetware installation, though accuracy isn't particularly great.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can shoot over walls&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated&lt;/i&gt;&lt;/color&gt;</Gun_KTLM.description>
+  
+  <KTMEGARAILCANNON.label>"Divine Arrow" 480mm Railgun</KTMEGARAILCANNON.label>
+  <KTMEGARAILCANNON.description>An experimental massive railgun that can penetrate any known armor, with enormous energy consumption.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can shoot over walls&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated&lt;/i&gt;&lt;/color&gt;</KTMEGARAILCANNON.description>
+  
+  <Gun_KTMEGARAILCANNON.label>"Divine Arrow" 480mm Railgun</Gun_KTMEGARAILCANNON.label>
+  <Gun_KTMEGARAILCANNON.description>An experimental massive railgun that can penetrate any known armor, with enormous energy consumption.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can shoot over walls&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated&lt;/i&gt;&lt;/color&gt;</Gun_KTMEGARAILCANNON.description>
+  
+  <Bullet_KTMEGARAILCANNON.label>"Divine Arrow" 480mm Railgun Projectile</Bullet_KTMEGARAILCANNON.label>
+  <Bullet_KTMEGARAILCANNON.description>"Divine Arrow" 480mm Railgun Projectile</Bullet_KTMEGARAILCANNON.description>
+  
+  <KTEMPMORTAR.label>"Cease" EMP Mortar</KTEMPMORTAR.label>
+  <KTEMPMORTAR.description>Long-range automatic mortar that generates a large-area EMP upon impact, paralyzing mechanical targets.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can shoot over walls&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated&lt;/i&gt;&lt;/color&gt;</KTEMPMORTAR.description>
+  
+  <Bullet_KTEMPMORTAR.label>"Cease" EMP Mortar Shell</Bullet_KTEMPMORTAR.label>
+  
+  <Gun_KTEMPMORTAR.label>"Cease" EMP Mortar</Gun_KTEMPMORTAR.label>
+  <Gun_KTEMPMORTAR.description>Long-range automatic mortar that generates a large-area EMP upon impact, paralyzing mechanical targets.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can shoot over walls&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated&lt;/i&gt;&lt;/color&gt;</Gun_KTEMPMORTAR.description>
+  
+  <KTDOOMCANNON.label>"Doom" 800MM Annihilation Cannon</KTDOOMCANNON.label>
+  <KTDOOMCANNON.description>No words needed. Everything will be annihilated.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can shoot over walls&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated&lt;/i&gt;&lt;/color&gt;</KTDOOMCANNON.description>
+  
+  <Gun_KTDOOMCANNON.label>"Doom" 800MM Annihilation Cannon</Gun_KTDOOMCANNON.label>
+  <Gun_KTDOOMCANNON.description>No words needed. Everything will be annihilated.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can shoot over walls&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated&lt;/i&gt;&lt;/color&gt;</Gun_KTDOOMCANNON.description>
+  
+  <Bullet_KTDOOMCANNON.label>"Doom" 800MM Annihilation Cannon</Bullet_KTDOOMCANNON.label>
+  <Bullet_KTDOOMCANNON.description>800MM artillery shell</Bullet_KTDOOMCANNON.description>
+  
+  <KTShieldGeneratorBullets.label>"Horizon" Low-Angle Shield</KTShieldGeneratorBullets.label>
+  <KTShieldGeneratorBullets.description>A large-area low-angle shield used to intercept ground fire. Compact and lightweight, it can be placed anywhere - on a table, water dispenser, or even directly attached to the ceiling.\n&lt;color=#FFAA00&gt;&lt;i&gt;As it is a one-way shield, our turrets must be placed inside the shield to function properly.&lt;/i&gt;&lt;/color&gt;</KTShieldGeneratorBullets.description>
+  <KTShieldGeneratorMortar.label>"Skyline" High-Angle Shield</KTShieldGeneratorMortar.label>
+  <KTShieldGeneratorMortar.description>A large-area high-angle shield used to intercept mortar-class weapon fire. Compact and lightweight, it can be placed anywhere - on a table, water dispenser, or even directly attached to the ceiling.\n&lt;color=#FFAA00&gt;&lt;i&gt;As it is a one-way shield, our turrets must be placed inside the shield to function properly.&lt;/i&gt;&lt;/color&gt;</KTShieldGeneratorMortar.description>
+  
+   <KTRAILAUTOGUN.label>"Stinger" 80mm Rail Auto-cannon</KTRAILAUTOGUN.label>
+  <KTRAILAUTOGUN.description>A large electromagnetic rapid-fire cannon turret with extremely high accuracy.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;The displayed range circle has a BUG and cannot show the actual range&lt;/i&gt;&lt;/color&gt;</KTRAILAUTOGUN.description>
+  
+  <Gun_KTRAILAUTOGUN.label>"Stinger" 80mm Rail Auto-cannon</Gun_KTRAILAUTOGUN.label>
+  <Gun_KTRAILAUTOGUN.description>A large electromagnetic rapid-fire cannon turret with extremely high accuracy.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;The displayed range circle has a BUG and cannot show the actual range&lt;/i&gt;&lt;/color&gt;</Gun_KTRAILAUTOGUN.description>
+  
+  <Bullet_KTRAILAUTOGUN.label>"Stinger" 80mm Rail Auto-cannon Shell</Bullet_KTRAILAUTOGUN.label>
+  <Bullet_KTRAILAUTOGUN.description>"Stinger" 80mm Railgun Shell</Bullet_KTRAILAUTOGUN.description>
+  
+  <KTPLASMACANNON.label>"Titan" 180mm Plasma Cannon</KTPLASMACANNON.label>
+  <KTPLASMACANNON.description>An experimental plasma weapon. While its direct hit power and accuracy are inferior to kinetic weapons, it has a larger area of effect and EMP effects. Most importantly, this type of weapon does not require reloading and can sustain output as long as power is guaranteed.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can shoot over walls&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;EMP effects&lt;/i&gt;&lt;/color&gt;</KTPLASMACANNON.description>
+  
+  <Gun_KTPLASMACANNON.label>"Titan" 180mm Plasma Cannon</Gun_KTPLASMACANNON.label>
+  <Gun_KTPLASMACANNON.description>An experimental plasma weapon. While its direct hit power and accuracy are inferior to kinetic weapons, it has a larger area of effect and EMP effects. Most importantly, this type of weapon does not require reloading and can sustain output as long as power is guaranteed.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can shoot over walls&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;EMP effects&lt;/i&gt;&lt;/color&gt;</Gun_KTPLASMACANNON.description>
+  
+  <Bullet_KTPLASMACANNON.label>"Titan" 180mm Plasma Cannon</Bullet_KTPLASMACANNON.label>
+  <Bullet_KTPLASMACANNON.description>180mm Plasma Cannon</Bullet_KTPLASMACANNON.description>
+  
+  <KTPLASMAAC.description>An experimental plasma weapon. While its direct hit power and accuracy are inferior to kinetic weapons, it has a larger area of effect and附带EMP effects. Most importantly, this type of weapon does not require reloading and can sustain output as long as power is guaranteed.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;EMP effects&lt;/i&gt;&lt;/color&gt;</KTPLASMAAC.description>
+  
+  <Gun_KTPLASMAAC.label>"Rapidstream" 80mm Plasma Auto-cannon</Gun_KTPLASMAAC.label>
+  <Gun_KTPLASMAAC.description>An experimental plasma weapon. While its direct hit power and accuracy are inferior to kinetic weapons, it has a larger area of effect and附带EMP effects. Most importantly, this type of weapon does not require reloading and can sustain output as long as power is guaranteed.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;EMP effects&lt;/i&gt;&lt;/color&gt;</Gun_KTPLASMAAC.description>
+  
+  <Bullet_KTPLASMAAC.label>"Rapidstream" 80mm Plasma Auto-cannon</Bullet_KTPLASMAAC.label>
+  <Bullet_KTPLASMAAC.description>80mm Plasma Auto-cannon</Bullet_KTPLASMAAC.description>
+  
+  <KT_Turret_Tachyon_Lances.label>"Solar Flare" Tachyon Lance</KT_Turret_Tachyon_Lances.label>
+  <KT_Turret_Tachyon_Lances.description>A super downgraded version of a certain Stellaris-era weapon, often used for mining operations. Can fire a powerful tachyon beam that affects units along its path, so strictly limit the weapon's firing angle to ensure there are no other important units in the firing path.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated (pure manual operation recommended)&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;Unstoppable&lt;/i&gt;&lt;/color&gt;</KT_Turret_Tachyon_Lances.description>
+  
+  <KT_TurretGun_Tachyon_Lances.label>"Solar Flare" Tachyon Lance</KT_TurretGun_Tachyon_Lances.label>
+  <KT_TurretGun_Tachyon_Lances.description>A super downgraded version of a certain Stellaris-era weapon, often used for mining operations. Can fire a powerful tachyon beam that affects units along its path, so strictly limit the weapon's firing angle to ensure there are no other important units in the firing path.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated (pure manual operation recommended)&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;Unstoppable&lt;/i&gt;&lt;/color&gt;</KT_TurretGun_Tachyon_Lances.description>
+  
+  <KT_Tachyon_LancesBeam.label>"Solar Flare" Tachyon Lance</KT_Tachyon_LancesBeam.label>
+  <KT_Tachyon_LancesBeam.description>"Solar Flare" Tachyon Lance</KT_Tachyon_LancesBeam.description>
+  
+  <KTSHOTGUN.label>"Pacifier" Shotgun Turret</KTSHOTGUN.label>
+  <KTSHOTGUN.description>A shotgun turret suitable for point defense. Special projectiles can cause brief EMP effects on mechanical units, have good suppression capability against conventional units, and have a chance to stun them.</KTSHOTGUN.description>
+  
+  <Bullet_KTSHOTGUN.label>"Pacifier" Shotgun Turret</Bullet_KTSHOTGUN.label>
+  <Bullet_KTSHOTGUN.description>A shotgun turret suitable for point defense. Special projectiles can cause brief EMP effects on mechanical units, have good suppression capability against conventional units, and have a chance to stun them.</Bullet_KTSHOTGUN.description>
+  
+  <Gun_KTSHOTGUN.label>"Pacifier" Shotgun Turret</Gun_KTSHOTGUN.label>
+  <Gun_KTSHOTGUN.description>A metal storm system that can instantly unleash massive amounts of ammunition, capable of shredding any hostile unit entering its range.</Gun_KTSHOTGUN.description>
+  
+  <KTLASERTURRET.label>"Radiant" Heavy Laser Cannon</KTLASERTURRET.label>
+  <KTLASERTURRET.description>A special laser weapon. Upon impact, it instantly detonates nearby material, creating a massive explosion and generating an EMP (I can't make this up any more). \n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;EMP equipped&lt;/i&gt;&lt;/color&gt;</KTLASERTURRET.description>
+
+  <Gun_KTLASERTURRET.label>"Glow" Heavy Laser Cannon</Gun_KTLASERTURRET.label>
+  <Gun_KTLASERTURRET.description>A special laser weapon that instantly detonates nearby material upon impact, creating a massive explosion and generating an EMP (I can't make this up any more). \n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;EMP included&lt;/i&gt;&lt;/color&gt;</Gun_KTLASERTURRET.description>
+
+  <Bullet_KTLASERTURRET.label>"Glittering" Heavy Laser Cannon</Bullet_KTLASERTURRET.label>
+  <Bullet_KTLASERTURRET.description>"Glittering" Heavy Laser Cannon</Bullet_KTLASERTURRET.description>
+  
+  <KTTranquilizerTurret.label>"Euthanasia" Tranquilizer Turret</KTTranquilizerTurret.label>
+  <KTTranquilizerTurret.description>This turret can fire multiple tranquilizer darts at once, quickly incapacitating targets while minimizing lethal harm (as long as the target doesn't fall forward causing secondary injury from the embedded syringes). Theoretically capable of subduing most moving creatures, even mechanoids.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated&lt;/i&gt;&lt;/color&gt;</KTTranquilizerTurret.description>
+  
+  <Bullet_KTTranquilizerTurret.label>"Euthanasia" Tranquilizer Turret</Bullet_KTTranquilizerTurret.label>
+  <Bullet_KTTranquilizerTurret.description>"Euthanasia" Tranquilizer Turret</Bullet_KTTranquilizerTurret.description>
+  
+  <Gun_KTTranquilizerTurret.label>"Euthanasia" Tranquilizer Turret</Gun_KTTranquilizerTurret.label>
+  <Gun_KTTranquilizerTurret.description>This turret can fire multiple tranquilizer darts at once, quickly incapacitating targets while minimizing lethal harm (as long as the target doesn't fall forward causing secondary injury from the embedded syringes). Theoretically capable of subduing most moving creatures, even mechanoids, though the turret cannot distinguish whether targets can actually be tranquilized, potentially wasting ammunition.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated&lt;/i&gt;&lt;/color&gt;</Gun_KTTranquilizerTurret.description>
+  <Gun_KTTranquilizerTurret.label>"Euthanasia" Tranquilizer Turret</Gun_KTTranquilizerTurret.label>
+  
+  <KTMACHINEGUN.label>"Sentinel" Heavy Machine Gun Turret</KTMACHINEGUN.label>
+  <KTMACHINEGUN.description>A fully automatic heavy machine gun turret equipped with a defensive shield, giving it far superior protection compared to turrets of the same class.</KTMACHINEGUN.description>
+  
+  <Bullet_KTMACHINEGUN.label>"Sentinel" Heavy Machine Gun Turret</Bullet_KTMACHINEGUN.label>
+  <Bullet_KTMACHINEGUN.description>"Sentinel" Heavy Machine Gun Turret</Bullet_KTMACHINEGUN.description>
+  
+  <Gun_KTMACHINEGUN.label>"Sentinel" Heavy Machine Gun Turret</Gun_KTMACHINEGUN.label>
+  <Gun_KTMACHINEGUN.description>A fully automatic heavy machine gun turret equipped with a defensive shield, giving it far superior protection compared to turrets of the same class.</Gun_KTMACHINEGUN.description>
+  
+  <Gun_KTMACHINEGUN.label>"Sentinel" Heavy Machine Gun Turret</Gun_KTMACHINEGUN.label>
+ <KTGRANTAUTOCANNON.label>"Hurricane" 40-Barrel 30MM Autocannon</KTGRANTAUTOCANNON.label>
+  <KTGRANTAUTOCANNON.description>An Ork-style design that combines two 20-barrel 30MM autocannons on a single large turret, using armor-piercing ammunition.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can shoot over walls&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated&lt;/i&gt;&lt;/color&gt;</KTGRANTAUTOCANNON.description>
+  
+  <Gun_KTGRANTAUTOCANNON.label>"Hurricane" 40-Barrel 30MM Autocannon</Gun_KTGRANTAUTOCANNON.label>
+  <Gun_KTGRANTAUTOCANNON.description>An Ork-style design that combines two 20-barrel 30MM autocannons on a single large turret, using armor-piercing ammunition.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can shoot over walls&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated&lt;/i&gt;&lt;/color&gt;</Gun_KTGRANTAUTOCANNON.description>
+  
+  <Bullet_KTGRANTAUTOCANNON.label>"Hurricane" 40-Barrel 30MM Autocannon</Bullet_KTGRANTAUTOCANNON.label>
+  <Bullet_KTGRANTAUTOCANNON.description>30MM Autocannon</Bullet_KTGRANTAUTOCANNON.description>
+  
+  <!-- Building Category: Decorations -->
+  <KT_kebabseal.label>"Decoration" Seal Kebab Grill</KT_kebabseal.label>
+  <KT_kebabseal.description>A giant seal on a grill, but it emits a very unpleasant odor, and there's a note next to it that says &lt;color=#FF0000&gt;&lt;i&gt;"Poisonous, do not eat!"&lt;/i&gt;&lt;/color&gt;</KT_kebabseal.description>
+  
+  <KT_ammobox.label>"Decoration" Ammo Crate</KT_ammobox.label>
+  <KT_ammobox.description>For safety reasons, the shells inside have been replaced with proportional foam toys.</KT_ammobox.description>
+  
+  <KT_missile_racks.label>"Decoration" Missile Rack</KT_missile_racks.label>
+  <KT_missile_racks.description>Decorative missiles, the warheads contain only sand, but what you don't know is that our ancestors actually used giant missile colonization ships to land on new worlds.</KT_missile_racks.description>
+  
+  <KT_Barricade.label>"Defense" Tactical Barricade</KT_Barricade.label>
+  <KT_Barricade.description>This sturdy barricade provides cover for personnel, features built-in lighting, and is designed to block incoming bullets while maintaining an aesthetically pleasing appearance. The only issue is that the Pact Nation citizens it originated from were generally quite tall, but fortunately there's a step at the edge allowing colonists to use it. The barricade will block certain animals like a fence would.</KT_Barricade.description>
+  
+  
+  <KT_wallTV.label>「Entertainment」Wall-Mounted Display</KT_wallTV.label>
+  <KT_wallTV.description>Wall-mounted displays can present various data to colonists in an intuitive manner, though 99% of the time they are used as televisions. </KT_wallTV.description>
+  
+  <!-- Building Category: Functional -->
+  
+  <KT_UFGenerator.label>Hyperdimensional Power Station</KT_UFGenerator.label>
+  <KT_UFGenerator.description>Actually, there's no technological structure inside this device - it's completely solid iron. The power generation effect is entirely produced by direct connection to hyperdimensional entities, the shell is just decoration.</KT_UFGenerator.description>
+  
+  <KT_Workbench.label>3D Printing Workbench</KT_Workbench.label>
+  <KT_Workbench.description>According to the operation manual recorded in historical texts, this workbench can theoretically print anything with corresponding resources, even living creatures! However, due to Pact Nation treaty restrictions, pact nations can only use design blueprints approved by UF Headquarters. But some mischievous hyperdimensional entity made it possible for this workbench in the rimworld to also print delicious nutrient paste.\n&lt;color=#FFAA00&gt;&lt;i&gt;By the way, our rimworld colonists love watching the 3D printing process so much that they won't leave the machine while it's working.&lt;/i&gt;&lt;/color&gt;</KT_Workbench.description>
+  
+  <KT_SWorkbench.label>3D Printing Workbench (Equipment)</KT_SWorkbench.label>
+  <KT_SWorkbench.description>Apart from its size, there is almost no difference from the other large 3D printing workbench, but this one is specifically used for printing apparel-type equipment. (Actually, the MOD author thought one machine produced too many items and found it tedious to scroll through them all.)\n&lt;color=#FFAA00&gt;&lt;i&gt;By the way, our RimWorld colonists love watching the 3D printing process so much that they won't leave the machine while it's working.&lt;/i&gt;&lt;/color&gt;</KT_SWorkbench.description>
+  
+  <KT_Maintenance_Station.label>Nanotechnology Maintenance Station</KT_Maintenance_Station.label>
+  <KT_Maintenance_Station.description>This structure nominally deploys maintenance nanobots from its top to provide continuous repair and durability enhancement for buildings and items within its range that are designated as residential zones. However, in essence, it remains merely a glowing metal box with no internal technological components.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;This structure increases the durability of items and buildings to 1.5 times their original durability + 200 (e.g., a wall with 500 HP will be enhanced to 1200).&lt;/i&gt;&lt;/color&gt;\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Equipment worn by player faction colonists can be automatically repaired, but durability values will only increase when items are placed on the ground.&lt;/i&gt;&lt;/color&gt;</KT_Maintenance_Station.description>
+</LanguageData>

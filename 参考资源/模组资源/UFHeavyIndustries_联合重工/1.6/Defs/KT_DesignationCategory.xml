@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!--设计界面-->
+  <DesignationCategoryDef>
+    <defName>KT_designation_group</defName>
+    <label>KT_designation_group</label>
+    <order>5</order>
+    <specialDesignatorClasses>
+      <li>Designator_Cancel</li>
+      <li>Designator_Deconstruct</li>
+    </specialDesignatorClasses>
+  </DesignationCategoryDef>
+</Defs>

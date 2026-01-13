@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: KT_Battle_walker_main_autogun -->
+  <KT_Battle_walker_main_autogun.label>「铁靴」57MM自动机炮</KT_Battle_walker_main_autogun.label>
+  <!-- EN: KT_Battle_walker_main_autogun -->
+  <KT_Battle_walker_main_autogun.description>先锋级步行机可选的机炮，可以压制步兵集群。</KT_Battle_walker_main_autogun.description>
+  <!-- EN: Trample -->
+  <KT_Battle_walker_main_autogun.tools.Trample.label>踩踏</KT_Battle_walker_main_autogun.tools.Trample.label>
+  <!-- EN: KT_Battle_walker_main_autogun -->
+  <KT_Battle_walker_main_autogun.verbs.Verb_Shoot.label>踩踏</KT_Battle_walker_main_autogun.verbs.Verb_Shoot.label>
+  
+  <!-- EN: KT_Battle_walker_main_gatling_gun -->
+  <KT_Battle_walker_main_gatling_gun.label>「火神」14.5MM加特机枪</KT_Battle_walker_main_gatling_gun.label>
+  <!-- EN: KT_Battle_walker_main_gatling_gun -->
+  <KT_Battle_walker_main_gatling_gun.description>先锋级步行机可选的重型机枪，适合对付轻甲单位。</KT_Battle_walker_main_gatling_gun.description>
+  <!-- EN: Trample -->
+  <KT_Battle_walker_main_gatling_gun.tools.Trample.label>踩踏</KT_Battle_walker_main_gatling_gun.tools.Trample.label>
+  <!-- EN: KT_Battle_walker_main_gatling_gun -->
+  <KT_Battle_walker_main_gatling_gun.verbs.Verb_Shoot.label>踩踏</KT_Battle_walker_main_gatling_gun.verbs.Verb_Shoot.label>
+  
+  <!-- EN: KT_Bullet_Battle_walker_main_autogun -->
+  <KT_Bullet_Battle_walker_main_autogun.label>「铁靴」57MM自动机炮</KT_Bullet_Battle_walker_main_autogun.label>
+  <KT_Bullet_Battle_walker_main_autogun.description>「铁靴」57MM自动机炮</KT_Bullet_Battle_walker_main_autogun.description>
+  
+  <!-- EN: KT_Bullet_Battle_walker_main_gatling_gun -->
+  <KT_Bullet_Battle_walker_main_gatling_gun.label>「火神」14.5MM加特机枪</KT_Bullet_Battle_walker_main_gatling_gun.label>
+  
+  <!-- EN: KT_Bullet_Main_battlewalker_machinegunn -->
+  <KT_Bullet_Main_battlewalker_machinegunn.label>「护卫犬」反人员机枪</KT_Bullet_Main_battlewalker_machinegunn.label>
+  <KT_Bullet_Main_battlewalker_machinegunn.description>「护卫犬」反人员机枪</KT_Bullet_Main_battlewalker_machinegunn.description>
+  
+  <!-- EN: KT_Bullet_Main_battlewalker_main_gun -->
+  <KT_Bullet_Main_battlewalker_main_gun.label>「战锤」203MM主炮</KT_Bullet_Main_battlewalker_main_gun.label>
+  <KT_Bullet_Main_battlewalker_main_gun.description>「战锤」203MM主炮</KT_Bullet_Main_battlewalker_main_gun.description>
+  
+  <!-- EN: KT_Main_battlewalker -->
+  <KT_Main_battlewalker.label>「先锋」战斗步行机</KT_Main_battlewalker.label>
+  <!-- EN: KT_Main_battlewalker -->
+  <KT_Main_battlewalker.description>某公约国使用的中小型无人步行机，标配拥有威力巨大的湮灭导弹，反人员机枪和EMP迫击炮，同时可以选择多种挂载方案应对不同的战术需求，同时护盾发生器和承伤立场可以很好的弥补机体脆弱的问题，在某些极端情况下甚至可以正面抗下一轮来自舰娘的火力打击</KT_Main_battlewalker.description>
+  <!-- EN: Trample -->
+  <KT_Main_battlewalker.tools.Trample.label>碾压</KT_Main_battlewalker.tools.Trample.label>
+  
+  <!-- EN: KT_Main_battlewalker_EMPlauncher -->
+  <KT_Main_battlewalker_EMPlauncher.label>「安眠曲」EMP迫击炮</KT_Main_battlewalker_EMPlauncher.label>
+  <!-- EN: KT_Main_battlewalker_EMPlauncher -->
+  <KT_Main_battlewalker_EMPlauncher.description>先锋级步行机标配的EMP曲射火力，用于压制大片机械单位。</KT_Main_battlewalker_EMPlauncher.description>
+  <!-- EN: KT_Main_battlewalker_EMPlauncher -->
+
+  
+  <!-- EN: KT_Main_battlewalker_machinegun -->
+  <KT_Main_battlewalker_machinegun.label>「护卫犬」反人员机枪</KT_Main_battlewalker_machinegun.label>
+  <!-- EN: KT_Main_battlewalker_machinegun -->
+  <KT_Main_battlewalker_machinegun.description>先锋级步行机标配的反人员重型机枪，通过凶悍的火力阻止轻目标单位靠近。</KT_Main_battlewalker_machinegun.description>
+  <!-- EN: KT_Main_battlewalker_machinegun -->
+  
+  <!-- EN: KT_Main_battlewalker_main_gun -->
+  <KT_Main_battlewalker_main_gun.label>「战锤」203MM主炮</KT_Main_battlewalker_main_gun.label>
+  <!-- EN: KT_Main_battlewalker_main_gun -->
+  <KT_Main_battlewalker_main_gun.description>先锋级步行机可选的远程火炮挂载，使其拥有与重型单位硬碰硬的资本，而且炮弹命中后会二次爆炸，增大杀伤范围。</KT_Main_battlewalker_main_gun.description>
+  <!-- EN: Trample -->
+  <KT_Main_battlewalker_main_gun.tools.Trample.label>碾压</KT_Main_battlewalker_main_gun.tools.Trample.label>
+  <!-- EN: KT_Main_battlewalker_main_gun -->
+  <KT_Main_battlewalker_main_gun.verbs.Verb_Shoot.label>碾压</KT_Main_battlewalker_main_gun.verbs.Verb_Shoot.label>
+  
+
+  <Proj_kt_doommissile.label>湮灭导弹</Proj_kt_doommissile.label>
+  
+  
+  <KT_Main_battlewalker_war_tramples.label>战争践踏</KT_Main_battlewalker_war_tramples.label>
+  <KT_Main_battlewalker_war_tramples.description>哇还真的有人闲着没事点开看，既然都被你看到了，这个单位实现近战碾压效果靠的是一个透明的无特效爆炸副炮炮塔。而且有敌我识别，非常智能哦！</KT_Main_battlewalker_war_tramples.description>
+
+  <KT_Bullet_Main_battlewalker_war_tramples.label>战争践踏</KT_Bullet_Main_battlewalker_war_tramples.label>
+  <KT_Bullet_Main_battlewalker_war_tramples.description>战争践踏</KT_Bullet_Main_battlewalker_war_tramples.description>
+  
+</LanguageData>

@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+    <ResearchTabDef>
+        <defName>KT_Research</defName>
+        <label>KT_Research</label>
+    </ResearchTabDef>
+
+    <ResearchProjectDef Name="KT_ResearchProject_low_Base" Abstract="true">
+        <techLevel>Spacer</techLevel>
+        <tab>KT_Research</tab>
+    </ResearchProjectDef>
+	
+    <ResearchProjectDef Name="KT_ResearchProject_high_Base" Abstract="true">
+        <techLevel>Spacer</techLevel>
+        <tab>KT_Research</tab>
+	<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+	<requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+    </ResearchProjectDef>
+	
+    <!--T0基础炮塔-->
+    <ResearchProjectDef ParentName="KT_ResearchProject_low_Base">
+        <defName>KT_Base_t0_turret</defName>
+        <label>KT_Base_t0_turret</label>
+        <description>KT_Base_t0_turret</description>
+        <baseCost>1000</baseCost>
+        <researchViewX>0</researchViewX>
+        <researchViewY>0</researchViewY>
+    </ResearchProjectDef>
+	
+	<!--T1基础炮塔-->
+	<ResearchProjectDef ParentName="KT_ResearchProject_low_Base">
+        <defName>KT_Base_t1_turret</defName>
+        <label>KT_Base_t1_turret</label>
+        <description>KT_Base_t1_turret</description>
+        <prerequisites>
+            <li>KT_Base_t0_turret</li>
+        </prerequisites>
+        <baseCost>1500</baseCost>
+        <researchViewX>1</researchViewX>
+        <researchViewY>0</researchViewY>
+    </ResearchProjectDef>
+	
+	<!--T2炮塔-火炮-->
+	<ResearchProjectDef ParentName="KT_ResearchProject_high_Base">
+        <defName>KT_Base_t2_Artillery_turret</defName>
+        <label>KT_Base_t2_Artillery_turret</label>
+        <description>KT_Base_t2_Artillery_turret</description>
+        <prerequisites>
+            <li>KT_Base_t1_turret</li>
+        </prerequisites>
+        <baseCost>2000</baseCost>
+        <researchViewX>2</researchViewX>
+        <researchViewY>0</researchViewY>
+    </ResearchProjectDef>
+	
+	<!--T2炮塔-能量-->
+	<ResearchProjectDef ParentName="KT_ResearchProject_high_Base">
+        <defName>KT_Base_t2_energy_turret</defName>
+        <label>KT_Base_t2_energy_turret</label>
+        <description>KT_Base_t2_energy_turret</description>
+        <prerequisites>
+            <li>KT_Base_t1_turret</li>
+        </prerequisites>
+        <baseCost>2000</baseCost>
+        <researchViewX>2</researchViewX>
+        <researchViewY>0.7</researchViewY>
+    </ResearchProjectDef>
+	
+	<!--T2炮塔-磁轨-->
+	<ResearchProjectDef ParentName="KT_ResearchProject_high_Base">
+        <defName>KT_Base_t2_rail_turret</defName>
+        <label>KT_Base_t2_rail_turret</label>
+        <description>KT_Base_t2_rail_turret</description>
+        <prerequisites>
+            <li>KT_Base_t1_turret</li>
+        </prerequisites>
+        <baseCost>3000</baseCost>
+        <researchViewX>2</researchViewX>
+        <researchViewY>1.4</researchViewY>
+    </ResearchProjectDef>
+	
+	<!--T3炮塔-火炮-->
+	<ResearchProjectDef ParentName="KT_ResearchProject_high_Base">
+        <defName>KT_Base_t3_Artillery_turret</defName>
+        <label>KT_Base_t3_Artillery_turret</label>
+        <description>KT_Base_t3_Artillery_turret</description>
+        <prerequisites>
+            <li>KT_Base_t2_Artillery_turret</li>
+        </prerequisites>
+        <baseCost>3000</baseCost>
+        <researchViewX>3</researchViewX>
+        <researchViewY>0</researchViewY>
+    </ResearchProjectDef>
+	
+	<!--T3炮塔-能量-->
+	<ResearchProjectDef ParentName="KT_ResearchProject_high_Base">
+        <defName>KT_Base_t3_energy_turret</defName>
+        <label>KT_Base_t3_energy_turret</label>
+        <description>KT_Base_t3_energy_turret</description>
+        <prerequisites>
+            <li>KT_Base_t2_energy_turret</li>
+        </prerequisites>
+        <baseCost>3000</baseCost>
+        <researchViewX>3</researchViewX>
+        <researchViewY>0.7</researchViewY>
+    </ResearchProjectDef>
+	
+	<!--T3炮塔-磁轨-->
+	<ResearchProjectDef ParentName="KT_ResearchProject_high_Base">
+        <defName>KT_Base_t3_rail_turret</defName>
+        <label>KT_Base_t3_rail_turret</label>
+        <description>KT_Base_t3_rail_turret</description>
+        <prerequisites>
+            <li>KT_Base_t2_rail_turret</li>
+        </prerequisites>
+        <baseCost>3000</baseCost>
+        <researchViewX>3</researchViewX>
+        <researchViewY>1.4</researchViewY>
+    </ResearchProjectDef>
+	
+	<!--T4炮塔-火炮-->
+	<ResearchProjectDef ParentName="KT_ResearchProject_high_Base">
+        <defName>KT_Base_t4_Artillery_turret</defName>
+        <label>KT_Base_t4_Artillery_turret</label>
+        <description>KT_Base_t4_Artillery_turret</description>
+        <prerequisites>
+            <li>KT_Base_t3_Artillery_turret</li>
+        </prerequisites>
+        <baseCost>5000</baseCost>
+        <researchViewX>4</researchViewX>
+        <researchViewY>0</researchViewY>
+    </ResearchProjectDef>
+	
+	<!--T4炮塔-能量-->
+	<ResearchProjectDef ParentName="KT_ResearchProject_high_Base">
+        <defName>KT_Base_t4_energy_turret</defName>
+        <label>KT_Base_t4_energy_turret</label>
+        <description>KT_Base_t4_energy_turret</description>
+        <prerequisites>
+            <li>KT_Base_t3_energy_turret</li>
+        </prerequisites>
+        <baseCost>5000</baseCost>
+        <researchViewX>4</researchViewX>
+        <researchViewY>0.7</researchViewY>
+    </ResearchProjectDef>
+	
+	<!--T4炮塔-磁轨-->
+	<ResearchProjectDef ParentName="KT_ResearchProject_high_Base">
+        <defName>KT_Base_t4_rail_turret</defName>
+        <label>KT_Base_t4_rail_turret</label>
+        <description>KT_Base_t4_rail_turret</description>
+        <prerequisites>
+            <li>KT_Base_t3_rail_turret</li>
+        </prerequisites>
+        <baseCost>5000</baseCost>
+        <researchViewX>4</researchViewX>
+        <researchViewY>1.4</researchViewY>
+    </ResearchProjectDef>
+	
+	<!--T5炮塔-能量-->
+	<ResearchProjectDef ParentName="KT_ResearchProject_high_Base">
+        <defName>KT_Base_t5_energy_turret</defName>
+        <label>KT_Base_t5_energy_turret</label>
+        <description>KT_Base_t5_energy_turret</description>
+        <prerequisites>
+            <li>KT_Base_t4_energy_turret</li>
+        </prerequisites>
+        <baseCost>7000</baseCost>
+        <researchViewX>5</researchViewX>
+        <researchViewY>0.7</researchViewY>
+    </ResearchProjectDef>
+	
+    <!--工作台-->
+    <ResearchProjectDef ParentName="KT_ResearchProject_low_Base">
+        <defName>KT_Base_Workbench</defName>
+        <label>KT_Base_Workbench</label>
+        <description>KT_Base_Workbench</description>
+        <baseCost>2000</baseCost>
+        <researchViewX>0</researchViewX>
+        <researchViewY>2.8</researchViewY>
+		<prerequisites>
+            <li>Gunsmithing</li>
+        </prerequisites>
+    </ResearchProjectDef>
+	
+	<!--T1武器-->
+    <ResearchProjectDef ParentName="KT_ResearchProject_low_Base">
+        <defName>KT_Base_t1_weapon</defName>
+        <label>KT_Base_t1_weapon</label>
+        <description>KT_Base_t1_weapon</description>
+        <baseCost>2000</baseCost>
+        <researchViewX>1</researchViewX>
+        <researchViewY>2.8</researchViewY>
+		<prerequisites>
+            <li>KT_Base_Workbench</li>
+        </prerequisites>
+    </ResearchProjectDef>	
+
+	<!--T2武器-->
+    <ResearchProjectDef ParentName="KT_ResearchProject_high_Base">
+        <defName>KT_Base_t2_weapon</defName>
+        <label>KT_Base_t2_weapon</label>
+        <description>KT_Base_t2_weapon</description>
+        <baseCost>3000</baseCost>
+        <researchViewX>2</researchViewX>
+        <researchViewY>2.8</researchViewY>
+		<prerequisites>
+            <li>KT_Base_t1_weapon</li>
+        </prerequisites>
+    </ResearchProjectDef>	
+	
+	    <!--T3武器-->
+    <ResearchProjectDef ParentName="KT_ResearchProject_high_Base">
+        <defName>KT_Base_t3_weapon</defName>
+        <label>KT_Base_t3_weapon</label>
+        <description>KT_Base_t3_weapon</description>
+        <baseCost>4000</baseCost>
+        <researchViewX>3</researchViewX>
+        <researchViewY>2.8</researchViewY>
+		<prerequisites>
+            <li>KT_Base_t2_weapon</li>
+        </prerequisites>
+    </ResearchProjectDef>
+	
+	<!--T3等离子武器-->
+    <ResearchProjectDef ParentName="KT_ResearchProject_high_Base">
+        <defName>KT_Base_t3_plasma_weapon</defName>
+        <label>KT_Base_t3_plasma_weapon</label>
+        <description>KT_Base_t3_plasma_weapon</description>
+        <baseCost>4000</baseCost>
+        <researchViewX>3</researchViewX>
+        <researchViewY>3.5</researchViewY>
+		<prerequisites>
+            <li>KT_Base_t3_weapon</li>
+        </prerequisites>
+    </ResearchProjectDef>	
+			
+	<!--T4武器-->
+    <ResearchProjectDef ParentName="KT_ResearchProject_high_Base">
+        <defName>KT_Base_t4_weapon</defName>
+        <label>KT_Base_t4_weapon</label>
+        <description>KT_Base_t4_weapon</description>
+        <baseCost>5000</baseCost>
+        <researchViewX>4</researchViewX>
+        <researchViewY>3.5</researchViewY>
+		<prerequisites>
+            <li>KT_Base_t3_weapon</li>
+			<li>KT_Base_t3_plasma_weapon</li>
+        </prerequisites>
+    </ResearchProjectDef>	
+	
+	<!--铁光环-->
+    <ResearchProjectDef ParentName="KT_ResearchProject_high_Base">
+        <defName>KT_Base_backpack</defName>
+        <label>KT_Base_backpack</label>
+        <description>KT_Base_backpack</description>
+        <baseCost>4000</baseCost>
+        <researchViewX>1</researchViewX>
+        <researchViewY>3.5</researchViewY>
+		<prerequisites>
+            <li>KT_Shield</li>
+			<li>KT_Base_Workbench</li>
+        </prerequisites>
+    </ResearchProjectDef>	
+	
+	
+	<!--装甲-->
+    <ResearchProjectDef ParentName="KT_ResearchProject_high_Base">
+        <defName>KT_Base_armor</defName>
+        <label>KT_Base_armor</label>
+        <description>KT_Base_armor</description>
+        <baseCost>5000</baseCost>
+        <researchViewX>3</researchViewX>
+        <researchViewY>2.1</researchViewY>
+		<prerequisites>
+            <li>KT_Base_t3_weapon</li>
+			<li>PoweredArmor</li>
+        </prerequisites>
+    </ResearchProjectDef>	
+	
+	<!--武天使-->
+	<ResearchProjectDef ParentName="KT_ResearchProject_high_Base">
+        <defName>KT_Jetpack</defName>
+        <label>‘War Angel’ Turbine-Jet Flying Backpack</label>
+        <description>This flight backpack was originally designed to foster family harmony. In nations adhering to the Multi-Species Convention, it assists non-flying races in achieving companion flight when marrying members of flying races. However, in the Outer Worlds, a certain indigenous church has developed a keen interest in it. \n\n&lt;color=#FFAA00&gt;&lt;i&gt;Compensation for incidents such as crashes, collisions with walls, or singed feathers, tails, or hair occurring during use of this product shall be provided within 5,500 standard years. ——‘War Angel’ After-Sales Commitment&lt;/i&gt;&lt;/color&gt;</description>
+        <prerequisites>
+            <li>ShieldBelt</li>
+			<li>KT_Base_Workbench</li>
+        </prerequisites>
+        <baseCost>2000</baseCost>
+        <researchViewX>0</researchViewX>
+        <researchViewY>3.5</researchViewY>
+    </ResearchProjectDef>
+	
+	<!--天际线地平线-->
+	<ResearchProjectDef ParentName="KT_ResearchProject_low_Base">
+        <defName>KT_Shield</defName>
+        <label>KT_Shield</label>
+        <description>KT_Shield</description>
+        <prerequisites>
+            <li>ShieldBelt</li>
+        </prerequisites>
+        <baseCost>2000</baseCost>
+        <researchViewX>0</researchViewX>
+        <researchViewY>4.2</researchViewY>
+    </ResearchProjectDef>
+	
+	<!--AT立场-->
+	<ResearchProjectDef ParentName="KT_ResearchProject_high_Base">
+        <defName>KT_Shield_AT</defName>
+        <label>KT_Shield_AT</label>
+        <description>KT_Shield_AT</description>
+        <prerequisites>
+            <li>KT_Shield</li>
+        </prerequisites>
+        <baseCost>4000</baseCost>
+        <researchViewX>1</researchViewX>
+        <researchViewY>4.2</researchViewY>
+    </ResearchProjectDef>
+    
+	<ResearchProjectDef ParentName="KT_ResearchProject_low_Base">
+        <defName>KT_UFGenerator_small_tech</defName>
+        <label>KT_UFGenerator_small_tech</label>
+        <description>KT_UFGenerator_small_tech</description>
+        <prerequisites>
+            <li>Fabrication</li>
+        </prerequisites>
+        <baseCost>1500</baseCost>
+        <researchViewX>2</researchViewX>
+        <researchViewY>4.2</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="KT_ResearchProject_high_Base">
+        <defName>KT_UFGenerator_tech</defName>
+        <label>KT_UFGenerator_tech</label>
+        <description>KT_UFGenerator_tech</description>
+        <prerequisites>
+            <li>KT_UFGenerator_small_tech</li>
+        </prerequisites>
+        <baseCost>4000</baseCost>
+        <researchViewX>3</researchViewX>
+        <researchViewY>4.2</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="KT_ResearchProject_high_Base">
+        <defName>KT_Maintenance_Station_tech</defName>
+        <label>KT_Maintenance_Station_tech</label>
+        <description>KT_Maintenance_Station_tech</description>
+        <prerequisites>
+            <li>Fabrication</li>
+        </prerequisites>
+        <baseCost>5000</baseCost>
+        <researchViewX>4</researchViewX>
+        <researchViewY>4.2</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="KT_ResearchProject_high_Base">
+        <defName>KT_Communication_tech</defName>
+        <label>KT_Communication_tech</label>
+        <description>KT_Communication_tech</description>
+
+        <baseCost>4000</baseCost>
+        <researchViewX>0</researchViewX>
+        <researchViewY>4.9</researchViewY>
+    </ResearchProjectDef>
+	
+	
+	<ResearchProjectDef ParentName="KT_ResearchProject_high_Base">
+        <defName>KT_chip_tech</defName>
+        <label>KT_chip_tech</label>
+        <description>KT_chip_tech</description>
+        <prerequisites>
+            <li>KT_Communication_tech</li>
+        </prerequisites>
+        <baseCost>5000</baseCost>
+        <researchViewX>1</researchViewX>
+        <researchViewY>4.9</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="KT_ResearchProject_high_Base">
+        <defName>KT_Orbital_bombardment_tech</defName>
+        <label>KT_Orbital_bombardment_tech</label>
+        <description>KT_Orbital_bombardment_tech</description>
+        <prerequisites>
+            <li>KT_Communication_tech</li>
+        </prerequisites>
+        <baseCost>7000</baseCost>
+        <researchViewX>2</researchViewX>
+        <researchViewY>4.9</researchViewY>
+    </ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="KT_ResearchProject_high_Base">
+        <defName>KT_Mecha_tech</defName>
+        <label>KT_Mecha_tech</label>
+        <description>KT_Mecha_tech</description>
+        <prerequisites>
+            <li>KT_Communication_tech</li>
+			<li>BasicMechtech</li>
+        </prerequisites>
+        <baseCost>5000</baseCost>
+        <researchViewX>1</researchViewX>
+        <researchViewY>5.6</researchViewY>
+    </ResearchProjectDef>
+</Defs>

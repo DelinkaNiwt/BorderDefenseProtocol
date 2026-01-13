@@ -1,0 +1,1926 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Defs>
+  <!-- 特殊武器矛枪 -->
+  <ThingDef ParentName="KT_BaseMakeableGun" Name="KT_SPEAR">
+    <defName>KT_SPEAR</defName>
+    <label>KT_SPEAR</label>
+    <description>KT_SPEAR</description>
+    <graphicData>
+      <texPath>Things/Weapons/KT_SPEAR</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>2</drawSize> <!-- 贴图大小 -->
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+    <tradeability>None</tradeability>
+    <generateAllowChance>0</generateAllowChance>
+    <generateCommonality>0</generateCommonality>
+    <relicChance>0</relicChance>
+    <statBases>
+      <WorkToMake>80000</WorkToMake>
+      <Mass>10</Mass>
+      <AccuracyTouch>1</AccuracyTouch>
+      <AccuracyShort>1</AccuracyShort>
+      <AccuracyMedium>1</AccuracyMedium>
+      <AccuracyLong>1</AccuracyLong>
+      <RangedWeapon_Cooldown>1.2</RangedWeapon_Cooldown>
+    </statBases>
+    <costList>
+	  <KT_steel>50</KT_steel>
+      <Plasteel>40</Plasteel>
+	  <Gold>20</Gold>
+	  <ComponentIndustrial>10</ComponentIndustrial>
+	  <ComponentSpacer>6</ComponentSpacer>
+    </costList>
+	
+    <recipeMaker>
+      <researchPrerequisite>KT_Base_t4_weapon</researchPrerequisite>
+      <skillRequirements>
+        <Crafting>15</Crafting>
+      </skillRequirements>
+      <recipeUsers Inherit="True">
+        <li>KT_Workbench</li>
+      </recipeUsers>
+      <displayPriority>500</displayPriority>
+    </recipeMaker>
+    <techLevel>Ultra</techLevel>
+    <weaponTags>
+      <li>WeaponBeamRepeater</li>
+	  <li>KT_weapon</li>
+    </weaponTags>
+
+    <weaponClasses>
+	  <li>Melee</li>
+      <li>RangedHeavy</li>
+    </weaponClasses>
+	
+	<comps>
+	  <li Class="SRA.CompProperties_WeaponRenderDynamic">
+		<TexturePath>Things/Weapons/KT_SPEAR_light</TexturePath>
+		<totalFrames>4</totalFrames>
+		<ticksPerFrame>2</ticksPerFrame>
+	  </li>
+    </comps>
+	<drawerType>MapMeshAndRealTime</drawerType>
+	<uiIconPath>Things/Weapons/KT_SPEAR_icon</uiIconPath>
+	<equippedStatOffsets>
+		<MoveSpeed>0.2</MoveSpeed>
+		<ShootingAccuracyPawn>100</ShootingAccuracyPawn>
+	</equippedStatOffsets>
+	
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_KT_SPEAR</defaultProjectile>
+        <warmupTime>1</warmupTime>
+        <range>60</range>
+		<burstShotCount>1</burstShotCount>
+        <soundCast>KT_Beamflashlight_heavy</soundCast>
+        <soundCastTail>GunTail_Medium</soundCastTail>
+        <muzzleFlashScale>15</muzzleFlashScale>
+        <aimingChargeMote>Mote_BeamRepeater_Charge</aimingChargeMote>
+        <aimingChargeMoteOffset>0.1</aimingChargeMoteOffset>
+      </li>
+    </verbs>	
+	<tools>
+		<li>
+			<label>edge</label>
+			<capacities>
+				<li>KT_Melee_AOE_II</li>
+			</capacities>
+			<power>150</power>
+			<cooldownTime>1.2</cooldownTime>
+			<armorPenetration>2</armorPenetration>
+			<extraMeleeDamages>
+          		<li>
+            		<def>EMP</def>
+        			<amount>25</amount>
+        		</li>
+			</extraMeleeDamages>
+		</li>
+		<li>
+			<label>edge</label>
+			<capacities>
+				<li>KT_Melee_AOE</li>
+			</capacities>
+			<power>120</power>
+			<cooldownTime>0.8</cooldownTime>
+			<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+			<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+			<armorPenetration>2</armorPenetration>
+			<extraMeleeDamages>
+          		<li>
+            		<def>EMP</def>
+        			<amount>25</amount>
+        		</li>
+			</extraMeleeDamages>
+		</li>
+	</tools>
+  </ThingDef>
+  
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_KT_SPEAR</defName>
+    <label>Bullet_KT_SPEAR</label>
+    <thingClass>SRA.Projectile_MultiExplosive_Beam</thingClass>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_KT_flashlight</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>KT_Beamflashlight</damageDef>
+	  <explosionRadius>1.5</explosionRadius>
+      <damageAmountBase>100</damageAmountBase>
+      <beamMoteDef>KT_Beamflashlight_heavy</beamMoteDef>
+      <beamStartOffset>0</beamStartOffset>
+      <armorPenetrationBase>1.2</armorPenetrationBase>
+	  <stoppingPower>2</stoppingPower>
+    </projectile>
+    
+    <modExtensions>
+      <li Class="SRA.MultiExplosive_BeamExtension">
+        <MultiExplosive_Beams>
+          <li>
+            <radius>1.5</radius>
+            <damageDef>KTREDomb</damageDef>
+            <damageAmount>50</damageAmount>
+            <armorPenetration>0.8</armorPenetration>
+            <explosionSound>Explosion_Bomb</explosionSound>
+            <explosionDamageFalloff>true</explosionDamageFalloff><!-- 默认true -->
+            <onlyAntiHostile>false</onlyAntiHostile> <!-- 智能弹药：这个爆炸只伤害敌对目标，默认false -->
+          </li>
+        </MultiExplosive_Beams>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  <!-- 特殊武器激光阵列枪-->
+  <ThingDef ParentName="KT_BaseMakeableGun" Name="KTLaserArraygun">
+    <defName>KTLaserArraygun</defName>
+    <label>KTLaserArraygun</label>
+    <description>KTLaserArraygun</description>
+    <graphicData>
+      <texPath>Things/Weapons/KTLaserArraygun</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>1.5</drawSize> <!-- 贴图大小 -->
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+    <tradeability>None</tradeability>
+    <generateAllowChance>0</generateAllowChance>
+    <generateCommonality>0</generateCommonality>
+    <relicChance>0</relicChance>
+    <statBases>
+      <WorkToMake>80000</WorkToMake>
+      <Mass>10</Mass>
+      <AccuracyTouch>0.65</AccuracyTouch>
+      <AccuracyShort>0.3</AccuracyShort>
+      <AccuracyMedium>0.2</AccuracyMedium>
+      <AccuracyLong>0.1</AccuracyLong>
+      <RangedWeapon_Cooldown>1</RangedWeapon_Cooldown>
+    </statBases>
+	
+	<comps>
+	  <li Class="SRA.CompProperties_WeaponRenderDynamic">
+		<TexturePath>Things/Weapons/KTLaserArraygun_light</TexturePath>
+		<totalFrames>4</totalFrames>
+		<ticksPerFrame>2</ticksPerFrame>
+	  </li>
+    </comps>
+	<drawerType>MapMeshAndRealTime</drawerType>
+	<uiIconPath>Things/Weapons/KTLaserArraygun_icon</uiIconPath>
+	
+    <costList>
+      <Plasteel>180</Plasteel>
+      <Steel>450</Steel>
+	  <Gold>20</Gold>
+	  <ComponentIndustrial>10</ComponentIndustrial>
+	  <ComponentSpacer>5</ComponentSpacer>
+    </costList>
+	
+    <recipeMaker>
+      <researchPrerequisite>KT_Base_t4_weapon</researchPrerequisite>
+      <skillRequirements>
+        <Crafting>15</Crafting>
+      </skillRequirements>
+      <recipeUsers Inherit="True">
+        <li>KT_Workbench</li>
+      </recipeUsers>
+      <displayPriority>500</displayPriority>
+    </recipeMaker>
+    <techLevel>Ultra</techLevel>
+    <weaponTags>
+      <li>WeaponBeamRepeater</li>
+	  <li>KT_weapon</li>
+    </weaponTags>
+
+    <weaponClasses>
+	  <li>Melee</li>
+      <li>RangedLight</li>
+    </weaponClasses>
+	
+	<equippedStatOffsets>
+		<MoveSpeed>0.1</MoveSpeed>
+		<StaggerDurationFactor>-1</StaggerDurationFactor>
+	</equippedStatOffsets>
+	
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_KTLaserArraygun</defaultProjectile>
+        <warmupTime>0.4</warmupTime>
+        <range>18</range>
+		<burstShotCount>45</burstShotCount>
+		<ticksBetweenBurstShots>0</ticksBetweenBurstShots>
+        <soundCast>KT_Beamflashlight_heavy</soundCast>
+        <soundCastTail>GunTail_Medium</soundCastTail>
+        <muzzleFlashScale>15</muzzleFlashScale>
+        <aimingChargeMote>Mote_BeamRepeater_Charge</aimingChargeMote>
+        <aimingChargeMoteOffset>0.1</aimingChargeMoteOffset>
+      </li>
+    </verbs>
+	<tools>
+      <li>
+        <label>edge</label>
+        <capacities>
+          <li>Cut</li>
+        </capacities>
+        <power>35</power>
+        <cooldownTime>0.7</cooldownTime>
+        <armorPenetration>1.2</armorPenetration>
+		<extraMeleeDamages>
+          <li>
+            <def>EMP</def>
+            <amount>10</amount>
+          </li>
+        </extraMeleeDamages>
+      </li>
+	</tools> 
+  </ThingDef>
+  
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_KTLaserArraygun</defName>
+    <label>Bullet_KTLaserArraygun</label>
+    <thingClass>SRA.Projectile_BeamWithEffect</thingClass>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_KT_flashlight</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>KT_Beamflashlight</damageDef>
+      <damageAmountBase>20</damageAmountBase>
+      <beamMoteDef>KT_Beamflashlight_heavy</beamMoteDef>
+      <beamStartOffset>0.5</beamStartOffset>
+      <armorPenetrationBase>1.70</armorPenetrationBase>
+	  <stoppingPower>1.0</stoppingPower>
+    </projectile>
+	<modExtensions>
+        <li Class="SRA.Projectile_BeamWithEffect_Extension">
+          <impactEffecter>KT_Laserhit_large</impactEffecter>
+        </li>
+    </modExtensions>
+  </ThingDef>
+  
+  
+  <ThingDef ParentName="KT_BaseMakeableGun" Name="KT_Plasmagun">
+    <defName>KT_Plasmagun</defName>
+    <label>KT_Plasmagun</label>
+    <description>KT_Plasmagun</description>
+    <graphicData>
+      <texPath>Things/Weapons/KT_Plasmagun</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+    <tradeability>None</tradeability>
+    <generateAllowChance>0</generateAllowChance>
+    <generateCommonality>0</generateCommonality>
+    <relicChance>0</relicChance>
+    <statBases>
+      <WorkToMake>70000</WorkToMake>
+      <Mass>8</Mass>
+      <AccuracyTouch>0.90</AccuracyTouch>
+      <AccuracyShort>0.80</AccuracyShort>
+      <AccuracyMedium>0.75</AccuracyMedium>
+      <AccuracyLong>0.65</AccuracyLong>
+      <RangedWeapon_Cooldown>0.9</RangedWeapon_Cooldown>
+    </statBases>
+    <costList>
+      <Plasteel>150</Plasteel>
+      <Steel>250</Steel>
+	  <Gold>25</Gold>
+	  <ComponentIndustrial>12</ComponentIndustrial>
+	  <ComponentSpacer>6</ComponentSpacer>
+    </costList>
+	<weaponTags>
+	  <li>KT_weapon</li>
+    </weaponTags>
+	<comps>
+	  <li Class="SRA.CompProperties_WeaponRenderDynamic">
+		<TexturePath>Things/Weapons/KT_Plasmagun_light</TexturePath>
+		<totalFrames>1</totalFrames>
+		<ticksPerFrame>1</ticksPerFrame>
+	  </li>
+    </comps>
+	<drawerType>MapMeshAndRealTime</drawerType>
+	
+    <recipeMaker>
+      <researchPrerequisite>KT_Base_t4_weapon</researchPrerequisite>
+      <skillRequirements>
+        <Crafting>15</Crafting>
+      </skillRequirements>
+      <recipeUsers Inherit="True">
+        <li>KT_Workbench</li>
+      </recipeUsers>
+      <displayPriority>500</displayPriority>
+    </recipeMaker>
+    <techLevel>Ultra</techLevel>
+
+    <weaponClasses>
+      <li>RangedHeavy</li>
+    </weaponClasses>
+	
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_KT_Plasmagun</defaultProjectile>
+        <warmupTime>0.8</warmupTime>
+        <range>45</range>
+		<burstShotCount>4</burstShotCount>
+		<ticksBetweenBurstShots>6</ticksBetweenBurstShots>
+        <soundCast>KTPLASMACANNONRound</soundCast>
+        <soundCastTail>GunTail_Light</soundCastTail>
+        <muzzleFlashScale>35</muzzleFlashScale>
+      </li>
+    </verbs>
+	<modExtensions>
+      <li Class="MuzzleFlash.MuzzleFlashProps" MayRequire="IssacZhuang.MuzzleFlash">
+        <def>MF_ChargedMuzzleFalsh</def>
+        <drawSize>(1)</drawSize>
+        <offsets>
+          <li>(0.4,0)</li>
+        </offsets>
+        <isAlternately>true</isAlternately>
+      </li>
+    </modExtensions>
+    <tools>
+      <li>
+        <label>barrels</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>15</power>
+        <cooldownTime>1.3</cooldownTime>
+      </li>
+    </tools>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_KT_Plasmagun</defName>
+    <label>Bullet_KT_Plasmagun</label>
+    <thingClass>SRA.Projectile_MultiExplosive</thingClass>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_kt_plasma</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>KTBLUEBomb</damageDef>
+        <explosionRadius>1</explosionRadius>
+        <speed>180</speed>
+        <damageAmountBase>40</damageAmountBase>
+        <arcHeightFactor>0</arcHeightFactor>
+        <soundExplode>Explosion_Rocket</soundExplode>
+		<flyOverhead>false</flyOverhead>
+		<armorPenetrationBase>1.4</armorPenetrationBase>
+		<stoppingPower>1.2</stoppingPower>
+    </projectile>
+	<modExtensions>
+		  <li Class="SRA.TailBulletDef">
+       		   <tailFleckDef>KT_Fleck_blue_particle_Tail_II</tailFleckDef>
+      	 	   <fleckMakeFleckTickMax>10</fleckMakeFleckTickMax><!-- 疑似无效 -->
+			   <fleckDelayTicks>5</fleckDelayTicks><!-- 出膛后多久出现轨迹 -->
+			   <fleckMakeFleckNum>1</fleckMakeFleckNum>
+     	    </li>
+          <li Class="SRA.MultiExplosiveExtension">
+         <multiexplosions>
+          <li>
+            <radius>1</radius>
+            <damageDef>KTBLUEBomb</damageDef>
+            <damageAmount>40</damageAmount>
+            <armorPenetration>1.4</armorPenetration>
+            <explosionSound>Explosion_Rocket</explosionSound>
+            <explosionDamageFalloff>true</explosionDamageFalloff><!-- 默认true -->
+            <onlyAntiHostile>false</onlyAntiHostile> <!-- 智能弹药：这个爆炸只伤害敌对目标，默认false -->
+            <!-- 现阶段就支持这么多参数 -->
+          </li>
+		  <li>
+			<radius>1.5</radius>
+			<damageDef>EMP</damageDef>
+			<damageAmount>50</damageAmount>
+			<armorPenetration>8</armorPenetration>
+			<explosionSound>Explosion_EMP</explosionSound>
+			<explosionDamageFalloff>true</explosionDamageFalloff>
+			<onlyAntiHostile>true</onlyAntiHostile>
+		  </li>
+        </multiexplosions>
+        <bulletLaunches>
+          <li>
+            <projectileDef>KT_Bullet_shield_overloader</projectileDef>
+            <bulletCount>2</bulletCount>
+            <angleRange>120</angleRange>
+            <distanceRange>
+              <min>1</min>
+              <max>1</max>
+            </distanceRange>
+          </li>
+        </bulletLaunches>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  
+  <ThingDef ParentName="KT_BaseMakeableGun" Name="KT_WSGW">
+    <defName>KT_WSGW</defName>
+    <label>KT_WSGW</label>
+    <description>KT_WSGW</description>
+    <graphicData>
+      <texPath>Things/Weapons/KT_WSGW</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>2</drawSize> <!-- 贴图大小 -->
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+    <tradeability>None</tradeability>
+    <generateAllowChance>0</generateAllowChance>
+    <generateCommonality>0</generateCommonality>
+    <relicChance>0</relicChance>
+    <statBases>
+      <WorkToMake>140000</WorkToMake>
+      <Mass>75</Mass>
+      <AccuracyTouch>1</AccuracyTouch>
+      <AccuracyShort>1</AccuracyShort>
+      <AccuracyMedium>1</AccuracyMedium>
+      <AccuracyLong>1</AccuracyLong>
+      <RangedWeapon_Cooldown>2</RangedWeapon_Cooldown>
+    </statBases>
+	<comps>
+	  <li Class="SRA.CompProperties_WeaponRenderDynamic">
+		<TexturePath>Things/Weapons/KT_WSGW_light</TexturePath>
+		<totalFrames>1</totalFrames>
+		<ticksPerFrame>1</ticksPerFrame>
+	  </li>
+    </comps>
+	<drawerType>MapMeshAndRealTime</drawerType>
+    <costList>
+      <KT_steel>100</KT_steel>
+	  <Gold>50</Gold>
+	  <Uranium>25</Uranium>
+	  <ComponentIndustrial>35</ComponentIndustrial>
+	  <ComponentSpacer>20</ComponentSpacer>
+    </costList>
+	<weaponTags>
+	  <li>KT_weapon</li>
+    </weaponTags>
+    <recipeMaker>
+      <researchPrerequisite>KT_Base_t4_weapon</researchPrerequisite>
+      <skillRequirements>
+        <Crafting>17</Crafting>
+      </skillRequirements>
+      <recipeUsers Inherit="True">
+        <li>KT_Workbench</li>
+      </recipeUsers>
+      <displayPriority>500</displayPriority>
+    </recipeMaker>
+    <techLevel>Ultra</techLevel>
+
+    <weaponClasses>
+      <li>RangedHeavy</li>
+    </weaponClasses>
+	
+	<equippedStatOffsets>
+		<MoveSpeed>-0.70</MoveSpeed>
+	</equippedStatOffsets>
+	
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_KT_WSGW</defaultProjectile>
+		<requireLineOfSight>false</requireLineOfSight>
+        <warmupTime>1.5</warmupTime>
+        <range>500</range>
+		<minRange>10</minRange>
+		<burstShotCount>1</burstShotCount>
+        <soundCast>KTSound_Cannonii</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>50</muzzleFlashScale>
+        <forcedMissRadius>0.1</forcedMissRadius>
+		<targetParams>
+			<canTargetLocations>true</canTargetLocations>
+		</targetParams>
+      </li>
+    </verbs>
+	<modExtensions>
+      <li Class="MuzzleFlash.MuzzleFlashProps" MayRequire="IssacZhuang.MuzzleFlash">
+        <def>MF_StandardMuzzleFalsh</def>
+        <drawSize>(1.2)</drawSize>
+        <offsets>
+          <li>(0.5,0.3)</li>
+        </offsets>
+        <isAlternately>true</isAlternately>
+      </li>
+    </modExtensions>
+	<tools>
+      <li>
+        <label>edge</label>
+        <capacities>
+          <li>Cut</li>
+        </capacities>
+        <power>50</power>
+        <cooldownTime>2</cooldownTime>
+        <armorPenetration>4</armorPenetration>
+      </li>
+	</tools> 
+  </ThingDef>
+  
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_KT_WSGW</defName>
+    <label>Bullet_KT_WSGW</label>
+    <thingClass>Projectile_Explosive</thingClass>
+        <category>Projectile</category>
+        <tickerType>Normal</tickerType>
+        <altitudeLayer>Projectile</altitudeLayer>
+        <graphicData>
+            <texPath>Things/Projectile/Bullet_100MM</texPath> <!-- 子弹贴图路径 -->
+            <graphicClass>Graphic_Single</graphicClass> <!-- 使用单一图形 -->
+			<shaderType>MoteGlow</shaderType>
+      		<drawSize>(3)</drawSize>
+        </graphicData>
+        <projectile>
+            <damageDef>Bomb</damageDef>
+            <explosionRadius>4</explosionRadius>
+            <speed>200</speed>
+            <damageAmountBase>450</damageAmountBase>
+            <arcHeightFactor>0</arcHeightFactor>
+            <soundExplode>Explosion_Rocket</soundExplode>
+			<flyOverhead>true</flyOverhead>
+			<stoppingPower>10</stoppingPower>
+        </projectile>
+	</ThingDef>
+	
+	<!-- 爆弹枪精工 -->
+  <ThingDef ParentName="KT_BaseMakeableGun" Name="KT_BoltgunP">
+    <defName>KT_BoltgunP</defName>
+    <label>KT_BoltgunP</label>
+    <description>KT_BoltgunP</description>
+    <graphicData>
+      <texPath>Things/Weapons/KT_BoltgunP</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>1.2</drawSize> <!-- 贴图大小 -->
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+    <tradeability>None</tradeability>
+    <generateAllowChance>0</generateAllowChance>
+    <generateCommonality>0</generateCommonality>
+    <relicChance>0</relicChance>
+    <statBases>
+      <WorkToMake>75000</WorkToMake>
+      <Mass>13</Mass>
+      <AccuracyTouch>0.95</AccuracyTouch>
+      <AccuracyShort>0.90</AccuracyShort>
+      <AccuracyMedium>0.88</AccuracyMedium>
+      <AccuracyLong>0.85</AccuracyLong>
+      <RangedWeapon_Cooldown>1.5</RangedWeapon_Cooldown>
+    </statBases>
+	<comps>
+	  <li Class="SRA.CompProperties_WeaponRenderDynamic">
+		<TexturePath>Things/Weapons/KT_BoltgunP_light</TexturePath>
+		<totalFrames>1</totalFrames>
+		<ticksPerFrame>1</ticksPerFrame>
+	  </li>
+    </comps>
+	<drawerType>MapMeshAndRealTime</drawerType>
+    <costList>
+      <Plasteel>180</Plasteel>
+      <Steel>300</Steel>
+	  <ComponentIndustrial>10</ComponentIndustrial>
+	  <ComponentSpacer>6</ComponentSpacer>
+	  <Gold>10</Gold>
+    </costList>
+	
+    <recipeMaker>
+      <researchPrerequisite>KT_Base_t4_weapon</researchPrerequisite>
+      <skillRequirements>
+        <Crafting>12</Crafting>
+      </skillRequirements>
+      <recipeUsers Inherit="True">
+        <li>KT_Workbench</li>
+      </recipeUsers>
+      <displayPriority>500</displayPriority>
+    </recipeMaker>
+    <techLevel>Spacer</techLevel>
+    <weaponTags>
+      <li>WeaponBeamRepeater</li>
+	  <li>KT_weapon</li>
+    </weaponTags>
+
+    <weaponClasses>
+      <li>LongShots</li>
+	  <li>RangedHeavy</li>
+    </weaponClasses>
+	
+	<equippedStatOffsets>
+      <MoveSpeed>-0.20</MoveSpeed>
+    </equippedStatOffsets>
+	
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_KT_BoltgunP</defaultProjectile>
+        <warmupTime>1.5</warmupTime>
+        <range>75</range>
+		<burstShotCount>2</burstShotCount>
+		<ticksBetweenBurstShots>12</ticksBetweenBurstShots>
+        <soundCast>KT_Boltgun</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>40</muzzleFlashScale>
+		<forcedMissRadius>0.01</forcedMissRadius>
+      </li>
+    </verbs>
+	<modExtensions>
+      <li Class="MuzzleFlash.MuzzleFlashProps" MayRequire="IssacZhuang.MuzzleFlash">
+        <def>MF_StandardMuzzleFalsh</def>
+        <drawSize>(0.75)</drawSize>
+        <offsets>
+          <li>(0.5,0)</li>
+        </offsets>
+        <isAlternately>true</isAlternately>
+      </li>
+    </modExtensions>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>12</power>
+        <cooldownTime>1.5</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>12</power>
+        <cooldownTime>1.2</cooldownTime>
+      </li>
+    </tools>
+  </ThingDef>
+  
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_KT_BoltgunP</defName>
+    <label>Bullet_KT_BoltgunP</label>
+    <thingClass>Projectile_Explosive</thingClass>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_kt_small_II</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>1.1</drawSize> <!-- 贴图大小 -->
+    </graphicData>
+    <projectile>
+      <damageDef>Bomb</damageDef>
+        <explosionRadius>1.2</explosionRadius>
+        <speed>220</speed>
+        <damageAmountBase>60</damageAmountBase>
+        <arcHeightFactor>0</arcHeightFactor>
+        <soundExplode>Explosion_Rocket</soundExplode>
+		<flyOverhead>false</flyOverhead>
+		<armorPenetrationBase>1.4</armorPenetrationBase>
+		<stoppingPower>1.1</stoppingPower>
+    </projectile>
+  </ThingDef>
+  
+  
+  <ThingDef ParentName="KT_MeleeWeapon_unmanufacturable">
+    <defName>KT_Folding_fan</defName>
+    <label>KT_Folding_fan</label>
+    <description>KT_Folding_fan</description>
+    <soundInteract>Interact_MonoSword</soundInteract>
+    <meleeHitSound>MeleeHit_MonoSword</meleeHitSound>
+	<techLevel>Ultra</techLevel>
+	<generateCommonality>0</generateCommonality>
+    <statBases>
+	  <WorkToMake>30000</WorkToMake>
+      <Mass>0.5</Mass>
+    </statBases>
+	
+    <weaponTags>
+	  <li>KT_weapon</li>
+    </weaponTags>
+	
+	<costList>
+		  <Steel>250</Steel>
+		  <Plasteel>550</Plasteel>
+		  <ComponentIndustrial>25</ComponentIndustrial>
+		  <ComponentSpacer>5</ComponentSpacer>
+	</costList>
+
+    <comps>
+	  <li Class="SRA.CompProperties_WeaponRenderDynamic">
+		<TexturePath>Things/Weapons/KT_Folding_fan_light</TexturePath>
+		<totalFrames>5</totalFrames>
+		<ticksPerFrame>2</ticksPerFrame>
+	  </li>
+    </comps>
+	<equippedStatOffsets>
+      <MoveSpeed>0.30</MoveSpeed>
+    </equippedStatOffsets>
+    <burnableByRecipe>false</burnableByRecipe>
+
+
+    <generateAllowChance>0</generateAllowChance>
+    <generateCommonality>0</generateCommonality>
+    <relicChance>0</relicChance>
+    <weaponClasses>
+      <li>Melee</li>
+    </weaponClasses>
+    <thingSetMakerTags>
+      <li>RewardStandardMidFreq</li>
+    </thingSetMakerTags>
+    <smeltable>false</smeltable>
+	<uiIconPath>Things/Weapons/KT_Folding_fan_icon</uiIconPath>
+    <graphicData>
+      <texPath>Things/Weapons/KT_Folding_fan</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>0.8</drawSize> <!-- 贴图大小 -->
+    </graphicData>
+	<equippedAngleOffset>10</equippedAngleOffset>
+    <tools>
+		<li>
+			<label>edge</label>
+			<capacities>
+				<li>KT_Melee_AOE_pink</li>
+			</capacities>
+			<power>90</power>
+			<cooldownTime>0.2</cooldownTime>
+			<armorPenetration>2</armorPenetration>
+			<extraMeleeDamages>
+          		<li>
+            		<def>EMP</def>
+        			<amount>20</amount>
+        		</li>
+			</extraMeleeDamages>
+		</li>
+	</tools>
+	
+  </ThingDef>
+  
+  
+ 	<!-- 射金枪 -->
+  <ThingDef ParentName="KT_Weapon_unmanufacturable" Name="KT_Special_SMG">
+    <defName>KT_Special_SMG</defName>
+    <label>KT_Special_SMG</label>
+    <description>KT_Special_SMG</description>
+    <graphicData>
+      <texPath>Things/Weapons/KT_Special_SMG</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>1.2</drawSize> <!-- 贴图大小 -->
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+
+    <generateAllowChance>0</generateAllowChance>
+    <generateCommonality>0</generateCommonality>
+    <relicChance>0</relicChance>
+    <statBases>
+      <WorkToMake>75000</WorkToMake>
+      <Mass>3</Mass>
+      <AccuracyTouch>0.95</AccuracyTouch>
+      <AccuracyShort>0.85</AccuracyShort>
+      <AccuracyMedium>0.80</AccuracyMedium>
+      <AccuracyLong>0.75</AccuracyLong>
+      <RangedWeapon_Cooldown>1.5</RangedWeapon_Cooldown>
+    </statBases>
+	<comps>
+	  <li Class="SRA.CompProperties_WeaponRenderDynamic">
+		<TexturePath>Things/Weapons/KT_Special_SMG_light</TexturePath>
+		<totalFrames>1</totalFrames>
+		<ticksPerFrame>1</ticksPerFrame>
+	  </li>
+    </comps>
+	<drawerType>MapMeshAndRealTime</drawerType>
+    <costList>
+      <Plasteel>500</Plasteel>
+      <Steel>500</Steel>
+	  <ComponentIndustrial>10</ComponentIndustrial>
+	  <ComponentSpacer>6</ComponentSpacer>
+	  <Gold>20</Gold>
+    </costList>
+	
+    <techLevel>Spacer</techLevel>
+    <weaponTags>
+	  <li>KT_weapon</li>
+    </weaponTags>
+
+    <weaponClasses>
+      <li>LongShots</li>
+	  <li>RangedHeavy</li>
+    </weaponClasses>
+	
+	<equippedStatOffsets>
+      <MoveSpeed>-0.10</MoveSpeed>
+    </equippedStatOffsets>
+	
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>KT_Bullet_Special_SMG</defaultProjectile>
+        <warmupTime>1.0</warmupTime>
+        <range>55</range>
+		<burstShotCount>6</burstShotCount>
+		<ticksBetweenBurstShots>3</ticksBetweenBurstShots>
+        <soundCast>KT_gunshot</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>40</muzzleFlashScale>
+      </li>
+    </verbs>
+	<modExtensions>
+      <li Class="MuzzleFlash.MuzzleFlashProps" MayRequire="IssacZhuang.MuzzleFlash">
+        <def>MF_StandardMuzzleFalsh</def>
+        <drawSize>(0.75)</drawSize>
+        <offsets>
+          <li>(0.5,0)</li>
+        </offsets>
+        <isAlternately>true</isAlternately>
+      </li>
+    </modExtensions>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>12</power>
+        <cooldownTime>1.5</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>12</power>
+        <cooldownTime>1.2</cooldownTime>
+      </li>
+    </tools>
+  </ThingDef>
+  
+
+  <ThingDef ParentName="BaseBullet">
+		<defName>KT_Bullet_Special_SMG</defName>
+		<label>KT_Bullet_Special_SMG</label>
+		<thingClass>SRA.Projectile_BulletWithEffect</thingClass>
+		<graphicData>
+			<texPath>Things/Projectile/Bullet_kt_small_II</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>TransparentPostLight</shaderType>
+			<drawSize>1.2</drawSize>
+		</graphicData>
+		<projectile>
+			<damageDef>Bullet</damageDef>
+			<damageAmountBase>20</damageAmountBase>
+			<armorPenetrationBase>0.9</armorPenetrationBase>
+			<stoppingPower>5</stoppingPower>
+			<speed>120</speed>
+			<extraDamages>
+				<li>
+					<def>KT_Special_SMG_crystal</def>
+					<amount>24</amount>
+				</li>
+			</extraDamages>
+		</projectile>
+    	<modExtensions>
+      		<li Class="SRA.Projectile_BulletWithEffect_Extension">
+        		<impactEffecter>KT_Special_SMG_crystal_Hit</impactEffecter>
+    		</li>
+    	</modExtensions>
+	</ThingDef>
+	
+	
+<!-- 分裂枪 -->
+  <ThingDef ParentName="KT_Weapon_unmanufacturable" Name="KT_Splitter_Gun">
+    <defName>KT_Splitter_Gun</defName>
+    <label>KT_Splitter_Gun</label>
+    <description>KT_Splitter_Gun</description>
+    <graphicData>
+      <texPath>Things/Weapons/KT_Splitter_Gun</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>1.8</drawSize> <!-- 贴图大小 -->
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+
+    <generateAllowChance>0</generateAllowChance>
+    <generateCommonality>0</generateCommonality>
+    <relicChance>0</relicChance>
+    <statBases>
+      <Mass>13</Mass>
+      <AccuracyTouch>0.80</AccuracyTouch>
+      <AccuracyShort>0.85</AccuracyShort>
+      <AccuracyMedium>0.90</AccuracyMedium>
+      <AccuracyLong>0.75</AccuracyLong>
+      <RangedWeapon_Cooldown>2</RangedWeapon_Cooldown>
+    </statBases>
+	<comps>
+	  <li Class="SRA.CompProperties_WeaponRenderDynamic">
+		<TexturePath>Things/Weapons/KT_Splitter_Gun_light</TexturePath>
+		<totalFrames>1</totalFrames>
+		<ticksPerFrame>1</ticksPerFrame>
+	  </li>
+    </comps>
+	<drawerType>MapMeshAndRealTime</drawerType>
+    <costList>
+      <Plasteel>800</Plasteel>
+      <Steel>800</Steel>
+	  <ComponentIndustrial>10</ComponentIndustrial>
+	  <ComponentSpacer>8</ComponentSpacer>
+	  <Gold>30</Gold>
+    </costList>
+	
+    <techLevel>Spacer</techLevel>
+    <weaponTags>
+	  <li>KT_weapon</li>
+    </weaponTags>
+
+    <weaponClasses>
+      <li>LongShots</li>
+	  <li>RangedHeavy</li>
+    </weaponClasses>
+	
+	<equippedStatOffsets>
+      <MoveSpeed>-0.15</MoveSpeed>
+    </equippedStatOffsets>
+	
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>KT_Bullet_Splitter_Gun</defaultProjectile>
+        <warmupTime>1.0</warmupTime>
+        <range>65</range>
+		<burstShotCount>1</burstShotCount>
+        <soundCast>KT_gunshot_II</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>40</muzzleFlashScale>
+		<targetParams>
+			<canTargetLocations>true</canTargetLocations>
+		</targetParams>
+      </li>
+    </verbs>
+	<modExtensions>
+      <li Class="MuzzleFlash.MuzzleFlashProps" MayRequire="IssacZhuang.MuzzleFlash">
+        <def>MF_ChargedMuzzleFalsh</def>
+        <drawSize>(1)</drawSize>
+        <offsets>
+          <li>(0.6,0)</li>
+        </offsets>
+        <isAlternately>true</isAlternately>
+      </li>
+    </modExtensions>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>12</power>
+        <cooldownTime>1.5</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>12</power>
+        <cooldownTime>1.2</cooldownTime>
+      </li>
+    </tools>
+  </ThingDef>
+  
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>KT_Bullet_Splitter_Gun</defName>
+    <label>KT_Bullet_Splitter_Gun</label>
+    <thingClass>SRA.Projectile_MultiExplosive</thingClass>
+        <category>Projectile</category>
+        <tickerType>Normal</tickerType>
+        <altitudeLayer>Projectile</altitudeLayer>
+        <graphicData>
+            <texPath>Things/Projectile/Bullet_kt_plasma</texPath> <!-- 子弹贴图路径 -->
+            <graphicClass>Graphic_Single</graphicClass> <!-- 使用单一图形 -->
+			<shaderType>MoteGlow</shaderType>
+      		<drawSize>(1.5)</drawSize>
+        </graphicData>
+        <projectile>
+            <damageDef>KTBLUEBomb</damageDef>
+            <explosionRadius>3</explosionRadius>
+            <speed>120</speed>
+            <damageAmountBase>120</damageAmountBase>
+            <arcHeightFactor>0</arcHeightFactor>
+            <soundExplode>Explosion_Bomb</soundExplode>
+			<armorPenetrationBase>1.4</armorPenetrationBase>
+			<stoppingPower>1.5</stoppingPower>
+		</projectile>
+		<modExtensions>
+		  <li Class="SRA.TailBulletDef">
+       		   <tailFleckDef>KT_Fleck_blue_particle_Tail</tailFleckDef>
+      	 	   <fleckMakeFleckTickMax>10</fleckMakeFleckTickMax><!-- 疑似无效 -->
+			   <fleckDelayTicks>5</fleckDelayTicks><!-- 出膛后多久出现轨迹 -->
+			   <fleckMakeFleckNum>4</fleckMakeFleckNum>
+     	    </li>
+          <li Class="SRA.MultiExplosiveExtension">
+         <multiexplosions>
+          <li>
+            <radius>3</radius>
+            <damageDef>KTBLUEBomb</damageDef>
+            <damageAmount>120</damageAmount>
+            <armorPenetration>1.5</armorPenetration>
+            <explosionSound>Explosion_Bomb</explosionSound>
+            <explosionDamageFalloff>true</explosionDamageFalloff><!-- 默认true -->
+            <onlyAntiHostile>true</onlyAntiHostile> <!-- 智能弹药：这个爆炸只伤害敌对目标，默认false -->
+            <!-- 现阶段就支持这么多参数 -->
+          </li>
+		  <li>
+			<radius>4</radius>
+			<damageDef>EMP</damageDef>
+			<damageAmount>60</damageAmount>
+			<armorPenetration>8</armorPenetration>
+			<explosionSound>Explosion_EMP</explosionSound>
+			<explosionDamageFalloff>true</explosionDamageFalloff>
+			<onlyAntiHostile>true</onlyAntiHostile>
+		  </li>
+        </multiexplosions>
+        <bulletLaunches>
+          <li>
+            <projectileDef>KT_Bullet_Splitter_Gun_bulletLaunches</projectileDef>
+            <bulletCount>8</bulletCount>
+            <angleRange>120</angleRange>
+            <distanceRange>
+              <min>4</min>
+              <max>8</max>
+            </distanceRange>
+          </li>
+        </bulletLaunches>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>KT_Bullet_Splitter_Gun_bulletLaunches</defName>
+    <label>KT_Bullet_Splitter_Gun_bulletLaunches</label>
+    <thingClass>SRA.Projectile_MultiExplosive</thingClass>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_kt_plasma</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>EMP</damageDef>
+        <explosionRadius>1</explosionRadius>
+        <speed>80</speed>
+        <damageAmountBase>80</damageAmountBase>
+        <arcHeightFactor>0</arcHeightFactor>
+        <soundExplode>Explosion_Rocket</soundExplode>
+		<flyOverhead>false</flyOverhead>
+		<armorPenetrationBase>1</armorPenetrationBase>
+    </projectile>
+	<modExtensions>
+        <li Class="SRA.MultiExplosiveExtension">
+        <multiexplosions>
+          <li>
+            <radius>1.5</radius>
+            <damageDef>KTBLUEBomb</damageDef>
+            <damageAmount>80</damageAmount>
+            <armorPenetration>1.2</armorPenetration>
+            <explosionSound>Explosion_Bomb</explosionSound>
+            <explosionDamageFalloff>true</explosionDamageFalloff><!-- 默认true -->
+            <onlyAntiHostile>true</onlyAntiHostile> <!-- 智能弹药：这个爆炸只伤害敌对目标，默认false -->
+            <!-- 现阶段就支持这么多参数 -->
+          </li>
+		  <li>
+			<radius>2</radius>
+			<damageDef>EMP</damageDef>
+			<damageAmount>60</damageAmount>
+			<armorPenetration>8</armorPenetration>
+			<explosionSound>Explosion_EMP</explosionSound>
+			<explosionDamageFalloff>true</explosionDamageFalloff>
+			<onlyAntiHostile>true</onlyAntiHostile>
+		  </li>
+        </multiexplosions>
+      </li>
+    </modExtensions>
+   </ThingDef>
+   
+   
+   <ThingDef ParentName="KT_Weapon_unmanufacturable" Name="KT_Bow_Great">
+    <defName>KT_Bow_Great</defName>
+    <label>Super greatbow</label>
+    <description>A super greatbow. Fires a heavy arrow long distances.</description>
+    <graphicData>
+      <texPath>Things/Item/Equipment/WeaponRanged/BowGreat</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <soundInteract>Bow_Large</soundInteract>
+    <costList>
+      <WoodLog>6000</WoodLog>
+    </costList>
+    <thingSetMakerTags>
+      <li>RewardStandardQualitySuper</li>
+    </thingSetMakerTags>
+    <statBases>
+      <WorkToMake>9000</WorkToMake>
+      <Mass>3.0</Mass>
+      <AccuracyTouch>0.65</AccuracyTouch>
+      <AccuracyShort>0.85</AccuracyShort>
+      <AccuracyMedium>0.75</AccuracyMedium>
+      <AccuracyLong>0.50</AccuracyLong>
+      <RangedWeapon_Cooldown>1.5</RangedWeapon_Cooldown>
+    </statBases>
+    <weaponTags>
+      <li>KT_weapon</li>
+    </weaponTags>
+    <weaponClasses>
+      <li>Ranged</li>
+      <li>RangedHeavy</li>
+    </weaponClasses>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>KT_Super_Arrow_Great</defaultProjectile>
+		<burstShotCount>80</burstShotCount>
+		<ticksBetweenBurstShots>1</ticksBetweenBurstShots>
+        <warmupTime>0.3</warmupTime>
+        <range>39.9</range>
+        <soundCast>Bow_Large</soundCast>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>limb</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>9</power>
+        <cooldownTime>2</cooldownTime>
+      </li>
+    </tools>
+
+    <rotateInShelves>false</rotateInShelves>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseProjectileNeolithic">
+    <defName>KT_Super_Arrow_Great</defName>
+    <label>greatbow arrow</label>
+    <graphicData>
+      <texPath>Things/Projectile/Arrow_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>Arrow</damageDef>
+      <damageAmountBase>17</damageAmountBase>
+      <stoppingPower>1.5</stoppingPower>
+      <armorPenetrationBase>1.15</armorPenetrationBase>
+      <speed>49</speed>
+    </projectile>
+  </ThingDef>
+  
+  <!-- 颠佬粉色激光枪-->
+  <ThingDef ParentName="KT_Weapon_unmanufacturable" Name="KT_SKGUN">
+    <defName>KT_SKGUN</defName>
+    <label>"Star Defender" Psycho-Laser Rifle</label>
+    <description>A Psycho-Warrior exclusive weapon of immense power, though it can only emit pink laser beams.\n\n&lt;color=#ff8484>&lt;i>Everyone expects lasers to be green, but there's nothing wrong with pink...&lt;/i>&lt;/color></description>
+    <graphicData>
+      <texPath>Things/Weapons/KT_SKGUN</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>1.5</drawSize> <!-- 贴图大小 -->
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+    <generateAllowChance>0</generateAllowChance>
+    <generateCommonality>0</generateCommonality>
+    <relicChance>0</relicChance>
+    <statBases>
+      <WorkToMake>80000</WorkToMake>
+      <Mass>15</Mass>
+      <AccuracyTouch>0.80</AccuracyTouch>
+      <AccuracyShort>0.90</AccuracyShort>
+      <AccuracyMedium>0.80</AccuracyMedium>
+      <AccuracyLong>0.80</AccuracyLong>
+      <RangedWeapon_Cooldown>1</RangedWeapon_Cooldown>
+    </statBases>
+	
+    <costList>
+      <Plasteel>50</Plasteel>
+      <Steel>800</Steel>
+    </costList>
+	
+    <techLevel>Ultra</techLevel>
+    <weaponTags>
+      <li>WeaponBeamRepeater</li>
+	  <li>KT_weapon</li>
+    </weaponTags>
+
+    <weaponClasses>
+      <li>RangedHeavy</li>
+    </weaponClasses>
+	
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_KT_SKGUN</defaultProjectile>
+        <warmupTime>0.5</warmupTime>
+        <range>45</range>
+		<burstShotCount>3</burstShotCount>
+		<ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+        <soundCast>KT_Beamflashlight_heavy</soundCast>
+        <soundCastTail>GunTail_Medium</soundCastTail>
+        <muzzleFlashScale>15</muzzleFlashScale>
+      </li>
+    </verbs>
+	<tools>
+      <li>
+        <label>edge</label>
+        <capacities>
+          <li>Cut</li>
+        </capacities>
+        <power>15</power>
+        <cooldownTime>1.2</cooldownTime>
+        <armorPenetration>0.5</armorPenetration>
+      </li>
+	</tools> 
+  </ThingDef>
+  
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_KT_SKGUN</defName>
+    <label>"Star Defender" Psycho-Laser Rifle</label>
+    <thingClass>SRA.Projectile_BeamWithEffect</thingClass>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_KT_flashlight</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>KT_Beamflashlight</damageDef>
+      <damageAmountBase>65</damageAmountBase>
+      <beamMoteDef>KT_Beamflashlight_pink_heavy</beamMoteDef>
+      <beamStartOffset>0.5</beamStartOffset>
+      <armorPenetrationBase>1.50</armorPenetrationBase>
+	  <stoppingPower>1.5</stoppingPower>
+    </projectile>
+	<modExtensions>
+        <li Class="SRA.Projectile_BeamWithEffect_Extension">
+          <impactEffecter>KT_Laserhit_large</impactEffecter>
+        </li>
+    </modExtensions>
+  </ThingDef>
+  
+  
+  <!-- 安倍切 -->
+  <ThingDef ParentName="KT_Weapon_unmanufacturable" Name="KT_Assassingun">
+    <defName>KT_Assassingun</defName>
+    <label>KT_Assassingun</label>
+    <description>KT_Assassingun</description>
+    <graphicData>
+      <texPath>Things/Weapons/KT_Assassingun</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>0.7</drawSize> <!-- 贴图大小 -->
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+
+    <generateAllowChance>0</generateAllowChance>
+    <generateCommonality>0</generateCommonality>
+    <relicChance>0</relicChance>
+    <statBases>
+      <WorkToMake>75000</WorkToMake>
+      <Mass>2</Mass>
+      <AccuracyTouch>0.90</AccuracyTouch>
+      <AccuracyShort>1.80</AccuracyShort>
+      <AccuracyMedium>0.35</AccuracyMedium>
+      <AccuracyLong>0.25</AccuracyLong>
+      <RangedWeapon_Cooldown>3.5</RangedWeapon_Cooldown>
+    </statBases>
+    <costList>
+      <WoodLog>20</WoodLog>
+      <Steel>10</Steel>
+	  <ComponentIndustrial>1</ComponentIndustrial>
+    </costList>
+	
+    <techLevel>Spacer</techLevel>
+    <weaponTags>
+	  <li>KT_weapon</li>
+    </weaponTags>
+
+    <weaponClasses>
+      <li>RangedLight</li>
+    </weaponClasses>
+	
+	<equippedStatOffsets>
+		<MoveSpeed>2</MoveSpeed>
+		<StaggerDurationFactor>-1</StaggerDurationFactor>
+	</equippedStatOffsets>
+	
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>KT_Bullet_Assassingun</defaultProjectile>
+        <warmupTime>0</warmupTime>
+        <range>12</range>
+		<burstShotCount>2</burstShotCount>
+		<ticksBetweenBurstShots>6</ticksBetweenBurstShots>
+        <soundCast>Shot_Shotgun</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>40</muzzleFlashScale>
+      </li>
+    </verbs>
+	<modExtensions>
+      <li Class="MuzzleFlash.MuzzleFlashProps" MayRequire="IssacZhuang.MuzzleFlash">
+        <def>MF_StandardMuzzleFalsh</def>
+        <drawSize>(1.35)</drawSize>
+        <offsets>
+          <li>(0.4,0)</li>
+        </offsets>
+        <isAlternately>true</isAlternately>
+      </li>
+    </modExtensions>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>8</power>
+        <cooldownTime>1.0</cooldownTime>
+      </li>
+    </tools>
+  </ThingDef>
+  
+
+  <ThingDef ParentName="BaseBullet">
+		<defName>KT_Bullet_Assassingun</defName>
+		<label>KT_Bullet_Assassingun</label>
+		<graphicData>
+			<texPath>Things/Projectile/Bullet_Shotgun</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>TransparentPostLight</shaderType>
+			<drawSize>1.2</drawSize>
+		</graphicData>
+		<projectile>
+			<damageDef>Bullet</damageDef>
+			<damageAmountBase>200</damageAmountBase>
+			<armorPenetrationBase>5</armorPenetrationBase>
+			<stoppingPower>5</stoppingPower>
+			<speed>120</speed>
+		</projectile>
+	</ThingDef>
+	
+	
+	<!-- 必中步枪 -->
+  <ThingDef ParentName="KT_Weapon_unmanufacturable" Name="KT_101Rifle">
+    <defName>KT_101Rifle</defName>
+    <label>KT_101Rifle</label>
+    <description>KT_101Rifle</description>
+    <graphicData>
+      <texPath>Things/Weapons/KT_101Rifle</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>1.5</drawSize> <!-- 贴图大小 -->
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+	
+    <comps>
+	  <li Class="SRA.CompProperties_WeaponRenderDynamic">
+		<TexturePath>Things/Weapons/KT_101Rifle_light</TexturePath>
+		<totalFrames>1</totalFrames>
+		<ticksPerFrame>1</ticksPerFrame>
+	  </li>
+    </comps>
+	
+	<drawerType>MapMeshAndRealTime</drawerType>
+    <generateAllowChance>0</generateAllowChance>
+    <generateCommonality>0</generateCommonality>
+    <relicChance>0</relicChance>
+    <statBases>
+      <WorkToMake>75000</WorkToMake>
+      <Mass>6</Mass>
+      <AccuracyTouch>1</AccuracyTouch>
+      <AccuracyShort>1</AccuracyShort>
+      <AccuracyMedium>1</AccuracyMedium>
+      <AccuracyLong>1</AccuracyLong>
+      <RangedWeapon_Cooldown>2.0</RangedWeapon_Cooldown>
+    </statBases>
+    <costList>
+      <WoodLog>3000</WoodLog>
+      <Steel>3000</Steel>
+    </costList>
+	
+    <techLevel>Spacer</techLevel>
+    <weaponTags>
+	  <li>KT_weapon</li>
+    </weaponTags>
+
+    <weaponClasses>
+	  <li>Melee</li>
+      <li>RangedHeavy</li>
+    </weaponClasses>
+		
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>KT_Bullet_101Rifle</defaultProjectile>
+		<requireLineOfSight>false</requireLineOfSight>
+        <warmupTime>1.0</warmupTime>
+        <range>120</range>
+		<burstShotCount>1</burstShotCount>
+        <soundCast>KT_gunshot_IV</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>40</muzzleFlashScale>
+      </li>
+    </verbs>
+	<modExtensions>
+      <li Class="MuzzleFlash.MuzzleFlashProps" MayRequire="IssacZhuang.MuzzleFlash">
+        <def>MF_StandardMuzzleFalsh</def>
+        <drawSize>(1.0)</drawSize>
+        <offsets>
+          <li>(1.2,0)</li>
+        </offsets>
+        <isAlternately>true</isAlternately>
+      </li>
+    </modExtensions>
+    <tools>
+      <li>
+        <label>edge</label>
+        <capacities>
+          <li>Cut</li>
+        </capacities>
+        <power>25</power>
+        <cooldownTime>1.2</cooldownTime>
+        <armorPenetration>0.7</armorPenetration>
+      </li>
+	</tools> 
+  </ThingDef>
+  
+
+  <ThingDef ParentName="BaseBullet">
+		<defName>KT_Bullet_101Rifle</defName>
+		<label>KT_Bullet_101Rifle</label>
+		<thingClass>ECT.Projectile_GuidedCartridge</thingClass>
+		<graphicData>
+			<texPath>Things/Projectile/Bullet_381MM</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>TransparentPostLight</shaderType>
+			<drawSize>1.0</drawSize>
+		</graphicData>
+		<projectile>
+			<speed>70</speed>
+			<damageDef>KTBomb_EMPTY</damageDef>
+			<flyOverhead>true</flyOverhead>
+			<stoppingPower>2</stoppingPower>
+			<arcHeightFactor>0</arcHeightFactor>
+			<explosionRadius>2</explosionRadius>
+			<damageAmountBase>80</damageAmountBase>
+			<soundExplode>KTNONESOUND</soundExplode>
+			<armorPenetrationBase>1.5</armorPenetrationBase>
+		</projectile>
+		<modExtensions>
+			<li Class="ECT.ModExtension_GuidedCartridge">
+				<!-- 修正角度 -->
+				<maxHomingAngle>360</maxHomingAngle>
+			</li>
+		</modExtensions>
+	</ThingDef>
+	
+	<!-- 雷鸣 -->
+	<ThingDef ParentName="KT_BaseMakeableGun" Name="KT_Rumbler">
+    <defName>KT_Rumbler</defName>
+    <label>"Thunderer" M-26 Mortar</label>
+    <description>This portable mortar represents the absolute limit of lightweight design. It utilizes a unique magazine feed system, capable of firing three 80mm mortar shells in rapid succession for devastating bombardment. Additionally, its explosions release large quantities of toxic gas.</description>
+    <graphicData>
+      <texPath>Things/Weapons/KT_Rumbler</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>2</drawSize> <!-- 贴图大小 -->
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+    <tradeability>None</tradeability>
+    <generateAllowChance>0</generateAllowChance>
+    <generateCommonality>0</generateCommonality>
+    <relicChance>0</relicChance>
+    <statBases>
+      <WorkToMake>120000</WorkToMake>
+      <Mass>15</Mass>
+      <AccuracyTouch>0.2</AccuracyTouch>
+      <AccuracyShort>0.4</AccuracyShort>
+      <AccuracyMedium>0.5</AccuracyMedium>
+      <AccuracyLong>0.5</AccuracyLong>
+      <RangedWeapon_Cooldown>2.5</RangedWeapon_Cooldown>
+    </statBases>
+	<comps>
+	  <li Class="SRA.CompProperties_WeaponRenderDynamic">
+		<TexturePath>Things/Weapons/KT_Rumbler_light</TexturePath>
+		<totalFrames>1</totalFrames>
+		<ticksPerFrame>1</ticksPerFrame>
+	  </li>
+    </comps>
+	<drawerType>MapMeshAndRealTime</drawerType>
+    <costList>
+      <KT_steel>80</KT_steel>
+	  <Gold>20</Gold>
+	  <Uranium>25</Uranium>
+	  <ComponentIndustrial>15</ComponentIndustrial>
+	  <ComponentSpacer>5</ComponentSpacer>
+    </costList>
+	<weaponTags>
+	  <li>KT_weapon</li>
+    </weaponTags>
+    <recipeMaker>
+      <researchPrerequisite>KT_Base_t4_weapon</researchPrerequisite>
+      <skillRequirements>
+        <Crafting>15</Crafting>
+      </skillRequirements>
+      <recipeUsers Inherit="True">
+        <li>KT_Workbench</li>
+      </recipeUsers>
+      <displayPriority>500</displayPriority>
+    </recipeMaker>
+    <techLevel>Ultra</techLevel>
+
+    <weaponClasses>
+      <li>RangedHeavy</li>
+    </weaponClasses>
+	
+	<equippedStatOffsets>
+		<MoveSpeed>-0.70</MoveSpeed>
+	</equippedStatOffsets>
+	
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_KT_Rumbler</defaultProjectile>
+		<requireLineOfSight>false</requireLineOfSight>
+        <warmupTime>2</warmupTime>
+        <range>90</range>
+		<burstShotCount>3</burstShotCount>
+		<ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+        <soundCast>RocketswarmLauncher_Fire</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>50</muzzleFlashScale>
+		<targetParams>
+			<canTargetLocations>true</canTargetLocations>
+		</targetParams>
+      </li>
+    </verbs>
+	<tools>
+      <li>
+        <label>edge</label>
+        <capacities>
+          <li>Cut</li>
+        </capacities>
+        <power>10</power>
+        <cooldownTime>3</cooldownTime>
+        <armorPenetration>0.2</armorPenetration>
+      </li>
+	</tools> 
+  </ThingDef>
+  
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_KT_Rumbler</defName>
+    <label>"Thunderer" M-26 Mortar</label>
+    <thingClass>SRA.Projectile_MultiExplosive_NorthArcTrail</thingClass>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_MORTAR_II</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+	    <drawSize>1.0</drawSize>
+    </graphicData>
+    <projectile>
+			<damageDef>Bomb</damageDef>
+			<explosionRadius>3</explosionRadius>
+			<damageAmountBase>120</damageAmountBase>
+			<armorPenetrationBase>1.5</armorPenetrationBase>
+			<stoppingPower>3</stoppingPower>
+			<speed>60</speed>
+      <flyOverhead>true</flyOverhead>
+      <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+    </projectile>
+    <modExtensions>
+      <li Class="SRA.NorthArcModExtension">
+        <northOffsetDistance>5</northOffsetDistance>
+        <curveSteepness>1.5</curveSteepness>
+        <useArcTrajectory>true</useArcTrajectory>
+      </li>
+      <li Class="SRA.TailBulletDef">
+        <tailFleckDef>KT_Fleck_Smoke_Tail</tailFleckDef>
+        <fleckMakeFleckTickMax>5</fleckMakeFleckTickMax>
+        <fleckDelayTicks>1</fleckDelayTicks>
+        <fleckMakeFleckNum>1~2</fleckMakeFleckNum>
+        <fleckScale>0.5~1.0</fleckScale>
+        <fleckSpeed>0.1~0.3</fleckSpeed>
+        <fleckAngle>-30~30</fleckAngle>
+      </li>
+      <li Class="SRA.MultiExplosiveExtension">
+        <multiexplosions>
+          <li>
+		    <radius>2.5</radius>
+            <postExplosionGasRadiusOverride>1.5</postExplosionGasRadiusOverride>
+            <damageDef>ToxGas</damageDef>
+            <postExplosionGasType>ToxGas</postExplosionGasType>
+          </li>
+          <li>
+            <radius>4.5</radius>
+            <damageDef>Bomb</damageDef>
+            <damageAmount>120</damageAmount>
+            <armorPenetration>1.5</armorPenetration>
+            <explosionSound>Explosion_Bomb</explosionSound>
+            <explosionDamageFalloff>true</explosionDamageFalloff>
+            <!--explosionEffect>SRA_GiantExplosion</explosionEffect>
+            <explosionEffectLifetimeTicks>180</explosionEffectLifetimeTicks--> 
+            <onlyAntiHostile>false</onlyAntiHostile>
+          </li>
+        </multiexplosions>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  
+  <!-- 肛钉 -->
+  <ThingDef ParentName="KT_Weapon_unmanufacturable" Name="KT_Analnail">
+    <defName>KT_Analnail</defName>
+    <label>Dainsleif</label>
+    <description>An ancient model kinetic launcher, rumored to be so slow that only third-rate Dragoon pilots or Mililas with eight broken wing segments could fail to dodge it, and it comes with only one round of ammunition.\n\n&lt;color=#fff000&gt;&lt;i&gt;After traveling a certain distance, the projectile will penetrate through the first unit it hits as well as any units behind it, so aim at the frontmost unit for maximum penetration effect.&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;Can shoot over walls&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;45° No-Escape Zone (projectile hit correction)&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;Knockback effect&lt;/i&gt;&lt;/color&gt;</description>
+    <graphicData>
+      <texPath>Things/Weapons/KT_Analnail</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>2.8</drawSize> <!-- 贴图大小 -->
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+
+    <generateAllowChance>0</generateAllowChance>
+    <generateCommonality>0</generateCommonality>
+    <relicChance>0</relicChance>
+    <statBases>
+      <WorkToMake>75000</WorkToMake>
+      <Mass>40</Mass>
+      <AccuracyTouch>1</AccuracyTouch>
+      <AccuracyShort>1</AccuracyShort>
+      <AccuracyMedium>1</AccuracyMedium>
+      <AccuracyLong>1</AccuracyLong>
+    </statBases>
+    <costList>
+      <WoodLog>5</WoodLog>
+      <Steel>5</Steel>
+    </costList>
+	
+    <techLevel>Spacer</techLevel> 
+    <weaponTags>
+	  <li>KT_weapon</li>
+    </weaponTags>
+
+    <weaponClasses>
+      <li>RangedHeavy</li>
+    </weaponClasses>
+	
+	<equippedStatOffsets>
+		<MoveSpeed>-0.80</MoveSpeed>
+	</equippedStatOffsets>
+	
+    <verbs>
+      <li>
+        <verbClass>Verb_ShootOneUse</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_ElectromagneticCannon</defaultProjectile>
+        <warmupTime>1.5</warmupTime>
+		<minRange>15</minRange>
+        <range>200</range>
+		<requireLineOfSight>false</requireLineOfSight>
+        <soundCast>KT_Railgun_II</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>120</muzzleFlashScale>
+		<targetParams>
+			<canTargetPawns>true</canTargetPawns>
+			<canTargetMechs>true</canTargetMechs>
+			<canTargetHumans>true</canTargetHumans>
+			<canTargetAnimals>true</canTargetAnimals>
+			<canTargetLocations>true</canTargetLocations>
+		</targetParams>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>8</power>
+        <cooldownTime>4.0</cooldownTime>
+      </li>
+    </tools>
+  </ThingDef>
+  
+  <ThingDef ParentName="KT_MeleeWeapon">
+    <defName>KT_ChainSword</defName>
+    <label>"Slaughterer" CS-1 Chainsword</label>
+    <description>This massive chainsword is equipped with monomolecular teeth that can easily shred heavy armor. The wielder can choose between wide-area slashing or brutal focused attacks on single targets.\n\n&lt;color=#FFDF4B&gt;&lt;i&gt;Blood for the T-Du! Skulls for the Throne of Virtue!&lt;/i&gt;&lt;/color&gt;\n\n&lt;color=#FFAA00>&lt;i&gt;Currently in single-target output mode: higher armor penetration and extremely high attack frequency&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00>&lt;i&gt;Attacks with EMP effects&lt;/i&gt;&lt;/color&gt;</description>
+    <soundInteract>Interact_MonoSword</soundInteract>
+    <meleeHitSound>MeleeHit_MonoSword</meleeHitSound>
+	<techLevel>Ultra</techLevel>
+	<generateCommonality>0</generateCommonality>
+    <statBases>
+	  <WorkToMake>30000</WorkToMake>
+      <Mass>7</Mass>
+    </statBases>
+	<recipeMaker>
+		  <researchPrerequisite>KT_Base_t4_weapon</researchPrerequisite>
+		  <skillRequirements>
+			<Crafting>12</Crafting>
+		  </skillRequirements>
+		  <recipeUsers Inherit="True">
+            <li>KT_SWorkbench</li>
+          </recipeUsers>
+		  <displayPriority>500</displayPriority>
+	</recipeMaker>
+	<costList>
+	    <KT_steel>50</KT_steel>
+	    <Gold>5</Gold>
+	    <ComponentIndustrial>8</ComponentIndustrial>
+	    <ComponentSpacer>4</ComponentSpacer>
+    </costList>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.15</MoveSpeed>
+    </equippedStatOffsets>
+    <comps>
+      <li Class="CompProperties_Art">
+        <nameMaker>NamerArtWeaponMelee</nameMaker>
+        <descriptionMaker>ArtDescription_WeaponMelee</descriptionMaker>
+        <minQualityForArtistic>Excellent</minQualityForArtistic>
+      </li>
+	  <li Class="SRA.CompProperties_WeaponRenderDynamic">
+		<TexturePath>Things/Weapons/KT_ChainSword_light</TexturePath>
+		<totalFrames>1</totalFrames>
+		<ticksPerFrame>1</ticksPerFrame>
+	  </li>
+	  <li Class="SRA.CompProperties_WeaponHediffGiver">
+		<hediff>KT_ChainSword_hediff</hediff>
+	  </li>
+    </comps>
+
+    <burnableByRecipe>false</burnableByRecipe>
+
+    <tradeTags>
+      <li>WeaponMelee</li>
+    </tradeTags>
+    
+    <generateAllowChance>0</generateAllowChance>
+    <generateCommonality>0</generateCommonality>
+    <relicChance>0</relicChance>
+    <weaponClasses>
+      <li>Melee</li>
+    </weaponClasses>
+    <thingSetMakerTags>
+      <li>RewardStandardMidFreq</li>
+    </thingSetMakerTags>
+    <smeltable>false</smeltable>
+	<uiIconPath>Things/Weapons/KT_ChainSword</uiIconPath>
+    <graphicData>
+      <texPath>Things/Weapons/KT_ChainSword</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>2</drawSize> <!-- 贴图大小 -->
+    </graphicData>
+	<equippedAngleOffset>-40</equippedAngleOffset>
+    <tools>
+      <li>
+        <label>edge</label>
+        <capacities>
+          <li>Cut</li>
+        </capacities>
+        <power>10</power>
+        <cooldownTime>0.1</cooldownTime>
+		<extraMeleeDamages>
+          <li>
+            <def>EMP</def>
+            <amount>25</amount>
+          </li>
+        </extraMeleeDamages>
+        <armorPenetration>1.5</armorPenetration>
+      </li>
+    </tools>
+  </ThingDef>
+  
+  <ThingDef ParentName="KT_BaseUnMakeableMeleeWeapon">
+    <defName>KT_ChainSword_AOE</defName>
+    <label>"Slaughterer" CS-1 Chainsword（AOE）</label>
+    <description>This massive chainsword is equipped with monomolecular teeth that can easily shred heavy armor. The wielder can choose between wide-area slashing or brutal focused attacks on single targets.\n\n&lt;color=#FFDF4B&gt;&lt;i&gt;Blood for the T-Du! Skulls for the Throne of Virtue!&lt;/i&gt;&lt;/color&gt;\n\n&lt;color=#FFAA00>&lt;i&gt;Currently in cleave mode: AOE melee attacks&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00>&lt;i&gt;Attacks with EMP effects&lt;/i&gt;&lt;/color&gt;</description>
+    <soundInteract>Interact_MonoSword</soundInteract>
+    <meleeHitSound>MeleeHit_MonoSword</meleeHitSound>
+	<techLevel>Ultra</techLevel>
+	<generateCommonality>0</generateCommonality>
+    <statBases>
+      <Mass>7</Mass>
+    </statBases>
+
+	<costList>
+	    <KT_steel>50</KT_steel>
+	    <Gold>5</Gold>
+	    <ComponentIndustrial>8</ComponentIndustrial>
+	    <ComponentSpacer>4</ComponentSpacer>
+    </costList>
+
+    <comps>
+      <li Class="CompProperties_Art">
+        <nameMaker>NamerArtWeaponMelee</nameMaker>
+        <descriptionMaker>ArtDescription_WeaponMelee</descriptionMaker>
+        <minQualityForArtistic>Excellent</minQualityForArtistic>
+      </li>
+	  <li Class="SRA.CompProperties_WeaponRenderDynamic">
+		<TexturePath>Things/Weapons/KT_ChainSword_light</TexturePath>
+		<totalFrames>1</totalFrames>
+		<ticksPerFrame>1</ticksPerFrame>
+	  </li>
+	  <li Class="SRA.CompProperties_WeaponHediffGiver">
+		<hediff>KT_ChainSword_hediff</hediff>
+	  </li>
+    </comps>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.15</MoveSpeed>
+    </equippedStatOffsets>
+    <burnableByRecipe>false</burnableByRecipe>
+
+    <tradeTags>
+      <li>WeaponMelee</li>
+    </tradeTags>
+    
+    <generateAllowChance>0</generateAllowChance>
+    <generateCommonality>0</generateCommonality>
+    <relicChance>0</relicChance>
+    <weaponClasses>
+      <li>Melee</li>
+    </weaponClasses>
+    <thingSetMakerTags>
+      <li>RewardStandardMidFreq</li>
+    </thingSetMakerTags>
+    <smeltable>false</smeltable>
+	<uiIconPath>Things/Weapons/KT_ChainSword</uiIconPath>
+    <graphicData>
+      <texPath>Things/Weapons/KT_ChainSword</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>2</drawSize> <!-- 贴图大小 -->
+    </graphicData>
+	<equippedAngleOffset>-40</equippedAngleOffset>
+    <tools>
+		<li>
+			<label>Heavy crosscut</label>
+			<capacities>
+				<li>KT_Melee_AOE_yellow</li>
+			</capacities>
+			<power>180</power>
+			<cooldownTime>1.2</cooldownTime>
+			<armorPenetration>1.0</armorPenetration>
+			<extraMeleeDamages>
+          		<li>
+            		<def>EMP</def>
+        			<amount>10</amount>
+        		</li>
+			</extraMeleeDamages>
+		</li>
+		<li>
+        	<label>edge</label>
+        	<capacities>
+          		<li>Cut</li>
+        	</capacities>
+        	<power>50</power>
+        	<cooldownTime>0.8</cooldownTime>
+        	<armorPenetration>0.7</armorPenetration>
+      	</li>
+	</tools>
+  </ThingDef>
+</Defs>

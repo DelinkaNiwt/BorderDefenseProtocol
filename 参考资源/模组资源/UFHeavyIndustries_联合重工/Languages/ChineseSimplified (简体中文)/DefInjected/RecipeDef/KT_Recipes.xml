@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <Make_KTNutrientPaste.label>制作三明治</Make_KTNutrientPaste.label>
+  <Make_KTNutrientPaste.description>用更少的材料制作更多的食物</Make_KTNutrientPaste.description>
+  <Make_KTNutrientPaste_ten.label>制作三明治 X10</Make_KTNutrientPaste_ten.label>
+  <Make_KTNutrientPaste_ten.description>用更少的材料制作更多的食物</Make_KTNutrientPaste_ten.description>
+  
+  <InstallKTLASC.label>植入「指挥者」低空支援引导芯片</InstallKTLASC.label>
+  <InstallKTLASC.description>植入「指挥者」低空支援引导芯片</InstallKTLASC.description>
+  <InstallKTLASC.jobString>植入「指挥者」低空支援引导芯片</InstallKTLASC.jobString>
+  <RemoveKTLASC.label>移除「指挥者」低空支援引导芯片</RemoveKTLASC.label>
+  <RemoveKTLASC.description>移除「指挥者」低空支援引导芯片</RemoveKTLASC.description>
+  <RemoveKTLASC.jobString>移除「指挥者」低空支援引导芯片</RemoveKTLASC.jobString>
+  
+  <InstallKTMED.label>植入「第二春」自愈芯片</InstallKTMED.label>
+  <InstallKTMED.description>植入「第二春」自愈芯片</InstallKTMED.description>
+  <InstallKTMED.jobString>植入「第二春」自愈芯片</InstallKTMED.jobString>
+  <RemoveKTMED.label>移除「第二春」自愈芯片</RemoveKTMED.label>
+  <RemoveKTMED.description>移除「第二春」自愈芯片</RemoveKTMED.description>
+  <RemoveKTMED.jobString>移除「第二春」自愈芯片</RemoveKTMED.jobString>
+  
+  <InstallKTHASC.label>植入「死亡赋予者」高轨支援引导芯片</InstallKTHASC.label>
+  <InstallKTHASC.description>植入「死亡赋予者」高轨支援引导芯片</InstallKTHASC.description>
+  <InstallKTHASC.jobString>植入「死亡赋予者」高轨支援引导芯片</InstallKTHASC.jobString>
+  <RemoveKTHASC.label>移除「死亡赋予者」高轨支援引导芯片</RemoveKTHASC.label>
+  <RemoveKTHASC.description>移除「死亡赋予者」高轨支援引导芯片</RemoveKTHASC.description>
+  <RemoveKTHASC.jobString>移除「死亡赋予者」高轨支援引导芯片</RemoveKTHASC.jobString>
+  
+  <Make_KT_steel.label>制作沐烬钢 X10</Make_KT_steel.label>
+  <Make_KT_steel.description>我们其实并不能生产这种材料，因为我们缺少一种核心原材料，好在超维存在会帮我们补上这一部分，最终成品甚至物理性质都被改变了。</Make_KT_steel.description>
+  <Make_KT_steel_hundred.label>制作沐烬钢 X100</Make_KT_steel_hundred.label>
+  <Make_KT_steel_hundred.description>我们其实并不能生产这种材料，因为我们缺少一种核心原材料，好在超维存在会帮我们补上这一部分，最终成品甚至物理性质都被改变了。</Make_KT_steel_hundred.description>
+  
+</LanguageData>

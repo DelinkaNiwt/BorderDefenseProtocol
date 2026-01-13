@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	<Operation Class="PatchOperationFindMod">
+      <mods>
+         <li>Reel's Turret Pipeline</li>
+      </mods>
+      <match Class="PatchOperationSequence">
+		<operations>
+			<li Class="PatchOperationReplace">
+			<xpath>/Defs/ThingDef[defName="KT20MMACTurret"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs/li</xpath>
+			  <value>
+			    <li>ReelTurretAmmo</li>
+			  </value>
+			</li>
+			
+			<li Class="PatchOperationReplace">
+			<xpath>/Defs/ThingDef[defName="KT100MMCANNON"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs/li</xpath>
+			  <value>
+			    <li>ReelTurretAmmo</li>
+			  </value>
+			</li>
+			
+			<li Class="PatchOperationReplace">
+			<xpath>/Defs/ThingDef[defName="KTROCKETTurret"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs/li</xpath>
+			  <value>
+			    <li>ReelTurretAmmo</li>
+			  </value>
+			</li>
+			
+			<li Class="PatchOperationReplace">
+			<xpath>/Defs/ThingDef[defName="KTRAILGUN"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs/li</xpath>
+			  <value>
+			    <li>ReelTurretAmmo</li>
+			  </value>
+			</li>
+			
+			<li Class="PatchOperationReplace">
+			<xpath>/Defs/ThingDef[defName="KTMGX94D"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs/li</xpath>
+			  <value>
+			    <li>ReelTurretAmmo</li>
+			  </value>
+			</li>
+			
+			<li Class="PatchOperationReplace">
+			<xpath>/Defs/ThingDef[defName="KT57MMCANNON"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs/li</xpath>
+			  <value>
+			    <li>ReelTurretAmmo</li>
+			  </value>
+			</li>
+			
+			<li Class="PatchOperationReplace">
+			<xpath>/Defs/ThingDef[defName="KTLM"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs/li</xpath>
+			  <value>
+			    <li>ReelTurretAmmo</li>
+			  </value>
+			</li>
+			
+			<li Class="PatchOperationReplace">
+			<xpath>/Defs/ThingDef[defName="KTEMPMORTAR"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs/li</xpath>
+			  <value>
+			    <li>ReelTurretAmmo</li>
+			  </value>
+			</li>
+			
+			<li Class="PatchOperationReplace">
+			<xpath>/Defs/ThingDef[defName="KTRAILAUTOGUN"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs/li</xpath>
+			  <value>
+			    <li>ReelTurretAmmo</li>
+			  </value>
+			</li>
+			
+			<li Class="PatchOperationReplace">
+			<xpath>/Defs/ThingDef[defName="KTSHOTGUN"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs/li</xpath>
+			  <value>
+			    <li>ReelTurretAmmo</li>
+			  </value>
+			</li>
+			
+			<li Class="PatchOperationReplace">
+			<xpath>/Defs/ThingDef[defName="KTMACHINEGUN"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs/li</xpath>
+			  <value>
+			    <li>ReelTurretAmmo</li>
+			  </value>
+			</li>
+			
+			<li Class="PatchOperationReplace">
+			<xpath>/Defs/ThingDef[defName="KTGRANTAUTOCANNON"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs/li</xpath>
+			  <value>
+			    <li>ReelTurretAmmo</li>
+			  </value>
+			</li>
+			
+			<li Class="PatchOperationReplace">
+			<xpath>/Defs/ThingDef[defName="KT_LARGEAUTOCANNON"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs/li</xpath>
+			  <value>
+			    <li>ReelTurretAmmo</li>
+			  </value>
+			</li>
+		</operations>
+		</match>	
+	</Operation>
+</Patch>

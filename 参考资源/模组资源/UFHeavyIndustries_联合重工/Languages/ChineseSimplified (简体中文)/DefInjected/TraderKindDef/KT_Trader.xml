@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: KT_armament_Trader -->
+  <KT_armament_Trader.label>军火商</KT_armament_Trader.label>
+  
+  <!-- EN: KT_food_Trader -->
+  <KT_food_Trader.label>食品贸易商</KT_food_Trader.label>
+  
+  <!-- EN: KT_material_Trader -->
+  <KT_material_Trader.label>材料供应商</KT_material_Trader.label>
+  
+  <!-- EN: KT_pantsushop_Trader -->
+  <KT_pantsushop_Trader.label>战利品运输舰</KT_pantsushop_Trader.label>
+  
+  <!-- EN: KT_slave_Trader -->
+  <KT_slave_Trader.label>人才贸易商船</KT_slave_Trader.label>
+  
+  <KT_medic_Trader.label>医药商船</KT_medic_Trader.label>
+  
+</LanguageData>

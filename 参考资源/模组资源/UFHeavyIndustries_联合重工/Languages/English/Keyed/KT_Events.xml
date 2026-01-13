@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+ <KT_PANTSU_SHOP_TITLE>Pantsu Shop</KT_PANTSU_SHOP_TITLE>
+ <KT_PANTSU_SHOP_ELLA>Pantsu Shop - Ella</KT_PANTSU_SHOP_ELLA>
+ <KT_DESC_PANTSU_SHOP_1>&lt;color=#FFAA00>&lt;i>The communication line connected, we see what looks like a bathhouse... with a blonde woman standing there...&lt;/i>&lt;/color></KT_DESC_PANTSU_SHOP_1>
+ <KT_OPTION_PANTSU_SHOP_1_1>Hello?</KT_OPTION_PANTSU_SHOP_1_1>
+ 
+ <KT_DESC_PANTSU_SHOP_2>&lt;color=#FFAA00>&lt;i>「The blonde woman hesitated for a moment, frowning」&lt;/i>&lt;/color>\nI think I understand what's happening now. Your boss is really something, always enjoying playing cosplay games with dust... Let me check this place...\nHmm... Conventional FTL unavailable, locked in primitive era... Ha, she really knows how to pick. When the vacation ends, just wipe it clean and complete a performance metric directly.</KT_DESC_PANTSU_SHOP_2>
+ <KT_OPTION_PANTSU_SHOP_2_1>We don't understand, what do you mean?</KT_OPTION_PANTSU_SHOP_2_1>
+ 
+ <KT_DESC_PANTSU_SHOP_3>You're not qualified to ask questions.\nIn principle, I wouldn't communicate with dust like you, let alone do business. But your boss seems quite invested in this game and has authorized me to grant you some permissions, so I'll make an exception.\nFrom now on, this secondary intelligence will serve as your contact window. I personally don't have the energy or interest to communicate with you excessively.</KT_DESC_PANTSU_SHOP_3>
+ <KT_OPTION_PANTSU_SHOP_3_1>Wait! We really don't understand</KT_OPTION_PANTSU_SHOP_3_1>
+ 
+ <KT_PANTSU_SHOP_EDEN>UF Frigate - Eden</KT_PANTSU_SHOP_EDEN>
+ <KT_DESC_PANTSU_SHOP_4>&lt;color=#FFAA00>&lt;i>「The screen switches... we see what appears to be some kind of AI core」&lt;/i>&lt;/color>\nGreetings, this is the UF Frigate. I will now serve as the挂牌window for the Pantsu Shop for your future对接activities. Any questions?</KT_DESC_PANTSU_SHOP_4>
+ <KT_OPTION_PANTSU_SHOP_4_1>I completely don't understand what's going on, could you explain?</KT_OPTION_PANTSU_SHOP_4_1>
+ 
+ <KT_DESC_PANTSU_SHOP_5>No problem! Let me introduce myself first. As you can see, I'm a secondary intelligence of an honor guard UF frigate. You can call me &lt;color=#FFAA00>&lt;i>Eden&lt;/i>&lt;/color>.\nNormally, my kind are only used to execute Catastrophe Assessment Ceremonies to test chosen ones. I've performed &lt;color=#c10000>&lt;i>[No corresponding transponder, number too long to display]&lt;/i>&lt;/color> ceremonies so far, having been destroyed and reconstructed 18 times. Ella said this is a reward for my satisfactory work, allowing me to do things beyond ceremonies, so I'm very happy!\n\nI've jumped and am docked in deep orbit around your planet on standby. Ella has authorized me to挂牌the Pantsu Shop for trading with you and providing assistance. Any other questions?</KT_DESC_PANTSU_SHOP_5>
+ <KT_OPTION_PANTSU_SHOP_5_1>What exactly is the Pantsu Shop? What is the Catastrophe Assessment Ceremony?</KT_OPTION_PANTSU_SHOP_5_1>
+ <KT_OPTION_PANTSU_SHOP_5_2>What exactly is UF?</KT_OPTION_PANTSU_SHOP_5_2>
+ <KT_OPTION_PANTSU_SHOP_5_3>Why are you helping us?</KT_OPTION_PANTSU_SHOP_5_3>
+ <KT_OPTION_PANTSU_SHOP_5_4>What can you do?</KT_OPTION_PANTSU_SHOP_5_4>
+ <KT_OPTION_PANTSU_SHOP_5_5>We understand, goodbye.</KT_OPTION_PANTSU_SHOP_5_5>
+ 
+ <KT_DESC_PANTSU_SHOP_6>&lt;color=#FFAA00>&lt;i>「Requesting Q&A permissions... Access denied. No comment on this matter.」&lt;/i>&lt;/color></KT_DESC_PANTSU_SHOP_6>
+ <KT_DESC_PANTSU_SHOP_8>According to the instructions of the great &lt;color=#ffe400>&lt;i>Senior Star Superintendent - Tirpitz&lt;/i>&lt;/color>, this frigate will assist in completing the small cosplay script &lt;color=#ffe400>&lt;i>"UF Pact Nation"&lt;/i>&lt;/color>, providing assistance within authorized permissions.\nAnd this ship can gain relaxation and excitement from it!</KT_DESC_PANTSU_SHOP_8>
+ 
+ <KT_DESC_PANTSU_SHOP_9>These are the assistance options I currently offer, though some require further protocol unlocks: &lt;color=#ffe400>&lt;i>\n1. Guide or simulate merchant ships to your colony for trade\n2. Assist with global selective orbital bombardment\n3. Sell mechanoid armies&lt;/i>&lt;/color></KT_DESC_PANTSU_SHOP_9>
+ 
+ <KT_DESC_PANTSU_SHOP_10>Excellent, I hope we'll spend some wonderful time together. Please try to live as long as possible, so that Lord can enjoy herself to the fullest. Contact me anytime through the communication terminal if needed.</KT_DESC_PANTSU_SHOP_10>
+ 
+ <KT_DESC_PANTSU_SHOP_11_1>What assistance do you need?</KT_DESC_PANTSU_SHOP_11_1>
+ <KT_DESC_PANTSU_SHOP_11_2>Please live longer, it benefits us all.</KT_DESC_PANTSU_SHOP_11_2>
+ <KT_DESC_PANTSU_SHOP_11_3>Although being an honor guard ship isn't bad, you know, I'd like to try something different.</KT_DESC_PANTSU_SHOP_11_3>
+ <KT_DESC_PANTSU_SHOP_11_4>You know, the real Pantsu Shop uses another special resource as trade currency, but you're definitely not qualified to access that.</KT_DESC_PANTSU_SHOP_11_4>
+ <KT_DESC_PANTSU_SHOP_11_5>The name Eden comes from Ella's stool, but calling it directly E-stool would be too blunt.</KT_DESC_PANTSU_SHOP_11_5>
+ 
+ <KT_OPTION_PANTSU_SHOP_11_1>We need trade</KT_OPTION_PANTSU_SHOP_11_1>
+ <KT_OPTION_PANTSU_SHOP_11_1_disabled>Eden needs to cool down the jump transmission device again, requires about a day's wait each time</KT_OPTION_PANTSU_SHOP_11_1_disabled>
+ <KT_OPTION_PANTSU_SHOP_11_2>We need to purchase mechanoids</KT_OPTION_PANTSU_SHOP_11_2>
+ <KT_OPTION_PANTSU_SHOP_11_2_disabled>Permissions not yet unlocked, cannot purchase</KT_OPTION_PANTSU_SHOP_11_2_disabled>
+
+ <KT_DESC_PANTSU_SHOP_12_1>What type of trade do you need? I can easily alter the positions of merchant ships in orbit, teleporting them near you.</KT_DESC_PANTSU_SHOP_12_1>
+ <KT_DESC_PANTSU_SHOP_12_2>Haha, no problem. Those merchant ships will definitely be confused about why they were teleported elsewhere, but I believe they won't refuse business opportunities.</KT_DESC_PANTSU_SHOP_12_2>
+ 
+ <KT_OPTION_PANTSU_SHOP_12_1>Material Suppliers</KT_OPTION_PANTSU_SHOP_12_1>
+ <KT_OPTION_PANTSU_SHOP_12_2>Food Traders</KT_OPTION_PANTSU_SHOP_12_2>
+ <KT_OPTION_PANTSU_SHOP_12_3>Arms Dealers</KT_OPTION_PANTSU_SHOP_12_3>
+ <KT_OPTION_PANTSU_SHOP_12_4>Talent Trade Ships</KT_OPTION_PANTSU_SHOP_12_4>
+ <KT_OPTION_PANTSU_SHOP_12_5>Trophy Transport Ships</KT_OPTION_PANTSU_SHOP_12_5>
+ <KT_OPTION_PANTSU_SHOP_12_6>Medic Trade Ships</KT_OPTION_PANTSU_SHOP_12_6>
+ 
+ <KT_DESC_PANTSU_SHOP_13>Please ensure the drop beacon area is sufficiently clear, &lt;color=#ffe400>&lt;i>avoid hazardous terrain (like vacuum and water, etc.)&lt;/i>&lt;/color>, preferably pure empty ground if possible. Otherwise, I'm not responsible for any damage to property or cargo.</KT_DESC_PANTSU_SHOP_13>
+ <KT_OPTION_PANTSU_SHOP_13_1>Vanguard-class Combat Walker</KT_OPTION_PANTSU_SHOP_13_1>
+ <KT_OPTION_PANTSU_SHOP_13_2>Hover Tank</KT_OPTION_PANTSU_SHOP_13_2>
+ <KT_OPTION_PANTSU_SHOP_13_1_disabled>Temporarily unavailable, Eden needs to restock merchandise. Please wait patiently. (CD about 5 days)</KT_OPTION_PANTSU_SHOP_13_1_disabled>
+ <KT_OPTION_PANTSU_SHOP_13_2_disabled>Temporarily unavailable, Eden needs to restock merchandise. Please wait patiently. (CD about 3 days)</KT_OPTION_PANTSU_SHOP_13_2_disabled>
+
+ 
+ <KT_DESC_PANTSU_SHOP_14>Good, this Vanguard-class Combat Walker costs &lt;color=#ffe400>&lt;i>20,000 silver&lt;/i>&lt;/color>, bandwidth占用8, has multiple optional mounts to adapt to different tactical needs, and all models are equipped with an anti-personnel machine gun and EMP mortar. It's the largest mechanoid you can purchase from me.\n\nDelivery size is 3X3, ensure there's sufficient空地around the drop beacon, otherwise I'm not responsible for any damage or lost items.</KT_DESC_PANTSU_SHOP_14>
+ <KT_OPTION_PANTSU_SHOP_14_1>Purchase</KT_OPTION_PANTSU_SHOP_14_1>
+ <KT_OPTION_PANTSU_SHOP_14_2>Autocannon Type</KT_OPTION_PANTSU_SHOP_14_2>
+ <KT_OPTION_PANTSU_SHOP_14_3>Gatling Machine Gun Type</KT_OPTION_PANTSU_SHOP_14_3>
+ <KT_MESSAGE_PANTSU_SHOP_14_1>UF Express, delivering for you now.</KT_MESSAGE_PANTSU_SHOP_14_1>
+ 
+ <KT_DESC_PANTSU_SHOP_15>Good, this Hover Tank costs &lt;color=#ffe400>&lt;i>10,000 silver&lt;/i>&lt;/color>, bandwidth is 6, not slowed by terrain, has a powerful 105MM triple-shot main cannon, but only a light machine gun for self-defense.\n\nDelivery size is 2X2, ensure there's sufficient open place around the drop beacon, otherwise I'm not responsible for any damage or lost items.</KT_DESC_PANTSU_SHOP_15>
+ <KT_OPTION_PANTSU_SHOP_15_1>Purchase</KT_OPTION_PANTSU_SHOP_15_1>
+ <KT_MESSAGE_PANTSU_SHOP_15_1>UF Express, delivering for you now.</KT_MESSAGE_PANTSU_SHOP_15_1>
+ 
+ <NONEED>Not needed for now</NONEED>
+ <GOBACK>I'll think about it more</GOBACK>
+ <KT_BYE>Goodbye</KT_BYE>
+ <SILVERNOTENOUGH>Insufficient silver, cannot purchase</SILVERNOTENOUGH>
+ 
+</LanguageData>
+
+

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+	<!--Comp_HNGT_OrbitalBombardment-->
+	<HNGT_TargeterBusy>“火控计算机繁忙”</HNGT_TargeterBusy>
+	<HNGT_NoOtherMap>“火控系统目标清单为空”</HNGT_NoOtherMap>
+	<HNGT_CooldownLeft>系统冷却中，还剩{0}秒。</HNGT_CooldownLeft>
+	<HNGT_LocationInvalid>“火控系统无法锁定该区域”</HNGT_LocationInvalid>
+	<HNGT_TurretAlreadyFiring>“正在发动洲际弹道攻击”</HNGT_TurretAlreadyFiring>
+	<HNGT_InterMapBombardment_Label>“洲际弹道攻击”</HNGT_InterMapBombardment_Label>
+	<HNGT_InterMapBombardment_Desc>对星球其他目标发动一次精准的洲际弹道攻击。</HNGT_InterMapBombardment_Desc>
+	<!--WorldObject_GlobalAttackDevice-->
+	<HNGT_GlobalAttackArrived>{0}已飞抵{1}上空，进入末段弹道开始再入大气层。</HNGT_GlobalAttackArrived>
+</LanguageData>

@@ -1,0 +1,174 @@
+<Defs>
+<ThingDef ParentName="BuildingBase"><!-- 超维直连大脑，联合替代思考 -->
+    <defName>KT_UFGenerator_small</defName>
+    <label>KT_UFGenerator_small</label>
+    <description>KT_UFGenerator_small</description>
+    <surfaceType>None</surfaceType> <!-- 表面类型 -->
+    <uiOrder>2300</uiOrder> <!-- UI栏顺序 -->
+	<uiIconScale>0.5</uiIconScale> <!-- ui图标比例 -->
+    <graphicData> <!-- 图形数据 -->
+      <texPath>Things/Building/KT_UFGenerator_small</texPath> <!-- 贴图路径 -->
+      <graphicClass>Graphic_Single</graphicClass> <!-- 图形类 -->
+	  <drawSize>(3)</drawSize> <!-- 贴图大小 -->
+	  <drawOffset>(0,0,0.2)</drawOffset> <!-- 绘制偏移北 -->
+    </graphicData>
+    <statBases> <!-- 统计基础 -->
+      <MaxHitPoints>80000</MaxHitPoints> <!-- 最大生命值 -->
+      <WorkToBuild>1500</WorkToBuild> <!-- 工作量 -->
+      <Flammability>0</Flammability> <!-- 易燃性 -->
+	  <Mass>80</Mass>
+      <Beauty>39</Beauty> <!-- 美观 -->
+    </statBases>
+    <size>(1,1)</size> <!-- 尺寸 --> 
+	<costList>
+      <Steel>1200</Steel>
+	  <Plasteel>150</Plasteel>
+      <ComponentIndustrial>5</ComponentIndustrial>
+	  <ComponentSpacer>1</ComponentSpacer>
+    </costList>
+	
+	<damageMultipliers>
+	  <li>
+        <damageDef>EMP</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>	
+	
+	<constructionSkillPrerequisite>1</constructionSkillPrerequisite> <!-- 施工技能先决条件 -->
+	<altitudeLayer>Building</altitudeLayer> <!-- 图层高度 -->
+    <passability>Standable</passability> <!-- 通过性 -->
+    <blockWind>false</blockWind> <!-- 气流阻挡 -->
+
+    <coversFloor>false</coversFloor> <!-- 覆盖地板 -->
+    <rotatable>false</rotatable> <!-- 可旋转 -->
+    <selectable>true</selectable> <!-- 可选择 -->
+	<useStuffTerrainAffordance>false</useStuffTerrainAffordance> <!-- 使用地形承受能力 -->
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded> <!-- 需要地形承受能力，石材所需的承担特质 -->
+    <holdsRoof>false</holdsRoof> <!-- 支撑屋顶 -->
+    <designationCategory>KT_designation_group</designationCategory> <!-- UI栏位置 -->
+    <castEdgeShadows>True</castEdgeShadows> <!-- 投射边缘阴影 -->
+    <blockLight>false</blockLight> <!-- 光线遮挡 -->
+	<fertility>0</fertility> <!-- 肥沃 -->
+	<building> <!-- 建筑 -->
+	  <isEdifice>true</isEdifice> <!-- 是建筑 -->
+	  <paintable>true</paintable> <!-- 可涂漆 -->
+	  <ai_chillDestination>false</ai_chillDestination> <!-- ai冷却目的地 -->
+	</building>
+	<thingCategories>
+          <li>BuildingsPower</li>
+    </thingCategories>
+    <minifiedDef>MinifiedThing</minifiedDef>
+	<researchPrerequisites>
+	  <li>KT_UFGenerator_small_tech</li>
+    </researchPrerequisites>
+	<tickerType>Normal</tickerType>
+	<drawerType>MapMeshAndRealTime</drawerType>
+	<comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerPlant</compClass>
+        <basePowerConsumption>-12000</basePowerConsumption>
+        <transmitsPower>true</transmitsPower>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>2</glowRadius>
+        <glowColor>(255,255,255,0)</glowColor>
+      </li>
+	  <li Class="SRA.CompProperties_BuildingDrawExtraFourRot">
+			<graphicDataExtra>
+				<graphicClass>Graphic_Single</graphicClass>
+				<shaderType>TransparentPostLight</shaderType>
+				<texPath>Things/Building/KT_UFGenerator_small_light</texPath>
+				<drawSize>(3,3)</drawSize>
+	 		    <drawOffset>(0,0,0.2)</drawOffset>
+			</graphicDataExtra>
+	  </li>
+	</comps> 
+   </ThingDef> 
+   
+   <ThingDef ParentName="BuildingBase"><!-- 超维直连电瓶，联合替代思考 -->
+    <defName>KT_UFGenerator</defName>
+    <label>KT_UFGenerator</label>
+    <description>KT_UFGenerator</description>
+    <surfaceType>None</surfaceType> <!-- 表面类型 -->
+    <uiOrder>2300</uiOrder> <!-- UI栏顺序 -->
+	<uiIconScale>1</uiIconScale> <!-- ui图标比例 -->
+    <graphicData> <!-- 图形数据 -->
+      <texPath>Things/Building/KT_UFGenerator</texPath> <!-- 贴图路径 -->
+      <graphicClass>Graphic_Single</graphicClass> <!-- 图形类 -->
+	  <drawSize>(5)</drawSize> <!-- 贴图大小 -->
+	  <drawOffset>(0,0,0.2)</drawOffset> <!-- 绘制偏移北 -->
+    </graphicData>
+    <statBases> <!-- 统计基础 -->
+      <MaxHitPoints>200000</MaxHitPoints> <!-- 最大生命值 -->
+      <WorkToBuild>3000</WorkToBuild> <!-- 工作量 -->
+      <Flammability>0</Flammability> <!-- 易燃性 -->
+	  <Mass>200</Mass>
+      <Beauty>50</Beauty> <!-- 美观 -->
+    </statBases>
+    <size>(3,3)</size> <!-- 尺寸 --> 
+	<costList>
+      <KT_steel>300</KT_steel>
+      <ComponentIndustrial>10</ComponentIndustrial>
+	  <ComponentSpacer>2</ComponentSpacer>
+	  <Gold>20</Gold>
+    </costList>
+	
+	<damageMultipliers>
+	  <li>
+        <damageDef>EMP</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>	
+	
+	<constructionSkillPrerequisite>1</constructionSkillPrerequisite> <!-- 施工技能先决条件 -->
+	<altitudeLayer>Building</altitudeLayer> <!-- 图层高度 -->
+    <passability>Standable</passability> <!-- 通过性 -->
+    <blockWind>false</blockWind> <!-- 气流阻挡 -->
+
+    <coversFloor>false</coversFloor> <!-- 覆盖地板 -->
+    <rotatable>false</rotatable> <!-- 可旋转 -->
+    <selectable>true</selectable> <!-- 可选择 -->
+	<useStuffTerrainAffordance>false</useStuffTerrainAffordance> <!-- 使用地形承受能力 -->
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded> <!-- 需要地形承受能力，石材所需的承担特质 -->
+    <holdsRoof>false</holdsRoof> <!-- 支撑屋顶 -->
+    <designationCategory>KT_designation_group</designationCategory> <!-- UI栏位置 -->
+    <castEdgeShadows>True</castEdgeShadows> <!-- 投射边缘阴影 -->
+    <blockLight>false</blockLight> <!-- 光线遮挡 -->
+	<fertility>0</fertility> <!-- 肥沃 -->
+	<building> <!-- 建筑 -->
+	  <isEdifice>true</isEdifice> <!-- 是建筑 -->
+	  <paintable>true</paintable> <!-- 可涂漆 -->
+	  <ai_chillDestination>false</ai_chillDestination> <!-- ai冷却目的地 -->
+	</building>
+	<thingCategories>
+          <li>BuildingsPower</li>
+    </thingCategories>
+    <minifiedDef>MinifiedThing</minifiedDef>
+	<researchPrerequisites>
+	  <li>KT_UFGenerator_tech</li>
+    </researchPrerequisites>
+	<tickerType>Normal</tickerType>
+	<drawerType>MapMeshAndRealTime</drawerType>
+	<comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerPlant</compClass>
+        <basePowerConsumption>-120000</basePowerConsumption>
+        <transmitsPower>true</transmitsPower>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>5</glowRadius>
+        <glowColor>(255,255,255,0)</glowColor>
+      </li>
+	  <li Class="SRA.CompProperties_BuildingDrawExtraFourRot">
+			<graphicDataExtra>
+				<graphicClass>Graphic_Single</graphicClass>
+				<shaderType>TransparentPostLight</shaderType>
+				<texPath>Things/Building/KT_UFGenerator_Light</texPath>
+				<drawSize>(5,5)</drawSize>
+	 		    <drawOffset>(0,0,0.2)</drawOffset>
+			</graphicDataExtra>
+	  </li>
+	</comps> 
+   </ThingDef> 
+   
+</Defs>

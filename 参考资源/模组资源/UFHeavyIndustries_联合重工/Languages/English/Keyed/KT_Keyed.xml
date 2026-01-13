@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  	<SRABarrierTitle>-Barrier</SRABarrierTitle>
+  	<SRA_BarrierStatus>Barrier Status</SRA_BarrierStatus>
+  	<SRA_BarrierValue>{0}/{1}</SRA_BarrierValue>
+  	<SRA_BarrierRecharging>Recharging: {0}s</SRA_BarrierRecharging>
+  	<SRA_BarrierRegen>Regen: {0}/s</SRA_BarrierRegen>
+	<SRABarrierTooltip>Barriers can block incoming damage.\n\n-Barriers have barrier efficiency. Damage taken is multiplied by barrier efficiency before calculating barrier value loss.\n-Barriers calculate the unit's damage taken multiplier and multiply it with barrier efficiency. If the damage taken multiplier is above 100%, it will not be included in the calculation.\n-Some barriers have recharge cooldown. If the barrier is completely destroyed, it enters recharge cooldown. When cooldown time is greater than 0, the barrier will fully recharge immediately after cooldown completes.\n-Some barriers have damage cap. Damage taken will not exceed this cap. Only effective when this value is greater than 0.\n-Some barriers have damage reduction. Damage taken is reduced by the corresponding value. Only effective when this value is greater than 0.\n\n-Regen Delay: {0}\n-Recharge Cooldown: {1}\n-Barrier Efficiency: {2}\n-Damage Cap: {3}\n-Damage Reduction: {4}</SRABarrierTooltip>
+	<SRA_RegenTipExtra>-Regenerates {0} health per second.</SRA_RegenTipExtra>
+
+	<OrbitalStrikePowerBeam>Orbital Laser Strike</OrbitalStrikePowerBeam>
+	<FEL_ResearchRequired>Eden: "If you don't research the corresponding technology, I won't let you use it~"</FEL_ResearchRequired>
+	<LaserInvalidTarget>"Invalid target, fire control system cannot complete lock-on."</LaserInvalidTarget>
+	<OrbitalStrikeNoOtherMap>"Fire control system has not loaded valid data."</OrbitalStrikeNoOtherMap>
+	<cooldownLeftSeconds>"Irradiation command cooling down, remaining time: {0} seconds."</cooldownLeftSeconds>
+	<OrbitalStrikePowerBeamDesc>"Call in an orbital laser strike."</OrbitalStrikePowerBeamDesc>
+	<OrbitalStrikeMessage>"{0} fire control system has loaded trajectory data, locking onto {1} area, commencing irradiation operation."</OrbitalStrikeMessage>
+	<SelectBeamStartpoint>"Safety disengaged, please designate irradiation starting point coordinates."</SelectBeamStartpoint>
+	<SelectBeamEndpoint>"Trigger unlocked, please designate irradiation ending point coordinates."</SelectBeamEndpoint>
+	
+	<Holographic.LabelNext>"Switch Image"</Holographic.LabelNext>
+	<Holographic.DescNext>"Manually switch to the next holographic image."</Holographic.DescNext>
+	<Holographic.LabelAutoplay>"Auto Cycle"</Holographic.LabelAutoplay>
+	<Holographic.DescAutoplay>"Enable or disable automatic cycling playback."</Holographic.DescAutoplay>
+	<Holographic.DisableReasonNoPower>"Insufficient power for holographic projection!"</Holographic.DisableReasonNoPower>
+	<Holographic.DisableReasonChanging>"Switching holographic projection."</Holographic.DisableReasonChanging>
+	
+	<!--Vector Reflection-->
+	<ATField_ReflectMode_Label>Vector Reflection</ATField_ReflectMode_Label>
+	<ATField_ReflectMode_Desc>Inverts the phase vectors of the AT Field, significantly reducing its rigidity but reflecting incoming projectiles back to their point of origin.</ATField_ReflectMode_Desc>
+	<!--Energy Suppression-->
+	<ATField_SuppressExplosions_Label>Energy Suppression</ATField_SuppressExplosions_Label>
+	<ATField_SuppressExplosions_Desc>In this mode, the AT Field suppresses all high-energy releases within its range. Whether external orbital saturation bombardment or internal thermonuclear mines, both will struggle to cause internal damage.</ATField_SuppressExplosions_Desc>
+	<!--Traffic Control-->
+	<ATField_RedirectSkyfall_Label>Indiscriminate Traffic Control</ATField_RedirectSkyfall_Label>
+	<ATField_RedirectSkyfall_Desc>Projects the AT Field into the upper atmosphere to deflect drop pod landing points, or creates rigid spatial fractures in the atmosphere to directly destroy drop equipment.\n\n（&lt;color=#FFAA00&gt;&lt;i&gt;When traffic control is enabled, it indiscriminately deflects all drops including allies and goods. When disabled, only deflects hostile drops.&lt;/i&gt;&lt;/color&gt;）</ATField_RedirectSkyfall_Desc>
+	<!--Warp Denial-->
+	<ATField_AntiTeleport_Label>Indiscriminate Warp Denial</ATField_AntiTeleport_Label>
+	<ATField_TeleportIntercepted>"Abnormal spatial fluctuations have been denied by AT Field."</ATField_TeleportIntercepted>
+	<ATField_AntiTeleport_Desc>Forcibly suppresses spatial energy within the field using the AT Field, maintaining a low-energy stable state. Directly banishes any targets attempting to warp into the field interior.\n\n（&lt;color=#FFAA00&gt;&lt;i&gt;When warp denial is enabled, it indiscriminately intercepts warps. When disabled, only intercepts hostile warps.&lt;/i&gt;&lt;/color&gt;）</ATField_AntiTeleport_Desc>
+	<!--Control Panel-->
+	<ATField_Energy_Label>AT Field Capacity</ATField_Energy_Label>
+	<ATField_Rebooting>AT Field Rebooting: {0}s</ATField_Rebooting>
+	<ATField_Radius_Label>AT Field Radius: {0}m</ATField_Radius_Label>
+	<ATField_Break_Warning>"Warning: AT Field oversaturation breach, system shutdown."</ATField_Break_Warning>
+	
+	<!--Turbojet Jump-->
+	<CannotJumpToRoof>"Obstruction exists above landing point"</CannotJumpToRoof>
+	<CannotJumpUnderRoof>"Obstruction exists above starting point"</CannotJumpUnderRoof>
+	<CannotFlyThroughWall>"No line of sight along dash path"</CannotFlyThroughWall>
+	<MessageJumpTargetInvalid>"Landing area impassable"</MessageJumpTargetInvalid>
+	<!--Collision Mode-->
+	<Turbojet_CombatMode_Label>Collision Mode</Turbojet_CombatMode_Label>
+	<Turbojet_CombatMode_Desc>When enabled, turbojet jumps and dashes can use the shield to inflict additional knockback and stun effects.</Turbojet_CombatMode_Desc>
+	<!--Flight Command: Walk-->
+	<Turbojet_Mode_Off_Label>Flight Command: Walk</Turbojet_Mode_Off_Label>
+	<Turbojet_Mode_Off_Desc>Turbojet engines shut down, generating no thrust.</Turbojet_Mode_Off_Desc>
+	<!--Flight Command: Boost-->
+	<Turbojet_Mode_HoverMove_Label>Flight Command: Boost</Turbojet_Mode_HoverMove_Label>
+	<Turbojet_Mode_HoverMove_Desc>Turbojet engines idle, maintaining low-altitude flight only during movement. (Cannot directly fly over roofs)\n-Can fly over deep water, vacuum, and other terrains\n-Not affected by any terrain减速\n-Can move under roofs</Turbojet_Mode_HoverMove_Desc>
+	<!--Flight Command: Hover-->
+	<Turbojet_Mode_HoverAlways_Label>Flight Command: Hover</Turbojet_Mode_HoverAlways_Label>
+	<Turbojet_Mode_HoverAlways_Desc>Turbojet engines operate at rated capacity, enabling sustained aerial flight. (Cannot directly fly over roofs)\n-Ignores walls, can hover over deep water, vacuum, and other terrains\n-Not affected by any terrain减速\n-Hovering state不受dangerous terrain damage, does not trigger mines\n-Cannot move under roofs</Turbojet_Mode_HoverAlways_Desc>
+	<!--Aerodynamic Shield-->
+	<Turbojet_Shield_Recharging>Overload Reset</Turbojet_Shield_Recharging>
+	<Turbojet_Shield_Status>Shield Capacity: {0} / {1}</Turbojet_Shield_Status>
+
+</LanguageData>

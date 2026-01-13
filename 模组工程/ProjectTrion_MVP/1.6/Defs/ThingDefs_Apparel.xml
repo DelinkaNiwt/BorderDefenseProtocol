@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ======================== 触发器装备基础 ======================== -->
+  <!-- Trion触发器基础定义 - 所有触发器的父类 -->
+  <ThingDef Name="TrionTriggerBase" Abstract="true" ParentName="ApparelBase">
+    <category>Item</category>
+    <tickerType>Normal</tickerType>
+    <stackLimit>1</stackLimit>
+    <apparel>
+      <bodyPartGroups>
+        <li>Torso</li>  <!-- 穿在躯干 -->
+      </bodyPartGroups>
+      <layers>
+        <li>OnSkin</li>  <!-- 贴身穿戴 -->
+      </layers>
+    </apparel>
+    <statBases>
+      <Insulation_Cold>0</Insulation_Cold>
+      <Insulation_Heat>0</Insulation_Heat>
+      <ArmorRating_Sharp>0.1</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.1</ArmorRating_Blunt>
+      <ArmorRating_Heat>0.2</ArmorRating_Heat>
+    </statBases>
+  </ThingDef>
+
+  <!-- ======================== 标准触发器 ======================== -->
+  <ThingDef ParentName="TrionTriggerBase">
+    <defName>TrionTrigger_Standard</defName>
+    <label>标准触发器</label>
+    <description>Trion能量驱动的多功能触发器。可装配多个组件模块，是使用Trion系统的关键装备。\n\n具有3个挂载点：左手(4槽)、右手(4槽)、特殊(1槽)</description>
+
+    <thingClass>ProjectTrion_MVP.TrionTrigger</thingClass>
+    <graphicData>
+      <texPath>Items/Trion/TrionTrigger_Standard</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+
+    <statBases>
+      <Mass>2</Mass>
+      <Flammability>0.5</Flammability>
+    </statBases>
+
+    <smeltable>false</smeltable>
+
+    <tradeTags>
+      <li>Apparel</li>
+    </tradeTags>
+  </ThingDef>
+
+</Defs>

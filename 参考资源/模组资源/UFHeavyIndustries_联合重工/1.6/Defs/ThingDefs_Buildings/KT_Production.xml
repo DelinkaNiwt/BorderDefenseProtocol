@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <WorkGiverDef>
+    <defName>KT_Operate</defName>
+    <label>Operate Machine</label>
+    <giverClass>WorkGiver_DoBill</giverClass>
+    <workType>Crafting</workType>
+    <priorityInType>140</priorityInType>
+    <fixedBillGiverDefs>
+	  <li>KT_Workbench</li>
+    </fixedBillGiverDefs>
+    <verb>Operate</verb>
+    <gerund>Operating at</gerund>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <prioritizeSustains>true</prioritizeSustains>
+  </WorkGiverDef>
+  
+  <ThingDef ParentName="BenchBase" Name="KT_BenchBase" Abstract="True">
+		<thingClass>Building_WorkTable</thingClass>
+		<castEdgeShadows>true</castEdgeShadows>
+		<staticSunShadowHeight>0.20</staticSunShadowHeight>
+		<altitudeLayer>Building</altitudeLayer>
+		<fillPercent>0.8</fillPercent>
+		<useHitPoints>True</useHitPoints>
+		<designationCategory>KT_designation_group</designationCategory>
+		<passability>PassThroughOnly</passability>
+		<pathCost>80</pathCost>
+		<hasInteractionCell>True</hasInteractionCell>
+		<surfaceType>Item</surfaceType>
+	  <inspectorTabs>
+			<li>ITab_Bills</li>
+		</inspectorTabs>
+		<building>
+			<spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
+			<paintable>true</paintable>
+		</building>
+		<constructEffect>ConstructMetal</constructEffect>
+		<comps>
+			<li Class="CompProperties_Flickable"/>
+			<li Class="CompProperties_AffectedByFacilities">
+				<linkableFacilities>
+					<li>ToolCabinet</li>
+				</linkableFacilities>
+			</li>
+		</comps>
+    <placeWorkers>
+      <li>PlaceWorker_ShowFacilitiesConnections</li>
+      <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+    </placeWorkers>
+  </ThingDef>
+  
+  <WorkGiverDef>
+    <defName>KT_Operate_II</defName>
+    <label>Operate Machine</label>
+    <giverClass>WorkGiver_DoBill</giverClass>
+    <workType>Crafting</workType>
+    <priorityInType>140</priorityInType>
+    <fixedBillGiverDefs>
+	  <li>KT_SWorkbench</li>
+    </fixedBillGiverDefs>
+    <verb>Operate</verb>
+    <gerund>Operating at</gerund>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <prioritizeSustains>true</prioritizeSustains>
+  </WorkGiverDef>
+  
+  <ThingDef ParentName="BenchBase" Name="KT_SBenchBase" Abstract="True">
+		<thingClass>Building_WorkTable</thingClass>
+		<castEdgeShadows>true</castEdgeShadows>
+		<staticSunShadowHeight>0.20</staticSunShadowHeight>
+		<altitudeLayer>Building</altitudeLayer>
+		<fillPercent>0.8</fillPercent>
+		<useHitPoints>True</useHitPoints>
+		<designationCategory>KT_designation_group</designationCategory>
+		<passability>PassThroughOnly</passability>
+		<pathCost>80</pathCost>
+		<hasInteractionCell>True</hasInteractionCell>
+		<surfaceType>Item</surfaceType>
+	  <inspectorTabs>
+			<li>ITab_Bills</li>
+		</inspectorTabs>
+		<building>
+			<spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
+			<paintable>true</paintable>
+		</building>
+		<constructEffect>ConstructMetal</constructEffect>
+		<comps>
+			<li Class="CompProperties_Flickable"/>
+			<li Class="CompProperties_AffectedByFacilities">
+				<linkableFacilities>
+					<li>ToolCabinet</li>
+				</linkableFacilities>
+			</li>
+		</comps>
+    <placeWorkers>
+      <li>PlaceWorker_ShowFacilitiesConnections</li>
+      <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+    </placeWorkers>
+  </ThingDef>
+	
+  <ThingDef ParentName="KT_BenchBase">
+    <defName>KT_Workbench</defName>
+    <label>KT_Workbench</label>
+    <description>KT_Workbench</description>
+	<uiOrder>2250</uiOrder> <!-- UI栏顺序 -->
+	<uiIconPath>Things/Building/KT_Workbench</uiIconPath>
+    <graphicData>
+      <texPath>Things/Building/KT_Workbench</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(5,3)</drawSize>
+	  <drawOffsetSouth>(0,0,0)</drawOffsetSouth>
+	  <drawOffsetNorth>(0,0,0)</drawOffsetNorth>
+	  <drawOffsetEast>(-0.38,0,0)</drawOffsetEast>
+	  <drawOffsetWest>(0.30,0,0)</drawOffsetWest>
+    </graphicData>
+    <designationCategory>KT_designation_group</designationCategory>
+    <costList>
+      <Steel>350</Steel>
+      <ComponentIndustrial>10</ComponentIndustrial>
+	  <ComponentSpacer>2</ComponentSpacer>
+    </costList>
+	<defaultPlacingRot>North</defaultPlacingRot> <!-- 默认放置位置 -->
+	<rotatable>true</rotatable> <!-- 可旋转 -->
+    <statBases>
+      <WorkToBuild>9000</WorkToBuild>
+      <MaxHitPoints>2500</MaxHitPoints>
+      <Flammability>0.05</Flammability>
+	  <Mass>125</Mass>
+      <WorkTableWorkSpeedFactor>1.35</WorkTableWorkSpeedFactor>
+    </statBases>
+    <size>(5,2)</size>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+    <minifiedDef>MinifiedThing</minifiedDef>
+	<tickerType>Normal</tickerType>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <basePowerConsumption>1200</basePowerConsumption>
+      </li>
+	  <li Class="CompProperties_Glower">
+            <glowRadius>3</glowRadius>
+            <glowColor>(255,255,255,0)</glowColor>
+	  </li>
+	  <li Class="SRA.CompProperties_BuildingDrawExtraFourRot">
+			<graphicDataExtra>
+				<graphicClass>Graphic_Multi</graphicClass>
+				<shaderType>TransparentPostLight</shaderType>
+				<texPath>Things/Building/KT_Workbench_Light</texPath>
+				<drawSize>(5,3)</drawSize>
+	 		    <drawOffsetSouth>(0,0,0)</drawOffsetSouth>
+	 		    <drawOffsetNorth>(0,0,0)</drawOffsetNorth>
+			    <drawOffsetEast>(-0.38,0,0)</drawOffsetEast>
+			    <drawOffsetWest>(0.30,0,0)</drawOffsetWest>
+			</graphicDataExtra>
+	  </li>
+    </comps>
+	
+	<recipes>
+      <li>Make_ComponentIndustrial</li>
+	  <li>Make_ComponentSpacer</li>
+	  <li>Make_KTNutrientPaste</li><!-- 改成三明治了，但我懒得新增条目了，直接再原来的营养膏上改了 -->
+	  <li>Make_KTNutrientPaste_ten</li><!-- 改成三明治了，但我懒得新增条目了，直接再原来的营养膏上改了 -->
+    </recipes>
+	
+	<researchPrerequisites>
+      <li>KT_Base_Workbench</li>
+    </researchPrerequisites>
+  </ThingDef>
+  
+  <ThingDef ParentName="KT_SBenchBase">
+    <defName>KT_SWorkbench</defName>
+    <label>KT_SWorkbench</label>
+    <description>KT_SWorkbench</description>
+	<uiOrder>2250</uiOrder> <!-- UI栏顺序 -->
+    <graphicData>
+      <texPath>Things/Building/KT_SWorkbench</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(2.9)</drawSize>
+	  <drawOffsetSouth>(0,0,0.2)</drawOffsetSouth>
+	  <drawOffsetNorth>(0,0,-0.05)</drawOffsetNorth>
+	  <drawOffsetEast>(-0.11,0,0.5)</drawOffsetEast>
+	  <drawOffsetWest>(0.10,0,0.5)</drawOffsetWest>
+    </graphicData>
+    <designationCategory>KT_designation_group</designationCategory>
+    <costList>
+      <Steel>200</Steel>
+      <ComponentIndustrial>5</ComponentIndustrial>
+	  <ComponentSpacer>1</ComponentSpacer>
+    </costList>
+	<defaultPlacingRot>North</defaultPlacingRot> <!-- 默认放置位置 -->
+	<rotatable>true</rotatable> <!-- 可旋转 -->
+    <statBases>
+      <WorkToBuild>5000</WorkToBuild>
+      <MaxHitPoints>2000</MaxHitPoints>
+      <Flammability>0.05</Flammability>
+      <WorkTableWorkSpeedFactor>1.35</WorkTableWorkSpeedFactor>
+	  <Mass>80</Mass>
+    </statBases>
+	  <recipes>
+	  </recipes>
+    <size>(1,2)</size>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+	<tickerType>Normal</tickerType>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <comps>
+	  <li Class="SRA.CompProperties_BuildingDrawExtraFourRot">
+			<graphicDataExtra>
+				<graphicClass>Graphic_Multi</graphicClass>
+				<shaderType>TransparentPostLight</shaderType>
+				<texPath>Things/Building/KT_SWorkbench_Light</texPath>
+				<drawSize>(2.9)</drawSize>
+	  		    <drawOffsetSouth>(0,0,0.2)</drawOffsetSouth>
+	  		    <drawOffsetNorth>(0,0,-0.05)</drawOffsetNorth>
+	  		    <drawOffsetEast>(-0.11,0,0.5)</drawOffsetEast>
+	  		    <drawOffsetWest>(0.10,0,0.5)</drawOffsetWest>
+			</graphicDataExtra>
+	  </li>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <basePowerConsumption>800</basePowerConsumption>
+      </li>
+	  <li Class="CompProperties_Glower">
+            <glowRadius>3</glowRadius>
+            <glowColor>(255,255,255,0)</glowColor>
+	  </li>
+    </comps>
+    <minifiedDef>MinifiedThing</minifiedDef>
+	<recipes>
+      <li>Make_ComponentIndustrial</li>
+	  <li>Make_ComponentSpacer</li>
+	  <li>Make_KTNutrientPaste</li>
+	  <li>Make_KTNutrientPaste_ten</li><!-- 改成三明治了，但我懒得新增条目了，直接再原来的营养膏上改了 -->
+    </recipes>
+	
+	<researchPrerequisites>
+      <li>KT_Base_Workbench</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+</Defs>	

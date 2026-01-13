@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+    <ThingDef ParentName="BuildingBase">
+        <defName>KTLM</defName> 
+        <label>KTLM</label> <!-- 显示名称 -->
+        <description>KTLM.</description> <!-- 描述 -->
+        <uiOrder>1600</uiOrder> <!-- UI栏顺序 -->
+        <thingClass>Building_TurretGun</thingClass> <!-- 定义为炮塔 -->
+        
+        <size>(1,1)</size>
+        <drawerType>MapMeshAndRealTime</drawerType> <!-- 绘制类型：地图网格和实时 -->
+        
+        <graphicData>
+			<texPath>Things/Building/Security/KT_Base_Small</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(3,3)</drawSize>
+		</graphicData>
+
+        <castEdgeShadows>False</castEdgeShadows> <!-- 是否渲染阴影 -->
+        <minifiedDef>MinifiedThing</minifiedDef> <!-- 最小化后的定义 -->
+        <uiIconPath>Things/Building/Security/KTLM_Ico</uiIconPath> <!-- 图标路径 -->
+
+        <altitudeLayer>Building</altitudeLayer> <!-- 图形的显示层级 -->
+        <stealable>false</stealable> <!-- 不可盗窃 -->
+        <rotatable>true</rotatable> <!-- 不可旋转 -->
+        
+        <thingCategories>
+            <li>BuildingsSecurity</li> <!-- 建筑类别：安全 -->
+        </thingCategories>
+        
+        <statBases>
+            <MaxHitPoints>300</MaxHitPoints> <!-- 最大生命值 -->
+            <Flammability>0</Flammability> <!-- 可燃性 -->
+            <WorkToBuild>150</WorkToBuild> <!-- 建造所需工作时间 -->
+            <Mass>50</Mass> <!-- 质量 -->
+            <Beauty>-15</Beauty> <!-- 美观度 -->
+            <ShootingAccuracyTurret>1</ShootingAccuracyTurret> <!-- 射击精度 -->
+        </statBases>
+
+        <tickerType>Normal</tickerType> <!-- 每次更新的计时器类型 -->
+        
+    <comps>
+      <li Class="SRA.CompProperties_ForceTargetable" /><!-- 善良手操 -->  
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>30</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Refuelable"> <!-- 应该是可以补给 -->
+        <fuelLabel>Shots until barrel change</fuelLabel>
+        <fuelGizmoLabel>Barrel durability</fuelGizmoLabel>
+        <outOfFuelMessage>Needs new barrel</outOfFuelMessage>
+        <fuelFilter><thingDefs><li>Steel</li></thingDefs></fuelFilter>
+        <fuelCapacity>12</fuelCapacity>
+        <fuelMultiplier>0.4</fuelMultiplier>
+        <initialFuelPercent>1</initialFuelPercent>
+        <autoRefuelPercent>0.5</autoRefuelPercent>
+        <showFuelGizmo>true</showFuelGizmo>
+        <minimumFueledThreshold>1</minimumFueledThreshold>
+        <factorByDifficulty>false</factorByDifficulty>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelIconPath>KT_UI/UI_OUTAMMO</fuelIconPath>
+      </li>
+    </comps>
+        
+        <passability>PassThroughOnly</passability> <!-- 只能穿透 -->
+        <pathCost>50</pathCost> <!-- 建筑路径成本 -->
+        <fillPercent>0.5</fillPercent> <!-- 填充度 -->
+        <hasTooltip>true</hasTooltip> <!-- 是否显示工具提示 -->
+        
+        
+        <costList>
+            <Steel>100</Steel> <!-- 钢铁 200 单位 -->
+            <ComponentIndustrial>3</ComponentIndustrial> <!-- 工业组件 10 个 -->
+        </costList>
+        
+        <generateCommonality>0</generateCommonality>
+        <tradeability>None</tradeability>
+
+        <constructionSkillPrerequisite>5</constructionSkillPrerequisite> <!-- 建造技能需求 -->
+        <terrainAffordanceNeeded>Light</terrainAffordanceNeeded> <!-- 需要轻型地形 -->
+        <designationCategory>KT_designation_group</designationCategory> <!-- 指定分类：安全 -->
+
+        <building>
+            <ai_combatDangerous>true</ai_combatDangerous> <!-- AI认为它具有危险性 -->
+            <turretGunDef>Gun_KTLM</turretGunDef> <!-- 定义使用的枪械 -->
+            <deconstructible>true</deconstructible>
+            <paintable>true</paintable> <!-- 是否可以涂漆：可以 -->
+            <turretTopDrawSize>2.5</turretTopDrawSize>
+            <turretTopOffset>(0, 0)</turretTopOffset>
+            <turretBurstCooldownTime>4</turretBurstCooldownTime> <!-- 炮塔射击冷却时间 -->
+            <combatPower>10</combatPower>
+        </building>
+		
+        <researchPrerequisites>
+            <li>KT_Base_t0_turret</li>
+        </researchPrerequisites>
+		
+        <placeWorkers>
+            <li>PlaceWorker_TurretTop</li> <!-- 放置工作：炮塔顶部 -->
+            <li>PlaceWorker_ShowTurretRadius</li>
+        </placeWorkers>
+        
+    </ThingDef>
+
+    <!-- 定义武器 -->
+    <ThingDef ParentName="BaseWeaponTurret">
+        <defName>Gun_KTLM</defName> <!-- 武器名称 -->
+        <label>Gun_KTLM</label> <!-- 武器标签 -->
+        <description>Gun_KTLM.</description> <!-- 武器描述 -->
+        <graphicData>
+            <texPath>Things/Building/Security/KTLM</texPath> <!-- 武器贴图路径 -->
+            <graphicClass>Graphic_Single</graphicClass> <!-- 使用单一图形 -->
+            <shaderType>CutoutComplex</shaderType>
+        </graphicData>
+        <soundInteract>Interact_Rifle</soundInteract> <!-- 使用时音效 -->
+        <tradeability>None</tradeability> <!-- 不能交易 -->
+        <destroyOnDrop>true</destroyOnDrop> <!-- 掉落时销毁 -->
+        <generateCommonality>0</generateCommonality>
+        <statBases>
+            <AccuracyTouch>0.6</AccuracyTouch> <!-- 近距离精度 -->
+            <AccuracyShort>0.7</AccuracyShort> <!-- 短程精度 -->
+            <AccuracyMedium>0.8</AccuracyMedium> <!-- 中程精度 -->
+            <AccuracyLong>0.9</AccuracyLong> <!-- 长程精度 -->
+            <RangedWeapon_Cooldown>4</RangedWeapon_Cooldown> <!-- 冷却时间 -->
+            <Mass>25</Mass> <!-- 质量 -->
+            <Flammability>0</Flammability> <!-- 不可燃 -->
+            <DeteriorationRate>0</DeteriorationRate> <!-- 不会腐烂 -->
+        </statBases>
+		<weaponTags>
+	  	  <li>KT_weapon</li>
+   	    </weaponTags>
+        <verbs>
+            <li>
+                <verbClass>Verb_Shoot</verbClass> <!-- 射击行为 -->
+                <hasStandardCommand>true</hasStandardCommand> <!-- 标准命令 -->
+                <defaultProjectile>KTLM_BULLET</defaultProjectile> <!-- 默认子弹 -->
+                <warmupTime>1</warmupTime> <!-- 预热时间 -->
+				<requireLineOfSight>false</requireLineOfSight><!-- 能不能曲射 -->
+                <range>50</range> <!-- 射程 -->
+				<minRange>15</minRange>
+                <burstShotCount>1</burstShotCount> <!-- 每次射击子弹数量 -->
+                <ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+                <soundCast>KTLMRound</soundCast> <!-- 射击音效 -->
+                <soundCastTail>GunTail_Heavy</soundCastTail> <!-- 尾音效 -->
+                <muzzleFlashScale>40</muzzleFlashScale> <!-- 火光规模 -->
+                <consumeFuelPerShot>1</consumeFuelPerShot> <!-- 每发子弹消耗的燃料 -->
+				<targetParams>
+					<canTargetLocations>true</canTargetLocations>
+				</targetParams>
+            </li>
+        </verbs>
+    </ThingDef>
+	
+	
+	<ThingDef>
+        <defName>KTLM_BULLET</defName>
+        <label>KTLM_BULLET</label>
+        <thingClass>SRA.Projectile_MultiExplosive</thingClass>
+        <category>Projectile</category>
+        <tickerType>Normal</tickerType>
+        <altitudeLayer>Projectile</altitudeLayer>
+        <graphicData>
+            <texPath>Things/Projectile/Bullet_LM</texPath> <!-- 子弹贴图路径 -->
+            <graphicClass>Graphic_Single</graphicClass> <!-- 使用单一图形 -->
+      		<drawSize>(2)</drawSize>
+        </graphicData>
+        <projectile>
+            <damageDef>Bomb</damageDef>
+            <explosionRadius>2.5</explosionRadius>
+            <speed>80</speed>
+            <damageAmountBase>40</damageAmountBase>
+            <arcHeightFactor>0</arcHeightFactor>
+            <soundExplode>Explosion_Rocket</soundExplode>
+			<flyOverhead>true</flyOverhead>
+			<stoppingPower>0.8</stoppingPower>
+        </projectile>
+		<modExtensions>
+		  <li Class="SRA.TailBulletDef">
+       		   <tailFleckDef>KT_Fleck_Smoke_Tail</tailFleckDef>
+      	 	   <fleckMakeFleckTickMax>10</fleckMakeFleckTickMax><!-- 疑似无效 -->
+			   <fleckDelayTicks>5</fleckDelayTicks><!-- 出膛后多久出现轨迹 -->
+			   <fleckMakeFleckNum>1</fleckMakeFleckNum>
+     	  </li>
+          <li Class="SRA.MultiExplosiveExtension">
+               <multiexplosions>
+                 <li>
+                  <radius>2.5</radius>
+                  <damageDef>Bomb</damageDef>
+                  <damageAmount>40</damageAmount>
+                  <armorPenetration>0.8</armorPenetration>
+                  <explosionSound>Explosion_Bomb</explosionSound>
+                  <explosionDamageFalloff>true</explosionDamageFalloff><!-- 默认true -->
+                  <onlyAntiHostile>true</onlyAntiHostile> <!-- 智能弹药：这个爆炸只伤害敌对目标，默认false -->
+                  <!-- 现阶段就支持这么多参数 -->
+                 </li>
+               </multiexplosions>
+			   <bulletLaunches>
+                   <li>
+                     <projectileDef>KTLM_BULLET_Splinter</projectileDef>
+                     <bulletCount>4</bulletCount>
+                     <angleRange>140</angleRange>
+                     <distanceRange>
+                       <min>3</min>
+                       <max>6</max>
+                     </distanceRange>
+                   </li>
+               </bulletLaunches>
+          </li>
+       </modExtensions>
+  </ThingDef>	
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>KTLM_BULLET_Splinter</defName>
+    <label>KTLM_BULLET</label>
+    <thingClass>Projectile_Explosive</thingClass>
+        <category>Projectile</category>
+        <tickerType>Normal</tickerType>
+        <altitudeLayer>Projectile</altitudeLayer>
+        <graphicData>
+            <texPath>Things/Projectile/Bullet_381MM</texPath> <!-- 子弹贴图路径 -->
+            <graphicClass>Graphic_Single</graphicClass> <!-- 使用单一图形 -->
+			<shaderType>MoteGlow</shaderType>
+      		<drawSize>(0.8)</drawSize>
+        </graphicData>
+        <projectile>
+            <damageDef>Bomb</damageDef>
+            <explosionRadius>1</explosionRadius>
+            <speed>180</speed>
+            <damageAmountBase>25</damageAmountBase>
+            <arcHeightFactor>0</arcHeightFactor>
+            <soundExplode>Explosion_Rocket</soundExplode>
+			<flyOverhead>true</flyOverhead>
+			<armorPenetrationBase>0.5</armorPenetrationBase>
+		</projectile>
+  </ThingDef>
+</Defs>

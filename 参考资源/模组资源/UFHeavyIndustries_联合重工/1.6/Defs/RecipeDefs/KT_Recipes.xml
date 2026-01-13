@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs> 
+  <RecipeDef Name="KT_CookMeal" ParentName="CookMealBase">
+    <defName>KT_CookMeal</defName>
+    <label>cook meal</label>
+    <description>Cook a straightforward meal from one ingredient.</description>
+    <jobString>Cooking meal.</jobString>
+    <workSpeedStat>CookSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_CookMeal</soundWorking>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
+    <workSkill>Cooking</workSkill>
+    <displayPriority>100</displayPriority>
+  </RecipeDef>
+  
+  <RecipeDef ParentName="KT_CookMeal"><!-- 改成三明治了，但我懒得新增条目了，直接再原来的营养膏上改了 -->
+    <defName>Make_KTNutrientPaste</defName>
+    <label>Make_KTNutrientPaste</label>
+    <description>Cook a sandwich.</description>
+    <jobString>Cooking Sandwich.</jobString>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>FoodRaw</li>
+          </categories>
+        </filter>
+        <count>0.2</count>
+      </li>
+    </ingredients>
+    <products>
+      <KTNutrientPaste>1</KTNutrientPaste>
+    </products>
+    <displayPriority>700</displayPriority>
+  </RecipeDef>
+  
+  <RecipeDef ParentName="KT_CookMeal"><!-- 改成三明治了，但我懒得新增条目了，直接再原来的营养膏上改了 -->
+    <defName>Make_KTNutrientPaste_ten</defName>
+    <label>Cook 10 sandwiches.</label>
+    <description>Cook 10 sandwiches.</description>
+    <jobString>Cooking Sandwich.</jobString>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>FoodRaw</li>
+          </categories>
+        </filter>
+        <count>2</count>
+      </li>
+    </ingredients>
+    <products>
+      <KTNutrientPaste>10</KTNutrientPaste>
+    </products>
+    <displayPriority>700</displayPriority>
+  </RecipeDef>
+  
+  <RecipeDef>
+    <defName>Make_KT_steel</defName>
+    <label>Make Mundite X10</label>
+    <description>Make 10 Mundites</description>
+    <jobString>Making Mundite.</jobString>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_Machining</soundWorking>
+    <workAmount>500</workAmount>
+    <unfinishedThingDef>UnfinishedComponent</unfinishedThingDef>
+	<recipeUsers>
+        <li>KT_SWorkbench</li>
+		<li>FabricationBench</li>
+    </recipeUsers>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>80</count>
+      </li>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>20</count>
+      </li>
+    </ingredients>
+    <products>
+      <KT_steel>10</KT_steel>
+    </products>
+    <skillRequirements>
+      <Crafting>12</Crafting>
+    </skillRequirements>
+    <workSkill>Crafting</workSkill>
+    <displayPriority>0</displayPriority>
+  </RecipeDef>
+  
+  <RecipeDef>
+    <defName>Make_KT_steel_hundred</defName>
+    <label>Make Mundite X100</label>
+    <description>Make 100 Mundites</description>
+    <jobString>Making Mundite.</jobString>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_Machining</soundWorking>
+    <workAmount>500</workAmount>
+    <unfinishedThingDef>UnfinishedComponent</unfinishedThingDef>
+	<recipeUsers>
+        <li>KT_SWorkbench</li>
+		<li>FabricationBench</li>
+    </recipeUsers>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>800</count>
+      </li>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>200</count>
+      </li>
+    </ingredients>
+    <products>
+      <KT_steel>100</KT_steel>
+    </products>
+    <skillRequirements>
+      <Crafting>12</Crafting>
+    </skillRequirements>
+    <workSkill>Crafting</workSkill>
+    <displayPriority>0</displayPriority>
+  </RecipeDef>
+</Defs>

@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<!--等离子体炮口焰效-->
+	<ThingDef ParentName="MoteBase">
+		<defName>PlasmaMuzzleFlash</defName>
+		<label>Plasma Muzzle Flash</label>
+		<description>Plasma Muzzle Flash</description>
+		<tickerType>Normal</tickerType>
+		<!--焰效材质数据-->
+		<category>Mote</category>
+		<altitudeLayer>Projectile</altitudeLayer>
+		<graphicData>
+			<drawSize>(7, 7)</drawSize>
+			<shaderType>MoteGlow</shaderType>
+			<texPath>Things/TripletTurbolasers/PlasmaMuzzleFlash</texPath>
+		</graphicData>
+		<mote>
+			<solidTime>0.05</solidTime>
+			<fadeOutTime>0.15</fadeOutTime>
+		</mote>
+	</ThingDef>
+	<!--核光焰热冲击效果-->
+	<!--核热浪扭曲-->
+	<FleckDef ParentName="FleckGlowDistortBackground">
+		<defName>Fleck_NuclearHeatWave</defName>
+		<altitudeLayer>MoteOverheadLow</altitudeLayer>
+		<fleckSystemClass>FleckSystemThrown</fleckSystemClass>
+		<fadeInTime>0.1</fadeInTime>
+		<fadeOutTime>0.5</fadeOutTime>
+		<solidTime>0.3</solidTime>
+		<growthRate>15</growthRate>
+		<graphicData>
+			<drawSize>(7.5, 7.5)</drawSize>
+			<texPath>Things/Mote/Black</texPath>
+			<shaderParameters>
+				<_brightnessMultiplier>3</_brightnessMultiplier>
+				<_distortionIntensity>0.05</_distortionIntensity>
+				<_DistortionTex>/Things/Mote/MoteHellfireCannon_HeatWaveDistortion</_DistortionTex>
+			</shaderParameters>
+		</graphicData>
+	</FleckDef>
+	<!--切伦科夫闪光A-->
+	<FleckDef ParentName="FleckBase_Thrown">
+		<defName>Fleck_CherenkovLightA</defName>
+		<altitudeLayer>MoteOverhead</altitudeLayer>
+		<fadeInTime>0.25</fadeInTime>
+		<fadeOutTime>0.75</fadeOutTime>
+		<solidTime>0.5</solidTime>
+		<growthRate>3</growthRate>
+		<graphicData>
+			<drawSize>(10, 10)</drawSize>
+			<color>(0.1, 0.5, 1.0, 1.0)</color>
+			<shaderType>MoteHeatDiffusion</shaderType>
+			<texPath>Things/Mote/HeatDiffusion</texPath>
+			<graphicClass>Graphic_FleckPulse</graphicClass>
+			<shaderParameters>
+				<_Clip>0</_Clip>
+				<_Intensity>10</_Intensity>
+				<_texBScale>0.25</_texBScale>
+				<_texBScrollSpeed>-0.5</_texBScrollSpeed>
+				<_MultiplyTex>/Things/Mote/RadiationDistortion_A</_MultiplyTex>
+			</shaderParameters>
+		</graphicData>
+	</FleckDef>
+	<!--切伦科夫闪光B-->
+	<FleckDef ParentName="FleckBase_Thrown">
+		<defName>Fleck_CherenkovLightB</defName>
+		<altitudeLayer>MoteOverhead</altitudeLayer>
+		<fadeInTime>0.25</fadeInTime>
+		<fadeOutTime>0.75</fadeOutTime>
+		<solidTime>0.5</solidTime>
+		<growthRate>3</growthRate>
+		<graphicData>
+			<drawSize>(10, 10)</drawSize>
+			<color>(0, 0.5, 0.5, 1)</color>
+			<shaderType>MoteHeatDiffusion</shaderType>
+			<texPath>Things/Mote/HeatDiffusion</texPath>
+			<graphicClass>Graphic_FleckPulse</graphicClass>
+			<shaderParameters>
+				<_Clip>0</_Clip>
+				<_Intensity>10</_Intensity>
+				<_texBScale>0.25</_texBScale>
+				<_texBScrollSpeed>-0.5</_texBScrollSpeed>
+				<_MultiplyTex>/Things/Mote/RadiationDistortion_B</_MultiplyTex>
+			</shaderParameters>
+		</graphicData>
+	</FleckDef>
+	<!--高热气旋-->
+	<FleckDef ParentName="FleckBase_Thrown">
+		<defName>Fleck_HeatCyclone</defName>
+		<altitudeLayer>MoteOverhead</altitudeLayer>
+		<fleckSystemClass>FleckSystemThrown</fleckSystemClass>
+		<fadeInTime>0.25</fadeInTime>
+		<fadeOutTime>0.75</fadeOutTime>
+		<solidTime>0.5</solidTime>
+		<graphicData>
+			<drawSize>(75, 75)</drawSize>
+			<shaderType>MoteGlow</shaderType>
+			<texPath>Things/Mote/VaporizeExplosionRays_A</texPath>
+		</graphicData>
+	</FleckDef>
+	<!--核光焰冲击-->
+	<EffecterDef>
+		<defName>NuclearFlameWave</defName>
+		<children>
+			<li>
+				<subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+				<fleckDef>Fleck_NuclearHeatWave</fleckDef>
+				<burstCount>1</burstCount>
+				<spawnLocType>OnSource</spawnLocType>
+			</li>
+			<li>
+				<subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+				<fleckDef>Fleck_CherenkovLightA</fleckDef>
+				<burstCount>1</burstCount>
+				<spawnLocType>OnSource</spawnLocType>
+			</li>
+			<li>
+				<subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+				<fleckDef>Fleck_CherenkovLightB</fleckDef>
+				<burstCount>1</burstCount>
+				<spawnLocType>OnSource</spawnLocType>
+			</li>
+			<li>
+				<subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+				<fleckDef>Fleck_HeatCyclone</fleckDef>
+				<burstCount>1</burstCount>
+				<rotationRate>30</rotationRate>
+				<spawnLocType>OnSource</spawnLocType>
+			</li>
+		</children>
+	</EffecterDef>
+	<!--三联装泵浦激光炮塔-->
+	<ThingDef ParentName="HeavyNavalGunTurretBase">
+		<defName>Turret_TripletTurbolasers</defName>
+		<label>Triplet Turbolasers Turret</label>
+		<description>A Triplet Turbolasers Turret</description>
+		<uiOrder>2220</uiOrder> <!-- UI栏顺序 -->
+		<designationCategory>KT_designation_group</designationCategory> <!-- 指定分类：联合 -->
+		<researchPrerequisites>
+            <li>KT_Base_t5_energy_turret</li>
+        </researchPrerequisites>
+
+		<!--炮塔材质数据-->
+		<size>(7,7)</size>
+		<tickerType>Normal</tickerType>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<uiIconPath>Things/TripletTurbolasers/TripletTurbolasers_MenuIcon</uiIconPath>
+		<graphicData>
+			<drawSize>(17,17)</drawSize>
+			<graphicClass>Graphic_Single</graphicClass>
+			<texPath>Things/TripletTurbolasers/TripletTurbolasers_Base</texPath>
+		</graphicData>
+		<!--炮塔转速设置-->
+		<thingClass>HNGT.Building_TurretGunRotateAim</thingClass>
+		<modExtensions>
+			<li Class="HNGT.ModExt_RotateAimTurret">
+				<speed>1.5</speed>
+			</li>
+		</modExtensions>
+		<!--炮塔工作参数-->
+		<statBases>
+			<Flammability>0</Flammability>
+			<WorkToBuild>12000</WorkToBuild>
+			<MaxHitPoints>12000</MaxHitPoints>
+			<ShootingAccuracyTurret>1</ShootingAccuracyTurret>
+		</statBases>
+		<useHitPoints>true</useHitPoints>
+		<!--炮塔承伤系数-->
+		<damageMultipliers>
+			<li>
+				<damageDef>EMP</damageDef>
+				<multiplier>0</multiplier>
+			</li>
+			<li>
+				<damageDef>Stun</damageDef>
+				<multiplier>0</multiplier>
+			</li>
+			<li>
+				<damageDef>Flame</damageDef>
+				<multiplier>0</multiplier>
+			</li>
+		</damageMultipliers>
+		<!--炮塔建造材料-->
+		<costList>
+			<KT_steel>900</KT_steel>
+     		<ComponentIndustrial>60</ComponentIndustrial>
+	 		<ComponentSpacer>40</ComponentSpacer>
+		</costList>
+		<killedLeavings>
+			<ChunkSlagSteel>5</ChunkSlagSteel>
+		</killedLeavings>
+		<!--炮塔工作组件-->
+		<comps>
+			<li Class="CompProperties_Flickable"/>
+			<li Class="HNGT.CompProperties_ManualAimMode" />
+			<li Class="CompProperties_Power">
+				<transmitsPower>false</transmitsPower>
+				<compClass>CompPowerTrader</compClass>
+				<basePowerConsumption>18000</basePowerConsumption>
+			</li>
+			<!--洲际弹道打击工作组件-->
+			<li Class="HNGT.CompProperties_HNGT_GlobalBallisticAttack">
+				<!--冷却时间-->
+				<cooldownSeconds>10</cooldownSeconds>
+				<!--末段打击效果-->
+				<payloadThingDefName>Bombardment_TripletTurbolasers</payloadThingDefName>
+				<!--世界地图飞行物定义-->
+				<worldObjectDefName>Cluster_TripletTurbolasers</worldObjectDefName>
+				<!--洲际弹道打击按钮材质数据-->
+				<iconPath>Things/TripletTurbolasers/test</iconPath>
+			</li>
+		</comps>
+		<building>
+			<turretTopOffset>(0, 0)</turretTopOffset>
+			<turretTopDrawSize>13</turretTopDrawSize>
+			<ai_combatDangerous>true</ai_combatDangerous>
+			<turretBurstCooldownTime>3.5</turretBurstCooldownTime>
+			<turretGunDef>Gun_TripletTurbolasers</turretGunDef>
+		</building>
+	</ThingDef>
+	<!--三联装泵浦激光炮-->
+	<ThingDef ParentName="BaseWeaponTurret">
+		<defName>Gun_TripletTurbolasers</defName>
+		<label>Triplet Turbolasers Gun</label>
+		<description>A Triplet Turbolasers</description>
+		<!--主炮材质数据-->
+		<graphicData>
+			<drawSize>(13,13)</drawSize>
+			<graphicClass>Graphic_Single</graphicClass>
+			<texPath>Things/TripletTurbolasers/TripletTurbolasers_Gun</texPath>
+		</graphicData>
+		<!--主炮制退设置-->
+		<verbs>
+			<li>
+				<verbClass>HNGT.Verb_BarrelWithRecoilAndFlash</verbClass>
+				<defaultProjectile>Bullet_TripletTurbolasers</defaultProjectile>
+				<!--主炮声光效果-->
+				<muzzleFlashScale>100</muzzleFlashScale>
+				<soundCast>KT_blastercannon</soundCast>
+				<soundCastTail>GunTail_Heavy</soundCastTail>
+				<!--主炮射程设置-->
+				<range>500</range>
+				<minRange>30</minRange>
+				<!--主炮初始充能时长-->
+				<warmupTime>4</warmupTime>
+				<!--主炮单轮射击数-->
+				<burstShotCount>3</burstShotCount>
+				<!--主炮猎歼设置-->
+				<isMortar>true</isMortar>
+				<forcedMissRadius>3</forcedMissRadius>
+				<hasStandardCommand>true</hasStandardCommand>
+				<requireLineOfSight>false</requireLineOfSight>
+				<targetParams>
+					<canTargetPawns>true</canTargetPawns>
+					<canTargetMechs>true</canTargetMechs>
+					<canTargetHumans>true</canTargetHumans>
+					<canTargetAnimals>true</canTargetAnimals>
+					<canTargetLocations>true</canTargetLocations>
+				</targetParams>
+			</li>
+		</verbs>
+		<modExtensions>
+			<li Class="HNGT.ModExtension_BarrelWithRecoilAndFlash">
+				<!--炮口焰效设置-->
+				<muzzleFlashMoteDefName>PlasmaMuzzleFlash</muzzleFlashMoteDefName>
+				<!--炮管材质设置-->
+				<barrelTextureSize>(3,3)</barrelTextureSize>
+				<barrelTexturePath>Things/TripletTurbolasers/TripletTurbolasers_Barrel</barrelTexturePath>
+				<!--炮管制退距离-->
+				<recoilAmount>1</recoilAmount>
+				<!--炮管制退过程时长-->
+				<recoilKickTicks>5</recoilKickTicks>
+				<!--炮管制退回弹过程总时长-->
+				<recoilDurationTicks>20</recoilDurationTicks>
+				<!--炮管贴图坐标位置-->
+				<offsets>
+					<li>(-0.85, 3.5)</li>
+					<li>(0, 3.5)</li>
+					<li>(0.85, 3.5)</li>
+				</offsets>
+			</li>
+		</modExtensions>
+		<!--主炮工作参数-->
+		<statBases>
+			<!--主炮基本参数-->
+			<Mass>100</Mass>
+			<Flammability>0</Flammability>
+			<DeteriorationRate>0</DeteriorationRate>
+			<!--主炮命中率设置-->
+			<AccuracyTouch>0.9</AccuracyTouch>
+			<AccuracyShort>0.7</AccuracyShort>
+			<AccuracyMedium>0.5</AccuracyMedium>
+			<AccuracyLong>0.3</AccuracyLong>
+			<!--主炮再充能速度设置-->
+			<RangedWeapon_Cooldown>3.5</RangedWeapon_Cooldown>
+		</statBases>
+	</ThingDef>
+	<!--泵浦激光束-->
+	<ThingDef>
+		<defName>Bullet_TripletTurbolasers</defName>
+		<label>Triplet Turbolasers Bullet</label>
+		<description>TripletTurbolasers</description>
+		<category>Projectile</category>
+		<thingClass>HNGT.Projectile_CompoundExplosion</thingClass>
+		<!--泵浦激光束材质数据-->
+		<tickerType>Normal</tickerType>
+		<altitudeLayer>Projectile</altitudeLayer>
+		<graphicData>
+			<drawSize>(5, 5)</drawSize>
+			<shaderType>MoteGlow</shaderType>
+			<graphicClass>Graphic_Single</graphicClass>
+			<texPath>Things/TripletTurbolasers/Bullet_TripletTurbolasers</texPath>
+		</graphicData>
+		<!--泵浦激光束造伤设置-->
+		<projectile Class="HNGT.ProjectileProperties_CompoundExplosion">
+			<!--基本弹道设置-->
+			<speed>300</speed>
+			<flyOverhead>true</flyOverhead>
+			<arcHeightFactor>0</arcHeightFactor>
+			<!--EMP效果过载护盾-->
+			<damageDef>EMP</damageDef>
+			<explosionRadius>15</explosionRadius>
+			<damageAmountBase>300</damageAmountBase>
+			<soundExplode>Explosion_EMP</soundExplode>
+			<additionalExplosions>
+				<!--等离子爆燃-->
+				<li>
+					<damageDef>PlasmaBlast</damageDef>
+					<radius>5</radius>
+					<damageAmount>400</damageAmount>
+					<soundExplode>Explosion_EMP</soundExplode>
+				</li>
+				<!--核光焰点燃-->
+				<li>
+					<damageDef>NuclearFlame</damageDef>
+					<radius>15</radius>
+					<damageAmount>80</damageAmount>
+					<soundExplode>Explosion_EMP</soundExplode>
+				</li>
+			</additionalExplosions>
+		</projectile>
+	</ThingDef>
+	<!--洲际飞行中的泵浦激光束-->
+	<WorldObjectDef>
+		<defName>Cluster_TripletTurbolasers</defName>
+		<label>A Cluster Of Triplet Turbolasers</label>
+		<description>A Cluster Of Triplet Turbolasers</description>
+		<texture>Things/TripletTurbolasers/Cluster_TripletTurbolasers</texture>
+		<!--世界地图属性设置-->
+		<expandMore>true</expandMore>
+		<expandingIcon>true</expandingIcon>
+		<useDynamicDrawer>true</useDynamicDrawer>
+		<allowCaravanIncidentsWhichGenerateMap>false</allowCaravanIncidentsWhichGenerateMap>
+		<!--洲际飞行参数设置-->
+		<worldObjectClass>HNGT.WorldObject_GlobalAttackDevice</worldObjectClass>
+		<modExtensions>
+			<li Class="HNGT.DefModExtension_GlobalAttackDeviceParams">
+				<!--洲际飞行速度-->
+				<flightSpeed>0.005</flightSpeed>
+				<!--炮塔伪开火轮数-->
+				<fakeBurstRounds>5</fakeBurstRounds>
+			</li>
+		</modExtensions>
+	</WorldObjectDef>
+	<!--泵浦激光束末段打击效果-->
+	<ThingDef ParentName="OrbitalStrikeBase">
+		<defName>Bombardment_TripletTurbolasers</defName>
+		<label>Triplet Turbolasers Bombardment</label>
+		<!--打击中心控制器透明材质-->
+		<graphicData>
+			<texPath>Things/Mote/Transparent</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<!--打击中心瞄准激光效果-->
+		<comps>
+			<li Class="CompProperties_OrbitalBeam">
+				<width>0</width>
+				<color>(255, 255, 255, 0)</color>
+			</li>
+		</comps>
+		<!--泵浦激光束末段打击效果-->
+		<thingClass>HNGT.HighOrbitAttack</thingClass>
+		<modExtensions>
+			<li Class="HNGT.ModExtension_HighOrbitAttack">
+				<!--总打击次数-->
+				<explosionCount>15</explosionCount>
+				<!--打击偏移半径-->
+				<impactAreaRadius>50</impactAreaRadius>
+				<!--打击时间间隔-->
+				<bombIntervalTicks>50</bombIntervalTicks>
+				<!--打击战斗部锁定时间-->
+				<warmupTicks>50</warmupTicks>
+				<!--打击战斗部再入段声音倍率-->
+				<preImpactSoundVolume>50</preImpactSoundVolume>
+				<!--打击战斗部末段再入速度-->
+				<projectileFlyTimeTicks>10</projectileFlyTimeTicks>
+				<!--打击战斗部种类-->
+				<projectileDefName>Bullet_TripletTurbolasers</projectileDefName>
+				<!--打击战斗部材质资源-->
+				<projectileTexturePath>Things/TripletTurbolasers/Bullet_TripletTurbolasers</projectileTexturePath>
+			</li>
+		</modExtensions>
+	</ThingDef>
+</Defs>

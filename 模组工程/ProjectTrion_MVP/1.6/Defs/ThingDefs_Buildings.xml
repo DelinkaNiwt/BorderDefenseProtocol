@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ======================== 触发器配置台 ======================== -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>Building_TriggerConfigBench</defName>
+    <label>触发器配置台</label>
+    <description>用于配置 Trion 触发器上的组件。在此工作台可以装卸触发器上的各种模块。</description>
+
+    <thingClass>ProjectTrion_MVP.Building_TriggerConfigBench</thingClass>
+    <graphicData>
+      <texPath>Things/Building/Trion/Building_TriggerConfigBench</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(3, 2)</drawSize>
+    </graphicData>
+
+    <category>Building</category>
+    <building>
+      <defaultStorageSettings>
+        <priority>Important</priority>
+      </defaultStorageSettings>
+    </building>
+
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Flammability>0.5</Flammability>
+      <WorkToBuild>800</WorkToBuild>
+    </statBases>
+
+    <costList>
+      <Steel>60</Steel>
+      <ComponentIndustrial>1</ComponentIndustrial>
+    </costList>
+
+    <comps>
+      <li Class="CompProperties_Forbiddable" />
+    </comps>
+
+    <designationCategory>Production</designationCategory>
+  </ThingDef>
+
+  <!-- ======================== 传送锚 ======================== -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>Building_BailOutAnchor</defName>
+    <label>传送锚</label>
+    <description>Trion 传送锚。作为战斗体脱离（Bail Out）的传送目标。可被启用/禁用，禁用时不会被选为传送目标。</description>
+
+    <thingClass>ProjectTrion_MVP.Building_BailOutAnchor</thingClass>
+    <graphicData>
+      <texPath>Things/Building/Trion/Building_BailOutAnchor</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1.5, 1.5)</drawSize>
+    </graphicData>
+
+    <category>Building</category>
+
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Flammability>0.2</Flammability>
+      <WorkToBuild>400</WorkToBuild>
+    </statBases>
+
+    <costList>
+      <Steel>40</Steel>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+
+    <comps>
+      <li Class="CompProperties_Forbiddable" />
+    </comps>
+
+    <designationCategory>Production</designationCategory>
+  </ThingDef>
+
+  <!-- ======================== 生命监测仪 ======================== -->
+  <ThingDef ParentName="BedWithQualityBase">
+    <defName>VitalsMonitor</defName>
+    <label>生命监测仪</label>
+    <description>用于进行Trion腺体植入手术的医疗设备。配备了高精度的生命体征监测系统，可以安全地进行复杂的Trion改造手术。</description>
+
+    <thingClass>Building_Bed</thingClass>
+    <graphicData>
+      <texPath>Things/Building/Trion/VitalsMonitor</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2, 2)</drawSize>
+    </graphicData>
+
+    <category>Building</category>
+
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Flammability>0.7</Flammability>
+      <WorkToBuild>6000</WorkToBuild>
+      <Mass>20</Mass>
+    </statBases>
+
+    <costList>
+      <Steel>50</Steel>
+      <ComponentIndustrial>3</ComponentIndustrial>
+    </costList>
+
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>100</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable" />
+      <li Class="CompProperties_Facility" />
+    </comps>
+
+    <designationCategory>Misc</designationCategory>
+  </ThingDef>
+
+</Defs>

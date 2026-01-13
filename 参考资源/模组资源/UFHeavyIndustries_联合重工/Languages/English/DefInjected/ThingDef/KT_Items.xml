@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <KTNutrientPaste.label>Delicious Sandwich</KTNutrientPaste.label>
+  <KTNutrientPaste.description>3D-printed Sandwich, but it tastes quite good, equivalent to a fine meal.</KTNutrientPaste.description>
+  
+  <KT_Backpack.label>"Iron Halo" Damage Absorption Field Backpack</KT_Backpack.label>
+  <KT_Backpack.description>A damage absorption field backpack completely different from shields.\n- Designed to allow the character to block damage below 35 points. While the shield is active, single instance damage will not exceed 45. Damage above the absorption threshold deducts from the Iron Halo's absorption value. Once the absorption value reaches zero, it requires recharging before it can be used again.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Example: Attack damage 100, forced damage 45, deduct 35 immunity value, reduce field backpack absorption value by 10 points, negating this attack.&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;Example 2: Attack damage 40, deduct 35 immunity value, reduce field backpack absorption value by 5 points, negating this attack.&lt;/i&gt;&lt;/color&gt;</KT_Backpack.description>
+  
+  <KT_HeavyShield.label>"Guardian" SH-12 Naval Shield</KT_HeavyShield.label>
+  <KT_HeavyShield.description>A massive shield that allows the user to observe targets through a screen on the back. The side slots of the shield can accommodate various types of weapons, commonly used in narrow ship interiors.</KT_HeavyShield.description>
+  
+  <KT_SAG.label>"Mind's Eye" Scientific Analysis Goggles</KT_SAG.label>
+  <KT_SAG.description>Advanced analysis goggles reverse-engineered using the same technology found in United Fleet recreational facilities. Capable of multi-dimensional analysis of targets. These goggles can also calculate firearm trajectories, increasing hit probability and reducing aiming time.</KT_SAG.description>
+</LanguageData>

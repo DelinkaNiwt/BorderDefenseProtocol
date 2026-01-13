@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+   <!-- EN: Proj_kt_doommissile -->
+   <KT_doommissile.label>发射湮灭导弹</KT_doommissile.label>
+  <!-- EN: KT_doommissile -->
+  <KT_doommissile.description>发射一枚威力巨大的湮灭导弹。\n\n&lt;color=#FFAA00>&lt;i>导弹每12小时自动生产一枚&lt;/i>&lt;/color>\n&lt;color=#FFAA00>&lt;i>显示的射程圈有BUG，无法显示实际射程，实际最大射程为250&lt;/i>&lt;/color></KT_doommissile.description>
+  <Proj_kt_doommissile.label>发射湮灭导弹</Proj_kt_doommissile.label>
+  
+  
+  <KT_AGT_AP.label>发射穿甲弹</KT_AGT_AP.label>
+  <Proj_KT_AGT_AP.label>穿甲弹</Proj_KT_AGT_AP.label>
+  <KT_AGT_AP.description>发射一枚威力巨大的穿甲弹。\n\n&lt;color=#FFAA00>&lt;i>炮弹每12小时自动生产一枚&lt;/i>&lt;/color></KT_AGT_AP.description>
+  
+  
+  <KT_FlyOver_Bomber_Attack.label>「低空支援」女武神轰炸机支援</KT_FlyOver_Bomber_Attack.label>
+  <KT_FlyOver_Bomber_Attack.description>艾登将操控一架经过改装的女武神星际运输机进行空袭，他会凌空轰炸以追求刺激。本次空袭有数十枚巡航导弹轰炸目标区域。</KT_FlyOver_Bomber_Attack.description>
+  
+  <KT_FlyOver_Super_Destroyer_Attack.label>「轨道支援」星球压制舰轨道支援</KT_FlyOver_Super_Destroyer_Attack.label>
+  <KT_FlyOver_Super_Destroyer_Attack.description>艾登的得力部下，一艘星球压制舰将会飞跃我们的殖民地并提供轨道炮支援，轨道炮击会避开重要的殖民地资产（农作物除外），因此请避免与敌人近距离缠斗影响打击效果。</KT_FlyOver_Super_Destroyer_Attack.description>
+  
+  <KT_FlyOver_AX_Attack.label>「低空支援」AX-飞鹅攻击机支援</KT_FlyOver_AX_Attack.label>
+  <KT_FlyOver_AX_Attack.description>艾登最喜欢最刺激的近距离支援攻击机，可以使用机炮对一整条直线上的敌人进行扫射，同时四枚战术导弹会攻击飞行路径上的敌人。</KT_FlyOver_AX_Attack.description>
+   
+  <KT_FlyOver_AX_5000KG.label>「低空支援」AX-飞鹅攻击机支援</KT_FlyOver_AX_5000KG.label>
+  <KT_FlyOver_AX_5000KG.description>艾登最喜欢最刺激的近距离支援攻击机，可以使用机炮对一整条直线上的敌人进行扫射，同时四枚战术导弹会攻击飞行路径上的敌人。</KT_FlyOver_AX_5000KG.description>
+  
+  <KT_FlyOver_AX_5000KG_Attack.label>「低空支援」AX-飞鹅攻击机5000KG航弹</KT_FlyOver_AX_5000KG_Attack.label>
+  <KT_FlyOver_AX_5000KG_Attack.description>艾登最喜欢最刺激的近距离支援攻击机，它将投下一枚重磅炸弹，湮灭范围内的一切单位。</KT_FlyOver_AX_5000KG_Attack.description>
+  
+  <KT_Bullet_FlyOver_AX.label>飞鹅机炮</KT_Bullet_FlyOver_AX.label>
+  <KT_Bullet_FlyOver_AX.description>飞鹅机炮</KT_Bullet_FlyOver_AX.description>
+  
+  <KT_Bullet_FlyOver_AX_rocket.label>飞鹅导弹</KT_Bullet_FlyOver_AX_rocket.label>
+  <KT_Bullet_FlyOver_AX_rocket.description>飞鹅导弹</KT_Bullet_FlyOver_AX_rocket.description>
+  
+  <KT_Bullet_FlyOver_AX_5000KG.label>飞鹅5000KG航空炸弹</KT_Bullet_FlyOver_AX_5000KG.label>
+  <KT_Bullet_FlyOver_AX_5000KG.description>飞鹅5000KG航空炸弹</KT_Bullet_FlyOver_AX_5000KG.description>
+  
+  <KT_Bullet_FlyOver_Super_Destroyer.label>轨道炮击</KT_Bullet_FlyOver_Super_Destroyer.label>
+  <KT_Bullet_FlyOver_Super_Destroyer.description>轨道炮击</KT_Bullet_FlyOver_Super_Destroyer.description>
+  <KT_Orbital_FirePower_Incoming.label>轨道炮击</KT_Orbital_FirePower_Incoming.label>
+  <KT_Orbital_FirePower_Incoming.description>轨道炮击</KT_Orbital_FirePower_Incoming.description>
+  
+  <KT_Longjump_biocat.label>脊背龙弹射</KT_Longjump_biocat.label>
+  <KT_Longjump_biocat.description>生化猫娘的外骨骼模块支持其进行超长距离跳跃</KT_Longjump_biocat.description>
+  <KT_TerrorRoar_biocat.label>惊世哈气</KT_TerrorRoar_biocat.label>
+  <KT_TerrorRoar_biocat.description>生化猫娘保留并强化了曾经的一些习性，可以通过发出巨大且恐怖的哈气来震慑部分敌人和动物。</KT_TerrorRoar_biocat.description>
+  
+  <TurbojetJump_Ability.label>涡喷跳跃</TurbojetJump_Ability.label>
+  <TurbojetJump_Ability.description>启动涡喷引擎进行高机动跳跃，可以无视地形障碍直接跨越墙体。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;启动撞击模式后，该技能可以撞开敌对单位并造成眩晕，根据近战技能和手持武器数值，对落地点单位造成大范围AOE伤害。&lt;/i&gt;&lt;/color&gt;</TurbojetJump_Ability.description>
+  
+  <TurbojetDash_Ability.label>涡喷冲刺</TurbojetDash_Ability.label>
+  <TurbojetDash_Ability.description>启动引擎进行低空高速冲刺。可以在屋顶下使用，但无法穿过墙壁。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;启动撞击模式后，该技能可以撞开敌对单位并造成眩晕，根据近战技能和手持武器数值，对沿途受击单位造成小范围AOE伤害。&lt;/i&gt;&lt;/color&gt;</TurbojetDash_Ability.description>
+  
+   <Ability_BezierMissileLaunch.label>导弹齐射</Ability_BezierMissileLaunch.label>
+  <Ability_BezierMissileLaunch.description>向目标区域齐射贝塞尔振荡导弹，导弹命中后会点燃并眩晕目标。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;每12小时自动装填一次弹舱。&lt;/i&gt;&lt;/color&gt;</Ability_BezierMissileLaunch.description>
+  
+ <Ability_BezierMissileLaunch_II.label>导弹齐射</Ability_BezierMissileLaunch_II.label>
+  <Ability_BezierMissileLaunch_II.description>向目标区域齐射贝塞尔振荡导弹，导弹命中后会点燃并眩晕目标。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;每12小时自动装填一次弹舱。&lt;/i&gt;&lt;/color&gt;</Ability_BezierMissileLaunch_II.description>
+</LanguageData>

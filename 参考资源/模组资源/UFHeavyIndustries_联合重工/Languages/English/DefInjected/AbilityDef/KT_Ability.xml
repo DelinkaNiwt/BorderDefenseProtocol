@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+ <KT_doommissile.label>Launch Annihilation Missile</KT_doommissile.label>
+  <!-- EN: KT_doommissile -->
+  <KT_doommissile.description>Launch a massively powerful annihilation missile.\n\n&lt;color=#FFAA00>&lt;i>Missiles are automatically produced one every 12 hours&lt;/i>&lt;/color>\n&lt;color=#FFAA00>&lt;i>The displayed range circle has a BUG and cannot show actual range, actual maximum range is 250&lt;/i>&lt;/color></KT_doommissile.description>
+  <Proj_kt_doommissile.label>Launch Annihilation Missile</Proj_kt_doommissile.label>
+  
+  
+  <KT_AGT_AP.label>Launch Armor-Piercing Shell</KT_AGT_AP.label>
+  <Proj_KT_AGT_AP.label>Armor-Piercing Shell</Proj_KT_AGT_AP.label>
+  <KT_AGT_AP.description>Launch a massively powerful armor-piercing shell.\n\n&lt;color=#FFAA00>&lt;i>Shells are automatically produced one every 12 hours&lt;/i>&lt;/color></KT_AGT_AP.description>
+</LanguageData>

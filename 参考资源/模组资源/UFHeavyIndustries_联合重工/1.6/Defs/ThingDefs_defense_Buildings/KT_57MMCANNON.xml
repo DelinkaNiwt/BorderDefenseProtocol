@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+    <ThingDef ParentName="BuildingBase">
+        <defName>KT57MMCANNON</defName>  
+        <label>KT57MMCANNON</label> <!-- 显示名称 -->
+        <description>KT57MMCANNON</description> <!-- 描述 -->
+        <thingClass>SRA.Building_TurretGunHasSpeed</thingClass>
+		<modExtensions>
+	      <li Class="SRA.ModExt_HasSpeedTurret"><!-- SRA炮塔转速 -->
+		    <speed>2.0</speed>
+	      </li>
+  	    </modExtensions>
+        <uiOrder>1700</uiOrder> <!-- UI栏顺序 -->
+        <size>(2,2)</size>
+        <drawerType>MapMeshAndRealTime</drawerType> <!-- 绘制类型：地图网格和实时 -->
+        
+        <graphicData>
+		<texPath>Things/Building/Security/Pocket20MMACBase</texPath>
+		<graphicClass>Graphic_Single</graphicClass>
+		<drawSize>(4.3,4.3)</drawSize>
+	</graphicData>
+
+        <castEdgeShadows>False</castEdgeShadows> <!-- 是否渲染阴影 -->
+        <minifiedDef>MinifiedThing</minifiedDef> <!-- 最小化后的定义 -->
+        <uiIconPath>Things/Building/Security/KT57MMCANNON_Ico</uiIconPath> <!-- 图标路径 -->
+
+        <altitudeLayer>Building</altitudeLayer> <!-- 图形的显示层级 -->
+        <stealable>false</stealable> <!-- 不可盗窃 -->
+        <rotatable>true</rotatable> <!-- 不可旋转 -->
+        
+        <thingCategories>
+            <li>BuildingsSecurity</li> <!-- 建筑类别：安全 -->
+        </thingCategories>
+        
+        <statBases>
+            <MaxHitPoints>1500</MaxHitPoints> <!-- 最大生命值 -->
+            <Flammability>0</Flammability> <!-- 可燃性 -->
+            <WorkToBuild>1000</WorkToBuild> <!-- 建造所需工作时间 -->
+            <Mass>120</Mass> <!-- 质量 -->
+            <Beauty>15</Beauty> <!-- 美观度 -->
+            <ShootingAccuracyTurret>1</ShootingAccuracyTurret> <!-- 射击精度 -->
+        </statBases>
+
+        <tickerType>Normal</tickerType> <!-- 每次更新的计时器类型 -->
+        
+        <comps>
+	      <li Class="SRA.CompProperties_ForceTargetable" /><!-- 善良手操 -->		
+          <li Class="CompProperties_Forbiddable"/>
+            <li Class="CompProperties_Power">
+              <compClass>CompPowerTrader</compClass>
+              <basePowerConsumption>1000</basePowerConsumption>
+            </li>
+            <li Class="CompProperties_Flickable"/>
+            <li Class="CompProperties_Breakdownable"/>
+            <li Class="CompProperties_Refuelable"> <!-- 应该是可以补给 -->
+              <fuelLabel>Shots until barrel change</fuelLabel>
+              <fuelGizmoLabel>Barrel durability</fuelGizmoLabel>
+              <outOfFuelMessage>Needs new barrel</outOfFuelMessage>
+              <fuelFilter><thingDefs><li>Steel</li></thingDefs></fuelFilter>
+              <fuelCapacity>120</fuelCapacity>
+              <fuelMultiplier>0.8</fuelMultiplier>
+              <initialFuelPercent>1</initialFuelPercent>
+              <autoRefuelPercent>0.5</autoRefuelPercent>
+              <showFuelGizmo>true</showFuelGizmo>
+              <minimumFueledThreshold>1</minimumFueledThreshold>
+              <factorByDifficulty>false</factorByDifficulty>
+              <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+              <fuelIconPath>KT_UI/UI_OUTAMMO</fuelIconPath>
+            </li>
+    </comps>
+        
+        <passability>PassThroughOnly</passability> <!-- 只能穿透 -->
+        <pathCost>50</pathCost> <!-- 建筑路径成本 -->
+        <fillPercent>0.5</fillPercent> <!-- 填充度 -->
+        <hasTooltip>true</hasTooltip> <!-- 是否显示工具提示 -->
+        
+        
+        <costList>
+            <Steel>400</Steel> <!-- 钢铁 200 单位 -->
+			<Plasteel>50</Plasteel>
+            <ComponentIndustrial>15</ComponentIndustrial> <!-- 工业组件 10 个 -->
+        </costList>
+        
+        <generateCommonality>0</generateCommonality>
+        <tradeability>None</tradeability>
+
+        <constructionSkillPrerequisite>5</constructionSkillPrerequisite> <!-- 建造技能需求 -->
+        <terrainAffordanceNeeded>Light</terrainAffordanceNeeded> <!-- 需要轻型地形 -->
+        <designationCategory>KT_designation_group</designationCategory> <!-- 指定分类：安全 -->
+
+        <building>
+            <ai_combatDangerous>true</ai_combatDangerous> <!-- AI认为它具有危险性 -->
+            <turretGunDef>Gun_KT57MMCANNON</turretGunDef> <!-- 定义使用的枪械 -->
+            <deconstructible>true</deconstructible>
+            <paintable>true</paintable> <!-- 是否可以涂漆：可以 -->
+            <turretTopDrawSize>4</turretTopDrawSize>
+            <turretTopOffset>(-0.05, 0.1)</turretTopOffset>
+            <turretBurstCooldownTime>2.5</turretBurstCooldownTime> <!-- 炮塔射击冷却时间 -->
+            <combatPower>120</combatPower>
+        </building>
+ 		
+        <researchPrerequisites>
+            <li>KT_Base_t1_turret</li>
+        </researchPrerequisites>
+		        
+        <placeWorkers>
+            <li>PlaceWorker_TurretTop</li> <!-- 放置工作：炮塔顶部 -->
+        </placeWorkers>
+        
+    </ThingDef>
+
+    <!-- 定义子弹：Pocket 20MMAC Bullet -->
+    <ThingDef>
+        <defName>Bullet_KT57MMCANNON</defName>
+        <label>Bullet_KT57MMCANNON</label>
+        <thingClass>Projectile_Explosive</thingClass>
+        <category>Projectile</category>
+        <tickerType>Normal</tickerType>
+        <altitudeLayer>Projectile</altitudeLayer>
+        <graphicData>
+            <texPath>Things/Projectile/Bullet_100MM</texPath> <!-- 子弹贴图路径 -->
+            <graphicClass>Graphic_Single</graphicClass> <!-- 使用单一图形 -->
+			<shaderType>MoteGlow</shaderType>
+      		<drawSize>(1.5)</drawSize>
+        </graphicData>
+        <projectile>
+            <damageDef>Bomb</damageDef>
+            <explosionRadius>0.5</explosionRadius>
+            <speed>250</speed>
+            <damageAmountBase>45</damageAmountBase>
+            <arcHeightFactor>0</arcHeightFactor>
+            <soundExplode>Explosion_Rocket</soundExplode>
+			<flyOverhead>false</flyOverhead>
+			<armorPenetrationBase>1</armorPenetrationBase>
+        </projectile>
+  </ThingDef>	
+
+    <!-- 定义武器：Pocket 20MMAC Gun -->
+    <ThingDef ParentName="BaseWeaponTurret">
+        <defName>Gun_KT57MMCANNON</defName> <!-- 武器名称 -->
+        <label>Gun_KT57MMCANNON</label> <!-- 武器标签 -->
+        <description>Gun_KT57MMCANNON</description> <!-- 武器描述 -->
+        <graphicData>
+            <texPath>Things/Building/Security/KT57MMCANNON</texPath> <!-- 武器贴图路径 -->
+            <graphicClass>Graphic_Single</graphicClass> <!-- 使用单一图形 -->
+            <shaderType>CutoutComplex</shaderType>
+        </graphicData>
+        <soundInteract>Interact_Rifle</soundInteract> <!-- 使用时音效 -->
+        <tradeability>None</tradeability> <!-- 不能交易 -->
+        <destroyOnDrop>true</destroyOnDrop> <!-- 掉落时销毁 -->
+        <generateCommonality>0</generateCommonality>
+        <statBases>
+            <AccuracyTouch>0.90</AccuracyTouch> <!-- 近距离精度 -->
+            <AccuracyShort>0.85</AccuracyShort> <!-- 短程精度 -->
+            <AccuracyMedium>0.80</AccuracyMedium> <!-- 中程精度 -->
+            <AccuracyLong>0.80</AccuracyLong> <!-- 长程精度 -->
+            <RangedWeapon_Cooldown>2.5</RangedWeapon_Cooldown> <!-- 冷却时间 -->
+            <Mass>50</Mass> <!-- 质量 -->
+            <Flammability>0</Flammability> <!-- 不可燃 -->
+            <DeteriorationRate>0</DeteriorationRate> <!-- 不会腐烂 -->
+        </statBases>
+        <verbs>
+            <li>
+                <verbClass>SRA.Verb_ShootWithOffset</verbClass> <!-- 射击行为 -->
+                <hasStandardCommand>true</hasStandardCommand> <!-- 标准命令 -->
+                <defaultProjectile>Bullet_KT57MMCANNON</defaultProjectile> <!-- 默认子弹 -->
+                <warmupTime>1</warmupTime> <!-- 预热时间 -->
+				<requireLineOfSight>true</requireLineOfSight><!-- 能不能曲射 -->
+                <range>65</range> <!-- 射程 -->
+				<minRange>5</minRange>
+                <burstShotCount>3</burstShotCount> <!-- 每次射击子弹数量 -->
+                <ticksBetweenBurstShots>15</ticksBetweenBurstShots>
+                <soundCast>KT57MMRound</soundCast> <!-- 射击音效 -->
+                <soundCastTail>GunTail_Light</soundCastTail> <!-- 尾音效 -->
+                <muzzleFlashScale>40</muzzleFlashScale> <!-- 火光规模 -->
+                <consumeFuelPerShot>1</consumeFuelPerShot> <!-- 每发子弹消耗的燃料 -->
+				<forcedMissRadius>0.5</forcedMissRadius>
+            </li>
+        </verbs>
+		<weaponTags>
+	  	  <li>KT_weapon</li>
+    	</weaponTags>
+		<modExtensions>
+          <li Class="MuzzleFlash.MuzzleFlashProps" MayRequire="IssacZhuang.MuzzleFlash">
+            <def>MF_StandardMuzzleFalsh</def>
+            <drawSize>(1.2)</drawSize>
+            <offsets>
+              <li>(1.6,0)</li>
+            </offsets>
+            <isAlternately>true</isAlternately>
+          </li>
+		  <li Class="SRA.ModExtension_ShootWithOffset">
+             <offsets>
+               <li>(0,-2)</li>
+             </offsets>
+          </li>		  
+        </modExtensions>
+    </ThingDef>
+</Defs>

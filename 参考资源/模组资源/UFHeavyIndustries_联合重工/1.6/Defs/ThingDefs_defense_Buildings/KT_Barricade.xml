@@ -1,0 +1,68 @@
+<Defs>
+    <ThingDef ParentName="BuildingBase">
+    <defName>KT_Barricade</defName>
+    <label>KT_Barricade</label>
+    <description>KT_Barricade</description>
+    <thingClass>Building</thingClass>
+    <category>Building</category>
+	<uiOrder>1510</uiOrder> <!-- UI栏顺序 -->
+    <replaceTags>
+      <li>KT_Barricade</li>
+    </replaceTags>
+    <graphicData>
+      <texPath>Things/Building/Barricade/KT_Barricade</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <shaderType>CutoutComplex</shaderType>
+      <linkType>Basic</linkType>
+      <linkFlags>
+        <li>Barricades</li>
+      </linkFlags>
+    </graphicData>
+    <uiIconPath>Things/Building/Barricade/KT_Barricade_MenuIcon</uiIconPath>
+    <uiIconScale>1.0</uiIconScale>
+    <altitudeLayer>Building</altitudeLayer>
+    <pathCost>40</pathCost>
+    <pathCostIgnoreRepeat>true</pathCostIgnoreRepeat>
+    <passability>PassThroughOnly</passability>
+    <castEdgeShadows>true</castEdgeShadows>
+    <fillPercent>0.72</fillPercent>
+    <canOverlapZones>false</canOverlapZones>
+	<stuffCategories>
+      <li>Metallic</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <costStuffCount>8</costStuffCount>
+    <statBases>
+      <MaxHitPoints>1200</MaxHitPoints>
+      <Beauty>1</Beauty>
+      <WorkToBuild>450</WorkToBuild>
+      <Flammability>0</Flammability>
+    </statBases>
+    <building>
+      <ai_chillDestination>false</ai_chillDestination>
+      <isInert>true</isInert>
+      <isFence>true</isFence>
+      <isPlaceOverableWall>true</isPlaceOverableWall>
+      <blueprintGraphicData>
+        <texPath>Things/Building/Barricade/KT_Barricade_Atlas</texPath>
+      </blueprintGraphicData>
+      <paintable>true</paintable>
+    </building>
+    <drawStyleCategory>Defenses</drawStyleCategory>
+    <comps>
+	  <li Class="CompProperties_Glower">
+        <glowRadius>2</glowRadius>
+        <glowColor>(252,255,255,0)</glowColor>
+      </li>
+    </comps>
+    <filthLeaving>Filth_RubbleBuilding</filthLeaving>
+    <rotatable>false</rotatable>
+    <selectable>true</selectable>
+    <neverMultiSelect>true</neverMultiSelect>
+    <useStuffTerrainAffordance>true</useStuffTerrainAffordance>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded> <!-- Best affordance needed for stone -->
+    <designationCategory>KT_designation_group</designationCategory>
+    <staticSunShadowHeight>0.20</staticSunShadowHeight>
+    <designationHotKey>Misc1</designationHotKey>
+  </ThingDef>
+</Defs>

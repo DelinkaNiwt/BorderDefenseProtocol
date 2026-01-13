@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>  
+  <KT_Base_t0_turret.label>Basic Defense Technology</KT_Base_t0_turret.label>
+  <KT_Base_t0_turret.description>Unlock the technology protocol, we will be permitted to construct basic defensive turrets.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Did you know these turrets were once used by us to prevent food in warehouses from being stolen by small rats in the Noston trenches. — Light Cruiser β&lt;/i&gt;&lt;/color&gt;</KT_Base_t0_turret.description>
+  
+  <KT_Base_t1_turret.label>Advanced Defense Technology</KT_Base_t1_turret.label>
+  <KT_Base_t1_turret.description>The ancients said, if you want to keep cake from being stolen when left outside for five minutes, the best way is to surround it with defensive installations.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;You should know your actions will be scorned by those serious history enthusiasts, right? They'll point out that your equipment's power is significantly less than historical records, and bombard you with messages until you change it. — Eugen&lt;/i&gt;&lt;/color&gt;</KT_Base_t1_turret.description>
+  
+  <KT_Base_t2_Artillery_turret.label>Kinetic Artillery</KT_Base_t2_Artillery_turret.label>
+  <KT_Base_t2_Artillery_turret.description>Solid shells, deep barrels - always provide more sense of security than those elusive energy weapons.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;The structure inside the turret? Actually they're all inflatable models... We just need to restore the appearance, firing can be handled by hyperdimensional links. — Deep Sea Tirpitz&lt;/i&gt;&lt;/color&gt;</KT_Base_t2_Artillery_turret.description>
+
+  <KT_Base_t2_energy_turret.label>Energy Artillery</KT_Base_t2_energy_turret.label>
+  <KT_Base_t2_energy_turret.description>Light, elegant, dazzling - these words can all describe our energy weapons. The dumb, big, black, and crude kinetic weapons are too barbaric.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;My last vacation? You mean when I simulated being the God-Emperor in the Warhammer universe? The vacation was too short, had to get up from the toilet halfway through~ — Deep Sea Tirpitz&lt;/i&gt;&lt;/color&gt;</KT_Base_t2_energy_turret.description>  
+  
+  <KT_Base_t2_rail_turret.label>Railgun</KT_Base_t2_rail_turret.label>
+  <KT_Base_t2_rail_turret.description>Can opener神器.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;I became the UF flagship through self-struggle, but also had to consider the course of history, and more importantly, the Supreme Flagship's preference — U96&lt;/i&gt;&lt;/color&gt;</KT_Base_t2_rail_turret.description>  
+  
+  <KT_Base_t3_Artillery_turret.label>Advanced Kinetic Artillery</KT_Base_t3_Artillery_turret.label>
+  <KT_Base_t3_Artillery_turret.description>Bigger shells with thicker barrels.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Compared to those stellar naval guns that use meters as caliber units, this thing is like a toothpick. — Taihou&lt;/i&gt;&lt;/color&gt;</KT_Base_t3_Artillery_turret.description>
+
+  <KT_Base_t3_energy_turret.label>Advanced Energy Artillery</KT_Base_t3_energy_turret.label>
+  <KT_Base_t3_energy_turret.description>We need more batteries to support these energy weapons!\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Stop playing, it's your turn to be on duty. — Deep Sea Bismarck&lt;/i&gt;&lt;/color&gt;</KT_Base_t3_energy_turret.description>  
+  
+  <KT_Base_t3_rail_turret.label>Advanced Railgun</KT_Base_t3_rail_turret.label>
+  <KT_Base_t3_rail_turret.description>If one shot doesn't penetrate, fire two.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;They definitely don't know that the so-called vaccine against the UF Perfection Instrument not only doesn't work but also has a bunch of additional Debuffs — Ella&lt;/i&gt;&lt;/color&gt;</KT_Base_t3_rail_turret.description>  
+
+  <KT_Base_t4_Artillery_turret.label>Ultimate Kinetic Artillery</KT_Base_t4_Artillery_turret.label>
+  <KT_Base_t4_Artillery_turret.description>The final protocol for artillery weapons. In a way, being annihilated by these weapons is also an honor.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Those people upstairs are really useless, they actually look down on my artillery designs! In my concept, as long as the barrel is long enough, we can directly fire into the enemy's command headquarters and end the battle instantly. But they ignore me, isn't that infuriating? Really! — Cabot&lt;/i&gt;&lt;/color&gt;</KT_Base_t4_Artillery_turret.description>
+
+  <KT_Base_t4_energy_turret.label>Ultimate Energy Artillery</KT_Base_t4_energy_turret.label>
+  <KT_Base_t4_energy_turret.description>We do not allow full-power laser weapons to be used on planets - any one of them could easily burn up the entire planetary atmosphere! Therefore, you must first sign a disclaimer.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Join UF to get 72 catgirls — Vestal&lt;/i&gt;&lt;/color&gt;</KT_Base_t4_energy_turret.description>    
+  
+  <KT_Shield.label>Shield Technology</KT_Shield.label>
+  <KT_Shield.description>My bedroom must have shields installed, otherwise I can't sleep soundly.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;The outcome of the black monoliths? The tea powder in your cup is made from them. — London&lt;/i&gt;&lt;/color&gt;</KT_Shield.description>
+  
+  <KT_UFGenerator_tech.label>Super Reactor</KT_UFGenerator_tech.label>
+  <KT_UFGenerator_tech.description>The increasing power demand from various defensive weapons and facilities requires new energy acquisition methods to be put on the agenda.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;I don't need scientific principles to build these things. As long as I'm connected to the hyperdimensional network, the rest is just like molding clay into shapes I like. — Deep Sea Tirpitz&lt;/i&gt;&lt;/color&gt;</KT_UFGenerator_tech.description>    
+ 
+  <KT_Base_Workbench.label>Pact Nation Standard Equipment</KT_Base_Workbench.label>
+  <KT_Base_Workbench.description>All citizens of the United Fleet are shipgirls who use ship equipment for combat, hence they don't use individual weapons. However, historical records show that the United Fleet had numerous subordinate pact nations, for which a batch of equipment was specially developed to enhance their domestic security. To prevent theft and leakage by criminals, the power was strictly limited to ensure the personal and property safety of United shipgirls.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;I put a lot of effort into fabricating these weapons. I should have restored them according to historical records. Can those history enthusiasts stop DMing me? — Deep Sea Tirpitz&lt;/i&gt;&lt;/color&gt;</KT_Base_Workbench.description>  
+  
+  <KT_Base_t1_weapon.label>Pact Nation Basic Firearms</KT_Base_t1_weapon.label>
+  <KT_Base_t1_weapon.description>Light weapons extensively equipped by pact nations.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;If I catch anyone using laser gun batteries to charge their phones again, they can forget about this month's salary. — A Pact Nation Weapons Production Team Leader&lt;/i&gt;&lt;/color&gt;</KT_Base_t1_weapon.description>    
+  
+  <KT_Base_t2_weapon.label>Pact Nation Heavy Firearms</KT_Base_t2_weapon.label>
+  <KT_Base_t2_weapon.description>Weapons used by pact nations' heavy firepower units. From this level onward, both users and the firearms themselves will be strictly monitored, because if leaked into the hands of criminals and used against the United, the excessive weapon power could leave stains on the shipgirls' clothes.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Sometimes we really need pact nation troops. After all, we're only equipped with naval guns and can't do embroidery needle work. — A United Army Sergeant&lt;/i&gt;&lt;/color&gt;</KT_Base_t2_weapon.description>   
+  
+  <KT_Base_t3_weapon.label>Pact Nation Heavy Firepower</KT_Base_t3_weapon.label>
+  <KT_Base_t3_weapon.description>Heavy weapons designed for Pact Nation elite veterans, with high weight and usually EMP extreme damage.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;One shot kills a whole group, I guess I got to experience a budget version of being a shipgirl. — A Pact Nation heavy firepower soldier&lt;/i&gt;&lt;/color&gt;</KT_Base_t3_weapon.description>
+  
+  <KT_Base_t3_plasma_weapon.label>Pact Nation Plasma Weapons</KT_Base_t3_plasma_weapon.label>
+  <KT_Base_t3_plasma_weapon.description>Although Pact Nation soldiers' laser guns are also energy weapons, compared to plasma they're just flashlights.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;★☆☆☆☆ Terrorists burned my dress. — A UF shipgirl travel review&lt;/i&gt;&lt;/color&gt;</KT_Base_t3_plasma_weapon.description> 
+  
+  <KT_Base_t4_weapon.label>Pact Nation Precision Firearms (Previous level not yet completed)</KT_Base_t4_weapon.label>
+  <KT_Base_t4_weapon.description>Only pact nation warriors who have proven their loyalty to the United Fleet can obtain precision weapons personally designed by United shipgirls rather than AI-generated.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Hope you like the weapon I designed. — Washington, Class 2-3, United Capital Elementary School&lt;/i&gt;&lt;/color&gt;</KT_Base_t4_weapon.description>
+  
+  <KT_Base_armor.label>Pact Nation Power Armor</KT_Base_armor.label>
+  <KT_Base_armor.description>Different Pact Nations have vastly different armor designs due to species variations, and this model is designed for humanoid creatures. Our hyperdimensional entity has specially installed a shoulder cannon for it, using the same shell compression technology as shipgirl equipment, making the user a budget version of a shipgirl.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;I told you, the turret structure is just decoration. — Deep Sea Tirpitz&lt;/i&gt;&lt;/color&gt;</KT_Base_armor.description>
+  
+  <KT_Base_backpack.label>Iron Halo Damage Absorption Field</KT_Base_backpack.label>
+  <KT_Base_backpack.description>A damage-absorption type field shield developed to enhance the battlefield survivability of Pact Nation infantry, integrated into a compact backpack.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;I can take at least three shots. — Pact Nation Soldier&lt;/i&gt;&lt;/color&gt;</KT_Base_backpack.description>
+  
+  <KT_Maintenance_Station_tech.label>Nanotechnology Maintenance Station</KT_Maintenance_Station_tech.label>
+  <KT_Maintenance_Station_tech.description>This structure is a marvel - it can not only repair items and buildings, but also increase their durability.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Even the durability of candy boxes has been multiplied several times, making them impossible to open! — Firefly&lt;/i&gt;&lt;/color&gt;</KT_Maintenance_Station_tech.description>
+</LanguageData>

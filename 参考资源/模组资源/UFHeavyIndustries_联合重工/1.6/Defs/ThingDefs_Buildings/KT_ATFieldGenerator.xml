@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<!--AT发生器-->
+	<ThingDef ParentName="BuildingBase">
+		<defName>KT_ATFieldGenerator</defName>
+		<label>"Canopy" AT-Field Shield</label>
+		<description>This shield can self-adjust its size to intercept most types of attacks, featuring vector reflection (can deflect most projectile weapons), prevents internal explosions, deflects orbital drops (though trade pods will also be deflected), prevents tunnel worms and insectoid swarms from spawning inside the shield (even those already emerging can be deflected by adjusting the shield range), blocks warp jumps, and protects against solar flares.</description>
+		<thingClass>ATFieldGenerator.Building_ATFieldGenerator</thingClass>
+		<uiOrder>2302</uiOrder>
+		<!--材质数据-->
+		<hasTooltip>true</hasTooltip>
+		<uiIconScale>1.40</uiIconScale>
+		<altitudeLayer>Building</altitudeLayer>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<designationCategory>Security</designationCategory>
+		<uiIconPath>Things/Building/KT_UFShield_icon</uiIconPath>
+		<graphicData>
+			<drawSize>(5.5,5.5)</drawSize>
+			<graphicClass>Graphic_Single</graphicClass>
+			<texPath>Things/Building/KT_UFShield</texPath>
+			<drawOffset>(0,0,0.2)</drawOffset>
+		</graphicData>
+		<thingCategories>
+          <li>BuildingsSecurity</li>
+        </thingCategories>
+    	<minifiedDef>MinifiedThing</minifiedDef>
+		<researchPrerequisites>
+	  	    <li>KT_Shield_AT</li>
+ 	    </researchPrerequisites>
+		<designationCategory>KT_designation_group</designationCategory>
+		<!--基本属性-->
+		<size>(3,3)</size>
+		<pathCost>0</pathCost>
+		<rotatable>false</rotatable>
+		<fillPercent>0.5</fillPercent>
+		<tickerType>Normal</tickerType>
+		<passability>PassThroughOnly</passability>
+		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+		<statBases>
+			<Flammability>0</Flammability>
+			<MaxHitPoints>5000</MaxHitPoints>
+			<WorkToBuild>50000</WorkToBuild>
+			<Mass>200</Mass>
+		</statBases>
+		<costList>
+			<KT_steel>300</KT_steel>
+			<Gold>50</Gold>
+			<ComponentIndustrial>25</ComponentIndustrial>			
+			<ComponentSpacer>15</ComponentSpacer>
+		</costList>
+		<tickerType>Normal</tickerType>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<!--工作组件-->
+		<comps>
+		    <li Class="SRA.CompProperties_BuildingDrawExtraFourRot">
+				<graphicDataExtra>
+					<graphicClass>Graphic_Single</graphicClass>
+					<shaderType>TransparentPostLight</shaderType>
+					<texPath>Things/Building/KT_UFShield_Light</texPath>
+					<drawSize>(5.5,5.5)</drawSize>
+	 		  	    <drawOffset>(0,0,0.2)</drawOffset>
+				</graphicDataExtra>
+	 		</li>
+			<!--手动开关-->
+			<li Class="CompProperties_Flickable"/>
+			<!--待机发光-->
+			<li Class="CompProperties_Glower">
+				<glowRadius>3</glowRadius>
+				<glowColor>(255,255,255,0)</glowColor>
+			</li>
+			<!--工作能耗-->
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTrader</compClass>
+				<basePowerConsumption>100000</basePowerConsumption>
+			</li>
+			<!--相位拒绝-->
+			<li Class="ATFieldGenerator.CompProperties_AbsoluteTerrorField">
+				<!--重启参数-->
+				<cooldownTicks>1000</cooldownTicks>
+				<restartEnergyPct>0.3</restartEnergyPct>
+				<!--按钮图标-->
+				<iconPathReflect>KT_UI/UI_Rebound</iconPathReflect>
+				<iconPathSkyfall>KT_UI/UI_Airspace_Control</iconPathSkyfall>
+				<iconPathTeleport>KT_UI/UI_Teleport_suppression</iconPathTeleport>
+				<iconPathExplosion>KT_UI/UI_Explosion_suppression</iconPathExplosion>
+				<!--特效资源-->
+				<damageScaleMax>5.5</damageScaleMax>
+				<damageScaleBase>0.5</damageScaleBase>
+				<damageScaleFactor>50</damageScaleFactor>
+				<interceptMoteDef>Mote_ATFieldOctagon</interceptMoteDef>
+				<!--矢量反射-->
+				<reflectMissRadius>5</reflectMissRadius>
+				<reflectScatterFactor>0.25</reflectScatterFactor>
+				<reflectEnergyCostFactor>5</reflectEnergyCostFactor>
+				<shieldColorReflect>(1.0, 0.3, 0.3, 0.15)</shieldColorReflect>
+				<!--基本参数-->
+				<radiusMin>5</radiusMin>
+				<radiusMax>125</radiusMax>
+				<maxDamagePerHit>500</maxDamagePerHit>
+				<energyMax>500000</energyMax>
+				<radiusDefault>5</radiusDefault>
+				<energyGainPerTick>2000</energyGainPerTick>
+				<energyLossPerDamage>1</energyLossPerDamage>
+				<shieldColor>(0.5, 0.8, 0.9, 0.15)</shieldColor>
+				<shieldTexturePath>Other/ForceField</shieldTexturePath>
+			</li>
+		</comps>
+	</ThingDef>
+</Defs>

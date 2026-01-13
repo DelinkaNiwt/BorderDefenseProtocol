@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- ======================== UI文本 ======================== -->
+  <Trion_ScanPawnButton>扫描Pawn</Trion_ScanPawnButton>
+  <Trion_ScanPawnDesc>选择一个Pawn进行天赋扫描（需要有Trion腺体）</Trion_ScanPawnDesc>
+
+  <!-- ======================== 提示消息 ======================== -->
+  <Trion_ScanSuccess_First>{0}首次扫描：天赋等级{1}，Trion容量重算为{2:F0}</Trion_ScanSuccess_First>
+  <Trion_ScanSuccess_Again>{0}的天赋等级：{1}，当前Trion容量{2:F0}</Trion_ScanSuccess_Again>
+  <Trion_ScanFailed_NoGland>扫描失败：{0}没有Trion腺体</Trion_ScanFailed_NoGland>
+
+  <!-- ======================== 天赋等级名称 ======================== -->
+  <TalentGrade_S>S（精英）</TalentGrade_S>
+  <TalentGrade_A>A（高级）</TalentGrade_A>
+  <TalentGrade_B>B（中高）</TalentGrade_B>
+  <TalentGrade_C>C（普通）</TalentGrade_C>
+  <TalentGrade_D>D（中低）</TalentGrade_D>
+  <TalentGrade_E>E（新兵）</TalentGrade_E>
+
+  <!-- ======================== 日志消息 ======================== -->
+  <Trion_ModInitialized>[Trion_MVP] 模组初始化成功</Trion_ModInitialized>
+  <Trion_ImplantSuccess>[Trion] {0}植入Trion腺体，获得Trion能量系统</Trion_ImplantSuccess>
+  <Trion_ImplantFailed>[Trion] {0}植入失败</Trion_ImplantFailed>
+  <Trion_CombatBodyGenerated>[Trion] {0}的战斗体已生成</Trion_CombatBodyGenerated>
+  <Trion_CombatBodyDestroyed>[Trion] {0}的战斗体已摧毁</Trion_CombatBodyDestroyed>
+  <Trion_BailOutSuccess>[Trion] {0}已成功执行Bail Out脱离</Trion_BailOutSuccess>
+  <Trion_BailOutFailed>[Trion] {0}的Bail Out脱离失败</Trion_BailOutFailed>
+
+</LanguageData>

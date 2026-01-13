@@ -1,0 +1,773 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <TraderKindDef>
+    <defName>KT_material_Trader</defName>
+    <label>KT_material_Trader</label>
+    <commonality>2</commonality>
+    <orbital>true</orbital>
+    <stockGenerators>
+
+      <!-- Metals -->
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Silver</thingDef>
+        <countRange>
+          <min>20000</min>
+          <max>80000</max>
+        </countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>ComponentIndustrial</thingDef>
+        <countRange>
+          <min>100</min>
+          <max>200</max>
+        </countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>ComponentSpacer</thingDef>
+        <countRange>
+          <min>30</min>
+          <max>50</max>
+        </countRange>
+      </li>
+	  <li Class="StockGenerator_SingleDef">
+        <thingDef>Neutroamine</thingDef>
+        <countRange>100~500</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Steel</thingDef>
+        <countRange>
+          <min>5000</min>
+          <max>15000</max>
+        </countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Plasteel</thingDef>
+        <countRange>
+          <min>2000</min>
+          <max>4000</max>
+        </countRange>
+      </li>
+	  <li Class="StockGenerator_SingleDef">
+        <thingDef>KT_steel</thingDef>
+        <countRange>
+          <min>1000</min>
+          <max>4000</max>
+        </countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Gold</thingDef>
+        <countRange>
+          <min>2000</min>
+          <max>4000</max>
+        </countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Uranium</thingDef>
+        <countRange>
+          <min>1000</min>
+          <max>3000</max>
+        </countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Jade</thingDef>
+        <countRange>
+          <min>500</min>
+          <max>1000</max>
+        </countRange>
+      </li>
+
+     <li Class="StockGenerator_SingleDef">
+        <thingDef>BlocksMarble</thingDef>
+        <countRange>
+          <min>1000</min>
+          <max>3000</max>
+        </countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>BlocksGranite</thingDef>
+        <countRange>
+          <min>2000</min>
+          <max>4000</max>
+        </countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>BlocksSlate</thingDef>
+        <countRange>
+          <min>2000</min>
+          <max>4000</max>
+        </countRange>
+      </li>
+	  
+	  <li Class="StockGenerator_SingleDef">
+        <thingDef>WoodLog</thingDef>
+        <countRange>
+          <min>3000</min>
+          <max>8000</max>
+        </countRange>
+      </li>
+	  
+	  <li Class="StockGenerator_SingleDef">
+        <thingDef>Cloth</thingDef>
+        <countRange>
+          <min>800</min>
+          <max>1500</max>
+        </countRange>
+      </li>
+	  
+	  <li Class="StockGenerator_SingleDef">
+        <thingDef>Hyperweave</thingDef>
+        <countRange>
+          <min>200</min>
+          <max>500</max>
+        </countRange>
+      </li>
+
+      <!-- Buying -->
+      <li Class="StockGenerator_BuyExpensiveSimple" />
+      <li Class="StockGenerator_BuyTradeTag"><tag>Clothing</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>Art</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>Drugs</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>MusicalInstrument</tag></li>
+
+    </stockGenerators>
+  </TraderKindDef>
+
+	<TraderKindDef>
+		<defName>KT_food_Trader</defName>
+		<label>KT_food_Trader</label>
+		<orbital>true</orbital>
+		<stockGenerators>
+			<!--=============== Sale ===============-->
+			<!--Foods -->
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Wort</thingDef>
+				<countRange>500~800</countRange>
+			</li>
+			<li Class="StockGenerator_Category">
+				<categoryDef>PlantMatter</categoryDef>
+				<thingDefCountRange>5~10</thingDefCountRange>
+				<countRange>500~800</countRange>
+			</li>
+			<li Class="StockGenerator_Category">
+				<categoryDef>Foods</categoryDef>
+				<excludedCategories>
+					<li>FoodMeals</li>
+					<li>FoodRaw</li>
+				</excludedCategories>
+				<thingDefCountRange>10~20</thingDefCountRange>
+				<countRange>500~800</countRange>
+			</li>
+			<li Class="StockGenerator_Category">
+				<categoryDef>FoodMeals</categoryDef>
+				<thingDefCountRange>6~20</thingDefCountRange>
+				<countRange>40~80</countRange>
+			</li>
+			<!--FoodRaw-->
+			<li Class="StockGenerator_Category">
+				<categoryDef>FoodRaw</categoryDef>
+				<excludedCategories>
+					<li>MeatRaw</li>
+					<li>PlantFoodRaw</li>
+					<li>AnimalProductRaw</li>
+				</excludedCategories>
+				<thingDefCountRange>10~20</thingDefCountRange>
+				<countRange>500~800</countRange>
+			</li>
+			<li Class="StockGenerator_Category">
+				<categoryDef>PlantFoodRaw</categoryDef>
+				<thingDefCountRange>5~20</thingDefCountRange>
+				<countRange>500~800</countRange>
+			</li>
+			<li Class="StockGenerator_Category">
+				<categoryDef>MeatRaw</categoryDef>
+				<thingDefCountRange>5~20</thingDefCountRange>
+				<countRange>500~800</countRange>
+			</li>
+			<!--AnimalProductRaw-->
+			<li Class="StockGenerator_Category">
+				<categoryDef>AnimalProductRaw</categoryDef>
+				<excludedCategories>
+					<li>EggsUnfertilized</li>
+					<li>EggsFertilized</li>
+				</excludedCategories>
+				<thingDefCountRange>10~20</thingDefCountRange>
+				<countRange>500~800</countRange>
+			</li>
+			<li Class="StockGenerator_Category">
+				<categoryDef>EggsUnfertilized</categoryDef>
+				<thingDefCountRange>10~20</thingDefCountRange>
+				<countRange>20~50</countRange>
+				<price>Cheap</price>
+			</li>
+			<li Class="StockGenerator_Category">
+				<categoryDef>EggsFertilized</categoryDef>
+				<thingDefCountRange>10~20</thingDefCountRange>
+				<countRange>20~50</countRange>
+			</li>
+			<!--Natural Textiles-->
+			<li Class="StockGenerator_Category">
+				<categoryDef>Leathers</categoryDef>
+				<thingDefCountRange>20~40</thingDefCountRange>
+				<countRange>1000~2000</countRange>
+			</li>
+			<li Class="StockGenerator_Category">
+				<categoryDef>Wools</categoryDef>
+				<thingDefCountRange>6~40</thingDefCountRange>
+				<countRange>1000~2000</countRange>
+			</li>
+			<!--Books-->
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>TextBook</thingDef>
+				<countRange>4</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Hyperweave</thingDef>
+				<countRange>300~500</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Cloth</thingDef>
+				<countRange>3000~5000</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Schematic</thingDef>
+				<countRange>4</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Novel</thingDef>
+				<countRange>4</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Silver</thingDef>
+				<countRange>10000~60000</countRange>
+			</li>
+			<li Class="StockGenerator_Category">
+				<categoryDef>Drugs</categoryDef>
+			</li>
+			<li Class="StockGenerator_MultiDef">
+				<thingDefs>
+					<li>Chocolate</li>
+					<li>Kibble</li>
+					<li>Pemmican</li>
+				</thingDefs>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Gold</thingDef>
+				<countRange>400~1000</countRange>
+			</li>
+		<!--===============  Buying  ===============-->	
+      <li Class="StockGenerator_BuyExpensiveSimple" />
+      <li Class="StockGenerator_BuyTradeTag"><tag>Clothing</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>Art</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>Drugs</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>MusicalInstrument</tag></li>
+		</stockGenerators>
+	</TraderKindDef>
+
+  	<TraderKindDef>
+		<defName>KT_armament_Trader</defName>
+		<label>KT_armament_Trader</label>
+		<orbital>true</orbital>
+		<stockGenerators>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Shell_HighExplosive</thingDef>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Shell_Incendiary</thingDef>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Shell_EMP</thingDef>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Shell_Smoke</thingDef>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Shell_Firefoam</thingDef>
+			</li>
+			<li Class="StockGenerator_SingleDef"
+			    MayRequire="Ludeon.RimWorld.Biotech">
+				<thingDef>Shell_Toxic</thingDef>
+			</li>
+			<li Class="StockGenerator_Category">
+				<categoryDef>MortarShells</categoryDef>
+				<thingDefCountRange>3~10</thingDefCountRange>
+				<countRange>6~12</countRange>
+			</li>
+			
+			<li Class="StockGenerator_MarketValue">
+       			 <tradeTag>WeaponRanged</tradeTag>
+       			 <countRange>7~14</countRange>
+     	    </li>
+     		<li Class="StockGenerator_Category">
+      			  <categoryDef>WeaponsMelee</categoryDef>
+     			  <thingDefCountRange>2~4</thingDefCountRange>
+      			  <countRange>2~3</countRange>
+   			</li>
+	        <li Class="StockGenerator_SingleDef" >
+                <thingDef>KT_SK_Powerarmor</thingDef>
+                <countRange>1</countRange>
+            </li>
+			<li Class="StockGenerator_SingleDef" >
+                <thingDef>KT_SK_helmet</thingDef>
+                <countRange>1</countRange>
+            </li>
+			<li Class="StockGenerator_SingleDef" >
+                <thingDef>KT_SKGUN</thingDef>
+                <countRange>1</countRange>
+            </li>
+			<li Class="StockGenerator_SingleDef" >
+                <thingDef>KT_Folding_fan</thingDef>
+                <countRange>0~1</countRange>
+            </li>
+	          
+	        <li Class="StockGenerator_SingleDef" >
+                <thingDef>KT_Special_SMG</thingDef>
+                <countRange>0~1</countRange>
+            </li>
+	  
+	        <li Class="StockGenerator_SingleDef" >
+                <thingDef>KT_Splitter_Gun</thingDef>
+                <countRange>0~1</countRange>
+            </li>
+	  
+	        <li Class="StockGenerator_SingleDef" >
+                <thingDef>KT_Bow_Great</thingDef>
+                <countRange>0~1</countRange>
+            </li>
+			
+			<li Class="StockGenerator_SingleDef" >
+                <thingDef>KT_Assassingun</thingDef>
+                <countRange>0~2</countRange>
+            </li>
+			<li Class="StockGenerator_SingleDef" >
+                <thingDef>KT_Analnail</thingDef>
+                <countRange>1~8</countRange>
+            </li>
+			<!--Single-->
+			<!--SingleVanilla-->
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Apparel_PsychicShockLance</thingDef>
+				<countRange>1~3</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Apparel_PsychicInsanityLance</thingDef>
+				<countRange>1~2</countRange>
+			</li>
+			<!--Category-->
+			<li Class="StockGenerator_Category">
+				<categoryDef>ApparelUtility</categoryDef>
+				<thingDefCountRange>7~15</thingDefCountRange>
+				<countRange>1~3</countRange>
+			</li>
+			<li Class="StockGenerator_Category">
+				<categoryDef>Apparel</categoryDef>
+				<thingDefCountRange>30~50</thingDefCountRange>
+				<countRange>1~3</countRange>
+			</li>
+			<!--MedicalSupplies-->
+			<li Class="StockGenerator_Category">
+				<excludedThingDefs>
+					<li MayRequire="Ludeon.RimWorld.Biotech">
+						<thingDef>DeathrestCapacitySerum</thingDef>
+					</li>
+					<li>MechSerumHealer</li>
+					<li>MechSerumResurrector</li>
+				</excludedThingDefs>
+				<categoryDef>Drugs</categoryDef>
+				<thingDefCountRange>7~15</thingDefCountRange>
+				<countRange>50~80</countRange>
+			</li>
+			<li Class="StockGenerator_Category">
+				<categoryDef>Medicine</categoryDef>
+				<thingDefCountRange>5~20</thingDefCountRange>
+				<countRange>30~60</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Silver</thingDef>
+				<countRange>30000~60000</countRange>
+			</li>
+			<li Class="StockGenerator_Category">
+				<categoryDef>Drugs</categoryDef>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Gold</thingDef>
+				<countRange>2000~10000</countRange>
+			</li>
+			<!--===============  Buying  ===============-->
+			<li Class="StockGenerator_BuyExpensiveSimple"/>
+			<li Class="StockGenerator_BuyTradeTag"><tag>HoraxWeapon</tag></li>
+			<li Class="StockGenerator_BuyTradeTag">
+				<tag>Art</tag>
+			</li>
+			<li Class="StockGenerator_BuyTradeTag">
+				<tag>MusicalInstrument</tag>
+			</li>
+			<li Class="StockGenerator_BuyTradeTag">
+				<tag>ImplantEmpireCommon</tag>
+			</li>
+			<li Class="StockGenerator_BuyTradeTag">
+				<tag>ImplantEmpireRoyal</tag>
+			</li>
+			<li Class="StockGenerator_BuyTradeTag">
+				<tag>PsylinkNeuroformer</tag>
+			</li>
+			<li Class="StockGenerator_BuyTradeTag">
+				<tag>ExoticBuilding</tag>
+			</li>
+		</stockGenerators>
+	</TraderKindDef>
+
+  <TraderKindDef>
+    <defName>KT_slave_Trader</defName>
+    <label>KT_slave_Trader</label>
+    <orbital>true</orbital>
+
+    <stockGenerators>
+
+      <!-- Resources -->
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Silver</thingDef>
+        <countRange>10000~60000</countRange>
+      </li>
+
+      <!-- Slaves -->
+      <li Class="StockGenerator_Slaves">
+        <countRange>4~7</countRange>
+      </li>
+	  
+	  
+      <!-- 加入联合可获得72个猫娘，从来都不是玩笑话 -->
+      <li Class="Kiiro.StockGenerator_Maids" MayRequire="Ancot.KiiroRace">
+        <countRange>8~15</countRange>
+      </li>
+	  <!-- 巨大雪牛多喝水 -->
+	  <li Class="StockGenerator_MooGirl_Slaves" MayRequire="HAR.MuGirlRace">
+        <countRange>1~4</countRange>
+      </li>
+      
+      <!-- Buying -->
+      <li Class="StockGenerator_BuyExpensiveSimple" />
+	  <li Class="StockGenerator_BuySlaves" />
+      <li Class="StockGenerator_BuyTradeTag"><tag>Art</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>ImplantEmpireCommon</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>ImplantEmpireRoyal</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>PsylinkNeuroformer</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>MusicalInstrument</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>GravshipUpgrade</tag></li>
+
+    </stockGenerators>
+  </TraderKindDef> 
+   
+  <TraderKindDef>
+    <defName>KT_medic_Trader</defName>
+    <label>Medic Trader</label>
+    <orbital>true</orbital>
+
+    <stockGenerators>
+
+      <!-- Resources -->
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Silver</thingDef>
+        <countRange>50000~100000</countRange>
+      </li>
+	  <li Class="StockGenerator_SingleDef">
+        <thingDef>Gold</thingDef>
+        <countRange>1000~2000</countRange>
+      </li>
+	  <li Class="StockGenerator_SingleDef">
+        <thingDef>Neutroamine</thingDef>
+        <countRange>300~500</countRange>
+      </li>
+	  <li Class="StockGenerator_SingleDef">
+	    <thingDef>ComponentIndustrial</thingDef>
+        <countRange>20~40</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>ComponentSpacer</thingDef>
+        <countRange>5~10</countRange>
+      </li>
+	  <li Class="StockGenerator_SingleDef">
+        <thingDef>MedicineUltratech</thingDef>
+        <countRange>50~150</countRange>
+		<price>Cheap</price>
+      </li>
+	  <li Class="StockGenerator_SingleDef">
+        <thingDef>MedicineIndustrial</thingDef>
+        <countRange>100~250</countRange>
+		<price>Cheap</price>
+      </li>
+	  
+	  <!-- Drugs -->
+      <li Class="StockGenerator_Category">
+		<categoryDef>Drugs</categoryDef>
+		<thingDefCountRange>7~15</thingDefCountRange>
+		<countRange>50~80</countRange>
+		<price>Cheap</price>
+	  </li>
+	  
+      <!-- Implants -->
+      <li Class="StockGenerator_Tag">
+        <tradeTag>TechHediff</tradeTag>
+        <thingDefCountRange>10~10</thingDefCountRange>
+        <countRange>3~5</countRange>
+      </li>
+      
+	  <li Class="StockGenerator_Category">
+        <categoryDef>Neurotrainers</categoryDef>
+		<thingDefCountRange>2</thingDefCountRange>
+		<countRange>1~3</countRange>
+      </li>
+
+      <li Class="StockGenerator_Category">
+        <categoryDef>NeurotrainersPsycast</categoryDef>
+		<thingDefCountRange>2</thingDefCountRange>
+		<countRange>1~2</countRange>
+      </li>
+
+      <li Class="StockGenerator_Category">
+        <categoryDef>NeurotrainersSkill</categoryDef>
+		<thingDefCountRange>4</thingDefCountRange>
+		<countRange>2~3</countRange>
+      </li>
+	  <li Class="StockGenerator_SingleDef" >
+        <thingDef>KT_Light_Air_Strike_Chip</thingDef>
+        <countRange>0~1</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef" >
+        <thingDef>KT_Heavy_Air_Strike_Chip</thingDef>
+        <countRange>0~1</countRange>
+      </li>
+	  <li Class="StockGenerator_SingleDef" >
+        <thingDef>KT_medical_Chip</thingDef>
+        <countRange>1~2</countRange>
+      </li>
+	  
+	  <li Class="StockGenerator_SingleDef" >
+        <thingDef>HospitalBed</thingDef>
+        <countRange>2~3</countRange>
+      </li>
+      
+      <!-- Buying -->
+	  <li Class="StockGenerator_BuyExpensiveSimple" />
+      <li Class="StockGenerator_BuyTradeTag"><tag>Art</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>Drugs</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>MusicalInstrument</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>ImplantEmpireCommon</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>ImplantEmpireRoyal</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>PsylinkNeuroformer</tag></li>
+	  <li Class="StockGenerator_BuyTradeTag"><tag>UtilitySpecial</tag></li>
+      <li Class="StockGenerator_BuySingleDef" MayRequire="Ludeon.RimWorld.Anomaly"><thingDef>Shell_Deadlife</thingDef></li>
+      <li Class="StockGenerator_BuySingleDef" MayRequire="Ludeon.RimWorld.Anomaly"><thingDef>VoidSculpture</thingDef></li>
+      <li Class="StockGenerator_BuySingleDef" MayRequire="Ludeon.RimWorld.Anomaly"><thingDef>Shard</thingDef></li>
+      <li Class="StockGenerator_BuySingleDef" MayRequire="Ludeon.RimWorld.Anomaly"><thingDef>Bioferrite</thingDef></li>
+      <li Class="StockGenerator_BuySingleDef" MayRequire="Ludeon.RimWorld.Anomaly"><thingDef>RevenantSpine</thingDef></li>	  
+    </stockGenerators>
+  </TraderKindDef>  
+   
+  <TraderKindDef>
+    <defName>KT_pantsushop_Trader</defName>
+    <label>KT_pantsushop_Trader</label>
+    <orbital>true</orbital>
+
+    <stockGenerators>
+
+      <!-- Resources -->
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Silver</thingDef>
+        <countRange>80000~150000</countRange>
+      </li>
+	  <li Class="StockGenerator_SingleDef">
+        <thingDef>Gold</thingDef>
+        <countRange>2000~4000</countRange>
+      </li>
+	  <li Class="StockGenerator_SingleDef">
+        <thingDef>KT_steel</thingDef>
+        <countRange>300~1500</countRange>
+      </li>
+	  <li Class="StockGenerator_SingleDef">
+	    <thingDef>ComponentIndustrial</thingDef>
+        <countRange>100~120</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>ComponentSpacer</thingDef>
+        <countRange>70~90</countRange>
+      </li>
+	  <li Class="StockGenerator_SingleDef">
+        <thingDef>MedicineUltratech</thingDef>
+        <countRange>5~15</countRange>
+      </li>
+	  <li Class="StockGenerator_SingleDef">
+        <thingDef>MedicineIndustrial</thingDef>
+        <countRange>25~35</countRange>
+      </li>
+	  <li Class="StockGenerator_SingleDef" MayRequire="Ludeon.RimWorld.Odyssey">
+        <thingDef>ShuttleEngine</thingDef>
+        <countRange>2~5</countRange>
+      </li>
+	  <!-- Techprints -->
+	  <li Class="StockGenerator_Techprints">
+        <countChances>
+          <li>
+            <count>5</count>
+            <chance>1</chance>
+          </li>
+        </countChances>
+      </li>
+	  <li Class="StockGenerator_SingleDef">
+        <thingDef>TextBook</thingDef>
+        <countRange>1~2</countRange>
+      </li>
+
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Schematic</thingDef>
+        <countRange>1~1</countRange>
+      </li>
+
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Novel</thingDef>
+        <countRange>1~1</countRange>
+      </li>
+	  <li Class="StockGenerator_Category">
+        <categoryDef>Neurotrainers</categoryDef>
+		<thingDefCountRange>2</thingDefCountRange>
+		<countRange>1~3</countRange>
+      </li>
+
+      <li Class="StockGenerator_Category">
+        <categoryDef>NeurotrainersPsycast</categoryDef>
+		<thingDefCountRange>2</thingDefCountRange>
+		<countRange>1~3</countRange>
+      </li>
+
+      <li Class="StockGenerator_Category">
+        <categoryDef>NeurotrainersSkill</categoryDef>
+		<thingDefCountRange>2</thingDefCountRange>
+		<countRange>1~3</countRange>
+      </li>
+	  <li Class="StockGenerator_SingleDef" >
+        <thingDef>KT_SAG</thingDef>
+        <countRange>0~2</countRange>
+      </li>
+	  <li Class="StockGenerator_SingleDef" >
+        <thingDef>KT_Powerarmor</thingDef>
+        <countRange>0~2</countRange>
+      </li>
+	  <li Class="StockGenerator_SingleDef" >
+        <thingDef>KT_helmet</thingDef>
+        <countRange>0~2</countRange>
+      </li>
+	  <li Class="StockGenerator_SingleDef" >
+        <thingDef>KT_helmet_shark_teeth</thingDef>
+        <countRange>0~1</countRange>
+      </li>
+	  <li Class="StockGenerator_SingleDef" >
+        <thingDef>KT_HeavyShield</thingDef>
+        <countRange>1~3</countRange>
+      </li>
+	  <li Class="StockGenerator_SingleDef" >
+        <thingDef>KT_Backpack</thingDef>
+        <countRange>0~2</countRange>
+      </li>
+	  
+	  <li Class="StockGenerator_SingleDef" >
+        <thingDef>KT_Folding_fan</thingDef>
+        <countRange>0~1</countRange>
+      </li>
+	  
+	  <li Class="StockGenerator_SingleDef" >
+        <thingDef>KT_Special_SMG</thingDef>
+        <countRange>0~1</countRange>
+      </li>
+	  
+	  <li Class="StockGenerator_SingleDef" >
+        <thingDef>KT_Splitter_Gun</thingDef>
+        <countRange>0~1</countRange>
+      </li>
+	  
+	  <li Class="StockGenerator_SingleDef" >
+        <thingDef>KT_Assassingun</thingDef>
+        <countRange>0~2</countRange>
+      </li>
+	  
+	  <li Class="StockGenerator_SingleDef" >
+        <thingDef>KT_Bow_Great</thingDef>
+        <countRange>1~1</countRange>
+      </li>
+	  
+	  <li Class="StockGenerator_SingleDef" >
+        <thingDef>KT_101Rifle</thingDef>
+        <countRange>0~1</countRange>
+      </li>
+	  <!-- Implants -->
+      <li Class="StockGenerator_Tag">
+        <tradeTag>TechHediff</tradeTag>
+        <thingDefCountRange>10~10</thingDefCountRange>
+        <countRange>1~2</countRange>
+      </li>
+	  
+      <li Class="StockGenerator_MarketValue" MayRequire="TOT.CeleTech.MKIII">
+        <tradeTag>CeleTechWeapon</tradeTag>
+        <countRange>2~5</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef" MayRequire="TOT.CeleTech.MKIII">
+        <thingDef>CMC_Gravcore</thingDef>
+        <countRange>1~2</countRange>
+      </li>
+	  
+	  <li Class="StockGenerator_SingleDef" MayRequire="KindSeal.MobileDragoon">
+        <thingDef>KT_Module_PE2_Core</thingDef>
+        <countRange>0~1</countRange>
+      </li>
+	  <li Class="StockGenerator_SingleDef" MayRequire="KindSeal.MobileDragoon">
+        <thingDef>KT_Module_PE2_Helmet</thingDef>
+        <countRange>0~1</countRange>
+      </li>
+	  <li Class="StockGenerator_SingleDef" MayRequire="KindSeal.MobileDragoon">
+        <thingDef>KTMD_Module_25MMAC</thingDef>
+        <countRange>0~2</countRange>
+      </li>
+	  <li Class="StockGenerator_SingleDef" MayRequire="KindSeal.MobileDragoon">
+        <thingDef>KTMD_Module_ShieldBackpack</thingDef>
+        <countRange>0~1</countRange>
+      </li>
+	  <li Class="StockGenerator_SingleDef" MayRequire="KindSeal.MobileDragoon">
+        <thingDef>KTMD_Module_ENERGYSword</thingDef>
+        <countRange>0~1</countRange>
+      </li>
+	  <li Class="StockGenerator_SingleDef" MayRequire="KindSeal.MobileDragoon">
+        <thingDef>KTMD_Module_HeavyShield</thingDef>
+        <countRange>0~2</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef" >
+          <thingDef>KT_SK_Powerarmor</thingDef>
+          <countRange>0~1</countRange>
+      </li>
+	  <li Class="StockGenerator_SingleDef" >
+          <thingDef>KT_SK_helmet</thingDef>
+          <countRange>0~1</countRange>
+      </li>
+	  <li Class="StockGenerator_SingleDef" >
+          <thingDef>KT_SKGUN</thingDef>
+          <countRange>0~1</countRange>
+      </li>
+      <!-- Buying -->
+	  <li Class="StockGenerator_BuyExpensiveSimple" />
+      <li Class="StockGenerator_BuyTradeTag"><tag>Clothing</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>Art</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>Drugs</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>MusicalInstrument</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>ImplantEmpireCommon</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>ImplantEmpireRoyal</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>PsylinkNeuroformer</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>GravshipUpgrade</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>ExoticBuilding</tag></li>
+	  <li Class="StockGenerator_BuyTradeTag"><tag>HoraxWeapon</tag></li>
+	  <li Class="StockGenerator_BuyTradeTag"><tag>UtilitySpecial</tag></li>
+      <li Class="StockGenerator_BuySingleDef" MayRequire="Ludeon.RimWorld.Anomaly"><thingDef>Shell_Deadlife</thingDef></li>
+      <li Class="StockGenerator_BuySingleDef" MayRequire="Ludeon.RimWorld.Anomaly"><thingDef>VoidSculpture</thingDef></li>
+      <li Class="StockGenerator_BuySingleDef" MayRequire="Ludeon.RimWorld.Anomaly"><thingDef>Shard</thingDef></li>
+      <li Class="StockGenerator_BuySingleDef" MayRequire="Ludeon.RimWorld.Anomaly"><thingDef>Bioferrite</thingDef></li>
+      <li Class="StockGenerator_BuySingleDef" MayRequire="Ludeon.RimWorld.Anomaly"><thingDef>RevenantSpine</thingDef></li>	  
+    </stockGenerators>
+  </TraderKindDef> 
+</Defs>
+

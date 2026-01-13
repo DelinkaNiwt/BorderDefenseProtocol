@@ -1,0 +1,859 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <PawnKindDef Name="KTHeavyMechanoidKind" Abstract="True">
+    <defaultFactionType>Mechanoid</defaultFactionType>
+    <aiAvoidCover>false</aiAvoidCover>
+    <destroyGearOnDrop>true</destroyGearOnDrop>
+    <canStrip>false</canStrip>
+    <minGenerationAge>100</minGenerationAge>
+    <forceNormalGearQuality>true</forceNormalGearQuality>
+    <allowInMechClusters>false</allowInMechClusters><!--机械集群-->
+
+    <weaponMoney>5000~10000</weaponMoney>
+    <combatPower>400</combatPower>
+    <techHediffsChance>1</techHediffsChance>
+    <techHediffsMoney>10000~15000</techHediffsMoney>
+    <controlGroupPortraitZoom>0.8</controlGroupPortraitZoom>
+  </PawnKindDef>
+  
+  <ThingDef Abstract="True" Name="KTSuperHeavyMechanoid" ParentName="HeavyMechanoid">
+    <statBases>
+      <MoveSpeed>4</MoveSpeed>
+      <MarketValue>32000</MarketValue>
+      <ControlTakingTime>4</ControlTakingTime>
+      <BandwidthCost>5</BandwidthCost>
+      <ArmorRating_Blunt>4</ArmorRating_Blunt>
+      <ArmorRating_Sharp>4</ArmorRating_Sharp>
+      <ArmorRating_Heat>4</ArmorRating_Heat>
+      <ComfyTemperatureMin>-200</ComfyTemperatureMin>
+      <ComfyTemperatureMax>2000</ComfyTemperatureMax>
+      <StaggerDurationFactor>-1</StaggerDurationFactor>
+      <PsychicSensitivity>0</PsychicSensitivity>
+      <MechEnergyUsageFactor>0</MechEnergyUsageFactor>
+      <MechEnergyLossPerHP>0</MechEnergyLossPerHP>
+      <WastepacksPerRecharge>0</WastepacksPerRecharge>
+    </statBases>
+    <race>
+      <hasCorpse>false</hasCorpse>
+      <intelligence>ToolUser</intelligence>
+      <thinkTreeMain>Mechanoid</thinkTreeMain>
+      <baseHealthScale>1</baseHealthScale>
+      <mechWeightClass>UltraHeavy</mechWeightClass>
+      <mechFixedSkillLevel>20</mechFixedSkillLevel>
+    </race>
+    <butcherProducts Inherit="False">
+      <Steel>50</Steel>
+      <Plasteel>20</Plasteel>
+    </butcherProducts>
+  </ThingDef>
+
+  <ThingDef Name="KT_Main_battlewalker" ParentName="KTSuperHeavyMechanoid">
+    <defName>KT_Main_battlewalker</defName> <!-- 修改了defName以避免冲突 -->
+    <label>KT_Main_battlewalker</label>
+    <description>KT_Main_battlewalker</description>
+    <statBases>
+      <BandwidthCost>8</BandwidthCost>
+      <MoveSpeed>3</MoveSpeed>
+    </statBases>
+    <race>
+      <body>Mech_Warqueen</body>
+      <baseBodySize>10</baseBodySize>
+      <lifeStageAges>
+        <li>
+          <def>MechanoidFullyFormed</def>
+          <minAge>0</minAge>
+          <soundWounded>Pawn_Mech_Warqueen_Wounded</soundWounded>
+          <soundDeath>Pawn_Mech_Warqueen_Death</soundDeath>
+          <soundCall>Pawn_Mech_Warqueen_Call</soundCall>
+        </li>
+      </lifeStageAges>
+      <baseHealthScale>12</baseHealthScale>
+      <!-- <thinkTreeConstant>WarUrchinConstant</thinkTreeConstant> -->
+    </race>
+    <tools>
+      <li>
+        <label>Trample</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>500</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>Torso</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+      </li>
+    </tools>
+	<statBases>
+	  <IncomingDamageFactor>0.5</IncomingDamageFactor>
+    </statBases>
+    <damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+      <li>
+        <damageDef>EMP</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <comps>
+      <!--加上这个组件的机械体会直接跳过原版指挥范围判定-->
+      <li Class="SRA.CompProperties_GlobalMechCommand" />
+      <li Class="CompProperties_CanBeDormant" />
+      <li Class="CompProperties_WakeUpDormant">
+        <wakeUpOnDamage>true</wakeUpOnDamage>
+        <wakeUpCheckRadius>30</wakeUpCheckRadius>
+        <wakeUpSound>MechanoidsWakeUp</wakeUpSound>
+      </li>
+      <li Class="SRA.CompProperties_VehicleWeapon">
+        <drawData>
+          <dataEast>
+            <offset>(0.6,0,-0.6)</offset>
+          </dataEast>
+          <dataWest>
+            <offset>(-0.6,0,1.1)</offset>
+            <layer>-20</layer>
+          </dataWest>
+          <dataSouth>
+            <offset>(-1.35,0,0.5)</offset>
+			<layer>40</layer>
+          </dataSouth>
+          <dataNorth>
+            <offset>(1.5,0,-0.3)</offset>
+          </dataNorth>
+        </drawData>
+        <turretRotationFollowPawn>true</turretRotationFollowPawn>
+        <rotationSmoothTime>0.12</rotationSmoothTime>
+      </li>
+      <li Class="SRA.CompProperties_MultiTurretGun">
+		    <ID>0</ID>
+        <turretDef>KT_Main_battlewalker_machinegun</turretDef>
+        <!-- <angleOffset>-90</angleOffset> -->
+        <renderNodeProperties>
+          <li>
+            <nodeClass>PawnRenderNode_TurretGun</nodeClass>
+            <workerClass>PawnRenderNodeWorker_TurretGun</workerClass>
+            <parentTagDef>Body</parentTagDef>
+            <overrideMeshSize>(3, 3)</overrideMeshSize>
+            <pawnType>Any</pawnType>
+            <drawData>
+              <dataNorth>
+                <offset>(0, 0, 2.35)</offset>
+				<rotationOffset>270</rotationOffset>
+                <flip>true</flip>
+                <layer>-20</layer>
+              </dataNorth>
+              <dataEast>
+                <layer>-20</layer>
+				<rotationOffset>270</rotationOffset>
+                <offset>(2, 0, -0.5)</offset>
+              </dataEast>
+              <dataSouth>
+			  <layer>-20</layer>
+			  <rotationOffset>270</rotationOffset>
+                <offset>(0, 0, -1.35)</offset>
+              </dataSouth>
+              <dataWest>
+			  <layer>-20</layer>
+                <offset>(-2, 0, -0.4)</offset>
+				<rotationOffset>-270</rotationOffset>
+              </dataWest>
+            </drawData>
+          </li>
+        </renderNodeProperties>
+      </li>
+	  <li Class="SRA.CompProperties_MultiTurretGun">
+		    <ID>1</ID>
+        <turretDef>KT_Main_battlewalker_EMPlauncher</turretDef>
+        <!-- <angleOffset>-90</angleOffset> -->
+        <renderNodeProperties>
+          <li>
+            <nodeClass>PawnRenderNode_TurretGun</nodeClass>
+            <workerClass>PawnRenderNodeWorker_TurretGun</workerClass>
+            <parentTagDef>Body</parentTagDef>
+            <overrideMeshSize>(0.1,0.1)</overrideMeshSize>
+            <pawnType>Any</pawnType>
+            <drawData>
+              <dataNorth>
+                <offset>(0, 0, 0)</offset>
+                <layer>-20</layer>
+              </dataNorth>
+              <dataEast>
+                <offset>(0, 0, 0)</offset>
+                <layer>-20</layer>
+              </dataEast>
+              <dataSouth>
+			    <offset>(0, 0, 0)</offset>
+                <layer>-20</layer>
+              </dataSouth>
+              <dataWest>
+			    <offset>(0, 0, 0)</offset>
+                <layer>-20</layer>
+              </dataWest>
+            </drawData>
+          </li>
+        </renderNodeProperties>
+      </li>
+	  <li Class="SRA.CompProperties_MultiTurretGun">
+		    <ID>1</ID>
+        <turretDef>KT_Main_battlewalker_war_tramples</turretDef>
+        <!-- <angleOffset>-90</angleOffset> -->
+        <renderNodeProperties>
+          <li>
+            <nodeClass>PawnRenderNode_TurretGun</nodeClass>
+            <workerClass>PawnRenderNodeWorker_TurretGun</workerClass>
+            <parentTagDef>Body</parentTagDef>
+            <overrideMeshSize>(0.1,0.1)</overrideMeshSize>
+            <pawnType>Any</pawnType>
+            <drawData>
+              <dataNorth>
+                <offset>(0, 0, 0)</offset>
+                <layer>-20</layer>
+              </dataNorth>
+              <dataEast>
+                <offset>(0, 0, 0)</offset>
+                <layer>-20</layer>
+              </dataEast>
+              <dataSouth>
+			    <offset>(0, 0, 0)</offset>
+                <layer>-20</layer>
+              </dataSouth>
+              <dataWest>
+			    <offset>(0, 0, 0)</offset>
+                <layer>-20</layer>
+              </dataWest>
+            </drawData>
+          </li>
+        </renderNodeProperties>
+      </li>
+      <li Class="CompProperties_ProjectileInterceptor">
+        <radius>6</radius>
+        <interceptGroundProjectiles>true</interceptGroundProjectiles>
+        <color>(0.4, 0.4, 0.4)</color>
+        <reactivateEffect>BulletShieldGenerator_Reactivate</reactivateEffect>
+        <activeSound>BulletShield_Ambience</activeSound>
+        <hitPoints>6400</hitPoints>
+        <hitPointsRestoreInstantlyAfterCharge>true</hitPointsRestoreInstantlyAfterCharge>
+        <chargeDurationTicks>900</chargeDurationTicks><!-- 15s -->
+        <rechargeHitPointsIntervalTicks>90</rechargeHitPointsIntervalTicks>
+        <minIdleAlpha>0.2</minIdleAlpha>
+        <drawWithNoSelection>True</drawWithNoSelection>
+        <disarmedByEmpForTicks>900</disarmedByEmpForTicks>
+        <gizmoTipKey>ProjectileInterceptorTip</gizmoTipKey>
+      </li>
+    </comps>
+  </ThingDef>
+  <!-- 基础代码 -->
+  <PawnKindDef Name="KT_Main_battlewalker_PawnKind" ParentName="KTHeavyMechanoidKind">
+    <defName>KT_Main_battlewalker</defName> <!-- 修改了defName以避免冲突 -->
+    <label>KT_Main_battlewalker</label>
+    <race>KT_Main_battlewalker</race>
+    <combatPower>1000</combatPower>
+    <maxPerGroup>0</maxPerGroup>
+    <allowInMechClusters>false</allowInMechClusters>
+    <forceNoDeathNotification>true</forceNoDeathNotification>
+    <forceDeathOnDowned>true</forceDeathOnDowned>
+    <startingHediffs>
+      <li>
+        <def>KT_battlewalker_Hediff</def>
+      </li>
+    </startingHediffs>
+	
+	<abilities>
+      <li>KT_FlyOver_AX_Attack</li>
+    </abilities>
+	
+    <lifeStages>
+      <li>
+        <bodyGraphicData>
+          <texPath>Things/Pawn/Mechanoid/KT_Main_battlewalker</texPath>
+          <maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/None</maskPath>
+          <shaderType>CutoutWithOverlay</shaderType>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>6</drawSize>
+          <shadowData>
+            <volume>(1.4, 1.8, 1.4)</volume>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+    <weaponTags>
+      <li>KT_Main_battlewalker_main_gun</li>
+    </weaponTags>
+	<weaponMoney>5000~10000</weaponMoney>
+    <controlGroupPortraitZoom>0.7</controlGroupPortraitZoom>  
+
+    <abilities>
+      <li>KT_doommissile</li>
+    </abilities>
+  </PawnKindDef>
+  
+  
+ <PawnKindDef Name="KT_Main_battlewalker_PawnKind_main_autogun" ParentName="KT_Main_battlewalker_PawnKind">
+  <defName>KT_Main_battlewalker_PawnKind_main_autogun</defName>
+  <label>KT_Main_battlewalker_PawnKind_main_autogun</label>
+   <weaponTags Inherit="False">
+      <li>KT_Battle_walker_main_autogun</li>
+   </weaponTags>
+	<weaponMoney>5000~10000</weaponMoney>
+  </PawnKindDef>
+  
+  <PawnKindDef Name="KT_Main_battlewalker_PawnKind_main_gatling" ParentName="KT_Main_battlewalker_PawnKind">
+  <defName>KT_Main_battlewalker_PawnKind_main_gatling</defName>
+    <label>KT_Main_battlewalker_PawnKind_main_gatling</label>
+    <weaponTags Inherit="False">
+      <li>KT_Battle_walker_main_gatling_gun</li>
+    </weaponTags>
+	<weaponMoney>5000~10000</weaponMoney>
+  </PawnKindDef>
+
+
+	<ThingDef ParentName="KT_Mecha_WeaponBase">
+		<defName>KT_Main_battlewalker_main_gun</defName>
+		<label>KT_Main_battlewalker_main_gun</label>
+		<description>KT_Main_battlewalker_main_gun</description>
+		<graphicData>
+			<texPath>Things/Pawn/Mechanoid/KT_Battle_walker_main_gun</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>11</drawSize>
+		</graphicData>
+		<uiIconScale>0.2</uiIconScale>
+		<equippedAngleOffset>0</equippedAngleOffset>
+    	<smeltable>false</smeltable>
+		<statBases>
+			<MarketValue>1600</MarketValue>
+			<MaxHitPoints>640</MaxHitPoints>
+			<Mass>400</Mass>
+			<AccuracyTouch>1</AccuracyTouch>
+			<AccuracyShort>1</AccuracyShort>
+			<AccuracyMedium>1</AccuracyMedium>
+			<AccuracyLong>1</AccuracyLong>
+			<RangedWeapon_Cooldown>2</RangedWeapon_Cooldown>
+			<Flammability>0</Flammability>
+		</statBases>
+		<tradeability>None</tradeability>
+		<relicChance>0</relicChance>
+		<weaponTags>
+			<li>KT_Main_battlewalker_main_gun</li>
+		</weaponTags>
+		<verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>KT_Bullet_Main_battlewalker_main_gun</defaultProjectile>
+        <hasStandardCommand>true</hasStandardCommand>
+           <warmupTime>1.5</warmupTime>
+           <range>250</range>
+		   <minRange>15</minRange>
+           <soundCast>KTSound_Cannonii</soundCast>
+        <soundCastTail>GunTail_Medium</soundCastTail>
+        <muzzleFlashScale>9</muzzleFlashScale>
+        <aimingChargeMote>Mote_BeamRepeater_Charge</aimingChargeMote>
+        <aimingChargeMoteOffset>0</aimingChargeMoteOffset>
+			<requireLineOfSight>false</requireLineOfSight>
+		   <targetParams>
+			   <canTargetLocations>true</canTargetLocations>
+		   </targetParams>
+      </li>
+		</verbs>
+		<tools>
+			<li>
+				<label>Trample</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>64</power>
+				<cooldownTime>2</cooldownTime>
+			</li>
+		</tools>
+		
+	</ThingDef>
+	
+  
+	<AbilityDef>
+		<defName>KT_doommissile</defName>
+		<label>KT_doommissile</label>
+		<description>KT_doommissile</description>
+		<iconPath>Things/Projectile/Bullet_doommissile</iconPath>
+		<cooldownTicksRange>30000</cooldownTicksRange>
+		<cooldownPerCharge>true</cooldownPerCharge>
+		<charges>16</charges>
+		<aiCanUse>true</aiCanUse>
+		<verbProperties>
+			<verbClass>Verb_CastAbility</verbClass>
+			<range>250</range>
+			<warmupTime>4</warmupTime>
+			<soundCast>InfernoCannon_Fire</soundCast>
+			<soundCastTail>GunTail_Heavy</soundCastTail>
+			<muzzleFlashScale>12</muzzleFlashScale>
+			<minRange>20</minRange>
+			<requireLineOfSight>false</requireLineOfSight>
+			<targetParams>
+                  <canTargetLocations>true</canTargetLocations>
+                  <canTargetSelf>true</canTargetSelf>
+                  <canTargetPawns>true</canTargetPawns>
+                  <canTargetBuildings>true</canTargetBuildings>
+                  <canTargetPlants>true</canTargetPlants>
+            </targetParams>
+			<soundAiming>HellsphereCannon_Aiming</soundAiming>
+			<canGoWild>false</canGoWild>
+		</verbProperties>
+		<comps>
+			<li Class="CompProperties_AbilityLaunchProjectile">
+				<projectileDef>Proj_kt_doommissile</projectileDef>
+			</li>
+		</comps>
+	</AbilityDef>
+
+  
+  <ThingDef ParentName="BaseIncendiaryProjectile_KTarmor">
+    <defName>Proj_kt_doommissile</defName>
+    <label>Proj_kt_doommissile</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_doommissile</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>(2.5)</drawSize>
+    </graphicData>
+    <projectile>
+        <damageDef>Bomb</damageDef>
+        <explosionRadius>15</explosionRadius>
+        <speed>250</speed>
+        <damageAmountBase>1800</damageAmountBase>
+        <arcHeightFactor>0</arcHeightFactor>
+        <soundExplode>Explosion_Rocket</soundExplode>
+		<armorPenetrationBase>2</armorPenetrationBase>
+		<stoppingPower>1.8</stoppingPower>
+		<flyOverhead>true</flyOverhead>
+    </projectile>
+	</ThingDef>
+	
+  <ThingDef ParentName="BaseBullet">
+    <defName>KT_Bullet_Main_battlewalker_main_gun</defName>
+    <label>KT_Bullet_Main_battlewalker_main_gun</label>
+    <thingClass>SRA.Projectile_MultiExplosive</thingClass>
+        <category>Projectile</category>
+        <tickerType>Normal</tickerType>
+        <altitudeLayer>Projectile</altitudeLayer>
+        <graphicData>
+            <texPath>Things/Projectile/Bullet_381MM</texPath> <!-- 子弹贴图路径 -->
+            <graphicClass>Graphic_Single</graphicClass> <!-- 使用单一图形 -->
+			<shaderType>MoteGlow</shaderType>
+      		<drawSize>(2.6)</drawSize>
+        </graphicData>
+        <projectile>
+            <damageDef>Bomb</damageDef>
+            <explosionRadius>4</explosionRadius>
+            <speed>180</speed>
+            <damageAmountBase>300</damageAmountBase>
+            <arcHeightFactor>0</arcHeightFactor>
+            <soundExplode>Explosion_Rocket</soundExplode>
+			<flyOverhead>true</flyOverhead>
+			<armorPenetrationBase>1.8</armorPenetrationBase>
+			<stoppingPower>1.5</stoppingPower>
+		</projectile>
+		<modExtensions>
+        <li Class="SRA.MultiExplosiveExtension">
+        <multiexplosions>
+          <li>
+            <radius>4</radius>
+            <damageDef>Bomb</damageDef>
+            <damageAmount>300</damageAmount>
+            <armorPenetration>1.8</armorPenetration>
+            <explosionSound>Explosion_Bomb</explosionSound>
+            <explosionDamageFalloff>true</explosionDamageFalloff><!-- 默认true -->
+            <onlyAntiHostile>false</onlyAntiHostile> <!-- 智能弹药：这个爆炸只伤害敌对目标，默认false -->
+            <!-- 现阶段就支持这么多参数 -->
+          </li>
+        </multiexplosions>
+        <bulletLaunches>
+          <li>
+            <projectileDef>KT_Bullet_AG_TANK_Turret</projectileDef>
+            <bulletCount>5</bulletCount>
+            <angleRange>120</angleRange>
+            <distanceRange>
+              <min>4</min>
+              <max>8</max>
+            </distanceRange>
+          </li>
+        </bulletLaunches>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>KT_Main_battlewalker_machinegun</defName>
+    <label>KT_Main_battlewalker_machinegun</label>
+    <description>KT_Main_battlewalker_machinegun</description>
+
+    <graphicData>
+      <texPath>Things/Pawn/Mechanoid/KT_Battle_walker_machinegun</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>6</drawSize>
+    </graphicData>
+    <statBases>
+			<AccuracyTouch>1</AccuracyTouch>
+			<AccuracyShort>0.7</AccuracyShort>
+			<AccuracyMedium>0.6</AccuracyMedium>
+			<AccuracyLong>0.5</AccuracyLong>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>48</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>KT_Bullet_Main_battlewalker_machinegunn</defaultProjectile>
+        <hasStandardCommand>true</hasStandardCommand>
+        <range>30</range>
+				<ticksBetweenBurstShots>1</ticksBetweenBurstShots>
+				<burstShotCount>30</burstShotCount>
+        <defaultCooldownTime>2</defaultCooldownTime>
+				<soundCast>KT_AUTOCANNON_II</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>5</muzzleFlashScale>
+      </li>
+    </verbs>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+        <defName>KT_Bullet_Main_battlewalker_machinegunn</defName> <!-- 子弹名称 -->
+        <label>KT_Bullet_Main_battlewalker_machinegunn</label> <!-- 子弹标签 -->
+        <graphicData>
+            <texPath>Things/Projectile/Bullet_100MM</texPath> <!-- 子弹贴图路径 -->
+            <graphicClass>Graphic_Single</graphicClass> <!-- 使用单一图形 -->
+			<drawSize>(1.1)</drawSize>
+        </graphicData>
+        <projectile>
+            <damageDef>Bullet</damageDef> <!-- 子弹伤害类型 -->
+            <damageAmountBase>30</damageAmountBase> <!-- 基础伤害量 -->
+            <speed>400</speed> <!-- 子弹速度 -->
+			<armorPenetrationBase>0.8</armorPenetrationBase>
+			<stoppingPower>0.8</stoppingPower>
+        </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>KT_Main_battlewalker_EMPlauncher</defName>
+    <label>KT_Main_battlewalker_EMPlauncher</label>
+    <description>KT_Main_battlewalker_EMPlauncher</description>
+
+    <graphicData>
+      <texPath>Things/Pawn/Mechanoid/KT_Battle_walker_machinegun</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+			<AccuracyTouch>0.8</AccuracyTouch>
+			<AccuracyShort>0.6</AccuracyShort>
+			<AccuracyMedium>0.6</AccuracyMedium>
+			<AccuracyLong>0.6</AccuracyLong>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>48</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>KT_Main_battlewalker_EMPlauncher_BULLET</defaultProjectile>
+        <hasStandardCommand>true</hasStandardCommand>
+        <range>60</range>
+		<minRange>10</minRange>
+		<burstShotCount>1</burstShotCount>
+        <defaultCooldownTime>3.5</defaultCooldownTime>
+		<soundCast>RocketswarmLauncher_Fire</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>5</muzzleFlashScale>
+      </li>
+    </verbs>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>KT_Main_battlewalker_EMPlauncher_BULLET</defName>
+    <label>KTEMPMORTAR_BULLET</label>
+    <thingClass>SRA.Projectile_MultiExplosive_NorthArcTrail</thingClass>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_MORTAR_II</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+	    <drawSize>1.0</drawSize>
+    </graphicData>
+    <projectile>
+			<damageDef>EMP</damageDef>
+			<explosionRadius>8</explosionRadius>
+			<damageAmountBase>100</damageAmountBase>
+			<stoppingPower>3</stoppingPower>
+			<speed>120</speed>
+      <flyOverhead>true</flyOverhead>
+      <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+    </projectile>
+    <modExtensions>
+      <li Class="SRA.NorthArcModExtension">
+        <northOffsetDistance>5</northOffsetDistance>
+        <curveSteepness>1.5</curveSteepness>
+        <useArcTrajectory>true</useArcTrajectory>
+      </li>
+      <li Class="SRA.TailBulletDef">
+        <tailFleckDef>KT_Fleck_Smoke_Tail</tailFleckDef>
+        <fleckMakeFleckTickMax>5</fleckMakeFleckTickMax>
+        <fleckDelayTicks>1</fleckDelayTicks>
+        <fleckMakeFleckNum>1~2</fleckMakeFleckNum>
+        <fleckScale>0.5~1.0</fleckScale>
+        <fleckSpeed>0.1~0.3</fleckSpeed>
+        <fleckAngle>-30~30</fleckAngle>
+      </li>
+      <li Class="SRA.MultiExplosiveExtension">
+        <multiexplosions>
+          <li>
+            <radius>8</radius>
+            <damageDef>EMP</damageDef>
+            <damageAmount>100</damageAmount>
+            <onlyAntiHostile>false</onlyAntiHostile>
+          </li>
+        </multiexplosions>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  	<ThingDef ParentName="KT_Mecha_WeaponBase">
+		<defName>KT_Battle_walker_main_autogun</defName>
+		<label>KT_Battle_walker_main_autogun</label>
+		<description>KT_Battle_walker_main_autogun</description>
+		<graphicData>
+			<texPath>Things/Pawn/Mechanoid/KT_Battle_walker_main_autogun</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>9</drawSize>
+		</graphicData>
+		<uiIconScale>0.3</uiIconScale>
+		<equippedAngleOffset>0</equippedAngleOffset>
+    	<smeltable>false</smeltable>
+		<statBases>
+			<MarketValue>1600</MarketValue>
+			<MaxHitPoints>640</MaxHitPoints>
+			<Mass>400</Mass>
+			<AccuracyTouch>0.9</AccuracyTouch>
+			<AccuracyShort>0.75</AccuracyShort>
+			<AccuracyMedium>0.7</AccuracyMedium>
+			<AccuracyLong>0.7</AccuracyLong>
+			<RangedWeapon_Cooldown>2</RangedWeapon_Cooldown>
+			<Flammability>0</Flammability>
+		</statBases>
+
+		<tradeability>None</tradeability>
+		<relicChance>0</relicChance>
+		<weaponTags>
+			<li>KT_Battle_walker_main_autogun</li>
+		</weaponTags>
+		<verbs>
+         <li>
+           <verbClass>Verb_Shoot</verbClass>
+           <defaultProjectile>KT_Bullet_Battle_walker_main_autogun</defaultProjectile>
+           <hasStandardCommand>true</hasStandardCommand>
+           <warmupTime>1.2</warmupTime>
+           <range>80</range>
+		   <ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+		   <burstShotCount>10</burstShotCount>
+           <soundCast>KT_AUTOCANNON_III</soundCast>
+           <soundCastTail>GunTail_Medium</soundCastTail>
+           <muzzleFlashScale>9</muzzleFlashScale>
+           <aimingChargeMote>Mote_BeamRepeater_Charge</aimingChargeMote>
+           <aimingChargeMoteOffset>0</aimingChargeMoteOffset>
+		   <forcedMissRadius>1</forcedMissRadius>
+		   <targetParams>
+			   <canTargetLocations>true</canTargetLocations>
+		   </targetParams>
+         </li>
+		</verbs>
+		<tools>
+			<li>
+				<label>Trample</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>64</power>
+				<cooldownTime>2</cooldownTime>
+			</li>
+		</tools>
+		
+	</ThingDef>
+	
+	<ThingDef ParentName="BaseBullet">
+    <defName>KT_Bullet_Battle_walker_main_autogun</defName>
+    <label>KT_Bullet_Battle_walker_main_autogun</label>
+    <thingClass>Projectile_Explosive</thingClass>
+        <category>Projectile</category>
+        <tickerType>Normal</tickerType>
+        <altitudeLayer>Projectile</altitudeLayer>
+        <graphicData>
+            <texPath>Things/Projectile/Bullet_381MM</texPath> <!-- 子弹贴图路径 -->
+            <graphicClass>Graphic_Single</graphicClass> <!-- 使用单一图形 -->
+			<shaderType>MoteGlow</shaderType>
+      		<drawSize>(1.2)</drawSize>
+        </graphicData>
+        <projectile>
+            <damageDef>Bomb</damageDef>
+            <explosionRadius>1.5</explosionRadius>
+            <speed>250</speed>
+            <damageAmountBase>55</damageAmountBase>
+            <arcHeightFactor>0</arcHeightFactor>
+            <soundExplode>Explosion_Rocket</soundExplode>
+			<flyOverhead>false</flyOverhead>
+			<armorPenetrationBase>1.4</armorPenetrationBase>
+			<stoppingPower>1.3</stoppingPower>
+		</projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="KT_Mecha_WeaponBase">
+		<defName>KT_Battle_walker_main_gatling_gun</defName>
+		<label>KT_Battle_walker_main_gatling_gun</label>
+		<description>KT_Battle_walker_main_gatling_gun</description>
+		<graphicData>
+			<texPath>Things/Pawn/Mechanoid/KT_Battle_walker_main_gatling_gun</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>6.5</drawSize>
+		</graphicData>
+		<uiIconScale>0.3</uiIconScale>
+		<equippedAngleOffset>0</equippedAngleOffset>
+    	<smeltable>false</smeltable>
+		<statBases>
+			<MarketValue>1600</MarketValue>
+			<MaxHitPoints>640</MaxHitPoints>
+			<Mass>400</Mass>
+			<AccuracyTouch>0.9</AccuracyTouch>
+			<AccuracyShort>0.80</AccuracyShort>
+			<AccuracyMedium>0.75</AccuracyMedium>
+			<AccuracyLong>0.65</AccuracyLong>
+			<RangedWeapon_Cooldown>1.5</RangedWeapon_Cooldown>
+			<Flammability>0</Flammability>
+		</statBases>
+
+		<tradeability>None</tradeability>
+		<relicChance>0</relicChance>
+		<weaponTags>
+			<li>KT_Battle_walker_main_gatling_gun</li>
+		</weaponTags>
+		<verbs>
+         <li>
+           <verbClass>Verb_Shoot</verbClass>
+           <defaultProjectile>KT_Bullet_Battle_walker_main_gatling_gun</defaultProjectile>
+           <hasStandardCommand>true</hasStandardCommand>
+           <warmupTime>1.0</warmupTime>
+           <range>70</range>
+		   <ticksBetweenBurstShots>2</ticksBetweenBurstShots>
+		   <burstShotCount>30</burstShotCount>
+           <soundCast>KT_AUTOCANNON_IV</soundCast>
+           <soundCastTail>GunTail_Medium</soundCastTail>
+           <muzzleFlashScale>25</muzzleFlashScale>
+		   <targetParams>
+			   <canTargetLocations>true</canTargetLocations>
+		   </targetParams>
+         </li>
+		</verbs>
+		<tools>
+			<li>
+				<label>Trample</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>64</power>
+				<cooldownTime>2</cooldownTime>
+			</li>
+		</tools>
+		
+	</ThingDef>
+	
+  <ThingDef ParentName="BaseBullet">
+    <defName>KT_Bullet_Battle_walker_main_gatling_gun</defName>
+    <label>KT_Bullet_Battle_walker_main_gatling_gun</label>
+        <category>Projectile</category>
+        <tickerType>Normal</tickerType>
+        <altitudeLayer>Projectile</altitudeLayer>
+        <graphicData>
+            <texPath>Things/Projectile/Bullet_381MM</texPath> <!-- 子弹贴图路径 -->
+            <graphicClass>Graphic_Single</graphicClass> <!-- 使用单一图形 -->
+      		<drawSize>(0.9)</drawSize>
+        </graphicData>
+        <projectile>
+            <damageDef>Bullet</damageDef> <!-- 子弹伤害类型 -->
+            <damageAmountBase>40</damageAmountBase> <!-- 基础伤害量 -->
+            <speed>400</speed> <!-- 子弹速度 -->
+			<armorPenetrationBase>1.3</armorPenetrationBase>
+			<stoppingPower>1.2</stoppingPower>
+        </projectile>
+  </ThingDef>
+  
+  
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>KT_Main_battlewalker_war_tramples</defName>
+    <label>KT_Main_battlewalker_war_tramples</label>
+    <description>KT_Main_battlewalker_war_tramples</description>
+
+    <graphicData>
+      <texPath>Things/Pawn/Mechanoid/AllegianceOverlays/None_east</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>1</drawSize>
+    </graphicData>
+    <statBases>
+			<AccuracyTouch>1</AccuracyTouch>
+			<AccuracyShort>1</AccuracyShort>
+			<AccuracyMedium>1</AccuracyMedium>
+			<AccuracyLong>1</AccuracyLong>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>0</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>KT_Bullet_Main_battlewalker_war_tramples</defaultProjectile>
+        <hasStandardCommand>true</hasStandardCommand>
+        <range>2</range>
+		<ticksBetweenBurstShots>1</ticksBetweenBurstShots>
+		<burstShotCount>2</burstShotCount>
+        <defaultCooldownTime>2</defaultCooldownTime>
+		<soundCast>KTNONESOUND</soundCast>
+        <soundCastTail>KTNONESOUND</soundCastTail>
+        <muzzleFlashScale>0</muzzleFlashScale>
+      </li>
+    </verbs>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>KT_Bullet_Main_battlewalker_war_tramples</defName>
+    <label>KT_Bullet_Main_battlewalker_war_tramples</label>
+    <thingClass>SRA.Projectile_MultiExplosive</thingClass>
+        <category>Projectile</category>
+        <tickerType>Normal</tickerType>
+        <altitudeLayer>Projectile</altitudeLayer>
+        <graphicData>
+            <texPath>Things/Pawn/Mechanoid/AllegianceOverlays/None_east</texPath> 
+            <graphicClass>Graphic_Single</graphicClass> 
+			<shaderType>MoteGlow</shaderType>
+      		<drawSize>(0.1)</drawSize>
+        </graphicData>
+        <projectile>
+            <damageDef>KTBomb_EMPTY</damageDef>
+            <explosionRadius>2</explosionRadius>
+            <speed>1000</speed>
+            <damageAmountBase>500</damageAmountBase>
+            <arcHeightFactor>0</arcHeightFactor>
+            <soundExplode>KTNONESOUND</soundExplode>
+			<flyOverhead>false</flyOverhead>
+			<armorPenetrationBase>10</armorPenetrationBase>
+		</projectile>
+		<modExtensions>
+        <li Class="SRA.MultiExplosiveExtension">
+        <multiexplosions>
+          <li>
+            <radius>2</radius>
+            <damageDef>KTBomb_EMPTY</damageDef>
+            <damageAmount>500</damageAmount>
+            <armorPenetration>10</armorPenetration>
+            <explosionSound>KTNONESOUND</explosionSound>
+            <explosionDamageFalloff>true</explosionDamageFalloff><!-- 默认true -->
+            <onlyAntiHostile>true</onlyAntiHostile> <!-- 智能弹药：这个爆炸只伤害敌对目标，默认false -->
+            <!-- 现阶段就支持这么多参数 -->
+          </li>
+        </multiexplosions>
+      </li>
+    </modExtensions>
+  </ThingDef>
+</Defs>

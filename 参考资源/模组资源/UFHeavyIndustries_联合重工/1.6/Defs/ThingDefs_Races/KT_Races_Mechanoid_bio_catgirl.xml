@@ -1,0 +1,802 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <PawnKindDef Name="KTLightMechanoidKind" Abstract="True">
+    <defaultFactionType>Mechanoid</defaultFactionType>
+    <aiAvoidCover>false</aiAvoidCover>
+    <destroyGearOnDrop>true</destroyGearOnDrop>
+    <canStrip>false</canStrip>
+    <minGenerationAge>100</minGenerationAge>
+    <forceNormalGearQuality>true</forceNormalGearQuality>
+    <allowInMechClusters>false</allowInMechClusters>
+
+    <weaponMoney>2000~3000</weaponMoney>
+    <combatPower>50</combatPower>
+    <techHediffsChance>1</techHediffsChance>
+    <techHediffsMoney>1000~2000</techHediffsMoney>
+    <controlGroupPortraitZoom>0.8</controlGroupPortraitZoom>
+  </PawnKindDef>
+  
+  <ThingDef Abstract="True" Name="KTLightMechanoid" ParentName="LightMechanoid">
+    <statBases>
+      <MoveSpeed>8</MoveSpeed>
+      <MarketValue>3000</MarketValue>
+      <ControlTakingTime>3</ControlTakingTime>
+      <BandwidthCost>1</BandwidthCost>
+      <ArmorRating_Blunt>2</ArmorRating_Blunt>
+      <ArmorRating_Sharp>2</ArmorRating_Sharp>
+      <ArmorRating_Heat>2</ArmorRating_Heat>
+      <ComfyTemperatureMin>-200</ComfyTemperatureMin>
+      <ComfyTemperatureMax>2000</ComfyTemperatureMax>
+      <StaggerDurationFactor>-1</StaggerDurationFactor>
+      <PsychicSensitivity>0</PsychicSensitivity>
+      <MechEnergyUsageFactor>0</MechEnergyUsageFactor>
+      <MechEnergyLossPerHP>0</MechEnergyLossPerHP>
+      <WastepacksPerRecharge>0</WastepacksPerRecharge>
+    </statBases>
+    <race>
+      <hasCorpse>false</hasCorpse>
+      <intelligence>ToolUser</intelligence>
+      <thinkTreeMain>Mechanoid</thinkTreeMain>
+      <baseHealthScale>1</baseHealthScale>
+      <mechWeightClass>UltraHeavy</mechWeightClass>
+    </race>
+    <butcherProducts Inherit="False">
+      <Steel>30</Steel>
+      <Plasteel>20</Plasteel>
+    </butcherProducts>
+	
+	<damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+      <li>
+        <damageDef>EMP</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+  </ThingDef>
+  
+  <ThingDef ParentName="KTLightMechanoid">
+      <defName>KT_BIO_CATGIRL_fabricor</defName>
+      <label>KT_BIO_CATGIRL_fabricor</label>
+      <description>KT_BIO_CATGIRL_fabricor</description>
+	  <statBases>
+	    <IncomingDamageFactor>0.1</IncomingDamageFactor>
+		<CleaningSpeed>0.8</CleaningSpeed>
+		<WorkSpeedGlobal>2.00</WorkSpeedGlobal>
+		<FoodPoisonChance>0.001</FoodPoisonChance>		
+      </statBases>
+      <race>
+        <mechEnabledWorkTypes>
+          <li>Crafting</li>
+          <li>Smithing</li>
+          <li>Tailoring</li>
+		  <li>Cooking</li>
+		  <li>Doctor</li>
+		  <li>Hauling</li>
+		  <li>Cleaning</li>
+        </mechEnabledWorkTypes>
+		<mechFixedSkillLevel>15</mechFixedSkillLevel>
+		<baseBodySize>2</baseBodySize>
+		<baseHealthScale>4</baseHealthScale>
+        <lifeStageAges>
+          <li>
+            <def>MechanoidFullyFormed</def>
+            <minAge>0</minAge>
+            <soundWounded>Pawn_KT_BIO_CATGIRL_Wounded</soundWounded>
+            <soundDeath>Pawn_KT_BIO_CATGIRL_Death</soundDeath>
+            <soundCall>Pawn_KT_BIO_CATGIRL_Call</soundCall>
+          </li>
+        </lifeStageAges>
+      </race>
+	  
+	  <comps>
+        <li Class="SRA.CompProperties_GlobalMechCommand" />
+		
+		<li Class="SRA.CompProperties_MultiTurretGun">
+		    <ID>0</ID>
+        <turretDef>KT_BIO_CATGIRL_ghost_turret</turretDef>
+        <!-- <angleOffset>-90</angleOffset> -->
+        <renderNodeProperties>
+          <li>
+            <nodeClass>PawnRenderNode_TurretGun</nodeClass>
+            <workerClass>PawnRenderNodeWorker_TurretGun</workerClass>
+            <parentTagDef>Body</parentTagDef>
+            <overrideMeshSize>(1,1)</overrideMeshSize>
+            <pawnType>Any</pawnType>
+            <drawData>
+              <dataNorth>
+                <offset>(-0.5, 0, 0.4)</offset>
+				<rotationOffset>270</rotationOffset>
+                <flip>true</flip>
+                <layer>-80</layer>
+              </dataNorth>
+			  <dataSouth>
+			    <layer>40</layer>
+			    <rotationOffset>270</rotationOffset>
+                <offset>(0.5, 0,0.4)</offset>
+              </dataSouth>
+              <dataEast>
+                <layer>-80</layer>
+				<rotationOffset>270</rotationOffset>
+                <offset>(0.2, 0, 0.3)</offset>
+              </dataEast>
+              <dataWest>
+			  <layer>40</layer>
+                <offset>(-0.6, 0, 0.4)</offset>
+				<rotationOffset>-270</rotationOffset>
+              </dataWest>
+            </drawData>
+          </li>
+        </renderNodeProperties>
+      </li> 
+      </comps>
+	
+    </ThingDef>
+    
+   <PawnKindDef ParentName="KTLightMechanoidKind">
+      <defName>KT_BIO_CATGIRL_fabricor</defName>
+      <label>KT_BIO_CATGIRL_fabricor</label>
+      <race>KT_BIO_CATGIRL_fabricor</race>
+      <startingHediffs>
+         <li>
+           <def>KT_BCG_Hediff</def>
+         </li>
+      </startingHediffs>	  
+      <lifeStages>
+        <li>
+        <bodyGraphicData>
+          <texPath>Things/Pawn/Mechanoid/KT_BIO_CATGIRL</texPath>
+          <maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/None</maskPath>
+          <shaderType>CutoutWithOverlay</shaderType>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>(3, 3)</drawSize>
+
+        </bodyGraphicData>
+      </li>
+      </lifeStages>
+	  <abilities>
+          <li>KT_Longjump_biocat</li>
+		  <li MayRequire="Ludeon.RimWorld.Odyssey" >KT_TerrorRoar_biocat</li>
+      </abilities>
+	
+	  <weaponTags>
+        <li>KT_BIO_CATGIRL_weapon</li>
+      </weaponTags>
+    </PawnKindDef>
+	
+	
+  <ThingDef ParentName="KTLightMechanoid">
+      <defName>KT_BIO_CATGIRL_logistics</defName>
+      <label>KT_BIO_CATGIRL_logistics</label>
+      <description>KT_BIO_CATGIRL_logistics</description>
+	  <statBases>
+	    <IncomingDamageFactor>0.1</IncomingDamageFactor>
+		<CleaningSpeed>1.25</CleaningSpeed>
+		<WorkSpeedGlobal>2</WorkSpeedGlobal>
+      </statBases>
+      <race>
+        <mechEnabledWorkTypes>
+          <li>Mining</li>
+		  <li>Construction</li>
+		  <li>PlantCutting</li>
+          <li>Growing</li>
+		  <li>Firefighter</li>
+		  <li>Hauling</li>
+		  <li>Cleaning</li>
+        </mechEnabledWorkTypes>
+		<mechFixedSkillLevel>15</mechFixedSkillLevel>
+		<baseBodySize>2</baseBodySize>
+		<baseHealthScale>4</baseHealthScale>
+        <lifeStageAges>
+          <li>
+            <def>MechanoidFullyFormed</def>
+            <minAge>0</minAge>
+            <soundWounded>Pawn_KT_BIO_CATGIRL_Wounded</soundWounded>
+            <soundDeath>Pawn_KT_BIO_CATGIRL_Death</soundDeath>
+            <soundCall>Pawn_KT_BIO_CATGIRL_Call</soundCall>
+          </li>
+        </lifeStageAges>
+      </race>
+	  
+	  <comps>
+        <li Class="SRA.CompProperties_GlobalMechCommand" />
+		
+		<li Class="SRA.CompProperties_MultiTurretGun">
+		    <ID>0</ID>
+        <turretDef>KT_BIO_CATGIRL_ghost_turret</turretDef>
+        <!-- <angleOffset>-90</angleOffset> -->
+        <renderNodeProperties>
+          <li>
+            <nodeClass>PawnRenderNode_TurretGun</nodeClass>
+            <workerClass>PawnRenderNodeWorker_TurretGun</workerClass>
+            <parentTagDef>Body</parentTagDef>
+            <overrideMeshSize>(1,1)</overrideMeshSize>
+            <pawnType>Any</pawnType>
+            <drawData>
+              <dataNorth>
+                <offset>(-0.5, 0, 0.4)</offset>
+				<rotationOffset>270</rotationOffset>
+                <flip>true</flip>
+                <layer>-80</layer>
+              </dataNorth>
+			  <dataSouth>
+			    <layer>40</layer>
+			    <rotationOffset>270</rotationOffset>
+                <offset>(0.5, 0,0.4)</offset>
+              </dataSouth>
+              <dataEast>
+                <layer>-80</layer>
+				<rotationOffset>270</rotationOffset>
+                <offset>(0.2, 0, 0.3)</offset>
+              </dataEast>
+              <dataWest>
+			  <layer>40</layer>
+                <offset>(-0.6, 0, 0.4)</offset>
+				<rotationOffset>-270</rotationOffset>
+              </dataWest>
+            </drawData>
+          </li>
+        </renderNodeProperties>
+      </li> 
+    </comps>
+    </ThingDef>
+    
+   <PawnKindDef ParentName="KTLightMechanoidKind">
+      <defName>KT_BIO_CATGIRL_logistics</defName>
+      <label>KT_BIO_CATGIRL_logistics</label>
+      <race>KT_BIO_CATGIRL_logistics</race>
+      <startingHediffs>
+         <li>
+           <def>KT_BCG_Hediff</def>
+         </li>
+      </startingHediffs>  
+      <lifeStages>
+        <li>
+        <bodyGraphicData>
+          <texPath>Things/Pawn/Mechanoid/KT_BIO_CATGIRL</texPath>
+          <maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/None</maskPath>
+          <shaderType>CutoutWithOverlay</shaderType>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>(3, 3)</drawSize>
+
+        </bodyGraphicData>
+      </li>
+      </lifeStages>
+	  <abilities>
+          <li>KT_Longjump_biocat</li>
+		  <li MayRequire="Ludeon.RimWorld.Odyssey" >KT_TerrorRoar_biocat</li>
+      </abilities>
+	  <weaponTags>
+        <li>KT_BIO_CATGIRL_weapon</li>
+      </weaponTags>
+    </PawnKindDef>
+	
+	
+	
+  <ThingDef ParentName="KT_MeleeWeapon_unmanufacturable">
+    <defName>KT_BIO_CATGIRL_Meleeweapon</defName>
+    <label>KT_BIO_CATGIRL_Meleeweapon</label>
+    <description>KT_BIO_CATGIRL_Meleeweapon</description>
+    <soundInteract>Interact_MonoSword</soundInteract>
+    <meleeHitSound>MeleeHit_MonoSword</meleeHitSound>
+	<techLevel>Ultra</techLevel>
+    <statBases>
+	  <WorkToMake>30000</WorkToMake>
+      <Mass>12</Mass>
+    </statBases>
+	
+    <weaponTags>
+	  <li>KT_BIO_CATGIRL_weapon</li>
+	  <li>KT_weapon</li>
+    </weaponTags>
+	
+	<costList>
+	  <Steel>250</Steel>
+	</costList>
+
+    <comps>
+	  <li Class="SRA.CompProperties_WeaponRenderDynamic">
+		<TexturePath>Things/Pawn/Mechanoid/KT_BIO_CATGIRL_Meleeweapon_light</TexturePath>
+		<totalFrames>1</totalFrames>
+		<ticksPerFrame>1</ticksPerFrame>
+	  </li>
+    </comps>
+	
+	<equippedStatOffsets>
+      <MoveSpeed>0.30</MoveSpeed>
+	  <MeleeHitChance>0.5</MeleeHitChance>
+    </equippedStatOffsets>
+	
+    <burnableByRecipe>false</burnableByRecipe>
+
+
+    <tradeability>None</tradeability>
+    <relicChance>0</relicChance>
+	
+    <weaponClasses>
+      <li>Melee</li>
+    </weaponClasses>
+
+    <smeltable>false</smeltable>
+	<uiIconPath>Things/Pawn/Mechanoid/KT_BIO_CATGIRL_Meleeweapon_icon</uiIconPath>
+    <graphicData>
+      <texPath>Things/Pawn/Mechanoid/KT_BIO_CATGIRL_Meleeweapon</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>2.7</drawSize> <!-- 贴图大小 -->
+    </graphicData>
+	<equippedAngleOffset>-30</equippedAngleOffset>
+    <tools>
+		<li>
+			<label>edge</label>
+			<capacities>
+				<li>KT_Melee_AOE_II</li>
+			</capacities>
+			<power>150</power>
+			<cooldownTime>1.0</cooldownTime>
+			<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+			<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+			<armorPenetration>2</armorPenetration>
+			<extraMeleeDamages>
+          		<li>
+            		<def>EMP</def>
+        			<amount>25</amount>
+        		</li>
+			</extraMeleeDamages>
+		</li>
+		<li>
+			<label>edge</label>
+			<capacities>
+				<li>KT_Melee_AOE</li>
+			</capacities>
+			<power>120</power>
+			<cooldownTime>0.6</cooldownTime>
+			<armorPenetration>2</armorPenetration>
+			<extraMeleeDamages>
+          		<li>
+            		<def>EMP</def>
+        			<amount>25</amount>
+        		</li>
+			</extraMeleeDamages>
+		</li>
+	</tools>
+	
+  </ThingDef>
+  
+  <ThingDef ParentName="KT_Mecha_WeaponBase">
+		<defName>KT_BIO_CATGIRL_Machinegun</defName>
+		<label>KT_BIO_CATGIRL_Machinegun</label>
+		<description>KT_BIO_CATGIRL_Machinegun</description>
+		<graphicData>
+			<texPath>Things/Pawn/Mechanoid/KT_BIO_CATGIRL_Machinegun</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>2</drawSize>
+		</graphicData>
+		<uiIconScale>0.8</uiIconScale>
+		<equippedAngleOffset>0</equippedAngleOffset>
+    	<smeltable>false</smeltable>
+		<statBases>
+			<MarketValue>2000</MarketValue>
+			<MaxHitPoints>500</MaxHitPoints>
+			<Mass>20</Mass>
+			<AccuracyTouch>0.9</AccuracyTouch>
+			<AccuracyShort>0.80</AccuracyShort>
+			<AccuracyMedium>0.75</AccuracyMedium>
+			<AccuracyLong>0.75</AccuracyLong>
+			<RangedWeapon_Cooldown>1.5</RangedWeapon_Cooldown>
+			<Flammability>0</Flammability>
+		</statBases>
+        <comps>
+	      <li Class="SRA.CompProperties_WeaponRenderDynamic">
+		  <TexturePath>Things/Pawn/Mechanoid/KT_BIO_CATGIRL_Machinegun_light</TexturePath>
+		  <totalFrames>1</totalFrames>
+		  <ticksPerFrame>1</ticksPerFrame>
+	    </li>
+        </comps>
+		<tradeability>None</tradeability>
+		<relicChance>0</relicChance>
+		<weaponTags>
+	 	  <li>KT_BIO_CATGIRL_weapon</li>
+		   <li>KT_weapon</li>
+    	</weaponTags>
+		<verbs>
+         <li>
+           <verbClass>Verb_Shoot</verbClass>
+           <defaultProjectile>KT_Bullet_BIO_CATGIRL_Machinegun</defaultProjectile>
+           <hasStandardCommand>true</hasStandardCommand>
+           <warmupTime>1.0</warmupTime>
+           <range>50</range>
+		   <ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+		   <burstShotCount>30</burstShotCount>
+           <soundCast>KT_gunshot_III</soundCast>
+           <soundCastTail>GunTail_Medium</soundCastTail>
+           <muzzleFlashScale>15</muzzleFlashScale>
+		   <targetParams>
+			   <canTargetLocations>true</canTargetLocations>
+		   </targetParams>
+         </li>
+		</verbs>
+		
+		<modExtensions>
+          <li Class="MuzzleFlash.MuzzleFlashProps" MayRequire="IssacZhuang.MuzzleFlash">
+            <def>MF_ChargedMuzzleFalsh</def>
+            <drawSize>(1)</drawSize>
+            <offsets>
+              <li>(0.9,0)</li>
+            </offsets>
+            <isAlternately>true</isAlternately>
+          </li>
+        </modExtensions>
+	
+		<tools>
+			<li>
+			<label>edge</label>
+			<capacities>
+				<li>KT_Melee_AOE</li>
+			</capacities>
+			<power>50</power>
+			<cooldownTime>1.2</cooldownTime>
+			<armorPenetration>1.5</armorPenetration>
+			<extraMeleeDamages>
+          		<li>
+            		<def>EMP</def>
+        			<amount>25</amount>
+        		</li>
+			</extraMeleeDamages>
+		</li>
+		</tools>
+		
+	</ThingDef>
+	
+  <ThingDef ParentName="BaseBullet">
+    <defName>KT_Bullet_BIO_CATGIRL_Machinegun</defName>
+    <label>KT_Bullet_BIO_CATGIRL_Machinegun</label>
+        <category>Projectile</category>
+        <tickerType>Normal</tickerType>
+        <altitudeLayer>Projectile</altitudeLayer>
+        <graphicData>
+            <texPath>Things/Projectile/Bullet_381MM</texPath> <!-- 子弹贴图路径 -->
+            <graphicClass>Graphic_Single</graphicClass> <!-- 使用单一图形 -->
+      		<drawSize>(0.6)</drawSize>
+        </graphicData>
+        <projectile>
+            <damageDef>Bullet</damageDef> <!-- 子弹伤害类型 -->
+            <damageAmountBase>25</damageAmountBase> <!-- 基础伤害量 -->
+            <speed>150</speed> <!-- 子弹速度 -->
+			<armorPenetrationBase>1.0</armorPenetrationBase>
+			<stoppingPower>1.0</stoppingPower>
+        </projectile>
+  </ThingDef>
+
+  <ThingDef ParentName="KT_Mecha_WeaponBase">
+    <defName>KT_BIO_CATGIRL_Grenadelauncher</defName>
+    <label>KT_BIO_CATGIRL_Grenadelauncher</label>
+    <description>KT_BIO_CATGIRL_Grenadelauncher</description>
+    <graphicData>
+      <texPath>Things/Pawn/Mechanoid/KT_BIO_CATGIRL_Grenadelauncher</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>1.8</drawSize>
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+
+    <tradeability>None</tradeability>
+    <relicChance>0</relicChance>
+    <statBases>
+      <Mass>18</Mass>
+      <AccuracyTouch>0.80</AccuracyTouch>
+      <AccuracyShort>0.85</AccuracyShort>
+      <AccuracyMedium>0.80</AccuracyMedium>
+      <AccuracyLong>0.65</AccuracyLong>
+      <RangedWeapon_Cooldown>2.5</RangedWeapon_Cooldown>
+    </statBases>
+	<comps>
+	  <li Class="SRA.CompProperties_WeaponRenderDynamic">
+		<TexturePath>Things/Pawn/Mechanoid/KT_BIO_CATGIRL_Grenadelauncher_light</TexturePath>
+		<totalFrames>1</totalFrames>
+		<ticksPerFrame>1</ticksPerFrame>
+	  </li>
+    </comps>
+	<drawerType>MapMeshAndRealTime</drawerType>
+    <costList>
+      <Steel>500</Steel>
+    </costList>
+	
+    <weaponTags>
+	  <li>KT_weapon</li>
+	  <li>KT_BIO_CATGIRL_weapon</li>
+    </weaponTags>
+
+    <weaponClasses>
+      <li>LongShots</li>
+	  <li>RangedHeavy</li>
+    </weaponClasses>
+	
+	
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>KT_Bullet_BIO_CATGIRL_Grenadelauncher</defaultProjectile>
+        <warmupTime>1.0</warmupTime>
+        <range>45</range>
+		<burstShotCount>2</burstShotCount>
+		<ticksBetweenBurstShots>30</ticksBetweenBurstShots>
+        <soundCast>KT_gunshot_II</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>40</muzzleFlashScale>
+		<targetParams>
+			<canTargetLocations>true</canTargetLocations>
+		</targetParams>
+      </li>
+    </verbs>
+	<modExtensions>
+      <li Class="MuzzleFlash.MuzzleFlashProps" MayRequire="IssacZhuang.MuzzleFlash">
+        <def>MF_ChargedMuzzleFalsh</def>
+        <drawSize>(1)</drawSize>
+        <offsets>
+          <li>(0.5,0)</li>
+        </offsets>
+        <isAlternately>true</isAlternately>
+      </li>
+    </modExtensions>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>12</power>
+        <cooldownTime>1.5</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>12</power>
+        <cooldownTime>1.2</cooldownTime>
+      </li>
+    </tools>
+  </ThingDef>
+  
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>KT_Bullet_BIO_CATGIRL_Grenadelauncher</defName>
+    <label>KT_Bullet_BIO_CATGIRL_Grenadelauncher</label>
+    <thingClass>SRA.Projectile_MultiExplosive</thingClass>
+        <category>Projectile</category>
+        <tickerType>Normal</tickerType>
+        <altitudeLayer>Projectile</altitudeLayer>
+        <graphicData>
+            <texPath>Things/Projectile/Bullet_kt_plasma</texPath> <!-- 子弹贴图路径 -->
+            <graphicClass>Graphic_Single</graphicClass> <!-- 使用单一图形 -->
+			<shaderType>MoteGlow</shaderType>
+      		<drawSize>(1.5)</drawSize>
+        </graphicData>
+        <projectile>
+            <damageDef>KTBLUEBomb</damageDef>
+            <explosionRadius>2.5</explosionRadius>
+            <speed>80</speed>
+            <damageAmountBase>90</damageAmountBase>
+            <arcHeightFactor>0</arcHeightFactor>
+            <soundExplode>Explosion_Bomb</soundExplode>
+			<armorPenetrationBase>1.2</armorPenetrationBase>
+			<stoppingPower>1.2</stoppingPower>
+		</projectile>
+	    <modExtensions>
+		  <li Class="SRA.TailBulletDef">
+       		   <tailFleckDef>KT_Fleck_blue_particle_Tail_II</tailFleckDef>
+      	 	   <fleckMakeFleckTickMax>10</fleckMakeFleckTickMax><!-- 疑似无效 -->
+			   <fleckDelayTicks>5</fleckDelayTicks><!-- 出膛后多久出现轨迹 -->
+			   <fleckMakeFleckNum>1</fleckMakeFleckNum>
+     	  </li>
+          <li Class="SRA.MultiExplosiveExtension">
+            <multiexplosions>
+            <li>
+            <radius>2.5</radius>
+            <damageDef>KTBLUEBomb</damageDef>
+            <damageAmount>90</damageAmount>
+            <armorPenetration>1.2</armorPenetration>
+            <explosionSound>Explosion_Bomb</explosionSound>
+            <explosionDamageFalloff>true</explosionDamageFalloff><!-- 默认true -->
+            <onlyAntiHostile>true</onlyAntiHostile> <!-- 智能弹药：这个爆炸只伤害敌对目标，默认false -->
+            <!-- 现阶段就支持这么多参数 -->
+          </li>
+		  <li>
+			<radius>4</radius>
+			<damageDef>EMP</damageDef>
+			<damageAmount>60</damageAmount>
+			<armorPenetration>8</armorPenetration>
+			<explosionSound>Explosion_EMP</explosionSound>
+			<explosionDamageFalloff>true</explosionDamageFalloff>
+			<onlyAntiHostile>true</onlyAntiHostile>
+		  </li>
+        </multiexplosions>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  
+  <ThingDef ParentName="KT_Mecha_WeaponBase">
+    <defName>KT_BIO_CATGIRL_Railgun</defName>
+    <label>KT_BIO_CATGIRL_Railgun</label>
+    <description>KT_BIO_CATGIRL_Railgun</description>
+    <graphicData>
+      <texPath>Things/Pawn/Mechanoid/KT_BIO_CATGIRL_Railgun</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>2</drawSize>
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+
+    <tradeability>None</tradeability>
+    <relicChance>0</relicChance>
+    <statBases>
+      <Mass>20</Mass>
+      <AccuracyTouch>1</AccuracyTouch>
+      <AccuracyShort>1</AccuracyShort>
+      <AccuracyMedium>1</AccuracyMedium>
+      <AccuracyLong>1</AccuracyLong>
+      <RangedWeapon_Cooldown>2</RangedWeapon_Cooldown>
+    </statBases>
+	<comps>
+	  <li Class="SRA.CompProperties_WeaponRenderDynamic">
+		<TexturePath>Things/Pawn/Mechanoid/KT_BIO_CATGIRL_Railgun_light</TexturePath>
+		<totalFrames>1</totalFrames>
+		<ticksPerFrame>1</ticksPerFrame>
+	  </li>
+    </comps>
+	<drawerType>MapMeshAndRealTime</drawerType>
+    <costList>
+      <Steel>500</Steel>
+    </costList>
+	<equippedStatOffsets>
+	  <RangedWeapon_DamageMultiplier>0.10</RangedWeapon_DamageMultiplier>
+	  <ShootingAccuracyPawn>100</ShootingAccuracyPawn>
+    </equippedStatOffsets>
+    <weaponTags>
+	  <li>KT_weapon</li>
+	  <li>KT_BIO_CATGIRL_weapon</li>
+    </weaponTags>
+
+    <weaponClasses>
+      <li>LongShots</li>
+	  <li>RangedHeavy</li>
+    </weaponClasses>
+	
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>KT_Bullet_BIO_CATGIRL_Railgun</defaultProjectile>
+        <warmupTime>1.5</warmupTime>
+        <range>100</range>
+		<burstShotCount>1</burstShotCount>
+        <soundCast>KTRAILGUNRound</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>40</muzzleFlashScale>
+		<targetParams>
+			<canTargetLocations>true</canTargetLocations>
+		</targetParams>
+      </li>
+    </verbs>
+	<modExtensions>
+      <li Class="MuzzleFlash.MuzzleFlashProps" MayRequire="IssacZhuang.MuzzleFlash">
+        <def>MF_ChargedMuzzleFalsh</def>
+        <drawSize>(1.4)</drawSize>
+        <offsets>
+          <li>(0.6,0)</li>
+        </offsets>
+        <isAlternately>true</isAlternately>
+      </li>
+    </modExtensions>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>12</power>
+        <cooldownTime>1.5</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>12</power>
+        <cooldownTime>1.2</cooldownTime>
+      </li>
+    </tools>
+  </ThingDef>
+  
+  <ThingDef>
+        <defName>KT_Bullet_BIO_CATGIRL_Railgun</defName>
+        <label>KT_Bullet_BIO_CATGIRL_Railgun</label>
+        <thingClass>ECT.Projectile_GuidedCartridge</thingClass>
+        <category>Projectile</category>
+        <tickerType>Normal</tickerType>
+        <altitudeLayer>Projectile</altitudeLayer>
+        <graphicData>
+            <texPath>Things/Projectile/Bullet_100MM</texPath> <!-- 子弹贴图路径 -->
+            <graphicClass>Graphic_Single</graphicClass> <!-- 使用单一图形 -->
+			<shaderType>MoteGlow</shaderType>
+      		<drawSize>(2)</drawSize>
+        </graphicData>
+		<projectile>
+			<speed>250</speed>
+			<damageDef>KTBomb_EMPTY</damageDef>
+			<flyOverhead>true</flyOverhead>
+			<stoppingPower>3</stoppingPower>
+			<arcHeightFactor>0</arcHeightFactor>
+			<explosionRadius>0.8</explosionRadius>
+			<damageAmountBase>120</damageAmountBase>
+			<soundExplode>KTNONESOUND</soundExplode>
+			<armorPenetrationBase>2</armorPenetrationBase>
+		</projectile>
+		<modExtensions>
+			<li Class="ECT.ModExtension_GuidedCartridge">
+				<!-- 修正角度 -->
+				<maxHomingAngle>45</maxHomingAngle>
+			</li>
+		</modExtensions>
+  </ThingDef>
+  
+  
+  <!-- 副炮 -->
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>KT_BIO_CATGIRL_ghost_turret</defName>
+    <label>KT_BIO_CATGIRL_ghost_turret</label>
+    <description>KT_BIO_CATGIRL_ghost_turret</description>
+
+    <graphicData>
+      <texPath>Things/Pawn/Mechanoid/KT_BIO_CATGIRL_ghost_turret</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>1.2</drawSize>
+    </graphicData>
+    <statBases>
+			<AccuracyTouch>1</AccuracyTouch>
+			<AccuracyShort>0.7</AccuracyShort>
+			<AccuracyMedium>0.6</AccuracyMedium>
+			<AccuracyLong>0.5</AccuracyLong>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>0.1</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>KT_Bullet_BIO_CATGIRL_ghost_turret</defaultProjectile>
+        <hasStandardCommand>true</hasStandardCommand>
+        <range>25</range>
+		<ticksBetweenBurstShots>3</ticksBetweenBurstShots>
+		<burstShotCount>6</burstShotCount>
+        <defaultCooldownTime>1.2</defaultCooldownTime>
+		<soundCast>KT_AUTOCANNON_V</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>15</muzzleFlashScale>
+      </li>
+    </verbs>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+        <defName>KT_Bullet_BIO_CATGIRL_ghost_turret</defName> <!-- 子弹名称 -->
+        <label>KT_Bullet_BIO_CATGIRL_ghost_turret</label> <!-- 子弹标签 -->
+        <graphicData>
+            <texPath>Things/Projectile/Bullet_381MM</texPath> <!-- 子弹贴图路径 -->
+            <graphicClass>Graphic_Single</graphicClass> <!-- 使用单一图形 -->
+			<drawSize>(0.5)</drawSize>
+        </graphicData>
+        <projectile>
+            <damageDef>Bullet</damageDef> <!-- 子弹伤害类型 -->
+            <damageAmountBase>15</damageAmountBase> <!-- 基础伤害量 -->
+            <speed>120</speed> <!-- 子弹速度 -->
+			<armorPenetrationBase>0.40</armorPenetrationBase>
+        </projectile>
+  </ThingDef>
+  
+  
+</Defs>

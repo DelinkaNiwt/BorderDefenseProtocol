@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>  
+  <KT_Base_t0_turret.label>基础防御科技</KT_Base_t0_turret.label>
+  <KT_Base_t0_turret.description>解锁科技协议，我们将被允许建造基础防卫炮塔。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;你知道吗，这些炮塔曾经被我们用于防止仓库中的粮食被诺斯顿战壕中的小型老鼠偷吃。 ——轻巡β&lt;/i&gt;&lt;/color&gt;</KT_Base_t0_turret.description>
+  
+  <KT_Base_t1_turret.label>进阶防御科技</KT_Base_t1_turret.label>
+  <KT_Base_t1_turret.description>古人说，如果想要蛋糕放在外面5分钟不被偷吃，最好的办法就是围上一圈防御设施。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;你应该知道你的行为会被那些较真的历史学爱好者唾弃吧？她们会指出你这些装备的威力严重小于史实情况，并给你不停的发信息直到你改了为止。 ——欧根&lt;/i&gt;&lt;/color&gt;</KT_Base_t1_turret.description>
+  
+  <KT_Base_t2_Artillery_turret.label>实弹火炮</KT_Base_t2_Artillery_turret.label>
+  <KT_Base_t2_Artillery_turret.description>手感扎实的炮弹，深邃的炮管，永远比那些虚无缥缈的能量武器更能给人带来安全感。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;你问炮塔里面的结构？其实都是充气模型啦...我们只要还原外观就行了，开炮什么的交给超维链路就行。 ——深海提尔比茨&lt;/i&gt;&lt;/color&gt;</KT_Base_t2_Artillery_turret.description>
+
+  <KT_Base_t2_energy_turret.label>能量火炮</KT_Base_t2_energy_turret.label>
+  <KT_Base_t2_energy_turret.description>轻盈，优雅，耀眼，这些词都可以形容我们能量武器的，傻大黑粗的实弹武器还是太野蛮了。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;我的上个假期？你说我模拟战锤宇宙当神皇T督的那次吗？假期太短了，玩到一半就只能从马桶上站起来了~ ——深海提尔比茨&lt;/i&gt;&lt;/color&gt;</KT_Base_t2_energy_turret.description>  
+  
+  <KT_Base_t2_rail_turret.label>磁轨炮</KT_Base_t2_rail_turret.label>
+  <KT_Base_t2_rail_turret.description>开罐头神器。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;我能当上联合旗舰，当然要靠自我奋斗，但是也要考虑到历史的行程，更重要的是至高总旗舰喜欢——U96&lt;/i&gt;&lt;/color&gt;</KT_Base_t2_rail_turret.description>  
+  
+  <KT_Base_t3_Artillery_turret.label>先进实弹火炮</KT_Base_t3_Artillery_turret.label>
+  <KT_Base_t3_Artillery_turret.description>更大的炮弹配更粗的炮管。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;和群星上哪些用米做口径单位的舰炮相比，这玩意和牙签差不多。 ——大凤&lt;/i&gt;&lt;/color&gt;</KT_Base_t3_Artillery_turret.description>
+
+  <KT_Base_t3_energy_turret.label>先进能量火炮</KT_Base_t3_energy_turret.label>
+  <KT_Base_t3_energy_turret.description>我们需要更多的电池来支持这些能量武器！\n\n&lt;color=#FFAA00&gt;&lt;i&gt;别玩了，轮到你值班了。 ——深海俾斯麦&lt;/i&gt;&lt;/color&gt;</KT_Base_t3_energy_turret.description>  
+  
+  <KT_Base_t3_rail_turret.label>先进磁轨炮</KT_Base_t3_rail_turret.label>
+  <KT_Base_t3_rail_turret.description>如果一发打不穿，就打两发。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;他们肯定不知道那个所谓的针对联合至善仪的疫苗其实不仅没有效果，还有一堆附加的Debuff——艾拉&lt;/i&gt;&lt;/color&gt;</KT_Base_t3_rail_turret.description>  
+
+  <KT_Base_t4_Artillery_turret.label>终极实弹火炮</KT_Base_t4_Artillery_turret.label>
+  <KT_Base_t4_Artillery_turret.description>火炮类的武器的最终协议，某种意义上被这些武器湮灭，也是一种荣誉。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;上面那些人真的是太没用了，居然看不上我设计的火炮！在我的设想中只要炮管足够长，就可以直接怼近敌人的指挥部里开火，瞬间结束战斗。但她们居然无视我，你说气不气？真是的！ ——卡伯特&lt;/i&gt;&lt;/color&gt;</KT_Base_t4_Artillery_turret.description>
+
+  <KT_Base_t4_energy_turret.label>终极能量火炮</KT_Base_t4_energy_turret.label>
+  <KT_Base_t4_energy_turret.description>我们不允许在星球上使用全功率的激光武器，它们中的任意一个都能轻易烧毁整个星球大气！因此你必须先签署免责条款。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;加入联合，即可获得72个猫娘——女灶神&lt;/i&gt;&lt;/color&gt;</KT_Base_t4_energy_turret.description>    
+  
+  <KT_Base_t4_rail_turret.label>终极磁轨炮</KT_Base_t4_rail_turret.label>
+  <KT_Base_t4_rail_turret.description>高精准度，穿透效果，确实是非常刻板印象的磁轨炮呢。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;当你觉得自己是第四面墙后的观众时，不妨想想万一你的世界只是个我们暂未审查的宇宙怎么办。——章小姐&lt;/i&gt;&lt;/color&gt;</KT_Base_t4_rail_turret.description>  
+  
+  <KT_Shield.label>护盾技术</KT_Shield.label>
+  <KT_Shield.description>我的卧室必须安装护盾，不然我睡不踏实。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;黑石碑的结局？你手上这杯茶的茶粉就是它们。——伦敦&lt;/i&gt;&lt;/color&gt;</KT_Shield.description>    
+  
+  <KT_Shield_AT.label>AT立场护盾</KT_Shield_AT.label>
+  <KT_Shield_AT.description>这款护盾可以自行调节大小，拦截大部分类型的攻击，矢量反射（能反弹大部分射弹武器），内部禁止爆炸， 偏移轨道空投（但轨道贸易空降仓也会被偏移），禁止坑道兽和虫群一类袭击从护盾内产生（甚至已经有钻出提示，调整护盾范围后依然能偏移），拦截折跃进入，抵御太阳耀斑。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;卧槽轮椅。——华盛顿&lt;/i&gt;&lt;/color&gt;</KT_Shield_AT.description> 
+  
+    <KT_UFGenerator_small_tech.label>小型反应堆</KT_UFGenerator_small_tech.label>
+  <KT_UFGenerator_small_tech.description>这款体积小巧便于携带的反应堆非常适合户外旅行时为电子产品供电。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;超维直连大脑，联合替代思考。——深海提尔比茨&lt;/i&gt;&lt;/color&gt;</KT_UFGenerator_small_tech.description>
+  
+  <KT_UFGenerator_tech.label>超级反应堆</KT_UFGenerator_tech.label>
+  <KT_UFGenerator_tech.description>各类防御武器和设施带来的电力需求日益增加，新的能源获取途径需要提上日程。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;我不需要用什么科学原理来构建这些东西，只要通过我连上超维网络，剩下的这些东西就只要和捏橡皮泥一样捏个我喜欢的外形就行了。——深海提尔比茨&lt;/i&gt;&lt;/color&gt;</KT_UFGenerator_tech.description>    
+ 
+  <KT_Base_Workbench.label>公约国制式装备</KT_Base_Workbench.label>
+  <KT_Base_Workbench.description>联合舰队的公民均为舰娘，使用舰装作战，因此并不使用单兵武器，但史册记载联合舰队旗下存在大量仆从公约国，为此特地研制了一批装备用于加强其国内安保，同时为防止不法分子偷窃泄露，威力被严格限制，确保联合舰娘的人身财产安全。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;捏造这批武器我可是下了很大功夫的，我应该是按照史册上记载的内容还原的，那些历史爱好者能不能别私信我了。——深海提尔比茨&lt;/i&gt;&lt;/color&gt;</KT_Base_Workbench.description>  
+  
+  <KT_Base_t1_weapon.label>公约国基础装备</KT_Base_t1_weapon.label>
+  <KT_Base_t1_weapon.description>公约国大量装备的轻型武器。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;谁再让我发现有人用激光枪电池给自己的手机充电，这个月的工资就别想要了。——某公约国武器生产车间组长&lt;/i&gt;&lt;/color&gt;</KT_Base_t1_weapon.description>    
+  
+  <KT_Base_t2_weapon.label>公约国重型装备</KT_Base_t2_weapon.label>
+  <KT_Base_t2_weapon.description>公约国重火力部队使用的武器，从该级武器之后，使用者和枪械本身都将被严格监控，因为一旦泄漏到不法分子手中并针对联合使用，过高的武器威力将在舰娘们的衣服上留下污渍。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;有时候我们确实需要公约国部队，毕竟我们只装备了舰炮，绣花针一般的活我们干不了。——某联合陆军士官&lt;/i&gt;&lt;/color&gt;</KT_Base_t2_weapon.description>   
+  
+  <KT_Base_t3_weapon.label>公约国重火力</KT_Base_t3_weapon.label>
+  <KT_Base_t3_weapon.description>为公约国精锐老兵设计的重型武器，重量夸张，通常附带伤害极大。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;一炮死一片，我也算体验了下低配版的舰娘吧。——某公约国重火力士兵&lt;/i&gt;&lt;/color&gt;</KT_Base_t3_weapon.description>
+  
+  <KT_Base_t3_plasma_weapon.label>公约国等离子武器</KT_Base_t3_plasma_weapon.label>
+  <KT_Base_t3_plasma_weapon.description>虽然公约国士兵的激光枪也是能量武器，但和等离子相比只能算是手电筒吧。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;★☆☆☆☆ 恐怖分子烧坏了我的裙子。——某联合舰娘旅行评价&lt;/i&gt;&lt;/color&gt;</KT_Base_t3_plasma_weapon.description>
+
+  <KT_Base_armor.label>公约国动力装甲</KT_Base_armor.label>
+  <KT_Base_armor.description>不同的公约国因为物种差异，护甲设计千差万别，而这款是为类人型生物所设计，我们的超维存在还特别为其安装了一门肩炮，使用了舰娘舰装同款的炮弹压缩技术，使用者将为低配版的舰娘。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;我说过，炮塔结构只是装饰。——深海提尔比茨&lt;/i&gt;&lt;/color&gt;</KT_Base_armor.description>
+ 
+  <KT_Base_t4_weapon.label>公约国精工枪械</KT_Base_t4_weapon.label>
+  <KT_Base_t4_weapon.description>只有向联合舰队证明了自己忠诚的公约国战士才可以获得由联合舰娘亲自设计而非AI生成的精工武器。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;希望你喜欢我设计的武器。——联合首都小学二年级三班华盛顿&lt;/i&gt;&lt;/color&gt;</KT_Base_t4_weapon.description>
+  
+  <KT_Base_backpack.label>铁光环承伤立场</KT_Base_backpack.label>
+  <KT_Base_backpack.description>为提高公约国步兵战场生存能力而开发的承伤型立场护盾，被集成在一个小巧的背包中。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;我至少能抗三炮。——公约国士兵&lt;/i&gt;&lt;/color&gt;</KT_Base_backpack.description>
+  
+  <KT_Maintenance_Station_tech.label>纳米维修站</KT_Maintenance_Station_tech.label>
+  <KT_Maintenance_Station_tech.description>该建筑是一个奇迹，不仅可以维修物品建筑，还可以增加他们的耐久度。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;糖果盒子的耐久度也被提升了数倍，根本打不开！。——萤火虫&lt;/i&gt;&lt;/color&gt;</KT_Maintenance_Station_tech.description>
+  
+  
+  <KT_Communication_tech.label>战利品商店贸易</KT_Communication_tech.label>
+  <!-- EN: KT_Communication_tech -->
+  <KT_Communication_tech.description>研究这项科技，超维存在托梦告诉我的，它能让我们联络上战利品商店。\n\n&lt;color=#FFAA00>&lt;i>我们通常只和舰娘交易呢。——艾拉&lt;/i>&lt;/color></KT_Communication_tech.description>
+  
+   <KT_Mecha_tech.label>公约国主战机械体</KT_Mecha_tech.label>
+  <!-- EN: KT_Mecha_tech -->
+  <KT_Mecha_tech.description>艾登将会为我们提供历史上存在过的公约国陆军机械体单位，在通讯页面解锁购买。\n\n&lt;color=#FFAA00>&lt;i>目前只做了2个机械体，以后要是做的比较多了应该会拆分一个MOD——作者善良海豹&lt;/i>&lt;/color></KT_Mecha_tech.description>
+  
+  <KT_Orbital_bombardment_tech.label>轨道激光协议</KT_Orbital_bombardment_tech.label>
+  <!-- EN: KT_Orbital_bombardment_tech -->
+  <KT_Orbital_bombardment_tech.description>联合护卫舰艾登将为我们执行轨道激光轰炸，只要简单操作综合控制终端，我们就可以做到足不出户打击全球。\n\n&lt;color=#FFAA00>&lt;i>按照程序我应该向你提供我的编号，但由于你们没有对应的应答器，所以如果要我口述编号的话，到宇宙毁灭也读不完...——艾登&lt;/i>&lt;/color></KT_Orbital_bombardment_tech.description>
+  
+  
+  <KT_Base_t5_energy_turret.label>洲际能量火炮</KT_Base_t5_energy_turret.label>
+  <KT_Base_t5_energy_turret.description>能进行跨地图射击的大型能量火炮，发射的能量炮弹能产生致命的高温与辐射。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;I am your mother. ——列克星敦&lt;/i&gt;&lt;/color&gt;</KT_Base_t5_energy_turret.description>
+  
+  <KT_chip_tech.label>植入体芯片</KT_chip_tech.label>
+  <KT_chip_tech.description>一系列植入大脑的芯片，就是尺寸有点大。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;空袭芯片使用时会产生大量白字（也有可能红字），但没有什么影响，不会有别的BUG，如果汇报这项错误我不会受理。 ——作者善良海豹&lt;/i&gt;&lt;/color&gt;</KT_chip_tech.description>
+  
+ <KT_Jetpack.label>涡喷飞行背包</KT_Jetpack.label>
+ <KT_Jetpack.description>这款飞行背包本是为促进家庭和睦设计的。在多物种公约国，当飞行种族与不可飞行种族通婚时，它可以帮助后者实现伴飞。然而在边缘世界，某个土著教会却对它产生了浓厚的兴趣。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;在使用本产品过程中造成的坠机，撞墙，烧焦羽毛尾巴头发等问题将在5500个标准年内得到补偿。 ——武天使售后承诺&lt;/i&gt;&lt;/color&gt;</KT_Jetpack.description>
+</LanguageData>
+
+

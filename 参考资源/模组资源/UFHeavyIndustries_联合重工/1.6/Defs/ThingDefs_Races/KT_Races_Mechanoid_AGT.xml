@@ -1,0 +1,581 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ThingDef Name="KT_AG_TANK" ParentName="KTSuperHeavyMechanoid">
+    <defName>KT_AG_TANK</defName> <!-- 修改了defName以避免冲突 -->
+    <label>KT_AG_TANK</label>
+    <description>KT_AG_TANK</description>
+    <statBases>
+      <BandwidthCost>6</BandwidthCost>
+      <MoveSpeed>6</MoveSpeed>
+    </statBases>
+    <race>
+      <body>Mech_Warqueen</body>
+      <baseBodySize>6</baseBodySize>
+      <lifeStageAges>
+        <li>
+          <def>MechanoidFullyFormed</def>
+          <minAge>0</minAge>
+          <soundWounded>Pawn_Mech_Warqueen_Wounded</soundWounded>
+          <soundDeath>Pawn_Mech_Warqueen_Death</soundDeath>
+          <soundCall>Pawn_Mech_Warqueen_Call</soundCall>
+        </li>
+      </lifeStageAges>
+      <baseHealthScale>10</baseHealthScale>
+      <!-- <thinkTreeConstant>WarUrchinConstant</thinkTreeConstant> -->
+    </race>
+    <tools>
+      <li>
+        <label>Trample</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>300</power>
+        <cooldownTime>6</cooldownTime>
+        <linkedBodyPartsGroup>Torso</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+      </li>
+    </tools>
+    <damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+      <li>
+        <damageDef>EMP</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+	<statBases>
+	  <IncomingDamageFactor>0.3</IncomingDamageFactor>
+    </statBases>
+    <comps>
+      <!--加上这个组件的机械体会直接跳过原版指挥范围判定-->
+      <li Class="SRA.CompProperties_GlobalMechCommand" />
+      <li Class="CompProperties_CanBeDormant" />
+      <li Class="CompProperties_WakeUpDormant">
+        <wakeUpOnDamage>true</wakeUpOnDamage>
+        <wakeUpCheckRadius>30</wakeUpCheckRadius>
+        <wakeUpSound>MechanoidsWakeUp</wakeUpSound>
+      </li>
+      <li Class="SRA.CompProperties_VehicleWeapon">
+        <drawData>
+          <dataEast>
+            <offset>(0,0,0)</offset>
+			<layer>10</layer>
+          </dataEast>
+          <dataWest>
+            <offset>(0,0,0.27)</offset>
+            <layer>20</layer>
+          </dataWest>
+          <dataSouth>
+            <offset>(-0.12,0,0.05)</offset>
+			<layer>40</layer>
+          </dataSouth>
+          <dataNorth>
+            <offset>(0.15,0,0)</offset>
+          </dataNorth>
+        </drawData>
+        <turretRotationFollowPawn>true</turretRotationFollowPawn>
+        <rotationSmoothTime>0.20</rotationSmoothTime>
+      </li>
+      <li Class="SRA.CompProperties_MultiTurretGun">
+		    <ID>0</ID>
+        <turretDef>KT_AG_TANK_LMG</turretDef>
+        <!-- <angleOffset>-90</angleOffset> -->
+        <renderNodeProperties>
+          <li>
+            <nodeClass>PawnRenderNode_TurretGun</nodeClass>
+            <workerClass>PawnRenderNodeWorker_TurretGun</workerClass>
+            <parentTagDef>Body</parentTagDef>
+            <overrideMeshSize>(2,2)</overrideMeshSize>
+            <pawnType>Any</pawnType>
+            <drawData>
+              <dataNorth>
+                <offset>(0.95, 0, 1.6)</offset>
+				<rotationOffset>270</rotationOffset>
+                <flip>true</flip>
+                <layer>40</layer>
+              </dataNorth>
+			  <dataSouth>
+			    <layer>40</layer>
+			    <rotationOffset>270</rotationOffset>
+                <offset>(-0.9, 0,-1.5)</offset>
+              </dataSouth>
+              <dataEast>
+                <layer>40</layer>
+				<rotationOffset>270</rotationOffset>
+                <offset>(1.6, 0, -0.7)</offset>
+              </dataEast>
+              <dataWest>
+			  <layer>40</layer>
+                <offset>(-1.55, 0, 0.85)</offset>
+				<rotationOffset>-270</rotationOffset>
+              </dataWest>
+            </drawData>
+          </li>
+        </renderNodeProperties>
+      </li> 
+	  <li Class="SRA.CompProperties_PawnRenderExtra">
+        <path>Things/Pawn/Mechanoid/KT_AG_TANK_light</path>
+        <size>(12,0,12)</size>
+        <colorAlly>(255,255,255)</colorAlly>
+        <colorEnemy>(255,255,255)</colorEnemy>
+        <shader>TransparentPostLight</shader>
+        <drawData>
+          <dataEast>
+            <offset>(0,0,0)</offset>
+            <layer>1</layer>
+          </dataEast>
+          <dataWest>
+            <offset>(0,0,0)</offset>
+            <layer>1</layer>
+          </dataWest>
+          <dataSouth>
+            <offset>(0,0,0)</offset>
+            <layer>1</layer>
+          </dataSouth>
+          <dataNorth>
+            <offset>(0,0,0)</offset>
+            <layer>1</layer>
+          </dataNorth>
+        </drawData>
+      </li>
+    </comps>
+  </ThingDef>
+  <!-- 基础代码 -->
+  <PawnKindDef Name="KT_AG_TANK_PawnKind" ParentName="KTHeavyMechanoidKind">
+    <defName>KT_AG_TANK</defName> <!-- 修改了defName以避免冲突 -->
+    <label>KT_AG_TANK</label>
+    <race>KT_AG_TANK</race>
+    <combatPower>1000</combatPower>
+    <maxPerGroup>0</maxPerGroup>
+    <allowInMechClusters>false</allowInMechClusters>
+    <forceNoDeathNotification>true</forceNoDeathNotification>
+    <forceDeathOnDowned>true</forceDeathOnDowned>
+    <startingHediffs>
+      <li>
+        <def>KT_AG_TANK_Hediff</def>
+      </li>
+    </startingHediffs>
+
+    <lifeStages>
+      <li>
+        <bodyGraphicData>
+          <texPath>Things/Pawn/Mechanoid/KT_AG_TANK</texPath>
+          <maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/None</maskPath>
+          <shaderType>CutoutWithOverlay</shaderType>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>(12, 12)</drawSize>
+          <shadowData>
+            <volume>(1.4, 1.8, 1.4)</volume>
+          </shadowData>
+
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+    <weaponTags>
+      <li>KT_AG_TANK_Turret</li>
+    </weaponTags>
+	<weaponMoney>5000~10000</weaponMoney>
+    <controlGroupPortraitZoom>0.7</controlGroupPortraitZoom>  
+	
+	<abilities>
+	  <li>SmokepopMech</li>
+    </abilities>
+
+  </PawnKindDef>
+  
+  <ThingDef ParentName="KT_Mecha_WeaponBase">
+		<defName>KT_AG_TANK_Turret</defName>
+		<label>KT_AG_TANK_Turret</label>
+		<description>KT_AG_TANK_Turret</description>
+		<graphicData>
+			<texPath>Things/Pawn/Mechanoid/KT_AG_TANK_turret</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(12, 6)</drawSize>
+		</graphicData>
+		<uiIconScale>0.5</uiIconScale>
+		<equippedAngleOffset>0</equippedAngleOffset>
+    	<smeltable>false</smeltable>
+		<statBases>
+			<MarketValue>1600</MarketValue>
+			<MaxHitPoints>640</MaxHitPoints>
+			<Mass>200</Mass>
+			<AccuracyTouch>0.8</AccuracyTouch>
+			<AccuracyShort>0.8</AccuracyShort>
+			<AccuracyMedium>0.9</AccuracyMedium>
+			<AccuracyLong>0.75</AccuracyLong>
+			<RangedWeapon_Cooldown>2.5</RangedWeapon_Cooldown>
+			<Flammability>0</Flammability>
+		</statBases>
+		<tradeability>None</tradeability>
+		<relicChance>0</relicChance>
+		<weaponTags>
+			<li>KT_AG_TANK_Turret</li>
+		</weaponTags>
+		<verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>KT_Bullet_AG_TANK_Turret</defaultProjectile>
+        <hasStandardCommand>true</hasStandardCommand>
+         <warmupTime>2</warmupTime>
+         <range>120</range>
+		 <minRange>5</minRange>
+         <soundCast>KT_Largecannon_V</soundCast>
+		 <ticksBetweenBurstShots>20</ticksBetweenBurstShots>
+		 <burstShotCount>3</burstShotCount>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>25</muzzleFlashScale>
+		   <forcedMissRadius>1</forcedMissRadius>
+			<requireLineOfSight>false</requireLineOfSight>
+		   <targetParams>
+			   <canTargetLocations>true</canTargetLocations>
+		   </targetParams>
+      </li>
+		</verbs>
+		<tools>
+			<li>
+				<label>Trample</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>64</power>
+				<cooldownTime>2</cooldownTime>
+			</li>
+		</tools>
+		
+	</ThingDef>
+	
+	
+   <ThingDef ParentName="BaseBullet">
+    <defName>KT_Bullet_AG_TANK_Turret</defName>
+    <label>KT_Bullet_AG_TANK_Turret</label>
+    <thingClass>Projectile_Explosive</thingClass>
+        <category>Projectile</category>
+        <tickerType>Normal</tickerType>
+        <altitudeLayer>Projectile</altitudeLayer>
+        <graphicData>
+            <texPath>Things/Projectile/Bullet_381MM</texPath> <!-- 子弹贴图路径 -->
+            <graphicClass>Graphic_Single</graphicClass> <!-- 使用单一图形 -->
+			<shaderType>MoteGlow</shaderType>
+      		<drawSize>(2.5)</drawSize>
+        </graphicData>
+        <projectile>
+            <damageDef>Bomb</damageDef>
+            <explosionRadius>2.5</explosionRadius>
+            <speed>180</speed>
+            <damageAmountBase>120</damageAmountBase>
+            <arcHeightFactor>0</arcHeightFactor>
+            <soundExplode>Explosion_Rocket</soundExplode>
+			<flyOverhead>true</flyOverhead>
+			<armorPenetrationBase>1.8</armorPenetrationBase>
+			<stoppingPower>1.2</stoppingPower>
+		</projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="KT_Mecha_WeaponBase">
+		<defName>KT_AG_TANK_turret_AAGUN</defName>
+		<label>"Smasher" Quad 20MM Anti-Aircraft Autocannon</label>
+		<description>Equipped with quad anti-aircraft autocannons, effectively annihilates lightly to moderately armored targets. Anti-air mode is not yet implemented, but the tradition of flak guns firing horizontally will not be forgotten.</description>
+		<graphicData>
+			<texPath>Things/Pawn/Mechanoid/KT_AG_TANK_turret_AAGUN</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(12, 6)</drawSize>
+		</graphicData>
+		<uiIconScale>0.5</uiIconScale>
+		<equippedAngleOffset>0</equippedAngleOffset>
+    	<smeltable>false</smeltable>
+		<statBases>
+			<MarketValue>1600</MarketValue>
+			<MaxHitPoints>640</MaxHitPoints>
+			<Mass>200</Mass>
+			<AccuracyTouch>1</AccuracyTouch>
+			<AccuracyShort>1</AccuracyShort>
+			<AccuracyMedium>1</AccuracyMedium>
+			<AccuracyLong>1</AccuracyLong>
+			<RangedWeapon_Cooldown>1</RangedWeapon_Cooldown>
+			<Flammability>0</Flammability>
+		</statBases>
+		<tradeability>None</tradeability>
+		<relicChance>0</relicChance>
+		<weaponTags>
+			<li>KT_AG_TANK_Turret</li>
+		</weaponTags>
+		<verbs>
+          <li>
+            <verbClass>Verb_Shoot</verbClass>
+            <defaultProjectile>KT_Bullet_AG_TANK_Turret_AAGUN</defaultProjectile>
+            <hasStandardCommand>true</hasStandardCommand>
+             <warmupTime>0.5</warmupTime>
+             <range>85</range>
+		     <minRange>5</minRange>
+             <soundCast>KT_AUTOCANNON_VII</soundCast>
+		     <ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+		     <burstShotCount>30</burstShotCount>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>25</muzzleFlashScale>
+		    <targetParams>
+			     <canTargetLocations>true</canTargetLocations>
+	        </targetParams>
+		    <canGoWild>false</canGoWild>
+          </li>
+		</verbs>
+
+		<tools>
+			<li>
+				<label>Trample</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>64</power>
+				<cooldownTime>2</cooldownTime>
+			</li>
+		</tools>
+		
+	</ThingDef>
+	
+	
+   <ThingDef ParentName="BaseBullet">
+       <defName>KT_Bullet_AG_TANK_Turret_AAGUN</defName>
+       <label>"Smasher" Quad 20MM Anti-Aircraft Autocannon</label>
+        <category>Projectile</category>
+        <tickerType>Normal</tickerType>
+        <altitudeLayer>Projectile</altitudeLayer>
+        <graphicData>
+            <texPath>Things/Projectile/Bullet_100MM</texPath> <!-- 子弹贴图路径 -->
+            <graphicClass>Graphic_Single</graphicClass> <!-- 使用单一图形 -->
+			<shaderType>MoteGlow</shaderType>
+      		<drawSize>(1.5)</drawSize>
+        </graphicData>
+        <projectile>
+            <damageDef>Bullet</damageDef> <!-- 子弹伤害类型 -->
+            <damageAmountBase>35</damageAmountBase> <!-- 基础伤害量 -->
+            <speed>300</speed> <!-- 子弹速度 -->
+			<armorPenetrationBase>1</armorPenetrationBase>
+			<stoppingPower>2</stoppingPower>
+        </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="KT_Mecha_WeaponBase">
+		<defName>KT_AG_TANK_turret_Rocket</defName>
+		<label>"Iron Curtain" Rocket Launcher</label>
+		<description>A terrifying presence capable of launching a lethal volley of rockets in a single salvo.</description>
+		<graphicData>
+			<texPath>Things/Pawn/Mechanoid/KT_AG_TANK_turret_Rocket</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(12, 6)</drawSize>
+		</graphicData>
+		<uiIconScale>0.5</uiIconScale>
+		<equippedAngleOffset>0</equippedAngleOffset>
+    	<smeltable>false</smeltable>
+		<statBases>
+			<MarketValue>1600</MarketValue>
+			<MaxHitPoints>640</MaxHitPoints>
+			<Mass>200</Mass>
+			<AccuracyTouch>0.3</AccuracyTouch>
+			<AccuracyShort>0.5</AccuracyShort>
+			<AccuracyMedium>0.7</AccuracyMedium>
+			<AccuracyLong>0.65</AccuracyLong>
+			<RangedWeapon_Cooldown>3</RangedWeapon_Cooldown>
+			<Flammability>0</Flammability>
+		</statBases>
+		<tradeability>None</tradeability>
+		<relicChance>0</relicChance>
+		<weaponTags>
+			<li>KT_AG_TANK_Turret</li>
+		</weaponTags>
+		<verbs>
+          <li>
+            <verbClass>Verb_Shoot</verbClass>
+            <defaultProjectile>KT_Bullet_AG_TANK_Turret_Rocket</defaultProjectile>
+            <hasStandardCommand>true</hasStandardCommand>
+             <warmupTime>2.5</warmupTime>
+             <range>150</range>
+		     <minRange>15</minRange>
+             <soundCast>KT_rocket</soundCast>
+		     <ticksBetweenBurstShots>13</ticksBetweenBurstShots>
+		     <burstShotCount>15</burstShotCount>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>25</muzzleFlashScale>
+		    <requireLineOfSight>false</requireLineOfSight>
+		    <targetParams>
+			     <canTargetLocations>true</canTargetLocations>
+	        </targetParams>
+          </li>
+		</verbs>
+
+		<tools>
+			<li>
+				<label>Trample</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>64</power>
+				<cooldownTime>2</cooldownTime>
+			</li>
+		</tools>
+		
+	</ThingDef>
+  
+    <ThingDef ParentName="BaseBullet">
+    <defName>KT_Bullet_AG_TANK_Turret_Rocket</defName>
+    <label>"Iron Curtain" Rocket Launcher</label>
+    <thingClass>SRA.Projectile_MultiExplosive_NorthArcTrail</thingClass>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_doommissile</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+	    <drawSize>1.3</drawSize>
+    </graphicData>
+    <projectile>
+			<damageDef>Bomb</damageDef>
+			<explosionRadius>4.5</explosionRadius>
+			<damageAmountBase>55</damageAmountBase>
+			<armorPenetrationBase>1.2</armorPenetrationBase>
+			<stoppingPower>3</stoppingPower>
+			<speed>80</speed>
+      <flyOverhead>true</flyOverhead>
+      <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+    </projectile>
+    <modExtensions>
+      <li Class="SRA.NorthArcModExtension">
+        <northOffsetDistance>5</northOffsetDistance>
+        <curveSteepness>1.5</curveSteepness>
+        <useArcTrajectory>true</useArcTrajectory>
+      </li>
+      <li Class="SRA.TailBulletDef">
+        <tailFleckDef>KT_Fleck_Smoke_Tail</tailFleckDef>
+        <fleckMakeFleckTickMax>5</fleckMakeFleckTickMax>
+        <fleckDelayTicks>1</fleckDelayTicks>
+        <fleckMakeFleckNum>1~2</fleckMakeFleckNum>
+        <fleckScale>0.5~1.0</fleckScale>
+        <fleckSpeed>0.1~0.3</fleckSpeed>
+        <fleckAngle>-30~30</fleckAngle>
+      </li>
+      <li Class="SRA.MultiExplosiveExtension">
+        <multiexplosions>
+          <li>
+            <radius>4.5</radius>
+            <damageDef>Bomb</damageDef>
+            <damageAmount>60</damageAmount>
+            <armorPenetration>1.2</armorPenetration>
+            <explosionSound>Explosion_Bomb</explosionSound>
+            <explosionDamageFalloff>true</explosionDamageFalloff>
+            <!--explosionEffect>SRA_GiantExplosion</explosionEffect>
+            <explosionEffectLifetimeTicks>180</explosionEffectLifetimeTicks--> 
+            <onlyAntiHostile>false</onlyAntiHostile>
+          </li>
+        </multiexplosions>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>KT_AG_TANK_LMG</defName>
+    <label>KT_AG_TANK_LMG</label>
+    <description>KT_AG_TANK_LMG</description>
+
+    <graphicData>
+      <texPath>Things/Pawn/Mechanoid/KT_AG_TANK_LMG</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>1.2</drawSize>
+    </graphicData>
+    <statBases>
+			<AccuracyTouch>1</AccuracyTouch>
+			<AccuracyShort>0.7</AccuracyShort>
+			<AccuracyMedium>0.6</AccuracyMedium>
+			<AccuracyLong>0.5</AccuracyLong>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>48</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>KT_Bullet_AG_TANK_LMG</defaultProjectile>
+        <hasStandardCommand>true</hasStandardCommand>
+        <range>30</range>
+		<ticksBetweenBurstShots>3</ticksBetweenBurstShots>
+		<burstShotCount>12</burstShotCount>
+        <defaultCooldownTime>2</defaultCooldownTime>
+		<soundCast>KT_AUTOCANNON_V</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>15</muzzleFlashScale>
+      </li>
+    </verbs>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+        <defName>KT_Bullet_AG_TANK_LMG</defName> <!-- 子弹名称 -->
+        <label>KT_Bullet_AG_TANK_LMG</label> <!-- 子弹标签 -->
+        <graphicData>
+            <texPath>Things/Projectile/Bullet_100MM</texPath> <!-- 子弹贴图路径 -->
+            <graphicClass>Graphic_Single</graphicClass> <!-- 使用单一图形 -->
+			<drawSize>(1.1)</drawSize>
+        </graphicData>
+        <projectile>
+            <damageDef>Bullet</damageDef> <!-- 子弹伤害类型 -->
+            <damageAmountBase>20</damageAmountBase> <!-- 基础伤害量 -->
+            <speed>400</speed> <!-- 子弹速度 -->
+			<armorPenetrationBase>0.40</armorPenetrationBase>
+        </projectile>
+  </ThingDef>
+  
+  <AbilityDef>
+		<defName>KT_AGT_AP</defName>
+		<label>KT_AGT_AP</label>
+		<description>KT_AGT_AP</description>
+		<iconPath>Things/Projectile/Bullet_KT_AP</iconPath>
+		<cooldownTicksRange>30000</cooldownTicksRange>
+		<cooldownPerCharge>true</cooldownPerCharge>
+		<charges>8</charges>
+		<aiCanUse>true</aiCanUse>
+		<verbProperties>
+			<verbClass>Verb_CastAbility</verbClass>
+			<range>120</range>
+			<warmupTime>2</warmupTime>
+			<soundCast>KT_Largecannon_V</soundCast>
+			<soundCastTail>GunTail_Heavy</soundCastTail>
+			<muzzleFlashScale>12</muzzleFlashScale>
+			<minRange>0</minRange>
+			<targetParams>
+                  <canTargetLocations>true</canTargetLocations>
+                  <canTargetSelf>true</canTargetSelf>
+                  <canTargetPawns>true</canTargetPawns>
+                  <canTargetBuildings>true</canTargetBuildings>
+                  <canTargetPlants>true</canTargetPlants>
+            </targetParams>
+			<soundAiming>HellsphereCannon_Aiming</soundAiming>
+			<canGoWild>false</canGoWild>
+		</verbProperties>
+		<comps>
+			<li Class="CompProperties_AbilityLaunchProjectile">
+				<projectileDef>Proj_KT_AGT_AP</projectileDef>
+			</li>
+		</comps>
+	</AbilityDef>
+
+  
+  <ThingDef ParentName="BaseIncendiaryProjectile_KTarmor">
+    <defName>Proj_KT_AGT_AP</defName>
+    <label>Proj_KT_AGT_AP</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_KT_AP</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+	  <drawSize>(2.5)</drawSize>
+    </graphicData>
+    <projectile>
+        <damageDef>Bullet</damageDef>
+        <speed>500</speed>
+        <damageAmountBase>1500</damageAmountBase>
+        <arcHeightFactor>0</arcHeightFactor>
+		<armorPenetrationBase>4</armorPenetrationBase>
+		<soundExplode>KTNONESOUND</soundExplode>
+    </projectile>
+	</ThingDef>
+  
+</Defs>

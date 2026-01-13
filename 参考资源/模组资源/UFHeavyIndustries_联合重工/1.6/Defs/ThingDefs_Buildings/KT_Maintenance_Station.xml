@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+   <ThingDef ParentName="BuildingBase"><!-- 超维直连大脑，联合替代思考 -->
+    <defName>KT_Maintenance_Station</defName>
+    <label>KT_Maintenance_Station</label>
+    <description>KT_Maintenance_Station</description>
+    <surfaceType>None</surfaceType> <!-- 表面类型 -->
+    <uiOrder>2400</uiOrder> <!-- UI栏顺序 -->
+	<uiIconScale>1</uiIconScale> <!-- ui图标比例 -->
+	<uiIconPath>Things/Building/KT_Maintenance_Station</uiIconPath>
+    <graphicData> <!-- 图形数据 -->
+      <texPath>Things/Building/KT_Maintenance_Station</texPath> <!-- 贴图路径 -->
+      <graphicClass>Graphic_Multi</graphicClass> <!-- 图形类 -->
+	  <drawSize>(5)</drawSize> <!-- 贴图大小 -->
+    </graphicData>
+    <statBases> <!-- 统计基础 -->
+      <MaxHitPoints>2000</MaxHitPoints> <!-- 最大生命值 -->
+      <WorkToBuild>5000</WorkToBuild> <!-- 工作量 -->
+      <Flammability>0</Flammability> <!-- 易燃性 -->
+      <Beauty>10</Beauty> <!-- 美观 -->
+	  <Mass>200</Mass>
+    </statBases>
+    <size>(3,3)</size> <!-- 尺寸 --> 
+	<costList>
+      <KT_steel>500</KT_steel>
+      <ComponentIndustrial>35</ComponentIndustrial>
+	  <ComponentSpacer>15</ComponentSpacer>
+	  <Gold>100</Gold>
+    </costList>
+	<thingCategories>
+        <li>BuildingsMisc</li>
+    </thingCategories>
+    <minifiedDef>MinifiedThing</minifiedDef>
+	<constructionSkillPrerequisite>1</constructionSkillPrerequisite> <!-- 施工技能先决条件 -->
+	<altitudeLayer>Building</altitudeLayer> <!-- 图层高度 -->
+    <passability>Standable</passability> <!-- 通过性 -->
+    <blockWind>false</blockWind> <!-- 气流阻挡 -->
+
+    <coversFloor>false</coversFloor> <!-- 覆盖地板 -->
+    <rotatable>true</rotatable> <!-- 可旋转 -->
+    <selectable>true</selectable> <!-- 可选择 -->
+	<useStuffTerrainAffordance>false</useStuffTerrainAffordance> <!-- 使用地形承受能力 -->
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded> <!-- 需要地形承受能力，石材所需的承担特质 -->
+    <holdsRoof>false</holdsRoof> <!-- 支撑屋顶 -->
+    <designationCategory>KT_designation_group</designationCategory> <!-- UI栏位置 -->
+    <castEdgeShadows>True</castEdgeShadows> <!-- 投射边缘阴影 -->
+    <blockLight>false</blockLight> <!-- 光线遮挡 -->
+	<fertility>0</fertility> <!-- 肥沃 -->
+	<building> <!-- 建筑 -->
+	  <isEdifice>true</isEdifice> <!-- 是建筑 -->
+	  <paintable>true</paintable> <!-- 可涂漆 -->
+	  <ai_chillDestination>false</ai_chillDestination> <!-- ai冷却目的地 -->
+	</building>
+	<researchPrerequisites>
+	  <li>KT_Maintenance_Station_tech</li>
+    </researchPrerequisites>
+	<specialDisplayRadius>35</specialDisplayRadius>
+	<tickerType>Normal</tickerType>
+	<drawerType>MapMeshAndRealTime</drawerType>
+	<comps>
+      <li Class="SRA.CompProperties_RepairTower">
+        <!-- 修复半径：0=无限，>0=以建筑为中心的圆形范围 -->
+        <repairRadius>35</repairRadius>
+        <!-- 修复区域：HomeArea=仅居住区，EntireArea=指定范围内全部-->
+        <repairArea>HomeArea</repairArea>
+        <!-- 修复速率：每秒修复的百分比 (0.02 = 2%) -->
+        <repairRatePerSecond>0.02</repairRatePerSecond>
+        <!-- 修复上限：耐久度 * multiplier + offset -->
+        <maxRepairMultiplier>1.5</maxRepairMultiplier>
+        <maxRepairOffset>200</maxRepairOffset>
+      </li>
+      <li Class="SRA.CompProperties_BuildingDrawExtraFourRot">
+			<graphicDataExtra>
+				<graphicClass>Graphic_Multi</graphicClass>
+				<shaderType>TransparentPostLight</shaderType>
+				<texPath>Things/Building/KT_Maintenance_Station_Light</texPath>
+				<drawSize>(5,5)</drawSize>
+	 		    <drawOffsetSouth>(0,0,0)</drawOffsetSouth>
+	 		    <drawOffsetNorth>(0,0,0)</drawOffsetNorth>
+			    <drawOffsetEast>(0,0,0)</drawOffsetEast>
+			    <drawOffsetWest>(0,0,0)</drawOffsetWest>
+			</graphicDataExtra>
+	  </li>
+	  
+	  <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>5000</basePowerConsumption>
+      </li>
+	</comps> 
+   </ThingDef> 
+</Defs>

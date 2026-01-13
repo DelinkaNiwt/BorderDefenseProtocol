@@ -1,0 +1,301 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<!--冲击火花效果-->
+	<FleckDef ParentName="FleckBase">
+		<defName>Fleck_ImpactSpark</defName>
+		<fleckSystemClass>FleckSystemThrown</fleckSystemClass>
+		<!--材质数据-->
+		<solidTime>0.15</solidTime>
+		<fadeInTime>0.05</fadeInTime>
+		<fadeOutTime>0.3</fadeOutTime>
+		<altitudeLayer>MoteOverhead</altitudeLayer>
+		<graphicData>
+			<drawSize>3</drawSize>
+			<color>(255, 220, 150)</color>
+			<shaderType>MoteGlow</shaderType>
+			<texPath>Things/Mote/SparkFlash</texPath>
+		</graphicData>
+	</FleckDef>
+	<!--炮塔-->
+	<ThingDef ParentName="BuildingBase">
+		<defName>KT_Turret_ElectromagneticCannon</defName>
+		<label>"Lorentz Spear" Triple Heavy Railgun</label>
+		<description>This electromagnetic cannon is a behemoth in every sense—the penetrating power of its shells is sufficient to pierce through any enemy and is nearly impossible to evade.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can shoot over walls&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;45° No-Escape Zone (guaranteed hit)&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;Penetrating attack&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;Knockback effect&lt;/i&gt;&lt;/color&gt;</description>
+		<thingClass>ECT.Building_TurretGunHasSpeed</thingClass>
+		<!--材质数据-->
+		<uiOrder>2200</uiOrder>
+		<uiIconScale>1</uiIconScale>
+		<rotatable>false</rotatable>
+		<hasTooltip>true</hasTooltip>
+		<drawHighlight>true</drawHighlight>
+		<altitudeLayer>Building</altitudeLayer>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<designationCategory>KT_designation_group</designationCategory>
+		<uiIconPath>Things/Building/Security/MenuIcon_ElectromagneticCannon</uiIconPath>
+		<drawHighlightOnlyForHostile>true</drawHighlightOnlyForHostile>
+		<graphicData>
+			<drawSize>(20,20)</drawSize>
+			<graphicClass>Graphic_Single</graphicClass>
+			<texPath>Things/Building/Security/KT381MMCANNON_Base</texPath>
+		</graphicData>
+		<!--炮塔承伤系数-->
+		<damageMultipliers>
+			<li>
+				<damageDef>EMP</damageDef>
+				<multiplier>0</multiplier>
+			</li>
+			<li>
+				<damageDef>Stun</damageDef>
+				<multiplier>0</multiplier>
+			</li>
+			<li>
+				<damageDef>Flame</damageDef>
+				<multiplier>0</multiplier>
+			</li>
+		</damageMultipliers>
+		<!--基本属性-->
+		<size>(9,9)</size>
+		<pathCost>50</pathCost>
+		<stealable>false</stealable>
+		<fillPercent>0.5</fillPercent>
+		<tickerType>Normal</tickerType>
+		<statBases>
+			<Flammability>0</Flammability>
+			<WorkToBuild>5000</WorkToBuild>
+			<MaxHitPoints>15000</MaxHitPoints>
+			<Mass>5000</Mass>
+			<ShootingAccuracyTurret>1</ShootingAccuracyTurret>
+		</statBases>
+		<!--建造参数-->
+		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+		<constructionSkillPrerequisite>10</constructionSkillPrerequisite>
+		<killedLeavings>
+			<ChunkSlagSteel>5</ChunkSlagSteel>
+		</killedLeavings>
+		<placeWorkers>
+			<li>PlaceWorker_TurretTop</li>
+			<li>PlaceWorker_NotUnderRoof</li>
+		</placeWorkers>
+		<costList>
+      		<KT_steel>900</KT_steel>
+     		 <ComponentIndustrial>60</ComponentIndustrial>
+	  		<ComponentSpacer>40</ComponentSpacer>
+   		</costList>
+		<!--武器数据-->
+		<building>
+			<turretTopDrawSize>17</turretTopDrawSize>
+			<turretTopOffset>(0, 0)</turretTopOffset>
+			<ai_combatDangerous>true</ai_combatDangerous>
+			<turretBurstCooldownTime>10</turretBurstCooldownTime>
+			<turretGunDef>Gun_ElectromagneticCannon</turretGunDef>
+			<combatPower>5000</combatPower>
+		</building>
+		<researchPrerequisites>
+          <li>KT_Base_t4_rail_turret</li>
+        </researchPrerequisites>		
+		<!--工作组件-->
+		<comps>
+			<!--开关总闸-->
+			<li Class="CompProperties_Flickable"/>
+			<!--禁止使用-->
+			<li Class="CompProperties_Forbiddable"/>
+			<!--手动瞄准-->
+			<li Class="ECT.CompProperties_ManualAimMode" />
+			<!--工作能耗-->
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTrader</compClass>
+				<basePowerConsumption>10000</basePowerConsumption>
+			</li>
+			
+			<li Class="CompProperties_Flickable"/>
+            <li Class="CompProperties_Breakdownable"/>
+            <li Class="CompProperties_Refuelable"> <!-- 应该是可以补给 -->
+               <fuelLabel>Shots until barrel change</fuelLabel>
+               <fuelGizmoLabel>Barrel durability</fuelGizmoLabel>
+               <outOfFuelMessage>Needs new barrel</outOfFuelMessage>
+               <fuelFilter><thingDefs><li>ComponentSpacer</li></thingDefs></fuelFilter>
+               <fuelCapacity>60</fuelCapacity>
+               <fuelMultiplier>3</fuelMultiplier>
+               <initialFuelPercent>1</initialFuelPercent>
+               <autoRefuelPercent>0.5</autoRefuelPercent>
+               <showFuelGizmo>true</showFuelGizmo>
+               <minimumFueledThreshold>1</minimumFueledThreshold>
+               <factorByDifficulty>false</factorByDifficulty>
+               <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+               <fuelIconPath>KT_UI/UI_OUTAMMO</fuelIconPath>
+           </li>
+		</comps>
+		<modExtensions>
+			<!--炮塔转速-->
+			<li Class="ECT.ModExtension_HasSpeedTurret">
+				<speed>0.5</speed>
+			</li>
+		</modExtensions>
+	</ThingDef>
+	
+	<!--主炮_"Lorentz Spear" Triple Heavy Railgun-->
+	<ThingDef ParentName="BaseWeaponTurret">
+		<defName>Gun_ElectromagneticCannon</defName>
+		<label>"Lorentz Spear" Triple Heavy Railgun</label>
+		<description>This electromagnetic cannon is a behemoth in every sense—the penetrating power of its shells is sufficient to pierce through any enemy and is nearly impossible to evade.\n\n&lt;color=#FFAA00&gt;&lt;i&gt;Can shoot over walls&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;Can be manually operated&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;45° No-Escape Zone (guaranteed hit)&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;Penetrating attack&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;Knockback effect&lt;/i&gt;&lt;/color&gt;</description>
+		<!--材质数据-->
+		<graphicData>
+			<drawSize>(22,22)</drawSize>
+			<graphicClass>Graphic_Single</graphicClass>
+			<texPath>Things/Building/Security/Gun_ElectromagneticCannon</texPath>
+		</graphicData>
+		<!--基本属性-->
+		<statBases>
+			<Mass>120</Mass>
+			<Flammability>0</Flammability>
+			<AccuracyLong>1</AccuracyLong>
+			<AccuracyTouch>1</AccuracyTouch>
+			<AccuracyShort>1</AccuracyShort>
+			<AccuracyMedium>1</AccuracyMedium>
+			<DeteriorationRate>0</DeteriorationRate>
+			<RangedWeapon_Cooldown>10</RangedWeapon_Cooldown>
+		</statBases>
+		<weaponTags>
+	 	 	<li>KT_weapon</li>
+   		</weaponTags>
+		<!--运动组件-->
+		<verbs>
+			<li>
+				<range>500</range>
+				<minRange>25</minRange>
+				<warmupTime>2</warmupTime>
+				<burstShotCount>3</burstShotCount>
+				<consumeFuelPerShot>1</consumeFuelPerShot> 
+				<muzzleFlashScale>100</muzzleFlashScale>
+				<soundCast>KT_Railgun_II</soundCast>
+				<soundCastTail>GunTail_Heavy</soundCastTail>
+				<hasStandardCommand>true</hasStandardCommand>
+				<requireLineOfSight>false</requireLineOfSight>
+				<verbClass>ECT.Verb_ShootWithOffset</verbClass>
+				<ticksBetweenBurstShots>30</ticksBetweenBurstShots>
+				<defaultProjectile>Bullet_ElectromagneticCannon</defaultProjectile>
+				<targetParams>
+					<canTargetPawns>true</canTargetPawns>
+					<canTargetMechs>true</canTargetMechs>
+					<canTargetHumans>true</canTargetHumans>
+					<canTargetAnimals>true</canTargetAnimals>
+					<canTargetLocations>true</canTargetLocations>
+				</targetParams>
+			</li>
+		</verbs>
+		<modExtensions>
+		    <li Class="MuzzleFlash.MuzzleFlashProps" MayRequire="IssacZhuang.MuzzleFlash">
+               <def>MF_ChargedMuzzleFalsh</def>
+               <drawSize>(4)</drawSize>
+               <offsets>
+                 <li>(7.0,-1.5)</li>
+		         <li>(7.0,0)</li>
+				 <li>(7.0,1.5)</li>
+               </offsets>
+               <isAlternately>true</isAlternately>
+            </li>
+			<!--炮管动画-->
+			<li Class="ECT.ModExtension_ShootWithOffset">
+				<!--身管制退-->
+				<!--制退行程-->
+				<recoilAmount>1</recoilAmount>
+				<!--制退时间-->
+				<recoilKickTicks>1</recoilKickTicks>
+				<!--复位时间-->
+				<recoilDurationTicks>120</recoilDurationTicks>
+				<!--材质设置-->
+				<barrelTextureSize>(4,4)</barrelTextureSize>
+				<barrelTexturePath>Things/Building/Security/Barrel_ElectromagneticCannon</barrelTexturePath>
+				<offsets>
+					<li>(-1.5,-2.5)</li>
+					<li>(0,-2.5)</li>
+					<li>(1.5,-2.5)</li>
+				</offsets>
+				<!--导轨电弧-->
+				<!--电弧数量-->
+				<muzzleFlashArcCount>2</muzzleFlashArcCount>
+				<!--电弧宽度-->
+				<muzzleFlashArcWidth>5</muzzleFlashArcWidth>
+				<!--电弧长度-->
+				<muzzleFlashArcLength>5</muzzleFlashArcLength>
+				<!--电弧间距-->
+				<muzzleFlashArcSpacing>0.5</muzzleFlashArcSpacing>
+				<!--电弧时长-->
+				<muzzleFlashArcDuration>15</muzzleFlashArcDuration>
+				<!--噪声系数-->
+				<muzzleFlashArcVariance>0.15</muzzleFlashArcVariance>
+				<!--起点坐标-->
+				<muzzleOffsets>
+					<li>(-1.5,3)</li>
+					<li>(0,3)</li>
+					<li>(1.5,3)</li>
+				</muzzleOffsets>
+			</li>
+		</modExtensions>
+	</ThingDef>
+	<!--弹头_"Lorentz Spear" Triple Heavy Railgun-->
+	<ThingDef>
+		<defName>Bullet_ElectromagneticCannon</defName>
+		<label>"Lorentz Spear" Triple Heavy Railgun</label>
+		<thingClass>ECT.Projectile_HeavyArmourPiercer</thingClass>
+		<!--材质数据-->
+		<altitudeLayer>Projectile</altitudeLayer>
+		<graphicData>
+			<drawSize>(5,15)</drawSize>
+			<shaderType>MoteGlow</shaderType>
+			<graphicClass>Graphic_Single</graphicClass>
+			<texPath>Things/Projectile/Bullet_ElectromagneticCannon</texPath>
+		</graphicData>
+		<!--基本属性-->
+		<tickerType>Normal</tickerType>
+		<category>Projectile</category>
+		<projectile>
+			<speed>300</speed>
+			<damageDef>Bomb</damageDef>
+			<flyOverhead>true</flyOverhead>
+			<stoppingPower>30</stoppingPower>
+			<arcHeightFactor>0</arcHeightFactor>
+			<explosionRadius>5</explosionRadius>
+			<damageAmountBase>1200</damageAmountBase>
+			<soundExplode>Explosion_Rocket</soundExplode>
+			<armorPenetrationBase>10</armorPenetrationBase>
+		</projectile>
+		<modExtensions>
+			<li Class="ECT.ModExtension_HeavyArmourPiercer">
+				<!--击穿杀伤效果-->
+				<!--击晕时长-->
+				<stunDuration>150</stunDuration>
+				<!--扫掠半径-->
+				<hitWidthRadius>3</hitWidthRadius>
+				<!--逃逸角度-->
+				<maxHomingAngle>10</maxHomingAngle>
+				<!--造伤次数-->
+				<maxHitsPerTarget>3</maxHitsPerTarget>
+				<!--击退距离-->
+				<knockbackDistance>15</knockbackDistance>
+				<!--冲击火花效果-->
+				<!--喷射夹角-->
+				<sparkSpreadAngle>5</sparkSpreadAngle>
+				<!--火花数量-->
+				<sparkCountRange>15~25</sparkCountRange>
+				<!--火花速度-->
+				<sparkSpeedRange>50~75</sparkSpeedRange>
+				<!--击穿音效-->
+				<skimHitSound>BulletImpact_Metal</skimHitSound>
+				<!--火花粒子-->
+				<sparkFleckDef>Fleck_ImpactSpark</sparkFleckDef>
+				<!--摩擦电弧效果-->
+				<!--电弧宽度-->
+				<lightningWidth>2</lightningWidth>
+				<!--电弧长度-->
+				<lightningLength>8</lightningLength>
+				<!--噪声系数-->
+				<lightningVariance>1</lightningVariance>
+				<!--电弧时长-->
+				<lightningDuration>15</lightningDuration>
+				<!--延伸速度-->
+				<lightningGrowthTicks>5</lightningGrowthTicks>
+			</li>
+		</modExtensions>
+	</ThingDef>
+</Defs>

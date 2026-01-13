@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 高空支援 -->
+  <ThingDef Parent="EtherealThingBase">
+    <defName>KT_FlyOver_Super_Destroyer</defName>
+    <label>KT_FlyOver_Super_Destroyer</label>
+    <thingClass>SRA.FlyOver</thingClass>
+    <tickerType>Normal</tickerType>
+    <drawerType>RealtimeOnly</drawerType>
+    <graphicData>
+      <!-- <texPath>ArachnaeSwarm/Weapon/ARA_Weapon_Empty</texPath> -->
+      <texPath>Things/FlyOverThing/KT_HDII_SHIP</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+      <drawSize>(108,108)</drawSize>
+      <color>(255,255,255,120)</color>
+    </graphicData>
+    <castEdgeShadows>false</castEdgeShadows>
+    <staticSunShadowHeight>0</staticSunShadowHeight>
+    <skyfaller>
+	  <anticipationSound>DropPod_Fall_Mechanoid</anticipationSound>
+      <shadow>Things/FlyOverThing/KT_EMPTY</shadow>
+      <shadowSize>(0, 0)</shadowSize>
+      <motesPerCell>0</motesPerCell>
+      <floatingSound></floatingSound>
+      <impactSound></impactSound>
+    </skyfaller>
+    <modExtensions>
+      <li Class="SRA.FlyOverShadowExtension">
+        <customShadowPath>Things/FlyOverThing/KT_EMPTY</customShadowPath>
+        <useCustomShadow>true</useCustomShadow>
+        <shadowIntensity>0.8</shadowIntensity>
+        <minShadowAlpha>0</minShadowAlpha>
+        <maxShadowAlpha>0</maxShadowAlpha>
+        <minShadowScale>0</minShadowScale>
+        <maxShadowScale>0</maxShadowScale>
+      </li>
+    </modExtensions>
+    <seeThroughFog>true</seeThroughFog>
+    <useHitPoints>false</useHitPoints>
+    <selectable>false</selectable>
+    <alwaysHaulable>false</alwaysHaulable>
+    <altitudeLayer>MetaOverlays</altitudeLayer>
+    <comps>
+	 <!-- 入场音效 -->
+      <li Class="SRA.CompProperties_PlaySoundOnSpawn">
+        <sound>KT_alarm</sound>
+      </li>
+	 <!-- 炮击支援 -->
+      <li Class="SRA.CompProperties_ShipArtillery">
+        <ticksBetweenAttacks>25</ticksBetweenAttacks>
+        <attackDurationTicks>500</attackDurationTicks>
+        <warmupTicks>60</warmupTicks>
+        <attackRadius>60</attackRadius>
+        <shellsPerVolley>3</shellsPerVolley>
+        <ignoreProtectionChance>0</ignoreProtectionChance>
+
+        <skyfallerDef>KT_Orbital_FirePower_Incoming</skyfallerDef>
+
+        <attackSound>Skyfaller_Crashing</attackSound>
+        <impactSound>Explosion_Bomb</impactSound>
+		
+		<!-- 新增派系甄别配置 -->
+        <useFactionDiscrimination>true</useFactionDiscrimination>
+        <useMicroTracking>true</useMicroTracking>
+
+        <useRandomTargets>true</useRandomTargets>
+        <avoidPlayerAssets>true</avoidPlayerAssets>
+        <playerAssetAvoidanceRadius>10</playerAssetAvoidanceRadius>
+
+        <sendAttackLetter>false</sendAttackLetter>
+        <customLetterLabel>战舰炮击警告</customLetterLabel>
+        <customLetterText>一艘敌方战舰正在对殖民地进行炮击！立即寻找掩护！</customLetterText>
+        <letterDef>ThreatBig</letterDef>
+      </li>
+    </comps>
+  </ThingDef>
+
+  
+  <ThingDef ParentName="SkyfallerBase">
+    <defName>KT_Orbital_FirePower_Incoming</defName>
+    <label>KT_Orbital_FirePower_Incoming</label>
+    <size>(1, 1)</size>
+    <graphicData>
+      <graphicClass>Graphic_Single_AgeSecs</graphicClass>
+      <texPath>Things/FlyOverThing/KT_Orbital_FirePower_Incoming</texPath>
+      <drawSize>(4,4)</drawSize>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <seeThroughFog>true</seeThroughFog>
+	<comps>
+      <li Class="SRA.CompProperties_PlaySoundOnSpawn">
+        <sound>KT_Largecannon_IV</sound>
+      </li>
+    </comps>
+    <skyfaller>
+      <movementType>Accelerate</movementType>
+      <shadow>Things/Skyfaller/SkyfallerShadowDropPod</shadow>
+      <shadowSize>(2.5, 2.5)</shadowSize>
+      <explosionRadius>10</explosionRadius>
+      <explosionDamage>KTBLUEBomb</explosionDamage>
+      <explosionDamageFactor>15</explosionDamageFactor>
+      <cameraShake>1</cameraShake>
+      <angleCurve>
+        <points>
+          <li>(0,0)</li>
+          <li>(1,-1)</li>
+        </points>
+      </angleCurve>
+    </skyfaller>
+  </ThingDef>
+</Defs>

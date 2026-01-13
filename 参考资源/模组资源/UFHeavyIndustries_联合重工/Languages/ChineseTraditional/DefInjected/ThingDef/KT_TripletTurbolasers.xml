@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+	<Turret_TripletTurbolasers.label>「帝国」三联装涡轮激光炮</Turret_TripletTurbolasers.label>
+	<Turret_TripletTurbolasers.description>其通过大型电容组贮存能量，发射由激光作用于爆能气体产生的高能粒子束，命中中心区域产生的高温足以融化一切单位，并大范围灼烧范围外的单位并留下可怖的疤痕。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以跨地图射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;EMP与灼烧附带&lt;/i&gt;&lt;/color&gt;</Turret_TripletTurbolasers.description>
+
+    <Gun_TripletTurbolasers.label>「帝国」三联装涡轮激光炮</Gun_TripletTurbolasers.label>
+	<Gun_TripletTurbolasers.description>其通过大型电容组贮存能量，发射由激光作用于爆能气体产生的高能粒子束，命中中心区域产生的高温足以融化一切单位，并大范围灼烧范围外的单位并留下可怖的疤痕。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;可以跨地图射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;可以越墙射击&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;可以手动操作&lt;/i&gt;&lt;/color&gt;\n&lt;color=#FFAA00&gt;&lt;i&gt;EMP与灼烧附带&lt;/i&gt;&lt;/color&gt;</Gun_TripletTurbolasers.description>
+	
+	<Bullet_TripletTurbolasers.label>高能粒子束</Bullet_TripletTurbolasers.label>
+	<Bullet_TripletTurbolasers.description>高能粒子束</Bullet_TripletTurbolasers.description>
+	
+    <PlasmaMuzzleFlash.label>高能粒子束</PlasmaMuzzleFlash.label>
+    <PlasmaMuzzleFlash.description>高能粒子束</PlasmaMuzzleFlash.description>
+	
+    <Cluster_TripletTurbolasers.description>(洲际飞行中的高能粒子束集群)</Cluster_TripletTurbolasers.description>
+	
+	<Bombardment_TripletTurbolasers.label>高能粒子束集群</Bombardment_TripletTurbolasers.label>
+</LanguageData>

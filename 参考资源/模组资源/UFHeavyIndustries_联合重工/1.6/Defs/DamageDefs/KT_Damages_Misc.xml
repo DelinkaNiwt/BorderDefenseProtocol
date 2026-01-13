@@ -1,0 +1,397 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <DamageDef Name="KT_GREEN_Bomb">
+    <defName>KTGREENBomb</defName>
+    <label>KTGREENBomb</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>true</externalViolence>
+    <isExplosive>true</isExplosive>
+    <deathMessage>{0} has died in an explosion.</deathMessage>
+    <hediff>Shredded</hediff>
+    <hediffSolid>Crack</hediffSolid>
+    <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+    <impactSoundType>Blunt</impactSoundType>
+    <armorCategory>Sharp</armorCategory>
+    <minDamageToFragment>15</minDamageToFragment>
+    <defaultDamage>80</defaultDamage>
+    <defaultStoppingPower>0.5</defaultStoppingPower>
+    <defaultArmorPenetration>0.20</defaultArmorPenetration>
+    <buildingDamageFactorImpassable>4</buildingDamageFactorImpassable>
+    <buildingDamageFactorPassable>2</buildingDamageFactorPassable>
+    <plantDamageFactor>4</plantDamageFactor>
+    <corpseDamageFactor>0.5</corpseDamageFactor>
+    <explosionAffectOutsidePartsOnly>false</explosionAffectOutsidePartsOnly>
+    <explosionHeatEnergyPerCell>5</explosionHeatEnergyPerCell>
+    <explosionCellFleck>BlastDry</explosionCellFleck>
+    <explosionColorCenter>(0.3, 1, 0.8)</explosionColorCenter>
+    <explosionColorEdge>(0.4, 0.6, 0.6)</explosionColorEdge>
+    <soundExplosion>Explosion_Bomb</soundExplosion>
+    <combatLogRules>Damage_Bomb</combatLogRules>
+  </DamageDef>
+  
+  <DamageDef Name="KT_RED_Bomb">
+    <defName>KTREDomb</defName>
+    <label>KTREDomb</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>true</externalViolence>
+    <isExplosive>true</isExplosive>
+    <deathMessage>{0} has died in an explosion.</deathMessage>
+    <hediff>Shredded</hediff>
+    <hediffSolid>Crack</hediffSolid>
+    <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+    <impactSoundType>Blunt</impactSoundType>
+    <armorCategory>Sharp</armorCategory>
+    <minDamageToFragment>15</minDamageToFragment>
+    <defaultDamage>80</defaultDamage>
+    <defaultStoppingPower>0.5</defaultStoppingPower>
+    <defaultArmorPenetration>0.20</defaultArmorPenetration>
+    <buildingDamageFactorImpassable>4</buildingDamageFactorImpassable>
+    <buildingDamageFactorPassable>2</buildingDamageFactorPassable>
+    <plantDamageFactor>4</plantDamageFactor>
+    <corpseDamageFactor>0.5</corpseDamageFactor>
+    <explosionAffectOutsidePartsOnly>false</explosionAffectOutsidePartsOnly>
+    <explosionHeatEnergyPerCell>5</explosionHeatEnergyPerCell>
+    <explosionCellFleck>KT_BlastDry</explosionCellFleck>
+    <explosionColorCenter>(0.9, 0.3, 0.3)</explosionColorCenter>
+    <explosionColorEdge>(0.6, 0.2, 0.2)</explosionColorEdge>
+    <soundExplosion>Explosion_Bomb</soundExplosion>
+    <combatLogRules>Damage_Bomb</combatLogRules>
+  </DamageDef>
+
+  <DamageDef Name="KT_BLUE_Bomb">
+    <defName>KTBLUEBomb</defName>
+    <label>KTBLUEBomb</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>true</externalViolence>
+    <isExplosive>true</isExplosive>
+    <deathMessage>{0} has died in an explosion.</deathMessage>
+    <hediff>Shredded</hediff>
+    <hediffSolid>Crack</hediffSolid>
+    <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+    <impactSoundType>Blunt</impactSoundType>
+    <armorCategory>Sharp</armorCategory>
+    <minDamageToFragment>15</minDamageToFragment>
+    <defaultDamage>50</defaultDamage>
+    <defaultStoppingPower>0.5</defaultStoppingPower>
+    <defaultArmorPenetration>0.20</defaultArmorPenetration>
+    <buildingDamageFactorImpassable>4</buildingDamageFactorImpassable>
+    <buildingDamageFactorPassable>2</buildingDamageFactorPassable>
+    <plantDamageFactor>4</plantDamageFactor>
+    <corpseDamageFactor>0.5</corpseDamageFactor>
+    <explosionAffectOutsidePartsOnly>false</explosionAffectOutsidePartsOnly>
+    <explosionHeatEnergyPerCell>5</explosionHeatEnergyPerCell>
+    <explosionCellFleck>BlastDry</explosionCellFleck>
+    <explosionColorCenter>(0.4, 1, 1)</explosionColorCenter>
+    <explosionColorEdge>(0.4, 0.8, 0.8)</explosionColorEdge>
+    <soundExplosion>Explosion_Bomb</soundExplosion>
+    <combatLogRules>Damage_Bomb</combatLogRules>
+  </DamageDef>
+  
+  <DamageDef Name="KT_BLUE_Bomb_slow">
+    <defName>KTBLUEBomb_slow</defName>
+    <label>KTBLUEBomb</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>true</externalViolence>
+    <isExplosive>true</isExplosive>
+    <deathMessage>{0} has died in an explosion.</deathMessage>
+    <hediff>Shredded</hediff>
+    <hediffSolid>Crack</hediffSolid>
+    <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+    <impactSoundType>Blunt</impactSoundType>
+    <armorCategory>Sharp</armorCategory>
+    <minDamageToFragment>15</minDamageToFragment>
+    <defaultDamage>50</defaultDamage>
+    <defaultStoppingPower>0.5</defaultStoppingPower>
+    <defaultArmorPenetration>0.20</defaultArmorPenetration>
+    <buildingDamageFactorImpassable>4</buildingDamageFactorImpassable>
+    <buildingDamageFactorPassable>2</buildingDamageFactorPassable>
+    <plantDamageFactor>4</plantDamageFactor>
+    <corpseDamageFactor>0.5</corpseDamageFactor>
+    <explosionAffectOutsidePartsOnly>false</explosionAffectOutsidePartsOnly>
+    <explosionHeatEnergyPerCell>5</explosionHeatEnergyPerCell>
+    <explosionCellFleck>KT_BlastDry</explosionCellFleck>
+    <explosionColorCenter>(0.4, 1, 1)</explosionColorCenter>
+    <explosionColorEdge>(0.4, 0.8, 0.8)</explosionColorEdge>
+    <soundExplosion>Explosion_Bomb</soundExplosion>
+    <combatLogRules>Damage_Bomb</combatLogRules>
+  </DamageDef>
+  
+  
+  <DamageDef Name="KT_WHITE_Bomb">
+    <defName>KTWHITEBomb</defName>
+    <label>KTWHITEBomb</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>true</externalViolence>
+    <isExplosive>true</isExplosive>
+    <deathMessage>{0} has died in an explosion.</deathMessage>
+    <hediff>Shredded</hediff>
+    <hediffSolid>Crack</hediffSolid>
+    <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+    <impactSoundType>Blunt</impactSoundType>
+    <armorCategory>Sharp</armorCategory>
+    <minDamageToFragment>15</minDamageToFragment>
+    <defaultDamage>100</defaultDamage>
+    <defaultStoppingPower>0.5</defaultStoppingPower>
+    <defaultArmorPenetration>0.20</defaultArmorPenetration>
+    <buildingDamageFactorImpassable>4</buildingDamageFactorImpassable>
+    <buildingDamageFactorPassable>2</buildingDamageFactorPassable>
+    <plantDamageFactor>4</plantDamageFactor>
+    <corpseDamageFactor>0.5</corpseDamageFactor>
+    <explosionAffectOutsidePartsOnly>false</explosionAffectOutsidePartsOnly>
+    <explosionHeatEnergyPerCell>5</explosionHeatEnergyPerCell>
+    <explosionCellFleck>KT_BlastDry</explosionCellFleck>
+    <explosionColorCenter>(1, 1, 1)</explosionColorCenter>
+    <explosionColorEdge>(0.8, 0.8, 0.8)</explosionColorEdge>
+    <soundExplosion>KTNONESOUND</soundExplosion>
+    <combatLogRules>Damage_Bomb</combatLogRules>
+  </DamageDef>
+  
+  <DamageDef Name="KT_Beam_flashlight">
+    <defName>KT_Beamflashlight</defName>
+    <label>beam</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>true</externalViolence>
+    <deathMessage>{0} has been beamed to death.</deathMessage>
+    <hediff>BeamWound</hediff>
+    <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+    <impactSoundType>Blunt</impactSoundType>
+    <armorCategory>Sharp</armorCategory>
+    <overkillPctToDestroyPart>0~0.7</overkillPctToDestroyPart>
+    <isRanged>true</isRanged>
+    <makesAnimalsFlee>true</makesAnimalsFlee>
+    <defaultDamage>10</defaultDamage>
+    <defaultArmorPenetration>0.5</defaultArmorPenetration>
+    <buildingDamageFactorImpassable>1.5</buildingDamageFactorImpassable>
+    <buildingDamageFactorPassable>0.75</buildingDamageFactorPassable>
+	<ignoreShields>true</ignoreShields>
+  </DamageDef>
+  
+ 
+  <DamageDef Name="KT_Narcotic_gas">
+    <defName>KT_Narcotic_gas</defName>
+    <label>KT_Narcotic_gas</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>true</externalViolence>
+    <isExplosive>true</isExplosive>
+    <deathMessage>{0} has died in a narcotic gas.</deathMessage>
+    <hediff>Shredded</hediff>
+    <hediffSolid>Crack</hediffSolid>
+    <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+    <impactSoundType>Blunt</impactSoundType>
+    <armorCategory>Sharp</armorCategory>
+    <minDamageToFragment>0</minDamageToFragment>
+    <defaultDamage>0</defaultDamage>
+    <defaultStoppingPower>2.0</defaultStoppingPower>
+    <defaultArmorPenetration>0.20</defaultArmorPenetration>
+    <buildingDamageFactorImpassable>0</buildingDamageFactorImpassable>
+    <buildingDamageFactorPassable>0</buildingDamageFactorPassable>
+    <plantDamageFactor>0</plantDamageFactor>
+    <corpseDamageFactor>0.5</corpseDamageFactor>
+    <explosionAffectOutsidePartsOnly>false</explosionAffectOutsidePartsOnly>
+    <explosionHeatEnergyPerCell>5</explosionHeatEnergyPerCell>
+    <explosionCellFleck>BlastExtinguisher</explosionCellFleck>
+    <explosionColorEdge>(0.706, 0.839, 0.09, 0.25)</explosionColorEdge>
+    <soundExplosion>Explosion_Smoke</soundExplosion>
+    <combatLogRules>Damage_Bomb</combatLogRules>
+	<ignoreShields>true</ignoreShields>
+	<additionalHediffs>
+		<li>
+			<hediff>Anesthetic</hediff>
+			<severityPerDamageDealt>0.4</severityPerDamageDealt>
+			<inverseStatScaling>true</inverseStatScaling>
+		</li>
+	</additionalHediffs>
+	<applyAdditionalHediffsIfHuntingForFood>false</applyAdditionalHediffsIfHuntingForFood>
+  </DamageDef>
+
+  <DamageDef ParentName="Bullet">
+	<defName>BulletTranquilizer</defName>
+	<label>BulletTranquilizer</label>
+	<additionalHediffs>
+		<li>
+			<hediff>Anesthetic</hediff>
+			<severityPerDamageDealt>0.3</severityPerDamageDealt>
+			<inverseStatScaling>true</inverseStatScaling>
+		</li>
+	</additionalHediffs>
+	<applyAdditionalHediffsIfHuntingForFood>false</applyAdditionalHediffsIfHuntingForFood>
+	<impactSoundType>Bullet</impactSoundType>
+	<ignoreShields>true</ignoreShields>
+  </DamageDef>
+  
+  <DamageDef ParentName="Beam">
+    <defName>KTBeamBypassShields</defName>
+    <ignoreShields>true</ignoreShields>
+  </DamageDef>
+  
+  <DamageDef Name="KT_EMPTY_Bomb=">
+    <defName>KTBomb_EMPTY</defName>
+    <label>KTBomb_EMPTY</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>true</externalViolence>
+    <isExplosive>true</isExplosive>
+    <deathMessage>{0} has died in an explosion.</deathMessage>
+    <hediff>Shredded</hediff>
+    <hediffSolid>Crack</hediffSolid>
+    <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+    <impactSoundType>Blunt</impactSoundType>
+    <armorCategory>Sharp</armorCategory>
+    <minDamageToFragment>15</minDamageToFragment>
+    <defaultDamage>10</defaultDamage>
+    <defaultStoppingPower>0.5</defaultStoppingPower>
+    <defaultArmorPenetration>0.20</defaultArmorPenetration>
+    <buildingDamageFactorImpassable>4</buildingDamageFactorImpassable>
+    <buildingDamageFactorPassable>2</buildingDamageFactorPassable>
+    <plantDamageFactor>4</plantDamageFactor>
+    <corpseDamageFactor>0.5</corpseDamageFactor>
+    <explosionAffectOutsidePartsOnly>false</explosionAffectOutsidePartsOnly>
+    <explosionHeatEnergyPerCell>5</explosionHeatEnergyPerCell>
+    <explosionCellFleck>KT_EMPTY</explosionCellFleck>
+    <explosionColorCenter>(1, 1, 1)</explosionColorCenter>
+    <explosionColorEdge>(1, 1, 1)</explosionColorEdge>
+    <soundExplosion>KTNONESOUND</soundExplosion>
+    <combatLogRules>Damage_Bomb</combatLogRules>
+  </DamageDef>
+  
+   <DamageDef>
+      <defName>KT_Special_SMG_crystal</defName>
+      <label>KT_Special_SMG_crystal</label>
+      <harmsHealth>false</harmsHealth>
+      <makesBlood>false</makesBlood>
+      <externalViolence>true</externalViolence>
+      <deathMessage>{0} has been stunned to death.</deathMessage>
+      <defaultDamage>20</defaultDamage>
+      <defaultArmorPenetration>20</defaultArmorPenetration>
+      <additionalHediffs>
+        <li>
+          <hediff>KT_Special_SMG_crystal</hediff>
+          <severityFixed>0.2</severityFixed>
+          <inverseStatScaling>true</inverseStatScaling>
+          <victimSeverityScalingByInvBodySize>true</victimSeverityScalingByInvBodySize>
+        </li>
+      </additionalHediffs>
+      <impactSoundType>Electric</impactSoundType>
+   </DamageDef>
+   
+   <DamageDef Name="KTBomb_with_effect">
+    <defName>KTBomb_with_effect</defName>
+    <label>KTBLUEBomb</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>true</externalViolence>
+    <isExplosive>true</isExplosive>
+    <deathMessage>{0} has died in an explosion.</deathMessage>
+    <hediff>Shredded</hediff>
+    <hediffSolid>Crack</hediffSolid>
+    <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+    <impactSoundType>Blunt</impactSoundType>
+    <armorCategory>Sharp</armorCategory>
+    <minDamageToFragment>15</minDamageToFragment>
+    <defaultDamage>50</defaultDamage>
+    <defaultStoppingPower>0.5</defaultStoppingPower>
+    <defaultArmorPenetration>0.20</defaultArmorPenetration>
+    <buildingDamageFactorImpassable>4</buildingDamageFactorImpassable>
+    <buildingDamageFactorPassable>2</buildingDamageFactorPassable>
+    <plantDamageFactor>4</plantDamageFactor>
+    <corpseDamageFactor>0.5</corpseDamageFactor>
+    <explosionAffectOutsidePartsOnly>false</explosionAffectOutsidePartsOnly>
+    <explosionHeatEnergyPerCell>5</explosionHeatEnergyPerCell>
+    <explosionCellFleck>KT_EMPTY</explosionCellFleck>
+    <explosionColorCenter>(0.4, 1, 1)</explosionColorCenter>
+    <explosionColorEdge>(0.4, 0.8, 0.8)</explosionColorEdge>
+    <soundExplosion>Explosion_Bomb</soundExplosion>
+    <combatLogRules>Damage_Bomb</combatLogRules>
+	<explosionCenterEffecter>KTBomb_effect</explosionCenterEffecter>
+  </DamageDef>
+  
+  <EffecterDef>
+    <defName>KTBomb_effect</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>Mote_KT_SmallExplosion</moteDef>
+        <scale>1~1</scale>
+      </li>
+	  <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>Mote_KT_SmallExplosionInner</moteDef>
+        <scale>5~5</scale>
+      </li>
+    </children>
+  </EffecterDef> 
+  
+  <ThingDef ParentName="MoteBase">
+    <defName>Mote_KT_SmallExplosion</defName>
+    <graphicData>
+      <texPath>Things/Mote/PowerBeam</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <drawOffscreen>true</drawOffscreen>
+    <mote>
+      <fadeInTime>0.01</fadeInTime>
+      <solidTime>0</solidTime>
+      <fadeOutTime>0.4</fadeOutTime>
+      <growthRate>50</growthRate>
+    </mote>
+  </ThingDef>
+  
+  <ThingDef ParentName="MoteBase">
+    <defName>Mote_KT_SmallExplosionInner</defName>
+    <graphicData>
+      <texPath>Things/Mote/PowerBeam</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <drawOffscreen>true</drawOffscreen>
+    <mote>
+      <fadeInTime>0.01</fadeInTime>
+      <solidTime>0</solidTime>
+      <fadeOutTime>0.4</fadeOutTime>
+      <growthRate>25</growthRate>
+    </mote>
+  </ThingDef>
+  
+  <DamageDef>
+      <defName>KT_SealMG_curse</defName>
+      <label>Curse of the Giant Scythe</label>
+      <harmsHealth>false</harmsHealth>
+      <makesBlood>false</makesBlood>
+      <externalViolence>true</externalViolence>
+      <deathMessage>{0} has been stunned to death.</deathMessage>
+      <defaultDamage>25</defaultDamage>
+      <defaultArmorPenetration>20</defaultArmorPenetration>
+      <additionalHediffs>
+        <li>
+          <hediff>KT_SealMG_curse</hediff>
+          <severityFixed>0.2</severityFixed>
+          <inverseStatScaling>true</inverseStatScaling>
+          <victimSeverityScalingByInvBodySize>true</victimSeverityScalingByInvBodySize>
+        </li>
+      </additionalHediffs>
+      <impactSoundType>Electric</impactSoundType>
+   </DamageDef>
+   
+   <DamageDef Name="KT_SEALBullet">
+    <defName>KT_SEALBullet</defName>
+    <label>bullet</label>
+    <workerClass>SRA.DamageWorker_AddInjury_NoDamageFactor</workerClass>
+    <externalViolence>true</externalViolence>
+    <deathMessage>{0} has been shot to death.</deathMessage>
+    <hediff>Gunshot</hediff>
+    <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+    <impactSoundType>Bullet</impactSoundType>
+    <armorCategory>Sharp</armorCategory>
+    <overkillPctToDestroyPart>0~0.7</overkillPctToDestroyPart>
+    <isRanged>true</isRanged>
+    <makesAnimalsFlee>true</makesAnimalsFlee>
+	
+	<buildingDamageFactorImpassable>4</buildingDamageFactorImpassable>
+    <buildingDamageFactorPassable>2</buildingDamageFactorPassable>
+	
+	<modExtensions>
+      <li Class="SRA.DamageWorker_NoDamageFactor_Extension">
+        <penetrationFactor>1</penetrationFactor>
+      </li>
+    </modExtensions>
+  </DamageDef>
+</Defs>

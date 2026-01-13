@@ -1,0 +1,427 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <DesignatorDropdownGroupDef>
+        <defName>KT_HolographicMenu</defName>
+        <label>KT_Holographic</label>
+    </DesignatorDropdownGroupDef>
+	
+	<!--全息广告-->
+	<ThingDef ParentName="BuildingBase">
+		<defName>KT_Holographic_logo</defName>
+		<uiOrder>1500</uiOrder> <!-- UI栏顺序 -->
+		<label>"Decorative" Holographic projection (logo)</label>
+		<description>The symbols used by various UF convention countries in the past are not remembered by the extradimensional beings as to what power they once belonged to; they were simply created because they thought they looked good.</description>
+		<designatorDropdown>KT_HolographicMenu</designatorDropdown>
+		<!--材质定义-->
+		<altitudeLayer>Building</altitudeLayer>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<designationCategory>KT_designation_group</designationCategory> <!-- 指定分类：联合 -->
+		<graphicData>
+			<drawSize>(1,1)</drawSize>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>TransparentPostLight</shaderType>
+			<texPath>Things/Building/KT_Holographic/KT_HolographicBase</texPath>
+		</graphicData>
+		<building>
+            <destroySound>BuildingDestroyed_Metal_Small</destroySound>
+	        <isEdifice>false</isEdifice>
+	        <canBuildNonEdificesUnder>true</canBuildNonEdificesUnder>
+        </building>
+		<clearBuildingArea>false</clearBuildingArea>
+		<!--基本属性-->
+		<size>(1,1)</size>
+		<pathCost>10</pathCost>
+		<stealable>true</stealable>
+		<tickerType>Normal</tickerType>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<passability>PassThroughOnly</passability>
+		<rotatable>false</rotatable> <!-- 可旋转 -->
+		<thingCategories>
+			<li>BuildingsMisc</li>
+		</thingCategories>
+		<!--基本状态-->
+		<costList>
+			<Plasteel>30</Plasteel>
+			<ComponentIndustrial>1</ComponentIndustrial>
+		</costList>
+		<statBases>
+			<Mass>10</Mass>
+			<Beauty>100</Beauty>
+			<Flammability>0</Flammability>
+			<MarketValue>1000</MarketValue>
+			<MaxHitPoints>100</MaxHitPoints>
+		</statBases>
+		<!--工作组件-->
+		<comps>
+			<!--电力损耗-->
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTrader</compClass>
+				<basePowerConsumption>300</basePowerConsumption>
+			</li>
+			<!--照明效果-->
+			<li Class="CompProperties_Glower">
+				<glowRadius>10</glowRadius>
+				<glowColor>(255,255,255,0)</glowColor>
+				<darklightToggle>true</darklightToggle>
+				<colorPickerEnabled>true</colorPickerEnabled>
+			</li>
+			<!--全息投影-->
+			<li Class="SRA.CompProperties_Holographic">
+				<!--透明程度-->
+				<opacity>0.75</opacity>
+				<!--浮动速度-->
+				<floatSpeed>0.03</floatSpeed>
+				<!--浮动行程-->
+				<floatAmplitude>0.3</floatAmplitude>
+				<!--手动切换时间间隔-->
+				<transitionDuration>100</transitionDuration>
+				<!--绘制层级-->
+				<altitudeLayer>MetaOverlays</altitudeLayer>
+				<!--自动循环时间间隔-->
+				<autoplayIntervalTicks>300</autoplayIntervalTicks>
+				<!--按钮材质-->
+				<uiIconPathNext>Things/Building/KT_Holographic/KT_UI_Nexticon</uiIconPathNext>
+				<uiIconPathAutoplay>Things/Building/KT_Holographic/KT_UI_Autoicon</uiIconPathAutoplay>
+				<!--按钮设置-->
+				<descNext>Holographic.DescNext</descNext>
+				<labelNext>Holographic.LabelNext</labelNext>
+				<descAutoplay>Holographic.DescAutoplay</descAutoplay>
+				<labelAutoplay>Holographic.LabelAutoplay</labelAutoplay>
+				<disableReasonNoPower>Holographic.DisableReasonNoPower</disableReasonNoPower>
+				<disableReasonChanging>Holographic.DisableReasonChanging</disableReasonChanging>
+				<!--广告内容-->
+				<graphics>
+					<li>
+						<drawSize>(5, 10)</drawSize>
+						<drawOffset>(0, 0, 4)</drawOffset>
+						<graphicClass>Graphic_Single</graphicClass>
+						<shaderType>TransparentPostLight</shaderType>
+						<texPath>Things/Building/KT_Holographic/KT_Holographic_logo_A</texPath>
+					</li>
+                    <li>
+						<drawSize>(5, 10)</drawSize>
+						<drawOffset>(0, 0, 4.5)</drawOffset>
+						<graphicClass>Graphic_Single</graphicClass>
+						<shaderType>TransparentPostLight</shaderType>
+						<texPath>Things/Building/KT_Holographic/KT_Holographic_logo_B</texPath>
+					</li>
+					<li>
+						<drawSize>(5, 10)</drawSize>
+						<drawOffset>(0, 0, 4.5)</drawOffset>
+						<graphicClass>Graphic_Single</graphicClass>
+						<shaderType>TransparentPostLight</shaderType>
+						<texPath>Things/Building/KT_Holographic/KT_Holographic_logo_C</texPath>
+					</li>
+					<li>
+						<drawSize>(5, 10)</drawSize>
+						<drawOffset>(0, 0, 4.5)</drawOffset>
+						<graphicClass>Graphic_Single</graphicClass>
+						<shaderType>TransparentPostLight</shaderType>
+						<texPath>Things/Building/KT_Holographic/KT_Holographic_logo_D</texPath>
+					</li>
+					<li>
+						<drawSize>(5, 10)</drawSize>
+						<drawOffset>(0, 0, 4.5)</drawOffset>
+						<graphicClass>Graphic_Single</graphicClass>
+						<shaderType>TransparentPostLight</shaderType>
+						<texPath>Things/Building/KT_Holographic/KT_Holographic_logo_E</texPath>
+					</li>
+					<li>
+						<drawSize>(5, 10)</drawSize>
+						<drawOffset>(0, 0, 4.5)</drawOffset>
+						<graphicClass>Graphic_Single</graphicClass>
+						<shaderType>TransparentPostLight</shaderType>
+						<texPath>Things/Building/KT_Holographic/KT_Holographic_logo_F</texPath>
+					</li>
+				</graphics>
+			</li>
+		</comps>
+	</ThingDef>
+	
+	<ThingDef ParentName="BuildingBase">
+		<defName>KT_Holographic_logo_small</defName>
+		<label>"Decorative" Holographic projection (Small logo)</label>
+		<uiOrder>1500</uiOrder> <!-- UI栏顺序 -->
+		<description>The symbols used by various UF convention countries in the past are not remembered by the extradimensional beings as to what power they once belonged to; they were simply created because they thought they looked good.</description>
+		<designatorDropdown>KT_HolographicMenu</designatorDropdown>
+		<!--材质定义-->
+		<altitudeLayer>Building</altitudeLayer>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<designationCategory>KT_designation_group</designationCategory> <!-- 指定分类：联合 -->
+		<graphicData>
+			<drawSize>(1,1)</drawSize>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>TransparentPostLight</shaderType>
+			<texPath>Things/Building/KT_Holographic/KT_HolographicBase</texPath>
+		</graphicData>
+		<building>
+            <destroySound>BuildingDestroyed_Metal_Small</destroySound>
+	        <isEdifice>false</isEdifice>
+	        <canBuildNonEdificesUnder>true</canBuildNonEdificesUnder>
+        </building>
+		<clearBuildingArea>false</clearBuildingArea>
+		<!--基本属性-->
+		<size>(1,1)</size>
+		<pathCost>10</pathCost>
+		<stealable>true</stealable>
+		<tickerType>Normal</tickerType>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<passability>PassThroughOnly</passability>
+		<rotatable>false</rotatable> <!-- 可旋转 -->
+		<thingCategories>
+			<li>BuildingsMisc</li>
+		</thingCategories>
+		<!--基本状态-->
+		<costList>
+			<Plasteel>30</Plasteel>
+			<ComponentIndustrial>1</ComponentIndustrial>
+		</costList>
+		<statBases>
+			<Mass>10</Mass>
+			<Beauty>100</Beauty>
+			<Flammability>0</Flammability>
+			<MarketValue>1000</MarketValue>
+			<MaxHitPoints>100</MaxHitPoints>
+		</statBases>
+		<!--工作组件-->
+		<comps>
+			<!--电力损耗-->
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTrader</compClass>
+				<basePowerConsumption>300</basePowerConsumption>
+			</li>
+			<!--照明效果-->
+			<li Class="CompProperties_Glower">
+				<glowRadius>10</glowRadius>
+				<glowColor>(255,255,255,0)</glowColor>
+				<darklightToggle>true</darklightToggle>
+				<colorPickerEnabled>true</colorPickerEnabled>
+			</li>
+			<!--全息投影-->
+			<li Class="SRA.CompProperties_Holographic">
+				<!--透明程度-->
+				<opacity>0.75</opacity>
+				<!--浮动速度-->
+				<floatSpeed>0.03</floatSpeed>
+				<!--浮动行程-->
+				<floatAmplitude>0.3</floatAmplitude>
+				<!--手动切换时间间隔-->
+				<transitionDuration>100</transitionDuration>
+				<!--绘制层级-->
+				<altitudeLayer>MetaOverlays</altitudeLayer>
+				<!--自动循环时间间隔-->
+				<autoplayIntervalTicks>300</autoplayIntervalTicks>
+				<!--按钮材质-->
+				<uiIconPathNext>Things/Building/KT_Holographic/KT_UI_Nexticon</uiIconPathNext>
+				<uiIconPathAutoplay>Things/Building/KT_Holographic/KT_UI_Autoicon</uiIconPathAutoplay>
+				<!--按钮设置-->
+				<descNext>Holographic.DescNext</descNext>
+				<labelNext>Holographic.LabelNext</labelNext>
+				<descAutoplay>Holographic.DescAutoplay</descAutoplay>
+				<labelAutoplay>Holographic.LabelAutoplay</labelAutoplay>
+				<disableReasonNoPower>Holographic.DisableReasonNoPower</disableReasonNoPower>
+				<disableReasonChanging>Holographic.DisableReasonChanging</disableReasonChanging>
+				<!--广告内容-->
+				<graphics>
+					<li>
+						<drawSize>(5, 10)</drawSize>
+						<drawOffset>(0, 0, 4)</drawOffset>
+						<graphicClass>Graphic_Single</graphicClass>
+						<shaderType>TransparentPostLight</shaderType>
+						<texPath>Things/Building/KT_Holographic/KT_Holographic_logo_small_A</texPath>
+					</li>
+                    <li>
+						<drawSize>(5, 10)</drawSize>
+						<drawOffset>(0, 0, 4.5)</drawOffset>
+						<graphicClass>Graphic_Single</graphicClass>
+						<shaderType>TransparentPostLight</shaderType>
+						<texPath>Things/Building/KT_Holographic/KT_Holographic_logo_small_B</texPath>
+					</li>
+					<li>
+						<drawSize>(5, 10)</drawSize>
+						<drawOffset>(0, 0, 4)</drawOffset>
+						<graphicClass>Graphic_Single</graphicClass>
+						<shaderType>TransparentPostLight</shaderType>
+						<texPath>Things/Building/KT_Holographic/KT_Holographic_logo_small_C</texPath>
+					</li>
+                    <li>
+						<drawSize>(5, 10)</drawSize>
+						<drawOffset>(0, 0, 4.5)</drawOffset>
+						<graphicClass>Graphic_Single</graphicClass>
+						<shaderType>TransparentPostLight</shaderType>
+						<texPath>Things/Building/KT_Holographic/KT_Holographic_logo_small_D</texPath>
+					</li>
+					<li>
+						<drawSize>(5, 10)</drawSize>
+						<drawOffset>(0, 0, 4)</drawOffset>
+						<graphicClass>Graphic_Single</graphicClass>
+						<shaderType>TransparentPostLight</shaderType>
+						<texPath>Things/Building/KT_Holographic/KT_Holographic_logo_small_E</texPath>
+					</li>
+                    <li>
+						<drawSize>(5, 10)</drawSize>
+						<drawOffset>(0, 0, 4.5)</drawOffset>
+						<graphicClass>Graphic_Single</graphicClass>
+						<shaderType>TransparentPostLight</shaderType>
+						<texPath>Things/Building/KT_Holographic/KT_Holographic_logo_small_F</texPath>
+					</li>
+				</graphics>
+			</li>
+		</comps>
+	</ThingDef>
+	
+	<!--全息广告-->
+	<ThingDef ParentName="BuildingBase">
+		<defName>KT_Holographic_advertisement</defName>
+		<label>"Decorative" Holographic projection (Advertisement)</label>
+		<description>Rubbish advertising—only a fool would believe it.</description>
+		<uiOrder>1500</uiOrder> <!-- UI栏顺序 -->
+		<designatorDropdown>KT_HolographicMenu</designatorDropdown>
+		<!--材质定义-->
+		<altitudeLayer>Building</altitudeLayer>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<designationCategory>KT_designation_group</designationCategory> <!-- 指定分类：联合 -->
+		<graphicData>
+			<drawSize>(1,1)</drawSize>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>TransparentPostLight</shaderType>
+			<texPath>Things/Building/KT_Holographic/KT_HolographicBase</texPath>
+		</graphicData>
+		<building>
+            <destroySound>BuildingDestroyed_Metal_Small</destroySound>
+	        <isEdifice>false</isEdifice>
+	        <canBuildNonEdificesUnder>true</canBuildNonEdificesUnder>
+        </building>
+		<clearBuildingArea>false</clearBuildingArea>
+		<!--基本属性-->
+		<size>(1,1)</size>
+		<pathCost>10</pathCost>
+		<stealable>true</stealable>
+		<tickerType>Normal</tickerType>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<passability>PassThroughOnly</passability>
+		<rotatable>false</rotatable> <!-- 可旋转 -->
+		<thingCategories>
+			<li>BuildingsMisc</li>
+		</thingCategories>
+		<!--基本状态-->
+		<costList>
+			<Plasteel>30</Plasteel>
+			<ComponentIndustrial>1</ComponentIndustrial>
+		</costList>
+		<statBases>
+			<Mass>10</Mass>
+			<Beauty>100</Beauty>
+			<Flammability>0</Flammability>
+			<MarketValue>1000</MarketValue>
+			<MaxHitPoints>100</MaxHitPoints>
+		</statBases>
+		<!--工作组件-->
+		<comps>
+			<!--电力损耗-->
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTrader</compClass>
+				<basePowerConsumption>300</basePowerConsumption>
+			</li>
+			<!--照明效果-->
+			<li Class="CompProperties_Glower">
+				<glowRadius>10</glowRadius>
+				<glowColor>(255,255,255,0)</glowColor>
+				<darklightToggle>true</darklightToggle>
+				<colorPickerEnabled>true</colorPickerEnabled>
+			</li>
+			<!--全息投影-->
+			<li Class="SRA.CompProperties_Holographic">
+				<!--透明程度-->
+				<opacity>0.75</opacity>
+				<!--浮动速度-->
+				<floatSpeed>0.03</floatSpeed>
+				<!--浮动行程-->
+				<floatAmplitude>0.3</floatAmplitude>
+				<!--手动切换时间间隔-->
+				<transitionDuration>100</transitionDuration>
+				<!--绘制层级-->
+				<altitudeLayer>MetaOverlays</altitudeLayer>
+				<!--自动循环时间间隔-->
+				<autoplayIntervalTicks>300</autoplayIntervalTicks>
+				<!--按钮材质-->
+				<uiIconPathNext>Things/Building/KT_Holographic/KT_UI_Nexticon</uiIconPathNext>
+				<uiIconPathAutoplay>Things/Building/KT_Holographic/KT_UI_Autoicon</uiIconPathAutoplay>
+				<!--按钮设置-->
+				<descNext>Holographic.DescNext</descNext>
+				<labelNext>Holographic.LabelNext</labelNext>
+				<descAutoplay>Holographic.DescAutoplay</descAutoplay>
+				<labelAutoplay>Holographic.LabelAutoplay</labelAutoplay>
+				<disableReasonNoPower>Holographic.DisableReasonNoPower</disableReasonNoPower>
+				<disableReasonChanging>Holographic.DisableReasonChanging</disableReasonChanging>
+				<!--广告内容-->
+				<graphics>
+					<li>
+						<drawSize>(2.5, 5)</drawSize>
+						<drawOffset>(0, 0, 3)</drawOffset>
+						<graphicClass>Graphic_Single</graphicClass>
+						<shaderType>TransparentPostLight</shaderType>
+						<texPath>Things/Building/KT_Holographic/KT_Holographic_advertisement_A</texPath>
+					</li>
+                    <li>
+						<drawSize>(2.5, 5)</drawSize>
+						<drawOffset>(0, 0, 3)</drawOffset>
+						<graphicClass>Graphic_Single</graphicClass>
+						<shaderType>TransparentPostLight</shaderType>
+						<texPath>Things/Building/KT_Holographic/KT_Holographic_advertisement_B</texPath>
+					</li>
+					<li>
+						<drawSize>(2.5, 5)</drawSize>
+						<drawOffset>(0, 0, 3)</drawOffset>
+						<graphicClass>Graphic_Single</graphicClass>
+						<shaderType>TransparentPostLight</shaderType>
+						<texPath>Things/Building/KT_Holographic/KT_Holographic_advertisement_C</texPath>
+					</li>
+					<li>
+						<drawSize>(2.5, 5)</drawSize>
+						<drawOffset>(0, 0, 3)</drawOffset>
+						<graphicClass>Graphic_Single</graphicClass>
+						<shaderType>TransparentPostLight</shaderType>
+						<texPath>Things/Building/KT_Holographic/KT_Holographic_advertisement_D</texPath>
+					</li>
+					<li>
+						<drawSize>(2.5, 5)</drawSize>
+						<drawOffset>(0, 0, 3)</drawOffset>
+						<graphicClass>Graphic_Single</graphicClass>
+						<shaderType>TransparentPostLight</shaderType>
+						<texPath>Things/Building/KT_Holographic/KT_Holographic_advertisement_E</texPath>
+					</li>
+					<li>
+						<drawSize>(2.5, 5)</drawSize>
+						<drawOffset>(0, 0, 3)</drawOffset>
+						<graphicClass>Graphic_Single</graphicClass>
+						<shaderType>TransparentPostLight</shaderType>
+						<texPath>Things/Building/KT_Holographic/KT_Holographic_advertisement_F</texPath>
+					</li>
+					<li>
+						<drawSize>(2.5, 5)</drawSize>
+						<drawOffset>(0, 0, 3)</drawOffset>
+						<graphicClass>Graphic_Single</graphicClass>
+						<shaderType>TransparentPostLight</shaderType>
+						<texPath>Things/Building/KT_Holographic/KT_Holographic_advertisement_G</texPath>
+					</li>
+					<li>
+						<drawSize>(2.5, 5)</drawSize>
+						<drawOffset>(0, 0, 3)</drawOffset>
+						<graphicClass>Graphic_Single</graphicClass>
+						<shaderType>TransparentPostLight</shaderType>
+						<texPath>Things/Building/KT_Holographic/KT_Holographic_advertisement_H</texPath>
+					</li>
+					<li>
+						<drawSize>(2.5, 5)</drawSize>
+						<drawOffset>(0, 0, 3)</drawOffset>
+						<graphicClass>Graphic_Single</graphicClass>
+						<shaderType>TransparentPostLight</shaderType>
+						<texPath>Things/Building/KT_Holographic/KT_Holographic_advertisement_I</texPath>
+					</li>
+				</graphics>
+			</li>
+		</comps>
+	</ThingDef>
+</Defs>

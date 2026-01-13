@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+ <KT_Main_battlewalker.label>"Vanguard" Combat Walker</KT_Main_battlewalker.label>
+  <KT_Main_battlewalker.description>A small to medium-sized unmanned walker used by a certain Pact Nation. It can be equipped with various loadouts to adapt to different tactical requirements. Its shield generator and damage absorption field effectively compensate for the frame's fragility, and in extreme situations, it can even withstand a volley of fire from a shipgirl.</KT_Main_battlewalker.description>
+  
+  <!-- EN: KT_Main_battlewalker_PawnKind_main_autogun -->
+  <KT_Main_battlewalker_PawnKind_main_autogun.label>"Vanguard" Combat Walker</KT_Main_battlewalker_PawnKind_main_autogun.label>
+  
+  <!-- EN: KT_Main_battlewalker_PawnKind_main_gatling -->
+  <KT_Main_battlewalker_PawnKind_main_gatling.label>"Vanguard" Combat Walker</KT_Main_battlewalker_PawnKind_main_gatling.label>
+  
+</LanguageData>

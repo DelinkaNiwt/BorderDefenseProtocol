@@ -1,0 +1,203 @@
+<Defs>
+	<ThingDef ParentName="KT_AutocannonTurret">
+    <defName>KTPLASMACANNON</defName>
+    <label>KTPLASMACANNON</label>
+	<thingClass>SRA.Building_TurretGunHasSpeed</thingClass>
+	<modExtensions>
+	   <li Class="SRA.ModExt_HasSpeedTurret"><!-- SRA炮塔转速 -->
+		 <speed>1.1</speed>
+	   </li>
+  	</modExtensions>
+    <description>KTPLASMACANNON</description>
+    <uiIconPath>Things/Building/Security/KTPLASMACANNON_Ico</uiIconPath>
+	<uiOrder>1900</uiOrder> <!-- UI栏顺序 -->
+	<graphicData>
+		<texPath>Things/Building/Security/KT381MMCANNON_Base</texPath>
+		<graphicClass>Graphic_Single</graphicClass>
+		<drawSize>(12,12)</drawSize>
+	</graphicData>
+	<size>(5,5)</size>
+    <statBases>
+	  <MaxHitPoints>5000</MaxHitPoints>
+	  <Flammability>0</Flammability>
+      <ShootingAccuracyTurret>1</ShootingAccuracyTurret>
+	  <WorkToBuild>2400</WorkToBuild>
+    </statBases>
+	<drawerType>MapMeshAndRealTime</drawerType>
+	<tickerType>Normal</tickerType>
+	<killedLeavings>
+      <ChunkSlagSteel>3</ChunkSlagSteel>
+    </killedLeavings>
+    <costList>
+      <Steel>1200</Steel>
+	  <Plasteel>300</Plasteel>
+      <ComponentIndustrial>20</ComponentIndustrial>
+	  <ComponentSpacer>10</ComponentSpacer>
+    </costList>
+	
+	<damageMultipliers>
+	  <li>
+        <damageDef>EMP</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+	  <li>
+        <damageDef>Stun</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+	
+    <comps>
+	  <li Class="SRA.CompProperties_ForceTargetable" /><!-- 善良手操 -->
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>5000</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Breakdownable"/>
+    </comps>
+
+    <building>
+      <turretGunDef>Gun_KTPLASMACANNON</turretGunDef>
+	  <ai_combatDangerous>true</ai_combatDangerous> <!-- AI认为它具有危险性 -->
+	  <turretTopDrawSize>13</turretTopDrawSize>
+	  <turretTopOffset>(0, 0)</turretTopOffset>
+      <turretBurstCooldownTime>8</turretBurstCooldownTime>
+    </building>
+    <researchPrerequisites>
+      <li>KT_Base_t3_energy_turret</li>
+    </researchPrerequisites>
+	<designationCategory>KT_designation_group</designationCategory> <!-- 指定分类：防卫 -->
+
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>Gun_KTPLASMACANNON</defName>
+    <label>Gun_KTPLASMACANNON</label>
+    <description>Gun_KTPLASMACANNON</description>
+    <graphicData>
+      <texPath>Things/Building/Security/KTPLASMACANNON</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(3.8,3.8)</drawSize>
+    </graphicData>
+    <statBases>
+      <AccuracyTouch>0.40</AccuracyTouch>
+      <AccuracyShort>0.40</AccuracyShort>
+      <AccuracyMedium>0.35</AccuracyMedium>
+      <AccuracyLong>0.30</AccuracyLong>
+      <RangedWeapon_Cooldown>8</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>80</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+	<verbs>
+      <li>
+        <verbClass>SRA.Verb_ShootWithOffset</verbClass> <!-- 射击行为 -->
+        <hasStandardCommand>true</hasStandardCommand> <!-- 标准命令 -->
+        <defaultProjectile>Bullet_KTPLASMACANNON</defaultProjectile> <!-- 默认子弹 -->
+        <warmupTime>4</warmupTime> <!-- 预热时间 -->
+		<requireLineOfSight>false</requireLineOfSight><!-- 只能直线射击 -->
+		<minRange>30</minRange>
+        <range>500</range> <!-- 射程 -->
+        <burstShotCount>2</burstShotCount> <!-- 每次射击子弹数量 -->
+        <soundCast>KTPLASMACANNONRound</soundCast> <!-- 射击音效 -->
+        <soundCastTail>GunTail_Heavy</soundCastTail> <!-- 尾音效 -->
+        <muzzleFlashScale>80</muzzleFlashScale> <!-- 火光规模 -->
+        <consumeFuelPerShot>1</consumeFuelPerShot> <!-- 每发子弹消耗的燃料 -->
+		<targetParams>
+			<canTargetLocations>true</canTargetLocations>
+		</targetParams>
+      </li>
+    </verbs>
+	<weaponTags>
+	  	<li>KT_weapon</li>
+   	</weaponTags>
+	<modExtensions>
+      <li Class="MuzzleFlash.MuzzleFlashProps" MayRequire="IssacZhuang.MuzzleFlash">
+         <def>MF_ChargedMuzzleFalsh</def>
+         <drawSize>(4)</drawSize>
+         <offsets>
+           <li>(4,-0.3)</li>
+		   <li>(4,0.3)</li>
+         </offsets>
+         <isAlternately>true</isAlternately>
+     </li>
+	 <li Class="SRA.ModExtension_ShootWithOffset">
+         <offsets>
+           <li>(0.3,-4.5)</li>
+		   <li>(-0.3,-4.5)</li><!-- 第一个参数是东西（负数为东）。第二个参数为南北（负数为朝北） -->
+         </offsets>
+     </li>		 
+   </modExtensions>
+  </ThingDef>
+  
+  <ThingDef>
+        <defName>Bullet_KTPLASMACANNON</defName>
+        <label>Bullet_KTPLASMACANNON</label>
+        <thingClass>SRA.Projectile_MultiExplosive</thingClass>
+        <category>Projectile</category>
+        <tickerType>Normal</tickerType>
+        <altitudeLayer>Projectile</altitudeLayer>
+        <graphicData>
+            <texPath>Things/Projectile/Bullet_kt_plasma</texPath> <!-- 子弹贴图路径 -->
+            <graphicClass>Graphic_Single</graphicClass> <!-- 使用单一图形 -->
+			<shaderType>MoteGlow</shaderType>
+      		<drawSize>(2.5)</drawSize>
+        </graphicData>
+        <projectile>
+            <damageDef>KTBLUEBomb</damageDef>
+            <explosionRadius>4</explosionRadius>
+			<stoppingPower>1</stoppingPower>
+            <speed>160</speed>
+            <damageAmountBase>160</damageAmountBase>
+            <arcHeightFactor>0</arcHeightFactor>
+            <soundExplode>Explosion_Rocket</soundExplode>
+			<flyOverhead>true</flyOverhead>
+			<armorPenetrationBase>1</armorPenetrationBase>
+        </projectile>
+		
+		<modExtensions>
+		  <li Class="SRA.TailBulletDef">
+       		   <tailFleckDef>KT_Fleck_blue_particle_Tail_II</tailFleckDef>
+      	 	   <fleckMakeFleckTickMax>10</fleckMakeFleckTickMax><!-- 疑似无效 -->
+			   <fleckDelayTicks>5</fleckDelayTicks><!-- 出膛后多久出现轨迹 -->
+			   <fleckMakeFleckNum>1</fleckMakeFleckNum>
+     	    </li>
+          <li Class="SRA.MultiExplosiveExtension">
+         <multiexplosions>
+          <li>
+            <radius>4</radius>
+            <damageDef>KTBLUEBomb</damageDef>
+            <damageAmount>160</damageAmount>
+            <armorPenetration>1</armorPenetration>
+            <explosionSound>Explosion_Rocket</explosionSound>
+            <explosionDamageFalloff>true</explosionDamageFalloff><!-- 默认true -->
+            <onlyAntiHostile>false</onlyAntiHostile> <!-- 智能弹药：这个爆炸只伤害敌对目标，默认false -->
+            <!-- 现阶段就支持这么多参数 -->
+          </li>
+		  <li>
+			<radius>4</radius>
+			<damageDef>EMP</damageDef>
+			<damageAmount>50</damageAmount>
+			<armorPenetration>8</armorPenetration>
+			<explosionSound>Explosion_EMP</explosionSound>
+			<explosionDamageFalloff>true</explosionDamageFalloff>
+			<onlyAntiHostile>true</onlyAntiHostile>
+		  </li>
+        </multiexplosions>
+        <bulletLaunches>
+          <li>
+            <projectileDef>KT_Bullet_shield_overloader</projectileDef>
+            <bulletCount>4</bulletCount>
+            <angleRange>120</angleRange>
+            <distanceRange>
+              <min>1</min>
+              <max>1</max>
+            </distanceRange>
+          </li>
+        </bulletLaunches>
+      </li>
+    </modExtensions>
+  </ThingDef>	
+
+</Defs>

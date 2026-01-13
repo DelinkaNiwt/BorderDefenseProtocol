@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs> 
+  <!-- 低空支援 -->
+  <AbilityDef>
+    <defName>KT_FlyOver_Bomber_Attack</defName>
+    <label>KT_FlyOver_Bomber_Attack</label>
+    <description>KT_FlyOver_Bomber_Attack</description>
+    <iconPath>KT_UI/UI_Bomber</iconPath>
+	<cooldownPerCharge>true</cooldownPerCharge>
+    <cooldownTicksRange>24000</cooldownTicksRange>
+	<charges>3</charges>
+	
+    <hotKey>Misc12</hotKey>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <drawAimPie>false</drawAimPie>
+      <requireLineOfSight>false</requireLineOfSight>
+      <warmupTime>1</warmupTime>
+      <range>120</range>
+      <targetable>true</targetable>
+      <targetParams>
+        <canTargetSelf>false</canTargetSelf>
+        <canTargetLocations>true</canTargetLocations>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <!-- <li Class="SRA.CompProperties_AircraftStrike">
+        <requiredAircraftType>ARA_HiveCorvette_Entity</requiredAircraftType>
+        <aircraftCooldownTicks>5000</aircraftCooldownTicks>
+        <aircraftsPerUse>1</aircraftsPerUse>
+      </li> -->
+      <li Class="SRA.CompProperties_AbilitySpawnFlyOver">
+        <flyOverDef>KT_FlyOver_Bomber</flyOverDef>
+        <flyOverType>GroundStrafing</flyOverType>
+        <flightSpeed>4</flightSpeed>
+        <altitude>20</altitude>
+        <playFlyOverSound>true</playFlyOverSound>
+        <approachType>Perpendicular</approachType>
+
+        <!-- 扫射参数 -->
+        <enableGroundStrafing>true</enableGroundStrafing>
+        <strafeWidth>4</strafeWidth>
+        <strafeLength>32</strafeLength>
+        <strafeFireChance>0</strafeFireChance>
+        <minStrafeProjectiles>12</minStrafeProjectiles>
+        <maxStrafeProjectiles>12</maxStrafeProjectiles>
+
+        <!-- 只传递信号，不传递具体参数 -->
+        <enableSectorSurveillance>true</enableSectorSurveillance>
+
+        <!-- 可视化 -->
+        <showStrafePreview>true</showStrafePreview>
+        <strafePreviewColor>(1.0,0.3,0.1,0.2)</strafePreviewColor>
+
+        <!-- 预览配置 -->
+        <showSectorPreview>true</showSectorPreview>
+        <sectorPreviewColor>(0.3,0.7,1.0,0.3)</sectorPreviewColor>
+      </li>
+    </comps>
+  </AbilityDef>
+  
+  
+  <AbilityDef>
+    <defName>KT_FlyOver_AX_Attack</defName>
+    <label>KT_FlyOver_AX_Attack</label>
+    <description>KT_FlyOver_AX_Attack</description>
+    <iconPath>KT_UI/UI_AX</iconPath>
+    <cooldownTicksRange>12000</cooldownTicksRange>
+	<cooldownPerCharge>true</cooldownPerCharge>
+	<charges>4</charges>
+    <hotKey>Misc12</hotKey>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <drawAimPie>false</drawAimPie>
+      <requireLineOfSight>false</requireLineOfSight>
+      <warmupTime>1</warmupTime>
+      <range>120</range>
+      <targetable>true</targetable>
+      <targetParams>
+        <canTargetSelf>false</canTargetSelf>
+        <canTargetLocations>true</canTargetLocations>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <!-- <li Class="SRA.CompProperties_AircraftStrike">
+        <requiredAircraftType>ARA_HiveCorvette_Entity</requiredAircraftType>
+        <aircraftCooldownTicks>5000</aircraftCooldownTicks>
+        <aircraftsPerUse>1</aircraftsPerUse>
+      </li> -->
+      <li Class="SRA.CompProperties_AbilitySpawnFlyOver">
+        <flyOverDef>KT_FlyOver_AX</flyOverDef>
+        <flyOverType>GroundStrafing</flyOverType>
+        <flightSpeed>6</flightSpeed>
+        <altitude>20</altitude>
+        <playFlyOverSound>true</playFlyOverSound>
+        <approachType>Perpendicular</approachType>
+
+        <!-- 扫射参数 -->
+        <enableGroundStrafing>true</enableGroundStrafing>
+        <strafeWidth>2</strafeWidth>
+        <strafeLength>60</strafeLength>
+        <strafeFireChance>0</strafeFireChance>
+        <minStrafeProjectiles>80</minStrafeProjectiles>
+        <maxStrafeProjectiles>100</maxStrafeProjectiles>
+
+        <!-- 只传递信号，不传递具体参数 -->
+        <enableSectorSurveillance>true</enableSectorSurveillance>
+
+        <!-- 可视化 -->
+        <showStrafePreview>true</showStrafePreview>
+        <strafePreviewColor>(1.0,0.3,0.1,0.2)</strafePreviewColor>
+
+        <!-- 预览配置 -->
+        <showSectorPreview>true</showSectorPreview>
+        <sectorPreviewColor>(0.3,0.7,1.0,0.3)</sectorPreviewColor>
+      </li>
+    </comps>
+  </AbilityDef>
+  
+  <AbilityDef>
+    <defName>KT_FlyOver_AX_5000KG_Attack</defName>
+    <label>KT_FlyOver_AX_5000KG_Attack</label>
+    <description>KT_FlyOver_AX_5000KG_Attack</description>
+    <iconPath>KT_UI/UI_AX_5000KG</iconPath>
+    <cooldownTicksRange>60000</cooldownTicksRange>
+	<cooldownPerCharge>true</cooldownPerCharge>
+	<charges>2</charges>
+    <hotKey>Misc12</hotKey>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <drawAimPie>false</drawAimPie>
+      <requireLineOfSight>false</requireLineOfSight>
+      <warmupTime>1</warmupTime>
+      <range>180</range>
+      <targetable>true</targetable>
+      <targetParams>
+        <canTargetSelf>false</canTargetSelf>
+        <canTargetLocations>true</canTargetLocations>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <!-- <li Class="SRA.CompProperties_AircraftStrike">
+        <requiredAircraftType>ARA_HiveCorvette_Entity</requiredAircraftType>
+        <aircraftCooldownTicks>5000</aircraftCooldownTicks>
+        <aircraftsPerUse>1</aircraftsPerUse>
+      </li> -->
+      <li Class="SRA.CompProperties_AbilitySpawnFlyOver">
+        <flyOverDef>KT_FlyOver_AX_5000KG</flyOverDef>
+        <flyOverType>GroundStrafing</flyOverType>
+        <flightSpeed>6</flightSpeed>
+        <altitude>20</altitude>
+        <playFlyOverSound>true</playFlyOverSound>
+        <approachType>Perpendicular</approachType>
+
+        <!-- 扫射参数 -->
+        <enableGroundStrafing>true</enableGroundStrafing>
+        <strafeWidth>2</strafeWidth>
+        <strafeLength>2</strafeLength>
+        <strafeFireChance>0</strafeFireChance>
+        <minStrafeProjectiles>1</minStrafeProjectiles>
+        <maxStrafeProjectiles>1</maxStrafeProjectiles>
+
+        <!-- 只传递信号，不传递具体参数 -->
+        <enableSectorSurveillance>true</enableSectorSurveillance>
+
+        <!-- 可视化 -->
+        <showStrafePreview>true</showStrafePreview>
+        <strafePreviewColor>(1.0,0.3,0.1,0.2)</strafePreviewColor>
+
+        <!-- 预览配置 -->
+        <showSectorPreview>true</showSectorPreview>
+        <sectorPreviewColor>(0.3,0.7,1.0,0.3)</sectorPreviewColor>
+      </li>
+    </comps>
+  </AbilityDef>
+  
+  <!-- 效果不行，不会打炮塔 -->
+  <AbilityDef>
+    <defName>KT_FlyOver_Supportship_Attack</defName>
+    <label>KT_FlyOver_Supportship_Attack</label>
+    <description>KT_FlyOver_Supportship_Attack</description>
+    <iconPath>KT_UI/UI_Supportship</iconPath>
+    <cooldownTicksRange>60000</cooldownTicksRange>
+	<cooldownPerCharge>true</cooldownPerCharge>
+	<charges>1</charges>
+    <hotKey>Misc12</hotKey>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <drawAimPie>false</drawAimPie>
+      <requireLineOfSight>false</requireLineOfSight>
+      <warmupTime>1</warmupTime>
+      <range>180</range>
+      <targetable>true</targetable>
+      <targetParams>
+        <canTargetSelf>false</canTargetSelf>
+        <canTargetLocations>true</canTargetLocations>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <!-- <li Class="SRA.CompProperties_AircraftStrike">
+        <requiredAircraftType>ARA_HiveCorvette_Entity</requiredAircraftType>
+        <aircraftCooldownTicks>5000</aircraftCooldownTicks>
+        <aircraftsPerUse>1</aircraftsPerUse>
+      </li> -->
+      <li Class="SRA.CompProperties_AbilitySpawnFlyOver">
+        <flyOverDef>KT_FlyOver_Supportship</flyOverDef>
+        <flyOverType>GroundStrafing</flyOverType>
+        <flightSpeed>0.5</flightSpeed>
+        <altitude>30</altitude>
+        <playFlyOverSound>true</playFlyOverSound>
+        <approachType>Perpendicular</approachType>
+
+        <!-- 扫射参数 -->
+        <enableGroundStrafing>true</enableGroundStrafing>
+        <strafeWidth>20</strafeWidth>
+        <strafeLength>20</strafeLength>
+        <strafeFireChance>0</strafeFireChance>
+        <minStrafeProjectiles>6</minStrafeProjectiles>
+        <maxStrafeProjectiles>8</maxStrafeProjectiles>
+		
+        <!-- 只传递信号，不传递具体参数 -->
+        <enableSectorSurveillance>true</enableSectorSurveillance>
+
+        <!-- 可视化 -->
+        <showStrafePreview>true</showStrafePreview>
+        <strafePreviewColor>(1.0,0.3,0.1,0.2)</strafePreviewColor>
+
+        <!-- 预览配置 -->
+        <showSectorPreview>true</showSectorPreview>
+        <sectorPreviewColor>(0.3,0.7,1.0,0.3)</sectorPreviewColor>
+      </li>
+    </comps>
+  </AbilityDef>
+  <!-- 轨道支援 -->
+  
+  <AbilityDef>
+    <defName>KT_FlyOver_Super_Destroyer_Attack</defName>
+    <label>KT_FlyOver_Super_Destroyer_Attack</label>
+    <description>KT_FlyOver_Super_Destroyer_Attack</description>
+    <iconPath>KT_UI/UI_Super_Destroyer</iconPath>
+    <cooldownTicksRange>60000</cooldownTicksRange>
+	<cooldownPerCharge>true</cooldownPerCharge>
+	<charges>1</charges>
+    <hotKey>Misc12</hotKey>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <drawAimPie>false</drawAimPie>
+      <requireLineOfSight>false</requireLineOfSight>
+      <warmupTime>1</warmupTime>
+      <range>120</range>
+      <targetable>true</targetable>
+      <targetParams>
+        <canTargetSelf>false</canTargetSelf>
+        <canTargetLocations>true</canTargetLocations>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <!-- <li Class="SRA.CompProperties_AircraftStrike">
+        <requiredAircraftType>ARA_HiveCorvette_Entity</requiredAircraftType>
+        <aircraftCooldownTicks>5000</aircraftCooldownTicks>
+        <aircraftsPerUse>1</aircraftsPerUse>
+      </li> -->
+      <li Class="SRA.CompProperties_AbilitySpawnFlyOver">
+        <flyOverDef>KT_FlyOver_Super_Destroyer</flyOverDef>
+        <flyOverType>GroundStrafing</flyOverType>
+        <flightSpeed>0.4</flightSpeed>
+        <altitude>20</altitude>
+        <playFlyOverSound>true</playFlyOverSound>
+        <approachType>Perpendicular</approachType>
+
+        <!-- 只传递信号，不传递具体参数 -->
+        <enableSectorSurveillance>true</enableSectorSurveillance>
+
+        <!-- 可视化 -->
+        <showStrafePreview>true</showStrafePreview>
+        <strafePreviewColor>(1.0,0.3,0.1,0.2)</strafePreviewColor>
+
+        <!-- 预览配置 -->
+        <showSectorPreview>true</showSectorPreview>
+        <sectorPreviewColor>(0.3,0.7,1.0,0.3)</sectorPreviewColor>
+      </li>
+    </comps>
+  </AbilityDef>
+</Defs>

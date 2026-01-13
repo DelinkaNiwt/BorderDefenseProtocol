@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>	 
+  <ThingDef ParentName="ApparelBase">
+    <defName>KT_HeavyShield</defName>
+    <label>KT_HeavyShield</label>
+    <description>KT_HeavyShield</description>
+    <techLevel>Industrial</techLevel>
+    
+    <recipeMaker>
+      <unfinishedThingDef>UnfinishedPack</unfinishedThingDef>
+      <researchPrerequisite>KT_Base_Workbench</researchPrerequisite>
+      <recipeUsers>
+        <li>KT_SWorkbench</li>
+      </recipeUsers>
+      <useIngredientsForColor>false</useIngredientsForColor>
+      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+      <workSkill>Crafting</workSkill>
+      <effectWorking>Smith</effectWorking>
+      <soundWorking>Recipe_Smith</soundWorking>
+      <skillRequirements>
+        <Crafting>5</Crafting>
+      </skillRequirements>
+      <displayPriority>510</displayPriority>
+    </recipeMaker>
+    <costList>
+      <Steel>450</Steel>
+	  <Plasteel>50</Plasteel>
+	  <ComponentIndustrial>5</ComponentIndustrial>
+	  <Uranium>5</Uranium>
+    </costList>
+	<equippedStatOffsets>
+		<IncomingDamageFactor>-0.1</IncomingDamageFactor>
+		<MeleeDodgeChance>-0.25</MeleeDodgeChance>
+		<StaggerDurationFactor>-0.3</StaggerDurationFactor>
+		<MoveSpeed>-0.15</MoveSpeed>
+		<StuffEffectMultiplierArmor>0.85</StuffEffectMultiplierArmor>
+		<ArmorRating_Sharp>1</ArmorRating_Sharp>
+		<ArmorRating_Blunt>1</ArmorRating_Blunt>
+		<ArmorRating_Heat>1</ArmorRating_Heat>
+	</equippedStatOffsets>
+    <graphicData>
+      <texPath>Things/Apparel/KT_HeavyShield/KT_HeavyShield_display</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.4</drawSize>
+    </graphicData>
+    <tickerType>Normal</tickerType>
+	
+    <statBases>
+       <MaxHitPoints>2500</MaxHitPoints>
+       <WorkToMake>30000</WorkToMake>
+       <Mass>4</Mass>
+       <Flammability>0</Flammability>
+       <EquipDelay>2</EquipDelay>
+    </statBases>
+	
+    <thingCategories>
+      <li>ApparelUtility</li>
+    </thingCategories>
+	
+    <generateAllowChance>0.15</generateAllowChance>
+    <apparel>
+	   <wornGraphicPath>Things/Apparel/KT_HeavyShield/KT_HeavyShield</wornGraphicPath>
+	   <useWornGraphicMask>true</useWornGraphicMask>
+       <drawData>
+			<dataNorth>
+				<offset>(-0.2, -0.4, 0.0)</offset>
+			</dataNorth>
+			<dataSouth>
+				<offset>(0.4, 0.3, -0.2)</offset>
+			</dataSouth>
+            <dataWest>
+            	<offset>(-0.1, 0.4, -0.15)</offset>
+            </dataWest>
+            <dataEast>
+            	<offset>(0.5, -0.4, 0.0)</offset>
+            </dataEast>
+            <scale>1.0</scale>
+      </drawData>
+      <countsAsClothingForNudity>false</countsAsClothingForNudity>
+      <careIfWornByCorpse>false</careIfWornByCorpse>
+      <bodyPartGroups>
+		<li>Torso</li>
+		<li>Neck</li>
+		<li>Arms</li>
+		<li>Legs</li>
+		<li>Eyes</li>
+		<li>Mouth</li>
+	  </bodyPartGroups>
+      <layers>
+          <li>Belt</li>
+      </layers>
+    </apparel>
+    <allowedArchonexusCount>1</allowedArchonexusCount>
+    <tradeTags>
+      <li>Clothing</li>
+      <li>Armor</li>
+    </tradeTags>
+  </ThingDef>
+</Defs>

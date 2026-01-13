@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ThingDef Name="BodyPartProstheticKTBase" ParentName="BodyPartBase" Abstract="True">
+    <techLevel>Spacer</techLevel>
+    <thingCategories>
+      <li>BodyPartsProsthetic</li>
+    </thingCategories>
+    <recipeMaker>
+      <displayPriority>600</displayPriority>
+	  <unfinishedThingDef>UnfinishedPack</unfinishedThingDef>
+    </recipeMaker>
+  </ThingDef>
+  
+  <HediffDef ParentName="ImplantHediffBase">
+    <defName>KT_Light_Air_Strike</defName>
+	<defaultLabelColor>(255, 70, 0)</defaultLabelColor>
+    <label>KT_Light_Air_Strike_Chip</label>
+    <labelNoun>KT_Light_Air_Strike_Chip</labelNoun>
+    <description>KT_Light_Air_Strike_Chip</description>
+    <descriptionHyperlinks><ThingDef>KT_Light_Air_Strike_Chip</ThingDef></descriptionHyperlinks>
+    <stages>
+      <li>
+		<capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>0.5</offset>
+          </li>
+		</capMods>
+		<statOffsets>
+           <MechBandwidth>25</MechBandwidth>
+		   <MechRemoteRepairDistance>20</MechRemoteRepairDistance>
+		   <MechFormingSpeed>5</MechFormingSpeed>
+		   <MechRepairSpeed>8</MechRepairSpeed>
+         </statOffsets>
+      </li>
+    </stages>
+    <spawnThingOnRemoved>KT_Light_Air_Strike_Chip</spawnThingOnRemoved>
+	
+	<comps>
+        <li Class="HediffCompProperties_GiveAbility">
+          <abilityDefs>
+		    <li>KT_FlyOver_AX_Attack</li>
+			<li>KT_FlyOver_AX_5000KG_Attack</li>
+            <li>KT_FlyOver_Bomber_Attack</li>
+          </abilityDefs>
+        </li>
+    </comps>
+  </HediffDef>
+  
+  <ThingDef ParentName="BodyPartProstheticKTBase">
+    <defName>KT_Light_Air_Strike_Chip</defName>
+    <label>KT_Light_Air_Strike_Chip</label>
+    <description>KT_Light_Air_Strike_Chip</description>
+    <descriptionHyperlinks><RecipeDef>InstallKTLASC</RecipeDef></descriptionHyperlinks>
+	<graphicData>
+      <texPath>Things/Others/KT_Chip</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.00</drawSize>
+    </graphicData>
+	<statBases>
+		<WorkToMake>6000</WorkToMake>
+		<MarketValue>3200</MarketValue>
+		<Mass>0.2</Mass>
+	</statBases>
+    <thingSetMakerTags>
+      <li>RewardStandardLowFreq</li>
+    </thingSetMakerTags>
+    <costList>
+      <Steel>50</Steel>
+	  <Plasteel>80</Plasteel>
+	  <Gold>50</Gold>
+      <ComponentIndustrial>10</ComponentIndustrial>
+	  <ComponentSpacer>20</ComponentSpacer>
+    </costList>
+	<recipeMaker>
+		  <researchPrerequisite>KT_chip_tech</researchPrerequisite>
+		  <skillRequirements>
+			<Crafting>12</Crafting>
+		  </skillRequirements>
+		  <recipeUsers Inherit="False">
+			<li>KT_SWorkbench</li>
+		  </recipeUsers>
+		  <displayPriority>200</displayPriority>
+	</recipeMaker>
+  </ThingDef>
+  
+  <RecipeDef ParentName="SurgeryInstallImplantBase">
+    <defName>InstallKTLASC</defName>
+    <label>install Light Air Strike Chip</label>
+    <description>Install a Light Air Strike Chip.</description>
+    <descriptionHyperlinks>
+      <ThingDef>KT_Light_Air_Strike_Chip</ThingDef>
+      <HediffDef>KT_Light_Air_Strike</HediffDef>
+    </descriptionHyperlinks>
+    <jobString>Installing Kai Yang chip.</jobString>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>KT_Light_Air_Strike_Chip</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>KT_Light_Air_Strike_Chip</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <appliedOnFixedBodyParts>
+      <li>Brain</li>
+    </appliedOnFixedBodyParts>
+    <addsHediff>KT_Light_Air_Strike</addsHediff>
+  </RecipeDef>
+
+  <RecipeDef ParentName="SurgeryRemoveImplantBase">
+    <defName>RemoveKTLASC</defName>
+    <label>remove Light Air Strike Chip</label>
+    <description>Remove the Light Air Strike Chip.</description>
+    <descriptionHyperlinks>
+      <ThingDef>KT_Light_Air_Strike_Chip</ThingDef>
+      <HediffDef>KT_Light_Air_Strike</HediffDef>
+    </descriptionHyperlinks>
+    <jobString>Removing Light Air Strike Chip.</jobString>
+    <removesHediff>KT_Light_Air_Strike</removesHediff>
+  </RecipeDef>
+</Defs>
+
+  

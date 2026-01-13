@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: KT_AG_TANK -->
+  <KT_BIO_CATGIRL_fabricor.label>「操作型」联合生化猫娘</KT_BIO_CATGIRL_fabricor.label>
+  <!-- EN: KT_AG_TANK -->
+  <KT_BIO_CATGIRL_fabricor.description>这些植入大量机械体改造的生化猫娘由艾登亲自培育改造。原有的耳朵，尾巴等部件均被换成了机械型，也在全身植入外骨骼和装甲。这批猫娘型号本是用于执行安保任务，但艾登植入的模块可以使得这些杀人机器平时可用于殖民地生产工作。</KT_BIO_CATGIRL_fabricor.description>
+  
+  <!-- EN: KT_AG_TANK -->
+  <KT_BIO_CATGIRL_logistics.label>「后勤型」联合生化猫娘</KT_BIO_CATGIRL_logistics.label>
+  <!-- EN: KT_AG_TANK -->
+  <KT_BIO_CATGIRL_logistics.description>这些植入大量机械体改造的生化猫娘由艾登亲自培育改造。原有的耳朵，尾巴等部件均被换成了机械型，也在全身植入外骨骼和装甲。这批猫娘型号本是用于执行安保任务，但艾登植入的模块可以使得这些杀人机器平时可用于殖民地生产工作。</KT_BIO_CATGIRL_logistics.description>
+  
+  <KT_BIO_CATGIRL_ghost_turret.label>「基灵」BCG-5猫娘战斗伙伴</KT_BIO_CATGIRL_ghost_turret.label>
+  <KT_BIO_CATGIRL_ghost_turret.description>每一位猫娘都会配备的随行无人机，可记录备份机体数据，一旦机体不可挽回的受损，可以使用备份数据重构身体。配备有一门小型机枪，可以一定程度上补充火力。</KT_BIO_CATGIRL_ghost_turret.description>
+  <KT_Bullet_BIO_CATGIRL_ghost_turret.label>「基灵」BCG-5猫娘战斗伙伴</KT_Bullet_BIO_CATGIRL_ghost_turret.label>
+  
+  <KT_BIO_CATGIRL_Meleeweapon.label>「洁白之爪」BCG-1猫娘等离子巨剑</KT_BIO_CATGIRL_Meleeweapon.label>
+  <KT_BIO_CATGIRL_Meleeweapon.description>由生化猫娘使用的巨型近战武器，对于常人来说重量巨大，而猫娘可以轻松挥舞。\n\n&lt;color=#FFAA00>&lt;i>近战拥有AOE效果&lt;/i>&lt;/color>\n&lt;color=#FFAA00>&lt;i>攻击附带EMP&lt;/i>&lt;/color></KT_BIO_CATGIRL_Meleeweapon.description>
+  
+  <KT_BIO_CATGIRL_Machinegun.label>「哈曼波奇」BCG-2猫娘重机枪</KT_BIO_CATGIRL_Machinegun.label>
+  <KT_BIO_CATGIRL_Machinegun.description>由生化猫娘使用的重型机枪，火力强劲，且安装了一把等离子军刀用于近身作战。\n\n&lt;color=#FFAA00>&lt;i>近战拥有AOE效果&lt;/i>&lt;/color>\n&lt;color=#FFAA00>&lt;i>近战攻击附带EMP&lt;/i>&lt;/color></KT_BIO_CATGIRL_Machinegun.description>
+  <KT_Bullet_BIO_CATGIRL_Machinegun.label>「哈曼波奇」BCG-2猫娘重机枪</KT_Bullet_BIO_CATGIRL_Machinegun.label>
+  
+  <KT_BIO_CATGIRL_Grenadelauncher.label>「脊背龙」BCG-3猫娘智能等离子发射器</KT_BIO_CATGIRL_Grenadelauncher.label>
+  <KT_BIO_CATGIRL_Grenadelauncher.description>由生化猫娘使用的智能等离子发射器，不会对友军和中立单位友军伤害。\n\n&lt;color=#FFAA00>&lt;i>无友军伤害&lt;/i>&lt;/color>\n&lt;color=#FFAA00>&lt;i>攻击附带EMP&lt;/i>&lt;/color></KT_BIO_CATGIRL_Grenadelauncher.description>
+  <KT_Bullet_BIO_CATGIRL_Grenadelauncher.label>「脊背龙」BCG-3猫娘智能等离子发射器</KT_Bullet_BIO_CATGIRL_Grenadelauncher.label>
+  
+   <KT_BIO_CATGIRL_Railgun.label>「捕食者」BCG-4猫娘磁轨枪</KT_BIO_CATGIRL_Railgun.label>
+  <KT_BIO_CATGIRL_Railgun.description>由生化猫娘使用的远程磁轨武器。\n\n&lt;color=#FFAA00&gt;&lt;i&gt;45°不可逃逸区（命中修正）&lt;/i&gt;&lt;/color&gt;</KT_BIO_CATGIRL_Railgun.description>
+  <KT_Bullet_BIO_CATGIRL_Railgun.label>「捕食者」BCG-4猫娘磁轨枪</KT_Bullet_BIO_CATGIRL_Railgun.label>
+</LanguageData>

@@ -23,326 +23,67 @@ if sys.platform == 'win32':
 
 # 占位贴图定义：包含所有需要生成的贴图类别、尺寸、路径等
 PLACEHOLDER_TEXTURES = {
-    # ===================== 物品（Items） =====================
-    'Items/Weapon': {
-        'Sword_Iron': {'size': (64, 64), 'color': '#888888', 'label': 'Sword_Iron'},
-        'Gun_Pistol': {'size': (64, 64), 'color': '#555555', 'label': 'Pistol'},
-    },
 
-    # ===================== 衣物（Apparel - 需要5种身体类型） =====================
-    'Things/Apparel': {
-        'Shirt': {
+    # ===================== Trion MVP相关 =====================
+    'Things/Building/Trion': {
+        'Building_TriggerConfigBench': {
+            'size': (192, 192),
+            'color': '#8B008B',  # 深紫色，代表控制
+            'label': 'ConfigBench',
+        },
+        'Building_BailOutAnchor': {
             'size': (128, 128),
-            'color': '#FF6B6B',
-            'variants': ['Male', 'Female', 'Thin', 'Hulk', 'Fat'],
-            'label': 'Shirt',
-            'mask': True,  # 需要遮罩贴图
+            'color': '#FF6347',  # 番茄红，代表紧急脱离点
+            'label': 'BailOutAnchor',
         },
-        'Pants': {
+        'VitalsMonitor': {
             'size': (128, 128),
-            'color': '#4ECDC4',
-            'variants': ['Male', 'Female', 'Thin', 'Hulk', 'Fat'],
-            'label': 'Pants',
+            'color': '#00CED1',  # 深青色，代表医疗设备
+            'label': 'VitalsMonitor',
         },
     },
 
-    # ===================== 建筑（Buildings） =====================
-    'Things/Building/Furniture': {
-        'Table': {
-            'size': (256, 256),
-            'color': '#A67C52',
-            'directions': ['North', 'East', 'South', 'West'],
-            'label': 'Table',
-        },
-    },
-
-    'Things/Building/Production': {
-        'Workbench': {
-            'size': (256, 256),
-            'color': '#9B9B9B',
-            'directions': ['North', 'East', 'South', 'West'],
-            'label': 'Workbench',
-        },
-        'Stove': {
+    'Things/Building': {
+        'TrionDetector': {
             'size': (128, 128),
-            'color': '#C0C0C0',
-            'directions': ['North', 'East', 'South', 'West'],
-            'label': 'Stove',
+            'color': '#4169E1',  # 皇家蓝，代表高科技检测仪
+            'label': 'Detector',
         },
     },
 
-    # ===================== 防御设施 =====================
-    'Things/Building/Defense': {
-        'Turret': {
-            'size': (128, 128),
-            'color': '#2C3E50',
-            'directions': ['North', 'East', 'South', 'West'],
-            'label': 'Turret',
-        },
-        'Wall': {
+    'Items/Trion': {
+        'TrionTrigger_Standard': {
             'size': (64, 64),
-            'color': '#808080',
-            'label': 'Wall',
+            'color': '#9932CC',  # 深兰花紫，代表触发器
+            'label': 'Trigger',
         },
     },
 
-    'Things/Building/Decoration': {
-        'Painting': {
-            'size': (128, 128),
-            'color': '#8B7355',
-            'directions': ['North', 'East', 'South', 'West'],
-            'label': 'Painting',
-        },
-        'Statue': {
-            'size': (128, 128),
-            'color': '#D3D3D3',
-            'directions': ['North', 'East', 'South', 'West'],
-            'label': 'Statue',
-        },
-    },
-
-    'Things/Building/Door': {
-        'DoorSteel': {
-            'size': (64, 128),
-            'color': '#A9A9A9',
-            'directions': ['North', 'East', 'South', 'West'],
-            'label': 'Door',
-        },
-    },
-
-    'Things/Building/Power': {
-        'Generator': {
-            'size': (256, 128),
-            'color': '#FFD700',
-            'directions': ['North', 'East', 'South', 'West'],
-            'label': 'Generator',
-        },
-        'PowerConduit': {
+    'Things/Pawn/Humanlike/TrionComponents': {
+        'ArcBlade': {
             'size': (64, 64),
-            'color': '#FF8C00',
-            'label': 'Conduit',
+            'color': '#FFD700',  # 金色，代表近战武器
+            'label': 'ArcBlade',
         },
-    },
-
-    'Things/Building/Storage': {
-        'StorageShelf': {
-            'size': (128, 128),
-            'color': '#8B4513',
-            'directions': ['North', 'East', 'South', 'West'],
-            'label': 'Shelf',
-        },
-    },
-
-    # ===================== 角色/Pawn（含所有体型） =====================
-    'Things/Pawn/Human': {
-        'Colonist': {
-            'size': (128, 256),
-            'color': '#FFB6C1',
-            'directions': ['North', 'East', 'South', 'West'],
-            'body_types': ['Male', 'Female', 'Thin', 'Hulk', 'Fat'],
-            'label': 'Colonist',
-        },
-    },
-
-    # ===================== 头部（头部使用性别路径命名） =====================
-    'Things/Pawn/Humanlike/Heads/Male': {
-        'Male_Average_Normal': {
+        'Shield': {
             'size': (64, 64),
-            'color': '#F4A460',
-            'label': 'Head_Male',
+            'color': '#00CED1',  # 深青色，代表防御
+            'label': 'Shield',
         },
-    },
-
-    'Things/Pawn/Humanlike/Heads/Female': {
-        'Female_Average_Normal': {
+        'ExplosiveBullet': {
             'size': (64, 64),
-            'color': '#FFB6A3',
-            'label': 'Head_Female',
+            'color': '#FF4500',  # 橙红色，代表爆炸
+            'label': 'Bullet',
         },
-    },
-
-    # ===================== 动物 =====================
-    'Things/Pawn/Animal': {
-        'Dog': {
-            'size': (128, 128),
-            'color': '#8B4513',
-            'directions': ['North', 'East', 'South', 'West'],
-            'states': {'swimming': True, 'stationary': True},
-            'label': 'Dog',
-        },
-        'Cat': {
-            'size': (96, 96),
-            'color': '#A0522D',
-            'directions': ['North', 'East', 'South', 'West'],
-            'label': 'Cat',
-        },
-        'Elk': {
-            'size': (128, 128),
-            'color': '#654321',
-            'directions': ['North', 'East', 'South', 'West'],
-            'label': 'Elk',
-        },
-    },
-
-    # ===================== 机械单位 =====================
-    'Things/Pawn/Mechanical': {
-        'Mechanoid': {
-            'size': (128, 128),
-            'color': '#696969',
-            'directions': ['North', 'East', 'South', 'West'],
-            'label': 'Mechanoid',
-        },
-    },
-
-    # ===================== 植物 =====================
-    'Plants': {
-        'Shrub': {
-            'size': (128, 128),
-            'color': '#2D5016',
-            'variants': ['a', 'b', 'c'],
-            'label': 'Shrub',
-        },
-        'Tree_Oak': {
-            'size': (256, 256),
-            'color': '#228B22',
-            'label': 'Tree_Oak',
-        },
-        'Tree_Pine': {
-            'size': (256, 256),
-            'color': '#1B4D3E',
-            'label': 'Tree_Pine',
-        },
-        'Crop_Rice': {
-            'size': (128, 128),
-            'color': '#8B8B00',
-            'label': 'Crop_Rice',
-        },
-    },
-
-    # ===================== UI图标 =====================
-    'UI/Icons': {
-        'Health_Status': {
+        'Chameleon': {
             'size': (64, 64),
-            'color': '#FF0000',
-            'label': 'Health',
+            'color': '#228B22',  # 森林绿，代表隐身
+            'label': 'Chameleon',
         },
-        'Happy_Status': {
+        'BailOut': {
             'size': (64, 64),
-            'color': '#FFD700',
-            'label': 'Happy',
-        },
-        'Hungry_Status': {
-            'size': (64, 64),
-            'color': '#FFA500',
-            'label': 'Hungry',
-        },
-        'Tired_Status': {
-            'size': (64, 64),
-            'color': '#4169E1',
-            'label': 'Tired',
-        },
-    },
-
-    # ===================== UI按钮 =====================
-    'UI/Buttons': {
-        'BuildButton': {
-            'size': (32, 32),
-            'color': '#4CAF50',
-            'label': 'Build',
-        },
-        'CancelButton': {
-            'size': (32, 32),
-            'color': '#FF5252',
-            'label': 'Cancel',
-        },
-    },
-
-    # ===================== 地形 =====================
-    'Terrain/Floor': {
-        'MetalPlating': {
-            'size': (512, 512),
-            'color': '#C0C0C0',
-            'label': 'Metal',
-        },
-        'WoodFloor': {
-            'size': (512, 512),
-            'color': '#8B4513',
-            'label': 'Wood',
-        },
-        'ConcreteFloor': {
-            'size': (512, 512),
-            'color': '#696969',
-            'label': 'Concrete',
-        },
-    },
-
-    'Terrain/Natural': {
-        'GrassPlain': {
-            'size': (512, 512),
-            'color': '#7CFC00',
-            'label': 'Grass',
-        },
-        'Dirt': {
-            'size': (512, 512),
-            'color': '#8B6F47',
-            'label': 'Dirt',
-        },
-    },
-
-    # ===================== 特效 =====================
-    'Effects/Impact': {
-        'Bullet_Impact': {
-            'size': (64, 64),
-            'color': '#FFB6C1',
-            'label': 'Impact',
-        },
-        'Explosion': {
-            'size': (128, 128),
-            'color': '#FF4500',
-            'label': 'Explosion',
-        },
-    },
-
-    'Effects/Blood': {
-        'Blood_Splatter': {
-            'size': (64, 64),
-            'color': '#8B0000',
-            'label': 'Blood',
-        },
-    },
-
-    # ===================== 物品变体 =====================
-    'Items/Food': {
-        'MealSimple': {
-            'size': (64, 64),
-            'color': '#D2691E',
-            'label': 'Meal',
-        },
-    },
-
-    'Items/Resources': {
-        'Steel': {
-            'size': (64, 64),
-            'color': '#A9A9A9',
-            'label': 'Steel',
-        },
-        'Wood': {
-            'size': (64, 64),
-            'color': '#8B4513',
-            'label': 'Wood',
-        },
-        'Cloth': {
-            'size': (64, 64),
-            'color': '#F0E68C',
-            'label': 'Cloth',
-        },
-    },
-
-    'Items/Medicine': {
-        'Herbal_Medicine': {
-            'size': (64, 64),
-            'color': '#90EE90',
-            'label': 'Medicine',
+            'color': '#DC143C',  # 深绯红，代表紧急脱离
+            'label': 'BailOut',
         },
     },
 }
@@ -578,7 +319,16 @@ def main():
     # 获取输出路径
     script_dir = Path(__file__).parent
     project_root = script_dir.parent.parent
-    output_path = project_root / "参考资源" / "通用资源" / "占位贴图"
+
+    # 优先检查MVP项目目录是否存在
+    mvp_output_path = project_root / "临时" / "Trion_MVP_CodeDeliverables" / "Textures"
+
+    if mvp_output_path.exists():
+        output_path = mvp_output_path
+        print(f"📍 检测到MVP项目目录，输出到: {output_path}\n")
+    else:
+        output_path = project_root / "参考资源" / "通用资源" / "占位贴图"
+        print(f"📍 使用默认输出路径: {output_path}\n")
 
     # 验证路径
     if not output_path.parent.exists():

@@ -1,0 +1,171 @@
+<Defs>
+	<ThingDef ParentName="KT_AutocannonTurret">
+    <defName>KTRAILAUTOGUN</defName>
+    <label>KTRAILAUTOGUN</label>
+	<thingClass>SRA.Building_TurretGunHasSpeed</thingClass>
+	<modExtensions>
+	   <li Class="SRA.ModExt_HasSpeedTurret"><!-- SRA炮塔转速 -->
+		 <speed>1.9</speed>
+	   </li>
+  	</modExtensions>
+    <description>KTRAILAUTOGUN</description>
+    <uiIconPath>Things/Building/Security/KTRAILAUTOGUN_Ico</uiIconPath>
+	<uiOrder>1800</uiOrder> <!-- UI栏顺序 -->
+	<graphicData>
+		<texPath>Things/Building/Security/KT100MMCANNON_Base</texPath>
+		<graphicClass>Graphic_Single</graphicClass>
+		<drawSize>(6,6)</drawSize>
+	</graphicData>
+	<size>(3,3)</size>
+    <statBases>
+	  <MaxHitPoints>3000</MaxHitPoints>
+	  <Flammability>0</Flammability>
+      <ShootingAccuracyTurret>1</ShootingAccuracyTurret>
+	  <WorkToBuild>1200</WorkToBuild>
+    </statBases>
+	<drawerType>MapMeshAndRealTime</drawerType>
+	<tickerType>Normal</tickerType>
+	<killedLeavings>
+      <ChunkSlagSteel>3</ChunkSlagSteel>
+    </killedLeavings>
+    <costList>
+      <Steel>400</Steel>
+	  <Plasteel>60</Plasteel>
+      <ComponentIndustrial>3</ComponentIndustrial>
+	  <ComponentSpacer>3</ComponentSpacer>
+    </costList>
+    <comps>
+	  <li Class="SRA.CompProperties_ForceTargetable" /><!-- 善良手操 -->
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>800</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Refuelable"> <!-- 应该是可以补给 -->
+        <fuelLabel>Shots until barrel change</fuelLabel>
+        <fuelGizmoLabel>Barrel durability</fuelGizmoLabel>
+        <outOfFuelMessage>Needs new barrel</outOfFuelMessage>
+        <fuelFilter><thingDefs><li>Steel</li></thingDefs></fuelFilter>
+        <fuelCapacity>400</fuelCapacity>
+        <fuelMultiplier>2</fuelMultiplier>
+        <initialFuelPercent>1</initialFuelPercent>
+        <autoRefuelPercent>0.5</autoRefuelPercent>
+        <showFuelGizmo>true</showFuelGizmo>
+        <minimumFueledThreshold>1</minimumFueledThreshold>
+        <factorByDifficulty>false</factorByDifficulty>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelIconPath>KT_UI/UI_OUTAMMO</fuelIconPath>
+      </li>
+    </comps>
+
+    <building>
+      <turretGunDef>Gun_KTRAILAUTOGUN</turretGunDef>
+	  <ai_combatDangerous>true</ai_combatDangerous> <!-- AI认为它具有危险性 -->
+	  <turretTopDrawSize>7.5</turretTopDrawSize>
+      <turretBurstCooldownTime>0.7</turretBurstCooldownTime>
+    </building>
+    <researchPrerequisites>
+      <li>KT_Base_t2_rail_turret</li>
+    </researchPrerequisites>
+	<designationCategory>KT_designation_group</designationCategory> <!-- 指定分类：防卫 -->
+	<specialDisplayRadius>150</specialDisplayRadius> <!-- 特殊显示半径 -->
+
+	
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>Gun_KTRAILAUTOGUN</defName>
+    <label>Gun_KTRAILAUTOGUN</label>
+    <description>Gun_KTRAILAUTOGUN</description>
+    <graphicData>
+      <texPath>Things/Building/Security/KTRAILAUTOGUN</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(3.8,3.8)</drawSize>
+    </graphicData>
+    <statBases>
+      <AccuracyTouch>1</AccuracyTouch>
+      <AccuracyShort>1</AccuracyShort>
+      <AccuracyMedium>1</AccuracyMedium>
+      <AccuracyLong>1</AccuracyLong>
+      <RangedWeapon_Cooldown>0.7</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>60</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+	<verbs>
+      <li>
+        <verbClass>SRA.Verb_ShootWithOffset</verbClass> <!-- 射击行为 -->
+        <hasStandardCommand>true</hasStandardCommand> <!-- 标准命令 -->
+        <defaultProjectile>Bullet_KTRAILAUTOGUN</defaultProjectile> <!-- 默认子弹 -->
+        <warmupTime>1.6</warmupTime> <!-- 预热时间 -->
+		<requireLineOfSight>true</requireLineOfSight><!-- 只能直线射击 -->
+		<minRange>15</minRange>
+        <range>150</range> <!-- 射程 -->
+        <burstShotCount>2</burstShotCount> <!-- 每次射击子弹数量 -->
+        <soundCast>KTRAILAUTOGUNRound</soundCast> <!-- 射击音效 -->
+        <soundCastTail>GunTail_Light</soundCastTail> <!-- 尾音效 -->
+        <muzzleFlashScale>20</muzzleFlashScale> <!-- 火光规模 -->
+        <consumeFuelPerShot>1</consumeFuelPerShot> <!-- 每发子弹消耗的燃料 -->
+      </li>
+    </verbs>
+	<weaponTags>
+	  	<li>KT_weapon</li>
+   	</weaponTags>	
+	<modExtensions>
+      <li Class="MuzzleFlash.MuzzleFlashProps" MayRequire="IssacZhuang.MuzzleFlash">
+         <def>MF_ChargedMuzzleFalsh</def>
+         <drawSize>(3)</drawSize>
+         <offsets>
+           <li>(1,0)</li>
+         </offsets>
+         <isAlternately>true</isAlternately>
+     </li>
+	 <li Class="SRA.ModExtension_ShootWithOffset">
+         <offsets>
+           <li>(0,-1.5)</li>
+         </offsets>
+     </li>		 
+   </modExtensions>
+  </ThingDef>
+  
+  <ThingDef>
+        <defName>Bullet_KTRAILAUTOGUN</defName>
+        <label>KTRAILAUTOGUN</label>
+        <category>Projectile</category>
+        <tickerType>Normal</tickerType>
+        <altitudeLayer>Projectile</altitudeLayer>
+        <graphicData>
+            <texPath>Things/Projectile/Bullet_100MM</texPath> <!-- 子弹贴图路径 -->
+            <graphicClass>Graphic_Single</graphicClass> <!-- 使用单一图形 -->
+			<shaderType>MoteGlow</shaderType>
+      		<drawSize>(2)</drawSize>
+        </graphicData>
+        <projectile>
+            <damageDef>Bullet</damageDef>
+            <speed>700</speed>
+            <damageAmountBase>70</damageAmountBase>
+            <arcHeightFactor>0</arcHeightFactor>
+			<flyOverhead>false</flyOverhead>
+			<armorPenetrationBase>1.5</armorPenetrationBase>
+			<stoppingPower>1.5</stoppingPower>
+        </projectile>
+		
+		<thingClass>SRA.Projectile_SRA_Railgun</thingClass>
+		<modExtensions>
+			<li Class="SRA.SRA_RailgunProjectileExtension">
+			<!-- 穿透设置 -->
+			<maxPenetrations>6</maxPenetrations>
+			<penetrationDelayTicks>1</penetrationDelayTicks>
+				<!-- 爆炸设置 -->
+				<explosionRadius>0.7</explosionRadius>
+				<explosionDamage>0</explosionDamage><!-- 小于等于0则使用子弹的伤害数值 -->
+				<explosionArmorPenetration>0</explosionArmorPenetration><!-- 小于等于0则使用子弹的穿透数值 -->
+				<damageDef>Bullet</damageDef>
+				<explosionSound>KTNONESOUND</explosionSound>
+			</li>
+		</modExtensions>
+  </ThingDef>	
+
+</Defs>

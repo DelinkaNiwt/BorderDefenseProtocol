@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<!--重型舰炮炮塔大类-->
+	<ThingDef ParentName="BuildingBase" Name="HeavyNavalGunTurretBase" Abstract="True">
+		<label>Heavy Naval Gun Turret Base</label>
+		<description>A Heavy Naval Gun Turret Base</description>
+		<!--贴图绘制参数-->
+		<rotatable>false</rotatable>
+		<hasTooltip>true</hasTooltip>
+		<drawHighlight>true</drawHighlight>
+		<altitudeLayer>Building</altitudeLayer>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<drawHighlightOnlyForHostile>true</drawHighlightOnlyForHostile>
+		<!--建筑参数-->
+		<pathCost>0</pathCost>
+		<fillPercent>0</fillPercent>
+		<!--建筑逻辑-->
+		<stealable>false</stealable>
+		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+		<placeWorkers>
+			<li>PlaceWorker_TurretTop</li>
+		</placeWorkers>
+		<building>
+			<ai_combatDangerous>true</ai_combatDangerous>
+		</building>
+	</ThingDef>
+</Defs>
