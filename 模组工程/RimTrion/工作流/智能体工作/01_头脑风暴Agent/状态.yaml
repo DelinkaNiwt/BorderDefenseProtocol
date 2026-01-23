@@ -1,0 +1,12 @@
+# 01_头脑风暴Agent 状态
+
+Agent名称: 头脑风暴Agent
+当前状态: pending                    # pending(待命) / processing(进行中) / completed(完成) / blocked(阻塞)
+
+上次更新: 2026-01-23T00:00:00Z
+用户验证状态: 待评审                 # 待评审 / 已批准 / 需修改
+
+后续行动: 等待主Agent激活
+
+备注: |
+  Agent处于初始状态，准备接收用户的想法进行创意探索

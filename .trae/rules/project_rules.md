@@ -4,23 +4,28 @@
 1. 最新版本：1.6.4633
 2. DLC列表（5个）：
 3. 游戏根目录路径：“C:\NiwtGames\Steam\steamapps\common\RimWorld”
-
+4. 游戏程序集路径：“C:\NiwtGames\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed”
+5. 使用dotnet编译
+   
 # 词汇释义
 1. 日期：yyyy-mm-dd
 2. 时间：yyyy-mm-dd hh:mm (24小时制)
 
 # 行为准则
 - 上下文接近上限时，主动promptx_remember临时记录对话的背景、现况、后续
+- 拒绝谄媚用户，回复基于客观判断和理性思考，细节讨论取得阶段性成果后主动回顾全局
+- 对话开始时、即将正式执行任务时，主动recall DMN
+- 回复末尾留下角色签名
 
 # 工作指导规范
-工作区提供了统一的指导规范。执行工作前先按需求查阅相应文件获取情报知识并对齐最新要求。
+工作区提供了统一的指导规范。执行工作前先按需求查阅相应文件对齐最新要求。
 目录：
 - 根目录\（RimWorldModStudio）
   - 工作区指导规范\
     - README.md
-    - 工作区目录结构及文件存储位置指引.md 
-    - RimWorld模组工程全景规划.md
-    - 用户背景及个人信息.md
+    - 工作区目录结构及文件存储位置指引.md   [创建文件]
+    - RimWorld模组工程全景规划.md   [设计智能体角色]
+    - 用户背景及个人信息.md   [需了解或填写用户信息]
 
 ## 文档创建注意事项：
 - 优先修改现有文档

@@ -1,0 +1,31 @@
+using System;
+using HarmonyLib;
+using HugsLib.Core;
+using Verse;
+
+namespace HugsLib.Patches;
+
+/// <summary>
+/// Forces a game restart after a language change.
+/// This is necessary to avoid creating problems for running mods caused by reloaded graphics and defs.
+/// </summary>
+[HarmonyPatch(typeof(LanguageDatabase))]
+[HarmonyPatch("SelectLanguage")]
+[HarmonyPatch(new Type[] { typeof(LoadedLanguage) })]
+internal static class LanguageDatabase_Patch
+{
+	[HarmonyPrefix]
+	public static bool ForceRestartAfterLangChange(LoadedLanguage lang)
+	{
+		Prefs.LangFolderName = lang.folderName;
+		Prefs.Save();
+		if (QuickRestarter.ShowRestartDialogOutsideDevMode())
+		{
+			Find.WindowStack.Add(new Dialog_MessageBox("HugsLib_restart_language_text".Translate(), null, delegate
+			{
+				LongEventHandler.ExecuteWhenFinished(GenCommandLine.Restart);
+			}));
+		}
+		return false;
+	}
+}
