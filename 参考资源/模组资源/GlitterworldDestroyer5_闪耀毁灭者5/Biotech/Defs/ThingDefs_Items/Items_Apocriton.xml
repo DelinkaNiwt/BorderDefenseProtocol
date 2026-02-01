@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 半灵质芯片 -->
+
+  <ThingDef ParentName="MechResourceBase">
+    <defName>BlackNanoChip</defName>
+    <label>semi-psychic chip</label>
+    <description>The chip that unites the wisdom and crystallization of the apocriton. \n\n Surprisingly, the information in it has not been encrypted. The black-clad apocriton seems to deliberately want to let others have a chance to understand him as well.</description>
+    <graphicData>
+      <texPath>Items/BlackNanoChip</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <MarketValue>0</MarketValue>
+    </statBases>
+	<comps>
+      <li Class="CompProperties_CompAnalyzableUnlockResearch">
+        <analysisID>55214361</analysisID>
+        <requiresMechanitor>true</requiresMechanitor>
+
+        <!-- Analyzable -->
+
+        <analysisDurationHours>0.5</analysisDurationHours>
+        <destroyedOnAnalyzed>false</destroyedOnAnalyzed>
+        <completedLetterLabel>Signal chip studied: {RESEARCH} unlocked</completedLetterLabel>
+        <completedLetter>By studying the signal chip, {PAWN_labelShort} has acquired the insight needed for the research project(s) {RESEARCH}.\n\nYour researchers can now use research benches to begin researching how to actually use the technology.</completedLetter>
+        <completedLetterDef>PositiveEvent</completedLetterDef>
+
+        <!-- Interactable -->
+
+        <activateTexPath>UI/Icons/Study</activateTexPath>
+
+        <activateLabelString>Analyze...</activateLabelString>
+        <activateDescString>Analyze the signal chip.</activateDescString>
+        <jobString>Analyze semi-psychic chip</jobString>
+        <guiLabelString>Choose who should analyze this</guiLabelString>
+        <inspectString>Can be analyzed by a colonist.</inspectString>
+
+        <targetingParameters>
+          <canTargetBuildings>false</canTargetBuildings>
+          <canTargetAnimals>false</canTargetAnimals>
+          <canTargetMechs>false</canTargetMechs>
+          <onlyTargetControlledPawns>true</onlyTargetControlledPawns>
+        </targetingParameters>
+      </li>
+    </comps>
+  </ThingDef>
+  
+  <!-- 机械邮件 -->
+
+  <ThingDef ParentName="MechResourceBase">
+    <defName>GD_DescriptionChip</defName>
+    <label>mech email</label>
+    <description>Hello. For some time before you have been in contact with something about the mechanoids, they may be dressed in shabby black, alone and not behaving very similarly to normal mechanoids, but that does not mean that you can provoke them at will. These mechanoids has a leader of notable ability to command, as long as he is still, I am afraid that your study of these mechanoids will not be able to continue to deepen. But I can provide you with help. \nAccording to my understanding, this powerful mechanoid possesses abilities that include the following:\n\n-Psychic Comet, his primary weapon. Launches a bombardment with clumps of psychic energy over a large area. \n\n-Ball Lightning, a secondary weapon. Able to instantly dismantle enemies that try to get close to him, explode after some time, and fly very slowly.\n\n-shoot countless lightning arrows from the wings on his back and cover a vast area. This kind of attack consumes a considerable amount of energy, so the movements before it is executed are quite obvious. Even an organism can easily detect it.\n\n-Rough melee attacks are also of little use, he will bend and leap enemies who try to get close to him away from him.\n\n-When you aim a gun at it, it might suddenly swap positions between someone in your team and it. Be cautious of accidental injuries by friendly forces.\n\nThis is all the information we can provide, the specific tactics still need to be formulated by you. I'm looking forward to the appearance of someone who can challenge him. \n\nThe bottom of this email is unsigned.</description>
+    <graphicData>
+      <texPath>Items/DescriptionChip</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+	  <MaxHitPoints>200</MaxHitPoints>
+      <MarketValue>0</MarketValue>
+    </statBases>
+	<comps Inherit="false" />
+  </ThingDef>
+  
+  <!-- 战争 -->
+  <ThingDef ParentName="BlackMedalBase">
+		<defName>BlackMedal_War</defName>
+		<label>iron medal</label>
+		<description>"Just because we don't want war to happen doesn't mean we fear it coming."\n\n"A blanket denial of war will only lead to one's own destruction in the end."</description>
+		<graphicData>
+			<texPath>Items/Medals/BlackMedal_War</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<recipeMaker>
+			<researchPrerequisites>
+			  <li>GD3_Apocriton</li>
+			</researchPrerequisites>
+		</recipeMaker>
+		<costList>
+			<Uranium>1500</Uranium>
+			<Plasteel>1500</Plasteel>
+		</costList>
+		<comps>
+		  <li Class="GD3.CompProperties_War">
+		    <toggleIconPath>UI/Buttons/MedalWar</toggleIconPath>
+			<toggleLabelKey>GD.ToggleWarLabel</toggleLabelKey>
+			<toggleDescKey>GD.ToggleWarDesc</toggleDescKey>
+			<toggleLabelKey2>GD.ToggleWarLabelB</toggleLabelKey2>
+			<toggleDescKey2>GD.ToggleWarDescB</toggleDescKey2>
+		  </li>
+		</comps>
+	</ThingDef>
+	
+	<!-- 死亡 -->
+    <ThingDef ParentName="BlackMedalBase">
+		<defName>BlackMedal_Death</defName>
+		<label>bronze medal</label>
+		<description>"The people of the glitterworld yearn beyond measure for a world without death. But life without death can only become a tumor, growing distorted and without beauty."\n\n"Only then do I sympathize with those materialists. How wonderful it would be if the souls of people could really meet in heaven after they die."</description>
+		<graphicData>
+			<texPath>Items/Medals/BlackMedal_Death</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<recipeMaker>
+			<researchPrerequisites>
+			  <li>GD3_Apocriton</li>
+			</researchPrerequisites>
+		</recipeMaker>
+		<costList>
+			<Meat_Human>1000</Meat_Human>
+			<Leather_Human>1000</Leather_Human>
+		</costList>
+		<comps>
+		  <li Class="GD3.CompProperties_Death">
+		    <toggleIconPath>UI/Buttons/MedalDeath</toggleIconPath>
+			<toggleLabelKey>GD.ToggleDeathLabel</toggleLabelKey>
+			<toggleDescKey>GD.ToggleDeathDesc</toggleDescKey>
+			<toggleLabelKey2>GD.ToggleDeathLabelB</toggleLabelKey2>
+			<toggleDescKey2>GD.ToggleDeathDescB</toggleDescKey2>
+		  </li>
+		</comps>
+	</ThingDef>
+	
+	<!-- 瘟疫 -->
+    <ThingDef ParentName="BlackMedalBase">
+		<defName>BlackMedal_Plague</defName>
+		<label>onyx medal</label>
+		<description>"The natural plague was finally wiped out completely by the Shining World, but the man-made biochemical weapons were instead developed at great length." \n\n "I saw the man spasming and crouching down to suck the luciferium scattered on the ground. Humanity has not got rid of the devil, the plague, after all; it just exists in a different way."</description>
+		<graphicData>
+			<texPath>Items/Medals/BlackMedal_Plague</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<recipeMaker>
+			<researchPrerequisites>
+			  <li>GD3_Apocriton</li>
+			</researchPrerequisites>
+		</recipeMaker>
+		<costList>
+			<MedicineUltratech>300</MedicineUltratech>
+			<Luciferium>100</Luciferium>
+		</costList>
+		<comps>
+		  <li Class="GD3.CompProperties_Plague">
+		    <toggleIconPath>UI/Buttons/MedalPlague</toggleIconPath>
+			<toggleLabelKey>GD.TogglePlagueLabel</toggleLabelKey>
+			<toggleDescKey>GD.TogglePlagueDesc</toggleDescKey>
+			<toggleLabelKey2>GD.TogglePlagueLabelB</toggleLabelKey2>
+			<toggleDescKey2>GD.TogglePlagueDescB</toggleDescKey2>
+		  </li>
+		</comps>
+	</ThingDef>
+	
+	<!-- 征服 -->
+    <ThingDef ParentName="BlackMedalBase">
+		<defName>BlackMedal_Conquer</defName>
+		<label>pale medal</label>
+		<description>The war is over and mankind wraps the wound in bandages as if it had never happened. \n\nThings like this will be repeated in eternity, over and over again.</description>
+		<graphicData>
+			<texPath>Items/Medals/BlackMedal_Conquer</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<recipeMaker>
+			<researchPrerequisites>
+			  <li>GD3_GiantCluster_Ultra</li>
+			  <li>GD3_Apocriton</li>
+			</researchPrerequisites>
+		</recipeMaker>
+		<costList>
+			<BlackMedal_War>1</BlackMedal_War>
+			<BlackMedal_Death>1</BlackMedal_Death>
+			<BlackMedal_Plague>1</BlackMedal_Plague>
+			<BlackMedal_Famine>1</BlackMedal_Famine>
+		</costList>
+		<comps>
+		  <li Class="GD3.CompProperties_Conquer">
+		    <toggleIconPath>UI/Buttons/MedalConquer</toggleIconPath>
+			<toggleLabelKey>GD.ToggleConquerLabel</toggleLabelKey>
+			<toggleDescKey>GD.ToggleConquerDesc</toggleDescKey>
+			<toggleLabelKey2>GD.ToggleConquerLabelB</toggleLabelKey2>
+			<toggleDescKey2>GD.ToggleConquerDescB</toggleDescKey2>
+			<toggleLabelKey3>GD.ToggleConquerLabelC</toggleLabelKey3>
+			<toggleDescKey3>GD.ToggleConquerDescC</toggleDescKey3>
+			<toggleLabelKey4>GD.ToggleConquerLabelD</toggleLabelKey4>
+			<toggleDescKey4>GD.ToggleConquerDescD</toggleDescKey4>
+		  </li>
+		</comps>
+	</ThingDef>
+
+</Defs>

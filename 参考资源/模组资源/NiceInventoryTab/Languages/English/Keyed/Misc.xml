@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <NIT_PawnAutoWearExpl>{0} got a task to wear {1}</NIT_PawnAutoWearExpl>
+  <NIT_BillCreatedExpl>Created a bill in {0} for {1}</NIT_BillCreatedExpl>
+  <NIT_Forbidden>(forb.) </NIT_Forbidden>
+  <NIT_MayDrop>(may drop) </NIT_MayDrop>
+  <NIT_CannotDrop>Cannot be dropped</NIT_CannotDrop>
+  <NIT_CannotConsumeThing>Cannot be consumed</NIT_CannotConsumeThing>
+  <NIT_Equip>Equip</NIT_Equip>
+  <NIT_MoveToInventory>Unequip</NIT_MoveToInventory>
+  <NIT_WearFromInventory>Wear from inventory</NIT_WearFromInventory>
+</LanguageData>

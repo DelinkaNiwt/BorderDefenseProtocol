@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <DamageDef ParentName="Bomb">
+    <defName>GD_Bomb_AM</defName>
+    <defaultDamage>50</defaultDamage>
+    <defaultStoppingPower>2.0</defaultStoppingPower>
+    <defaultArmorPenetration>1.30</defaultArmorPenetration>
+	<explosionColorCenter>(22, 46, 140)</explosionColorCenter>
+	<explosionColorEdge>(176, 224, 230)</explosionColorEdge>
+  </DamageDef>
+
+</Defs>

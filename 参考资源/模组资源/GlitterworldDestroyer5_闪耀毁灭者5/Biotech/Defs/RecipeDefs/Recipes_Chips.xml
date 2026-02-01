@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <RecipeDef>
+    <defName>Make_ChipA</defName>
+    <label>make powerfocus chip</label>
+    <description>Make a powerfocus chip.</description>
+    <jobString>Making powerfocus chip.</jobString>
+    <effectWorking>Cremate</effectWorking>
+    <soundWorking>Recipe_Cremate</soundWorking>
+    <workAmount>6000</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>PrecisionDeck</li>
+          </thingDefs>
+        </filter>
+        <count>25</count>
+      </li>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>SignalChip</li>
+          </thingDefs>
+        </filter>
+        <count>2</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>PrecisionDeck</li>
+		<li>SignalChip</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <PowerfocusChip>1</PowerfocusChip>
+    </products>
+	<researchPrerequisite>HighMechtech</researchPrerequisite>
+  </RecipeDef>
+  
+  <RecipeDef>
+    <defName>Make_ChipB</defName>
+    <label>make nanostructuring chip</label>
+    <description>Make a nanostructuring chip.</description>
+    <jobString>Making nanostructuring chip.</jobString>
+    <effectWorking>Cremate</effectWorking>
+    <soundWorking>Recipe_Cremate</soundWorking>
+    <workAmount>6000</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>PrecisionDeck</li>
+          </thingDefs>
+        </filter>
+        <count>25</count>
+      </li>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>PowerfocusChip</li>
+          </thingDefs>
+        </filter>
+        <count>2</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>PrecisionDeck</li>
+		<li>PowerfocusChip</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <NanostructuringChip>1</NanostructuringChip>
+    </products>
+	<researchPrerequisite>UltraMechtech</researchPrerequisite>
+  </RecipeDef>
+
+</Defs>

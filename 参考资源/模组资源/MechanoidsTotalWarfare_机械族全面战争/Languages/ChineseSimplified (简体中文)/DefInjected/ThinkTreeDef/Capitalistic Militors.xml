@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 爬到安全地带。 -->
+  <Capitalistic_Militors_ThinkTreeMain.thinkRoot.subNodes.1.subNodes.0.subNodes.0.subNodes.0.subNodes.0.crawlingReportStringOverride>TODO</Capitalistic_Militors_ThinkTreeMain.thinkRoot.subNodes.1.subNodes.0.subNodes.0.subNodes.0.subNodes.0.crawlingReportStringOverride>
+  <!-- EN: 爬到床上。 -->
+  <Capitalistic_Militors_ThinkTreeMain.thinkRoot.subNodes.1.subNodes.0.subNodes.0.subNodes.0.subNodes.1.subNodes.0.crawlingReportStringOverride>TODO</Capitalistic_Militors_ThinkTreeMain.thinkRoot.subNodes.1.subNodes.0.subNodes.0.subNodes.0.subNodes.1.subNodes.0.crawlingReportStringOverride>
+  
+  <!-- EN: 爬到安全地带。 -->
+  <Gestapo_Militors_ThinkTreeMain.thinkRoot.subNodes.1.subNodes.0.subNodes.0.subNodes.0.subNodes.0.crawlingReportStringOverride>TODO</Gestapo_Militors_ThinkTreeMain.thinkRoot.subNodes.1.subNodes.0.subNodes.0.subNodes.0.subNodes.0.crawlingReportStringOverride>
+  <!-- EN: 爬到床上。 -->
+  <Gestapo_Militors_ThinkTreeMain.thinkRoot.subNodes.1.subNodes.0.subNodes.0.subNodes.0.subNodes.1.subNodes.0.crawlingReportStringOverride>TODO</Gestapo_Militors_ThinkTreeMain.thinkRoot.subNodes.1.subNodes.0.subNodes.0.subNodes.0.subNodes.1.subNodes.0.crawlingReportStringOverride>
+  
+  <!-- EN: Patrolling. -->
+  <TW_University_Minitor.thinkRoot.subNodes.1.subNodes.3.subNodes.1.subNodes.0.reportStringOverride>TODO</TW_University_Minitor.thinkRoot.subNodes.1.subNodes.3.subNodes.1.subNodes.0.reportStringOverride>
+  
+</LanguageData>

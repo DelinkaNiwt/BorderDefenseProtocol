@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Patch -->
+  <BlackApocritonExist>The self-destruct logic is blocked by a sophisticated intrusion virus.</BlackApocritonExist>
+  
+  <!-- Medals -->
+  <GD.TogglePlagueLabel>Corpse Explosion : {0}</GD.TogglePlagueLabel>
+  <GD.TogglePlagueDesc>Toggle psychic corpse explosion. Dead enemy corpses will deal damage to friendly troops around them, and create more corpses that way.</GD.TogglePlagueDesc>
+  <GD.TogglePlagueLabelB>Eliminate poison : {0}</GD.TogglePlagueLabelB>
+  <GD.TogglePlagueDescB>Switch to dispel poison by itself. Protects the wearer from any negative status.</GD.TogglePlagueDescB>
+  
+  <GD.ToggleDeathLabel>Storming</GD.ToggleDeathLabel>
+  <GD.ToggleDeathDesc>Force a target into a rampage, fully heal it, and grant it great combat power. The medallion wearer can destroy this target at any time.</GD.ToggleDeathDesc>
+  <GD.ToggleDeathLabelB>Clear</GD.ToggleDeathLabelB>
+  <GD.ToggleDeathDescB>Destroy targets that have gone berserk due to the effects of the Bronze Medallion.</GD.ToggleDeathDescB>
+  <CausedByDeathMedal>Caused by a bronze medallion.</CausedByDeathMedal>
+  <GD.NoDeathTarget>There are no targets available for removal.</GD.NoDeathTarget>
+  <GD.PawnIsBlackMech>Cannot affect black mechanics.</GD.PawnIsBlackMech>
+  <GD.PawnDowned>Target falls to the ground.</GD.PawnDowned>
+  <GD.DeathCoolDown>On cooldown: {0} seconds</GD.DeathCoolDown>
+  <GD.TargetExist>Only one affected enemy can exist at the same time.</GD.TargetExist>
+  
+  <GD.ToggleWarLabel>Wide Bombardment</GD.ToggleWarLabel>
+  <GD.ToggleWarDesc>Unleash a powerful wide area bombardment over a large area. \nCooldown: 10 seconds.</GD.ToggleWarDesc>
+  <GD.ToggleWarLabelB>Precision Strike</GD.ToggleWarLabelB>
+  <GD.ToggleWarDescB>Precise continuous bombardment within one point. \ncooldown: 2 sec.</GD.ToggleWarDescB>
+  <GD.WarCooling>Bombardment on cooldown: {0} seconds</GD.WarCooling>
+  
+  <GD.ToggleConquerLabel>Wide Bombardment</GD.ToggleConquerLabel>
+  <GD.ToggleConquerDesc>Unleash a powerful wide area bombardment over a large area.</GD.ToggleConquerDesc>
+  <GD.ToggleConquerLabelB>Corpse Explosion : {0}</GD.ToggleConquerLabelB>
+  <GD.ToggleConquerDescB>Suppresses the enemy's ability to move, while causing the dead enemy to deal damage to friendly troops around him.</GD.ToggleConquerDescB>
+  <GD.ToggleConquerLabelC>Self-healing : {0}</GD.ToggleConquerLabelC>
+  <GD.ToggleConquerDescC>Quickly heals the wearer's fresh wounds and removes all negative effects. \nIf the wearer's mental state is abnormal, bring it back immediately.</GD.ToggleConquerDescC>
+  <GD.ToggleConquerLabelD>Storming</GD.ToggleConquerLabelD>
+  <GD.ToggleConquerDescD>Causes all enemies within this area to go into a rage. \nCooldown: 60 seconds.</GD.ToggleConquerDescD>
+  <GD.ConquerCooling>Storming on cooldown: {0} seconds</GD.ConquerCooling>
+  
+  <!-- Radio -->
+  <PsychicRadioALabel>Passivation Radio</PsychicRadioALabel>
+  <PsychicRadioADesc>Reduces the psychic sensitivity of all colonists by 50%.</PsychicRadioADesc>
+  
+  <PsychicRadioBLabel>Sensitized Radio</PsychicRadioBLabel>
+  <PsychicRadioBDesc>Increase the psychic sensitivity of all colonists by 50%.</PsychicRadioBDesc>
+  
+  <PsychicRadioCLabel>Undifferentiated signal interception</PsychicRadioCLabel>
+  <PsychicRadioCDesc>The interception of psychic signals from all sources temporarily zeroes the psychic sensitivity of all colonists. This level of information processing has become so complex as to be almost incomprehensible to organic life, so the building also requires extremely large amounts of power to support the operation of the broadcast program.</PsychicRadioCDesc>
+  
+  <!-- Clothes -->
+  <GD_FailedToWear>Too fat to wear this apparel.</GD_FailedToWear>
+  <PuzzleScuccess>Validation passed. Delivery of browsing privileges. </PuzzleScuccess>.
+  <PuzzleFailed>Validation failed. </PuzzleFailed>
+  <PuzzleFinished>Validation passed</PuzzleFinished>
+  <PuzzleFinishedDesc>The Black Mechanitor's costume has been unlocked. This costume's gaining effect will gradually get stronger as you progress through the game. </PuzzleFinishedDesc>
+  <PuzzleChecking>Verifying in progress</PuzzleChecking>
+  <PuzzleEnded>Verified</PuzzleEnded>
+  
+  <!-- Biotech -->
+  <GD.KillAllUrchin>Clear the war urchins</GD.KillAllUrchin>
+  <GD.KillAllUrchinDesc>Commands all active war urchins on this map to shut down. </GD.KillAllUrchinDesc>
+  <GD.CanNotKillUrchin> No active war urchins. </GD.CanNotKillUrchin>
+  
+  <GD.ClearAllUrchins>{0}: Shutdown command has been issued. Initialization in progress. </GD.ClearAllUrchins>
+  
+  <GD.ObserverLink>Target Designation</GD.ObserverLink>
+  <GD.ObserverLinkDesc>Select a friendly colonist or mechanoid to provide long-range reconnaissance assistance, increasing its range by 25%. Re-specifying the same target can cancel the designation.</GD.ObserverLinkDesc>
+  <GD.ObserverDisconnected>Task canceled.</GD.ObserverDisconnected>
+  <GD.ObserverConnected>Task accepted. Target: {0}.</GD.ObserverConnected>
+  <GD.ObserverDowned>Observer downed.</GD.ObserverDowned>
+  <GD.ObserverNotControled>Observer not controlled.</GD.ObserverNotControled>
+  
+  <GD.MechanitorNotFound>This unit is not controlled.</GD.MechanitorNotFound>
+  <GD.MechanoidDowned>This unit is Downed.</GD.MechanoidDowned>
+  <GD.LowEnergy>At least 20% of the remaining energy is needed to use the skill.</GD.LowEnergy>
+  
+  <!-- Alpha -->
+  <GD.KillAllGutter> Clear guttersnipes</GD.KillAllGutter>
+  <GD.KillAllGutterDesc> Order all active guttersnipes on this map to shut down. </GD.KillAllGutterDesc>
+  <GD.CanNotKillGutter> There are no active guttersnipes. </GD.CanNotKillGutter>
+</LanguageData>

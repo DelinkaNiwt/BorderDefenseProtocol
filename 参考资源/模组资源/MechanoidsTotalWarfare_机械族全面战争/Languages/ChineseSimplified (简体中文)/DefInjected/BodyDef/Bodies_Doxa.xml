@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 静巢构体 Doxa-0 -->
+  <Doxa0Body.label>TODO</Doxa0Body.label>
+  <!-- EN: 深层逻辑核 -->
+  <Doxa0Body.corePart.parts.Doxa0_Dorsal_Second.parts.Doxa0_Dorsal_Third.parts.Doxa0_Dorsal_Fourth.parts.0.customLabel>TODO</Doxa0Body.corePart.parts.Doxa0_Dorsal_Second.parts.Doxa0_Dorsal_Third.parts.Doxa0_Dorsal_Fourth.parts.0.customLabel>
+  <!-- EN: 反粒子炮架 -->
+  <Doxa0Body.corePart.parts.1.customLabel>TODO</Doxa0Body.corePart.parts.1.customLabel>
+  <!-- EN: 反粒子发射口 -->
+  <Doxa0Body.corePart.parts.1.parts.0.customLabel>TODO</Doxa0Body.corePart.parts.1.parts.0.customLabel>
+  <!-- EN: 火控核心单元 -->
+  <Doxa0Body.corePart.parts.1.parts.1.customLabel>TODO</Doxa0Body.corePart.parts.1.parts.1.customLabel>
+  <!-- EN: 裂壳蛛孵化腔 -->
+  <Doxa0Body.corePart.parts.2.customLabel>TODO</Doxa0Body.corePart.parts.2.customLabel>
+  <!-- EN: 前端感知阵列 -->
+  <Doxa0Body.corePart.parts.3.customLabel>TODO</Doxa0Body.corePart.parts.3.customLabel>
+  <!-- EN: 多爪推进组 -->
+  <Doxa0Body.corePart.parts.4.customLabel>TODO</Doxa0Body.corePart.parts.4.customLabel>
+  
+</LanguageData>

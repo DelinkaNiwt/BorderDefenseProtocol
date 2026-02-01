@@ -1,0 +1,347 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="SuperHeavyMechanoid">
+    <defName>Mech_Annihilator</defName>
+    <label>annihilator</label>
+    <description>The small self-propelled star-slayer weapon of the mechanoid hive. When carrying out the mission, it is responsible for drilling deep into the earth and using plasma nozzles to activate the mantle, triggering intense geological activities and making the first step in preparing for the disintegration of the planet. When in standby mode, it drifts in space, waiting for the nearest cerebrex core to wake it up, and take it to kill. \n\nThe plasma nozzle is its main attack method. It is equipped with small turrets on its limbs, destroying the corresponding parts can paralyze it.</description>
+	<thingClass>GD3.Annihilator</thingClass>
+	<uiIconPath>Annihilator/Annihilator_Ancient</uiIconPath>
+	<size>(9,9)</size>
+	<statBases>
+	  <MarketValue>28800</MarketValue>
+	  <ArmorRating_Blunt>1.55</ArmorRating_Blunt>
+      <ArmorRating_Sharp>2.00</ArmorRating_Sharp>
+      <MechEnergyLossPerHP>0.02</MechEnergyLossPerHP>
+      <BandwidthCost>125</BandwidthCost>
+      <EMPResistance>0.75</EMPResistance>
+      <MoveSpeed>1.5</MoveSpeed>
+	  <PsychicSensitivity>0</PsychicSensitivity>
+	  <MaxFlightTime>3600</MaxFlightTime>
+      <FlightCooldown>0</FlightCooldown>
+	  <StaggerDurationFactor>0</StaggerDurationFactor>
+    </statBases>
+	<destroyable>false</destroyable>
+    <race>
+  	  <body>MechAnnihilator</body>
+	  <renderTree>MechAnnihilator</renderTree>
+	  <thinkTreeMain>MechAnnihilator</thinkTreeMain>
+      <thinkTreeConstant>MechAnnihilatorConstant</thinkTreeConstant>
+  	  <baseBodySize>57.2</baseBodySize>
+	  <disableIgniteVerb>true</disableIgniteVerb>
+	  <flightStartChanceOnJobStart>0</flightStartChanceOnJobStart>
+	  <canFlyInVacuum>true</canFlyInVacuum>
+	  <doesntMove>true</doesntMove>
+      <hasCorpse>false</hasCorpse>
+	  <allowedOnCaravan>false</allowedOnCaravan>
+	  <mechWeightClass>Central</mechWeightClass>
+  	  <lifeStageAges>
+		<li>
+  		  <def>MechanoidFullyFormed</def>
+  		  <soundWounded>Pawn_Mech_Diabolus_Wounded</soundWounded>
+  		  <soundDeath>Pawn_Mech_Diabolus_Death</soundDeath>
+  		  <soundCall>Pawn_Mech_Diabolus_Call</soundCall>
+		</li>
+		<li>
+  		  <def>MechanoidFullyFormed</def>
+  		  <soundWounded>Pawn_Mech_Diabolus_Wounded</soundWounded>
+  		  <soundDeath>Pawn_Mech_Diabolus_Death</soundDeath>
+  		  <soundCall>Pawn_Mech_Diabolus_Call</soundCall>
+		</li>
+		<li>
+  		  <def>MechanoidFullyFormed</def>
+  		  <soundWounded>Pawn_Mech_Diabolus_Wounded</soundWounded>
+  		  <soundDeath>Pawn_Mech_Diabolus_Death</soundDeath>
+  		  <soundCall>Pawn_Mech_Diabolus_Call</soundCall>
+		</li>
+		<li>
+  		  <def>MechanoidFullyFormed</def>
+  		  <soundWounded>Pawn_Mech_Diabolus_Wounded</soundWounded>
+  		  <soundDeath>Pawn_Mech_Diabolus_Death</soundDeath>
+  		  <soundCall>Pawn_Mech_Diabolus_Call</soundCall>
+		</li>
+  	  </lifeStageAges>
+  	  <baseHealthScale>30</baseHealthScale>
+    </race>
+    <comps>
+	  <li Class="CompProperties_AffectsSky">
+        <skyColors>
+          <sky>(255, 230, 200, 155)</sky>
+          <shadow>(225, 220, 185)</shadow>
+          <overlay>(255, 255, 255)</overlay>
+          <saturation>1.1</saturation>
+        </skyColors>
+      </li>
+	  <li Class="GD3.CompProperties_HitArmor">
+		<hediffToAdd>GD_HitArmor</hediffToAdd>
+		<duration>60</duration>
+		<limitOfTimes>30</limitOfTimes>
+	  </li>
+	  <li Class="GD3.CompProperties_AnnihilatorTurretGun">
+        <turretDef>Turret_Annihilator_Charge</turretDef>
+        <angleOffset>-90</angleOffset>
+        <autoAttack>true</autoAttack>
+		<linkedBodyPartsGroup>Annihilator_Leg_LFront</linkedBodyPartsGroup>
+		<ID>0</ID>
+        <renderNodeProperties>
+          <li>
+			<debugLabel>Turret_LF</debugLabel>
+            <nodeClass>GD3.PawnRenderNode_AnnihilatorTurretGun</nodeClass>
+            <workerClass>GD3.PawnRenderNodeWorker_AnnihilatorTurretGun</workerClass>
+            <overrideMeshSize>(1, 1)</overrideMeshSize>
+            <parentTagDef>Annihilator_Leg_LFront</parentTagDef>
+            <baseLayer>25</baseLayer>
+            <pawnType>Any</pawnType>
+            <drawData>
+			  <defaultData>
+				<offset>(2.65,0,-0.75)</offset>
+			  </defaultData>
+              <dataWest>
+                <rotationOffset>180</rotationOffset>
+              </dataWest>
+            </drawData>
+          </li>
+        </renderNodeProperties>
+      </li>
+	  <li Class="GD3.CompProperties_AnnihilatorTurretGun">
+        <turretDef>Turret_Annihilator_Charge</turretDef>
+        <angleOffset>-90</angleOffset>
+        <autoAttack>true</autoAttack>
+		<linkedBodyPartsGroup>Annihilator_Leg_RFront</linkedBodyPartsGroup>
+		<ID>1</ID>
+        <renderNodeProperties>
+          <li>
+			<debugLabel>Turret_RF</debugLabel>
+            <nodeClass>GD3.PawnRenderNode_AnnihilatorTurretGun</nodeClass>
+            <workerClass>GD3.PawnRenderNodeWorker_AnnihilatorTurretGun</workerClass>
+            <overrideMeshSize>(1, 1)</overrideMeshSize>
+            <parentTagDef>Annihilator_Leg_RFront</parentTagDef>
+            <baseLayer>25</baseLayer>
+            <pawnType>Any</pawnType>
+            <drawData>
+			  <defaultData>
+				<offset>(-2.65,0,-0.75)</offset>
+			  </defaultData>
+              <dataWest>
+                <rotationOffset>180</rotationOffset>
+              </dataWest>
+            </drawData>
+          </li>
+        </renderNodeProperties>
+      </li>
+	  <li Class="GD3.CompProperties_AnnihilatorTurretGun">
+        <turretDef>Turret_Annihilator_Arc</turretDef>
+        <angleOffset>-90</angleOffset>
+        <autoAttack>true</autoAttack>
+		<linkedBodyPartsGroup>Annihilator_Leg_LHind</linkedBodyPartsGroup>
+		<ID>2</ID>
+        <renderNodeProperties>
+          <li>
+			<debugLabel>Turret_LH</debugLabel>
+            <nodeClass>GD3.PawnRenderNode_AnnihilatorTurretGun</nodeClass>
+            <workerClass>GD3.PawnRenderNodeWorker_AnnihilatorTurretGun</workerClass>
+            <overrideMeshSize>(1, 1)</overrideMeshSize>
+            <parentTagDef>Annihilator_Leg_LHind</parentTagDef>
+            <baseLayer>-1</baseLayer>
+            <pawnType>Any</pawnType>
+            <drawData>
+			  <defaultData>
+				<offset>(2.55,0,3.55)</offset>
+			  </defaultData>
+              <dataWest>
+                <rotationOffset>180</rotationOffset>
+              </dataWest>
+            </drawData>
+          </li>
+        </renderNodeProperties>
+      </li>
+	  <li Class="GD3.CompProperties_AnnihilatorTurretGun">
+        <turretDef>Turret_Annihilator_Arc</turretDef>
+        <angleOffset>-90</angleOffset>
+        <autoAttack>true</autoAttack>
+		<linkedBodyPartsGroup>Annihilator_Leg_RHind</linkedBodyPartsGroup>
+		<ID>3</ID>
+        <renderNodeProperties>
+          <li>
+			<debugLabel>Turret_RH</debugLabel>
+            <nodeClass>GD3.PawnRenderNode_AnnihilatorTurretGun</nodeClass>
+            <workerClass>GD3.PawnRenderNodeWorker_AnnihilatorTurretGun</workerClass>
+            <overrideMeshSize>(1, 1)</overrideMeshSize>
+            <parentTagDef>Annihilator_Leg_RHind</parentTagDef>
+            <baseLayer>-1</baseLayer>
+            <pawnType>Any</pawnType>
+            <drawData>
+			  <defaultData>
+				<offset>(-2.55,0,3.55)</offset>
+			  </defaultData>
+              <dataWest>
+                <rotationOffset>180</rotationOffset>
+              </dataWest>
+            </drawData>
+          </li>
+        </renderNodeProperties>
+      </li>
+	</comps>
+	<modExtensions>
+	  <li Class="GD3.IsFlyingUnit">
+        <flyingHeight>10</flyingHeight>
+		<flightDeterminedByCode>true</flightDeterminedByCode>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  <PawnKindDef ParentName="HeavyMechanoidKind">
+    <defName>Mech_Annihilator</defName>
+    <label>annihilator</label>
+    <race>Mech_Annihilator</race>
+    <combatPower>10000</combatPower>
+    <maxPerGroup>1</maxPerGroup>
+    <isBoss>true</isBoss>
+    <allowInMechClusters>false</allowInMechClusters>
+	<canMeleeAttack>false</canMeleeAttack>
+	<useFixedRotation>true</useFixedRotation>
+	<fixedRotation>East</fixedRotation>
+    <lifeStages>
+  	  <li>
+		<bodyGraphicData>
+  		  <texPath>Annihilator/Torso/Torso_Ancient_Normal</texPath>
+		  <graphicClass>Graphic_Single</graphicClass>
+		  <drawSize>10</drawSize>
+		</bodyGraphicData>
+		<flyingAnimationEast>Annihilator_Suspending</flyingAnimationEast>
+		<flyingAnimationNorth>Annihilator_Suspending</flyingAnimationNorth>
+		<flyingAnimationSouth>Annihilator_Suspending</flyingAnimationSouth>
+  	  </li>
+	  <li>
+		<bodyGraphicData>
+  		  <texPath>Annihilator/Torso/Torso_Ancient_Damaged</texPath>
+		  <graphicClass>Graphic_Single</graphicClass>
+		  <drawSize>10</drawSize>
+		</bodyGraphicData>
+		<flyingAnimationEast>Annihilator_Suspending</flyingAnimationEast>
+		<flyingAnimationNorth>Annihilator_Suspending</flyingAnimationNorth>
+		<flyingAnimationSouth>Annihilator_Suspending</flyingAnimationSouth>
+  	  </li>
+	  <li>
+		<bodyGraphicData>
+  		  <texPath>Annihilator/Torso/Torso_Normal</texPath>
+		  <graphicClass>Graphic_Single</graphicClass>
+		  <drawSize>10</drawSize>
+		</bodyGraphicData>
+		<flyingAnimationEast>Annihilator_Suspending</flyingAnimationEast>
+		<flyingAnimationNorth>Annihilator_Suspending</flyingAnimationNorth>
+		<flyingAnimationSouth>Annihilator_Suspending</flyingAnimationSouth>
+  	  </li>
+	  <li>
+		<bodyGraphicData>
+  		  <texPath>Annihilator/Torso/Torso_Damaged</texPath>
+		  <graphicClass>Graphic_Single</graphicClass>
+		  <drawSize>10</drawSize>
+		</bodyGraphicData>
+		<flyingAnimationEast>Annihilator_Suspending</flyingAnimationEast>
+		<flyingAnimationNorth>Annihilator_Suspending</flyingAnimationNorth>
+		<flyingAnimationSouth>Annihilator_Suspending</flyingAnimationSouth>
+  	  </li>
+    </lifeStages>
+	<controlGroupPortraitZoom>0.2</controlGroupPortraitZoom>
+    <weaponTags>
+    </weaponTags>
+    <abilities>
+  	  <li>Annihilator_JumpAbility</li>
+	  <li>Annihilator_Suspend</li>
+	  <li>Annihilator_JumpAndSuspend</li>
+	  <li>Annihilator_LongJump</li>
+    </abilities>
+  </PawnKindDef>
+  
+  <!-- 诶你怎么死了 -->
+  <ThingDef ParentName="NonDeconstructibleAncientBuildingBase">
+    <defName>AnnihilatorCorpse_Ancient</defName>
+    <label>annihilator ruin</label>
+    <description>The destroyed annihilator. One can study the wreckage and attempt to crack its manufacturing technology, or destroy and recycle the resources.</description>
+    <rotatable>false</rotatable>
+    <graphicData>
+      <texPath>Annihilator/AnnihilatorCorpse_Ancient</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>10</drawSize>
+      <drawOffset>(0,0,0.5)</drawOffset>
+      <shadowData>
+        <volume>(6.8, 1, 3.1)</volume>
+		<offset>(0, 0, -1.55)</offset>
+      </shadowData>
+    </graphicData>
+    <size>(7,7)</size>
+    <fillPercent>0.8</fillPercent>
+    <passability>PassThroughOnly</passability>
+    <pathCost>70</pathCost>
+    <statBases>
+      <MaxHitPoints>2500</MaxHitPoints>
+	  <Mass>1250</Mass>
+    </statBases>
+    <killedLeavings>
+      <Steel>500</Steel>
+	  <Plasteel>400</Plasteel>
+	  <ComponentIndustrial>20</ComponentIndustrial>
+	  <ComponentSpacer>10</ComponentSpacer>
+	  <PrecisionDeck>300</PrecisionDeck>
+	  <GravlitePanel>200</GravlitePanel>
+	  <Gravcore>1</Gravcore>
+    </killedLeavings>
+	<minifiedDef>MinifiedThing</minifiedDef>		
+	<thingCategories>
+	  <li>BuildingsSpecial</li>
+	</thingCategories>
+	<comps>
+      <li>
+        <compClass>GD3.CompAnnihilatorRuin</compClass>
+      </li>
+      <li Class="CompProperties_Hackable">
+        <defence>12000</defence>
+        <effectHacking>HackingTerminal</effectHacking>
+        <showProgressAfterHackCompletion>false</showProgressAfterHackCompletion>
+        <intellectualSkillPrerequisite>16</intellectualSkillPrerequisite>
+        <notHackedInspectString>Decode for technology.</notHackedInspectString>
+        <hackedMessage>{HACKER_labelShort} has finished decoding {SUBJECT_labelNoParenthesisDef}.</hackedMessage>
+      </li>
+    </comps>
+  </ThingDef>
+  
+  <ThingDef ParentName="NonDeconstructibleAncientBuildingBase">
+    <defName>AnnihilatorCorpse</defName>
+    <label>annihilator ruin</label>
+    <description>The destroyed annihilator. One can destroy and recycle the resources.</description>
+    <rotatable>false</rotatable>
+    <graphicData>
+      <texPath>Annihilator/AnnihilatorCorpse</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>10</drawSize>
+	  <drawOffset>(0,0,0.5)</drawOffset>
+      <shadowData>
+        <volume>(6.8, 1, 3.1)</volume>
+		<offset>(0, 0, -1.55)</offset>
+      </shadowData>
+    </graphicData>
+    <size>(7,7)</size>
+    <fillPercent>0.8</fillPercent>
+    <passability>PassThroughOnly</passability>
+    <pathCost>70</pathCost>
+    <statBases>
+      <MaxHitPoints>2500</MaxHitPoints>
+	  <Mass>1250</Mass>
+    </statBases>
+    <killedLeavings>
+      <Steel>500</Steel>
+	  <Plasteel>400</Plasteel>
+	  <ComponentIndustrial>20</ComponentIndustrial>
+	  <ComponentSpacer>10</ComponentSpacer>
+	  <PrecisionDeck>300</PrecisionDeck>
+	  <GravlitePanel>200</GravlitePanel>
+	  <Gravcore>1</Gravcore>
+    </killedLeavings>
+	<minifiedDef>MinifiedThing</minifiedDef>		
+	<thingCategories>
+	  <li>BuildingsSpecial</li>
+	</thingCategories>
+  </ThingDef>
+      
+</Defs>

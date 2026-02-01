@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <BlackPersonaData.label>交换人格数据（1000情报 - 1人格数据）</BlackPersonaData.label>
+  <PrecisionDeck.label>交换精密装甲板（1000情报 - 75精密装甲板）</PrecisionDeck.label>
+  <OrbitalTargeterMechCluster.label>交换机械集群靶向器（1000情报 - 1机械集群靶向器）</OrbitalTargeterMechCluster.label>
+  <MedicineUltratech.label>交换闪耀世界医药（1000情报 - 10闪耀世界医药）</MedicineUltratech.label>
+  <Ally.label>呼叫支援（2000情报 - 一组战斗员）\n注意：战斗员会攻击除了你以外的所有派系</Ally.label>
+
+
+</LanguageData>

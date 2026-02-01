@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <GD.ToggleInvisibilityLabel>Invisibility : {0}</GD.ToggleInvisibilityLabel>
+  <GD.ToggleInvisibilityDesc>Switch invisibility function.</GD.ToggleInvisibilityDesc>
+  <GD.FireflyNoEnergy>The Firefly is out of energy.</GD.FireflyNoEnergy>
+  <GD.FireflyLaying>The Firefly is charging.</GD.FireflyLaying>
+  <CausedByApocriton>Caused by the apocriton resentment.</CausedByApocriton>
+  <BlackMechanoidNotExist>The black mechanoids not exist.</BlackMechanoidNotExist>
+  <BlackMechanoidSleeping>Due to the solar flare, the black mechanoids are sleeping.</BlackMechanoidSleeping>
+  <CalledBlackMechanoid>{0} disguised as a wounded centipede sent a distress signal, which was accepted.</CalledBlackMechanoid>
+  <GD.AttackMode>Auto attack : {0}</GD.AttackMode>
+  <GD.AttackModeDesc>When turned on, this {0} will automatically release mechanoids attack until the resources are exhausted.</GD.AttackModeDesc>
+  
+  <BlackPassed>black mechanoids</BlackPassed>
+  <BlackPassedDesc>There are two black-clad mechanoids who happen to be passing through the area. If you are not ready, be careful not to provoke them.</BlackPassedDesc>
+  
+  <GD.ChangeWeaponLabel>change weapon</GD.ChangeWeaponLabel>
+  <GD.ChangeWeaponDesc>Switching the weapon held by the Mechanoid.</GD.ChangeWeaponDesc>
+  
+  <CentipedeReboot>Persona core shutting down...</CentipedeReboot>
+  
+  <!-- Giant Cluster -->
+  <MechanoidNotExist>The Mechanoid not exist.</MechanoidNotExist>
+  <ReceiverDelaying>In standby shelter: {0} hours</ReceiverDelaying>
+  
+  <ReceiverSelectLabel>Detecting cluster size：{0}</ReceiverSelectLabel>
+  <GD.markA>small</GD.markA>
+  <GD.markB>medium</GD.markB>
+  <GD.markC>large</GD.markC>
+  <GD.markD>ultra</GD.markD>
+  <ReceiverSelectDesc>Modify the size of the target cluster detected by the shortwave receiver.</ReceiverSelectDesc>
+  
+  <ArchoMineTriggered>An Archotech Trick Mine has been triggered!</ArchoMineTriggered>
+  <MarrowADestroy>The psychic shielding marrow has been destroyed.</MarrowADestroy>
+  <MarrowBDestroy>The psychic suppression marrow has been destroyed.</MarrowBDestroy>
+  <MarrowCDestroy>The psychic berserk marrow has been destroyed.</MarrowCDestroy>
+  <TechAFinished>Unlocked "Level 1 Cluster Technology".</TechAFinished>
+  <TechBFinished>Unlocked "Level 2 Cluster Technology".</TechBFinished>
+  <TechCFinished>Unlocked "Level 3 Cluster Technology".</TechCFinished>
+  <CausedByMarrow>Caused by psychic berserk marrow.</CausedByMarrow>
+  
+  <AllSkillsPerfect>All skills are full level</AllSkillsPerfect>
+  
+  <GD.TermiteToggleLabel>Switching fire mode:</GD.TermiteToggleLabel>
+  <GD.TermiteToggleDesc>Choose between thump bombs and smoke bombs.</GD.TermiteToggleDesc>
+  <GD.TermiteAMode>thump</GD.TermiteAMode>
+  <GD.TermiteBMode>smoke</GD.TermiteBMode>
+  
+  <!-- Medals -->
+  <GD.ToggleFamineLabel>Inhibit : {0}</GD.ToggleFamineLabel>
+  <GD.ToggleFamineDesc>Interferes with the enemy's nerve conduction, suppressing all enemies' consciousness and movement ability to less than 35%.</GD.ToggleFamineDesc>
+  <GD.ToggleFamineLabelB>self-healing : {0}</GD.ToggleFamineLabelB>
+  <GD.ToggleFamineDescB>Heal your own fresh wounds at a faster rate.</GD.ToggleFamineDescB>
+  
+  <!-- Reinforce -->
+  <ReinforcedTip>Mechanoids are fully armed</ReinforcedTip>
+  <ReinforcedTipDesc>When the affluent colony is on the right track, the mechanoids will also see this place as a threat they have to eradicate. \n\nSince the total wealth value accumulated has reached as much as one million, the Mechanoid Hive has armed all the combat units under its command with advanced accessory parts, ready to meet a whole new challenge.</ReinforcedTipDesc>
+  <GD.HitArmorGizmoLabel>Reactive Armor</GD.HitArmorGizmoLabel>
+  <GD.HitArmorBarTip>The number of remaining reactive armor counts on the mechanoid is shown here. The mechanoid has a reactive armor trigger limit of {0}, and currently has {1} remaining. The number of times can be recovered by mechanitor repair.</GD.HitArmorBarTip>
+  
+  <!-- Communication -->
+  <StationWithoutPower>Station outage</StationWithoutPower>
+  <GD.MustReserchBench>must be placed on a hi-tech research bench. </GD.MustReserchBench>
+  <GD.MustSameRot>must be oriented in the same direction as the hi-tech research bench. </GD.MustSameRot>
+  <GD.MustPlaceEdge>must be placed at the very edge of the hi-tech research bench. </GD.MustPlaceEdge>
+  <GD.HackProgress>Stealing progress </GD.HackProgress>
+</LanguageData>

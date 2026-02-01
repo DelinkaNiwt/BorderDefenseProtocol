@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 傀儡研究设施，仅用于封锁特定科技 -->
+
+  <DummyResearchBuilding.label>科技封锁</DummyResearchBuilding.label>
+  <DummyResearchBuilding.description>来自机械族的封锁使你的殖民者无法主动研究这项科技。\n摧毁对应阶段的巨型集群核心建筑来解锁此项目。</DummyResearchBuilding.description>
+
+
+</LanguageData>

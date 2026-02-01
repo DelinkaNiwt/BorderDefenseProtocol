@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <ThingDef Name="PuzzlePillarBase" ParentName="BuildingBase" Abstract="True">
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Buildings/Puzzle/PuzzlePillar</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2.75,2.75)</drawSize>
+      <damageData>
+        <rect>(0,0,3,1.8)</rect>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+      <shadowData>
+        <volume>(0.8,0.5,0.8)</volume>
+      </shadowData>
+	  <drawOffset>(0,0,0.80)</drawOffset>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+	<hasTooltip>true</hasTooltip>
+    <pathCost>0</pathCost>
+    <blockWind>true</blockWind>
+	<stealable>false</stealable>
+    <rotatable>false</rotatable>
+    <castEdgeShadows>true</castEdgeShadows>
+    <fillPercent>1.0</fillPercent>
+    <passability>Impassable</passability>
+    <canOverlapZones>false</canOverlapZones>
+    <statBases>
+      <MaxHitPoints>5000</MaxHitPoints>
+      <Flammability>0</Flammability>
+    </statBases>
+    <size>(1,1)</size>
+    <building>
+      <destroySound>BuildingDestroyed_Metal_Big</destroySound>
+    </building>
+    <!-- <defaultPlacingRot>South</defaultPlacingRot> -->
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <hasInteractionCell>true</hasInteractionCell>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <tickerType>Normal</tickerType>
+  </ThingDef>
+  
+  <ThingDef ParentName="PuzzlePillarBase">
+    <defName>PuzzlePillar_True</defName>
+    <label>Mechanical nerve endings</label>
+    <description>Strange columnar architecture. Can be interacted with to enable some kind of system to be switched on and off, role unknown.</description>
+	<selectable>false</selectable>
+    <comps>
+	  <li Class="GD3.CompProperties_Puzzle">
+	    <isPuzzle>true</isPuzzle>
+	    <answer>true</answer>
+		<graphic>Buildings/Puzzle/PuzzlePillar_True</graphic>
+	  </li>
+      <li Class="CompProperties_Usable">
+        <useJob>TriggerObject</useJob>
+        <useLabel>Press</useLabel>
+        <useDuration>60</useDuration>
+        <ignoreOtherReservations>true</ignoreOtherReservations>
+      </li>
+      <li Class="CompProperties_UseEffect">
+        <compClass>GD3.CompUseEffect_ChangeAnswer</compClass>
+      </li>
+    </comps>
+  </ThingDef>
+  
+  <ThingDef ParentName="PuzzlePillarBase">
+    <defName>PuzzlePillar_False</defName>
+    <label>Mechanical nerve endings</label>
+    <description>Strange columnar architecture. Can be interacted with to enable some kind of system to be switched on and off, role unknown.</description>
+	<selectable>false</selectable>
+    <comps>
+	  <li Class="GD3.CompProperties_Puzzle">
+	    <isPuzzle>true</isPuzzle>
+	    <answer>false</answer>
+		<graphic>Buildings/Puzzle/PuzzlePillar_True</graphic>
+	  </li>
+      <li Class="CompProperties_Usable">
+        <useJob>TriggerObject</useJob>
+        <useLabel>Press</useLabel>
+        <useDuration>60</useDuration>
+        <ignoreOtherReservations>true</ignoreOtherReservations>
+      </li>
+      <li Class="CompProperties_UseEffect">
+        <compClass>GD3.CompUseEffect_ChangeAnswer</compClass>
+      </li>
+    </comps>
+  </ThingDef>
+  
+  <ThingDef ParentName="PuzzlePillarBase">
+    <defName>PuzzlePillar_Center</defName>
+    <label>Mechanical nerve center</label>
+    <description>Strange columnar building that keeps making weird noises. It seems to have important knowledge hidden inside, and you can verify it here after meeting certain conditions, and after passing it, you can get the permission to browse freely. \n\nThe base reads "E=T,T=F".</description>
+    <comps>
+	  <li Class="GD3.CompProperties_Puzzle">
+	    <isPuzzle>false</isPuzzle>
+	    <answer>true</answer>
+		<graphic>Buildings/Puzzle/PuzzlePillar_Center</graphic>
+	  </li>
+      <li Class="CompProperties_Usable">
+        <useJob>TriggerObject</useJob>
+        <useLabel>Validate</useLabel>
+        <useDuration>60</useDuration>
+        <ignoreOtherReservations>true</ignoreOtherReservations>
+      </li>
+      <li Class="CompProperties_UseEffect">
+        <compClass>GD3.CompUseEffect_Check</compClass>
+      </li>
+	  <li Class="CompProperties_AmbientSound">
+        <sound>Puzzle_Ambient</sound>
+      </li>
+    </comps>
+  </ThingDef>
+  
+  <!-- If you see it, then I can tell you the answer is ETTEE ETTET ETETE TTEET ETETT. Or you can try to work a little harder on your own? -->
+
+</Defs>

@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 禁卫机械蜈蚣 -->
+
+  <Mech_CataphractCentipede.label>禁卫机械蜈蚣</Mech_CataphractCentipede.label>
+  <Mech_CataphractCentipede.labelPlural>禁卫机械蜈蚣</Mech_CataphractCentipede.labelPlural>
+
+
+  <!-- 海军机械静螳 -->
+
+  <Mech_MarineLancer.label>海军机械静螳</Mech_MarineLancer.label>
+  <Mech_MarineLancer.labelPlural>海军机械静螳</Mech_MarineLancer.labelPlural>
+
+
+  <!-- 斥候机械飞螳 -->
+
+  <Mech_ReconScyther.label>斥候机械飞螳</Mech_ReconScyther.label>
+  <Mech_ReconScyther.labelPlural>斥候机械飞螳</Mech_ReconScyther.labelPlural>
+
+
+  <!-- 机械萤火虫 -->
+
+  <Mech_Firefly.label>机械萤火虫</Mech_Firefly.label>
+  <Mech_Firefly.labelPlural>机械萤火虫</Mech_Firefly.labelPlural>
+  
+  <!-- 机械伊蚊 -->
+
+  <Mech_Mosquito.label>机械伊蚊</Mech_Mosquito.label>
+  <Mech_Mosquito.labelPlural>机械伊蚊</Mech_Mosquito.labelPlural>
+
+
+  <!-- 黑衣机械飞螳 -->
+
+  <Mech_BlackScyther.label>黑衣机械飞螳</Mech_BlackScyther.label>
+  <Mech_BlackScyther.labelPlural>黑衣机械飞螳</Mech_BlackScyther.labelPlural>
+
+
+  <!-- 黑衣机械静螳 -->
+
+  <Mech_BlackLancer.label>黑衣机械静螳</Mech_BlackLancer.label>
+  <Mech_BlackLancer.labelPlural>黑衣机械静螳</Mech_BlackLancer.labelPlural>
+  
+  <!-- 黑衣机械耀螳 -->
+
+  <Mech_BlackTesseron.label>黑衣机械耀螳</Mech_BlackTesseron.label>
+  <Mech_BlackTesseron.labelPlural>黑衣机械耀螳</Mech_BlackTesseron.labelPlural>
+  
+  <!-- 黑衣机械盾螳 -->
+
+  <Mech_BlackLegionary.label>黑衣机械盾螳</Mech_BlackLegionary.label>
+  <Mech_BlackLegionary.labelPlural>黑衣机械盾螳</Mech_BlackLegionary.labelPlural>
+  
+  <!-- 黑衣机械小蠊 -->
+
+  <Mech_BlackMilitor.label>黑衣机械小蠊</Mech_BlackMilitor.label>
+  <Mech_BlackMilitor.labelPlural>黑衣机械小蠊</Mech_BlackMilitor.labelPlural>
+
+
+</LanguageData>

@@ -1,0 +1,787 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 反物质步枪 -->
+
+  <ThingDef ParentName="BaseHumanMakeableGun">
+    <defName>GD_AntimatterRifle</defName>
+    <label>antimatter rifle</label>
+    <description>Your colonists have accessed the black mechanoids' database to harness the power of antimatter annihilation, but how the black lancer manage this power remains a mystery. \n\n The rifle is capable of firing powerful antimatter rounds, but is somewhat weakened for safety reasons.</description>
+    <techLevel>Spacer</techLevel>
+    <graphicData>
+      <texPath>AntimatterRifle</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <soundInteract>Interact_ChargeRifle</soundInteract>
+	<smeltable>false</smeltable>
+    <statBases>
+      <WorkToMake>45000</WorkToMake>
+      <Mass>4.6</Mass>
+      <AccuracyTouch>0.55</AccuracyTouch>
+      <AccuracyShort>0.64</AccuracyShort>
+      <AccuracyMedium>0.55</AccuracyMedium>
+      <AccuracyLong>0.45</AccuracyLong>
+      <RangedWeapon_Cooldown>1.70</RangedWeapon_Cooldown>
+    </statBases>
+    <thingSetMakerTags>
+      <li>RewardStandardLowFreq</li>
+      <li>RewardStandardQualitySuper</li>
+    </thingSetMakerTags>
+    <weaponClasses>
+      <li>RangedLight</li>
+    </weaponClasses>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_Antimatter</defaultProjectile>
+        <warmupTime>1.0</warmupTime>
+        <range>35.9</range>
+        <ticksBetweenBurstShots>16</ticksBetweenBurstShots>
+        <burstShotCount>3</burstShotCount>
+        <soundCast>Shot_Autocannon</soundCast>
+        <soundCastTail>GunTail_Medium</soundCastTail>
+        <muzzleFlashScale>18</muzzleFlashScale>
+		<forcedMissRadius>1.5</forcedMissRadius>
+        <ai_AvoidFriendlyFireRadius>3</ai_AvoidFriendlyFireRadius>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>point</label>
+        <capacities>
+          <li>Stab</li>
+        </capacities>
+        <power>21</power>
+        <cooldownTime>2</cooldownTime>
+		<armorPenetration>0.9</armorPenetration>
+      </li>
+      <li>
+        <label>edge</label>
+        <capacities>
+          <li>Cut</li>
+        </capacities>
+        <power>16</power>
+        <cooldownTime>2</cooldownTime>
+		<armorPenetration>0.9</armorPenetration>
+      </li>
+    </tools>
+	<recipeMaker>
+		<researchPrerequisite>GD3_Weapons</researchPrerequisite>
+		<recipeUsers>
+			<li>FabricationBench</li>
+		</recipeUsers>
+		<skillRequirements>
+			<Crafting>12</Crafting>
+		</skillRequirements>
+	</recipeMaker>
+	<costList>
+		<Steel>80</Steel>
+	    <Plasteel>90</Plasteel>
+	    <BlackPersonaData>3</BlackPersonaData>
+        <ComponentIndustrial>5</ComponentIndustrial>
+	    <ComponentSpacer>4</ComponentSpacer>
+	</costList>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_Antimatter</defName>
+    <label>antimatter shot</label>
+    <graphicData>
+      <texPath>Things/Projectile/Charge_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+      <drawSize>1.5</drawSize>
+    </graphicData>
+	<thingClass>Projectile_Explosive</thingClass>
+    <projectile>
+      <damageDef>BombChargeSmall</damageDef>
+      <speed>120</speed>
+	  <explosionRadius>1.6</explosionRadius >
+    </projectile>
+  </ThingDef>
+  
+  <!-- 低温仪式杖 -->
+  
+  <ThingDef ParentName="MeleeWeaponUltratech">
+		<defName>GD_CryogenicCeremonialStaff</defName>
+		<label>cryogenic ceremonial sword</label>
+		<description>Your colonists read from the black mechanoids' database a way to destroy heat out of thin air, but how the black scyther achieve their anti-entropy is still a mystery. \n\n This fatal ceremonial sword can cause cold bite and EMP shock to enemies.</description>
+		<graphicData>
+			<texPath>CryogenicCeremonialStaff</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>1.35</drawSize>
+		</graphicData>
+		<smeltable>false</smeltable>
+		<soundInteract>Interact_PlasmaSword</soundInteract>
+		<meleeHitSound>MeleeHit_PlasmaSword</meleeHitSound>
+		<tickerType>Normal</tickerType>
+		<weaponTags Inherit="false">
+           <!-- <li>UltratechMelee</li> -->
+        </weaponTags>
+		<costList>
+			<ComponentSpacer>4</ComponentSpacer>
+			<Plasteel>200</Plasteel>
+			<Gold>5</Gold>
+			<BlackPersonaData>3</BlackPersonaData>
+		</costList>
+		<statBases>
+			<WorkToMake>36000</WorkToMake>
+			<Mass>8</Mass>
+		</statBases>
+		<equippedStatOffsets>
+			<MeleeHitChance>3</MeleeHitChance>	
+		</equippedStatOffsets>
+		<equippedAngleOffset>60</equippedAngleOffset>
+		<tools>
+			<li>
+				<label>point</label>
+				<capacities>
+					<li>Stab</li>
+				</capacities>
+				<power>27</power>
+				<armorPenetration>0.85</armorPenetration>
+				<cooldownTime>1.1</cooldownTime>
+				<extraMeleeDamages>
+					<li>
+					<def>EMP</def>
+					<amount>40</amount>
+					</li>
+					<li>
+					<def>Frostbite_GD</def>
+					<amount>15</amount>
+					</li>
+				</extraMeleeDamages>
+			</li>
+			<li>
+				<label>edge</label>
+				<capacities>
+					<li>Cut</li>
+				</capacities>
+				<power>20</power>
+				<armorPenetration>0.65</armorPenetration>
+				<cooldownTime>0.5</cooldownTime>
+				<extraMeleeDamages>
+					<li>
+					<def>EMP</def>
+					<amount>40</amount>
+					</li>
+					<li>
+					<def>Frostbite_GD</def>
+					<amount>15</amount>
+					</li>
+				</extraMeleeDamages>
+			</li>
+		</tools>
+		<comps>
+		  <!-- <li Class="CompOversizedWeapon.CompProperties_OversizedWeapon">
+			<eastOffset>(0.0, 0.0, 0.0)</eastOffset>
+			<westOffset>(0.0, 0.0, 0.0)</westOffset>
+			<northOffset>(0.3, 0.0, 0.0)</northOffset>
+			<southOffset>(0.3, 0.0, 0.0)</southOffset>
+		  </li> -->
+		</comps>
+		<tradeability>Sellable</tradeability>
+		<recipeMaker>
+		  <researchPrerequisite>GD3_Weapons</researchPrerequisite>
+		  <recipeUsers Inherit="false">
+			<li>FabricationBench</li>
+		  </recipeUsers>
+		  <skillRequirements>
+			<Crafting>10</Crafting>
+			<Artistic>4</Artistic>
+		  </skillRequirements>
+		  <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+		  <workSkill>Crafting</workSkill>
+		  <effectWorking>Smith</effectWorking>
+		  <soundWorking>Recipe_Smith</soundWorking>
+		  <unfinishedThingDef>UnfinishedWeapon</unfinishedThingDef>
+		</recipeMaker>
+		<thingSetMakerTags Inherit="false">
+		</thingSetMakerTags>
+	</ThingDef>
+	
+	<!-- 燃烧弹火箭炮 -->
+	<ThingDef ParentName="BaseHumanMakeableGun">
+    <defName>GD_IncendiaryRocket</defName>
+    <label>simple incendiary rocket launcher</label>
+    <description>The process is simple and inexpensive, and although it is not very reliable it does not prevent it from being a good choice for soldiers during offensive battles. The high temperature generated by \n\nCan also damage the power core of some heavy armor units with relative ease.</description>
+    <techLevel>Industrial</techLevel>
+	<tickerType>Normal</tickerType>
+	<smeltable>false</smeltable>
+    <graphicData>
+      <texPath>IncendiaryRocket</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>1.5</drawSize>
+    </graphicData>
+    <statBases>
+      <WorkToMake>5000</WorkToMake>
+      <Mass>4.6</Mass>
+    </statBases>
+    <weaponClasses>
+      <li>RangedHeavy</li>
+    </weaponClasses>
+    <tradeTags>
+      <li>ExoticMisc</li>
+      <li>WeaponRanged</li>
+    </tradeTags>
+	<relicChance>0</relicChance>
+    <verbs>
+      <li>
+        <verbClass>Verb_ShootOneUse</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>GD_Bullet_IncendiaryRocket</defaultProjectile>
+        <forcedMissRadius>0.9</forcedMissRadius>
+        <warmupTime>2.5</warmupTime>
+        <ai_AvoidFriendlyFireRadius>5</ai_AvoidFriendlyFireRadius>
+        <range>35.9</range>
+        <soundCast>InfernoCannon_Fire</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <onlyManualCast>true</onlyManualCast>
+        <stopBurstWithoutLos>false</stopBurstWithoutLos>
+        <targetParams>
+          <canTargetLocations>true</canTargetLocations>
+        </targetParams>
+        <muzzleFlashScale>14</muzzleFlashScale>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>handle</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>21</power>
+        <cooldownTime>2.2</cooldownTime>
+      </li>
+    </tools>
+	<recipeMaker>
+		<researchPrerequisite>GD3_StrangeWeapons</researchPrerequisite>
+	</recipeMaker>
+	<costList>
+		<Steel>60</Steel>
+	    <Chemfuel>40</Chemfuel>
+        <ComponentIndustrial>5</ComponentIndustrial>
+	</costList>
+	<comps>
+	<li Class="CompProperties_Explosive">
+        <explosiveRadius>3.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <requiredDamageTypeToExplode>Flame</requiredDamageTypeToExplode>
+    </li>
+	</comps>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>GD_Bullet_IncendiaryRocket</defName>
+    <label>incendiary rocket</label>
+    <graphicData>
+      <texPath>Things/Projectile/Rocket_Big</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+    </graphicData>
+	<thingClass>Projectile_Explosive</thingClass>
+    <projectile>
+      <damageDef>Flame</damageDef>
+	  <damageAmountBase>85</damageAmountBase>
+      <armorPenetrationBase>0.45</armorPenetrationBase>
+      <!-- Use default damage from explosion def -->
+      <speed>55</speed>
+      <explosionRadius>4.4</explosionRadius >
+      <preExplosionSpawnThingDef>Filth_Fuel</preExplosionSpawnThingDef>
+      <preExplosionSpawnChance>0.36</preExplosionSpawnChance>
+	  <flyOverhead>false</flyOverhead>
+      <ai_IsIncendiary>true</ai_IsIncendiary>
+    </projectile>
+  </ThingDef>
+  
+  <!-- EMP手炮 -->
+  
+  <ThingDef ParentName="BaseHumanMakeableGun">
+    <defName>Gun_EmpHandCannon</defName>
+    <label>EMP hand cannon</label>
+    <description>A lightweight and reliable anti-Mech weapon capable of projecting EMP grenades at a considerable distance, effectively combining the advantages of an EMP grenade with an EMP launcher.</description>
+    <graphicData>
+      <texPath>EMPHandCannon</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>1.25</drawSize>
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <weaponClasses>
+      <li>RangedHeavy</li>
+    </weaponClasses>
+    <weaponTags>
+      <li>GrenadeEMP</li>
+    </weaponTags>
+    <statBases>
+      <WorkToMake>38000</WorkToMake>
+      <Mass>1.4</Mass>
+      <RangedWeapon_Cooldown>2.5</RangedWeapon_Cooldown>
+    </statBases>
+    <costList>
+      <Steel>85</Steel>
+	  <Plasteel>45</Plasteel>
+      <ComponentIndustrial>8</ComponentIndustrial>
+    </costList>
+    <recipeMaker>
+      <skillRequirements>
+        <Crafting>4</Crafting>
+      </skillRequirements>
+      <researchPrerequisite>GD3_StrangeWeapons</researchPrerequisite>
+    </recipeMaker>
+	<equippedAngleOffset>45</equippedAngleOffset>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_EMPHandCannon</defaultProjectile>
+        <warmupTime>2.5</warmupTime>
+        <range>33.9</range>
+        <forcedMissRadius>1.9</forcedMissRadius>
+        <burstShotCount>1</burstShotCount>
+        <soundCast>GD_EMPHandCannon</soundCast>
+        <soundCastTail>GunTail_Medium</soundCastTail>
+        <muzzleFlashScale>14</muzzleFlashScale>
+        <targetParams>
+          <canTargetLocations>true</canTargetLocations>
+        </targetParams>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>13</power>
+        <cooldownTime>2</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>13</power>
+        <cooldownTime>2</cooldownTime>
+      </li>
+    </tools>
+  </ThingDef>
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_EMPHandCannon</defName>
+    <label>EMP launcher shell</label>
+    <graphicData>
+      <texPath>Things/Projectile/LauncherShot</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+      <color>(68,150,215)</color>
+    </graphicData>
+    <thingClass>Projectile_Explosive</thingClass>
+    <projectile>
+      <speed>20</speed>
+      <damageDef>EMP</damageDef>
+      <!-- Use default damage from explosion def -->
+      <explosionRadius>4.5</explosionRadius>
+      <ai_IsIncendiary>true</ai_IsIncendiary>
+      <arcHeightFactor>0.2</arcHeightFactor>
+      <shadowSize>0.6</shadowSize>
+    </projectile>
+  </ThingDef>
+  
+  <!-- 海军心灵手雷 -->
+  
+  <ThingDef ParentName="BaseMakeableGrenade">
+    <defName>Weapon_PsychicGrenade</defName>
+    <label>marine psychic grenade</label>
+    <description>A replica of the psychic grenade derived from the knowledge of the marine lancer. The explosion of the shock wave can disturb the enemy's psychic nerves, making them dizzy, vomiting, and in severe cases may fall or even die.\n\nDoes not damage friendly or neutral units.</description>
+    <recipeMaker>
+      <researchPrerequisite>GD3_Weapons</researchPrerequisite>
+	  <recipeUsers Inherit="false">
+		<li>FabricationBench</li>
+	  </recipeUsers>
+	  <skillRequirements>
+		<Crafting>10</Crafting>
+	  </skillRequirements>
+	  <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+	  <workSkill>Crafting</workSkill>
+	  <effectWorking>Smith</effectWorking>
+	  <soundWorking>Recipe_Smith</soundWorking>
+	  <unfinishedThingDef>UnfinishedWeapon</unfinishedThingDef>
+    </recipeMaker>
+    <tickerType>Normal</tickerType>
+	<tradeability>Sellable</tradeability>
+    <graphicData>
+      <texPath>PsychicGrenadeWeapon</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <uiIconScale>1.3</uiIconScale>
+    <soundInteract>Interact_Grenade</soundInteract>
+    <techLevel>Industrial</techLevel>
+    <statBases>
+      <Mass>1</Mass>
+      <RangedWeapon_Cooldown>2.66</RangedWeapon_Cooldown>
+      <WorkToMake>32000</WorkToMake>
+    </statBases>
+    <costList>
+		<ComponentSpacer>1</ComponentSpacer>
+		<Plasteel>80</Plasteel>
+		<BlackPersonaData>2</BlackPersonaData>
+	</costList>
+    <weaponTags Inherit="false">
+    </weaponTags>
+    <thingCategories>
+      <li>Grenades</li>
+    </thingCategories>
+    <smeltable>false</smeltable>
+    <verbs>
+      <li>
+        <label>throw frag grenade</label>
+        <verbClass>Verb_LaunchProjectile</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <range>13.9</range>
+        <forcedMissRadius>1.9</forcedMissRadius>
+        <warmupTime>1.5</warmupTime>
+        <noiseRadius>4</noiseRadius>
+        <ai_IsBuildingDestroyer>false</ai_IsBuildingDestroyer>
+        <soundCast>ThrowGrenade</soundCast>
+        <targetParams>
+          <canTargetLocations>true</canTargetLocations>
+        </targetParams>
+        <defaultProjectile>Proj_PsychicGrenade</defaultProjectile>
+        <rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
+      </li>
+    </verbs>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseGrenadeProjectile">
+	<defName>Proj_PsychicGrenade</defName>
+    <label>psychic grenade</label>
+    <thingClass>Projectile_Explosive</thingClass>
+    <graphicData>
+      <texPath>PsychicGrenade</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <explosionRadius>3.9</explosionRadius >
+      <damageDef>GD_PsychicStrike</damageDef>
+      <!-- Use default damage from explosion def -->
+      <explosionDelay>100</explosionDelay>
+    </projectile>
+  </ThingDef>
+  
+  <!-- 万花筒 -->
+
+  <ThingDef ParentName="BaseHumanMakeableGun">
+    <defName>GD_Kaleidoscope</defName>
+    <label>kaleidoscope</label>
+    <description>Your colonists have read from the black mechanoids' database how to use many types of weapons efficiently. \n\nThis shotgun is capable of firing a dense array of bullets simultaneously, including charge, inferno, high-explosive, and EMP. Beware of friendly fire.</description>
+    <techLevel>Spacer</techLevel>
+    <graphicData>
+      <texPath>Kaleidoscope</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <soundInteract>Interact_ChargeRifle</soundInteract>
+	<smeltable>false</smeltable>
+    <statBases>
+      <WorkToMake>45000</WorkToMake>
+      <Mass>4.6</Mass>
+      <AccuracyTouch>0.85</AccuracyTouch>
+      <AccuracyShort>0.84</AccuracyShort>
+      <AccuracyMedium>0.75</AccuracyMedium>
+      <AccuracyLong>0.55</AccuracyLong>
+      <RangedWeapon_Cooldown>1.20</RangedWeapon_Cooldown>
+    </statBases>
+    <thingSetMakerTags>
+      <li>RewardStandardLowFreq</li>
+      <li>RewardStandardQualitySuper</li>
+    </thingSetMakerTags>
+    <weaponClasses>
+      <li>RangedLight</li>
+    </weaponClasses>
+    <verbs>
+      <li>
+        <verbClass>GD3.Verb_MultiShoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_Inferno_Kaleidoscope</defaultProjectile>
+        <warmupTime>1.0</warmupTime>
+		<minRange>2.9</minRange>
+        <range>17.9</range>
+        <burstShotCount>1</burstShotCount>
+        <soundCast>GD_Kaleidoscope</soundCast>
+        <soundCastTail>GunTail_Medium</soundCastTail>
+        <muzzleFlashScale>18</muzzleFlashScale>
+		<forcedMissRadius>1.5</forcedMissRadius>
+        <ai_AvoidFriendlyFireRadius>3</ai_AvoidFriendlyFireRadius>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>16</power>
+        <cooldownTime>1.5</cooldownTime>
+		<armorPenetration>0.4</armorPenetration>
+      </li>
+    </tools>
+	<recipeMaker>
+		<researchPrerequisite>GD3_Weapons</researchPrerequisite>
+		<recipeUsers>
+			<li>FabricationBench</li>
+		</recipeUsers>
+		<skillRequirements>
+			<Crafting>12</Crafting>
+		</skillRequirements>
+	</recipeMaker>
+	<costList>
+		<Steel>100</Steel>
+	    <Plasteel>120</Plasteel>
+	    <BlackPersonaData>3</BlackPersonaData>
+        <ComponentIndustrial>15</ComponentIndustrial>
+	    <ComponentSpacer>3</ComponentSpacer>
+	</costList>
+	<modExtensions>
+		<li Class="GD3.MultiShootExtension">
+		  <projectiles>
+			<li>Bullet_ChargeBlasterHeavy</li>
+			<li>Bullet_ChargeBlasterHeavy</li>
+			<li>Bullet_ChargeBlasterHeavy</li>
+			<li>Bullet_ChargeBlasterHeavy</li>
+			<li>Bullet_Inferno_Kaleidoscope</li>
+			<li>Bullet_Explode_Kaleidoscope</li>
+			<li>Bullet_Explode_Kaleidoscope</li>
+			<li>Bullet_EMP_Kaleidoscope</li>
+		  </projectiles>
+		</li>
+	</modExtensions>
+  </ThingDef>
+  
+  <!-- 子弹 -->
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_Inferno_Kaleidoscope</defName>
+    <label>inferno shell</label>
+    <graphicData>
+      <texPath>Things/Projectile/LauncherShot</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+      <color>(254,189,58)</color>
+    </graphicData>
+    <thingClass>Projectile_Explosive</thingClass>
+    <projectile>
+      <damageDef>Flame</damageDef>
+      <damageAmountBase>45</damageAmountBase>
+      <speed>65</speed>
+      <explosionRadius>2.4</explosionRadius >
+      <preExplosionSpawnThingDef>Filth_Fuel</preExplosionSpawnThingDef>
+      <preExplosionSpawnChance>0.47</preExplosionSpawnChance>
+      <ai_IsIncendiary>true</ai_IsIncendiary>
+    </projectile>
+  </ThingDef>
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_Explode_Kaleidoscope</defName>
+    <label>explode shell</label>
+    <graphicData>
+      <texPath>Things/Projectile/LauncherShot</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+      <color>(254,189,58)</color>
+    </graphicData>
+    <thingClass>Projectile_Explosive</thingClass>
+    <projectile>
+      <damageDef>Bomb</damageDef>
+	  <damageAmountBase>35</damageAmountBase>
+      <speed>90</speed>
+	  <explosionRadius>2.9</explosionRadius>
+	  <preExplosionSpawnThingDef>Filth_Ash</preExplosionSpawnThingDef>
+	  <preExplosionSpawnChance>0.4</preExplosionSpawnChance>
+    </projectile>
+  </ThingDef>
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_EMP_Kaleidoscope</defName>
+    <label>EMP shell</label>
+    <graphicData>
+      <texPath>Things/Projectile/LauncherShot</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+      <color>(68,150,215)</color>
+    </graphicData>
+    <thingClass>Projectile_Explosive</thingClass>
+    <projectile>
+      <speed>60</speed>
+      <damageDef>EMP</damageDef>
+	  <damageAmountBase>40</damageAmountBase>
+      <explosionRadius>2.5</explosionRadius>
+      <ai_IsIncendiary>true</ai_IsIncendiary>
+      <arcHeightFactor>0.2</arcHeightFactor>
+      <shadowSize>0.6</shadowSize>
+    </projectile>
+  </ThingDef>
+  
+  <!-- 沉思 -->
+
+  <ThingDef ParentName="BaseHumanMakeableGun">
+    <defName>GD_ArcThrower</defName>
+    <label>arc thrower</label>
+    <description>Your colonists have read from the black mechanoids' database how to flexibly use electric current. \n\nThis arc thrower can cause chain burns to a small area of enemies and generate EMP impacts. Because it is equipped with an automatic voltage regulation system, it will not pose a threat to nearby friendly forces.</description>
+    <techLevel>Spacer</techLevel>
+    <graphicData>
+      <texPath>ArcThrower_Blue</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <soundInteract>Interact_ChargeRifle</soundInteract>
+	<smeltable>false</smeltable>
+    <statBases>
+      <WorkToMake>35000</WorkToMake>
+      <Mass>5.2</Mass>
+      <AccuracyTouch>0.95</AccuracyTouch>
+      <AccuracyShort>0.95</AccuracyShort>
+      <AccuracyMedium>0.95</AccuracyMedium>
+      <AccuracyLong>0.95</AccuracyLong>
+      <RangedWeapon_Cooldown>2.10</RangedWeapon_Cooldown>
+    </statBases>
+    <thingSetMakerTags>
+      <li>RewardStandardLowFreq</li>
+      <li>RewardStandardQualitySuper</li>
+    </thingSetMakerTags>
+    <weaponClasses>
+      <li>RangedLight</li>
+    </weaponClasses>
+    <verbs>
+      <li>
+        <verbClass>GD3.Verb_ThrowArc</verbClass>
+		<hasStandardCommand>true</hasStandardCommand>
+        <range>31.9</range>
+        <soundCast>ArcThrowerBurst</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>15</muzzleFlashScale>
+        <warmupTime>0.4</warmupTime>
+        <ticksBetweenBurstShots>3</ticksBetweenBurstShots>
+        <burstShotCount>1</burstShotCount>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>16</power>
+        <cooldownTime>1.5</cooldownTime>
+		<armorPenetration>0.4</armorPenetration>
+      </li>
+    </tools>
+	<recipeMaker>
+		<researchPrerequisite>GD3_Weapons</researchPrerequisite>
+		<recipeUsers>
+			<li>FabricationBench</li>
+		</recipeUsers>
+		<skillRequirements>
+			<Crafting>10</Crafting>
+		</skillRequirements>
+	</recipeMaker>
+	<costList>
+		<Steel>140</Steel>
+	    <Plasteel>40</Plasteel>
+	    <BlackPersonaData>2</BlackPersonaData>
+        <ComponentIndustrial>12</ComponentIndustrial>
+	    <ComponentSpacer>1</ComponentSpacer>
+	</costList>
+	<modExtensions>
+	  <li Class="GD3.Ext_Arc">
+	    <range>6.9</range><!-- 连锁范围 -->
+	    <chainCount>2~5</chainCount><!-- 连锁数 -->
+	    <damage>Burn</damage><!-- 伤害类型 -->
+	    <amount>25</amount><!-- 伤害 -->
+	    <penetration>1.0</penetration><!-- 穿甲 -->
+	    <EMPdamage>40</EMPdamage><!-- EMP伤害 -->
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  <!-- 沉思 -->
+
+  <ThingDef ParentName="BaseHumanMakeableGun">
+    <defName>GD_Rumination</defName>
+    <label>rumination</label>
+    <description>You often see the black-clad apocriton lost in thought alone. The universe is so vast and profound. The more you know about it, the more frightened you become in your heart. \n\nEnemies that receive an electric shock will simultaneously generate several lightning arrows nearby.</description>
+    <techLevel>Archotech</techLevel>
+    <graphicData>
+      <texPath>ArcThrower_Red</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <soundInteract>Interact_ChargeRifle</soundInteract>
+	<smeltable>false</smeltable>
+    <statBases>
+      <WorkToMake>45000</WorkToMake>
+      <Mass>5.2</Mass>
+      <AccuracyTouch>0.95</AccuracyTouch>
+      <AccuracyShort>0.95</AccuracyShort>
+      <AccuracyMedium>0.95</AccuracyMedium>
+      <AccuracyLong>0.95</AccuracyLong>
+      <RangedWeapon_Cooldown>2.10</RangedWeapon_Cooldown>
+    </statBases>
+    <thingSetMakerTags IsNull="True" />
+    <weaponClasses>
+      <li>RangedLight</li>
+    </weaponClasses>
+    <verbs>
+      <li>
+        <verbClass>GD3.Verb_ThrowArc_Red</verbClass>
+		<hasStandardCommand>true</hasStandardCommand>
+        <range>37.9</range>
+        <soundCast>ArcThrowerBurst</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>15</muzzleFlashScale>
+        <warmupTime>0.4</warmupTime>
+        <ticksBetweenBurstShots>24</ticksBetweenBurstShots>
+        <burstShotCount>2</burstShotCount>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>16</power>
+        <cooldownTime>1.5</cooldownTime>
+		<armorPenetration>0.4</armorPenetration>
+      </li>
+    </tools>
+	<recipeMaker>
+		<researchPrerequisite>GD3_Apocriton</researchPrerequisite>
+		<recipeUsers>
+			<li>FabricationBench</li>
+		</recipeUsers>
+		<skillRequirements>
+			<Crafting>18</Crafting>
+		</skillRequirements>
+	</recipeMaker>
+	<tradeability>Sellable</tradeability>
+	<costList>
+		<GD_ArcThrower>1</GD_ArcThrower>
+	    <BlackPersonaData>2</BlackPersonaData>
+	    <ComponentSpacer>1</ComponentSpacer>
+		<WhitePetal>100</WhitePetal>
+	</costList>
+	<modExtensions>
+	  <li Class="GD3.Ext_Arc">
+	    <range>7.9</range><!-- 连锁范围 -->
+	    <chainCount>4~9</chainCount><!-- 连锁数 -->
+	    <damage>Burn</damage><!-- 伤害类型 -->
+	    <amount>20</amount><!-- 伤害 -->
+	    <penetration>1.5</penetration><!-- 穿甲 -->
+	    <EMPdamage>60</EMPdamage><!-- EMP伤害 -->
+      </li>
+	  <li Class="GD3.Ext_GlowWeapon">
+	    <graphicData>
+		  <texPath>Mote/ArcThrower_Red_Glow</texPath>
+		  <graphicClass>Graphic_Single</graphicClass>
+		  <shaderType>MoteGlow</shaderType>
+		</graphicData>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+</Defs>

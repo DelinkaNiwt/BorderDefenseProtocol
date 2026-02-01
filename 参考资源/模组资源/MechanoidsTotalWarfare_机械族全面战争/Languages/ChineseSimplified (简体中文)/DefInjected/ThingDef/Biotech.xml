@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 链波中继 -->
+  <NCL_MechNode.label>TODO</NCL_MechNode.label>
+  <!-- EN: 链波中继站是由NCL工程师与机械师共同研发的量子通讯节点，初始提供20点基础带宽，可消耗额外电力提升信号强度，需绑定指定机械师作为服务终端以维持稳定运作。 -->
+  <NCL_MechNode.description>TODO</NCL_MechNode.description>
+  
+</LanguageData>

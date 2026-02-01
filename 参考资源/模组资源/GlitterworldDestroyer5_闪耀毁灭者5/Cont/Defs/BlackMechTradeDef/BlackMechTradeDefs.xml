@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <GD3.BlackMechTradeDef>
+    <defName>BlackPersonaData</defName>
+    <label>Exchange Persona Data (1000 intelligence - 1 persona data)</label>
+    <workerClass>GD3.BlackMechTradeWorker_Goods</workerClass>
+	<thing>BlackPersonaData</thing>
+	<count>1</count>
+	<order>100</order>
+  </GD3.BlackMechTradeDef>
+  
+  <GD3.BlackMechTradeDef>
+    <defName>PrecisionDeck</defName>
+    <label>Exchange Precision Armor Plates (1000 intelligence - 75 precision decks)</label>
+    <workerClass>GD3.BlackMechTradeWorker_Goods</workerClass>
+	<thing>PrecisionDeck</thing>
+	<count>75</count>
+	<order>200</order>
+  </GD3.BlackMechTradeDef>
+  
+  <GD3.BlackMechTradeDef>
+    <defName>OrbitalTargeterMechCluster</defName>
+    <label>Exchange Mech Cluster Targeter (1000 intelligence - 1 mech cluster targeter)</label>
+    <workerClass>GD3.BlackMechTradeWorker_Goods</workerClass>
+	<thing>OrbitalTargeterMechCluster</thing>
+	<count>1</count>
+	<order>300</order>
+  </GD3.BlackMechTradeDef>
+  
+  <GD3.BlackMechTradeDef>
+    <defName>MedicineUltratech</defName>
+    <label>Exchange Glitterworld Medicine (1000 intelligence - 10 Glitterworld medicine)</label>
+    <workerClass>GD3.BlackMechTradeWorker_Goods</workerClass>
+	<thing>MedicineUltratech</thing>
+	<count>10</count>
+	<order>400</order>
+  </GD3.BlackMechTradeDef>
+  
+  <GD3.BlackMechTradeDef>
+    <defName>Ally</defName>
+    <label>Call for Support (2000 Intelligence - a group of combatants)\nNote: Combatants will attack ALL factions except you</label>
+    <workerClass>GD3.BlackMechTradeWorker_Ally</workerClass>
+	<intelligenceCost>2000</intelligenceCost>
+	<rectHeight>60</rectHeight>
+	<order>500</order>
+  </GD3.BlackMechTradeDef>
+
+</Defs>

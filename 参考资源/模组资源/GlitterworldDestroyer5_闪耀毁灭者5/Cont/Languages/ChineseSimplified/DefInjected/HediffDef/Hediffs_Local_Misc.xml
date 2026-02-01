@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CataphractCentipede_Boot.label>人格核心启动</CataphractCentipede_Boot.label>
+  <CataphractCentipede_Boot.description>这个单位庞大的体型阻碍了信号传输，人格核心需要一段时间开机。初始化阶段此单位极其脆弱。</CataphractCentipede_Boot.description>
+  <CataphractCentipede_Boot.stages.0.label>初始化</CataphractCentipede_Boot.stages.0.label>
+  <CataphractCentipede_Boot.stages.1.label>初步调谐</CataphractCentipede_Boot.stages.1.label>
+  <CataphractCentipede_Boot.stages.2.label>过载</CataphractCentipede_Boot.stages.2.label>
+  <CataphractCentipede_Boot.stages.3.label>完成</CataphractCentipede_Boot.stages.3.label>
+
+  <MechJump.label>跳跃背包就绪</MechJump.label>
+  <MechJump.description>这个单位可以使用跳跃背包接近敌人。\n\n跳跃背包作用范围：2~12格</MechJump.description>
+
+  <Activation.label>活化</Activation.label>
+  <Activation.description>此单位体内的纳米机械体正在强化其机动能力。</Activation.description>
+  
+  <MindSuppression.label>思维压制</MindSuppression.label>
+  <MindSuppression.description>机械蜂王的心灵冲击波正在干扰此单位的神经信号传导，较为敏感的视神经与启灵神经会因此几乎无法正常工作。\n\n只有在离机械蜂王55格以内的时候才会受到此效果的影响。</MindSuppression.description>
+
+  <GD_SpeedBoost.label>被伤狂怒</GD_SpeedBoost.label>
+  <GD_SpeedBoost.description>受伤激活了这台机械体的自我防卫机制，他的性能在一定时间内得到提升。</GD_SpeedBoost.description>
+  
+  <MedalFamineHediff.label>心灵饥饿</MedalFamineHediff.label>
+  <MedalFamineHediff.description>一种奇怪的烧灼感填充了此单位的大脑。</MedalFamineHediff.description>
+  
+  <GD_BlackShield.label>移行护盾</GD_BlackShield.label>
+  <GD_BlackShield.description>这面护盾能够以难以形容的怪异方式主动改变自己的形状，并柔软地将任何来袭攻击阻挡在外。当护盾消失时，被它所储存的动能还会瞬间向外释放，击伤任何敢于靠近的人。</GD_BlackShield.description>
+  
+  <GD_Militor.label>小蠊</GD_Militor.label>
+  <GD_Militor.description>保护性效果。</GD_Militor.description>
+  
+  <GD_SavingMech.label>任务机械体</GD_SavingMech.label>
+  <GD_SavingMech.description>保护性效果。</GD_SavingMech.description>
+  
+  <GD_CallReinforcement.label>领队</GD_CallReinforcement.label>
+  <GD_CallReinforcement.description>这台机械体拥有一次性的呼叫支援能力。 如果它呼叫成功，一支机械伊蚊中队将被部署至战场上。 \n\n受到EMP打击后该模块将损坏。</GD_CallReinforcement.description>
+</LanguageData>

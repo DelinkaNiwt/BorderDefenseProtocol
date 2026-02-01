@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <GD3BlackPassedBy.label>黑衣机械体经过</GD3BlackPassedBy.label>
+  
+  <MechCluster_Giant_Incident.label>机械集群-复仇</MechCluster_Giant_Incident.label>
+  <MechCluster_Giant_Incident.letterLabel>机械集群-复仇</MechCluster_Giant_Incident.letterLabel>
+  <MechCluster_Giant_Incident.letterText>一个格外庞大的机械战斗集群前来铲除你。\n\n这些战斗单位是被一次高风险的信息窃取行为吸引而来。为了对付高威胁的巨型炮塔，你需要准备充足的烟雾与吸引火力用的诱饵。</MechCluster_Giant_Incident.letterText>
+
+
+</LanguageData>

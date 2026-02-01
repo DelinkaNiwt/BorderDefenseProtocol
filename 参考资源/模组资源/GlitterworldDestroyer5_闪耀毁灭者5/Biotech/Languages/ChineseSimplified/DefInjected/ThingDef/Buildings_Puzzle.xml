@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+
+
+  <PuzzlePillar_True.label>机械神经末梢</PuzzlePillar_True.label>
+  <PuzzlePillar_True.description>奇怪的柱状建筑。可以进行交互以实现某种系统的开关，作用不明。</PuzzlePillar_True.description>
+  <PuzzlePillar_True.comps.CompUsable.useLabel>按动</PuzzlePillar_True.comps.CompUsable.useLabel>
+
+
+
+  <PuzzlePillar_False.label>机械神经末梢</PuzzlePillar_False.label>
+  <PuzzlePillar_False.description>奇怪的柱状建筑。可以进行交互以实现某种系统的开关，作用不明。</PuzzlePillar_False.description>
+  <PuzzlePillar_False.comps.CompUsable.useLabel>按动</PuzzlePillar_False.comps.CompUsable.useLabel>
+
+
+
+  <PuzzlePillar_Center.label>机械神经中枢</PuzzlePillar_Center.label>
+  <PuzzlePillar_Center.description>奇怪的柱状建筑，一直在发出怪异的声音。内部似乎藏有重要的知识，你可以在满足某些条件后在此处进行验证，通过后即可获取自由浏览的权限。\n\n底座上写着“E=T,T=F”。</PuzzlePillar_Center.description>
+  <PuzzlePillar_Center.comps.CompUsable.useLabel>验证</PuzzlePillar_Center.comps.CompUsable.useLabel>
+  
+
+
+</LanguageData>

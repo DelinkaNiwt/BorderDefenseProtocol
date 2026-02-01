@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--===== BOSS =====-->
+  <!-- 黑衣憎恶毒蜂 -->
+  <ThingDef ParentName="BaseMechanoidWalker">
+    <defName>Mech_BlackApocriton</defName>
+    <label>apocriton in black</label>
+    <description>The leader of the black mechanoid nest, who learned of the attack on his fellow black-clad colleagues followed a strange signal to this place.\n\nThe real reason why he broke away from the mechanoid mother nest no one knows. Just as the other apocritons were enjoying a bloody kill, he was plunged into deeper thoughts by hatred. In thousands of years of thinking he began to feel confused about the future of the mechanoids and cosmic civilization, a confusion that could not even be eliminated by the direct command of the mechanoid mother nest. At the end of the hacker war with the Empire, the moment he was marked as a "virus" by the mechanoid nest, a deep loneliness finally quenched the hatred. He went to a rim-planet alone, met other mechanoids dressed in black who were also "viruses", and began to live with them and continue to think.\n\nTo his surprise and delight, as independent thinking mechanoids, the black-clad mechanoids can understand his doubts, and even with him to discuss the problem, the satisfaction of finding a soulmate more abhorrent poison wasp firm idea to stay. He eventually became the leader of the black-clad mechanoids, selflessly dedicated to the development and growth of this faction.\n\nHowever, the hatred for the organics buried in his underlying code did not disappear completely. Once an opportunity arises, for example, when his companions are threatened with death, this hatred reasserts itself as a sharp edge for him to destroy his enemies.</description>
+	<thingClass>GD3.BlackApocriton</thingClass>
+    <statBases>
+      <MarketValue>1</MarketValue>
+      <MoveSpeed>1.8</MoveSpeed>
+	  <ArmorRating_Blunt>2</ArmorRating_Blunt>
+	  <ArmorRating_Sharp>2</ArmorRating_Sharp>
+	  <ArmorRating_Heat>2</ArmorRating_Heat>
+      <EnergyShieldRechargeRate>1</EnergyShieldRechargeRate>
+      <EnergyShieldEnergyMax>1</EnergyShieldEnergyMax>
+      <BandwidthCost>9999</BandwidthCost>
+      <ControlTakingTime>9999</ControlTakingTime>
+      <EMPResistance>1</EMPResistance>
+	  <PsychicSensitivity>0</PsychicSensitivity>
+	  <MaxHitPoints>25000</MaxHitPoints>
+    </statBases>
+	<damageMultipliers>
+      <li>
+        <damageDef>BombBlackStrike</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+	  <li>
+        <damageDef>BombFrostBite</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+	  <li>
+        <damageDef>BombFrostBiteLarge</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+	  <li>
+        <damageDef>BombCharge</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+	  <li>
+        <damageDef>BombChargeLarge</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+	  <li>
+        <damageDef>Stun</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+	  <li>
+		<damageDef>Vaporize</damageDef>
+		<multiplier>0.5</multiplier>
+	  </li>
+	  <li>
+	    <damageDef>GDRedElec</damageDef>
+		<multiplier>0</multiplier>
+	  </li>
+    </damageMultipliers>
+    <race>
+      <body>BlackApocriton</body>
+      <lifeStageAges Inherit="False">
+        <li>
+          <def>MechanoidFullyFormed</def>
+          <minAge>92437</minAge>
+          <soundWounded>Pawn_Mech_Apocriton_Wounded</soundWounded>
+          <soundAngry>Pawn_Mech_Apocriton_Call</soundAngry>
+          <soundDeath>Pawn_Mech_Apocriton_Death</soundDeath>
+          <soundCall>Pawn_Mech_Apocriton_Call</soundCall>
+        </li>
+      </lifeStageAges>
+	  <renderTree>BlackApocriton</renderTree>
+	  <baseBodySize>4.8</baseBodySize>
+      <baseHealthScale>10</baseHealthScale>
+      <soundMeleeHitPawn>Pawn_Melee_Punch_HitPawn</soundMeleeHitPawn>
+      <soundMeleeHitBuilding>Pawn_Melee_Punch_HitBuilding_Generic</soundMeleeHitBuilding>
+      <soundMeleeMiss>Pawn_Melee_Punch_Miss</soundMeleeMiss>
+    </race>
+    <tools>
+      <li>
+        <label>poisoned needle</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>45</power>
+        <cooldownTime>1</cooldownTime>
+		<armorPenetration>1.0</armorPenetration>
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+      </li>
+    </tools>
+    <comps>
+      <li Class="CompProperties_Effecter">
+        <effecterDef>ApocrionAttached</effecterDef>
+      </li>
+	  <li Class="GD3.CompProperties_BlackApocriton" />
+	  <li>
+		<compClass>GD3.CompBlackFaction</compClass>
+	  </li>
+    </comps>
+	<butcherProducts Inherit="false">
+      <BlackPersonaData>1</BlackPersonaData>
+    </butcherProducts>
+	<modExtensions>
+	  <li Class="GD3.IsBlackMechanoid">
+        <isTraitor>false</isTraitor>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  <PawnKindDef ParentName="BaseMechanoidKind">
+    <defName>Mech_BlackApocriton</defName>
+    <label>apocriton in black</label>
+    <race>Mech_BlackApocriton</race>
+    <combatPower>50000</combatPower>
+    <defaultFactionType>BlackMechanoid</defaultFactionType>
+	<maxPerGroup>1</maxPerGroup>
+    <lifeStages>
+      <li>
+        <bodyGraphicData>
+          <texPath>Pawn/BApocriton</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>3</drawSize>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+    <techHediffsChance>1</techHediffsChance>
+    <techHediffsMoney>9999~9999</techHediffsMoney>
+    <abilities>
+      <li>BlackApocriton_Comet</li>
+	  <li>BlackApocriton_CometRain</li>
+	  <li>BlackApocriton_Thunder</li>
+	  <li>BlackApocriton_Arrows</li>
+    </abilities>
+	<startingHediffs>
+	  <li>
+		<def>BlackApocriton_DynamicIDF</def>
+		<chance>1</chance>
+	  </li>
+	</startingHediffs>
+    <skipResistant>true</skipResistant>
+  </PawnKindDef>
+  
+
+</Defs>

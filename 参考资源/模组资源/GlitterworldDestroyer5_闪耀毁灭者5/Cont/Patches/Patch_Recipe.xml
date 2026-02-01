@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+  <!-- <Operation Class="PatchOperationSequence">
+    <success>Always</success>
+    <operations>
+      <li Class="PatchOperationTest">
+        <xpath>/Defs/ThingDef[defName="FabricationBench"]/recipes</xpath>
+        <success>Invert</success>
+      </li>
+      <li Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="FabricationBench"]/recipes</xpath>
+        <value>
+          <recipes />
+        </value>
+      </li>
+    </operations>
+  </Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/ThingDef[defName="FabricationBench"]/recipes</xpath>
+		<value>
+			<li>Make_GDHealerSerum</li>
+		</value>
+	</Operation> -->
+</Patch>

@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: NCL -->
+  <NCL_faction.label>TODO</NCL_faction.label>
+  <!-- EN: 常态NCL派系，属于友方阵营，必须被生成。 -->
+  <NCL_faction.description>TODO</NCL_faction.description>
+  <!-- EN: leader -->
+  <NCL_faction.leaderTitle>TODO</NCL_faction.leaderTitle>
+  <!-- EN: {0} from {1} are attacking your {2}. -->
+  <NCL_faction.messageDefendersAttacking>TODO</NCL_faction.messageDefendersAttacking>
+  <!-- EN: mechanoid -->
+  <NCL_faction.pawnSingular>TODO</NCL_faction.pawnSingular>
+  <!-- EN: mechanoids -->
+  <NCL_faction.pawnsPlural>TODO</NCL_faction.pawnsPlural>
+  
+  <!-- EN: NCL -->
+  <NCL_factionEnemy.label>TODO</NCL_factionEnemy.label>
+  <!-- EN: 特殊情况下的NCL派系，属于敌方阵营，必须被生成。 -->
+  <NCL_factionEnemy.description>TODO</NCL_factionEnemy.description>
+  <!-- EN: leader -->
+  <NCL_factionEnemy.leaderTitle>TODO</NCL_factionEnemy.leaderTitle>
+  <!-- EN: {0} from {1} are attacking your {2}. -->
+  <NCL_factionEnemy.messageDefendersAttacking>TODO</NCL_factionEnemy.messageDefendersAttacking>
+  <!-- EN: mechanoid -->
+  <NCL_factionEnemy.pawnSingular>TODO</NCL_factionEnemy.pawnSingular>
+  <!-- EN: mechanoids -->
+  <NCL_factionEnemy.pawnsPlural>TODO</NCL_factionEnemy.pawnsPlural>
+  
+</LanguageData>

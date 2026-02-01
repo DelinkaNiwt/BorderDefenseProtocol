@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <Make_GDHealerSerum.label>制造治愈机械液</Make_GDHealerSerum.label>
+  <Make_GDHealerSerum.description>制造一瓶一次性使用的治愈机械液。</Make_GDHealerSerum.description>
+  <Make_GDHealerSerum.jobString>正在制造治愈机械液。</Make_GDHealerSerum.jobString>
+  
+  <Make_GDResurrectSerum.label>制造复活机械液</Make_GDResurrectSerum.label>
+  <Make_GDResurrectSerum.description>制造一瓶一次性使用的复活机械液。</Make_GDResurrectSerum.description>
+  <Make_GDResurrectSerum.jobString>正在制造复活机械液。</Make_GDResurrectSerum.jobString>
+  
+  <Make_GDShieldCore.label>制造护盾核心</Make_GDShieldCore.label>
+  <Make_GDShieldCore.description>制造一块护盾核心。</Make_GDShieldCore.description>
+  <Make_GDShieldCore.jobString>正在制造护盾核心。</Make_GDShieldCore.jobString>
+  
+  <Make_GDPsylink.label>组装启灵装置</Make_GDPsylink.label>
+  <Make_GDPsylink.description>制造一个启灵装置。</Make_GDPsylink.description>
+  <Make_GDPsylink.jobString>正在制造启灵装置。</Make_GDPsylink.jobString>
+  
+  <Make_GDPersonaCore.label>制造人格核心</Make_GDPersonaCore.label>
+  <Make_GDPersonaCore.description>制造一个人格核心。</Make_GDPersonaCore.description>
+  <Make_GDPersonaCore.jobString>正在制造人格核心。</Make_GDPersonaCore.jobString>
+  
+  <Make_GDTechCore.label>制造科技核心</Make_GDTechCore.label>
+  <Make_GDTechCore.description>制造一个科技核心。</Make_GDTechCore.description>
+  <Make_GDTechCore.jobString>正在制造科技核心。</Make_GDTechCore.jobString>
+  
+  <Make_GDLuciferium.label>制造魔鬼素</Make_GDLuciferium.label>
+  <Make_GDLuciferium.description>制造一份魔鬼素。</Make_GDLuciferium.description>
+  <Make_GDLuciferium.jobString>正在制造魔鬼素。</Make_GDLuciferium.jobString>
+  
+  <Make_GDUniversalTrainer.label>制造通用训练器</Make_GDUniversalTrainer.label>
+  <Make_GDUniversalTrainer.description>制造一瓶一次性使用的通用训练器。</Make_GDUniversalTrainer.description>
+  <Make_GDUniversalTrainer.jobString>正在制造通用训练器。</Make_GDUniversalTrainer.jobString>
+  
+  <Extract_MechCorpse.label>熔炼生锈尸体</Extract_MechCorpse.label>
+  <Extract_MechCorpse.description>用高温从生锈尸体中熔炼出一些尚可利用的钢铁。这是它最后的归宿。</Extract_MechCorpse.description>
+  <Extract_MechCorpse.jobString>正在熔炼生锈尸体。</Extract_MechCorpse.jobString>
+
+</LanguageData>

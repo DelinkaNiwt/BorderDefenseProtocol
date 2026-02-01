@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 损坏炮台 -->
+
+  <PlayerTurret_Broken.label>损坏炮塔</PlayerTurret_Broken.label>
+  <PlayerTurret_Broken.description>一座损坏的炮塔，其中存有一些具有分析价值的数据。修复后会自动上传至机械族巢穴。</PlayerTurret_Broken.description>
+  
+  <!-- 电荷霰炮炮塔 -->
+
+  <PlayerTurret_ChargeSleetTurret.label>电荷霰炮炮塔</PlayerTurret_ChargeSleetTurret.label>
+  <PlayerTurret_ChargeSleetTurret.description>武装有电荷霰炮的炮塔，能够对近距离敌人造成毁灭性打击。</PlayerTurret_ChargeSleetTurret.description>
+
+  <Gun_ChargeSleetBlaster.label>电荷霰炮</Gun_ChargeSleetBlaster.label>
+  <Gun_ChargeSleetBlaster.description>被设计用于在近距离打出密集大口径电荷弹的冲击炮。</Gun_ChargeSleetBlaster.description>
+  
+  <!-- 磁轨炮塔 -->
+
+  <PlayerTurret_RailgunTurret.label>磁轨炮塔</PlayerTurret_RailgunTurret.label>
+  <PlayerTurret_RailgunTurret.description>武装有电荷磁轨炮的炮塔，通过电磁场加速后打出的电荷能够贯穿数个重甲单位。</PlayerTurret_RailgunTurret.description>
+
+  <Gun_RailgunTurret.label>磁轨炮</Gun_RailgunTurret.label>
+  <Gun_RailgunTurret.description>被设计用于打击重型单位的磁轨炮。</Gun_RailgunTurret.description>
+  <Bullet_GDRailgun.label>磁轨弹</Bullet_GDRailgun.label>
+  
+  <!-- 电弧炮塔 -->
+
+  <PlayerTurret_ArcTurret.label>电弧炮塔</PlayerTurret_ArcTurret.label>
+  <PlayerTurret_ArcTurret.description>武装有电弧枪的炮塔，能够对一定范围内的敌人造成连锁伤害并造成EMP震慑。</PlayerTurret_ArcTurret.description>
+
+  <Gun_ArcThrowTurret.label>电弧枪</Gun_ArcThrowTurret.label>
+  <Gun_ArcThrowTurret.description>被设计用于打击群体单位的电弧枪。</Gun_ArcThrowTurret.description>
+  
+  <!-- 黑衣设施建筑 -->
+  
+  <GD_BlackMechComputer.label>停用的计算机</GD_BlackMechComputer.label>
+  <GD_BlackMechComputer.description>被黑衣机械族用于临时储存、分析数据的计算机，已经遭到了物理上的破坏以避免数据泄露。但凭借机械巢的技术，只要能收集到一些残留的数据或是硬件碎片，便能复原出有用的信息。</GD_BlackMechComputer.description>
+  <GD_BlackMechComputer.comps.CompHackable.hackedInspectString>已骇入。</GD_BlackMechComputer.comps.CompHackable.hackedInspectString>
+  <GD_BlackMechComputer.comps.CompHackable.hackedMessage>{HACKER_labelShort}已完成对{SUBJECT_labelNoParenthesisDef}的骇入。</GD_BlackMechComputer.comps.CompHackable.hackedMessage>
+  <GD_BlackMechComputer.comps.CompHackable.notHackedInspectString>骇入以获取信息。</GD_BlackMechComputer.comps.CompHackable.notHackedInspectString>
+  
+  <GD_DroneTerminal.label>无人机终端</GD_DroneTerminal.label>
+  <GD_DroneTerminal.description>用于应急停止无人机运作的终端，可以通过骇入强制激活。\n\n随机停用一台还在运作的诡雷无人机，并且有可能分析到残余信息，小概率获取人格数据。</GD_DroneTerminal.description>
+  
+  <GD_EmptyShelves.label>空物品架</GD_EmptyShelves.label>
+  <GD_EmptyShelves.description>已经被搬空的物品架。</GD_EmptyShelves.description>
+  <GD_StorageRacks.label>储存货架</GD_StorageRacks.label>
+  <GD_StorageRacks.description>堆放着一些杂乱零件的货架，或许可以整理出一些有用的材料。</GD_StorageRacks.description>
+  <GD_PaperBoxA.label>纸板箱</GD_PaperBoxA.label>
+  <GD_PaperBoxA.description>似乎黑衣机械族也喜欢使用这种简单高效的存储工具。可以打开以获取一些有用的材料。</GD_PaperBoxA.description>
+  <GD_PaperBoxB.label>纸板箱</GD_PaperBoxB.label>
+  <GD_PaperBoxB.description>似乎黑衣机械族也喜欢使用这种简单高效的存储工具。可以打开以获取一些有用的材料。</GD_PaperBoxB.description>
+  <GD_BigCase.label>大提箱</GD_BigCase.label>
+  <GD_BigCase.description>因为某些原因没来得及带走的大箱子，里面可能会有珍贵的资源。</GD_BigCase.description>
+  <GD_WeaponCase.label>小提箱</GD_WeaponCase.label>
+  <GD_WeaponCase.description>因为某些原因没来得及带走的小箱子，里面可能会有珍贵的资源。</GD_WeaponCase.description>
+
+
+</LanguageData>

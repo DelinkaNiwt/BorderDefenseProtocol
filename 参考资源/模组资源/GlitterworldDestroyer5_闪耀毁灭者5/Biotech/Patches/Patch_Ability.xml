@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/AbilityDef[defName="SmokepopMech"]/comps</xpath>
+		<value>
+			<comps>
+			  <li Class="CompProperties_AbilitySmokepop">
+				<smokeRadius>5.9</smokeRadius>
+				<clamorType>Ability</clamorType>
+				<clamorRadius>15</clamorRadius>
+			  </li>
+			</comps>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/AbilityDef[defName="SmokepopMech"]/verbProperties</xpath>
+		<value>
+			<verbProperties>
+			  <verbClass>Verb_CastAbility</verbClass>
+			  <warmupTime>1</warmupTime>
+			  <range>5.9</range>
+			  <drawAimPie>false</drawAimPie>    
+			  <targetParams>
+				<canTargetSelf>true</canTargetSelf>
+			  </targetParams>
+			</verbProperties>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/AbilityDef[defName="SmokepopMech"]/cooldownTicksRange</xpath>
+		<value>
+			<cooldownTicksRange>3600</cooldownTicksRange>
+		</value>
+	</Operation>
+	
+</Patch>

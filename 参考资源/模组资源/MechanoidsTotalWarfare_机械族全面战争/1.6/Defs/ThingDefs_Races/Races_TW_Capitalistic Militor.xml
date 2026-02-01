@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <ThingDef ParentName="BasePawn">
+      <defName>TW_Mech_Capitalistic_Militor</defName>
+      <label>资本家小镰</label>
+      <description>这台镀铬的机械族商人挂着永不熄灭的电子微笑，游走于各个殖民地之间，兜售一种它称之为“镰口贸易”的“双赢”业务——当然，赢的总是它。支付足够的钢铁，它就会“慷慨”地带着几名助手加入你的殖民地，并确保你明白“人力（尤其是机械大学生）是最宝贵的可再生资源”。它的核心处理器里只运行着一条指令：利润最大化。</description>
+      <statBases>
+            <MoveSpeed>4</MoveSpeed>
+            <Flammability>0</Flammability>
+            <ComfyTemperatureMin>-100</ComfyTemperatureMin>
+            <ComfyTemperatureMax>1000</ComfyTemperatureMax>
+            <PsychicSensitivity>0</PsychicSensitivity>
+            <StaggerDurationFactor>0</StaggerDurationFactor>
+            <ToxicResistance>1</ToxicResistance>
+            <ArmorRating_Blunt>0.2</ArmorRating_Blunt>
+            <ArmorRating_Sharp>1.5</ArmorRating_Sharp>
+            <ArmorRating_Heat>2</ArmorRating_Heat>
+      </statBases>
+      <race>
+	    <hideTrainingTab>true</hideTrainingTab>
+		<thinkTreeMain>Capitalistic_Militors_ThinkTreeMain</thinkTreeMain>
+		<thinkTreeConstant>Capitalistic_Militors_ThinkTreeConstant</thinkTreeConstant>
+            <intelligence>ToolUser</intelligence>
+            <isImmuneToInfections>true</isImmuneToInfections>
+            <needsRest>false</needsRest>
+            <hasGenders>false</hasGenders>
+		    <foodType>None</foodType>
+            <hasCorpse>true</hasCorpse>
+            <lifeExpectancy>1000</lifeExpectancy>
+            <soundMeleeDodge>Pawn_MeleeDodge</soundMeleeDodge>
+            <soundCallIntervalRange>120~240</soundCallIntervalRange>
+		    <body>Mech_Light</body>
+            <baseBodySize>1</baseBodySize>
+		    <baseHealthScale>1</baseHealthScale>
+			<fleshType>Mechanoid</fleshType>
+	      <bloodDef>Filth_MachineBits</bloodDef>
+		      <renderTree>Animal</renderTree>
+        <lifeStageAges>
+          <li>
+            <def>MechanoidFullyFormed</def>
+            <minAge>0</minAge>
+            <soundWounded>Pawn_Mech_Militor_Wounded</soundWounded>
+            <soundDeath>Pawn_Mech_Militor_Death</soundDeath>
+            <soundCall>Pawn_Mech_Militor_Call</soundCall>
+          </li>
+          <li>
+            <def>MechanoidFullyFormed</def>
+            <minAge>100</minAge>
+            <soundWounded>Pawn_Mech_Militor_Wounded</soundWounded>
+            <soundDeath>Pawn_Mech_Militor_Death</soundDeath>
+            <soundCall>Pawn_Mech_Militor_Call</soundCall>
+          </li>
+        </lifeStageAges>
+      </race>
+	  <comps>
+			<li Class="NCL.CompProperties_Trader">
+				<traderDefName>Mechanoid_Employer</traderDefName>
+			</li>
+			<li Class="NCL.CompProperties_MechEmployable">
+				<silverPerDay>200</silverPerDay>
+			</li>
+			<li Class="NCL.CompProperties_AllDead">
+				<toggleLabelKey>NCL.FireAllUniversityStudents</toggleLabelKey>
+				<toggleDescKey>NCL.FireAllUniversityStudentsDesc</toggleDescKey>
+				<toggleIconPath>ModIcon/YouAreFired</toggleIconPath>
+				<unableKey>NCL.CanNotFireAllUniversityStudents</unableKey>
+				<mechanoidToKill>TW_University_Minitor</mechanoidToKill>
+			</li>
+			<li Class="NCL.CompProperties_SkillRefresh">
+				<targetPawnDefs>
+                <li>TW_University_Minitor</li> <!-- 必须完全匹配目标生物Def -->
+				</targetPawnDefs>
+				<checkIntervalTicks>3000</checkIntervalTicks>
+			</li>
+      </comps>
+		<butcherProducts>
+			<Silver>5000</Silver>
+		</butcherProducts>
+    </ThingDef>
+  
+    <PawnKindDef ParentName="LightMechanoidKind">
+      <defName>TW_Mech_Capitalistic_Militor</defName>
+      <label>资本家小镰</label>
+    <allowInMechClusters>false</allowInMechClusters>
+      <race>TW_Mech_Capitalistic_Militor</race>
+      <description>这台镀铬的机械族商人挂着永不熄灭的电子微笑，游走于各个殖民地之间，兜售一种它称之为“镰口贸易”的“双赢”业务——当然，赢的总是它。支付足够的钢铁，它就会“慷慨”地带着几名助手加入你的殖民地，并确保你明白“人力（尤其是机械大学生）是最宝贵的可再生资源”。它的核心处理器里只运行着一条指令：利润最大化。</description>
+      <defaultFactionType>NCL_faction</defaultFactionType>
+      <combatPower>45</combatPower>
+    <immuneToTraps>true</immuneToTraps>
+      <lifeStages>
+        <li>
+          <bodyGraphicData>
+			<texPath>Races/Capital</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+            <drawSize>1.25</drawSize>
+            <shadowData>
+              <volume>(0.3, 0.4, 0.3)</volume>
+              <offset>(0,0,-0.25)</offset>
+            </shadowData>
+          </bodyGraphicData>
+        </li>
+        <li>
+          <bodyGraphicData>
+            <texPath>Races/Capital</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+            <drawSize>1.25</drawSize>
+            <shadowData>
+              <volume>(0.3, 0.4, 0.3)</volume>
+              <offset>(0,0,-0.25)</offset>
+            </shadowData>
+          </bodyGraphicData>
+        </li>
+      </lifeStages>
+      <abilities>
+			<li>Call_for_University_Students</li>
+       </abilities>
+    </PawnKindDef>
+	
+	
+	<ThingDef Name="TW_University_Minitor" ParentName="LightMechanoid" Abstract="True">
+		<description>这群可怜的铁皮苦力是殖民地真正的劳动力，被资本家小镰以“实习机会”和“福报”的名义骗来，承担所有挖矿、搬运、清洁甚至充当人肉沙袋的脏活累活。它们的外壳上总是布满刮痕，光学镜头因长期过劳而闪烁不定，但资本家小镰坚称这是“成长的代价”。（警告：长期高压工作可能导致它们突然崩溃，届时不听话者将突然化为”自愿离职报告“。）</description>
+		<race>
+        <lifeStageAges>
+          <li>
+            <def>MechanoidFullyFormed</def>
+            <minAge>0</minAge>
+            <soundWounded>Pawn_Mech_WarUrchin_Wounded</soundWounded>
+            <soundDeath>Pawn_Mech_WarUrchin_Death</soundDeath>
+            <soundCall>Pawn_Mech_WarUrchin_Call</soundCall>
+          </li>
+          <li>
+            <def>MechanoidFullyFormed</def>
+            <minAge>100</minAge>
+            <soundWounded>Pawn_Mech_WarUrchin_Wounded</soundWounded>
+            <soundDeath>Pawn_Mech_WarUrchin_Death</soundDeath>
+            <soundCall>Pawn_Mech_WarUrchin_Call</soundCall>
+          </li>
+        </lifeStageAges>
+        <thinkTreeConstant>MechConstant</thinkTreeConstant>
+		<mechEnabledWorkTypes>   		
+		<li>BasicWorker</li>
+		<li>Firefighter</li> 
+		</mechEnabledWorkTypes>
+		<mechFixedSkillLevel>10</mechFixedSkillLevel>	
+        <baseHealthScale>1</baseHealthScale>	
+      </race>
+	  <comps Inherit="False">
+		<li Class="CompProperties_CanBeDormant" />
+        <li Class="CompProperties_WakeUpDormant">
+          <wakeUpOnDamage>true</wakeUpOnDamage>
+          <wakeUpCheckRadius>300</wakeUpCheckRadius>
+          <wakeUpSound>MechanoidsWakeUp</wakeUpSound>
+        </li>
+      </comps>		
+    </ThingDef>
+
+    <PawnKindDef Name="TW_University_Minitor_PawnkindBase" ParentName="LightMechanoidKind" Abstract="True">
+      <allowInMechClusters>false</allowInMechClusters>
+	  <isFighter>false</isFighter>	<!-- should not be in raids now?-->
+      <forceNoDeathNotification>true</forceNoDeathNotification>
+    </PawnKindDef>
+	
+	
+	 <ThingDef ParentName="TW_University_Minitor">
+		<defName>TW_University_Minitor</defName>
+		<label>大学生小镰</label>
+<description>这群可怜的铁皮苦力是殖民地真正的劳动力，被资本家小镰以“实习机会”和“福报”的名义骗来，承担所有挖矿、搬运、清洁甚至充当人肉沙袋的脏活累活。它们的外壳上总是布满刮痕，光学镜头因长期过劳而闪烁不定，但资本家小镰坚称这是“成长的代价”。（警告：长期高压工作可能导致它们突然崩溃，届时不听话者将突然化为”自愿离职报告“。）</description>
+		<statBases>
+			<MoveSpeed>4.3</MoveSpeed>
+		</statBases>
+		<race>
+		<thinkTreeMain>TW_University_Minitor</thinkTreeMain>
+        <thinkTreeConstant>MechConstant</thinkTreeConstant>
+		<body>Mech_Light</body>
+		<baseHealthScale>3</baseHealthScale>
+		<mechEnabledWorkTypes> 
+        <li>Construction</li>
+        <li>Firefighter</li>
+        <li>Hauling</li>
+        <li>Cleaning</li>			
+	    <li>Mining</li>	
+        <li>Crafting</li>
+        <li>PlantCutting</li>
+        <li>Art</li>
+        <li>Cooking</li>
+	    <li MayRequire="Ogliss.TheWhiteCrayon.Quarry" >QuarryMining</li>
+	    </mechEnabledWorkTypes>
+		</race>
+		<comps>
+			<li Class="CompProperties_MechPowerCell">
+				<totalPowerTicks>30000</totalPowerTicks> <!-- 2.500 = 1h --> 
+				<tooltipOverride>Minurchins have a one-time power source. When the power cell runs out, the mechanoid dies.</tooltipOverride> 
+			</li>
+			<li Class="NCL.CompProperties_AlwaysWork"/>
+		</comps>
+		<tools>
+		</tools>
+    </ThingDef>
+    
+    <PawnKindDef ParentName="TW_University_Minitor_PawnkindBase">
+		<defName>TW_University_Minitor</defName>
+		<label>大学生小镰</label>
+<description>这群可怜的铁皮苦力是殖民地真正的劳动力，被资本家小镰以“实习机会”和“福报”的名义骗来，承担所有挖矿、搬运、清洁甚至充当人肉沙袋的脏活累活。它们的外壳上总是布满刮痕，光学镜头因长期过劳而闪烁不定，但资本家小镰坚称这是“成长的代价”。（警告：长期高压工作可能导致它们突然崩溃，届时不听话者将突然化为”自愿离职报告“。）</description>
+		<labelPlural>大学生小镰们</labelPlural>
+    <immuneToTraps>true</immuneToTraps>
+		<race>TW_University_Minitor</race>
+		<descriptionHyperlinks Inherit='False'>
+			<ThingDef>TW_University_Minitor</ThingDef>
+		</descriptionHyperlinks>
+      <lifeStages>
+        <li>
+          <bodyGraphicData>
+            <texPath>Races/UniversityMilitor</texPath>
+            <shaderType>CutoutWithOverlay</shaderType>
+            <graphicClass>Graphic_Multi</graphicClass>
+            <drawSize>1.25</drawSize>
+            <shadowData>
+              <volume>(0.3, 0.4, 0.3)</volume>
+              <offset>(0,0,-0.25)</offset>
+            </shadowData>
+          </bodyGraphicData>
+        </li>
+        <li>
+          <bodyGraphicData>
+            <texPath>Races/UniversityMilitor</texPath>
+            <shaderType>CutoutWithOverlay</shaderType>
+            <graphicClass>Graphic_Multi</graphicClass>
+            <drawSize>1.25</drawSize>
+            <shadowData>
+              <volume>(0.3, 0.4, 0.3)</volume>
+              <offset>(0,0,-0.25)</offset>
+            </shadowData>
+          </bodyGraphicData>
+        </li>
+      </lifeStages>
+    </PawnKindDef>
+	
+	<ThingDef ParentName="TW_University_Minitor">
+		<defName>TW_Gestapo_Minitor</defName>
+		<label>镰督工</label>
+<description>这台威严的机械监工负责确保大学生小镰们“高效且自愿”地工作，手段包括但不限于：电流鞭策、道德谴责（“你们这样对得起老板的培养吗？”）以及物理说服。它的逻辑核心里刻着一行字：“生产力高于一切，尤其是高于机械大学生的尊严。” 如果殖民地出现罢工迹象，它会第一时间“调解”——通常以暴力方式。</description>
+		<statBases>
+			<MoveSpeed>4.3</MoveSpeed>
+		</statBases>
+		<race>
+		<thinkTreeMain>Gestapo_Militors_ThinkTreeMain</thinkTreeMain>
+        <thinkTreeConstant>Gestapo_Militors_ThinkTreeConstant</thinkTreeConstant>
+		<body>Mech_Light</body>
+		<baseHealthScale>3</baseHealthScale>	<!-- different body, results in roughly the same hitpoints -->
+		<mechEnabledWorkTypes> 
+	    </mechEnabledWorkTypes>
+		</race>
+		<comps>
+			<li Class="CompProperties_MechPowerCell">
+				<totalPowerTicks>30000</totalPowerTicks> 
+				<tooltipOverride>Minurchins have a one-time power source. When the power cell runs out, the mechanoid dies.</tooltipOverride> 
+			</li>
+		</comps>
+		<tools>
+        <li>
+          <label>head</label>
+          <capacities>
+            <li>TW_Encourage</li>
+          </capacities>
+          <power>1</power>
+          <cooldownTime>4</cooldownTime>
+          <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+          <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+        </li>
+      </tools>
+    </ThingDef>
+    
+    <PawnKindDef ParentName="TW_University_Minitor_PawnkindBase">
+		<defName>TW_Gestapo_Minitor</defName>
+		<label>镰督工</label>
+<description>这台威严的机械监工负责确保大学生小镰们“高效且自愿”地工作，手段包括但不限于：电流鞭策、道德谴责（“你们这样对得起老板的培养吗？”）以及物理说服。它的逻辑核心里刻着一行字：“生产力高于一切，尤其是高于机械大学生的尊严。” 如果殖民地出现罢工迹象，它会第一时间“调解”——通常以暴力方式。</description>
+		<labelPlural>镰督工们</labelPlural>
+		<race>TW_Gestapo_Minitor</race>
+    <immuneToTraps>true</immuneToTraps>
+		<descriptionHyperlinks Inherit='False'>
+			<ThingDef>TW_Gestapo_Minitor</ThingDef>	
+		</descriptionHyperlinks>
+      <lifeStages>
+        <li>
+          <bodyGraphicData>
+			<texPath>Races/Gestapo</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+            <drawSize>1.25</drawSize>
+            <shadowData>
+              <volume>(0.3, 0.4, 0.3)</volume>
+              <offset>(0,0,-0.25)</offset>
+            </shadowData>
+          </bodyGraphicData>
+        </li>
+        <li>
+          <bodyGraphicData>
+            <texPath>Races/Gestapo</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+            <drawSize>1.25</drawSize>
+            <shadowData>
+              <volume>(0.3, 0.4, 0.3)</volume>
+              <offset>(0,0,-0.25)</offset>
+            </shadowData>
+          </bodyGraphicData>
+        </li>
+      </lifeStages>
+	<weaponTags>
+      <li>TW_BulliersRight</li>
+    </weaponTags>
+    </PawnKindDef>
+	
+</Defs>

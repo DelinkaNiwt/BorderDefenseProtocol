@@ -1,0 +1,462 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{81BFFECF-DD46-41AC-ABB7-91B305AFA634}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GD3</RootNamespace>
+    <AssemblyName>GD3</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Assemblies\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>..\..\..\..\..\..\..\workshop\content\294100\2009463077\Current\Assemblies\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\..\..\..\..\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="com.rlabrecque.steamworks.net">
+      <HintPath>..\..\..\..\..\RimWorldWin64_Data\Managed\com.rlabrecque.steamworks.net.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="KCSG">
+      <HintPath>..\..\..\..\..\..\..\workshop\content\294100\2023507013\1.6\Assemblies\KCSG.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>..\..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>..\..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VEF">
+      <HintPath>..\..\..\..\..\..\..\workshop\content\294100\2023507013\1.6\Assemblies\VEF.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bezier\BezierBullet.cs" />
+    <Compile Include="Bezier\BezierProjectiles.cs" />
+    <Compile Include="Bezier\BezierProjectile_Explosive.cs" />
+    <Compile Include="Bezier\BezierUtil.cs" />
+    <Compile Include="Bezier\ModExt_BezierBullet.cs" />
+    <Compile Include="Bezier\ModExt_BezierProjectiles.cs" />
+    <Compile Include="BlackApocriton\BlackApocriton.cs" />
+    <Compile Include="BlackApocriton\MechBossTransition.cs" />
+    <Compile Include="BlackApocriton\JobGiver_WaitWhenBeaten.cs" />
+    <Compile Include="BlackApocriton\CompAbilityEffect_CometRain.cs" />
+    <Compile Include="BlackApocriton\CompAbilityEffect_PocketThunder.cs" />
+    <Compile Include="BlackApocriton\CompAbilityEffect_ThunderArrows.cs" />
+    <Compile Include="BlackApocriton\HediffDynamicIDF.cs" />
+    <Compile Include="BlackApocriton\IsBlackMechanoid.cs" />
+    <Compile Include="BlackApocriton\JobGiver_AIAbilityFightAndKeepDistance.cs" />
+    <Compile Include="BlackApocriton\MiraculousFlowerTransition.cs" />
+    <Compile Include="BlackApocriton\PawnRenderNodeWorker_Cane.cs" />
+    <Compile Include="BlackApocriton\PsychicComet.cs" />
+    <Compile Include="BlackApocriton\Puzzle\ModExtension_DrawOffset.cs" />
+    <Compile Include="BlackApocriton\Puzzle\PawnRenderNodeWorker_BlackSuit.cs" />
+    <Compile Include="BlackApocriton\ThrowingCane.cs" />
+    <Compile Include="BlackApocriton\ThunderArrow.cs" />
+    <Compile Include="BossMusic.cs" />
+    <Compile Include="Building_AntiAirTurret.cs" />
+    <Compile Include="DamageWorker_DontHitAllies.cs" />
+    <Compile Include="DamageWorker_AntiAir.cs" />
+    <Compile Include="GameComponents\GameComponent_ExtraDrawer.cs" />
+    <Compile Include="GiantCluster\GenStep_CustomStructureGen_WithMusic.cs" />
+    <Compile Include="GiantCluster\MechanicalContainer.cs" />
+    <Compile Include="GiantCluster\MusicPlayer_CommandSignal.cs" />
+    <Compile Include="HediffDrawer.cs" />
+    <Compile Include="Mechanoid\CompAbilityEffect_RocketAttack.cs" />
+    <Compile Include="Mechanoid\CompAbilityEffect_CallReinforce.cs" />
+    <Compile Include="Mechanoid\CompEffecterWakeUp.cs" />
+    <Compile Include="Mechanoid\HediffCallReinforcement.cs" />
+    <Compile Include="Mechanoid\HediffComp_BrokenByEMP.cs" />
+    <Compile Include="Odyssey\Annihilator.cs" />
+    <Compile Include="Odyssey\AnimationWorker_Trigonometric.cs" />
+    <Compile Include="Odyssey\AnimationWorker_Jump.cs" />
+    <Compile Include="Odyssey\AnimationWorker_RandomShake.cs" />
+    <Compile Include="Odyssey\Building_Annihilator.cs" />
+    <Compile Include="Odyssey\Building_CentralCharger.cs" />
+    <Compile Include="Odyssey\Ext_GlowWeapon.cs" />
+    <Compile Include="Odyssey\Verb_ThrowArc_Red.cs" />
+    <Compile Include="Odyssey\PlaceWorker_ShowArcTurretRadius.cs" />
+    <Compile Include="Odyssey\GenStep_CustomStructureGen_Platform.cs" />
+    <Compile Include="Odyssey\CompAnnihilatorTerminal.cs" />
+    <Compile Include="Odyssey\JobGiver_GetEnergy_Charge.cs" />
+    <Compile Include="Odyssey\CompAnnihilatorRuin.cs" />
+    <Compile Include="Odyssey\Command_TargetPart.cs" />
+    <Compile Include="Odyssey\CompAbilityEffect_AnnihilatorLongJump.cs" />
+    <Compile Include="Odyssey\Ext_Arc.cs" />
+    <Compile Include="Odyssey\PawnRenderNodeWorker_AnnihilatorTurretGun.cs" />
+    <Compile Include="Odyssey\CompAnnihilatorTurretGun.cs" />
+    <Compile Include="Odyssey\PawnRenderNode_AnnihilatorTurretGun.cs" />
+    <Compile Include="Odyssey\CompAbilityEffect_AnnihilatorSuspend.cs" />
+    <Compile Include="Odyssey\JobGiver_AIGotoNearestHostileWhenFlying.cs" />
+    <Compile Include="Odyssey\CompAbilityEffect_AnnihilatorJumpAndSuspend.cs" />
+    <Compile Include="Odyssey\JobGiver_AnnihilatorFight.cs" />
+    <Compile Include="Odyssey\Skyfaller_SuspendReady.cs" />
+    <Compile Include="Odyssey\CompAbilityEffect_AnnihilatorJump.cs" />
+    <Compile Include="Odyssey\PawnRenderNodeProperties_AnnihilatorPart.cs" />
+    <Compile Include="Odyssey\PawnRenderNode_Annihilator_Part.cs" />
+    <Compile Include="Odyssey\PawnRenderNode_Annihilator.cs" />
+    <Compile Include="Odyssey\CompCerebrexAbility.cs" />
+    <Compile Include="Odyssey\GenStep_CustomStructureGen_Mechhive.cs" />
+    <Compile Include="Odyssey\SkyFaller_JumpingMech.cs" />
+    <Compile Include="Odyssey\Skyfaller_LandingMech.cs" />
+    <Compile Include="Odyssey\Verb_ThrowArc.cs" />
+    <Compile Include="Patches\Annihilator_Patch.cs" />
+    <Compile Include="Patches\CerebrexCore_Patch.cs" />
+    <Compile Include="Patches\MechControl_Patch.cs" />
+    <Compile Include="Patches\Verb_Patch.cs" />
+    <Compile Include="Script\Black\QuestNode_PlaceThing.cs" />
+    <Compile Include="Script\Black\QuestPart_PlaceMilitor.cs" />
+    <Compile Include="Script\Black\QuestPart_PlaceThing.cs" />
+    <Compile Include="Script\MechHive\StorytellerComp_RandomMechhiveQuest.cs" />
+    <Compile Include="Script\MechHive\ChoiceLetter_SavingMech.cs" />
+    <Compile Include="Script\MechHive\FinalBattleDummy.cs" />
+    <Compile Include="Script\MechHive\QuestNode_HyperLinks.cs" />
+    <Compile Include="Script\MechHive\QuestNode_AdjustProgress.cs" />
+    <Compile Include="Script\MechHive\QuestPart_AdjustProgress.cs" />
+    <Compile Include="Script\MechHive\QuestNode_Root_SavingMechModified.cs" />
+    <Compile Include="Script\MechHive\FloatMenuOptionProvider_ModifySavingMech.cs" />
+    <Compile Include="Script\MechHive\HediffComp_SavingMech.cs" />
+    <Compile Include="Script\MechHive\JobDriver_ModifySavingMech.cs" />
+    <Compile Include="Script\MechHive\QuestNode_AddQuest.cs" />
+    <Compile Include="Script\MechHive\QuestNode_RandomPawnkind.cs" />
+    <Compile Include="Patches\FloatMenu_Patch.cs" />
+    <Compile Include="Patches\Render_Patch.cs" />
+    <Compile Include="Mechanoid\PawnRenderNode_SignalTip.cs" />
+    <Compile Include="Script\Black\BlackMechTradeDef.cs" />
+    <Compile Include="Script\Black\BlackMechTradeWorker.cs" />
+    <Compile Include="Script\MechHive\ArtilleryStrike_Penetration.cs" />
+    <Compile Include="Script\MechHive\Building_BrokenTurret.cs" />
+    <Compile Include="Script\MechHive\BuildRequestComp.cs" />
+    <Compile Include="Script\MechHive\ArtilleryStrike_EMP.cs" />
+    <Compile Include="Script\MechHive\CompBlackComputer.cs" />
+    <Compile Include="Script\MechHive\QuestNode_Root_SavingMechNotModified.cs" />
+    <Compile Include="Script\MechHive\QuestNode_SavingMech_Modify.cs" />
+    <Compile Include="Script\MechHive\QuestNode_UnknownHiveQuest.cs" />
+    <Compile Include="Script\MechHive\JobGiver_AIFightEnemiesWithoutLOS.cs" />
+    <Compile Include="Script\MechHive\JobGiver_WaitWithoutEnemies.cs" />
+    <Compile Include="Script\MechHive\CompArchoDrone.cs" />
+    <Compile Include="Script\MechHive\CompArchoMineTerminal.cs" />
+    <Compile Include="Script\MechHive\LayoutWorker_BlackSite.cs" />
+    <Compile Include="Script\MechHive\QuestPart_AddQuest.cs" />
+    <Compile Include="Script\MechHive\QuestPart_ReceiveLetter.cs" />
+    <Compile Include="Script\MechHive\QuestPart_SavingMech_Modify.cs" />
+    <Compile Include="Script\MechHive\RoomPart_CornorDroneWithEdgeTerminal.cs" />
+    <Compile Include="Script\MechHive\TileMutatorWorker_Structure.cs" />
+    <Compile Include="Script\MechHive\Dialog_Artillery.cs" />
+    <Compile Include="Script\MechHive\ArtilleryStrike_Inferno.cs" />
+    <Compile Include="Script\MechHive\JobDriver_CallArtillery.cs" />
+    <Compile Include="Script\MechHive\QuestNode_Root_Structure.cs" />
+    <Compile Include="Script\MechHive\QuestPart_InitiateBuildRequest.cs" />
+    <Compile Include="Script\MechHive\QuestNode_BuildRequest_Initiate.cs" />
+    <Compile Include="Script\MechHive\QuestNode_BuildRequest_GetRequestedThing.cs" />
+    <Compile Include="Script\MechHive\QuestNode_QuestAlwaysUnique.cs" />
+    <Compile Include="Script\MechHive\Reward_ClusterAssist.cs" />
+    <Compile Include="Script\MechHive\QuestNode_ClusterAssist.cs" />
+    <Compile Include="Script\MechHive\QuestNode_SendTurret.cs" />
+    <Compile Include="Script\MechHive\QuestNode_RandomTurret.cs" />
+    <Compile Include="Script\MechHive\Reward_RandomTurret.cs" />
+    <Compile Include="Script\MechHive\ShellRandomAngle.cs" />
+    <Compile Include="Script\MechHive\WorkGiver_FixTurret.cs" />
+    <Compile Include="Script\MechHive\JobDriver_FixTurret.cs" />
+    <Compile Include="Script\MechHive\CompSendCorpse.cs" />
+    <Compile Include="Script\MechHive\QuestNode_EndWithSound.cs" />
+    <Compile Include="Script\MechHive\RailgunProjectile.cs" />
+    <Compile Include="StatPart_Reinforce.cs" />
+    <Compile Include="WorkGiver_UpgradeTurret.cs" />
+    <Compile Include="JobDriver_HaulToTurret.cs" />
+    <Compile Include="JobDriver_InteractBase.cs" />
+    <Compile Include="WorkGiver_AddDecks.cs" />
+    <Compile Include="Command_WhiteAction.cs" />
+    <Compile Include="CompDeckReinforce.cs" />
+    <Compile Include="JobDriver_UpgradeTurret.cs" />
+    <Compile Include="Patches\Buildings_Patch.cs" />
+    <Compile Include="PlaceWorker_ShowAATurretRadius.cs" />
+    <Compile Include="DebugTools.cs" />
+    <Compile Include="IsAntiAirProj.cs" />
+    <Compile Include="IsFlyingUnit.cs" />
+    <Compile Include="Mechanoid\CompAbilityEffect_AirRaid.cs" />
+    <Compile Include="Mechanoid\JobGiver_AIAirUnitAbilityFight.cs" />
+    <Compile Include="Mechanoid\JobGiver_WanderWhetherDutyExist.cs" />
+    <Compile Include="Mechanoid\MechMosquito.cs" />
+    <Compile Include="Mechanoid\ReinforceFlare.cs" />
+    <Compile Include="Mechanoid\ReinforceMosquito.cs" />
+    <Compile Include="ProjectileAntiAir.cs" />
+    <Compile Include="ThinkNode_ConditionalThingDef.cs" />
+    <Compile Include="JobGiver_Log.cs" />
+    <Compile Include="GiantCluster\AIAggressive.cs" />
+    <Compile Include="AlphaMechs\AlphaBombardment.cs" />
+    <Compile Include="AlphaMechs\AlphaSkyfaller.cs" />
+    <Compile Include="AlphaMechs\CompProperties_Terror.cs" />
+    <Compile Include="AlphaMechs\CompTerror.cs" />
+    <Compile Include="AlphaMechs\HediffCompProperties_Terror.cs" />
+    <Compile Include="AlphaMechs\HediffCompTerror.cs" />
+    <Compile Include="AlphaMechs\Projectile_AlphaBombardment.cs" />
+    <Compile Include="BlackApocriton\ApocritonBombardment.cs" />
+    <Compile Include="BlackApocriton\ApocritonMine.cs" />
+    <Compile Include="BlackApocriton\Command_HackerAbility.cs" />
+    <Compile Include="BlackApocriton\CompAbilityEffect_Comet.cs" />
+    <Compile Include="BlackApocriton\CompTeleport_Attack.cs" />
+    <Compile Include="BlackApocriton\CompTeleport_Defend.cs" />
+    <Compile Include="BlackApocriton\HediffCompApoBerserk.cs" />
+    <Compile Include="BlackApocriton\HediffCompDisappear.cs" />
+    <Compile Include="BlackApocriton\HediffCompProperties_ApoBerserk.cs" />
+    <Compile Include="BlackApocriton\CompProperties_SpawnThingOnDestroy.cs" />
+    <Compile Include="BlackApocriton\CompBlackApocriton.cs" />
+    <Compile Include="BlackApocriton\CompProperties_BlackApocriton.cs" />
+    <Compile Include="BlackApocriton\CompSpawnThingOnDestroy.cs" />
+    <Compile Include="BlackApocriton\HediffCompProperties_Disappear.cs" />
+    <Compile Include="BlackApocriton\Projectile_PocketThunder.cs" />
+    <Compile Include="Mechanoid\JobGiver_FleeForDistance.cs" />
+    <Compile Include="Mechanoid\CompAttackMode.cs" />
+    <Compile Include="Mechanoid\HitArmorGizmo.cs" />
+    <Compile Include="Mechanoid\CompDrawBattery.cs" />
+    <Compile Include="Mechanoid\JobGiver_Wait.cs" />
+    <Compile Include="Patches\BlackSuit_Patch.cs" />
+    <Compile Include="Patches\Damage_Patch.cs" />
+    <Compile Include="Patches\Exostrider_Patch.cs" />
+    <Compile Include="Patches\Flying_Patch.cs" />
+    <Compile Include="Patches\Lord_Patch.cs" />
+    <Compile Include="Patches\MechRepair_Patch.cs" />
+    <Compile Include="Patches\Mortar_Patch.cs" />
+    <Compile Include="Patches\Shield_Patch.cs" />
+    <Compile Include="Patches\SitePart_Patch.cs" />
+    <Compile Include="Patches\Threat_Patch.cs" />
+    <Compile Include="Script\Black\Alert_Exo.cs" />
+    <Compile Include="Script\Black\Alert_Militor.cs" />
+    <Compile Include="Script\Black\BiomeWorker_Drysea.cs" />
+    <Compile Include="Script\Black\BlackBomb.cs" />
+    <Compile Include="Script\Black\CompAbilityEffect_ShieldSupport.cs" />
+    <Compile Include="Script\Black\CompDrawWarning.cs" />
+    <Compile Include="Script\Black\CompExostriderTurret.cs" />
+    <Compile Include="Script\Black\CompFloatingCannon.cs" />
+    <Compile Include="Script\Black\CompMilitor.cs" />
+    <Compile Include="Script\Black\CompProperties_ExostriderTurret.cs" />
+    <Compile Include="Script\Black\CompProperties_FloatingCannon.cs" />
+    <Compile Include="Script\Black\CompProperties_ServerUpperDrawer.cs" />
+    <Compile Include="Script\Black\CompProperties_ShieldSupportAbility.cs" />
+    <Compile Include="Script\Black\CompServerUpperDrawer.cs" />
+    <Compile Include="Script\Black\CompUseEffect_HackMortar.cs" />
+    <Compile Include="Script\Black\CompUseEffect_Key.cs" />
+    <Compile Include="Script\Black\CompUseEffect_StealIntelligence.cs" />
+    <Compile Include="Script\Black\DryseaDummy.cs" />
+    <Compile Include="Script\Black\EliminateDummy.cs" />
+    <Compile Include="Script\Black\Exostrider.cs" />
+    <Compile Include="Script\Black\ExostriderDummy.cs" />
+    <Compile Include="Script\Black\ExostriderExtension.cs" />
+    <Compile Include="Script\Black\GenStep_CustomStructureGen.cs" />
+    <Compile Include="Script\Black\GenStep_CustomStructureGen_Drysea.cs" />
+    <Compile Include="Script\Black\GenStep_CustomStructureGen_Exo.cs" />
+    <Compile Include="Script\Black\GenStep_CustomStructureGen_Militor.cs" />
+    <Compile Include="Script\Black\HediffComp_BlackShield.cs" />
+    <Compile Include="Script\Black\JobGiver_TrySupportShield.cs" />
+    <Compile Include="Script\Black\LordJob_WaitAtPoint.cs" />
+    <Compile Include="Script\Black\MultiShootExtension.cs" />
+    <Compile Include="Script\Black\PawnRenderNodeWorker_FloatingCannon.cs" />
+    <Compile Include="Script\Black\PawnRenderNode_FloatingCannon.cs" />
+    <Compile Include="Script\Black\Projectile_Exostrider.cs" />
+    <Compile Include="Script\Black\Projectile_Exostrider_Sub.cs" />
+    <Compile Include="Script\Black\QuestNode_BlackQuest.cs" />
+    <Compile Include="Script\Black\QuestNode_Drysea.cs" />
+    <Compile Include="Script\Black\QuestNode_Eliminate.cs" />
+    <Compile Include="Script\Black\QuestNode_Exostrider.cs" />
+    <Compile Include="Script\Black\QuestNode_FortressEnd.cs" />
+    <Compile Include="Script\Black\QuestNode_Militor.cs" />
+    <Compile Include="Script\Black\QuestPart_AddIntel.cs" />
+    <Compile Include="Script\Black\QuestPart_BackHome.cs" />
+    <Compile Include="Script\Black\QuestPart_BlackMechanoid.cs" />
+    <Compile Include="BlackApocriton\ThoughtWorker_HateAura_Black.cs" />
+    <Compile Include="Verb_AntiAirShoot.cs" />
+    <Compile Include="WorldComponents\MainComponent.cs" />
+    <Compile Include="Mechanoid\CompAbilityEffect_PlaceShield.cs" />
+    <Compile Include="Mechanoid\CompAllDead.cs" />
+    <Compile Include="Mechanoid\CompApocriton.cs" />
+    <Compile Include="Mechanoid\CompBlackFaction.cs" />
+    <Compile Include="Mechanoid\CompChangeWeapon.cs" />
+    <Compile Include="Mechanoid\CompChangeWeaponB.cs" />
+    <Compile Include="Mechanoid\CompFireBurst.cs" />
+    <Compile Include="Mechanoid\CompHitArmor.cs" />
+    <Compile Include="Mechanoid\CompObserverLink.cs" />
+    <Compile Include="CompProperties_Radio.cs" />
+    <Compile Include="Reinforce\CompProperties_ReinforceHediff.cs" />
+    <Compile Include="Mechanoid\CompPsychicAttack.cs" />
+    <Compile Include="CompRadio.cs" />
+    <Compile Include="Reinforce\CompReinforceHediff.cs" />
+    <Compile Include="Mechanoid\CompSpawnMech.cs" />
+    <Compile Include="CompUseEffect_HelpCaller.cs" />
+    <Compile Include="Mechanoid\DamageWorker_PsychicStrike.cs" />
+    <Compile Include="Mechanoid\DamageWorker_Vaporize.cs" />
+    <Compile Include="Mechanoid\DeathActionWorker_MechExplosion.cs" />
+    <Compile Include="GDMod.cs" />
+    <Compile Include="GiantCluster\Building_ArchoMine.cs" />
+    <Compile Include="GiantCluster\CompBerserkMarrow.cs" />
+    <Compile Include="GiantCluster\CompProperties_BerserkMarrow.cs" />
+    <Compile Include="GiantCluster\CompProperties_ReceiverSelect.cs" />
+    <Compile Include="GiantCluster\CompProperties_SecVerb.cs" />
+    <Compile Include="GiantCluster\CompProperties_SecVerb_Pawn.cs" />
+    <Compile Include="GiantCluster\CompProperties_ShieldMarrow.cs" />
+    <Compile Include="GiantCluster\CompProperties_SuppressionMarrow.cs" />
+    <Compile Include="GiantCluster\CompProperties_WallSelfHeal.cs" />
+    <Compile Include="GiantCluster\CompReceiverSelect.cs" />
+    <Compile Include="GiantCluster\CompSecVerb.cs" />
+    <Compile Include="GiantCluster\CompSecVerbPawn.cs" />
+    <Compile Include="GiantCluster\CompShieldMarrow.cs" />
+    <Compile Include="GiantCluster\CompSuppressionMarrow.cs" />
+    <Compile Include="GiantCluster\CompUseEffect_Detection.cs" />
+    <Compile Include="GiantCluster\CompUseEffect_Trainer.cs" />
+    <Compile Include="GiantCluster\CompWallSelfHeal.cs" />
+    <Compile Include="GiantCluster\DamageWorker_ArchoMine.cs" />
+    <Compile Include="GiantCluster\GiantFlameBomb.cs" />
+    <Compile Include="GiantCluster\Verb_GiantSpewFire.cs" />
+    <Compile Include="Mechanoid\HediffCompProperties_Reboot.cs" />
+    <Compile Include="Mechanoid\HediffCompProperties_Rolling.cs" />
+    <Compile Include="Mechanoid\HediffComp_Reboot.cs" />
+    <Compile Include="Mechanoid\HediffComp_Rolling.cs" />
+    <Compile Include="Mechanoid\HediffGiver_MechHypothermia.cs" />
+    <Compile Include="Mechanoid\JobDriver_UtiScanner.cs" />
+    <Compile Include="Mechanoid\JobGiver_ObserverFollow.cs" />
+    <Compile Include="Mechanoid\JobGiver_PsychicGrenade.cs" />
+    <Compile Include="BlackApocriton\Medal\CompConquer.cs" />
+    <Compile Include="BlackApocriton\Medal\CompDeath.cs" />
+    <Compile Include="BlackApocriton\Medal\CompFamine.cs" />
+    <Compile Include="BlackApocriton\Medal\CompPlague.cs" />
+    <Compile Include="BlackApocriton\Medal\CompProperties_Conquer.cs" />
+    <Compile Include="BlackApocriton\Medal\CompProperties_Death.cs" />
+    <Compile Include="BlackApocriton\Medal\CompProperties_Famine.cs" />
+    <Compile Include="BlackApocriton\Medal\CompProperties_Plague.cs" />
+    <Compile Include="BlackApocriton\Medal\CompProperties_War.cs" />
+    <Compile Include="BlackApocriton\Medal\CompWar.cs" />
+    <Compile Include="Script\Black\CommunicationWindow_BlackMech.cs" />
+    <Compile Include="Script\Black\CommunicationWindow_Empire.cs" />
+    <Compile Include="Script\Black\CompAnalyzableSubcore.cs" />
+    <Compile Include="Script\Black\CompAnalyzableUnlockScript.cs" />
+    <Compile Include="Script\Black\CompCommunicationStation.cs" />
+    <Compile Include="Script\Black\CompProperties_CompAnalyzableSubcore.cs" />
+    <Compile Include="Script\Black\CompProperties_CompAnalyzableUnlockScript.cs" />
+    <Compile Include="Script\Black\CompUseEffect_Window.cs" />
+    <Compile Include="Script\Black\GenStep_MechGrave.cs" />
+    <Compile Include="Script\Black\IncidentWorker_MechClusterGiant.cs" />
+    <Compile Include="Script\Black\JobDriver_OperateStation.cs" />
+    <Compile Include="Script\Black\MechanoidScriptDef.cs" />
+    <Compile Include="Script\Black\MechClusterGenerator_Giant.cs" />
+    <Compile Include="WorldComponents\MissionComponent.cs" />
+    <Compile Include="Script\Black\MissionWindow.cs" />
+    <Compile Include="Script\Black\QuestNode_Root_SubcoreAnalyse.cs" />
+    <Compile Include="Script\Black\QuestNode_Root_ToxPollutionPump.cs" />
+    <Compile Include="Script\Black\QuestPart_CheckQuestFail.cs" />
+    <Compile Include="Script\Black\QuestPart_Drysea.cs" />
+    <Compile Include="Script\Black\QuestPart_GenerateMilitor.cs" />
+    <Compile Include="Script\Black\QuestPart_InitiateComet.cs" />
+    <Compile Include="Script\Black\QuestPart_InitiateRaid.cs" />
+    <Compile Include="Script\Black\QuestPart_InitiateScript.cs" />
+    <Compile Include="Script\Black\QuestPart_PlayEffect.cs" />
+    <Compile Include="Script\Black\QuestPart_StartBattle.cs" />
+    <Compile Include="Script\Black\Reward_BlackMech.cs" />
+    <Compile Include="Script\Black\Reward_Intelligence.cs" />
+    <Compile Include="Script\Black\ScriptButton.cs" />
+    <Compile Include="Script\Black\ScriptTree.cs" />
+    <Compile Include="Script\Black\SketchResolver_MechCluster_Giant.cs" />
+    <Compile Include="Script\Black\TradeWindow_BlackMech.cs" />
+    <Compile Include="Script\Black\Verb_LaunchMultiProjectile.cs" />
+    <Compile Include="Script\Black\Verb_MultiShoot.cs" />
+    <Compile Include="Script\Black\WorkGiver_CommunicationStation.cs" />
+    <Compile Include="Mechanoid\ModExtension_NotSendLetter.cs" />
+    <Compile Include="Patches\Analyze_Patch.cs" />
+    <Compile Include="Patches\Apocriton_Patch.cs" />
+    <Compile Include="Patches\Apparel_Patch.cs" />
+    <Compile Include="Patches\BlackApocriton_Patch.cs" />
+    <Compile Include="Patches\ControlRange_Patch.cs" />
+    <Compile Include="Patches\Dodge_Patch.cs" />
+    <Compile Include="Patches\EMP_Patch.cs" />
+    <Compile Include="Patches\Faction_Patch.cs" />
+    <Compile Include="Patches\Harmony.cs" />
+    <Compile Include="Mechanoid\HediffComp_MechJump.cs" />
+    <Compile Include="Hediff_MechNodeGD.cs" />
+    <Compile Include="IncidentBlackPassedBy.cs" />
+    <Compile Include="Mechanoid\CompPawnInvisibility.cs" />
+    <Compile Include="GDDefOf.cs" />
+    <Compile Include="Mechanoid\HediffCompProperties_MechJump.cs" />
+    <Compile Include="MechChipModExt.cs" />
+    <Compile Include="GDSettings.cs" />
+    <Compile Include="Patches\MechCapsule_Patch.cs" />
+    <Compile Include="Patches\SendLetter_Patch.cs" />
+    <Compile Include="Patches\Weapon_Patch.cs" />
+    <Compile Include="PlaceWorker_Station.cs" />
+    <Compile Include="Mechanoid\Projectile_Antimatter.cs" />
+    <Compile Include="Mechanoid\Projectile_CataInferno.cs" />
+    <Compile Include="Mechanoid\Projectile_HellsphereCannon.cs" />
+    <Compile Include="Properties\GD2.cs" />
+    <Compile Include="BlackApocriton\Puzzle\CompApparelHediff.cs" />
+    <Compile Include="BlackApocriton\Puzzle\CompProperties_ApparelHediff.cs" />
+    <Compile Include="BlackApocriton\Puzzle\CompProperties_Puzzle.cs" />
+    <Compile Include="BlackApocriton\Puzzle\CompPuzzle.cs" />
+    <Compile Include="BlackApocriton\Puzzle\CompUseEffect_ChangeAnswer.cs" />
+    <Compile Include="BlackApocriton\Puzzle\CompUseEffect_Check.cs" />
+    <Compile Include="Reinforce\HediffComp_Dodge.cs" />
+    <Compile Include="Reinforce\HediffComp_HitArmor.cs" />
+    <Compile Include="Reinforce\HediffComp_OverHorizon.cs" />
+    <Compile Include="Reinforce\HediffComp_RemoveWhenPlayer.cs" />
+    <Compile Include="Reinforce\HediffComp_ShieldGenerator.cs" />
+    <Compile Include="Reinforce\HediffComp_Smoke.cs" />
+    <Compile Include="Reinforce\HediffComp_ScrapSmoking.cs" />
+    <Compile Include="Reinforce\HediffComp_TopTurret.cs" />
+    <Compile Include="WorldComponents\Update\GDUpdate.cs" />
+    <Compile Include="WorldComponents\Update\GDUpdateMod.cs" />
+    <Compile Include="WorldComponents\Update\GDUpdateSetting.cs" />
+    <Compile Include="Script\Black\GraphicWindow.cs" />
+    <Compile Include="WorldComponents\UpdateComponent.cs" />
+    <Compile Include="WorldComponents\Update\UpdateWindow.cs" />
+    <Compile Include="GDUtility.cs" />
+    <Compile Include="Verb_LaunchProjectileBackfire.cs" />
+    <Compile Include="Mechanoid\Verb_PsychicLance.cs" />
+    <Compile Include="Verb_ShootBackfire.cs" />
+    <Compile Include="Mechanoid\Verb_SpewFire.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

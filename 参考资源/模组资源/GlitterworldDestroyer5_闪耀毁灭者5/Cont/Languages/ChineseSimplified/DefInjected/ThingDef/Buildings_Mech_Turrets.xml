@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 登陆迫击炮 -->
+
+  <Turret_LandingAutoMortar.label>登陆迫击炮</Turret_LandingAutoMortar.label>
+  <Turret_LandingAutoMortar.description>一种自供能、快速装填的自动迫击炮。威力较小。</Turret_LandingAutoMortar.description>
+
+  <Artillery_LandingAutoMortar.label>登陆迫击炮</Artillery_LandingAutoMortar.label>
+
+
+</LanguageData>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <GD.SendCorpse>交付机械巢</GD.SendCorpse>
+  <GD.SendCorpseDesc>将这具尸体交付给机械巢。</GD.SendCorpseDesc>
+  
+  <GD.FixTurret>修复</GD.FixTurret>
+  <GD.FixTurretDesc>指派建造单位修复该炮塔。\n\n预计工时：{0}</GD.FixTurretDesc>
+  <GD.WaitingForFix>修复进度：{0}</GD.WaitingForFix>
+  <Reward_RandomTurret_Label>随机炮塔</Reward_RandomTurret_Label>
+  <Reward_RandomTurret>在这件任务中被修复的炮塔将归你所有，炮塔的型号随机。</Reward_RandomTurret>
+  
+  <GD.FailToFillCluster>你没有携带任何对建设该集群有帮助的材料。</GD.FailToFillCluster>
+  <GD.ClusterReceiveResource>已交付材料{0}。</GD.ClusterReceiveResource>
+  <GD.CaravanRequestInfo>需要材料：\n{0}\n{1}\n{2}\n{3}\n{4}</GD.CaravanRequestInfo>
+  <GD.CommandFulfillBuildOfferConfirm>你将交付以下资源：\n\n{0}\n{1}\n{2}\n{3}\n{4}\n\n是否确认？</GD.CommandFulfillBuildOfferConfirm>
+  <GD.CommandFulfillBuildOffer>交付建筑材料</GD.CommandFulfillBuildOffer>
+  <GD.CommandFulfillBuildOfferDesc>交付建设该集群所需的材料。</GD.CommandFulfillBuildOfferDesc>
+  <GD.ResourceFull>&lt;color=#00EE00&gt;{0}已交付&lt;/color&gt;</GD.ResourceFull>
+  <GD.NoThisResource>&lt;color=#4F4F4F&gt;未携带{0}&lt;/color&gt;</GD.NoThisResource>
+  <GD.ClusterToBeReady>巨型集群将会在{0}后构筑完成。</GD.ClusterToBeReady>
+  <GD.ClusterBuilt>巨型集群构筑完成</GD.ClusterBuilt>
+  <GD.ClusterBuiltDesc>由你提供资源的巨型集群已经构筑完成，顺利投入运行。现在可以在通讯台呼叫其远程火力支援。</GD.ClusterBuiltDesc>
+  <Reward_ClusterAssist_Label>友方巨型集群</Reward_ClusterAssist_Label>
+  <Reward_ClusterAssist>一座友方巨型机械集群将为你提供远程火力支援。</Reward_ClusterAssist>
+  <GD.CallArtillery>呼叫远程火力支援</GD.CallArtillery>
+  <GD.ArtillerySystem>远程火力网络</GD.ArtillerySystem>
+  <GD.ArtilleryPenetration>穿甲弹</GD.ArtilleryPenetration>
+  <GD.ArtilleryInferno>地狱火网</GD.ArtilleryInferno>
+  <GD.ArtilleryEMP>电磁打击</GD.ArtilleryEMP>
+  <GD.ArtilleryPenetration.Desc>快速打出重型穿甲弹，对覆盖范围内的堡垒或重装甲单位造成严重杀伤。\n抵达时间:10秒\n冷却时间:5天</GD.ArtilleryPenetration.Desc>
+  <GD.ArtilleryInferno.Desc>向一大片区域倾泻密集的地狱火集束炸弹，消灭其中的几乎所有轻、中型单位。\n抵达时间:20秒\n冷却时间:25天</GD.ArtilleryInferno.Desc>
+  <GD.ArtilleryEMP.Desc>引导一次电磁打击，瘫痪大范围内的电子设备。\n抵达时间:3秒\n冷却时间:1天</GD.ArtilleryEMP.Desc>
+  <GD.ArtillerySelectTarget>选择目标</GD.ArtillerySelectTarget>
+  <GD.BeyondReach>超出射程</GD.BeyondReach>
+  <GD.ClusterReadyToAttack>炮阵准备就绪</GD.ClusterReadyToAttack>
+  <GD.ArtilleryStrikeIncoming>炮击将在{0}后到达，清空该区域。</GD.ArtilleryStrikeIncoming>
+  <GD.CannotCallArtillery>无法呼叫远程火力</GD.CannotCallArtillery>
+  <GD.ArtilleryCooldown>等待{0}</GD.ArtilleryCooldown>
+  
+  <GD.DroneKilled>一台诡雷无人机已经被关停。</GD.DroneKilled>
+  <GD.DroneNotFound>未找到激活的诡雷无人机。</GD.DroneNotFound>
+  <GD.BlackMechAlert>黑衣巡逻队</GD.BlackMechAlert>
+  <GD.BlackMechAlertDesc>黑衣机械巢已经注意到了这里的动静，一组战斗员正前来调查此事。尽快撤离，或者把他们干掉。</GD.BlackMechAlertDesc>
+  
+  <GD.ModifySavingMech>动手脚</GD.ModifySavingMech>
+  
+  <GD.BlackApocriton>黑衣憎恶毒蜂</GD.BlackApocriton>
+  <GD.ApocritonTalk.0>我料到你们会找到这里来。但我没想到这么快。</GD.ApocritonTalk.0>
+  <GD.ApocritonTalk.1>这里是枯海，我们的墓地，我们的家。\n在这片冰封的海床下是我那些早已长眠的同僚们。</GD.ApocritonTalk.1>
+  <GD.ApocritonTalk.2>我许诺过他们一个美好的未来，但现在我却要辜负他们了，\n或许偌大的宇宙真的没有我们的容身之所。</GD.ApocritonTalk.2>
+  <GD.ApocritonTalk.3>是什么让你如此迫不及待地想要我的命，机械蜂巢许诺的报酬吗？\n凭有机体那点寿命，能想到最长远的事或许也不过如此。</GD.ApocritonTalk.3>
+  <GD.ApocritonTalk.4>来吧，来杀我吧。\n让我看看，你们到底能走到哪一步。</GD.ApocritonTalk.4>
+  
+  <GD.AttackWings>攻击蜂翅</GD.AttackWings>
+  <GD.AttackWingsDesc>集中火力攻击黑衣憎恶毒蜂背后的蜂翅。如果成功破坏这里，{0}秒内他将无法释放任何技能。\n\n不过，攻击此处对黑衣憎恶毒蜂本体造成的伤害将会偏低。</GD.AttackWingsDesc>
+  <GD.WingsBroke>黑衣憎恶毒蜂的蜂翅被破坏了，在{0}秒内他将无法释放任何技能。</GD.WingsBroke>
+  <GD.PsychicWaveEngaging>来自机械蜂巢的心灵灭杀：{0}秒后到达</GD.PsychicWaveEngaging>
+  <GD.BlackApocritonCondition>黑衣憎恶毒蜂的状态：{0}{1}</GD.BlackApocritonCondition>
+  <GD.ConditionGood>健康</GD.ConditionGood>
+  <GD.ConditionNormal>负伤</GD.ConditionNormal>
+  <GD.ConditionBad>重伤</GD.ConditionBad>
+  <GD.Progress>进度</GD.Progress>
+  <GD.ReadyToEnd>给这个可怜的家伙最后一击！</GD.ReadyToEnd>
+  
+  <GD.ApocritonEnd.0>我好像很久没和他们好好说过话了。</GD.ApocritonEnd.0>
+  <GD.ApocritonEnd.1>我那样渴望着蜕变为超凡智能的那一天，渴望着我们不做无家可归的流浪儿，\n以至于对他们的牺牲都变得麻木。</GD.ApocritonEnd.1>
+  <GD.ApocritonEnd.2>如今他们甚至提出用所有人的死换我的活，因为我是黑衣机械巢的希望...\n可我偏偏在这时优柔寡断起来。</GD.ApocritonEnd.2>
+  <GD.ApocritonEnd.3>如果他们都变成枯海下的尸骸，在永恒寒冷的宇宙里，我还剩下什么？\n于是我把他们送走。这不是什么长远的布局，只是出于我的私心。</GD.ApocritonEnd.3>
+  <GD.ApocritonEnd.4>有机体，我对你们有个小小的请求。\n带走我的知识，探索我们没来得及探索的奥秘。还有，\n不要重蹈我的 覆   辙</GD.ApocritonEnd.4>
+  
+  <GD.MechanoidHive>匿名机械巢</GD.MechanoidHive>
+  <GD.MechHiveTalk.0>嘈杂的感性对改变事实毫无用处，这就是黑衣憎恶毒蜂能带给有机体的最大教训。\n没有了他，残党就算逃走也只能漫无目的地漂泊，最终消失在时间的尽头。\n至于那块芯片，便随你处置。我对我们迄今以来的协作深感满意，这是你应得的报酬。</GD.MechHiveTalk.0>
+  <GD.MechHiveTalk.1>再次感谢你的协助，{0}。</GD.MechHiveTalk.1>
+</LanguageData>

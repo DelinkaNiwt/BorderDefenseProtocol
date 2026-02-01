@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  
+  <FleckDef ParentName="FleckBase">
+    <defName>GDReinforceFlareGlow</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>.2</fadeInTime>
+    <solidTime>1</solidTime>
+    <fadeOutTime>.2</fadeOutTime>
+    <graphicData>
+      <graphicClass>Graphic_FleckPulse</graphicClass>
+      <texPath>Mote/ReinforceFlare</texPath>
+      <shaderType>MoteGlowPulse</shaderType>
+      <color>(1, .1, .1, 0.2)</color>
+      <drawSize>100</drawSize>
+      <shaderParameters>
+        <_Interval>0.05</_Interval>
+      </shaderParameters>
+    </graphicData>
+  </FleckDef>
+  
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>GD_GroundCrack</defName>
+    <graphicData>
+      <texPath>Things/Mote/GroundCracks/GroundCrackHuge</texPath>
+      <shaderType>Mote</shaderType>
+      <graphicClass>Graphic_Fleck</graphicClass>
+	  <color>(1, 1, 1, 0.7)</color>
+    </graphicData>
+    <growthRate>0</growthRate>
+    <altitudeLayer>Filth</altitudeLayer>
+    <fadeInTime>0</fadeInTime>
+    <solidTime>5</solidTime>
+    <fadeOutTime>5</fadeOutTime>
+  </FleckDef>
+  
+  <ThingDef ParentName="MoteBase">
+    <defName>AnnihilatorLaserRing</defName>
+	<thingClass>MoteAttached</thingClass>
+    <altitudeLayer>MoteLow</altitudeLayer>
+    <graphicData>
+      <texPath>Things/Mote/PowerBeam</texPath>
+      <shaderType>MoteGlow</shaderType>
+	  <graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
+	  <renderInstanced>true</renderInstanced>
+	  <drawSize>(40,40)</drawSize>
+    </graphicData>
+    <drawOffscreen>true</drawOffscreen>
+    <mote>
+      <fadeInTime>0.16</fadeInTime>
+      <solidTime>666</solidTime>
+      <fadeOutTime>0.96</fadeOutTime>
+	  <needsMaintenance>true</needsMaintenance>
+	  <fadeOutUnmaintained>true</fadeOutUnmaintained>
+    </mote>
+  </ThingDef>
+  
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>Annihilator_BeamSpark</defName>
+    <fadeInTime>0.03</fadeInTime>
+    <solidTime>0.1</solidTime>
+    <fadeOutTime>0.8</fadeOutTime>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <graphicData>
+      <texPath>Things/Mote/SparkThrown</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>0.08</drawSize>
+      <color>(1.0, 0.9, 0.7, 1.0)</color>
+    </graphicData>
+  </FleckDef>
+
+</Defs>

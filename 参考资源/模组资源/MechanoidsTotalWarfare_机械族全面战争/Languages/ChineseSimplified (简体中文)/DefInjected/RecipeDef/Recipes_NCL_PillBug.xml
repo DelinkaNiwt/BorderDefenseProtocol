@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 造闪光西瓜虫 -->
+  <NCL_Mech_PillBug.label>TODO</NCL_Mech_PillBug.label>
+  <!-- EN: 单位档案：NCL-04“闪光西瓜虫”\n来源：NCL「铁律」重装防御序列\n\n这是一种被改装用于地面重火力压制的特殊战斗单位，最初作为实验性光学兵器平台诞生于NCL的末期。机体表层遍布密集的光子晶体结构，在强光环境下常被误认为是能量残影，因此得名“闪光西瓜虫”。\n\n它行动迟缓，但极其耐打，具备高于常规机械单位的生存能力。前端搭载的“裂解者”阳电子炮可在远距离内融穿大部分掩体与装甲目标，双侧同步运行的棱镜激光系统则能精确击毁中低速飞行物，尤其擅长拦截来自低轨道的投射物。\n\n特殊能力：\n◈「跳起来滚」- 通过短距能量喷射瞬间跃向目标区域，对落点附近的敌对单位造成冲击伤害与强力击退效果 -->
+  <NCL_Mech_PillBug.description>TODO</NCL_Mech_PillBug.description>
+  <!-- EN: Gestating mech. -->
+  <NCL_Mech_PillBug.jobString>TODO</NCL_Mech_PillBug.jobString>
+  
+</LanguageData>

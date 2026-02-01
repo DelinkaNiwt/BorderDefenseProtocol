@@ -1,0 +1,503 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <HediffDef>
+    <defName>CrimsonSlagburstScorched</defName>
+    <label>Crimson Slagburst Scorched</label>
+    <hediffClass>HediffWithComps</hediffClass>
+    <description>赤蚀凝焚伤痕</description>
+    <defaultLabelColor>(128, 0, 32)</defaultLabelColor>
+	<isBad>true</isBad>
+	<stages>
+	  <li>
+	    <statOffsets>
+		  <IncomingDamageFactor>+0.25</IncomingDamageFactor>
+		</statOffsets>
+	    <capMods>
+	      <li>
+	        <capacity>Moving</capacity>
+            <offset>-0.2</offset>
+	      </li>
+	    </capMods>
+      </li>
+	</stages>
+	<comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>6000~9000</disappearsAfterTicks>
+      </li>
+    </comps>
+  </HediffDef>
+  
+  <HediffDef>
+    <defName>The_coming_death</defName>
+    <label>死亡将至</label>
+	<defaultLabelColor>(220, 220, 220)</defaultLabelColor>
+    <hediffClass>HediffWithComps</hediffClass>
+    <description>引爆吧</description>
+	<isBad>true</isBad>
+	<stages>
+	  <li>
+	    <statOffsets>
+		  <IncomingDamageFactor>+0.25</IncomingDamageFactor>
+		</statOffsets>
+	    <capMods>
+	      <li>
+	        <capacity>Moving</capacity>
+            <offset>-0.2</offset>
+	      </li>
+	    </capMods>
+      </li>
+	</stages>
+	<comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>120</disappearsAfterTicks>
+      </li>
+    <li Class="NCL.HediffCompProperties_ExplodeOnRemove">
+      <damageDef>DeathExplosion</damageDef>
+      <damageAmount>888</damageAmount>
+      <explosionRadius>8.8</explosionRadius>
+      <affectFriendly>false</affectFriendly>
+    </li>
+	<li Class="HediffCompProperties_DisappearsOnDeath"/>
+    </comps>
+  </HediffDef>
+  
+  <HediffDef>
+  <defName>GD_Hediff_CloakedEffect</defName>
+  <label>光学迷彩激活</label>
+  <defaultLabelColor>(220, 220, 220)</defaultLabelColor>
+  <hediffClass>HediffWithComps</hediffClass>
+  <description>光学迷彩激活</description>
+  <isBad>false</isBad>
+  <comps>
+    <!-- 隐身效果 -->
+      <li Class="HediffCompProperties_Invisibility">
+        <visibleToPlayer>true</visibleToPlayer>
+      </li>
+    <!-- 自动解除 -->
+    <li Class="HediffCompProperties_Disappears">
+      <disappearsAfterTicks>3000</disappearsAfterTicks>
+	  <showRemainingTime>true</showRemainingTime>
+    </li>
+	<li Class="HediffCompProperties_DisappearsOnDeath"/>
+  </comps>
+</HediffDef>
+
+  <HediffDef>
+    <defName>Zero_Point_Overdrive_Hediff</defName>
+    <label>零点闪烁过载</label>
+	<defaultLabelColor>(0, 255, 255)</defaultLabelColor>
+    <hediffClass>HediffWithComps</hediffClass>
+    <description>机械关节进入过载模式，移动速度提高，伤害承受减半，射击冷却减半</description>
+    <isBad>false</isBad>
+	<stages>
+	  <li>
+	    <statOffsets>
+		  <IncomingDamageFactor>-0.5</IncomingDamageFactor>
+		  <RangedWeapon_Cooldown>-0.5</RangedWeapon_Cooldown>
+		</statOffsets>
+	    <capMods>
+	      <li>
+	        <capacity>Moving</capacity>
+            <offset>+3</offset>
+	      </li>
+		  <li>
+            <capacity>Consciousness</capacity>
+            <postFactor>+1</postFactor>
+          </li>
+	    </capMods>
+      </li>
+	</stages>
+	<comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>1800</disappearsAfterTicks>
+		<showRemainingTime>true</showRemainingTime>
+      </li>
+    </comps>
+  </HediffDef>
+  
+    <HediffDef>
+    <defName>NCL_Shadow_Tag_Hediff</defName>
+    <label>踩影</label>
+	<defaultLabelColor>(220, 220, 220)</defaultLabelColor>
+    <hediffClass>HediffWithComps</hediffClass>
+    <description>该目标已被踩影，短时间内无法移动</description>
+    <isBad>true</isBad>
+	<stages>
+	  <li>
+	    <statOffsets>
+		  <MoveSpeed>-999</MoveSpeed>
+        </statOffsets>
+      </li>
+	</stages>
+	<comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>1200</disappearsAfterTicks>
+		<showRemainingTime>true</showRemainingTime>
+      </li>
+    </comps>
+  </HediffDef>
+
+
+  <HediffDef>
+    <defName>NCL_Terminus_Gazed_Hediff</defName>
+    <label>终焉之视</label>
+	<defaultLabelColor>(180, 30, 30)</defaultLabelColor>
+    <hediffClass>HediffWithComps</hediffClass>
+    <description>NCL“月光之子”计划中的最终战斗协议，仅限于LUN-EYE-07α级虹膜载体。协议激活时，植入者将进入一种近乎神明的作战状态：时间仿佛凝滞，敌人尚未察觉，毁灭已至。
+	
+	但代价无法回避——协议结束后，宿主将遭遇全面神经崩解，陷入感官瘫痪与战斗力丧失的状态。</description>
+    <isBad>false</isBad>
+	<stages>
+	  <li>
+	    <statFactors>
+			<VEF_VerbRangeFactor>2</VEF_VerbRangeFactor>
+			<RangedCooldownFactor>0.01</RangedCooldownFactor><!--远程冷却系数-->
+			<AimingDelayFactor>0.01</AimingDelayFactor><!--瞄准延迟系数-->	
+        </statFactors>
+		<statOffsets>
+		  <MoveSpeed>30</MoveSpeed>
+        </statOffsets>
+      </li>
+	</stages>
+	<comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>10000</disappearsAfterTicks>
+		<showRemainingTime>true</showRemainingTime>
+      </li>
+	  <li Class="HediffCompProperties_GiveAbility">
+        <abilityDefs>
+          <li>NCL_Phantom_Force</li>
+        </abilityDefs>
+      </li>
+	  	<li Class="VEF.Hediffs.HediffCompProperties_Targeting">
+		<neverMiss>true</neverMiss>
+		<initialTargetingMoteScale>3</initialTargetingMoteScale>
+		<targetingLineTexPath>UI/Overlays/ThickLine</targetingLineTexPath>
+		<targetingLineColor>(255, 0, 0)</targetingLineColor>
+		<targetingLineWidth>0.05</targetingLineWidth>
+		</li>
+		<li Class="NCL.HediffCompProperties_DisappearTrigger">
+		<hediffToGive>NCL_Solar_Disruption</hediffToGive>
+		</li>
+    </comps>
+  </HediffDef>
+  
+    <HediffDef>
+    <defName>NCL_Overwatch_Nexus_MechBoost</defName>
+    <label>战术数据链同步</label>
+    <description>通过反隐雷达构建的战术网络，实时优化机械族单位的火控系统，显著提升射击精度与战场响应速度。</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.52, 1, 0.95)</defaultLabelColor>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>1800</disappearsAfterTicks>
+        <showRemainingTime>false</showRemainingTime>
+      </li>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/>
+      <li Class="HediffCompProperties_Link">
+        <requireLinkOnOtherPawn>false</requireLinkOnOtherPawn>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <statFactors>
+		    <ShootingAccuracyPawn>1.25</ShootingAccuracyPawn>
+			<VEF_VerbRangeFactor>1.2</VEF_VerbRangeFactor>
+			<AimingDelayFactor>0.8</AimingDelayFactor><!--瞄准延迟系数-->	
+        </statFactors>
+      </li>
+    </stages>
+    <isBad>false</isBad>
+  </HediffDef>
+  
+    <HediffDef>
+    <defName>NCL_Solar_Disruption</defName>
+    <label>日光退相干</label>
+	<defaultLabelColor>(180, 150, 50)</defaultLabelColor>
+	<description>“如月坠海。”
+	“终焉凝视”协议终止后的必然后遗症，源于光子晶束与神经引导膜的量子纠缠结构断裂，导致宿主全身感知与运动系统进入退相干崩解阶段。虽仍保持意识，但身体与思维已严重失调</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>true</isBad>
+	<stages>
+	   <li>
+	    <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <postFactor>0.5</postFactor>
+          </li>
+	    </capMods>
+	    <statFactors>
+            <ShootingAccuracyPawn>-0.5</ShootingAccuracyPawn>
+			<VEF_VerbRangeFactor>0.85</VEF_VerbRangeFactor>
+			<RangedCooldownFactor>1.35</RangedCooldownFactor><!--远程冷却系数-->
+			<AimingDelayFactor>1.35</AimingDelayFactor><!--瞄准延迟系数-->	
+        </statFactors>
+		<statOffsets>
+		    <MoveSpeed>-5</MoveSpeed>
+        </statOffsets>
+      </li>
+	</stages>
+  <comps>
+		<li Class="HediffCompProperties_DisappearsOnDeath"/>
+		<li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>60000</disappearsAfterTicks>
+		<showRemainingTime>true</showRemainingTime>
+      </li>
+  </comps>
+  </HediffDef>
+  
+  <HediffDef>
+    <defName>Moonlight_Synchronization</defName>
+    <label>月辉入相干</label>
+	<description>受月光辐射激发，植入体内的光子晶束虹膜与神经光谱引导膜发生共振，宿主进入超载状态，战斗感知与反应速度显著提升</description>
+    <hediffClass>HediffWithComps</hediffClass>
+	<defaultLabelColor>(0, 120, 255)</defaultLabelColor>
+    <isBad>false</isBad>
+	<stages>
+	   <li>
+	    <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <postFactor>1.5</postFactor>
+          </li>
+	    </capMods>
+	    <statFactors>
+            <ShootingAccuracyPawn>72</ShootingAccuracyPawn>
+			<VEF_VerbRangeFactor>1.25</VEF_VerbRangeFactor>
+			<RangedCooldownFactor>0.75</RangedCooldownFactor><!--远程冷却系数-->
+			<AimingDelayFactor>0.75</AimingDelayFactor><!--瞄准延迟系数-->	
+        </statFactors>
+		<statOffsets>
+		  <PsychicSensitivity>1.5</PsychicSensitivity><!--心灵敏感度系数-->
+		  <MeditationFocusGain>1.5</MeditationFocusGain><!--冥想增益系数-->
+        </statOffsets>
+      </li>
+	</stages>
+  <comps>
+		<li Class="HediffCompProperties_DisappearsOnDeath"/>
+  </comps>
+  </HediffDef>
+  
+    <HediffDef>
+    <defName>Symbiomesh</defName>
+    <label>共生膜：动态生理调节</label>
+    <hediffClass>HediffWithComps</hediffClass>
+    <description>纳米液主动调节生理状态，增强体能效率与作业适应性。</description>
+	<defaultLabelColor>(255, 80, 80)</defaultLabelColor>
+	<stages>
+	  <li>
+	    <statOffsets>
+		  <WorkSpeedGlobal>0.1</WorkSpeedGlobal>
+		  <PainShockThreshold>+0.2</PainShockThreshold>
+          <ImmunityGainSpeed>+0.2</ImmunityGainSpeed>
+          <InjuryHealingFactor>+0.5</InjuryHealingFactor>
+		</statOffsets>
+	    <statFactors>
+          <StaggerDurationFactor>0.8</StaggerDurationFactor>
+		  <RestFallRateFactor>0.8</RestFallRateFactor>
+		  <MentalBreakThreshold>0.8</MentalBreakThreshold>
+        </statFactors>
+		 <hungerRateFactorOffset>-0.2</hungerRateFactorOffset>
+      </li>
+	</stages>
+	<comps>
+      <li Class="HediffCompProperties_RemoveIfApparelDropped" />
+  </comps>
+    <isBad>false</isBad>
+  </HediffDef>
+  
+    <HediffDef>
+    <defName>Centurion_Arsenal_Codex_Hediff</defName>
+    <label>百战兵谱：复合战术背负</label>
+    <hediffClass>HediffWithComps</hediffClass>
+    <description>你现在什么都有了，放手去做吧。</description>
+	<defaultLabelColor>(255, 80, 80)</defaultLabelColor>
+	<stages>
+	  <li>
+	    <statOffsets>
+		  <WorkSpeedGlobal>0.2</WorkSpeedGlobal>
+		</statOffsets>
+	    <statFactors>
+          <JoyFallRateFactor>0.8</JoyFallRateFactor>
+        </statFactors>
+      </li>
+	</stages>
+    <comps>
+      <li Class="HediffCompProperties_GiveAbility">
+        <abilityDefs>
+          <li>Codex_Rifle</li>
+          <li>Codex_SMG</li>
+          <li>Codex_Sniper</li>
+          <li>Codex_M9Knife</li>
+		  <li>NCL_ToggleCodexTurret</li>
+        </abilityDefs>
+      </li>
+	  <li Class="HediffCompProperties_RemoveIfApparelDropped" />
+    </comps>
+    <isBad>false</isBad>
+  </HediffDef>
+  
+  <HediffDef MayRequire="oskarpotocki.vanillafactionsexpanded.core">
+    <defName>NCL_ShoulderTurretActive</defName>
+    <hediffClass>HediffWithComps</hediffClass>
+    <label>extended shoulder turret</label>
+    <description>Invisible hediff with shoulderturret.</description>
+    <defaultLabelColor>(1,1,1)</defaultLabelColor>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <becomeVisible>false</becomeVisible>
+      </li>
+    </stages>
+	<comps>
+		<li Class="MVCF.Comps.HediffCompProperties_ExtendedVerbGiver">
+			<verbs>
+				<li>
+					<verbClass>Verb_Shoot</verbClass>
+					<label>shoulder turret gun</label>
+					<defaultProjectile>ChargedBullet_Codex_Rifle</defaultProjectile>
+					<warmupTime>1.5</warmupTime>
+					<range>33</range>
+					<hasStandardCommand>true</hasStandardCommand>
+					<ticksBetweenBurstShots>15</ticksBetweenBurstShots>
+					<burstShotCount>2</burstShotCount>
+					<soundCast>GunShotA</soundCast>
+					<soundCastTail>GunTail_Light</soundCastTail>
+					<muzzleFlashScale>9</muzzleFlashScale>
+				</li>
+			</verbs>
+			<verbProps>
+				<li>
+					<label>shoulder turret gun</label>
+					<visualLabel>shoulder turret gun</visualLabel>
+					<description>A low caliber autonomous gun made to be mounted on a shoulder.</description>
+					<canBeToggled>false</canBeToggled>
+					<comps>
+						<li Class="MVCF.VerbComps.VerbCompProperties_Turret">
+							<compClass>MVCF.VerbComps.VerbComp_Turret</compClass>
+							<humanAsDefault>true</humanAsDefault>
+							<graphic>
+								<texPath>Weapons/CodexTurret</texPath>
+								<graphicClass>Graphic_Single</graphicClass>
+								<drawSize>0.2,0.2</drawSize>
+							</graphic>
+							<specificPositions>
+									<li>
+										<defName>Human</defName>
+										<BodyType>Hulk</BodyType>
+										<Default>(0,0)</Default>
+										<Up>(-0.4,0.45)</Up>
+										<Down>(0.4,0.5)</Down>
+										<Right>(-0.55,0.4)</Right>
+										<Left>(0.55,0.4)</Left>
+									</li>
+									<li>
+										<defName>Human</defName>
+										<BodyType>Fat</BodyType>
+										<Default>(0,0)</Default>
+										<Up>(-0.35,0.45)</Up>
+										<Down>(0.35,0.5)</Down>
+										<Right>(-0.5,0.4)</Right>
+										<Left>(0.5,0.4)</Left>
+									</li>
+									<li>
+										<defName>Human</defName>
+										<BodyType>Male</BodyType>
+										<Default>(0,0)</Default>
+										<Up>(-0.3,0.45)</Up>
+										<Down>(0.3,0.4)</Down>
+										<Right>(-0.4,0.4)</Right>
+										<Left>(0.4,0.4)</Left>
+									</li>
+									<li>
+										<defName>Human</defName>
+										<BodyType>Female</BodyType>
+										<Default>(0,0)</Default>
+										<Up>(-0.3,0.4)</Up>
+										<Down>(0.3,0.4)</Down>
+										<Right>(-0.4,0.4)</Right>
+										<Left>(0.4,0.4)</Left>
+									</li>
+									<li>
+										<defName>Human</defName>
+										<BodyType>Thin</BodyType>
+										<Default>(0,0)</Default>
+										<Up>(-0.275,0.4)</Up>
+										<Down>(0.275,0.4)</Down>
+										<Right>(-0.4,0.4)</Right>
+										<Left>(0.4,0.4)</Left>
+									</li>
+								</specificPositions>
+							<scalings>
+								<li>
+									<defName>Human</defName>
+									<BodyType>Thin</BodyType>
+									<scaling>0.5</scaling>
+								</li>
+								<li>
+									<defName>Human</defName>
+									<BodyType>Male</BodyType>
+									<scaling>0.5</scaling>
+								</li>
+								<li>
+									<defName>Human</defName>
+									<BodyType>Female</BodyType>
+									<scaling>0.5</scaling>
+								</li>
+								<li>
+									<defName>Human</defName>
+									<BodyType>Fat</BodyType>
+									<scaling>0.6</scaling>
+								</li>
+								<li>
+									<defName>Human</defName>
+									<BodyType>Hulk</BodyType>
+									<scaling>0.6</scaling>
+								</li>
+							</scalings>
+						</li>
+						<li Class="MVCF.VerbComps.VerbCompProperties_Cooldown">
+							<compClass>MVCF.VerbComps.VerbComp_Cooldown</compClass>
+							<cooldownTime>1.5</cooldownTime>
+						</li>
+					</comps>
+				</li>
+			</verbProps>
+		</li>
+    <li Class="HediffCompProperties_Disappears">
+      <disappearsAfterTicks>30000</disappearsAfterTicks>
+    </li>
+	</comps>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>TW_WasEncouraged</defName>
+    <label>被鼓励哩</label>
+    <hediffClass>HediffWithComps</hediffClass>
+    <description>被鼓励哩</description>
+    <defaultLabelColor>(255, 80, 80)</defaultLabelColor>
+	<isBad>true</isBad>
+	<stages>
+	  <li>
+	    <statOffsets>
+		   <MoveSpeed>+1.5</MoveSpeed>
+           <WorkSpeedGlobal>+1.5</WorkSpeedGlobal>
+		</statOffsets>
+      </li>
+	</stages>
+	<comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>30000</disappearsAfterTicks>
+		<showRemainingTime>true</showRemainingTime>
+      </li>
+	<li Class="NCL.HediffCompProperties_MechAutoRecovery">
+        <tickMultiflier>600</tickMultiflier>
+        <healPoint>10</healPoint>
+      </li>
+    </comps>
+  </HediffDef>
+
+</Defs>
+

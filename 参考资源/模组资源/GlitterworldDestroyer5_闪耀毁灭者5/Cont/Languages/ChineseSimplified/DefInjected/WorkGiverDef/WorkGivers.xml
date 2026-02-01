@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <GD_Hack.label>黑入服务器</GD_Hack.label>
+  <GD_Hack.verb>黑入服务器</GD_Hack.verb>
+  <GD_Hack.gerund>黑入服务器于</GD_Hack.gerund>
+  
+  <GD_UpgradeTurret.label>加固炮塔</GD_UpgradeTurret.label>
+  <GD_UpgradeTurret.verb>加固炮塔</GD_UpgradeTurret.verb>
+  <GD_UpgradeTurret.gerund>加固炮塔于</GD_UpgradeTurret.gerund>
+  
+  <GD_HaulDecksToTurret.label>准备装甲板</GD_HaulDecksToTurret.label>
+  <GD_HaulDecksToTurret.verb>准备装甲板</GD_HaulDecksToTurret.verb>
+  <GD_HaulDecksToTurret.gerund>准备装甲板于</GD_HaulDecksToTurret.gerund>
+  
+  <GD_FixTurret.label>修复炮塔</GD_FixTurret.label>
+  <GD_FixTurret.verb>修复炮塔</GD_FixTurret.verb>
+  <GD_FixTurret.gerund>修复炮塔于</GD_FixTurret.gerund>
+
+
+</LanguageData>

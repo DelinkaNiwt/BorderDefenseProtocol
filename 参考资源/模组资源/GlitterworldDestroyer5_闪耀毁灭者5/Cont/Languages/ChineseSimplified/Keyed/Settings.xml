@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <GD_ReinforceTitle>禁用强化机械族威胁</GD_ReinforceTitle>
+  <GD_ThreatRateTitle>机械族威胁规模</GD_ThreatRateTitle>
+  <GD_ThreatRateDesc>当袭击派系为机械族时，对其袭击点数的调整。</GD_ThreatRateDesc>
+  <GD_MechDamageTitle>机械体伤害系数</GD_MechDamageTitle>
+  <GD_MechDamageDesc>来自机械体的攻击伤害会乘以此倍率。会同时影响敌方与友方的机械体。</GD_MechDamageDesc>
+  <GD_TurretDamageTitle>机械炮塔伤害系数</GD_TurretDamageTitle>
+  <GD_TurretDamageDesc>来自机械族炮塔的攻击伤害会乘以此倍率。只会影响敌方的机械族炮塔。</GD_TurretDamageDesc>
+  <GD_ReinforceTip>当玩家殖民地总财富值超过一百万时，所有来袭的敌方机械族都会得到加强。这会显著提高后期的防御难度。</GD_ReinforceTip>
+  <GD_DetectCooldownTitle>不稳定短波接收器冷却时间（天）</GD_DetectCooldownTitle>
+  <GD_TurretConsumePowerTitle>巨型电荷炮塔每轮开火消耗的储电量</GD_TurretConsumePowerTitle>
+  <GD_Tip>*以下设置均需要biotechDLC才能生效</GD_Tip>
+  <GD_ReactiveArmorTitle>禁用反应装甲</GD_ReactiveArmorTitle>
+  <GD_PauseWhenUnstable>机械族服务器不稳定时自动暂停</GD_PauseWhenUnstable>
+  <GD_AdvancedNodeTitle>先进基站提供带宽量</GD_AdvancedNodeTitle>
+  <GD_VaporizeRangeTitle>炼狱魔王主炮杀伤半径</GD_VaporizeRangeTitle>
+  <GD_NotNeedToResearch>流浪者黑衣科技不需要解谜</GD_NotNeedToResearch>
+  <GD_DeveloperMode>开发者模式</GD_DeveloperMode>
+  <GD_DeveloperModeTip>与多种日志的显示有关。正常游玩不需要开启。</GD_DeveloperModeTip>
+  <GD_AirforceTitle>禁用机械族空军增援</GD_AirforceTitle>
+  <GD_AirforceTip>袭击点数超过2000点时，袭击队伍中的任意远程机械体可能会获得呼叫空中增援许可。</GD_AirforceTip>
+  <GD_MechhiveIntervalTitle>机械巢任务刷新频率（天）：</GD_MechhiveIntervalTitle>
+  <GD_MechhiveIntervalTip>当选择与黑衣机械族敌对时，刷新机械巢特殊任务的平均间隔。</GD_MechhiveIntervalTip>
+</LanguageData>

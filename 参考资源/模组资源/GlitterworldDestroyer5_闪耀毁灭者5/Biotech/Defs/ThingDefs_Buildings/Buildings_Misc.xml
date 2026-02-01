@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <ThingDef ParentName="BuildingBase">
+    <defName>GD_BandNode</defName>
+    <label>advanced band node</label>
+    <description>A advanced mechanoid-band signal amplifier. Band nodes must be tuned to a specific mechanitor. This will add 4 bandwidth to that mechanitor's total bandwidth, allowing them to control more mechanoids.\n\nOnce a band node is constructed, it can be quickly tuned to a mechanitor. However, retuning a band node to a different mechanitor takes significantly longer.</description>
+    <tickerType>Normal</tickerType>
+    <rotatable>false</rotatable>
+    <canOverlapZones>false</canOverlapZones>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <fillPercent>0.4</fillPercent>
+    <graphicData>
+      <texPath>Buildings/GDBandNode</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2.5,2.5)</drawSize>
+      <shadowData>
+        <volume>(1.5, 0.35, 1.2)</volume>
+        <offset>(0, 0, -0.15)</offset>
+      </shadowData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <building>
+      <ai_chillDestination>false</ai_chillDestination>
+      <artificialForMeditationPurposes>false</artificialForMeditationPurposes>
+      <buildingTags>
+        <li>Biotech</li>
+      </buildingTags>
+    </building>
+    <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+    <designationCategory>Biotech</designationCategory>
+    <uiOrder>2440</uiOrder>
+    <statBases>
+      <MaxHitPoints>550</MaxHitPoints>
+      <WorkToBuild>12000</WorkToBuild>
+      <Mass>25</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+    <size>(2,2)</size>
+    <costList>
+      <Plasteel>100</Plasteel>
+      <ComponentSpacer>1</ComponentSpacer>
+	  <PrecisionDeck>25</PrecisionDeck>
+    </costList>
+    <researchPrerequisites>
+      <li>HighMechtech</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>400</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_BandNode">
+        <hediff>GD_BandNode</hediff>
+        <untunedEffect>BandNodeUntuned</untunedEffect>
+        <tuningEffect>BandNodeTuning</tuningEffect>
+        <tunedEffect>BandNodeTuned</tunedEffect>
+        <retuningEffect>BandNodeRetuning</retuningEffect>
+        <tuningCompleteSound>BandNodeTuning_Complete</tuningCompleteSound>
+        <powerConsumptionIdle>100</powerConsumptionIdle>
+      </li>
+    </comps>
+    <placeWorkers>
+      <li>PlaceWorker_BandNode</li>
+    </placeWorkers>
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+  </ThingDef>
+  
+  <!-- Band node -->
+  <HediffDef>
+    <defName>GD_BandNode</defName>
+    <hediffClass>GD3.Hediff_MechNode</hediffClass>
+    <label>advanced band node (tuned)</label>
+    <description>This mechanitor's bandwidth is being increased thanks to the influence of a advanced band node structure.</description>
+    <isBad>false</isBad>
+  </HediffDef>
+  
+  <!-- BOSS -->
+  <!-- 碟形天线 -->
+  <!-- <ThingDef ParentName="BuildingBase">
+    <defName>GD_MechbandDish</defName>
+    <label>Mysterious Antenna</label>
+    <description>Your colonists built this summoner in accordance with the information in the personality data, modeled after the dish antenna. A strange glow flows from the warning bulb.\n\n&lt;color=#E3170D&gt;Summon an extremely difficult enemy to come. Always make sure you do everything you can to prepare before attempting to challenge him.&lt;/color&gt;</description>
+    <graphicData>
+      <texPath>Buildings/GD_MechbandDish</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2,2)</drawSize>
+      <shadowData>
+        <volume>(1.1, 0.75, 1.1</volume>
+      </shadowData>
+    </graphicData>
+	<rotatable>false</rotatable>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.3</fillPercent>
+    <building>
+      <ai_chillDestination>false</ai_chillDestination>
+      <buildingTags>
+        <li>Biotech</li>
+      </buildingTags>
+    </building>
+    <designationCategory>Biotech</designationCategory>
+    <uiOrder>2461</uiOrder>
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <WorkToBuild>8000</WorkToBuild>
+      <Mass>25</Mass>
+      <Flammability>0.5</Flammability>
+    </statBases>
+    <size>(2,2)</size>
+    <costList>
+      <Plasteel>150</Plasteel>
+	  <BlackPersonaData>2</BlackPersonaData>
+      <ComponentSpacer>10</ComponentSpacer>
+    </costList>
+    <researchPrerequisites>
+      <li>HighMechtech</li>
+	  <li>GD3_Weapons</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Usable">
+        <useJob>TriggerObject</useJob>
+        <useLabel>Summon apocriton in black</useLabel>
+        <useDuration>900</useDuration>
+        <floatMenuFactionIcon>BlackMechanoid</floatMenuFactionIcon>
+      </li>
+      <li Class="CompProperties_Useable_CallBossgroup">
+        <bossgroupDef>BlackApocriton</bossgroupDef>
+        <effecterDef>MechbandDishUsed</effecterDef>
+        <prepareEffecterDef>MechBandDishPrepared</prepareEffecterDef>
+        <unlockedLetterLabelKey>LetterLabelBossgroupCallerUnlocked</unlockedLetterLabelKey>
+        <unlockedLetterTextKey>LetterBossgroupCallerUnlocked</unlockedLetterTextKey>
+        <delayTicks>120</delayTicks>
+      </li>
+      <li Class="CompProperties_UseEffectDestroySelf">
+        <delayTicks>120</delayTicks>
+        <spawnKilledLeavings>false</spawnKilledLeavings>
+        <effecterDef>MechbandBuildingDestroyed</effecterDef>
+      </li>
+	  <li Class="CompProperties_Glower">
+        <glowRadius>4</glowRadius>
+        <glowColor>(117,255,0,0)</glowColor>
+      </li>
+    </comps>
+    <tickerType>Normal</tickerType>
+    <filthLeaving>Filth_MachineBits</filthLeaving>
+  </ThingDef> -->
+  
+  <!-- 玩偶 -->
+  <ThingDef Name="GDDollBase" ParentName="BuildingBase" Abstract="True">
+		<category>Building</category>
+		<thingClass>Building</thingClass>
+		<uiIconScale>1.5</uiIconScale>
+		<rotatable>false</rotatable>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.15</fillPercent>
+		<statBases>
+			<MaxHitPoints>300</MaxHitPoints>
+			<WorkToBuild>100</WorkToBuild>
+			<Flammability>0</Flammability>
+			<Mass>1</Mass>
+			<Beauty>100</Beauty>
+		</statBases>
+		<selectable>true</selectable>
+		<building>
+			<isEdifice>false</isEdifice>
+		</building>
+		<soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+		<defaultPlacingRot>North</defaultPlacingRot>
+		<destroyable>true</destroyable>
+		<tradeability>None</tradeability>
+		<clearBuildingArea>false</clearBuildingArea>
+		<minifiedDef>MinifiedThing</minifiedDef>		
+		<thingCategories>
+			<li>BuildingsFurniture</li>
+		</thingCategories>
+	</ThingDef>
+	
+	<ThingDef ParentName="GDDollBase">
+		<defName>GD_Doll</defName>
+		<label>Black scyther doll</label>
+		<description>A cute doll. Makes you want to pinch its hat.</description>
+		<graphicData>
+			<texPath>Buildings/BlackScyther_Doll</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(0.8,0.8)</drawSize>
+			<damageData>
+				<rect>(0.35,0.35,0.3,0.3)</rect>
+			</damageData>
+		</graphicData>
+		<costList>
+		  <Cloth>50</Cloth>
+		</costList>
+		<designationCategory>Furniture</designationCategory>
+		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+		<researchPrerequisites>
+		  <li>GD3_Apocriton</li>
+		</researchPrerequisites>
+	</ThingDef>
+	
+	<ThingDef ParentName="GDDollBase">
+		<defName>GD_LancerDoll</defName>
+		<label>Black lancer doll</label>
+		<description>A cute doll. Makes you want to pinch its hat.</description>
+		<graphicData>
+			<texPath>Buildings/BlackLancer_Doll</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(0.8,0.8)</drawSize>
+			<damageData>
+				<rect>(0.35,0.35,0.3,0.3)</rect>
+			</damageData>
+		</graphicData>
+		<costList>
+		  <Cloth>50</Cloth>
+		</costList>
+		<designationCategory>Furniture</designationCategory>
+		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+		<researchPrerequisites>
+		  <li>GD3_Apocriton</li>
+		</researchPrerequisites>
+	</ThingDef>
+	
+	<ThingDef ParentName="GDDollBase">
+		<defName>GD_MilitorDoll</defName>
+		<label>Black militor doll</label>
+		<description>A cute doll. Makes you want to pinch its hat.</description>
+		<graphicData>
+			<texPath>Buildings/BlackMilitor_Doll</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(0.8,0.8)</drawSize>
+			<damageData>
+				<rect>(0.35,0.35,0.3,0.3)</rect>
+			</damageData>
+		</graphicData>
+	</ThingDef>
+	
+	<ThingDef Name="FufuBase" ParentName="BuildingBase" Abstract="true">
+		<category>Building</category>
+		<thingClass>Building</thingClass>
+		<uiIconScale>1.25</uiIconScale>
+		<rotatable>true</rotatable>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.15</fillPercent>
+		<costList>
+		  <Cloth>50</Cloth>
+		  <WhitePetal>50</WhitePetal>
+		</costList>
+		<statBases>
+			<MaxHitPoints>300</MaxHitPoints>
+			<WorkToBuild>400</WorkToBuild>
+			<Flammability>0</Flammability>
+			<Mass>1</Mass>
+			<Beauty>300</Beauty>
+		</statBases>
+		<selectable>true</selectable>
+		<building>
+			<isEdifice>false</isEdifice>
+		</building>
+		<soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<designationCategory>Furniture</designationCategory>
+		<destroyable>true</destroyable>
+		<tradeability>None</tradeability>
+		<clearBuildingArea>false</clearBuildingArea>
+		<minifiedDef>MinifiedThing</minifiedDef>		
+		<thingCategories>
+			<li>BuildingsFurniture</li>
+		</thingCategories>
+		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+		<researchPrerequisites Inherit="false">
+			<li>GD3_Apocriton</li>
+		</researchPrerequisites>
+	</ThingDef>
+	
+	<ThingDef ParentName="FufuBase">
+		<defName>GD_QiuciFufu</defName>
+		<label>"Qiuci" fufu</label>
+		<description>A miho fox. Looks like a mod writer.</description>
+		<graphicData>
+			<texPath>Buildings/Fufu/QiuciFufu</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(1.25,1.25)</drawSize>
+			<damageData>
+				<rect>(0.35,0.35,0.3,0.3)</rect>
+			</damageData>
+			<drawOffset>(0,0,0.4)</drawOffset>
+		</graphicData>
+	</ThingDef>
+	
+	<ThingDef ParentName="FufuBase">
+		<defName>GD_ApocritonFufu</defName>
+		<label>"Apocriton in black" fufu</label>
+		<description>Our great leader. But it looks like a... A girl?</description>
+		<graphicData>
+			<texPath>Buildings/Fufu/ApocritonFufu</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(1.25,1.25)</drawSize>
+			<damageData>
+				<rect>(0.35,0.35,0.3,0.3)</rect>
+			</damageData>
+			<drawOffset>(0,0,0.4)</drawOffset>
+		</graphicData>
+	</ThingDef>
+	
+	<ThingDef ParentName="BuildingBase">
+		<defName>GD_LargeGarbageBag</defName>
+		<label>toxic wastepack pillow</label>
+		<description>Oversized wastepack bags will contaminate your colony... Just kidding. It's just a throw pillow. And harmless.</description>
+		<category>Building</category>
+		<thingClass>Building</thingClass>
+		<graphicData>
+			<texPath>Buildings/LargeGarbageBag</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(2.85,2.85)</drawSize>
+			<drawOffset>(0,0,0.75)</drawOffset>
+			<damageData>
+				<rect>(0.7,0.7,0.6,0.6)</rect>
+			</damageData>
+		</graphicData>
+		<size>(2,1)</size>
+		<uiIconScale>1.2</uiIconScale>
+		<rotatable>false</rotatable>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.35</fillPercent>
+		<costList>
+		  <Wastepack_Red>5</Wastepack_Red>
+		</costList>
+		<statBases>
+			<MaxHitPoints>500</MaxHitPoints>
+			<WorkToBuild>100</WorkToBuild>
+			<Flammability>0</Flammability>
+			<Mass>1</Mass>
+			<Beauty>100</Beauty>
+		</statBases>
+		<selectable>true</selectable>
+		<building>
+			<isEdifice>false</isEdifice>
+		</building>
+		<soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+		<defaultPlacingRot>North</defaultPlacingRot>
+		<designationCategory>Furniture</designationCategory>
+		<destroyable>true</destroyable>
+		<tradeability>None</tradeability>
+		<clearBuildingArea>false</clearBuildingArea>
+		<minifiedDef>MinifiedThing</minifiedDef>		
+		<thingCategories>
+			<li>BuildingsFurniture</li>
+		</thingCategories>
+		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+		<researchPrerequisites>
+		  <li>GD3_Apocriton</li>
+		</researchPrerequisites>
+	</ThingDef>
+	
+	<!-- 心灵广播 -->
+	<ThingDef Name="PsychicRadioBase" Abstract="True" ParentName="BuildingBase">
+    <altitudeLayer>Building</altitudeLayer>
+    <pathCost>50</pathCost>
+    <blockWind>true</blockWind>
+    <passability>Impassable</passability>
+    <canOverlapZones>false</canOverlapZones>
+    <fillPercent>1.0</fillPercent>
+    <statBases>
+      <MaxHitPoints>1500</MaxHitPoints>
+      <Flammability>0</Flammability>
+	  <WorkToBuild>300000</WorkToBuild>
+	  <Beauty>1000</Beauty>
+    </statBases>
+    <damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <building>
+      <combatPower>750</combatPower>
+      <claimable>false</claimable>
+      <destroySound>BuildingDestroyed_Metal_Big</destroySound>
+    </building>
+    <comps>
+      <li Class="CompProperties_WakeUpDormant" />
+      <li Class="CompProperties_Initiatable" />
+    </comps>
+    <receivesSignals>true</receivesSignals>
+    <tickerType>Normal</tickerType>
+    <rotatable>false</rotatable>
+    <selectable>true</selectable>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+    <drawerType>MapMeshOnly</drawerType>
+    <castEdgeShadows>True</castEdgeShadows>
+    <repairEffect>ConstructMetal</repairEffect>
+    <forceDebugSpawnable>true</forceDebugSpawnable>
+    <killedLeavings>
+      <Steel>60</Steel>
+      <ComponentIndustrial>1</ComponentIndustrial>
+      <Plasteel>10</Plasteel>
+      <ChunkSlagSteel>4</ChunkSlagSteel>
+    </killedLeavings>
+  </ThingDef>
+  
+  <ThingDef ParentName="PsychicRadioBase">
+    <defName>PsychicRadio</defName>
+    <label>psychic radio</label>
+    <description>This is an archotech facility built by your colonists to be able to influence the psychic sensitivity of organic life with its ability to edit psychic signals. \n\nHowever, this does not mean that the Archotech is fully understood by the colonists - copying homework to the blueprints within the persona data does not enable one to learn anything.</description>
+    <size>(5,5)</size>
+	<costList>
+	  <Steel>250</Steel>
+	  <Plasteel>250</Plasteel>
+	  <ComponentIndustrial>10</ComponentIndustrial>
+      <ComponentSpacer>5</ComponentSpacer>
+	  <AIPersonaCore>1</AIPersonaCore>
+	</costList>
+	<constructionSkillPrerequisite>10</constructionSkillPrerequisite>
+	<researchPrerequisites>
+      <li>UltraMechtech</li>
+	  <li>GD3_GiantCluster_Medium</li>
+    </researchPrerequisites>
+    <graphicData>
+      <texPath>Buildings/PsychicRadio</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(7.9,7.9)</drawSize>
+      <drawOffset>(0,0,0.16)</drawOffset>
+      <shadowData>
+        <volume>(4.9,3.5,4.9)</volume>
+        <offset>(0,0,0)</offset>
+      </shadowData>
+      <damageData>
+        <rect>(0.9, 0.9, 4.1, 4.1)</rect>
+      </damageData>
+    </graphicData>
+	<designationCategory>Misc</designationCategory>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+      </li>
+	  <li Class="GD3.CompProperties_Radio">
+	    <powerCostFst>500</powerCostFst>
+		<powerCostSec>5000</powerCostSec>
+		<powerCostThd>20000</powerCostThd>
+	  </li>
+    </comps>
+  </ThingDef>
+
+</Defs>

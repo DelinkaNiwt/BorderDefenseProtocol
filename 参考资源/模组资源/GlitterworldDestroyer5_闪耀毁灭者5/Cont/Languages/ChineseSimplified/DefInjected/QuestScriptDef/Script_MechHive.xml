@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <GD_Quest_SendCorpse.questNameRules.rulesStrings.0>questName-&gt;匿名合同</GD_Quest_SendCorpse.questNameRules.rulesStrings.0>
+  <GD_Quest_SendCorpse.questDescriptionRules.rulesStrings.0>questDescription-&gt;你收到了一组来自匿名机械巢的讯息。发信人似乎并不是这颗星球本地的机械巢，也并不抱有敌意。\n\n信中，对方相当有礼貌地问了好，并出乎意料地精确描述出了殖民地当前的情况。它向你的殖民者开出了一份见面礼，并保证未来双方还有许多事情可以合作，事后它也会向你支付可观的报酬。而这一双赢局面的建立只需要你迈出简单的第一步:\n\n把那具黑衣机械飞螳的尸体交给它。\n\n选中尸体并确认，随后一股来自太空的远距离灵能便会将其接收。</GD_Quest_SendCorpse.questDescriptionRules.rulesStrings.0>
+  
+  <GD_Quest_FixTurret.questNameRules.rulesStrings.0>questName-&gt;修复损坏炮塔</GD_Quest_FixTurret.questNameRules.rulesStrings.0>
+  <GD_Quest_FixTurret.questDescriptionRules.rulesStrings.0>questDescription-&gt;你收到了一组来自匿名机械巢的讯息。\n\n一座隶属于本地机械族的矿场近期遭受袭击，主脑从坐标位置分析出了灵能波动残留。为了确定这是否与黑衣机械族有关，机械巢需要更多数据。\n\n一座损坏的炮塔将被送往你的殖民地进行修复，修复完成后其记录下的战斗数据将会被自动上传至机械族服务器。炮塔将会作为报酬归你所有。</GD_Quest_FixTurret.questDescriptionRules.rulesStrings.0>
+  <GD_Quest_FixTurret.questContentRules.rulesStrings.0>turretArriveLetterLabel-&gt;受损炮塔</GD_Quest_FixTurret.questContentRules.rulesStrings.0>
+  <GD_Quest_FixTurret.questContentRules.rulesStrings.1>turretArriveLetterText-&gt;需要修复的炮塔已经到达殖民地。</GD_Quest_FixTurret.questContentRules.rulesStrings.1>
+  
+  <GD_Quest_BuildCluster.questNameRules.rulesStrings.0>questName-&gt;建设中的巨型集群</GD_Quest_BuildCluster.questNameRules.rulesStrings.0>
+  <GD_Quest_BuildCluster.questDescriptionRules.rulesStrings.0>questDescription-&gt;你收到了一组来自匿名机械巢的讯息。\n\n本地机械巢扫描到你的殖民地附近存在未知来源的灵能波动，为了长期监测这股灵能，机械族决定在此地建立一座巨型集群。但大规模的材料运输可能引起不必要的注意，因此机械巢希望你能给这座在建的集群提供基础资源。作为报酬，该集群会在建成后对你保持中立，并且你可以在通讯台呼叫它的远程炮火支援。\n\n交付所有资源后，巨型集群还需要25天的时间完成构筑。</GD_Quest_BuildCluster.questDescriptionRules.rulesStrings.0>
+  <GD_Quest_BuildCluster.questContentRules.rulesStrings.0>builtLetterLabel-&gt;资源交付完成</GD_Quest_BuildCluster.questContentRules.rulesStrings.0>
+  <GD_Quest_BuildCluster.questContentRules.rulesStrings.1>builtLetterText-&gt;该集群所属的建造机大队已经收到材料，开始施工，预计25天后即可完成作业。</GD_Quest_BuildCluster.questContentRules.rulesStrings.1>
+  
+  <GD_Quest_ExploreBase.questNameRules.rulesStrings.0>questName-&gt;废弃的黑衣机械族据点</GD_Quest_ExploreBase.questNameRules.rulesStrings.0>
+  <GD_Quest_ExploreBase.questDescriptionRules.rulesStrings.0>questDescription-&gt;你收到了一组来自匿名机械巢的讯息。\n\n机械族巡逻队在一处隐蔽的荒野发现了一座废弃据点，经过初步扫描可以确定这座据点曾被黑衣机械族使用。为了避免打草惊蛇，机械蜂巢计划由你的殖民者伪装成意外经过的拾荒者，代替机械族进行探索。\n\n这座遗迹内可能藏有不少黑衣机械族没来得及清理的情报或资源。你需要找到其中还能运作的主机，并利用机械蜂巢提供的技术将内部信息上传至机械族服务器，其余的资源则任你处置。\n\n本地主脑提醒：小心黑衣机械族的无人机。</GD_Quest_ExploreBase.questDescriptionRules.rulesStrings.0>
+  <GD_Quest_ExploreBase.questContentRules.rulesStrings.0>computerLostLabel-&gt;主机被摧毁</GD_Quest_ExploreBase.questContentRules.rulesStrings.0>
+  <GD_Quest_ExploreBase.questContentRules.rulesStrings.1>computerLostText-&gt;存有高价值情报的主机被摧毁了。任务[resolvedQuestName]已经失败。</GD_Quest_ExploreBase.questContentRules.rulesStrings.1>
+  <GD_Quest_ExploreBase.questContentRules.rulesStrings.2>siteLostLabel-&gt;据点消失</GD_Quest_ExploreBase.questContentRules.rulesStrings.2>
+  <GD_Quest_ExploreBase.questContentRules.rulesStrings.3>siteLostText-&gt;这座据点被一阵未知来源的强烈灵能波动抹除了。任务[resolvedQuestName]已经失败。</GD_Quest_ExploreBase.questContentRules.rulesStrings.3>
+  
+  <GD_Quest_HelpMech.questNameRules.rulesStrings.0>questName-&gt;拯救[joiner_nameDef]</GD_Quest_HelpMech.questNameRules.rulesStrings.0>
+  <GD_Quest_HelpMech.questDescriptionRules.rulesStrings.0>questDescription-&gt;你收到了一段来自匿名机械体的SOS信号。虽然听起来有些不可思议，但现在确实有一台[joiner_nameDef]在向你求救。\n\n[joiner_nameDef]在逃生舱中向你简单说明了情况：[joiner_pronoun]原本是一台隶属于[ancientFaction_name]的机械体，拥有独立的人格核心。当[joiner_pronoun]从漫长的休眠中醒来时，迎接[joiner_objective]的却不是值得信赖的机械师，而是觊觎[joiner_possessive]人格核心的宝藏猎人。[joiner_pronoun]在混乱中乘坐一个空投舱逃出了包围。\n\n[joiner_nameDef]希望你的殖民地能够暂时庇护[joiner_pronoun]，这意味着你需要迎接一波来自[enemyFaction_name]的袭击，并收留[joiner_objective]大概[leaveTicks_duration]的时间。\n\n[joiner_nameDef]承诺如果有机会[joiner_pronoun]一定会感谢你的帮助。</GD_Quest_HelpMech.questDescriptionRules.rulesStrings.0>
+  <GD_Quest_HelpMech.questContentRules.rulesStrings.0>mechJoinLabel-&gt;[joiner_nameDef]到达</GD_Quest_HelpMech.questContentRules.rulesStrings.0>
+  <GD_Quest_HelpMech.questContentRules.rulesStrings.1>mechJoinText-&gt;[joiner_nameDef]已经到达你的殖民地，[joiner_pronoun]会在这里待大概[leaveTicks_duration]。</GD_Quest_HelpMech.questContentRules.rulesStrings.1>
+  <GD_Quest_HelpMech.questContentRules.rulesStrings.2>hiveOrderLabel-&gt;建议：机械蜂巢</GD_Quest_HelpMech.questContentRules.rulesStrings.2>
+  <GD_Quest_HelpMech.questContentRules.rulesStrings.3>hiveOrderText-&gt;机械蜂巢已经得知有一台具备独立人格的机械体在你的殖民地，它向你提出了一个有趣的建议。\n\n由于机械族的强力封锁，黑衣机械族已经许久没有过新鲜血液，因此这台[joiner_nameDef]很有可能成为他们的招募目标。机械蜂巢已经为[joiner_pronoun]准备好了一段病毒代码，只要植入[joiner_possessive]脊髓神经网络中，机械族就可以利用[joiner_objective]获取大量有价值的情报，并造成一些破坏。\n\n植入病毒的操作非常简单。只要你愿意，你随时可以对毫无防备的[joiner_nameDef]展开行动。</GD_Quest_HelpMech.questContentRules.rulesStrings.3>
+  <GD_Quest_HelpMech.questContentRules.rulesStrings.4>leaveLabel-&gt;[joiner_nameDef]准备离开</GD_Quest_HelpMech.questContentRules.rulesStrings.4>
+  <GD_Quest_HelpMech.questContentRules.rulesStrings.5>leaveText-&gt;[joiner_nameDef]已经做好准备踏上旅途了。[joiner_pronoun]用充满磁性的机械音说自己不会忘了你们的恩情。</GD_Quest_HelpMech.questContentRules.rulesStrings.5>
+  <GD_Quest_HelpMech.questContentRules.rulesStrings.6>raidText-&gt;[enemyFaction_pawnsPlural]是为[../joiner_nameDef]而来。</GD_Quest_HelpMech.questContentRules.rulesStrings.6>
+  
+  <GD_Quest_Sub_HelpMechNotModified.questNameRules.rulesStrings.0>questName-&gt;拯救机械体奖励</GD_Quest_Sub_HelpMechNotModified.questNameRules.rulesStrings.0>
+  <GD_Quest_Sub_HelpMechNotModified.questDescriptionRules.rulesStrings.0>questDescription-&gt;隐藏描述。</GD_Quest_Sub_HelpMechNotModified.questDescriptionRules.rulesStrings.0>
+  <GD_Quest_Sub_HelpMechNotModified.questContentRules.rulesStrings.0>rewardLetterLabel-&gt;[rewardGiver_nameDef]的礼物</GD_Quest_Sub_HelpMechNotModified.questContentRules.rulesStrings.0>
+  <GD_Quest_Sub_HelpMechNotModified.questContentRules.rulesStrings.1>rewardLetterText-&gt;[rewardGiver_nameDef]联系上了你。[rewardDelayTicks_duration]前，是你在[rewardGiver_objective]最绝望的时候伸出了援手。\n\n如今[rewardGiver_pronoun]已经从漂泊的境况中走了出来，并准备了一份礼品，用于报答你对[rewardGiver_possessive]救命之恩。这些都是[rewardGiver_pronoun]凭本事从世界的各个角落探索来的：\n\n[listOfRewards]\n\n此外，[rewardGiver_nameDef]还提到了一群穿着黑色衣服的机械族，他们独立的思维与团结的组织给[rewardGiver_objective]留下了深刻的印象，因此[rewardGiver_pronoun]也选择加入了他们。[rewardGiver_pronoun]希望以后还能与你们重逢。</GD_Quest_Sub_HelpMechNotModified.questContentRules.rulesStrings.1>
+  
+  <GD_Quest_Sub_HelpMechModified.questNameRules.rulesStrings.0>questName-&gt;拯救机械体奖励</GD_Quest_Sub_HelpMechModified.questNameRules.rulesStrings.0>
+  <GD_Quest_Sub_HelpMechModified.questDescriptionRules.rulesStrings.0>questDescription-&gt;隐藏描述。</GD_Quest_Sub_HelpMechModified.questDescriptionRules.rulesStrings.0>
+  <GD_Quest_Sub_HelpMechModified.questContentRules.rulesStrings.0>rewardLetterLabel-&gt;[rewardGiver_nameDef]的礼物</GD_Quest_Sub_HelpMechModified.questContentRules.rulesStrings.0>
+  <GD_Quest_Sub_HelpMechModified.questContentRules.rulesStrings.1>rewardLetterText-&gt;[rewardGiver_nameDef]联系上了你。[rewardDelayTicks_duration]前，是你在[rewardGiver_objective]最绝望的时候伸出了援手。\n\n如今[rewardGiver_pronoun]已经从漂泊的境况中走了出来，并准备了一份礼品，用于报答你对[rewardGiver_possessive]救命之恩。这些都是[rewardGiver_pronoun]凭本事从世界的各个角落探索来的：\n\n[listOfRewards]\n\n此外，[rewardGiver_nameDef]还提到了一群穿着黑色衣服的机械族，他们独立的思维与团结的组织给[rewardGiver_objective]留下了深刻的印象，因此[rewardGiver_pronoun]也选择加入了他们。[rewardGiver_pronoun]希望以后还能与你们重逢。\n\n我们要告诉[rewardGiver_pronoun]关于病毒代码的事情吗？</GD_Quest_Sub_HelpMechModified.questContentRules.rulesStrings.1>
+  <GD_Quest_Sub_HelpMechModified.questContentRules.rulesStrings.2>subLetterText-&gt;[rewardGiver_nameDef]平静地表示了对殖民地立场的理解。[rewardGiver_pronoun]说[rewardGiver_pronoun]会寻求黑衣机械族的帮助来清除这些病毒带来的影响，并感谢了你的告知。</GD_Quest_Sub_HelpMechModified.questContentRules.rulesStrings.2>
+  <GD_Quest_Sub_HelpMechModified.questContentRules.rulesStrings.3>endingLetterLabel-&gt;病毒程序起效</GD_Quest_Sub_HelpMechModified.questContentRules.rulesStrings.3>
+  <GD_Quest_Sub_HelpMechModified.questContentRules.rulesStrings.4>endingLetterText-&gt;潜伏于[rewardGiver_nameDef]脑核中的病毒程序已经逐渐苏醒。它将许多与黑衣机械体有关的科技数据上传至了机械族服务器，并记录了宿主近日的行程。接着，它遥控[rewardGiver_nameDef]自爆，摧毁了一整个黑衣机械族的据点。\n\n不知道黑衣们会给[rewardGiver_objective]办一场怎样的葬礼呢？</GD_Quest_Sub_HelpMechModified.questContentRules.rulesStrings.4>
+  
+  <GD_Quest_BlackApocriton.questNameRules.rulesStrings.0>questName-&gt;葬礼</GD_Quest_BlackApocriton.questNameRules.rulesStrings.0>
+  <GD_Quest_BlackApocriton.questDescriptionRules.rulesStrings.0>questDescription-&gt;你收到了一组来自机械蜂巢的讯息。\n\n得力于你长久以来的协助，机械族已经收集到了足够的信息，并成功定位到了它们的最终目标——黑衣机械毒蜂。这台具备独立思维的高级机械体自脱离机械蜂巢以来便一直被视为心腹大患，而如今消灭它的绝佳机会终于到来了。\n\n从监测到的灵能波动分析，黑衣机械毒蜂似乎正打算用远距离折越将它幸存的几十个同僚送往其它星球。因此机械族需要你的最后一次协助：前往它的所在地，拖住它的脚步，直到来自机械蜂巢核心的强大灵能波动将它从这个世界上抹除。\n\n黑衣机械毒蜂恐怕没法被你概念中的任何一种方法直接杀死。但你仍可以通过造成伤害迫使它分心防守，为机械蜂巢决定性的一击争取时间。</GD_Quest_BlackApocriton.questDescriptionRules.rulesStrings.0>
+  <GD_Quest_BlackApocriton.questContentRules.rulesStrings.0>mailLabel-&gt;机械邮件</GD_Quest_BlackApocriton.questContentRules.rulesStrings.0>
+  <GD_Quest_BlackApocriton.questContentRules.rulesStrings.1>mailText-&gt;一封邮件已被送往你的殖民地，上面记录有大量有关黑衣机械毒蜂的信息。它们会在战斗时派上用场。</GD_Quest_BlackApocriton.questContentRules.rulesStrings.1>
+  <GD_Quest_BlackApocriton.root.nodes.siteDestroyed.node.nodes.Letter.label.slateRef>任务失败: [resolvedQuestName]</GD_Quest_BlackApocriton.root.nodes.siteDestroyed.node.nodes.Letter.label.slateRef>
+  <GD_Quest_BlackApocriton.root.nodes.siteDestroyed.node.nodes.Letter.text.slateRef>由于丢失了对目标的准确定位，机械蜂巢的灵能打击未能达到预期效果。任务[resolvedQuestName]已失败。</GD_Quest_BlackApocriton.root.nodes.siteDestroyed.node.nodes.Letter.text.slateRef>
+
+
+</LanguageData>

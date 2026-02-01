@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 小型冲击炮 -->
+
+  <PlayerTurret_AutoMiniTurret.label>小型冲击炮塔</PlayerTurret_AutoMiniTurret.label>
+  <PlayerTurret_AutoMiniTurret.description>一种自供能小型机械族炮塔。受损时会爆炸。</PlayerTurret_AutoMiniTurret.description>
+
+
+  <!-- 电荷冲击炮台 -->
+
+  <PlayerTurret_AutoChargeBlaster.label>自动电荷冲击炮塔</PlayerTurret_AutoChargeBlaster.label>
+  <PlayerTurret_AutoChargeBlaster.description>一种自供能机械族炮塔。连射大口径电荷弹，威力巨大。</PlayerTurret_AutoChargeBlaster.description>
+
+
+  <!-- 地狱火加农炮台 -->
+
+  <PlayerTurret_AutoInferno.label>自动地狱火加农炮塔</PlayerTurret_AutoInferno.label>
+  <PlayerTurret_AutoInferno.description>一种自供能机械族炮塔。发射威力巨大的地狱火炮弹。</PlayerTurret_AutoInferno.description>
+
+
+  <!-- EMP磁轨炮 -->
+
+  <PlayerTurret_EMPArtillery.label>重型EMP磁轨炮</PlayerTurret_EMPArtillery.label>
+  <PlayerTurret_EMPArtillery.description>一种自供能炮塔。发射EMP炮弹，爆炸威力巨大，足以将最强大的机械体击晕40秒。\n\n机械族并没有这个炮塔的设计蓝图，这个炮塔完全由你聪明的殖民者们设计建造。</PlayerTurret_EMPArtillery.description>
+  <PlayerTurret_EMPArtillery.comps.CompRefuelable.fuelLabel>射击直到炮弹打空</PlayerTurret_EMPArtillery.comps.CompRefuelable.fuelLabel>
+  <PlayerTurret_EMPArtillery.comps.CompRefuelable.fuelGizmoLabel>炮弹容量</PlayerTurret_EMPArtillery.comps.CompRefuelable.fuelGizmoLabel>
+  <PlayerTurret_EMPArtillery.comps.CompRefuelable.outOfFuelMessage>炮弹打空</PlayerTurret_EMPArtillery.comps.CompRefuelable.outOfFuelMessage>
+
+  <Gun_EMPArtilleryTurret.label>EMP磁轨炮</Gun_EMPArtilleryTurret.label>
+  <Gun_EMPArtilleryTurret.description>威力巨大的磁轨炮，发射EMP弹。</Gun_EMPArtilleryTurret.description>
+
+  <Bullet_EMPArtillery.label>EMP炮弹</Bullet_EMPArtillery.label>
+
+
+  <!-- 自动迫击炮 -->
+
+  <PlayerTurret_AutoMortar.label>自动迫击炮</PlayerTurret_AutoMortar.label>
+  <PlayerTurret_AutoMortar.description>一种自动供能、装填的迫击炮。出于技术限制和安全考虑，威力相比机械族原版迫击炮更小。</PlayerTurret_AutoMortar.description>
+
+  <Artillery_PlayerAutoMortar.label>自动迫击炮</Artillery_PlayerAutoMortar.label>
+  <Bullet_Shell_PlayerAntigrainWarhead.label>自动迫击炮弹</Bullet_Shell_PlayerAntigrainWarhead.label>
+
+
+  <!-- 登陆迫击炮 -->
+
+  <PlayerTurret_LandingAutoMortar.label>登陆迫击炮</PlayerTurret_LandingAutoMortar.label>
+  <PlayerTurret_LandingAutoMortar.description>一种自供能、快速装填的自动迫击炮。威力较小。</PlayerTurret_LandingAutoMortar.description>
+  
+  <!-- 电荷冲击炮台 -->
+
+  <PlayerTurret_GiantChargeBlaster.label>巨型电荷冲击炮塔</PlayerTurret_GiantChargeBlaster.label>
+  <PlayerTurret_GiantChargeBlaster.description>一台由复杂工艺组建起来的钢铁巨兽。出于安全考虑略微降低了威力，同时每次开火都需要消耗一定的储电量。\n\n这种炮塔会发射口径接近炮弹的电荷子弹，撕开每一个进犯者的身躯。被敌人近身时会切换至类霰弹开火模式。\n\n*重要：当你的电路网络储电量过低或没有储电设备时，炮塔不能开火。</PlayerTurret_GiantChargeBlaster.description>
+  
+  <!-- 高射机枪炮塔 -->
+
+  <PlayerTurret_AntiAirMachineGun.label>防空机枪炮塔</PlayerTurret_AntiAirMachineGun.label>
+  <PlayerTurret_AntiAirMachineGun.description>一种改装后的自动四联机枪塔，只能对空中单位射击，能够对敌方空军造成相当有效的杀伤。也可以被用于拦截任意高角炮弹，但对射击角度有要求。</PlayerTurret_AntiAirMachineGun.description>
+
+  <Gun_GDAntiAirMachineGun.label>四联防空机枪</Gun_GDAntiAirMachineGun.label>
+  <Gun_GDAntiAirMachineGun.description>只能对空中单位射击的机枪。</Gun_GDAntiAirMachineGun.description>
+
+  <Bullet_AntiAirMachineGun.label>高射子弹</Bullet_AntiAirMachineGun.label>
+  
+  <!-- 防空火箭巢炮塔 -->
+
+  <PlayerTurret_AntiAirRocketPod.label>防空火箭巢炮塔</PlayerTurret_AntiAirRocketPod.label>
+  <PlayerTurret_AntiAirRocketPod.description>一种自动四联火箭塔，只能对空中单位射击，拥有相当高的命中率与对敌人集群的杀伤效率，但对分散的敌人较为无力。也可以被用于拦截任意高角炮弹。</PlayerTurret_AntiAirRocketPod.description>
+
+  <Gun_GDAntiAirRocketPod.label>四联防空火箭巢</Gun_GDAntiAirRocketPod.label>
+  <Gun_GDAntiAirRocketPod.description>只能对空中单位发射的火箭巢。</Gun_GDAntiAirRocketPod.description>
+
+  <Bullet_AntiAirRocketPod.label>制导火箭</Bullet_AntiAirRocketPod.label>
+
+
+</LanguageData>

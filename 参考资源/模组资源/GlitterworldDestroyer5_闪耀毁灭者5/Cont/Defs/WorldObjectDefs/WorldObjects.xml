@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <WorldObjectDef ParentName="StaticWorldObjectBase">
+    <defName>GD_ClusterConstructing</defName>
+    <label>cluster under construction</label>
+    <description>The framework of the giant cluster under construction. To avoid drawing attention, you need to provide the construction resources.</description>
+    <!-- <worldObjectClass>GD3.WorldClusterConstructing</worldObjectClass> -->
+	<texture>UI/Symbols/AllyGiantCluster_constructing</texture>
+    <expandingIcon>true</expandingIcon>
+	<expandingIconTexture>UI/Symbols/AllyGiantCluster_constructing</expandingIconTexture>
+    <expandingIconPriority>70</expandingIconPriority>
+	<expandingIconColor>(255, 255, 255)</expandingIconColor>
+    <comps>
+      <li Class="GD3.WorldObjectCompProperties_BuildRequest" />
+    </comps>
+  </WorldObjectDef>
+  
+  <WorldObjectDef ParentName="StaticWorldObjectBase">
+    <defName>GD_AllyCluster</defName>
+    <label>giant cluster</label>
+    <description>For the giant cluster that remains neutral towards you, you can call for artillery support through the comms console.</description>
+    <!-- <worldObjectClass>GD3.WorldClusterConstructing</worldObjectClass> -->
+	<texture>UI/Symbols/AllyGiantCluster</texture>
+    <expandingIcon>true</expandingIcon>
+	<expandingIconTexture>UI/Symbols/AllyGiantCluster</expandingIconTexture>
+    <expandingIconPriority>70</expandingIconPriority>
+	<expandingIconColor>(255, 255, 255)</expandingIconColor>
+    <comps>
+    </comps>
+  </WorldObjectDef>
+
+</Defs>

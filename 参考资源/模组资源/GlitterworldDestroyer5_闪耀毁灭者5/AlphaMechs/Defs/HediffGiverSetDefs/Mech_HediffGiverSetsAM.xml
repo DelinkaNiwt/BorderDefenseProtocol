@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <HediffGiverSetDef>
+    <defName>Introduction_Infernus</defName>
+    <hediffGivers>
+      <li Class="HediffGiver_Random">
+        <hediff>Introduction_Infernus</hediff>
+        <mtbDays>0.00000001</mtbDays>
+      </li>
+    </hediffGivers>
+  </HediffGiverSetDef>
+  
+  <HediffGiverSetDef>
+    <defName>Introduction_WarEmpress</defName>
+    <hediffGivers>
+      <li Class="HediffGiver_Random">
+        <hediff>Introduction_WarEmpress</hediff>
+        <mtbDays>0.00000001</mtbDays>
+      </li>
+    </hediffGivers>
+  </HediffGiverSetDef>
+  
+  <HediffGiverSetDef>
+    <defName>Introduction_Apoptosis</defName>
+    <hediffGivers>
+      <li Class="HediffGiver_Random">
+        <hediff>Introduction_Apoptosis</hediff>
+        <mtbDays>0.00000001</mtbDays>
+      </li>
+    </hediffGivers>
+  </HediffGiverSetDef>
+  
+</Defs>

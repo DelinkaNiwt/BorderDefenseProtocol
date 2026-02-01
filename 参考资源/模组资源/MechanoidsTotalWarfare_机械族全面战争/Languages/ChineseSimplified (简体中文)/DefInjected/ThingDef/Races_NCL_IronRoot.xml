@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 铁树 -->
+  <NCL_Mech_Ironbark.label>TODO</NCL_Mech_Ironbark.label>
+  <!-- EN: 单位档案：NCL-05“铁树”\n\n来源：NCL「铁律」重装近战序列\n\n这台名为“铁树”的巨型作战机械曾是用于城市攻坚和区域清洗的主力单位，其外壳覆盖类树皮仿生装甲，具备极高的抗击打性。内部结构复杂，能在非致命损伤下缓慢修复自身，是典型的高生存型压制平台。\n\n它的战斗方式粗暴而高效。前置的“裂地巨臂”配有高频震荡刃，能轻松撕裂近距离内的轻型载具或掩体；背部的燃剂喷口则能喷出高温黏着性燃烧物，覆盖扇形区域，将一切沾染目标长时间点燃。\n\n更致命的是，其周身持续释放的高温辐射场，可穿透掩体，灼烧接近单位，并有效破除隐匿装置。靠近它作战是极为不智的选择。\n\n在关键时刻，“铁树”还能主动引爆自身反应炉，释放毁灭性的热能冲击波。 -->
+  <NCL_Mech_Ironbark.description>TODO</NCL_Mech_Ironbark.description>
+  <!-- EN: Enable/disable invisibility detection -->
+  <NCL_Mech_Ironbark.comps.CompAntiInvisibilityField.toggleCommandDesc>TODO</NCL_Mech_Ironbark.comps.CompAntiInvisibilityField.toggleCommandDesc>
+  <!-- EN: Toggle Scanner -->
+  <NCL_Mech_Ironbark.comps.CompAntiInvisibilityField.toggleCommandLabel>TODO</NCL_Mech_Ironbark.comps.CompAntiInvisibilityField.toggleCommandLabel>
+  <!-- EN: 裂地巨臂 -->
+  <NCL_Mech_Ironbark.tools.0.label>TODO</NCL_Mech_Ironbark.tools.0.label>
+  <!-- EN: 裂地巨臂 -->
+  <NCL_Mech_Ironbark.tools.0.labelNoLocation>TODO</NCL_Mech_Ironbark.tools.0.labelNoLocation>
+  <!-- EN: 裂地巨臂 -->
+  <NCL_Mech_Ironbark.tools.1.label>TODO</NCL_Mech_Ironbark.tools.1.label>
+  <!-- EN: 裂地巨臂 -->
+  <NCL_Mech_Ironbark.tools.1.labelNoLocation>TODO</NCL_Mech_Ironbark.tools.1.labelNoLocation>
+  <!-- EN: 铁木树冠 -->
+  <NCL_Mech_Ironbark.tools.2.label>TODO</NCL_Mech_Ironbark.tools.2.label>
+  
+</LanguageData>

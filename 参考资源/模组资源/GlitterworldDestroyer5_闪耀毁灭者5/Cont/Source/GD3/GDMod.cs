@@ -1,0 +1,38 @@
+﻿using System;
+using System.Linq;
+using RimWorld;
+using UnityEngine;
+using Verse;
+
+namespace GD3
+{
+	// Token: 0x0200001F RID: 31
+	internal class GDMod : Mod
+	{
+		public GDMod(ModContentPack mcp) : base(mcp)
+		{
+			base.GetSettings<GDSettings>();
+		}
+
+		public override void WriteSettings()
+		{
+			base.WriteSettings();
+			GDMod.ApplySettings();
+		}
+
+		public static void ApplySettings()
+		{
+			//StatUtility.SetStatValueInList(ref GDDefOf.GD_HitArmor.stages[0].statFactors, StatDefOf.IncomingDamageFactor, 1.0f - (float)GDSettings.damageBlockRate/100);
+			return;
+		}
+
+		public override string SettingsCategory()
+		{
+			return base.Content.Name;
+		}
+		public override void DoSettingsWindowContents(Rect inRect)
+		{
+			GDSettings.DoWindowContents(inRect);
+		}
+	}
+}

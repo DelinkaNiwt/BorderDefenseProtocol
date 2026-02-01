@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+
+
+    <RecipeDef ParentName="BaseMechanoidRecipe">
+    <defName>TW_Mech_Paratrooper</defName>
+    <label>制造特战伞兵静螳</label>
+    <gestationCycles>6</gestationCycles>
+    <displayPriority>300</displayPriority>
+    <description>机械族中型量产精英机械体。配备专业喷气式背包，可原地起飞，在地图内指定地点及大地图一定范围内实施伞降；同时，伞兵静螳还能投掷进攻型破片闪光弹，对各类单位造成眩晕与破片伤害。
+
+伞兵静螳的核心跳跃技术来自于某科技企业所谓“高性能计算芯片”，在闪耀世界算力竞赛中被打假后，芯片流入机械主巢，意外的是，这片芯片意外在跳跃平衡技术方面对中型机械体有重要突破，随后被大规模量产，代号“Jumping”。</description>
+    <researchPrerequisites>
+	<li>HighMechtech</li>
+	</researchPrerequisites>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>125</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>75</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>SubcoreHigh</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>4</count>
+      </li>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>Chemfuel</li>
+          </thingDefs>
+        </filter>
+        <count>75</count>
+      </li>
+    </ingredients>
+    <products>
+      <TW_Mech_Paratrooper>1</TW_Mech_Paratrooper>
+    </products>
+    <descriptionHyperlinks>
+      <ThingDef>TW_Mech_Paratrooper</ThingDef>
+    </descriptionHyperlinks>
+  </RecipeDef>
+  
+ </Defs>

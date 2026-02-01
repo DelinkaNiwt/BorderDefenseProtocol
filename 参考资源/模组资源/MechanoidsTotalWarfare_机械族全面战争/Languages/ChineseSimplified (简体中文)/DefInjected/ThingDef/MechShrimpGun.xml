@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Tide Surge -->
+  <Bullet_TideSurge.label>TODO</Bullet_TideSurge.label>
+  
+  <!-- EN: 潮涌标枪 -->
+  <TideSurge.label>TODO</TideSurge.label>
+  <!-- EN: 1 -->
+  <TideSurge.description>TODO</TideSurge.description>
+  <!-- EN: stock -->
+  <TideSurge.tools.stock.label>TODO</TideSurge.tools.stock.label>
+  <!-- EN: barrel -->
+  <TideSurge.tools.barrel.label>TODO</TideSurge.tools.barrel.label>
+  <!-- EN: 潮涌标枪 -->
+  <TideSurge.verbs.Verb_Shoot.label>TODO</TideSurge.verbs.Verb_Shoot.label>
+  
+</LanguageData>

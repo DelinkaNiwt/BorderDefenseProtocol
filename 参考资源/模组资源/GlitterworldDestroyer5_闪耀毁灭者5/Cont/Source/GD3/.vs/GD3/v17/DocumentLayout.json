@@ -1,0 +1,101 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\Glitterworld Destroyer 5 - Mechanoid Addon\\Cont\\Source\\GD3\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{81BFFECF-DD46-41AC-ABB7-91B305AFA634}|GD3.csproj|d:\\steamlibrary\\steamapps\\common\\rimworld\\mods\\glitterworld destroyer 5 - mechanoid addon\\cont\\source\\gd3\\projectileantiair.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{81BFFECF-DD46-41AC-ABB7-91B305AFA634}|GD3.csproj|solutionrelative:projectileantiair.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{81BFFECF-DD46-41AC-ABB7-91B305AFA634}|GD3.csproj|d:\\steamlibrary\\steamapps\\common\\rimworld\\mods\\glitterworld destroyer 5 - mechanoid addon\\cont\\source\\gd3\\patches\\flying_patch.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{81BFFECF-DD46-41AC-ABB7-91B305AFA634}|GD3.csproj|solutionrelative:patches\\flying_patch.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\58303\\Desktop\\Assembly\\Verse\\Projectile_Explosive.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{81BFFECF-DD46-41AC-ABB7-91B305AFA634}|GD3.csproj|D:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\Glitterworld Destroyer 5 - Mechanoid Addon\\Cont\\Source\\GD3\\gdutility.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{81BFFECF-DD46-41AC-ABB7-91B305AFA634}|GD3.csproj|solutionrelative:gdutility.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{81BFFECF-DD46-41AC-ABB7-91B305AFA634}|GD3.csproj|D:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\Glitterworld Destroyer 5 - Mechanoid Addon\\Cont\\Source\\GD3\\gddefof.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{81BFFECF-DD46-41AC-ABB7-91B305AFA634}|GD3.csproj|solutionrelative:gddefof.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Flying_Patch.cs",
+              "DocumentMoniker": "D:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\Glitterworld Destroyer 5 - Mechanoid Addon\\Cont\\Source\\GD3\\Patches\\Flying_Patch.cs",
+              "RelativeDocumentMoniker": "Patches\\Flying_Patch.cs",
+              "ToolTip": "D:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\Glitterworld Destroyer 5 - Mechanoid Addon\\Cont\\Source\\GD3\\Patches\\Flying_Patch.cs",
+              "RelativeToolTip": "Patches\\Flying_Patch.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAQwCsAAABzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-10T04:40:24.74Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Projectile_Explosive.cs",
+              "DocumentMoniker": "C:\\Users\\58303\\Desktop\\Assembly\\Verse\\Projectile_Explosive.cs",
+              "ToolTip": "C:\\Users\\58303\\Desktop\\Assembly\\Verse\\Projectile_Explosive.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-10T04:38:59.627Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ProjectileAntiAir.cs",
+              "DocumentMoniker": "D:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\Glitterworld Destroyer 5 - Mechanoid Addon\\Cont\\Source\\GD3\\ProjectileAntiAir.cs",
+              "RelativeDocumentMoniker": "ProjectileAntiAir.cs",
+              "ToolTip": "D:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\Glitterworld Destroyer 5 - Mechanoid Addon\\Cont\\Source\\GD3\\ProjectileAntiAir.cs",
+              "RelativeToolTip": "ProjectileAntiAir.cs",
+              "ViewState": "AgIAAO4AAAAAAAAAAAAswPoAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-10T04:36:12.159Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "GDUtility.cs",
+              "DocumentMoniker": "D:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\Glitterworld Destroyer 5 - Mechanoid Addon\\Cont\\Source\\GD3\\GDUtility.cs",
+              "RelativeDocumentMoniker": "GDUtility.cs",
+              "ToolTip": "D:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\Glitterworld Destroyer 5 - Mechanoid Addon\\Cont\\Source\\GD3\\GDUtility.cs",
+              "RelativeToolTip": "GDUtility.cs",
+              "ViewState": "AgIAABgCAAAAAAAAAAAwwDECAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-26T05:09:06.806Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "GDDefOf.cs",
+              "DocumentMoniker": "D:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\Glitterworld Destroyer 5 - Mechanoid Addon\\Cont\\Source\\GD3\\GDDefOf.cs",
+              "RelativeDocumentMoniker": "GDDefOf.cs",
+              "ToolTip": "D:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\Glitterworld Destroyer 5 - Mechanoid Addon\\Cont\\Source\\GD3\\GDDefOf.cs",
+              "RelativeToolTip": "GDDefOf.cs",
+              "ViewState": "AQIAAMEBAAAAAAAAAAAkwOQBAAA6AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-26T05:09:06.806Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

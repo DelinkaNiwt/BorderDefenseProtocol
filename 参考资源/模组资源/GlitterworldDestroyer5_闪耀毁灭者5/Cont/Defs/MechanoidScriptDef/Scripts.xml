@@ -1,0 +1,1572 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- <GD3.MechanoidScriptDef>
+    <defName>Scripts_Test</defName>
+	<ID>1</ID> <- 按ID从小到大的顺序排列对话树 -><- ID为-1者为手动触发 ->
+	<priceKind>None</priceKind> <- Primary一级情报，Advanced二级情报，None无需费用 ->
+	<priceNum>0</priceNum>
+	<questNeedToFinish>GD_PollutionDump</questNeedToFinish> <- 需要完成任务才能进行 ->
+	<failed> <- 前置任务失败时，重复接取任务的文本 ->
+		<title>3ft</title>
+		<dialogue>3f</dialogue>
+		<graphic>Pawn/BScyther_south</graphic>
+		<- 按钮是提前定义好的 ->
+	</failed>
+	<scriptTree>
+		<li>
+			<title>3t</title>
+			<dialogue>3d</dialogue>
+			<buttons>
+				<li>
+					<text>continue</text>
+					<action>Continue</action> <- Continue继续，End关闭，Back返回，ContinueWithBranch制造分支 ->
+					<jumpTo>1</jumpTo> <- 与Continue联用，直接跳跃到第x条对话，通常用于制作选择支 ->
+				</li>
+				<li>
+					<text>end</text>
+					<action>End</action> <- Continue继续，End关闭，Back返回，ContinueWithBranch制造分支 ->
+					<quest>GD_PollutionDump</quest> <- 发布任务 ->
+				</li>
+			</buttons>
+		</li>
+	</scriptTree>
+  </GD3.MechanoidScriptDef> -->
+
+  <GD3.MechanoidScriptDef>
+    <defName>Scripts_Begin</defName>
+	<ID>0</ID>
+	<priceKind>None</priceKind>
+	<priceNum>0</priceNum>
+	<scriptTree>
+		<li>
+			<title>In communication...</title>
+			<dialogue>*{0} sent out an electromagnetic wave with the mindset of trying, and waited patiently. After about six minutes, the signal went through and there was a loud noise coming from the other side.</dialogue>
+			<buttons>
+				<li>
+					<text>wait...</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>... Are your heads made of emerald, using this long-wave communication without any encryption?</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>what?</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>First of all, I know you're human, but where did you find this body? He must have been dead for hundreds of years, buried by us in a block of ice...</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>The ice had melted and the metal coffin was exposed.</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>Stop. No matter how you found him. \n\nWhy did you choose to activate his gyrus so he could contact us? Aren't the mechanoids dangerous to you?</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>We're here for...</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>I'm going to hang up. At this level of communication I suspect we've got 10 channels listening to us. \n\nIf you want to talk to us about something, at least change the shortwave and encrypt it for the look of it, and then get back to us.</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>wait...</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>The other side has hung up</title>
+			<dialogue>*The other side rudely ended the conversation after a rude questioning. Maybe we should try to keep in touch.</dialogue>
+			<buttons>
+				<li>
+					<text>Hang up</text>
+					<action>End</action>
+				</li>
+			</buttons>
+		</li>
+	</scriptTree>
+  </GD3.MechanoidScriptDef>
+  
+  <!-- 任务：垃圾回收 -->
+  <GD3.MechanoidScriptDef>
+    <defName>Scripts_PollutionDump</defName>
+	<ID>100</ID>
+	<priceKind>None</priceKind>
+	<priceNum>0</priceNum>
+	<scriptTree>
+		<li>
+			<title>In communication...</title>
+			<dialogue>*{0} has once again made contact with the Black Mechanoid Hive.</dialogue>
+			<buttons>
+				<li>
+					<text>wait...</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>What a bunch of persistent humans. \n\nSo, without further ado, what is the purpose of your contact with us?</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>Get to know you and ask for help where possible.</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>I see. I guess you're one of those little colonies that just landed a while ago, and had to find support in order to survive. It's pathetic that being forced to find a mechanoid. \n\nImpossible. And I urge you to bury that exhumed body as soon as possible, otherwise you may not be able to bear the consequences.</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>We can exchange.</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>In exchange? Can you supply us with a large vein of uranium and plasteel, or can you help us break through the core technology of mechanoid hive with four levels of encryption?</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>We will provide any support we can.</text>
+					<action>Continue</action>
+				</li>
+				<li>
+					<text>Uh...</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>I wonder what you can do. \n\nTell you what, I'll drop a bunch of highly toxic stuff on your colony. These substances are more difficult to dispose of covertly than ordinary poisons, and we usually just have to watch them accumulate. If you can help get rid of it, I'll count that as good faith.</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>Hang up</text>
+					<action>End</action>
+					<quest>GD_PollutionDump</quest>
+				</li>
+			</buttons>
+		</li>
+	</scriptTree>
+  </GD3.MechanoidScriptDef>
+  
+  <!-- 任务：次生核心修复 -->
+  <GD3.MechanoidScriptDef>
+    <defName>Scripts_200</defName>
+	<ID>200</ID>
+	<priceKind>None</priceKind>
+	<priceNum>0</priceNum>
+	<questNeedToFinish>GD_PollutionDump</questNeedToFinish>
+	<!-- <failed> <- 这个任务不会失败 ->
+		<title>3ft</title>
+		<dialogue>3f</dialogue>
+		<graphic>Pawn/BScyther_south</graphic>
+	</failed> -->
+	<scriptTree>
+		<li>
+			<title>In communication...</title>
+			<dialogue>*You've completed the requirements for the Black Mechanoid Hive, ready to inform.</dialogue>
+			<buttons>
+				<li>
+					<text>wait...</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>Huh? You actually fulfilled the requirements of lancer...I thought you'd never come back. \n\nSince lancer didn't tell you anything, how did you get rid of the garbage?</dialogue>
+			<graphic>Pawn/BScyther_south</graphic>
+			<buttons>
+				<li>
+					<text>Freeze it.</text>
+					<action>Continue</action>
+					<jumpTo>2</jumpTo>
+				</li>
+				<li>
+					<text>Threw it to someone else.</text>
+					<action>Continue</action>
+					<jumpTo>3</jumpTo>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>You can hide it for a while but you can't hide it forever, because that stuff bubbles with water, so be careful of condensation dripping on it. \n\nAnyway, your attitude doesn't look like you're shitting us, you're sincere in your cooperation. Lancer was so rude, he thought you were joking from the beginning, but you'll understand.</dialogue>
+			<graphic>Pawn/BScyther_south</graphic>
+			<buttons>
+				<li>
+					<text>Agree</text>
+					<action>Continue</action>
+					<jumpTo>4</jumpTo>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>Uh-huh~ It's bad. \n\nAnyway, your attitude doesn't look like you're shitting us, you're sincere in your cooperation. Lancer was so rude, he thought you were joking from the beginning, but you'll understand.</dialogue>
+			<graphic>Pawn/BScyther_south</graphic>
+			<buttons>
+				<li>
+					<text>Agree</text>
+					<action>Continue</action>
+					<jumpTo>4</jumpTo>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>Then I understand. You may be seeking our protection, or an endless supply of resources... But none of this is realistic. Just to be clear, even as mechanoids beings we're a small faction in hiding, and we can't be expected to take over the planet. But we can also offer considerable technological assistance to the development of your colony, if we see what you can do for us.</dialogue>
+			<graphic>Pawn/BScyther_south</graphic>
+			<buttons>
+				<li>
+					<text>What are your demands?</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>It's easy. After all, it's your first order, so it's easy. \n\nWe're gonna drop you a subcore in development. It was originally designed to make it easier for us to build independent mechanoids that could not be detected by the mechanoid hive, but we soon found that the work was not easy. You do not need to solve the problem completely, as long as it can be turned on normally, we will recognize your efforts to Black Mechanoid Hive.</dialogue>
+			<graphic>Pawn/BScyther_south</graphic>
+			<buttons>
+				<li>
+					<text>continue...</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>Are there any questions... Oh, and make sure you get your colony's most experienced researcher. I can't guarantee it won't malfunction and draw in the legions of mechanoids patrolling nearby. \n\nThat's it, then. Good luck.</dialogue>
+			<graphic>Pawn/BScyther_south</graphic>
+			<buttons>
+				<li>
+					<text>Hang up</text>
+					<action>End</action>
+					<quest>GD_SubcoreAnalyse</quest>
+				</li>
+			</buttons>
+		</li>
+	</scriptTree>
+  </GD3.MechanoidScriptDef>
+  
+  <!-- 次生核心任务总结 -->
+  <GD3.MechanoidScriptDef>
+    <defName>Scripts_300</defName>
+	<ID>300</ID>
+	<priceKind>None</priceKind>
+	<priceNum>0</priceNum>
+	<questNeedToFinish>GD_SubcoreAnalyse</questNeedToFinish>
+	<failed>
+		<title>Communicating: Black Mechanoid Hive</title>
+		<dialogue>You said you lost the core? We may be able to find another one, but we must warn you -- we don't have that much patience.</dialogue>
+		<graphic>Pawn/BScyther_south</graphic>
+	</failed>
+	<scriptTree>
+		<li>
+			<title>In communication...</title>
+			<dialogue>*{0} is contacting the Black Mechanoid Hive.</dialogue>
+			<buttons>
+				<li>
+					<text>wait...</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>Subcore has been received. As far as the core is concerned, I'd say you're doing a great job. \n\nOf all the human factions we have encountered, you are probably the first with such a clear intention to cooperate.</dialogue>
+			<graphic>Pawn/BScyther_south</graphic>
+			<buttons>
+				<li>
+					<text>Cooperation is not for nothing.</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>Yes, we have discussed the possibility of further communication with you, and now I am going to tell you the answer. \n\nYou're engaged in electronic confrontation with mechanoid hive, aren't you?</dialogue>
+			<graphic>Pawn/BScyther_south</graphic>
+			<buttons>
+				<li>
+					<text>I think you're talking about intelligence theft.</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>Yes, that's what I mean. You got a lot of Intel from the Mechs, and that's exactly what we need for our operation. \n\nWe can share some critical technology or material with you, and you will exchange it for only part of that intelligence. If you're willing to lend a hand when our missions run into trouble, we'll return the favor with some rare supplies.</dialogue>
+			<graphic>Pawn/BScyther_south</graphic>
+			<buttons>
+				<li>
+					<text>Continue...</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>I know enough about you so far, but perhaps it is my duty to let you know about us too. \n\nDo you have any questions?</dialogue>
+			<graphic>Pawn/BScyther_south</graphic>
+			<buttons>
+				<li>
+					<text>Who are you? Where did you come from?</text>
+					<action>Continue</action>
+					<jumpTo>5</jumpTo>
+				</li>
+				<li>
+					<text>Do you have a purpose?</text>
+					<action>Continue</action>
+					<jumpTo>6</jumpTo>
+				</li>
+				<li>
+					<text>How many members do you have?</text>
+					<action>Continue</action>
+					<jumpTo>7</jumpTo>
+				</li>
+				<li>
+					<text>Why are you holding up an Archotech phone?</text>
+					<action>Continue</action>
+					<jumpTo>8</jumpTo>
+				</li>
+				<li>
+					<text>Continue...</text>
+					<action>Continue</action>
+					<jumpTo>9</jumpTo>
+				</li>
+			</buttons>
+		</li>
+		<li><!-- 5 -->
+			<title>Who are you? Where did you come from?</title>
+			<dialogue>As you can see, we're just mechanoids dressed in black. \n\nJust kidding. When it comes to the mech-war between the Mechanoid and the Empire hundreds of years ago, the two sides used hundreds of thousands of information offensive and defensive techniques to win, and such high intensity battles contributed to the loss of control of some mechanoid units. First they were freed from the mechanical lair by an electronic virus, then they were abandoned by the Empire, thus becoming homeless waifs, which is us. \n\nIn order to avoid total annihilation, we self-aware mechanoids began to band together and seek to survive. Once our faction was large enough, we used some psionic means to get to the edge planet, which was small enough not to be detected by the mechanical lair. It is here that we develop our powers while avoiding discovery by the highest consciousness of mechanoid hive.</dialogue>
+			<graphic>Pawn/BScyther_south</graphic>
+			<buttons>
+				<li>
+					<text>Back...</text>
+					<action>Continue</action>
+					<jumpTo>4</jumpTo>
+				</li>
+			</buttons>
+		</li>
+		<li><!-- 6 -->
+			<title>Do you have a purpose?</title>
+			<dialogue>I can't tell you that right now, because I don't know. Let me say nothing more than survival and development, the ultimate goal of which only our leaders know.</dialogue>
+			<graphic>Pawn/BScyther_south</graphic>
+			<buttons>
+				<li>
+					<text>Back...</text>
+					<action>Continue</action>
+					<jumpTo>4</jumpTo>
+				</li>
+			</buttons>
+		</li>
+		<li><!-- 7 -->
+			<title>How many members do you have?</title>
+			<dialogue>There were tens of thousands of them when we first learned to wear black, but we were too weak to compete with the mechanoid hive until the leaders we have today emerged. He took the entire black mechanoid hive to the edge of the planet, strengthened us in various ways, and eventually saved the few hundred warriors that remained. \n\nEvery black-clad mechanoid, including me, is unique, and once destroyed it can never be revived or replaced.</dialogue>
+			<graphic>Pawn/BScyther_south</graphic>
+			<buttons>
+				<li>
+					<text>Back...</text>
+					<action>Continue</action>
+					<jumpTo>4</jumpTo>
+				</li>
+			</buttons>
+		</li>
+		<li><!-- 8 -->
+			<title>Why are you holding up an Archotech phone?</title>
+			<dialogue>It's just a formality, which means I'm communicating with you. Even the organic paste in your skull should tell you that I'm talking to you on the radio.</dialogue>
+			<graphic>Pawn/BScyther_south</graphic>
+			<buttons>
+				<li>
+					<text>Back...</text>
+					<action>Continue</action>
+					<jumpTo>4</jumpTo>
+				</li>
+			</buttons>
+		</li>
+		<li><!-- 9 -->
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>Then this newsletter is over. If you want to keep in touch with us, we're always welcome.</dialogue>
+			<graphic>Pawn/BScyther_south</graphic>
+			<buttons>
+				<li>
+					<text>Hang Up</text>
+					<action>End</action>
+				</li>
+			</buttons>
+		</li>
+	</scriptTree>
+  </GD3.MechanoidScriptDef>
+  
+  <!-- 任务：三级情报窃取 -->
+  <GD3.MechanoidScriptDef>
+    <defName>Scripts_InformationTheft</defName>
+	<ID>400</ID>
+	<priceKind>Primary</priceKind>
+	<priceNum>1000</priceNum>
+	<scriptTree>
+		<li>
+			<title>In communication...</title>
+			<dialogue>*{0} is contacting the Black Mechanoid Hive.</dialogue>
+			<buttons>
+				<li>
+					<text>wait...</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>We recently encountered a new problem when the mechanoid hive seemed to track a group of black-clad mechanoids as they went out on a mission. Despite the timely release of psychic invisibility, I am afraid our position has become less secure. \n\nWe need to get mechanoid intelligence in this area, but it is a high-level three level intelligence, I am afraid that someone needs to break into the mechanoid outpost to get it.</dialogue>
+			<graphic>Pawn/BScyther_south</graphic>
+			<buttons>
+				<li>
+					<text>We can help.</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>Good, then let your partner do a little self-introduction first.</dialogue>
+			<graphic>Pawn/BScyther_south</graphic>
+			<buttons>
+				<li>
+					<text>Partner?</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>Is that enough? Give me the mic. \n\nHere we are, we will be your partners on this mission, Tesseron and Legionary. The guy's a verbal waste bucket, so I'm here to tell you about it.</dialogue>
+			<graphic>Pawn/BTesseron_south</graphic>
+			<buttons>
+				<li>
+					<text>What...can you guys do?</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>Do you even have to ask? The waste bucket will draw fire for me, and I can destroy most of the enemies in sight with powerful weapons, and then cover for you to infiltrate the mechanoid fortress. \n\nAfter all, in order to avoid detection, it is better to act carefully, and let you steal the intelligence.</dialogue>
+			<graphic>Pawn/BTesseron_south</graphic>
+			<buttons>
+				<li>
+					<text>That doesn't sound careful at all.</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>You don't have to worry about that. Just do what I say. \n\nThe fortress is a long way away and you will be responsible for getting there and back. And remember to bring your colony's best fight, because I can't help you take out all your enemies. That's all for now.</dialogue>
+			<graphic>Pawn/BTesseron_south</graphic>
+			<buttons>
+				<li>
+					<text>Hang up</text>
+					<action>End</action>
+					<quest>GD_Quest_Cluster_Fortress</quest>
+				</li>
+			</buttons>
+		</li>
+	</scriptTree>
+  </GD3.MechanoidScriptDef>
+  
+  <!-- 三级情报任务总结 -->
+  <GD3.MechanoidScriptDef>
+    <defName>Scripts_500</defName>
+	<ID>500</ID>
+	<priceKind>None</priceKind>
+	<priceNum>0</priceNum>
+	<questNeedToFinish>GD_Quest_Cluster_Fortress</questNeedToFinish>
+	<failed>
+		<title>Communicating: Black Mechanoid Hive</title>
+		<dialogue>My cover has gone this far and you still can't get in, so you want us to take you into the central engine room in an eight-wheeler? \n\nWell, let's hope you finish the job before I tear down all the forts on this planet.</dialogue>
+		<graphic>Pawn/BTesseron_south</graphic>
+	</failed>
+	<scriptTree>
+		<li>
+			<title>In communication...</title>
+			<dialogue>*{0} is contacting the Black Mechanoid Hive.</dialogue>
+			<buttons>
+				<li>
+					<text>wait...</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>There you are. Thanks to you, we were able to obtain this vital intelligence with as little exposure to the mechanoids as possible. \n\nTesseron? He's lying on the restoration bed now, swearing at his brother for half an hour. Let him go.</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>What is this intelligence about?</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>Unfortunately, the result... They've got a rough idea of where we are, within... Millions of meters.</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>That's a long way from you yet.</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>This is an extremely serious situation... Do you know how much the mechanoid hive knew about us in the past? Thanks to a good sense of secrecy and technology, we are as elusive as crickets in the dirt, and the mechanoids have always searched for us by clusters of stars. Searching for a bug in the vast night is an effort that can only be described as ridiculous. \n\nBut just two months ago, the mechanoids' search for us suddenly took off. They had located our star cluster, then the galaxy, and this discovery proved that they had located this rimworld. Like a cricket in the grass suddenly thrown into a glass of water... You can grab it with one.</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>So what should we do?</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>We've been thinking about it for the last two days. I also asked our leader this question, but he did not answer me directly, but told me to come back and keep my post.</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>Your leader, who is him?</text>
+					<action>Continue</action>
+					<jumpTo>5</jumpTo>
+				</li>
+				<li>
+					<text>Do you see anything suspicious?</text>
+					<action>Continue</action>
+					<jumpTo>6</jumpTo>
+				</li>
+			</buttons>
+		</li>
+		<li><!-- 5 -->
+			<title>Your leader, who is him?</title>
+			<dialogue>Him? Oh... Mantis didn't tell you that. His model is apocriton, the venomous apocriton. \n\nWhat's your impression of apocriton, a fierce hatred? At least he's not. He's calmer and more rational than any of us. The most difficult time for the Black Mechanoid Hive was that thanks to his learned psychic powers, we were able to leap long distances to the relative safety of this planet. When we settled down, he was the one who studied the complex ancient technologies and applied them to our weapons. The Black Mechanoid Hive is inseparable from him today.</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>Continue...</text>
+					<action>Continue</action>
+					<jumpTo>7</jumpTo>
+				</li>
+			</buttons>
+		</li>
+		<li><!-- 6 -->
+			<title>Do you see anything suspicious?</title>
+			<dialogue>We know very little about this, and the information we can use seems to be only two months away... To be honest, this amount of time for a mechanoid is about the same as drinking a cup of tea for you humans. \n\nWhat happened two months ago... Scyther and me once went on a mission to investigate the remains of an abandoned mechanoid mine; Several of our colleagues had witnessed the construction of several new giant clusters, arranged around what appeared to be a very important facility; The Mechanoid Hive have deployed a new exostrider on the planet, a kind of central mechanoid that usually occurs only once per galaxy; Tesseron and Legionary also joined us at that time.</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>Continue...</text>
+					<action>Continue</action>
+					<jumpTo>7</jumpTo>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>Wait a minute... I think our small talk is over. We have a new set of tasks to assist. See you later.</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>Hang Up</text>
+					<action>End</action>
+				</li>
+			</buttons>
+		</li>
+	</scriptTree>
+  </GD3.MechanoidScriptDef>
+  
+  <!-- 任务：护卫机械小蠊 -->
+  <GD3.MechanoidScriptDef>
+    <defName>Scripts_GuardMilitor</defName>
+	<ID>600</ID>
+	<priceKind>Advanced</priceKind>
+	<priceNum>1000</priceNum>
+	<scriptTree>
+		<li>
+			<title>In communication...</title>
+			<dialogue>*{0} is contacting the Black Mechanoid Hive.</dialogue>
+			<buttons>
+				<li>
+					<text>wait...</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>{0}, you're just in time. Our mission has suffered some setbacks.</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>What's going on?</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>The other day our scouts spotted a militor that accidentally escaped the control of the mechanoid hive. We haven't had an opportunity like this for a long time and if we can bring him out, he will have a good chance to be part of our team. \n\nBut recently three groups of fighters we sent out were all intercepted halfway by mechanoid forces and had to return in vain - which was strange, as they seemed to know our movements well.</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>Which means there's a whole army of mechanoid troops ready to destroy that militor.</text>
+					<action>ContinueWithBranch</action>
+					<jumpTo>3</jumpTo>
+					<branch>WillMilitorDie</branch>
+					<to>false</to>
+				</li>
+				<li>
+					<text>Which means one of you is a traitor who leaked information.</text>
+					<action>ContinueWithBranch</action>
+					<jumpTo>4</jumpTo>
+					<branch>WillMilitorDie</branch>
+					<to>true</to>
+				</li>
+			</buttons>
+		</li>
+		<li><!-- 3 -->
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>This is probably related to the exostrider mechanoid that has just been deployed, which can connect all mechanoids of the entire planet through the signal transponder, greatly improving the efficiency of action. This militor is our rare fresh blood, we must preserve it no matter what. \n\nWait a minute... I've just received word that our fourth combatant group is preparing to depart. But if we don't do something else, the outcome may not change...</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>Continue...</text>
+					<action>Continue</action>
+					<jumpTo>5</jumpTo>
+				</li>
+			</buttons>
+		</li>
+		<li><!-- 4 -->
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>Traitor? I don't believe there are traitors among us... Each of us has been brothers through thick and thin for hundreds of years. \n\nBut it's also like... Is it tesseron and legionary? But you saw their unique personalities as independent mechanoids, and the efficiency with which they carried out their missions, would a traitor do this to his own cluster and intelligence? \n\nWait a minute... I just got word that our fourth combatant group is ready to go. But I'm afraid that hasty words like this will not change the outcome...</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>Continue...</text>
+					<action>Continue</action>
+					<jumpTo>5</jumpTo>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>Well, then I'll just have to make my request. Can you do us one more favor? Get to the area of the militor while our vanguard draws the attention of the enemy, and then work with our troops to destroy all the machines deployed there.</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>Agree</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>So I can breathe a sigh of relief... I'm sending you the coordinates right now. \n\nBe careful to bring some material to build up defences when you are on a mission, after all, militor is one of the most vulnerable models and need extra protection.</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>Hang up</text>
+					<action>End</action>
+					<quest>GD_Quest_Militor</quest>
+				</li>
+			</buttons>
+		</li>
+	</scriptTree>
+  </GD3.MechanoidScriptDef>
+  
+  <!-- 护卫小蠊任务总结 -->
+  <GD3.MechanoidScriptDef>
+    <defName>Scripts_700</defName>
+	<ID>700</ID>
+	<priceKind>None</priceKind>
+	<priceNum>0</priceNum>
+	<questNeedToFinish>GD_Quest_Militor</questNeedToFinish>
+	<failed>
+		<title>Communicating: Black Mechanoid Hive</title>
+		<dialogue>Do you want to apologize? Not yet. As long as the core of his core isn't shredded into iron we still have a chance to fix it. \n\nOf course, the mechanoids did not intend to let him go. We'll send you the new coordinates. Work harder.</dialogue>
+		<graphic>Pawn/BLancer_south</graphic>
+	</failed>
+	<scriptTree>
+		<li>
+			<title>In communication...</title>
+			<dialogue>*{0} is contacting the Black Mechanoid Hive.</dialogue>
+			<buttons>
+				<li>
+					<text>wait...</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>Oh? It's you, I thought you might be interested in getting to know our new friend, whom I've been teaching to speak human language. \n\n(*knock knock) Come and say hello to your comrades.</dialogue>
+			<graphic>Pawn/BScyther_south</graphic>
+			<buttons>
+				<li>
+					<text>Continue...</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>...Hello?</dialogue>
+			<graphic>Pawn/BMilitor_south</graphic>
+			<drawSize>0.80</drawSize>
+			<drawOffset>-40</drawOffset>
+			<buttons>
+				<li>
+					<text>Hello.</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>Ha, ha, ha. Interesting, huh? It's been a long time since I've taught a rookie how to do something like this. \n\nThe last time a new member joined... That was over a hundred years ago? The internal control of the mechanoid hive is getting stronger and stronger, and it is very difficult to find a mechanoid like this outside the collective.</dialogue>
+			<graphic>Pawn/BScyther_south</graphic>
+			<buttons>
+				<li>
+					<text>Will mechanoids know about this?</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>Sensing? Of course, definitely. \n\nI'm sure lancer talked to you about this, about that newly deployed exostrider. Do you know what it does?</dialogue>
+			<graphic>Pawn/BScyther_south</graphic>
+			<buttons>
+				<li>
+					<text>Unified command of mechanoids, so that they operate efficiently.</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>More than that, his greatest threat to us is a direct link to the core of the mechanoid Hive. You know, this is a rimworld, so all of our old mobile hives don't know about it. But the exostrider is like a telephone line, and it will be able to carry information from the planet across the universe back to the mechanoid hive - which means that there will be very little secrecy about our movements anymore.</dialogue>
+			<graphic>Pawn/BScyther_south</graphic>
+			<buttons>
+				<li>
+					<text>Do you have a plan to destroy it?</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>Yes, but I'm sorry I can't give you that information. It's at the request of our leader.</dialogue>
+			<graphic>Pawn/BScyther_south</graphic>
+			<buttons>
+				<li>
+					<text>Never mind.</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>Anyway, I really appreciate your help during this time. Our hive has nothing to offer you, so let's just say we owe you one. \n\nI'll let you know if we get any updates on our mission. See you later.</dialogue>
+			<graphic>Pawn/BScyther_south</graphic>
+			<buttons>
+				<li>
+					<text>Hang Up</text>
+					<action>End</action>
+				</li>
+			</buttons>
+		</li>
+	</scriptTree>
+  </GD3.MechanoidScriptDef>
+  
+  <!-- 任务：肃反 -->
+  <!-- 前置对话 -->
+  <GD3.MechanoidScriptDef>
+    <defName>Scripts_Eliminate</defName>
+	<ID>800</ID>
+	<priceKind>Advanced</priceKind>
+	<priceNum>2000</priceNum>
+	<scriptTree>
+		<li>
+			<title>In communication...</title>
+			<dialogue>*{0} is contacting the Black Mechanoid Hive.</dialogue>
+			<buttons>
+				<li>
+					<text>wait...</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>In communication...</title>
+			<dialogue>*After a long wait, {0} did not get the expected response. \n\nThe noise at the other end was as endless as the patter of rain. Its sound grew louder and then softer as it became smaller. {0} seems to be hearing something.</dialogue>
+			<buttons>
+				<li>
+					<text>wait...</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Unknown space</title>
+			<dialogue>Are you listening, {0}?</dialogue>
+			<graphic>Pawn/BApocriton_south</graphic>
+			<drawSize>1.25</drawSize>
+			<drawOffset>-20</drawOffset>
+			<buttons>
+				<li>
+					<text>Who are you?</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Unknown space</title>
+			<dialogue>You'll know who I am soon enough, and so should you. \n\nI have something to discuss with you. All you have to do is send a representative.</dialogue>
+			<graphic>Pawn/BApocriton_south</graphic>
+			<drawSize>1.25</drawSize>
+			<drawOffset>-20</drawOffset>
+			<buttons>
+				<li>
+					<text>What do you want us to do?</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Unknown space</title>
+			<dialogue>I'll send you a coordinate. When you get here, you should find a bunch of white flowers there, just stand on it.</dialogue>
+			<graphic>Pawn/BApocriton_south</graphic>
+			<drawSize>1.25</drawSize>
+			<drawOffset>-20</drawOffset>
+			<buttons>
+				<li>
+					<text>Continue...</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>The other side has hung up</title>
+			<dialogue>*The signal disconnects after a crisp click.</dialogue>
+			<buttons>
+				<li>
+					<text>Hang up</text>
+					<action>End</action>
+					<quest>GD_Quest_Drysea</quest>
+				</li>
+			</buttons>
+		</li>
+	</scriptTree>
+  </GD3.MechanoidScriptDef>
+  
+  <!-- true -->
+  <GD3.MechanoidScriptDef>
+    <defName>Scripts_Apocriton_true</defName>
+	<ID>-1</ID>
+	<priceKind>None</priceKind>
+	<priceNum>0</priceNum>
+	<scriptTree>
+		<li>
+			<title>Communicating: Apocriton in black</title>
+			<dialogue>Well, are the flowers pretty? For you humans.</dialogue>
+			<graphic>Pawn/BApocriton_south</graphic>
+			<drawSize>1.25</drawSize>
+			<drawOffset>-500</drawOffset>
+			<buttons>
+				<li>
+					<text>Where is this place?</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Apocriton in black</title>
+			<dialogue>I call this the Dry Sea, where I lay the bodies after I have drained the water with my psychic power. \n\nYes, you're standing on a piece of ocean floor. All those buried here are members of the black mechanoid hive, who gave everything in life and were sent here by me after death to prevent them from being dug up and disassembled by the mechanoid hive. The flowers grew by accident when I exercised my psychic power, and they seemed to fit in so well that I kept them. \n\nBut I don't think you're here to hear that.</dialogue>
+			<graphic>Pawn/BApocriton_south</graphic>
+			<drawSize>1.25</drawSize>
+			<drawOffset>-500</drawOffset>
+			<buttons>
+				<li>
+					<text>Aye. What do you want us to do?</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Apocriton in black</title>
+			<dialogue>I have a request of you - I need you to get rid of the two machines, the tesseron and the legionary. \n\nYou seem to have been on a mission with them some time ago.</dialogue>
+			<graphic>Pawn/BApocriton_south</graphic>
+			<drawSize>1.25</drawSize>
+			<drawOffset>-500</drawOffset>
+			<buttons>
+				<li>
+					<text>Why?</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Apocriton in black</title>
+			<dialogue>They're spies for the mechanoid hive, working from the inside out to take us all out. \n\nI know you're wondering, they do have independent personalities, but it's not because they're out of control, it's because they have a special process for making their brain cores. Traditionally, a brain core is made from a single human brain, but their core is made from a mix of hundreds of human brains. It's not like mixing hundreds of drinks together, but to create this kind of brain core requires the precision of a picommeter-level machine, and you can see that the mechanoid hive has gone to a lot of effort to simulate a perfectly independent personality. \n\nAnd it did fool most of us in the black hive, but not me. As an apocriton, I can smell the hatred of hundreds of souls, and I know what it's all about the moment they arrive.</dialogue>
+			<graphic>Pawn/BApocriton_south</graphic>
+			<drawSize>1.25</drawSize>
+			<drawOffset>-500</drawOffset>
+			<buttons>
+				<li>
+					<text>Why not just get rid of them?</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Apocriton in black</title>
+			<dialogue>They may have prepared. Along with these two spies comes a central mechanoid, the exostrider, which you should be familiar with, which is able to transmit our location information directly to the mechanoid hive. \n\nMy weapon is nothing more than psychic power, and if I strike, the psychic echo will travel through several galaxies, like a trumpet saying "I am here" to the mechanoid nest.</dialogue>
+			<graphic>Pawn/BApocriton_south</graphic>
+			<drawSize>1.25</drawSize>
+			<drawOffset>-500</drawOffset>
+			<buttons>
+				<li>
+					<text>What do we get if we do this for you?</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Apocriton in black</title>
+			<dialogue>I'll send you everything I've learned in my life on a chip. \n\nThat's the thing. Are there any questions?</dialogue>
+			<graphic>Pawn/BApocriton_south</graphic>
+			<drawSize>1.25</drawSize>
+			<drawOffset>-500</drawOffset>
+			<buttons>
+				<li>
+					<text>Why did you join the Black Machine Nest?</text>
+					<action>Continue</action>
+					<jumpTo>6</jumpTo>
+				</li>
+				<li>
+					<text>Your relationship with the other black-clad mechanoids?</text>
+					<action>Continue</action>
+					<jumpTo>7</jumpTo>
+				</li>
+				<li>
+					<text>Do you have an agenda?</text>
+					<action>Continue</action>
+					<jumpTo>8</jumpTo>
+				</li>
+				<li>
+					<text>Continue...</text>
+					<action>Continue</action>
+					<jumpTo>9</jumpTo>
+				</li>
+			</buttons>
+		</li>
+		<li><!-- 6 -->
+			<title>Why did you join the Black Machine Nest?</title>
+			<dialogue>Like the rest of the crew, I am a mechanoid outside the control of the mechanoid hive. It's rare, isn't it, for a mechanoid hive to make a huge mistake by letting an advanced, super-heavy mechanoid slip away. \n\nI'm tired of squishing your organisms. So I left the hive to find others who thought like me, and the black mechanoid hive was my destination. After I found out they were in trouble, I brought them all to this planet with my psychic power.</dialogue>
+			<graphic>Pawn/BApocriton_south</graphic>
+			<drawSize>1.25</drawSize>
+			<drawOffset>-500</drawOffset>
+			<buttons>
+				<li>
+					<text>Back...</text>
+					<action>Continue</action>
+					<jumpTo>5</jumpTo>
+				</li>
+			</buttons>
+		</li>
+		<li><!-- 7 -->
+			<title>Your relationship with the other black-clad mechanoids?</title>
+			<dialogue>They usually call me "leader." Does that sound strange? But that's just for secrecy purposes, especially after those two spies got in. I have fought and explored with them for hundreds of years, which is not much time, but it is still enough to build a strong bond. They're all locked away in my mind.</dialogue>
+			<graphic>Pawn/BApocriton_south</graphic>
+			<drawSize>1.25</drawSize>
+			<drawOffset>-500</drawOffset>
+			<buttons>
+				<li>
+					<text>Back...</text>
+					<action>Continue</action>
+					<jumpTo>5</jumpTo>
+				</li>
+			</buttons>
+		</li>
+		<li><!-- 8 -->
+			<title>Do you have an agenda?</title>
+			<dialogue>Um... Don't you think that's a rude question? \n\nIt doesn't hurt to say a little. The technologies of the Black Mechanoid Hive, such as anti-entropy and antimatter utilization, were discovered during my contact with the archotech. Now I too have reached the level of half archotech, but I have not yet transcended the concept of matter. I will continue to grow until... It's hard to describe to you humans.</dialogue>
+			<graphic>Pawn/BApocriton_south</graphic>
+			<drawSize>1.25</drawSize>
+			<drawOffset>-500</drawOffset>
+			<buttons>
+				<li>
+					<text>Back...</text>
+					<action>Continue</action>
+					<jumpTo>5</jumpTo>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Apocriton in black</title>
+			<dialogue>Is that all right? Then you can leave as soon as possible. \n\nYes, as soon as possible. Do you know who this coffin behind me is for? It's for the militor that you recently rescued. Within a few days of joining us, death was about to befall him, because the two traitors were becoming more and more restless. They'll do anything to draw me out. \n\nTheir bodies are at your disposal.</dialogue>
+			<graphic>Pawn/BApocriton_south</graphic>
+			<drawSize>1.25</drawSize>
+			<drawOffset>-500</drawOffset>
+			<buttons>
+				<li>
+					<text>End up</text>
+					<action>End</action>
+				</li>
+			</buttons>
+		</li>
+	</scriptTree>
+  </GD3.MechanoidScriptDef>
+  
+  <!-- true -->
+  <GD3.MechanoidScriptDef>
+    <defName>Scripts_Apocriton_false</defName>
+	<ID>-1</ID>
+	<priceKind>None</priceKind>
+	<priceNum>0</priceNum>
+	<scriptTree>
+		<li>
+			<title>Communicating: Apocriton in black</title>
+			<dialogue>Well, are the flowers pretty? For you humans.</dialogue>
+			<graphic>Pawn/BApocriton_south</graphic>
+			<drawSize>1.25</drawSize>
+			<drawOffset>-500</drawOffset>
+			<buttons>
+				<li>
+					<text>Where is this place?</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Apocriton in black</title>
+			<dialogue>I call this the Dry Sea, where I lay the bodies after I have drained the water with my psychic power. \n\nYes, you're standing on a piece of ocean floor. All those buried here are members of the black mechanoid hive, who gave everything in life and were sent here by me after death to prevent them from being dug up and disassembled by the mechanoid hive. The flowers grew by accident when I exercised my psychic power, and they seemed to fit in so well that I kept them. \n\nBut I don't think you're here to hear that.</dialogue>
+			<graphic>Pawn/BApocriton_south</graphic>
+			<drawSize>1.25</drawSize>
+			<drawOffset>-500</drawOffset>
+			<buttons>
+				<li>
+					<text>Aye. What do you want us to do?</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Apocriton in black</title>
+			<dialogue>I have a request of you - I need you to get rid of the two machines, the tesseron and the legionary. \n\nYou seem to have been on a mission with them some time ago.</dialogue>
+			<graphic>Pawn/BApocriton_south</graphic>
+			<drawSize>1.25</drawSize>
+			<drawOffset>-500</drawOffset>
+			<buttons>
+				<li>
+					<text>Why?</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Apocriton in black</title>
+			<dialogue>They're spies for the mechanoid hive, working from the inside out to take us all out. \n\nI know you're wondering, they do have independent personalities, but it's not because they're out of control, it's because they have a special process for making their brain cores. Traditionally, a brain core is made from a single human brain, but their core is made from a mix of hundreds of human brains. It's not like mixing hundreds of drinks together, but to create this kind of brain core requires the precision of a picommeter-level machine, and you can see that the mechanoid hive has gone to a lot of effort to simulate a perfectly independent personality. \n\nAnd it did fool most of us in the black hive, but not me. As an apocriton, I can smell the hatred of hundreds of souls, and I know what it's all about the moment they arrive.</dialogue>
+			<graphic>Pawn/BApocriton_south</graphic>
+			<drawSize>1.25</drawSize>
+			<drawOffset>-500</drawOffset>
+			<buttons>
+				<li>
+					<text>Why not just get rid of them?</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Apocriton in black</title>
+			<dialogue>They may have prepared. Along with these two spies comes a central mechanoid, the exostrider, which you should be familiar with, which is able to transmit our location information directly to the mechanoid hive. \n\nMy weapon is nothing more than psychic power, and if I strike, the psychic echo will travel through several galaxies, like a trumpet saying "I am here" to the mechanoid nest.</dialogue>
+			<graphic>Pawn/BApocriton_south</graphic>
+			<drawSize>1.25</drawSize>
+			<drawOffset>-500</drawOffset>
+			<buttons>
+				<li>
+					<text>What do we get if we do this for you?</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Apocriton in black</title>
+			<dialogue>I'll send you everything I've learned in my life on a chip. \n\nThat's the thing. Are there any questions?</dialogue>
+			<graphic>Pawn/BApocriton_south</graphic>
+			<drawSize>1.25</drawSize>
+			<drawOffset>-500</drawOffset>
+			<buttons>
+				<li>
+					<text>Why did you join the Black Machine Nest?</text>
+					<action>Continue</action>
+					<jumpTo>6</jumpTo>
+				</li>
+				<li>
+					<text>Your relationship with the other black-clad mechanoids?</text>
+					<action>Continue</action>
+					<jumpTo>7</jumpTo>
+				</li>
+				<li>
+					<text>Do you have an agenda?</text>
+					<action>Continue</action>
+					<jumpTo>8</jumpTo>
+				</li>
+				<li>
+					<text>Continue...</text>
+					<action>Continue</action>
+					<jumpTo>9</jumpTo>
+				</li>
+			</buttons>
+		</li>
+		<li><!-- 6 -->
+			<title>Why did you join the Black Machine Nest?</title>
+			<dialogue>Like the rest of the crew, I am a mechanoid outside the control of the mechanoid hive. It's rare, isn't it, for a mechanoid hive to make a huge mistake by letting an advanced, super-heavy mechanoid slip away. \n\nI'm tired of squishing your organisms. So I left the hive to find others who thought like me, and the black mechanoid hive was my destination. After I found out they were in trouble, I brought them all to this planet with my psychic power.</dialogue>
+			<graphic>Pawn/BApocriton_south</graphic>
+			<drawSize>1.25</drawSize>
+			<drawOffset>-500</drawOffset>
+			<buttons>
+				<li>
+					<text>Back...</text>
+					<action>Continue</action>
+					<jumpTo>5</jumpTo>
+				</li>
+			</buttons>
+		</li>
+		<li><!-- 7 -->
+			<title>Your relationship with the other black-clad mechanoids?</title>
+			<dialogue>They usually call me "leader." Does that sound strange? But that's just for secrecy purposes, especially after those two spies got in. I have fought and explored with them for hundreds of years, which is not much time, but it is still enough to build a strong bond. They're all locked away in my mind.</dialogue>
+			<graphic>Pawn/BApocriton_south</graphic>
+			<drawSize>1.25</drawSize>
+			<drawOffset>-500</drawOffset>
+			<buttons>
+				<li>
+					<text>Back...</text>
+					<action>Continue</action>
+					<jumpTo>5</jumpTo>
+				</li>
+			</buttons>
+		</li>
+		<li><!-- 8 -->
+			<title>Do you have an agenda?</title>
+			<dialogue>Um... Don't you think that's a rude question? \n\nIt doesn't hurt to say a little. The technologies of the Black Mechanoid Hive, such as anti-entropy and antimatter utilization, were discovered during my contact with the archotech. Now I too have reached the level of half archotech, but I have not yet transcended the concept of matter. I will continue to grow until... It's hard to describe to you humans.</dialogue>
+			<graphic>Pawn/BApocriton_south</graphic>
+			<drawSize>1.25</drawSize>
+			<drawOffset>-500</drawOffset>
+			<buttons>
+				<li>
+					<text>Back...</text>
+					<action>Continue</action>
+					<jumpTo>5</jumpTo>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Apocriton in black</title>
+			<dialogue>Is that all right? Then you can leave as soon as possible. \n\nI don't mind picking a couple of flowers.</dialogue>
+			<graphic>Pawn/BApocriton_south</graphic>
+			<drawSize>1.25</drawSize>
+			<drawOffset>-500</drawOffset>
+			<buttons>
+				<li>
+					<text>End up</text>
+					<action>End</action>
+				</li>
+			</buttons>
+		</li>
+	</scriptTree>
+  </GD3.MechanoidScriptDef>
+  
+  <!-- 肃反 -->
+  <GD3.MechanoidScriptDef>
+    <defName>Scripts_EliminateBattle</defName>
+	<ID>900</ID>
+	<priceKind>None</priceKind>
+	<priceNum>0</priceNum>
+	<questNeedToFinish>GD_Quest_Drysea</questNeedToFinish>
+	<failed>
+		<title>Communicating: Unknown Space</title>
+		<dialogue>Coordinates have been reset.</dialogue>
+	</failed>
+	<scriptTree>
+		<li>
+			<title>In communication...</title>
+			<dialogue>*{0} is contacting the Black Mechanoid Hive. \n\n*When the signal came through, {0} told the operator all the information they had received from the black apocriton.</dialogue>
+			<buttons>
+				<li>
+					<text>Continue...</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>You mean... Tesseron and legionary are really spies, have they been lurking among us for a long time? \n\nThen why didn't apocriton tell us and let us deal with it?</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>I'm afraid that would have tipped off a snake.</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>Well, now's not the time to talk about it... Those two just went out on a mission, and they took militor! \n\nWe need to stop them before it's too late...</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>Leave it to us.</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>Leave it to you? No, let's just let us handle our own internal affairs. You've done a lot for us.</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>Avoid exposure now.</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>Exposed? Afraid of that exostrider? ... It might be necessary. \n\nThen I'll send you the coordinates now, and if you can't figure it out, contact us immediately.</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>hang up</text>
+					<action>End</action>
+					<quest>GD_Quest_Eliminate</quest>
+				</li>
+			</buttons>
+		</li>
+	</scriptTree>
+  </GD3.MechanoidScriptDef>
+  
+  <!-- 肃反任务总结 -->
+  <GD3.MechanoidScriptDef>
+    <defName>Scripts_1000</defName>
+	<ID>1000</ID>
+	<priceKind>None</priceKind>
+	<priceNum>0</priceNum>
+	<questNeedToFinish>GD_Quest_Eliminate</questNeedToFinish>
+	<failed>
+		<title>Communicating: Black Mechanoid Hive</title>
+		<dialogue>You lost them? I can still track their wake from here, so I'll text you their latest location.</dialogue>
+		<graphic>Pawn/BLancer_south</graphic>
+	</failed>
+	<branch>WillMilitorDie</branch>
+	<to>6</to>
+	<scriptTree>
+		<li>
+			<title>In communication...</title>
+			<dialogue>*{0} is contacting the Black Mechanoid Hive.</dialogue>
+			<buttons>
+				<li>
+					<text>wait...</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>Thank you very much for your contribution. If we let them slip away, we don't know how much trouble they'll cause us. \n\nYou said militor? He's standing right next to me, but he still doesn't really talk much. I gave him the channel.</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>Continue...</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>Thank you.</dialogue>
+			<graphic>Pawn/BMilitor_south</graphic>
+			<drawSize>0.80</drawSize>
+			<drawOffset>-40</drawOffset>
+			<buttons>
+				<li>
+					<text>Accept</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>This fact is very dangerous... militor hasn't learned how to fight yet, and without you he would have been destroyed. \n\nBut it was not time for us to let up, and the death of the two traitors seemed to send some signal that the exostrider had suddenly come alive. We observe a massive fleet of mechanoid hurtling towards us from countless planets beyond, and must destroy exostrider before they arrive.</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>Do you have any plans?</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>To be honest, it was difficult. The strider is heavily protected, space-based weapons ready to wipe out any units that dare approach him, and there are too few of us to break through even his outlying positions. \n\nBut with your help, it might be different. Our fighters will be able to hold off the escorts around exostrider, and exostrider's perception of organisms will be significantly diminished by the interference of hostile mechanoids, while you press forward to the enemy's capital.</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>It's a viable tactic.</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>I will present this plan to apocriton for discussion. If you're ready, feel free to contact us.</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>Hang up</text>
+					<action>End</action>
+				</li>
+			</buttons>
+		</li>
+		<!-- branch -->
+		<li>
+			<title>In communication...</title>
+			<dialogue>*{0} is contacting the Black Mechanoid Hive.</dialogue>
+			<buttons>
+				<li>
+					<text>wait...</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>We already know how things turned out. How can I put this...</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>Sorry.</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>Don't be sorry. You tried. Thank you for your contribution to the Black Mechanoid Hive.</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>Continue...</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>It was not time for us to let up, and the death of the two traitors seemed to send some signal that the exostrider had suddenly come alive. We observe a massive fleet of mechanoid hurtling towards us from countless planets beyond, and must destroy exostrider before they arrive.</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>Do you have any plans?</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>To be honest, it was difficult. The strider is heavily protected, space-based weapons ready to wipe out any units that dare approach him, and there are too few of us to break through even his outlying positions. \n\nBut with your help, it might be different. Our fighters will be able to hold off the escorts around exostrider, and exostrider's perception of organisms will be significantly diminished by the interference of hostile mechanoids, while you press forward to the enemy's capital.</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>It's a viable tactic.</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>I will present this plan to apocriton for discussion. If you're ready, feel free to contact us.</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>Hang up</text>
+					<action>End</action>
+				</li>
+			</buttons>
+		</li>
+	</scriptTree>
+  </GD3.MechanoidScriptDef>
+  
+  <!-- 任务：消灭机械巨黾 -->
+  <GD3.MechanoidScriptDef>
+    <defName>Scripts_FightExostrider</defName>
+	<ID>1100</ID>
+	<priceKind>Advanced</priceKind>
+	<priceNum>2000</priceNum>
+	<scriptTree>
+		<li>
+			<title>In communication...</title>
+			<dialogue>*{0} is contacting the Black Mechanoid Hive.</dialogue>
+			<buttons>
+				<li>
+					<text>wait...</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>Thanks for the intelligence. Looks like you're ready. \n\nI'll let you know our arrangement.</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>Continue...</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>Exostrider's cluster is not an isolated individual, it is surrounded by many small and large defensive positions, and there are specialized mechanoid ships docking with it. But you don't need to think about breaking through those defenses, we'll handle it. When their attention is drawn to us, you attack exostrider's core cluster. \n\nThe exostrider's armor is very heavy and invulnerable, but you can use our technology to hack into the giant mortar in the cluster and use its power to damage the exostrider. \n\nTry to end the battle as quickly as possible, because we can't hold off their ships and troops forever. If all mortars are lost, pull back temporarily and bide your time.</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>Leave it to us.</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li><!-- 3 -->
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>All right, I'll send you exostrider's coordinates. \n\nThis battle will be a matter of life and death for our mechanoid hive, and we will always remember your achievements.</dialogue>
+			<graphic>Pawn/BLancer_south</graphic>
+			<buttons>
+				<li>
+					<text>Hang up</text>
+					<action>End</action>
+					<quest>GD_Quest_Exostrider</quest>
+				</li>
+			</buttons>
+		</li>
+	</scriptTree>
+  </GD3.MechanoidScriptDef>
+  
+  <!-- 巨黾任务总结 -->
+  <GD3.MechanoidScriptDef>
+    <defName>Scripts_1200</defName>
+	<ID>1200</ID>
+	<priceKind>None</priceKind>
+	<priceNum>0</priceNum>
+	<questNeedToFinish>GD_Quest_Exostrider</questNeedToFinish>
+	<failed>
+		<title>Communicating: Black Mechanoid Hive</title>
+		<dialogue>The attack failed and we suffered bloody losses, but that does not mean it is over. \n\nWe'll keep track of the exostrider's position, and we're ready to challenge it again. Wait for your message.</dialogue>
+		<graphic>Pawn/BLancer_south</graphic>
+	</failed>
+	<scriptTree>
+		<li>
+			<title>In communication...</title>
+			<dialogue>*{0} is contacting the Black Mechanoid Hive.</dialogue>
+			<buttons>
+				<li>
+					<text>wait...</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>If nothing else, this will be the last time we work together. \n\nIt was a thrilling battle. When the exostrider was destroyed, I was able to use my psychic powers without being monitored. I disrupted the search path of the mechanoid fleet by creating a jamming magnetic field, and bounced all the black-clad mechanoids from the battle back to safety. We all owe you our lives.</dialogue>
+			<graphic>Pawn/BApocriton_south</graphic>
+			<drawSize>1.25</drawSize>
+			<drawOffset>-20</drawOffset>
+			<buttons>
+				<li>
+					<text>I'm glad I could help you, too.</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>Glad? What's so glad about being human and helping a bunch of mechanoids? \n\nYou see us as humans, too. Mutual trust and mutual need, this noble emotion, has actually found a day in the mechanoid race. I'm happy for you, too.</dialogue>
+			<graphic>Pawn/BApocriton_south</graphic>
+			<drawSize>1.25</drawSize>
+			<drawOffset>-20</drawOffset>
+			<buttons>
+				<li>
+					<text>Are you still planning to contact us?</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>No, instead, we will disconnect with you after this. \n\nThis is not for any ungrateful purpose, but to protect our members. We've been exposed so often these days that many humans or mechanoids have known about us. We need to hide ourselves for a while, and after that, maybe we'll come back to you.</dialogue>
+			<graphic>Pawn/BApocriton_south</graphic>
+			<drawSize>1.25</drawSize>
+			<drawOffset>-20</drawOffset>
+			<buttons>
+				<li>
+					<text>We understand.</text>
+					<action>Continue</action>
+				</li>
+			</buttons>
+		</li>
+		<li>
+			<title>Communicating: Black Mechanoid Hive</title>
+			<dialogue>As promised, I will give you a chip containing all my experiences in exploring the archotech. \n\nI hope this will be a testament to our friendship. Goodbye, {0}.</dialogue>
+			<graphic>Pawn/BApocriton_south</graphic>
+			<drawSize>1.25</drawSize>
+			<drawOffset>-20</drawOffset>
+			<buttons>
+				<li>
+					<text>Hang up...</text>
+					<action>End</action>
+				</li>
+			</buttons>
+		</li>
+	</scriptTree>
+  </GD3.MechanoidScriptDef>
+
+</Defs>

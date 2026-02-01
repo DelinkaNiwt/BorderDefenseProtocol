@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	
+	<ResearchProjectDef>
+		<defName>GD3_Annihilator</defName>
+		<label>star-slayer</label>
+		<description>Seize one of the most terrifying forces of the mechanoid hive from the ruins of annihilator.</description>
+		<tab>GDTech</tab>
+		<baseCost>2000</baseCost>
+		<techLevel>Ultra</techLevel>
+		<requiredResearchBuilding>DummyResearchBuilding</requiredResearchBuilding>
+		<researchViewX>5</researchViewX>
+		<researchViewY>1</researchViewY>
+	</ResearchProjectDef>
+	
+</Defs>

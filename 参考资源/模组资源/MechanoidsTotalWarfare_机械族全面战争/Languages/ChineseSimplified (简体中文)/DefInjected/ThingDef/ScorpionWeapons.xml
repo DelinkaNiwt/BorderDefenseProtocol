@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Bullet Red tide -->
+  <Bullet_Red_tide.label>TODO</Bullet_Red_tide.label>
+  
+  <!-- EN: Crimson Slagburst Rocket -->
+  <Crimson_Slagburst_Rocket.label>TODO</Crimson_Slagburst_Rocket.label>
+  
+  <!-- EN: Redtide -->
+  <NCL_Redtide.label>TODO</NCL_Redtide.label>
+  <!-- EN: 赤潮 -->
+  <NCL_Redtide.description>TODO</NCL_Redtide.description>
+  <!-- EN: stock -->
+  <NCL_Redtide.tools.stock.label>TODO</NCL_Redtide.tools.stock.label>
+  <!-- EN: barrel -->
+  <NCL_Redtide.tools.barrel.label>TODO</NCL_Redtide.tools.barrel.label>
+  <!-- EN: Redtide -->
+  <NCL_Redtide.verbs.Verb_ShootWithDustBlast.label>TODO</NCL_Redtide.verbs.Verb_ShootWithDustBlast.label>
+  
+  <!-- EN: RT AutoGun -->
+  <RT_AutoGun.label>TODO</RT_AutoGun.label>
+  <!-- EN: RT AutoGun -->
+  <RT_AutoGun.description>TODO</RT_AutoGun.description>
+  <!-- EN: RT AutoGun -->
+  <RT_AutoGun.verbs.Verb_ArcSprayProjectile.label>TODO</RT_AutoGun.verbs.Verb_ArcSprayProjectile.label>
+  
+</LanguageData>

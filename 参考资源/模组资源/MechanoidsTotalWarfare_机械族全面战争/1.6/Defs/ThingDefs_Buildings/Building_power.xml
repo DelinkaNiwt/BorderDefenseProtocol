@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+<ThingDef ParentName="BuildingBase">
+    <defName>NCL_Battery</defName>
+    <label>先进电池</label>
+    <description>先进电池是NCL工程师研发的中型储能单元，采用量子电容技术，可稳定存储2000W电力，在恶劣环境下仍能保持高效充放电性能。</description>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <thingClass>Building_Battery</thingClass>
+    <graphicData>
+      <texPath>Buildings/NCLBattery</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>2.3</drawSize>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <blockWind>true</blockWind>
+    <castEdgeShadows>true</castEdgeShadows>
+    <fillPercent>0.40</fillPercent>
+    <tickerType>Normal</tickerType>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsPower</li>
+    </thingCategories>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <WorkToBuild>800</WorkToBuild>
+      <Mass>20</Mass>
+      <Flammability>1.0</Flammability>
+      <Beauty>4</Beauty>
+    </statBases>
+    <size>(1,2)</size>
+    <building>
+      <destroySound>BuildingDestroyed_Metal_Medium</destroySound>
+    </building>
+    <costList>
+      <Steel>100</Steel>
+	  <Plasteel>40</Plasteel>
+	  <ComponentIndustrial>1</ComponentIndustrial>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Battery">
+        <storedEnergyMax>2000</storedEnergyMax>
+        <efficiency>0.98</efficiency>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <transmitsPower>true</transmitsPower>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Stunnable">
+        <useLargeEMPEffecter>true</useLargeEMPEffecter>
+        <affectedDamageDefs>
+          <li>EMP</li>
+        </affectedDamageDefs>
+      </li>
+    </comps>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <designationCategory>Power</designationCategory>
+    <uiOrder>2020</uiOrder>
+    <staticSunShadowHeight>0.2</staticSunShadowHeight>
+    <constructEffect>ConstructMetal</constructEffect>
+    <designationHotKey>Misc4</designationHotKey>
+    <canOverlapZones>false</canOverlapZones>
+    <researchPrerequisites>
+      <li>NCL_Advance_Battery</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>NCL_Large_Battery</defName>
+    <label>装甲蓄电池</label>
+    <description>装甲蓄电池是NCL专为军事级电力需求设计的高容量储能单元，采用强化量子电容阵列技术，可稳定储存高达12000W电力，满足前线基地和重型设备的能源需求。</description>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <thingClass>Building_Battery</thingClass>
+    <graphicData>
+      <texPath>Buildings/NCLLargeBattery</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(5.5,5)</drawSize>
+      <shadowData>
+        <volume>(0, 0, 0)</volume>
+      </shadowData>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <blockWind>true</blockWind>
+    <castEdgeShadows>true</castEdgeShadows>
+    <fillPercent>0.40</fillPercent>
+    <tickerType>Normal</tickerType>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsPower</li>
+    </thingCategories>
+    <statBases>
+      <MaxHitPoints>4000</MaxHitPoints>
+      <WorkToBuild>800</WorkToBuild>
+      <Mass>20</Mass>
+      <Flammability>0</Flammability>
+      <Beauty>16</Beauty>
+    </statBases>
+    <size>(2,4)</size>
+    <building>
+      <destroySound>BuildingDestroyed_Metal_Medium</destroySound>
+    </building>
+    <costList>
+      <Steel>300</Steel>
+	  <Plasteel>175</Plasteel>
+	  <ComponentSpacer>1</ComponentSpacer>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Battery">
+        <storedEnergyMax>12000</storedEnergyMax>
+        <efficiency>0.98</efficiency>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <transmitsPower>true</transmitsPower>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Stunnable">
+        <useLargeEMPEffecter>true</useLargeEMPEffecter>
+        <affectedDamageDefs>
+          <li>EMP</li>
+        </affectedDamageDefs>
+      </li>
+    </comps>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <designationCategory>Power</designationCategory>
+    <uiOrder>2020</uiOrder>
+    <constructEffect>ConstructMetal</constructEffect>
+    <designationHotKey>Misc4</designationHotKey>
+    <canOverlapZones>false</canOverlapZones>
+    <researchPrerequisites>
+      <li>NCL_Advance_Battery</li>
+      <li>NCL_Research_of_megastructures</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+    <ThingDef ParentName="BuildingBase">
+    <defName>NCL_LightWaterReactor</defName>
+    <label>轻水反应堆</label>
+    <thingClass>Building</thingClass>
+    <description>轻水反应堆是NCL研发的模块化核能装置，采用铀燃料驱动，可弹性输出最高280,000W电力，但需通过外部冷却系统将堆芯温度维持在120°C以下。若冷却失效，燃料棒将因"空泡效应"（Void Coefficient）导致功率骤升而熔毁，其爆炸当量取决于剩余燃料量——这项特性使其既可成为高效能源，也能被改造为毁灭性武器。</description>
+    <tickerType>Normal</tickerType>
+    <drawerType>RealtimeOnly</drawerType>
+    <graphicData>
+      <graphicClass>NCL.Graphic_RefuelableMulti</graphicClass>
+      <texPath>Buildings/LightWaterReactor</texPath>
+      <drawSize>(7,7)</drawSize>
+      <shadowData>
+        <volume>(2.9, 1, 1.9)</volume>
+      </shadowData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.75</fillPercent>
+    <pathCost>50</pathCost>
+    <rotatable>true</rotatable>
+    <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <designationCategory>Power</designationCategory>
+    <uiOrder>2200</uiOrder>
+    <canOverlapZones>false</canOverlapZones>
+    <statBases>
+      <MaxHitPoints>4000</MaxHitPoints>
+      <WorkToBuild>120000</WorkToBuild>
+      <Flammability>0.75</Flammability>
+      <Beauty>-40</Beauty>
+    </statBases>
+    <size>(7,7)</size>
+    <costList>
+      <Steel>1000</Steel>
+	  <Plasteel>800</Plasteel>
+      <ComponentIndustrial>54</ComponentIndustrial>
+	  <ComponentSpacer>24</ComponentSpacer>
+    </costList>
+    <placeWorkers>
+    </placeWorkers>
+    <researchPrerequisites>
+      <li>NCL_Advance_Nuclear_Power</li>
+    </researchPrerequisites>
+		<placeWorkers>
+			<li>NCL.PlaceWorker_MustBeRoofed</li>
+		</placeWorkers>
+    <comps>
+  <li Class="NCL.CompProperties_TemperatureMonitor">
+    <warningTemperature>80</warningTemperature>
+    <criticalTemperature>135</criticalTemperature>
+    <checkInterval>60</checkInterval> <!-- 每秒检查一次 -->
+  </li>
+    <li Class="CompProperties_Power">
+				<compClass>NCL.CompPowerAdjustable</compClass>
+				<transmitsPower>true</transmitsPower>
+    </li>
+      <li Class="CompProperties_Flickable"/>
+			<li Class="CompProperties_Refuelable">
+				<fuelCapacity>5000</fuelCapacity>
+				<targetFuelLevelConfigurable>true</targetFuelLevelConfigurable>
+				<initialConfigurableTargetFuelLevel>0</initialConfigurableTargetFuelLevel>
+				<fuelFilter>
+					<thingDefs>
+						<li>Uranium</li>
+					</thingDefs>
+				</fuelFilter>
+				<fuelConsumptionRate>2</fuelConsumptionRate>
+				<consumeFuelOnlyWhenUsed>false</consumeFuelOnlyWhenUsed>
+				<autoRefuelPercent>100</autoRefuelPercent>
+				<showFuelGizmo>true</showFuelGizmo>
+				<drawOutOfFuelOverlay>true</drawOutOfFuelOverlay>
+				<drawFuelGaugeInMap>false</drawFuelGaugeInMap>
+				<showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+			</li>
+       <li Class="NCL.CompProperties_ExplosiveRefuelable">
+         <minExplosionRadius>5</minExplosionRadius>
+          <maxExplosionRadius>50</maxExplosionRadius>
+         <damageDef>Bomb</damageDef>
+         <explosionDamageFactor>1</explosionDamageFactor>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>8</glowRadius>
+        <glowColor>(80,141,223,0)</glowColor>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Stunnable">
+        <useLargeEMPEffecter>true</useLargeEMPEffecter>
+        <affectedDamageDefs>
+          <li>EMP</li>
+        </affectedDamageDefs>
+      </li>
+    </comps>
+  </ThingDef>
+
+</Defs>

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  
+  <ThinkTreeDef>
+    <defName>HunterDroneConstant_GDClone</defName>
+    <thinkRoot Class="ThinkNode_Priority">
+      <subNodes>
+
+        <!-- Despawned -->
+        <li Class="ThinkNode_Subtree">
+          <treeDef>Despawned</treeDef>
+        </li>
+
+        <!-- <li Class="ThinkNode_ConditionalCanDoConstantThinkTreeJobNow">
+          <subNodes>            
+			<li Class="GD3.JobGiver_WaitWithoutEnemies" />
+            <li Class="JobGiver_AIGotoTarget" />
+            <li Class="JobGiver_AIGotoNearestHostile" />
+            <li Class="JobGiver_AIFightEnemies">
+              <targetAcquireRadius>65</targetAcquireRadius>
+              <targetKeepRadius>72</targetKeepRadius>
+            </li>
+          </subNodes>
+        </li> -->
+      </subNodes>
+    </thinkRoot>
+  </ThinkTreeDef>
+  
+</Defs>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- Servers -->
+
+  <MechServer_True.label>机械族服务器</MechServer_True.label>
+  <MechServer_True.description>可能包含有用信息的服务器，需要秘钥打开。</MechServer_True.description>
+  <MechServer_True.comps.CompUsable.useLabel>窃取情报</MechServer_True.comps.CompUsable.useLabel>
+
+  <MechServer_False.label>机械族服务器</MechServer_False.label>
+  <MechServer_False.description>可能包含有用信息的服务器，被高度加密。</MechServer_False.description>
+  
+  <MechServer_Normal.label>机械族服务器</MechServer_Normal.label>
+  <MechServer_Normal.description>可能包含有用信息的服务器，但不是这次的目标。</MechServer_Normal.description>
+
+
+</LanguageData>

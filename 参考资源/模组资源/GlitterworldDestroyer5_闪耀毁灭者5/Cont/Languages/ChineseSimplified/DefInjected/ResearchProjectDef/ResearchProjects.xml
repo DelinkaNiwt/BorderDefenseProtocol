@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <GD3_MiniTurret.label>基础炮塔</GD3_MiniTurret.label>
+  <GD3_MiniTurret.description>学习如何建造基本炮塔，包括小型冲击炮塔与防空炮塔。</GD3_MiniTurret.description>
+
+  <GD3_ChargeBlasterTurret.label>自动电荷冲击炮塔</GD3_ChargeBlasterTurret.label>
+  <GD3_ChargeBlasterTurret.description>学习如何建造电荷冲击炮塔。</GD3_ChargeBlasterTurret.description>
+
+  <GD3_InfernoTurret.label>自动地狱火炮塔</GD3_InfernoTurret.label>
+  <GD3_InfernoTurret.description>学习如何建造地狱火炮塔。</GD3_InfernoTurret.description>
+
+  <GD3_EMPTurret.label>重型EMP磁轨炮</GD3_EMPTurret.label>
+  <GD3_EMPTurret.description>学习如何建造发射EMP炮弹的炮塔。</GD3_EMPTurret.description>
+
+  <GD3_Mortar.label>自动迫击炮</GD3_Mortar.label>
+  <GD3_Mortar.description>学习如何建造自动迫击炮与登陆迫击炮。</GD3_Mortar.description>
+
+  <GD3_Weapons.label>机械族武器</GD3_Weapons.label>
+  <GD3_Weapons.description>从黑衣机械族数据库中学习如何制作先进的机械族武器。</GD3_Weapons.description>
+  
+  <GD3_IncendiaryRocket.label>简易燃烧火箭筒</GD3_IncendiaryRocket.label>
+  <GD3_IncendiaryRocket.description>学习如何制作简易燃烧火箭筒。\n\n这种火箭筒消耗材料较少、易于制作，产生的高温也能很方便地破坏某些装甲目标的动力核心。</GD3_IncendiaryRocket.description>
+  
+  <GD3_GiantCluster_Small.label>山雨欲来</GD3_GiantCluster_Small.label>
+  <GD3_GiantCluster_Small.description>随着机械族主力的抵达，它们的战斗建筑与生产设施也一并被布置到了这颗边缘星球上，由这些建筑构成的庞大、复杂的结构被称为“巨型集群”。\n\n学习截取机械族短波信号来获悉巨型集群的具体位置，通过摧毁集群来获取它们的大量物资与高精尖科技。</GD3_GiantCluster_Small.description>
+  
+  <GD3_GiantCluster_Medium.label>一级集群科技</GD3_GiantCluster_Medium.label>
+  <GD3_GiantCluster_Medium.description>从心灵遮蔽髓的数据库中学习有关集群构筑的知识，并解锁对下一级巨型集群的探测能力。</GD3_GiantCluster_Medium.description>
+  
+  <GD3_GiantCluster_Large.label>二级集群科技</GD3_GiantCluster_Large.label>
+  <GD3_GiantCluster_Large.description>从心灵抑制髓的数据库中学习有关稀有资源生产的知识，并解锁对下一级巨型集群的探测能力。</GD3_GiantCluster_Large.description>
+  
+  <GD3_GiantCluster_Ultra.label>三级集群科技</GD3_GiantCluster_Ultra.label>
+  <GD3_GiantCluster_Ultra.description>从心灵狂暴髓的数据库中学习有关神经网络编辑的知识，并用它们将殖民地的发展带到一个新的高度。</GD3_GiantCluster_Ultra.description>
+  
+  <GD3_GiantCluster_CentipedeAbility.label>禁卫蜈蚣改装</GD3_GiantCluster_CentipedeAbility.label>
+  <GD3_GiantCluster_CentipedeAbility.description>改装禁卫蜈蚣的动力基座，使其在移动时能够碾压周围的敌人。体型不大于1.0的敌人会遭受额外的伤害。\n\n*需要Biotech DLC</GD3_GiantCluster_CentipedeAbility.description>
+  
+  <GD3_GiantCluster_ArtilleryA.label>磁轨炮-敌我识别</GD3_GiantCluster_ArtilleryA.label>
+  <GD3_GiantCluster_ArtilleryA.description>给予EMP磁轨炮敌我识别的逻辑，使其不会再影响非敌方机械体或炮塔。</GD3_GiantCluster_ArtilleryA.description>
+  
+  <GD3_GiantCluster_ArtilleryB.label>磁轨炮-电烧伤</GD3_GiantCluster_ArtilleryB.label>
+  <GD3_GiantCluster_ArtilleryB.description>改良EMP磁轨炮的炮弹杀伤机制，给予其电灼烧范围内所有敌对单位的能力。</GD3_GiantCluster_ArtilleryB.description>
+  
+  <GD3_Intelligence.label>高动态范围信号处理</GD3_Intelligence.label>
+  <GD3_Intelligence.description>改良机械通讯台的信号处理机制，使其能够截取更高级的情报。</GD3_Intelligence.description>
+
+
+</LanguageData>

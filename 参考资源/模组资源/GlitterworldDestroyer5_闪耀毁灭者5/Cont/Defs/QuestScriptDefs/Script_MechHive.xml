@@ -1,0 +1,792 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- base -->
+  <QuestScriptDef Name="MechHiveQuestBase" Abstract="True">
+    <rootSelectionWeight>0</rootSelectionWeight>
+    <rootMinPoints>99999</rootMinPoints>
+    <canGiveRoyalFavor>false</canGiveRoyalFavor>
+	<autoAccept>false</autoAccept>
+	<isRootSpecial>True</isRootSpecial>
+  </QuestScriptDef>
+  
+  <!-- 送出尸体 -->
+  <!-- quest -->
+  <QuestScriptDef ParentName="MechHiveQuestBase">
+    <defName>GD_Quest_SendCorpse</defName>
+	<defaultChallengeRating>1</defaultChallengeRating>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->Anonymous contract</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->You have received a set of messages from an anonymous mechanoid hive. The sender does not seem to be a local mechanoid hive on this planet and does not hold any hostility. \n\nIn the letter, the other party greeted you quite politely and unexpectedly described the current situation of the colony precisely. It offered your colonists a welcome gift and guaranteed that there would still be many things for both sides to cooperate on in the future. Afterward, it would also pay you a considerable reward. And the establishment of this win-win situation only requires you to take a simple first step: \n\nHand over the carcass of that black-clad scyther to it. \n\nSelect the corpse and confirm it. Then, a distant psychic power from space will receive it.</li>
+      </rulesStrings>
+    </questDescriptionRules>
+	<root Class="QuestNode_Sequence">
+      <nodes>
+	  
+        <li Class="QuestNode_GetMap" />
+		<li Class="QuestNode_SubScript">
+          <def>GD_Uti_RewardValueFromPoints_Medium</def>
+        </li>
+		
+		<li Class="VEF.Storyteller.QuestNode_GetFaction">
+			<allowEnemy>true</allowEnemy>
+			<mustBePermanentEnemy>true</mustBePermanentEnemy>
+			<storeAs>faction</storeAs>
+			<factionDef>Mechanoid</factionDef>
+		</li>
+		
+        <li Class="QuestNode_Signal">
+          <inSignal>ReceivedCorpse</inSignal>
+          <node Class="RimWorld.QuestGen.QuestNode_Sequence">
+            <nodes>
+			  <li Class="QuestNode_GiveRewards">
+				<parms>
+				  <allowGoodwill>false</allowGoodwill>
+				  <thingRewardRequired>true</thingRewardRequired>
+				  <thingRewardItemsOnly>true</thingRewardItemsOnly>
+				</parms>
+			  </li>
+			  <li Class="GD3.QuestNode_AdjustProgress">
+				<progress>1</progress>
+			  </li>
+			  <li Class="GD3.QuestNode_EndWithSound">
+				<outcome>Success</outcome>
+				<sendStandardLetter>true</sendStandardLetter>
+			  </li>
+            </nodes>
+          </node>
+        </li>
+      </nodes>
+    </root>
+  </QuestScriptDef>
+  
+  <!-- 修复炮塔 -->
+  <!-- quest -->
+  <QuestScriptDef>
+    <defName>GD_Quest_FixTurret</defName>
+    <rootSelectionWeight>0.7</rootSelectionWeight>
+    <defaultChallengeRating>1</defaultChallengeRating>
+    <expireDaysRange>4~8</expireDaysRange>
+    <everAcceptableInSpace>true</everAcceptableInSpace>
+	<minRefireDays>30</minRefireDays>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->Repair of the damaged turret</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->You have received a set of messages from an anonymous mechanoid hive.\n\nA mine belonging to the local mechanoids was recently attacked. The cerebrex core analyzed the residual psychic power fluctuations from the coordinate position. To determine whether this is related to the black mechaniods, mechanoid hive needs more data. \n\nA damaged turret will be sent to your colony for repair. After the repair is completed, the battle data it recorded will be automatically uploaded to the mechanoid server. The turret will be yours as a reward.</li>
+      </rulesStrings>
+    </questDescriptionRules>
+	<questContentRules>
+      <rulesStrings>
+
+        <!-- Letters -->
+        <li>turretArriveLetterLabel->Broken turret</li>
+        <li>turretArriveLetterText->The turret in need of repair have arrived at the colony.</li>
+
+      </rulesStrings>
+    </questContentRules>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+		<li Class="GD3.QuestNode_RandomTurret" />
+        <li Class="QuestNode_GetMap">
+          <canBeSpace>true</canBeSpace>
+        </li>
+        <li Class="VEF.Storyteller.QuestNode_GetFaction">
+			<allowEnemy>true</allowEnemy>
+			<mustBePermanentEnemy>true</mustBePermanentEnemy>
+			<storeAs>faction</storeAs>
+			<factionDef>Mechanoid</factionDef>
+		</li>
+        <li Class="GD3.QuestNode_SendTurret" />
+
+        <!-- End conditions -->
+        <li Class="QuestNode_Signal">
+          <inSignal>turret.Destroyed</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+			  <li Class="GD3.QuestNode_EndWithSound">
+				<outcome>Fail</outcome>
+				<sendStandardLetter>true</sendStandardLetter>
+			  </li>
+            </nodes>
+          </node>
+        </li>
+
+        <li Class="QuestNode_Signal">
+          <inSignal>turret.Fixed</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+			  <li Class="GD3.QuestNode_AdjustProgress">
+				<progress>1</progress>
+			  </li>
+			  <li Class="GD3.QuestNode_EndWithSound">
+				<outcome>Success</outcome>
+				<sendStandardLetter>true</sendStandardLetter>
+			  </li>
+            </nodes>
+          </node>
+        </li>
+      </nodes>
+    </root>
+  </QuestScriptDef>
+  
+  <!-- 筹建集群 -->
+  <!-- quest -->
+  <QuestScriptDef>
+    <defName>GD_Quest_BuildCluster</defName>
+    <rootSelectionWeight>1.2</rootSelectionWeight>
+    <defaultChallengeRating>3</defaultChallengeRating>
+	<expireDaysRange>10~15</expireDaysRange>
+	<affectedByPoints>false</affectedByPoints>
+	<affectedByPopulation>false</affectedByPopulation>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->Giant cluster under construction</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->You have received a set of messages from an anonymous mechanoid hive. \n\nThe local mechanoid hive has detected an unknown source of psychic power fluctuations near your colony. To monitor this psychic power in a long term, the mechanoids have decided to build a giant cluster here. However, large-scale material transportation may draw unnecessary attention. Therefore, mechanoid hive hopes that you can provide basic resources for this under-construction cluster. As a reward, the cluster will remain neutral to you once it is built, and you can also call for its remote artillery support from the comms console. \n\nAfter all resources are delivered, it will still take 25 days to complete the construction of the giant cluster.</li>
+      </rulesStrings>
+    </questDescriptionRules>
+	<questContentRules>
+      <rulesStrings>
+
+        <!-- Letters -->
+        <li>builtLetterLabel->Resource delivery completed</li>
+        <li>builtLetterText->The constructor brigade to which the cluster belongs has received the resources and started the construction. It is expected that the work will be completed in 25 days.</li>
+
+      </rulesStrings>
+    </questContentRules>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+		<li Class="GD3.QuestNode_ClusterAssist" />
+        <li Class="QuestNode_GetMap" />
+		<!-- site -->
+		<li Class="QuestNode_Set">
+          <name>siteDistRange</name>
+          <value>4~8</value>
+        </li>
+        <li Class="QuestNode_GetSiteTile">
+          <storeAs>siteTile</storeAs>
+          <preferCloserTiles>true</preferCloserTiles>
+        </li>
+		<li Class="VEF.Storyteller.QuestNode_GetFaction">
+			<allowEnemy>true</allowEnemy>
+			<mustBePermanentEnemy>true</mustBePermanentEnemy>
+			<storeAs>siteFaction</storeAs>
+			<factionDef>Mechanoid</factionDef>
+		</li>
+		<li Class="QuestNode_GetPlayerFaction">
+          <storeAs>playerFaction</storeAs>
+        </li>
+		<li Class="QuestNode_GenerateWorldObject">
+          <def>GD_ClusterConstructing</def>
+          <tile>$siteTile</tile>
+          <faction>$siteFaction</faction>
+          <storeAs>cluster</storeAs>
+        </li>
+		<li Class="QuestNode_SpawnWorldObjects">
+          <worldObjects>$cluster</worldObjects>
+          <tile>$siteTile</tile>
+        </li>
+		<!-- unique -->
+		<li Class="GD3.QuestNode_QuestAlwaysUnique">
+          <tag>AllyCluster</tag>
+        </li>
+		<!-- give resources -->
+        <li Class="GD3.QuestNode_BuildRequest_GetRequestedThing">
+          <storeThingAs>requestedThing</storeThingAs>
+          <storeThingCountAs>requestedThingCount</storeThingCountAs>
+		  <needDefs>
+			<li>Steel</li>
+			<li>Plasteel</li>
+			<li>ComponentIndustrial</li>
+			<li>ComponentSpacer</li>
+			<li>PrecisionDeck</li>
+		  </needDefs>
+		  <needCounts>
+			<li>2500</li>
+			<li>1000</li>
+			<li>150</li>
+			<li>45</li>
+			<li>450</li>
+		  </needCounts>
+        </li>
+        <li Class="GD3.QuestNode_BuildRequest_Initiate">
+          <settlement>$cluster</settlement>
+          <requestedThingDef>$requestedThing</requestedThingDef>
+          <requestedThingCount>$requestedThingCount</requestedThingCount>
+        </li>
+		<!-- outcome -->
+        <li Class="QuestNode_Signal">
+          <inSignal>cluster.Built</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+			  <li Class="QuestNode_Letter">
+                <label TKey="LetterLabelQuestExpired">[builtLetterLabel]</label>
+                <text TKey="LetterTextQuestExpired">[builtLetterText]</text>
+              </li>
+			  <li Class="GD3.QuestNode_AdjustProgress">
+				<progress>3</progress>
+			  </li>
+			  <li Class="GD3.QuestNode_EndWithSound">
+				<outcome>Success</outcome>
+				<sendStandardLetter>true</sendStandardLetter>
+			  </li>
+            </nodes>
+          </node>
+        </li>
+      </nodes>
+    </root>
+  </QuestScriptDef>
+  
+  <!-- 探索据点 -->
+  <!-- site -->
+  <SitePartDef>
+    <defName>GD_BlackBaseSite</defName>
+    <label>abandoned base</label>
+    <description>Abandoned base of the mechanoids in black, might be able to yield some valuable intelligence.</description>
+	<gravShipsCanLandOn>true</gravShipsCanLandOn>
+    <tags>
+      <li>GD_BlackBaseSite</li>
+    </tags>
+    <approachOrderString>Investigate {0}</approachOrderString>
+    <approachingReportString>Investigating {0}.</approachingReportString>
+    <siteTexture>World/WorldObjects/Sites/Outpost</siteTexture>
+    <expandingIconTexture>World/WorldObjects/Expanding/AncientStructure</expandingIconTexture>
+    <considerEnteringAsAttack>false</considerEnteringAsAttack>
+  </SitePartDef>
+  <!-- quest -->
+  <QuestScriptDef>
+	<defName>GD_Quest_ExploreBase</defName>
+    <isRootSpecial>true</isRootSpecial>
+    <defaultChallengeRating>2</defaultChallengeRating>
+    <rootSelectionWeight>0.8</rootSelectionWeight>
+	<expireDaysRange>10~15</expireDaysRange>
+	<minRefireDays>10</minRefireDays>
+    <autoAccept>false</autoAccept>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->The abandoned base of mechanoid in black</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->You have received a set of messages from an anonymous mechanoid hive. \n\nA mechanoid patrol party discovered an abandoned base in a secluded wilderness. After a preliminary scan, it can be confirmed that this base was once used by the black-clad mechanoids. To avoid alerting the enemy, mechanoid hive plans to involve your colonists disguising themselves as unexpected scavengers to explore on behalf of mechanoids. \n\nThere might be a lot of information or resources that the black-clad mechanoids didn't have time to clear within this ruin. You need to find the still-operational hosts among them and use the technology provided by mechanoid hive to upload the internal information to the mechaonid server. The rest of the resources are at your disposal. \n\nLocal cerebrex core reminder: Be cautious of the drones of black-clad mechanoid.</li>
+      </rulesStrings>
+    </questDescriptionRules>
+	<questContentRules>
+      <rulesStrings>
+
+        <!-- Letters -->
+		<li>computerLostLabel->Host destroyed</li>
+        <li>computerLostText->The host containing high-value intelligence was destroyed. Quest [resolvedQuestName] has failed.</li>
+        <li>siteLostLabel->Site lost</li>
+        <li>siteLostText->This site was wiped out by a powerful psychic wave of unknown origin. Quest [resolvedQuestName] has failed.</li>
+
+      </rulesStrings>
+    </questContentRules>
+	<root Class="QuestNode_Sequence">
+      <nodes>
+		<li Class="GD3.QuestNode_UnknownHiveQuest">
+		  <hyperLinks>
+			<li>Drone_ArchoHunter</li>
+		  </hyperLinks>
+		</li>
+        <li Class="QuestNode_SubScript">
+          <def>Util_AdjustPointsForDistantFight</def>
+        </li>
+
+        <li Class="QuestNode_GetMap">
+          <canBeSpace>false</canBeSpace>
+        </li>
+        
+        <li Class="QuestNode_Set">
+          <name>siteDistRange</name>
+          <value>16~40</value>
+        </li>
+        
+        <li Class="QuestNode_GetSiteTile">
+          <storeAs>siteTile</storeAs>
+          <preferCloserTiles>true</preferCloserTiles>
+		  <selectLandmarkChance>0</selectLandmarkChance>
+        </li>
+		
+        <li Class="GD3.QuestNode_Root_Structure">
+          <structureMutator>GD_BlackBaseMutator</structureMutator>
+          <sitePartDef>GD_BlackBaseSite</sitePartDef>
+        </li>
+		
+		<li Class="QuestNode_Signal">
+          <inSignal>Hacked</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+			  <li Class="GD3.QuestNode_AdjustProgress">
+				<progress>2</progress>
+			  </li>
+              <li Class="GD3.QuestNode_EndWithSound">
+				<outcome>Success</outcome>
+				<sendStandardLetter>true</sendStandardLetter>
+			  </li>
+            </nodes>
+          </node>
+        </li>
+		
+		<li Class="QuestNode_Signal">
+          <inSignal>Lost</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label TKey="LetterLabelQuestFailed">[computerLostLabel]</label>
+                <text TKey="LetterTextQuestFailed">[computerLostText]</text>
+              </li>
+              <li Class="GD3.QuestNode_EndWithSound">
+				<outcome>Fail</outcome>
+			  </li>
+            </nodes>
+          </node>
+        </li>
+		
+		<li Class="QuestNode_Signal">
+          <inSignal>site.Destroyed</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label TKey="LetterLabelQuestFailed">[siteLostLabel]</label>
+                <text TKey="LetterTextQuestFailed">[siteLostText]</text>
+              </li>
+              <li Class="GD3.QuestNode_EndWithSound">
+				<outcome>Fail</outcome>
+			  </li>
+            </nodes>
+          </node>
+        </li>
+      </nodes>
+    </root>
+  </QuestScriptDef>
+  
+  <!-- 帮助飞螳 -->
+  <!-- quest -->
+  <!--=== first ===-->
+  <QuestScriptDef>
+    <defName>GD_Quest_HelpMech</defName>
+    <defaultChallengeRating>2</defaultChallengeRating>
+    <rootSelectionWeight>0.6</rootSelectionWeight>
+	<expireDaysRange>1~2</expireDaysRange>
+	<minRefireDays>60</minRefireDays>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->Saving [joiner_nameDef]</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->You have received an SOS signal from an anonymous mechanoid. Although it may sound incredible, there is indeed a [joiner_nameDef] calling you for help now. \n\n[joiner_nameDef] briefly explains the situation to you in the drop pod: [joiner_pronoun] was originally a mechanoid belonging to [ancientFaction_name], with an independent persona core. When [joiner_pronoun] awoke from its long slumber, what greeted [joiner_objective] was not a trustworthy mechanitor but treasure hunters who coveted [joiner_possessive] persona core. [joiner_pronoun] escaped from the siege in an drop pod amid the chaos. \n\n[joiner_nameDef] wishes that your colony temporarily shelter [joiner_objective], which means you will have to face a wave of raid from [enemyFaction_name], And take in [joiner_objective] for approximately [leaveTicks_duration]. \n\n[joiner_nameDef] promises that if there is an opportunity, [joiner_pronoun] will definitely thank you for your help.</li>
+      </rulesStrings>
+    </questDescriptionRules>
+	<questContentRules>
+      <rulesStrings>
+
+        <!-- Letters -->
+		<li>mechJoinLabel->[joiner_nameDef] arrives</li>
+        <li>mechJoinText->[joiner_nameDef] has arrived at your colony, [joiner_pronoun] will stay here for approximately [leaveTicks_duration].</li>
+		<li>hiveOrderLabel->Suggestion: mechanoid hive</li>
+        <li>hiveOrderText->The Mechanoid Hive has learned that there is a mechanoid with an independent personality in your colony, and it has made an interesting suggestion to you. \n\nDue to the strong blockade by mechanoids, the Black-clad mechanoid has not had any new blood for a long time. Therefore, this [joiner_nameDef] is very likely to become their recruitment target. The Newcomer hive has prepared a piece of virus code for [joiner_objective]. As long as it is implanted into [joiner_possessive] spinal neural network, mechanoids can use [joiner_objective] to obtain a large amount of valuable intelligence and cause some destruction. \n\nThe operation of implanting this virus is very simple. As long as you like, you can take action against the unprepared [joiner_nameDef] at any time.</li>
+		<li>leaveLabel->[joiner_nameDef] ready to leave</li>
+        <li>leaveText->[joiner_nameDef] is all set to embark on the journey. [joiner_pronoun] say with a magnetic mechanical voice that [joiner_pronoun] will never forget your kindness.</li>
+		<li>raidText->The [enemyFaction_pawnsPlural] have come to get [../joiner_nameDef].</li>
+
+      </rulesStrings>
+    </questContentRules>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+		<li Class="GD3.QuestNode_UnknownHiveQuest" />
+        <li Class="QuestNode_SubScript">
+          <def>Util_RandomizePointsChallengeRating</def>
+        </li>
+        <li Class="QuestNode_GetMap" />
+		
+		<li Class="VEF.Storyteller.QuestNode_GetFaction">
+			<allowNeutral>true</allowNeutral>
+			<storeAs>ancientFaction</storeAs>
+			<factionDef>Ancients</factionDef>
+		</li>
+		<li Class="QuestNode_GetFaction">
+          <allowEnemy>true</allowEnemy>
+          <mustBePermanentEnemy>false</mustBePermanentEnemy>
+		  <leaderMustBeSafe>true</leaderMustBeSafe>
+          <storeAs>enemyFaction</storeAs>
+        </li>
+		<li Class="QuestNode_Set">
+          <name>mechModified</name>
+          <value>$(0)</value>
+        </li>
+		
+		<!-- generate pawn -->
+		<li Class="GD3.QuestNode_RandomPawnkind">
+		  <pawnKinds>
+			<li>Mech_Scyther</li>
+		  </pawnKinds>
+		</li>
+        <li Class="QuestNode_GeneratePawn">
+          <storeAs>joiner</storeAs>
+          <kindDef>$pawnkind</kindDef>
+		  <faction>$ancientFaction</faction>
+        </li>
+		<li Class="QuestNode_ExtraFaction">
+          <pawns>$joiner</pawns>
+          <factionType>HomeFaction</factionType>
+          <faction>$ancientFaction</faction>
+		  <inSignalsRemovePawn>
+            <li>joiner.LeftMap</li>
+          </inSignalsRemovePawn>
+        </li>
+		<li Class="QuestNode_LeaveOnCleanup">
+          <pawns>$joiner</pawns>
+          <sendStandardLetter>false</sendStandardLetter>
+        </li>
+		<li Class="QuestNode_AddHediff">
+		  <pawns>$joiner</pawns>
+		  <hediffDef>GD_SavingMech</hediffDef>
+		</li>
+        
+        <li Class="QuestNode_PawnsArrive">
+          <pawns>$joiner</pawns>
+          <joinPlayer>true</joinPlayer>
+          <arrivalMode>RandomDrop</arrivalMode>
+          <customLetterLabel>[mechJoinLabel]</customLetterLabel>
+          <customLetterText>[mechJoinText]</customLetterText>
+        </li>
+
+        <!-- Raid arrives -->
+        <li Class="QuestNode_Set">
+          <name>raidDelayTicks</name>
+          <value>$(roundToTicksRough(randInt(1800, 2700)))</value>
+        </li>
+		<li Class="QuestNode_GetDropSpot" />
+        <li Class="QuestNode_Delay">
+          <delayTicks>$raidDelayTicks</delayTicks>
+          <node Class="QuestNode_SubScript">
+            <def>Util_Raid</def>
+            <prefix>raid</prefix>
+            <parms>
+              <inSignal>$inSignal</inSignal>
+              <map>$map</map>
+              <points>$points</points>
+              <enemyFaction>$enemyFaction</enemyFaction>
+              <dropSpot>$dropSpot</dropSpot>
+			  <arrivalMode>EdgeDrop</arrivalMode>
+              <customLetterLabel TKey="LetterLabelChasing">{BASELABEL}</customLetterLabel>
+              <customLetterText TKey="LetterTextChasing">{BASETEXT}</customLetterText>
+            </parms>
+          </node>
+        </li>
+		
+		<!-- Mech hive order -->
+		<li Class="QuestNode_Set">
+          <name>orderDelayTicks</name>
+          <value>$(roundToTicksRough(randInt(60000, 90000)))</value>
+        </li>
+		<li Class="QuestNode_Delay">
+          <delayTicks>$orderDelayTicks</delayTicks>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+			  <li Class="QuestNode_Letter">
+                <label TKey="LetterLabelHiveOrder">[hiveOrderLabel]</label>
+                <text TKey="LetterTextHiveOrder">[hiveOrderText]</text>
+				<lookTargets>$joiner</lookTargets>
+              </li>
+			  <li Class="GD3.QuestNode_SavingMech_Modify" />
+            </nodes>
+          </node>
+        </li>
+		<li Class="QuestNode_Signal">
+          <inSignal>Modified</inSignal>
+          <node Class="QuestNode_Set">
+			<name>mechModified</name>
+			<value>$(1)</value>
+		  </node>
+        </li>
+		
+		<!-- leave -->
+		<li Class="QuestNode_Set">
+          <name>leaveTicks</name>
+          <value>$(roundToTicksRough(randInt(180000, 240000)))</value>
+        </li>
+		<li Class="QuestNode_Delay">
+          <delayTicks>$leaveTicks</delayTicks>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+			  <li Class="QuestNode_Letter">
+                <label TKey="LetterLabelLeave">[leaveLabel]</label>
+                <text TKey="LetterTextLeave">[leaveText]</text>
+              </li>
+			  <li Class="QuestNode_Leave">
+				<pawns>$joiner</pawns>
+				<sendStandardLetter>false</sendStandardLetter>
+			  </li>
+            </nodes>
+          </node>
+        </li>
+		
+		<!-- endings -->
+		<li Class="QuestNode_Signal">
+          <inSignal>joiner.Destroyed</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+			  <li Class="GD3.QuestNode_EndWithSound">
+				<outcome>Fail</outcome>
+				<sendStandardLetter>true</sendStandardLetter>
+			  </li>
+            </nodes>
+          </node>
+        </li>
+		
+		<li Class="QuestNode_Signal">
+          <inSignal>joiner.LeftMap</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+			  <li Class="QuestNode_Chance">
+				<chance>$mechModified</chance>
+				<!-- branch -->
+				<node Class="QuestNode_Sequence">
+				  <nodes>
+					<li Class="GD3.QuestNode_AddQuest">
+					  <pawns>$joiner</pawns>
+					  <def>GD_Quest_Sub_HelpMechModified</def>
+					</li>
+				  </nodes>
+				</node>
+				<elseNode Class="QuestNode_Sequence">
+				  <nodes>
+					<li Class="GD3.QuestNode_AddQuest">
+					  <pawns>$joiner</pawns>
+					  <def>GD_Quest_Sub_HelpMechNotModified</def>
+					</li>
+				  </nodes>
+				</elseNode>
+			  </li>
+			  
+			  <li Class="GD3.QuestNode_EndWithSound">
+				<outcome>Success</outcome>
+				<sendStandardLetter>true</sendStandardLetter>
+			  </li>
+            </nodes>
+          </node>
+        </li>
+
+      </nodes>
+    </root>
+  </QuestScriptDef>
+  <!--=== second ===-->
+  <!-- not modified -->
+  <QuestScriptDef>
+    <defName>GD_Quest_Sub_HelpMechNotModified</defName>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->Saved mech delayed reward</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->Hidden description.</li>
+      </rulesStrings>
+    </questDescriptionRules>
+    <questContentRules>
+      <rulesStrings>
+        <li>rewardLetterLabel->[rewardGiver_nameDef]'s gift</li>
+        <li>rewardLetterText->[rewardGiver_nameDef] has contacted you. [rewardDelayTicks_duration] ago, you helped [rewardGiver_objective] in desperate circumstances.\n\nNow [rewardGiver_pronoun] has emerged from its wandering situation and has prepared a gift to repay your life-saving favor. All of these were discovered by [rewardGiver_objective] through his own efforts from every corner of the world: \n\n[listOfRewards]\n\nIn addition, [rewardGiver_nameDef] also mentioned a group of mechanoids dressed in black. Their independent thinking and united organization left a deep impression on [rewardGiver_objective], therefore, [rewardGiver_pronoun] chose to join them. [rewardGiver_pronoun] hopes to see you again in the future.</li>
+      </rulesStrings>
+    </questContentRules>
+    <defaultHidden>true</defaultHidden>
+    <root Class="GD3.QuestNode_Root_SavingMechNotModified" />
+  </QuestScriptDef>
+  <!-- modified -->
+  <QuestScriptDef>
+    <defName>GD_Quest_Sub_HelpMechModified</defName>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->Saved mech delayed reward</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->Hidden description.</li>
+      </rulesStrings>
+    </questDescriptionRules>
+    <questContentRules>
+      <rulesStrings>
+        <li>rewardLetterLabel->[rewardGiver_nameDef]'s gift</li>
+        <li>rewardLetterText->[rewardGiver_nameDef] has contacted you. [rewardDelayTicks_duration] ago, you helped [rewardGiver_objective] in desperate circumstances.\n\nNow [rewardGiver_pronoun] has emerged from its wandering situation and has prepared a gift to repay your life-saving favor. All of these were discovered by [rewardGiver_objective] through his own efforts from every corner of the world: \n\n[listOfRewards]\n\nIn addition, [rewardGiver_nameDef] also mentioned a group of mechanoids dressed in black. Their independent thinking and united organization left a deep impression on [rewardGiver_objective], therefore, [rewardGiver_pronoun] chose to join them. [rewardGiver_pronoun] hopes to see you again in the future.\n\nShould we tell [rewardGiver_pronoun] something about the virus code?</li>
+		<li>subLetterText->[rewardGiver_nameDef] calmly expressed an understanding of your colony's stance. [rewardGiver_pronoun] said that [rewardGiver_pronoun] would seek the help of black-clad mechanoids to eliminate the impact of these viruses, and thanked you for your notification.</li>
+		
+		<li>endingLetterLabel->The virus code takes effect</li>
+        <li>endingLetterText->The virus code lurking in the core of [rewardGiver_nameDef] has gradually awakened. It uploaded a lot of technological data related to the black-clad mechanoids to the mechanoid server, and recorded the host's recent itinerary. Then, it remotely controlled [rewardGiver_nameDef] to self-destruct, destroying an entire base of black-clad mechanoids. \n\nI wonder what kind of funeral the black-clad ones will hold for [rewardGiver_objective]?</li>
+      </rulesStrings>
+    </questContentRules>
+    <defaultHidden>true</defaultHidden>
+    <root Class="GD3.QuestNode_Root_SavingMechModified" />
+  </QuestScriptDef>
+  
+  <LetterDef ParentName="CustomChoiceLetterBase">
+    <defName>SavingMech</defName>
+    <letterClass>GD3.ChoiceLetter_SavingMech</letterClass>
+  </LetterDef>
+  
+  <!-- 黑衣毒蜂 -->
+  <!-- site -->
+  <SitePartDef>
+    <defName>GD_Sitepart_BlackApocriton</defName>
+    <label>drysea</label>
+    <description>The location of the black-clad apocriton.</description>
+    <siteTexture>UI/Reward_BlackMech</siteTexture>
+    <expandingIconTexture>UI/Reward_BlackMech</expandingIconTexture>
+    <tags>
+      <li>Site_BlackApocriton</li>
+    </tags>
+	<minMapSize>(75, 1, 75)</minMapSize>
+  </SitePartDef>
+  
+   <GenStepDef>
+    <defName>GD_Sitepart_BlackApocriton</defName>
+    <linkWithSite>GD_Sitepart_BlackApocriton</linkWithSite>
+    <order>463</order>
+    <genStep Class="GD3.GenStep_CustomStructureGen_Drysea">
+      <structureLayoutDefs>
+        <li>GD_Drysea_Pre</li>
+      </structureLayoutDefs>
+    </genStep>
+  </GenStepDef>
+  <!-- quest -->
+  <QuestScriptDef ParentName="MechHiveQuestBase">
+    <defName>GD_Quest_BlackApocriton</defName>
+	<defaultChallengeRating>4</defaultChallengeRating>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->Funeral</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->You have received a set of messages from mechanoid hive. \n\nThanks to your long-term assistance, mechanoids has collected sufficient information and successfully located their ultimate target - the black-clad apocriton. This advanced mechanoid with independent thinking has been regarded as a major threat since it broke away from mechanoid hive, and now the perfect opportunity to eliminate it has finally arrived. \n\nBased on the analysis of the detected psychic fluctuations, it seems that the black-clad apocriton is planning to use long-distance skip to send its dozens of surviving colleagues to other planets. Therefore, mechanoids needs your last assistance: go to its location, hold it back until the powerful psychic wave from the core of mechanoid hive erases it from this world. \n\nThe black-clad apocriton is unlikely to be killed directly by any of the methods you have in mind. But you can still force it to focus on defense by dealing damage, buying time for mechanoid hive's decisive strike.</li>
+      </rulesStrings>
+    </questDescriptionRules>
+	<questContentRules>
+      <rulesStrings>
+        <li>mailLabel->mech email</li>
+        <li>mailText->An email has been sent to your colony, which contains a large amount of information about the black-clad apocriton. They will come in handy during battles.</li>
+      </rulesStrings>
+    </questContentRules>
+	<root Class="QuestNode_Sequence">
+      <nodes>
+
+        <li Class="QuestNode_SubScript">
+          <def>Util_AdjustPointsForDistantFight</def>
+        </li>
+        <li Class="QuestNode_GetMap" />
+		
+		<li Class="QuestNode_GenerateThing">
+		  <def>GD_DescriptionChip</def>
+		  <storeAs>mail</storeAs>
+		</li>
+		<li Class="QuestNode_DropPods">
+          <contents>$mail</contents>
+          <useTradeDropSpot>true</useTradeDropSpot>
+		  <sendStandardLetter>true</sendStandardLetter>
+		  <customLetterLabel>[mailLabel]</customLetterLabel>
+		  <customLetterText>[mailText]</customLetterText>
+        </li>
+		
+		<li Class="QuestNode_Set">
+          <name>siteDistRange</name>
+          <value>5~10</value>
+        </li>
+
+        <li Class="QuestNode_GetSiteTile">
+          <storeAs>siteTile</storeAs>
+          <preferCloserTiles>true</preferCloserTiles>
+		  <selectLandmarkChance>0</selectLandmarkChance>
+        </li>
+
+        <li Class="QuestNode_GetSitePartDefsByTagsAndFaction">
+          <storeAs>sitePartDefs</storeAs>
+          <storeFactionAs>siteFaction</storeFactionAs>
+          <sitePartsTags>
+            <li><tag>Site_BlackApocriton</tag></li>
+          </sitePartsTags>
+        </li>
+		
+		<li Class="VEF.Storyteller.QuestNode_GetFaction">
+			<allowEnemy>true</allowEnemy>
+			<mustBePermanentEnemy>true</mustBePermanentEnemy>
+			<storeAs>siteFaction</storeAs>
+			<factionDef>Mechanoid</factionDef>
+		</li>
+
+        <li Class="QuestNode_GetDefaultSitePartsParams">
+          <tile>$siteTile</tile>
+          <faction>$siteFaction</faction>
+          <sitePartDefs>$sitePartDefs</sitePartDefs>
+          <storeSitePartsParamsAs>sitePartsParams</storeSitePartsParamsAs>
+        </li>
+        
+        <li Class="QuestNode_GetSiteThreatPoints">
+          <storeAs>sitePoints</storeAs>
+          <sitePartsParams>$sitePartsParams</sitePartsParams>
+        </li>
+
+        <li Class="QuestNode_SubScript">
+          <def>Util_GenerateSite</def>
+        </li>
+		
+		<li Class="QuestNode_SpawnWorldObjects">
+          <worldObjects>$site</worldObjects>
+        </li>
+        
+        <li Class="GD3.QuestNode_PlaceThing">
+		  <inSignal>site.MapGenerated</inSignal>
+          <site>$site</site>
+		  <thingDef>GD_FinalBattleDummy</thingDef>
+        </li>
+		
+		<li Class="QuestNode_Signal">
+          <inSignal>TargetKilled</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+			  <li Class="QuestNode_End">
+				<outcome>Success</outcome>
+				<sendStandardLetter>false</sendStandardLetter>
+			  </li>
+            </nodes>
+          </node>
+        </li>
+		
+        <!-- If we enter and leave, the map is destroyed. Fail the quest. -->
+        <li Class="QuestNode_Signal">
+          <inSignal>site.Destroyed</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label TKey="LetterLabelQuestFailed">Quest failed: [resolvedQuestName]</label>
+                <text TKey="LetterTextQuestFailed">Due to the loss of accurate target positioning, the psychic strike of mechanoid hive failed to achieve the expected effect. Mission [resolvedQuestName] has failed.</text>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+      </nodes>
+    </root>
+  </QuestScriptDef>
+
+</Defs>

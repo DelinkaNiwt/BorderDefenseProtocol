@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <DamageDef ParentName="BluntBase">
+      <defName>Frostbite_GD</defName>
+      <label>frostbite</label>
+      <makesBlood>false</makesBlood>
+      <additionalHediffs>
+        <li>
+          <hediff>Hypothermia</hediff>
+          <severityPerDamageDealt>0.02</severityPerDamageDealt>
+          <victimSeverityScalingByInvBodySize>true</victimSeverityScalingByInvBodySize>
+        </li>
+      </additionalHediffs>
+      <impactSoundType>Electric</impactSoundType>
+    </DamageDef>
+	
+	<DamageDef ParentName="Bomb">
+      <defName>BombChargeLarge</defName>
+	  <explosionColorCenter>(0.5, 0.15, 1)</explosionColorCenter>
+	  <explosionColorEdge>(0.67, 0.5, 1)</explosionColorEdge>
+      <defaultDamage>1000</defaultDamage>
+      <defaultStoppingPower>15.0</defaultStoppingPower>
+      <defaultArmorPenetration>1.90</defaultArmorPenetration>
+	  <buildingDamageFactorImpassable>15</buildingDamageFactorImpassable>
+      <buildingDamageFactorPassable>7.5</buildingDamageFactorPassable>
+    </DamageDef>
+	
+	<DamageDef ParentName="Bomb">
+      <defName>BombCharge</defName>
+	  <explosionColorCenter>(0.5, 0.15, 1)</explosionColorCenter>
+	  <explosionColorEdge>(0.67, 0.5, 1)</explosionColorEdge>
+      <defaultDamage>130</defaultDamage>
+      <defaultStoppingPower>2.0</defaultStoppingPower>
+      <defaultArmorPenetration>1.30</defaultArmorPenetration>
+	  <buildingDamageFactorImpassable>15</buildingDamageFactorImpassable>
+      <buildingDamageFactorPassable>7.5</buildingDamageFactorPassable>
+    </DamageDef>
+	
+	<DamageDef ParentName="Bomb">
+      <defName>BombChargeSmall</defName>
+	  <explosionColorCenter>(0.5, 0.15, 1)</explosionColorCenter>
+	  <explosionColorEdge>(0.67, 0.5, 1)</explosionColorEdge>
+      <defaultDamage>40</defaultDamage>
+      <defaultStoppingPower>2.0</defaultStoppingPower>
+      <defaultArmorPenetration>1.30</defaultArmorPenetration>
+	  <buildingDamageFactorImpassable>15</buildingDamageFactorImpassable>
+      <buildingDamageFactorPassable>7.5</buildingDamageFactorPassable>
+    </DamageDef>
+	
+	<DamageDef ParentName="Bomb">
+      <defName>BombFrostBite</defName>
+	  <explosionColorCenter>(0.34, 1, 0.98)</explosionColorCenter>
+	  <explosionColorEdge>(0.54, 0.82, 1)</explosionColorEdge>
+      <defaultDamage>10</defaultDamage>
+      <defaultStoppingPower>2.0</defaultStoppingPower>
+      <defaultArmorPenetration>1.90</defaultArmorPenetration>
+	  <buildingDamageFactorImpassable>0</buildingDamageFactorImpassable>
+      <buildingDamageFactorPassable>0</buildingDamageFactorPassable>
+	  <additionalHediffs>
+        <li>
+          <hediff>Hypothermia</hediff>
+          <severityPerDamageDealt>0.04</severityPerDamageDealt>
+          <victimSeverityScalingByInvBodySize>true</victimSeverityScalingByInvBodySize>
+        </li>
+      </additionalHediffs>
+    </DamageDef>
+	
+	<DamageDef ParentName="Bomb">
+      <defName>BombFrostBiteLarge</defName>
+	  <explosionColorCenter>(0.34, 1, 0.98)</explosionColorCenter>
+	  <explosionColorEdge>(0.54, 0.82, 1)</explosionColorEdge>
+      <defaultDamage>30</defaultDamage>
+      <defaultStoppingPower>2.0</defaultStoppingPower>
+      <defaultArmorPenetration>1.30</defaultArmorPenetration>
+	  <buildingDamageFactorImpassable>0</buildingDamageFactorImpassable>
+      <buildingDamageFactorPassable>0</buildingDamageFactorPassable>
+	  <additionalHediffs>
+        <li>
+          <hediff>Hypothermia</hediff>
+          <severityPerDamageDealt>0.05</severityPerDamageDealt>
+          <victimSeverityScalingByInvBodySize>true</victimSeverityScalingByInvBodySize>
+        </li>
+      </additionalHediffs>
+    </DamageDef>
+	
+	<DamageDef ParentName="StunBase">
+      <defName>GD_PsychicStrike</defName>
+      <label>psychic strike</label>
+      <workerClass>GD3.DamageWorker_PsychicStrike</workerClass>
+      <externalViolence>true</externalViolence>
+      <deathMessage>{0}'s mind was disturbed.</deathMessage>
+      <defaultDamage>20</defaultDamage>
+      <combatLogRules>Damage_Stun</combatLogRules>
+      <causeStun>false</causeStun>
+	  <explosionSnowMeltAmount>0</explosionSnowMeltAmount>
+      <explosionCellFleck>BlastEMP</explosionCellFleck>
+      <explosionColorEdge>(0.8, 0.8, 0.8, 0.8)</explosionColorEdge>
+      <explosionInteriorFleck>ElectricalSpark</explosionInteriorFleck>
+	  <impactSoundType>Electric</impactSoundType>
+	  <soundExplosion>GD_PsychicGrenade</soundExplosion>
+    </DamageDef>
+	
+	<DamageDef ParentName="Bomb">
+      <defName>BombScript</defName>
+      <defaultDamage>550</defaultDamage>
+      <defaultStoppingPower>2.0</defaultStoppingPower>
+      <defaultArmorPenetration>1.30</defaultArmorPenetration>
+    </DamageDef>
+	
+	<!-- 黑蜂 -->
+	<DamageDef ParentName="Bomb">
+      <defName>BombBlackStrike</defName>
+	  <explosionColorCenter>(25, 25, 112)</explosionColorCenter>
+	  <explosionColorEdge>(224, 255, 255)</explosionColorEdge>
+      <defaultDamage>80</defaultDamage>
+      <defaultStoppingPower>2.0</defaultStoppingPower>
+      <defaultArmorPenetration>1.80</defaultArmorPenetration>
+	  <buildingDamageFactorImpassable>4</buildingDamageFactorImpassable>
+      <buildingDamageFactorPassable>8</buildingDamageFactorPassable>
+	  <additionalHediffs>
+        <li>
+          <hediff>Hypothermia</hediff>
+          <severityPerDamageDealt>0.01</severityPerDamageDealt>
+          <victimSeverityScalingByInvBodySize>true</victimSeverityScalingByInvBodySize>
+        </li>
+      </additionalHediffs>
+    </DamageDef>
+	
+	<DamageDef ParentName="Bomb">
+      <defName>GDRedElec</defName>
+	  <workerClass>GD3.DamageWorker_DontHitAllies</workerClass>
+	  <armorCategory>Heat</armorCategory>
+	  <hediff>Burn</hediff>
+      <impactSoundType>Electric</impactSoundType>
+	  <makesBlood>false</makesBlood>
+      <defaultDamage>50</defaultDamage>
+      <explosionSnowMeltAmount>0</explosionSnowMeltAmount>
+      <explosionCellFleck>BlastEMP</explosionCellFleck>
+      <explosionColorEdge>(0.8, 0.1, 0.1, 0.8)</explosionColorEdge>
+      <explosionInteriorFleck>ElectricalSpark</explosionInteriorFleck>
+      <soundExplosion>Explosion_EMP</soundExplosion>
+      <combatLogRules>Damage_EMP</combatLogRules>
+      <defaultStoppingPower>16.8</defaultStoppingPower>
+      <defaultArmorPenetration>0.50</defaultArmorPenetration>
+	  <corpseDamageFactor>0.01</corpseDamageFactor>
+	  <buildingDamageFactorImpassable>0.4</buildingDamageFactorImpassable>
+      <buildingDamageFactorPassable>0.2</buildingDamageFactorPassable>
+      <plantDamageFactor>0</plantDamageFactor>
+	</DamageDef>
+	
+	<!-- 防空 -->
+	<DamageDef ParentName="Bomb">
+      <defName>GDBombAntiAir</defName>
+      <workerClass>GD3.DamageWorker_AntiAir</workerClass>
+	</DamageDef>
+	
+	<!-- 湮黾 -->
+	<DamageDef>
+	  <defName>GD_Beam</defName>
+      <label>beam</label>
+      <workerClass>DamageWorker_AddInjury</workerClass>
+      <externalViolence>true</externalViolence>
+      <deathMessage>{0} has been beamed to death.</deathMessage>
+      <hediff>BeamWound</hediff>
+      <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+      <impactSoundType>Bullet</impactSoundType>
+      <armorCategory>Heat</armorCategory>
+      <overkillPctToDestroyPart>0~0.7</overkillPctToDestroyPart>
+      <isRanged>true</isRanged>
+      <makesAnimalsFlee>true</makesAnimalsFlee>
+      <defaultDamage>10</defaultDamage>
+      <defaultArmorPenetration>0.5</defaultArmorPenetration>
+      <buildingDamageFactorImpassable>1</buildingDamageFactorImpassable>
+      <buildingDamageFactorPassable>1</buildingDamageFactorPassable>
+	  <ignoreShields>true</ignoreShields>
+    </DamageDef>
+
+</Defs>

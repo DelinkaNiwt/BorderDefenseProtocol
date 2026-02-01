@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 破碎信标碎片 -->
+  <Ancient_WarBeacon_PartsA.label>TODO</Ancient_WarBeacon_PartsA.label>
+  <!-- EN: 战争信标残骸中散落的组件碎片，其内部结构已严重损毁，不具备任何战术或通讯功能。但对于资源短缺的殖民地来说，这些碎片依旧可作为金属与复合材料的来源。 -->
+  <Ancient_WarBeacon_PartsA.description>TODO</Ancient_WarBeacon_PartsA.description>
+  
+  <!-- EN: 破碎信标碎片 -->
+  <Ancient_WarBeacon_PartsB.label>TODO</Ancient_WarBeacon_PartsB.label>
+  <!-- EN: 战争信标残骸中散落的组件碎片，其内部结构已严重损毁，不具备任何战术或通讯功能。但对于资源短缺的殖民地来说，这些碎片依旧可作为金属与复合材料的来源。 -->
+  <Ancient_WarBeacon_PartsB.description>TODO</Ancient_WarBeacon_PartsB.description>
+  
+  <!-- EN: 战争巨蝎残骸 -->
+  <Broken_War_Scorpion_Rust.label>TODO</Broken_War_Scorpion_Rust.label>
+  <!-- EN: 一只战争巨蝎的残骸,你感受到其中似乎存在某些有价值的事物 -->
+  <Broken_War_Scorpion_Rust.description>TODO</Broken_War_Scorpion_Rust.description>
+  <!-- EN: 战争巨蝎残骸 -->
+  <Broken_War_Scorpion_Rust.comps.CompProximityLetter.letterLabel>TODO</Broken_War_Scorpion_Rust.comps.CompProximityLetter.letterLabel>
+  <!-- EN: 当你靠近这座战争巨蝎残骸时,你感受到其中似乎存在某些有价值的事物,你隐隐约约看到其头部的一块闪闪发光的红色立方体,也许其能提取出为你所用 -->
+  <Broken_War_Scorpion_Rust.comps.CompProximityLetter.letterText>TODO</Broken_War_Scorpion_Rust.comps.CompProximityLetter.letterText>
+  <!-- EN: 可用的: {LEAVINGS1_label} -->
+  <Broken_War_Scorpion_Rust.comps.CompLeavingsLetter.letterLabel>TODO</Broken_War_Scorpion_Rust.comps.CompLeavingsLetter.letterLabel>
+  <!-- EN: 战争巨蝎残骸毁坏后留下了一份红色魔方,也许你能用它解锁什么科技 -->
+  <Broken_War_Scorpion_Rust.comps.CompLeavingsLetter.letterText>TODO</Broken_War_Scorpion_Rust.comps.CompLeavingsLetter.letterText>
+  <!-- EN: 包含一块闪闪发光的红色立方体. -->
+  <Broken_War_Scorpion_Rust.comps.CompInspectString.inspectString>TODO</Broken_War_Scorpion_Rust.comps.CompInspectString.inspectString>
+  
+  <!-- EN: 破碎的信标旧址 -->
+  <Building_Ancient_WarBeacon.label>TODO</Building_Ancient_WarBeacon.label>
+  <!-- EN: 这座战争信标早已饱经战火的洗礼，残垣断壁诉说着一场惨烈的过往。尽管其表面伤痕累累、结构破碎，但核心框架依旧坚固如初，仿佛静静等待着重返战场的那一刻。\n如果你能筹集足够的资源并完成修复，或许就能再次唤醒它沉睡的力量——将其重构为真正的战争信标，点燃机械族对这片土地的关注，也为你带来前所未有的科技突破。\n它静候着……是重启，还是遗忘？ -->
+  <Building_Ancient_WarBeacon.description>TODO</Building_Ancient_WarBeacon.description>
+  <!-- EN: 破碎的信标旧址 -->
+  <Building_Ancient_WarBeacon.comps.CompProximityLetter.letterLabel>TODO</Building_Ancient_WarBeacon.comps.CompProximityLetter.letterLabel>
+  <!-- EN: 这座战争信标早已饱经战火的洗礼，残垣断壁诉说着一场惨烈的过往。尽管其表面伤痕累累、结构破碎，但核心框架依旧坚固如初，仿佛静静等待着重返战场的那一刻。\n如果你能筹集足够的资源并完成修复，或许就能再次唤醒它沉睡的力量——将其重构为真正的战争信标，点燃机械族对这片土地的关注，也为你带来前所未有的科技突破。\n它静候着……是重启，还是遗忘？ -->
+  <Building_Ancient_WarBeacon.comps.CompProximityLetter.letterText>TODO</Building_Ancient_WarBeacon.comps.CompProximityLetter.letterText>
+  <!-- EN: NCL_WARBEACON_TOGGLE_GIZMO_LABEL -->
+  <Building_Ancient_WarBeacon.modExtensions.0.toggleGizmoLabel>TODO</Building_Ancient_WarBeacon.modExtensions.0.toggleGizmoLabel>
+  <!-- EN: NCL_WARBEACON_TOGGLE_GIZMO_OFF_LABEL -->
+  <Building_Ancient_WarBeacon.modExtensions.0.toggleGizmoOffLabel>TODO</Building_Ancient_WarBeacon.modExtensions.0.toggleGizmoOffLabel>
+  
+  <!-- EN: 战争信标 -->
+  <Building_TotalWarfareActivator.label>TODO</Building_TotalWarfareActivator.label>
+  <!-- EN: 你已成功修复这座战争信标，它庞大的构造在废土之上仿佛一尊沉眠的巨兽，令人不寒而栗。作为机械族用以标定战略坐标的核心建筑，它的激活意味着你将暴露于他们的视野之中——更强大、更致命的机械部队将陆续涌来，妄图将你彻底摧毁。\n但高风险亦伴随高回报。通过分析信标的核心数据，你有望破解机械族的技术壁垒，解锁曾经遥不可及的尖端科技。\n选择权在你手中——是沉默以保全，还是点燃战火，直面未知？\n打开它，打开战争。 -->
+  <Building_TotalWarfareActivator.description>TODO</Building_TotalWarfareActivator.description>
+  <!-- EN: 开启全面战争X -->
+  <Building_TotalWarfareActivator.comps.CompUsable.useLabel>TODO</Building_TotalWarfareActivator.comps.CompUsable.useLabel>
+  
+</LanguageData>

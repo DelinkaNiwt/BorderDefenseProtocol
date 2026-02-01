@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <ThingDef ParentName="BaseMechanoid">
+    <defName>TW_Mech_Paratrooper</defName>
+    <label>特战伞兵静螳</label>
+    <description>机械族中型量产精英机械体。配备专业喷气式背包，同时，伞兵静螳还能投掷进攻型破片闪光弹，对各类单位造成眩晕与破片伤害。
+
+伞兵静螳的核心跳跃技术来自于某科技企业所谓“高性能计算芯片”，在闪耀世界算力竞赛中被打假后，芯片流入机械主巢，意外的是，这片芯片意外在跳跃平衡技术方面对中型机械体有重要突破，随后被大规模量产，代号“Jumping”。</description>
+    <statBases>
+      <MarketValue>1200</MarketValue>
+      <MoveSpeed>4.8</MoveSpeed>
+      <ArmorRating_Blunt>0.64</ArmorRating_Blunt>
+      <ArmorRating_Sharp>1</ArmorRating_Sharp>
+      <PsychicSensitivity>0</PsychicSensitivity>
+	    <ShootingAccuracyPawn>2</ShootingAccuracyPawn>
+	  <IncomingDamageFactor>1</IncomingDamageFactor>
+	  <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">4</BandwidthCost>
+	  <MechEnergyLossPerHP  MayRequire="Ludeon.Rimworld.Biotech">0.2</MechEnergyLossPerHP>
+	  <WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">3</WastepacksPerRecharge>
+
+    </statBases>
+	<size>(1,1)</size>
+   <tools>
+      <li>
+        <label>left fist</label>
+        <labelNoLocation>fist</labelNoLocation>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>12.0</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+      <li>
+        <label>right fist</label>
+        <labelNoLocation>fist</labelNoLocation>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>12.0</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+      <li>
+        <label>head</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>8.5</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+        <chanceFactor>0.2</chanceFactor>
+      </li>
+    </tools>
+	<damageMultipliers>
+	  <li>
+        <damageDef>Stun</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <race>
+      <intelligence>ToolUser</intelligence>
+      <thinkTreeMain>Mechanoid</thinkTreeMain>
+      <body>Lancer</body>
+      <baseBodySize>1</baseBodySize>
+      <baseHealthScale>2</baseHealthScale>
+	  <hediffGiverSets>
+	  </hediffGiverSets>
+      <soundCallIntervalRange>1000~2000</soundCallIntervalRange>
+      <soundMeleeHitPawn>Pawn_Melee_MechanoidBash_HitPawn</soundMeleeHitPawn>
+      <soundMeleeHitBuilding>Pawn_Melee_MechanoidBash_HitBuilding</soundMeleeHitBuilding>
+      <soundMeleeMiss>Pawn_Melee_MechanoidBash_Miss</soundMeleeMiss>
+	  <mechWeightClass>Medium</mechWeightClass>
+	  <lifeStageAges Inherit="false">
+        <li>
+          <def>MechanoidFullyFormed</def>
+          <minAge>0</minAge>
+          <soundWounded>Pawn_Mech_Centipede_Wounded</soundWounded>
+          <soundDeath>Pawn_Mech_Centipede_Death</soundDeath>
+          <soundCall>Pawn_Mech_Centipede_Call</soundCall>
+        </li>
+        <li MayRequire="Ludeon.RimWorld.Biotech">
+          <def>MechanoidFullyFormed</def>
+          <minAge>100</minAge>
+          <soundWounded>Pawn_Mech_Centipede_Wounded</soundWounded>
+          <soundDeath>Pawn_Mech_Centipede_Death</soundDeath>
+          <soundCall>Pawn_Mech_Centipede_Call</soundCall>
+        </li>
+      </lifeStageAges>
+    </race>
+	<comps>  
+    <li Class="NCL.CompProperties_IgnoreCommandRange" />
+	 <li Class="CompProperties_Forbiddable"/>
+	<li Class="CompProperties_ProjectileInterceptor">
+    <radius>2</radius>
+    <color>(0.4, 0.4, 0.4)</color>
+    <interceptGroundProjectiles>true</interceptGroundProjectiles>
+    <interceptAirProjectiles>true</interceptAirProjectiles>
+		<reactivateEffect>BulletShieldGenerator_Reactivate</reactivateEffect>
+		<activeSound>BulletShield_Ambience</activeSound>
+		<hitPoints>150</hitPoints>
+		<hitPointsRestoreInstantlyAfterCharge>true</hitPointsRestoreInstantlyAfterCharge>
+		<chargeDurationTicks>1800</chargeDurationTicks>
+		<rechargeHitPointsIntervalTicks>1</rechargeHitPointsIntervalTicks>
+		<minIdleAlpha>0.2</minIdleAlpha>
+		<drawWithNoSelection>True</drawWithNoSelection>
+		<disarmedByEmpForTicks>1800</disarmedByEmpForTicks>
+		<gizmoTipKey>ProjectileInterceptorTip</gizmoTipKey>
+      </li>
+	</comps>
+    <butcherProducts>
+      <Steel>75</Steel>
+      <Plasteel>25</Plasteel>
+    </butcherProducts>
+  </ThingDef>
+
+  <PawnKindDef ParentName="BaseMechanoidKind">
+    <defName>TW_Mech_Paratrooper_Kind</defName>
+    <label>特战伞兵静螳</label>
+    <combatPower>400</combatPower>
+    <weaponMoney>9999~9999</weaponMoney>
+  <abilities>
+    <li>TW_LaunchGrenadeExplosiveEMP</li>
+    <li>SuckerPunch</li>
+  </abilities>
+	<race>TW_Mech_Paratrooper</race>
+    <lifeStages>
+      <li>
+        <bodyGraphicData>
+          <texPath>Races/Paratrooper</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>1.6</drawSize>
+          <shadowData>
+            <volume>(0.4, 0.6, 0.4)</volume>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+      <li>
+        <bodyGraphicData>
+          <texPath>Races/ParatrooperAncient</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>1.6</drawSize>
+          <shadowData>
+            <volume>(0.4, 0.6, 0.4)</volume>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+    <weaponTags>
+      <li>Specops_Charge_Lance</li>
+    </weaponTags>
+  </PawnKindDef>
+  
+     <AbilityDef>
+    <defName>SuckerPunch</defName>
+    <label>突袭</label>
+    <description>"激活喷气背包的全域机动系统，使单位能够从地图任意位置进行战术空降突入，快速部署到目标区域执行作战任务。"</description>
+    <iconPath>Things/SuckerPunch</iconPath>
+    <cooldownTicksRange>6000</cooldownTicksRange>
+    <aiCanUse>false</aiCanUse>
+    <!--<ai_SearchAOEForTargets>true</ai_SearchAOEForTargets>-->
+    <targetRequired>false</targetRequired>
+    <!--所需目标-->
+    <verbProperties>
+      <verbClass>NCL.Verb_CastAbilityDragonFly</verbClass>
+      <warmupTime>0</warmupTime>
+      <range>50</range>
+      <targetParams>
+        <canTargetSelf>True</canTargetSelf>
+      </targetParams>
+    </verbProperties>
+  <modExtensions>
+    <li Class="NCL.DragonFlyExtension">
+      <dropPodLeavingDef>DropPodLeavingParatrooper</dropPodLeavingDef>
+      <landingPodDef>DropPodIncomingParatrooper</landingPodDef>
+      <activeTransporterDef>TW_ActiveDropPod</activeTransporterDef>
+    </li>
+  </modExtensions>
+  </AbilityDef>
+
+    <ThingDef ParentName="SkyfallerBase">
+    <!--进场-->
+    <defName>DropPodIncomingParatrooper</defName>
+    <label>DropPodIncomingParatrooper</label>
+    <thingClass>DropPodIncoming</thingClass>
+    <graphicData>
+      <texPath>Things/DropPodIncomingParatrooper</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutFlying</shaderType>
+      <drawSize>(3,3)</drawSize>
+    </graphicData>
+    <skyfaller>
+      <movementType>Decelerate</movementType>
+      <shadow>Things/Skyfaller/SkyfallerShadowDropPod</shadow>
+      <shadowSize>(1,1)</shadowSize>
+      <anticipationSound>DropPod_Fall</anticipationSound>
+      <anticipationSoundTicks>100</anticipationSoundTicks>
+      <impactSound>DropPod_Impact</impactSound>
+      <speed>0.05</speed>
+      <motesPerCell>0</motesPerCell>
+      <angleCurve>
+        <points>
+       <li>-90,0</li><!--垂直飞升-->
+        </points>
+      </angleCurve>
+      <rotationCurve>
+         <points>
+        <li>0,90</li>
+        </points>
+      </rotationCurve>
+    </skyfaller>
+  </ThingDef>
+
+    <ThingDef ParentName="SkyfallerBase">
+    <defName>DropPodLeavingParatrooper</defName><!--出场-->
+    <label>DropPodLeavingParatrooper</label>
+    <thingClass>FlyShipLeaving</thingClass>
+    <graphicData>
+      <texPath>Things/Paratrooper_south</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutFlying</shaderType>
+      <drawSize>(1.8,1.8)</drawSize>
+    </graphicData>
+    <skyfaller>
+      <movementType>Decelerate</movementType>
+      <reversed>true</reversed>
+      <shadow>Things/Skyfaller/SkyfallerShadowDropPod</shadow>
+      <shadowSize>(1,1)</shadowSize>
+      <anticipationSound>DropPod_Leaving</anticipationSound>
+      <anticipationSoundTicks>-10</anticipationSoundTicks>
+      <ticksToImpactRange><!--滴答影响范围？-->
+        <min>-40</min>
+        <max>-15</max>
+      </ticksToImpactRange>
+          <angleCurve>
+        <points>
+       <li>-90,0</li><!--垂直飞升-->
+        </points>
+      </angleCurve>
+      <rotationCurve>
+         <points>
+        <li>0,-90</li>
+        </points>
+      </rotationCurve>
+    </skyfaller>
+<comps>
+    <li Class="NCL.CompProperties_ContinuousExhaust">
+        <offsetDistance>1.2</offsetDistance>
+        <fleckInterval>1</fleckInterval>
+        <fleckTypes>
+            <li>Smoke</li>
+            <li>FireGlow</li>
+            <li>MicroSparks</li>
+        </fleckTypes>
+    </li>
+</comps>
+
+  </ThingDef>
+  
+  <ThingDef Name="ActiveDropPod">
+    <defName>TW_ActiveDropPod</defName>
+    <label>TW ActiveDropPod</label>
+    <category>Item</category>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <thingClass>ActiveTransporter</thingClass>
+    <scatterableOnMapGen>false</scatterableOnMapGen>
+    <tickerType>Normal</tickerType>
+    <soundOpen>DropPod_Open</soundOpen>
+    <graphicData>
+      <texPath>Races/Paratrooper_south</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.6</drawSize>
+      <shadowData>
+        <volume>(0.8, 0.6, 0.8)</volume>
+      </shadowData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <blockWind>true</blockWind>
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <MaxHitPoints>500</MaxHitPoints>
+      <Flammability>0</Flammability>
+    </statBases>
+    <selectable>true</selectable>
+  </ThingDef>
+
+</Defs>

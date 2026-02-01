@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--===========================  Bushes ==============================-->
+
+  <ThingDef ParentName="PlantBase">
+    <defName>Plant_PeaceLily</defName>
+    <label>peace lily</label>
+    <description>The faint petals illuminate the way to come.</description>
+    <statBases>
+      <MaxHitPoints>85</MaxHitPoints>
+      <Beauty>28</Beauty>
+      <BeautyOutdoors>28</BeautyOutdoors>
+      <Nutrition>0.05</Nutrition>
+	  <Flammability>0</Flammability>
+    </statBases>
+    <graphicData>
+      <texPath>PeaceLily</texPath>
+      <graphicClass>Graphic_Random</graphicClass>
+    </graphicData>
+    <altitudeLayer>Item</altitudeLayer>
+    <selectable>true</selectable>
+    <ingestible>
+      <canAutoSelectAsFoodForCaravan>false</canAutoSelectAsFoodForCaravan>
+    </ingestible>
+    <plant>
+      <dieIfLeafless>false</dieIfLeafless>
+      <sowWork>750</sowWork> <!-- 100 ticks per live day -->
+	  <neverBlightable>true</neverBlightable>
+      <sowTags>
+        <li>Ground</li>
+        <li>Decorative</li>
+      </sowTags>
+      <growMinGlow>0.3</growMinGlow>
+      <topWindExposure>0.1</topWindExposure>
+      <growDays>28.5</growDays>
+	  <sowResearchPrerequisites>
+        <li>GD3_Apocriton</li>
+      </sowResearchPrerequisites>
+      <lifespanDaysPerGrowDays>5</lifespanDaysPerGrowDays>
+      <visualSizeRange>0.90~0.90</visualSizeRange>
+	  <immatureGraphicPath>PeaceLily</immatureGraphicPath>
+	  <maxMeshCount>4</maxMeshCount>
+      <wildOrder>0</wildOrder>
+      <purpose>Beauty</purpose>
+	  <harvestTag>Standard</harvestTag>
+      <harvestedThingDef>WhitePetal</harvestedThingDef>
+      <harvestYield>1</harvestYield>
+    </plant>
+	<comps>
+	  <li Class="CompProperties_Glower">
+        <glowRadius>2.9</glowRadius>
+        <glowColor>(255,255,240,0)</glowColor>
+      </li>
+	</comps>
+  </ThingDef>
+  
+  <ThingDef ParentName="RoughPlantBase">
+    <defName>WhitePetal</defName>
+    <label>white petal</label>
+    <description>The petals of the peace lily. It is white and beautiful, but its use is limited because of its special physical properties. \n\nWhen you touch the petal with your hand, it turns into a transparent, smooth oily liquid that adheres to your finger and changes back into its original shape when you stop. But when squeezed, the petals are irreversibly transformed into a pool of sake-like liquid that occasionally glint in a dazzling spot of light.</description>
+    <graphicData>
+      <texPath>Items/WhitePetal</texPath>
+    </graphicData>
+	<tradeability>Sellable</tradeability>
+    <statBases>
+      <MarketValue>10</MarketValue>
+      <Flammability>0</Flammability>
+	  <Beauty>10</Beauty>
+    </statBases>
+    <thingCategories>
+      <li>PlantMatter</li>
+    </thingCategories>
+    <ingestible>
+      <preferability>DesperateOnly</preferability>
+      <canAutoSelectAsFoodForCaravan>false</canAutoSelectAsFoodForCaravan>
+    </ingestible>
+  </ThingDef>
+
+</Defs>

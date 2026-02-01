@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!-- Mech -->
+
+  <AbilityDef>
+    <defName>MechFireBurst</defName>
+    <label>fire burst</label>
+    <description>Bursts high energy in all directions, vaporizing everything within range.</description>
+    <jobDef>CastAbilityOnThingWithoutWeapon</jobDef>
+    <iconPath>UI/Abilities/FireBurst</iconPath>
+    <cooldownTicksRange>2700</cooldownTicksRange>
+    <aiCanUse>true</aiCanUse>
+    <ai_SearchAOEForTargets>true</ai_SearchAOEForTargets>
+    <targetRequired>false</targetRequired>
+    <displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+    <showCastingProgressBar>true</showCastingProgressBar>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <warmupEffecter>Fire_Burst_Warmup</warmupEffecter>
+      <warmupTime>6</warmupTime>
+      <requireLineOfSight>false</requireLineOfSight>
+      <range>5.9</range>
+      <drawAimPie>false</drawAimPie>      
+      <targetParams>
+        <canTargetSelf>true</canTargetSelf>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="GD3.CompProperties_AbilityFireBurstB">
+        <radius>5.9</radius>
+      </li>
+    </comps>
+  </AbilityDef> 
+
+  <AbilityDef>
+    <defName>ResurrectionMech</defName>
+    <label>resurrect mech</label>
+    <description>Resurrect a recently-killed mechanoid by externally supercharging its self-repair processes. The mechanoid will come back with some but not all of its wounds healed.</description>
+    <iconPath>UI/Abilities/MechResurrection</iconPath>
+    <cooldownTicksRange>120</cooldownTicksRange>
+    <warmupStartSound>MechResurrect_Warmup</warmupStartSound>
+    <warmupEffecter>ApocrionAoeWarmup</warmupEffecter>
+    <jobDef>CastAbilityGoToThing</jobDef>
+    <canUseAoeToGetTargets>true</canUseAoeToGetTargets>
+    <useAverageTargetPositionForWarmupEffecter>true</useAverageTargetPositionForWarmupEffecter>
+    <hostile>false</hostile>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+    <statBases> 
+      <Ability_EffectRadius>5</Ability_EffectRadius>
+    </statBases>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <drawAimPie>true</drawAimPie>
+      <range>9.9</range>
+      <warmupTime>4</warmupTime>
+      <soundCast>MechResurrect_Cast</soundCast>
+      <requireLineOfSight>true</requireLineOfSight>
+      <targetParams>
+        <canTargetPawns>false</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetCorpses>true</canTargetCorpses>
+        <canTargetAnimals>false</canTargetAnimals>
+        <canTargetHumans>false</canTargetHumans>
+        <canTargetMechs>true</canTargetMechs>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="CompProperties_ResurrectMech">
+        <maxCorpseAgeTicks>3600</maxCorpseAgeTicks><!-- 60 seconds -->
+        <costs>
+          <li>
+            <weightClass>Light</weightClass>
+            <cost>0</cost>
+          </li>
+          <li>
+            <weightClass>Medium</weightClass>
+            <cost>1</cost>
+          </li>
+          <li>
+            <weightClass>Heavy</weightClass>
+            <cost>2</cost>
+          </li>
+        </costs>
+        <appliedEffecterDef>MechResurrected</appliedEffecterDef>
+      </li>
+    </comps>
+  </AbilityDef>
+  
+  <!-- common -->
+  <AbilityDef>
+    <defName>LongJumpReconScyther</defName>
+    <label>scyther longjump</label>
+    <description>Jump to a distant location using jump packs.</description>
+    <iconPath>UI/Abilities/MechLongJump</iconPath>
+    <cooldownTicksRange>360</cooldownTicksRange>
+    <hostile>false</hostile>
+	<groupAbility>true</groupAbility>
+	<hotKey>Misc5</hotKey>
+	<canUseAoeToGetTargets>true</canUseAoeToGetTargets>
+    <verbProperties>
+      <verbClass>Verb_CastAbilityJump</verbClass>
+      <label>jump</label>
+      <violent>false</violent>
+      <forceNormalTimeSpeed>false</forceNormalTimeSpeed>
+      <warmupTime>0.5</warmupTime>
+      <minRange>1.9</minRange>
+      <range>11.9</range>
+      <requireLineOfSight>true</requireLineOfSight>
+	  <warmupEffecter>JumpWarmupEffect</warmupEffecter>
+	  <flightEffecterDef>JumpFlightEffect</flightEffecterDef>
+	  <soundLanding>JumpPackLand</soundLanding>
+      <flyWithCarriedThing>false</flyWithCarriedThing>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>false</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+  </AbilityDef>
+  
+  <AbilityDef>
+    <defName>MechPlaceShield</defName>
+    <label>deploy high-angle shield</label>
+    <description>Consume 20% of the mechanoid's energy reserves to deploy a high angle shield that can be maintained for 30 seconds.</description>
+    <jobDef>CastAbilityOnThingWithoutWeapon</jobDef>
+    <iconPath>UI/Buttons/MechPlaceShield</iconPath>
+    <cooldownTicksRange>3600</cooldownTicksRange>
+	<stunTargetWhileCasting>True</stunTargetWhileCasting>
+    <targetRequired>false</targetRequired>
+    <displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+    <showCastingProgressBar>true</showCastingProgressBar>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <warmupEffecter>ConstructMetal</warmupEffecter>
+      <warmupTime>2</warmupTime>
+      <requireLineOfSight>false</requireLineOfSight>
+      <range>-1</range>   
+      <targetParams>
+        <canTargetSelf>true</canTargetSelf>
+		<canTargetPawns>false</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetAnimals>false</canTargetAnimals>
+        <canTargetHumans>false</canTargetHumans>
+        <canTargetMechs>false</canTargetMechs>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="GD3.CompProperties_PlaceShieldAbility"/>
+    </comps>
+  </AbilityDef>
+  
+  <!--===== Black Apocriton ======-->
+  <!-- 灵能彗星 -->
+  <AbilityDef>
+    <defName>BlackApocriton_Comet</defName>
+    <label>comet strike</label>
+	<jobDef>CastAbilityOnThingWithoutWeapon</jobDef>
+    <iconPath>UI/Reward_BlackMech</iconPath>
+    <cooldownTicksRange>520</cooldownTicksRange>
+	<aiCanUse>true</aiCanUse>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+	<disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+	<showWhenDrafted>false</showWhenDrafted>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <warmupTime>-1</warmupTime>
+      <requireLineOfSight>true</requireLineOfSight>
+      <range>59.9</range>
+      <drawAimPie>false</drawAimPie>
+      <targetParams>
+        <canTargetLocations>false</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>true</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="CompProperties_AbilityEffect">
+		<compClass>GD3.CompAbilityEffect_Comet</compClass>
+	  </li>
+    </comps>
+  </AbilityDef>
+  
+  <AbilityDef>
+    <defName>BlackApocriton_CometRain</defName>
+    <label>comet rain</label>
+	<jobDef>CastAbilityOnThingWithoutWeapon</jobDef>
+    <iconPath>UI/Reward_BlackMech</iconPath>
+    <cooldownTicksRange>1220</cooldownTicksRange>
+	<aiCanUse>true</aiCanUse>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+	<disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+	<showWhenDrafted>false</showWhenDrafted>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <warmupTime>-1</warmupTime>
+      <requireLineOfSight>false</requireLineOfSight>
+      <range>59.9</range>
+      <drawAimPie>false</drawAimPie>
+      <targetParams>
+        <canTargetLocations>false</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>true</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="CompProperties_AbilityEffect">
+		<compClass>GD3.CompAbilityEffect_CometRain</compClass>
+	  </li>
+    </comps>
+  </AbilityDef>
+  
+  <!-- 球状闪电 -->
+  <AbilityDef>
+    <defName>BlackApocriton_Thunder</defName>
+    <label>pocket thunder</label>
+	<jobDef>CastAbilityOnThingWithoutWeapon</jobDef>
+    <iconPath>UI/Reward_BlackMech</iconPath>
+    <cooldownTicksRange>900</cooldownTicksRange>
+	<aiCanUse>true</aiCanUse>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+	<disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+	<showWhenDrafted>false</showWhenDrafted>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <warmupTime>-1</warmupTime>
+      <requireLineOfSight>true</requireLineOfSight>
+      <range>39.9</range>
+      <drawAimPie>false</drawAimPie>
+      <targetParams>
+        <canTargetLocations>false</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>true</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="CompProperties_AbilityEffect">
+		<compClass>GD3.CompAbilityEffect_PocketThunder</compClass>
+	  </li>
+    </comps>
+  </AbilityDef>
+  
+  <!-- 闪电箭雨 -->
+  <AbilityDef>
+    <defName>BlackApocriton_Arrows</defName>
+    <label>thunder arrows</label>
+	<jobDef>CastAbilityOnThingWithoutWeapon</jobDef>
+    <iconPath>UI/Reward_BlackMech</iconPath>
+    <cooldownTicksRange>1400</cooldownTicksRange>
+	<aiCanUse>true</aiCanUse>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+	<disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+	<showWhenDrafted>false</showWhenDrafted>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <warmupTime>-1</warmupTime>
+      <requireLineOfSight>false</requireLineOfSight>
+      <range>49.9</range>
+      <drawAimPie>false</drawAimPie>
+      <targetParams>
+        <canTargetLocations>false</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>true</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="CompProperties_AbilityEffect">
+		<compClass>GD3.CompAbilityEffect_ThunderArrows</compClass>
+	  </li>
+    </comps>
+  </AbilityDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_RedThunderArrow</defName>
+    <label>thunder</label>
+	<thingClass>GD3.BezierProjectiles_Explosive</thingClass>
+    <graphicData>
+      <texPath>RedThunderArrow</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(0.6, 0.8)</drawSize>
+    </graphicData>
+    <projectile>
+      <damageDef>GDRedElec</damageDef>
+      <speed>22</speed>
+	  <damageAmountBase>55</damageAmountBase>
+	  <armorPenetrationBase>0.65</armorPenetrationBase>
+      <explosionRadius>2.9</explosionRadius>
+      <!-- <preExplosionSpawnSingleThingDef>Filth_BlastMark</preExplosionSpawnSingleThingDef> -->
+    </projectile>
+	<modExtensions>
+      <li Class="GD3.ModExt_BezierProjectiles">
+        <drawStartDelay>1</drawStartDelay> <!-- 延迟多少 Tick 后开始绘制尾迹 -->
+        <trailFleckDef>LineEMP_Red</trailFleckDef> <!-- 使用的尾迹粒子类型 -->
+        <trailThickness>0.450</trailThickness> <!-- 尾迹线条的粗细 -->
+        <probeStep>0.3</probeStep> <!-- 碰撞检测步长，越小越精确但性能越差 -->
+        <!-- 三阶贝塞尔 -->
+        <useCubieCurve>true</useCubieCurve> <!-- 启用三阶贝塞尔曲线的开关 -->
+        <enableRandomSide>true</enableRandomSide> <!-- 是否启用随机左右翻转 -->
+        <randomSideChance>0.5</randomSideChance> <!-- 触发翻转的概率（0~1） --> 
+        <randOffsetRange>
+          <min>-3.0</min> <!-- 控制点扰动偏移的最小值,这个值别太大，十几就顶天了！ -->
+          <max>3.0</max> <!-- 控制点扰动偏移的最大值,这个值别太大，十几就顶天了！ -->
+        </randOffsetRange>
+        <P1Offset>0.0</P1Offset> <!-- 控制点1 与起点的距离百分比（0 ~ 1之间），越大越靠近终点 -->
+        <P1Side>12.0</P1Side>   <!-- 控制点1 向左（或右）偏移的距离，值越大弯曲越强 -->
+        <P2Offset>0.0</P2Offset> <!-- 控制点2 与起点的距离百分比（0 ~ 1之间），通常应 > P1Offset -->
+        <P2Side>7.5</P2Side>  <!-- 控制点2 向右（或左）偏移的距离，符号决定弯曲方向 -->
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+</Defs>

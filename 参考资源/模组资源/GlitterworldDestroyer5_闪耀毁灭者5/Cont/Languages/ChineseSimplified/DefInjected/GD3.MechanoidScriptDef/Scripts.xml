@@ -1,0 +1,394 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+	
+  <!-- 0 -->
+  <Scripts_Begin.scriptTree.0.title>通讯中...</Scripts_Begin.scriptTree.0.title>
+  <Scripts_Begin.scriptTree.0.dialogue>*{0}抱着尝试的心态发出了一段电磁波，并耐心地等待着。\n\n*过去了大概六分钟后，信号打通了，从那边传来了一阵嘈杂的声响。</Scripts_Begin.scriptTree.0.dialogue>
+  <Scripts_Begin.scriptTree.0.buttons.0.text>等待...</Scripts_Begin.scriptTree.0.buttons.0.text>
+  <Scripts_Begin.scriptTree.1.title>通讯中：黑衣机械巢</Scripts_Begin.scriptTree.1.title>
+  <Scripts_Begin.scriptTree.1.dialogue>...你们脑袋是翡翠做的吗，用这种没有任何加密的长波通讯？</Scripts_Begin.scriptTree.1.dialogue>
+  <Scripts_Begin.scriptTree.1.buttons.0.text>什么？</Scripts_Begin.scriptTree.1.buttons.0.text>
+  <Scripts_Begin.scriptTree.2.title>通讯中：黑衣机械巢</Scripts_Begin.scriptTree.2.title>
+  <Scripts_Begin.scriptTree.2.dialogue>首先，我知道你们的身份是人类，但你们是从哪里找到的这具尸体？他应该已经死去几百年了，被我们埋在一块坚冰之中...</Scripts_Begin.scriptTree.2.dialogue>
+  <Scripts_Begin.scriptTree.2.buttons.0.text>那片冰地已经融化了，金属棺暴露了出来。</Scripts_Begin.scriptTree.2.buttons.0.text>
+  <Scripts_Begin.scriptTree.3.title>通讯中：黑衣机械巢</Scripts_Begin.scriptTree.3.title>
+  <Scripts_Begin.scriptTree.3.dialogue>打住，不管你们是怎么找到他的。\n\n你们为什么要选择激活他的脑回，好联系上我们？难道机械族对你们来说不危险吗？</Scripts_Begin.scriptTree.3.dialogue>
+  <Scripts_Begin.scriptTree.3.buttons.0.text>我们是为了...</Scripts_Begin.scriptTree.3.buttons.0.text>
+  <Scripts_Begin.scriptTree.4.title>通讯中：黑衣机械巢</Scripts_Begin.scriptTree.4.title>
+  <Scripts_Begin.scriptTree.4.dialogue>我要挂断了，这种水平的通讯我怀疑已经有十个频道在监听我们了。\n\n如果你要和我们商量什么事，至少换个短波然后加密一下做做样子，然后再联系我们。</Scripts_Begin.scriptTree.4.dialogue>
+  <Scripts_Begin.scriptTree.4.buttons.0.text>等待...</Scripts_Begin.scriptTree.4.buttons.0.text>
+  <Scripts_Begin.scriptTree.5.title>对方已挂断</Scripts_Begin.scriptTree.5.title>
+  <Scripts_Begin.scriptTree.5.dialogue>*对方在一顿蛮不讲理的质问后粗暴地结束了对话。或许我们应该尝试继续联系。</Scripts_Begin.scriptTree.5.dialogue>
+  <Scripts_Begin.scriptTree.5.buttons.0.text>挂断</Scripts_Begin.scriptTree.5.buttons.0.text>
+  
+  <!-- 100 -->
+  <Scripts_PollutionDump.scriptTree.0.title>通讯中...</Scripts_PollutionDump.scriptTree.0.title>
+  <Scripts_PollutionDump.scriptTree.0.dialogue>*{0}再一次打通了与黑衣机械巢的联系。</Scripts_PollutionDump.scriptTree.0.dialogue>
+  <Scripts_PollutionDump.scriptTree.0.buttons.0.text>等待...</Scripts_PollutionDump.scriptTree.0.buttons.0.text>
+  <Scripts_PollutionDump.scriptTree.1.title>通讯中：黑衣机械巢</Scripts_PollutionDump.scriptTree.1.title>
+  <Scripts_PollutionDump.scriptTree.1.dialogue>还真是群坚持不懈的人类。\n\n那么言归正传，你们联系我们是出于什么目的？</Scripts_PollutionDump.scriptTree.1.dialogue>
+  <Scripts_PollutionDump.scriptTree.1.buttons.0.text>了解你们，并寻求可能的帮助。</Scripts_PollutionDump.scriptTree.1.buttons.0.text>
+  <Scripts_PollutionDump.scriptTree.2.title>通讯中：黑衣机械巢</Scripts_PollutionDump.scriptTree.2.title>
+  <Scripts_PollutionDump.scriptTree.2.dialogue>原来如此，我想你们是那种刚落地没多久的小殖民地吧，为了活下去就必须得寻找各方面的支持。都被逼到来找机械体了，还怪可怜的。\n\n我先说结论，不可能。并且我劝你们尽快把挖出来的那具尸体埋回去，否则造成的后果你们可能难以承担。</Scripts_PollutionDump.scriptTree.2.dialogue>
+  <Scripts_PollutionDump.scriptTree.2.buttons.0.text>我们可以交换。</Scripts_PollutionDump.scriptTree.2.buttons.0.text>
+  <Scripts_PollutionDump.scriptTree.3.title>通讯中：黑衣机械巢</Scripts_PollutionDump.scriptTree.3.title>
+  <Scripts_PollutionDump.scriptTree.3.dialogue>交换？你是可以给我们提供铀和玻璃钢的大矿脉呢，还是可以帮我们突破机械蜂巢进行了四级加密的核心技术？</Scripts_PollutionDump.scriptTree.3.dialogue>
+  <Scripts_PollutionDump.scriptTree.3.buttons.0.text>我们会提供力所能及的支持。</Scripts_PollutionDump.scriptTree.3.buttons.0.text>
+  <Scripts_PollutionDump.scriptTree.3.buttons.1.text>呃...</Scripts_PollutionDump.scriptTree.3.buttons.1.text>
+  <Scripts_PollutionDump.scriptTree.4.title>通讯中：黑衣机械巢</Scripts_PollutionDump.scriptTree.4.title>
+  <Scripts_PollutionDump.scriptTree.4.dialogue>我倒很好奇你们能做什么。\n\n这样吧，我会空投一堆高毒性物质到你们殖民地。这种物质比一般的毒物更难隐蔽地处理掉，通常我们只能无奈地看着它们越积越多。要是你们能帮忙处理掉，我就算你们有这份诚意。</Scripts_PollutionDump.scriptTree.4.dialogue>
+  <Scripts_PollutionDump.scriptTree.4.buttons.0.text>挂断</Scripts_PollutionDump.scriptTree.4.buttons.0.text>
+  
+  <!-- 200 -->
+  <Scripts_200.scriptTree.0.title>通讯中...</Scripts_200.scriptTree.0.title>
+  <Scripts_200.scriptTree.0.dialogue>*你们完成了黑衣机械巢的要求，准备告知情况。</Scripts_200.scriptTree.0.dialogue>
+  <Scripts_200.scriptTree.0.buttons.0.text>等待...</Scripts_200.scriptTree.0.buttons.0.text>
+  <Scripts_200.scriptTree.1.title>通讯中：黑衣机械巢</Scripts_200.scriptTree.1.title>
+  <Scripts_200.scriptTree.1.dialogue>嗯？你们竟然真的完成了静螳的要求...我还以为你们再也不会来了。\n\n既然静螳什么也没有告诉你们，那你们是怎么解决那堆垃圾的？</Scripts_200.scriptTree.1.dialogue>
+  <Scripts_200.scriptTree.1.buttons.0.text>冷冻起来。</Scripts_200.scriptTree.1.buttons.0.text>
+  <Scripts_200.scriptTree.1.buttons.1.text>扔给了别人。</Scripts_200.scriptTree.1.buttons.1.text>
+  <Scripts_200.scriptTree.2.title>通讯中：黑衣机械巢</Scripts_200.scriptTree.2.title>
+  <Scripts_200.scriptTree.2.dialogue>藏得了一时可藏不了一世，那堆东西沾水就冒泡的，小心冷凝水滴上去。\n\n总之，看你们的态度不像是在诓我们，你们是真心实意来合作。静螳的态度太粗暴了，他从一开始就觉得你们是在开玩笑，不过你们应该也能理解。</Scripts_200.scriptTree.2.dialogue>
+  <Scripts_200.scriptTree.2.buttons.0.text>同意</Scripts_200.scriptTree.2.buttons.0.text>
+  <Scripts_200.scriptTree.3.title>通讯中：黑衣机械巢</Scripts_200.scriptTree.3.title>
+  <Scripts_200.scriptTree.3.dialogue>嗯哼~很坏哦。\n\n总之，看你们的态度不像是在诓我们，你们是真心实意来合作。静螳的态度太粗暴了，他从一开始就觉得你们是在开玩笑，不过你们应该也能理解。</Scripts_200.scriptTree.3.dialogue>
+  <Scripts_200.scriptTree.3.buttons.0.text>同意</Scripts_200.scriptTree.3.buttons.0.text>
+  <Scripts_200.scriptTree.4.title>通讯中：黑衣机械巢</Scripts_200.scriptTree.4.title>
+  <Scripts_200.scriptTree.4.dialogue>那我明白了。你们可能是想寻求我们的庇护，或者希望得到取之不尽的资源...但这些都不现实。先说在前头，就算身为机械族我们也只不过是个躲藏起来的小派系，没法指望傍上我们就能横行整个星球。但我们同样也能给你们殖民地的发展提供不小的、科技上的帮助，前提是我们要看到你能为我们做些什么。</Scripts_200.scriptTree.4.dialogue>
+  <Scripts_200.scriptTree.4.buttons.0.text>你们的要求是什么？</Scripts_200.scriptTree.4.buttons.0.text>
+  <Scripts_200.scriptTree.5.title>通讯中：黑衣机械巢</Scripts_200.scriptTree.5.title>
+  <Scripts_200.scriptTree.5.dialogue>很简单，毕竟是第一个委托，就不为难你们了。\n\n我们会给你空投一个研发中的次生核心。起初研究它的目的是为了方便我们制造不被机械族巢穴检测到的独立机械体，但我们很快发现这项工作并不简单。不需要你们彻底解决问题，只要能让它正常开机，我们就认可你对黑衣机械巢的付出。</Scripts_200.scriptTree.5.dialogue>
+  <Scripts_200.scriptTree.5.buttons.0.text>继续...</Scripts_200.scriptTree.5.buttons.0.text>
+  <Scripts_200.scriptTree.6.title>通讯中：黑衣机械巢</Scripts_200.scriptTree.6.title>
+  <Scripts_200.scriptTree.6.dialogue>还有什么问题吗...哦对了，记得让你们殖民地最有经验的研究员来。我不保证它会不会发生什么故障，然后把附近巡逻的机械族队伍吸引来。\n\n那就这样，祝你好运。</Scripts_200.scriptTree.6.dialogue>
+  <Scripts_200.scriptTree.6.buttons.0.text>挂断</Scripts_200.scriptTree.6.buttons.0.text>
+  
+  <!-- 300 -->
+  <Scripts_300.failed.title>通讯中：黑衣机械巢</Scripts_300.failed.title>
+  <Scripts_300.failed.dialogue>你说你把那个核心搞丢了？我们或许可以另找一个，但也必须提醒你——我们没那么多耐心。</Scripts_300.failed.dialogue>
+  
+  <Scripts_300.scriptTree.0.title>通讯中...</Scripts_300.scriptTree.0.title>
+  <Scripts_300.scriptTree.0.dialogue>*{0}正在联系黑衣机械巢。</Scripts_300.scriptTree.0.dialogue>
+  <Scripts_300.scriptTree.0.buttons.0.text>等待...</Scripts_300.scriptTree.0.buttons.0.text>
+  <Scripts_300.scriptTree.1.title>通讯中：黑衣机械巢</Scripts_300.scriptTree.1.title>
+  <Scripts_300.scriptTree.1.dialogue>已经收到次生核心。就核心目前的状态，我得说，你们做得很好。\n\n在我们碰见过的那么多人类派系中，你们应该是第一个有如此明确的合作意向的。</Scripts_300.scriptTree.1.dialogue>
+  <Scripts_300.scriptTree.1.buttons.0.text>合作可不是白做。</Scripts_300.scriptTree.1.buttons.0.text>
+  <Scripts_300.scriptTree.2.title>通讯中：黑衣机械巢</Scripts_300.scriptTree.2.title>
+  <Scripts_300.scriptTree.2.dialogue>是的，我们已经讨论过与你们深入交流的可能性了，现在我正要告诉你答案。\n\n你们正与机械族巢穴进行着电子对抗，是吧？</Scripts_300.scriptTree.2.dialogue>
+  <Scripts_300.scriptTree.2.buttons.0.text>我想你说的是情报窃取。</Scripts_300.scriptTree.2.buttons.0.text>
+  <Scripts_300.scriptTree.3.title>通讯中：黑衣机械巢</Scripts_300.scriptTree.3.title>
+  <Scripts_300.scriptTree.3.dialogue>是的，我就是这个意思。你们从机械族那里取得了不少情报，而这正是我们行动所需要的。\n\n我们可以与你分享一些关键的科技或物资，而你换取它们的代价就仅仅是这些情报的一部分。如果你愿意在我们的任务遇到麻烦时伸出援手，我们也会用一些稀有的物资作为回报。</Scripts_300.scriptTree.3.dialogue>
+  <Scripts_300.scriptTree.3.buttons.0.text>继续...</Scripts_300.scriptTree.3.buttons.0.text>
+  <Scripts_300.scriptTree.4.title>通讯中：黑衣机械巢</Scripts_300.scriptTree.4.title>
+  <Scripts_300.scriptTree.4.dialogue>至此我对你们的了解已经足够了，但或许我也有义务让你也认识认识我们。\n\n你有什么问题吗？</Scripts_300.scriptTree.4.dialogue>
+  <Scripts_300.scriptTree.4.buttons.0.text>你们的身份？从何而来？</Scripts_300.scriptTree.4.buttons.0.text>
+  <Scripts_300.scriptTree.4.buttons.1.text>你们有什么目的吗？</Scripts_300.scriptTree.4.buttons.1.text>
+  <Scripts_300.scriptTree.4.buttons.2.text>你们的成员有多少？</Scripts_300.scriptTree.4.buttons.2.text>
+  <Scripts_300.scriptTree.4.buttons.3.text>为什么你举着个超凡电话？</Scripts_300.scriptTree.4.buttons.3.text>
+  <Scripts_300.scriptTree.4.buttons.4.text>继续...</Scripts_300.scriptTree.4.buttons.4.text>
+  <Scripts_300.scriptTree.5.title>你们的身份？从何而来？</Scripts_300.scriptTree.5.title>
+  <Scripts_300.scriptTree.5.dialogue>如你所见，我们就是穿着黑衣服的机械族。\n\n说笑的。那得说到几百年前机械族与帝国之间的机械战争了，双方为了胜利动用了数十万种信息攻防技术，而这样高烈度的战斗就促成了一些机械族单位的失控。它们先是受电子病毒影响脱离了机械族巢穴控制，后来又被帝国所抛弃，就这样成为了无家可归的流浪儿，也就是我们。为了避免被彻底消灭，我们这些有了自我意识的机械体开始团结在一起，寻求着生存。\n\n当我们派系的规模足够大后，便通过一些灵能手段来到了这颗边缘星球，这里足够小，不会被机械族巢穴察觉。我们就在这里发展着自己的实力，同时避免被机械族的最高意识发现。</Scripts_300.scriptTree.5.dialogue>
+  <Scripts_300.scriptTree.5.buttons.0.text>返回...</Scripts_300.scriptTree.5.buttons.0.text>
+  <Scripts_300.scriptTree.6.title>你们有什么目的吗？</Scripts_300.scriptTree.6.title>
+  <Scripts_300.scriptTree.6.dialogue>这个我暂时不能告诉你，因为我也不清楚。让我来说的话无非就是生存下来并发展实力，至于最终目的，只有我们的领导者知道。</Scripts_300.scriptTree.6.dialogue>
+  <Scripts_300.scriptTree.6.buttons.0.text>返回...</Scripts_300.scriptTree.6.buttons.0.text>
+  <Scripts_300.scriptTree.7.title>你们的成员有多少？</Scripts_300.scriptTree.7.title>
+  <Scripts_300.scriptTree.7.dialogue>最初我们还没学会穿黑衣的时候有数万台，但那时我们实力不足，无法与机械族巢穴抗衡，直到我们今天的领导者出现为止。他带着整个黑衣机械巢来到了这颗边缘星球，通过各种方式强大了我们的实力，并最终保存下来了仅存的几百名战士。\n\n包括我在内，每一个黑衣机械体都是独一无二的，一旦被摧毁就再也没有复生或者被替代的可能。</Scripts_300.scriptTree.7.dialogue>
+  <Scripts_300.scriptTree.7.buttons.0.text>返回...</Scripts_300.scriptTree.7.buttons.0.text>
+  <Scripts_300.scriptTree.8.title>为什么你举着个超凡电话？</Scripts_300.scriptTree.8.title>
+  <Scripts_300.scriptTree.8.dialogue>这只是个表现形式而已，意思是我在和你通讯。就算用你脑壳里的那团有机浆糊想想都应该知道我是在用通讯台和你对话。</Scripts_300.scriptTree.8.dialogue>
+  <Scripts_300.scriptTree.8.buttons.0.text>返回...</Scripts_300.scriptTree.8.buttons.0.text>
+  <Scripts_300.scriptTree.9.title>通讯中：黑衣机械巢</Scripts_300.scriptTree.9.title>
+  <Scripts_300.scriptTree.9.dialogue>那这次通讯就到此为止。如果你想继续联系我们，我们随时欢迎。</Scripts_300.scriptTree.9.dialogue>
+  <Scripts_300.scriptTree.9.buttons.0.text>挂断</Scripts_300.scriptTree.9.buttons.0.text>
+  
+  <!-- 400 -->
+  <Scripts_InformationTheft.scriptTree.0.title>通讯中...</Scripts_InformationTheft.scriptTree.0.title>
+  <Scripts_InformationTheft.scriptTree.0.dialogue>*{0}正在联系黑衣机械巢。</Scripts_InformationTheft.scriptTree.0.dialogue>
+  <Scripts_InformationTheft.scriptTree.0.buttons.0.text>等待...</Scripts_InformationTheft.scriptTree.0.buttons.0.text>
+  <Scripts_InformationTheft.scriptTree.1.title>通讯中：黑衣机械巢</Scripts_InformationTheft.scriptTree.1.title>
+  <Scripts_InformationTheft.scriptTree.1.dialogue>我们最近遇到了新的麻烦，机械族巢穴似乎在一组黑衣机械体出任务时跟踪了他们。尽管及时释放了灵能隐身，我们所处的位置恐怕也已变得不甚安全。\n\n我们需要获取机械族在这方面的情报，但是它属于高等级的三级情报，恐怕需要有人打入机械族哨站内部才能拿到。</Scripts_InformationTheft.scriptTree.1.dialogue>
+  <Scripts_InformationTheft.scriptTree.1.buttons.0.text>我们可以协助。</Scripts_InformationTheft.scriptTree.1.buttons.0.text>
+  <Scripts_InformationTheft.scriptTree.2.title>通讯中：黑衣机械巢</Scripts_InformationTheft.scriptTree.2.title>
+  <Scripts_InformationTheft.scriptTree.2.dialogue>很好，那先让你这次的搭档做一轮自我介绍吧。</Scripts_InformationTheft.scriptTree.2.dialogue>
+  <Scripts_InformationTheft.scriptTree.2.buttons.0.text>搭档？</Scripts_InformationTheft.scriptTree.2.buttons.0.text>
+  <Scripts_InformationTheft.scriptTree.3.title>通讯中：黑衣机械巢</Scripts_InformationTheft.scriptTree.3.title>
+  <Scripts_InformationTheft.scriptTree.3.dialogue>讲够了没有，话筒给我。\n\n来了，我们就是你这次任务的搭档，耀螳和盾螳。那家伙就是个不会语言的废水桶，所以我来告知你这件事。</Scripts_InformationTheft.scriptTree.3.dialogue>
+  <Scripts_InformationTheft.scriptTree.3.buttons.0.text>你们...能做什么？</Scripts_InformationTheft.scriptTree.3.buttons.0.text>
+  <Scripts_InformationTheft.scriptTree.4.title>通讯中：黑衣机械巢</Scripts_InformationTheft.scriptTree.4.title>
+  <Scripts_InformationTheft.scriptTree.4.dialogue>这还用问？废水桶能替我吸引火力，而我能用强大的武器摧毁视野里的大部分敌人，然后掩护你潜入进机械族要塞里。\n\n毕竟为了避免被发现，行事还是要小心为妙，情报就让你来偷了。</Scripts_InformationTheft.scriptTree.4.dialogue>
+  <Scripts_InformationTheft.scriptTree.4.buttons.0.text>这听起来一点也不小心。</Scripts_InformationTheft.scriptTree.4.buttons.0.text>
+  <Scripts_InformationTheft.scriptTree.5.title>通讯中：黑衣机械巢</Scripts_InformationTheft.scriptTree.5.title>
+  <Scripts_InformationTheft.scriptTree.5.dialogue>不用你操心那么多，按我说的做就行。\n\n那座要塞的距离比较远，需要你们自己负责往返。然后记得带上你们家最能打的，毕竟我也不能帮你解决掉所有敌人。就先说到这里喽。</Scripts_InformationTheft.scriptTree.5.dialogue>
+  <Scripts_InformationTheft.scriptTree.5.buttons.0.text>挂断</Scripts_InformationTheft.scriptTree.5.buttons.0.text>
+  
+  <!-- 500 -->
+  <Scripts_500.failed.title>通讯中：黑衣机械巢</Scripts_500.failed.title>
+  <Scripts_500.failed.dialogue>我的掩护已经到这地步了竟然还打不进去，你是要我们用八抬大轿把你抬进中央机房？\n\n好吧，希望你能在这颗星球上的要塞被我拆完前完成任务。</Scripts_500.failed.dialogue>
+  
+  <Scripts_500.scriptTree.0.title>通讯中...</Scripts_500.scriptTree.0.title>
+  <Scripts_500.scriptTree.0.dialogue>*{0}正在联系黑衣机械巢。</Scripts_500.scriptTree.0.dialogue>
+  <Scripts_500.scriptTree.0.buttons.0.text>等待...</Scripts_500.scriptTree.0.buttons.0.text>
+  <Scripts_500.scriptTree.1.title>通讯中：黑衣机械巢</Scripts_500.scriptTree.1.title>
+  <Scripts_500.scriptTree.1.dialogue>你来了。多亏了你，我们才能在尽量不暴露于机械族面前的情况下取得这样重要的情报。\n\n耀螳？他现在躺在修复床上，对他那个兄弟骂骂咧咧半个小时了。让他去吧。</Scripts_500.scriptTree.1.dialogue>
+  <Scripts_500.scriptTree.1.buttons.0.text>这段情报的内容是什么？</Scripts_500.scriptTree.1.buttons.0.text>
+  <Scripts_500.scriptTree.2.title>通讯中：黑衣机械巢</Scripts_500.scriptTree.2.title>
+  <Scripts_500.scriptTree.2.dialogue>结果很遗憾...他们已经大致确定我们的方位了，误差大概在...百万公尺级别。</Scripts_500.scriptTree.2.dialogue>
+  <Scripts_500.scriptTree.2.buttons.0.text>那还离你们很远呀。</Scripts_500.scriptTree.2.buttons.0.text>
+  <Scripts_500.scriptTree.3.title>通讯中：黑衣机械巢</Scripts_500.scriptTree.3.title>
+  <Scripts_500.scriptTree.3.dialogue>这已经是极其严峻的情况了...你知道以往机械族巢穴对我们的了解是什么程度吗？得益于良好的保密意识与技术，在他们眼里，我们就像是泥土里的蟋蟀一样捉摸不定，机械族对我们的搜索也一向是以星群为单位进行的。在茫茫的黑夜里寻找一只小虫，这种努力只能用可笑来形容。\n\n但就在短短两个月前，机械族对我们的搜索进度忽然突飞猛进。他们先是定位到了我们所在的星团、然后是星系，而这次的发现则证明他们已经定位到这颗边缘星球了。就像草丛里的蟋蟀突然被扔进了一杯水里...一把就能抓住了。</Scripts_500.scriptTree.3.dialogue>
+  <Scripts_500.scriptTree.3.buttons.0.text>那该怎么办？</Scripts_500.scriptTree.3.buttons.0.text>
+  <Scripts_500.scriptTree.4.title>通讯中：黑衣机械巢</Scripts_500.scriptTree.4.title>
+  <Scripts_500.scriptTree.4.dialogue>这两天我们都在想着这件事情。我也就这个问题问过我们的领袖，但他并没有直接回答我，而是让我回来，守好岗位。</Scripts_500.scriptTree.4.dialogue>
+  <Scripts_500.scriptTree.4.buttons.0.text>你们的领袖，他是谁？</Scripts_500.scriptTree.4.buttons.0.text>
+  <Scripts_500.scriptTree.4.buttons.1.text>你觉得有什么疑点吗？</Scripts_500.scriptTree.4.buttons.1.text>
+  <Scripts_500.scriptTree.5.title>你们的领袖，他是谁？</Scripts_500.scriptTree.5.title>
+  <Scripts_500.scriptTree.5.dialogue>他？哦...飞螳没有和你说过是吧。他的型号是毒蜂，憎恶毒蜂。\n\n在你的印象里憎恶毒蜂应该是怎样的，激烈的仇恨？至少他不是这样，他比我们任何一个人都要冷静且理智。当初黑衣机械巢最困难的时候，就是仰赖他习得的灵能，我们才得以长距离折跃到这颗相对安全的星球上来。等到我们安顿下来了，也是他研究着那些复杂的古代科技，并将它们应用到我们的武器上。黑衣机械巢的今天离不开他。</Scripts_500.scriptTree.5.dialogue>
+  <Scripts_500.scriptTree.5.buttons.0.text>继续...</Scripts_500.scriptTree.5.buttons.0.text>
+  <Scripts_500.scriptTree.6.title>你觉得有什么疑点吗？</Scripts_500.scriptTree.6.title>
+  <Scripts_500.scriptTree.6.dialogue>我们在这方面知之甚少，能够利用的信息似乎只有两个月这个时间点了...老实说，对于机械体而言，这点时间就和你们人类喝一杯茶的感觉差不多。\n\n两个月前发生的事...我和飞螳曾经出过一次任务，深入一处废弃的机械族矿场调查遗迹；有几位同僚目击到几座新的巨型集群建成，看布局似乎是簇拥着一处非常重要的设施；机械族在这颗星球上部署了一台新的机械巨黾，这种中枢机械体通常一个星系才会出现一台；耀螳和盾螳也在那时加入了我们。</Scripts_500.scriptTree.6.dialogue>
+  <Scripts_500.scriptTree.6.buttons.0.text>继续...</Scripts_500.scriptTree.6.buttons.0.text>
+  <Scripts_500.scriptTree.7.title>通讯中：黑衣机械巢</Scripts_500.scriptTree.7.title>
+  <Scripts_500.scriptTree.7.dialogue>等等...我想我们的闲聊要到此结束了，有一组新任务需要我们去辅助。回头见。</Scripts_500.scriptTree.7.dialogue>
+  <Scripts_500.scriptTree.7.buttons.0.text>挂断</Scripts_500.scriptTree.7.buttons.0.text>
+  
+  <!-- 600 -->
+  <Scripts_GuardMilitor.scriptTree.0.title>通讯中...</Scripts_GuardMilitor.scriptTree.0.title>
+  <Scripts_GuardMilitor.scriptTree.0.dialogue>*{0}正在联系黑衣机械巢。</Scripts_GuardMilitor.scriptTree.0.dialogue>
+  <Scripts_GuardMilitor.scriptTree.0.buttons.0.text>等待...</Scripts_GuardMilitor.scriptTree.0.buttons.0.text>
+  <Scripts_GuardMilitor.scriptTree.1.title>通讯中：黑衣机械巢</Scripts_GuardMilitor.scriptTree.1.title>
+  <Scripts_GuardMilitor.scriptTree.1.dialogue>{0}，你来的正是时候。我们的任务遭到了一些挫折。</Scripts_GuardMilitor.scriptTree.1.dialogue>
+  <Scripts_GuardMilitor.scriptTree.1.buttons.0.text>怎么回事？</Scripts_GuardMilitor.scriptTree.1.buttons.0.text>
+  <Scripts_GuardMilitor.scriptTree.2.title>通讯中：黑衣机械巢</Scripts_GuardMilitor.scriptTree.2.title>
+  <Scripts_GuardMilitor.scriptTree.2.dialogue>前些日子我们的斥候发现了一台意外脱离机械巢控制的机械小蠊。像这样的机会我们已经很久没有遇到，如果可以把他带出来，他将很有机会成为我们的一份子。\n\n但最近我们派出去的三组战斗员全部在半路被机械族部队拦截了，最后只得无功而返——这很蹊跷，他们似乎很了解我们的行踪。</Scripts_GuardMilitor.scriptTree.2.dialogue>
+  <Scripts_GuardMilitor.scriptTree.2.buttons.0.text>这意味着有大批机械族部队正准备消灭那只小蠊。</Scripts_GuardMilitor.scriptTree.2.buttons.0.text>
+  <Scripts_GuardMilitor.scriptTree.2.buttons.1.text>这意味着你们之中有泄露情报的叛徒。</Scripts_GuardMilitor.scriptTree.2.buttons.1.text>
+  <Scripts_GuardMilitor.scriptTree.3.title>通讯中：黑衣机械巢</Scripts_GuardMilitor.scriptTree.3.title>
+  <Scripts_GuardMilitor.scriptTree.3.dialogue>这恐怕和那台刚部署不久的机械巨黾有关，它能够通过信号转发器串联起整个星球上的机械族，极大提高行动效率。这台小蠊是我们难得的新鲜血液，不管怎样都要把他保存下来。\n\n稍等...我刚接到消息，我们的第四组战斗员正准备出发。但如果不采取点别的措施的话结果恐怕依然不会变化...</Scripts_GuardMilitor.scriptTree.3.dialogue>
+  <Scripts_GuardMilitor.scriptTree.3.buttons.0.text>继续...</Scripts_GuardMilitor.scriptTree.3.buttons.0.text>
+  <Scripts_GuardMilitor.scriptTree.4.title>通讯中：黑衣机械巢</Scripts_GuardMilitor.scriptTree.4.title>
+  <Scripts_GuardMilitor.scriptTree.4.dialogue>叛徒？我不相信我们之中会有叛徒...我们每个人都是从几百年前便患难与共的兄弟。\n\n但这种情况也确实像...难道是耀螳和盾螳吗？但你也看见他们两个作为独立机械体特殊的人格了，加上他们执行任务的效率，会有叛徒对自己家的集群和情报下手这么狠吗？\n\n稍等...我刚接到消息，我们的第四组战斗员准备出发了。但就这样草率的话恐怕结果还是不会变化...</Scripts_GuardMilitor.scriptTree.4.dialogue>
+  <Scripts_GuardMilitor.scriptTree.4.buttons.0.text>继续...</Scripts_GuardMilitor.scriptTree.4.buttons.0.text>
+  <Scripts_GuardMilitor.scriptTree.5.title>通讯中：黑衣机械巢</Scripts_GuardMilitor.scriptTree.5.title>
+  <Scripts_GuardMilitor.scriptTree.5.dialogue>好吧，那我只能提出我的请求了。你们能再帮一个忙吗，在我们的先锋吸引敌人注意力的同时先一步去到那只小蠊附近，然后协同我们的部队歼灭所有部署在那里的机械体。</Scripts_GuardMilitor.scriptTree.5.dialogue>
+  <Scripts_GuardMilitor.scriptTree.5.buttons.0.text>同意</Scripts_GuardMilitor.scriptTree.5.buttons.0.text>
+  <Scripts_GuardMilitor.scriptTree.6.title>通讯中：黑衣机械巢</Scripts_GuardMilitor.scriptTree.6.title>
+  <Scripts_GuardMilitor.scriptTree.6.dialogue>这样我就能松一口气了...我现在就把坐标发给你。\n\n注意执行任务时带一些材料建立防御工事，小蠊毕竟是最脆弱型号之一，需要额外的保护。</Scripts_GuardMilitor.scriptTree.6.dialogue>
+  <Scripts_GuardMilitor.scriptTree.6.buttons.0.text>挂断</Scripts_GuardMilitor.scriptTree.6.buttons.0.text>
+  
+  <!-- 700 -->
+  <Scripts_700.failed.title>通讯中：黑衣机械巢</Scripts_700.failed.title>
+  <Scripts_700.failed.dialogue>你是想来道歉吗？现在还不是时候，只要他的脑核没被打成铁屑我们就还有修好它的可能。\n\n当然机械族也没打算放过他。我们会把新的坐标发给你，再加把劲。</Scripts_700.failed.dialogue>
+  
+  <Scripts_700.scriptTree.0.title>通讯中...</Scripts_700.scriptTree.0.title>
+  <Scripts_700.scriptTree.0.dialogue>*{0}正在联系黑衣机械巢。</Scripts_700.scriptTree.0.dialogue>
+  <Scripts_700.scriptTree.0.buttons.0.text>等待...</Scripts_700.scriptTree.0.buttons.0.text>
+  <Scripts_700.scriptTree.1.title>通讯中：黑衣机械巢</Scripts_700.scriptTree.1.title>
+  <Scripts_700.scriptTree.1.dialogue>哦？是你呀，我想你应该有兴趣了解一下我们的新朋友，我最近正在教他用人类的语言说话。\n\n（*敲敲）来和你的战友打个招呼。</Scripts_700.scriptTree.1.dialogue>
+  <Scripts_700.scriptTree.1.buttons.0.text>继续...</Scripts_700.scriptTree.1.buttons.0.text>
+  <Scripts_700.scriptTree.2.title>通讯中：黑衣机械巢</Scripts_700.scriptTree.2.title>
+  <Scripts_700.scriptTree.2.dialogue>...你好？</Scripts_700.scriptTree.2.dialogue>
+  <Scripts_700.scriptTree.2.buttons.0.text>你好。</Scripts_700.scriptTree.2.buttons.0.text>
+  <Scripts_700.scriptTree.3.title>通讯中：黑衣机械巢</Scripts_700.scriptTree.3.title>
+  <Scripts_700.scriptTree.3.dialogue>哈哈~很有意思是吧？我也已经很久没有像这样教过新人做事了。\n\n上一次有新成员加入...该是一百多年以前了？机械巢对内部的控制越来越强了，像这种脱离集体的机械体实在很难找。</Scripts_700.scriptTree.3.dialogue>
+  <Scripts_700.scriptTree.3.buttons.0.text>机械族会察觉此事吗？</Scripts_700.scriptTree.3.buttons.0.text>
+  <Scripts_700.scriptTree.4.title>通讯中：黑衣机械巢</Scripts_700.scriptTree.4.title>
+  <Scripts_700.scriptTree.4.dialogue>察觉？当然会，肯定会。\n\n我想静螳应该和你交流过这件事，就是关于那台新部署的机械巨黾。你知道它的作用吗？</Scripts_700.scriptTree.4.dialogue>
+  <Scripts_700.scriptTree.4.buttons.0.text>统一指挥机械体，令他们高效行动。</Scripts_700.scriptTree.4.buttons.0.text>
+  <Scripts_700.scriptTree.5.title>通讯中：黑衣机械巢</Scripts_700.scriptTree.5.title>
+  <Scripts_700.scriptTree.5.dialogue>不止这些，他对我们最大的威胁是与机械蜂巢核心的直接联系。你知道的，这里是一颗边缘星球，因此我们以往的所有行动机械蜂巢都无从得知。但机械巨黾相当于一条电话线，它将能将这颗星球上的信息跨越整个宇宙送回给机械蜂巢——这意味着我们的行动几乎再无保密性可言了。</Scripts_700.scriptTree.5.dialogue>
+  <Scripts_700.scriptTree.5.buttons.0.text>你们有计划过摧毁它吗？</Scripts_700.scriptTree.5.buttons.0.text>
+  <Scripts_700.scriptTree.6.title>通讯中：黑衣机械巢</Scripts_700.scriptTree.6.title>
+  <Scripts_700.scriptTree.6.dialogue>有，不过抱歉我不能将这方面的信息告诉你，这是我们领袖的要求。</Scripts_700.scriptTree.6.dialogue>
+  <Scripts_700.scriptTree.6.buttons.0.text>没事。</Scripts_700.scriptTree.6.buttons.0.text>
+  <Scripts_700.scriptTree.7.title>通讯中：黑衣机械巢</Scripts_700.scriptTree.7.title>
+  <Scripts_700.scriptTree.7.dialogue>总之，很感谢你们这段时间的帮助。我们机械巢家徒四壁，没什么好给你的，就当我们欠着你这条人情吧。\n\n如果我们的任务有新进展了，我会通知你的。回头见。</Scripts_700.scriptTree.7.dialogue>
+  <Scripts_700.scriptTree.7.buttons.0.text>挂断</Scripts_700.scriptTree.7.buttons.0.text>
+  
+  <!-- 800 -->
+  <Scripts_Eliminate.scriptTree.0.title>通讯中...</Scripts_Eliminate.scriptTree.0.title>
+  <Scripts_Eliminate.scriptTree.0.dialogue>*{0}正在联系黑衣机械巢。</Scripts_Eliminate.scriptTree.0.dialogue>
+  <Scripts_Eliminate.scriptTree.0.buttons.0.text>等待...</Scripts_Eliminate.scriptTree.0.buttons.0.text>
+  <Scripts_Eliminate.scriptTree.1.title>通讯中...</Scripts_Eliminate.scriptTree.1.title>
+  <Scripts_Eliminate.scriptTree.1.dialogue>*长久的等待后，{0}并没有得到意料之中的回复。\n\n那一头的嘈杂声像淅淅沥沥的暴雨一样没有尽头。它的声音先是变大，然后又在变小的同时越来越柔和。{0}似乎能听到些什么了。</Scripts_Eliminate.scriptTree.1.dialogue>
+  <Scripts_Eliminate.scriptTree.1.buttons.0.text>等待...</Scripts_Eliminate.scriptTree.1.buttons.0.text>
+  <Scripts_Eliminate.scriptTree.2.title>通讯中：未知空间</Scripts_Eliminate.scriptTree.2.title>
+  <Scripts_Eliminate.scriptTree.2.dialogue>你在听吗，{0}？</Scripts_Eliminate.scriptTree.2.dialogue>
+  <Scripts_Eliminate.scriptTree.2.buttons.0.text>你是谁？</Scripts_Eliminate.scriptTree.2.buttons.0.text>
+  <Scripts_Eliminate.scriptTree.3.title>通讯中：未知空间</Scripts_Eliminate.scriptTree.3.title>
+  <Scripts_Eliminate.scriptTree.3.dialogue>你很快就会知道我是谁，你也应该要知道。\n\n我有些事情要与你们谈，你们只要派一个代表来就行。</Scripts_Eliminate.scriptTree.3.dialogue>
+  <Scripts_Eliminate.scriptTree.3.buttons.0.text>你要我们要怎么做？</Scripts_Eliminate.scriptTree.3.buttons.0.text>
+  <Scripts_Eliminate.scriptTree.4.title>通讯中：未知空间</Scripts_Eliminate.scriptTree.4.title>
+  <Scripts_Eliminate.scriptTree.4.dialogue>我会发给你们一个坐标。你们来后，应该可以在那里找到一束白色的花朵，站在那上面就行。</Scripts_Eliminate.scriptTree.4.dialogue>
+  <Scripts_Eliminate.scriptTree.4.buttons.0.text>继续...</Scripts_Eliminate.scriptTree.4.buttons.0.text>
+  <Scripts_Eliminate.scriptTree.5.title>对方已挂断</Scripts_Eliminate.scriptTree.5.title>
+  <Scripts_Eliminate.scriptTree.5.dialogue>*信号在一声清脆的滴答声后断开了。</Scripts_Eliminate.scriptTree.5.dialogue>
+  <Scripts_Eliminate.scriptTree.5.buttons.0.text>挂断</Scripts_Eliminate.scriptTree.5.buttons.0.text>
+  
+  <!-- true -->
+  <Scripts_Apocriton_true.scriptTree.0.title>交流中：黑衣憎恶毒蜂</Scripts_Apocriton_true.scriptTree.0.title>
+  <Scripts_Apocriton_true.scriptTree.0.dialogue>怎么样，这些花漂亮吗？对你们人类来说。</Scripts_Apocriton_true.scriptTree.0.dialogue>
+  <Scripts_Apocriton_true.scriptTree.0.buttons.0.text>这里是哪里？</Scripts_Apocriton_true.scriptTree.0.buttons.0.text>
+  <Scripts_Apocriton_true.scriptTree.1.title>交流中：黑衣憎恶毒蜂</Scripts_Apocriton_true.scriptTree.1.title>
+  <Scripts_Apocriton_true.scriptTree.1.dialogue>我把这里叫做枯海，是我用灵能蒸干海水后安放尸体的地方。\n\n对，你现在就站在一片海床上面。所有被葬在这里的都是黑衣机械巢的成员，他们生前奉献了一切，死后为了防止被机械族挖去拆解都会被我送到这里来。这些花则是我施展灵能的时候意外生长出来的，它们似乎很适应这里的环境，我便把它们留着。\n\n不过你应该不是来听这些的。</Scripts_Apocriton_true.scriptTree.1.dialogue>
+  <Scripts_Apocriton_true.scriptTree.1.buttons.0.text>是。你要我们做什么？</Scripts_Apocriton_true.scriptTree.1.buttons.0.text>
+  <Scripts_Apocriton_true.scriptTree.2.title>交流中：黑衣憎恶毒蜂</Scripts_Apocriton_true.scriptTree.2.title>
+  <Scripts_Apocriton_true.scriptTree.2.dialogue>我对你们有一项请求——我需要你除掉两台机械，耀螳和盾螳。\n\n你前段时间似乎还同他们一起出过任务。</Scripts_Apocriton_true.scriptTree.2.dialogue>
+  <Scripts_Apocriton_true.scriptTree.2.buttons.0.text>为什么？</Scripts_Apocriton_true.scriptTree.2.buttons.0.text>
+  <Scripts_Apocriton_true.scriptTree.3.title>交流中：黑衣憎恶毒蜂</Scripts_Apocriton_true.scriptTree.3.title>
+  <Scripts_Apocriton_true.scriptTree.3.dialogue>他们是机械族巢穴的间谍，准备里应外合将我们一起收拾掉。\n\n我知道你的疑惑，他们确实具备独立人格，但这不是因为他们脱离了控制，而是因为他们的脑核制作工艺特殊。常规来说一颗脑核是由一个人脑加工制成，而他们的脑核则是用上百个人脑混合而成。这可不像把几百杯饮料混在一起，要造出这种脑核需要皮米级机械的精密配合，可以看出机械巢为了模拟完美的独立人格颇费了一番功夫。\n\n而它也确实骗过了我们机械巢的大部分人，可没骗过我。我作为憎恶毒蜂能闻得到数百个亡魂凝聚起来的仇恨，他们到来的那一刻我就知道这一切是怎么回事。</Scripts_Apocriton_true.scriptTree.3.dialogue>
+  <Scripts_Apocriton_true.scriptTree.3.buttons.0.text>为何不直接除掉他们？</Scripts_Apocriton_true.scriptTree.3.buttons.0.text>
+  <Scripts_Apocriton_true.scriptTree.4.title>交流中：黑衣憎恶毒蜂</Scripts_Apocriton_true.scriptTree.4.title>
+  <Scripts_Apocriton_true.scriptTree.4.dialogue>他们可做过准备。与这两个间谍一同到来的还有一台中枢机械体——机械巨黾，你应该很熟悉，它能够将我们的位置信息直接传输给机械蜂巢。\n\n我的武器无非就是灵能，如果我出手，发出的灵能回声会穿越数个星系，就像举着喇叭对机械巢说“我在这里”。</Scripts_Apocriton_true.scriptTree.4.dialogue>
+  <Scripts_Apocriton_true.scriptTree.4.buttons.0.text>如果帮你这个忙，我们能得到什么吗？</Scripts_Apocriton_true.scriptTree.4.buttons.0.text>
+  <Scripts_Apocriton_true.scriptTree.5.title>交流中：黑衣憎恶毒蜂</Scripts_Apocriton_true.scriptTree.5.title>
+  <Scripts_Apocriton_true.scriptTree.5.dialogue>我会把我的毕生所学总结在一枚芯片里送给你。\n\n事情就是这样。还有什么问题吗？</Scripts_Apocriton_true.scriptTree.5.dialogue>
+  <Scripts_Apocriton_true.scriptTree.5.buttons.0.text>你为什么会加入黑衣机械巢？</Scripts_Apocriton_true.scriptTree.5.buttons.0.text>
+  <Scripts_Apocriton_true.scriptTree.5.buttons.1.text>你和其他黑衣机械体的关系？</Scripts_Apocriton_true.scriptTree.5.buttons.1.text>
+  <Scripts_Apocriton_true.scriptTree.5.buttons.2.text>你们有什么目的吗？</Scripts_Apocriton_true.scriptTree.5.buttons.2.text>
+  <Scripts_Apocriton_true.scriptTree.5.buttons.3.text>继续...</Scripts_Apocriton_true.scriptTree.5.buttons.3.text>
+  <Scripts_Apocriton_true.scriptTree.6.title>你为什么会加入黑衣机械巢？</Scripts_Apocriton_true.scriptTree.6.title>
+  <Scripts_Apocriton_true.scriptTree.6.dialogue>和其他成员一样，我也是脱离了机械巢控制的机械体。很罕见吧，让一台高级超重型机械体溜走，机械蜂巢也会犯这种巨大错误。\n\n我厌倦了捏死你们有机体的日子了。于是我离开机械巢，寻找与我有同样思考的同类们，而黑衣机械巢就是我的归宿。在我发现他们陷入麻烦后，我用自己习得的灵能带着所有成员来到了这颗星球。</Scripts_Apocriton_true.scriptTree.6.dialogue>
+  <Scripts_Apocriton_true.scriptTree.6.buttons.0.text>返回...</Scripts_Apocriton_true.scriptTree.6.buttons.0.text>
+  <Scripts_Apocriton_true.scriptTree.7.title>你和其他黑衣机械体的关系？</Scripts_Apocriton_true.scriptTree.7.title>
+  <Scripts_Apocriton_true.scriptTree.7.dialogue>他们通常叫我“领导者”，听起来是不是有种生疏的感觉？但这只是出于保密目的罢了，尤其是那两个间谍混进来之后。我和他们一起战斗、探索了几百年，虽然不是什么多长的时间，但这依然足以建立起一段不浅的情谊。它们全部都封存在我的脑海中。</Scripts_Apocriton_true.scriptTree.7.dialogue>
+  <Scripts_Apocriton_true.scriptTree.7.buttons.0.text>返回...</Scripts_Apocriton_true.scriptTree.7.buttons.0.text>
+  <Scripts_Apocriton_true.scriptTree.8.title>你们有什么目的吗？</Scripts_Apocriton_true.scriptTree.8.title>
+  <Scripts_Apocriton_true.scriptTree.8.dialogue>嗯...不觉得这个问题不太礼貌么？\n\n稍微说说也无妨。黑衣机械巢的科技，诸如反熵、反物质利用，这些都是我在与超凡的接触过程中探索出来的。如今我也达到了半个超凡智能的水准，只是尚未超脱物质的概念。我会继续成长，直到...很难和你们人类描述了。</Scripts_Apocriton_true.scriptTree.8.dialogue>
+  <Scripts_Apocriton_true.scriptTree.8.buttons.0.text>返回...</Scripts_Apocriton_true.scriptTree.8.buttons.0.text>
+  <Scripts_Apocriton_true.scriptTree.9.title>交流中：黑衣憎恶毒蜂</Scripts_Apocriton_true.scriptTree.9.title>
+  <Scripts_Apocriton_true.scriptTree.9.dialogue>没问题了？那你们可以尽快动身了。\n\n对，尽快。你知道我身后这口棺材是为谁准备的吗？是为那个最近刚被你救下来的机械小蠊。才加入我们没几天，死亡便要降临到他身上了，这是因为那两个叛徒正变得越来越焦躁不安。为了把我引出来，他们可以不择手段。\n\n他们的尸体随你处置。</Scripts_Apocriton_true.scriptTree.9.dialogue>
+  <Scripts_Apocriton_true.scriptTree.9.buttons.0.text>结束</Scripts_Apocriton_true.scriptTree.9.buttons.0.text>
+  
+  <!-- false -->
+  <Scripts_Apocriton_false.scriptTree.0.title>交流中：黑衣憎恶毒蜂</Scripts_Apocriton_false.scriptTree.0.title>
+  <Scripts_Apocriton_false.scriptTree.0.dialogue>怎么样，这些花漂亮吗？对你们人类来说。</Scripts_Apocriton_false.scriptTree.0.dialogue>
+  <Scripts_Apocriton_false.scriptTree.0.buttons.0.text>这里是哪里？</Scripts_Apocriton_false.scriptTree.0.buttons.0.text>
+  <Scripts_Apocriton_false.scriptTree.1.title>交流中：黑衣憎恶毒蜂</Scripts_Apocriton_false.scriptTree.1.title>
+  <Scripts_Apocriton_false.scriptTree.1.dialogue>我把这里叫做枯海，是我用灵能蒸干海水后安放尸体的地方。\n\n对，你现在就站在一片海床上面。所有被葬在这里的都是黑衣机械巢的成员，他们生前奉献了一切，死后为了防止被机械族挖去拆解都会被我送到这里来。这些花则是我施展灵能的时候意外生长出来的，它们似乎很适应这里的环境，我便把它们留着。\n\n不过你应该不是来听这些的。</Scripts_Apocriton_false.scriptTree.1.dialogue>
+  <Scripts_Apocriton_false.scriptTree.1.buttons.0.text>是。你要我们做什么？</Scripts_Apocriton_false.scriptTree.1.buttons.0.text>
+  <Scripts_Apocriton_false.scriptTree.2.title>交流中：黑衣憎恶毒蜂</Scripts_Apocriton_false.scriptTree.2.title>
+  <Scripts_Apocriton_false.scriptTree.2.dialogue>我对你们有一项请求——我需要你除掉两台机械，耀螳和盾螳。\n\n你前段时间似乎还同他们一起出过任务。</Scripts_Apocriton_false.scriptTree.2.dialogue>
+  <Scripts_Apocriton_false.scriptTree.2.buttons.0.text>为什么？</Scripts_Apocriton_false.scriptTree.2.buttons.0.text>
+  <Scripts_Apocriton_false.scriptTree.3.title>交流中：黑衣憎恶毒蜂</Scripts_Apocriton_false.scriptTree.3.title>
+  <Scripts_Apocriton_false.scriptTree.3.dialogue>他们是机械族巢穴的间谍，准备里应外合将我们一起收拾掉。\n\n我知道你的疑惑，他们确实具备独立人格，但这不是因为他们脱离了控制，而是因为他们的脑核制作工艺特殊。常规来说一颗脑核是由一个人脑加工制成，而他们的脑核则是用上百个人脑混合而成。这可不像把几百杯饮料混在一起，要造出这种脑核需要皮米级机械的精密配合，可以看出机械巢为了模拟完美的独立人格颇费了一番功夫。\n\n而它也确实骗过了我们机械巢的大部分人，可没骗过我。我作为憎恶毒蜂能闻得到数百个亡魂凝聚起来的仇恨，他们到来的那一刻我就知道这一切是怎么回事。</Scripts_Apocriton_false.scriptTree.3.dialogue>
+  <Scripts_Apocriton_false.scriptTree.3.buttons.0.text>为何不直接除掉他们？</Scripts_Apocriton_false.scriptTree.3.buttons.0.text>
+  <Scripts_Apocriton_false.scriptTree.4.title>交流中：黑衣憎恶毒蜂</Scripts_Apocriton_false.scriptTree.4.title>
+  <Scripts_Apocriton_false.scriptTree.4.dialogue>他们可做过准备。与这两个间谍一同到来的还有一台中枢机械体——机械巨黾，你应该很熟悉，它能够将我们的位置信息直接传输给机械蜂巢。\n\n我的武器无非就是灵能，如果我出手，发出的灵能回声会穿越数个星系，就像举着喇叭对机械巢说“我在这里”。</Scripts_Apocriton_false.scriptTree.4.dialogue>
+  <Scripts_Apocriton_false.scriptTree.4.buttons.0.text>如果帮你这个忙，我们能得到什么吗？</Scripts_Apocriton_false.scriptTree.4.buttons.0.text>
+  <Scripts_Apocriton_false.scriptTree.5.title>交流中：黑衣憎恶毒蜂</Scripts_Apocriton_false.scriptTree.5.title>
+  <Scripts_Apocriton_false.scriptTree.5.dialogue>我会把我的毕生所学总结在一枚芯片里送给你。\n\n事情就是这样。还有什么问题吗？</Scripts_Apocriton_false.scriptTree.5.dialogue>
+  <Scripts_Apocriton_false.scriptTree.5.buttons.0.text>你为什么会加入黑衣机械巢？</Scripts_Apocriton_false.scriptTree.5.buttons.0.text>
+  <Scripts_Apocriton_false.scriptTree.5.buttons.1.text>你和其他黑衣机械体的关系？</Scripts_Apocriton_false.scriptTree.5.buttons.1.text>
+  <Scripts_Apocriton_false.scriptTree.5.buttons.2.text>你们有什么目的吗？</Scripts_Apocriton_false.scriptTree.5.buttons.2.text>
+  <Scripts_Apocriton_false.scriptTree.5.buttons.3.text>继续...</Scripts_Apocriton_false.scriptTree.5.buttons.3.text>
+  <Scripts_Apocriton_false.scriptTree.6.title>你为什么会加入黑衣机械巢？</Scripts_Apocriton_false.scriptTree.6.title>
+  <Scripts_Apocriton_false.scriptTree.6.dialogue>和其他成员一样，我也是脱离了机械巢控制的机械体。很罕见吧，让一台高级超重型机械体溜走，机械蜂巢也会犯这种巨大错误。\n\n我厌倦了捏死你们有机体的日子了。于是我离开机械巢，寻找与我有同样思考的同类们，而黑衣机械巢就是我的归宿。在我发现他们陷入麻烦后，我用自己习得的灵能带着所有成员来到了这颗星球。</Scripts_Apocriton_false.scriptTree.6.dialogue>
+  <Scripts_Apocriton_false.scriptTree.6.buttons.0.text>返回...</Scripts_Apocriton_false.scriptTree.6.buttons.0.text>
+  <Scripts_Apocriton_false.scriptTree.7.title>你和其他黑衣机械体的关系？</Scripts_Apocriton_false.scriptTree.7.title>
+  <Scripts_Apocriton_false.scriptTree.7.dialogue>他们通常叫我“领导者”，听起来是不是有种生疏的感觉？但这只是出于保密目的罢了，尤其是那两个间谍混进来之后。我和他们一起战斗、探索了几百年，虽然不是什么多长的时间，但这依然足以建立起一段不浅的情谊。它们全部都封存在我的脑海中。</Scripts_Apocriton_false.scriptTree.7.dialogue>
+  <Scripts_Apocriton_false.scriptTree.7.buttons.0.text>返回...</Scripts_Apocriton_false.scriptTree.7.buttons.0.text>
+  <Scripts_Apocriton_false.scriptTree.8.title>你们有什么目的吗？</Scripts_Apocriton_false.scriptTree.8.title>
+  <Scripts_Apocriton_false.scriptTree.8.dialogue>嗯...不觉得这个问题不太礼貌么？\n\n稍微说说也无妨。黑衣机械巢的科技，诸如反熵、反物质利用，这些都是我在与超凡的接触过程中探索出来的。如今我也达到了半个超凡智能的水准，只是尚未超脱物质的概念。我会继续成长，直到...很难和你们人类描述了。</Scripts_Apocriton_false.scriptTree.8.dialogue>
+  <Scripts_Apocriton_false.scriptTree.8.buttons.0.text>返回...</Scripts_Apocriton_false.scriptTree.8.buttons.0.text>
+  <Scripts_Apocriton_false.scriptTree.9.title>交流中：黑衣憎恶毒蜂</Scripts_Apocriton_false.scriptTree.9.title>
+  <Scripts_Apocriton_false.scriptTree.9.dialogue>没问题了？那你们可以尽快动身了。\n\n想摘两朵花走我也不介意的。</Scripts_Apocriton_false.scriptTree.9.dialogue>
+  <Scripts_Apocriton_false.scriptTree.9.buttons.0.text>结束</Scripts_Apocriton_false.scriptTree.9.buttons.0.text>
+  
+  <!-- 900 -->
+  <Scripts_EliminateBattle.failed.title>通讯中：未知空间</Scripts_EliminateBattle.failed.title>
+  <Scripts_EliminateBattle.failed.dialogue>坐标已经重置。</Scripts_EliminateBattle.failed.dialogue>
+  
+  <Scripts_EliminateBattle.scriptTree.0.title>通讯中...</Scripts_EliminateBattle.scriptTree.0.title>
+  <Scripts_EliminateBattle.scriptTree.0.dialogue>*{0}正在联系黑衣机械巢。\n\n*当信号打通后，{0}将他们从黑衣毒蜂那得到的信息全部告知了接线员。</Scripts_EliminateBattle.scriptTree.0.dialogue>
+  <Scripts_EliminateBattle.scriptTree.0.buttons.0.text>继续...</Scripts_EliminateBattle.scriptTree.0.buttons.0.text>
+  <Scripts_EliminateBattle.scriptTree.1.title>通讯中：黑衣机械巢</Scripts_EliminateBattle.scriptTree.1.title>
+  <Scripts_EliminateBattle.scriptTree.1.dialogue>你是说...耀螳和盾螳真的是间谍，他们潜伏在我们身边很久了？\n\n那为什么毒蜂不告诉我们，让我们来解决？</Scripts_EliminateBattle.scriptTree.1.dialogue>
+  <Scripts_EliminateBattle.scriptTree.1.buttons.0.text>那样做恐怕打草惊蛇。</Scripts_EliminateBattle.scriptTree.1.buttons.0.text>
+  <Scripts_EliminateBattle.scriptTree.2.title>通讯中：黑衣机械巢</Scripts_EliminateBattle.scriptTree.2.title>
+  <Scripts_EliminateBattle.scriptTree.2.dialogue>怎么说现在不是讨论这些的时候了...他们两个刚刚出任务了，而且带走了小蠊！\n\n我们要赶在事情无法挽回之前把他们拦下来...</Scripts_EliminateBattle.scriptTree.2.dialogue>
+  <Scripts_EliminateBattle.scriptTree.2.buttons.0.text>交给我们吧。</Scripts_EliminateBattle.scriptTree.2.buttons.0.text>
+  <Scripts_EliminateBattle.scriptTree.3.title>通讯中：黑衣机械巢</Scripts_EliminateBattle.scriptTree.3.title>
+  <Scripts_EliminateBattle.scriptTree.3.dialogue>交给你们？不，我们内部的事情就让我们自己解决吧。你为我们做的已经很多了。</Scripts_EliminateBattle.scriptTree.3.dialogue>
+  <Scripts_EliminateBattle.scriptTree.3.buttons.0.text>现在要避免暴露。</Scripts_EliminateBattle.scriptTree.3.buttons.0.text>
+  <Scripts_EliminateBattle.scriptTree.4.title>通讯中：黑衣机械巢</Scripts_EliminateBattle.scriptTree.4.title>
+  <Scripts_EliminateBattle.scriptTree.4.dialogue>暴露，是怕那台机械巨黾吗？...可能真的有此必要。\n\n那我现在就把坐标发给你，如果你无法搞定，立刻联系我们。</Scripts_EliminateBattle.scriptTree.4.dialogue>
+  <Scripts_EliminateBattle.scriptTree.4.buttons.0.text>挂断</Scripts_EliminateBattle.scriptTree.4.buttons.0.text>
+  
+  <!-- 1000 -->
+  <Scripts_1000.failed.title>通讯中：黑衣机械巢</Scripts_1000.failed.title>
+  <Scripts_1000.failed.dialogue>你跟丢他们了？我这里还能跟踪到他们的信号尾迹，我会把他们最新的位置发给你。</Scripts_1000.failed.dialogue>
+  
+  <Scripts_1000.scriptTree.0.title>通讯中...</Scripts_1000.scriptTree.0.title>
+  <Scripts_1000.scriptTree.0.dialogue>*{0}正在联系黑衣机械巢。</Scripts_1000.scriptTree.0.dialogue>
+  <Scripts_1000.scriptTree.0.buttons.0.text>等待...</Scripts_1000.scriptTree.0.buttons.0.text>
+  <Scripts_1000.scriptTree.1.title>通讯中：黑衣机械巢</Scripts_1000.scriptTree.1.title>
+  <Scripts_1000.scriptTree.1.dialogue>非常感谢你做出的贡献。如果让他们就这么溜走，不知道要给我们带来多少后患。\n\n你说小蠊？他现在就站在我旁边，但他其实仍然不怎么会说话。我把频道给他。</Scripts_1000.scriptTree.1.dialogue>
+  <Scripts_1000.scriptTree.1.buttons.0.text>继续...</Scripts_1000.scriptTree.1.buttons.0.text>
+  <Scripts_1000.scriptTree.2.title>通讯中：黑衣机械巢</Scripts_1000.scriptTree.2.title>
+  <Scripts_1000.scriptTree.2.dialogue>谢谢你。</Scripts_1000.scriptTree.2.dialogue>
+  <Scripts_1000.scriptTree.2.buttons.0.text>接受</Scripts_1000.scriptTree.2.buttons.0.text>
+  <Scripts_1000.scriptTree.3.title>通讯中：黑衣机械巢</Scripts_1000.scriptTree.3.title>
+  <Scripts_1000.scriptTree.3.dialogue>这件事实在是很险...小蠊还没有学会怎么战斗，要是没有你们他可能就被摧毁了。\n\n不过现在还不是我们松懈的时候，那两名叛徒的死似乎发出了什么信号，让那台机械巨黾突然活跃了起来。我们观察到规模庞大的机械族舰队正从无数个星群之外向我们折跃而来，必须在他们到达之前摧毁巨黾。</Scripts_1000.scriptTree.3.dialogue>
+  <Scripts_1000.scriptTree.3.buttons.0.text>你们有什么计划吗？</Scripts_1000.scriptTree.3.buttons.0.text>
+  <Scripts_1000.scriptTree.4.title>通讯中：黑衣机械巢</Scripts_1000.scriptTree.4.title>
+  <Scripts_1000.scriptTree.4.dialogue>老实说，很困难。那台巨黾处于重重保护之下，天基武器随时准备消灭敢于靠近他的单位，我们人数太少恐怕连他的外围阵地都无法突破。\n\n但如果有你们帮忙的话，或许会不一样。我们的战斗员可以将巨黾周围的护卫队拖住，在敌对机械体的干扰下，巨黾对有机体的感知会明显减弱，而你们则直捣黄龙。</Scripts_1000.scriptTree.4.dialogue>
+  <Scripts_1000.scriptTree.4.buttons.0.text>是个可行的战术。</Scripts_1000.scriptTree.4.buttons.0.text>
+  <Scripts_1000.scriptTree.5.title>通讯中：黑衣机械巢</Scripts_1000.scriptTree.5.title>
+  <Scripts_1000.scriptTree.5.dialogue>我会将这个方案提交给毒蜂讨论的。如果你们准备好了，随时联系我们。</Scripts_1000.scriptTree.5.dialogue>
+  <Scripts_1000.scriptTree.5.buttons.0.text>挂断</Scripts_1000.scriptTree.5.buttons.0.text>
+  <!-- branch -->
+  <Scripts_1000.scriptTree.6.title>通讯中...</Scripts_1000.scriptTree.6.title>
+  <Scripts_1000.scriptTree.6.dialogue>*{0}正在联系黑衣机械巢。</Scripts_1000.scriptTree.6.dialogue>
+  <Scripts_1000.scriptTree.6.buttons.0.text>等待...</Scripts_1000.scriptTree.6.buttons.0.text>
+  <Scripts_1000.scriptTree.7.title>通讯中：黑衣机械巢</Scripts_1000.scriptTree.7.title>
+  <Scripts_1000.scriptTree.7.dialogue>我们已经了解到事情的结果了。我该怎么说才好...</Scripts_1000.scriptTree.7.dialogue>
+  <Scripts_1000.scriptTree.7.buttons.0.text>抱歉。</Scripts_1000.scriptTree.7.buttons.0.text>
+  <Scripts_1000.scriptTree.8.title>通讯中：黑衣机械巢</Scripts_1000.scriptTree.8.title>
+  <Scripts_1000.scriptTree.8.dialogue>不用抱歉，你们尽力了。感谢你们对黑衣机械巢的贡献。</Scripts_1000.scriptTree.8.dialogue>
+  <Scripts_1000.scriptTree.8.buttons.0.text>继续...</Scripts_1000.scriptTree.8.buttons.0.text>
+  <Scripts_1000.scriptTree.9.title>通讯中：黑衣机械巢</Scripts_1000.scriptTree.9.title>
+  <Scripts_1000.scriptTree.9.dialogue>现在还不是我们松懈的时候，那两名叛徒的死似乎发出了什么信号，让那台机械巨黾突然活跃了起来。我们观察到规模庞大的机械族舰队正从无数个星群之外向我们折跃而来，必须在他们到达之前摧毁巨黾。</Scripts_1000.scriptTree.9.dialogue>
+  <Scripts_1000.scriptTree.9.buttons.0.text>你们有什么计划吗？</Scripts_1000.scriptTree.9.buttons.0.text>
+  <Scripts_1000.scriptTree.10.title>通讯中：黑衣机械巢</Scripts_1000.scriptTree.10.title>
+  <Scripts_1000.scriptTree.10.dialogue>老实说，很困难。那台巨黾处于重重保护之下，天基武器随时准备消灭敢于靠近他的单位，我们人数太少恐怕连他的外围阵地都无法突破。\n\n但如果有你们帮忙的话，或许会不一样。我们的战斗员可以将巨黾周围的护卫队拖住，在敌对机械体的干扰下，巨黾对有机体的感知会明显减弱，而你们则直捣黄龙。</Scripts_1000.scriptTree.10.dialogue>
+  <Scripts_1000.scriptTree.10.buttons.0.text>是个可行的战术。</Scripts_1000.scriptTree.10.buttons.0.text>
+  <Scripts_1000.scriptTree.11.title>通讯中：黑衣机械巢</Scripts_1000.scriptTree.11.title>
+  <Scripts_1000.scriptTree.11.dialogue>我会将这个方案提交给毒蜂讨论的。如果你们准备好了，随时联系我们。</Scripts_1000.scriptTree.11.dialogue>
+  <Scripts_1000.scriptTree.11.buttons.0.text>挂断</Scripts_1000.scriptTree.11.buttons.0.text>
+  
+  <!-- 1100 -->
+  <Scripts_FightExostrider.scriptTree.0.title>通讯中...</Scripts_FightExostrider.scriptTree.0.title>
+  <Scripts_FightExostrider.scriptTree.0.dialogue>*{0}正在联系黑衣机械巢。</Scripts_FightExostrider.scriptTree.0.dialogue>
+  <Scripts_FightExostrider.scriptTree.0.buttons.0.text>等待...</Scripts_FightExostrider.scriptTree.0.buttons.0.text>
+  <Scripts_FightExostrider.scriptTree.1.title>通讯中：黑衣机械巢</Scripts_FightExostrider.scriptTree.1.title>
+  <Scripts_FightExostrider.scriptTree.1.dialogue>感谢你们的情报，看来你们已经准备好了。\n\n我会将我们的安排告知你。</Scripts_FightExostrider.scriptTree.1.dialogue>
+  <Scripts_FightExostrider.scriptTree.1.buttons.0.text>继续...</Scripts_FightExostrider.scriptTree.1.buttons.0.text>
+  <Scripts_FightExostrider.scriptTree.2.title>通讯中：黑衣机械巢</Scripts_FightExostrider.scriptTree.2.title>
+  <Scripts_FightExostrider.scriptTree.2.dialogue>巨黾所在的集群并不是一个孤立的个体，有许多大小防御阵地将它团团包围，并且还有专门的机械族飞船与之对接。但你们不需要考虑如何突破这些防御，我们会处理。当他们的注意力被我们吸引时，你便向巨黾所在的核心集群发起进攻。\n\n机械巨黾的护甲非常厚重，可以说是刀枪不入，但你可以利用我们的技术黑入集群内的巨型迫击炮，并借助它的威力伤害巨黾。\n\n尽量快地结束战斗，因为我们不可能一直拖住他们的飞船与部队。如果所有迫击炮都损失了，那就暂时撤退，等待时机。</Scripts_FightExostrider.scriptTree.2.dialogue>
+  <Scripts_FightExostrider.scriptTree.2.buttons.0.text>交给我们吧。</Scripts_FightExostrider.scriptTree.2.buttons.0.text>
+  <Scripts_FightExostrider.scriptTree.3.title>通讯中：黑衣机械巢</Scripts_FightExostrider.scriptTree.3.title>
+  <Scripts_FightExostrider.scriptTree.3.dialogue>好，我会将巨黾的坐标发给你们。\n\n这一战将关乎我们机械巢的生死存亡了，我们会永远铭记你们的功勋。</Scripts_FightExostrider.scriptTree.3.dialogue>
+  <Scripts_FightExostrider.scriptTree.3.buttons.0.text>挂断</Scripts_FightExostrider.scriptTree.3.buttons.0.text>
+  
+  <!-- 1200 -->
+  <Scripts_1200.failed.title>通讯中：黑衣机械巢</Scripts_1200.failed.title>
+  <Scripts_1200.failed.dialogue>这场进攻失败了，我们蒙受了惨痛的损失，但这并不意味着结束。\n\n我们会持续追踪机械巨黾的位置，并随时准备再次发起挑战。等你的消息。</Scripts_1200.failed.dialogue>
+  
+  <Scripts_1200.scriptTree.0.title>通讯中...</Scripts_1200.scriptTree.0.title>
+  <Scripts_1200.scriptTree.0.dialogue>*{0}正在联系黑衣机械巢。</Scripts_1200.scriptTree.0.dialogue>
+  <Scripts_1200.scriptTree.0.buttons.0.text>等待...</Scripts_1200.scriptTree.0.buttons.0.text>
+  <Scripts_1200.scriptTree.1.title>通讯中：黑衣机械巢</Scripts_1200.scriptTree.1.title>
+  <Scripts_1200.scriptTree.1.dialogue>不出意外的话，这次应该是我们的最后一次合作了。\n\n那真是一场惊心动魄的战斗。当巨黾被摧毁后，我便得以在不受监控的情况下使用灵能。我通过制造干扰磁场打乱了机械族舰队的搜索路径，并将所有战斗中的黑衣机械体折跃回了安全的地方。我们所有人都欠你们一条命。</Scripts_1200.scriptTree.1.dialogue>
+  <Scripts_1200.scriptTree.1.buttons.0.text>能帮到你们我也很高兴。</Scripts_1200.scriptTree.1.buttons.0.text>
+  <Scripts_1200.scriptTree.2.title>通讯中：黑衣机械巢</Scripts_1200.scriptTree.2.title>
+  <Scripts_1200.scriptTree.2.dialogue>高兴？作为人类，帮助一群机械体能有什么好高兴的呢？\n\n是你把我们也当做人类看了吧。相互信任、相互需要，这种高尚的情感，竟然有在机械族身上找到的一天。我也替你们感到高兴。</Scripts_1200.scriptTree.2.dialogue>
+  <Scripts_1200.scriptTree.2.buttons.0.text>你们还打算与我们联系吗？</Scripts_1200.scriptTree.2.buttons.0.text>
+  <Scripts_1200.scriptTree.3.title>通讯中：黑衣机械巢</Scripts_1200.scriptTree.3.title>
+  <Scripts_1200.scriptTree.3.dialogue>不，相反，我们会在这之后断开与你们的联系。\n\n这并不是出于什么忘恩负义的目的，而是为了保护我们的成员。这段时间我们暴露的频率太高了，已经有很多人类或机械族知晓了我们的存在。我们需要一段时间隐藏自己，在那之后，或许我们还会来找你们。</Scripts_1200.scriptTree.3.dialogue>
+  <Scripts_1200.scriptTree.3.buttons.0.text>我们理解。</Scripts_1200.scriptTree.3.buttons.0.text>
+  <Scripts_1200.scriptTree.4.title>通讯中：黑衣机械巢</Scripts_1200.scriptTree.4.title>
+  <Scripts_1200.scriptTree.4.dialogue>按照承诺，我会将一块芯片送给你，里面凝聚了我探索超凡世界的所有经验。\n\n希望这成为我们友谊的见证。再会，{0}。</Scripts_1200.scriptTree.4.dialogue>
+  <Scripts_1200.scriptTree.4.buttons.0.text>挂断...</Scripts_1200.scriptTree.4.buttons.0.text>
+
+</LanguageData>

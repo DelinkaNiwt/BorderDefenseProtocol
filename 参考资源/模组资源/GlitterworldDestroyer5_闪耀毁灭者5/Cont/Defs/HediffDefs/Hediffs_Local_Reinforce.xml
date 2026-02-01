@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <HediffDef Name="GD_ReinforceHediffBase" Abstract="True">
+	<hediffClass>HediffWithComps</hediffClass>
+    <initialSeverity>1</initialSeverity>
+	<maxSeverity>1</maxSeverity>
+	<defaultLabelColor>(64, 224, 208)</defaultLabelColor>
+	<alwaysAllowMothball>true</alwaysAllowMothball>
+	<alwaysAllowMothballCached>true</alwaysAllowMothballCached>
+	<comps>
+      <li Class="GD3.HediffCompProperties_RemoveWhenPlayer"/>
+	  <li Class="HediffCompProperties_DisappearsOnDeath"/>
+    </comps>
+  </HediffDef>
+  
+  <!--===== Range =====-->
+  <!-- 辅瞄 -->
+  <HediffDef ParentName="GD_ReinforceHediffBase">
+    <defName>Reinforce_Aiming</defName>
+    <label>Auxiliary aiming elements</label>
+    <description>Advanced micro calculator that can analyze the enemy's position, posture and possible intentions at a very fast speed and provide the mechanoid with multiple targeting solutions for reference. Significantly improve the shooting accuracy of the mechanoid.</description>
+	<comps>
+        <!-- null -->
+    </comps>
+    <stages>
+      <li>
+		<minSeverity>0.01</minSeverity>
+		<statFactors>
+            <AimingDelayFactor>1.25</AimingDelayFactor>
+            <ShootingAccuracyPawn>7.5</ShootingAccuracyPawn>
+        </statFactors>
+		<capMods>
+            <li>
+                <capacity>Sight</capacity>
+                <offset>1</offset>
+            </li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+  
+  <!-- 火控 -->
+  <HediffDef ParentName="GD_ReinforceHediffBase">
+    <defName>Reinforce_FireControl</defName>
+    <label>Precision fire control instrument</label>
+    <description>Advanced microcomputers that rapidly acquire and process information about battlefield posture and targets, and control firearms firing. Significantly increase the firing speed of mechanoid.</description>
+	<comps>
+        <!-- null -->
+    </comps>
+    <stages>
+      <li>
+		<minSeverity>0.01</minSeverity>
+		<statFactors>
+            <AimingDelayFactor>0.25</AimingDelayFactor>
+            <RangedCooldownFactor MayRequire="Ludeon.RimWorld.Biotech">0.5</RangedCooldownFactor>
+        </statFactors>
+		<capMods>
+            <li>
+                <capacity>Sight</capacity>
+                <offset>1</offset>
+            </li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+  
+  <!-- 护盾 -->
+  <HediffDef ParentName="GD_ReinforceHediffBase">
+    <defName>Reinforce_ShieldGeneration</defName>
+    <label>Full-angle shield projector</label>
+    <description>Lightweight and sophisticated shield projector capable of analyzing what mode it needs to be adjusted to based on the battlefield situation and used to defend against almost any projectile attack. Can only be deployed once.</description>
+	<comps>
+      <li Class="GD3.HediffCompProperties_ShieldGenerator">
+        <range>12.9</range>
+      </li>
+    </comps>
+    <stages>
+      <!-- null -->
+    </stages>
+  </HediffDef>
+  
+  <!-- 雷达 -->
+  <HediffDef ParentName="GD_ReinforceHediffBase">
+    <defName>Reinforce_Radar</defName>
+    <label>Monitor Radar</label>
+    <description>By receiving reflected electromagnetic waves from multiple wavelengths at the same time, it can obtain accurate information about the enemy out of sight and respond appropriately. When the mechanoid is hit from out of range, a single bombardment is given in return.\n\nMechanoids will lose this ability due to circuit board burnout after an EMP hit.</description>
+	<comps>
+      <li Class="GD3.HediffCompProperties_OverHorizon">
+        <missile>GD_Shell_Radar</missile>
+      </li>
+	  <li Class="GD3.HediffCompProperties_BrokenByEMP"/>
+    </comps>
+    <stages>
+      <!-- null -->
+    </stages>
+  </HediffDef>
+  <!-- Missle -->
+  <ThingDef ParentName="BaseBullet">
+    <defName>GD_Shell_Radar</defName>
+    <label>high-explosive shell</label>
+    <graphicData>
+      <texPath>Things/Projectile/ShellHighExplosive</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+    </graphicData>
+    <thingClass>GD3.BezierProjectiles_Explosive</thingClass>
+    <projectile>
+      <damageDef>Bomb</damageDef>
+      <speed>15</speed>
+	  <damageAmountBase>40</damageAmountBase>
+      <explosionRadius>3.4</explosionRadius>
+      <flyOverhead>true</flyOverhead>
+      <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <soundExplode>MortarBomb_Explode</soundExplode>
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+      <preExplosionSpawnSingleThingDef>Filth_BlastMark</preExplosionSpawnSingleThingDef>
+    </projectile>
+	<modExtensions>
+      <li Class="GD3.ModExt_BezierProjectiles">
+        <drawStartDelay>1</drawStartDelay> <!-- 延迟多少 Tick 后开始绘制尾迹 -->
+        <trailFleckDef>LineEMP</trailFleckDef> <!-- 使用的尾迹粒子类型 -->
+        <trailThickness>0.250</trailThickness> <!-- 尾迹线条的粗细 -->
+        <probeStep>0.3</probeStep> <!-- 碰撞检测步长，越小越精确但性能越差 -->
+        <!-- 三阶贝塞尔 -->
+        <useCubieCurve>true</useCubieCurve> <!-- 启用三阶贝塞尔曲线的开关 -->
+        <enableRandomSide>true</enableRandomSide> <!-- 是否启用随机左右翻转 -->
+        <randomSideChance>1</randomSideChance> <!-- 触发翻转的概率（0~1） --> 
+        <randOffsetRange>
+          <min>-1.0</min> <!-- 控制点扰动偏移的最小值,这个值别太大，十几就顶天了！ -->
+          <max>1.0</max> <!-- 控制点扰动偏移的最大值,这个值别太大，十几就顶天了！ -->
+        </randOffsetRange>
+        <P1Offset>0.0</P1Offset> <!-- 控制点1 与起点的距离百分比（0 ~ 1之间），越大越靠近终点 -->
+        <P1Side>-8.5</P1Side>   <!-- 控制点1 向左（或右）偏移的距离，值越大弯曲越强 -->
+        <P2Offset>0.6</P2Offset> <!-- 控制点2 与起点的距离百分比（0 ~ 1之间），通常应 > P1Offset -->
+        <P2Side>-5.0</P2Side>  <!-- 控制点2 向右（或左）偏移的距离，符号决定弯曲方向 -->
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  <!-- 炮塔 -->
+  <HediffDef ParentName="GD_ReinforceHediffBase">
+    <defName>Reinforce_TopTurret</defName>
+    <label>Charge turret backpack</label>
+    <description>A backpack driven by a complex mechanical structure that can be carried by any mechanoid and automatically deploy to provide fire support when needed.</description>
+	<comps>
+      <li Class="GD3.HediffCompProperties_TopTurret">
+		<turretDef>Gun_ChargeBlasterTurret_Tiny</turretDef>
+		<angleOffset>-90</angleOffset>
+		<autoAttack>true</autoAttack>
+	  </li>
+    </comps>
+    <stages>
+      <!-- null -->
+    </stages>
+  </HediffDef>
+  
+  <!--===== Melee =====-->
+  <!-- 甲胄 -->
+  <HediffDef ParentName="GD_ReinforceHediffBase">
+    <defName>Reinforce_Armor</defName>
+    <label>Heavy exoskeleton armor</label>
+    <description>Heavy structural defensive armor, containing hundreds of layers of defensive shells made of different materials, sacrificing some mobility in exchange for the ability to withstand powerful damage.</description>
+	<comps>
+        <!-- null -->
+    </comps>
+    <stages>
+      <li>
+		<minSeverity>0.01</minSeverity>
+		<statFactors>
+            <ArmorRating_Sharp>1.75</ArmorRating_Sharp>
+            <ArmorRating_Blunt>2.5</ArmorRating_Blunt>
+			<IncomingDamageFactor>0.65</IncomingDamageFactor>
+        </statFactors>
+		<capMods>
+            <li>
+                <capacity>Moving</capacity>
+                <offset>-0.2</offset>
+            </li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+  
+  <!-- 推进 -->
+  <HediffDef ParentName="GD_ReinforceHediffBase">
+    <defName>Reinforce_Thruster</defName>
+    <label>Low power thruster</label>
+    <description>The engine of the giant unit is modified to reduce the power to fit the body design of most mechanoid units, greatly improving the mobility of this unit.</description>
+	<comps>
+        <!-- null -->
+    </comps>
+    <stages>
+      <li>
+		<minSeverity>0.01</minSeverity>
+		<statFactors>
+            <MoveSpeed>1.25</MoveSpeed>
+        </statFactors>
+		<capMods>
+            <li>
+                <capacity>Moving</capacity>
+                <offset>0.75</offset>
+            </li>
+			<li>
+				<capacity>Manipulation</capacity>
+				<offset>0.5</offset>
+            </li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+  
+  <!-- 装甲 -->
+  <HediffDef ParentName="GD_ReinforceHediffBase">
+    <defName>Reinforce_HitArmor</defName>
+    <label>Portable reactive armor</label>
+    <description>The original heavy and inflexible reactive armor is modified to become readily deployable portable armor, but its defensive efficiency will obviously be reduced.</description>
+	<comps>
+      <li Class="GD3.HediffCompProperties_HitArmor">
+		<hediffToAdd>GD_HitArmor</hediffToAdd>
+		<duration>40</duration>
+	  </li>
+    </comps>
+    <stages>
+      <!-- null -->
+    </stages>
+  </HediffDef>
+  
+  <!-- 烟雾 -->
+  <HediffDef ParentName="GD_ReinforceHediffBase">
+    <defName>Reinforce_Smoke</defName>
+    <label>Contaminated smoke tanks</label>
+    <description>The polluting material produced by the mechanoids is simply disposed of as waste dust, which can be used to obscure the firing boundaries of enemy turrets during battle.</description>
+	<comps>
+      <li Class="GD3.HediffCompProperties_Smoke">
+		<range>4.9</range>
+		<interval>60</interval>
+	  </li>
+    </comps>
+    <stages>
+      <li>
+	    <minSeverity>0.01</minSeverity>
+	    <capMods>
+            <li>
+                <capacity>Moving</capacity>
+                <offset>0.4</offset>
+            </li>
+        </capMods>
+	  </li>
+    </stages>
+  </HediffDef>
+  
+  <!-- 闪避 -->
+  <HediffDef ParentName="GD_ReinforceHediffBase">
+    <defName>Reinforce_Dodge</defName>
+    <label>Arms Countermeasure Chip</label>
+    <description>A brain plug-in that operates at extremely high power and analyzes enemy movements, capable of predicting thousands of possible enemy tactical intentions in an instant and providing advice on how to deal with them. This mechanoid can completely dodge any human melee attack with a melee level of less than 18, and the probability of dodging mechanoids and animals is 90% and 100% respectively.</description>
+	<comps>
+      <li Class="GD3.HediffCompProperties_Dodge">
+		<DodgeChanceFacingMechanoids>0.9</DodgeChanceFacingMechanoids>
+	  </li>
+    </comps>
+    <stages>
+      <!-- null -->
+    </stages>
+  </HediffDef>
+  
+  <!--===== 废品 =====-->
+  <!-- 废品 -->
+  <HediffDef ParentName="GD_ReinforceHediffBase">
+    <defName>Reinforce_Scrap</defName>
+    <label>Scrap</label>
+    <description>Due to accidental errors that occurred during the assembly process, the bionic brain of this mechanoid had catastrophic uneven glue application, wiring confusion, etching damage and even dust intrusion such low-level errors, and it could no longer be expected to make any contribution to the mechanoid hive at all.</description>
+	<defaultLabelColor>(227, 168, 105)</defaultLabelColor>
+	<comps>
+      <li Class="GD3.HediffCompProperties_ScrapSmoking"/>
+    </comps>
+    <stages>
+      <li>
+	    <minSeverity>0.01</minSeverity>
+		<statFactors>
+            <ArmorRating_Sharp>0.5</ArmorRating_Sharp>
+            <ArmorRating_Blunt>0.5</ArmorRating_Blunt>
+			<IncomingDamageFactor>2</IncomingDamageFactor>
+        </statFactors>
+	    <capMods>
+            <li>
+                <capacity>Consciousness</capacity>
+                <offset>-0.35</offset>
+            </li>
+			<li>
+                <capacity>Moving</capacity>
+                <offset>-0.15</offset>
+            </li>
+			<li>
+                <capacity>Sight</capacity>
+                <offset>-0.5</offset>
+            </li>
+			<li>
+                <capacity>Hearing</capacity>
+                <offset>-0.5</offset>
+            </li>
+			<li>
+                <capacity>BloodFiltration</capacity>
+                <offset>-0.5</offset>
+            </li>
+			<li>
+                <capacity>BloodPumping</capacity>
+                <offset>-0.5</offset>
+            </li>
+        </capMods>
+	  </li>
+    </stages>
+  </HediffDef>
+  
+  
+</Defs>

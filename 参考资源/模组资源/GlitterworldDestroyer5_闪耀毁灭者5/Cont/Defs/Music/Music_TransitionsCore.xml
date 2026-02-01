@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <MusicTransitionDef>
+    <defName>GD_CommandSignal</defName>
+    <workerType>GD3.MechBossTransition</workerType>
+    <sequence>GD_CommandSignal</sequence>
+    <overridesInterruptions>true</overridesInterruptions>
+	<dangerRequirement>RequiresDanger</dangerRequirement>
+    <priority>110</priority>
+  </MusicTransitionDef>
+
+</Defs>

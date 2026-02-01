@@ -1,0 +1,556 @@
+﻿++Solution 'GD3' ‎(1 of 1 project)
+i:{00000000-0000-0000-0000-000000000000}:GD3.sln
+++GD3
+i:{00000000-0000-0000-0000-000000000000}:GD3
+++Properties
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\properties\
+++References
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:
+++Alpha
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\alpha\
+++BlackApocriton
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\blackapocriton\
+++Celestiall
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\celestiall\
+++GiantCluster
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\giantcluster\
+++Medal
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\medal\
+++Patches
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\patches\
+++Analyze_Patch.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\patches\analyze_patch.cs
+++Apocriton_Patch.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\patches\apocriton_patch.cs
+++Apparel_Patch.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\patches\apparel_patch.cs
+++BlackApocriton_Patch.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\patches\blackapocriton_patch.cs
+++BlackSuit_Patch.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\patches\blacksuit_patch.cs
+++CallBoss_Patch.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\patches\callboss_patch.cs
+++ControlRange_Patch.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\patches\controlrange_patch.cs
+++Dodge_Patch.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\patches\dodge_patch.cs
+++EMP_Patch.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\patches\emp_patch.cs
+++Exostrider_Patch.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\patches\exostrider_patch.cs
+++Faction_Patch.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\patches\faction_patch.cs
+++Harmony.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\patches\harmony.cs
+++Lord_Patch.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\patches\lord_patch.cs
+++MechCapsule_Patch.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\patches\mechcapsule_patch.cs
+++Mortar_Patch.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\patches\mortar_patch.cs
+++SendLetter_Patch.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\patches\sendletter_patch.cs
+++Shield_Patch.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\patches\shield_patch.cs
+++SitePart_Patch.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\patches\sitepart_patch.cs
+++Threat_Patch.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\patches\threat_patch.cs
+++Weapon_Patch.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\patches\weapon_patch.cs
+++Puzzle
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\puzzle\
+++Reinforce
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\reinforce\
+++Script
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\
+++Alert_Exo.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\alert_exo.cs
+++Alert_Militor.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\alert_militor.cs
+++BiomeWorker_Drysea.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\biomeworker_drysea.cs
+++BlackBomb.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\blackbomb.cs
+++CommunicationWindow_BlackMech.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\communicationwindow_blackmech.cs
+++CommunicationWindow_Empire.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\communicationwindow_empire.cs
+++CompAbilityEffect_ShieldSupport.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\compabilityeffect_shieldsupport.cs
+++CompAnalyzableSubcore.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\companalyzablesubcore.cs
+++CompAnalyzableUnlockScript.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\companalyzableunlockscript.cs
+++CompCommunicationStation.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\compcommunicationstation.cs
+++CompDrawWarning.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\compdrawwarning.cs
+++CompExostriderTurret.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\compexostriderturret.cs
+++CompFloatingCannon.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\compfloatingcannon.cs
+++CompMilitor.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\compmilitor.cs
+++CompProperties_CompAnalyzableSubcore.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\compproperties_companalyzablesubcore.cs
+++CompProperties_CompAnalyzableUnlockScript.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\compproperties_companalyzableunlockscript.cs
+++CompProperties_ExostriderTurret.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\compproperties_exostriderturret.cs
+++CompProperties_FloatingCannon.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\compproperties_floatingcannon.cs
+++CompProperties_ServerUpperDrawer.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\compproperties_serverupperdrawer.cs
+++CompProperties_ShieldSupportAbility.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\compproperties_shieldsupportability.cs
+++CompServerUpperDrawer.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\compserverupperdrawer.cs
+++CompUseEffect_HackMortar.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\compuseeffect_hackmortar.cs
+++CompUseEffect_Key.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\compuseeffect_key.cs
+++CompUseEffect_StealIntelligence.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\compuseeffect_stealintelligence.cs
+++CompUseEffect_Window.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\compuseeffect_window.cs
+++DryseaDummy.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\dryseadummy.cs
+++EliminateDummy.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\eliminatedummy.cs
+++Exostrider.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\exostrider.cs
+++ExostriderDummy.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\exostriderdummy.cs
+++ExostriderExtension.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\exostriderextension.cs
+++GenStep_CustomStructureGen.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\genstep_customstructuregen.cs
+++GenStep_CustomStructureGen_Drysea.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\genstep_customstructuregen_drysea.cs
+++GenStep_CustomStructureGen_Exo.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\genstep_customstructuregen_exo.cs
+++GenStep_CustomStructureGen_Militor.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\genstep_customstructuregen_militor.cs
+++GenStep_MechGrave.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\genstep_mechgrave.cs
+++GraphicWindow.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\graphicwindow.cs
+++HediffComp_BlackShield.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\hediffcomp_blackshield.cs
+++IncidentWorker_MechClusterGiant.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\incidentworker_mechclustergiant.cs
+++JobDriver_OperateStation.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\jobdriver_operatestation.cs
+++JobGiver_TrySupportShield.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\jobgiver_trysupportshield.cs
+++LordJob_WaitAtPoint.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\lordjob_waitatpoint.cs
+++MechanoidScriptDef.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\mechanoidscriptdef.cs
+++MechClusterGenerator_Giant.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\mechclustergenerator_giant.cs
+++MissionComponent.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\missioncomponent.cs
+++MissionWindow.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\missionwindow.cs
+++MultiShootExtension.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\multishootextension.cs
+++PawnRenderNode_FloatingCannon.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\pawnrendernode_floatingcannon.cs
+++PawnRenderNodeWorker_FloatingCannon.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\pawnrendernodeworker_floatingcannon.cs
+++Projectile_Exostrider.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\projectile_exostrider.cs
+++Projectile_Exostrider_Sub.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\projectile_exostrider_sub.cs
+++QuestNode_BlackQuest.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\questnode_blackquest.cs
+++QuestNode_Drysea.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\questnode_drysea.cs
+++QuestNode_Eliminate.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\questnode_eliminate.cs
+++QuestNode_Exostrider.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\questnode_exostrider.cs
+++QuestNode_FortressEnd.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\questnode_fortressend.cs
+++QuestNode_GenerateSite_Map.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\questnode_generatesite_map.cs
+++QuestNode_GenerateSite_Militor.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\questnode_generatesite_militor.cs
+++QuestNode_Militor.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\questnode_militor.cs
+++QuestNode_Root_SubcoreAnalyse.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\questnode_root_subcoreanalyse.cs
+++QuestNode_Root_ToxPollutionPump.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\questnode_root_toxpollutionpump.cs
+++QuestPart_AddIntel.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\questpart_addintel.cs
+++QuestPart_BackHome.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\questpart_backhome.cs
+++QuestPart_BlackMechanoid.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\questpart_blackmechanoid.cs
+++QuestPart_CheckQuestFail.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\questpart_checkquestfail.cs
+++QuestPart_Drysea.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\questpart_drysea.cs
+++QuestPart_GenerateMilitor.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\questpart_generatemilitor.cs
+++QuestPart_InitiateComet.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\questpart_initiatecomet.cs
+++QuestPart_InitiateRaid.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\questpart_initiateraid.cs
+++QuestPart_InitiateScript.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\questpart_initiatescript.cs
+++QuestPart_PlayEffect.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\questpart_playeffect.cs
+++QuestPart_StartBattle.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\questpart_startbattle.cs
+++Reward_BlackMech.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\reward_blackmech.cs
+++Reward_Intelligence.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\reward_intelligence.cs
+++ScriptButton.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\scriptbutton.cs
+++ScriptTree.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\scripttree.cs
+++SitePartWorker_Map.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\sitepartworker_map.cs
+++SitePartWorker_Militor.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\sitepartworker_militor.cs
+++SketchResolver_MechCluster_Giant.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\sketchresolver_mechcluster_giant.cs
+++TradeWindow_BlackMech.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\tradewindow_blackmech.cs
+++Verb_LaunchMultiProjectile.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\verb_launchmultiprojectile.cs
+++Verb_MultiShoot.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\verb_multishoot.cs
+++WorkGiver_CommunicationStation.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\script\workgiver_communicationstation.cs
+++Update
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\update\
+++CompAbilityEffect_PlaceShield.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\compabilityeffect_placeshield.cs
+++CompAllDead.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\compalldead.cs
+++CompApocriton.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\compapocriton.cs
+++CompBlackFaction.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\compblackfaction.cs
+++CompChangeWeapon.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\compchangeweapon.cs
+++CompChangeWeaponB.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\compchangeweaponb.cs
+++CompDrawBattery.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\compdrawbattery.cs
+++CompFireBurst.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\compfireburst.cs
+++CompHitArmor.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\comphitarmor.cs
+++CompObserverLink.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\compobserverlink.cs
+++CompPawnInvisibility.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\comppawninvisibility.cs
+++CompProperties_AbilityFireBurst.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\compproperties_abilityfireburst.cs
+++CompProperties_AllDead.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\compproperties_alldead.cs
+++CompProperties_Apocriton.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\compproperties_apocriton.cs
+++CompProperties_ChangeWeapon.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\compproperties_changeweapon.cs
+++CompProperties_ChangeWeaponB.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\compproperties_changeweaponb.cs
+++CompProperties_HitArmor.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\compproperties_hitarmor.cs
+++CompProperties_Invisibility.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\compproperties_invisibility.cs
+++CompProperties_ObserverLink.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\compproperties_observerlink.cs
+++CompProperties_PlaceShield.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\compproperties_placeshield.cs
+++CompProperties_PsychicAttack.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\compproperties_psychicattack.cs
+++CompProperties_Radio.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\compproperties_radio.cs
+++CompProperties_ReinforceHediff.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\compproperties_reinforcehediff.cs
+++CompProperties_SpawnMech.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\compproperties_spawnmech.cs
+++CompPsychicAttack.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\comppsychicattack.cs
+++CompRadio.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\compradio.cs
+++CompReinforceHediff.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\compreinforcehediff.cs
+++CompSpawnMech.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\compspawnmech.cs
+++CompUseEffect_HelpCaller.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\compuseeffect_helpcaller.cs
+++DamageWorker_PsychicStrike.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\damageworker_psychicstrike.cs
+++DamageWorker_Vaporize.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\damageworker_vaporize.cs
+++DeathActionWorker_MechExplosion.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\deathactionworker_mechexplosion.cs
+++GDDefOf.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\gddefof.cs
+++GDMod.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\gdmod.cs
+++Hediff_MechNodeGD.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\hediff_mechnodegd.cs
+++HediffComp_MechJump.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\hediffcomp_mechjump.cs
+++HediffComp_Reboot.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\hediffcomp_reboot.cs
+++HediffComp_Rolling.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\hediffcomp_rolling.cs
+++HediffCompProperties_MechJump.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\hediffcompproperties_mechjump.cs
+++HediffCompProperties_Reboot.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\hediffcompproperties_reboot.cs
+++HediffCompProperties_Rolling.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\hediffcompproperties_rolling.cs
+++HediffGiver_MechHypothermia.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\hediffgiver_mechhypothermia.cs
+++IncidentBlackPassedBy.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\incidentblackpassedby.cs
+++JobDriver_UtiScanner.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\jobdriver_utiscanner.cs
+++JobGiver_ObserverFollow.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\jobgiver_observerfollow.cs
+++JobGiver_PsychicGrenade.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\jobgiver_psychicgrenade.cs
+++MechChipModExt.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\mechchipmodext.cs
+++ModExtension_NotSendLetter.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\modextension_notsendletter.cs
+++ModSettings.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\modsettings.cs
+++PlaceWorker_Station.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\placeworker_station.cs
+++Projectile_Antimatter.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\projectile_antimatter.cs
+++Projectile_CataInferno.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\projectile_catainferno.cs
+++Projectile_HellsphereCannon.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\projectile_hellspherecannon.cs
+++Utility.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\utility.cs
+++Verb_PsychicLance.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\verb_psychiclance.cs
+++Verb_SpewFire.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\verb_spewfire.cs
+++GD2.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\properties\gd2.cs
+++0Harmony
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:
+++Assembly-CSharp
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:
+++KCSG
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:
+++Microsoft.CSharp
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:
+++System
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:
+++System.Core
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:
+++System.Data
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:
+++System.Data.DataSetExtensions
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:
+++System.Net.Http
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:
+++System.Xml
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:
+++System.Xml.Linq
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:
+++UnityEngine
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:
+++UnityEngine.CoreModule
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:
+++UnityEngine.IMGUIModule
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:
+++UnityEngine.TextRenderingModule
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:
+++AlphaBombardment.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\alpha\alphabombardment.cs
+++AlphaSkyfaller.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\alpha\alphaskyfaller.cs
+++CompProperties_Terror.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\alpha\compproperties_terror.cs
+++CompTerror.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\alpha\compterror.cs
+++HediffCompProperties_Terror.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\alpha\hediffcompproperties_terror.cs
+++HediffCompTerror.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\alpha\hediffcompterror.cs
+++Projectile_AlphaBombardment.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\alpha\projectile_alphabombardment.cs
+++ApocritonBombardment.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\blackapocriton\apocritonbombardment.cs
+++ApocritonMine.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\blackapocriton\apocritonmine.cs
+++Command_HackerAbility.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\blackapocriton\command_hackerability.cs
+++CompAbilityEffect_Repair.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\blackapocriton\compabilityeffect_repair.cs
+++CompApoShield.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\blackapocriton\compaposhield.cs
+++CompBlackApocriton.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\blackapocriton\compblackapocriton.cs
+++CompProperties_ApoShield.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\blackapocriton\compproperties_aposhield.cs
+++CompProperties_BlackApocriton.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\blackapocriton\compproperties_blackapocriton.cs
+++CompProperties_RepairAbility.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\blackapocriton\compproperties_repairability.cs
+++CompProperties_SpawnThingOnDestroy.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\blackapocriton\compproperties_spawnthingondestroy.cs
+++CompSpawnThingOnDestroy.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\blackapocriton\compspawnthingondestroy.cs
+++CompTeleport_Attack.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\blackapocriton\compteleport_attack.cs
+++CompTeleport_Defend.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\blackapocriton\compteleport_defend.cs
+++Gizmo_ApoShieldStatus.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\blackapocriton\gizmo_aposhieldstatus.cs
+++HediffCompApoBerserk.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\blackapocriton\hediffcompapoberserk.cs
+++HediffCompDisappear.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\blackapocriton\hediffcompdisappear.cs
+++HediffCompProperties_ApoBerserk.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\blackapocriton\hediffcompproperties_apoberserk.cs
+++HediffCompProperties_Disappear.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\blackapocriton\hediffcompproperties_disappear.cs
+++JobGiver_TryRepairSelf.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\blackapocriton\jobgiver_tryrepairself.cs
+++Projectile_PocketThunder.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\blackapocriton\projectile_pocketthunder.cs
+++ThoughtWorker_HateAura_Black.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\blackapocriton\thoughtworker_hateaura_black.cs
+++TipComponent.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\blackapocriton\tipcomponent.cs
+++CompProperties_QingChe.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\celestiall\compproperties_qingche.cs
+++CompQingChe.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\celestiall\compqingche.cs
+++DamageWorker_Thunder.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\celestiall\damageworker_thunder.cs
+++Verb_WuYiDamage.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\celestiall\verb_wuyidamage.cs
+++Building_ArchoMine.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\giantcluster\building_archomine.cs
+++CompBerserkMarrow.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\giantcluster\compberserkmarrow.cs
+++CompProperties_BerserkMarrow.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\giantcluster\compproperties_berserkmarrow.cs
+++CompProperties_ReceiverSelect.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\giantcluster\compproperties_receiverselect.cs
+++CompProperties_SecVerb.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\giantcluster\compproperties_secverb.cs
+++CompProperties_SecVerb_Pawn.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\giantcluster\compproperties_secverb_pawn.cs
+++CompProperties_ShieldMarrow.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\giantcluster\compproperties_shieldmarrow.cs
+++CompProperties_SuppressionMarrow.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\giantcluster\compproperties_suppressionmarrow.cs
+++CompProperties_WallSelfHeal.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\giantcluster\compproperties_wallselfheal.cs
+++CompReceiverSelect.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\giantcluster\compreceiverselect.cs
+++CompSecVerb.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\giantcluster\compsecverb.cs
+++CompSecVerbPawn.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\giantcluster\compsecverbpawn.cs
+++CompShieldMarrow.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\giantcluster\compshieldmarrow.cs
+++CompSuppressionMarrow.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\giantcluster\compsuppressionmarrow.cs
+++CompUseEffect_Detection.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\giantcluster\compuseeffect_detection.cs
+++CompUseEffect_Trainer.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\giantcluster\compuseeffect_trainer.cs
+++CompWallSelfHeal.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\giantcluster\compwallselfheal.cs
+++DamageWorker_ArchoMine.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\giantcluster\damageworker_archomine.cs
+++GiantFlameBomb.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\giantcluster\giantflamebomb.cs
+++Verb_GiantSpewFire.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\giantcluster\verb_giantspewfire.cs
+++CompConquer.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\medal\compconquer.cs
+++CompDeath.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\medal\compdeath.cs
+++CompFamine.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\medal\compfamine.cs
+++CompPlague.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\medal\compplague.cs
+++CompProperties_Conquer.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\medal\compproperties_conquer.cs
+++CompProperties_Death.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\medal\compproperties_death.cs
+++CompProperties_Famine.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\medal\compproperties_famine.cs
+++CompProperties_Plague.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\medal\compproperties_plague.cs
+++CompProperties_War.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\medal\compproperties_war.cs
+++CompWar.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\medal\compwar.cs
+++CompApparelHediff.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\puzzle\compapparelhediff.cs
+++CompProperties_ApparelHediff.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\puzzle\compproperties_apparelhediff.cs
+++CompProperties_Puzzle.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\puzzle\compproperties_puzzle.cs
+++CompPuzzle.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\puzzle\comppuzzle.cs
+++CompUseEffect_ChangeAnswer.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\puzzle\compuseeffect_changeanswer.cs
+++CompUseEffect_Check.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\puzzle\compuseeffect_check.cs
+++HediffComp_Dodge.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\reinforce\hediffcomp_dodge.cs
+++HediffComp_HitArmor.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\reinforce\hediffcomp_hitarmor.cs
+++HediffComp_OverHorizon.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\reinforce\hediffcomp_overhorizon.cs
+++HediffComp_RemoveWhenPlayer.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\reinforce\hediffcomp_removewhenplayer.cs
+++HediffComp_ScrapSmoking.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\reinforce\hediffcomp_scrapsmoking.cs
+++HediffComp_ShieldGenerator.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\reinforce\hediffcomp_shieldgenerator.cs
+++HediffComp_Smoke.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\reinforce\hediffcomp_smoke.cs
+++HediffComp_TopTurret.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\reinforce\hediffcomp_topturret.cs
+++HediffCompProperties_Dodge.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\reinforce\hediffcompproperties_dodge.cs
+++HediffCompProperties_HitArmor.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\reinforce\hediffcompproperties_hitarmor.cs
+++HediffCompProperties_OverHorizon.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\reinforce\hediffcompproperties_overhorizon.cs
+++HediffCompProperties_RemoveWhenPlayer.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\reinforce\hediffcompproperties_removewhenplayer.cs
+++HediffCompProperties_ScrapSmoking.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\reinforce\hediffcompproperties_scrapsmoking.cs
+++HediffCompProperties_ShieldGeneration.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\reinforce\hediffcompproperties_shieldgeneration.cs
+++HediffCompProperties_Smoke.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\reinforce\hediffcompproperties_smoke.cs
+++HediffCompProperties_TopTurret.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\reinforce\hediffcompproperties_topturret.cs
+++GDUpdate.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\update\gdupdate.cs
+++GDUpdateMod.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\update\gdupdatemod.cs
+++GDUpdateSetting.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\update\gdupdatesetting.cs
+++UpdateComponent.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\update\updatecomponent.cs
+++UpdateWindow.cs
+i:{81bffecf-dd46-41ac-abb7-91b305afa634}:e:\steam\steamapps\common\rimworld\mods\glitterworld destroyer 4 - mechanoid addon\cont\source\gd3\update\updatewindow.cs

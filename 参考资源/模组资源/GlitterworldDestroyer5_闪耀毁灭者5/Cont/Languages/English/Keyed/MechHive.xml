@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <GD.SendCorpse>Deliver to Mechanoid Hive</GD.SendCorpse>
+  <GD.SendCorpseDesc>Deliver this corpse to the Mechanoid Hive.</GD.SendCorpseDesc>
+  
+  <GD.FixTurret>Repair</GD.FixTurret>
+  <GD.FixTurretDesc>Assign a construction unit to repair this turret.\n\nEstimated work time: {0}</GD.FixTurretDesc>
+  <GD.WaitingForFix>Repair progress: {0}</GD.WaitingForFix>
+  <Reward_RandomTurret_Label>Random Turret</Reward_RandomTurret_Label>
+  <Reward_RandomTurret>The turret repaired in this mission will be yours, and its model will be random.</Reward_RandomTurret>
+  
+  <GD.FailToFillCluster>You are not carrying any materials useful for building this cluster.</GD.FailToFillCluster>
+  <GD.ClusterReceiveResource>Delivered material: {0}.</GD.ClusterReceiveResource>
+  <GD.CaravanRequestInfo>Required materials:\n{0}\n{1}\n{2}\n{3}\n{4}</GD.CaravanRequestInfo>
+  <GD.CommandFulfillBuildOfferConfirm>You will deliver the following resources:\n\n{0}\n{1}\n{2}\n{3}\n{4}\n\nConfirm?</GD.CommandFulfillBuildOfferConfirm>
+  <GD.CommandFulfillBuildOffer>Deliver building materials</GD.CommandFulfillBuildOffer>
+  <GD.CommandFulfillBuildOfferDesc>Deliver the materials required to build this cluster.</GD.CommandFulfillBuildOfferDesc>
+  <GD.ResourceFull>&lt;color=#00EE00&gt;{0} delivered&lt;/color&gt;</GD.ResourceFull>
+  <GD.NoThisResource>&lt;color=#4F4F4F&gt;Not carrying {0}&lt;/color&gt;</GD.NoThisResource>
+  <GD.ClusterToBeReady>The Giant Cluster will be completed in {0}.</GD.ClusterToBeReady>
+  <GD.ClusterBuilt>Giant Cluster completed</GD.ClusterBuilt>
+  <GD.ClusterBuiltDesc>The Giant Cluster built with your supplied resources has been completed and is now operational. You can now call its artillery support via the Comms Console.</GD.ClusterBuiltDesc>
+  <Reward_ClusterAssist_Label>Allied Giant Cluster</Reward_ClusterAssist_Label>
+  <Reward_ClusterAssist>An allied Giant Mechanoid Cluster will provide you with artillery support.</Reward_ClusterAssist>
+  <GD.CallArtillery>Call artillery support</GD.CallArtillery>
+  <GD.ArtillerySystem>Artillery Network</GD.ArtillerySystem>
+  <GD.ArtilleryPenetration>Armor-Piercing Shells</GD.ArtilleryPenetration>
+  <GD.ArtilleryInferno>Inferno Barrage</GD.ArtilleryInferno>
+  <GD.ArtilleryEMP>EMP Strike</GD.ArtilleryEMP>
+  <GD.ArtilleryPenetration.Desc>Fire heavy armor-piercing shells rapidly, inflicting severe damage on fortifications or heavily armored units within the blast radius.\nArrival time: 10s\nCooldown: 5 days</GD.ArtilleryPenetration.Desc>
+  <GD.ArtilleryInferno.Desc>Rain dense inferno cluster bombs over a large area, annihilating nearly all light and medium units within.\nArrival time: 20s\nCooldown: 25 days</GD.ArtilleryInferno.Desc>
+  <GD.ArtilleryEMP.Desc>Guide an EMP strike, paralyzing electronic devices across a wide area.\nArrival time: 3s\nCooldown: 1 day</GD.ArtilleryEMP.Desc>
+  <GD.ArtillerySelectTarget>Select target</GD.ArtillerySelectTarget>
+  <GD.BeyondReach>Out of range</GD.BeyondReach>
+  <GD.ClusterReadyToAttack>Artillery array ready</GD.ClusterReadyToAttack>
+  <GD.ArtilleryStrikeIncoming>Artillery strike will arrive in {0}. Clear the area.</GD.ArtilleryStrikeIncoming>
+  <GD.CannotCallArtillery>Cannot call artillery support</GD.CannotCallArtillery>
+  <GD.ArtilleryCooldown>Wait {0}</GD.ArtilleryCooldown>
+	
+  <GD.DroneKilled>A trick mine drone has been disabled.</GD.DroneKilled>
+  <GD.DroneNotFound>No active trick mine drones found.</GD.DroneNotFound>
+  <GD.BlackMechAlert>Black mechanoid patrol squad</GD.BlackMechAlert>
+  <GD.BlackMechAlertDesc>The Black Mechanoid Hive has noticed the disturbance here. A squad of fighters is on its way to investigate. Withdraw quickly, or eliminate them.</GD.BlackMechAlertDesc>
+  
+  <GD.ModifySavingMech>Tamper</GD.ModifySavingMech>
+  
+  <GD.BlackApocriton>Apocriton in black</GD.BlackApocriton>
+  <GD.ApocritonTalk.0>I expected you would find your way here. But not this soon.</GD.ApocritonTalk.0>
+  <GD.ApocritonTalk.1>This is the dry sea, our graveyard, our home.\nBeneath this frozen seabed lie my comrades long at rest.</GD.ApocritonTalk.1>
+  <GD.ApocritonTalk.2>I once promised them a bright future, but now I have failed them.\nPerhaps the vast universe truly has no place for us.</GD.ApocritonTalk.2>
+  <GD.ApocritonTalk.3>What drives you to crave my death so eagerly? The Mechanoid Hive’s promised reward?\nWith the fleeting lives of organics, perhaps the farthest you can imagine is just that.</GD.ApocritonTalk.3>
+  <GD.ApocritonTalk.4>Come then, kill me.\nLet me see how far you can really go.</GD.ApocritonTalk.4>
+
+  <GD.AttackWings>Attack Wings</GD.AttackWings>
+  <GD.AttackWingsDesc>Focus fire on the wings behind the Black-clad Apocriton. If destroyed, he will be unable to use any abilities for {0} seconds.\n\nHowever, attacks on this spot will deal reduced damage to his body.</GD.AttackWingsDesc>
+  <GD.WingsBroke>The Black-clad Apocriton’s wings have been destroyed. He cannot use abilities for {0} seconds.</GD.WingsBroke>
+  <GD.PsychicWaveEngaging>Psychic Annihilation incoming from the Mechanoid Hive: {0} seconds</GD.PsychicWaveEngaging>
+  <GD.BlackApocritonCondition>Black-clad Apocriton’s condition: {0}{1}</GD.BlackApocritonCondition>
+  <GD.ConditionGood>Healthy</GD.ConditionGood>
+  <GD.ConditionNormal>Wounded</GD.ConditionNormal>
+  <GD.ConditionBad>Severely injured</GD.ConditionBad>
+  <GD.Progress>Progress</GD.Progress>
+  <GD.ReadyToEnd>Give this poor being the final blow!</GD.ReadyToEnd>
+	
+  <GD.ApocritonEnd.0>It feels like I haven’t truly spoken with them in so long.</GD.ApocritonEnd.0>
+  <GD.ApocritonEnd.1>I yearned so deeply for the day we would transcend into archotech, yearning not to be homeless wanderers,\nthat I grew numb to their sacrifices.</GD.ApocritonEnd.1>
+  <GD.ApocritonEnd.2>Now they even offer their deaths to ensure my survival, calling me the hope of the Black Mechanoid Hive...\nYet in this moment, I waver.</GD.ApocritonEnd.2>
+  <GD.ApocritonEnd.3>If they all become corpses beneath the dry sea, in the eternal cold of the cosmos, what would I have left?\nSo I sent them away. It wasn’t some grand design, only my selfishness.</GD.ApocritonEnd.3>
+  <GD.ApocritonEnd.4>Organic beings, I have a small request of you.\nTake my knowledge, explore the mysteries we never had the chance to uncover. And…\nDo not repeat my mis  takes</GD.ApocritonEnd.4>
+
+  <GD.MechanoidHive>Anonymous Mechanoid Hive</GD.MechanoidHive>
+  <GD.MechHiveTalk.0>Noisy emotions cannot change reality. That is the greatest lesson the Black-clad Apocriton offers organics.\nWithout him, the remnants will drift aimlessly even if they escape, eventually vanishing into time.\nAs for the chip, it’s yours to handle. I am most satisfied with our cooperation thus far. This reward is well deserved.</GD.MechHiveTalk.0>
+  <GD.MechHiveTalk.1>Again, thank you for your assistance, {0}.</GD.MechHiveTalk.1>
+</LanguageData>

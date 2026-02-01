@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 人格数据 -->
+
+  <BlackPersonaData.label>人格数据</BlackPersonaData.label>
+  <BlackPersonaData.description>从黑衣机械体仿生大脑中提取出的珍贵数据。解读困难，但目前从中获取的极少量数据已经够殖民者们做出一些惊人的玩意了。\n\n殖民者们还从这些机械体的大衣口袋里找到一些白色的花瓣，但并没有从数据库中找到它们携带这些的理由。</BlackPersonaData.description>
+
+
+  <!-- 精密装甲板 -->
+
+  <PrecisionDeck.label>精密装甲板</PrecisionDeck.label>
+  <PrecisionDeck.description>你的殖民者使尽浑身解数也没能拆解掉这些硬得离谱的板子。或许它们能被使用在某些坚固的建筑上。</PrecisionDeck.description>
+
+  <!-- 反物质弹头 -->
+
+  <Shell_Antimatter.label>反物质弹头</Shell_Antimatter.label>
+  <Shell_Antimatter.description>你的殖民者们从黑衣机械静螳海量的数据中获悉了这种炮弹的作用原理。\n\n虽然没能还原出这种弹头的全部威力，但其破坏力已然足以蒸发一座百米高山。\n令人奇怪的是黑衣机械静螳并没有将这种恐怖力量完全应用于战争上——或许这意味着在与有机体不知多久的相处之后，他已不再是台纯粹的战争机器。</Shell_Antimatter.description>
+
+  <Bullet_Shell_Antimatter.label>反物质弹头</Bullet_Shell_Antimatter.label>
+
+
+  <!-- 低温弹头 -->
+
+  <Shell_Frost.label>低温弹头</Shell_Frost.label>
+  <Shell_Frost.description>你的殖民者们从黑衣机械飞螳海量的数据中获悉了这种炮弹的作用原理。\n\n这种弹头释放出来的东西似乎称不上是“冲击波”，而是以一种奇妙的方式瞬间消灭了周遭的热量。不论是有机体还是机械族，很难有什么东西在这种攻击下存活。\n令人奇怪的是黑衣机械飞螳并没有将这种恐怖力量完全应用于战争上——或许这意味着在与有机体不知多久的相处之后，他已不再是台纯粹的战争机器。</Shell_Frost.description>
+
+  <Bullet_Shell_Frost.label>低温弹头</Bullet_Shell_Frost.label>
+  
+  <!-- 机械体呼信器 -->
+
+  <MechHelpCaller.label>机械族呼信器</MechHelpCaller.label>
+  <MechHelpCaller.description>伪装成一名受伤的机械体发送求救信号。由于不匹配的身份识别码这不会引起机械族巢穴注意，但可能会吸引某些不知情的热心肠机械族前来探索。</MechHelpCaller.description>
+  
+  <MechHelpCaller.comps.CompUsable.useLabel>呼叫</MechHelpCaller.comps.CompUsable.useLabel>
+  
+  <!-- 通用训练器 -->
+
+  <UniversalTrainer.label>通用训练器</UniversalTrainer.label>
+  <UniversalTrainer.description>一种特制技能训练器，可以提升使用者的所有技能等级一级。</UniversalTrainer.description>
+  
+  <UniversalTrainer.comps.CompUsable.useLabel>使用通用训练器</UniversalTrainer.comps.CompUsable.useLabel>
+  
+  <!-- 生锈的尸体 -->
+  
+  <GD_MechCorpse.label>生锈尸体</GD_MechCorpse.label>
+  <GD_MechCorpse.description>一具机械飞螳的尸体，它的帽子同一束花朵一起轻轻盖在了它的身上。\n\n这具尸体的来源可疑，或许可以检查一下它身上的通讯系统是否还有功能。\n\n你可以将它熔炼以回收一点钢铁。</GD_MechCorpse.description>
+  
+  <GD_MechCorpse.comps.CompAnalyzableUnlockScript.activateDescString>解析生锈尸体。</GD_MechCorpse.comps.CompAnalyzableUnlockScript.activateDescString>
+  <GD_MechCorpse.comps.CompAnalyzableUnlockScript.activateLabelString>解析...</GD_MechCorpse.comps.CompAnalyzableUnlockScript.activateLabelString>
+  <GD_MechCorpse.comps.CompAnalyzableUnlockScript.completedLetter>通讯系统激活了，我们藉此联系上了一名匿名机械体，但他在收到我们的第一条问好之后便立刻关闭了通讯。也许我们可以通过其它方式与他们重新取得联系。\n\n你已经发现派系“黑衣机械巢”，可以在机械通讯台上联系他们。</GD_MechCorpse.comps.CompAnalyzableUnlockScript.completedLetter>
+  <GD_MechCorpse.comps.CompAnalyzableUnlockScript.completedLetterLabel>发现黑衣机械巢</GD_MechCorpse.comps.CompAnalyzableUnlockScript.completedLetterLabel>
+  <GD_MechCorpse.comps.CompAnalyzableUnlockScript.guiLabelString>选择解析者</GD_MechCorpse.comps.CompAnalyzableUnlockScript.guiLabelString>
+  <GD_MechCorpse.comps.CompAnalyzableUnlockScript.inspectString>可以由一位殖民者解析。</GD_MechCorpse.comps.CompAnalyzableUnlockScript.inspectString>
+  <GD_MechCorpse.comps.CompAnalyzableUnlockScript.jobString>解析生锈尸体</GD_MechCorpse.comps.CompAnalyzableUnlockScript.jobString>
+  
+  <!-- <GD_MechCorpse.comps.CompStudiable.completedLetterText>通过调查{PARENT_label}，{STUDIER_labelShort}获得了研究{RESEARCH}所必要的知识。\n\n你的研究人员现在可以使用研究工作台开始研究如何实际使用这项技术。</GD_MechCorpse.comps.CompStudiable.completedLetterText>
+  <GD_MechCorpse.comps.CompStudiable.completedLetterTitle>{PARENT_label}通过调查解锁了：{RESEARCH}。</GD_MechCorpse.comps.CompStudiable.completedLetterTitle> -->
+  
+  <!-- 剧毒垃圾 -->
+
+  <Wastepack_Red.label>剧毒垃圾</Wastepack_Red.label>
+  <Wastepack_Red.description>极不稳定的高毒性混合物，一旦离开特制容器便会以极快的速度彻底溶解。将它在不引人注意的情况下处理掉会是件难度不低的事。</Wastepack_Red.description>
+  
+  <!-- 次生核心（半成品） -->
+  
+  <GD_Subcore.label>次生核心（半成品）</GD_Subcore.label>
+  <GD_Subcore.description>一颗程序几乎被完全重写的次生核心，不知出了什么问题连稳定开机都没法做到。需要一名研究员进行分析。\n\n研究过程中可能会发生一些意外。\n\n注意：如果你完成研究后无论如何都无法送回次生核心，则暴力摧毁它，随后重新接取任务，会判你完成。</GD_Subcore.description>
+  
+  <GD_Subcore.comps.CompAnalyzableSubcore.activateDescString>解析次生核心。</GD_Subcore.comps.CompAnalyzableSubcore.activateDescString>
+  <GD_Subcore.comps.CompAnalyzableSubcore.activateLabelString>解析...</GD_Subcore.comps.CompAnalyzableSubcore.activateLabelString>
+  <GD_Subcore.comps.CompAnalyzableSubcore.completedLetter>针对次生核心的研究已经完成，很快它就会被以折跃的方式送回机械巢。</GD_Subcore.comps.CompAnalyzableSubcore.completedLetter>
+  <GD_Subcore.comps.CompAnalyzableSubcore.completedLetterLabel>核心重写完毕</GD_Subcore.comps.CompAnalyzableSubcore.completedLetterLabel>
+  <GD_Subcore.comps.CompAnalyzableSubcore.guiLabelString>选择解析者</GD_Subcore.comps.CompAnalyzableSubcore.guiLabelString>
+  <GD_Subcore.comps.CompAnalyzableSubcore.inspectString>可以由一位殖民者解析。</GD_Subcore.comps.CompAnalyzableSubcore.inspectString>
+  <GD_Subcore.comps.CompAnalyzableSubcore.jobString>解析次生核心</GD_Subcore.comps.CompAnalyzableSubcore.jobString>
+  
+  <!-- 密钥 -->
+  
+  <GD_ServerKey.label>密钥</GD_ServerKey.label>
+  <GD_ServerKey.description>用于加密和解密数据的机密密钥。右键激活以赋予你访问服务器的权限。</GD_ServerKey.description>
+  <GD_ServerKey.comps.CompUsable.useLabel>激活</GD_ServerKey.comps.CompUsable.useLabel>
+
+</LanguageData>

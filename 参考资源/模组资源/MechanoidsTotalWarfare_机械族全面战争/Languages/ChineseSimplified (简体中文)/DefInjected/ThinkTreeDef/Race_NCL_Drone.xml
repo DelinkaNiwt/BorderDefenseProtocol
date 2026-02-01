@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 爬到安全地带。 -->
+  <NCL_Dinergate_Drone_thinkTreeMain.thinkRoot.subNodes.0.subNodes.0.subNodes.0.subNodes.0.subNodes.0.crawlingReportStringOverride>TODO</NCL_Dinergate_Drone_thinkTreeMain.thinkRoot.subNodes.0.subNodes.0.subNodes.0.subNodes.0.subNodes.0.crawlingReportStringOverride>
+  <!-- EN: 爬到床上。 -->
+  <NCL_Dinergate_Drone_thinkTreeMain.thinkRoot.subNodes.0.subNodes.0.subNodes.0.subNodes.0.subNodes.1.subNodes.0.crawlingReportStringOverride>TODO</NCL_Dinergate_Drone_thinkTreeMain.thinkRoot.subNodes.0.subNodes.0.subNodes.0.subNodes.0.subNodes.1.subNodes.0.crawlingReportStringOverride>
+  
+  <!-- EN: 爬到安全地带。 -->
+  <NCL_Scutiger_Drone_thinkTreeMain.thinkRoot.subNodes.0.subNodes.0.subNodes.0.subNodes.0.subNodes.0.crawlingReportStringOverride>TODO</NCL_Scutiger_Drone_thinkTreeMain.thinkRoot.subNodes.0.subNodes.0.subNodes.0.subNodes.0.subNodes.0.crawlingReportStringOverride>
+  <!-- EN: 爬到床上。 -->
+  <NCL_Scutiger_Drone_thinkTreeMain.thinkRoot.subNodes.0.subNodes.0.subNodes.0.subNodes.0.subNodes.1.subNodes.0.crawlingReportStringOverride>TODO</NCL_Scutiger_Drone_thinkTreeMain.thinkRoot.subNodes.0.subNodes.0.subNodes.0.subNodes.0.subNodes.1.subNodes.0.crawlingReportStringOverride>
+  
+</LanguageData>

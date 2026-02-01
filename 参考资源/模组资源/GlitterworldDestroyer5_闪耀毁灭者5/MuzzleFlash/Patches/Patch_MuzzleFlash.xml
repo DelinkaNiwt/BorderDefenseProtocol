@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+    <Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Muzzle Flash</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<success>Always</success>
+			<operations>
+
+				<!--Charged shit idk-->
+
+				<li Class="SafePatcher.PatchOperationSetModExtension">
+					<xpath>Defs/ThingDef[defName="Gun_HighChargeLance"]</xpath>
+					<value>
+						<li Class="MuzzleFlash.MuzzleFlashProps">
+							<def>MF_ChargedMuzzleFalsh</def>
+							<drawSize>(2,1)</drawSize>
+							<offsets>
+								<li>(0.38,0)</li>
+							</offsets>
+						</li>
+					</value>
+				</li>
+
+				<li Class="SafePatcher.PatchOperationSetModExtension">
+					<xpath>Defs/ThingDef[defName="CataphractCentipede_SR"]</xpath>
+					<value>
+						<li Class="MuzzleFlash.MuzzleFlashProps">
+							<def>MF_ChargedMuzzleFalsh</def>
+							<drawSize>(6,3)</drawSize>
+							<offsets>
+								<li>(0.88,0)</li>
+							</offsets>
+						</li>
+					</value>
+				</li>
+
+				<li Class="SafePatcher.PatchOperationSetModExtension">
+					<xpath>Defs/ThingDef[defName="CataphractCentipede_FY"]</xpath>
+					<value>
+						<li Class="MuzzleFlash.MuzzleFlashProps">
+							<def>MF_StandardMuzzleFalsh</def>
+							<drawSize>(3,3)</drawSize>
+							<offsets>
+								<li>(0.85,0.62)</li>
+								<li>(0.85,-0.62)</li>
+							</offsets>
+							<isAlternately>true</isAlternately>
+						</li>
+					</value>
+				</li>
+				
+				<li Class="SafePatcher.PatchOperationSetModExtension">
+					<xpath>Defs/ThingDef[defName="Gun_MarineChargeLance"]</xpath>
+					<value>
+						<li Class="MuzzleFlash.MuzzleFlashProps">
+							<def>MF_ChargedMuzzleFalsh</def>
+							<drawSize>(2,1)</drawSize>
+							<offsets>
+								<li>(0.38,0)</li>
+							</offsets>
+						</li>
+					</value>
+				</li>
+				
+				<li Class="SafePatcher.PatchOperationSetModExtension">
+					<xpath>Defs/ThingDef[defName="Gun_MiniChargeGun"]</xpath>
+					<value>
+						<li Class="MuzzleFlash.MuzzleFlashProps">
+							<def>MF_ChargedMuzzleFalsh</def>
+							<drawSize>(1,1)</drawSize>
+							<offsets>
+								<li>(0.18,0)</li>
+							</offsets>
+						</li>
+					</value>
+				</li>
+				
+				<li Class="SafePatcher.PatchOperationSetModExtension">
+					<xpath>Defs/ThingDef[defName="Gun_Minigun_Mech"]</xpath>
+					<value>
+						<li Class="MuzzleFlash.MuzzleFlashProps">
+							<def>MF_StandardMuzzleFalsh</def>
+							<drawSize>(1.8,1.8)</drawSize>
+							<offsets>
+								<li>(0.86,-0.09)</li>
+							</offsets>
+						</li>
+					</value>
+				</li>
+				
+				<li Class="SafePatcher.PatchOperationSetModExtension">
+					<xpath>Defs/ThingDef[defName="Gun_GiantChargeBlaster"]</xpath>
+					<value>
+						<li Class="MuzzleFlash.MuzzleFlashProps">
+							<def>MF_ChargedMuzzleFalsh</def>
+							<drawSize>(7,3.5)</drawSize>
+							<offsets>
+								<li>(2.1,0)</li>
+							</offsets>
+						</li>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+	
+</Patch>

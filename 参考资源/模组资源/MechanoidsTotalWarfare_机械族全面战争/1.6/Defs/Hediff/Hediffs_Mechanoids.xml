@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  
+  <HediffDef>
+    <defName>NCL_Mech_Ironbark_Hediff</defName>
+    <label>NCL：铁树</label>
+	<defaultLabelColor>(0.8, 0.2, 0.2)</defaultLabelColor>
+	<description>铁木妖的蜂窝减震层与高温再生循环会在受到攻击时自动强化受损区域</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <comps>
+	  <li Class="NCL.HediffCompProperties_MechAutoRecovery">
+        <tickMultiflier>180</tickMultiflier>
+        <healPoint>5</healPoint>
+      </li>
+	</comps>
+	<stages>
+      <li>
+		<minSeverity>0.01</minSeverity>
+		<statFactors>
+			<IncomingDamageFactor>0.80</IncomingDamageFactor><!--受到伤害乘数-->
+			<StaggerDurationFactor>0.5</StaggerDurationFactor><!--抑止时间系数-->
+        </statFactors>
+		<statOffsets>
+		  <MeleeHitChance>+10</MeleeHitChance>
+		  <MeleeDodgeChance>+10</MeleeDodgeChance>
+        </statOffsets>
+      </li>
+    </stages>
+    <modExtensions>
+        <li Class="NCL.HediffExtension_NoNotification"/>
+    </modExtensions>
+  </HediffDef>
+
+    <HediffGiverSetDef>
+    <defName>NCL_Mech_Ironbark_Introduction</defName>
+    <hediffGivers>
+      <li Class="HediffGiver_Random">
+        <hediff>NCL_Mech_Ironbark_Hediff</hediff>
+        <mtbDays>0.00000001</mtbDays>
+      </li>
+    </hediffGivers>
+  </HediffGiverSetDef>
+
+    <HediffDef>
+    <defName>NCL_Mech_Mantis_Hediff</defName>
+    <label>NCL：机械兰螳</label>
+	<defaultLabelColor>(0.8, 0.2, 0.2)</defaultLabelColor>
+	<description>1</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <comps>
+	  <li Class="NCL.HediffCompProperties_MechAutoRecovery">
+        <tickMultiflier>180</tickMultiflier>
+        <healPoint>5</healPoint>
+      </li>
+	</comps>
+	<stages>
+      <li>
+		<minSeverity>0.01</minSeverity>
+		<statFactors>
+			<IncomingDamageFactor>0.80</IncomingDamageFactor><!--受到伤害乘数-->
+			<StaggerDurationFactor>0.5</StaggerDurationFactor><!--抑止时间系数-->
+        </statFactors>
+		<statOffsets>
+		  <MeleeHitChance>+18</MeleeHitChance>
+		  <MeleeDodgeChance>+18</MeleeDodgeChance>
+        </statOffsets>
+      </li>
+    </stages>
+    <modExtensions>
+        <li Class="NCL.HediffExtension_NoNotification"/>
+    </modExtensions>
+  </HediffDef>
+  
+  <HediffGiverSetDef>
+    <defName>NCL_Mech_Mantis_Introduction</defName>
+    <hediffGivers>
+      <li Class="HediffGiver_Random">
+        <hediff>NCL_Mech_Mantis_Hediff</hediff>
+        <mtbDays>0.00000001</mtbDays>
+      </li>
+    </hediffGivers>
+  </HediffGiverSetDef>
+  
+  <HediffDef>
+    <defName>TW_Mech_Shell_Fortification_Hediff</defName>
+    <label>全面战争：壳堡构体</label>
+	<defaultLabelColor>(0.8, 0.2, 0.2)</defaultLabelColor>
+	<description>全面战争：壳堡构体</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <comps>
+	  <li Class="NCL.HediffCompProperties_MechAutoRecovery">
+        <tickMultiflier>180</tickMultiflier>
+        <healPoint>10</healPoint>
+      </li>
+	</comps>
+	<stages>
+      <li>
+		<minSeverity>0.01</minSeverity>
+		<statFactors>
+			<StaggerDurationFactor>0</StaggerDurationFactor><!--抑止时间系数-->
+    </statFactors>
+      </li>
+    </stages>
+      <modExtensions>
+        <li Class="NCL.HediffExtension_NoNotification"/>
+    </modExtensions>
+  </HediffDef>
+  
+  <HediffGiverSetDef>
+    <defName>TW_Mech_Shell_Fortification_Introduction</defName>
+    <hediffGivers>
+      <li Class="HediffGiver_Random">
+        <hediff>TW_Mech_Shell_Fortification_Hediff</hediff>
+        <mtbDays>0.00000001</mtbDays>
+      </li>
+    </hediffGivers>
+  </HediffGiverSetDef>
+
+    <HediffDef>
+    <defName>TW_Mech_Shell_Fortification_ShellBreaked_Hediff</defName>
+    <label>全面战争：壳堡构体</label>
+	<defaultLabelColor>(0.8, 0.2, 0.2)</defaultLabelColor>
+	<description>全面战争：壳堡构体</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <comps>
+	  <li Class="NCL.HediffCompProperties_MechAutoRecovery">
+        <tickMultiflier>180</tickMultiflier>
+        <healPoint>10</healPoint>
+      </li>
+	</comps>
+	<stages>
+      <li>
+		<minSeverity>0.01</minSeverity>
+		<statFactors>
+			<VEF_VerbRangeFactor>1.25</VEF_VerbRangeFactor>
+			<RangedCooldownFactor>0.1</RangedCooldownFactor>
+			<AimingDelayFactor>0.1</AimingDelayFactor>
+        </statFactors>
+		<statOffsets>
+        </statOffsets>
+      </li>
+    </stages>
+    <modExtensions>
+        <li Class="NCL.HediffExtension_NoNotification"/>
+    </modExtensions>
+  </HediffDef>
+  
+  <HediffGiverSetDef>
+    <defName>TW_Mech_Shell_Fortification_ShellBreaked</defName>
+    <hediffGivers>
+      <li Class="HediffGiver_Random">
+        <hediff>TW_Mech_Shell_Fortification_ShellBreaked_Hediff</hediff>
+        <mtbDays>0.00000001</mtbDays>
+      </li>
+    </hediffGivers>
+  </HediffGiverSetDef>
+
+    <HediffDef>
+    <defName>TW_Capacitor_Meltdown</defName>
+    <label>电容紊乱</label>
+	<defaultLabelColor>(0.8, 0.2, 0.2)</defaultLabelColor>
+	<description>在电容过载爆炸后，特斯拉蜈蚣会陷入短暂的机能崩溃状态。高压电弧变得紊乱，移动速度大幅下降，攻击时甚至会出现短暂的电力中断。虽然它能通过自主充能逐渐恢复，但在完全回充前，无论是追击敌人还是防御反击都显得力不从心。</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <comps>
+	  <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>3600</disappearsAfterTicks>
+		<showRemainingTime>true</showRemainingTime>
+      </li>
+	  <li Class="NCL.HediffCompProperties_EffectAura">
+        <minDistance>1.0</minDistance>  <!-- 最小5格距离 -->
+        <maxDistance>3.0</maxDistance>  <!-- 最大6格距离 -->
+        <EffectInterval>300</EffectInterval> <!-- 每2秒生成一轮 -->
+        <EffectsPerBurst>1</EffectsPerBurst> <!-- 每次生成3个烟雾点 -->
+		<EffectFleckDef>NCL_EnergyCrackle</EffectFleckDef>
+      </li>
+	</comps>
+	<stages>
+      <li>
+		<minSeverity>0.01</minSeverity>
+		<statFactors>
+			<IncomingDamageFactor>2</IncomingDamageFactor><!--受到伤害乘数-->
+			<StaggerDurationFactor>3</StaggerDurationFactor><!--抑止时间系数-->
+			<MeleeDamageFactor>0.5</MeleeDamageFactor>
+			<MoveSpeed>0.5</MoveSpeed>
+        </statFactors>
+		<statOffsets>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+    <HediffDef>
+    <defName>NCL_Mech_ArchotechWorm_Hediff</defName>
+    <label>NCL：超凡机械蠕虫</label>
+	<defaultLabelColor>(0.8, 0.2, 0.2)</defaultLabelColor>
+	<description>这个庞大机械体的身世被NCL封存在最高机密中，您虽充满好奇却无从探查。您亲眼见证过它在战场上展现的神迹般的杀伤效率，此刻只能庆幸它暂时属于同盟阵营——尽管这种特殊状态充满未知变数。</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <comps>
+	  <li Class="NCL.HediffCompProperties_MechAutoRecovery">
+        <tickMultiflier>180</tickMultiflier>
+        <healPoint>1</healPoint>
+      </li>
+	</comps>
+	<stages>
+      <li>
+		<minSeverity>0.01</minSeverity>
+		<statFactors>
+			<StaggerDurationFactor>0</StaggerDurationFactor><!--抑止时间系数-->
+        </statFactors>
+		<statOffsets>
+		  <MeleeHitChance>+10</MeleeHitChance>
+		  <MeleeDodgeChance>+10</MeleeDodgeChance>
+        </statOffsets>
+      </li>
+    </stages>
+    <modExtensions>
+        <li Class="NCL.HediffExtension_NoNotification"/>
+    </modExtensions>
+  </HediffDef>
+
+  <HediffGiverSetDef>
+    <defName>NCL_Mech_ArchotechWorm_Hediff</defName>
+    <hediffGivers>
+      <li Class="HediffGiver_Random">
+        <hediff>NCL_Mech_ArchotechWorm_Hediff</hediff>
+        <mtbDays>0.00000001</mtbDays>
+      </li>
+    </hediffGivers>
+  </HediffGiverSetDef>
+
+      <HediffDef>
+    <defName>TW_Mech_Apocriton_Hediff</defName>
+    <label>全面战争：憎恶毒蜂</label>
+	<defaultLabelColor>(0.8, 0.2, 0.2)</defaultLabelColor>
+	<description>憎恶毒蜂专有的光学迷彩模块，使其从战场上隐身。仅当玩家单位处于其附近25格范围内时隐身才会解除，在此之前该单位不进行攻击。</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <comps>
+        <li Class="NCL.HediffCompProperties_InvisibilityWithEnemyAwareness">
+        <detectionRadius>25</detectionRadius> <!-- 检测半径 -->
+        <checkInterval>60</checkInterval>
+        <visibleToPlayer>true</visibleToPlayer>
+	    </li>
+        <li Class="HediffCompProperties_DisappearsOnDeath"/>
+	</comps>
+	<stages>
+  </stages>
+    <modExtensions>
+        <li Class="NCL.HediffExtension_NoNotification"/>
+    </modExtensions>
+  </HediffDef>
+
+  <HediffGiverSetDef>
+    <defName>TW_Mech_Apocriton_Hediff</defName>
+    <hediffGivers>
+      <li Class="HediffGiver_Random">
+        <hediff>TW_Mech_Apocriton_Hediff</hediff>
+        <mtbDays>0.00000001</mtbDays>
+      </li>
+    </hediffGivers>
+  </HediffGiverSetDef>
+
+      <HediffDef>
+    <defName>TW_Mech_Warqueen_Hediff</defName>
+    <label>全面战争：战争女王</label>
+	<defaultLabelColor>(0.8, 0.2, 0.2)</defaultLabelColor>
+<description>战争女王利用装载的钢铁能源强化机体防御。钢铁储量越充足，伤害减免效果越强：满载时可承受伤害降至50%，耗尽后承受伤害提升至150%。</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <comps>
+        <li Class="HediffCompProperties_DisappearsOnDeath"/>
+	</comps>
+	<stages>
+  </stages>
+    <modExtensions>
+        <li Class="NCL.HediffExtension_NoNotification"/>
+    </modExtensions>
+  </HediffDef>
+
+  <HediffGiverSetDef>
+    <defName>TW_Mech_Warqueen_Hediff</defName>
+    <hediffGivers>
+      <li Class="HediffGiver_Random">
+        <hediff>TW_Mech_Warqueen_Hediff</hediff>
+        <mtbDays>0.00000001</mtbDays>
+      </li>
+    </hediffGivers>
+  </HediffGiverSetDef>
+
+</Defs>

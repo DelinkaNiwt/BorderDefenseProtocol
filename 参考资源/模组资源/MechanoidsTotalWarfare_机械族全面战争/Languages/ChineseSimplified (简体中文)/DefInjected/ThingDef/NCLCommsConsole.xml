@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: NCL通讯台 -->
+  <NCLCommsConsole.label>TODO</NCLCommsConsole.label>
+  <!-- EN: 一个看上去十分古典的通讯台，内置的解码器能够让其进入三级加密后的通讯网络 -->
+  <NCLCommsConsole.description>TODO</NCLCommsConsole.description>
+  <!-- EN: Call NCL -->
+  <NCLCommsConsole.comps.CompUsable.useLabel>TODO</NCLCommsConsole.comps.CompUsable.useLabel>
+  
+</LanguageData>

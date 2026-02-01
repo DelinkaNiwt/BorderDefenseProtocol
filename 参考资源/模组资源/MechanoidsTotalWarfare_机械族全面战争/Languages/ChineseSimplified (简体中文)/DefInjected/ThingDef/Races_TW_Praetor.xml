@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 侧频卫螽 -->
+  <TW_Mech_Praetor.label>TODO</TW_Mech_Praetor.label>
+  <!-- EN: 机械卫螽的升级型号，搭载更加强劲的护盾生成器，使用四联制导导弹发射器，能够在较远距离发射高爆或者EMP制导导弹以精准压制其对手；身后的反探测雷达可以消除范围内所有地方单位的隐匿效果。 -->
+  <TW_Mech_Praetor.description>TODO</TW_Mech_Praetor.description>
+  <!-- EN: Enable/disable invisibility detection -->
+  <TW_Mech_Praetor.comps.CompAntiInvisibilityField.toggleCommandDesc>TODO</TW_Mech_Praetor.comps.CompAntiInvisibilityField.toggleCommandDesc>
+  <!-- EN: Toggle Scanner -->
+  <TW_Mech_Praetor.comps.CompAntiInvisibilityField.toggleCommandLabel>TODO</TW_Mech_Praetor.comps.CompAntiInvisibilityField.toggleCommandLabel>
+  <!-- EN: head -->
+  <TW_Mech_Praetor.tools.head.label>TODO</TW_Mech_Praetor.tools.head.label>
+  
+</LanguageData>

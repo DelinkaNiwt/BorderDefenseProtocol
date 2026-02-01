@@ -1,0 +1,484 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <!--===== 外部结构 =====-->
+  <PrefabDef>
+    <defName>Exterior_BlackSite_LaunchPad_Large</defName>
+    <size>(13,13)</size>
+    <things>
+      <AncientShipBeacon>
+        <rects>
+          <li>(0,0,0,0)</li>
+          <li>(12,0,12,0)</li>
+          <li>(0,12,0,12)</li>
+          <li>(12,12,12,12)</li>
+        </rects>
+      </AncientShipBeacon>
+    </things>
+    <terrain>
+      <AncientTile>
+        <rects>
+          <li>(0,0,12,0)</li>
+          <li>(0,1,0,12)</li>
+          <li>(12,1,12,12)</li>
+          <li>(1,12,11,12)</li>
+        </rects>
+      </AncientTile>
+      <AncientConcrete>
+        <rects>
+          <li>(1,1,11,11)</li>
+        </rects>
+      </AncientConcrete>
+    </terrain>
+    <prefabs>
+      <Exterior_BlackSite_LaunchPad_GridEntry>
+        <positions>
+          <li>(2, 0, 2)</li>
+          <li>(6, 0, 2)</li>
+          <li>(10, 0, 2)</li>
+          <li>(2, 0, 6)</li>
+          <li>(6, 0, 6)</li>
+          <li>(10, 0, 6)</li>
+          <li>(2, 0, 10)</li>
+          <li>(6, 0, 10)</li>
+          <li>(10, 0, 10)</li>
+        </positions>
+      </Exterior_BlackSite_LaunchPad_GridEntry>
+    </prefabs>
+  </PrefabDef>
+  
+  <PrefabDef>
+    <defName>Exterior_BlackSite_LaunchPad_GridEntry</defName>
+    <size>(3,3)</size>
+    <things>
+      <TransportPod>
+        <position>(1, 0, 1)</position>
+        <chance>0.3</chance>
+      </TransportPod>
+      <Filth_BlastMark>
+        <position>(1, 0, 1)</position>
+        <hp>-1</hp>
+        <chance>0.2</chance>
+      </Filth_BlastMark>
+    </things>
+  </PrefabDef>
+  
+  <!--===== 内部结构 =====-->
+  <!-- 计算机 -->
+  <PrefabDef>
+    <defName>GD_BlackMechComputer</defName>
+    <size>(7,4)</size>
+    <things>
+      <GD_BlackMechComputer>
+        <position>(4, 0, 1)</position>
+      </GD_BlackMechComputer>
+      <BandNode>
+        <position>(1, 0, 1)</position>
+      </BandNode>
+    </things>
+	<terrain>
+	  <AncientTile>
+        <rects>
+          <li>(0,0,6,0)</li>
+          <li>(0,1,0,3)</li>
+          <li>(3,1,3,3)</li>
+          <li>(6,1,6,3)</li>
+          <li>(1,3,2,3)</li>
+          <li>(4,3,5,3)</li>
+        </rects>
+      </AncientTile>
+      <SilverTile>
+        <rects>
+          <li>(1,1,2,2)</li>
+          <li>(4,1,5,2)</li>
+        </rects>
+      </SilverTile>
+    </terrain>
+  </PrefabDef>
+  
+  <!-- 桌子凳子 -->
+  <PrefabDef>
+    <defName>GD_TableAndStool</defName>
+    <size>(3,4)</size>
+    <things>
+      <Stool>
+        <rects>
+          <li>(2,0,2,0)</li>
+          <li>(2,3,2,3)</li>
+        </rects>
+        <relativeRotation>Opposite</relativeRotation>
+        <stuff>Uranium</stuff>
+        <quality>Normal</quality>
+      </Stool>
+      <Stool>
+        <position>(0, 0, 1)</position>
+        <relativeRotation>Counterclockwise</relativeRotation>
+        <stuff>Uranium</stuff>
+        <quality>Normal</quality>
+      </Stool>
+      <Table2x2c>
+        <position>(1, 0, 1)</position>
+        <stuff>Uranium</stuff>
+        <quality>Normal</quality>
+      </Table2x2c>
+    </things>
+  </PrefabDef>
+  
+  <!-- 机器组 -->
+  <PrefabDef>
+    <defName>GD_Machines</defName> <!-- rename -->
+    <size>(11,7)</size>
+    <things>
+      <AncientEquipmentBlocks>
+        <positions>
+          <li>(2, 0, 1)</li>
+          <li>(7, 0, 1)</li>
+          <li>(2, 0, 4)</li>
+          <li>(7, 0, 4)</li>
+        </positions>
+      </AncientEquipmentBlocks>
+      <AncientLamp>
+        <position>(5, 0, 3)</position>
+      </AncientLamp>
+    </things>
+  </PrefabDef>
+  
+  <!-- 桌椅电视 -->
+  <PrefabDef>
+    <defName>GD_TelevisionAndTable</defName> <!-- rename -->
+    <size>(3,3)</size>
+    <things>
+      <Table1x2c>
+        <position>(2, 0, 1)</position>
+        <relativeRotation>Counterclockwise</relativeRotation>
+        <stuff>Uranium</stuff>
+        <quality>Normal</quality>
+      </Table1x2c>
+      <BookcaseSmall>
+        <position>(0, 0, 2)</position>
+        <relativeRotation>Opposite</relativeRotation>
+        <stuff>Uranium</stuff>
+      </BookcaseSmall>
+      <Stool>
+        <position>(1, 0, 0)</position>
+        <stuff>Uranium</stuff>
+        <quality>Normal</quality>
+      </Stool>
+      <Stool>
+        <position>(0, 0, 1)</position>
+        <relativeRotation>Counterclockwise</relativeRotation>
+        <stuff>Uranium</stuff>
+        <quality>Normal</quality>
+      </Stool>
+      <TubeTelevision>
+        <position>(2, 0, 2)</position>
+        <relativeRotation>Opposite</relativeRotation>
+      </TubeTelevision>
+    </things>
+  </PrefabDef>
+
+  <!-- 研究台 -->
+  <PrefabDef>
+    <defName>GD_ResearchTable</defName> <!-- rename -->
+    <size>(5,3)</size>
+    <things>
+      <SimpleResearchBench>
+        <position>(1, 0, 1)</position>
+        <stuff>BlocksGranite</stuff>
+      </SimpleResearchBench>
+      <BookcaseSmall>
+        <position>(0, 0, 0)</position>
+        <relativeRotation>Clockwise</relativeRotation>
+        <stuff>BlocksGranite</stuff>
+      </BookcaseSmall>
+      <Bookcase>
+        <position>(4, 0, 2)</position>
+        <relativeRotation>Opposite</relativeRotation>
+        <stuff>BlocksGranite</stuff>
+      </Bookcase>
+    </things>
+  </PrefabDef>
+
+  <!-- 大箱子 --> 
+  <PrefabDef>
+    <defName>GD_BigCase</defName> <!-- rename -->
+    <size>(3,2)</size>
+    <things>
+      <GD_BigCase>
+        <position>(1, 0, 0)</position>
+      </GD_BigCase>
+    </things>
+  </PrefabDef>
+  
+  <!-- 小箱子 --> 
+  <PrefabDef>
+    <defName>GD_SmallCase</defName> <!-- rename -->
+    <size>(3,1)</size>
+    <things>
+      <GD_WeaponCase>
+        <position>(1, 0, 0)</position>
+      </GD_WeaponCase>
+    </things>
+  </PrefabDef>
+  
+  <!-- 纸箱A --> 
+  <PrefabDef>
+    <defName>GD_PaperBoxA</defName> <!-- rename -->
+    <size>(1,1)</size>
+    <things>
+      <GD_PaperBoxA>
+        <position>(0, 0, 0)</position>
+      </GD_PaperBoxA>
+    </things>
+  </PrefabDef>
+  
+  <!-- 纸箱B --> 
+  <PrefabDef>
+    <defName>GD_PaperBoxB</defName> <!-- rename -->
+    <size>(1,1)</size>
+    <things>
+      <GD_PaperBoxB>
+        <position>(0, 0, 0)</position>
+      </GD_PaperBoxB>
+    </things>
+  </PrefabDef>
+  
+  <!-- 空架子 -->
+  <PrefabDef>
+    <defName>GD_EmptyRacks</defName> <!-- rename -->
+    <size>(4,3)</size>
+    <things>
+      <GD_EmptyShelves>
+        <positions>
+          <li>(0, 0, 0)</li>
+          <li>(2, 0, 0)</li>
+        </positions>
+      </GD_EmptyShelves>
+      <GD_EmptyShelves>
+        <positions>
+          <li>(1, 0, 2)</li>
+          <li>(3, 0, 2)</li>
+        </positions>
+        <relativeRotation>Opposite</relativeRotation>
+      </GD_EmptyShelves>
+    </things>
+  </PrefabDef>
+  
+  <!-- 货物架子 -->
+  <PrefabDef>
+    <defName>GD_StorageRacks</defName> <!-- rename -->
+    <size>(4,3)</size>
+    <things>
+      <GD_StorageRacks>
+        <position>(0, 0, 0)</position>
+      </GD_StorageRacks>
+      <GD_StorageRacks>
+        <position>(3, 0, 2)</position>
+        <relativeRotation>Opposite</relativeRotation>
+      </GD_StorageRacks>
+      <GD_EmptyShelves>
+        <position>(2, 0, 0)</position>
+      </GD_EmptyShelves>
+      <GD_EmptyShelves>
+        <position>(1, 0, 2)</position>
+        <relativeRotation>Opposite</relativeRotation>
+      </GD_EmptyShelves>
+    </things>
+  </PrefabDef>
+  
+  <!-- 纽扣电池 -->
+  <PrefabDef>
+    <defName>GD_PowerCell</defName> <!-- rename -->
+    <size>(1,1)</size>
+	<edgeOnly>true</edgeOnly>
+    <things>
+      <UnstablePowerCell>
+        <position>(0, 0, 0)</position>
+      </UnstablePowerCell>
+    </things>
+  </PrefabDef>
+  
+  <!-- 台球桌 -->
+  <PrefabDef>
+    <defName>GD_BilliardsTable</defName> <!-- rename -->
+    <size>(4,5)</size>
+    <things>
+      <BilliardsTable>
+        <position>(1, 0, 2)</position>
+        <stuff>BlocksGranite</stuff>
+        <quality>Normal</quality>
+      </BilliardsTable>
+    </things>
+    <terrain>
+      <CarpetRed>
+        <rects>
+          <li>(0,0,3,4)</li>
+        </rects>
+      </CarpetRed>
+    </terrain>
+  </PrefabDef>
+
+  <!-- 通讯台 -->
+  <PrefabDef>
+    <defName>GD_CommsConsole</defName> <!-- rename -->
+    <size>(4,2)</size>
+	<edgeOnly>true</edgeOnly>
+    <things>
+      <CommsConsole>
+        <position>(1, 0, 0)</position>
+      </CommsConsole>
+      <OrbitalTradeBeacon>
+        <position>(3, 0, 0)</position>
+      </OrbitalTradeBeacon>
+    </things>
+    <terrain>
+      <Ice>
+        <rects>
+          <li>(0,0,3,1)</li>
+        </rects>
+      </Ice>
+    </terrain>
+  </PrefabDef>
+  
+  <!-- 大杂货箱 -->
+  <PrefabDef>
+    <defName>GD_LargeCrate</defName> <!-- rename -->
+    <size>(1,1)</size>
+    <things>
+      <AncientLargeCrate>
+        <position>(0, 0, 0)</position>
+      </AncientLargeCrate>
+    </things>
+  </PrefabDef>
+  
+  <!-- 小杂货箱 -->  
+  <PrefabDef>
+    <defName>GD_SmallCrate</defName> <!-- rename -->
+    <size>(1,1)</size>
+    <things>
+      <AncientLongCrate>
+        <position>(0, 0, 0)</position>
+      </AncientLongCrate>
+    </things>
+  </PrefabDef>
+
+  <!-- 远古机枪塔 -->
+  <PrefabDef>
+    <defName>GD_AncientTurret</defName> <!-- rename -->
+    <size>(1,1)</size>
+    <things>
+      <AncientSecurityTurret>
+        <position>(0, 0, 0)</position>
+      </AncientSecurityTurret>
+    </things>
+    <terrain>
+      <MetalTile>
+        <rects>
+          <li>(0,0,0,0)</li>
+        </rects>
+      </MetalTile>
+    </terrain>
+  </PrefabDef>
+
+  <!-- 培育器 -->
+  <PrefabDef>
+    <defName>GD_AncientMechGestator</defName> <!-- rename -->
+    <size>(3,2)</size>
+    <things>
+      <AncientMechGestator>
+        <position>(1, 0, 0)</position>
+      </AncientMechGestator>
+    </things>
+  </PrefabDef>
+  
+  <!-- 远古节点 -->
+  <PrefabDef>
+    <defName>GD_BandNodes</defName> <!-- rename -->
+    <size>(6,2)</size>
+	<edgeOnly>true</edgeOnly>
+    <things>
+      <AncientBandNode>
+        <positions>
+          <li>(0, 0, 0)</li>
+          <li>(2, 0, 0)</li>
+          <li>(4, 0, 0)</li>
+        </positions>
+      </AncientBandNode>
+    </things>
+  </PrefabDef>
+
+  <!-- 灭火器 -->
+  <PrefabDef>
+    <defName>GD_FirefoamPopper</defName> <!-- rename -->
+    <size>(1,1)</size>
+    <things>
+      <FirefoamPopper>
+        <position>(0, 0, 0)</position>
+      </FirefoamPopper>
+    </things>
+    <terrain>
+      <TileGranite>
+        <rects>
+          <li>(0,0,0,0)</li>
+        </rects>
+      </TileGranite>
+    </terrain>
+  </PrefabDef>
+  
+  <!-- 巨型机械 -->
+  <PrefabDef>
+    <defName>GD_GiantMachine</defName> <!-- rename -->
+    <size>(5,4)</size>
+    <things>
+      <AncientSecurityTurret>
+        <rects>
+          <li>(0,3,0,3)</li>
+          <li>(4,3,4,3)</li>
+        </rects>
+      </AncientSecurityTurret>
+      <AncientMachine>
+        <position>(2, 0, 1)</position>
+      </AncientMachine>
+    </things>
+  </PrefabDef>
+  
+  <!-- 超频仪 -->
+  <PrefabDef>
+    <defName>GD_MechBooster</defName> <!-- rename -->
+    <size>(4,4)</size>
+    <things>
+      <MechBooster>
+        <position>(1, 0, 1)</position>
+      </MechBooster>
+    </things>
+    <terrain>
+      <AncientTile>
+        <rects>
+          <li>(0,0,3,0)</li>
+          <li>(0,1,0,3)</li>
+          <li>(3,1,3,3)</li>
+          <li>(1,3,2,3)</li>
+        </rects>
+      </AncientTile>
+      <MetalTile>
+        <rects>
+          <li>(1,1,2,2)</li>
+        </rects>
+      </MetalTile>
+    </terrain>
+  </PrefabDef>
+
+  <!-- 设备架 -->
+  <PrefabDef>
+    <defName>GD_SystemRack</defName> <!-- rename -->
+    <size>(1,3)</size>
+    <things>
+      <AncientSystemRack>
+        <position>(0, 0, 1)</position>
+      </AncientSystemRack>
+    </things>
+  </PrefabDef>
+
+
+
+</Defs>

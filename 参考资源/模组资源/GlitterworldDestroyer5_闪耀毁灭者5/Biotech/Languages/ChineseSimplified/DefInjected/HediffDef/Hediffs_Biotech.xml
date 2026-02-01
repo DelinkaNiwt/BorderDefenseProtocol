@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <GD_HitArmor.label>反应装甲</GD_HitArmor.label>
+  <GD_HitArmor.description>一种附加于机械体表层的额外装甲。在机械体遭受伤害时，它会弹出并抵御即将到来的更多攻击。</GD_HitArmor.description>
+
+  <Introduction_Diabolus.label>精英：炼狱魔王</Introduction_Diabolus.label>
+  <Introduction_Diabolus.description>反应装甲：该单位受伤后的一秒内无法再次受伤。\n\n火力提升：主炮与自卫火焰的威力显著提升。\n\n坚固装甲：该单位几乎不会受到任何传统的锐器与钝器伤害。\n\n易燃：该单位受到的所有热能伤害翻倍。</Introduction_Diabolus.description>
+  
+  <Introduction_Warqueen.label>精英：战争女皇</Introduction_Warqueen.label>
+  <Introduction_Warqueen.description>反应装甲：该单位受伤后的一秒内无法再次受伤。\n\n火力提升：装载的机械死卫数量大幅提升。</Introduction_Warqueen.description>
+  
+  <Introduction_Apocriton.label>精英：憎恶毒蜂</Introduction_Apocriton.label>
+  <Introduction_Apocriton.description>反应装甲：该单位受伤后的一秒内无法再次受伤。\n\n组件改良：复活友军机械体时的消耗显著降低。\n\n思维干扰：以该单位为圆心的55格范围内，有机体敌人将失去全部视力与大部分心灵熵上限。</Introduction_Apocriton.description>
+
+  <PsychicRadioSupport_Fst.label>心灵广播</PsychicRadioSupport_Fst.label>
+  <PsychicRadioSupport_Fst.description>这个单位的大脑正受到心灵广播编辑。</PsychicRadioSupport_Fst.description>
+  
+  <PsychicRadioSupport_Sec.label>心灵广播</PsychicRadioSupport_Sec.label>
+  <PsychicRadioSupport_Sec.description>这个单位的大脑正受到心灵广播编辑。</PsychicRadioSupport_Sec.description>
+  
+  <PsychicRadioSupport_Thd.label>心灵广播</PsychicRadioSupport_Thd.label>
+  <PsychicRadioSupport_Thd.description>这个单位的大脑正受到心灵广播编辑。</PsychicRadioSupport_Thd.description>
+</LanguageData>

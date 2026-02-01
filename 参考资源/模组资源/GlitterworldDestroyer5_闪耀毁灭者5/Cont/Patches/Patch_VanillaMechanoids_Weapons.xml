@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+	<Operation Class="PatchOperationSequence">
+		<operations>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Bullet_InfernoCannon"]/projectile</xpath>
+				<value>
+					<projectile>
+					  <damageDef>Flame</damageDef>
+					  <damageAmountBase>80</damageAmountBase>
+					  <armorPenetrationBase>0.85</armorPenetrationBase>
+					  <!-- Use default damage from explosion def -->
+					  <speed>55</speed>
+					  <explosionRadius>4.2</explosionRadius >
+					  <preExplosionSpawnThingDef>Filth_Fuel</preExplosionSpawnThingDef>
+					  <preExplosionSpawnChance>0.56</preExplosionSpawnChance>
+					  <flyOverhead>true</flyOverhead>
+					  <ai_IsIncendiary>true</ai_IsIncendiary>
+					</projectile>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Gun_InfernoCannon"]/verbs</xpath>
+				<value>
+					<verbs>
+					  <li>
+						<verbClass>Verb_Shoot</verbClass>
+						<hasStandardCommand>true</hasStandardCommand>
+						<defaultProjectile>Bullet_InfernoCannon</defaultProjectile>
+						<forcedMissRadius>3.5</forcedMissRadius>
+						<ai_AvoidFriendlyFireRadius>3</ai_AvoidFriendlyFireRadius>
+						<warmupTime>1.25</warmupTime>
+						<range>28.9</range>
+						<burstShotCount>1</burstShotCount>
+						<soundCast>InfernoCannon_Fire</soundCast>
+						<soundCastTail>GunTail_Light</soundCastTail>
+						<muzzleFlashScale>14</muzzleFlashScale>
+					  </li>
+					</verbs>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Gun_ChargeBlasterHeavy"]/verbs</xpath>
+				<value>
+					<verbs>
+					  <li>
+						<verbClass>GD3.Verb_ShootBackfire</verbClass>
+						<hasStandardCommand>true</hasStandardCommand>
+						<defaultProjectile>Bullet_ChargeBlasterHeavy</defaultProjectile>
+						<warmupTime>1.25</warmupTime>
+						<range>28.9</range>
+						<ticksBetweenBurstShots>3</ticksBetweenBurstShots>
+						<burstShotCount>48</burstShotCount>
+						<soundCast>Shot_ChargeBlaster</soundCast>
+						<soundCastTail>GunTail_Heavy</soundCastTail>
+						<muzzleFlashScale>9</muzzleFlashScale>
+					  </li>
+					</verbs>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Gun_Needle"]/verbs</xpath>
+				<value>
+					<verbs>
+					  <li>
+						<verbClass>Verb_Shoot</verbClass>
+						<hasStandardCommand>true</hasStandardCommand>
+						<defaultProjectile>Bullet_NeedleGun</defaultProjectile>
+						<warmupTime>2.5</warmupTime>
+						<minRange>21</minRange>
+						<range>42</range>
+						<soundCast>Shot_NeedleGun</soundCast>
+						<soundCastTail>GunTail_Heavy</soundCastTail>
+						<muzzleFlashScale>9</muzzleFlashScale>
+					  </li>
+					</verbs>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Gun_Needle"]/statBases</xpath>
+				<value>
+					<statBases>
+					  <MarketValue>1400</MarketValue>
+					  <Mass>2.6</Mass>
+					  <AccuracyTouch>1.00</AccuracyTouch>
+					  <AccuracyShort>1.00</AccuracyShort>
+					  <AccuracyMedium>0.90</AccuracyMedium>
+					  <AccuracyLong>0.85</AccuracyLong>
+					  <RangedWeapon_Cooldown>2.1</RangedWeapon_Cooldown>
+					</statBases>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Gun_ThumpCannon"]/statBases/RangedWeapon_Cooldown</xpath>
+				<value>
+					<RangedWeapon_Cooldown>4</RangedWeapon_Cooldown>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Gun_ThumpCannon"]/tools</xpath>
+				<value>
+					<tools>
+						<li>
+							<label>barrel</label>
+							<capacities>
+							<li>Blunt</li>
+							<li>Poke</li>
+							</capacities>
+							<power>18</power>
+							<cooldownTime>1.6</cooldownTime>
+						</li>
+					</tools>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+	
+</Patch>

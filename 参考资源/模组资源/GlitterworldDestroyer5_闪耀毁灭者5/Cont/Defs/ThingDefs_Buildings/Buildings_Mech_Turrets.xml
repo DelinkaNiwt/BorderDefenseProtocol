@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <!-- 登陆迫击炮 -->
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>Turret_LandingAutoMortar</defName>
+    <label>auto mortar</label>
+    <description>A self-powered, fast-loading automatic mortar. Less powerful.</description>
+    <thingClass>Building_TurretGun</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Buildings/MortarMechLarge_Base</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2,2)</drawSize>
+      <drawOffset>(0,0,-0.16)</drawOffset>
+      <damageData>
+        <rect>(0.3,0.3,1.4,1.4)</rect>
+      </damageData>
+      <shadowData>
+        <offset>(-0.13,-0.87,-0.1)</offset>
+        <volume>(0.5,0.4,1.05)</volume>
+      </shadowData>
+    </graphicData>
+    <receivesSignals>true</receivesSignals>
+    <altitudeLayer>Building</altitudeLayer>
+    <stealable>false</stealable>
+    <size>(2,2)</size>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <fillPercent>0.4</fillPercent>
+    <killedLeavings>
+      <ChunkSlagSteel>1</ChunkSlagSteel>
+      <Steel>40</Steel>
+      <Plasteel>10</Plasteel>
+      <ReinforcedBarrel>1</ReinforcedBarrel>
+    </killedLeavings>
+    <tickerType>Normal</tickerType>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>4.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+      </li>
+      <li Class="CompProperties_CanBeDormant" />
+      <li Class="CompProperties_WakeUpDormant">
+        <wakeUpSound>MechanoidsWakeUp</wakeUpSound>
+      </li>
+	  <li Class="CompProperties_Stunnable">
+        <affectedDamageDefs>
+          <li>EMP</li>
+        </affectedDamageDefs>
+      </li>
+	  <li Class="CompProperties_AmbientSound">
+        <sound>MechTurretBig_Call</sound>
+      </li>
+    </comps>
+    <statBases>
+      <MaxHitPoints>360</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <Mass>30</Mass>
+      <ShootingAccuracyTurret>0.9</ShootingAccuracyTurret>
+      <Beauty>-20</Beauty>
+    </statBases>
+    <damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <building>
+      <buildingTags>
+        <li>MechClusterMember</li>
+        <li>MechClusterCombatThreat</li>
+      </buildingTags>
+      <combatPower>220</combatPower>
+      <turretGunDef>Artillery_LandingAutoMortar</turretGunDef>
+      <turretBurstWarmupTime>2.0</turretBurstWarmupTime>
+      <turretBurstCooldownTime>6.0</turretBurstCooldownTime>
+      <turretInitialCooldownTime>10.0</turretInitialCooldownTime>
+      <minMechClusterPoints>3660</minMechClusterPoints>
+    </building>
+    <uiIconPath>Things/Building/Security/TurretMortar_MenuIcon</uiIconPath>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseArtilleryWeapon">
+    <defName>Artillery_LandingAutoMortar</defName>
+    <label>landing auto-mortar</label>
+    <graphicData>
+      <texPath>Things/Building/Mech/TurretMechMortar_Top</texPath>
+    </graphicData>
+    <uiIconScale>1.25</uiIconScale>
+    <weaponTags>
+      <li>Artillery_BaseDestroyer</li>
+    </weaponTags>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>Bullet_Shell_HighExplosive</defaultProjectile>
+        <forcedMissRadius>4.2</forcedMissRadius>
+        <ai_AvoidFriendlyFireRadius>3</ai_AvoidFriendlyFireRadius>
+        <warmupTime>4</warmupTime>
+        <minRange>5.6</minRange>
+        <range>52</range>
+        <burstShotCount>1</burstShotCount>
+        <soundCast>Mortar_LaunchA</soundCast>
+        <soundCastTail>GunTail_Light</soundCastTail>
+        <muzzleFlashScale>16</muzzleFlashScale>
+        <requireLineOfSight>false</requireLineOfSight>
+        <targetParams>
+          <canTargetLocations>true</canTargetLocations>
+        </targetParams>
+      </li>
+    </verbs>
+  </ThingDef>
+
+</Defs>

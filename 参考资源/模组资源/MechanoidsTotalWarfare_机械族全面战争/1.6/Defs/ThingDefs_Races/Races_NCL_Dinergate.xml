@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef Name="NCLMechDinergate" ParentName="BaseMechanoidWalker">
+    <defName>NCL_Mech_Dinergate</defName>
+    <label>机动兵蚁</label>
+<description>单位档案 NCL-00 “机动兵蚁”
+代号 Dinergate
+来源：「铁律」量产通用序列
+
+作为NCL的首个完全自主设计单位 “机动兵蚁”标志着从改装遗骸到自有机械智造的历史转折。这种体型较小的作战平台曾被部署于各类前线任务中，从隧道渗透到基地突袭，其身影几乎无处不在。
+
+核心骨架采用蜂巢仿生构造，由近三百块微型活体金属关节拼合而成，既具备高承载力，又便于批量组装。
+
+武器配置因环境而异，标准型号通常配备中程电荷标枪与一对可变形机械臂，可在搬运、搏斗、拆卸间自由切换用途。
+
+背部安装了折叠式无人机收纳装置，可在必要关头召唤防御性无人机协同作战。
+
+虽然已是旧型号，但“机动兵蚁”的大量数据残片仍被部分智能阵营反复使用与优化。有推测称，某些版本仍在运行于星际废墟之中，以极简的外壳与致命的效率，持续履行着一个早已失效的指令。</description>
+    <statBases>
+      <MarketValue>800</MarketValue>
+      <MoveSpeed>6.0</MoveSpeed>
+      <ArmorRating_Blunt>0.60</ArmorRating_Blunt>
+	  <EMPResistance>0.20</EMPResistance>
+      <ArmorRating_Sharp>0.60</ArmorRating_Sharp>
+      <ShootingAccuracyPawn>3</ShootingAccuracyPawn>
+      <PsychicSensitivity>0</PsychicSensitivity>
+      <BandwidthCost MayRequire="Ludeon.RimWorld.Biotech">3</BandwidthCost>
+      <MechEnergyLossPerHP MayRequire="Ludeon.RimWorld.Biotech">0.2</MechEnergyLossPerHP>
+    </statBases>
+    <tools>
+      <li>
+        <label>left fist</label>
+        <labelNoLocation>fist</labelNoLocation>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>10.0</power>
+        <cooldownTime>1</cooldownTime>
+        <linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+      <li>
+        <label>right fist</label>
+        <labelNoLocation>fist</labelNoLocation>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>10.0</power>
+        <cooldownTime>1</cooldownTime>
+        <linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+      <li>
+        <label>head</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>25</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+        <chanceFactor>0.2</chanceFactor>
+      </li>
+    </tools>
+    <race>
+      <body>Lancer</body>
+      <baseHealthScale>2</baseHealthScale>
+      <detritusLeavings>
+        <li>
+          <def>ChunkMechanoidSlag</def>
+          <texOverrideIndex>11</texOverrideIndex>
+          <spawnChance>0.1</spawnChance>
+        </li>
+        <li>
+          <def>ChunkMechanoidSlag</def>
+          <texOverrideIndex>12</texOverrideIndex>
+          <spawnChance>0.1</spawnChance>
+        </li>
+      </detritusLeavings>
+      <mechEnabledWorkTypes>
+        <li>Hauling</li>
+        <li>Cleaning</li>
+      </mechEnabledWorkTypes>
+      <mechFixedSkillLevel>20</mechFixedSkillLevel>
+    </race>
+	<butcherProducts>
+      <Steel>300</Steel>
+      <Plasteel>100</Plasteel>
+    </butcherProducts>
+<comps>  
+  <li Class="NyarsModPackOne.CompProperties_DroneCarrier">
+    <!-- 消耗的资源类型 -->
+    <fixedIngredient>Steel</fixedIngredient>
+    
+    <!-- 每台无人机消耗的资源数量 -->
+    <costPerDrone>50</costPerDrone>
+    
+    <!-- 最大资源携带量 -->
+    <maxIngredientCount>100</maxIngredientCount>
+    
+    <!-- 冷却时间（游戏刻） -->
+    <cooldownTicks>1200</cooldownTicks> <!-- 60秒 -->
+    
+    <!-- 单次最多部署的无人机数量 -->
+    <maxDronesPerSpawn>1</maxDronesPerSpawn>
+    
+    <!-- 初始资源量 -->
+    <startingIngredientCount>100</startingIngredientCount>
+    
+    <!-- 可选：指定无人机种类 -->
+    <droneKind>NCL_Dinergate_Drone</droneKind>
+    <gizmoIconPath>Races/Drone_south</gizmoIconPath>
+  </li>
+	</comps>
+  </ThingDef>
+
+  <PawnKindDef ParentName="BaseMechanoidKind">
+    <defName>NCL_Mech_Dinergate_Kind</defName>
+    <label>机动兵蚁</label>
+    <race>NCL_Mech_Dinergate</race>
+    <defaultFactionType>NCL_faction</defaultFactionType>
+	<allowInMechClusters>false</allowInMechClusters>
+    <combatPower>180</combatPower>
+    <lifeStages>
+      <li MayRequire="Ludeon.RimWorld.Biotech">
+        <bodyGraphicData>
+          <texPath>Things/Dinergate</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>1.5</drawSize>
+          <shadowData>
+            <volume>(0.4, 0.8, 0.4)</volume>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+      <li>
+        <bodyGraphicData>
+          <texPath>Things/Dinergate</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>1.5</drawSize>
+          <shadowData>
+            <volume>(0.4, 0.8, 0.4)</volume>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+    <weaponMoney>9999~9999</weaponMoney>
+    <weaponTags>
+      <li>NCLLance</li>
+    </weaponTags>
+    <techHediffsChance>1</techHediffsChance>
+    <techHediffsMoney>9999~9999</techHediffsMoney>
+  <abilities>
+  </abilities>
+  </PawnKindDef>
+
+  <ThingDef Name="NCLMechDinergateSniper" ParentName="BaseMechanoidWalker">
+    <defName>NCL_Mech_DinergateSniper</defName>
+    <label>狙击兵蚁</label>
+<description>单位档案 NCL-02 “狙击兵蚁”
+代号 DinergateSniper
+来源：「铁律」量产远程特化序列
+
+作为“机动兵蚁”的远程作战分型，“狙击兵蚁”是在轻量化骨架的基础上进一步做减法的产物。体积更小，结构更紧凑，却能在中距离范围内执行精确打击与长时侦查任务。
+
+主武器为一柄代号“NCL-42 赤针”的战术狙击枪 发射红晶陶瓷制成的低成本弹头 在保持穿甲能力的同时大幅削减了弹体重量与生产资源消耗——实测中可穿透25毫米匀质钢板。
+
+背部安装了折叠式无人机收纳装置，可在必要关头召唤防御性无人机协同作战。
+
+与其他机械族不同，“狙击兵蚁”在作战中极少发出机动噪声，运动路径呈断续跳跃型，被认为是一种“无法预测的射手构装体”。
+
+根据部分残存战术编录，机动兵蚁个体多作为游击群体的“眼睛”与“第一枪”，在主力部队到达前已完成侦察与开火准备。</description>
+    <statBases>
+      <MarketValue>800</MarketValue>
+      <MoveSpeed>5.0</MoveSpeed>
+      <ArmorRating_Blunt>0.60</ArmorRating_Blunt>
+	  <EMPResistance>0.20</EMPResistance>
+      <ArmorRating_Sharp>0.60</ArmorRating_Sharp>
+      <PsychicSensitivity>0</PsychicSensitivity>
+      <ShootingAccuracyPawn>10</ShootingAccuracyPawn>
+      <BandwidthCost MayRequire="Ludeon.RimWorld.Biotech">3</BandwidthCost>
+      <MechEnergyLossPerHP MayRequire="Ludeon.RimWorld.Biotech">0.2</MechEnergyLossPerHP>
+    </statBases>
+    <tools>
+      <li>
+        <label>left fist</label>
+        <labelNoLocation>fist</labelNoLocation>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>10.0</power>
+        <cooldownTime>1</cooldownTime>
+        <linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+      <li>
+        <label>right fist</label>
+        <labelNoLocation>fist</labelNoLocation>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>10.0</power>
+        <cooldownTime>1</cooldownTime>
+        <linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+      <li>
+        <label>head</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>25</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+        <chanceFactor>0.2</chanceFactor>
+      </li>
+    </tools>
+    <race>
+      <body>Lancer</body>
+      <baseHealthScale>2</baseHealthScale>
+      <detritusLeavings>
+        <li>
+          <def>ChunkMechanoidSlag</def>
+          <texOverrideIndex>11</texOverrideIndex>
+          <spawnChance>0.1</spawnChance>
+        </li>
+        <li>
+          <def>ChunkMechanoidSlag</def>
+          <texOverrideIndex>12</texOverrideIndex>
+          <spawnChance>0.1</spawnChance>
+        </li>
+      </detritusLeavings>
+      <mechEnabledWorkTypes>
+        <li>Hauling</li>
+        <li>Cleaning</li>
+      </mechEnabledWorkTypes>
+      <mechFixedSkillLevel>20</mechFixedSkillLevel>
+    </race>
+	<butcherProducts>
+      <Steel>300</Steel>
+      <Plasteel>100</Plasteel>
+    </butcherProducts>
+<comps>  
+  <li Class="NyarsModPackOne.CompProperties_DroneCarrier">
+    <!-- 消耗的资源类型 -->
+    <fixedIngredient>Steel</fixedIngredient>
+    
+    <!-- 每台无人机消耗的资源数量 -->
+    <costPerDrone>50</costPerDrone>
+    
+    <!-- 最大资源携带量 -->
+    <maxIngredientCount>100</maxIngredientCount>
+    
+    <!-- 冷却时间（游戏刻） -->
+    <cooldownTicks>1200</cooldownTicks> <!-- 60秒 -->
+    
+    <!-- 单次最多部署的无人机数量 -->
+    <maxDronesPerSpawn>1</maxDronesPerSpawn>
+    
+    <!-- 初始资源量 -->
+    <startingIngredientCount>100</startingIngredientCount>
+    
+    <!-- 可选：指定无人机种类 -->
+    <droneKind>NCL_Dinergate_Drone</droneKind>
+    <gizmoIconPath>Races/Drone_south</gizmoIconPath>
+  </li>
+	</comps>
+  </ThingDef>
+
+  <PawnKindDef ParentName="BaseMechanoidKind">
+    <defName>NCL_Mech_DinergateSniper_Kind</defName>
+    <label>狙击兵蚁</label>
+    <race>NCL_Mech_DinergateSniper</race>
+    <defaultFactionType>NCL_faction</defaultFactionType>
+	<allowInMechClusters>false</allowInMechClusters>
+    <combatPower>180</combatPower>
+    <lifeStages>
+      <li MayRequire="Ludeon.RimWorld.Biotech">
+        <bodyGraphicData>
+          <texPath>Things/DinergateSniper</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>1.5</drawSize>
+          <shadowData>
+            <volume>(0.4, 0.8, 0.4)</volume>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+      <li>
+        <bodyGraphicData>
+          <texPath>Things/DinergateSniper</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>1.5</drawSize>
+          <shadowData>
+            <volume>(0.4, 0.8, 0.4)</volume>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+    <weaponMoney>9999~9999</weaponMoney>
+    <weaponTags>
+      <li>NCL42H</li>
+    </weaponTags>
+    <techHediffsChance>1</techHediffsChance>
+    <techHediffsMoney>9999~9999</techHediffsMoney>
+  <abilities>
+  </abilities>
+  </PawnKindDef>
+</Defs>

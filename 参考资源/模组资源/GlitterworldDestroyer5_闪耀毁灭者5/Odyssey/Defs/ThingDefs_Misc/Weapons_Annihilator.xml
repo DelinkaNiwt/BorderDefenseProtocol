@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>Turret_Annihilator_Charge</defName>
+    <label>charge blaster turret</label>
+    <description>A small charge blaster designed for use on a defense turret.</description>
+    <tradeability>None</tradeability>
+    <destroyOnDrop>true</destroyOnDrop>
+    <graphicData>
+      <texPath>Things/Item/Equipment/WeaponRanged/ChargeBlasterTurret</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>1.2</drawSize>
+    </graphicData>
+    <statBases>
+      <Mass>2.6</Mass>
+      <AccuracyTouch>0.98</AccuracyTouch>
+      <AccuracyShort>0.95</AccuracyShort>
+      <AccuracyMedium>0.90</AccuracyMedium>
+      <AccuracyLong>0.85</AccuracyLong>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>Bullet_ChargeBlasterHeavy</defaultProjectile>
+        <range>38.9</range>
+        <soundCast>Shot_ChargeBlaster</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>9</muzzleFlashScale>
+        <defaultCooldownTime>1.5</defaultCooldownTime>
+        <ticksBetweenBurstShots>3</ticksBetweenBurstShots>
+		<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+        <burstShotCount>15</burstShotCount>
+      </li>
+    </verbs>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>Turret_Annihilator_Arc</defName>
+    <label>arc thrower turret</label>
+    <description>A small arc thrower designed for use on a defense turret.</description>
+    <tradeability>None</tradeability>
+    <destroyOnDrop>true</destroyOnDrop>
+    <graphicData>
+      <texPath>Buildings/ArcThrower_Top</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>1.2</drawSize>
+    </graphicData>
+    <statBases>
+      <Mass>2.6</Mass>
+      <AccuracyTouch>0.98</AccuracyTouch>
+      <AccuracyShort>0.95</AccuracyShort>
+      <AccuracyMedium>0.90</AccuracyMedium>
+      <AccuracyLong>0.85</AccuracyLong>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>GD3.Verb_ThrowArc</verbClass>
+        <range>19.9</range>
+        <soundCast>ArcThrowerBurst</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>9</muzzleFlashScale>
+        <defaultCooldownTime>4.5</defaultCooldownTime>
+        <ticksBetweenBurstShots>3</ticksBetweenBurstShots>
+		<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+        <burstShotCount>1</burstShotCount>
+      </li>
+    </verbs>
+	<modExtensions>
+	  <li Class="GD3.Ext_Arc">
+	    <range>8.9</range><!-- 连锁范围 -->
+	    <chainCount>2~6</chainCount><!-- 连锁数 -->
+	    <damage>Burn</damage><!-- 伤害类型 -->
+	    <amount>65</amount><!-- 伤害 -->
+	    <penetration>1.0</penetration><!-- 穿甲 -->
+	    <EMPdamage>40</EMPdamage><!-- EMP伤害 -->
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+</Defs>

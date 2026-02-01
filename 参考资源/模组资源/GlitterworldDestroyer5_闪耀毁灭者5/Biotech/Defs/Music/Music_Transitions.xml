@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <MusicTransitionDef>
+    <defName>GD_MiraculousFlower</defName>
+    <workerType>GD3.MiraculousFlowerTransition</workerType>
+    <sequence>GD_MiraculousFlower</sequence>
+    <overridesInterruptions>true</overridesInterruptions>
+    <priority>50</priority>
+  </MusicTransitionDef>
+  
+  <MusicTransitionDef>
+    <defName>GD_MechCommander</defName>
+    <workerType>GD3.MechBossTransition</workerType>
+    <sequence>GD_MechCommander</sequence>
+    <overridesInterruptions>true</overridesInterruptions>
+    <priority>120</priority>
+  </MusicTransitionDef>
+
+</Defs>

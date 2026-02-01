@@ -1,0 +1,351 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <!-- 禁卫蜈蚣启动 -->
+  <HediffDef>
+    <defName>CataphractCentipede_Boot</defName>
+    <label>persona core booting</label>
+	<hediffClass>Hediff_High</hediffClass>
+    <description>The sheer size of the unit blocks signal transmission, and the persona core takes a while to turn on. This unit is extremely vulnerable during initialization.</description>
+    <initialSeverity>0.01</initialSeverity>
+	<maxSeverity>1</maxSeverity>
+	<defaultLabelColor>(0.8, 0.2, 0.2)</defaultLabelColor>
+	<comps>
+        <li Class="HediffCompProperties_SeverityPerDay">
+            <severityPerDay>8</severityPerDay>
+        </li>
+		<li Class="GD3.HediffCompProperties_Rolling">
+			<interval>30</interval>
+			<damage>20</damage>
+			<penetration>1.2</penetration>
+			<maxBodySize>3.6</maxBodySize>
+			<requireTech>GD3_GiantCluster_CentipedeAbility</requireTech>
+		</li>
+		<li Class="GD3.HediffCompProperties_Reboot"/>
+    </comps>
+    <stages>
+      <li>
+		<minSeverity>0.01</minSeverity>
+        <label>initializing</label>
+		<statFactors>
+            <IncomingDamageFactor>7.5</IncomingDamageFactor>
+        </statFactors>
+		<capMods>
+            <li>
+                <capacity>Consciousness</capacity>
+                <offset>-0.4</offset>
+            </li>
+        </capMods>
+      </li>
+      <li>
+        <minSeverity>0.20</minSeverity>
+        <label>preliminary tuning</label>
+		<statFactors>
+            <IncomingDamageFactor>4</IncomingDamageFactor>
+        </statFactors>
+		<capMods>
+            <li>
+                <capacity>Consciousness</capacity>
+                <offset>-0.1</offset>
+            </li>
+        </capMods>
+      </li>    
+	  <li>
+		<minSeverity>0.40</minSeverity>
+        <label>overloading</label>
+		<statFactors>
+            <MeleeWeapon_CooldownMultiplier>0.3</MeleeWeapon_CooldownMultiplier>
+            <IncomingDamageFactor>0</IncomingDamageFactor>
+        </statFactors>
+		<capMods>
+            <li>
+                <capacity>Consciousness</capacity>
+                <offset>0.6</offset>
+            </li>
+            <li>
+                <capacity>Moving</capacity>
+                <offset>0.4</offset>
+            </li>
+        </capMods>
+      </li>
+	  <li>
+		<minSeverity>0.80</minSeverity>
+        <label>complete</label>
+      </li>
+    </stages>
+    <modExtensions>
+		  <li Class="GD3.ModExtension_NotSendLetter" />
+	  </modExtensions>
+  </HediffDef>
+  
+  <!-- 跳包 -->
+  <HediffDef>
+    <defName>MechJump</defName>
+    <label>jump pack ready</label>
+	<hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(255, 20, 20)</defaultLabelColor>
+    <description>This unit can use jump packs to get close to enemies.\n\nJump backpack range of action: 2~12</description>
+    <comps>
+	  <li Class="HediffCompProperties_DisappearsOnDeath"/>
+      <li Class="GD3.HediffCompProperties_MechJump">
+        <compClass>GD3.HediffComp_MechJump</compClass>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <statOffsets>
+					<MoveSpeed>+1</MoveSpeed>
+        </statOffsets>
+        <statFactors>
+        </statFactors>
+      </li>
+    </stages>
+    <modExtensions>
+		  <li Class="GD3.ModExtension_NotSendLetter" />
+	  </modExtensions>
+  </HediffDef>
+  
+  <!-- 活化 -->
+  <HediffDef>
+    <defName>Activation</defName>
+    <label>activate</label>
+	<hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(0, 238, 238)</defaultLabelColor>
+    <description>The nanomechanics inside this unit are enhancing their mobility.</description>
+    <comps>
+	  <li Class="HediffCompProperties_DisappearsOnDeath"/>
+    </comps>
+    <stages>
+      <li>
+        <capMods>
+            <li>
+                <capacity>Manipulation</capacity>
+                <offset>+4</offset>
+            </li>
+			<li>
+                <capacity>Moving</capacity>
+                <offset>+1</offset>
+            </li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+  
+  <!-- 思维压制 -->
+  <HediffDef>
+    <defName>MindSuppression</defName>
+    <label>mind suppression</label>
+	<hediffClass>HediffWithComps</hediffClass>
+    <isBad>true</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(138, 43, 226)</defaultLabelColor>
+    <description>The psychic shockwave from the apocriton is stirring the nerves of this unit like a wave.\n\nYou will only be affected by this effect if you are closer than 55 frames from the apocriton.</description>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <showRemainingTime>false</showRemainingTime>
+      </li>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/>
+    </comps>
+    <stages>
+      <li>
+        <statFactors>
+          <PsychicEntropyMax>0.01</PsychicEntropyMax>
+        </statFactors>
+		<capMods>
+          <li>
+            <capacity>Sight</capacity>
+            <postFactor>0</postFactor>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+  
+  <!-- 反应装甲 -->
+  <HediffDef>
+    <defName>GD_HitArmor</defName>
+    <label>reactive armor</label>
+	<hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(3, 168, 158)</defaultLabelColor>
+    <description>Additional armor that is configured on the surface armor of a mechanoid, which acts when the mechanoid is damaged and interferes with the attack, reducing the damage it takes for a short period of time.</description>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <showRemainingTime>True</showRemainingTime>
+      </li>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/>
+    </comps>
+    <stages>
+      <li>
+        <statFactors>
+          <IncomingDamageFactor>0</IncomingDamageFactor>
+        </statFactors>
+		<capMods>
+          <li>
+            <capacity>Moving</capacity>
+            <postFactor>0.9</postFactor>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+  
+  <!-- 加速 - 原Reinforced mechanoids内容 -->
+  <HediffDef>
+    <defName>GD_SpeedBoost</defName>
+    <label>wounded rage</label>
+	<hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(255, 97, 0)</defaultLabelColor>
+    <description>The injury activated the self-defense mechanism of this mechanoid, and his performance was enhanced for a certain period of time.</description>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <showRemainingTime>True</showRemainingTime>
+      </li>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/>
+    </comps>
+    <stages>
+      <li>
+		<capMods>
+          <li>
+            <capacity>Moving</capacity>
+            <postFactor>2.5</postFactor>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+  
+  <!-- 移行护盾 -->
+  <HediffDef>
+    <defName>GD_BlackShield</defName>
+    <label>migration shield</label>
+	<hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(106, 90, 205)</defaultLabelColor>
+    <description>The shield is able to actively change its shape in an indescribably weird way and is soft enough to keep out any incoming attack. When the shield disappears, the stored kinetic energy will be released outwards in an instant, injuring anyone who dares to approach.</description>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <showRemainingTime>True</showRemainingTime>
+      </li>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/>
+	  <li>
+		<compClass>GD3.HediffComp_BlackShield</compClass>
+	  </li>
+    </comps>
+  </HediffDef>
+  
+  <!-- 饥荒 -->
+  <HediffDef>
+    <defName>MedalFamineHediff</defName>
+    <label>Psychic hunger</label>
+    <description>A strange burning sensation fills the brain of this unit.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(252, 230, 201)</defaultLabelColor>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>60</disappearsAfterTicks>
+        <showRemainingTime>false</showRemainingTime>
+      </li>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/>
+    </comps>
+    <stages>
+      <li>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <setMax>0.35</setMax>
+          </li>
+		  <li>
+            <capacity>Moving</capacity>
+            <setMax>0.35</setMax>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+    <isBad>true</isBad>
+  </HediffDef>
+  
+  <!-- 增援信号 -->
+  <HediffDef>
+    <defName>GD_CallReinforcement</defName>
+    <label>leader</label>
+	<hediffClass>GD3.HediffCallReinforcement</hediffClass>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(0.8, 0.2, 0.2)</defaultLabelColor>
+    <description>This mechanoid has a one-time call reinforcement capability. If it makes a successful call, a mechanoid mosquito squadron will be deployed to the battlefield. \n\nThis module will be damaged after being hit by EMP.</description>
+    <comps>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/>
+	  <li Class="GD3.HediffCompProperties_BrokenByEMP"/>
+    </comps>
+	<renderNodeProperties>
+      <li>
+        <nodeClass>GD3.PawnRenderNode_SignalTip</nodeClass>
+		<texPath>Empty/Empty</texPath>
+		<overrideMeshSize>(1.15, 1.15)</overrideMeshSize>
+		<color>(1,0,0,1)</color>
+		<baseLayer>-999</baseLayer>
+		<parentTagDef>Root</parentTagDef>
+		<pawnType>Any</pawnType>
+      </li>
+    </renderNodeProperties>
+  </HediffDef>
+  
+  <!--===== 任务 =====-->
+  <!-- 任务小蠊 -->
+  <HediffDef>
+    <defName>GD_Militor</defName>
+    <label>militor</label>
+	<hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(255, 255, 255)</defaultLabelColor>
+    <description>Protective hediff.</description>
+    <comps>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/>
+    </comps>
+	<stages>
+      <li>
+	    <becomeVisible>false</becomeVisible>
+        <statFactors>
+          <IncomingDamageFactor>0.25</IncomingDamageFactor>
+        </statFactors>
+        <damageFactors>
+          <BombBlackStrike>0</BombBlackStrike>
+          <BombCharge>0</BombCharge>
+        </damageFactors>
+      </li>
+    </stages>
+  </HediffDef>
+  
+  <!-- 任务任意机械 -->
+  <HediffDef>
+    <defName>GD_SavingMech</defName>
+    <label>quest mech</label>
+	<hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(255, 255, 255)</defaultLabelColor>
+    <description>Protective hediff.</description>
+    <comps>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/>
+	  <li><compClass>GD3.HediffComp_SavingMech</compClass></li>
+    </comps>
+	<stages>
+      <li>
+	    <becomeVisible>false</becomeVisible>
+        <statFactors>
+          <IncomingDamageFactor>0.5</IncomingDamageFactor>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+</Defs>

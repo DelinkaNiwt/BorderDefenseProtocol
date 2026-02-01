@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <WorldObjectDef ParentName="SpaceSite">
+    <defName>GD_OrbitalPlatform</defName>
+    <label>platform</label>
+    <texture>UI/Symbols/AnnihilatorPlatform</texture>
+	<expandingIconTexture>UI/Symbols/AnnihilatorPlatform</expandingIconTexture>
+  </WorldObjectDef>
+
+</Defs>

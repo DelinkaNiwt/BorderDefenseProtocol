@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <GD_BandNode.label>先进基站</GD_BandNode.label>
+  <GD_BandNode.description>一台用于机械族通信的先进信号放大器。基站必须调整指定的机械师服务对象。这将会为被服务的机械师增加4个总带宽上限，以便他们能控制更多的机械族。\n\n基站在被建造出来时会自动选择一位机械师作为服务对象。但如果需要重设基站的服务对象的话往往需要更长的时间。</GD_BandNode.description>
+
+
+  <!-- 碟形天线 -->
+
+  <!-- <GD_MechbandDish.label>神秘的天线</GD_MechbandDish.label>
+  <GD_MechbandDish.description>你的殖民者们依照着人格数据中的信息，仿照着碟形天线制造了这台召唤器。警示灯泡上流动着奇异的光芒。\n\n&lt;color=#E3170D&gt;召唤一名极为难缠的敌人前来。在试图挑战他之前，一定要先确保你做足了一切准备。&lt;/color&gt;</GD_MechbandDish.description>
+  <GD_MechbandDish.comps.CompUsable.useLabel>召唤黑衣憎恶毒蜂</GD_MechbandDish.comps.CompUsable.useLabel> -->
+
+
+  <!-- 玩偶 -->
+
+  <GD_Doll.label>黑衣飞螳玩偶</GD_Doll.label>
+  <GD_Doll.description>一个可爱的玩偶。让人想捏捏它的帽子。</GD_Doll.description>
+  <GD_Doll_Blueprint.label>黑衣飞螳玩偶（蓝图）</GD_Doll_Blueprint.label>
+  <GD_Doll_Blueprint_Install.label>黑衣飞螳玩偶（蓝图）</GD_Doll_Blueprint_Install.label>
+  <GD_Doll_Frame.label>黑衣飞螳玩偶（建造中）</GD_Doll_Frame.label>
+  <GD_Doll_Frame.description>一个可爱的玩偶。让人想捏捏它的帽子。</GD_Doll_Frame.description>
+  
+  <GD_LancerDoll.label>黑衣静螳玩偶</GD_LancerDoll.label>
+  <GD_LancerDoll.description>一个可爱的玩偶。让人想捏捏它的帽子。</GD_LancerDoll.description>
+  <GD_LancerDoll_Blueprint.label>黑衣静螳玩偶（蓝图）</GD_LancerDoll_Blueprint.label>
+  <GD_LancerDoll_Blueprint_Install.label>黑衣静螳玩偶（蓝图）</GD_LancerDoll_Blueprint_Install.label>
+  <GD_LancerDoll_Frame.label>黑衣静螳玩偶（建造中）</GD_LancerDoll_Frame.label>
+  <GD_LancerDoll_Frame.description>一个可爱的玩偶。让人想捏捏它的帽子。</GD_LancerDoll_Frame.description>
+  
+  <GD_MilitorDoll.label>黑衣小蠊玩偶</GD_MilitorDoll.label>
+  <GD_MilitorDoll.description>一个可爱的玩偶。让人想捏捏它的帽子。</GD_MilitorDoll.description>
+  <GD_MilitorDoll_Blueprint.label>黑衣飞螳玩偶（蓝图）</GD_MilitorDoll_Blueprint.label>
+  <GD_MilitorDoll_Blueprint_Install.label>黑衣飞螳玩偶（蓝图）</GD_MilitorDoll_Blueprint_Install.label>
+  <GD_MilitorDoll_Frame.label>黑衣飞螳玩偶（建造中）</GD_MilitorDoll_Frame.label>
+  <GD_MilitorDoll_Frame.description>一个可爱的玩偶。让人想捏捏它的帽子。</GD_MilitorDoll_Frame.description>
+  
+  <GD_QiuciFufu.label>“秋辞”fufu</GD_QiuciFufu.label>
+  <GD_QiuciFufu.description>一只美狐。看起来像个mod作者。</GD_QiuciFufu.description>
+  <GD_QiuciFufu_Blueprint.label>“秋辞”fufu（蓝图）</GD_QiuciFufu_Blueprint.label>
+  <GD_QiuciFufu_Blueprint_Install.label>“秋辞”fufu（蓝图）</GD_QiuciFufu_Blueprint_Install.label>
+  <GD_QiuciFufu_Frame.label>“秋辞”fufu（建造中）</GD_QiuciFufu_Frame.label>
+  <GD_QiuciFufu_Frame.description>一只美狐。看起来像个mod作者。</GD_QiuciFufu_Frame.description>
+  
+  <GD_ApocritonFufu.label>“黑衣憎恶毒蜂”fufu</GD_ApocritonFufu.label>
+  <GD_ApocritonFufu.description>我们伟大的领袖。但看起来像个...女孩子？</GD_ApocritonFufu.description>
+  <GD_ApocritonFufu_Blueprint.label>“黑衣憎恶毒蜂”fufu（蓝图）</GD_ApocritonFufu_Blueprint.label>
+  <GD_ApocritonFufu_Blueprint_Install.label>“黑衣憎恶毒蜂”fufu（蓝图）</GD_ApocritonFufu_Blueprint_Install.label>
+  <GD_ApocritonFufu_Frame.label>“黑衣憎恶毒蜂”fufu（建造中）</GD_ApocritonFufu_Frame.label>
+  <GD_ApocritonFufu_Frame.description>我们伟大的领袖。但看起来像个...女孩子？</GD_ApocritonFufu_Frame.description>
+  
+  <GD_LargeGarbageBag.label>剧毒垃圾抱枕</GD_LargeGarbageBag.label>
+  <GD_LargeGarbageBag.description>超大号垃圾袋，会将你的殖民地尽数污染...说笑的。这就是个抱枕，已经无害化了。</GD_LargeGarbageBag.description>
+  <GD_LargeGarbageBag_Blueprint.label>剧毒垃圾抱枕（蓝图）</GD_LargeGarbageBag_Blueprint.label>
+  <GD_LargeGarbageBag_Blueprint_Install.label>剧毒垃圾抱枕（蓝图）</GD_LargeGarbageBag_Blueprint_Install.label>
+  <GD_LargeGarbageBag_Frame.label>剧毒垃圾抱枕（建造中）</GD_LargeGarbageBag_Frame.label>
+  <GD_LargeGarbageBag_Frame.description>超大号垃圾袋，会将你的殖民地尽数污染...说笑的。这就是个抱枕，已经无害化了。</GD_LargeGarbageBag_Frame.description>
+  
+  <!-- 心灵广播 -->
+
+  <PsychicRadio.label>心灵广播</PsychicRadio.label>
+  <PsychicRadio.description>这是一台由你的殖民者们建造出来的超凡设施，能够凭借其对心灵信号的编辑能力影响有机生命的心灵敏感度。\n\n然而这并不意味着超凡科技已经完全为殖民者们所理解了——对着人格数据内的蓝图抄作业可不能使人学习到什么知识。</PsychicRadio.description>
+
+
+</LanguageData>

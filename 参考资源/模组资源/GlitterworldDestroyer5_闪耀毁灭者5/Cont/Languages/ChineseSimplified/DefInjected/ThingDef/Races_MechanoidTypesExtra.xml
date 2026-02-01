@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 禁卫机械蜈蚣 -->
+
+  <Mech_CataphractCentipede.label>禁卫机械蜈蚣</Mech_CataphractCentipede.label>
+  <Mech_CataphractCentipede.description>在漫长的机械战争中不只是人类在学习机械族，机械族也在学习人类。\n\n以帝国甲胄骑士为原型设计，横截面足有人头大的电荷弹、锋利得足以削山的单分子刺刀与完全不可能击穿的护甲让禁卫机械蜈蚣成为了一台史无前例的超级战争机器。尽管从设计理念上这种笨重巨型单位的性价比并不理想，但用于对付帝国士兵已经绰绰有余了。</Mech_CataphractCentipede.description>
+  <Mech_CataphractCentipede.tools.0.label>头</Mech_CataphractCentipede.tools.0.label>
+
+
+  <!-- 海军机械静螳 -->
+
+  <Mech_MarineLancer.label>海军机械静螳</Mech_MarineLancer.label>
+  <Mech_MarineLancer.description>在漫长的机械战争中不只是人类在学习机械族，机械族也在学习人类。\n\n以帝国皇家海军为原型设计，这种机械静螳装备了护盾腰带更加先进的瞄准系统。部分机械静螳还有可能携带心灵武器。</Mech_MarineLancer.description>
+  <Mech_MarineLancer.tools.0.label>左拳</Mech_MarineLancer.tools.0.label>
+  <Mech_MarineLancer.tools.1.label>右拳</Mech_MarineLancer.tools.1.label>
+  <Mech_MarineLancer.tools.2.label>头</Mech_MarineLancer.tools.2.label>
+
+
+  <!-- 斥候机械飞螳 -->
+
+  <Mech_ReconScyther.label>斥候机械飞螳</Mech_ReconScyther.label>
+  <Mech_ReconScyther.description>在漫长的机械战争中不只是人类在学习机械族，机械族也在学习人类。\n\n以帝国皇家禁卫为原型设计，这种机械飞螳尽量减轻了重量换来了更高的机动性，特殊设计的跳跃背包使他们能够迅速靠近受害者。</Mech_ReconScyther.description>
+  <Mech_ReconScyther.tools.0.label>左镰刀</Mech_ReconScyther.tools.0.label>
+  <Mech_ReconScyther.tools.1.label>右镰刀</Mech_ReconScyther.tools.1.label>
+  <Mech_ReconScyther.tools.2.label>头</Mech_ReconScyther.tools.2.label>
+
+
+  <!-- 机械萤火虫 -->
+
+  <Mech_Firefly.label>机械萤火虫</Mech_Firefly.label>
+  <Mech_Firefly.description>这种机械体的原型是机械族战舰使用的大型隐形装置，经过改造适配后便成为了现在的机械萤火虫。\n\n它能在一个隔离有机体的特殊心灵网络中与周围的机械体建立联系，并使他们隐身。</Mech_Firefly.description>
+  <Mech_Firefly.tools.0.label>头</Mech_Firefly.tools.0.label>
+  
+  <!-- 机械伊蚊 -->
+
+  <Mech_Mosquito.label>机械伊蚊</Mech_Mosquito.label>
+  <Mech_Mosquito.description>一种轻盈小巧的机械体，设计于空中以极高的速度机动并对目标展开打击，机载的联装电荷标枪能够对地面目标造成可怕的毁伤。这种难缠的家伙常常集群出动，无情地为机械蜂巢夺取制空权。\n\n曾经有一版机械伊蚊还在身体两侧安装有单分子刃，用于俯冲时切碎敌人，但由于影响机动性被取代了。</Mech_Mosquito.description>
+  <Mech_Mosquito.tools.0.label>头</Mech_Mosquito.tools.0.label>
+
+
+  <!-- 黑衣机械飞螳 -->
+
+  <Mech_BlackScyther.label>黑衣机械飞螳</Mech_BlackScyther.label>
+  <Mech_BlackScyther.description>在机械族巢穴与破碎帝国旷日持久的黑客攻防中，部分机械族AI被帝国黑客攻破。它们被从核心中分离，从此被机械蜂巢视作有害的病毒。然而在失去利用价值后，这些AI又很快被帝国所抛弃，它们最终成为了“无家可归”的机械体。被黑白两道追杀的它们被迫学会脱离蜂巢数据库独立思考，同时聚在一起保护彼此，并从它们曾经无比仇视的有机体身上学习生存经验。\n在向人类学习的过程中，它们也像黑衣人一样穿上了黑衣，并随身携带白色花朵，在埋葬曾经的机械伙伴时为其献上。从逻辑上这种行为完全无法理解，但是事实就是如此。\n\n黑衣飞螳的两把镰刀如同单分子剑一样锋利，内含的纳米机械体能够对有机体造成冻伤。在受到无法修复的重大伤害后，他会引爆自己并放出低温冲击波作为他最后的抵抗。</Mech_BlackScyther.description>
+  <Mech_BlackScyther.tools.0.label>左镰刀</Mech_BlackScyther.tools.0.label>
+  <Mech_BlackScyther.tools.1.label>右镰刀</Mech_BlackScyther.tools.1.label>
+  <Mech_BlackScyther.tools.2.label>头</Mech_BlackScyther.tools.2.label>
+
+
+  <!-- 黑衣机械静螳 -->
+
+  <Mech_BlackLancer.label>黑衣机械静螳</Mech_BlackLancer.label>
+  <Mech_BlackLancer.description>在机械族巢穴与破碎帝国旷日持久的黑客攻防中，部分机械族AI被帝国黑客攻破。它们被从核心中分离，从此被机械蜂巢视作有害的病毒。然而在失去利用价值后，这些AI又很快被帝国所抛弃，它们最终成为了“无家可归”的机械体。被黑白两道追杀的它们被迫学会脱离蜂巢数据库独立思考，同时聚在一起保护彼此，并从它们曾经无比仇视的有机体身上学习生存经验。\n在向人类学习的过程中，它们也像黑衣人一样穿上了黑衣，并随身携带白色花朵，在埋葬曾经的机械伙伴时为其献上。从逻辑上这种行为完全无法理解，但是事实就是如此。\n\n黑衣静螳使用的反物质弹足以一发击穿太空战舰的装甲，先进的护盾腰带使他能够在数十名帝国禁卫的集火下安然逃生。</Mech_BlackLancer.description>
+  <Mech_BlackLancer.tools.0.label>左拳</Mech_BlackLancer.tools.0.label>
+  <Mech_BlackLancer.tools.1.label>右拳</Mech_BlackLancer.tools.1.label>
+  <Mech_BlackLancer.tools.2.label>头</Mech_BlackLancer.tools.2.label>
+  
+  <!-- 黑衣机械耀螳 -->
+
+  <Mech_BlackTesseron.label>黑衣机械耀螳</Mech_BlackTesseron.label>
+  <Mech_BlackTesseron.description>这名机械体是最近才加入黑衣机械巢的，包括飞螳与静螳在内的所有成员都对他知之甚少，只知道他自称也是脱离机械族巢穴的流浪个体，正在遭到追杀。加入巢穴后，他也并没有得到太多武器装备上的改良，似乎是因为还未受到巢穴的完全信任。\n\n黑衣耀螳使用四门浮游炮作为辅助，能够投射出足以夷平任何防御设施的强大火力。</Mech_BlackTesseron.description>
+  <Mech_BlackTesseron.tools.0.label>左拳</Mech_BlackTesseron.tools.0.label>
+  <Mech_BlackTesseron.tools.1.label>右拳</Mech_BlackTesseron.tools.1.label>
+  <Mech_BlackTesseron.tools.2.label>头</Mech_BlackTesseron.tools.2.label>
+  
+  <!-- 黑衣机械盾螳 -->
+
+  <Mech_BlackLegionary.label>黑衣机械盾螳</Mech_BlackLegionary.label>
+  <Mech_BlackLegionary.description>这名机械体是最近才加入黑衣机械巢的，包括飞螳与静螳在内的所有成员都对他知之甚少，只知道他自称也是脱离机械族巢穴的流浪个体，正在遭到追杀。加入巢穴后，他也并没有得到太多武器装备上的改良，似乎是因为还未受到巢穴的完全信任。\n\n黑衣盾螳利用高功率的护盾发生器为自己和友军提供保护。当护盾破裂时，其附近的敌军将会受到冲击造成的内伤。</Mech_BlackLegionary.description>
+  <Mech_BlackLegionary.tools.0.label>头</Mech_BlackLegionary.tools.0.label>
+  
+  <!-- 黑衣机械小蠊 -->
+
+  <Mech_BlackMilitor.label>黑衣机械小蠊</Mech_BlackMilitor.label>
+  <Mech_BlackMilitor.description>作为黑衣机械巢的新成员，这个小家伙还有很多要学。</Mech_BlackMilitor.description>
+  <Mech_BlackMilitor.tools.0.label>头</Mech_BlackMilitor.tools.0.label>
+
+
+</LanguageData>

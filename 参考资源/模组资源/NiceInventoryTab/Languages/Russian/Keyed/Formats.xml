@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <NIT_MS>0.# м/с</NIT_MS>
+  <NIT_M>0 м</NIT_M>
+  <NIT_Seconds>0.## с</NIT_Seconds>
+  <NIT_RPM>0 rpm</NIT_RPM>
+  <NIT_PerDay_Add>/д</NIT_PerDay_Add>
+  <NIT_KG>0.# кг</NIT_KG>
+</LanguageData>

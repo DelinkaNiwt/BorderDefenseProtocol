@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+
+  <MechFireBurst.label>火焰喷发</MechFireBurst.label>
+  <MechFireBurst.description>向四周爆发高能量，蒸发范围内的一切。</MechFireBurst.description>
+  
+  <LongJumpReconScyther.label>斥候飞螳跳跃</LongJumpReconScyther.label>
+  <LongJumpReconScyther.description>使用跳跃背包跳跃至指定地点。</LongJumpReconScyther.description>
+  
+  <MechPlaceShield.label>部署高角护盾</MechPlaceShield.label>
+  <MechPlaceShield.description>消耗该机械体20％的储能，部署一面能够维持30秒的高角护盾。</MechPlaceShield.description>
+  
+  <BlackApocriton_Comet.label>彗星轰击</BlackApocriton_Comet.label>
+  <BlackApocriton_CometRain.label>彗星雨</BlackApocriton_CometRain.label>
+  <BlackApocriton_Thunder.label>球状闪电</BlackApocriton_Thunder.label>
+  <BlackApocriton_Arrows.label>闪电箭雨</BlackApocriton_Arrows.label>
+
+
+</LanguageData>

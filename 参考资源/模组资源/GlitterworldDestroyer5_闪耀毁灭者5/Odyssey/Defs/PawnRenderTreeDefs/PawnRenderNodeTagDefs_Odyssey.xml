@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Defs>
+  
+  <PawnRenderNodeTagDef>
+    <defName>Annihilator_Joints</defName>
+  </PawnRenderNodeTagDef>
+  
+  <PawnRenderNodeTagDef>
+    <defName>Annihilator_Leg_LFront</defName>
+  </PawnRenderNodeTagDef>
+  
+  <PawnRenderNodeTagDef>
+    <defName>Annihilator_Leg_RFront</defName>
+  </PawnRenderNodeTagDef>
+  
+  <PawnRenderNodeTagDef>
+    <defName>Annihilator_Leg_LMiddle</defName>
+  </PawnRenderNodeTagDef>
+  
+  <PawnRenderNodeTagDef>
+    <defName>Annihilator_Leg_RMiddle</defName>
+  </PawnRenderNodeTagDef>
+  
+  <PawnRenderNodeTagDef>
+    <defName>Annihilator_Leg_LHind</defName>
+  </PawnRenderNodeTagDef>
+  
+  <PawnRenderNodeTagDef>
+    <defName>Annihilator_Leg_RHind</defName>
+  </PawnRenderNodeTagDef>
+  
+</Defs>

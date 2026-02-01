@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <GD.StationTitle>机械通讯台：操作页</GD.StationTitle>
+  <GD.StationDescription>这台看起来简单的仪器能够捕获机械族之间交流产生的电磁波，并循着路径定位到机械族服务器的位置。经验丰富的研究员可以藉此黑入服务器并截取一部分情报，并将其用于出售或者其它用途。\n机械族情报的机密等级总共有五级，且我们通常只能截取其中最低的两级，因为从第三级开始情报便需要实体秘钥才能解锁了。\n\n目前持有一级情报：{0}\n目前持有二级情报：{1}</GD.StationDescription>
+  <GD.CommunicateWithEmpire>与破碎帝国联系...</GD.CommunicateWithEmpire>
+  <GD.EmpireNotFound>（无帝国派系）</GD.EmpireNotFound>
+  <GD.CommunicateWithBlackMech>与黑衣机械巢联系...</GD.CommunicateWithBlackMech>
+  <GD.WaitForDiscover>（无信号）</GD.WaitForDiscover>
+  <GD.FirewallStable>当前机械族服务器状态：稳定\n可以安全潜入并截取情报。</GD.FirewallStable>
+  <GD.FirewallUnstable>当前机械族服务器状态：不稳定\n有机会截取到更多情报，但也有暴露的风险。</GD.FirewallUnstable>
+  <GD.FirewallAlert>当前机械族服务器状态：警觉\n立刻中止情报截取!</GD.FirewallAlert>
+  <GD.EmpireTaxTip>由于在机械族情报方面帝国早已涉足并建立有完整的法律法规，你获取的每一份数据都要上交10％的税。\n除非你打算和他们翻脸。</GD.EmpireTaxTip>
+  <GD.EmpireTaxHostile>由于与帝国处于敌对关系，你无需负担税款。</GD.EmpireTaxHostile>
+  <GD.FirewallToUnstable>机械族服务器的防火墙更新了。当前状态：不稳定</GD.FirewallToUnstable>
+  <GD.FirewallToStable>机械族服务器的防火墙更新了。当前状态：稳定</GD.FirewallToStable>
+  <GD.FirewallToAlert>机械族服务器的防火墙更新了。当前状态：警觉</GD.FirewallToAlert>
+  <GD.RevengeRaid>一次不安全的操作引起了机械族的注意。它们的报复要来了！</GD.RevengeRaid>
+  <GD.ExtraInt>额外情报！</GD.ExtraInt>
+  <GD.ToggleLabel>低级处理：{0}</GD.ToggleLabel>
+  <GD.ToggleDesc>将信息处理方式还原为低级形式，截取一级情报。</GD.ToggleDesc>
+  <!-- empire -->
+  <GD.EmpireTradeTitle>机械通讯台：与帝国交易</GD.EmpireTradeTitle>
+  <GD.EmpireTradeDescription>你可以用机械族情报与帝国交换白银、荣誉，或是单纯改善关系。</GD.EmpireTradeDescription>
+  <GD.EmpireSellInt1>出售一级情报：你当前持有{0}份</GD.EmpireSellInt1>
+  <GD.SellIntButton_1Silver>交换白银（1000情报 - 200白银）</GD.SellIntButton_1Silver>
+  <GD.SellIntButton_1Royal>交换荣誉（1000情报 - 2荣誉）</GD.SellIntButton_1Royal>
+  <GD.SellIntButton_1Relation>改善关系（1000情报 - 8关系）</GD.SellIntButton_1Relation>
+  <GD.EmpireSellInt2>出售二级情报：你当前持有{0}份</GD.EmpireSellInt2>
+  <GD.SellIntButton_2Silver>交换白银（1000情报 - 500白银）</GD.SellIntButton_2Silver>
+  <GD.SellIntButton_2Royal>交换荣誉（1000情报 - 5荣誉）</GD.SellIntButton_2Royal>
+  <GD.SellIntButton_2Relation>改善关系（1000情报 - 15关系）</GD.SellIntButton_2Relation>
+  <GD.EmpireSellHostile>由于与帝国敌对，大部分交易选项暂不可用。\n星际主宰{0}表示他需要看到你的诚意。目前你只能用情报改善关系，直到两个派系间的隔阂基本消除。</GD.EmpireSellHostile>
+  <GD.IntNotEnough>你的情报不足。</GD.IntNotEnough>
+  <GD.Back>返回</GD.Back>
+  <!-- BlackMechanoid -->
+  <GD.ContainCorpse>这具棺材里确实装着尸体，却没有任何阴暗腐烂的气息。</GD.ContainCorpse>
+  <GD.BlackMechAlreadyDiscovered>已发现黑衣机械巢</GD.BlackMechAlreadyDiscovered>
+  <GD.LevelNotEnoughToAnalyse>智识等级不足10</GD.LevelNotEnoughToAnalyse>
+  <GD.DamageBlack>由于攻击性行为，你与黑衣机械巢的关系下降了{0}点。</GD.DamageBlack>
+  <GD.BlackHostileTitle>敌对：黑衣机械巢</GD.BlackHostileTitle>
+  <GD.BlackHostileDesc>你的过激行为让黑衣机械巢感到失望。此后若是再与你遭遇，他们将把你当做敌人看待。</GD.BlackHostileDesc>
+  <GD.QuestNotFinish>连线那一头只传来了嘈杂的沙沙声，或许你先要完成手上的任务。</GD.QuestNotFinish>
+  <GD.NeedPayTitle>当前任务需要支付情报</GD.NeedPayTitle>
+  <GD.NeedPayDesc>黑衣机械巢的下一个任务需要你支付情报才能发布。这可能是在试探你合作的诚意，也可能是为了给行动作铺垫。\n\n需要{0}：{1}\n你目前持有：{2}</GD.NeedPayDesc>
+  <GD.NeedPayButton>支付</GD.NeedPayButton>
+  <GD.PaymentSuccess>你已经把手中的情报交给了机械巢，再次联系他们以进行下一次任务。</GD.PaymentSuccess>
+  <GD.PrimaryInt>一级情报</GD.PrimaryInt>
+  <GD.PrimaryAdv>二级情报</GD.PrimaryAdv>
+  <GD.BlackMechSellInt>出售二级情报：你当前持有{0}份</GD.BlackMechSellInt>
+  <GD.BlackMechScriptTree>进度</GD.BlackMechScriptTree>
+  <GD.BlackMechScriptTreeEnd>（已完成）</GD.BlackMechScriptTreeEnd>
+  <GD.BlackMechTradeTitle>机械通讯台：黑衣机械巢</GD.BlackMechTradeTitle>
+  <GD.BlackMechTradeDescription>与常规机械体不同，黑衣机械巢的成员对人类的态度更偏向中立——这也意味着如果你能为他们带来有价值的东西，他们便可能同样给予你回馈。你可以直接用机械族情报与他们换取资源，或是替他们做一些事情。</GD.BlackMechTradeDescription>
+  <GD.BlackMechTradeUnable>你的殖民地对这个派系还不甚了解。\n推进进度以解锁该页面的功能。</GD.BlackMechTradeUnable>
+  <Reward_BlackMech_Label>黑衣机械任务</Reward_BlackMech_Label>
+  <Reward_BlackMech>这是一件从黑衣机械巢接取的任务，完成它以推进进度。</Reward_BlackMech>
+  <Reward_Intelligence_Label>情报交换</Reward_Intelligence_Label>
+  <Reward_Intelligence>黑衣机械巢会分享给你2500点二级情报作为额外的报酬。</Reward_Intelligence>
+  <GD.ApocritonIsDead>黑衣憎恶毒蜂已死</GD.ApocritonIsDead>
+  <GD.BlackMechNotFound>未发现黑衣机械巢</GD.BlackMechNotFound>
+  <GD.BlackMechNotEnemy>黑衣机械巢不是你的敌人</GD.BlackMechNotEnemy>
+  <!-- Subcore -->
+  <GD.SubcoreRaidTitle>机械族袭击</GD.SubcoreRaidTitle>
+  <GD.SubcoreRaidDesc>次生核心在研究中意外发出了一阵杂乱无章的电磁波，这立刻引起了附近一支机械族分队的注意。准备好战斗。</GD.SubcoreRaidDesc>
+  <GD.SubcoreBadEvent1Title>火光</GD.SubcoreBadEvent1Title>
+  <GD.SubcoreBadEvent1Desc>次生核心在研究中突然爆发出一阵火光。</GD.SubcoreBadEvent1Desc>
+  <GD.SubcoreBadEvent2Title>浓烟</GD.SubcoreBadEvent2Title>
+  <GD.SubcoreBadEvent2Desc>次生核心在研究中突然爆发出一阵浓烟。</GD.SubcoreBadEvent2Desc>
+  <GD.SubcoreProgress>进度：{0}/{1}</GD.SubcoreProgress>
+  <GD.SubcoreCooldown>再过{0}小时可再次研究。</GD.SubcoreCooldown>
+  <GD.SendSubcore>手动送回</GD.SendSubcore>
+  <GD.SendSubcoreDesc>如果次生核心没有自动送回，点击此按钮。</GD.SendSubcoreDesc>
+  <!-- Server -->
+  <GD.ServerStolen>已与这台服务器互动过</GD.ServerStolen>
+  <GD.KeyNeeded>需要密钥</GD.KeyNeeded>
+  <GD.ServerStealComplete>已窃取部分情报：{0}/{1}</GD.ServerStealComplete>
+  <GD.KeyGained>已获得权限，现在你可以与机械族要塞的服务器互动。</GD.KeyGained>
+  <GD.HasKey>已获得权限</GD.HasKey>
+  <!-- Militor -->
+  <MilitorAlert>注意护卫目标</MilitorAlert>
+  <MilitorAlertDesc>侦测到机械族部队向此处靠近中。\n\n你的任务是护卫这台机械小蠊。如果他的行动有可能使自身陷入危险，你需要立刻使用灵能或EMP等手段阻止他。</MilitorAlertDesc>
+  <GD.MilitorMissionStart>侦测到机械族部队靠近中。第一波攻击将于60秒后出现，尽快部署防御。</GD.MilitorMissionStart>
+  <GD.RaidLight>先遣进攻</GD.RaidLight>
+  <GD.RaidLightDesc>一支快速反应的机械族前锋部队到达附近。准备好防御。</GD.RaidLightDesc>
+  <GD.RaidHeavy>主力进攻</GD.RaidHeavy>
+  <GD.RaidHeavyDesc>一支强大的机械族主力部队到达附近。准备好防御。</GD.RaidHeavyDesc>
+  <GD.RaidUltraHeavy>最后攻势</GD.RaidUltraHeavy>
+  <GD.RaidUltraHeavyDesc>机械族的最后攻势即将到来。顶住这波强大压力！</GD.RaidUltraHeavyDesc>
+  <GD.HelpArrive>附近的支援赶到了，他们会立刻前来协助战斗。</GD.HelpArrive>
+  <GD.MilitorExiting>机械小蠊准备离开地图了，注意保护他。</GD.MilitorExiting>
+  <!-- Eliminate -->
+  <GD.FoundMilitor>已找到黑衣小蠊，很快他就会被送回总部，准备寻找叛徒并战斗。</GD.FoundMilitor>
+  <GD.FoundMilitorCorpse>我们来晚了。准备寻找叛徒并战斗。</GD.FoundMilitorCorpse>
+  <GD.ReadyToBattle>准备寻找叛徒并战斗。</GD.ReadyToBattle>
+  <GD.BattleStart>目标现身</GD.BattleStart>
+  <GD.BattleStartDesc>敌人已经现身。看起来他们已在此处埋伏了许久，消灭他们！</GD.BattleStartDesc>
+  <GD.TesseronSay>既然你都知道了，我也没什么好说了！</GD.TesseronSay>
+  <GD.DollReward>成就奖励：完成“肃反”任务并使黑衣小蠊存活下来。</GD.DollReward>
+  <!-- Exostrider -->
+  <GD.MortarHacked>已控制迫击炮</GD.MortarHacked>
+  <GD.ExostriderIntro>无敌状态。</GD.ExostriderIntro>
+  <GD.Exostrider2Intro>只有巨型迫击炮能够击伤该单位。</GD.Exostrider2Intro>
+  <GD.ExostriderStartFight>机械巨黾正准备摧毁一座已经易手的巨型迫击炮！</GD.ExostriderStartFight>
+  <GD.ExoBeamAttack>机械巨黾呼叫了轨道光束支援。小心！</GD.ExoBeamAttack>
+  <GD.ExoBombardmentAttack>机械巨黾呼叫了轨道轰炸支援。小心！</GD.ExoBombardmentAttack>
+  <GD.ExoMechanoids>机械空投增援</GD.ExoMechanoids>
+  <GD.ExoMechanoidsDesc>大批机械族正结束休眠并从星球轨道上投下以支援战斗，注意各个方向的来敌。</GD.ExoMechanoidsDesc>
+  <GD.ExoSuperBeamAttack>机械巨黾呼叫了一波轨道光束饱和式轰炸。注意躲避！</GD.ExoSuperBeamAttack>
+  <ExostriderAlert>机械飞船集结中</ExostriderAlert>
+  <ExostriderAlertDesc>机械族飞船的注意力正在逐渐返回巨黾周围。尽快结束战斗，否则你将遭受越来越强的火力压制。</ExostriderAlertDesc>
+  <GD.MortarLost>我们失去了一座巨型迫击炮。</GD.MortarLost>
+  <GD.MortarAllLost>所有巨型迫击炮都被摧毁了，我们再无手段伤害机械巨黾。立刻撤退！</GD.MortarAllLost>
+  
+  <GD.ChipReward>成就奖励：完成黑衣任务线的全部内容。</GD.ChipReward>
+  <GD.ScriptEnd>任务线完成</GD.ScriptEnd>
+  <GD.ScriptEndDesc>你已经完成黑衣任务线的全部内容。\n\n黑衣机械巢已与你脱离接触，但你依然可以用情报与他们进行交易。\n\n如果你拥有黑衣机械师制服，你应该能注意到它的等级已经达到五级了。</GD.ScriptEndDesc>
+  
+  <GD.CantGenerateQuest>任务接受失败。可能是因为殖民地地图缺失等原因，请检查。</GD.CantGenerateQuest>
+</LanguageData>

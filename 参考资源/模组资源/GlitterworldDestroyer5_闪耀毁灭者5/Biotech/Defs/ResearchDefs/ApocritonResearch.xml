@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	
+	<ResearchProjectDef>
+		<defName>GD3_Apocriton</defName>
+		<label>legacy message</label>
+		<description>The colonists learned all about the principles of Black Mechanoid technology from the chip left behind by the Apocriton. Now you can make some amazing stuff with this information.</description>
+		<tab>GDTech</tab>
+		<baseCost>5000</baseCost>
+		<techLevel>Archotech</techLevel>
+		<prerequisites>
+			<li>GD3_Weapons</li>
+		</prerequisites>
+		<requiredAnalyzed>
+			<li>BlackNanoChip</li>
+		</requiredAnalyzed>
+		<researchViewX>2</researchViewX>
+		<researchViewY>3</researchViewY>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef>
+		<defName>GD3_Puzzle</defName>
+		<label>The rangers' legacy</label>
+		<description>After a certain amount of understanding, your colonists have discovered that the clothing on the Black Clad Mechanoids does not appear to be made of simple fabric, and that they possess the ability to connect with the wearer's neurons. However, since little is known about this technology, we need an expert who knows enough about the Mechanics to explore this knowledge, such as a mechanitor.</description>
+		<tab>GDTech</tab>
+		<baseCost>500</baseCost>
+		<techLevel>Spacer</techLevel>
+		<prerequisites>
+			<!-- null -->
+		</prerequisites>
+		<requiredResearchBuilding>DummyResearchBuilding</requiredResearchBuilding>
+		<researchViewX>0</researchViewX>
+		<researchViewY>2</researchViewY>
+	</ResearchProjectDef>
+	
+</Defs>

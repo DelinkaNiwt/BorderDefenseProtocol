@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 机械通讯台 -->
+
+  <GD_CommunicationStation.label>机械通讯台</GD_CommunicationStation.label>
+  <GD_CommunicationStation.description>这个看似简陋的通讯台能够帮助你黑入机械族的初级服务器，并截取它们的部分情报。这些情报可以用于和某些大派系交易，也可以用在其它神秘的用途。\n\n由于每一步操作都会留下数据痕迹，这种行为并不安全。如果被机械蜂巢发现，就算立刻切断与服务器的连接，针对你的报复也会很快到来，因此你应该避免在敏感时期继续黑入网络。\n\n顺带一提，在窃取数据这方面帝国早已涉足并建立有完整的法律法规，你获取的每一份数据都要上交10％的税。\n除非你打算和他们翻脸。</GD_CommunicationStation.description>
+  
+  <GD_CommunicationStation.comps.CompUsable.useLabel>通讯...</GD_CommunicationStation.comps.CompUsable.useLabel>
+
+
+</LanguageData>

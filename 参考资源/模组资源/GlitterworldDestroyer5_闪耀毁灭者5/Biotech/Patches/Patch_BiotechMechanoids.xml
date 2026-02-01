@@ -1,0 +1,596 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+		<li Class="PatchOperationTest">
+			<xpath>/Defs/ThingDef[defName="Mech_Militor"]/comps</xpath>
+			<success>Invert</success>
+		</li>
+		<li Class="PatchOperationAdd">
+			<xpath>/Defs/ThingDef[defName="Mech_Militor"]</xpath>
+			<value>
+			<comps />
+			</value>
+		</li>
+		</operations>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/ThingDef[defName="Mech_Militor"]/comps</xpath>
+		<value>
+			<li>
+				<compClass>GD3.CompMilitor</compClass>
+			</li>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationSequence">
+		<operations>
+		    <!-- Light -->
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[@Name="LightMechanoid"]/statBases</xpath>
+				<value>
+					<statBases>
+						<MarketValue>800</MarketValue>
+						<MoveSpeed>3.4</MoveSpeed>
+						<ArmorRating_Blunt>0.30</ArmorRating_Blunt>
+						<ArmorRating_Sharp>0.55</ArmorRating_Sharp>
+						<MechEnergyLossPerHP>0.66</MechEnergyLossPerHP>
+						<PsychicSensitivity>0</PsychicSensitivity>
+					</statBases>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Mech_Militor"]/statBases</xpath>
+				<value>
+					<statBases>
+					  <MoveSpeed>4.5</MoveSpeed>
+					</statBases>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Mech_Lifter"]/statBases</xpath>
+				<value>
+					<statBases>
+					  <MoveSpeed>3.85</MoveSpeed>
+					</statBases>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Mech_Constructoid"]/statBases</xpath>
+				<value>
+					<statBases>
+					  <ConstructionSpeed>1.0</ConstructionSpeed>
+					</statBases>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="Mech_Constructoid"]/race</xpath>
+				<value>
+					<mechFixedSkillLevel>14</mechFixedSkillLevel>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/PawnKindDef[defName="Mech_Constructoid"]</xpath>
+				<value>
+					<weaponTags>
+					  <li>MechanoidGunSlugthrower</li>
+					</weaponTags>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Mech_Fabricor"]/statBases</xpath>
+				<value>
+					<statBases>
+						<MarketValue>8000</MarketValue>
+						<MoveSpeed>3.0</MoveSpeed>
+						<FoodPoisonChance>0</FoodPoisonChance>
+					</statBases>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="Mech_Fabricor"]/race</xpath>
+				<value>
+					<mechFixedSkillLevel>18</mechFixedSkillLevel>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Mech_Fabricor"]/race/mechEnabledWorkTypes</xpath>
+				<value>
+					<mechEnabledWorkTypes>
+					  <li>BasicWorker</li>
+					  <li>Crafting</li>
+					  <li>Smithing</li>
+					  <li>Tailoring</li>
+					  <li>Cooking</li>
+					  <li>Art</li>
+					</mechEnabledWorkTypes>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Mech_Agrihand"]/tools</xpath>
+				<value>
+				  <tools>
+					<li>
+					  <label>right blade</label>
+					  <capacities>
+						<li>Cut</li>
+						<li>Stab</li>
+					  </capacities>
+					  <power>12</power>
+					  <cooldownTime>1</cooldownTime>
+					  <linkedBodyPartsGroup>RightBlade</linkedBodyPartsGroup>
+					  <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+					</li>
+				  </tools>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Mech_WarUrchin"]/statBases</xpath>
+				<value>
+				  <statBases>
+					<MoveSpeed>4.65</MoveSpeed>
+					<ArmorRating_Blunt>0.65</ArmorRating_Blunt>
+					<ArmorRating_Sharp>0.95</ArmorRating_Sharp>
+				  </statBases>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Mech_WarUrchin"]/race/baseHealthScale</xpath>
+				<value>
+				  <baseHealthScale>4.2</baseHealthScale>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Mech_Paramedic"]/statBases</xpath>
+				<value>
+				  <statBases>
+					<MoveSpeed>5.8</MoveSpeed>
+				  </statBases>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="Mech_Paramedic"]/race</xpath>
+				<value>
+					<mechFixedSkillLevel>18</mechFixedSkillLevel>
+				</value>
+			</li>
+			<!-- Medium -->
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Mech_Legionary"]/statBases</xpath>
+				<value>
+				    <statBases>
+					  <MarketValue>1200</MarketValue>
+					  <MoveSpeed>4.3</MoveSpeed>
+					  <EnergyShieldRechargeRate>0.25</EnergyShieldRechargeRate>
+					  <EnergyShieldEnergyMax>1.5</EnergyShieldEnergyMax>
+					  <ArmorRating_Blunt>0.6</ArmorRating_Blunt>
+					  <ArmorRating_Sharp>0.7</ArmorRating_Sharp>
+					  <BandwidthCost>2</BandwidthCost>
+					  <ControlTakingTime>18</ControlTakingTime>
+					</statBases>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Mech_Legionary"]/comps/li[1]</xpath>
+				<value>
+				  <li Class="CompProperties_ProjectileInterceptor">
+					<radius>3</radius>
+					<interceptGroundProjectiles>true</interceptGroundProjectiles>
+					<color>(0.4, 0.4, 0.4)</color>
+					<reactivateEffect>BulletShieldGenerator_Reactivate</reactivateEffect>
+					<activeSound>BulletShield_Ambience</activeSound>
+					<hitPoints>300</hitPoints>
+					<hitPointsRestoreInstantlyAfterCharge>true</hitPointsRestoreInstantlyAfterCharge>
+					<chargeDurationTicks>5400</chargeDurationTicks><!-- 90s -->
+					<rechargeHitPointsIntervalTicks>4</rechargeHitPointsIntervalTicks>
+					<drawWithNoSelection>True</drawWithNoSelection>
+					<disarmedByEmpForTicks>1500</disarmedByEmpForTicks>
+					<gizmoTipKey>ProjectileInterceptorTip</gizmoTipKey>
+				  </li>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/PawnKindDef[defName="Mech_Legionary"]/weaponTags</xpath>
+				<value>
+					<weaponTags>
+					  <li>MechanoidGunLongRange</li>
+					</weaponTags>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Mech_Scorcher"]/statBases</xpath>
+				<value>
+				    <statBases>
+					  <MoveSpeed>4.5</MoveSpeed>
+					  <BandwidthCost>2</BandwidthCost>
+					  <ArmorRating_Blunt>1</ArmorRating_Blunt>
+					  <ArmorRating_Sharp>1</ArmorRating_Sharp>
+					</statBases>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Mech_Scorcher"]/tools</xpath>
+				<value>
+				    <tools>
+					  <li>
+						<label>front left leg</label>
+						<capacities>
+						  <li>Blunt</li>
+						</capacities>
+						<power>12.0</power>
+						<cooldownTime>1</cooldownTime>
+						<linkedBodyPartsGroup>FrontLeftLeg</linkedBodyPartsGroup>
+						<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+					  </li>
+					  <li>
+						<label>front right leg</label>
+						<capacities>
+						  <li>Blunt</li>
+						</capacities>
+						<power>12.0</power>
+						<cooldownTime>1</cooldownTime>
+						<linkedBodyPartsGroup>FrontRightLeg</linkedBodyPartsGroup>
+						<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+					  </li>
+					  <li>
+						<label>head</label>
+						<capacities>
+						  <li>Blunt</li>
+						</capacities>
+						<power>8.5</power>
+						<cooldownTime>1</cooldownTime>
+						<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+						<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+						<chanceFactor>0.2</chanceFactor>
+					  </li>
+					</tools>
+				</value>
+			</li>
+			<!-- Heavy -->
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[@Name="HeavyMechanoid"]/statBases</xpath>
+				<value>
+					<statBases>
+					  <MoveSpeed>1.9</MoveSpeed>
+					  <ArmorRating_Blunt>0.80</ArmorRating_Blunt>
+					  <ArmorRating_Sharp>1.10</ArmorRating_Sharp>
+					  <PsychicSensitivity>0</PsychicSensitivity>
+					  <ControlTakingTime>24</ControlTakingTime>
+					  <MechEnergyLossPerHP>0.2</MechEnergyLossPerHP>
+					</statBases>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Mech_Tunneler"]/statBases</xpath>
+				<value>
+				    <statBases>
+					  <MoveSpeed>4.5</MoveSpeed>
+					  <BandwidthCost>2</BandwidthCost>
+					  <ArmorRating_Blunt>1</ArmorRating_Blunt>
+					  <ArmorRating_Sharp>1</ArmorRating_Sharp>
+					</statBases>
+				</value>
+			</li>
+			<!-- SuperHeavy -->
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[@Name="SuperHeavyMechanoid"]/statBases</xpath>
+				<value>
+					<statBases>
+					  <MarketValue>1600</MarketValue>
+					  <ControlTakingTime>30</ControlTakingTime>
+					  <BandwidthCost>10</BandwidthCost>
+					  <ArmorRating_Blunt>0.25</ArmorRating_Blunt>
+					  <ArmorRating_Sharp>0.75</ArmorRating_Sharp>
+					  <PsychicSensitivity>0</PsychicSensitivity>
+					  <MechEnergyLossPerHP>0.05</MechEnergyLossPerHP>
+					</statBases>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[@Name="SuperHeavyMechanoid"]</xpath>
+				<value>
+					<damageMultipliers>
+					  <li>
+						<damageDef>Stun</damageDef>
+						<multiplier>0</multiplier>
+					  </li>
+					</damageMultipliers>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[@Name="SuperHeavyMechanoid"]/butcherProducts</xpath>
+				<value>
+					<butcherProducts Inherit="false">
+					  <Steel>100</Steel>
+					  <Plasteel>50</Plasteel>
+					  <PrecisionDeck>10</PrecisionDeck>
+					</butcherProducts>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Mech_Centurion"]/statBases</xpath>
+				<value>
+				    <statBases>
+					  <MoveSpeed>1.6</MoveSpeed>
+					  <EnergyShieldRechargeRate>0.5</EnergyShieldRechargeRate>
+					  <EnergyShieldEnergyMax>3</EnergyShieldEnergyMax>
+					  <ArmorRating_Blunt>1</ArmorRating_Blunt>
+					  <ArmorRating_Sharp>1.5</ArmorRating_Sharp>
+					  <MeleeDoorDamageFactor>1.5</MeleeDoorDamageFactor>
+					  <BandwidthCost>5</BandwidthCost>
+					</statBases>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Mech_Centurion"]/comps/li[1]</xpath>
+				<value>
+				  <li Class="CompProperties_ProjectileInterceptor">
+					<radius>10</radius>
+					<interceptGroundProjectiles>true</interceptGroundProjectiles>
+					<color>(0.4, 0.4, 0.4)</color>
+					<reactivateEffect>BulletShieldGenerator_Reactivate</reactivateEffect>
+					<activeSound>BulletShield_Ambience</activeSound>
+					<hitPoints>2500</hitPoints>
+					<hitPointsRestoreInstantlyAfterCharge>true</hitPointsRestoreInstantlyAfterCharge>
+					<chargeDurationTicks>1800</chargeDurationTicks>
+					<rechargeHitPointsIntervalTicks>1</rechargeHitPointsIntervalTicks>
+					<minIdleAlpha>0.2</minIdleAlpha>
+					<drawWithNoSelection>True</drawWithNoSelection>
+					<disarmedByEmpForTicks>900</disarmedByEmpForTicks>
+					<gizmoTipKey>ProjectileInterceptorTip</gizmoTipKey>
+				  </li>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/PawnKindDef[defName="Mech_Centurion"]</xpath>
+				<value>
+				  <abilities>
+				    <li>MechPlaceShield</li>
+				  </abilities>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Mech_Centurion"]/tools</xpath>
+				<value>
+				    <tools>
+					  <li>
+						<label>head</label>
+						<capacities>
+						  <li>Demolish</li>
+						</capacities>
+						<power>20</power>
+						<cooldownTime>1</cooldownTime>
+						<armorPenetration>0.9</armorPenetration>
+						<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+						<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+						<chanceFactor>0.2</chanceFactor>
+					  </li>
+					</tools>
+				</value>
+			</li>
+			<!-- BOSS -->
+			<!-- Apocriton -->
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Mech_Apocriton"]/statBases/ArmorRating_Blunt</xpath>
+				<value>
+					<ArmorRating_Blunt>0.65</ArmorRating_Blunt>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Mech_Apocriton"]/statBases/ArmorRating_Sharp</xpath>
+				<value>
+					<ArmorRating_Sharp>1.05</ArmorRating_Sharp>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="Mech_Apocriton"]/statBases</xpath>
+				<value>
+					<MaxHitPoints>500</MaxHitPoints>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="Mech_Apocriton"]/race</xpath>
+				<value>
+					<hediffGiverSets>
+						<li>Introduction_Apocriton</li>
+					</hediffGiverSets>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="Mech_Apocriton"]/comps</xpath>
+				<value>
+				  <li Class="GD3.CompProperties_PsychicAttack">
+					<interval>58~59</interval>
+					<minDistance>55</minDistance>
+					<actPeriod>25</actPeriod>
+					<hediffToAdd>MindSuppression</hediffToAdd>
+				  </li>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="Mech_Apocriton"]/comps</xpath>
+				<value>
+				  <li Class="GD3.CompProperties_HitArmor">
+					<hediffToAdd>GD_HitArmor</hediffToAdd>
+					<duration>120</duration>
+					<limitOfTimes>10</limitOfTimes>
+				  </li>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="Mech_Apocriton"]/comps</xpath>
+				<value>
+				  <li Class="GD3.CompProperties_Apocriton">
+					<affectRangeFst>55</affectRangeFst>
+					<affectRangeSec>65</affectRangeSec>
+				  </li>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="Mech_Apocriton"]</xpath>
+				<value>
+					<butcherProducts Inherit="false">
+					  <Steel>100</Steel>
+					  <Plasteel>200</Plasteel>
+					  <PrecisionDeck>50</PrecisionDeck>
+					</butcherProducts>
+				</value>
+			</li>
+			<!-- Warqueen -->
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Mech_Warqueen"]/statBases</xpath>
+				<value>
+					<statBases>
+					  <MoveSpeed>1.6</MoveSpeed>
+					  <EnergyShieldRechargeRate>1</EnergyShieldRechargeRate>
+					  <EnergyShieldEnergyMax>5</EnergyShieldEnergyMax>
+					  <ArmorRating_Blunt>0.5</ArmorRating_Blunt>
+					  <ArmorRating_Sharp>1.0</ArmorRating_Sharp>
+					  <ArmorRating_Heat>2</ArmorRating_Heat>
+					  <MeleeDoorDamageFactor>1.5</MeleeDoorDamageFactor>
+					  <EMPResistance>0</EMPResistance>
+					  <BandwidthCost>20</BandwidthCost>
+					  <MaxHitPoints>500</MaxHitPoints>
+					</statBases>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="Mech_Warqueen"]/race</xpath>
+				<value>
+					<hediffGiverSets>
+						<li>Introduction_Warqueen</li>
+					</hediffGiverSets>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Mech_Warqueen"]/race/baseHealthScale</xpath>
+				<value>
+					<baseHealthScale>3.2</baseHealthScale>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="Mech_Warqueen"]/comps</xpath>
+				<value>
+				  <li Class="GD3.CompProperties_HitArmor">
+					<hediffToAdd>GD_HitArmor</hediffToAdd>
+					<duration>60</duration>
+					<limitOfTimes>15</limitOfTimes>
+				  </li>
+				  <li Class="GD3.CompProperties_AttackMode">
+					<label>GD.AttackMode</label>
+					<description>GD.AttackModeDesc</description>
+					<UI>UI/Buttons/AutoAttack_WarQueen</UI>
+				  </li>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Mech_Warqueen"]/comps/li[@Class="CompProperties_MechCarrier"]</xpath>
+				<value>
+				  <li Class="CompProperties_MechCarrier">
+					<spawnPawnKind>Mech_WarUrchin</spawnPawnKind>
+					<fixedIngredient>Steel</fixedIngredient>
+					<costPerPawn>20</costPerPawn>
+					<startingIngredientCount>1000</startingIngredientCount>
+					<maxIngredientCount>1000</maxIngredientCount>
+					<spawnEffecter>WarqueenWarUrchinsSpawned</spawnEffecter>
+					<spawnedMechEffecter>WarUrchinSpawned</spawnedMechEffecter>
+					<attachSpawnedEffecter>true</attachSpawnedEffecter>
+					<attachSpawnedMechEffecter>true</attachSpawnedMechEffecter>
+					<maxPawnsToSpawn>10</maxPawnsToSpawn>
+				  </li>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="Mech_Warqueen"]/comps</xpath>
+				<value>
+				  <li Class="GD3.CompProperties_AllDead">
+					<toggleLabelKey>GD.KillAllUrchin</toggleLabelKey>
+					<toggleDescKey>GD.KillAllUrchinDesc</toggleDescKey>
+					<toggleIconPath>UI/Buttons/GD_ClearUrchin</toggleIconPath>
+					<unableKey>GD.CanNotKillUrchin</unableKey>
+					<mechanoidToKill>Mech_WarUrchin</mechanoidToKill>
+				  </li>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="Mech_Warqueen"]</xpath>
+				<value>
+					<butcherProducts Inherit="false">
+					  <Steel>400</Steel>
+					  <Plasteel>50</Plasteel>
+					  <PrecisionDeck>50</PrecisionDeck>
+					</butcherProducts>
+				</value>
+			</li>
+			<!-- Diabolus -->
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Mech_Diabolus"]/statBases</xpath>
+				<value>
+				  <statBases>
+					<ArmorRating_Blunt>0.70</ArmorRating_Blunt>
+					<ArmorRating_Sharp>0.90</ArmorRating_Sharp>
+					<ArmorRating_Heat>0</ArmorRating_Heat>
+					<EMPResistance>0</EMPResistance>
+					<BandwidthCost>20</BandwidthCost>
+					<MoveSpeed>2.7</MoveSpeed>
+					<EnergyShieldRechargeRate>1</EnergyShieldRechargeRate>
+					<EnergyShieldEnergyMax>5</EnergyShieldEnergyMax>
+					<IncomingDamageFactor>0.5</IncomingDamageFactor>
+					<MaxHitPoints>500</MaxHitPoints>
+				  </statBases>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="Mech_Diabolus"]</xpath>
+				<value>
+				  <damageMultipliers>
+					  <li>
+						<damageDef>VaporizeSec</damageDef>
+						<multiplier>0</multiplier>
+					  </li>
+				  </damageMultipliers>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="Mech_Diabolus"]/race</xpath>
+				<value>
+					<hediffGiverSets>
+						<li>Introduction_Diabolus</li>
+					</hediffGiverSets>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="Mech_Diabolus"]/comps</xpath>
+				<value>
+				  <li Class="GD3.CompProperties_HitArmor">
+					<hediffToAdd>GD_HitArmor</hediffToAdd>
+					<duration>60</duration>
+					<limitOfTimes>15</limitOfTimes>
+				  </li>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="Mech_Diabolus"]</xpath>
+				<value>
+					<butcherProducts Inherit="false">
+					  <Steel>300</Steel>
+					  <Plasteel>100</Plasteel>
+					  <PrecisionDeck>50</PrecisionDeck>
+					</butcherProducts>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/PawnKindDef[defName="Mech_Diabolus"]/abilities</xpath>
+				<value>
+				  <abilities>
+					<li>MechFireBurst</li>
+				  </abilities>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+	
+</Patch>

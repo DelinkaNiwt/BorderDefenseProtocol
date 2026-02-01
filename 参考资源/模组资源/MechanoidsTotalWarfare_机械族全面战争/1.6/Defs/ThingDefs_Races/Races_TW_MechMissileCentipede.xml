@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <ThingDef ParentName="MechCentipede">
+    <defName>Mech_CentipedeMissile</defName>
+    <label>机械制导蜈蚣</label>
+	<description>一只装备了制导导弹发射器的蜈蚣，能够在较远距离发射高爆或者EMP制导导弹以精准压制其对手</description>
+  <comps>
+  </comps>
+  </ThingDef>
+  
+  <PawnKindDef ParentName="MechCentipedeBase">
+    <defName>Mech_CentipedeMissile_Kind</defName>
+    <label>机械制导蜈蚣</label>
+    <race>Mech_CentipedeMissile</race>
+	<description>一只装备了制导导弹发射器的蜈蚣，能够在较远距离发射高爆或者EMP制导导弹以精准压制其对手</description>
+    <lifeStages Inherit="False">
+      <li MayRequire="Ludeon.RimWorld.Biotech">
+        <bodyGraphicData>
+          <texPath>Races/CentipedeMissile</texPath>
+          <shaderType>CutoutWithOverlay</shaderType>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>3</drawSize>
+          <shadowData>
+            <volume>(0.6, 0.8, 0.6)</volume>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+      <li>
+        <bodyGraphicData>
+          <texPath>Races/CentipedeMissileAncient</texPath>
+          <shaderType>CutoutWithOverlay</shaderType>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>3</drawSize>
+          <shadowData>
+            <volume>(0.6, 0.8, 0.6)</volume>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+    <weaponTags>
+      <li>TW_Guided_Rocket_Launcher_EMP</li>
+      <li>TW_Guided_Rocket_Launcher_HE</li>
+    </weaponTags>
+  </PawnKindDef>
+  
+</Defs>

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <PlayerBuilding_Annihilator.label>机械湮黾</PlayerBuilding_Annihilator.label>
+  <PlayerBuilding_Annihilator.description>机械族的小型自走歼星武器。执行任务时负责钻入地底深处并利用等离子喷口激活地幔，引发强烈的地质活动，为肢解行星作第一步准备。待机时便在太空中漂流，等待最近的机械主脑将它唤醒，领它去杀戮。\n\n以等离子喷口作为主要攻击方式。肢体上搭载有小型炮塔，摧毁对应部位可以将其瘫痪。</PlayerBuilding_Annihilator.description>
+  
+  <GD_AnnihilatorTerminal.label>终端</GD_AnnihilatorTerminal.label>
+  <GD_AnnihilatorTerminal.description>古代用于处理机械族信号的终端。可以由专业的人骇入并发送模拟信号，吸引周围的机械族单位靠近。</GD_AnnihilatorTerminal.description>
+
+</LanguageData>

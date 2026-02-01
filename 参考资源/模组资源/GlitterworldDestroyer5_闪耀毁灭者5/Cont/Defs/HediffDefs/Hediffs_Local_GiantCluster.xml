@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <!-- 遮蔽髓 -->
+  <HediffDef>
+    <defName>PsychicShieldMarrowHediff</defName>
+    <label>psychic shield</label>
+    <description>Affected by the psychic shock wave, this unit can no longer use its mind powers.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0, 199, 140)</defaultLabelColor>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>60</disappearsAfterTicks>
+        <showRemainingTime>false</showRemainingTime>
+      </li>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/>
+    </comps>
+    <stages>
+      <li>
+        <statFactors>
+          <PsychicSensitivity>0</PsychicSensitivity>
+		  <PsychicEntropyMax>0</PsychicEntropyMax>
+        </statFactors>
+      </li>
+    </stages>
+    <isBad>true</isBad>
+  </HediffDef>
+  
+  <!-- 抑制髓 -->
+  <HediffDef>
+    <defName>PsychicSuppressionMarrowHediff</defName>
+    <label>psychic suppression</label>
+    <description>Affected by the psychic shock wave, this unit has difficulty maintaining normal thinking anymore.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0, 199, 140)</defaultLabelColor>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>60</disappearsAfterTicks>
+        <showRemainingTime>false</showRemainingTime>
+      </li>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/>
+    </comps>
+    <stages>
+      <li>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <setMax>0.75</setMax>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+    <isBad>true</isBad>
+  </HediffDef>
+  
+</Defs>

@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 灵能彗星 -->
+  
+  <ThingDef ParentName="SkyfallerBase">
+    <defName>BlackStrike</defName>
+    <label>psychic comet</label>
+	<thingClass>GD3.PsychicComet</thingClass>
+    <graphicData>
+      <texPath>BlackStrike</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(5,15)</drawSize>
+    </graphicData>
+    <skyfaller>
+      <explosionRadius>5.9</explosionRadius>
+      <explosionDamage>BombBlackStrike</explosionDamage>
+	  <explosionDamageFactor>0.5</explosionDamageFactor>
+      <rotateGraphicTowardsDirection>true</rotateGraphicTowardsDirection>
+      <speed>2.6</speed>
+      <shadowSize>(4, 4)</shadowSize>
+	  <ticksToImpactRange>60~150</ticksToImpactRange>
+	  <anticipationSound>MortarRound_PreImpact</anticipationSound>
+      <rubbleShrapnelCountRange><min>50</min><max>100</max></rubbleShrapnelCountRange>
+	  <shrapnelDistanceFactor>0.8</shrapnelDistanceFactor>
+    </skyfaller>
+  </ThingDef>
+  
+  <!-- 球状闪电 -->
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_PocketThunder</defName>
+    <label>Ball Lightning</label>
+    <graphicData>
+      <texPath>Empty/Empty</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+    </graphicData>
+	<thingClass>GD3.Projectile_PocketThunder</thingClass>
+    <projectile>
+      <damageDef>BombBlackStrike</damageDef>
+	  <damageAmountBase>320</damageAmountBase>
+      <armorPenetrationBase>0.85</armorPenetrationBase>
+      <speed>5</speed>
+      <explosionRadius>7.9</explosionRadius >
+	  <preExplosionSpawnSingleThingDef>Filth_BlastMark</preExplosionSpawnSingleThingDef>
+      <preExplosionSpawnThingDef>Filth_Ash</preExplosionSpawnThingDef>
+      <preExplosionSpawnChance>0.7</preExplosionSpawnChance>
+	  <flyOverhead>true</flyOverhead>
+    </projectile>
+	<!-- <comps>
+	  <li Class="GD3.CompProperties_SpawnThingOnDestroy">
+		<thingDef>GD_DummyBombardment</thingDef>
+	  </li>
+	</comps> -->
+  </ThingDef>
+  
+  <!-- 灵能彗星·空降 -->
+  
+  <ThingDef ParentName="SkyfallerBase">
+    <defName>BlackStrike_Pod</defName>
+    <label>psychic comet</label>
+    <size>(2,2)</size>
+    <graphicData>
+      <texPath>BlackStrike</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(5,15)</drawSize>
+    </graphicData>
+    <skyfaller>
+	  <angleCurve>
+	    <points>
+          <li>(0,     0)</li>
+          <li>(1,     0)</li>
+        </points>
+	  </angleCurve>
+	  <explosionDamageFactor>1</explosionDamageFactor>
+      <explosionRadius>3.9</explosionRadius>
+      <explosionDamage>BombBlackStrike</explosionDamage>
+	  <anticipationSound>MortarRound_PreImpact</anticipationSound>
+      <rotateGraphicTowardsDirection>true</rotateGraphicTowardsDirection>
+      <speed>1</speed>
+      <shadowSize>(4, 4)</shadowSize>
+    </skyfaller>
+	<comps>
+	  <li Class="GD3.CompProperties_SpawnThingOnDestroy"/>
+	</comps>
+  </ThingDef>
+  
+  <!-- dummy -->
+  
+  <ThingDef ParentName="EtherealThingBase">
+	<defName>GD_DummyBombardment</defName>
+	<label>bombardment</label>
+	<graphicData>
+	  <texPath>Empty/Empty</texPath>
+	  <graphicClass>Graphic_Single</graphicClass>
+	</graphicData>
+	<thingClass>GD3.ApocritonBombardment</thingClass>
+	<tickerType>Normal</tickerType>
+	<drawerType>RealtimeOnly</drawerType>
+	<alwaysFlee>true</alwaysFlee>
+  </ThingDef>
+  
+  <ThingDef ParentName="EtherealThingBase">
+	<defName>GD_DummyMine</defName>
+	<label>mine</label>
+	<graphicData>
+	  <texPath>Empty/Empty</texPath>
+	  <graphicClass>Graphic_Single</graphicClass>
+	</graphicData>
+	<thingClass>GD3.ApocritonMine</thingClass>
+	<tickerType>Normal</tickerType>
+	<drawerType>RealtimeOnly</drawerType>
+	<alwaysFlee>true</alwaysFlee>
+  </ThingDef>
+  
+  <ThingDef ParentName="EtherealThingBase">
+	<defName>GD_ThunderArrow</defName>
+	<label>thunder</label>
+	<graphicData>
+	  <texPath>Empty/Empty</texPath>
+	  <graphicClass>Graphic_Single</graphicClass>
+	</graphicData>
+	<thingClass>GD3.ThunderArrow</thingClass>
+	<tickerType>Normal</tickerType>
+	<drawerType>RealtimeOnly</drawerType>
+	<alwaysFlee>true</alwaysFlee>
+  </ThingDef>
+  
+  <ThingDef ParentName="EtherealThingBase">
+	<defName>GD_ThrowingCane</defName>
+	<label>cane</label>
+	<graphicData>
+	  <texPath>Empty/Empty</texPath>
+	  <graphicClass>Graphic_Single</graphicClass>
+	</graphicData>
+	<thingClass>GD3.ThrowingCane</thingClass>
+	<tickerType>Normal</tickerType>
+	<drawerType>RealtimeOnly</drawerType>
+	<alwaysFlee>true</alwaysFlee>
+  </ThingDef>
+  
+  <ThingDef ParentName="EtherealThingBase">
+	<defName>GD_AlphaBombardment</defName>
+	<label>bombardment</label>
+	<graphicData>
+	  <texPath>Empty/Empty</texPath>
+	  <graphicClass>Graphic_Single</graphicClass>
+	</graphicData>
+	<thingClass>GD3.AlphaBombardment</thingClass>
+	<tickerType>Normal</tickerType>
+	<drawerType>RealtimeOnly</drawerType>
+	<alwaysFlee>true</alwaysFlee>
+  </ThingDef>
+  
+  <!-- Mod -->
+  
+  <ThingDef ParentName="SkyfallerBase">
+    <defName>AlphaStrike</defName>
+    <label>missle</label>
+    <size>(2,2)</size>
+	<thingClass>GD3.AlphaSkyfaller</thingClass>
+    <graphicData>
+      <texPath>AlphaRocket</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Mote</shaderType>
+      <drawSize>(5,5)</drawSize>
+    </graphicData>
+    <skyfaller>
+	  <angleCurve>
+	    <points>
+          <li>(0,     0)</li>
+          <li>(1,     0)</li>
+        </points>
+	  </angleCurve>
+      <explosionRadius>5.9</explosionRadius>
+      <explosionDamage>GD_Bomb_AM</explosionDamage>
+	  <explosionDamageFactor>1.8</explosionDamageFactor>
+	  <anticipationSound>MortarRound_PreImpact</anticipationSound>
+      <rotateGraphicTowardsDirection>true</rotateGraphicTowardsDirection>
+      <speed>1.6</speed>
+      <shadowSize>(4, 4)</shadowSize>
+    </skyfaller>
+  </ThingDef>
+
+</Defs>

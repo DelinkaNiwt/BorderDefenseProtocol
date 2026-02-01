@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: GrenadeExplosiveEMP -->
+  <Proj_GrenadeExplosiveEMP.label>TODO</Proj_GrenadeExplosiveEMP.label>
+  
+  <!-- EN: 特种电荷标枪 -->
+  <Specops_Charge_Lance.label>TODO</Specops_Charge_Lance.label>
+  <!-- EN: 仅在伞兵静螳间装备的特殊电荷标枪，有着极远的射程与不俗的伤害 -->
+  <Specops_Charge_Lance.description>TODO</Specops_Charge_Lance.description>
+  <!-- EN: stock -->
+  <Specops_Charge_Lance.tools.stock.label>TODO</Specops_Charge_Lance.tools.stock.label>
+  <!-- EN: barrel -->
+  <Specops_Charge_Lance.tools.barrel.label>TODO</Specops_Charge_Lance.tools.barrel.label>
+  <!-- EN: 特种电荷标枪 -->
+  <Specops_Charge_Lance.verbs.Verb_Shoot.label>TODO</Specops_Charge_Lance.verbs.Verb_Shoot.label>
+  
+</LanguageData>

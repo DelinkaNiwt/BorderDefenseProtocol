@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <!-- 勋章 -->
+  
+  <ThingCategoryDef>
+	<defName>GD3_Medal</defName>
+	<label>medal</label>
+	<parent>Apparel</parent>
+  </ThingCategoryDef>
+	
+  <ApparelLayerDef>
+	<defName>OuterMedal</defName>
+	<label>medal</label>
+	<drawOrder>280</drawOrder>
+  </ApparelLayerDef>
+  
+  <ThingDef Name="BlackMedalBase" ParentName="ApparelBase" Abstract="True">
+    <thingCategories>
+		<li>GD3_Medal</li>
+	</thingCategories>
+	<tradeability>None</tradeability>
+	<smeltable>false</smeltable>
+	<recipeMaker>
+	    <effectWorking>Smith</effectWorking>
+        <soundWorking>Recipe_Machining</soundWorking>
+	    <unfinishedThingDef>UnfinishedGun</unfinishedThingDef>
+		<recipeUsers Inherit="False">
+		  <li>FabricationBench</li>
+		</recipeUsers>
+		<skillRequirements>
+			<Crafting>20</Crafting>
+		</skillRequirements>		
+	</recipeMaker>
+	<techLevel>Archotech</techLevel>
+	<statBases>
+		<MaxHitPoints>1500</MaxHitPoints>
+		<WorkToMake>25000</WorkToMake>
+		<Mass>0.5</Mass>
+		<Flammability>0</Flammability>
+		<EquipDelay>1</EquipDelay>
+	</statBases>
+	<tickerType>Normal</tickerType>
+	<apparel>
+		<wearPerDay>0</wearPerDay>
+		<countsAsClothingForNudity>false</countsAsClothingForNudity>
+		<careIfWornByCorpse>false</careIfWornByCorpse>
+		<careIfDamaged>false</careIfDamaged>
+		<bodyPartGroups>
+			<li>Neck</li>
+		</bodyPartGroups>
+		<layers>
+			<li>OuterMedal</li>
+		</layers>
+	</apparel>
+  </ThingDef>
+	
+	<!-- 饥荒 -->
+    <ThingDef ParentName="BlackMedalBase">
+		<defName>BlackMedal_Famine</defName>
+		<label>tungsten medal</label>
+		<description>"The hunger felt like a fire burning through flesh and blood. I raised my eyes and saw the orange light of the house, which seemed to be the color of hunger." \n\n"The people of the glitterworld have not experienced hunger for a long time, and they take it for granted. I just hope they don't forget where such a life comes from."</description>
+		<graphicData>
+			<texPath>Items/Medals/BlackMedal_Famine</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<recipeMaker>
+			<researchPrerequisites>
+			  <li>GD3_GiantCluster_Ultra</li>
+			</researchPrerequisites>
+		</recipeMaker>
+		<costList>
+			<Chocolate>10000</Chocolate>
+			<WoodLog>2000</WoodLog>
+		</costList>
+		<comps>
+		  <li Class="GD3.CompProperties_Famine">
+		    <toggleIconPath>UI/Buttons/MedalFamine</toggleIconPath>
+			<toggleLabelKey>GD.ToggleFamineLabel</toggleLabelKey>
+			<toggleDescKey>GD.ToggleFamineDesc</toggleDescKey>
+			<toggleLabelKey2>GD.ToggleFamineLabelB</toggleLabelKey2>
+			<toggleDescKey2>GD.ToggleFamineDescB</toggleDescKey2>
+		  </li>
+		</comps>
+	</ThingDef>
+
+</Defs>

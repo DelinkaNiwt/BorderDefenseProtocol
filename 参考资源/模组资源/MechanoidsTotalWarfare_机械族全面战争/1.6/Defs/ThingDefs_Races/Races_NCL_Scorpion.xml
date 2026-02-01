@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <LifeStageDef>
+    <defName>NCL_Mech_ScorpionFullyformed</defName>
+    <label>fully-formed</label>
+    <caravanRideable>true</caravanRideable>
+    <visible>false</visible>
+  </LifeStageDef>
+  
+  <ThingDef Name="NCLMechScorpion" ParentName="SuperHeavyMechanoid">
+    <defName>NCL_Mech_Scorpion</defName>
+    <label>战争巨蝎</label>
+    <description>单位档案：NCL-03“战争巨蝎”
+来源：NCL「铁律」重装突击序列
+
+这台被称作“战争巨蝎”的单位，是联合体为打击高密度据点目标而打造的重装突袭机种。其外壳由数百万片自修复铀金属鳞片组成，能在受损时动态重组为局部防御屏障，提供突破常规的物理抗性——战场记录显示其能硬抗高爆弹正面直击后继续推进。
+
+核心武装为尾部挂载的「炽核贯杀」轨道主炮，通过高压缩能量弹短暂蓄能后释放的热熔射流，可瞬间焚穿重型掩体与装甲载具。每次炮击伴随的等离子震荡波会引发区域性热浪与地形熔毁效应，形成极具压制性的战场控制能力。
+
+双侧同步的压制火炮阵列提供不间断的火力覆盖，能在主炮充能期间精确压制步兵与轻装单位。</description>
+    <statBases>
+      <MarketValue>3200</MarketValue>
+      <MoveSpeed>5.4</MoveSpeed>
+      <ArmorRating_Blunt>1.05</ArmorRating_Blunt>
+	  <EMPResistance>0.40</EMPResistance>
+      <ArmorRating_Sharp>1.05</ArmorRating_Sharp>
+	  <ShootingAccuracyPawn>1.5</ShootingAccuracyPawn>
+      <PsychicSensitivity>0</PsychicSensitivity>
+      <BandwidthCost MayRequire="Ludeon.RimWorld.Biotech">8</BandwidthCost>
+      <MechEnergyLossPerHP  MayRequire="Ludeon.RimWorld.Biotech">0.2</MechEnergyLossPerHP>
+    </statBases>
+	<tools>
+      <li>
+        <label>MechanicalHead</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>50</power>
+        <cooldownTime>1</cooldownTime>
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+        <chanceFactor>0.2</chanceFactor>
+      </li>
+    </tools>
+	<comps>  
+	  <li Class="CompProperties_TurretGun">
+        <turretDef>RT_AutoGun</turretDef>
+        <angleOffset>-90</angleOffset>
+     </li>
+	</comps>
+	<butcherProducts>
+      <Steel>600</Steel>
+      <Plasteel>180</Plasteel>
+    </butcherProducts>
+    <race>
+      <lifeStageAges>
+        <li>
+          <def>NCL_Mech_ScorpionFullyformed</def>
+          <minAge>0</minAge>
+          <soundWounded>Pawn_Mech_Diabolus_Wounded</soundWounded>
+            <soundDeath>Pawn_Mech_Diabolus_Death</soundDeath>
+            <soundCall>Pawn_Mech_Diabolus_Call</soundCall>
+        </li>
+      </lifeStageAges>
+      <body>ScorpionBody</body>
+	  <baseBodySize>3.5</baseBodySize>
+      <baseHealthScale>4</baseHealthScale>
+      <detritusLeavings>
+        <li>
+          <def>ChunkMechanoidSlag</def>
+          <texOverrideIndex>11</texOverrideIndex>
+          <spawnChance>0.1</spawnChance>
+        </li>
+        <li>
+          <def>ChunkMechanoidSlag</def>
+          <texOverrideIndex>12</texOverrideIndex>
+          <spawnChance>0.1</spawnChance>
+        </li>
+      </detritusLeavings>
+        <mechEnabledWorkTypes>
+          <li>Hauling</li>
+		  <li>Mining</li>
+        </mechEnabledWorkTypes>
+	<mechFixedSkillLevel>20</mechFixedSkillLevel>
+    </race>
+  </ThingDef>
+
+  <PawnKindDef ParentName="HeavyMechanoidKind">
+  <defName>NCL_Mech_Scorpion_Kind</defName>
+  <label>战争巨蝎</label>
+  <race>NCL_Mech_Scorpion</race>
+  <defaultFactionType>NCL_faction</defaultFactionType>
+  <allowInMechClusters>false</allowInMechClusters>
+  <combatPower>1800</combatPower>
+  <lifeStages>
+    <li MayRequire="Ludeon.RimWorld.Biotech">
+      <bodyGraphicData>
+        <texPath>Things/Scorpion</texPath>
+        <graphicClass>Graphic_Multi</graphicClass>
+        <drawSize>4.5</drawSize>
+        <shadowData>
+          <volume>(0.4, 0.8, 0.4)</volume>
+        </shadowData>
+      </bodyGraphicData>
+    </li>
+  </lifeStages>
+  <weaponMoney>9999~9999</weaponMoney>
+  <weaponTags>
+    <li>RedT03</li>
+  </weaponTags>
+  <techHediffsChance>1</techHediffsChance>
+  <techHediffsMoney>9999~9999</techHediffsMoney>
+  <abilities>
+	<li>NCL_Blazing_Core_Penetrator</li>
+	<li>NCL_MechSelfRepair</li>
+  </abilities>
+  </PawnKindDef>
+  
+</Defs>

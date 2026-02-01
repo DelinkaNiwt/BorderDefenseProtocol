@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <ThingDef Name="MechServerBase" ParentName="BuildingBase" Abstract="True">
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <altitudeLayer>Building</altitudeLayer>
+	<hasTooltip>true</hasTooltip>
+    <pathCost>0</pathCost>
+    <blockWind>true</blockWind>
+	<stealable>false</stealable>
+    <rotatable>false</rotatable>
+    <castEdgeShadows>true</castEdgeShadows>
+    <fillPercent>1.0</fillPercent>
+    <passability>Impassable</passability>
+    <canOverlapZones>false</canOverlapZones>
+    <statBases>
+      <MaxHitPoints>250</MaxHitPoints>
+      <Flammability>0</Flammability>
+    </statBases>
+    <size>(1,1)</size>
+    <building>
+      <destroySound>BuildingDestroyed_Metal_Big</destroySound>
+    </building>
+    <!-- <defaultPlacingRot>South</defaultPlacingRot> -->
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <hasInteractionCell>true</hasInteractionCell>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <tickerType>Normal</tickerType>
+  </ThingDef>
+  
+  <ThingDef ParentName="MechServerBase">
+    <defName>MechServer_True</defName>
+    <label>mechanoid server</label>
+    <description>Servers that may contain useful information require a secret key to open.</description>
+	<selectable>true</selectable>
+	<graphicData>
+      <texPath>Buildings/Fortress/Server_true</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2.50,2.00)</drawSize>
+	  <drawOffset>(0,0,0.4)</drawOffset>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+      <shadowData>
+        <volume>(0.8,0.5,0.5)</volume>
+      </shadowData>
+    </graphicData>
+    <comps>
+      <li Class="CompProperties_Usable">
+        <useJob>TriggerObject</useJob>
+        <useLabel>Steal Intelligence</useLabel>
+        <useDuration>60</useDuration>
+        <ignoreOtherReservations>true</ignoreOtherReservations>
+      </li>
+	  <li Class="GD3.CompProperties_ServerUpperDrawer">
+		<drawOffset>(0,0,0.4)</drawOffset>
+	  </li>
+	  <li Class="CompProperties_UseEffect">
+        <compClass>GD3.CompUseEffect_StealIntelligence</compClass>
+      </li>
+    </comps>
+  </ThingDef>
+  
+  <ThingDef ParentName="MechServerBase">
+    <defName>MechServer_False</defName>
+    <label>mechanoid server</label>
+    <description>Servers that may contain useful information are highly encrypted.</description>
+	<selectable>true</selectable>
+	<graphicData>
+      <texPath>Buildings/Fortress/Server_false</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2.50,2.00)</drawSize>
+	  <drawOffset>(0,0,0.4)</drawOffset>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+      <shadowData>
+        <volume>(0.8,0.5,0.5)</volume>
+      </shadowData>
+    </graphicData>
+    <comps>
+	  <li Class="GD3.CompProperties_ServerUpperDrawer">
+		<drawOffset>(0,0,0.4)</drawOffset>
+	  </li>
+    </comps>
+  </ThingDef>
+  
+  <ThingDef ParentName="MechServerBase">
+    <defName>MechServer_Normal</defName>
+    <label>mechanoid server</label>
+    <description>A server that may contain useful information, but is not the target of this case.</description>
+	<selectable>true</selectable>
+	<graphicData>
+      <texPath>Buildings/Fortress/Server_normal</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2.50,2.00)</drawSize>
+	  <drawOffset>(0,0,0.4)</drawOffset>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+      <shadowData>
+        <volume>(0.8,0.5,0.5)</volume>
+      </shadowData>
+    </graphicData>
+    <comps>
+	  <li Class="GD3.CompProperties_ServerUpperDrawer">
+		<drawOffset>(0,0,0.4)</drawOffset>
+	  </li>
+    </comps>
+  </ThingDef>
+  
+  <!-- dummy -->
+  
+  <ThingDef ParentName="EtherealThingBase">
+	<defName>GD_ServerDummy</defName>
+	<label>server dummy</label>
+	<graphicData>
+	  <texPath>Empty/Empty</texPath>
+	  <graphicClass>Graphic_Single</graphicClass>
+	</graphicData>
+	<thingClass>ThingWithComps</thingClass>
+	<tickerType>Normal</tickerType>
+	<drawerType>RealtimeOnly</drawerType>
+	<alwaysFlee>true</alwaysFlee>
+  </ThingDef>
+
+</Defs>

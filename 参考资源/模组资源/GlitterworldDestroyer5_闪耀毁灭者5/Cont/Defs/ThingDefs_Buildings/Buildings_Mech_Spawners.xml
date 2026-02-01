@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+<!-- 禁卫机械舱 -->
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>LargeMechCapsule</defName>
+    <label>large mech capsule</label>
+    <description>A mechanoid storage and deployment capsule. It can contain a number of mechanoids, ready to emerge and fight upon being awakened.</description>
+    <altitudeLayer>Building</altitudeLayer>
+    <pathCost>50</pathCost>
+    <blockWind>true</blockWind>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>1.0</fillPercent>
+    <tickerType>Normal</tickerType>
+    <selectable>true</selectable>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <repairEffect>ConstructMetal</repairEffect>
+    <forceDebugSpawnable>true</forceDebugSpawnable>
+    <receivesSignals>true</receivesSignals>
+    <isMechClusterThreat>true</isMechClusterThreat>
+    <size>(5,5)</size>
+    <statBases>
+      <MaxHitPoints>800</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <Beauty>-20</Beauty>
+      <WorkToBuild>500</WorkToBuild>
+    </statBases>
+    <graphicData>
+      <texPath>Buildings/LargeMechCapsule</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(7,7)</drawSize>
+	  <drawOffset>(0,0,-0.15)</drawOffset>
+      <shadowData>
+        <volume>(1.8, 0.7, 2.8)</volume>
+      </shadowData>
+    </graphicData>
+    <building>
+      <combatPower>2500</combatPower>
+      <buildingTags>
+        <li>MechClusterMember</li>
+        <li>MechClusterCombatThreat</li>
+      </buildingTags>
+      <roofCollapseDamageMultiplier>0.2</roofCollapseDamageMultiplier>
+      <minMechClusterPoints>7000</minMechClusterPoints>
+      <destroySound>BuildingDestroyed_Metal_Medium</destroySound>
+    </building>
+    <costList>
+      <ComponentIndustrial>5</ComponentIndustrial>
+	  <ComponentSpacer>1</ComponentSpacer>
+      <Plasteel>80</Plasteel>
+    </costList>
+    <killedLeavings>
+      <ChunkSlagSteel>2</ChunkSlagSteel>
+    </killedLeavings>
+    <damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <comps>
+      <li Class="CompProperties_CanBeDormant">
+        <awakeStateLabelKey>OpenedDaysAgo</awakeStateLabelKey>
+        <dormantStateLabelKey>DormantCompSealed</dormantStateLabelKey>
+      </li>
+      <li Class="CompProperties_WakeUpDormant">
+        <wakeUpSound>MechanoidsWakeUp</wakeUpSound>
+      </li>
+      <li Class="CompProperties_PawnSpawnOnWakeup">
+        <points>50</points>
+        <spawnablePawnKinds>
+          <li>Mech_CataphractCentipede</li>
+        </spawnablePawnKinds>
+        <spawnSound>CryptosleepCasket_Eject</spawnSound>
+        <lordJob>LordJob_MechanoidsDefend</lordJob>
+        <shouldJoinParentLord>True</shouldJoinParentLord>
+      </li>
+    </comps>
+	<modExtensions>
+	  <li Class="GD3.AIAggressive">
+		<emptyCapsuleDef>LargeMechCapsule_Empty</emptyCapsuleDef>
+	  </li>
+	</modExtensions>
+  </ThingDef>
+  
+  <ThingDef ParentName="BuildingBase">
+    <defName>LargeMechCapsule_Empty</defName>
+    <label>large mech capsule</label>
+    <description>An empty large mech capsule.</description>
+    <altitudeLayer>Building</altitudeLayer>
+    <pathCost>50</pathCost>
+    <blockWind>true</blockWind>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>1.0</fillPercent>
+    <selectable>true</selectable>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <repairEffect>ConstructMetal</repairEffect>
+    <receivesSignals>true</receivesSignals>
+    <size>(5,5)</size>
+    <statBases>
+      <MaxHitPoints>800</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <Beauty>-20</Beauty>
+      <WorkToBuild>500</WorkToBuild>
+    </statBases>
+    <graphicData>
+      <texPath>Buildings/LargeMechCapsule_empty</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(7,7)</drawSize>
+	  <drawOffset>(0,0,-0.15)</drawOffset>
+      <shadowData>
+        <volume>(1.8, 0.7, 2.8)</volume>
+      </shadowData>
+    </graphicData>
+    <building>
+      <roofCollapseDamageMultiplier>0.2</roofCollapseDamageMultiplier>
+      <destroySound>BuildingDestroyed_Metal_Medium</destroySound>
+    </building>
+    <costList>
+      <ComponentIndustrial>5</ComponentIndustrial>
+	  <ComponentSpacer>1</ComponentSpacer>
+      <Plasteel>80</Plasteel>
+    </costList>
+    <killedLeavings>
+      <ChunkSlagSteel>2</ChunkSlagSteel>
+    </killedLeavings>
+    <damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+  </ThingDef>
+
+</Defs>

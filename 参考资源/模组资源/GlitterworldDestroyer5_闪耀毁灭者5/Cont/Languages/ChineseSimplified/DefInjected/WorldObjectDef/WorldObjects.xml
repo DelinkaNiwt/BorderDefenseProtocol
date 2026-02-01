@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <GD_ClusterConstructing.label>建设中的集群</GD_ClusterConstructing.label>
+  <GD_ClusterConstructing.description>建设中的巨型集群框架。为了避免引起注意，建造材料需要你来提供。</GD_ClusterConstructing.description>
+  
+  <GD_AllyCluster.label>巨型集群</GD_AllyCluster.label>
+  <GD_AllyCluster.description>对你保持中立的巨型集群，可以通过通讯台呼叫其炮火支援。</GD_AllyCluster.description>
+
+
+</LanguageData>

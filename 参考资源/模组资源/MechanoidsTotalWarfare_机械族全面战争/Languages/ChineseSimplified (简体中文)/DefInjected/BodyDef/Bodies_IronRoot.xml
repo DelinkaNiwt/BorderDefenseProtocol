@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 铁树 -->
+  <NCL_Mech_IronbarkBody.label>TODO</NCL_Mech_IronbarkBody.label>
+  <!-- EN: 热感阵列：左 -->
+  <NCL_Mech_IronbarkBody.corePart.parts.IronbarkCanopy.parts.1.customLabel>TODO</NCL_Mech_IronbarkBody.corePart.parts.IronbarkCanopy.parts.1.customLabel>
+  <!-- EN: 热感阵列：右 -->
+  <NCL_Mech_IronbarkBody.corePart.parts.IronbarkCanopy.parts.2.customLabel>TODO</NCL_Mech_IronbarkBody.corePart.parts.IronbarkCanopy.parts.2.customLabel>
+  <!-- EN: 液压粉碎器：一 -->
+  <NCL_Mech_IronbarkBody.corePart.parts.IronbarkCanopy.parts.3.customLabel>TODO</NCL_Mech_IronbarkBody.corePart.parts.IronbarkCanopy.parts.3.customLabel>
+  <!-- EN: 液压粉碎器：二 -->
+  <NCL_Mech_IronbarkBody.corePart.parts.IronbarkCanopy.parts.4.customLabel>TODO</NCL_Mech_IronbarkBody.corePart.parts.IronbarkCanopy.parts.4.customLabel>
+  <!-- EN: 焚城辐射阵列 -->
+  <NCL_Mech_IronbarkBody.corePart.parts.2.customLabel>TODO</NCL_Mech_IronbarkBody.corePart.parts.2.customLabel>
+  
+</LanguageData>

@@ -1,0 +1,92 @@
+{
+  "注释": "灵活配置示例 - 精确控制生成的贴图数量（不多不少）",
+  "textures": [
+    {
+      "name": "服装 - 女性衬衣正面（仅1张）",
+      "width": 128,
+      "height": 128,
+      "output_prefix": "Apparel_FemaleShirt",
+      "color_scheme": {
+        "r": 150,
+        "g": 100,
+        "b": 80
+      },
+      "suffix_type": "apparel",
+      "suffix_names": ["_Female"],
+      "directions": ["_north"],
+      "grid_size": 32,
+      "grid_width": 1
+    },
+    {
+      "name": "服装 - 女性全方向（4张）",
+      "width": 128,
+      "height": 128,
+      "output_prefix": "Apparel_FemaleJacket",
+      "color_scheme": {
+        "r": 100,
+        "g": 80,
+        "b": 60
+      },
+      "suffix_type": "apparel",
+      "suffix_names": ["_Female"],
+      "directions": ["_north", "_east", "_south", "_west"],
+      "grid_size": 32,
+      "grid_width": 1
+    },
+    {
+      "name": "服装 - 男性女性北西方向（4张）",
+      "width": 128,
+      "height": 128,
+      "output_prefix": "Apparel_Pants",
+      "color_scheme": "blue",
+      "suffix_type": "apparel",
+      "suffix_names": ["_Male", "_Female"],
+      "directions": ["_north", "_west"],
+      "grid_size": 32,
+      "grid_width": 1
+    },
+    {
+      "name": "建筑 - 仅北方向（1张）",
+      "width": 256,
+      "height": 256,
+      "output_prefix": "Building_SimpleHouse",
+      "color_scheme": "blue",
+      "suffix_type": "multi",
+      "suffix_names": ["_north"],
+      "grid_size": 32,
+      "grid_width": 1
+    },
+    {
+      "name": "建筑 - 北西两个方向（2张）",
+      "width": 256,
+      "height": 256,
+      "output_prefix": "Building_Workshop",
+      "color_scheme": "gray",
+      "suffix_type": "multi",
+      "suffix_names": ["_north", "_west"],
+      "grid_size": 32,
+      "grid_width": 1
+    },
+    {
+      "name": "植物 - 两个变体（2张）",
+      "width": 128,
+      "height": 128,
+      "output_prefix": "Plant_Tree",
+      "color_scheme": "green",
+      "suffix_type": "random",
+      "suffix_names": ["_a", "_b"],
+      "grid_size": 32,
+      "grid_width": 1
+    },
+    {
+      "name": "武器 - 铁剑（1张）",
+      "width": 128,
+      "height": 128,
+      "output_prefix": "Weapon_Sword",
+      "color_scheme": "red",
+      "suffix_type": "single",
+      "grid_size": 32,
+      "grid_width": 1
+    }
+  ]
+}

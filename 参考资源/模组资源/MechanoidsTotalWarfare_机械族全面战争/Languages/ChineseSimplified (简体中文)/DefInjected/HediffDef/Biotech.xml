@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 链波中继 (tuned) -->
+  <NCL_MechNode.label>TODO</NCL_MechNode.label>
+  <!-- EN: This mechanitor's bandwidth is being increased by 5 per node thanks to the influence of a voidlink band node structure. -->
+  <NCL_MechNode.description>TODO</NCL_MechNode.description>
+  
+</LanguageData>

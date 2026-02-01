@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <GD_ReinforceFlare.label>信号</GD_ReinforceFlare.label>
+  
+  <GD_ReinforceMosquito.label>伊蚊</GD_ReinforceMosquito.label>
+  
+  <GD_PenetrationArtilleryShell.label>穿甲弹</GD_PenetrationArtilleryShell.label>
+  <GD_PenetrationArtilleryStrike.label>轰炸</GD_PenetrationArtilleryStrike.label>
+  
+  <GD_InfernoArtilleryShellLarge.label>燃烧弹</GD_InfernoArtilleryShellLarge.label>
+  <GD_InfernoArtilleryShell.label>燃烧弹</GD_InfernoArtilleryShell.label>
+  <GD_InfernoArtilleryStrike.label>轰炸</GD_InfernoArtilleryStrike.label>
+  
+  <GD_EMPArtilleryStrike.label>轰炸</GD_EMPArtilleryStrike.label>
+
+</LanguageData>

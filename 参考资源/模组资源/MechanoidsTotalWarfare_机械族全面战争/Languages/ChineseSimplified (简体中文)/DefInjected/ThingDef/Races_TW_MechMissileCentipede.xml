@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 机械制导蜈蚣 -->
+  <Mech_CentipedeMissile.label>TODO</Mech_CentipedeMissile.label>
+  <!-- EN: 一只装备了制导导弹发射器的蜈蚣，能够在较远距离发射高爆或者EMP制导导弹以精准压制其对手 -->
+  <Mech_CentipedeMissile.description>TODO</Mech_CentipedeMissile.description>
+  <!-- EN: head -->
+  <Mech_CentipedeMissile.tools.head.label>TODO</Mech_CentipedeMissile.tools.head.label>
+  
+</LanguageData>

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+
+  <RecipeDef ParentName="CentipedeMechanoidRecipe">
+    <defName>Mech_CentipedeMissile</defName>
+    <label>制造机械制导蜈蚣</label>
+	<description>一只装备了制导导弹发射器的蜈蚣，能够在较远距离发射高爆或者EMP制导导弹以精准压制其对手</description>
+    <products>
+      <Mech_CentipedeMissile>1</Mech_CentipedeMissile>
+    </products>
+    <descriptionHyperlinks>
+      <ThingDef>Mech_CentipedeMissile</ThingDef>
+    </descriptionHyperlinks>
+	<researchPrerequisites>
+	  <li>HighMechtech</li>
+	</researchPrerequisites>
+  </RecipeDef>
+  
+ </Defs>

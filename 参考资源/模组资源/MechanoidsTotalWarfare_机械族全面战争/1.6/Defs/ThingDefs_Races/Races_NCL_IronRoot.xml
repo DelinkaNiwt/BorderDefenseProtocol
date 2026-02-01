@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <LifeStageDef>
+    <defName>NCL_Mech_IronbarkFullyformed</defName>
+    <label>fully-formed</label>
+    <caravanRideable>true</caravanRideable>
+    <visible>false</visible>
+  </LifeStageDef>
+  
+  <ThingDef Name="NCLMechIronbark" ParentName="SuperHeavyMechanoid">
+    <defName>NCL_Mech_Ironbark</defName>
+    <label>铁树</label>
+    <description>单位档案：NCL-05“铁树”
+
+来源：NCL「铁律」重装近战序列
+
+这台名为“铁树”的巨型作战机械曾是用于城市攻坚和区域清洗的主力单位，其外壳覆盖类树皮仿生装甲，具备极高的抗击打性。内部结构复杂，能在非致命损伤下缓慢修复自身，是典型的高生存型压制平台。
+
+它的战斗方式粗暴而高效。前置的“裂地巨臂”配有高频震荡刃，能轻松撕裂近距离内的轻型载具或掩体；背部的燃剂喷口则能喷出高温黏着性燃烧物，覆盖扇形区域，将一切沾染目标长时间点燃。
+
+更致命的是，其周身持续释放的高温辐射场，可穿透掩体，灼烧接近单位，并有效破除隐匿装置。靠近它作战是极为不智的选择。
+
+在关键时刻，“铁树”还能主动引爆自身反应炉，释放毁灭性的热能冲击波。</description>
+    <statBases>
+      <MarketValue>3200</MarketValue>
+      <MoveSpeed>3.2</MoveSpeed>
+      <ArmorRating_Blunt>1.6</ArmorRating_Blunt>
+	  <EMPResistance>1</EMPResistance>
+      <ArmorRating_Sharp>1</ArmorRating_Sharp>
+	  <ShootingAccuracyPawn>3</ShootingAccuracyPawn>
+      <PsychicSensitivity>0</PsychicSensitivity>
+      <BandwidthCost MayRequire="Ludeon.RimWorld.Biotech">10</BandwidthCost>
+      <MechEnergyLossPerHP  MayRequire="Ludeon.RimWorld.Biotech">0.2</MechEnergyLossPerHP>
+    </statBases>
+	<tools>
+      <li>
+        <label>裂地巨臂</label>
+        <labelNoLocation>裂地巨臂</labelNoLocation>
+        <capacities>
+          <li>Cut</li>
+          <li>Stab</li>
+        </capacities>
+        <power>25</power>
+        <cooldownTime>1</cooldownTime>
+        <linkedBodyPartsGroup>LeftBlade</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+      <li>
+        <label>裂地巨臂</label>
+        <labelNoLocation>裂地巨臂</labelNoLocation>
+        <capacities>
+          <li>Cut</li>
+          <li>Stab</li>
+        </capacities>
+        <power>25</power>
+        <cooldownTime>1</cooldownTime>
+        <linkedBodyPartsGroup>RightBlade</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+      <li>
+        <label>铁木树冠</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>120</power>
+        <cooldownTime>2.2</cooldownTime>
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+        <chanceFactor>0.2</chanceFactor>
+      </li>
+    </tools>
+	<comps>  
+    <li Class="NCL.CompProperties_AntiInvisibilityField">
+        <effectiveRadius>35</effectiveRadius>
+		<requiresPower>false</requiresPower>
+		<applyHediff>DisruptorFlash</applyHediff>
+        <checkIntervalTicks>60</checkIntervalTicks>
+		<affectsThroughWalls>true</affectsThroughWalls>
+		<drawRadius>true</drawRadius>
+        <drawLines>true</drawLines>
+        <radiusColor>(255, 255, 255)</radiusColor>
+        </li>
+	</comps> 
+	<butcherProducts>
+      <Steel>600</Steel>
+      <Plasteel>180</Plasteel>
+    </butcherProducts>
+    <race>
+      <lifeStageAges>
+        <li>
+          <def>NCL_Mech_IronbarkFullyformed</def>
+          <minAge>0</minAge>
+          <soundWounded>Pawn_Mech_Diabolus_Wounded</soundWounded>
+            <soundDeath>Pawn_Mech_Diabolus_Death</soundDeath>
+            <soundCall>Pawn_Mech_Diabolus_Call</soundCall>
+        </li>
+      </lifeStageAges>
+      <body>NCL_Mech_IronbarkBody</body>
+	  <baseBodySize>4.5</baseBodySize>
+      <baseHealthScale>10</baseHealthScale>
+      <detritusLeavings>
+        <li>
+          <def>ChunkMechanoidSlag</def>
+          <texOverrideIndex>11</texOverrideIndex>
+          <spawnChance>0.1</spawnChance>
+        </li>
+        <li>
+          <def>ChunkMechanoidSlag</def>
+          <texOverrideIndex>12</texOverrideIndex>
+          <spawnChance>0.1</spawnChance>
+        </li>
+      </detritusLeavings>
+        <mechEnabledWorkTypes>
+          <li>PlantCutting</li>
+          <li>Growing</li>
+        </mechEnabledWorkTypes>
+	<mechFixedSkillLevel>20</mechFixedSkillLevel>
+	<hediffGiverSets>
+      <li>NCL_Mech_Ironbark_Introduction</li>
+    </hediffGiverSets>
+    </race>
+	<modExtensions>
+        <li Class="NyarsModPackOne.ModExtension_EffecterOnMelee">
+            <effectersAtCaster>
+			</effectersAtCaster>
+            <flecksAtTarget>
+				<li>NCL_Fleck_BurnerUsedEmber</li>
+			</flecksAtTarget>
+            <motesAtTarget>
+				<li>Mote_SparkThrownFast</li>
+			</motesAtTarget>
+            <motesLinkLine>
+			</motesLinkLine>
+            </li>
+    </modExtensions>
+  </ThingDef>
+
+  <PawnKindDef ParentName="HeavyMechanoidKind">
+  <defName>NCL_Mech_Ironbark_Kind</defName>
+  <label>铁木妖</label>
+  <race>NCL_Mech_Ironbark</race>
+  <defaultFactionType>NCL_faction</defaultFactionType>
+  <allowInMechClusters>false</allowInMechClusters>
+  <combatPower>1800</combatPower>
+  <lifeStages>
+    <li MayRequire="Ludeon.RimWorld.Biotech">
+      <bodyGraphicData>
+        <texPath>Races/IronRoot</texPath>
+        <graphicClass>Graphic_Multi</graphicClass>
+        <drawSize>4.5</drawSize>
+        <shadowData>
+          <volume>(0.4, 0.8, 0.4)</volume>
+        </shadowData>
+      </bodyGraphicData>
+    </li>
+  </lifeStages>
+  <weaponMoney>9999~9999</weaponMoney>
+  <weaponTags>
+  </weaponTags>
+  <techHediffsChance>1</techHediffsChance>
+  <techHediffsMoney>9999~9999</techHediffsMoney>
+  <abilities>
+    <li>Ironbark_Explosion</li>
+  </abilities>
+  </PawnKindDef>
+  
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>NCL_FireSpew_Short</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.1</fadeInTime>
+    <solidTime>0.4</solidTime>
+    <fadeOutTime>0.2</fadeOutTime>
+    <rotateTowardsMoveDirection>false</rotateTowardsMoveDirection>
+    <rotateTowardsMoveDirectionExtraAngle>90</rotateTowardsMoveDirectionExtraAngle>
+    <graphicData>
+      <graphicClass>Graphic_FleckPulse</graphicClass>
+      <shaderType>GlowAnimated</shaderType>
+      <texPath>Things/Mote/FireSpew_A</texPath>
+      <shaderParameters>
+        <_NumFrames>5</_NumFrames>
+        <_FramesPerSec>7</_FramesPerSec>
+      </shaderParameters>
+      <drawSize>1.6</drawSize>
+    </graphicData>
+  </FleckDef>
+
+</Defs>

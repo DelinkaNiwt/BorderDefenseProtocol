@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <GD_BlackBaseSite.label>废弃据点</GD_BlackBaseSite.label>
+  <GD_BlackBaseSite.description>黑衣机械族的废弃基地，或许能够调查到一些有价值的情报。</GD_BlackBaseSite.description>
+  <GD_BlackBaseSite.approachOrderString>调查{0}</GD_BlackBaseSite.approachOrderString>
+  <GD_BlackBaseSite.approachingReportString>正在调查{0}。</GD_BlackBaseSite.approachingReportString>
+  
+  <GD_Sitepart_BlackApocriton.label>枯海</GD_Sitepart_BlackApocriton.label>
+  <GD_Sitepart_BlackApocriton.description>黑衣机械毒蜂的所在地。</GD_Sitepart_BlackApocriton.description>
+
+
+
+</LanguageData>

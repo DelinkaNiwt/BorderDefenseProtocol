@@ -1,0 +1,290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+	<Operation Class="PatchOperationFindMod">
+	  <mods>
+		<li>Biotech</li>
+	  </mods>
+      <match Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName = "ResurrectLightMech"]/fixedIngredientFilter/thingDefs</xpath>
+        <value>
+		  <li>Corpse_Mech_Observer</li>
+        </value>
+	  </match>
+	</Operation>
+	
+	<Operation Class="PatchOperationFindMod">
+	  <mods>
+		<li>Biotech</li>
+	  </mods>
+      <match Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName = "ResurrectMediumMech"]/fixedIngredientFilter/thingDefs</xpath>
+        <value>
+		  <li>Corpse_Mech_Firefly</li>
+		  <li>Corpse_Mech_ReconScyther</li>
+		  <li>Corpse_Mech_MarineLancer</li>
+		  <li>Corpse_Mech_Termite</li>
+		  <li>Corpse_Mech_Mosquito</li>
+        </value>
+	  </match>
+	</Operation>
+	
+	<Operation Class="PatchOperationFindMod">
+	  <mods>
+		<li>Biotech</li>
+	  </mods>
+      <match Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName = "ResurrectHeavyMech"]/fixedIngredientFilter/thingDefs</xpath>
+        <value>
+		  <li>Corpse_Mech_CentipedeSword</li>
+        </value>
+	  </match>
+	</Operation>
+	
+	<Operation Class="PatchOperationFindMod">
+	  <mods>
+		<li>Biotech</li>
+	  </mods>
+      <match Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName = "ResurrectUltraheavyMech"]/fixedIngredientFilter/thingDefs</xpath>
+        <value>
+		  <li>Corpse_Mech_CataphractCentipede</li>
+        </value>
+	  </match>
+	</Operation>
+	
+	<Operation Class="PatchOperationFindMod">
+	  <mods>
+		<li>Biotech</li>
+	  </mods>
+      <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName = "MechGestator"]/recipes</xpath>
+        <value>
+		  <li>Observer</li>
+        </value>
+	  </match>
+	</Operation>
+	
+	<Operation Class="PatchOperationFindMod">
+	  <mods>
+		<li>Biotech</li>
+	  </mods>
+      <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName = "LargeMechGestator"]/recipes</xpath>
+        <value>
+		  <li>Firefly</li>
+		  <li>ReconScyther</li>
+		  <li>MarineLancer</li>
+		  <li>CataphractCentipede</li>
+		  <li>Termite</li>
+		  <li>MechMosquito</li>
+		  <li>Mech_CentipedeSword</li>
+        </value>
+	  </match>
+	</Operation>
+	
+	<!-- <Operation Class="PatchOperationFindMod">
+	  <mods>
+		<li>Biotech</li>
+	  </mods>
+      <match Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName = "Diabolus"]/researchPrerequisite</xpath>
+        <value>
+		<researchPrerequisite>UltraMechtech</researchPrerequisite>
+        </value>
+	  </match>
+	</Operation> -->
+	
+	<Operation Class="PatchOperationFindMod">
+	  <mods>
+		<li>Biotech</li>
+	  </mods>
+      <match Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName = "Scorcher"]</xpath>
+        <value>
+		<researchPrerequisite>BasicMechtech</researchPrerequisite>
+        </value>
+	  </match>
+	</Operation>
+	
+	<Operation Class="PatchOperationFindMod">
+	  <mods>
+		<li>Biotech</li>
+	  </mods>
+      <match Class="PatchOperationRemove">
+        <xpath>Defs/RecipeDef[defName = "Scorcher"]/ingredients</xpath>
+	  </match>
+	</Operation>
+	
+	<Operation Class="PatchOperationFindMod">
+	  <mods>
+		<li>Biotech</li>
+	  </mods>
+      <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName = "MechGestator"]/recipes</xpath>
+		<value>
+		  <li>Scorcher</li>
+        </value>
+	  </match>
+	</Operation>
+	
+	<Operation Class="PatchOperationFindMod">
+	  <mods>
+		<li>Biotech</li>
+	  </mods>
+      <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName = "LargeMechGestator"]/recipes/li[text()="Scorcher"]</xpath>
+	  </match>
+	</Operation>
+	
+	<Operation Class="PatchOperationFindMod">
+	  <mods>
+		<li>Biotech</li>
+	  </mods>
+      <match Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName = "Scorcher"]</xpath>
+        <value>
+		<ingredients Inherit="False">
+		  <li>
+			<filter>
+			  <thingDefs>
+				<li>Steel</li>
+			  </thingDefs>
+			</filter>
+			<count>80</count>
+		  </li>
+		  <li>
+			<filter>
+			  <thingDefs>
+				<li>Plasteel</li>
+			  </thingDefs>
+			</filter>
+			<count>32</count>
+		  </li>
+		  <li>
+			<filter>
+			  <thingDefs>
+				<li>ComponentIndustrial</li>
+			  </thingDefs>
+			</filter>
+			<count>3</count>
+		  </li>
+		  <li>
+			<filter>
+			  <thingDefs>
+				<li>SubcoreBasic</li>
+			  </thingDefs>
+			</filter>
+			<count>1</count>
+		  </li>
+		</ingredients>
+        </value>
+	  </match>
+	</Operation>
+	
+	<Operation Class="PatchOperationFindMod">
+	  <mods>
+		<li>Biotech</li>
+	  </mods>
+      <match Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName = "Tesseron"]</xpath>
+        <value>
+		<researchPrerequisite>HighMechtech</researchPrerequisite>
+        </value>
+	  </match>
+	</Operation>
+	
+	<Operation Class="PatchOperationFindMod">
+	  <mods>
+		<li>Biotech</li>
+	  </mods>
+      <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[@Name = "MechResourceBase"]/statBases/MaxHitPoints</xpath>
+        <value>
+			<MaxHitPoints>25000</MaxHitPoints>
+        </value>
+	  </match>
+	</Operation>
+	
+	<Operation Class="PatchOperationFindMod">
+	  <mods>
+		<li>Biotech</li>
+	  </mods>
+      <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[@Name = "MechResourceBase"]/statBases/Flammability</xpath>
+        <value>
+			<Flammability>0</Flammability>
+        </value>
+	  </match>
+	</Operation>
+	
+	<Operation Class="PatchOperationFindMod">
+	  <mods>
+		<li>Biotech</li>
+	  </mods>
+      <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[@Name = "BaseMechanoid"]/statBases/WorkSpeedGlobal</xpath>
+        <value>
+		<WorkSpeedGlobal MayRequire="Ludeon.Rimworld.Biotech">0.85</WorkSpeedGlobal>
+        </value>
+	  </match>
+	</Operation>
+	
+	<Operation Class="PatchOperationFindMod">
+	  <mods>
+		<li>Biotech</li>
+	  </mods>
+      <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName = "MechBooster"]/comps</xpath>
+        <value>
+		<comps>
+		  <li Class="CompProperties_Power">
+			<compClass>CompPowerTrader</compClass>
+			<basePowerConsumption>500</basePowerConsumption>
+		  </li>
+		  <li Class="CompProperties_CauseHediff_AoE">
+			<range>19.9</range>
+			<onlyTargetMechs>true</onlyTargetMechs>
+			<hediff>MechBoost</hediff>
+			<activeSound>MechBooster_Working</activeSound>
+		  </li>
+		  <li Class="CompProperties_Flickable"/>
+		</comps>
+        </value>
+	  </match>
+	</Operation>
+	
+	<Operation Class="PatchOperationFindMod">
+	  <mods>
+		<li>Biotech</li>
+	  </mods>
+      <match Class="PatchOperationReplace">
+        <xpath>Defs/HediffDef[defName = "MechBoost"]/stages</xpath>
+        <value>
+		<stages>
+		  <li>
+			<statFactors>
+			  <MoveSpeed>2.5</MoveSpeed>
+			  <WorkSpeedGlobal>1.50</WorkSpeedGlobal>
+			</statFactors>
+		  </li>
+		</stages>
+        </value>
+	  </match>
+	</Operation>
+	
+	<Operation Class="PatchOperationFindMod">
+	  <mods>
+		<li>Biotech</li>
+	  </mods>
+      <match Class="PatchOperationAdd">
+        <xpath>Defs/PawnKindDef[defName = "Mech_ReconScyther"]</xpath>
+        <value>
+		<abilities>
+		  <li>LongJumpReconScyther</li>
+		</abilities>
+        </value>
+	  </match>
+	</Operation>
+	
+</Patch>

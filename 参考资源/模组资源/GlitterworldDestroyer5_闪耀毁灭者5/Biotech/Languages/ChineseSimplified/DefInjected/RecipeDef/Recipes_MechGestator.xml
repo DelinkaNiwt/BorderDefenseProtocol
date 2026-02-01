@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <Observer.label>培育观察机</Observer.label>
+  <Observer.description>培育一台观察机。</Observer.description>
+  <Observer.jobString>正在培育机械体。</Observer.jobString>
+
+  <Firefly.label>培育机械萤火虫</Firefly.label>
+  <Firefly.description>培育一台机械萤火虫。</Firefly.description>
+  <Firefly.jobString>正在培育机械体。</Firefly.jobString>
+  
+  <ReconScyther.label>培育斥候机械飞螳</ReconScyther.label>
+  <ReconScyther.description>培育一台斥候机械飞螳。</ReconScyther.description>
+  <ReconScyther.jobString>正在培育机械体。</ReconScyther.jobString>
+  
+  <MarineLancer.label>培育海军机械静螳</MarineLancer.label>
+  <MarineLancer.description>培育一台海军机械静螳。</MarineLancer.description>
+  <MarineLancer.jobString>正在培育机械体。</MarineLancer.jobString>
+  
+  <CataphractCentipede.label>培育禁卫机械蜈蚣</CataphractCentipede.label>
+  <CataphractCentipede.description>培育一台禁卫机械蜈蚣。</CataphractCentipede.description>
+  <CataphractCentipede.jobString>正在培育机械体。</CataphractCentipede.jobString>
+  
+  <Termite.label>培育机械白蚁</Termite.label>
+  <Termite.description>培育一台机械白蚁。</Termite.description>
+  <Termite.jobString>正在培育机械体。</Termite.jobString>
+  
+  <Mech_CentipedeSword.label>培育机械锯杀蜈蚣</Mech_CentipedeSword.label>
+  <Mech_CentipedeSword.description>培育一台机械锯杀蜈蚣。</Mech_CentipedeSword.description>
+  <Mech_CentipedeSword.jobString>正在培育机械体。</Mech_CentipedeSword.jobString>
+  
+  <MechMosquito.label>培育机械伊蚊</MechMosquito.label>
+  <MechMosquito.description>培育一台机械伊蚊。</MechMosquito.description>
+  <MechMosquito.jobString>正在培育机械体。</MechMosquito.jobString>
+
+
+</LanguageData>

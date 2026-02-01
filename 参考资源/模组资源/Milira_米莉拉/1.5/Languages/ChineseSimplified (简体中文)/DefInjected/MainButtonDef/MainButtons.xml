@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<LanguageData>
-  
-  <!-- EN: milian config -->
-  <Milian_Config.label>米莉安配置</Milian_Config.label>
-  <!-- EN: View and manage equipments of milian in the colony. -->
-  <Milian_Config.description>查看和管理殖民地中米莉安的装备。</Milian_Config.description>
-  
-</LanguageData>

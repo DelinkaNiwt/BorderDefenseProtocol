@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 观察机 -->
+
+  <Mech_Observer.label>观察机</Mech_Observer.label>
+  <Mech_Observer.description>一只被设计用于进行远距离侦查的机械体，它可以被指定去辅助一名殖民者或者机械体进行瞄准，并提高其25％射程。\n\n当处于工作模式时，观察机会主动跟随绑定目标。只有在离目标足够近时射程提升效果才会生效。</Mech_Observer.description>
+
+
+</LanguageData>

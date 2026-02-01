@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 裂解者阳电子炮 -->
+  <Disruptor_Positron_Cannon.label>TODO</Disruptor_Positron_Cannon.label>
+  <!-- EN: 最大射程45格，可熔穿3米级复合装甲 -->
+  <Disruptor_Positron_Cannon.description>TODO</Disruptor_Positron_Cannon.description>
+  <!-- EN: barrel -->
+  <Disruptor_Positron_Cannon.tools.barrel.label>TODO</Disruptor_Positron_Cannon.tools.barrel.label>
+  <!-- EN: 裂解者阳电子炮 -->
+  <Disruptor_Positron_Cannon.verbs.Verb_ShootBeam.label>TODO</Disruptor_Positron_Cannon.verbs.Verb_ShootBeam.label>
+  
+  <!-- EN: Mote -->
+  <Mote_GraserBeamNCL.label>TODO</Mote_GraserBeamNCL.label>
+  
+  <!-- EN: Mote -->
+  <NCL_Mote_PillBugBeamBase.label>TODO</NCL_Mote_PillBugBeamBase.label>
+  
+</LanguageData>

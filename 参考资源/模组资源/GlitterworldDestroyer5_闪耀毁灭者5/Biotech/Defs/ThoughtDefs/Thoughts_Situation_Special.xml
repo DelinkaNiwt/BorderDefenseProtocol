@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThoughtDef>
+    <defName>HateAura_Black</defName>
+    <workerClass>GD3.ThoughtWorker_HateAura_Black</workerClass>
+    <effectMultiplyingStat>PsychicSensitivity</effectMultiplyingStat>
+    <validWhileDespawned>true</validWhileDespawned>
+    <developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
+    <stages>
+      <li>
+        <label>apocriton whisper (intense)</label>
+        <description>This is so unreal.</description>
+        <baseMoodEffect>-50</baseMoodEffect>
+      </li>
+      <li>
+        <label>apocriton whisper (strong)</label>
+        <description>His voice seemed to be stirring my brain... I was having a hard time concentrating. Everything I was seeing and hearing was getting stranger and stranger.</description>
+        <baseMoodEffect>-30</baseMoodEffect>
+      </li>
+      <li>
+        <label>apocriton whisper (distant)</label>
+        <description>He seemed to be mumbling something to me.</description>
+        <baseMoodEffect>-10</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+</Defs>

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <Mech_Annihilator.label>机械湮黾</Mech_Annihilator.label>
+  <Mech_Annihilator.description>机械族的小型自走歼星武器。执行任务时负责钻入地底深处并利用等离子喷口激活地幔，引发强烈的地质活动，为肢解行星作第一步准备。待机时便在太空中漂流，等待最近的机械主脑将它唤醒，领它去杀戮。\n\n以等离子喷口作为主要攻击方式。肢体上搭载有小型炮塔，摧毁对应部位可以将其瘫痪。</Mech_Annihilator.description>
+  
+  <AnnihilatorCorpse_Ancient.label>湮黾废墟</AnnihilatorCorpse_Ancient.label>
+  <AnnihilatorCorpse_Ancient.description>被击毁的机械湮黾。可以研究残骸并试图破解其制造技术，或者拆除回收资源。</AnnihilatorCorpse_Ancient.description>
+  <AnnihilatorCorpse_Ancient.comps.CompHackable.hackedMessage>{HACKER_labelShort}已完成对{SUBJECT_labelNoParenthesisDef}的破解。</AnnihilatorCorpse_Ancient.comps.CompHackable.hackedMessage>
+  <AnnihilatorCorpse_Ancient.comps.CompHackable.notHackedInspectString>破解以获取科技。</AnnihilatorCorpse_Ancient.comps.CompHackable.notHackedInspectString>
+  
+  <AnnihilatorCorpse.label>湮黾废墟</AnnihilatorCorpse.label>
+  <AnnihilatorCorpse.description>被击毁的机械湮黾。可以拆除回收资源。</AnnihilatorCorpse.description>
+
+</LanguageData>

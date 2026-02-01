@@ -1,0 +1,10 @@
+namespace CharacterEditor;
+
+internal enum OptionS
+{
+	HOTKEYEDITOR,
+	HOTKEYTELEPORT,
+	CUSTOMGENE,
+	CUSTOMOBJECT,
+	CUSTOMLIFESTAGE
+}

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <ThinkTreeDef>
+    <defName>ObserverConstant</defName>
+    <thinkRoot Class="ThinkNode_Priority">
+      <subNodes>
+
+        <!-- Despawned -->
+        <li Class="ThinkNode_Subtree">
+          <treeDef>Despawned</treeDef>
+        </li>
+        
+        <!-- Non-player mechs -->
+        <li Class="ThinkNode_ConditionalPlayerMech">
+          <subNodes>
+            <li Class="ThinkNode_ConditionalCanDoConstantThinkTreeJobNow">
+              <subNodes>
+                
+				<li Class="ThinkNode_ConditionalWorkMode" MayRequire="Ludeon.RimWorld.Biotech">
+                <workMode>Work</workMode>
+                <subNodes>
+                  <li Class="JobGiver_SeekAllowedArea" />
+                  <li Class="JobGiver_GetEnergy_Charger" />
+                  <li Class="GD3.JobGiver_ObserverFollow" />
+                </subNodes>
+              </li>
+              
+              </subNodes>
+            </li>
+          </subNodes>
+        </li>
+      </subNodes>
+    </thinkRoot>
+  </ThinkTreeDef>
+
+
+</Defs>

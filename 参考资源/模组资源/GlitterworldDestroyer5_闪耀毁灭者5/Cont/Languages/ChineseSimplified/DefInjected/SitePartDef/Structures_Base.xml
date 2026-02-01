@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 小型 -->
+
+  <GD_Sitepart_Cluster_S.label>巨型机械集群α</GD_Sitepart_Cluster_S.label>
+  <GD_Sitepart_Cluster_S.description>一处防御完备的巨型机械集群。</GD_Sitepart_Cluster_S.description>
+
+
+  <!-- 中型 -->
+
+  <GD_Sitepart_Cluster_M.label>巨型机械集群β</GD_Sitepart_Cluster_M.label>
+  <GD_Sitepart_Cluster_M.description>一处防御完备的巨型机械集群。</GD_Sitepart_Cluster_M.description>
+
+
+  <!-- 大型 -->
+
+  <GD_Sitepart_Cluster_L.label>巨型机械集群γ</GD_Sitepart_Cluster_L.label>
+  <GD_Sitepart_Cluster_L.description>一处防御完备的巨型机械集群。</GD_Sitepart_Cluster_L.description>
+
+
+  <!-- 超大型 -->
+
+  <GD_Sitepart_Cluster_U.label>巨型机械集群Ω</GD_Sitepart_Cluster_U.label>
+  <GD_Sitepart_Cluster_U.description>一处防御完备的巨型机械集群。</GD_Sitepart_Cluster_U.description>
+  
+  <!-- 要塞 -->
+
+  <GD_Sitepart_Cluster_Fortress.label>机械族要塞</GD_Sitepart_Cluster_Fortress.label>
+  <GD_Sitepart_Cluster_Fortress.description>一处防御完备的要塞。</GD_Sitepart_Cluster_Fortress.description>
+  
+  <!-- 小蠊 -->
+
+  <GD_Sitepart_Militor.label>机械小蠊坐标</GD_Sitepart_Militor.label>
+  <GD_Sitepart_Militor.description>机械小蠊需要你的支援。先遣部队已经就位。</GD_Sitepart_Militor.description>
+  
+  <!-- 枯海 -->
+
+  <GD_Sitepart_Drysea_Pre.label>坐标</GD_Sitepart_Drysea_Pre.label>
+  <GD_Sitepart_Drysea_Pre.description>未知坐标。</GD_Sitepart_Drysea_Pre.description>
+  
+  <!-- 肃反 -->
+
+  <GD_Sitepart_Eliminate.label>追踪定位</GD_Sitepart_Eliminate.label>
+  <GD_Sitepart_Eliminate.description>定位到目标位于此地。</GD_Sitepart_Eliminate.description>
+  
+  <!-- 巨黾 -->
+
+  <GD_Sitepart_Exostrider.label>巨黾集群</GD_Sitepart_Exostrider.label>
+  <GD_Sitepart_Exostrider.description>一座防守机械巨黾的巨型集群。</GD_Sitepart_Exostrider.description>
+
+
+</LanguageData>

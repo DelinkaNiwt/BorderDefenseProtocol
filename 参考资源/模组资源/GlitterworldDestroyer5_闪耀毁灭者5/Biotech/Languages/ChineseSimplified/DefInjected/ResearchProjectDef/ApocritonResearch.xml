@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <GD3_Apocriton.label>遗留信息</GD3_Apocriton.label>
+  <GD3_Apocriton.description>殖民者们从憎恶毒蜂留下的芯片中了解到了黑衣机械族科技的全部原理。现在你可以靠这些信息做出一些惊人的玩意了。</GD3_Apocriton.description>
+
+  <GD3_Puzzle.label>流浪者的遗产</GD3_Puzzle.label>
+  <GD3_Puzzle.description>经过一定的了解，你的殖民者们发现黑衣机械族身上的衣物似乎并不是由简单的布料制成的，它们拥有和穿戴者的神经元相连接的能力。然而由于对这种技术知之甚少，我们需要有一名足够了解机械族的专家去探索这方面的知识，比如一位机械师。</GD3_Puzzle.description>
+  
+  <GD3_StrangeWeapons.label>土制武器</GD3_StrangeWeapons.label>
+  <GD3_StrangeWeapons.description>这些都是你心灵手巧的殖民者自己动脑创造出来的武器。它们可能奇怪、滑稽、不可思议，但一定有用。</GD3_StrangeWeapons.description>
+  
+</LanguageData>

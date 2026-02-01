@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="BaseMechCharger">
+    <defName>CentralRecharger</defName>
+    <label>central recharger</label>
+    <description>A large charging station designed for central-level mechanoids. Its specially reinforced design enables it to withstand instantaneous pressure of thousands of tons without significant deformation. Even so, it is still necessary to pay attention to regular maintenance.</description>
+	<thingClass>GD3.Building_CentralCharger</thingClass>
+    <graphicData>
+      <texPath>Buildings/AnnihilatorCharger</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>11</drawSize>
+	  <drawOffset>(0,0,0)</drawOffset>
+    </graphicData>
+	<rotatable>false</rotatable>
+	<altitudeLayer>FloorCoverings</altitudeLayer>
+    <interactionCellOffset>(0,0,1)</interactionCellOffset>
+    <passability>Standable</passability>
+	<fillPercent>0.1</fillPercent>
+    <statBases>
+      <MaxHitPoints>1500</MaxHitPoints>
+      <WorkToBuild>75000</WorkToBuild>
+      <Mass>2500</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+    <size>(11,10)</size>
+    <building>
+      <requiredMechWeightClasses>
+        <li>Central</li>
+      </requiredMechWeightClasses>
+	  <barDrawData>
+        <north>
+          <preRotationOffset>(0,-2.4)</preRotationOffset>
+          <size>(0.95,0.25)</size>
+        </north>
+      </barDrawData>
+	  <destroySound>BuildingDestroyed_Metal_Big</destroySound>
+    </building>
+    <costList>
+      <Steel>650</Steel>
+	  <Plasteel>300</Plasteel>
+	  <ComponentIndustrial>35</ComponentIndustrial>
+	  <ComponentSpacer>5</ComponentSpacer>
+	  <PrecisionDeck>100</PrecisionDeck>
+    </costList>
+	<constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+    <researchPrerequisites>
+      <li>GD3_Annihilator</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_ThingContainer">
+        <compClass>CompThingContainer</compClass>
+        <stackLimit>100</stackLimit>
+        <drawContainedThing>false</drawContainedThing>
+        <dropEffecterDef>MechChargerWasteRemoved</dropEffecterDef>
+      </li>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>5000</basePowerConsumption>
+      </li>
+    </comps>
+  </ThingDef>
+
+</Defs>

@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 复合装甲增强协议 -->
+  <TW_CompositeArmorReinforcementProtocol_M.label>TODO</TW_CompositeArmorReinforcementProtocol_M.label>
+  <!-- EN: 该单位的防护能力获得大幅增强 -->
+  <TW_CompositeArmorReinforcementProtocol_M.description>TODO</TW_CompositeArmorReinforcementProtocol_M.description>
+  
+  <!-- EN: 复合装甲增强协议 -->
+  <TW_CompositeArmorReinforcementProtocol_R.label>TODO</TW_CompositeArmorReinforcementProtocol_R.label>
+  <!-- EN: 该单位的防护能力获得大幅增强 -->
+  <TW_CompositeArmorReinforcementProtocol_R.description>TODO</TW_CompositeArmorReinforcementProtocol_R.description>
+  
+  <!-- EN: 超功率推进器 -->
+  <TW_HighMobilityPhaseShiftDrive_M.label>TODO</TW_HighMobilityPhaseShiftDrive_M.label>
+  <!-- EN: 该单位的移动速度得到了大幅加强 -->
+  <TW_HighMobilityPhaseShiftDrive_M.description>TODO</TW_HighMobilityPhaseShiftDrive_M.description>
+  
+  <!-- EN: 超功率推进器 -->
+  <TW_HighMobilityPhaseShiftDrive_R.label>TODO</TW_HighMobilityPhaseShiftDrive_R.label>
+  <!-- EN: 该单位的移动速度得到了大幅加强 -->
+  <TW_HighMobilityPhaseShiftDrive_R.description>TODO</TW_HighMobilityPhaseShiftDrive_R.description>
+  
+  <!-- EN: 长距弹道优化模组 -->
+  <TW_LongRangeBallisticsOptimizationSystem.label>TODO</TW_LongRangeBallisticsOptimizationSystem.label>
+  <!-- EN: 该单位的武器射程获得了20%增长。 -->
+  <TW_LongRangeBallisticsOptimizationSystem.description>TODO</TW_LongRangeBallisticsOptimizationSystem.description>
+  
+  <!-- EN: 光学迷彩干扰装置 -->
+  <TW_Optical_Camo_Disruption_M.label>TODO</TW_Optical_Camo_Disruption_M.label>
+  <!-- EN: 随机单位机械体被赋予光学迷彩模块，使其从战场上隐身，仅当玩家单位处于其附近5格范围内时隐身才会解除。（该隐身对玩家可见） -->
+  <TW_Optical_Camo_Disruption_M.description>TODO</TW_Optical_Camo_Disruption_M.description>
+  
+  <!-- EN: 光学迷彩干扰装置 -->
+  <TW_Optical_Camo_Disruption_R.label>TODO</TW_Optical_Camo_Disruption_R.label>
+  <!-- EN: 随机单位机械体被赋予光学迷彩模块，使其从战场上隐身。仅当玩家单位处于其附近45格范围内时隐身才会解除。（该隐身对玩家不可见） -->
+  <TW_Optical_Camo_Disruption_R.description>TODO</TW_Optical_Camo_Disruption_R.description>
+  
+  <!-- EN: 机械超载 -->
+  <TW_Overdrive_M.label>TODO</TW_Overdrive_M.label>
+  <!-- EN: 该机械体因被注入大量能量而在短时间内超载 -->
+  <TW_Overdrive_M.description>TODO</TW_Overdrive_M.description>
+  <!-- EN: 超载 -->
+  <TW_Overdrive_M.stages.0.label>TODO</TW_Overdrive_M.stages.0.label>
+  <!-- EN: 能量过剩 -->
+  <TW_Overdrive_M.stages.1.label>TODO</TW_Overdrive_M.stages.1.label>
+  <!-- EN: 逐渐稳定 -->
+  <TW_Overdrive_M.stages.2.label>TODO</TW_Overdrive_M.stages.2.label>
+  <!-- EN: 稳定 -->
+  <TW_Overdrive_M.stages.3.label>TODO</TW_Overdrive_M.stages.3.label>
+  
+  <!-- EN: 远程战术协调单元:突袭信号指示终端 -->
+  <TW_TacticalArtilleryCoordinationModule_Airstrike_Signal_Transmitter.label>TODO</TW_TacticalArtilleryCoordinationModule_Airstrike_Signal_Transmitter.label>
+  <!-- EN: 该单位在周围半径150格内存在玩家单位时将召唤突袭信号指示终端协助战斗 -->
+  <TW_TacticalArtilleryCoordinationModule_Airstrike_Signal_Transmitter.description>TODO</TW_TacticalArtilleryCoordinationModule_Airstrike_Signal_Transmitter.description>
+  
+  <!-- EN: 远程战术协调单元：狱火炮 -->
+  <TW_TacticalArtilleryCoordinationModule_AutoInferno.label>TODO</TW_TacticalArtilleryCoordinationModule_AutoInferno.label>
+  <!-- EN: 该单位在周围半径35格内存在玩家单位时将召唤狱火炮协助战斗 -->
+  <TW_TacticalArtilleryCoordinationModule_AutoInferno.description>TODO</TW_TacticalArtilleryCoordinationModule_AutoInferno.description>
+  
+  <!-- EN: 远程战术协调单元:迫击炮 -->
+  <TW_TacticalArtilleryCoordinationModule_AutoMortar.label>TODO</TW_TacticalArtilleryCoordinationModule_AutoMortar.label>
+  <!-- EN: 该单位在周围半径150格内存在玩家单位时将召唤迫击炮协助战斗 -->
+  <TW_TacticalArtilleryCoordinationModule_AutoMortar.description>TODO</TW_TacticalArtilleryCoordinationModule_AutoMortar.description>
+  
+  <!-- EN: 远程战术协调单元:EMP迫击炮 -->
+  <TW_TacticalArtilleryCoordinationModule_AutoMortarEMP.label>TODO</TW_TacticalArtilleryCoordinationModule_AutoMortarEMP.label>
+  <!-- EN: 该单位在周围半径150格内存在玩家单位时将召唤EMP迫击炮协助战斗 -->
+  <TW_TacticalArtilleryCoordinationModule_AutoMortarEMP.description>TODO</TW_TacticalArtilleryCoordinationModule_AutoMortarEMP.description>
+  
+  <!-- EN: 远程战术协调单元：冲击炮 -->
+  <TW_TacticalArtilleryCoordinationModule_ChargeBlaster.label>TODO</TW_TacticalArtilleryCoordinationModule_ChargeBlaster.label>
+  <!-- EN: 该单位在周围半径35格内存在玩家单位时将召唤冲击炮协助战斗 -->
+  <TW_TacticalArtilleryCoordinationModule_ChargeBlaster.description>TODO</TW_TacticalArtilleryCoordinationModule_ChargeBlaster.description>
+  
+  <!-- EN: 远程战术协调单元：点防御 -->
+  <TW_TacticalArtilleryCoordinationModule_LaserDefence.label>TODO</TW_TacticalArtilleryCoordinationModule_LaserDefence.label>
+  <!-- EN: 该单位在周围半径35格内存在玩家单位时将召唤点防御协助战斗 -->
+  <TW_TacticalArtilleryCoordinationModule_LaserDefence.description>TODO</TW_TacticalArtilleryCoordinationModule_LaserDefence.description>
+  
+</LanguageData>

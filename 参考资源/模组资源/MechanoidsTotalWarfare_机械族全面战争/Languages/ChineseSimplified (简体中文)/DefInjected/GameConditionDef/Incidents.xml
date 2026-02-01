@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 机械空投 -->
+  <Mech2000Coming.label>TODO</Mech2000Coming.label>
+  <!-- EN: 突袭信号指示器已出现！您的殖民地已被 b2000 锁定，具有强力护盾及反隐能力的指示器在场时可持续发送加密指令，持续召唤空降型机械体对殖民地进行高频投送，请尽快破坏它！ -->
+  <Mech2000Coming.description>TODO</Mech2000Coming.description>
+  <!-- EN: 机械空投结束了 -->
+  <Mech2000Coming.endMessage>TODO</Mech2000Coming.endMessage>
+  <!-- EN: 突袭信号指示器已出现！您的殖民地已被 b2000 锁定，具有强力护盾及反隐能力的指示器在场时可持续发送加密指令，持续召唤空降型机械体对殖民地进行高频投送，请尽快破坏它！ -->
+  <Mech2000Coming.letterText>TODO</Mech2000Coming.letterText>
+  
+</LanguageData>

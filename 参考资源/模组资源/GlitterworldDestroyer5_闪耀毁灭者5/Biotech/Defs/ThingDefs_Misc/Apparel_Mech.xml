@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- <ThingDef ParentName="MechApparelBase">
+    <defName>Apparel_ApocritonShield</defName>
+    <label>semi-psychic shield unit</label>
+    <description>A strong and sensitive heavy shield capable of fierce return fire against incoming threats.</description>
+    <graphicData>
+      <texPath>Things/Pawn/Mechanoid/Apparel/HeavyPersonalShield</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <tickerType>Normal</tickerType>
+	<useHitPoints>False</useHitPoints>
+    <statBases Inherit="false">
+      <Mass>3</Mass>
+      <Flammability>0</Flammability>
+      <EnergyShieldRechargeRate>5</EnergyShieldRechargeRate>
+      <EnergyShieldEnergyMax>10</EnergyShieldEnergyMax>
+      <DeteriorationRate>2</DeteriorationRate>
+      <Beauty>-3</Beauty>
+    </statBases>
+    <apparel>
+      <bodyPartGroups>
+        <li>Torso</li>
+      </bodyPartGroups>
+      <layers>
+        <li>Middle</li>
+      </layers>
+    </apparel>
+    <comps>
+      <li Class="GD3.CompProperties_ApoShield">
+        <startingTicksToReset>1200</startingTicksToReset>
+        <minDrawSize>2.5</minDrawSize>
+        <maxDrawSize>2.8</maxDrawSize>
+        <energyLossPerDamage>0.01</energyLossPerDamage>
+        <energyOnReset>10</energyOnReset>
+        <blocksRangedWeapons>false</blocksRangedWeapons>
+      </li>
+    </comps>
+  </ThingDef> -->
+  
+  <ThingDef ParentName="ApparelBase">
+    <defName>GD_PolarizedLight</defName>
+    <label>polarized light</label>
+    <description>A specially designed shield belt, the spread of the shield as soft as water. In addition to allowing range weapons to fire outward-facing, it also provides a 10-second migration shield after breaking, blocking all external attacks. \n\nIt takes quite a while to recharge.</description>
+    <thingClass>Apparel</thingClass>
+    <graphicData>
+      <texPath>PolarizedLight</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <tickerType>Normal</tickerType>
+    <techLevel>Spacer</techLevel>
+    <statBases>
+      <Mass>3</Mass>
+      <WorkToMake>34000</WorkToMake>
+      <Flammability>0</Flammability>
+      <EnergyShieldRechargeRate>0.33</EnergyShieldRechargeRate>
+      <EnergyShieldEnergyMax>4.5</EnergyShieldEnergyMax>
+      <EquipDelay>2</EquipDelay>
+    </statBases>
+    <costList>
+      <ComponentSpacer>3</ComponentSpacer>
+	  <Plasteel>70</Plasteel>
+	  <Gold>4</Gold>
+	  <BlackPersonaData>2</BlackPersonaData>
+    </costList>
+    <recipeMaker>
+      <unfinishedThingDef>UnfinishedBelt</unfinishedThingDef>
+      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+      <workSkill>Crafting</workSkill>
+      <effectWorking>Smith</effectWorking>
+      <soundWorking>Recipe_Machining</soundWorking>
+      <researchPrerequisite>GD3_Weapons</researchPrerequisite>
+	  <recipeUsers>
+		<li>FabricationBench</li>
+	  </recipeUsers>
+	  <skillRequirements>
+		<Crafting>10</Crafting>
+	  </skillRequirements>
+      <useIngredientsForColor>false</useIngredientsForColor>
+    </recipeMaker>
+    <thingCategories>
+      <li>ApparelUtility</li>
+    </thingCategories>
+	<tradeability>Sellable</tradeability>
+    <apparel>
+      <countsAsClothingForNudity>false</countsAsClothingForNudity>
+      <careIfWornByCorpse>false</careIfWornByCorpse>
+      <careIfDamaged>false</careIfDamaged>
+      <wearPerDay>0</wearPerDay>
+      <bodyPartGroups>
+        <li>Waist</li>
+      </bodyPartGroups>
+      <layers>
+        <li>Belt</li>
+      </layers>
+      <tags/>
+      <developmentalStageFilter>Child, Adult</developmentalStageFilter>
+    </apparel>
+    <colorGenerator Class="ColorGenerator_Options">
+      <options>
+        <li>
+          <weight>10</weight>
+          <only>(0.9,0.9,0.9,1)</only>
+        </li>
+      </options>
+    </colorGenerator>
+    <comps>
+      <li Class="CompProperties_Shield">
+	    <startingTicksToReset>5400</startingTicksToReset>
+		<blocksRangedWeapons>false</blocksRangedWeapons>
+	  </li>
+    </comps>
+    <allowedArchonexusCount>1</allowedArchonexusCount>
+    <tradeTags Inherit="false" />
+  </ThingDef>
+
+</Defs>

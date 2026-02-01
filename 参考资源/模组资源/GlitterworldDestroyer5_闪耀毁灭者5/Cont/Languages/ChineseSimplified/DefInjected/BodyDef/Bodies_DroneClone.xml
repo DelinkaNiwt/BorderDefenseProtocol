@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 诡雷无人机 -->
+
+  <DroneWithThreeLegs_GDClone.label>诡雷无人机</DroneWithThreeLegs_GDClone.label>
+  <DroneWithThreeLegs_GDClone.corePart.parts.3.customLabel>中腿</DroneWithThreeLegs_GDClone.corePart.parts.3.customLabel>
+  <DroneWithThreeLegs_GDClone.corePart.parts.4.customLabel>左后腿</DroneWithThreeLegs_GDClone.corePart.parts.4.customLabel>
+  <DroneWithThreeLegs_GDClone.corePart.parts.5.customLabel>右后腿</DroneWithThreeLegs_GDClone.corePart.parts.5.customLabel>
+
+
+</LanguageData>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <Introduction_Infernus.label>精英：炼狱冥神</Introduction_Infernus.label>
+  <Introduction_Infernus.description>反应装甲：该单位受伤后的一秒内无法再次受伤。\n\n火力提升：主炮与自卫火焰的威力显著提升。\n\n坚固装甲：该单位几乎不会受到任何传统的锐器与钝器伤害。\n\n易燃：该单位受到的所有热能伤害翻倍。\n\n狰狞恐怖：与该单位距离不足49格的所有人形有机体都会对其狰狞的外形与行动模式感到恐惧。在恐惧感达到一定阈值后，此人会因惊慌失措而陷入失控状态。</Introduction_Infernus.description>
+  
+  <Introduction_WarEmpress.label>精英：战争女帝</Introduction_WarEmpress.label>
+  <Introduction_WarEmpress.description>反应装甲：该单位受伤后的一秒内无法再次受伤。\n\n火力提升：装载的机械御侍数量大幅提升。\n\n狰狞恐怖：与该单位距离不足49格的所有人形有机体都会对其狰狞的外形与行动模式感到恐惧。在恐惧感达到一定阈值后，此人会因惊慌失措而陷入失控状态。</Introduction_WarEmpress.description>
+  
+  <Introduction_Apoptosis.label>精英：憎恶骇蜂</Introduction_Apoptosis.label>
+  <Introduction_Apoptosis.description>反应装甲：该单位受伤后的一秒内无法再次受伤。\n\n思维干扰：以该单位为圆心的55格范围内，有机体敌人将失去全部视力与大部分心灵熵上限。\n\n狰狞恐怖：与该单位距离不足59格的所有人形有机体都会对其狰狞的外形与行动模式感到恐惧。在恐惧感达到一定阈值后，此人会因惊慌失措而陷入失控状态。</Introduction_Apoptosis.description>
+  
+</LanguageData>

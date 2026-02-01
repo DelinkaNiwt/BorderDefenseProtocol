@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <GenStepDef>
+    <defName>GD_OrbitalMechhive</defName>
+    <order>290</order>
+    <genStep Class="GD3.GenStep_CustomStructureGen_Mechhive">
+      <structureLayoutDefs>
+        <li>GD_Mechhive</li>
+      </structureLayoutDefs>
+	  <musicBox>MusicPlayer_CommandSignal</musicBox>
+    </genStep>
+  </GenStepDef>
+  
+</Defs>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+  
+  <Operation Class="PatchOperationAdd">
+	<xpath>Defs/AlienRace.ThingDef_AlienRace[defName = "Alien_Epona" or defName = "Alien_Destrier" or defName = "Alien_Unicorn"]/alienRace/raceRestriction/apparelList</xpath>
+	<value>
+	  <li>Apparel_Epona_BlackWindbreaker</li>
+	  <li>Apparel_Epona_BlackHat</li>
+	</value>
+  </Operation>
+	
+</Patch>

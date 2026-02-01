@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  
+  <ThinkTreeDef>
+    <defName>MechAnnihilator</defName>
+    <thinkRoot Class="ThinkNode_Priority">
+      <subNodes>
+        <!-- Despawned -->
+        <li Class="ThinkNode_Subtree">
+          <treeDef>Despawned</treeDef>
+        </li>
+		
+		<li Class="ThinkNode_ConditionalDeactivated">
+          <subNodes>
+            <li Class="JobGiver_Deactivated" />
+          </subNodes>
+        </li>
+        
+        <!-- 不会倒地 -->
+        <!-- <li Class="ThinkNode_Subtree">
+          <treeDef>Downed</treeDef>
+        </li> -->
+        
+        <li Class="ThinkNode_ConditionalLowEnergy">
+          <subNodes>
+            <li Class="JobGiver_SelfShutdown" />
+          </subNodes>
+        </li>
+		
+		<!-- Do a queued job -->
+        <li Class="ThinkNode_QueuedJob" />
+
+        <!-- Wait if drafted -->
+        <li Class="ThinkNode_ConditionalOfPlayerFaction">
+          <subNodes>
+            <li Class="ThinkNode_Tagger">
+              <tagToGive>DraftedOrder</tagToGive>
+              <subNodes>
+                <li Class="JobGiver_Orders" />
+              </subNodes>
+            </li>
+          </subNodes>
+        </li>
+		
+		<!-- recharge -->
+		<li Class="ThinkNode_ConditionalPlayerControlledMech">
+          <subNodes>
+            <li Class="ThinkNode_ConditionalNotFormingCaravan">
+            <subNodes>
+              
+              <!-- Keep charging if we're already charging -->
+              <li Class="ThinkNode_ConditionalRecharging">
+                <subNodes>
+                  <li Class="GD3.JobGiver_GetEnergy_Charge" />
+                </subNodes>
+              </li>
+              
+              <li Class="GD3.JobGiver_GetEnergy_Charge" />
+
+            </subNodes>
+            </li>
+          </subNodes>
+        </li>
+		
+		<!-- Idle player mech -->
+        <li Class="ThinkNode_ConditionalPlayerControlledMech">
+          <subNodes>
+            <li Class="ThinkNode_Tagger">
+              <tagToGive>Idle</tagToGive>
+              <subNodes>
+                <li Class="JobGiver_Idle" />
+              </subNodes>
+            </li>
+          </subNodes>
+        </li>
+		
+		<li Class="GD3.JobGiver_AIGotoNearestHostileWhenFlying" />
+		
+        <li Class="GD3.JobGiver_AnnihilatorFight" />
+        
+        <!-- Idle fallback -->
+        <li Class="JobGiver_Idle" />
+      </subNodes>
+    </thinkRoot>
+  </ThinkTreeDef>
+
+  <ThinkTreeDef>
+    <defName>MechAnnihilatorConstant</defName>
+    <thinkRoot Class="ThinkNode_Priority">
+      <subNodes>
+        <!-- Despawned -->
+        <li Class="ThinkNode_Subtree">
+          <treeDef>Despawned</treeDef>
+        </li>
+      </subNodes>
+    </thinkRoot>
+  </ThinkTreeDef>
+  
+</Defs>

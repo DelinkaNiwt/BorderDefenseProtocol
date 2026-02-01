@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <SettingsCommonTab>Общее</SettingsCommonTab>
+  <SettingsStatTab>Показатели</SettingsStatTab>
+  <SettingsExperimentalTab>Экспериментальные</SettingsExperimentalTab>
+  <SettingsIntegrationTab>Интеграция модов</SettingsIntegrationTab>
+  <SettingsColorsTab>Цвета</SettingsColorsTab>
+
+  <GearTabWidth>Ширина {0} px</GearTabWidth>
+  <StatDebuffVisible>Показывать дебаффы</StatDebuffVisible>
+  <NIT_AutoRenameBillLabelSettings>Автоматическое переименование при создании задачи на верстаке</NIT_AutoRenameBillLabelSettings>
+
+  <NIT_EnableStarsAsQuality>Включить отображение качества звездочками</NIT_EnableStarsAsQuality>
+  <NIT_EnableOptionToOpenApparelMaster>Включить возможность открытия мастера одежды</NIT_EnableOptionToOpenApparelMaster>
+  <NIT_EnableProgressBars>Включить индикаторы прогресса</NIT_EnableProgressBars>
+
+  <NIT_EnableAutoWear>Включить автоматическое надевание одежды после создания (может вызвать конфликты модов)</NIT_EnableAutoWear>
+
+  <NIT_CLI_UseVanillaButtons>Использовать стандартные кнопки</NIT_CLI_UseVanillaButtons>
+  <NIT_ShowWeaponsInEquipmentSection>Показывать дополнительное оружие в разделе "Экипировка"</NIT_ShowWeaponsInEquipmentSection>
+
+  <NIT_DepressionMode>Режим депрессии {0}</NIT_DepressionMode>
+  <NIT_DepressionColor>Ваш цвет депрессии</NIT_DepressionColor>
+  <NIT_Showcase>Демонстрация</NIT_Showcase>
+  <NIT_OnlyOnHover>Только при наведении</NIT_OnlyOnHover>
+  <NIT_MatchToQualityColorsMod>Как в моде Quality Colors</NIT_MatchToQualityColorsMod>
+  <NIT_Reset>Сбросить</NIT_Reset>
+</LanguageData>

@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 增援信号弹 -->
+  <ThingDef ParentName="SkyfallerBase">
+    <defName>GD_ReinforceFlare</defName>
+    <label>flare</label>
+	<thingClass>GD3.ReinforceFlare</thingClass>
+	<tickerType>Normal</tickerType>
+    <graphicData>
+      <texPath>Empty/Empty</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <skyfaller>
+	  <angleCurve>
+	    <points>
+          <li>(0,     0)</li>
+          <li>(1,     0)</li>
+        </points>
+	  </angleCurve>
+	  <speedCurve>
+	    <points>
+		  <li>(0.0,     6)</li>
+          <li>(0.05,     6)</li>
+		  <li>(0.10,     0.05)</li>
+          <li>(1.0,     0.05)</li>
+        </points>
+	  </speedCurve>
+	  <reversed>true</reversed>
+      <speed>0.75</speed>
+      <shadowSize>(0.4, 0.4)</shadowSize>
+      <ticksToImpactRange><min>0</min><max>0</max></ticksToImpactRange>
+	  <ticksToDiscardInReverse><min>1200</min><max>1200</max></ticksToDiscardInReverse>
+    </skyfaller>
+	<comps>
+	  <li Class="CompProperties_Glower">
+        <glowRadius>6.9</glowRadius>
+        <glowColor>(255,117,108,0)</glowColor>
+      </li>
+	</comps>
+  </ThingDef>
+  
+  <!-- 伊蚊掠过地图 -->
+  <ThingDef ParentName="SkyfallerBase">
+    <defName>GD_ReinforceMosquito</defName>
+    <label>mosquito</label>
+	<thingClass>GD3.ReinforceMosquito</thingClass>
+	<tickerType>Normal</tickerType>
+    <graphicData>
+      <texPath>Mote/ReinforceMosquito</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>2</drawSize>
+    </graphicData>
+    <skyfaller>
+	  <angleCurve>
+	    <points>
+          <li>(0,     -90)</li>
+          <li>(1,     -90)</li>
+        </points>
+	  </angleCurve>
+	  <reversed>true</reversed>
+      <speed>0.75</speed>
+      <shadowSize>(1.8, 1.8)</shadowSize>
+      <ticksToImpactRange><min>0</min><max>0</max></ticksToImpactRange>
+	  <ticksToDiscardInReverse><min>280</min><max>280</max></ticksToDiscardInReverse>
+    </skyfaller>
+  </ThingDef>
+  
+  <!-- 穿甲弹炮击 -->
+  <ThingDef ParentName="SkyfallerBase">
+    <defName>GD_PenetrationArtilleryShell</defName>
+    <label>penetration shell</label>
+	<thingClass>GD3.ShellRandomAngle</thingClass>
+    <graphicData>
+      <texPath>ReinforceMissle</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Mote</shaderType>
+      <drawSize>(2.5,5.0)</drawSize>
+    </graphicData>
+    <skyfaller>
+      <explosionRadius>5.9</explosionRadius>
+      <explosionDamage>BombSuper</explosionDamage>
+	  <explosionDamageFactor>0.375</explosionDamageFactor>
+      <rotateGraphicTowardsDirection>true</rotateGraphicTowardsDirection>
+      <speed>1.8</speed>
+      <shadowSize>(3, 3)</shadowSize>
+	  <ticksToImpactRange>60~150</ticksToImpactRange>
+	  <anticipationSound>MortarRound_PreImpact</anticipationSound>
+	  <metalShrapnelCountRange><min>1</min><max>2</max></metalShrapnelCountRange>
+      <rubbleShrapnelCountRange><min>50</min><max>100</max></rubbleShrapnelCountRange>
+	  <shrapnelDistanceFactor>0.8</shrapnelDistanceFactor>
+    </skyfaller>
+  </ThingDef>
+  <ThingDef ParentName="EtherealThingBase">
+	<defName>GD_PenetrationArtilleryStrike</defName>
+	<label>bombardment</label>
+	<graphicData>
+	  <texPath>Empty/Empty</texPath>
+	  <graphicClass>Graphic_Single</graphicClass>
+	</graphicData>
+	<thingClass>GD3.ArtilleryStrike_Penetration</thingClass>
+	<tickerType>Normal</tickerType>
+	<drawerType>RealtimeOnly</drawerType>
+  </ThingDef>
+  <!-- 地狱火炮击 -->
+  <ThingDef ParentName="SkyfallerBase">
+    <defName>GD_InfernoArtilleryShellLarge</defName>
+    <label>inferno shell</label>
+	<thingClass>GD3.ShellRandomAngle</thingClass>
+    <graphicData>
+      <texPath>CataphractCentipede_FY_Bullet</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Mote</shaderType>
+      <drawSize>(2.5,2.5)</drawSize>
+    </graphicData>
+    <skyfaller>
+      <explosionRadius>7.9</explosionRadius>
+      <explosionDamage>Flame</explosionDamage>
+	  <explosionDamageFactor>15</explosionDamageFactor>
+      <rotateGraphicTowardsDirection>true</rotateGraphicTowardsDirection>
+      <speed>1.4</speed>
+      <shadowSize>(3, 3)</shadowSize>
+	  <ticksToImpactRange>90~150</ticksToImpactRange>
+	  <anticipationSound>MortarRound_PreImpact</anticipationSound>
+      <rubbleShrapnelCountRange><min>50</min><max>100</max></rubbleShrapnelCountRange>
+	  <shrapnelDistanceFactor>0.8</shrapnelDistanceFactor>
+    </skyfaller>
+  </ThingDef>
+  <ThingDef ParentName="SkyfallerBase">
+    <defName>GD_InfernoArtilleryShell</defName>
+    <label>flame shell</label>
+	<thingClass>GD3.ShellRandomAngle</thingClass>
+    <graphicData>
+      <texPath>HellsphereStrike</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Mote</shaderType>
+      <drawSize>(1.5,3.0)</drawSize>
+    </graphicData>
+    <skyfaller>
+      <explosionRadius>4.9</explosionRadius>
+      <explosionDamage>Flame</explosionDamage>
+	  <explosionDamageFactor>5</explosionDamageFactor>
+      <rotateGraphicTowardsDirection>true</rotateGraphicTowardsDirection>
+      <speed>1.8</speed>
+      <shadowSize>(3, 3)</shadowSize>
+	  <ticksToImpactRange>60~150</ticksToImpactRange>
+	  <anticipationSound>MortarRound_PreImpact</anticipationSound>
+      <rubbleShrapnelCountRange><min>30</min><max>60</max></rubbleShrapnelCountRange>
+	  <shrapnelDistanceFactor>0.5</shrapnelDistanceFactor>
+    </skyfaller>
+  </ThingDef>
+  <ThingDef ParentName="EtherealThingBase">
+	<defName>GD_InfernoArtilleryStrike</defName>
+	<label>bombardment</label>
+	<graphicData>
+	  <texPath>Empty/Empty</texPath>
+	  <graphicClass>Graphic_Single</graphicClass>
+	</graphicData>
+	<thingClass>GD3.ArtilleryStrike_Inferno</thingClass>
+	<tickerType>Normal</tickerType>
+	<drawerType>RealtimeOnly</drawerType>
+  </ThingDef>
+  <!-- EMP炮击 -->
+  <ThingDef ParentName="EtherealThingBase">
+	<defName>GD_EMPArtilleryStrike</defName>
+	<label>bombardment</label>
+	<graphicData>
+	  <texPath>Empty/Empty</texPath>
+	  <graphicClass>Graphic_Single</graphicClass>
+	</graphicData>
+	<thingClass>GD3.ArtilleryStrike_EMP</thingClass>
+	<tickerType>Normal</tickerType>
+	<drawerType>RealtimeOnly</drawerType>
+  </ThingDef>
+  
+  <!--===== 音乐 =====-->
+  <ThingDef ParentName="EtherealThingBase">
+	<defName>MusicPlayer_CommandSignal</defName>
+	<label>music player</label>
+	<graphicData>
+	  <texPath>Empty/Empty</texPath>
+	  <graphicClass>Graphic_Single</graphicClass>
+	</graphicData>
+	<thingClass>GD3.MusicPlayer_CommandSignal</thingClass>
+	<tickerType>Long</tickerType>
+	<drawerType>RealtimeOnly</drawerType>
+  </ThingDef>
+</Defs>

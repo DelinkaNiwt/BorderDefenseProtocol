@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 爬到安全地带。 -->
+  <DoxaThinkTreeMain.thinkRoot.subNodes.1.subNodes.0.subNodes.0.subNodes.0.subNodes.0.crawlingReportStringOverride>TODO</DoxaThinkTreeMain.thinkRoot.subNodes.1.subNodes.0.subNodes.0.subNodes.0.subNodes.0.crawlingReportStringOverride>
+  <!-- EN: 爬到床上。 -->
+  <DoxaThinkTreeMain.thinkRoot.subNodes.1.subNodes.0.subNodes.0.subNodes.0.subNodes.1.subNodes.0.crawlingReportStringOverride>TODO</DoxaThinkTreeMain.thinkRoot.subNodes.1.subNodes.0.subNodes.0.subNodes.0.subNodes.1.subNodes.0.crawlingReportStringOverride>
+  <!-- EN: Patrolling. -->
+  <DoxaThinkTreeMain.thinkRoot.subNodes.7.subNodes.0.subNodes.1.subNodes.4.subNodes.1.subNodes.0.reportStringOverride>TODO</DoxaThinkTreeMain.thinkRoot.subNodes.7.subNodes.0.subNodes.1.subNodes.4.subNodes.1.subNodes.0.reportStringOverride>
+  
+  <!-- EN: 爬到安全地带。 -->
+  <Psycasts_MilitorThinkTreeMain.thinkRoot.subNodes.1.subNodes.0.subNodes.0.subNodes.0.subNodes.0.crawlingReportStringOverride>TODO</Psycasts_MilitorThinkTreeMain.thinkRoot.subNodes.1.subNodes.0.subNodes.0.subNodes.0.subNodes.0.crawlingReportStringOverride>
+  <!-- EN: 爬到床上。 -->
+  <Psycasts_MilitorThinkTreeMain.thinkRoot.subNodes.1.subNodes.0.subNodes.0.subNodes.0.subNodes.1.subNodes.0.crawlingReportStringOverride>TODO</Psycasts_MilitorThinkTreeMain.thinkRoot.subNodes.1.subNodes.0.subNodes.0.subNodes.0.subNodes.1.subNodes.0.crawlingReportStringOverride>
+  <!-- EN: Patrolling. -->
+  <Psycasts_MilitorThinkTreeMain.thinkRoot.subNodes.8.subNodes.0.subNodes.1.subNodes.4.subNodes.1.subNodes.0.reportStringOverride>TODO</Psycasts_MilitorThinkTreeMain.thinkRoot.subNodes.8.subNodes.0.subNodes.1.subNodes.4.subNodes.1.subNodes.0.reportStringOverride>
+  
+  <!-- EN: 爬到安全地带。 -->
+  <Shell_FortificationThinkTreeMain.thinkRoot.subNodes.2.subNodes.0.subNodes.0.subNodes.0.subNodes.0.crawlingReportStringOverride>TODO</Shell_FortificationThinkTreeMain.thinkRoot.subNodes.2.subNodes.0.subNodes.0.subNodes.0.subNodes.0.crawlingReportStringOverride>
+  <!-- EN: 爬到床上。 -->
+  <Shell_FortificationThinkTreeMain.thinkRoot.subNodes.2.subNodes.0.subNodes.0.subNodes.0.subNodes.1.subNodes.0.crawlingReportStringOverride>TODO</Shell_FortificationThinkTreeMain.thinkRoot.subNodes.2.subNodes.0.subNodes.0.subNodes.0.subNodes.1.subNodes.0.crawlingReportStringOverride>
+  <!-- EN: Patrolling. -->
+  <Shell_FortificationThinkTreeMain.thinkRoot.subNodes.8.subNodes.0.subNodes.1.subNodes.4.subNodes.1.subNodes.0.reportStringOverride>TODO</Shell_FortificationThinkTreeMain.thinkRoot.subNodes.8.subNodes.0.subNodes.1.subNodes.4.subNodes.1.subNodes.0.reportStringOverride>
+  
+</LanguageData>

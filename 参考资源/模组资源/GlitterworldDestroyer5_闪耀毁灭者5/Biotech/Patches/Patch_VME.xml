@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+	<Operation Class="PatchOperationFindMod">
+	  <mods>
+		<li>Vanilla Ideology Expanded - Memes and Structures</li>
+	  </mods>
+      <match Class="PatchOperationReplace">
+        <xpath>Defs/AbilityDef[defName = "VME_EnableSelfDestruct"]/gizmoClass</xpath>
+        <value>
+		  <gizmoClass>GD3.Command_HackerAbility</gizmoClass>
+        </value>
+	  </match>
+	</Operation>
+	
+</Patch>

@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Defs>
+
+  <TileMutatorDef Abstract="True" Name="GD_BlackMutatorBase">
+    <categories>
+      <li>GD_BlackBaseSite</li>
+    </categories>
+    <biomeBlacklist>
+      <li>Ocean</li>
+      <li>Lake</li>
+	  <li>IceSheet</li>
+      <li>SeaIce</li>
+    </biomeBlacklist>
+	<canSpawnOnRiver>false</canSpawnOnRiver>
+  </TileMutatorDef>
+
+  <TileMutatorDef ParentName="GD_BlackMutatorBase">
+    <defName>GD_BlackBaseMutator</defName>
+    <label>abandoned base</label>
+    <description>Abandoned base of the mechanoids in black, might be able to yield some valuable intelligence.</description>
+    <workerClass>GD3.TileMutatorWorker_Structure</workerClass>
+    <structureGenParms>
+      <structureLayoutDef>GD_BlackBaseSite</structureLayoutDef>
+      <structureSizeRange>65~85</structureSizeRange>
+      <scatteredPrefabs>
+        <li>
+          <countPer10kCellsRange>1~1</countPer10kCellsRange>
+          <minSpacing>35</minSpacing>
+          <maxDistFromStructure>60</maxDistFromStructure>
+          <prefabs>
+            <Exterior_BlackSite_LaunchPad_Large>
+              <weight>1.0</weight>
+              <indoorRuin>false</indoorRuin>
+              <filthDef>Filth_RubbleRock</filthDef>
+              <filthExpandBy>0</filthExpandBy>
+              <filthChance>0.05</filthChance>
+              <max>2</max>
+            </Exterior_BlackSite_LaunchPad_Large>
+          </prefabs>
+        </li>
+      </scatteredPrefabs>
+      <perimeterExpandBy>3</perimeterExpandBy>
+      <perimeterWallDef>AncientFence</perimeterWallDef>
+      <perimeterWallChance>0.95</perimeterWallChance>
+      <perimeterScatteredThings>
+        <ChunkMechanoidSlag>3</ChunkMechanoidSlag>
+      </perimeterScatteredThings>
+      <perimeterScatterTerrain>
+        <AncientConcrete>
+          <groupsPerHundredCells>0~1</groupsPerHundredCells>
+          <itemsPerGroup>3~8</itemsPerGroup>
+          <groupDistRange>2~3</groupDistRange>
+        </AncientConcrete>
+      </perimeterScatterTerrain>
+    </structureGenParms>
+  </TileMutatorDef>
+
+</Defs>

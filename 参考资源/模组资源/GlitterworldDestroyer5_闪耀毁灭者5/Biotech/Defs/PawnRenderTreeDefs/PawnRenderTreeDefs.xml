@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <PawnRenderTreeDef>
+    <defName>BlackApocriton</defName>
+    <root Class="PawnRenderNodeProperties_Parent">
+      <debugLabel>Root</debugLabel>
+      <tagDef>Root</tagDef>
+      <children>
+        <li>
+          <debugLabel>Body</debugLabel>
+          <tagDef>Body</tagDef>
+          <nodeClass>PawnRenderNode_AnimalPart</nodeClass>
+          <useRottenColor>true</useRottenColor>
+          <children>
+            <li>
+              <debugLabel>Wounds</debugLabel>
+              <nodeClass>PawnRenderNode_AnimalPart</nodeClass>
+              <workerClass>PawnRenderNodeWorker_OverlayWounds</workerClass>
+              <overlayLayer>Body</overlayLayer>
+              <useGraphic>false</useGraphic>
+              <baseLayer>3</baseLayer>
+            </li>
+            <li>
+              <debugLabel>Firefoam</debugLabel>
+              <nodeClass>PawnRenderNode_AnimalPart</nodeClass>
+              <workerClass>PawnRenderNodeWorker_OverlayFirefoam</workerClass>
+              <overlayLayer>Body</overlayLayer>
+              <useGraphic>false</useGraphic>
+              <baseLayer>5</baseLayer>
+            </li>
+          </children>
+        </li>
+		<li>
+          <debugLabel>Cane</debugLabel>
+		  <workerClass>GD3.PawnRenderNodeWorker_Cane</workerClass>
+		  <texPath>BlackCane</texPath>
+		  <overrideMeshSize>2</overrideMeshSize>
+		  <drawData>
+			<dataEast>
+			  <offset>(0.4, 0, -0.2)</offset>
+			</dataEast>
+			<dataSouth>
+			  <offset>(-0.5, 0, -0.2)</offset>
+			</dataSouth>
+			<dataNorth>
+			  <layer>-1</layer>
+			  <offset>(-0.5, 0, 0.00)</offset>
+			</dataNorth>
+			<dataWest>
+			  <offset>(-0.4, 0, -0.2)</offset>
+			</dataWest>
+		  </drawData>
+		  <overlayLayer>Body</overlayLayer>
+		  <tagDef>MechCane</tagDef>
+		  <baseLayer>10</baseLayer>
+        </li>
+        <li Class="PawnRenderNodeProperties_Carried">
+          <debugLabel>Weapon/carried thing</debugLabel>
+          <workerClass>PawnRenderNodeWorker_Carried</workerClass>
+        </li>
+      </children>
+    </root>
+  </PawnRenderTreeDef>
+
+</Defs>

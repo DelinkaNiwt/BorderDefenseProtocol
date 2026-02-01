@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 无人机支援 -->
+  <NCL_Dinergate_SpawnDrone.label>TODO</NCL_Dinergate_SpawnDrone.label>
+  <!-- EN: 释放无人机 -->
+  <NCL_Dinergate_SpawnDrone.description>TODO</NCL_Dinergate_SpawnDrone.description>
+  
+  <!-- EN: 无人机支援2 -->
+  <NCL_Scutiger_SpawnDrone.label>TODO</NCL_Scutiger_SpawnDrone.label>
+  <!-- EN: 释放无人机 -->
+  <NCL_Scutiger_SpawnDrone.description>TODO</NCL_Scutiger_SpawnDrone.description>
+  
+</LanguageData>

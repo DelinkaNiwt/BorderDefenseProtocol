@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  
+  <!-- 安灵百合 -->
+  
+  <Plant_PeaceLily.label>安灵百合</Plant_PeaceLily.label>
+  <Plant_PeaceLily.description>幽幽的花瓣照亮来时的路。</Plant_PeaceLily.description>
+  
+  <WhitePetal.label>白色花瓣</WhitePetal.label>
+  <WhitePetal.description>安灵百合的花瓣。洁白美丽，但因为特殊的物理性质其用途有限。\n\n当你用手接触到花瓣时，它便会化成一滩透明光滑的油性液体附着在手指上，并在你收手时变回原形。但如果进行挤压，这些花瓣便会不可逆地转化为一滩类似清酒的液体，并不时发出闪闪烁烁的刺眼光斑。</WhitePetal.description>
+
+</LanguageData>

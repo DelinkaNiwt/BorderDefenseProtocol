@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <NIT_MaxRangeOfAttackTip>Max range of attack</NIT_MaxRangeOfAttackTip>
+  <NIT_OptimalRangeTip>Optimal range: {0} ~ {1} m ({2} ±{3})</NIT_OptimalRangeTip>
+  <NIT_AtRangeTip>At {0} m: {1}</NIT_AtRangeTip>
+  
+  <NIT_ArmorPenetration>Armor penetration</NIT_ArmorPenetration>
+  <NIT_RangedDPSTip>Ranged DPS</NIT_RangedDPSTip>
+  <NIT_MeleeDPSTip>Melee DPS</NIT_MeleeDPSTip>
+  <NIT_DPSatOptimalRange>DPS at optimal range</NIT_DPSatOptimalRange>
+  <NIT_DPS100Accuracy>DPS with 100% accuracy</NIT_DPS100Accuracy>
+  <NIT_PawnModifiers>Pawn modifiers</NIT_PawnModifiers>
+  <NIT_OneShotDamage>One shot damage</NIT_OneShotDamage>
+  <NIT_Damage>Damage</NIT_Damage>
+
+  <NIT_Melee>Melee</NIT_Melee>
+  <NIT_Ranged>Ranged</NIT_Ranged>
+  <NIT_Range>Range</NIT_Range>
+  <NIT_Speed>Speed</NIT_Speed>
+
+  <NIT_Sharp>Sharp</NIT_Sharp>
+  <NIT_Blunt>Blunt</NIT_Blunt>
+  <NIT_Heat>Heat</NIT_Heat>
+  <NIT_TemperatureRangeShort>Temperature range</NIT_TemperatureRangeShort>
+
+  <NIT_Toxic>Toxic</NIT_Toxic>
+  <NIT_Vacuum>Vacuum</NIT_Vacuum>
+  <NIT_Flammability>Flam.</NIT_Flammability>
+  <NIT_Psychic>Psy. sens</NIT_Psychic>
+
+  <NIT_Medical>Medical</NIT_Medical>
+  <NIT_Social>Social</NIT_Social>
+  <NIT_Negotiation>Negotiation</NIT_Negotiation>
+  <NIT_Meditation>Meditation</NIT_Meditation>
+
+  <NIT_Mass>Mass</NIT_Mass>
+
+  <NIT_Combat>Combat</NIT_Combat>
+  <NIT_Resistances>Resistances</NIT_Resistances>
+  <NIT_Inventory>Inventory</NIT_Inventory>
+  <NIT_Equipment>Equipment</NIT_Equipment>
+  <NIT_Apparel>Apparel</NIT_Apparel>
+  <NIT_MassAndBulk>Mass and bulk</NIT_MassAndBulk>
+
+  <NIT_AvailableApparel>Suitable apparel</NIT_AvailableApparel>
+  <NIT_Wear>Wear</NIT_Wear>
+  <NIT_NothingToWear>Nothing to wear</NIT_NothingToWear>
+  <NIT_Make>Make</NIT_Make>
+  <NIT_NothingToMake>Nothing to make</NIT_NothingToMake>
+
+  <NIT_AutoNameRecipe>{0} for {1}</NIT_AutoNameRecipe>
+  <NIT_PawnModifierPercent>x{0} by {1}</NIT_PawnModifierPercent>
+  <NIT_PawnModifierPercentSigned>{0} by {1}</NIT_PawnModifierPercentSigned>
+  <NIT_WorktableTasks>{0} ({1} tasks)</NIT_WorktableTasks>
+
+  <NIT_Biocoded>Biocoded</NIT_Biocoded>
+
+  <OpenOptimizationMaster>Open optimization master</OpenOptimizationMaster>
+
+  <NIT_ApparelDamageWarning>Torn apparel</NIT_ApparelDamageWarning>
+  <NIT_ApparelNudistWarning>Apparel are not suitable for nudists</NIT_ApparelNudistWarning>
+  <NIT_WeaponNotUsableWithShieldWarning>Weapon is not usable with energy shield</NIT_WeaponNotUsableWithShieldWarning>
+  
+  <NIT_UnforceApparel>Unforce</NIT_UnforceApparel>
+  <NIT_ForceApparel>Force</NIT_ForceApparel>
+
+  <NIT_WorkEfficiency>Work speed</NIT_WorkEfficiency>
+
+  <NIT_ClearWork>Clear</NIT_ClearWork>
+  <NIT_EatWork>Eat</NIT_EatWork>
+  <NIT_RepairWork>Repair</NIT_RepairWork>
+  <NIT_ConstructionWork>Construction</NIT_ConstructionWork>
+  <NIT_MiningWork>Mining</NIT_MiningWork>
+  <NIT_CookingWork>Cooking</NIT_CookingWork>
+  <NIT_CraftingWork>Crafting</NIT_CraftingWork>
+  <NIT_PlantsWork>Plants</NIT_PlantsWork>
+  <NIT_AnimalsWork>Animals</NIT_AnimalsWork>
+  <NIT_MedicalWork>Medical</NIT_MedicalWork>
+  <NIT_SocialWork>Social</NIT_SocialWork>
+  <NIT_IntellectualWork>Intellectual</NIT_IntellectualWork>
+  <NIT_ArtisticWork>Artistic</NIT_ArtisticWork>
+  <NIT_ShootingWork>Shooting</NIT_ShootingWork>
+  <NIT_MeleeWork>Melee</NIT_MeleeWork>
+</LanguageData>

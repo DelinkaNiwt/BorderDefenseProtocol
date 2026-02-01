@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 禁卫机械舱 -->
+
+  <LargeMechCapsule.label>大型机械舱</LargeMechCapsule.label>
+  <LargeMechCapsule.description>一个尺寸非常不对劲的机械舱。里面可能装着什么恐怖的东西...</LargeMechCapsule.description>
+  
+  <LargeMechCapsule_Empty.label>大型机械舱</LargeMechCapsule_Empty.label>
+  <LargeMechCapsule_Empty.description>一个空的大型机械舱。</LargeMechCapsule_Empty.description>
+
+
+</LanguageData>

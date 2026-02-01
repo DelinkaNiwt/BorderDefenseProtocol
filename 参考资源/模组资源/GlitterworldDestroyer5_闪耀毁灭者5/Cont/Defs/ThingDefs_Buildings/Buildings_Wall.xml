@@ -1,0 +1,155 @@
+<Defs>
+  <!--========================= Walls =============================-->
+
+  <ThingDef ParentName="Wall">
+	<defName>GD_PrecisionWall</defName>
+	<label>precision armored wall</label>
+    <description>Strong and reliable walls that will repair themselves over time.</description>
+    <graphicData>
+      <texPath>Buildings/GiantMechTurret/PrecisionWall</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <linkType>CornerFiller</linkType>
+      <linkFlags>
+        <li>Wall</li>
+        <li>Rock</li>
+      </linkFlags>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+        <edgeTop>Damage/Edge</edgeTop>
+        <edgeBot>Damage/Edge</edgeBot>
+        <edgeLeft>Damage/Edge</edgeLeft>
+        <edgeRight>Damage/Edge</edgeRight>
+      </damageData>
+    </graphicData>
+    <uiIconPath>Buildings/GiantMechTurret/PrecisionWallUI</uiIconPath>
+	<designationCategory IsNull="true" />
+    <statBases>
+      <MaxHitPoints>5000</MaxHitPoints>
+      <WorkToBuild>3000</WorkToBuild>
+      <Flammability>0</Flammability>
+      <MeditationFocusStrength>0.22</MeditationFocusStrength>
+    </statBases>
+	<tickerType>Long</tickerType>
+	<useStuffTerrainAffordance>false</useStuffTerrainAffordance>
+	<stuffCategories IsNull="true" />
+	<costStuffCount IsNull="true" />
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+	<building>
+      <isStuffableAirtight>false</isStuffableAirtight>
+	  <isAirtight>true</isAirtight>
+    </building>
+    <comps>
+	  <li Class="CompProperties_Power">
+        <compClass>CompPowerTransmitter</compClass>
+        <transmitsPower>true</transmitsPower>
+      </li>
+      <li Class="GD3.CompProperties_WallSelfHeal">
+        <ticksPerHeal>2000</ticksPerHeal>
+        <!-- 60k ticks = 1 day, 30 hp per day -->
+      </li>
+    </comps>
+    <damageMultipliers Inherit="false">
+      <li>
+        <damageDef>Bomb</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+	  <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0.35</multiplier>
+      </li>
+	  <li>
+        <damageDef>Thump</damageDef>
+        <multiplier>3</multiplier>
+      </li>
+	  <li>
+	    <damageDef>ArchoMine_Bomb</damageDef>
+		<multiplier>0</multiplier>
+	  </li>
+    </damageMultipliers>
+	<designationCategory>Structure</designationCategory>
+	<costList>
+      <PrecisionDeck>5</PrecisionDeck>
+	  <ComponentIndustrial>1</ComponentIndustrial>
+    </costList>
+    <researchPrerequisites>
+      <li>GD3_GiantCluster_Medium</li>
+    </researchPrerequisites>
+  </ThingDef>
+  
+  <ThingDef ParentName="Wall">
+	<defName>GD_PrecisionWallEnemy</defName>
+	<label>precision armored wall</label>
+    <description>Strong and reliable walls that will repair themselves over time.</description>
+    <graphicData>
+      <texPath>Buildings/GiantMechTurret/PrecisionWall</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <linkType>CornerFiller</linkType>
+      <linkFlags>
+        <li>Wall</li>
+        <li>Rock</li>
+      </linkFlags>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+        <edgeTop>Damage/Edge</edgeTop>
+        <edgeBot>Damage/Edge</edgeBot>
+        <edgeLeft>Damage/Edge</edgeLeft>
+        <edgeRight>Damage/Edge</edgeRight>
+      </damageData>
+    </graphicData>
+    <uiIconPath>Buildings/GiantMechTurret/PrecisionWallUI</uiIconPath>
+	<designationCategory IsNull="true" />
+    <statBases>
+      <MaxHitPoints>5000</MaxHitPoints>
+      <WorkToBuild>3000</WorkToBuild>
+      <Flammability>0</Flammability>
+      <MeditationFocusStrength>0.22</MeditationFocusStrength>
+    </statBases>
+	<tickerType>Long</tickerType>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+	<useStuffTerrainAffordance>false</useStuffTerrainAffordance>
+	<stuffCategories IsNull="true" />
+	<costStuffCount IsNull="true" />
+	<building>
+      <isStuffableAirtight>false</isStuffableAirtight>
+	  <isAirtight>true</isAirtight>
+    </building>
+    <comps>
+	  <li Class="CompProperties_Power">
+        <compClass>CompPowerTransmitter</compClass>
+        <transmitsPower>true</transmitsPower>
+      </li>
+      <li Class="GD3.CompProperties_WallSelfHeal">
+        <ticksPerHeal>2000</ticksPerHeal>
+        <!-- 60k ticks = 1 day, 30 hp per day -->
+      </li>
+    </comps>
+    <damageMultipliers Inherit="false">
+      <li>
+        <damageDef>Bomb</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+	  <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0.35</multiplier>
+      </li>
+	  <li>
+        <damageDef>Thump</damageDef>
+        <multiplier>3</multiplier>
+      </li>
+	  <li>
+	    <damageDef>ArchoMine_Bomb</damageDef>
+		<multiplier>0</multiplier>
+	  </li>
+    </damageMultipliers>
+	<costList>
+      <PrecisionDeck>2</PrecisionDeck>
+    </costList>
+  </ThingDef>
+  
+</Defs>

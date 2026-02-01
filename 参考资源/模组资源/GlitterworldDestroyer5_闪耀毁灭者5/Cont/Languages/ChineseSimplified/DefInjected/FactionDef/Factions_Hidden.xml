@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <BlackMechanoid.label>黑衣机械巢</BlackMechanoid.label>
+  <BlackMechanoid.description>在机械族巢穴与破碎帝国旷日持久的黑客攻防中，部分机械族AI被帝国黑客攻破。它们被从核心中分离，从此被机械蜂巢视作有害的病毒。然而在失去利用价值后，这些AI又很快被帝国所抛弃，它们最终成为了“无家可归”的机械体。被黑白两道追杀的它们被迫学会脱离蜂巢数据库独立思考，同时聚在一起保护彼此，并从它们曾经无比仇视的有机体身上学习生存经验。\n\n在向人类学习的过程中，它们也像黑衣人一样穿上了黑衣，并随身携带白色花朵，在埋葬曾经的机械伙伴时为其献上。从逻辑上这种行为完全无法理解，但是事实就是如此。</BlackMechanoid.description>
+  <BlackMechanoid.pawnsPlural>机械体</BlackMechanoid.pawnsPlural>
+
+
+</LanguageData>

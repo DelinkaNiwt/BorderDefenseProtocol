@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- Lance -->
+
+  <Gun_HighChargeLance.label>高能电荷标枪</Gun_HighChargeLance.label>
+  <Gun_HighChargeLance.description>一种装载了特制弹药的电荷标枪，巨大的威力足以击毁宇宙舰船。</Gun_HighChargeLance.description>
+  <Gun_HighChargeLance.tools.0.label>枪托</Gun_HighChargeLance.tools.0.label>
+
+  <Bullet_HighChargeLance.label>高能电荷标枪弹</Bullet_HighChargeLance.label>
+  
+  <Bullet_MosquitoChargeLance.label>电荷标枪弹</Bullet_MosquitoChargeLance.label>
+
+
+  <!-- 禁卫冲击炮 -->
+
+  <Bullet_CataphractCentipede_SR.label>禁卫电荷弹</Bullet_CataphractCentipede_SR.label>
+
+  <CataphractCentipede_SR.label>禁卫冲击炮</CataphractCentipede_SR.label>
+  <CataphractCentipede_SR.description>搭载了单分子刺刀的巨型电荷冲击炮。你不会想正面面对它的。</CataphractCentipede_SR.description>
+  <CataphractCentipede_SR.tools.0.label>刀尖</CataphractCentipede_SR.tools.0.label>
+  <CataphractCentipede_SR.tools.1.label>刀刃</CataphractCentipede_SR.tools.1.label>
+  
+  <!-- 禁卫烛天炮 -->
+
+  <Bullet_CataphractCentipede_FY.label>烛天炮弹</Bullet_CataphractCentipede_FY.label>
+
+  <CataphractCentipede_FY.label>禁卫烛天炮</CataphractCentipede_FY.label>
+  <CataphractCentipede_FY.description>由一台巨型单位使用的超重型火炮。开火时脱落的弹壳足以直接砸碎一个小型地堡。</CataphractCentipede_FY.description>
+  <CataphractCentipede_FY.tools.0.label>炮体</CataphractCentipede_FY.tools.0.label>
+
+
+  <!-- 重型等离子剑 -->
+
+  <HeavyPlasmaSword.label>等离子锯</HeavyPlasmaSword.label>
+  <HeavyPlasmaSword.description>原先被用于精密仪器制造的切割环节，直到机械蜂巢发现它用来切有机体同样趁手。</HeavyPlasmaSword.description>
+  <HeavyPlasmaSword.tools.0.label>锯刃</HeavyPlasmaSword.tools.0.label>
+
+
+  <!-- 海军电荷标枪 -->
+
+  <Bullet_MarineChargeLance.label>电荷标枪弹</Bullet_MarineChargeLance.label>
+
+  <Gun_MarineChargeLance.label>海军电荷标枪</Gun_MarineChargeLance.label>
+  <Gun_MarineChargeLance.description>经过改造的电荷标枪。稍微牺牲了威力换取了射击速度。</Gun_MarineChargeLance.description>
+  <Gun_MarineChargeLance.tools.0.label>barrel</Gun_MarineChargeLance.tools.0.label>
+
+
+  <!-- 海军心灵标枪 -->
+
+  <Gun_MarinePsyLance.label>海军心灵标枪</Gun_MarinePsyLance.label>
+  <Gun_MarinePsyLance.description>机械蜂巢的秘密武器，在以前被用来消灭身着重甲的帝国禁军士兵——星辰守护。\n\n能够透过墙壁射击，但是射击范围非常有限，且伤害不会引起大脑烧伤。注意与携带它的静螳保持距离。</Gun_MarinePsyLance.description>
+  <Gun_MarinePsyLance.verbs.0.label>psychic shock lance</Gun_MarinePsyLance.verbs.0.label>
+  <Gun_MarinePsyLance.tools.0.label>barrel</Gun_MarinePsyLance.tools.0.label>
+
+
+  <!-- 电荷加速器 -->
+
+  <Bullet_MiniChargeGun.label>迷你电荷弹</Bullet_MiniChargeGun.label>
+
+  <Gun_MiniChargeGun.label>电荷加速器</Gun_MiniChargeGun.label>
+  <Gun_MiniChargeGun.description>给机械萤火虫装配的电荷加速器。</Gun_MiniChargeGun.description>
+
+
+  <!-- Heavy Plasma Sword -->
+  <!--<HeavyPlasmaSword.tools.1.label>剑刃</HeavyPlasmaSword.tools.1.label>-->
+  
+  <Gun_Minigun_Mech.label>压制机枪</Gun_Minigun_Mech.label>
+  <Gun_Minigun_Mech.description>大口径机枪，拥有压倒性的火力。庆幸在rimworld里你不用负责这只蜈蚣的后勤吧。</Gun_Minigun_Mech.description>
+  <Gun_Minigun_Mech.tools.0.label>枪托</Gun_Minigun_Mech.tools.0.label>
+
+  <Bullet_Minigun_Mech.label>机枪子弹</Bullet_Minigun_Mech.label>
+  
+  <Gun_ChargeBlasterTurret_Tiny.label>电荷炮塔背包</Gun_ChargeBlasterTurret_Tiny.label>
+  <Gun_ChargeBlasterTurret_Tiny.description>一个小型电荷炮塔。</Gun_ChargeBlasterTurret_Tiny.description>
+  
+  <Bullet_MosquitoChargeLance>电荷标枪弹</Bullet_MosquitoChargeLance>
+  <Bullet_MosquitoRocket>火箭弹</Bullet_MosquitoRocket>
+  
+  <!-- 耀螳 -->
+
+  <Bullet_ExplodeTurret_Shell.label>高爆炮弹</Bullet_ExplodeTurret_Shell.label>
+  <Bullet_EMPFloatingTurret.label>电离炮弹</Bullet_EMPFloatingTurret.label>
+  <GD_BlackBomb.label>黑衣爆炸簇</GD_BlackBomb.label>
+
+  <Gun_ChargeBlasterFloatingTurret.label>电荷浮游炮塔</Gun_ChargeBlasterFloatingTurret.label>
+  <Gun_ChargeBlasterFloatingTurret.description>黑衣机械耀螳装备的炮塔。</Gun_ChargeBlasterFloatingTurret.description>
+  <Gun_InfernoCannonFloatingTurret.label>狱火浮游炮塔</Gun_InfernoCannonFloatingTurret.label>
+  <Gun_InfernoCannonFloatingTurret.description>黑衣机械耀螳装备的炮塔。</Gun_InfernoCannonFloatingTurret.description>
+  <Gun_ExplodeFloatingTurret.label>高爆浮游炮塔</Gun_ExplodeFloatingTurret.label>
+  <Gun_ExplodeFloatingTurret.description>黑衣机械耀螳装备的炮塔。</Gun_ExplodeFloatingTurret.description>
+  <Gun_EMPFloatingTurret.label>电离浮游炮塔</Gun_EMPFloatingTurret.label>
+  <Gun_EMPFloatingTurret.description>黑衣机械耀螳装备的炮塔。</Gun_EMPFloatingTurret.description>
+  
+  <!-- 盾螳 -->
+  
+  <Gun_NeedleLauncher_Defence.label>防卫用穿刺针</Gun_NeedleLauncher_Defence.label>
+  <Gun_NeedleLauncher_Defence.description>黑衣机械盾螳配备的武器，利用快射速在近距离格斗中占据先机。</Gun_NeedleLauncher_Defence.description>
+  <Gun_NeedleLauncher_Defence.tools.0.label>把手</Gun_NeedleLauncher_Defence.tools.0.label>
+
+</LanguageData>

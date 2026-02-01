@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- Thump Cannon -->
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_ThumpCannon</defName>
+    <label>thump bomb</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Thump</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <thingClass>Projectile_Explosive</thingClass>
+    <projectile>
+      <damageDef>Thump</damageDef>
+      <damageAmountBase>20</damageAmountBase>
+      <explosionRadius>2.6</explosionRadius >
+      <stoppingPower>3</stoppingPower>
+      <speed>50</speed>
+      <soundExplode>ThumpCannon_Impact</soundExplode>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_ThumpCannon_Smoke</defName>
+    <label>thump smoke</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Thump</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <thingClass>Projectile_Explosive</thingClass>
+    <projectile>
+      <speed>40</speed>
+      <damageDef>Smoke</damageDef>
+      <!-- Use default damage from explosion def -->
+      <explosionRadius>4.9</explosionRadius>
+      <postExplosionGasType>BlindSmoke</postExplosionGasType>
+      <ai_IsIncendiary>true</ai_IsIncendiary>
+      <arcHeightFactor>0.2</arcHeightFactor>
+      <shadowSize>0.6</shadowSize>
+      <screenShakeFactor>0.5</screenShakeFactor>
+    </projectile>
+  </ThingDef>
+
+</Defs>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <GD_OperateStation.reportString>在TargetA黑入机械族服务器。</GD_OperateStation.reportString>
+  <GD_HaulToTurret.reportString>正在搬运TargetB至TargetA。</GD_HaulToTurret.reportString>
+  <GD_UpgradeTurret.reportString>正在加固TargetA。</GD_UpgradeTurret.reportString>
+  <GD_FleeFlying.reportString>与TargetA保持距离。</GD_FleeFlying.reportString>
+  <GD_FixTurret.reportString>正在修复TargetA。</GD_FixTurret.reportString>
+  <GD_CallArtillery.reportString>使用通讯台。</GD_CallArtillery.reportString>
+  <GD_ModifySavingMech.reportString>对TargetA做手脚。</GD_ModifySavingMech.reportString>
+
+</LanguageData>

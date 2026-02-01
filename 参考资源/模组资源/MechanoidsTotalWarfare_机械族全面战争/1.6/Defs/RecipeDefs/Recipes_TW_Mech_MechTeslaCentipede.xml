@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+
+    <RecipeDef ParentName="BaseMechanoidRecipe">
+    <defName>TW_Mech_MechTeslaCentipede</defName>
+    <label>制造机械特斯拉蜈蚣</label>
+    <gestationCycles>12</gestationCycles>
+    <displayPriority>300</displayPriority>
+    <description>由旧时代“闪耀世界”科技打造的特斯拉防御网络原型机改造而来，这种机械蜈蚣曾是专门用于拦截轨道空降部队的杀戮兵器。休眠数百年后，它被未知信号重新激活，背部搭载的超导电容器能释放百万伏特级的毁灭性电流，甚至能将飞射而来的炮弹瞬间气化。不过，它的能量系统极度依赖电磁稳定，一旦遭受EMP冲击，过载的电容便会引发连锁爆炸。</description>
+    <researchPrerequisites>
+	<li>NCL_Doom_Calculation</li>
+	<li>NCL_Ignition_of_the_Crucible</li>
+	</researchPrerequisites>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>550</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>375</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>6</count>
+      </li>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>SubcoreHigh</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>20</count>
+      </li>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>NanostructuringChip</li>
+          </thingDefs>
+        </filter>
+        <count>2</count>
+      </li>
+    </ingredients>
+    <products>
+      <TW_Mech_MechTeslaCentipede>1</TW_Mech_MechTeslaCentipede>
+    </products>
+    <descriptionHyperlinks>
+      <ThingDef>TW_Mech_MechTeslaCentipede</ThingDef>
+    </descriptionHyperlinks>
+  </RecipeDef>
+  
+ </Defs>

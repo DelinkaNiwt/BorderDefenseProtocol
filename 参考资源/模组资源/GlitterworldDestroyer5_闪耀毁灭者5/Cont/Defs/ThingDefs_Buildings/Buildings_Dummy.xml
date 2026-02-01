@@ -1,0 +1,84 @@
+<Defs>
+  <!-- 傀儡研究设施，仅用于封锁特定科技 -->
+  
+  <ThingDef ParentName="BuildingBase">
+    <defName>DummyResearchBuilding</defName>
+    <label>technology blockade</label>
+    <description>The blockade from the mechanoids prevents your colonists from actively researching this technology. \n Destroy the giant cluster core building in the corresponding stage to unlock this item.</description>
+    <graphicData>
+      <texPath>UI/Symbols/Blockade</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.8</drawSize>
+    </graphicData>
+    <uiIconScale>1.8</uiIconScale>
+    <size>(2,2)</size>
+    <rotatable>false</rotatable>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <castEdgeShadows>true</castEdgeShadows>
+    <designationHotKey>Misc4</designationHotKey>
+    <canOverlapZones>false</canOverlapZones>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <Mass>60</Mass>
+    </statBases>
+    <comps>
+      <li Class="CompProperties_Facility">
+        <statOffsets>
+          <ResearchSpeedFactor>0.1</ResearchSpeedFactor>
+        </statOffsets>
+        <maxSimultaneous>1</maxSimultaneous>
+      </li>
+    </comps>
+  </ThingDef>
+  
+  <ThingDef ParentName="EtherealThingBase">
+	<defName>GD_DryseaDummy</defName>
+	<label>drysea dummy</label>
+	<graphicData>
+	  <texPath>Empty/Empty</texPath>
+	  <graphicClass>Graphic_Single</graphicClass>
+	</graphicData>
+	<thingClass>GD3.DryseaDummy</thingClass>
+	<tickerType>Normal</tickerType>
+	<drawerType>RealtimeOnly</drawerType>
+  </ThingDef>
+  
+  <ThingDef ParentName="EtherealThingBase">
+	<defName>GD_EliminateDummy</defName>
+	<label>eliminate dummy</label>
+	<graphicData>
+	  <texPath>Empty/Empty</texPath>
+	  <graphicClass>Graphic_Single</graphicClass>
+	</graphicData>
+	<thingClass>GD3.EliminateDummy</thingClass>
+	<tickerType>Normal</tickerType>
+	<drawerType>RealtimeOnly</drawerType>
+  </ThingDef>
+  
+  <ThingDef ParentName="EtherealThingBase">
+	<defName>GD_ExostriderDummy</defName>
+	<label>exostrider dummy</label>
+	<graphicData>
+	  <texPath>Empty/Empty</texPath>
+	  <graphicClass>Graphic_Single</graphicClass>
+	</graphicData>
+	<thingClass>GD3.ExostriderDummy</thingClass>
+	<tickerType>Normal</tickerType>
+	<drawerType>RealtimeOnly</drawerType>
+  </ThingDef>
+  
+  <ThingDef ParentName="EtherealThingBase">
+	<defName>GD_FinalBattleDummy</defName>
+	<label>final battle dummy</label>
+	<graphicData>
+	  <texPath>Empty/Empty</texPath>
+	  <graphicClass>Graphic_Single</graphicClass>
+	</graphicData>
+	<thingClass>GD3.FinalBattleDummy</thingClass>
+	<tickerType>Normal</tickerType>
+	<drawerType>RealtimeOnly</drawerType>
+  </ThingDef>
+  
+</Defs>

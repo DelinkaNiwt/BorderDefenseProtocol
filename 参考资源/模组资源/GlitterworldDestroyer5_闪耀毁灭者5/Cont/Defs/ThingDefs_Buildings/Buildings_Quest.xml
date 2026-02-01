@@ -1,0 +1,928 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <!--===== 随机炮塔 =====-->
+  <!-- 损毁炮台 -->
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>PlayerTurret_Broken</defName>
+    <label>broken turret</label>
+    <description>A damaged turret, in which there are some data of analytical value. After repair, it will be automatically uploaded to the mechanoid hive's server.</description>
+	<thingClass>GD3.Building_BrokenTurret</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Buildings/BrokenTurret</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2.5, 2.5)</drawSize>
+      <drawOffset>(0,0,-0.06)</drawOffset>
+      <damageData>
+        <rect>(0.3,0.3,1.4,1.4)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(1.5,0.35,1.4)</volume>
+        <offset>(0,0,-0.05)</offset>
+      </shadowData>
+    </graphicData>
+	<thingCategories>
+      <li>BuildingsSecurity</li>
+    </thingCategories>
+    <receivesSignals>true</receivesSignals>
+    <altitudeLayer>Building</altitudeLayer>
+    <stealable>false</stealable>
+    <rotatable>false</rotatable>
+    <size>(2,2)</size>
+    <statBases>
+      <MaxHitPoints>720</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <Mass>60</Mass>
+      <Beauty>-20</Beauty>
+	  <WorkToBuild>5400</WorkToBuild>
+    </statBases>
+    <damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <tickerType>Normal</tickerType>
+    <comps>
+	  <li Class="CompProperties_Forbiddable"/>
+    </comps>
+    <killedLeavings>
+      <ChunkSlagSteel>1</ChunkSlagSteel>
+    </killedLeavings>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <fillPercent>0.5</fillPercent>
+    <hasTooltip>true</hasTooltip>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+	<costList>
+      <Steel>100</Steel>
+    </costList>
+    <designationHotKey>Misc2</designationHotKey>
+    <researchPrerequisites IsNull="True" />
+	<minifiedDef>MinifiedThing</minifiedDef>
+	<uiIconPath>Buildings/BrokenTurret</uiIconPath>
+	<uiIconScale>1.15</uiIconScale>
+  </ThingDef>
+  
+  <!-- 电荷霰炮炮台 -->
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>PlayerTurret_ChargeSleetTurret</defName>
+    <label>charge sleet turret</label>
+    <description>A turret mounted with a charge sleet gun, capable of dealing devastating damage to close-range enemies.</description>
+    <thingClass>Building_TurretGun</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Things/Building/Mech/TurretMechLarge_Base</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2, 2)</drawSize>
+      <drawOffset>(0,0,-0.16)</drawOffset>
+      <damageData>
+        <rect>(0.3,0.3,1.4,1.4)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(1.5,0.35,1.4)</volume>
+        <offset>(0,0,-0.05)</offset>
+      </shadowData>
+    </graphicData>
+	<thingCategories>
+      <li>BuildingsSecurity</li>
+    </thingCategories>
+    <receivesSignals>true</receivesSignals>
+    <altitudeLayer>Building</altitudeLayer>
+    <stealable>false</stealable>
+    <rotatable>false</rotatable>
+    <size>(2,2)</size>
+    <statBases>
+      <MaxHitPoints>720</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <Mass>100</Mass>
+      <ShootingAccuracyTurret>0.85</ShootingAccuracyTurret>
+      <Beauty>-20</Beauty>
+	  <WorkToBuild>5400</WorkToBuild>
+    </statBases>
+    <damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <tickerType>Normal</tickerType>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>5.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.0</chanceNeverExplodeFromDamage>
+      </li>
+	  <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>1000</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+	  <li Class="CompProperties_Stunnable">
+        <affectedDamageDefs>
+          <li>EMP</li>
+        </affectedDamageDefs>
+      </li>
+	  <li Class="CompProperties_AmbientSound">
+        <sound>MechTurretBig_Call</sound>
+      </li>
+    </comps>
+    <killedLeavings>
+      <ChunkSlagSteel>1</ChunkSlagSteel>
+    </killedLeavings>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <fillPercent>0.5</fillPercent>
+    <hasTooltip>true</hasTooltip>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <building>
+      <combatPower>150</combatPower>
+      <ai_combatDangerous>true</ai_combatDangerous>
+      <turretGunDef>Gun_ChargeSleetBlaster</turretGunDef>
+      <turretBurstWarmupTime>0.3</turretBurstWarmupTime>
+	  <turretBurstCooldownTime>2.6</turretBurstCooldownTime>
+      <turretTopDrawSize>2.75</turretTopDrawSize>
+      <turretTopOffset>(0, 0.05)</turretTopOffset>
+    </building>
+	<costList>
+      <Steel>300</Steel>
+	  <Plasteel>50</Plasteel>
+	  <PrecisionDeck>45</PrecisionDeck>
+      <ComponentIndustrial>5</ComponentIndustrial>
+	  <ComponentSpacer>2</ComponentSpacer>
+    </costList>
+	<placeWorkers>
+      <li>PlaceWorker_TurretTop</li>
+      <li>PlaceWorker_ShowTurretRadius</li>
+    </placeWorkers>
+    <designationHotKey>Misc2</designationHotKey>
+    <researchPrerequisites IsNull="True" />
+	<minifiedDef>MinifiedThing</minifiedDef>
+	<uiIconPath>Buildings/ChargeSleetTurret_icon</uiIconPath>
+	<uiIconScale>0.95</uiIconScale>
+  </ThingDef>
+  
+  <ThingDef ParentName="Gun_ChargeBlasterHeavyBase">
+    <defName>Gun_ChargeSleetBlaster</defName>
+    <label>charge sleet blaster</label>
+    <description>A blaster designed to fire dense large-caliber charge projectiles at close range.</description>
+    <graphicData>
+      <texPath>Buildings/ChargeSleetTurret_Top</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <AccuracyTouch>1.00</AccuracyTouch>
+      <AccuracyShort>0.88</AccuracyShort>
+      <AccuracyMedium>0.62</AccuracyMedium>
+	  <AccuracyLong>0.52</AccuracyLong>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+		<defaultProjectile>Bullet_ChargeBlasterHeavy</defaultProjectile>
+		<range>11.9</range>
+		<soundCast>ThumpCannon_Fire</soundCast>
+		<soundCastTail>GunTail_Heavy</soundCastTail>
+		<muzzleFlashScale>9</muzzleFlashScale>
+		<defaultCooldownTime>2.6</defaultCooldownTime>
+		<ticksBetweenBurstShots>1</ticksBetweenBurstShots>
+		<burstShotCount>10</burstShotCount>
+      </li>
+    </verbs>
+  </ThingDef>
+  
+  <!-- 磁轨炮台 -->
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>PlayerTurret_RailgunTurret</defName>
+    <label>railgun turret</label>
+    <description>A turret armed with charged railguns, after being accelerated by electromagnetic fields, the emit charges can penetrate several heavily armored units.</description>
+    <thingClass>Building_TurretGun</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Things/Building/Mech/TurretMechLarge_Base</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2, 2)</drawSize>
+      <drawOffset>(0,0,-0.16)</drawOffset>
+      <damageData>
+        <rect>(0.3,0.3,1.4,1.4)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(1.5,0.35,1.4)</volume>
+        <offset>(0,0,-0.05)</offset>
+      </shadowData>
+    </graphicData>
+	<thingCategories>
+      <li>BuildingsSecurity</li>
+    </thingCategories>
+    <receivesSignals>true</receivesSignals>
+    <altitudeLayer>Building</altitudeLayer>
+    <stealable>false</stealable>
+    <rotatable>false</rotatable>
+    <size>(2,2)</size>
+    <statBases>
+      <MaxHitPoints>720</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <Mass>100</Mass>
+      <ShootingAccuracyTurret>0.85</ShootingAccuracyTurret>
+      <Beauty>-20</Beauty>
+	  <WorkToBuild>5400</WorkToBuild>
+    </statBases>
+    <damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <tickerType>Normal</tickerType>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>5.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.0</chanceNeverExplodeFromDamage>
+      </li>
+	  <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>1000</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+	  <li Class="CompProperties_Stunnable">
+        <affectedDamageDefs>
+          <li>EMP</li>
+        </affectedDamageDefs>
+      </li>
+	  <li Class="CompProperties_AmbientSound">
+        <sound>MechTurretBig_Call</sound>
+      </li>
+    </comps>
+    <killedLeavings>
+      <ChunkSlagSteel>1</ChunkSlagSteel>
+    </killedLeavings>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <fillPercent>0.5</fillPercent>
+    <hasTooltip>true</hasTooltip>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <building>
+      <combatPower>150</combatPower>
+      <ai_combatDangerous>true</ai_combatDangerous>
+      <turretGunDef>Gun_RailgunTurret</turretGunDef>
+      <turretBurstCooldownTime>4.5</turretBurstCooldownTime>
+	  <turretBurstWarmupTime>2.1</turretBurstWarmupTime>
+      <turretTopDrawSize>2.75</turretTopDrawSize>
+      <turretTopOffset>(0, 0.05)</turretTopOffset>
+    </building>
+	<costList>
+      <Steel>300</Steel>
+	  <Plasteel>50</Plasteel>
+	  <PrecisionDeck>45</PrecisionDeck>
+      <ComponentIndustrial>5</ComponentIndustrial>
+	  <ComponentSpacer>2</ComponentSpacer>
+    </costList>
+	<placeWorkers>
+      <li>PlaceWorker_TurretTop</li>
+      <li>PlaceWorker_ShowTurretRadius</li>
+    </placeWorkers>
+    <designationHotKey>Misc2</designationHotKey>
+    <researchPrerequisites IsNull="True" />
+	<minifiedDef>MinifiedThing</minifiedDef>
+	<uiIconPath>Buildings/RailgunTurret_icon</uiIconPath>
+	<uiIconScale>0.95</uiIconScale>
+  </ThingDef>
+  
+  <ThingDef ParentName="Gun_ChargeBlasterHeavyBase">
+    <defName>Gun_RailgunTurret</defName>
+    <label>railgun</label>
+    <description>A railgun designed to strike heavy units.</description>
+    <graphicData>
+      <texPath>Buildings/RailgunTurret_Top</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <AccuracyTouch>1.00</AccuracyTouch>
+      <AccuracyShort>1.00</AccuracyShort>
+      <AccuracyMedium>1.00</AccuracyMedium>
+	  <AccuracyLong>1.00</AccuracyLong>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+		<hasStandardCommand>true</hasStandardCommand>
+		<defaultProjectile>Bullet_GDRailgun</defaultProjectile>
+		<warmupTime>2.0</warmupTime>
+		<minRange>5.9</minRange>
+		<range>49.9</range>
+		<ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+		<burstShotCount>1</burstShotCount>
+		<soundCast>ChargeLance_Fire</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+		<muzzleFlashScale>25</muzzleFlashScale>
+      </li>
+    </verbs>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_GDRailgun</defName>
+    <label>railgun bullet</label>
+	<thingClass>GD3.RailgunProjectile</thingClass>
+    <graphicData>
+      <texPath>Things/Projectile/ChargeLanceShot</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+	  <drawSize>1.4</drawSize>
+    </graphicData>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>65</damageAmountBase>
+      <armorPenetrationBase>1.05</armorPenetrationBase>
+      <speed>128</speed>
+    </projectile>
+  </ThingDef>
+  
+  <!-- 电弧炮台 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>PlayerTurret_ArcTurret</defName>
+    <label>arc thrower turret</label>
+    <description>The turret armed with an arc gun, capable of dealing chain damage to enemies within a certain range and creating EMP deterrence.</description>
+    <thingClass>Building_TurretGun</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Things/Building/Mech/TurretMechLarge_Base</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2, 2)</drawSize>
+      <drawOffset>(0,0,-0.16)</drawOffset>
+      <damageData>
+        <rect>(0.3,0.3,1.4,1.4)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(1.5,0.35,1.4)</volume>
+        <offset>(0,0,-0.05)</offset>
+      </shadowData>
+    </graphicData>
+	<thingCategories>
+      <li>BuildingsSecurity</li>
+    </thingCategories>
+    <receivesSignals>true</receivesSignals>
+    <altitudeLayer>Building</altitudeLayer>
+    <stealable>false</stealable>
+    <rotatable>false</rotatable>
+    <size>(2,2)</size>
+    <statBases>
+      <MaxHitPoints>720</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <Mass>100</Mass>
+      <ShootingAccuracyTurret>0.85</ShootingAccuracyTurret>
+      <Beauty>-20</Beauty>
+	  <WorkToBuild>5400</WorkToBuild>
+    </statBases>
+    <damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <tickerType>Normal</tickerType>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>5.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.0</chanceNeverExplodeFromDamage>
+      </li>
+	  <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>1000</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+	  <li Class="CompProperties_Stunnable">
+        <affectedDamageDefs>
+          <li>EMP</li>
+        </affectedDamageDefs>
+      </li>
+	  <li Class="CompProperties_AmbientSound">
+        <sound>MechTurretBig_Call</sound>
+      </li>
+    </comps>
+    <killedLeavings>
+      <ChunkSlagSteel>1</ChunkSlagSteel>
+    </killedLeavings>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <fillPercent>0.5</fillPercent>
+    <hasTooltip>true</hasTooltip>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <building>
+      <combatPower>150</combatPower>
+      <ai_combatDangerous>true</ai_combatDangerous>
+      <turretGunDef>Gun_ArcThrowTurret</turretGunDef>
+      <turretBurstCooldownTime>3.5</turretBurstCooldownTime>
+	  <turretBurstWarmupTime>0.1</turretBurstWarmupTime>
+      <turretTopDrawSize>2.25</turretTopDrawSize>
+      <turretTopOffset>(0, 0.05)</turretTopOffset>
+    </building>
+	<costList>
+      <Steel>300</Steel>
+	  <Plasteel>50</Plasteel>
+	  <PrecisionDeck>45</PrecisionDeck>
+      <ComponentIndustrial>5</ComponentIndustrial>
+	  <ComponentSpacer>2</ComponentSpacer>
+    </costList>
+	<placeWorkers>
+      <li>PlaceWorker_TurretTop</li>
+      <li>GD3.PlaceWorker_ShowArcTurretRadius</li>
+    </placeWorkers>
+    <designationHotKey>Misc2</designationHotKey>
+    <researchPrerequisites IsNull="True" />
+	<minifiedDef>MinifiedThing</minifiedDef>
+	<uiIconPath>Buildings/ArcTurret_icon</uiIconPath>
+	<uiIconScale>0.95</uiIconScale>
+  </ThingDef>
+  
+  <ThingDef ParentName="Gun_ChargeBlasterHeavyBase">
+    <defName>Gun_ArcThrowTurret</defName>
+    <label>arc thrower turret</label>
+    <description>An arc gun designed to strike group units.</description>
+    <graphicData>
+      <texPath>Buildings/ArcThrower_Top</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>1.2</drawSize>
+    </graphicData>
+    <statBases>
+      <Mass>2.6</Mass>
+      <AccuracyTouch>0.98</AccuracyTouch>
+      <AccuracyShort>0.95</AccuracyShort>
+      <AccuracyMedium>0.90</AccuracyMedium>
+      <AccuracyLong>0.85</AccuracyLong>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>GD3.Verb_ThrowArc</verbClass>
+        <range>29.9</range>
+        <soundCast>ArcThrowerBurst</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>9</muzzleFlashScale>
+        <defaultCooldownTime>3.5</defaultCooldownTime>
+        <ticksBetweenBurstShots>3</ticksBetweenBurstShots>
+		<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+        <burstShotCount>1</burstShotCount>
+      </li>
+    </verbs>
+	<modExtensions>
+	  <li Class="GD3.Ext_Arc">
+	    <range>8.9</range><!-- 连锁范围 -->
+	    <chainCount>3~5</chainCount><!-- 连锁数 -->
+	    <damage>Burn</damage><!-- 伤害类型 -->
+	    <amount>45</amount><!-- 伤害 -->
+	    <penetration>1.0</penetration><!-- 穿甲 -->
+	    <EMPdamage>60</EMPdamage><!-- EMP伤害 -->
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  <!--===== 废弃基地 =====-->
+  <ThingDef Abstract="True" Name="GDBlackBaseBuildingBase" ParentName="NonDeconstructibleAncientBuildingBase">
+    <building>
+      <displayAttackToDestroyOnInspectPane>false</displayAttackToDestroyOnInspectPane>
+    </building>
+  </ThingDef>
+  
+  <!-- 数据库 -->
+  <ThingDef ParentName="GDBlackBaseBuildingBase">
+    <defName>GD_BlackMechComputer</defName>
+    <label>deactivated computer</label>
+    <description>A computer used by the black-clad mechanoid for temporary data storage and analysis, which has been physically damaged to prevent data leakage. However, with the technology of mechanoid hive, as long as some residual data or hardware fragments can be collected, useful information can be restored.</description>
+    <graphicData>
+      <texPath>Buildings/AncientUrbanRuins/Computation</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2.4,2.4)</drawSize>
+    </graphicData>
+    <size>(2,2)</size>
+    <rotatable>false</rotatable>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <Flammability>0.5</Flammability>
+    </statBases>
+    <castEdgeShadows>false</castEdgeShadows>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <building>
+      <destroySound>BuildingDestroyed_Metal_Big</destroySound>
+    </building>
+    <costList>
+      <Steel>100</Steel>
+    </costList>
+    <killedLeavings>
+      <ChunkSlagSteel>1</ChunkSlagSteel>
+      <Steel>25</Steel>
+    </killedLeavings>
+	<hasInteractionCell>True</hasInteractionCell>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <altitudeLayer>Building</altitudeLayer>
+    <canBeUsedUnderRoof>false</canBeUsedUnderRoof>
+    <fillPercent>0.60</fillPercent>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <tickerType>Normal</tickerType>
+    <comps>
+      <li>
+        <compClass>GD3.CompBlackComputer</compClass>
+      </li>
+      <li Class="CompProperties_Hackable">
+        <defence>12000</defence>
+        <effectHacking>HackingTerminal</effectHacking>
+        <lockoutDurationHoursRange>6~8</lockoutDurationHoursRange>
+        <hackedInspectString>Hacked.</hackedInspectString>
+        <showProgressAfterHackCompletion>false</showProgressAfterHackCompletion>
+        <intellectualSkillPrerequisite>6</intellectualSkillPrerequisite>
+        <notHackedInspectString>Hack for information.</notHackedInspectString>
+        <hackedMessage>{HACKER_labelShort} has finished hacking {SUBJECT_labelNoParenthesisDef}.</hackedMessage>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>1.5</glowRadius>
+        <glowColor>(144,238,144,155)</glowColor>
+      </li>
+    </comps>
+  </ThingDef>
+  
+  <!-- 终端 -->
+  <ThingDef ParentName="AncientTerminalBase">
+    <defName>GD_DroneTerminal</defName>
+    <label>drone terminal</label>
+    <description>A terminal used for emergency shutdown of drone operations and can be forcibly activated through hacking. \n\nRandomly deactivate a trick mine drone that is still in operation, and there is a possibility of analyzing residual information to obtain persona data with a small probability.</description>
+    <comps>
+      <li Class="GD3.CompProperties_ArchoMineTerminalHackable">
+        <!-- Hackable -->
+        <defence>600</defence>
+        <effectHacking>HackingTerminal</effectHacking>
+        <intellectualSkillPrerequisite>4</intellectualSkillPrerequisite>
+      </li>
+    </comps>
+  </ThingDef>
+  
+  <!-- 物品架 -->
+  <ThingDef ParentName="GDBlackBaseBuildingBase">
+    <defName>GD_EmptyShelves</defName>
+    <label>empty shelves</label>
+    <description>This item rack that has been emptied.</description>
+    <graphicData>
+      <texPath>Buildings/AncientUrbanRuins/EmptyShelves</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(2.4,1.2)</drawSize>
+      <shadowData>
+        <volume>(1.8, 0.3, 0.1)</volume>
+      </shadowData>
+    </graphicData>
+    <size>(2,1)</size>
+    <fillPercent>0.35</fillPercent>
+    <altitudeLayer>Building</altitudeLayer>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+    </statBases>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+  </ThingDef>
+  
+  <ThingDef ParentName="GDBlackBaseBuildingBase">
+    <defName>GD_StorageRacks</defName>
+    <label>storage racks</label>
+    <description>This shelve piled with some disordered parts might be able to sort out some useful materials.</description>
+	<thingClass>Building_Crate</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>	
+    <graphicData>
+      <texPath>Buildings/AncientUrbanRuins/Injection_StorageRacks</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(2.4,1.2)</drawSize>
+      <shadowData>
+        <volume>(1.8, 0.3, 0.1)</volume>
+      </shadowData>
+    </graphicData>
+    <size>(2,1)</size>
+    <fillPercent>0.35</fillPercent>
+    <altitudeLayer>Building</altitudeLayer>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+    </statBases>
+	<building>
+      <openingStartedSound>Building_Deconstructed</openingStartedSound>
+	  <isInert>true</isInert>
+    </building>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+	<comps>
+      <li Class="CompProperties_EmptyStateGraphic">
+        <graphicData>
+          <texPath>Buildings/AncientUrbanRuins/RustyEmptyShelves</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>(2.4,1.2)</drawSize>
+        </graphicData>
+      </li>
+      <li Class="CompProperties_LootSpawn">
+        <contents>Reward_GDPaperBox</contents>
+      </li>
+    </comps>
+  </ThingDef>
+  
+  <!-- 纸板盒 -->
+  <ThingDef ParentName="GDBlackBaseBuildingBase">
+    <defName>GD_PaperBoxA</defName>
+    <label>paper box</label>
+    <description>It seems that the black-clad mechanoids also like to use this simple and efficient storage tool. You can open it to obtain some useful materials.</description>
+	<thingClass>Building_Crate</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>	
+    <fillPercent>0.3</fillPercent>
+    <passability>PassThroughOnly</passability>
+    <pathCost>20</pathCost>
+    <graphicData>
+      <texPath>Buildings/AncientUrbanRuins/PaperBox_A</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+    </statBases>
+	<building>
+      <openingStartedSound>Building_Deconstructed</openingStartedSound>
+	  <isInert>true</isInert>
+    </building>
+	<rotatable>false</rotatable>
+    <comps>
+      <li Class="CompProperties_EmptyStateGraphic">
+        <graphicData>
+          <texPath>Buildings/AncientUrbanRuins/PaperBox_A_Open</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>(1,1)</drawSize>
+        </graphicData>
+      </li>
+      <li Class="CompProperties_LootSpawn">
+        <contents>Reward_GDPaperBox</contents>
+      </li>
+    </comps>
+  </ThingDef>
+  
+  <ThingDef ParentName="GDBlackBaseBuildingBase">
+    <defName>GD_PaperBoxB</defName>
+    <label>paper box</label>
+    <description>It seems that the black-clad mechanoids also like to use this simple and efficient storage tool. You can open it to obtain some useful materials.</description>
+	<thingClass>Building_Crate</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>	
+    <fillPercent>0.3</fillPercent>
+    <passability>PassThroughOnly</passability>
+    <pathCost>20</pathCost>
+    <graphicData>
+      <texPath>Buildings/AncientUrbanRuins/PaperBox_B</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+    </statBases>
+	<building>
+      <openingStartedSound>Building_Deconstructed</openingStartedSound>
+	  <isInert>true</isInert>
+    </building>
+	<rotatable>false</rotatable>
+    <comps>
+      <li Class="CompProperties_EmptyStateGraphic">
+        <graphicData>
+          <texPath>Buildings/AncientUrbanRuins/PaperBox_B_Open</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>(1,1)</drawSize>
+        </graphicData>
+      </li>
+      <li Class="CompProperties_LootSpawn">
+        <contents>Reward_GDPaperBox</contents>
+      </li>
+    </comps>
+  </ThingDef>
+  
+  <ThingSetMakerDef>
+    <defName>Reward_GDPaperBox</defName>
+    <root Class="ThingSetMaker_RandomOption">
+      <options>
+        <li>
+          <weight>0.2</weight>
+          <thingSetMaker Class="ThingSetMaker_StackCount">
+            <fixedParams>
+              <filter>
+                <thingDefs>
+                  <li>BlackPersonaData</li>
+                </thingDefs>
+              </filter>
+              <countRange>1</countRange>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+        <li>
+          <weight>1</weight>
+          <thingSetMaker Class="ThingSetMaker_StackCount">
+            <fixedParams>
+              <filter>
+                <thingDefs>
+                  <li>ComponentIndustrial</li>
+                </thingDefs>
+              </filter>
+              <countRange>5~7</countRange>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+		<li>
+          <weight>0.4</weight>
+          <thingSetMaker Class="ThingSetMaker_StackCount">
+            <fixedParams>
+              <filter>
+                <thingDefs>
+                  <li>ComponentSpacer</li>
+                </thingDefs>
+              </filter>
+              <countRange>1~2</countRange>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+      </options>
+    </root>
+  </ThingSetMakerDef>
+  
+  <!-- 箱子 -->
+  <ThingDef ParentName="GDBlackBaseBuildingBase">
+    <defName>GD_BigCase</defName>
+    <label>big case</label>
+    <description>A big case that was not taken away in time for some reason, might contain precious resources.</description>
+	<thingClass>Building_Crate</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>	
+    <graphicData>
+      <texPath>Buildings/AncientUrbanRuins/BigCase</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(3.0,2.0)</drawSize>
+    </graphicData>
+    <size>(3,2)</size>
+    <fillPercent>0.25</fillPercent>
+    <altitudeLayer>Building</altitudeLayer>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+    </statBases>
+	<building>
+      <openingStartedSound>Building_Deconstructed</openingStartedSound>
+	  <isInert>true</isInert>
+    </building>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+	<comps>
+      <li Class="CompProperties_EmptyStateGraphic">
+        <graphicData>
+          <texPath>Buildings/AncientUrbanRuins/BigCase_Open</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>(3.0,2.0)</drawSize>
+        </graphicData>
+      </li>
+      <li Class="CompProperties_LootSpawn">
+        <contents>Reward_GDCaseBig</contents>
+      </li>
+    </comps>
+  </ThingDef>
+  
+  <ThingDef ParentName="GDBlackBaseBuildingBase">
+    <defName>GD_WeaponCase</defName>
+    <label>small case</label>
+    <description>A small case that was not taken away in time for some reason, might contain precious resources.</description>
+	<thingClass>Building_Crate</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>	
+    <graphicData>
+      <texPath>Buildings/AncientUrbanRuins/WeaponCase</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(3.0,1.0)</drawSize>
+      <shadowData>
+        <volume>(1.8, 0.3, 0.1)</volume>
+      </shadowData>
+    </graphicData>
+    <size>(3,1)</size>
+    <fillPercent>0.25</fillPercent>
+    <altitudeLayer>Building</altitudeLayer>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+    </statBases>
+	<building>
+      <openingStartedSound>Building_Deconstructed</openingStartedSound>
+	  <isInert>true</isInert>
+    </building>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+	<comps>
+      <li Class="CompProperties_EmptyStateGraphic">
+        <graphicData>
+          <texPath>Buildings/AncientUrbanRuins/WeaponCase_Open</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>(3.0,1.0)</drawSize>
+        </graphicData>
+      </li>
+      <li Class="CompProperties_LootSpawn">
+        <contents>Reward_GDCaseSmall</contents>
+      </li>
+    </comps>
+  </ThingDef>
+  
+  <ThingSetMakerDef>
+    <defName>Reward_GDCaseBig</defName>
+    <root Class="ThingSetMaker_RandomOption">
+      <options>
+        <li>
+          <weight>0.2</weight>
+          <thingSetMaker Class="ThingSetMaker_StackCount">
+            <fixedParams>
+              <filter>
+                <thingDefs>
+                  <li>BlackPersonaData</li>
+                </thingDefs>
+              </filter>
+              <countRange>1~2</countRange>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+        <li>
+          <weight>1</weight>
+          <thingSetMaker Class="ThingSetMaker_StackCount">
+            <fixedParams>
+              <filter>
+                <thingDefs>
+                  <li>PrecisionDeck</li>
+                </thingDefs>
+              </filter>
+              <countRange>50~80</countRange>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+		<li>
+          <weight>0.4</weight>
+          <thingSetMaker Class="ThingSetMaker_StackCount">
+            <fixedParams>
+              <filter>
+                <thingDefs>
+                  <li>SignalChip</li>
+				  <li>PowerfocusChip</li>
+				  <li>NanostructuringChip</li>
+                </thingDefs>
+              </filter>
+              <countRange>1~3</countRange>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+      </options>
+    </root>
+  </ThingSetMakerDef>
+  
+  <ThingSetMakerDef>
+    <defName>Reward_GDCaseSmall</defName>
+    <root Class="ThingSetMaker_RandomOption">
+      <options>
+        <li>
+          <weight>0.2</weight>
+          <thingSetMaker Class="ThingSetMaker_StackCount">
+            <fixedParams>
+              <filter>
+                <thingDefs>
+                  <li>BlackPersonaData</li>
+                </thingDefs>
+              </filter>
+              <countRange>1</countRange>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+        <li>
+          <weight>1</weight>
+          <thingSetMaker Class="ThingSetMaker_StackCount">
+            <fixedParams>
+              <filter>
+                <thingDefs>
+                  <li>PrecisionDeck</li>
+                </thingDefs>
+              </filter>
+              <countRange>20~40</countRange>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+		<li>
+          <weight>0.4</weight>
+          <thingSetMaker Class="ThingSetMaker_StackCount">
+            <fixedParams>
+              <filter>
+                <thingDefs>
+                  <li>SignalChip</li>
+				  <li>PowerfocusChip</li>
+                </thingDefs>
+              </filter>
+              <countRange>1</countRange>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+      </options>
+    </root>
+  </ThingSetMakerDef>
+  
+
+</Defs>

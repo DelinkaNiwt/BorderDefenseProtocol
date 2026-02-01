@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <GD.CerebrexAbilityWarning>机械主脑的灵能波动显著活跃了起来，小心！</GD.CerebrexAbilityWarning>
+  <GD.CerebrexLandReinforce>地面增援</GD.CerebrexLandReinforce>
+  <GD.CerebrexLandReinforceDesc>机械主脑利用远距离折越将一支规模为{1}的快速反应部队送到了战场上。注意保护{0}！</GD.CerebrexLandReinforceDesc>
+  <GD.CerebrexAirReinforce>空中增援</GD.CerebrexAirReinforce>
+  <GD.CerebrexAirReinforceDesc>机械主脑调遣了一支待机的机械伊蚊中队进入轨道！</GD.CerebrexAirReinforceDesc>
+  <GD.CerebrexRandomSkip>混乱折越</GD.CerebrexRandomSkip>
+  <GD.CerebrexRandomSkipDesc>机械主脑释放出的强灵能场打乱了所有人的站位！</GD.CerebrexRandomSkipDesc>
+  <GD.CerebrexVertigo>心灵眩晕</GD.CerebrexVertigo>
+  <GD.CerebrexVertigoDesc>机械主脑释放出的强灵能场干扰了神经电传导，使所有人陷入晕眩！</GD.CerebrexVertigoDesc>
+  
+  <GD.CerebrexDestroyedTip>然而，这台所谓“机械主脑”也不过是机械蜂巢的无数神经元之一，只是在完成远古时期的任务后依然机械地执行着底层代码。摧毁它虽然可以打乱这颗星球上机械族的部署，但并不足以完全消灭它们。\n\n全球的机械族袭击强度已降低至20%。</GD.CerebrexDestroyedTip>
+  
+  <GD.AnnihilatorComing>信号已经发出，目标将会在{0}后到达。</GD.AnnihilatorComing>
+  <GD.AnnihilatorArrival>探测到危险信号接近。小心。</GD.AnnihilatorArrival>
+  <GD.AnnihilatorBusy>{0}正在执行其它任务。</GD.AnnihilatorBusy>
+  <GD.AnnihilatorTileInvalid>{0}的位置无效。</GD.AnnihilatorTileInvalid>
+  <GD.MeaningLessTile>无意义的目标</GD.MeaningLessTile>
+  <GD.Target.Annihilator>集中攻击：</GD.Target.Annihilator>
+  <GD.Target.AnnihilatorDesc>将火力集中在{0}的特定身体部位上。某些部件被破坏会同时导致{0}的机能损伤，例如炮塔瘫痪或是速度放缓。\n\n右键进行选择。</GD.Target.AnnihilatorDesc>
+  <GD.Target.Any>任意部位</GD.Target.Any>
+  <GD.Target.LegLF>左前腿</GD.Target.LegLF>
+  <GD.Target.LegRF>右前腿</GD.Target.LegRF>
+  <GD.Target.LegLM>左中腿</GD.Target.LegLM>
+  <GD.Target.LegRM>右中腿</GD.Target.LegRM>
+  <GD.Target.LegLH>左后腿</GD.Target.LegLH>
+  <GD.Target.LegRH>右后腿</GD.Target.LegRH>
+  <GD.AnnihilatorReadyToJump>机械湮黾准备起跳</GD.AnnihilatorReadyToJump>
+  
+</LanguageData>

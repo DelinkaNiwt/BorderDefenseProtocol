@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	
+  <HediffDef>
+    <defName>GD_Terror</defName>
+    <label>Fear</label>
+    <description>The psychological reaction that occurs when facing a distorted and powerful enemy. When terror builds to a certain level, the person becomes overwhelmed and loses control. The sense of terror will gradually fade over time. \n\nThe sum of shooting level and melee level is greater than the enemy's terror level person will not feel fear due to facing that enemy.</description>
+    <hediffClass>Hediff_High</hediffClass>
+    <maxSeverity>1</maxSeverity>
+    <defaultLabelColor>(106, 90, 205)</defaultLabelColor>
+    <comps>
+	  <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-3</severityPerDay>
+      </li>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/>
+	  <li Class="GD3.HediffCompProperties_Terror"/>
+    </comps>
+    <stages>
+      <li>
+        <label>tension</label>
+      </li>
+	  <li>
+	    <minSeverity>0.33</minSeverity>
+		<label>panic</label>
+      </li>
+	  <li>
+	    <minSeverity>0.66</minSeverity>
+		<label>shudder</label>
+      </li>
+	  <li>
+	    <minSeverity>0.90</minSeverity>
+		<label>despair</label>
+      </li>
+    </stages>
+    <isBad>true</isBad>
+  </HediffDef>
+  
+</Defs>

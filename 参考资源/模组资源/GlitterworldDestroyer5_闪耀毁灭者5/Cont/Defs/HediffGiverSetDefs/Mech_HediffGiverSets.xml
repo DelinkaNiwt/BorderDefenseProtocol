@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <HediffGiverSetDef>
+    <defName>MechHypothermia</defName>
+    <hediffGivers>
+      <li Class="GD3.HediffGiver_MechHypothermia">
+        <hediff>Hypothermia</hediff>
+        <hediffInsectoid>HypothermicSlowdown</hediffInsectoid>
+      </li>
+    </hediffGivers>
+  </HediffGiverSetDef>
+
+  <HediffGiverSetDef>
+    <defName>CataphractCentipede_Boot</defName>
+    <hediffGivers>
+      <li Class="HediffGiver_Random">
+        <hediff>CataphractCentipede_Boot</hediff>
+        <mtbDays>0.00000001</mtbDays>
+      </li>
+    </hediffGivers>
+  </HediffGiverSetDef>
+  
+  <HediffGiverSetDef>
+    <defName>MechJump</defName>
+    <hediffGivers>
+      <li Class="HediffGiver_Random">
+        <hediff>MechJump</hediff>
+        <mtbDays>0.00000001</mtbDays>
+      </li>
+    </hediffGivers>
+  </HediffGiverSetDef>
+  
+  <HediffGiverSetDef>
+    <defName>Activation</defName>
+    <hediffGivers>
+      <li Class="HediffGiver_Random">
+        <hediff>Activation</hediff>
+        <mtbDays>0.00000001</mtbDays>
+      </li>
+    </hediffGivers>
+  </HediffGiverSetDef>
+  
+</Defs>

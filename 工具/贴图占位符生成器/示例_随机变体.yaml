@@ -1,0 +1,42 @@
+# 占位贴图示例 - 随机变体贴图（Graphic_Random）- 验证阶段用于测试随机变体加载
+textures:
+  - width: 128
+    height: 128
+    output_prefix: Plant_Shrub
+    color_scheme: green
+    suffix_type: random
+    suffix_names:
+      - _a
+      - _b
+      - _c
+    grid_size: 32
+    grid_width: 1
+
+  - width: 64
+    height: 64
+    output_prefix: Decoration_Flower
+    color_scheme: purple
+    suffix_type: random
+    suffix_names:
+      - _0
+      - _1
+      - _2
+      - _3
+    grid_size: 32
+    grid_width: 1
+
+  - width: 256
+    height: 256
+    output_prefix: Plant_Tree
+    color_scheme:
+      r: 100
+      g: 150
+      b: 80
+    suffix_type: random
+    suffix_names:
+      - _a
+      - _b
+      - _c
+      - _d
+    grid_size: 32
+    grid_width: 1

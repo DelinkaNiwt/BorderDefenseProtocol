@@ -1,0 +1,1114 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 小型冲击炮 -->
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>PlayerTurret_AutoMiniTurret</defName>
+    <label>mini-slugger turret</label>
+    <description>A self-powered defense turret mounted with a weak but long-ranged slug-thrower. May explode when damaged.</description>
+    <thingClass>Building_TurretGun</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Things/Building/Mech/TurretMechMini_Base</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+      <drawOffset>(0,0,-0.11)</drawOffset>
+      <damageData>
+        <rect>(0.2,0.2,0.6,0.6)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(0.27,0.25,0.27)</volume>
+        <offset>(0,0,0)</offset>
+      </shadowData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <stealable>false</stealable>
+    <rotatable>false</rotatable>
+	<thingCategories>
+      <li>BuildingsSecurity</li>
+    </thingCategories>
+    <statBases>
+      <MaxHitPoints>400</MaxHitPoints>
+      <Flammability>0</Flammability>
+	  <WorkToBuild>1800</WorkToBuild>
+      <Mass>10</Mass>
+      <ShootingAccuracyTurret>0.96</ShootingAccuracyTurret>
+      <Beauty>-20</Beauty>
+    </statBases>
+    <damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <tickerType>Normal</tickerType>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>1.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.0</chanceNeverExplodeFromDamage>
+      </li>
+	  <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>200</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+	  <li Class="CompProperties_Stunnable">
+        <affectedDamageDefs>
+          <li>EMP</li>
+        </affectedDamageDefs>
+      </li>
+	  <li Class="CompProperties_AmbientSound">
+        <sound>MechTurretSmall_Call</sound>
+      </li>
+    </comps>
+    <killedLeavings>
+      <ChunkSlagSteel>1</ChunkSlagSteel>
+    </killedLeavings>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <fillPercent>0.4</fillPercent>
+    <hasTooltip>true</hasTooltip>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <building>
+      <combatPower>45</combatPower>
+      <ai_combatDangerous>true</ai_combatDangerous>
+      <turretGunDef>Gun_MiniTurretMech</turretGunDef>
+      <turretBurstCooldownTime>2.5</turretBurstCooldownTime>
+    </building>
+	<costList>
+      <Steel>90</Steel>
+	  <Plasteel>20</Plasteel>
+      <ComponentIndustrial>3</ComponentIndustrial>
+    </costList>
+    <designationCategory>Security</designationCategory>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+	<placeWorkers>
+      <li>PlaceWorker_TurretTop</li>
+      <li>PlaceWorker_ShowTurretRadius</li>
+    </placeWorkers>
+    <designationHotKey>Misc2</designationHotKey>
+    <researchPrerequisites>
+      <li>GD3_MiniTurret</li>
+    </researchPrerequisites>
+	<minifiedDef>MinifiedThing</minifiedDef>
+	<uiIconPath>Buildings/AutoMiniTurret_icon</uiIconPath>
+	<uiIconScale>0.55</uiIconScale>
+  </ThingDef>
+  
+  <!-- 电荷冲击炮台 -->
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>PlayerTurret_AutoChargeBlaster</defName>
+    <label>auto charge turret</label>
+    <description>A self-powered turret mounted with a charge blaster.</description>
+    <thingClass>Building_TurretGun</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Things/Building/Mech/TurretMechLarge_Base</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2, 2)</drawSize>
+      <drawOffset>(0,0,-0.16)</drawOffset>
+      <damageData>
+        <rect>(0.3,0.3,1.4,1.4)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(1.5,0.35,1.4)</volume>
+        <offset>(0,0,-0.05)</offset>
+      </shadowData>
+    </graphicData>
+    <receivesSignals>true</receivesSignals>
+    <altitudeLayer>Building</altitudeLayer>
+    <stealable>false</stealable>
+    <rotatable>false</rotatable>
+    <size>(2,2)</size>
+    <statBases>
+      <MaxHitPoints>720</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <Mass>100</Mass>
+      <ShootingAccuracyTurret>0.95</ShootingAccuracyTurret>
+      <Beauty>-20</Beauty>
+	  <WorkToBuild>5400</WorkToBuild>
+    </statBases>
+    <damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <tickerType>Normal</tickerType>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>5.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.0</chanceNeverExplodeFromDamage>
+      </li>
+	  <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>1000</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+	  <li Class="CompProperties_Stunnable">
+        <affectedDamageDefs>
+          <li>EMP</li>
+        </affectedDamageDefs>
+      </li>
+	  <li Class="CompProperties_AmbientSound">
+        <sound>MechTurretBig_Call</sound>
+      </li>
+    </comps>
+    <killedLeavings>
+      <ChunkSlagSteel>1</ChunkSlagSteel>
+    </killedLeavings>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <fillPercent>0.5</fillPercent>
+    <hasTooltip>true</hasTooltip>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <building>
+      <combatPower>150</combatPower>
+      <ai_combatDangerous>true</ai_combatDangerous>
+      <turretGunDef>Gun_ChargeBlasterHeavyTurret</turretGunDef>
+      <turretBurstCooldownTime>0.3</turretBurstCooldownTime>
+      <turretTopDrawSize>1.75</turretTopDrawSize>
+      <turretTopOffset>(0, 0.05)</turretTopOffset>
+    </building>
+	<costList>
+      <Steel>300</Steel>
+	  <Plasteel>50</Plasteel>
+	  <PrecisionDeck>45</PrecisionDeck>
+      <ComponentIndustrial>5</ComponentIndustrial>
+	  <ComponentSpacer>2</ComponentSpacer>
+    </costList>
+    <designationCategory>Security</designationCategory>
+    <constructionSkillPrerequisite>12</constructionSkillPrerequisite>
+	<placeWorkers>
+      <li>PlaceWorker_TurretTop</li>
+      <li>PlaceWorker_ShowTurretRadius</li>
+    </placeWorkers>
+    <designationHotKey>Misc2</designationHotKey>
+    <researchPrerequisites>
+      <li>GD3_ChargeBlasterTurret</li>
+    </researchPrerequisites>
+	<uiIconPath>Buildings/ChargeTurret_icon</uiIconPath>
+	<uiIconScale>0.95</uiIconScale>
+  </ThingDef>
+  
+  <!-- 地狱火加农炮台 -->
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>PlayerTurret_AutoInferno</defName>
+    <label>auto inferno turret</label>
+    <description>A self-powered turret mounted with an inferno cannon. It cannot sense targets at very short ranges.</description>
+    <thingClass>Building_TurretGun</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Things/Building/Mech/TurretMechLarge_Base</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(2, 2)</drawSize>
+      <drawOffset>(0,0,-0.16)</drawOffset>
+      <damageData>
+        <rect>(0.3,0.3,1.4,1.4)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(1.5,0.35,1.4)</volume>
+        <offset>(0,0,-0.05)</offset>
+      </shadowData>
+    </graphicData>
+    <receivesSignals>true</receivesSignals>
+    <altitudeLayer>Building</altitudeLayer>
+    <stealable>false</stealable>
+    <rotatable>false</rotatable>
+    <size>(2,2)</size>
+    <statBases>
+      <MaxHitPoints>720</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <Mass>100</Mass>
+      <ShootingAccuracyTurret>0.96</ShootingAccuracyTurret>
+      <Beauty>-20</Beauty>
+	  <WorkToBuild>5400</WorkToBuild>
+    </statBases>
+    <damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <tickerType>Normal</tickerType>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>5.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.5</chanceNeverExplodeFromDamage>
+      </li>
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>1000</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+	  <li Class="CompProperties_Stunnable">
+        <affectedDamageDefs>
+          <li>EMP</li>
+        </affectedDamageDefs>
+      </li>
+	  <li Class="CompProperties_AmbientSound">
+        <sound>MechTurretBig_Call</sound>
+      </li>
+    </comps>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <fillPercent>0.5</fillPercent>
+    <hasTooltip>true</hasTooltip>
+    <killedLeavings>
+      <ChunkSlagSteel>1</ChunkSlagSteel>
+    </killedLeavings>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <building>
+      <combatPower>190</combatPower>
+      <ai_combatDangerous>true</ai_combatDangerous>
+      <turretGunDef>Gun_InfernoCannonTurret</turretGunDef>
+      <turretBurstCooldownTime>17.0</turretBurstCooldownTime>
+      <turretTopDrawSize>1.75</turretTopDrawSize>
+      <turretTopOffset>(0, 0.05)</turretTopOffset>
+      <minMechClusterPoints>570</minMechClusterPoints>
+    </building>
+	<costList>
+      <Steel>300</Steel>
+	  <Plasteel>50</Plasteel>
+	  <PrecisionDeck>45</PrecisionDeck>
+      <ComponentIndustrial>5</ComponentIndustrial>
+	  <ComponentSpacer>2</ComponentSpacer>
+    </costList>
+    <designationCategory>Security</designationCategory>
+    <constructionSkillPrerequisite>12</constructionSkillPrerequisite>
+	<placeWorkers>
+      <li>PlaceWorker_TurretTop</li>
+      <li>PlaceWorker_ShowTurretRadius</li>
+    </placeWorkers>
+    <designationHotKey>Misc2</designationHotKey>
+    <researchPrerequisites>
+      <li>GD3_InfernoTurret</li>
+    </researchPrerequisites>
+	<uiIconPath>Buildings/InfernoTurret_icon</uiIconPath>
+	<uiIconScale>0.95</uiIconScale>
+  </ThingDef>
+  
+  <!-- EMP磁轨炮 -->
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>PlayerTurret_EMPArtillery</defName>
+    <label>heavy EMP railgun</label>
+    <description>A self-powered turret. Fire an EMP shell with a blast powerful enough to stun the most powerful mechanoid body for 40 seconds.\n\nMechanoids do not have blueprints for this turret, it was designed and built entirely by your clever colonists.</description>
+    <thingClass>Building_TurretGun</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Buildings/EMPArtillery_base</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(3, 3)</drawSize>
+      <drawOffset>(0,0,-0.24)</drawOffset>
+      <damageData>
+        <rect>(0.3,0.3,1.4,1.4)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(1.5,0.35,1.4)</volume>
+        <offset>(0,0,-0.05)</offset>
+      </shadowData>
+    </graphicData>
+	<uiIconPath>Buildings/EMPArtillery_icon</uiIconPath>
+    <receivesSignals>true</receivesSignals>
+    <altitudeLayer>Building</altitudeLayer>
+    <stealable>false</stealable>
+    <rotatable>false</rotatable>
+    <size>(3,3)</size>
+    <statBases>
+      <MaxHitPoints>1280</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <Mass>100</Mass>
+      <ShootingAccuracyTurret>0.96</ShootingAccuracyTurret>
+      <Beauty>-20</Beauty>
+	  <WorkToBuild>12400</WorkToBuild>
+    </statBases>
+    <damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <tickerType>Normal</tickerType>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>5.9</explosiveRadius>
+        <explosiveDamageType>EMP</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.5</chanceNeverExplodeFromDamage>
+      </li>
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>1000</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+	  <li Class="CompProperties_Refuelable">
+        <fuelLabel>Shoot until you run out of shell</fuelLabel>
+        <fuelGizmoLabel>Shell capacity</fuelGizmoLabel>
+        <fuelFilter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </fuelFilter>
+        <fuelCapacity>2</fuelCapacity>
+        <initialFuelPercent>1</initialFuelPercent>
+        <autoRefuelPercent>1</autoRefuelPercent>
+        <showFuelGizmo>true</showFuelGizmo>
+        <minimumFueledThreshold>1</minimumFueledThreshold>
+        <fuelMultiplier>0.025</fuelMultiplier>
+        <factorByDifficulty>false</factorByDifficulty>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <outOfFuelMessage>Can't shoot: need to fill plasteel</outOfFuelMessage>
+        <fuelIconPath>UI/Overlays/Barrel</fuelIconPath>
+      </li>
+	  <li Class="CompProperties_Stunnable">
+        <affectedDamageDefs>
+          <li>EMP</li>
+        </affectedDamageDefs>
+      </li>
+	  <li Class="CompProperties_AmbientSound">
+        <sound>MechTurretBig_Call</sound>
+      </li>
+    </comps>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <fillPercent>0.5</fillPercent>
+    <hasTooltip>true</hasTooltip>
+    <killedLeavings>
+      <ChunkSlagSteel>1</ChunkSlagSteel>
+    </killedLeavings>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <building>
+      <combatPower>190</combatPower>
+      <ai_combatDangerous>true</ai_combatDangerous>
+      <turretGunDef>Gun_EMPArtilleryTurret</turretGunDef>
+	  <turretTopDrawSize>2.5</turretTopDrawSize>
+	  <turretBurstWarmupTime>4.0</turretBurstWarmupTime>
+      <turretBurstCooldownTime>17.0</turretBurstCooldownTime>
+      <turretTopOffset>(0, 0.05)</turretTopOffset>
+    </building>
+	<uiIconScale>0.95</uiIconScale>
+	<costList>
+      <Steel>300</Steel>
+	  <Plasteel>200</Plasteel>
+	  <PrecisionDeck>80</PrecisionDeck>
+	  <ComponentSpacer>4</ComponentSpacer>
+    </costList>
+    <designationCategory>Security</designationCategory>
+    <constructionSkillPrerequisite>12</constructionSkillPrerequisite>
+	<placeWorkers>
+      <li>PlaceWorker_TurretTop</li>
+      <li>PlaceWorker_ShowTurretRadius</li>
+    </placeWorkers>
+    <designationHotKey>Misc2</designationHotKey>
+    <researchPrerequisites>
+      <li>GD3_EMPTurret</li>
+    </researchPrerequisites>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>Gun_EMPArtilleryTurret</defName>
+    <label>Pulse Machine Gun</label>
+    <description>A powerful magnetic rail gun that fires EMP rounds.</description>
+    <graphicData>
+      <texPath>Buildings/EMPArtillery_Top</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(3,3)</drawSize>
+    </graphicData>
+    <statBases>
+      <AccuracyTouch>0.66</AccuracyTouch>
+      <AccuracyShort>0.71</AccuracyShort>
+      <AccuracyMedium>0.83</AccuracyMedium>
+      <AccuracyLong>0.72</AccuracyLong>
+      <RangedWeapon_Cooldown>15.0</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>75</Mass>
+      <Flammability>0</Flammability>
+	  <WorkToBuild>12400</WorkToBuild>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_EMPArtillery</defaultProjectile>
+		<minRange>12</minRange>
+        <range>54</range>
+		<requireLineOfSight>false</requireLineOfSight>
+        <targetParams>
+          <canTargetLocations>true</canTargetLocations>
+        </targetParams>
+        <burstShotCount>1</burstShotCount>
+        <soundCast>Shot_SniperRifle</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>18</muzzleFlashScale>
+        <consumeFuelPerShot>1</consumeFuelPerShot>
+		<forcedMissRadius>2.6</forcedMissRadius>
+        <ai_AvoidFriendlyFireRadius>1</ai_AvoidFriendlyFireRadius>
+        <warmupTime>2.25</warmupTime>
+      </li>
+    </verbs>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_EMPArtillery</defName>
+    <label>inferno cannon shell</label>
+    <graphicData>
+      <texPath>Buildings/EMPArtillery_shell</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+    </graphicData>
+    <thingClass>Projectile_Explosive</thingClass>
+    <projectile>
+      <damageDef>EMP</damageDef>
+	  <damageAmountBase>200</damageAmountBase>
+      <speed>95</speed>
+      <explosionRadius>15.2</explosionRadius >
+	  <flyOverhead>true</flyOverhead>
+      <ai_IsIncendiary>true</ai_IsIncendiary>
+    </projectile>
+  </ThingDef>
+  
+  <!-- 自动迫击炮 -->
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>PlayerTurret_AutoMortar</defName>
+    <label>auto mortar</label>
+    <description>A self-powered, self-loading, automatic mortar. It can hit targets at any distance, over walls, but is quite inaccurate.</description>
+    <thingClass>Building_TurretGun</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Things/Building/Mech/TurretMechLarge_Base</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(3,3)</drawSize>
+      <drawOffset>(0,0,-0.16)</drawOffset>
+      <damageData>
+        <rect>(0.3,0.3,1.4,1.4)</rect>
+      </damageData>
+      <shadowData>
+        <offset>(-0.13,-0.87,-0.1)</offset>
+        <volume>(0.5,0.4,1.05)</volume>
+      </shadowData>
+    </graphicData>
+    <receivesSignals>true</receivesSignals>
+    <altitudeLayer>Building</altitudeLayer>
+    <stealable>false</stealable>
+    <size>(3,3)</size>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <fillPercent>0.4</fillPercent>
+    <tickerType>Normal</tickerType>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <comps>
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>4.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+      </li>
+	  <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>1000</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+	  <li Class="CompProperties_Stunnable">
+        <affectedDamageDefs>
+          <li>EMP</li>
+        </affectedDamageDefs>
+      </li>
+	  <li Class="CompProperties_AmbientSound">
+        <sound>MechTurretBig_Call</sound>
+      </li>
+    </comps>
+    <statBases>
+      <MaxHitPoints>480</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <Mass>30</Mass>
+      <ShootingAccuracyTurret>0.9</ShootingAccuracyTurret>
+      <Beauty>-20</Beauty>
+	  <WorkToBuild>7200</WorkToBuild>
+    </statBases>
+    <damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <building>
+      <combatPower>220</combatPower>
+      <turretGunDef>Artillery_PlayerAutoMortar</turretGunDef>
+	  <turretTopDrawSize>3</turretTopDrawSize>
+      <turretBurstWarmupTime>4.0</turretBurstWarmupTime>
+      <turretBurstCooldownTime>80.0</turretBurstCooldownTime>
+    </building>
+	<costList>
+      <Steel>300</Steel>
+	  <Plasteel>150</Plasteel>
+	  <PrecisionDeck>100</PrecisionDeck>
+      <ComponentIndustrial>10</ComponentIndustrial>
+	  <ComponentSpacer>1</ComponentSpacer>
+    </costList>
+    <designationCategory>Security</designationCategory>
+    <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
+	<placeWorkers>
+      <li>PlaceWorker_TurretTop</li>
+    </placeWorkers>
+    <designationHotKey>Misc2</designationHotKey>
+    <researchPrerequisites>
+      <li>GD3_Mortar</li>
+	  <li>GD3_GiantCluster_Medium</li>
+    </researchPrerequisites>
+	<uiIconPath>Buildings/AutoMortar_icon</uiIconPath>
+	<uiIconScale>0.95</uiIconScale>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseArtilleryWeapon">
+    <defName>Artillery_PlayerAutoMortar</defName>
+    <label>auto-mortar</label>
+    <graphicData>
+      <texPath>Things/Building/Mech/TurretMechMortar_Top</texPath>
+    </graphicData>
+    <uiIconScale>1.25</uiIconScale>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>Bullet_Shell_PlayerAntigrainWarhead</defaultProjectile>
+        <forcedMissRadius>10</forcedMissRadius>
+        <ai_AvoidFriendlyFireRadius>3</ai_AvoidFriendlyFireRadius>
+        <warmupTime>4</warmupTime>
+        <minRange>29.9</minRange>
+        <range>500</range>
+        <burstShotCount>1</burstShotCount>
+        <soundCast>Mortar_LaunchA</soundCast>
+        <soundCastTail>GunTail_Light</soundCastTail>
+        <muzzleFlashScale>16</muzzleFlashScale>
+        <requireLineOfSight>false</requireLineOfSight>
+        <targetParams>
+          <canTargetLocations>true</canTargetLocations>
+        </targetParams>
+      </li>
+    </verbs>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_Shell_PlayerAntigrainWarhead</defName>
+    <label>antigrain warhead</label>
+    <graphicData>
+      <texPath>Things/Projectile/ShellAntigrainWarhead</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+    </graphicData>
+    <thingClass>Projectile_Explosive</thingClass>
+    <projectile>
+      <damageDef>BombSuper</damageDef>
+      <speed>41</speed>
+      <explosionRadius>8.6</explosionRadius>
+      <explosionChanceToStartFire>0.22</explosionChanceToStartFire>
+      <explosionDamageFalloff>true</explosionDamageFalloff>
+      <explosionEffect>GiantExplosion</explosionEffect>
+      <flyOverhead>true</flyOverhead>
+      <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <soundExplode>Explosion_GiantBomb</soundExplode>
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+    </projectile>
+  </ThingDef>
+  
+  <!-- 登陆迫击炮 -->
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>PlayerTurret_LandingAutoMortar</defName>
+    <label>auto mortar 2</label>
+    <description>A self-powered, fast-loading automatic mortar. Less powerful.</description>
+    <thingClass>Building_TurretGun</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Buildings/MortarMechLarge_Base</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2,2)</drawSize>
+      <drawOffset>(0,0,-0.16)</drawOffset>
+      <damageData>
+        <rect>(0.3,0.3,1.4,1.4)</rect>
+      </damageData>
+      <shadowData>
+        <offset>(-0.13,-0.87,-0.1)</offset>
+        <volume>(0.5,0.4,1.05)</volume>
+      </shadowData>
+    </graphicData>
+    <receivesSignals>true</receivesSignals>
+    <altitudeLayer>Building</altitudeLayer>
+    <stealable>false</stealable>
+    <size>(2,2)</size>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <fillPercent>0.4</fillPercent>
+    <tickerType>Normal</tickerType>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>4.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+      </li>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>400</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+	  <li Class="CompProperties_Stunnable">
+        <affectedDamageDefs>
+          <li>EMP</li>
+        </affectedDamageDefs>
+      </li>
+	  <li Class="CompProperties_AmbientSound">
+        <sound>MechTurretBig_Call</sound>
+      </li>
+    </comps>
+    <statBases>
+      <MaxHitPoints>360</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <Mass>30</Mass>
+      <ShootingAccuracyTurret>0.9</ShootingAccuracyTurret>
+      <Beauty>-20</Beauty>
+	  <WorkToBuild>5400</WorkToBuild>
+    </statBases>
+    <damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <building>
+      <combatPower>220</combatPower>
+      <turretGunDef>Artillery_LandingAutoMortar</turretGunDef>
+      <turretBurstWarmupTime>2.0</turretBurstWarmupTime>
+      <turretBurstCooldownTime>6.0</turretBurstCooldownTime>
+      <turretInitialCooldownTime>10.0</turretInitialCooldownTime>
+    </building>
+	<costList>
+      <Steel>100</Steel>
+	  <Plasteel>100</Plasteel>
+	  <PrecisionDeck>20</PrecisionDeck>
+      <ComponentIndustrial>12</ComponentIndustrial>
+    </costList>
+    <designationCategory>Security</designationCategory>
+    <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
+	<placeWorkers>
+      <li>PlaceWorker_TurretTop</li>
+    </placeWorkers>
+    <designationHotKey>Misc2</designationHotKey>
+    <researchPrerequisites>
+      <li>GD3_Mortar</li>
+    </researchPrerequisites>
+	<uiIconPath>Buildings/LandingAutoMortar_icon</uiIconPath>
+	<uiIconScale>0.95</uiIconScale>
+  </ThingDef>
+  
+  <!-- 电荷冲击炮台 -->
+
+  <ThingDef ParentName="GiantTurretBase">
+    <defName>PlayerTurret_GiantChargeBlaster</defName>
+    <label>giant charge turret</label>
+    <description>A steel behemoth, formed by complex craftsmanship. The power is slightly reduced to ensure safety, and each fire consumes a certain amount of power storage. \n\nThis turret will fire charge bullets with a caliber close to that of a cannonball, tearing apart each offender's body. It will switch to a shotgun-like firing mode when it is approached by the enemy.\n\n*Important: The turret cannot fire when your circuit network storage is too low or there is no storage device.</description>
+    <graphicData>
+      <texPath>Buildings/GiantMechTurret/GiantMechTurretBase_Charge</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(5.2, 5.2)</drawSize>
+      <drawOffset>(0,0,-0.10)</drawOffset>
+      <damageData>
+        <rect>(0.3,0.3,1.4,1.4)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(1.5,0.35,1.4)</volume>
+        <offset>(0,0,-0.05)</offset>
+      </shadowData>
+    </graphicData>
+    <size>(4,4)</size>
+    <statBases>
+      <MaxHitPoints>2480</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <Mass>300</Mass>
+      <ShootingAccuracyTurret>0.98</ShootingAccuracyTurret>
+      <Beauty>-20</Beauty>
+	  <WorkToBuild>32400</WorkToBuild>
+    </statBases>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>5.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.0</chanceNeverExplodeFromDamage>
+      </li>
+      <li Class="CompProperties_CanBeDormant" />
+      <li Class="CompProperties_WakeUpDormant">
+        <wakeUpSound>MechanoidsWakeUp</wakeUpSound>
+      </li>
+	  <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>10000</basePowerConsumption>
+		<transmitsPower>true</transmitsPower>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+	  <li Class="CompProperties_Stunnable">
+        <affectedDamageDefs>
+          <li>EMP</li>
+        </affectedDamageDefs>
+      </li>
+	  <li Class="CompProperties_AmbientSound">
+        <sound>MechTurretBig_Call</sound>
+      </li>
+    </comps>
+    <building>
+      <combatPower>1250</combatPower>
+      <ai_combatDangerous>true</ai_combatDangerous>
+      <turretGunDef>Gun_GiantChargeBlaster</turretGunDef>
+	  <turretTopDrawSize>4.6</turretTopDrawSize>
+	  <turretBurstWarmupTime>0.2</turretBurstWarmupTime>
+      <turretBurstCooldownTime>2.5</turretBurstCooldownTime>
+      <turretTopOffset>(0, 0.05)</turretTopOffset>
+    </building>
+	<placeWorkers>
+      <li>PlaceWorker_TurretTop</li>
+    </placeWorkers>
+	<costList>
+      <Steel>1250</Steel>
+	  <Plasteel>750</Plasteel>
+	  <PrecisionDeck>400</PrecisionDeck>
+      <ComponentIndustrial>40</ComponentIndustrial>
+	  <ComponentSpacer>8</ComponentSpacer>
+    </costList>
+	<designationCategory>Security</designationCategory>
+    <constructionSkillPrerequisite>14</constructionSkillPrerequisite>
+	<uiIconPath>Buildings/GiantMechTurret/GiantMechTurretBase_Charge_UI</uiIconPath>
+    <uiIconScale>1.05</uiIconScale>
+    <researchPrerequisites>
+      <li>GD3_ChargeBlasterTurret</li>
+	  <li>GD3_GiantCluster_Medium</li>
+    </researchPrerequisites>
+  </ThingDef>
+  
+  <!-- 高射机枪炮台 -->
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>PlayerTurret_AntiAirMachineGun</defName>
+    <label>anti-air machinegun turret</label>
+    <description>A modified automatic quadruple machine gun turret, which can only fire at air units, can cause considerable effective damage to the enemy air force. It can also be used to intercept any high-angle artillery shells, but there are requirements for the firing Angle.</description>
+    <thingClass>GD3.Building_AntiAirTurret</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Buildings/AntiAirTurret_Base</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(3, 3)</drawSize>
+      <drawOffset>(0,0,-0.16)</drawOffset>
+      <damageData>
+        <rect>(0.3,0.3,1.4,1.4)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(1.5,0.35,1.4)</volume>
+        <offset>(0,0,-0.05)</offset>
+      </shadowData>
+    </graphicData>
+    <receivesSignals>true</receivesSignals>
+    <altitudeLayer>Building</altitudeLayer>
+    <stealable>false</stealable>
+    <rotatable>false</rotatable>
+    <size>(2,2)</size>
+    <statBases>
+      <MaxHitPoints>520</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <Mass>60</Mass>
+      <ShootingAccuracyTurret>0.95</ShootingAccuracyTurret>
+      <Beauty>-10</Beauty>
+	  <WorkToBuild>5400</WorkToBuild>
+    </statBases>
+    <damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <tickerType>Normal</tickerType>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>2.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.0</chanceNeverExplodeFromDamage>
+      </li>
+	  <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>250</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+	  <li Class="CompProperties_Stunnable">
+        <affectedDamageDefs>
+          <li>EMP</li>
+        </affectedDamageDefs>
+      </li>
+    </comps>
+    <killedLeavings>
+      <ChunkSlagSteel>1</ChunkSlagSteel>
+    </killedLeavings>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <fillPercent>0.5</fillPercent>
+    <hasTooltip>true</hasTooltip>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <building>
+      <combatPower>150</combatPower>
+      <ai_combatDangerous>true</ai_combatDangerous>
+      <turretGunDef>Gun_GDAntiAirMachineGun</turretGunDef>
+      <turretBurstCooldownTime>2.8</turretBurstCooldownTime>
+      <turretTopDrawSize>3</turretTopDrawSize>
+      <turretTopOffset>(0, -0.05)</turretTopOffset>
+    </building>
+	<costList>
+      <Steel>200</Steel>
+	  <PrecisionDeck>15</PrecisionDeck>
+      <ComponentIndustrial>10</ComponentIndustrial>
+    </costList>
+    <designationCategory>Security</designationCategory>
+    <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+	<placeWorkers>
+      <li>PlaceWorker_TurretTop</li>
+      <li>GD3.PlaceWorker_ShowAATurretRadius</li>
+    </placeWorkers>
+    <designationHotKey>Misc2</designationHotKey>
+    <researchPrerequisites>
+      <li>GD3_MiniTurret</li>
+	  <li>GunTurrets</li>
+    </researchPrerequisites>
+	<uiIconPath>Buildings/AntiAirMachineGunTurret_UI</uiIconPath>
+	<uiIconScale>1.2</uiIconScale>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>Gun_GDAntiAirMachineGun</defName>
+    <label>anti-air machinegun</label>
+    <description>A machine gun that can only fire at units in the air.</description>
+    <graphicData>
+      <texPath>Buildings/AntiAirMachineGun</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <uiIconScale>2</uiIconScale>
+    <statBases>
+      <AccuracyTouch>1.00</AccuracyTouch>
+      <AccuracyShort>0.95</AccuracyShort>
+      <AccuracyMedium>0.90</AccuracyMedium>
+      <AccuracyLong>0.88</AccuracyLong>
+      <RangedWeapon_Cooldown>2.8</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>5</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>GD3.Verb_AntiAirShoot</verbClass>
+        <defaultProjectile>Bullet_AntiAirMachineGun</defaultProjectile>
+		<minRange>3.9</minRange>
+        <range>189.9</range>
+		<warmupTime>0.25</warmupTime>
+        <soundCast>GDAntiAirMachineGun</soundCast>
+        <soundCastTail>GunTail_Light</soundCastTail>
+		<requireLineOfSight>false</requireLineOfSight>
+        <muzzleFlashScale>9</muzzleFlashScale>
+		<ticksBetweenBurstShots>4</ticksBetweenBurstShots>
+        <burstShotCount>16</burstShotCount>
+      </li>
+    </verbs>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_AntiAirMachineGun</defName>
+    <label>bullets</label>
+	<thingClass>GD3.ProjectileAntiAir</thingClass>
+    <graphicData>
+      <texPath>Buildings/Bullet_AntiAirMachineGun</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>(2, 2)</drawSize>
+    </graphicData>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+	  <flyOverhead>true</flyOverhead>
+      <damageAmountBase>18</damageAmountBase>
+      <speed>125</speed>
+    </projectile>
+	<modExtensions>
+	  <li Class="GD3.IsAntiAirProj" />
+    </modExtensions>
+  </ThingDef>
+  
+  <!-- 防空火箭巢炮台 -->
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>PlayerTurret_AntiAirRocketPod</defName>
+    <label>anti-air rocket pod turret</label>
+    <description>An automatic quadruple rocket tower can only fire at air units, has a relatively high hit rate and a high efficiency in killing enemy groups, but is relatively weak against scattered enemies. \n\nIt can also be used to intercept any high-angle artillery shells.</description>
+    <thingClass>GD3.Building_AntiAirTurret</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Buildings/AntiAirTurret_Base</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(3, 3)</drawSize>
+      <drawOffset>(0,0,-0.16)</drawOffset>
+      <damageData>
+        <rect>(0.3,0.3,1.4,1.4)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(1.5,0.35,1.4)</volume>
+        <offset>(0,0,-0.05)</offset>
+      </shadowData>
+    </graphicData>
+    <receivesSignals>true</receivesSignals>
+    <altitudeLayer>Building</altitudeLayer>
+    <stealable>false</stealable>
+    <rotatable>false</rotatable>
+    <size>(2,2)</size>
+    <statBases>
+      <MaxHitPoints>720</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <Mass>60</Mass>
+      <ShootingAccuracyTurret>0.95</ShootingAccuracyTurret>
+      <Beauty>-10</Beauty>
+	  <WorkToBuild>12400</WorkToBuild>
+    </statBases>
+    <damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <tickerType>Normal</tickerType>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>3.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.0</chanceNeverExplodeFromDamage>
+      </li>
+	  <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>450</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+	  <li Class="CompProperties_Stunnable">
+        <affectedDamageDefs>
+          <li>EMP</li>
+        </affectedDamageDefs>
+      </li>
+    </comps>
+    <killedLeavings>
+      <ChunkSlagSteel>2</ChunkSlagSteel>
+    </killedLeavings>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <fillPercent>0.5</fillPercent>
+    <hasTooltip>true</hasTooltip>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <building>
+      <combatPower>200</combatPower>
+      <ai_combatDangerous>true</ai_combatDangerous>
+      <turretGunDef>Gun_GDAntiAirRocketPod</turretGunDef>
+	  <turretBurstWarmupTime>1.25</turretBurstWarmupTime>
+      <turretBurstCooldownTime>7.5</turretBurstCooldownTime>
+      <turretTopDrawSize>3</turretTopDrawSize>
+      <turretTopOffset>(0, -0.05)</turretTopOffset>
+    </building>
+	<costList>
+      <Steel>200</Steel>
+	  <Plasteel>100</Plasteel>
+	  <PrecisionDeck>45</PrecisionDeck>
+      <ComponentIndustrial>15</ComponentIndustrial>
+    </costList>
+    <designationCategory>Security</designationCategory>
+    <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+	<placeWorkers>
+      <li>PlaceWorker_TurretTop</li>
+      <li>GD3.PlaceWorker_ShowAATurretRadius</li>
+    </placeWorkers>
+    <designationHotKey>Misc2</designationHotKey>
+    <researchPrerequisites>
+      <li>GD3_MiniTurret</li>
+	  <li>HeavyTurrets</li>
+    </researchPrerequisites>
+	<uiIconPath>Buildings/AntiAirRocketPodTurret_UI</uiIconPath>
+	<uiIconScale>1.2</uiIconScale>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>Gun_GDAntiAirRocketPod</defName>
+    <label>anti-air rocket pod</label>
+    <description>A rocket pod that can only be launched at units in the air.</description>
+    <graphicData>
+      <texPath>Buildings/AntiAirRocketPod</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <uiIconScale>2</uiIconScale>
+    <statBases>
+      <AccuracyTouch>1.00</AccuracyTouch>
+      <AccuracyShort>0.95</AccuracyShort>
+      <AccuracyMedium>0.90</AccuracyMedium>
+      <AccuracyLong>0.88</AccuracyLong>
+      <RangedWeapon_Cooldown>7.5</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>15</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>GD3.Verb_AntiAirShoot</verbClass>
+        <defaultProjectile>Bullet_AntiAirRocketPod</defaultProjectile>
+		<minRange>3.9</minRange>
+        <range>189.9</range>
+		<warmupTime>0.75</warmupTime>
+        <soundCast>GDAntiAirRocketPod</soundCast>
+        <soundCastTail>GunTail_Light</soundCastTail>
+		<requireLineOfSight>false</requireLineOfSight>
+        <muzzleFlashScale>18</muzzleFlashScale>
+		<ticksBetweenBurstShots>20</ticksBetweenBurstShots>
+        <burstShotCount>4</burstShotCount>
+      </li>
+    </verbs>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_AntiAirRocketPod</defName>
+    <label>rocket</label>
+	<thingClass>GD3.ProjectileAntiAir</thingClass>
+    <graphicData>
+      <texPath>Things/Projectile/Rocket_Big</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>(1, 1)</drawSize>
+    </graphicData>
+    <projectile>
+      <damageDef>GDBombAntiAir</damageDef>
+	  <damageAmountBase>65</damageAmountBase>
+      <armorPenetrationBase>0.65</armorPenetrationBase>
+      <!-- Use default damage from explosion def -->
+      <speed>85</speed>
+      <explosionRadius>3.9</explosionRadius >
+	  <flyOverhead>true</flyOverhead>
+    </projectile>
+	<modExtensions>
+	  <li Class="GD3.IsAntiAirProj">
+		<guided>true</guided>
+		<accelerate>true</accelerate>
+	  </li>
+    </modExtensions>
+  </ThingDef>
+
+</Defs>

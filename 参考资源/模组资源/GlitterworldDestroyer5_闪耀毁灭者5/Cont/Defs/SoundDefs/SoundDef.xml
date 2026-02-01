@@ -1,0 +1,794 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<SoundDef>
+		<defName>CataphractCentipede_FY</defName>
+		<eventNames />
+		<context>MapOnly</context>
+		<maxSimultaneous>1</maxSimultaneous>
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>CataphractCentipede_FY</clipPath>
+					</li>
+				</grains>
+				<pitchRange>
+					<min>0.9152174</min>
+					<max>1.042391</max>
+				</pitchRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+	
+	<!-- Giant Cluster -->
+	<SoundDef>
+		<defName>GiantChargeFire</defName>
+		<eventNames />
+		<context>MapOnly</context>
+		<maxSimultaneous>4</maxSimultaneous>
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>GiantChargeFire</clipPath>
+					</li>
+				</grains>
+				<pitchRange>
+					<min>0.9152174</min>
+					<max>1.042391</max>
+				</pitchRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>GiantInfernoCannon</defName>
+		<eventNames />
+		<context>MapOnly</context>
+		<maxSimultaneous>1</maxSimultaneous>
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>GiantInfernoCannon</clipPath>
+					</li>
+				</grains>
+				<pitchRange>
+					<min>0.9152174</min>
+					<max>1.042391</max>
+				</pitchRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>GiantAutoMortar</defName>
+		<eventNames />
+		<context>MapOnly</context>
+		<maxSimultaneous>1</maxSimultaneous>
+		<subSounds>
+			<li>
+				<onCamera>true</onCamera>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>GiantAutoMortar</clipPath>
+					</li>
+				</grains>
+				<pitchRange>
+					<min>0.9152174</min>
+					<max>1.042391</max>
+				</pitchRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>GiantAutoMortar_Large</defName>
+		<eventNames />
+		<context>MapOnly</context>
+		<maxSimultaneous>1</maxSimultaneous>
+		<subSounds>
+			<li>
+				<onCamera>true</onCamera>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>GiantAutoMortar_Large</clipPath>
+					</li>
+				</grains>
+				<pitchRange>
+					<min>0.9152174</min>
+					<max>1.042391</max>
+				</pitchRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>Gear_Start</defName>
+		<eventNames />
+		<context>MapOnly</context>
+		<maxSimultaneous>1</maxSimultaneous>
+		<subSounds>
+			<li>
+				<onCamera>true</onCamera>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>Gear_Start</clipPath>
+					</li>
+				</grains>
+				<pitchRange>
+					<min>0.9152174</min>
+					<max>1.042391</max>
+				</pitchRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>Gear_Ambient</defName>
+		<sustain>True</sustain>
+		<context>MapOnly</context>
+		<priorityMode>PrioritizeNearest</priorityMode>
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Folder">
+						<clipPath>Gear_Ambient</clipPath>
+					</li>
+				</grains>
+				<volumeRange>40~60</volumeRange>
+				<distRange>15~25</distRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>GD_UrchinLauncher</defName>
+		<eventNames />
+		<context>MapOnly</context>
+		<maxVoices>2</maxVoices>  
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>GD_UrchinLauncher</clipPath>
+					</li>
+				</grains>
+				<volumeRange>60~80</volumeRange>
+				<pitchRange>
+					<min>1.5</min>
+					<max>0.5</max>
+				</pitchRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>GD_EMPHandCannon</defName>
+		<eventNames />
+		<context>MapOnly</context>
+		<maxVoices>2</maxVoices>  
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>EMPHandCannon</clipPath>
+					</li>
+				</grains>
+				<volumeRange>60~80</volumeRange>
+				<pitchRange>
+					<min>1.5</min>
+					<max>0.5</max>
+				</pitchRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>GD_PsychicGrenade</defName>
+		<eventNames />
+		<context>MapOnly</context>
+		<maxVoices>2</maxVoices>  
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>PsychicGrenade</clipPath>
+					</li>
+				</grains>
+				<volumeRange>40~60</volumeRange>
+				<pitchRange>
+					<min>1.5</min>
+					<max>0.5</max>
+				</pitchRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>GD_Kaleidoscope</defName>
+		<eventNames />
+		<context>MapOnly</context>
+		<maxVoices>2</maxVoices>  
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>Kaleidoscope</clipPath>
+					</li>
+				</grains>
+				<volumeRange>40~60</volumeRange>
+				<pitchRange>
+					<min>1.5</min>
+					<max>0.5</max>
+				</pitchRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+	
+	<!-- Mission -->
+	
+	<SoundDef>
+		<defName>GD_Morse_IMHERE</defName>
+		<eventNames />
+		<context>MapOnly</context>
+		<maxVoices>1</maxVoices>  
+		<subSounds>
+			<li>
+				<onCamera>true</onCamera>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>Morse_IMHERE</clipPath>
+					</li>
+				</grains>
+				<volumeRange>20~20</volumeRange>
+				<pitchRange>1</pitchRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>GD_Morse_STOLEN</defName>
+		<eventNames />
+		<context>MapOnly</context>
+		<maxVoices>1</maxVoices>  
+		<subSounds>
+			<li>
+				<onCamera>true</onCamera>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>Morse_STOLEN</clipPath>
+					</li>
+				</grains>
+				<volumeRange>20~20</volumeRange>
+				<pitchRange>1</pitchRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>GD_Morse_CLEAR</defName>
+		<eventNames />
+		<context>MapOnly</context>
+		<maxVoices>1</maxVoices>  
+		<subSounds>
+			<li>
+				<onCamera>true</onCamera>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>Morse_CLEAR</clipPath>
+					</li>
+				</grains>
+				<volumeRange>40~40</volumeRange>
+				<pitchRange>1</pitchRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>GD_Morse_SOS</defName>
+		<eventNames />
+		<context>MapOnly</context>
+		<maxVoices>1</maxVoices>  
+		<subSounds>
+			<li>
+				<onCamera>true</onCamera>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>Morse_SOS</clipPath>
+					</li>
+				</grains>
+				<volumeRange>40~40</volumeRange>
+				<pitchRange>1</pitchRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>GD_Controled</defName>
+		<eventNames />
+		<context>MapOnly</context>
+		<maxVoices>1</maxVoices>  
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>GD_Controled</clipPath>
+					</li>
+				</grains>
+				<volumeRange>40~40</volumeRange>
+				<pitchRange>1</pitchRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>ExostriderDeath</defName>
+		<eventNames />
+		<context>MapOnly</context>
+		<maxVoices>1</maxVoices>  
+		<subSounds>
+			<li>
+				<onCamera>true</onCamera>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>ExostriderDeath</clipPath>
+					</li>
+				</grains>
+				<volumeRange>80~80</volumeRange>
+				<pitchRange>1</pitchRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+      <defName>GDReinforceFlare</defName>
+      <context>MapOnly</context>
+      <subSounds>
+		<li>
+          <grains>
+			<li Class="AudioGrain_Clip">
+              <clipPath>ReinforceFlare</clipPath>
+			</li>
+          </grains>
+          <volumeRange>70</volumeRange>
+          <pitchRange>0.8~1.2</pitchRange>
+          <distRange>0~100</distRange>
+          <sustainLoop>False</sustainLoop>
+		</li>
+      </subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+      <defName>GDMosquitosPassing</defName>
+      <context>MapOnly</context>
+      <subSounds>
+		<li>
+		  <onCamera>true</onCamera>
+          <grains>
+			<li Class="AudioGrain_Clip">
+              <clipPath>MosquitosPassing</clipPath>
+			</li>
+          </grains>
+          <volumeRange>60</volumeRange>
+          <pitchRange>0.8~1.2</pitchRange>
+          <sustainLoop>False</sustainLoop>
+		</li>
+      </subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+      <defName>GDAntiAirMachineGun</defName>
+      <context>MapOnly</context>
+      <subSounds>
+		<li>
+          <grains>
+			<li Class="AudioGrain_Clip">
+              <clipPath>AntiAirMachineGun</clipPath>
+			</li>
+          </grains>
+          <volumeRange>120</volumeRange>
+          <pitchRange>0.8~1.2</pitchRange>
+          <distRange>0~50</distRange>
+          <sustainLoop>False</sustainLoop>
+		</li>
+      </subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+      <defName>GDAntiAirRocketPod</defName>
+      <context>MapOnly</context>
+      <subSounds>
+		<li>
+          <grains>
+			<li Class="AudioGrain_Clip">
+              <clipPath>AARocketPod</clipPath>
+			</li>
+          </grains>
+          <volumeRange>70</volumeRange>
+          <pitchRange>0.8~1.2</pitchRange>
+          <distRange>0~50</distRange>
+          <sustainLoop>False</sustainLoop>
+		</li>
+      </subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+      <defName>GDDeckReinforce</defName>
+      <context>MapOnly</context>
+	  <maxVoices>1</maxVoices>
+	  <maxSimultaneous>1</maxSimultaneous>
+      <subSounds>
+		<li>
+		  <onCamera>true</onCamera>
+          <grains>
+			<li Class="AudioGrain_Clip">
+              <clipPath>DeckReinforce</clipPath>
+			</li>
+          </grains>
+          <volumeRange>20</volumeRange>
+          <pitchRange>0.9~1.1</pitchRange>
+          <sustainLoop>False</sustainLoop>
+		</li>
+      </subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+      <defName>GDGearStart</defName>
+      <context>MapOnly</context>
+      <subSounds>
+		<li>
+          <grains>
+			<li Class="AudioGrain_Clip">
+              <clipPath>Gear_Start</clipPath>
+			</li>
+          </grains>
+          <volumeRange>70</volumeRange>
+          <pitchRange>0.9~1.1</pitchRange>
+          <distRange>0~50</distRange>
+          <sustainLoop>False</sustainLoop>
+		</li>
+      </subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+      <defName>SnowScreenTriggered</defName>
+      <context>MapOnly</context>
+  	  <sustain>True</sustain>
+  	  <priorityMode>PrioritizeNearest</priorityMode>
+      <subSounds>
+        <li>
+  		<onCamera>True</onCamera>
+          <grains>
+            <li Class="AudioGrain_Clip">
+              <clipPath>SnowScreenTriggered</clipPath>
+            </li>
+          </grains>
+          <volumeRange>30</volumeRange>
+          <pitchRange>1</pitchRange>
+          <sustainLoop>True</sustainLoop>
+        </li>
+      </subSounds>
+    </SoundDef>
+	
+	<SoundDef>
+      <defName>IceSpreading</defName>
+      <context>MapOnly</context>
+  	  <priorityMode>PrioritizeNearest</priorityMode>
+      <subSounds>
+        <li>
+		  <onCamera>True</onCamera>
+          <grains>
+            <li Class="AudioGrain_Clip">
+              <clipPath>IceSpreading</clipPath>
+            </li>
+          </grains>
+          <volumeRange>30</volumeRange>
+          <pitchRange>1</pitchRange>
+          <sustainLoop>False</sustainLoop>
+        </li>
+      </subSounds>
+    </SoundDef>
+	
+	<SoundDef>
+      <defName>GDDistantArtilleryEMP</defName>
+      <context>MapOnly</context>
+      <subSounds>
+		<li>
+          <grains>
+			<li Class="AudioGrain_Clip">
+              <clipPath>DistantArtilleryEMP</clipPath>
+			</li>
+          </grains>
+          <volumeRange>70</volumeRange>
+          <pitchRange>0.9~1.1</pitchRange>
+          <distRange>0~150</distRange>
+          <sustainLoop>False</sustainLoop>
+		</li>
+      </subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+      <defName>PocketThunderWave</defName>
+      <context>MapOnly</context>
+      <subSounds>
+		<li>
+          <grains>
+			<li Class="AudioGrain_Clip">
+              <clipPath>PocketThunderWave</clipPath>
+			</li>
+          </grains>
+          <volumeRange>70</volumeRange>
+          <pitchRange>0.8~1.2</pitchRange>
+          <distRange>0~50</distRange>
+          <sustainLoop>False</sustainLoop>
+		</li>
+      </subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+      <defName>ThunderArrowShoot</defName>
+      <context>MapOnly</context>
+      <subSounds>
+		<li>
+          <grains>
+			<li Class="AudioGrain_Clip">
+              <clipPath>ThunderArrowShoot</clipPath>
+			</li>
+          </grains>
+          <volumeRange>40</volumeRange>
+          <pitchRange>0.8~1.2</pitchRange>
+          <distRange>0~50</distRange>
+          <sustainLoop>False</sustainLoop>
+		</li>
+      </subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+      <defName>ThunderArrowWarning</defName>
+      <context>MapOnly</context>
+  	  <priorityMode>PrioritizeNearest</priorityMode>
+      <subSounds>
+        <li>
+		  <onCamera>True</onCamera>
+          <grains>
+            <li Class="AudioGrain_Clip">
+              <clipPath>ThunderArrowWarning</clipPath>
+            </li>
+          </grains>
+          <volumeRange>30</volumeRange>
+          <pitchRange>0.9~1.1</pitchRange>
+          <sustainLoop>False</sustainLoop>
+        </li>
+      </subSounds>
+    </SoundDef>
+	
+	<SoundDef>
+      <defName>MechCaneBroke</defName>
+      <context>MapOnly</context>
+  	  <priorityMode>PrioritizeNearest</priorityMode>
+      <subSounds>
+        <li>
+		  <onCamera>True</onCamera>
+          <grains>
+            <li Class="AudioGrain_Clip">
+              <clipPath>MechCaneBroke</clipPath>
+            </li>
+          </grains>
+          <volumeRange>40</volumeRange>
+          <pitchRange>0.9~1.1</pitchRange>
+          <sustainLoop>False</sustainLoop>
+        </li>
+      </subSounds>
+    </SoundDef>
+	
+	<SoundDef>
+      <defName>HugePsychicWave</defName>
+      <context>MapOnly</context>
+  	  <priorityMode>PrioritizeNearest</priorityMode>
+      <subSounds>
+        <li>
+		  <onCamera>True</onCamera>
+          <grains>
+            <li Class="AudioGrain_Clip">
+              <clipPath>HugePsychicWave</clipPath>
+            </li>
+          </grains>
+          <volumeRange>50</volumeRange>
+          <pitchRange>0.9~1.1</pitchRange>
+          <sustainLoop>False</sustainLoop>
+        </li>
+      </subSounds>
+    </SoundDef>
+	
+	<SoundDef>
+		<defName>Annihilator_DoJump</defName>
+		<context>MapOnly</context>
+		<priorityMode>PrioritizeNearest</priorityMode>
+		<subSounds>
+		  <li>
+			<grains>
+				<li Class="AudioGrain_Folder">
+					<clipFolderPath>Annihilator_Jump</clipFolderPath>
+				</li>
+			</grains>
+			<volumeRange>80</volumeRange>
+			<pitchRange>0.8~1.2</pitchRange>
+			<distRange>0~50</distRange>
+		  </li>
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+      <defName>Annihilator_PreJump</defName>
+      <context>MapOnly</context>
+      <subSounds>
+		<li>
+		  <muteWhenPaused>true</muteWhenPaused>
+          <grains>
+			<li Class="AudioGrain_Clip">
+              <clipPath>Annihilator_PreJump</clipPath>
+			</li>
+          </grains>
+          <volumeRange>40</volumeRange>
+          <pitchRange>0.9~1.1</pitchRange>
+          <distRange>0~50</distRange>
+          <sustainLoop>False</sustainLoop>
+		</li>
+      </subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+      <defName>Annihilator_Laser</defName>
+      <context>MapOnly</context>
+  	  <sustain>True</sustain>
+  	  <priorityMode>PrioritizeNearest</priorityMode>
+      <subSounds>
+        <li>
+		  <muteWhenPaused>true</muteWhenPaused>
+          <grains>
+            <li Class="AudioGrain_Clip">
+              <clipPath>Annihilator_Laser</clipPath>
+            </li>
+          </grains>
+          <volumeRange>40</volumeRange>
+          <pitchRange>1</pitchRange>
+		  <distRange>0~50</distRange>
+          <sustainLoop>True</sustainLoop>
+        </li>
+      </subSounds>
+    </SoundDef>
+	
+	<SoundDef>
+      <defName>Annihilator_Transform</defName>
+      <context>MapOnly</context>
+      <subSounds>
+		<li>
+		  <muteWhenPaused>true</muteWhenPaused>
+          <grains>
+			<li Class="AudioGrain_Clip">
+              <clipPath>Annihilator_Transform</clipPath>
+			</li>
+          </grains>
+          <volumeRange>60</volumeRange>
+          <pitchRange>0.9~1.1</pitchRange>
+          <distRange>0~50</distRange>
+          <sustainLoop>False</sustainLoop>
+		</li>
+      </subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+      <defName>ArcThrowerBurst</defName>
+      <context>MapOnly</context>
+      <subSounds>
+		<li>
+          <grains>
+			<li Class="AudioGrain_Clip">
+              <clipPath>ArcThrowerBurst</clipPath>
+			</li>
+          </grains>
+          <volumeRange>45</volumeRange>
+          <pitchRange>0.8~1.2</pitchRange>
+          <distRange>0~50</distRange>
+          <sustainLoop>False</sustainLoop>
+		</li>
+      </subSounds>
+	</SoundDef>
+	
+	<!-- Puzzle -->
+	<SoundDef>
+		<defName>PuzzleTrigger</defName>
+		<eventNames />
+		<context>MapOnly</context>
+		<maxVoices>2</maxVoices>  
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>PuzzleTrigger</clipPath>
+					</li>
+				</grains>
+				<volumeRange>90~110</volumeRange>
+				<pitchRange>
+					<min>0.9152174</min>
+					<max>1.042391</max>
+				</pitchRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>Puzzle_Ambient</defName>
+		<sustain>True</sustain>
+		<context>MapOnly</context>
+		<priorityMode>PrioritizeNearest</priorityMode>
+		<subSounds>
+			<li>
+				<onCamera>true</onCamera>
+				<grains>
+					<li Class="AudioGrain_Folder">
+						<clipPath>Puzzle_Ambient</clipPath>
+					</li>
+				</grains>
+				<volumeRange>20~20</volumeRange>
+				<distRange>10~20</distRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+	
+	<!-- Mods -->
+	<SoundDef>
+		<defName>Guttersnipe_Attack</defName>
+		<eventNames />
+		<context>MapOnly</context>
+		<maxVoices>35</maxVoices>  
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>Guttersnipe</clipPath>
+					</li>
+				</grains>
+				<volumeRange>10</volumeRange>
+				<pitchRange>
+					<min>0.9152174</min>
+					<max>1.042391</max>
+				</pitchRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+	
+	<!-- Songs -->
+	<SongDef>
+		<defName>Xenanis</defName>
+		<clipPath>Songs/Xenanis</clipPath>
+        <volume>0.7</volume>
+		<commonality>0</commonality>
+		<tense>true</tense>
+	</SongDef>
+	
+	<SongDef>
+		<defName>CommandSignal</defName>
+		<clipPath>Songs/CommandSignal</clipPath>
+        <volume>0.7</volume>
+		<commonality>0</commonality>
+		<tense>true</tense>
+	</SongDef>
+	
+	<SongDef>
+		<defName>MechCommander</defName>
+		<clipPath>Songs/MechCommander</clipPath>
+        <volume>0.7</volume>
+		<commonality>0</commonality>
+		<tense>true</tense>
+	</SongDef>
+	
+	<SongDef>
+		<defName>MiraculousFlower</defName>
+		<clipPath>Songs/MiraculousFlower</clipPath>
+        <volume>0.6</volume>
+		<commonality>0</commonality>
+		<tense>false</tense>
+	</SongDef>
+</Defs>

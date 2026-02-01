@@ -1,0 +1,15 @@
+E:\Steam\steamapps\common\RimWorld\Mods\Glitterworld Destroyer\Source\GD2\obj\Debug\GD2.csproj.AssemblyReference.cache
+E:\Steam\steamapps\common\RimWorld\Mods\Glitterworld Destroyer\Source\GD2\obj\Debug\GD2.csproj.CoreCompileInputs.cache
+E:\Steam\steamapps\common\RimWorld\Mods\Glitterworld Destroyer\Assemblies\GD2.dll
+E:\Steam\steamapps\common\RimWorld\Mods\Glitterworld Destroyer\Source\GD2\obj\Debug\GD2.dll
+E:\Steam\steamapps\common\RimWorld\Mods\Glitterworld Destroyer MK2\Assemblies\GD2.dll
+E:\Steam\steamapps\common\RimWorld\Mods\Glitterworld Destroyer MK2\Source\GD2\obj\Debug\GD2.csproj.AssemblyReference.cache
+E:\Steam\steamapps\common\RimWorld\Mods\Glitterworld Destroyer MK2\Source\GD2\obj\Debug\GD2.csproj.CoreCompileInputs.cache
+E:\Steam\steamapps\common\RimWorld\Mods\Glitterworld Destroyer MK2\Source\GD2\obj\Debug\GD2.dll
+E:\Steam\steamapps\common\RimWorld\Mods\Glitterworld Destroyer MK2\Cont\Assemblies\GD2.dll
+E:\Steam\steamapps\common\RimWorld\Mods\Glitterworld Destroyer MK2\Cont\Source\GD2\obj\Debug\GD2.csproj.AssemblyReference.cache
+E:\Steam\steamapps\common\RimWorld\Mods\Glitterworld Destroyer MK2\Cont\Source\GD2\obj\Debug\GD2.csproj.CoreCompileInputs.cache
+E:\Steam\steamapps\common\RimWorld\Mods\Glitterworld Destroyer MK2\Cont\Source\GD2\obj\Debug\GD2.dll
+E:\Steam\steamapps\common\RimWorld\Mods\Hyacinth's Mechanoid Addon - GD MK3\Cont\Source\GD2\obj\Debug\GD2.csproj.AssemblyReference.cache
+E:\Steam\steamapps\common\RimWorld\Mods\Hyacinth's Mechanoid Addon - GD MK3\Cont\Source\GD2\obj\Debug\GD2.csproj.CoreCompileInputs.cache
+E:\Steam\steamapps\common\RimWorld\Mods\Hyacinth's Mechanoid Addon - GD MK3\Cont\Source\GD2\obj\Debug\GD2.dll

@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+  <Operation Class="PatchOperationSequence">
+	<success>Always</success>
+	  <operations>
+		<li Class="PatchOperationTest">
+		  <xpath>/Defs/ThingDef[@Name="BuildingBase"]/comps</xpath>
+		  <success>Invert</success>
+		</li>
+		<li Class="PatchOperationAdd">
+		  <xpath>/Defs/ThingDef[@Name="BuildingBase"]</xpath>
+		  <value>
+			<comps />
+		  </value>
+		</li>
+	</operations>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+	<xpath>/Defs/ThingDef[@Name="BuildingBase"]/comps</xpath>
+	<value>
+	  <li Class="GD3.CompProperties_DeckReinforce" />
+	</value>
+  </Operation>
+  
+  <Operation Class="PatchOperationAdd">
+	<xpath>/Defs/ThingDef[@Name="BuildingBase"]/statBases</xpath>
+	<value>
+	  <RangedCooldownFactorBuilding>1</RangedCooldownFactorBuilding>
+	</value>
+  </Operation>
+  
+  <Operation Class="PatchOperationSequence">
+	<success>Always</success>
+	  <operations>
+		<li Class="PatchOperationTest">
+		  <xpath>/Defs/StatDef[defName="MaxHitPoints"]/parts</xpath>
+		  <success>Invert</success>
+		</li>
+		<li Class="PatchOperationAdd">
+		  <xpath>/Defs/StatDef[defName="MaxHitPoints"]</xpath>
+		  <value>
+			<parts />
+		  </value>
+		</li>
+	</operations>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+	<xpath>/Defs/StatDef[defName="MaxHitPoints"]/parts</xpath>
+	<value>
+	  <li Class="GD3.StatPart_Reinforce" />
+	</value>
+  </Operation>
+  
+  <Operation Class="PatchOperationAdd">
+	<xpath>/Defs/ThingDef[defName="VanometricPowerCell"]/statBases</xpath>
+	<value>
+	  <RangedCooldownFactorBuilding>1</RangedCooldownFactorBuilding>
+	</value>
+  </Operation>
+  
+  <Operation Class="PatchOperationAdd">
+	<xpath>/Defs/ThingDef[defName="HiTechResearchBench"]/comps/li[@Class="CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+	<value>
+	  <li>GD_CommunicationStation</li>
+	</value>
+  </Operation>
+  
+  <Operation Class="PatchOperationSequence">
+    <success>Always</success>
+    <operations>
+      <li Class="PatchOperationTest">
+        <xpath>/Defs/ThingDef[defName="VanometricPowerCell"]/designationCategory</xpath>
+        <success>Invert</success>
+      </li>
+      <li Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="VanometricPowerCell"]</xpath>
+        <value>
+          <designationCategory />
+        </value>
+      </li>
+    </operations>
+  </Operation>
+  
+  <Operation Class="PatchOperationReplace">
+	<xpath>/Defs/ThingDef[defName="VanometricPowerCell"]/designationCategory</xpath>
+	<value>
+		<designationCategory>Power</designationCategory>
+	</value>
+  </Operation>
+
+	<Operation Class="PatchOperationSequence">
+    <success>Always</success>
+    <operations>
+      <li Class="PatchOperationTest">
+        <xpath>/Defs/ThingDef[defName="VanometricPowerCell"]/researchPrerequisites</xpath>
+        <success>Invert</success>
+      </li>
+      <li Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="VanometricPowerCell"]</xpath>
+        <value>
+          <researchPrerequisites />
+        </value>
+      </li>
+    </operations>
+  </Operation>
+  
+  <Operation Class="PatchOperationReplace">
+	<xpath>/Defs/ThingDef[defName="VanometricPowerCell"]/researchPrerequisites</xpath>
+	<value>
+		<researchPrerequisites>
+		  <li>GD3_GiantCluster_Large</li>
+		</researchPrerequisites>
+	</value>
+  </Operation>
+  
+  <Operation Class="PatchOperationSequence">
+    <success>Always</success>
+    <operations>
+      <li Class="PatchOperationTest">
+        <xpath>/Defs/ThingDef[defName="UnstablePowerCell"]/designationCategory</xpath>
+        <success>Invert</success>
+      </li>
+      <li Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="UnstablePowerCell"]</xpath>
+        <value>
+          <designationCategory />
+        </value>
+      </li>
+    </operations>
+  </Operation>
+  
+  <Operation Class="PatchOperationReplace">
+	<xpath>/Defs/ThingDef[defName="UnstablePowerCell"]/designationCategory</xpath>
+	<value>
+		<designationCategory>Power</designationCategory>
+	</value>
+  </Operation>
+
+	<Operation Class="PatchOperationSequence">
+    <success>Always</success>
+    <operations>
+      <li Class="PatchOperationTest">
+        <xpath>/Defs/ThingDef[defName="UnstablePowerCell"]/researchPrerequisites</xpath>
+        <success>Invert</success>
+      </li>
+      <li Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="UnstablePowerCell"]</xpath>
+        <value>
+          <researchPrerequisites />
+        </value>
+      </li>
+    </operations>
+  </Operation>
+  
+  <Operation Class="PatchOperationReplace">
+	<xpath>/Defs/ThingDef[defName="UnstablePowerCell"]/researchPrerequisites</xpath>
+	<value>
+		<researchPrerequisites>
+		  <li>GD3_GiantCluster_Medium</li>
+		</researchPrerequisites>
+	</value>
+  </Operation>
+  
+  <Operation Class="PatchOperationReplace">
+	<xpath>/Defs/ThingDef[defName="UnstablePowerCell"]/costList</xpath>
+	<value>
+		<costList>
+		  <Steel>80</Steel>
+		  <ComponentIndustrial>5</ComponentIndustrial>
+		</costList>
+	</value>
+  </Operation>
+  
+  <Operation Class="PatchOperationReplace">
+	<xpath>/Defs/ThingDef[defName="ShieldGeneratorBullets"]/comps</xpath>
+	<value>
+		<comps>
+		  <li Class="CompProperties_ProjectileInterceptor">
+			<radius>20</radius>
+			<interceptGroundProjectiles>true</interceptGroundProjectiles>
+			<interceptNonHostileProjectiles>false</interceptNonHostileProjectiles>
+			<color>(0.4, 0.4, 0.4)</color>
+			<reactivateEffect>BulletShieldGenerator_Reactivate</reactivateEffect>
+			<activeSound>BulletShield_Ambience</activeSound>
+			<disarmedByEmpForTicks>1080</disarmedByEmpForTicks>
+			<chargeIntervalTicks>600000</chargeIntervalTicks>
+			<chargeDurationTicks>60000</chargeDurationTicks>
+		  </li>
+		  <li Class="CompProperties_WakeUpDormant">
+			<wakeUpSound>MechanoidsWakeUp</wakeUpSound>
+		  </li>
+		</comps>
+	</value>
+  </Operation>
+  
+</Patch>

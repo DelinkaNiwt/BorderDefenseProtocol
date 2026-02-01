@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 黑衣憎恶毒蜂 -->
+
+  <Mech_BlackApocriton.label>黑衣憎恶毒蜂</Mech_BlackApocriton.label>
+  <Mech_BlackApocriton.labelPlural>黑衣憎恶毒蜂</Mech_BlackApocriton.labelPlural>
+  <Mech_BlackApocriton.labelMale>黑衣憎恶毒蜂</Mech_BlackApocriton.labelMale>
+  <Mech_BlackApocriton.labelMalePlural>黑衣憎恶毒蜂</Mech_BlackApocriton.labelMalePlural>
+  <Mech_BlackApocriton.labelFemale>黑衣憎恶毒蜂</Mech_BlackApocriton.labelFemale>
+  <Mech_BlackApocriton.labelFemalePlural>黑衣憎恶毒蜂</Mech_BlackApocriton.labelFemalePlural>
+  
+  <Mech_Observer.label>观察机</Mech_Observer.label>
+  <Mech_Observer.labelPlural>观察机</Mech_Observer.labelPlural>
+
+
+</LanguageData>

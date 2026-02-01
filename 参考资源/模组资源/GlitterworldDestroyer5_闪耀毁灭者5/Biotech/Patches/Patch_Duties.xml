@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+  <Operation Class="PatchOperationInsert">
+    <xpath>/Defs/DutyDef[defName = "AssaultColony" or defName="HuntEnemiesIndividual" or defName="AssaultThing"]/thinkNode[@Class="ThinkNode_Priority"]/subNodes/li[@Class="JobGiver_AIFightEnemies"]</xpath>
+    <value>
+      <li Class="ThinkNode_Subtree">
+		<treeDef>BlackApocritonFight</treeDef>
+	  </li>
+    </value>
+  </Operation>
+  
+  <Operation Class="PatchOperationInsert">
+    <xpath>/Defs/DutyDef[defName = "Defend"]/thinkNode[@Class="ThinkNode_Priority"]/subNodes/li[@Class="JobGiver_AIDefendPoint"]</xpath>
+    <value>
+      <li Class="ThinkNode_Subtree">
+		<treeDef>BlackApocritonFight</treeDef>
+	  </li>
+    </value>
+  </Operation>
+  
+  <Operation Class="PatchOperationInsert">
+    <xpath>/Defs/DutyDef[defName = "Escort"]/thinkNode[@Class="ThinkNode_Priority"]/subNodes/li[@Class="JobGiver_AIDefendEscortee"]</xpath>
+    <value>
+      <li Class="ThinkNode_Subtree">
+		<treeDef>BlackApocritonFight</treeDef>
+	  </li>
+    </value>
+  </Operation>
+  
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/WorkGiverDef[defName = "LongRangeScan" or defName = "GroundPenetratingScan"]/canBeDoneByMechs</xpath>
+    <value>
+      <canBeDoneByMechs>true</canBeDoneByMechs>
+    </value>
+  </Operation>
+  
+  <!-- <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/JobDef[defName = "OperateScanner"]/driverClass</xpath>
+    <value>
+      <driverClass>GD3.JobDriver_UtiScanner</driverClass>
+    </value>
+  </Operation> -->
+</Patch>

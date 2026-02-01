@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 死卫冲击炮 -->
+
+  <GD_UrchinLauncher.label>死卫冲击炮</GD_UrchinLauncher.label>
+  <GD_UrchinLauncher.description>这是一把由你的殖民者设计出来的新式武器，可以远程发射一只战争死卫帮助吸引火力。\n\n不要对着你的朋友发射，砸到人还是挺疼的。</GD_UrchinLauncher.description>
+  
+  <!-- <GD_UrchinLauncher.verbs.0.label>死卫</GD_UrchinLauncher.verbs.0.label>
+  
+  <GD_UrchinLauncher.comps.0.verbProps.0.label>死卫</GD_UrchinLauncher.comps.0.verbProps.0.label> -->
+
+
+</LanguageData>

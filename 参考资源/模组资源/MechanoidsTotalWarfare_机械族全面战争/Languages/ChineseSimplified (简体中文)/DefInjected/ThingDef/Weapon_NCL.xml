@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Lighting Strike -->
+  <Bullet_LightingStrike.label>TODO</Bullet_LightingStrike.label>
+  
+  <!-- EN: Mote -->
+  <Mote_NCLWormLaser.label>TODO</Mote_NCLWormLaser.label>
+  
+  <!-- EN: 破坏死光 -->
+  <NCL_Gun_BeamGraser.label>TODO</NCL_Gun_BeamGraser.label>
+  <!-- EN: 蠕虫通过念力汇聚大量能量于口中喷射而出 -->
+  <NCL_Gun_BeamGraser.description>TODO</NCL_Gun_BeamGraser.description>
+  <!-- EN: 破坏死光 -->
+  <NCL_Gun_BeamGraser.verbs.Verb_GuangA.label>TODO</NCL_Gun_BeamGraser.verbs.Verb_GuangA.label>
+  
+  <!-- EN: 雷击 -->
+  <NCL_Gun_HellsphereCannon.label>TODO</NCL_Gun_HellsphereCannon.label>
+  <!-- EN: 蠕虫召唤雷击攻击距离自己最近的敌人 -->
+  <NCL_Gun_HellsphereCannon.description>TODO</NCL_Gun_HellsphereCannon.description>
+  <!-- EN: 雷击 -->
+  <NCL_Gun_HellsphereCannon.verbs.Verb_ShootOneUse.label>TODO</NCL_Gun_HellsphereCannon.verbs.Verb_ShootOneUse.label>
+  
+</LanguageData>

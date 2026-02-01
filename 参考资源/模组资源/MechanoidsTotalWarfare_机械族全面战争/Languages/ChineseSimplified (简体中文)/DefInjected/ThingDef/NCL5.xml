@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: NCL5 bullet -->
+  <Bullet_NCL.label>TODO</Bullet_NCL.label>
+  
+  <!-- EN: NCL5 -->
+  <NCL_Rifle.label>TODO</NCL_Rifle.label>
+  <!-- EN: 武器档案：诺亚制式通用型突击步枪第五代\n代号：NCL5  \n所属：诺亚新共产主义联盟「铁律」常规武器序列  \n\n功能概述：  \nNCL5 是诺亚新共产主义联盟的制式突击步枪，专为大规模列装设计。其射程、射速、子弹穿透与稳定性均达到同类别武器的顶尖水平，但单发伤害与停滞能力稍显不足，适合中远距离持续压制。\n\n  开发者Lsa和None批注：\n“规模化，建制化。” -->
+  <NCL_Rifle.description>TODO</NCL_Rifle.description>
+  <!-- EN: stock -->
+  <NCL_Rifle.tools.stock.label>TODO</NCL_Rifle.tools.stock.label>
+  <!-- EN: barrel -->
+  <NCL_Rifle.tools.barrel.label>TODO</NCL_Rifle.tools.barrel.label>
+  <!-- EN: NCL5 -->
+  <NCL_Rifle.verbs.Verb_Shoot.label>TODO</NCL_Rifle.verbs.Verb_Shoot.label>
+  
+</LanguageData>

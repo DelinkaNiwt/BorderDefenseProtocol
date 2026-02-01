@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <Apparel_ApocritonShield.label>半灵质护盾</Apparel_ApocritonShield.label>
+  <Apparel_ApocritonShield.description>坚固而灵敏的重型护盾，能够对到来的威胁作出猛烈的还击。</Apparel_ApocritonShield.description>
+  
+  <GD_PolarizedLight.label>偏振光</GD_PolarizedLight.label>
+  <GD_PolarizedLight.description>一条设计独特的护盾腰带，所展开的盾面仿佛水面一样柔软。除了能够允许远程武器向外射击，它还能在破碎后提供为期10秒的移行护盾，抵挡一切外来的攻击。\n\n重新充能时间相当长。</GD_PolarizedLight.description>
+
+
+</LanguageData>

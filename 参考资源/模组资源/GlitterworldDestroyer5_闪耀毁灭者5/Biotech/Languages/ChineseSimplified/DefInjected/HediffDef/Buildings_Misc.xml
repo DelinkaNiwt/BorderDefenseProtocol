@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- Band node -->
+
+  <GD_BandNode.label>先进频带节点（调谐）</GD_BandNode.label>
+  <GD_BandNode.description>由于频带节点设施影响，该机械师的带宽已增加。</GD_BandNode.description>
+
+
+</LanguageData>

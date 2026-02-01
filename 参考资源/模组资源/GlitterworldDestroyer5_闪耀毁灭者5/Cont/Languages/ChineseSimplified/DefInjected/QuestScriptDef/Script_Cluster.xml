@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 小型 -->
+
+  <GD_Quest_Cluster_S.questNameRules.rulesStrings.0>questName-&gt;发现巨型机械集群α</GD_Quest_Cluster_S.questNameRules.rulesStrings.0>
+  <GD_Quest_Cluster_S.questDescriptionRules.rulesStrings.0>questDescription-&gt;短波接收器定位了不远处一座巨型集群的位置。\n\n这个集群看起来刚建立不久，少量并不算强的炮塔正保护着一个庞大的集装箱，看起来像是一处资源中转站。如果我们突袭这个集群，或许就能收获相当数量的基础材料。\n\n*Biotech DLC：机械白蚁是有力的进攻前锋，出发前请至少带上一台。</GD_Quest_Cluster_S.questDescriptionRules.rulesStrings.0>
+  <GD_Quest_Cluster_S.root.nodes.WorldObjectTimeout.node.nodes.Letter.label.slateRef>任务过期: [resolvedQuestName]</GD_Quest_Cluster_S.root.nodes.WorldObjectTimeout.node.nodes.Letter.label.slateRef>
+  <GD_Quest_Cluster_S.root.nodes.WorldObjectTimeout.node.nodes.Letter.text.slateRef>巨型集群已经实现驻扎目的并完成转移。任务[resolvedQuestName]已经过期。</GD_Quest_Cluster_S.root.nodes.WorldObjectTimeout.node.nodes.Letter.text.slateRef>
+  <GD_Quest_Cluster_S.root.nodes.siteDestroyed.node.nodes.Letter.label.slateRef>任务结束: [resolvedQuestName]</GD_Quest_Cluster_S.root.nodes.siteDestroyed.node.nodes.Letter.label.slateRef>
+  <GD_Quest_Cluster_S.root.nodes.siteDestroyed.node.nodes.Letter.text.slateRef>任务[resolvedQuestName]已结束。</GD_Quest_Cluster_S.root.nodes.siteDestroyed.node.nodes.Letter.text.slateRef>
+
+
+  <!-- 中型 -->
+
+  <GD_Quest_Cluster_M.questNameRules.rulesStrings.0>questName-&gt;发现巨型机械集群β</GD_Quest_Cluster_M.questNameRules.rulesStrings.0>
+  <GD_Quest_Cluster_M.questDescriptionRules.rulesStrings.0>questDescription-&gt;短波接收器定位了不远处一座巨型集群的位置。\n\n这个集群已经初具规模，几台巨型炮塔已经被立起，同时也有机动单位驻扎在集群中。其中的核心建筑——心灵遮蔽髓能让殖民者无法使用心灵能力，我们需要有完善的进攻规划才能成功。\n\n新的威胁：心灵遮蔽髓、自动迫击炮、巨型电荷炮塔、超凡诡雷</GD_Quest_Cluster_M.questDescriptionRules.rulesStrings.0>
+  <GD_Quest_Cluster_M.root.nodes.WorldObjectTimeout.node.nodes.Letter.label.slateRef>任务过期: [resolvedQuestName]</GD_Quest_Cluster_M.root.nodes.WorldObjectTimeout.node.nodes.Letter.label.slateRef>
+  <GD_Quest_Cluster_M.root.nodes.WorldObjectTimeout.node.nodes.Letter.text.slateRef>巨型集群已经实现驻扎目的并完成转移。任务[resolvedQuestName]已经过期。</GD_Quest_Cluster_M.root.nodes.WorldObjectTimeout.node.nodes.Letter.text.slateRef>
+  <GD_Quest_Cluster_M.root.nodes.siteDestroyed.node.nodes.Letter.label.slateRef>任务失败: [resolvedQuestName]</GD_Quest_Cluster_M.root.nodes.siteDestroyed.node.nodes.Letter.label.slateRef>
+  <GD_Quest_Cluster_M.root.nodes.siteDestroyed.node.nodes.Letter.text.slateRef>这场攻击终究打草惊蛇，集群在遭遇威胁后迅速整备并完成了转移。任务[resolvedQuestName]已经失败。</GD_Quest_Cluster_M.root.nodes.siteDestroyed.node.nodes.Letter.text.slateRef>
+
+
+  <!-- 大型 -->
+
+  <GD_Quest_Cluster_L.questNameRules.rulesStrings.0>questName-&gt;发现巨型机械集群γ</GD_Quest_Cluster_L.questNameRules.rulesStrings.0>
+  <GD_Quest_Cluster_L.questDescriptionRules.rulesStrings.0>questDescription-&gt;短波接收器定位了不远处一座巨型集群的位置。\n\n这个集群防守异常森严，初步推断是为重要的机械族工业生产线的安装扫清障碍。心灵抑制髓会让我方所有参战者无法专心思考，这将进一步提高战斗难度，但这座集群不甚紧密的排布或许为空投突袭提供了可乘之机。\n\n新的威胁：心灵抑制髓、巨型地狱火炮塔、巨型自动迫击炮、电荷加速器、等离子放大器、禁卫机械蜈蚣</GD_Quest_Cluster_L.questDescriptionRules.rulesStrings.0>
+  <GD_Quest_Cluster_L.root.nodes.WorldObjectTimeout.node.nodes.Letter.label.slateRef>任务过期: [resolvedQuestName]</GD_Quest_Cluster_L.root.nodes.WorldObjectTimeout.node.nodes.Letter.label.slateRef>
+  <GD_Quest_Cluster_L.root.nodes.WorldObjectTimeout.node.nodes.Letter.text.slateRef>巨型集群已经实现驻扎目的并完成转移。任务[resolvedQuestName]已经过期。</GD_Quest_Cluster_L.root.nodes.WorldObjectTimeout.node.nodes.Letter.text.slateRef>
+  <GD_Quest_Cluster_L.root.nodes.siteDestroyed.node.nodes.Letter.label.slateRef>任务失败: [resolvedQuestName]</GD_Quest_Cluster_L.root.nodes.siteDestroyed.node.nodes.Letter.label.slateRef>
+  <GD_Quest_Cluster_L.root.nodes.siteDestroyed.node.nodes.Letter.text.slateRef>这场攻击终究打草惊蛇，集群在遭遇威胁后迅速整备并完成了转移。任务[resolvedQuestName]已经失败。</GD_Quest_Cluster_L.root.nodes.siteDestroyed.node.nodes.Letter.text.slateRef>
+
+
+  <!-- 超大型 -->
+
+  <GD_Quest_Cluster_U.questNameRules.rulesStrings.0>questName-&gt;发现巨型机械集群Ω</GD_Quest_Cluster_U.questNameRules.rulesStrings.0>
+  <GD_Quest_Cluster_U.questDescriptionRules.rulesStrings.0>questDescription-&gt;短波接收器定位了不远处一座巨型集群的位置。\n\n事实上我们从数千米外便以肉眼观测到了这座集群的建筑构造，机械族似乎是想以这里为跳板逐步实现硅基化整颗星球的目标。或许我们不应该多管闲事，但一旦进攻成功，所收获的知识将足以使我们超越过去的一切阻碍。\n心灵狂暴髓发出的低语每隔一小段时间便会使一名我方战士陷入狂暴。我们对此几乎无计可施，能做的可能只有尽量增加参战单位数量以降低核心人员受影响概率，并尽快结束战斗。\n\n新的威胁：心灵狂暴髓</GD_Quest_Cluster_U.questDescriptionRules.rulesStrings.0>
+  <GD_Quest_Cluster_U.root.nodes.WorldObjectTimeout.node.nodes.Letter.label.slateRef>任务过期: [resolvedQuestName]</GD_Quest_Cluster_U.root.nodes.WorldObjectTimeout.node.nodes.Letter.label.slateRef>
+  <GD_Quest_Cluster_U.root.nodes.WorldObjectTimeout.node.nodes.Letter.text.slateRef>巨型集群已经实现驻扎目的并完成转移。任务[resolvedQuestName]已经过期。</GD_Quest_Cluster_U.root.nodes.WorldObjectTimeout.node.nodes.Letter.text.slateRef>
+  <GD_Quest_Cluster_U.root.nodes.siteDestroyed.node.nodes.Letter.label.slateRef>任务失败: [resolvedQuestName]</GD_Quest_Cluster_U.root.nodes.siteDestroyed.node.nodes.Letter.label.slateRef>
+  <GD_Quest_Cluster_U.root.nodes.siteDestroyed.node.nodes.Letter.text.slateRef>这场攻击终究打草惊蛇，集群在遭遇威胁后迅速整备并完成了转移。任务[resolvedQuestName]已经失败。</GD_Quest_Cluster_U.root.nodes.siteDestroyed.node.nodes.Letter.text.slateRef>
+
+
+</LanguageData>

@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <JobDef>
+    <defName>GD_FleeFlying</defName>
+    <driverClass>JobDriver_Flee</driverClass>
+    <reportString>avoiding enemies.</reportString>
+    <checkOverrideOnDamage>OnlyIfInstigatorNotJobTarget</checkOverrideOnDamage>
+    <isIdle>true</isIdle>
+	<tryStartFlying>true</tryStartFlying>
+    <overrideFlyChance>1</overrideFlyChance>
+	<ifFlyingKeepFlying>true</ifFlyingKeepFlying>
+  </JobDef>
+  
+  <JobDef>
+    <defName>GD_CastAbilityOnThing_Flying</defName>
+    <driverClass>JobDriver_CastAbility</driverClass>
+    <casualInterruptible>false</casualInterruptible>
+    <collideWithPawns>true</collideWithPawns>
+    <tryStartFlying>true</tryStartFlying>
+    <overrideFlyChance>1</overrideFlyChance>
+	<ifFlyingKeepFlying>true</ifFlyingKeepFlying>
+  </JobDef>
+  
+  <JobDef>
+    <defName>GD_CallArtillery</defName>
+    <driverClass>GD3.JobDriver_CallArtillery</driverClass>
+    <reportString>using comms console.</reportString>
+	<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+	<tryStartFlying>true</tryStartFlying>
+    <overrideFlyChance>1</overrideFlyChance>
+	<ifFlyingKeepFlying>true</ifFlyingKeepFlying>
+  </JobDef>
+  
+  <JobDef>
+    <defName>GD_ModifySavingMech</defName>
+    <driverClass>GD3.JobDriver_ModifySavingMech</driverClass>
+    <reportString>tampering with TargetA.</reportString>
+	<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+
+</Defs>

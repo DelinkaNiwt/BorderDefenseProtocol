@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <!-- 流浪者的礼帽 -->
+  <ThingDef ParentName="MechanitorBlackHatBase">
+    <defName>Apparel_Epona_BlackHat</defName>
+    <label>rangers' bowler hat (epona)</label>
+    <description>Beautiful bowler hat, containing mechanical neurons that can assist the wearer to think. \n\nSeems to be a outsider.</description>
+    <techLevel>Spacer</techLevel>
+    <graphicData>
+      <texPath>Apparel/Epona_BlackHat</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>1.0</drawSize>
+    </graphicData>
+	<tickerType>Normal</tickerType>
+    <costList>
+      <Cloth>100</Cloth>
+    </costList>
+    <recipeMaker>
+	  <recipeUsers Inherit="False">
+        <li>TableMachining</li>
+      </recipeUsers>
+      <researchPrerequisite>GD3_Puzzle</researchPrerequisite>
+      <skillRequirements>
+        <Crafting>4</Crafting>
+      </skillRequirements>
+	  <displayPriority>704</displayPriority>
+    </recipeMaker>
+	<smeltable>false</smeltable>
+	<tradeability>Sellable</tradeability>
+    <statBases>
+      <WorkToMake>2100</WorkToMake>
+      <MaxHitPoints>200</MaxHitPoints>
+      <Mass>0.28</Mass>
+      <EquipDelay>2</EquipDelay>
+    </statBases>
+    <equippedStatOffsets>
+	  <MechFormingSpeed>1</MechFormingSpeed>
+      <PawnBeauty>1</PawnBeauty>
+	  <TradePriceImprovement>0.25</TradePriceImprovement>
+	  <SocialImpact>0.5</SocialImpact>
+	  <VacuumResistance MayRequire="Ludeon.Rimworld.Odyssey">0.4</VacuumResistance>
+    </equippedStatOffsets>
+    <apparel>
+	  <drawData>
+		<defaultData>
+		  <offset>(0,0,-0.280)</offset>
+		</defaultData>
+		<dataWest>
+		  <offset>(-0.1,0,-0.280)</offset>
+		  <flip>true</flip>
+		  <layer>100</layer>
+		</dataWest>
+		<dataEast>
+		  <offset>(-0.055,0,-0.280)</offset>
+		</dataEast>
+		<scale>1.4</scale>
+	  </drawData>
+      <wornGraphicPath>Apparel/Epona_BlackHat</wornGraphicPath>
+      <countsAsClothingForNudity>false</countsAsClothingForNudity>
+      <bodyPartGroups>
+        <li>UpperHead</li>
+      </bodyPartGroups>
+      <layers>
+        <li>Overhead</li>
+      </layers>
+	  <tags>
+	    <li>PrestigeCombatGear</li>
+	  </tags>
+      <scoreOffset>4</scoreOffset>
+      <mechanitorApparel>true</mechanitorApparel>
+    </apparel>
+	<comps>
+	  <li Class="GD3.CompProperties_ApparelHediff">
+	    <hediff>GD_BlackEnhancer_Hat</hediff>
+	  </li>
+	</comps>
+	<modExtensions>
+	  <li Class="GD3.ModExtension_DrawOffset">
+		<offset>(0,0,-0.085)</offset>
+		<extraScale>0.1</extraScale>
+	  </li>
+    </modExtensions>
+  </ThingDef>
+  
+  <!-- 流浪者的风衣 -->
+  <ThingDef ParentName="ApparelArmorPowerBase">
+    <defName>Apparel_Epona_BlackWindbreaker</defName>
+    <label>rangers' wind breaker (epona)</label>
+    <description>The wide, heavy trench coat contains mechanical neurons that can assist the wearer in controlling the mechanoids, and the effect will be enhanced when the colony destroys certain powerful mechanoids.</description>
+    <graphicData>
+      <texPath>Apparel/Epona_BlackWindbreaker</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+	<tickerType>Normal</tickerType>
+    <statBases>
+	  <WorkToMake>4200</WorkToMake>
+      <MaxHitPoints>200</MaxHitPoints>
+      <Mass>2</Mass>
+      <ArmorRating_Sharp>0.6</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.3</ArmorRating_Blunt>
+      <ArmorRating_Heat>0.9</ArmorRating_Heat>
+      <Insulation_Cold>42</Insulation_Cold>
+      <Insulation_Heat>36</Insulation_Heat>
+      <EquipDelay>5</EquipDelay>
+    </statBases>
+    <equippedStatOffsets Inherit="false">
+      <MoveSpeed>1.0</MoveSpeed>
+	  <VacuumResistance MayRequire="Ludeon.Rimworld.Odyssey">0.4</VacuumResistance>
+    </equippedStatOffsets>
+	<recipeMaker>
+	  <unfinishedThingDef>UnfinishedApparel</unfinishedThingDef>
+      <displayPriority>705</displayPriority>
+	  <recipeUsers Inherit="False">
+        <li>TableMachining</li>
+      </recipeUsers>
+      <researchPrerequisite>GD3_Puzzle</researchPrerequisite>
+      <skillRequirements>
+        <Crafting>4</Crafting>
+      </skillRequirements>
+    </recipeMaker>
+    <costList Inherit="False">
+      <Cloth>180</Cloth>
+    </costList>
+    <apparel>
+      <tags>
+        <li>Mechlord</li>
+		<li>Royal</li>
+		<li>PrestigeCombatGear</li>
+      </tags>
+	  <bodyPartGroups>
+		<li>Torso</li>
+		<li>Neck</li>
+		<li>Legs</li>
+	  </bodyPartGroups>
+	  <layers>
+	    <li>Middle</li>
+        <li>Shell</li>
+		<li>OnSkin</li>
+      </layers>
+	  <renderNodeProperties>
+		<li>
+		  <debugLabel>WindBreaker</debugLabel>
+		  <workerClass>GD3.PawnRenderNodeWorker_BlackSuit_Epona</workerClass>
+		  <bodyTypeGraphicPaths>
+			<Thin>Apparel/Epona_BlackWindbreaker_Fat</Thin>
+			<Hulk>Apparel/Epona_BlackWindbreaker_Hulk</Hulk>
+			<Fat>Apparel/Epona_BlackWindbreaker_Fat</Fat>
+			<Male>Apparel/Epona_BlackWindbreaker_Male</Male>
+			<Female>Apparel/Epona_BlackWindbreaker_Female</Female>
+		  </bodyTypeGraphicPaths>
+		  <baseLayer>20</baseLayer>
+		  <parentTagDef>ApparelBody</parentTagDef>
+		  <pawnType>Any</pawnType>
+		  <shaderTypeDef>Transparent</shaderTypeDef>
+		  <drawData>
+			<scale>0.88</scale>
+			<defaultData>
+				<offset>(0,0,0.058)</offset>
+			</defaultData>
+			<dataEast>
+				<offset>(0.05,0,0.058)</offset>
+			</dataEast>
+			<dataWest>
+				<offset>(-0.015,0,0.058)</offset>
+			</dataWest>
+		  </drawData>
+		</li>
+		<li>
+		  <debugLabel>Cloak</debugLabel>
+		  <workerClass>GD3.PawnRenderNodeWorker_BlackSuit_Epona</workerClass>
+		  <bodyTypeGraphicPaths>
+			<Thin>Apparel/Backlight_Fat</Thin>
+			<Hulk>Apparel/Epona_Cloak_Hulk</Hulk>
+			<Fat>Apparel/Backlight_Fat</Fat>
+			<Male>Apparel/Epona_Cloak_Male</Male>
+			<Female>Apparel/Epona_Cloak_Female</Female>
+		  </bodyTypeGraphicPaths>
+		  <baseLayer>-999</baseLayer>
+		  <parentTagDef>ApparelBody</parentTagDef>
+		  <pawnType>Any</pawnType>
+		  <shaderTypeDef>Transparent</shaderTypeDef>
+		  <drawData>
+			<scale>0.88</scale>
+			<defaultData>
+				<offset>(0,0,0.058)</offset>
+			</defaultData>
+			<dataEast>
+				<offset>(0.05,0,0.058)</offset>
+			</dataEast>
+			<dataWest>
+				<offset>(-0.05,0,0.058)</offset>
+			</dataWest>
+		  </drawData>
+		</li>
+	  </renderNodeProperties>
+	  <wornGraphicPath></wornGraphicPath>
+    </apparel>
+    <tradeability>Sellable</tradeability>
+    <tradeTags Inherit="False">
+      <li>HiTechArmor</li>
+    </tradeTags>
+	<comps>
+	  <li Class="GD3.CompProperties_ApparelHediff">
+	    <hediff>GD_BlackEnhancer</hediff>
+	  </li>
+	</comps>
+	<modExtensions>
+	  <li Class="GD3.ModExtension_DrawOffset">
+		<offset>(-0.005,0,-0.06)</offset>
+		<extraScale>0.03</extraScale>
+	  </li>
+    </modExtensions>
+  </ThingDef>
+
+</Defs>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Patch -->
+  <BlackApocritonExist>自毁逻辑被一种复杂的入侵病毒封锁了。</BlackApocritonExist>
+  
+  <!-- Medals -->
+  <GD.TogglePlagueLabel>尸爆 : {0}</GD.TogglePlagueLabel>
+  <GD.TogglePlagueDesc>开关灵能尸爆。死亡的敌人尸体将会对其周围的友军造成伤害，并以此制造更多尸体。</GD.TogglePlagueDesc>
+  <GD.TogglePlagueLabelB>祛毒 : {0}</GD.TogglePlagueLabelB>
+  <GD.TogglePlagueDescB>开关自行祛毒。保护佩戴者不受任何负面状态的影响。</GD.TogglePlagueDescB>
+  
+  <GD.ToggleDeathLabel>暴走</GD.ToggleDeathLabel>
+  <GD.ToggleDeathDesc>强制一个目标陷入狂暴，完全治愈之并赋予其强大战斗力。勋章佩戴者可以随时将此目标消灭。</GD.ToggleDeathDesc>
+  <GD.ToggleDeathLabelB>清除</GD.ToggleDeathLabelB>
+  <GD.ToggleDeathDescB>消灭因受铜色勋章影响而狂暴的目标。</GD.ToggleDeathDescB>
+  <CausedByDeathMedal>由铜色勋章造成。</CausedByDeathMedal>
+  <GD.NoDeathTarget>没有可供清除的目标。</GD.NoDeathTarget>
+  <GD.PawnIsBlackMech>不能影响黑衣机械族。</GD.PawnIsBlackMech>
+  <GD.PawnDowned>目标倒地。</GD.PawnDowned>
+  <GD.DeathCoolDown>冷却中：{0}秒</GD.DeathCoolDown>
+  <GD.TargetExist>同时只能存在一名被影响的敌人。</GD.TargetExist>
+  
+  <GD.ToggleWarLabel>广域轰炸</GD.ToggleWarLabel>
+  <GD.ToggleWarDesc>在一片较大的范围内展开威力巨大的广域轰炸。\n冷却时间：10秒。</GD.ToggleWarDesc>
+  <GD.ToggleWarLabelB>精确打击</GD.ToggleWarLabelB>
+  <GD.ToggleWarDescB>在一点内进行精确的连续轰炸。\n冷却时间：2秒。</GD.ToggleWarDescB>
+  <GD.WarCooling>轰炸冷却中：{0}秒</GD.WarCooling>
+  
+  <GD.ToggleConquerLabel>广域轰炸</GD.ToggleConquerLabel>
+  <GD.ToggleConquerDesc>在一片区域内展开威力巨大的广域轰炸。</GD.ToggleConquerDesc>
+  <GD.ToggleConquerLabelB>尸爆 : {0}</GD.ToggleConquerLabelB>
+  <GD.ToggleConquerDescB>抑止敌人的行动能力，同时使死亡的敌人对其周围的友军造成伤害。</GD.ToggleConquerDescB>
+  <GD.ToggleConquerLabelC>自愈 : {0}</GD.ToggleConquerLabelC>
+  <GD.ToggleConquerDescC>快速治愈佩戴者的新鲜伤口，并去除所有负面效果。\n如果佩戴者的精神状态异常，使其立刻恢复。</GD.ToggleConquerDescC>
+  <GD.ToggleConquerLabelD>暴走</GD.ToggleConquerLabelD>
+  <GD.ToggleConquerDescD>使这片地区内的所有敌人陷入狂暴。\n冷却时间：60秒。</GD.ToggleConquerDescD>
+  <GD.ConquerCooling>冷却中：{0}秒</GD.ConquerCooling>
+  
+  <!-- Radio -->
+  <PsychicRadioALabel>钝化广播</PsychicRadioALabel>
+  <PsychicRadioADesc>降低所有殖民者50％的心灵敏感度。</PsychicRadioADesc>
+  
+  <PsychicRadioBLabel>敏化广播</PsychicRadioBLabel>
+  <PsychicRadioBDesc>提高所有殖民者50％的心灵敏感度。复杂的信号处理需要消耗更多电力。</PsychicRadioBDesc>
+  
+  <PsychicRadioCLabel>无差别信号拦截</PsychicRadioCLabel>
+  <PsychicRadioCDesc>对一切来源的心灵信号进行拦截，使所有殖民者的心灵敏感度暂时归零。这种水平的信息处理已复杂到几乎无法为有机生命所理解，因此该建筑也需要极大量的电力来支持广播程序运行。</PsychicRadioCDesc>
+  
+  <!-- Puzzle -->
+  <GD_FailedToWear>因为太胖穿不上这件衣服。</GD_FailedToWear>
+  <PuzzleScuccess>验证通过。交付浏览权限。</PuzzleScuccess>
+  <PuzzleFailed>验证不通过。</PuzzleFailed>
+  <PuzzleFinished>验证通过</PuzzleFinished>
+  <PuzzleFinishedDesc>黑衣机械师的服装已经解锁。这套衣物的增益效果会随你的游戏进度推进而逐渐变强。</PuzzleFinishedDesc>
+  <PuzzleChecking>验证中</PuzzleChecking>
+  <PuzzleEnded>已经完成验证</PuzzleEnded>
+  
+  <!-- Biotech -->
+  <GD.KillAllUrchin>清除战争死卫</GD.KillAllUrchin>
+  <GD.KillAllUrchinDesc>命令本地图上所有正在活动的战争死卫关机。</GD.KillAllUrchinDesc>
+  <GD.CanNotKillUrchin>没有正在活动的战争死卫。</GD.CanNotKillUrchin>
+  
+  <GD.ClearAllUrchins>{0}：已发出关机指令。初始化中。</GD.ClearAllUrchins>
+  
+  <GD.ObserverLink>指定目标</GD.ObserverLink>
+  <GD.ObserverLinkDesc>选择一个友方殖民者或机械体，为其提供远距离辅助侦查，这可以提高其25％射程。再次指定同一个目标可以取消指定。</GD.ObserverLinkDesc>
+  <GD.ObserverDisconnected>已取消任务。</GD.ObserverDisconnected>
+  <GD.ObserverConnected>已接受任务。目标：{0}。</GD.ObserverConnected>
+  <GD.ObserverDowned>观察机倒地。</GD.ObserverDowned>
+  <GD.ObserverNotControled>观察机未被控制。</GD.ObserverNotControled>
+  
+  <GD.MechanitorNotFound>此单位不受控制。</GD.MechanitorNotFound>
+  <GD.MechanoidDowned>此单位倒地。</GD.MechanoidDowned>
+  <GD.LowEnergy>至少需要20％的剩余能量才可以使用技能。</GD.LowEnergy>
+  
+  <!-- Alpha -->
+  <GD.KillAllGutter>清除战争御侍</GD.KillAllGutter>
+  <GD.KillAllGutterDesc>命令本地图上所有正在活动的战争御侍关机。</GD.KillAllGutterDesc>
+  <GD.CanNotKillGutter>没有正在活动的战争御侍。</GD.CanNotKillGutter>
+</LanguageData>

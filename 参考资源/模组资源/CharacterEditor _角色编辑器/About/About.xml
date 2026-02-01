@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>Character Editor</name>
+  <author>void</author>
+  <url></url>
+  <modVersion>1.6.1</modVersion>
+  <supportedVersions>
+	<li>1.0</li>  
+	<li>1.1</li>
+	<li>1.2</li>
+	<li>1.3</li>
+	<li>1.4</li>
+	<li>1.5</li>
+	<li>1.6</li>
+  </supportedVersions>
+  <packageId>void.charactereditor</packageId>
+  <modDependencies>
+	<li>
+		<packageId>brrainz.harmony</packageId>
+		<displayName>Harmony</displayName>
+		<steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+	</li>	
+  </modDependencies>
+  <loadAfter>
+  	<li>brrainz.harmony</li>
+	<li>Ludeon.RimWorld</li>
+	<li>Ludeon.RimWorld.Royalty</li>
+	<li>Ludeon.RimWorld.Ideology</li>
+	<li>Ludeon.RimWorld.Biotech</li>
+	<li>Ludeon.RimWorld.Anomaly</li>
+	<li>UnlimitedHugs.HugsLib</li>
+  </loadAfter>
+  <description>v1.6.3 build on 2025-07-21 for RimWorld v1.6.4523
+Editor for humanlike pawns on map and for crashlanding (colonists, enemies, dead pawns)
+
+
+MOD FEATURES
+• editor for pawns on map and for crashlanding
+• editable: body, head, hair, skin color, apparel color, gender, name, age, skills, passion, traits, backstory, health, needs, thoughts, attraction, relations, favorite color
+• list for all available pawns, on map, in world, animals, etc
+• create, edit, remove, find, load, save pawns
+• edit or shift pawn inventory items
+• equip, edit or place weapons, apparel, items
+• change faction, race, mental state, inspiration
+• recruit, resurrect, heal or hurt pawns
+• redress, undress pawns
+• teleport pawns
+• change or edit ideology
+• give or remove titles
+• add or remove psy abilities
+• add or remove xenotypes and genes
+• edit records
+• edit mutations
+
+
+MOD LOAD ORDER
+Harmony
+Core
+Royalty (optional)
+Ideology (optional)
+Biotech (optional)
+Anomaly (optional)
+HugsLib (optional)
+...
+Character Editor
+
+
+MOD SETTINGS
+• ARGB/HDR [Enable/Disable] (image of selected pawn)
+• Create with race specific clothes [Enable/Disable]
+• Create nude [Enable/Disable]
+• Create no start weapon [Enable/Disable]
+• Create no start inventory [Enable/Disable]
+• Editor pauses game [Enable/Disable]
+• Show editor tabs [Enable/Disable]
+• Show pawn list [Enable/Disable]
+• Mini view [Enable/Disable]
+• Show in main tabs [Enable/Disable]
+• Architect menu objects [Enable/Disable]
+• Optional map settings [Enable/Disable]
+• Automatic Apparelcheck [Enable/Disable]
+• Stay in cascet [Enable/Disable]
+• Show dead logo [Enable/Disable]
+• Use sorted pawn list [Enable/Disable]
+• Use name files [Enable/Disable]
+• Hotkeys for UI and Teleport
+• Resolution (image of selected pawn)
+• Stack Limit [1..9999] (max value for the inventory slider)
+• Num capsule slots [10..100]
+• Custom saved armor changes
+• Custom saved weapon changes
+• Custom saved item changes
+• Custom pawns [90 slots]
+
+
+HOW TO USE
+a) start the editor from the crashlanding screen
+b) start the editor from the main tabs after the map has loaded (near to menu)
+c) start the editor from mod settings
+d) start the editor by entering 'Zombrella' or 'Zombgrella' cascet with pawn
+e) start the editor by pressing hotkey button (set a hotkey in settings)
+
+
+HOW TO CHANGE GRADIENT COLOR
+1. Precondition Gradient Hair mod is active.
+2. Click on the Hair-Label to open the color picker dialog.
+3. Select your Color for ColorA and ColorB.
+
+
+COMPATIBLE MODS
+should be compatible to almost every mod
+
+
+HINTS
+• To see add / remove pawn buttons - click on the star button left of the bio tab. that will show you all extended functions for pawn creation and more. click it again to hide them.
+• Click on the 'star' button on the right corner of the pawn image, to activate randomizers.
+• To choose the color with color picker, click on the hair label or apparel label or skin label.
+• There are 90 slots for pawns. Saved items are limited to 5. Gradient Hair is saved, when available.
+• When starting editor while pawn is selected, then selected pawn will be auto-selected in editor.
+
+
+HINTS FOR ITEM STAT EDITING
+• stat changes are instant for the current game session
+• you can rollback all stat changes by clicking on reset all to default
+• when you want to keep your changes after game restart, than you can use the save button
+• should also work with combat extended, but the functionality is limited
+• the editable changes for weapons is a lite version of the weaponry mod
+• the editable changes for armors is from my unreleased armory mod
+• you can buy the items instead of adding them to a pawn, by clicking on the item texture
+
+
+LANGUAGES
+• Most of the ui elements are auto-translated to all in-game languages.
+• Full language support for german, english, french, polish, spanish, russian, japanese, simplified chinese
+
+
+SPECIAL THANKS TO
+• Proxyer for japanese translation
+• 黄俊浩 for simplified chinese translation
+
+
+CHANGES OF LAST UPDATE
+• 2025-07-21
+- fixed Null Reference error on FirstBodySizeGene 
+- fixed teleporting a character adds them a psy bar
+- fixed pawn generation of creepJoiners. if you still see an error on creation, its because the game failed to create parents or age, but the pawn itself was created
+- fixed Null Reference error on tooltip for some royalty titles and DrawDesc
+- fixed given key 'HOTKEYEDITOR' was not present in the dictionary
+- fixed deleting slots in mod options not deleting slot zero
+- fixed path separator for import export pawnslots on Linux
+- fixed short hash collision with terraform rimworld mod (both mods need to be updated to current version first)
+- creating random pawns now can create pawns of xenotypes, not only baseliners (when DLC on)
+• 2025-06-18 build 1
+- mod updated for RimWorld 1.6.4494
+- fix for favorite color, colorDef instead of color for 1.6
+- checked reference members and -calls for vanilla game
+- added bodysize genes for 50 and 60 percent scale
+- fixed weird icon image for random button
+- fixed icon textures not loading on float menu
+- moved most of the reflection labels to their classes
+- fixed gradient error message
+• 2025-06-16 build 0
+- mod updated for RimWorld 1.6.4492
+</description>
+</ModMetaData>

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <SettingsCommonTab>Common</SettingsCommonTab>
+  <SettingsStatTab>Stats</SettingsStatTab>
+  <SettingsExperimentalTab>Experimental</SettingsExperimentalTab>
+  <SettingsIntegrationTab>Mods integration</SettingsIntegrationTab>
+  <SettingsColorsTab>Colors</SettingsColorsTab>
+
+  <GearTabWidth>Tab width {0} px</GearTabWidth>
+  <StatDebuffVisible>Show debuffs</StatDebuffVisible>
+  <NIT_AutoRenameBillLabelSettings>Auto rename bill on create</NIT_AutoRenameBillLabelSettings>
+
+  <NIT_EnableStarsAsQuality>Enable the quality display as stars</NIT_EnableStarsAsQuality>
+  <NIT_EnableOptionToOpenApparelMaster>Enable option to open apparel master</NIT_EnableOptionToOpenApparelMaster>
+  <NIT_EnableProgressBars>Enable progress bars</NIT_EnableProgressBars>
+
+  <NIT_EnableAutoWear>Enable auto-wear after crating apparel (may cause mod conflicts)</NIT_EnableAutoWear>
+
+  <NIT_CLI_UseVanillaButtons>Use vanilla buttons</NIT_CLI_UseVanillaButtons>
+  <NIT_ShowWeaponsInEquipmentSection>Show weapons in equipment section</NIT_ShowWeaponsInEquipmentSection>
+
+  <NIT_DepressionMode>Depression mode {0}</NIT_DepressionMode>
+  <NIT_DepressionColor>Your depression color</NIT_DepressionColor>
+  <NIT_Showcase>Showcase</NIT_Showcase>
+  <NIT_OnlyOnHover>Only on hover</NIT_OnlyOnHover>
+  <NIT_MatchToQualityColorsMod>Match to Quality Colors</NIT_MatchToQualityColorsMod>
+  <NIT_Reset>Default</NIT_Reset>
+</LanguageData>

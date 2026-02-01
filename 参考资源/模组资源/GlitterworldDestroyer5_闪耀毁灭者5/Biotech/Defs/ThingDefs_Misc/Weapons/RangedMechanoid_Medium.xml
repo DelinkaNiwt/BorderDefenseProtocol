@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <!-- reset beam -->
+  <DamageDef>
+    <defName>Beam</defName>
+    <label>beam</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>true</externalViolence>
+    <deathMessage>{0} has been beamed to death.</deathMessage>
+    <hediff>BeamWound</hediff>
+    <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+    <impactSoundType>Bullet</impactSoundType>
+    <armorCategory>Heat</armorCategory>
+    <overkillPctToDestroyPart>0~0.7</overkillPctToDestroyPart>
+    <isRanged>true</isRanged>
+    <makesAnimalsFlee>true</makesAnimalsFlee>
+    <defaultDamage>15</defaultDamage>
+    <defaultArmorPenetration>1.5</defaultArmorPenetration>
+    <buildingDamageFactorImpassable>0.4</buildingDamageFactorImpassable>
+    <buildingDamageFactorPassable>1</buildingDamageFactorPassable>
+  </DamageDef>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_ToxicNeedleGun</defName>
+    <label>toxic needle</label>
+    <graphicData>
+      <texPath>Things/Projectile/ToxicNeedleShot</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>BulletToxic</damageDef>
+      <damageAmountBase>15</damageAmountBase>
+      <armorPenetrationBase>1.35</armorPenetrationBase>
+      <stoppingPower>3.5</stoppingPower>
+      <speed>145</speed>
+    </projectile>
+  </ThingDef>
+
+</Defs>

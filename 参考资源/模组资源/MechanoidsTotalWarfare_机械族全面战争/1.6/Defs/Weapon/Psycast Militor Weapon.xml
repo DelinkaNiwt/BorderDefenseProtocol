@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_PsyCast_SMG</defName>
+    <label>PsyCast SMG Bullet</label>
+    <graphicData>
+      <texPath>Things/Projectile/Charge_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+<color>(0.71, 0.94, 0.75)</color> <!-- RGB(181, 240, 191) -->
+      <drawSize>1</drawSize>
+    </graphicData>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>4</damageAmountBase>
+      <armorPenetrationBase>2</armorPenetrationBase>
+	  <stoppingPower>1</stoppingPower>
+      <speed>20</speed>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseGun">
+    <defName>TW_PsyCast_SMG</defName>
+    <label>灵能冲锋枪</label>
+    <description>这把特制灵能冲锋枪是专为小镰打造的装备。长期996工作让这台机械体早早患上了严重的肩周炎，再也无法像同类那样自如使用传统枪械。虽然挂着冲锋枪的名号，实则更像个高科技泡泡枪——射出的灵能子弹飞行速度缓慢得如同漂浮的肥皂泡，就算是散步的老奶奶也能轻松躲开。即便如此，那微乎其微的后坐力对颤抖的机械臂而言仍是艰巨挑战。</description>
+    <tradeability>None</tradeability>
+    <destroyOnDrop>true</destroyOnDrop>
+    <relicChance>0</relicChance>
+    <graphicData>
+      <texPath>Things/PsyCast_SMG</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>0.75</drawSize>
+    </graphicData>
+    <soundInteract>Interact_SMG</soundInteract>
+    <weaponClasses>
+      <li>ShortShots</li>
+      <li>RangedHeavy</li>
+    </weaponClasses>
+    <statBases>
+      <WorkToMake>70000</WorkToMake>
+      <Mass>3.5</Mass>
+      <AccuracyTouch>0.8</AccuracyTouch>
+      <AccuracyShort>0.75</AccuracyShort>
+      <AccuracyMedium>0.5</AccuracyMedium>
+      <AccuracyLong>0.45</AccuracyLong>
+      <RangedWeapon_Cooldown>0.5</RangedWeapon_Cooldown>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_PsyCast_SMG</defaultProjectile>
+        <warmupTime>0.5</warmupTime>
+        <range>41</range>
+        <burstShotCount>7</burstShotCount>
+        <ticksBetweenBurstShots>6</ticksBetweenBurstShots>
+        <soundCast>Shot_HeavySMG</soundCast>
+        <soundCastTail>GunTail_Medium</soundCastTail>
+        <muzzleFlashScale>9</muzzleFlashScale>
+      </li>
+    </verbs>
+    <weaponTags Inherit="False">
+      <li>TW_PsyCast_SMG</li>
+    </weaponTags>
+	<tradeTags>
+      <li>TW_PsyCast_SMG</li>
+    </tradeTags>
+    <tools>
+      <li>
+        <label>grip</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>15</power>
+        <cooldownTime>0.1</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>15</power>
+        <cooldownTime>0.1</cooldownTime>
+      </li>
+    </tools>
+  </ThingDef>
+  
+  </Defs>

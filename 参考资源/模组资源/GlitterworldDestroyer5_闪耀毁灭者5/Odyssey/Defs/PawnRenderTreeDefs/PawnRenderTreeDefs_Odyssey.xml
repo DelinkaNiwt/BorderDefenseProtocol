@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <PawnRenderTreeDef>
+    <defName>MechAnnihilator</defName>
+    <root Class="PawnRenderNodeProperties_Parent">
+      <debugLabel>Root</debugLabel>
+      <tagDef>Root</tagDef>
+      <children>
+        <li>
+          <debugLabel>Body</debugLabel>
+          <tagDef>Body</tagDef>
+          <nodeClass>GD3.PawnRenderNode_Annihilator</nodeClass>
+          <children>
+            <li>
+              <debugLabel>Firefoam</debugLabel>
+              <nodeClass>PawnRenderNode_AnimalPart</nodeClass>
+              <workerClass>PawnRenderNodeWorker_OverlayFirefoam</workerClass>
+              <overlayLayer>Body</overlayLayer>
+              <useGraphic>false</useGraphic>
+              <baseLayer>5</baseLayer>
+            </li>
+          </children>
+        </li>
+		<li>
+		  <debugLabel>Joints</debugLabel>
+		  <texPath>Annihilator/Joint/Joints</texPath>
+		  <overrideMeshSize>10</overrideMeshSize>
+		  <overlayLayer>Body</overlayLayer>
+		  <tagDef>Annihilator_Joints</tagDef>
+		  <baseLayer>-10</baseLayer>
+		</li>
+		<li Class="GD3.PawnRenderNodeProperties_AnnihilatorPart">
+		  <debugLabel>Leg_LF</debugLabel>
+		  <texPath>Annihilator/Leg/LeftFront</texPath>
+		  <overrideMeshSize>10</overrideMeshSize>
+		  <overlayLayer>Body</overlayLayer>
+		  <drawData>
+			<defaultData>
+			  <pivot>(1,0)</pivot>
+			</defaultData>
+		  </drawData>
+		  <tagDef>Annihilator_Leg_LFront</tagDef>
+		  <linkedWithGroup>Annihilator_Leg_LFront</linkedWithGroup>
+		  <baseLayer>20</baseLayer>
+		</li>
+		<li Class="GD3.PawnRenderNodeProperties_AnnihilatorPart">
+		  <debugLabel>Leg_RF</debugLabel>
+		  <texPath>Annihilator/Leg/RightFront</texPath>
+		  <overrideMeshSize>10</overrideMeshSize>
+		  <overlayLayer>Body</overlayLayer>
+		  <drawData>
+			<defaultData>
+			  <pivot>(-1,0)</pivot>
+			</defaultData>
+		  </drawData>
+		  <tagDef>Annihilator_Leg_RFront</tagDef>
+		  <linkedWithGroup>Annihilator_Leg_RFront</linkedWithGroup>
+		  <baseLayer>20</baseLayer>
+		</li>
+		<li Class="GD3.PawnRenderNodeProperties_AnnihilatorPart">
+		  <debugLabel>Leg_LM</debugLabel>
+		  <texPath>Annihilator/Leg/LeftMid</texPath>
+		  <overrideMeshSize>10</overrideMeshSize>
+		  <overlayLayer>Body</overlayLayer>
+		  <drawData>
+			<defaultData>
+			  <pivot>(0.5,0.5)</pivot>
+			</defaultData>
+		  </drawData>
+		  <tagDef>Annihilator_Leg_LMiddle</tagDef>
+		  <linkedWithGroup>Annihilator_Leg_LMiddle</linkedWithGroup>
+		  <baseLayer>-2</baseLayer>
+		</li>
+		<li Class="GD3.PawnRenderNodeProperties_AnnihilatorPart">
+		  <debugLabel>Leg_RM</debugLabel>
+		  <texPath>Annihilator/Leg/RightMid</texPath>
+		  <overrideMeshSize>10</overrideMeshSize>
+		  <overlayLayer>Body</overlayLayer>
+		  <drawData>
+			<defaultData>
+			  <pivot>(-0.5,0.5)</pivot>
+			</defaultData>
+		  </drawData>
+		  <tagDef>Annihilator_Leg_RMiddle</tagDef>
+		  <linkedWithGroup>Annihilator_Leg_RMiddle</linkedWithGroup>
+		  <baseLayer>-2</baseLayer>
+		</li>
+		<li Class="GD3.PawnRenderNodeProperties_AnnihilatorPart">
+		  <debugLabel>Leg_LH</debugLabel>
+		  <texPath>Annihilator/Leg/LeftHind</texPath>
+		  <overrideMeshSize>10</overrideMeshSize>
+		  <overlayLayer>Body</overlayLayer>
+		  <drawData>
+			<defaultData>
+			  <pivot>(0.5,0.5)</pivot>
+			</defaultData>
+		  </drawData>
+		  <tagDef>Annihilator_Leg_LHind</tagDef>
+		  <linkedWithGroup>Annihilator_Leg_LHind</linkedWithGroup>
+		  <baseLayer>-5</baseLayer>
+		</li>
+		<li Class="GD3.PawnRenderNodeProperties_AnnihilatorPart">
+		  <debugLabel>Leg_RH</debugLabel>
+		  <texPath>Annihilator/Leg/RightHind</texPath>
+		  <overrideMeshSize>10</overrideMeshSize>
+		  <overlayLayer>Body</overlayLayer>
+		  <drawData>
+			<defaultData>
+			  <pivot>(-0.5,0.5)</pivot>
+			</defaultData>
+		  </drawData>
+		  <tagDef>Annihilator_Leg_RHind</tagDef>
+		  <linkedWithGroup>Annihilator_Leg_RHind</linkedWithGroup>
+		  <baseLayer>-5</baseLayer>
+		</li>
+      </children>
+    </root>
+  </PawnRenderTreeDef>
+
+</Defs>

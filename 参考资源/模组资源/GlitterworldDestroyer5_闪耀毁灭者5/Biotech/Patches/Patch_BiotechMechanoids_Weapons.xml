@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+	<Operation Class="PatchOperationSequence">
+		<operations>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Bullet_MiniShotgun"]/projectile</xpath>
+				<value>
+					<projectile>
+					  <damageDef>Bullet</damageDef>
+					  <damageAmountBase>12</damageAmountBase>
+					  <stoppingPower>2.5</stoppingPower>
+					  <armorPenetrationBase>0.42</armorPenetrationBase>
+					  <speed>55</speed>
+					</projectile>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Gun_MiniShotgun"]/verbs</xpath>
+				<value>
+					<verbs>
+					  <li>
+						<verbClass>Verb_Shoot</verbClass>
+						<hasStandardCommand>true</hasStandardCommand>
+						<defaultProjectile>Bullet_MiniShotgun</defaultProjectile>
+						<warmupTime>1.2</warmupTime>
+						<range>12.9</range>
+						<burstShotCount>3</burstShotCount>
+						<ticksBetweenBurstShots>1</ticksBetweenBurstShots>
+						<soundCast>Shot_Shotgun</soundCast>
+						<soundCastTail>GunTail_Heavy</soundCastTail>
+						<muzzleFlashScale>6</muzzleFlashScale>
+					  </li>
+					</verbs>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Bullet_Slugthrower"]/projectile</xpath>
+				<value>
+					<projectile>
+					  <damageDef>Bullet</damageDef>
+					  <damageAmountBase>12</damageAmountBase>
+					  <armorPenetrationBase>0.42</armorPenetrationBase>
+					  <speed>70</speed>
+					</projectile>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Gun_Slugthrower"]/verbs</xpath>
+				<value>
+					<verbs>
+					  <li>
+						<verbClass>Verb_Shoot</verbClass>
+						<hasStandardCommand>true</hasStandardCommand>
+						<defaultProjectile>Bullet_Slugthrower</defaultProjectile>
+						<warmupTime>0.3</warmupTime>
+						<range>19.9</range>
+						<ticksBetweenBurstShots>8</ticksBetweenBurstShots>
+						<burstShotCount>1</burstShotCount>
+						<soundCast>Shot_Slugthrower</soundCast>
+						<soundCastTail>GunTail_Light</soundCastTail>
+						<muzzleFlashScale>9</muzzleFlashScale>
+					  </li>
+					</verbs>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Bullet_Spiner"]/projectile</xpath>
+				<value>
+					<projectile>
+					  <damageDef>Bullet</damageDef>
+					  <damageAmountBase>10</damageAmountBase>
+					  <armorPenetrationBase>0.48</armorPenetrationBase>
+					  <speed>70</speed>
+					</projectile>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Gun_Spiner"]/verbs</xpath>
+				<value>
+					<verbs>
+					  <li>
+						<verbClass>Verb_Shoot</verbClass>
+						<hasStandardCommand>true</hasStandardCommand>
+						<defaultProjectile>Bullet_Spiner</defaultProjectile>
+						<warmupTime>0.3</warmupTime>
+						<range>6.9</range>
+						<ticksBetweenBurstShots>1</ticksBetweenBurstShots>
+						<burstShotCount>1</burstShotCount>
+						<soundCast>Shot_Spiner</soundCast>
+						<soundCastTail>GunTail_Light</soundCastTail>
+						<muzzleFlashScale>9</muzzleFlashScale>
+					  </li>
+					</verbs>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Gun_Spiner"]/statBases</xpath>
+				<value>
+					<statBases>
+					  <MarketValue>500</MarketValue>
+					  <Mass>1</Mass>
+					  <AccuracyTouch>0.20</AccuracyTouch>
+					  <AccuracyShort>0.30</AccuracyShort>
+					  <AccuracyMedium>0.40</AccuracyMedium>
+					  <AccuracyLong>0.95</AccuracyLong>
+					  <RangedWeapon_Cooldown>0.3</RangedWeapon_Cooldown>      
+					</statBases>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Gun_MiniFlameblaster"]/verbs</xpath>
+				<value>
+					<verbs>
+					  <li>
+						<verbClass>GD3.Verb_SpewFire</verbClass>
+						<hasStandardCommand>true</hasStandardCommand>
+						<warmupTime>0</warmupTime>
+						<range>7.9</range>
+						<ticksBetweenBurstShots>4</ticksBetweenBurstShots>
+						<burstShotCount>30</burstShotCount>
+						<soundCast>Shot_MiniFlameblaster</soundCast>
+						<muzzleFlashScale>9</muzzleFlashScale>
+					  </li>
+					</verbs>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Gun_MiniFlameblaster"]/statBases</xpath>
+				<value>
+					<statBases>
+					  <MarketValue>1000</MarketValue>
+					  <Mass>1.5</Mass>
+					  <AccuracyTouch>0.40</AccuracyTouch>
+					  <AccuracyShort>0.48</AccuracyShort>
+					  <AccuracyMedium>0.35</AccuracyMedium>
+					  <AccuracyLong>0.26</AccuracyLong>
+					  <RangedWeapon_Cooldown>2.0</RangedWeapon_Cooldown>      
+					</statBases>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Gun_BeamGraser"]/verbs</xpath>
+				<value>
+					<verbs>
+					  <li>
+						<verbClass>Verb_ShootBeam</verbClass>
+						<hasStandardCommand>true</hasStandardCommand>
+						<warmupTime>1.0</warmupTime>
+						<range>24.9</range>
+						<minRange>3.9</minRange>
+						<beamFullWidthRange>6.9</beamFullWidthRange>
+						<burstShotCount>30</burstShotCount>
+						<beamWidth>6</beamWidth>
+						<ticksBetweenBurstShots>3</ticksBetweenBurstShots>
+						<beamDamageDef>Beam</beamDamageDef>
+						<soundCastTail>GunTail_Medium</soundCastTail>
+						<muzzleFlashScale>9</muzzleFlashScale>
+						<soundCastBeam>BeamGraser_Shooting</soundCastBeam>
+						<beamGroundFleckDef>Fleck_BeamBurn</beamGroundFleckDef>
+						<beamFleckChancePerTick>0.32</beamFleckChancePerTick>
+						<beamMaxDeviation>1.5</beamMaxDeviation>
+						<beamCurvature>0.6</beamCurvature>
+						<beamMoteDef>Mote_GraserBeamBase</beamMoteDef>
+						<beamEndEffecterDef>GraserBeam_End</beamEndEffecterDef>
+						<beamChanceToStartFire>0.85</beamChanceToStartFire>
+						<beamChanceToAttachFire>0.85</beamChanceToAttachFire>
+						<beamFireSizeRange>0.55~0.85</beamFireSizeRange>
+						<beamLineFleckDef>Fleck_BeamSpark</beamLineFleckDef>
+						<beamStartOffset>0.8</beamStartOffset>
+						<beamLineFleckChanceCurve>
+						  <points>
+							<li>(0, 0)</li>
+							<li>(0.65, 0.4)</li>
+							<li>(1, 0.75)</li>
+						  </points>
+						</beamLineFleckChanceCurve>
+					  </li>
+					</verbs>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Gun_BeamGraser"]/statBases</xpath>
+				<value>
+					<statBases>
+					  <WorkToMake>40000</WorkToMake>
+					  <Mass>4</Mass>
+					  <AccuracyTouch>1</AccuracyTouch>
+					  <AccuracyShort>1</AccuracyShort>
+					  <AccuracyMedium>1</AccuracyMedium>
+					  <AccuracyLong>1</AccuracyLong>
+					  <RangedWeapon_Cooldown>1.0</RangedWeapon_Cooldown>
+					</statBases>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Gun_ToxicNeedle"]/verbs</xpath>
+				<value>
+					<verbs>
+					  <li>
+						<verbClass>Verb_Shoot</verbClass>
+						<hasStandardCommand>true</hasStandardCommand>
+						<defaultProjectile>Bullet_ToxicNeedleGun</defaultProjectile>
+						<warmupTime>1.35</warmupTime>
+						<range>44.9</range>
+						<soundCast>Shot_ToxicNeedleGun</soundCast>
+						<soundCastTail>GunTail_Heavy</soundCastTail>
+						<muzzleFlashScale>9</muzzleFlashScale>
+					  </li>
+					</verbs>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Gun_ToxicNeedle"]/statBases</xpath>
+				<value>
+					<statBases>
+					  <MarketValue>1400</MarketValue>
+					  <Mass>2.6</Mass>
+					  <AccuracyTouch>1.00</AccuracyTouch>
+					  <AccuracyShort>1.00</AccuracyShort>
+					  <AccuracyMedium>1.00</AccuracyMedium>
+					  <AccuracyLong>1.00</AccuracyLong>
+					  <RangedWeapon_Cooldown>0.1</RangedWeapon_Cooldown>
+					</statBases>
+				</value>
+			</li>
+			<!-- 副炮 -->
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Gun_ChargeBlasterTurret"]/verbs</xpath>
+				<value>
+					<verbs>
+					  <li>
+						<verbClass>Verb_Shoot</verbClass>
+						<defaultProjectile>Bullet_ChargeBlasterHeavy</defaultProjectile>
+						<range>11.9</range>
+						<soundCast>ThumpCannon_Fire</soundCast>
+						<soundCastTail>GunTail_Heavy</soundCastTail>
+						<muzzleFlashScale>9</muzzleFlashScale>
+						<defaultCooldownTime>2.5</defaultCooldownTime>
+						<linkedBodyPartsGroup>BulbTurret</linkedBodyPartsGroup>
+						<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+						<ticksBetweenBurstShots>1</ticksBetweenBurstShots>
+						<burstShotCount>6</burstShotCount>
+					  </li>
+					</verbs>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Gun_ChargeBlasterTurret"]/statBases</xpath>
+				<value>
+					<statBases>
+					  <Mass>2.6</Mass>
+					  <AccuracyTouch>0.60</AccuracyTouch>
+					  <AccuracyShort>0.80</AccuracyShort>
+					  <AccuracyMedium>0.90</AccuracyMedium>
+					  <AccuracyLong>0.85</AccuracyLong>
+					</statBases>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+	
+</Patch>

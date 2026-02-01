@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Defs>
-  <KeyBindingDef ParentName="DevelopmentKeyBinding">
-    <defName>VFE_Dev_Restart</defName>
-    <label>restart game</label>
-    <defaultKeyCodeA></defaultKeyCodeA>
-  </KeyBindingDef>
-</Defs>

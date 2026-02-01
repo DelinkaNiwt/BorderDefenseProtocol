@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 蠕虫将至 -->
+  <NCL_WaitWorm.label>TODO</NCL_WaitWorm.label>
+  <!-- EN: 一只机械蠕虫将被投放到你的主基地,如果你在这段蠕虫到来之前离开基地,那么你将永久的失去它. -->
+  <NCL_WaitWorm.description>TODO</NCL_WaitWorm.description>
+  <!-- EN: 蠕虫送达 -->
+  <NCL_WaitWorm.endMessage>TODO</NCL_WaitWorm.endMessage>
+  <!-- EN: 被投放的蠕虫抵达了你的基地,准备接收. -->
+  <NCL_WaitWorm.letterText>TODO</NCL_WaitWorm.letterText>
+  
+  <!-- EN: 试炼将至 -->
+  <NCL_WaitWormFight.label>TODO</NCL_WaitWormFight.label>
+  <!-- EN: 一只机械蠕虫将被投放到你的主基地,如果你在这段蠕虫到来之前逃离,那么你的试炼可能会被视为失败. -->
+  <NCL_WaitWormFight.description>TODO</NCL_WaitWormFight.description>
+  <!-- EN: 蠕虫送达 -->
+  <NCL_WaitWormFight.endMessage>TODO</NCL_WaitWormFight.endMessage>
+  <!-- EN: 被投放的蠕虫抵达了你的基地,准备好战斗吧. -->
+  <NCL_WaitWormFight.letterText>TODO</NCL_WaitWormFight.letterText>
+  
+</LanguageData>

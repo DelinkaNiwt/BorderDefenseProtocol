@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+   <ThingDef ParentName="BuildingBase">
+    <defName>TW_CerebrexCore_Rebuild</defName>
+    <label>机械首脑</label>
+    <description>这座远古机械文明的神经中枢，表面覆盖着脉动的量子回路网络。其核心是一个悬浮的神经突触脑装体，通过反重力场在基座上缓缓旋转。主脑内置的深空信号阵列能向整个星系广播坐标，唤醒沉睡的机械军团。
+    
+    警告：激活主脑将使你的殖民地暴露于机械帝国的视野中。重启后，机械族袭击将被重新激活，所有来袭部队都将获得战斗强化。
+    
+    通过研究主脑的核心矩阵，可解锁机械文明的尖端科技蓝图。</description>
+    <tickerType>Normal</tickerType>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Buildings/MechCoreBase</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(7,7)</drawSize>
+    </graphicData>
+    <uiIconPath>Buildings/CerebrexCore_ReBuild_MenuIcon</uiIconPath>
+    <size>(7,7)</size>
+    <rotatable>false</rotatable>
+    <passability>Impassable</passability>
+    <castEdgeShadows>false</castEdgeShadows>
+    <fillPercent>1.0</fillPercent>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <destroyable>false</destroyable>
+    <useHitPoints>false</useHitPoints>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <building>
+      <isEdifice>true</isEdifice>
+      <deconstructible>false</deconstructible>
+      <claimable>true</claimable>
+      <repairable>true</repairable>
+      <isTargetable>true</isTargetable>
+    </building>
+    <thingCategories>
+      <li>BuildingsMisc</li>
+    </thingCategories>
+    <statBases>
+      <MaxHitPoints>7200</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <Mass>3000</Mass>
+      <Beauty>500</Beauty>
+	  <WorkToBuild>88000</WorkToBuild>
+    </statBases>
+	<costList>
+      <AIPersonaCore>1</AIPersonaCore>
+      <Steel>1500</Steel>
+	  <Uranium>1000</Uranium>
+	  <Plasteel>800</Plasteel>
+      <ComponentIndustrial>72</ComponentIndustrial>
+	  <ComponentSpacer>36</ComponentSpacer>
+    </costList>
+	<researchPrerequisites>
+      <li>NCL_CerebrexCore_Rebuild</li>
+  </researchPrerequisites>
+    <designationCategory>Biotech</designationCategory>
+    <constructionSkillPrerequisite>12</constructionSkillPrerequisite>
+    <comps>
+    <li Class="CompProperties_RestartableCerebrexCore">
+      <bobFrequency>0.02</bobFrequency>
+      <bobAmplitude>0.35</bobAmplitude>
+      <zOffset>2</zOffset>
+      <restartDurationTicks>180</restartDurationTicks> 
+           </li>
+      <li Class="CompProperties_AmbientSound">
+        <sound>CerebrexCore_Ambient</sound>
+      </li>
+    </comps>
+  </ThingDef>
+  
+</Defs>

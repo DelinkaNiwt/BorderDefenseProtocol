@@ -1,0 +1,437 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <!-- base -->
+  <QuestScriptDef Name="GiantClusterQuestBase" Abstract="True">
+    <rootSelectionWeight>0.00001</rootSelectionWeight>
+    <rootMinPoints>99999</rootMinPoints>
+    <canGiveRoyalFavor>false</canGiveRoyalFavor>
+	<autoAccept>true</autoAccept>
+    <!-- <successHistoryEvent MayRequire="Ludeon.RimWorld.Ideology">Raided_BanditCamp</successHistoryEvent> -->
+  </QuestScriptDef>
+  
+  <!-- 小型 -->
+  <QuestScriptDef ParentName="GiantClusterQuestBase">
+    <defName>GD_Quest_Cluster_S</defName>
+	<defaultChallengeRating>1</defaultChallengeRating>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->Detected giant mechanoid clusters α</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->The shortwave receiver located the position of a giant cluster not far away. \n\nThis cluster looks like it was just recently established, and a handful of not-so-strong turrets are protecting a huge container that looks like a resource staging area. If we raid this cluster, we might be able to harvest a considerable amount of basic materials. \n\n*Biotech DLC: Termites are powerful offensive vanguards, so take at least one with you before you go.</li>
+      </rulesStrings>
+    </questDescriptionRules>
+	<root Class="QuestNode_Sequence">
+      <nodes>
+
+        <li Class="QuestNode_SubScript">
+          <def>Util_AdjustPointsForDistantFight</def>
+        </li>
+        <li Class="QuestNode_GetMap" />
+		
+		<li Class="QuestNode_Set">
+          <name>siteDistRange</name>
+          <value>5~10</value>
+        </li>
+
+        <li Class="QuestNode_GetSiteTile">
+          <storeAs>siteTile</storeAs>
+          <preferCloserTiles>true</preferCloserTiles>
+		  <selectLandmarkChance>0</selectLandmarkChance>
+        </li>
+
+        <li Class="QuestNode_GetSitePartDefsByTagsAndFaction">
+          <storeAs>sitePartDefs</storeAs>
+          <storeFactionAs>siteFaction</storeFactionAs>
+          <sitePartsTags>
+            <li><tag>GiantCluster_S</tag></li>
+          </sitePartsTags>
+          <!-- <mustBeHostileToFactionOf>Mechanoid</mustBeHostileToFactionOf> -->
+        </li>
+		
+		<li Class="VEF.Storyteller.QuestNode_GetFaction">
+			<allowEnemy>true</allowEnemy>
+			<mustBePermanentEnemy>true</mustBePermanentEnemy>
+			<storeAs>siteFaction</storeAs>
+			<factionDef>Mechanoid</factionDef>
+		</li>
+
+        <li Class="QuestNode_GetDefaultSitePartsParams">
+          <tile>$siteTile</tile>
+          <faction>$siteFaction</faction>
+          <sitePartDefs>$sitePartDefs</sitePartDefs>
+          <storeSitePartsParamsAs>sitePartsParams</storeSitePartsParamsAs>
+        </li>
+        
+        <li Class="QuestNode_GetSiteThreatPoints">
+          <storeAs>sitePoints</storeAs>
+          <sitePartsParams>$sitePartsParams</sitePartsParams>
+        </li>
+
+        <li Class="QuestNode_SubScript">
+          <def>Util_GenerateSite</def>
+        </li>
+        
+        <li Class="QuestNode_SpawnWorldObjects">
+          <worldObjects>$site</worldObjects>
+        </li>
+
+        <li Class="QuestNode_WorldObjectTimeout">
+          <worldObject>$site</worldObject>
+          <isQuestTimeout>true</isQuestTimeout>
+          <delayTicks>$(randInt(15,18)*60000)</delayTicks>
+          <inSignalDisable>site.MapGenerated</inSignalDisable>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label TKey="LetterLabelQuestExpired">Quest expired: [resolvedQuestName]</label>
+                <text TKey="LetterTextQuestExpired">The giant cluster has achieved its residency purpose and completed its transfer. The task [resolvedQuestName] has expired.</text>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+        <!-- If we enter and leave, the map is destroyed. Fail the quest. -->
+        <li Class="QuestNode_Signal">
+          <inSignal>site.Destroyed</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label TKey="LetterLabelQuestFailed">Quest end: [resolvedQuestName]</label>
+                <text TKey="LetterTextQuestFailed">Mission [resolvedQuestName] has ended.</text>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+      </nodes>
+    </root>
+  </QuestScriptDef>
+  
+  <!-- 中型 -->
+  <QuestScriptDef ParentName="GiantClusterQuestBase">
+    <defName>GD_Quest_Cluster_M</defName>
+	<defaultChallengeRating>2</defaultChallengeRating>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->Detected giant mechanoid clusters β</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->The shortwave receiver located the position of a giant cluster not far away. \n\nThis cluster is already taking shape, several giant turrets have been erected, as well as mobile units stationed in the cluster. One of the core buildings, the psychic shielding marrow, prevents the colonists from using their psychic abilities, and we need to have a well planned attack to succeed. \n\nnew threats: psychic shielding marrow, automated mortars, giant charge turrets, archotech trick mines</li>
+      </rulesStrings>
+    </questDescriptionRules>
+	<root Class="QuestNode_Sequence">
+      <nodes>
+
+        <li Class="QuestNode_SubScript">
+          <def>Util_AdjustPointsForDistantFight</def>
+        </li>
+        <li Class="QuestNode_GetMap" />
+		
+		<li Class="QuestNode_Set">
+          <name>siteDistRange</name>
+          <value>5~10</value>
+        </li>
+
+        <li Class="QuestNode_GetSiteTile">
+          <storeAs>siteTile</storeAs>
+          <preferCloserTiles>true</preferCloserTiles>
+		  <selectLandmarkChance>0</selectLandmarkChance>
+        </li>
+
+        <li Class="QuestNode_GetSitePartDefsByTagsAndFaction">
+          <storeAs>sitePartDefs</storeAs>
+          <storeFactionAs>siteFaction</storeFactionAs>
+          <sitePartsTags>
+            <li><tag>GiantCluster_M</tag></li>
+          </sitePartsTags>
+          <!-- <mustBeHostileToFactionOf>Mechanoid</mustBeHostileToFactionOf> -->
+        </li>
+		
+		<li Class="VEF.Storyteller.QuestNode_GetFaction">
+			<allowEnemy>true</allowEnemy>
+			<mustBePermanentEnemy>true</mustBePermanentEnemy>
+			<storeAs>siteFaction</storeAs>
+			<factionDef>Mechanoid</factionDef>
+		</li>
+
+        <li Class="QuestNode_GetDefaultSitePartsParams">
+          <tile>$siteTile</tile>
+          <faction>$siteFaction</faction>
+          <sitePartDefs>$sitePartDefs</sitePartDefs>
+          <storeSitePartsParamsAs>sitePartsParams</storeSitePartsParamsAs>
+        </li>
+        
+        <li Class="QuestNode_GetSiteThreatPoints">
+          <storeAs>sitePoints</storeAs>
+          <sitePartsParams>$sitePartsParams</sitePartsParams>
+        </li>
+
+        <li Class="QuestNode_SubScript">
+          <def>Util_GenerateSite</def>
+        </li>
+        
+        <li Class="QuestNode_SpawnWorldObjects">
+          <worldObjects>$site</worldObjects>
+        </li>
+
+        <li Class="QuestNode_WorldObjectTimeout">
+          <worldObject>$site</worldObject>
+          <isQuestTimeout>true</isQuestTimeout>
+          <delayTicks>$(randInt(15,18)*60000)</delayTicks>
+          <inSignalDisable>site.MapGenerated</inSignalDisable>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label TKey="LetterLabelQuestExpired">Quest expired: [resolvedQuestName]</label>
+                <text TKey="LetterTextQuestExpired">The giant cluster has achieved its residency purpose and completed its transfer. The task [resolvedQuestName] has expired.</text>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+        <!-- If we enter and leave, the map is destroyed. Fail the quest. -->
+        <li Class="QuestNode_Signal">
+          <inSignal>site.Destroyed</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label TKey="LetterLabelQuestFailed">Quest failed: [resolvedQuestName]</label>
+                <text TKey="LetterTextQuestFailed">This attack eventually spooked the cluster, which quickly regrouped and completed its diversion after the threat was encountered. Mission [resolvedQuestName] has failed.</text>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+      </nodes>
+    </root>
+  </QuestScriptDef>
+  
+  <!-- 大型 -->
+  <QuestScriptDef ParentName="GiantClusterQuestBase">
+    <defName>GD_Quest_Cluster_L</defName>
+	<defaultChallengeRating>3</defaultChallengeRating>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->Detected giant mechanoid clusters γ</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->The shortwave receiver located the position of a giant cluster not far away. \n\nThis cluster is unusually heavily defended, and the initial inference is that it is clearing the way for the installation of an important mechanoid industrial production line. The psychic suppression marrow will prevent all our combatants from concentrating on their thoughts, which will further make the battle more difficult, but the cluster's less-than-tightly lined up may provide an opportunity for airdrop raids to take advantage of. \n\nNew threats: Psychic suppression marrow, Giant Inferno Turret, Giant Automated Mortar, Charge Enhancer, Plasma Enhancer, Cataphract Centipede</li>
+      </rulesStrings>
+    </questDescriptionRules>
+	<root Class="QuestNode_Sequence">
+      <nodes>
+
+        <li Class="QuestNode_SubScript">
+          <def>Util_AdjustPointsForDistantFight</def>
+        </li>
+        <li Class="QuestNode_GetMap" />
+		
+		<li Class="QuestNode_Set">
+          <name>siteDistRange</name>
+          <value>5~10</value>
+        </li>
+
+        <li Class="QuestNode_GetSiteTile">
+          <storeAs>siteTile</storeAs>
+          <preferCloserTiles>true</preferCloserTiles>
+		  <selectLandmarkChance>0</selectLandmarkChance>
+        </li>
+
+        <li Class="QuestNode_GetSitePartDefsByTagsAndFaction">
+          <storeAs>sitePartDefs</storeAs>
+          <storeFactionAs>siteFaction</storeFactionAs>
+          <sitePartsTags>
+            <li><tag>GiantCluster_L</tag></li>
+          </sitePartsTags>
+          <!-- <mustBeHostileToFactionOf>Mechanoid</mustBeHostileToFactionOf> -->
+        </li>
+		
+		<li Class="VEF.Storyteller.QuestNode_GetFaction">
+			<allowEnemy>true</allowEnemy>
+			<mustBePermanentEnemy>true</mustBePermanentEnemy>
+			<storeAs>siteFaction</storeAs>
+			<factionDef>Mechanoid</factionDef>
+		</li>
+
+        <li Class="QuestNode_GetDefaultSitePartsParams">
+          <tile>$siteTile</tile>
+          <faction>$siteFaction</faction>
+          <sitePartDefs>$sitePartDefs</sitePartDefs>
+          <storeSitePartsParamsAs>sitePartsParams</storeSitePartsParamsAs>
+        </li>
+        
+        <li Class="QuestNode_GetSiteThreatPoints">
+          <storeAs>sitePoints</storeAs>
+          <sitePartsParams>$sitePartsParams</sitePartsParams>
+        </li>
+
+        <li Class="QuestNode_SubScript">
+          <def>Util_GenerateSite</def>
+        </li>
+        
+        <li Class="QuestNode_SpawnWorldObjects">
+          <worldObjects>$site</worldObjects>
+        </li>
+
+        <li Class="QuestNode_WorldObjectTimeout">
+          <worldObject>$site</worldObject>
+          <isQuestTimeout>true</isQuestTimeout>
+          <delayTicks>$(randInt(15,18)*60000)</delayTicks>
+          <inSignalDisable>site.MapGenerated</inSignalDisable>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label TKey="LetterLabelQuestExpired">Quest expired: [resolvedQuestName]</label>
+                <text TKey="LetterTextQuestExpired">The giant cluster has achieved its residency purpose and completed its transfer. The task [resolvedQuestName] has expired.</text>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+        <!-- If we enter and leave, the map is destroyed. Fail the quest. -->
+        <li Class="QuestNode_Signal">
+          <inSignal>site.Destroyed</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label TKey="LetterLabelQuestFailed">Quest failed: [resolvedQuestName]</label>
+                <text TKey="LetterTextQuestFailed">This attack eventually spooked the cluster, which quickly regrouped and completed its diversion after the threat was encountered. Mission [resolvedQuestName] has failed.</text>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+      </nodes>
+    </root>
+  </QuestScriptDef>
+  
+  <!-- 超大型 -->
+  <QuestScriptDef ParentName="GiantClusterQuestBase">
+    <defName>GD_Quest_Cluster_U</defName>
+	<defaultChallengeRating>4</defaultChallengeRating>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->Detected giant mechanoid clusters Ω</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->The shortwave receiver located the position of a giant cluster not far away. \n\nIn fact, we observed the architectural structure of this cluster with the naked eye from several thousand meters away, and it seems that the mechanoids are trying to use this place as a springboard to gradually achieve the goal of siliconizing the entire planet. Perhaps we should not meddle, but once the attack is successful, the knowledge gained will be enough to take us beyond all the obstacles of the past.\nThe whispers emanating from the psychic berserk marrow will send one of our warriors into a berserk frenzy every little while. There is little we can do about it, except perhaps try to increase the number of units involved in the battle to reduce the probability of the core being affected and end the battle as soon as possible. \n\nNew threat: Psychic Berserk Marrow</li>
+      </rulesStrings>
+    </questDescriptionRules>
+	<root Class="QuestNode_Sequence">
+      <nodes>
+
+        <li Class="QuestNode_SubScript">
+          <def>Util_AdjustPointsForDistantFight</def>
+        </li>
+        <li Class="QuestNode_GetMap" />
+		
+		<li Class="QuestNode_Set">
+          <name>siteDistRange</name>
+          <value>5~10</value>
+        </li>
+
+        <li Class="QuestNode_GetSiteTile">
+          <storeAs>siteTile</storeAs>
+          <preferCloserTiles>true</preferCloserTiles>
+		  <selectLandmarkChance>0</selectLandmarkChance>
+        </li>
+
+        <li Class="QuestNode_GetSitePartDefsByTagsAndFaction">
+          <storeAs>sitePartDefs</storeAs>
+          <storeFactionAs>siteFaction</storeFactionAs>
+          <sitePartsTags>
+            <li><tag>GiantCluster_U</tag></li>
+          </sitePartsTags>
+          <!-- <mustBeHostileToFactionOf>Mechanoid</mustBeHostileToFactionOf> -->
+        </li>
+		
+		<li Class="VEF.Storyteller.QuestNode_GetFaction">
+			<allowEnemy>true</allowEnemy>
+			<mustBePermanentEnemy>true</mustBePermanentEnemy>
+			<storeAs>siteFaction</storeAs>
+			<factionDef>Mechanoid</factionDef>
+		</li>
+
+        <li Class="QuestNode_GetDefaultSitePartsParams">
+          <tile>$siteTile</tile>
+          <faction>$siteFaction</faction>
+          <sitePartDefs>$sitePartDefs</sitePartDefs>
+          <storeSitePartsParamsAs>sitePartsParams</storeSitePartsParamsAs>
+        </li>
+        
+        <li Class="QuestNode_GetSiteThreatPoints">
+          <storeAs>sitePoints</storeAs>
+          <sitePartsParams>$sitePartsParams</sitePartsParams>
+        </li>
+
+        <li Class="QuestNode_SubScript">
+          <def>Util_GenerateSite</def>
+        </li>
+        
+        <li Class="QuestNode_SpawnWorldObjects">
+          <worldObjects>$site</worldObjects>
+        </li>
+
+        <li Class="QuestNode_WorldObjectTimeout">
+          <worldObject>$site</worldObject>
+          <isQuestTimeout>true</isQuestTimeout>
+          <delayTicks>$(randInt(15,18)*60000)</delayTicks>
+          <inSignalDisable>site.MapGenerated</inSignalDisable>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label TKey="LetterLabelQuestExpired">Quest expired: [resolvedQuestName]</label>
+                <text TKey="LetterTextQuestExpired">The giant cluster has achieved its residency purpose and completed its transfer. The task [resolvedQuestName] has expired.</text>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+        <!-- If we enter and leave, the map is destroyed. Fail the quest. -->
+        <li Class="QuestNode_Signal">
+          <inSignal>site.Destroyed</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label TKey="LetterLabelQuestFailed">Quest failed: [resolvedQuestName]</label>
+                <text TKey="LetterTextQuestFailed">This attack eventually spooked the cluster, which quickly regrouped and completed its diversion after the threat was encountered. Mission [resolvedQuestName] has failed.</text>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+      </nodes>
+    </root>
+  </QuestScriptDef>
+  
+</Defs>

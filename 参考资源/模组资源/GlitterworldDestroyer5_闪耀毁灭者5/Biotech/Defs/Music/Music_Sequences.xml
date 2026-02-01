@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <MusicSequenceDef>
+    <defName>GD_MiraculousFlower</defName>
+    <canBeInterrupted>true</canBeInterrupted>
+    <loop>true</loop>
+    <fadeoutLastSongDuration>8</fadeoutLastSongDuration>
+    <fadeInDuration>8</fadeInDuration>
+    <overrideFadeout>12</overrideFadeout>
+    <song>MiraculousFlower</song>
+    <loopFadeout>true</loopFadeout>
+    <pausedVolumeFactor>0.5</pausedVolumeFactor>
+  </MusicSequenceDef>
+  
+  <MusicSequenceDef>
+    <defName>GD_MechCommander</defName>
+    <canBeInterrupted>true</canBeInterrupted>
+    <loop>true</loop>
+    <fadeoutLastSongDuration>8</fadeoutLastSongDuration>
+    <fadeInDuration>5</fadeInDuration>
+    <overrideFadeout>8</overrideFadeout>
+    <song>MechCommander</song>
+    <loopFadeout>true</loopFadeout>
+    <pausedVolumeFactor>0.5</pausedVolumeFactor>
+  </MusicSequenceDef>
+
+</Defs>

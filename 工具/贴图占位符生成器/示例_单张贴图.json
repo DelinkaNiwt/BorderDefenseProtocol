@@ -1,0 +1,32 @@
+{
+  "注释": "占位贴图示例 - 单张贴图（Graphic_Single）- 验证阶段用于测试XML配置加载",
+  "textures": [
+    {
+      "width": 128,
+      "height": 128,
+      "output_prefix": "Weapon_Sword_Iron",
+      "color_scheme": "red",
+      "suffix_type": "single",
+      "grid_size": 32,
+      "grid_width": 1
+    },
+    {
+      "width": 64,
+      "height": 64,
+      "output_prefix": "UI_Icon_Build",
+      "color_scheme": "blue",
+      "suffix_type": "single",
+      "grid_size": 32,
+      "grid_width": 1
+    },
+    {
+      "width": 256,
+      "height": 256,
+      "output_prefix": "Item_Gold_Nugget",
+      "color_scheme": "yellow",
+      "suffix_type": "single",
+      "grid_size": 32,
+      "grid_width": 1
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  
+  <GD_Terror.label>恐怖</GD_Terror.label>
+  <GD_Terror.description>面对扭曲且强大敌人时产生的心理反应。当恐怖感积累到一定程度，此人便会因不知所措而失去控制。恐怖感会随着时间推移逐渐消退。\n\n射击等级与格斗等级之和大于敌人的恐怖等级者不会因面对该敌人而感到恐惧。</GD_Terror.description>
+  <GD_Terror.stages.0.label>紧张</GD_Terror.stages.0.label>
+  <GD_Terror.stages.1.label>惊慌</GD_Terror.stages.1.label>
+  <GD_Terror.stages.2.label>战栗</GD_Terror.stages.2.label>
+  <GD_Terror.stages.3.label>绝望</GD_Terror.stages.3.label>
+  
+</LanguageData>

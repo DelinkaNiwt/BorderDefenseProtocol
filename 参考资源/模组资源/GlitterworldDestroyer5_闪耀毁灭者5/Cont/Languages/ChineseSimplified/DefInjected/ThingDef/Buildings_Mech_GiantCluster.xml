@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 不稳定短波接收器 -->
+
+  <GD_ShortWaveReceiver.label>不稳定短波接收器</GD_ShortWaveReceiver.label>
+  <GD_ShortWaveReceiver.description>通过截取机械族发出的特定短波信号来确定巨型集群的具体位置。\n\n每一次截获信号都会引起机械蜂巢的警觉，接收器需要进行一段时间的待机掩蔽来避免被发现坐标。</GD_ShortWaveReceiver.description>
+  <GD_ShortWaveReceiver.comps.CompUsable.useLabel>扫描巨型集群</GD_ShortWaveReceiver.comps.CompUsable.useLabel>
+
+
+  <!-- 电荷冲击炮台 -->
+
+  <Turret_GiantChargeBlaster.label>巨型电荷冲击炮塔</Turret_GiantChargeBlaster.label>
+  <Turret_GiantChargeBlaster.description>一台由复杂工艺组建起来的钢铁巨兽，只会在巨型集群中作为守备力量出现。\n\n这种炮塔会发射口径接近炮弹的电荷子弹，撕开每一个进犯者的身躯。被敌人近身时会切换至类霰弹开火模式。</Turret_GiantChargeBlaster.description>
+
+  <Gun_GiantChargeBlaster.label>巨型电荷冲击炮</Gun_GiantChargeBlaster.label>
+  <Gun_GiantChargeBlaster.description>发射大口径电荷弹的特制冲击炮。</Gun_GiantChargeBlaster.description>
+
+  <Bullet_GiantCharge.label>巨型电荷弹</Bullet_GiantCharge.label>
+
+
+  <!-- 地狱火炮台 -->
+
+  <Turret_GiantChargeInferno.label>巨型地狱火炮塔</Turret_GiantChargeInferno.label>
+  <Turret_GiantChargeInferno.description>一台由复杂工艺组建起来的钢铁巨兽，只会在巨型集群中作为守备力量出现。\n\n这种炮塔会发射庞大的地狱火炮弹，炮弹爆炸后其中的液态地狱火会四散飞溅，融化周围的一切敌人。</Turret_GiantChargeInferno.description>
+
+  <Gun_GiantInfernoLauncher.label>巨型地狱火炮</Gun_GiantInfernoLauncher.label>
+  <Gun_GiantInfernoLauncher.description>发射大口径地狱火的特制火炮。</Gun_GiantInfernoLauncher.description>
+
+  <Bullet_GiantInfernoCannon.label>巨型地狱火炮弹</Bullet_GiantInfernoCannon.label>
+
+
+  <!-- 电荷 -->
+
+  <GiantChargeEnhancer.label>电荷加速器</GiantChargeEnhancer.label>
+  <GiantChargeEnhancer.description>一种结构精密的增幅器，能够显著提升周围巨型电荷冲击炮的射击速度与精确度。</GiantChargeEnhancer.description>
+
+
+  <!-- 等离子 -->
+
+  <GiantPlasmaEnhancer.label>等离子放大器</GiantPlasmaEnhancer.label>
+  <GiantPlasmaEnhancer.description>一种结构精密的增幅器，能够显著提升周围巨型地狱火炮的射击速度。</GiantPlasmaEnhancer.description>
+
+
+  <!-- 超凡诡雷 -->
+
+  <ArchoTrap_BoobyMine.label>超凡诡雷</ArchoTrap_BoobyMine.label>
+  <ArchoTrap_BoobyMine.description>诡异地悬浮在半空中的小型装置，只有在极其靠近它时才能隐约观察到它的存在。\n\n触发后会将周边的一切蒸发。</ArchoTrap_BoobyMine.description>
+
+
+  <!-- 自动迫击炮 -->
+
+  <Turret_GiantAutoMortar.label>巨型自动迫击炮</Turret_GiantAutoMortar.label>
+  <Turret_GiantAutoMortar.description>一台由复杂工艺组建起来的钢铁巨兽，只会在巨型集群中作为守备力量出现。\n\n一颗集束反粒子炮弹的威力便足以将一座山头削低数米。被敌人近身时会切换至登陆开火模式。</Turret_GiantAutoMortar.description>
+
+  <Artillery_GiantMortarTurret.label>巨型自动迫击炮</Artillery_GiantMortarTurret.label>
+  <Artillery_GiantMortarTurret.description>发射集束反粒子炮弹的迫击炮。</Artillery_GiantMortarTurret.description>
+
+  <Bullet_Shell_GiantUltraWarhead.label>高爆炮弹</Bullet_Shell_GiantUltraWarhead.label>
+  <Bullet_Shell_GiantWarhead.label>高爆炮弹</Bullet_Shell_GiantWarhead.label>
+
+
+  <!-- base -->
+
+  <GD_DummyMortar.label>无</GD_DummyMortar.label>
+  <GD_DummyMortar.description>只是个占位符。</GD_DummyMortar.description>
+
+
+  <!-- 机械集装箱 -->
+
+  <GD_MechanicalContainer.label>机械集装箱</GD_MechanicalContainer.label>
+  <GD_MechanicalContainer.description>储存有用于建设集群的大量基础物资的集装箱，通常情况下需要密码解锁，但我们显然不用遵守这个规则。</GD_MechanicalContainer.description>
+
+
+  <!-- 心灵遮蔽髓 -->
+
+  <PsychicShieldMarrow.label>心灵遮蔽髓</PsychicShieldMarrow.label>
+  <PsychicShieldMarrow.description>一座巨大的超凡建筑，能够屏蔽本地区所有敌人的心灵网络。\n\n摧毁后解锁一级机械科技。</PsychicShieldMarrow.description>
+
+
+  <!-- 心灵抑制髓 -->
+
+  <PsychicSuppressionMarrow.label>心灵抑制髓</PsychicSuppressionMarrow.label>
+  <PsychicSuppressionMarrow.description>一座巨大的超凡建筑，能够将本地区所有敌人的意识压制在一个较低水平。\n\n摧毁后解锁二级机械科技。</PsychicSuppressionMarrow.description>
+
+
+  <!-- 心灵狂暴髓 -->
+
+  <PsychicBerserkMarrow.label>心灵狂暴髓</PsychicBerserkMarrow.label>
+  <PsychicBerserkMarrow.description>一座巨大的超凡建筑，能够间歇性狂暴本地区的任何敌人。\n\n摧毁后解锁三级机械科技。</PsychicBerserkMarrow.description>
+  
+  <!--===== 巨黾 =====-->
+  <!-- 自动迫击炮 -->
+
+  <Turret_GiantAutoMortar_Script.label>巨型自动迫击炮（固守）</Turret_GiantAutoMortar_Script.label>
+  <Turret_GiantAutoMortar_Script.description>一台由复杂工艺组建起来的钢铁巨兽，只会在巨型集群中作为守备力量出现。\n\n可以命令你队伍中高智识的殖民者黑入该迫击炮，并利用它强大的火力击伤机械巨黾。</Turret_GiantAutoMortar_Script.description>
+  <Turret_GiantAutoMortar_Script.comps.CompUsable.useLabel>黑入并控制</Turret_GiantAutoMortar_Script.comps.CompUsable.useLabel>
+
+  <Artillery_GiantMortarTurret_Script.label>巨型自动迫击炮</Artillery_GiantMortarTurret_Script.label>
+  <Artillery_GiantMortarTurret_Script.description>发射集束反粒子炮弹的迫击炮。</Artillery_GiantMortarTurret_Script.description>
+
+  <Bullet_Shell_GiantUltraWarhead_Script.label>高爆炮弹</Bullet_Shell_GiantUltraWarhead_Script.label>
+  
+  <!-- 机械巨黾 -->
+
+  <GD_Exostrider.label>机械巨黾</GD_Exostrider.label>
+  <GD_Exostrider.description>一台巨型中枢机械体，机械蜂巢最瑰丽的杰作之一。\n\n通常情况下，机械巨黾只会利用它的信号转发器对一个星系内的机械集群进行统一调度，并与机械巢核心进行直接的信息交换。一台巨黾通常会有数艘机械族飞船进行协同配合，以方便信息传输与护卫。在特殊情况下它同样能利用重型火炮与业火速射炮进行战斗，速射炮会自动对一定范围内的敌人进行搜索打击，而主炮只会在迫不得已的情况下启动，用于反制某些威胁巨大的目标。\n\n由于在召唤机械族舰队的过程中巨黾充当了“坐标原点”的功能，它不能随意移动，但厚重的装甲也意味着你不能用常规方法对它造成伤害。</GD_Exostrider.description>
+
+  <Artillery_Exostrider.label>“地狱之门”超重型火炮</Artillery_Exostrider.label>
+  <Artillery_Exostrider.description>机械巨黾装备的巨型火炮，它的一次开火足以让整片大地为之震颤。通常只会在遭遇重大威胁时启动。</Artillery_Exostrider.description>
+  <Artillery_Exostrider_Sub.label>“冥河星光”速射炮</Artillery_Exostrider_Sub.label>
+  <Artillery_Exostrider_Sub.description>机械巨黾装备的速射火炮，通常用于毁灭成群的重装甲单位，但对小体型灵活目标则效果有限。</Artillery_Exostrider_Sub.description>
+  <ExostriderShell_Up.label>冥河炮弹</ExostriderShell_Up.label>
+  <ExostriderShell_Down.label>冥河炮弹</ExostriderShell_Down.label>
+
+
+</LanguageData>

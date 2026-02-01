@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ThingDef ParentName="BasePawn" Name="BaseDrone_GDClone" Abstract="True">
+    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+    <statBases>
+      <MarketValue>1200</MarketValue>
+      <PsychicSensitivity>0</PsychicSensitivity>
+      <MoveSpeed>4.2</MoveSpeed>
+      <ToxicResistance>1</ToxicResistance>
+      <Flammability>0</Flammability>
+      <ComfyTemperatureMin>-100</ComfyTemperatureMin>
+      <ComfyTemperatureMax>250</ComfyTemperatureMax>
+      <MeatAmount>0</MeatAmount>
+      <ArmorRating_Blunt>0.05</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.25</ArmorRating_Sharp>
+      <ArmorRating_Heat>1.50</ArmorRating_Heat>
+      <ToxicEnvironmentResistance>1</ToxicEnvironmentResistance>
+      <WorkSpeedGlobal>0.5</WorkSpeedGlobal>
+      <VacuumResistance MayRequire="Ludeon.RimWorld.Odyssey">1</VacuumResistance>
+    </statBases>
+    <receivesSignals>true</receivesSignals>
+    <tradeability>None</tradeability>
+    <race>
+      <alwaysAwake>true</alwaysAwake>
+      <fleshType>Mechanoid</fleshType>
+      <needsRest>false</needsRest>
+      <hasGenders>false</hasGenders>
+      <hasCorpse>true</hasCorpse>
+      <foodType>None</foodType>
+      <lifeExpectancy>2500</lifeExpectancy>
+      <bloodDef>Filth_MachineBits</bloodDef>
+      <disableIgniteVerb>true</disableIgniteVerb>
+      <trainability>None</trainability>
+      <nameGenerator>NamerMech</nameGenerator>
+      <hideTrainingTab>true</hideTrainingTab>
+      <intelligence>ToolUser</intelligence>
+      <thinkTreeMain>Drone_GDClone</thinkTreeMain>
+      <canFlyInVacuum>true</canFlyInVacuum>
+    </race>
+    <tools>
+      <li>
+        <label>shell spike</label>
+        <capacities>
+          <li>Stab</li>
+        </capacities>
+        <power>6</power>
+        <cooldownTime>2.6</cooldownTime>
+        <linkedBodyPartsGroup>Torso</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+      </li>
+    </tools>
+    <killedLeavings>
+      <Filth_MachineBits>4</Filth_MachineBits>
+    </killedLeavings>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseDrone_GDClone">
+    <defName>Drone_ArchoHunter</defName>
+    <label>trick mine drone</label>
+    <description>Replicas of archotech trick mine after being reverse-analyzed by the black-clad mechanoids, responsible for replacing their combatants to carry out regular defense and patrol tasks. \n\nIn the patrol state, this drone will randomly teleport at a certain frequency. When a moving target is detected, it will enter an alert state. Keeping still can relieve its alertness. After determining the target, it will quickly approach and self-destruct.</description>
+    <statBases>
+      <MoveSpeed>5.4</MoveSpeed>
+	  <IncomingDamageFactor>0.1</IncomingDamageFactor>
+    </statBases>
+	<damageMultipliers>
+      <li>
+        <damageDef>ArchoMine_Bomb</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <race>
+      <thinkTreeConstant>HunterDroneConstant_GDClone</thinkTreeConstant>
+      <baseHealthScale>0.35</baseHealthScale>
+      <baseBodySize>0.7</baseBodySize>
+      <hasCorpse>true</hasCorpse>
+      <body>DroneWithThreeLegs_GDClone</body>
+      <lifeStageAges>
+        <li>
+          <def>MechanoidFullyFormed</def>
+          <minAge>0</minAge>
+          <soundWounded>Pawn_Mech_Militor_Wounded</soundWounded>
+          <soundDeath>Pawn_Mech_Militor_Death</soundDeath>
+          <soundCall>Pawn_Mech_Militor_Call</soundCall>
+        </li>
+      </lifeStageAges>
+    </race>
+    <comps>
+      <li Class="GD3.CompProperties_ArchoDrone">
+        <explosionRadius>2.9</explosionRadius>
+        <explosionDamageType>ArchoMine_Bomb</explosionDamageType>
+        <explosionDamageAmount>100</explosionDamageAmount>
+      </li>
+    </comps>
+    <butcherProducts>
+      <Steel>15</Steel>
+    </butcherProducts>
+  </ThingDef>
+  
+  <PawnKindDef>
+	<defName>Drone_ArchoHunter</defName>
+    <label>trick mine drone</label>
+    <labelPlural>trick mine drones</labelPlural>
+    <race>Drone_ArchoHunter</race>
+    <combatPower>750</combatPower>
+    <canOpenDoors>true</canOpenDoors>
+    <canOpenAnyDoor>true</canOpenAnyDoor>
+    <lifeStages>
+      <li>
+        <bodyGraphicData>
+          <texPath>Pawn/ArchoHunterDrone</texPath>
+          <drawSize>1.2</drawSize>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+    <defaultFactionDef>BlackMechanoid</defaultFactionDef>
+    <aiAvoidCover>true</aiAvoidCover>
+    <destroyGearOnDrop>true</destroyGearOnDrop>
+    <canStrip>false</canStrip>
+    <minGenerationAge>100</minGenerationAge>
+    <forceNormalGearQuality>true</forceNormalGearQuality>
+    <allowInMechClusters>false</allowInMechClusters>
+    <forceNoDeathNotification>true</forceNoDeathNotification>
+    <weaponMoney>9999~9999</weaponMoney>
+    <weaponTags />
+    <preventIdeo>true</preventIdeo>
+    <allowOldAgeInjuries>false</allowOldAgeInjuries>
+    <immuneToGameConditionEffects>true</immuneToGameConditionEffects>
+    <combatPower>10</combatPower>
+    <techHediffsChance>1</techHediffsChance>
+    <techHediffsMoney>9999~9999</techHediffsMoney>
+    <controlGroupPortraitZoom>1.8</controlGroupPortraitZoom>
+    <forceDeathOnDowned>true</forceDeathOnDowned>
+  </PawnKindDef>
+  
+</Defs>

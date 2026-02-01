@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 裂壳蛛激光刀 -->
+  <MeleeWeapon_Shellsplitter.label>TODO</MeleeWeapon_Shellsplitter.label>
+  <!-- EN: 1 -->
+  <MeleeWeapon_Shellsplitter.description>TODO</MeleeWeapon_Shellsplitter.description>
+  <!-- EN: handle -->
+  <MeleeWeapon_Shellsplitter.tools.handle.label>TODO</MeleeWeapon_Shellsplitter.tools.handle.label>
+  <!-- EN: blade -->
+  <MeleeWeapon_Shellsplitter.tools.blade.label>TODO</MeleeWeapon_Shellsplitter.tools.blade.label>
+  <!-- EN: point -->
+  <MeleeWeapon_Shellsplitter.tools.point.label>TODO</MeleeWeapon_Shellsplitter.tools.point.label>
+  
+  <!-- EN: high-explosive shell -->
+  <Shell_TW_Antiparticle_Rail_Mortar.label>TODO</Shell_TW_Antiparticle_Rail_Mortar.label>
+  
+  <!-- EN: EMP shell -->
+  <Shell_TW_EMP_Rail_Mortar.label>TODO</Shell_TW_EMP_Rail_Mortar.label>
+  
+  <!-- EN: 小型核弹发射器 -->
+  <TW_Antiparticle_Rail_Mortar.label>TODO</TW_Antiparticle_Rail_Mortar.label>
+  <!-- EN: 被称为“毁灭化身”的軌道抛射系统，Doxa-0架设后可启动其核心主炮系统，将小型核弹以重力导轨形式发射出去进行远程打击。\n	\n可穿透护盾、结构壁垒与能量覆盖层，其打击过程常件随时间延迟。 -->
+  <TW_Antiparticle_Rail_Mortar.description>TODO</TW_Antiparticle_Rail_Mortar.description>
+  <!-- EN: stock -->
+  <TW_Antiparticle_Rail_Mortar.tools.stock.label>TODO</TW_Antiparticle_Rail_Mortar.tools.stock.label>
+  <!-- EN: barrel -->
+  <TW_Antiparticle_Rail_Mortar.tools.barrel.label>TODO</TW_Antiparticle_Rail_Mortar.tools.barrel.label>
+  <!-- EN: 小型核弹发射器 -->
+  <TW_Antiparticle_Rail_Mortar.verbs.Verb_AdvancedShoot.label>TODO</TW_Antiparticle_Rail_Mortar.verbs.Verb_AdvancedShoot.label>
+  
+</LanguageData>

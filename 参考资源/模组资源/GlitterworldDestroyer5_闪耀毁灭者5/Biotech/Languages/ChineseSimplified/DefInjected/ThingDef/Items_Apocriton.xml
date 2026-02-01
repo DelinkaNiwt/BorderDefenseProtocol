@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 半灵质芯片 -->
+
+  <BlackNanoChip.label>半灵质芯片</BlackNanoChip.label>
+  <BlackNanoChip.description>凝聚着憎恶毒蜂智慧与结晶的芯片。\n\n令人意外的是，其中的信息并没有被加密过。黑衣憎恶毒蜂似乎刻意地想让别人也有理解他的机会。</BlackNanoChip.description>
+
+  <BlackNanoChip.comps.CompAnalyzableUnlockResearch.activateDescString>解析半灵质芯片</BlackNanoChip.comps.CompAnalyzableUnlockResearch.activateDescString>
+  <BlackNanoChip.comps.CompAnalyzableUnlockResearch.activateLabelString>解析中...</BlackNanoChip.comps.CompAnalyzableUnlockResearch.activateLabelString>
+  <BlackNanoChip.comps.CompAnalyzableUnlockResearch.completedLetter>通过解析{PARENT_label}，{STUDIER_labelShort}获得了研究{research}所必要的知识。\n\n你的研究人员现在可以使用研究工作台开始研究如何实际使用这项技术。</BlackNanoChip.comps.CompAnalyzableUnlockResearch.completedLetter>
+  <BlackNanoChip.comps.CompAnalyzableUnlockResearch.completedLetterLabel>{PARENT_label}通过解析解锁了：{RESEARCH}。</BlackNanoChip.comps.CompAnalyzableUnlockResearch.completedLetterLabel>
+  <BlackNanoChip.comps.CompAnalyzableUnlockResearch.guiLabelString>选择解析者</BlackNanoChip.comps.CompAnalyzableUnlockResearch.guiLabelString>
+  <BlackNanoChip.comps.CompAnalyzableUnlockResearch.inspectString>可以由一位殖民者解析。</BlackNanoChip.comps.CompAnalyzableUnlockResearch.inspectString>
+  <BlackNanoChip.comps.CompAnalyzableUnlockResearch.jobString>解析半灵质芯片。</BlackNanoChip.comps.CompAnalyzableUnlockResearch.jobString>
+  
+  <BlackNanoChip.comps.CompStudiable.completedLetterText>通过调查{PARENT_label}，{STUDIER_labelShort}获得了研究{RESEARCH}所必要的知识。\n\n你的研究人员现在可以使用研究工作台开始研究如何实际使用这项技术。</BlackNanoChip.comps.CompStudiable.completedLetterText>
+  <BlackNanoChip.comps.CompStudiable.completedLetterTitle>{PARENT_label}通过调查解锁了：{RESEARCH}。</BlackNanoChip.comps.CompStudiable.completedLetterTitle>
+  
+  
+  <!-- 机械邮件 -->
+
+  <GD_DescriptionChip.label>机械邮件</GD_DescriptionChip.label>
+  <GD_DescriptionChip.description>你好。在之前的一段时间里你一直在接触一些有关黑衣机械族的事情，他们可能身穿破旧黑衣、形单影只、行为与正常机械族不甚相似，但这并不意味着你能随意对他们发起挑衅。这些机械族有一名能力不俗的领袖指挥，只要他还在，你们对这些机械体的研究恐怕将无法继续深入。但我能为你们提供帮助。\n据我的了解，这名强大机械体拥有包括以下能力：\n\n-灵能彗星，他的主要武器。在一片较大的范围内以团状灵能发起轰炸。\n\n-球状闪电，次要武器。能够将试图靠近他的敌人瞬间拆解，并在一段时间后爆炸，飞行速度很慢。\n\n-从背后的蜂翅发射出无数闪电箭并覆盖一片极大的范围。这种攻击方式耗能相当大，因此施展前的动作也很明显，就算是有机体也不难察觉。\n\n-不要试图利用隐身靠近他，他看得见你。\n\n-粗暴的近战突进用处亦有限，他会将试图靠近他的敌人折跃到远离他的地方。\n\n-当你用枪支瞄准它时，它可能会忽然将你队伍中的某人与它互换位置。小心友军误伤。\n\n我方能提供的信息便是这些，具体的战术还是要请你们制定。我很期待有能挑战他的人出现。\n\n这封邮件的底部没有署名。</GD_DescriptionChip.description>
+
+
+  <!-- 战争 -->
+
+  <BlackMedal_War.label>铁色勋章</BlackMedal_War.label>
+  <BlackMedal_War.description>“我们不愿意战争发生，不代表我们惧怕战争的到来。”\n\n“一味地否定战争，最后只会导致自己的毁灭。”</BlackMedal_War.description>
+
+
+  <!-- 死亡 -->
+
+  <BlackMedal_Death.label>铜色勋章</BlackMedal_Death.label>
+  <BlackMedal_Death.description>“闪耀世界的人们无比向往没有死亡的世界。但没有死亡的生命只能成为一块肉瘤，扭曲地生长着而毫无美感。”\n\n“只有这时我才会同情那些唯物主义者。要是人死了之后灵魂真的能在天堂相会，那该多好。”</BlackMedal_Death.description>
+
+
+  <!-- 瘟疫 -->
+
+  <BlackMedal_Plague.label>玛瑙色勋章</BlackMedal_Plague.label>
+  <BlackMedal_Plague.description>“自然的瘟疫终于被闪耀世界所彻底消灭，但人造的生化武器却反而得到了长足的发展。”\n\n“我看见那人浑身痉挛着伏下身子吸食散落在地上的魔鬼素粉末。人类终究没有摆脱瘟疫这个魔鬼，它只是换了种方式存在。”</BlackMedal_Plague.description>
+  
+  <!-- 征服 -->
+
+  <BlackMedal_Conquer.label>铂色勋章</BlackMedal_Conquer.label>
+  <BlackMedal_Conquer.description>战争结束了，人类把伤口缠上绷带，仿佛它从未发生过。\n\n这样的事情还会在永恒的时间中重演，一遍又一遍。</BlackMedal_Conquer.description>
+
+
+</LanguageData>

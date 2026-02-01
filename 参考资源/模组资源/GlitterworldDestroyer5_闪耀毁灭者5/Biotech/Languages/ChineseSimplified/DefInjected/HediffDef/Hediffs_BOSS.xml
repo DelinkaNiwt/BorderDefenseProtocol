@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <BlackSupport_Fst.label>心灵推动</BlackSupport_Fst.label>
+  <BlackSupport_Fst.description>这名机械体正得到他周围一名指挥官的增强。</BlackSupport_Fst.description>
+
+  <BlackSupport_Sec.label>心灵推动</BlackSupport_Sec.label>
+  <BlackSupport_Sec.description>这名机械体正得到他周围一名指挥官的增强。</BlackSupport_Sec.description>
+
+  <BlackSupport_Thr.label>心灵推动</BlackSupport_Thr.label>
+  <BlackSupport_Thr.description>这名机械体正得到他周围一名指挥官的增强。</BlackSupport_Thr.description>
+
+  <BlackApocriton_DynamicIDF.label>灵能薄膜</BlackApocriton_DynamicIDF.label>
+  <BlackApocriton_DynamicIDF.description>空气被灵能压缩、转化为一种奇异的状态后如同薄膜般覆盖在了身体表面，能够对外来的暴力袭击作出灵活的形变，并有效保护此单位。\n\n乘伤系数会根据受到的伤害动态变化。</BlackApocriton_DynamicIDF.description>
+
+
+  <!-- Medal -->
+
+  <GD_MedalSupport.label>无尽狂暴</GD_MedalSupport.label>
+  <GD_MedalSupport.description>这个单位的肉体与精神完全处在了一块精密勋章的控制之下。他的生命随时都有可能终结。</GD_MedalSupport.description>
+
+
+</LanguageData>

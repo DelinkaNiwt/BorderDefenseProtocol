@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <Frostbite_GD.label>机械冻伤</Frostbite_GD.label>
+  <Frostbite_GD.deathMessage>{0}被冻死了。</Frostbite_GD.deathMessage>
+
+  <BombCharge.deathMessage>{0}被湮灭了。</BombCharge.deathMessage>
+  <BombChargeSmall.deathMessage>{0}被湮灭了。</BombChargeSmall.deathMessage>
+  <BombFrostBite.deathMessage>{0}被冻死了。</BombFrostBite.deathMessage>
+  
+  <GD_Beam.label>光束</GD_Beam.label>
+  <GD_Beam.deathMessage>{0}因超量的光辐射而死。</GD_Beam.deathMessage>
+
+
+</LanguageData>

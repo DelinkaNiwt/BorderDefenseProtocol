@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>GD_CommunicationStation</defName>
+    <label>mech-communication station</label>
+    <description>This seemingly simple communication station can help you hack into the primary servers of the mechanoid and intercept some of their intelligence. This information can be used to make deals with certain large factions, as well as for other mysterious purposes. \n\nSince every step of the operation leaves a data trail, this behavior is not safe. If the mechanoid hive finds out, even if the connection to the server is cut off immediately, retaliation against you will come quickly, so you should avoid continuing to hack into the network during a sensitive period. \n\nBy the way, when it comes to data theft, the Empire has long been involved and established complete laws and regulations, and every piece of data you obtain is subject to a 10% tax. \nUnless you plan to show your hand.</description>
+    <thingClass>Building</thingClass>
+    <size>(1,2)</size>
+    <minifiedDef>MinifiedThing</minifiedDef>	
+	<tickerType>Normal</tickerType>
+    <thingCategories>
+      <li>BuildingsProduction</li>
+    </thingCategories>
+    <stuffCategories>
+      <li>Metallic</li>
+    </stuffCategories>
+    <costStuffCount>150</costStuffCount>
+    <costList>
+      <Steel>60</Steel>
+      <ComponentIndustrial>8</ComponentIndustrial>
+    </costList>
+    <graphicData>
+      <texPath>Buildings/GD_CommunicationStation</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(4,4)</drawSize>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <castEdgeShadows>true</castEdgeShadows>
+    <staticSunShadowHeight>0.20</staticSunShadowHeight>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.15</fillPercent>
+    <pathCost>50</pathCost>
+    <statBases>
+      <MaxHitPoints>250</MaxHitPoints>
+      <WorkToBuild>5000</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Mass>10</Mass>
+      <ResearchSpeedFactor>1.0</ResearchSpeedFactor>
+    </statBases>
+    <comps Inherit="False">
+      <li Class="CompProperties_ReportWorkSpeed">
+        <workSpeedStat>ResearchSpeedFactor</workSpeedStat>
+      </li>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>250</basePowerConsumption>
+        <shortCircuitInRain>true</shortCircuitInRain>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+	  <li Class="CompProperties_Forbiddable"/>
+	  <li Class="CompProperties_Usable">
+        <useJob>TriggerObject</useJob>
+        <useLabel>Communication...</useLabel>
+        <useDuration>1</useDuration>
+        <ignoreOtherReservations>true</ignoreOtherReservations>
+      </li>
+      <li Class="CompProperties_UseEffect">
+        <compClass>GD3.CompUseEffect_Window</compClass>
+      </li>
+      <li Class="CompProperties_Facility">
+        <maxSimultaneous>1</maxSimultaneous>
+      </li>
+	  <li>
+	    <compClass>GD3.CompCommunicationStation</compClass>
+	  </li>
+    </comps>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <terrainAffordanceNeeded IsNull="True" />
+    <hasInteractionCell>true</hasInteractionCell>
+    <designationCategory>Production</designationCategory>
+    <uiOrder>2610</uiOrder>
+    <surfaceType>Item</surfaceType>
+    <designationHotKey>Misc4</designationHotKey>
+    <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+    <placeWorkers>
+      <li>PlaceWorker_ShowFacilitiesConnections</li>
+      <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+      <li>PlaceWorker_DrawLinesToBookcasesInRoom</li>
+      <li>GD3.PlaceWorker_Station</li>
+    </placeWorkers>
+    <researchPrerequisites>
+      <li>MicroelectronicsBasics</li>
+    </researchPrerequisites>
+    <building>
+      <isEdifice>false</isEdifice>
+      <paintable>true</paintable>
+    </building>
+    <clearBuildingArea>false</clearBuildingArea>
+  </ThingDef>
+
+</Defs>

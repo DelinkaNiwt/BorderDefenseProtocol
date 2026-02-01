@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>PlayerBuilding_Annihilator</defName>
+    <label>annihilator</label>
+    <description>The small self-propelled star-slayer weapon of the mechanoid hive. When carrying out the mission, it is responsible for drilling deep into the earth and using plasma nozzles to activate the mantle, triggering intense geological activities and making the first step in preparing for the disintegration of the planet. When in standby mode, it drifts in space, waiting for the nearest cerebrex core to wake it up, and take it to kill. \n\nThe plasma nozzle is its main attack method. It is equipped with small turrets on its limbs, destroying the corresponding parts can paralyze it.</description>
+    <thingClass>GD3.Building_Annihilator</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+	<size>(9,9)</size>
+    <graphicData>
+      <texPath>Annihilator/Annihilator</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>10</drawSize>
+      <drawOffset>(0,0,0)</drawOffset>
+      <shadowData>
+        <volume>(6.8, 1, 3.1)</volume>
+		<offset>(0, 0, -1.55)</offset>
+      </shadowData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <stealable>false</stealable>
+    <rotatable>false</rotatable>
+    <statBases>
+      <MaxHitPoints>5000</MaxHitPoints>
+      <Flammability>0</Flammability>
+	  <WorkToBuild>300000</WorkToBuild>
+      <Mass>1250</Mass>
+      <Beauty>-20</Beauty>
+	  <BandwidthCost>125</BandwidthCost>
+    </statBases>
+    <damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <comps>
+	  <li Class="CompProperties_Forbiddable"/>
+    </comps>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <fillPercent>0.4</fillPercent>
+    <hasTooltip>true</hasTooltip>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <building>
+      <ai_combatDangerous>true</ai_combatDangerous>
+    </building>
+	<costList>
+      <Steel>4500</Steel>
+	  <Plasteel>4000</Plasteel>
+	  <ComponentIndustrial>200</ComponentIndustrial>
+	  <ComponentSpacer>40</ComponentSpacer>
+	  <PrecisionDeck>1500</PrecisionDeck>
+	  <GravlitePanel>800</GravlitePanel>
+	  <Gravcore>3</Gravcore>
+	  <SubcoreHigh>1</SubcoreHigh>
+	  <AIPersonaCore>1</AIPersonaCore>
+    </costList>
+    <designationCategory>Biotech</designationCategory>
+    <constructionSkillPrerequisite>12</constructionSkillPrerequisite>
+    <researchPrerequisites>
+      <li>GD3_Annihilator</li>
+    </researchPrerequisites>
+	<uiIconPath>Annihilator/Annihilator</uiIconPath>
+	<uiIconScale>1.2</uiIconScale>
+  </ThingDef>
+  
+  <!-- Quests -->
+  <ThingDef ParentName="AncientTerminalBase">
+    <defName>GD_AnnihilatorTerminal</defName>
+    <label>terminal</label>
+    <description>The terminal used in ancient times for processing mechanoid signals. It can be hacked by professionals and analog signals sent to attract the surrounding mechanoids to approach.</description>
+    <comps>
+      <li Class="GD3.CompProperties_AnnihilatorTerminalHackable">
+        <!-- Hackable -->
+        <defence>600</defence>
+        <effectHacking>HackingTerminal</effectHacking>
+        <intellectualSkillPrerequisite>10</intellectualSkillPrerequisite>
+      </li>
+    </comps>
+  </ThingDef>
+
+</Defs>

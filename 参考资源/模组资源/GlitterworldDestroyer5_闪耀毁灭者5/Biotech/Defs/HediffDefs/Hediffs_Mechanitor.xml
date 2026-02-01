@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- Control sublink -->
+
+  <ThingDef ParentName="ControlSublinkBase">
+    <defName>GD_ControlRangelink</defName>
+    <label>mechanitor control chip</label>
+    <description>An implant which significantly increases a mechanitor's control distance.\n\nThis implant can be installed up to 2 times to increase its effect. When the level is full, the control distance of the mechanitor will not be limited by the map.</description>
+    <costList>
+      <SignalChip>3</SignalChip>
+	  <PowerfocusChip>3</PowerfocusChip>
+	  <NanostructuringChip>3</NanostructuringChip>
+      <ComponentSpacer>15</ComponentSpacer>
+    </costList>
+    <recipeMaker>
+      <researchPrerequisite>UltraMechtech</researchPrerequisite>
+	  <recipeUsers Inherit="false">
+		<li>FabricationBench</li>
+	  </recipeUsers>
+    </recipeMaker>
+    <comps>
+      <li Class="CompProperties_Usable">
+        <compClass>CompUsableImplant</compClass>
+        <useJob>UseItem</useJob>
+        <useLabel>Implant chip</useLabel>
+        <userMustHaveHediff>MechlinkImplant</userMustHaveHediff>
+      </li>
+      <li Class="CompProperties_UseEffectInstallImplant">
+        <hediffDef>GD_ControlRangelinkImplant</hediffDef>
+        <bodyPart>Brain</bodyPart>
+        <canUpgrade>true</canUpgrade>
+        <maxSeverity>2</maxSeverity>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <HediffDef>
+    <defName>GD_ControlRangelinkImplant</defName>
+    <hediffClass>Hediff_Level</hediffClass>
+    <descriptionHyperlinks><ThingDef>GD_ControlRangelink</ThingDef></descriptionHyperlinks>
+    <label>mechanitor control chip</label>
+    <description>An implant which increases a mechanitor's control distance.\n\nThis implant can be installed up to 2 times to increase its effect. When the level is full, the control distance of the mechanitor will not be limited by the map.</description>
+    <defaultLabelColor>(64,224,208)</defaultLabelColor>
+    <isBad>false</isBad>
+    <priceImpact>true</priceImpact>
+    <initialSeverity>1</initialSeverity> <!-- Severity is bound to level of implant -->
+    <minSeverity>0</minSeverity>
+    <maxSeverity>2</maxSeverity>
+    <keepOnBodyPartRestoration>True</keepOnBodyPartRestoration>
+    <levelIsQuantity>true</levelIsQuantity>
+    <stages>
+      <li>
+        <minSeverity>1</minSeverity>
+      </li>
+      <li>
+        <minSeverity>2</minSeverity>
+      </li>
+    </stages>
+  </HediffDef>
+  
+  <!-- 黑色风衣 -->
+  <HediffDef>
+    <defName>GD_BlackEnhancer_Hat</defName>
+    <label>Neuron optimization</label>
+    <description>The mechanical neurons that remain in the black suit are connecting with the wearer and increasing his thinking speed and ability to control the mechanoids. \n\nWhen killing certain powerful mechanoids, this effect can be enhanced.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(176, 224, 230)</defaultLabelColor>
+	<minSeverity>0</minSeverity>
+    <maxSeverity>4</maxSeverity>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>90</disappearsAfterTicks>
+        <showRemainingTime>false</showRemainingTime>
+      </li>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/>
+    </comps>
+    <stages>
+      <li>
+	    <minSeverity>0</minSeverity>
+		<label>level 1</label>
+        <statOffsets>
+		  <MechBandwidth>1</MechBandwidth>
+        </statOffsets>
+      </li>
+	  <li>
+	    <minSeverity>1</minSeverity>
+		<label>level 2</label>
+        <statOffsets>
+		  <MechRepairSpeed>0.25</MechRepairSpeed>
+		  <MechBandwidth>2</MechBandwidth>
+        </statOffsets>
+      </li>
+	  <li>
+	    <minSeverity>2</minSeverity>
+		<label>level 3</label>
+        <statOffsets>
+		  <MechRepairSpeed>0.5</MechRepairSpeed>
+          <MechRemoteShieldEnergy>50</MechRemoteShieldEnergy>
+		  <MechBandwidth>4</MechBandwidth>
+        </statOffsets>
+      </li>
+	  <li>
+	    <minSeverity>3</minSeverity>
+		<label>level 4</label>
+        <statOffsets>
+          <MechRepairSpeed>0.75</MechRepairSpeed>
+          <MechRemoteShieldEnergy>150</MechRemoteShieldEnergy>
+		  <MechBandwidth>12</MechBandwidth>
+        </statOffsets>
+      </li>
+	  <li>
+	    <minSeverity>4</minSeverity>
+		<label>level 5</label>
+        <statOffsets>
+          <MechRepairSpeed>1</MechRepairSpeed>
+          <MechRemoteShieldEnergy>250</MechRemoteShieldEnergy>
+		  <MechBandwidth>27</MechBandwidth>
+        </statOffsets>
+      </li>
+    </stages>
+    <isBad>false</isBad>
+  </HediffDef>
+  
+  <HediffDef>
+    <defName>GD_BlackEnhancer</defName>
+    <label>Neuron optimization</label>
+    <description>The mechanical neurons that remain in the black suit are connecting with the wearer and increasing his thinking speed and ability to control the mechanoids. \n\nWhen killing certain powerful mechanoids, this effect can be enhanced.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(176, 224, 230)</defaultLabelColor>
+	<minSeverity>0</minSeverity>
+    <maxSeverity>4</maxSeverity>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>90</disappearsAfterTicks>
+        <showRemainingTime>false</showRemainingTime>
+      </li>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/>
+    </comps>
+    <stages>
+      <li>
+	    <minSeverity>0</minSeverity>
+		<label>level 1</label>
+        <statOffsets>
+          <MechFormingSpeed>0.5</MechFormingSpeed>
+		  <MechRepairSpeed>0.5</MechRepairSpeed>
+		  <WorkSpeedGlobalOffsetMech>0.25</WorkSpeedGlobalOffsetMech>
+		  <MechBandwidth>4</MechBandwidth>
+        </statOffsets>
+      </li>
+	  <li>
+	    <minSeverity>1</minSeverity>
+		<label>level 2</label>
+        <statOffsets>
+          <MechFormingSpeed>1</MechFormingSpeed>
+		  <MechRepairSpeed>1</MechRepairSpeed>
+		  <WorkSpeedGlobalOffsetMech>0.45</WorkSpeedGlobalOffsetMech>
+		  <MechBandwidth>8</MechBandwidth>
+        </statOffsets>
+      </li>
+	  <li>
+	    <minSeverity>2</minSeverity>
+		<label>level 3</label>
+        <statOffsets>
+          <MechFormingSpeed>1.5</MechFormingSpeed>
+		  <MechRepairSpeed>1.5</MechRepairSpeed>
+		  <MechRemoteShieldDistance>3.0</MechRemoteShieldDistance>
+          <MechRemoteShieldEnergy>150</MechRemoteShieldEnergy>
+		  <WorkSpeedGlobalOffsetMech>0.65</WorkSpeedGlobalOffsetMech>
+		  <MechBandwidth>18</MechBandwidth>
+        </statOffsets>
+      </li>
+	  <li>
+	    <minSeverity>3</minSeverity>
+		<label>level 4</label>
+        <statOffsets>
+          <MechFormingSpeed>2</MechFormingSpeed>
+		  <MechRepairSpeed>3</MechRepairSpeed>
+          <MechRemoteRepairDistance>8.0</MechRemoteRepairDistance>
+		  <MechRemoteShieldDistance>8.0</MechRemoteShieldDistance>
+          <MechRemoteShieldEnergy>600</MechRemoteShieldEnergy>
+		  <WorkSpeedGlobalOffsetMech>1.0</WorkSpeedGlobalOffsetMech>
+		  <MechBandwidth>48</MechBandwidth>
+        </statOffsets>
+      </li>
+	  <li>
+	    <minSeverity>4</minSeverity>
+		<label>level 5</label>
+        <statOffsets>
+          <MechFormingSpeed>3</MechFormingSpeed>
+		  <MechRepairSpeed>4</MechRepairSpeed>
+          <MechRemoteRepairDistance>12.0</MechRemoteRepairDistance>
+		  <MechRemoteShieldDistance>12.0</MechRemoteShieldDistance>
+          <MechRemoteShieldEnergy>1250</MechRemoteShieldEnergy>
+		  <WorkSpeedGlobalOffsetMech>1.25</WorkSpeedGlobalOffsetMech>
+		  <MechBandwidth>108</MechBandwidth>
+        </statOffsets>
+      </li>
+    </stages>
+    <isBad>false</isBad>
+  </HediffDef>
+  
+  <!-- 观察机引导 -->
+  <HediffDef>
+    <defName>GD_ObserverEnhancer</defName>
+    <label>Observer guidance</label>
+    <description>An observer is conducting reconnaissance and assisting this unit with aiming. The range has been increased.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(127, 255, 212)</defaultLabelColor>
+	<minSeverity>0</minSeverity>
+    <maxSeverity>1</maxSeverity>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>90</disappearsAfterTicks>
+        <showRemainingTime>false</showRemainingTime>
+      </li>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/>
+    </comps>
+    <stages>
+      <li>
+	    <minSeverity>0</minSeverity>
+		<label>out of range</label>
+      </li>
+	  <li>
+	    <minSeverity>1</minSeverity>
+        <statFactors>
+			<VEF_VerbRangeFactor>1.25</VEF_VerbRangeFactor>
+		</statFactors>
+      </li>
+    </stages>
+    <isBad>false</isBad>
+  </HediffDef>
+  
+  <!-- DEV -->
+  <HediffDef>
+    <defName>GD_Dev_UltimateBandwidth</defName>
+    <label>dev: ultimate bandwidth</label>
+	<description>It looks like cheating.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(176, 224, 230)</defaultLabelColor>
+	<minSeverity>0</minSeverity>
+    <maxSeverity>1</maxSeverity>
+    <comps>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/>
+    </comps>
+    <stages>
+      <li>
+	    <minSeverity>0</minSeverity>
+        <statOffsets>
+		  <MechBandwidth>500</MechBandwidth>
+        </statOffsets>
+      </li>
+    </stages>
+    <isBad>false</isBad>
+  </HediffDef>
+
+</Defs>

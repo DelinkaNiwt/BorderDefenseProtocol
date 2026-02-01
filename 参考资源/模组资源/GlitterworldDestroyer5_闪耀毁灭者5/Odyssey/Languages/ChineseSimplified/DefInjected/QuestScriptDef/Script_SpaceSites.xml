@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <GD_Quest_StarSlayer.questNameRules.rulesStrings.0>questName-&gt;远古歼星者</GD_Quest_StarSlayer.questNameRules.rulesStrings.0>
+  <GD_Quest_StarSlayer.questDescriptionRules.rulesStrings.0>questDescription-&gt;[discoveryMethod]一处被遗弃的轨道设施位置。\n\n这里似乎是一处在古代战争中被遗弃的停泊港，通过残缺不全的信号你可以探测到一台庞大的机械体正在附近的太空中漂流。你不清楚它的来历与目的，只知道它正处于休眠状态，并且极其危险。\n\n你可以尝试登上该平台并发送模拟信号，将该机械体激活并吸引至此。由此可能产生的一切后果都不得而知。</GD_Quest_StarSlayer.questDescriptionRules.rulesStrings.0>
+  <GD_Quest_StarSlayer.root.nodes.IsSet.elseNode.nodes.Set.value.slateRef>你已发现</GD_Quest_StarSlayer.root.nodes.IsSet.elseNode.nodes.Set.value.slateRef>
+  <GD_Quest_StarSlayer.questContentRules.rulesStrings.0>expiredLabel-&gt;任务过期:[resolvedQuestName]</GD_Quest_StarSlayer.questContentRules.rulesStrings.0>
+  <GD_Quest_StarSlayer.questContentRules.rulesStrings.1>expiredText-&gt;原先探测到的那台中枢机械体已经离开临近轨道，任务[resolvedQuestName]已经过期。</GD_Quest_StarSlayer.questContentRules.rulesStrings.1>
+
+
+</LanguageData>

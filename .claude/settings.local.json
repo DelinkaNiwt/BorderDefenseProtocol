@@ -1,0 +1,51 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:worldtrigger.huijiwiki.com)",
+      "Bash(tree:*)",
+      "WebSearch",
+      "WebFetch(domain:worldtriggerwiki.com)",
+      "WebFetch(domain:worldtrigger.fandom.com)",
+      "WebFetch(domain:en.wikipedia.org)",
+      "WebFetch(domain:tvtropes.org)",
+      "WebFetch(domain:worldtrigger.miraheze.org)",
+      "WebFetch(domain:www.anime.com)",
+      "WebFetch(domain:www.cbr.com)",
+      "WebFetch(domain:www.viz.com)",
+      "WebFetch(domain:quizlet.com)",
+      "WebFetch(domain:www.epicdope.com)",
+      "WebFetch(domain:worldtriggerrpg.wordpress.com)",
+      "WebFetch(domain:allthetropes.miraheze.org)",
+      "WebFetch(domain:www.wikiwand.com)",
+      "WebFetch(domain:www.scribd.com)",
+      "WebFetch(domain:colossalblade.tumblr.com)",
+      "WebFetch(domain:www.theouterhaven.net)",
+      "WebFetch(domain:chippokenabokura.tumblr.com)",
+      "WebFetch(domain:anime.stackexchange.com)",
+      "WebFetch(domain:dandwiki.com)",
+      "WebFetch(domain:www.crunchyroll.com)",
+      "WebFetch(domain:pinnedupink.com)",
+      "WebFetch(domain:www.bilibili.com)",
+      "WebFetch(domain:www.baidu.com)",
+      "WebFetch(domain:example.com)",
+      "WebFetch(domain:www.ietf.org)",
+      "WebFetch(domain:www.rfc-editor.org)",
+      "Bash(curl:*)",
+      "Bash(env)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:httpbin.org)",
+      "WebFetch(domain:api.github.com)",
+      "Bash(netsh advfirewall show:*)",
+      "Bash(claude:*)",
+      "Bash(copy \"C:\\\\NiwtDatas\\\\Projects\\\\RimworldModStudio\\\\临时\\\\RimWT\\\\第一阶段：原材料理解\\\\1.2_Trion能量系统笔记.md\" \"C:\\\\NiwtDatas\\\\Projects\\\\RimworldModStudio\\\\临时\\\\RimWT\\\\第一阶段：原材料理解\\\\1.2_Trion能量系统笔记_backup_v1.1.md\")",
+      "Bash(powershell:*)",
+      "Bash(where:*)",
+      "Bash(cscript:*)",
+      "Bash(winget install:*)",
+      "Bash(del:*)"
+    ],
+    "additionalDirectories": [
+      "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\RimWT\\00_项目管理"
+    ]
+  }
+}

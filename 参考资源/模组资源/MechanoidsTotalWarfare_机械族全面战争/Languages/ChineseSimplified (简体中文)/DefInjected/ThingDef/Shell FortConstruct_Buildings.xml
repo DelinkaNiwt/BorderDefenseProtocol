@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 破碎的壳心堡垒 -->
+  <Broken_Shellcore_Bastion.label>TODO</Broken_Shellcore_Bastion.label>
+  <!-- EN: TODO -->
+  <Broken_Shellcore_Bastion.description>TODO</Broken_Shellcore_Bastion.description>
+  <!-- EN: NCL_WARBEACON_TOGGLE_GIZMO_LABEL -->
+  <Broken_Shellcore_Bastion.modExtensions.0.toggleGizmoLabel>TODO</Broken_Shellcore_Bastion.modExtensions.0.toggleGizmoLabel>
+  <!-- EN: NCL_WARBEACON_TOGGLE_GIZMO_OFF_LABEL -->
+  <Broken_Shellcore_Bastion.modExtensions.0.toggleGizmoOffLabel>TODO</Broken_Shellcore_Bastion.modExtensions.0.toggleGizmoOffLabel>
+  
+  <!-- EN: 壳心堡垒 -->
+  <Building_PawnContainer.label>TODO</Building_PawnContainer.label>
+  <!-- EN: 自毁倒计时: {0}秒 -->
+  <Building_PawnContainer.comps.Comp_AloneDetonator.customCountdownText>TODO</Building_PawnContainer.comps.Comp_AloneDetonator.customCountdownText>
+  
+  <!-- EN: 壳心堡垒 -->
+  <Building_PawnContainerForged.label>TODO</Building_PawnContainerForged.label>
+  
+  <!-- EN: 海螺壳武器 -->
+  <Shell_FortConstruct_Barrage.label>TODO</Shell_FortConstruct_Barrage.label>
+  <!-- EN: 海螺壳武器 -->
+  <Shell_FortConstruct_Barrage.verbs.Verb_Shoot.label>TODO</Shell_FortConstruct_Barrage.verbs.Verb_Shoot.label>
+  
+  <!-- EN: Shell Break Spawner -->
+  <ShellBreakSpawner.label>TODO</ShellBreakSpawner.label>
+  <!-- EN: Something is emerging from the ground here. -->
+  <ShellBreakSpawner.description>TODO</ShellBreakSpawner.description>
+  <!-- EN: Pit gate opened -->
+  <ShellBreakSpawner.building.groundSpawnerLetterLabel>TODO</ShellBreakSpawner.building.groundSpawnerLetterLabel>
+  
+  <!-- EN: 壳心堡垒 -->
+  <TW_Complete_Shellcore_Bastion.label>TODO</TW_Complete_Shellcore_Bastion.label>
+  
+  <!-- EN: 壳心堡垒 -->
+  <TW_Shellcore_Bastion.label>TODO</TW_Shellcore_Bastion.label>
+  
+</LanguageData>

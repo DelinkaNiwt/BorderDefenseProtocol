@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	
+	<ResearchTabDef>
+		<defName>GDTech</defName>
+		<label>mech-techs</label>
+		<generalTitle>glitterworld destroyer</generalTitle>
+		<generalDescription>The mechanoids not only brought destruction to the planet, they also brought advanced technology. By analyzing the principles of these technologies, colonists could create similar and even restrained weapons to protect themselves.</generalDescription>
+	</ResearchTabDef>
+	
+	<ResearchProjectDef>
+		<defName>GD3_MiniTurret</defName>
+		<label>basic turret</label>
+		<description>Learn how to build basic turrets, including mini slag turret and anti-air turrets.</description>
+		<tab>GDTech</tab>
+		<baseCost>500</baseCost>
+		<techLevel>Spacer</techLevel>
+		<prerequisites>
+			<li>MicroelectronicsBasics</li>
+		</prerequisites>
+		<researchViewX>0</researchViewX>
+		<researchViewY>1</researchViewY>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef>
+		<defName>GD3_ChargeBlasterTurret</defName>
+		<label>auto charge turret</label>
+		<description>Learn how to build charge turrets.</description>
+		<tab>GDTech</tab>
+		<baseCost>3000</baseCost>
+		<techLevel>Spacer</techLevel>
+		<prerequisites>
+			<li>GD3_MiniTurret</li>
+		</prerequisites>
+		<researchViewX>1</researchViewX>
+		<researchViewY>0</researchViewY>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef>
+		<defName>GD3_InfernoTurret</defName>
+		<label>auto inferno turret</label>
+		<description>Learn how to build inferno turrets.</description>
+		<tab>GDTech</tab>
+		<baseCost>3000</baseCost>
+		<techLevel>Spacer</techLevel>
+		<prerequisites>
+			<li>GD3_MiniTurret</li>
+		</prerequisites>
+		<researchViewX>1</researchViewX>
+		<researchViewY>2</researchViewY>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef>
+		<defName>GD3_EMPTurret</defName>
+		<label>EMP turret</label>
+		<description>Learn how to build EMP turrets.</description>
+		<tab>GDTech</tab>
+		<baseCost>5000</baseCost>
+		<techLevel>Spacer</techLevel>
+		<prerequisites>
+			<li>GD3_ChargeBlasterTurret</li>
+			<li>GD3_InfernoTurret</li>
+		</prerequisites>
+		<researchViewX>2</researchViewX>
+		<researchViewY>1</researchViewY>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef>
+		<defName>GD3_Mortar</defName>
+		<label>auto mortar</label>
+		<description>Learn how to build auto mortars.</description>
+		<tab>GDTech</tab>
+		<baseCost>5000</baseCost>
+		<techLevel>Spacer</techLevel>
+		<prerequisites>
+			<li>GD3_MiniTurret</li>
+			<li>Mortars</li>
+		</prerequisites>
+		<researchViewX>1</researchViewX>
+		<researchViewY>1</researchViewY>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef>
+		<defName>GD3_Weapons</defName>
+		<label>mech-weapons</label>
+		<description>Learn how to make advanced mech weapons from the Blackcoat Mechanoid database.</description>
+		<tab>GDTech</tab>
+		<baseCost>5000</baseCost>
+		<techLevel>Spacer</techLevel>
+		<prerequisites>
+			<li>ChargedShot</li>
+		</prerequisites>
+		<researchViewX>1</researchViewX>
+		<researchViewY>3</researchViewY>
+	</ResearchProjectDef>
+	
+	<!-- <ResearchProjectDef>
+		<defName>GD3_IncendiaryRocket</defName>
+		<label>simple incendiary rocket launcher</label>
+		<description>Learn how to make incendiary rocket launcher.\n\nThese rocket launchers consume less material, are easy to make, and generate high temperatures that can easily destroy the power cores of certain armored targets.</description>
+		<tab>GDTech</tab>
+		<baseCost>500</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>BiofuelRefining</li>
+		</prerequisites>
+		<researchViewX>0</researchViewX>
+		<researchViewY>3</researchViewY>
+	</ResearchProjectDef> -->
+	
+	<ResearchProjectDef>
+		<defName>GD3_StrangeWeapons</defName>
+		<label>makeshift weapons</label>
+		<description>These are weapons that your handy colonists created with their own brains. They may be strange, comical and unbelievable, but they are certainly useful.</description>
+		<tab>GDTech</tab>
+		<baseCost>500</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>Machining</li>
+		</prerequisites>
+		<researchViewX>0</researchViewX>
+		<researchViewY>3</researchViewY>
+	</ResearchProjectDef>
+	
+	<!-- Giant Cluster -->
+	
+	<ResearchProjectDef>
+		<defName>GD3_GiantCluster_Small</defName>
+		<label>The Approaching Storm</label>
+		<description>With the arrival of the main mechanoid force, their battle structures and production facilities were also placed on the rim-planet, forming a large, complex structure known as the "Mega Cluster". \n\n learns to intercept the short-wave signals of the mechanoids to learn the exact location of the Mega Cluster, and by destroying the Cluster, obtains a large amount of their supplies and highly sophisticated technology.</description>
+		<tab>GDTech</tab>
+		<baseCost>1000</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>MicroelectronicsBasics</li>
+		</prerequisites>
+		<researchViewX>0</researchViewX>
+		<researchViewY>4</researchViewY>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef>
+		<defName>GD3_GiantCluster_Medium</defName>
+		<label>Level 1 Cluster Technology</label>
+		<description>Learn about cluster construction from the database of psychic shielding marrow and unlock the ability to detect the next level of giant clusters.</description>
+		<tab>GDTech</tab>
+		<baseCost>1000</baseCost>
+		<techLevel>Spacer</techLevel>
+		<prerequisites>
+			<li>GD3_GiantCluster_Small</li>
+		</prerequisites>
+		<requiredResearchBuilding>DummyResearchBuilding</requiredResearchBuilding>
+		<researchViewX>1</researchViewX>
+		<researchViewY>4</researchViewY>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef>
+		<defName>GD3_GiantCluster_Large</defName>
+		<label>Level 2 Cluster Technology</label>
+		<description>Learn about rare resource production from the psychic suppression marrow's database and unlock the ability to probe the next level of giant clusters.</description>
+		<tab>GDTech</tab>
+		<baseCost>1000</baseCost>
+		<techLevel>Ultra</techLevel>
+		<prerequisites>
+			<li>GD3_GiantCluster_Medium</li>
+		</prerequisites>
+		<requiredResearchBuilding>DummyResearchBuilding</requiredResearchBuilding>
+		<researchViewX>2</researchViewX>
+		<researchViewY>4</researchViewY>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef>
+		<defName>GD3_GiantCluster_Ultra</defName>
+		<label>Level 3 Cluster Technology</label>
+		<description>Learn about neural network editing from the psychic berserk marrow's database and use them to take the colony to the next level of development.</description>
+		<tab>GDTech</tab>
+		<baseCost>1000</baseCost>
+		<techLevel>Ultra</techLevel>
+		<prerequisites>
+			<li>GD3_GiantCluster_Large</li>
+		</prerequisites>
+		<requiredResearchBuilding>DummyResearchBuilding</requiredResearchBuilding>
+		<researchViewX>3</researchViewX>
+		<researchViewY>4</researchViewY>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef>
+		<defName>GD3_GiantCluster_CentipedeAbility</defName>
+		<label>Cataphract Centipede Modification</label>
+		<description>Modify the power base of the Cataphract Centipede so that it can crush the enemies around it while moving. Enemies no larger than 1.0 in bodysize will suffer additional damage.\n\n*Need Biotech DLC</description>
+		<tab>GDTech</tab>
+		<baseCost>2500</baseCost>
+		<techLevel>Ultra</techLevel>
+		<prerequisites>
+			<li>GD3_GiantCluster_Large</li>
+		</prerequisites>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<requiredResearchFacilities>
+		  <li>MultiAnalyzer</li>
+		</requiredResearchFacilities>
+		<researchViewX>3</researchViewX>
+		<researchViewY>5</researchViewY>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef>
+		<defName>GD3_GiantCluster_ArtilleryA</defName>
+		<label>Magnetic Rail Gun - Enemy Identification</label>
+		<description>Give the EMP magneto rail gun enemy identification logic so that it no longer affects non-enemy mechanoids or turrets.</description>
+		<tab>GDTech</tab>
+		<baseCost>1500</baseCost>
+		<techLevel>Ultra</techLevel>
+		<prerequisites>
+			<li>GD3_GiantCluster_Medium</li>
+		</prerequisites>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<requiredResearchFacilities>
+		  <li>MultiAnalyzer</li>
+		</requiredResearchFacilities>
+		<researchViewX>2</researchViewX>
+		<researchViewY>5</researchViewY>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef>
+		<defName>GD3_GiantCluster_ArtilleryB</defName>
+		<label>Magnetic Rail Gun - Electric Burn</label>
+		<description>Improves the cannonball kill mechanism of the EMP magnetic rail gun, giving it the ability to electrically scorch all hostile pawns in its range.</description>
+		<tab>GDTech</tab>
+		<baseCost>2500</baseCost>
+		<techLevel>Ultra</techLevel>
+		<prerequisites>
+			<li>GD3_GiantCluster_ArtilleryA</li>
+		</prerequisites>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<requiredResearchFacilities>
+		  <li>MultiAnalyzer</li>
+		</requiredResearchFacilities>
+		<researchViewX>3</researchViewX>
+		<researchViewY>6</researchViewY>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef>
+		<defName>GD3_Intelligence</defName>
+		<label>High dynamic range signal processing</label>
+		<description>Improve the signal processing mechanism of the mech-communication station to enable it to intercept more advanced intelligence.</description>
+		<tab>GDTech</tab>
+		<baseCost>1000</baseCost>
+		<techLevel>Spacer</techLevel>
+		<prerequisites>
+			<li>MicroelectronicsBasics</li>
+		</prerequisites>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<requiredResearchFacilities>
+		  <li>MultiAnalyzer</li>
+		</requiredResearchFacilities>
+		<researchViewX>3</researchViewX>
+		<researchViewY>1</researchViewY>
+	</ResearchProjectDef>
+	
+</Defs>

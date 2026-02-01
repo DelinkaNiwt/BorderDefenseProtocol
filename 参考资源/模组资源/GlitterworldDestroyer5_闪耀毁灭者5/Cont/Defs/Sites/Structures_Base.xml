@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 小型 -->
+  <SitePartDef>
+    <defName>GD_Sitepart_Cluster_S</defName>
+    <label>giant cluster α</label>
+    <description>A well-defended giant mechanoid cluster.</description>
+    <siteTexture>UI/Symbols/GiantCluster_A</siteTexture>
+    <expandingIconTexture>UI/Symbols/GiantCluster_A</expandingIconTexture>
+    <handlesWorldObjectTimeoutInspectString>true</handlesWorldObjectTimeoutInspectString>
+    <tags>
+      <li>GiantCluster_S</li>
+    </tags>
+	<minMapSize>(250, 1, 250)</minMapSize>
+  </SitePartDef>
+  
+   <GenStepDef>
+    <defName>GD_Sitepart_Cluster_S</defName>
+    <linkWithSite>GD_Sitepart_Cluster_S</linkWithSite>
+    <order>460</order>
+    <genStep Class="GD3.GenStep_CustomStructureGen_WithMusic">
+      <structureLayoutDefs>
+        <li>GiantCluster_S</li>
+      </structureLayoutDefs>
+	  <musicBox>MusicPlayer_CommandSignal</musicBox>
+    </genStep>
+  </GenStepDef>
+  
+  <!-- 中型 -->
+  
+  <SitePartDef>
+    <defName>GD_Sitepart_Cluster_M</defName>
+    <label>giant cluster β</label>
+    <description>A well-defended giant mechanoid cluster.</description>
+    <siteTexture>UI/Symbols/GiantCluster_B</siteTexture>
+    <expandingIconTexture>UI/Symbols/GiantCluster_B</expandingIconTexture>
+    <handlesWorldObjectTimeoutInspectString>true</handlesWorldObjectTimeoutInspectString>
+    <tags>
+      <li>GiantCluster_M</li>
+    </tags>
+	<minMapSize>(250, 1, 250)</minMapSize>
+  </SitePartDef>
+  
+   <GenStepDef>
+    <defName>GD_Sitepart_Cluster_M</defName>
+    <linkWithSite>GD_Sitepart_Cluster_M</linkWithSite>
+    <order>461</order>
+    <genStep Class="GD3.GenStep_CustomStructureGen_WithMusic">
+      <structureLayoutDefs>
+        <li>GiantCluster_M</li>
+      </structureLayoutDefs>
+	  <musicBox>MusicPlayer_CommandSignal</musicBox>
+    </genStep>
+  </GenStepDef>
+  
+  <!-- 大型 -->
+  
+  <SitePartDef>
+    <defName>GD_Sitepart_Cluster_L</defName>
+    <label>giant cluster γ</label>
+    <description>A well-defended giant mechanoid cluster.</description>
+    <siteTexture>UI/Symbols/GiantCluster_C</siteTexture>
+    <expandingIconTexture>UI/Symbols/GiantCluster_C</expandingIconTexture>
+    <handlesWorldObjectTimeoutInspectString>true</handlesWorldObjectTimeoutInspectString>
+    <tags>
+      <li>GiantCluster_L</li>
+    </tags>
+	<minMapSize>(250, 1, 250)</minMapSize>
+  </SitePartDef>
+  
+   <GenStepDef>
+    <defName>GD_Sitepart_Cluster_L</defName>
+    <linkWithSite>GD_Sitepart_Cluster_L</linkWithSite>
+    <order>462</order>
+    <genStep Class="GD3.GenStep_CustomStructureGen_WithMusic">
+      <structureLayoutDefs>
+        <li>GiantCluster_L</li>
+      </structureLayoutDefs>
+	  <musicBox>MusicPlayer_CommandSignal</musicBox>
+    </genStep>
+  </GenStepDef>
+  
+  <!-- 超大型 -->
+  
+  <SitePartDef>
+    <defName>GD_Sitepart_Cluster_U</defName>
+    <label>giant cluster Ω</label>
+    <description>A well-defended giant mechanoid cluster.</description>
+    <siteTexture>UI/Symbols/GiantCluster_D</siteTexture>
+    <expandingIconTexture>UI/Symbols/GiantCluster_D</expandingIconTexture>
+    <handlesWorldObjectTimeoutInspectString>true</handlesWorldObjectTimeoutInspectString>
+    <tags>
+      <li>GiantCluster_U</li>
+    </tags>
+	<minMapSize>(250, 1, 250)</minMapSize>
+  </SitePartDef>
+  
+   <GenStepDef>
+    <defName>GD_Sitepart_Cluster_U</defName>
+    <linkWithSite>GD_Sitepart_Cluster_U</linkWithSite>
+    <order>463</order>
+    <genStep Class="GD3.GenStep_CustomStructureGen_WithMusic">
+      <structureLayoutDefs>
+        <li>GiantCluster_U</li>
+      </structureLayoutDefs>
+	  <musicBox>MusicPlayer_CommandSignal</musicBox>
+    </genStep>
+  </GenStepDef>
+
+
+
+  <!-- symbols -->
+  <KCSG.SymbolDef>
+  <defName>GiantChargeEnhancer</defName>
+  <thing>GiantChargeEnhancer</thing>
+</KCSG.SymbolDef>
+
+<KCSG.SymbolDef>
+  <defName>GiantPlasmaEnhancer</defName>
+  <thing>GiantPlasmaEnhancer</thing>
+</KCSG.SymbolDef>
+
+<KCSG.SymbolDef>
+  <defName>GD_PrecisionWallEnemy</defName>
+  <thing>GD_PrecisionWallEnemy</thing>
+</KCSG.SymbolDef>
+
+<KCSG.SymbolDef>
+  <defName>GD_MechanicalContainer</defName>
+  <thing>GD_MechanicalContainer</thing>
+</KCSG.SymbolDef>
+
+<KCSG.SymbolDef>
+  <defName>Turret_GiantChargeInferno</defName>
+  <thing>Turret_GiantChargeInferno</thing>
+</KCSG.SymbolDef>
+
+<KCSG.SymbolDef>
+  <defName>Turret_GiantChargeBlaster</defName>
+  <thing>Turret_GiantChargeBlaster</thing>
+</KCSG.SymbolDef>
+
+<KCSG.SymbolDef>
+  <defName>Turret_GiantAutoMortar</defName>
+  <thing>Turret_GiantAutoMortar</thing>
+</KCSG.SymbolDef>
+
+<KCSG.SymbolDef>
+  <defName>ArchoTrap_BoobyMine</defName>
+  <thing>ArchoTrap_BoobyMine</thing>
+</KCSG.SymbolDef>
+
+<KCSG.SymbolDef>
+  <defName>PsychicBerserkMarrow</defName>
+  <thing>PsychicBerserkMarrow</thing>
+</KCSG.SymbolDef>
+
+<KCSG.SymbolDef>
+  <defName>PsychicShieldMarrow</defName>
+  <thing>PsychicShieldMarrow</thing>
+</KCSG.SymbolDef>
+
+<KCSG.SymbolDef>
+  <defName>PsychicSuppressionMarrow</defName>
+  <thing>PsychicSuppressionMarrow</thing>
+</KCSG.SymbolDef>
+
+<KCSG.SymbolDef>
+  <defName>Turret_AutoMortar_North</defName>
+  <thing>Turret_AutoMortar</thing>
+</KCSG.SymbolDef>
+
+  <!-- extra symbols -->
+  <KCSG.SymbolDef>
+  <defName>Turret_AutoChargeBlaster_North</defName>
+  <thing>Turret_AutoChargeBlaster</thing>
+</KCSG.SymbolDef>
+
+<KCSG.SymbolDef>
+  <defName>Turret_AutoInferno_North</defName>
+  <thing>Turret_AutoInferno</thing>
+</KCSG.SymbolDef>
+
+<KCSG.SymbolDef>
+  <defName>Turret_AutoMiniTurret</defName>
+  <thing>Turret_AutoMiniTurret</thing>
+</KCSG.SymbolDef>
+
+<KCSG.SymbolDef>
+  <defName>Turret_LandingAutoMortar_North</defName>
+  <thing>Turret_LandingAutoMortar</thing>
+</KCSG.SymbolDef>
+
+<KCSG.SymbolDef>
+  <defName>LargeMechCapsule_North</defName>
+  <thing>LargeMechCapsule</thing>
+</KCSG.SymbolDef>
+
+<!-- Fortress -->
+
+<KCSG.SymbolDef>
+  <defName>MechServer_Normal</defName>
+  <thing>MechServer_Normal</thing>
+</KCSG.SymbolDef>
+
+<KCSG.SymbolDef>
+  <defName>MechServer_True</defName>
+  <thing>MechServer_True</thing>
+</KCSG.SymbolDef>
+
+<KCSG.SymbolDef>
+  <defName>MechServer_False</defName>
+  <thing>MechServer_False</thing>
+</KCSG.SymbolDef>
+
+<KCSG.SymbolDef>
+  <defName>Plant_PeaceLily</defName>
+  <thing>Plant_PeaceLily</thing>
+</KCSG.SymbolDef>
+
+<KCSG.SymbolDef>
+  <defName>Turret_GiantAutoMortar_Script</defName>
+  <thing>Turret_GiantAutoMortar_Script</thing>
+</KCSG.SymbolDef>
+
+<KCSG.SymbolDef>
+  <defName>GD_Exostrider</defName>
+  <thing>GD_Exostrider</thing>
+</KCSG.SymbolDef>
+
+
+
+</Defs>

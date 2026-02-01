@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <GD_ReinforceTitle>Disable enhanced mechanoids threat</GD_ReinforceTitle>
+  <GD_ThreatRateTitle>Mechanoid Threat Scale</GD_ThreatRateTitle>
+  <GD_ThreatRateDesc>An adjustment to raid points when the raider faction is mechanoid.</GD_ThreatRateDesc>
+  <GD_MechDamageTitle>Mechanoid Damage Factor</GD_MechDamageTitle>
+  <GD_MechDamageDesc>Damage from mechaonid's attack is multiplied by this factor. Affects both enemy and friendly mechanoids.</GD_MechDamageDesc>
+  <GD_TurretDamageTitle>Mechanoid Turret Damage Factor</GD_TurretDamageTitle>
+  <GD_TurretDamageDesc>Attack damage from mechanoid turrets is multiplied by this factor. Only affects enemy mechanoid turrets.</GD_TurretDamageDesc>
+  <GD_ReinforceTip>When the total wealth value of the player's colony exceeds one million, all incoming enemy mechanoids will be reinforced. This will significantly increase the difficulty of defense in the later stages.</GD_ReinforceTip>
+  <GD_DetectCooldownTitle>Unstable shortwave receiver cooling time (days)</GD_DetectCooldownTitle>
+  <GD_TurretConsumePowerTitle>Electricity storage consumed per round of firing by the giant charge turret</GD_TurretConsumePowerTitle>
+  <GD_Tip>*The following settings are required for biotechDLC to take effect</GD_Tip>
+  <GD_ReactiveArmorTitle>Disable reactive armor</GD_ReactiveArmorTitle>
+  <GD_PauseWhenUnstable>Automatically pauses when the mechanoid server is unstable</GD_PauseWhenUnstable>
+  <GD_AdvancedNodeTitle>Amount of bandwidth provided by advanced base stations（Biotech DLC）</GD_AdvancedNodeTitle>
+  <GD_VaporizeRangeTitle>diabolus' main cannon kill radius</GD_VaporizeRangeTitle>
+  <GD_NotNeedToResearch>The wanderer's black suit Tech doesn't need to solve puzzles</GD_NotNeedToResearch>
+  <GD_DeveloperMode>Developer mode</GD_DeveloperMode>
+  <GD_DeveloperModeTip>Related to the display of multiple logs. No need to open for normal play.</GD_DeveloperModeTip>
+  <GD_AirforceTitle>Disable reinforcement of mechanoid air force</GD_AirforceTitle>
+  <GD_AirforceTip>When raid points exceed 2,000, a random ranged mechanoid in the raid team may be granted permission to call for air reinforcement.</GD_AirforceTip>
+  <GD_MechhiveIntervalTitle>Respawn rate of mechanoid hive quests (days):</GD_MechhiveIntervalTitle>
+  <GD_MechhiveIntervalTip>When choosing to be hostile to the Black-clad Mechs, respawn the average interval of the mechanoid hive special quests.</GD_MechhiveIntervalTip>
+</LanguageData>

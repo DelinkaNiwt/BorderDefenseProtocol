@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: left front power leg -->
+  <LeftFrontPowerLeg.label>TODO</LeftFrontPowerLeg.label>
+  <!-- EN: power leg -->
+  <LeftFrontPowerLeg.labelShort>TODO</LeftFrontPowerLeg.labelShort>
+  
+  <!-- EN: left hind power leg -->
+  <LeftHindPowerLeg.label>TODO</LeftHindPowerLeg.label>
+  <!-- EN: power leg -->
+  <LeftHindPowerLeg.labelShort>TODO</LeftHindPowerLeg.labelShort>
+  
+  <!-- EN: right front power leg -->
+  <RightFrontPowerLeg.label>TODO</RightFrontPowerLeg.label>
+  <!-- EN: power leg -->
+  <RightFrontPowerLeg.labelShort>TODO</RightFrontPowerLeg.labelShort>
+  
+  <!-- EN: right hind power leg -->
+  <RightHindPowerLeg.label>TODO</RightHindPowerLeg.label>
+  <!-- EN: power leg -->
+  <RightHindPowerLeg.labelShort>TODO</RightHindPowerLeg.labelShort>
+  
+</LanguageData>

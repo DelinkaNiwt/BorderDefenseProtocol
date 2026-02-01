@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+	<Operation Class="PatchOperationSequence">
+		<operations>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/MapGeneratorDef[defName="Mechhive"]/genSteps/li[1]</xpath>
+				<value>
+					<li>GD_OrbitalMechhive</li>
+				</value>
+			</li>
+			<li Class="PatchOperationRemove">
+				<xpath>Defs/ThingDef[defName="MechhiveAssembler"]/comps/li[@Class="CompProperties_MechhiveAssembler"]/options/Mech_Militor</xpath>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="MechhiveAssembler"]/comps/li[@Class="CompProperties_MechhiveAssembler"]/options</xpath>
+				<value>
+					<Mech_MarineLancer>5</Mech_MarineLancer>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="MechhiveAssembler"]/comps/li[@Class="CompProperties_MechhiveAssembler"]/options</xpath>
+				<value>
+					<Mech_ReconScyther>10</Mech_ReconScyther>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="MechhiveAssembler"]/comps/li[@Class="CompProperties_MechhiveAssembler"]/options</xpath>
+				<value>
+					<Mech_Mosquito>5</Mech_Mosquito>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="MechhiveAssembler"]/comps/li[@Class="CompProperties_MechhiveAssembler"]/options</xpath>
+				<value>
+					<Mech_CentipedeSword>3</Mech_CentipedeSword>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="CerebrexCore"]/comps</xpath>
+				<value>
+					<li><compClass>GD3.CompCerebrexAbility</compClass></li>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/SitePartDef[defName="OrbitalMechhive"]/minMapSize</xpath>
+				<value>
+					<minMapSize>(300, 1, 300)</minMapSize>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+	
+</Patch>

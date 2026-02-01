@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <Annihilator_JumpAbility.label>跳跃</Annihilator_JumpAbility.label>
+  <Annihilator_JumpAbility.description>高高跃起并落在目标地点，对落点内的敌人造成可怕的压伤。</Annihilator_JumpAbility.description>
+  
+  <Annihilator_Suspend.label>等离子扫荡</Annihilator_Suspend.label>
+  <Annihilator_Suspend.description>激活逆重引擎，悬浮并向下喷射等离子体，清扫范围内的一切物体。</Annihilator_Suspend.description>
+  
+  <Annihilator_JumpAndSuspend.label>跃近扫荡</Annihilator_JumpAndSuspend.label>
+  <Annihilator_JumpAndSuspend.description>高高跃起并在目标地点上方转为悬浮状态，喷射等离子体进行扫荡。</Annihilator_JumpAndSuspend.description>
+  
+  <Annihilator_LongJump.label>远距离跳跃</Annihilator_LongJump.label>
+  <Annihilator_LongJump.description>高高跃起并利用逆重引擎短暂航行一段距离，最终落在目标地点。</Annihilator_LongJump.description>
+  
+</LanguageData>

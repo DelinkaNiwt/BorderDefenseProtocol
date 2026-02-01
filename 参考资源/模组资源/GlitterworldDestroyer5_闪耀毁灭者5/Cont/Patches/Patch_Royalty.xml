@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+    <Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Royalty</li>
+		</mods>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName = "MechAssembler"]/comps/li[@Class = "CompProperties_SpawnerPawn"]/spawnablePawnKinds</xpath>
+			<value>
+				<li>Mech_MarineLancer</li>
+				<li>Mech_ReconScyther</li>
+			</value>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationFindMod">
+	  <mods>
+		<li>Royalty</li>
+	  </mods>
+      <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName = "MechCapsule"]/comps/li[@Class = "CompProperties_PawnSpawnOnWakeup"]/spawnablePawnKinds</xpath>
+        <value>
+		<li>Mech_MarineLancer</li>
+		<li>Mech_ReconScyther</li>
+		<li>Mech_Firefly</li>
+        </value>
+	  </match>
+	</Operation>
+	
+	<Operation Class="PatchOperationFindMod">
+	  <mods>
+		<li>Royalty</li>
+	  </mods>
+      <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName = "MeleeWeapon_PlasmaSword"]/tools</xpath>
+        <value>
+			<tools>
+			  <li>
+				<label>handle</label>
+				<capacities>
+				  <li>Blunt</li>
+				</capacities>
+				<power>12</power>
+				<cooldownTime>2</cooldownTime>
+				<armorPenetration>0.4</armorPenetration>
+			  </li>
+			  <li>
+				<label>point</label>
+				<capacities>
+				  <li>Stab</li>
+				</capacities>
+				<power>28</power>
+				<cooldownTime>2.6</cooldownTime>
+				<armorPenetration>0.8</armorPenetration>
+				<extraMeleeDamages>
+				  <li>
+					<def>Flame</def>
+					<amount>28</amount>
+					<chance>1</chance>
+				  </li>
+				</extraMeleeDamages>
+			  </li>
+			  <li>
+				<label>edge</label>
+				<capacities>
+				  <li>Cut</li>
+				</capacities>
+				<power>28</power>
+				<cooldownTime>2.6</cooldownTime>
+				<armorPenetration>0.8</armorPenetration>
+				<extraMeleeDamages>
+				  <li>
+					<def>Flame</def>
+					<amount>28</amount>
+					<chance>1</chance>
+				  </li>
+				</extraMeleeDamages>
+			  </li>
+			</tools>
+        </value>
+	  </match>
+	</Operation>
+	
+	<Operation Class="PatchOperationFindMod">
+	  <mods>
+		<li>Royalty</li>
+	  </mods>
+      <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName = "MeleeWeapon_PlasmaSwordBladelink"]/tools</xpath>
+        <value>
+			<tools>
+			  <li>
+				<label>handle</label>
+				<capacities>
+				  <li>Blunt</li>
+				</capacities>
+				<power>12</power>
+				<cooldownTime>2</cooldownTime>
+				<armorPenetration>0.4</armorPenetration>
+			  </li>
+			  <li>
+				<label>point</label>
+				<capacities>
+				  <li>Stab</li>
+				</capacities>
+				<power>32</power>
+				<cooldownTime>2.6</cooldownTime>
+				<armorPenetration>0.8</armorPenetration>
+				<extraMeleeDamages>
+				  <li>
+					<def>Flame</def>
+					<amount>32</amount>
+					<chance>1</chance>
+				  </li>
+				</extraMeleeDamages>
+			  </li>
+			  <li>
+				<label>edge</label>
+				<capacities>
+				  <li>Cut</li>
+				</capacities>
+				<power>32</power>
+				<cooldownTime>2.6</cooldownTime>
+				<armorPenetration>0.8</armorPenetration>
+				<extraMeleeDamages>
+				  <li>
+					<def>Flame</def>
+					<amount>32</amount>
+					<chance>1</chance>
+				  </li>
+				</extraMeleeDamages>
+			  </li>
+			</tools>
+        </value>
+	  </match>
+	</Operation>
+	
+</Patch>

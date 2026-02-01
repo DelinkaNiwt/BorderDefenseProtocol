@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 心灵手雷 -->
+  <AbilityDef>
+    <defName>ThrowPsychicGrenade</defName>
+    <label>throw psychic grenade</label>
+    <description>Throw a psyhic grenade at the target.</description>
+	<hotKey>Misc3</hotKey>
+	<iconPath>PsychicGrenadeWeapon</iconPath>
+    <cooldownTicksRange>1200</cooldownTicksRange>
+    <aiCanUse>true</aiCanUse>
+	<displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>true</disableGizmoWhileUndrafted>
+    <verbProperties>
+      <verbClass>Verb_AbilityShoot</verbClass>
+	  <range>13.9</range>
+      <defaultProjectile>Proj_PsychicGrenade</defaultProjectile>
+      <warmupTime>1.5</warmupTime>
+      <soundCast>ThrowGrenade</soundCast>
+	  <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+      </targetParams>
+    </verbProperties>
+  </AbilityDef>
+  
+  <!-- 伊蚊轰炸 -->
+  <AbilityDef>
+    <defName>MosquitoBombardment</defName>
+    <label>air raid</label>
+    <description>Strafe the enemies along a line. Requires some time to calibrate.</description>
+	<hotKey>Misc3</hotKey>
+	<iconPath>UI/Buttons/MosquitoBomb</iconPath>
+    <cooldownTicksRange>240</cooldownTicksRange>
+    <aiCanUse>true</aiCanUse>
+	<jobDef>GD_CastAbilityOnThing_Flying</jobDef>
+	<displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+	  <range>11.9</range>
+      <drawAimPie>true</drawAimPie>
+      <warmupTime>1.5</warmupTime>
+	  <ai_IsWeapon>false</ai_IsWeapon>
+    </verbProperties>
+	<comps>
+      <li Class="CompProperties_AbilityEffect">
+		<compClass>GD3.CompAbilityEffect_AirRaid</compClass>
+	  </li>
+    </comps>
+  </AbilityDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_MosquitoChargeLance</defName>
+    <label>charge lance shot</label>
+    <graphicData>
+      <texPath>Things/Projectile/ChargeLanceShot</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+      <drawSize>1.5</drawSize>
+    </graphicData>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>20</damageAmountBase>
+	  <armorPenetrationBase>0.45</armorPenetrationBase>
+      <stoppingPower>2</stoppingPower>
+      <speed>120</speed>
+    </projectile>
+  </ThingDef>
+  
+  <!-- 伊蚊火箭弹 -->
+  <AbilityDef>
+    <defName>MosquitoRocket</defName>
+    <label>rocket attack</label>
+    <description>Launch a powerful armor-piercing rocket, which requires a considerable amount of time to load.</description>
+	<hotKey>Misc3</hotKey>
+	<iconPath>UI/Buttons/MosquitoRocket</iconPath>
+    <cooldownTicksRange>3500</cooldownTicksRange>
+    <aiCanUse>true</aiCanUse>
+	<jobDef>GD_CastAbilityOnThing_Flying</jobDef>
+	<displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+    <verbProperties>
+      <verbClass>Verb_AbilityShoot</verbClass>
+	  <range>11.9</range>
+	  <warmupTime>1.5</warmupTime>
+	  <soundCast>InfernoCannon_Fire</soundCast>
+      <defaultProjectile>Bullet_MosquitoRocket</defaultProjectile>
+      <drawAimPie>true</drawAimPie>
+	  <ai_IsWeapon>false</ai_IsWeapon>
+    </verbProperties>
+	<comps>
+      <li Class="CompProperties_AbilityEffect">
+		<compClass>GD3.CompAbilityEffect_RocketAttack</compClass>
+	  </li>
+    </comps>
+  </AbilityDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_MosquitoRocket</defName>
+    <label>rocket</label>
+	<thingClass>GD3.BezierProjectiles_Explosive</thingClass>
+    <graphicData>
+      <texPath>Things/Projectile/Rocket_Big</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+      <drawSize>(0.6, 1.2)</drawSize>
+    </graphicData>
+    <projectile>
+      <damageDef>Bomb</damageDef>
+      <speed>22</speed>
+	  <damageAmountBase>55</damageAmountBase>
+	  <armorPenetrationBase>0.75</armorPenetrationBase>
+      <explosionRadius>2.9</explosionRadius>
+      <preExplosionSpawnSingleThingDef>Filth_BlastMark</preExplosionSpawnSingleThingDef>
+    </projectile>
+	<modExtensions>
+      <li Class="GD3.ModExt_BezierProjectiles">
+        <drawStartDelay>1</drawStartDelay> <!-- 延迟多少 Tick 后开始绘制尾迹 -->
+        <trailFleckDef>LineEMP</trailFleckDef> <!-- 使用的尾迹粒子类型 -->
+        <trailThickness>0.250</trailThickness> <!-- 尾迹线条的粗细 -->
+        <probeStep>0.3</probeStep> <!-- 碰撞检测步长，越小越精确但性能越差 -->
+        <!-- 三阶贝塞尔 -->
+        <useCubieCurve>true</useCubieCurve> <!-- 启用三阶贝塞尔曲线的开关 -->
+        <enableRandomSide>false</enableRandomSide> <!-- 是否启用随机左右翻转 -->
+        <randomSideChance>0</randomSideChance> <!-- 触发翻转的概率（0~1） --> 
+        <randOffsetRange>
+          <min>-1.0</min> <!-- 控制点扰动偏移的最小值,这个值别太大，十几就顶天了！ -->
+          <max>1.0</max> <!-- 控制点扰动偏移的最大值,这个值别太大，十几就顶天了！ -->
+        </randOffsetRange>
+        <P1Offset>0.0</P1Offset> <!-- 控制点1 与起点的距离百分比（0 ~ 1之间），越大越靠近终点 -->
+        <P1Side>5.5</P1Side>   <!-- 控制点1 向左（或右）偏移的距离，值越大弯曲越强 -->
+        <P2Offset>0.6</P2Offset> <!-- 控制点2 与起点的距离百分比（0 ~ 1之间），通常应 > P1Offset -->
+        <P2Side>3.0</P2Side>  <!-- 控制点2 向右（或左）偏移的距离，符号决定弯曲方向 -->
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  <!-- 呼叫增援 -->
+  <AbilityDef>
+    <defName>MechCallReinforcement</defName>
+    <label>call reinforcement</label>
+    <description>Call for reinforcement.</description>
+    <iconPath>UI/Abilities/MechResurrection</iconPath>
+    <cooldownTicksRange>900</cooldownTicksRange>
+	<stunTargetWhileCasting>True</stunTargetWhileCasting>
+    <targetRequired>false</targetRequired>
+    <showCastingProgressBar>true</showCastingProgressBar>
+	<warmupStartSound>MechResurrect_Warmup</warmupStartSound>
+	<warmupEffecter>GDReinforceFlareAbility</warmupEffecter>
+	<aiCanUse>true</aiCanUse>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <warmupTime>12</warmupTime>
+      <requireLineOfSight>false</requireLineOfSight>
+	  <soundAiming>HellsphereCannon_Aiming</soundAiming>
+      <range>-1</range>   
+      <targetParams>
+        <canTargetSelf>true</canTargetSelf>
+		<canTargetPawns>false</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetAnimals>false</canTargetAnimals>
+        <canTargetHumans>false</canTargetHumans>
+        <canTargetMechs>false</canTargetMechs>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="CompProperties_AbilityEffect">
+		<compClass>GD3.CompAbilityEffect_CallReinforce</compClass>
+	  </li>
+    </comps>
+  </AbilityDef>
+  
+  <!--===== 黑衣 =====-->
+  <!-- 护盾附加 -->
+  <AbilityDef>
+    <defName>GD_BlackShieldSupport</defName>
+    <label>shield support</label>
+    <description>shield support.</description>
+    <iconPath>UI/Buttons/MechPlaceShield</iconPath>
+    <cooldownTicksRange>600</cooldownTicksRange>
+	<aiCanUse>true</aiCanUse>
+	<showCastingProgressBar>true</showCastingProgressBar>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <range>9.9</range>
+      <warmupTime>2</warmupTime>
+      <soundCast>MechResurrect_Cast</soundCast>
+	  <warmupEffecter>ConstructMetal</warmupEffecter>
+      <requireLineOfSight>false</requireLineOfSight>
+      <targetParams>
+        <canTargetPawns>true</canTargetPawns>
+		<canTargetSelf>true</canTargetSelf>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetCorpses>false</canTargetCorpses>
+        <canTargetAnimals>false</canTargetAnimals>
+        <canTargetHumans>false</canTargetHumans>
+        <canTargetMechs>true</canTargetMechs>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="GD3.CompProperties_ShieldSupportAbility"/>
+    </comps>
+  </AbilityDef>
+
+
+</Defs>

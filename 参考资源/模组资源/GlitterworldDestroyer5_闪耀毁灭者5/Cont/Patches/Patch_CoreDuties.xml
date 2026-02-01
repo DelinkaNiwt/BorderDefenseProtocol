@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+  <!-- <Operation Class="PatchOperationInsert">
+    <xpath>/Defs/DutyDef[defName = "AssaultColony" or defName = "Defend" or defName="Escort" or defName="HuntEnemiesIndividual" or defName="PrisonerEscape" or defName="AssaultThing"]/thinkNode[@Class="ThinkNode_Priority"]/subNodes/li[@Class="JobGiver_TakeCombatEnhancingDrug"]</xpath>
+    <value>
+      <li Class="GD3.JobGiver_PsychicGrenade">
+      </li>
+    </value>
+  </Operation> -->
+  
+  <Operation Class="PatchOperationInsert">
+    <xpath>/Defs/DutyDef[defName = "AssaultColony" or defName = "Defend" or defName="Escort" or defName="HuntEnemiesIndividual" or defName="AssaultThing"]/thinkNode[@Class="ThinkNode_Priority"]/subNodes/li[@Class="JobGiver_TakeCombatEnhancingDrug"]</xpath>
+    <value>
+      <li Class="GD3.JobGiver_TrySupportShield" />
+    </value>
+  </Operation>
+  
+  <Operation Class="PatchOperationInsert">
+    <xpath>/Defs/DutyDef[defName = "AssaultColony" or defName="HuntEnemiesIndividual" or defName="AssaultThing"]/thinkNode[@Class="ThinkNode_Priority"]/subNodes/li[@Class="JobGiver_AIFightEnemies"]</xpath>
+    <value>
+      <li Class="ThinkNode_Subtree">
+		<treeDef>MechMosquitoAlwaysFight</treeDef>
+	  </li>
+    </value>
+  </Operation>
+  
+  <Operation Class="PatchOperationInsert">
+    <xpath>/Defs/DutyDef[defName = "Defend"]/thinkNode[@Class="ThinkNode_Priority"]/subNodes/li[@Class="JobGiver_AIDefendPoint"]</xpath>
+    <value>
+      <li Class="ThinkNode_Subtree">
+		<treeDef>MechMosquitoAlwaysFight</treeDef>
+	  </li>
+    </value>
+  </Operation>
+  
+  <Operation Class="PatchOperationInsert">
+    <xpath>/Defs/DutyDef[defName = "Escort"]/thinkNode[@Class="ThinkNode_Priority"]/subNodes/li[@Class="JobGiver_AIDefendEscortee"]</xpath>
+    <value>
+      <li Class="ThinkNode_Subtree">
+		<treeDef>MechMosquitoAlwaysFight</treeDef>
+	  </li>
+    </value>
+  </Operation>
+
+</Patch>

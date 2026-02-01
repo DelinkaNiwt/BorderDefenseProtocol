@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <BlackApocriton.label>黑衣憎恶毒蜂</BlackApocriton.label>
+  <BlackApocriton.corePart.parts.MechanicalNeck.parts.MechanicalHead.parts.left_sight_sensor.customLabel>左视觉传感器</BlackApocriton.corePart.parts.MechanicalNeck.parts.MechanicalHead.parts.left_sight_sensor.customLabel>
+  <BlackApocriton.corePart.parts.MechanicalNeck.parts.MechanicalHead.parts.right_sight_sensor.customLabel>右视觉传感器</BlackApocriton.corePart.parts.MechanicalNeck.parts.MechanicalHead.parts.right_sight_sensor.customLabel>
+  <BlackApocriton.corePart.parts.MechanicalNeck.parts.MechanicalHead.parts.left_hearing_sensor.customLabel>左听觉传感器</BlackApocriton.corePart.parts.MechanicalNeck.parts.MechanicalHead.parts.left_hearing_sensor.customLabel>
+  <BlackApocriton.corePart.parts.MechanicalNeck.parts.MechanicalHead.parts.right_hearing_sensor.customLabel>右听觉传感器</BlackApocriton.corePart.parts.MechanicalNeck.parts.MechanicalHead.parts.right_hearing_sensor.customLabel>
+  <BlackApocriton.corePart.parts.front_left_leg.customLabel>左前腿</BlackApocriton.corePart.parts.front_left_leg.customLabel>
+  <BlackApocriton.corePart.parts.front_left_leg.parts.front_left_foot.customLabel>左前足</BlackApocriton.corePart.parts.front_left_leg.parts.front_left_foot.customLabel>
+  <BlackApocriton.corePart.parts.front_right_leg.customLabel>右前腿</BlackApocriton.corePart.parts.front_right_leg.customLabel>
+  <BlackApocriton.corePart.parts.front_right_leg.parts.front_right_foot.customLabel>右前足</BlackApocriton.corePart.parts.front_right_leg.parts.front_right_foot.customLabel>
+  <BlackApocriton.corePart.parts.rear_left_leg.customLabel>左后腿</BlackApocriton.corePart.parts.rear_left_leg.customLabel>
+  <BlackApocriton.corePart.parts.rear_left_leg.parts.rear_left_foot.customLabel>左后足</BlackApocriton.corePart.parts.rear_left_leg.parts.rear_left_foot.customLabel>
+  <BlackApocriton.corePart.parts.rear_right_leg.customLabel>右后腿</BlackApocriton.corePart.parts.rear_right_leg.customLabel>
+  <BlackApocriton.corePart.parts.rear_right_leg.parts.rear_right_foot.customLabel>右后足</BlackApocriton.corePart.parts.rear_right_leg.parts.rear_right_foot.customLabel>
+
+
+</LanguageData>

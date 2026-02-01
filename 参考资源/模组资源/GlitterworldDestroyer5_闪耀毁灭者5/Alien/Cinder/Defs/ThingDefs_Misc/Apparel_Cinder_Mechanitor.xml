@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <ThingDef Name="GD_Cinder_ApparelBase" Abstract="True">
+		<thingClass>Apparel</thingClass>
+		<category>Item</category>
+		<drawerType>MapMeshOnly</drawerType>
+		<selectable>True</selectable>
+		<pathCost>14</pathCost>
+		<useHitPoints>True</useHitPoints>
+		<techLevel>Industrial</techLevel>
+		<thingCategories>
+			<li>Apparel</li>
+		</thingCategories>
+		<graphicData>
+			<graphicClass>Graphic_Single</graphicClass>
+			<onGroundRandomRotateAngle>35</onGroundRandomRotateAngle>
+		</graphicData>
+		<drawGUIOverlay>true</drawGUIOverlay>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<Flammability>1.0</Flammability>
+			<DeteriorationRate>2</DeteriorationRate>
+			<Beauty>-3</Beauty>
+		</statBases>
+		<tradeTags>
+			<li>Clothing</li>
+		</tradeTags>
+		<altitudeLayer>Item</altitudeLayer>
+		<alwaysHaulable>True</alwaysHaulable>
+		<tickerType>Never</tickerType>
+		<burnableByRecipe>true</burnableByRecipe>
+		<comps>
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Styleable" />
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompColorable</compClass>
+			</li>
+		</comps>
+		<apparel>
+		<canBeDesiredForIdeo>false</canBeDesiredForIdeo>
+		<canBeGeneratedToSatisfyWarmth>false</canBeGeneratedToSatisfyWarmth>
+		<canBeGeneratedToSatisfyToxicEnvironmentResistance>false</canBeGeneratedToSatisfyToxicEnvironmentResistance>
+		<canBeGeneratedToSatisfyVacuumResistance>false</canBeGeneratedToSatisfyVacuumResistance>
+			<tags>
+				<li>Cinder_Civilan</li>
+			</tags>
+		</apparel>
+		<recipeMaker>
+		     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+             <workSkill>Crafting</workSkill>
+             <effectWorking>Tailor</effectWorking>
+             <soundWorking>Recipe_Tailor</soundWorking>
+			<recipeUsers>
+				<li>Cinder_AncientWorkstation</li>
+			</recipeUsers>
+				<unfinishedThingDef>UnfinishedApparel</unfinishedThingDef>
+		</recipeMaker>
+	</ThingDef>
+	
+  <ThingDef ParentName="ApparelBase" Name="GD_Cinder_HatBase" Abstract="True">
+		<thingCategories Inherit="false">
+			<li>Headgear</li>
+		</thingCategories>
+		<smeltable>false</smeltable>
+		<graphicData>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<uiIconScale>1.4</uiIconScale>
+		<apparel>
+			<parentTagDef>ApparelHead</parentTagDef>
+			<countsAsClothingForNudity>false</countsAsClothingForNudity>
+			<renderSkipFlags>
+				<li>None</li>
+			</renderSkipFlags>
+			<tags>
+				<li>Cinder_Civilan</li>
+			</tags>
+			<canBeDesiredForIdeo>false</canBeDesiredForIdeo>
+		    <canBeGeneratedToSatisfyWarmth>false</canBeGeneratedToSatisfyWarmth>
+			<canBeGeneratedToSatisfyToxicEnvironmentResistance>false</canBeGeneratedToSatisfyToxicEnvironmentResistance>
+			<canBeGeneratedToSatisfyVacuumResistance>false</canBeGeneratedToSatisfyVacuumResistance>
+		</apparel>
+		<recipeMaker>
+		     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+             <workSkill>Crafting</workSkill>
+             <effectWorking>Tailor</effectWorking>
+             <soundWorking>Recipe_Tailor</soundWorking>
+			<recipeUsers>
+				<li>Cinder_AncientWorkstation</li>
+			</recipeUsers>
+			<unfinishedThingDef>UnfinishedApparel</unfinishedThingDef>
+		</recipeMaker>
+	</ThingDef>
+	
+  <!-- 流浪者的礼帽 -->
+  <ThingDef ParentName="GD_Cinder_HatBase">
+    <defName>Apparel_Cinder_BlackHat</defName>
+    <label>rangers' bowler hat (cinder)</label>
+    <description>Beautiful bowler hat, containing mechanical neurons that can assist the wearer to think. \n\nGuess what's hidden in the hat?</description>
+    <techLevel>Spacer</techLevel>
+    <graphicData>
+      <texPath>Apparel/Cinder_BlackHat</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>1.0</drawSize>
+    </graphicData>
+	<tickerType>Normal</tickerType>
+    <costList>
+      <Cloth>100</Cloth>
+    </costList>
+    <recipeMaker>
+	  <recipeUsers Inherit="False">
+        <li>TableMachining</li>
+      </recipeUsers>
+      <researchPrerequisite>GD3_Puzzle</researchPrerequisite>
+      <skillRequirements>
+        <Crafting>4</Crafting>
+      </skillRequirements>
+	  <displayPriority>702</displayPriority>
+    </recipeMaker>
+	<smeltable>false</smeltable>
+	<tradeability>Sellable</tradeability>
+    <statBases>
+      <WorkToMake>2100</WorkToMake>
+      <MaxHitPoints>200</MaxHitPoints>
+      <Mass>0.28</Mass>
+      <EquipDelay>2</EquipDelay>
+    </statBases>
+    <equippedStatOffsets>
+	  <MechFormingSpeed>1</MechFormingSpeed>
+      <PawnBeauty>1</PawnBeauty>
+	  <TradePriceImprovement>0.25</TradePriceImprovement>
+	  <SocialImpact>0.5</SocialImpact>
+	  <VacuumResistance MayRequire="Ludeon.Rimworld.Odyssey">0.4</VacuumResistance>
+    </equippedStatOffsets>
+    <apparel>
+      <wornGraphicPath>Apparel/Cinder_BlackHat</wornGraphicPath>
+      <!-- <hatRenderedFrontOfFace>true</hatRenderedFrontOfFace> -->
+      <countsAsClothingForNudity>false</countsAsClothingForNudity>
+      <bodyPartGroups>
+        <li>UpperHead</li>
+      </bodyPartGroups>
+      <layers>
+        <li>Overhead</li>
+      </layers>
+	  <tags>
+	    <li>PrestigeCombatGear</li>
+	  </tags>
+      <scoreOffset>4</scoreOffset>
+      <mechanitorApparel>true</mechanitorApparel>
+    </apparel>
+	<comps>
+	  <li Class="GD3.CompProperties_ApparelHediff">
+	    <hediff>GD_BlackEnhancer_Hat</hediff>
+	  </li>
+	</comps>
+  </ThingDef>
+  
+  <!-- 流浪者的风衣 -->
+  <ThingDef ParentName="GD_Cinder_ApparelBase">
+    <defName>Apparel_Cinder_BlackWindbreaker</defName>
+    <label>rangers' full dress (cinder)</label>
+    <description>The exquisite dress contains mechanical neurons that can assist the wearer in controlling the mechanoids, and the effect will be enhanced when the colony destroys certain powerful mechanoids.</description>
+    <graphicData>
+      <texPath>Apparel/Cinder_BlackWindbreaker</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+	<tickerType>Normal</tickerType>
+    <statBases>
+	  <WorkToMake>4200</WorkToMake>
+      <MaxHitPoints>200</MaxHitPoints>
+      <Mass>2</Mass>
+      <ArmorRating_Sharp>0.6</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.3</ArmorRating_Blunt>
+      <ArmorRating_Heat>0.9</ArmorRating_Heat>
+      <Insulation_Cold>42</Insulation_Cold>
+      <Insulation_Heat>36</Insulation_Heat>
+      <EquipDelay>5</EquipDelay>
+    </statBases>
+    <equippedStatOffsets Inherit="false">
+      <MoveSpeed>1.0</MoveSpeed>
+	  <VacuumResistance MayRequire="Ludeon.Rimworld.Odyssey">0.4</VacuumResistance>
+    </equippedStatOffsets>
+	<recipeMaker>
+	  <unfinishedThingDef>UnfinishedApparel</unfinishedThingDef>
+      <displayPriority>703</displayPriority>
+	  <recipeUsers Inherit="False">
+        <li>TableMachining</li>
+      </recipeUsers>
+      <researchPrerequisite>GD3_Puzzle</researchPrerequisite>
+      <skillRequirements>
+        <Crafting>4</Crafting>
+      </skillRequirements>
+    </recipeMaker>
+    <costList Inherit="False">
+      <Cloth>180</Cloth>
+    </costList>
+    <apparel>
+      <tags>
+        <li>Mechlord</li>
+		<li>Royal</li>
+		<li>PrestigeCombatGear</li>
+      </tags>
+	  <bodyPartGroups>
+		<li>Torso</li>
+		<li>Neck</li>
+		<li>Legs</li>
+	  </bodyPartGroups>
+	  <layers>
+		<li>OnSkin</li>
+      </layers>
+      <wornGraphicPath>Apparel/Cinder_BlackWindbreaker</wornGraphicPath>
+    </apparel>
+    <tradeability>Sellable</tradeability>
+    <tradeTags Inherit="False">
+      <li>HiTechArmor</li>
+    </tradeTags>
+	<comps>
+	  <li Class="GD3.CompProperties_ApparelHediff">
+	    <hediff>GD_BlackEnhancer</hediff>
+	  </li>
+	</comps>
+  </ThingDef>
+
+</Defs>

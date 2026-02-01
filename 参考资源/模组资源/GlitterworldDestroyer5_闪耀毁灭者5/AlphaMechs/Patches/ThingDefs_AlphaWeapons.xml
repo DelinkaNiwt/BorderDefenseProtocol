@@ -1,0 +1,432 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/VEF.Weapons.ExpandableProjectileDef[defName="AM_FlamethrowerBullet"]/projectile</xpath>
+		<value>
+		  <projectile>
+			<damageDef>Flame</damageDef>		
+			<flyOverhead>false</flyOverhead>
+			<damageAmountBase>45</damageAmountBase>
+			<stoppingPower>1.5</stoppingPower>
+			<ai_IsIncendiary>true</ai_IsIncendiary>
+			<preExplosionSpawnThingDef>Filth_Fuel</preExplosionSpawnThingDef>
+			<preExplosionSpawnChance>0.6</preExplosionSpawnChance>
+			<speed>40</speed>
+		  </projectile>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="AM_Gun_GoliathChargeBlaster"]/statBases/RangedWeapon_Cooldown</xpath>
+		<value>
+		  <RangedWeapon_Cooldown>2.4</RangedWeapon_Cooldown>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="AM_Gun_GoliathNeedle"]/statBases</xpath>
+		<value>
+		  <statBases>
+			<MarketValue>1400</MarketValue>
+			<Mass>2.6</Mass>
+			<AccuracyTouch>0.96</AccuracyTouch>
+			<AccuracyShort>0.97</AccuracyShort>
+			<AccuracyMedium>0.99</AccuracyMedium>
+			<AccuracyLong>0.97</AccuracyLong>
+			<RangedWeapon_Cooldown>1.1</RangedWeapon_Cooldown>
+		  </statBases>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="AM_CryoBullet"]/projectile</xpath>
+		<value>
+		  <projectile>
+			<speed>40</speed>
+			<damageDef>Frostbite</damageDef>
+			<damageAmountBase>8</damageAmountBase>
+			<explosionRadius>3.9</explosionRadius>
+			<soundExplode>AM_Cryogun</soundExplode>
+		  </projectile>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[@Name="AM_SiegeTurretBase"]/statBases</xpath>
+		<value>
+		  <statBases>
+			<MarketValue>1400</MarketValue>
+			<Mass>18</Mass>
+			<RangedWeapon_Cooldown>15</RangedWeapon_Cooldown>
+		  </statBases>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/ThingDef[defName="AM_Bullet_Shell_Explosive"]/graphicData</xpath>
+		<value>
+		  <drawSize>3.0</drawSize>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="AM_Bullet_Shell_Explosive"]/projectile</xpath>
+		<value>
+		  <projectile>
+			<damageDef>Bomb</damageDef>
+			<!-- damage amount is the damage def default -->
+			<damageAmountBase>75</damageAmountBase>
+			<speed>95</speed>
+			<explosionRadius>5.9</explosionRadius>
+			<flyOverhead>true</flyOverhead>
+			<soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+			<soundExplode>MortarBomb_Explode</soundExplode>
+			<soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+			<soundAmbient>MortarRound_Ambient</soundAmbient>
+		  </projectile>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="AM_Bullet_Shell_Demolisher"]/projectile</xpath>
+		<value>
+		  <projectile>
+			<flyOverhead>false</flyOverhead>
+			<damageDef>AM_SiegeBlunt</damageDef>
+			<damageAmountBase>40</damageAmountBase>
+			<speed>40</speed>
+		  </projectile>
+		</value>
+	</Operation>
+	
+	<!--===== Biotech =====-->
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Biotech</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<operations>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Gun_CoilLance"]/verbs</xpath>
+					<value>
+						<verbs>
+							<li>
+								<verbClass>Verb_Shoot</verbClass>
+								<hasStandardCommand>true</hasStandardCommand>
+								<defaultProjectile>AM_Gun_CoilLance_Projectile</defaultProjectile>
+								<warmupTime>2.0</warmupTime>
+								<range>37.9</range>
+								<ticksBetweenBurstShots>6</ticksBetweenBurstShots>
+								<burstShotCount>5</burstShotCount>
+								<soundCast>AM_Gauss</soundCast>
+								<soundCastTail>GunTail_Medium</soundCastTail>
+								<muzzleFlashScale>9</muzzleFlashScale>
+								<targetParams>
+									<canTargetLocations>true</canTargetLocations>
+									<canTargetPawns>true</canTargetPawns>
+									<canTargetBuildings>true</canTargetBuildings>
+								</targetParams>
+							</li>
+						</verbs>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/VEF.Weapons.ExpandableProjectileDef[defName="AM_Gun_CoilLance_Projectile"]/projectile</xpath>
+					<value>
+						<projectile>
+							<damageDef>Bullet</damageDef>
+							<damageAmountBase>16</damageAmountBase>
+							<armorPenetrationBase>0.75</armorPenetrationBase>
+							<stoppingPower>1</stoppingPower>
+							<speed>150</speed>
+						</projectile>
+					</value>
+				</li>
+				
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Gun_SuperHeavyChargeBlaster"]/verbs</xpath>
+					<value>
+						<verbs>
+							<li>
+								<verbClass>Verb_Shoot</verbClass>
+								<hasStandardCommand>true</hasStandardCommand>
+								<defaultProjectile>AM_Bullet_ChargeBlasterHeavy_Red</defaultProjectile>
+								<warmupTime>2.25</warmupTime>
+								<range>17.9</range>
+								<ticksBetweenBurstShots>3</ticksBetweenBurstShots>
+								<burstShotCount>32</burstShotCount>
+								<soundCast>AM_Shot_ChargeBlaster_Red</soundCast>
+								<soundCastTail>GunTail_Heavy</soundCastTail>
+								<muzzleFlashScale>9</muzzleFlashScale>
+							</li>
+						</verbs>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Bullet_ChargeBlasterHeavy_Red"]/projectile</xpath>
+					<value>
+						<projectile>
+						  <damageDef>Bullet</damageDef>
+						  <damageAmountBase>31</damageAmountBase>
+						  <speed>90</speed>
+						  <armorPenetrationBase>1.05</armorPenetrationBase>
+						</projectile>
+					</value>
+				</li>
+				
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Bullet_LaserRifle"]/projectile</xpath>
+					<value>
+						<projectile>
+							<damageDef>Beam</damageDef>
+							<damageAmountBase>15</damageAmountBase>
+							<armorPenetrationBase>1</armorPenetrationBase>
+							<stoppingPower>1.5</stoppingPower>
+						</projectile>
+					</value>
+				</li>
+				
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/VEF.Weapons.ExpandableProjectileDef[defName="AM_Bullet_Firethrower"]/projectile</xpath>
+					<value>
+						<projectile>
+							<damageDef>Flame</damageDef>		
+							<flyOverhead>false</flyOverhead>
+							<damageAmountBase>60</damageAmountBase>
+							<stoppingPower>1.5</stoppingPower>
+							<ai_IsIncendiary>true</ai_IsIncendiary>
+							<preExplosionSpawnThingDef>Filth_Fuel</preExplosionSpawnThingDef>
+							<preExplosionSpawnChance>0.8</preExplosionSpawnChance>
+							<speed>40</speed>
+						</projectile>
+					</value>
+				</li>
+				
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_StarfireTurret"]/verbs</xpath>
+					<value>
+						<verbs>
+							<li>
+								<verbClass>Verb_Shoot</verbClass>
+								<targetParams>
+									<canTargetLocations>true</canTargetLocations>
+									<canTargetPawns>true</canTargetPawns>
+								</targetParams>
+								<hasStandardCommand>true</hasStandardCommand>
+								<defaultProjectile>AM_Bullet_Starfire</defaultProjectile>
+								<forcedMissRadius>5</forcedMissRadius>
+								<ai_AvoidFriendlyFireRadius>5</ai_AvoidFriendlyFireRadius>
+								<warmupTime>10</warmupTime>
+								<range>49.9</range>
+								<burstShotCount>1</burstShotCount>
+								<soundCast>AM_Starfire</soundCast>
+								<soundCastTail>GunTail_Light</soundCastTail>
+								<muzzleFlashScale>14</muzzleFlashScale>
+							</li>
+						</verbs>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Bullet_Starfire_Secondary"]/projectile</xpath>
+					<value>
+						<projectile>
+							<damageDef>Flame</damageDef>
+							<explosionRadius>1.5</explosionRadius>
+							<damageAmountBase>1</damageAmountBase>
+							<speed>50</speed>
+							<screenShakeFactor>0</screenShakeFactor>
+							<soundExplode>AM_LowZap</soundExplode>
+						</projectile>
+					</value>
+				</li>
+				
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Gun_TacticalShotgun"]/verbs</xpath>
+					<value>
+						<verbs>
+							<li>
+								<verbClass>Verb_Shoot</verbClass>
+								<hasStandardCommand>true</hasStandardCommand>
+								<defaultProjectile>AM_Bullet_TacticalShotgun</defaultProjectile>
+								<warmupTime>0.3</warmupTime>
+								<range>8.9</range>
+								<burstShotCount>4</burstShotCount>
+								<ticksBetweenBurstShots>1</ticksBetweenBurstShots>
+								<soundCast>Shot_Shotgun</soundCast>
+								<soundCastTail>GunTail_Heavy</soundCastTail>
+								<muzzleFlashScale>18</muzzleFlashScale>
+							</li>
+						</verbs>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Bullet_TacticalShotgun"]/projectile</xpath>
+					<value>
+						<projectile>
+							<damageDef>Bullet</damageDef>
+							<damageAmountBase>5</damageAmountBase>
+							<stoppingPower>2.5</stoppingPower>
+							<armorPenetrationBase>0.36</armorPenetrationBase>
+							<speed>55</speed>
+						</projectile>
+					</value>
+				</li>
+				
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_BeamGraserCannon"]/verbs</xpath>
+					<value>
+						<verbs>
+							<li>
+								<verbClass>Verb_ShootBeam</verbClass>
+								<hasStandardCommand>true</hasStandardCommand>
+								<warmupTime>1.8</warmupTime>
+								<range>42</range>
+								<minRange>3.9</minRange>
+
+								<beamFullWidthRange>8.9</beamFullWidthRange>
+								<burstShotCount>40</burstShotCount>
+								<beamWidth>7</beamWidth>
+								<ticksBetweenBurstShots>3</ticksBetweenBurstShots>
+								<beamDamageDef>AM_PowerfulBeam</beamDamageDef>
+								<soundCastTail>GunTail_Medium</soundCastTail>
+								<muzzleFlashScale>18</muzzleFlashScale>
+								<soundCastBeam>BeamGraser_Shooting</soundCastBeam>
+								<beamGroundFleckDef>Fleck_BeamBurn</beamGroundFleckDef>
+								<beamFleckChancePerTick>0.32</beamFleckChancePerTick>
+								<beamMaxDeviation>1.5</beamMaxDeviation>
+								<beamCurvature>0.3</beamCurvature>
+								<beamMoteDef>AM_Mote_GraserBeamBase</beamMoteDef>
+								<beamEndEffecterDef>GraserBeam_End</beamEndEffecterDef>
+								<beamChanceToStartFire>0.9</beamChanceToStartFire>
+								<beamChanceToAttachFire>0.9</beamChanceToAttachFire>
+								<beamFireSizeRange>0.55~0.85</beamFireSizeRange>
+								<beamLineFleckDef>Fleck_BeamSpark</beamLineFleckDef>
+								<beamStartOffset>0.8</beamStartOffset>
+								<beamLineFleckChanceCurve>
+									<points>
+										<li>(0, 0)</li>
+										<li>(0.65, 0.4)</li>
+										<li>(1, 0.75)</li>
+									</points>
+								</beamLineFleckChanceCurve>
+							</li>
+						</verbs>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/DamageDef[defName="AM_PowerfulBeam"]/defaultArmorPenetration</xpath>
+					<value>
+						<defaultArmorPenetration>1.45</defaultArmorPenetration>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/HediffDef[defName="Introduction_Diabolus"]/stages/li[1]/damageFactors</xpath>
+					<value>
+					  <AM_PowerfulBeam>8</AM_PowerfulBeam>
+					</value>
+				</li>
+				
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_MechanoidGunRotaryNeedle"]/verbs</xpath>
+					<value>
+						<verbs Inherit="False">
+							<li>
+								<verbClass>Verb_Shoot</verbClass>
+								<hasStandardCommand>true</hasStandardCommand>
+								<defaultProjectile>AM_Bullet_NeedleGun</defaultProjectile>
+								<warmupTime>1.5</warmupTime>
+								<range>21.9</range>
+								<burstShotCount>10</burstShotCount>
+								<ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+								<soundCast>AM_NeedleShot</soundCast>
+								<soundCastTail>GunTail_Heavy</soundCastTail>
+								<muzzleFlashScale>9</muzzleFlashScale>
+							</li>
+						</verbs>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Bullet_NeedleGun"]/projectile</xpath>
+					<value>
+						<projectile>
+							<damageDef>Bullet</damageDef>
+							<damageAmountBase>4</damageAmountBase>
+							<armorPenetrationBase>0.55</armorPenetrationBase>
+							<stoppingPower>1.5</stoppingPower>
+							<speed>90</speed>
+						</projectile>
+					</value>
+				</li>
+				
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_MortarCanister"]/projectile</xpath>
+					<value>
+						<projectile>
+							<speed>15</speed>
+							<arcHeightFactor>5</arcHeightFactor>
+							<shadowSize>0.8</shadowSize>
+							<damageDef>Bomb</damageDef>
+							<damageAmountBase>35</damageAmountBase>
+							<explosionRadius>2.9</explosionRadius>
+							<flyOverhead>true</flyOverhead>
+						</projectile>
+					</value>
+				</li>
+				<!--=== BOSS ===-->
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="AM_Gun_HellsphereOrbital"]/graphicData</xpath>
+					<value>
+						<drawSize>1.8</drawSize>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Gun_HellsphereOrbital"]/statBases</xpath>
+					<value>
+						<statBases>
+							<MarketValue>1400</MarketValue>
+							<Mass>20</Mass>
+							<AccuracyTouch>1</AccuracyTouch>
+							<AccuracyShort>1</AccuracyShort>
+							<AccuracyMedium>1</AccuracyMedium>
+							<AccuracyLong>1</AccuracyLong>
+							<RangedWeapon_Cooldown>10</RangedWeapon_Cooldown>
+						</statBases>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Gun_HellsphereOrbital"]/verbs/li[verbClass="Verb_Shoot"]/range</xpath>
+					<value>
+						<range>36</range>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Bullet_HellsphereCannonGun"]/thingClass</xpath>
+					<value>
+						<thingClass>GD3.Projectile_AlphaBombardment</thingClass>
+					</value>
+				</li>
+				
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Gun_AcidSpewer"]/verbs/li[verbClass="Verb_Shoot"]/range</xpath>
+					<value>
+						<range>35</range>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/VEF.Weapons.ExpandableProjectileDef[defName="AM_Bullet_AcidSpewer"]/projectile</xpath>
+					<value>
+						<projectile>
+							<damageDef>AM_AcidSpit</damageDef>
+							<flyOverhead>false</flyOverhead>
+							<damageAmountBase>45</damageAmountBase>
+							<stoppingPower>1.5</stoppingPower>
+							<speed>40</speed>
+						</projectile>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+ 
+</Patch>

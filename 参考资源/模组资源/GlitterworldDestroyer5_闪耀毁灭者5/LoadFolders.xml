@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<loadFolders>
+	<v1.6>
+	  <li>Cont</li>
+	  <li IfModActive="Ludeon.Rimworld.Biotech">Biotech</li>
+	  <li IfModActive="Ludeon.Rimworld.Odyssey">Odyssey</li>
+	  <li IfModActive="issaczhuang.muzzleflash">MuzzleFlash</li>
+	  <li IfModActive="sarg.alphamechs">AlphaMechs</li>
+	  <li IfModActiveAll="BreadMo.Cinders,erdelf.HumanoidAlienRaces">Alien/Cinder</li>
+	  <li IfModActive="Epona.EponaDynasticRise">Alien/Epona</li>
+    </v1.6>
+</loadFolders>

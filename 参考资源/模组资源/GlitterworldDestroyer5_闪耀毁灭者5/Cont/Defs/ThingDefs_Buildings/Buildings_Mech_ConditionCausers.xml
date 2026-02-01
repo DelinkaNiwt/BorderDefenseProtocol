@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 飞行器构筑体 -->
+  <ThingDef ParentName="ConditionCauserBase">
+    <defName>MechAircraftFacility</defName>
+    <label>aircraft facility</label>
+    <description>The tall tower, equipped with communication devices, houses a large number of dormant mechanoid mosquitoes inside and can be quickly deployed to the battlefield when needed.</description>
+    <size>(6,4)</size>
+	<passability>PassThroughOnly</passability>
+    <graphicData>
+      <texPath>Buildings/AircraftFacility</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(9.0,9.0)</drawSize>
+      <drawOffset>(-0.4,0,1.6)</drawOffset>
+      <shadowData>
+        <volume>(4.5,3.5,3.4)</volume>
+        <offset>(0,0,0)</offset>
+      </shadowData>
+      <damageData>
+        <rect>(0.5, 0, 4.8, 3.4)</rect>
+      </damageData>
+    </graphicData>
+    <comps>
+	  <li Class="GD3.CompProperties_EffecterWakeUp">
+		<effecter>GDReinforceFlareAttachedClear</effecter>
+		<offset>(2.1, 0, 5.5)</offset>
+		<scale>0.1</scale>
+	  </li>
+      <li Class="CompProperties_CanBeDormant">
+        <compClass>CompMechanoid</compClass>
+      </li>
+	  <li Class="CompProperties_SpawnerPawn">
+        <spawnablePawnKinds>
+          <li>Mech_Mosquito</li>
+        </spawnablePawnKinds>
+        <chooseSingleTypeToSpawn>True</chooseSingleTypeToSpawn>
+		<pawnsLeftToSpawnKey>MessageMechanoidsLeftToAssemble</pawnsLeftToSpawnKey>
+        <noPawnsLeftToSpawnKey>ShutDown</noPawnsLeftToSpawnKey>
+        <nextSpawnInspectStringKey>MechAssemblyCompleteIn</nextSpawnInspectStringKey>
+        <nextSpawnInspectStringKeyDormant>MechAssemblyNextType</nextSpawnInspectStringKeyDormant>
+		<maxPawnsToSpawn>100</maxPawnsToSpawn>
+        <spawnSound>MechAssembler_Spawn</spawnSound>
+        <showNextSpawnInInspect>true</showNextSpawnInInspect>
+        <lordJob>LordJob_MechanoidsDefend</lordJob>
+        <pawnSpawnIntervalDays>0.1</pawnSpawnIntervalDays>
+		<pawnSpawnRadius>2</pawnSpawnRadius>
+        <shouldJoinParentLord>True</shouldJoinParentLord>
+      </li>
+      <li Class="CompProperties_AmbientSound">
+        <sound>SunBlocker_Ambience</sound>
+      </li>
+    </comps>
+  </ThingDef>
+
+</Defs>

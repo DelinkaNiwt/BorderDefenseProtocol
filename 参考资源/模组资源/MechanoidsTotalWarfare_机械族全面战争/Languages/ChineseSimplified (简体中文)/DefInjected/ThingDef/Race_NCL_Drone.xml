@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Dronegun Bullet -->
+  <Bullet_MiniDronegun.label>TODO</Bullet_MiniDronegun.label>
+  
+  <!-- EN: 无人机 -->
+  <NCL_Dinergate_Drone.label>TODO</NCL_Dinergate_Drone.label>
+  <!-- EN: 无人机 -->
+  <NCL_Dinergate_Drone.description>TODO</NCL_Dinergate_Drone.description>
+  <!-- EN: left blade -->
+  <NCL_Dinergate_Drone.tools.left_blade.label>TODO</NCL_Dinergate_Drone.tools.left_blade.label>
+  <!-- EN: blade -->
+  <NCL_Dinergate_Drone.tools.left_blade.labelNoLocation>TODO</NCL_Dinergate_Drone.tools.left_blade.labelNoLocation>
+  <!-- EN: right blade -->
+  <NCL_Dinergate_Drone.tools.right_blade.label>TODO</NCL_Dinergate_Drone.tools.right_blade.label>
+  <!-- EN: blade -->
+  <NCL_Dinergate_Drone.tools.right_blade.labelNoLocation>TODO</NCL_Dinergate_Drone.tools.right_blade.labelNoLocation>
+  <!-- EN: head -->
+  <NCL_Dinergate_Drone.tools.head.label>TODO</NCL_Dinergate_Drone.tools.head.label>
+  
+  <!-- EN: 便携式机枪 -->
+  <NCL_MiniDronegun.label>TODO</NCL_MiniDronegun.label>
+  <!-- EN: 便携式机枪 -->
+  <NCL_MiniDronegun.description>TODO</NCL_MiniDronegun.description>
+  <!-- EN: 便携式机枪 -->
+  <NCL_MiniDronegun.verbs.Verb_Shoot.label>TODO</NCL_MiniDronegun.verbs.Verb_Shoot.label>
+  
+  <!-- EN: 便携式机枪 -->
+  <NCL_MiniDroneRifle.label>TODO</NCL_MiniDroneRifle.label>
+  <!-- EN: 便携式机枪 -->
+  <NCL_MiniDroneRifle.description>TODO</NCL_MiniDroneRifle.description>
+  <!-- EN: stock -->
+  <NCL_MiniDroneRifle.tools.stock.label>TODO</NCL_MiniDroneRifle.tools.stock.label>
+  <!-- EN: barrel -->
+  <NCL_MiniDroneRifle.tools.barrel.label>TODO</NCL_MiniDroneRifle.tools.barrel.label>
+  <!-- EN: 便携式机枪 -->
+  <NCL_MiniDroneRifle.verbs.Verb_Shoot.label>TODO</NCL_MiniDroneRifle.verbs.Verb_Shoot.label>
+  
+  <!-- EN: 无人机 -->
+  <NCL_Scutiger_Drone.label>TODO</NCL_Scutiger_Drone.label>
+  <!-- EN: 无人机 -->
+  <NCL_Scutiger_Drone.description>TODO</NCL_Scutiger_Drone.description>
+  <!-- EN: left blade -->
+  <NCL_Scutiger_Drone.tools.left_blade.label>TODO</NCL_Scutiger_Drone.tools.left_blade.label>
+  <!-- EN: blade -->
+  <NCL_Scutiger_Drone.tools.left_blade.labelNoLocation>TODO</NCL_Scutiger_Drone.tools.left_blade.labelNoLocation>
+  <!-- EN: right blade -->
+  <NCL_Scutiger_Drone.tools.right_blade.label>TODO</NCL_Scutiger_Drone.tools.right_blade.label>
+  <!-- EN: blade -->
+  <NCL_Scutiger_Drone.tools.right_blade.labelNoLocation>TODO</NCL_Scutiger_Drone.tools.right_blade.labelNoLocation>
+  <!-- EN: head -->
+  <NCL_Scutiger_Drone.tools.head.label>TODO</NCL_Scutiger_Drone.tools.head.label>
+  
+</LanguageData>

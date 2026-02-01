@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	
+  <HediffDef>
+    <defName>Introduction_Infernus</defName>
+    <label>elite: infernus</label>
+	<hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(0.8, 0.2, 0.2)</defaultLabelColor>
+    <description>Reactive Armor: The unit cannot be re-injured for 1 seconds after it is wounded. \n\nFire Power Boost: The power of the main cannon and self-defense flames is significantly increased. \n\nStrong Armor: The unit is virtually impervious to any traditional sharp and blunt weapon damage. \n\nFlammable: The unit takes twice as much damage from all heat.\n\nPredictable Terror: All humanoid organisms less than 59 frames away from this unit will be terrified of its hideous appearance and mode of action. After a certain threshold of fear is reached, the person will fall out of control due to panic.</description>
+    <comps>
+	  <li Class="HediffCompProperties_DisappearsOnDeath"/>
+    </comps>
+    <stages>
+      <li>
+        <!-- null -->
+      </li>
+    </stages>
+    <modExtensions>
+		  <li Class="GD3.ModExtension_NotSendLetter" />
+	  </modExtensions>
+  </HediffDef>
+  
+  <HediffDef>
+    <defName>Introduction_WarEmpress</defName>
+    <label>elite: war empress</label>
+	<hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(0.8, 0.2, 0.2)</defaultLabelColor>
+    <description>Reactive Armor: The unit cannot be re-injured for 1 seconds after it is wounded. \n\nFirepower Boost: The number of loaded guttersnipe is significantly increased.\n\nPredictable Terror: All humanoid organisms less than 59 frames away from this unit will be terrified of its hideous appearance and mode of action. After a certain threshold of fear is reached, the person will fall out of control due to panic.</description>
+    <comps>
+	  <li Class="HediffCompProperties_DisappearsOnDeath"/>
+    </comps>
+    <stages>
+      <li>
+        <!-- null -->
+      </li>
+    </stages>
+    <modExtensions>
+		  <li Class="GD3.ModExtension_NotSendLetter" />
+	  </modExtensions>
+  </HediffDef>
+  
+  <HediffDef>
+    <defName>Introduction_Apoptosis</defName>
+    <label>elite: apoptosis</label>
+	<hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(0.8, 0.2, 0.2)</defaultLabelColor>
+    <description>Reactive Armor: The unit cannot be re-injured for 1 seconds after it is wounded. \n\nComponent Improvement: The consumption when reviving friendly mechanoids is significantly reduced. \n\nThought Disruption: Within 55 squares of the unit's circle, organic enemies will lose all of their vision and most of their neural heat cap. \n\nPredictable Terror: All humanoid organisms less than 59 frames away from this unit will be terrified of its hideous appearance and mode of action. After a certain threshold of fear is reached, the person will fall out of control due to panic.</description>
+    <comps>
+	  <li Class="HediffCompProperties_DisappearsOnDeath"/>
+    </comps>
+    <stages>
+      <li>
+        <!-- null -->
+      </li>
+    </stages>
+    <modExtensions>
+		  <li Class="GD3.ModExtension_NotSendLetter" />
+	  </modExtensions>
+  </HediffDef>
+  
+</Defs>

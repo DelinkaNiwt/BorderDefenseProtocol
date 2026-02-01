@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 聚变反应堆 -->
+  <FusionReactor.label>TODO</FusionReactor.label>
+  
+  <!-- EN: 希腊烈火喷嘴 -->
+  <GreekFireNozzle.label>TODO</GreekFireNozzle.label>
+  
+  <!-- EN: 液压粉碎器 -->
+  <HydraulicCrusher.label>TODO</HydraulicCrusher.label>
+  
+  <!-- EN: 焚城辐射器 -->
+  <InfernoEmitter.label>TODO</InfernoEmitter.label>
+  
+  <!-- EN: 铁木基段 -->
+  <IronbarkBaseTrunk.label>TODO</IronbarkBaseTrunk.label>
+  <!-- EN: 铁木主干基座 -->
+  <IronbarkBaseTrunk.labelShort>TODO</IronbarkBaseTrunk.labelShort>
+  
+  <!-- EN: 铁木树冠 -->
+  <IronbarkCanopy.label>TODO</IronbarkCanopy.label>
+  
+  <!-- EN: 铁木核心 -->
+  <IronbarkCore.label>TODO</IronbarkCore.label>
+  
+  <!-- EN: 铁木下段 -->
+  <IronbarkLowerTrunk.label>TODO</IronbarkLowerTrunk.label>
+  <!-- EN: 铁木主干基座 -->
+  <IronbarkLowerTrunk.labelShort>TODO</IronbarkLowerTrunk.labelShort>
+  
+  <!-- EN: 铁木中段 -->
+  <IronbarkMidTrunk.label>TODO</IronbarkMidTrunk.label>
+  <!-- EN: 铁木主干基座 -->
+  <IronbarkMidTrunk.labelShort>TODO</IronbarkMidTrunk.labelShort>
+  
+  <!-- EN: 根系枢纽 -->
+  <IronbarkRootHub.label>TODO</IronbarkRootHub.label>
+  <!-- EN: 铁木主干基座 -->
+  <IronbarkRootHub.labelShort>TODO</IronbarkRootHub.labelShort>
+  
+  <!-- EN: 铁木主干 -->
+  <IronbarkTrunk.label>TODO</IronbarkTrunk.label>
+  <!-- EN: 铁木主干基座 -->
+  <IronbarkTrunk.labelShort>TODO</IronbarkTrunk.labelShort>
+  
+  <!-- EN: 相位护盾核心 -->
+  <PhaseShieldCore.label>TODO</PhaseShieldCore.label>
+  
+  <!-- EN: 根系关节 -->
+  <RootJoint.label>TODO</RootJoint.label>
+  
+  <!-- EN: 热感阵列 -->
+  <ThermalSensor.label>TODO</ThermalSensor.label>
+  
+</LanguageData>

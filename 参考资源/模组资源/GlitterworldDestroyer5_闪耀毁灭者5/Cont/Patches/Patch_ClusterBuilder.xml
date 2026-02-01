@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+  
+  <!-- <Operation Class="PatchOperationAdd">
+	<xpath>Defs/ThingDef[defName = "ShieldGeneratorMortar" or defName="ShieldGeneratorBullets" or defName="MechCapsule" or defName="LargeMechCapsule" or defName="Turret_GiantChargeBlaster" or defName="Turret_GiantChargeInferno" or defName="GiantChargeEnhancer" or defName="GiantPlasmaEnhancer" or defName="ArchoTrap_BoobyMine" or defName="Turret_GiantAutoMortar" or defName = "Turret_LandingAutoMortar" or @Name="GiantClusterCoreBase" or @Name="MechServerBase" or defName="Turret_AutoMiniTurret" or defName="Turret_AutoChargeBlaster" or defName="Turret_AutoInferno" or defName="Turret_AutoMortar" or defName="GD_PrecisionWallEnemy" or defName="MechAssembler" or defName="Turret_GiantAutoMortar_Script" or defName="GD_Exostrider"]</xpath>
+	<value>
+		<designationCategory>Structure</designationCategory>
+	</value>
+  </Operation>
+  
+  <Operation Class="PatchOperationRemove">
+	<xpath>Defs/ThingDef[defName = "GD_PrecisionWall"]/designationCategory</xpath>
+  </Operation>
+  
+  <Operation Class="PatchOperationAdd">
+	<xpath>Defs/ThingDef[@Name = "AncientBuildingBase"]</xpath>
+	<value>
+		<designationCategory>Misc</designationCategory>
+	</value>
+  </Operation> -->
+  
+  <!-- <Operation Class="PatchOperationAdd">
+	<xpath>Defs/ThingDef[defName = "AnticraftBeam" or defName="MechStabilizer" or defName="MechRelay" or defName="MechRelay_Crashed" or defName="AncientFortifiedWall" or defName="AncientBlastDoor" or defName="MechanoidDropPod" or defName="CerebrexCore" or defName="CerebrexStabilizer" or defName="MechanoidProcessor" or defName = "MechPylon" or defName="MechhiveAssembler" or defName = "AncientMechGestatorTank" or defName = "AncientEmergencyLight_Green" or defName = "GD_AnnihilatorTerminal"]</xpath>
+	<value>
+		<designationCategory>Structure</designationCategory>
+	</value>
+  </Operation>
+  
+  <Operation Class="PatchOperationAdd">
+	<xpath>Defs/TerrainDef[defName = "MechanoidPlatform" or defName = "AncientTile" or defName = "AncientConcrete"]</xpath>
+	<value>
+		<designationCategory>Structure</designationCategory>
+	</value>
+  </Operation> -->
+  
+</Patch>

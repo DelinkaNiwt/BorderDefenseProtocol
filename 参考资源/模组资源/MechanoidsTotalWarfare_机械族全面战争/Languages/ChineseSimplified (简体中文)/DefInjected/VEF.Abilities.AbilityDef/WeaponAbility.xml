@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 百战兵谱：M9刺刀 -->
+  <Codex_M9Knife.label>TODO</Codex_M9Knife.label>
+  <!-- EN: 切换至M9刺刀 -->
+  <Codex_M9Knife.description>TODO</Codex_M9Knife.description>
+  
+  <!-- EN: 百战兵谱：电荷步枪 -->
+  <Codex_Rifle.label>TODO</Codex_Rifle.label>
+  <!-- EN: 切换至电荷步枪 -->
+  <Codex_Rifle.description>TODO</Codex_Rifle.description>
+  
+  <!-- EN: 百战兵谱：冲锋枪 -->
+  <Codex_SMG.label>TODO</Codex_SMG.label>
+  <!-- EN: 切换至重型冲锋枪 -->
+  <Codex_SMG.description>TODO</Codex_SMG.description>
+  
+  <!-- EN: 百战兵谱：狙击枪 -->
+  <Codex_Sniper.label>TODO</Codex_Sniper.label>
+  <!-- EN: 切换至狙击枪 -->
+  <Codex_Sniper.description>TODO</Codex_Sniper.description>
+  
+</LanguageData>

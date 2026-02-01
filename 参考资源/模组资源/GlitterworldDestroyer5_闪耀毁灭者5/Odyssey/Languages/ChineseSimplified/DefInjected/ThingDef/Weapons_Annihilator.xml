@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <Turret_Annihilator_Charge.label>电荷速射炮塔</Turret_Annihilator_Charge.label>
+  <Turret_Annihilator_Charge.description>被设计用于炮塔的小型电荷冲击炮。</Turret_Annihilator_Charge.description>
+  
+  <Turret_Annihilator_Arc.label>电弧炮塔</Turret_Annihilator_Arc.label>
+  <Turret_Annihilator_Arc.description>被设计用于炮塔的小型电弧枪。</Turret_Annihilator_Arc.description>
+
+</LanguageData>

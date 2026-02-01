@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- Walls -->
+
+  <GD_PrecisionWall.label>精密装甲墙</GD_PrecisionWall.label>
+  <GD_PrecisionWall.description>坚固可靠的墙体，会随时间流逝进行自我修复。</GD_PrecisionWall.description>
+
+  <GD_PrecisionWallEnemy.label>精密装甲墙</GD_PrecisionWallEnemy.label>
+  <GD_PrecisionWallEnemy.description>坚固可靠的墙体，会随时间流逝进行自我修复。</GD_PrecisionWallEnemy.description>
+
+
+</LanguageData>

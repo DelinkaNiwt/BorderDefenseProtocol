@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <StatDef>
+    <defName>RangedCooldownFactorBuilding</defName>
+    <label>building ranged cooldown multiplier</label>
+    <description>A multiplier on the cooldown between bursts when the turret using a ranged weapon.</description>
+    <category>Building</category>
+    <toStringStyle>PercentZero</toStringStyle>
+    <defaultBaseValue>1</defaultBaseValue>
+    <minValue>0.01</minValue>
+    <hideAtValue>1</hideAtValue>
+    <displayPriorityInCategory>1205</displayPriorityInCategory>
+  </StatDef>
+
+</Defs>

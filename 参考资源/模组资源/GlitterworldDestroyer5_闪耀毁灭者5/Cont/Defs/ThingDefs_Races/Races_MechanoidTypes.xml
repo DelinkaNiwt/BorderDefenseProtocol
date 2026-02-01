@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- Centipede -->
+  <!-- Centipede - sword -->
+  <ThingDef ParentName="MechCentipede">
+    <defName>Mech_CentipedeSword</defName>
+    <label>centipede swordman</label>
+  </ThingDef>
+  
+  <PawnKindDef ParentName="MechCentipedeBase">
+    <defName>Mech_CentipedeSword</defName>
+    <label>centipede swordman</label>
+    <race>Mech_CentipedeSword</race>
+    <lifeStages Inherit="False">
+      <li MayRequire="Ludeon.RimWorld.Biotech">
+        <bodyGraphicData>
+          <texPath>Things/Pawn/Mechanoid/CentipedeBurnerClean</texPath>
+          <maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/CentipedeBurner</maskPath>
+          <shaderType>CutoutWithOverlay</shaderType>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>3</drawSize>
+          <shadowData>
+            <volume>(0.6, 0.8, 0.6)</volume>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+      <li>
+        <bodyGraphicData>
+          <texPath>Things/Pawn/Mechanoid/CentipedeBurner</texPath>
+          <maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/CentipedeBurner</maskPath>
+          <shaderType>CutoutWithOverlay</shaderType>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>3</drawSize>
+          <shadowData>
+            <volume>(0.6, 0.8, 0.6)</volume>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+    <weaponTags>
+      <li>MechanoidSwordHeavy</li>
+    </weaponTags>
+  </PawnKindDef>
+  
+</Defs>

@@ -1,0 +1,1378 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!-- 不稳定短波接收器 -->
+  
+  <ThingDef ParentName="BuildingBase">
+    <defName>GD_ShortWaveReceiver</defName>
+    <label>unstable shortwave receiver</label>
+    <description>The exact location of the giant cluster is determined by intercepting specific short-wave signals emitted by the mechanoids. \n\nEach intercepted signal will cause the Mechanoid Hive to be alerted, and the receiver will need to perform a period of standby cover to avoid having the coordinates discovered.</description>
+    <graphicData>
+      <texPath>Buildings/GiantMechTurret/ShortWaveReceiver</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(1.25,1.25)</drawSize>
+      <damageData>
+        <rect>(0,0,3,1.8)</rect>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+      <shadowData>
+        <volume>(1,0.5,1)</volume>
+      </shadowData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>0</pathCost>
+    <blockWind>false</blockWind>
+    <castEdgeShadows>false</castEdgeShadows>
+    <fillPercent>0.5</fillPercent>
+    <canOverlapZones>false</canOverlapZones>
+    <statBases>
+      <MaxHitPoints>250</MaxHitPoints>
+      <WorkToBuild>2200</WorkToBuild>
+      <Flammability>0.6</Flammability>
+    </statBases>
+    <size>(1,1)</size>
+    <building>
+      <destroySound>BuildingDestroyed_Metal_Big</destroySound>
+    </building>
+    <costList>
+      <Steel>75</Steel>
+      <ComponentIndustrial>3</ComponentIndustrial>
+    </costList>
+    <!-- <defaultPlacingRot>South</defaultPlacingRot> -->
+    <interactionCellOffset>(0,0,1)</interactionCellOffset>
+    <hasInteractionCell>true</hasInteractionCell>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <designationCategory>Misc</designationCategory>
+    <uiOrder>2110</uiOrder>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>true</shortCircuitInRain>
+        <basePowerConsumption>200</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Usable">
+        <useJob>TriggerObject</useJob>
+        <useLabel>Detect Giant Cluster</useLabel>
+        <useDuration>900</useDuration>
+        <floatMenuOptionPriority>SummonThreat</floatMenuOptionPriority>
+        <floatMenuFactionIcon>Mechanoid</floatMenuFactionIcon>
+        <ignoreOtherReservations>true</ignoreOtherReservations>
+      </li>
+      <li Class="CompProperties_UseEffect">
+        <compClass>GD3.CompUseEffect_Detection</compClass>
+      </li>
+	  <li Class="GD3.CompProperties_ReceiverSelect"/>
+    </comps>
+    <designationHotKey>Misc3</designationHotKey>
+    <placeWorkers>
+      <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+    </placeWorkers>
+    <researchPrerequisites>
+      <li>GD3_GiantCluster_Small</li>
+    </researchPrerequisites>
+    <constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+    <tickerType>Normal</tickerType>
+  </ThingDef>
+
+  <!--===== Cluster =====-->
+  <!-- base -->
+  
+  <ThingDef Name="GiantBuildingBase" ParentName="BuildingBase" Abstract="True">
+    <!-- <designationCategory>Structure</designationCategory> -->
+	<receivesSignals>true</receivesSignals>
+    <altitudeLayer>Building</altitudeLayer>
+    <stealable>false</stealable>
+    <rotatable>false</rotatable>
+    <drawerType>MapMeshAndRealTime</drawerType>
+	<damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+	  <li>
+        <damageDef>Bomb</damageDef>
+        <multiplier>0.35</multiplier>
+      </li>
+	  <li>
+	    <damageDef>ArchoMine_Bomb</damageDef>
+		<multiplier>0</multiplier>
+	  </li>
+	  <li>
+	    <damageDef>Thump</damageDef>
+		<multiplier>3</multiplier>
+	  </li>
+    </damageMultipliers>
+	<tickerType>Normal</tickerType>
+	<passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <fillPercent>0.5</fillPercent>
+    <hasTooltip>true</hasTooltip>
+	<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+	<killedLeavings>
+      <ChunkSlagSteel>3</ChunkSlagSteel>
+	  <Steel>75</Steel>
+	  <Plasteel>50</Plasteel>
+	  <ComponentIndustrial>4</ComponentIndustrial>
+    </killedLeavings>
+  </ThingDef>
+
+  <ThingDef Name="GiantTurretBase" ParentName="GiantBuildingBase" Abstract="True">
+	<thingClass>Building_TurretGun</thingClass>
+  </ThingDef>
+
+  <!-- 电荷冲击炮台 -->
+
+  <ThingDef ParentName="GiantTurretBase">
+    <defName>Turret_GiantChargeBlaster</defName>
+    <label>giant charge turret</label>
+    <description>A steel behemoth, formed by complex craftsmanship, will only appear as a guard force in a giant cluster. \n\nThis turret will fire charge bullets with a caliber close to that of a cannonball, tearing apart each offender's body. It will switch to a shotgun-like firing mode when it is approached by the enemy.</description>
+    <graphicData>
+      <texPath>Buildings/GiantMechTurret/GiantMechTurretBase_Charge</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(5.2, 5.2)</drawSize>
+      <drawOffset>(0,0,-0.10)</drawOffset>
+      <damageData>
+        <rect>(0.3,0.3,1.4,1.4)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(1.5,0.35,1.4)</volume>
+        <offset>(0,0,-0.05)</offset>
+      </shadowData>
+    </graphicData>
+    <size>(4,4)</size>
+    <statBases>
+      <MaxHitPoints>2480</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <Mass>300</Mass>
+      <ShootingAccuracyTurret>0.90</ShootingAccuracyTurret>
+      <Beauty>-20</Beauty>
+    </statBases>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>5.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.0</chanceNeverExplodeFromDamage>
+      </li>
+      <li Class="CompProperties_CanBeDormant" />
+      <li Class="CompProperties_WakeUpDormant">
+        <wakeUpSound>MechanoidsWakeUp</wakeUpSound>
+      </li>
+	  <li Class="CompProperties_AffectedByFacilities">
+        <linkableFacilities>
+          <li>GiantChargeEnhancer</li>
+        </linkableFacilities>
+      </li>
+	  <li Class="CompProperties_Stunnable">
+        <affectedDamageDefs>
+          <li>EMP</li>
+        </affectedDamageDefs>
+      </li>
+	  <li Class="CompProperties_AmbientSound">
+        <sound>MechTurretBig_Call</sound>
+      </li>
+    </comps>
+    <building>
+      <combatPower>450</combatPower>
+      <ai_combatDangerous>true</ai_combatDangerous>
+      <turretGunDef>Gun_GiantChargeBlaster</turretGunDef>
+	  <turretTopDrawSize>4.6</turretTopDrawSize>
+	  <turretBurstWarmupTime>0.2</turretBurstWarmupTime>
+      <turretBurstCooldownTime>1.6</turretBurstCooldownTime>
+      <turretTopOffset>(0, 0.05)</turretTopOffset>
+	  <buildingTags>
+	    <li>GiantTurretRevenge</li>
+		<li>MechClusterCombatThreat</li>
+	  </buildingTags>
+    </building>
+    <uiIconScale>0.95</uiIconScale>
+  </ThingDef>
+
+  <ThingDef ParentName="Gun_ChargeBlasterHeavyBase">
+    <defName>Gun_GiantChargeBlaster</defName>
+    <label>giant charge blaster</label>
+    <description>A special charge blaster that fires large caliber charge shells.</description>
+    <graphicData>
+      <texPath>Buildings/GiantMechTurret/GiantMechTurret_Charge</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <AccuracyTouch>1.00</AccuracyTouch>
+      <AccuracyShort>0.88</AccuracyShort>
+      <AccuracyMedium>0.62</AccuracyMedium>
+	  <AccuracyLong>0.52</AccuracyLong>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>GD3.Verb_ShootBackfire</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_GiantCharge</defaultProjectile>
+        <warmupTime>0.4</warmupTime>
+        <range>85.9</range>
+        <ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+        <burstShotCount>25</burstShotCount>
+        <soundCast>GiantChargeFire</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>9</muzzleFlashScale>
+      </li>
+    </verbs>
+	<comps>
+      <li Class="GD3.CompProperties_SecVerb">
+        <verbProps>
+          <verbClass>Verb_Shoot</verbClass>
+          <hasStandardCommand>true</hasStandardCommand>
+          <defaultProjectile>Bullet_GiantCharge</defaultProjectile>
+          <warmupTime>0.3</warmupTime>
+          <range>14.9</range>
+          <ticksBetweenBurstShots>0</ticksBetweenBurstShots>
+          <burstShotCount>10</burstShotCount>
+          <soundCast>GiantChargeFire</soundCast>
+          <soundCastTail>GunTail_Heavy</soundCastTail>
+          <muzzleFlashScale>9</muzzleFlashScale>
+        </verbProps>
+		<range>10.9</range>
+      </li>
+    </comps>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_GiantCharge</defName>
+    <label>charge blaster shot</label>
+    <graphicData>
+      <texPath>Things/Projectile/Charge_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+	  <drawSize>2.5</drawSize>
+    </graphicData>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>35</damageAmountBase>
+      <speed>150</speed>
+	  <armorPenetrationBase>1.55</armorPenetrationBase>
+    </projectile>
+  </ThingDef>
+  
+  <!-- 地狱火炮台 -->
+
+  <ThingDef ParentName="GiantTurretBase">
+    <defName>Turret_GiantChargeInferno</defName>
+    <label>giant inferno turret</label>
+    <description>A steel behemoth formed by complex craftsmanship, it will only appear as a guard force in giant clusters. \n\nThis turret will fire huge inferno shells, and the liquid hellfire in it will splash in all directions after the shells explode, melting all the enemies around.</description>
+    <graphicData>
+      <texPath>Buildings/GiantMechTurret/GiantMechTurretBase_Inferno</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(5.2, 5.2)</drawSize>
+      <drawOffset>(0,0,-0.10)</drawOffset>
+      <damageData>
+        <rect>(0.3,0.3,1.4,1.4)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(1.5,0.35,1.4)</volume>
+        <offset>(0,0,-0.05)</offset>
+      </shadowData>
+    </graphicData>
+    <size>(4,4)</size>
+    <statBases>
+      <MaxHitPoints>2480</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <Mass>300</Mass>
+      <ShootingAccuracyTurret>0.98</ShootingAccuracyTurret>
+      <Beauty>-20</Beauty>
+    </statBases>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>5.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.0</chanceNeverExplodeFromDamage>
+      </li>
+      <li Class="CompProperties_CanBeDormant" />
+      <li Class="CompProperties_WakeUpDormant">
+        <wakeUpSound>MechanoidsWakeUp</wakeUpSound>
+      </li>
+	  <li Class="CompProperties_AffectedByFacilities">
+        <linkableFacilities>
+          <li>GiantPlasmaEnhancer</li>
+        </linkableFacilities>
+      </li>
+	  <li Class="CompProperties_Stunnable">
+        <affectedDamageDefs>
+          <li>EMP</li>
+        </affectedDamageDefs>
+      </li>
+	  <li Class="CompProperties_AmbientSound">
+        <sound>MechTurretBig_Call</sound>
+      </li>
+    </comps>
+    <building>
+      <combatPower>450</combatPower>
+      <ai_combatDangerous>true</ai_combatDangerous>
+      <turretGunDef>Gun_GiantInfernoLauncher</turretGunDef>
+	  <turretTopDrawSize>4.6</turretTopDrawSize>
+	  <turretBurstWarmupTime>8.0</turretBurstWarmupTime>
+      <turretBurstCooldownTime>39.5</turretBurstCooldownTime>
+      <turretTopOffset>(0, 0.05)</turretTopOffset>
+	  <buildingTags>
+	    <li>GiantTurretRevenge</li>
+		<li>MechClusterCombatThreat</li>
+	  </buildingTags>
+    </building>
+    <uiIconScale>0.95</uiIconScale>
+  </ThingDef>
+
+  <ThingDef ParentName="Gun_InfernoCannonBase">
+    <defName>Gun_GiantInfernoLauncher</defName>
+    <label>giant inferno launcher</label>
+    <description>A special gun that fires large caliber inferno.</description>
+    <graphicData>
+      <texPath>Buildings/GiantMechTurret/GiantMechTurret_Inferno</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+	<smeltable>false</smeltable>
+    <statBases>
+      <AccuracyTouch>1.00</AccuracyTouch>
+      <AccuracyShort>0.88</AccuracyShort>
+      <AccuracyMedium>0.62</AccuracyMedium>
+	  <AccuracyLong>0.52</AccuracyLong>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_GiantInfernoCannon</defaultProjectile>
+        <forcedMissRadius>1.5</forcedMissRadius>
+        <ai_AvoidFriendlyFireRadius>3</ai_AvoidFriendlyFireRadius>
+        <warmupTime>6.25</warmupTime>
+		<minRange>11.9</minRange>
+        <range>85.9</range>
+        <burstShotCount>1</burstShotCount>
+        <soundCast>GiantInfernoCannon</soundCast>
+        <soundCastTail>GunTail_Light</soundCastTail>
+        <muzzleFlashScale>48</muzzleFlashScale>
+		<requireLineOfSight>false</requireLineOfSight>
+      </li>
+    </verbs>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_GiantInfernoCannon</defName>
+    <label>giant inferno shell</label>
+    <graphicData>
+      <texPath>CataphractCentipede_FY_Bullet</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+      <drawSize>3.0</drawSize>
+    </graphicData>
+    <thingClass>Projectile_Explosive</thingClass>
+    <projectile>
+	  <explosionEffect>GiantExplosion</explosionEffect>
+      <flyOverhead>true</flyOverhead>
+      <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <soundExplode>Explosion_GiantBomb</soundExplode>
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+      <damageDef>Flame</damageDef>
+	  <damageAmountBase>125</damageAmountBase>
+      <speed>80</speed>
+	  <explosionRadius>7.9</explosionRadius>
+	  <preExplosionSpawnThingDef>Filth_Ash</preExplosionSpawnThingDef>
+	  <preExplosionSpawnChance>1</preExplosionSpawnChance>
+    </projectile>
+	<comps>
+	  <li Class="GD3.CompProperties_SpawnThingOnDestroy">
+		<thingDef>GD_CataFlame</thingDef>
+	  </li>
+	</comps>
+  </ThingDef>
+  
+  <!-- dummy -->
+  <!-- 弃用 -->
+  
+  <ThingDef ParentName="EtherealThingBase">
+	<defName>GD_GiantFlame</defName>
+	<label>flamebomb</label>
+	<graphicData>
+	  <texPath>Empty/Empty</texPath>
+	  <graphicClass>Graphic_Single</graphicClass>
+	</graphicData>
+	<thingClass>GD3.GiantFlameBomb</thingClass>
+	<tickerType>Normal</tickerType>
+	<drawerType>RealtimeOnly</drawerType>
+	<alwaysFlee>true</alwaysFlee>
+  </ThingDef>
+  
+  <!--===== 放大器 =====-->
+  <!-- 电荷 -->
+  
+  <ThingDef ParentName="GiantBuildingBase">
+    <defName>GiantChargeEnhancer</defName>
+    <label>charge enhancer</label>
+    <description>A structurally sophisticated amplifier that can significantly increase the firing speed and accuracy of the surrounding giant charge blaster.</description>
+    <graphicData>
+      <texPath>Buildings/GiantMechTurret/GiantChargeEnhancer</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(4.95,4.95)</drawSize>
+	  <drawOffset>(0,0,0.11)</drawOffset>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <castEdgeShadows>true</castEdgeShadows>
+    <staticSunShadowHeight>0.35</staticSunShadowHeight>
+    <canOverlapZones>false</canOverlapZones>
+    <statBases>
+      <MaxHitPoints>1200</MaxHitPoints>
+      <Mass>20</Mass>
+      <Flammability>0.5</Flammability>
+    </statBases>
+    <size>(3,3)</size>
+    <building>
+      <destroySound>BuildingDestroyed_Metal_Small</destroySound>
+    </building>
+    <comps>
+      <li Class="CompProperties_Facility">
+        <statOffsets>
+          <RangedCooldownFactorBuilding>-0.75</RangedCooldownFactorBuilding>
+		  <ShootingAccuracyTurret>0.10</ShootingAccuracyTurret>
+        </statOffsets>
+        <maxSimultaneous>1</maxSimultaneous>
+      </li>
+    </comps>
+    <placeWorkers>
+      <li>PlaceWorker_ShowFacilitiesConnections</li>
+    </placeWorkers>
+  </ThingDef>
+  
+  <!-- 等离子 -->
+  
+  <ThingDef ParentName="GiantBuildingBase">
+    <defName>GiantPlasmaEnhancer</defName>
+    <label>plasma enhancer</label>
+    <description>A sophisticatedly structured enhancer that can significantly increase the firing speed of the surrounding giant inferno cannons.</description>
+    <graphicData>
+      <texPath>Buildings/GiantMechTurret/GiantPlasmaEnhancer</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(4.95,4.95)</drawSize>
+	  <drawOffset>(0,0,0.11)</drawOffset>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <castEdgeShadows>true</castEdgeShadows>
+    <staticSunShadowHeight>0.35</staticSunShadowHeight>
+    <canOverlapZones>false</canOverlapZones>
+    <statBases>
+      <MaxHitPoints>1200</MaxHitPoints>
+      <Mass>20</Mass>
+      <Flammability>0.5</Flammability>
+    </statBases>
+    <size>(3,3)</size>
+    <building>
+      <destroySound>BuildingDestroyed_Metal_Small</destroySound>
+    </building>
+    <comps>
+      <li Class="CompProperties_Facility">
+        <statOffsets>
+          <RangedCooldownFactorBuilding>-0.50</RangedCooldownFactorBuilding>
+        </statOffsets>
+        <maxSimultaneous>1</maxSimultaneous>
+      </li>
+    </comps>
+    <placeWorkers>
+      <li>PlaceWorker_ShowFacilitiesConnections</li>
+    </placeWorkers>
+  </ThingDef>
+  
+  <!-- 超凡诡雷 -->
+  
+  <ThingDef ParentName="TrapIEDBase">
+    <defName>ArchoTrap_BoobyMine</defName>
+    <label>archotech trick mine</label>
+    <description>A small device that hovers eerily in mid-air and can only be vaguely observed when extremely close to it. The \n\n triggers will vaporize everything around it.</description>
+    <thingClass>GD3.Building_ArchoMine</thingClass>
+	<tickerType>Normal</tickerType>
+	<neverMultiSelect>true</neverMultiSelect>
+	<drawerType>RealtimeOnly</drawerType>
+	<graphicData>
+      <texPath>Buildings/GiantMechTurret/ArchoBoobyMine</texPath>
+	  <drawSize>1.6</drawSize>
+	  <color>(1,1,1,0.6)</color>
+    </graphicData>
+	<minifiedDef />
+	<designationCategory Inherit="false" />
+	<damageMultipliers>
+      <li>
+        <damageDef>ArchoMine_Bomb</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+	  <li>
+        <damageDef>Bomb</damageDef>
+        <multiplier>0.45</multiplier>
+      </li>
+    </damageMultipliers>
+	<statBases>
+      <Mass>20</Mass>
+	  <MaxHitPoints>1250</MaxHitPoints>
+	  <WorkToBuild>16000</WorkToBuild>
+      <Flammability>0</Flammability>
+      <TrapSpringChance>1.0</TrapSpringChance>
+    </statBases>
+	<thingCategories Inherit="false" />
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <explosiveRadius>2.9</explosiveRadius>
+        <explosiveDamageType>ArchoMine_Bomb</explosiveDamageType>
+        <wickTicks>2</wickTicks>
+		<damageFalloff>false</damageFalloff>
+        <explosionSound>Explosion_GiantBomb</explosionSound>
+      </li>
+    </comps>
+	<researchPrerequisites Inherit="false" />
+    <specialDisplayRadius>2.9</specialDisplayRadius>
+  </ThingDef>
+	
+  <DamageDef ParentName="Bomb">
+    <defName>ArchoMine_Bomb</defName>
+	<!-- <workerClass>GD3.DamageWorker_ArchoMine</workerClass> -->
+	<deathMessage>{0} has been beaten into quantum foam.</deathMessage>
+	<explosionColorCenter>(107, 142, 35)</explosionColorCenter>
+	<explosionColorEdge>(248, 248, 255)</explosionColorEdge>
+    <defaultDamage>400</defaultDamage>
+    <defaultStoppingPower>20</defaultStoppingPower>
+    <defaultArmorPenetration>99999</defaultArmorPenetration>
+	<buildingDamageFactorImpassable>0</buildingDamageFactorImpassable>
+    <buildingDamageFactorPassable>0</buildingDamageFactorPassable>
+  </DamageDef>
+  
+  <!-- 自动迫击炮 -->
+
+  <ThingDef ParentName="GiantTurretBase">
+    <defName>Turret_GiantAutoMortar</defName>
+    <label>giant auto mortar</label>
+    <description>A steel beast assembled by a complex process would only appear as a guard force in a giant cluster. \n\nA single cluster antigrain shell is powerful enough to cut a mountain down by several meters. It will switch to landing fire mode when it is approached by the enemy.</description>
+    <graphicData>
+      <texPath>Buildings/GiantMechTurret/GiantMechTurretBase</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(6.5, 6.5)</drawSize>
+      <drawOffset>(0,0,-0.125)</drawOffset>
+      <damageData>
+        <rect>(0.3,0.3,1.4,1.4)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(2.0,0.35,2.0)</volume>
+        <offset>(0,0,-0.05)</offset>
+      </shadowData>
+    </graphicData>
+    <size>(5,5)</size>
+    <statBases>
+      <MaxHitPoints>3280</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <Mass>300</Mass>
+      <ShootingAccuracyTurret>0.90</ShootingAccuracyTurret>
+      <Beauty>-20</Beauty>
+    </statBases>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>5.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.0</chanceNeverExplodeFromDamage>
+      </li>
+      <li Class="CompProperties_CanBeDormant" />
+      <li Class="CompProperties_WakeUpDormant">
+        <wakeUpSound>MechanoidsWakeUp</wakeUpSound>
+      </li>
+	  <li Class="CompProperties_Stunnable">
+        <affectedDamageDefs>
+          <li>EMP</li>
+        </affectedDamageDefs>
+      </li>
+	  <li Class="CompProperties_AmbientSound">
+        <sound>MechTurretBig_Call</sound>
+      </li>
+    </comps>
+	<generateCommonality>4</generateCommonality>
+    <building>
+      <combatPower>10</combatPower>
+      <ai_combatDangerous>true</ai_combatDangerous>
+      <turretGunDef>Artillery_GiantMortarTurret</turretGunDef>
+	  <turretTopDrawSize>5.8</turretTopDrawSize>
+	  <turretBurstWarmupTime>3.0</turretBurstWarmupTime>
+      <!-- <turretBurstCooldownTime>6.6</turretBurstCooldownTime> -->
+      <turretTopOffset>(0, 0.05)</turretTopOffset>
+	  <buildingTags>
+	    <li>GiantTurretRevenge</li>
+		<li>MechClusterProblemCauser_Mortar</li>
+	  </buildingTags>
+    </building>
+    <uiIconScale>0.95</uiIconScale>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseArtilleryWeapon">
+    <defName>Artillery_GiantMortarTurret</defName>
+    <label>giant auto mortar</label>
+    <description>Mortars that fire cluster anti-grain shells.</description>
+    <graphicData>
+      <texPath>Buildings/GiantMechTurret/GiantMortarTurret</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <weaponTags>
+      <li>Artillery_BaseDestroyer</li>
+    </weaponTags>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>Bullet_Shell_GiantUltraWarhead</defaultProjectile>
+        <forcedMissRadius>10</forcedMissRadius>
+        <ai_AvoidFriendlyFireRadius>3</ai_AvoidFriendlyFireRadius>
+		<defaultCooldownTime>55.0</defaultCooldownTime>
+        <warmupTime>65</warmupTime>
+        <minRange>29.9</minRange>
+        <range>200</range>
+        <burstShotCount>1</burstShotCount>
+        <soundCast>GiantAutoMortar_Large</soundCast>
+        <soundCastTail>GunTail_Light</soundCastTail>
+        <muzzleFlashScale>16</muzzleFlashScale>
+        <requireLineOfSight>false</requireLineOfSight>
+        <targetParams>
+          <canTargetLocations>true</canTargetLocations>
+        </targetParams>
+      </li>
+    </verbs>
+	<comps>
+      <li Class="GD3.CompProperties_SecVerb">
+        <verbProps>
+          <verbClass>Verb_Shoot</verbClass>
+          <defaultProjectile>Bullet_Shell_GiantWarhead</defaultProjectile>
+          <forcedMissRadius>4.2</forcedMissRadius>
+          <ai_AvoidFriendlyFireRadius>3</ai_AvoidFriendlyFireRadius>
+		  <defaultCooldownTime>0.1</defaultCooldownTime>
+          <warmupTime>4</warmupTime>
+          <minRange>5.6</minRange>
+          <range>32.9</range>
+          <burstShotCount>1</burstShotCount>
+		  <ticksBetweenBurstShots>4</ticksBetweenBurstShots>
+          <soundCast>GiantAutoMortar</soundCast>
+          <soundCastTail>GunTail_Light</soundCastTail>
+          <muzzleFlashScale>16</muzzleFlashScale>
+          <requireLineOfSight>false</requireLineOfSight>
+          <targetParams>
+            <canTargetLocations>true</canTargetLocations>
+          </targetParams>
+        </verbProps>
+		<range>31.9</range>
+      </li>
+    </comps>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_Shell_GiantUltraWarhead</defName>
+    <label>HE-warhead</label>
+    <graphicData>
+      <texPath>Things/Projectile/ShellAntigrainWarhead</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+	  <drawSize>3.5</drawSize>
+    </graphicData>
+    <thingClass>Projectile_Explosive</thingClass>
+    <projectile>
+      <damageDef>Bomb</damageDef>
+      <speed>35</speed>
+	  <damageAmountBase>750</damageAmountBase>
+      <explosionRadius>11.9</explosionRadius>
+      <explosionChanceToStartFire>0.22</explosionChanceToStartFire>
+      <explosionDamageFalloff>true</explosionDamageFalloff>
+      <explosionEffect>GiantExplosion</explosionEffect>
+      <flyOverhead>true</flyOverhead>
+      <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <soundExplode>Explosion_GiantBomb</soundExplode>
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_Shell_GiantWarhead</defName>
+    <label>HE-warhead</label>
+    <graphicData>
+      <texPath>Things/Projectile/ShellAntigrainWarhead</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+	  <drawSize>1.5</drawSize>
+    </graphicData>
+    <thingClass>Projectile_Explosive</thingClass>
+    <projectile>
+      <damageDef>Bomb</damageDef>
+      <speed>75</speed>
+	  <damageAmountBase>75</damageAmountBase>
+      <explosionRadius>5.6</explosionRadius>
+      <explosionChanceToStartFire>0.22</explosionChanceToStartFire>
+      <explosionDamageFalloff>true</explosionDamageFalloff>
+      <flyOverhead>true</flyOverhead>
+      <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <soundExplode>MortarBomb_Explode</soundExplode>
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+    </projectile>
+  </ThingDef>
+  
+  <!--===== 核心设施 =====-->
+  <!-- base -->
+  
+  <ThingDef Name="GiantClusterCoreBase" ParentName="BuildingBase" Abstract="True">
+    <!-- <designationCategory>Structure</designationCategory> -->
+	<receivesSignals>true</receivesSignals>
+    <altitudeLayer>Building</altitudeLayer>
+    <stealable>false</stealable>
+    <rotatable>false</rotatable>
+    <drawerType>MapMeshAndRealTime</drawerType>
+	<thingClass>Building_TurretGun</thingClass>
+	<damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+	  <li>
+        <damageDef>Bomb</damageDef>
+        <multiplier>0.35</multiplier>
+      </li>
+	  <li>
+	    <damageDef>ArchoMine_Bomb</damageDef>
+		<multiplier>0</multiplier>
+	  </li>
+    </damageMultipliers>
+	<statBases>
+      <Flammability>0</Flammability>
+      <Mass>300</Mass>
+    </statBases>
+	<tickerType>Normal</tickerType>
+	<blockWind>true</blockWind>
+    <passability>Impassable</passability>
+    <canOverlapZones>false</canOverlapZones>
+    <fillPercent>1.0</fillPercent>
+    <pathCost>75</pathCost>
+    <hasTooltip>true</hasTooltip>
+	<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+	<castEdgeShadows>True</castEdgeShadows>
+	<size>(5,5)</size>
+    <building>
+      <destroySound>BuildingDestroyed_Metal_Big</destroySound>
+	  <combatPower>5000</combatPower>
+      <ai_combatDangerous>true</ai_combatDangerous>
+      <turretGunDef>GD_DummyMortar</turretGunDef>
+	  <turretTopDrawSize>1.1</turretTopDrawSize>
+	  <turretBurstWarmupTime>60.1</turretBurstWarmupTime>
+      <turretBurstCooldownTime>60.1</turretBurstCooldownTime>
+      <turretTopOffset>(0, 0.05)</turretTopOffset>
+    </building>
+	<comps>
+      <li Class="CompProperties_WakeUpDormant" />
+      <li Class="CompProperties_Initiatable" />
+	  <li Class="CompProperties_AmbientSound">
+        <sound>MechTurretBig_Call</sound>
+      </li>
+    </comps>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseArtilleryWeapon">
+    <defName>GD_DummyMortar</defName>
+    <label>None</label>
+    <description>None.</description>
+    <graphicData>
+      <texPath>Empty/Empty</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+	<weaponTags>
+      <li>Artillery_BaseDestroyer</li>
+    </weaponTags>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>Bullet_Shell_GiantWarhead</defaultProjectile>
+        <forcedMissRadius>10</forcedMissRadius>
+        <ai_AvoidFriendlyFireRadius>3</ai_AvoidFriendlyFireRadius>
+		<defaultCooldownTime>55.0</defaultCooldownTime>
+        <warmupTime>55</warmupTime>
+        <range>501</range>
+		<minRange>500</minRange>
+        <burstShotCount>1</burstShotCount>
+        <soundCast>GiantAutoMortar_Large</soundCast>
+        <soundCastTail>GunTail_Light</soundCastTail>
+        <muzzleFlashScale>16</muzzleFlashScale>
+        <requireLineOfSight>false</requireLineOfSight>
+        <targetParams>
+          <canTargetLocations>true</canTargetLocations>
+        </targetParams>
+      </li>
+    </verbs>
+  </ThingDef>
+  
+  <!-- 机械集装箱 -->
+  
+  <ThingDef ParentName="GiantClusterCoreBase">
+    <defName>GD_MechanicalContainer</defName>
+    <label>mechanical container</label>
+    <description>Containers containing large amounts of basic supplies for building clusters normally require a password to unlock them, but we obviously don't have to follow this rule.</description>
+	<thingClass>GD3.MechanicalContainer</thingClass>
+    <graphicData>
+      <texPath>Buildings/GiantMechTurret/MechanicalContainer</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(7.5,6.3)</drawSize>
+      <drawOffset>(0,0,0)</drawOffset>
+      <shadowData>
+        <volume>(5.2,3.5,5.2)</volume>
+        <offset>(0,0,0)</offset>
+      </shadowData>
+      <damageData>
+        <rect>(0.9, 0.9, 4.1, 4.1)</rect>
+      </damageData>
+    </graphicData>
+	<statBases>
+      <MaxHitPoints>5000</MaxHitPoints>
+      <Beauty>-20</Beauty>
+    </statBases>
+    <killedLeavings>
+      <Steel>2050</Steel>
+	  <Plasteel>650</Plasteel>
+	  <Uranium>550</Uranium>
+	  <Silver>2550</Silver>
+	  <Gold>350</Gold>
+	  <ComponentIndustrial>50</ComponentIndustrial>
+	  <ComponentSpacer>15</ComponentSpacer>
+	  <Chemfuel>1050</Chemfuel>
+    </killedLeavings>
+  </ThingDef>
+  
+  <!-- 心灵遮蔽髓 -->
+  
+  <ThingDef ParentName="GiantClusterCoreBase">
+    <defName>PsychicShieldMarrow</defName>
+    <label>psychic shielding marrow</label>
+    <description>A huge archotech building capable of shielding the psychic network of all enemies in the region. \n\n Destroy to unlock Level 1 Cluster Technology.</description>
+    <graphicData>
+      <texPath>Buildings/PsychicRadio</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(7.9,7.9)</drawSize>
+      <drawOffset>(0,0,0.16)</drawOffset>
+      <shadowData>
+        <volume>(4.9,3.5,4.9)</volume>
+        <offset>(0,0,0)</offset>
+      </shadowData>
+      <damageData>
+        <rect>(0.9, 0.9, 4.1, 4.1)</rect>
+      </damageData>
+    </graphicData>
+	<statBases>
+      <MaxHitPoints>15000</MaxHitPoints>
+      <Beauty>1000</Beauty>
+    </statBases>
+    <comps>
+      <li Class="GD3.CompProperties_ShieldMarrow" />
+    </comps>
+  </ThingDef>
+  
+  <!-- 心灵抑制髓 -->
+  
+  <ThingDef ParentName="GiantClusterCoreBase">
+    <defName>PsychicSuppressionMarrow</defName>
+    <label>psychic suppression marrow</label>
+    <description>A huge archotech building capable of suppressing the consciousness of all enemies in the region to a lower level. \n\n Destroy to unlock Level 2 Cluster Technology.</description>
+    <graphicData>
+      <texPath>Buildings/PsychicSuppressionMarrow</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(7.9,7.9)</drawSize>
+      <drawOffset>(0,0,0.16)</drawOffset>
+      <shadowData>
+        <volume>(4.9,3.5,4.9)</volume>
+        <offset>(0,0,0)</offset>
+      </shadowData>
+      <damageData>
+        <rect>(0.9, 0.9, 4.1, 4.1)</rect>
+      </damageData>
+    </graphicData>
+	<statBases>
+      <MaxHitPoints>15000</MaxHitPoints>
+      <Beauty>1000</Beauty>
+    </statBases>
+    <comps>
+      <li Class="GD3.CompProperties_SuppressionMarrow" />
+    </comps>
+  </ThingDef>
+  
+  <!-- 心灵狂暴髓 -->
+  
+  <ThingDef ParentName="GiantClusterCoreBase">
+    <defName>PsychicBerserkMarrow</defName>
+    <label>psychic berserk marrow</label>
+    <description>A huge archotech building capable of intermittently raging against any enemy in the region. \n\n Destroy to unlock Level 3 Cluster technology.</description>
+    <graphicData>
+      <texPath>Buildings/PsychicBerserkMarrow</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(7.9,7.9)</drawSize>
+      <drawOffset>(0,0,0.16)</drawOffset>
+      <shadowData>
+        <volume>(4.9,3.5,4.9)</volume>
+        <offset>(0,0,0)</offset>
+      </shadowData>
+      <damageData>
+        <rect>(0.9, 0.9, 4.1, 4.1)</rect>
+      </damageData>
+    </graphicData>
+	<statBases>
+      <MaxHitPoints>15000</MaxHitPoints>
+      <Beauty>1000</Beauty>
+    </statBases>
+    <comps>
+      <li Class="GD3.CompProperties_BerserkMarrow">
+		<ticksToAffect>3600</ticksToAffect>
+	  </li>
+    </comps>
+  </ThingDef>
+
+  <!--===== 巨黾 =====-->
+  <!-- 巨型迫击炮 -->
+  <ThingDef ParentName="GiantTurretBase">
+    <defName>Turret_GiantAutoMortar_Script</defName>
+    <label>giant auto mortar (defensive)</label>
+    <description>A steel beast assembled by a complex process would only appear as a guard force in a giant cluster. \n\nYou can order the intelligent colonists in your party to hack into the mortar and use its powerful fire to damage the giant exostrider.</description>
+    <graphicData>
+      <texPath>Buildings/GiantMechTurret/GiantMechTurretBase</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(6.5, 6.5)</drawSize>
+      <drawOffset>(0,0,-0.125)</drawOffset>
+      <damageData>
+        <rect>(0.3,0.3,1.4,1.4)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(2.0,0.35,2.0)</volume>
+        <offset>(0,0,-0.05)</offset>
+      </shadowData>
+    </graphicData>
+    <size>(5,5)</size>
+    <statBases>
+      <MaxHitPoints>4680</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <Mass>300</Mass>
+      <ShootingAccuracyTurret>0.90</ShootingAccuracyTurret>
+      <Beauty>-20</Beauty>
+    </statBases>
+	<damageMultipliers>
+      <li>
+        <damageDef>Vaporize</damageDef>
+        <multiplier>0.025</multiplier>
+      </li>
+	  <li>
+        <damageDef>BombScript</damageDef>
+        <multiplier>0.25</multiplier>
+      </li>
+    </damageMultipliers>
+	<interactionCellOffset>(0,0,-3)</interactionCellOffset>
+    <hasInteractionCell>true</hasInteractionCell>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>5.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.0</chanceNeverExplodeFromDamage>
+      </li>
+      <li Class="CompProperties_CanBeDormant" />
+      <li Class="CompProperties_WakeUpDormant">
+        <wakeUpSound>MechanoidsWakeUp</wakeUpSound>
+      </li>
+	  <li Class="CompProperties_Stunnable">
+        <affectedDamageDefs>
+          <li>EMP</li>
+        </affectedDamageDefs>
+      </li>
+	  <li Class="CompProperties_Usable">
+        <useJob>TriggerObject</useJob>
+        <useLabel>Hack and control</useLabel>
+        <useDuration>600</useDuration>
+        <ignoreOtherReservations>true</ignoreOtherReservations>
+      </li>
+	  <li Class="CompProperties_UseEffect">
+        <compClass>GD3.CompUseEffect_HackMortar</compClass>
+		<warmupEffecter>ConstructMetal</warmupEffecter>
+      </li>
+	  <li Class="CompProperties_AmbientSound">
+        <sound>MechTurretBig_Call</sound>
+      </li>
+    </comps>
+    <building>
+      <combatPower>10</combatPower>
+      <ai_combatDangerous>true</ai_combatDangerous>
+      <turretGunDef>Artillery_GiantMortarTurret_Script</turretGunDef>
+	  <turretTopDrawSize>5.8</turretTopDrawSize>
+	  <turretBurstWarmupTime>3.0</turretBurstWarmupTime>
+      <turretTopOffset>(0, 0.05)</turretTopOffset>
+    </building>
+    <uiIconScale>0.95</uiIconScale>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseArtilleryWeapon">
+    <defName>Artillery_GiantMortarTurret_Script</defName>
+    <label>giant auto mortar</label>
+    <description>Mortars that fire cluster anti-grain shells.</description>
+    <graphicData>
+      <texPath>Buildings/GiantMechTurret/GiantMortarTurret</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <weaponTags>
+      <li>Artillery_BaseDestroyer</li>
+    </weaponTags>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>Bullet_Shell_GiantUltraWarhead_Script</defaultProjectile>
+        <forcedMissRadius>1.9</forcedMissRadius>
+        <ai_AvoidFriendlyFireRadius>3</ai_AvoidFriendlyFireRadius>
+		<defaultCooldownTime>65.0</defaultCooldownTime>
+        <warmupTime>65</warmupTime>
+        <minRange>29.9</minRange>
+        <range>400</range>
+        <burstShotCount>1</burstShotCount>
+        <soundCast>GiantAutoMortar_Large</soundCast>
+        <soundCastTail>GunTail_Light</soundCastTail>
+        <muzzleFlashScale>16</muzzleFlashScale>
+        <requireLineOfSight>false</requireLineOfSight>
+        <targetParams>
+          <canTargetLocations>true</canTargetLocations>
+        </targetParams>
+      </li>
+    </verbs>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_Shell_GiantUltraWarhead_Script</defName>
+    <label>HE-warhead</label>
+    <graphicData>
+      <texPath>Things/Projectile/ShellAntigrainWarhead</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+	  <drawSize>3.5</drawSize>
+    </graphicData>
+    <thingClass>Projectile_Explosive</thingClass>
+    <projectile>
+      <damageDef>BombScript</damageDef>
+      <speed>35</speed>
+	  <damageAmountBase>550</damageAmountBase>
+      <explosionRadius>11.9</explosionRadius>
+      <explosionChanceToStartFire>0.22</explosionChanceToStartFire>
+      <explosionDamageFalloff>true</explosionDamageFalloff>
+      <explosionEffect>GiantExplosion</explosionEffect>
+      <flyOverhead>true</flyOverhead>
+      <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <soundExplode>Explosion_GiantBomb</soundExplode>
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+    </projectile>
+  </ThingDef>
+  
+  <!-- 机械巨黾 -->
+  <ThingDef ParentName="BuildingBase">
+	<defName>GD_Exostrider</defName>
+    <label>exostrider</label>
+	<description>A giant central mechanoid, one of the most magnificent creations of the mechaonid hive. \n\nNormally, the exostrider would only use its transponder to uniformly schedule the mechanoid clusters within a galaxy and exchange information directly with the mechanoid hive core. A exostrider usually has several mechanoid ships working together to facilitate information transmission and protection. In special situations, it can also use heavy artillery and industrial rapid-fire artillery combat, rapid-fire guns will automatically search for a certain range of enemy attacks, while the main gun will only be activated when forced to use against some of the most threatening targets. \n\nSince the exostrider acts as a "coordinate origin" when summoning the mechanoid fleet, it can't move at will, but its heavy armor also means you can't deal damage to it using normal methods.</description>
+    <graphicData>
+      <texPath>Exostrider</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(11.8, 11.8)</drawSize>
+      <drawOffset>(0,0,0.5)</drawOffset>
+      <shadowData>
+        <volume>(9.0,0.35,7.8)</volume>
+        <offset>(0,0,0)</offset>
+      </shadowData>
+    </graphicData>
+    <thingClass>GD3.Exostrider</thingClass>
+	<receivesSignals>true</receivesSignals>
+    <altitudeLayer>Building</altitudeLayer>
+    <stealable>false</stealable>
+    <drawerType>MapMeshAndRealTime</drawerType>
+	<tickerType>Normal</tickerType>
+    <fillPercent>0.75</fillPercent>
+    <hasTooltip>true</hasTooltip>
+	<killedLeavings>
+      <AncientExostriderRemains>1</AncientExostriderRemains>
+	  <AncientExostriderHead>1</AncientExostriderHead>
+	  <AncientExostriderCannon>1</AncientExostriderCannon>
+    </killedLeavings>
+	<size>(9,9)</size>
+    <statBases>
+      <Flammability>0</Flammability>
+      <Mass>27500</Mass>
+      <ShootingAccuracyTurret>0.98</ShootingAccuracyTurret>
+      <Beauty>-200</Beauty>
+    </statBases>
+    <destroyable>false</destroyable>
+    <preventSkyfallersLandingOn>true</preventSkyfallersLandingOn>
+    <useHitPoints>false</useHitPoints>
+    <passability>Impassable</passability>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <blockWind>true</blockWind>
+    <rotatable>false</rotatable>
+    <holdsRoof>true</holdsRoof>
+    <comps>
+      <li Class="GD3.CompProperties_ExostriderTurret">
+        <turretDef>Artillery_Exostrider_Sub</turretDef>
+		<drawOffset>(-1.8,0,3.2)</drawOffset>
+		<ID>0</ID>
+      </li>
+	  <li Class="GD3.CompProperties_ExostriderTurret">
+        <turretDef>Artillery_Exostrider_Sub</turretDef>
+		<drawOffset>(1.8,0,3.2)</drawOffset>
+		<ID>1</ID>
+      </li>
+	  <li Class="GD3.CompProperties_ExostriderTurret">
+        <turretDef>Artillery_Exostrider_Charge</turretDef>
+		<drawOffset>(-1.5,0,0.6)</drawOffset>
+		<changeAngle>true</changeAngle>
+		<ID>2</ID>
+      </li>
+	  <li Class="GD3.CompProperties_ExostriderTurret">
+        <turretDef>Artillery_Exostrider_Charge</turretDef>
+		<drawOffset>(1.5,0,0.6)</drawOffset>
+		<changeAngle>true</changeAngle>
+		<ID>3</ID>
+      </li>
+	  <li Class="CompProperties_AmbientSound">
+        <sound>MechTurretBig_Call</sound>
+      </li>
+    </comps>
+    <building>
+      <combatPower>10000</combatPower>
+      <ai_combatDangerous>true</ai_combatDangerous>
+      <turretGunDef>Artillery_Exostrider</turretGunDef>
+	  <turretTopDrawSize>9.8</turretTopDrawSize>
+	  <turretBurstWarmupTime>7.5</turretBurstWarmupTime>
+      <turretBurstCooldownTime>0.5</turretBurstCooldownTime>
+    </building>
+	<modExtensions>
+	  <li Class="GD3.ExostriderExtension">
+		<health>10</health>
+		<helpTicks>6000</helpTicks>
+		<graphicData>
+		  <texPath>Exostrider_Wounded</texPath>
+		  <graphicClass>Graphic_Single</graphicClass>
+		  <drawSize>(11.8, 11.8)</drawSize>
+		  <drawOffset>(0,0,0.5)</drawOffset>
+		  <shadowData>
+			<volume>(9.0,0.35,7.8)</volume>
+			<offset>(0,0,0)</offset>
+		  </shadowData>
+		</graphicData>
+	  </li>
+	</modExtensions>
+  </ThingDef>
+  
+  <!-- 主炮 -->
+  <ThingDef ParentName="BaseArtilleryWeapon">
+    <defName>Artillery_Exostrider</defName>
+    <label>"Gate of Hell" super heavy artillery</label>
+    <description>A giant cannon mounted by a giant exostrider, whose single fire was enough to shake the whole earth. It's usually only activated when there's a major threat.</description>
+    <graphicData>
+      <texPath>ExostriderCannon</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>(1.25, 1.0)</drawSize>
+    </graphicData>
+    <weaponTags>
+      <li>Artillery_BaseDestroyer</li>
+    </weaponTags>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>Bullet_Exostrider</defaultProjectile>
+        <ai_AvoidFriendlyFireRadius>3</ai_AvoidFriendlyFireRadius>
+		<defaultCooldownTime>55.0</defaultCooldownTime>
+        <warmupTime>65</warmupTime>
+        <minRange>29.9</minRange>
+        <range>400</range>
+        <burstShotCount>1</burstShotCount>
+        <soundCast>GiantAutoMortar_Large</soundCast>
+        <soundCastTail>GunTail_Light</soundCastTail>
+        <muzzleFlashScale>16</muzzleFlashScale>
+        <requireLineOfSight>false</requireLineOfSight>
+        <targetParams>
+          <canTargetLocations>true</canTargetLocations>
+        </targetParams>
+      </li>
+    </verbs>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_Exostrider</defName>
+    <label>HE-warhead</label>
+    <graphicData>
+      <texPath>Empty/Empty</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+    </graphicData>
+    <thingClass>GD3.Projectile_Exostrider</thingClass>
+    <projectile>
+      <damageDef>Bomb</damageDef>
+      <speed>35</speed>
+	  <damageAmountBase>32500</damageAmountBase>
+      <explosionRadius>16.9</explosionRadius>
+      <flyOverhead>true</flyOverhead>
+    </projectile>
+  </ThingDef>
+  
+  <!-- 副炮 -->
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>Artillery_Exostrider_Sub</defName>
+    <label>"Styx Starlight" rapid-fire cannon</label>
+    <description>A rapid-fire cannon equipped with a exostrider, usually used to destroy groups of heavily armored units, but had limited effectiveness against small, flexible targets.</description>
+    <graphicData>
+      <texPath>ExostriderSubCannon</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <tradeability>None</tradeability>
+    <destroyOnDrop>true</destroyOnDrop>
+    <statBases>
+      <Mass>2.6</Mass>
+      <AccuracyTouch>0.95</AccuracyTouch>
+      <AccuracyShort>0.90</AccuracyShort>
+      <AccuracyMedium>0.90</AccuracyMedium>
+      <AccuracyLong>0.85</AccuracyLong>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_Exostrider_Sub</defaultProjectile>
+        <defaultCooldownTime>48.5</defaultCooldownTime>
+        <range>97.9</range>
+        <soundCast>Shot_HellsphereCannonGun</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>9</muzzleFlashScale>
+        <minRange>5.9</minRange>
+		<requireLineOfSight>false</requireLineOfSight>
+        <targetParams>
+          <canTargetLocations>true</canTargetLocations>
+          <canTargetPawns>false</canTargetPawns>
+        </targetParams>
+		<ticksBetweenBurstShots>20</ticksBetweenBurstShots>
+        <burstShotCount>6</burstShotCount>
+        <canGoWild>false</canGoWild>
+      </li>
+    </verbs>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_Exostrider_Sub</defName>
+    <label>Styx cannon shot</label>
+    <graphicData>
+      <texPath>Empty/Empty</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+    </graphicData>
+    <thingClass>GD3.Projectile_Exostrider_Sub</thingClass>
+    <projectile>
+      <damageDef>Bomb</damageDef>
+      <speed>35</speed>
+	  <damageAmountBase>550</damageAmountBase>
+      <explosionRadius>16.9</explosionRadius>
+      <flyOverhead>true</flyOverhead>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="SkyfallerBase">
+    <defName>ExostriderShell_Up</defName>
+    <label>Styx cannon shot</label>
+    <size>(2,2)</size>
+    <graphicData>
+      <texPath>Things/Projectile/HellsphereCannon</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(3, 6)</drawSize>
+    </graphicData>
+    <skyfaller>
+	  <angleCurve>
+	    <points>
+          <li>(0,     0)</li>
+          <li>(1,     0)</li>
+        </points>
+	  </angleCurve>
+	  <reversed>true</reversed>
+      <speed>0.65</speed>
+      <shadowSize>(1, 1)</shadowSize>
+	  <anticipationSound>DropPod_Leaving</anticipationSound>
+      <anticipationSoundTicks>10</anticipationSoundTicks>
+      <ticksToImpactRange><min>0</min><max>0</max></ticksToImpactRange>
+    </skyfaller>
+  </ThingDef>
+  
+  <ThingDef ParentName="SkyfallerBase">
+    <defName>ExostriderShell_Down</defName>
+    <label>Styx cannon shot</label>
+    <size>(2,2)</size>
+    <graphicData>
+      <texPath>HellsphereStrike</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(3, 6)</drawSize>
+    </graphicData>
+    <skyfaller>
+	  <angleCurve>
+	    <points>
+          <li>(0,     0)</li>
+          <li>(1,     0)</li>
+        </points>
+	  </angleCurve>
+      <explosionRadius>2.9</explosionRadius>
+      <explosionDamage>Vaporize</explosionDamage>
+	  <explosionDamageFactor>1.0</explosionDamageFactor>
+      <rotateGraphicTowardsDirection>true</rotateGraphicTowardsDirection>
+      <speed>0.85</speed>
+      <shadowSize>(3, 3)</shadowSize>
+	  <ticksToImpactRange><min>240</min><max>240</max></ticksToImpactRange>
+    </skyfaller>
+	<comps>
+	  <li>
+		<compClass>GD3.CompDrawWarning</compClass>
+	  </li>
+	</comps>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>Artillery_Exostrider_Charge</defName>
+    <label>charge blaster turret</label>
+    <description>A small charge blaster designed for use on a defense turret.</description>
+    <tradeability>None</tradeability>
+    <destroyOnDrop>true</destroyOnDrop>
+    <graphicData>
+      <texPath>Things/Item/Equipment/WeaponRanged/ChargeBlasterTurret</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>1.2</drawSize>
+    </graphicData>
+    <statBases>
+      <Mass>2.6</Mass>
+      <AccuracyTouch>0.98</AccuracyTouch>
+      <AccuracyShort>0.95</AccuracyShort>
+      <AccuracyMedium>0.90</AccuracyMedium>
+      <AccuracyLong>0.85</AccuracyLong>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>Bullet_ChargeBlasterHeavy</defaultProjectile>
+        <range>38.9</range>
+        <soundCast>Shot_ChargeBlaster</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>9</muzzleFlashScale>
+        <defaultCooldownTime>1.5</defaultCooldownTime>
+        <ticksBetweenBurstShots>3</ticksBetweenBurstShots>
+        <burstShotCount>15</burstShotCount>
+      </li>
+    </verbs>
+  </ThingDef>
+  
+</Defs>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <GD3.GDUpdate>
+    <defName>GDUpdate</defName>
+	<version>1.026</version>
+	<preview>UI/UpdateTexture</preview>
+	<label>Glitterworld Destroyer - 26.1.10 Update</label>
+	<description>&lt;b&gt;Core:&lt;/b&gt;
+
+- EMP can now destroy some hediffs normally.
+- Anti-aircraft turrets can now normally counterattack some high angle shells in Total Mechanoids Warfare.</description>
+  </GD3.GDUpdate>
+
+</Defs>

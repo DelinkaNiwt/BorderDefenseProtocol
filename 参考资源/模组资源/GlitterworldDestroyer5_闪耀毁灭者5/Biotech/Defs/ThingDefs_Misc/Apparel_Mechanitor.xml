@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <ThingDef Abstract="True" Name="MechanitorBlackHatBase" ParentName="HatMakeableBase">
+    <graphicData>
+      <drawSize>1.0</drawSize>
+    </graphicData>
+    <smeltable>false</smeltable>
+    <recipeMaker>
+      <displayPriority>700</displayPriority>
+    </recipeMaker>
+    <tradeability>Sellable</tradeability>
+  </ThingDef>
+  
+  <!-- 流浪者的礼帽 -->
+  <ThingDef ParentName="MechanitorBlackHatBase">
+    <defName>Apparel_GD_BlackHat</defName>
+    <label>rangers' bowler hat</label>
+    <description>Beautiful bowler hat, containing mechanical neurons that can assist the wearer to think. \n\nMaybe it can be used to do magic tricks.</description>
+    <techLevel>Spacer</techLevel>
+    <graphicData>
+      <texPath>Apparel/GD_BlackHat</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+	<tickerType>Normal</tickerType>
+    <costList>
+      <Cloth>100</Cloth>
+    </costList>
+    <recipeMaker>
+	  <recipeUsers Inherit="False">
+        <li>TableMachining</li>
+      </recipeUsers>
+      <researchPrerequisite>GD3_Puzzle</researchPrerequisite>
+      <skillRequirements>
+        <Crafting>4</Crafting>
+      </skillRequirements>
+    </recipeMaker>
+    <statBases>
+      <WorkToMake>2100</WorkToMake>
+      <MaxHitPoints>200</MaxHitPoints>
+      <Mass>0.28</Mass>
+      <EquipDelay>2</EquipDelay>
+    </statBases>
+    <equippedStatOffsets>
+	  <MechFormingSpeed>1</MechFormingSpeed>
+      <PawnBeauty>1</PawnBeauty>
+	  <TradePriceImprovement>0.25</TradePriceImprovement>
+	  <SocialImpact>0.5</SocialImpact>
+	  <VacuumResistance MayRequire="Ludeon.Rimworld.Odyssey">0.4</VacuumResistance>
+    </equippedStatOffsets>
+    <apparel>
+      <wornGraphicPath>Apparel/GD_BlackHat</wornGraphicPath>
+      <!-- <hatRenderedFrontOfFace>true</hatRenderedFrontOfFace> -->
+      <countsAsClothingForNudity>false</countsAsClothingForNudity>
+      <bodyPartGroups>
+        <li>UpperHead</li>
+      </bodyPartGroups>
+      <layers>
+        <li>Overhead</li>
+      </layers>
+	  <tags>
+	    <li>PrestigeCombatGear</li>
+	  </tags>
+      <scoreOffset>4</scoreOffset>
+      <mechanitorApparel>true</mechanitorApparel>
+    </apparel>
+	<comps>
+	  <li Class="GD3.CompProperties_ApparelHediff">
+	    <hediff>GD_BlackEnhancer_Hat</hediff>
+	  </li>
+	</comps>
+  </ThingDef>
+  
+  <!-- 流浪者的风衣 -->
+  <ThingDef ParentName="ApparelArmorPowerBase">
+    <defName>Apparel_GD_BlackWindbreaker</defName>
+    <label>rangers' wind breaker</label>
+    <description>The wide, heavy trench coat contains mechanical neurons that can assist the wearer in controlling the mechanoids, and the effect will be enhanced when the colony destroys certain powerful mechanoids.</description>
+    <graphicData>
+      <texPath>Apparel/GD_BlackWindbreaker</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+	<tickerType>Normal</tickerType>
+    <statBases>
+	  <WorkToMake>4200</WorkToMake>
+      <MaxHitPoints>200</MaxHitPoints>
+      <Mass>2</Mass>
+      <ArmorRating_Sharp>0.6</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.3</ArmorRating_Blunt>
+      <ArmorRating_Heat>0.9</ArmorRating_Heat>
+      <Insulation_Cold>42</Insulation_Cold>
+      <Insulation_Heat>36</Insulation_Heat>
+      <EquipDelay>5</EquipDelay>
+    </statBases>
+    <equippedStatOffsets Inherit="false">
+      <MoveSpeed>1.0</MoveSpeed>
+	  <VacuumResistance MayRequire="Ludeon.Rimworld.Odyssey">0.4</VacuumResistance>
+    </equippedStatOffsets>
+	<recipeMaker>
+	  <unfinishedThingDef>UnfinishedApparel</unfinishedThingDef>
+      <displayPriority>701</displayPriority>
+	  <recipeUsers Inherit="False">
+        <li>TableMachining</li>
+      </recipeUsers>
+      <researchPrerequisite>GD3_Puzzle</researchPrerequisite>
+      <skillRequirements>
+        <Crafting>4</Crafting>
+      </skillRequirements>
+    </recipeMaker>
+    <costList Inherit="False">
+      <Cloth>180</Cloth>
+    </costList>
+    <apparel>
+      <tags>
+        <li>Mechlord</li>
+		<li>Royal</li>
+		<li>PrestigeCombatGear</li>
+      </tags>
+	  <layers>
+	    <li>Middle</li>
+        <li>Shell</li>
+		<li>OnSkin</li>
+      </layers>
+	  <renderNodeProperties>
+		<li>
+		  <debugLabel>Light</debugLabel>
+		  <workerClass>GD3.PawnRenderNodeWorker_BlackSuit</workerClass>
+		  <bodyTypeGraphicPaths>
+			<Thin>Apparel/Backlight_Thin</Thin>
+			<Hulk>Apparel/Backlight_Hulk</Hulk>
+			<Fat>Apparel/Backlight_Fat</Fat>
+			<Male>Apparel/Backlight_Male</Male>
+			<Female>Apparel/Backlight_Female</Female>
+		  </bodyTypeGraphicPaths>
+		  <baseLayer>0</baseLayer>
+		  <parentTagDef>Body</parentTagDef>
+		  <pawnType>Any</pawnType>
+		  <shaderTypeDef>MoteGlow</shaderTypeDef>
+		  <drawData>
+			<dataEast>
+				<layer>35</layer>
+			</dataEast>
+			<dataSouth>
+				<layer>30</layer>
+			</dataSouth>
+			<dataNorth>
+				<layer>60</layer>
+			</dataNorth>
+			<dataWest>
+				<layer>35</layer>
+			</dataWest>
+		  </drawData>
+		</li>
+	  </renderNodeProperties>
+      <wornGraphicPath>Apparel/GD_BlackWindbreaker</wornGraphicPath>
+    </apparel>
+    <tradeability>Sellable</tradeability>
+    <tradeTags Inherit="False">
+      <li>HiTechArmor</li>
+    </tradeTags>
+	<comps>
+	  <li Class="GD3.CompProperties_ApparelHediff">
+	    <hediff>GD_BlackEnhancer</hediff>
+	  </li>
+	</comps>
+	<modExtensions>
+	  <li Class="GD3.ModExtension_DrawOffset">
+		<offset>(0,0,-0.1)</offset>
+	  </li>
+    </modExtensions>
+  </ThingDef>
+
+</Defs>

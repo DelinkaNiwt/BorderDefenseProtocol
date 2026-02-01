@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: NCL通讯系统 -->
+  <ChineseSimplified.label>TODO</ChineseSimplified.label>
+  <!-- EN: 「（突然象征性地立正敬礼）‘为人类存续而奋斗！’——官方口号嘛，喊还是要喊一下的～（肩膀立刻松懈下来）」\n\n「其实就是几个幸存者据点凑成的互助群组。以前嘛...可能还像点样子，但自从闪耀世界那边爆发了智械革命，我们这边也开始疯狂减员...现在嘛，不剩多少人了。」\n\n「大本营在离你们五个地月距离的一颗人造卫星上，现在主要靠迫降到就近的行星做些买卖，回收些机械族残骸来发展。」\n\n「至于那个《条例》？我们老大56年前编的，一共六百六十六页！真正的核心思想就一条——，撑久一点，至少撑到能叫人来给你收尸的地步。’」\n\n「所以，既然联系上了，也算认识了。以后真遇到搞不定的麻烦，如果频道还通着... 可以试着呼叫我们。力所能及的范围内，我们或许能想想办法搭把手。」 -->
+  <ChineseSimplified.FirstHello.NextCallTools.0.NextCallTools.0.NextCallTools.0.UseHello>TODO</ChineseSimplified.FirstHello.NextCallTools.0.NextCallTools.0.NextCallTools.0.UseHello>
+  <!-- EN: 蠕虫预告 -->
+  <ChineseSimplified.NCLCallTools.1.letter>TODO</ChineseSimplified.NCLCallTools.1.letter>
+  <!-- EN: 大宝贝要来咯. -->
+  <ChineseSimplified.NCLCallTools.1.letterText>TODO</ChineseSimplified.NCLCallTools.1.letterText>
+  <!-- EN: Fieldy： “援兵？说来惭愧，咱们这儿也不剩几个活人了，直接派舰队支援是没戏了。”\n\n“不过嘛，也不是完全没人能派...emmm，这样吧！我听我家那两位机械师说，他们刚弄出个新型泰坦机械体，还在调试阶段。虽然是待测试的，但毕竟是泰坦级别，战斗力你们绝对可以放心！”\n\n（调出一个巨大但有些闪烁的泰坦投影）“那些白大褂肯定很乐意收集实战数据。等着，我去问问她愿不愿意把它送到你们那儿，帮你们守城顺便测试！”（话音刚落，Fieldy的身影就从屏幕上消失了）\n\n【约5分钟后】\n（屏幕重新亮起，Fieldy微喘着气）“OK！她答应了，少有这么爽快！（快速操作）先给你们发份操作手册...（投影中的泰坦模型突然抽搐了一下）别看它这样，拆起机械族可利索了！条件是...（查看清单）嗯...每天提供20单位钢铁给它当‘零食费’？”\n\n（确认发送完毕）“好了！你们没意见的话，我这就让它往你们那边动身了。预计2天之内就能赶到！” -->
+  <ChineseSimplified.NCLCallTools.1.TextLong>TODO</ChineseSimplified.NCLCallTools.1.TextLong>
+  <!-- EN: 暂不申请 -->
+  <ChineseSimplified.NCLCallTools.1.TextNo>TODO</ChineseSimplified.NCLCallTools.1.TextNo>
+  <!-- EN: 确认申请（官方作弊码，不建议过度依赖于它） -->
+  <ChineseSimplified.NCLCallTools.1.TextYes>TODO</ChineseSimplified.NCLCallTools.1.TextYes>
+  <!-- EN: 蠕虫遣返 -->
+  <ChineseSimplified.NCLCallTools.2.letter>TODO</ChineseSimplified.NCLCallTools.2.letter>
+  <!-- EN: 机械蠕虫暂时离开了你的基地. -->
+  <ChineseSimplified.NCLCallTools.2.letterText>TODO</ChineseSimplified.NCLCallTools.2.letterText>
+  <!-- EN: 暂不遣返 -->
+  <ChineseSimplified.NCLCallTools.2.TextNo>TODO</ChineseSimplified.NCLCallTools.2.TextNo>
+  <!-- EN: 确认遣返 -->
+  <ChineseSimplified.NCLCallTools.2.TextYes>TODO</ChineseSimplified.NCLCallTools.2.TextYes>
+  <!-- EN: 蠕虫预告 -->
+  <ChineseSimplified.NCLCallTools.3.NextCallTools.0.letter>TODO</ChineseSimplified.NCLCallTools.3.NextCallTools.0.letter>
+  <!-- EN: 一位你熟悉的对手 -->
+  <ChineseSimplified.NCLCallTools.3.NextCallTools.0.letterText>TODO</ChineseSimplified.NCLCallTools.3.NextCallTools.0.letterText>
+  <!-- EN: 暂不开启 -->
+  <ChineseSimplified.NCLCallTools.3.NextCallTools.0.TextNo>TODO</ChineseSimplified.NCLCallTools.3.NextCallTools.0.TextNo>
+  <!-- EN: 接受挑战 -->
+  <ChineseSimplified.NCLCallTools.3.NextCallTools.0.TextYes>TODO</ChineseSimplified.NCLCallTools.3.NextCallTools.0.TextYes>
+  <!-- EN: 好,蠕虫现在已经进入休眠状态了 -->
+  <ChineseSimplified.NCLCallTools.4.WormInSleep>TODO</ChineseSimplified.NCLCallTools.4.WormInSleep>
+  <!-- EN: 好,蠕虫现在已经恢复活跃状态了 -->
+  <ChineseSimplified.NCLCallTools.4.WormOutSleep>TODO</ChineseSimplified.NCLCallTools.4.WormOutSleep>
+  <!-- EN: 「喂喂喂，又是你们呀，找我有什么事吗？」 -->
+  <ChineseSimplified.RandomHello.0>TODO</ChineseSimplified.RandomHello.0>
+  <!-- EN: 「哟，还活着呢？可以嘛～这世道真是没个消停。自从某个闪耀世界的机械族造反之后，咱们人类和他们之间就没一刻太平，现在连附近的中寰世界都快给他们洗了，还好是他们没搞出超光速，不然我们连窝在边缘世界过日子的愿望都泡汤了。」 -->
+  <ChineseSimplified.RandomHello.1>TODO</ChineseSimplified.RandomHello.1>
+  <!-- EN: 「生存建议？那当然，多造点激光点防御炮塔？现在的机械族精得很，还会用迫击炮偷家。点防御不仅能干掉炮弹，就连魔王弹都能拦呢」 -->
+  <ChineseSimplified.RandomHello.2>TODO</ChineseSimplified.RandomHello.2>
+  <!-- EN: 「机械族能隐身？不是早把反隐雷达的图纸发你了吗？前线建一个呗？我记得咱家那边自研的机械族里好像也有一个能反隐的，你掂量下哪个合适？」 -->
+  <ChineseSimplified.RandomHello.3>TODO</ChineseSimplified.RandomHello.3>
+  <!-- EN: 「你们最近是不是碰上了机械族泰坦？对，就是那些巨大的、像能把山拆了似的家伙。听好了，用信标可以召唤他们作战，打赢了还能学他们的构造，不过……能不能活着回来，就看你们造化了。」 -->
+  <ChineseSimplified.RandomHello.4>TODO</ChineseSimplified.RandomHello.4>
+  <!-- EN: 「说起来你们势力范围内那座破烂的机械族建筑，应该是个‘战争信标’。激活它，会引来机械族主力入侵，不过也能解析一些隐藏科技。是赌一把还是保守点，看你们咯～当地人倒是可能会感激你，毕竟你吸引了火力。」 -->
+  <ChineseSimplified.RandomHello.5>TODO</ChineseSimplified.RandomHello.5>
+  <!-- EN: 「要不要我给你们连线点商船？有几家贸易商和我们关系不错。你问我们平时卖些什么？艺术品、衣服、奢侈食品啥的……你们要来点吗？」 -->
+  <ChineseSimplified.RandomHello.6>TODO</ChineseSimplified.RandomHello.6>
+  
+  <!-- EN: NCL Call -->
+  <English.label>TODO</English.label>
+  <!-- EN: Signal acquired. Comm channel decrypted. Proceed with directive? -->
+  <English.FirstHello.FirstUseMess>TODO</English.FirstHello.FirstUseMess>
+  <!-- EN: (Snaps a mock salute) "Fighting for humanity's survival!" —gotta chant the official motto~ (immediately slumps) "Total nonsense, obviously."\n\n"Truth is, we're just a support collective cobbled from survivor outposts. Used to be semi-organized... till the Glitterworld's 'Machine Revolution' started wiping us out."\n\n(Taps star chart) "Headquarters? A derelict satellite five lunar orbits away. We scrape by trading on nearby planets and salvaging mechanoid wrecks."\n\n"That 'Solidarity Act'? Our boss wrote it 56 years ago—666 pages of pure fluff. Real rule's simple: Survive long enough for someone to bury your corpse."\n\n(Leans in, static flickering) "Since we're connected now... if you're truly screwed and the channel's hot? Call us. We'll do... what we can." -->
+  <English.FirstHello.NextCallTools.0.NextCallTools.0.NextCallTools.0.UseHello>TODO</English.FirstHello.NextCallTools.0.NextCallTools.0.NextCallTools.0.UseHello>
+  <!-- EN: (Sudden laughter) "New colony? Hah! Only rookies fresh on the Rim would use this antique frequency!"\n\n(Keys clattering) "Let me check your coordinates... Wait. Isn't there a War Beacon near you? Please tell me you didn't activate that thing?"\n\n(Rapid scanning sounds)\n"Hmm... readings stable. You got lucky. That beacon's no toy—last colony that touched it got shredded by enhanced Mechanoids within days." Leans closer, voice dropping. "Though rumor says its core holds priceless intel..."\n\n"But since you're not scrap metal yet..." Taps a faded emblem on her jacket. "Per Chapter 3, Article 12 of the Rimworld Solidarity Act, NCL assists lost pioneers. Limited supplies, but..." (smirks) "better than watching Mechanoids recycle you~" -->
+  <English.FirstHello.NextCallTools.0.NextCallTools.0.UseHello>TODO</English.FirstHello.NextCallTools.0.NextCallTools.0.UseHello>
+  <!-- EN: 「Bzzrt— Beep... Quantum link established!」\n\nThe screen flickers violently before resolving onto a wide-brimmed fedora pulled low. A girl’s voice crackles through static:\n\n「Fieldy authentication— Huh? This channel’s supposed to route to Trade Hub.」\n\n(Perspective widens, revealing half her face)\n「Who’re you? Glitterworld survivor? Or... (suddenly tense) Another mechanoid bionic trap?」 -->
+  <English.FirstHello.NextCallTools.0.UseHello>TODO</English.FirstHello.NextCallTools.0.UseHello>
+  <!-- EN: "Don't you have your own business to handle?" -->
+  <English.NCLCallTools.0.FirstUseMess>TODO</English.NCLCallTools.0.FirstUseMess>
+  <!-- EN: Thought I was the only idle soul around. I do nothing at the colony—they recruited me as a chef, turns out I can't cook. Boss hauled skill trainers from trade runs to teach me, but then a Mechanitor arrived. Her cooking mech stole my job. Now I serve plates and answer calls. Boss says I 'talk a good game' though. -->
+  <English.NCLCallTools.0.Randomstring.0>TODO</English.NCLCallTools.0.Randomstring.0>
+  <!-- EN: Alright, scram! Your colony's still rundown—shouldn't you be fixing that? -->
+  <English.NCLCallTools.0.Randomstring.1>TODO</English.NCLCallTools.0.Randomstring.1>
+  <!-- EN: ArchoWorm in Coming -->
+  <English.NCLCallTools.1.letter>TODO</English.NCLCallTools.1.letter>
+  <!-- EN: You will be fine. -->
+  <English.NCLCallTools.1.letterText>TODO</English.NCLCallTools.1.letterText>
+  <!-- EN: "Reinforcements? Embarrassing truth—barely any living souls left here. Sending fleets is impossible."\n\n"But... we might have one option. Our mechanitor just built a prototype titan. Still debugging, but titan-grade firepower? Absolutely reliable!"\n\n(A glitching titan hologram flickers)\n"Those lab-coats crave combat data. Hold on—let me beg them to lend it for your defense!"\n(Screen cuts abruptly)\n\n[5 mins later]\n(Fieldy reappears, slightly breathless)\n"Done! She agreed shockingly fast! Sending manual now... (projected titan spasms) Don't mind the glitches—it shreds mechanoids! Cost? (checks list) 20 steel daily ‘maintenance rations’. Deal?"\n\n(Keys clattering)\n"Departing now! ETA: 48 hours. Try not to get flattened~" -->
+  <English.NCLCallTools.1.TextLong>TODO</English.NCLCallTools.1.TextLong>
+  <!-- EN: Decline For Now -->
+  <English.NCLCallTools.1.TextNo>TODO</English.NCLCallTools.1.TextNo>
+  <!-- EN: Confirm Request (Official Cheat Code - Overuse Not Advised) -->
+  <English.NCLCallTools.1.TextYes>TODO</English.NCLCallTools.1.TextYes>
+  <!-- EN: Archoworm Repatriated -->
+  <English.NCLCallTools.2.letter>TODO</English.NCLCallTools.2.letter>
+  <!-- EN: Archoworm has temporarily left your colony. -->
+  <English.NCLCallTools.2.letterText>TODO</English.NCLCallTools.2.letterText>
+  <!-- EN: Oh? Want Archoworm off-site temporarily?No problem, initiating recall protocol now. -->
+  <English.NCLCallTools.2.TextLong>TODO</English.NCLCallTools.2.TextLong>
+  <!-- EN: Delay Repatriation -->
+  <English.NCLCallTools.2.TextNo>TODO</English.NCLCallTools.2.TextNo>
+  <!-- EN: Confirm Repatriation -->
+  <English.NCLCallTools.2.TextYes>TODO</English.NCLCallTools.2.TextYes>
+  <!-- EN: Worm Alert -->
+  <English.NCLCallTools.3.NextCallTools.0.letter>TODO</English.NCLCallTools.3.NextCallTools.0.letter>
+  <!-- EN: A familiar adversary approaches. -->
+  <English.NCLCallTools.3.NextCallTools.0.letterText>TODO</English.NCLCallTools.3.NextCallTools.0.letterText>
+  <!-- EN: "I hear your soul's hunger... human. But epics are forged in blood and fire."\n(A hologram coalesces through gunsmoke, projecting a burning miniature Troy)\n"The truth? Yours for the taking. But can you afford the price?"\n"Turn back now—remain an ignorant living corpse." -->
+  <English.NCLCallTools.3.NextCallTools.0.TextLong>TODO</English.NCLCallTools.3.NextCallTools.0.TextLong>
+  <!-- EN: Postpone -->
+  <English.NCLCallTools.3.NextCallTools.0.TextNo>TODO</English.NCLCallTools.3.NextCallTools.0.TextNo>
+  <!-- EN: Accept Challenge -->
+  <English.NCLCallTools.3.NextCallTools.0.TextYes>TODO</English.NCLCallTools.3.NextCallTools.0.TextYes>
+  <!-- EN: You attempt to connect to the special frequency, but receive only scattered static—no response from the other end. -->
+  <English.NCLCallTools.3.UseHello>TODO</English.NCLCallTools.3.UseHello>
+  <!-- EN: Confirmed. The ArchoWorm has entered hibernation mode. -->
+  <English.NCLCallTools.4.WormInSleep>TODO</English.NCLCallTools.4.WormInSleep>
+  <!-- EN: Confirmed. The ArchoWorm has resumed active status. -->
+  <English.NCLCallTools.4.WormOutSleep>TODO</English.NCLCallTools.4.WormOutSleep>
+  <!-- EN: Select merchant convoy: -->
+  <English.NCLCallTools.5.ChooseTrader>TODO</English.NCLCallTools.5.ChooseTrader>
+  <!-- EN: "Not just with us—I'll patch you through to veteran merchants on this route. Just signal when needed, I'll redirect them to your... charming outpost." -->
+  <English.NCLCallTools.5.FirstUseMess>TODO</English.NCLCallTools.5.FirstUseMess>
+  <!-- EN: Patience—trade ships don't pass by daily. -->
+  <English.NCLCallTools.5.NoChoose>TODO</English.NCLCallTools.5.NoChoose>
+  <!-- EN: "Hello? Comms dropped suddenly—what happened on your end?" -->
+  <English.OutWarHello.UseHello>TODO</English.OutWarHello.UseHello>
+  <!-- EN: "Hey hey, you guys again? What's up this time?" -->
+  <English.RandomHello.0>TODO</English.RandomHello.0>
+  <!-- EN: 「"Whoa, still breathing? Not bad~ This chaos never ends. Since that Glitterworld mechanoid uprising, humans and bots have been at constant war. Even nearby Midworlds are getting overrun. Thank the void they haven't cracked FTL yet - otherwise we'd lose our last scrap of peace out here on the Rim." -->
+  <English.RandomHello.1>TODO</English.RandomHello.1>
+  <!-- EN: "Survival advice? Pile up laser point-defense turrets! Modern mechanoids ambush with mortars. Point-defense shreds shells - even demon warheads!" -->
+  <English.RandomHello.2>TODO</English.RandomHello.2>
+  <!-- EN: "Invisible mechs? Didn't I send you the sensor blueprint? Build a scanner upfront. Or... wait, our homebrew mechanoids have an invis-detector too. Pick whichever fits." -->
+  <English.RandomHello.3>TODO</English.RandomHello.3>
+  <!-- EN: "Facing a mechanoid titan? Those mountain-crushers? Use beacons to summon them. Win, and you might reverse-engineer them... if you survive." -->
+  <English.RandomHello.4>TODO</English.RandomHello.4>
+  <!-- EN: "That broken structure in your territory? It's a Tribulation Beacon. Activate it to lure mechanoid legions - and decrypt hidden tech. Gamble or play safe? Locals might thank you for drawing fire though~" -->
+  <English.RandomHello.5>TODO</English.RandomHello.5>
+  <!-- EN: "Want me to ping some merchants? Got contacts with decent trade ships. What we sell? Art, fancy clothes, luxury snacks... want some?" -->
+  <English.RandomHello.6>TODO</English.RandomHello.6>
+  <!-- EN: Come on, let me see your struggle! -->
+  <English.WarHello.NextCallTools.0.UseHello>TODO</English.WarHello.NextCallTools.0.UseHello>
+  <!-- EN: Console online... establishing carrier wave...\n\nFrequency open. No response detected.\n\nStatic sputters in the dark. -->
+  <English.WarHello.UseHello>TODO</English.WarHello.UseHello>
+  
+</LanguageData>

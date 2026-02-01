@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Range -->
+  <Reinforce_Aiming.label>辅助瞄准元件</Reinforce_Aiming.label>
+  <Reinforce_Aiming.description>先进的微型计算器，能够以极快的速度分析出敌人的位置、姿态与可能的意图，并为机械体提供多种瞄准方案参考。显著提高机械体的射击精度。</Reinforce_Aiming.description>
+  
+  <Reinforce_FireControl.label>精密火控元件</Reinforce_FireControl.label>
+  <Reinforce_FireControl.description>先进的微型计算机，能够迅速获取并处理战场态势和目标的相关信息，并控制火力兵器射击。显著提高机械体的射击速度。</Reinforce_FireControl.description>
+  
+  <Reinforce_ShieldGeneration.label>全角护盾投影仪</Reinforce_ShieldGeneration.label>
+  <Reinforce_ShieldGeneration.description>轻便而复杂的护盾投影仪，能够根据战场形势分析需要调整为何种模式，并用于抵御几乎任何弹幕的袭击。只能被部署一次。</Reinforce_ShieldGeneration.description>
+  
+  <Reinforce_Radar.label>监视雷达</Reinforce_Radar.label>
+  <Reinforce_Radar.description>同时从多种波段接受反射的电磁波，借此可以获取视距外敌人的准确信息，并进行合理应对。在此机械体受到射程外打击时给予单次轰炸回击。\n\n机械体在受到EMP打击后会因电路板烧坏而失去此能力。</Reinforce_Radar.description>
+  
+  <Reinforce_TopTurret.label>电荷炮塔背包</Reinforce_TopTurret.label>
+  <Reinforce_TopTurret.description>一种以复杂机械结构驱动的背包，可以被任何机械体携带，并在需要时自动展开以提供火力支援。</Reinforce_TopTurret.description>
+  
+  <!-- Melee -->
+  <Reinforce_Armor.label>重型外骨骼护甲</Reinforce_Armor.label>
+  <Reinforce_Armor.description>沉重的结构性防御护甲，包含数百层不同材料构成的防御外壳，以牺牲部分机动性为代价换来抵御强大伤害的能力。</Reinforce_Armor.description>
+  
+  <Reinforce_Thruster.label>低功率推进器</Reinforce_Thruster.label>
+  <Reinforce_Thruster.description>由巨型单位的发动机改造而来，降低功率以适配大部分机械族单位的躯体设计，极大地提高此单位的机动能力。</Reinforce_Thruster.description>
+  
+  <Reinforce_HitArmor.label>便携式反应装甲</Reinforce_HitArmor.label>
+  <Reinforce_HitArmor.description>原本沉重且不灵活的反应装甲经过改造，变为随时可以部署的便携式装甲，但其防御效率显然会有所下降。</Reinforce_HitArmor.description>
+  
+  <Reinforce_Smoke.label>污染烟尘罐</Reinforce_Smoke.label>
+  <Reinforce_Smoke.description>将机械族生产的污染性物质简单处理为废尘，可在战斗时用于遮蔽敌人炮塔的射界。</Reinforce_Smoke.description>
+  
+  <Reinforce_Dodge.label>武装对策芯片</Reinforce_Dodge.label>
+  <Reinforce_Dodge.description>以极高的功率运行并分析敌人动作的脑部插件，能够在一瞬间预测出上千种敌人可能的战术意图并提供应对建议。此机械体能完全闪避任何格斗等级不满18级的人类的近身攻击，对机械体和动物的闪避概率则分别为90％与100％。</Reinforce_Dodge.description>
+  
+  <!-- Scrap -->
+  <Reinforce_Scrap.label>废品</Reinforce_Scrap.label>
+  <Reinforce_Scrap.description>由于在装配过程中发生的偶然失误，这台机械体的仿生大脑出现了灾难性的涂胶不匀、接线混乱、刻蚀损坏甚至是灰尘侵入这类低级错误，已经完全不能指望它为机械蜂巢做出什么贡献了。</Reinforce_Scrap.description>
+
+</LanguageData>

@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  
+    <RecipeDef ParentName="BaseMechanoidRecipe">
+    <defName>TW_Mech_Praetor</defName>
+    <label>制造侧频卫螽</label>
+    <gestationCycles>12</gestationCycles>
+    <displayPriority>300</displayPriority>
+    <description>机械卫螽的升级型号，搭载更加强劲的护盾生成器，使用四联制导导弹发射器，能够在较远距离发射高爆或者EMP制导导弹以精准压制其对手；身后的反探测雷达可以消除范围内所有地方单位的隐匿效果。</description>
+    <researchPrerequisites>
+	<li>UltraMechtech</li>
+	<li>NCL_Ignition_of_the_Crucible</li>
+	</researchPrerequisites>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>650</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>450</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>8</count>
+      </li>
+	        <li>
+        <filter>
+          <thingDefs>
+            <li>Uranium</li>
+          </thingDefs>
+        </filter>
+        <count>400</count>
+      </li>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>SubcoreHigh</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>25</count>
+      </li>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>NanostructuringChip</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <TW_Mech_Praetor>1</TW_Mech_Praetor>
+    </products>
+    <descriptionHyperlinks>
+      <ThingDef>TW_Mech_Praetor</ThingDef>
+    </descriptionHyperlinks>
+  </RecipeDef>
+  
+ </Defs>

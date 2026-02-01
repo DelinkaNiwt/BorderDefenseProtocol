@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <IncidentDef>
+        <defName>GD3BlackPassedBy</defName>
+        <label>mechanoids in black passing by</label>
+        <targetTags>
+            <li>Map_PlayerHome</li>
+        </targetTags>
+        <workerClass>GD3.IncidentBlackPassedBy</workerClass>
+        <category>Misc</category>
+        <baseChance>0.2</baseChance>
+        <pointsScaleable>true</pointsScaleable>
+        <requireColonistsPresent>True</requireColonistsPresent>
+    </IncidentDef>
+	
+	<IncidentDef>
+	  <defName>MechCluster_Giant_Incident</defName>
+      <label>mech cluster - revenge</label>
+      <targetTags>
+        <li>Map_PlayerHome</li>
+      </targetTags>
+      <workerClass>GD3.IncidentWorker_MechClusterGiant</workerClass>
+      <letterLabel>Mechanoid cluster- revenge</letterLabel>
+      <letterText>An exceptionally large group of mechanoid combat cluster comes to destroy you. \n\nThese combat units were drawn in by a high-stakes attempt at information theft. To deal with giant turrets with high threat, you need plenty of smoke and bait to attract fire.</letterText>
+      <letterDef>ThreatBig</letterDef>
+      <baseChance>0</baseChance>
+      <pointsScaleable>true</pointsScaleable>
+      <category>ThreatBig</category>
+    </IncidentDef>
+	
+	<SketchResolverDef>
+      <defName>MechCluster_Giant</defName>
+      <isRoot>true</isRoot>
+      <resolver Class="GD3.SketchResolver_MechCluster_Giant" />
+    </SketchResolverDef>
+</Defs>

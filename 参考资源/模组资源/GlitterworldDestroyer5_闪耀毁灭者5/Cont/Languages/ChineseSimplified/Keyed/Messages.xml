@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <GD.ToggleInvisibilityLabel>隐形 : {0}</GD.ToggleInvisibilityLabel>
+  <GD.ToggleInvisibilityDesc>开关隐形功能。</GD.ToggleInvisibilityDesc>
+  <GD.FireflyNoEnergy>机械萤火虫的能量耗尽。</GD.FireflyNoEnergy>
+  <GD.FireflyLaying>机械萤火虫正在充电。</GD.FireflyLaying>
+  <CausedByApocriton>由憎恶毒蜂的怨恨造成。</CausedByApocriton>
+  <BlackMechanoidNotExist>不存在黑衣机械族派系</BlackMechanoidNotExist>
+  <BlackMechanoidSleeping>由于太阳耀斑，黑衣机械巢正在睡觉。</BlackMechanoidSleeping>
+  <CalledBlackMechanoid>{0}伪装成一只受伤的机械蜈蚣发出了求救信号，这段信号被接受到了。</CalledBlackMechanoid>
+  <GD.AttackMode>自动出击 : {0}</GD.AttackMode>
+  <GD.AttackModeDesc>开启后，这台{0}将会自动释放机械体出击，直到资源耗尽为止。</GD.AttackModeDesc>
+  
+  <BlackPassed>黑衣机械族</BlackPassed>
+  <BlackPassedDesc>有两名黑衣机械体恰巧经过此地。如果你还未准备好，小心不要招惹他们。</BlackPassedDesc>
+  
+  <GD.ChangeWeaponLabel>切换武器</GD.ChangeWeaponLabel>
+  <GD.ChangeWeaponDesc>切换这名机械体手持的武器。</GD.ChangeWeaponDesc>
+  
+  <CentipedeReboot>人格核心关机中...</CentipedeReboot>
+  
+  <GD.NotFlying>该单位未处于飞行状态。</GD.NotFlying>
+  <GD.MosquitoReinforceArrival>增援的机械伊蚊中队已到达战斗位置。</GD.MosquitoReinforceArrival>
+  
+  <GD.DeckReinforce>加固</GD.DeckReinforce>
+  <GD.DeckReinforceDesc>消耗精密装甲板加固该炮塔，按比例提升其耐久最大值。\n\n消耗装甲板：{0}\n工作量：{1}</GD.DeckReinforceDesc>
+  <GD.TurretCurrentLevel>炮塔当前加固等级：{0}</GD.TurretCurrentLevel>
+  <GD.NeedMoreDecks>还需要加载{0}块精密装甲板</GD.NeedMoreDecks>
+  <GD.WaitingForUpgrade>加固进度：{0}</GD.WaitingForUpgrade>
+  
+  <!-- Giant Cluster -->
+  <MechanoidNotExist>不存在机械族派系</MechanoidNotExist>
+  <ReceiverDelaying>待机掩蔽中：{0}小时</ReceiverDelaying>
+  
+  <ReceiverSelectLabel>探测集群规模：{0}</ReceiverSelectLabel>
+  <GD.markA>小型</GD.markA>
+  <GD.markB>中型</GD.markB>
+  <GD.markC>大型</GD.markC>
+  <GD.markD>超大型</GD.markD>
+  <ReceiverSelectDesc>修改短波接收器探测的目标集群规模。</ReceiverSelectDesc>
+  
+  <ArchoMineTriggered>有一枚超凡诡雷被触发了！</ArchoMineTriggered>
+  <MarrowADestroy>心灵遮蔽髓已被摧毁。</MarrowADestroy>
+  <MarrowBDestroy>心灵抑制髓已被摧毁。</MarrowBDestroy>
+  <MarrowCDestroy>心灵狂暴髓已被摧毁。</MarrowCDestroy>
+  <TechAFinished>已解锁“一级集群科技”。</TechAFinished>
+  <TechBFinished>已解锁“二级集群科技”。</TechBFinished>
+  <TechCFinished>已解锁“三级集群科技”。</TechCFinished>
+  <CausedByMarrow>由心灵狂暴髓造成。</CausedByMarrow>
+  
+  <AllSkillsPerfect>所有技能都已满级</AllSkillsPerfect>
+  
+  <GD.TermiteToggleLabel>切换开火模式：</GD.TermiteToggleLabel>
+  <GD.TermiteToggleDesc>在攻城共振弹与烟雾弹之间选择。</GD.TermiteToggleDesc>
+  <GD.TermiteAMode>攻城</GD.TermiteAMode>
+  <GD.TermiteBMode>烟雾</GD.TermiteBMode>
+  
+  <!-- Medals -->
+  <GD.ToggleFamineLabel>抑止 : {0}</GD.ToggleFamineLabel>
+  <GD.ToggleFamineDesc>干扰敌方的神经传导，将所有敌人的意识与移动能力抑制在35％以下。</GD.ToggleFamineDesc>
+  <GD.ToggleFamineLabelB>自愈 : {0}</GD.ToggleFamineLabelB>
+  <GD.ToggleFamineDescB>以较快的速度治疗自身的新鲜伤口。</GD.ToggleFamineDescB>
+  
+  <!-- Reinforce -->
+  <ReinforcedTip>机械族全副武装</ReinforcedTip>
+  <ReinforcedTipDesc>当富庶的殖民地步入正轨时，机械族也会将此地视为它们不得不铲除的威胁。\n\n由于积累的总财富值已达一百万之巨，机械巢穴已经利用先进的附属配件武装了其麾下的所有战斗单位，做好迎接全新挑战的准备。</ReinforcedTipDesc>
+  <GD.HitArmorGizmoLabel>反应装甲</GD.HitArmorGizmoLabel>
+  <GD.HitArmorBarTip>此处显示了这台机械体剩余的反应装甲次数。该机械体的反应装甲触发上限为{0}次，目前剩余{1}次。可以通过机械师修复来恢复次数。</GD.HitArmorBarTip>
+  
+  <!-- Communication -->
+  <StationWithoutPower>通讯台断电</StationWithoutPower>
+  <GD.MustReserchBench>必须放置在高级研究台上。</GD.MustReserchBench>
+  <GD.MustSameRot>必须与高级研究台保持同一朝向。</GD.MustSameRot>
+  <GD.MustPlaceEdge>必须放置在研究台最边缘。</GD.MustPlaceEdge>
+  <GD.HackProgress>窃取进度</GD.HackProgress>
+</LanguageData>

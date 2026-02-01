@@ -1,0 +1,39 @@
+{
+  "注释": "占位贴图示例 - 4方向贴图（Graphic_Multi）- 验证阶段用于测试多方向加载",
+  "textures": [
+    {
+      "width": 256,
+      "height": 256,
+      "output_prefix": "Building_CraftingBench",
+      "color_scheme": "blue",
+      "suffix_type": "multi",
+      "suffix_names": ["_north", "_east", "_south", "_west"],
+      "grid_size": 32,
+      "grid_width": 1
+    },
+    {
+      "width": 128,
+      "height": 128,
+      "output_prefix": "Door_Steel",
+      "color_scheme": "gray",
+      "suffix_type": "multi",
+      "suffix_names": ["_north", "_east", "_south", "_west"],
+      "grid_size": 32,
+      "grid_width": 1
+    },
+    {
+      "width": 512,
+      "height": 512,
+      "output_prefix": "Building_LargeFactory",
+      "color_scheme": {
+        "r": 100,
+        "g": 100,
+        "b": 120
+      },
+      "suffix_type": "multi",
+      "suffix_names": ["_north", "_east", "_south", "_west"],
+      "grid_size": 32,
+      "grid_width": 2
+    }
+  ]
+}

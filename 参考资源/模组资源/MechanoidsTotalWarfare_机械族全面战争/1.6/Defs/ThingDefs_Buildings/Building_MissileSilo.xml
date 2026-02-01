@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+    <ThingDef ParentName="BuildingBase">
+    <defName>NCL_Building_MissileSilo</defName>
+    <label>“铁雨”垂发拦截系统</label>
+    <description>“铁雨”垂发拦截系统是 NCL 自主研发的全域反导装备，以专用导弹井为载体，核心功能是发射密集中型反导导弹。
+ 
+该系统可远程自动跟踪敌方导弹及爆破敌方本体，实现全地图范围防御，导弹井内置微型导弹生产工厂，可自主生产中型反导导弹，每生产与发射一枚此导弹消耗少量钢铁与电力（20铁100电），在密集火力下，需要大量资源保障持续作战。
+ 
+作为现有技术条件下的“导弹终结者”，它是NCL构建完备反导系统的关键，可高效削弱敌方打击强度，掌握战场主动权。</description>
+    <thingClass>NCL.Building_MissileSilo</thingClass>
+   <uiIconPath>Buildings/NCL_MissileSilo</uiIconPath>
+    <tickerType>Normal</tickerType>
+    <drawerType>RealtimeOnly</drawerType>
+    <fillPercent>0.4</fillPercent>
+    <altitudeLayer>FloorEmplacement</altitudeLayer>
+    <graphicData>
+      <texPath>Buildings/NCL_MissileSilo</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(6,6)</drawSize>
+      <shadowData>
+        <volume>(0, 0, 0)</volume>
+        <offset>(0, 0, -0.2)</offset>
+      </shadowData>
+    </graphicData>
+    <passability>PassThroughOnly</passability>
+    <building>
+      <ai_chillDestination>false</ai_chillDestination>
+      <buildingTags>
+        <li>BuildingsSecurity</li>
+      </buildingTags>
+    </building>
+    <constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+    <designationCategory>Security</designationCategory>
+    <uiOrder>2420</uiOrder>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <rotatable>false</rotatable>
+    <thingCategories>
+      <li>BuildingsMisc</li>
+    </thingCategories>
+    <statBases>
+      <MaxHitPoints>5000</MaxHitPoints>
+      <WorkToBuild>8000</WorkToBuild>
+      <Mass>500</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+    <size>(6,6)</size>
+    <costList>
+      <Steel>1750</Steel>
+	  <Plasteel>300</Plasteel>
+    <ComponentIndustrial>24</ComponentIndustrial>
+	  <ComponentSpacer>8</ComponentSpacer>
+    </costList>
+    <researchPrerequisites>
+      <li>NCL_Vertical_Launch_Interception_System</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>2000</basePowerConsumption>
+      </li>
+        <li Class="NCL.CompProperties_SteelResource">
+            <fixedIngredient>Steel</fixedIngredient>
+            <maxIngredientCount>5000</maxIngredientCount>
+            <startingIngredientCount>1000</startingIngredientCount>
+        </li>
+    </comps>
+    <placeWorkers>
+      <li>PlaceWorker_ShowCauseHediffAoE</li>
+    </placeWorkers>
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+  </ThingDef>
+
+        <ThingDef ParentName="BaseBullet">
+        <defName>Nyar_IronRain_Rocket</defName>
+        <label>IronRain Rocket</label>
+        <thingClass>NyarsModPackTwo.Bullet_TracingEnemies</thingClass>
+        <altitudeLayer>MoteLow</altitudeLayer>
+        <modExtensions>
+            <li Class="NyarsModPackTwo.ModExtension_BulletProperties">
+                <trailFleck>Nyar_IronRain_Rocket_Fleck</trailFleck>
+                <trackEnemyProjectiles>true</trackEnemyProjectiles>
+                <initialFlyingStep>0.2</initialFlyingStep>
+            <accelerationDuration>120</accelerationDuration>
+            <ticksBeforeTracing>30</ticksBeforeTracing>  
+                <maxFlyingTime>900</maxFlyingTime>
+                <flyingStep>2</flyingStep>
+                <ignoreGroundProjectiles>true</ignoreGroundProjectiles>
+        <enableExplosionOnHit>false</enableExplosionOnHit>
+	<randomImpactFlecks>
+        <li>NCL_LaserDefenseImpact_One</li>
+        <li>NCL_LaserDefenseImpact_Two</li>
+        <li>NCL_LaserDefenseImpact_Three</li>
+        <li>NCL_LaserDefenseImpact_Four</li>
+    </randomImpactFlecks>
+            </li>
+        </modExtensions>
+        <graphicData>
+            <texPath>Projectiles/AutoChasingMissile</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+            <drawSize>1.5</drawSize>
+        </graphicData>
+        <projectile>
+            <damageDef>Bomb</damageDef>
+            <flyOverhead>true</flyOverhead>
+            <armorPenetrationBase>0.5</armorPenetrationBase>
+            <explosionRadius>4.2</explosionRadius>
+            <damageAmountBase>35</damageAmountBase>
+            <speed>55</speed>
+        </projectile>
+    <comps>
+    <li Class="NCL.CompProperties_FragmentedExplosive">
+      <explosionRadius>12</explosionRadius>
+      <fragmentCount>12</fragmentCount> <!-- 碎片总数 -->
+      <guaranteedCenterFraction>0.5</guaranteedCenterFraction> <!-- 一半碎片落在中心 -->
+      <fragmentProjectileDef>Bullet_NCL_Fragments</fragmentProjectileDef>
+      <fireGlowSize>0</fireGlowSize>
+      <heatGlowSize>0</heatGlowSize>
+      <smokeSize>0</smokeSize>
+    </li>
+    </comps>
+    </ThingDef>
+    <FleckDef ParentName="FleckBase">
+        <defName>Nyar_IronRain_Rocket_Fleck</defName>
+        <altitudeLayer>MoteLow</altitudeLayer>
+        <fadeInTime>0</fadeInTime>
+        <fadeOutTime>0.4</fadeOutTime>
+        <solidTime>0</solidTime>
+        <graphicData>
+            <drawSize>(2,2)</drawSize>
+            <color>(0.5,0.5,0.5)</color>
+            <shaderType>MoteGlow</shaderType>
+            <texPath>XFXFXFXF</texPath>
+        </graphicData>
+    </FleckDef>
+  
+      <JobDef>
+        <defName>FillTheIronRain</defName>
+        <driverClass>NCL.JobDriver_FillMissileSilo</driverClass>
+        <reportString>Fill The Iron Rain</reportString>
+    </JobDef>
+
+  <WorkGiverDef ParentName="HaulToBase">
+    <defName>HaulToTheIronRain</defName>
+    <label>haul resources To The IronRain</label>
+    <giverClass>NCL.WorkGiver_HaulSteelToMissileSilo</giverClass>
+  </WorkGiverDef>
+  
+
+</Defs>

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- Control sublink -->
+
+  <GD_ControlRangelink.label>机械师控制芯片</GD_ControlRangelink.label>
+  <GD_ControlRangelink.description>一种能够显著提升机械师控制距离的脑内植入物。\n\n这种植入物可以被安装2次以提升效果。当等级满时，机械师的控制距离将不受地图限制。</GD_ControlRangelink.description>
+  <GD_ControlRangelink.comps.CompUsableImplant.useLabel>植入芯片</GD_ControlRangelink.comps.CompUsableImplant.useLabel>
+
+
+</LanguageData>

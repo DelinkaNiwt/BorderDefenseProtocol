@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <Drone_ArchoHunter.label>诡雷无人机</Drone_ArchoHunter.label>
+  <Drone_ArchoHunter.description>超凡诡雷被黑衣机械族逆向分析以后制造出的仿品，负责代替其战斗员执行常规的防守与巡逻任务。\n\n在巡逻状态下会以一定频率进行随机折越。发现移动目标后会进入警觉状态，保持不动可以使其解除警觉。确定目标后便会快速靠近并自爆。</Drone_ArchoHunter.description>
+  <Drone_ArchoHunter.tools.0.label>针刺</Drone_ArchoHunter.tools.0.label>
+
+</LanguageData>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <QuestScriptDef>
+    <defName>GD_Quest_StarSlayer</defName>
+    <randomlySelectable>false</randomlySelectable>
+    <givenBy>
+      <li>OrbitalScanner</li>
+    </givenBy>
+	<defaultChallengeRating>3</defaultChallengeRating>
+    <rootSelectionWeight>3</rootSelectionWeight>
+	<minRefireDays>60</minRefireDays>
+    <isRootSpecial>true</isRootSpecial>
+    <autoAccept>true</autoAccept>
+    <questAvailableLetterTextIsDescription>true</questAvailableLetterTextIsDescription>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->Ancient star-slayer</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->[discoveryMethod] the location of an abandoned orbital platform.\n\nThis place seems to be a docked port abandoned in an ancient war. Through the incomplete signals, you can detect a giant mechanoid drifting in the nearby space. You have no idea about its origin or purpose, only thing you know is that it is in dormant and extremely dangerous. \n\nYou can try to land onto the platform and send analog signals to activate and attract the mechanoid here. All the possible consequences that may arise from this are unknown.</li>
+      </rulesStrings>
+    </questDescriptionRules>
+	<questContentRules>
+      <rulesStrings>
+        <li>expiredLabel->Quest expired: [resolvedQuestName]</li>
+        <li>expiredText->The central mechanoid that was previously detected has already left the adjacent orbit, The quest [resolvedQuestName] has expired.</li>
+      </rulesStrings>
+    </questContentRules>
+    <canOccurOnAllPlanetLayers>true</canOccurOnAllPlanetLayers>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+		<li Class="QuestNode_IsSet">
+          <name>discoveryMethod</name>
+          <elseNode Class="QuestNode_RandomNode">
+            <nodes>
+              <li Class="QuestNode_Set">
+                <name>discoveryMethod</name>
+                <value>You have discovered</value>
+              </li>
+            </nodes>
+          </elseNode>
+        </li>
+		
+        <li Class="QuestNode_Root_Site">
+          <layerWhitelist>
+            <li>Orbit</li>
+          </layerWhitelist>
+          <canBeSpace>true</canBeSpace>
+          <sitePartDef>GD_OrbitalPlatform</sitePartDef>
+          <worldObjectDef>GD_OrbitalPlatform</worldObjectDef>
+          <distanceFromColonyRange>1~3</distanceFromColonyRange> <!-- distance is in on the orbital layer tiles -->
+        </li>
+		
+		<!-- <li Class="GD3.QuestNode_QuestAlwaysUnique">
+          <tag>StarSlayer</tag>
+        </li> -->
+
+        <li Class="QuestNode_WorldObjectTimeout">
+          <worldObject>$site</worldObject>
+          <isQuestTimeout>true</isQuestTimeout>
+          <delayTicks>$(randInt(45,60)*60000)</delayTicks>
+          <inSignalDisable>site.MapGenerated</inSignalDisable>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label TKey="LetterLabelQuestExpired">[expiredLabel]</label>
+                <text TKey="LetterTextQuestExpired">[expiredText]</text>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+		
+		<li Class="QuestNode_Signal">
+          <inSignal>Defeated</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="GD3.QuestNode_EndWithSound">
+				<outcome>Success</outcome>
+				<sendStandardLetter>true</sendStandardLetter>
+			  </li>
+            </nodes>
+          </node>
+        </li>
+
+        <li Class="QuestNode_NoWorldObject">
+          <worldObject>$site</worldObject>
+          <node Class="QuestNode_End" />
+        </li>
+      </nodes>
+    </root>
+  </QuestScriptDef>
+  
+</Defs>

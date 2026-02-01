@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+
+  
+    <RecipeDef ParentName="BaseMechanoidRecipe">
+    <defName>NCL_Mech_Scorpion</defName>
+    <label>制造战争巨蝎</label>
+    <gestationCycles>10</gestationCycles>
+    <displayPriority>200</displayPriority>
+    <description>单位档案：NCL-03“战争巨蝎”
+来源：NCL「铁律」重装突击序列
+
+这台被称作“战争巨蝎”的单位，是联合体为打击高密度据点目标而打造的重装突袭机种。其外壳由数百万片自修复铀金属鳞片组成，能在受损时动态重组为局部防御屏障，提供突破常规的物理抗性——战场记录显示其能硬抗高爆弹正面直击后继续推进。
+
+核心武装为尾部挂载的「炽核贯杀」轨道主炮，通过高压缩能量弹短暂蓄能后释放的热熔射流，可瞬间焚穿重型掩体与装甲载具。每次炮击伴随的等离子震荡波会引发区域性热浪与地形熔毁效应，形成极具压制性的战场控制能力。
+
+双侧同步的压制火炮阵列提供不间断的火力覆盖，能在主炮充能期间精确压制步兵与轻装单位。</description>
+	<researchPrerequisite Inherit="false" />
+	<researchPrerequisites>
+	  <li>UltraMechtech</li>
+	  <li>NCL_Heavyforge_Units</li>
+	</researchPrerequisites>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>450</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Uranium</li>
+          </thingDefs>
+        </filter>
+        <count>125</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>125</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>NCL_Neural_Weave</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>NCL_Microfusion_Reactor</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <NCL_Mech_Scorpion>1</NCL_Mech_Scorpion>
+    </products>
+    <descriptionHyperlinks>
+      <ThingDef>NCL_Mech_Scorpion</ThingDef>
+    </descriptionHyperlinks>
+  </RecipeDef>
+  
+ </Defs>

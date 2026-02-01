@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+
+  
+    <RecipeDef ParentName="BaseMechanoidRecipe">
+    <defName>NCL_Mech_Mantis</defName>
+    <label>制造机械兰螳</label>
+    <gestationCycles>10</gestationCycles>
+    <displayPriority>200</displayPriority>
+    <description>单位档案：NCL-06“机械兰螳”
+来源：NCL自主机械序列VI型
+这台融合机械少女上半身与狼蛛底盘的第六代特战单位，专精致命近身猎杀与战术突进。其重甲内置动态自愈系统，可在单挑中持续修复创伤，却因能量分流机制在集火时异常脆弱；借助液压关节爆发的短距跃迁能力，可瞬间切入敌阵或撤离险境。专属武器「双向遮蔽系统」同步展开战术烟幕屏障与两枚红外制导Gyro-Blade旋刃——命中时触发EMP冲击波及可控破片溅射，瓦解电子设备并撕裂血肉。最终协议「焚心殉爆」将通过超载核心熔毁装甲，以毁灭性自燃爆炸与强敌同归于尽。</description>
+	<researchPrerequisite Inherit="false" />
+	<researchPrerequisites>
+	  <li>UltraMechtech</li>
+	  <li>NCL_Heavyforge_Units</li>
+	</researchPrerequisites>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>450</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Hyperweave</li>
+          </thingDefs>
+        </filter>
+        <count>125</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>125</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>NCL_Neural_Weave</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>NCL_Microfusion_Reactor</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <NCL_Mech_Mantis>1</NCL_Mech_Mantis>
+    </products>
+    <descriptionHyperlinks>
+      <ThingDef>NCL_Mech_Mantis</ThingDef>
+    </descriptionHyperlinks>
+  </RecipeDef>
+  
+ </Defs>

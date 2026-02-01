@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Crimson Slagburst -->
+  <Crimson_Slagburst.label>TODO</Crimson_Slagburst.label>
+  <!-- EN: {0} has burned to death. -->
+  <Crimson_Slagburst.deathMessage>TODO</Crimson_Slagburst.deathMessage>
+  
+  <!-- EN: DeathExplosion -->
+  <DeathExplosion.label>TODO</DeathExplosion.label>
+  <!-- EN: {0} is death. -->
+  <DeathExplosion.deathMessage>TODO</DeathExplosion.deathMessage>
+  
+  <!-- EN: Disruptor Positron Burn -->
+  <Disruptor_Positron_Burn.label>TODO</Disruptor_Positron_Burn.label>
+  <!-- EN: {0} has burned to death. -->
+  <Disruptor_Positron_Burn.deathMessage>TODO</Disruptor_Positron_Burn.deathMessage>
+  
+  <!-- EN: ShotbyDeath -->
+  <ShotbyDeath.label>TODO</ShotbyDeath.label>
+  <!-- EN: {0} is death. -->
+  <ShotbyDeath.deathMessage>TODO</ShotbyDeath.deathMessage>
+  
+  <!-- EN: Antiparticle explosion -->
+  <TW_Antiparticle_explosion.label>TODO</TW_Antiparticle_explosion.label>
+  <!-- EN: {0} has burned to death. -->
+  <TW_Antiparticle_explosion.deathMessage>TODO</TW_Antiparticle_explosion.deathMessage>
+  
+  <!-- EN: Crimson Slagburst -->
+  <TW_Crimson_Slagburst.label>TODO</TW_Crimson_Slagburst.label>
+  <!-- EN: {0} has burned to death. -->
+  <TW_Crimson_Slagburst.deathMessage>TODO</TW_Crimson_Slagburst.deathMessage>
+  
+  <!-- EN: HyperBeam Burn -->
+  <TW_HyperBeam_Damage.label>TODO</TW_HyperBeam_Damage.label>
+  <!-- EN: {0} has burned to death. -->
+  <TW_HyperBeam_Damage.deathMessage>TODO</TW_HyperBeam_Damage.deathMessage>
+  
+  <!-- EN: DeathExplosion -->
+  <WildFire.label>TODO</WildFire.label>
+  <!-- EN: {0} is death. -->
+  <WildFire.deathMessage>TODO</WildFire.deathMessage>
+  
+</LanguageData>

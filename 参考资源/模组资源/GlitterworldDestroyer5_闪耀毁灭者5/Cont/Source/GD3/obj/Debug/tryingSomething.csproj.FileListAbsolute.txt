@@ -1,0 +1,6 @@
+E:\Steam\steamapps\common\RimWorld\Mods\Ratkin Weapons+\Source\tryingSomething\bin\Debug\tryingSomething.dll
+E:\Steam\steamapps\common\RimWorld\Mods\Ratkin Weapons+\Source\tryingSomething\bin\Debug\tryingSomething.pdb
+E:\Steam\steamapps\common\RimWorld\Mods\Ratkin Weapons+\Source\tryingSomething\obj\Debug\tryingSomething.csproj.AssemblyReference.cache
+E:\Steam\steamapps\common\RimWorld\Mods\Ratkin Weapons+\Source\tryingSomething\obj\Debug\tryingSomething.csproj.CoreCompileInputs.cache
+E:\Steam\steamapps\common\RimWorld\Mods\Ratkin Weapons+\Source\tryingSomething\obj\Debug\tryingSomething.dll
+E:\Steam\steamapps\common\RimWorld\Mods\Ratkin Weapons+\Source\tryingSomething\obj\Debug\tryingSomething.pdb

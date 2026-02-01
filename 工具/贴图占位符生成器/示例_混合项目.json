@@ -1,0 +1,99 @@
+{
+  "注释": "占位贴图示例 - 混合项目 - 完整的验证测试用例（包含所有类型）",
+  "textures": [
+    {
+      "name": "武器 - 铁剑",
+      "width": 128,
+      "height": 128,
+      "output_prefix": "Weapon_Sword_Iron",
+      "color_scheme": "red",
+      "suffix_type": "single",
+      "grid_size": 32,
+      "grid_width": 1
+    },
+    {
+      "name": "建筑 - 工作台",
+      "width": 256,
+      "height": 256,
+      "output_prefix": "Building_CraftingBench",
+      "color_scheme": "blue",
+      "suffix_type": "multi",
+      "suffix_names": ["_north", "_east", "_south", "_west"],
+      "grid_size": 32,
+      "grid_width": 1
+    },
+    {
+      "name": "衣物 - T恤",
+      "width": 128,
+      "height": 128,
+      "output_prefix": "Apparel_TShirt",
+      "color_scheme": {
+        "r": 180,
+        "g": 120,
+        "b": 80
+      },
+      "suffix_type": "apparel",
+      "suffix_names": ["_Male", "_Female", "_Thin", "_Hulk", "_Fat"],
+      "grid_size": 32,
+      "grid_width": 1
+    },
+    {
+      "name": "植物 - 灌木",
+      "width": 128,
+      "height": 128,
+      "output_prefix": "Plant_Shrub",
+      "color_scheme": "green",
+      "suffix_type": "random",
+      "suffix_names": ["_a", "_b", "_c"],
+      "grid_size": 32,
+      "grid_width": 1
+    },
+    {
+      "name": "UI - 命令图标",
+      "width": 64,
+      "height": 64,
+      "output_prefix": "UI_Icon_Build",
+      "color_scheme": "yellow",
+      "suffix_type": "single",
+      "grid_size": 32,
+      "grid_width": 1
+    },
+    {
+      "name": "建筑 - 大型工厂",
+      "width": 512,
+      "height": 512,
+      "output_prefix": "Building_LargeFactory",
+      "color_scheme": "gray",
+      "suffix_type": "multi",
+      "suffix_names": ["_north", "_east", "_south", "_west"],
+      "grid_size": 32,
+      "grid_width": 2
+    },
+    {
+      "name": "门窗 - 钢门",
+      "width": 128,
+      "height": 128,
+      "output_prefix": "Door_Steel",
+      "color_scheme": {
+        "r": 100,
+        "g": 100,
+        "b": 120
+      },
+      "suffix_type": "multi",
+      "suffix_names": ["_north", "_east", "_south", "_west"],
+      "grid_size": 32,
+      "grid_width": 1
+    },
+    {
+      "name": "装饰 - 花朵",
+      "width": 64,
+      "height": 64,
+      "output_prefix": "Decoration_Flower",
+      "color_scheme": "purple",
+      "suffix_type": "random",
+      "suffix_names": ["_0", "_1", "_2", "_3"],
+      "grid_size": 32,
+      "grid_width": 1
+    }
+  ]
+}

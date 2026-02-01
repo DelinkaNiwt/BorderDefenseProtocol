@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <GD.CerebrexAbilityWarning>The psychic power fluctuations of the cerebrex core have become significantly more active. Be careful!</GD.CerebrexAbilityWarning>
+  <GD.CerebrexLandReinforce>Ground reinforcement</GD.CerebrexLandReinforce>
+  <GD.CerebrexLandReinforceDesc>The cerebrex core brain sent a rapid response force of size {1} to the battlefield by long-range skip. Take care to protect {0}!</GD.CerebrexLandReinforceDesc>
+  <GD.CerebrexAirReinforce>Air reinforcement</GD.CerebrexAirReinforce>
+  <GD.CerebrexAirReinforceDesc>The cerebrex core dispatched a standby mechanoid mosquito squadron into orbit!</GD.CerebrexAirReinforceDesc>
+  <GD.CerebrexRandomSkip>Chaos skip</GD.CerebrexRandomSkip>
+  <GD.CerebrexRandomSkipDesc>The powerful psychic power field released by the cerebrex core disrupted everyone's positions!</GD.CerebrexRandomSkipDesc>
+  <GD.CerebrexVertigo>Psychic vertigo</GD.CerebrexVertigo>
+  <GD.CerebrexVertigoDesc>The powerful psychic power field released by the cerebrex core interfered with the electrical conduction of nerves, causing everyone to feel dizzy!</GD.CerebrexVertigoDesc>
+  
+  <GD.CerebrexDestroyedTip>However, this so-called "cerebrex core" is merely one of the countless neurons in the mechanoid hive, and it still mechanically executes the underlying code after completing tasks from ancient times. Although destroying it could disrupt the deployment of mechanoids on this planet, it would not be enough to completely wipe them out. \n\nThe global threat factor of mechanoid has been reduced to 20%.</GD.CerebrexDestroyedTip>
+  
+  <GD.AnnihilatorComing>The signal has been sent out and the target will arrive after {0}.</GD.AnnihilatorComing>
+  <GD.AnnihilatorArrival>A danger signal has been detected approaching. Be careful.</GD.AnnihilatorArrival>
+  <GD.AnnihilatorBusy>{0} is performing other tasks.</GD.AnnihilatorBusy>
+  <GD.AnnihilatorTileInvalid>The position of {0} is invalid.</GD.AnnihilatorTileInvalid>
+  <GD.MeaningLessTile>Meaningless target</GD.MeaningLessTile>
+  <GD.Target.Annihilator>Concentrated attack: </GD.Target.Annihilator>
+  <GD.Target.AnnihilatorDesc>Concentrate the firepower on the specific body part of {0}. The damage to certain components can simultaneously lead to functional impairment of {0}, such as the paralysis of the turret or a slowdown in speed. \n\nRight-click to select.</GD.Target.AnnihilatorDesc>
+  <GD.Target.Any>Any part</GD.Target.Any>
+  <GD.Target.LegLF>Left front leg</GD.Target.LegLF>
+  <GD.Target.LegRF>Right front leg</GD.Target.LegRF>
+  <GD.Target.LegLM>left middle leg</GD.Target.LegLM>
+  <GD.Target.LegRM>right middle leg</GD.Target.LegRM>
+  <GD.Target.LegLH>left rear leg</GD.Target.LegLH>
+  <GD.Target.LegRH>right rear leg</GD.Target.LegRH>
+  <GD.AnnihilatorReadyToJump>Annihilator is ready to take off</GD.AnnihilatorReadyToJump>
+</LanguageData>

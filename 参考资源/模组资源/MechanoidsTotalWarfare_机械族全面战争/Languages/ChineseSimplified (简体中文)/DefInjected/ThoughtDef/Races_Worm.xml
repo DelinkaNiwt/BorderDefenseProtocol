@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 蠕虫威压 -->
+  <WormPressure.stages.0.label>TODO</WormPressure.stages.0.label>
+  <!-- EN: 受到蠕虫的威压影响,变的脆弱且易怒. -->
+  <WormPressure.stages.0.description>TODO</WormPressure.stages.0.description>
+  
+</LanguageData>

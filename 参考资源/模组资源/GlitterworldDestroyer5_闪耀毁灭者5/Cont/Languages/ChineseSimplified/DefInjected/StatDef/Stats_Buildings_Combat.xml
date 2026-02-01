@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <RangedCooldownFactorBuilding.label>建筑远程冷却系数</RangedCooldownFactorBuilding.label>
+  <RangedCooldownFactorBuilding.description>这个建筑在使用远程武器时，开火后的冷却时间系数。</RangedCooldownFactorBuilding.description>
+
+
+</LanguageData>

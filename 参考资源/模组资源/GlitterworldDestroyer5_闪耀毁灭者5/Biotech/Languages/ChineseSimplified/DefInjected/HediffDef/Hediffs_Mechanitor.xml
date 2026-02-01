@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- Control sublink -->
+
+  <GD_ControlRangelinkImplant.label>机械师控制芯片</GD_ControlRangelinkImplant.label>
+  <GD_ControlRangelinkImplant.description>一种能够显著提升机械师控制距离的脑内植入物。\n\n这种植入物可以被安装2次以提升效果。当等级满时，机械师的控制距离将不受地图限制。</GD_ControlRangelinkImplant.description>
+  
+  <GD_BlackEnhancer_Hat.label>神经元优化</GD_BlackEnhancer_Hat.label>
+  <GD_BlackEnhancer_Hat.description>存留在黑衣中的机械神经元正在与穿戴者连结，并提高他的思考速度与控制机械族的能力。\n\n当杀死某些强大的机械体后，这种效果便可以得到提升。</GD_BlackEnhancer_Hat.description>
+  
+  <GD_BlackEnhancer.label>神经元优化</GD_BlackEnhancer.label>
+  <GD_BlackEnhancer.description>存留在黑衣中的机械神经元正在与穿戴者连结，并提高他的思考速度与控制机械族的能力。\n\n当杀死某些强大的机械体后，这种效果便可以得到提升。</GD_BlackEnhancer.description>
+  
+  <GD_ObserverEnhancer.label>观察机引导</GD_ObserverEnhancer.label>
+  <GD_ObserverEnhancer.description>一台观察机正在进行侦查并辅助此单位瞄准。射程得到提升。</GD_ObserverEnhancer.description>
+  <GD_ObserverEnhancer.stages.0.label>距离太远</GD_ObserverEnhancer.stages.0.label>
+  
+  <GD_Dev_UltimateBandwidth.label>DEV:终极带宽</GD_Dev_UltimateBandwidth.label>
+  <GD_Dev_UltimateBandwidth.description>看起来像作弊一样。</GD_Dev_UltimateBandwidth.description>
+
+
+</LanguageData>

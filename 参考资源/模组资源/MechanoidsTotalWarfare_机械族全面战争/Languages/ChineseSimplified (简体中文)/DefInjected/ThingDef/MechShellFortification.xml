@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Ionized Plasma -->
+  <Ionized_Plasma.label>TODO</Ionized_Plasma.label>
+  
+  <!-- EN: 等离子电浆发射器 -->
+  <TW_Ionized_Plasma_Launcher.label>TODO</TW_Ionized_Plasma_Launcher.label>
+  <!-- EN: 1 -->
+  <TW_Ionized_Plasma_Launcher.description>TODO</TW_Ionized_Plasma_Launcher.description>
+  <!-- EN: stock -->
+  <TW_Ionized_Plasma_Launcher.tools.stock.label>TODO</TW_Ionized_Plasma_Launcher.tools.stock.label>
+  <!-- EN: barrel -->
+  <TW_Ionized_Plasma_Launcher.tools.barrel.label>TODO</TW_Ionized_Plasma_Launcher.tools.barrel.label>
+  <!-- EN: 等离子电浆发射器 -->
+  <TW_Ionized_Plasma_Launcher.verbs.Verb_ShootFromAbove.label>TODO</TW_Ionized_Plasma_Launcher.verbs.Verb_ShootFromAbove.label>
+  
+  <!-- EN: Shell Fortification AutomaticMissileLauncher -->
+  <TW_Mech_Shell_Fortification_AutomaticMissileLauncher.label>TODO</TW_Mech_Shell_Fortification_AutomaticMissileLauncher.label>
+  <!-- EN: 1 -->
+  <TW_Mech_Shell_Fortification_AutomaticMissileLauncher.description>TODO</TW_Mech_Shell_Fortification_AutomaticMissileLauncher.description>
+  <!-- EN: Shell Fortification AutomaticMissileLauncher -->
+  <TW_Mech_Shell_Fortification_AutomaticMissileLauncher.verbs.Verb_Shoot.label>TODO</TW_Mech_Shell_Fortification_AutomaticMissileLauncher.verbs.Verb_Shoot.label>
+  
+  <!-- EN: TW_Mech_Shell_Fortification_MissileProjectile -->
+  <TW_Mech_Shell_Fortification_MissileProjectile.label>TODO</TW_Mech_Shell_Fortification_MissileProjectile.label>
+  
+</LanguageData>

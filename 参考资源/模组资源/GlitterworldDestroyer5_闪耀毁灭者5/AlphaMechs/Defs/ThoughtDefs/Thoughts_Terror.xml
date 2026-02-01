@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThoughtDef>
+    <defName>GD_Terror</defName>
+    <durationDays>3</durationDays>
+    <stages>
+      <li>
+        <label>seen an terrifying behemoth</label>
+        <description>If I had not seen it with my own eyes, I would not have believed that such an ugly thing really exists in the world... Every time I think of it my heart will not stop beating wildly.</description>
+        <baseMoodEffect>-7</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+</Defs>

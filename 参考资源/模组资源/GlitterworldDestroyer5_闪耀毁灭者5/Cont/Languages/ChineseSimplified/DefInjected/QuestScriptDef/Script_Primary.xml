@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 剧毒物质空投 -->
+
+  <GD_PollutionDump.questNameRules.rulesStrings.0>questName-&gt;剧毒物质空投</GD_PollutionDump.questNameRules.rulesStrings.0>
+  <GD_PollutionDump.questDescriptionRules.rulesStrings.0>questDescription-&gt;一组剧毒物质正要空投到你的殖民地。这些物质难以被常规的降解器处理，因此你应该准备好一个低温空间以储存它，或是想想其他办法。</GD_PollutionDump.questDescriptionRules.rulesStrings.0>
+  <GD_PollutionDump.questContentRules.rulesStrings.0>wastepacksLetterLabel->剧毒物质到达</GD_PollutionDump.questContentRules.rulesStrings.0>
+  <GD_PollutionDump.questContentRules.rulesStrings.1>wastepacksLetterText->黑衣机械体描述的剧毒物质已经抵达。</GD_PollutionDump.questContentRules.rulesStrings.1>
+  
+  <!-- 次生核心空投 -->
+  
+  <GD_SubcoreAnalyse.questNameRules.rulesStrings.0>questName-&gt;次生核心委托</GD_SubcoreAnalyse.questNameRules.rulesStrings.0>
+  <GD_SubcoreAnalyse.questDescriptionRules.rulesStrings.0>questDescription-&gt;黑衣机械巢的次生核心即将空投到你的殖民地。\n\n为了维持程序稳定和保证散热，每八小时你只能研究它一次，研究完成后它会被自动送回。智识等级不高的殖民者可能会在研究过程中造成一些意外。</GD_SubcoreAnalyse.questDescriptionRules.rulesStrings.0>
+  <GD_SubcoreAnalyse.questContentRules.rulesStrings.0>subcoreArriveLetterLabel->次生核心</GD_SubcoreAnalyse.questContentRules.rulesStrings.0>
+  <GD_SubcoreAnalyse.questContentRules.rulesStrings.1>subcoreArriveLetterText->黑衣机械体描述的次生核心已经抵达。</GD_SubcoreAnalyse.questContentRules.rulesStrings.1>
+  
+  <!-- 窃取三级情报 -->
+  
+  <GD_Quest_Cluster_Fortress.questNameRules.rulesStrings.0>questName-&gt;窃取三级情报</GD_Quest_Cluster_Fortress.questNameRules.rulesStrings.0>
+  <GD_Quest_Cluster_Fortress.questDescriptionRules.rulesStrings.0>questDescription-&gt;为了保护黑衣机械巢的信息不被泄露，我们需要进攻一座机械族要塞，入侵其中央机房并窃取有关的三级情报。\n\n访问情报的权限需要用密钥激活。它可能会在要塞中的任意一名机械体身上，必须消灭这名机械体并夺取密钥。要塞中所有可访问的服务器都必须保持完好无损，以便我们解析出完整的信息。\n\n黑衣机械耀螳和黑衣机械盾螳会掩护你的行动。</GD_Quest_Cluster_Fortress.questDescriptionRules.rulesStrings.0>
+  <GD_Quest_Cluster_Fortress.root.nodes.WorldObjectTimeout.node.nodes.Letter.label.slateRef>任务失效：[resolvedQuestName]</GD_Quest_Cluster_Fortress.root.nodes.WorldObjectTimeout.node.nodes.Letter.label.slateRef>
+  <GD_Quest_Cluster_Fortress.root.nodes.WorldObjectTimeout.node.nodes.Letter.text.slateRef>携带密钥的机械体已经从这座要塞中转移，任务[resolvedQuestName]已经失效。</GD_Quest_Cluster_Fortress.root.nodes.WorldObjectTimeout.node.nodes.Letter.text.slateRef>
+  <GD_Quest_Cluster_Fortress.root.nodes.siteDestroyed.node.nodes.Letter.label.slateRef>任务失败：[resolvedQuestName]</GD_Quest_Cluster_Fortress.root.nodes.siteDestroyed.node.nodes.Letter.label.slateRef>
+  <GD_Quest_Cluster_Fortress.root.nodes.siteDestroyed.node.nodes.Letter.text.slateRef>在这次未达目的的袭击后，机械族将遭受袭击的要塞进行了加强，并对有关情报进行了转移。任务[resolvedQuestName]已经失败。</GD_Quest_Cluster_Fortress.root.nodes.siteDestroyed.node.nodes.Letter.text.slateRef>
+  
+  <!-- 护卫机械小蠊 -->
+  
+  <GD_Quest_Militor.questNameRules.rulesStrings.0>questName-&gt;护卫机械小蠊</GD_Quest_Militor.questNameRules.rulesStrings.0>
+  <GD_Quest_Militor.questDescriptionRules.rulesStrings.0>questDescription-&gt;一支规模庞大的机械族部队正在接近那台脱离控制的机械小蠊，试图摧毁之。我们必须在其大部队受到牵制时先一步赶到小蠊的位置，然后建立防御并歼灭所有敌人。\n\n战斗将发生在一座废弃小镇之中，建议携带一定量的材料或便携炮塔辅助防守。</GD_Quest_Militor.questDescriptionRules.rulesStrings.0>
+  <GD_Quest_Militor.root.nodes.WorldObjectTimeout.node.nodes.Letter.label.slateRef>任务失效：[resolvedQuestName]</GD_Quest_Militor.root.nodes.WorldObjectTimeout.node.nodes.Letter.label.slateRef>
+  <GD_Quest_Militor.root.nodes.WorldObjectTimeout.node.nodes.Letter.text.slateRef>我们失去了与机械小蠊的联系，任务[resolvedQuestName]已经失效。</GD_Quest_Militor.root.nodes.WorldObjectTimeout.node.nodes.Letter.text.slateRef>
+  <GD_Quest_Militor.root.nodes.siteDestroyed.node.nodes.Letter.label.slateRef>任务失败：[resolvedQuestName]</GD_Quest_Militor.root.nodes.siteDestroyed.node.nodes.Letter.label.slateRef>
+  <GD_Quest_Militor.root.nodes.siteDestroyed.node.nodes.Letter.text.slateRef>我们失去了与机械小蠊的联系，任务[resolvedQuestName]已经失败。</GD_Quest_Militor.root.nodes.siteDestroyed.node.nodes.Letter.text.slateRef>
+  
+  <!-- 枯海 -->
+
+  <GD_Quest_Drysea.questNameRules.rulesStrings.0>questName-&gt;枯海</GD_Quest_Drysea.questNameRules.rulesStrings.0>
+  <GD_Quest_Drysea.questDescriptionRules.rulesStrings.0>questDescription-&gt;黑衣憎恶毒蜂打算与你进行一次谈话。\n\n如果你在目的地没有找到白色花朵，向他说明即可。</GD_Quest_Drysea.questDescriptionRules.rulesStrings.0>
+  
+  <!-- 肃反 -->
+  
+  <GD_Quest_Eliminate.questNameRules.rulesStrings.0>questName-&gt;肃反</GD_Quest_Eliminate.questNameRules.rulesStrings.0>
+  <GD_Quest_Eliminate.questDescriptionRules.rulesStrings.0>questDescription-&gt;我们无法直接获取两名叛徒的坐标，只能通过黑衣小蠊的坐标大致推算他们的动向。\n\n追踪坐标并清除背叛者。由于小蠊可能陷入危险，我们的行动越快越好。</GD_Quest_Eliminate.questDescriptionRules.rulesStrings.0>
+  <GD_Quest_Eliminate.root.nodes.WorldObjectTimeout.node.nodes.Letter.label.slateRef>任务失效：[resolvedQuestName]</GD_Quest_Eliminate.root.nodes.WorldObjectTimeout.node.nodes.Letter.label.slateRef>
+  <GD_Quest_Eliminate.root.nodes.WorldObjectTimeout.node.nodes.Letter.text.slateRef>我们追踪的坐标已经失去意义，任务[resolvedQuestName]已经失效。</GD_Quest_Eliminate.root.nodes.WorldObjectTimeout.node.nodes.Letter.text.slateRef>
+  <GD_Quest_Eliminate.root.nodes.siteDestroyed.node.nodes.Letter.label.slateRef>任务失败：[resolvedQuestName]</GD_Quest_Eliminate.root.nodes.siteDestroyed.node.nodes.Letter.label.slateRef>
+  <GD_Quest_Eliminate.root.nodes.siteDestroyed.node.nodes.Letter.text.slateRef>目标逃走了，任务[resolvedQuestName]已经失败。</GD_Quest_Eliminate.root.nodes.siteDestroyed.node.nodes.Letter.text.slateRef>
+  
+  <!-- 巨黾 -->
+  
+  <GD_Quest_Exostrider.questNameRules.rulesStrings.0>questName-&gt;巨黾之颅</GD_Quest_Exostrider.questNameRules.rulesStrings.0>
+  <GD_Quest_Exostrider.questDescriptionRules.rulesStrings.0>questDescription-&gt;黑衣机械巢将机械巨黾的位置发送给了我们。\n\n这台巨型机械体因为要执行特殊任务暂时无法随意移动，但它也同时被一座巨型集群层层保护着。我们的常规武器无法击穿他的厚重外壳，但黑衣机械体们早有办法——黑入集群内的巨型迫击炮，并借用重炮的威力去击伤巨黾。\n\n这场战斗势必要速战速决。一旦全部迫击炮都被摧毁，我们便不得不撤退。</GD_Quest_Exostrider.questDescriptionRules.rulesStrings.0>
+  <GD_Quest_Exostrider.root.nodes.siteDestroyed.node.nodes.Letter.label.slateRef>任务失败：[resolvedQuestName]</GD_Quest_Exostrider.root.nodes.siteDestroyed.node.nodes.Letter.label.slateRef>
+  <GD_Quest_Exostrider.root.nodes.siteDestroyed.node.nodes.Letter.text.slateRef>这次失败的进攻促使机械族对机械巨黾进行了紧急转移，任务[resolvedQuestName]已经失败。</GD_Quest_Exostrider.root.nodes.siteDestroyed.node.nodes.Letter.text.slateRef>
+
+
+</LanguageData>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <SitePartDef ParentName="SpaceSiteBase">
+    <defName>GD_OrbitalPlatform</defName>
+    <label>orbital platform</label>
+    <description>A platform that has the potential to establish a connection with the central mechanoid.</description>
+    <siteTexture>UI/Symbols/AnnihilatorPlatform</siteTexture>
+    <expandingIconTexture>UI/Symbols/AnnihilatorPlatform</expandingIconTexture>
+    <handlesWorldObjectTimeoutInspectString>true</handlesWorldObjectTimeoutInspectString>
+    <tags>
+      <li>GD_OrbitalPlatform</li>
+    </tags>
+	<copyQuestName>true</copyQuestName>
+    <considerEnteringAsAttack>false</considerEnteringAsAttack>
+  </SitePartDef>
+  
+  <GenStepDef>
+    <defName>GD_OrbitalPlatform</defName>
+	<linkWithSite>GD_OrbitalPlatform</linkWithSite>
+    <order>290</order>
+    <genStep Class="GD3.GenStep_CustomStructureGen_Platform">
+      <structureLayoutDefs>
+        <li>GD_OrbitalPlatform</li>
+      </structureLayoutDefs>
+    </genStep>
+  </GenStepDef>
+  
+</Defs>

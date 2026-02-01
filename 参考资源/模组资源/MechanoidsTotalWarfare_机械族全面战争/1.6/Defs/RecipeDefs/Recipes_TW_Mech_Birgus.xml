@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+
+  
+    <RecipeDef ParentName="BaseMechanoidRecipe">
+    <defName>TW_Mech_Birgus</defName>
+    <label>制造椰子械</label>
+    <gestationCycles>6</gestationCycles>
+    <displayPriority>300</displayPriority>
+    <description>机械巢穴仿造异星潮间带节肢生物铸造的战术单位。复合装甲外壳覆盖精密的液压关节，四足踏地时发出金属叩击声。移速稳健而非迅猛，然其合金附肢可在近距爆发骇人杀伤力。内置自适应减震网络，将冲击能转化为结构强化，愈受击则躯壳愈韧。腹舱搭载「微尘雾核」，受击即释放精准烟幕，为自身与友军织就灵动的生存屏障。</description>
+    <researchPrerequisites>
+	<li>StandardMechtech</li>
+	</researchPrerequisites>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>175</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>250</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>8</count>
+      </li>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>SubcoreRegular</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <TW_Mech_Birgus>1</TW_Mech_Birgus>
+    </products>
+    <descriptionHyperlinks>
+      <ThingDef>TW_Mech_Birgus</ThingDef>
+    </descriptionHyperlinks>
+  </RecipeDef>
+  
+ </Defs>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 黑衣憎恶毒蜂 -->
+
+  <!-- <BossDef>
+    <defName>BlackApocriton</defName>
+    <kindDef>Mech_BlackApocriton</kindDef>
+  </BossDef>
+
+  <BossgroupDef ParentName="BaseBossgroup">
+    <defName>BlackApocriton</defName>
+    <boss>BlackApocriton</boss>
+	<repeatWaveStartIndex>0</repeatWaveStartIndex>
+    <waves>
+      <li>
+        <bossCount>1</bossCount>
+        <escorts>
+          <Mech_BlackScyther>1</Mech_BlackScyther>
+          <Mech_BlackLancer>1</Mech_BlackLancer>
+        </escorts>
+        <bossApparel>
+          <li>
+            <thing>Apparel_ApocritonShield</thing>
+          </li>
+        </bossApparel>
+      </li>
+    </waves>
+    <leaderDescription>The {LEADERKIND_label} is the leader of the black mechanoid nest. He has never been seen before by your colonists.</leaderDescription>
+    <rewardDef>BlackNanoChip</rewardDef>
+  </BossgroupDef> -->
+
+</Defs>

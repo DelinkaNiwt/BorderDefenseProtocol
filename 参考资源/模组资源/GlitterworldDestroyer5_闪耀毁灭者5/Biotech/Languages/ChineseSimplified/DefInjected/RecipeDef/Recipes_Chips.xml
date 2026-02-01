@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <Make_ChipA.label>制造能量汇聚芯片</Make_ChipA.label>
+  <Make_ChipA.description>制造一块能量汇聚芯片。</Make_ChipA.description>
+  <Make_ChipA.jobString>正在制造能量汇聚芯片。</Make_ChipA.jobString>
+  
+  <Make_ChipB.label>制造纳米结构芯片</Make_ChipB.label>
+  <Make_ChipB.description>制造一块纳米结构芯片。</Make_ChipB.description>
+  <Make_ChipB.jobString>正在制造纳米结构芯片。</Make_ChipB.jobString>
+
+
+</LanguageData>

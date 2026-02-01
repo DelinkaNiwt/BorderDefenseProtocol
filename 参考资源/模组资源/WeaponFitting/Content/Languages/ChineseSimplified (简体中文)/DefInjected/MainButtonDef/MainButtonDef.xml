@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<LanguageData>
-  
-  <!-- EN: modified weapon-->
-  <WeaponFitting.label>武器改装</WeaponFitting.label>
-  <!-- EN: View and manage modified and unique weapons. -->
-  <WeaponFitting.description>查看并管理可改装的武器</WeaponFitting.description>
-  
-</LanguageData>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <!-- 跳跃 -->
+  <AbilityDef>
+    <defName>Annihilator_JumpAbility</defName>
+    <label>jump</label>
+	<description>Leap high and land at the target location, dealing terrifying crushing damage to the enemies within the landing spot.</description>
+	<jobDef>CastAbilityOnThingWithoutWeapon</jobDef>
+    <iconPath>UI/Buttons/Annihilator_Jump</iconPath>
+    <cooldownTicksRange>600</cooldownTicksRange>
+	<aiCanUse>true</aiCanUse>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+	<disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+	<showWhenDrafted>true</showWhenDrafted>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <warmupTime>-1</warmupTime>
+      <requireLineOfSight>false</requireLineOfSight>
+      <range>500</range>
+      <drawAimPie>false</drawAimPie>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>false</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="CompProperties_AbilityEffect">
+		<compClass>GD3.CompAbilityEffect_AnnihilatorJump</compClass>
+	  </li>
+    </comps>
+  </AbilityDef>
+  
+  <!-- 悬浮 -->
+  <AbilityDef>
+    <defName>Annihilator_Suspend</defName>
+    <label>plasma sweep</label>
+	<description>Activate the grav engine, suspend and spray plasma downward to clean up all objects within the range.</description>
+	<jobDef>CastAbilityOnThingWithoutWeapon</jobDef>
+    <iconPath>UI/Buttons/Annihilator_Suspend</iconPath>
+    <cooldownTicksRange>600</cooldownTicksRange>
+	<aiCanUse>true</aiCanUse>
+	<targetRequired>false</targetRequired>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+	<disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+	<showWhenDrafted>true</showWhenDrafted>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <warmupTime>-1</warmupTime>
+      <requireLineOfSight>false</requireLineOfSight>
+      <range>-1</range>
+      <drawAimPie>false</drawAimPie>
+      <targetParams>
+        <canTargetLocations>false</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+		<canTargetSelf>true</canTargetSelf>
+        <canTargetBuildings>false</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="CompProperties_AbilityEffect">
+		<compClass>GD3.CompAbilityEffect_AnnihilatorSuspend</compClass>
+	  </li>
+    </comps>
+  </AbilityDef>
+  
+  <!-- 跳跃并悬浮 -->
+  <AbilityDef>
+    <defName>Annihilator_JumpAndSuspend</defName>
+    <label>jump to sweep</label>
+	<description>Leap high and turns into a suspended state above the target location, spraying plasma for sweeping.</description>
+	<jobDef>CastAbilityOnThingWithoutWeapon</jobDef>
+    <iconPath>UI/Buttons/Annihilator_JumpAndSuspend</iconPath>
+    <cooldownTicksRange>600</cooldownTicksRange>
+	<aiCanUse>true</aiCanUse>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+	<disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+	<showWhenDrafted>true</showWhenDrafted>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <warmupTime>-1</warmupTime>
+      <requireLineOfSight>false</requireLineOfSight>
+      <range>500</range>
+      <drawAimPie>false</drawAimPie>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>false</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="CompProperties_AbilityEffect">
+		<compClass>GD3.CompAbilityEffect_AnnihilatorJumpAndSuspend</compClass>
+	  </li>
+    </comps>
+  </AbilityDef>
+  
+  <!-- 长距离跳跃 -->
+  <AbilityDef>
+    <defName>Annihilator_LongJump</defName>
+    <label>long jump</label>
+	<description>Leap high and use the grav engine to sail for a short distance, then land at the target location.</description>
+	<jobDef>CastAbilityOnThingWithoutWeapon</jobDef>
+    <iconPath>UI/Buttons/Annihilator_LongJump</iconPath>
+    <cooldownTicksRange>-1</cooldownTicksRange>
+	<aiCanUse>false</aiCanUse>
+	<targetRequired>false</targetRequired>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+	<disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+	<showWhenDrafted>true</showWhenDrafted>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <warmupTime>-1</warmupTime>
+      <requireLineOfSight>false</requireLineOfSight>
+      <range>-1</range>
+      <drawAimPie>false</drawAimPie>
+      <targetParams>
+        <canTargetLocations>false</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+		<canTargetSelf>true</canTargetSelf>
+        <canTargetBuildings>false</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="GD3.CompProperties_AbilityAnnihilatorLongJump">
+		<range>50</range>
+	  </li>
+    </comps>
+  </AbilityDef>
+
+</Defs>

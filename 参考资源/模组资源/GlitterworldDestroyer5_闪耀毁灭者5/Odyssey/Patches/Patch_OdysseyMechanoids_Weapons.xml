@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+	<Operation Class="PatchOperationSequence">
+		<operations>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Bullet_BeamRepeater"]/projectile</xpath>
+				<value>
+					<projectile>
+					  <damageDef>BeamBypassShields</damageDef>
+					  <damageAmountBase>5</damageAmountBase>
+					  <beamMoteDef>Mote_BeamRepeaterLaser</beamMoteDef>
+					  <beamStartOffset>0.5</beamStartOffset>
+					  <armorPenetrationBase>1.5</armorPenetrationBase>
+					</projectile>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Gun_BeamRepeater"]/verbs</xpath>
+				<value>
+					<verbs>
+					  <li>
+						<verbClass>Verb_Shoot</verbClass>
+						<hasStandardCommand>true</hasStandardCommand>
+						<defaultProjectile>Bullet_BeamRepeater</defaultProjectile>
+						<warmupTime>2</warmupTime>
+						<range>21.9</range>
+						<burstShotCount>30</burstShotCount>
+						<ticksBetweenBurstShots>8</ticksBetweenBurstShots>
+						<soundCast>Shot_BeamRepeater</soundCast>
+						<soundCastTail>GunTail_Medium</soundCastTail>
+						<muzzleFlashScale>9</muzzleFlashScale>
+						<aimingChargeMote>Mote_BeamRepeater_Charge</aimingChargeMote>
+						<aimingChargeMoteOffset>1.07</aimingChargeMoteOffset>
+					  </li>
+					</verbs>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+	
+</Patch>

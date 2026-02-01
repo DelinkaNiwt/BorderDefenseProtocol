@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <NIT_PawnAutoWearExpl>{0} получил задачу надеть {1}</NIT_PawnAutoWearExpl>
+  <NIT_BillCreatedExpl>Создана задача в {0} для {1}</NIT_BillCreatedExpl>
+  <NIT_Forbidden>(запр.) </NIT_Forbidden>
+  <NIT_MayDrop>(переоденет) </NIT_MayDrop>
+  <NIT_CannotDrop>Нельзя выбросить</NIT_CannotDrop>
+  <NIT_CannotConsumeThing>Нельзя съесть</NIT_CannotConsumeThing>
+  <NIT_Equip>Снарядить</NIT_Equip>
+  <NIT_MoveToInventory>Переместить в инвентарь</NIT_MoveToInventory>
+  <NIT_WearFromInventory>Надеть из инвентаря</NIT_WearFromInventory>
+</LanguageData>

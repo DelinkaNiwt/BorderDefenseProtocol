@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 谜题 -->
+
+  <GD_Puzzle.root.nodes.9.node.nodes.0.label>任务结束: [resolvedQuestName]</GD_Puzzle.root.nodes.9.node.nodes.0.label>
+  <GD_Puzzle.root.nodes.9.node.nodes.0.text>殖民者们已经离开了此地。</GD_Puzzle.root.nodes.9.node.nodes.0.text>
+  <GD_Puzzle.questDescriptionRules.rulesStrings.0>questDescription-&gt;一阵不寻常的信号传来，你的机械师凭借着丰富的经验立刻便意识到这段信号中藏有大量信息。经过分析，这段信号是从一座近处的古老堡垒中传来的。里面可能藏有一些珍贵的知识。</GD_Puzzle.questDescriptionRules.rulesStrings.0>
+  <GD_Puzzle.questNameRules.rulesStrings.0>questName-&gt;发现神秘坐标</GD_Puzzle.questNameRules.rulesStrings.0>
+
+
+</LanguageData>

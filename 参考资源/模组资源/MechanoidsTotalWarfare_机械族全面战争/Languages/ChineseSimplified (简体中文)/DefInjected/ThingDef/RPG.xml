@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: EMP-Guided Missile -->
+  <TW_EMP_Guided_Missile.label>TODO</TW_EMP_Guided_Missile.label>
+  
+  <!-- EN: 制导火箭发射器-EMP导弹 -->
+  <TW_Guided_Rocket_Launcher_EMP.label>TODO</TW_Guided_Rocket_Launcher_EMP.label>
+  <!-- EN: "发射可追踪目标的高爆弹或EMP火箭弹，适用于精确打击。" -->
+  <TW_Guided_Rocket_Launcher_EMP.description>TODO</TW_Guided_Rocket_Launcher_EMP.description>
+  <!-- EN: Switch to HE -->
+  <TW_Guided_Rocket_Launcher_EMP.comps.CompFormChange.transformData.0.label>TODO</TW_Guided_Rocket_Launcher_EMP.comps.CompFormChange.transformData.0.label>
+  <!-- EN: Switch to HE -->
+  <TW_Guided_Rocket_Launcher_EMP.comps.CompFormChange.transformData.0.description>TODO</TW_Guided_Rocket_Launcher_EMP.comps.CompFormChange.transformData.0.description>
+  <!-- EN: barrel -->
+  <TW_Guided_Rocket_Launcher_EMP.tools.barrel.label>TODO</TW_Guided_Rocket_Launcher_EMP.tools.barrel.label>
+  <!-- EN: 制导火箭发射器-EMP导弹 -->
+  <TW_Guided_Rocket_Launcher_EMP.verbs.Verb_Shoot.label>TODO</TW_Guided_Rocket_Launcher_EMP.verbs.Verb_Shoot.label>
+  
+  <!-- EN: 制导火箭发射器-高爆导弹 -->
+  <TW_Guided_Rocket_Launcher_HE.label>TODO</TW_Guided_Rocket_Launcher_HE.label>
+  <!-- EN: "发射可追踪目标的高爆弹或EMP火箭弹，适用于精确打击。" -->
+  <TW_Guided_Rocket_Launcher_HE.description>TODO</TW_Guided_Rocket_Launcher_HE.description>
+  <!-- EN: Switch to EMP -->
+  <TW_Guided_Rocket_Launcher_HE.comps.CompFormChange.transformData.0.label>TODO</TW_Guided_Rocket_Launcher_HE.comps.CompFormChange.transformData.0.label>
+  <!-- EN: Switch to EMP -->
+  <TW_Guided_Rocket_Launcher_HE.comps.CompFormChange.transformData.0.description>TODO</TW_Guided_Rocket_Launcher_HE.comps.CompFormChange.transformData.0.description>
+  <!-- EN: barrel -->
+  <TW_Guided_Rocket_Launcher_HE.tools.barrel.label>TODO</TW_Guided_Rocket_Launcher_HE.tools.barrel.label>
+  <!-- EN: 制导火箭发射器-高爆导弹 -->
+  <TW_Guided_Rocket_Launcher_HE.verbs.Verb_Shoot.label>TODO</TW_Guided_Rocket_Launcher_HE.verbs.Verb_Shoot.label>
+  
+  <!-- EN: HE-Guided Missile -->
+  <TW_HE_Guided_Missile.label>TODO</TW_HE_Guided_Missile.label>
+  
+  <!-- EN: 4联制导火箭发射器-EMP导弹 -->
+  <TW_Quad_Guided_Rocket_Launcher_EMP.label>TODO</TW_Quad_Guided_Rocket_Launcher_EMP.label>
+  <!-- EN: "发射可追踪目标的高爆弹或EMP火箭弹，适用于精确打击。" -->
+  <TW_Quad_Guided_Rocket_Launcher_EMP.description>TODO</TW_Quad_Guided_Rocket_Launcher_EMP.description>
+  <!-- EN: Switch to HE -->
+  <TW_Quad_Guided_Rocket_Launcher_EMP.comps.CompFormChange.transformData.0.label>TODO</TW_Quad_Guided_Rocket_Launcher_EMP.comps.CompFormChange.transformData.0.label>
+  <!-- EN: Switch to HE -->
+  <TW_Quad_Guided_Rocket_Launcher_EMP.comps.CompFormChange.transformData.0.description>TODO</TW_Quad_Guided_Rocket_Launcher_EMP.comps.CompFormChange.transformData.0.description>
+  <!-- EN: barrel -->
+  <TW_Quad_Guided_Rocket_Launcher_EMP.tools.barrel.label>TODO</TW_Quad_Guided_Rocket_Launcher_EMP.tools.barrel.label>
+  <!-- EN: 4联制导火箭发射器-EMP导弹 -->
+  <TW_Quad_Guided_Rocket_Launcher_EMP.verbs.Verb_Shoot.label>TODO</TW_Quad_Guided_Rocket_Launcher_EMP.verbs.Verb_Shoot.label>
+  
+  <!-- EN: 4联制导火箭发射器-高爆导弹 -->
+  <TW_Quad_Guided_Rocket_Launcher_HE.label>TODO</TW_Quad_Guided_Rocket_Launcher_HE.label>
+  <!-- EN: "发射可追踪目标的高爆弹或EMP火箭弹，适用于精确打击。" -->
+  <TW_Quad_Guided_Rocket_Launcher_HE.description>TODO</TW_Quad_Guided_Rocket_Launcher_HE.description>
+  <!-- EN: Switch to EMP -->
+  <TW_Quad_Guided_Rocket_Launcher_HE.comps.CompFormChange.transformData.0.label>TODO</TW_Quad_Guided_Rocket_Launcher_HE.comps.CompFormChange.transformData.0.label>
+  <!-- EN: Switch to EMP -->
+  <TW_Quad_Guided_Rocket_Launcher_HE.comps.CompFormChange.transformData.0.description>TODO</TW_Quad_Guided_Rocket_Launcher_HE.comps.CompFormChange.transformData.0.description>
+  <!-- EN: barrel -->
+  <TW_Quad_Guided_Rocket_Launcher_HE.tools.barrel.label>TODO</TW_Quad_Guided_Rocket_Launcher_HE.tools.barrel.label>
+  <!-- EN: 4联制导火箭发射器-高爆导弹 -->
+  <TW_Quad_Guided_Rocket_Launcher_HE.verbs.Verb_Shoot.label>TODO</TW_Quad_Guided_Rocket_Launcher_HE.verbs.Verb_Shoot.label>
+  
+</LanguageData>

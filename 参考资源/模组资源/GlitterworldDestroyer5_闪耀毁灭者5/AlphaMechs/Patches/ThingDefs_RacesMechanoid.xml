@@ -1,0 +1,1327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	
+	<!-- 机械圣环 -->
+    <Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="AM_Aura"]/statBases</xpath>
+		<value>
+			<statBases>
+			  <MoveSpeed>5.15</MoveSpeed>
+			  <ArmorRating_Blunt>0.35</ArmorRating_Blunt>
+			  <ArmorRating_Sharp>0.70</ArmorRating_Sharp>
+			  <PsychicSensitivity>0</PsychicSensitivity>
+			  <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">3</BandwidthCost>
+			  <StaggerDurationFactor MayRequire="Ludeon.Rimworld.Biotech">0</StaggerDurationFactor>
+			</statBases>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="AM_Aura"]/tools</xpath>
+		<value>
+		  <tools>
+			<li>
+				<label>wing blade</label>
+				<capacities>
+					<li>Cut</li>
+					<li>Stab</li>
+				</capacities>
+				<power>27</power>
+				<cooldownTime>0.9</cooldownTime>
+				<armorPenetration>0.9</armorPenetration>
+				<linkedBodyPartsGroup>AM_WingBlades</linkedBodyPartsGroup>
+				<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+			</li>
+			<li>
+				<label>head</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>15</power>
+				<cooldownTime>2</cooldownTime>
+				<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+				<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+				<chanceFactor>0.2</chanceFactor>
+			</li>
+		  </tools>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/ThingDef[defName="AM_Aura"]</xpath>
+		<value>
+			<damageMultipliers>
+			  <li>
+				<damageDef>EMP</damageDef>
+				<multiplier>0.4</multiplier>
+			  </li>
+			</damageMultipliers>
+		</value>
+	</Operation>
+	
+	<!-- 机械剐蛛 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="AM_Daggersnout"]/statBases</xpath>
+		<value>
+			<statBases>
+			  <MoveSpeed>8.15</MoveSpeed>
+			  <ArmorRating_Blunt>0.25</ArmorRating_Blunt>
+			  <ArmorRating_Sharp>0.50</ArmorRating_Sharp>
+			  <PsychicSensitivity>0</PsychicSensitivity>
+			</statBases>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="AM_Daggersnout"]/tools</xpath>
+		<value>
+		  <tools>
+			<li>
+				<label>snout blade</label>
+				<capacities>
+					<li>Cut</li>
+					<li>Stab</li>
+				</capacities>
+				<power>6</power>
+				<armorPenetration>0.5</armorPenetration>
+				<cooldownTime>0.4</cooldownTime>
+				<linkedBodyPartsGroup>AM_NoseBlade</linkedBodyPartsGroup>
+				<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+			</li>
+
+			<li>
+				<label>head</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>7</power>
+				<cooldownTime>2</cooldownTime>
+				<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+				<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+				<chanceFactor>0.2</chanceFactor>
+			</li>
+		  </tools>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/ThingDef[defName="AM_Daggersnout"]</xpath>
+		<value>
+			<damageMultipliers>
+			  <li>
+				<damageDef>EMP</damageDef>
+				<multiplier>0.4</multiplier>
+			  </li>
+			</damageMultipliers>
+		</value>
+	</Operation>
+	
+	<!-- 机械灼螨 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="AM_Fireworm"]/statBases</xpath>
+		<value>
+			<statBases>
+				<MoveSpeed>2.7</MoveSpeed>
+				<ArmorRating_Blunt>0.60</ArmorRating_Blunt>
+				<ArmorRating_Sharp>1.00</ArmorRating_Sharp>
+				<PsychicSensitivity>0</PsychicSensitivity>
+				<BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">4</BandwidthCost>
+				<MechEnergyLossPerHP MayRequire="Ludeon.Rimworld.Biotech">0.2</MechEnergyLossPerHP>
+			</statBases>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="AM_Fireworm"]/tools</xpath>
+		<value>
+		  <tools>
+			<li>
+				<label>head</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>30</power>
+				<cooldownTime>2.6</cooldownTime>
+				<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+				<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+			</li>
+		  </tools>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/ThingDef[defName="AM_Fireworm"]</xpath>
+		<value>
+			<damageMultipliers>
+			  <li>
+				<damageDef>EMP</damageDef>
+				<multiplier>0.4</multiplier>
+			  </li>
+			  <li>
+				<damageDef>Flame</damageDef>
+				<multiplier>0</multiplier>
+			  </li>
+			</damageMultipliers>
+		</value>
+	</Operation>
+	
+	<!-- 机械蚁狮 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="AM_Goliath"]/statBases</xpath>
+		<value>
+			<statBases>
+				<MoveSpeed>2.7</MoveSpeed>
+				<ArmorRating_Blunt>0.60</ArmorRating_Blunt>
+				<ArmorRating_Sharp>1.40</ArmorRating_Sharp>
+				<PsychicSensitivity>0</PsychicSensitivity>
+				<BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">4</BandwidthCost>
+				<MechEnergyLossPerHP MayRequire="Ludeon.Rimworld.Biotech">0.2</MechEnergyLossPerHP>
+			</statBases>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="AM_Goliath"]/tools</xpath>
+		<value>
+		  <tools>
+			<li>
+				<label>head</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>30</power>
+				<cooldownTime>2.6</cooldownTime>
+				<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+				<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+			</li>
+		  </tools>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/ThingDef[defName="AM_Goliath"]</xpath>
+		<value>
+			<damageMultipliers>
+			  <li>
+				<damageDef>EMP</damageDef>
+				<multiplier>0.4</multiplier>
+			  </li>
+			</damageMultipliers>
+		</value>
+	</Operation>
+	
+	<!-- 机械霜甲 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="AM_Phalanx"]/statBases</xpath>
+		<value>
+			<statBases>
+				<MoveSpeed>2.7</MoveSpeed>
+				<ArmorRating_Blunt>0.60</ArmorRating_Blunt>
+				<ArmorRating_Sharp>1.00</ArmorRating_Sharp>
+				<PsychicSensitivity>0</PsychicSensitivity>
+				<BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">4</BandwidthCost>
+				<MechEnergyLossPerHP MayRequire="Ludeon.Rimworld.Biotech">0.2</MechEnergyLossPerHP>
+			</statBases>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="AM_Phalanx"]/tools</xpath>
+		<value>
+		  <tools>
+			<li>
+				<label>head</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>30</power>
+				<cooldownTime>2.6</cooldownTime>
+				<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+				<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+			</li>
+		  </tools>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/ThingDef[defName="AM_Phalanx"]</xpath>
+		<value>
+			<damageMultipliers>
+			  <li>
+				<damageDef>EMP</damageDef>
+				<multiplier>0.4</multiplier>
+			  </li>
+			</damageMultipliers>
+		</value>
+	</Operation>
+	
+	<!-- 机械破城重甲 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="AM_Siegebreaker"]/statBases</xpath>
+		<value>
+			<statBases>
+				<MoveSpeed>1.8</MoveSpeed>
+				<ArmorRating_Blunt>1.00</ArmorRating_Blunt>
+				<ArmorRating_Sharp>1.15</ArmorRating_Sharp>
+				<PsychicSensitivity>0</PsychicSensitivity>
+				<BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">8</BandwidthCost>
+				<MechEnergyLossPerHP MayRequire="Ludeon.Rimworld.Biotech">0.15</MechEnergyLossPerHP>
+			</statBases>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="AM_Siegebreaker"]/tools</xpath>
+		<value>
+		  <tools>
+			<li>
+				<label>head</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>50</power>
+				<cooldownTime>3.5</cooldownTime>
+				<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+				<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+			</li>
+		  </tools>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/ThingDef[defName="AM_Siegebreaker"]</xpath>
+		<value>
+			<damageMultipliers>
+			  <li>
+				<damageDef>EMP</damageDef>
+				<multiplier>0.4</multiplier>
+			  </li>
+			</damageMultipliers>
+		</value>
+	</Operation>
+	
+	<!--===== Biotech =====-->
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Biotech</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<operations>
+				<!-- 机械突击小蠊 -->
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Mech_Bellicor"]/statBases</xpath>
+					<value>
+						<statBases>
+							<MoveSpeed>4.5</MoveSpeed>
+							<MarketValue>1600</MarketValue>
+							<PsychicSensitivity>0</PsychicSensitivity>
+							<ArmorRating_Blunt>0.4</ArmorRating_Blunt>
+							<ArmorRating_Sharp>0.65</ArmorRating_Sharp>
+							<MechEnergyLossPerHP>0.75</MechEnergyLossPerHP>
+							<BandwidthCost>2</BandwidthCost>
+						</statBases>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Mech_Bellicor"]/tools</xpath>
+					<value>
+						<tools>
+							<li>
+								<label>head</label>
+								<capacities>
+									<li>Blunt</li>
+								</capacities>
+								<power>10</power>
+								<cooldownTime>0.8</cooldownTime>
+								<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+								<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+							</li>
+						</tools>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="AM_Mech_Bellicor"]</xpath>
+					<value>
+						<damageMultipliers>
+						  <li>
+							<damageDef>EMP</damageDef>
+							<multiplier>0.4</multiplier>
+						  </li>
+						</damageMultipliers>
+					</value>
+				</li>
+				<!-- 机械炮击小蠊 -->
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Mech_Artilleron"]/statBases</xpath>
+					<value>
+						<statBases>
+							<MoveSpeed>3.2</MoveSpeed>
+							<MarketValue>1600</MarketValue>
+							<PsychicSensitivity>0</PsychicSensitivity>
+							<ArmorRating_Blunt>0.4</ArmorRating_Blunt>
+							<ArmorRating_Sharp>0.65</ArmorRating_Sharp>
+							<MechEnergyLossPerHP>0.75</MechEnergyLossPerHP>
+							<BandwidthCost>2</BandwidthCost>
+						</statBases>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Mech_Artilleron"]/tools</xpath>
+					<value>
+						<tools>
+							<li>
+								<label>head</label>
+								<capacities>
+									<li>Blunt</li>
+								</capacities>
+								<power>10</power>
+								<cooldownTime>0.8</cooldownTime>
+								<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+								<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+							</li>
+						</tools>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="AM_Mech_Artilleron"]</xpath>
+					<value>
+						<damageMultipliers>
+						  <li>
+							<damageDef>EMP</damageDef>
+							<multiplier>0.4</multiplier>
+						  </li>
+						</damageMultipliers>
+					</value>
+				</li>
+				<!-- 闪击机 -->
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="AM_Blitzkrieg"]</xpath>
+					<value>
+						<statBases>
+							<MoveSpeed>5.8</MoveSpeed>
+						</statBases>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/AbilityDef[defName="AM_Detonate"]/comps</xpath>
+					<value>
+						<comps>
+							<li Class="AlphaMechs.CompProperties_Detonate">
+								<radius>4.9</radius>
+								<damageType>Bomb</damageType>
+								<damageAmount>100</damageAmount>
+								<soundCreated>MortarIncendiary_Explode</soundCreated>
+								<chanceToStartFire>0.5</chanceToStartFire>
+								<killUser>true</killUser>
+							</li>
+						</comps>
+					</value>
+				</li>
+				<!-- 机械重装卫螽 -->
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Mech_Legate"]/statBases</xpath>
+					<value>
+						<statBases>
+							<MoveSpeed>1.8</MoveSpeed>
+							<PsychicSensitivity>0</PsychicSensitivity>
+							<ArmorRating_Sharp>1.45</ArmorRating_Sharp>
+							<EnergyShieldRechargeRate>0.75</EnergyShieldRechargeRate>
+							<EnergyShieldEnergyMax>5</EnergyShieldEnergyMax>
+							<MeleeDoorDamageFactor>1.5</MeleeDoorDamageFactor>
+						</statBases>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Mech_Legate"]/tools</xpath>
+					<value>
+						<tools>
+							<li>
+								<label>head</label>
+								<capacities>
+								  <li>Demolish</li>
+								</capacities>
+								<power>28</power>
+								<cooldownTime>2</cooldownTime>
+								<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+								<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+								<chanceFactor>0.2</chanceFactor>
+							</li>
+						</tools>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Mech_Legate"]/comps</xpath>
+					<value>
+						<comps>
+						  <li Class="CompProperties_ProjectileInterceptor">
+							<radius>12</radius>
+							<interceptGroundProjectiles>true</interceptGroundProjectiles>
+							<color>(0.4, 0.4, 0.4)</color>
+							<reactivateEffect>BulletShieldGenerator_Reactivate</reactivateEffect>
+							<activeSound>BulletShield_Ambience</activeSound>
+							<hitPoints>5250</hitPoints>
+							<hitPointsRestoreInstantlyAfterCharge>true</hitPointsRestoreInstantlyAfterCharge>
+							<chargeDurationTicks>1800</chargeDurationTicks><!-- 30s -->
+							<rechargeHitPointsIntervalTicks>3</rechargeHitPointsIntervalTicks>
+							<minIdleAlpha>0.2</minIdleAlpha>
+							<drawWithNoSelection>True</drawWithNoSelection>
+							<disarmedByEmpForTicks>900</disarmedByEmpForTicks>
+							<gizmoTipKey>ProjectileInterceptorTip</gizmoTipKey>
+						  </li>
+						</comps>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/PawnKindDef[defName="AM_Mech_Legate"]</xpath>
+					<value>
+					  <abilities>
+						<li>MechPlaceShield</li>
+					  </abilities>
+					</value>
+				</li>
+				<!-- 机械士螳 -->
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Mech_Munifex"]/statBases</xpath>
+					<value>
+						<statBases>
+							<MoveSpeed>4.95</MoveSpeed>
+						    <ArmorRating_Blunt>0.85</ArmorRating_Blunt>
+						    <ArmorRating_Sharp>0.85</ArmorRating_Sharp>
+						    <PsychicSensitivity>0</PsychicSensitivity>
+							<BandwidthCost>4</BandwidthCost>
+						</statBases>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Mech_Munifex"]/tools</xpath>
+					<value>
+						<tools>
+							<li>
+								<label>left fist</label>
+								<capacities>
+									<li>Blunt</li>
+								</capacities>
+								<power>12.0</power>
+								<cooldownTime>1</cooldownTime>
+								<linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+								<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+							</li>
+							<li>
+								<label>right fist</label>
+								<capacities>
+									<li>Blunt</li>
+								</capacities>
+								<power>12.0</power>
+								<cooldownTime>1</cooldownTime>
+								<linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+								<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+							</li>
+							<li>
+								<label>head</label>
+								<capacities>
+									<li>Blunt</li>
+								</capacities>
+								<power>8.5</power>
+								<cooldownTime>1</cooldownTime>
+								<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+								<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+								<chanceFactor>0.2</chanceFactor>
+							</li>
+						</tools>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="AM_Mech_Munifex"]</xpath>
+					<value>
+						<damageMultipliers>
+						  <li>
+							<damageDef>EMP</damageDef>
+							<multiplier>0.4</multiplier>
+						  </li>
+						</damageMultipliers>
+					</value>
+				</li>
+				<!-- 机械磁螳 -->
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Mech_Sagittarius"]/statBases</xpath>
+					<value>
+						<statBases>
+							<MoveSpeed>4.95</MoveSpeed>
+						    <ArmorRating_Blunt>0.85</ArmorRating_Blunt>
+						    <ArmorRating_Sharp>0.85</ArmorRating_Sharp>
+						    <PsychicSensitivity>0</PsychicSensitivity>
+							<BandwidthCost>4</BandwidthCost>
+						</statBases>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Mech_Sagittarius"]/tools</xpath>
+					<value>
+						<tools>
+							<li>
+								<label>left fist</label>
+								<capacities>
+									<li>Blunt</li>
+								</capacities>
+								<power>12.0</power>
+								<cooldownTime>1</cooldownTime>
+								<linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+								<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+							</li>
+							<li>
+								<label>right fist</label>
+								<capacities>
+									<li>Blunt</li>
+								</capacities>
+								<power>12.0</power>
+								<cooldownTime>1</cooldownTime>
+								<linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+								<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+							</li>
+							<li>
+								<label>head</label>
+								<capacities>
+									<li>Blunt</li>
+								</capacities>
+								<power>8.5</power>
+								<cooldownTime>1</cooldownTime>
+								<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+								<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+								<chanceFactor>0.2</chanceFactor>
+							</li>
+						</tools>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="AM_Mech_Sagittarius"]</xpath>
+					<value>
+						<damageMultipliers>
+						  <li>
+							<damageDef>EMP</damageDef>
+							<multiplier>0.4</multiplier>
+						  </li>
+						</damageMultipliers>
+					</value>
+				</li>
+				<!-- 机械重型盾螳 -->
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Mech_Optio"]/statBases</xpath>
+					<value>
+						<statBases>
+							<MarketValue>1800</MarketValue>
+							<MoveSpeed>4.5</MoveSpeed>
+							<EnergyShieldRechargeRate>0.25</EnergyShieldRechargeRate>
+							<EnergyShieldEnergyMax>2</EnergyShieldEnergyMax>
+							<BandwidthCost>3</BandwidthCost>
+							<ControlTakingTime>25</ControlTakingTime>
+							<ArmorRating_Blunt>0.55</ArmorRating_Blunt>
+							<ArmorRating_Sharp>0.85</ArmorRating_Sharp>
+						</statBases>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="AM_Mech_Optio"]</xpath>
+					<value>
+						<tools>
+							<li>
+								<label>left fist</label>
+								<capacities>
+									<li>Blunt</li>
+								</capacities>
+								<power>12.0</power>
+								<cooldownTime>1</cooldownTime>
+								<linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+								<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+							</li>
+							<li>
+								<label>right fist</label>
+								<capacities>
+									<li>Blunt</li>
+								</capacities>
+								<power>12.0</power>
+								<cooldownTime>1</cooldownTime>
+								<linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+								<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+							</li>
+							<li>
+								<label>head</label>
+								<capacities>
+									<li>Blunt</li>
+								</capacities>
+								<power>8.5</power>
+								<cooldownTime>1</cooldownTime>
+								<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+								<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+								<chanceFactor>0.2</chanceFactor>
+							</li>
+						</tools>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Mech_Optio"]/comps</xpath>
+					<value>
+						<comps>
+						  <li Class="CompProperties_ProjectileInterceptor">
+								<radius>5</radius>
+								<interceptGroundProjectiles>true</interceptGroundProjectiles>
+								<color>(0.8, 0.4, 0.4)</color>
+								<reactivateEffect>BulletShieldGenerator_Reactivate</reactivateEffect>
+								<activeSound>BulletShield_Ambience</activeSound>
+								<hitPoints>650</hitPoints>
+								<hitPointsRestoreInstantlyAfterCharge>true</hitPointsRestoreInstantlyAfterCharge>
+								<rechargeHitPointsIntervalTicks>3</rechargeHitPointsIntervalTicks>
+								<chargeDurationTicks>5400</chargeDurationTicks>
+								<!-- 90s -->
+								<drawWithNoSelection>True</drawWithNoSelection>
+								<disarmedByEmpForTicks>1500</disarmedByEmpForTicks>
+								<gizmoTipKey>ProjectileInterceptorTip</gizmoTipKey>
+							</li>
+						</comps>
+					</value>
+				</li>
+				<!-- 机械重型耀螳 -->
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Mech_Polychoron"]/statBases</xpath>
+					<value>
+						<statBases>
+							<BandwidthCost>4</BandwidthCost>
+							<ControlTakingTime>25</ControlTakingTime>
+							<ArmorRating_Blunt>0.55</ArmorRating_Blunt>
+							<ArmorRating_Sharp>0.95</ArmorRating_Sharp>
+							<MoveSpeed>4.4</MoveSpeed>
+						</statBases>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="AM_Mech_Polychoron"]</xpath>
+					<value>
+						<tools>
+							<li>
+								<label>left fist</label>
+								<capacities>
+									<li>Blunt</li>
+								</capacities>
+								<power>12.0</power>
+								<cooldownTime>1</cooldownTime>
+								<linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+								<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+							</li>
+							<li>
+								<label>right fist</label>
+								<capacities>
+									<li>Blunt</li>
+								</capacities>
+								<power>12.0</power>
+								<cooldownTime>1</cooldownTime>
+								<linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+								<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+							</li>
+							<li>
+								<label>head</label>
+								<capacities>
+									<li>Blunt</li>
+								</capacities>
+								<power>8.5</power>
+								<cooldownTime>1</cooldownTime>
+								<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+								<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+								<chanceFactor>0.2</chanceFactor>
+							</li>
+						</tools>
+					</value>
+				</li>
+				<!-- 机械熔烬重甲 -->
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Siegemelter"]/statBases</xpath>
+					<value>
+						<statBases>
+							<MoveSpeed>1.8</MoveSpeed>
+							<ArmorRating_Blunt>1.00</ArmorRating_Blunt>
+							<ArmorRating_Sharp>1.15</ArmorRating_Sharp>
+							<PsychicSensitivity>0</PsychicSensitivity>
+							<BandwidthCost>8</BandwidthCost>
+							<MechEnergyLossPerHP>0.15</MechEnergyLossPerHP>
+						</statBases>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Siegemelter"]/tools</xpath>
+					<value>
+						<tools>
+							<li>
+								<label>head</label>
+								<capacities>
+									<li>Blunt</li>
+								</capacities>
+								<power>50</power>
+								<cooldownTime>3.5</cooldownTime>
+								<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+								<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+							</li>
+						</tools>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="AM_Siegemelter"]</xpath>
+					<value>
+						<damageMultipliers>
+						  <li>
+							<damageDef>EMP</damageDef>
+							<multiplier>0.4</multiplier>
+						  </li>
+						  <li>
+							<damageDef>Flame</damageDef>
+							<multiplier>0</multiplier>
+						  </li>
+						</damageMultipliers>
+					</value>
+				</li>
+				<!-- 机械星火重甲 -->
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Starfire"]/statBases</xpath>
+					<value>
+						<statBases>
+							<MoveSpeed>1.8</MoveSpeed>
+							<ArmorRating_Blunt>1.00</ArmorRating_Blunt>
+							<ArmorRating_Sharp>1.25</ArmorRating_Sharp>
+							<PsychicSensitivity>0</PsychicSensitivity>
+							<BandwidthCost>15</BandwidthCost>
+							<MechEnergyLossPerHP>0.15</MechEnergyLossPerHP>
+						</statBases>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Starfire"]/tools</xpath>
+					<value>
+						<tools>
+							<li>
+								<label>head</label>
+								<capacities>
+									<li>Blunt</li>
+								</capacities>
+								<power>50</power>
+								<cooldownTime>3.5</cooldownTime>
+								<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+								<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+							</li>
+						</tools>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="AM_Starfire"]</xpath>
+					<value>
+						<damageMultipliers>
+						  <li>
+							<damageDef>EMP</damageDef>
+							<multiplier>0.4</multiplier>
+						  </li>
+						</damageMultipliers>
+					</value>
+				</li>
+				<!--=== BOSS ===-->
+				<!-- 恐惧 -->
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="AM_Infernus" or defName="AM_WarEmpress"]/comps</xpath>
+					<value>
+						<li Class="GD3.CompProperties_HitArmor">
+							<hediffToAdd>GD_HitArmor</hediffToAdd>
+							<duration>60</duration>
+							<limitOfTimes>25</limitOfTimes>
+						</li>
+						<li Class="GD3.CompProperties_Terror">
+							<range>49</range>
+							<interval>150</interval>
+							<applyThought>true</applyThought>
+							<thought>GD_Terror</thought>
+							<hediff>GD_Terror</hediff>
+							<severityToAdd>0.015</severityToAdd>
+							<terrorLevel>20</terrorLevel>
+						</li>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="AM_WarEmpress"]/comps</xpath>
+					<value>
+						<li Class="GD3.CompProperties_AllDead">
+							<toggleLabelKey>GD.KillAllGutter</toggleLabelKey>
+							<toggleDescKey>GD.KillAllGutterDesc</toggleDescKey>
+							<toggleIconPath>UI/Buttons/GD_ClearGuttersnipe</toggleIconPath>
+							<unableKey>GD.CanNotKillGutter</unableKey>
+							<mechanoidToKill>AM_Mech_Guttersnipe</mechanoidToKill>
+						</li>
+						<li Class="GD3.CompProperties_AttackMode">
+							<label>GD.AttackMode</label>
+							<description>GD.AttackModeDesc</description>
+							<UI>UI/Buttons/AutoAttack_WarEmpress</UI>
+						</li>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="AM_Apoptosis"]/comps</xpath>
+					<value>
+						<li Class="GD3.CompProperties_HitArmor">
+							<hediffToAdd>GD_HitArmor</hediffToAdd>
+							<duration>60</duration>
+							<limitOfTimes>20</limitOfTimes>
+						</li>
+						<li Class="GD3.CompProperties_PsychicAttack">
+							<interval>58~59</interval>
+							<minDistance>55</minDistance>
+							<actPeriod>25</actPeriod>
+							<hediffToAdd>MindSuppression</hediffToAdd>
+						</li>
+						<li Class="GD3.CompProperties_Terror">
+							<range>59</range>
+							<interval>150</interval>
+							<applyThought>true</applyThought>
+							<thought>GD_Terror</thought>
+							<hediff>GD_Terror</hediff>
+							<severityToAdd>0.02</severityToAdd>
+							<terrorLevel>30</terrorLevel>
+						</li>
+					</value>
+				</li>
+				<!-- 炼狱冥神 -->
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Infernus"]/statBases</xpath>
+					<value>
+						<statBases>
+							<ArmorRating_Blunt>1.1</ArmorRating_Blunt>
+							<ArmorRating_Sharp>0.9</ArmorRating_Sharp>
+							<ArmorRating_Heat>0</ArmorRating_Heat>
+							<EMPResistance>0</EMPResistance>
+							<BandwidthCost>30</BandwidthCost>
+							<MoveSpeed>2.7</MoveSpeed>
+							<PsychicSensitivity>0</PsychicSensitivity>
+							<EnergyShieldRechargeRate>1</EnergyShieldRechargeRate>
+							<EnergyShieldEnergyMax>5</EnergyShieldEnergyMax>
+							<IncomingDamageFactor>0.5</IncomingDamageFactor>
+							<MaxHitPoints>500</MaxHitPoints>
+						</statBases>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Infernus"]/race</xpath>
+					<value>
+						<race>
+							<body>Mech_Diabolus</body>
+							<baseBodySize>7.8</baseBodySize>
+							<lifeStageAges>
+								<li>
+									<def>MechanoidFullyFormed</def>
+									<minAge>0</minAge>
+									<soundWounded>Pawn_Mech_Diabolus_Wounded</soundWounded>
+									<soundDeath>Pawn_Mech_Diabolus_Death</soundDeath>
+									<soundCall>Pawn_Mech_Diabolus_Call</soundCall>
+								</li>
+								<li>
+									<def>MechanoidFullyFormed</def>
+									<minAge>100</minAge>
+									<soundWounded>Pawn_Mech_Diabolus_Wounded</soundWounded>
+									<soundDeath>Pawn_Mech_Diabolus_Death</soundDeath>
+									<soundCall>Pawn_Mech_Diabolus_Call</soundCall>
+								</li>
+							</lifeStageAges>
+							<hediffGiverSets>
+							  <li>Introduction_Infernus</li>
+							</hediffGiverSets>
+							<baseHealthScale>10.5</baseHealthScale>
+						</race>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Infernus"]/tools</xpath>
+					<value>
+						<tools>
+							<li>
+								<label>head</label>
+								<capacities>
+									<li>Blunt</li>
+								</capacities>
+								<power>50</power>
+								<cooldownTime>2.0</cooldownTime>
+								<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+								<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+							</li>
+						</tools>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/PawnKindDef[defName="AM_Infernus"]/abilities</xpath>
+					<value>
+						<abilities>
+							<li>MechFireBurst</li>
+						</abilities>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="AM_Infernus"]</xpath>
+					<value>
+						<damageMultipliers>
+						  <li>
+							<damageDef>Flame</damageDef>
+							<multiplier>6</multiplier>
+						  </li>
+						  <li>
+							<damageDef>Beam</damageDef>
+							<multiplier>10</multiplier>
+						  </li>
+						  <li>
+							<damageDef>AM_PowerfulBeam</damageDef>
+							<multiplier>8</multiplier>
+						  </li>
+						  <li>
+							<damageDef>VaporizeSec</damageDef>
+							<multiplier>0</multiplier>
+						  </li>
+						</damageMultipliers>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="AM_Infernus"]</xpath>
+					<value>
+						<butcherProducts Inherit="false">
+							<Steel>400</Steel>
+							<Plasteel>200</Plasteel>
+							<PrecisionDeck>75</PrecisionDeck>
+						</butcherProducts>
+					</value>
+				</li>
+				<!-- 战争女帝 -->
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_WarEmpress"]/statBases</xpath>
+					<value>
+						<statBases>
+							<MoveSpeed>2.45</MoveSpeed>
+							<EnergyShieldRechargeRate>1</EnergyShieldRechargeRate>
+						    <EnergyShieldEnergyMax>5</EnergyShieldEnergyMax>
+						    <ArmorRating_Blunt>0.85</ArmorRating_Blunt>
+							<ArmorRating_Sharp>1.35</ArmorRating_Sharp>
+							<ArmorRating_Heat>2</ArmorRating_Heat>
+							<PsychicSensitivity>0</PsychicSensitivity>
+							<MeleeDoorDamageFactor>1.5</MeleeDoorDamageFactor>
+							<EMPResistance>0</EMPResistance>
+							<BandwidthCost>30</BandwidthCost>
+							<MaxHitPoints>500</MaxHitPoints>
+						</statBases>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_WarEmpress"]/race</xpath>
+					<value>
+						<race>
+							<body>AM_Mech_WarEmpress</body>
+							<baseBodySize>5</baseBodySize>
+							<lifeStageAges>
+								<li>
+									<def>MechanoidFullyFormed</def>
+									<minAge>0</minAge>
+									<soundWounded>Pawn_Mech_Warqueen_Wounded</soundWounded>
+									<soundDeath>Pawn_Mech_Warqueen_Death</soundDeath>
+									<soundCall>Pawn_Mech_Warqueen_Call</soundCall>
+								</li>
+								<li>
+									<def>MechanoidFullyFormed</def>
+									<minAge>100</minAge>
+									<soundWounded>Pawn_Mech_Warqueen_Wounded</soundWounded>
+									<soundDeath>Pawn_Mech_Warqueen_Death</soundDeath>
+									<soundCall>Pawn_Mech_Warqueen_Call</soundCall>
+								</li>
+							</lifeStageAges>
+							<hediffGiverSets>
+							  <li>Introduction_WarEmpress</li>
+							</hediffGiverSets>
+							<baseHealthScale>6.5</baseHealthScale>
+							<dutyBoss>AM_WarEmpress</dutyBoss>
+						</race>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_WarEmpress"]/tools</xpath>
+					<value>
+						<tools>
+							<li>
+								<label>left rending claws</label>
+								<capacities>
+									<li>Scratch</li>
+								</capacities>
+								<power>28</power>
+								<cooldownTime>0.75</cooldownTime>
+								<linkedBodyPartsGroup>LeftPowerClaw</linkedBodyPartsGroup>
+								<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+							</li>
+							<li>
+								<label>right rending claws</label>
+								<capacities>
+									<li>Scratch</li>
+								</capacities>
+								<power>28</power>
+								<cooldownTime>0.75</cooldownTime>
+								<linkedBodyPartsGroup>RightPowerClaw</linkedBodyPartsGroup>
+								<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+							</li>
+							<li>
+								<label>head</label>
+								<capacities>
+									<li>Blunt</li>
+								</capacities>
+								<power>35</power>
+								<cooldownTime>1</cooldownTime>
+								<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+								<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+								<chanceFactor>0.2</chanceFactor>
+							</li>
+						</tools>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_WarEmpress"]/comps/li[spawnPawnKind="AM_Mech_Guttersnipe"]</xpath>
+					<value>
+						<li Class="CompProperties_MechCarrier">
+							<spawnPawnKind>AM_Mech_Guttersnipe</spawnPawnKind>
+							<fixedIngredient>Plasteel</fixedIngredient>
+							<costPerPawn>25</costPerPawn>
+							<startingIngredientCount>1500</startingIngredientCount>
+							<maxIngredientCount>1500</maxIngredientCount>
+							<spawnEffecter>WarqueenWarUrchinsSpawned</spawnEffecter>
+							<spawnedMechEffecter>WarUrchinSpawned</spawnedMechEffecter>
+							<attachSpawnedEffecter>true</attachSpawnedEffecter>
+							<attachSpawnedMechEffecter>true</attachSpawnedMechEffecter>
+							<cooldownTicks>450</cooldownTicks>
+							<maxPawnsToSpawn>10</maxPawnsToSpawn>
+						</li>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="AM_WarEmpress"]</xpath>
+					<value>
+						<butcherProducts Inherit="false">
+							<Steel>200</Steel>
+							<Plasteel>300</Plasteel>
+							<PrecisionDeck>75</PrecisionDeck>
+						</butcherProducts>
+					</value>
+				</li>
+				<!-- 炮塔 -->
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Gun_SniperTurret"]/statBases</xpath>
+					<value>
+						<statBases>
+							<AccuracyTouch>0.82</AccuracyTouch>
+							<AccuracyShort>0.83</AccuracyShort>
+							<AccuracyMedium>0.94</AccuracyMedium>
+							<AccuracyLong>0.99</AccuracyLong>
+							<DeteriorationRate>0</DeteriorationRate>
+							<Mass>40</Mass>
+							<Flammability>0</Flammability>
+						</statBases>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Gun_SniperTurret"]/verbs</xpath>
+					<value>
+						<verbs>
+							<li>
+								<verbClass>Verb_Shoot</verbClass>
+								<defaultProjectile>AM_Bullet_SniperTurret</defaultProjectile>
+								<warmupTime>0</warmupTime>
+								<minRange>14.9</minRange>
+								<defaultCooldownTime>6.5</defaultCooldownTime>
+								<range>65.9</range>
+								<burstShotCount>1</burstShotCount>
+								<soundCast>AM_Shot</soundCast>
+								<soundCastTail>GunTail_Heavy</soundCastTail>
+								<muzzleFlashScale>18</muzzleFlashScale>
+								<consumeFuelPerShot>1</consumeFuelPerShot>
+							</li>
+						</verbs>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Bullet_SniperTurret"]/projectile</xpath>
+					<value>
+						<projectile>
+							<damageDef>Bullet</damageDef>
+							<damageAmountBase>85</damageAmountBase>
+							<speed>120</speed>
+						</projectile>
+					</value>
+				</li>
+				<!-- 战争御侍 -->
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Mech_Guttersnipe"]/statBases</xpath>
+					<value>
+						<statBases>
+							<MoveSpeed>11.45</MoveSpeed>
+							<ArmorRating_Blunt>0.45</ArmorRating_Blunt>
+							<ArmorRating_Sharp>0.85</ArmorRating_Sharp>
+						</statBases>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Mech_Guttersnipe"]/comps/li[totalPowerTicks=30000]</xpath>
+					<value>
+						<li Class="CompProperties_MechPowerCell">
+							<totalPowerTicks>15000</totalPowerTicks>
+						</li>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Mech_Guttersnipe"]/tools</xpath>
+					<value>
+						<tools>
+							<li>
+								<label>head</label>
+								<capacities>
+									<li>Cut</li>
+									<li>Stab</li>
+								</capacities>
+								<power>6</power>
+								<armorPenetration>0.65</armorPenetration>
+								<cooldownTime>0.4</cooldownTime>
+								<linkedBodyPartsGroup>AM_CircularSaw</linkedBodyPartsGroup>
+								<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+							</li>
+						</tools>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="AM_Mech_Guttersnipe"]/race</xpath>
+					<value>
+						<soundMeleeHitPawn>Pawn_Melee_MechanoidSlash_HitPawn</soundMeleeHitPawn>
+						<soundMeleeHitBuilding>Pawn_Melee_MechanoidSlash_HitBuilding</soundMeleeHitBuilding>
+						<soundMeleeMiss>Pawn_Melee_MechanoidSlash_Miss</soundMeleeMiss>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/BodyPartDef[defName="AM_CircularSaw"]/hitPoints</xpath>
+					<value>
+						<hitPoints>30</hitPoints>
+					</value>
+				</li>
+				<!-- 憎恶骇蜂 -->
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Apoptosis"]/statBases</xpath>
+					<value>
+						<statBases>
+							<MarketValue>1600</MarketValue>
+							<MoveSpeed>3.8</MoveSpeed>
+							<EnergyShieldRechargeRate>0.35</EnergyShieldRechargeRate>
+							<EnergyShieldEnergyMax>2.5</EnergyShieldEnergyMax>
+							<PsychicSensitivity>0</PsychicSensitivity>
+							<BandwidthCost>20</BandwidthCost>
+							<ControlTakingTime>30</ControlTakingTime>
+							<EMPResistance>0</EMPResistance>
+							<ArmorRating_Blunt>2</ArmorRating_Blunt>
+							<ArmorRating_Sharp>2</ArmorRating_Sharp>
+						</statBases>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Apoptosis"]/race</xpath>
+					<value>
+						<race>
+							<thinkTreeConstant>AM_MechConstant_LightResurrect</thinkTreeConstant>
+							<body>AM_ApocritonWinged</body>
+							<mechWeightClass>UltraHeavy</mechWeightClass>
+							<lifeStageAges Inherit="False">
+								<li>
+									<def>MechanoidFullyFormed</def>
+									<minAge>0</minAge>
+									<soundWounded>Pawn_Mech_Apocriton_Wounded</soundWounded>
+									<soundAngry>Pawn_Mech_Apocriton_Call</soundAngry>
+									<soundDeath>Pawn_Mech_Apocriton_Death</soundDeath>
+									<soundCall>Pawn_Mech_Apocriton_Call</soundCall>
+								</li>
+								<li>
+									<def>MechanoidFullyFormed</def>
+									<minAge>100</minAge>
+									<soundWounded>Pawn_Mech_Apocriton_Wounded</soundWounded>
+									<soundAngry>Pawn_Mech_Apocriton_Call</soundAngry>
+									<soundDeath>Pawn_Mech_Apocriton_Death</soundDeath>
+									<soundCall>Pawn_Mech_Apocriton_Call</soundCall>
+								</li>
+							</lifeStageAges>
+							<hediffGiverSets>
+							  <li>Introduction_Apoptosis</li>
+							</hediffGiverSets>
+							<baseHealthScale>6.5</baseHealthScale>
+							<soundMeleeHitPawn>Pawn_Melee_Punch_HitPawn</soundMeleeHitPawn>
+							<soundMeleeHitBuilding>Pawn_Melee_Punch_HitBuilding</soundMeleeHitBuilding>
+							<soundMeleeMiss>Pawn_Melee_Punch_Miss</soundMeleeMiss>
+							<soundAmbience>Pawn_Mech_Apocriton_Ambience</soundAmbience>
+						</race>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Apoptosis"]/tools</xpath>
+					<value>
+						<tools>
+							<li>
+								<label>wing blade</label>
+								<capacities>
+									<li>Cut</li>
+									<li>Stab</li>
+								</capacities>
+								<power>27</power>
+								<cooldownTime>1</cooldownTime>
+								<armorPenetration>0.9</armorPenetration>
+								<linkedBodyPartsGroup>AM_WingBlades</linkedBodyPartsGroup>
+								<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+							</li>
+							<li>
+								<label>head</label>
+								<capacities>
+									<li>Blunt</li>
+								</capacities>
+								<power>18</power>
+								<cooldownTime>1</cooldownTime>
+								<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+								<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+							</li>
+						</tools>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="AM_Apoptosis"]</xpath>
+					<value>
+						<damageMultipliers>
+						  <li>
+							<damageDef>EMP</damageDef>
+							<multiplier>0.9</multiplier>
+						  </li>
+						</damageMultipliers>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="AM_Apoptosis"]</xpath>
+					<value>
+						<butcherProducts Inherit="false">
+							<Steel>200</Steel>
+							<Plasteel>200</Plasteel>
+							<PrecisionDeck>75</PrecisionDeck>
+						</butcherProducts>
+					</value>
+				</li>
+				<!-- 炮塔 -->
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="AM_Gun_SoulDrainTurret"]/verbs</xpath>
+					<value>
+						<verbs>
+							<li>
+								<verbClass>Verb_Shoot</verbClass>
+								<defaultProjectile>AM_Bullet_SoulDrain</defaultProjectile>
+								<range>55</range>
+								<soundCast>AM_SoulDrain</soundCast>
+								<muzzleFlashScale>9</muzzleFlashScale>
+								<defaultCooldownTime>2.5</defaultCooldownTime>
+								<ticksBetweenBurstShots>150</ticksBetweenBurstShots>
+							</li>
+						</verbs>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+ 
+</Patch>

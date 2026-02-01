@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <RecipeDef ParentName="LightMechanoidRecipe">
+    <defName>Observer</defName>
+    <label>gestate observer</label>
+    <description>Gestate a observer mechanoid.</description>
+    <researchPrerequisite>HighMechtech</researchPrerequisite>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>100</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>SubcoreHigh</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <Mech_Observer>1</Mech_Observer>
+    </products>
+    <descriptionHyperlinks>
+      <ThingDef>Mech_Observer</ThingDef>
+    </descriptionHyperlinks>
+  </RecipeDef>
+  
+  <RecipeDef ParentName="MediumMechanoidRecipe">
+    <defName>Firefly</defName>
+    <label>gestate firefly</label>
+    <description>Gestate a firefly mechanoid.</description>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>125</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>250</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>4</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>SubcoreRegular</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <Mech_Firefly>1</Mech_Firefly>
+    </products>
+    <descriptionHyperlinks>
+      <ThingDef>Mech_Firefly</ThingDef>
+    </descriptionHyperlinks>
+	<researchPrerequisite>HighMechtech</researchPrerequisite>
+  </RecipeDef>
+  
+  <RecipeDef ParentName="MediumMechanoidRecipe">
+    <defName>ReconScyther</defName>
+    <label>gestate recon scyther</label>
+    <description>Gestate a recon scyther mechanoid.</description>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>125</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>50</count>
+      </li>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>Chemfuel</li>
+          </thingDefs>
+        </filter>
+        <count>50</count>
+      </li>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>PrecisionDeck</li>
+          </thingDefs>
+        </filter>
+        <count>20</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>SubcoreRegular</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <Mech_ReconScyther>1</Mech_ReconScyther>
+    </products>
+    <descriptionHyperlinks>
+      <ThingDef>Mech_ReconScyther</ThingDef>
+    </descriptionHyperlinks>
+	<gestationCycles>3</gestationCycles>
+	<researchPrerequisite>StandardMechtech</researchPrerequisite>
+  </RecipeDef>
+  
+  <RecipeDef ParentName="MediumMechanoidRecipe">
+    <defName>MarineLancer</defName>
+    <label>gestate marine lancer</label>
+    <description>Gestate a marine lancer mechanoid.</description>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>125</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>75</count>
+      </li>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>PrecisionDeck</li>
+          </thingDefs>
+        </filter>
+        <count>20</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>SubcoreHigh</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <Mech_MarineLancer>1</Mech_MarineLancer>
+    </products>
+    <descriptionHyperlinks>
+      <ThingDef>Mech_MarineLancer</ThingDef>
+    </descriptionHyperlinks>
+	<gestationCycles>4</gestationCycles>
+	<researchPrerequisite>HighMechtech</researchPrerequisite>
+  </RecipeDef>
+  
+  <RecipeDef ParentName="SuperHeavyMechanoidRecipe">
+    <defName>CataphractCentipede</defName>
+    <label>gestate cataphract centipede</label>
+    <description>Gestate a cataphract centipede mechanoid.</description>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>650</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>850</count>
+      </li>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>PrecisionDeck</li>
+          </thingDefs>
+        </filter>
+        <count>200</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>25</count>
+      </li>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>SubcoreHigh</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>AIPersonaCore</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <Mech_CataphractCentipede>1</Mech_CataphractCentipede>
+    </products>
+    <descriptionHyperlinks>
+      <ThingDef>Mech_CataphractCentipede</ThingDef>
+    </descriptionHyperlinks>
+	<gestationCycles>18</gestationCycles>
+  </RecipeDef>
+  
+  <RecipeDef ParentName="MediumMechanoidRecipe">
+    <defName>MechMosquito</defName>
+    <label>gestate recon scyther</label>
+    <description>Gestate a recon scyther mechanoid.</description>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>100</count>
+      </li>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>Chemfuel</li>
+          </thingDefs>
+        </filter>
+        <count>60</count>
+      </li>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>PrecisionDeck</li>
+          </thingDefs>
+        </filter>
+        <count>20</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>SubcoreRegular</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <Mech_Mosquito>1</Mech_Mosquito>
+    </products>
+    <descriptionHyperlinks>
+      <ThingDef>Mech_Mosquito</ThingDef>
+    </descriptionHyperlinks>
+	<gestationCycles>3</gestationCycles>
+	<researchPrerequisite>StandardMechtech</researchPrerequisite>
+  </RecipeDef>
+  
+  <!-- Termite -->
+  
+  <RecipeDef ParentName="MediumMechanoidRecipe">
+    <defName>Termite</defName>
+    <label>gestate termite</label>
+    <description>Gestate a termite mechanoid.</description>
+    <ingredients Inherit="False">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>125</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>75</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>SubcoreRegular</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <Mech_Termite>1</Mech_Termite>
+    </products>
+    <descriptionHyperlinks>
+      <ThingDef>Mech_Termite</ThingDef>
+    </descriptionHyperlinks>
+	<researchPrerequisite Inherit="false" />
+	<researchPrerequisites>
+	  <li>StandardMechtech</li>
+	  <li>GD3_GiantCluster_Small</li>
+	</researchPrerequisites>
+  </RecipeDef>
+  
+  <!-- Centipede swordman -->
+  <RecipeDef ParentName="CentipedeMechanoidRecipe">
+    <defName>Mech_CentipedeSword</defName>
+    <label>gestate centipede swordman</label>
+    <description>Gestate a centipede mechanoid armed with a saw.</description>
+    <products>
+      <Mech_CentipedeSword>1</Mech_CentipedeSword>
+    </products>
+    <descriptionHyperlinks>
+      <ThingDef>Mech_CentipedeSword</ThingDef>
+    </descriptionHyperlinks>
+  </RecipeDef>
+
+</Defs>

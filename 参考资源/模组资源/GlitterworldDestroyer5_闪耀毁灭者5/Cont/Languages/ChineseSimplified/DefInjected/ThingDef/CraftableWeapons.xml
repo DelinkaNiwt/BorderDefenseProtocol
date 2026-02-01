@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 反物质步枪 -->
+
+  <GD_AntimatterRifle.label>反物质步枪</GD_AntimatterRifle.label>
+  <GD_AntimatterRifle.description>你的殖民者从黑衣机械族的数据库中读取了利用反物质湮灭时能量的方法，但黑衣机械静螳是如何控制这种巨大能量的仍是个未解之谜。\n\n这把步枪能够发射威力强劲的反物质弹，但出于安全考虑威力有一定削弱。</GD_AntimatterRifle.description>
+  <GD_AntimatterRifle.tools.0.label>刀尖</GD_AntimatterRifle.tools.0.label>
+  <GD_AntimatterRifle.tools.1.label>刀刃</GD_AntimatterRifle.tools.1.label>
+
+  <Bullet_Antimatter.label>反物质弹</Bullet_Antimatter.label>
+
+  <!-- 低温仪式杖 -->
+
+  <GD_CryogenicCeremonialStaff.label>低温仪式剑</GD_CryogenicCeremonialStaff.label>
+  <GD_CryogenicCeremonialStaff.description>你的殖民者从黑衣机械族的数据库中读取了凭空消灭热量的的方法，但黑衣机械飞螳是如何实现反熵的仍是个未解之谜。\n\n这把致命的仪式剑能够对敌人造成低温冻伤，并产生EMP冲击。</GD_CryogenicCeremonialStaff.description>
+  <GD_CryogenicCeremonialStaff.tools.0.label>剑锋</GD_CryogenicCeremonialStaff.tools.0.label>
+  <GD_CryogenicCeremonialStaff.tools.1.label>剑刃</GD_CryogenicCeremonialStaff.tools.1.label>
+  
+  <!-- 燃烧火箭 -->
+
+  <GD_IncendiaryRocket.label>简易燃烧火箭筒</GD_IncendiaryRocket.label>
+  <GD_IncendiaryRocket.description>工序简单、造价低廉，尽管不是很可靠但这并不妨碍它成为攻坚战斗时士兵们的不二之选。\n\n产生的高温也能较轻松地损坏某些重甲单位的动力核心。</GD_IncendiaryRocket.description>
+  <GD_IncendiaryRocket.tools.0.label>筒身</GD_IncendiaryRocket.tools.0.label>
+
+  <GD_Bullet_IncendiaryRocket.label>燃烧火箭</GD_Bullet_IncendiaryRocket.label>
+  
+  <!-- EMP手炮 -->
+
+  <Gun_EmpHandCannon.label>EMP手炮</Gun_EmpHandCannon.label>
+  <Gun_EmpHandCannon.description>轻便可靠的反机械族武器，能够在一个相当长的距离将EMP榴弹投射出去，有效结合了EMP手雷与EMP发射器的优点。</Gun_EmpHandCannon.description>
+  <Gun_EmpHandCannon.tools.0.label>枪托</Gun_EmpHandCannon.tools.0.label>
+  <Gun_EmpHandCannon.tools.1.label>枪身</Gun_EmpHandCannon.tools.1.label>
+
+  <Bullet_EMPHandCannon.label>EMP榴弹</Bullet_EMPHandCannon.label>
+  
+  <!-- 海军心灵手雷 -->
+
+  <Weapon_PsychicGrenade.label>海军心灵手榴弹</Weapon_PsychicGrenade.label>
+  <Weapon_PsychicGrenade.description>从海军机械静螳身上汲取知识仿造出来的心灵手榴弹。爆发出的冲击波可以扰动敌人的启灵神经，使其眩晕、呕吐，严重者可能会倒地甚至死亡。\n\n不会伤害友军或者中立单位。</Weapon_PsychicGrenade.description>
+  <Weapon_PsychicGrenade.verbs.0.label>投掷手榴弹</Weapon_PsychicGrenade.verbs.0.label>
+
+  <Proj_PsychicGrenade.label>心灵手榴弹</Proj_PsychicGrenade.label>
+  
+  <!-- 万花筒 -->
+
+  <GD_Kaleidoscope.label>万花筒</GD_Kaleidoscope.label>
+  <GD_Kaleidoscope.description>你的殖民者从黑衣机械族的数据库中读取了高效运用多种类型武器的方法。\n\n这把霰弹枪能够同时打出密集的多种子弹，类型包括电荷、地狱火、高爆与EMP。小心误伤。</GD_Kaleidoscope.description>
+  <GD_Kaleidoscope.tools.0.label>枪托</GD_Kaleidoscope.tools.0.label>
+
+  <Bullet_Inferno_Kaleidoscope.label>狱火弹</Bullet_Inferno_Kaleidoscope.label>
+  <Bullet_Explode_Kaleidoscope.label>高爆弹</Bullet_Explode_Kaleidoscope.label>
+  <Bullet_EMP_Kaleidoscope.label>EMP弹</Bullet_EMP_Kaleidoscope.label>
+  
+  <!-- 电弧枪系列 -->
+  <GD_ArcThrower.label>电弧枪</GD_ArcThrower.label>
+  <GD_ArcThrower.description>你的殖民者从黑衣机械族的数据库中读取了灵活运用电流的方法。\n\n这把电弧投掷器能够对一小片敌人造成连锁烧伤，并产生EMP冲击。由于其内置了自动调节电压的系统，不会对附近的友军产生威胁。</GD_ArcThrower.description>
+  <GD_ArcThrower.tools.0.label>枪托</GD_ArcThrower.tools.0.label>
+  
+  <GD_Rumination.label>沉思</GD_Rumination.label>
+  <GD_Rumination.description>你时常能看到黑衣憎恶毒蜂在孤单地沉思。宇宙是那么浩瀚而深邃，你对它了解的越多，内心就越是惶恐。\n\n受到电击的敌人会同时在附近生成数发闪电箭。</GD_Rumination.description>
+  <GD_Rumination.tools.0.label>枪托</GD_Rumination.tools.0.label>
+
+</LanguageData>

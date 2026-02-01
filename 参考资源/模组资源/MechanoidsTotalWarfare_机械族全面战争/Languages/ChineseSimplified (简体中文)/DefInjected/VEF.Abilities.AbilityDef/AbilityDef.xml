@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 牵引 -->
+  <NCLBeckon.label>TODO</NCLBeckon.label>
+  <!-- EN: 将目标用牵引至身侧. -->
+  <NCLBeckon.description>TODO</NCLBeckon.description>
+  
+  <!-- EN: 潜龙 -->
+  <NCLBurrowAttack.label>TODO</NCLBurrowAttack.label>
+  <!-- EN: 从地下猛地钻出发出突击 -->
+  <NCLBurrowAttack.description>TODO</NCLBurrowAttack.description>
+  <!-- EN: jump -->
+  <NCLBurrowAttack.verbProperties.label>TODO</NCLBurrowAttack.verbProperties.label>
+  
+  <!-- EN: Chaotic Teleport -->
+  <NCLChaosTeleport.label>TODO</NCLChaosTeleport.label>
+  <!-- EN: Randomly teleports any colonists present on the entire map. -->
+  <NCLChaosTeleport.description>TODO</NCLChaosTeleport.description>
+  
+  <!-- EN: 重力突进 -->
+  <NCLJumpWithBomb.label>TODO</NCLJumpWithBomb.label>
+  <!-- EN: 猛的跳向目标并以体重碾压对手 -->
+  <NCLJumpWithBomb.description>TODO</NCLJumpWithBomb.description>
+  <!-- EN: jump -->
+  <NCLJumpWithBomb.verbProperties.label>TODO</NCLJumpWithBomb.verbProperties.label>
+  
+  <!-- EN: 驱逐 -->
+  <NCLPush.label>TODO</NCLPush.label>
+  <!-- EN: 将目标驱逐. -->
+  <NCLPush.description>TODO</NCLPush.description>
+  
+</LanguageData>

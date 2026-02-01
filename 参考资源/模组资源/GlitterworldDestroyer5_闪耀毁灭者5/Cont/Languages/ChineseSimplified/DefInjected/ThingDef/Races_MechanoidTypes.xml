@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!--<Mech_BlackScyther.label>黑衣机械飞螳</Mech_BlackScyther.label>-->
+  <!--<Mech_BlackScyther.description>一种由Archotech直接控制的机械飞螳，任务包括监视其它机械体的状况、测试新装备的性能……还有消灭有机体。\n\n他的两把镰刀如同单分子剑一样锋利，内含的纳米机械体能够对有机体造成冻伤。</Mech_BlackScyther.description>-->
+  <!--<Mech_BlackScyther.tools.0.label>左镰刀</Mech_BlackScyther.tools.0.label>-->
+  <!--<Mech_BlackScyther.tools.1.label>右镰刀</Mech_BlackScyther.tools.1.label>-->
+  <!--<Mech_BlackScyther.tools.2.label>头</Mech_BlackScyther.tools.2.label>-->
+  <!--<Mech_BlackLancer.label>黑衣机械静螳</Mech_BlackLancer.label>-->
+  <!--<Mech_BlackLancer.description>一种由Archotech直接控制的机械静螳，任务包括监视其它机械体的状况、测试新装备的性能……还有消灭有机体。\n\n他使用的特制电荷弹能够一发击穿大部分的太空时代材料，因此也被计划用于机械族战舰上。</Mech_BlackLancer.description>-->
+  <!--<Mech_BlackLancer.tools.0.label>左拳</Mech_BlackLancer.tools.0.label>-->
+  <!--<Mech_BlackLancer.tools.1.label>右拳</Mech_BlackLancer.tools.1.label>-->
+  <!--<Mech_BlackLancer.tools.2.label>头</Mech_BlackLancer.tools.2.label>-->
+  
+  <Mech_CentipedeSword.label>机械锯杀蜈蚣</Mech_CentipedeSword.label>
+  <Mech_CentipedeSword.description>一种装备了重型等离子锯的机械蜈蚣，能够在大卸八块敌人的同时将其烤至三分熟。</Mech_CentipedeSword.description>
+
+</LanguageData>

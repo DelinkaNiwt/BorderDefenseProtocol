@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <WorkGiverDef>
+    <defName>GD_Hack</defName>
+    <label>hack at communication station</label>
+    <giverClass>GD3.WorkGiver_CommunicationStation</giverClass>
+    <priorityInType>105</priorityInType>
+    <workType>Research</workType>
+    <verb>hack</verb>
+    <gerund>hacking at</gerund>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <canBeDoneByMechs>false</canBeDoneByMechs>
+  </WorkGiverDef>
+  
+  <WorkGiverDef>
+    <defName>GD_UpgradeTurret</defName>
+    <label>reinforcing a turret</label>
+    <giverClass>GD3.WorkGiver_UpgradeTurret</giverClass>
+    <priorityInType>30</priorityInType>
+    <workType>Construction</workType>
+    <verb>reinforce</verb>
+    <gerund>reinforcing</gerund>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <nonColonistsCanDo>true</nonColonistsCanDo>
+    <canBeDoneByMechs>true</canBeDoneByMechs>
+  </WorkGiverDef>
+  
+  <WorkGiverDef>
+    <defName>GD_HaulDecksToTurret</defName>
+    <label>preparing precision decks</label>
+    <giverClass>GD3.WorkGiver_AddDecks</giverClass>
+    <workType>Hauling</workType>
+    <verb>prepare</verb>
+    <gerund>preparing</gerund>
+    <priorityInType>150</priorityInType>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <prioritizeSustains>true</prioritizeSustains>
+  </WorkGiverDef>
+  
+  <WorkGiverDef>
+    <defName>GD_FixTurret</defName>
+    <label>fixing a turret</label>
+    <giverClass>GD3.WorkGiver_FixTurret</giverClass>
+    <priorityInType>30</priorityInType>
+    <workType>Construction</workType>
+    <verb>fix</verb>
+    <gerund>fixing</gerund>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <nonColonistsCanDo>true</nonColonistsCanDo>
+    <canBeDoneByMechs>true</canBeDoneByMechs>
+  </WorkGiverDef>
+
+</Defs>

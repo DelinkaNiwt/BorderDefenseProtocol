@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ResearchTabDef>
+    <defName>NCL_Research</defName>
+    <label>机械族：全面战争</label>
+  </ResearchTabDef>
+  
+    <ResearchProjectDef>
+    <defName>NCL_Standard_Issue</defName>
+    <label>标准配装</label>
+    <description>"解锁NCL标准突击步枪和自卫冲锋枪的制造技术。"</description>
+    <techLevel>Spacer</techLevel>
+    <baseCost>1000</baseCost>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+      <li>GasOperation</li>
+	  <li>NCL_Ashes_to_Signal</li>
+    </prerequisites>
+    <tab>NCL_Research</tab><!--科技-->
+    <researchViewX>1</researchViewX>
+    <researchViewY>0</researchViewY>
+  </ResearchProjectDef>
+  
+    <ResearchProjectDef>
+    <defName>NCL_Protective_Gear</defName>
+    <label>特种作战防护服研发</label>
+    <description>"科研两种尖端单兵防护装备：战术隐形斗篷与生物强化作战服，以提升特种部队生存能力。"</description>
+    <techLevel>Spacer</techLevel>
+    <baseCost>4000</baseCost>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+      <li>NCL_Standard_Issue</li>
+	  <li>PoweredArmor</li>
+    </prerequisites>
+    <tab>NCL_Research</tab><!--科技-->
+    <researchViewX>2</researchViewX>
+    <researchViewY>0</researchViewY>
+    <requiredResearchFacilities><!--所需设施-->
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+  </ResearchProjectDef>
+  
+  <ResearchProjectDef>
+    <defName>NCL_Ashes_to_Signal</defName>
+    <label>星火传音</label>
+    <description>"破译红色魔方中的加密信号，建立与NCL机械网络的初步连接。这是你踏入机械战争领域的第一步。"</description>
+    <techLevel>Spacer</techLevel>
+    <baseCost>500</baseCost>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+    </prerequisites>
+    <tab>NCL_Research</tab>
+    <researchViewX>0</researchViewX>
+    <researchViewY>3</researchViewY>
+	<requiredAnalyzed>
+      <li>NCL_RedCube</li>
+    </requiredAnalyzed>
+    <generalRules>
+      <rulesStrings>
+        <li>subject->mechanoids</li>
+
+        <li>subject_story->acquired a Red Cube in shady circumstances</li>
+        <li>subject_story->found an intact Red Cube in a War Scorpion wreck</li>
+        <li>subject_gerund->unlocking certain technologies</li>
+      </rulesStrings>
+    </generalRules>
+  </ResearchProjectDef>
+  
+    <ResearchProjectDef>
+    <defName>NCL_Vanguard_Units</defName>
+    <label>先锋机械</label>
+    <description>"解锁中型机械单位制造技术。"</description>
+    <techLevel>Spacer</techLevel>
+    <baseCost>1000</baseCost>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+      <li>NCL_Ashes_to_Signal</li>
+	  <li>StandardMechtech</li>
+    </prerequisites>
+    <tab>NCL_Research</tab>
+    <researchViewX>1</researchViewX>
+    <researchViewY>3</researchViewY>
+    <requiredResearchFacilities>
+    </requiredResearchFacilities>
+  </ResearchProjectDef>
+  
+    <ResearchProjectDef>
+    <defName>NCL_Helios_PD_Turret</defName>
+    <label>激光点防御炮塔</label>
+    <description>"研发激光拦截系统，能够有效防御火箭、炮弹和低速飞行器的攻击。"</description>
+    <techLevel>Spacer</techLevel>
+    <baseCost>1000</baseCost>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+      <li>NCL_Advance_Battery</li>
+    </prerequisites>
+    <tab>NCL_Research</tab>
+    <researchViewX>2</researchViewX>
+    <researchViewY>2</researchViewY>
+    <requiredResearchFacilities>
+    </requiredResearchFacilities>
+  </ResearchProjectDef>
+
+      <ResearchProjectDef>
+    <defName>NCL_Vertical_Launch_Interception_System</defName>
+    <label>垂发拦截系统</label>
+    <description>"研发“铁雨”垂发拦截系统，系统可远程自动跟踪敌方导弹及爆破敌方本体，实现全地图范围防御。"</description>
+    <techLevel>Spacer</techLevel>
+    <baseCost>5000</baseCost>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+      <li>NCL_Helios_PD_Turret</li>
+    </prerequisites>
+    <tab>NCL_Research</tab>
+    <researchViewX>3</researchViewX>
+    <researchViewY>2</researchViewY>
+    <requiredResearchFacilities>
+    </requiredResearchFacilities>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>NCL_Advance_Battery</defName>
+    <label>高效蓄能</label>
+    <description>"研发蓄能效率更高，蓄电量更大的电池组。"</description>
+    <techLevel>Spacer</techLevel>
+    <baseCost>1000</baseCost>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+      <li>NCL_Ashes_to_Signal</li>
+      <li>Batteries</li>
+    </prerequisites>
+    <tab>NCL_Research</tab>
+    <researchViewX>1</researchViewX>
+    <researchViewY>2</researchViewY>
+    <requiredResearchFacilities>
+    </requiredResearchFacilities>
+  </ResearchProjectDef>
+
+    <ResearchProjectDef>
+    <defName>NCL_Advance_Nuclear_Power</defName>
+    <label>先进核能</label>
+    <description>"研发可弹性输出的模块化核能装置。"</description>
+    <techLevel>Spacer</techLevel>
+    <baseCost>8000</baseCost>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+      <li>NCL_Advance_Battery</li>
+      <li>MultiAnalyzer</li>
+    </prerequisites>
+    <tab>NCL_Research</tab>
+    <researchViewX>2</researchViewX>
+    <researchViewY>1</researchViewY>
+    <requiredResearchFacilities>
+    </requiredResearchFacilities>
+  </ResearchProjectDef>
+
+    <ResearchProjectDef>
+    <defName>NCL_SpectreNet_Array</defName>
+    <label>警戒穹顶反隐系统</label>
+    <description>"研发战略级反隐形雷达设施，可侦测范围内所有隐形单位，并为机械部队提供战场感知支援。"</description>
+    <techLevel>Spacer</techLevel>
+    <baseCost>2000</baseCost>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+      <li>NCL_Research_of_megastructures</li>
+    </prerequisites>
+    <tab>NCL_Research</tab>
+    <researchViewX>2</researchViewX>
+    <researchViewY>4</researchViewY>
+    <requiredResearchFacilities>
+		<li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+  </ResearchProjectDef>
+
+      <ResearchProjectDef>
+    <defName>NCL_Research_of_megastructures</defName>
+    <label>战略性建筑研发</label>
+    <description>"战略性建筑研发专注于设计建造能直接改变战场格局的核心设施，包括大型能源武器、机械改造中心、侦察卫星锅等关键架构，通过科技优势实现战术层面的颠覆性突破。"</description>
+    <techLevel>Spacer</techLevel>
+    <baseCost>1000</baseCost>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+      <li>NCL_Ashes_to_Signal</li>
+    </prerequisites>
+    <tab>NCL_Research</tab>
+    <researchViewX>1</researchViewX>
+    <researchViewY>4</researchViewY>
+    <requiredResearchFacilities>
+		<li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+  </ResearchProjectDef>
+
+      <ResearchProjectDef>
+    <defName>NCL_Building_Lightingstrike</defName>
+    <label>特斯拉信标</label>
+    <description>特斯拉信标是NCL研发的战略级电能武器系统，通过电网储备能源持续召唤区域落雷打击敌方单位，并可在关键时刻释放大范围EMP冲击瘫痪敌军电子设备，将电力储备转化为直接战场压制力。</description>
+    <techLevel>Spacer</techLevel>
+    <baseCost>4000</baseCost>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+	  	<li>Fabrication</li>
+      <li>NCL_Research_of_megastructures</li>
+    </prerequisites>
+    <tab>NCL_Research</tab>
+    <researchViewX>3</researchViewX>
+    <researchViewY>4</researchViewY>
+    <requiredResearchFacilities>
+		<li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>NCL_MechNode</defName>
+    <label>链波中继</label>
+    <description>链波中继站是由NCL工程师与机械师共同研发的量子通讯节点，初始提供20点基础带宽，可消耗额外电力提升信号强度，需绑定指定机械师作为服务终端以维持稳定运作。</description>
+    <techLevel>Spacer</techLevel>
+    <baseCost>6000</baseCost>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+	  	<li>Fabrication</li>
+      <li>NCL_Research_of_megastructures</li>
+    </prerequisites>
+    <tab>NCL_Research</tab>
+    <researchViewX>4</researchViewX>
+    <researchViewY>4</researchViewY>
+    <requiredResearchFacilities>
+		<li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+  </ResearchProjectDef>
+  
+    <ResearchProjectDef>
+    <defName>NCL_Heavyforge_Units</defName>
+    <label>重装机械</label>
+    <description>"解锁重型战斗机械制造技术，他们将会是你作战的主力。"</description>
+    <techLevel>Spacer</techLevel>
+    <baseCost>3000</baseCost>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+    <li>NCL_Vanguard_Units</li>
+	  <li>HighMechtech</li>
+    <li>MultiAnalyzer</li>
+    </prerequisites>
+    <tab>NCL_Research</tab>
+    <researchViewX>3</researchViewX>
+    <researchViewY>3</researchViewY>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+  </ResearchProjectDef>
+  
+    <ResearchProjectDef>
+    <defName>NCL_Archoworm</defName>
+    <label>超凡机械</label>
+    <description>画龙点睛</description>
+    <techLevel>Spacer</techLevel>
+    <baseCost>30000</baseCost>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+      <li>NCL_Heavyforge_Units</li>
+    </prerequisites>
+    <tab>NCL_Research</tab>
+    <researchViewX>5</researchViewX>
+    <researchViewY>3</researchViewY>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+  </ResearchProjectDef>
+  
+        <ResearchProjectDef>
+    <defName>NCL_Ignition_of_the_Crucible</defName>
+    <label>熔火点火</label>
+    <description>"通过激活并解析机械族战争信标，解锁其核心科技树，逐渐获得原属于机械文明的尖端军事技术。"</description>
+    <techLevel>Spacer</techLevel>
+    <baseCost>500</baseCost>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+    </prerequisites>
+    <tab>NCL_Research</tab>
+    <researchViewX>0</researchViewX>
+    <researchViewY>5</researchViewY>
+    <requiredAnalyzed>
+      <li>TW_Precision_Memory_Interface_Array</li>
+    </requiredAnalyzed>
+    <generalRules>
+      <rulesStrings>
+        <li>subject->mechanoids</li>
+
+        <li>subject_story->acquired a Precision Memory Interface Array in shady circumstances</li>
+        <li>subject_story->found an intact Precision Memory Interface Array in a War Beacon wreck</li>
+        <li>subject_gerund->unlocking certain technologies</li>
+      </rulesStrings>
+    </generalRules>
+  </ResearchProjectDef>
+  
+    <ResearchProjectDef>
+    <defName>NCL_Doom_Calculation</defName>
+    <label>技术诠译：静巢</label>
+    <description>"研究静巢构体的战场控制技术，解锁机械族高级战术演算能力。"</description>
+    <techLevel>Spacer</techLevel>
+    <baseCost>4000</baseCost>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+	    <li>NCL_Ignition_of_the_Crucible</li>
+		<li>UltraMechtech</li>
+    </prerequisites>
+    <tab>NCL_Research</tab>
+    <researchViewX>2</researchViewX>
+    <researchViewY>5</researchViewY>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+	<requiredAnalyzed>
+      <li>TW_DoxaTacticalCore</li>
+    </requiredAnalyzed>
+    <generalRules>
+      <rulesStrings>
+        <li>subject->mechanoids</li>
+
+        <li>subject_story->acquired a Doxa Tactical Core in shady circumstances</li>
+        <li>subject_story->found an intact Doxa Tactical Core in a Doxa wreck</li>
+        <li>subject_story->survived a mechanoid hive assault</li>
+        <li>subject_story->collated reports of mechanoid attacks, looking for commonalities</li>
+
+        <li>subject_gerund->creating Titan mechanoids</li>
+      </rulesStrings>
+    </generalRules>
+  </ResearchProjectDef>
+  
+      <ResearchProjectDef>
+    <defName>NCL_Fortress_Protocol</defName>
+    <label>技术诠译：壳堡</label>
+    <description>"解析壳堡构体的复合装甲系统与战场控制协议，掌握机械族终极攻坚单位的运作原理。"</description>
+    <techLevel>Spacer</techLevel>
+    <baseCost>5000</baseCost>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+	    <li>NCL_Doom_Calculation</li>
+    </prerequisites>
+    <tab>NCL_Research</tab>
+    <researchViewX>4</researchViewX>
+    <researchViewY>5</researchViewY>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+	<requiredAnalyzed>
+      <li>TW_ArmorBlitzWarfare</li>
+    </requiredAnalyzed>
+    <generalRules>
+      <rulesStrings>
+        <li>subject->mechanoids</li>
+        <li>subject_story->acquired an Armor Blitz Warfare Core in shady circumstances</li>
+        <li>subject_story->found an intact Armor Blitz Warfare Core in a Shell FortConstruct wreck</li>
+        <li>subject_story->survived a mechanoid hive assault</li>
+        <li>subject_story->collated reports of mechanoid attacks, looking for commonalities</li>
+        <li>subject_gerund->creating Titan mechanoids</li>
+      </rulesStrings>
+    </generalRules>
+  </ResearchProjectDef>
+  
+  <ResearchProjectDef>
+    <defName>NCL_Cybernethic_Arbo</defName>
+    <label>赛博诺斯母树</label>
+    <description>研究实现大批量永久性强化改造我方机械族的战略性建筑</description>
+    <techLevel>Spacer</techLevel>
+    <baseCost>8000</baseCost>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+    <li>NCL_Research_of_megastructures</li>
+	  <li>NCL_Heavyforge_Units</li>
+		<li>Fabrication</li>
+		<li>NCL_Doom_Calculation</li>
+    </prerequisites>
+    <tab>NCL_Research</tab>
+    <researchViewX>5</researchViewX>
+    <researchViewY>4</researchViewY>
+    <requiredResearchFacilities>
+    </requiredResearchFacilities>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>NCL_Experimental_Assemblies</defName>
+    <label>实验级技术</label>
+    <description>"接触NCL最前沿的武器原型技术。"</description>
+    <techLevel>Spacer</techLevel>
+    <baseCost>5000</baseCost>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+	    <li>NCL_Protective_Gear</li>
+    </prerequisites>
+    <tab>NCL_Research</tab>
+    <researchViewX>3</researchViewX>
+    <researchViewY>0</researchViewY>
+    <requiredResearchFacilities>
+	    <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+  </ResearchProjectDef>
+
+    <ResearchProjectDef>
+    <defName>NCL_CerebrexCore_Rebuild</defName>
+    <label>重启机械首脑</label>
+    <description>"准备好迎接更强大的挑战了吗"</description>
+    <techLevel>Spacer</techLevel>
+    <baseCost>5000</baseCost>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+  <requiredAnalyzed>
+    <li>TW_CerebrexCore_Target</li> <!-- 需要分析不存在的物品 -->
+  </requiredAnalyzed>
+    <tab>NCL_Research</tab>
+    <researchViewX>4</researchViewX>
+    <researchViewY>6</researchViewY>
+    <requiredResearchFacilities>
+	    <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+  </ResearchProjectDef>
+
+      <ResearchProjectDef>
+    <defName>NCL_Seraphiron</defName>
+    <label>敬请期待</label>
+    <description>"这将会是一个飞行机械族boss，目前还在制作阶段，敬请期待。"</description>
+    <techLevel>Spacer</techLevel>
+    <baseCost>5000</baseCost>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+    <li>NCL_CerebrexCore_Rebuild</li>
+	  <li>NCL_Fortress_Protocol</li>
+    </prerequisites>
+    <tab>NCL_Research</tab>
+    <researchViewX>6</researchViewX>
+    <researchViewY>5</researchViewY>
+    <requiredResearchFacilities>
+	    <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+  </ResearchProjectDef>
+
+
+</Defs>

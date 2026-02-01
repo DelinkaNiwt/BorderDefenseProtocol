@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	
+	<Operation Class="PatchOperationSequence">
+		<operations>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Mech_Cyclops"]/statBases</xpath>
+				<value>
+					<statBases>
+					  <ArmorRating_Blunt>0.35</ArmorRating_Blunt>
+					  <ArmorRating_Sharp>0.70</ArmorRating_Sharp>
+					  <PsychicSensitivity>0</PsychicSensitivity>
+					  <MoveSpeed>4.5</MoveSpeed>
+					  <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">2</BandwidthCost>
+					</statBases>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Mech_Cyclops"]/tools</xpath>
+				<value>
+					<tools>
+					  <li>
+						<label>front left leg</label>
+						<labelNoLocation>leg</labelNoLocation>
+						<capacities>
+						  <li>Blunt</li>
+						</capacities>
+						<power>12.0</power>
+						<cooldownTime>1.2</cooldownTime>
+						<linkedBodyPartsGroup>FrontLeftLeg</linkedBodyPartsGroup>
+						<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+					  </li>
+					  <li>
+						<label>front right leg</label>
+						<labelNoLocation>leg</labelNoLocation>
+						<capacities>
+						  <li>Blunt</li>
+						</capacities>
+						<power>12.0</power>
+						<cooldownTime>1.2</cooldownTime>
+						<linkedBodyPartsGroup>FrontRightLeg</linkedBodyPartsGroup>
+						<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+					  </li>
+					  <li>
+						<label>head</label>
+						<capacities>
+						  <li>Blunt</li>
+						</capacities>
+						<power>8.5</power>
+						<cooldownTime>1.2</cooldownTime>
+						<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+						<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+						<chanceFactor>0.2</chanceFactor>
+					  </li>
+					</tools>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+	
+</Patch>

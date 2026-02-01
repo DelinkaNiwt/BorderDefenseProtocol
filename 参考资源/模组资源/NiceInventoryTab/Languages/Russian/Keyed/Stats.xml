@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <NIT_MaxRangeOfAttackTip>Максимальная дальность атаки</NIT_MaxRangeOfAttackTip>
+  <NIT_OptimalRangeTip>Оптимальная: {0} ~ {1} м ({2} ±{3})</NIT_OptimalRangeTip>
+  <NIT_AtRangeTip>На {0} м: {1}</NIT_AtRangeTip>
+  
+  <NIT_ArmorPenetration>Бронепробитие</NIT_ArmorPenetration>
+  <NIT_RangedDPSTip>DPS дальнего боя</NIT_RangedDPSTip>
+  <NIT_MeleeDPSTip>DPS ближнего боя</NIT_MeleeDPSTip>
+  <NIT_DPSatOptimalRange>DPS на оптим. дистанции</NIT_DPSatOptimalRange>
+  <NIT_DPS100Accuracy>DPS при 100% точности</NIT_DPS100Accuracy>
+  <NIT_PawnModifiers>Модификаторы пешки</NIT_PawnModifiers>
+  <NIT_OneShotDamage>Урон за один выстрел</NIT_OneShotDamage>
+  <NIT_Damage>Урон</NIT_Damage>
+
+  <NIT_Melee>Ближний</NIT_Melee>
+  <NIT_Ranged>Дальний</NIT_Ranged>
+  <NIT_Range>Дальность</NIT_Range>
+  <NIT_Speed>Скорость</NIT_Speed>
+
+  <NIT_Sharp>Колющее</NIT_Sharp>
+  <NIT_Blunt>Дробящее</NIT_Blunt>
+  <NIT_Heat>Тепловое</NIT_Heat>
+  <NIT_TemperatureRangeShort>Диапазон температур</NIT_TemperatureRangeShort>
+
+  <NIT_Toxic>Токсины</NIT_Toxic>
+  <NIT_Vacuum>Вакуум</NIT_Vacuum>
+  <NIT_Flammability>Воспл.</NIT_Flammability>
+  <NIT_Psychic>Пси. чув.</NIT_Psychic>
+
+  <NIT_Medical>Медицина</NIT_Medical>
+  <NIT_Social>Общение</NIT_Social>
+  <NIT_Negotiation>Переговоры</NIT_Negotiation>
+  <NIT_Meditation>Медитация</NIT_Meditation>
+
+  <NIT_Mass>Масса</NIT_Mass>
+
+  <NIT_Combat>Бой</NIT_Combat>
+  <NIT_Resistances>Сопротивления</NIT_Resistances>
+  <NIT_Inventory>Инвентарь</NIT_Inventory>
+  <NIT_Equipment>Снаряжение</NIT_Equipment>
+  <NIT_Apparel>Одежда</NIT_Apparel>
+  <NIT_MassAndBulk>Масса и объём</NIT_MassAndBulk>
+
+  <NIT_AvailableApparel>Подходящая одежда</NIT_AvailableApparel>
+  <NIT_Wear>Надеть</NIT_Wear>
+  <NIT_NothingToWear>Нечего надеть</NIT_NothingToWear>
+  <NIT_Make>Сделать</NIT_Make>
+  <NIT_NothingToMake>Нечего сделать</NIT_NothingToMake>
+
+  <NIT_AutoNameRecipe>{0} для {1}</NIT_AutoNameRecipe>
+  <NIT_PawnModifierPercent>x{0} от {1}</NIT_PawnModifierPercent>
+  <NIT_PawnModifierPercentSigned>{0} от {1}</NIT_PawnModifierPercentSigned>
+  <NIT_WorktableTasks>{0} ({1} задач)</NIT_WorktableTasks>
+
+  <NIT_Biocoded>Биокодировано</NIT_Biocoded>
+
+  <OpenOptimizationMaster>Открыть мастер оптимизации</OpenOptimizationMaster>
+
+  <NIT_ApparelDamageWarning>Рваная одежда</NIT_ApparelDamageWarning>
+  <NIT_ApparelNudistWarning>Одежда не подходит для нудистов</NIT_ApparelNudistWarning>
+  <NIT_WeaponNotUsableWithShieldWarning>Оружие нельзя использовать с энергощитами</NIT_WeaponNotUsableWithShieldWarning>
+
+  <NIT_UnforceApparel>Снять принуждение</NIT_UnforceApparel>
+  <NIT_ForceApparel>Принудить</NIT_ForceApparel>
+
+  <NIT_WorkEfficiency>Скр. работы</NIT_WorkEfficiency>
+
+  <NIT_ClearWork>Уборка</NIT_ClearWork>
+  <NIT_EatWork>Скр. питания</NIT_EatWork>
+  <NIT_RepairWork>Ремонт</NIT_RepairWork>
+  <NIT_ConstructionWork>Стройка</NIT_ConstructionWork>
+  <NIT_MiningWork>Добыча</NIT_MiningWork>
+  <NIT_CookingWork>Кулинария</NIT_CookingWork>
+  <NIT_CraftingWork>Создание</NIT_CraftingWork>
+  <NIT_PlantsWork>Фермерство</NIT_PlantsWork>
+  <NIT_AnimalsWork>Животные</NIT_AnimalsWork>
+  <NIT_MedicalWork>Медицина</NIT_MedicalWork>
+  <NIT_SocialWork>Общение</NIT_SocialWork>
+  <NIT_IntellectualWork>Изучение</NIT_IntellectualWork>
+  <NIT_ArtisticWork>Искусство</NIT_ArtisticWork>
+  <NIT_ShootingWork>Стрельба</NIT_ShootingWork>
+  <NIT_MeleeWork>Ближний бой</NIT_MeleeWork>
+</LanguageData>

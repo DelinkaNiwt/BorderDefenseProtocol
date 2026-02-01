@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 遮蔽髓 -->
+
+  <PsychicShieldMarrowHediff.label>心灵遮蔽</PsychicShieldMarrowHediff.label>
+  <PsychicShieldMarrowHediff.description>受到心灵冲击波的影响，这个单位无法再使用心灵能力。</PsychicShieldMarrowHediff.description>
+
+
+  <!-- 抑制髓 -->
+
+  <PsychicSuppressionMarrowHediff.label>心灵抑制</PsychicSuppressionMarrowHediff.label>
+  <PsychicSuppressionMarrowHediff.description>受到心灵冲击波的影响，这个单位难以再维持正常的思考。</PsychicSuppressionMarrowHediff.description>
+
+
+</LanguageData>

@@ -1,0 +1,509 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 人格数据 -->
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>BlackPersonaData</defName>
+    <label>persona data</label>
+    <description>Precious data extracted from the bionic brain of a black-clad robot. It's hard to interpret, but the tiny amount of data that's been gathered so far has allowed the colonists to do some amazing things.\n\nColonists also found some white petals in the coat pockets of the mechanoids, but did not find their reason for carrying them in the database.</description>
+    <graphicData>
+      <texPath>Items/PersonaData</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+	<recipeMaker>
+		<researchPrerequisite>GD3_Apocriton</researchPrerequisite>
+		<recipeUsers>
+			<li>FabricationBench</li>
+		</recipeUsers>
+		<skillRequirements>
+			<Crafting>10</Crafting>
+		</skillRequirements>
+		<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+		<workSkill>Crafting</workSkill>
+		<effectWorking>Smith</effectWorking>
+		<soundWorking>Recipe_Smith</soundWorking>
+		<unfinishedThingDef>UnfinishedGun</unfinishedThingDef>
+	</recipeMaker>
+	<costList>
+	    <Plasteel>80</Plasteel>
+		<PrecisionDeck>25</PrecisionDeck>
+	    <ComponentSpacer>2</ComponentSpacer>
+	</costList>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+    <stackLimit>20</stackLimit>
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+	  <WorkToMake>8000</WorkToMake>
+      <MarketValue>1200</MarketValue>
+      <MaxHitPoints>70</MaxHitPoints>
+      <Mass>2</Mass>
+      <Flammability>0.2</Flammability>
+    </statBases>
+    <thingCategories>
+      <li>Items</li>
+    </thingCategories>
+    <tradeability>Sellable</tradeability>
+    <techLevel>Ultra</techLevel>
+    <tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+  </ThingDef>
+  
+  <!-- 精密装甲板 -->
+  
+  <ThingDef ParentName="ResourceBase">
+    <defName>PrecisionDeck</defName>
+    <label>precision deck</label>
+    <description>Your colonists' best efforts failed to disassemble these ridiculously hard boards. Maybe they could be used in some solid buildings.</description>
+    <graphicData>
+      <texPath>Items/PrecisionDeck</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Standard_Drop</soundDrop>
+    <healthAffectsPrice>false</healthAffectsPrice>
+	<useHitPoints>false</useHitPoints>
+	<stackLimit>60</stackLimit>
+    <statBases>
+      <MarketValue>35</MarketValue>
+      <Mass>1.2</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+    <intricate>true</intricate>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+    <tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+    <allowedArchonexusCount>50</allowedArchonexusCount>
+    <burnableByRecipe>false</burnableByRecipe>
+  </ThingDef>
+  
+  <!-- 反物质弹头 -->
+
+  <ThingDef ParentName="MakeableShellBase">
+    <defName>Shell_Antimatter</defName>
+    <label>antimatter shell</label>
+    <description>Your colonists were informed of the principle of action of this shell from the massive amount of data of the black-clad lancer. \n\nAlthough they have not been able to restore the full power of this warhead, its destructive power is already enough to vaporize a hundred-meter mountain. \nIt is strange that the black-clad lancer static mantis does not apply this horrific power completely to warfare - perhaps this means that after spending an unknown amount of time with the organism, he is no longer a pure war machine.</description>
+    <graphicData>
+      <texPath>Items/Shell_Antimatter</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+	<tradeability>Sellable</tradeability>
+	<statBases>
+      <MarketValue>2500</MarketValue>
+    </statBases>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <explosiveRadius>12.7</explosiveRadius>
+        <explosiveDamageType>BombChargeLarge</explosiveDamageType>
+        <explosiveExpandPerStackcount>0.4</explosiveExpandPerStackcount>
+        <startWickHitPointsPercent>0.7</startWickHitPointsPercent>
+        <wickTicks>60~120</wickTicks>
+      </li>
+    </comps>
+    <projectileWhenLoaded>Bullet_Shell_Antimatter</projectileWhenLoaded>
+    <costList>
+      <Plasteel>250</Plasteel>
+	  <Uranium>250</Uranium>
+      <BlackPersonaData>1</BlackPersonaData>
+    </costList>
+    <recipeMaker>
+      <researchPrerequisites>
+	    <li>Mortars</li>
+        <li>GD3_Weapons</li>
+	  </researchPrerequisites>
+	  <recipeUsers Inherit="False">
+        <li>FabricationBench</li>
+      </recipeUsers>
+    </recipeMaker>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_Shell_Antimatter</defName>
+    <label>antimatter shell</label>
+    <graphicData>
+      <texPath>Things/Projectile/ShellHighExplosive</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+    </graphicData>
+    <thingClass>GD3.Projectile_Antimatter</thingClass>
+    <projectile>
+      <damageDef>BombChargeLarge</damageDef>
+      <speed>31</speed>
+      <explosionRadius>16</explosionRadius>
+      <explosionEffect>GiantExplosion</explosionEffect>
+      <flyOverhead>true</flyOverhead>
+      <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <soundExplode>Explosion_GiantBomb</soundExplode>
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+    </projectile>
+  </ThingDef>
+  
+  <!-- 低温弹头 -->
+
+  <ThingDef ParentName="MakeableShellBase">
+    <defName>Shell_Frost</defName>
+    <label>frost shell</label>
+    <description>Your colonists have learned from the massive data of the black-clad scyther how the projectile works. \n\nThe stuff released by this warhead doesn't seem to be a "shockwave", but rather a fantastic way to instantly destroy the heat around it. Whether it is organic or mechanoids, it is difficult for anything to survive such an attack. \nIt is strange that the black-clad scyther static mantis does not apply this horrific power completely to warfare - perhaps this means that after spending an unknown amount of time with the organism, he is no longer a pure war machine.</description>
+    <graphicData>
+      <texPath>Items/Shell_Frost</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+	<tradeability>Sellable</tradeability>
+	<statBases>
+      <MarketValue>2500</MarketValue>
+    </statBases>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <explosiveRadius>12.7</explosiveRadius>
+        <explosiveDamageType>BombFrostBiteLarge</explosiveDamageType>
+        <explosiveExpandPerStackcount>0.4</explosiveExpandPerStackcount>
+        <startWickHitPointsPercent>0.7</startWickHitPointsPercent>
+        <wickTicks>60~120</wickTicks>
+      </li>
+    </comps>
+    <projectileWhenLoaded>Bullet_Shell_Frost</projectileWhenLoaded>
+    <costList>
+      <Plasteel>200</Plasteel>
+	  <Uranium>200</Uranium>
+      <BlackPersonaData>1</BlackPersonaData>
+    </costList>
+    <recipeMaker>
+      <researchPrerequisites>
+	    <li>Mortars</li>
+        <li>GD3_Weapons</li>
+	  </researchPrerequisites>
+	  <recipeUsers Inherit="False">
+        <li>FabricationBench</li>
+      </recipeUsers>
+    </recipeMaker>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_Shell_Frost</defName>
+    <label>frost shell</label>
+    <graphicData>
+      <texPath>Things/Projectile/ShellHighExplosive</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+    </graphicData>
+    <thingClass>Projectile_Explosive</thingClass>
+    <projectile>
+      <damageDef>BombFrostBiteLarge</damageDef>
+      <speed>66</speed>
+      <explosionRadius>21</explosionRadius>
+      <explosionEffect>GiantExplosion</explosionEffect>
+      <flyOverhead>true</flyOverhead>
+      <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <soundExplode>Explosion_GiantBomb</soundExplode>
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+    </projectile>
+  </ThingDef>
+  
+  <!-- 机械族求救发信器 -->
+  <ThingDef ParentName="ResourceBase" Name="MechHelpCallerBase" Abstract="True">
+    <thingClass>ThingWithComps</thingClass>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <MaxHitPoints>80</MaxHitPoints>
+      <Mass>0.2</Mass>
+      <DeteriorationRate>2.0</DeteriorationRate>
+      <Flammability>0.2</Flammability>
+    </statBases>
+    <techLevel>Ultra</techLevel>
+    <tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+  </ThingDef>
+  
+  <!-- <ThingDef ParentName="MechHelpCallerBase">
+    <defName>MechHelpCaller</defName>
+    <label>mechanoid pager</label>
+    <description>Disguise as a wounded mechanoid to send a distress signal. Due to the mismatched identification code this will not attract the attention of the mechanoids hive, but may attract some warm-hearted mechanoids to explore.</description>
+    <graphicData>
+      <texPath>Items/MechHelpCaller</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>1.2</drawSize>
+    </graphicData>
+    <stackLimit>5</stackLimit>
+	<recipeMaker>
+		<researchPrerequisite>GD3_Weapons</researchPrerequisite>
+		<recipeUsers>
+			<li>FabricationBench</li>
+		</recipeUsers>
+		<skillRequirements>
+			<Crafting>8</Crafting>
+		</skillRequirements>
+	</recipeMaker>
+	<costList>
+	    <Plasteel>20</Plasteel>
+		<PrecisionDeck>50</PrecisionDeck>
+	    <ComponentSpacer>2</ComponentSpacer>
+	</costList>
+    <statBases>
+      <MarketValue>1300</MarketValue>
+    </statBases>
+    <thingCategories>
+      <li>Items</li>
+    </thingCategories>
+    <tradeability>Sellable</tradeability>
+    <comps>
+      <li Class="CompProperties_Usable">
+        <useJob>UseItem</useJob>
+        <useLabel>Call</useLabel>
+        <useDuration>300</useDuration>
+      </li>
+      <li Class="CompProperties_UseEffectPlaySound">
+        <soundOnUsed>MechanoidsWakeUp</soundOnUsed>
+      </li>
+	  <li Class="CompProperties_UseEffect">
+        <compClass>GD3.CompUseEffect_HelpCaller</compClass>
+      </li>
+    </comps>
+  </ThingDef> -->
+  
+  <!-- 通用训练器 -->
+  
+  <ThingDef ParentName="MechHelpCallerBase">
+    <defName>UniversalTrainer</defName>
+    <label>universal trainer</label>
+    <description>A special skill trainer that can upgrade all skills of the user by one level.</description>
+    <graphicData>
+      <texPath>Things/Item/Special/MechSerumNeurotrainer</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>1.2</drawSize>
+    </graphicData>
+    <stackLimit>5</stackLimit>
+    <statBases>
+      <MarketValue>1300</MarketValue>
+    </statBases>
+    <thingCategories>
+      <li>Items</li>
+    </thingCategories>
+    <tradeability>Sellable</tradeability>
+    <comps>
+      <li Class="CompProperties_Usable">
+        <useJob>UseItem</useJob>
+        <useLabel>Use universal trainer</useLabel>
+        <useDuration>300</useDuration>
+      </li>
+      <li Class="CompProperties_UseEffectPlaySound">
+        <soundOnUsed>MechSerumUsed</soundOnUsed>
+      </li>
+	  <li Class="CompProperties_UseEffect">
+        <compClass>GD3.CompUseEffect_Trainer</compClass>
+      </li>
+    </comps>
+  </ThingDef>
+  
+  <!-- Missions -->
+  <!-- 生锈的尸体 -->
+  
+  <ThingDef ParentName="MechResourceBase">
+    <defName>GD_MechCorpse</defName>
+    <label>rusty corpse</label>
+    <description>The body of a scyther was gently covered with its hat and a bouquet of flowers. \n\nThe source of this corpse is suspicious, perhaps we can check if the communication system on its body is still functioning.\n\nYou can melt it to recover a little steel.</description>
+    <graphicData>
+      <texPath>GD_MechCorpse</texPath>
+	  <drawSize>1.6</drawSize>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <onGroundRandomRotateAngle>50</onGroundRandomRotateAngle>
+    </graphicData>
+	<soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+    <stackLimit>1</stackLimit>
+	<costList>
+      <Plasteel>50</Plasteel>
+	  <Steel>100</Steel>
+    </costList>
+	<smeltable>true</smeltable>
+    <statBases>
+      <MarketValue>0</MarketValue>
+	  <MaxHitPoints>500</MaxHitPoints>
+	  <Mass>50</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+	<tradeability>None</tradeability>
+	<comps>
+      <li Class="GD3.CompProperties_CompAnalyzableUnlockScript">
+        <analysisID>543548361</analysisID>
+
+        <!-- Analyzable -->
+
+        <analysisDurationHours>0.5</analysisDurationHours>
+        <destroyedOnAnalyzed>false</destroyedOnAnalyzed>
+        <completedLetterLabel>Black Mechanoid Hive Discovered</completedLetterLabel>
+        <completedLetter>The communication system activated, and we were able to contact an anonymous mechanoid, but he shut down the communication as soon as he received our first hello. Maybe we can get back in touch with them some other way. \n\nYou have found the faction "Black Mechanoid Hive" and can contact them on the mech-communication station.</completedLetter>
+        <completedLetterDef>PositiveEvent</completedLetterDef>
+
+        <!-- Interactable -->
+
+        <activateTexPath>UI/Icons/Study</activateTexPath>
+
+        <activateLabelString>Analyze...</activateLabelString>
+        <activateDescString>Analyzing the rusty corpse.</activateDescString>
+        <jobString>Analyze rusty corpse</jobString>
+        <guiLabelString>Choose who should analyze this</guiLabelString>
+        <inspectString>Can be analyzed by a colonist.</inspectString>
+
+        <targetingParameters>
+          <canTargetBuildings>false</canTargetBuildings>
+          <canTargetAnimals>false</canTargetAnimals>
+          <canTargetMechs>false</canTargetMechs>
+          <onlyTargetControlledPawns>true</onlyTargetControlledPawns>
+        </targetingParameters>
+      </li>
+	  <li Class="GD3.CompProperties_SendCorpse" />
+    </comps>
+  </ThingDef>
+  
+  <!-- 剧毒垃圾 -->
+  
+  <ThingDef ParentName="ResourceBase">
+    <defName>Wastepack_Red</defName>
+    <label>highly toxic wastepack</label>
+    <description>Extremely unstable and highly toxic mixtures, once left the special container, will completely dissolve at a very fast rate. Getting rid of it under the radar would be a very difficult thing to do.</description>
+    <possessionCount>5</possessionCount>
+    <graphicData>
+      <texPath>Items/ToxWastePack</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Standard_Drop</soundDrop>
+    <stackLimit>5</stackLimit>
+    <statBases>
+      <Beauty>-80</Beauty>
+      <MarketValue>0</MarketValue>
+      <Mass>6</Mass>
+      <Flammability>1</Flammability>
+      <DeteriorationRate>50</DeteriorationRate>
+    </statBases>
+    <thingCategories>
+      <li>ItemsMisc</li>
+    </thingCategories>
+    <comps>
+      <li Class="CompProperties_GasOnDamage">
+        <type>ToxGas</type>
+        <damageFactor>6</damageFactor>
+        <useStackCountAsFactor>true</useStackCountAsFactor>
+      </li>
+      <li Class="CompProperties_Dissolution">
+        <dissolutionAfterDays>1</dissolutionAfterDays>
+        <dissolutinFactorIndoors>0.5</dissolutinFactorIndoors>
+        <dissolutionFactorRain>10</dissolutionFactorRain>
+      </li>
+      <li Class="CompProperties_DissolutionEffectPollution">
+        <cellsToPollutePerDissolution>30</cellsToPollutePerDissolution>
+        <tilePollutionPerDissolution>0.0020</tilePollutionPerDissolution>
+        <waterTilePollutionFactor>8</waterTilePollutionFactor>
+      </li>
+      <li>
+        <compClass>CompDissolutionEffect_Goodwill</compClass>
+      </li>
+    </comps>
+    <tickerType>Normal</tickerType>
+  </ThingDef>
+  
+  <!-- 次生核心（半成品）-->
+  
+  <ThingDef ParentName="MechResourceBase">
+    <defName>GD_Subcore</defName>
+    <label>subcore (semi-finished)</label>
+    <description>A subcore that's been almost completely rewritten, and somehow it can't even start up stably. We need a researcher to do the analysis. \n\nThere may be some accidents during the research.\n\nNote: If you are unable to return to the subcore after completing your research, you will be judged to have completed the task by violently destroying it and then retaking it.</description>
+    <graphicData>
+      <texPath>Items/GD_Subcore</texPath>
+	  <drawSize>1</drawSize>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+	<soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+    <stackLimit>1</stackLimit>
+	<tickerType>Normal</tickerType>
+    <statBases>
+      <MarketValue>0</MarketValue>
+	  <MaxHitPoints>500</MaxHitPoints>
+	  <Mass>5</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+	<tradeability>None</tradeability>
+	<comps>
+      <li Class="GD3.CompProperties_CompAnalyzableSubcore">
+        <analysisID>542148361</analysisID>
+
+        <!-- Analyzable -->
+		<analysisRequiredRange>10</analysisRequiredRange>
+        <analysisDurationHours>0.5</analysisDurationHours>
+        <destroyedOnAnalyzed>false</destroyedOnAnalyzed>
+        <completedLetterLabel>Subcore rewrite complete</completedLetterLabel>
+        <completedLetter>The subcore has been studied, and soon it will be sent back to the black mechanoid hive in a teleport.</completedLetter>
+        <completedLetterDef>PositiveEvent</completedLetterDef>
+
+        <!-- Interactable -->
+
+        <activateTexPath>UI/Icons/Study</activateTexPath>
+
+        <activateLabelString>Analyze...</activateLabelString>
+        <activateDescString>Analyzing the subcore.</activateDescString>
+        <jobString>Analyze subcore</jobString>
+        <guiLabelString>Choose who should analyze this</guiLabelString>
+        <inspectString>Can be analyzed by a colonist.</inspectString>
+
+        <targetingParameters>
+          <canTargetBuildings>false</canTargetBuildings>
+          <canTargetAnimals>false</canTargetAnimals>
+          <canTargetMechs>false</canTargetMechs>
+          <onlyTargetControlledPawns>true</onlyTargetControlledPawns>
+        </targetingParameters>
+      </li>
+    </comps>
+  </ThingDef>
+  
+  <!-- 密钥 -->
+  
+  <ThingDef ParentName="MechResourceBase">
+    <defName>GD_ServerKey</defName>
+    <label>secret key</label>
+    <description>Secret key used to encrypt and decrypt data. Right-click activation to give you access to the server.</description>
+    <graphicData>
+      <texPath>Items/ServerKey</texPath>
+	  <drawSize>1.6</drawSize>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <onGroundRandomRotateAngle>50</onGroundRandomRotateAngle>
+    </graphicData>
+	<soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+    <stackLimit>1</stackLimit>
+	<costList>
+      <Plasteel>50</Plasteel>
+	  <Steel>100</Steel>
+    </costList>
+	<smeltable>true</smeltable>
+    <statBases>
+      <MarketValue>0</MarketValue>
+	  <MaxHitPoints>500</MaxHitPoints>
+	  <Mass>0.5</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+	<tradeability>None</tradeability>
+	<comps>
+      <li Class="CompProperties_Usable">
+        <useJob>TriggerObject</useJob>
+        <useLabel>activate</useLabel>
+        <useDuration>60</useDuration>
+        <ignoreOtherReservations>true</ignoreOtherReservations>
+      </li>
+	  <li Class="CompProperties_UseEffect">
+        <compClass>GD3.CompUseEffect_Key</compClass>
+      </li>
+    </comps>
+  </ThingDef>
+
+</Defs>

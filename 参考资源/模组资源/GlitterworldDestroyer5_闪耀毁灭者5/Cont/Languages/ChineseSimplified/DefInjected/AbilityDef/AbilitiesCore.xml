@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <ThrowPsychicGrenade.label>投掷心灵手雷</ThrowPsychicGrenade.label>
+  <ThrowPsychicGrenade.description>向目标投掷一颗心灵手雷。</ThrowPsychicGrenade.description>
+  
+  <MosquitoBombardment.label>空袭</MosquitoBombardment.label>
+  <MosquitoBombardment.description>对一条线上的敌人进行扫射。需要短暂的时间校准。</MosquitoBombardment.description>
+  
+  <MosquitoRocket.label>火箭袭击</MosquitoRocket.label>
+  <MosquitoRocket.description>发射一枚大威力穿甲火箭弹，需要不短的时间装填。</MosquitoRocket.description>
+  
+  <GD_BlackShieldSupport.label>护盾支援</GD_BlackShieldSupport.label>
+  <GD_BlackShieldSupport.description>护盾支援。</GD_BlackShieldSupport.description>
+  
+  <MechCallReinforcement.label>呼叫增援</MechCallReinforcement.label>
+  <MechCallReinforcement.description>呼叫增援。</MechCallReinforcement.description>
+
+</LanguageData>

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+
+  <GD_FullAngelShieldProjector.label>高角护盾发生器</GD_FullAngelShieldProjector.label>
+  <GD_FullAngelShieldProjector.description>一个由机械体部署的护盾发生器，可以阻挡高角度射弹。</GD_FullAngelShieldProjector.description>
+
+  <GD_FullAngelShieldProjector.comps.CompDestroyAfterDelay.countdownLabel>烧毁于</GD_FullAngelShieldProjector.comps.CompDestroyAfterDelay.countdownLabel>
+  
+  <GD_LowAngelShieldProjector.label>低角护盾发生器</GD_LowAngelShieldProjector.label>
+  <GD_LowAngelShieldProjector.description>一个由机械体部署的护盾发生器，可以阻挡低角度射弹。</GD_LowAngelShieldProjector.description>
+
+  <GD_LowAngelShieldProjector.comps.CompDestroyAfterDelay.countdownLabel>烧毁于</GD_LowAngelShieldProjector.comps.CompDestroyAfterDelay.countdownLabel>
+  
+  <GD_AbilityShieldProjector.label>高角护盾发生器</GD_AbilityShieldProjector.label>
+  <GD_AbilityShieldProjector.description>一个由机械体部署的护盾发生器，可以阻挡高角度射弹。</GD_AbilityShieldProjector.description>
+
+  <GD_AbilityShieldProjector.comps.CompDestroyAfterDelay.countdownLabel>烧毁于</GD_AbilityShieldProjector.comps.CompDestroyAfterDelay.countdownLabel>
+
+
+</LanguageData>

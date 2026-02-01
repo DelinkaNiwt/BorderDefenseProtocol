@@ -1,0 +1,43 @@
+{
+  "注释": "衣物贴图示例 v1.1 - 演示如何使用新的 directions 参数精确控制生成",
+  "textures": [
+    {
+      "name": "T恤 - 完整套装（5体型×4方向=20张）",
+      "width": 128,
+      "height": 128,
+      "output_prefix": "Apparel_TShirt",
+      "color_scheme": "blue",
+      "suffix_type": "apparel",
+      "suffix_names": ["_Male", "_Female", "_Thin", "_Hulk", "_Fat"],
+      "grid_size": 32,
+      "grid_width": 1
+    },
+    {
+      "name": "夹克 - 仅女性正面（1张）",
+      "width": 128,
+      "height": 128,
+      "output_prefix": "Apparel_Jacket",
+      "color_scheme": {
+        "r": 100,
+        "g": 80,
+        "b": 60
+      },
+      "suffix_type": "apparel",
+      "suffix_names": ["_Female"],
+      "directions": ["_north"],
+      "grid_size": 32,
+      "grid_width": 1
+    },
+    {
+      "name": "皇家长袍 - 仅女性全四个方向（4张）",
+      "width": 256,
+      "height": 256,
+      "output_prefix": "Apparel_RoyalRobe",
+      "color_scheme": "purple",
+      "suffix_type": "apparel",
+      "suffix_names": ["_Female"],
+      "grid_size": 32,
+      "grid_width": 1
+    }
+  ]
+}

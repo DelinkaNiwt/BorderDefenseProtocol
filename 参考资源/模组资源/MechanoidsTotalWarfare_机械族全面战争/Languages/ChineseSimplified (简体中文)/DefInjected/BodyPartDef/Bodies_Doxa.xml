@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: 反粒子发射口 -->
+  <Doxa0_AntiParticleEmitter.label>TODO</Doxa0_AntiParticleEmitter.label>
+  
+  <!-- EN: 深层逻辑核 -->
+  <Doxa0_DeepLogic_NeuronCore.label>TODO</Doxa0_DeepLogic_NeuronCore.label>
+  
+  <!-- EN: 背壳节一 -->
+  <Doxa0_Dorsal_First.label>TODO</Doxa0_Dorsal_First.label>
+  <!-- EN: 背壳节 -->
+  <Doxa0_Dorsal_First.labelShort>TODO</Doxa0_Dorsal_First.labelShort>
+  
+  <!-- EN: 背壳节四 -->
+  <Doxa0_Dorsal_Fourth.label>TODO</Doxa0_Dorsal_Fourth.label>
+  <!-- EN: 背壳节 -->
+  <Doxa0_Dorsal_Fourth.labelShort>TODO</Doxa0_Dorsal_Fourth.labelShort>
+  
+  <!-- EN: 背壳节二 -->
+  <Doxa0_Dorsal_Second.label>TODO</Doxa0_Dorsal_Second.label>
+  <!-- EN: 背壳节 -->
+  <Doxa0_Dorsal_Second.labelShort>TODO</Doxa0_Dorsal_Second.labelShort>
+  
+  <!-- EN: 背壳节三 -->
+  <Doxa0_Dorsal_Third.label>TODO</Doxa0_Dorsal_Third.label>
+  <!-- EN: 背壳节 -->
+  <Doxa0_Dorsal_Third.labelShort>TODO</Doxa0_Dorsal_Third.labelShort>
+  
+  <!-- EN: 火控协调模块 -->
+  <Doxa0_FireControlModule.label>TODO</Doxa0_FireControlModule.label>
+  
+  <!-- EN: 裂壳蛛孵化腔 -->
+  <Doxa0_Hatch_Module.label>TODO</Doxa0_Hatch_Module.label>
+  
+  <!-- EN: 多爪推进组 -->
+  <Doxa0_LimbCluster.label>TODO</Doxa0_LimbCluster.label>
+  
+  <!-- EN: 前端感知阵列 -->
+  <Doxa0_Sensor_Cluster.label>TODO</Doxa0_Sensor_Cluster.label>
+  
+  <!-- EN: 反粒子炮架 -->
+  <Doxa0_Turret_Mount.label>TODO</Doxa0_Turret_Mount.label>
+  
+</LanguageData>

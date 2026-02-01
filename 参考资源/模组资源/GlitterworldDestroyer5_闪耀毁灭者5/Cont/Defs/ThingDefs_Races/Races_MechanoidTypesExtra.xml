@@ -1,0 +1,1523 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+ <!-- 禁卫机械蜈蚣 -->
+  
+  <ThingDef ParentName="BaseMechanoid">
+    <defName>Mech_CataphractCentipede</defName>
+    <label>cataphract centipede</label>
+    <description>During the long war it was not only the humans who were learning the mechanoids, the mechanoids were learning the humans.\n\nDesigned based on the prototype of the cataphracts, The cross section is as big as a human head, the single-molecule bayonet sharp enough to cut mountains, and the armor is completely impossible to penetrate, making the cataphract centipede an unprecedented super war machine. Although conceptually uneconomical, the hulking behemoth was more than adequate against empire soldiers.</description>
+    <statBases>
+      <MoveSpeed>1.9</MoveSpeed>
+      <ArmorRating_Blunt>0.65</ArmorRating_Blunt>
+      <ArmorRating_Sharp>1.44</ArmorRating_Sharp>
+      <PsychicSensitivity>0</PsychicSensitivity>
+	  <IncomingDamageFactor>0.2</IncomingDamageFactor>
+	  <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">40</BandwidthCost>
+	  <MechEnergyLossPerHP  MayRequire="Ludeon.Rimworld.Biotech">0.05</MechEnergyLossPerHP>
+	  <WastepacksPerRecharge MayRequire="Ludeon.Rimworld.Biotech">3</WastepacksPerRecharge>
+	  <MaxHitPoints>1500</MaxHitPoints>
+    </statBases>
+	<size>(1,1)</size>
+    <tools>
+      <li>
+        <label>head</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>33</power>
+        <cooldownTime>2.6</cooldownTime>
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+      </li>
+    </tools>
+	<damageMultipliers>
+	  <li>
+        <damageDef>Stun</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <race>
+      <intelligence>ToolUser</intelligence>
+      <thinkTreeMain>Mechanoid</thinkTreeMain>
+      <body>MechanicalCentipede</body>
+      <baseBodySize>12.8</baseBodySize>
+      <baseHealthScale>6.48</baseHealthScale>
+	  <hediffGiverSets>
+        <li>CataphractCentipede_Boot</li>
+	  </hediffGiverSets>
+      <soundCallIntervalRange>1000~2000</soundCallIntervalRange>
+      <soundMeleeHitPawn>Pawn_Melee_MechanoidBash_HitPawn</soundMeleeHitPawn>
+      <soundMeleeHitBuilding>Pawn_Melee_MechanoidBash_HitBuilding</soundMeleeHitBuilding>
+      <soundMeleeMiss>Pawn_Melee_MechanoidBash_Miss</soundMeleeMiss>
+	  <mechWeightClass>UltraHeavy</mechWeightClass>
+	  <lifeStageAges Inherit="false">
+        <li>
+          <def>MechanoidFullyFormed</def>
+          <minAge>0</minAge>
+          <soundWounded>Pawn_Mech_Centipede_Wounded</soundWounded>
+          <soundDeath>Pawn_Mech_Centipede_Death</soundDeath>
+          <soundCall>Pawn_Mech_Centipede_Call</soundCall>
+        </li>
+        <li MayRequire="Ludeon.RimWorld.Biotech">
+          <def>MechanoidFullyFormed</def>
+          <minAge>100</minAge>
+          <soundWounded>Pawn_Mech_Centipede_Wounded</soundWounded>
+          <soundDeath>Pawn_Mech_Centipede_Death</soundDeath>
+          <soundCall>Pawn_Mech_Centipede_Call</soundCall>
+        </li>
+      </lifeStageAges>
+    </race>
+	<comps>
+	  <li Class="GD3.CompProperties_ChangeWeaponB">
+		<toggleIconPath>UI/Buttons/WeaponToggleB</toggleIconPath>
+		<toggleLabelKey>GD.ChangeWeaponLabel</toggleLabelKey>
+		<toggleDescKey>GD.ChangeWeaponDesc</toggleDescKey>
+	  </li>
+	  <li>
+	    <compClass>GD3.CompDrawBattery</compClass>
+	  </li>
+	</comps>
+    <butcherProducts>
+      <Steel>600</Steel>
+      <Plasteel>180</Plasteel>
+	  <PrecisionDeck>100</PrecisionDeck>
+    </butcherProducts>
+  </ThingDef>
+
+  <PawnKindDef ParentName="BaseMechanoidKind">
+    <defName>Mech_CataphractCentipede</defName>
+    <label>cataphract centipede</label>
+    <combatPower>30</combatPower>
+    <weaponMoney>9999~9999</weaponMoney>
+	<isGoodBreacher>true</isGoodBreacher>
+    <weaponTags>
+      <li>CataphractCentipede</li>
+    </weaponTags>
+	<race>Mech_CataphractCentipede</race>
+    <lifeStages>
+	  <li MayRequire="Ludeon.RimWorld.Biotech">
+        <bodyGraphicData>
+          <texPath>Pawn/CataphractCentipede</texPath>
+          <maskPath>Pawn/Mech_CataphractCentipede</maskPath>
+          <shaderType>CutoutWithOverlay</shaderType>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>8</drawSize>
+          <shadowData>
+            <volume>(0.6, 0.8, 0.6)</volume>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+      <li>
+        <bodyGraphicData>
+          <texPath>Pawn/CataphractCentipedeAncient</texPath>
+		  <maskPath>Pawn/Mech_CataphractCentipede</maskPath>
+          <shaderType>CutoutWithOverlay</shaderType>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>8</drawSize>
+          <shadowData>
+            <volume>(0.4, 0.8, 0.4)</volume>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+  </PawnKindDef>
+  
+  <!-- Walker (lancer/scyther) base -->
+
+  <ThingDef ParentName="BaseMechanoid" Name="BaseMechanoidWalkerAdv" Abstract="True">
+    <race>
+      <intelligence>ToolUser</intelligence>
+      <thinkTreeMain>Mechanoid</thinkTreeMain>
+      <baseBodySize>1.0</baseBodySize>
+      <lifeStageAges>
+        <li>
+          <def>MechanoidFullyFormed</def>
+          <minAge>0</minAge>
+          <soundWounded>Pawn_Mech_Scyther_Wounded</soundWounded>
+          <soundDeath>Pawn_Mech_Scyther_Death</soundDeath>
+          <soundCall>Pawn_Mech_Scyther_Call</soundCall>
+        </li>
+      </lifeStageAges>
+	  <mechWeightClass>Medium</mechWeightClass>
+    </race>
+    <butcherProducts>
+      <Steel>15</Steel>
+    </butcherProducts>
+  </ThingDef>
+  
+  <!-- 海军机械静螳 -->
+  
+  <ThingDef ParentName="BaseMechanoidWalkerAdv">
+    <defName>Mech_MarineLancer</defName>
+    <label>marine lancer</label>
+    <description>During the long war it was not only the humans who were learning the mechanoids, the mechanoids were learning the humans.\n\nModelled on the Empire Royal Navy, the lancers are equipped with shield belts and a more advanced targeting system. Some lancers may also carry psychic weapons.</description>
+	<statBases>
+      <MoveSpeed>3.1</MoveSpeed>
+      <ArmorRating_Blunt>0.42</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.94</ArmorRating_Sharp>
+	  <EnergyShieldEnergyMax>1.2</EnergyShieldEnergyMax>
+	  <EnergyShieldRechargeRate>0.3</EnergyShieldRechargeRate>
+	  <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">4</BandwidthCost>
+	  <MechEnergyLossPerHP  MayRequire="Ludeon.Rimworld.Biotech">0.2</MechEnergyLossPerHP>
+      <PsychicSensitivity>0</PsychicSensitivity>
+    </statBases>
+    <tools>
+      <li>
+        <label>left fist</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>12.0</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+      <li>
+        <label>right fist</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>12.0</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+      <li>
+        <label>head</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>8.5</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+        <chanceFactor>0.2</chanceFactor>
+      </li>
+    </tools>
+    <race>
+      <body>Lancer</body>
+      <baseHealthScale>1.12</baseHealthScale>
+      <soundMeleeHitPawn>Pawn_Melee_Punch_HitPawn</soundMeleeHitPawn>
+      <soundMeleeHitBuilding>Pawn_Melee_Punch_HitBuilding_Generic</soundMeleeHitBuilding>
+      <soundMeleeMiss>Pawn_Melee_Punch_Miss</soundMeleeMiss>
+	  <lifeStageAges Inherit="false">
+        <li>
+          <def>MechanoidFullyFormed</def>
+          <minAge>0</minAge>
+          <soundWounded>Pawn_Mech_Scyther_Wounded</soundWounded>
+          <soundDeath>Pawn_Mech_Scyther_Death</soundDeath>
+          <soundCall>Pawn_Mech_Scyther_Call</soundCall>
+        </li>
+        <li MayRequire="Ludeon.RimWorld.Biotech">
+          <def>MechanoidFullyFormed</def>
+          <minAge>100</minAge>
+          <soundWounded>Pawn_Mech_Scyther_Wounded</soundWounded>
+          <soundDeath>Pawn_Mech_Scyther_Death</soundDeath>
+          <soundCall>Pawn_Mech_Scyther_Call</soundCall>
+        </li>
+      </lifeStageAges>
+    </race>
+	<comps>
+		<li Class="CompProperties_Shield">
+			<energyLossPerDamage>0.01</energyLossPerDamage>
+			<blocksRangedWeapons>false</blocksRangedWeapons>
+		</li>
+		<!-- <li Class="GD3.CompProperties_ChangeWeapon">
+		  <toggleIconPath>UI/Buttons/WeaponToggle</toggleIconPath>
+		  <toggleLabelKey>GD.ChangeWeaponLabel</toggleLabelKey>
+		  <toggleDescKey>GD.ChangeWeaponDesc</toggleDescKey>
+		</li> -->
+	</comps>
+	<butcherProducts>
+      <Steel>50</Steel>
+      <Plasteel>20</Plasteel>
+	  <PrecisionDeck>5</PrecisionDeck>
+    </butcherProducts>
+  </ThingDef>
+
+  <PawnKindDef ParentName="BaseMechanoidKind">
+    <defName>Mech_MarineLancer</defName>
+    <label>marine lancer</label>
+    <race>Mech_MarineLancer</race>
+    <combatPower>250</combatPower>
+    <lifeStages>
+	  <li MayRequire="Ludeon.RimWorld.Biotech">
+        <bodyGraphicData>
+          <texPath>Pawn/MarineLancer</texPath>
+          <maskPath>Pawn/Mech_MarineLancer</maskPath>
+          <shaderType>CutoutWithOverlay</shaderType>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>1.8</drawSize>
+          <shadowData>
+            <volume>(0.6, 0.8, 0.6)</volume>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+      <li>
+        <bodyGraphicData>
+          <texPath>Pawn/MarineLancerAncient</texPath>
+		  <maskPath>Pawn/Mech_MarineLancer</maskPath>
+		  <shaderType>CutoutWithOverlay</shaderType>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>1.8</drawSize>
+          <shadowData>
+            <volume>(0.4, 0.8, 0.4)</volume>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+    <weaponMoney>9999~9999</weaponMoney>
+    <weaponTags>
+      <li>MarineLancer_A</li>
+	  <li>MarineLancer_B</li>
+    </weaponTags>
+	<abilities>
+	  <li>ThrowPsychicGrenade</li>
+	</abilities>
+	<aiAvoidCover>false</aiAvoidCover>
+  </PawnKindDef>
+  
+  <!-- 斥候机械飞螳 -->
+  
+  <ThingDef ParentName="BaseMechanoidWalkerAdv">
+    <defName>Mech_ReconScyther</defName>
+    <label>recon scyther</label>
+    <description>During the long war it was not only the humans who were learning the mechanoids, the mechanoids were learning the humans.\n\nModeled after the Empire Recons, the scythers offer reduced weight in exchange for greater mobility, with specially designed jumping packs that allow them to move quickly toward their victims.</description>
+    <statBases>
+	  <ArmorRating_Blunt>0.62</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.94</ArmorRating_Sharp>
+	  <PsychicSensitivity>0</PsychicSensitivity>
+	  <MoveSpeed>6.45</MoveSpeed>
+	  <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">3</BandwidthCost>
+	  <StaggerDurationFactor MayRequire="Ludeon.Rimworld.Biotech">0.5</StaggerDurationFactor>
+	  <MechEnergyLossPerHP  MayRequire="Ludeon.Rimworld.Biotech">0.15</MechEnergyLossPerHP>
+	</statBases>
+    <tools>
+      <li>
+        <label>left blade</label>
+        <capacities>
+          <li>Cut</li>
+          <li>Stab</li>
+        </capacities>
+        <power>18</power>
+        <cooldownTime>1</cooldownTime>
+		<armorPenetration>0.9</armorPenetration>
+        <linkedBodyPartsGroup>LeftBlade</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+      <li>
+        <label>right blade</label>
+        <capacities>
+          <li>Cut</li>
+          <li>Stab</li>
+        </capacities>
+        <power>18</power>
+        <cooldownTime>1</cooldownTime>
+		<armorPenetration>0.9</armorPenetration>
+        <linkedBodyPartsGroup>RightBlade</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+      <li>
+        <label>head</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>14</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+        <chanceFactor>0.2</chanceFactor>
+      </li>
+    </tools>
+    <race>
+      <body>Scyther</body>
+      <baseHealthScale>2.68</baseHealthScale>
+      <soundMeleeHitPawn>Pawn_Melee_MechanoidSlash_HitPawn</soundMeleeHitPawn>
+      <soundMeleeHitBuilding>Pawn_Melee_MechanoidSlash_HitBuilding</soundMeleeHitBuilding>
+      <soundMeleeMiss>Pawn_Melee_MechanoidSlash_Miss</soundMeleeMiss>
+	  <hediffGiverSets>
+        <li>MechJump</li>
+	  </hediffGiverSets>
+	  <lifeStageAges Inherit="false">
+        <li>
+          <def>MechanoidFullyFormed</def>
+          <minAge>0</minAge>
+          <soundWounded>Pawn_Mech_Scyther_Wounded</soundWounded>
+          <soundDeath>Pawn_Mech_Scyther_Death</soundDeath>
+          <soundCall>Pawn_Mech_Scyther_Call</soundCall>
+        </li>
+        <li MayRequire="Ludeon.RimWorld.Biotech">
+          <def>MechanoidFullyFormed</def>
+          <minAge>100</minAge>
+          <soundWounded>Pawn_Mech_Scyther_Wounded</soundWounded>
+          <soundDeath>Pawn_Mech_Scyther_Death</soundDeath>
+          <soundCall>Pawn_Mech_Scyther_Call</soundCall>
+        </li>
+      </lifeStageAges>
+    </race>
+	<butcherProducts>
+      <Steel>50</Steel>
+      <Plasteel>20</Plasteel>
+	  <PrecisionDeck>5</PrecisionDeck>
+    </butcherProducts>
+  </ThingDef>
+
+  <PawnKindDef ParentName="BaseMechanoidKind">
+    <defName>Mech_ReconScyther</defName>
+    <label>recon scyther</label>
+    <race>Mech_ReconScyther</race>
+    <combatPower>250</combatPower>
+    <lifeStages>
+	  <li MayRequire="Ludeon.RimWorld.Biotech">
+        <bodyGraphicData>
+          <texPath>Pawn/ReconScyther</texPath>
+          <maskPath>Pawn/Mech_ReconScyther</maskPath>
+          <shaderType>CutoutWithOverlay</shaderType>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>1.8</drawSize>
+          <shadowData>
+            <volume>(0.6, 0.8, 0.6)</volume>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+      <li>
+        <bodyGraphicData>
+          <texPath>Pawn/ReconScytherAncient</texPath>
+		  <maskPath>Pawn/Mech_ReconScyther</maskPath>
+		  <shaderType>CutoutWithOverlay</shaderType>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>1.8</drawSize>
+          <shadowData>
+            <volume>(0.4, 0.8, 0.4)</volume>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+    <weaponMoney>0~0</weaponMoney>
+    <defendPointRadius>0</defendPointRadius>
+    <weaponTags>
+    </weaponTags>
+	<modExtensions>
+      <li Class="GD3.MechChipModExt">
+        <mechChipDefs>
+          <li>MechJump</li>
+        </mechChipDefs>
+      </li>
+    </modExtensions>
+  </PawnKindDef>
+  
+  <!-- 机械萤火虫 -->
+  
+  <ThingDef ParentName="BaseMechanoid">
+    <defName>Mech_Firefly</defName>
+    <label>firefly</label>
+    <description>The prototype was a large cloaking device used by mechanoid warships, which was adapted to become the firefly.\n\nIt can make contact with and render invisible surrounding mechanoids in a special psychic network that isolates organisms.</description>
+    <statBases>
+      <MoveSpeed>2.5</MoveSpeed>
+      <ArmorRating_Blunt>0.15</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.43</ArmorRating_Sharp>
+      <PsychicSensitivity>1.75</PsychicSensitivity>
+	  <IncomingDamageFactor>0.5</IncomingDamageFactor>
+	  <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">5</BandwidthCost>
+      <MechEnergyLossPerHP  MayRequire="Ludeon.Rimworld.Biotech">0.2</MechEnergyLossPerHP>
+    </statBases>
+    <tools>
+      <li>
+        <label>head</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>8</power>
+        <cooldownTime>2.6</cooldownTime>
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+      </li>
+    </tools>
+    <race>
+      <intelligence>ToolUser</intelligence>
+      <thinkTreeMain>Mechanoid</thinkTreeMain>
+      <body>Firefly</body>
+      <baseBodySize>0.9</baseBodySize>
+      <baseHealthScale>1.0</baseHealthScale>
+	  <hediffGiverSets>
+        <!-- <li>CataphractCentipede_Boot</li> -->
+	  </hediffGiverSets>
+      <lifeStageAges>
+        <li>
+          <def>MechanoidFullyFormed</def>
+          <minAge>0</minAge>
+          <soundWounded>Pawn_Mech_Centipede_Wounded</soundWounded>
+          <soundDeath>Pawn_Mech_Centipede_Death</soundDeath>
+          <soundCall>Pawn_Mech_Centipede_Call</soundCall>
+        </li>
+		<li MayRequire="Ludeon.RimWorld.Biotech">
+          <def>MechanoidFullyFormed</def>
+          <minAge>100</minAge>
+          <soundWounded>Pawn_Mech_Centipede_Wounded</soundWounded>
+          <soundDeath>Pawn_Mech_Centipede_Death</soundDeath>
+          <soundCall>Pawn_Mech_Centipede_Call</soundCall>
+        </li>
+      </lifeStageAges>
+	  <mechWeightClass>Medium</mechWeightClass>
+      <soundCallIntervalRange>1000~2000</soundCallIntervalRange>
+      <soundMeleeHitPawn>Pawn_Melee_MechanoidBash_HitPawn</soundMeleeHitPawn>
+      <soundMeleeHitBuilding>Pawn_Melee_MechanoidBash_HitBuilding</soundMeleeHitBuilding>
+      <soundMeleeMiss>Pawn_Melee_MechanoidBash_Miss</soundMeleeMiss>
+    </race>
+	<comps>
+      <li Class="GD3.CompProperties_Invisibility">
+		<interval>250~600</interval>
+        <maxDistance>15</maxDistance>
+		<actPeriod>25</actPeriod>
+		<hediffToAdd>PsychicInvisibility</hediffToAdd>
+		<toggleIconPath>UI/Buttons/InvisibilityToggle</toggleIconPath>
+		<toggleLabelKey>GD.ToggleInvisibilityLabel</toggleLabelKey>
+		<toggleDescKey>GD.ToggleInvisibilityDesc</toggleDescKey>
+      </li>
+    </comps>
+	<butcherProducts>
+      <ComponentSpacer>2</ComponentSpacer>
+	  <Plasteel>30</Plasteel>
+    </butcherProducts>
+  </ThingDef>
+
+  <PawnKindDef ParentName="BaseMechanoidKind">
+    <defName>Mech_Firefly</defName>
+    <label>cataphract centipede</label>
+    <combatPower>1500</combatPower>
+    <weaponMoney>9999~9999</weaponMoney>
+	<maxPerGroup>3</maxPerGroup>
+    <weaponTags>
+      <li>Mech_Firefly</li>
+    </weaponTags>
+	<race>Mech_Firefly</race>
+    <lifeStages>
+	  <li MayRequire="Ludeon.RimWorld.Biotech">
+        <bodyGraphicData>
+          <texPath>Pawn/MechFirefly</texPath>
+          <maskPath>Pawn/Mech_Firefly</maskPath>
+          <shaderType>CutoutWithOverlay</shaderType>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>2</drawSize>
+          <shadowData>
+            <volume>(0.6, 0.8, 0.6)</volume>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+      <li>
+        <bodyGraphicData>
+          <texPath>Pawn/MechFireflyAncient</texPath>
+		  <maskPath>Pawn/Mech_Firefly</maskPath>
+          <shaderType>CutoutWithOverlay</shaderType>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>2</drawSize>
+          <shadowData>
+            <volume>(0.6, 0.8, 0.6)</volume>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+  </PawnKindDef>
+  
+  <!-- 机械伊蚊 -->
+  
+  <ThingDef ParentName="BaseMechanoid">
+    <defName>Mech_Mosquito</defName>
+    <label>mosquito</label>
+	<thingClass>GD3.MechMosquito</thingClass>
+    <description>A light and compact mechanoid, designed to maneuver at extremely high speeds in the air and strike targets, the combined charge lance on board can cause terrifying damage to ground targets. These troublesome mechs often go out in groups, ruthlessly seizing air superiority for the mechanoid hive. \n\nThere was once a version of mosquito that had mono blades installed on both sides of its body to chop up enemies during dives, but they were replaced due to their impact on mobility.</description>
+    <statBases>
+      <MoveSpeed>3.1</MoveSpeed>
+      <ArmorRating_Blunt>0.35</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.73</ArmorRating_Sharp>
+      <PsychicSensitivity>0</PsychicSensitivity>
+	  <MaxFlightTime>3600</MaxFlightTime>
+      <FlightCooldown>0</FlightCooldown>
+	  <IncomingDamageFactor>0.5</IncomingDamageFactor>
+	  <CaravanBonusSpeedFactor>5.0</CaravanBonusSpeedFactor>
+	  <BandwidthCost>3</BandwidthCost>
+	  <MechEnergyLossPerHP>0.2</MechEnergyLossPerHP>
+    </statBases>
+    <tools>
+      <li>
+        <label>head</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>13</power>
+        <cooldownTime>2.6</cooldownTime>
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+      </li>
+    </tools>
+	<damageMultipliers>
+      <li>
+        <damageDef>EMP</damageDef>
+        <multiplier>0.8</multiplier>
+      </li>
+	  <li>
+        <damageDef>Stun</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <race>
+      <intelligence>ToolUser</intelligence>
+      <thinkTreeMain>MechMosquito</thinkTreeMain>
+      <body>MechMosquito</body>
+      <baseBodySize>0.9</baseBodySize>
+      <baseHealthScale>1.0</baseHealthScale>
+	  <flightStartChanceOnJobStart>0.1</flightStartChanceOnJobStart>
+      <canFlyIntoMap>true</canFlyIntoMap>
+      <canLeaveMapFlying>true</canLeaveMapFlying>
+	  <disableIgniteVerb>true</disableIgniteVerb>
+	  <canFlyInVacuum>true</canFlyInVacuum>
+      <lifeStageAges>
+        <li>
+          <def>MechanoidFullyFormed</def>
+          <minAge>0</minAge>
+          <soundWounded>Pawn_Mech_Pikeman_Wounded</soundWounded>
+          <soundDeath>Pawn_Mech_Pikeman_Death</soundDeath>
+          <soundCall>Pawn_Mech_Pikeman_Call</soundCall>
+        </li>
+		<li MayRequire="Ludeon.RimWorld.Biotech">
+          <def>MechanoidFullyFormed</def>
+          <minAge>100</minAge>
+          <soundWounded>Pawn_Mech_Pikeman_Wounded</soundWounded>
+          <soundDeath>Pawn_Mech_Pikeman_Death</soundDeath>
+          <soundCall>Pawn_Mech_Pikeman_Call</soundCall>
+        </li>
+      </lifeStageAges>
+	  <mechWeightClass>Medium</mechWeightClass>
+      <soundCallIntervalRange>1000~2000</soundCallIntervalRange>
+      <soundMeleeHitPawn>Pawn_Melee_MechanoidBash_HitPawn</soundMeleeHitPawn>
+      <soundMeleeHitBuilding>Pawn_Melee_MechanoidBash_HitBuilding</soundMeleeHitBuilding>
+      <soundMeleeMiss>Pawn_Melee_MechanoidBash_Miss</soundMeleeMiss>
+    </race>
+	<comps>
+      
+    </comps>
+	<butcherProducts>
+      <Steel>25</Steel>
+	  <Plasteel>8</Plasteel>
+	  <PrecisionDeck>5</PrecisionDeck>
+    </butcherProducts>
+	<modExtensions>
+	  <li Class="GD3.IsFlyingUnit">
+        <flyingHeight>2</flyingHeight>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <PawnKindDef ParentName="BaseMechanoidKind">
+    <defName>Mech_Mosquito</defName>
+    <label>mosquito</label>
+    <combatPower>350</combatPower>
+    <weaponMoney>9999~9999</weaponMoney>
+    <weaponTags>
+      <!-- <li>Mech_Mosquito</li> -->
+    </weaponTags>
+	<race>Mech_Mosquito</race>
+    <lifeStages>
+	  <li MayRequire="Ludeon.RimWorld.Biotech">
+        <bodyGraphicData>
+          <texPath>Mosquito/MechMosquito</texPath>
+          <maskPath>Mosquito/Mech_Mosquito</maskPath>
+          <shaderType>CutoutWithOverlay</shaderType>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>2</drawSize>
+        </bodyGraphicData>
+		<flyingAnimationEast>MosquitoFlying_east</flyingAnimationEast>
+		<flyingAnimationNorth>MosquitoFlying_north</flyingAnimationNorth>
+		<flyingAnimationSouth>MosquitoFlying_south</flyingAnimationSouth>
+      </li>
+      <li>
+        <bodyGraphicData>
+          <texPath>Mosquito/MechMosquitoAncient</texPath>
+		  <maskPath>Mosquito/Mech_Mosquito</maskPath>
+          <shaderType>CutoutWithOverlay</shaderType>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>2</drawSize>
+        </bodyGraphicData>
+		<flyingAnimationEast>MosquitoAncientFlying_east</flyingAnimationEast>
+		<flyingAnimationNorth>MosquitoAncientFlying_north</flyingAnimationNorth>
+		<flyingAnimationSouth>MosquitoAncientFlying_south</flyingAnimationSouth>
+      </li>
+    </lifeStages>
+	<abilities>
+      <li>MosquitoBombardment</li>
+	  <li>MosquitoRocket</li>
+    </abilities>
+  </PawnKindDef>
+  
+  <!--===== 黑衣机械体 =====-->
+  <!-- 黑衣机械飞螳 -->
+	
+	<ThingDef ParentName="BaseMechanoidWalkerAdv">
+    <defName>Mech_BlackScyther</defName>
+    <label>scyther in black</label>
+    <description>During the long hacking campaign between the mechanoid hive and the Empire, some mech AI were breached by empire hackers. They are separated from the core, and have since been regarded as harmful by mechanoid hive. However, after losing their usefulness, these AI were soon abandoned by the Empire and eventually became "homeless" mechanoids. Hunted by black and White, they are forced to learn to think independently of the Hive database, while gathering together to protect each other and learn survival lessons from the organisms they once hated.\nIn the process of learning from humans, they also wear black like the man in Black and carry white flowers with them to offer to their former mechanoid companions when they bury them. Logically this behavior is completely incomprehensible, but it is true.\n\nHis two scythes are as sharp as mono-swords and contain nanomechanics that can cause frostbite to organisms. After being severely damaged beyond repair, he would detonate himself and unleash a cryogenic shockwave as his last stand.</description>
+	<statBases>
+	  <MoveSpeed>7.2</MoveSpeed>
+      <ArmorRating_Blunt>0.70</ArmorRating_Blunt>
+      <ArmorRating_Sharp>1.20</ArmorRating_Sharp>
+      <PsychicSensitivity>0</PsychicSensitivity>
+	  <MaxHitPoints>25000</MaxHitPoints>
+	  <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">9999</BandwidthCost>
+    </statBases>
+    <tools>
+      <li>
+        <label>left blade</label>
+        <capacities>
+          <li>Cut</li>
+          <li>Stab</li>
+        </capacities>
+        <power>11</power>
+        <cooldownTime>0.2</cooldownTime>
+		<armorPenetration>1.35</armorPenetration>
+        <linkedBodyPartsGroup>LeftBlade</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+		<extraMeleeDamages>
+          <li>
+            <def>EMP</def>
+            <amount>40</amount>
+          </li>
+		  <li>
+            <def>Frostbite_GD</def>
+            <amount>4</amount>
+          </li>
+        </extraMeleeDamages>
+      </li>
+      <li>
+        <label>right blade</label>
+        <capacities>
+          <li>Cut</li>
+          <li>Stab</li>
+        </capacities>
+        <power>11</power>
+        <cooldownTime>0.2</cooldownTime>
+		<armorPenetration>1.35</armorPenetration>
+        <linkedBodyPartsGroup>RightBlade</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+		<extraMeleeDamages>
+          <li>
+            <def>EMP</def>
+            <amount>40</amount>
+          </li>
+		  <li>
+            <def>Frostbite_GD</def>
+            <amount>3</amount>
+          </li>
+        </extraMeleeDamages>
+      </li>
+      <li>
+        <label>head</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>49</power>
+        <cooldownTime>0.5</cooldownTime>
+		<armorPenetration>8.0</armorPenetration>
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+        <chanceFactor>0.1</chanceFactor>
+		<extraMeleeDamages>
+          <li>
+            <def>EMP</def>
+            <amount>40</amount>
+          </li>
+		  <li>
+            <def>Frostbite_GD</def>
+            <amount>15</amount>
+          </li>
+        </extraMeleeDamages>
+      </li>
+    </tools>
+	<damageMultipliers>
+      <li>
+        <damageDef>EMP</damageDef>
+        <multiplier>0.4</multiplier>
+      </li>
+	  <li>
+        <damageDef>BombCharge</damageDef>
+        <multiplier>0.1</multiplier>
+      </li>
+	  <li>
+        <damageDef>Stun</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+	  <li>
+        <damageDef>BombBlackStrike</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <race>
+      <deathAction>
+        <workerClass>GD3.DeathActionWorker_MechExplosion</workerClass>
+      </deathAction>
+      <body>Scyther</body>
+	    <baseBodySize>4.8</baseBodySize>
+      <baseHealthScale>12</baseHealthScale>
+      <soundMeleeHitPawn>Pawn_Melee_MechanoidSlash_HitPawn</soundMeleeHitPawn>
+      <soundMeleeHitBuilding>Pawn_Melee_MechanoidSlash_HitBuilding</soundMeleeHitBuilding>
+      <soundMeleeMiss>Pawn_Melee_MechanoidSlash_Miss</soundMeleeMiss>
+	    <hediffGiverSets>
+        <li>Activation</li>
+	    </hediffGiverSets>
+    </race>
+	<comps>
+      <li>
+		<compClass>GD3.CompTeleport_Attack</compClass>
+	  </li>
+	  <li>
+		<compClass>GD3.CompBlackFaction</compClass>
+	  </li>
+    </comps>
+	<butcherProducts>
+      <Steel>100</Steel>
+      <Plasteel>60</Plasteel>
+	  <BlackPersonaData>1</BlackPersonaData>
+    </butcherProducts>
+	<modExtensions>
+	  <li Class="GD3.IsBlackMechanoid">
+        <isTraitor>false</isTraitor>
+      </li>
+    </modExtensions>
+  </ThingDef>
+    
+  <PawnKindDef>
+    <defName>Mech_BlackScyther</defName>
+    <label>scyther in black</label>
+    <race>Mech_BlackScyther</race>
+	<defaultFactionType>BlackMechanoid</defaultFactionType>
+	<maxPerGroup>1</maxPerGroup>
+    <aiAvoidCover>true</aiAvoidCover>
+	<isFighter>false</isFighter>
+    <destroyGearOnDrop>true</destroyGearOnDrop>
+    <combatPower>50000</combatPower>
+	<allowInMechClusters>false</allowInMechClusters>
+    <lifeStages>
+      <li>
+        <bodyGraphicData>
+          <texPath>Pawn/BScyther</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>1.6</drawSize>
+          <shadowData>
+            <volume>(0.4, 0.8, 0.4)</volume>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+    <weaponMoney>0~0</weaponMoney>
+    <weaponTags>
+    </weaponTags>
+  </PawnKindDef>
+  
+  <!-- 黑衣机械静螳 -->
+  
+  <ThingDef ParentName="BaseMechanoidWalkerAdv">
+    <defName>Mech_BlackLancer</defName>
+    <label>lancer in black</label>
+    <description>During the long hacking campaign between the mechanoid hive and the Empire, some mech AI were breached by empire hackers. They are separated from the core, and have since been regarded as harmful by mechanoid hive. However, after losing their usefulness, these AI were soon abandoned by the Empire and eventually became "homeless" mechanoids. Hunted by black and White, they are forced to learn to think independently of the Hive database, while gathering together to protect each other and learn survival lessons from the organisms they once hated.\nIn the process of learning from humans, they also wear black like the man in Black and carry white flowers with them to offer to their former mechanoid companions when they bury them. Logically this behavior is completely incomprehensible, but it is true.\n\nHe uses antimatter rounds capable of piercing the armor of a space ship with a single blow, and his advanced shield belt allows him to survive the fire of dozens of empire cataphracts.</description>
+	<statBases>
+      <ArmorRating_Blunt>0.22</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.78</ArmorRating_Sharp>
+      <PsychicSensitivity>0</PsychicSensitivity>
+	  <MaxHitPoints>25000</MaxHitPoints>
+	  <EnergyShieldEnergyMax>5</EnergyShieldEnergyMax>
+	  <EnergyShieldRechargeRate>1.2</EnergyShieldRechargeRate>
+	  <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">9999</BandwidthCost>
+    </statBases>
+    <tools>
+      <li>
+        <label>left fist</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>24.0</power>
+        <cooldownTime>0.6</cooldownTime>
+        <linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+      <li>
+        <label>right fist</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>24.0</power>
+        <cooldownTime>0.6</cooldownTime>
+        <linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+      <li>
+        <label>head</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>36</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+        <chanceFactor>0.2</chanceFactor>
+      </li>
+    </tools>
+	<damageMultipliers>
+      <li>
+        <damageDef>EMP</damageDef>
+        <multiplier>0.4</multiplier>
+      </li>
+	  <li>
+        <damageDef>BombCharge</damageDef>
+        <multiplier>0.1</multiplier>
+      </li>
+	  <li>
+        <damageDef>Stun</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+	  <li>
+        <damageDef>BombBlackStrike</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <race>
+      <body>Lancer</body>
+      <baseHealthScale>8</baseHealthScale>
+      <soundMeleeHitPawn>Pawn_Melee_Punch_HitPawn</soundMeleeHitPawn>
+      <soundMeleeHitBuilding>Pawn_Melee_Punch_HitBuilding_Generic</soundMeleeHitBuilding>
+      <soundMeleeMiss>Pawn_Melee_Punch_Miss</soundMeleeMiss>
+    </race>
+	<comps>
+      <li Class="CompProperties_Shield">
+		<energyLossPerDamage>0.01</energyLossPerDamage>
+		<blocksRangedWeapons>false</blocksRangedWeapons>
+	  </li>
+	  <li>
+		<compClass>GD3.CompTeleport_Defend</compClass>
+	  </li>
+	  <li>
+		<compClass>GD3.CompBlackFaction</compClass>
+	  </li>
+    </comps>
+	<butcherProducts>
+      <Steel>100</Steel>
+      <Plasteel>60</Plasteel>
+	  <BlackPersonaData>1</BlackPersonaData>
+    </butcherProducts>
+	<modExtensions>
+	  <li Class="GD3.IsBlackMechanoid">
+        <isTraitor>false</isTraitor>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <PawnKindDef>
+    <defName>Mech_BlackLancer</defName>
+    <label>lancer in black</label>
+    <race>Mech_BlackLancer</race>
+	<defaultFactionType>BlackMechanoid</defaultFactionType>
+	<maxPerGroup>1</maxPerGroup>
+    <aiAvoidCover>true</aiAvoidCover>
+	<isFighter>false</isFighter>
+    <destroyGearOnDrop>true</destroyGearOnDrop>
+    <combatPower>50000</combatPower>
+	<allowInMechClusters>false</allowInMechClusters>
+    <lifeStages>
+      <li>
+        <bodyGraphicData>
+          <texPath>Pawn/BLancer</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>1.6</drawSize>
+          <shadowData>
+            <volume>(0.4, 0.8, 0.4)</volume>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+    <weaponMoney>9999~9999</weaponMoney>
+    <weaponTags>
+      <li>MechanoidBlack</li>
+    </weaponTags>
+  </PawnKindDef>
+  
+  <!-- 黑衣机械耀螳 -->
+  
+  <ThingDef ParentName="BaseMechanoidWalkerAdv">
+    <defName>Mech_BlackTesseron</defName>
+    <label>tesseron in black</label>
+    <description>This mechanoid is a recent addition to the Black Mechanoid Hive, and all members, including scyther and lancer, know little about him, except that he claims to be a stray from the mechanoid hive and is being hunted. After joining the hive, he did not receive much improvement in weapons and equipment, apparently because he was not yet fully trusted by the hive. \n\nWith the aid of four floating cannons, tesseron is capable of firing enough firepower to flatten any defensive facility.</description>
+    <statBases>
+      <ArmorRating_Blunt>0.82</ArmorRating_Blunt>
+      <ArmorRating_Sharp>1.48</ArmorRating_Sharp>
+      <PsychicSensitivity>0</PsychicSensitivity>
+	  <MaxHitPoints>25000</MaxHitPoints>
+	  <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">9999</BandwidthCost>
+    </statBases>
+	<tools>
+      <li>
+        <label>left fist</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>24.0</power>
+        <cooldownTime>0.6</cooldownTime>
+        <linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+      <li>
+        <label>right fist</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>24.0</power>
+        <cooldownTime>0.6</cooldownTime>
+        <linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+      <li>
+        <label>head</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>36</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+        <chanceFactor>0.2</chanceFactor>
+      </li>
+    </tools>
+	<damageMultipliers>
+      <li>
+        <damageDef>EMP</damageDef>
+        <multiplier>0.4</multiplier>
+      </li>
+	  <li>
+        <damageDef>Stun</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+	<race>
+      <body>Lancer</body>
+      <baseHealthScale>10</baseHealthScale>
+      <soundMeleeHitPawn>Pawn_Melee_Punch_HitPawn</soundMeleeHitPawn>
+      <soundMeleeHitBuilding>Pawn_Melee_Punch_HitBuilding_Generic</soundMeleeHitBuilding>
+      <soundMeleeMiss>Pawn_Melee_Punch_Miss</soundMeleeMiss>
+    </race>
+	<comps>
+      <li Class="GD3.CompProperties_FloatingCannon">
+        <turretDef>Gun_ChargeBlasterFloatingTurret</turretDef>
+        <angleOffset>-90</angleOffset>
+        <renderNodeProperties>
+          <li>
+            <nodeClass>GD3.PawnRenderNode_FloatingCannon</nodeClass>
+            <workerClass>GD3.PawnRenderNodeWorker_FloatingCannon</workerClass>
+            <parentTagDef>Body</parentTagDef>
+            <overrideMeshSize>(1, 1)</overrideMeshSize>
+			<drawSize>1.4</drawSize>
+            <baseLayer>20</baseLayer>
+            <pawnType>Any</pawnType>
+          </li>
+        </renderNodeProperties>
+		<offset>0.8</offset>
+		<angle>0</angle>
+		<id>0</id>
+      </li>
+	  <li Class="GD3.CompProperties_FloatingCannon">
+        <turretDef>Gun_InfernoCannonFloatingTurret</turretDef>
+        <angleOffset>-90</angleOffset>
+        <renderNodeProperties>
+          <li>
+            <nodeClass>GD3.PawnRenderNode_FloatingCannon</nodeClass>
+            <workerClass>GD3.PawnRenderNodeWorker_FloatingCannon</workerClass>
+            <parentTagDef>Body</parentTagDef>
+            <overrideMeshSize>(1, 1)</overrideMeshSize>
+			<drawSize>1.4</drawSize>
+            <baseLayer>20</baseLayer>
+            <pawnType>Any</pawnType>
+          </li>
+        </renderNodeProperties>
+		<offset>0.8</offset>
+		<angle>90</angle>
+		<id>1</id>
+      </li>
+	  <li Class="GD3.CompProperties_FloatingCannon">
+        <turretDef>Gun_ExplodeFloatingTurret</turretDef>
+        <angleOffset>-90</angleOffset>
+        <renderNodeProperties>
+          <li>
+            <nodeClass>GD3.PawnRenderNode_FloatingCannon</nodeClass>
+            <workerClass>GD3.PawnRenderNodeWorker_FloatingCannon</workerClass>
+            <parentTagDef>Body</parentTagDef>
+            <overrideMeshSize>(1, 1)</overrideMeshSize>
+			<drawSize>1.4</drawSize>
+            <baseLayer>20</baseLayer>
+            <pawnType>Any</pawnType>
+          </li>
+        </renderNodeProperties>
+		<offset>0.8</offset>
+		<angle>180</angle>
+		<id>2</id>
+      </li>
+	  <li Class="GD3.CompProperties_FloatingCannon">
+        <turretDef>Gun_EMPFloatingTurret</turretDef>
+        <angleOffset>-90</angleOffset>
+        <renderNodeProperties>
+          <li>
+            <nodeClass>GD3.PawnRenderNode_FloatingCannon</nodeClass>
+            <workerClass>GD3.PawnRenderNodeWorker_FloatingCannon</workerClass>
+            <parentTagDef>Body</parentTagDef>
+            <overrideMeshSize>(1, 1)</overrideMeshSize>
+			<drawSize>1.4</drawSize>
+            <baseLayer>20</baseLayer>
+            <pawnType>Any</pawnType>
+          </li>
+        </renderNodeProperties>
+		<offset>0.8</offset>
+		<angle>270</angle>
+		<id>3</id>
+      </li>
+	  <li>
+		<compClass>GD3.CompBlackFaction</compClass>
+	  </li>
+    </comps>
+	<butcherProducts>
+      <Steel>200</Steel>
+      <Plasteel>100</Plasteel>
+    </butcherProducts>
+	<modExtensions>
+	  <li Class="GD3.IsBlackMechanoid">
+        <isTraitor>true</isTraitor>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <PawnKindDef ParentName="BaseMechanoidKind">
+    <defName>Mech_BlackTesseron</defName>
+    <label>tesseron in black</label>
+    <race>Mech_BlackTesseron</race>
+    <defaultFactionType>BlackMechanoid</defaultFactionType>
+	<maxPerGroup>1</maxPerGroup>
+    <aiAvoidCover>true</aiAvoidCover>
+	<isFighter>false</isFighter>
+    <destroyGearOnDrop>true</destroyGearOnDrop>
+    <combatPower>50000</combatPower>
+	<allowInMechClusters>false</allowInMechClusters>
+    <lifeStages>
+      <li>
+        <bodyGraphicData>
+          <texPath>Pawn/BTesseron</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>1.6</drawSize>
+          <shadowData>
+            <volume>(0.4, 0.8, 0.4)</volume>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+    <weaponMoney>9999~9999</weaponMoney>
+    <weaponTags>
+      <li>BeamGraserGun</li>
+    </weaponTags>
+    <techHediffsChance>1</techHediffsChance>
+    <techHediffsMoney>9999~9999</techHediffsMoney>
+  </PawnKindDef>
+  
+  <!-- 浮游炮塔 -->
+  <!-- 电荷 -->
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>Gun_ChargeBlasterFloatingTurret</defName>
+    <label>charge blaster turret</label>
+    <description>A small charge blaster designed for use on a defense turret.</description>
+    <tradeability>None</tradeability>
+    <destroyOnDrop>true</destroyOnDrop>
+    <graphicData>
+      <texPath>FloatingCannon_Charge</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <Mass>2.6</Mass>
+      <AccuracyTouch>0.60</AccuracyTouch>
+      <AccuracyShort>0.80</AccuracyShort>
+      <AccuracyMedium>0.90</AccuracyMedium>
+      <AccuracyLong>0.85</AccuracyLong>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+		<defaultProjectile>Bullet_ChargeBlasterHeavy</defaultProjectile>
+		<range>42.9</range>
+		<soundCast>Shot_ChargeBlaster</soundCast>
+		<soundCastTail>GunTail_Heavy</soundCastTail>
+		<muzzleFlashScale>9</muzzleFlashScale>
+		<defaultCooldownTime>1.0</defaultCooldownTime>
+		<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+		<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+		<ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+		<burstShotCount>10</burstShotCount>
+      </li>
+    </verbs>
+  </ThingDef>
+  <!-- 地狱火 -->
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>Gun_InfernoCannonFloatingTurret</defName>
+    <label>inferno turret</label>
+    <description>A small charge blaster designed for use on a defense turret.</description>
+    <tradeability>None</tradeability>
+    <destroyOnDrop>true</destroyOnDrop>
+    <graphicData>
+      <texPath>FloatingCannon_Inferno</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <Mass>2.6</Mass>
+      <AccuracyTouch>0.60</AccuracyTouch>
+      <AccuracyShort>0.80</AccuracyShort>
+      <AccuracyMedium>0.90</AccuracyMedium>
+      <AccuracyLong>0.85</AccuracyLong>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+		<defaultProjectile>Bullet_InfernoCannon</defaultProjectile>
+		<range>33.9</range>
+		<soundCast>InfernoCannon_Fire</soundCast>
+		<soundCastTail>GunTail_Light</soundCastTail>
+		<forcedMissRadius>1.9</forcedMissRadius>
+		<ai_AvoidFriendlyFireRadius>3</ai_AvoidFriendlyFireRadius>
+		<muzzleFlashScale>14</muzzleFlashScale>
+		<defaultCooldownTime>1.9</defaultCooldownTime>
+		<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+		<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+		<ticksBetweenBurstShots>1</ticksBetweenBurstShots>
+      </li>
+    </verbs>
+  </ThingDef>
+  <!-- 爆炸 -->
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>Gun_ExplodeFloatingTurret</defName>
+    <label>explode turret</label>
+    <description>A small charge blaster designed for use on a defense turret.</description>
+    <tradeability>None</tradeability>
+    <destroyOnDrop>true</destroyOnDrop>
+    <graphicData>
+      <texPath>FloatingCannon_Bomb</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <Mass>2.6</Mass>
+      <AccuracyTouch>0.60</AccuracyTouch>
+      <AccuracyShort>0.80</AccuracyShort>
+      <AccuracyMedium>0.90</AccuracyMedium>
+      <AccuracyLong>0.85</AccuracyLong>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+		<defaultProjectile>Bullet_ExplodeTurret_Shell</defaultProjectile>
+		<range>51.9</range>
+		<soundCast>ThumpCannon_Fire</soundCast>
+		<soundCastTail>GunTail_Heavy</soundCastTail>
+		<forcedMissRadius>1.9</forcedMissRadius>
+		<ai_AvoidFriendlyFireRadius>3</ai_AvoidFriendlyFireRadius>
+		<muzzleFlashScale>14</muzzleFlashScale>
+		<defaultCooldownTime>2.5</defaultCooldownTime>
+		<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+		<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+		<ticksBetweenBurstShots>1</ticksBetweenBurstShots>
+      </li>
+    </verbs>
+  </ThingDef>
+  <!-- EMP -->
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>Gun_EMPFloatingTurret</defName>
+    <label>EMP turret</label>
+    <description>A small charge blaster designed for use on a defense turret.</description>
+    <tradeability>None</tradeability>
+    <destroyOnDrop>true</destroyOnDrop>
+    <graphicData>
+      <texPath>FloatingCannon_EMP</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <Mass>2.6</Mass>
+      <AccuracyTouch>0.60</AccuracyTouch>
+      <AccuracyShort>0.80</AccuracyShort>
+      <AccuracyMedium>0.90</AccuracyMedium>
+      <AccuracyLong>0.85</AccuracyLong>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+		<defaultProjectile>Bullet_EMPFloatingTurret</defaultProjectile>
+		<range>36.9</range>
+		<soundCast>GD_EMPHandCannon</soundCast>
+        <soundCastTail>GunTail_Medium</soundCastTail>
+		<forcedMissRadius>1.9</forcedMissRadius>
+		<ai_AvoidFriendlyFireRadius>3</ai_AvoidFriendlyFireRadius>
+		<muzzleFlashScale>14</muzzleFlashScale>
+		<defaultCooldownTime>5.5</defaultCooldownTime>
+		<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+		<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+		<ticksBetweenBurstShots>1</ticksBetweenBurstShots>
+      </li>
+    </verbs>
+  </ThingDef>
+  
+  <!-- 子弹 -->
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_ExplodeTurret_Shell</defName>
+    <label>explode shell</label>
+    <graphicData>
+      <texPath>Things/Projectile/LauncherShot</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+      <color>(254,189,58)</color>
+    </graphicData>
+    <thingClass>Projectile_Explosive</thingClass>
+    <projectile>
+      <damageDef>Bomb</damageDef>
+	  <damageAmountBase>85</damageAmountBase>
+      <speed>90</speed>
+	  <explosionRadius>6.9</explosionRadius>
+	  <preExplosionSpawnThingDef>Filth_Ash</preExplosionSpawnThingDef>
+	  <preExplosionSpawnChance>0.4</preExplosionSpawnChance>
+    </projectile>
+	<comps>
+	  <li Class="GD3.CompProperties_SpawnThingOnDestroy">
+		<thingDef>GD_BlackBomb</thingDef>
+	  </li>
+	</comps>
+  </ThingDef>
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_EMPFloatingTurret</defName>
+    <label>EMP shell</label>
+    <graphicData>
+      <texPath>Things/Projectile/LauncherShot</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+      <color>(68,150,215)</color>
+    </graphicData>
+    <thingClass>Projectile_Explosive</thingClass>
+    <projectile>
+      <speed>60</speed>
+      <damageDef>EMP</damageDef>
+	  <damageAmountBase>80</damageAmountBase>
+      <explosionRadius>4.5</explosionRadius>
+      <ai_IsIncendiary>true</ai_IsIncendiary>
+      <arcHeightFactor>0.2</arcHeightFactor>
+      <shadowSize>0.6</shadowSize>
+    </projectile>
+  </ThingDef>
+  
+  <!-- dummy -->
+  
+  <ThingDef ParentName="EtherealThingBase">
+	<defName>GD_BlackBomb</defName>
+	<label>blackbomb</label>
+	<graphicData>
+	  <texPath>Empty/Empty</texPath>
+	  <graphicClass>Graphic_Single</graphicClass>
+	</graphicData>
+	<thingClass>GD3.BlackBomb</thingClass>
+	<tickerType>Normal</tickerType>
+	<drawerType>RealtimeOnly</drawerType>
+	<alwaysFlee>true</alwaysFlee>
+  </ThingDef>
+  
+  <!-- 黑衣机械盾螳 -->
+  
+  <ThingDef ParentName="BaseMechanoidWalkerAdv">
+    <defName>Mech_BlackLegionary</defName>
+    <label>legionary in black</label>
+    <description>This mechanoid is a recent addition to the Black Mechanoid Hive, and all members, including scyther and lancer, know little about him, except that he claims to be a stray from the mechanoid hive and is being hunted. After joining the hive, he did not receive much improvement in weapons and equipment, apparently because he was not yet fully trusted by the hive. \n\nLegionary uses a high-powered shield generator to protect itself and its Allies. When the shield breaks, nearby enemy troops will suffer internal injuries from the impact.</description>
+    <statBases>
+	  <MoveSpeed>4.0</MoveSpeed>
+      <ArmorRating_Blunt>0.82</ArmorRating_Blunt>
+      <ArmorRating_Sharp>1.48</ArmorRating_Sharp>
+      <PsychicSensitivity>0</PsychicSensitivity>
+	  <MaxHitPoints>25000</MaxHitPoints>
+	  <BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">9999</BandwidthCost>
+    </statBases>
+	<tools>
+      <li>
+        <label>head</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>36</power>
+        <cooldownTime>1</cooldownTime>
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+        <chanceFactor>1</chanceFactor>
+      </li>
+    </tools>
+	<damageMultipliers>
+      <li>
+        <damageDef>EMP</damageDef>
+        <multiplier>0.4</multiplier>
+      </li>
+	  <li>
+        <damageDef>Stun</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+    <race>
+      <body>Lancer</body>
+      <baseHealthScale>20</baseHealthScale>
+      <soundMeleeHitPawn>Pawn_Melee_Punch_HitPawn</soundMeleeHitPawn>
+      <soundMeleeHitBuilding>Pawn_Melee_Punch_HitBuilding_Generic</soundMeleeHitBuilding>
+      <soundMeleeMiss>Pawn_Melee_Punch_Miss</soundMeleeMiss>
+    </race>
+    <comps>
+      <li Class="CompProperties_ProjectileInterceptor">
+        <radius>5.9</radius>
+        <interceptGroundProjectiles>true</interceptGroundProjectiles>
+        <color>(0.4, 0.4, 0.4)</color>
+        <reactivateEffect>BulletShieldGenerator_Reactivate</reactivateEffect>
+        <activeSound>BulletShield_Ambience</activeSound>
+        <hitPoints>2000</hitPoints>
+        <hitPointsRestoreInstantlyAfterCharge>true</hitPointsRestoreInstantlyAfterCharge>
+		<rechargeHitPointsIntervalTicks>1</rechargeHitPointsIntervalTicks>
+        <chargeDurationTicks>300</chargeDurationTicks><!-- 90s -->
+        <drawWithNoSelection>True</drawWithNoSelection>
+        <disarmedByEmpForTicks>60</disarmedByEmpForTicks>
+        <gizmoTipKey>ProjectileInterceptorTip</gizmoTipKey>
+      </li>
+	  <li>
+		<compClass>GD3.CompBlackFaction</compClass>
+	  </li>
+    </comps>
+	<modExtensions>
+	  <li Class="GD3.IsBlackMechanoid">
+        <isTraitor>true</isTraitor>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  <PawnKindDef ParentName="BaseMechanoidKind">
+    <defName>Mech_BlackLegionary</defName>
+    <label>legionary in black</label>
+    <race>Mech_BlackLegionary</race>
+    <defaultFactionType>BlackMechanoid</defaultFactionType>
+	<maxPerGroup>1</maxPerGroup>
+    <aiAvoidCover>true</aiAvoidCover>
+	<isFighter>false</isFighter>
+    <destroyGearOnDrop>true</destroyGearOnDrop>
+    <combatPower>50000</combatPower>
+	<allowInMechClusters>false</allowInMechClusters>
+    <lifeStages>
+      <li>
+        <bodyGraphicData>
+          <texPath>Pawn/BLegionary</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>1.6</drawSize>
+          <shadowData>
+            <volume>(0.4, 0.8, 0.4)</volume>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+    <weaponMoney>9999~9999</weaponMoney>
+    <weaponTags>
+      <li>MechanoidGunNeedleLauncher_Defence</li>
+    </weaponTags>
+    <techHediffsChance>1</techHediffsChance>
+    <techHediffsMoney>9999~9999</techHediffsMoney>
+    <controlGroupPortraitZoom>1.2</controlGroupPortraitZoom>
+	<abilities>
+	  <li>GD_BlackShieldSupport</li>
+	</abilities>
+  </PawnKindDef>
+  
+  <!-- 黑衣机械小蠊 -->    
+  
+    <ThingDef ParentName="LightMechanoid">
+      <defName>Mech_BlackMilitor</defName>
+      <label>militor in black</label>
+      <description>As the newest member of the Black Mechanoid Hive, this little fellow still has a lot to learn.</description>
+      <statBases>
+        <MoveSpeed>3.8</MoveSpeed>
+		<ArmorRating_Blunt>0.52</ArmorRating_Blunt>
+		<ArmorRating_Sharp>0.98</ArmorRating_Sharp>
+		<PsychicSensitivity>0</PsychicSensitivity>
+		<MaxHitPoints>25000</MaxHitPoints>
+		<BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">9999</BandwidthCost>
+      </statBases>
+	  <tools>
+		  <li>
+			<label>head</label>
+			<capacities>
+			  <li>Blunt</li>
+			</capacities>
+			<power>16</power>
+			<cooldownTime>2</cooldownTime>
+			<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+			<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+			<chanceFactor>0.2</chanceFactor>
+		  </li>
+	  </tools>
+	  <damageMultipliers>
+		  <li>
+			<damageDef>BombCharge</damageDef>
+			<multiplier>0.1</multiplier>
+		  </li>
+		  <li>
+			<damageDef>Stun</damageDef>
+			<multiplier>0</multiplier>
+		  </li>
+		  <li>
+			<damageDef>BombBlackStrike</damageDef>
+			<multiplier>0</multiplier>
+		  </li>
+	  </damageMultipliers>
+      <race>
+		<intelligence>ToolUser</intelligence>
+		<thinkTreeMain>Mechanoid</thinkTreeMain>
+		<baseBodySize>0.7</baseBodySize>
+		<baseHealthScale>15</baseHealthScale>
+		<lifeStageAges>
+		  <li>
+			<def>MechanoidFullyFormed</def>
+			<minAge>0</minAge>
+			<soundWounded>Pawn_Mech_Militor_Wounded</soundWounded>
+            <soundDeath>Pawn_Mech_Militor_Death</soundDeath>
+            <soundCall>Pawn_Mech_Militor_Call</soundCall>
+          </li>
+		</lifeStageAges>
+	  </race>
+	  <comps>
+		  <li>
+			<compClass>GD3.CompBlackFaction</compClass>
+		  </li>
+	  </comps>
+    </ThingDef>
+  
+    <PawnKindDef ParentName="LightMechanoidKind">
+      <defName>Mech_BlackMilitor</defName>
+      <label>militor in black</label>
+      <race>Mech_BlackMilitor</race>
+      <defaultFactionType>BlackMechanoid</defaultFactionType>
+	  <maxPerGroup>1</maxPerGroup>
+      <aiAvoidCover>false</aiAvoidCover>
+	  <isFighter>false</isFighter>
+      <destroyGearOnDrop>true</destroyGearOnDrop>
+      <combatPower>50000</combatPower>
+	  <allowInMechClusters>false</allowInMechClusters>
+      <lifeStages>
+        <li>
+          <bodyGraphicData>
+            <texPath>Pawn/BMilitor</texPath>
+            <graphicClass>Graphic_Multi</graphicClass>
+            <drawSize>1.25</drawSize>
+            <shadowData>
+              <volume>(0.3, 0.4, 0.3)</volume>
+              <offset>(0,0,-0.25)</offset>
+            </shadowData>
+          </bodyGraphicData>
+        </li>
+      </lifeStages>
+      <weaponTags>
+        <li>MechanoidGunShortRange</li>
+      </weaponTags>
+    </PawnKindDef>
+
+</Defs>
