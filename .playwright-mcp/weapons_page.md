@@ -1,0 +1,4619 @@
+- generic [active] [ref=e1]:
+  - main [ref=e4]:
+    - heading "Weapons View the revision history for this page." [level=1] [ref=e5]:
+      - text: Weapons
+      - generic:
+        - link "View the revision history for this page.":
+          - /url: /index.php?title=Weapons&action=history
+    - generic [ref=e6]:
+      - link "Jump to navigation" [ref=e7] [cursor=pointer]:
+        - /url: "#mw-head"
+      - link "Jump to search" [ref=e8] [cursor=pointer]:
+        - /url: "#searchInput"
+      - generic [ref=e10]:
+        - table [ref=e11]:
+          - rowgroup [ref=e12]:
+            - row "Basics Menus Game Creation Gameplay Pawns Plants Resources Gear Mods Gear Menu Weapons Apparel Clothing Armor Utility" [ref=e13]:
+              - cell "Basics Menus Game Creation Gameplay Pawns Plants Resources Gear Mods Gear Menu Weapons Apparel Clothing Armor Utility" [ref=e14]:
+                - table [ref=e15]:
+                  - rowgroup [ref=e16]:
+                    - row "Basics Menus Game Creation Gameplay Pawns Plants Resources Gear Mods" [ref=e17]:
+                      - table [ref=e19]:
+                        - rowgroup [ref=e20]:
+                          - row "Basics Menus Game Creation Gameplay Pawns Plants Resources Gear Mods" [ref=e21]:
+                            - cell "Basics" [ref=e22]:
+                              - link "Basics" [ref=e23] [cursor=pointer]:
+                                - /url: /wiki/Basics
+                            - cell "Menus" [ref=e24]:
+                              - link "Menus" [ref=e25] [cursor=pointer]:
+                                - /url: /wiki/Menus
+                            - cell "Game Creation" [ref=e26]:
+                              - link "Game Creation" [ref=e27] [cursor=pointer]:
+                                - /url: /wiki/Game_Creation
+                            - cell "Gameplay" [ref=e28]:
+                              - link "Gameplay" [ref=e29] [cursor=pointer]:
+                                - /url: /wiki/Gameplay
+                            - cell "Pawns" [ref=e30]:
+                              - link "Pawns" [ref=e31] [cursor=pointer]:
+                                - /url: /wiki/Pawns
+                            - cell "Plants" [ref=e32]:
+                              - link "Plants" [ref=e33] [cursor=pointer]:
+                                - /url: /wiki/Plants
+                            - cell "Resources" [ref=e34]:
+                              - link "Resources" [ref=e35] [cursor=pointer]:
+                                - /url: /wiki/Resources
+                            - cell "Gear" [ref=e36]
+                            - cell "Mods" [ref=e37]:
+                              - link "Mods" [ref=e38] [cursor=pointer]:
+                                - /url: /wiki/Mods
+                - table [ref=e39]:
+                  - rowgroup [ref=e40]:
+                    - row "Gear Menu Weapons Apparel Clothing Armor Utility" [ref=e41]:
+                      - cell "Gear Menu" [ref=e42]:
+                        - link "Gear Menu" [ref=e43] [cursor=pointer]:
+                          - /url: /wiki/Gear
+                      - cell "Weapons" [ref=e44]
+                      - cell "Apparel" [ref=e45]:
+                        - link "Apparel" [ref=e46] [cursor=pointer]:
+                          - /url: /wiki/Apparel
+                      - cell "Clothing" [ref=e47]:
+                        - link "Clothing" [ref=e48] [cursor=pointer]:
+                          - /url: /wiki/Clothing
+                      - cell "Armor" [ref=e49]:
+                        - link "Armor" [ref=e50] [cursor=pointer]:
+                          - /url: /wiki/Armor
+                      - cell "Utility" [ref=e51]:
+                        - link "Utility" [ref=e52] [cursor=pointer]:
+                          - /url: /wiki/Utility
+        - separator [ref=e53]
+        - generic [ref=e54]:
+          - text: For analysis of using each weapon, see
+          - link "Weapon Guide" [ref=e55] [cursor=pointer]:
+            - /url: /wiki/Weapon_Guide
+          - text: .
+        - generic [ref=e56]:
+          - text: For a way to compare the numbers of each weapon, see
+          - link "Weapon comparison table" [ref=e57] [cursor=pointer]:
+            - /url: /wiki/Weapon_comparison_table
+          - text: .
+        - link "Weapons preview.png" [ref=e59] [cursor=pointer]:
+          - /url: /wiki/File:Weapons_preview.png
+          - img "Weapons preview.png" [ref=e60]
+        - paragraph [ref=e61]:
+          - text: Weapons are used by
+          - link "colonists" [ref=e62] [cursor=pointer]:
+            - /url: /wiki/Colonists
+          - text: and
+          - link "raiders" [ref=e63] [cursor=pointer]:
+            - /url: /wiki/Raiders
+          - text: alike to fight each other (and sometimes to put down enraged
+          - link "animals" [ref=e64] [cursor=pointer]:
+            - /url: /wiki/Animals
+          - text: ). Weapons have several characteristics that make them useful in different combat situations. Most currently do not consume any ammunition, but instead take time to aim and additional cooldown time for subsequent shots.
+        - navigation "Contents" [ref=e66]:
+          - button "hide" [ref=e67]
+          - generic [ref=e68]:
+            - heading "Contents" [level=2] [ref=e69]
+            - generic [ref=e70]:
+              - text: "["
+              - generic [ref=e71] [cursor=pointer]: hide
+              - text: "]"
+          - list [ref=e72]:
+            - listitem [ref=e73]:
+              - link "1. Ranged weapons" [ref=e74] [cursor=pointer]:
+                - /url: "#Ranged_weapons"
+                - generic [ref=e75]: "1."
+                - generic [ref=e76]: Ranged weapons
+              - list [ref=e77]:
+                - listitem [ref=e78]:
+                  - link "1.1. Firing cycle" [ref=e79] [cursor=pointer]:
+                    - /url: "#Firing_cycle"
+                    - generic [ref=e80]: 1.1.
+                    - generic [ref=e81]: Firing cycle
+                - listitem [ref=e82]:
+                  - link "1.2. Range" [ref=e83] [cursor=pointer]:
+                    - /url: "#Range"
+                    - generic [ref=e84]: 1.2.
+                    - generic [ref=e85]: Range
+                - listitem [ref=e86]:
+                  - link "1.3. Accuracy" [ref=e87] [cursor=pointer]:
+                    - /url: "#Accuracy"
+                    - generic [ref=e88]: 1.3.
+                    - generic [ref=e89]: Accuracy
+                - listitem [ref=e90]:
+                  - link "1.4. Stopping power" [ref=e91] [cursor=pointer]:
+                    - /url: "#Stopping_power"
+                    - generic [ref=e92]: 1.4.
+                    - generic [ref=e93]: Stopping power
+                - listitem [ref=e94]:
+                  - link "1.5. Ranged weapons comparison table" [ref=e95] [cursor=pointer]:
+                    - /url: "#Ranged_weapons_comparison_table"
+                    - generic [ref=e96]: 1.5.
+                    - generic [ref=e97]: Ranged weapons comparison table
+                - listitem [ref=e98]:
+                  - link "1.6. Quality modifiers" [ref=e99] [cursor=pointer]:
+                    - /url: "#Quality_modifiers"
+                    - generic [ref=e100]: 1.6.
+                    - generic [ref=e101]: Quality modifiers
+            - listitem [ref=e102]:
+              - link "2. Melee weapons" [ref=e103] [cursor=pointer]:
+                - /url: "#Melee_weapons"
+                - generic [ref=e104]: "2."
+                - generic [ref=e105]: Melee weapons
+              - list [ref=e106]:
+                - listitem [ref=e107]:
+                  - link "2.1. Base melee stats" [ref=e108] [cursor=pointer]:
+                    - /url: "#Base_melee_stats"
+                    - generic [ref=e109]: 2.1.
+                    - generic [ref=e110]: Base melee stats
+                - listitem [ref=e111]:
+                  - link "2.2. Material / Quality modifiers" [ref=e112] [cursor=pointer]:
+                    - /url: "#Material_.2F_Quality_modifiers"
+                    - generic [ref=e113]: 2.2.
+                    - generic [ref=e114]: Material / Quality modifiers
+                - listitem [ref=e115]:
+                  - link "2.3. Melee formulas" [ref=e116] [cursor=pointer]:
+                    - /url: "#Melee_formulas"
+                    - generic [ref=e117]: 2.3.
+                    - generic [ref=e118]: Melee formulas
+                  - list [ref=e119]:
+                    - listitem [ref=e120]:
+                      - link "2.3.1. General formulas" [ref=e121] [cursor=pointer]:
+                        - /url: "#General_formulas"
+                        - generic [ref=e122]: 2.3.1.
+                        - generic [ref=e123]: General formulas
+                    - listitem [ref=e124]:
+                      - link "2.3.2. Listed DPS on weapons" [ref=e125] [cursor=pointer]:
+                        - /url: "#Listed_DPS_on_weapons"
+                        - generic [ref=e126]: 2.3.2.
+                        - generic [ref=e127]: Listed DPS on weapons
+                    - listitem [ref=e128]:
+                      - link "2.3.3. Listed DPS on pawns" [ref=e129] [cursor=pointer]:
+                        - /url: "#Listed_DPS_on_pawns"
+                        - generic [ref=e130]: 2.3.3.
+                        - generic [ref=e131]: Listed DPS on pawns
+            - listitem [ref=e132]:
+              - link "3. Biocoding" [ref=e133] [cursor=pointer]:
+                - /url: "#Biocoding"
+                - generic [ref=e134]: "3."
+                - generic [ref=e135]: Biocoding
+            - listitem [ref=e136]:
+              - link "4. Unobtainable weapons" [ref=e137] [cursor=pointer]:
+                - /url: "#Unobtainable_weapons"
+                - generic [ref=e138]: "4."
+                - generic [ref=e139]: Unobtainable weapons
+            - listitem [ref=e140]:
+              - link "5. Gallery" [ref=e141] [cursor=pointer]:
+                - /url: "#Gallery"
+                - generic [ref=e142]: "5."
+                - generic [ref=e143]: Gallery
+            - listitem [ref=e144]:
+              - link "6. Version history" [ref=e145] [cursor=pointer]:
+                - /url: "#Version_history"
+                - generic [ref=e146]: "6."
+                - generic [ref=e147]: Version history
+        - paragraph [ref=e148]:
+          - text: If left exposed with no roof, a weapon on the ground will
+          - link "deteriorate" [ref=e149] [cursor=pointer]:
+            - /url: /wiki/Deterioration
+          - text: until it disintegrates without a trace. Weapons stored in a
+          - link "shelf" [ref=e150] [cursor=pointer]:
+            - /url: /wiki/Shelf
+          - text: will not deteriorate, even if left outside.
+        - paragraph [ref=e151]: Weapons of quality Excellent or higher have an engraving that can be read by clicking the Art tab from the inspect pane.
+        - heading "Ranged weapons[edit]" [level=2] [ref=e152]:
+          - text: Ranged weapons
+          - generic [ref=e153]:
+            - text: "["
+            - link "edit" [ref=e154] [cursor=pointer]:
+              - /url: /index.php?title=Weapons&action=edit&section=1
+            - text: "]"
+        - paragraph [ref=e155]:
+          - text: Range weapons consist mostly of firearms, as well as explosives, other non-gunpowder weapons like
+          - link "bows and throwing spears" [ref=e156] [cursor=pointer]:
+            - /url: /wiki/Neolithic_Weapons
+          - text: ", and more advanced weapons like the charge rifle. A ranged weapon's accuracy and damage are also affected by its"
+          - link "quality" [ref=e157] [cursor=pointer]:
+            - /url: /wiki/Quality
+          - text: level.
+        - heading "Firing cycle[edit]" [level=3] [ref=e158]:
+          - text: Firing cycle
+          - generic [ref=e159]:
+            - text: "["
+            - link "edit" [ref=e160] [cursor=pointer]:
+              - /url: /index.php?title=Weapons&action=edit&section=2
+            - text: "]"
+        - paragraph [ref=e161]:
+          - text: Once a target is selected, and the shooter is in
+          - link "range" [ref=e162] [cursor=pointer]:
+            - /url: "#Range"
+          - text: ", the firing cycle of ranged weapons can be broken down into three phases."
+        - list [ref=e163]:
+          - listitem [ref=e164]:
+            - text: Aiming time. Sometimes referred to as warm-up. During this period the shooter will remain stationary and aim at the target before firing. The time this takes depends on the aiming time of the weapon, multiplied by the
+            - link "aiming time" [ref=e165] [cursor=pointer]:
+              - /url: /wiki/Aiming_time
+            - text: stat of the shooter. The remaining time until firing is displayed by a translucent white wedge, displayed in front of the shooter and cast toward the target. The wedge slowly thins until it disappears and the shot or burst is fired. During this time, the firing action can be canceled.
+          - listitem [ref=e166]:
+            - text: Firing. Once aiming has finished, the pawn will fire the weapon. Ranged weapons either fire a single shot or a number of shots in sequence called a burst. The number of shots in a burst is determined by the weapon type and cannot be changed. Once begun, firing can't be interrupted manually, however it can be interrupted, such as by stunning. A burst will also end early if the target dies or is destroyed. There is a short delay, called "burst
+            - link "ticks" [ref=e167] [cursor=pointer]:
+              - /url: /wiki/Tick
+            - text: "\", after every shot in the burst but the last."
+          - listitem [ref=e168]:
+            - text: Cooldown. Once firing is complete, a cooldown occurs. During this period the shooter will remain stationary. The time this takes depends on the cooldown time of the weapon, multiplied by the
+            - link "Ranged Cooldown Multiplier" [ref=e169] [cursor=pointer]:
+              - /url: /wiki/Ranged_Cooldown_Multiplier
+            - text: stat of the shooter. This is indicated by a translucent white circle over the pawn, which shrinks to nothing as the pawn recovers.
+        - paragraph [ref=e170]: Once this cycle is complete, the process repeats.
+        - paragraph [ref=e171]: "Thus optimum DPS is determined by the following equation:"
+        - paragraph [ref=e172]:
+          - code [ref=e174]:
+            - text: Max DPS = (Damage × Burst Shot Count) ÷ ((Ranged Cooldown (
+            - link "ticks" [ref=e175] [cursor=pointer]:
+              - /url: /wiki/Ticks
+            - text: ) + Warm-up (
+            - link "ticks" [ref=e176] [cursor=pointer]:
+              - /url: /wiki/Ticks
+            - text: ) + (Burst Time (
+            - link "ticks" [ref=e177] [cursor=pointer]:
+              - /url: /wiki/Ticks
+            - text: ) * (Burst Count - 1)) ÷ 60)
+        - paragraph [ref=e178]:
+          - text: This optimum DPS is then affected by
+          - link "accuracy" [ref=e179] [cursor=pointer]:
+            - /url: "#Accuracy"
+          - text: to determine the actual DPS on target.
+        - heading "Range[edit]" [level=3] [ref=e180]:
+          - text: Range
+          - generic [ref=e181]:
+            - text: "["
+            - link "edit" [ref=e182] [cursor=pointer]:
+              - /url: /index.php?title=Weapons&action=edit&section=3
+            - text: "]"
+        - paragraph [ref=e183]: "The ranges are measured in tiles and correspond to:"
+        - list [ref=e184]:
+          - listitem [ref=e185]: Touch = 3 tiles.
+          - listitem [ref=e186]: Short = 12 tiles.
+          - listitem [ref=e187]: Medium = 25 tiles.
+          - listitem [ref=e188]: Long = 40 tiles.
+        - paragraph [ref=e189]:
+          - text: Every ranged weapon has an
+          - link "accuracy" [ref=e190] [cursor=pointer]:
+            - /url: "#Accuracy"
+          - text: for each range point. Between those ranges, the accuracy of the weapon is linearly interpolated. A weapon will never fire past its range stat, even if it has an accuracy value listed for longer ranges. For example, a pump shotgun, with a maximum range of 15.9 tiles, a Short range accuracy of 87% and a Medium range accuracy of 77%. It will never fire at a target 17 tiles away, but at a range of 14 tiles, its accuracy will be 2/13 of the way between the Short and Medium range accuracy values, or 85%.
+        - paragraph [ref=e191]: Ranged weapons wielders cannot fire at targets that are in melee range of themselves, but can target more distant enemies while engaged in melee. Note that NPCs will never target another pawn while engaged in melee.
+        - heading "Accuracy[edit]" [level=3] [ref=e192]:
+          - text: Accuracy
+          - generic [ref=e193]:
+            - text: "["
+            - link "edit" [ref=e194] [cursor=pointer]:
+              - /url: /index.php?title=Weapons&action=edit&section=4
+            - text: "]"
+        - table [ref=e195]:
+          - rowgroup [ref=e196]:
+            - 'row "StumpChoppedA (cropped).png This section is a stub. You can help RimWorld Wiki by expanding it. Reason: Needs to be double checked and what happens at ranges beyond 40 tiles for weapon accuracy? Where is body size of target applied? Also Combat in darkness precept effect needs info. Also Nearsighted info? Also Shooting Accuracy Multiplier (Child) (verify in game, not just xml)." [ref=e197]':
+              - cell "StumpChoppedA (cropped).png" [ref=e198]:
+                - link "StumpChoppedA (cropped).png" [ref=e200] [cursor=pointer]:
+                  - /url: /wiki/Category:Stubs
+                  - img "StumpChoppedA (cropped).png" [ref=e201]
+              - 'cell "This section is a stub. You can help RimWorld Wiki by expanding it. Reason: Needs to be double checked and what happens at ranges beyond 40 tiles for weapon accuracy? Where is body size of target applied? Also Combat in darkness precept effect needs info. Also Nearsighted info? Also Shooting Accuracy Multiplier (Child) (verify in game, not just xml)." [ref=e202]':
+                - generic [ref=e203]:
+                  - generic [ref=e204]:
+                    - text: This section is a
+                    - link "stub" [ref=e205] [cursor=pointer]:
+                      - /url: /wiki/Category:Stubs
+                    - text: .
+                  - text: You can help RimWorld Wiki by
+                  - generic [ref=e206]:
+                    - link "expanding it" [ref=e207] [cursor=pointer]:
+                      - /url: https://rimworldwiki.com/index.php?title=Weapons&action=edit
+                    - text: ". Reason:"
+                  - generic [ref=e208]:
+                    - text: Needs to be double checked and what happens at ranges beyond 40 tiles for weapon accuracy? Where is body size of target applied? Also
+                    - link "Combat in darkness" [ref=e209] [cursor=pointer]:
+                      - /url: /wiki/Combat_in_darkness
+                    - text: precept effect needs info. Also
+                    - link "Nearsighted" [ref=e210] [cursor=pointer]:
+                      - /url: /wiki/Nearsighted
+                    - text: info? Also
+                    - link "Shooting Accuracy Multiplier (Child)" [ref=e211] [cursor=pointer]:
+                      - /url: /wiki/Shooting_Accuracy_Multiplier_(Child)
+                    - text: (verify in game, not just xml).
+        - paragraph [ref=e212]: "Ranged weapon accuracy follows the following equation:"
+        - paragraph [ref=e213]:
+          - code [ref=e215]:
+            - text: Accuracy = (
+            - link "Shooting Accuracy" [ref=e216] [cursor=pointer]:
+              - /url: /wiki/Shooting_Accuracy
+            - superscript [ref=e217]: Range
+            - text: × Weapon Accuracy ×
+            - link "Weather" [ref=e218] [cursor=pointer]:
+              - /url: /wiki/Weather
+            - text: ×
+            - link "Smoke" [ref=e219] [cursor=pointer]:
+              - /url: /wiki/Smoke
+            - text: ×
+            - link "Cover" [ref=e220] [cursor=pointer]:
+              - /url: /wiki/Cover
+            - text: ) +
+            - link "Combat in Darkness" [ref=e221] [cursor=pointer]:
+              - /url: /wiki/Combat_in_darkness
+        - paragraph [ref=e222]: "Where:"
+        - list [ref=e223]:
+          - listitem [ref=e224]:
+            - link "Shooting Accuracy" [ref=e225] [cursor=pointer]:
+              - /url: /wiki/Shooting_Accuracy
+            - text: ": Is the stat of the shooting pawn."
+          - listitem [ref=e226]: "Range: Is the distance in tiles between the shooter and the target."
+          - listitem [ref=e227]: "Weapon Accuracy: Is the weapon accuracy of the weapon at that range. If it is not one of the listed values at 3, 12, 25, or 40 tiles, it is linearly interpolated between the nearest point above and the nearest point below the current range."
+          - listitem [ref=e228]:
+            - link "Weather" [ref=e229] [cursor=pointer]:
+              - /url: /wiki/Weather
+            - text: ": Is the accuracy modifier for a given weather ranging from 50% for Fog, to 100% on a clear day."
+          - listitem [ref=e230]:
+            - link "Smoke" [ref=e231] [cursor=pointer]:
+              - /url: /wiki/Smoke
+            - text: ": If smoke occupies any tile directly between the shooter and target, it applies a 30% modifier (otherwise 100%)."
+          - listitem [ref=e232]:
+            - link "Cover" [ref=e233] [cursor=pointer]:
+              - /url: /wiki/Cover
+            - text: ": Cover modifier for the target, based on cover objects and shooting angle."
+          - listitem [ref=e234]:
+            - link "Body size" [ref=e235] [cursor=pointer]:
+              - /url: /wiki/Body_size
+            - text: ": A modifier based on the body size of the target. 0.5x for body sizes of 0.5 or lower, equal to body size for body size between 0.5 and 2.0, and 2.0x for body sizes of 2.0x or higher."
+            - generic "Verify bounds and check where the multiplier is applied in the order of pperations" [ref=e236]:
+              - superscript [ref=e237]: "[Detail/Verify]"
+          - listitem [ref=e238]:
+            - link "Combat in Darkness" [ref=e239] [cursor=pointer]:
+              - /url: /wiki/Combat_in_darkness
+            - text: Preferred Precept
+            - superscript [ref=e240]:
+              - link "Content added by the Ideology DLC" [ref=e241] [cursor=pointer]:
+                - /url: /wiki/Ideology_DLC
+                - img "Content added by the Ideology DLC" [ref=e242]
+            - text: ": If the shooter has the precept and the target is in darkness, +25% accuracy. If the shooter has the precept and target is not in darkness, -20% accuracy. Otherwise, 0%. For this precept, \"darkness\" is considered: 1. \"Indoors\" with 0% light level, 2. \"Indoors\" lit by only"
+            - link "dark light" [ref=e243] [cursor=pointer]:
+              - /url: /wiki/Darktorch#Summary
+            - text: ", or 3. Outdoors or Unroofed, only if the sun is at 0% light level."
+        - paragraph [ref=e244]:
+          - text: Related to accuracy, there are also
+          - link "friendly fire" [ref=e245] [cursor=pointer]:
+            - /url: /wiki/Friendly_fire
+          - text: mechanics that prevent misses from hitting nearby allies within a certain radius.
+        - heading "Stopping power[edit]" [level=3] [ref=e246]:
+          - text: Stopping power
+          - generic [ref=e247]:
+            - text: "["
+            - link "edit" [ref=e248] [cursor=pointer]:
+              - /url: /index.php?title=Weapons&action=edit&section=5
+            - text: "]"
+        - paragraph [ref=e249]:
+          - text: Stopping power is the ability of ranged weapons to cause stagger when hitting a target, slowing them down by 83% for 95
+          - link "ticks" [ref=e250] [cursor=pointer]:
+            - /url: /wiki/Time
+          - text: (1.58 secs). Stagger duration is scaled by
+          - link "Stagger Time Multiplier" [ref=e251] [cursor=pointer]:
+            - /url: /wiki/Stagger_Time_Multiplier
+          - text: ", which may render the target immune to being staggered."
+          - link "Unnatural corpses" [ref=e252] [cursor=pointer]:
+            - /url: /wiki/Unnatural_corpse
+          - superscript [ref=e253]:
+            - link "Content added by the Anomaly DLC" [ref=e254] [cursor=pointer]:
+              - /url: /wiki/Anomaly_(DLC)
+              - img "Content added by the Anomaly DLC" [ref=e255]
+          - text: are immune to being staggered, despite having 100%
+          - link "Stagger Time Multiplier" [ref=e256] [cursor=pointer]:
+            - /url: /wiki/Stagger_Time_Multiplier
+          - text: . The size of the number relates directly to the body size of the pawn that can be staggered by the weapon - thus, to stagger
+          - link "humans" [ref=e257] [cursor=pointer]:
+            - /url: /wiki/Human
+          - text: a stopping power of 1 or higher is required while to stagger an
+          - link "elephant" [ref=e258] [cursor=pointer]:
+            - /url: /wiki/Elephant
+          - text: a stopping power of 4 would be needed. Any creature (unless immune to it) will get staggered when hit by a projectile with a sufficient stopping power, even if it doesn't deal any damage.
+        - paragraph [ref=e259]: "A typical ranged weapon has a stopping power of 0.5, however the following weapons have higher stopping powers:"
+        - list [ref=e261]:
+          - listitem [ref=e262]:
+            - link "ChargeLance.png" [ref=e263] [cursor=pointer]:
+              - /url: /wiki/Charge_lance
+              - img "ChargeLance.png" [ref=e264]
+            - link "Charge lance" [ref=e265] [cursor=pointer]:
+              - /url: /wiki/Charge_lance
+          - listitem [ref=e266]:
+            - link "Bolt-action rifle.png" [ref=e267] [cursor=pointer]:
+              - /url: /wiki/Bolt-action_rifle
+              - img "Bolt-action rifle.png" [ref=e268]
+            - link "Bolt-action rifle" [ref=e269] [cursor=pointer]:
+              - /url: /wiki/Bolt-action_rifle
+          - listitem [ref=e270]:
+            - link "NeedleGun.png" [ref=e271] [cursor=pointer]:
+              - /url: /wiki/Needle_gun
+              - img "NeedleGun.png" [ref=e272]
+            - link "Needle gun" [ref=e273] [cursor=pointer]:
+              - /url: /wiki/Needle_gun
+          - listitem [ref=e274]:
+            - link "ThumpCannon.png" [ref=e275] [cursor=pointer]:
+              - /url: /wiki/Thump_cannon
+              - img "ThumpCannon.png" [ref=e276]
+            - link "Thump cannon" [ref=e277] [cursor=pointer]:
+              - /url: /wiki/Thump_cannon
+          - listitem [ref=e278]:
+            - link "RecurveBow.png" [ref=e279] [cursor=pointer]:
+              - /url: /wiki/Recurve_bow
+              - img "RecurveBow.png" [ref=e280]
+            - link "Recurve bow" [ref=e281] [cursor=pointer]:
+              - /url: /wiki/Recurve_bow
+          - listitem [ref=e282]:
+            - link "GreatBow.png" [ref=e283] [cursor=pointer]:
+              - /url: /wiki/Greatbow
+              - img "GreatBow.png" [ref=e284]
+            - link "Greatbow" [ref=e285] [cursor=pointer]:
+              - /url: /wiki/Greatbow
+          - listitem [ref=e286]:
+            - link "ChainShotgun.png" [ref=e287] [cursor=pointer]:
+              - /url: /wiki/Chain_shotgun
+              - img "ChainShotgun.png" [ref=e288]
+            - link "Chain shotgun" [ref=e289] [cursor=pointer]:
+              - /url: /wiki/Chain_shotgun
+          - listitem [ref=e290]:
+            - link "LMG.png" [ref=e291] [cursor=pointer]:
+              - /url: /wiki/LMG
+              - img "LMG.png" [ref=e292]
+            - link "LMG" [ref=e293] [cursor=pointer]:
+              - /url: /wiki/LMG
+          - listitem [ref=e294]:
+            - link "Shell antigrain a.png" [ref=e295] [cursor=pointer]:
+              - /url: /wiki/Antigrain_warhead
+              - img "Shell antigrain a.png" [ref=e296]
+            - link "Antigrain warhead" [ref=e297] [cursor=pointer]:
+              - /url: /wiki/Antigrain_warhead
+          - listitem [ref=e298]:
+            - link "SniperRifle.png" [ref=e299] [cursor=pointer]:
+              - /url: /wiki/Sniper_rifle
+              - img "SniperRifle.png" [ref=e300]
+            - link "Sniper rifle" [ref=e301] [cursor=pointer]:
+              - /url: /wiki/Sniper_rifle
+          - listitem [ref=e302]:
+            - link "Pump shotgun.png" [ref=e303] [cursor=pointer]:
+              - /url: /wiki/Pump_shotgun
+              - img "Pump shotgun.png" [ref=e304]
+            - link "Pump shotgun" [ref=e305] [cursor=pointer]:
+              - /url: /wiki/Pump_shotgun
+          - listitem [ref=e306]:
+            - link "Revolver.png" [ref=e307] [cursor=pointer]:
+              - /url: /wiki/Revolver
+              - img "Revolver.png" [ref=e308]
+            - link "Revolver" [ref=e309] [cursor=pointer]:
+              - /url: /wiki/Revolver
+          - listitem [ref=e310]:
+            - link "Pila.png" [ref=e311] [cursor=pointer]:
+              - /url: /wiki/Pila
+              - img "Pila.png" [ref=e312]
+            - link "Pila" [ref=e313] [cursor=pointer]:
+              - /url: /wiki/Pila
+          - listitem [ref=e314]:
+            - link "MiniShotgun.png" [ref=e315] [cursor=pointer]:
+              - /url: /wiki/Mini-shotgun
+              - img "MiniShotgun.png" [ref=e316]
+            - link "Mini-shotgun" [ref=e317] [cursor=pointer]:
+              - /url: /wiki/Mini-shotgun
+            - superscript [ref=e318]:
+              - link "Content added by the Biotech DLC" [ref=e319] [cursor=pointer]:
+                - /url: /wiki/Biotech_(DLC)
+                - img "Content added by the Biotech DLC" [ref=e320]
+          - listitem [ref=e321]:
+            - link "ToxicNeedleGun.png" [ref=e322] [cursor=pointer]:
+              - /url: /wiki/Toxic_needle_gun
+              - img "ToxicNeedleGun.png" [ref=e323]
+            - link "Toxic needle gun" [ref=e324] [cursor=pointer]:
+              - /url: /wiki/Toxic_needle_gun
+            - superscript [ref=e325]:
+              - link "Content added by the Biotech DLC" [ref=e326] [cursor=pointer]:
+                - /url: /wiki/Biotech_(DLC)
+                - img "Content added by the Biotech DLC" [ref=e327]
+          - listitem [ref=e328]:
+            - link "HellsphereCannon.png" [ref=e329] [cursor=pointer]:
+              - /url: /wiki/Hellsphere_cannon
+              - img "HellsphereCannon.png" [ref=e330]
+            - link "Hellsphere cannon" [ref=e331] [cursor=pointer]:
+              - /url: /wiki/Hellsphere_cannon
+            - superscript [ref=e332]:
+              - link "Content added by the Biotech DLC" [ref=e333] [cursor=pointer]:
+                - /url: /wiki/Biotech_(DLC)
+                - img "Content added by the Biotech DLC" [ref=e334]
+          - listitem [ref=e335]:
+            - link "NeedleLauncher.png" [ref=e336] [cursor=pointer]:
+              - /url: /wiki/Needle_launcher
+              - img "NeedleLauncher.png" [ref=e337]
+            - link "Needle launcher" [ref=e338] [cursor=pointer]:
+              - /url: /wiki/Needle_launcher
+            - superscript [ref=e339]:
+              - link "Content added by the Biotech DLC" [ref=e340] [cursor=pointer]:
+                - /url: /wiki/Biotech_(DLC)
+                - img "Content added by the Biotech DLC" [ref=e341]
+          - listitem [ref=e342]:
+            - link "UniqueBoltActionRifleA.png" [ref=e343] [cursor=pointer]:
+              - /url: /wiki/Unique_bolt-action_rifle
+              - img "UniqueBoltActionRifleA.png" [ref=e344]
+            - link "Unique bolt-action rifle" [ref=e345] [cursor=pointer]:
+              - /url: /wiki/Unique_bolt-action_rifle
+            - superscript [ref=e346]:
+              - link "Content added by the Odyssey DLC" [ref=e347] [cursor=pointer]:
+                - /url: /wiki/Odyssey_(DLC)
+                - img "Content added by the Odyssey DLC" [ref=e348]
+          - listitem [ref=e349]:
+            - link "UniqueChainShotgunA.png" [ref=e350] [cursor=pointer]:
+              - /url: /wiki/Unique_chain_shotgun
+              - img "UniqueChainShotgunA.png" [ref=e351]
+            - link "Unique chain shotgun" [ref=e352] [cursor=pointer]:
+              - /url: /wiki/Unique_chain_shotgun
+            - superscript [ref=e353]:
+              - link "Content added by the Odyssey DLC" [ref=e354] [cursor=pointer]:
+                - /url: /wiki/Odyssey_(DLC)
+                - img "Content added by the Odyssey DLC" [ref=e355]
+          - listitem [ref=e356]:
+            - text: "[[|24px|link=Unique LMG]]"
+            - link "Unique LMG" [ref=e357] [cursor=pointer]:
+              - /url: /wiki/Unique_LMG
+            - superscript [ref=e358]:
+              - link "Content added by the Odyssey DLC" [ref=e359] [cursor=pointer]:
+                - /url: /wiki/Odyssey_(DLC)
+                - img "Content added by the Odyssey DLC" [ref=e360]
+          - listitem [ref=e361]:
+            - link "UniqueChargeLanceA.png" [ref=e362] [cursor=pointer]:
+              - /url: /wiki/Unique_charge_lance
+              - img "UniqueChargeLanceA.png" [ref=e363]
+            - link "Unique charge lance" [ref=e364] [cursor=pointer]:
+              - /url: /wiki/Unique_charge_lance
+            - superscript [ref=e365]:
+              - link "Content added by the Odyssey DLC" [ref=e366] [cursor=pointer]:
+                - /url: /wiki/Odyssey_(DLC)
+                - img "Content added by the Odyssey DLC" [ref=e367]
+          - listitem [ref=e368]:
+            - text: "[[|24px|link=Unique revolver]]"
+            - link "Unique revolver" [ref=e369] [cursor=pointer]:
+              - /url: /wiki/Unique_revolver
+            - superscript [ref=e370]:
+              - link "Content added by the Odyssey DLC" [ref=e371] [cursor=pointer]:
+                - /url: /wiki/Odyssey_(DLC)
+                - img "Content added by the Odyssey DLC" [ref=e372]
+          - listitem [ref=e373]:
+            - link "SentryScattergun.png" [ref=e374] [cursor=pointer]:
+              - /url: /wiki/Scattergun
+              - img "SentryScattergun.png" [ref=e375]
+            - link "Scattergun" [ref=e376] [cursor=pointer]:
+              - /url: /wiki/Scattergun
+            - superscript [ref=e377]:
+              - link "Content added by the Odyssey DLC" [ref=e378] [cursor=pointer]:
+                - /url: /wiki/Odyssey_(DLC)
+                - img "Content added by the Odyssey DLC" [ref=e379]
+          - listitem [ref=e380]:
+            - text: "[[|24px|link=Unique greatbow]]"
+            - link "Unique greatbow" [ref=e381] [cursor=pointer]:
+              - /url: /wiki/Unique_greatbow
+            - superscript [ref=e382]:
+              - link "Content added by the Odyssey DLC" [ref=e383] [cursor=pointer]:
+                - /url: /wiki/Odyssey_(DLC)
+                - img "Content added by the Odyssey DLC" [ref=e384]
+          - listitem [ref=e385]:
+            - text: "[[|24px|link=Unique sniper rifle]]"
+            - link "Unique sniper rifle" [ref=e386] [cursor=pointer]:
+              - /url: /wiki/Unique_sniper_rifle
+            - superscript [ref=e387]:
+              - link "Content added by the Odyssey DLC" [ref=e388] [cursor=pointer]:
+                - /url: /wiki/Odyssey_(DLC)
+                - img "Content added by the Odyssey DLC" [ref=e389]
+        - paragraph [ref=e390]: At the time of writing, all weapons with a stopping power above 0.5, have a stopping power of at least 1 and are able to stagger humans.
+        - heading "Ranged weapons comparison table[edit]" [level=3] [ref=e391]:
+          - text: Ranged weapons comparison table
+          - generic [ref=e392]:
+            - text: "["
+            - link "edit" [ref=e393] [cursor=pointer]:
+              - /url: /index.php?title=Weapons&action=edit&section=6
+            - text: "]"
+        - paragraph [ref=e394]: Stats listed in the table below are for weapons that are of normal quality; better/worse quality will raise/lower the % to hit as appropriate.
+        - paragraph [ref=e395]: DPS (Optimal) refers to the theoretical DPS if every single shot were to hit the target. DPS for the various ranges takes into account the weapon's accuracy at the start of the defined range.
+        - paragraph [ref=e396]:
+          - text: Technical limitations prevent the display of a more comprehensive table on this page. For a complete comparison table, see
+          - link "Weapon comparison table" [ref=e397] [cursor=pointer]:
+            - /url: /wiki/Weapon_comparison_table
+          - text: .
+        - table [ref=e398]:
+          - rowgroup [ref=e399]:
+            - row "Name Damage AP Stopping Power Warm-Up (ticks)[A] Cooldown (ticks)[A] Range (tiles) Burst Count Burst (ticks)[A] Bullet Speed Accuracy (Touch) Accuracy (Short) Accuracy (Medium) Accuracy (Long) Miss Radius Blast Radius DPS (Optimal)[B] DPS (Touch)[B] DPS (Short)[B] DPS (Medium)[B] DPS (Long)[B] Value Silver" [ref=e400]:
+              - columnheader "Name" [ref=e401] [cursor=pointer]
+              - columnheader "Damage" [ref=e402] [cursor=pointer]
+              - columnheader "AP" [ref=e403] [cursor=pointer]
+              - columnheader "Stopping Power" [ref=e404] [cursor=pointer]
+              - columnheader "Warm-Up (ticks)[A]" [ref=e405] [cursor=pointer]:
+                - text: Warm-Up
+                - text: (ticks)
+                - superscript [ref=e406]:
+                  - link "[A]" [ref=e407]:
+                    - /url: "#endnote_Time"
+              - columnheader "Cooldown (ticks)[A]" [ref=e408] [cursor=pointer]:
+                - text: Cooldown
+                - text: (ticks)
+                - superscript [ref=e409]:
+                  - link "[A]" [ref=e410]:
+                    - /url: "#endnote_Time"
+              - columnheader "Range (tiles)" [ref=e411] [cursor=pointer]:
+                - text: Range
+                - text: (tiles)
+              - columnheader "Burst Count" [ref=e412] [cursor=pointer]
+              - columnheader "Burst (ticks)[A]" [ref=e413] [cursor=pointer]:
+                - text: Burst (ticks)
+                - superscript [ref=e414]:
+                  - link "[A]" [ref=e415]:
+                    - /url: "#endnote_Time"
+              - columnheader "Bullet Speed" [ref=e416] [cursor=pointer]
+              - columnheader "Accuracy (Touch)" [ref=e417] [cursor=pointer]:
+                - text: Accuracy
+                - text: (Touch)
+              - columnheader "Accuracy (Short)" [ref=e418] [cursor=pointer]:
+                - text: Accuracy
+                - text: (Short)
+              - columnheader "Accuracy (Medium)" [ref=e419] [cursor=pointer]:
+                - text: Accuracy
+                - text: (Medium)
+              - columnheader "Accuracy (Long)" [ref=e420] [cursor=pointer]:
+                - text: Accuracy
+                - text: (Long)
+              - columnheader "Miss Radius" [ref=e421] [cursor=pointer]
+              - columnheader "Blast Radius" [ref=e422] [cursor=pointer]
+              - columnheader "DPS (Optimal)[B]" [ref=e423] [cursor=pointer]:
+                - text: DPS
+                - text: (Optimal)
+                - superscript [ref=e424]:
+                  - link "[B]" [ref=e425]:
+                    - /url: "#endnote_DPS_Targets"
+              - columnheader "DPS (Touch)[B]" [ref=e426] [cursor=pointer]:
+                - text: DPS
+                - text: (Touch)
+                - superscript [ref=e427]:
+                  - link "[B]" [ref=e428]:
+                    - /url: "#endnote_DPS_Targets"
+              - columnheader "DPS (Short)[B]" [ref=e429] [cursor=pointer]:
+                - text: DPS
+                - text: (Short)
+                - superscript [ref=e430]:
+                  - link "[B]" [ref=e431]:
+                    - /url: "#endnote_DPS_Targets"
+              - columnheader "DPS (Medium)[B]" [ref=e432] [cursor=pointer]:
+                - text: DPS
+                - text: (Medium)
+                - superscript [ref=e433]:
+                  - link "[B]" [ref=e434]:
+                    - /url: "#endnote_DPS_Targets"
+              - columnheader "DPS (Long)[B]" [ref=e435] [cursor=pointer]:
+                - text: DPS
+                - text: (Long)
+                - superscript [ref=e436]:
+                  - link "[B]" [ref=e437]:
+                    - /url: "#endnote_DPS_Targets"
+              - columnheader "Value Silver" [ref=e438] [cursor=pointer]:
+                - text: Value
+                - link "Silver" [ref=e439]:
+                  - /url: /wiki/Silver
+                  - img "Silver" [ref=e440]
+          - rowgroup [ref=e441]:
+            - row "Assault rifle Assault rifle 11 16 0.5 60 102 30.9 3 10 70 60% 70% 65% 55% - - 10.88 6.528 7.616 7.072 5.984 480" [ref=e442]:
+              - columnheader "Assault rifle" [ref=e443]:
+                - link "Assault rifle" [ref=e444] [cursor=pointer]:
+                  - /url: /wiki/Assault_rifle
+                  - img "Assault rifle" [ref=e445]
+              - rowheader "Assault rifle" [ref=e446]:
+                - link "Assault rifle" [ref=e447] [cursor=pointer]:
+                  - /url: /wiki/Assault_rifle
+              - cell "11" [ref=e448]
+              - cell "16" [ref=e449]
+              - cell "0.5" [ref=e450]
+              - cell "60" [ref=e451]
+              - cell "102" [ref=e452]
+              - cell "30.9" [ref=e453]
+              - cell "3" [ref=e454]
+              - cell "10" [ref=e455]
+              - cell "70" [ref=e456]
+              - cell "60%" [ref=e457]
+              - cell "70%" [ref=e458]
+              - cell "65%" [ref=e459]
+              - cell "55%" [ref=e460]
+              - cell "-" [ref=e461]
+              - cell "-" [ref=e462]
+              - cell "10.88" [ref=e463]
+              - cell "6.528" [ref=e464]
+              - cell "7.616" [ref=e465]
+              - cell "7.072" [ref=e466]
+              - cell "5.984" [ref=e467]:
+                - paragraph [ref=e468]: "5.984"
+              - cell "480" [ref=e469]
+            - row "Autopistol Autopistol 10 15 0.5 18 60 25.9 1 - 55 80% 70% 40% 30% - - 7.69 6.152 5.383 3.076 2.307 139" [ref=e470]:
+              - columnheader "Autopistol" [ref=e471]:
+                - link "Autopistol" [ref=e472] [cursor=pointer]:
+                  - /url: /wiki/Autopistol
+                  - img "Autopistol" [ref=e473]
+              - rowheader "Autopistol" [ref=e474]:
+                - link "Autopistol" [ref=e475] [cursor=pointer]:
+                  - /url: /wiki/Autopistol
+              - cell "10" [ref=e476]
+              - cell "15" [ref=e477]
+              - cell "0.5" [ref=e478]
+              - cell "18" [ref=e479]
+              - cell "60" [ref=e480]
+              - cell "25.9" [ref=e481]
+              - cell "1" [ref=e482]
+              - cell "-" [ref=e483]
+              - cell "55" [ref=e484]
+              - cell "80%" [ref=e485]
+              - cell "70%" [ref=e486]
+              - cell "40%" [ref=e487]
+              - cell "30%" [ref=e488]
+              - cell "-" [ref=e489]
+              - cell "-" [ref=e490]
+              - cell "7.69" [ref=e491]
+              - cell "6.152" [ref=e492]
+              - cell "5.383" [ref=e493]
+              - cell "3.076" [ref=e494]
+              - cell "2.307" [ref=e495]:
+                - paragraph [ref=e496]: "2.307"
+              - cell "139" [ref=e497]
+            - row "Bolt-action rifle Bolt-action rifle 18 27 1.5 102 90 36.9 1 - 70 65% 80% 90% 80% - - 5.63 3.6595 4.504 5.067 4.504 255" [ref=e498]:
+              - columnheader "Bolt-action rifle" [ref=e499]:
+                - link "Bolt-action rifle" [ref=e500] [cursor=pointer]:
+                  - /url: /wiki/Bolt-action_rifle
+                  - img "Bolt-action rifle" [ref=e501]
+              - rowheader "Bolt-action rifle" [ref=e502]:
+                - link "Bolt-action rifle" [ref=e503] [cursor=pointer]:
+                  - /url: /wiki/Bolt-action_rifle
+              - cell "18" [ref=e504]
+              - cell "27" [ref=e505]
+              - cell "1.5" [ref=e506]
+              - cell "102" [ref=e507]
+              - cell "90" [ref=e508]
+              - cell "36.9" [ref=e509]
+              - cell "1" [ref=e510]
+              - cell "-" [ref=e511]
+              - cell "70" [ref=e512]
+              - cell "65%" [ref=e513]
+              - cell "80%" [ref=e514]
+              - cell "90%" [ref=e515]
+              - cell "80%" [ref=e516]
+              - cell "-" [ref=e517]
+              - cell "-" [ref=e518]
+              - cell "5.63" [ref=e519]
+              - cell "3.6595" [ref=e520]
+              - cell "4.504" [ref=e521]
+              - cell "5.067" [ref=e522]
+              - cell "4.504" [ref=e523]:
+                - paragraph [ref=e524]: "4.504"
+              - cell "255" [ref=e525]
+            - row "Chain shotgun Chain shotgun 18 14 3 72 81 12.9 3 10 55 57% 64% 55% 45% - - 18.73 10.6761 11.9872 10.3015 - 405" [ref=e526]:
+              - columnheader "Chain shotgun" [ref=e527]:
+                - link "Chain shotgun" [ref=e528] [cursor=pointer]:
+                  - /url: /wiki/Chain_shotgun
+                  - img "Chain shotgun" [ref=e529]
+              - rowheader "Chain shotgun" [ref=e530]:
+                - link "Chain shotgun" [ref=e531] [cursor=pointer]:
+                  - /url: /wiki/Chain_shotgun
+              - cell "18" [ref=e532]
+              - cell "14" [ref=e533]
+              - cell "3" [ref=e534]
+              - cell "72" [ref=e535]
+              - cell "81" [ref=e536]
+              - cell "12.9" [ref=e537]
+              - cell "3" [ref=e538]
+              - cell "10" [ref=e539]
+              - cell "55" [ref=e540]
+              - cell "57%" [ref=e541]
+              - cell "64%" [ref=e542]
+              - cell "55%" [ref=e543]
+              - cell "45%" [ref=e544]
+              - cell "-" [ref=e545]
+              - cell "-" [ref=e546]
+              - cell "18.73" [ref=e547]
+              - cell "10.6761" [ref=e548]
+              - cell "11.9872" [ref=e549]
+              - cell "10.3015" [ref=e550]:
+                - paragraph [ref=e551]: "10.3015"
+              - cell "-" [ref=e552]
+              - cell "405" [ref=e553]
+            - row "Charge lance Charge lance 30 45 1.5 102 162 32.9 1 - 120 65% 85% 85% 75% - - 6.82 4.433 5.797 5.797 5.115 1,355" [ref=e554]:
+              - columnheader "Charge lance" [ref=e555]:
+                - link "Charge lance" [ref=e556] [cursor=pointer]:
+                  - /url: /wiki/Charge_lance
+                  - img "Charge lance" [ref=e557]
+              - rowheader "Charge lance" [ref=e558]:
+                - link "Charge lance" [ref=e559] [cursor=pointer]:
+                  - /url: /wiki/Charge_lance
+              - cell "30" [ref=e560]
+              - cell "45" [ref=e561]
+              - cell "1.5" [ref=e562]
+              - cell "102" [ref=e563]
+              - cell "162" [ref=e564]
+              - cell "32.9" [ref=e565]
+              - cell "1" [ref=e566]
+              - cell "-" [ref=e567]
+              - cell "120" [ref=e568]
+              - cell "65%" [ref=e569]
+              - cell "85%" [ref=e570]
+              - cell "85%" [ref=e571]
+              - cell "75%" [ref=e572]
+              - cell "-" [ref=e573]
+              - cell "-" [ref=e574]
+              - cell "6.82" [ref=e575]
+              - cell "4.433" [ref=e576]
+              - cell "5.797" [ref=e577]
+              - cell "5.797" [ref=e578]
+              - cell "5.115" [ref=e579]:
+                - paragraph [ref=e580]: "5.115"
+              - cell "1,355" [ref=e581]
+            - row "Charge rifle Charge rifle 16 35 0.5 60 120 27.9 3 12 70 55% 64% 55% 45% - - 14.12 7.766 9.0368 7.766 6.354 1,010" [ref=e582]:
+              - columnheader "Charge rifle" [ref=e583]:
+                - link "Charge rifle" [ref=e584] [cursor=pointer]:
+                  - /url: /wiki/Charge_rifle
+                  - img "Charge rifle" [ref=e585]
+              - rowheader "Charge rifle" [ref=e586]:
+                - link "Charge rifle" [ref=e587] [cursor=pointer]:
+                  - /url: /wiki/Charge_rifle
+              - cell "16" [ref=e588]
+              - cell "35" [ref=e589]
+              - cell "0.5" [ref=e590]
+              - cell "60" [ref=e591]
+              - cell "120" [ref=e592]
+              - cell "27.9" [ref=e593]
+              - cell "3" [ref=e594]
+              - cell "12" [ref=e595]
+              - cell "70" [ref=e596]
+              - cell "55%" [ref=e597]
+              - cell "64%" [ref=e598]
+              - cell "55%" [ref=e599]
+              - cell "45%" [ref=e600]
+              - cell "-" [ref=e601]
+              - cell "-" [ref=e602]
+              - cell "14.12" [ref=e603]
+              - cell "7.766" [ref=e604]
+              - cell "9.0368" [ref=e605]
+              - cell "7.766" [ref=e606]
+              - cell "6.354" [ref=e607]:
+                - paragraph [ref=e608]: "6.354"
+              - cell "1,010" [ref=e609]
+            - row "Doomsday rocket launcher Doomsday rocket launcher 50 10 0.5 270 270 36 1 - 50 -% -% -% -% 1.9 7.8 5.56 - - - - 1,000" [ref=e610]:
+              - columnheader "Doomsday rocket launcher" [ref=e611]:
+                - link "Doomsday rocket launcher" [ref=e612] [cursor=pointer]:
+                  - /url: /wiki/Doomsday_rocket_launcher
+                  - img "Doomsday rocket launcher" [ref=e613]
+              - rowheader "Doomsday rocket launcher" [ref=e614]:
+                - link "Doomsday rocket launcher" [ref=e615] [cursor=pointer]:
+                  - /url: /wiki/Doomsday_rocket_launcher
+              - cell "50" [ref=e616]
+              - cell "10" [ref=e617]
+              - cell "0.5" [ref=e618]
+              - cell "270" [ref=e619]
+              - cell "270" [ref=e620]
+              - cell "36" [ref=e621]
+              - cell "1" [ref=e622]
+              - cell "-" [ref=e623]
+              - cell "50" [ref=e624]
+              - cell "-%" [ref=e625]
+              - cell "-%" [ref=e626]
+              - cell "-%" [ref=e627]
+              - cell "-%" [ref=e628]
+              - cell "1.9" [ref=e629]
+              - cell "7.8" [ref=e630]
+              - cell "5.56" [ref=e631]
+              - cell "-" [ref=e632]
+              - cell "-" [ref=e633]
+              - cell "-" [ref=e634]
+              - cell "-" [ref=e635]
+              - cell "1,000" [ref=e636]
+            - row "EMP grenades EMP grenades 50 - - 90 160 12.9 1 - 12 -% -% -% -% 1.9 3.5 12 - - - - 315" [ref=e637]:
+              - columnheader "EMP grenades" [ref=e638]:
+                - link "EMP grenades" [ref=e639] [cursor=pointer]:
+                  - /url: /wiki/EMP_grenades
+                  - img "EMP grenades" [ref=e640]
+              - rowheader "EMP grenades" [ref=e641]:
+                - link "EMP grenades" [ref=e642] [cursor=pointer]:
+                  - /url: /wiki/EMP_grenades
+              - cell "50" [ref=e643]
+              - cell "-" [ref=e644]
+              - cell "-" [ref=e645]
+              - cell "90" [ref=e646]
+              - cell "160" [ref=e647]
+              - cell "12.9" [ref=e648]
+              - cell "1" [ref=e649]
+              - cell "-" [ref=e650]
+              - cell "12" [ref=e651]
+              - cell "-%" [ref=e652]
+              - cell "-%" [ref=e653]
+              - cell "-%" [ref=e654]
+              - cell "-%" [ref=e655]
+              - cell "1.9" [ref=e656]
+              - cell "3.5" [ref=e657]
+              - cell "12" [ref=e658]
+              - cell "-" [ref=e659]
+              - cell "-" [ref=e660]
+              - cell "-" [ref=e661]
+              - cell "-" [ref=e662]
+              - cell "315" [ref=e663]
+            - row "EMP launcher EMP launcher 50 0 - 210 210 23.9 1 - 40 -% -% -% -% 1.9 1.1 7.14 - - - - 505" [ref=e664]:
+              - columnheader "EMP launcher" [ref=e665]:
+                - link "EMP launcher" [ref=e666] [cursor=pointer]:
+                  - /url: /wiki/EMP_launcher
+                  - img "EMP launcher" [ref=e667]
+              - rowheader "EMP launcher" [ref=e668]:
+                - link "EMP launcher" [ref=e669] [cursor=pointer]:
+                  - /url: /wiki/EMP_launcher
+              - cell "50" [ref=e670]
+              - cell "0" [ref=e671]
+              - cell "-" [ref=e672]
+              - cell "210" [ref=e673]
+              - cell "210" [ref=e674]
+              - cell "23.9" [ref=e675]
+              - cell "1" [ref=e676]
+              - cell "-" [ref=e677]
+              - cell "40" [ref=e678]
+              - cell "-%" [ref=e679]
+              - cell "-%" [ref=e680]
+              - cell "-%" [ref=e681]
+              - cell "-%" [ref=e682]
+              - cell "1.9" [ref=e683]
+              - cell "1.1" [ref=e684]
+              - cell "7.14" [ref=e685]
+              - cell "-" [ref=e686]
+              - cell "-" [ref=e687]
+              - cell "-" [ref=e688]
+              - cell "-" [ref=e689]
+              - cell "505" [ref=e690]
+            - row "Frag grenades Frag grenades 50 10 0.5 90 160 12.9 1 - 12 -% -% -% -% 1.9 1.9 12 - - - - 265" [ref=e691]:
+              - columnheader "Frag grenades" [ref=e692]:
+                - link "Frag grenades" [ref=e693] [cursor=pointer]:
+                  - /url: /wiki/Frag_grenades
+                  - img "Frag grenades" [ref=e694]
+              - rowheader "Frag grenades" [ref=e695]:
+                - link "Frag grenades" [ref=e696] [cursor=pointer]:
+                  - /url: /wiki/Frag_grenades
+              - cell "50" [ref=e697]
+              - cell "10" [ref=e698]
+              - cell "0.5" [ref=e699]
+              - cell "90" [ref=e700]
+              - cell "160" [ref=e701]
+              - cell "12.9" [ref=e702]
+              - cell "1" [ref=e703]
+              - cell "-" [ref=e704]
+              - cell "12" [ref=e705]
+              - cell "-%" [ref=e706]
+              - cell "-%" [ref=e707]
+              - cell "-%" [ref=e708]
+              - cell "-%" [ref=e709]
+              - cell "1.9" [ref=e710]
+              - cell "1.9" [ref=e711]
+              - cell "12" [ref=e712]
+              - cell "-" [ref=e713]
+              - cell "-" [ref=e714]
+              - cell "-" [ref=e715]
+              - cell "-" [ref=e716]
+              - cell "265" [ref=e717]
+            - row "Greatbow Greatbow 17 15 1.5 120 90 29.9 1 - 49 65% 85% 75% 50% - - 4.86 3.159 4.131 3.645 2.43 104" [ref=e718]:
+              - columnheader "Greatbow" [ref=e719]:
+                - link "Greatbow" [ref=e720] [cursor=pointer]:
+                  - /url: /wiki/Greatbow
+                  - img "Greatbow" [ref=e721]
+              - rowheader "Greatbow" [ref=e722]:
+                - link "Greatbow" [ref=e723] [cursor=pointer]:
+                  - /url: /wiki/Greatbow
+              - cell "17" [ref=e724]
+              - cell "15" [ref=e725]
+              - cell "1.5" [ref=e726]
+              - cell "120" [ref=e727]
+              - cell "90" [ref=e728]
+              - cell "29.9" [ref=e729]
+              - cell "1" [ref=e730]
+              - cell "-" [ref=e731]
+              - cell "49" [ref=e732]
+              - cell "65%" [ref=e733]
+              - cell "85%" [ref=e734]
+              - cell "75%" [ref=e735]
+              - cell "50%" [ref=e736]
+              - cell "-" [ref=e737]
+              - cell "-" [ref=e738]
+              - cell "4.86" [ref=e739]
+              - cell "3.159" [ref=e740]
+              - cell "4.131" [ref=e741]
+              - cell "3.645" [ref=e742]
+              - cell "2.43" [ref=e743]:
+                - paragraph [ref=e744]: "2.43"
+              - cell "104" [ref=e745]
+            - row "Heavy SMG Heavy SMG 12 18 0.5 54 99 22.9 3 11 48 85% 65% 35% 20% - - 12.34 10.489 8.021 4.319 - 355" [ref=e746]:
+              - columnheader "Heavy SMG" [ref=e747]:
+                - link "Heavy SMG" [ref=e748] [cursor=pointer]:
+                  - /url: /wiki/Heavy_SMG
+                  - img "Heavy SMG" [ref=e749]
+              - rowheader "Heavy SMG" [ref=e750]:
+                - link "Heavy SMG" [ref=e751] [cursor=pointer]:
+                  - /url: /wiki/Heavy_SMG
+              - cell "12" [ref=e752]
+              - cell "18" [ref=e753]
+              - cell "0.5" [ref=e754]
+              - cell "54" [ref=e755]
+              - cell "99" [ref=e756]
+              - cell "22.9" [ref=e757]
+              - cell "3" [ref=e758]
+              - cell "11" [ref=e759]
+              - cell "48" [ref=e760]
+              - cell "85%" [ref=e761]
+              - cell "65%" [ref=e762]
+              - cell "35%" [ref=e763]
+              - cell "20%" [ref=e764]
+              - cell "-" [ref=e765]
+              - cell "-" [ref=e766]
+              - cell "12.34" [ref=e767]
+              - cell "10.489" [ref=e768]
+              - cell "8.021" [ref=e769]
+              - cell "4.319" [ref=e770]:
+                - paragraph [ref=e771]: "4.319"
+              - cell "-" [ref=e772]
+              - cell "355" [ref=e773]
+            - row "Incendiary launcher Incendiary launcher 10 0 - 210 210 23.9 1 - 40 -% -% -% -% 1.9 1.1 1.43 - - - - 340" [ref=e774]:
+              - columnheader "Incendiary launcher" [ref=e775]:
+                - link "Incendiary launcher" [ref=e776] [cursor=pointer]:
+                  - /url: /wiki/Incendiary_launcher
+                  - img "Incendiary launcher" [ref=e777]
+              - rowheader "Incendiary launcher" [ref=e778]:
+                - link "Incendiary launcher" [ref=e779] [cursor=pointer]:
+                  - /url: /wiki/Incendiary_launcher
+              - cell "10" [ref=e780]
+              - cell "0" [ref=e781]
+              - cell "-" [ref=e782]
+              - cell "210" [ref=e783]
+              - cell "210" [ref=e784]
+              - cell "23.9" [ref=e785]
+              - cell "1" [ref=e786]
+              - cell "-" [ref=e787]
+              - cell "40" [ref=e788]
+              - cell "-%" [ref=e789]
+              - cell "-%" [ref=e790]
+              - cell "-%" [ref=e791]
+              - cell "-%" [ref=e792]
+              - cell "1.9" [ref=e793]
+              - cell "1.1" [ref=e794]
+              - cell "1.43" [ref=e795]
+              - cell "-" [ref=e796]
+              - cell "-" [ref=e797]
+              - cell "-" [ref=e798]
+              - cell "-" [ref=e799]
+              - cell "340" [ref=e800]
+            - row "LMG LMG 12 16 1 108 96 25.9 6 7 46 40% 48% 35% 26% - - 18.08 7.232 8.6784 6.328 4.7008 425" [ref=e801]:
+              - columnheader "LMG" [ref=e802]:
+                - link "LMG" [ref=e803] [cursor=pointer]:
+                  - /url: /wiki/LMG
+                  - img "LMG" [ref=e804]
+              - rowheader "LMG" [ref=e805]:
+                - link "LMG" [ref=e806] [cursor=pointer]:
+                  - /url: /wiki/LMG
+              - cell "12" [ref=e807]
+              - cell "16" [ref=e808]
+              - cell "1" [ref=e809]
+              - cell "108" [ref=e810]
+              - cell "96" [ref=e811]
+              - cell "25.9" [ref=e812]
+              - cell "6" [ref=e813]
+              - cell "7" [ref=e814]
+              - cell "46" [ref=e815]
+              - cell "40%" [ref=e816]
+              - cell "48%" [ref=e817]
+              - cell "35%" [ref=e818]
+              - cell "26%" [ref=e819]
+              - cell "-" [ref=e820]
+              - cell "-" [ref=e821]
+              - cell "18.08" [ref=e822]
+              - cell "7.232" [ref=e823]
+              - cell "8.6784" [ref=e824]
+              - cell "6.328" [ref=e825]
+              - cell "4.7008" [ref=e826]:
+                - paragraph [ref=e827]: "4.7008"
+              - cell "425" [ref=e828]
+            - row "Machine pistol Machine pistol 6 9 0.5 30 54 19.9 3 7 55 90% 65% 35% 15% - - 11.02 9.918 7.163 3.857 - 220" [ref=e829]:
+              - columnheader "Machine pistol" [ref=e830]:
+                - link "Machine pistol" [ref=e831] [cursor=pointer]:
+                  - /url: /wiki/Machine_pistol
+                  - img "Machine pistol" [ref=e832]
+              - rowheader "Machine pistol" [ref=e833]:
+                - link "Machine pistol" [ref=e834] [cursor=pointer]:
+                  - /url: /wiki/Machine_pistol
+              - cell "6" [ref=e835]
+              - cell "9" [ref=e836]
+              - cell "0.5" [ref=e837]
+              - cell "30" [ref=e838]
+              - cell "54" [ref=e839]
+              - cell "19.9" [ref=e840]
+              - cell "3" [ref=e841]
+              - cell "7" [ref=e842]
+              - cell "55" [ref=e843]
+              - cell "90%" [ref=e844]
+              - cell "65%" [ref=e845]
+              - cell "35%" [ref=e846]
+              - cell "15%" [ref=e847]
+              - cell "-" [ref=e848]
+              - cell "-" [ref=e849]
+              - cell "11.02" [ref=e850]
+              - cell "9.918" [ref=e851]
+              - cell "7.163" [ref=e852]
+              - cell "3.857" [ref=e853]:
+                - paragraph [ref=e854]: "3.857"
+              - cell "-" [ref=e855]
+              - cell "220" [ref=e856]
+            - row "Minigun Minigun 10 15 0.5 150 90 30.9 25 5 70 20% 25% 25% 18% - - 41.67 8.334 10.4175 10.4175 7.5006 1,160" [ref=e857]:
+              - columnheader "Minigun" [ref=e858]:
+                - link "Minigun" [ref=e859] [cursor=pointer]:
+                  - /url: /wiki/Minigun
+                  - img "Minigun" [ref=e860]
+              - rowheader "Minigun" [ref=e861]:
+                - link "Minigun" [ref=e862] [cursor=pointer]:
+                  - /url: /wiki/Minigun
+              - cell "10" [ref=e863]
+              - cell "15" [ref=e864]
+              - cell "0.5" [ref=e865]
+              - cell "150" [ref=e866]
+              - cell "90" [ref=e867]
+              - cell "30.9" [ref=e868]
+              - cell "25" [ref=e869]
+              - cell "5" [ref=e870]
+              - cell "70" [ref=e871]
+              - cell "20%" [ref=e872]
+              - cell "25%" [ref=e873]
+              - cell "25%" [ref=e874]
+              - cell "18%" [ref=e875]
+              - cell "-" [ref=e876]
+              - cell "-" [ref=e877]
+              - cell "41.67" [ref=e878]
+              - cell "8.334" [ref=e879]
+              - cell "10.4175" [ref=e880]
+              - cell "10.4175" [ref=e881]
+              - cell "7.5006" [ref=e882]:
+                - paragraph [ref=e883]: "7.5006"
+              - cell "1,160" [ref=e884]
+            - row "Molotov cocktails Molotov cocktails 10 - - 90 160 12.9 1 - 12 -% -% -% -% 1.9 1.1 2.4 - - - - 245" [ref=e885]:
+              - columnheader "Molotov cocktails" [ref=e886]:
+                - link "Molotov cocktails" [ref=e887] [cursor=pointer]:
+                  - /url: /wiki/Molotov_cocktails
+                  - img "Molotov cocktails" [ref=e888]
+              - rowheader "Molotov cocktails" [ref=e889]:
+                - link "Molotov cocktails" [ref=e890] [cursor=pointer]:
+                  - /url: /wiki/Molotov_cocktails
+              - cell "10" [ref=e891]
+              - cell "-" [ref=e892]
+              - cell "-" [ref=e893]
+              - cell "90" [ref=e894]
+              - cell "160" [ref=e895]
+              - cell "12.9" [ref=e896]
+              - cell "1" [ref=e897]
+              - cell "-" [ref=e898]
+              - cell "12" [ref=e899]
+              - cell "-%" [ref=e900]
+              - cell "-%" [ref=e901]
+              - cell "-%" [ref=e902]
+              - cell "-%" [ref=e903]
+              - cell "1.9" [ref=e904]
+              - cell "1.1" [ref=e905]
+              - cell "2.4" [ref=e906]
+              - cell "-" [ref=e907]
+              - cell "-" [ref=e908]
+              - cell "-" [ref=e909]
+              - cell "-" [ref=e910]
+              - cell "245" [ref=e911]
+            - row "Pila Pila 25 10 2.5 240 150 18.9 1 - 26 80% 71% 50% 32% - - 3.85 3.08 2.7335 1.925 - 109" [ref=e912]:
+              - columnheader "Pila" [ref=e913]:
+                - link "Pila" [ref=e914] [cursor=pointer]:
+                  - /url: /wiki/Pila
+                  - img "Pila" [ref=e915]
+              - rowheader "Pila" [ref=e916]:
+                - link "Pila" [ref=e917] [cursor=pointer]:
+                  - /url: /wiki/Pila
+              - cell "25" [ref=e918]
+              - cell "10" [ref=e919]
+              - cell "2.5" [ref=e920]
+              - cell "240" [ref=e921]
+              - cell "150" [ref=e922]
+              - cell "18.9" [ref=e923]
+              - cell "1" [ref=e924]
+              - cell "-" [ref=e925]
+              - cell "26" [ref=e926]
+              - cell "80%" [ref=e927]
+              - cell "71%" [ref=e928]
+              - cell "50%" [ref=e929]
+              - cell "32%" [ref=e930]
+              - cell "-" [ref=e931]
+              - cell "-" [ref=e932]
+              - cell "3.85" [ref=e933]
+              - cell "3.08" [ref=e934]
+              - cell "2.7335" [ref=e935]
+              - cell "1.925" [ref=e936]:
+                - paragraph [ref=e937]: "1.925"
+              - cell "-" [ref=e938]
+              - cell "109" [ref=e939]
+            - row "Pump shotgun Pump shotgun 18 14 3 54 75 15.9 1 - 55 80% 87% 77% 64% - - 8.37 6.696 7.2819 6.4449 - 255" [ref=e940]:
+              - columnheader "Pump shotgun" [ref=e941]:
+                - link "Pump shotgun" [ref=e942] [cursor=pointer]:
+                  - /url: /wiki/Pump_shotgun
+                  - img "Pump shotgun" [ref=e943]
+              - rowheader "Pump shotgun" [ref=e944]:
+                - link "Pump shotgun" [ref=e945] [cursor=pointer]:
+                  - /url: /wiki/Pump_shotgun
+              - cell "18" [ref=e946]
+              - cell "14" [ref=e947]
+              - cell "3" [ref=e948]
+              - cell "54" [ref=e949]
+              - cell "75" [ref=e950]
+              - cell "15.9" [ref=e951]
+              - cell "1" [ref=e952]
+              - cell "-" [ref=e953]
+              - cell "55" [ref=e954]
+              - cell "80%" [ref=e955]
+              - cell "87%" [ref=e956]
+              - cell "77%" [ref=e957]
+              - cell "64%" [ref=e958]
+              - cell "-" [ref=e959]
+              - cell "-" [ref=e960]
+              - cell "8.37" [ref=e961]
+              - cell "6.696" [ref=e962]
+              - cell "7.2819" [ref=e963]
+              - cell "6.4449" [ref=e964]:
+                - paragraph [ref=e965]: "6.4449"
+              - cell "-" [ref=e966]
+              - cell "255" [ref=e967]
+            - row "Recurve bow Recurve bow 14 21 1 87 99 25.9 1 - 56 70% 78% 65% 35% - - 4.52 3.164 3.5256 2.938 1.582 66" [ref=e968]:
+              - columnheader "Recurve bow" [ref=e969]:
+                - link "Recurve bow" [ref=e970] [cursor=pointer]:
+                  - /url: /wiki/Recurve_bow
+                  - img "Recurve bow" [ref=e971]
+              - rowheader "Recurve bow" [ref=e972]:
+                - link "Recurve bow" [ref=e973] [cursor=pointer]:
+                  - /url: /wiki/Recurve_bow
+              - cell "14" [ref=e974]
+              - cell "21" [ref=e975]
+              - cell "1" [ref=e976]
+              - cell "87" [ref=e977]
+              - cell "99" [ref=e978]
+              - cell "25.9" [ref=e979]
+              - cell "1" [ref=e980]
+              - cell "-" [ref=e981]
+              - cell "56" [ref=e982]
+              - cell "70%" [ref=e983]
+              - cell "78%" [ref=e984]
+              - cell "65%" [ref=e985]
+              - cell "35%" [ref=e986]
+              - cell "-" [ref=e987]
+              - cell "-" [ref=e988]
+              - cell "4.52" [ref=e989]
+              - cell "3.164" [ref=e990]
+              - cell "3.5256" [ref=e991]
+              - cell "2.938" [ref=e992]
+              - cell "1.582" [ref=e993]:
+                - paragraph [ref=e994]: "1.582"
+              - cell "66" [ref=e995]
+            - row "Revolver Revolver 12 18 1 18 96 25.9 1 - 55 80% 75% 55% 40% - - 6.32 5.056 4.74 3.476 2.528 135" [ref=e996]:
+              - columnheader "Revolver" [ref=e997]:
+                - link "Revolver" [ref=e998] [cursor=pointer]:
+                  - /url: /wiki/Revolver
+                  - img "Revolver" [ref=e999]
+              - rowheader "Revolver" [ref=e1000]:
+                - link "Revolver" [ref=e1001] [cursor=pointer]:
+                  - /url: /wiki/Revolver
+              - cell "12" [ref=e1002]
+              - cell "18" [ref=e1003]
+              - cell "1" [ref=e1004]
+              - cell "18" [ref=e1005]
+              - cell "96" [ref=e1006]
+              - cell "25.9" [ref=e1007]
+              - cell "1" [ref=e1008]
+              - cell "-" [ref=e1009]
+              - cell "55" [ref=e1010]
+              - cell "80%" [ref=e1011]
+              - cell "75%" [ref=e1012]
+              - cell "55%" [ref=e1013]
+              - cell "40%" [ref=e1014]
+              - cell "-" [ref=e1015]
+              - cell "-" [ref=e1016]
+              - cell "6.32" [ref=e1017]
+              - cell "5.056" [ref=e1018]
+              - cell "4.74" [ref=e1019]
+              - cell "3.476" [ref=e1020]
+              - cell "2.528" [ref=e1021]:
+                - paragraph [ref=e1022]: "2.528"
+              - cell "135" [ref=e1023]
+            - row "Short bow Short bow 11 16 0.5 81 99 22.9 1 - 44 75% 65% 45% 25% - - 3.67 2.7525 2.3855 1.6515 - 45" [ref=e1024]:
+              - columnheader "Short bow" [ref=e1025]:
+                - link "Short bow" [ref=e1026] [cursor=pointer]:
+                  - /url: /wiki/Short_bow
+                  - img "Short bow" [ref=e1027]
+              - rowheader "Short bow" [ref=e1028]:
+                - link "Short bow" [ref=e1029] [cursor=pointer]:
+                  - /url: /wiki/Short_bow
+              - cell "11" [ref=e1030]
+              - cell "16" [ref=e1031]
+              - cell "0.5" [ref=e1032]
+              - cell "81" [ref=e1033]
+              - cell "99" [ref=e1034]
+              - cell "22.9" [ref=e1035]
+              - cell "1" [ref=e1036]
+              - cell "-" [ref=e1037]
+              - cell "44" [ref=e1038]
+              - cell "75%" [ref=e1039]
+              - cell "65%" [ref=e1040]
+              - cell "45%" [ref=e1041]
+              - cell "25%" [ref=e1042]
+              - cell "-" [ref=e1043]
+              - cell "-" [ref=e1044]
+              - cell "3.67" [ref=e1045]
+              - cell "2.7525" [ref=e1046]
+              - cell "2.3855" [ref=e1047]
+              - cell "1.6515" [ref=e1048]:
+                - paragraph [ref=e1049]: "1.6515"
+              - cell "-" [ref=e1050]
+              - cell "45" [ref=e1051]
+            - row "Smoke launcher Smoke launcher 0 - - 210 210 23.9 1 - 40 -% -% -% -% 1.9 2.4 - - - - 380" [ref=e1052]:
+              - columnheader "Smoke launcher" [ref=e1053]:
+                - link "Smoke launcher" [ref=e1054] [cursor=pointer]:
+                  - /url: /wiki/Smoke_launcher
+                  - img "Smoke launcher" [ref=e1055]
+              - rowheader "Smoke launcher" [ref=e1056]:
+                - link "Smoke launcher" [ref=e1057] [cursor=pointer]:
+                  - /url: /wiki/Smoke_launcher
+              - cell "0" [ref=e1058]
+              - cell "-" [ref=e1059]
+              - cell "-" [ref=e1060]
+              - cell "210" [ref=e1061]
+              - cell "210" [ref=e1062]
+              - cell "23.9" [ref=e1063]
+              - cell "1" [ref=e1064]
+              - cell "-" [ref=e1065]
+              - cell "40" [ref=e1066]
+              - cell "-%" [ref=e1067]
+              - cell "-%" [ref=e1068]
+              - cell "-%" [ref=e1069]
+              - cell "-%" [ref=e1070]
+              - cell "1.9" [ref=e1071]
+              - cell "2.4" [ref=e1072]
+              - cell [ref=e1073]
+              - cell "-" [ref=e1074]
+              - cell "-" [ref=e1075]
+              - cell "-" [ref=e1076]
+              - cell "-" [ref=e1077]
+              - cell "380" [ref=e1078]
+            - row "Sniper rifle Sniper rifle 25 38 1.5 210 90 44.9 1 - 100 50% 70% 88% 90% - - 5 2.5 3.5 4.4 4.5 530" [ref=e1079]:
+              - columnheader "Sniper rifle" [ref=e1080]:
+                - link "Sniper rifle" [ref=e1081] [cursor=pointer]:
+                  - /url: /wiki/Sniper_rifle
+                  - img "Sniper rifle" [ref=e1082]
+              - rowheader "Sniper rifle" [ref=e1083]:
+                - link "Sniper rifle" [ref=e1084] [cursor=pointer]:
+                  - /url: /wiki/Sniper_rifle
+              - cell "25" [ref=e1085]
+              - cell "38" [ref=e1086]
+              - cell "1.5" [ref=e1087]
+              - cell "210" [ref=e1088]
+              - cell "90" [ref=e1089]
+              - cell "44.9" [ref=e1090]
+              - cell "1" [ref=e1091]
+              - cell "-" [ref=e1092]
+              - cell "100" [ref=e1093]
+              - cell "50%" [ref=e1094]
+              - cell "70%" [ref=e1095]
+              - cell "88%" [ref=e1096]
+              - cell "90%" [ref=e1097]
+              - cell "-" [ref=e1098]
+              - cell "-" [ref=e1099]
+              - cell "5" [ref=e1100]
+              - cell "2.5" [ref=e1101]
+              - cell "3.5" [ref=e1102]
+              - cell "4.4" [ref=e1103]
+              - cell "4.5" [ref=e1104]
+              - cell "530" [ref=e1105]
+            - row "Triple rocket launcher Triple rocket launcher 50 10 0.5 270 270 36 3 20 50 -% -% -% -% 2.9 3.9 15.52 - - - - 1,000" [ref=e1106]:
+              - columnheader "Triple rocket launcher" [ref=e1107]:
+                - link "Triple rocket launcher" [ref=e1108] [cursor=pointer]:
+                  - /url: /wiki/Triple_rocket_launcher
+                  - img "Triple rocket launcher" [ref=e1109]
+              - rowheader "Triple rocket launcher" [ref=e1110]:
+                - link "Triple rocket launcher" [ref=e1111] [cursor=pointer]:
+                  - /url: /wiki/Triple_rocket_launcher
+              - cell "50" [ref=e1112]
+              - cell "10" [ref=e1113]
+              - cell "0.5" [ref=e1114]
+              - cell "270" [ref=e1115]
+              - cell "270" [ref=e1116]
+              - cell "36" [ref=e1117]
+              - cell "3" [ref=e1118]
+              - cell "20" [ref=e1119]
+              - cell "50" [ref=e1120]
+              - cell "-%" [ref=e1121]
+              - cell "-%" [ref=e1122]
+              - cell "-%" [ref=e1123]
+              - cell "-%" [ref=e1124]
+              - cell "2.9" [ref=e1125]
+              - cell "3.9" [ref=e1126]
+              - cell "15.52" [ref=e1127]
+              - cell "-" [ref=e1128]
+              - cell "-" [ref=e1129]
+              - cell "-" [ref=e1130]
+              - cell "-" [ref=e1131]
+              - cell "1,000" [ref=e1132]
+            - row "Hellcat rifle Hellcat rifle Content added by the Anomaly DLC 10 15 0.5 66 102 26.9 3 10 70 60% 70% 65% 55% - - 9.57 5.742 6.699 6.2205 5.2635 480" [ref=e1133]:
+              - columnheader "Hellcat rifle" [ref=e1134]:
+                - link "Hellcat rifle" [ref=e1135] [cursor=pointer]:
+                  - /url: /wiki/Hellcat_rifle
+                  - img "Hellcat rifle" [ref=e1136]
+              - rowheader "Hellcat rifle Content added by the Anomaly DLC" [ref=e1137]:
+                - link "Hellcat rifle" [ref=e1138] [cursor=pointer]:
+                  - /url: /wiki/Hellcat_rifle
+                - superscript [ref=e1139]:
+                  - link "Content added by the Anomaly DLC" [ref=e1140] [cursor=pointer]:
+                    - /url: /wiki/Anomaly_(DLC)
+                    - img "Content added by the Anomaly DLC" [ref=e1141]
+              - cell "10" [ref=e1142]
+              - cell "15" [ref=e1143]
+              - cell "0.5" [ref=e1144]
+              - cell "66" [ref=e1145]
+              - cell "102" [ref=e1146]
+              - cell "26.9" [ref=e1147]
+              - cell "3" [ref=e1148]
+              - cell "10" [ref=e1149]
+              - cell "70" [ref=e1150]
+              - cell "60%" [ref=e1151]
+              - cell "70%" [ref=e1152]
+              - cell "65%" [ref=e1153]
+              - cell "55%" [ref=e1154]
+              - cell "-" [ref=e1155]
+              - cell "-" [ref=e1156]
+              - cell "9.57" [ref=e1157]
+              - cell "5.742" [ref=e1158]
+              - cell "6.699" [ref=e1159]
+              - cell "6.2205" [ref=e1160]
+              - cell "5.2635" [ref=e1161]:
+                - paragraph [ref=e1162]: "5.2635"
+              - cell "480" [ref=e1163]
+            - row "Nerve spiker Nerve spiker Content added by the Anomaly DLC 11 16 0.5 87 99 29.9 1 - 44 70% 78% 65% 35% - - 3.55 2.485 2.769 2.3075 1.2425 62" [ref=e1164]:
+              - columnheader "Nerve spiker" [ref=e1165]:
+                - link "Nerve spiker" [ref=e1166] [cursor=pointer]:
+                  - /url: /wiki/Nerve_spiker
+                  - img "Nerve spiker" [ref=e1167]
+              - rowheader "Nerve spiker Content added by the Anomaly DLC" [ref=e1168]:
+                - link "Nerve spiker" [ref=e1169] [cursor=pointer]:
+                  - /url: /wiki/Nerve_spiker
+                - superscript [ref=e1170]:
+                  - link "Content added by the Anomaly DLC" [ref=e1171] [cursor=pointer]:
+                    - /url: /wiki/Anomaly_(DLC)
+                    - img "Content added by the Anomaly DLC" [ref=e1172]
+              - cell "11" [ref=e1173]
+              - cell "16" [ref=e1174]
+              - cell "0.5" [ref=e1175]
+              - cell "87" [ref=e1176]
+              - cell "99" [ref=e1177]
+              - cell "29.9" [ref=e1178]
+              - cell "1" [ref=e1179]
+              - cell "-" [ref=e1180]
+              - cell "44" [ref=e1181]
+              - cell "70%" [ref=e1182]
+              - cell "78%" [ref=e1183]
+              - cell "65%" [ref=e1184]
+              - cell "35%" [ref=e1185]
+              - cell "-" [ref=e1186]
+              - cell "-" [ref=e1187]
+              - cell "3.55" [ref=e1188]
+              - cell "2.485" [ref=e1189]
+              - cell "2.769" [ref=e1190]
+              - cell "2.3075" [ref=e1191]
+              - cell "1.2425" [ref=e1192]:
+                - paragraph [ref=e1193]: "1.2425"
+              - cell "62" [ref=e1194]
+            - 'row "Unique hellcat rifle (Error: Page has no Property:Image) Unique hellcat rifle Content added by the Anomaly DLCContent added by the Odyssey DLC 10 15 0.5 66 102 26.9 3 10 70 60% 70% 65% 55% - - 9.57 5.742 6.699 6.2205 5.2635 480" [ref=e1195]':
+              - 'columnheader "Unique hellcat rifle (Error: Page has no Property:Image)" [ref=e1196]':
+                - link "Unique hellcat rifle" [ref=e1197] [cursor=pointer]:
+                  - /url: /wiki/Unique_hellcat_rifle
+                - generic [ref=e1198]:
+                  - text: "(Error: Page has no"
+                  - link "Property:Image" [ref=e1199] [cursor=pointer]:
+                    - /url: /wiki/Property:Image
+                  - text: )
+              - rowheader "Unique hellcat rifle Content added by the Anomaly DLCContent added by the Odyssey DLC" [ref=e1200]:
+                - link "Unique hellcat rifle" [ref=e1201] [cursor=pointer]:
+                  - /url: /wiki/Unique_hellcat_rifle
+                - superscript [ref=e1202]:
+                  - link "Content added by the Anomaly DLC" [ref=e1203] [cursor=pointer]:
+                    - /url: /wiki/Anomaly_(DLC)
+                    - img "Content added by the Anomaly DLC" [ref=e1204]
+                - superscript [ref=e1205]:
+                  - link "Content added by the Odyssey DLC" [ref=e1206] [cursor=pointer]:
+                    - /url: /wiki/Odyssey_(DLC)
+                    - img "Content added by the Odyssey DLC" [ref=e1207]
+              - cell "10" [ref=e1208]
+              - cell "15" [ref=e1209]
+              - cell "0.5" [ref=e1210]
+              - cell "66" [ref=e1211]
+              - cell "102" [ref=e1212]
+              - cell "26.9" [ref=e1213]
+              - cell "3" [ref=e1214]
+              - cell "10" [ref=e1215]
+              - cell "70" [ref=e1216]
+              - cell "60%" [ref=e1217]
+              - cell "70%" [ref=e1218]
+              - cell "65%" [ref=e1219]
+              - cell "55%" [ref=e1220]
+              - cell "-" [ref=e1221]
+              - cell "-" [ref=e1222]
+              - cell "9.57" [ref=e1223]
+              - cell "5.742" [ref=e1224]
+              - cell "6.699" [ref=e1225]
+              - cell "6.2205" [ref=e1226]
+              - cell "5.2635" [ref=e1227]:
+                - paragraph [ref=e1228]: "5.2635"
+              - cell "480" [ref=e1229]
+            - row "Flamebow Flamebow Content added by the Biotech DLC 6 9 0.5 81 99 22.9 1 - 44 75% 65% 45% 25% - - 2 1.5 1.3 0.9 - 45" [ref=e1230]:
+              - columnheader "Flamebow" [ref=e1231]:
+                - link "Flamebow" [ref=e1232] [cursor=pointer]:
+                  - /url: /wiki/Flamebow
+                  - img "Flamebow" [ref=e1233]
+              - rowheader "Flamebow Content added by the Biotech DLC" [ref=e1234]:
+                - link "Flamebow" [ref=e1235] [cursor=pointer]:
+                  - /url: /wiki/Flamebow
+                - superscript [ref=e1236]:
+                  - link "Content added by the Biotech DLC" [ref=e1237] [cursor=pointer]:
+                    - /url: /wiki/Biotech_(DLC)
+                    - img "Content added by the Biotech DLC" [ref=e1238]
+              - cell "6" [ref=e1239]
+              - cell "9" [ref=e1240]
+              - cell "0.5" [ref=e1241]
+              - cell "81" [ref=e1242]
+              - cell "99" [ref=e1243]
+              - cell "22.9" [ref=e1244]
+              - cell "1" [ref=e1245]
+              - cell "-" [ref=e1246]
+              - cell "44" [ref=e1247]
+              - cell "75%" [ref=e1248]
+              - cell "65%" [ref=e1249]
+              - cell "45%" [ref=e1250]
+              - cell "25%" [ref=e1251]
+              - cell "-" [ref=e1252]
+              - cell "-" [ref=e1253]
+              - cell "2" [ref=e1254]
+              - cell "1.5" [ref=e1255]
+              - cell "1.3" [ref=e1256]
+              - cell "0.9" [ref=e1257]:
+                - paragraph [ref=e1258]: "0.9"
+              - cell "-" [ref=e1259]
+              - cell "45" [ref=e1260]
+            - row "Beam repeater Beam repeater Content added by the Odyssey DLC 5 50 0.5 240 180 21.9 30 10 70 65% 72% 65% 60% - - 12.68 8.242 9.1296 8.242 - 1,235" [ref=e1261]:
+              - columnheader "Beam repeater" [ref=e1262]:
+                - link "Beam repeater" [ref=e1263] [cursor=pointer]:
+                  - /url: /wiki/Beam_repeater
+                  - img "Beam repeater" [ref=e1264]
+              - rowheader "Beam repeater Content added by the Odyssey DLC" [ref=e1265]:
+                - link "Beam repeater" [ref=e1266] [cursor=pointer]:
+                  - /url: /wiki/Beam_repeater
+                - superscript [ref=e1267]:
+                  - link "Content added by the Odyssey DLC" [ref=e1268] [cursor=pointer]:
+                    - /url: /wiki/Odyssey_(DLC)
+                    - img "Content added by the Odyssey DLC" [ref=e1269]
+              - cell "5" [ref=e1270]
+              - cell "50" [ref=e1271]
+              - cell "0.5" [ref=e1272]
+              - cell "240" [ref=e1273]
+              - cell "180" [ref=e1274]
+              - cell "21.9" [ref=e1275]
+              - cell "30" [ref=e1276]
+              - cell "10" [ref=e1277]
+              - cell "70" [ref=e1278]
+              - cell "65%" [ref=e1279]
+              - cell "72%" [ref=e1280]
+              - cell "65%" [ref=e1281]
+              - cell "60%" [ref=e1282]
+              - cell "-" [ref=e1283]
+              - cell "-" [ref=e1284]
+              - cell "12.68" [ref=e1285]
+              - cell "8.242" [ref=e1286]
+              - cell "9.1296" [ref=e1287]
+              - cell "8.242" [ref=e1288]:
+                - paragraph [ref=e1289]: "8.242"
+              - cell "-" [ref=e1290]
+              - cell "1,235" [ref=e1291]
+            - 'row "Unique LMG (Error: Page has no Property:Image) Unique LMG Content added by the Odyssey DLC 12 16 1 108 96 25.9 6 7 46 40% 48% 35% 26% - - 18.08 7.232 8.6784 6.328 4.7008 425" [ref=e1292]':
+              - 'columnheader "Unique LMG (Error: Page has no Property:Image)" [ref=e1293]':
+                - link "Unique LMG" [ref=e1294] [cursor=pointer]:
+                  - /url: /wiki/Unique_LMG
+                - generic [ref=e1295]:
+                  - text: "(Error: Page has no"
+                  - link "Property:Image" [ref=e1296] [cursor=pointer]:
+                    - /url: /wiki/Property:Image
+                  - text: )
+              - rowheader "Unique LMG Content added by the Odyssey DLC" [ref=e1297]:
+                - link "Unique LMG" [ref=e1298] [cursor=pointer]:
+                  - /url: /wiki/Unique_LMG
+                - superscript [ref=e1299]:
+                  - link "Content added by the Odyssey DLC" [ref=e1300] [cursor=pointer]:
+                    - /url: /wiki/Odyssey_(DLC)
+                    - img "Content added by the Odyssey DLC" [ref=e1301]
+              - cell "12" [ref=e1302]
+              - cell "16" [ref=e1303]
+              - cell "1" [ref=e1304]
+              - cell "108" [ref=e1305]
+              - cell "96" [ref=e1306]
+              - cell "25.9" [ref=e1307]
+              - cell "6" [ref=e1308]
+              - cell "7" [ref=e1309]
+              - cell "46" [ref=e1310]
+              - cell "40%" [ref=e1311]
+              - cell "48%" [ref=e1312]
+              - cell "35%" [ref=e1313]
+              - cell "26%" [ref=e1314]
+              - cell "-" [ref=e1315]
+              - cell "-" [ref=e1316]
+              - cell "18.08" [ref=e1317]
+              - cell "7.232" [ref=e1318]
+              - cell "8.6784" [ref=e1319]
+              - cell "6.328" [ref=e1320]
+              - cell "4.7008" [ref=e1321]:
+                - paragraph [ref=e1322]: "4.7008"
+              - cell "425" [ref=e1323]
+            - row "Unique assault rifle Unique assault rifle Content added by the Odyssey DLC 11 16 0.5 60 102 30.9 3 10 70 60% 70% 65% 55% - - 10.88 6.528 7.616 7.072 5.984 480" [ref=e1324]:
+              - columnheader "Unique assault rifle" [ref=e1325]:
+                - link "Unique assault rifle" [ref=e1326] [cursor=pointer]:
+                  - /url: /wiki/Unique_assault_rifle
+                  - img "Unique assault rifle" [ref=e1327]
+              - rowheader "Unique assault rifle Content added by the Odyssey DLC" [ref=e1328]:
+                - link "Unique assault rifle" [ref=e1329] [cursor=pointer]:
+                  - /url: /wiki/Unique_assault_rifle
+                - superscript [ref=e1330]:
+                  - link "Content added by the Odyssey DLC" [ref=e1331] [cursor=pointer]:
+                    - /url: /wiki/Odyssey_(DLC)
+                    - img "Content added by the Odyssey DLC" [ref=e1332]
+              - cell "11" [ref=e1333]
+              - cell "16" [ref=e1334]
+              - cell "0.5" [ref=e1335]
+              - cell "60" [ref=e1336]
+              - cell "102" [ref=e1337]
+              - cell "30.9" [ref=e1338]
+              - cell "3" [ref=e1339]
+              - cell "10" [ref=e1340]
+              - cell "70" [ref=e1341]
+              - cell "60%" [ref=e1342]
+              - cell "70%" [ref=e1343]
+              - cell "65%" [ref=e1344]
+              - cell "55%" [ref=e1345]
+              - cell "-" [ref=e1346]
+              - cell "-" [ref=e1347]
+              - cell "10.88" [ref=e1348]
+              - cell "6.528" [ref=e1349]
+              - cell "7.616" [ref=e1350]
+              - cell "7.072" [ref=e1351]
+              - cell "5.984" [ref=e1352]:
+                - paragraph [ref=e1353]: "5.984"
+              - cell "480" [ref=e1354]
+            - row "Unique beam repeater Unique beam repeater Content added by the Odyssey DLC 5 50 0.5 240 180 21.9 30 10 70 65% 72% 65% 60% - - 12.68 8.242 9.1296 8.242 - 1,235" [ref=e1355]:
+              - columnheader "Unique beam repeater" [ref=e1356]:
+                - link "Unique beam repeater" [ref=e1357] [cursor=pointer]:
+                  - /url: /wiki/Unique_beam_repeater
+                  - img "Unique beam repeater" [ref=e1358]
+              - rowheader "Unique beam repeater Content added by the Odyssey DLC" [ref=e1359]:
+                - link "Unique beam repeater" [ref=e1360] [cursor=pointer]:
+                  - /url: /wiki/Unique_beam_repeater
+                - superscript [ref=e1361]:
+                  - link "Content added by the Odyssey DLC" [ref=e1362] [cursor=pointer]:
+                    - /url: /wiki/Odyssey_(DLC)
+                    - img "Content added by the Odyssey DLC" [ref=e1363]
+              - cell "5" [ref=e1364]
+              - cell "50" [ref=e1365]
+              - cell "0.5" [ref=e1366]
+              - cell "240" [ref=e1367]
+              - cell "180" [ref=e1368]
+              - cell "21.9" [ref=e1369]
+              - cell "30" [ref=e1370]
+              - cell "10" [ref=e1371]
+              - cell "70" [ref=e1372]
+              - cell "65%" [ref=e1373]
+              - cell "72%" [ref=e1374]
+              - cell "65%" [ref=e1375]
+              - cell "60%" [ref=e1376]
+              - cell "-" [ref=e1377]
+              - cell "-" [ref=e1378]
+              - cell "12.68" [ref=e1379]
+              - cell "8.242" [ref=e1380]
+              - cell "9.1296" [ref=e1381]
+              - cell "8.242" [ref=e1382]:
+                - paragraph [ref=e1383]: "8.242"
+              - cell "-" [ref=e1384]
+              - cell "1,235" [ref=e1385]
+            - row "Unique bolt-action rifle Unique bolt-action rifle Content added by the Odyssey DLC 18 27 1.5 102 90 36.9 1 - 70 65% 80% 90% 80% - - 5.63 3.6595 4.504 5.067 4.504 255" [ref=e1386]:
+              - columnheader "Unique bolt-action rifle" [ref=e1387]:
+                - link "Unique bolt-action rifle" [ref=e1388] [cursor=pointer]:
+                  - /url: /wiki/Unique_bolt-action_rifle
+                  - img "Unique bolt-action rifle" [ref=e1389]
+              - rowheader "Unique bolt-action rifle Content added by the Odyssey DLC" [ref=e1390]:
+                - link "Unique bolt-action rifle" [ref=e1391] [cursor=pointer]:
+                  - /url: /wiki/Unique_bolt-action_rifle
+                - superscript [ref=e1392]:
+                  - link "Content added by the Odyssey DLC" [ref=e1393] [cursor=pointer]:
+                    - /url: /wiki/Odyssey_(DLC)
+                    - img "Content added by the Odyssey DLC" [ref=e1394]
+              - cell "18" [ref=e1395]
+              - cell "27" [ref=e1396]
+              - cell "1.5" [ref=e1397]
+              - cell "102" [ref=e1398]
+              - cell "90" [ref=e1399]
+              - cell "36.9" [ref=e1400]
+              - cell "1" [ref=e1401]
+              - cell "-" [ref=e1402]
+              - cell "70" [ref=e1403]
+              - cell "65%" [ref=e1404]
+              - cell "80%" [ref=e1405]
+              - cell "90%" [ref=e1406]
+              - cell "80%" [ref=e1407]
+              - cell "-" [ref=e1408]
+              - cell "-" [ref=e1409]
+              - cell "5.63" [ref=e1410]
+              - cell "3.6595" [ref=e1411]
+              - cell "4.504" [ref=e1412]
+              - cell "5.067" [ref=e1413]
+              - cell "4.504" [ref=e1414]:
+                - paragraph [ref=e1415]: "4.504"
+              - cell "255" [ref=e1416]
+            - row "Unique chain shotgun Unique chain shotgun Content added by the Odyssey DLC 18 14 3 72 81 12.9 3 10 55 57% 64% 55% 45% - - 18.73 10.6761 11.9872 10.3015 - 405" [ref=e1417]:
+              - columnheader "Unique chain shotgun" [ref=e1418]:
+                - link "Unique chain shotgun" [ref=e1419] [cursor=pointer]:
+                  - /url: /wiki/Unique_chain_shotgun
+                  - img "Unique chain shotgun" [ref=e1420]
+              - rowheader "Unique chain shotgun Content added by the Odyssey DLC" [ref=e1421]:
+                - link "Unique chain shotgun" [ref=e1422] [cursor=pointer]:
+                  - /url: /wiki/Unique_chain_shotgun
+                - superscript [ref=e1423]:
+                  - link "Content added by the Odyssey DLC" [ref=e1424] [cursor=pointer]:
+                    - /url: /wiki/Odyssey_(DLC)
+                    - img "Content added by the Odyssey DLC" [ref=e1425]
+              - cell "18" [ref=e1426]
+              - cell "14" [ref=e1427]
+              - cell "3" [ref=e1428]
+              - cell "72" [ref=e1429]
+              - cell "81" [ref=e1430]
+              - cell "12.9" [ref=e1431]
+              - cell "3" [ref=e1432]
+              - cell "10" [ref=e1433]
+              - cell "55" [ref=e1434]
+              - cell "57%" [ref=e1435]
+              - cell "64%" [ref=e1436]
+              - cell "55%" [ref=e1437]
+              - cell "45%" [ref=e1438]
+              - cell "-" [ref=e1439]
+              - cell "-" [ref=e1440]
+              - cell "18.73" [ref=e1441]
+              - cell "10.6761" [ref=e1442]
+              - cell "11.9872" [ref=e1443]
+              - cell "10.3015" [ref=e1444]:
+                - paragraph [ref=e1445]: "10.3015"
+              - cell "-" [ref=e1446]
+              - cell "405" [ref=e1447]
+            - row "Unique charge lance Unique charge lance Content added by the Odyssey DLC 30 45 1.5 102 162 32.9 1 - 120 65% 85% 85% 75% - - 6.82 4.433 5.797 5.797 5.115 1,355" [ref=e1448]:
+              - columnheader "Unique charge lance" [ref=e1449]:
+                - link "Unique charge lance" [ref=e1450] [cursor=pointer]:
+                  - /url: /wiki/Unique_charge_lance
+                  - img "Unique charge lance" [ref=e1451]
+              - rowheader "Unique charge lance Content added by the Odyssey DLC" [ref=e1452]:
+                - link "Unique charge lance" [ref=e1453] [cursor=pointer]:
+                  - /url: /wiki/Unique_charge_lance
+                - superscript [ref=e1454]:
+                  - link "Content added by the Odyssey DLC" [ref=e1455] [cursor=pointer]:
+                    - /url: /wiki/Odyssey_(DLC)
+                    - img "Content added by the Odyssey DLC" [ref=e1456]
+              - cell "30" [ref=e1457]
+              - cell "45" [ref=e1458]
+              - cell "1.5" [ref=e1459]
+              - cell "102" [ref=e1460]
+              - cell "162" [ref=e1461]
+              - cell "32.9" [ref=e1462]
+              - cell "1" [ref=e1463]
+              - cell "-" [ref=e1464]
+              - cell "120" [ref=e1465]
+              - cell "65%" [ref=e1466]
+              - cell "85%" [ref=e1467]
+              - cell "85%" [ref=e1468]
+              - cell "75%" [ref=e1469]
+              - cell "-" [ref=e1470]
+              - cell "-" [ref=e1471]
+              - cell "6.82" [ref=e1472]
+              - cell "4.433" [ref=e1473]
+              - cell "5.797" [ref=e1474]
+              - cell "5.797" [ref=e1475]
+              - cell "5.115" [ref=e1476]:
+                - paragraph [ref=e1477]: "5.115"
+              - cell "1,355" [ref=e1478]
+            - row "Unique charge rifle Unique charge rifle Content added by the Odyssey DLC 16 35 0.5 60 120 27.9 3 12 70 55% 64% 55% 45% - - 14.12 7.766 9.0368 7.766 6.354 1,010" [ref=e1479]:
+              - columnheader "Unique charge rifle" [ref=e1480]:
+                - link "Unique charge rifle" [ref=e1481] [cursor=pointer]:
+                  - /url: /wiki/Unique_charge_rifle
+                  - img "Unique charge rifle" [ref=e1482]
+              - rowheader "Unique charge rifle Content added by the Odyssey DLC" [ref=e1483]:
+                - link "Unique charge rifle" [ref=e1484] [cursor=pointer]:
+                  - /url: /wiki/Unique_charge_rifle
+                - superscript [ref=e1485]:
+                  - link "Content added by the Odyssey DLC" [ref=e1486] [cursor=pointer]:
+                    - /url: /wiki/Odyssey_(DLC)
+                    - img "Content added by the Odyssey DLC" [ref=e1487]
+              - cell "16" [ref=e1488]
+              - cell "35" [ref=e1489]
+              - cell "0.5" [ref=e1490]
+              - cell "60" [ref=e1491]
+              - cell "120" [ref=e1492]
+              - cell "27.9" [ref=e1493]
+              - cell "3" [ref=e1494]
+              - cell "12" [ref=e1495]
+              - cell "70" [ref=e1496]
+              - cell "55%" [ref=e1497]
+              - cell "64%" [ref=e1498]
+              - cell "55%" [ref=e1499]
+              - cell "45%" [ref=e1500]
+              - cell "-" [ref=e1501]
+              - cell "-" [ref=e1502]
+              - cell "14.12" [ref=e1503]
+              - cell "7.766" [ref=e1504]
+              - cell "9.0368" [ref=e1505]
+              - cell "7.766" [ref=e1506]
+              - cell "6.354" [ref=e1507]:
+                - paragraph [ref=e1508]: "6.354"
+              - cell "1,010" [ref=e1509]
+            - 'row "Unique greatbow (Error: Page has no Property:Image) Unique greatbow Content added by the Odyssey DLC 17 15 1.5 120 90 29.9 1 - 49 65% 85% 75% 50% - - 4.86 3.159 4.131 3.645 2.43 104" [ref=e1510]':
+              - 'columnheader "Unique greatbow (Error: Page has no Property:Image)" [ref=e1511]':
+                - link "Unique greatbow" [ref=e1512] [cursor=pointer]:
+                  - /url: /wiki/Unique_greatbow
+                - generic [ref=e1513]:
+                  - text: "(Error: Page has no"
+                  - link "Property:Image" [ref=e1514] [cursor=pointer]:
+                    - /url: /wiki/Property:Image
+                  - text: )
+              - rowheader "Unique greatbow Content added by the Odyssey DLC" [ref=e1515]:
+                - link "Unique greatbow" [ref=e1516] [cursor=pointer]:
+                  - /url: /wiki/Unique_greatbow
+                - superscript [ref=e1517]:
+                  - link "Content added by the Odyssey DLC" [ref=e1518] [cursor=pointer]:
+                    - /url: /wiki/Odyssey_(DLC)
+                    - img "Content added by the Odyssey DLC" [ref=e1519]
+              - cell "17" [ref=e1520]
+              - cell "15" [ref=e1521]
+              - cell "1.5" [ref=e1522]
+              - cell "120" [ref=e1523]
+              - cell "90" [ref=e1524]
+              - cell "29.9" [ref=e1525]
+              - cell "1" [ref=e1526]
+              - cell "-" [ref=e1527]
+              - cell "49" [ref=e1528]
+              - cell "65%" [ref=e1529]
+              - cell "85%" [ref=e1530]
+              - cell "75%" [ref=e1531]
+              - cell "50%" [ref=e1532]
+              - cell "-" [ref=e1533]
+              - cell "-" [ref=e1534]
+              - cell "4.86" [ref=e1535]
+              - cell "3.159" [ref=e1536]
+              - cell "4.131" [ref=e1537]
+              - cell "3.645" [ref=e1538]
+              - cell "2.43" [ref=e1539]:
+                - paragraph [ref=e1540]: "2.43"
+              - cell "104" [ref=e1541]
+            - 'row "Unique heavy SMG (Error: Page has no Property:Image) Unique heavy SMG Content added by the Odyssey DLC 12 18 0.5 54 99 22.9 3 11 48 85% 65% 35% 20% - - 12.34 10.489 8.021 4.319 - 355" [ref=e1542]':
+              - 'columnheader "Unique heavy SMG (Error: Page has no Property:Image)" [ref=e1543]':
+                - link "Unique heavy SMG" [ref=e1544] [cursor=pointer]:
+                  - /url: /wiki/Unique_heavy_SMG
+                - generic [ref=e1545]:
+                  - text: "(Error: Page has no"
+                  - link "Property:Image" [ref=e1546] [cursor=pointer]:
+                    - /url: /wiki/Property:Image
+                  - text: )
+              - rowheader "Unique heavy SMG Content added by the Odyssey DLC" [ref=e1547]:
+                - link "Unique heavy SMG" [ref=e1548] [cursor=pointer]:
+                  - /url: /wiki/Unique_heavy_SMG
+                - superscript [ref=e1549]:
+                  - link "Content added by the Odyssey DLC" [ref=e1550] [cursor=pointer]:
+                    - /url: /wiki/Odyssey_(DLC)
+                    - img "Content added by the Odyssey DLC" [ref=e1551]
+              - cell "12" [ref=e1552]
+              - cell "18" [ref=e1553]
+              - cell "0.5" [ref=e1554]
+              - cell "54" [ref=e1555]
+              - cell "99" [ref=e1556]
+              - cell "22.9" [ref=e1557]
+              - cell "3" [ref=e1558]
+              - cell "11" [ref=e1559]
+              - cell "48" [ref=e1560]
+              - cell "85%" [ref=e1561]
+              - cell "65%" [ref=e1562]
+              - cell "35%" [ref=e1563]
+              - cell "20%" [ref=e1564]
+              - cell "-" [ref=e1565]
+              - cell "-" [ref=e1566]
+              - cell "12.34" [ref=e1567]
+              - cell "10.489" [ref=e1568]
+              - cell "8.021" [ref=e1569]
+              - cell "4.319" [ref=e1570]:
+                - paragraph [ref=e1571]: "4.319"
+              - cell "-" [ref=e1572]
+              - cell "355" [ref=e1573]
+            - 'row "Unique minigun (Error: Page has no Property:Image) Unique minigun Content added by the Odyssey DLC 10 15 0.5 150 90 30.9 25 5 70 20% 25% 25% 18% - - 41.67 8.334 10.4175 10.4175 7.5006 1,160" [ref=e1574]':
+              - 'columnheader "Unique minigun (Error: Page has no Property:Image)" [ref=e1575]':
+                - link "Unique minigun" [ref=e1576] [cursor=pointer]:
+                  - /url: /wiki/Unique_minigun
+                - generic [ref=e1577]:
+                  - text: "(Error: Page has no"
+                  - link "Property:Image" [ref=e1578] [cursor=pointer]:
+                    - /url: /wiki/Property:Image
+                  - text: )
+              - rowheader "Unique minigun Content added by the Odyssey DLC" [ref=e1579]:
+                - link "Unique minigun" [ref=e1580] [cursor=pointer]:
+                  - /url: /wiki/Unique_minigun
+                - superscript [ref=e1581]:
+                  - link "Content added by the Odyssey DLC" [ref=e1582] [cursor=pointer]:
+                    - /url: /wiki/Odyssey_(DLC)
+                    - img "Content added by the Odyssey DLC" [ref=e1583]
+              - cell "10" [ref=e1584]
+              - cell "15" [ref=e1585]
+              - cell "0.5" [ref=e1586]
+              - cell "150" [ref=e1587]
+              - cell "90" [ref=e1588]
+              - cell "30.9" [ref=e1589]
+              - cell "25" [ref=e1590]
+              - cell "5" [ref=e1591]
+              - cell "70" [ref=e1592]
+              - cell "20%" [ref=e1593]
+              - cell "25%" [ref=e1594]
+              - cell "25%" [ref=e1595]
+              - cell "18%" [ref=e1596]
+              - cell "-" [ref=e1597]
+              - cell "-" [ref=e1598]
+              - cell "41.67" [ref=e1599]
+              - cell "8.334" [ref=e1600]
+              - cell "10.4175" [ref=e1601]
+              - cell "10.4175" [ref=e1602]
+              - cell "7.5006" [ref=e1603]:
+                - paragraph [ref=e1604]: "7.5006"
+              - cell "1,160" [ref=e1605]
+            - 'row "Unique revolver (Error: Page has no Property:Image) Unique revolver Content added by the Odyssey DLC 12 18 1 18 96 25.9 1 - 55 80% 75% 55% 40% - - 6.32 5.056 4.74 3.476 2.528 135" [ref=e1606]':
+              - 'columnheader "Unique revolver (Error: Page has no Property:Image)" [ref=e1607]':
+                - link "Unique revolver" [ref=e1608] [cursor=pointer]:
+                  - /url: /wiki/Unique_revolver
+                - generic [ref=e1609]:
+                  - text: "(Error: Page has no"
+                  - link "Property:Image" [ref=e1610] [cursor=pointer]:
+                    - /url: /wiki/Property:Image
+                  - text: )
+              - rowheader "Unique revolver Content added by the Odyssey DLC" [ref=e1611]:
+                - link "Unique revolver" [ref=e1612] [cursor=pointer]:
+                  - /url: /wiki/Unique_revolver
+                - superscript [ref=e1613]:
+                  - link "Content added by the Odyssey DLC" [ref=e1614] [cursor=pointer]:
+                    - /url: /wiki/Odyssey_(DLC)
+                    - img "Content added by the Odyssey DLC" [ref=e1615]
+              - cell "12" [ref=e1616]
+              - cell "18" [ref=e1617]
+              - cell "1" [ref=e1618]
+              - cell "18" [ref=e1619]
+              - cell "96" [ref=e1620]
+              - cell "25.9" [ref=e1621]
+              - cell "1" [ref=e1622]
+              - cell "-" [ref=e1623]
+              - cell "55" [ref=e1624]
+              - cell "80%" [ref=e1625]
+              - cell "75%" [ref=e1626]
+              - cell "55%" [ref=e1627]
+              - cell "40%" [ref=e1628]
+              - cell "-" [ref=e1629]
+              - cell "-" [ref=e1630]
+              - cell "6.32" [ref=e1631]
+              - cell "5.056" [ref=e1632]
+              - cell "4.74" [ref=e1633]
+              - cell "3.476" [ref=e1634]
+              - cell "2.528" [ref=e1635]:
+                - paragraph [ref=e1636]: "2.528"
+              - cell "135" [ref=e1637]
+            - 'row "Unique sniper rifle (Error: Page has no Property:Image) Unique sniper rifle Content added by the Odyssey DLC 25 38 1.5 210 90 44.9 1 - 100 50% 70% 88% 90% - - 5 2.5 3.5 4.4 4.5 530" [ref=e1638]':
+              - 'columnheader "Unique sniper rifle (Error: Page has no Property:Image)" [ref=e1639]':
+                - link "Unique sniper rifle" [ref=e1640] [cursor=pointer]:
+                  - /url: /wiki/Unique_sniper_rifle
+                - generic [ref=e1641]:
+                  - text: "(Error: Page has no"
+                  - link "Property:Image" [ref=e1642] [cursor=pointer]:
+                    - /url: /wiki/Property:Image
+                  - text: )
+              - rowheader "Unique sniper rifle Content added by the Odyssey DLC" [ref=e1643]:
+                - link "Unique sniper rifle" [ref=e1644] [cursor=pointer]:
+                  - /url: /wiki/Unique_sniper_rifle
+                - superscript [ref=e1645]:
+                  - link "Content added by the Odyssey DLC" [ref=e1646] [cursor=pointer]:
+                    - /url: /wiki/Odyssey_(DLC)
+                    - img "Content added by the Odyssey DLC" [ref=e1647]
+              - cell "25" [ref=e1648]
+              - cell "38" [ref=e1649]
+              - cell "1.5" [ref=e1650]
+              - cell "210" [ref=e1651]
+              - cell "90" [ref=e1652]
+              - cell "44.9" [ref=e1653]
+              - cell "1" [ref=e1654]
+              - cell "-" [ref=e1655]
+              - cell "100" [ref=e1656]
+              - cell "50%" [ref=e1657]
+              - cell "70%" [ref=e1658]
+              - cell "88%" [ref=e1659]
+              - cell "90%" [ref=e1660]
+              - cell "-" [ref=e1661]
+              - cell "-" [ref=e1662]
+              - cell "5" [ref=e1663]
+              - cell "2.5" [ref=e1664]
+              - cell "3.5" [ref=e1665]
+              - cell "4.4" [ref=e1666]
+              - cell "4.5" [ref=e1667]
+              - cell "530" [ref=e1668]
+            - row "Grenadier armor Grenadier armor Content added by the Royalty DLC 50 10 0.5 90 60 12.9 1 - 16 -% -% -% -% 1.9 1.9 20 - - - - 2,305" [ref=e1669]:
+              - columnheader "Grenadier armor" [ref=e1670]:
+                - link "Grenadier armor" [ref=e1671] [cursor=pointer]:
+                  - /url: /wiki/Grenadier_armor
+                  - img "Grenadier armor" [ref=e1672]
+              - rowheader "Grenadier armor Content added by the Royalty DLC" [ref=e1673]:
+                - link "Grenadier armor" [ref=e1674] [cursor=pointer]:
+                  - /url: /wiki/Grenadier_armor
+                - superscript [ref=e1675]:
+                  - link "Content added by the Royalty DLC" [ref=e1676] [cursor=pointer]:
+                    - /url: /wiki/Royalty_DLC
+                    - img "Content added by the Royalty DLC" [ref=e1677]
+              - cell "50" [ref=e1678]
+              - cell "10" [ref=e1679]
+              - cell "0.5" [ref=e1680]
+              - cell "90" [ref=e1681]
+              - cell "60" [ref=e1682]
+              - cell "12.9" [ref=e1683]
+              - cell "1" [ref=e1684]
+              - cell "-" [ref=e1685]
+              - cell "16" [ref=e1686]
+              - cell "-%" [ref=e1687]
+              - cell "-%" [ref=e1688]
+              - cell "-%" [ref=e1689]
+              - cell "-%" [ref=e1690]
+              - cell "1.9" [ref=e1691]
+              - cell "1.9" [ref=e1692]
+              - cell "20" [ref=e1693]
+              - cell "-" [ref=e1694]
+              - cell "-" [ref=e1695]
+              - cell "-" [ref=e1696]
+              - cell "-" [ref=e1697]
+              - cell "2,305" [ref=e1698]
+          - rowgroup
+        - paragraph [ref=e1699]:
+          - superscript [ref=e1700]:
+            - text: Values shown in Red indicate the weapon is out of range at the reference point for this range band. The value is provided due to the
+            - link "interpolated nature" [ref=e1701] [cursor=pointer]:
+              - /url: "#Range"
+            - text: of accuracy between range points.
+        - generic [ref=e1702]:
+          - definition [ref=e1703]:
+            - link "^A" [ref=e1706] [cursor=pointer]:
+              - /url: "#ref_Time"
+            - text: "At normal game speed, there are 60 ticks to one real world second. See:"
+            - link "Time" [ref=e1707] [cursor=pointer]:
+              - /url: /wiki/Time
+            - text: .
+          - definition [ref=e1708]:
+            - link "^B" [ref=e1711] [cursor=pointer]:
+              - /url: "#ref_DPS_Targets"
+            - text: This DPS assumes a single target - weapons with a blast radius may have higher effective DPS by virtue of hitting multiple targets.
+        - heading "Quality modifiers[edit]" [level=3] [ref=e1712]:
+          - text: Quality modifiers
+          - generic [ref=e1713]:
+            - text: "["
+            - link "edit" [ref=e1714] [cursor=pointer]:
+              - /url: /index.php?title=Weapons&action=edit&section=7
+            - text: "]"
+        - table [ref=e1715]:
+          - rowgroup [ref=e1716]:
+            - row "Quality Accuracy Modifier Base Damage Modifier Armor Penetration Modifier" [ref=e1717]:
+              - columnheader "Quality" [ref=e1718] [cursor=pointer]
+              - columnheader "Accuracy Modifier" [ref=e1719] [cursor=pointer]
+              - columnheader "Base Damage Modifier" [ref=e1720] [cursor=pointer]
+              - columnheader "Armor Penetration Modifier" [ref=e1721] [cursor=pointer]
+          - rowgroup [ref=e1722]:
+            - row "Awful 0.80 0.90 0.90" [ref=e1723]:
+              - rowheader "Awful" [ref=e1724]
+              - cell "0.80" [ref=e1725]
+              - cell "0.90" [ref=e1726]
+              - cell "0.90" [ref=e1727]
+            - row "Poor 0.90 1.00 1.00" [ref=e1728]:
+              - rowheader "Poor" [ref=e1729]
+              - cell "0.90" [ref=e1730]
+              - cell "1.00" [ref=e1731]
+              - cell "1.00" [ref=e1732]
+            - row "Normal 1.00 1.00 1.00" [ref=e1733]:
+              - rowheader "Normal" [ref=e1734]
+              - cell "1.00" [ref=e1735]
+              - cell "1.00" [ref=e1736]
+              - cell "1.00" [ref=e1737]
+            - row "Good 1.10 1.00 1.00" [ref=e1738]:
+              - rowheader "Good" [ref=e1739]
+              - cell "1.10" [ref=e1740]
+              - cell "1.00" [ref=e1741]
+              - cell "1.00" [ref=e1742]
+            - row "Excellent 1.20 1.00 1.00" [ref=e1743]:
+              - rowheader "Excellent" [ref=e1744]
+              - cell "1.20" [ref=e1745]
+              - cell "1.00" [ref=e1746]
+              - cell "1.00" [ref=e1747]
+            - row "Masterwork 1.35 1.25 1.25" [ref=e1748]:
+              - rowheader "Masterwork" [ref=e1749]
+              - cell "1.35" [ref=e1750]
+              - cell "1.25" [ref=e1751]
+              - cell "1.25" [ref=e1752]
+            - row "Legendary 1.50 1.50 1.50" [ref=e1753]:
+              - rowheader "Legendary" [ref=e1754]
+              - cell "1.50" [ref=e1755]
+              - cell "1.50" [ref=e1756]
+              - cell "1.50" [ref=e1757]
+          - rowgroup
+        - heading "Melee weapons[edit]" [level=2] [ref=e1758]:
+          - text: Melee weapons
+          - generic [ref=e1759]:
+            - text: "["
+            - link "edit" [ref=e1760] [cursor=pointer]:
+              - /url: /index.php?title=Weapons&action=edit&section=8
+            - text: "]"
+        - paragraph [ref=e1761]: These are touch-range weapons. Besides dedicated melee weapons, all ranged weapons can also be used as makeshift melee weapons.
+        - paragraph [ref=e1762]:
+          - text: The exact damage of a melee weapon is based on its
+          - link "quality" [ref=e1763] [cursor=pointer]:
+            - /url: /wiki/Quality
+          - text: level, with a low quality weapon dealing less damage and a high quality weapon dealing more.
+        - paragraph [ref=e1764]:
+          - text: Note that melee accuracy is determined by a
+          - link "colonist" [ref=e1765] [cursor=pointer]:
+            - /url: /wiki/Colonist
+          - text: "'s"
+          - link "melee skill" [ref=e1766] [cursor=pointer]:
+            - /url: /wiki/Melee
+          - text: and further modified by health stats of manipulation and sight, as well as the opponent's dodge chance.
+        - paragraph [ref=e1767]: Weapons of quality Excellent or higher have an engraving that can be read by clicking the Art tab from the inspect pane.
+        - heading "Base melee stats[edit]" [level=3] [ref=e1768]:
+          - text: Base melee stats
+          - generic [ref=e1769]:
+            - text: "["
+            - link "edit" [ref=e1770] [cursor=pointer]:
+              - /url: /index.php?title=Weapons&action=edit&section=9
+            - text: "]"
+        - paragraph [ref=e1771]:
+          - text: The following stats are for a baseline human wielding weapons that are of normal quality and made out of
+          - link "steel" [ref=e1772] [cursor=pointer]:
+            - /url: /wiki/Steel
+          - text: (the baseline material). Other materials may do more or less average damage per second (DPS), as will better/worse
+          - link "qualities" [ref=e1773] [cursor=pointer]:
+            - /url: /wiki/Quality
+          - text: .
+        - listitem [ref=e1775]:
+          - table [ref=e1776]:
+            - rowgroup [ref=e1777]:
+              - row "Name Material Awful Poor Normal Good Excellent Masterwork Legendary Average cooldown Damage type [A] Value in Silver" [ref=e1778]:
+                - columnheader "Name" [ref=e1779] [cursor=pointer]
+                - columnheader "Material" [ref=e1780] [cursor=pointer]
+                - columnheader "Awful" [ref=e1781]
+                - columnheader "Poor" [ref=e1782]
+                - columnheader "Normal" [ref=e1783]
+                - columnheader "Good" [ref=e1784]
+                - columnheader "Excellent" [ref=e1785]
+                - columnheader "Masterwork" [ref=e1786]
+                - columnheader "Legendary" [ref=e1787]
+                - columnheader "Average cooldown" [ref=e1788] [cursor=pointer]:
+                  - text: Average
+                  - text: cooldown
+                - columnheader "Damage type [A]" [ref=e1789] [cursor=pointer]:
+                  - text: Damage
+                  - text: type
+                  - superscript [ref=e1790]:
+                    - link "[A]" [ref=e1791]:
+                      - /url: "#endnote_BluntA"
+                - columnheader "Value in Silver" [ref=e1792] [cursor=pointer]:
+                  - text: Value
+                  - text: in
+                  - link "Silver" [ref=e1793]:
+                    - /url: /wiki/Silver
+                    - img "Silver" [ref=e1794]
+              - row "DPS AP DPS AP DPS AP DPS AP DPS AP DPS AP DPS AP" [ref=e1795]:
+                - columnheader "DPS" [ref=e1796] [cursor=pointer]
+                - columnheader "AP" [ref=e1797] [cursor=pointer]
+                - columnheader "DPS" [ref=e1798] [cursor=pointer]
+                - columnheader "AP" [ref=e1799] [cursor=pointer]
+                - columnheader "DPS" [ref=e1800] [cursor=pointer]
+                - columnheader "AP" [ref=e1801] [cursor=pointer]
+                - columnheader "DPS" [ref=e1802] [cursor=pointer]
+                - columnheader "AP" [ref=e1803] [cursor=pointer]
+                - columnheader "DPS" [ref=e1804] [cursor=pointer]
+                - columnheader "AP" [ref=e1805] [cursor=pointer]
+                - columnheader "DPS" [ref=e1806] [cursor=pointer]
+                - columnheader "AP" [ref=e1807] [cursor=pointer]
+                - columnheader "DPS" [ref=e1808] [cursor=pointer]
+                - columnheader "AP" [ref=e1809] [cursor=pointer]
+            - rowgroup [ref=e1810]:
+              - row "Human Unarmed human – – – – – 4.1 12% – – – – – – – – 2 s Blunt –" [ref=e1811]:
+                - columnheader "Human" [ref=e1812]:
+                  - link "Human" [ref=e1813] [cursor=pointer]:
+                    - /url: /wiki/Human
+                    - img "Human" [ref=e1814]
+                - columnheader "Unarmed human" [ref=e1815]:
+                  - text: Unarmed
+                  - link "human" [ref=e1816] [cursor=pointer]:
+                    - /url: /wiki/Human
+                - rowheader "–" [ref=e1817]
+                - cell "–" [ref=e1818]
+                - cell "–" [ref=e1819]
+                - cell "–" [ref=e1820]
+                - cell "–" [ref=e1821]
+                - cell "4.1" [ref=e1822]
+                - cell "12%" [ref=e1823]
+                - cell "–" [ref=e1824]
+                - cell "–" [ref=e1825]
+                - cell "–" [ref=e1826]
+                - cell "–" [ref=e1827]
+                - cell "–" [ref=e1828]
+                - cell "–" [ref=e1829]
+                - cell "–" [ref=e1830]
+                - cell "–" [ref=e1831]
+                - cell "2 s" [ref=e1832]
+                - cell "Blunt" [ref=e1833]
+                - cell "–" [ref=e1834]
+              - row "Alpha thrumbo horn Alpha thrumbo horn Content added by the Odyssey DLC – – – – – 20 48% – – – – – – – – 1.6 s Sharp 3,000" [ref=e1835]:
+                - columnheader "Alpha thrumbo horn" [ref=e1836]:
+                  - link "Alpha thrumbo horn" [ref=e1837] [cursor=pointer]:
+                    - /url: /wiki/Alpha_thrumbo_horn
+                    - img "Alpha thrumbo horn" [ref=e1838]
+                - columnheader "Alpha thrumbo horn Content added by the Odyssey DLC" [ref=e1839]:
+                  - link "Alpha thrumbo horn" [ref=e1840] [cursor=pointer]:
+                    - /url: /wiki/Alpha_thrumbo_horn
+                  - superscript [ref=e1841]:
+                    - link "Content added by the Odyssey DLC" [ref=e1842] [cursor=pointer]:
+                      - /url: /wiki/Odyssey_(DLC)
+                      - img "Content added by the Odyssey DLC" [ref=e1843]
+                - rowheader "–" [ref=e1844]
+                - cell "–" [ref=e1845]
+                - cell "–" [ref=e1846]
+                - cell "–" [ref=e1847]
+                - cell "–" [ref=e1848]
+                - cell "20" [ref=e1849]
+                - cell "48%" [ref=e1850]
+                - cell "–" [ref=e1851]
+                - cell "–" [ref=e1852]
+                - cell "–" [ref=e1853]
+                - cell "–" [ref=e1854]
+                - cell "–" [ref=e1855]
+                - cell "–" [ref=e1856]
+                - cell "–" [ref=e1857]
+                - cell "–" [ref=e1858]
+                - cell "1.6 s" [ref=e1859]
+                - cell "Sharp" [ref=e1860]
+                - cell "3,000" [ref=e1861]
+              - row "Archotech arm Archotech arm – – – – – 6.28 18.75% – – – – – – – – 2 s Blunt 2,800" [ref=e1862]:
+                - columnheader "Archotech arm" [ref=e1863]:
+                  - link "Archotech arm" [ref=e1864] [cursor=pointer]:
+                    - /url: /wiki/Archotech_arm
+                    - img "Archotech arm" [ref=e1865]
+                - columnheader "Archotech arm" [ref=e1866]:
+                  - link "Archotech arm" [ref=e1867] [cursor=pointer]:
+                    - /url: /wiki/Archotech_arm
+                - rowheader "–" [ref=e1868]
+                - cell "–" [ref=e1869]
+                - cell "–" [ref=e1870]
+                - cell "–" [ref=e1871]
+                - cell "–" [ref=e1872]
+                - cell "6.28" [ref=e1873]
+                - cell "18.75%" [ref=e1874]
+                - cell "–" [ref=e1875]
+                - cell "–" [ref=e1876]
+                - cell "–" [ref=e1877]
+                - cell "–" [ref=e1878]
+                - cell "–" [ref=e1879]
+                - cell "–" [ref=e1880]
+                - cell "–" [ref=e1881]
+                - cell "–" [ref=e1882]
+                - cell "2 s" [ref=e1883]
+                - cell "Blunt" [ref=e1884]
+                - cell "2,800" [ref=e1885]
+              - row "Axe Axe Content added by the Royalty DLC Steel Steel 5.48 16.07% 6.08 17.83% 6.68 19.58% 7.28 21.34% 7.88 23.1% 9.38 27.5% 10.58 31.01% 2 s Sharp 120" [ref=e1886]:
+                - columnheader "Axe" [ref=e1887]:
+                  - link "Axe" [ref=e1888] [cursor=pointer]:
+                    - /url: /wiki/Axe
+                    - img "Axe" [ref=e1889]
+                - columnheader "Axe Content added by the Royalty DLC" [ref=e1890]:
+                  - link "Axe" [ref=e1891] [cursor=pointer]:
+                    - /url: /wiki/Axe
+                  - superscript [ref=e1892]:
+                    - link "Content added by the Royalty DLC" [ref=e1893] [cursor=pointer]:
+                      - /url: /wiki/Royalty_DLC
+                      - img "Content added by the Royalty DLC" [ref=e1894]
+                - rowheader "Steel Steel" [ref=e1895]:
+                  - link "Steel" [ref=e1896] [cursor=pointer]:
+                    - /url: /wiki/Steel
+                    - img "Steel" [ref=e1897]
+                  - link "Steel" [ref=e1898] [cursor=pointer]:
+                    - /url: /wiki/Steel
+                - cell "5.48" [ref=e1899]
+                - cell "16.07%" [ref=e1900]
+                - cell "6.08" [ref=e1901]
+                - cell "17.83%" [ref=e1902]
+                - cell "6.68" [ref=e1903]
+                - cell "19.58%" [ref=e1904]
+                - cell "7.28" [ref=e1905]
+                - cell "21.34%" [ref=e1906]
+                - cell "7.88" [ref=e1907]
+                - cell "23.1%" [ref=e1908]
+                - cell "9.38" [ref=e1909]
+                - cell "27.5%" [ref=e1910]
+                - cell "10.58" [ref=e1911]
+                - cell "31.01%" [ref=e1912]
+                - cell "2 s" [ref=e1913]
+                - cell "Sharp" [ref=e1914]
+                - cell "120" [ref=e1915]
+              - row "Beer Beer – – – – – 4.4 12.75% – – – – – – – – 2 s Blunt 12" [ref=e1916]:
+                - columnheader "Beer" [ref=e1917]:
+                  - link "Beer" [ref=e1918] [cursor=pointer]:
+                    - /url: /wiki/Beer
+                    - img "Beer" [ref=e1919]
+                - columnheader "Beer" [ref=e1920]:
+                  - link "Beer" [ref=e1921] [cursor=pointer]:
+                    - /url: /wiki/Beer
+                - rowheader "–" [ref=e1922]
+                - cell "–" [ref=e1923]
+                - cell "–" [ref=e1924]
+                - cell "–" [ref=e1925]
+                - cell "–" [ref=e1926]
+                - cell "4.4" [ref=e1927]
+                - cell "12.75%" [ref=e1928]
+                - cell "–" [ref=e1929]
+                - cell "–" [ref=e1930]
+                - cell "–" [ref=e1931]
+                - cell "–" [ref=e1932]
+                - cell "–" [ref=e1933]
+                - cell "–" [ref=e1934]
+                - cell "–" [ref=e1935]
+                - cell "–" [ref=e1936]
+                - cell "2 s" [ref=e1937]
+                - cell "Blunt" [ref=e1938]
+                - cell "12" [ref=e1939]
+              - row "Bionic arm Bionic arm – – – – – 5.53 16.5% – – – – – – – – 2 s Blunt 1,030" [ref=e1940]:
+                - columnheader "Bionic arm" [ref=e1941]:
+                  - link "Bionic arm" [ref=e1942] [cursor=pointer]:
+                    - /url: /wiki/Bionic_arm
+                    - img "Bionic arm" [ref=e1943]
+                - columnheader "Bionic arm" [ref=e1944]:
+                  - link "Bionic arm" [ref=e1945] [cursor=pointer]:
+                    - /url: /wiki/Bionic_arm
+                - rowheader "–" [ref=e1946]
+                - cell "–" [ref=e1947]
+                - cell "–" [ref=e1948]
+                - cell "–" [ref=e1949]
+                - cell "–" [ref=e1950]
+                - cell "5.53" [ref=e1951]
+                - cell "16.5%" [ref=e1952]
+                - cell "–" [ref=e1953]
+                - cell "–" [ref=e1954]
+                - cell "–" [ref=e1955]
+                - cell "–" [ref=e1956]
+                - cell "–" [ref=e1957]
+                - cell "–" [ref=e1958]
+                - cell "–" [ref=e1959]
+                - cell "–" [ref=e1960]
+                - cell "2 s" [ref=e1961]
+                - cell "Blunt" [ref=e1962]
+                - cell "1,030" [ref=e1963]
+              - row "Breach axe Breach axe Steel Steel 5.14 9.4% 5.68 10.39% 6.22 11.38% 6.76 12.36% 7.3 13.35% 8.65 15.82% 9.73 17.79% 1.25 s Blunt 113" [ref=e1964]:
+                - columnheader "Breach axe" [ref=e1965]:
+                  - link "Breach axe" [ref=e1966] [cursor=pointer]:
+                    - /url: /wiki/Breach_axe
+                    - img "Breach axe" [ref=e1967]
+                - columnheader "Breach axe" [ref=e1968]:
+                  - link "Breach axe" [ref=e1969] [cursor=pointer]:
+                    - /url: /wiki/Breach_axe
+                - rowheader "Steel Steel" [ref=e1970]:
+                  - link "Steel" [ref=e1971] [cursor=pointer]:
+                    - /url: /wiki/Steel
+                    - img "Steel" [ref=e1972]
+                  - link "Steel" [ref=e1973] [cursor=pointer]:
+                    - /url: /wiki/Steel
+                - cell "5.14" [ref=e1974]
+                - cell "9.4%" [ref=e1975]
+                - cell "5.68" [ref=e1976]
+                - cell "10.39%" [ref=e1977]
+                - cell "6.22" [ref=e1978]
+                - cell "11.38%" [ref=e1979]
+                - cell "6.76" [ref=e1980]
+                - cell "12.36%" [ref=e1981]
+                - cell "7.3" [ref=e1982]
+                - cell "13.35%" [ref=e1983]
+                - cell "8.65" [ref=e1984]
+                - cell "15.82%" [ref=e1985]
+                - cell "9.73" [ref=e1986]
+                - cell "17.79%" [ref=e1987]
+                - cell "1.25 s" [ref=e1988]
+                - cell "Blunt" [ref=e1989]
+                - cell "113" [ref=e1990]
+              - row "Club Club Steel Steel – – – – 6.31 18.83% – – – – – – – – 2 s Blunt 80" [ref=e1991]:
+                - columnheader "Club" [ref=e1992]:
+                  - link "Club" [ref=e1993] [cursor=pointer]:
+                    - /url: /wiki/Club
+                    - img "Club" [ref=e1994]
+                - columnheader "Club" [ref=e1995]:
+                  - link "Club" [ref=e1996] [cursor=pointer]:
+                    - /url: /wiki/Club
+                - rowheader "Steel Steel" [ref=e1997]:
+                  - link "Steel" [ref=e1998] [cursor=pointer]:
+                    - /url: /wiki/Steel
+                    - img "Steel" [ref=e1999]
+                  - link "Steel" [ref=e2000] [cursor=pointer]:
+                    - /url: /wiki/Steel
+                - cell "–" [ref=e2001]
+                - cell "–" [ref=e2002]
+                - cell "–" [ref=e2003]
+                - cell "–" [ref=e2004]
+                - cell "6.31" [ref=e2005]
+                - cell "18.83%" [ref=e2006]
+                - cell "–" [ref=e2007]
+                - cell "–" [ref=e2008]
+                - cell "–" [ref=e2009]
+                - cell "–" [ref=e2010]
+                - cell "–" [ref=e2011]
+                - cell "–" [ref=e2012]
+                - cell "–" [ref=e2013]
+                - cell "–" [ref=e2014]
+                - cell "2 s" [ref=e2015]
+                - cell "Blunt" [ref=e2016]
+                - cell "80" [ref=e2017]
+              - row "Drill arm Drill arm Content added by the Royalty DLC – – – – – 5.9 18% – – – – – – – – 2 s Sharp 425" [ref=e2018]:
+                - columnheader "Drill arm" [ref=e2019]:
+                  - link "Drill arm" [ref=e2020] [cursor=pointer]:
+                    - /url: /wiki/Drill_arm
+                    - img "Drill arm" [ref=e2021]
+                - columnheader "Drill arm Content added by the Royalty DLC" [ref=e2022]:
+                  - link "Drill arm" [ref=e2023] [cursor=pointer]:
+                    - /url: /wiki/Drill_arm
+                  - superscript [ref=e2024]:
+                    - link "Content added by the Royalty DLC" [ref=e2025] [cursor=pointer]:
+                      - /url: /wiki/Royalty_DLC
+                      - img "Content added by the Royalty DLC" [ref=e2026]
+                - rowheader "–" [ref=e2027]
+                - cell "–" [ref=e2028]
+                - cell "–" [ref=e2029]
+                - cell "–" [ref=e2030]
+                - cell "–" [ref=e2031]
+                - cell "5.9" [ref=e2032]
+                - cell "18%" [ref=e2033]
+                - cell "–" [ref=e2034]
+                - cell "–" [ref=e2035]
+                - cell "–" [ref=e2036]
+                - cell "–" [ref=e2037]
+                - cell "–" [ref=e2038]
+                - cell "–" [ref=e2039]
+                - cell "–" [ref=e2040]
+                - cell "–" [ref=e2041]
+                - cell "2 s" [ref=e2042]
+                - cell "Sharp" [ref=e2043]
+                - cell "425" [ref=e2044]
+              - row "Elbow blade Elbow blade Content added by the Royalty DLC – – – – – 7.78 23.25% – – – – – – – – 2 s Sharp 355" [ref=e2045]:
+                - columnheader "Elbow blade" [ref=e2046]:
+                  - link "Elbow blade" [ref=e2047] [cursor=pointer]:
+                    - /url: /wiki/Elbow_blade
+                    - img "Elbow blade" [ref=e2048]
+                - columnheader "Elbow blade Content added by the Royalty DLC" [ref=e2049]:
+                  - link "Elbow blade" [ref=e2050] [cursor=pointer]:
+                    - /url: /wiki/Elbow_blade
+                  - superscript [ref=e2051]:
+                    - link "Content added by the Royalty DLC" [ref=e2052] [cursor=pointer]:
+                      - /url: /wiki/Royalty_DLC
+                      - img "Content added by the Royalty DLC" [ref=e2053]
+                - rowheader "–" [ref=e2054]
+                - cell "–" [ref=e2055]
+                - cell "–" [ref=e2056]
+                - cell "–" [ref=e2057]
+                - cell "–" [ref=e2058]
+                - cell "7.78" [ref=e2059]
+                - cell "23.25%" [ref=e2060]
+                - cell "–" [ref=e2061]
+                - cell "–" [ref=e2062]
+                - cell "–" [ref=e2063]
+                - cell "–" [ref=e2064]
+                - cell "–" [ref=e2065]
+                - cell "–" [ref=e2066]
+                - cell "–" [ref=e2067]
+                - cell "–" [ref=e2068]
+                - cell "2 s" [ref=e2069]
+                - cell "Sharp" [ref=e2070]
+                - cell "355" [ref=e2071]
+              - row "Elephant tusk Elephant tusk – – – – – 6.44 23.33% – – – – – – – – 2.45 s Sharp 80" [ref=e2072]:
+                - columnheader "Elephant tusk" [ref=e2073]:
+                  - link "Elephant tusk" [ref=e2074] [cursor=pointer]:
+                    - /url: /wiki/Elephant_tusk
+                    - img "Elephant tusk" [ref=e2075]
+                - columnheader "Elephant tusk" [ref=e2076]:
+                  - link "Elephant tusk" [ref=e2077] [cursor=pointer]:
+                    - /url: /wiki/Elephant_tusk
+                - rowheader "–" [ref=e2078]
+                - cell "–" [ref=e2079]
+                - cell "–" [ref=e2080]
+                - cell "–" [ref=e2081]
+                - cell "–" [ref=e2082]
+                - cell "6.44" [ref=e2083]
+                - cell "23.33%" [ref=e2084]
+                - cell "–" [ref=e2085]
+                - cell "–" [ref=e2086]
+                - cell "–" [ref=e2087]
+                - cell "–" [ref=e2088]
+                - cell "–" [ref=e2089]
+                - cell "–" [ref=e2090]
+                - cell "–" [ref=e2091]
+                - cell "–" [ref=e2092]
+                - cell "2.45 s" [ref=e2093]
+                - cell "Sharp" [ref=e2094]
+                - cell "80" [ref=e2095]
+              - row "Eltex staff Eltex staff Content added by the Royalty DLC [C] – 3.98 12.6% 4.12 13.4% 4.51 16.5% 4.88 17.85% 5.24 19.2% 6.16 22.58% 6.9 25.28% 2.45 s Blunt 2,000" [ref=e2096]:
+                - columnheader "Eltex staff" [ref=e2097]:
+                  - link "Eltex staff" [ref=e2098] [cursor=pointer]:
+                    - /url: /wiki/Eltex_staff
+                    - img "Eltex staff" [ref=e2099]
+                - columnheader "Eltex staff Content added by the Royalty DLC [C]" [ref=e2100]:
+                  - link "Eltex staff" [ref=e2101] [cursor=pointer]:
+                    - /url: /wiki/Eltex_staff
+                  - superscript [ref=e2102]:
+                    - link "Content added by the Royalty DLC" [ref=e2103] [cursor=pointer]:
+                      - /url: /wiki/Royalty_DLC
+                      - img "Content added by the Royalty DLC" [ref=e2104]
+                  - superscript [ref=e2105]:
+                    - link "[C]" [ref=e2106] [cursor=pointer]:
+                      - /url: "#endnote_UltraC"
+                - rowheader "–" [ref=e2107]
+                - cell "3.98" [ref=e2108]
+                - cell "12.6%" [ref=e2109]
+                - cell "4.12" [ref=e2110]
+                - cell "13.4%" [ref=e2111]
+                - cell "4.51" [ref=e2112]
+                - cell "16.5%" [ref=e2113]
+                - cell "4.88" [ref=e2114]
+                - cell "17.85%" [ref=e2115]
+                - cell "5.24" [ref=e2116]
+                - cell "19.2%" [ref=e2117]
+                - cell "6.16" [ref=e2118]
+                - cell "22.58%" [ref=e2119]
+                - cell "6.9" [ref=e2120]
+                - cell "25.28%" [ref=e2121]
+                - cell "2.45 s" [ref=e2122]
+                - cell "Blunt" [ref=e2123]
+                - cell "2,000" [ref=e2124]
+              - row "Field hand Field hand Content added by the Royalty DLC – – – – – 4.4 12.75% – – – – – – – – 2 s Blunt 425" [ref=e2125]:
+                - columnheader "Field hand" [ref=e2126]:
+                  - link "Field hand" [ref=e2127] [cursor=pointer]:
+                    - /url: /wiki/Field_hand
+                    - img "Field hand" [ref=e2128]
+                - columnheader "Field hand Content added by the Royalty DLC" [ref=e2129]:
+                  - link "Field hand" [ref=e2130] [cursor=pointer]:
+                    - /url: /wiki/Field_hand
+                  - superscript [ref=e2131]:
+                    - link "Content added by the Royalty DLC" [ref=e2132] [cursor=pointer]:
+                      - /url: /wiki/Royalty_DLC
+                      - img "Content added by the Royalty DLC" [ref=e2133]
+                - rowheader "–" [ref=e2134]
+                - cell "–" [ref=e2135]
+                - cell "–" [ref=e2136]
+                - cell "–" [ref=e2137]
+                - cell "–" [ref=e2138]
+                - cell "4.4" [ref=e2139]
+                - cell "12.75%" [ref=e2140]
+                - cell "–" [ref=e2141]
+                - cell "–" [ref=e2142]
+                - cell "–" [ref=e2143]
+                - cell "–" [ref=e2144]
+                - cell "–" [ref=e2145]
+                - cell "–" [ref=e2146]
+                - cell "–" [ref=e2147]
+                - cell "–" [ref=e2148]
+                - cell "2 s" [ref=e2149]
+                - cell "Blunt" [ref=e2150]
+                - cell "425" [ref=e2151]
+              - row "Flesh whip Flesh whip Content added by the Anomaly DLC – – – – – 8.71 48% – – – – – – – – 2 s Sharp 0" [ref=e2152]:
+                - columnheader "Flesh whip" [ref=e2153]:
+                  - link "Flesh whip" [ref=e2154] [cursor=pointer]:
+                    - /url: /wiki/Flesh_whip
+                    - img "Flesh whip" [ref=e2155]
+                - columnheader "Flesh whip Content added by the Anomaly DLC" [ref=e2156]:
+                  - link "Flesh whip" [ref=e2157] [cursor=pointer]:
+                    - /url: /wiki/Flesh_whip
+                  - superscript [ref=e2158]:
+                    - link "Content added by the Anomaly DLC" [ref=e2159] [cursor=pointer]:
+                      - /url: /wiki/Anomaly_(DLC)
+                      - img "Content added by the Anomaly DLC" [ref=e2160]
+                - rowheader "–" [ref=e2161]
+                - cell "–" [ref=e2162]
+                - cell "–" [ref=e2163]
+                - cell "–" [ref=e2164]
+                - cell "–" [ref=e2165]
+                - cell "8.71" [ref=e2166]
+                - cell "48%" [ref=e2167]
+                - cell "–" [ref=e2168]
+                - cell "–" [ref=e2169]
+                - cell "–" [ref=e2170]
+                - cell "–" [ref=e2171]
+                - cell "–" [ref=e2172]
+                - cell "–" [ref=e2173]
+                - cell "–" [ref=e2174]
+                - cell "–" [ref=e2175]
+                - cell "2 s" [ref=e2176]
+                - cell "Sharp" [ref=e2177]
+                - cell "0" [ref=e2178]
+              - row "Gladius Gladius Steel Steel 5.78 17.27% 6.42 19.18% 7.06 21.08% 7.7 22.99% 8.33 24.9% 9.93 29.67% 11.2 33.49% 2 s Sharp 138" [ref=e2179]:
+                - columnheader "Gladius" [ref=e2180]:
+                  - link "Gladius" [ref=e2181] [cursor=pointer]:
+                    - /url: /wiki/Gladius
+                    - img "Gladius" [ref=e2182]
+                - columnheader "Gladius" [ref=e2183]:
+                  - link "Gladius" [ref=e2184] [cursor=pointer]:
+                    - /url: /wiki/Gladius
+                - rowheader "Steel Steel" [ref=e2185]:
+                  - link "Steel" [ref=e2186] [cursor=pointer]:
+                    - /url: /wiki/Steel
+                    - img "Steel" [ref=e2187]
+                  - link "Steel" [ref=e2188] [cursor=pointer]:
+                    - /url: /wiki/Steel
+                - cell "5.78" [ref=e2189]
+                - cell "17.27%" [ref=e2190]
+                - cell "6.42" [ref=e2191]
+                - cell "19.18%" [ref=e2192]
+                - cell "7.06" [ref=e2193]
+                - cell "21.08%" [ref=e2194]
+                - cell "7.7" [ref=e2195]
+                - cell "22.99%" [ref=e2196]
+                - cell "8.33" [ref=e2197]
+                - cell "24.9%" [ref=e2198]
+                - cell "9.93" [ref=e2199]
+                - cell "29.67%" [ref=e2200]
+                - cell "11.2" [ref=e2201]
+                - cell "33.49%" [ref=e2202]
+                - cell "2 s" [ref=e2203]
+                - cell "Sharp" [ref=e2204]
+                - cell "138" [ref=e2205]
+              - row "Hand talon Hand talon Content added by the Royalty DLC – – – – – 8.18 14.25% – – – – – – – – 1.63 s Blunt 355" [ref=e2206]:
+                - columnheader "Hand talon" [ref=e2207]:
+                  - link "Hand talon" [ref=e2208] [cursor=pointer]:
+                    - /url: /wiki/Hand_talon
+                    - img "Hand talon" [ref=e2209]
+                - columnheader "Hand talon Content added by the Royalty DLC" [ref=e2210]:
+                  - link "Hand talon" [ref=e2211] [cursor=pointer]:
+                    - /url: /wiki/Hand_talon
+                  - superscript [ref=e2212]:
+                    - link "Content added by the Royalty DLC" [ref=e2213] [cursor=pointer]:
+                      - /url: /wiki/Royalty_DLC
+                      - img "Content added by the Royalty DLC" [ref=e2214]
+                - rowheader "–" [ref=e2215]
+                - cell "–" [ref=e2216]
+                - cell "–" [ref=e2217]
+                - cell "–" [ref=e2218]
+                - cell "–" [ref=e2219]
+                - cell "8.18" [ref=e2220]
+                - cell "14.25%" [ref=e2221]
+                - cell "–" [ref=e2222]
+                - cell "–" [ref=e2223]
+                - cell "–" [ref=e2224]
+                - cell "–" [ref=e2225]
+                - cell "–" [ref=e2226]
+                - cell "–" [ref=e2227]
+                - cell "–" [ref=e2228]
+                - cell "–" [ref=e2229]
+                - cell "1.63 s" [ref=e2230]
+                - cell "Blunt" [ref=e2231]
+                - cell "355" [ref=e2232]
+              - row "Ikwa Ikwa Steel Steel 5.46 16% 6.08 17.81% 6.7 19.63% 7.32 21.44% 7.94 23.25% 9.48 27.78% 10.72 31.41% 2 s Sharp 113" [ref=e2233]:
+                - columnheader "Ikwa" [ref=e2234]:
+                  - link "Ikwa" [ref=e2235] [cursor=pointer]:
+                    - /url: /wiki/Ikwa
+                    - img "Ikwa" [ref=e2236]
+                - columnheader "Ikwa" [ref=e2237]:
+                  - link "Ikwa" [ref=e2238] [cursor=pointer]:
+                    - /url: /wiki/Ikwa
+                - rowheader "Steel Steel" [ref=e2239]:
+                  - link "Steel" [ref=e2240] [cursor=pointer]:
+                    - /url: /wiki/Steel
+                    - img "Steel" [ref=e2241]
+                  - link "Steel" [ref=e2242] [cursor=pointer]:
+                    - /url: /wiki/Steel
+                - cell "5.46" [ref=e2243]
+                - cell "16%" [ref=e2244]
+                - cell "6.08" [ref=e2245]
+                - cell "17.81%" [ref=e2246]
+                - cell "6.7" [ref=e2247]
+                - cell "19.63%" [ref=e2248]
+                - cell "7.32" [ref=e2249]
+                - cell "21.44%" [ref=e2250]
+                - cell "7.94" [ref=e2251]
+                - cell "23.25%" [ref=e2252]
+                - cell "9.48" [ref=e2253]
+                - cell "27.78%" [ref=e2254]
+                - cell "10.72" [ref=e2255]
+                - cell "31.41%" [ref=e2256]
+                - cell "2 s" [ref=e2257]
+                - cell "Sharp" [ref=e2258]
+                - cell "113" [ref=e2259]
+              - row "Jade knife Jade knife [B] – 4.69 14.29% 5.21 15.89% 5.73 17.48% 6.26 19.08% 6.78 20.68% 8.09 24.68% 9.13 27.87% 2.04 s Sharp 159" [ref=e2260]:
+                - columnheader "Jade knife" [ref=e2261]:
+                  - link "Jade knife" [ref=e2262] [cursor=pointer]:
+                    - /url: /wiki/Jade_knife
+                    - img "Jade knife" [ref=e2263]
+                - columnheader "Jade knife [B]" [ref=e2264]:
+                  - link "Jade knife" [ref=e2265] [cursor=pointer]:
+                    - /url: /wiki/Jade_knife
+                  - superscript [ref=e2266]:
+                    - link "[B]" [ref=e2267] [cursor=pointer]:
+                      - /url: "#endnote_JadeB"
+                - rowheader "–" [ref=e2268]
+                - cell "4.69" [ref=e2269]
+                - cell "14.29%" [ref=e2270]
+                - cell "5.21" [ref=e2271]
+                - cell "15.89%" [ref=e2272]
+                - cell "5.73" [ref=e2273]
+                - cell "17.48%" [ref=e2274]
+                - cell "6.26" [ref=e2275]
+                - cell "19.08%" [ref=e2276]
+                - cell "6.78" [ref=e2277]
+                - cell "20.68%" [ref=e2278]
+                - cell "8.09" [ref=e2279]
+                - cell "24.68%" [ref=e2280]
+                - cell "9.13" [ref=e2281]
+                - cell "27.87%" [ref=e2282]
+                - cell "2.04 s" [ref=e2283]
+                - cell "Sharp" [ref=e2284]
+                - cell "159" [ref=e2285]
+              - row "Knee spike Knee spike Content added by the Royalty DLC – – – – – 7.57 31.5% – – – – – – – – 2.45 s Sharp 355" [ref=e2286]:
+                - columnheader "Knee spike" [ref=e2287]:
+                  - link "Knee spike" [ref=e2288] [cursor=pointer]:
+                    - /url: /wiki/Knee_spike
+                    - img "Knee spike" [ref=e2289]
+                - columnheader "Knee spike Content added by the Royalty DLC" [ref=e2290]:
+                  - link "Knee spike" [ref=e2291] [cursor=pointer]:
+                    - /url: /wiki/Knee_spike
+                  - superscript [ref=e2292]:
+                    - link "Content added by the Royalty DLC" [ref=e2293] [cursor=pointer]:
+                      - /url: /wiki/Royalty_DLC
+                      - img "Content added by the Royalty DLC" [ref=e2294]
+                - rowheader "–" [ref=e2295]
+                - cell "–" [ref=e2296]
+                - cell "–" [ref=e2297]
+                - cell "–" [ref=e2298]
+                - cell "–" [ref=e2299]
+                - cell "7.57" [ref=e2300]
+                - cell "31.5%" [ref=e2301]
+                - cell "–" [ref=e2302]
+                - cell "–" [ref=e2303]
+                - cell "–" [ref=e2304]
+                - cell "–" [ref=e2305]
+                - cell "–" [ref=e2306]
+                - cell "–" [ref=e2307]
+                - cell "–" [ref=e2308]
+                - cell "–" [ref=e2309]
+                - cell "2.45 s" [ref=e2310]
+                - cell "Sharp" [ref=e2311]
+                - cell "355" [ref=e2312]
+              - row "Knife Knife Steel Steel 5.74 13.95% 6.38 15.51% 7.02 17.06% 7.65 18.62% 8.29 20.18% 9.89 24.07% 11.17 27.18% 1.63 s Sharp 64" [ref=e2313]:
+                - columnheader "Knife" [ref=e2314]:
+                  - link "Knife" [ref=e2315] [cursor=pointer]:
+                    - /url: /wiki/Knife
+                    - img "Knife" [ref=e2316]
+                - columnheader "Knife" [ref=e2317]:
+                  - link "Knife" [ref=e2318] [cursor=pointer]:
+                    - /url: /wiki/Knife
+                - rowheader "Steel Steel" [ref=e2319]:
+                  - link "Steel" [ref=e2320] [cursor=pointer]:
+                    - /url: /wiki/Steel
+                    - img "Steel" [ref=e2321]
+                  - link "Steel" [ref=e2322] [cursor=pointer]:
+                    - /url: /wiki/Steel
+                - cell "5.74" [ref=e2323]
+                - cell "13.95%" [ref=e2324]
+                - cell "6.38" [ref=e2325]
+                - cell "15.51%" [ref=e2326]
+                - cell "7.02" [ref=e2327]
+                - cell "17.06%" [ref=e2328]
+                - cell "7.65" [ref=e2329]
+                - cell "18.62%" [ref=e2330]
+                - cell "8.29" [ref=e2331]
+                - cell "20.18%" [ref=e2332]
+                - cell "9.89" [ref=e2333]
+                - cell "24.07%" [ref=e2334]
+                - cell "11.17" [ref=e2335]
+                - cell "27.18%" [ref=e2336]
+                - cell "1.63 s" [ref=e2337]
+                - cell "Sharp" [ref=e2338]
+                - cell "64" [ref=e2339]
+              - row "Longsword Longsword Steel Steel 6.44 23.27% 7.17 25.93% 7.9 28.58% 8.64 31.24% 9.37 33.9% 11.54 41.69% 13.13 47.44% 2.45 s Sharp 255" [ref=e2340]:
+                - columnheader "Longsword" [ref=e2341]:
+                  - link "Longsword" [ref=e2342] [cursor=pointer]:
+                    - /url: /wiki/Longsword
+                    - img "Longsword" [ref=e2343]
+                - columnheader "Longsword" [ref=e2344]:
+                  - link "Longsword" [ref=e2345] [cursor=pointer]:
+                    - /url: /wiki/Longsword
+                - rowheader "Steel Steel" [ref=e2346]:
+                  - link "Steel" [ref=e2347] [cursor=pointer]:
+                    - /url: /wiki/Steel
+                    - img "Steel" [ref=e2348]
+                  - link "Steel" [ref=e2349] [cursor=pointer]:
+                    - /url: /wiki/Steel
+                - cell "6.44" [ref=e2350]
+                - cell "23.27%" [ref=e2351]
+                - cell "7.17" [ref=e2352]
+                - cell "25.93%" [ref=e2353]
+                - cell "7.9" [ref=e2354]
+                - cell "28.58%" [ref=e2355]
+                - cell "8.64" [ref=e2356]
+                - cell "31.24%" [ref=e2357]
+                - cell "9.37" [ref=e2358]
+                - cell "33.9%" [ref=e2359]
+                - cell "11.54" [ref=e2360]
+                - cell "41.69%" [ref=e2361]
+                - cell "13.13" [ref=e2362]
+                - cell "47.44%" [ref=e2363]
+                - cell "2.45 s" [ref=e2364]
+                - cell "Sharp" [ref=e2365]
+                - cell "255" [ref=e2366]
+              - row "Mace Mace Steel Steel 5.69 17.27% 6.32 19.18% 6.95 21.08% 7.57 22.99% 8.2 24.9% 9.76 29.67% 11.02 33.49% 2 s Blunt 117" [ref=e2367]:
+                - columnheader "Mace" [ref=e2368]:
+                  - link "Mace" [ref=e2369] [cursor=pointer]:
+                    - /url: /wiki/Mace
+                    - img "Mace" [ref=e2370]
+                - columnheader "Mace" [ref=e2371]:
+                  - link "Mace" [ref=e2372] [cursor=pointer]:
+                    - /url: /wiki/Mace
+                - rowheader "Steel Steel" [ref=e2373]:
+                  - link "Steel" [ref=e2374] [cursor=pointer]:
+                    - /url: /wiki/Steel
+                    - img "Steel" [ref=e2375]
+                  - link "Steel" [ref=e2376] [cursor=pointer]:
+                    - /url: /wiki/Steel
+                - cell "5.69" [ref=e2377]
+                - cell "17.27%" [ref=e2378]
+                - cell "6.32" [ref=e2379]
+                - cell "19.18%" [ref=e2380]
+                - cell "6.95" [ref=e2381]
+                - cell "21.08%" [ref=e2382]
+                - cell "7.57" [ref=e2383]
+                - cell "22.99%" [ref=e2384]
+                - cell "8.2" [ref=e2385]
+                - cell "24.9%" [ref=e2386]
+                - cell "9.76" [ref=e2387]
+                - cell "29.67%" [ref=e2388]
+                - cell "11.02" [ref=e2389]
+                - cell "33.49%" [ref=e2390]
+                - cell "2 s" [ref=e2391]
+                - cell "Blunt" [ref=e2392]
+                - cell "117" [ref=e2393]
+              - row "Mastodon tusk Mastodon tusk Content added by the Odyssey DLC – – – – – 6.57 25.75% – – – – – – – – 2.62 s Sharp 120" [ref=e2394]:
+                - columnheader "Mastodon tusk" [ref=e2395]:
+                  - link "Mastodon tusk" [ref=e2396] [cursor=pointer]:
+                    - /url: /wiki/Mastodon_tusk
+                    - img "Mastodon tusk" [ref=e2397]
+                - columnheader "Mastodon tusk Content added by the Odyssey DLC" [ref=e2398]:
+                  - link "Mastodon tusk" [ref=e2399] [cursor=pointer]:
+                    - /url: /wiki/Mastodon_tusk
+                  - superscript [ref=e2400]:
+                    - link "Content added by the Odyssey DLC" [ref=e2401] [cursor=pointer]:
+                      - /url: /wiki/Odyssey_(DLC)
+                      - img "Content added by the Odyssey DLC" [ref=e2402]
+                - rowheader "–" [ref=e2403]
+                - cell "–" [ref=e2404]
+                - cell "–" [ref=e2405]
+                - cell "–" [ref=e2406]
+                - cell "–" [ref=e2407]
+                - cell "6.57" [ref=e2408]
+                - cell "25.75%" [ref=e2409]
+                - cell "–" [ref=e2410]
+                - cell "–" [ref=e2411]
+                - cell "–" [ref=e2412]
+                - cell "–" [ref=e2413]
+                - cell "–" [ref=e2414]
+                - cell "–" [ref=e2415]
+                - cell "–" [ref=e2416]
+                - cell "–" [ref=e2417]
+                - cell "2.62 s" [ref=e2418]
+                - cell "Sharp" [ref=e2419]
+                - cell "120" [ref=e2420]
+              - row "Monosword Monosword Content added by the Royalty DLC [C] – 8.73 57.2% 10.3 64.8% 11.45 72% 12.59 79.2% 13.74 86.4% 16.6 104.4% 18.89 118.8% 1.9 s Sharp 2,000" [ref=e2421]:
+                - columnheader "Monosword" [ref=e2422]:
+                  - link "Monosword" [ref=e2423] [cursor=pointer]:
+                    - /url: /wiki/Monosword
+                    - img "Monosword" [ref=e2424]
+                - columnheader "Monosword Content added by the Royalty DLC [C]" [ref=e2425]:
+                  - link "Monosword" [ref=e2426] [cursor=pointer]:
+                    - /url: /wiki/Monosword
+                  - superscript [ref=e2427]:
+                    - link "Content added by the Royalty DLC" [ref=e2428] [cursor=pointer]:
+                      - /url: /wiki/Royalty_DLC
+                      - img "Content added by the Royalty DLC" [ref=e2429]
+                  - superscript [ref=e2430]:
+                    - link "[C]" [ref=e2431] [cursor=pointer]:
+                      - /url: "#endnote_UltraC"
+                - rowheader "–" [ref=e2432]
+                - cell "8.73" [ref=e2433]
+                - cell "57.2%" [ref=e2434]
+                - cell "10.3" [ref=e2435]
+                - cell "64.8%" [ref=e2436]
+                - cell "11.45" [ref=e2437]
+                - cell "72%" [ref=e2438]
+                - cell "12.59" [ref=e2439]
+                - cell "79.2%" [ref=e2440]
+                - cell "13.74" [ref=e2441]
+                - cell "86.4%" [ref=e2442]
+                - cell "16.6" [ref=e2443]
+                - cell "104.4%" [ref=e2444]
+                - cell "18.89" [ref=e2445]
+                - cell "118.8%" [ref=e2446]
+                - cell "1.9 s" [ref=e2447]
+                - cell "Sharp" [ref=e2448]
+                - cell "2,000" [ref=e2449]
+              - row "Persona monosword Persona monosword Content added by the Royalty DLC [C] – 11.63 57.6% 13.08 64.8% 14.53 72% 15.98 79.2% 17.44 86.4% 24.47 130.5% 27.84 148.5% 1.6 s Sharp 3,000" [ref=e2450]:
+                - columnheader "Persona monosword" [ref=e2451]:
+                  - link "Persona monosword" [ref=e2452] [cursor=pointer]:
+                    - /url: /wiki/Persona_monosword
+                    - img "Persona monosword" [ref=e2453]
+                - columnheader "Persona monosword Content added by the Royalty DLC [C]" [ref=e2454]:
+                  - link "Persona monosword" [ref=e2455] [cursor=pointer]:
+                    - /url: /wiki/Persona_monosword
+                  - superscript [ref=e2456]:
+                    - link "Content added by the Royalty DLC" [ref=e2457] [cursor=pointer]:
+                      - /url: /wiki/Royalty_DLC
+                      - img "Content added by the Royalty DLC" [ref=e2458]
+                  - superscript [ref=e2459]:
+                    - link "[C]" [ref=e2460] [cursor=pointer]:
+                      - /url: "#endnote_UltraC"
+                - rowheader "–" [ref=e2461]
+                - cell "11.63" [ref=e2462]
+                - cell "57.6%" [ref=e2463]
+                - cell "13.08" [ref=e2464]
+                - cell "64.8%" [ref=e2465]
+                - cell "14.53" [ref=e2466]
+                - cell "72%" [ref=e2467]
+                - cell "15.98" [ref=e2468]
+                - cell "79.2%" [ref=e2469]
+                - cell "17.44" [ref=e2470]
+                - cell "86.4%" [ref=e2471]
+                - cell "24.47" [ref=e2472]
+                - cell "130.5%" [ref=e2473]
+                - cell "27.84" [ref=e2474]
+                - cell "148.5%" [ref=e2475]
+                - cell "1.6 s" [ref=e2476]
+                - cell "Sharp" [ref=e2477]
+                - cell "3,000" [ref=e2478]
+              - row "Persona plasmasword Persona plasmasword Content added by the Royalty DLC [C] [D] – 8.12 24.2% 9.05 26.98% 9.97 29.75% 10.9 32.53% 12.79 36.9% 15.45 44.59% 17.59 50.74% 1.9 s Sharp + Burn 3,000" [ref=e2479]:
+                - columnheader "Persona plasmasword" [ref=e2480]:
+                  - link "Persona plasmasword" [ref=e2481] [cursor=pointer]:
+                    - /url: /wiki/Persona_plasmasword
+                    - img "Persona plasmasword" [ref=e2482]
+                - columnheader "Persona plasmasword Content added by the Royalty DLC [C] [D]" [ref=e2483]:
+                  - link "Persona plasmasword" [ref=e2484] [cursor=pointer]:
+                    - /url: /wiki/Persona_plasmasword
+                  - superscript [ref=e2485]:
+                    - link "Content added by the Royalty DLC" [ref=e2486] [cursor=pointer]:
+                      - /url: /wiki/Royalty_DLC
+                      - img "Content added by the Royalty DLC" [ref=e2487]
+                  - superscript [ref=e2488]:
+                    - link "[C]" [ref=e2489] [cursor=pointer]:
+                      - /url: "#endnote_UltraC"
+                  - superscript [ref=e2490]:
+                    - link "[D]" [ref=e2491] [cursor=pointer]:
+                      - /url: "#endnote_PlasmaD"
+                - rowheader "–" [ref=e2492]
+                - cell "8.12" [ref=e2493]
+                - cell "24.2%" [ref=e2494]
+                - cell "9.05" [ref=e2495]
+                - cell "26.98%" [ref=e2496]
+                - cell "9.97" [ref=e2497]
+                - cell "29.75%" [ref=e2498]
+                - cell "10.9" [ref=e2499]
+                - cell "32.53%" [ref=e2500]
+                - cell "12.79" [ref=e2501]
+                - cell "36.9%" [ref=e2502]
+                - cell "15.45" [ref=e2503]
+                - cell "44.59%" [ref=e2504]
+                - cell "17.59" [ref=e2505]
+                - cell "50.74%" [ref=e2506]
+                - cell "1.9 s" [ref=e2507]
+                - cell "Sharp + Burn" [ref=e2508]
+                - cell "3,000" [ref=e2509]
+              - row "Persona zeushammer Persona zeushammer Content added by the Royalty DLC [C] – 9.91 31.07% 11.06 34.7% 13.17 40% 14.49 44% 15.8 48% 19.1 58% 21.73 66% 2.05 s Blunt + EMP 3,000" [ref=e2510]:
+                - columnheader "Persona zeushammer" [ref=e2511]:
+                  - link "Persona zeushammer" [ref=e2512] [cursor=pointer]:
+                    - /url: /wiki/Persona_zeushammer
+                    - img "Persona zeushammer" [ref=e2513]
+                - columnheader "Persona zeushammer Content added by the Royalty DLC [C]" [ref=e2514]:
+                  - link "Persona zeushammer" [ref=e2515] [cursor=pointer]:
+                    - /url: /wiki/Persona_zeushammer
+                  - superscript [ref=e2516]:
+                    - link "Content added by the Royalty DLC" [ref=e2517] [cursor=pointer]:
+                      - /url: /wiki/Royalty_DLC
+                      - img "Content added by the Royalty DLC" [ref=e2518]
+                  - superscript [ref=e2519]:
+                    - link "[C]" [ref=e2520] [cursor=pointer]:
+                      - /url: "#endnote_UltraC"
+                - rowheader "–" [ref=e2521]
+                - cell "9.91" [ref=e2522]
+                - cell "31.07%" [ref=e2523]
+                - cell "11.06" [ref=e2524]
+                - cell "34.7%" [ref=e2525]
+                - cell "13.17" [ref=e2526]
+                - cell "40%" [ref=e2527]
+                - cell "14.49" [ref=e2528]
+                - cell "44%" [ref=e2529]
+                - cell "15.8" [ref=e2530]
+                - cell "48%" [ref=e2531]
+                - cell "19.1" [ref=e2532]
+                - cell "58%" [ref=e2533]
+                - cell "21.73" [ref=e2534]
+                - cell "66%" [ref=e2535]
+                - cell "2.05 s" [ref=e2536]
+                - cell "Blunt + EMP" [ref=e2537]
+                - cell "3,000" [ref=e2538]
+              - row "Plasmasword Plasmasword Content added by the Royalty DLC [C] [D] – 6.03 22.4% 6.71 24.95% 7.39 27.5% 8.08 30.05% 8.76 32.6% 10.47 38.98% 12.63 47.03% 2.45 s Sharp + Burn 2,000" [ref=e2539]:
+                - columnheader "Plasmasword" [ref=e2540]:
+                  - link "Plasmasword" [ref=e2541] [cursor=pointer]:
+                    - /url: /wiki/Plasmasword
+                    - img "Plasmasword" [ref=e2542]
+                - columnheader "Plasmasword Content added by the Royalty DLC [C] [D]" [ref=e2543]:
+                  - link "Plasmasword" [ref=e2544] [cursor=pointer]:
+                    - /url: /wiki/Plasmasword
+                  - superscript [ref=e2545]:
+                    - link "Content added by the Royalty DLC" [ref=e2546] [cursor=pointer]:
+                      - /url: /wiki/Royalty_DLC
+                      - img "Content added by the Royalty DLC" [ref=e2547]
+                  - superscript [ref=e2548]:
+                    - link "[C]" [ref=e2549] [cursor=pointer]:
+                      - /url: "#endnote_UltraC"
+                  - superscript [ref=e2550]:
+                    - link "[D]" [ref=e2551] [cursor=pointer]:
+                      - /url: "#endnote_PlasmaD"
+                - rowheader "–" [ref=e2552]
+                - cell "6.03" [ref=e2553]
+                - cell "22.4%" [ref=e2554]
+                - cell "6.71" [ref=e2555]
+                - cell "24.95%" [ref=e2556]
+                - cell "7.39" [ref=e2557]
+                - cell "27.5%" [ref=e2558]
+                - cell "8.08" [ref=e2559]
+                - cell "30.05%" [ref=e2560]
+                - cell "8.76" [ref=e2561]
+                - cell "32.6%" [ref=e2562]
+                - cell "10.47" [ref=e2563]
+                - cell "38.98%" [ref=e2564]
+                - cell "12.63" [ref=e2565]
+                - cell "47.03%" [ref=e2566]
+                - cell "2.45 s" [ref=e2567]
+                - cell "Sharp + Burn" [ref=e2568]
+                - cell "2,000" [ref=e2569]
+              - row "Power claw Power claw – – – – – 9.28 27.75% – – – – – – – – 2 s Blunt 385" [ref=e2570]:
+                - columnheader "Power claw" [ref=e2571]:
+                  - link "Power claw" [ref=e2572] [cursor=pointer]:
+                    - /url: /wiki/Power_claw
+                    - img "Power claw" [ref=e2573]
+                - columnheader "Power claw" [ref=e2574]:
+                  - link "Power claw" [ref=e2575] [cursor=pointer]:
+                    - /url: /wiki/Power_claw
+                - rowheader "–" [ref=e2576]
+                - cell "–" [ref=e2577]
+                - cell "–" [ref=e2578]
+                - cell "–" [ref=e2579]
+                - cell "–" [ref=e2580]
+                - cell "9.28" [ref=e2581]
+                - cell "27.75%" [ref=e2582]
+                - cell "–" [ref=e2583]
+                - cell "–" [ref=e2584]
+                - cell "–" [ref=e2585]
+                - cell "–" [ref=e2586]
+                - cell "–" [ref=e2587]
+                - cell "–" [ref=e2588]
+                - cell "–" [ref=e2589]
+                - cell "–" [ref=e2590]
+                - cell "2 s" [ref=e2591]
+                - cell "Blunt" [ref=e2592]
+                - cell "385" [ref=e2593]
+              - row "Prosthetic arm Prosthetic arm – – – – – 4.1 12% – – – – – – – – 2 s Blunt 260" [ref=e2594]:
+                - columnheader "Prosthetic arm" [ref=e2595]:
+                  - link "Prosthetic arm" [ref=e2596] [cursor=pointer]:
+                    - /url: /wiki/Prosthetic_arm
+                    - img "Prosthetic arm" [ref=e2597]
+                - columnheader "Prosthetic arm" [ref=e2598]:
+                  - link "Prosthetic arm" [ref=e2599] [cursor=pointer]:
+                    - /url: /wiki/Prosthetic_arm
+                - rowheader "–" [ref=e2600]
+                - cell "–" [ref=e2601]
+                - cell "–" [ref=e2602]
+                - cell "–" [ref=e2603]
+                - cell "–" [ref=e2604]
+                - cell "4.1" [ref=e2605]
+                - cell "12%" [ref=e2606]
+                - cell "–" [ref=e2607]
+                - cell "–" [ref=e2608]
+                - cell "–" [ref=e2609]
+                - cell "–" [ref=e2610]
+                - cell "–" [ref=e2611]
+                - cell "–" [ref=e2612]
+                - cell "–" [ref=e2613]
+                - cell "–" [ref=e2614]
+                - cell "2 s" [ref=e2615]
+                - cell "Blunt" [ref=e2616]
+                - cell "260" [ref=e2617]
+              - row "Spear Spear Steel Steel 6.39 33.5% 7.13 37.5% 7.88 41.5% 8.63 45.5% 9.38 49.5% 11.43 61.63% 13.01 70.13% 2.6 s Sharp 186" [ref=e2618]:
+                - columnheader "Spear" [ref=e2619]:
+                  - link "Spear" [ref=e2620] [cursor=pointer]:
+                    - /url: /wiki/Spear
+                    - img "Spear" [ref=e2621]
+                - columnheader "Spear" [ref=e2622]:
+                  - link "Spear" [ref=e2623] [cursor=pointer]:
+                    - /url: /wiki/Spear
+                - rowheader "Steel Steel" [ref=e2624]:
+                  - link "Steel" [ref=e2625] [cursor=pointer]:
+                    - /url: /wiki/Steel
+                    - img "Steel" [ref=e2626]
+                  - link "Steel" [ref=e2627] [cursor=pointer]:
+                    - /url: /wiki/Steel
+                - cell "6.39" [ref=e2628]
+                - cell "33.5%" [ref=e2629]
+                - cell "7.13" [ref=e2630]
+                - cell "37.5%" [ref=e2631]
+                - cell "7.88" [ref=e2632]
+                - cell "41.5%" [ref=e2633]
+                - cell "8.63" [ref=e2634]
+                - cell "45.5%" [ref=e2635]
+                - cell "9.38" [ref=e2636]
+                - cell "49.5%" [ref=e2637]
+                - cell "11.43" [ref=e2638]
+                - cell "61.63%" [ref=e2639]
+                - cell "13.01" [ref=e2640]
+                - cell "70.13%" [ref=e2641]
+                - cell "2.6 s" [ref=e2642]
+                - cell "Sharp" [ref=e2643]
+                - cell "186" [ref=e2644]
+              - row "Thrumbo horn Thrumbo horn – – – – – 9.44 34.63% – – – – – – – – 2.45 s Sharp 800" [ref=e2645]:
+                - columnheader "Thrumbo horn" [ref=e2646]:
+                  - link "Thrumbo horn" [ref=e2647] [cursor=pointer]:
+                    - /url: /wiki/Thrumbo_horn
+                    - img "Thrumbo horn" [ref=e2648]
+                - columnheader "Thrumbo horn" [ref=e2649]:
+                  - link "Thrumbo horn" [ref=e2650] [cursor=pointer]:
+                    - /url: /wiki/Thrumbo_horn
+                - rowheader "–" [ref=e2651]
+                - cell "–" [ref=e2652]
+                - cell "–" [ref=e2653]
+                - cell "–" [ref=e2654]
+                - cell "–" [ref=e2655]
+                - cell "9.44" [ref=e2656]
+                - cell "34.63%" [ref=e2657]
+                - cell "–" [ref=e2658]
+                - cell "–" [ref=e2659]
+                - cell "–" [ref=e2660]
+                - cell "–" [ref=e2661]
+                - cell "–" [ref=e2662]
+                - cell "–" [ref=e2663]
+                - cell "–" [ref=e2664]
+                - cell "–" [ref=e2665]
+                - cell "2.45 s" [ref=e2666]
+                - cell "Sharp" [ref=e2667]
+                - cell "800" [ref=e2668]
+              - row "Venom fangs Venom fangs Content added by the Royalty DLC – – – – – 6.65 19.5% – – – – – – – – 2 s Blunt 355" [ref=e2669]:
+                - columnheader "Venom fangs" [ref=e2670]:
+                  - link "Venom fangs" [ref=e2671] [cursor=pointer]:
+                    - /url: /wiki/Venom_fangs
+                    - img "Venom fangs" [ref=e2672]
+                - columnheader "Venom fangs Content added by the Royalty DLC" [ref=e2673]:
+                  - link "Venom fangs" [ref=e2674] [cursor=pointer]:
+                    - /url: /wiki/Venom_fangs
+                  - superscript [ref=e2675]:
+                    - link "Content added by the Royalty DLC" [ref=e2676] [cursor=pointer]:
+                      - /url: /wiki/Royalty_DLC
+                      - img "Content added by the Royalty DLC" [ref=e2677]
+                - rowheader "–" [ref=e2678]
+                - cell "–" [ref=e2679]
+                - cell "–" [ref=e2680]
+                - cell "–" [ref=e2681]
+                - cell "–" [ref=e2682]
+                - cell "6.65" [ref=e2683]
+                - cell "19.5%" [ref=e2684]
+                - cell "–" [ref=e2685]
+                - cell "–" [ref=e2686]
+                - cell "–" [ref=e2687]
+                - cell "–" [ref=e2688]
+                - cell "–" [ref=e2689]
+                - cell "–" [ref=e2690]
+                - cell "–" [ref=e2691]
+                - cell "–" [ref=e2692]
+                - cell "2 s" [ref=e2693]
+                - cell "Blunt" [ref=e2694]
+                - cell "355" [ref=e2695]
+              - row "Venom talon Venom talon Content added by the Royalty DLC – – – – – 6.34 14.25% – – – – – – – – 1.63 s Blunt 355" [ref=e2696]:
+                - columnheader "Venom talon" [ref=e2697]:
+                  - link "Venom talon" [ref=e2698] [cursor=pointer]:
+                    - /url: /wiki/Venom_talon
+                    - img "Venom talon" [ref=e2699]
+                - columnheader "Venom talon Content added by the Royalty DLC" [ref=e2700]:
+                  - link "Venom talon" [ref=e2701] [cursor=pointer]:
+                    - /url: /wiki/Venom_talon
+                  - superscript [ref=e2702]:
+                    - link "Content added by the Royalty DLC" [ref=e2703] [cursor=pointer]:
+                      - /url: /wiki/Royalty_DLC
+                      - img "Content added by the Royalty DLC" [ref=e2704]
+                - rowheader "–" [ref=e2705]
+                - cell "–" [ref=e2706]
+                - cell "–" [ref=e2707]
+                - cell "–" [ref=e2708]
+                - cell "–" [ref=e2709]
+                - cell "6.34" [ref=e2710]
+                - cell "14.25%" [ref=e2711]
+                - cell "–" [ref=e2712]
+                - cell "–" [ref=e2713]
+                - cell "–" [ref=e2714]
+                - cell "–" [ref=e2715]
+                - cell "–" [ref=e2716]
+                - cell "–" [ref=e2717]
+                - cell "–" [ref=e2718]
+                - cell "–" [ref=e2719]
+                - cell "1.63 s" [ref=e2720]
+                - cell "Blunt" [ref=e2721]
+                - cell "355" [ref=e2722]
+              - row "Warhammer Warhammer Content added by the Royalty DLC Steel Steel 5.64 21.07% 6.28 23.45% 6.91 25.83% 7.55 28.22% 8.19 30.6% 9.78 36.56% 11.26 43.73% 2.6 s Blunt 350" [ref=e2723]:
+                - columnheader "Warhammer" [ref=e2724]:
+                  - link "Warhammer" [ref=e2725] [cursor=pointer]:
+                    - /url: /wiki/Warhammer
+                    - img "Warhammer" [ref=e2726]
+                - columnheader "Warhammer Content added by the Royalty DLC" [ref=e2727]:
+                  - link "Warhammer" [ref=e2728] [cursor=pointer]:
+                    - /url: /wiki/Warhammer
+                  - superscript [ref=e2729]:
+                    - link "Content added by the Royalty DLC" [ref=e2730] [cursor=pointer]:
+                      - /url: /wiki/Royalty_DLC
+                      - img "Content added by the Royalty DLC" [ref=e2731]
+                - rowheader "Steel Steel" [ref=e2732]:
+                  - link "Steel" [ref=e2733] [cursor=pointer]:
+                    - /url: /wiki/Steel
+                    - img "Steel" [ref=e2734]
+                  - link "Steel" [ref=e2735] [cursor=pointer]:
+                    - /url: /wiki/Steel
+                - cell "5.64" [ref=e2736]
+                - cell "21.07%" [ref=e2737]
+                - cell "6.28" [ref=e2738]
+                - cell "23.45%" [ref=e2739]
+                - cell "6.91" [ref=e2740]
+                - cell "25.83%" [ref=e2741]
+                - cell "7.55" [ref=e2742]
+                - cell "28.22%" [ref=e2743]
+                - cell "8.19" [ref=e2744]
+                - cell "30.6%" [ref=e2745]
+                - cell "9.78" [ref=e2746]
+                - cell "36.56%" [ref=e2747]
+                - cell "11.26" [ref=e2748]
+                - cell "43.73%" [ref=e2749]
+                - cell "2.6 s" [ref=e2750]
+                - cell "Blunt" [ref=e2751]
+                - cell "350" [ref=e2752]
+              - row "Wood Wood – – – – – 4.78 14.25% – – – – – – – – 2 s Blunt 1.2" [ref=e2753]:
+                - columnheader "Wood" [ref=e2754]:
+                  - link "Wood" [ref=e2755] [cursor=pointer]:
+                    - /url: /wiki/Wood
+                    - img "Wood" [ref=e2756]
+                - columnheader "Wood" [ref=e2757]:
+                  - link "Wood" [ref=e2758] [cursor=pointer]:
+                    - /url: /wiki/Wood
+                - rowheader "–" [ref=e2759]
+                - cell "–" [ref=e2760]
+                - cell "–" [ref=e2761]
+                - cell "–" [ref=e2762]
+                - cell "–" [ref=e2763]
+                - cell "4.78" [ref=e2764]
+                - cell "14.25%" [ref=e2765]
+                - cell "–" [ref=e2766]
+                - cell "–" [ref=e2767]
+                - cell "–" [ref=e2768]
+                - cell "–" [ref=e2769]
+                - cell "–" [ref=e2770]
+                - cell "–" [ref=e2771]
+                - cell "–" [ref=e2772]
+                - cell "–" [ref=e2773]
+                - cell "2 s" [ref=e2774]
+                - cell "Blunt" [ref=e2775]
+                - cell "1.2" [ref=e2776]
+              - row "Zeushammer Zeushammer Content added by the Royalty DLC [C] – 7.62 31.07% 8.52 34.7% 9.41 38.33% 10.3 41.97% 11.78 48% 14.24 58% 16.2 66% 2.75 s Blunt + EMP 2,000" [ref=e2777]:
+                - columnheader "Zeushammer" [ref=e2778]:
+                  - link "Zeushammer" [ref=e2779] [cursor=pointer]:
+                    - /url: /wiki/Zeushammer
+                    - img "Zeushammer" [ref=e2780]
+                - columnheader "Zeushammer Content added by the Royalty DLC [C]" [ref=e2781]:
+                  - link "Zeushammer" [ref=e2782] [cursor=pointer]:
+                    - /url: /wiki/Zeushammer
+                  - superscript [ref=e2783]:
+                    - link "Content added by the Royalty DLC" [ref=e2784] [cursor=pointer]:
+                      - /url: /wiki/Royalty_DLC
+                      - img "Content added by the Royalty DLC" [ref=e2785]
+                  - superscript [ref=e2786]:
+                    - link "[C]" [ref=e2787] [cursor=pointer]:
+                      - /url: "#endnote_UltraC"
+                - rowheader "–" [ref=e2788]
+                - cell "7.62" [ref=e2789]
+                - cell "31.07%" [ref=e2790]
+                - cell "8.52" [ref=e2791]
+                - cell "34.7%" [ref=e2792]
+                - cell "9.41" [ref=e2793]
+                - cell "38.33%" [ref=e2794]
+                - cell "10.3" [ref=e2795]
+                - cell "41.97%" [ref=e2796]
+                - cell "11.78" [ref=e2797]
+                - cell "48%" [ref=e2798]
+                - cell "14.24" [ref=e2799]
+                - cell "58%" [ref=e2800]
+                - cell "16.2" [ref=e2801]
+                - cell "66%" [ref=e2802]
+                - cell "2.75 s" [ref=e2803]
+                - cell "Blunt + EMP" [ref=e2804]
+                - cell "2,000" [ref=e2805]
+            - rowgroup
+          - generic [ref=e2806]:
+            - definition [ref=e2807]:
+              - link "A" [ref=e2809] [cursor=pointer]:
+                - /url: "#ref_BluntA"
+                - superscript [ref=e2811]: A
+              - text: All sharp melee weapons come also with (weak) blunt attacks.
+            - definition [ref=e2812]:
+              - link "B" [ref=e2814] [cursor=pointer]:
+                - /url: "#ref_JadeB"
+                - superscript [ref=e2816]: B
+              - text: A
+              - link "jade knife" [ref=e2817] [cursor=pointer]:
+                - /url: /wiki/Jade_knife
+              - text: can only be obtained via the Lost tribe scenario; they cannot be crafted nor purchased.
+            - definition [ref=e2818]:
+              - link "C" [ref=e2820] [cursor=pointer]:
+                - /url: "#ref_UltraC"
+                - superscript [ref=e2822]: C
+              - text: These weapons cannot be created by the player, they are able to be obtained through quests and purchasing them from Merchants. All but the
+              - link "eltex staff" [ref=e2823] [cursor=pointer]:
+                - /url: /wiki/Eltex_staff
+              - text: come in "
+              - link "persona" [ref=e2824] [cursor=pointer]:
+                - /url: /wiki/Persona_weapon
+              - text: "\" variants that cannot be wielded by anyone other than the bonded pawn unless it has the \""
+              - link "freewielder" [ref=e2825] [cursor=pointer]:
+                - /url: /wiki/Freewielder
+              - text: "\" trait, so make sure you choose a good pawn to use them."
+            - definition [ref=e2826]:
+              - link "D" [ref=e2828] [cursor=pointer]:
+                - /url: "#ref_PlasmaD"
+                - superscript [ref=e2830]: D
+              - text: These weapons also have a chance to set a pawn on fire. This damage is not included in the DPS. For further detail, see the individual pages.
+        - heading "Material / Quality modifiers[edit]" [level=3] [ref=e2831]:
+          - text: Material / Quality modifiers
+          - generic [ref=e2832]:
+            - text: "["
+            - link "edit" [ref=e2833] [cursor=pointer]:
+              - /url: /index.php?title=Weapons&action=edit&section=10
+            - text: "]"
+        - generic [ref=e2834]:
+          - listitem [ref=e2835]:
+            - table [ref=e2836]:
+              - rowgroup [ref=e2837]:
+                - row "Material Cooldown speed factor Damage factor (Blunt) Damage factor (Sharp) Max HP factor DPS factor (Blunt) DPS factor (Sharp)" [ref=e2838]:
+                  - columnheader "Material" [ref=e2839] [cursor=pointer]
+                  - columnheader "Cooldown speed factor" [ref=e2840] [cursor=pointer]
+                  - columnheader "Damage factor (Blunt)" [ref=e2841] [cursor=pointer]
+                  - columnheader "Damage factor (Sharp)" [ref=e2842] [cursor=pointer]
+                  - columnheader "Max HP factor" [ref=e2843] [cursor=pointer]
+                  - columnheader "DPS factor (Blunt)" [ref=e2844] [cursor=pointer]
+                  - columnheader "DPS factor (Sharp)" [ref=e2845] [cursor=pointer]
+              - rowgroup [ref=e2846]:
+                - row "Gold 1 1 0.75 0.6 1 0.75" [ref=e2847]:
+                  - rowheader "Gold" [ref=e2848]:
+                    - link "Gold" [ref=e2849] [cursor=pointer]:
+                      - /url: /wiki/Gold
+                  - cell "1" [ref=e2850]
+                  - cell "1" [ref=e2851]
+                  - cell "0.75" [ref=e2852]
+                  - cell "0.6" [ref=e2853]
+                  - cell "1" [ref=e2854]
+                  - cell "0.75" [ref=e2855]
+                - row "Granite blocks 1.3 1 0.65 1.7 0.77 0.5" [ref=e2856]:
+                  - rowheader "Granite blocks" [ref=e2857]:
+                    - link "Granite blocks" [ref=e2858] [cursor=pointer]:
+                      - /url: /wiki/Granite_blocks
+                  - cell "1.3" [ref=e2859]
+                  - cell "1" [ref=e2860]
+                  - cell "0.65" [ref=e2861]
+                  - cell "1.7" [ref=e2862]
+                  - cell "0.77" [ref=e2863]
+                  - cell "0.5" [ref=e2864]
+                - row "Jade 1.3 1.5 1 0.5 1.15 0.77" [ref=e2865]:
+                  - rowheader "Jade" [ref=e2866]:
+                    - link "Jade" [ref=e2867] [cursor=pointer]:
+                      - /url: /wiki/Jade
+                  - cell "1.3" [ref=e2868]
+                  - cell "1.5" [ref=e2869]
+                  - cell "1" [ref=e2870]
+                  - cell "0.5" [ref=e2871]
+                  - cell "1.15" [ref=e2872]
+                  - cell "0.77" [ref=e2873]
+                - row "Limestone blocks 1.3 1 0.6 1.55 0.77 0.46" [ref=e2874]:
+                  - rowheader "Limestone blocks" [ref=e2875]:
+                    - link "Limestone blocks" [ref=e2876] [cursor=pointer]:
+                      - /url: /wiki/Limestone_blocks
+                  - cell "1.3" [ref=e2877]
+                  - cell "1" [ref=e2878]
+                  - cell "0.6" [ref=e2879]
+                  - cell "1.55" [ref=e2880]
+                  - cell "0.77" [ref=e2881]
+                  - cell "0.46" [ref=e2882]
+                - row "Marble blocks 1.3 1 0.6 1.2 0.77 0.46" [ref=e2883]:
+                  - rowheader "Marble blocks" [ref=e2884]:
+                    - link "Marble blocks" [ref=e2885] [cursor=pointer]:
+                      - /url: /wiki/Marble_blocks
+                  - cell "1.3" [ref=e2886]
+                  - cell "1" [ref=e2887]
+                  - cell "0.6" [ref=e2888]
+                  - cell "1.2" [ref=e2889]
+                  - cell "0.77" [ref=e2890]
+                  - cell "0.46" [ref=e2891]
+                - row "Plasteel 0.8 0.9 1.1 2.8 1.13 1.38" [ref=e2892]:
+                  - rowheader "Plasteel" [ref=e2893]:
+                    - link "Plasteel" [ref=e2894] [cursor=pointer]:
+                      - /url: /wiki/Plasteel
+                  - cell "0.8" [ref=e2895]
+                  - cell "0.9" [ref=e2896]
+                  - cell "1.1" [ref=e2897]
+                  - cell "2.8" [ref=e2898]
+                  - cell "1.13" [ref=e2899]
+                  - cell "1.38" [ref=e2900]
+                - row "Sandstone blocks 1.3 1 0.5 1.4 0.77 0.38" [ref=e2901]:
+                  - rowheader "Sandstone blocks" [ref=e2902]:
+                    - link "Sandstone blocks" [ref=e2903] [cursor=pointer]:
+                      - /url: /wiki/Sandstone_blocks
+                  - cell "1.3" [ref=e2904]
+                  - cell "1" [ref=e2905]
+                  - cell "0.5" [ref=e2906]
+                  - cell "1.4" [ref=e2907]
+                  - cell "0.77" [ref=e2908]
+                  - cell "0.38" [ref=e2909]
+                - row "Silver 1 1 0.85 0.7 1 0.85" [ref=e2910]:
+                  - rowheader "Silver" [ref=e2911]:
+                    - link "Silver" [ref=e2912] [cursor=pointer]:
+                      - /url: /wiki/Silver
+                  - cell "1" [ref=e2913]
+                  - cell "1" [ref=e2914]
+                  - cell "0.85" [ref=e2915]
+                  - cell "0.7" [ref=e2916]
+                  - cell "1" [ref=e2917]
+                  - cell "0.85" [ref=e2918]
+                - row "Slate blocks 1.3 1 0.6 1.3 0.77 0.46" [ref=e2919]:
+                  - rowheader "Slate blocks" [ref=e2920]:
+                    - link "Slate blocks" [ref=e2921] [cursor=pointer]:
+                      - /url: /wiki/Slate_blocks
+                  - cell "1.3" [ref=e2922]
+                  - cell "1" [ref=e2923]
+                  - cell "0.6" [ref=e2924]
+                  - cell "1.3" [ref=e2925]
+                  - cell "0.77" [ref=e2926]
+                  - cell "0.46" [ref=e2927]
+                - row "Steel 1 1 1 1 1 1" [ref=e2928]:
+                  - rowheader "Steel" [ref=e2929]:
+                    - link "Steel" [ref=e2930] [cursor=pointer]:
+                      - /url: /wiki/Steel
+                  - cell "1" [ref=e2931]
+                  - cell "1" [ref=e2932]
+                  - cell "1" [ref=e2933]
+                  - cell "1" [ref=e2934]
+                  - cell "1" [ref=e2935]
+                  - cell "1" [ref=e2936]
+                - row "Uranium 1.1 1.5 1.1 2.5 1.36 1" [ref=e2937]:
+                  - rowheader "Uranium" [ref=e2938]:
+                    - link "Uranium" [ref=e2939] [cursor=pointer]:
+                      - /url: /wiki/Uranium
+                  - cell "1.1" [ref=e2940]
+                  - cell "1.5" [ref=e2941]
+                  - cell "1.1" [ref=e2942]
+                  - cell "2.5" [ref=e2943]
+                  - cell "1.36" [ref=e2944]
+                  - cell "1" [ref=e2945]
+                - row "Wood 1 0.9 0.4 0.65 0.9 0.4" [ref=e2946]:
+                  - rowheader "Wood" [ref=e2947]:
+                    - link "Wood" [ref=e2948] [cursor=pointer]:
+                      - /url: /wiki/Wood
+                  - cell "1" [ref=e2949]
+                  - cell "0.9" [ref=e2950]
+                  - cell "0.4" [ref=e2951]
+                  - cell "0.65" [ref=e2952]
+                  - cell "0.9" [ref=e2953]
+                  - cell "0.4" [ref=e2954]
+                - row "Bioferrite Content added by the Anomaly DLC 1 0.9 1.3 2 0.9 1.3" [ref=e2955]:
+                  - rowheader "Bioferrite Content added by the Anomaly DLC" [ref=e2956]:
+                    - link "Bioferrite" [ref=e2957] [cursor=pointer]:
+                      - /url: /wiki/Bioferrite
+                    - superscript [ref=e2958]:
+                      - link "Content added by the Anomaly DLC" [ref=e2959] [cursor=pointer]:
+                        - /url: /wiki/Anomaly_(DLC)
+                        - img "Content added by the Anomaly DLC" [ref=e2960]
+                  - cell "1" [ref=e2961]
+                  - cell "0.9" [ref=e2962]
+                  - cell "1.3" [ref=e2963]
+                  - cell "2" [ref=e2964]
+                  - cell "0.9" [ref=e2965]
+                  - cell "1.3" [ref=e2966]
+                - row "Obsidian Content added by the Odyssey DLC 1 1 1.4 0.5 1 1.4" [ref=e2967]:
+                  - rowheader "Obsidian Content added by the Odyssey DLC" [ref=e2968]:
+                    - link "Obsidian" [ref=e2969] [cursor=pointer]:
+                      - /url: /wiki/Obsidian
+                    - superscript [ref=e2970]:
+                      - link "Content added by the Odyssey DLC" [ref=e2971] [cursor=pointer]:
+                        - /url: /wiki/Odyssey_(DLC)
+                        - img "Content added by the Odyssey DLC" [ref=e2972]
+                  - cell "1" [ref=e2973]
+                  - cell "1" [ref=e2974]
+                  - cell "1.4" [ref=e2975]
+                  - cell "0.5" [ref=e2976]
+                  - cell "1" [ref=e2977]
+                  - cell "1.4" [ref=e2978]
+                - row "Vacstone blocks Content added by the Odyssey DLC 1.3 1 0.6 1.8 0.77 0.46" [ref=e2979]:
+                  - rowheader "Vacstone blocks Content added by the Odyssey DLC" [ref=e2980]:
+                    - link "Vacstone blocks" [ref=e2981] [cursor=pointer]:
+                      - /url: /wiki/Vacstone_blocks
+                    - superscript [ref=e2982]:
+                      - link "Content added by the Odyssey DLC" [ref=e2983] [cursor=pointer]:
+                        - /url: /wiki/Odyssey_(DLC)
+                        - img "Content added by the Odyssey DLC" [ref=e2984]
+                  - cell "1.3" [ref=e2985]
+                  - cell "1" [ref=e2986]
+                  - cell "0.6" [ref=e2987]
+                  - cell "1.8" [ref=e2988]
+                  - cell "0.77" [ref=e2989]
+                  - cell "0.46" [ref=e2990]
+              - rowgroup
+          - generic [ref=e2991]:
+            - table [ref=e2992]:
+              - rowgroup [ref=e2993]:
+                - row "Quality Base Damage Modifier" [ref=e2994]:
+                  - columnheader "Quality" [ref=e2995] [cursor=pointer]
+                  - columnheader "Base Damage Modifier" [ref=e2996] [cursor=pointer]
+              - rowgroup [ref=e2997]:
+                - row "Awful 0.80" [ref=e2998]:
+                  - rowheader "Awful" [ref=e2999]
+                  - cell "0.80" [ref=e3000]
+                - row "Poor 0.90" [ref=e3001]:
+                  - rowheader "Poor" [ref=e3002]
+                  - cell "0.90" [ref=e3003]
+                - row "Normal 1.00" [ref=e3004]:
+                  - rowheader "Normal" [ref=e3005]
+                  - cell "1.00" [ref=e3006]
+                - row "Good 1.10" [ref=e3007]:
+                  - rowheader "Good" [ref=e3008]
+                  - cell "1.10" [ref=e3009]
+                - row "Excellent 1.20" [ref=e3010]:
+                  - rowheader "Excellent" [ref=e3011]
+                  - cell "1.20" [ref=e3012]
+                - row "Masterwork 1.45" [ref=e3013]:
+                  - rowheader "Masterwork" [ref=e3014]
+                  - cell "1.45" [ref=e3015]
+                - row "Legendary 1.65" [ref=e3016]:
+                  - rowheader "Legendary" [ref=e3017]
+                  - cell "1.65" [ref=e3018]
+              - rowgroup
+            - paragraph [ref=e3019]: Do note that stone blocks can only be used with clubs.
+            - heading "Melee formulas[edit]" [level=3] [ref=e3020]:
+              - text: Melee formulas
+              - generic [ref=e3021]:
+                - text: "["
+                - link "edit" [ref=e3022] [cursor=pointer]:
+                  - /url: /index.php?title=Weapons&action=edit&section=11
+                - text: "]"
+            - table [ref=e3023]:
+              - rowgroup [ref=e3024]:
+                - 'row "Rewrite.png This article is suggested to be rewritten. Reason: Expand into explanation of Melee verb system and true DPS vs displayed DPS. Consider consulting with User:Jiquera on the wiki and Khitrir on the unofficial RW discord. You can help the RimWorld Wiki by improving it." [ref=e3025]':
+                  - cell "Rewrite.png" [ref=e3026]:
+                    - link "Rewrite.png" [ref=e3028] [cursor=pointer]:
+                      - /url: /wiki/Category:Pages_to_be_rewritten
+                      - img "Rewrite.png" [ref=e3029]
+                  - 'cell "This article is suggested to be rewritten. Reason: Expand into explanation of Melee verb system and true DPS vs displayed DPS. Consider consulting with User:Jiquera on the wiki and Khitrir on the unofficial RW discord. You can help the RimWorld Wiki by improving it." [ref=e3030]':
+                    - generic [ref=e3031]:
+                      - text: This article is suggested to be
+                      - link "rewritten" [ref=e3032] [cursor=pointer]:
+                        - /url: /wiki/Category:Pages_to_be_rewritten
+                      - text: ". Reason: Expand into explanation of Melee verb system and true DPS vs displayed DPS. Consider consulting with"
+                      - link "User:Jiquera" [ref=e3033] [cursor=pointer]:
+                        - /url: /index.php?title=User:Jiquera&action=edit&redlink=1
+                      - text: on the wiki and
+                      - link "Khitrir" [ref=e3034] [cursor=pointer]:
+                        - /url: https://www.reddit.com/r/RimWorld/comments/lcjgil/the_melee_verb_system_why_it_didnt_fix_what_it/
+                      - text: on the unofficial RW discord. You can help the RimWorld Wiki by
+                      - link "improving" [ref=e3036] [cursor=pointer]:
+                        - /url: https://rimworldwiki.com/index.php?title=Weapons&action=edit
+                      - text: it.
+            - heading "General formulas[edit]" [level=4] [ref=e3037]:
+              - text: General formulas
+              - generic [ref=e3038]:
+                - text: "["
+                - link "edit" [ref=e3039] [cursor=pointer]:
+                  - /url: /index.php?title=Weapons&action=edit&section=12
+                - text: "]"
+            - paragraph [ref=e3040]: Damage for any melee weapon is Base Damage x Material Modifier x Quality Modifier
+            - paragraph [ref=e3041]: Cooldown is calculated as Weapon melee cooldown / Material melee cooldown
+            - paragraph [ref=e3042]: DPS (damage per second) is calculated as Damage / Cooldown. Note that you must use Cooldown (seconds) to get DPS, otherwise if you use Cooldown (Ticks) you'll calculate DPT (Damage Per Tick) which you probably don't want.
+            - paragraph [ref=e3043]: AP (armor piercing) defaults to 0.015 x Damage if no value is specified
+            - paragraph [ref=e3044]: Chance Factor defaults to 1 if no value is specified
+            - heading "Listed DPS on weapons[edit]" [level=4] [ref=e3045]:
+              - text: Listed DPS on weapons
+              - generic [ref=e3046]:
+                - text: "["
+                - link "edit" [ref=e3047] [cursor=pointer]:
+                  - /url: /index.php?title=Weapons&action=edit&section=13
+                - text: "]"
+            - paragraph [ref=e3048]: "The DPS listed on the info tab for weapons is deceiving as it is no longer used when a pawn equips the item (see below). Regardless this is how it is computed based on the melee attack options the weapon has:"
+            - list [ref=e3049]:
+              - listitem [ref=e3050]: For each attack option compute the Selection Weight = Damage x Damage
+              - listitem [ref=e3051]: For each attack option compute the Selection Chance = Selection Weight / SumOfAll(Selection Weights)
+              - listitem [ref=e3052]: Compute the Average Damage = SumOfAll(Damage x Selection Chance)
+              - listitem [ref=e3053]: Compute the Average Cooldown = SumOfAll(Cooldown x Selection Chance)
+              - listitem [ref=e3054]: Compute the Average DPS = Average Damage / Average Cooldown
+            - paragraph [ref=e3055]: "Note that this is mathematically incorrect (see below for more details). Below is an example with a Normal Persona Zeus Hammer:"
+            - table [ref=e3056]:
+              - rowgroup [ref=e3057]:
+                - row "Attack Damage Cooldown Selection Weight Selection Chance" [ref=e3058]:
+                  - columnheader "Attack" [ref=e3059]
+                  - columnheader "Damage" [ref=e3060]
+                  - columnheader "Cooldown" [ref=e3061]
+                  - columnheader "Selection Weight" [ref=e3062]
+                  - columnheader "Selection Chance" [ref=e3063]
+                - row "head 31 2.2 961 81%" [ref=e3064]:
+                  - cell "head" [ref=e3065]
+                  - cell "31" [ref=e3066]
+                  - cell "2.2" [ref=e3067]
+                  - cell "961" [ref=e3068]
+                  - cell "81%" [ref=e3069]
+                - row "handle 15 1.6 225 19%" [ref=e3070]:
+                  - cell "handle" [ref=e3071]
+                  - cell "15" [ref=e3072]
+                  - cell "1.6" [ref=e3073]
+                  - cell "225" [ref=e3074]
+                  - cell "19%" [ref=e3075]
+            - paragraph [ref=e3076]: Average Damage = 31 x 81% + 15 x 19% = 27.965
+            - paragraph [ref=e3077]: Average Cooldown = 2.2 x 81% + 1.6 x 19% = 2.086
+            - paragraph [ref=e3078]: Average DPS = 27.965 / 2.086 = 13.40
+            - paragraph [ref=e3079]: You can find more of these values in Dev mode >> Logging Menu >> Tools. There are also values listed for pawns and these are computed the same as above except that in step 1 you also multiply by 0.3 and the Chance Factor if one is specified. Note that just like the item values these are not actually used in the game anymore (see below).
+            - heading "Listed DPS on pawns[edit]" [level=4] [ref=e3080]:
+              - text: Listed DPS on pawns
+              - generic [ref=e3081]:
+                - text: "["
+                - link "edit" [ref=e3082] [cursor=pointer]:
+                  - /url: /index.php?title=Weapons&action=edit&section=14
+                - text: "]"
+            - paragraph [ref=e3083]:
+              - text: This is a system used since version
+              - link "1.1.2610" [ref=e3084] [cursor=pointer]:
+                - /url: /wiki/Version/1.1.2610
+              - text: "and it is based on a category system. It is based on the attack options available however now we take both the options from the weapon as well as the options from the pawn (eg. fists) into account:"
+            - list [ref=e3085]:
+              - listitem [ref=e3086]: For each attack option compute the Initial Selection Weight = Damage x (1 + AP) x Chance Factor / Cooldown
+              - listitem [ref=e3087]:
+                - text: "For each attack option determine the Category based on the highest weight value we just computed:"
+                - list [ref=e3088]:
+                  - listitem [ref=e3089]: Best if Initial Selection Weight >= 0.95 x MAX(Initial Selection Weight)
+                  - listitem [ref=e3090]: Worst if Initial Selection Weight < 0.25 x MAX(Initial Selection Weight)
+                  - listitem [ref=e3091]: Mid Otherwise
+              - listitem [ref=e3092]:
+                - text: "For each attack option compute the Final Selection Weight based on the categories:"
+                - list [ref=e3093]:
+                  - listitem [ref=e3094]: 0.75 / NumberOfOptionsIn(Best) if the option is in the Best category
+                  - listitem [ref=e3095]: 0.25 / NumberOfOptionsIn(Mid) if the option is in the Mid category
+                  - listitem [ref=e3096]: 0.0 if the option is in the Worst category
+              - listitem [ref=e3097]: For each attack option compute the Selection Chance = Final Selection Weight / SumOfAll(Final Selection Weights)
+              - listitem [ref=e3098]: Compute the Average Damage = SumOfAll(Damage x Selection Chance)
+              - listitem [ref=e3099]: Compute the Average Cooldown = SumOfAll(Cooldown x Selection Chance)
+              - listitem [ref=e3100]: Compute the Average DPS = Average Damage / Average Cooldown
+            - paragraph [ref=e3101]:
+              - text: Below is an example with a pawn carrying a Normal
+              - link "Persona Zeus Hammer" [ref=e3102] [cursor=pointer]:
+                - /url: /wiki/Persona_zeushammer
+              - text: "(note that AP is not specified and therefore is defined as Damage x 0.015):"
+            - table [ref=e3103]:
+              - rowgroup [ref=e3104]:
+                - row "Attack Damage Cooldown Armor Piercing Chance Factor Initial Selection Weight Category Final Selection Weight Selection Chance" [ref=e3105]:
+                  - columnheader "Attack" [ref=e3106]
+                  - columnheader "Damage" [ref=e3107]
+                  - columnheader "Cooldown" [ref=e3108]
+                  - columnheader "Armor Piercing" [ref=e3109]
+                  - columnheader "Chance Factor" [ref=e3110]
+                  - columnheader "Initial Selection Weight" [ref=e3111]
+                  - columnheader "Category" [ref=e3112]
+                  - columnheader "Final Selection Weight" [ref=e3113]
+                  - columnheader "Selection Chance" [ref=e3114]
+                - row "head 31 2.2 20.64 Best 0.75 75.0%" [ref=e3115]:
+                  - cell "head" [ref=e3116]
+                  - cell "31" [ref=e3117]
+                  - cell "2.2" [ref=e3118]
+                  - cell [ref=e3119]
+                  - cell [ref=e3120]
+                  - cell "20.64" [ref=e3121]
+                  - cell "Best" [ref=e3122]
+                  - cell "0.75" [ref=e3123]
+                  - cell "75.0%" [ref=e3124]
+                - row "handle 15 1.6 11.48 Mid 0.125 12.5%" [ref=e3125]:
+                  - cell "handle" [ref=e3126]
+                  - cell "15" [ref=e3127]
+                  - cell "1.6" [ref=e3128]
+                  - cell [ref=e3129]
+                  - cell [ref=e3130]
+                  - cell "11.48" [ref=e3131]
+                  - cell "Mid" [ref=e3132]
+                  - cell "0.125" [ref=e3133]
+                  - cell "12.5%" [ref=e3134]
+                - row "left fist (archotech arm) 14 2 8.47 Mid 0.125 12.5%" [ref=e3135]:
+                  - cell "left fist (archotech arm)" [ref=e3136]
+                  - cell "14" [ref=e3137]
+                  - cell "2" [ref=e3138]
+                  - cell [ref=e3139]
+                  - cell [ref=e3140]
+                  - cell "8.47" [ref=e3141]
+                  - cell "Mid" [ref=e3142]
+                  - cell "0.125" [ref=e3143]
+                  - cell "12.5%" [ref=e3144]
+                - row "right fist 8.2 2 4.60 Worst 0.00 0.0%" [ref=e3145]:
+                  - cell "right fist" [ref=e3146]
+                  - cell "8.2" [ref=e3147]
+                  - cell "2" [ref=e3148]
+                  - cell [ref=e3149]
+                  - cell [ref=e3150]
+                  - cell "4.60" [ref=e3151]
+                  - cell "Worst" [ref=e3152]
+                  - cell "0.00" [ref=e3153]
+                  - cell "0.0%" [ref=e3154]
+                - row "teeth 8.2 2 0.07 0.32 Worst 0.00 0.0%" [ref=e3155]:
+                  - cell "teeth" [ref=e3156]
+                  - cell "8.2" [ref=e3157]
+                  - cell "2" [ref=e3158]
+                  - cell [ref=e3159]
+                  - cell "0.07" [ref=e3160]
+                  - cell "0.32" [ref=e3161]
+                  - cell "Worst" [ref=e3162]
+                  - cell "0.00" [ref=e3163]
+                  - cell "0.0%" [ref=e3164]
+                - row "head 5 2 0.2 0.54 Worst 0.00 0.0%" [ref=e3165]:
+                  - cell "head" [ref=e3166]
+                  - cell "5" [ref=e3167]
+                  - cell "2" [ref=e3168]
+                  - cell [ref=e3169]
+                  - cell "0.2" [ref=e3170]
+                  - cell "0.54" [ref=e3171]
+                  - cell "Worst" [ref=e3172]
+                  - cell "0.00" [ref=e3173]
+                  - cell "0.0%" [ref=e3174]
+            - paragraph [ref=e3175]: Average Damage = 31 x 75% + 15 x 12.5% + 14 x 12.5% = 26.875
+            - paragraph [ref=e3176]: Average Cooldown = 2.2 x 75% + 1.6 x 12.5% + 2 x 12.5% = 2.100
+            - paragraph [ref=e3177]: Average DPS = 26.875 / 2.100 = 12.80
+            - paragraph [ref=e3178]: Note that in this case upgrading the left arm actually decreased the average DPS (from 13.17 to 12.80) by moving an inferior attack option from Worst to Mid.
+            - paragraph [ref=e3179]: There is a peculiarity in the description above as it seems that the AccuracyTouch properties of ranged weapons is not used. This may be a bug as it seems intended that it should have been used.
+            - heading "Biocoding[edit]" [level=2] [ref=e3180]:
+              - text: Biocoding
+              - generic [ref=e3181]:
+                - text: "["
+                - link "edit" [ref=e3182] [cursor=pointer]:
+                  - /url: /index.php?title=Weapons&action=edit&section=15
+                - text: "]"
+            - generic [ref=e3183]:
+              - text: "See also:"
+              - link "Persona weapons" [ref=e3184] [cursor=pointer]:
+                - /url: /wiki/Persona_weapons
+            - paragraph [ref=e3185]:
+              - text: Any weapons carried by non-colonists can arrive on the map "biocoded", meaning that weapon is only usable by the specific pawn that the weapon is biocoded to. Biocoding on weapons cannot be changed or erased, but pawns recruited as colonists will still be able to use weapons biocoded to them. These weapons are occasionally found on raiders, guests and other pawns, and cannot be sold. They can be
+              - link "smelted" [ref=e3186] [cursor=pointer]:
+                - /url: /wiki/Electric_smelter
+              - text: and have a specific option in both the bill menu and in
+              - link "stockpiles" [ref=e3187] [cursor=pointer]:
+                - /url: /wiki/Stockpile
+              - text: to allow their sorting.
+            - heading "Unobtainable weapons[edit]" [level=2] [ref=e3188]:
+              - text: Unobtainable weapons
+              - generic [ref=e3189]:
+                - text: "["
+                - link "edit" [ref=e3190] [cursor=pointer]:
+                  - /url: /index.php?title=Weapons&action=edit&section=16
+                - text: "]"
+            - generic [ref=e3191]:
+              - text: "Main article:"
+              - link "Unobtainable items" [ref=e3192] [cursor=pointer]:
+                - /url: /wiki/Unobtainable_items
+            - paragraph [ref=e3193]:
+              - text: Certain weapons are equipped exclusively by
+              - link "mechanoids" [ref=e3194] [cursor=pointer]:
+                - /url: /wiki/Mechanoid
+              - text: or
+              - link "turrets" [ref=e3195] [cursor=pointer]:
+                - /url: /wiki/Turret
+              - text: . These cannot be obtained independently from their regular users without the use of
+              - link "dev mode" [ref=e3196] [cursor=pointer]:
+                - /url: /wiki/Dev_mode
+              - text: . When a normal pawn equips a debug-spawned weapon and then drops it, the weapon will disappear.
+            - heading "Gallery[edit]" [level=2] [ref=e3197]:
+              - text: Gallery
+              - generic [ref=e3198]:
+                - text: "["
+                - link "edit" [ref=e3199] [cursor=pointer]:
+                  - /url: /index.php?title=Weapons&action=edit&section=17
+                - text: "]"
+            - list [ref=e3200]:
+              - listitem [ref=e3201]:
+                - generic [ref=e3202]:
+                  - link [ref=e3205] [cursor=pointer]:
+                    - /url: /wiki/File:UnfinishedWeapon.png
+                  - paragraph [ref=e3207]: Unfinished melee weapon
+              - listitem [ref=e3208]:
+                - generic [ref=e3209]:
+                  - link [ref=e3212] [cursor=pointer]:
+                    - /url: /wiki/File:UnfinishedGun.png
+                  - paragraph [ref=e3214]: Unfinished gun
+            - heading "Version history[edit]" [level=2] [ref=e3215]:
+              - text: Version history
+              - generic [ref=e3216]:
+                - text: "["
+                - link "edit" [ref=e3217] [cursor=pointer]:
+                  - /url: /index.php?title=Weapons&action=edit&section=18
+                - text: "]"
+            - list [ref=e3218]:
+              - listitem [ref=e3219]:
+                - link "0.0.245" [ref=e3220] [cursor=pointer]:
+                  - /url: /wiki/Version/0.0.245
+                - text: "- Shooting accuracy split into misses due to equipment and misses due to skill."
+              - listitem [ref=e3221]:
+                - link "0.0.250" [ref=e3222] [cursor=pointer]:
+                  - /url: /wiki/Version/0.0.250
+                - text: "- Melee attacks incap more than guns and explosives. N.b. That this change may or may not be represented in the current version. It was only added in this previous version."
+              - listitem [ref=e3223]:
+                - link "0.8.657" [ref=e3224] [cursor=pointer]:
+                  - /url: /wiki/Version/0.8.657
+                - text: "- Melee weapons have a"
+                - link "quality" [ref=e3225] [cursor=pointer]:
+                  - /url: /wiki/Quality
+                - text: . Can now craft any kind of melee weapon from appropriate materials.
+              - listitem [ref=e3226]:
+                - link "0.9.722" [ref=e3227] [cursor=pointer]:
+                  - /url: /wiki/Version/0.9.722
+                - text: "- High-quality weapons have art engraved into them. All weapons now have quality levels, including guns and bows. Quality affects accuracy."
+              - listitem [ref=e3228]:
+                - text: Beta 19/1.0 - Debuffed ranged weapon melee attacks to be in line with fists in terms of DPS. Serious melee weapons (
+                - link "knife" [ref=e3229] [cursor=pointer]:
+                  - /url: /wiki/Knife
+                - text: on upward) across the board 5%-10% DPS buff. Pawns hit by ranged attacks now stagger the same way as pawns hit by melee attacks. This effect only happens if the weapon's stopping power stat is equal or greater than the target's body size. Missed shots now have a 50% extra chance of hitting nothing; this will make missed shots less likely to hit random things (but doesn’t change the chance of missing).
+              - listitem [ref=e3230]:
+                - link "1.1.0" [ref=e3231] [cursor=pointer]:
+                  - /url: /wiki/Version/1.1.0
+                - text: "- Biocoding added"
+            - separator [ref=e3232]
+            - generic [ref=e3234]:
+              - generic [ref=e3235]: Weapons
+              - generic [ref=e3236]:
+                - generic:
+                  - generic:
+                    - term [ref=e3237]:
+                      - generic [ref=e3238]: Melee |
+                      - text: Neolithic
+                    - definition [ref=e3239]:
+                      - link "Breach axe" [ref=e3240] [cursor=pointer]:
+                        - /url: /wiki/Breach_axe
+                      - text: •
+                      - link "Club" [ref=e3241] [cursor=pointer]:
+                        - /url: /wiki/Club
+                      - text: •
+                      - link "Ikwa" [ref=e3242] [cursor=pointer]:
+                        - /url: /wiki/Ikwa
+                      - text: •
+                      - link "Knife" [ref=e3243] [cursor=pointer]:
+                        - /url: /wiki/Knife
+                      - generic [ref=e3244]:
+                        - text: (
+                        - link "Jade" [ref=e3245] [cursor=pointer]:
+                          - /url: /wiki/Jade_knife
+                        - text: )
+                      - text: •
+                      - link "Spear" [ref=e3246] [cursor=pointer]:
+                        - /url: /wiki/Spear
+                  - generic:
+                    - term [ref=e3247]: Medieval
+                    - definition [ref=e3248]:
+                      - link "Gladius" [ref=e3249] [cursor=pointer]:
+                        - /url: /wiki/Gladius
+                      - text: •
+                      - link "Longsword" [ref=e3250] [cursor=pointer]:
+                        - /url: /wiki/Longsword
+                      - text: •
+                      - link "Mace" [ref=e3251] [cursor=pointer]:
+                        - /url: /wiki/Mace
+                      - text: •
+                      - link "Axe" [ref=e3252] [cursor=pointer]:
+                        - /url: /wiki/Axe
+                      - superscript [ref=e3253]:
+                        - link "Content added by the Royalty DLC" [ref=e3254] [cursor=pointer]:
+                          - /url: /wiki/Royalty_DLC
+                          - img "Content added by the Royalty DLC" [ref=e3255]
+                      - text: •
+                      - link "Warhammer" [ref=e3256] [cursor=pointer]:
+                        - /url: /wiki/Warhammer
+                      - superscript [ref=e3257]:
+                        - link "Content added by the Royalty DLC" [ref=e3258] [cursor=pointer]:
+                          - /url: /wiki/Royalty_DLC
+                          - img "Content added by the Royalty DLC" [ref=e3259]
+                  - generic:
+                    - term [ref=e3260]: Ultra
+                    - definition [ref=e3261]:
+                      - link "Eltex staff" [ref=e3262] [cursor=pointer]:
+                        - /url: /wiki/Eltex_staff
+                      - superscript [ref=e3263]:
+                        - link "Content added by the Royalty DLC" [ref=e3264] [cursor=pointer]:
+                          - /url: /wiki/Royalty_DLC
+                          - img "Content added by the Royalty DLC" [ref=e3265]
+                      - text: •
+                      - link "Monosword" [ref=e3266] [cursor=pointer]:
+                        - /url: /wiki/Monosword
+                      - generic [ref=e3267]:
+                        - text: (
+                        - link "Persona" [ref=e3268] [cursor=pointer]:
+                          - /url: /wiki/Persona_monosword
+                        - text: )
+                      - superscript [ref=e3269]:
+                        - link "Content added by the Royalty DLC" [ref=e3270] [cursor=pointer]:
+                          - /url: /wiki/Royalty_DLC
+                          - img "Content added by the Royalty DLC" [ref=e3271]
+                      - text: •
+                      - link "Plasmasword" [ref=e3272] [cursor=pointer]:
+                        - /url: /wiki/Plasmasword
+                      - generic [ref=e3273]:
+                        - text: (
+                        - link "Persona" [ref=e3274] [cursor=pointer]:
+                          - /url: /wiki/Persona_plasmasword
+                        - text: )
+                      - superscript [ref=e3275]:
+                        - link "Content added by the Royalty DLC" [ref=e3276] [cursor=pointer]:
+                          - /url: /wiki/Royalty_DLC
+                          - img "Content added by the Royalty DLC" [ref=e3277]
+                      - text: •
+                      - link "Zeushammer" [ref=e3278] [cursor=pointer]:
+                        - /url: /wiki/Zeushammer
+                      - generic [ref=e3279]:
+                        - text: (
+                        - link "Persona" [ref=e3280] [cursor=pointer]:
+                          - /url: /wiki/Persona_zeushammer
+                        - text: )
+                      - superscript [ref=e3281]:
+                        - link "Content added by the Royalty DLC" [ref=e3282] [cursor=pointer]:
+                          - /url: /wiki/Royalty_DLC
+                          - img "Content added by the Royalty DLC" [ref=e3283]
+                  - generic:
+                    - term [ref=e3284]: Improvised
+                    - definition [ref=e3285]:
+                      - link "Beer" [ref=e3286] [cursor=pointer]:
+                        - /url: /wiki/Beer
+                      - text: •
+                      - link "Elephant tusk" [ref=e3287] [cursor=pointer]:
+                        - /url: /wiki/Elephant_tusk
+                      - text: •
+                      - link "Thrumbo horn" [ref=e3288] [cursor=pointer]:
+                        - /url: /wiki/Thrumbo_horn
+                      - text: •
+                      - link "Wood" [ref=e3289] [cursor=pointer]:
+                        - /url: /wiki/Wood
+                      - text: •
+                      - link "Alpha thrumbo horn" [ref=e3290] [cursor=pointer]:
+                        - /url: /wiki/Alpha_thrumbo_horn
+                      - superscript [ref=e3291]:
+                        - link "Content added by the Odyssey DLC" [ref=e3292] [cursor=pointer]:
+                          - /url: /wiki/Odyssey_(DLC)
+                          - img "Content added by the Odyssey DLC" [ref=e3293]
+                      - text: •
+                      - link "Mastodon tusk" [ref=e3294] [cursor=pointer]:
+                        - /url: /wiki/Mastodon_tusk
+                      - superscript [ref=e3295]:
+                        - link "Content added by the Odyssey DLC" [ref=e3296] [cursor=pointer]:
+                          - /url: /wiki/Odyssey_(DLC)
+                          - img "Content added by the Odyssey DLC" [ref=e3297]
+                  - generic:
+                    - term [ref=e3298]:
+                      - generic [ref=e3299]: Ranged |
+                      - text: Neolithic
+                    - definition [ref=e3300]:
+                      - link "Greatbow" [ref=e3301] [cursor=pointer]:
+                        - /url: /wiki/Greatbow
+                      - generic [ref=e3302]:
+                        - text: (
+                        - link "Unique" [ref=e3303] [cursor=pointer]:
+                          - /url: /wiki/Unique_greatbow
+                        - superscript [ref=e3304]:
+                          - link "Content added by the Odyssey DLC" [ref=e3305] [cursor=pointer]:
+                            - /url: /wiki/Odyssey_(DLC)
+                            - img "Content added by the Odyssey DLC" [ref=e3306]
+                        - text: )
+                      - text: •
+                      - link "Pila" [ref=e3307] [cursor=pointer]:
+                        - /url: /wiki/Pila
+                      - text: •
+                      - link "Recurve bow" [ref=e3308] [cursor=pointer]:
+                        - /url: /wiki/Recurve_bow
+                      - text: •
+                      - link "Short bow" [ref=e3309] [cursor=pointer]:
+                        - /url: /wiki/Short_bow
+                      - text: •
+                      - link "Flamebow" [ref=e3310] [cursor=pointer]:
+                        - /url: /wiki/Flamebow
+                      - superscript [ref=e3311]:
+                        - link "Content added by the Biotech DLC" [ref=e3312] [cursor=pointer]:
+                          - /url: /wiki/Biotech_(DLC)
+                          - img "Content added by the Biotech DLC" [ref=e3313]
+                  - generic:
+                    - term [ref=e3314]: Medieval
+                    - definition [ref=e3315]:
+                      - link "Nerve spiker" [ref=e3316] [cursor=pointer]:
+                        - /url: /wiki/Nerve_spiker
+                      - superscript [ref=e3317]:
+                        - link "Content added by the Anomaly DLC" [ref=e3318] [cursor=pointer]:
+                          - /url: /wiki/Anomaly_(DLC)
+                          - img "Content added by the Anomaly DLC" [ref=e3319]
+                  - generic:
+                    - term [ref=e3320]: Industrial
+                    - definition [ref=e3321]:
+                      - link "Assault rifle" [ref=e3322] [cursor=pointer]:
+                        - /url: /wiki/Assault_rifle
+                      - generic [ref=e3323]:
+                        - text: (
+                        - link "Unique" [ref=e3324] [cursor=pointer]:
+                          - /url: /wiki/Unique_assault_rifle
+                        - superscript [ref=e3325]:
+                          - link "Content added by the Odyssey DLC" [ref=e3326] [cursor=pointer]:
+                            - /url: /wiki/Odyssey_(DLC)
+                            - img "Content added by the Odyssey DLC" [ref=e3327]
+                        - text: )
+                      - text: •
+                      - link "Autopistol" [ref=e3328] [cursor=pointer]:
+                        - /url: /wiki/Autopistol
+                      - text: •
+                      - link "Bolt-action rifle" [ref=e3329] [cursor=pointer]:
+                        - /url: /wiki/Bolt-action_rifle
+                      - generic [ref=e3330]:
+                        - text: (
+                        - link "Unique" [ref=e3331] [cursor=pointer]:
+                          - /url: /wiki/Unique_bolt-action_rifle
+                        - superscript [ref=e3332]:
+                          - link "Content added by the Odyssey DLC" [ref=e3333] [cursor=pointer]:
+                            - /url: /wiki/Odyssey_(DLC)
+                            - img "Content added by the Odyssey DLC" [ref=e3334]
+                        - text: )
+                      - text: •
+                      - link "Chain shotgun" [ref=e3335] [cursor=pointer]:
+                        - /url: /wiki/Chain_shotgun
+                      - generic [ref=e3336]:
+                        - text: (
+                        - link "Unique" [ref=e3337] [cursor=pointer]:
+                          - /url: /wiki/Unique_chain_shotgun
+                        - superscript [ref=e3338]:
+                          - link "Content added by the Odyssey DLC" [ref=e3339] [cursor=pointer]:
+                            - /url: /wiki/Odyssey_(DLC)
+                            - img "Content added by the Odyssey DLC" [ref=e3340]
+                        - text: )
+                      - text: •
+                      - link "Heavy SMG" [ref=e3341] [cursor=pointer]:
+                        - /url: /wiki/Heavy_SMG
+                      - generic [ref=e3342]:
+                        - text: (
+                        - link "Unique" [ref=e3343] [cursor=pointer]:
+                          - /url: /wiki/Unique_heavy_SMG
+                        - superscript [ref=e3344]:
+                          - link "Content added by the Odyssey DLC" [ref=e3345] [cursor=pointer]:
+                            - /url: /wiki/Odyssey_(DLC)
+                            - img "Content added by the Odyssey DLC" [ref=e3346]
+                        - text: )
+                      - text: • Launcher
+                      - generic [ref=e3347]:
+                        - text: (
+                        - link "EMP" [ref=e3348] [cursor=pointer]:
+                          - /url: /wiki/EMP_launcher
+                        - text: ","
+                        - link "Incendiary" [ref=e3349] [cursor=pointer]:
+                          - /url: /wiki/Incendiary_launcher
+                        - text: ","
+                        - link "Smoke" [ref=e3350] [cursor=pointer]:
+                          - /url: /wiki/Smoke_launcher
+                        - text: ","
+                        - link "Toxbomb" [ref=e3351] [cursor=pointer]:
+                          - /url: /wiki/Toxbomb_launcher
+                        - superscript [ref=e3352]:
+                          - link "Content added by the Biotech DLC" [ref=e3353] [cursor=pointer]:
+                            - /url: /wiki/Biotech_(DLC)
+                            - img "Content added by the Biotech DLC" [ref=e3354]
+                        - text: )
+                      - text: •
+                      - link "LMG" [ref=e3355] [cursor=pointer]:
+                        - /url: /wiki/LMG
+                      - generic [ref=e3356]:
+                        - text: (
+                        - link "Unique" [ref=e3357] [cursor=pointer]:
+                          - /url: /wiki/Unique_LMG
+                        - superscript [ref=e3358]:
+                          - link "Content added by the Odyssey DLC" [ref=e3359] [cursor=pointer]:
+                            - /url: /wiki/Odyssey_(DLC)
+                            - img "Content added by the Odyssey DLC" [ref=e3360]
+                        - text: )
+                      - text: •
+                      - link "Machine pistol" [ref=e3361] [cursor=pointer]:
+                        - /url: /wiki/Machine_pistol
+                      - text: •
+                      - link "Minigun" [ref=e3362] [cursor=pointer]:
+                        - /url: /wiki/Minigun
+                      - generic [ref=e3363]:
+                        - text: (
+                        - link "Unique" [ref=e3364] [cursor=pointer]:
+                          - /url: /wiki/Unique_minigun
+                        - superscript [ref=e3365]:
+                          - link "Content added by the Odyssey DLC" [ref=e3366] [cursor=pointer]:
+                            - /url: /wiki/Odyssey_(DLC)
+                            - img "Content added by the Odyssey DLC" [ref=e3367]
+                        - text: )
+                      - text: •
+                      - link "Pump shotgun" [ref=e3368] [cursor=pointer]:
+                        - /url: /wiki/Pump_shotgun
+                      - text: •
+                      - link "Revolver" [ref=e3369] [cursor=pointer]:
+                        - /url: /wiki/Revolver
+                      - generic [ref=e3370]:
+                        - text: (
+                        - link "Unique" [ref=e3371] [cursor=pointer]:
+                          - /url: /wiki/Unique_revolver
+                        - superscript [ref=e3372]:
+                          - link "Content added by the Odyssey DLC" [ref=e3373] [cursor=pointer]:
+                            - /url: /wiki/Odyssey_(DLC)
+                            - img "Content added by the Odyssey DLC" [ref=e3374]
+                        - text: )
+                      - text: •
+                      - link "Sniper rifle" [ref=e3375] [cursor=pointer]:
+                        - /url: /wiki/Sniper_rifle
+                      - generic [ref=e3376]:
+                        - text: (
+                        - link "Unique" [ref=e3377] [cursor=pointer]:
+                          - /url: /wiki/Unique_sniper_rifle
+                        - superscript [ref=e3378]:
+                          - link "Content added by the Odyssey DLC" [ref=e3379] [cursor=pointer]:
+                            - /url: /wiki/Odyssey_(DLC)
+                            - img "Content added by the Odyssey DLC" [ref=e3380]
+                        - text: )
+                      - text: •
+                      - link "Hellcat rifle" [ref=e3381] [cursor=pointer]:
+                        - /url: /wiki/Hellcat_rifle
+                      - generic [ref=e3382]:
+                        - text: (
+                        - link "Unique" [ref=e3383] [cursor=pointer]:
+                          - /url: /wiki/Unique_hellcat_rifle
+                        - superscript [ref=e3384]:
+                          - link "Content added by the Odyssey DLC" [ref=e3385] [cursor=pointer]:
+                            - /url: /wiki/Odyssey_(DLC)
+                            - img "Content added by the Odyssey DLC" [ref=e3386]
+                        - text: )
+                      - superscript [ref=e3387]:
+                        - link "Content added by the Anomaly DLC" [ref=e3388] [cursor=pointer]:
+                          - /url: /wiki/Anomaly_(DLC)
+                          - img "Content added by the Anomaly DLC" [ref=e3389]
+                      - text: •
+                      - link "Incinerator" [ref=e3390] [cursor=pointer]:
+                        - /url: /wiki/Incinerator
+                      - superscript [ref=e3391]:
+                        - link "Content added by the Anomaly DLC" [ref=e3392] [cursor=pointer]:
+                          - /url: /wiki/Anomaly_(DLC)
+                          - img "Content added by the Anomaly DLC" [ref=e3393]
+                  - generic:
+                    - term [ref=e3394]: Spacer
+                    - definition [ref=e3395]:
+                      - link "Charge lance" [ref=e3396] [cursor=pointer]:
+                        - /url: /wiki/Charge_lance
+                      - generic [ref=e3397]:
+                        - text: (
+                        - link "Unique" [ref=e3398] [cursor=pointer]:
+                          - /url: /wiki/Unique_charge_lance
+                        - superscript [ref=e3399]:
+                          - link "Content added by the Odyssey DLC" [ref=e3400] [cursor=pointer]:
+                            - /url: /wiki/Odyssey_(DLC)
+                            - img "Content added by the Odyssey DLC" [ref=e3401]
+                        - text: )
+                      - text: •
+                      - link "Charge rifle" [ref=e3402] [cursor=pointer]:
+                        - /url: /wiki/Charge_rifle
+                      - generic [ref=e3403]:
+                        - text: (
+                        - link "Unique" [ref=e3404] [cursor=pointer]:
+                          - /url: /wiki/Unique_charge_rifle
+                        - superscript [ref=e3405]:
+                          - link "Content added by the Odyssey DLC" [ref=e3406] [cursor=pointer]:
+                            - /url: /wiki/Odyssey_(DLC)
+                            - img "Content added by the Odyssey DLC" [ref=e3407]
+                        - text: )
+                      - text: •
+                      - link "Beam graser" [ref=e3408] [cursor=pointer]:
+                        - /url: /wiki/Beam_graser
+                      - superscript [ref=e3409]:
+                        - link "Content added by the Biotech DLC" [ref=e3410] [cursor=pointer]:
+                          - /url: /wiki/Biotech_(DLC)
+                          - img "Content added by the Biotech DLC" [ref=e3411]
+                      - text: •
+                      - link "Beam repeater" [ref=e3412] [cursor=pointer]:
+                        - /url: /wiki/Beam_repeater
+                      - generic [ref=e3413]:
+                        - text: (
+                        - link "Unique" [ref=e3414] [cursor=pointer]:
+                          - /url: /wiki/Unique_beam_repeater
+                        - text: )
+                      - superscript [ref=e3415]:
+                        - link "Content added by the Odyssey DLC" [ref=e3416] [cursor=pointer]:
+                          - /url: /wiki/Odyssey_(DLC)
+                          - img "Content added by the Odyssey DLC" [ref=e3417]
+                  - generic:
+                    - term [ref=e3418]: Consumables
+                    - definition [ref=e3419]:
+                      - link "Doomsday rocket launcher" [ref=e3420] [cursor=pointer]:
+                        - /url: /wiki/Doomsday_rocket_launcher
+                      - text: •
+                      - link "Triple rocket launcher" [ref=e3421] [cursor=pointer]:
+                        - /url: /wiki/Triple_rocket_launcher
+                  - generic:
+                    - term [ref=e3422]: Throwables
+                    - definition [ref=e3423]:
+                      - link "EMP grenades" [ref=e3424] [cursor=pointer]:
+                        - /url: /wiki/EMP_grenades
+                      - text: •
+                      - link "Frag grenades" [ref=e3425] [cursor=pointer]:
+                        - /url: /wiki/Frag_grenades
+                      - text: •
+                      - link "Molotov cocktails" [ref=e3426] [cursor=pointer]:
+                        - /url: /wiki/Molotov_cocktails
+                      - text: •
+                      - link "Tox grenades" [ref=e3427] [cursor=pointer]:
+                        - /url: /wiki/Tox_grenades
+                      - superscript [ref=e3428]:
+                        - link "Content added by the Biotech DLC" [ref=e3429] [cursor=pointer]:
+                          - /url: /wiki/Biotech_(DLC)
+                          - img "Content added by the Biotech DLC" [ref=e3430]
+                  - generic:
+                    - term [ref=e3431]: Mechanoid
+                    - definition [ref=e3432]:
+                      - link "Heavy charge blaster" [ref=e3433] [cursor=pointer]:
+                        - /url: /wiki/Heavy_charge_blaster
+                      - text: •
+                      - link "Inferno cannon" [ref=e3434] [cursor=pointer]:
+                        - /url: /wiki/Inferno_cannon
+                      - text: •
+                      - link "Needle gun" [ref=e3435] [cursor=pointer]:
+                        - /url: /wiki/Needle_gun
+                      - text: •
+                      - link "Thump cannon" [ref=e3436] [cursor=pointer]:
+                        - /url: /wiki/Thump_cannon
+                      - text: •
+                      - link "Charge blaster turret" [ref=e3437] [cursor=pointer]:
+                        - /url: /wiki/Charge_blaster_turret
+                      - superscript [ref=e3438]:
+                        - link "Content added by the Biotech DLC" [ref=e3439] [cursor=pointer]:
+                          - /url: /wiki/Biotech_(DLC)
+                          - img "Content added by the Biotech DLC" [ref=e3440]
+                      - text: •
+                      - link "Hellsphere cannon" [ref=e3441] [cursor=pointer]:
+                        - /url: /wiki/Hellsphere_cannon
+                      - superscript [ref=e3442]:
+                        - link "Content added by the Biotech DLC" [ref=e3443] [cursor=pointer]:
+                          - /url: /wiki/Biotech_(DLC)
+                          - img "Content added by the Biotech DLC" [ref=e3444]
+                      - text: •
+                      - link "Mini-flameblaster" [ref=e3445] [cursor=pointer]:
+                        - /url: /wiki/Mini-flameblaster
+                      - superscript [ref=e3446]:
+                        - link "Content added by the Biotech DLC" [ref=e3447] [cursor=pointer]:
+                          - /url: /wiki/Biotech_(DLC)
+                          - img "Content added by the Biotech DLC" [ref=e3448]
+                      - text: •
+                      - link "Mini-shotgun" [ref=e3449] [cursor=pointer]:
+                        - /url: /wiki/Mini-shotgun
+                      - superscript [ref=e3450]:
+                        - link "Content added by the Biotech DLC" [ref=e3451] [cursor=pointer]:
+                          - /url: /wiki/Biotech_(DLC)
+                          - img "Content added by the Biotech DLC" [ref=e3452]
+                      - text: •
+                      - link "Needle launcher" [ref=e3453] [cursor=pointer]:
+                        - /url: /wiki/Needle_launcher
+                      - superscript [ref=e3454]:
+                        - link "Content added by the Biotech DLC" [ref=e3455] [cursor=pointer]:
+                          - /url: /wiki/Biotech_(DLC)
+                          - img "Content added by the Biotech DLC" [ref=e3456]
+                      - text: •
+                      - link "Slugthrower" [ref=e3457] [cursor=pointer]:
+                        - /url: /wiki/Slugthrower
+                      - superscript [ref=e3458]:
+                        - link "Content added by the Biotech DLC" [ref=e3459] [cursor=pointer]:
+                          - /url: /wiki/Biotech_(DLC)
+                          - img "Content added by the Biotech DLC" [ref=e3460]
+                      - text: •
+                      - link "Spiner" [ref=e3461] [cursor=pointer]:
+                        - /url: /wiki/Spiner
+                      - superscript [ref=e3462]:
+                        - link "Content added by the Biotech DLC" [ref=e3463] [cursor=pointer]:
+                          - /url: /wiki/Biotech_(DLC)
+                          - img "Content added by the Biotech DLC" [ref=e3464]
+                      - text: •
+                      - link "Toxic needle gun" [ref=e3465] [cursor=pointer]:
+                        - /url: /wiki/Toxic_needle_gun
+                      - superscript [ref=e3466]:
+                        - link "Content added by the Biotech DLC" [ref=e3467] [cursor=pointer]:
+                          - /url: /wiki/Biotech_(DLC)
+                          - img "Content added by the Biotech DLC" [ref=e3468]
+                  - generic:
+                    - term [ref=e3469]: Structures
+                    - definition [ref=e3470]:
+                      - link "Auto-mortar" [ref=e3471] [cursor=pointer]:
+                        - /url: /wiki/Auto-mortar
+                      - text: •
+                      - link "Autocannon" [ref=e3472] [cursor=pointer]:
+                        - /url: /wiki/Autocannon
+                      - text: •
+                      - link "Inferno cannon (Turret)" [ref=e3473] [cursor=pointer]:
+                        - /url: /wiki/Inferno_cannon_(Turret)
+                      - text: •
+                      - link "Light charge blaster" [ref=e3474] [cursor=pointer]:
+                        - /url: /wiki/Light_charge_blaster
+                      - text: •
+                      - link "Mini-slugger" [ref=e3475] [cursor=pointer]:
+                        - /url: /wiki/Mini-slugger
+                      - text: •
+                      - link "Mini-turret gun" [ref=e3476] [cursor=pointer]:
+                        - /url: /wiki/Mini-turret_gun
+                      - text: •
+                      - link "Mortar (Weapon)" [ref=e3477] [cursor=pointer]:
+                        - /url: /wiki/Mortar_(Weapon)
+                      - text: •
+                      - link "Uranium slug cannon" [ref=e3478] [cursor=pointer]:
+                        - /url: /wiki/Uranium_slug_cannon
+                      - text: •
+                      - link "Tactical turret gun" [ref=e3479] [cursor=pointer]:
+                        - /url: /wiki/Tactical_turret_gun
+                      - superscript [ref=e3480]:
+                        - link "Content added by the Anomaly DLC" [ref=e3481] [cursor=pointer]:
+                          - /url: /wiki/Anomaly_(DLC)
+                          - img "Content added by the Anomaly DLC" [ref=e3482]
+                  - generic:
+                    - term [ref=e3483]: Drone
+                    - definition [ref=e3484]:
+                      - link "Scattergun" [ref=e3485] [cursor=pointer]:
+                        - /url: /wiki/Scattergun
+                      - superscript [ref=e3486]:
+                        - link "Content added by the Odyssey DLC" [ref=e3487] [cursor=pointer]:
+                          - /url: /wiki/Odyssey_(DLC)
+                          - img "Content added by the Odyssey DLC" [ref=e3488]
+                  - generic:
+                    - term [ref=e3489]:
+                      - generic [ref=e3490]: Related |
+                      - link "Body part weapons" [ref=e3492] [cursor=pointer]:
+                        - /url: /wiki/Body_part_weapons
+                    - definition [ref=e3493]:
+                      - link "Prosthetic arm" [ref=e3494] [cursor=pointer]:
+                        - /url: /wiki/Prosthetic_arm
+                      - text: •
+                      - link "Bionic arm" [ref=e3495] [cursor=pointer]:
+                        - /url: /wiki/Bionic_arm
+                      - text: •
+                      - link "Archotech arm" [ref=e3496] [cursor=pointer]:
+                        - /url: /wiki/Archotech_arm
+                      - text: •
+                      - link "Power claw" [ref=e3497] [cursor=pointer]:
+                        - /url: /wiki/Power_claw
+                      - text: •
+                      - link "Field hand" [ref=e3498] [cursor=pointer]:
+                        - /url: /wiki/Field_hand
+                      - superscript [ref=e3499]:
+                        - link "Content added by the Royalty DLC" [ref=e3500] [cursor=pointer]:
+                          - /url: /wiki/Royalty_DLC
+                          - img "Content added by the Royalty DLC" [ref=e3501]
+                      - text: •
+                      - link "Drill arm" [ref=e3502] [cursor=pointer]:
+                        - /url: /wiki/Drill_arm
+                      - superscript [ref=e3503]:
+                        - link "Content added by the Royalty DLC" [ref=e3504] [cursor=pointer]:
+                          - /url: /wiki/Royalty_DLC
+                          - img "Content added by the Royalty DLC" [ref=e3505]
+                      - text: •
+                      - link "Venom talon" [ref=e3506] [cursor=pointer]:
+                        - /url: /wiki/Venom_talon
+                      - superscript [ref=e3507]:
+                        - link "Content added by the Royalty DLC" [ref=e3508] [cursor=pointer]:
+                          - /url: /wiki/Royalty_DLC
+                          - img "Content added by the Royalty DLC" [ref=e3509]
+                      - text: •
+                      - link "Venom fangs" [ref=e3510] [cursor=pointer]:
+                        - /url: /wiki/Venom_fangs
+                      - superscript [ref=e3511]:
+                        - link "Content added by the Royalty DLC" [ref=e3512] [cursor=pointer]:
+                          - /url: /wiki/Royalty_DLC
+                          - img "Content added by the Royalty DLC" [ref=e3513]
+                      - text: •
+                      - link "Knee spike" [ref=e3514] [cursor=pointer]:
+                        - /url: /wiki/Knee_spike
+                      - superscript [ref=e3515]:
+                        - link "Content added by the Royalty DLC" [ref=e3516] [cursor=pointer]:
+                          - /url: /wiki/Royalty_DLC
+                          - img "Content added by the Royalty DLC" [ref=e3517]
+                      - text: •
+                      - link "Elbow blade" [ref=e3518] [cursor=pointer]:
+                        - /url: /wiki/Elbow_blade
+                      - superscript [ref=e3519]:
+                        - link "Content added by the Royalty DLC" [ref=e3520] [cursor=pointer]:
+                          - /url: /wiki/Royalty_DLC
+                          - img "Content added by the Royalty DLC" [ref=e3521]
+                      - text: •
+                      - link "Hand talon" [ref=e3522] [cursor=pointer]:
+                        - /url: /wiki/Hand_talon
+                      - superscript [ref=e3523]:
+                        - link "Content added by the Royalty DLC" [ref=e3524] [cursor=pointer]:
+                          - /url: /wiki/Royalty_DLC
+                          - img "Content added by the Royalty DLC" [ref=e3525]
+                      - text: •
+                      - link "Flesh whip" [ref=e3526] [cursor=pointer]:
+                        - /url: /wiki/Flesh_whip
+                      - superscript [ref=e3527]:
+                        - link "Content added by the Anomaly DLC" [ref=e3528] [cursor=pointer]:
+                          - /url: /wiki/Anomaly_(DLC)
+                          - img "Content added by the Anomaly DLC" [ref=e3529]
+                  - generic:
+                    - term [ref=e3530]: Integrated weapons
+                    - definition [ref=e3531]:
+                      - link "Grenadier armor" [ref=e3532] [cursor=pointer]:
+                        - /url: /wiki/Grenadier_armor
+                      - superscript [ref=e3533]:
+                        - link "Content added by the Royalty DLC" [ref=e3534] [cursor=pointer]:
+                          - /url: /wiki/Royalty_DLC
+                          - img "Content added by the Royalty DLC" [ref=e3535]
+                      - text: •
+                      - link "Phoenix armor" [ref=e3536] [cursor=pointer]:
+                        - /url: /wiki/Phoenix_armor
+                      - superscript [ref=e3537]:
+                        - link "Content added by the Royalty DLC" [ref=e3538] [cursor=pointer]:
+                          - /url: /wiki/Royalty_DLC
+                          - img "Content added by the Royalty DLC" [ref=e3539]
+      - generic [ref=e3541]:
+        - link "Categories" [ref=e3542] [cursor=pointer]:
+          - /url: /wiki/Special:Categories
+        - text: ":"
+        - list [ref=e3543]:
+          - listitem [ref=e3544]:
+            - link "Stubs" [ref=e3545] [cursor=pointer]:
+              - /url: /wiki/Category:Stubs
+          - listitem [ref=e3546]:
+            - link "Pages to be rewritten" [ref=e3547] [cursor=pointer]:
+              - /url: /wiki/Category:Pages_to_be_rewritten
+          - listitem [ref=e3548]:
+            - link "Equipment" [ref=e3549] [cursor=pointer]:
+              - /url: /wiki/Category:Equipment
+  - generic:
+    - heading "Navigation menu" [level=2] [ref=e3550]
+    - generic [ref=e3551]:
+      - navigation "Personal tools" [ref=e3552]:
+        - generic:
+          - list:
+            - listitem [ref=e3553]: Not logged in
+            - listitem [ref=e3554]:
+              - link "Talk" [ref=e3555] [cursor=pointer]:
+                - /url: /wiki/Special:MyTalk
+            - listitem [ref=e3556]:
+              - link "Contributions" [ref=e3557] [cursor=pointer]:
+                - /url: /wiki/Special:MyContributions
+            - listitem [ref=e3558]:
+              - link "Create account" [ref=e3559] [cursor=pointer]:
+                - /url: /index.php?title=Special:CreateAccount&returnto=Weapons
+            - listitem [ref=e3560]:
+              - link "Log in" [ref=e3561] [cursor=pointer]:
+                - /url: /index.php?title=Special:UserLogin&returnto=Weapons
+      - navigation "Namespaces" [ref=e3563]:
+        - list [ref=e3564]:
+          - listitem [ref=e3565]:
+            - link "Page" [ref=e3566] [cursor=pointer]:
+              - /url: /wiki/Weapons
+          - listitem [ref=e3567]:
+            - link "Discussion" [ref=e3568] [cursor=pointer]:
+              - /url: /wiki/Talk:Weapons
+      - generic [ref=e3569]:
+        - navigation "Views" [ref=e3570]:
+          - list [ref=e3571]:
+            - listitem [ref=e3572]:
+              - link "Read" [ref=e3573] [cursor=pointer]:
+                - /url: /wiki/Weapons
+            - listitem [ref=e3574]:
+              - link "Edit" [ref=e3575] [cursor=pointer]:
+                - /url: /index.php?title=Weapons&action=edit
+            - listitem [ref=e3576]:
+              - link "View history" [ref=e3577] [cursor=pointer]:
+                - /url: /index.php?title=Weapons&action=history
+        - search [ref=e3578]:
+          - heading "Search" [level=3] [ref=e3579]
+          - generic [ref=e3581]:
+            - searchbox "Search" [ref=e3582]
+            - button "Search" [ref=e3583] [cursor=pointer]
+            - button "Go" [ref=e3584] [cursor=pointer]
+    - generic [ref=e3585]:
+      - banner [ref=e3586]:
+        - link "Visit the main page" [ref=e3587] [cursor=pointer]:
+          - /url: /wiki/Main_Page
+      - navigation "RimWorld" [ref=e3588]:
+        - list [ref=e3590]:
+          - listitem [ref=e3591]:
+            - link "Official Site" [ref=e3592] [cursor=pointer]:
+              - /url: http://ludeon.com/
+          - listitem [ref=e3593]:
+            - link "Official Forum" [ref=e3594] [cursor=pointer]:
+              - /url: http://ludeon.com/forums/
+          - listitem [ref=e3595]:
+            - link "IRC channel" [ref=e3596] [cursor=pointer]:
+              - /url: http://webchat.quakenet.org/?channels=rimworld
+          - listitem [ref=e3597]:
+            - link "Official Twitter" [ref=e3598] [cursor=pointer]:
+              - /url: https://twitter.com/TynanSylvester
+      - navigation "Navigation" [ref=e3599]:
+        - heading "Navigation" [level=3] [ref=e3600]
+        - list [ref=e3602]:
+          - listitem [ref=e3603]:
+            - link "Main page" [ref=e3604] [cursor=pointer]:
+              - /url: /wiki/Main_Page
+          - listitem [ref=e3605]:
+            - link "Recent changes" [ref=e3606] [cursor=pointer]:
+              - /url: /wiki/Special:RecentChanges
+          - listitem [ref=e3607]:
+            - link "Random page" [ref=e3608] [cursor=pointer]:
+              - /url: /wiki/Special:Random
+      - navigation "Tools" [ref=e3609]:
+        - heading "Tools" [level=3] [ref=e3610]
+        - list [ref=e3612]:
+          - listitem [ref=e3613]:
+            - link "What links here" [ref=e3614] [cursor=pointer]:
+              - /url: /wiki/Special:WhatLinksHere/Weapons
+          - listitem [ref=e3615]:
+            - link "Related changes" [ref=e3616] [cursor=pointer]:
+              - /url: /wiki/Special:RecentChangesLinked/Weapons
+          - listitem [ref=e3617]:
+            - link "Special pages" [ref=e3618] [cursor=pointer]:
+              - /url: /wiki/Special:SpecialPages
+          - listitem [ref=e3619]:
+            - link "Printable version" [ref=e3620] [cursor=pointer]:
+              - /url: javascript:print();
+          - listitem [ref=e3621]:
+            - link "Permanent link" [ref=e3622] [cursor=pointer]:
+              - /url: /index.php?title=Weapons&oldid=173450
+          - listitem [ref=e3623]:
+            - link "Page information" [ref=e3624] [cursor=pointer]:
+              - /url: /index.php?title=Weapons&action=info
+          - listitem [ref=e3625]:
+            - link "Browse properties" [ref=e3626] [cursor=pointer]:
+              - /url: /wiki/Special:Browse/:Weapons
+  - contentinfo [ref=e3627]:
+    - list [ref=e3628]:
+      - listitem [ref=e3629]: This page was last edited on 25 December 2025, at 01:41.
+      - listitem [ref=e3630]:
+        - text: Content is available under
+        - link "CC BY-SA 3.0" [ref=e3631] [cursor=pointer]:
+          - /url: /wiki/RimWorld_Wiki:Copyrights
+        - text: unless otherwise noted.
+    - list:
+      - listitem [ref=e3632]:
+        - link "Privacy policy" [ref=e3633] [cursor=pointer]:
+          - /url: /wiki/RimWorld_Wiki:Privacy_policy
+      - listitem [ref=e3634]:
+        - link "About RimWorld Wiki" [ref=e3635] [cursor=pointer]:
+          - /url: /wiki/RimWorld_Wiki:About
+      - listitem [ref=e3636]:
+        - link "Disclaimers" [ref=e3637] [cursor=pointer]:
+          - /url: /wiki/RimWorld_Wiki:General_disclaimer
+    - list [ref=e3638]:
+      - listitem [ref=e3639]:
+        - link "CC BY-SA 3.0" [ref=e3640] [cursor=pointer]:
+          - /url: https://creativecommons.org/licenses/by-sa/3.0/
+          - img "CC BY-SA 3.0" [ref=e3641]
+      - listitem [ref=e3642]:
+        - link "Powered by MediaWiki" [ref=e3643] [cursor=pointer]:
+          - /url: https://www.mediawiki.org/
+          - img "Powered by MediaWiki" [ref=e3644]
+        - link "Powered by Semantic MediaWiki" [ref=e3645] [cursor=pointer]:
+          - /url: https://www.semantic-mediawiki.org/wiki/Semantic_MediaWiki
+          - img "Powered by Semantic MediaWiki" [ref=e3646]

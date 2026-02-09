@@ -1,0 +1,2 @@
+[    1211ms] [WARNING] document.domain mutation is ignored because the surrounding agent cluster is origin-keyed. @ https://s1.hdslb.com/bfs/static/laputa-search/client/assets/vendor.24f24acb.js:773
+[   16788ms] [WARNING] Deprecated API for given entry type. @ https://s1.hdslb.com/bfs/seed/jinkela/short/b-mirror/biliMirror.umd.mini.js:1

@@ -42,10 +42,29 @@
       "Bash(where:*)",
       "Bash(cscript:*)",
       "Bash(winget install:*)",
-      "Bash(del:*)"
+      "Bash(del:*)",
+      "Bash(git commit:*)",
+      "WebFetch(domain:rimworld.huijiwiki.com)",
+      "mcp__plugin_playwright_playwright__browser_navigate",
+      "mcp__promptx__discover",
+      "mcp__promptx__action",
+      "mcp__rimworld-code-rag-base__rough_search",
+      "mcp__rimworld-code-rag-base__get_item",
+      "mcp__rimworld-code-rag-mods__rough_search",
+      "mcp__rimworld-code-rag-mods__get_item",
+      "mcp__plugin_playwright_playwright__browser_close",
+      "WebFetch(domain:tieba.baidu.com)",
+      "WebFetch(domain:www.fanverse.org)",
+      "mcp__plugin_playwright_playwright__browser_click",
+      "mcp__plugin_playwright_playwright__browser_tabs",
+      "mcp__plugin_playwright_playwright__browser_snapshot",
+      "WebFetch(domain:www.anthropic.com)",
+      "WebFetch(domain:felloai.com)",
+      "Bash(git add:*)"
     ],
     "additionalDirectories": [
       "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\RimWT\\00_项目管理"
     ]
-  }
+  },
+  "disableAllHooks": true
 }
