@@ -1,0 +1,905 @@
+- generic [ref=e2]:
+  - region
+  - generic [ref=e3]:
+    - link "Skip to content" [ref=e4] [cursor=pointer]:
+      - /url: "#start-of-content"
+    - banner [ref=e6]:
+      - heading "Navigation Menu" [level=2] [ref=e7]
+      - generic [ref=e8]:
+        - link "Homepage" [ref=e10] [cursor=pointer]:
+          - /url: /
+          - img [ref=e11]
+        - generic [ref=e13]:
+          - navigation "Global" [ref=e16]:
+            - list [ref=e17]:
+              - listitem [ref=e18]:
+                - button "Platform" [ref=e20] [cursor=pointer]:
+                  - text: Platform
+                  - img [ref=e21]
+              - listitem [ref=e23]:
+                - button "Solutions" [ref=e25] [cursor=pointer]:
+                  - text: Solutions
+                  - img [ref=e26]
+              - listitem [ref=e28]:
+                - button "Resources" [ref=e30] [cursor=pointer]:
+                  - text: Resources
+                  - img [ref=e31]
+              - listitem [ref=e33]:
+                - button "Open Source" [ref=e35] [cursor=pointer]:
+                  - text: Open Source
+                  - img [ref=e36]
+              - listitem [ref=e38]:
+                - button "Enterprise" [ref=e40] [cursor=pointer]:
+                  - text: Enterprise
+                  - img [ref=e41]
+              - listitem [ref=e43]:
+                - link "Pricing" [ref=e44] [cursor=pointer]:
+                  - /url: https://github.com/pricing
+                  - generic [ref=e45]: Pricing
+          - generic [ref=e46]:
+            - button "Search or jump to…" [ref=e49] [cursor=pointer]:
+              - img [ref=e51]
+            - link "Sign in" [ref=e54] [cursor=pointer]:
+              - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fobra%2Fsuperpowers
+            - link "Sign up" [ref=e55] [cursor=pointer]:
+              - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E&source=header-repo&source_repo=obra%2Fsuperpowers
+            - button "Appearance settings" [ref=e58] [cursor=pointer]:
+              - img
+  - main [ref=e62]:
+    - generic [ref=e63]:
+      - generic [ref=e64]:
+        - generic [ref=e66]:
+          - img [ref=e67]
+          - link "obra" [ref=e70] [cursor=pointer]:
+            - /url: /obra
+          - generic [ref=e71]: /
+          - strong [ref=e72]:
+            - link "superpowers" [ref=e73] [cursor=pointer]:
+              - /url: /obra/superpowers
+          - generic [ref=e74]: Public
+        - generic [ref=e75]:
+          - list:
+            - listitem [ref=e76]:
+              - link "Sponsor @obra" [ref=e77] [cursor=pointer]:
+                - /url: /sponsors/obra
+                - generic [ref=e79]:
+                  - img [ref=e80]
+                  - text: Sponsor
+            - listitem [ref=e82]:
+              - link "You must be signed in to change notification settings" [ref=e83] [cursor=pointer]:
+                - /url: /login?return_to=%2Fobra%2Fsuperpowers
+                - img [ref=e84]
+                - text: Notifications
+            - listitem [ref=e86]:
+              - link "Fork 3.9k" [ref=e87] [cursor=pointer]:
+                - /url: /login?return_to=%2Fobra%2Fsuperpowers
+                - img [ref=e88]
+                - text: Fork
+                - generic "3,905" [ref=e90]: 3.9k
+            - listitem [ref=e91]:
+              - link "You must be signed in to star a repository" [ref=e93] [cursor=pointer]:
+                - /url: /login?return_to=%2Fobra%2Fsuperpowers
+                - img [ref=e94]
+                - text: Star
+                - generic "51680 users starred this repository" [ref=e96]: 51.7k
+      - navigation "Repository" [ref=e97]:
+        - list [ref=e98]:
+          - listitem [ref=e99]:
+            - link "Code" [ref=e100] [cursor=pointer]:
+              - /url: /obra/superpowers
+              - img [ref=e101]
+              - generic [ref=e103]: Code
+          - listitem [ref=e104]:
+            - link "Issues 90" [ref=e105] [cursor=pointer]:
+              - /url: /obra/superpowers/issues
+              - img [ref=e106]
+              - generic [ref=e109]: Issues
+              - generic "90" [ref=e110]
+          - listitem [ref=e111]:
+            - link "Pull requests 43" [ref=e112] [cursor=pointer]:
+              - /url: /obra/superpowers/pulls
+              - img [ref=e113]
+              - generic [ref=e115]: Pull requests
+              - generic "43" [ref=e116]
+          - listitem [ref=e117]:
+            - link "Actions" [ref=e118] [cursor=pointer]:
+              - /url: /obra/superpowers/actions
+              - img [ref=e119]
+              - generic [ref=e121]: Actions
+          - listitem [ref=e122]:
+            - link "Projects" [ref=e123] [cursor=pointer]:
+              - /url: /obra/superpowers/projects
+              - img [ref=e124]
+              - generic [ref=e126]: Projects
+          - listitem [ref=e127]:
+            - link "Security" [ref=e128] [cursor=pointer]:
+              - /url: /obra/superpowers/security
+              - img [ref=e129]
+              - generic [ref=e131]: Security
+          - listitem [ref=e132]:
+            - link "Insights" [ref=e133] [cursor=pointer]:
+              - /url: /obra/superpowers/pulse
+              - img [ref=e134]
+              - generic [ref=e136]: Insights
+    - generic [ref=e138]:
+      - heading "obra/superpowers" [level=1] [ref=e139]
+      - generic [ref=e142]:
+        - generic [ref=e146]:
+          - generic [ref=e147]:
+            - generic [ref=e148]:
+              - button "main branch" [ref=e150] [cursor=pointer]:
+                - generic [ref=e151]:
+                  - generic [ref=e153]:
+                    - img [ref=e155]
+                    - generic [ref=e158]: main
+                  - generic:
+                    - img
+              - generic [ref=e159]:
+                - link "Go to Branches page" [ref=e160] [cursor=pointer]:
+                  - /url: /obra/superpowers/branches
+                  - img [ref=e161]
+                - link "Go to Tags page" [ref=e163] [cursor=pointer]:
+                  - /url: /obra/superpowers/tags
+                  - img [ref=e164]
+            - generic [ref=e166]:
+              - generic [ref=e170]:
+                - img [ref=e172]
+                - combobox "Go to file" [ref=e174]
+              - button "Code" [ref=e175] [cursor=pointer]:
+                - generic [ref=e176]:
+                  - generic:
+                    - img
+                  - generic [ref=e177]: Code
+                  - generic:
+                    - img
+          - generic [ref=e178]:
+            - generic [ref=e179]:
+              - heading "Folders and files" [level=2] [ref=e180]
+              - table "Folders and files" [ref=e181]:
+                - rowgroup:
+                  - row "Name Last commit message Last commit date":
+                    - columnheader "Name"
+                    - columnheader "Last commit message":
+                      - generic "Last commit message"
+                    - columnheader "Last commit date":
+                      - generic "Last commit date"
+                - rowgroup [ref=e182]:
+                  - 'row "Latest commit obra commits by obra Release v4.3.0: Enforce brainstorming workflow, prevent unintended pl… Open commit details Commit e16d611 · Feb 13, 20262 days ago History 278 Commits" [ref=e183]':
+                    - 'cell "Latest commit obra commits by obra Release v4.3.0: Enforce brainstorming workflow, prevent unintended pl… Open commit details Commit e16d611 · Feb 13, 20262 days ago History 278 Commits" [ref=e184]':
+                      - generic [ref=e185]:
+                        - heading "Latest commit" [level=2] [ref=e186]
+                        - generic [ref=e187]:
+                          - generic [ref=e189]:
+                            - link "obra" [ref=e190] [cursor=pointer]:
+                              - /url: /obra
+                              - img "obra" [ref=e191]
+                            - link "commits by obra" [ref=e192] [cursor=pointer]:
+                              - /url: /obra/superpowers/commits?author=obra
+                              - text: obra
+                          - generic [ref=e193]:
+                            - 'link "Release v4.3.0: Enforce brainstorming workflow, prevent unintended pl…" [ref=e196] [cursor=pointer]':
+                              - /url: /obra/superpowers/commit/e16d611eee14ac4c3253b4bf4c55a98d905c2e64
+                            - button "Open commit details" [ref=e197] [cursor=pointer]:
+                              - img [ref=e198]
+                        - generic [ref=e200]:
+                          - generic [ref=e202]:
+                            - link "Commit e16d611" [ref=e203] [cursor=pointer]:
+                              - /url: /obra/superpowers/commit/e16d611eee14ac4c3253b4bf4c55a98d905c2e64
+                              - text: e16d611
+                            - text: ·
+                            - generic "Feb 13, 2026, 3:03 AM GMT+8" [ref=e204]: Feb 13, 20262 days ago
+                          - generic [ref=e205]:
+                            - heading "History" [level=2] [ref=e206]
+                            - link "278 Commits" [ref=e207] [cursor=pointer]:
+                              - /url: /obra/superpowers/commits/main/
+                              - generic [ref=e208]:
+                                - generic:
+                                  - img
+                                - generic [ref=e209]: 278 Commits
+                  - 'row ".claude-plugin, (Directory) Release v4.3.0: Enforce brainstorming workflow, prevent unintended pl… Feb 13, 20262 days ago" [ref=e210]':
+                    - cell ".claude-plugin, (Directory)" [ref=e211]:
+                      - generic [ref=e212]:
+                        - img [ref=e213]
+                        - link ".claude-plugin, (Directory)" [ref=e218] [cursor=pointer]:
+                          - /url: /obra/superpowers/tree/main/.claude-plugin
+                          - text: .claude-plugin
+                    - 'cell "Release v4.3.0: Enforce brainstorming workflow, prevent unintended pl…" [ref=e219]':
+                      - 'link "Release v4.3.0: Enforce brainstorming workflow, prevent unintended pl…" [ref=e222] [cursor=pointer]':
+                        - /url: /obra/superpowers/commit/e16d611eee14ac4c3253b4bf4c55a98d905c2e64
+                    - cell "Feb 13, 20262 days ago" [ref=e223]:
+                      - generic [ref=e224]: Feb 13, 20262 days ago
+                  - row ".codex, (Directory) Add Windows uninstall instructions and expand migration steps Feb 6, 2026last week" [ref=e225]:
+                    - cell ".codex, (Directory)" [ref=e226]:
+                      - generic [ref=e227]:
+                        - img [ref=e228]
+                        - link ".codex, (Directory)" [ref=e233] [cursor=pointer]:
+                          - /url: /obra/superpowers/tree/main/.codex
+                          - text: .codex
+                    - cell "Add Windows uninstall instructions and expand migration steps" [ref=e234]:
+                      - link "Add Windows uninstall instructions and expand migration steps" [ref=e237] [cursor=pointer]:
+                        - /url: /obra/superpowers/commit/8dd31c3da575d1eb069debbcad8e5eeb8e4c1f05
+                    - cell "Feb 6, 2026last week" [ref=e238]:
+                      - generic [ref=e239]: Feb 6, 2026last week
+                  - row ".github, (Directory) Update GitHub funding configuration Nov 22, 20253 months ago" [ref=e240]:
+                    - cell ".github, (Directory)" [ref=e241]:
+                      - generic [ref=e242]:
+                        - img [ref=e243]
+                        - link ".github, (Directory)" [ref=e248] [cursor=pointer]:
+                          - /url: /obra/superpowers/tree/main/.github
+                          - text: .github
+                    - cell "Update GitHub funding configuration" [ref=e249]:
+                      - link "Update GitHub funding configuration" [ref=e252] [cursor=pointer]:
+                        - /url: /obra/superpowers/commit/84283dfc058f61b8985e07d20eb6838a6e7388fe
+                    - cell "Nov 22, 20253 months ago" [ref=e253]:
+                      - generic [ref=e254]: Nov 22, 20253 months ago
+                  - 'row ".opencode, (Directory) fix(opencode): standardize on plugins/ directory per official docs Jan 24, 20263 weeks ago" [ref=e255]':
+                    - cell ".opencode, (Directory)" [ref=e256]:
+                      - generic [ref=e257]:
+                        - img [ref=e258]
+                        - link ".opencode, (Directory)" [ref=e263] [cursor=pointer]:
+                          - /url: /obra/superpowers/tree/main/.opencode
+                          - text: .opencode
+                    - 'cell "fix(opencode): standardize on plugins/ directory per official docs" [ref=e264]':
+                      - 'link "fix(opencode): standardize on plugins/ directory per official docs" [ref=e267] [cursor=pointer]':
+                        - /url: /obra/superpowers/commit/03087b13b87a5813bdc96afa8c5468ed2f63d596
+                    - cell "Jan 24, 20263 weeks ago" [ref=e268]:
+                      - generic [ref=e269]: Jan 24, 20263 weeks ago
+                  - 'row "agents, (Directory) fix: inherit agent model (#144) Dec 24, 20252 months ago" [ref=e270]':
+                    - cell "agents, (Directory)" [ref=e271]:
+                      - generic [ref=e272]:
+                        - img [ref=e273]
+                        - link "agents, (Directory)" [ref=e278] [cursor=pointer]:
+                          - /url: /obra/superpowers/tree/main/agents
+                          - text: agents
+                    - 'cell "fix: inherit agent model (#144)" [ref=e279]':
+                      - generic [ref=e281]:
+                        - 'link "fix: inherit agent model (" [ref=e282] [cursor=pointer]':
+                          - /url: /obra/superpowers/commit/e64ad670df2c8e86ed3ad6607445ea7db5504b27
+                        - link "#144" [ref=e283] [cursor=pointer]:
+                          - /url: https://github.com/obra/superpowers/pull/144
+                        - link ")" [ref=e284] [cursor=pointer]:
+                          - /url: /obra/superpowers/commit/e64ad670df2c8e86ed3ad6607445ea7db5504b27
+                    - cell "Dec 24, 20252 months ago" [ref=e285]:
+                      - generic [ref=e286]: Dec 24, 20252 months ago
+                  - row "commands, (Directory) Make slash commands user-only with disable-model-invocation Dec 24, 20252 months ago" [ref=e287]:
+                    - cell "commands, (Directory)" [ref=e288]:
+                      - generic [ref=e289]:
+                        - img [ref=e290]
+                        - link "commands, (Directory)" [ref=e295] [cursor=pointer]:
+                          - /url: /obra/superpowers/tree/main/commands
+                          - text: commands
+                    - cell "Make slash commands user-only with disable-model-invocation" [ref=e296]:
+                      - link "Make slash commands user-only with disable-model-invocation" [ref=e299] [cursor=pointer]:
+                        - /url: /obra/superpowers/commit/9baedaa1171bfa487ed87f3ce12933b615be290f
+                    - cell "Dec 24, 20252 months ago" [ref=e300]:
+                      - generic [ref=e301]: Dec 24, 20252 months ago
+                  - row "docs, (Directory) Add Windows uninstall instructions and expand migration steps Feb 6, 2026last week" [ref=e302]:
+                    - cell "docs, (Directory)" [ref=e303]:
+                      - generic [ref=e304]:
+                        - img [ref=e305]
+                        - link "docs, (Directory)" [ref=e310] [cursor=pointer]:
+                          - /url: /obra/superpowers/tree/main/docs
+                          - text: docs
+                    - cell "Add Windows uninstall instructions and expand migration steps" [ref=e311]:
+                      - link "Add Windows uninstall instructions and expand migration steps" [ref=e314] [cursor=pointer]:
+                        - /url: /obra/superpowers/commit/8dd31c3da575d1eb069debbcad8e5eeb8e4c1f05
+                    - cell "Feb 6, 2026last week" [ref=e315]:
+                      - generic [ref=e316]: Feb 6, 2026last week
+                  - row "hooks, (Directory) Make SessionStart hook synchronous so using-superpowers loads before … Feb 13, 20262 days ago" [ref=e317]:
+                    - cell "hooks, (Directory)" [ref=e318]:
+                      - generic [ref=e319]:
+                        - img [ref=e320]
+                        - link "hooks, (Directory)" [ref=e325] [cursor=pointer]:
+                          - /url: /obra/superpowers/tree/main/hooks
+                          - text: hooks
+                    - cell "Make SessionStart hook synchronous so using-superpowers loads before …" [ref=e326]:
+                      - link "Make SessionStart hook synchronous so using-superpowers loads before …" [ref=e329] [cursor=pointer]:
+                        - /url: /obra/superpowers/commit/4c836817da6fe630802180956dd234f2817083b0
+                    - cell "Feb 13, 20262 days ago" [ref=e330]:
+                      - generic [ref=e331]: Feb 13, 20262 days ago
+                  - 'row "lib, (Directory) refactor: convert skills-core and plugin to pure ESM for module compa… Nov 23, 20253 months ago" [ref=e332]':
+                    - cell "lib, (Directory)" [ref=e333]:
+                      - generic [ref=e334]:
+                        - img [ref=e335]
+                        - link "lib, (Directory)" [ref=e340] [cursor=pointer]:
+                          - /url: /obra/superpowers/tree/main/lib
+                          - text: lib
+                    - 'cell "refactor: convert skills-core and plugin to pure ESM for module compa…" [ref=e341]':
+                      - 'link "refactor: convert skills-core and plugin to pure ESM for module compa…" [ref=e344] [cursor=pointer]':
+                        - /url: /obra/superpowers/commit/d92de28150339bf194b45d54ea8f0f6889255b20
+                    - cell "Nov 23, 20253 months ago" [ref=e345]:
+                      - generic [ref=e346]: Nov 23, 20253 months ago
+                  - row "skills, (Directory) Enforce brainstorming workflow with hard gates and process flow Feb 13, 20262 days ago" [ref=e347]:
+                    - cell "skills, (Directory)" [ref=e348]:
+                      - generic [ref=e349]:
+                        - img [ref=e350]
+                        - link "skills, (Directory)" [ref=e355] [cursor=pointer]:
+                          - /url: /obra/superpowers/tree/main/skills
+                          - text: skills
+                    - cell "Enforce brainstorming workflow with hard gates and process flow" [ref=e356]:
+                      - link "Enforce brainstorming workflow with hard gates and process flow" [ref=e359] [cursor=pointer]:
+                        - /url: /obra/superpowers/commit/7f2ee614b6d65af34bd6b689f48f79f742a9d43c
+                    - cell "Feb 13, 20262 days ago" [ref=e360]:
+                      - generic [ref=e361]: Feb 13, 20262 days ago
+                  - row "tests, (Directory) Fix stream-json output requiring --verbose flag Feb 11, 20264 days ago" [ref=e362]:
+                    - cell "tests, (Directory)" [ref=e363]:
+                      - generic [ref=e364]:
+                        - img [ref=e365]
+                        - link "tests, (Directory)" [ref=e370] [cursor=pointer]:
+                          - /url: /obra/superpowers/tree/main/tests
+                          - text: tests
+                    - cell "Fix stream-json output requiring --verbose flag" [ref=e371]:
+                      - link "Fix stream-json output requiring --verbose flag" [ref=e374] [cursor=pointer]:
+                        - /url: /obra/superpowers/commit/f8cf545bc560b5f0dee535c0e6251e96cf704ba1
+                    - cell "Feb 11, 20264 days ago" [ref=e375]:
+                      - generic [ref=e376]: Feb 11, 20264 days ago
+                  - 'row ".gitattributes, (File) fix: Windows hook execution for Claude Code 2.1.x (#331) Jan 23, 20263 weeks ago" [ref=e377]':
+                    - cell ".gitattributes, (File)" [ref=e378]:
+                      - generic [ref=e379]:
+                        - img [ref=e380]
+                        - link ".gitattributes, (File)" [ref=e385] [cursor=pointer]:
+                          - /url: /obra/superpowers/blob/main/.gitattributes
+                          - text: .gitattributes
+                    - 'cell "fix: Windows hook execution for Claude Code 2.1.x (#331)" [ref=e386]':
+                      - generic [ref=e388]:
+                        - 'link "fix: Windows hook execution for Claude Code 2.1.x (" [ref=e389] [cursor=pointer]':
+                          - /url: /obra/superpowers/commit/36fcd576265b93d3a0048ad928c986a4b9bf1af8
+                        - link "#331" [ref=e390] [cursor=pointer]:
+                          - /url: https://github.com/obra/superpowers/pull/331
+                        - link ")" [ref=e391] [cursor=pointer]:
+                          - /url: /obra/superpowers/commit/36fcd576265b93d3a0048ad928c986a4b9bf1af8
+                    - cell "Jan 23, 20263 weeks ago" [ref=e392]:
+                      - generic [ref=e393]: Jan 23, 20263 weeks ago
+                  - row ".gitignore, (File) Prepare v4.0.0 release Dec 18, 20252 months ago" [ref=e394]:
+                    - cell ".gitignore, (File)" [ref=e395]:
+                      - generic [ref=e396]:
+                        - img [ref=e397]
+                        - link ".gitignore, (File)" [ref=e402] [cursor=pointer]:
+                          - /url: /obra/superpowers/blob/main/.gitignore
+                          - text: .gitignore
+                    - cell "Prepare v4.0.0 release" [ref=e403]:
+                      - link "Prepare v4.0.0 release" [ref=e406] [cursor=pointer]:
+                        - /url: /obra/superpowers/commit/95c6e1633630a1462679cf1284b95ec458a27a8e
+                    - cell "Dec 18, 20252 months ago" [ref=e407]:
+                      - generic [ref=e408]: Dec 18, 20252 months ago
+                  - row "LICENSE, (File) Revert \"Reapply \"Move superpowers plugin into plugins/superpowers-boo… Oct 16, 20254 months ago" [ref=e409]:
+                    - cell "LICENSE, (File)" [ref=e410]:
+                      - generic [ref=e411]:
+                        - img [ref=e412]
+                        - link "LICENSE, (File)" [ref=e417] [cursor=pointer]:
+                          - /url: /obra/superpowers/blob/main/LICENSE
+                          - text: LICENSE
+                    - cell "Revert \"Reapply \"Move superpowers plugin into plugins/superpowers-boo…" [ref=e418]:
+                      - link "Revert \"Reapply \"Move superpowers plugin into plugins/superpowers-boo…" [ref=e421] [cursor=pointer]:
+                        - /url: /obra/superpowers/commit/84123b84505619a646722afddb79d79e624c8cb4
+                    - cell "Oct 16, 20254 months ago" [ref=e422]:
+                      - generic [ref=e423]: Oct 16, 20254 months ago
+                  - row "README.md, (File) Simplify installation verification instructions Feb 6, 2026last week" [ref=e424]:
+                    - cell "README.md, (File)" [ref=e425]:
+                      - generic [ref=e426]:
+                        - img [ref=e427]
+                        - link "README.md, (File)" [ref=e432] [cursor=pointer]:
+                          - /url: /obra/superpowers/blob/main/README.md
+                          - text: README.md
+                    - cell "Simplify installation verification instructions" [ref=e433]:
+                      - link "Simplify installation verification instructions" [ref=e436] [cursor=pointer]:
+                        - /url: /obra/superpowers/commit/5e0d2f8175ccd8f5378e41399dde3c88d5718d90
+                    - cell "Feb 6, 2026last week" [ref=e437]:
+                      - generic [ref=e438]: Feb 6, 2026last week
+                  - 'row "RELEASE-NOTES.md, (File) Release v4.3.0: Enforce brainstorming workflow, prevent unintended pl… Feb 13, 20262 days ago" [ref=e439]':
+                    - cell "RELEASE-NOTES.md, (File)" [ref=e440]:
+                      - generic [ref=e441]:
+                        - img [ref=e442]
+                        - link "RELEASE-NOTES.md, (File)" [ref=e447] [cursor=pointer]:
+                          - /url: /obra/superpowers/blob/main/RELEASE-NOTES.md
+                          - text: RELEASE-NOTES.md
+                    - 'cell "Release v4.3.0: Enforce brainstorming workflow, prevent unintended pl…" [ref=e448]':
+                      - 'link "Release v4.3.0: Enforce brainstorming workflow, prevent unintended pl…" [ref=e451] [cursor=pointer]':
+                        - /url: /obra/superpowers/commit/e16d611eee14ac4c3253b4bf4c55a98d905c2e64
+                    - cell "Feb 13, 20262 days ago" [ref=e452]:
+                      - generic [ref=e453]: Feb 13, 20262 days ago
+            - generic [ref=e455]:
+              - generic [ref=e456]:
+                - heading "Repository files navigation" [level=2] [ref=e457]
+                - navigation "Repository files" [ref=e458]:
+                  - list [ref=e459]:
+                    - listitem [ref=e460]:
+                      - link "README" [ref=e461] [cursor=pointer]:
+                        - /url: "#"
+                        - generic [ref=e462]: README
+                    - listitem [ref=e463]:
+                      - link "Code of conduct" [ref=e464] [cursor=pointer]:
+                        - /url: "#"
+                        - generic [ref=e465]: Code of conduct
+                    - listitem [ref=e466]:
+                      - link "Contributing" [ref=e467] [cursor=pointer]:
+                        - /url: "#"
+                        - generic [ref=e468]: Contributing
+                    - listitem [ref=e469]:
+                      - link "MIT license" [ref=e470] [cursor=pointer]:
+                        - /url: "#"
+                        - generic [ref=e471]: MIT license
+                    - listitem [ref=e472]:
+                      - link "Security" [ref=e473] [cursor=pointer]:
+                        - /url: "#"
+                        - generic [ref=e474]: Security
+                - button "Outline" [ref=e475] [cursor=pointer]:
+                  - img [ref=e476]
+              - article [ref=e479]:
+                - generic [ref=e480]:
+                  - heading "Superpowers" [level=1] [ref=e481]
+                  - 'link "Permalink: Superpowers" [ref=e482] [cursor=pointer]':
+                    - /url: "#superpowers"
+                    - img [ref=e483]
+                - paragraph [ref=e485]: Superpowers is a complete software development workflow for your coding agents, built on top of a set of composable "skills" and some initial instructions that make sure your agent uses them.
+                - generic [ref=e486]:
+                  - heading "How it works" [level=2] [ref=e487]
+                  - 'link "Permalink: How it works" [ref=e488] [cursor=pointer]':
+                    - /url: "#how-it-works"
+                    - img [ref=e489]
+                - paragraph [ref=e491]:
+                  - text: It starts from the moment you fire up your coding agent. As soon as it sees that you're building something, it
+                  - emphasis [ref=e492]: doesn't
+                  - text: just jump into trying to write code. Instead, it steps back and asks you what you're really trying to do.
+                - paragraph [ref=e493]: Once it's teased a spec out of the conversation, it shows it to you in chunks short enough to actually read and digest.
+                - paragraph [ref=e494]: After you've signed off on the design, your agent puts together an implementation plan that's clear enough for an enthusiastic junior engineer with poor taste, no judgement, no project context, and an aversion to testing to follow. It emphasizes true red/green TDD, YAGNI (You Aren't Gonna Need It), and DRY.
+                - paragraph [ref=e495]:
+                  - text: Next up, once you say "go", it launches a
+                  - emphasis [ref=e496]: subagent-driven-development
+                  - text: process, having agents work through each engineering task, inspecting and reviewing their work, and continuing forward. It's not uncommon for Claude to be able to work autonomously for a couple hours at a time without deviating from the plan you put together.
+                - paragraph [ref=e497]: There's a bunch more to it, but that's the core of the system. And because the skills trigger automatically, you don't need to do anything special. Your coding agent just has Superpowers.
+                - generic [ref=e498]:
+                  - heading "Sponsorship" [level=2] [ref=e499]
+                  - 'link "Permalink: Sponsorship" [ref=e500] [cursor=pointer]':
+                    - /url: "#sponsorship"
+                    - img [ref=e501]
+                - paragraph [ref=e503]:
+                  - text: If Superpowers has helped you do stuff that makes money and you are so inclined, I'd greatly appreciate it if you'd consider
+                  - link "sponsoring my opensource work" [ref=e504] [cursor=pointer]:
+                    - /url: https://github.com/sponsors/obra
+                  - text: .
+                - paragraph [ref=e505]: Thanks!
+                - list [ref=e506]:
+                  - listitem [ref=e507]: Jesse
+                - generic [ref=e508]:
+                  - heading "Installation" [level=2] [ref=e509]
+                  - 'link "Permalink: Installation" [ref=e510] [cursor=pointer]':
+                    - /url: "#installation"
+                    - img [ref=e511]
+                - paragraph [ref=e513]:
+                  - strong [ref=e514]: "Note:"
+                  - text: Installation differs by platform. Claude Code has a built-in plugin system. Codex and OpenCode require manual setup.
+                - generic [ref=e515]:
+                  - heading "Claude Code (via Plugin Marketplace)" [level=3] [ref=e516]
+                  - 'link "Permalink: Claude Code (via Plugin Marketplace)" [ref=e517] [cursor=pointer]':
+                    - /url: "#claude-code-via-plugin-marketplace"
+                    - img [ref=e518]
+                - paragraph [ref=e520]: "In Claude Code, register the marketplace first:"
+                - generic [ref=e521]:
+                  - generic [ref=e522]: /plugin marketplace add obra/superpowers-marketplace
+                  - button "Copy" [ref=e524] [cursor=pointer]:
+                    - img [ref=e525]
+                - paragraph [ref=e528]: "Then install the plugin from this marketplace:"
+                - generic [ref=e529]:
+                  - generic [ref=e530]: /plugin install superpowers@superpowers-marketplace
+                  - button "Copy" [ref=e532] [cursor=pointer]:
+                    - img [ref=e533]
+                - generic [ref=e536]:
+                  - heading "Verify Installation" [level=3] [ref=e537]
+                  - 'link "Permalink: Verify Installation" [ref=e538] [cursor=pointer]':
+                    - /url: "#verify-installation"
+                    - img [ref=e539]
+                - paragraph [ref=e541]: Start a new session and ask Claude to help with something that would trigger a skill (e.g., "help me plan this feature" or "let's debug this issue"). Claude should automatically invoke the relevant superpowers skill.
+                - generic [ref=e542]:
+                  - heading "Codex" [level=3] [ref=e543]
+                  - 'link "Permalink: Codex" [ref=e544] [cursor=pointer]':
+                    - /url: "#codex"
+                    - img [ref=e545]
+                - paragraph [ref=e547]: "Tell Codex:"
+                - generic [ref=e548]:
+                  - code [ref=e550]: Fetch and follow instructions from https://raw.githubusercontent.com/obra/superpowers/refs/heads/main/.codex/INSTALL.md
+                  - button "Copy" [ref=e552] [cursor=pointer]:
+                    - img [ref=e553]
+                - paragraph [ref=e556]:
+                  - strong [ref=e557]: "Detailed docs:"
+                  - link "docs/README.codex.md" [ref=e558] [cursor=pointer]:
+                    - /url: /obra/superpowers/blob/main/docs/README.codex.md
+                - generic [ref=e559]:
+                  - heading "OpenCode" [level=3] [ref=e560]
+                  - 'link "Permalink: OpenCode" [ref=e561] [cursor=pointer]':
+                    - /url: "#opencode"
+                    - img [ref=e562]
+                - paragraph [ref=e564]: "Tell OpenCode:"
+                - generic [ref=e565]:
+                  - code [ref=e567]: Fetch and follow instructions from https://raw.githubusercontent.com/obra/superpowers/refs/heads/main/.opencode/INSTALL.md
+                  - button "Copy" [ref=e569] [cursor=pointer]:
+                    - img [ref=e570]
+                - paragraph [ref=e573]:
+                  - strong [ref=e574]: "Detailed docs:"
+                  - link "docs/README.opencode.md" [ref=e575] [cursor=pointer]:
+                    - /url: /obra/superpowers/blob/main/docs/README.opencode.md
+                - generic [ref=e576]:
+                  - heading "The Basic Workflow" [level=2] [ref=e577]
+                  - 'link "Permalink: The Basic Workflow" [ref=e578] [cursor=pointer]':
+                    - /url: "#the-basic-workflow"
+                    - img [ref=e579]
+                - list [ref=e581]:
+                  - listitem [ref=e582]:
+                    - paragraph [ref=e583]:
+                      - strong [ref=e584]: brainstorming
+                      - text: "- Activates before writing code. Refines rough ideas through questions, explores alternatives, presents design in sections for validation. Saves design document."
+                  - listitem [ref=e585]:
+                    - paragraph [ref=e586]:
+                      - strong [ref=e587]: using-git-worktrees
+                      - text: "- Activates after design approval. Creates isolated workspace on new branch, runs project setup, verifies clean test baseline."
+                  - listitem [ref=e588]:
+                    - paragraph [ref=e589]:
+                      - strong [ref=e590]: writing-plans
+                      - text: "- Activates with approved design. Breaks work into bite-sized tasks (2-5 minutes each). Every task has exact file paths, complete code, verification steps."
+                  - listitem [ref=e591]:
+                    - paragraph [ref=e592]:
+                      - strong [ref=e593]: subagent-driven-development
+                      - text: or
+                      - strong [ref=e594]: executing-plans
+                      - text: "- Activates with plan. Dispatches fresh subagent per task with two-stage review (spec compliance, then code quality), or executes in batches with human checkpoints."
+                  - listitem [ref=e595]:
+                    - paragraph [ref=e596]:
+                      - strong [ref=e597]: test-driven-development
+                      - text: "- Activates during implementation. Enforces RED-GREEN-REFACTOR: write failing test, watch it fail, write minimal code, watch it pass, commit. Deletes code written before tests."
+                  - listitem [ref=e598]:
+                    - paragraph [ref=e599]:
+                      - strong [ref=e600]: requesting-code-review
+                      - text: "- Activates between tasks. Reviews against plan, reports issues by severity. Critical issues block progress."
+                  - listitem [ref=e601]:
+                    - paragraph [ref=e602]:
+                      - strong [ref=e603]: finishing-a-development-branch
+                      - text: "- Activates when tasks complete. Verifies tests, presents options (merge/PR/keep/discard), cleans up worktree."
+                - paragraph [ref=e604]:
+                  - strong [ref=e605]: The agent checks for relevant skills before any task.
+                  - text: Mandatory workflows, not suggestions.
+                - generic [ref=e606]:
+                  - heading "What's Inside" [level=2] [ref=e607]
+                  - 'link "Permalink: What''s Inside" [ref=e608] [cursor=pointer]':
+                    - /url: "#whats-inside"
+                    - img [ref=e609]
+                - generic [ref=e611]:
+                  - heading "Skills Library" [level=3] [ref=e612]
+                  - 'link "Permalink: Skills Library" [ref=e613] [cursor=pointer]':
+                    - /url: "#skills-library"
+                    - img [ref=e614]
+                - paragraph [ref=e616]:
+                  - strong [ref=e617]: Testing
+                - list [ref=e618]:
+                  - listitem [ref=e619]:
+                    - strong [ref=e620]: test-driven-development
+                    - text: "- RED-GREEN-REFACTOR cycle (includes testing anti-patterns reference)"
+                - paragraph [ref=e621]:
+                  - strong [ref=e622]: Debugging
+                - list [ref=e623]:
+                  - listitem [ref=e624]:
+                    - strong [ref=e625]: systematic-debugging
+                    - text: "- 4-phase root cause process (includes root-cause-tracing, defense-in-depth, condition-based-waiting techniques)"
+                  - listitem [ref=e626]:
+                    - strong [ref=e627]: verification-before-completion
+                    - text: "- Ensure it's actually fixed"
+                - paragraph [ref=e628]:
+                  - strong [ref=e629]: Collaboration
+                - list [ref=e630]:
+                  - listitem [ref=e631]:
+                    - strong [ref=e632]: brainstorming
+                    - text: "- Socratic design refinement"
+                  - listitem [ref=e633]:
+                    - strong [ref=e634]: writing-plans
+                    - text: "- Detailed implementation plans"
+                  - listitem [ref=e635]:
+                    - strong [ref=e636]: executing-plans
+                    - text: "- Batch execution with checkpoints"
+                  - listitem [ref=e637]:
+                    - strong [ref=e638]: dispatching-parallel-agents
+                    - text: "- Concurrent subagent workflows"
+                  - listitem [ref=e639]:
+                    - strong [ref=e640]: requesting-code-review
+                    - text: "- Pre-review checklist"
+                  - listitem [ref=e641]:
+                    - strong [ref=e642]: receiving-code-review
+                    - text: "- Responding to feedback"
+                  - listitem [ref=e643]:
+                    - strong [ref=e644]: using-git-worktrees
+                    - text: "- Parallel development branches"
+                  - listitem [ref=e645]:
+                    - strong [ref=e646]: finishing-a-development-branch
+                    - text: "- Merge/PR decision workflow"
+                  - listitem [ref=e647]:
+                    - strong [ref=e648]: subagent-driven-development
+                    - text: "- Fast iteration with two-stage review (spec compliance, then code quality)"
+                - paragraph [ref=e649]:
+                  - strong [ref=e650]: Meta
+                - list [ref=e651]:
+                  - listitem [ref=e652]:
+                    - strong [ref=e653]: writing-skills
+                    - text: "- Create new skills following best practices (includes testing methodology)"
+                  - listitem [ref=e654]:
+                    - strong [ref=e655]: using-superpowers
+                    - text: "- Introduction to the skills system"
+                - generic [ref=e656]:
+                  - heading "Philosophy" [level=2] [ref=e657]
+                  - 'link "Permalink: Philosophy" [ref=e658] [cursor=pointer]':
+                    - /url: "#philosophy"
+                    - img [ref=e659]
+                - list [ref=e661]:
+                  - listitem [ref=e662]:
+                    - strong [ref=e663]: Test-Driven Development
+                    - text: "- Write tests first, always"
+                  - listitem [ref=e664]:
+                    - strong [ref=e665]: Systematic over ad-hoc
+                    - text: "- Process over guessing"
+                  - listitem [ref=e666]:
+                    - strong [ref=e667]: Complexity reduction
+                    - text: "- Simplicity as primary goal"
+                  - listitem [ref=e668]:
+                    - strong [ref=e669]: Evidence over claims
+                    - text: "- Verify before declaring success"
+                - paragraph [ref=e670]:
+                  - text: "Read more:"
+                  - link "Superpowers for Claude Code" [ref=e671] [cursor=pointer]:
+                    - /url: https://blog.fsck.com/2025/10/09/superpowers/
+                - generic [ref=e672]:
+                  - heading "Contributing" [level=2] [ref=e673]
+                  - 'link "Permalink: Contributing" [ref=e674] [cursor=pointer]':
+                    - /url: "#contributing"
+                    - img [ref=e675]
+                - paragraph [ref=e677]: "Skills live directly in this repository. To contribute:"
+                - list [ref=e678]:
+                  - listitem [ref=e679]: Fork the repository
+                  - listitem [ref=e680]: Create a branch for your skill
+                  - listitem [ref=e681]:
+                    - text: Follow the
+                    - code [ref=e682]: writing-skills
+                    - text: skill for creating and testing new skills
+                  - listitem [ref=e683]: Submit a PR
+                - paragraph [ref=e684]:
+                  - text: See
+                  - code [ref=e685]: skills/writing-skills/SKILL.md
+                  - text: for the complete guide.
+                - generic [ref=e686]:
+                  - heading "Updating" [level=2] [ref=e687]
+                  - 'link "Permalink: Updating" [ref=e688] [cursor=pointer]':
+                    - /url: "#updating"
+                    - img [ref=e689]
+                - paragraph [ref=e691]: "Skills update automatically when you update the plugin:"
+                - generic [ref=e692]:
+                  - generic [ref=e693]: /plugin update superpowers
+                  - button "Copy" [ref=e695] [cursor=pointer]:
+                    - img [ref=e696]
+                - generic [ref=e699]:
+                  - heading "License" [level=2] [ref=e700]
+                  - 'link "Permalink: License" [ref=e701] [cursor=pointer]':
+                    - /url: "#license"
+                    - img [ref=e702]
+                - paragraph [ref=e704]: MIT License - see LICENSE file for details
+                - generic [ref=e705]:
+                  - heading "Support" [level=2] [ref=e706]
+                  - 'link "Permalink: Support" [ref=e707] [cursor=pointer]':
+                    - /url: "#support"
+                    - img [ref=e708]
+                - list [ref=e710]:
+                  - listitem [ref=e711]:
+                    - strong [ref=e712]: Issues
+                    - text: ":"
+                    - link "https://github.com/obra/superpowers/issues" [ref=e713] [cursor=pointer]:
+                      - /url: https://github.com/obra/superpowers/issues
+                  - listitem [ref=e714]:
+                    - strong [ref=e715]: Marketplace
+                    - text: ":"
+                    - link "https://github.com/obra/superpowers-marketplace" [ref=e716] [cursor=pointer]:
+                      - /url: https://github.com/obra/superpowers-marketplace
+        - generic [ref=e718]:
+          - generic [ref=e721]:
+            - heading "About" [level=2] [ref=e722]
+            - paragraph [ref=e723]: An agentic skills framework & software development methodology that works.
+            - heading "Resources" [level=3] [ref=e724]
+            - link "Readme" [ref=e726] [cursor=pointer]:
+              - /url: "#readme-ov-file"
+              - img [ref=e727]
+              - text: Readme
+            - heading "License" [level=3] [ref=e729]
+            - link "MIT license" [ref=e731] [cursor=pointer]:
+              - /url: "#MIT-1-ov-file"
+              - img [ref=e732]
+              - text: MIT license
+            - link "Activity" [ref=e735] [cursor=pointer]:
+              - /url: /obra/superpowers/activity
+              - img [ref=e736]
+              - text: Activity
+            - heading "Stars" [level=3] [ref=e738]
+            - link "51.7k stars" [ref=e740] [cursor=pointer]:
+              - /url: /obra/superpowers/stargazers
+              - img [ref=e741]
+              - strong [ref=e743]: 51.7k
+              - text: stars
+            - heading "Watchers" [level=3] [ref=e744]
+            - link "294 watching" [ref=e746] [cursor=pointer]:
+              - /url: /obra/superpowers/watchers
+              - img [ref=e747]
+              - strong [ref=e749]: "294"
+              - text: watching
+            - heading "Forks" [level=3] [ref=e750]
+            - link "3.9k forks" [ref=e752] [cursor=pointer]:
+              - /url: /obra/superpowers/forks
+              - img [ref=e753]
+              - strong [ref=e755]: 3.9k
+              - text: forks
+            - link "Report repository" [ref=e757] [cursor=pointer]:
+              - /url: /contact/report-content?content_url=https%3A%2F%2Fgithub.com%2Fobra%2Fsuperpowers&report=obra+%28user%29
+          - generic [ref=e759]:
+            - heading "Releases 2" [level=2] [ref=e760]:
+              - link "Releases 2" [ref=e761] [cursor=pointer]:
+                - /url: /obra/superpowers/releases
+                - text: Releases
+                - generic "2" [ref=e762]
+            - link "v4.1.1 Latest Jan 23, 20263 weeks ago" [ref=e763] [cursor=pointer]:
+              - /url: /obra/superpowers/releases/tag/v4.1.1
+              - img [ref=e764]
+              - generic [ref=e766]:
+                - generic [ref=e767]:
+                  - generic [ref=e768]: v4.1.1
+                  - 'generic "Label: Latest" [ref=e769]': Latest
+                - generic [ref=e770]: Jan 23, 20263 weeks ago
+            - link "+ 1 release" [ref=e772] [cursor=pointer]:
+              - /url: /obra/superpowers/releases
+          - generic [ref=e774]:
+            - heading "Sponsor this project" [level=2] [ref=e775]
+            - generic [ref=e776]:
+              - link "@obra" [ref=e777] [cursor=pointer]:
+                - /url: /obra
+                - img "@obra" [ref=e778]
+              - link "obra Jesse Vincent" [ref=e780] [cursor=pointer]:
+                - /url: /obra
+                - strong [ref=e781]: obra
+                - text: Jesse Vincent
+            - link "Sponsor @obra" [ref=e782] [cursor=pointer]:
+              - /url: /sponsors/obra
+              - generic [ref=e784]:
+                - img [ref=e785]
+                - text: Sponsor
+            - link "Learn more about GitHub Sponsors" [ref=e788] [cursor=pointer]:
+              - /url: /sponsors
+          - generic [ref=e790]:
+            - heading "Packages" [level=2] [ref=e791]:
+              - link "Packages" [ref=e792] [cursor=pointer]:
+                - /url: /users/obra/packages?repo_name=superpowers
+            - generic [ref=e793]: No packages published
+          - generic [ref=e795]:
+            - heading "Contributors 16" [level=2] [ref=e796]:
+              - link "Contributors 16" [ref=e797] [cursor=pointer]:
+                - /url: /obra/superpowers/graphs/contributors
+                - text: Contributors
+                - generic "16" [ref=e798]
+            - list [ref=e799]:
+              - listitem [ref=e800]:
+                - link "@obra" [ref=e801] [cursor=pointer]:
+                  - /url: https://github.com/obra
+                  - img "@obra" [ref=e802]
+              - listitem [ref=e803]:
+                - link "@claude" [ref=e804] [cursor=pointer]:
+                  - /url: https://github.com/claude
+                  - img "@claude" [ref=e805]
+              - listitem [ref=e806]:
+                - link "@arittr" [ref=e807] [cursor=pointer]:
+                  - /url: https://github.com/arittr
+                  - img "@arittr" [ref=e808]
+              - listitem [ref=e809]:
+                - link "@clkao" [ref=e810] [cursor=pointer]:
+                  - /url: https://github.com/clkao
+                  - img "@clkao" [ref=e811]
+              - listitem [ref=e812]:
+                - link "@jjshanks" [ref=e813] [cursor=pointer]:
+                  - /url: https://github.com/jjshanks
+                  - img "@jjshanks" [ref=e814]
+              - listitem [ref=e815]:
+                - link "@oribarilan" [ref=e816] [cursor=pointer]:
+                  - /url: https://github.com/oribarilan
+                  - img "@oribarilan" [ref=e817]
+              - listitem [ref=e818]:
+                - link "@vmotta8" [ref=e819] [cursor=pointer]:
+                  - /url: https://github.com/vmotta8
+                  - img "@vmotta8" [ref=e820]
+              - listitem [ref=e821]:
+                - link "@sotte" [ref=e822] [cursor=pointer]:
+                  - /url: https://github.com/sotte
+                  - img "@sotte" [ref=e823]
+              - listitem [ref=e824]:
+                - link "@rhuss" [ref=e825] [cursor=pointer]:
+                  - /url: https://github.com/rhuss
+                  - img "@rhuss" [ref=e826]
+              - listitem [ref=e827]:
+                - link "@ryancnelson" [ref=e828] [cursor=pointer]:
+                  - /url: https://github.com/ryancnelson
+                  - img "@ryancnelson" [ref=e829]
+              - listitem [ref=e830]:
+                - link "@avleen" [ref=e831] [cursor=pointer]:
+                  - /url: https://github.com/avleen
+                  - img "@avleen" [ref=e832]
+              - listitem [ref=e833]:
+                - link "@onelesd" [ref=e834] [cursor=pointer]:
+                  - /url: https://github.com/onelesd
+                  - img "@onelesd" [ref=e835]
+              - listitem [ref=e836]:
+                - link "@egornomic" [ref=e837] [cursor=pointer]:
+                  - /url: https://github.com/egornomic
+                  - img "@egornomic" [ref=e838]
+              - listitem [ref=e839]:
+                - link "@mycarrysun" [ref=e840] [cursor=pointer]:
+                  - /url: https://github.com/mycarrysun
+                  - img "@mycarrysun" [ref=e841]
+            - link "+ 2 contributors" [ref=e843] [cursor=pointer]:
+              - /url: /obra/superpowers/graphs/contributors
+          - generic [ref=e845]:
+            - heading "Languages" [level=2] [ref=e846]
+            - list [ref=e854]:
+              - listitem [ref=e855]:
+                - link "Shell 76.1%" [ref=e856] [cursor=pointer]:
+                  - /url: /obra/superpowers/search?l=shell
+                  - img [ref=e857]
+                  - generic [ref=e859]: Shell
+                  - generic [ref=e860]: 76.1%
+              - listitem [ref=e861]:
+                - link "JavaScript 12.4%" [ref=e862] [cursor=pointer]:
+                  - /url: /obra/superpowers/search?l=javascript
+                  - img [ref=e863]
+                  - generic [ref=e865]: JavaScript
+                  - generic [ref=e866]: 12.4%
+              - listitem [ref=e867]:
+                - link "Python 5.7%" [ref=e868] [cursor=pointer]:
+                  - /url: /obra/superpowers/search?l=python
+                  - img [ref=e869]
+                  - generic [ref=e871]: Python
+                  - generic [ref=e872]: 5.7%
+              - listitem [ref=e873]:
+                - link "TypeScript 4.3%" [ref=e874] [cursor=pointer]:
+                  - /url: /obra/superpowers/search?l=typescript
+                  - img [ref=e875]
+                  - generic [ref=e877]: TypeScript
+                  - generic [ref=e878]: 4.3%
+              - listitem [ref=e879]:
+                - link "Batchfile 1.5%" [ref=e880] [cursor=pointer]:
+                  - /url: /obra/superpowers/search?l=batchfile
+                  - img [ref=e881]
+                  - generic [ref=e883]: Batchfile
+                  - generic [ref=e884]: 1.5%
+  - contentinfo [ref=e885]:
+    - heading "Footer" [level=2] [ref=e886]
+    - generic [ref=e887]:
+      - generic [ref=e888]:
+        - link "GitHub Homepage" [ref=e889] [cursor=pointer]:
+          - /url: https://github.com
+          - img [ref=e890]
+        - generic [ref=e892]: © 2026 GitHub, Inc.
+      - navigation "Footer" [ref=e893]:
+        - heading "Footer navigation" [level=3] [ref=e894]
+        - list "Footer navigation" [ref=e895]:
+          - listitem [ref=e896]:
+            - link "Terms" [ref=e897] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/github-terms/github-terms-of-service
+          - listitem [ref=e898]:
+            - link "Privacy" [ref=e899] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/privacy-policies/github-privacy-statement
+          - listitem [ref=e900]:
+            - link "Security" [ref=e901] [cursor=pointer]:
+              - /url: https://github.com/security
+          - listitem [ref=e902]:
+            - link "Status" [ref=e903] [cursor=pointer]:
+              - /url: https://www.githubstatus.com/
+          - listitem [ref=e904]:
+            - link "Community" [ref=e905] [cursor=pointer]:
+              - /url: https://github.community/
+          - listitem [ref=e906]:
+            - link "Docs" [ref=e907] [cursor=pointer]:
+              - /url: https://docs.github.com/
+          - listitem [ref=e908]:
+            - link "Contact" [ref=e909] [cursor=pointer]:
+              - /url: https://support.github.com?tags=dotcom-footer
+          - listitem [ref=e910]:
+            - button "Manage cookies" [ref=e912] [cursor=pointer]
+          - listitem [ref=e913]:
+            - button "Do not share my personal information" [ref=e915] [cursor=pointer]

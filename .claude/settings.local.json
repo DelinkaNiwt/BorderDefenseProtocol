@@ -60,11 +60,40 @@
       "mcp__plugin_playwright_playwright__browser_snapshot",
       "WebFetch(domain:www.anthropic.com)",
       "WebFetch(domain:felloai.com)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "mcp__rolex__identity",
+      "mcp__rolex__focus",
+      "Bash(printf:*)",
+      "Bash(\"/c/NiwtApplications/nodejs/node.exe\" \"/c/Users/Niwt/.claude/plugins/cache/claude-hud/claude-hud/0.0.7/dist/index.js\")",
+      "mcp__rimworld-code-rag-base__get_used_by",
+      "mcp__plugin_playwright_playwright__browser_run_code",
+      "mcp__plugin_playwright_playwright__browser_evaluate",
+      "mcp__rolex__society",
+      "mcp__rolex__directory",
+      "mcp__RimSearcher__rimworld-searcher__locate",
+      "WebFetch(domain:github.com)",
+      "mcp__RimSearcher__rimworld-searcher__inspect",
+      "mcp__RimSearcher__rimworld-searcher__list_directory",
+      "mcp__RimSearcher__rimworld-searcher__search_regex",
+      "mcp__RimSearcher__rimworld-searcher__read_code",
+      "mcp__RimSearcher__rimworld-searcher__trace"
     ],
     "additionalDirectories": [
       "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\RimWT\\00_项目管理"
     ]
   },
-  "disableAllHooks": true
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -ExecutionPolicy Bypass -File \"C:\\NiwtDatas\\Projects\\ClaudeCode_Tools\\Hooks\\气泡通知\\balloon-notification.ps1\" -Title \"Claude 回复完成\" -Message \"对话已完成，请查看回复内容\"",
+            "async": true
+          }
+        ]
+      }
+    ]
+  },
+  "disableAllHooks": false
 }
