@@ -677,61 +677,12 @@ CompTriggerBody在DevMode下提供以下调试Gizmo：
 
 ## 7. 微内核扩展：RegisterDrain聚合结算
 
-### 7.1 扩展动机
-
-多个模块可能同时产生持续Trion消耗（战斗体维持、隐身芯片、未来其他源）。
-各模块独立调用Consume()存在浮点精度问题且无法统一展示总消耗速率。
-
-### 7.2 CompTrion新增API
-
-```csharp
-void RegisterDrain(string key, float drainPerDay)
-  // 注册一个持续消耗源
-  // key: 唯一标识（如 "combatBody", "stealth_main"）
-  // drainPerDay: 每天消耗量
-
-void UnregisterDrain(string key)
-  // 移除一个持续消耗源
-
-float TotalDrainPerDay { get; }
-  // 所有注册源的聚合消耗速率（只读）
-```
-
-### 7.3 CompTick修改
-
-```
-CompTrion.CompTick() 修改：
-
-  // 原有：建筑被动消耗
-  if Props.passiveDrainPerDay > 0:
-    Consume(Props.passiveDrainPerDay / TICKS_PER_DAY)
-
-  // 新增：聚合所有注册的drain源，间隔结算
-  if drainRegistry.Count > 0 && TicksGame % drainInterval == 0:
-    totalDrain = Sum(drainRegistry.Values)
-    Consume(totalDrain × drainInterval / TICKS_PER_DAY)
-
-  drainInterval 由 Props.drainSettleInterval 配置（默认60 ticks）
-```
-
-### 7.4 存档
-
-```
-drainRegistry: Dictionary<string, float>
-  Scribe_Collections.Look(ref drainRegistry, "trionDrains",
-    LookMode.Value, LookMode.Value)
-
-读档后由各模块重新RegisterDrain（效果Activate时注册）。
-但保留存档作为防御性备份。
-```
-
-### 7.5 向后兼容
-
-```
-此扩展不修改CompTrion已有API（Consume/Recover/Allocate/Release/SetFrozen）。
-仅新增RegisterDrain/UnregisterDrain/TotalDrainPerDay。
-建筑的passiveDrainPerDay保持原有逻辑不变。
-```
+> 本节内容已迁移至 6.1 Trion能量系统详细设计 v1.4。
+> 具体见 6.1 §2.1（drainRegistry字段）、§3.6（RegisterDrain/UnregisterDrain/TotalDrainPerDay API）、§3.7 CompTick（聚合结算逻辑）、§8（drainSettleInterval配置）。
+>
+> 触发器模块作为消费者，通过以下方式使用：
+> - 隐身芯片激活时：CompTrion.RegisterDrain("stealth_" + side, drainPerDay)
+> - 隐身芯片关闭时：CompTrion.UnregisterDrain("stealth_" + side)
 
 ---
 
