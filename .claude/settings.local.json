@@ -76,7 +76,13 @@
       "mcp__RimSearcher__rimworld-searcher__list_directory",
       "mcp__RimSearcher__rimworld-searcher__search_regex",
       "mcp__RimSearcher__rimworld-searcher__read_code",
-      "mcp__RimSearcher__rimworld-searcher__trace"
+      "mcp__RimSearcher__rimworld-searcher__trace",
+      "Bash(python:*)",
+      "mcp__ide__getDiagnostics",
+      "Bash(\"C:\\\\Windows\\\\Microsoft.NET\\\\Framework\\\\v4.0.30319\\\\MSBuild.exe\" BDP.csproj /p:Configuration=Debug /t:Build)",
+      "Bash(\"C:\\\\Windows\\\\Microsoft.NET\\\\Framework\\\\v4.0.30319\\\\MSBuild.exe\":*)",
+      "Bash(cmd /c:*)",
+      "Bash(dotnet build:*)"
     ],
     "additionalDirectories": [
       "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\RimWT\\00_项目管理"

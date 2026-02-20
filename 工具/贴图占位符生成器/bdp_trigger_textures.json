@@ -1,0 +1,23 @@
+{
+  "注释": "BDP触发器模块测试贴图 - 占位符，用于验证XML配置加载",
+  "textures": [
+    {
+      "width": 128,
+      "height": 128,
+      "output_prefix": "BDP_TriggerBody_Test",
+      "color_scheme": "blue",
+      "suffix_type": "single",
+      "grid_size": 32,
+      "grid_width": 1
+    },
+    {
+      "width": 64,
+      "height": 64,
+      "output_prefix": "BDP_Chip_Test",
+      "color_scheme": "green",
+      "suffix_type": "single",
+      "grid_size": 16,
+      "grid_width": 1
+    }
+  ]
+}

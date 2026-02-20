@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ══════════════════════════════════════════════════════
+       BDP_Chip_Test_Utility — 测试用辅助芯片（最简单，无Harmony依赖）
+       用途：验证LoadChip/ActivateChip/DeactivateChip/状态转储流程
+       ══════════════════════════════════════════════════════ -->
+  <ThingDef>
+    <defName>BDP_Chip_Test_Utility</defName>
+    <label>测试辅助芯片</label>
+    <description>用于开发测试的辅助类芯片。激活时授予"跳跃"Ability（如果存在）。</description>
+    <category>Item</category>
+    <thingClass>ThingWithComps</thingClass>
+    <graphicData>
+      <texPath>Things/Trigger/BDP_Chip_Test</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <Mass>0.1</Mass>
+      <MarketValue>50</MarketValue>
+    </statBases>
+    <comps>
+      <li Class="BDP.Trigger.CompProperties_TriggerChip">
+        <preferredSide>Left</preferredSide>
+        <activationCost>0</activationCost>
+        <!-- chipEffectClass：UtilityChipEffect（无Ability时Activate/Deactivate为空操作） -->
+        <chipEffectClass>BDP.Trigger.UtilityChipEffect</chipEffectClass>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- ══════════════════════════════════════════════════════
+       BDP_Chip_Test_Stealth — 测试用隐身芯片（验证RegisterDrain）
+       用途：验证StealthChipEffect + CompTrion.RegisterDrain聚合结算
+       ══════════════════════════════════════════════════════ -->
+  <ThingDef>
+    <defName>BDP_Chip_Test_Stealth</defName>
+    <label>测试隐身芯片</label>
+    <description>用于开发测试的隐身类芯片。激活时注册持续Trion消耗（5/天）。</description>
+    <category>Item</category>
+    <thingClass>ThingWithComps</thingClass>
+    <graphicData>
+      <texPath>Things/Trigger/BDP_Chip_Test</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <Mass>0.1</Mass>
+      <MarketValue>50</MarketValue>
+    </statBases>
+    <comps>
+      <li Class="BDP.Trigger.CompProperties_TriggerChip">
+        <preferredSide>Left</preferredSide>
+        <activationCost>5</activationCost>
+        <chipEffectClass>BDP.Trigger.StealthChipEffect</chipEffectClass>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="BDP.Trigger.StealthChipConfig">
+        <!-- stealthHediffDef留空：无Hediff时Activate/Deactivate为空操作，仅验证RegisterDrain -->
+        <drainPerDay>5</drainPerDay>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+</Defs>
