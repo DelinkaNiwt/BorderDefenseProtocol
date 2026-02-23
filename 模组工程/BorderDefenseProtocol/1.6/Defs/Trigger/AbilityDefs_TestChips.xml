@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ══════════════════════════════════════════════════════
+       BDP_Ability_TestJump — 测试用跳跃Ability
+       Verb_CastAbilityJump + CastJump（同Biotech Longjump模式）
+       + CompAbilityEffect_TrionCost(trionCostPerUse=10)
+       range=15
+
+       P11修复：原CompAbilityEffect_Teleport不支持地面目标
+       （Apply()开头if(!target.HasThing)return静默失败）。
+       改用Verb_CastAbilityJump，跳跃由JumpUtility.DoJump()
+       通过PawnFlyer实现，原生支持地面目标+抛物线飞行动画。
+       ══════════════════════════════════════════════════════ -->
+  <AbilityDef>
+    <defName>BDP_Ability_TestJump</defName>
+    <label>测试跳跃</label>
+    <description>消耗Trion进行短距离跳跃。</description>
+    <iconPath>UI/Abilities/Longjump</iconPath>
+    <hostile>false</hostile>
+    <jobDef>CastJump</jobDef>
+    <verbProperties>
+      <verbClass>Verb_CastAbilityJump</verbClass>
+      <range>15</range>
+      <warmupTime>0.5</warmupTime>
+      <requireLineOfSight>true</requireLineOfSight>
+      <soundCast>Longjump_Jump</soundCast>
+      <soundLanding>Longjump_Land</soundLanding>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>false</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <!-- BDP Trion消耗（Verb_CastAbilityJump.base.TryCastShot()会触发comp的Apply） -->
+      <li Class="BDP.Trigger.CompProperties_AbilityTrionCost">
+        <trionCostPerUse>10</trionCostPerUse>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <!-- ══════════════════════════════════════════════════════
+       BDP_Ability_TestStealth — 测试用隐身Ability
+       自施放，使用原版CompAbilityEffect_GiveHediff添加隐身Hediff
+       + CompAbilityEffect_TrionCost(trionCostPerUse=5)
+       ══════════════════════════════════════════════════════ -->
+  <AbilityDef>
+    <defName>BDP_Ability_TestStealth</defName>
+    <label>测试隐身</label>
+    <description>消耗Trion激活隐身效果，降低移动速度。</description>
+    <iconPath>UI/Abilities/Invisibility</iconPath>
+    <hostile>false</hostile>
+    <targetRequired>false</targetRequired>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <warmupTime>0.5</warmupTime>
+      <range>0</range>
+      <drawAimPie>false</drawAimPie>
+      <targetParams>
+        <canTargetSelf>true</canTargetSelf>
+        <canTargetPawns>false</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetLocations>false</canTargetLocations>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <!-- 原版GiveHediff：自施放添加隐身Hediff -->
+      <li Class="CompProperties_AbilityGiveHediff">
+        <compClass>CompAbilityEffect_GiveHediff</compClass>
+        <hediffDef>BDP_Hediff_TestStealth</hediffDef>
+        <applyToSelf>true</applyToSelf>
+        <onlyApplyToSelf>true</onlyApplyToSelf>
+      </li>
+      <!-- BDP Trion消耗 -->
+      <li Class="BDP.Trigger.CompProperties_AbilityTrionCost">
+        <trionCostPerUse>5</trionCostPerUse>
+      </li>
+    </comps>
+  </AbilityDef>
+
+</Defs>

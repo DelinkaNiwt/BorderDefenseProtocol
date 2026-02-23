@@ -18,7 +18,7 @@
     <biostatMet>-1</biostatMet>
     <!-- Stat贡献：天赋对三个Trion属性的基础值 -->
     <statOffsets>
-      <BDP_TrionCapacity>70</BDP_TrionCapacity>
+      <BDP_TrionCapacity>200</BDP_TrionCapacity>
       <BDP_TrionOutputPower>5</BDP_TrionOutputPower>
       <BDP_TrionRecoveryRate>50</BDP_TrionRecoveryRate>
     </statOffsets>

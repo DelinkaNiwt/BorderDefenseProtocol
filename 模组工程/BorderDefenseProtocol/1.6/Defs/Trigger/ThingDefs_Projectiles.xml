@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ══════════════════════════════════════════════════════
+       BDP_Bullet_TestPulse — 测试用爆炸弹（远程A用）
+       Projectile_Explosive, Bomb伤害, dmg=8, 爆炸半径=1.2, 速度=55
+       ══════════════════════════════════════════════════════ -->
+  <ThingDef ParentName="BaseBullet">
+    <defName>BDP_Bullet_TestPulse</defName>
+    <label>测试脉冲弹</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <thingClass>Projectile_Explosive</thingClass>
+    <projectile>
+      <damageDef>Bomb</damageDef>
+      <damageAmountBase>8</damageAmountBase>
+      <explosionRadius>1.2</explosionRadius>
+      <speed>55</speed>
+    </projectile>
+  </ThingDef>
+
+  <!-- ══════════════════════════════════════════════════════
+       BDP_Bullet_TestSniper — 测试用狙击弹（远程B用）
+       Bullet, 普通伤害, dmg=25, 速度=90
+       ══════════════════════════════════════════════════════ -->
+  <ThingDef ParentName="BaseBullet">
+    <defName>BDP_Bullet_TestSniper</defName>
+    <label>测试狙击弹</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>25</damageAmountBase>
+      <speed>90</speed>
+    </projectile>
+  </ThingDef>
+
+</Defs>

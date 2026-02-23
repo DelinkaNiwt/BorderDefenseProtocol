@@ -32,6 +32,7 @@ namespace BDP.Core
 
         // ── 状态标志 ──
         private bool frozen;     // 恢复是否被冻结（由外部系统设置）
+        private bool initialized; // 是否已完成首次初始化（防止PawnFlyer落地时PostSpawnSetup重置数据）
 
         // ── 聚合消耗注册表（v1.4） ──
         // key=消耗源标识, value=每天消耗量
@@ -195,7 +196,7 @@ namespace BDP.Core
             if (drainRegistry == null)
                 drainRegistry = new Dictionary<string, float>();
 
-            if (!respawningAfterLoad)
+            if (!respawningAfterLoad && !initialized)
             {
                 // 首次生成（非读档）：用XML配置初始化
                 max = Props.baseMax;
@@ -210,8 +211,15 @@ namespace BDP.Core
                 RegisterDrain("passive", Props.passiveDrainPerDay);
             }
 
-            // 立即从Stat同步一次
+            // 从Stat同步max（Pawn的max来自Gene statOffsets，非baseMax）
             RefreshMax();
+
+            // Pawn首次生成时：RefreshMax()可能将max从0提升到Stat值，
+            // 但cur仍为0（因为baseMax=0）。此时用新max重新初始化cur。
+            if (!respawningAfterLoad && !initialized && cur <= 0f && max > 0f)
+                cur = max * Props.startPercent;
+
+            initialized = true; // 标记已完成首次初始化，后续PostSpawnSetup不再重置
 
             int now = Find.TickManager.TicksGame;
             refreshTick = now + Props.statRefreshInterval;
@@ -383,6 +391,7 @@ namespace BDP.Core
             Scribe_Values.Look(ref max, "trionMax");
             Scribe_Values.Look(ref allocated, "trionAllocated");
             Scribe_Values.Look(ref frozen, "trionFrozen");
+            Scribe_Values.Look(ref initialized, "trionInitialized");
             Scribe_Collections.Look(ref drainRegistry, "trionDrains", LookMode.Value, LookMode.Value);
 
             // 读档后校验不变量——防止存档损坏或版本升级导致的数据不一致
@@ -391,6 +400,9 @@ namespace BDP.Core
                 max = Mathf.Max(0f, max);
                 cur = Mathf.Clamp(cur, 0f, max);
                 allocated = Mathf.Clamp(allocated, 0f, cur);
+
+                // 读档后视为已初始化，防止后续PostSpawnSetup重置
+                initialized = true;
 
                 // 旧存档兼容：drainRegistry可能为null
                 if (drainRegistry == null)

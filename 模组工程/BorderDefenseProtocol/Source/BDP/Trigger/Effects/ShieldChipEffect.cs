@@ -29,13 +29,27 @@ namespace BDP.Trigger
 
         public bool CanActivate(Pawn pawn, Thing triggerBody) => true;
 
+        /// <summary>
+        /// 从ActivatingSlot读取ShieldChipConfig，回退到遍历AllActiveSlots。
+        /// 优先ActivatingSlot确保激活/关闭时读取正确槽位的配置。
+        /// </summary>
         private static ShieldChipConfig GetConfig(Thing triggerBody)
         {
-            // 从触发体上激活的芯片读取配置
             var triggerComp = triggerBody.TryGetComp<CompTriggerBody>();
-            foreach (var slot in triggerComp?.AllActiveSlots() ?? System.Linq.Enumerable.Empty<ChipSlot>())
+            if (triggerComp == null) return null;
+
+            // 优先从ActivatingSlot读取
+            var slot = triggerComp.ActivatingSlot;
+            if (slot?.loadedChip != null)
             {
-                var ext = slot.loadedChip?.def?.GetModExtension<ShieldChipConfig>();
+                var cfg = slot.loadedChip.def.GetModExtension<ShieldChipConfig>();
+                if (cfg != null) return cfg;
+            }
+
+            // 回退：遍历所有激活槽位（兼容读档恢复）
+            foreach (var activeSlot in triggerComp.AllActiveSlots())
+            {
+                var ext = activeSlot.loadedChip?.def?.GetModExtension<ShieldChipConfig>();
                 if (ext != null) return ext;
             }
             return null;

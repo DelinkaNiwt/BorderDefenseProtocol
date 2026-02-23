@@ -44,9 +44,10 @@
       </li>
       <!-- 触发器模块：BORDER型，4+4槽位，玩家可管理芯片 -->
       <li Class="BDP.Trigger.CompProperties_TriggerBody">
-        <leftSlotCount>4</leftSlotCount>
-        <rightSlotCount>4</rightSlotCount>
-        <hasRight>true</hasRight>
+        <leftHandSlotCount>4</leftHandSlotCount>
+        <rightHandSlotCount>4</rightHandSlotCount>
+        <hasRightHand>true</hasRightHand>
+        <specialSlotCount>2</specialSlotCount>
         <switchCooldownTicks>30</switchCooldownTicks>
         <allowChipManagement>true</allowChipManagement>
         <autoActivateOnEquip>false</autoActivateOnEquip>

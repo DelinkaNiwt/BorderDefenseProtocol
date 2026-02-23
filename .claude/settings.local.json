@@ -82,7 +82,8 @@
       "Bash(\"C:\\\\Windows\\\\Microsoft.NET\\\\Framework\\\\v4.0.30319\\\\MSBuild.exe\" BDP.csproj /p:Configuration=Debug /t:Build)",
       "Bash(\"C:\\\\Windows\\\\Microsoft.NET\\\\Framework\\\\v4.0.30319\\\\MSBuild.exe\":*)",
       "Bash(cmd /c:*)",
-      "Bash(dotnet build:*)"
+      "Bash(dotnet build:*)",
+      "Bash(ls:*)"
     ],
     "additionalDirectories": [
       "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\RimWT\\00_项目管理"

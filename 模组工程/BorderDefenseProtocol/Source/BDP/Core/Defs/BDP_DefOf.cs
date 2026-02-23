@@ -20,6 +20,10 @@ namespace BDP.Core
         // ── GeneDef ──
         public static GeneDef BDP_Gene_TrionGland;
 
+        // ── JobDef（芯片攻击） ──
+        public static JobDef BDP_ChipRangedAttack;
+        public static JobDef BDP_ChipMeleeAttack;
+
         static BDP_DefOf()
         {
             DefOfHelper.EnsureInitializedInCtor(typeof(BDP_DefOf));

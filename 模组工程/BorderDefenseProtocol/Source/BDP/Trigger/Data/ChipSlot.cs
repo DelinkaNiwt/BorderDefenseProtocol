@@ -5,8 +5,11 @@ namespace BDP.Trigger
     /// <summary>
     /// 槽位侧别枚举。
     /// v2.0变更（T23）：Main/Sub改为Left/Right，为战斗体部位系统做准备。
+    /// v2.1变更（T29）：新增Special，用于内置系统芯片（全部同时激活/关闭）。
+    ///   · Special：运行时槽位侧别，不参与左右切换状态机
+    /// v3.0变更：Left/Right → LeftHand/RightHand，规范化三侧槽位命名
     /// </summary>
-    public enum SlotSide { Left, Right, Either }
+    public enum SlotSide { LeftHand, RightHand, Special }
 
     /// <summary>
     /// 单个芯片槽位的数据容器（非ThingComp）。

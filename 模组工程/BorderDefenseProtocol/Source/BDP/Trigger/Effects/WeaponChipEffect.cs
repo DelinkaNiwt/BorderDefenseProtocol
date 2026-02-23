@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using RimWorld;
 using Verse;
 
@@ -11,9 +13,7 @@ namespace BDP.Trigger
     ///   - Deactivate改为调用ClearSideVerbs
     ///   - 侧别通过CompTriggerBody.ActivatingSide临时上下文获取
     ///
-    /// 关键设计（T13）：Activate/Deactivate必须双重重建VerbTracker：
-    ///   1. triggerBody的CompTriggerBody.VerbTracker（决定"有哪些Verb"）
-    ///   2. pawn.verbTracker（决定"Pawn实际能用哪些Verb"）
+    /// v5.0变更：RebuildVerbs搬迁至CompTriggerBody，本类只负责设置/清除Verb数据。
     /// </summary>
     public class WeaponChipEffect : IChipEffect
     {
@@ -23,14 +23,22 @@ namespace BDP.Trigger
             if (triggerComp == null) return;
 
             // 通过ActivatingSide获取当前操作的侧别
-            var side = triggerComp.ActivatingSide ?? SlotSide.Left;
+            var side = triggerComp.ActivatingSide ?? SlotSide.LeftHand;
 
-            // 此处myVerbProperties/myTools由具体武器芯片的DefModExtension配置提供
-            // 基类实现为stub——具体武器芯片子类应override此方法提供实际数据
-            // TODO: 从芯片ThingDef读取Verb/Tool配置
-            triggerComp.SetSideVerbs(side, null, null);
+            // 从ActivatingSlot读取WeaponChipConfig（T36：数据存在DefModExtension中）
+            var cfg = GetConfig(triggerComp);
 
-            RebuildVerbs(pawn, triggerBody);
+            // B2修复：近战芯片只有tools没有verbProperties时，从tools合成melee VerbProperties标记。
+            // 原因：ComposeVerbs需要VerbProperties来识别此侧为近战，触发ComposeDualMelee路径。
+            // 若verbProperties为null，ComposeVerbs回退到触发体默认Verbs，DualMelee永远不会被创建。
+            var verbs = cfg?.verbProperties;
+            if (verbs == null && cfg != null && cfg.tools != null && cfg.tools.Count > 0)
+                verbs = SynthesizeMeleeVerbProps(cfg);
+
+            triggerComp.SetSideVerbs(side, verbs, cfg?.tools);
+
+            // v5.0：RebuildVerbs已搬迁至CompTriggerBody
+            triggerComp.RebuildVerbs(pawn);
         }
 
         public void Deactivate(Pawn pawn, Thing triggerBody)
@@ -38,10 +46,11 @@ namespace BDP.Trigger
             var triggerComp = triggerBody.TryGetComp<CompTriggerBody>();
             if (triggerComp == null) return;
 
-            var side = triggerComp.ActivatingSide ?? SlotSide.Left;
+            var side = triggerComp.ActivatingSide ?? SlotSide.LeftHand;
             triggerComp.ClearSideVerbs(side);
 
-            RebuildVerbs(pawn, triggerBody);
+            // v5.0：RebuildVerbs已搬迁至CompTriggerBody
+            triggerComp.RebuildVerbs(pawn);
         }
 
         public void Tick(Pawn pawn, Thing triggerBody) { }
@@ -49,13 +58,68 @@ namespace BDP.Trigger
         public bool CanActivate(Pawn pawn, Thing triggerBody) => true;
 
         /// <summary>
-        /// 双重重建VerbTracker（T13核心修复）。
-        /// 先重建武器的VerbTracker，再重建Pawn的verbTracker。
+        /// B2修复：从WeaponChipConfig合成最小化的melee VerbProperties标记。
+        /// 目的：让ComposeVerbs识别此侧为近战（IsMeleeAttack=true需要meleeDamageDef非null），
+        /// 触发ComposeDualMelee路径，创建Verb_BDPMelee。
+        /// DamageDef通过Tool.capacities → ManeuverDef.verb.meleeDamageDef查找。
+        /// v6.0变更：接收完整WeaponChipConfig，设置burstShotCount和ticksBetweenBurstShots。
         /// </summary>
-        protected static void RebuildVerbs(Pawn pawn, Thing triggerBody)
+        private static List<VerbProperties> SynthesizeMeleeVerbProps(WeaponChipConfig cfg)
         {
-            triggerBody.TryGetComp<CompTriggerBody>()?.VerbTracker?.InitVerbsFromZero();
-            pawn?.verbTracker?.InitVerbsFromZero();
+            var result = new List<VerbProperties>();
+            var tool = cfg.tools[0];
+
+            // 从Tool的capacities查找对应的DamageDef
+            DamageDef damageDef = null;
+            if (tool.capacities != null && tool.capacities.Count > 0)
+            {
+                var capacity = tool.capacities[0];
+                // ManeuverDef.requiredCapacity匹配ToolCapacityDef → ManeuverDef.verb.meleeDamageDef
+                var maneuver = DefDatabase<ManeuverDef>.AllDefs
+                    .FirstOrDefault(m => m.requiredCapacity == capacity);
+                damageDef = maneuver?.verb?.meleeDamageDef;
+            }
+            damageDef = damageDef ?? DamageDefOf.Blunt; // 兜底
+
+            // 必须用Verb_BDPMelee而非Verb_MeleeAttackDamage！
+            // 原因：标准Verb_MeleeAttackDamage.DamageInfosToApply用EquipmentSource.def（触发体）作为weapon，
+            // 而Verb_BDPMelee.ApplyMeleeDamageToTarget用currentChipDef（芯片）作为weapon。
+            // 若用标准类，hediff永远显示"触发体"。
+            result.Add(new VerbProperties
+            {
+                verbClass = typeof(Verb_BDPMelee),
+                meleeDamageDef = damageDef,
+                meleeDamageBaseAmount = (int)tool.power,
+                defaultCooldownTime = tool.cooldownTime,
+                // v6.0：从WeaponChipConfig读取burst参数，供DualVerbCompositor和引擎burst机制使用
+                burstShotCount = cfg.meleeBurstCount,
+                ticksBetweenBurstShots = cfg.meleeBurstInterval,
+            });
+            return result;
+        }
+
+        /// <summary>
+        /// 从ActivatingSlot读取WeaponChipConfig，回退到遍历AllActiveSlots。
+        /// 原因：ActivatingSlot在DoActivate/DeactivateSlot中设置，
+        /// 读档恢复时也会同步设置，确保Effect能正确读取当前操作槽位的配置。
+        /// </summary>
+        private static WeaponChipConfig GetConfig(CompTriggerBody triggerComp)
+        {
+            // 优先从ActivatingSlot读取（激活/关闭上下文）
+            var slot = triggerComp.ActivatingSlot;
+            if (slot?.loadedChip != null)
+            {
+                var cfg = slot.loadedChip.def.GetModExtension<WeaponChipConfig>();
+                if (cfg != null) return cfg;
+            }
+
+            // 回退：遍历所有激活槽位（兼容读档恢复等边界情况）
+            foreach (var activeSlot in triggerComp.AllActiveSlots())
+            {
+                var cfg = activeSlot.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
+                if (cfg != null) return cfg;
+            }
+            return null;
         }
     }
 }
