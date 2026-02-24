@@ -370,5 +370,18 @@ namespace BDP.Trigger
         /// 仅supportsVolley=true时有效。
         /// </summary>
         public float volleySpreadRadius = 0f;
+
+        /// <summary>是否支持变化弹（引导飞行模式）。</summary>
+        public bool supportsGuided = false;
+
+        /// <summary>最大锚点数（不含最终目标）。仅supportsGuided=true时有效。</summary>
+        public int maxAnchors = 3;
+
+        /// <summary>
+        /// 锚点散布基础半径（格）。每个锚点按递增系数偏移：
+        /// actualAnchor[i] = anchor[i] + Random.insideUnitCircle * anchorSpread * (i / totalAnchors)
+        /// 第一段偏移最小，最后一段偏移最大。齐射时每颗子弹独立计算。
+        /// </summary>
+        public float anchorSpread = 0.3f;
     }
 }

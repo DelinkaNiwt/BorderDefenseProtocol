@@ -111,6 +111,7 @@ namespace BDP.Trigger
                         if (!canHitNonTargetPawnsNow)
                             flags &= ~ProjectileHitFlags.NonTargetPawns;
                         proj.Launch(manningPawn, drawPos, forcedMissTarget, currentTarget, flags, preventFriendlyFire, equipmentSource);
+                        OnProjectileLaunched(proj);
                         IncrementShotsFired();
                         return true;
                     }
@@ -131,6 +132,7 @@ namespace BDP.Trigger
                 if (Rand.Chance(0.5f) && canHitNonTargetPawnsNow)
                     flags2 |= ProjectileHitFlags.NonTargetPawns;
                 proj.Launch(manningPawn, drawPos, resultingLine.Dest, currentTarget, flags2, preventFriendlyFire, equipmentSource, targetCoverDef);
+                OnProjectileLaunched(proj);
                 IncrementShotsFired();
                 return true;
             }
@@ -142,6 +144,7 @@ namespace BDP.Trigger
                 if (canHitNonTargetPawnsNow)
                     flags3 |= ProjectileHitFlags.NonTargetPawns;
                 proj.Launch(manningPawn, drawPos, coverThing, currentTarget, flags3, preventFriendlyFire, equipmentSource, targetCoverDef);
+                OnProjectileLaunched(proj);
                 IncrementShotsFired();
                 return true;
             }
@@ -158,9 +161,16 @@ namespace BDP.Trigger
             else
                 proj.Launch(manningPawn, drawPos, resultingLine.Dest, currentTarget, flags4, preventFriendlyFire, equipmentSource, targetCoverDef);
 
+            OnProjectileLaunched(proj);
             IncrementShotsFired();
             return true;
         }
+
+        /// <summary>
+        /// 弹道发射后回调（v7.0变化弹）。子类可重写此方法对刚发射的弹道进行后处理，
+        /// 例如附加 GuidedFlightController 实现引导飞行。
+        /// </summary>
+        protected virtual void OnProjectileLaunched(Projectile proj) { }
 
         /// <summary>
         /// 重写OrderForceTarget：使用BDP_ChipRangedAttack替代默认的AttackStatic。
