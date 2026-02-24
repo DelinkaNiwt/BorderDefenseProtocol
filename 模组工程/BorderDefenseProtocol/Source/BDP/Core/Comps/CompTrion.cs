@@ -56,6 +56,12 @@ namespace BDP.Core
         /// <summary>可用量 = 当前值 - 占用量。战斗中所有消耗从此扣减。</summary>
         public float Available => cur - allocated;
 
+        /// <summary>
+        /// 可用值耗尽事件（Available从>0降至≤0时触发）。
+        /// 不序列化——由消费者在Notify_Equipped时注册，Notify_Unequipped时注销。
+        /// </summary>
+        public System.Action OnAvailableDepleted;
+
         /// <summary>当前百分比。供Gizmo_TrionBar显示和阈值检查使用。</summary>
         public float Percent => max > 0f ? cur / max : 0f;
 
@@ -109,6 +115,7 @@ namespace BDP.Core
             if (amount <= 0f) return false;
             if (Available < amount) return false;
             cur -= amount;
+            CheckAvailableDepleted();
             return true;
         }
 
@@ -163,6 +170,16 @@ namespace BDP.Core
         }
 
         /// <summary>
+        /// 检查Available是否已耗尽（≤0），若是则触发OnAvailableDepleted事件。
+        /// 在Consume()、CompTick()聚合消耗、RefreshMax()后调用。
+        /// </summary>
+        private void CheckAvailableDepleted()
+        {
+            if (Available <= 0f)
+                OnAvailableDepleted?.Invoke();
+        }
+
+        /// <summary>
         /// 从Stat系统重新读取max值。
         /// Pawn从Stat聚合读取，非Pawn用XML配置的baseMax。
         /// max缩小时cur和allocated跟着钳位，保持不变量。
@@ -182,6 +199,7 @@ namespace BDP.Core
             max = Mathf.Max(0f, newMax);
             cur = Mathf.Clamp(cur, 0f, max);           // max缩小时cur跟着缩
             allocated = Mathf.Min(allocated, cur);       // 保持不变量②
+            CheckAvailableDepleted();
         }
 
         // ═══════════════════════════════════════════

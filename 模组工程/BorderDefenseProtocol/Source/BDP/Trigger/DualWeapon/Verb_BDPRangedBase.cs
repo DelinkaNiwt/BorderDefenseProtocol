@@ -25,6 +25,12 @@ namespace BDP.Trigger
     public abstract class Verb_BDPRangedBase : Verb_Shoot
     {
         /// <summary>
+        /// 齐射视觉偏移量（v6.1）。齐射Verb在每发循环前设置随机值，射完重置为零。
+        /// 仅影响弹道视觉起点，不影响命中判定（LOS/cover用caster.Position）。
+        /// </summary>
+        protected Vector3 shotOriginOffset;
+
+        /// <summary>
         /// 复制Verb_LaunchProjectile.TryCastShot() + Verb_Shoot.TryCastShot()逻辑，
         /// 将equipmentSource替换为chipEquipment参数。
         /// chipEquipment为null时回退到base.TryCastShot()（原版逻辑）。
@@ -68,7 +74,7 @@ namespace BDP.Trigger
                 equipmentSource = caster;
             }
 
-            Vector3 drawPos = caster.DrawPos;
+            Vector3 drawPos = caster.DrawPos + shotOriginOffset;
             Projectile proj = (Projectile)GenSpawn.Spawn(projectileDef, resultingLine.Source, caster.Map);
 
             // CompUniqueWeapon：damageDefOverride + extraDamages（芯片通常无此组件）

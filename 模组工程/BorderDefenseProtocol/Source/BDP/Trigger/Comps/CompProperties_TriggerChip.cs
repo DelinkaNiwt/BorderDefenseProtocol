@@ -58,8 +58,9 @@ namespace BDP.Trigger
         public List<string> exclusionTags;
 
         /// <summary>
-        /// 关闭冷却（ticks），默认0（瞬间关闭）。
-        /// 关闭后到完全失效的延迟，预留扩展。
+        /// 关闭后摇时长（ticks），默认0（瞬间关闭）。
+        /// 切换芯片时，旧芯片在后摇期间仍保持isActive=true，
+        /// 后摇到期后才执行Deactivate，然后进入新芯片的前摇阶段。
         /// </summary>
         public int deactivationDelay = 0;
 

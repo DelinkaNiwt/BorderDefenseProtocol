@@ -102,9 +102,10 @@ namespace BDP.Trigger
 
         private void DrawSlotRow(Rect rect, ChipSlot slot, SlotSide side, bool editable)
         {
-            bool switching = triggerBody.IsSwitching;
-            // 特殊槽只读：不可点击
-            bool canClick = editable && slot.loadedChip != null && (!switching || slot.isActive);
+            // v6.0修复：按侧独立检查切换状态（旧代码用IsSwitching检查全局，导致一侧切换时另一侧也被禁用）
+            bool switching = triggerBody.IsSideSwitching(side);
+            // 切换/后摇中该侧所有槽位不可交互
+            bool canClick = editable && slot.loadedChip != null && !switching;
 
             // v3.1：四态行颜色判定
             //   激活 → ActiveRowColor/SpecialRowColor

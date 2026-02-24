@@ -20,6 +20,9 @@ namespace BDP.Trigger
         // v3.1：四态视觉——注册未激活（蓝色边框）、挂载未注册（暗黄边框）
         private static readonly Color RegisteredBorderColor = new Color(0.3f, 0.5f, 0.8f, 1f);
         private static readonly Color LoadedBorderColor = new Color(0.6f, 0.55f, 0.3f, 0.8f);
+        // v6.0：切换阶段进度条颜色——后摇（橙红）、前摇（青蓝）
+        private static readonly Texture2D WindingDownBarTex = SolidColorMaterials.NewSolidColorTexture(new Color(0.9f, 0.5f, 0.2f, 1f));
+        private static readonly Texture2D WarmingUpBarTex = SolidColorMaterials.NewSolidColorTexture(new Color(0.3f, 0.7f, 0.9f, 1f));
 
         public Gizmo_TriggerBodyStatus(CompTriggerBody triggerBody)
         {
@@ -35,17 +38,27 @@ namespace BDP.Trigger
             Widgets.DrawWindowBackground(rect);
 
             // 左手槽行
-            DrawSideRow(new Rect(rect.x + 4f, rect.y + 6f, rect.width - 8f, 28f),
+            DrawSideRow(new Rect(rect.x + 4f, rect.y + 4f, rect.width - 8f, 24f),
                 SlotSide.LeftHand, "左手");
-            // 右手槽行
-            DrawSideRow(new Rect(rect.x + 4f, rect.y + 38f, rect.width - 8f, 28f),
-                SlotSide.RightHand, "右手");
-
-            // 切换进度条（仅切换中时显示）
-            if (triggerBody.IsSwitching)
+            // 左手切换进度条（该侧切换中时显示，颜色区分后摇/前摇）
+            if (triggerBody.IsSideSwitching(SlotSide.LeftHand))
             {
-                var barRect = new Rect(rect.x + 4f, rect.y + 68f, rect.width - 8f, 4f);
-                Widgets.FillableBar(barRect, triggerBody.SwitchProgress, BaseContent.WhiteTex);
+                var barRect = new Rect(rect.x + 4f, rect.y + 30f, rect.width - 8f, 3f);
+                var barTex = triggerBody.GetSideSwitchPhase(SlotSide.LeftHand) == SwitchPhase.WindingDown
+                    ? WindingDownBarTex : WarmingUpBarTex;
+                Widgets.FillableBar(barRect, triggerBody.GetSideSwitchProgress(SlotSide.LeftHand), barTex);
+            }
+
+            // 右手槽行
+            DrawSideRow(new Rect(rect.x + 4f, rect.y + 38f, rect.width - 8f, 24f),
+                SlotSide.RightHand, "右手");
+            // 右手切换进度条（该侧切换中时显示，颜色区分后摇/前摇）
+            if (triggerBody.IsSideSwitching(SlotSide.RightHand))
+            {
+                var barRect = new Rect(rect.x + 4f, rect.y + 64f, rect.width - 8f, 3f);
+                var barTex = triggerBody.GetSideSwitchPhase(SlotSide.RightHand) == SwitchPhase.WindingDown
+                    ? WindingDownBarTex : WarmingUpBarTex;
+                Widgets.FillableBar(barRect, triggerBody.GetSideSwitchProgress(SlotSide.RightHand), barTex);
             }
 
             TooltipHandler.TipRegion(rect, "点击查看/操作所有槽位");

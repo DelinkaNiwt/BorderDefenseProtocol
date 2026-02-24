@@ -24,6 +24,8 @@
         <chipEffectClass>BDP.Trigger.WeaponChipEffect</chipEffectClass>
         <activationCost>5</activationCost>
         <allocationCost>5</allocationCost>
+        <activationWarmup>48</activationWarmup>
+        <deactivationDelay>12</deactivationDelay>
       </li>
     </comps>
     <modExtensions>
@@ -66,6 +68,8 @@
         <chipEffectClass>BDP.Trigger.WeaponChipEffect</chipEffectClass>
         <activationCost>3</activationCost>
         <allocationCost>8</allocationCost>
+        <activationWarmup>48</activationWarmup>
+        <deactivationDelay>12</deactivationDelay>
       </li>
     </comps>
     <modExtensions>
@@ -108,10 +112,14 @@
         <chipEffectClass>BDP.Trigger.WeaponChipEffect</chipEffectClass>
         <activationCost>3</activationCost>
         <allocationCost>10</allocationCost>
+        <activationWarmup>48</activationWarmup>
+        <deactivationDelay>12</deactivationDelay>
       </li>
     </comps>
     <modExtensions>
       <li Class="BDP.Trigger.WeaponChipConfig">
+        <supportsVolley>true</supportsVolley>
+        <volleySpreadRadius>0.3</volleySpreadRadius>
         <trionCostPerShot>1</trionCostPerShot>
         <!-- T36：远程Verb配置存放在DefModExtension中 -->
         <verbProperties>
@@ -132,13 +140,13 @@
   </ThingDef>
 
   <!-- ══════════════════════════════════════════════════════
-       #4 BDP_Chip_Test_RangedB — 远程武器芯片B（狙击弹单发+minOutputPower）
-       验证：minOutputPower门槛 + 高allocationCost + 单发高伤
+       #4 BDP_Chip_Test_RangedB — 远程武器芯片B（狙击弹10连射+minOutputPower）
+       验证：minOutputPower门槛 + 高allocationCost + 齐射 + burst连射
        ══════════════════════════════════════════════════════ -->
   <ThingDef>
     <defName>BDP_Chip_Test_RangedB</defName>
     <label>测试远程芯片B</label>
-    <description>狙击弹单发远程芯片。allocationCost=15, minOutputPower=5, trionCostPerShot=1。</description>
+    <description>狙击弹10连射远程芯片。allocationCost=15, minOutputPower=5, trionCostPerShot=1。支持齐射。</description>
     <category>Item</category>
     <thingClass>ThingWithComps</thingClass>
     <graphicData>
@@ -154,10 +162,14 @@
         <chipEffectClass>BDP.Trigger.WeaponChipEffect</chipEffectClass>
         <allocationCost>15</allocationCost>
         <minOutputPower>5</minOutputPower>
+        <activationWarmup>48</activationWarmup>
+        <deactivationDelay>12</deactivationDelay>
       </li>
     </comps>
     <modExtensions>
       <li Class="BDP.Trigger.WeaponChipConfig">
+        <supportsVolley>true</supportsVolley>
+        <volleySpreadRadius>0.3</volleySpreadRadius>
         <trionCostPerShot>1</trionCostPerShot>
         <verbProperties>
           <li>
@@ -166,7 +178,8 @@
             <defaultProjectile>BDP_Bullet_TestSniper</defaultProjectile>
             <warmupTime>2.0</warmupTime>
             <range>40</range>
-            <burstShotCount>1</burstShotCount>
+            <burstShotCount>10</burstShotCount>
+            <ticksBetweenBurstShots>8</ticksBetweenBurstShots>
             <soundCast>Shot_SniperRifle</soundCast>
             <muzzleFlashScale>12</muzzleFlashScale>
           </li>
@@ -199,6 +212,8 @@
         <activationCost>10</activationCost>
         <allocationCost>20</allocationCost>
         <isDualHand>true</isDualHand>
+        <activationWarmup>48</activationWarmup>
+        <deactivationDelay>12</deactivationDelay>
       </li>
     </comps>
     <modExtensions>
@@ -232,6 +247,8 @@
         <activationCost>3</activationCost>
         <allocationCost>12</allocationCost>
         <drainPerDay>10</drainPerDay>
+        <activationWarmup>48</activationWarmup>
+        <deactivationDelay>12</deactivationDelay>
         <exclusionTags>
           <li>stealth</li>
         </exclusionTags>
@@ -267,6 +284,8 @@
         <chipEffectClass>BDP.Trigger.UtilityChipEffect</chipEffectClass>
         <activationCost>2</activationCost>
         <allocationCost>5</allocationCost>
+        <activationWarmup>48</activationWarmup>
+        <deactivationDelay>12</deactivationDelay>
       </li>
     </comps>
     <modExtensions>

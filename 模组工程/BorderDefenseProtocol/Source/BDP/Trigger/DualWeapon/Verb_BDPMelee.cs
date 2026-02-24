@@ -356,5 +356,19 @@ namespace BDP.Trigger
 
         /// <summary>每发射击Trion消耗（0=无消耗）。</summary>
         public float trionCostPerShot = 0f;
+
+        /// <summary>
+        /// 是否支持齐射模式（右键触发）。
+        /// true时，右键Gizmo进入齐射瞄准：所有子弹在同一tick内一齐发射。
+        /// 仅对远程芯片有效。
+        /// </summary>
+        public bool supportsVolley = false;
+
+        /// <summary>
+        /// 齐射时每发子弹射出起点的随机偏移半径（格）。
+        /// 0=无偏移（所有子弹从同一点射出），0.3=轻微散布，0.6=明显散布。
+        /// 仅supportsVolley=true时有效。
+        /// </summary>
+        public float volleySpreadRadius = 0f;
     }
 }

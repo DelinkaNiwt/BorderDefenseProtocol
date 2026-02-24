@@ -48,7 +48,7 @@
         <rightHandSlotCount>4</rightHandSlotCount>
         <hasRightHand>true</hasRightHand>
         <specialSlotCount>2</specialSlotCount>
-        <switchCooldownTicks>30</switchCooldownTicks>
+        <switchCooldownTicks>0</switchCooldownTicks>
         <allowChipManagement>true</allowChipManagement>
         <autoActivateOnEquip>false</autoActivateOnEquip>
       </li>
