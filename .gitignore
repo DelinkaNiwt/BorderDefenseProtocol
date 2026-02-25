@@ -1,0 +1,14 @@
+# Visual Studio / C# 编译产物
+Source/**/bin/
+Source/**/obj/
+*.user
+*.suo
+*.cache
+
+# RimWorld 模组编译产物（保留最终 DLL）
+# Source/**/obj/
+
+# 临时文件
+*.tmp
+*.log
+.vs/

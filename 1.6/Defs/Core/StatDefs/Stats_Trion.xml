@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Trion能量系统的三个自定义Stat。
+  所有Stat通过RimWorld原生StatWorker计算，无需自定义StatWorker。
+  Gene/Hediff的statOffsets由引擎自动聚合。
+-->
+<Defs>
+
+  <!-- Trion容量：Pawn的最大Trion储存量 -->
+  <StatDef>
+    <defName>BDP_TrionCapacity</defName>
+    <label>Trion容量</label>
+    <description>Trion能量的最大储存量。由Trion腺体天赋和触发角植入决定。</description>
+    <category>BasicsPawn</category>
+    <defaultBaseValue>0</defaultBaseValue>
+    <minValue>0</minValue>
+    <toStringStyle>FloatOne</toStringStyle>
+    <showOnAnimals>false</showOnAnimals>
+    <showOnMechanoids>false</showOnMechanoids>
+    <!-- 只有当Stat有非默认值时才显示（即拥有Trion腺体基因时） -->
+    <showIfUndefined>false</showIfUndefined>
+  </StatDef>
+
+  <!-- Trion输出功率：行为阈值，某些高级能力需要达标才能施展 -->
+  <StatDef>
+    <defName>BDP_TrionOutputPower</defName>
+    <label>Trion输出功率</label>
+    <description>Trion能量的输出功率。影响高级能力的施展条件。</description>
+    <category>BasicsPawn</category>
+    <defaultBaseValue>0</defaultBaseValue>
+    <minValue>0</minValue>
+    <toStringStyle>FloatOne</toStringStyle>
+    <showOnAnimals>false</showOnAnimals>
+    <showOnMechanoids>false</showOnMechanoids>
+    <!-- 只有当Stat有非默认值时才显示（即拥有Trion腺体基因时） -->
+    <showIfUndefined>false</showIfUndefined>
+  </StatDef>
+
+  <!-- Trion恢复速率：每天恢复的Trion绝对值 -->
+  <StatDef>
+    <defName>BDP_TrionRecoveryRate</defName>
+    <label>Trion恢复速率</label>
+    <description>每天自然恢复的Trion量。受天赋和身体状态影响。</description>
+    <category>BasicsPawn</category>
+    <defaultBaseValue>0</defaultBaseValue>
+    <minValue>0</minValue>
+    <toStringStyle>FloatOne</toStringStyle>
+    <showOnAnimals>false</showOnAnimals>
+    <showOnMechanoids>false</showOnMechanoids>
+    <!-- 只有当Stat有非默认值时才显示（即拥有Trion腺体基因时） -->
+    <showIfUndefined>false</showIfUndefined>
+  </StatDef>
+
+</Defs>

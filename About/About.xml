@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>边境防卫协议</name>
+  <author>Niwt</author>
+  <packageId>Niwt.BDP</packageId>
+  <supportedVersions>
+    <li>1.6</li>
+  </supportedVersions>
+  <description>将《境界触发者》的核心机制融入RimWorld。引入Trion能量体系、可配置的触发器装备系统、战斗体状态切换机制，以及与近界民势力的对抗。</description>
+  <!-- modDependencies: Biotech -->
+  <modDependencies>
+  <li>
+    <packageId>Ludeon.RimWorld.Biotech</packageId>
+    <displayName>Biotech</displayName>
+  </li>
+ </modDependencies>
+</ModMetaData>

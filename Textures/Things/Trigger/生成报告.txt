@@ -1,0 +1,16 @@
+============================================================
+RimWorld 贴图生成报告
+============================================================
+
+[INFO] 开始批量生成 2 个贴图配置...
+
+[1/2] 处理配置: BDP_TriggerBody_Test
+[OK] 生成成功: BDP_TriggerBody_Test.png
+
+[2/2] 处理配置: BDP_Chip_Test
+[OK] 生成成功: BDP_Chip_Test.png
+
+============================================================
+总生成文件数: 2
+输出目录: C:\NiwtDatas\Projects\RimworldModStudio\模组工程\BorderDefenseProtocol\Textures\Things\Trigger
+============================================================

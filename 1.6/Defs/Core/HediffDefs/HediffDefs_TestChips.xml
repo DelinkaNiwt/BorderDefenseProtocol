@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ══════════════════════════════════════════════════════
+       BDP_Hediff_TestShield — 测试用护盾标记Hediff
+       标记型，isBad=false，无实际效果（仅标记护盾激活状态）
+       ══════════════════════════════════════════════════════ -->
+  <HediffDef>
+    <defName>BDP_Hediff_TestShield</defName>
+    <label>测试护盾</label>
+    <description>触发体护盾芯片激活时的标记效果。</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <defaultLabelColor>(0.4, 0.8, 1.0)</defaultLabelColor>
+    <stages>
+      <li>
+        <label>激活</label>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- ══════════════════════════════════════════════════════
+       BDP_Hediff_TestStealth — 测试用隐身Hediff
+       statOffsets: MoveSpeed -0.5（隐身时移速降低）
+       ══════════════════════════════════════════════════════ -->
+  <HediffDef>
+    <defName>BDP_Hediff_TestStealth</defName>
+    <label>测试隐身</label>
+    <description>触发体隐身芯片激活时的效果。移动速度降低。</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <defaultLabelColor>(0.6, 0.4, 0.8)</defaultLabelColor>
+    <stages>
+      <li>
+        <label>激活</label>
+        <statOffsets>
+          <MoveSpeed>-0.5</MoveSpeed>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+</Defs>

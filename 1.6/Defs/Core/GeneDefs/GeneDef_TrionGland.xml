@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Trion腺体基因定义。
+  通过statOffsets向Stat系统贡献基础属性值。
+  数值为示意值，待平衡性测试阶段调整。
+-->
+<Defs>
+
+  <GeneDef>
+    <defName>BDP_Gene_TrionGland</defName>
+    <geneClass>BDP.Core.Gene_TrionGland</geneClass>
+    <label>Trion腺体</label>
+    <description>此人拥有Trion腺体，能够产生和储存Trion能量。Trion是战斗体和触发器的能量来源。</description>
+    <iconPath>UI/Icons/Genes/Gene_TrionGland</iconPath>
+    <displayCategory>Miscellaneous</displayCategory>
+    <displayOrderInCategory>100</displayOrderInCategory>
+    <biostatCpx>2</biostatCpx>
+    <biostatMet>-1</biostatMet>
+    <!-- Stat贡献：天赋对三个Trion属性的基础值 -->
+    <statOffsets>
+      <BDP_TrionCapacity>200</BDP_TrionCapacity>
+      <BDP_TrionOutputPower>5</BDP_TrionOutputPower>
+      <BDP_TrionRecoveryRate>50</BDP_TrionRecoveryRate>
+    </statOffsets>
+  </GeneDef>
+
+</Defs>
