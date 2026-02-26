@@ -24,7 +24,7 @@ namespace BDP.Trigger
             var pawn = CasterPawn;
             if (pawn == null) return false;
 
-            var triggerComp = pawn.equipment?.Primary?.TryGetComp<CompTriggerBody>();
+            var triggerComp = GetTriggerComp();
             if (triggerComp == null) return false;
 
             // 通过侧别label定位芯片
@@ -64,27 +64,6 @@ namespace BDP.Trigger
                 trion?.Consume(totalCost);
 
             return anyHit;
-        }
-
-        /// <summary>通过侧别label定位当前芯片Thing（复用Verb_BDPShoot模式）。</summary>
-        private Thing GetCurrentChipThing(CompTriggerBody triggerComp)
-        {
-            if (triggerComp == null) return null;
-
-            SlotSide? side = DualVerbCompositor.ParseSideLabel(verbProps?.label);
-            if (side.HasValue)
-            {
-                var sideSlot = triggerComp.GetActiveSlot(side.Value);
-                if (sideSlot?.loadedChip != null) return sideSlot.loadedChip;
-            }
-
-            // 回退：遍历所有激活槽位
-            foreach (var activeSlot in triggerComp.AllActiveSlots())
-            {
-                if (activeSlot.loadedChip?.def?.GetModExtension<WeaponChipConfig>() != null)
-                    return activeSlot.loadedChip;
-            }
-            return null;
         }
 
         /// <summary>从WeaponChipConfig读取burstShotCount（实际齐射发射数）。</summary>

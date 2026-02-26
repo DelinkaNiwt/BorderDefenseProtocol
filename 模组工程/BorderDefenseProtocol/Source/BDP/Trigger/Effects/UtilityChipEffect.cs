@@ -28,29 +28,11 @@ namespace BDP.Trigger
         public bool CanActivate(Pawn pawn, Thing triggerBody) => true;
 
         /// <summary>
-        /// 从ActivatingSlot读取UtilityChipConfig，回退到遍历AllActiveSlots。
-        /// 优先ActivatingSlot确保激活/关闭时读取正确槽位的配置。
+        /// 从CompTriggerBody读取UtilityChipConfig（委托给通用GetChipExtension）。
         /// </summary>
         private static UtilityChipConfig GetConfig(Thing triggerBody)
         {
-            var triggerComp = triggerBody.TryGetComp<CompTriggerBody>();
-            if (triggerComp == null) return null;
-
-            // 优先从ActivatingSlot读取
-            var slot = triggerComp.ActivatingSlot;
-            if (slot?.loadedChip != null)
-            {
-                var cfg = slot.loadedChip.def.GetModExtension<UtilityChipConfig>();
-                if (cfg != null) return cfg;
-            }
-
-            // 回退：遍历所有激活槽位（兼容读档恢复）
-            foreach (var activeSlot in triggerComp.AllActiveSlots())
-            {
-                var ext = activeSlot.loadedChip?.def?.GetModExtension<UtilityChipConfig>();
-                if (ext != null) return ext;
-            }
-            return null;
+            return triggerBody.TryGetComp<CompTriggerBody>()?.GetChipExtension<UtilityChipConfig>();
         }
     }
 

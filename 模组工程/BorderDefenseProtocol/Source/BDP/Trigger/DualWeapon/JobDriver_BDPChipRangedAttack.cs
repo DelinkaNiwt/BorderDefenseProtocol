@@ -104,10 +104,17 @@ namespace BDP.Trigger
                     {
                         EndJobWith(JobCondition.Incompletable);
                     }
-                    else if (job.endIfCantShootInMelee
-                        && !pawn.Position.AdjacentTo8WayOrInside(TargetA.Cell))
+                    // 修复：对齐原版AttackStatic逻辑——仅在pawn处于最小射程内（太近）时结束job。
+                    // 旧代码 !AdjacentTo8WayOrInside 在远程战斗中永远为true，导致任何TryStartCastOn
+                    // 失败都会立即结束job（如读档后LOS暂时失败）。
+                    else if (job.endIfCantShootInMelee)
                     {
-                        EndJobWith(JobCondition.Incompletable);
+                        float minRange = verb.verbProps.EffectiveMinRange(TargetA, pawn);
+                        if ((float)pawn.Position.DistanceToSquared(TargetA.Cell) < minRange * minRange
+                            && pawn.Position.AdjacentTo8WayOrInside(TargetA.Cell))
+                        {
+                            EndJobWith(JobCondition.Incompletable);
+                        }
                     }
                 }
             };

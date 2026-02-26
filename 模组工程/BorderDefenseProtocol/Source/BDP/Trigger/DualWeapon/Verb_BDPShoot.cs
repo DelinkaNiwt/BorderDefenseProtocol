@@ -27,7 +27,7 @@ namespace BDP.Trigger
             var pawn = CasterPawn;
             if (pawn == null) return false;
 
-            var triggerComp = pawn.equipment?.Primary?.TryGetComp<CompTriggerBody>();
+            var triggerComp = GetTriggerComp();
             float cost = GetTrionCostPerShot(triggerComp);
 
             // Trion不足时中止射击
@@ -50,33 +50,6 @@ namespace BDP.Trigger
             }
 
             return result;
-        }
-
-        /// <summary>获取当前激活芯片的Thing实例（B3：供TryCastShotCore使用）。</summary>
-        private Thing GetCurrentChipThing(CompTriggerBody triggerComp)
-        {
-            if (triggerComp == null) return null;
-
-            // 优先通过侧别label精确定位芯片（独立Gizmo场景）
-            SlotSide? side = DualVerbCompositor.ParseSideLabel(verbProps?.label);
-            if (side.HasValue)
-            {
-                var sideSlot = triggerComp.GetActiveSlot(side.Value);
-                if (sideSlot?.loadedChip != null) return sideSlot.loadedChip;
-            }
-
-            // 回退：从ActivatingSlot读取（芯片激活上下文）
-            var slot = triggerComp.ActivatingSlot;
-            if (slot?.loadedChip != null) return slot.loadedChip;
-
-            // 最终回退：遍历所有激活槽位找第一个有WeaponChipConfig的
-            foreach (var activeSlot in triggerComp.AllActiveSlots())
-            {
-                if (activeSlot.loadedChip?.def?.GetModExtension<WeaponChipConfig>() != null)
-                    return activeSlot.loadedChip;
-            }
-
-            return null;
         }
 
         /// <summary>

@@ -90,13 +90,13 @@ namespace BDP.Trigger
                 }
             };
 
-            // 高亮绘制：已放置锚点折线 + 射程环
+            // 高亮绘制：已放置锚点折线 + 射程环 + LOS红线反馈
             Action<LocalTargetInfo> highlightAction = target =>
             {
                 // 射程环
                 GenDraw.DrawRadiusRing(caster.Position, weaponRange);
-                // 绘制已放置锚点和折线
-                DrawGuidedOverlay(caster, anchors, target);
+                // 绘制已放置锚点和折线（含LOS检测红线）
+                DrawGuidedOverlay(caster, anchors, target, caster.Map);
             };
 
             // 目标校验：视线 + 射程
@@ -110,11 +110,12 @@ namespace BDP.Trigger
                 return GenSight.LineOfSight(from, target.Cell, caster.Map);
             };
 
-            // GUI绘制：鼠标预览线
+            // GUI绘制：鼠标光标（使用validator结果判断LOS+射程）
             Action<LocalTargetInfo> onGuiAction = target =>
             {
-                // 鼠标光标
-                Texture2D icon = target.IsValid ? TexCommand.Attack : TexCommand.CannotShoot;
+                // 鼠标光标：使用validator结果（包含LOS+射程检查）决定图标
+                bool valid = target.IsValid && validator(target);
+                Texture2D icon = valid ? TexCommand.Attack : TexCommand.CannotShoot;
                 GenUI.DrawMouseAttachment(icon);
 
                 // 提示文字：已放置锚点数 / 最大数
@@ -135,22 +136,26 @@ namespace BDP.Trigger
         /// <summary>
         /// 绘制锚点折线和标记。
         /// 从施法者位置开始，经过所有锚点，到鼠标位置。
+        /// 最后一段线检查LOS，不通过时显示红色。
         /// </summary>
-        public static void DrawGuidedOverlay(Pawn caster, List<IntVec3> anchors, LocalTargetInfo mouseTarget)
+        public static void DrawGuidedOverlay(Pawn caster, List<IntVec3> anchors, LocalTargetInfo mouseTarget, Map map)
         {
             if (anchors == null || anchors.Count == 0)
             {
                 // 无锚点：从施法者到鼠标画预览线
                 if (mouseTarget.IsValid)
                 {
-                    GenDraw.DrawLineBetween(
-                        caster.DrawPos,
-                        mouseTarget.CenterVector3);
+                    // 检查LOS：施法者到鼠标
+                    bool hasLOS = GenSight.LineOfSight(caster.Position, mouseTarget.Cell, map);
+                    if (hasLOS)
+                        GenDraw.DrawLineBetween(caster.DrawPos, mouseTarget.CenterVector3);
+                    else
+                        GenDraw.DrawLineBetween(caster.DrawPos, mouseTarget.CenterVector3, SimpleColor.Red);
                 }
                 return;
             }
 
-            // 施法者 → 第一个锚点
+            // 施法者 → 各锚点（已确认LOS的段，白色）
             Vector3 prev = caster.DrawPos;
             for (int i = 0; i < anchors.Count; i++)
             {
@@ -161,10 +166,15 @@ namespace BDP.Trigger
                 prev = current;
             }
 
-            // 最后锚点 → 鼠标位置（预览线）
+            // 最后锚点 → 鼠标位置（预览线，检查LOS决定颜色）
             if (mouseTarget.IsValid)
             {
-                GenDraw.DrawLineBetween(prev, mouseTarget.CenterVector3);
+                IntVec3 from = anchors[anchors.Count - 1];
+                bool hasLOS = GenSight.LineOfSight(from, mouseTarget.Cell, map);
+                if (hasLOS)
+                    GenDraw.DrawLineBetween(prev, mouseTarget.CenterVector3);
+                else
+                    GenDraw.DrawLineBetween(prev, mouseTarget.CenterVector3, SimpleColor.Red);
             }
         }
     }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UnityEngine;
 using Verse;
 
@@ -309,31 +310,19 @@ namespace BDP.Trigger
             return result;
         }
 
-        /// <summary>
-        /// 浅拷贝VerbProperties（避免修改原始数据）。
-        /// 原因：VerbProperties来自芯片的WeaponChipConfig（DefModExtension），
-        /// 是共享的静态数据，不能直接修改isPrimary/hasStandardCommand。
-        /// </summary>
-        private static VerbProperties CopyVerbProps(VerbProperties src)
+        // ── MemberwiseClone缓存（Fix-7：替代手动字段拷贝，不会遗漏新增字段） ──
+        private static readonly System.Func<VerbProperties, VerbProperties> CloneVerbProps;
+
+        static DualVerbCompositor()
         {
-            return new VerbProperties
-            {
-                verbClass = src.verbClass,
-                isPrimary = src.isPrimary,
-                hasStandardCommand = src.hasStandardCommand,
-                defaultProjectile = src.defaultProjectile,
-                soundCast = src.soundCast,
-                muzzleFlashScale = src.muzzleFlashScale,
-                ticksBetweenBurstShots = src.ticksBetweenBurstShots,
-                range = src.range,
-                warmupTime = src.warmupTime,
-                defaultCooldownTime = src.defaultCooldownTime,
-                burstShotCount = src.burstShotCount,
-                label = src.label,
-                // B2补充：近战相关字段（ComposeDualMelee需要读取）
-                meleeDamageDef = src.meleeDamageDef,
-                meleeDamageBaseAmount = src.meleeDamageBaseAmount,
-            };
+            var mi = typeof(object).GetMethod("MemberwiseClone", BindingFlags.Instance | BindingFlags.NonPublic);
+            CloneVerbProps = vp => (VerbProperties)mi.Invoke(vp, null);
         }
+
+        /// <summary>
+        /// 浅拷贝VerbProperties（MemberwiseClone，不会遗漏新增字段）。
+        /// VerbProperties的引用类型字段（defaultProjectile, soundCast等）本身是Def引用，共享安全。
+        /// </summary>
+        private static VerbProperties CopyVerbProps(VerbProperties src) => CloneVerbProps(src);
     }
 }

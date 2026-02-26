@@ -11,6 +11,7 @@ namespace BDP.Trigger
     /// v2.0变更（T23）：Main/Sub → Left/Right
     /// v3.0变更：Left/Right → LeftHand/RightHand
     /// </summary>
+    [StaticConstructorOnStartup]
     public class Gizmo_TriggerBodyStatus : Gizmo
     {
         private readonly CompTriggerBody triggerBody;

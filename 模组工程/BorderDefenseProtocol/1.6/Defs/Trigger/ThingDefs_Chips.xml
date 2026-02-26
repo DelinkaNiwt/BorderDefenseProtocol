@@ -170,6 +170,9 @@
       <li Class="BDP.Trigger.WeaponChipConfig">
         <supportsVolley>true</supportsVolley>
         <volleySpreadRadius>0.3</volleySpreadRadius>
+        <supportsGuided>true</supportsGuided>
+        <maxAnchors>3</maxAnchors>
+        <anchorSpread>0.3</anchorSpread>
         <trionCostPerShot>1</trionCostPerShot>
         <verbProperties>
           <li>

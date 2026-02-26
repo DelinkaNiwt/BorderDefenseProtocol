@@ -69,14 +69,11 @@ namespace BDP.Trigger
             var result = new List<VerbProperties>();
             var tool = cfg.tools[0];
 
-            // 从Tool的capacities查找对应的DamageDef
+            // 从Tool的capacities查找对应的DamageDef（使用缓存避免线性搜索）
             DamageDef damageDef = null;
             if (tool.capacities != null && tool.capacities.Count > 0)
             {
-                var capacity = tool.capacities[0];
-                // ManeuverDef.requiredCapacity匹配ToolCapacityDef → ManeuverDef.verb.meleeDamageDef
-                var maneuver = DefDatabase<ManeuverDef>.AllDefs
-                    .FirstOrDefault(m => m.requiredCapacity == capacity);
+                var maneuver = Verb_BDPMelee.GetManeuverForCapacity(tool.capacities[0]);
                 damageDef = maneuver?.verb?.meleeDamageDef;
             }
             damageDef = damageDef ?? DamageDefOf.Blunt; // 兜底
@@ -99,27 +96,11 @@ namespace BDP.Trigger
         }
 
         /// <summary>
-        /// 从ActivatingSlot读取WeaponChipConfig，回退到遍历AllActiveSlots。
-        /// 原因：ActivatingSlot在DoActivate/DeactivateSlot中设置，
-        /// 读档恢复时也会同步设置，确保Effect能正确读取当前操作槽位的配置。
+        /// 从CompTriggerBody读取WeaponChipConfig（委托给通用GetChipExtension）。
         /// </summary>
         private static WeaponChipConfig GetConfig(CompTriggerBody triggerComp)
         {
-            // 优先从ActivatingSlot读取（激活/关闭上下文）
-            var slot = triggerComp.ActivatingSlot;
-            if (slot?.loadedChip != null)
-            {
-                var cfg = slot.loadedChip.def.GetModExtension<WeaponChipConfig>();
-                if (cfg != null) return cfg;
-            }
-
-            // 回退：遍历所有激活槽位（兼容读档恢复等边界情况）
-            foreach (var activeSlot in triggerComp.AllActiveSlots())
-            {
-                var cfg = activeSlot.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
-                if (cfg != null) return cfg;
-            }
-            return null;
+            return triggerComp?.GetChipExtension<WeaponChipConfig>();
         }
     }
 }

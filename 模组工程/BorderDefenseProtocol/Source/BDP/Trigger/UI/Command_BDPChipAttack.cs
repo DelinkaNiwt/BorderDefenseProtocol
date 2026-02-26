@@ -18,6 +18,9 @@ namespace BDP.Trigger
     ///   · volleyVerb非null时，右键进入齐射瞄准（BeginTargeting）
     ///   · volleyVerb为null时，右键走默认行为（无变化）
     ///
+    /// v7.0变更：引导弹verb拦截——左键/右键直接启动多步锚点瞄准，
+    ///   绕过原版targeting流程（原版verb.targetParams不允许地面瞄准）。
+    ///
     /// attackId生成规则（基于芯片defName）：
     ///   独立芯片攻击 → chipDef.defName（如"BDP_ChipArcMoon"）
     ///   双手触发     → "dual:" + Sort(A,B).Join("+")（如"dual:BDP_ChipArcMoon+BDP_ChipScorpion"）
@@ -45,19 +48,51 @@ namespace BDP.Trigger
         }
 
         /// <summary>
-        /// 重写GizmoOnGUIInt：拦截右键，volleyVerb存在时进入齐射瞄准。
-        /// 原理：Command.GizmoOnGUIInt中Event.current.button==1返回OpenedFloatMenu。
-        /// 拦截后调用BeginTargeting(volleyVerb)进入瞄准，返回Clear阻止浮动菜单。
+        /// 重写GizmoOnGUIInt：拦截左键/右键，引导弹verb直接启动多步锚点瞄准。
+        ///
+        /// PMS重构：统一使用Verb_BDPRangedBase.SupportsGuided判断，
+        /// 不再依赖具体Verb子类类型检查。
         /// </summary>
         protected override GizmoResult GizmoOnGUIInt(Rect butRect, GizmoRenderParms parms)
         {
             var result = base.GizmoOnGUIInt(butRect, parms);
 
-            // 拦截右键：volleyVerb存在时直接进入齐射瞄准
+            // 拦截左键：支持引导的verb直接启动多步锚点瞄准
+            if (result.State == GizmoState.Interacted
+                && verb is Verb_BDPRangedBase ranged && ranged.SupportsGuided)
+            {
+                SoundDefOf.Tick_Tiny.PlayOneShotOnCamera();
+                ranged.StartGuidedTargeting();
+                return new GizmoResult(GizmoState.Clear);
+            }
+            // 双手触发verb含变化弹侧时，左键也启动锚点瞄准
+            if (result.State == GizmoState.Interacted
+                && verb is Verb_BDPDualRanged dual && dual.HasGuidedSide)
+            {
+                SoundDefOf.Tick_Tiny.PlayOneShotOnCamera();
+                dual.StartGuidedTargeting();
+                return new GizmoResult(GizmoState.Clear);
+            }
+
+            // 拦截右键：volleyVerb存在时进入齐射瞄准
             if (result.State == GizmoState.OpenedFloatMenu && volleyVerb != null)
             {
                 SoundDefOf.Tick_Tiny.PlayOneShotOnCamera();
-                Find.Targeter.BeginTargeting(volleyVerb);
+                // 引导齐射verb：检查是否支持引导
+                if (volleyVerb is Verb_BDPRangedBase rangedVolley && rangedVolley.SupportsGuided)
+                {
+                    rangedVolley.StartGuidedTargeting();
+                }
+                // 双侧齐射verb含变化弹侧
+                else if (volleyVerb is Verb_BDPDualVolley dualVolley && dualVolley.HasGuidedSide)
+                {
+                    dualVolley.StartGuidedTargeting();
+                }
+                else
+                {
+                    // 普通齐射verb走原版targeting
+                    Find.Targeter.BeginTargeting(volleyVerb);
+                }
                 return new GizmoResult(GizmoState.Clear);
             }
 

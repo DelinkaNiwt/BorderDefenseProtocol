@@ -8,27 +8,102 @@ using Verse.AI;
 namespace BDP.Trigger
 {
     /// <summary>
-    /// BDP远程Verb的共享基类（v4.0 B3远程修复）。
+    /// BDP远程Verb的共享基类（v4.0 B3远程修复，v8.0 PMS重构）。
     /// 提供TryCastShotCore(Thing chipEquipment)方法，复制Verb_LaunchProjectile.TryCastShot()逻辑，
     /// 将equipmentSource替换为芯片Thing，使战斗日志显示芯片名而非触发体名。
     ///
+    /// PMS重构：引导弹逻辑从Verb_BDPGuided/Verb_BDPGuidedVolley上提到基类，
+    /// 通过SupportsGuided属性条件化启用，消除引导弹专用Verb子类。
+    ///
     /// 继承链：Verb → Verb_LaunchProjectile → Verb_Shoot → Verb_BDPRangedBase
     ///   ├── Verb_BDPShoot（单发射击）
-    ///   └── Verb_BDPDualRanged（双侧交替连射）
-    ///
-    /// 原因：Verb.EquipmentSource是非virtual属性，无法override。
-    ///   原版Verb_LaunchProjectile.TryCastShot()中equipmentSource = EquipmentSource（触发体Thing），
-    ///   传入Projectile.Launch()后，Projectile.equipmentDef = equipment.def（触发体ThingDef），
-    ///   最终Bullet.Impact()用equipmentDef创建BattleLogEntry_RangedImpact → 显示触发体名。
-    ///   本基类将equipmentSource替换为芯片Thing，使equipmentDef = 芯片ThingDef。
+    ///   ├── Verb_BDPVolley（单侧齐射）
+    ///   ├── Verb_BDPDualRanged（双侧交替连射）
+    ///   └── Verb_BDPDualVolley（双侧齐射）
     /// </summary>
     public abstract class Verb_BDPRangedBase : Verb_Shoot
     {
+        // ── Fix-5：CompTriggerBody缓存（避免每发子弹多次TryGetComp线性搜索） ──
+        private CompTriggerBody cachedTriggerComp;
+        private Pawn cachedTriggerPawn;
+
+        /// <summary>
+        /// 获取CasterPawn装备的触发体CompTriggerBody（缓存版本）。
+        /// Pawn变化时自动刷新缓存。
+        /// </summary>
+        /// <summary>
+        /// 序列化BDP Verb扩展状态：
+        /// 1. 占位VerbProperties防止BuggedAfterLoading判定
+        /// 2. GuidedVerbState引导弹状态（锚点、目标、双侧标记）
+        ///    原因：引导弹的LOS检查重定向到第一锚点而非最终目标，
+        ///    若GuidedActive丢失，读档后verb直接对最终目标做LOS→失败→无法射击。
+        /// </summary>
+        public override void ExposeData()
+        {
+            base.ExposeData();
+            if (Scribe.mode == LoadSaveMode.LoadingVars && verbProps == null)
+                verbProps = new VerbProperties();
+
+            // ── GuidedVerbState序列化 ──
+            Scribe_Values.Look(ref gs.GuidedActive, "gs_guidedActive");
+            Scribe_Values.Look(ref gs.GuidedTargetCell, "gs_guidedTargetCell");
+            Scribe_Values.Look(ref gs.CachedAnchorSpread, "gs_anchorSpread");
+            Scribe_Collections.Look(ref gs.RawAnchors, "gs_rawAnchors", LookMode.Value);
+            // LocalTargetInfo需要Scribe_TargetInfo
+            var rawFinal = gs.RawFinalTarget;
+            Scribe_TargetInfo.Look(ref rawFinal, "gs_rawFinalTarget");
+            gs.RawFinalTarget = rawFinal;
+            // 双侧专用
+            var savedThing = gs.SavedThingTarget;
+            Scribe_TargetInfo.Look(ref savedThing, "gs_savedThingTarget");
+            gs.SavedThingTarget = savedThing;
+            Scribe_Values.Look(ref gs.LeftIsGuided, "gs_leftIsGuided");
+            Scribe_Values.Look(ref gs.RightIsGuided, "gs_rightIsGuided");
+            Scribe_Values.Look(ref gs.CurrentShotIsGuided, "gs_currentShotIsGuided");
+        }
+
+        protected CompTriggerBody GetTriggerComp()
+        {
+            var pawn = CasterPawn;
+            if (pawn == null) { cachedTriggerComp = null; cachedTriggerPawn = null; return null; }
+            if (pawn != cachedTriggerPawn || cachedTriggerComp == null)
+            {
+                cachedTriggerPawn = pawn;
+                cachedTriggerComp = pawn.equipment?.Primary?.TryGetComp<CompTriggerBody>();
+            }
+            return cachedTriggerComp;
+        }
+
         /// <summary>
         /// 齐射视觉偏移量（v6.1）。齐射Verb在每发循环前设置随机值，射完重置为零。
         /// 仅影响弹道视觉起点，不影响命中判定（LOS/cover用caster.Position）。
         /// </summary>
         protected Vector3 shotOriginOffset;
+
+        /// <summary>
+        /// 获取LOS检查目标。引导模式下返回第一个锚点而非最终目标，
+        /// 因为引导弹的弹道经由锚点折线飞行，只需caster→第一锚点有LOS即可。
+        /// </summary>
+        protected virtual LocalTargetInfo GetLosCheckTarget()
+        {
+            return gs.GetLosCheckTarget(currentTarget);
+        }
+
+        /// <summary>引导模式下用第一个锚点替代最终目标进行LOS检查。</summary>
+        public override bool TryStartCastOn(LocalTargetInfo castTarg, LocalTargetInfo destTarg,
+            bool surpriseAttack = false, bool canHitNonTargetPawns = true,
+            bool preventFriendlyFire = false, bool nonInterruptingSelfCast = false)
+        {
+            gs.InterceptCastTarget(ref castTarg, caster.Position, caster.Map);
+
+            bool result = base.TryStartCastOn(castTarg, destTarg, surpriseAttack,
+                canHitNonTargetPawns, preventFriendlyFire, nonInterruptingSelfCast);
+
+            if (result)
+                gs.PostCastOn(ref currentTarget);
+
+            return result;
+        }
 
         /// <summary>
         /// 复制Verb_LaunchProjectile.TryCastShot() + Verb_Shoot.TryCastShot()逻辑，
@@ -50,7 +125,9 @@ namespace BDP.Trigger
             if (projectileDef == null)
                 return false;
 
-            bool hasLos = TryFindShootLineFromTo(caster.Position, currentTarget, out ShootLine resultingLine);
+            // v7.0修复：引导弹只需检查caster→第一锚点的LOS，而非caster→最终目标
+            LocalTargetInfo losTarget = GetLosCheckTarget();
+            bool hasLos = TryFindShootLineFromTo(caster.Position, losTarget, out ShootLine resultingLine);
             if (verbProps.stopBurstWithoutLos && !hasLos)
                 return false;
 
@@ -167,26 +244,75 @@ namespace BDP.Trigger
         }
 
         /// <summary>
-        /// 弹道发射后回调（v7.0变化弹）。子类可重写此方法对刚发射的弹道进行后处理，
-        /// 例如附加 GuidedFlightController 实现引导飞行。
+        /// 弹道发射后回调（v7.0变化弹）。子类可重写此方法对刚发射的弹道进行后处理。
+        /// 基类默认行为：引导模式下通过GuidedModule附加折线路径。
         /// </summary>
-        protected virtual void OnProjectileLaunched(Projectile proj) { }
+        protected virtual void OnProjectileLaunched(Projectile proj)
+        {
+            if (gs.GuidedActive)
+                gs.AttachGuidedFlight(proj);
+        }
+
+        // ── PMS重构：引导弹支持（从Verb_BDPGuided上提） ──
+
+        /// <summary>引导弹共享状态（PMS重构：从子类上提到基类）。</summary>
+        protected readonly GuidedVerbState gs = new GuidedVerbState();
+
+        /// <summary>当前芯片是否支持变化弹（引导飞行）。</summary>
+        public bool SupportsGuided => GetChipConfig()?.supportsGuided == true;
 
         /// <summary>
-        /// 重写OrderForceTarget：使用BDP_ChipRangedAttack替代默认的AttackStatic。
-        /// 原因：AttackStatic的JobDriver调用pawn.TryStartAttack()，
-        ///   该方法通过TryGetAttackVerb重新查找verb，忽略job.verbToUse，
-        ///   返回触发体的"柄"近战verb而非芯片远程verb，导致不射击。
-        /// BDP_ChipRangedAttack直接调用job.verbToUse.TryStartCastOn()，
-        /// 且具有与AttackStatic相同的持续攻击循环（tickIntervalAction）。
+        /// 启动多步锚点瞄准（由Command_BDPChipAttack.GizmoOnGUIInt调用）。
+        /// 不支持引导时回退到普通targeting。
+        /// </summary>
+        public virtual void StartGuidedTargeting()
+        {
+            var cfg = GetChipConfig();
+            if (cfg == null || !cfg.supportsGuided)
+            {
+                Find.Targeter.BeginTargeting(this);
+                return;
+            }
+
+            GuidedTargetingHelper.BeginGuidedTargeting(
+                this, CasterPawn, cfg.maxAnchors, verbProps.range,
+                (anchors, finalTarget) =>
+                {
+                    gs.StoreTargetingResult(anchors, finalTarget, cfg.anchorSpread);
+                    // 直接调用OrderForceTargetCore创建BDP_ChipRangedAttack job，
+                    // 而非BaseOrderForceTarget（原版Verb.OrderForceTarget创建的标准Job
+                    // 无法驱动脱离VerbTracker的芯片Verb）
+                    OrderForceTargetCore(finalTarget);
+                });
+        }
+
+        /// <summary>
+        /// 重写OrderForceTarget：引导弹时启动锚点瞄准，否则使用BDP_ChipRangedAttack job。
         /// </summary>
         public override void OrderForceTarget(LocalTargetInfo target)
         {
             if (CasterPawn == null) return;
 
+            // 引导弹：启动多步锚点瞄准
+            if (SupportsGuided)
+            {
+                StartGuidedTargeting();
+                return;
+            }
+            gs.GuidedActive = false;
+
+            OrderForceTargetCore(target);
+        }
+
+        /// <summary>
+        /// OrderForceTarget核心逻辑（不含引导弹判断）。
+        /// 供子类在已处理引导逻辑后直接调用。
+        /// </summary>
+        protected void OrderForceTargetCore(LocalTargetInfo target)
+        {
+            if (CasterPawn == null) return;
+
             // 防御性重置：如果verb因burst中断卡在Bursting状态，先重置
-            // 原因：芯片verb不在VerbTracker.AllVerbs中，BurstingTick不被调用，
-            //   若上一次burst被job中断，state会永久卡在Bursting
             if (Bursting)
                 Reset();
 
@@ -213,6 +339,70 @@ namespace BDP.Trigger
         {
             if (CasterIsPawn)
                 CasterPawn.records.Increment(RecordDefOf.ShotsFired);
+        }
+
+        /// <summary>
+        /// 通过侧别label定位当前芯片Thing（Fix-14：从Verb_BDPShoot/Verb_BDPVolley提升到基类）。
+        /// 三级回退：侧别label精确定位 → ActivatingSlot → 遍历所有激活槽位。
+        /// </summary>
+        protected Thing GetCurrentChipThing(CompTriggerBody triggerComp)
+        {
+            if (triggerComp == null) return null;
+
+            // 优先通过侧别label精确定位芯片（独立Gizmo场景）
+            SlotSide? side = DualVerbCompositor.ParseSideLabel(verbProps?.label);
+            if (side.HasValue)
+            {
+                var sideSlot = triggerComp.GetActiveSlot(side.Value);
+                if (sideSlot?.loadedChip != null) return sideSlot.loadedChip;
+            }
+
+            // 回退：从ActivatingSlot读取（芯片激活上下文）
+            var slot = triggerComp.ActivatingSlot;
+            if (slot?.loadedChip != null) return slot.loadedChip;
+
+            // 最终回退：遍历所有激活槽位找第一个有WeaponChipConfig的
+            foreach (var activeSlot in triggerComp.AllActiveSlots())
+            {
+                if (activeSlot.loadedChip?.def?.GetModExtension<WeaponChipConfig>() != null)
+                    return activeSlot.loadedChip;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 从芯片配置读取WeaponChipConfig（三级回退策略）。
+        /// 供引导弹判断（SupportsGuided）和参数读取共用。
+        /// </summary>
+        protected WeaponChipConfig GetChipConfig()
+        {
+            var pawn = CasterPawn;
+            if (pawn == null) return null;
+            var triggerComp = GetTriggerComp();
+            if (triggerComp == null) return null;
+
+            // 优先通过侧别label精确定位
+            SlotSide? side = DualVerbCompositor.ParseSideLabel(verbProps?.label);
+            if (side.HasValue)
+            {
+                var sideSlot = triggerComp.GetActiveSlot(side.Value);
+                var cfg = sideSlot?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
+                if (cfg != null) return cfg;
+            }
+            // 回退：ActivatingSlot
+            var slot = triggerComp.ActivatingSlot;
+            if (slot?.loadedChip != null)
+            {
+                var cfg = slot.loadedChip.def.GetModExtension<WeaponChipConfig>();
+                if (cfg != null) return cfg;
+            }
+            // 最终回退：遍历
+            foreach (var activeSlot in triggerComp.AllActiveSlots())
+            {
+                var cfg = activeSlot.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
+                if (cfg != null) return cfg;
+            }
+            return null;
         }
     }
 }
