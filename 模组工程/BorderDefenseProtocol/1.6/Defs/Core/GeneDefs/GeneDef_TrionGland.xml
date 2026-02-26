@@ -2,7 +2,7 @@
 <!--
   Trion腺体基因定义。
   通过statOffsets向Stat系统贡献基础属性值。
-  数值为示意值，待平衡性测试阶段调整。
+  数值基于中级天赋标准值（2026-02-26-trion-balance-design.md）。
 -->
 <Defs>
 
@@ -18,9 +18,9 @@
     <biostatMet>-1</biostatMet>
     <!-- Stat贡献：天赋对三个Trion属性的基础值 -->
     <statOffsets>
-      <BDP_TrionCapacity>200</BDP_TrionCapacity>
-      <BDP_TrionOutputPower>5</BDP_TrionOutputPower>
-      <BDP_TrionRecoveryRate>50</BDP_TrionRecoveryRate>
+      <BDP_TrionCapacity>700</BDP_TrionCapacity>
+      <BDP_TrionOutputPower>7</BDP_TrionOutputPower>
+      <BDP_TrionRecoveryRate>670</BDP_TrionRecoveryRate>
     </statOffsets>
   </GeneDef>
 

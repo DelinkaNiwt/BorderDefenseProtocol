@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 芯片远程攻击Job：复制AttackStatic行为但使用job.verbToUse直接施放 -->
+  <JobDef>
+    <defName>BDP_ChipRangedAttack</defName>
+    <driverClass>BDP.Trigger.JobDriver_BDPChipRangedAttack</driverClass>
+    <reportString>用芯片射击 TargetA。</reportString>
+    <allowOpportunisticPrefix>false</allowOpportunisticPrefix>
+  </JobDef>
+
+  <!-- v6.0新增：芯片近战攻击Job，跟随+近战+手动驱动VerbTick -->
+  <JobDef>
+    <defName>BDP_ChipMeleeAttack</defName>
+    <driverClass>BDP.Trigger.JobDriver_BDPChipMeleeAttack</driverClass>
+    <reportString>用芯片近战攻击 TargetA。</reportString>
+    <allowOpportunisticPrefix>false</allowOpportunisticPrefix>
+  </JobDef>
+</Defs>

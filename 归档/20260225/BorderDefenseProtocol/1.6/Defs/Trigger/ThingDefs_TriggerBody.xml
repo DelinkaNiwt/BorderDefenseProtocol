@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ══════════════════════════════════════════════════════
+       BDP_TriggerBody_Test — 测试用触发体（BORDER型）
+       用途：游戏内验证CompTriggerBody调试Gizmo
+       ══════════════════════════════════════════════════════ -->
+  <ThingDef ParentName="BaseWeapon">
+    <defName>BDP_TriggerBody_Test</defName>
+    <label>测试触发体</label>
+    <description>用于开发测试的BORDER触发体。装备后可通过上帝模式Gizmo验证芯片槽位系统。</description>
+    <techLevel>Industrial</techLevel>
+    <graphicData>
+      <texPath>Things/Trigger/BDP_TriggerBody_Test</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <soundInteract>Interact_Sword</soundInteract>
+    <statBases>
+      <WorkToMake>3000</WorkToMake>
+      <Mass>1.0</Mass>
+      <MarketValue>200</MarketValue>
+    </statBases>
+    <!-- 占位Tool：使ThingDef.IsWeapon=true，芯片激活后被重写属性替换 -->
+    <tools>
+      <li>
+        <label>柄</label>
+        <capacities><li>Blunt</li></capacities>
+        <power>5</power>
+        <cooldownTime>2.0</cooldownTime>
+      </li>
+    </tools>
+    <!-- Inherit="False"：覆盖BaseWeapon继承的comps列表，去掉原版CompEquippable。
+         原因：CompTriggerBody本身继承CompEquippable，若保留原版则有两个CompEquippable，
+         GetComp<CompEquippable>()返回第一个（原版空实现），导致装备后Gizmo不显示。 -->
+    <comps Inherit="False">
+      <!-- 原版必要Comp：允许物品被禁止拾取标记（SetForbidden调用需要此Comp） -->
+      <li Class="CompProperties_Forbiddable"/>
+      <!-- 原版必要Comp：允许武器接受意识形态风格外观（Ideology DLC风格化系统） -->
+      <li Class="CompProperties_Styleable"/>
+      <!-- 微内核：Trion能量池（Pawn的Trion由Gene驱动，此处baseMax=0） -->
+      <li Class="BDP.Core.CompProperties_Trion">
+        <baseMax>0</baseMax>
+        <showGizmo>false</showGizmo>
+      </li>
+      <!-- 触发器模块：BORDER型，4+4槽位，玩家可管理芯片 -->
+      <li Class="BDP.Trigger.CompProperties_TriggerBody">
+        <leftHandSlotCount>4</leftHandSlotCount>
+        <rightHandSlotCount>4</rightHandSlotCount>
+        <hasRightHand>true</hasRightHand>
+        <specialSlotCount>2</specialSlotCount>
+        <switchCooldownTicks>0</switchCooldownTicks>
+        <allowChipManagement>true</allowChipManagement>
+        <autoActivateOnEquip>false</autoActivateOnEquip>
+      </li>
+    </comps>
+  </ThingDef>
+
+</Defs>

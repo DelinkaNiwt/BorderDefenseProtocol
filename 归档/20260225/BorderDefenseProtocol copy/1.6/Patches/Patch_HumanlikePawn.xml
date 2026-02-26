@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  将CompTrion注入到人类Pawn的ThingDef中。
+  所有人类Pawn都会获得CompTrion组件。
+  没有Trion腺体基因的Pawn，max=0（惰性状态）。
+-->
+<Patch>
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef[@Name="Human"]/comps</xpath>
+    <value>
+      <li Class="BDP.Core.CompProperties_Trion">
+        <showGizmo>true</showGizmo>
+        <barColor>(0.3, 0.85, 0.55, 1.0)</barColor>
+        <allocatedBarColor>(0.25, 0.4, 0.45, 1.0)</allocatedBarColor>
+      </li>
+    </value>
+  </Operation>
+</Patch>

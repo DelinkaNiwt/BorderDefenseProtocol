@@ -1,0 +1,1613 @@
+
+ ▐▛███▜▌   Claude Code v2.1.56
+▝▜█████▛▘  Sonnet 4.6 · API Usage Billing
+  ▘▘ ▝▝    C:\NiwtDatas\Projects\RimworldModStudio
+
+  /model to try Opus 4.6
+
+❯ /clear 
+  ⎿  (no content)
+
+❯ 我们在上两次会话中完成了BDP模组触发器模块架构文档的重写：                 
+    1. v2.0 — 全局结构层（6个子系统概要）                                   
+    2. v2.1 — §3.1槽位与状态机 + §3.2芯片效果系统的详细设计                 
+                                                                            
+    本次会话的任务：填充§3.3和§3.5的详细设计。                              
+                                                                            
+    按计划，本次填充：                                                      
+    - §3.3 双武器与攻击系统详细（Verb隔离机制完整流程、RebuildVerbs+CreateA 
+  ndCacheChipVerbs内部步骤、DualVerbCompositor四种组合路径的详细输入输出、  
+  近战burst机制hitIndex状态机、自定义JobDriver流程与原版差异、齐射Verb创建  
+  逻辑、读档Verb复                                                          
+    用机制savedChipVerbs）                                                  
+    - §3.5 UI系统详细（Gizmo_TriggerBodyStatus四态渲染逻辑与切换进度条、Win 
+  dow_TriggerBodySlots布局与交互流程、Command_BDPChipAttack的attackId合并规 
+  则+齐射右键拦截+引导弹多步锚点瞄准的完整交互状态机）                      
+                                                                            
+    填充方式：在文档的对应 <!-- 详细设计插入点 --> 处扩展内容。             
+    深度：中等（每节1000-2000字）。组织方式：结构化子节（数据结构定义 →     
+  核心流程图 → 不变量/规则 → 边界情况）。                                   
+    面向读者：非专业开发者 + AI。                                           
+                                                                            
+    请先阅读以下文件：                                                      
+    - 架构文档：模组工程/BorderDefenseProtocol/docs/plans/2026-02-25-trigge 
+  r-module-architecture.md（重点看§3.3和§3.5概要）                          
+    - 核心代码：                                                            
+      - Source/BDP/Trigger/DualWeapon/DualVerbCompositor.cs                 
+      - Source/BDP/Trigger/DualWeapon/Verb_BDPRangedBase.cs                 
+      - Source/BDP/Trigger/DualWeapon/Verb_BDPShoot.cs                      
+      - Source/BDP/Trigger/DualWeapon/Verb_BDPVolley.cs                     
+      - Source/BDP/Trigger/DualWeapon/Verb_BDPDualRanged.cs                 
+      - Source/BDP/Trigger/DualWeapon/Verb_BDPDualVolley.cs                 
+      - Source/BDP/Trigger/DualWeapon/Verb_BDPMelee.cs                      
+      - Source/BDP/Trigger/DualWeapon/JobDriver_BDPChipRangedAttack.cs      
+      - Source/BDP/Trigger/UI/Command_BDPChipAttack.cs                      
+      - Source/BDP/Trigger/UI/Gizmo_TriggerBodyStatus.cs                    
+      - Source/BDP/Trigger/Comps/CompTriggerBody.cs（重点看RebuildVerbs、Cr 
+  eateAndCacheChipVerbs、CreateVolleyVerbs、CompGetEquippedGizmosExtra）    
+                                                                            
+    然后开始填充详细设计。逐节呈现给我确认后再写入文档。                    
+                                                                            
+    编写规范：                                                              
+    - 遵循 系统文件/元信息及历史记录模板.md 的格式                          
+    - 中文回答，留签名                                                      
+                                                                            
+  用brainstorm                                                              
+  ⎿  Async hook Stop completed
+
+● Skill(superpowers:brainstorming)
+  ⎿  Successfully loaded skill
+
+● 好的，按照 brainstorming
+  流程，我先探索项目上下文。让我并行读取架构文档和核心代码文件。
+
+● 现在并行读取架构文档和核心代码文件。
+
+● Read 1 file (ctrl+o to expand)
+
+● 现在并行读取核心代码文件。
+
+● Task(读取双武器系统代码)
+  ⎿  Done (8 tool uses · 93.7k tokens · 2m 26s)
+  (ctrl+o to expand)
+
+● Task(读取UI系统和CompTriggerBody代码)
+  ⎿  Done (12 tool uses · 67.8k tokens · 3m 15s)
+  (ctrl+o to expand)
+
+● 项目上下文探索完毕。我已经完整理解了§3.3和§3.5的代码实现。现在进入澄清问题阶段
+  。
+
+● User answered Claude's questions:
+  ⎿  · §3.3双武器系统的详细设计中，你希望引导弹（GuidedVerbState）的多步锚
+     点瞄准交互状态机放在§3.3还是§3.5 
+     UI系统中描述？它横跨Verb逻辑和UI交互两个层面。 → 放在§3.3
+
+● 明白，引导弹完整放在§3.3。下一个问题：
+
+● User answered Claude's questions:
+  ⎿  · §3.3中“读档Verb复用机制（savedChipVerbs）”这部分应该写多详细？它与§3
+     .6存档系统有重叠。 → 简要提及
+
+● 好的，savedChipVerbs简要提及，详细留给§3.6。
+
+● User answered Claude's questions:
+  ⎿  · 
+     Window_TriggerBodySlots（槽位管理窗口）在当前代码中是否已实现？我在代
+     码中只看到Gizmo点击时引用了它，但没有找到实现文件。§3.5应该如何处理它
+     ？ → ？怎么会没实现，你没看到这个吗c:\NiwtDatas\Projects\RimworldModSt
+     udio\模组工程\BorderDefenseProtocol\Source\BDP\Trigger\UI\Window_Trigg
+     erBodySlots.cs
+
+● 抱歉，我遗漏了这个文件。让我读取它。
+
+● Read 1 file (ctrl+o to expand)
+
+● 好的，Window_TriggerBodySlots已读取。现在我对所有代码都有完整理解了。
+
+● 澄清问题完毕。现在进入方案提议阶段。
+
+● 根据代码分析和你的回答，我提议以下组织方案：
+
+  §3.3 双武器与攻击系统 — 子节结构
+
+  我推荐的方案（与§3.1/§3.2保持一致的四段式结构）：
+
+  §3.3.1 数据结构与Verb创建流程
+  - 按侧Verb存储字段定义（leftHandActiveVerbProps等）
+  - RebuildVerbs 6步编排流程
+  - CreateAndCacheChipVerbs内部步骤（合成→创建→缓存分配）
+  - CreateVolleyVerbs齐射Verb创建逻辑
+  - 读档Verb复用：简要提及savedChipVerbs+loadID机制，详细留§3.6
+
+  §3.3.2 DualVerbCompositor四种组合路径
+  - 输入/输出/判定条件的完整表格
+  - 每条路径的VerbProperties合成细节（verbClass、burstShotCount、range取值规则）
+  - 侧别标签编码（SideLabel_LeftHand/RightHand）和ParseSideLabel三级回退
+
+  §3.3.3 攻击执行链
+  - 远程：JobDriver_BDPChipRangedAttack的tickAction/tickIntervalAction流程，与原
+  版AttackStatic的差异
+  - 近战：Verb_BDPMelee的hitIndex状态机（InitBurst→GetSideForHitIndex→EnsureTool
+  AndManeuver→ApplyPendingInterval）
+  - 引导弹：GuidedVerbState数据结构 + 多步锚点瞄准完整交互状态机 +
+  双侧引导的InterceptDualCastTarget
+
+  §3.3.4 核心不变量与边界情况
+  - Verb隔离不变量、burst状态一致性等
+  - 边界情况表（burst中断、双侧不同弹药、引导弹非引导侧LOS检查等）
+
+  §3.5 UI系统 — 子节结构
+
+  §3.5.1 Gizmo_TriggerBodyStatus
+  - 四态渲染逻辑（激活/注册未激活/挂载未注册/空）的判定条件和视觉
+  - 切换进度条（WindingDown橙红/WarmingUp青蓝）
+  - GetBestDisplaySlot优先级
+
+  §3.5.2 Window_TriggerBodySlots
+  - 布局自适应（两列/三列）
+  - 四态行颜色判定
+  - 交互流程（点击激活/关闭，切换中禁用）
+
+  §3.5.3 Command_BDPChipAttack
+  - attackId合并规则（独立/dual:/combo:）+ 排序保证对称性
+  - GizmoOnGUIInt三种拦截路径（引导弹左键/双手引导弹左键/齐射右键）
+  - Gizmo生成编排（CompGetEquippedGizmosExtra中的征召判定和yield逻辑）
+
+  这个结构可以吗？还是你想调整某些子节的范围或深度？
+
+✻ Brewed for 8m 33s
+
+❯ 可以，正文尽量多一些各种类型的图表 
+
+● 好，开始逐节呈现。先来§3.3.1。
+
+  ---
+  §3.3.1 数据结构与Verb创建流程
+
+  #### 3.3.1 数据结构与Verb创建流程
+
+  **CompTriggerBody中的按侧Verb存储**：
+
+  CompTriggerBody（Verb相关字段）
+  │
+  ├─ 按侧原始数据（由WeaponChipEffect.SetSideVerbs写入，序列化）
+  │   ├── leftHandActiveVerbProps:  List   左手芯片的Verb定义
+  │   ├── rightHandActiveVerbProps: List   右手芯片的Verb定义
+  │   ├── leftHandActiveTools:      List             左手芯片的近战Tool
+  │   └── rightHandActiveTools:     List             右手芯片的近战Tool
+  │
+  ├─ Verb实例缓存（不序列化，由CreateAndCacheChipVerbs创建）
+  │   ├── leftHandAttackVerb:   Verb
+  左手攻击Verb（Verb_BDPShoot或Verb_BDPMelee）
+  │   ├── rightHandAttackVerb:  Verb    右手攻击Verb
+  │   ├── dualAttackVerb:       Verb
+  双手合成攻击Verb（Verb_BDPDualRanged或Verb_BDPMelee）
+  │   ├── leftHandVolleyVerb:   Verb    左手齐射Verb（Verb_BDPVolley）
+  │   ├── rightHandVolleyVerb:  Verb    右手齐射Verb
+  │   └── dualVolleyVerb:       Verb    双手齐射Verb（Verb_BDPDualVolley）
+  │
+  └─ 读档复用（仅序列化阶段使用）
+      └── savedChipVerbs: List
+  存档时收集所有芯片Verb，读档时通过loadID匹配复用
+
+  **数据流向**：
+
+  XML芯片ThingDef
+    └─ WeaponChipConfig (DefModExtension)
+         ├── verbProperties: List
+         └── tools: List
+              │
+              │ WeaponChipEffect.Activate()
+              │ → SetSideVerbs(side, verbs, tools)
+              ▼
+  CompTriggerBody 按侧原始数据
+    ├── leftHandActiveVerbProps / leftHandActiveTools
+    └── rightHandActiveVerbProps / rightHandActiveTools
+              │
+              │ RebuildVerbs(pawn)
+              │   └─ CreateAndCacheChipVerbs(pawn)
+              │       └─ DualVerbCompositor.ComposeVerbs()
+              ▼
+  合成后的 List
+              │
+              │ Activator.CreateInstance(vp.verbClass)
+              │ 或 FindSavedVerb(loadID) 复用
+              ▼
+  6个Verb实例缓存（leftHandAttackVerb ... dualVolleyVerb）
+              │
+              │ CompGetEquippedGizmosExtra()
+              ▼
+  Command_BDPChipAttack Gizmo（传入verb + volleyVerb）
+
+  **RebuildVerbs完整流程**（6步编排）：
+
+  RebuildVerbs(pawn) — 由WeaponChipEffect.Activate/Deactivate触发
+  │
+  ├─ ① VerbTracker.InitVerbsFromZero()
+  │     重建VerbTracker，只包含触发体ThingDef上的占位Verb
+  │     和Tool产生的"柄"近战Verb
+  │
+  ├─ ② 遍历VerbTracker.AllVerbs，重新绑定verb.caster = pawn
+  │     原因：InitVerbsFromZero后caster被重置为null
+  │
+  ├─ ③ CreateAndCacheChipVerbs(pawn)
+  │     芯片Verb合成 + 创建 + 缓存（见下方详细流程）
+  │
+  └─ ④ [DevMode] 输出诊断日志
+        列出所有VerbTracker.AllVerbs和芯片Verb缓存
+
+  **CreateAndCacheChipVerbs内部步骤**：
+
+  CreateAndCacheChipVerbs(pawn)
+  │
+  ├─ Step 1: 清空6个Verb缓存
+  │   leftHandAttackVerb = rightHandAttackVerb = dualAttackVerb = null
+  │   leftHandVolleyVerb = rightHandVolleyVerb = dualVolleyVerb = null
+  │
+  ├─ Step 2: 调用DualVerbCompositor.ComposeVerbs()
+  │   输入：leftHandActiveVerbProps, rightHandActiveVerbProps,
+  │         GetActiveOrActivatingSlot(LeftHand),
+  GetActiveOrActivatingSlot(RightHand)
+  │   输出：List composedVerbs
+  │
+  ├─ Step 3: 遍历composedVerbs，逐个创建Verb实例
+  │   │
+  │   │  对每个VerbProperties vp：
+  │   │
+  │   ├─ 3a. 生成loadID = "BDP_Chip_{parent.ThingID}_{index}"
+  │   │
+  │   ├─ 3b. 尝试复用：verb = FindSavedVerb(loadID)
+  │   │       命中 → 跳过创建，直接使用已反序列化的实例
+  │   │       未命中 → verb = Activator.CreateInstance(vp.verbClass)
+  │   │
+  │   ├─ 3c. 初始化Verb字段：
+  │   │       verb.loadID = loadID
+  │   │       verb.verbProps = vp
+  │   │       verb.caster = pawn
+  │   │       verb.verbTracker = this.VerbTracker  ← 使EquipmentSource指向触发体
+  │   │
+  │   └─ 3d. 按类型+侧别分配到缓存：
+  │           ┌─────────────────────────┬──────────────────────────┐
+  │           │ Verb类型                │ 分配目标                  │
+  │           ├─────────────────────────┼──────────────────────────┤
+  │           │ Verb_BDPMelee           │                          │
+  │           │   label含LeftHand       │ → leftHandAttackVerb     │
+  │           │   label含RightHand      │ → rightHandAttackVerb    │
+  │           │   isPrimary=true(双手)  │ → dualAttackVerb         │
+  │           ├─────────────────────────┼──────────────────────────┤
+  │           │ Verb_BDPShoot           │                          │
+  │           │   label含LeftHand       │ → leftHandAttackVerb     │
+  │           │   label含RightHand      │ → rightHandAttackVerb    │
+  │           ├─────────────────────────┼──────────────────────────┤
+  │           │ Verb_BDPDualRanged      │ → dualAttackVerb         │
+  │           └─────────────────────────┴──────────────────────────┘
+  │
+  └─ Step 4: CreateVolleyVerbs(pawn)
+      创建齐射Verb（见下方）
+
+  **CreateVolleyVerbs流程**：
+
+  CreateVolleyVerbs(pawn)
+  │
+  ├─ 获取槽位：GetActiveOrActivatingSlot(side)
+  │   注意：用GetActiveOrActivating而非GetActive
+  │   原因：DoActivate中effect.Activate()触发RebuildVerbs时，
+  │         slot.isActive尚未设为true，GetActive会返回null
+  │
+  ├─ 左手齐射检查：
+  │   leftSlot有芯片？
+  │   → WeaponChipConfig.supportsVolley == true？
+  │   → leftHandAttackVerb != null？
+  │   → 全部满足：CreateSingleVolleyVerb(Verb_BDPVolley, 源verb)
+  │   → 赋值给leftHandVolleyVerb
+  │
+  ├─ 右手齐射检查：（同上逻辑）
+  │   → 赋值给rightHandVolleyVerb
+  │
+  └─ 双手齐射检查：
+      左右都支持齐射？
+      → CreateSingleVolleyVerb(Verb_BDPDualVolley, dualAttackVerb)
+      → 赋值给dualVolleyVerb
+
+  CreateSingleVolleyVerb(verbClass, sourceVerb):
+    ① CopyVerbProps(sourceVerb.verbProps) — 浅拷贝VerbProperties
+    ② 修改verbClass = volleyVerbClass
+    ③ 修改burstShotCount = 1（引擎只触发一次TryCastShot）
+    ④ 生成loadID，尝试FindSavedVerb复用
+    ⑤ 否则Activator.CreateInstance创建
+    ⑥ 绑定caster/verbTracker
+
+  **读档Verb复用**（简要）：
+
+  芯片Verb脱离VerbTracker.AllVerbs，但Job/Stance的verbToUse字段在读档时通过Resol
+  vingCrossRefs按loadID查找Verb实例。savedChipVerbs在PostExposeData中收集所有芯
+  片Verb并序列化，读档后CreateAndCacheChipVerbs优先通过FindSavedVerb(loadID)复用
+  已反序列化的实例，保证Job/Stance引用不断裂。详细机制见§3.6。
+
+  ---
+  §3.3.1 呈现完毕。这节可以吗？
+
+✻ Cooked for 1m 6s
+
+❯ 继续 
+  ⎿  Async hook Stop completed
+
+● 好，§3.3.1通过。继续§3.3.2。
+
+  ---
+  §3.3.2 DualVerbCompositor四种组合路径
+
+  #### 3.3.2 DualVerbCompositor四种组合路径
+
+  DualVerbCompositor是纯静态工具类（无状态纯函数），负责根据左右手芯片的Verb/Too
+  l数据合成最终VerbProperties列表。所有合成结果统一设置hasStandardCommand=false
+  ，使芯片Verb彻底脱离引擎标准Gizmo路径。
+
+  **侧别标签编码**：
+
+  合成时为每个VerbProperties.label写入侧别标识，供后续Verb实例通过ParseSideLabel
+  ()定位自身所属侧别。
+
+  | 常量 | 值 | 用途 |
+  |------|----|------|
+  | SideLabel_LeftHand | "BDP_LeftHand" |
+  编码在VerbProperties.label中，标识左手侧 |
+  | SideLabel_RightHand | "BDP_RightHand" | 标识右手侧 |
+
+  ParseSideLabel(label)解析规则：label包含"BDP_LeftHand"→LeftHand，包含"BDP_Righ
+  tHand"→RightHand，否则→null。
+
+  **组合判定流程**：
+
+  ComposeVerbs(leftVerbs, rightVerbs, leftSlot, rightSlot)
+  │
+  ├─ leftVerbs为空 且 rightVerbs为空？
+  │   └─ 返回空列表（两侧都无武器芯片）
+  │
+  ├─ 仅一侧有值？
+  │   └─ 路径A：单侧直通
+  │
+  ├─ 两侧都有值：
+  │   ├─ IsMeleeOnly(left) 且 IsMeleeOnly(right)？
+  │   │   └─ 路径B：近战+近战
+  │   │
+  │   ├─ !IsMeleeOnly(left) 且 !IsMeleeOnly(right)？
+  │   │   └─ 路径C：远程+远程
+  │   │
+  │   └─ 一侧近战一侧远程？
+  │       └─ 路径D：混合
+
+  **四条路径详细规格**：
+
+  ┌──────────────────────────────────────────────────────────────────────┐
+  │ 路径A：单侧直通                                                      │
+  │                                                                      │
+  │ 触发条件：仅左手或仅右手有VerbProperties                              │
+  │                                                                      │
+  │ 处理：                                                               │
+  │   ① CopyVerbProps() 浅拷贝（Fix-7：避免修改原始DefModExtension数据）  │
+  │   ② 设置 isPrimary = true                                           │
+  │   ③ 写入侧别label（SideLabel_LeftHand 或 SideLabel_RightHand）       │
+  │   ④ hasStandardCommand = false                                       │
+  │                                                                      │
+  │ 输出：[ 该侧Verb(isPrimary) ]                                        │
+  │ verbClass：保持原始（Verb_BDPShoot 或 Verb_BDPMelee）                 │
+  └──────────────────────────────────────────────────────────────────────┘
+
+  ┌──────────────────────────────────────────────────────────────────────┐
+  │ 路径B：近战+近战 → ComposeDualMelee                                   │
+  │                                                                      │
+  │ 触发条件：IsMeleeOnly(left)==true 且 IsMeleeOnly(right)==true         │
+  │                                                                      │
+  │ 输出列表（2或3个Verb）：                                              │
+  │                                                                      │
+  │   ┌─────────────────────────────────────────────────────────┐        │
+  │   │ [0] 左手Verb                                            │        │
+  │   │   · CopyVerbProps(left[0])                              │        │
+  │   │   · label = SideLabel_LeftHand                          │        │
+  │   │   · isPrimary = false（副Verb，可手动选择）              │        │
+  │   │   · verbClass = Verb_BDPMelee                           │        │
+  │   └─────────────────────────────────────────────────────────┘        │
+  │   ┌─────────────────────────────────────────────────────────┐        │
+  │   │ [1] 右手Verb（仅当左右不同芯片时添加）                   │        │
+  │   │   · AreSameChip(leftSlot, rightSlot) == true → 跳过     │        │
+  │   │   · CopyVerbProps(right[0])                             │        │
+  │   │   · label = SideLabel_RightHand                         │        │
+  │   │   · isPrimary = false                                   │        │
+  │   │   · verbClass = Verb_BDPMelee                           │        │
+  │   └─────────────────────────────────────────────────────────┘        │
+  │   ┌─────────────────────────────────────────────────────────┐        │
+  │   │ [末] 双手合成Verb（isPrimary=true，默认攻击）            │        │
+  │   │   · CopyVerbProps(left[0]) 作为基底                     │        │
+  │   │   · verbClass = Verb_BDPMelee                           │        │
+  │   │   · isPrimary = true                                    │        │
+  │   │   · burstShotCount = left.burst + right.burst           │        │
+  │   │   · ticksBetweenBurstShots = 取两侧较短间隔             │        │
+  │   │   · label = 无侧别标签（双手Verb通过isPrimary识别）      │        │
+  │   └─────────────────────────────────────────────────────────┘        │
+  │                                                                      │
+  │ 设计意图：                                                           │
+  │   · 双手合成Verb的burstShotCount = 左burst + 右burst                │
+  │     例：左3击+右2击 → 合成5击burst                                   │
+  │   · hitIndex状态机（§3.3.3）根据hitIndex分配每击归属侧               │
+  │   · 单侧Verb保留为副选项，玩家可手动选择只用一只手攻击               │
+  └──────────────────────────────────────────────────────────────────────┘
+
+  ┌──────────────────────────────────────────────────────────────────────┐
+  │ 路径C：远程+远程 → ComposeDualRanged                                  │
+  │                                                                      │
+  │ 触发条件：!IsMeleeOnly(left) 且 !IsMeleeOnly(right)                  │
+  │                                                                      │
+  │ 输出列表（2或3个Verb）：                                              │
+  │                                                                      │
+  │   ┌─────────────────────────────────────────────────────────┐        │
+  │   │ [0] 左手Verb                                            │        │
+  │   │   · CopyVerbProps(left[0])                              │        │
+  │   │   · label = SideLabel_LeftHand                          │        │
+  │   │   · isPrimary = false                                   │        │
+  │   │   · verbClass = 保持原始（Verb_BDPShoot）               │        │
+  │   └─────────────────────────────────────────────────────────┘        │
+  │   ┌─────────────────────────────────────────────────────────┐        │
+  │   │ [1] 右手Verb（仅当不同芯片时添加）                       │        │
+  │   │   · 同路径B逻辑                                         │        │
+  │   └─────────────────────────────────────────────────────────┘        │
+  │   ┌─────────────────────────────────────────────────────────┐        │
+  │   │ [末] 双手合成Verb（isPrimary=true）                      │        │
+  │   │   · CopyVerbProps(left[0]) 作为基底                     │        │
+  │   │   · verbClass = Verb_BDPDualRanged                      │        │
+  │   │   · isPrimary = true                                    │        │
+  │   │   · range = min(left.range, right.range)                │        │
+  │   │   · warmupTime = max(left.warmup, right.warmup)         │        │
+  │   │   · burstShotCount = left.burst + right.burst           │        │
+  │   │   · ticksBetweenBurstShots = 取两侧较短间隔             │        │
+  │   │   · defaultProjectile = left.defaultProjectile          │        │
+  │   │     （运行时由Verb_BDPDualRanged动态切换）               │        │
+  │   └─────────────────────────────────────────────────────────┘        │
+  │                                                                      │
+  │ 关键参数取值规则：                                                    │
+  │   · range取min：保证双侧都能命中（短射程侧不会打空）                 │
+  │   · warmupTime取max：两侧都需要准备完毕才能开火                      │
+  │   · burstShotCount叠加：交替射击，总发数=左+右                       │
+  │   · defaultProjectile只是占位：实际由DualRanged逐发切换               │
+  └──────────────────────────────────────────────────────────────────────┘
+
+  ┌──────────────────────────────────────────────────────────────────────┐
+  │ 路径D：近战+远程 → ComposeMixed                                       │
+  │                                                                      │
+  │ 触发条件：一侧IsMeleeOnly==true，另一侧==false                       │
+  │                                                                      │
+  │ 输出列表（2个Verb，无合成Verb）：                                     │
+  │                                                                      │
+  │   ┌─────────────────────────────────────────────────────────┐        │
+  │   │ [0] 近战侧Verb                                          │        │
+  │   │   · isPrimary = false                                   │        │
+  │   │   · verbClass = Verb_BDPMelee                           │        │
+  │   └─────────────────────────────────────────────────────────┘        │
+  │   ┌─────────────────────────────────────────────────────────┐        │
+  │   │ [1] 远程侧Verb                                          │        │
+  │   │   · isPrimary = true（远程优先作为默认攻击）             │        │
+  │   │   · verbClass = Verb_BDPShoot                           │        │
+  │   └─────────────────────────────────────────────────────────┘        │
+  │                                                                      │
+  │ 设计意图：                                                           │
+  │   · 不合成DualVerb——近战和远程的攻击距离/机制差异太大                │
+  │   · 远程isPrimary=true：征召后默认远程攻击，近战作为副选项            │
+  │   · 两个Verb各自独立Gizmo，玩家可自由切换                            │
+  └──────────────────────────────────────────────────────────────────────┘
+
+  **四路径对比总览**：
+
+  | 路径 | 触发条件 | 输出Verb数 | 合成Verb类型 | isPrimary | range规则 |
+  burst规则 |
+  |------|---------|-----------|-------------|-----------|----------|----------|
+  | A 单侧 | 仅一侧有值 | 1 | 无合成 | 该侧Verb | 保持原始 | 保持原始 |
+  | B 近战+近战 | 双侧近战 | 2~3 | Verb_BDPMelee | 合成Verb | N/A(近战) |
+  左burst+右burst |
+  | C 远程+远程 | 双侧远程 | 2~3 | Verb_BDPDualRanged | 合成Verb | min(左,右) |
+  左burst+右burst |
+  | D 混合 | 一近一远 | 2 | 无合成 | 远程侧 | 各自独立 | 各自独立 |
+
+  **CopyVerbProps实现说明**：
+
+  通过反射调用MemberwiseClone()浅拷贝VerbProperties。原因（Fix-7）：VerbProperti
+  es来自DefModExtension，是全局共享的Def数据。若直接修改label/isPrimary等字段，
+  会污染所有使用该芯片的触发体。浅拷贝后修改副本，原始数据不受影响。
+
+  **AreSameChip判定**：
+
+  比较两个ChipSlot的loadedChip.def.defName是否相同。相同芯片时不重复添加右手Verb
+  （避免Gizmo重复），合成Verb的burstShotCount仍然叠加（同一芯片双持=双倍连击）。
+
+  ---
+  §3.3.2 呈现完毕。这节可以吗？
+
+✻ Churned for 1m 4s
+
+❯ 继续 
+  ⎿  Async hook Stop completed
+
+● 好，§3.3.2通过。继续§3.3.3。
+
+  ---
+  §3.3.3 攻击执行链
+
+  #### 3.3.3 攻击执行链
+
+  本节描述三条攻击执行路径：远程JobDriver驱动、近战hitIndex状态机、引导弹多步锚
+  点瞄准。
+
+  ##### 远程攻击：JobDriver_BDPChipRangedAttack
+
+  **为什么需要自定义JobDriver**（设计决策D4）：
+
+  原版AttackStatic的两个致命问题：
+
+  ┌─ 问题①：Verb查找错误 ──────────────────────────────────────────────┐
+  │                                                                      │
+  │  原版 tickIntervalAction:                                            │
+  │    pawn.TryStartAttack(target)                                       │
+  │      └─ TryGetAttackVerb()                                          │
+  │           └─ 搜索 VerbTracker.AllVerbs                              │
+  │                └─ 返回触发体"柄"的近战Verb ✗                        │
+  │                   （芯片Verb不在AllVerbs中，被跳过）                 │
+  │                                                                      │
+  │  BDP JobDriver:                                                      │
+  │    job.verbToUse.TryStartCastOn(target)                              │
+  │      └─ 直接使用创建Job时绑定的芯片Verb ✓                           │
+  │                                                                      │
+  └──────────────────────────────────────────────────────────────────────┘
+
+  ┌─ 问题②：VerbTick不被调用 ──────────────────────────────────────────┐
+  │                                                                      │
+  │  原版VerbTick调用链：                                                │
+  │    Pawn_EquipmentTracker.EquipmentTrackerTick()                      │
+  │      └─ VerbTracker.VerbsTick()                                     │
+  │           └─ 遍历AllVerbs → verb.VerbTick()                         │
+  │              （芯片Verb不在AllVerbs中 → 永远不被调用）               │
+  │                                                                      │
+  │  后果：burstShotCount>1的Verb在第1发后state卡在Bursting              │
+  │        ticksToNextBurstShot永远不递减，burst永远不推进               │
+  │                                                                      │
+  │  BDP JobDriver修复：                                                 │
+  │    tickAction（每tick）:                                              │
+  │      job.verbToUse.VerbTick()   ← 手动驱动burst计时器               │
+  │                                                                      │
+  └──────────────────────────────────────────────────────────────────────┘
+
+  **JobDriver_BDPChipRangedAttack完整Toil流程**：
+
+  MakeNewToils()
+  │
+  ├─ Toil 1: ThrowColonistAttackingMote
+  │   · 一次性：在pawn头顶显示攻击动画提示
+  │
+  └─ Toil 2: attackToil（核心攻击循环）
+      │
+      ├─ initAction（首次进入）:
+      │   · 记录 startedIncapacitated = target.Downed
+      │   · pawn.pather.StopDead()  停止移动
+      │
+      ├─ tickAction（每tick执行）:
+      │   · job.verbToUse.VerbTick()
+      │     手动推进burst计时器（ticksToNextBurstShot递减）
+      │     这是整个JobDriver存在的核心原因之一
+      │
+      ├─ tickIntervalAction（每tickInterval执行）:
+      │   │
+      │   ├─ 目标检查：
+      │   │   · target已死亡？→ EndJobWith(Incompletable)
+      │   │   · target倒地 且 初始未倒地 且 非强制攻击？→ 结束
+      │   │   · numAttacksMade ≥ maxNumStaticAttacks？→ 结束
+      │   │
+      │   ├─ Stance等待：
+      │   │   · pawn.stances.curStance is Stance_Busy？→ 跳过本次
+      │   │     （上一次攻击的动画/冷却尚未结束）
+      │   │
+      │   └─ 发起攻击：
+      │       · job.verbToUse.TryStartCastOn(target)  ← 核心区别
+      │       · 成功 → numAttacksMade++
+      │
+      ├─ 失败条件 endIfCantShootTargetFromCurPos:
+      │   · !verb.CanHitTarget(target) → 结束
+      │     （目标移出射程或LOS被阻挡）
+      │
+      └─ 失败条件 endIfCantShootInMelee:
+          · verb.verbProps.minRange > 0
+            且 target与pawn相邻（距离<最小射程）→ 结束
+            （修复旧代码AdjacentTo8WayOrInside在远程战斗中的误判）
+
+  **与原版AttackStatic的差异对比**：
+
+  | 维度 | 原版AttackStatic | BDP JobDriver |
+  |------|-----------------|---------------|
+  | Verb来源 | pawn.TryStartAttack()重新查找 | job.verbToUse直接使用 |
+  | VerbTick驱动 | 依赖VerbTracker.VerbsTick() | tickAction手动调用 |
+  | 最小射程检查 | AdjacentTo8WayOrInside | verb.minRange + 距离计算 |
+  | 序列化 | 原版字段 | startedIncapacitated + numAttacksMade |
+  | 适用Verb | VerbTracker中的标准Verb |
+  任意Verb实例（含脱离VerbTracker的芯片Verb） |
+
+  ##### 近战攻击：Verb_BDPMelee hitIndex状态机
+
+  **为什么用hitIndex状态机而非for循环**（设计决策D10）：
+
+  方案A（已否决）：for循环同步多击
+    TryCastShot() {
+      for (int i = 0; i < totalHits; i++)
+        ApplyDamage(target);  // 同一tick内全部命中
+    }
+    问题：无动画、无音效、无Stance切换，视觉上只有1击
+
+  方案B（采用）：引擎burst机制 + hitIndex状态机
+    · burstShotCount = 左burst + 右burst（由DualVerbCompositor合成）
+    · 引擎每隔ticksBetweenBurstShots调用一次TryCastShot()
+    · 每次TryCastShot()只执行1击，通过hitIndex确定归属侧
+    · 每击有独立的动画、音效、Stance
+
+  **hitIndex状态机完整流程**：
+
+  TryCastShot() — 引擎每burst间隔调用一次
+  │
+  ├─ hitIndex == 0？（首击）
+  │   └─ InitBurst(triggerComp)
+  │       ├─ 解析侧别label判断模式：
+  │       │   · 有侧别标签 → 单侧模式
+  │       │   │   cachedLeftBurst = burstShotCount（或0）
+  │       │   │   cachedRightBurst = 0（或burstShotCount）
+  │       │   └─ cachedLeftInterval = cachedRightInterval =
+  ticksBetweenBurstShots
+  │       │
+  │       └─ 无侧别标签（isPrimary双手Verb）→ 双侧模式
+  │           ├─ 从左手芯片配置读取 cachedLeftBurst, cachedLeftInterval
+  │           └─ 从右手芯片配置读取 cachedRightBurst, cachedRightInterval
+  │
+  ├─ Bug6防御：target无效？→ SafeAbortBurst() + return false
+  │
+  ├─ 清除Stance_Cooldown
+  │   原因：引擎时序 VerbsTick() → StanceTrackerTick()
+  │   burst的下一击在VerbsTick中触发TryCastShot()，
+  │   但上一击的Stance_Cooldown要到StanceTrackerTick才清除。
+  │   若不手动清除，TryCastShot()中的动画会被Stance阻挡。
+  │
+  ├─ GetSideForHitIndex() → 确定当前击归属侧
+  │   │
+  │   │  分配规则（前N击=左手，之后=右手）：
+  │   │
+  │   │  hitIndex:     0   1   2   3   4
+  │   │  cachedLeft=3: ├─L─┤─L─┤─L─┤
+  │   │  cachedRight=2:              ├─R─┤─R─┤
+  │   │
+  │   └─ hitIndex < cachedLeftBurst → LeftHand
+  │      否则 → RightHand
+  │
+  ├─ EnsureToolAndManeuver(triggerComp, side)
+  │   │  Bug11修复：BDP Verb不经过VerbTracker.InitVerb()，
+  │   │  tool和maneuver字段未被初始化。每击手动设置。
+  │   │
+  │   ├─ 从该侧芯片的WeaponChipConfig.tools[0]读取Tool
+  │   ├─ 从Tool.capacities[0]查找ManeuverDef（缓存版本）
+  │   ├─ 设置 this.tool = tool
+  │   ├─ 设置 this.maneuver = maneuverDef
+  │   └─ 设置 currentChipDef = 该侧芯片ThingDef
+  │       （供ApplyMeleeDamageToTarget使用）
+  │
+  ├─ base.TryCastShot()
+  │   └─ 内部调用ApplyMeleeDamageToTarget(target)
+  │       │
+  │       │  重写伤害应用（与原版的关键差异）：
+  │       │
+  │       │  原版：weapon = EquipmentSource.def（触发体ThingDef）
+  │       │  BDP：  weapon = currentChipDef（芯片ThingDef）
+  │       │
+  │       ├─ 主伤害：
+  │       │   DamageInfo(maneuver.verb.meleeDamageDef,
+  │       │             tool.AdjustedBaseMeleeDamageAmount(pawn) × [0.8~1.2],
+  │       │             weapon: currentChipDef)
+  │       │
+  │       └─ extraMeleeDamages（若有）：
+  │           遍历tool.extraMeleeDamages，逐个Apply
+  │
+  ├─ Bug7修复：强制 return true
+  │   原因：base.TryCastShot()在miss/dodge时返回false，
+  │   引擎将false解读为"攻击失败，取消整个burst"。
+  │   但miss/dodge是正常战斗结果，不应中断连击。
+  │
+  ├─ 计算下一击的pendingInterval：
+  │   │
+  │   │  当前侧和下一击侧不同？→ 使用下一侧的interval
+  │   │  相同？→ 使用当前侧的interval
+  │   │
+  │   │  为什么不直接设置ticksToNextBurstShot？
+  │   │  因为TicksBetweenBurstShots属性是non-virtual的，
+  │   │  引擎在TryCastShot()返回后会用固定值覆盖。
+  │   │  所以用pendingInterval暂存，由JobDriver在VerbTick()后覆盖。
+  │   │
+  │   └─ pendingInterval = nextSideInterval
+  │
+  ├─ hitIndex++
+  │
+  └─ hitIndex >= burstShotCount？（burst结束）
+      └─ 重置：hitIndex=0, pendingInterval=-1,
+         cachedLeftBurst=cachedRightBurst=0
+
+  **ApplyPendingInterval机制**：
+
+  时序图（单个burst间隔内）：
+
+    tick N:  引擎调用 VerbTick()
+               └─ ticksToNextBurstShot--
+               └─ ticksToNextBurstShot == 0？
+                    └─ 调用 TryCastShot()
+                         └─ 设置 pendingInterval = X
+             引擎设置 ticksToNextBurstShot = TicksBetweenBurstShots（固定值）
+
+    tick N:  JobDriver.tickAction 调用 verb.VerbTick()（第二次）
+               └─ 无操作（已在本tick触发过）
+
+    tick N:  JobDriver.tickAction 之后：
+               └─ verb.ApplyPendingInterval()
+                    └─ pendingInterval != -1？
+                         └─ ticksToNextBurstShot = pendingInterval
+                         └─ pendingInterval = -1
+                    （覆盖引擎刚设置的固定值为芯片自定义间隔）
+
+    tick N+X: 下一击触发...
+
+  **SafeAbortBurst流程**：
+
+  SafeAbortBurst()
+  ├─ hitIndex = 0
+  ├─ pendingInterval = -1
+  ├─ cachedLeftBurst = cachedRightBurst = 0
+  ├─ cachedLeftInterval = cachedRightInterval = 0
+  ├─ currentChipDef = null
+  └─ base.Reset()
+      └─ 重置引擎burst状态（state, burstShotsLeft, ticksToNextBurstShot等）
+
+  ##### 引导弹多步锚点瞄准
+
+  **GuidedVerbState数据结构**：
+
+  GuidedVerbState（引导弹共享状态，持有在Verb_BDPRangedBase中）
+  ├── guidedActive: bool              引导模式是否激活
+  ├── anchors: List          已确认的锚点列表（折线路径中间点）
+  ├── finalTarget: LocalTargetInfo    最终目标（最后一步确认）
+  ├── maxAnchors: int                 最大锚点数（从BDPGuidedConfig读取）
+  ├── isLeftGuided: bool              左侧是否为引导弹（双侧Verb用）
+  ├── isRightGuided: bool             右侧是否为引导弹（双侧Verb用）
+  └── pendingTargetOverride: LocalTargetInfo
+  拦截用临时目标（InterceptCastTarget设置）
+
+  序列化字段（ExposeData中保存）：
+    guidedActive, anchors, finalTarget, isLeftGuided, isRightGuided
+    原因：burst中途存档→读档后需恢复引导状态
+
+  **多步锚点瞄准交互状态机**：
+
+                  ┌──────────────────────────────────────────┐
+                  │         Idle（未瞄准）                    │
+                  │  · guidedActive = false                  │
+                  │  · anchors 为空                          │
+                  └──────────────┬───────────────────────────┘
+                                 │
+                  玩家左键点击引导弹Gizmo
+                  （Command_BDPChipAttack.GizmoOnGUIInt拦截）
+                  verb.StartGuidedTargeting()
+                                 │
+                                 ▼
+                  ┌──────────────────────────────────────────┐
+                  │      锚点选择阶段（循环）                 │
+                  │  · GuidedTargetingHelper启动Targeter     │
+                  │  · 允许地面瞄准（原版Targeter不允许）     │
+                  │  · 显示已选锚点连线预览                   │
+                  └──────────────┬───────────────────────────┘
+                                 │
+                  ┌──────────────┼──────────────┐
+                  │              │              │
+               左键确认       右键/ESC       达到maxAnchors
+               选择锚点       取消瞄准       自动进入下一阶段
+                  │              │              │
+                  ▼              ▼              ▼
+            锚点加入         ┌────────┐    ┌──────────────┐
+            anchors列表      │ 回到   │    │ 最终目标选择 │
+            继续循环         │ Idle   │    │              │
+            （若未满）       └────────┘    └──────┬───────┘
+                  │                               │
+                  │  anchors.Count==maxAnchors     │
+                  └───────────────────────────────→│
+                                                   │
+                                 ┌─────────────────┼──────────────┐
+                                 │                 │              │
+                              左键确认          右键/ESC
+                              选择最终目标      取消全部
+                                 │                 │
+                                 ▼                 ▼
+                  ┌──────────────────────┐   ┌────────┐
+                  │   执行攻击           │   │ 回到   │
+                  │                      │   │ Idle   │
+                  │ · guidedActive=true  │   │ 清空   │
+                  │ · finalTarget=目标   │   │ anchors│
+                  │ · OrderForceTarget() │   └────────┘
+                  │   → 创建Job          │
+                  └──────────┬───────────┘
+                             │
+                             ▼
+                  ┌──────────────────────────────────────────┐
+                  │   TryCastShot执行                         │
+                  │                                          │
+                  │ · TryStartCastOn中：                     │
+                  │   InterceptCastTarget()                  │
+                  │   用第一个锚点替代最终目标做LOS检查        │
+                  │   （最终目标可能不在直视范围内）           │
+                  │                                          │
+                  │ · OnProjectileLaunched(proj)中：          │
+                  │   GuidedModule.SetPath(anchors+final)    │
+                  │   弹道沿折线路径飞行                      │
+                  │                                          │
+                  │ · burst结束后：                           │
+                  │   guidedActive=false, anchors清空         │
+                  └──────────────────────────────────────────┘
+
+  **InterceptCastTarget / InterceptDualCastTarget机制**：
+
+  单侧引导（Verb_BDPShoot / Verb_BDPVolley）：
+
+    TryStartCastOn(target) 被引擎调用
+      │
+      └─ gs.InterceptCastTarget(target)
+          ├─ guidedActive == false？→ 返回原target（不拦截）
+          └─ guidedActive == true？
+              └─ 返回 anchors[0]（第一个锚点）
+                 原因：引擎用target做LOS检查，
+                 最终目标可能在墙后，但第一个锚点在视线内
+
+  双侧引导（Verb_BDPDualRanged / Verb_BDPDualVolley）：
+
+    TryStartCastOn(target) 被引擎调用
+      │
+      └─ gs.InterceptDualCastTarget(target)
+          ├─ 任一侧isGuided == true？
+          │   └─ 返回 anchors[0]（引导侧的第一个锚点）
+          └─ 两侧都非引导？→ 返回原target
+
+    TryCastShot中逐发处理：
+      │
+      ├─ 当前发属于引导侧？
+      │   └─ 正常发射，OnProjectileLaunched附加折线路径
+      │
+      └─ 当前发属于非引导侧？
+          └─ 恢复Thing目标进行直射LOS检查
+             无LOS → 跳过该发（不浪费弹药）
+             有LOS → 正常直射
+
+  **Verb_BDPRangedBase中的三级回退定位策略**：
+
+  贯穿整个远程攻击系统，用于从Verb实例定位其所属芯片Thing和配置：
+
+  GetCurrentChipThing(triggerComp) — 定位芯片Thing
+  │
+  ├─ 优先级1：侧别label精确定位
+  │   ParseSideLabel(verbProps.label) → side
+  │   triggerComp.GetActiveSlot(side)?.loadedChip
+  │   （最精确：Verb创建时已编码侧别）
+  │
+  ├─ 优先级2：ActivatingSlot临时上下文
+  │   triggerComp.ActivatingSlot?.loadedChip
+  │   （DoActivate/DeactivateSlot执行期间有效）
+  │
+  └─ 优先级3：遍历所有激活槽位
+      triggerComp.AllActiveSlots中第一个武器芯片
+      （兜底：双手Verb无侧别label时使用）
+
+  GetChipConfig() — 定位芯片配置（同样三级回退）
+    侧别label → ActivatingSlot → 遍历AllActiveSlots
+    读取 WeaponChipConfig (DefModExtension)
+
+
+  ---
+  §3.3.3 呈现完毕。这节可以吗？
+
+✻ Cooked for 2m 7s
+
+❯ 继续 
+  ⎿  Async hook Stop completed
+
+● 好，§3.3.3通过。继续§3.3.4。
+
+  ---
+  §3.3.4 核心不变量与边界情况
+
+  #### 3.3.4 核心不变量与边界情况
+
+  **Verb隔离不变量**：
+
+  | # | 不变量 | 维护者 | 违反后果 |
+  |---|--------|--------|---------|
+  | ⑮ | 芯片Verb不在VerbTracker.AllVerbs中 | CreateAndCacheChipVerbs |
+  被引擎近战选择池/Y按钮自动拾取 |
+  | ⑯ | 所有芯片Verb的hasStandardCommand=false | DualVerbCompositor |
+  引擎为其生成标准Command_VerbTarget |
+  | ⑰ | 芯片Verb的verbTracker指向CompTriggerBody.VerbTracker |
+  CreateAndCacheChipVerbs | EquipmentSource为null，战斗日志无武器来源 |
+  | ⑱ | 芯片Verb的caster = 持有者Pawn | CreateAndCacheChipVerbs + RebuildVerbs |
+   射击/近战时caster为null导致空引用 |
+
+  **Burst状态不变量**：
+
+  | # | 不变量 | 维护者 | 违反后果 |
+  |---|--------|--------|---------|
+  | ⑲ | 近战hitIndex在burst结束时重置为0 | TryCastShot末尾 |
+  下次burst从错误位置开始 |
+  | ⑳ | pendingInterval在非burst期间为-1 | SafeAbortBurst / burst结束重置 |
+  ApplyPendingInterval误覆盖正常间隔 |
+  | ㉑ | 远程DualRanged的dualBurstIndex在新burst开始时清零 |
+  TryStartCastOn中Reset() | 残留索引导致侧别分配错误 |
+  | ㉒ | Verb_BDPMelee.TryCastShot始终返回true | Bug7修复 |
+  miss/dodge取消整个burst连击 |
+
+  **引导弹不变量**：
+
+  | # | 不变量 | 维护者 | 违反后果 |
+  |---|--------|--------|---------|
+  | ㉓ | guidedActive=true时anchors非空 | StartGuidedTargeting |
+  InterceptCastTarget用anchors[0]时空引用 |
+  | ㉔ | 非引导Verb的guidedActive始终为false | StartGuidedTargeting守卫检查 |
+  普通弹道被错误拦截 |
+  | ㉕ | burst结束后guidedActive重置为false | TryCastShot末尾 |
+  下次普通攻击被引导拦截 |
+
+  **数据一致性不变量**：
+
+  | # | 不变量 | 维护者 | 违反后果 |
+  |---|--------|--------|---------|
+  | ㉖ | CopyVerbProps产生独立副本，不修改原始Def数据 |
+  DualVerbCompositor.CopyVerbProps | 污染全局DefModExtension，影响所有触发体 |
+  | ㉗ | 双手合成Verb的burstShotCount = 左burst + 右burst | ComposeDualMelee /
+  ComposeDualRanged | 连击/连射数与实际侧别分配不匹配 |
+  | ㉘ | savedChipVerbs的loadID与CreateAndCacheChipVerbs生成的loadID格式一致 |
+  PostExposeData / CreateAndCacheChipVerbs |
+  读档后FindSavedVerb匹配失败，Job引用断裂 |
+
+  **边界情况**：
+
+  ┌──────────────────────────────────────────────────────────────────────┐
+  │ 场景：burst被外部中断（目标死亡/逃离射程）                            │
+  │                                                                      │
+  │ 远程：JobDriver检测到target无效 → EndJobWith(Incompletable)          │
+  │       Verb的burst状态由引擎在Job结束时自动Reset                      │
+  │                                                                      │
+  │ 近战：TryCastShot中Bug6防御检测target无效                            │
+  │       → SafeAbortBurst() 重置所有BDP状态字段 + base.Reset()          │
+  │       原因：近战burst中途目标死亡时，引擎不一定调用Reset()            │
+  └──────────────────────────────────────────────────────────────────────┘
+
+  ┌──────────────────────────────────────────────────────────────────────┐
+  │ 场景：双侧不同弹药类型（DualRanged交替射击）                         │
+  │                                                                      │
+  │ 机制：VerbProperties.defaultProjectile在合成时设为左侧弹药（占位）   │
+  │       TryCastShot中逐发切换：                                        │
+  │         try {                                                        │
+  │           verbProps.defaultProjectile = currentSideProjectile;       │
+  │           TryCastShotCore(chipEquipment);                            │
+  │         } finally {                                                  │
+  │           verbProps.defaultProjectile = originalProjectile;          │
+  │         }                                                            │
+  │       try/finally保证异常时也能恢复原值                               │
+  │                                                                      │
+  │ 风险：多线程环境下不安全。但RimWorld是单线程游戏，无此问题。          │
+  └──────────────────────────────────────────────────────────────────────┘
+
+  ┌──────────────────────────────────────────────────────────────────────┐
+  │ 场景：引导弹的非引导侧LOS检查（DualRanged/DualVolley）               │
+  │                                                                      │
+  │ 问题：InterceptDualCastTarget用锚点替代目标做LOS检查，               │
+  │       但非引导侧需要对真实目标直射，可能无LOS。                       │
+  │                                                                      │
+  │ 处理：TryCastShot中对非引导侧恢复Thing目标检查LOS：                  │
+  │       · 有LOS → 正常直射                                            │
+  │       · 无LOS → 跳过该发（dualBurstIndex仍推进，不卡住）            │
+  │       · Trion不扣除（未实际发射）                                    │
+  └──────────────────────────────────────────────────────────────────────┘
+
+  ┌──────────────────────────────────────────────────────────────────────┐
+  │ 场景：近战Verb的Stance_Cooldown时序冲突                               │
+  │                                                                      │
+  │ 引擎调用顺序（每tick）：                                              │
+  │   ① VerbsTick() → 检查burst计时 → 触发TryCastShot()                │
+  │   ② StanceTrackerTick() → 清除到期的Stance_Cooldown                 │
+  │                                                                      │
+  │ 问题：①中触发的TryCastShot()试图播放攻击动画，                       │
+  │       但上一击的Stance_Cooldown在②中才清除，动画被阻挡。             │
+  │                                                                      │
+  │ 修复：TryCastShot()开头手动检查并清除Stance_Cooldown：               │
+  │       if (pawn.stances.curStance is Stance_Cooldown)                 │
+  │           pawn.stances.SetStance(new Stance_Mobile());               │
+  └──────────────────────────────────────────────────────────────────────┘
+
+  ┌──────────────────────────────────────────────────────────────────────┐
+  │ 场景：同一芯片双持（AreSameChip=true）                                │
+  │                                                                      │
+  │ 合成行为：                                                           │
+  │   · 不添加右手副Verb（避免Gizmo重复）                                │
+  │   · 合成Verb的burstShotCount仍然叠加（左burst+右burst）             │
+  │   · 近战：hitIndex前半=左手，后半=右手（虽然是同一芯片）             │
+  │   · 远程：交替射击，两侧弹药类型相同                                 │
+  │                                                                      │
+  │ 视觉效果：双倍连击/连射，但只有1个独立Gizmo + 1个合成Gizmo           │
+  └──────────────────────────────────────────────────────────────────────┘
+
+  ┌──────────────────────────────────────────────────────────────────────┐
+  │ 场景：齐射Verb的burstShotCount=1设计                                  │
+  │                                                                      │
+  │ 齐射（Volley）在VerbProperties层面设burstShotCount=1，               │
+  │ 引擎只触发一次TryCastShot()。                                        │
+  │ 实际发射数由芯片配置的burstShotCount决定，在TryCastShot内部循环。    │
+  │                                                                      │
+  │ 原因：引擎burst机制是逐发调用TryCastShot，每发之间有间隔。           │
+  │       齐射需要同一tick内发射所有子弹（视觉上同时出膛）。              │
+  │       若用引擎burst，子弹会一颗一颗飞出，失去齐射感。                │
+  │                                                                      │
+  │ Trion消耗：预检总消耗（volleyCount × costPerShot），                  │
+  │           全部发射后一次性扣除。避免发射到一半Trion不足。              │
+  └──────────────────────────────────────────────────────────────────────┘
+
+  ┌──────────────────────────────────────────────────────────────────────┐
+  │ 场景：Verb_BDPRangedBase.ExposeData占位VerbProperties                 │
+  │                                                                      │
+  │ 问题：读档时Verb实例先被反序列化（ResolvingCrossRefs阶段），          │
+  │       此时verbProps可能为null。引擎在某些路径检查verbProps非null，     │
+  │       null时标记verb为BuggedAfterLoading并跳过。                      │
+  │                                                                      │
+  │ 修复：ExposeData中若verbProps==null，创建最小化占位VerbProperties：   │
+  │       verbProps = new VerbProperties { verbClass = GetType() }       │
+  │       后续CreateAndCacheChipVerbs会用正确的verbProps覆盖。            │
+  └──────────────────────────────────────────────────────────────────────┘
+
+
+  ---
+  §3.3.4 呈现完毕，§3.3全部完成。这节可以吗？可以的话我继续§3.5。
+
+✻ Crunched for 1m 7s
+
+❯ 继续 
+  ⎿  Async hook Stop completed
+
+● 好，§3.3全部通过。继续§3.5.1。
+
+  ---
+  §3.5.1 Gizmo_TriggerBodyStatus
+
+  #### 3.5.1 Gizmo_TriggerBodyStatus
+
+  Gizmo_TriggerBodyStatus是常驻内联状态条（75×75像素），严格遵循SRP——只负责状态
+  显示和窗口入口，不持有任何业务逻辑。所有数据通过CompTriggerBody的公开属性读取
+  。
+
+  **整体布局**：
+
+  ┌─────────────────────────────── 75px ────────────────────────────────┐
+  │ y+0   ┌─────────────────────────────────────────────────────────┐  │
+  │        │                   窗口背景                              │  │
+  │ y+4   │  [左手标签14px] [芯片图标24×24] [芯片图标] [芯片图标]   │  │
+  │        │  "左手"          槽位0          槽位1       槽位2       │  │
+  │ y+30  │  ████████████░░░░░░░░  左手切换进度条（3px高）          │  │
+  │        │  （仅切换中显示，WindingDown=橙红，WarmingUp=青蓝）      │  │
+  │ y+34  │                                                         │  │
+  │ y+38  │  [右手标签14px] [芯片图标24×24] [芯片图标] [芯片图标]   │  │
+  │        │  "右手"          槽位0          槽位1       槽位2       │  │
+  │ y+64  │  ████████████░░░░░░░░  右手切换进度条（3px高）          │  │
+  │        │  （仅切换中显示）                                       │  │
+  │ y+68  │                                                         │  │
+  │ y+75  └─────────────────────────────────────────────────────────┘  │
+  │         Tooltip: "点击查看/操作所有槽位"                            │
+  │         点击 → 打开Window_TriggerBodySlots（防重复检查）            │
+  └─────────────────────────────────────────────────────────────────────┘
+
+  **四态视觉系统**：
+
+  每个槽位图标根据芯片状态显示不同视觉效果。判定按优先级从高到低：
+
+                      ┌─────────────┐
+                      │ slot.isActive│
+                      │  == true?   │
+                      └──────┬──────┘
+                        是 ╱    ╲ 否
+                         ╱      ╲
+              ┌─────────┐    ┌──────────────┐
+              │ ① 激活  │    │ loadedChip   │
+              │         │    │  != null?    │
+              │ 芯片图标│    └──────┬───────┘
+              │ 绿色边框│      是 ╱    ╲ 否
+              │ (0.4,   │       ╱      ╲
+              │  0.8,   │  ┌────────┐  ┌──────────┐
+              │  0.4)   │  │Combat  │  │ ④ 空     │
+              └─────────┘  │Body    │  │          │
+                           │Active? │  │ 灰色实心 │
+                           └───┬────┘  │ (0.25,   │
+                         是 ╱    ╲ 否  │  0.25,   │
+                          ╱      ╲     │  0.25)   │
+               ┌──────────┐ ┌────────┐ └──────────┘
+               │②注册    │ │③挂载  │
+               │ 未激活   │ │ 未注册 │
+               │          │ │        │
+               │ 芯片图标 │ │ 50%透明│
+               │ 蓝色边框 │ │ 芯片图标│
+               │ (0.3,    │ │ 暗黄边框│
+               │  0.5,    │ │ (0.6,  │
+               │  0.8)    │ │  0.55, │
+               └──────────┘ │  0.3)  │
+                            └────────┘
+
+  **四态含义对照**：
+
+  | 状态 | 条件组合 | 图标处理 | 边框颜色 | 含义 |
+  |------|---------|---------|---------|------|
+  | ① 激活 | isActive == true | 正常显示 | 绿色(0.4, 0.8, 0.4) |
+  芯片正在输出效果 |
+  | ② 注册未激活 | 有芯片 + 战斗体已激活 + !isActive | 正常显示 | 蓝色(0.3, 0.5,
+   0.8) | 芯片已装载，战斗体在线，但未选中激活 |
+  | ③ 挂载未注册 | 有芯片 + 战斗体未激活 | 50%透明 | 暗黄(0.6, 0.55, 0.3) |
+  芯片已装载，但战斗体离线 |
+  | ④ 空 | loadedChip == null | 无图标 | 灰色实心填充(0.25, 0.25, 0.25) | 空槽位
+   |
+
+  **GetBestDisplaySlot优先级**：
+
+  每侧只显示一个"代表"槽位的图标。选择逻辑：
+
+  GetBestDisplaySlot(side) → ChipSlot
+  │
+  ├─ 优先级1：该侧的激活槽位
+  │   GetActiveSlot(side)?.loadedChip != null → 返回
+  │
+  └─ 优先级2：该侧第一个有芯片的槽位
+      遍历slots，找到loadedChip != null的第一个 → 返回
+      全部为空 → 返回null（显示④空状态）
+
+  **切换进度条**：
+
+  绘制条件：triggerBody.IsSideSwitching(side) == true
+
+  进度值：triggerBody.GetSideSwitchProgress(side)
+          返回 0.0~1.0（已经过时间 / 总时长）
+
+  颜色选择：
+    triggerBody.GetSideSwitchPhase(side) 返回值：
+    ┌──────────────┬────────────────────────────────────┐
+    │ WindingDown   │ WindingDownBarTex — 橙红色          │
+    │              │ 含义：旧芯片正在后摇/关闭中          │
+    ├──────────────┼────────────────────────────────────┤
+    │ WarmingUp    │ WarmingUpBarTex — 青蓝色            │
+    │              │ 含义：新芯片正在前摇/预热中          │
+    └──────────────┴────────────────────────────────────┘
+
+  绘制方式：
+    Widgets.FillableBar(barRect, progress, barTex)
+    barRect: 宽度=Gizmo宽度-边距, 高度=3px
+    位置：紧贴对应侧图标行下方
+
+  **点击交互**：
+
+  Widgets.ButtonInvisible(gizmoRect)
+  │
+  ├─ 检查Window_TriggerBodySlots是否已打开
+  │   Find.WindowStack.IsOpen()
+  │   └─ 已打开 → 不重复创建
+  │
+  └─ 未打开 → Find.WindowStack.Add(new Window_TriggerBodySlots(triggerBody))
+
+
+  ---
+  §3.5.1 呈现完毕。这节可以吗？
+
+✻ Cooked for 48s
+
+❯ 继续 
+  ⎿  Async hook Stop completed
+
+● 好，§3.5.1通过。继续§3.5.2。
+
+  ---
+  §3.5.2 Window_TriggerBodySlots
+
+  #### 3.5.2 Window_TriggerBodySlots
+
+  Window_TriggerBodySlots是浮动窗口，展示触发体所有槽位的详细状态，支持点击激活/
+  关闭芯片。严格遵循SRP——交互操作全部委托CompTriggerBody公开API（ActivateChip/De
+  activateChip），不绕过状态机。
+
+  **窗口属性**：
+
+  | 属性 | 值 | 说明 |
+  |------|----|------|
+  | doCloseX | true | 右上角关闭按钮 |
+  | absorbInputAroundWindow | false | 不阻挡窗口外的游戏交互 |
+  | forcePause | false | 不暂停游戏 |
+  | draggable | true | 可拖拽移动 |
+  | closeOnClickedOutside | false | 点击外部不关闭 |
+
+  **自适应布局**：
+
+  HasSpecialSlots = triggerBody.Props.specialSlotCount > 0
+
+  ┌─ specialSlotCount > 0 → 三列布局（560×260px）──────────────────────┐
+  │                                                                      │
+  │  标题: "槽位状态 — {触发体名称}"                                     │
+  │  ┌──────────────┐  ┌──────────────┐  ┌────────────────┐             │
+  │  │ 左手槽        │  │ 右手槽        │  │ 特殊槽          │             │
+  │  │ (Left Hand)  │  │ (Right Hand) │  │ (Special)      │             │
+  │  │              │  │              │  │                │             │
+  │  │ 宽度:        │  │ 宽度:        │  │ 宽度: 160px    │             │
+  │  │ (560-160     │  │ (同左)       │  │                │             │
+  │  │  -8×2)/2     │  │              │  │ editable=false │             │
+  │  │ =192px       │  │              │  │ （只读预览）    │             │
+  │  │              │  │              │  │                │             │
+  │  │ editable     │  │ editable     │  │                │             │
+  │  │ =true        │  │ =true        │  │                │             │
+  │  └──────────────┘  └──────────────┘  └────────────────┘             │
+  │  ├── gap=8px ──┤  ├── gap=8px ──┤                                   │
+  └──────────────────────────────────────────────────────────────────────┘
+
+  ┌─ specialSlotCount == 0 → 两列布局（380×260px）─────────────────────┐
+  │                                                                      │
+  │  标题: "槽位状态 — {触发体名称}"                                     │
+  │  ┌──────────────────┐  ┌──────────────────┐                         │
+  │  │ 左手槽            │  │ 右手槽            │                         │
+  │  │ (Left Hand)      │  │ (Right Hand)     │                         │
+  │  │                  │  │                  │                         │
+  │  │ 宽度:            │  │ 宽度:            │                         │
+  │  │ (380-8)/2=186px  │  │ (同左)           │                         │
+  │  │                  │  │                  │                         │
+  │  │ editable=true    │  │ editable=true    │                         │
+  │  └──────────────────┘  └──────────────────┘                         │
+  │  ├──── gap=8px ────┤                                                │
+  └──────────────────────────────────────────────────────────────────────┘
+
+  hasRightHand==false时右手列显示"（无右手槽）"提示文字。
+
+  **单行槽位绘制（DrawSlotRow）**：
+
+  每行高度: 34px（含2px间距）
+
+  ┌─ 单行布局（32px有效高度）──────────────────────────────────────────┐
+  │                                                                      │
+  │  ┌────┐ ┌──────┐ ┌──────────────────────────┐ ┌──┐                 │
+  │  │[0] │ │ icon │ │ "芯片名称"                │ │● │                 │
+  │  │    │ │24×24 │ │                          │ │  │                 │
+  │  └────┘ └──────┘ └──────────────────────────┘ └──┘                 │
+  │  x+2    x+22     x+50                        xMax-18               │
+  │  18px   24px     (width-70)px                 16px                  │
+  │  索引    图标     芯片标签                     激活指示器             │
+  │                                               （绿色●，仅激活时）   │
+  │                                                                      │
+  │  整行背景色 = 四态行颜色（见下方）                                    │
+  │  整行可点击（ButtonInvisible），切换中/空槽/只读时禁用               │
+  └──────────────────────────────────────────────────────────────────────┘
+
+  空槽位时：
+  ┌────┐ ┌──────────────────────────────────────────┐
+  │[0] │ │ "空"（灰色半透明文字）                     │
+  └────┘ └──────────────────────────────────────────┘
+
+  **四态行颜色判定**：
+
+  与Gizmo_TriggerBodyStatus的四态视觉系统对应，但用于行背景色：
+
+  判定流程（与Gizmo相同优先级）：
+
+    slot.isActive == true？
+    ├─ 是 → 特殊槽？SpecialRowColor(0.2,0.4,0.6,0.3)蓝
+    │                 否则 ActiveRowColor(0.3,0.6,0.3,0.3)绿
+    │
+    └─ 否 → loadedChip != null？
+         ├─ 是 → IsCombatBodyActive？
+         │       ├─ 是 → RegisteredInactiveColor(0.2,0.3,0.5,0.3)暗蓝
+         │       └─ 否 → LoadedUnregisteredColor(0.5,0.45,0.2,0.3)暗黄
+         │               图标额外设50%透明
+         │
+         └─ 否 → EmptyRowColor(0.15,0.15,0.15,0.3)深灰
+
+  | 状态 | 行背景色 | 图标处理 | 可点击 |
+  |------|---------|---------|--------|
+  | 激活（左右手） | 绿色(0.3,0.6,0.3) | 正常 + 绿色●指示器 | 是（点击关闭） |
+  | 激活（特殊槽） | 蓝色(0.2,0.4,0.6) | 正常 + 绿色●指示器 |
+  否（editable=false） |
+  | 注册未激活 | 暗蓝(0.2,0.3,0.5) | 正常 | 是（点击激活） |
+  | 挂载未注册 | 暗黄(0.5,0.45,0.2) | 50%透明 | 否（战斗体未激活） |
+  | 空 | 深灰(0.15,0.15,0.15) | 无图标 | 否（无芯片） |
+
+  **交互流程**：
+
+  玩家点击槽位行
+  │
+  ├─ 前置守卫（canClick判定）：
+  │   editable == true？                    （特殊槽只读 → 拒绝）
+  │   slot.loadedChip != null？             （空槽 → 拒绝）
+  │   !triggerBody.IsSideSwitching(side)？  （该侧切换中 → 拒绝）
+  │   全部通过 → canClick = true
+  │
+  ├─ canClick == false → 行显示DisabledColor(0.5,0.5,0.5,0.5)，无响应
+  │
+  └─ canClick == true → Widgets.ButtonInvisible(rect)
+      │
+      ├─ slot.isActive == true？
+      │   └─ triggerBody.DeactivateChip(side)    关闭当前芯片
+      │
+      └─ slot.isActive == false？
+          └─ triggerBody.ActivateChip(side, slot.index)    激活该芯片
+              └─ 进入§3.1的激活流程（状态机、前置检查等）
+
+  注意：IsSideSwitching(side)是按侧独立检查。
+        v6.0修复：旧代码用IsSwitching检查全局，
+        导致左手切换时右手槽位也被禁用。
+
+
+  ---
+  §3.5.2 呈现完毕。这节可以吗？
+
+✻ Brewed for 54s
+
+❯ 继续 
+  ⎿  Async hook Stop completed
+
+● 好，§3.5.2通过。继续§3.5.3。
+
+  ---
+  §3.5.3 Command_BDPChipAttack
+
+  #### 3.5.3 Command_BDPChipAttack
+
+  Command_BDPChipAttack继承Command_VerbTarget，是芯片攻击的Gizmo入口。解决原版按
+  ownerThing.def合并导致同一触发体所有Verb只显示1个Gizmo的问题（设计决策D5）。仅
+  征召时显示。
+
+  **attackId合并规则**：
+
+  原版合并逻辑（被替代）：
+    Command_VerbTarget.GroupsWith(other)
+      └─ verb.EquipmentSource.def == other.verb.EquipmentSource.def
+         所有芯片Verb的EquipmentSource都是同一个触发体 → 全部合并为1个Gizmo ✗
+
+  BDP合并逻辑：
+    Command_BDPChipAttack.GroupsWith(other)
+      └─ other is Command_BDPChipAttack bdp
+         && this.attackId == bdp.attackId
+         不同芯片有不同attackId → 各自独立Gizmo ✓
+         同芯片跨Pawn有相同attackId → 正确合并 ✓
+
+  **attackId生成规则**（在CompGetEquippedGizmosExtra中）：
+
+  | 场景 | attackId格式 | 示例 | 说明 |
+  |------|-------------|------|------|
+  | 独立左手芯片 | `chipDef.defName` | `"BDP_ArcMoonBlade"` |
+  芯片defName直接作为ID |
+  | 独立右手芯片 | `chipDef.defName` | `"BDP_ScorpionGun"` | 同上 |
+  | 双手合成攻击 | `"dual:" + Sort(A,B).Join("+")` |
+  `"dual:BDP_ArcMoonBlade+BDP_ScorpionGun"` | 字典序排序保证对称性 |
+  | 组合技能 | `"combo:" + comboAbilityDef.defName` |
+  `"combo:BDP_ArcScorpionCombo"` | 组合能力defName |
+
+  **排序对称性保证**：
+
+  双手attackId排序示例：
+
+    左手=弧月刃, 右手=蝎子枪:
+      Sort("BDP_ArcMoonBlade", "BDP_ScorpionGun")
+      → "dual:BDP_ArcMoonBlade+BDP_ScorpionGun"
+
+    左手=蝎子枪, 右手=弧月刃（交换位置）:
+      Sort("BDP_ScorpionGun", "BDP_ArcMoonBlade")
+      → "dual:BDP_ArcMoonBlade+BDP_ScorpionGun"  ← 相同！
+
+    保证：无论芯片装在哪只手，同一组合的attackId一致，
+          多Pawn选中时Gizmo正确合并。
+
+  **Gizmo生成编排**（CompGetEquippedGizmosExtra中的征召分支）：
+
+  CompGetEquippedGizmosExtra()
+  │
+  ├─ yield return 基类Gizmo
+  │
+  ├─ OwnerHasTrionGland() == false？→ 跳过所有芯片Gizmo
+  │
+  ├─ pawn.Drafted == true？（征召时生成攻击Gizmo）
+  │   │
+  │   ├─ leftHandAttackVerb != null？
+  │   │   └─ yield return new Command_BDPChipAttack {
+  │   │         verb = leftHandAttackVerb,
+  │   │         volleyVerb = leftHandVolleyVerb,    ← 可能为null
+  │   │         attackId = leftChipDef.defName
+  │   │       }
+  │   │
+  │   ├─ rightHandAttackVerb != null？
+  │   │   └─ yield return new Command_BDPChipAttack {
+  │   │         verb = rightHandAttackVerb,
+  │   │         volleyVerb = rightHandVolleyVerb,
+  │   │         attackId = rightChipDef.defName
+  │   │       }
+  │   │
+  │   └─ dualAttackVerb != null 且 两侧都有芯片？
+  │       └─ yield return new Command_BDPChipAttack {
+  │             verb = dualAttackVerb,
+  │             volleyVerb = dualVolleyVerb,
+  │             attackId = "dual:" + Sort(leftDef, rightDef) + "+"
+  │           }
+  │
+  ├─ allowChipManagement == true？
+  │   └─ yield return new Gizmo_TriggerBodyStatus(this)
+  │
+  └─ [godMode] yield return 调试Gizmo
+
+  **Gizmo显示示例**（征召状态下）：
+
+  场景：左手=弧月刃（近战），右手=蝎子枪（远程）→ 路径D混合
+
+    ┌──────────┐  ┌──────────┐
+    │ 弧月刃   │  │ 蝎子枪   │
+    │ (近战)   │  │ (远程)   │
+    │          │  │ ★primary │
+    └──────────┘  └──────────┘
+    attackId:     attackId:
+    "BDP_Arc..."  "BDP_Sco..."
+
+  场景：左手=蝎子枪（远程），右手=蝎子枪（远程）→ 路径C远程+远程
+
+    ┌──────────┐  ┌──────────┐
+    │ 蝎子枪   │  │ 双持蝎子 │
+    │ (单发)   │  │ (交替连射)│
+    │          │  │ ★primary │
+    └──────────┘  └──────────┘
+    attackId:     attackId:
+    "BDP_Sco..."  "dual:BDP_Sco...+BDP_Sco..."
+
+    注意：同芯片双持时AreSameChip=true，
+    不生成右手独立Gizmo，只有左手单发+双手合成。
+
+  场景：左手=弧月刃（远程+齐射），右手=蝎子枪（远程+齐射）
+
+    ┌──────────┐  ┌──────────┐  ┌──────────┐
+    │ 弧月刃   │  │ 蝎子枪   │  │ 双持连射 │
+    │ (单发)   │  │ (单发)   │  │ (交替)   │
+    │ 右键:齐射│  │ 右键:齐射│  │ 右键:齐射│
+    └──────────┘  └──────────┘  └──────────┘
+    volleyVerb:   volleyVerb:   volleyVerb:
+    leftVolley    rightVolley   dualVolley
+
+  **GizmoOnGUIInt三种拦截路径**：
+
+  GizmoOnGUIInt(rect, parms)
+  │
+  ├─ 检测鼠标在Gizmo区域内 + 鼠标按下事件
+  │
+  ├─ 路径①：左键 + 单侧引导弹
+  │   │
+  │   │  条件：verb is Verb_BDPRangedBase ranged
+  │   │         && ranged.SupportsGuided == true
+  │   │
+  │   │  为什么拦截：
+  │   │    原版Command_VerbTarget左键 → Find.Targeter.BeginTargeting()
+  │   │    原版Targeter不允许地面瞄准（只能选Thing目标）
+  │   │    引导弹需要选择地面锚点作为折线路径中间点
+  │   │
+  │   │  处理：
+  │   │    ranged.StartGuidedTargeting()
+  │   │    → 进入§3.3.3的多步锚点瞄准状态机
+  │   │    SoundDefOf.Tick_Tiny.PlayOneShotOnCamera()  音效反馈
+  │   │    return GizmoState.Clear  阻止引擎继续处理
+  │   │
+  │   └─ 结果：玩家进入锚点选择→最终目标选择→发射的完整流程
+  │
+  ├─ 路径②：左键 + 双手引导弹
+  │   │
+  │   │  条件：verb is Verb_BDPDualRanged dual
+  │   │         && dual.HasGuidedSide == true
+  │   │         （任一侧支持引导即触发）
+  │   │
+  │   │  处理：同路径①，调用dual.StartGuidedTargeting()
+  │   │
+  │   │  注意：Verb_BDPDualVolley同理检查
+  │   │
+  │   └─ 结果：双侧引导瞄准，引导侧走折线，非引导侧直射
+  │
+  ├─ 路径③：右键 + 有齐射Verb
+  │   │
+  │   │  条件：volleyVerb != null
+  │   │         && 右键点击事件
+  │   │
+  │   │  为什么拦截：
+  │   │    原版右键无特殊行为（或打开verb选择菜单）
+  │   │    BDP用右键触发齐射模式（同一tick发射所有子弹）
+  │   │
+  │   │  处理（按volleyVerb类型分三条子路径）：
+  │   │
+  │   │  ┌─ volleyVerb is Verb_BDPRangedBase vr && vr.SupportsGuided
+  │   │  │   └─ vr.StartGuidedTargeting()  引导齐射
+  │   │  │
+  │   │  ├─ volleyVerb is Verb_BDPDualVolley dv && dv.HasGuidedSide
+  │   │  │   └─ dv.StartGuidedTargeting()  双侧引导齐射
+  │   │  │
+  │   │  └─ 其他（普通齐射）
+  │   │      └─ Find.Targeter.BeginTargeting(volleyVerb)
+  │   │         标准瞄准→选目标→发射齐射
+  │   │
+  │   └─ 结果：右键触发齐射版本的攻击
+  │
+  └─ 无拦截命中 → 返回base.GizmoOnGUIInt()
+      引擎标准处理（普通左键瞄准→选目标→单发攻击）
+
+  **交互总览矩阵**：
+
+  | 鼠标操作 | verb类型 | 条件 | 行为 |
+  |---------|---------|------|------|
+  | 左键 | 普通远程 | !SupportsGuided | 原版Targeter瞄准→单发攻击 |
+  | 左键 | 引导远程 | SupportsGuided | 多步锚点瞄准→引导弹攻击 |
+  | 左键 | 双手引导 | HasGuidedSide | 多步锚点瞄准→双侧引导攻击 |
+  | 左键 | 近战 | — | 原版近战瞄准→近战攻击 |
+  | 右键 | 任意 | volleyVerb==null | 无特殊行为 |
+  | 右键 | 普通远程 | volleyVerb!=null, !Guided | 标准瞄准→齐射 |
+  | 右键 | 引导远程 | volleyVerb!=null, Guided | 多步锚点瞄准→引导齐射 |
+  | 右键 | 双手引导 | volleyVerb!=null, HasGuided | 多步锚点瞄准→双侧引导齐射 |
+
+  **Desc属性增强**：
+
+  volleyVerb != null时：
+    原始描述 + "\n右键：齐射"
+
+  示例：
+    "弧月刃远程攻击。射程24，伤害12。
+     右键：齐射"
+
+
+  ---
+  §3.5.3 呈现完毕，§3.5全部完成。所有设计内容都已呈现。确认后我开始写入文档。
+
+✻ Worked for 1m 7s
+
+❯ 确认 
+  ⎿  Async hook Stop completed
+
+● 好，全部通过。开始写入文档。
+
+● 先更新文档元信息，然后逐步插入§3.3和§3.5内容。
+
+● Update(模组工程\BorderDefenseProtocol\docs\plans\2026-02-25-trigger-module-arc
+        hitecture.md)
+  ⎿  Added 3 lines, removed 3 lines
+       1  ---                                                            
+       2  标题：触发器模块架构设计                                       
+       3 -版本号: v2.1                                                   
+       4 -更新日期: 2026-02-25                                           
+       3 +版本号: v2.2                                                   
+       4 +更新日期: 2026-02-26                                           
+       5  最后修改者: Claude Opus 4.6                                    
+       6  标签: [文档][用户未确认][未完成][未锁定]                       
+       7 -摘要: BDP触发器模块（BDP.Trigger）的架构设计文档。重写自旧版6.2
+         -(v1.5)。以CompTriggerBody为编排器，描述6个子系统的全局结构和概 
+         -要。v2.1填充了§3.1槽位与状态机系统、§3.2芯片效果系统的详细设计 
+         -。                                                             
+       7 +摘要: BDP触发器模块（BDP.Trigger）的架构设计文档。重写自旧版6.2
+         +(v1.5)。以CompTriggerBody为编排器，描述6个子系统的全局结构和概 
+         +要。v2.1填充了§3.1槽位与状态机系统、§3.2芯片效果系统的详细设计 
+         +。v2.2填充了§3.3双武器与攻击系统、§3.5 UI系统的详细设计。      
+       8  ---                                                            
+       9                                                                 
+      10  # 触发器模块架构设计                                           
+
+● 现在插入§3.3详细设计。
+
+✻ Cooked for 2m 46s
+
+❯ 继续写，遇到了什么问题 
+  ⎿  Async hook Stop completed
+
+● 没问题，继续写入。刚才完成了元信息更新，现在插入§3.3详细设计。
+
+✻ Baked for 2m 15s
+
+❯ 继续 
+  ⎿  Async hook Stop completed
+
+● 继续写入§3.3详细设计。替换第一个插入点。
+
+✻ Cogitated for 2m 18s
