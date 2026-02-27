@@ -78,6 +78,11 @@ namespace BDP.Trigger
 
             int leftCount = leftCfg.GetFirstBurstCount();
             int rightCount = rightCfg.GetFirstBurstCount();
+            // v9.0 FireMode：连射数注入
+            var leftFm  = GetFireMode(leftSlot.loadedChip);
+            var rightFm = GetFireMode(rightSlot.loadedChip);
+            if (leftFm  != null) leftCount  = leftFm.GetEffectiveBurst(leftCount);
+            if (rightFm != null) rightCount = rightFm.GetEffectiveBurst(rightCount);
             ThingDef leftProj = leftCfg.GetFirstProjectileDef();
             ThingDef rightProj = rightCfg.GetFirstProjectileDef();
 

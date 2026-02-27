@@ -12,13 +12,17 @@ namespace BDP.Trigger
         /// <summary>命中目标（可能为null=命中地面）。</summary>
         public readonly Thing HitThing;
 
+        /// <summary>是否被护盾格挡。</summary>
+        public readonly bool BlockedByShield;
+
         // ── 可修改 ──
         /// <summary>是否已有模块处理了Impact（true=跳过base.Impact）。</summary>
         public bool Handled;
 
-        public ImpactContext(Thing hitThing)
+        public ImpactContext(Thing hitThing, bool blockedByShield)
         {
             HitThing = hitThing;
+            BlockedByShield = blockedByShield;
             Handled = false;
         }
     }

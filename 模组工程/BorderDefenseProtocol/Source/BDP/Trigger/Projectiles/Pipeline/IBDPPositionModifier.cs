@@ -12,13 +12,17 @@ namespace BDP.Trigger
         /// <summary>逻辑位置（引擎插值计算结果）。</summary>
         public readonly Vector3 LogicalPosition;
 
+        /// <summary>飞行进度（0=刚发射，1=到达目标）。用于抛物线等需要进度的效果。</summary>
+        public readonly float Progress;
+
         // ── 可修改 ──
         /// <summary>显示位置（模块可修改以添加视觉偏移）。</summary>
         public Vector3 DrawPosition;
 
-        public PositionContext(Vector3 logicalPosition)
+        public PositionContext(Vector3 logicalPosition, float progress)
         {
             LogicalPosition = logicalPosition;
+            Progress = progress;
             DrawPosition = logicalPosition;
         }
     }

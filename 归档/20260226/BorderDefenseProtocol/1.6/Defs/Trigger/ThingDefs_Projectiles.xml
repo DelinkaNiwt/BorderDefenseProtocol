@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ══════════════════════════════════════════════════════
+       BDP_Bullet_TestPulse — 测试用爆炸弹（远程A用）
+       Bullet_BDP + ExplosionModule, Bomb伤害, dmg=8, 爆炸半径=1.2, 速度=55
+       ★ PMS重构：统一使用Bullet_BDP，爆炸由BDPExplosionConfig驱动
+       ══════════════════════════════════════════════════════ -->
+  <ThingDef ParentName="BaseBullet">
+    <defName>BDP_Bullet_TestPulse</defName>
+    <label>测试脉冲弹</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <thingClass>BDP.Trigger.Bullet_BDP</thingClass>
+    <projectile>
+      <damageDef>Bomb</damageDef>
+      <damageAmountBase>8</damageAmountBase>
+      <speed>55</speed>
+    </projectile>
+    <modExtensions>
+      <li Class="BDP.Trigger.BeamTrailConfig">
+        <segmentDuration>24</segmentDuration>
+        <trailWidth>0.165</trailWidth>
+        <trailColor>(0.65, 1.0, 0.3, 1.0)</trailColor>
+        <startOpacity>1.0</startOpacity>
+        <decayTime>0.8</decayTime>
+        <decaySharpness>10.0</decaySharpness>
+      </li>
+      <li Class="BDP.Trigger.BDPExplosionConfig">
+        <explosionRadius>1.2</explosionRadius>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- ══════════════════════════════════════════════════════
+       BDP_Bullet_TestSniper — 测试用狙击弹（远程B用）
+       Bullet_BDP + GuidedModule, 普通伤害, dmg=25, 速度=90
+       ★ PMS重构：BDPGuidedConfig标记启用引导飞行模块
+       ══════════════════════════════════════════════════════ -->
+  <ThingDef ParentName="BaseBullet">
+    <defName>BDP_Bullet_TestSniper</defName>
+    <label>测试狙击弹</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <thingClass>BDP.Trigger.Bullet_BDP</thingClass>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>25</damageAmountBase>
+      <speed>90</speed>
+    </projectile>
+    <modExtensions>
+      <li Class="BDP.Trigger.BeamTrailConfig">
+        <segmentDuration>30</segmentDuration>
+        <trailWidth>0.13</trailWidth>
+        <trailColor>(0.4, 1.0, 0.45, 1.0)</trailColor>
+        <startOpacity>1.0</startOpacity>
+        <decayTime>0.8</decayTime>
+        <decaySharpness>10.0</decaySharpness>
+      </li>
+      <li Class="BDP.Trigger.BDPGuidedConfig" />
+    </modExtensions>
+  </ThingDef>
+
+</Defs>

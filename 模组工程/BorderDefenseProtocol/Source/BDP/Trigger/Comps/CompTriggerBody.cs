@@ -1328,6 +1328,14 @@ namespace BDP.Trigger
                 }
             }
 
+            // v9.0：射击模式Gizmo（始终显示，方便战前配置）
+            foreach (var slot in AllActiveSlots())
+            {
+                var fm = slot.loadedChip?.TryGetComp<CompFireMode>();
+                if (fm != null)
+                    yield return new Gizmo_FireMode(fm, slot.loadedChip.def.label);
+            }
+
             // v2.1.1：allowChipManagement=false时不显示状态Gizmo
             // 原因：近界/黑触发器玩家无法操作芯片，显示Gizmo无意义
             if (Props.allowChipManagement)

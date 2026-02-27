@@ -16,14 +16,10 @@ namespace BDP.Trigger
         /// <summary>当前弹道目标点（模块可修改以实现追踪等）。</summary>
         public Vector3 Destination;
 
-        /// <summary>是否已被某模块修改过。</summary>
-        public bool Modified;
-
         public PathContext(Vector3 origin, Vector3 destination)
         {
             Origin = origin;
             Destination = destination;
-            Modified = false;
         }
     }
 

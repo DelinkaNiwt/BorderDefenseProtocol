@@ -39,7 +39,7 @@ namespace BDP.Trigger
             List<IntVec3> anchors, LocalTargetInfo finalTarget, float spread)
         {
             RawAnchors = new List<IntVec3>(anchors);
-            RawFinalTarget = new LocalTargetInfo(finalTarget.Cell);
+            RawFinalTarget = finalTarget;
             CachedAnchorSpread = spread;
             GuidedTargetCell = finalTarget.Cell;
             GuidedActive = anchors.Count > 0;
@@ -72,8 +72,10 @@ namespace BDP.Trigger
             LocalTargetInfo actualTarget = castTarg;
             if (GuidedActive && RawAnchors != null && RawAnchors.Count > 0)
             {
-                // 能直视目标时保持朝向目标，否则朝向第一锚点
-                bool canSeeTarget = GenSight.LineOfSight(casterPos, actualTarget.Cell, map);
+                // 能直视目标时保持朝向目标，否则朝向第一锚点。
+                // skipFirstCell=true：与引擎CanHitCellFromCellIgnoringRange保持一致，
+                // 避免施法者自身格子影响判断。
+                bool canSeeTarget = GenSight.LineOfSight(casterPos, actualTarget.Cell, map, skipFirstCell: true);
                 if (!canSeeTarget)
                     castTarg = new LocalTargetInfo(RawAnchors[0]);
             }
@@ -90,7 +92,7 @@ namespace BDP.Trigger
             LocalTargetInfo actualTarget = castTarg;
             if (GuidedActive && RawAnchors != null && RawAnchors.Count > 0)
             {
-                bool canSeeTarget = GenSight.LineOfSight(casterPos, actualTarget.Cell, map);
+                bool canSeeTarget = GenSight.LineOfSight(casterPos, actualTarget.Cell, map, skipFirstCell: true);
                 castTarg = canSeeTarget ? new LocalTargetInfo(actualTarget.Cell)
                                         : new LocalTargetInfo(RawAnchors[0]);
             }

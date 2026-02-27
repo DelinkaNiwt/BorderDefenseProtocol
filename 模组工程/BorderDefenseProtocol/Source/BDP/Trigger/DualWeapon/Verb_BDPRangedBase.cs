@@ -334,6 +334,12 @@ namespace BDP.Trigger
             CasterPawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
         }
 
+        // ── v9.0 FireMode辅助 ──
+
+        /// <summary>获取芯片上的CompFireMode（无则返回null）。burst注入仍需要此方法。</summary>
+        protected static CompFireMode GetFireMode(Thing chipThing)
+            => chipThing?.TryGetComp<CompFireMode>();
+
         /// <summary>增加ShotsFired记录（复制自Verb_Shoot.TryCastShot）。</summary>
         private void IncrementShotsFired()
         {

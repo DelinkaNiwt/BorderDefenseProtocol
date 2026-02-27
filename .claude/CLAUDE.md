@@ -14,3 +14,4 @@
 2. DLC列表（5个）：
 3. 游戏根目录路径：“C:\NiwtGames\Steam\steamapps\common\RimWorld”
 4. 游戏程序集路径：“C:\NiwtGames\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed”
+5. C# 7.3 语法

@@ -1,28 +1,5 @@
-namespace BDP.Trigger
-{
-    /// <summary>
-    /// 拦截判定数据包——修饰CheckForFreeIntercept的行为。
-    /// 模块可设置跳过拦截（穿透）或豁免特定目标。
-    /// </summary>
-    public struct InterceptContext
-    {
-        // ── 可修改 ──
-        /// <summary>是否跳过拦截检查（穿透弹）。</summary>
-        public bool SkipIntercept;
-
-        public InterceptContext(bool skipIntercept)
-        {
-            SkipIntercept = skipIntercept;
-        }
-    }
-
-    /// <summary>
-    /// 拦截判定管线接口——修改拦截行为（穿透/豁免）。
-    /// 执行顺序：管线第3阶段（引擎位置计算之后）。
-    /// </summary>
-    public interface IBDPInterceptModifier
-    {
-        /// <summary>修改拦截判定。</summary>
-        void ModifyIntercept(Bullet_BDP host, ref InterceptContext ctx);
-    }
-}
+// IBDPInterceptModifier 已移除。
+// 原因：阶段位置错误——拦截检查在 base.TickInterval() 内部发生，
+// 此阶段在 base 之后执行，永远无法影响拦截结果。
+// 如需穿透弹，需通过 Harmony patch CheckForFreeInterceptBetween 实现，届时重新设计此阶段。
+namespace BDP.Trigger { }

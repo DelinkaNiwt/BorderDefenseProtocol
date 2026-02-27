@@ -209,6 +209,12 @@ namespace BDP.Trigger
 
             leftRemaining = leftCfg?.GetFirstBurstCount() ?? 0;
             rightRemaining = rightCfg?.GetFirstBurstCount() ?? 0;
+            // v9.0 FireMode：连射数注入
+            var leftFm  = GetFireMode(triggerComp.GetActiveSlot(SlotSide.LeftHand)?.loadedChip);
+            var rightFm = GetFireMode(triggerComp.GetActiveSlot(SlotSide.RightHand)?.loadedChip);
+            if (leftFm  != null) leftRemaining  = leftFm.GetEffectiveBurst(leftRemaining);
+            if (rightFm != null) rightRemaining = rightFm.GetEffectiveBurst(rightRemaining);
+            verbProps.burstShotCount = leftRemaining + rightRemaining; // 同步引擎总发数
             leftProjectileDef = leftCfg?.GetFirstProjectileDef();
             rightProjectileDef = rightCfg?.GetFirstProjectileDef();
             gs.LeftIsGuided = leftCfg?.supportsGuided == true;

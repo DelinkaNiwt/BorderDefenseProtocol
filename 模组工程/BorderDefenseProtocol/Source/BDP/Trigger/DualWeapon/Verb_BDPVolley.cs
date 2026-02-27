@@ -36,6 +36,9 @@ namespace BDP.Trigger
 
             // 从芯片配置读取实际发射数
             int volleyCount = GetBurstCountFromConfig(cfg);
+            // v9.0 FireMode：连射数注入
+            var fm = GetFireMode(chipThing);
+            if (fm != null) volleyCount = fm.GetEffectiveBurst(volleyCount);
             float costPerShot = cfg.trionCostPerShot;
 
             // 预检Trion总消耗

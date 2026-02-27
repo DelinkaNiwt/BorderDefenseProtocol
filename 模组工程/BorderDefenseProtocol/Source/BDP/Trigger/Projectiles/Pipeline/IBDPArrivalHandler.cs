@@ -1,5 +1,3 @@
-using Verse;
-
 namespace BDP.Trigger
 {
     /// <summary>
@@ -8,19 +6,9 @@ namespace BDP.Trigger
     /// </summary>
     public struct ArrivalContext
     {
-        // ── 输入（只读）──
-        /// <summary>当前命中目标（可能为null）。</summary>
-        public readonly Thing HitTarget;
-
         // ── 可修改 ──
         /// <summary>是否继续飞行（true=不执行Impact，模块已重定向）。</summary>
         public bool Continue;
-
-        public ArrivalContext(Thing hitTarget)
-        {
-            HitTarget = hitTarget;
-            Continue = false;
-        }
     }
 
     /// <summary>

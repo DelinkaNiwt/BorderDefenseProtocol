@@ -40,6 +40,20 @@ namespace BDP.Trigger
 
             // B3修复：使用芯片Thing作为equipment source
             Thing chipEquipment = GetCurrentChipThing(triggerComp);
+
+            // v9.0 FireMode：连射截断（burst 机制截断法）
+            var fm = GetFireMode(chipEquipment);
+            if (fm != null)
+            {
+                var cfg = chipEquipment?.def?.GetModExtension<WeaponChipConfig>();
+                if (cfg != null)
+                {
+                    int effective = fm.GetEffectiveBurst(cfg.GetFirstBurstCount());
+                    int fired = verbProps.burstShotCount - burstShotsLeft;
+                    if (fired >= effective) { burstShotsLeft = 0; return false; }
+                }
+            }
+
             bool result = TryCastShotCore(chipEquipment);
 
             // 射击成功后消耗Trion

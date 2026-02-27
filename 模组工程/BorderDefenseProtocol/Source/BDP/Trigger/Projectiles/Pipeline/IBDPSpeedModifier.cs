@@ -1,33 +1,27 @@
 namespace BDP.Trigger
 {
-    /// <summary>
-    /// 速度修饰数据包——每tick决定"飞多快"。
-    /// 模块通过修改SpeedMultiplier来加速/减速弹道。
-    /// </summary>
+    /// <summary>发射时速度修正上下文。输入字段 readonly，输出字段可修改。</summary>
     public struct SpeedContext
     {
-        // ── 输入（只读）──
-        /// <summary>基础飞行速度（def.projectile.speed）。</summary>
-        public readonly float BaseSpeed;
+        /// <summary>初始速度倍率（来自 CompFireMode.Speed）。</summary>
+        public readonly float BaseSpeedMult;
+        /// <summary>最终速度倍率（模块可修改）。</summary>
+        public float SpeedMult;
 
-        // ── 可修改 ──
-        /// <summary>速度乘数（默认1.0，模块可叠加修改）。</summary>
-        public float SpeedMultiplier;
-
-        public SpeedContext(float baseSpeed)
+        public SpeedContext(float speedMult)
         {
-            BaseSpeed = baseSpeed;
-            SpeedMultiplier = 1f;
+            BaseSpeedMult = speedMult;
+            SpeedMult     = speedMult;
         }
     }
 
     /// <summary>
-    /// 速度修饰管线接口——修改飞行速度（加速/减速）。
-    /// 执行顺序：管线第2阶段（PathResolver之后）。
+    /// 发射时速度修正管线接口。
+    /// 在 Projectile.Launch Postfix 中调用（一次性，非 per-tick）。
+    /// 实现此接口的模块可在 ReinitFlight 执行前修改速度倍率。
     /// </summary>
     public interface IBDPSpeedModifier
     {
-        /// <summary>修改速度乘数。</summary>
-        void ModifySpeed(Bullet_BDP host, ref SpeedContext ctx);
+        void ModifySpeed(Bullet_BDP bullet, ref SpeedContext ctx);
     }
 }

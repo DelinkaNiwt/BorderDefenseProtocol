@@ -115,6 +115,7 @@
         <activationWarmup>48</activationWarmup>
         <deactivationDelay>12</deactivationDelay>
       </li>
+      <li Class="BDP.Trigger.CompProperties_FireMode"/>
     </comps>
     <modExtensions>
       <li Class="BDP.Trigger.WeaponChipConfig">
@@ -165,6 +166,7 @@
         <activationWarmup>48</activationWarmup>
         <deactivationDelay>12</deactivationDelay>
       </li>
+      <li Class="BDP.Trigger.CompProperties_FireMode"/>
     </comps>
     <modExtensions>
       <li Class="BDP.Trigger.WeaponChipConfig">
@@ -192,8 +194,60 @@
   </ThingDef>
 
   <!-- ══════════════════════════════════════════════════════
-       #5 BDP_Chip_Test_Shield — 护盾芯片（双手锁定）
+       #5 BDP_Chip_Test_RangedC — 远程武器芯片C（猎犬追踪弹3连射）
+       验证：Verb_BDPShoot + BDP_Bullet_Hound追踪弹 + burst=3 + 齐射 + FireMode
+       ══════════════════════════════════════════════════════ -->
+  <ThingDef>
+    <defName>BDP_Chip_Test_RangedC</defName>
+    <label>测试远程芯片C</label>
+    <description>猎犬追踪弹3连射远程芯片。activationCost=4, allocationCost=8, trionCostPerShot=1。支持齐射。</description>
+    <category>Item</category>
+    <thingClass>ThingWithComps</thingClass>
+    <graphicData>
+      <texPath>Things/Trigger/BDP_Chip_Test</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <Mass>0.1</Mass>
+      <MarketValue>130</MarketValue>
+    </statBases>
+    <comps>
+      <li Class="BDP.Trigger.CompProperties_TriggerChip">
+        <chipEffectClass>BDP.Trigger.WeaponChipEffect</chipEffectClass>
+        <activationCost>4</activationCost>
+        <allocationCost>8</allocationCost>
+        <activationWarmup>48</activationWarmup>
+        <deactivationDelay>12</deactivationDelay>
+      </li>
+      <li Class="BDP.Trigger.CompProperties_FireMode"/>
+    </comps>
+    <modExtensions>
+      <li Class="BDP.Trigger.WeaponChipConfig">
+        <supportsVolley>true</supportsVolley>
+        <volleySpreadRadius>0.3</volleySpreadRadius>
+        <trionCostPerShot>1</trionCostPerShot>
+        <!-- T36：远程Verb配置存放在DefModExtension中 -->
+        <verbProperties>
+          <li>
+            <verbClass>BDP.Trigger.Verb_BDPShoot</verbClass>
+            <hasStandardCommand>true</hasStandardCommand>
+            <defaultProjectile>BDP_Bullet_Hound</defaultProjectile>
+            <warmupTime>1.0</warmupTime>
+            <range>25</range>
+            <burstShotCount>3</burstShotCount>
+            <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+            <soundCast>Shot_ChargeRifle</soundCast>
+            <muzzleFlashScale>9</muzzleFlashScale>
+          </li>
+        </verbProperties>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- ══════════════════════════════════════════════════════
+       #6 BDP_Chip_Test_Shield — 护盾芯片（双手锁定）
        验证：ShieldChipEffect + isDualHand + shieldHediffDef
+       （原#5，因插入RangedC后顺延）
        ══════════════════════════════════════════════════════ -->
   <ThingDef>
     <defName>BDP_Chip_Test_Shield</defName>
@@ -227,7 +281,7 @@
   </ThingDef>
 
   <!-- ══════════════════════════════════════════════════════
-       #6 BDP_Chip_Test_Stealth — 隐身芯片（辅助类，Ability入口+Hediff实现）
+       #7 BDP_Chip_Test_Stealth — 隐身芯片（辅助类，Ability入口+Hediff实现）
        验证：UtilityChipEffect + drainPerDay + exclusionTags + GiveHediff Ability
        ══════════════════════════════════════════════════════ -->
   <ThingDef>
@@ -265,7 +319,7 @@
   </ThingDef>
 
   <!-- ══════════════════════════════════════════════════════
-       #7 BDP_Chip_Test_Utility — 辅助芯片（跳跃Ability）
+       #8 BDP_Chip_Test_Utility — 辅助芯片（跳跃Ability）
        验证：UtilityChipEffect + abilityDef + CompAbilityEffect_TrionCost
        ══════════════════════════════════════════════════════ -->
   <ThingDef>

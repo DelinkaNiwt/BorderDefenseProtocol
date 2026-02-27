@@ -43,6 +43,8 @@ namespace BDP.Trigger
             {
                 // 当前位置作为新起点，飞向下一路径点
                 host.RedirectFlight(host.DrawPos, controller.CurrentWaypoint);
+                if (!controller.IsGuided)
+                    host.IsOnFinalSegment = true;
                 ctx.Continue = true;
             }
         }
@@ -60,6 +62,8 @@ namespace BDP.Trigger
             if (waypoints.Count < 2) return;
 
             controller = new GuidedFlightController(waypoints);
+            host.FinalTarget = finalTarget;
+            host.IsOnFinalSegment = false;
             // 重定向到第一个路径点
             host.RedirectFlight(host.DrawPos, controller.CurrentWaypoint);
         }
@@ -80,8 +84,10 @@ namespace BDP.Trigger
                 Vector3 basePos = anchors[i].ToVector3Shifted();
                 if (anchorSpread > 0f)
                 {
+                    // 中间锚点散布上限与最终目标一致（0.45格），避免弹道中段过度偏离
+                    float clampedSpread = Mathf.Min(anchorSpread, 0.45f);
                     float factor = (float)(i + 1) / totalSegments;
-                    Vector2 offset = Random.insideUnitCircle * anchorSpread * factor;
+                    Vector2 offset = Random.insideUnitCircle * clampedSpread * factor;
                     basePos += new Vector3(offset.x, 0f, offset.y);
                 }
                 waypoints.Add(basePos);

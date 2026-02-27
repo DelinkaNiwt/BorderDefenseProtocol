@@ -52,6 +52,13 @@ namespace BDP.Trigger
         /// </summary>
         public float anchorSpread = 0.3f;
 
+        /// <summary>
+        /// 穿体穿透力初始值（0=不穿透）。
+        /// 区别于护甲穿透（armorPenetration）——此值决定子弹能否穿过目标继续飞行。
+        /// 每次穿透后由ImpactHandler递减，降至0时停止穿透。
+        /// </summary>
+        public float passthroughPower = 0f;
+
         /// <summary>从verbProperties中读取第一个burstShotCount>0的值（默认1）。</summary>
         public int GetFirstBurstCount()
         {

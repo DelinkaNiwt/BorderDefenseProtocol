@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ══════════════════════════════════════════════════════
+       #1 BDP_Chip_Test_MeleeA — 近战武器芯片A（Cut双连击）
+       验证：WeaponChipEffect + tools注入 + meleeBurstCount + activationCost
+       ══════════════════════════════════════════════════════ -->
+  <ThingDef>
+    <defName>BDP_Chip_Test_MeleeA</defName>
+    <label>测试近战芯片A</label>
+    <description>Cut双连击近战芯片。activationCost=5, allocationCost=5。</description>
+    <category>Item</category>
+    <thingClass>ThingWithComps</thingClass>
+    <graphicData>
+      <texPath>Things/Trigger/BDP_Chip_Test</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <Mass>0.1</Mass>
+      <MarketValue>80</MarketValue>
+    </statBases>
+    <comps>
+      <li Class="BDP.Trigger.CompProperties_TriggerChip">
+        <chipEffectClass>BDP.Trigger.WeaponChipEffect</chipEffectClass>
+        <activationCost>5</activationCost>
+        <allocationCost>5</allocationCost>
+        <activationWarmup>48</activationWarmup>
+        <deactivationDelay>12</deactivationDelay>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="BDP.Trigger.WeaponChipConfig">
+        <meleeBurstCount>2</meleeBurstCount>
+        <meleeBurstInterval>6</meleeBurstInterval>
+        <!-- T36：近战Tool配置存放在DefModExtension中，不放ThingDef.tools -->
+        <tools>
+          <li>
+            <label>刃</label>
+            <capacities><li>Cut</li></capacities>
+            <power>15</power>
+            <cooldownTime>1.5</cooldownTime>
+          </li>
+        </tools>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- ══════════════════════════════════════════════════════
+       #2 BDP_Chip_Test_MeleeB — 近战武器芯片B（Blunt单击）
+       验证：WeaponChipEffect + Blunt伤害 + 单击 + 与MeleeA双武器组合
+       ══════════════════════════════════════════════════════ -->
+  <ThingDef>
+    <defName>BDP_Chip_Test_MeleeB</defName>
+    <label>测试近战芯片B</label>
+    <description>Blunt单击近战芯片。activationCost=3, allocationCost=8。</description>
+    <category>Item</category>
+    <thingClass>ThingWithComps</thingClass>
+    <graphicData>
+      <texPath>Things/Trigger/BDP_Chip_Test</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <Mass>0.1</Mass>
+      <MarketValue>90</MarketValue>
+    </statBases>
+    <comps>
+      <li Class="BDP.Trigger.CompProperties_TriggerChip">
+        <chipEffectClass>BDP.Trigger.WeaponChipEffect</chipEffectClass>
+        <activationCost>3</activationCost>
+        <allocationCost>8</allocationCost>
+        <activationWarmup>48</activationWarmup>
+        <deactivationDelay>12</deactivationDelay>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="BDP.Trigger.WeaponChipConfig">
+        <meleeBurstCount>6</meleeBurstCount>
+        <meleeBurstInterval>3</meleeBurstInterval>
+        <!-- T36：近战Tool配置存放在DefModExtension中，不放ThingDef.tools -->
+        <tools>
+          <li>
+            <label>锤</label>
+            <capacities><li>Blunt</li></capacities>
+            <power>20</power>
+            <cooldownTime>2.0</cooldownTime>
+          </li>
+        </tools>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- ══════════════════════════════════════════════════════
+       #3 BDP_Chip_Test_RangedA — 远程武器芯片A（爆炸弹3连射）
+       验证：Verb_BDPShoot + burst=3 + explosive弹 + trionCostPerShot
+       ══════════════════════════════════════════════════════ -->
+  <ThingDef>
+    <defName>BDP_Chip_Test_RangedA</defName>
+    <label>测试远程芯片A</label>
+    <description>脉冲弹3连射远程芯片。activationCost=3, allocationCost=10, trionCostPerShot=1。</description>
+    <category>Item</category>
+    <thingClass>ThingWithComps</thingClass>
+    <graphicData>
+      <texPath>Things/Trigger/BDP_Chip_Test</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <Mass>0.1</Mass>
+      <MarketValue>120</MarketValue>
+    </statBases>
+    <comps>
+      <li Class="BDP.Trigger.CompProperties_TriggerChip">
+        <chipEffectClass>BDP.Trigger.WeaponChipEffect</chipEffectClass>
+        <activationCost>3</activationCost>
+        <allocationCost>10</allocationCost>
+        <activationWarmup>48</activationWarmup>
+        <deactivationDelay>12</deactivationDelay>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="BDP.Trigger.WeaponChipConfig">
+        <supportsVolley>true</supportsVolley>
+        <volleySpreadRadius>0.3</volleySpreadRadius>
+        <trionCostPerShot>1</trionCostPerShot>
+        <!-- T36：远程Verb配置存放在DefModExtension中 -->
+        <verbProperties>
+          <li>
+            <verbClass>BDP.Trigger.Verb_BDPShoot</verbClass>
+            <hasStandardCommand>true</hasStandardCommand>
+            <defaultProjectile>BDP_Bullet_TestPulse</defaultProjectile>
+            <warmupTime>0.8</warmupTime>
+            <range>20</range>
+            <burstShotCount>3</burstShotCount>
+            <ticksBetweenBurstShots>8</ticksBetweenBurstShots>
+            <soundCast>Shot_ChargeRifle</soundCast>
+            <muzzleFlashScale>9</muzzleFlashScale>
+          </li>
+        </verbProperties>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- ══════════════════════════════════════════════════════
+       #4 BDP_Chip_Test_RangedB — 远程武器芯片B（狙击弹10连射+minOutputPower）
+       验证：minOutputPower门槛 + 高allocationCost + 齐射 + burst连射
+       ══════════════════════════════════════════════════════ -->
+  <ThingDef>
+    <defName>BDP_Chip_Test_RangedB</defName>
+    <label>测试远程芯片B</label>
+    <description>狙击弹10连射远程芯片。allocationCost=15, minOutputPower=5, trionCostPerShot=1。支持齐射。</description>
+    <category>Item</category>
+    <thingClass>ThingWithComps</thingClass>
+    <graphicData>
+      <texPath>Things/Trigger/BDP_Chip_Test</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <Mass>0.1</Mass>
+      <MarketValue>150</MarketValue>
+    </statBases>
+    <comps>
+      <li Class="BDP.Trigger.CompProperties_TriggerChip">
+        <chipEffectClass>BDP.Trigger.WeaponChipEffect</chipEffectClass>
+        <allocationCost>15</allocationCost>
+        <minOutputPower>5</minOutputPower>
+        <activationWarmup>48</activationWarmup>
+        <deactivationDelay>12</deactivationDelay>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="BDP.Trigger.WeaponChipConfig">
+        <supportsVolley>true</supportsVolley>
+        <volleySpreadRadius>0.3</volleySpreadRadius>
+        <supportsGuided>true</supportsGuided>
+        <maxAnchors>3</maxAnchors>
+        <anchorSpread>0.3</anchorSpread>
+        <trionCostPerShot>1</trionCostPerShot>
+        <verbProperties>
+          <li>
+            <verbClass>BDP.Trigger.Verb_BDPShoot</verbClass>
+            <hasStandardCommand>true</hasStandardCommand>
+            <defaultProjectile>BDP_Bullet_TestSniper</defaultProjectile>
+            <warmupTime>2.0</warmupTime>
+            <range>40</range>
+            <burstShotCount>10</burstShotCount>
+            <ticksBetweenBurstShots>8</ticksBetweenBurstShots>
+            <soundCast>Shot_SniperRifle</soundCast>
+            <muzzleFlashScale>12</muzzleFlashScale>
+          </li>
+        </verbProperties>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- ══════════════════════════════════════════════════════
+       #5 BDP_Chip_Test_Shield — 护盾芯片（双手锁定）
+       验证：ShieldChipEffect + isDualHand + shieldHediffDef
+       ══════════════════════════════════════════════════════ -->
+  <ThingDef>
+    <defName>BDP_Chip_Test_Shield</defName>
+    <label>测试护盾芯片</label>
+    <description>护盾芯片。isDualHand=true，激活后锁定双侧。activationCost=10, allocationCost=20。</description>
+    <category>Item</category>
+    <thingClass>ThingWithComps</thingClass>
+    <graphicData>
+      <texPath>Things/Trigger/BDP_Chip_Test</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <Mass>0.1</Mass>
+      <MarketValue>200</MarketValue>
+    </statBases>
+    <comps>
+      <li Class="BDP.Trigger.CompProperties_TriggerChip">
+        <chipEffectClass>BDP.Trigger.ShieldChipEffect</chipEffectClass>
+        <activationCost>10</activationCost>
+        <allocationCost>20</allocationCost>
+        <isDualHand>true</isDualHand>
+        <activationWarmup>48</activationWarmup>
+        <deactivationDelay>12</deactivationDelay>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="BDP.Trigger.ShieldChipConfig">
+        <shieldHediffDef>BDP_Hediff_TestShield</shieldHediffDef>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- ══════════════════════════════════════════════════════
+       #6 BDP_Chip_Test_Stealth — 隐身芯片（辅助类，Ability入口+Hediff实现）
+       验证：UtilityChipEffect + drainPerDay + exclusionTags + GiveHediff Ability
+       ══════════════════════════════════════════════════════ -->
+  <ThingDef>
+    <defName>BDP_Chip_Test_Stealth</defName>
+    <label>测试隐身芯片</label>
+    <description>隐身芯片（辅助类）。激活后授予隐身Ability，使用Ability添加隐身Hediff。activationCost=3, allocationCost=12, drainPerDay=10, exclusionTags=stealth。</description>
+    <category>Item</category>
+    <thingClass>ThingWithComps</thingClass>
+    <graphicData>
+      <texPath>Things/Trigger/BDP_Chip_Test</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <Mass>0.1</Mass>
+      <MarketValue>150</MarketValue>
+    </statBases>
+    <comps>
+      <li Class="BDP.Trigger.CompProperties_TriggerChip">
+        <chipEffectClass>BDP.Trigger.UtilityChipEffect</chipEffectClass>
+        <activationCost>3</activationCost>
+        <allocationCost>12</allocationCost>
+        <drainPerDay>10</drainPerDay>
+        <activationWarmup>48</activationWarmup>
+        <deactivationDelay>12</deactivationDelay>
+        <exclusionTags>
+          <li>stealth</li>
+        </exclusionTags>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="BDP.Trigger.UtilityChipConfig">
+        <abilityDef>BDP_Ability_TestStealth</abilityDef>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- ══════════════════════════════════════════════════════
+       #7 BDP_Chip_Test_Utility — 辅助芯片（跳跃Ability）
+       验证：UtilityChipEffect + abilityDef + CompAbilityEffect_TrionCost
+       ══════════════════════════════════════════════════════ -->
+  <ThingDef>
+    <defName>BDP_Chip_Test_Utility</defName>
+    <label>测试辅助芯片</label>
+    <description>辅助芯片。激活时授予跳跃Ability。activationCost=2, allocationCost=5。</description>
+    <category>Item</category>
+    <thingClass>ThingWithComps</thingClass>
+    <graphicData>
+      <texPath>Things/Trigger/BDP_Chip_Test</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <Mass>0.1</Mass>
+      <MarketValue>100</MarketValue>
+    </statBases>
+    <comps>
+      <li Class="BDP.Trigger.CompProperties_TriggerChip">
+        <chipEffectClass>BDP.Trigger.UtilityChipEffect</chipEffectClass>
+        <activationCost>2</activationCost>
+        <allocationCost>5</allocationCost>
+        <activationWarmup>48</activationWarmup>
+        <deactivationDelay>12</deactivationDelay>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="BDP.Trigger.UtilityChipConfig">
+        <abilityDef>BDP_Ability_TestJump</abilityDef>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+</Defs>
