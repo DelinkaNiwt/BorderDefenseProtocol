@@ -65,4 +65,136 @@
     </modExtensions>
   </ThingDef>
 
+  <!-- ══════════════════════════════════════════════════════
+       BDP_Bullet_Hound — 猎犬追踪弹
+       纯追踪（Simple转向），速度35，dmg=6 Bullet
+       拖尾：橙红色，追踪延迟15tick后启动
+       ══════════════════════════════════════════════════════ -->
+  <ThingDef ParentName="BaseBullet">
+    <defName>BDP_Bullet_Hound</defName>
+    <label>猎犬追踪弹</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <thingClass>BDP.Trigger.Bullet_BDP</thingClass>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>6</damageAmountBase>
+      <speed>35</speed>
+    </projectile>
+    <modExtensions>
+      <li Class="BDP.Trigger.BeamTrailConfig">
+        <segmentDuration>30</segmentDuration>
+        <trailWidth>0.14</trailWidth>
+        <trailColor>(1.0, 0.6, 0.2, 1.0)</trailColor>
+        <startOpacity>1.0</startOpacity>
+        <decayTime>1.0</decayTime>
+        <decaySharpness>8.0</decaySharpness>
+      </li>
+      <li Class="BDP.Trigger.BDPTrackingConfig">
+        <turnMode>Simple</turnMode>
+        <maxTurnRate>0.8</maxTurnRate>
+        <trackingStartRatio>0.67</trackingStartRatio>
+        <trackingDelay>3</trackingDelay>
+        <maxFlyingTicks>480</maxFlyingTicks>
+        <maxLockAngle>70</maxLockAngle>
+        <searchRadius>15</searchRadius>
+        <allowRetarget>false</allowRetarget>
+        <lostTrackingSelfDestructTicks>30</lostTrackingSelfDestructTicks>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- ══════════════════════════════════════════════════════
+       BDP_Bullet_Hornet — 黄蜂超追踪弹（重做）
+       贝塞尔曲线追踪 + 速度外推预测 + 重锁能力
+       速度30，dmg=5 Bullet，拖尾：黄色
+       ══════════════════════════════════════════════════════ -->
+  <ThingDef ParentName="BaseBullet">
+    <defName>BDP_Bullet_Hornet</defName>
+    <label>黄蜂超追踪弹</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <thingClass>BDP.Trigger.Bullet_BDP</thingClass>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>5</damageAmountBase>
+      <speed>30</speed>
+    </projectile>
+    <modExtensions>
+      <li Class="BDP.Trigger.BeamTrailConfig">
+        <segmentDuration>36</segmentDuration>
+        <trailWidth>0.12</trailWidth>
+        <trailColor>(1.0, 0.9, 0.1, 1.0)</trailColor>
+        <startOpacity>1.0</startOpacity>
+        <decayTime>1.2</decayTime>
+        <decaySharpness>6.0</decaySharpness>
+      </li>
+      <li Class="BDP.Trigger.BDPTrackingConfig">
+        <!-- 贝塞尔曲线追踪 -->
+        <turnMode>Bezier</turnMode>
+        <bezierControlRatio>0.4</bezierControlRatio>
+        <!-- 速度外推预测 -->
+        <enablePrediction>true</enablePrediction>
+        <predictionTicks>3</predictionTicks>
+        <!-- 立即追踪，极短延迟 -->
+        <trackingStartRatio>1.0</trackingStartRatio>
+        <trackingDelay>5</trackingDelay>
+        <maxFlyingTicks>600</maxFlyingTicks>
+        <!-- 宽脱锁角 + 重锁能力 -->
+        <maxLockAngle>170</maxLockAngle>
+        <searchRadius>20</searchRadius>
+        <searchInterval>15</searchInterval>
+        <allowRetarget>true</allowRetarget>
+        <lostTrackingSelfDestructTicks>90</lostTrackingSelfDestructTicks>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- ══════════════════════════════════════════════════════
+       BDP_Bullet_Argus — 天眼制导弹
+       引导+追踪组合：GuidedModule走锚点折线，末段TrackingModule追踪
+       速度40，dmg=8 Bullet，拖尾：青绿色
+       trackingDelay=3 追踪在Phase进入FinalApproach后延迟3tick激活
+       ══════════════════════════════════════════════════════ -->
+  <ThingDef ParentName="BaseBullet">
+    <defName>BDP_Bullet_Argus</defName>
+    <label>天眼制导弹</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <thingClass>BDP.Trigger.Bullet_BDP</thingClass>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>8</damageAmountBase>
+      <speed>40</speed>
+    </projectile>
+    <modExtensions>
+      <li Class="BDP.Trigger.BeamTrailConfig">
+        <segmentDuration>28</segmentDuration>
+        <trailWidth>0.15</trailWidth>
+        <trailColor>(0.2, 1.0, 0.7, 1.0)</trailColor>
+        <startOpacity>1.0</startOpacity>
+        <decayTime>0.9</decayTime>
+        <decaySharpness>9.0</decaySharpness>
+      </li>
+      <!-- 引导模块：走锚点折线弹道 -->
+      <li Class="BDP.Trigger.BDPGuidedConfig" />
+      <!-- 追踪模块：末段锁定目标 -->
+      <li Class="BDP.Trigger.BDPTrackingConfig">
+        <turnMode>Simple</turnMode>
+        <maxTurnRate>0.8</maxTurnRate>
+        <trackingStartRatio>0.67</trackingStartRatio>
+        <trackingDelay>3</trackingDelay>
+        <maxFlyingTicks>480</maxFlyingTicks>
+        <maxLockAngle>70</maxLockAngle>
+        <searchRadius>15</searchRadius>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
 </Defs>

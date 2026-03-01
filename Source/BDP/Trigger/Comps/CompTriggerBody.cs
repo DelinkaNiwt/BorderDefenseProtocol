@@ -85,6 +85,11 @@ namespace BDP.Trigger
         private Verb rightHandVolleyVerb;   // 右手芯片齐射Verb实例
         private Verb dualVolleyVerb;        // 双手齐射Verb实例
 
+        // ── v10.0新增：组合技Verb缓存（不序列化，CreateAndCacheChipVerbs后重建） ──
+        private Verb comboAttackVerb;       // 组合技攻击Verb实例
+        private Verb comboVolleyVerb;       // 组合技齐射Verb实例
+        private ComboVerbDef matchedComboDef; // 匹配到的组合技定义（Gizmo用）
+
         /// <summary>
         /// 芯片Verb序列化列表（v8.0 PMS重构）。
         /// 存档时收集所有芯片Verb，读档时反序列化并注册到LoadedObjectDirectory，
@@ -465,6 +470,7 @@ namespace BDP.Trigger
                 sb.AppendLine($"  芯片Verb缓存（手动创建，不在AllVerbs中）:");
                 sb.AppendLine($"    left={leftHandAttackVerb?.GetType().Name} right={rightHandAttackVerb?.GetType().Name} dual={dualAttackVerb?.GetType().Name}");
                 sb.AppendLine($"    volleyLeft={leftHandVolleyVerb?.GetType().Name} volleyRight={rightHandVolleyVerb?.GetType().Name} volleyDual={dualVolleyVerb?.GetType().Name}");
+                sb.AppendLine($"    comboAttack={comboAttackVerb?.GetType().Name} comboVolley={comboVolleyVerb?.GetType().Name} comboDef={matchedComboDef?.defName}");
                 Log.Message(sb.ToString());
             }
         }
@@ -486,6 +492,10 @@ namespace BDP.Trigger
             leftHandVolleyVerb = null;
             rightHandVolleyVerb = null;
             dualVolleyVerb = null;
+            // v10.0：清空组合技缓存
+            comboAttackVerb = null;
+            comboVolleyVerb = null;
+            matchedComboDef = null;
 
             // 合成芯片VerbProperties
             var chipVerbProps = DualVerbCompositor.ComposeVerbs(
@@ -549,6 +559,9 @@ namespace BDP.Trigger
 
             // v6.1：为支持齐射的芯片创建volley verb
             CreateVolleyVerbs(pawn);
+
+            // v10.0：检测组合技匹配，创建组合技Verb
+            CreateComboVerbs(pawn);
         }
 
         /// <summary>
@@ -586,6 +599,152 @@ namespace BDP.Trigger
             // 双手齐射：两侧都支持齐射时才创建
             if (leftSupports && rightSupports && dualAttackVerb != null)
                 dualVolleyVerb = CreateSingleVolleyVerb(dualAttackVerb, typeof(Verb_BDPDualVolley), pawn);
+        }
+
+        /// <summary>
+        /// 检测组合技匹配，创建组合技Verb实例（v10.0新增）。
+        /// 遍历DefDatabase&lt;ComboVerbDef&gt;，匹配当前左右手激活芯片。
+        /// 匹配成功时创建Verb_BDPComboShoot（普通+齐射）。
+        /// </summary>
+        private void CreateComboVerbs(Pawn pawn)
+        {
+            var leftSlot = GetActiveOrActivatingSlot(SlotSide.LeftHand);
+            var rightSlot = GetActiveOrActivatingSlot(SlotSide.RightHand);
+            if (leftSlot?.loadedChip == null || rightSlot?.loadedChip == null) return;
+
+            foreach (var comboDef in DefDatabase<ComboVerbDef>.AllDefs)
+            {
+                if (!comboDef.Matches(leftSlot.loadedChip.def, rightSlot.loadedChip.def))
+                    continue;
+
+                // 匹配成功：创建组合技Verb
+                matchedComboDef = comboDef;
+                comboAttackVerb = CreateSingleComboVerb(comboDef, false, pawn,
+                    leftSlot, rightSlot);
+                if (comboDef.supportsVolley)
+                    comboVolleyVerb = CreateSingleComboVerb(comboDef, true, pawn,
+                        leftSlot, rightSlot);
+                break; // 只匹配第一个
+            }
+        }
+
+        /// <summary>
+        /// 创建单个组合技Verb实例（v10.0新增）。
+        /// 参数取两侧芯片的平均值。
+        /// </summary>
+        private Verb CreateSingleComboVerb(ComboVerbDef comboDef, bool isVolley,
+            Pawn pawn, ChipSlot leftSlot, ChipSlot rightSlot)
+        {
+            var leftCfg = leftSlot.loadedChip.def.GetModExtension<WeaponChipConfig>();
+            var rightCfg = rightSlot.loadedChip.def.GetModExtension<WeaponChipConfig>();
+            if (leftCfg == null || rightCfg == null) return null;
+
+            // 计算平均参数
+            float avgRange = (GetFirstRange(leftCfg) + GetFirstRange(rightCfg)) * 0.5f;
+            float avgWarmup = (GetFirstWarmup(leftCfg) + GetFirstWarmup(rightCfg)) * 0.5f;
+            float avgCooldown = (GetFirstCooldown(leftCfg) + GetFirstCooldown(rightCfg)) * 0.5f;
+            int avgBurst = UnityEngine.Mathf.RoundToInt(
+                (leftCfg.GetFirstBurstCount() + rightCfg.GetFirstBurstCount()) * 0.5f);
+            if (avgBurst < 1) avgBurst = 1;
+            float avgTrionCost = (leftCfg.trionCostPerShot + rightCfg.trionCostPerShot) * 0.5f;
+            float avgAnchorSpread = (leftCfg.anchorSpread + rightCfg.anchorSpread) * 0.5f;
+            float avgVolleySpread = (leftCfg.volleySpreadRadius + rightCfg.volleySpreadRadius) * 0.5f;
+            int avgTicksBetween = UnityEngine.Mathf.RoundToInt(
+                (GetFirstTicksBetween(leftCfg) + GetFirstTicksBetween(rightCfg)) * 0.5f);
+
+            // 构建VerbProperties
+            var vp = new VerbProperties
+            {
+                verbClass = typeof(Verb_BDPComboShoot),
+                isPrimary = false,
+                hasStandardCommand = false,
+                defaultProjectile = comboDef.projectileDef,
+                soundCast = GetFirstSound(leftCfg) ?? GetFirstSound(rightCfg),
+                muzzleFlashScale = 10f,
+                range = avgRange,
+                warmupTime = avgWarmup,
+                defaultCooldownTime = avgCooldown,
+                // 齐射模式：burstShotCount=1（TryCastShot内循环）
+                // 普通模式：burstShotCount=avgBurst（引擎burst机制）
+                burstShotCount = isVolley ? 1 : avgBurst,
+                ticksBetweenBurstShots = isVolley ? 0 : avgTicksBetween,
+            };
+
+            string suffix = isVolley ? "Volley" : "Attack";
+            string expectedLoadID = $"BDP_Combo_{parent.ThingID}_{comboDef.defName}_{suffix}";
+
+            // 读档时优先复用已反序列化的Verb实例
+            Verb verb = FindSavedVerb(expectedLoadID);
+            if (verb == null)
+            {
+                try
+                {
+                    verb = (Verb)System.Activator.CreateInstance(typeof(Verb_BDPComboShoot));
+                }
+                catch (System.Exception ex)
+                {
+                    Log.Error($"[BDP] 创建组合技Verb失败: {ex}");
+                    return null;
+                }
+            }
+
+            verb.loadID = expectedLoadID;
+            verb.verbProps = vp;
+            verb.caster = pawn;
+            verb.verbTracker = VerbTracker;
+
+            // 设置组合技专用字段
+            var comboVerb = (Verb_BDPComboShoot)verb;
+            comboVerb.comboDef = comboDef;
+            comboVerb.isVolley = isVolley;
+            comboVerb.avgBurstCount = avgBurst;
+            comboVerb.avgTrionCost = avgTrionCost;
+            comboVerb.avgAnchorSpread = avgAnchorSpread;
+            comboVerb.avgVolleySpread = avgVolleySpread;
+
+            return verb;
+        }
+
+        // ── 组合技参数读取辅助（从WeaponChipConfig.verbProperties[0]读取） ──
+
+        private static float GetFirstRange(WeaponChipConfig cfg)
+        {
+            if (cfg?.verbProperties != null)
+                foreach (var vp in cfg.verbProperties)
+                    if (vp.range > 0) return vp.range;
+            return 20f;
+        }
+
+        private static float GetFirstWarmup(WeaponChipConfig cfg)
+        {
+            if (cfg?.verbProperties != null)
+                foreach (var vp in cfg.verbProperties)
+                    return vp.warmupTime;
+            return 1f;
+        }
+
+        private static float GetFirstCooldown(WeaponChipConfig cfg)
+        {
+            if (cfg?.verbProperties != null)
+                foreach (var vp in cfg.verbProperties)
+                    return vp.defaultCooldownTime;
+            return 1f;
+        }
+
+        private static int GetFirstTicksBetween(WeaponChipConfig cfg)
+        {
+            if (cfg?.verbProperties != null)
+                foreach (var vp in cfg.verbProperties)
+                    return vp.ticksBetweenBurstShots;
+            return 8;
+        }
+
+        private static SoundDef GetFirstSound(WeaponChipConfig cfg)
+        {
+            if (cfg?.verbProperties != null)
+                foreach (var vp in cfg.verbProperties)
+                    if (vp.soundCast != null) return vp.soundCast;
+            return null;
         }
 
         /// <summary>
@@ -1221,6 +1380,9 @@ namespace BDP.Trigger
                 if (leftHandVolleyVerb != null) savedChipVerbs.Add(leftHandVolleyVerb);
                 if (rightHandVolleyVerb != null) savedChipVerbs.Add(rightHandVolleyVerb);
                 if (dualVolleyVerb != null) savedChipVerbs.Add(dualVolleyVerb);
+                // v10.0：组合技Verb
+                if (comboAttackVerb != null) savedChipVerbs.Add(comboAttackVerb);
+                if (comboVolleyVerb != null) savedChipVerbs.Add(comboVolleyVerb);
             }
             Scribe_Collections.Look(ref savedChipVerbs, "chipVerbs", LookMode.Deep);
 
@@ -1326,6 +1488,27 @@ namespace BDP.Trigger
                         defaultLabel = "双手触发",
                     };
                 }
+
+                // v10.0：组合技Gizmo（B+C同时激活时显示）
+                if (comboAttackVerb != null && matchedComboDef != null)
+                {
+                    yield return new Command_BDPChipAttack
+                    {
+                        verb = comboAttackVerb,
+                        volleyVerb = comboVolleyVerb,
+                        attackId = "combo:" + matchedComboDef.defName,
+                        icon = parent.def.uiIcon, // 暂用触发体图标
+                        defaultLabel = matchedComboDef.label ?? "组合技",
+                    };
+                }
+            }
+
+            // v9.0：射击模式Gizmo（始终显示，方便战前配置）
+            foreach (var slot in AllActiveSlots())
+            {
+                var fm = slot.loadedChip?.TryGetComp<CompFireMode>();
+                if (fm != null)
+                    yield return new Gizmo_FireMode(fm, slot.loadedChip.def.label);
             }
 
             // v2.1.1：allowChipManagement=false时不显示状态Gizmo

@@ -7,17 +7,17 @@ namespace BDP.Trigger
     /// 拖尾模块——从Bullet_BDP提取的光束拖尾逻辑。
     /// Priority=100（视觉效果，最后执行）。
     ///
-    /// 管线接口：IBDPTickObserver（每tick只读观察，创建拖尾线段）。
+    /// v5管线接口：IBDPVisualObserver（每tick只读观察，零副作用）。
     ///
     /// 每tick在宿主移动后创建一段BDPTrailSegment(prev→current)，
     /// 由BDPEffectMapComponent统一管理渲染和生命周期。
     /// </summary>
-    public class TrailModule : IBDPProjectileModule, IBDPTickObserver
+    public class TrailModule : IBDPProjectileModule, IBDPVisualObserver
     {
         /// <summary>拖尾配置引用（来自ThingDef.modExtensions）。</summary>
         private readonly BeamTrailConfig config;
 
-        /// <summary>缓存的Material（首次OnTick时延迟初始化，避免读档时跨线程加载）。</summary>
+        /// <summary>缓存的Material（首次Observe时延迟初始化，避免读档时跨线程加载）。</summary>
         private Material trailMat;
 
         /// <summary>是否已尝试初始化Material。</summary>
@@ -39,7 +39,7 @@ namespace BDP.Trigger
         public void OnSpawn(Bullet_BDP host)
         {
             prevPos = host.DrawPos;
-            // Material延迟到OnTick初始化，避免读档时在加载线程调用MaterialPool.MatFrom
+            // Material延迟到Observe初始化，避免读档时在加载线程调用MaterialPool.MatFrom
         }
 
         /// <summary>延迟初始化Material（确保在主线程执行）。</summary>
@@ -58,9 +58,9 @@ namespace BDP.Trigger
         }
 
         /// <summary>
-        /// IBDPTickObserver实现——每tick创建拖尾线段。
+        /// IBDPVisualObserver实现——每tick创建拖尾线段（零副作用）。
         /// </summary>
-        public void OnTick(Bullet_BDP host)
+        public void Observe(Bullet_BDP host)
         {
             EnsureMaterial(host);
             var cfg = config ?? host.def.GetModExtension<BeamTrailConfig>();

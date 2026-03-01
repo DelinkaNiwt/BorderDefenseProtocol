@@ -89,6 +89,17 @@ namespace BDP.Trigger
                 // 等待stance结束（冷却/瞄准中不重复施放）
                 if (pawn.stances.FullBodyBusy) return;
 
+                // 最大射程检查：目标超出射程时结束job。
+                // 引导弹的TryStartCastOn会把castTarg替换为第一个锚点，
+                // 导致base.TryStartCastOn只检查锚点射程而非最终目标射程，
+                // 从而绕过射程限制持续发射。此处在发射前直接检查最终目标距离。
+                float maxRange = verb.verbProps.range;
+                if ((float)pawn.Position.DistanceToSquared(TargetA.Cell) > maxRange * maxRange)
+                {
+                    EndJobWith(JobCondition.Incompletable);
+                    return;
+                }
+
                 LocalTargetInfo castTarget = verb.verbProps.ai_RangedAlawaysShootGroundBelowTarget
                     ? (LocalTargetInfo)TargetA.Cell : TargetA;
 

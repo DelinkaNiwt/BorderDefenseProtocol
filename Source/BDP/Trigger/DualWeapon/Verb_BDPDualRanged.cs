@@ -40,7 +40,7 @@ namespace BDP.Trigger
         }
 
         /// <summary>双侧引导瞄准——查找任一侧的引导配置。</summary>
-        public override void StartGuidedTargeting()
+        public override void StartAnchorTargeting()
         {
             var triggerComp = GetTriggerComp();
             if (triggerComp == null) { Find.Targeter.BeginTargeting(this); return; }
@@ -53,7 +53,7 @@ namespace BDP.Trigger
                                        : (rightCfg?.supportsGuided == true) ? rightCfg : null;
             if (guidedCfg == null) { Find.Targeter.BeginTargeting(this); return; }
 
-            GuidedTargetingHelper.BeginGuidedTargeting(
+            AnchorTargetingHelper.BeginAnchorTargeting(
                 this, CasterPawn, guidedCfg.maxAnchors, verbProps.range,
                 (anchors, finalTarget) =>
                 {
@@ -64,8 +64,8 @@ namespace BDP.Trigger
 
         public override void OrderForceTarget(LocalTargetInfo target)
         {
-            if (HasGuidedSide) { StartGuidedTargeting(); return; }
-            gs.GuidedActive = false;
+            if (HasGuidedSide) { StartAnchorTargeting(); return; }
+            gs.ManualAnchorsActive = false;
             OrderForceTargetCore(target);
         }
 
@@ -101,13 +101,40 @@ namespace BDP.Trigger
             return result;
         }
 
-        /// <summary>双侧LOS检查：感知CurrentShotIsGuided。</summary>
+        protected override ThingDef GetAutoRouteProjectileDef()
+        {
+            var triggerComp = GetTriggerComp();
+            var leftCfg = triggerComp?.GetActiveSlot(SlotSide.LeftHand)?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
+            var rightCfg = triggerComp?.GetActiveSlot(SlotSide.RightHand)?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
+
+            // 自动绕行只对引导弹有意义：优先返回支持引导的一侧弹药。
+            if (leftCfg?.supportsGuided == true)
+                return leftCfg.GetFirstProjectileDef() ?? base.GetAutoRouteProjectileDef();
+            if (rightCfg?.supportsGuided == true)
+                return rightCfg.GetFirstProjectileDef() ?? base.GetAutoRouteProjectileDef();
+
+            return leftCfg?.GetFirstProjectileDef()
+                ?? rightCfg?.GetFirstProjectileDef()
+                ?? base.GetAutoRouteProjectileDef();
+        }
+
+        /// <summary>双侧LOS检查：感知CurrentShotHasPath。</summary>
         protected override LocalTargetInfo GetLosCheckTarget()
             => gs.GetDualLosCheckTarget(currentTarget);
 
-        /// <summary>双侧弹道发射回调：仅当前发属于变化弹侧时附加引导。</summary>
+        /// <summary>
+        /// 双侧弹道发射回调：
+        /// - 手动引导：仅当前发属于引导侧时附加手动锚点路径；
+        /// - 自动绕行：与单侧保持一致，走同一套自动路径挂载流程。
+        /// </summary>
         protected override void OnProjectileLaunched(Projectile proj)
-            => gs.AttachGuidedFlightIfActive(proj);
+        {
+            if (gs.ManualAnchorsActive && gs.CurrentShotHasPath)
+                gs.AttachManualFlight(proj);
+            else
+                gs.AttachAutoRouteFlight(proj, gs.ResolveAutoRouteFinalTarget(currentTarget),
+                    GetChipConfig()?.anchorSpread ?? 0.3f);
+        }
 
         /// <summary>
         /// 重写Reset：清理双武器burst残留状态。
@@ -133,10 +160,10 @@ namespace BDP.Trigger
                 InitDualBurst();
 
             SlotSide shotSide = GetCurrentShotSide();
-            gs.CurrentShotIsGuided = gs.GuidedActive && IsSideGuided(shotSide);
+            gs.CurrentShotHasPath = gs.ManualAnchorsActive && IsSideGuided(shotSide);
 
             // 引导模式下，非变化弹侧无直视LOS → 跳过这发
-            if (gs.GuidedActive && !gs.CurrentShotIsGuided)
+            if (gs.ManualAnchorsActive && !gs.CurrentShotHasPath)
             {
                 IntVec3 losCell = gs.SavedThingTarget.IsValid
                     ? gs.SavedThingTarget.Cell : currentTarget.Cell;
@@ -158,8 +185,8 @@ namespace BDP.Trigger
 
             Thing chipEquipment = GetSideChipThing(shotSide);
 
-            bool needThingRestore = gs.GuidedActive
-                && !gs.CurrentShotIsGuided && gs.SavedThingTarget.IsValid;
+            bool needThingRestore = gs.ManualAnchorsActive
+                && !gs.CurrentShotHasPath && gs.SavedThingTarget.IsValid;
             if (needThingRestore) currentTarget = gs.SavedThingTarget;
 
             ThingDef originalProjectile = verbProps.defaultProjectile;
@@ -177,7 +204,7 @@ namespace BDP.Trigger
             }
 
             if (needThingRestore)
-                currentTarget = new LocalTargetInfo(gs.GuidedTargetCell);
+                currentTarget = new LocalTargetInfo(gs.ManualTargetCell);
 
             dualBurstIndex++;
             if (burstShotsLeft <= 1) dualBurstIndex = 0;
@@ -186,7 +213,7 @@ namespace BDP.Trigger
         }
 
         private bool IsSideGuided(SlotSide side)
-            => side == SlotSide.LeftHand ? gs.LeftIsGuided : gs.RightIsGuided;
+            => side == SlotSide.LeftHand ? gs.LeftHasPath : gs.RightHasPath;
 
         private void InitDualBurst()
         {
@@ -197,8 +224,8 @@ namespace BDP.Trigger
                 rightRemaining = 0;
                 leftProjectileDef = null;
                 rightProjectileDef = null;
-                gs.LeftIsGuided = false;
-                gs.RightIsGuided = false;
+                gs.LeftHasPath = false;
+                gs.RightHasPath = false;
                 return;
             }
 
@@ -209,10 +236,16 @@ namespace BDP.Trigger
 
             leftRemaining = leftCfg?.GetFirstBurstCount() ?? 0;
             rightRemaining = rightCfg?.GetFirstBurstCount() ?? 0;
+            // v9.0 FireMode：连射数注入
+            var leftFm  = GetFireMode(triggerComp.GetActiveSlot(SlotSide.LeftHand)?.loadedChip);
+            var rightFm = GetFireMode(triggerComp.GetActiveSlot(SlotSide.RightHand)?.loadedChip);
+            if (leftFm  != null) leftRemaining  = leftFm.GetEffectiveBurst(leftRemaining);
+            if (rightFm != null) rightRemaining = rightFm.GetEffectiveBurst(rightRemaining);
+            verbProps.burstShotCount = leftRemaining + rightRemaining; // 同步引擎总发数
             leftProjectileDef = leftCfg?.GetFirstProjectileDef();
             rightProjectileDef = rightCfg?.GetFirstProjectileDef();
-            gs.LeftIsGuided = leftCfg?.supportsGuided == true;
-            gs.RightIsGuided = rightCfg?.supportsGuided == true;
+            gs.LeftHasPath = leftCfg?.supportsGuided == true;
+            gs.RightHasPath = rightCfg?.supportsGuided == true;
         }
 
         /// <summary>确定当前发应使用哪一侧（Fix-12：双零防护）。</summary>

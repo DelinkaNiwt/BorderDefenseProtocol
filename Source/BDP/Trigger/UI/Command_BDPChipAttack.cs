@@ -62,7 +62,7 @@ namespace BDP.Trigger
                 && verb is Verb_BDPRangedBase ranged && ranged.SupportsGuided)
             {
                 SoundDefOf.Tick_Tiny.PlayOneShotOnCamera();
-                ranged.StartGuidedTargeting();
+                ranged.StartAnchorTargeting();
                 return new GizmoResult(GizmoState.Clear);
             }
             // 双手触发verb含变化弹侧时，左键也启动锚点瞄准
@@ -70,7 +70,7 @@ namespace BDP.Trigger
                 && verb is Verb_BDPDualRanged dual && dual.HasGuidedSide)
             {
                 SoundDefOf.Tick_Tiny.PlayOneShotOnCamera();
-                dual.StartGuidedTargeting();
+                dual.StartAnchorTargeting();
                 return new GizmoResult(GizmoState.Clear);
             }
 
@@ -81,12 +81,12 @@ namespace BDP.Trigger
                 // 引导齐射verb：检查是否支持引导
                 if (volleyVerb is Verb_BDPRangedBase rangedVolley && rangedVolley.SupportsGuided)
                 {
-                    rangedVolley.StartGuidedTargeting();
+                    rangedVolley.StartAnchorTargeting();
                 }
                 // 双侧齐射verb含变化弹侧
                 else if (volleyVerb is Verb_BDPDualVolley dualVolley && dualVolley.HasGuidedSide)
                 {
-                    dualVolley.StartGuidedTargeting();
+                    dualVolley.StartAnchorTargeting();
                 }
                 else
                 {

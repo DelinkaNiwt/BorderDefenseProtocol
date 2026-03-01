@@ -8,17 +8,26 @@ namespace BDP.Trigger
     /// 引导飞行模块——折线弹道逻辑。
     /// Priority=10（路径修改，优先执行）。
     ///
-    /// 管线接口：IBDPArrivalHandler（到达中间锚点时重定向飞行）。
+    /// v5管线接口：
+    ///   IBDPArrivalPolicy（到达锚点时重定向到下一路径点）
+    ///   IBDPFlightIntentProvider（首tick重定向到第一路径点，一次性）
     ///
     /// 内部持有GuidedFlightController，管理多段折线飞行。
-    /// Verb层通过SetWaypoints()注入锚点和最终目标。
+    /// Verb层通过ApplyWaypoints()注入锚点和最终目标。
     ///
-    /// 路径点构建逻辑（原Verb_BDPGuided.BuildWaypoints）已迁移到本模块内部。
+    /// v5变更：
+    ///   · 不再直接写host.IsOnFinalSegment
+    ///   · 不再调用host.RedirectFlightGuided
+    ///   · 通过ctx.Continue + ctx.NextDestination + ctx.RequestPhaseChange表达意图
+    ///   · 调用host.InitGuidedFlight()初始化引导飞行
     /// </summary>
-    public class GuidedModule : IBDPProjectileModule, IBDPArrivalHandler
+    public class GuidedModule : IBDPProjectileModule, IBDPArrivalPolicy, IBDPFlightIntentProvider
     {
         /// <summary>引导飞行控制器（null=尚未初始化或普通弹道）。</summary>
         private GuidedFlightController controller;
+
+        /// <summary>首次飞行意图标记——ApplyWaypoints后置true，首tick ProvideIntent消费后置false。</summary>
+        private bool needsInitialRedirect;
 
         public int Priority => 10;
 
@@ -33,69 +42,95 @@ namespace BDP.Trigger
         public void OnSpawn(Bullet_BDP host) { }
 
         /// <summary>
-        /// IBDPArrivalHandler实现——到达中间锚点时拦截Impact，重定向飞行到下一路径点。
+        /// IBDPArrivalPolicy实现——到达中间锚点时拦截Impact，重定向飞行到下一路径点。
         /// 设置ctx.Continue=true表示继续飞行（宿主跳过Impact）。
         /// </summary>
-        public void HandleArrival(Bullet_BDP host, ref ArrivalContext ctx)
+        public void DecideArrival(Bullet_BDP host, ref ArrivalContextV5 ctx)
         {
-            if (controller != null && controller.IsGuided
-                && controller.TryAdvanceWaypoint())
+            if (controller == null || !controller.IsGuided) return;
+            if (!controller.TryAdvanceWaypoint()) return;
+
+            if (!controller.IsGuided)
             {
-                // 当前位置作为新起点，飞向下一路径点
-                host.RedirectFlight(host.DrawPos, controller.CurrentWaypoint);
+                // ★ 进入最终段：用目标实时位置替代预计算路径点。
+                // 原因：预计算路径点基于开枪瞬间的Cell坐标，
+                //       飞行途中目标pawn可能已移动，导致初始方向偏离实际目标。
+                //       仅当FinalTarget持有有效Thing时生效，Cell目标回退预计算值。
+                Vector3 finalDest = (host.FinalTarget.Thing != null
+                                     && host.FinalTarget.Thing.Spawned)
+                    ? host.FinalTarget.Thing.DrawPos
+                    : controller.CurrentWaypoint;
                 ctx.Continue = true;
+                ctx.NextDestination = finalDest;
+                ctx.RequestPhaseChange = FlightPhase.FinalApproach;
+
+                if (TrackingDiag.Enabled)
+                {
+                    IntVec3 destCell = finalDest.ToIntVec3();
+                    bool los = host.Map != null
+                        && GenSight.LineOfSight(host.Position, destCell, host.Map);
+                    Log.Message($"[BDP-Guided] →最终段 dest={finalDest:F2} LOS={los}");
+                }
             }
+            else
+            {
+                // 中间锚点：使用预计算路径点
+                ctx.Continue = true;
+                ctx.NextDestination = controller.CurrentWaypoint;
+                ctx.RequestPhaseChange = FlightPhase.GuidedLeg;
+
+                if (TrackingDiag.Enabled)
+                {
+                    IntVec3 wpCell = controller.CurrentWaypoint.ToIntVec3();
+                    bool los = host.Map != null
+                        && GenSight.LineOfSight(host.Position, wpCell, host.Map);
+                    Log.Message($"[BDP-Guided] →锚点 dest={controller.CurrentWaypoint:F2} LOS={los}");
+                }
+            }
+        }
+
+        /// <summary>
+        /// IBDPFlightIntentProvider实现——仅在ApplyWaypoints后的首tick提供一次飞行意图，
+        /// 将子弹重定向到第一个路径点。之后每tick立即返回（无意图）。
+        ///
+        /// 原因：v5管线中Launch后的首次飞行方向由vanilla设定（指向autoRouteLosCell），
+        ///       齐射交替分配左/右路径后，"另一侧"子弹的初始方向与实际路径不匹配。
+        ///       通过管线Stage2在首tick修正，子弹从未朝错误方向移动。
+        /// </summary>
+        public void ProvideIntent(Bullet_BDP host, ref FlightIntentContext ctx)
+        {
+            if (!needsInitialRedirect) return;
+            needsInitialRedirect = false;
+
+            if (controller == null || !controller.IsGuided) return;
+
+            ctx.Intent = new FlightIntent
+            {
+                TargetPosition = controller.CurrentWaypoint,
+                TrackingActivated = false
+            };
         }
 
         /// <summary>
         /// 由Verb层调用——设置锚点和最终目标，构建路径点并初始化引导飞行。
-        /// 内部调用BuildWaypoints()构建路径点列表，然后初始化controller。
+        /// v5变更：调用host.InitGuidedFlight()设置Phase和同步目标，
+        ///         不再直接写host.IsOnFinalSegment。
+        /// v5命名修正：SetWaypoints → ApplyWaypoints。
         /// </summary>
-        public void SetWaypoints(Bullet_BDP host,
+        internal void ApplyWaypoints(Bullet_BDP host,
             List<IntVec3> anchors, LocalTargetInfo finalTarget, float anchorSpread)
         {
             if (anchors == null || anchors.Count == 0) return;
 
-            var waypoints = BuildWaypoints(anchors, finalTarget, anchorSpread);
+            var waypoints = WaypointBuilder.BuildWaypoints(anchors, finalTarget, anchorSpread);
             if (waypoints.Count < 2) return;
 
             controller = new GuidedFlightController(waypoints);
-            // 重定向到第一个路径点
-            host.RedirectFlight(host.DrawPos, controller.CurrentWaypoint);
-        }
 
-        /// <summary>
-        /// 构建路径点列表：锚点坐标 + 最终目标坐标，应用递增散布偏移。
-        /// 散布公式：actualAnchor[i] = anchor[i] + Random.insideUnitCircle * spread * (i+1)/total
-        /// （从Verb_BDPGuided.BuildWaypoints迁移）
-        /// </summary>
-        internal static List<Vector3> BuildWaypoints(
-            List<IntVec3> anchors, LocalTargetInfo finalTarget, float anchorSpread)
-        {
-            var waypoints = new List<Vector3>();
-            int totalSegments = anchors.Count + 1;
+            // v5：通过宿主API初始化引导飞行（设置Phase=GuidedLeg + 同步目标）
+            host.InitGuidedFlight(finalTarget);
+            needsInitialRedirect = true;  // 标记：下一tick通过管线Stage2重定向到首路径点
 
-            for (int i = 0; i < anchors.Count; i++)
-            {
-                Vector3 basePos = anchors[i].ToVector3Shifted();
-                if (anchorSpread > 0f)
-                {
-                    float factor = (float)(i + 1) / totalSegments;
-                    Vector2 offset = Random.insideUnitCircle * anchorSpread * factor;
-                    basePos += new Vector3(offset.x, 0f, offset.y);
-                }
-                waypoints.Add(basePos);
-            }
-
-            Vector3 finalPos = finalTarget.Cell.ToVector3Shifted();
-            if (anchorSpread > 0f)
-            {
-                float clampedSpread = Mathf.Min(anchorSpread, 0.45f);
-                Vector2 finalOffset = Random.insideUnitCircle * clampedSpread;
-                finalPos += new Vector3(finalOffset.x, 0f, finalOffset.y);
-            }
-            waypoints.Add(finalPos);
-            return waypoints;
         }
 
         public void ExposeData()

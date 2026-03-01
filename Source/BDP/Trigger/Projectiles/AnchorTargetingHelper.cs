@@ -18,8 +18,14 @@ namespace BDP.Trigger
     /// 使用 Find.Targeter.BeginTargeting(params, action, highlightAction, validator, ...)
     /// 回调形式实现，不修改 Targeter 本身。
     /// </summary>
-    public static class GuidedTargetingHelper
+    public static class AnchorTargetingHelper
     {
+        // 自动绕行预览缓存：避免每帧重复做ObstacleRouter BFS。
+        private static Map previewRouteMap;
+        private static IntVec3 previewRouteFrom;
+        private static IntVec3 previewRouteTo;
+        private static ObstacleRouteResult? previewRoute;
+
         /// <summary>
         /// 启动多步锚点瞄准。
         /// </summary>
@@ -28,7 +34,7 @@ namespace BDP.Trigger
         /// <param name="maxAnchors">最大锚点数（不含最终目标）</param>
         /// <param name="weaponRange">武器射程（起点到目标直线距离限制）</param>
         /// <param name="onComplete">完成回调：(锚点列表, 最终目标)</param>
-        public static void BeginGuidedTargeting(
+        public static void BeginAnchorTargeting(
             Verb verb, Pawn caster, int maxAnchors, float weaponRange,
             Action<List<IntVec3>, LocalTargetInfo> onComplete)
         {
@@ -90,34 +96,38 @@ namespace BDP.Trigger
                 }
             };
 
-            // 高亮绘制：已放置锚点折线 + 射程环 + LOS红线反馈
+            // 高亮绘制：已放置锚点折线 + 射程环 + LOS红线反馈 + 目标高亮
             Action<LocalTargetInfo> highlightAction = target =>
             {
                 // 射程环
                 GenDraw.DrawRadiusRing(caster.Position, weaponRange);
                 // 绘制已放置锚点和折线（含LOS检测红线）
                 DrawGuidedOverlay(caster, anchors, target, caster.Map);
+                // 目标脚下白色圆圈（与非引导模式一致）
+                if (target.IsValid)
+                    GenDraw.DrawTargetHighlight(target);
             };
 
-            // 目标校验：视线 + 射程
+            // 目标校验：
+            // - 加锚点（按住Shift）时：需要上一点到目标有LOS
+            // - 确认最终目标时：允许无LOS（由自动绕行接管）
             Func<LocalTargetInfo, bool> validator = target =>
             {
                 if (!target.IsValid || !target.Cell.InBounds(caster.Map)) return false;
                 // 射程检查（起点到目标直线距离）
                 if (caster.Position.DistanceTo(target.Cell) > weaponRange) return false;
-                // 视线检查（上一点到目标）
+                bool shiftHeld = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+                bool canAddAnchor = shiftHeld && anchors.Count < maxAnchors;
+                if (!canAddAnchor) return true;
+
+                // 仅锚点添加需要LOS检查（上一点到目标）
                 IntVec3 from = anchors.Count > 0 ? anchors[anchors.Count - 1] : caster.Position;
                 return GenSight.LineOfSight(from, target.Cell, caster.Map);
             };
 
-            // GUI绘制：鼠标光标（使用validator结果判断LOS+射程）
+            // GUI绘制：仅提示文字（准心交给Targeter默认绘制，恢复圆圈样式）
             Action<LocalTargetInfo> onGuiAction = target =>
             {
-                // 鼠标光标：使用validator结果（包含LOS+射程检查）决定图标
-                bool valid = target.IsValid && validator(target);
-                Texture2D icon = valid ? TexCommand.Attack : TexCommand.CannotShoot;
-                GenUI.DrawMouseAttachment(icon);
-
                 // 提示文字：已放置锚点数 / 最大数
                 if (anchors.Count > 0)
                 {
@@ -127,9 +137,12 @@ namespace BDP.Trigger
                 }
             };
 
+            // 鼠标光标：使用verb的UIIcon（与非引导模式一致），回退到默认攻击准心
+            Texture2D cursorIcon = (verb.UIIcon != BaseContent.BadTex) ? verb.UIIcon : null;
+
             Find.Targeter.BeginTargeting(
                 targetParams, action, highlightAction, validator,
-                caster, actionWhenFinished: null, mouseAttachment: null,
+                caster, actionWhenFinished: null, mouseAttachment: cursorIcon,
                 playSoundOnAction: true, onGuiAction: onGuiAction);
         }
 
@@ -142,15 +155,37 @@ namespace BDP.Trigger
         {
             if (anchors == null || anchors.Count == 0)
             {
-                // 无锚点：从施法者到鼠标画预览线
+                // 无锚点：有LOS时直线；无LOS时显示自动绕行的实际路径预览。
                 if (mouseTarget.IsValid)
                 {
-                    // 检查LOS：施法者到鼠标
                     bool hasLOS = GenSight.LineOfSight(caster.Position, mouseTarget.Cell, map);
                     if (hasLOS)
+                    {
                         GenDraw.DrawLineBetween(caster.DrawPos, mouseTarget.CenterVector3);
+                    }
                     else
+                    {
+                        var route = GetPreviewRoute(caster.Position, mouseTarget.Cell, map);
+                        if (route.HasValue && route.Value.IsValid)
+                        {
+                            bool drew = false;
+                            // 仅绘制逐段LOS全通的路径，不通的跳过
+                            if (route.Value.LeftAnchors != null && route.Value.LeftAnchors.Count > 0
+                                && VerbFlightState.IsPathClear(caster.Position, route.Value.LeftAnchors, mouseTarget.Cell, map))
+                            {
+                                DrawPreviewRoutePath(caster.DrawPos, route.Value.LeftAnchors, mouseTarget.CenterVector3);
+                                drew = true;
+                            }
+                            if (route.Value.RightAnchors != null && route.Value.RightAnchors.Count > 0
+                                && VerbFlightState.IsPathClear(caster.Position, route.Value.RightAnchors, mouseTarget.Cell, map))
+                            {
+                                DrawPreviewRoutePath(caster.DrawPos, route.Value.RightAnchors, mouseTarget.CenterVector3);
+                                drew = true;
+                            }
+                            if (drew) return;
+                        }
                         GenDraw.DrawLineBetween(caster.DrawPos, mouseTarget.CenterVector3, SimpleColor.Red);
+                    }
                 }
                 return;
             }
@@ -161,8 +196,6 @@ namespace BDP.Trigger
             {
                 Vector3 current = anchors[i].ToVector3Shifted();
                 GenDraw.DrawLineBetween(prev, current);
-                // 锚点标记
-                GenDraw.DrawTargetHighlight(new LocalTargetInfo(anchors[i]));
                 prev = current;
             }
 
@@ -177,5 +210,35 @@ namespace BDP.Trigger
                     GenDraw.DrawLineBetween(prev, mouseTarget.CenterVector3, SimpleColor.Red);
             }
         }
+
+        /// <summary>获取自动绕行预览路由（按起点/终点/地图缓存）。</summary>
+        private static ObstacleRouteResult? GetPreviewRoute(IntVec3 from, IntVec3 to, Map map)
+        {
+            if (map == null) return null;
+            if (previewRouteMap == map && previewRouteFrom == from && previewRouteTo == to)
+                return previewRoute;
+
+            previewRouteMap = map;
+            previewRouteFrom = from;
+            previewRouteTo = to;
+            previewRoute = ObstacleRouter.ComputeRoute(from, to, map);
+            return previewRoute;
+        }
+
+        /// <summary>绘制一条自动绕行预览路径（起点→锚点序列→终点）。</summary>
+        private static void DrawPreviewRoutePath(Vector3 start, List<IntVec3> anchors, Vector3 end)
+        {
+            if (anchors == null || anchors.Count == 0) return;
+
+            Vector3 prev = start;
+            for (int i = 0; i < anchors.Count; i++)
+            {
+                Vector3 current = anchors[i].ToVector3Shifted();
+                GenDraw.DrawLineBetween(prev, current);
+                prev = current;
+            }
+            GenDraw.DrawLineBetween(prev, end);
+        }
+
     }
 }

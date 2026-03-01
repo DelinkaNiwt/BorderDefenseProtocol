@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ══════════════════════════════════════════════════════
+       BDP_ComboVerb_BC_Argus — 天眼组合技（B+C → 天眼制导弹）
+       当左手芯片B + 右手芯片C同时激活时，额外生成第4个攻击Gizmo。
+       参数取B和C的平均值，发射BDP_Bullet_Argus天眼制导弹。
+       支持引导瞄准（锚点折线弹道）和齐射模式。
+       ══════════════════════════════════════════════════════ -->
+  <BDP.Trigger.ComboVerbDef>
+    <defName>BDP_ComboVerb_BC_Argus</defName>
+    <label>天眼组合</label>
+    <description>芯片B+C组合技：发射天眼制导弹，参数取两侧平均值。支持引导瞄准和齐射。</description>
+    <chipA>BDP_Chip_Test_RangedB</chipA>
+    <chipB>BDP_Chip_Test_RangedC</chipB>
+    <projectileDef>BDP_Bullet_Argus</projectileDef>
+    <supportsVolley>true</supportsVolley>
+    <supportsGuided>true</supportsGuided>
+    <maxAnchors>3</maxAnchors>
+  </BDP.Trigger.ComboVerbDef>
+
+  <!-- ══════════════════════════════════════════════════════
+       BDP_ComboVerb_CC_Hornet — 黄蜂组合技（C+C → 黄蜂超追踪弹）
+       当左右手同时装备猎犬芯片C时，额外生成组合技攻击Gizmo。
+       参数取两侧平均值（同芯片=原值），发射BDP_Bullet_Hornet黄蜂超追踪弹。
+       纯追踪弹，不支持引导瞄准，支持齐射模式。
+       ══════════════════════════════════════════════════════ -->
+  <BDP.Trigger.ComboVerbDef>
+    <defName>BDP_ComboVerb_CC_Hornet</defName>
+    <label>黄蜂组合</label>
+    <description>芯片C+C组合技：发射黄蜂超追踪弹，贝塞尔曲线追踪+速度外推预测+重锁能力。支持齐射。</description>
+    <chipA>BDP_Chip_Test_RangedC</chipA>
+    <chipB>BDP_Chip_Test_RangedC</chipB>
+    <projectileDef>BDP_Bullet_Hornet</projectileDef>
+    <supportsVolley>true</supportsVolley>
+    <supportsGuided>false</supportsGuided>
+  </BDP.Trigger.ComboVerbDef>
+
+</Defs>

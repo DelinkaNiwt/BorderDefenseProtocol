@@ -34,9 +34,9 @@ namespace BDP.Trigger
         /// <summary>
         /// 序列化BDP Verb扩展状态：
         /// 1. 占位VerbProperties防止BuggedAfterLoading判定
-        /// 2. GuidedVerbState引导弹状态（锚点、目标、双侧标记）
+        /// 2. VerbFlightState引导弹状态（锚点、目标、双侧标记）
         ///    原因：引导弹的LOS检查重定向到第一锚点而非最终目标，
-        ///    若GuidedActive丢失，读档后verb直接对最终目标做LOS→失败→无法射击。
+        ///    若ManualAnchorsActive丢失，读档后verb直接对最终目标做LOS→失败→无法射击。
         /// </summary>
         public override void ExposeData()
         {
@@ -44,9 +44,9 @@ namespace BDP.Trigger
             if (Scribe.mode == LoadSaveMode.LoadingVars && verbProps == null)
                 verbProps = new VerbProperties();
 
-            // ── GuidedVerbState序列化 ──
-            Scribe_Values.Look(ref gs.GuidedActive, "gs_guidedActive");
-            Scribe_Values.Look(ref gs.GuidedTargetCell, "gs_guidedTargetCell");
+            // ── VerbFlightState序列化 ──
+            Scribe_Values.Look(ref gs.ManualAnchorsActive, "gs_manualAnchorsActive");
+            Scribe_Values.Look(ref gs.ManualTargetCell, "gs_manualTargetCell");
             Scribe_Values.Look(ref gs.CachedAnchorSpread, "gs_anchorSpread");
             Scribe_Collections.Look(ref gs.RawAnchors, "gs_rawAnchors", LookMode.Value);
             // LocalTargetInfo需要Scribe_TargetInfo
@@ -57,9 +57,9 @@ namespace BDP.Trigger
             var savedThing = gs.SavedThingTarget;
             Scribe_TargetInfo.Look(ref savedThing, "gs_savedThingTarget");
             gs.SavedThingTarget = savedThing;
-            Scribe_Values.Look(ref gs.LeftIsGuided, "gs_leftIsGuided");
-            Scribe_Values.Look(ref gs.RightIsGuided, "gs_rightIsGuided");
-            Scribe_Values.Look(ref gs.CurrentShotIsGuided, "gs_currentShotIsGuided");
+            Scribe_Values.Look(ref gs.LeftHasPath, "gs_leftHasPath");
+            Scribe_Values.Look(ref gs.RightHasPath, "gs_rightHasPath");
+            Scribe_Values.Look(ref gs.CurrentShotHasPath, "gs_currentShotHasPath");
         }
 
         protected CompTriggerBody GetTriggerComp()
@@ -94,6 +94,8 @@ namespace BDP.Trigger
             bool surpriseAttack = false, bool canHitNonTargetPawns = true,
             bool preventFriendlyFire = false, bool nonInterruptingSelfCast = false)
         {
+            ThingDef routeProjectile = GetAutoRouteProjectileDef();
+            gs.PrepareAutoRouteForCast(caster.Position, castTarg, caster.Map, routeProjectile);
             gs.InterceptCastTarget(ref castTarg, caster.Position, caster.Map);
 
             bool result = base.TryStartCastOn(castTarg, destTarg, surpriseAttack,
@@ -104,6 +106,12 @@ namespace BDP.Trigger
 
             return result;
         }
+
+        /// <summary>
+        /// 自动绕行判定用的投射物Def。默认取当前芯片的首个投射物，子类可按双侧规则重写。
+        /// </summary>
+        protected virtual ThingDef GetAutoRouteProjectileDef()
+            => GetChipConfig()?.GetFirstProjectileDef() ?? Projectile;
 
         /// <summary>
         /// 复制Verb_LaunchProjectile.TryCastShot() + Verb_Shoot.TryCastShot()逻辑，
@@ -249,23 +257,26 @@ namespace BDP.Trigger
         /// </summary>
         protected virtual void OnProjectileLaunched(Projectile proj)
         {
-            if (gs.GuidedActive)
-                gs.AttachGuidedFlight(proj);
+            if (gs.ManualAnchorsActive)
+                gs.AttachManualFlight(proj);
+            else
+                gs.AttachAutoRouteFlight(proj, gs.ResolveAutoRouteFinalTarget(currentTarget),
+                    GetChipConfig()?.anchorSpread ?? 0.3f);
         }
 
         // ── PMS重构：引导弹支持（从Verb_BDPGuided上提） ──
 
         /// <summary>引导弹共享状态（PMS重构：从子类上提到基类）。</summary>
-        protected readonly GuidedVerbState gs = new GuidedVerbState();
+        protected readonly VerbFlightState gs = new VerbFlightState();
 
         /// <summary>当前芯片是否支持变化弹（引导飞行）。</summary>
-        public bool SupportsGuided => GetChipConfig()?.supportsGuided == true;
+        public virtual bool SupportsGuided => GetChipConfig()?.supportsGuided == true;
 
         /// <summary>
         /// 启动多步锚点瞄准（由Command_BDPChipAttack.GizmoOnGUIInt调用）。
         /// 不支持引导时回退到普通targeting。
         /// </summary>
-        public virtual void StartGuidedTargeting()
+        public virtual void StartAnchorTargeting()
         {
             var cfg = GetChipConfig();
             if (cfg == null || !cfg.supportsGuided)
@@ -274,7 +285,7 @@ namespace BDP.Trigger
                 return;
             }
 
-            GuidedTargetingHelper.BeginGuidedTargeting(
+            AnchorTargetingHelper.BeginAnchorTargeting(
                 this, CasterPawn, cfg.maxAnchors, verbProps.range,
                 (anchors, finalTarget) =>
                 {
@@ -296,10 +307,10 @@ namespace BDP.Trigger
             // 引导弹：启动多步锚点瞄准
             if (SupportsGuided)
             {
-                StartGuidedTargeting();
+                StartAnchorTargeting();
                 return;
             }
-            gs.GuidedActive = false;
+            gs.ManualAnchorsActive = false;
 
             OrderForceTargetCore(target);
         }
@@ -333,6 +344,12 @@ namespace BDP.Trigger
             job.endIfCantShootInMelee = true;
             CasterPawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
         }
+
+        // ── v9.0 FireMode辅助 ──
+
+        /// <summary>获取芯片上的CompFireMode（无则返回null）。burst注入仍需要此方法。</summary>
+        protected static CompFireMode GetFireMode(Thing chipThing)
+            => chipThing?.TryGetComp<CompFireMode>();
 
         /// <summary>增加ShotsFired记录（复制自Verb_Shoot.TryCastShot）。</summary>
         private void IncrementShotsFired()

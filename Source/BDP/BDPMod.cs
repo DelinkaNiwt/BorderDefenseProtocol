@@ -26,6 +26,7 @@ namespace BDP
             BDPModuleFactory.Register<BeamTrailConfig>(cfg => new TrailModule(cfg));
             BDPModuleFactory.Register<BDPGuidedConfig>(cfg => new GuidedModule(cfg));
             BDPModuleFactory.Register<BDPExplosionConfig>(cfg => new ExplosionModule(cfg));
+            BDPModuleFactory.Register<BDPTrackingConfig>(cfg => new TrackingModule(cfg));
 
             VerifyEngineMethodIntegrity();
         }
