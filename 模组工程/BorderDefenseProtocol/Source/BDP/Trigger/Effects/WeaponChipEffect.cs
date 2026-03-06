@@ -28,10 +28,10 @@ namespace BDP.Trigger
             // 从ActivatingSlot读取WeaponChipConfig（T36：数据存在DefModExtension中）
             var cfg = GetConfig(triggerComp);
 
-            // B2修复：近战芯片只有tools没有verbProperties时，从tools合成melee VerbProperties标记。
+            // B2修复：近战芯片只有tools没有primaryVerbProps时，从tools合成melee VerbProperties标记。
             // 原因：ComposeVerbs需要VerbProperties来识别此侧为近战，触发ComposeDualMelee路径。
-            // 若verbProperties为null，ComposeVerbs回退到触发体默认Verbs，DualMelee永远不会被创建。
-            var verbs = cfg?.verbProperties;
+            // 若primaryVerbProps为null，ComposeVerbs回退到触发体默认Verbs，DualMelee永远不会被创建。
+            var verbs = cfg?.primaryVerbProps != null ? new List<VerbProperties> { cfg.primaryVerbProps } : null;
             if (verbs == null && cfg != null && cfg.tools != null && cfg.tools.Count > 0)
                 verbs = SynthesizeMeleeVerbProps(cfg);
 

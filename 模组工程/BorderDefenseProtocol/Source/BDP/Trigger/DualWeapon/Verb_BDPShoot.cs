@@ -48,7 +48,7 @@ namespace BDP.Trigger
                 var cfg = chipEquipment?.def?.GetModExtension<WeaponChipConfig>();
                 if (cfg != null)
                 {
-                    int effective = fm.GetEffectiveBurst(cfg.GetFirstBurstCount());
+                    int effective = fm.GetEffectiveBurst(cfg.GetPrimaryBurstCount());
                     int fired = verbProps.burstShotCount - burstShotsLeft;
                     if (fired >= effective) { burstShotsLeft = 0; return false; }
                 }

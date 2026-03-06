@@ -42,26 +42,6 @@ namespace BDP.Trigger
         public float trionCostPerShot = 0f;
 
         // ═══════════════════════════════════════════════════════
-        // 废弃字段（保留用于向后兼容）
-        // ═══════════════════════════════════════════════════════
-
-        /// <summary>
-        /// [已废弃] 远程武器Verb配置列表。
-        /// 请使用 primaryVerbProps/secondaryVerbProps 替代。
-        /// 保留用于向后兼容：如果新字段为null，则回退到此字段。
-        /// </summary>
-        [System.Obsolete("Use primaryVerbProps/secondaryVerbProps instead")]
-        public List<VerbProperties> verbProperties;
-
-        /// <summary>
-        /// [已废弃] 是否支持齐射模式（右键触发）。
-        /// 请使用 secondaryVerbProps 显式配置齐射verb替代。
-        /// 保留用于向后兼容：如果secondaryVerbProps为null且此字段为true，则自动创建齐射verb。
-        /// </summary>
-        [System.Obsolete("Use secondaryVerbProps with Verb_BDPVolley instead")]
-        public bool supportsVolley = false;
-
-        // ═══════════════════════════════════════════════════════
         // 特殊机制配置
         // ═══════════════════════════════════════════════════════
 
@@ -92,38 +72,16 @@ namespace BDP.Trigger
         // 辅助方法
         // ═══════════════════════════════════════════════════════
 
-        /// <summary>获取主攻击verb的burstShotCount（优先使用primaryVerbProps，回退到verbProperties）。</summary>
+        /// <summary>获取主攻击verb的burstShotCount。</summary>
         public int GetPrimaryBurstCount()
         {
-            if (primaryVerbProps != null && primaryVerbProps.burstShotCount > 0)
-                return primaryVerbProps.burstShotCount;
-            return GetFirstBurstCount(); // 回退到旧逻辑
+            return primaryVerbProps?.burstShotCount ?? 1;
         }
 
-        /// <summary>获取主攻击verb的投射物（优先使用primaryVerbProps，回退到verbProperties）。</summary>
+        /// <summary>获取主攻击verb的投射物。</summary>
         public ThingDef GetPrimaryProjectileDef()
         {
-            if (primaryVerbProps != null && primaryVerbProps.defaultProjectile != null)
-                return primaryVerbProps.defaultProjectile;
-            return GetFirstProjectileDef(); // 回退到旧逻辑
-        }
-
-        /// <summary>[已废弃] 从verbProperties中读取第一个burstShotCount>0的值（默认1）。</summary>
-        public int GetFirstBurstCount()
-        {
-            if (verbProperties == null) return 1;
-            foreach (var vp in verbProperties)
-                if (vp.burstShotCount > 0) return vp.burstShotCount;
-            return 1;
-        }
-
-        /// <summary>[已废弃] 从verbProperties中读取第一个非null的defaultProjectile。</summary>
-        public ThingDef GetFirstProjectileDef()
-        {
-            if (verbProperties == null) return null;
-            foreach (var vp in verbProperties)
-                if (vp.defaultProjectile != null) return vp.defaultProjectile;
-            return null;
+            return primaryVerbProps?.defaultProjectile;
         }
     }
 }

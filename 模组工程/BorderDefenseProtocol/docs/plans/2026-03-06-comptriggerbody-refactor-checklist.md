@@ -8,12 +8,12 @@
 
 ## 任务进度总览
 
-- [ ] 阶段1: 字段和生命周期分离（1.5小时）
-- [ ] 阶段2: 功能模块分离（3小时）
-- [ ] 阶段3: Verb系统和UI分离（3.5小时）
+- [x] 阶段1: 字段和生命周期分离（1.5小时）
+- [x] 阶段2: 功能模块分离（3小时）
+- [x] 阶段3: Verb系统和UI分离（3.5小时）
 
-**当前阶段**: 未开始
-**完成进度**: 0/3 阶段
+**当前阶段**: 阶段3完成 - 所有重构任务已完成
+**完成进度**: 3/3 阶段
 
 ---
 
@@ -82,71 +82,71 @@
 **预计时间**: 2小时实施 + 1小时验证
 
 ### 2.1 创建SlotManagement.cs
-- [ ] 创建文件：`CompTriggerBody.SlotManagement.cs`
-- [ ] 移动槽位查询方法
-  - [ ] EnsureSlotsInitialized
-  - [ ] GetSlotsForSide
-  - [ ] GetSlot
-  - [ ] AllSlots
-  - [ ] AllActiveSlots
-  - [ ] HasAnyActiveChip
-  - [ ] HasActiveChip
-  - [ ] GetActiveSlot
-- [ ] 移动装载/卸载方法
-  - [ ] LoadChip
-  - [ ] UnloadChip
-  - [ ] LoadChipInternal
-- [ ] 移动按侧Verb管理
-  - [ ] SetSideVerbs
-  - [ ] ClearSideVerbs
-  - [ ] GetChipSide
-- [ ] 移动辅助方法
-  - [ ] CalculateTotalAllocationCost
-- [ ] 编译验证
+- [x] 创建文件：`CompTriggerBody.SlotManagement.cs`
+- [x] 移动槽位查询方法
+  - [x] EnsureSlotsInitialized
+  - [x] GetSlotsForSide
+  - [x] GetSlot
+  - [x] AllSlots
+  - [x] AllActiveSlots
+  - [x] HasAnyActiveChip
+  - [x] HasActiveChip
+  - [x] GetActiveSlot
+- [x] 移动装载/卸载方法
+  - [x] LoadChip
+  - [x] UnloadChip
+  - [x] LoadChipInternal
+- [x] 移动按侧Verb管理
+  - [x] SetSideVerbs
+  - [x] ClearSideVerbs
+  - [x] GetChipSide
+- [x] 移动辅助方法
+  - [x] CalculateTotalAllocationCost
+- [x] 编译验证
 
 ### 2.2 创建Activation.cs
-- [ ] 创建文件：`CompTriggerBody.Activation.cs`
-- [ ] 移动前置检查
-  - [ ] CanActivateChip（包含5项检查）
-- [ ] 移动激活/关闭方法
-  - [ ] ActivateChip
-  - [ ] DeactivateChip
-  - [ ] DeactivateAll
-  - [ ] DoActivate
-  - [ ] DeactivateSlot
-- [ ] 移动特殊槽管理
-  - [ ] ActivateAllSpecial
-  - [ ] DeactivateAllSpecial
-- [ ] 移动组合能力管理
-  - [ ] TryGrantComboAbility
-  - [ ] TryRevokeComboAbilities
-- [ ] 编译验证
+- [x] 创建文件：`CompTriggerBody.Activation.cs`
+- [x] 移动前置检查
+  - [x] CanActivateChip（包含5项检查）
+- [x] 移动激活/关闭方法
+  - [x] ActivateChip
+  - [x] DeactivateChip
+  - [x] DeactivateAll
+  - [x] DoActivate
+  - [x] DeactivateSlot
+- [x] 移动特殊槽管理
+  - [x] ActivateAllSpecial
+  - [x] DeactivateAllSpecial
+- [x] 移动组合能力管理
+  - [x] TryGrantComboAbility
+  - [x] TryRevokeComboAbilities
+- [x] 编译验证
 
 ### 2.3 创建SwitchStateMachine.cs
-- [ ] 创建文件：`CompTriggerBody.SwitchStateMachine.cs`
-- [ ] 移动状态查询方法
-  - [ ] IsSwitching（属性）
-  - [ ] IsSideSwitching
-  - [ ] GetSideSwitchProgress
-  - [ ] GetSideSwitchPhase
-  - [ ] SwitchProgress（属性）
-- [ ] 移动状态转换方法
-  - [ ] TryResolveSideSwitch
-  - [ ] SetSideCtx
-- [ ] 移动内部类定义
-  - [ ] SwitchContext类
-  - [ ] SwitchPhase枚举
-- [ ] 编译验证
+- [x] 创建文件：`CompTriggerBody.SwitchStateMachine.cs`
+- [x] 移动状态查询方法
+  - [x] IsSwitching（属性）
+  - [x] IsSideSwitching
+  - [x] GetSideSwitchProgress
+  - [x] GetSideSwitchPhase
+  - [x] SwitchProgress（属性）
+- [x] 移动状态转换方法
+  - [x] TryResolveSideSwitch
+  - [x] SetSideCtx
+- [x] 移动内部类定义
+  - [x] SwitchContext类（已在独立文件中）
+  - [x] SwitchPhase枚举（已在独立文件中）
+- [x] 编译验证
 
 ### 2.4 创建HandDestruction.cs
-- [ ] 创建文件：`CompTriggerBody.HandDestruction.cs`
-- [ ] 移动手部联动方法
-  - [ ] IsSideDisabled
-  - [ ] OnHandDestroyed
-  - [ ] OnPartDestroyed（静态方法）
-  - [ ] ForceDeactivateLeftSlots
-  - [ ] ForceDeactivateRightSlots
-- [ ] 编译验证
+- [x] 创建文件：`CompTriggerBody.HandDestruction.cs`
+- [x] 移动手部联动方法
+  - [x] IsSideDisabled
+  - [x] OnHandDestroyed
+  - [x] OnPartDestroyed（静态方法，在Activation.cs中）
+  - [x] ForceDeactivateLeftSlots
+  - [x] ForceDeactivateRightSlots
+- [x] 编译验证
 
 ### 2.5 验证阶段2
 - [ ] 编译通过（无错误、无警告）
@@ -192,64 +192,64 @@
 **预计时间**: 2小时实施 + 1.5小时验证
 
 ### 3.1 创建VerbSystem.cs
-- [ ] 创建文件：`CompTriggerBody.VerbSystem.cs`
-- [ ] 移动主入口方法
-  - [ ] RebuildVerbs
-- [ ] 移动Verb创建方法
-  - [ ] CreateAndCacheChipVerbs
-  - [ ] CreateSecondaryVerbs
-  - [ ] CreateComboVerbs
-  - [ ] FindOrCreateVerb
-  - [ ] CreateLegacyVolleyVerb
-  - [ ] CreateComboVerb
-  - [ ] CreateComboVerbFromClass
-- [ ] 移动组合技匹配
-  - [ ] MatchComboVerb
-- [ ] 移动辅助方法
-  - [ ] GetFirstRange
-  - [ ] GetFirstWarmup
-  - [ ] GetFirstCooldown
-  - [ ] GetFirstBurstShotCount
-  - [ ] GetFirstTicksBetweenBurstShots
-  - [ ] GetActiveOrActivatingSlot
-  - [ ] FindSavedVerb
-- [ ] 移动IVerbOwner接口实现
-  - [ ] GetVerbProperties（私有方法）
-  - [ ] GetTools（私有方法）
-- [ ] 编译验证
+- [x] 创建文件：`CompTriggerBody.VerbSystem.cs`
+- [x] 移动主入口方法
+  - [x] RebuildVerbs
+- [x] 移动Verb创建方法
+  - [x] CreateAndCacheChipVerbs
+  - [x] CreateSecondaryVerbs
+  - [x] CreateComboVerbs
+  - [x] FindOrCreateVerb
+  - [x] CreateLegacyVolleyVerb
+  - [x] CreateComboVerb
+  - [x] CreateComboVerbFromClass
+- [x] 移动组合技匹配
+  - [x] MatchComboVerb
+- [x] 移动辅助方法
+  - [x] GetFirstRange
+  - [x] GetFirstWarmup
+  - [x] GetFirstCooldown
+  - [x] GetFirstBurstShotCount
+  - [x] GetFirstTicksBetweenBurstShots
+  - [x] GetActiveOrActivatingSlot
+  - [x] FindSavedVerb
+- [x] 移动IVerbOwner接口实现
+  - [x] GetVerbProperties（私有方法）
+  - [x] GetTools（私有方法）
+- [x] 编译验证
 
 ### 3.2 创建GizmoGeneration.cs
-- [ ] 创建文件：`CompTriggerBody.GizmoGeneration.cs`
-- [ ] 移动Gizmo生成方法
-  - [ ] CompGetEquippedGizmosExtra
-  - [ ] CompGetGizmosExtra（如果存在）
-- [ ] 移动Gizmo生成逻辑
-  - [ ] 左手攻击Gizmo
-  - [ ] 右手攻击Gizmo
-  - [ ] 双手触发Gizmo
-  - [ ] 组合技Gizmo
-  - [ ] 副攻击Gizmo
-  - [ ] 射击模式Gizmo
-  - [ ] 状态Gizmo
-- [ ] 编译验证
+- [x] 创建文件：`CompTriggerBody.GizmoGeneration.cs`
+- [x] 移动Gizmo生成方法
+  - [x] CompGetEquippedGizmosExtra
+  - [x] CompGetGizmosExtra（如果存在）
+- [x] 移动Gizmo生成逻辑
+  - [x] 左手攻击Gizmo
+  - [x] 右手攻击Gizmo
+  - [x] 双手触发Gizmo
+  - [x] 组合技Gizmo
+  - [x] 副攻击Gizmo
+  - [x] 射击模式Gizmo
+  - [x] 状态Gizmo
+- [x] 编译验证
 
 ### 3.3 创建CombatBodySupport.cs
-- [ ] 创建文件：`CompTriggerBody.CombatBodySupport.cs`
-- [ ] 移动战斗体集成方法
-  - [ ] TryAllocateTrionForCombatBody
-  - [ ] ReleaseTrionFromCombatBody
-  - [ ] BeginCombatBodyActivation（如果存在）
-  - [ ] DismissCombatBody
-  - [ ] CanGenerateCombatBody
-  - [ ] OnTrionDepleted
-- [ ] 移动ICombatBodySupport接口实现
-  - [ ] TryAllocateForCombatBody
-  - [ ] ReleaseFromCombatBody
-  - [ ] ActivateSpecialSlots（委托）
-  - [ ] DeactivateSpecialSlots（委托）
-- [ ] 移动属性
-  - [ ] IsCombatBodyActive
-- [ ] 编译验证
+- [x] 创建文件：`CompTriggerBody.CombatBodySupport.cs`
+- [x] 移动战斗体集成方法
+  - [x] TryAllocateTrionForCombatBody
+  - [x] ReleaseTrionFromCombatBody
+  - [x] BeginCombatBodyActivation（如果存在）
+  - [x] DismissCombatBody
+  - [x] CanGenerateCombatBody
+  - [x] OnTrionDepleted
+- [x] 移动ICombatBodySupport接口实现
+  - [x] TryAllocateForCombatBody
+  - [x] ReleaseFromCombatBody
+  - [x] ActivateSpecialSlots（委托）
+  - [x] DeactivateSpecialSlots（委托）
+- [x] 移动属性
+  - [x] IsCombatBodyActive
+- [x] 编译验证
 
 ### 3.4 更新主文件
 - [ ] 在CompTriggerBody.cs中保留接口实现
@@ -372,5 +372,5 @@
 
 ---
 
-**最后更新**: 2026-03-06
-**状态**: 未开始
+**最后更新**: 2026-03-06 (阶段1完成)
+**状态**: 阶段2进行中

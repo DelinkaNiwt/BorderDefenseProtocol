@@ -110,12 +110,12 @@ namespace BDP.Trigger
 
             // 自动绕行只对引导弹有意义：优先返回支持引导的一侧弹药。
             if (leftCfg?.supportsGuided == true)
-                return leftCfg.GetFirstProjectileDef() ?? base.GetAutoRouteProjectileDef();
+                return leftCfg.GetPrimaryProjectileDef() ?? base.GetAutoRouteProjectileDef();
             if (rightCfg?.supportsGuided == true)
-                return rightCfg.GetFirstProjectileDef() ?? base.GetAutoRouteProjectileDef();
+                return rightCfg.GetPrimaryProjectileDef() ?? base.GetAutoRouteProjectileDef();
 
-            return leftCfg?.GetFirstProjectileDef()
-                ?? rightCfg?.GetFirstProjectileDef()
+            return leftCfg?.GetPrimaryProjectileDef()
+                ?? rightCfg?.GetPrimaryProjectileDef()
                 ?? base.GetAutoRouteProjectileDef();
         }
 
@@ -235,16 +235,16 @@ namespace BDP.Trigger
             var rightCfg = triggerComp.GetActiveSlot(SlotSide.RightHand)
                 ?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
 
-            leftRemaining = leftCfg?.GetFirstBurstCount() ?? 0;
-            rightRemaining = rightCfg?.GetFirstBurstCount() ?? 0;
+            leftRemaining = leftCfg?.GetPrimaryBurstCount() ?? 0;
+            rightRemaining = rightCfg?.GetPrimaryBurstCount() ?? 0;
             // v9.0 FireMode：连射数注入
             var leftFm  = GetFireMode(triggerComp.GetActiveSlot(SlotSide.LeftHand)?.loadedChip);
             var rightFm = GetFireMode(triggerComp.GetActiveSlot(SlotSide.RightHand)?.loadedChip);
             if (leftFm  != null) leftRemaining  = leftFm.GetEffectiveBurst(leftRemaining);
             if (rightFm != null) rightRemaining = rightFm.GetEffectiveBurst(rightRemaining);
             verbProps.burstShotCount = leftRemaining + rightRemaining; // 同步引擎总发数
-            leftProjectileDef = leftCfg?.GetFirstProjectileDef();
-            rightProjectileDef = rightCfg?.GetFirstProjectileDef();
+            leftProjectileDef = leftCfg?.GetPrimaryProjectileDef();
+            rightProjectileDef = rightCfg?.GetPrimaryProjectileDef();
             gs.LeftHasPath = leftCfg?.supportsGuided == true;
             gs.RightHasPath = rightCfg?.supportsGuided == true;
         }

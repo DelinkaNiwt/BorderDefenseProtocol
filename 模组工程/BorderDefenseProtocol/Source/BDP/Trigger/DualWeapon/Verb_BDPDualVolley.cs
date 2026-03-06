@@ -68,12 +68,12 @@ namespace BDP.Trigger
 
             // 自动绕行只对引导弹有意义：优先返回支持引导的一侧弹药。
             if (leftCfg?.supportsGuided == true)
-                return leftCfg.GetFirstProjectileDef() ?? base.GetAutoRouteProjectileDef();
+                return leftCfg.GetPrimaryProjectileDef() ?? base.GetAutoRouteProjectileDef();
             if (rightCfg?.supportsGuided == true)
-                return rightCfg.GetFirstProjectileDef() ?? base.GetAutoRouteProjectileDef();
+                return rightCfg.GetPrimaryProjectileDef() ?? base.GetAutoRouteProjectileDef();
 
-            return leftCfg?.GetFirstProjectileDef()
-                ?? rightCfg?.GetFirstProjectileDef()
+            return leftCfg?.GetPrimaryProjectileDef()
+                ?? rightCfg?.GetPrimaryProjectileDef()
                 ?? base.GetAutoRouteProjectileDef();
         }
 
@@ -104,15 +104,15 @@ namespace BDP.Trigger
             var rightCfg = rightSlot.loadedChip.def.GetModExtension<WeaponChipConfig>();
             if (leftCfg == null || rightCfg == null) return false;
 
-            int leftCount = leftCfg.GetFirstBurstCount();
-            int rightCount = rightCfg.GetFirstBurstCount();
+            int leftCount = leftCfg.GetPrimaryBurstCount();
+            int rightCount = rightCfg.GetPrimaryBurstCount();
             // v9.0 FireMode：连射数注入
             var leftFm  = GetFireMode(leftSlot.loadedChip);
             var rightFm = GetFireMode(rightSlot.loadedChip);
             if (leftFm  != null) leftCount  = leftFm.GetEffectiveBurst(leftCount);
             if (rightFm != null) rightCount = rightFm.GetEffectiveBurst(rightCount);
-            ThingDef leftProj = leftCfg.GetFirstProjectileDef();
-            ThingDef rightProj = rightCfg.GetFirstProjectileDef();
+            ThingDef leftProj = leftCfg.GetPrimaryProjectileDef();
+            ThingDef rightProj = rightCfg.GetPrimaryProjectileDef();
 
             if (gs.ManualAnchorsActive) { gs.LeftHasPath = leftCfg.supportsGuided; gs.RightHasPath = rightCfg.supportsGuided; }
 

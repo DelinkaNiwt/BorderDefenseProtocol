@@ -14,7 +14,7 @@
     <chipA>BDP_Chip_Test_RangedB</chipA>
     <chipB>BDP_Chip_Test_RangedC</chipB>
     <projectileDef>BDP_Bullet_Argus</projectileDef>
-    <supportsVolley>true</supportsVolley>
+    <secondaryVerbClass>BDP.Trigger.Verb_BDPComboShoot</secondaryVerbClass>
     <supportsGuided>true</supportsGuided>
     <maxAnchors>3</maxAnchors>
   </BDP.Trigger.ComboVerbDef>
@@ -32,7 +32,7 @@
     <chipA>BDP_Chip_Test_RangedC</chipA>
     <chipB>BDP_Chip_Test_RangedC</chipB>
     <projectileDef>BDP_Bullet_Hornet</projectileDef>
-    <supportsVolley>true</supportsVolley>
+    <secondaryVerbClass>BDP.Trigger.Verb_BDPComboShoot</secondaryVerbClass>
     <supportsGuided>false</supportsGuided>
   </BDP.Trigger.ComboVerbDef>
 

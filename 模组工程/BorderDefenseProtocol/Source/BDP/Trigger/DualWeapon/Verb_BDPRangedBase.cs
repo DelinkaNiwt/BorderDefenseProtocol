@@ -111,7 +111,7 @@ namespace BDP.Trigger
         /// 自动绕行判定用的投射物Def。默认取当前芯片的首个投射物，子类可按双侧规则重写。
         /// </summary>
         protected virtual ThingDef GetAutoRouteProjectileDef()
-            => GetChipConfig()?.GetFirstProjectileDef() ?? Projectile;
+            => GetChipConfig()?.GetPrimaryProjectileDef() ?? Projectile;
 
         /// <summary>
         /// 复制Verb_LaunchProjectile.TryCastShot() + Verb_Shoot.TryCastShot()逻辑，

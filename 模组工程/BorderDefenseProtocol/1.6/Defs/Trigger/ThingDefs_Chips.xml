@@ -148,23 +148,32 @@
     </comps>
     <modExtensions>
       <li Class="BDP.Trigger.WeaponChipConfig">
-        <supportsVolley>true</supportsVolley>
         <volleySpreadRadius>0.3</volleySpreadRadius>
         <trionCostPerShot>1</trionCostPerShot>
         <!-- T36：远程Verb配置存放在DefModExtension中 -->
-        <verbProperties>
-          <li>
-            <verbClass>BDP.Trigger.Verb_BDPShoot</verbClass>
-            <hasStandardCommand>true</hasStandardCommand>
-            <defaultProjectile>BDP_Bullet_TestPulse</defaultProjectile>
-            <warmupTime>0.8</warmupTime>
-            <range>20</range>
-            <burstShotCount>3</burstShotCount>
-            <ticksBetweenBurstShots>8</ticksBetweenBurstShots>
-            <soundCast>Shot_ChargeRifle</soundCast>
-            <muzzleFlashScale>9</muzzleFlashScale>
-          </li>
-        </verbProperties>
+        <primaryVerbProps>
+          <verbClass>BDP.Trigger.Verb_BDPShoot</verbClass>
+          <hasStandardCommand>true</hasStandardCommand>
+          <defaultProjectile>BDP_Bullet_TestPulse</defaultProjectile>
+          <warmupTime>0.8</warmupTime>
+          <range>20</range>
+          <burstShotCount>3</burstShotCount>
+          <ticksBetweenBurstShots>8</ticksBetweenBurstShots>
+          <soundCast>Shot_ChargeRifle</soundCast>
+          <muzzleFlashScale>9</muzzleFlashScale>
+        </primaryVerbProps>
+        <secondaryVerbProps>
+          <verbClass>BDP.Trigger.Verb_BDPVolley</verbClass>
+          <hasStandardCommand>false</hasStandardCommand>
+          <defaultProjectile>BDP_Bullet_TestPulse</defaultProjectile>
+          <warmupTime>0.8</warmupTime>
+          <range>20</range>
+          <burstShotCount>1</burstShotCount>
+          <ticksBetweenBurstShots>0</ticksBetweenBurstShots>
+          <soundCast>Shot_ChargeRifle</soundCast>
+          <muzzleFlashScale>9</muzzleFlashScale>
+          <label>齐射</label>
+        </secondaryVerbProps>
       </li>
     </modExtensions>
   </ThingDef>
@@ -211,25 +220,34 @@
     </comps>
     <modExtensions>
       <li Class="BDP.Trigger.WeaponChipConfig">
-        <supportsVolley>true</supportsVolley>
         <volleySpreadRadius>0.3</volleySpreadRadius>
         <supportsGuided>true</supportsGuided>
         <maxAnchors>3</maxAnchors>
         <anchorSpread>0.3</anchorSpread>
         <trionCostPerShot>1</trionCostPerShot>
-        <verbProperties>
-          <li>
-            <verbClass>BDP.Trigger.Verb_BDPShoot</verbClass>
-            <hasStandardCommand>true</hasStandardCommand>
-            <defaultProjectile>BDP_Bullet_TestSniper</defaultProjectile>
-            <warmupTime>2.0</warmupTime>
-            <range>40</range>
-            <burstShotCount>10</burstShotCount>
-            <ticksBetweenBurstShots>8</ticksBetweenBurstShots>
-            <soundCast>Shot_SniperRifle</soundCast>
-            <muzzleFlashScale>12</muzzleFlashScale>
-          </li>
-        </verbProperties>
+        <primaryVerbProps>
+          <verbClass>BDP.Trigger.Verb_BDPShoot</verbClass>
+          <hasStandardCommand>true</hasStandardCommand>
+          <defaultProjectile>BDP_Bullet_TestSniper</defaultProjectile>
+          <warmupTime>2.0</warmupTime>
+          <range>40</range>
+          <burstShotCount>10</burstShotCount>
+          <ticksBetweenBurstShots>8</ticksBetweenBurstShots>
+          <soundCast>Shot_SniperRifle</soundCast>
+          <muzzleFlashScale>12</muzzleFlashScale>
+        </primaryVerbProps>
+        <secondaryVerbProps>
+          <verbClass>BDP.Trigger.Verb_BDPVolley</verbClass>
+          <hasStandardCommand>false</hasStandardCommand>
+          <defaultProjectile>BDP_Bullet_TestSniper</defaultProjectile>
+          <warmupTime>2.0</warmupTime>
+          <range>40</range>
+          <burstShotCount>1</burstShotCount>
+          <ticksBetweenBurstShots>0</ticksBetweenBurstShots>
+          <soundCast>Shot_SniperRifle</soundCast>
+          <muzzleFlashScale>12</muzzleFlashScale>
+          <label>齐射</label>
+        </secondaryVerbProps>
       </li>
     </modExtensions>
   </ThingDef>
@@ -275,23 +293,32 @@
     </comps>
     <modExtensions>
       <li Class="BDP.Trigger.WeaponChipConfig">
-        <supportsVolley>true</supportsVolley>
         <volleySpreadRadius>0.3</volleySpreadRadius>
         <trionCostPerShot>1</trionCostPerShot>
         <!-- T36：远程Verb配置存放在DefModExtension中 -->
-        <verbProperties>
-          <li>
-            <verbClass>BDP.Trigger.Verb_BDPShoot</verbClass>
-            <hasStandardCommand>true</hasStandardCommand>
-            <defaultProjectile>BDP_Bullet_Hound</defaultProjectile>
-            <warmupTime>1.0</warmupTime>
-            <range>25</range>
-            <burstShotCount>3</burstShotCount>
-            <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
-            <soundCast>Shot_ChargeRifle</soundCast>
-            <muzzleFlashScale>9</muzzleFlashScale>
-          </li>
-        </verbProperties>
+        <primaryVerbProps>
+          <verbClass>BDP.Trigger.Verb_BDPShoot</verbClass>
+          <hasStandardCommand>true</hasStandardCommand>
+          <defaultProjectile>BDP_Bullet_Hound</defaultProjectile>
+          <warmupTime>1.0</warmupTime>
+          <range>25</range>
+          <burstShotCount>3</burstShotCount>
+          <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+          <soundCast>Shot_ChargeRifle</soundCast>
+          <muzzleFlashScale>9</muzzleFlashScale>
+        </primaryVerbProps>
+        <secondaryVerbProps>
+          <verbClass>BDP.Trigger.Verb_BDPVolley</verbClass>
+          <hasStandardCommand>false</hasStandardCommand>
+          <defaultProjectile>BDP_Bullet_Hound</defaultProjectile>
+          <warmupTime>1.0</warmupTime>
+          <range>25</range>
+          <burstShotCount>1</burstShotCount>
+          <ticksBetweenBurstShots>0</ticksBetweenBurstShots>
+          <soundCast>Shot_ChargeRifle</soundCast>
+          <muzzleFlashScale>9</muzzleFlashScale>
+          <label>齐射</label>
+        </secondaryVerbProps>
       </li>
     </modExtensions>
   </ThingDef>

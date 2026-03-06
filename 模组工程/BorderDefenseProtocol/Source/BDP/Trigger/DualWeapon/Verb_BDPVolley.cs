@@ -53,7 +53,7 @@ namespace BDP.Trigger
 
             // ★ 自动绕行：齐射前计算路由（条件2由Verb类型隐含满足）
             gs.PrepareAutoRoute(caster.Position, currentTarget.Cell,
-                caster.Map, cfg.GetFirstProjectileDef());
+                caster.Map, cfg.GetPrimaryProjectileDef());
 
             for (int i = 0; i < volleyCount; i++)
             {
@@ -77,12 +77,7 @@ namespace BDP.Trigger
         /// <summary>从WeaponChipConfig读取burstShotCount（实际齐射发射数）。</summary>
         private static int GetBurstCountFromConfig(WeaponChipConfig cfg)
         {
-            if (cfg?.verbProperties == null) return 1;
-            foreach (var vp in cfg.verbProperties)
-            {
-                if (vp.burstShotCount > 0) return vp.burstShotCount;
-            }
-            return 1;
+            return cfg?.primaryVerbProps?.burstShotCount ?? 1;
         }
     }
 }

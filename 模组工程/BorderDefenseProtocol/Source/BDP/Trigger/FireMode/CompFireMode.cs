@@ -119,7 +119,7 @@ namespace BDP.Trigger
         /// <summary>UI显示用：实际伤害值（整数）。无法读取时返回-1。</summary>
         public int GetDisplayDamage()
         {
-            var projDef = GetChipConfig()?.GetFirstProjectileDef();
+            var projDef = GetChipConfig()?.GetPrimaryProjectileDef();
             if (projDef?.projectile == null) return -1;
             int baseDmg = projDef.projectile.GetDamageAmount(null);
             return GetEffectiveDamage(baseDmg);
@@ -128,7 +128,7 @@ namespace BDP.Trigger
         /// <summary>UI显示用：实际速度（tiles/sec）。无法读取时返回-1。</summary>
         public float GetDisplaySpeed()
         {
-            var projDef = GetChipConfig()?.GetFirstProjectileDef();
+            var projDef = GetChipConfig()?.GetPrimaryProjectileDef();
             if (projDef?.projectile == null) return -1f;
             return projDef.projectile.speed * speed;
         }
@@ -136,7 +136,7 @@ namespace BDP.Trigger
         /// <summary>UI显示用：实际连射数（整数）。无法读取时返回-1。</summary>
         public int GetDisplayBurst()
         {
-            int baseBurst = GetChipConfig()?.GetFirstBurstCount() ?? -1;
+            int baseBurst = GetChipConfig()?.GetPrimaryBurstCount() ?? -1;
             if (baseBurst < 0) return -1;
             return GetEffectiveBurst(baseBurst);
         }
