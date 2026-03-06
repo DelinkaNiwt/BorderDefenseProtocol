@@ -11,43 +11,18 @@ namespace BDP.Trigger
     /// </summary>
     public class Verb_BDPDualVolley : Verb_BDPRangedBase
     {
-        /// <summary>任一侧是否支持变化弹。</summary>
-        public bool HasGuidedSide
+        /// <summary>查找两侧中支持引导的芯片配置。</summary>
+        protected override WeaponChipConfig GetGuidedConfig()
         {
-            get
-            {
-                var tc = GetTriggerComp();
-                if (tc == null) return false;
-                var lc = tc.GetActiveSlot(SlotSide.LeftHand)?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
-                var rc = tc.GetActiveSlot(SlotSide.RightHand)?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
-                return (lc?.supportsGuided == true) || (rc?.supportsGuided == true);
-            }
-        }
-
-        /// <summary>双侧引导瞄准。</summary>
-        public override void StartAnchorTargeting()
-        {
-            var tc = GetTriggerComp();
-            if (tc == null) { Find.Targeter.BeginTargeting(this); return; }
-            var lc = tc.GetActiveSlot(SlotSide.LeftHand)?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
-            var rc = tc.GetActiveSlot(SlotSide.RightHand)?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
-            WeaponChipConfig gc = (lc?.supportsGuided == true) ? lc : (rc?.supportsGuided == true) ? rc : null;
-            if (gc == null) { Find.Targeter.BeginTargeting(this); return; }
-            AnchorTargetingHelper.BeginAnchorTargeting(this, CasterPawn, gc.maxAnchors, verbProps.range,
-                (anchors, finalTarget) =>
-                {
-                    gs.StoreTargetingResult(anchors, finalTarget, gc.anchorSpread);
-                    gs.LeftHasPath = lc?.supportsGuided == true;
-                    gs.RightHasPath = rc?.supportsGuided == true;
-                    OrderForceTargetCore(finalTarget);
-                });
-        }
-
-        public override void OrderForceTarget(LocalTargetInfo target)
-        {
-            if (HasGuidedSide) { StartAnchorTargeting(); return; }
-            gs.ManualAnchorsActive = false;
-            OrderForceTargetCore(target);
+            var triggerComp = GetTriggerComp();
+            if (triggerComp == null) return null;
+            var leftCfg = triggerComp.GetActiveSlot(SlotSide.LeftHand)
+                ?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
+            var rightCfg = triggerComp.GetActiveSlot(SlotSide.RightHand)
+                ?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
+            if (leftCfg?.supportsGuided == true) return leftCfg;
+            if (rightCfg?.supportsGuided == true) return rightCfg;
+            return null;
         }
 
         public override bool TryStartCastOn(LocalTargetInfo castTarg, LocalTargetInfo destTarg,
@@ -88,7 +63,7 @@ namespace BDP.Trigger
                 gs.AttachManualFlight(proj);
             else
                 gs.AttachAutoRouteFlight(proj, gs.ResolveAutoRouteFinalTarget(currentTarget),
-                    GetChipConfig()?.anchorSpread ?? 0.3f);
+                    GetGuidedConfig()?.anchorSpread ?? 0.3f);
         }
 
         protected override bool TryCastShot()

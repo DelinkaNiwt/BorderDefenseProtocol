@@ -23,50 +23,18 @@ namespace BDP.Trigger
         private ThingDef leftProjectileDef;
         private ThingDef rightProjectileDef;
 
-        /// <summary>任一侧是否支持变化弹。</summary>
-        public bool HasGuidedSide
-        {
-            get
-            {
-                var triggerComp = GetTriggerComp();
-                if (triggerComp == null) return false;
-                var leftCfg = triggerComp.GetActiveSlot(SlotSide.LeftHand)
-                    ?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
-                var rightCfg = triggerComp.GetActiveSlot(SlotSide.RightHand)
-                    ?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
-                return (leftCfg?.supportsGuided == true)
-                    || (rightCfg?.supportsGuided == true);
-            }
-        }
-
-        /// <summary>双侧引导瞄准——查找任一侧的引导配置。</summary>
-        public override void StartAnchorTargeting()
+        /// <summary>查找两侧中支持引导的芯片配置。</summary>
+        protected override WeaponChipConfig GetGuidedConfig()
         {
             var triggerComp = GetTriggerComp();
-            if (triggerComp == null) { Find.Targeter.BeginTargeting(this); return; }
-
+            if (triggerComp == null) return null;
             var leftCfg = triggerComp.GetActiveSlot(SlotSide.LeftHand)
                 ?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
             var rightCfg = triggerComp.GetActiveSlot(SlotSide.RightHand)
                 ?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
-            WeaponChipConfig guidedCfg = (leftCfg?.supportsGuided == true) ? leftCfg
-                                       : (rightCfg?.supportsGuided == true) ? rightCfg : null;
-            if (guidedCfg == null) { Find.Targeter.BeginTargeting(this); return; }
-
-            AnchorTargetingHelper.BeginAnchorTargeting(
-                this, CasterPawn, guidedCfg.maxAnchors, verbProps.range,
-                (anchors, finalTarget) =>
-                {
-                    gs.StoreTargetingResult(anchors, finalTarget, guidedCfg.anchorSpread);
-                    OrderForceTargetCore(finalTarget);
-                });
-        }
-
-        public override void OrderForceTarget(LocalTargetInfo target)
-        {
-            if (HasGuidedSide) { StartAnchorTargeting(); return; }
-            gs.ManualAnchorsActive = false;
-            OrderForceTargetCore(target);
+            if (leftCfg?.supportsGuided == true) return leftCfg;
+            if (rightCfg?.supportsGuided == true) return rightCfg;
+            return null;
         }
 
         /// <summary>
@@ -134,7 +102,7 @@ namespace BDP.Trigger
                 gs.AttachManualFlight(proj);
             else
                 gs.AttachAutoRouteFlight(proj, gs.ResolveAutoRouteFinalTarget(currentTarget),
-                    GetChipConfig()?.anchorSpread ?? 0.3f);
+                    GetGuidedConfig()?.anchorSpread ?? 0.3f);
         }
 
         /// <summary>

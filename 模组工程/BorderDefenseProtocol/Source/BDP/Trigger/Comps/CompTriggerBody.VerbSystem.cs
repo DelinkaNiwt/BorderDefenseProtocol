@@ -170,15 +170,23 @@ namespace BDP.Trigger
                 {
                     var side = DualVerbCompositor.ParseSideLabel(label);
                     if (side == SlotSide.LeftHand)
+                    {
                         leftHandAttackVerb = verb;
+                        // 设置chipSide以便运行时精确查找芯片
+                        if (verb is Verb_BDPRangedBase rbL) rbL.chipSide = SlotSide.LeftHand;
+                    }
                     else if (side == SlotSide.RightHand)
+                    {
                         rightHandAttackVerb = verb;
+                        if (verb is Verb_BDPRangedBase rbR) rbR.chipSide = SlotSide.RightHand;
+                    }
                     else
                         dualAttackVerb = verb;
                 }
                 else if (verb is Verb_BDPDualRanged)
                 {
                     dualAttackVerb = verb;
+                    // chipSide保持null——双侧Verb由子类各自处理
                 }
             }
 
@@ -215,37 +223,66 @@ namespace BDP.Trigger
 
             // 左手副攻击
             if (leftHandAttackVerb != null && leftCfg != null)
-            {
-                leftHandSecondaryVerb = CreateSecondaryVerb(leftCfg, leftHandAttackVerb, pawn, "Left");
-            }
+                leftHandSecondaryVerb = CreateSingleSideSecondaryVerb(leftCfg, pawn, "Left", SlotSide.LeftHand);
 
             // 右手副攻击
             if (rightHandAttackVerb != null && rightCfg != null)
-            {
-                rightHandSecondaryVerb = CreateSecondaryVerb(rightCfg, rightHandAttackVerb, pawn, "Right");
-            }
+                rightHandSecondaryVerb = CreateSingleSideSecondaryVerb(rightCfg, pawn, "Right", SlotSide.RightHand);
 
-            // 双手副攻击：两侧都有副攻击时才创建
+            // 双手副攻击：两侧都有副攻击配置时创建Verb_BDPDualVolley
             if (leftHandSecondaryVerb != null && rightHandSecondaryVerb != null && dualAttackVerb != null)
-            {
-                dualSecondaryVerb = CreateSecondaryVerb(leftCfg, dualAttackVerb, pawn, "Dual");
-            }
+                dualSecondaryVerb = CreateDualSecondaryVerb(leftCfg, rightCfg, pawn);
         }
 
         /// <summary>
-        /// 创建单个副攻击verb实例（v9.0重构）。
-        ///
-        /// 逻辑：
-        ///   如果 cfg.secondaryVerbProps != null，使用它创建verb，否则返回null。
+        /// 创建单侧副攻击verb实例。
+        /// 创建后设置chipSide以便运行时精确查找芯片。
         /// </summary>
-        private Verb CreateSecondaryVerb(WeaponChipConfig cfg, Verb primaryVerb, Pawn pawn, string side)
+        private Verb CreateSingleSideSecondaryVerb(WeaponChipConfig cfg, Pawn pawn, string sideTag, SlotSide side)
         {
-            if (cfg.secondaryVerbProps != null)
+            if (cfg.secondaryVerbProps == null) return null;
+
+            string loadID = $"BDP_Secondary{sideTag}_{parent.ThingID}_{cfg.secondaryVerbProps.label}";
+            Verb verb = FindOrCreateVerb(cfg.secondaryVerbProps, pawn, loadID);
+
+            // 设置chipSide以便运行时精确查找芯片
+            if (verb is Verb_BDPRangedBase rb)
+                rb.chipSide = side;
+
+            return verb;
+        }
+
+        /// <summary>
+        /// 创建双手副攻击verb实例（Verb_BDPDualVolley）。
+        /// 合成两侧参数：range=min, warmup=max, cooldown=max, burstShotCount=1。
+        /// chipSide不设置（null）——双侧Verb由子类各自处理。
+        /// </summary>
+        private Verb CreateDualSecondaryVerb(WeaponChipConfig leftCfg, WeaponChipConfig rightCfg, Pawn pawn)
+        {
+            var leftSecVp = leftCfg.secondaryVerbProps;
+            var rightSecVp = rightCfg.secondaryVerbProps;
+
+            // 合成双手副攻击VerbProperties
+            var vp = new VerbProperties
             {
-                string loadID = $"BDP_Secondary{side}_{parent.ThingID}_{cfg.secondaryVerbProps.label}";
-                return FindOrCreateVerb(cfg.secondaryVerbProps, pawn, loadID);
-            }
-            return null;
+                verbClass = typeof(Verb_BDPDualVolley),
+                isPrimary = false,
+                hasStandardCommand = false,
+                defaultProjectile = leftSecVp?.defaultProjectile ?? rightSecVp?.defaultProjectile,
+                soundCast = leftSecVp?.soundCast ?? rightSecVp?.soundCast,
+                muzzleFlashScale = 10f,
+                range = Mathf.Min(leftSecVp?.range ?? 20f, rightSecVp?.range ?? 20f),
+                warmupTime = Mathf.Max(leftSecVp?.warmupTime ?? 1f, rightSecVp?.warmupTime ?? 1f),
+                defaultCooldownTime = Mathf.Max(
+                    leftSecVp?.defaultCooldownTime ?? 1f,
+                    rightSecVp?.defaultCooldownTime ?? 1f),
+                burstShotCount = 1,
+                ticksBetweenBurstShots = 0,
+                label = "双手齐射",
+            };
+
+            string loadID = $"BDP_SecondaryDual_{parent.ThingID}";
+            return FindOrCreateVerb(vp, pawn, loadID);
         }
 
         /// <summary>
