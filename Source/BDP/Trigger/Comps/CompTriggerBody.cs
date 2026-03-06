@@ -125,48 +125,7 @@ namespace BDP.Trigger
         //  ICombatBodySupport接口实现（v11.0战斗体系统重构）
         // ═══════════════════════════════════════════
 
-        /// <summary>
-        /// 实现ICombatBodySupport.TryAllocateForCombatBody。
-        /// 委托给现有的TryAllocateTrionForCombatBody方法。
-        /// </summary>
-        bool ICombatBodySupport.TryAllocateForCombatBody()
-        {
-            return TryAllocateTrionForCombatBody();
-        }
-
-        /// <summary>
-        /// 实现ICombatBodySupport.ReleaseFromCombatBody。
-        /// 委托给DismissCombatBody方法，执行完整的解除逻辑。
-        /// </summary>
-        void ICombatBodySupport.ReleaseFromCombatBody()
-        {
-            DismissCombatBody();
-        }
-
-        /// <summary>
-        /// 实现ICombatBodySupport.ActivateSpecialSlots。
-        /// 委托给现有的ActivateAllSpecial方法。
-        /// </summary>
-        void ICombatBodySupport.ActivateSpecialSlots()
-        {
-            ActivateAllSpecial();
-        }
-
-        /// <summary>
-        /// 实现ICombatBodySupport.DeactivateSpecialSlots。
-        /// 关闭所有特殊槽芯片。
-        /// </summary>
-        void ICombatBodySupport.DeactivateSpecialSlots()
-        {
-            if (specialSlots == null) return;
-            foreach (var slot in specialSlots)
-            {
-                if (slot.loadedChip != null && slot.isActive)
-                {
-                    DeactivateSlot(slot);
-                }
-            }
-        }
+        // ── ICombatBodySupport接口实现已移至 CompTriggerBody.CombatBodySupport.cs ──
 
         // ═══════════════════════════════════════════
         //  手部缺失联动（v12.2新增）

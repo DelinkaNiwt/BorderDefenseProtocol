@@ -9,11 +9,11 @@
 ## 任务进度总览
 
 - [x] 阶段1: 字段和生命周期分离（1.5小时）
-- [ ] 阶段2: 功能模块分离（3小时）
-- [ ] 阶段3: Verb系统和UI分离（3.5小时）
+- [x] 阶段2: 功能模块分离（3小时）
+- [x] 阶段3: Verb系统和UI分离（3.5小时）
 
-**当前阶段**: 阶段2 - 功能模块分离
-**完成进度**: 1/3 阶段
+**当前阶段**: 阶段3完成 - 所有重构任务已完成
+**完成进度**: 3/3 阶段
 
 ---
 
@@ -234,22 +234,22 @@
 - [x] 编译验证
 
 ### 3.3 创建CombatBodySupport.cs
-- [ ] 创建文件：`CompTriggerBody.CombatBodySupport.cs`
-- [ ] 移动战斗体集成方法
-  - [ ] TryAllocateTrionForCombatBody
-  - [ ] ReleaseTrionFromCombatBody
-  - [ ] BeginCombatBodyActivation（如果存在）
-  - [ ] DismissCombatBody
-  - [ ] CanGenerateCombatBody
-  - [ ] OnTrionDepleted
-- [ ] 移动ICombatBodySupport接口实现
-  - [ ] TryAllocateForCombatBody
-  - [ ] ReleaseFromCombatBody
-  - [ ] ActivateSpecialSlots（委托）
-  - [ ] DeactivateSpecialSlots（委托）
-- [ ] 移动属性
-  - [ ] IsCombatBodyActive
-- [ ] 编译验证
+- [x] 创建文件：`CompTriggerBody.CombatBodySupport.cs`
+- [x] 移动战斗体集成方法
+  - [x] TryAllocateTrionForCombatBody
+  - [x] ReleaseTrionFromCombatBody
+  - [x] BeginCombatBodyActivation（如果存在）
+  - [x] DismissCombatBody
+  - [x] CanGenerateCombatBody
+  - [x] OnTrionDepleted
+- [x] 移动ICombatBodySupport接口实现
+  - [x] TryAllocateForCombatBody
+  - [x] ReleaseFromCombatBody
+  - [x] ActivateSpecialSlots（委托）
+  - [x] DeactivateSpecialSlots（委托）
+- [x] 移动属性
+  - [x] IsCombatBodyActive
+- [x] 编译验证
 
 ### 3.4 更新主文件
 - [ ] 在CompTriggerBody.cs中保留接口实现
