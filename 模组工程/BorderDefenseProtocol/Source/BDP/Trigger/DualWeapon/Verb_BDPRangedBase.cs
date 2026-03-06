@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using BDP.Core;
+using BDP.Projectiles;
+using BDP.FireMode;
 using RimWorld;
 using UnityEngine;
 using Verse;

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BDP.FireMode;
 using RimWorld;
 using Verse;
 
