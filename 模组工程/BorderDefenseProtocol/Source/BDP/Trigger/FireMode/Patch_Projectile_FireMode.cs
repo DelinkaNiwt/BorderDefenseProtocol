@@ -37,9 +37,26 @@ namespace BDP.Trigger
             // equipment 是 protected 字段，用 Traverse 访问
             var equipment = Traverse.Create(__instance).Field("equipment").GetValue<Thing>();
             var fm = equipment?.TryGetComp<CompFireMode>();
-            if (fm == null || Mathf.Abs(fm.Speed - 1f) < 0.001f) return;
+            if (fm == null) return;
 
             bdp.DispatchSpeedModifiers(fm.Speed);
+        }
+    }
+
+    // 鈹€鈹€ Patch A2锛氳StartingTicksToImpact鎰熺煡鍙戝皠閫熷害鍊嶇巼 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+    [HarmonyPatch(typeof(Projectile), "get_StartingTicksToImpact")]
+    public static class Patch_Projectile_StartingTicksToImpact_FireModeSpeed
+    {
+        [HarmonyPostfix]
+        public static void Postfix(Projectile __instance, ref float __result)
+        {
+            if (!(__instance is Bullet_BDP bdp)) return;
+
+            float speedMult = bdp.LaunchSpeedMult;
+            if (Mathf.Abs(speedMult - 1f) < 0.001f) return;
+            if (speedMult <= 0.001f) speedMult = 0.001f;
+
+            __result = Mathf.Max(0.001f, __result / speedMult);
         }
     }
 
@@ -50,10 +67,14 @@ namespace BDP.Trigger
         [HarmonyPostfix]
         public static void Postfix(Projectile __instance, ref int __result)
         {
-            // equipment 为 null 时直接跳过，零副作用
+            // 检查1: 仅处理 Bullet_BDP（其他弹道跳过，零副作用）
+            if (!(__instance is Bullet_BDP)) return;
+
+            // 检查2: equipment 为 null 时直接跳过
             var equipment = Traverse.Create(__instance).Field("equipment").GetValue<Thing>();
             var fm = equipment?.TryGetComp<CompFireMode>();
             if (fm == null || Mathf.Abs(fm.Damage - 1f) < 0.001f) return;
+
             __result = Mathf.Max(1, Mathf.RoundToInt(__result * fm.Damage));
         }
     }

@@ -1,0 +1,487 @@
+
+ ▐▛███▜▌   Claude Code v2.1.56
+▝▜█████▛▘  Sonnet 4.6 · API Usage Billing
+  ▘▘ ▝▝    C:\NiwtDatas\Projects\RimworldModStudio
+
+  /model to try Opus 4.6
+
+❯ /clear 
+  ⎿  (no content)
+
+❯ c:\NiwtDatas\Projects\RimworldModStudio\模组工程\BorderDefenseProtocol\do 
+  cs\第六阶段：深度系统设计\战斗体系统需求设计文档.md                       
+  思考一下游戏原版和DLC有什么现有的系统框架对我们的需求有技术参考价值?注意  
+  洞悉技术本质而不是表面逻辑。                                              
+  我能想到的是“食尸鬼转化”可能有参考性，还有其它什么，你帮我调研一下。告诉  
+  我有哪些，游戏中是什么用法，在战斗体系统中可以怎么用。                    
+  我需要你解析游戏代码去严谨思考分析，但不要你现在为战斗体设计实现方案。你  
+  只做可行性和参考方向分析。                                                
+
+● 先读一下需求文档，了解战斗体系统的设计目标。
+
+● Read 1 file (ctrl+o to expand)
+
+● 需求文档已读完，核心技术诉求清晰：Hediff替换快照、伤害拦截、影子HP、需求冻结、
+  死亡拦截、倒地检测、传送。
+
+  现在并行调研游戏代码：
+
+● 4 Explore agents finished (ctrl+o to expand)
+   ├─ RimWorld ghoul transformation code · 32 tool uses · 50.1k tokens
+   │  ⎿  Done
+   ├─ RimWorld deathrest cryptosleep need freeze · 37 tool uses · 70.7k tokens
+   │  ⎿  Done
+   ├─ RimWorld death prevention damage interception · 15 tool uses · 63.8k
+   tokens
+   │  ⎿  Done
+   └─ RimWorld teleportation apparel spawn pawn draft · 31 tool uses · 85.6k
+   tokens
+      ⎿  Done
+
+● 四个方向都调研完成，现在综合输出分析报告。
+
+  ---
+  RimWorld 原生系统技术参考分析
+
+  以下按"游戏中是什么" → "技术本质" → "对战斗体的参考价值"三层逐一分析。
+
+  ---
+  一、食尸鬼转化系统（Ghoul / MutantDef）
+
+  游戏中是什么：
+  Anomaly DLC 外科手术将殖民者转化为食尸鬼。可通过 Pawn_MutantTracker.Revert()
+  逆向恢复。
+
+  技术本质：
+  - Turn() = 添加主Hediff + givesHediffs列表，选择性移除原有Hediff（removePerman
+  entInjuries/removeChronicIllnesses等标志）
+  - Revert() =
+  逐个移除转化时添加的Hediff，恢复保存的originalFaction/originalIdeo
+  - 关键缺陷：Ghoul转化不做Hediff快照——转化前的伤/病被直接删除而非存储，故Revert
+  只能恢复派系等元数据，不能恢复原始伤情
+  - 序列化：Pawn_MutantTracker.ExposeData() 通过 Scribe_* 保存运行时状态
+
+  对战斗体的参考价值：
+  NR-027（Hediff替换策略）的反面参考。Ghoul证明"移除Hediff再添加"这个操作在游戏
+  框架里是可行的，但它缺少快照导致不可逆。战斗体必须在 Turn 等价操作前先完整序列
+  化所有Hediff，解除时再反序列化还原。这是原版未做、但框架能支撑的扩展。
+
+  ---
+  二、冷冻舱挂起系统（Cryptosleep / Suspended）
+
+  游戏中是什么：
+  殖民者进入冷冻舱后所有需求停止消耗，出来后继续（不是恢复到快照值，而是冻结期间
+  完全不动）。
+
+  技术本质：
+  Pawn.Suspended → 递归检查 ParentHolder 链
+  → 找到 Building_CryptosleepCasket 即返回 true
+  → Need.IsFrozen 检查 pawn.Suspended
+  → NeedInterval() 开头 if (!IsFrozen) return → 直接跳过
+  所有需求的IsFrozen都自动响应Suspended，不需要逐个禁用。
+
+  对战斗体的参考价值：
+  NR-029（禁用生理需求）有两条路径：
+  路径A：仿照Cryptosleep利用Suspended机制——让战斗体Pawn进入某种"挂起"状态，所有
+  需求自动冻结。但代价是心理需求（NR-030要求保持）也会被一起冻结，不符合需求。
+  路径B（更适合）：直接使用 HediffStage.disablesNeeds 字段——只列出食物/休息/舒适
+  度，精确禁用。代码证明这是现成的缓存字典机制，性能可接受。
+  结论：战斗体应选路径B，禁用特定需求而非全体挂起。
+
+  ---
+  三、Deathrest系统（吸血鬼死亡休眠）
+
+  游戏中是什么：
+  吸血鬼进入特殊"死亡休眠"，有专属Need用于追踪恢复进度，状态完整序列化存档。
+
+  技术本质：
+  - Need_Deathrest.IsFrozen 覆写了基类的冻结判断
+  - Gene_Deathrest.ExposeData() 序列化所有进度字段（ticks、容量等）
+  - Hediff通过 def.DefName 引用存储，确保跨存档一致
+  - lastDeathrestTick 字段用于判断当前是否处于Deathrest状态（tick比较法）
+
+  对战斗体的参考价值：
+  NR-041（影子HP序列化）的直接参考。Gene_Deathrest.ExposeData() 展示了如何用 
+  Scribe_Values.Look 序列化自定义追踪数据。战斗体的每个部位影子HP字段可以完全用
+  同样的模式序列化，无需复杂方案。
+  另外"tick比较法"（lastDeathrestTick + 
+  updateRate）是判断当前状态的轻量模式，可用于战斗体状态的持久化标记。
+
+  ---
+  四、伤害管道拦截系统（DamageWorker Pipeline）
+
+  游戏中是什么：
+  护盾装备（原版盾牌、心灵护盾）吸收伤害，不让伤害到达本体。
+
+  技术本质（完整拦截链）：
+  Thing.TakeDamage(dinfo)
+    → ThingComp.PreApplyDamage(dinfo, absorbed)     ← 修改/阻止伤害
+    → ThingComp.PostPreApplyDamage(dinfo, absorbed)  ← 护盾在此吸收
+    → 实际伤害应用
+    → CheckForDownedStatus()
+    → ThingComp.PostApplyDamage(...)
+    → [如死亡] PreDeath() → 返回false可拦截
+
+  关键发现：
+  - DamageInfo.SetAmount(0) 可使伤害变零，原版HP不变
+  - PreDeath() 返回 false 可完全阻止死亡逻辑
+  - 这些均通过 ThingComp 扩展实现，无需Harmony patch就能接入
+
+  对战斗体的参考价值：
+  NR-001（完全伤害隔离）、NR-012（死亡拦截）的核心技术基础。  
+  - 伤害拦截：在 PostPreApplyDamage 中对战斗体Pawn将 
+  dinfo.SetAmount(0)，然后转入自己的影子HP管道（NR-042）
+  - 死亡拦截：PreDeath() 
+  中判断如果Pawn在战斗体状态，拦截死亡，转为触发被动破裂（NR-008/009）
+  - 重要：两个点均可通过 
+  HediffComp（在战斗体Hediff上挂载）来实现，不越权到ThingComp层级
+
+  ---
+  五、倒地检测系统
+
+  游戏中是什么：
+  部位受伤累积到阈值后Pawn倒地，触发AI行为改变（被救援、被俘虏等）。
+
+  技术本质：
+  伤害应用 → CheckForDownedStatus() → 设置pawn.health.Down = true
+  → 广播 OnDownedStateChanged 事件
+  - Pawn.Downed 是只读属性，实际由 hediffSet 的痛苦/意识值决定
+  - 倒地事件通过 HediffComp.CompPostTick() 或事件监听响应
+  - HediffComp_KillOnDowned_Instant 是原版已有"倒地即触发"模式的直接实现
+
+  对战斗体的参考价值：
+  NR-036（倒地即破裂）可直接参照 HediffComp_KillOnDowned_Instant 
+  模式——在战斗体Hediff的HediffComp中监听倒地状态，一旦 pawn.Downed == true 且处
+  于战斗体激活状态，立即触发被动破裂流程（NR-009）。这是原版已验证可行的钩子点。
+
+  ---
+  六、传送系统（Psycast Skip / 跳跃能力）
+
+  游戏中是什么：
+  灵能跳跃（Skip）、传送门（DoorTeleporter），可跨地图传送Pawn。
+
+  技术本质：
+  pawn.teleporting = true;                          // 设置无敌保护标志
+  pawn.ExitMap(allowedToJoinOrCreateCaravan: true);
+  pawn.teleporting = false;
+  GenSpawn.Spawn(pawn, targetCell, targetMap);       // 在目标位置生成
+  pawn.Notify_Teleported();                          // 通知传送完成
+  - pawn.teleporting 标志期间，离开地图不触发各种"玩家离开"副作用
+  - GenSpawn.Spawn 是标准的Pawn生成API
+
+  对战斗体的参考价值：
+  NR-014/NR-015（紧急脱离传送）的直接技术路径。
+  紧急脱离时：GenSpawn.Spawn(pawn, safeCell, map) 将真身生成到安全位置即可。
+  轨道空投多级回退逻辑（轨道贸易代码）更接近NR-014描述的"殖民地建筑附近→随机安全
+  位置"回退规则，值得进一步单独调研。
+
+  ---
+  七、衣物动态穿戴 / 物品容器系统
+
+  游戏中是什么：
+  强制给Pawn穿戴衣物（CharacterEditor等工具使用），物品在ThingOwner容器间转移。
+
+  技术本质：
+  - pawn.apparel.wornApparel（ThingOwner容器）直接 TryAdd() 即可穿戴，跳过UI
+  - 物品：pawn.inventory.innerContainer.TryAdd() / Remove()
+  - 穿戴前需 Apparel.DeSpawnOrDeselect() 清理地图存在状态
+  - 冲突衣物需先 pawn.apparel.Remove() 移除
+
+  对战斗体的参考价值：
+  NR-028（衣物/物品转移到快照容器、激活时Spawn外观Apparel）的完整技术路径已明确
+  。
+  转移路径：pawn.apparel.wornApparel → 快照自定义ThingOwner → 解除时反向
+  战斗体外观生成：GenSpawn.Spawn(apparelThing, ...) + 
+  apparel.wornApparel.TryAdd()
+
+  ---
+  八、强制征召系统
+
+  游戏中是什么：
+  通过代码强制设置Pawn的征召状态（CompDraftable用于动物征召）。
+
+  技术本质：
+  if (pawn.drafter == null)
+      pawn.drafter = new Pawn_DraftController(pawn);
+  pawn.drafter.Drafted = true;
+
+  对战斗体的参考价值：
+  NR-004步骤10（激活时强制征召）、NR-039（解除保持状态）：
+  激活时 pawn.drafter.Drafted = true。
+  解除时不操作 Drafted 属性，直接保持当时值即可。技术上无任何障碍。
+
+  ---
+  综合结论
+
+  ┌──────────────┬────────────────────────────────┬────────────────────────┐
+  │  战斗体需求  │          技术参考系统          │       可行性评估       │
+  ├──────────────┼────────────────────────────────┼────────────────────────┤
+  │ NR-027 Hedif │ Ghoul                          │ ✅ 可行，需补充序列化  │
+  │ f替换快照    │ Turn/Revert（+需自建快照）     │ 快照部分               │
+  ├──────────────┼────────────────────────────────┼────────────────────────┤
+  │ NR-029       │ HediffStage.disablesNeeds      │ ✅ 原生支持，精确禁用  │
+  │ 生理需求禁用 │                                │                        │
+  ├──────────────┼────────────────────────────────┼────────────────────────┤
+  │ NR-031       │ Hediff属性原生字段             │ ✅ 原生支持，无需代码  │
+  │ 精神崩溃阻止 │                                │                        │
+  ├──────────────┼────────────────────────────────┼────────────────────────┤
+  │ NR-036       │ HediffComp_KillOnDowned_Instan │ ✅                     │
+  │ 倒地即破裂   │ t模式                          │ 原版已有模式，直接参照 │
+  ├──────────────┼────────────────────────────────┼────────────────────────┤
+  │ NR-039       │ Pawn_DraftController.Drafted   │ ✅ 两行代码            │
+  │ 强制征召     │                                │                        │
+  ├──────────────┼────────────────────────────────┼────────────────────────┤
+  │ NR-041       │ Deathrest Scribe_Values.Look   │ ✅ 标准序列化模式      │
+  │ 影子HP序列化 │ 模式                           │                        │
+  ├──────────────┼────────────────────────────────┼────────────────────────┤
+  │ NR-042       │ PostPreApplyDamage +           │ ✅ 核心API确认可用     │
+  │ 伤害管道拦截 │ SetAmount(0)                   │                        │
+  ├──────────────┼────────────────────────────────┼────────────────────────┤
+  │ NR-012       │ PreDeath() 返回false           │ ✅ 原生钩子            │
+  │ 死亡拦截     │                                │                        │
+  ├──────────────┼────────────────────────────────┼────────────────────────┤
+  │ NR-028 衣物/ │ ThingOwner.TryAdd/Remove       │ ✅ 完整API可用         │
+  │ 物品转移     │                                │                        │
+  ├──────────────┼────────────────────────────────┼────────────────────────┤
+  │ NR-014       │ GenSpawn.Spawn + 空投回退逻辑  │ ✅ 可行，回退逻辑需进  │
+  │ 紧急脱离传送 │                                │ 一步调研               │
+  └──────────────┴────────────────────────────────┴────────────────────────┘
+
+  最有价值的发现（技术层面）：
+  1. Hediff管道的PostPreApplyDamage
+  是整个伤害隔离系统的关键切入点，在这里将伤害归零是最干净的方式
+  2. HediffStage.disablesNeeds
+  的缓存字典机制说明精确禁用特定需求有高效的原生支持
+  3. Ghoul Revert的缺陷（无快照）
+  反向证明了战斗体必须自己实现快照序列化，原版框架支撑但需要自建
+
+  ---
+  Claude Haiku 4.5
+
+✻ Baked for 4m 23s
+
+❯ /model 
+  ⎿  Set model to opus (claude-opus-4-6)
+
+❯ 还不错，再查一次，查漏补缺。而且我记得食尸鬼转化也有need相关的操作，也有  
+  视觉的更换。我不知道还有没有其它我不知晓但可学习的地方。其它的也是，看看  
+  你有没有漏的或者错的。                                                    
+  ⎿  Async hook Stop completed
+
+● 好，用Opus再深挖一轮，重点补漏和纠错。
+
+● 4 Task agents finished (ctrl+o to expand)
+   ├─ Deep dive Ghoul needs and visuals · 33 tool uses · 50.3k tokens
+   │  ⎿  Done
+   ├─ Verify damage pipeline hooks in engine · 18 tool uses · 40.1k tokens
+   │  ⎿  Done
+   ├─ Verify HediffStage disablesNeeds mechanism · 17 tool uses · 38.3k tokens
+   │  ⎿  Done
+   └─ Search other reference systems missed · 22 tool uses · 44.7k tokens
+      ⎿  Done
+
+✻ Cogitated for 5m 30s
+
+❯ 你刚才做了什么，简单回答我。然后再继续 
+  ⎿  Async hook Stop completed
+
+● 第二轮深挖，纠正了3个错误、补充了9个遗漏：
+
+  - 纠偏：PreDeath钩子不存在（死亡拦截必须Harmony）；disablesNeeds是销毁Need而非
+  冻结（值会丢失）；伤害吸收链的精确层级顺序
+  - 补漏：Ghoul的Need白名单机制、完整视觉管道、复活系统的分层恢复模式、Hediff序
+  列化三阶段加载、Apparel的locked参数和RemovevsTryDrop区别、DropCellFinder多级回
+  退、Notify_Downed()钩子、capMods统一管线、hungerRateFactor=0冻结方案
+
+  ---
+  现在继续。你之前说"看看有没有其它我不知晓但可学习的地方"——我再查几个可能遗漏的
+  系统。
+
+● 3 Task agents finished (ctrl+o to expand)
+   ├─ Search mental break prevention hediff · 44 tool uses · 63.3k tokens
+   │  ⎿  Done
+   ├─ Search environment immunity temperature toxin · 43 tool uses · 53.6k
+   tokens
+   │  ⎿  Done
+   └─ Search bleeding suppression and healing · 54 tool uses · 53.8k tokens
+      ⎿  Done
+
+● 三个方向全部完成。再补充一批重要发现。
+
+  ---
+  补漏 10：精神崩溃阻止（NR-031）—— 确认原生支持
+
+  HediffStage.blocksMentalBreaks 字段确实存在，上一轮标注"待定"是多虑了。
+
+  // MentalStateHandler.cs
+  public bool MentalBreaksBlocked()
+  {
+      foreach (Hediff hediff in pawn.health.hediffSet.hediffs)
+          if (hediff.CurStage != null && hediff.CurStage.blocksMentalBreaks)
+              return true;
+      return false;
+  }
+
+  原版只有 Anomaly DLC 的 MindNumbSerum 使用了它。战斗体 Hediff 的 stage
+  中加一行 <blocksMentalBreaks>true</blocksMentalBreaks> 即可，零代码。
+
+  注意：forced = true 的 TryStartMentalState 调用可以绕过此检查。如果有 mod
+  或事件强制触发精神崩溃，这个字段挡不住。但原版正常心情触发的崩溃都走
+  CanHaveMentalBreak() → Blocked 检查，可以被阻止。
+
+  ---
+  补漏 11：环境免疫（NR-033）的精确实现路径
+
+  体温免疫：原版没有布尔开关。温度伤害通过
+  HediffGiver_Heat/Hypothermia.OnIntervalPassed() 施加，判断条件是
+  ambientTemperature > SafeTemperatureRange().max。免疫方式是拉宽舒适区：
+
+  <!-- 战斗体Hediff的statOffsets -->
+  <statOffsets>
+      <ComfyTemperatureMin>-200</ComfyTemperatureMin>
+      <ComfyTemperatureMax>200</ComfyTemperatureMax>
+  </statOffsets>
+
+  参考：机械体用 -100 到 +250。设到 -200/+200 足以覆盖游戏中所有极端温度。
+
+  中毒免疫：通过 Stat 实现，两个 stat 是乘法关系：
+
+  num *= Mathf.Max(1f - pawn.GetStatValue(StatDefOf.ToxicResistance), 0f);
+  // ToxicResistance = 1 → 乘数 = 0 → 完全免疫
+
+  战斗体 Hediff 的 statOffsets 加 <ToxicResistance>1</ToxicResistance> 即可。
+
+  疾病免疫：HediffStage.makeImmuneTo
+  列表可以精确指定免疫哪些疾病。但这只阻止新感染，不冻结已有疾病进度。
+
+  疾病进度冻结：原版没有外部注入的冻结机制。SeverityChangePerDay() 由疾病自身的
+  HediffComp_Immunizable 驱动。要冻结需要 Harmony
+  patch，或者利用快照机制——战斗体激活时已有疾病随 Hediff
+  一起存入快照并移除，解除时从快照恢复，等效于"冻结"。
+
+  ---
+  补漏 12：自定义 HediffWithComps 天然屏蔽出血和自愈
+
+  这是本轮最重要的发现，直接验证了 NR-042 的设计决策：
+
+  原版出血和自愈系统硬编码了 is Hediff_Injury 类型检查：
+
+  // 出血：Hediff基类
+  public virtual float BleedRate => 0f;  // 只有Hediff_Injury override返回非零
+
+  // 自愈：HediffSet
+  public bool HasNaturallyHealingInjury()
+  {
+      for (int i = 0; i < hediffs.Count; i++)
+          if (hediffs[i] is Hediff_Injury hd && hd.CanHealNaturally())  // 
+  硬编码类型检查
+              return true;
+      return false;
+  }
+
+  结论：战斗体伤口 Hediff 只要用 HediffWithComps（不继承
+  Hediff_Injury），以下原版机制全部自动跳过：
+
+  ┌────────────────┬─────────────────────────────────┐
+  │   跳过的机制   │              原因               │
+  ├────────────────┼─────────────────────────────────┤
+  │ 出血           │ 基类 BleedRate 返回 0           │
+  ├────────────────┼─────────────────────────────────┤
+  │ 自然愈合       │ 硬编码 is Hediff_Injury         │
+  ├────────────────┼─────────────────────────────────┤
+  │ 包扎后愈合     │ 硬编码 is Hediff_Injury         │
+  ├────────────────┼─────────────────────────────────┤
+  │ 伤口老化止血   │ Hediff_Injury 内部逻辑          │
+  ├────────────────┼─────────────────────────────────┤
+  │ 伤口合并       │ Hediff_Injury.TryMergeWith 内部 │
+  ├────────────────┼─────────────────────────────────┤
+  │ 永久伤转化     │ Hediff_Injury.Heal() 内部       │
+  ├────────────────┼─────────────────────────────────┤
+  │ 伤口视觉覆盖层 │ Hediff_Injury.PostRemoved 内部  │
+  └────────────────┴─────────────────────────────────┘
+
+  不跳过的机制（仍然生效）：
+
+  ┌─────────────────────────┬───────────────────────────────────────────────┐
+  │      仍生效的机制       │                     说明                      │
+  ├─────────────────────────┼───────────────────────────────────────────────┤
+  │ Severity ≤ 0 → 自动移除 │ 基类行为，需注意                              │
+  ├─────────────────────────┼───────────────────────────────────────────────┤
+  │ totalBleedFactor 乘算   │ 任何 Hediff 的 stage 都参与全局出血因子       │
+  ├─────────────────────────┼───────────────────────────────────────────────┤
+  │ naturalHealingFactor    │ 任何 Hediff 的 stage 都参与全局愈合因子       │
+  │ 乘算                    │                                               │
+  ├─────────────────────────┼───────────────────────────────────────────────┤
+  │ TendableNow             │ 如果 def.tendable = true 仍可被包扎（设为     │
+  │                         │ false 即可）                                  │
+  └─────────────────────────┴───────────────────────────────────────────────┘
+
+  这完美验证了需求文档 NR-042 的设计决策："BDP伤口Hediff不继承原版伤口类，天然屏
+  蔽出血/疼痛等副作用"。不是"需要拦截"，而是"天然不触发"。
+
+  ---
+  最终修正总表
+
+  ┌──────────┬───────────────────────────────┬───────┬──────────────────────┐
+  │ 战斗体需 │           技术路径            │ Harmo │       上轮状态       │
+  │    求    │                               │  ny?  │                      │
+  ├──────────┼───────────────────────────────┼───────┼──────────────────────┤
+  │ NR-001   │ ThingComp.PostPreApplyDamage  │ 否    │ ✅ 无变化            │
+  │ 伤害隔离 │ 设 absorbed=true              │       │                      │
+  ├──────────┼───────────────────────────────┼───────┼──────────────────────┤
+  │ NR-012   │ preventsDeath=true + Harmony  │ 是    │ ⚠️ 纠偏（PreDeath不  │
+  │ 死亡拦截 │ patch ShouldBeDead 做条件判断 │       │ 存在）               │
+  ├──────────┼───────────────────────────────┼───────┼──────────────────────┤
+  │ NR-018   │ HediffStage.capMods 或 stat   │ 否    │ ✅ 无变化            │
+  │ 无限体力 │                               │       │                      │
+  ├──────────┼───────────────────────────────┼───────┼──────────────────────┤
+  │ NR-019   │ HediffStage.painFactor = 0    │ 否    │ ✅ 无变化            │
+  │ 疼痛免疫 │                               │       │                      │
+  ├──────────┼───────────────────────────────┼───────┼──────────────────────┤
+  │ NR-020   │ 用 HediffWithComps            │ 否    │ 🆕 补漏              │
+  │ 无法自愈 │ 天然不触发自愈                │       │                      │
+  ├──────────┼───────────────────────────────┼───────┼──────────────────────┤
+  │ NR-027   │ LookMode.Deep +               │       │                      │
+  │ Hediff快 │ Scribe_BodyParts +            │ 否    │ ✅ 无变化            │
+  │ 照       │ DirtyCache()                  │       │                      │
+  ├──────────┼───────────────────────────────┼───────┼──────────────────────┤
+  │          │ hungerRateFactor=0 +          │       │                      │
+  │ NR-029   │ restFallFactor=0              │ 否    │ ⚠️ 纠偏（disablesNee │
+  │ 需求冻结 │ 冻结值；disablesNeeds 移除    │       │ ds会销毁值）         │
+  │          │ Comfort                       │       │                      │
+  ├──────────┼───────────────────────────────┼───────┼──────────────────────┤
+  │ NR-031   │ HediffStage.blocksMentalBreak │       │ ⚠️                   │
+  │ 精神崩溃 │ s = true                      │ 否    │ 纠偏（确认原生支持） │
+  │ 阻止     │                               │       │                      │
+  ├──────────┼───────────────────────────────┼───────┼──────────────────────┤
+  │ NR-033   │ statOffsets:                  │       │                      │
+  │ 温度免疫 │ ComfyTemperatureMin/Max       │ 否    │ 🆕 补漏              │
+  │          │ 拉到极端值                    │       │                      │
+  ├──────────┼───────────────────────────────┼───────┼──────────────────────┤
+  │ NR-033   │ statOffsets: ToxicResistance  │ 否    │ 🆕 补漏              │
+  │ 中毒免疫 │ = 1                           │       │                      │
+  ├──────────┼───────────────────────────────┼───────┼──────────────────────┤
+  │ NR-033   │ 快照机制等效冻结（激活时移除  │ 否    │ 🆕 补漏              │
+  │ 疾病冻结 │ ，解除时恢复）                │       │                      │
+  ├──────────┼───────────────────────────────┼───────┼──────────────────────┤
+  │ NR-036   │ Hediff.Notify_Downed()        │       │                      │
+  │ 倒地即破 │ override                      │ 否    │ ✅ 无变化            │
+  │ 裂       │                               │       │                      │
+  ├──────────┼───────────────────────────────┼───────┼──────────────────────┤
+  │ NR-042   │ 用 HediffWithComps（非        │       │                      │
+  │ 伤口不出 │ Hediff_Injury）天然不出血     │ 否    │ 🆕 补漏（关键验证）  │
+  │ 血       │                               │       │                      │
+  └──────────┴───────────────────────────────┴───────┴──────────────────────┘
+
+  Harmony patch 需求汇总：整个战斗体系统中，只有 NR-012（死亡拦截）确认需要
+  Harmony。其余全部可通过原版 API / XML 配置 / 虚方法 override 实现。
+
+  Claude Opus 4.6
+
+✻ Baked for 5m 28s
+
+❯ 总结成文档 
+  ⎿  Async hook Stop completed
+
+● 我来整理成完整的技术参考文档。
+  ⎿  Interrupted · What should Claude do instead?

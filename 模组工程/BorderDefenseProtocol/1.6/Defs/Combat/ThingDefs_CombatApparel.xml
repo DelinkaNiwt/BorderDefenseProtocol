@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 战斗体装甲 - 默认战斗体装备 -->
+  <ThingDef ParentName="ApparelNoQualityBase">
+    <defName>BDP_CombatBodyArmor</defName>
+    <label>战斗体装甲</label>
+    <description>战斗体激活时自动装备的特殊装甲。无品质，无耐久，不可破坏。玩家不可主动卸下，只能通过战斗体切换来更换。</description>
+    <graphicData>
+      <texPath>Things/Pawn/Humanlike/Apparel/Duster/Duster</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <techLevel>Spacer</techLevel>
+    <statBases>
+      <MaxHitPoints>99999</MaxHitPoints>
+      <Mass>0</Mass>
+      <Flammability>0</Flammability>
+      <DeteriorationRate>0</DeteriorationRate>
+      <ArmorRating_Sharp>1.20</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.50</ArmorRating_Blunt>
+      <ArmorRating_Heat>0.60</ArmorRating_Heat>
+      <Insulation_Cold>20</Insulation_Cold>
+      <Insulation_Heat>10</Insulation_Heat>
+      <EquipDelay>0</EquipDelay>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>0.20</MoveSpeed>
+    </equippedStatOffsets>
+    <generateCommonality>0</generateCommonality>
+    <useHitPoints>false</useHitPoints>
+    <smeltable>false</smeltable>
+    <apparel>
+      <bodyPartGroups>
+        <li>Torso</li>
+        <li>Shoulders</li>
+        <li>Arms</li>
+        <li>Legs</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Pawn/Humanlike/Apparel/Duster/Duster</wornGraphicPath>
+      <layers>
+        <li>Middle</li>
+        <li>Shell</li>
+      </layers>
+      <tags>
+        <li>BDP_CombatBody</li>
+      </tags>
+    </apparel>
+    <comps>
+      <li Class="CompProperties_Forbiddable" />
+    </comps>
+    <tradeability>None</tradeability>
+  </ThingDef>
+
+</Defs>

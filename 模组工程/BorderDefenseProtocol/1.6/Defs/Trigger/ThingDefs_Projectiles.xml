@@ -94,19 +94,22 @@
       </li>
       <li Class="BDP.Trigger.BDPTrackingConfig">
         <turnMode>Simple</turnMode>
-        <maxTurnRate>8</maxTurnRate>
-        <trackingDelay>15</trackingDelay>
+        <maxTurnRate>0.8</maxTurnRate>
+        <trackingStartRatio>0.67</trackingStartRatio>
+        <trackingDelay>3</trackingDelay>
         <maxFlyingTicks>480</maxFlyingTicks>
-        <maxLockAngle>120</maxLockAngle>
+        <maxLockAngle>70</maxLockAngle>
         <searchRadius>15</searchRadius>
+        <allowRetarget>false</allowRetarget>
+        <lostTrackingSelfDestructTicks>30</lostTrackingSelfDestructTicks>
       </li>
     </modExtensions>
   </ThingDef>
 
   <!-- ══════════════════════════════════════════════════════
-       BDP_Bullet_Hornet — 黄蜂超追踪弹
-       超级追踪（Smooth转向），速度30，dmg=5 Bullet
-       拖尾：黄色，角加速+阻尼实现平滑曲线弹道
+       BDP_Bullet_Hornet — 黄蜂超追踪弹（重做）
+       贝塞尔曲线追踪 + 速度外推预测 + 重锁能力
+       速度30，dmg=5 Bullet，拖尾：黄色
        ══════════════════════════════════════════════════════ -->
   <ThingDef ParentName="BaseBullet">
     <defName>BDP_Bullet_Hornet</defName>
@@ -131,14 +134,22 @@
         <decaySharpness>6.0</decaySharpness>
       </li>
       <li Class="BDP.Trigger.BDPTrackingConfig">
-        <turnMode>Smooth</turnMode>
-        <maxTurnRate>10</maxTurnRate>
-        <angularAccel>4</angularAccel>
-        <damping>0.92</damping>
-        <trackingDelay>10</trackingDelay>
+        <!-- 贝塞尔曲线追踪 -->
+        <turnMode>Bezier</turnMode>
+        <bezierControlRatio>0.4</bezierControlRatio>
+        <!-- 速度外推预测 -->
+        <enablePrediction>true</enablePrediction>
+        <predictionTicks>3</predictionTicks>
+        <!-- 立即追踪，极短延迟 -->
+        <trackingStartRatio>1.0</trackingStartRatio>
+        <trackingDelay>5</trackingDelay>
         <maxFlyingTicks>600</maxFlyingTicks>
-        <maxLockAngle>150</maxLockAngle>
+        <!-- 宽脱锁角 + 重锁能力 -->
+        <maxLockAngle>170</maxLockAngle>
         <searchRadius>20</searchRadius>
+        <searchInterval>15</searchInterval>
+        <allowRetarget>true</allowRetarget>
+        <lostTrackingSelfDestructTicks>90</lostTrackingSelfDestructTicks>
       </li>
     </modExtensions>
   </ThingDef>
@@ -147,7 +158,7 @@
        BDP_Bullet_Argus — 天眼制导弹
        引导+追踪组合：GuidedModule走锚点折线，末段TrackingModule追踪
        速度40，dmg=8 Bullet，拖尾：青绿色
-       trackingDelay=0 因为追踪仅在IsOnFinalSegment=true时激活
+       trackingDelay=3 追踪在Phase进入FinalApproach后延迟3tick激活
        ══════════════════════════════════════════════════════ -->
   <ThingDef ParentName="BaseBullet">
     <defName>BDP_Bullet_Argus</defName>
@@ -176,11 +187,12 @@
       <!-- 追踪模块：末段锁定目标 -->
       <li Class="BDP.Trigger.BDPTrackingConfig">
         <turnMode>Simple</turnMode>
-        <maxTurnRate>6</maxTurnRate>
-        <trackingDelay>0</trackingDelay>
-        <maxFlyingTicks>500</maxFlyingTicks>
-        <maxLockAngle>90</maxLockAngle>
-        <searchRadius>12</searchRadius>
+        <maxTurnRate>0.8</maxTurnRate>
+        <trackingStartRatio>0.67</trackingStartRatio>
+        <trackingDelay>3</trackingDelay>
+        <maxFlyingTicks>480</maxFlyingTicks>
+        <maxLockAngle>70</maxLockAngle>
+        <searchRadius>15</searchRadius>
       </li>
     </modExtensions>
   </ThingDef>

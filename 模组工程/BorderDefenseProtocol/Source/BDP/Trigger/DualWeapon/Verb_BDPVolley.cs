@@ -50,6 +50,11 @@ namespace BDP.Trigger
             // 循环发射所有子弹（每颗独立命中判定）
             bool anyHit = false;
             float spread = cfg.volleySpreadRadius;
+
+            // ★ 自动绕行：齐射前计算路由（条件2由Verb类型隐含满足）
+            gs.PrepareAutoRoute(caster.Position, currentTarget.Cell,
+                caster.Map, cfg.GetFirstProjectileDef());
+
             for (int i = 0; i < volleyCount; i++)
             {
                 // 视觉偏移：每发子弹射出起点随机偏移

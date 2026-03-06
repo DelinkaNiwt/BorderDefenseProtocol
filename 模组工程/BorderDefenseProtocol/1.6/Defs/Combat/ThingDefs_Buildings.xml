@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- ══════════════════════════════════════════════════════
+       紧急脱离信标
+       约束：地图内只能存在1座，需要通电
+       作用：战斗体被动破裂时的传送目的地
+       ══════════════════════════════════════════════════════ -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>BDP_EmergencyBeacon</defName>
+    <label>紧急脱离信标</label>
+    <description>战斗体紧急脱离的传送目标。需要通电。地图内只能建造一座。</description>
+
+    <!-- 控制导航菜单中的预览图大小 -->
+    <uiIconScale>0.7</uiIconScale>
+
+    <thingClass>Building</thingClass>
+    <category>Building</category>
+    <graphicData>
+      <texPath>Things/Building/Misc/BDP_EmergencyBeacon</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2,2)</drawSize>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <blockWind>false</blockWind>
+    <fillPercent>0.25</fillPercent>
+    <canOverlapZones>false</canOverlapZones>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToBuild>2000</WorkToBuild>
+      <Flammability>0.5</Flammability>
+    </statBases>
+    <size>(1,1)</size>
+    <costList>
+      <Steel>50</Steel>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>50</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Glower">
+        <glowRadius>6</glowRadius>
+        <glowColor>(73,216,230,0)</glowColor>
+      </li>
+    </comps>
+    <placeWorkers>
+      <li>BDP.Combat.PlaceWorker_OnlyOnePerMap</li>
+    </placeWorkers>
+    <designationCategory>Misc</designationCategory>
+    <researchPrerequisites>
+      <li>Electricity</li>
+    </researchPrerequisites>
+  </ThingDef>
+</Defs>

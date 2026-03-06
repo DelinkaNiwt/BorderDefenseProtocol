@@ -6,71 +6,99 @@ using Verse;
 namespace BDP.Trigger
 {
     /// <summary>
-    /// BDP统一投射物宿主——继承原版Bullet，通过模块组合实现拖尾/引导/爆炸等功能。
+    /// BDP统一投射物宿主——v5管线架构。
     ///
-    /// 架构v4（管线化重构）：
-    ///   · 宿主本身是薄壳，不含业务逻辑
-    ///   · 功能由IBDPProjectileModule模块提供
-    ///   · 模块按需实现管线接口（IBDPPathResolver/IBDPPositionModifier/IBDPTickObserver/...）
-    ///   · 每tick按管线顺序分发：PathResolver→引擎计算→PositionModifier→TickObserver
-    ///   · 到达时：ArrivalHandler→ImpactHandler
-    ///   · 无管线参与者的阶段零开销（空列表跳过）
+    /// 核心原则：模块只产出意图，宿主统一执行。
+    ///   · Phase状态机是模块间唯一协作媒介（模块只读）
+    ///   · origin/destination/ticksToImpact 只在 ApplyFlightRedirect 中写入
+    ///   · Destroy()/Impact() 只在宿主内部调用
+    ///
+    /// 管线调度（8阶段）：
+    ///   TickInterval:
+    ///     0. PostLaunchInit
+    ///     1. LifecycleCheck — IBDPLifecyclePolicy
+    ///     2. FlightIntent — IBDPFlightIntentProvider
+    ///     3. base.TickInterval() — vanilla引擎
+    ///     4. PositionModifier — IBDPPositionModifier（保留）
+    ///     5. VisualObserve — IBDPVisualObserver
+    ///   ImpactSomething:
+    ///     6. ArrivalPolicy — IBDPArrivalPolicy
+    ///     7. HitResolve — IBDPHitResolver
+    ///     8. Impact — IBDPImpactHandler（保留）
     /// </summary>
     public class Bullet_BDP : Bullet
     {
         // ── 模块列表（按Priority升序） ──
         private List<IBDPProjectileModule> modules = new List<IBDPProjectileModule>();
 
-        // ── 管线参与者缓存（SpawnSetup时建立，避免每tick做is检查） ──
-        private List<IBDPPathResolver> pathResolvers;
+        // ── v5管线参与者缓存（SpawnSetup时建立） ──
+        private List<IBDPLifecyclePolicy> lifecyclePolicies;
+        private List<IBDPFlightIntentProvider> flightIntentProviders;
         private List<IBDPPositionModifier> positionModifiers;
-        private List<IBDPTickObserver> tickObservers;
-        private List<IBDPArrivalHandler> arrivalHandlers;
+        private List<IBDPVisualObserver> visualObservers;
+        private List<IBDPArrivalPolicy> arrivalPolicies;
+        private List<IBDPHitResolver> hitResolvers;
         private List<IBDPImpactHandler> impactHandlers;
         private List<IBDPSpeedModifier> speedModifiers;
+
+        // ── Phase转换观察者缓存 ──
+        private List<IBDPPhaseTransitionObserver> phaseObservers;
+
+        // ── 飞行阶段状态机（模块间唯一协作媒介） ──
+        /// <summary>
+        /// 当前飞行阶段。模块只读，宿主统一管理转换。
+        /// </summary>
+        public FlightPhase Phase { get; private set; } = FlightPhase.Direct;
+
+        // ── 飞行重定向配置 ──
+        /// <summary>从def.modExtensions读取，无配置时用默认值。</summary>
+        private FlightRedirectConfig redirectConfig;
 
         // ── 弹道目标信息 ──
         /// <summary>
         /// 弹道的最终目标。
-        /// 普通弹道等同于 intendedTarget；引导弹由 GuidedModule.SetWaypoints() 写入真实目标。
+        /// 普通弹道等同于intendedTarget；引导弹由GuidedModule.ApplyWaypoints()写入真实目标。
         /// </summary>
         public LocalTargetInfo FinalTarget;
-
-        /// <summary>
-        /// 当前是否处于最终飞行段（飞向真实目标）。
-        /// 普通弹道始终为 true；引导弹由 GuidedModule 在路径推进时维护。
-        /// </summary>
-        public bool IsOnFinalSegment = true;
-
-        // ── 追踪状态（由 IBDPPathResolver 模块维护） ──
-        /// <summary>是否正在被追踪模块引导（追踪弹激活时写true，丢失目标时写false）。</summary>
-        public bool IsTracking;
 
         /// <summary>追踪目标（可能与FinalTarget不同——追踪弹可中途切换目标）。</summary>
         public LocalTargetInfo TrackingTarget;
 
-        // ── 穿体穿透（由 IBDPImpactHandler 模块维护） ──
-        /// <summary>
-        /// 穿体穿透剩余力——子弹穿过目标继续飞行的能力。
-        /// 区别于原版ArmorPenetration（护甲穿透）。
-        /// 初始值由SpawnSetup从芯片配置读取，每次穿透后由ImpactHandler递减。
-        /// 默认0=不穿透。
-        /// </summary>
+        // ── 穿体穿透（由IBDPImpactHandler模块维护） ──
+        /// <summary>穿体穿透剩余力——子弹穿过目标继续飞行的能力。默认0=不穿透。</summary>
         public float PassthroughPower;
 
         /// <summary>已穿透实体次数（供伤害衰减计算）。</summary>
         public int PassthroughCount;
 
+        // ── Launch后延迟初始化标记 ──
+        private bool postLaunchInitDone;
+
+        /// <summary>上一tick是否有模块产出了飞行意图（供LifecycleContext注入）。</summary>
+        private bool lastTickHadIntent;
+
+        /// <summary>累计到达重定向次数（诊断 + 防无限循环）。</summary>
+        private int arrivalRedirectCount;
+        /// <summary>是否已消耗首段重定向（首段不做origin后退）。</summary>
+        private bool firstRedirectConsumed;
+
+        // ── Vanilla适配层 ──
+        /// <summary>Vanilla兼容适配层——集中处理vanilla机制冲突。</summary>
+        private VanillaAdapter vanillaAdapter = new VanillaAdapter();
+
         // ── 发射上下文 ──
-        /// <summary>发射时的游戏tick（用于延迟引爆、存活时限等时间相关效果）。</summary>
+        /// <summary>发射时的游戏tick。</summary>
         public int LaunchTick;
 
-        // ── PositionModifier输出缓存（供DrawPos/DrawAt使用） ──
-        /// <summary>经PositionModifier修饰后的显示位置。每tick更新。</summary>
+        // ── PositionModifier输出缓存 ──
         private Vector3 modifiedDrawPos;
-
-        /// <summary>是否有PositionModifier参与者（决定是否使用修饰位置）。</summary>
         private bool hasPositionModifiers;
+        /// <summary>发射速度倍率（FireMode注入，1=原速）。</summary>
+        private float launchSpeedMult = 1f;
+
+        // ══════════════════════════════════════════
+        //  公共API
+        // ══════════════════════════════════════════
 
         /// <summary>获取指定类型的模块实例（供Verb层调用）。</summary>
         public T GetModule<T>() where T : class, IBDPProjectileModule
@@ -82,10 +110,7 @@ namespace BDP.Trigger
             return null;
         }
 
-        /// <summary>
-        /// 获取实现指定管线接口的模块（供外部查询能力）。
-        /// 预留的Provider查询入口。
-        /// </summary>
+        /// <summary>获取实现指定管线接口的模块（供外部查询能力）。</summary>
         public T GetCapability<T>() where T : class
         {
             for (int i = 0; i < modules.Count; i++)
@@ -95,16 +120,132 @@ namespace BDP.Trigger
             return null;
         }
 
-        /// <summary>
-        /// 重定向飞行——由模块调用，将弹道从当前位置重定向到新目标。
-        /// 重置origin/destination/ticksToImpact。
-        /// </summary>
-        public void RedirectFlight(Vector3 newOrigin, Vector3 newDestination)
+        /// <summary>发射速度倍率（只读）。</summary>
+        public float LaunchSpeedMult => launchSpeedMult;
+
+        /// <summary>有效每tick速度（基础速度 * 发射速度倍率）。</summary>
+        public float EffectiveSpeedTilesPerTick
         {
-            origin = newOrigin;
-            destination = newDestination;
-            ticksToImpact = Mathf.CeilToInt(StartingTicksToImpact);
-            if (ticksToImpact < 1) ticksToImpact = 1;
+            get
+            {
+                float baseSpeed = def?.projectile?.SpeedTilesPerTick ?? 0f;
+                float mult = launchSpeedMult > 0.001f ? launchSpeedMult : 1f;
+                return baseSpeed * mult;
+            }
+        }
+
+        /// <summary>
+        /// 注入引导路径——外部调用入口，宿主内部委托给GuidedModule。
+        /// 外部调用者无需知道GuidedModule的存在。
+        /// </summary>
+        public bool TryInitGuidedFlight(
+            List<IntVec3> anchors, LocalTargetInfo finalTarget, float anchorSpread)
+        {
+            var module = GetModule<GuidedModule>();
+            if (module == null) return false;
+            module.ApplyWaypoints(this, anchors, finalTarget, anchorSpread);
+            return true;
+        }
+
+        /// <summary>
+        /// 初始化引导飞行——由GuidedModule.ApplyWaypoints调用。
+        /// 设置Phase=GuidedLeg，同步FinalTarget/TrackingTarget。
+        /// </summary>
+        public void InitGuidedFlight(LocalTargetInfo finalTarget)
+        {
+            SetPhase(FlightPhase.GuidedLeg);
+            FinalTarget = finalTarget;
+            TrackingTarget = finalTarget;
+        }
+
+        /// <summary>
+        /// 统一Phase转换——所有Phase变更必须通过此方法。
+        /// 通知所有IBDPPhaseTransitionObserver。
+        /// </summary>
+        private void SetPhase(FlightPhase newPhase)
+        {
+            if (Phase == newPhase) return;
+            var old = Phase;
+            Phase = newPhase;
+            if (TrackingDiag.Enabled)
+                Log.Message($"[BDP-Phase] {old}→{Phase}");
+            if (phaseObservers != null)
+            {
+                for (int i = 0; i < phaseObservers.Count; i++)
+                    phaseObservers[i].OnPhaseChanged(this, old, newPhase);
+            }
+        }
+
+        // ══════════════════════════════════════════
+        //  飞行重定向（唯一写入origin/destination/ticksToImpact的方法）
+        // ══════════════════════════════════════════
+
+        /// <summary>
+        /// 统一飞行参数重算——所有飞行方向变更必须通过此方法。
+        /// 红线约束：origin/destination/ticksToImpact只在此方法中写入。
+        ///
+        /// 策略：
+        ///   GuidedLeg/Tracking/FinalApproach → origin后退config.originOffset（恢复vanilla沿途拦截）
+        ///   Tracking远距离 → 固定tick，精确速度
+        ///   其他 → 精确距离计算
+        /// </summary>
+        private void ApplyFlightRedirect(Vector3 newDestination, bool exactPosition = false)
+        {
+            // 首段重定向只执行一次：用于避免首发视觉起点漂移。
+            bool isFirstRedirect = !firstRedirectConsumed;
+            firstRedirectConsumed = true;
+
+            var cfg = redirectConfig;
+            Vector3 currentPos = DrawPos;
+            Vector3 toDest = (newDestination - currentPos).Yto0();
+            float dist = toDest.magnitude;
+
+            if (dist < 0.001f)
+            {
+                // 退化：目标几乎重合，直接设置最小tick
+                destination = newDestination;
+                ticksToImpact = 1;
+                return;
+            }
+
+            Vector3 dir = toDest.normalized;
+            float speedPerTick = EffectiveSpeedTilesPerTick;
+            if (speedPerTick <= 0.0001f)
+                speedPerTick = def.projectile.SpeedTilesPerTick;
+
+            // ★ 使用适配层统一计算origin（替换原有的分散origin后退逻辑）
+            origin = vanillaAdapter.ComputeAdaptedOrigin(currentPos, dir, Phase, isFirstRedirect);
+            origin.y = currentPos.y;
+
+            // 距离策略（GuidedLeg不走far-distance，始终精确飞到锚点）
+            // exactPosition=true时跳过远距离策略（贝塞尔等精确位置模式）
+            bool isFarDistance = !exactPosition
+                && Phase == FlightPhase.Tracking
+                && dist > speedPerTick * cfg.farDistanceSpeedMult;
+
+            if (isFarDistance)
+            {
+                // 远距离：固定tick，精确速度
+                int ticks = cfg.farDistanceFixedTicks;
+                destination = currentPos + dir * (ticks * speedPerTick);
+                destination.y = currentPos.y;
+                ticksToImpact = ticks;
+            }
+            else
+            {
+                // 近距离：精确距离计算
+                ticksToImpact = Mathf.CeilToInt(dist / speedPerTick);
+                if (ticksToImpact < 1) ticksToImpact = 1;
+
+                // 近距离snap：用整tick距离避免CeilToInt余数累积
+                float finalApproachThreshold = speedPerTick * 1.5f;
+                float resolvedDist = dist <= finalApproachThreshold
+                    ? dist
+                    : ticksToImpact * speedPerTick;
+
+                destination = currentPos + dir * resolvedDist;
+                destination.y = currentPos.y;
+            }
         }
 
         // ══════════════════════════════════════════
@@ -122,87 +263,166 @@ namespace BDP.Trigger
                 modules.Sort((a, b) => a.Priority.CompareTo(b.Priority));
             }
 
-            // 初始化最终目标（引导弹会在 SetWaypoints 时覆盖）
+            // 初始化最终目标（引导弹会在ApplyWaypoints时覆盖）
             FinalTarget = intendedTarget;
 
             // 初始化发射时间戳
             if (!respawningAfterLoad)
                 LaunchTick = Find.TickManager.TicksGame;
 
-            // 初始化穿体穿透力（从芯片配置读取，无配置则默认0=不穿透）
+            // 初始化穿体穿透力
             if (!respawningAfterLoad)
             {
                 var chipConfig = equipmentDef?.GetModExtension<WeaponChipConfig>();
                 PassthroughPower = chipConfig?.passthroughPower ?? 0f;
             }
 
+            // 读取飞行重定向配置（无配置时用默认值）
+            redirectConfig = def.GetModExtension<FlightRedirectConfig>()
+                ?? new FlightRedirectConfig();
+
             // 建立管线参与者缓存
             BuildPipelineCache();
+
+            // 初始化显示位置（必须在OnSpawn之前，避免模块读到默认值）
+            modifiedDrawPos = base.DrawPos;
 
             // 通知所有模块
             for (int i = 0; i < modules.Count; i++)
                 modules[i].OnSpawn(this);
 
-            // 初始化显示位置
-            modifiedDrawPos = base.DrawPos;
+            // 配置适配层策略（根据弹道类型决定启用哪些适配）
+            bool hasTracking = GetModule<TrackingModule>() != null;
+            bool hasGuided = GetModule<GuidedModule>() != null;
+            vanillaAdapter.ConfigureStrategy(
+                needsOriginOffset: hasTracking || hasGuided,
+                needsUsedTargetSync: hasTracking
+            );
+
+            // 记录真实发射点（在Launch后，origin已由vanilla设置）
+            if (!respawningAfterLoad)
+                vanillaAdapter.RecordTrueOrigin(origin);
         }
 
         /// <summary>扫描模块列表，按管线接口类型分组缓存。</summary>
         private void BuildPipelineCache()
         {
-            pathResolvers = new List<IBDPPathResolver>();
+            lifecyclePolicies = new List<IBDPLifecyclePolicy>();
+            flightIntentProviders = new List<IBDPFlightIntentProvider>();
             positionModifiers = new List<IBDPPositionModifier>();
-            tickObservers = new List<IBDPTickObserver>();
-            arrivalHandlers = new List<IBDPArrivalHandler>();
+            visualObservers = new List<IBDPVisualObserver>();
+            arrivalPolicies = new List<IBDPArrivalPolicy>();
+            hitResolvers = new List<IBDPHitResolver>();
             impactHandlers = new List<IBDPImpactHandler>();
             speedModifiers = new List<IBDPSpeedModifier>();
+            phaseObservers = new List<IBDPPhaseTransitionObserver>();
 
             for (int i = 0; i < modules.Count; i++)
             {
                 var m = modules[i];
-                if (m is IBDPPathResolver pr) pathResolvers.Add(pr);
+                if (m is IBDPLifecyclePolicy lp) lifecyclePolicies.Add(lp);
+                if (m is IBDPFlightIntentProvider fp) flightIntentProviders.Add(fp);
                 if (m is IBDPPositionModifier pm) positionModifiers.Add(pm);
-                if (m is IBDPTickObserver to) tickObservers.Add(to);
-                if (m is IBDPArrivalHandler ah) arrivalHandlers.Add(ah);
+                if (m is IBDPVisualObserver vo) visualObservers.Add(vo);
+                if (m is IBDPArrivalPolicy ap) arrivalPolicies.Add(ap);
+                if (m is IBDPHitResolver hr) hitResolvers.Add(hr);
                 if (m is IBDPImpactHandler ih) impactHandlers.Add(ih);
                 if (m is IBDPSpeedModifier sm) speedModifiers.Add(sm);
+                if (m is IBDPPhaseTransitionObserver po) phaseObservers.Add(po);
             }
 
             hasPositionModifiers = positionModifiers.Count > 0;
         }
 
         // ══════════════════════════════════════════
-        //  管线分发：每tick
+        //  管线调度：每tick（阶段0-5）
         // ══════════════════════════════════════════
 
         /// <summary>
-        /// 管线化TickInterval——按阶段顺序分发：
-        ///   1. PathResolver → 修改destination
-        ///   2. 引擎位置计算（base.TickInterval）
-        ///   3. PositionModifier → 修饰显示位置
-        ///   4. TickObserver → 通知观察者
-        ///   5. 到达检查 → ArrivalHandler → ImpactHandler
-        ///
-        /// 注意：base.TickInterval内部已包含拦截检查和到达判定。
-        /// 当前PathResolver在base之前执行（修改destination），
-        /// PositionModifier和TickObserver在base之后执行。
-        /// ArrivalHandler通过ImpactSomething override分发。
+        /// v5管线TickInterval——8阶段调度。
+        ///   0. PostLaunchInit
+        ///   1. LifecycleCheck
+        ///   2. FlightIntent
+        ///   3. base.TickInterval()
+        ///   4. PositionModifier
+        ///   5. VisualObserve
         /// </summary>
         protected override void TickInterval(int delta)
         {
-            // 阶段1：PathResolver——修改destination
-            if (pathResolvers.Count > 0)
+            // 阶段0：Launch后延迟初始化
+            if (!postLaunchInitDone)
             {
-                var pathCtx = new PathContext(origin, destination);
-                for (int i = 0; i < pathResolvers.Count; i++)
-                    pathResolvers[i].ResolvePath(this, ref pathCtx);
-                destination = pathCtx.Destination;
+                postLaunchInitDone = true;
+                bool isStale = FinalTarget.Thing == null
+                    && FinalTarget.Cell.x == 0 && FinalTarget.Cell.z == 0;
+                if (isStale && intendedTarget.IsValid)
+                {
+                    FinalTarget = intendedTarget;
+                    TrackingTarget = intendedTarget;
+                }
             }
 
-            // 阶段2：引擎位置计算 + 拦截检查 + 到达判定
-            base.TickInterval(delta);
+            // 阶段1：LifecycleCheck——遍历lifecyclePolicies
+            if (lifecyclePolicies.Count > 0)
+            {
+                var lcCtx = new LifecycleContext(Phase, lastTickHadIntent);
+                for (int i = 0; i < lifecyclePolicies.Count; i++)
+                    lifecyclePolicies[i].CheckLifecycle(this, ref lcCtx);
 
-            // 阶段3：PositionModifier——修饰显示位置
+                // 处理Phase转换请求
+                if (lcCtx.RequestPhaseChange.HasValue)
+                {
+                    SetPhase(lcCtx.RequestPhaseChange.Value);
+                }
+
+                // 处理销毁请求
+                if (lcCtx.RequestDestroy)
+                {
+                    if (TrackingDiag.Enabled)
+                        Log.Message($"[BDP-Bullet] Destroy reason={lcCtx.DestroyReason} Phase={Phase} pos={Position}");
+                    if (Spawned) Destroy();
+                    return;
+                }
+            }
+
+            // 阶段2：FlightIntent——取第一个非null Intent执行ApplyFlightRedirect
+            if (flightIntentProviders.Count > 0)
+            {
+                var fiCtx = new FlightIntentContext(DrawPos, destination, Phase);
+                for (int i = 0; i < flightIntentProviders.Count; i++)
+                {
+                    flightIntentProviders[i].ProvideIntent(this, ref fiCtx);
+                    if (fiCtx.Intent.HasValue) break;
+                }
+
+                if (fiCtx.Intent.HasValue)
+                {
+                    var intent = fiCtx.Intent.Value;
+
+                    // 优先处理显式Phase请求
+                    if (fiCtx.RequestPhaseChange.HasValue)
+                    {
+                        SetPhase(fiCtx.RequestPhaseChange.Value);
+                    }
+                    // 追踪激活时的Phase转换（兼容旧路径）
+                    else if (intent.TrackingActivated && Phase != FlightPhase.Tracking)
+                    {
+                        SetPhase(FlightPhase.Tracking);
+                    }
+
+                    ApplyFlightRedirect(intent.TargetPosition, intent.ExactPosition);
+                }
+
+                // 记录本tick是否有Intent（供下一tick LifecycleContext使用）
+                lastTickHadIntent = fiCtx.Intent.HasValue;
+            }
+
+            // 阶段3：vanilla引擎位置计算 + 拦截检查 + 到达判定
+            base.TickInterval(delta);
+            if (!Spawned)
+                return;
+
+            // 阶段4：PositionModifier——修饰显示位置
             if (hasPositionModifiers)
             {
                 float progress = StartingTicksToImpact > 0f
@@ -218,56 +438,108 @@ namespace BDP.Trigger
                 modifiedDrawPos = base.DrawPos;
             }
 
-            // 阶段4：TickObserver——通知观察者（拖尾/视觉/音效）
-            for (int i = 0; i < tickObservers.Count; i++)
-                tickObservers[i].OnTick(this);
+            // 阶段5：VisualObserve——通知视觉观察者
+            for (int i = 0; i < visualObservers.Count; i++)
+                visualObservers[i].Observe(this);
         }
 
         // ══════════════════════════════════════════
-        //  管线分发：到达 & 命中
+        //  管线调度：到达 & 命中（阶段6-8）
         // ══════════════════════════════════════════
 
         /// <summary>
-        /// 到达决策——分发ArrivalHandler管线。
-        /// 任一模块设置Continue=true则短路跳过后续Handler和Impact。
+        /// v5到达决策——分发ArrivalPolicy + HitResolver管线。
         /// </summary>
         protected override void ImpactSomething()
         {
-            if (arrivalHandlers.Count > 0)
+            // 阶段6：ArrivalPolicy——决定继续飞还是命中
+            if (arrivalPolicies.Count > 0)
             {
-                var arrCtx = new ArrivalContext();
-                for (int i = 0; i < arrivalHandlers.Count; i++)
+                var arrCtx = new ArrivalContextV5(Phase);
+                for (int i = 0; i < arrivalPolicies.Count; i++)
                 {
-                    arrivalHandlers[i].HandleArrival(this, ref arrCtx);
-                    if (arrCtx.Continue) break; // 短路：已重定向，不再分发后续Handler
+                    arrivalPolicies[i].DecideArrival(this, ref arrCtx);
+                    if (arrCtx.Continue) break;
                 }
+
                 if (arrCtx.Continue)
-                    return; // 模块已重定向，不执行Impact
+                {
+                    // 处理Phase转换
+                    if (arrCtx.RequestPhaseChange.HasValue)
+                    {
+                        SetPhase(arrCtx.RequestPhaseChange.Value);
+                    }
+
+                    arrivalRedirectCount++;
+                    if (TrackingDiag.Enabled)
+                        Log.Message($"[BDP-Bullet] Redirect#{arrivalRedirectCount} Phase={Phase} nextDest={arrCtx.NextDestination:F2}");
+                    // 安全阀：防止无限重定向
+                    if (arrivalRedirectCount > 200)
+                    {
+                        Log.Warning($"[BDP-Bullet] 重定向超限销毁 def={def.defName} pos={Position} Phase={Phase}");
+                        if (Spawned) Destroy();
+                        return;
+                    }
+
+                    ApplyFlightRedirect(arrCtx.NextDestination);
+                    return;
+                }
             }
 
+            // 阶段7：HitResolve——修正命中判定
+            // ★ 优先使用适配层统一处理（usedTarget同步 + ForceGround检查）
+            var impactCheck = vanillaAdapter.CheckBeforeImpact(this, Phase, TrackingTarget, ref usedTarget);
+            if (impactCheck.ForceGround)
+            {
+                if (TrackingDiag.Enabled)
+                    Log.Message($"[VanillaAdapter] ForceGround: {impactCheck.Reason}");
+                Impact(null);
+                return;
+            }
+
+            // 其余HitResolver（非TrackingModule）仍可参与
+            if (hitResolvers.Count > 0)
+            {
+                var hitCtx = new HitContext(Phase, usedTarget);
+                for (int i = 0; i < hitResolvers.Count; i++)
+                    hitResolvers[i].ResolveHit(this, ref hitCtx);
+
+                if (hitCtx.ForceGround)
+                {
+                    Impact(null);
+                    return;
+                }
+
+                if (hitCtx.OverrideTarget.IsValid)
+                    usedTarget = hitCtx.OverrideTarget;
+            }
+
+            // 阶段8：vanilla命中判定 → Impact
             base.ImpactSomething();
         }
 
         /// <summary>
-        /// 命中效果——分发ImpactHandler管线。
-        /// 任一模块设置Handled=true则短路跳过后续Handler和base.Impact。
+        /// 命中效果——分发IBDPImpactHandler管线。
         /// </summary>
         protected override void Impact(Thing hitThing, bool blockedByShield = false)
         {
+            if (TrackingDiag.Enabled)
+            {
+                string hitName = hitThing?.def?.defName ?? "Ground";
+                Log.Message($"[BDP-Impact] {def.defName}→{hitName} Phase={Phase} pos={Position} shield={blockedByShield}");
+            }
+
             if (impactHandlers.Count > 0)
             {
                 var impCtx = new ImpactContext(hitThing, blockedByShield);
                 for (int i = 0; i < impactHandlers.Count; i++)
                 {
                     impactHandlers[i].HandleImpact(this, ref impCtx);
-                    if (impCtx.Handled) break; // 短路：已处理Impact，不再分发后续Handler
+                    if (impCtx.Handled) break;
                 }
-
-                if (impCtx.Handled)
-                    return; // 模块已处理Impact
+                if (impCtx.Handled) return;
             }
 
-            // 无模块处理时走原版Impact
             base.Impact(hitThing, blockedByShield);
         }
 
@@ -275,49 +547,38 @@ namespace BDP.Trigger
         //  显示位置（PositionModifier支持）
         // ══════════════════════════════════════════
 
-        /// <summary>
-        /// 重写DrawPos——返回经PositionModifier修饰后的显示位置。
-        /// 无PositionModifier时等同base.DrawPos。
-        /// </summary>
         public override Vector3 DrawPos => hasPositionModifiers ? modifiedDrawPos : base.DrawPos;
 
-        // ── v9.1 FireMode速度修正接口（供 Patch_Projectile_Launch_FireModeSpeed 调用） ──
+        // ── 速度修正接口（供Patch_Projectile_Launch_FireModeSpeed调用） ──
 
         /// <summary>
-        /// 速度修正：修改 destination 使 StartingTicksToImpact 自然变化，
-        /// 然后重新初始化 ticksToImpact / lifetime。
-        /// 与 RedirectFlight 模式一致，在 Launch 的 Postfix 中调用。
-        /// speedMult > 1 = 加速（destination 缩近），speedMult &lt; 1 = 减速（destination 拉远）。
+        /// 速度修正：修改destination使StartingTicksToImpact自然变化，
+        /// 然后重新初始化ticksToImpact/lifetime。
         /// </summary>
         public void ReinitFlight(float speedMult)
         {
-            Vector3 dir  = (destination - origin).Yto0();
-            float   dist = dir.magnitude;
-            if (dist < 0.001f) return;
+            launchSpeedMult = Mathf.Max(0.01f, speedMult);
 
-            float newDist = dist / speedMult;
-
-            // P0：防止 Speed 极小值时 destination 超出地图边界（越界会被引擎 Destroy()，零命中）
-            // 取地图短边的 80% 作为安全上限，保留足够余量
-            if (Map != null)
+            Vector3 dir = (destination - origin).Yto0();
+            float dist = dir.magnitude;
+            if (dist < 0.001f)
             {
-                float mapLimit = Mathf.Min(Map.Size.x, Map.Size.z) * 0.8f;
-                newDist = Mathf.Min(newDist, mapLimit);
+                ticksToImpact = 1;
+                lifetime = 1;
+                return;
             }
 
-            // 速度快 → 等效距离短 → StartingTicksToImpact 自然减小 → 更快到达
-            destination = origin + dir.normalized * newDist
-                          + Vector3.up * destination.y;
-            int newTicks  = Mathf.Max(1, Mathf.CeilToInt(StartingTicksToImpact));
+            float speedPerTick = EffectiveSpeedTilesPerTick;
+            if (speedPerTick <= 0.0001f)
+                speedPerTick = def.projectile.SpeedTilesPerTick;
+
+            // 防止destination超出地图边界
+            int newTicks = Mathf.Max(1, Mathf.CeilToInt(dist / speedPerTick));
             ticksToImpact = newTicks;
-            lifetime      = newTicks;
+            lifetime = newTicks;
         }
 
-        /// <summary>
-        /// 发射时速度管线分发入口（由 Patch_Projectile_Launch_FireModeSpeed 调用）。
-        /// 依次调用所有 IBDPSpeedModifier 模块，最终以修改后的倍率执行 ReinitFlight。
-        /// 无模块时行为与直接调用 ReinitFlight 完全一致。
-        /// </summary>
+        /// <summary>发射时速度管线分发入口。</summary>
         public void DispatchSpeedModifiers(float speedMult)
         {
             if (speedModifiers.Count > 0)
@@ -337,13 +598,21 @@ namespace BDP.Trigger
         public override void ExposeData()
         {
             base.ExposeData();
+
+            // v5 Phase状态机
+            var phase = Phase;
+            Scribe_Values.Look(ref phase, "bdpPhase", FlightPhase.Direct);
+            Phase = phase;
+
             Scribe_TargetInfo.Look(ref FinalTarget, "bdpFinalTarget");
-            Scribe_Values.Look(ref IsOnFinalSegment, "bdpIsOnFinalSegment", true);
-            Scribe_Values.Look(ref IsTracking, "bdpIsTracking", false);
             Scribe_TargetInfo.Look(ref TrackingTarget, "bdpTrackingTarget");
             Scribe_Values.Look(ref PassthroughPower, "bdpPassthroughPower", 0f);
             Scribe_Values.Look(ref PassthroughCount, "bdpPassthroughCount", 0);
             Scribe_Values.Look(ref LaunchTick, "bdpLaunchTick", 0);
+            Scribe_Values.Look(ref launchSpeedMult, "bdpLaunchSpeedMult", 1f);
+            Scribe_Values.Look(ref postLaunchInitDone, "bdpPostLaunchInit", false);
+            Scribe_Values.Look(ref arrivalRedirectCount, "bdpArrivalRedirects", 0);
+            Scribe_Values.Look(ref firstRedirectConsumed, "bdpFirstRedirectConsumed", false);
             Scribe_Collections.Look(ref modules, "bdpModules", LookMode.Deep);
             if (modules == null)
                 modules = new List<IBDPProjectileModule>();

@@ -26,6 +26,12 @@ namespace BDP.Trigger
         /// <summary>该槽位的芯片是否当前激活。</summary>
         public bool isActive;
 
+        /// <summary>
+        /// 槽位是否被禁用（手部/手臂被毁时设置）。
+        /// 禁用状态下芯片保留在槽位但不可激活，战斗体解除时自动恢复。
+        /// </summary>
+        public bool isDisabled;
+
         // 无参构造——Activator.CreateInstance和Scribe反序列化需要
         public ChipSlot() { }
 
@@ -35,6 +41,7 @@ namespace BDP.Trigger
             this.side = side;
             this.loadedChip = null;
             this.isActive = false;
+            this.isDisabled = false;
         }
 
         public void ExposeData()
@@ -43,13 +50,17 @@ namespace BDP.Trigger
             Scribe_Values.Look(ref side, "side");
             Scribe_Deep.Look(ref loadedChip, "loadedChip");
             Scribe_Values.Look(ref isActive, "isActive");
+            Scribe_Values.Look(ref isDisabled, "isDisabled");
 
             // 读档后校验不变量⑥：isActive=true时loadedChip必须非null
             if (Scribe.mode == LoadSaveMode.PostLoadInit && loadedChip == null)
+            {
                 isActive = false;
+                isDisabled = false;
+            }
         }
 
         public override string ToString()
-            => $"[{side}#{index} chip={loadedChip?.LabelShortCap ?? "empty"} active={isActive}]";
+            => $"[{side}#{index} chip={loadedChip?.LabelShortCap ?? "empty"} active={isActive} disabled={isDisabled}]";
     }
 }

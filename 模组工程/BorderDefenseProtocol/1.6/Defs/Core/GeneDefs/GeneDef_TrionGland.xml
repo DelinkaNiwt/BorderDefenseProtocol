@@ -22,6 +22,16 @@
       <BDP_TrionOutputPower>7</BDP_TrionOutputPower>
       <BDP_TrionRecoveryRate>670</BDP_TrionRecoveryRate>
     </statOffsets>
+    <!-- 战斗体装备配置 -->
+    <modExtensions>
+      <li Class="BDP.Combat.GeneExtension_CombatBody">
+        <defaultCombatApparel>
+          <li>BDP_CombatBodyArmor</li>
+        </defaultCombatApparel>
+        <!-- 战斗体维持消耗: 每天10点 -->
+        <maintenanceDrainPerDay>10</maintenanceDrainPerDay>
+      </li>
+    </modExtensions>
   </GeneDef>
 
 </Defs>

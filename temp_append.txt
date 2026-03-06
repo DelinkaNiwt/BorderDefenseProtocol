@@ -1,0 +1,56 @@
+```
+
+### 2.4 TrionCostHandler (Trion消耗处理器)
+
+**职责**：计算并消耗Trion。
+
+```csharp
+namespace BDP.Combat.DamageHandlers
+{
+    public class TrionCostHandler : IBDPDamageHandler, IConfigurableHandler
+    {
+        private Dictionary<DamageDef, float> damageMultipliers;
+        private float defaultMultiplier = 1.0f;
+
+        public void Configure(DamageHandlerDef def)
+        {
+            damageMultipliers = def.damageMultipliers ?? new Dictionary<DamageDef, float>();
+            defaultMultiplier = def.defaultMultiplier;
+        }
+
+        public void Handle(DamageContext context)
+        {
+            float multiplier = GetMultiplier(context.DamageInfo.Def);
+            float trionCost = context.DamageInfo.Amount * multiplier;
+
+            var compTrion = context.Pawn.GetComp<CompTrion>();
+            if (compTrion != null)
+            {
+                bool consumed = compTrion.Consume(trionCost);
+                if (!consumed)
+                {
+                    context.ShouldCollapse = true;
+                    context.CollapseReason = "Trion耗尽";
+                }
+            }
+            context.TrionCost = trionCost;
+        }
+
+        private float GetMultiplier(DamageDef damageDef)
+        {
+            if (damageMultipliers != null && damageMultipliers.TryGetValue(damageDef, out float multiplier))
+                return multiplier;
+            return defaultMultiplier;
+        }
+    }
+}
+```
+
+---
+
+## 历史修改记录
+
+| 版本 | 日期 | 修改摘要 | 签名 |
+|------|------|---------|------|
+| v1.0 | 2026-03-04 | 初版完成 | Claude Sonnet 4.6 |
+| v2.0 | 2026-03-04 | 架构优化版本。引入管道模式、优化影子HP系统、支持配置化策略 | Claude Sonnet 4.6 |

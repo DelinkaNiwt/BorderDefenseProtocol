@@ -23,6 +23,8 @@ namespace BDP.Trigger
         // v3.1：四态视觉——挂载未注册（暗黄）、注册未激活（暗蓝）
         private static readonly Color LoadedUnregisteredColor = new Color(0.5f, 0.45f, 0.2f, 0.3f);
         private static readonly Color RegisteredInactiveColor = new Color(0.2f, 0.3f, 0.5f, 0.3f);
+        // 禁用态（手部/手臂被毁）：暗红
+        private static readonly Color SlotDisabledRowColor = new Color(0.5f, 0.15f, 0.15f, 0.3f);
 
         public Window_TriggerBodySlots(CompTriggerBody triggerBody)
         {
@@ -104,16 +106,19 @@ namespace BDP.Trigger
         {
             // v6.0修复：按侧独立检查切换状态（旧代码用IsSwitching检查全局，导致一侧切换时另一侧也被禁用）
             bool switching = triggerBody.IsSideSwitching(side);
-            // 切换/后摇中该侧所有槽位不可交互
-            bool canClick = editable && slot.loadedChip != null && !switching;
+            // 禁用/切换/后摇中该侧所有槽位不可交互
+            bool canClick = editable && slot.loadedChip != null && !switching && !slot.isDisabled;
 
-            // v3.1：四态行颜色判定
+            // 五态行颜色判定（新增：禁用态）
+            //   禁用 → SlotDisabledRowColor（暗红，手部/手臂被毁）
             //   激活 → ActiveRowColor/SpecialRowColor
             //   有芯片 + 战斗体激活 → RegisteredInactiveColor（注册未激活）
             //   有芯片 + 战斗体未激活 → LoadedUnregisteredColor（挂载未注册）
             //   空 → EmptyRowColor
             Color rowColor;
-            if (slot.isActive)
+            if (slot.isDisabled)
+                rowColor = SlotDisabledRowColor;
+            else if (slot.isActive)
                 rowColor = side == SlotSide.Special ? SpecialRowColor : ActiveRowColor;
             else if (slot.loadedChip != null && triggerBody.IsCombatBodyActive)
                 rowColor = RegisteredInactiveColor;

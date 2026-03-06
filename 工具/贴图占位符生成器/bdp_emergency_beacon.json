@@ -1,0 +1,13 @@
+{
+  "textures": [
+    {
+      "width": 128,
+      "height": 128,
+      "output_prefix": "BDP_EmergencyBeacon",
+      "color_scheme": "blue",
+      "suffix_type": "single",
+      "grid_size": 32,
+      "grid_width": 1
+    }
+  ]
+}

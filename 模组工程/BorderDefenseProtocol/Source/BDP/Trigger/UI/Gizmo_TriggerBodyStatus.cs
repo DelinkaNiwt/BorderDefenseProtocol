@@ -24,6 +24,8 @@ namespace BDP.Trigger
         // v6.0：切换阶段进度条颜色——后摇（橙红）、前摇（青蓝）
         private static readonly Texture2D WindingDownBarTex = SolidColorMaterials.NewSolidColorTexture(new Color(0.9f, 0.5f, 0.2f, 1f));
         private static readonly Texture2D WarmingUpBarTex = SolidColorMaterials.NewSolidColorTexture(new Color(0.3f, 0.7f, 0.9f, 1f));
+        // 禁用态（手部/手臂被毁）：暗红边框
+        private static readonly Color DisabledBorderColor = new Color(0.7f, 0.2f, 0.2f, 1f);
 
         public Gizmo_TriggerBodyStatus(CompTriggerBody triggerBody)
         {
@@ -87,7 +89,16 @@ namespace BDP.Trigger
 
             if (displaySlot?.loadedChip != null)
             {
-                if (displaySlot.isActive)
+                // 禁用态优先：图标50%透明 + 暗红边框
+                if (triggerBody.IsSideDisabled(side))
+                {
+                    GUI.color = new Color(1f, 1f, 1f, 0.35f);
+                    GUI.DrawTexture(iconRect, displaySlot.loadedChip.def.uiIcon ?? BaseContent.BadTex);
+                    GUI.color = DisabledBorderColor;
+                    Widgets.DrawBox(iconRect, 1);
+                    GUI.color = Color.white;
+                }
+                else if (displaySlot.isActive)
                 {
                     // 有激活芯片：图标 + 绿色高亮边框
                     GUI.DrawTexture(iconRect, displaySlot.loadedChip.def.uiIcon ?? BaseContent.BadTex);

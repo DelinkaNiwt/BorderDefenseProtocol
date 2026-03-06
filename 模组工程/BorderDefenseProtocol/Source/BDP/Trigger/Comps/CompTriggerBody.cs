@@ -51,61 +51,14 @@ namespace BDP.Trigger
     ///   ⑫ activationWarmup对特殊槽芯片无效（战斗体生成时立即激活）（v2.1.1）
     ///   ⑬ IsCombatBodyActive==false时不可激活任何芯片（v6.0）
     ///   ⑭ WindingDown阶段旧芯片仍isActive=true，后摇到期才Deactivate（v6.0）
+    ///
+    /// v11.0变更（战斗体系统重构）：
+    ///   - 实现ICombatBodySupport接口，消除反射调用
+    ///   - 提供类型安全的战斗体支持API
     /// </summary>
-    public partial class CompTriggerBody : CompEquippable, IVerbOwner
+    public partial class CompTriggerBody : CompEquippable, IVerbOwner, ICombatBodySupport
     {
-        // ── 槽位数据（v2.0：mainSlots/subSlots → leftHandSlots/rightHandSlots） ──
-        private List<ChipSlot> leftHandSlots;
-        private List<ChipSlot> rightHandSlots;
-        // v2.1（T29）：特殊槽，全部同时激活/关闭，不参与切换状态机
-        private List<ChipSlot> specialSlots;
-
-        // ── 切换状态机（v6.0：按侧独立，null=Idle） ──
-        private SwitchContext leftSwitchCtx;
-        private SwitchContext rightSwitchCtx;
-
-        // v2.1（T31）：双手锁定槽位（非null=有双手芯片激活，另一侧被锁定）
-        private ChipSlot dualHandLockSlot;
-
-        // ── 按侧Verb存储（v2.0 T24：替代单一ActiveVerbProperties/ActiveTools） ──
-        // 由WeaponChipEffect通过SetSideVerbs设置，DualVerbCompositor合成最终结果
-        private List<VerbProperties> leftHandActiveVerbProps;
-        private List<Tool> leftHandActiveTools;
-        private List<VerbProperties> rightHandActiveVerbProps;
-        private List<Tool> rightHandActiveTools;
-
-        // ── v5.0新增：Verb引用缓存（不序列化，RebuildVerbs后重建） ──
-        // 供CompGetEquippedGizmosExtra读取，生成Command_BDPChipAttack
-        private Verb leftHandAttackVerb;    // 左手芯片独立攻击Verb实例
-        private Verb rightHandAttackVerb;   // 右手芯片独立攻击Verb实例
-        private Verb dualAttackVerb;        // 双手触发合成Verb实例
-
-        // ── v6.1新增：齐射Verb缓存（不序列化，CreateAndCacheChipVerbs后重建） ──
-        private Verb leftHandVolleyVerb;    // 左手芯片齐射Verb实例
-        private Verb rightHandVolleyVerb;   // 右手芯片齐射Verb实例
-        private Verb dualVolleyVerb;        // 双手齐射Verb实例
-
-        /// <summary>
-        /// 芯片Verb序列化列表（v8.0 PMS重构）。
-        /// 存档时收集所有芯片Verb，读档时反序列化并注册到LoadedObjectDirectory，
-        /// 使Job/Stance在ResolvingCrossRefs阶段能通过loadID找到芯片Verb。
-        /// RebuildVerbs时通过loadID匹配复用已反序列化的实例。
-        /// </summary>
-        private List<Verb> savedChipVerbs;
-
-        /// <summary>
-        /// 当前正在激活/关闭的槽位侧别（临时上下文）。
-        /// 在DoActivate/DeactivateSlot中设置，供WeaponChipEffect等效果类读取自己所在侧。
-        /// 调用effect.Activate/Deactivate前设置，调用后清除。
-        /// </summary>
-        internal SlotSide? ActivatingSide { get; private set; }
-
-        /// <summary>
-        /// 当前正在激活/关闭的槽位引用（临时上下文）。
-        /// 在DoActivate/DeactivateSlot中与ActivatingSide同步设置/清除。
-        /// 供Effect类通过此属性直接读取当前操作槽位的芯片DefModExtension。
-        /// </summary>
-        internal ChipSlot ActivatingSlot { get; private set; }
+        // ── 字段声明已移至 CompTriggerBody.Fields.cs ──
 
         /// <summary>
         /// 从当前操作槽位读取指定类型的DefModExtension，回退到遍历所有激活槽位。
@@ -128,13 +81,6 @@ namespace BDP.Trigger
             return null;
         }
 
-        /// <summary>
-        /// 战斗体是否处于激活状态（由战斗模块控制）。
-        /// true=已生成战斗体（芯片已Allocate），false=未生成。
-        /// 影响UI四态显示：挂载未注册 vs 注册未激活。
-        /// </summary>
-        internal bool IsCombatBodyActive { get; private set; }
-
         // ── 显式实现IVerbOwner接口（v5.1改造：芯片Verb完全脱离VerbTracker） ──
         // VerbTracker.InitVerbs()通过IVerbOwner接口调用，显式实现可正确拦截
         //
@@ -153,11 +99,6 @@ namespace BDP.Trigger
 
         // ── 便利属性 ──
         public CompProperties_TriggerBody Props => (CompProperties_TriggerBody)props;
-
-        // Holder来自CompEquippable：(parent.ParentHolder as Pawn_EquipmentTracker)?.pawn
-        private Pawn OwnerPawn => Holder;
-
-        private CompTrion TrionComp => OwnerPawn?.GetComp<CompTrion>();
 
         // ── 公开属性（v2.0：MainSlots/SubSlots → LeftHandSlots/RightHandSlots） ──
 
@@ -464,7 +405,8 @@ namespace BDP.Trigger
                 }
                 sb.AppendLine($"  芯片Verb缓存（手动创建，不在AllVerbs中）:");
                 sb.AppendLine($"    left={leftHandAttackVerb?.GetType().Name} right={rightHandAttackVerb?.GetType().Name} dual={dualAttackVerb?.GetType().Name}");
-                sb.AppendLine($"    volleyLeft={leftHandVolleyVerb?.GetType().Name} volleyRight={rightHandVolleyVerb?.GetType().Name} volleyDual={dualVolleyVerb?.GetType().Name}");
+                sb.AppendLine($"    secondaryLeft={leftHandSecondaryVerb?.GetType().Name} secondaryRight={rightHandSecondaryVerb?.GetType().Name} secondaryDual={dualSecondaryVerb?.GetType().Name}");
+                sb.AppendLine($"    comboAttack={comboAttackVerb?.GetType().Name} comboSecondary={comboSecondaryVerb?.GetType().Name} comboDef={matchedComboDef?.defName}");
                 Log.Message(sb.ToString());
             }
         }
@@ -482,10 +424,14 @@ namespace BDP.Trigger
             leftHandAttackVerb = null;
             rightHandAttackVerb = null;
             dualAttackVerb = null;
-            // v6.1：清空齐射缓存
-            leftHandVolleyVerb = null;
-            rightHandVolleyVerb = null;
-            dualVolleyVerb = null;
+            // v6.1：清空副攻击缓存（v8.0重命名，v9.0统一语义）
+            leftHandSecondaryVerb = null;
+            rightHandSecondaryVerb = null;
+            dualSecondaryVerb = null;
+            // v10.0：清空组合技缓存（v9.0重命名）
+            comboAttackVerb = null;
+            comboSecondaryVerb = null;
+            matchedComboDef = null;
 
             // 合成芯片VerbProperties
             var chipVerbProps = DualVerbCompositor.ComposeVerbs(
@@ -548,68 +494,123 @@ namespace BDP.Trigger
             }
 
             // v6.1：为支持齐射的芯片创建volley verb
-            CreateVolleyVerbs(pawn);
+            // v8.0变更：支持primaryVerbProps/secondaryVerbProps配置
+            CreateSecondaryVerbs(pawn);
+
+            // v10.0：检测组合技匹配，创建组合技Verb
+            CreateComboVerbs(pawn);
         }
 
         /// <summary>
-        /// 为支持齐射的远程芯片创建volley verb实例（v6.1新增）。
-        /// 遍历已缓存的burst verb，检查对应芯片的supportsVolley标志，
-        /// 为支持齐射的芯片创建Verb_BDPVolley/Verb_BDPDualVolley实例。
+        /// 为芯片创建副攻击verb实例（v8.0重构）。
+        ///
+        /// 新逻辑（v8.0）：
+        ///   1. 优先使用 secondaryVerbProps 显式配置的副攻击verb
+        ///   2. 如果 secondaryVerbProps == null 且 supportsVolley == true，创建齐射verb（向后兼容）
+        ///   3. 如果 secondaryVerbProps == null 且 supportsVolley == false，副攻击为null（右键走默认行为）
+        ///
+        /// 旧逻辑（v6.1）：
+        ///   遍历已缓存的burst verb，检查对应芯片的supportsVolley标志，
+        ///   为支持齐射的芯片创建Verb_BDPVolley/Verb_BDPDualVolley实例。
         ///
         /// 注意：使用GetActiveOrActivatingSlot而非GetActiveSlot。
         /// 原因：DoActivate中effect.Activate()触发RebuildVerbs时，
         ///       slot.isActive尚未设为true，GetActiveSlot找不到正在激活的芯片。
         /// </summary>
-        private void CreateVolleyVerbs(Pawn pawn)
+        private void CreateSecondaryVerbs(Pawn pawn)
         {
             var leftSlot = GetActiveOrActivatingSlot(SlotSide.LeftHand);
             var rightSlot = GetActiveOrActivatingSlot(SlotSide.RightHand);
             var leftCfg = leftSlot?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
             var rightCfg = rightSlot?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
-            bool leftSupports = leftCfg?.supportsVolley == true && leftCfg.verbProperties != null;
-            bool rightSupports = rightCfg?.supportsVolley == true && rightCfg.verbProperties != null;
 
-            // 左手齐射
-            if (leftSupports && leftHandAttackVerb != null)
+            // 左手副攻击
+            if (leftHandAttackVerb != null && leftCfg != null)
             {
-                var volleyType = typeof(Verb_BDPVolley);
-                leftHandVolleyVerb = CreateSingleVolleyVerb(leftHandAttackVerb, volleyType, pawn);
+                leftHandSecondaryVerb = CreateSecondaryVerb(leftCfg, leftHandAttackVerb, pawn, "Left");
             }
 
-            // 右手齐射
-            if (rightSupports && rightHandAttackVerb != null)
+            // 右手副攻击
+            if (rightHandAttackVerb != null && rightCfg != null)
             {
-                var volleyType = typeof(Verb_BDPVolley);
-                rightHandVolleyVerb = CreateSingleVolleyVerb(rightHandAttackVerb, volleyType, pawn);
+                rightHandSecondaryVerb = CreateSecondaryVerb(rightCfg, rightHandAttackVerb, pawn, "Right");
             }
 
-            // 双手齐射：两侧都支持齐射时才创建
-            if (leftSupports && rightSupports && dualAttackVerb != null)
-                dualVolleyVerb = CreateSingleVolleyVerb(dualAttackVerb, typeof(Verb_BDPDualVolley), pawn);
+            // 双手副攻击：两侧都有副攻击时才创建
+            if (leftHandSecondaryVerb != null && rightHandSecondaryVerb != null && dualAttackVerb != null)
+            {
+                dualSecondaryVerb = CreateSecondaryVerb(leftCfg, dualAttackVerb, pawn, "Dual");
+            }
         }
 
         /// <summary>
-        /// 获取指定侧的激活槽位，包含正在激活中的槽位（ActivatingSlot）。
-        /// 原因：DoActivate中slot.isActive在effect.Activate()之后才设为true，
-        ///       但RebuildVerbs在effect.Activate()内部调用，此时GetActiveSlot找不到该槽位。
+        /// 创建单个副攻击verb实例（v9.0重构）。
+        ///
+        /// 逻辑：
+        ///   1. 如果 cfg.secondaryVerbProps != null，使用它创建verb
+        ///   2. 否则如果 cfg.supportsVolley == true，创建齐射verb（向后兼容）
+        ///   3. 否则返回null
         /// </summary>
-        private ChipSlot GetActiveOrActivatingSlot(SlotSide side)
+        private Verb CreateSecondaryVerb(WeaponChipConfig cfg, Verb primaryVerb, Pawn pawn, string side)
         {
-            var active = GetActiveSlot(side);
-            if (active != null) return active;
-            // 回退：检查正在激活的槽位是否属于该侧
-            if (ActivatingSlot != null && ActivatingSlot.side == side)
-                return ActivatingSlot;
+            // 优先使用显式配置的secondaryVerbProps
+            if (cfg.secondaryVerbProps != null)
+            {
+                string loadID = $"BDP_Secondary{side}_{parent.ThingID}_{cfg.secondaryVerbProps.label}";
+                return FindOrCreateVerb(cfg.secondaryVerbProps, pawn, loadID);
+            }
+
+            // 向后兼容：supportsVolley=true时自动创建齐射verb
+            if (cfg.supportsVolley)
+            {
+                return CreateLegacyVolleyVerb(primaryVerb, pawn, side);
+            }
+
             return null;
         }
 
         /// <summary>
-        /// 基于已有burst verb的VerbProperties创建一个volley verb实例。
-        /// 复制VerbProperties，修改verbClass和burstShotCount=1。
+        /// 统一的Verb查找或创建方法（v9.0新增）。
+        /// 读档时优先复用已反序列化的Verb实例，否则创建新实例。
         /// </summary>
-        private Verb CreateSingleVolleyVerb(Verb sourceVerb, System.Type volleyVerbClass, Pawn pawn)
+        private Verb FindOrCreateVerb(VerbProperties vp, Pawn pawn, string loadID)
         {
-            var srcVp = sourceVerb.verbProps;
+            if (vp.verbClass == null) return null;
+
+            // 读档时优先复用已反序列化的Verb实例
+            Verb verb = FindSavedVerb(loadID);
+            if (verb == null)
+            {
+                try
+                {
+                    verb = (Verb)System.Activator.CreateInstance(vp.verbClass);
+                }
+                catch (System.Exception ex)
+                {
+                    Log.Error($"[BDP] 创建Verb失败: {vp.verbClass.Name} — {ex}");
+                    return null;
+                }
+            }
+
+            // 初始化Verb
+            verb.loadID = loadID;
+            verb.verbProps = vp;
+            verb.caster = pawn;
+            verb.verbTracker = VerbTracker;
+
+            return verb;
+        }
+
+        /// <summary>
+        /// 向后兼容方法：基于primaryVerb自动创建齐射verb（v9.0标记为过时）。
+        /// </summary>
+        [System.Obsolete("Use explicit secondaryVerbProps configuration instead")]
+        private Verb CreateLegacyVolleyVerb(Verb primaryVerb, Pawn pawn, string side)
+        {
+            var srcVp = primaryVerb.verbProps;
+
+            // 确定齐射verb类型
+            System.Type volleyVerbClass = side == "Dual" ? typeof(Verb_BDPDualVolley) : typeof(Verb_BDPVolley);
 
             // 复制VerbProperties，修改verbClass和burstShotCount
             var volleyVp = new VerbProperties
@@ -625,34 +626,196 @@ namespace BDP.Trigger
                 warmupTime = srcVp.warmupTime,
                 defaultCooldownTime = srcVp.defaultCooldownTime,
                 burstShotCount = 1, // 引擎只调用一次TryCastShot
-                label = srcVp.label,
+                label = "齐射", // 固定label
                 meleeDamageDef = srcVp.meleeDamageDef,
                 meleeDamageBaseAmount = srcVp.meleeDamageBaseAmount,
             };
 
-            string expectedLoadID = $"BDP_Volley_{parent.ThingID}_{volleyVerbClass.Name}_{srcVp.label}";
+            string loadID = $"BDP_LegacyVolley{side}_{parent.ThingID}_{volleyVerbClass.Name}";
+            return FindOrCreateVerb(volleyVp, pawn, loadID);
+        }
 
-            // 读档时优先复用已反序列化的Verb实例
-            Verb verb = FindSavedVerb(expectedLoadID);
-            if (verb == null)
+        /// <summary>
+        /// 检测组合技匹配，创建组合技Verb实例（v10.0新增，v9.0重构）。
+        /// 遍历DefDatabase&lt;ComboVerbDef&gt;，匹配当前左右手激活芯片。
+        /// 匹配成功时创建主攻击verb和副攻击verb（如果配置）。
+        /// </summary>
+        private void CreateComboVerbs(Pawn pawn)
+        {
+            var leftSlot = GetActiveOrActivatingSlot(SlotSide.LeftHand);
+            var rightSlot = GetActiveOrActivatingSlot(SlotSide.RightHand);
+            if (leftSlot?.loadedChip == null || rightSlot?.loadedChip == null) return;
+
+            foreach (var comboDef in DefDatabase<ComboVerbDef>.AllDefs)
             {
-                try
+                if (!comboDef.Matches(leftSlot.loadedChip.def, rightSlot.loadedChip.def))
+                    continue;
+
+                // 匹配成功：创建组合技Verb
+                matchedComboDef = comboDef;
+
+                // 创建主攻击verb
+                comboAttackVerb = CreateComboVerb(comboDef, false, pawn, leftSlot, rightSlot);
+
+                // 创建副攻击verb
+                comboSecondaryVerb = CreateComboVerb(comboDef, true, pawn, leftSlot, rightSlot);
+
+                break; // 只匹配第一个
+            }
+        }
+
+        /// <summary>
+        /// 创建单个组合技Verb实例（v10.0新增，v9.0重构）。
+        /// 参数取两侧芯片的平均值。
+        /// </summary>
+        private Verb CreateComboVerb(ComboVerbDef comboDef, bool isSecondary,
+            Pawn pawn, ChipSlot leftSlot, ChipSlot rightSlot)
+        {
+            var leftCfg = leftSlot.loadedChip.def.GetModExtension<WeaponChipConfig>();
+            var rightCfg = rightSlot.loadedChip.def.GetModExtension<WeaponChipConfig>();
+            if (leftCfg == null || rightCfg == null) return null;
+
+            // 如果是副攻击但未配置，检查向后兼容
+            if (isSecondary)
+            {
+                // 优先使用secondaryVerbClass
+                if (comboDef.secondaryVerbClass != null)
                 {
-                    verb = (Verb)System.Activator.CreateInstance(volleyVerbClass);
+                    // 创建显式配置的副攻击verb
+                    return CreateComboVerbFromClass(comboDef, comboDef.secondaryVerbClass,
+                        pawn, leftCfg, rightCfg, true);
                 }
-                catch (System.Exception ex)
+                // 向后兼容：supportsVolley=true时自动创建齐射verb
+                else if (comboDef.supportsVolley)
                 {
-                    Log.Error($"[BDP] 创建齐射Verb失败: {volleyVerbClass.Name} — {ex}");
-                    return null;
+                    return CreateComboVerbFromClass(comboDef, typeof(Verb_BDPComboShoot),
+                        pawn, leftCfg, rightCfg, true);
+                }
+                else
+                {
+                    return null; // 无副攻击
                 }
             }
 
-            verb.loadID = expectedLoadID;
-            verb.verbProps = volleyVp;
-            verb.caster = pawn;
-            verb.verbTracker = VerbTracker;
+            // 主攻击逻辑：使用primaryVerbClass
+            return CreateComboVerbFromClass(comboDef, comboDef.primaryVerbClass,
+                pawn, leftCfg, rightCfg, false);
+        }
+
+        /// <summary>
+        /// 从指定Verb类型创建组合技Verb实例（v9.0新增）。
+        /// </summary>
+        private Verb CreateComboVerbFromClass(ComboVerbDef comboDef, System.Type verbClass,
+            Pawn pawn, WeaponChipConfig leftCfg, WeaponChipConfig rightCfg, bool isSecondary)
+        {
+            // 计算平均参数
+            float avgRange = (GetFirstRange(leftCfg) + GetFirstRange(rightCfg)) * 0.5f;
+            float avgWarmup = (GetFirstWarmup(leftCfg) + GetFirstWarmup(rightCfg)) * 0.5f;
+            float avgCooldown = (GetFirstCooldown(leftCfg) + GetFirstCooldown(rightCfg)) * 0.5f;
+            int avgBurst = UnityEngine.Mathf.RoundToInt(
+                (leftCfg.GetFirstBurstCount() + rightCfg.GetFirstBurstCount()) * 0.5f);
+            if (avgBurst < 1) avgBurst = 1;
+            float avgTrionCost = (leftCfg.trionCostPerShot + rightCfg.trionCostPerShot) * 0.5f;
+            float avgAnchorSpread = (leftCfg.anchorSpread + rightCfg.anchorSpread) * 0.5f;
+            float avgVolleySpread = (leftCfg.volleySpreadRadius + rightCfg.volleySpreadRadius) * 0.5f;
+            int avgTicksBetween = UnityEngine.Mathf.RoundToInt(
+                (GetFirstTicksBetween(leftCfg) + GetFirstTicksBetween(rightCfg)) * 0.5f);
+
+            // 构建VerbProperties
+            var vp = new VerbProperties
+            {
+                verbClass = verbClass,
+                isPrimary = false,
+                hasStandardCommand = false,
+                defaultProjectile = comboDef.projectileDef,
+                soundCast = GetFirstSound(leftCfg) ?? GetFirstSound(rightCfg),
+                muzzleFlashScale = 10f,
+                range = avgRange,
+                warmupTime = avgWarmup,
+                defaultCooldownTime = avgCooldown,
+                // 副攻击模式：burstShotCount=1（TryCastShot内循环）
+                // 主攻击模式：burstShotCount=avgBurst（引擎burst机制）
+                burstShotCount = isSecondary ? 1 : avgBurst,
+                ticksBetweenBurstShots = isSecondary ? 0 : avgTicksBetween,
+                label = isSecondary ? "组合技副攻击" : comboDef.label,
+            };
+
+            string suffix = isSecondary ? "Secondary" : "Attack";
+            string loadID = $"BDP_Combo_{parent.ThingID}_{comboDef.defName}_{suffix}";
+
+            // 使用统一的FindOrCreateVerb方法
+            Verb verb = FindOrCreateVerb(vp, pawn, loadID);
+            if (verb == null) return null;
+
+            // 设置组合技专用字段（如果是Verb_BDPComboShoot）
+            if (verb is Verb_BDPComboShoot comboVerb)
+            {
+                comboVerb.comboDef = comboDef;
+                comboVerb.isVolley = isSecondary;
+                comboVerb.avgBurstCount = avgBurst;
+                comboVerb.avgTrionCost = avgTrionCost;
+                comboVerb.avgAnchorSpread = avgAnchorSpread;
+                comboVerb.avgVolleySpread = avgVolleySpread;
+            }
 
             return verb;
+        }
+
+        // ── 组合技参数读取辅助（从WeaponChipConfig.verbProperties[0]读取） ──
+
+        private static float GetFirstRange(WeaponChipConfig cfg)
+        {
+            if (cfg?.verbProperties != null)
+                foreach (var vp in cfg.verbProperties)
+                    if (vp.range > 0) return vp.range;
+            return 20f;
+        }
+
+        private static float GetFirstWarmup(WeaponChipConfig cfg)
+        {
+            if (cfg?.verbProperties != null)
+                foreach (var vp in cfg.verbProperties)
+                    return vp.warmupTime;
+            return 1f;
+        }
+
+        private static float GetFirstCooldown(WeaponChipConfig cfg)
+        {
+            if (cfg?.verbProperties != null)
+                foreach (var vp in cfg.verbProperties)
+                    return vp.defaultCooldownTime;
+            return 1f;
+        }
+
+        private static int GetFirstTicksBetween(WeaponChipConfig cfg)
+        {
+            if (cfg?.verbProperties != null)
+                foreach (var vp in cfg.verbProperties)
+                    return vp.ticksBetweenBurstShots;
+            return 8;
+        }
+
+        private static SoundDef GetFirstSound(WeaponChipConfig cfg)
+        {
+            if (cfg?.verbProperties != null)
+                foreach (var vp in cfg.verbProperties)
+                    if (vp.soundCast != null) return vp.soundCast;
+            return null;
+        }
+
+        /// <summary>
+        /// 获取指定侧的激活槽位，包含正在激活中的槽位（ActivatingSlot）。
+        /// 原因：DoActivate中slot.isActive在effect.Activate()之后才设为true，
+        ///       但RebuildVerbs在effect.Activate()内部调用，此时GetActiveSlot找不到该槽位。
+        /// </summary>
+        private ChipSlot GetActiveOrActivatingSlot(SlotSide side)
+        {
+            var active = GetActiveSlot(side);
+            if (active != null) return active;
+            // 回退：检查正在激活的槽位是否属于该侧
+            if (ActivatingSlot != null && ActivatingSlot.side == side)
+                return ActivatingSlot;
+            return null;
         }
 
         // ── 读档Verb复用（v8.0 PMS重构） ──
@@ -677,6 +840,46 @@ namespace BDP.Trigger
         }
 
         // ═══════════════════════════════════════════
+        //  预占用值同步（v1.8）
+        // ═══════════════════════════════════════════
+
+        /// <summary>
+        /// 计算所有已装载芯片的总Trion占用量。
+        /// </summary>
+        private float CalculateTotalAllocationCost()
+        {
+            float total = 0f;
+
+            foreach (var slot in AllSlots())
+            {
+                if (slot.loadedChip != null)
+                {
+                    var chipComp = slot.loadedChip.TryGetComp<TriggerChipComp>();
+                    if (chipComp != null)
+                    {
+                        total += chipComp.Props.allocationCost;
+                    }
+                }
+            }
+
+            return total;
+        }
+
+        /// <summary>
+        /// 同步预占用值到CompTrion。
+        /// 在芯片装载/卸载、装备/卸下时调用。
+        /// </summary>
+        private void SyncReservedAllocationToTrion()
+        {
+            var compTrion = OwnerPawn?.GetComp<CompTrion>();
+            if (compTrion != null)
+            {
+                float total = CalculateTotalAllocationCost();
+                compTrion.UpdateReservedAllocation(total);
+            }
+        }
+
+        // ═══════════════════════════════════════════
         //  芯片装载/卸载
         // ═══════════════════════════════════════════
 
@@ -686,10 +889,54 @@ namespace BDP.Trigger
             if (!Props.allowChipManagement) return false;
             var slot = GetSlot(side, slotIndex);
             if (slot == null || slot.loadedChip != null) return false;
-            if (chip?.TryGetComp<TriggerChipComp>() == null) return false;
+
+            var chipComp = chip?.TryGetComp<TriggerChipComp>();
+            if (chipComp == null) return false;
+
+            // 检查槽位限制（v3.1：改用枚举）
+            var chipProps = chipComp.Props as CompProperties_TriggerChip;
+            if (chipProps != null)
+            {
+                var restriction = chipProps.slotRestriction;
+                var currentSlot = slot.side;
+
+                // 检查槽位限制
+                bool canInsert = true;
+                if (restriction == ChipSlotRestriction.SpecialOnly)
+                {
+                    canInsert = (currentSlot == SlotSide.Special);
+                }
+                else if (restriction == ChipSlotRestriction.HandsOnly)
+                {
+                    canInsert = (currentSlot == SlotSide.LeftHand || currentSlot == SlotSide.RightHand);
+                }
+                // ChipSlotRestriction.None 时 canInsert 保持 true
+
+                if (!canInsert)
+                {
+                    string restrictionDesc = "未知槽位";
+                    if (restriction == ChipSlotRestriction.SpecialOnly)
+                    {
+                        restrictionDesc = "特殊槽位";
+                    }
+                    else if (restriction == ChipSlotRestriction.HandsOnly)
+                    {
+                        restrictionDesc = "左右手槽位";
+                    }
+
+                    Messages.Message(
+                        $"该芯片只能插入{restrictionDesc}",
+                        MessageTypeDefOf.RejectInput);
+                    return false;
+                }
+            }
 
             slot.loadedChip = chip;
             chip.holdingOwner?.Remove(chip);
+
+            // v1.8：装载后同步预占用值
+            SyncReservedAllocationToTrion();
+
             return true;
         }
 
@@ -711,6 +958,9 @@ namespace BDP.Trigger
             else
                 GenPlace.TryPlaceThing(chip, parent.Position, parent.Map, ThingPlaceMode.Near);
 
+            // v1.8：卸载后同步预占用值
+            SyncReservedAllocationToTrion();
+
             return true;
         }
 
@@ -729,6 +979,9 @@ namespace BDP.Trigger
 
             var slot = GetSlot(side, slotIndex);
             if (slot?.loadedChip == null) return false;
+
+            // 槽位被禁用（手部/手臂被毁）时不可激活
+            if (slot.isDisabled) return false;
 
             var chipComp = slot.loadedChip.TryGetComp<TriggerChipComp>();
             if (chipComp == null) return false;
@@ -957,6 +1210,124 @@ namespace BDP.Trigger
         }
 
         /// <summary>
+        /// 尝试为战斗体占用Trion（v11.1修复：添加原子性保证）。
+        /// 由Gene_TrionGland在战斗体激活前调用，用于检查并锁定Trion。
+        ///
+        /// 流程：
+        /// 1. 计算总需求量
+        /// 2. 检查是否足够（原子性检查）
+        /// 3. 如果足够，设置标志并逐个Allocate；如果不足，返回false
+        ///
+        /// 返回值：
+        /// - true: 所有芯片成功Allocate，可以激活战斗体
+        /// - false: Trion不足或TrionComp不存在，不应激活
+        ///
+        /// 注意：此方法只负责Allocate，不激活特殊槽芯片（由ActivateAllSpecial单独调用）。
+        /// </summary>
+        public bool TryAllocateTrionForCombatBody()
+        {
+
+            var trion = TrionComp;
+            if (trion == null)
+            {
+                Log.Error($"[BDP] TryAllocateTrionForCombatBody失败: TrionComp为null");
+                return false;
+            }
+
+            // 1. 计算总需求量
+            float totalCost = 0f;
+            var slotsWithCost = new List<(ChipSlot slot, float cost)>();
+
+            foreach (var slot in AllSlots())
+            {
+                if (slot.loadedChip == null) continue;
+                var chipComp = slot.loadedChip.TryGetComp<TriggerChipComp>();
+                if (chipComp != null && chipComp.Props.allocationCost > 0f)
+                {
+                    totalCost += chipComp.Props.allocationCost;
+                    slotsWithCost.Add((slot, chipComp.Props.allocationCost));
+                }
+            }
+
+            // 2. 检查是否足够（原子性检查）
+            if (trion.Available < totalCost)
+            {
+                // 改为普通日志，避免红色报错
+                return false;
+            }
+
+            // 3. 设置战斗体激活标志（必须在Allocate之前设置，因为某些检查依赖此标志）
+            IsCombatBodyActive = true;
+
+            // 4. 逐个Allocate（此时已确保足够，理论上不会失败）
+            float totalAllocated = 0f;
+            int successCount = 0;
+
+            foreach (var (slot, cost) in slotsWithCost)
+            {
+                bool ok = trion.Allocate(cost);
+                if (ok)
+                {
+                    totalAllocated += cost;
+                    successCount++;
+                }
+                else
+                {
+                    // 理论上不应该走到这里（因为已经预检查过）
+                    Log.Error($"[BDP] Allocate失败（异常情况）: {slot.loadedChip.def.defName} cost={cost:F1} available={trion.Available:F1}");
+                }
+            }
+
+
+            // 5. 返回成功
+            return true;
+        }
+
+        /// <summary>
+        /// 开始战斗体激活流程（v2.2重构版 - 已废弃，保留用于兼容性）。
+        ///
+        /// ⚠️ 此方法已被拆分为TryAllocateTrionForCombatBody + ActivateAllSpecial。
+        /// 新代码应使用拆分后的方法以保证原子性。
+        ///
+        /// 由Gene_TrionGland在战斗体激活时调用。
+        /// 流程：设置标志 → 逐个芯片Allocate → 激活特殊槽。
+        /// </summary>
+        [System.Obsolete("已废弃，请使用TryAllocateTrionForCombatBody + ActivateAllSpecial")]
+        public void BeginCombatBodyActivation()
+        {
+            Log.Message($"[BDP] BeginCombatBodyActivation() 被调用（已废弃）");
+
+            // 1. 设置战斗体激活标志
+            IsCombatBodyActive = true;
+
+            // 2. 遍历所有芯片，逐个Allocate（锁定Trion占用）
+            var trion = TrionComp;
+            float totalAllocated = 0f;
+            foreach (var slot in AllSlots())
+            {
+                if (slot.loadedChip == null) continue;
+                var chipComp = slot.loadedChip.TryGetComp<TriggerChipComp>();
+                if (chipComp != null && chipComp.Props.allocationCost > 0f)
+                {
+                    bool ok = trion?.Allocate(chipComp.Props.allocationCost) ?? false;
+                    if (ok)
+                    {
+                        totalAllocated += chipComp.Props.allocationCost;
+                    }
+                    else
+                    {
+                        Log.Warning($"[BDP] Allocate失败: {slot.loadedChip.def.defName} cost={chipComp.Props.allocationCost} available={trion?.Available ?? 0f:F1}");
+                    }
+                }
+            }
+
+            // 3. 激活特殊槽芯片
+            ActivateAllSpecial();
+
+            Log.Message($"[BDP] 战斗体激活完成 (allocated={totalAllocated:F1}, trion={trion?.Cur:F1}/{trion?.Max:F1})");
+        }
+
+        /// <summary>
         /// 激活所有特殊槽（全部同时激活）。
         /// 特殊槽不参与切换状态机，不受切换冷却影响（不变量⑨⑫）。
         /// 由战斗体模块在战斗体生成时调用。v2.1新增。
@@ -1067,10 +1438,14 @@ namespace BDP.Trigger
         /// 解除战斗体：关闭所有芯片 → 释放全部Trion占用 → 标记未激活。
         /// 释放逻辑基于trion.Allocated（Single Source of Truth），不依赖芯片是否仍在槽位中。
         /// </summary>
-        public void DismissCombatBody()
+        /// <param name="pawnOverride">显式指定Pawn（用于Notify_Unequipped中，此时OwnerPawn可能已为null）</param>
+        public void DismissCombatBody(Pawn pawnOverride = null)
         {
-            DeactivateAll();
-            var trion = TrionComp;
+            DeactivateAll(pawnOverride);
+            // 清除所有槽位的禁用标志（战斗体解除 → 部位恢复 → 槽位可用）
+            foreach (var slot in AllSlots())
+                slot.isDisabled = false;
+            var trion = (pawnOverride ?? OwnerPawn)?.GetComp<CompTrion>();
             if (trion != null) trion.Release(trion.Allocated);
             IsCombatBodyActive = false;
         }
@@ -1113,160 +1488,33 @@ namespace BDP.Trigger
         //  生命周期
         // ═══════════════════════════════════════════
 
-        public override void PostSpawnSetup(bool respawningAfterLoad)
+        // 静态构造函数：订阅部位破坏事件（v12.2新增：手部缺失联动）
+        static CompTriggerBody()
         {
-            base.PostSpawnSetup(respawningAfterLoad);
+            BDPEvents.OnPartDestroyed += OnPartDestroyed;
+        }
 
-            // B5修复：只在槽位尚未初始化时才初始化。
-            // 原因：触发体从装备卸下掉到地面时，GenSpawn.Spawn调用PostSpawnSetup(respawningAfterLoad: false)，
-            // 若无条件重新初始化会清空已装载的芯片。加 leftHandSlots == null 守卫避免覆盖。
-            if (!respawningAfterLoad && leftHandSlots == null)
+        /// <summary>
+        /// 响应部位破坏事件（静态事件处理器）。
+        /// </summary>
+        private static void OnPartDestroyed(PartDestroyedEventArgs args)
+        {
+            if (!args.IsHandPart) return;
+
+            // 找到该Pawn装备的触发体
+            CompTriggerBody comp = args.Pawn.equipment?.Primary?.GetComp<CompTriggerBody>();
+            if (comp != null)
             {
-                leftHandSlots = InitSlots(SlotSide.LeftHand, Props.leftHandSlotCount);
-                rightHandSlots = Props.hasRightHand ? InitSlots(SlotSide.RightHand, Props.rightHandSlotCount) : null;
-                // v2.1：初始化特殊槽
-                specialSlots = Props.specialSlotCount > 0
-                             ? InitSlots(SlotSide.Special, Props.specialSlotCount)
-                             : null;
-
-                if (Props.preloadedChips != null)
-                {
-                    foreach (var cfg in Props.preloadedChips)
-                    {
-                        if (cfg.chipDef == null) continue;
-                        var chip = ThingMaker.MakeThing(cfg.chipDef);
-                        LoadChipInternal(cfg.side, cfg.slotIndex, chip);
-                    }
-                }
+                comp.OnHandDestroyed(args.HandSide);
             }
-        }
-
-        public override void Notify_Equipped(Pawn pawn)
-        {
-            base.Notify_Equipped(pawn);
-            EnsureSlotsInitialized();
-
-            // v6.0：注册Trion耗尽事件
-            var trion = TrionComp;
-            if (trion != null) trion.OnAvailableDepleted += OnTrionDepleted;
-
-            if (Props.autoActivateOnEquip)
-            {
-                foreach (var slot in AllSlots())
-                    if (slot.loadedChip != null && !slot.isActive)
-                        ActivateChip(slot.side, slot.index);
-            }
-        }
-
-        public override void Notify_Unequipped(Pawn pawn)
-        {
-            // v6.0：注销Trion耗尽事件（pawn参数即卸下前的持有者）
-            var trion = pawn?.GetComp<CompTrion>();
-            if (trion != null) trion.OnAvailableDepleted -= OnTrionDepleted;
-
-            DeactivateAll(pawn);
-            base.Notify_Unequipped(pawn);
-        }
-
-        public override void PostDestroy(DestroyMode mode, Map previousMap)
-        {
-            DeactivateAll();
-            base.PostDestroy(mode, previousMap);
-        }
-
-        private static List<ChipSlot> InitSlots(SlotSide side, int count)
-        {
-            var list = new List<ChipSlot>(count);
-            for (int i = 0; i < count; i++) list.Add(new ChipSlot(i, side));
-            return list;
-        }
-
-        /// <summary>内部装载（不检查allowChipManagement，用于预装和读档恢复）。</summary>
-        private void LoadChipInternal(SlotSide side, int slotIndex, Thing chip)
-        {
-            var slot = GetSlot(side, slotIndex);
-            if (slot == null || slot.loadedChip != null) return;
-            slot.loadedChip = chip;
         }
 
         // ═══════════════════════════════════════════
         //  存档
         // ═══════════════════════════════════════════
 
-        public override void PostExposeData()
-        {
-            base.PostExposeData();
-
-            Scribe_Collections.Look(ref leftHandSlots, "leftHandSlots", LookMode.Deep);
-            Scribe_Collections.Look(ref rightHandSlots, "rightHandSlots", LookMode.Deep);
-            // v2.1：序列化特殊槽
-            Scribe_Collections.Look(ref specialSlots, "specialSlots", LookMode.Deep);
-            // v6.0：按侧独立切换上下文（旧存档中不存在，Scribe_Deep返回null即Idle）
-            Scribe_Deep.Look(ref leftSwitchCtx, "leftSwitchCtx");
-            Scribe_Deep.Look(ref rightSwitchCtx, "rightSwitchCtx");
-            // dualHandLockSlot是运行时引用，不序列化，读档后由激活恢复逻辑重建
-
-            // v3.1：序列化IsCombatBodyActive（战斗体状态需跨存档保持）
-            bool isCombatBodyActive = IsCombatBodyActive;
-            Scribe_Values.Look(ref isCombatBodyActive, "isCombatBodyActive");
-            IsCombatBodyActive = isCombatBodyActive;
-
-            // v8.0 PMS重构：序列化芯片Verb，使读档时Job/Stance能解析Verb引用
-            if (Scribe.mode == LoadSaveMode.Saving)
-            {
-                savedChipVerbs = new List<Verb>();
-                if (leftHandAttackVerb != null) savedChipVerbs.Add(leftHandAttackVerb);
-                if (rightHandAttackVerb != null) savedChipVerbs.Add(rightHandAttackVerb);
-                if (dualAttackVerb != null) savedChipVerbs.Add(dualAttackVerb);
-                if (leftHandVolleyVerb != null) savedChipVerbs.Add(leftHandVolleyVerb);
-                if (rightHandVolleyVerb != null) savedChipVerbs.Add(rightHandVolleyVerb);
-                if (dualVolleyVerb != null) savedChipVerbs.Add(dualVolleyVerb);
-            }
-            Scribe_Collections.Look(ref savedChipVerbs, "chipVerbs", LookMode.Deep);
-
-            if (Scribe.mode == LoadSaveMode.PostLoadInit)
-            {
-                if (leftHandSlots == null) leftHandSlots = InitSlots(SlotSide.LeftHand, Props.leftHandSlotCount);
-                if (Props.hasRightHand && rightHandSlots == null) rightHandSlots = InitSlots(SlotSide.RightHand, Props.rightHandSlotCount);
-                // v2.1：特殊槽读档恢复
-                if (Props.specialSlotCount > 0 && specialSlots == null)
-                    specialSlots = InitSlots(SlotSide.Special, Props.specialSlotCount);
-
-                // 恢复激活效果（IChipEffect无状态，重新调用Activate()）
-                var pawn = OwnerPawn;
-                if (pawn != null)
-                {
-                    // v6.0：读档后重新注册Trion耗尽事件
-                    var trion = pawn.GetComp<CompTrion>();
-                    if (trion != null) trion.OnAvailableDepleted += OnTrionDepleted;
-
-                    foreach (var slot in AllSlots())
-                    {
-                        if (slot.isActive && slot.loadedChip != null)
-                        {
-                            var chipComp = slot.loadedChip.TryGetComp<TriggerChipComp>();
-                            var effect = chipComp?.GetEffect();
-                            // C3修复：try/finally保护读档恢复路径
-                            ActivatingSide = slot.side;
-                            ActivatingSlot = slot;
-                            try
-                            {
-                                effect?.Activate(pawn, parent);
-                            }
-                            finally
-                            {
-                                ActivatingSide = null;
-                                ActivatingSlot = null;
-                            }
-
-                            // v2.1：读档后重建dualHandLockSlot
-                            if (chipComp?.Props.isDualHand == true)
-                                dualHandLockSlot = slot;
-                        }
-                    }
-                }
-            }
-        }
+        // PostSpawnSetup、Notify_Equipped、Notify_Unequipped、PostDestroy、PostExposeData
+        // 已移至 CompTriggerBody.Lifecycle.cs
 
         // ═══════════════════════════════════════════
         //  Gizmo
@@ -1292,7 +1540,7 @@ namespace BDP.Trigger
                     yield return new Command_BDPChipAttack
                     {
                         verb = leftHandAttackVerb,
-                        volleyVerb = leftHandVolleyVerb, // v6.1：齐射
+                        secondaryVerb = leftHandSecondaryVerb, // v9.0：副攻击（可以是齐射或其他模式）
                         attackId = leftChipDef.defName,
                         icon = leftChipDef.uiIcon,
                         defaultLabel = leftChipDef.label,
@@ -1303,7 +1551,7 @@ namespace BDP.Trigger
                     yield return new Command_BDPChipAttack
                     {
                         verb = rightHandAttackVerb,
-                        volleyVerb = rightHandVolleyVerb, // v6.1：齐射
+                        secondaryVerb = rightHandSecondaryVerb, // v9.0：副攻击（可以是齐射或其他模式）
                         attackId = rightChipDef.defName,
                         icon = rightChipDef.uiIcon,
                         defaultLabel = rightChipDef.label,
@@ -1320,10 +1568,23 @@ namespace BDP.Trigger
                     yield return new Command_BDPChipAttack
                     {
                         verb = dualAttackVerb,
-                        volleyVerb = dualVolleyVerb, // v6.1：齐射
+                        secondaryVerb = dualSecondaryVerb, // v9.0：副攻击（可以是齐射或其他模式）
                         attackId = "dual:" + a + "+" + b,
                         icon = parent.def.uiIcon, // 触发体图标
                         defaultLabel = "双手触发",
+                    };
+                }
+
+                // v10.0：组合技Gizmo（B+C同时激活时显示）
+                if (comboAttackVerb != null && matchedComboDef != null)
+                {
+                    yield return new Command_BDPChipAttack
+                    {
+                        verb = comboAttackVerb,
+                        secondaryVerb = comboSecondaryVerb, // v9.0：副攻击
+                        attackId = "combo:" + matchedComboDef.defName,
+                        icon = parent.def.uiIcon, // 暂用触发体图标
+                        defaultLabel = matchedComboDef.label ?? "组合技",
                     };
                 }
             }
@@ -1341,10 +1602,6 @@ namespace BDP.Trigger
             if (Props.allowChipManagement)
                 yield return new Gizmo_TriggerBodyStatus(this);
 
-            // v3.1：战斗体模拟按钮（godMode守卫，避免正式游戏中暴露调试功能）
-            if (DebugSettings.godMode)
-                foreach (var g in GetCombatBodyGizmos()) yield return g;
-
             if (!DebugSettings.godMode) yield break;
             foreach (var g in GetDebugGizmos()) yield return g;
         }
@@ -1352,9 +1609,6 @@ namespace BDP.Trigger
         // ═══════════════════════════════════════════
         //  组合能力系统（v4.0 F1新增）
         // ═══════════════════════════════════════════
-
-        // 当前已授予的组合能力（运行时跟踪，不序列化——读档时由激活恢复逻辑重建）
-        private readonly List<ComboAbilityDef> grantedCombos = new List<ComboAbilityDef>();
 
         /// <summary>
         /// 芯片激活后检查是否满足组合条件，满足则授予Ability。
@@ -1404,6 +1658,155 @@ namespace BDP.Trigger
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
             foreach (var g in base.CompGetGizmosExtra()) yield return g;
+        }
+
+        // ═══════════════════════════════════════════
+        //  ICombatBodySupport接口实现（v11.0战斗体系统重构）
+        // ═══════════════════════════════════════════
+
+        /// <summary>
+        /// 实现ICombatBodySupport.TryAllocateForCombatBody。
+        /// 委托给现有的TryAllocateTrionForCombatBody方法。
+        /// </summary>
+        bool ICombatBodySupport.TryAllocateForCombatBody()
+        {
+            return TryAllocateTrionForCombatBody();
+        }
+
+        /// <summary>
+        /// 实现ICombatBodySupport.ReleaseFromCombatBody。
+        /// 委托给DismissCombatBody方法，执行完整的解除逻辑。
+        /// </summary>
+        void ICombatBodySupport.ReleaseFromCombatBody()
+        {
+            DismissCombatBody();
+        }
+
+        /// <summary>
+        /// 实现ICombatBodySupport.ActivateSpecialSlots。
+        /// 委托给现有的ActivateAllSpecial方法。
+        /// </summary>
+        void ICombatBodySupport.ActivateSpecialSlots()
+        {
+            ActivateAllSpecial();
+        }
+
+        /// <summary>
+        /// 实现ICombatBodySupport.DeactivateSpecialSlots。
+        /// 关闭所有特殊槽芯片。
+        /// </summary>
+        void ICombatBodySupport.DeactivateSpecialSlots()
+        {
+            if (specialSlots == null) return;
+            foreach (var slot in specialSlots)
+            {
+                if (slot.loadedChip != null && slot.isActive)
+                {
+                    DeactivateSlot(slot);
+                }
+            }
+        }
+
+        // ═══════════════════════════════════════════
+        //  手部缺失联动（v12.2新增）
+        // ═══════════════════════════════════════════
+
+        /// <summary>
+        /// 查询指定侧是否被禁用（手部/手臂被毁）。
+        /// 只要该侧有任一槽位被禁用即返回true。
+        /// </summary>
+        public bool IsSideDisabled(SlotSide side)
+        {
+            var slots = side == SlotSide.LeftHand ? leftHandSlots
+                      : side == SlotSide.RightHand ? rightHandSlots
+                      : specialSlots;
+            if (slots == null) return false;
+            for (int i = 0; i < slots.Count; i++)
+                if (slots[i].isDisabled) return true;
+            return false;
+        }
+
+        /// <summary>
+        /// 处理手部破坏（实例方法）。
+        /// </summary>
+        private void OnHandDestroyed(HandSide side)
+        {
+            Log.Message($"[BDP] 检测到{(side == HandSide.Left ? "左手" : "右手")}被破坏，强制关闭对应槽位");
+
+            if (side == HandSide.Left)
+            {
+                ForceDeactivateLeftSlots("左手缺失");
+            }
+            else
+            {
+                ForceDeactivateRightSlots("右手缺失");
+            }
+        }
+
+        /// <summary>
+        /// 强制禁用左手槽位（手部/手臂被毁时调用）。
+        /// 芯片保留在槽位，但标记为禁用，激活的芯片被关闭。
+        /// </summary>
+        private void ForceDeactivateLeftSlots(string reason)
+        {
+            if (leftHandSlots == null) return;
+
+            // 获取装备者（使用CompEquippable的Holder属性）
+            Pawn pawn = Holder;
+            if (pawn == null)
+            {
+                Log.Warning("[BDP] ForceDeactivateLeftSlots: 无法获取装备者Pawn");
+                return;
+            }
+
+            foreach (var slot in leftHandSlots)
+            {
+                // 关闭激活的芯片（但不清除loadedChip）
+                if (slot.isActive)
+                {
+                    slot.isActive = false;
+                    Log.Message($"[BDP] 左手槽位[{slot.index}]芯片关闭: {slot.loadedChip?.Label ?? "null"} 原因={reason}");
+                }
+                // 标记槽位为禁用
+                slot.isDisabled = true;
+            }
+
+            // 清理左手Verb
+            ClearSideVerbs(SlotSide.LeftHand);
+            RebuildVerbs(pawn);
+        }
+
+        /// <summary>
+        /// 强制禁用右手槽位（手部/手臂被毁时调用）。
+        /// 芯片保留在槽位，但标记为禁用，激活的芯片被关闭。
+        /// </summary>
+        private void ForceDeactivateRightSlots(string reason)
+        {
+            if (rightHandSlots == null) return;
+
+            // 获取装备者（使用CompEquippable的Holder属性）
+            Pawn pawn = Holder;
+            if (pawn == null)
+            {
+                Log.Warning("[BDP] ForceDeactivateRightSlots: 无法获取装备者Pawn");
+                return;
+            }
+
+            foreach (var slot in rightHandSlots)
+            {
+                // 关闭激活的芯片（但不清除loadedChip）
+                if (slot.isActive)
+                {
+                    slot.isActive = false;
+                    Log.Message($"[BDP] 右手槽位[{slot.index}]芯片关闭: {slot.loadedChip?.Label ?? "null"} 原因={reason}");
+                }
+                // 标记槽位为禁用
+                slot.isDisabled = true;
+            }
+
+            // 清理右手Verb
+            ClearSideVerbs(SlotSide.RightHand);
+            RebuildVerbs(pawn);
         }
 
         // ── 调试/开发工具方法已提取到 CompTriggerBody.Debug.cs（Fix-8：partial class） ──

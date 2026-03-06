@@ -87,7 +87,9 @@
       "Bash(git:*)",
       "Bash(cd C:\\\\NiwtDatas\\\\Projects\\\\RimworldModStudio\\\\模组工程\\\\BorderDefenseProtocol:*)",
       "mcp__github__create_repository",
-      "Bash(setx GITHUB_PERSONAL_ACCESS_TOKEN:*)"
+      "Bash(setx GITHUB_PERSONAL_ACCESS_TOKEN:*)",
+      "Bash(cd C:\\\\NiwtDatas\\\\Projects\\\\RimworldModStudio:*)",
+      "Bash(cd:*)"
     ],
     "additionalDirectories": [
       "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\RimWT\\00_项目管理"

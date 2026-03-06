@@ -14,7 +14,6 @@
       <texPath>Things/Trigger/BDP_TriggerBody_Test</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
-    <soundInteract>Interact_Sword</soundInteract>
     <statBases>
       <WorkToMake>3000</WorkToMake>
       <Mass>1.0</Mass>

@@ -11,10 +11,12 @@ namespace BDP.Trigger
     ///   50 = 伤害效果（ExplosionModule）
     ///   100 = 视觉效果（TrailModule）
     ///
-    /// 管线架构v4：
+    /// 管线架构v5：
     ///   基础接口只保留Priority/OnSpawn/ExposeData。
-    ///   具体行为通过管线接口（IBDPTickObserver/IBDPPathResolver/...）组合实现。
-    ///   模块按需实现关心的管线接口，新增阶段不影响现有模块。
+    ///   具体行为通过管线接口组合实现：
+    ///     IBDPLifecyclePolicy / IBDPFlightIntentProvider / IBDPVisualObserver
+    ///     IBDPArrivalPolicy / IBDPHitResolver / IBDPPositionModifier / IBDPSpeedModifier
+    ///   模块只产出意图，宿主统一执行。Phase是模块间唯一协作媒介。
     /// </summary>
     public interface IBDPProjectileModule : IExposable
     {

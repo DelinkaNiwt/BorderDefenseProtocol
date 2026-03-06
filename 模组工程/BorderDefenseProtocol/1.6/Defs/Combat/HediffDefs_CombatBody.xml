@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <!-- 战斗体激活Hediff -->
+    <!-- 实现需求: NR-019(疼痛免疫), NR-031(精神崩溃阻止), NR-029(生理需求冻结), NR-018(无限体力), NR-033(环境免疫) -->
+    <HediffDef>
+        <defName>BDP_CombatBodyActive</defName>
+        <hediffClass>HediffWithComps</hediffClass>
+        <label>战斗体激活</label>
+        <description>Trion战斗体激活状态</description>
+        <defaultLabelColor>(0.8, 0.8, 1.0)</defaultLabelColor>
+        <isBad>false</isBad>
+
+        <!-- 阻止死亡判定（战斗体保护） -->
+        <preventsDeath>true</preventsDeath>
+
+        <!-- 战斗体伤害拦截器 -->
+        <comps>
+            <li Class="BDP.Combat.HediffCompProperties_CombatBodyDamageInterceptor" />
+        </comps>
+
+        <stages>
+            <li>
+                <!-- NR-019 疼痛免疫 -->
+                <painFactor>0</painFactor>
+
+                <!-- NR-031 精神崩溃阻止 -->
+                <blocksMentalBreaks>true</blocksMentalBreaks>
+
+                <!-- NR-029 生理需求冻结 -->
+                <hungerRateFactor>0</hungerRateFactor>
+                <restFallFactor>0</restFallFactor>
+                <disablesNeeds>
+                    <li>Comfort</li>
+                </disablesNeeds>
+
+                <!-- NR-018 无限体力 -->
+                <capMods>
+                    <li>
+                        <capacity>Moving</capacity>
+                        <postFactor>1.0</postFactor>
+                    </li>
+                </capMods>
+
+                <!-- NR-033 环境免疫 -->
+                <statOffsets>
+                    <ComfyTemperatureMin>-200</ComfyTemperatureMin>
+                    <ComfyTemperatureMax>200</ComfyTemperatureMax>
+                    <ToxicResistance>1</ToxicResistance>
+                </statOffsets>
+
+                <!-- NR-033 疾病免疫 -->
+                <makeImmuneTo>
+                    <li>Flu</li>
+                    <li>Plague</li>
+                    <li>Malaria</li>
+                    <li>SleepingSickness</li>
+                    <li>FibrousMechanites</li>
+                    <li>SensoryMechanites</li>
+                </makeImmuneTo>
+            </li>
+        </stages>
+    </HediffDef>
+
+    <!-- Trion枯竭debuff -->
+    <!-- 实现需求: NR-040(被动破裂惩罚) -->
+    <!-- 注意: 当前为占位实现,最终效果待数值设计阶段确定 -->
+    <HediffDef>
+        <defName>BDP_Exhaustion</defName>
+        <hediffClass>HediffWithComps</hediffClass>
+        <label>Trion枯竭</label>
+        <description>战斗体被动破裂后的虚弱状态(占位实现,最终效果待定)</description>
+        <defaultLabelColor>(0.5, 0.5, 0.5)</defaultLabelColor>
+        <isBad>true</isBad>
+
+        <stages>
+            <li>
+                <capMods>
+                    <li>
+                        <capacity>Moving</capacity>
+                        <postFactor>0.8</postFactor>
+                    </li>
+                    <li>
+                        <capacity>Manipulation</capacity>
+                        <postFactor>0.8</postFactor>
+                    </li>
+                </capMods>
+            </li>
+        </stages>
+    </HediffDef>
+
+    <!-- 战斗体部位摧毁 Hediff -->
+    <!-- 实现需求: 影子部位被毁时移除真身部位（无疼痛/流血） -->
+    <HediffDef>
+        <defName>BDP_CombatBodyPartDestroyed</defName>
+        <label>战斗体部位摧毁</label>
+        <description>战斗体保护下的部位摧毁。部位失去功能但不产生疼痛和流血。</description>
+        <hediffClass>Verse.Hediff_MissingPart</hediffClass>
+        <defaultLabelColor>(0.5, 0.5, 0.5)</defaultLabelColor>
+
+        <!-- 不产生负面心情 -->
+        <makesSickThought>false</makesSickThought>
+
+        <!-- 不显示伤口（战斗体内部机制） -->
+        <displayWound>false</displayWound>
+
+        <!-- 永久存在（直到战斗体解除时手动移除） -->
+        <chronic>true</chronic>
+
+        <!-- 不可治疗（无流血） -->
+        <tendable>false</tendable>
+
+        <!-- 不产生疼痛和流血（通过空的 stages 实现） -->
+        <stages>
+            <li>
+                <!-- 不设置 painOffset 或 painFactor = 无疼痛 -->
+                <!-- 不设置 bleedRate = 无流血 -->
+            </li>
+        </stages>
+    </HediffDef>
+
+    <!--
+      战斗体延时破裂状态标记
+      用途: 标记战斗体正在延时破裂中(1.5秒)
+      效果: 无敌、禁止攻击、降低移动速度
+    -->
+    <HediffDef>
+        <defName>BDP_CombatBodyCollapsing</defName>
+        <hediffClass>BDP.Combat.Hediff_CombatBodyCollapsing</hediffClass>
+        <label>战斗体破裂中</label>
+        <description>战斗体正在解除中，无法进行任何操作。</description>
+        <defaultLabelColor>(1, 0.5, 0)</defaultLabelColor>
+        <isBad>true</isBad>
+        <makesSickThought>false</makesSickThought>
+        <tendable>false</tendable>
+
+        <!-- 阻止死亡 -->
+        <preventsDeath>true</preventsDeath>
+
+        <!-- 能力影响 -->
+        <stages>
+            <li>
+                <painFactor>0</painFactor>
+                <capMods>
+                    <!-- 禁止攻击 -->
+                    <li>
+                        <capacity>Manipulation</capacity>
+                        <setMax>0</setMax>
+                    </li>
+                    <!-- 降低移动速度 -->
+                    <li>
+                        <capacity>Moving</capacity>
+                        <offset>-0.5</offset>
+                    </li>
+                </capMods>
+            </li>
+        </stages>
+    </HediffDef>
+
+    <!--
+      战斗体部位待失效标记
+      用途: 标记关键部位被破坏，等待战斗体破裂完成后失效
+      效果: 纯视觉标记，无能力影响
+    -->
+    <HediffDef>
+        <defName>BDP_CombatBodyPartPending</defName>
+        <hediffClass>Verse.Hediff_MissingPart</hediffClass>
+        <label>部位结构失效</label>
+        <labelNoun>结构失效</labelNoun>
+        <description>战斗体部位结构已被破坏，等待战斗体解除后失效。</description>
+        <defaultLabelColor>(1, 0.5, 0)</defaultLabelColor>
+        <isBad>true</isBad>
+        <makesSickThought>false</makesSickThought>
+
+        <!-- 不产生疼痛、流血、负面心情 -->
+        <stages>
+            <li>
+                <painFactor>0</painFactor>
+            </li>
+        </stages>
+    </HediffDef>
+</Defs>

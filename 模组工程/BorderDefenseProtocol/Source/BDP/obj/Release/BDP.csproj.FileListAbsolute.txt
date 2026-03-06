@@ -4,3 +4,8 @@ C:\NiwtDatas\Projects\RimworldModStudio\模组工程\BorderDefenseProtocol\Sourc
 C:\NiwtDatas\Projects\RimworldModStudio\模组工程\BorderDefenseProtocol\Source\BDP\obj\Release\BDP.csproj.CoreCompileInputs.cache
 C:\NiwtDatas\Projects\RimworldModStudio\模组工程\BorderDefenseProtocol\Source\BDP\obj\Release\BDP.dll
 C:\NiwtDatas\Projects\RimworldModStudio\模组工程\BorderDefenseProtocol\Source\BDP\obj\Release\BDP.pdb
+C:\NiwtDatas\Projects\RimworldModStudio\tmp_build_out\BDP.dll
+C:\Users\Niwt\AppData\Local\Temp\bdp_build_out\BDP.dll
+C:\Users\Niwt\AppData\Local\Temp\bdp_build_out\BDP.pdb
+C:\Users\Niwt\AppData\Local\Temp\bdp_msbuild_out\BDP.dll
+C:\Users\Niwt\AppData\Local\Temp\bdp_msbuild_out\BDP.pdb
