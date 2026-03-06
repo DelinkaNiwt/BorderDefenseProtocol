@@ -171,13 +171,13 @@ namespace BDP.Trigger
                             bool drew = false;
                             // 仅绘制逐段LOS全通的路径，不通的跳过
                             if (route.Value.LeftAnchors != null && route.Value.LeftAnchors.Count > 0
-                                && VerbFlightState.IsPathClear(caster.Position, route.Value.LeftAnchors, mouseTarget.Cell, map))
+                                && ObstacleRouter.IsPathClear(caster.Position, route.Value.LeftAnchors, mouseTarget.Cell, map))
                             {
                                 DrawPreviewRoutePath(caster.DrawPos, route.Value.LeftAnchors, mouseTarget.CenterVector3);
                                 drew = true;
                             }
                             if (route.Value.RightAnchors != null && route.Value.RightAnchors.Count > 0
-                                && VerbFlightState.IsPathClear(caster.Position, route.Value.RightAnchors, mouseTarget.Cell, map))
+                                && ObstacleRouter.IsPathClear(caster.Position, route.Value.RightAnchors, mouseTarget.Cell, map))
                             {
                                 DrawPreviewRoutePath(caster.DrawPos, route.Value.RightAnchors, mouseTarget.CenterVector3);
                                 drew = true;
@@ -221,7 +221,15 @@ namespace BDP.Trigger
             previewRouteMap = map;
             previewRouteFrom = from;
             previewRouteTo = to;
-            previewRoute = ObstacleRouter.ComputeRoute(from, to, map);
+
+            // 使用迭代算法（参数与BDPGuidedConfig默认值一致），确保预览与发射路径一致
+            var leftAnchors  = ObstacleRouter.ComputeIterativeRoute(from, to, map, 3, 3, preferLeft: true);
+            var rightAnchors = ObstacleRouter.ComputeIterativeRoute(from, to, map, 3, 3, preferLeft: false);
+
+            previewRoute = (leftAnchors != null || rightAnchors != null)
+                ? (ObstacleRouteResult?) new ObstacleRouteResult
+                  { LeftAnchors = leftAnchors, RightAnchors = rightAnchors }
+                : null;
             return previewRoute;
         }
 

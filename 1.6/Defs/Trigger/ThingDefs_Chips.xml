@@ -26,6 +26,15 @@
         <allocationCost>5</allocationCost>
         <activationWarmup>48</activationWarmup>
         <deactivationDelay>12</deactivationDelay>
+        <slotRestriction>HandsOnly</slotRestriction>
+        <categories>
+          <li>Weapon</li>
+          <li>Melee</li>
+          <li>Close</li>
+          <li>Physical</li>
+          <li>Blade</li>
+          <li>Burst</li>
+        </categories>
       </li>
     </comps>
     <modExtensions>
@@ -70,11 +79,20 @@
         <allocationCost>8</allocationCost>
         <activationWarmup>48</activationWarmup>
         <deactivationDelay>12</deactivationDelay>
+        <slotRestriction>HandsOnly</slotRestriction>
+        <categories>
+          <li>Weapon</li>
+          <li>Melee</li>
+          <li>Close</li>
+          <li>Physical</li>
+          <li>Blunt</li>
+          <li>Burst</li>
+        </categories>
       </li>
     </comps>
     <modExtensions>
       <li Class="BDP.Trigger.WeaponChipConfig">
-        <meleeBurstCount>6</meleeBurstCount>
+        <meleeBurstCount>1</meleeBurstCount>
         <meleeBurstInterval>3</meleeBurstInterval>
         <!-- T36：近战Tool配置存放在DefModExtension中，不放ThingDef.tools -->
         <tools>
@@ -114,6 +132,17 @@
         <allocationCost>10</allocationCost>
         <activationWarmup>48</activationWarmup>
         <deactivationDelay>12</deactivationDelay>
+        <slotRestriction>HandsOnly</slotRestriction>
+        <categories>
+          <li>Weapon</li>
+          <li>Ranged</li>
+          <li>Close</li>
+          <li>Energy</li>
+          <li>Rifle</li>
+          <li>Burst</li>
+          <li>Volley</li>
+          <li>Explosive</li>
+        </categories>
       </li>
       <li Class="BDP.Trigger.CompProperties_FireMode"/>
     </comps>
@@ -165,6 +194,18 @@
         <minOutputPower>5</minOutputPower>
         <activationWarmup>48</activationWarmup>
         <deactivationDelay>12</deactivationDelay>
+        <slotRestriction>HandsOnly</slotRestriction>
+        <categories>
+          <li>Weapon</li>
+          <li>Ranged</li>
+          <li>Long</li>
+          <li>Energy</li>
+          <li>Sniper</li>
+          <li>Burst</li>
+          <li>Volley</li>
+          <li>Guided</li>
+          <li>HighCost</li>
+        </categories>
       </li>
       <li Class="BDP.Trigger.CompProperties_FireMode"/>
     </comps>
@@ -218,6 +259,17 @@
         <allocationCost>8</allocationCost>
         <activationWarmup>48</activationWarmup>
         <deactivationDelay>12</deactivationDelay>
+        <slotRestriction>HandsOnly</slotRestriction>
+        <categories>
+          <li>Weapon</li>
+          <li>Ranged</li>
+          <li>Medium</li>
+          <li>Energy</li>
+          <li>Rifle</li>
+          <li>Burst</li>
+          <li>Volley</li>
+          <li>Tracking</li>
+        </categories>
       </li>
       <li Class="BDP.Trigger.CompProperties_FireMode"/>
     </comps>
@@ -271,6 +323,12 @@
         <isDualHand>true</isDualHand>
         <activationWarmup>48</activationWarmup>
         <deactivationDelay>12</deactivationDelay>
+        <slotRestriction>HandsOnly</slotRestriction>
+        <categories>
+          <li>Shield</li>
+          <li>Energy</li>
+          <li>HighCost</li>
+        </categories>
       </li>
     </comps>
     <modExtensions>
@@ -306,9 +364,15 @@
         <drainPerDay>10</drainPerDay>
         <activationWarmup>48</activationWarmup>
         <deactivationDelay>12</deactivationDelay>
+        <slotRestriction>HandsOnly</slotRestriction>
         <exclusionTags>
           <li>stealth</li>
         </exclusionTags>
+        <categories>
+          <li>Utility</li>
+          <li>Ability</li>
+          <li>Continuous</li>
+        </categories>
       </li>
     </comps>
     <modExtensions>
@@ -343,6 +407,11 @@
         <allocationCost>5</allocationCost>
         <activationWarmup>48</activationWarmup>
         <deactivationDelay>12</deactivationDelay>
+        <slotRestriction>HandsOnly</slotRestriction>
+        <categories>
+          <li>Utility</li>
+          <li>Ability</li>
+        </categories>
       </li>
     </comps>
     <modExtensions>
@@ -350,6 +419,43 @@
         <abilityDef>BDP_Ability_TestJump</abilityDef>
       </li>
     </modExtensions>
+  </ThingDef>
+
+  <!-- ══════════════════════════════════════════════════════
+       #9 BDP_Chip_EmergencyEscape — 紧急脱离芯片（特殊槽位）
+       约束：只能插特殊槽位
+       作用：战斗体被动破裂时触发传送
+       ══════════════════════════════════════════════════════ -->
+  <ThingDef>
+    <defName>BDP_Chip_EmergencyEscape</defName>
+    <label>紧急脱离芯片</label>
+    <description>特殊系统芯片。装载后，战斗体被动破裂时自动传送到紧急脱离信标位置。只能插入特殊槽位。</description>
+    <category>Item</category>
+    <thingClass>ThingWithComps</thingClass>
+    <graphicData>
+      <texPath>Things/Trigger/BDP_Chip_Test</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <Mass>0.1</Mass>
+      <MarketValue>300</MarketValue>
+    </statBases>
+    <comps>
+      <li Class="BDP.Trigger.CompProperties_TriggerChip">
+        <chipEffectClass>BDP.Combat.EmergencyEscapeChipEffect</chipEffectClass>
+        <slotRestriction>SpecialOnly</slotRestriction>
+        <activationCost>0</activationCost>
+        <allocationCost>200</allocationCost>
+        <activationWarmup>0</activationWarmup>
+        <deactivationDelay>0</deactivationDelay>
+        <categories>
+          <li>System</li>
+          <li>Passive</li>
+          <li>Utility</li>
+          <li>HighCost</li>
+        </categories>
+      </li>
+    </comps>
   </ThingDef>
 
 </Defs>

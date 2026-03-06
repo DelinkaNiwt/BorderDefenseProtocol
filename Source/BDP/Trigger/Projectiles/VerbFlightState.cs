@@ -224,6 +224,17 @@ namespace BDP.Trigger
         }
 
         /// <summary>
+        /// 重置自动绕行施法准备状态。
+        /// 在新 burst 的 InterceptDualCastTarget 之前调用，
+        /// 防止上次 burst 残留的 autoRouteLosCell 污染 castTarg 拦截。
+        /// </summary>
+        public void ResetAutoRouteCastState()
+        {
+            autoRouteCastPrepared = false;
+            autoRouteLosCell = default;
+        }
+
+        /// <summary>
         /// 齐射前调用一次，检测障碍物并缓存绕行路由。
         /// 触发条件：ManualAnchorsActive==false（无手动锚点）、弹药有BDPGuidedConfig、无LOS。
         /// </summary>
@@ -241,18 +252,26 @@ namespace BDP.Trigger
             if (GenSight.LineOfSight(shooterPos, targetPos, map, skipFirstCell: true))
                 return;
 
-            cachedRoute = ObstacleRouter.ComputeRoute(shooterPos, targetPos, map);
-            if (cachedRoute == null) return;
+            var guidedCfg      = projectileDef.GetModExtension<BDPGuidedConfig>();
+            int maxDepth       = guidedCfg.maxRouteDepth;
+            int anchorsPerWall = guidedCfg.anchorsPerWall;
 
-            // ★ 逐段LOS验证：不通的一侧置null，两侧都不通则整条路由作废。
-            // 原因：ObstacleRouter基于轮廓几何选锚点，不保证每段都有视线。
-            //       若一侧不通而仍交替分配，该侧子弹会撞墙。
-            var r = cachedRoute.Value;
-            if (!IsPathClear(shooterPos, r.LeftAnchors, targetPos, map))
-                r.LeftAnchors = null;
-            if (!IsPathClear(shooterPos, r.RightAnchors, targetPos, map))
-                r.RightAnchors = null;
-            cachedRoute = r.IsValid ? (ObstacleRouteResult?)r : null;
+            // 分别构建左优先、右优先两条迭代绕行路径（算法已迁入ObstacleRouter）
+            var leftAnchors  = ObstacleRouter.ComputeIterativeRoute(
+                shooterPos, targetPos, map, maxDepth, anchorsPerWall, preferLeft: true);
+            var rightAnchors = ObstacleRouter.ComputeIterativeRoute(
+                shooterPos, targetPos, map, maxDepth, anchorsPerWall, preferLeft: false);
+
+            // 最终全路径LOS验证，任一段不通则该侧作废
+            if (!ObstacleRouter.IsPathClear(shooterPos, leftAnchors,  targetPos, map)) leftAnchors  = null;
+            if (!ObstacleRouter.IsPathClear(shooterPos, rightAnchors, targetPos, map)) rightAnchors = null;
+            if (leftAnchors == null && rightAnchors == null) return;
+
+            cachedRoute = new ObstacleRouteResult
+            {
+                LeftAnchors  = leftAnchors,
+                RightAnchors = rightAnchors
+            };
         }
 
         /// <summary>
@@ -277,29 +296,6 @@ namespace BDP.Trigger
 
             // v5解耦：通过宿主API注入引导路径
             bdp.TryInitGuidedFlight(anchors, finalTarget, anchorSpread);
-        }
-
-        /// <summary>
-        /// 逐段LOS检查：射手→锚点1→…→锚点N→目标，任一段不通即返回false。
-        /// anchors为null或空时视为不可用。
-        /// internal：AnchorTargetingHelper预览绘制也需要调用。
-        /// </summary>
-        internal static bool IsPathClear(
-            IntVec3 shooterPos, List<IntVec3> anchors, IntVec3 targetPos, Map map)
-        {
-            if (anchors == null || anchors.Count == 0) return false;
-
-            // 射手→首锚点
-            if (!GenSight.LineOfSight(shooterPos, anchors[0], map)) return false;
-            // 锚点间
-            for (int i = 0; i < anchors.Count - 1; i++)
-            {
-                if (!GenSight.LineOfSight(anchors[i], anchors[i + 1], map)) return false;
-            }
-            // 末锚点→目标
-            if (!GenSight.LineOfSight(anchors[anchors.Count - 1], targetPos, map)) return false;
-
-            return true;
         }
 
         /// <summary>重置所有状态。</summary>

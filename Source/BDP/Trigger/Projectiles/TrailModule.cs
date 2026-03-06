@@ -26,19 +26,31 @@ namespace BDP.Trigger
         /// <summary>上一tick的位置（用于创建线段）。</summary>
         private Vector3 prevPos;
 
+        /// <summary>是否已初始化prevPos（首次Observe时延迟初始化）。</summary>
+        private bool prevPosInitialized;
+
+        /// <summary>实例ID（诊断用）。</summary>
+        private readonly int instanceId;
+        private static int nextInstanceId = 1;
+
         public int Priority => 100;
 
         /// <summary>无参构造——Scribe反序列化需要。</summary>
-        public TrailModule() { config = null; }
+        public TrailModule()
+        {
+            config = null;
+            instanceId = nextInstanceId++;
+        }
 
         public TrailModule(BeamTrailConfig config)
         {
             this.config = config;
+            instanceId = nextInstanceId++;
         }
 
         public void OnSpawn(Bullet_BDP host)
         {
-            prevPos = host.DrawPos;
+            // prevPos延迟到首次Observe初始化，因为SpawnSetup时DrawPos还未正确设置
             // Material延迟到Observe初始化，避免读档时在加载线程调用MaterialPool.MatFrom
         }
 
@@ -67,6 +79,15 @@ namespace BDP.Trigger
             if (cfg == null || !cfg.enabled || trailMat == null) return;
 
             Vector3 curPos = host.DrawPos;
+
+            // 首次调用：初始化prevPos为当前位置，不创建线段
+            if (!prevPosInitialized)
+            {
+                prevPos = curPos;
+                prevPosInitialized = true;
+                return;
+            }
+
             var comp = BDPEffectMapComponent.GetInstance(host.Map);
             comp?.CreateSegment(
                 prevPos, curPos, trailMat, cfg.trailColor,
@@ -76,6 +97,9 @@ namespace BDP.Trigger
         }
 
         /// <summary>配置来自def，无需额外序列化。</summary>
-        public void ExposeData() { }
+        public void ExposeData()
+        {
+            Scribe_Values.Look(ref prevPosInitialized, "prevPosInitialized", false);
+        }
     }
 }

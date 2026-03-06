@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Verse;
 
 namespace BDP.Trigger
@@ -64,9 +65,59 @@ namespace BDP.Trigger
         /// </summary>
         public int deactivationDelay = 0;
 
+        /// <summary>
+        /// 槽位限制类型（v3.1）。
+        /// None=无限制，SpecialOnly=只能插特殊槽位，HandsOnly=只能插左右手槽位。
+        /// </summary>
+        public ChipSlotRestriction slotRestriction = ChipSlotRestriction.None;
+
+        /// <summary>
+        /// 芯片类别标签列表（v3.1，多维度分类）。
+        /// 用于筛选、分组、批量设置等功能。一个芯片可以有多个类别标签。
+        /// 推荐使用ChipCategories常量类中的标签，但也可以自定义。
+        /// 例：["Weapon", "Ranged", "Energy", "Sniper", "Guided"]
+        /// </summary>
+        public List<string> categories;
+
         public CompProperties_TriggerChip()
         {
             compClass = typeof(TriggerChipComp);
+        }
+
+        // ═══════════════════════════════════════════════════════
+        // 辅助方法 - 类别标签查询
+        // ═══════════════════════════════════════════════════════
+
+        /// <summary>
+        /// 检查芯片是否包含指定类别标签。
+        /// </summary>
+        public bool HasCategory(string category)
+        {
+            return categories != null && categories.Contains(category);
+        }
+
+        /// <summary>
+        /// 检查芯片是否包含任意一个指定的类别标签。
+        /// </summary>
+        public bool HasAnyCategory(params string[] cats)
+        {
+            return categories != null && cats.Any(c => categories.Contains(c));
+        }
+
+        /// <summary>
+        /// 检查芯片是否包含所有指定的类别标签。
+        /// </summary>
+        public bool HasAllCategories(params string[] cats)
+        {
+            return categories != null && cats.All(c => categories.Contains(c));
+        }
+
+        /// <summary>
+        /// 获取芯片的所有类别标签（只读）。
+        /// </summary>
+        public IEnumerable<string> GetCategories()
+        {
+            return categories ?? Enumerable.Empty<string>();
         }
     }
 }

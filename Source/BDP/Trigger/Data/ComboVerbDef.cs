@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Verse;
 
@@ -11,6 +12,8 @@ namespace BDP.Trigger
     ///   · ComboVerbDef → 生成第4个攻击Gizmo（攻击模式），发射专属弹药
     ///
     /// 匹配规则：chipA和chipB的顺序无关（对称匹配），同ComboAbilityDef。
+    ///
+    /// v9.0变更：新增primaryVerbClass/secondaryVerbClass，废弃supportsVolley。
     /// </summary>
     public class ComboVerbDef : Def
     {
@@ -23,8 +26,31 @@ namespace BDP.Trigger
         /// <summary>组合技发射的弹药ThingDef（如BDP_Bullet_Argus）。</summary>
         public ThingDef projectileDef;
 
-        /// <summary>是否支持齐射模式（右键触发）。</summary>
+        // ═══════════════════════════════════════════════════════
+        // v9.0新增：显式Verb类型配置（推荐使用）
+        // ═══════════════════════════════════════════════════════
+
+        /// <summary>主攻击Verb类型（默认Verb_BDPComboShoot）。</summary>
+        public Type primaryVerbClass = typeof(Verb_BDPComboShoot);
+
+        /// <summary>副攻击Verb类型（null=无副攻击）。</summary>
+        public Type secondaryVerbClass = null;
+
+        // ═══════════════════════════════════════════════════════
+        // 废弃字段（保留用于向后兼容）
+        // ═══════════════════════════════════════════════════════
+
+        /// <summary>
+        /// [已废弃] 是否支持齐射模式（右键触发）。
+        /// 请使用 secondaryVerbClass 替代。
+        /// 保留用于向后兼容：如果secondaryVerbClass为null且此字段为true，则自动创建齐射verb。
+        /// </summary>
+        [Obsolete("Use secondaryVerbClass instead")]
         public bool supportsVolley = true;
+
+        // ═══════════════════════════════════════════════════════
+        // 特殊机制配置
+        // ═══════════════════════════════════════════════════════
 
         /// <summary>是否支持引导瞄准（锚点折线弹道）。</summary>
         public bool supportsGuided = true;

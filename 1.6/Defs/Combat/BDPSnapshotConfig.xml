@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    BDP快照排除配置（默认）
+    声明哪些Hediff不参与战斗体快照→回滚流程。
+
+    excludedHediffs      : 按具体HediffDef排除
+    excludedHediffClasses: 按C#类名排除（含所有子类）
+
+    其他模组可添加自己的 BDPSnapshotConfigDef，无需修改此文件。
+  -->
+  <BDP.Combat.BDPSnapshotConfigDef>
+    <defName>BDP_DefaultSnapshotExclusions</defName>
+
+    <!-- 按具体Def排除 -->
+    <excludedHediffs>
+      <li>PsychicAmplifier</li>   <!-- 启灵神经（灵能等级） -->
+      <li>MechlinkImplant</li>    <!-- 机控中枢（机械师植入） -->
+    </excludedHediffs>
+
+    <!-- 按C#类排除（含子类自动覆盖） -->
+    <excludedHediffClasses>
+      <li>Verse.Hediff_Psylink</li>   <!-- 启灵神经及其所有子类 -->
+      <li>Verse.Hediff_Mechlink</li>  <!-- 机控中枢及其所有子类 -->
+    </excludedHediffClasses>
+
+  </BDP.Combat.BDPSnapshotConfigDef>
+
+</Defs>

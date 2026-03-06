@@ -67,10 +67,14 @@ namespace BDP.Trigger
         [HarmonyPostfix]
         public static void Postfix(Projectile __instance, ref int __result)
         {
-            // equipment 为 null 时直接跳过，零副作用
+            // 检查1: 仅处理 Bullet_BDP（其他弹道跳过，零副作用）
+            if (!(__instance is Bullet_BDP)) return;
+
+            // 检查2: equipment 为 null 时直接跳过
             var equipment = Traverse.Create(__instance).Field("equipment").GetValue<Thing>();
             var fm = equipment?.TryGetComp<CompFireMode>();
             if (fm == null || Mathf.Abs(fm.Damage - 1f) < 0.001f) return;
+
             __result = Mathf.Max(1, Mathf.RoundToInt(__result * fm.Damage));
         }
     }

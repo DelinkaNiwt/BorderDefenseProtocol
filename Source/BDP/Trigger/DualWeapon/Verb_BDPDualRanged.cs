@@ -89,6 +89,7 @@ namespace BDP.Trigger
             leftProjectileDef = null;
             rightProjectileDef = null;
 
+            gs.ResetAutoRouteCastState();  // 清除上次 burst 残留的 autoRouteLosCell，防止误重定向
             LocalTargetInfo actualTarget = gs.InterceptDualCastTarget(
                 ref castTarg, caster.Position, caster.Map);
 

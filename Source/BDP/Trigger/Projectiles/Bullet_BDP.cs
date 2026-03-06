@@ -79,6 +79,12 @@ namespace BDP.Trigger
 
         /// <summary>累计到达重定向次数（诊断 + 防无限循环）。</summary>
         private int arrivalRedirectCount;
+        /// <summary>是否已消耗首段重定向（首段不做origin后退）。</summary>
+        private bool firstRedirectConsumed;
+
+        // ── Vanilla适配层 ──
+        /// <summary>Vanilla兼容适配层——集中处理vanilla机制冲突。</summary>
+        private VanillaAdapter vanillaAdapter = new VanillaAdapter();
 
         // ── 发射上下文 ──
         /// <summary>发射时的游戏tick。</summary>
@@ -185,6 +191,10 @@ namespace BDP.Trigger
         /// </summary>
         private void ApplyFlightRedirect(Vector3 newDestination, bool exactPosition = false)
         {
+            // 首段重定向只执行一次：用于避免首发视觉起点漂移。
+            bool isFirstRedirect = !firstRedirectConsumed;
+            firstRedirectConsumed = true;
+
             var cfg = redirectConfig;
             Vector3 currentPos = DrawPos;
             Vector3 toDest = (newDestination - currentPos).Yto0();
@@ -203,20 +213,9 @@ namespace BDP.Trigger
             if (speedPerTick <= 0.0001f)
                 speedPerTick = def.projectile.SpeedTilesPerTick;
 
-            // Phase为GuidedLeg/Tracking/FinalApproach时origin后退，恢复vanilla沿途拦截
-            bool needOriginOffset = Phase == FlightPhase.GuidedLeg
-                || Phase == FlightPhase.Tracking
-                || Phase == FlightPhase.FinalApproach;
-
-            if (needOriginOffset)
-            {
-                origin = currentPos - dir * cfg.originOffset;
-                origin.y = currentPos.y;
-            }
-            else
-            {
-                origin = currentPos;
-            }
+            // ★ 使用适配层统一计算origin（替换原有的分散origin后退逻辑）
+            origin = vanillaAdapter.ComputeAdaptedOrigin(currentPos, dir, Phase, isFirstRedirect);
+            origin.y = currentPos.y;
 
             // 距离策略（GuidedLeg不走far-distance，始终精确飞到锚点）
             // exactPosition=true时跳过远距离策略（贝塞尔等精确位置模式）
@@ -285,12 +284,24 @@ namespace BDP.Trigger
             // 建立管线参与者缓存
             BuildPipelineCache();
 
+            // 初始化显示位置（必须在OnSpawn之前，避免模块读到默认值）
+            modifiedDrawPos = base.DrawPos;
+
             // 通知所有模块
             for (int i = 0; i < modules.Count; i++)
                 modules[i].OnSpawn(this);
 
-            // 初始化显示位置
-            modifiedDrawPos = base.DrawPos;
+            // 配置适配层策略（根据弹道类型决定启用哪些适配）
+            bool hasTracking = GetModule<TrackingModule>() != null;
+            bool hasGuided = GetModule<GuidedModule>() != null;
+            vanillaAdapter.ConfigureStrategy(
+                needsOriginOffset: hasTracking || hasGuided,
+                needsUsedTargetSync: hasTracking
+            );
+
+            // 记录真实发射点（在Launch后，origin已由vanilla设置）
+            if (!respawningAfterLoad)
+                vanillaAdapter.RecordTrueOrigin(origin);
         }
 
         /// <summary>扫描模块列表，按管线接口类型分组缓存。</summary>
@@ -476,6 +487,17 @@ namespace BDP.Trigger
             }
 
             // 阶段7：HitResolve——修正命中判定
+            // ★ 优先使用适配层统一处理（usedTarget同步 + ForceGround检查）
+            var impactCheck = vanillaAdapter.CheckBeforeImpact(this, Phase, TrackingTarget, ref usedTarget);
+            if (impactCheck.ForceGround)
+            {
+                if (TrackingDiag.Enabled)
+                    Log.Message($"[VanillaAdapter] ForceGround: {impactCheck.Reason}");
+                Impact(null);
+                return;
+            }
+
+            // 其余HitResolver（非TrackingModule）仍可参与
             if (hitResolvers.Count > 0)
             {
                 var hitCtx = new HitContext(Phase, usedTarget);
@@ -590,6 +612,7 @@ namespace BDP.Trigger
             Scribe_Values.Look(ref launchSpeedMult, "bdpLaunchSpeedMult", 1f);
             Scribe_Values.Look(ref postLaunchInitDone, "bdpPostLaunchInit", false);
             Scribe_Values.Look(ref arrivalRedirectCount, "bdpArrivalRedirects", 0);
+            Scribe_Values.Look(ref firstRedirectConsumed, "bdpFirstRedirectConsumed", false);
             Scribe_Collections.Look(ref modules, "bdpModules", LookMode.Deep);
             if (modules == null)
                 modules = new List<IBDPProjectileModule>();

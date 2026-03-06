@@ -33,7 +33,7 @@ namespace BDP.Trigger
     /// </summary>
     public class TrackingModule : IBDPProjectileModule,
         IBDPFlightIntentProvider, IBDPLifecyclePolicy,
-        IBDPHitResolver, IBDPArrivalPolicy
+        IBDPArrivalPolicy
     {
         /// <summary>追踪配置引用。</summary>
         private readonly BDPTrackingConfig config;
@@ -426,36 +426,6 @@ namespace BDP.Trigger
                 currentAngle = Mathf.Atan2(newDir.x, newDir.z) * Mathf.Rad2Deg;
 
             return nextPos;
-        }
-
-        // ══════════════════════════════════════════
-        //  IBDPHitResolver — 命中修正
-        // ══════════════════════════════════════════
-
-        public void ResolveHit(Bullet_BDP host, ref HitContext ctx)
-        {
-            var cfg = GetConfig(host);
-            if (cfg == null) return;
-
-            // 追踪过期（TrackingLost/Free）打地面——防止vanilla无视距离命中usedTarget
-            if (ctx.CurrentPhase == FlightPhase.TrackingLost
-                || ctx.CurrentPhase == FlightPhase.Free)
-            {
-                ctx.ForceGround = true;
-                if (TrackingDiag.Enabled)
-                    Log.Message($"[BDP-Track] HitResolve ForceGround Phase={ctx.CurrentPhase}");
-                return;
-            }
-
-            // 极近距离命中保证——追踪中且目标有效时覆盖usedTarget
-            if ((ctx.CurrentPhase == FlightPhase.Tracking
-                || ctx.CurrentPhase == FlightPhase.FinalApproach)
-                && IsTargetValid(host.TrackingTarget))
-            {
-                ctx.OverrideTarget = host.TrackingTarget;
-                if (TrackingDiag.Enabled)
-                    Log.Message($"[BDP-Track] HitResolve Override={host.TrackingTarget} Phase={ctx.CurrentPhase}");
-            }
         }
 
         // ══════════════════════════════════════════

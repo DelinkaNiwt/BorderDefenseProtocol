@@ -34,6 +34,10 @@ namespace BDP.Core
         private bool frozen;     // 恢复是否被冻结（由外部系统设置）
         private bool initialized; // 是否已完成首次初始化（防止PawnFlyer落地时PostSpawnSetup重置数据）
 
+        // ── 预占用值（v1.8）──
+        // 由触发器系统在芯片装载/卸载时更新，战斗体激活时读取此值作为占用量
+        private float reservedAllocation = 0f;
+
         // ── 聚合消耗注册表（v1.4） ──
         // key=消耗源标识, value=每天消耗量
         private Dictionary<string, float> drainRegistry;
@@ -57,10 +61,22 @@ namespace BDP.Core
         public float Available => cur - allocated;
 
         /// <summary>
+        /// 预占用值（只读）。由触发器系统在芯片配置变更时更新。
+        /// 战斗体激活时读取此值作为占用量。
+        /// </summary>
+        public float ReservedAllocation => reservedAllocation;
+
+        /// <summary>
         /// 可用值耗尽事件（Available从>0降至≤0时触发）。
         /// 不序列化——由消费者在Notify_Equipped时注册，Notify_Unequipped时注销。
         /// </summary>
         public System.Action OnAvailableDepleted;
+
+        /// <summary>
+        /// Trion总值耗尽事件（cur从>0降至≤0时触发）。
+        /// 用于战斗体破裂检测。不序列化——由战斗体模块在激活时注册，解除时注销。
+        /// </summary>
+        public System.Action OnTrionDepleted;
 
         /// <summary>当前百分比。供Gizmo_TrionBar显示和阈值检查使用。</summary>
         public float Percent => max > 0f ? cur / max : 0f;
@@ -101,6 +117,15 @@ namespace BDP.Core
             drainRegistry.Remove(key);
         }
 
+        /// <summary>
+        /// 更新预占用值。由触发器系统调用。
+        /// </summary>
+        /// <param name="amount">新的预占用值</param>
+        public void UpdateReservedAllocation(float amount)
+        {
+            reservedAllocation = Mathf.Max(0f, amount);
+        }
+
         // ═══════════════════════════════════════════
         //  核心API
         // ═══════════════════════════════════════════
@@ -116,6 +141,7 @@ namespace BDP.Core
             if (Available < amount) return false;
             cur -= amount;
             CheckAvailableDepleted();
+            CheckTrionDepleted();
             return true;
         }
 
@@ -161,6 +187,7 @@ namespace BDP.Core
         {
             cur = 0f;
             allocated = 0f;
+            CheckTrionDepleted();
         }
 
         /// <summary>设置恢复冻结状态。由战斗模块在进入/退出战斗体状态时调用。</summary>
@@ -177,6 +204,16 @@ namespace BDP.Core
         {
             if (Available <= 0f)
                 OnAvailableDepleted?.Invoke();
+        }
+
+        /// <summary>
+        /// 检查Trion总值是否已耗尽（≤0），若是则触发OnTrionDepleted事件。
+        /// 在Consume()、ForceDeplete()、CompTick()聚合消耗后调用。
+        /// </summary>
+        private void CheckTrionDepleted()
+        {
+            if (cur <= 0f)
+                OnTrionDepleted?.Invoke();
         }
 
         /// <summary>
@@ -410,6 +447,7 @@ namespace BDP.Core
             Scribe_Values.Look(ref allocated, "trionAllocated");
             Scribe_Values.Look(ref frozen, "trionFrozen");
             Scribe_Values.Look(ref initialized, "trionInitialized");
+            Scribe_Values.Look(ref reservedAllocation, "reservedAllocation", 0f);
             Scribe_Collections.Look(ref drainRegistry, "trionDrains", LookMode.Value, LookMode.Value);
 
             // 读档后校验不变量——防止存档损坏或版本升级导致的数据不一致

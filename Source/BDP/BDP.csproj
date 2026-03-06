@@ -11,6 +11,7 @@
     <AssemblyName>BDP</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
 
   <!-- Release配置：输出到1.6/Assemblies -->

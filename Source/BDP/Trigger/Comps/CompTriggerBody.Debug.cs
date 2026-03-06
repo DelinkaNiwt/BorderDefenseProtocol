@@ -8,58 +8,14 @@ namespace BDP.Trigger
 {
     /// <summary>
     /// CompTriggerBody的调试/开发工具部分（Fix-8：partial class提取）。
-    /// 包含：GetCombatBodyGizmos, GetDebugGizmos, HasEmptySlot,
+    /// 包含：GetDebugGizmos, HasEmptySlot,
     ///       FillRandomChip, FillSpecificChip, GetChipMenuOptions,
     ///       ClearSide, Command_ActionWithMenu内部类。
+    ///
+    /// v2.1：移除GetCombatBodyGizmos，战斗体生成/解除逻辑已迁移到Gene_TrionGland。
     /// </summary>
     public partial class CompTriggerBody
     {
-        /// <summary>战斗体生成/解除按钮（godMode守卫）。</summary>
-        private IEnumerable<Gizmo> GetCombatBodyGizmos()
-        {
-            yield return new Command_Action
-            {
-                defaultLabel = "模拟战斗体生成",
-                defaultDesc = "CanGenerateCombatBody() → Allocate → ActivateAllSpecial()",
-                action = () =>
-                {
-                    if (!CanGenerateCombatBody())
-                    {
-                        Log.Warning("[BDP] 模拟战斗体生成: Trion不足，无法生成战斗体");
-                        return;
-                    }
-                    IsCombatBodyActive = true;
-                    var trion = TrionComp;
-                    float totalAllocated = 0f;
-                    foreach (var slot in AllSlots())
-                    {
-                        if (slot.loadedChip == null) continue;
-                        var chipComp = slot.loadedChip.TryGetComp<TriggerChipComp>();
-                        if (chipComp != null && chipComp.Props.allocationCost > 0f)
-                        {
-                            bool ok = trion?.Allocate(chipComp.Props.allocationCost) ?? false;
-                            if (ok)
-                                totalAllocated += chipComp.Props.allocationCost;
-                            else
-                                Log.Warning($"[BDP] Allocate失败: {slot.loadedChip.def.defName} cost={chipComp.Props.allocationCost} available={trion?.Available ?? 0f:F1}");
-                        }
-                    }
-                    ActivateAllSpecial();
-                    Log.Message($"[BDP] 模拟战斗体生成完成 (allocated={totalAllocated:F1}, trion={trion?.Cur:F1}/{trion?.Max:F1})");
-                }
-            };
-            yield return new Command_Action
-            {
-                defaultLabel = "模拟战斗体解除",
-                defaultDesc = "DismissCombatBody()",
-                action = () =>
-                {
-                    DismissCombatBody();
-                    Log.Message("[BDP] 模拟战斗体解除完成");
-                }
-            };
-        }
-
         private IEnumerable<Gizmo> GetDebugGizmos()
         {
             bool hasEmptyLeft = HasEmptySlot(SlotSide.LeftHand);

@@ -52,7 +52,8 @@ namespace BDP.Trigger
         /// 计算绕行路由。返回null表示无需/无法绕行。
         /// </summary>
         public static ObstacleRouteResult? ComputeRoute(
-            IntVec3 shooterPos, IntVec3 targetPos, Map map)
+            IntVec3 shooterPos, IntVec3 targetPos, Map map,
+            int anchorsPerWall = 5)
         {
             // Step1: 沿射线找第一个阻挡格
             IntVec3? blockCell = FindFirstBlockingCell(shooterPos, targetPos, map);
@@ -99,8 +100,8 @@ namespace BDP.Trigger
             }
 
             // Step5: 每侧分段选锚点（贪心取LateralDist最大点）
-            List<IntVec3> leftAnchors = SelectAnchors(leftPoints);
-            List<IntVec3> rightAnchors = SelectAnchors(rightPoints);
+            List<IntVec3> leftAnchors = SelectAnchors(leftPoints, anchorsPerWall);
+            List<IntVec3> rightAnchors = SelectAnchors(rightPoints, anchorsPerWall);
 
             if ((leftAnchors == null || leftAnchors.Count == 0)
                 && (rightAnchors == null || rightAnchors.Count == 0))
@@ -197,6 +198,66 @@ namespace BDP.Trigger
         }
 
         // ══════════════════════════════════════════
+        //  迭代绕行 & 路径LOS校验（供VerbFlightState/AnchorTargetingHelper共用）
+        // ══════════════════════════════════════════
+
+        /// <summary>
+        /// 迭代分段绕行路径构建。
+        /// 从 from 出发，对"当前末点→to"段反复调用 ComputeRoute，
+        /// 最多 maxDepth 次，直到全段通路或深度耗尽。
+        /// preferLeft=true 时优先选左侧锚点，失败降级右侧；反之亦然。
+        /// 返回完整锚点列表（不含端点），无法绕行时返回 null。
+        /// </summary>
+        public static List<IntVec3> ComputeIterativeRoute(
+            IntVec3 from, IntVec3 to, Map map,
+            int maxDepth, int anchorsPerWall, bool preferLeft)
+        {
+            var allAnchors = new List<IntVec3>();
+            IntVec3 segFrom = from;
+
+            for (int depth = 0; depth < maxDepth; depth++)
+            {
+                // 当前段已通，不再迭代
+                if (GenSight.LineOfSight(segFrom, to, map))
+                    break;
+
+                var seg = ComputeRoute(segFrom, to, map, anchorsPerWall);
+                if (seg == null || !seg.Value.IsValid) return null;
+
+                // 优先选一侧，不可用时降级到另一侧
+                List<IntVec3> side = preferLeft
+                    ? (seg.Value.LeftAnchors  ?? seg.Value.RightAnchors)
+                    : (seg.Value.RightAnchors ?? seg.Value.LeftAnchors);
+                if (side == null || side.Count == 0) return null;
+
+                allAnchors.AddRange(side);
+                segFrom = side[side.Count - 1];  // 下次从末锚点继续
+            }
+
+            return allAnchors.Count > 0 ? allAnchors : null;
+        }
+
+        /// <summary>
+        /// 逐段LOS检查：shooterPos→锚点1→…→锚点N→targetPos，任一段不通即返回false。
+        /// anchors为null或空时返回false。
+        /// </summary>
+        public static bool IsPathClear(
+            IntVec3 shooterPos, List<IntVec3> anchors, IntVec3 targetPos, Map map)
+        {
+            if (anchors == null || anchors.Count == 0) return false;
+            // 射手→首锚点
+            if (!GenSight.LineOfSight(shooterPos, anchors[0], map)) return false;
+            // 锚点间逐段
+            for (int i = 0; i < anchors.Count - 1; i++)
+            {
+                if (!GenSight.LineOfSight(anchors[i], anchors[i + 1], map)) return false;
+            }
+            // 末锚点→目标
+            if (!GenSight.LineOfSight(anchors[anchors.Count - 1], targetPos, map)) return false;
+            return true;
+        }
+
+        // ══════════════════════════════════════════
         //  Step5: 分段选锚点
         // ══════════════════════════════════════════
 
@@ -205,7 +266,7 @@ namespace BDP.Trigger
         /// 每段取LateralDist最大的单点（原始贪心），
         /// 按投影顺序组装。返回1~5个IntVec3，或null。
         /// </summary>
-        private static List<IntVec3> SelectAnchors(List<ContourPoint> points)
+        private static List<IntVec3> SelectAnchors(List<ContourPoint> points, int segmentCount)
         {
             if (points == null || points.Count == 0) return null;
 
@@ -222,13 +283,7 @@ namespace BDP.Trigger
                 return new List<IntVec3> { points[0].Cell };
             }
 
-            // 5段分界：每段20%
-            // 段0: [0%, 20%)  入口
-            // 段1: [20%, 40%) 入口过渡
-            // 段2: [40%, 60%) 中间
-            // 段3: [60%, 80%) 出口过渡
-            // 段4: [80%, 100%] 出口
-            const int segmentCount = 5;
+            // 按segmentCount等分，每段取LateralDist最大点
             float segSize = range / segmentCount;
 
             // 每段取LateralDist最大的点

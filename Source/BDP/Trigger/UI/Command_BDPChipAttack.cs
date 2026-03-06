@@ -14,12 +14,20 @@ namespace BDP.Trigger
     /// 方案：芯片Verb设hasStandardCommand=false脱离标准路径，
     /// CompGetEquippedGizmosExtra中用本类生成独立Gizmo，按attackId控制合并。
     ///
-    /// v6.1变更：新增volleyVerb字段+右键拦截，支持齐射模式。
-    ///   · volleyVerb非null时，右键进入齐射瞄准（BeginTargeting）
-    ///   · volleyVerb为null时，右键走默认行为（无变化）
+    /// v6.1变更：新增secondaryVerb字段+右键拦截，支持副攻击模式。
+    ///   · secondaryVerb非null时，右键进入副攻击瞄准（BeginTargeting）
+    ///   · secondaryVerb为null时，右键走默认行为（无变化）
     ///
     /// v7.0变更：引导弹verb拦截——左键/右键直接启动多步锚点瞄准，
     ///   绕过原版targeting流程（原版verb.targetParams不允许地面瞄准）。
+    ///
+    /// v8.0变更：secondaryVerb语义为"副攻击verb"（右键），不限于齐射。
+    ///   · secondaryVerb可以是任意类型的verb（齐射、逐发、引导等）
+    ///   · 描述文本根据verb类型动态生成
+    ///
+    /// v9.0变更：移除类型判断，描述文本从VerbProperties.label读取。
+    ///   · 不再判断verb类型（Verb_BDPVolley等）
+    ///   · 直接从secondaryVerb.verbProps.label读取描述
     ///
     /// attackId生成规则（基于芯片defName）：
     ///   独立芯片攻击 → chipDef.defName（如"BDP_ChipArcMoon"）
@@ -36,8 +44,8 @@ namespace BDP.Trigger
         /// <summary>基于芯片类型的攻击标识，用于GroupsWith合并判断。</summary>
         public string attackId;
 
-        /// <summary>齐射Verb实例（右键触发）。null=该芯片不支持齐射。</summary>
-        public Verb volleyVerb;
+        /// <summary>副攻击Verb实例（右键触发）。null=该芯片不支持副攻击，右键走默认行为。</summary>
+        public Verb secondaryVerb;
 
         public override bool GroupsWith(Gizmo other)
         {
@@ -74,24 +82,24 @@ namespace BDP.Trigger
                 return new GizmoResult(GizmoState.Clear);
             }
 
-            // 拦截右键：volleyVerb存在时进入齐射瞄准
-            if (result.State == GizmoState.OpenedFloatMenu && volleyVerb != null)
+            // 拦截右键：secondaryVerb存在时进入副攻击瞄准
+            if (result.State == GizmoState.OpenedFloatMenu && secondaryVerb != null)
             {
                 SoundDefOf.Tick_Tiny.PlayOneShotOnCamera();
-                // 引导齐射verb：检查是否支持引导
-                if (volleyVerb is Verb_BDPRangedBase rangedVolley && rangedVolley.SupportsGuided)
+                // 引导副攻击verb：检查是否支持引导
+                if (secondaryVerb is Verb_BDPRangedBase rangedSecondary && rangedSecondary.SupportsGuided)
                 {
-                    rangedVolley.StartAnchorTargeting();
+                    rangedSecondary.StartAnchorTargeting();
                 }
-                // 双侧齐射verb含变化弹侧
-                else if (volleyVerb is Verb_BDPDualVolley dualVolley && dualVolley.HasGuidedSide)
+                // 双侧副攻击verb含变化弹侧
+                else if (secondaryVerb is Verb_BDPDualVolley dualSecondary && dualSecondary.HasGuidedSide)
                 {
-                    dualVolley.StartAnchorTargeting();
+                    dualSecondary.StartAnchorTargeting();
                 }
                 else
                 {
-                    // 普通齐射verb走原版targeting
-                    Find.Targeter.BeginTargeting(volleyVerb);
+                    // 普通副攻击verb走原版targeting
+                    Find.Targeter.BeginTargeting(secondaryVerb);
                 }
                 return new GizmoResult(GizmoState.Clear);
             }
@@ -104,8 +112,12 @@ namespace BDP.Trigger
             get
             {
                 string baseDesc = base.Desc;
-                if (volleyVerb != null)
-                    return baseDesc + "\n右键：齐射";
+                if (secondaryVerb != null)
+                {
+                    // v9.0：从VerbProperties.label读取副攻击描述
+                    string secondaryLabel = secondaryVerb.verbProps.label ?? "副攻击";
+                    return baseDesc + $"\n右键：{secondaryLabel}";
+                }
                 return baseDesc;
             }
         }
