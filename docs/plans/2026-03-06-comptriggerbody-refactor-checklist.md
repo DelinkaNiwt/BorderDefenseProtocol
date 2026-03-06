@@ -192,31 +192,31 @@
 **预计时间**: 2小时实施 + 1.5小时验证
 
 ### 3.1 创建VerbSystem.cs
-- [ ] 创建文件：`CompTriggerBody.VerbSystem.cs`
-- [ ] 移动主入口方法
-  - [ ] RebuildVerbs
-- [ ] 移动Verb创建方法
-  - [ ] CreateAndCacheChipVerbs
-  - [ ] CreateSecondaryVerbs
-  - [ ] CreateComboVerbs
-  - [ ] FindOrCreateVerb
-  - [ ] CreateLegacyVolleyVerb
-  - [ ] CreateComboVerb
-  - [ ] CreateComboVerbFromClass
-- [ ] 移动组合技匹配
-  - [ ] MatchComboVerb
-- [ ] 移动辅助方法
-  - [ ] GetFirstRange
-  - [ ] GetFirstWarmup
-  - [ ] GetFirstCooldown
-  - [ ] GetFirstBurstShotCount
-  - [ ] GetFirstTicksBetweenBurstShots
-  - [ ] GetActiveOrActivatingSlot
-  - [ ] FindSavedVerb
-- [ ] 移动IVerbOwner接口实现
-  - [ ] GetVerbProperties（私有方法）
-  - [ ] GetTools（私有方法）
-- [ ] 编译验证
+- [x] 创建文件：`CompTriggerBody.VerbSystem.cs`
+- [x] 移动主入口方法
+  - [x] RebuildVerbs
+- [x] 移动Verb创建方法
+  - [x] CreateAndCacheChipVerbs
+  - [x] CreateSecondaryVerbs
+  - [x] CreateComboVerbs
+  - [x] FindOrCreateVerb
+  - [x] CreateLegacyVolleyVerb
+  - [x] CreateComboVerb
+  - [x] CreateComboVerbFromClass
+- [x] 移动组合技匹配
+  - [x] MatchComboVerb
+- [x] 移动辅助方法
+  - [x] GetFirstRange
+  - [x] GetFirstWarmup
+  - [x] GetFirstCooldown
+  - [x] GetFirstBurstShotCount
+  - [x] GetFirstTicksBetweenBurstShots
+  - [x] GetActiveOrActivatingSlot
+  - [x] FindSavedVerb
+- [x] 移动IVerbOwner接口实现
+  - [x] GetVerbProperties（私有方法）
+  - [x] GetTools（私有方法）
+- [x] 编译验证
 
 ### 3.2 创建GizmoGeneration.cs
 - [ ] 创建文件：`CompTriggerBody.GizmoGeneration.cs`
