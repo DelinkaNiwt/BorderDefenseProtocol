@@ -219,19 +219,19 @@
 - [x] 编译验证
 
 ### 3.2 创建GizmoGeneration.cs
-- [ ] 创建文件：`CompTriggerBody.GizmoGeneration.cs`
-- [ ] 移动Gizmo生成方法
-  - [ ] CompGetEquippedGizmosExtra
-  - [ ] CompGetGizmosExtra（如果存在）
-- [ ] 移动Gizmo生成逻辑
-  - [ ] 左手攻击Gizmo
-  - [ ] 右手攻击Gizmo
-  - [ ] 双手触发Gizmo
-  - [ ] 组合技Gizmo
-  - [ ] 副攻击Gizmo
-  - [ ] 射击模式Gizmo
-  - [ ] 状态Gizmo
-- [ ] 编译验证
+- [x] 创建文件：`CompTriggerBody.GizmoGeneration.cs`
+- [x] 移动Gizmo生成方法
+  - [x] CompGetEquippedGizmosExtra
+  - [x] CompGetGizmosExtra（如果存在）
+- [x] 移动Gizmo生成逻辑
+  - [x] 左手攻击Gizmo
+  - [x] 右手攻击Gizmo
+  - [x] 双手触发Gizmo
+  - [x] 组合技Gizmo
+  - [x] 副攻击Gizmo
+  - [x] 射击模式Gizmo
+  - [x] 状态Gizmo
+- [x] 编译验证
 
 ### 3.3 创建CombatBodySupport.cs
 - [ ] 创建文件：`CompTriggerBody.CombatBodySupport.cs`
