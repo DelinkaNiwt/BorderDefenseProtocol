@@ -3,7 +3,7 @@
 
   <!-- ══════════════════════════════════════════════════════
        #1 BDP_Chip_Test_MeleeA — 近战武器芯片A（Cut双连击）
-       验证：WeaponChipEffect + tools注入 + meleeBurstCount + activationCost
+       验证：VerbChipEffect + tools注入 + meleeBurstCount + activationCost
        ══════════════════════════════════════════════════════ -->
   <ThingDef>
     <defName>BDP_Chip_Test_MeleeA</defName>
@@ -21,7 +21,7 @@
     </statBases>
     <comps>
       <li Class="BDP.Trigger.CompProperties_TriggerChip">
-        <chipEffectClass>BDP.Trigger.WeaponChipEffect</chipEffectClass>
+        <chipEffectClass>BDP.Trigger.VerbChipEffect</chipEffectClass>
         <activationCost>5</activationCost>
         <allocationCost>5</allocationCost>
         <activationWarmup>48</activationWarmup>
@@ -38,7 +38,7 @@
       </li>
     </comps>
     <modExtensions>
-      <li Class="BDP.Trigger.WeaponChipConfig">
+      <li Class="BDP.Trigger.VerbChipConfig">
         <meleeBurstCount>2</meleeBurstCount>
         <meleeBurstInterval>6</meleeBurstInterval>
         <!-- T36：近战Tool配置存放在DefModExtension中，不放ThingDef.tools -->
@@ -56,7 +56,7 @@
 
   <!-- ══════════════════════════════════════════════════════
        #2 BDP_Chip_Test_MeleeB — 近战武器芯片B（Blunt单击）
-       验证：WeaponChipEffect + Blunt伤害 + 单击 + 与MeleeA双武器组合
+       验证：VerbChipEffect + Blunt伤害 + 单击 + 与MeleeA双武器组合
        ══════════════════════════════════════════════════════ -->
   <ThingDef>
     <defName>BDP_Chip_Test_MeleeB</defName>
@@ -74,7 +74,7 @@
     </statBases>
     <comps>
       <li Class="BDP.Trigger.CompProperties_TriggerChip">
-        <chipEffectClass>BDP.Trigger.WeaponChipEffect</chipEffectClass>
+        <chipEffectClass>BDP.Trigger.VerbChipEffect</chipEffectClass>
         <activationCost>3</activationCost>
         <allocationCost>8</allocationCost>
         <activationWarmup>48</activationWarmup>
@@ -91,7 +91,7 @@
       </li>
     </comps>
     <modExtensions>
-      <li Class="BDP.Trigger.WeaponChipConfig">
+      <li Class="BDP.Trigger.VerbChipConfig">
         <meleeBurstCount>1</meleeBurstCount>
         <meleeBurstInterval>3</meleeBurstInterval>
         <!-- T36：近战Tool配置存放在DefModExtension中，不放ThingDef.tools -->
@@ -127,7 +127,7 @@
     </statBases>
     <comps>
       <li Class="BDP.Trigger.CompProperties_TriggerChip">
-        <chipEffectClass>BDP.Trigger.WeaponChipEffect</chipEffectClass>
+        <chipEffectClass>BDP.Trigger.VerbChipEffect</chipEffectClass>
         <activationCost>3</activationCost>
         <allocationCost>10</allocationCost>
         <activationWarmup>48</activationWarmup>
@@ -144,10 +144,10 @@
           <li>Explosive</li>
         </categories>
       </li>
-      <li Class="BDP.Trigger.CompProperties_FireMode"/>
+      <li Class="BDP.FireMode.CompProperties_FireMode"/>
     </comps>
     <modExtensions>
-      <li Class="BDP.Trigger.WeaponChipConfig">
+      <li Class="BDP.Trigger.VerbChipConfig">
         <volleySpreadRadius>0.3</volleySpreadRadius>
         <trionCostPerShot>1</trionCostPerShot>
         <!-- T36：远程Verb配置存放在DefModExtension中 -->
@@ -198,7 +198,7 @@
     </statBases>
     <comps>
       <li Class="BDP.Trigger.CompProperties_TriggerChip">
-        <chipEffectClass>BDP.Trigger.WeaponChipEffect</chipEffectClass>
+        <chipEffectClass>BDP.Trigger.VerbChipEffect</chipEffectClass>
         <allocationCost>15</allocationCost>
         <minOutputPower>5</minOutputPower>
         <activationWarmup>48</activationWarmup>
@@ -216,10 +216,10 @@
           <li>HighCost</li>
         </categories>
       </li>
-      <li Class="BDP.Trigger.CompProperties_FireMode"/>
+      <li Class="BDP.FireMode.CompProperties_FireMode"/>
     </comps>
     <modExtensions>
-      <li Class="BDP.Trigger.WeaponChipConfig">
+      <li Class="BDP.Trigger.VerbChipConfig">
         <volleySpreadRadius>0.3</volleySpreadRadius>
         <supportsGuided>true</supportsGuided>
         <maxAnchors>3</maxAnchors>
@@ -272,7 +272,7 @@
     </statBases>
     <comps>
       <li Class="BDP.Trigger.CompProperties_TriggerChip">
-        <chipEffectClass>BDP.Trigger.WeaponChipEffect</chipEffectClass>
+        <chipEffectClass>BDP.Trigger.VerbChipEffect</chipEffectClass>
         <activationCost>4</activationCost>
         <allocationCost>8</allocationCost>
         <activationWarmup>48</activationWarmup>
@@ -289,10 +289,10 @@
           <li>Tracking</li>
         </categories>
       </li>
-      <li Class="BDP.Trigger.CompProperties_FireMode"/>
+      <li Class="BDP.FireMode.CompProperties_FireMode"/>
     </comps>
     <modExtensions>
-      <li Class="BDP.Trigger.WeaponChipConfig">
+      <li Class="BDP.Trigger.VerbChipConfig">
         <volleySpreadRadius>0.3</volleySpreadRadius>
         <trionCostPerShot>1</trionCostPerShot>
         <!-- T36：远程Verb配置存放在DefModExtension中 -->
@@ -325,7 +325,7 @@
 
   <!-- ══════════════════════════════════════════════════════
        #6 BDP_Chip_Test_Shield — 护盾芯片（双手锁定）
-       验证：ShieldChipEffect + isDualHand + shieldHediffDef
+       验证：HediffChipEffect + isDualHand + hediffDef
        （原#5，因插入RangedC后顺延）
        ══════════════════════════════════════════════════════ -->
   <ThingDef>
@@ -344,7 +344,7 @@
     </statBases>
     <comps>
       <li Class="BDP.Trigger.CompProperties_TriggerChip">
-        <chipEffectClass>BDP.Trigger.ShieldChipEffect</chipEffectClass>
+        <chipEffectClass>BDP.Trigger.HediffChipEffect</chipEffectClass>
         <activationCost>10</activationCost>
         <allocationCost>20</allocationCost>
         <isDualHand>true</isDualHand>
@@ -359,15 +359,15 @@
       </li>
     </comps>
     <modExtensions>
-      <li Class="BDP.Trigger.ShieldChipConfig">
-        <shieldHediffDef>BDP_Hediff_TestShield</shieldHediffDef>
+      <li Class="BDP.Trigger.HediffChipConfig">
+        <hediffDef>BDP_Hediff_TestShield</hediffDef>
       </li>
     </modExtensions>
   </ThingDef>
 
   <!-- ══════════════════════════════════════════════════════
        #7 BDP_Chip_Test_Stealth — 隐身芯片（辅助类，Ability入口+Hediff实现）
-       验证：UtilityChipEffect + drainPerDay + exclusionTags + GiveHediff Ability
+       验证：AbilityChipEffect + drainPerDay + exclusionTags + GiveHediff Ability
        ══════════════════════════════════════════════════════ -->
   <ThingDef>
     <defName>BDP_Chip_Test_Stealth</defName>
@@ -385,7 +385,7 @@
     </statBases>
     <comps>
       <li Class="BDP.Trigger.CompProperties_TriggerChip">
-        <chipEffectClass>BDP.Trigger.UtilityChipEffect</chipEffectClass>
+        <chipEffectClass>BDP.Trigger.AbilityChipEffect</chipEffectClass>
         <activationCost>3</activationCost>
         <allocationCost>12</allocationCost>
         <drainPerDay>10</drainPerDay>
@@ -403,7 +403,7 @@
       </li>
     </comps>
     <modExtensions>
-      <li Class="BDP.Trigger.UtilityChipConfig">
+      <li Class="BDP.Trigger.AbilityChipConfig">
         <abilityDef>BDP_Ability_TestStealth</abilityDef>
       </li>
     </modExtensions>
@@ -411,7 +411,7 @@
 
   <!-- ══════════════════════════════════════════════════════
        #8 BDP_Chip_Test_Utility — 辅助芯片（跳跃Ability）
-       验证：UtilityChipEffect + abilityDef + CompAbilityEffect_TrionCost
+       验证：AbilityChipEffect + abilityDef + CompAbilityEffect_TrionCost
        ══════════════════════════════════════════════════════ -->
   <ThingDef>
     <defName>BDP_Chip_Test_Utility</defName>
@@ -429,7 +429,7 @@
     </statBases>
     <comps>
       <li Class="BDP.Trigger.CompProperties_TriggerChip">
-        <chipEffectClass>BDP.Trigger.UtilityChipEffect</chipEffectClass>
+        <chipEffectClass>BDP.Trigger.AbilityChipEffect</chipEffectClass>
         <activationCost>2</activationCost>
         <allocationCost>5</allocationCost>
         <activationWarmup>48</activationWarmup>
@@ -442,7 +442,7 @@
       </li>
     </comps>
     <modExtensions>
-      <li Class="BDP.Trigger.UtilityChipConfig">
+      <li Class="BDP.Trigger.AbilityChipConfig">
         <abilityDef>BDP_Ability_TestJump</abilityDef>
       </li>
     </modExtensions>
@@ -469,7 +469,7 @@
     </statBases>
     <comps>
       <li Class="BDP.Trigger.CompProperties_TriggerChip">
-        <chipEffectClass>BDP.Combat.EmergencyEscapeChipEffect</chipEffectClass>
+        <chipEffectClass>BDP.Combat.PassiveChipEffect</chipEffectClass>
         <slotRestriction>SpecialOnly</slotRestriction>
         <activationCost>0</activationCost>
         <allocationCost>200</allocationCost>
