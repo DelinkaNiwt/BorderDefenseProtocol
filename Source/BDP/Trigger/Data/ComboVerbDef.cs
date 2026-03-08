@@ -37,18 +37,6 @@ namespace BDP.Trigger
         public Type secondaryVerbClass = null;
 
         // ═══════════════════════════════════════════════════════
-        // 废弃字段（保留用于向后兼容）
-        // ═══════════════════════════════════════════════════════
-
-        /// <summary>
-        /// [已废弃] 是否支持齐射模式（右键触发）。
-        /// 请使用 secondaryVerbClass 替代。
-        /// 保留用于向后兼容：如果secondaryVerbClass为null且此字段为true，则自动创建齐射verb。
-        /// </summary>
-        [Obsolete("Use secondaryVerbClass instead")]
-        public bool supportsVolley = true;
-
-        // ═══════════════════════════════════════════════════════
         // 特殊机制配置
         // ═══════════════════════════════════════════════════════
 
