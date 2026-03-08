@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 
-namespace BDP.Trigger
+namespace BDP.Projectiles
 {
     /// <summary>
     /// 路径点构建工具——纯计算，无副作用，不依赖任何模块或宿主。

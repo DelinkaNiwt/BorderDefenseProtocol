@@ -1,9 +1,10 @@
+using BDP.Projectiles;
 using HarmonyLib;
 using RimWorld;
 using UnityEngine;
 using Verse;
 
-namespace BDP.Trigger
+namespace BDP.FireMode.Patches
 {
     /// <summary>
     /// FireMode Harmony Patch 集合（v9.1 根本修复）。

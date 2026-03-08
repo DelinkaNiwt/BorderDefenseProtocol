@@ -2,7 +2,7 @@ using System.Linq;
 using UnityEngine;
 using Verse;
 
-namespace BDP.Trigger
+namespace BDP.FireMode
 {
     /// <summary>
     /// 射击模式Gizmo（v9.0 FireMode系统）。

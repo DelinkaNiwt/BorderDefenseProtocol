@@ -1,6 +1,6 @@
 using Verse;
 
-namespace BDP.Trigger
+namespace BDP.Projectiles.Config
 {
     /// <summary>追踪模块转向模式。</summary>
     public enum TrackingTurnMode

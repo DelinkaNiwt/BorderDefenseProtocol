@@ -7,9 +7,28 @@ namespace BDP.Trigger
 {
     /// <summary>
     /// CompTriggerBody字段声明（partial class）
+    /// v13.1：添加静态构造函数订阅伤害事件
     /// </summary>
+    [StaticConstructorOnStartup]
     public partial class CompTriggerBody
     {
+        // 静态构造函数：订阅全局伤害事件（v13.1）
+        static CompTriggerBody()
+        {
+            BDPEvents.OnDamageReceived += OnDamageReceivedGlobal;
+        }
+
+        /// <summary>
+        /// 全局伤害事件处理器（静态，v13.1）
+        /// </summary>
+        private static void OnDamageReceivedGlobal(DamageReceivedEventArgs args)
+        {
+            if (args?.Pawn?.equipment?.Primary == null) return;
+
+            // 查找触发体Comp
+            var triggerComp = args.Pawn.equipment.Primary.GetComp<CompTriggerBody>();
+            triggerComp?.CheckHandIntegrity(args.Pawn);
+        }
         // ── 槽位数据（v2.0：mainSlots/subSlots → leftHandSlots/rightHandSlots） ──
         private List<ChipSlot> leftHandSlots;
         private List<ChipSlot> rightHandSlots;
@@ -24,7 +43,7 @@ namespace BDP.Trigger
         private ChipSlot dualHandLockSlot;
 
         // ── 按侧Verb存储（v2.0 T24：替代单一ActiveVerbProperties/ActiveTools） ──
-        // 由WeaponChipEffect通过SetSideVerbs设置，DualVerbCompositor合成最终结果
+        // 由VerbChipEffect通过SetSideVerbs设置，DualVerbCompositor合成最终结果
         private List<VerbProperties> leftHandActiveVerbProps;
         private List<Tool> leftHandActiveTools;
         private List<VerbProperties> rightHandActiveVerbProps;
@@ -55,6 +74,20 @@ namespace BDP.Trigger
         /// </summary>
         private List<Verb> savedChipVerbs;
 
+        // ── v14.0新增：ProxyVerb自动攻击支持 ──
+
+        /// <summary>
+        /// 代理Verb实例（v14.0自动攻击）。
+        /// 不序列化，RebuildVerbs时重建。供Patch_Pawn_TryGetAttackVerb读取。
+        /// </summary>
+        private Verb_BDPProxy proxyVerb;
+
+        /// <summary>
+        /// 上次芯片Verb tick的游戏tick（v14.0）。
+        /// 防止同一tick内double-tick（JobDriver手动tick + Patch_VerbTracker_VerbsTick）。
+        /// </summary>
+        private int lastChipVerbTickedTick = -1;
+
         /// <summary>
         /// 已授予的组合能力列表（v10.0）。
         /// 用于跟踪当前激活的组合技能力，在芯片切换时撤销。
@@ -63,7 +96,7 @@ namespace BDP.Trigger
 
         /// <summary>
         /// 当前正在激活/关闭的槽位侧别（临时上下文）。
-        /// 在DoActivate/DeactivateSlot中设置，供WeaponChipEffect等效果类读取自己所在侧。
+        /// 在DoActivate/DeactivateSlot中设置，供VerbChipEffect等效果类读取自己所在侧。
         /// 调用effect.Activate/Deactivate前设置，调用后清除。
         /// </summary>
         internal SlotSide? ActivatingSide { get; private set; }

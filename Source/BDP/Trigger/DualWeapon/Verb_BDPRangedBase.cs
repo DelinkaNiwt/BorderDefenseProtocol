@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using BDP.Core;
+using BDP.Projectiles;
+using BDP.FireMode;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -23,6 +25,15 @@ namespace BDP.Trigger
     /// </summary>
     public abstract class Verb_BDPRangedBase : Verb_Shoot
     {
+        // ── 芯片侧别标识（创建时设置，运行时直接查找） ──
+
+        /// <summary>
+        /// 此Verb所属的芯片侧别（创建时设置）。
+        /// 单侧Verb: LeftHand/RightHand。双侧/组合技Verb: null。
+        /// 无需序列化——RebuildVerbs在读档时重新设置。
+        /// </summary>
+        internal SlotSide? chipSide;
+
         // ── Fix-5：CompTriggerBody缓存（避免每发子弹多次TryGetComp线性搜索） ──
         private CompTriggerBody cachedTriggerComp;
         private Pawn cachedTriggerPawn;
@@ -111,7 +122,7 @@ namespace BDP.Trigger
         /// 自动绕行判定用的投射物Def。默认取当前芯片的首个投射物，子类可按双侧规则重写。
         /// </summary>
         protected virtual ThingDef GetAutoRouteProjectileDef()
-            => GetChipConfig()?.GetFirstProjectileDef() ?? Projectile;
+            => GetChipConfig()?.GetPrimaryProjectileDef() ?? Projectile;
 
         /// <summary>
         /// 复制Verb_LaunchProjectile.TryCastShot() + Verb_Shoot.TryCastShot()逻辑，
@@ -261,7 +272,7 @@ namespace BDP.Trigger
                 gs.AttachManualFlight(proj);
             else
                 gs.AttachAutoRouteFlight(proj, gs.ResolveAutoRouteFinalTarget(currentTarget),
-                    GetChipConfig()?.anchorSpread ?? 0.3f);
+                    GetGuidedConfig()?.ranged?.guided?.anchorSpread ?? 0.3f);
         }
 
         // ── PMS重构：引导弹支持（从Verb_BDPGuided上提） ──
@@ -269,8 +280,16 @@ namespace BDP.Trigger
         /// <summary>引导弹共享状态（PMS重构：从子类上提到基类）。</summary>
         protected readonly VerbFlightState gs = new VerbFlightState();
 
+        /// <summary>
+        /// 获取引导弹相关的芯片配置。
+        /// 单侧Verb：返回GetChipConfig()。
+        /// 双侧Verb：子类重写，查找支持引导的那一侧的config。
+        /// 用于SupportsGuided、StartAnchorTargeting、OnProjectileLaunched。
+        /// </summary>
+        protected virtual VerbChipConfig GetGuidedConfig() => GetChipConfig();
+
         /// <summary>当前芯片是否支持变化弹（引导飞行）。</summary>
-        public virtual bool SupportsGuided => GetChipConfig()?.supportsGuided == true;
+        public virtual bool SupportsGuided => GetGuidedConfig()?.ranged?.guided != null;
 
         /// <summary>
         /// 启动多步锚点瞄准（由Command_BDPChipAttack.GizmoOnGUIInt调用）。
@@ -278,18 +297,18 @@ namespace BDP.Trigger
         /// </summary>
         public virtual void StartAnchorTargeting()
         {
-            var cfg = GetChipConfig();
-            if (cfg == null || !cfg.supportsGuided)
+            var cfg = GetGuidedConfig();
+            if (cfg?.ranged?.guided == null)
             {
                 Find.Targeter.BeginTargeting(this);
                 return;
             }
 
             AnchorTargetingHelper.BeginAnchorTargeting(
-                this, CasterPawn, cfg.maxAnchors, verbProps.range,
+                this, CasterPawn, cfg.ranged.guided.maxAnchors, verbProps.range,
                 (anchors, finalTarget) =>
                 {
-                    gs.StoreTargetingResult(anchors, finalTarget, cfg.anchorSpread);
+                    gs.StoreTargetingResult(anchors, finalTarget, cfg.ranged.guided.anchorSpread);
                     // 直接调用OrderForceTargetCore创建BDP_ChipRangedAttack job，
                     // 而非BaseOrderForceTarget（原版Verb.OrderForceTarget创建的标准Job
                     // 无法驱动脱离VerbTracker的芯片Verb）
@@ -359,66 +378,37 @@ namespace BDP.Trigger
         }
 
         /// <summary>
-        /// 通过侧别label定位当前芯片Thing（Fix-14：从Verb_BDPShoot/Verb_BDPVolley提升到基类）。
-        /// 三级回退：侧别label精确定位 → ActivatingSlot → 遍历所有激活槽位。
+        /// 通过chipSide定位当前芯片Thing。
+        /// chipSide由创建时设置，运行时直接按侧别查找。
         /// </summary>
         protected Thing GetCurrentChipThing(CompTriggerBody triggerComp)
         {
             if (triggerComp == null) return null;
 
-            // 优先通过侧别label精确定位芯片（独立Gizmo场景）
-            SlotSide? side = DualVerbCompositor.ParseSideLabel(verbProps?.label);
-            if (side.HasValue)
-            {
-                var sideSlot = triggerComp.GetActiveSlot(side.Value);
-                if (sideSlot?.loadedChip != null) return sideSlot.loadedChip;
-            }
+            // chipSide已设置：按侧别精确查找
+            if (chipSide.HasValue)
+                return triggerComp.GetActiveSlot(chipSide.Value)?.loadedChip;
 
-            // 回退：从ActivatingSlot读取（芯片激活上下文）
-            var slot = triggerComp.ActivatingSlot;
-            if (slot?.loadedChip != null) return slot.loadedChip;
-
-            // 最终回退：遍历所有激活槽位找第一个有WeaponChipConfig的
-            foreach (var activeSlot in triggerComp.AllActiveSlots())
-            {
-                if (activeSlot.loadedChip?.def?.GetModExtension<WeaponChipConfig>() != null)
-                    return activeSlot.loadedChip;
-            }
+            // chipSide为null：双侧/组合技Verb，由子类各自处理
             return null;
         }
 
         /// <summary>
-        /// 从芯片配置读取WeaponChipConfig（三级回退策略）。
-        /// 供引导弹判断（SupportsGuided）和参数读取共用。
+        /// 通过chipSide定位当前芯片的VerbChipConfig。
+        /// chipSide由创建时设置，运行时直接按侧别查找。
+        /// chipSide为null时返回null（双侧/组合技Verb由子类各自处理）。
         /// </summary>
-        protected WeaponChipConfig GetChipConfig()
+        protected VerbChipConfig GetChipConfig()
         {
-            var pawn = CasterPawn;
-            if (pawn == null) return null;
             var triggerComp = GetTriggerComp();
             if (triggerComp == null) return null;
 
-            // 优先通过侧别label精确定位
-            SlotSide? side = DualVerbCompositor.ParseSideLabel(verbProps?.label);
-            if (side.HasValue)
-            {
-                var sideSlot = triggerComp.GetActiveSlot(side.Value);
-                var cfg = sideSlot?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
-                if (cfg != null) return cfg;
-            }
-            // 回退：ActivatingSlot
-            var slot = triggerComp.ActivatingSlot;
-            if (slot?.loadedChip != null)
-            {
-                var cfg = slot.loadedChip.def.GetModExtension<WeaponChipConfig>();
-                if (cfg != null) return cfg;
-            }
-            // 最终回退：遍历
-            foreach (var activeSlot in triggerComp.AllActiveSlots())
-            {
-                var cfg = activeSlot.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
-                if (cfg != null) return cfg;
-            }
+            // chipSide已设置：按侧别精确查找
+            if (chipSide.HasValue)
+                return triggerComp.GetActiveSlot(chipSide.Value)
+                    ?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
+
+            // chipSide为null：双侧/组合技Verb
             return null;
         }
     }

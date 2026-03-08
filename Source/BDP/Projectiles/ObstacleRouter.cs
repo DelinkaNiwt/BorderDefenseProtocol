@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using BDP.Projectiles.Modules;
 using UnityEngine;
 using Verse;
 
-namespace BDP.Trigger
+namespace BDP.Projectiles
 {
     /// <summary>
     /// 障碍物自动绕行路由结果。

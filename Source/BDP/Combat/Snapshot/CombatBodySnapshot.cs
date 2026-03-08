@@ -54,6 +54,12 @@ namespace BDP.Combat.Snapshot
         public ThingOwner<Apparel> OriginalApparelContainer => originalApparelContainer;
         public ThingOwner<Thing> OriginalInventoryContainer => originalInventoryContainer;
 
+        /// <summary>
+        /// 获取Hediff快照列表（只读）。
+        /// 用于外部检查hediff是否在快照中。
+        /// </summary>
+        public IReadOnlyList<HediffRecord> GetHediffSnapshots() => hediffSnapshots;
+
         // ── IThingHolder 接口 ──
         public IThingHolder ParentHolder => pawn;
 

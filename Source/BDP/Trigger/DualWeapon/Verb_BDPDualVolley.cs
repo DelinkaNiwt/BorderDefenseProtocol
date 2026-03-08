@@ -6,74 +6,41 @@ using Verse;
 namespace BDP.Trigger
 {
     /// <summary>
-    /// 双侧齐射Verb（v6.1新增，v8.0 PMS重构）。
+    /// 双侧齐射Verb（v6.1新增，v8.0 PMS重构，v11.0更新为VerbChipConfig）。
     /// 在单次TryCastShot()中发射两侧所有子弹。
+    /// 支持引导模块：只有带引导模块的一侧才能使用手动引导路径。
     /// </summary>
     public class Verb_BDPDualVolley : Verb_BDPRangedBase
     {
-        /// <summary>任一侧是否支持变化弹。</summary>
-        public bool HasGuidedSide
+        /// <summary>查找两侧中支持引导的芯片配置。</summary>
+        protected override VerbChipConfig GetGuidedConfig()
         {
-            get
-            {
-                var tc = GetTriggerComp();
-                if (tc == null) return false;
-                var lc = tc.GetActiveSlot(SlotSide.LeftHand)?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
-                var rc = tc.GetActiveSlot(SlotSide.RightHand)?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
-                return (lc?.supportsGuided == true) || (rc?.supportsGuided == true);
-            }
-        }
-
-        /// <summary>双侧引导瞄准。</summary>
-        public override void StartAnchorTargeting()
-        {
-            var tc = GetTriggerComp();
-            if (tc == null) { Find.Targeter.BeginTargeting(this); return; }
-            var lc = tc.GetActiveSlot(SlotSide.LeftHand)?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
-            var rc = tc.GetActiveSlot(SlotSide.RightHand)?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
-            WeaponChipConfig gc = (lc?.supportsGuided == true) ? lc : (rc?.supportsGuided == true) ? rc : null;
-            if (gc == null) { Find.Targeter.BeginTargeting(this); return; }
-            AnchorTargetingHelper.BeginAnchorTargeting(this, CasterPawn, gc.maxAnchors, verbProps.range,
-                (anchors, finalTarget) =>
-                {
-                    gs.StoreTargetingResult(anchors, finalTarget, gc.anchorSpread);
-                    gs.LeftHasPath = lc?.supportsGuided == true;
-                    gs.RightHasPath = rc?.supportsGuided == true;
-                    OrderForceTargetCore(finalTarget);
-                });
-        }
-
-        public override void OrderForceTarget(LocalTargetInfo target)
-        {
-            if (HasGuidedSide) { StartAnchorTargeting(); return; }
-            gs.ManualAnchorsActive = false;
-            OrderForceTargetCore(target);
-        }
-
-        public override bool TryStartCastOn(LocalTargetInfo castTarg, LocalTargetInfo destTarg,
-            bool surpriseAttack = false, bool canHitNonTargetPawns = true,
-            bool preventFriendlyFire = false, bool nonInterruptingSelfCast = false)
-        {
-            LocalTargetInfo actualTarget = gs.InterceptDualCastTarget(ref castTarg, caster.Position, caster.Map);
-            bool result = base.TryStartCastOn(castTarg, destTarg, surpriseAttack, canHitNonTargetPawns, preventFriendlyFire, nonInterruptingSelfCast);
-            if (result) gs.PostDualCastOn(ref currentTarget, actualTarget);
-            return result;
+            var triggerComp = GetTriggerComp();
+            if (triggerComp == null) return null;
+            var leftCfg = triggerComp.GetActiveSlot(SlotSide.LeftHand)
+                ?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
+            var rightCfg = triggerComp.GetActiveSlot(SlotSide.RightHand)
+                ?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
+            // 优先返回左侧，如果左侧不支持则返回右侧
+            if (leftCfg?.supportsGuided == true) return leftCfg;
+            if (rightCfg?.supportsGuided == true) return rightCfg;
+            return null;
         }
 
         protected override ThingDef GetAutoRouteProjectileDef()
         {
             var tc = GetTriggerComp();
-            var leftCfg = tc?.GetActiveSlot(SlotSide.LeftHand)?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
-            var rightCfg = tc?.GetActiveSlot(SlotSide.RightHand)?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
+            var leftCfg = tc?.GetActiveSlot(SlotSide.LeftHand)?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
+            var rightCfg = tc?.GetActiveSlot(SlotSide.RightHand)?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
 
-            // 自动绕行只对引导弹有意义：优先返回支持引导的一侧弹药。
+            // 自动绕行只对引导弹有意义：优先返回支持引导的一侧弹药
             if (leftCfg?.supportsGuided == true)
-                return leftCfg.GetFirstProjectileDef() ?? base.GetAutoRouteProjectileDef();
+                return leftCfg.GetPrimaryProjectileDef() ?? base.GetAutoRouteProjectileDef();
             if (rightCfg?.supportsGuided == true)
-                return rightCfg.GetFirstProjectileDef() ?? base.GetAutoRouteProjectileDef();
+                return rightCfg.GetPrimaryProjectileDef() ?? base.GetAutoRouteProjectileDef();
 
-            return leftCfg?.GetFirstProjectileDef()
-                ?? rightCfg?.GetFirstProjectileDef()
+            return leftCfg?.GetPrimaryProjectileDef()
+                ?? rightCfg?.GetPrimaryProjectileDef()
                 ?? base.GetAutoRouteProjectileDef();
         }
 
@@ -88,7 +55,18 @@ namespace BDP.Trigger
                 gs.AttachManualFlight(proj);
             else
                 gs.AttachAutoRouteFlight(proj, gs.ResolveAutoRouteFinalTarget(currentTarget),
-                    GetChipConfig()?.anchorSpread ?? 0.3f);
+                    GetGuidedConfig()?.anchorSpread ?? 0.3f);
+        }
+
+        public override bool TryStartCastOn(LocalTargetInfo castTarg, LocalTargetInfo destTarg,
+            bool surpriseAttack = false, bool canHitNonTargetPawns = true,
+            bool preventFriendlyFire = false, bool nonInterruptingSelfCast = false)
+        {
+            gs.ResetAutoRouteCastState();
+            LocalTargetInfo actualTarget = gs.InterceptDualCastTarget(ref castTarg, caster.Position, caster.Map);
+            bool result = base.TryStartCastOn(castTarg, destTarg, surpriseAttack, canHitNonTargetPawns, preventFriendlyFire, nonInterruptingSelfCast);
+            if (result) gs.PostDualCastOn(ref currentTarget, actualTarget);
+            return result;
         }
 
         protected override bool TryCastShot()
@@ -100,22 +78,27 @@ namespace BDP.Trigger
             var leftSlot = triggerComp.GetActiveSlot(SlotSide.LeftHand);
             var rightSlot = triggerComp.GetActiveSlot(SlotSide.RightHand);
             if (leftSlot?.loadedChip == null || rightSlot?.loadedChip == null) return false;
-            var leftCfg = leftSlot.loadedChip.def.GetModExtension<WeaponChipConfig>();
-            var rightCfg = rightSlot.loadedChip.def.GetModExtension<WeaponChipConfig>();
+            var leftCfg = leftSlot.loadedChip.def.GetModExtension<VerbChipConfig>();
+            var rightCfg = rightSlot.loadedChip.def.GetModExtension<VerbChipConfig>();
             if (leftCfg == null || rightCfg == null) return false;
 
-            int leftCount = leftCfg.GetFirstBurstCount();
-            int rightCount = rightCfg.GetFirstBurstCount();
-            // v9.0 FireMode：连射数注入
+            int leftCount = leftCfg.GetPrimaryBurstCount();
+            int rightCount = rightCfg.GetPrimaryBurstCount();
             var leftFm  = GetFireMode(leftSlot.loadedChip);
             var rightFm = GetFireMode(rightSlot.loadedChip);
             if (leftFm  != null) leftCount  = leftFm.GetEffectiveBurst(leftCount);
             if (rightFm != null) rightCount = rightFm.GetEffectiveBurst(rightCount);
-            ThingDef leftProj = leftCfg.GetFirstProjectileDef();
-            ThingDef rightProj = rightCfg.GetFirstProjectileDef();
+            ThingDef leftProj = leftCfg.GetPrimaryProjectileDef();
+            ThingDef rightProj = rightCfg.GetPrimaryProjectileDef();
 
-            if (gs.ManualAnchorsActive) { gs.LeftHasPath = leftCfg.supportsGuided; gs.RightHasPath = rightCfg.supportsGuided; }
+            // 引导模块支持：标记哪一侧有引导路径
+            if (gs.ManualAnchorsActive)
+            {
+                gs.LeftHasPath = leftCfg.supportsGuided;
+                gs.RightHasPath = rightCfg.supportsGuided;
+            }
 
+            // 检查LOS：引导模式下，非引导侧需要直视LOS才能发射
             bool hasDirectLos = !gs.ManualAnchorsActive || GenSight.LineOfSight(caster.Position,
                 gs.SavedThingTarget.IsValid ? gs.SavedThingTarget.Cell : currentTarget.Cell, caster.Map);
             bool leftWillFire = !gs.ManualAnchorsActive || gs.LeftHasPath || hasDirectLos;
@@ -130,36 +113,41 @@ namespace BDP.Trigger
             ThingDef originalProjectile = verbProps.defaultProjectile;
             float spread = Mathf.Max(leftCfg.volleySpreadRadius, rightCfg.volleySpreadRadius);
 
-            // ★ 自动绕行：齐射前计算路由（用左侧弹药检查GuidedModule）
-            gs.PrepareAutoRoute(caster.Position, currentTarget.Cell,
-                caster.Map, leftProj);
+            gs.PrepareAutoRoute(caster.Position, currentTarget.Cell, caster.Map, leftProj);
 
             try
             {
+                // 左侧齐射
                 if (leftWillFire)
                 {
                     gs.CurrentShotHasPath = gs.ManualAnchorsActive && gs.LeftHasPath;
                     if (leftProj != null) verbProps.defaultProjectile = leftProj;
                     bool needRestoreL = gs.ManualAnchorsActive && !gs.CurrentShotHasPath && gs.SavedThingTarget.IsValid;
                     if (needRestoreL) currentTarget = gs.SavedThingTarget;
+
                     for (int i = 0; i < leftCount; i++)
                     {
                         if (spread > 0f) shotOriginOffset = new Vector3(Rand.Range(-spread, spread), 0f, Rand.Range(-spread, spread));
                         if (TryCastShotCore(leftSlot.loadedChip)) anyHit = true;
                     }
+
                     if (needRestoreL) currentTarget = new LocalTargetInfo(gs.ManualTargetCell);
                 }
+
+                // 右侧齐射
                 if (rightWillFire)
                 {
                     gs.CurrentShotHasPath = gs.ManualAnchorsActive && gs.RightHasPath;
                     if (rightProj != null) verbProps.defaultProjectile = rightProj;
                     bool needRestoreR = gs.ManualAnchorsActive && !gs.CurrentShotHasPath && gs.SavedThingTarget.IsValid;
                     if (needRestoreR) currentTarget = gs.SavedThingTarget;
+
                     for (int i = 0; i < rightCount; i++)
                     {
                         if (spread > 0f) shotOriginOffset = new Vector3(Rand.Range(-spread, spread), 0f, Rand.Range(-spread, spread));
                         if (TryCastShotCore(rightSlot.loadedChip)) anyHit = true;
                     }
+
                     if (needRestoreR) currentTarget = new LocalTargetInfo(gs.ManualTargetCell);
                 }
             }
@@ -169,6 +157,7 @@ namespace BDP.Trigger
                 shotOriginOffset = Vector3.zero;
                 gs.CurrentShotHasPath = false;
             }
+
             if (anyHit && totalCost > 0f) trion?.Consume(totalCost);
             return anyHit;
         }

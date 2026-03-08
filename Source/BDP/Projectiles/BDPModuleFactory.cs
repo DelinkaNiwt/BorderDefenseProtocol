@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using BDP.Projectiles.Modules;
+using BDP.Projectiles.Config;
 using Verse;
 
-namespace BDP.Trigger
+namespace BDP.Projectiles
 {
     /// <summary>
     /// 模块工厂——根据ThingDef上的DefModExtension自动创建对应模块实例。

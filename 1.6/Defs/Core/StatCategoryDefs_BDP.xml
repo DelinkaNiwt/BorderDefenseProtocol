@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 芯片信息StatCategory -->
+  <StatCategoryDef>
+    <defName>BDP_ChipInfo</defName>
+    <label>芯片信息</label>
+    <displayOrder>2050</displayOrder>
+  </StatCategoryDef>
+
+  <!-- 触发器配置StatCategory -->
+  <StatCategoryDef>
+    <defName>BDP_TriggerConfig</defName>
+    <label>触发器配置</label>
+    <displayOrder>40</displayOrder>  <!-- 低于Weapon_Ranged(44)，排在武器分类上面 -->
+  </StatCategoryDef>
+
+</Defs>

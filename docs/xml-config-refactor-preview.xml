@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  BDP模组XML配置重构预览
+  展示重构后的配置层次结构
+
+  重构目标：
+  1. 按功能域分组配置字段
+  2. 远程/近战配置清晰分离
+  3. 提高可读性和可维护性
+-->
+<Defs>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       示例1：远程芯片（齐射攻击）- 小行星
+       特点：普通弹 + 齐射散布
+       ══════════════════════════════════════════════════════════════ -->
+  <ThingDef ParentName="BDP_ChipBase">
+    <defName>BDP_Chip_Asteroid</defName>
+    <label>小行星</label>
+    <description>发射普通弹进行齐射攻击的远程芯片。</description>
+
+    <comps>
+      <li Class="BDP.Trigger.CompProperties_TriggerChip">
+        <chipEffectClass>BDP.Trigger.VerbChipEffect</chipEffectClass>
+        <slotRestriction>HandsOnly</slotRestriction>
+        <activationCost>12</activationCost>
+        <allocationCost>38</allocationCost>
+        <activationWarmup>30</activationWarmup>
+        <deactivationDelay>15</deactivationDelay>
+        <categories>
+          <li>Weapon</li>
+          <li>Ranged</li>
+          <li>Physical</li>
+        </categories>
+      </li>
+      <li Class="BDP.FireMode.CompProperties_FireMode"/>
+    </comps>
+
+    <modExtensions>
+      <!-- ═══════════════════════════════════════════════════════
+           VerbChipConfig - 重构后的嵌套结构
+           ═══════════════════════════════════════════════════════ -->
+      <li Class="BDP.Trigger.VerbChipConfig">
+
+        <!-- 主攻击Verb配置（核心，保持不变） -->
+        <primaryVerbProps>
+          <verbClass>BDP.Trigger.Verb_BDPVolley</verbClass>
+          <hasStandardCommand>true</hasStandardCommand>
+          <defaultProjectile>BDP_Bullet_Normal</defaultProjectile>
+          <warmupTime>1.0</warmupTime>
+          <range>40</range>
+          <burstShotCount>5</burstShotCount>
+          <ticksBetweenBurstShots>12</ticksBetweenBurstShots>
+          <soundCast>Shot_AssaultRifle</soundCast>
+          <defaultCooldownTime>2.0</defaultCooldownTime>
+          <accuracyTouch>0.55</accuracyTouch>
+          <accuracyShort>0.64</accuracyShort>
+          <accuracyMedium>0.55</accuracyMedium>
+          <accuracyLong>0.45</accuracyLong>
+        </primaryVerbProps>
+
+        <!-- 成本配置（分组） -->
+        <cost>
+          <trionPerShot>2</trionPerShot>
+        </cost>
+
+        <!-- 特殊机制配置（分组） -->
+        <special>
+          <!-- 齐射配置 -->
+          <volleySpreadRadius>0.3</volleySpreadRadius>
+
+          <!-- 引导配置（此芯片不支持） -->
+          <guided>
+            <enabled>false</enabled>
+          </guided>
+
+          <!-- 穿透配置 -->
+          <passthroughPower>0</passthroughPower>
+        </special>
+
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       示例2：远程芯片（引导齐射攻击）- 毒蛇
+       特点：引导弹 + 路径引导 + 齐射散布
+       ══════════════════════════════════════════════════════════════ -->
+  <ThingDef ParentName="BDP_ChipBase">
+    <defName>BDP_Chip_Viper</defName>
+    <label>毒蛇</label>
+    <description>发射引导弹进行齐射攻击的远程芯片。</description>
+
+    <comps>
+      <li Class="BDP.Trigger.CompProperties_TriggerChip">
+        <chipEffectClass>BDP.Trigger.VerbChipEffect</chipEffectClass>
+        <slotRestriction>HandsOnly</slotRestriction>
+        <activationCost>12</activationCost>
+        <allocationCost>38</allocationCost>
+        <activationWarmup>30</activationWarmup>
+        <deactivationDelay>15</deactivationDelay>
+        <categories>
+          <li>Weapon</li>
+          <li>Ranged</li>
+          <li>Guided</li>
+        </categories>
+      </li>
+      <li Class="BDP.FireMode.CompProperties_FireMode"/>
+    </comps>
+
+    <modExtensions>
+      <li Class="BDP.Trigger.VerbChipConfig">
+
+        <!-- 主攻击Verb配置 -->
+        <primaryVerbProps>
+          <verbClass>BDP.Trigger.Verb_BDPVolley</verbClass>
+          <hasStandardCommand>true</hasStandardCommand>
+          <defaultProjectile>BDP_Bullet_Guided</defaultProjectile>
+          <warmupTime>1.0</warmupTime>
+          <range>40</range>
+          <burstShotCount>5</burstShotCount>
+          <ticksBetweenBurstShots>12</ticksBetweenBurstShots>
+          <soundCast>Shot_AssaultRifle</soundCast>
+          <defaultCooldownTime>2.0</defaultCooldownTime>
+        </primaryVerbProps>
+
+        <!-- 成本配置 -->
+        <cost>
+          <trionPerShot>5</trionPerShot>
+        </cost>
+
+        <!-- 特殊机制配置 -->
+        <special>
+          <!-- 齐射配置 -->
+          <volleySpreadRadius>0.3</volleySpreadRadius>
+
+          <!-- 引导配置（此芯片支持） -->
+          <guided>
+            <enabled>true</enabled>
+            <maxAnchors>5</maxAnchors>
+            <anchorSpread>0.3</anchorSpread>
+          </guided>
+
+          <!-- 穿透配置 -->
+          <passthroughPower>0</passthroughPower>
+        </special>
+
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       示例3：近战芯片（单次攻击）
+       特点：单次近战攻击
+       ══════════════════════════════════════════════════════════════ -->
+  <ThingDef ParentName="BDP_ChipBase">
+    <defName>BDP_Chip_MeleeSingle</defName>
+    <label>近战芯片（单击）</label>
+    <description>单次近战攻击芯片。</description>
+
+    <comps>
+      <li Class="BDP.Trigger.CompProperties_TriggerChip">
+        <chipEffectClass>BDP.Trigger.VerbChipEffect</chipEffectClass>
+        <slotRestriction>HandsOnly</slotRestriction>
+        <activationCost>8</activationCost>
+        <allocationCost>25</allocationCost>
+        <activationWarmup>20</activationWarmup>
+        <deactivationDelay>10</deactivationDelay>
+        <categories>
+          <li>Weapon</li>
+          <li>Melee</li>
+        </categories>
+      </li>
+    </comps>
+
+    <modExtensions>
+      <li Class="BDP.Trigger.VerbChipConfig">
+
+        <!-- 近战芯片没有primaryVerbProps，通过tools自动合成 -->
+
+        <!-- 成本配置 -->
+        <cost>
+          <trionPerShot>3</trionPerShot>
+        </cost>
+
+        <!-- 近战配置（分组） -->
+        <melee>
+          <burstCount>1</burstCount>
+          <burstInterval>12</burstInterval>
+          <tools>
+            <li>
+              <label>刀刃</label>
+              <capacities>
+                <li>Cut</li>
+              </capacities>
+              <power>18</power>
+              <cooldownTime>1.5</cooldownTime>
+              <armorPenetration>0.25</armorPenetration>
+            </li>
+          </tools>
+        </melee>
+
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       示例4：近战芯片（连击攻击）
+       特点：3连击近战攻击
+       ══════════════════════════════════════════════════════════════ -->
+  <ThingDef ParentName="BDP_ChipBase">
+    <defName>BDP_Chip_MeleeBurst</defName>
+    <label>近战芯片（连击）</label>
+    <description>3连击近战攻击芯片。</description>
+
+    <comps>
+      <li Class="BDP.Trigger.CompProperties_TriggerChip">
+        <chipEffectClass>BDP.Trigger.VerbChipEffect</chipEffectClass>
+        <slotRestriction>HandsOnly</slotRestriction>
+        <activationCost>10</activationCost>
+        <allocationCost>30</allocationCost>
+        <activationWarmup>25</activationWarmup>
+        <deactivationDelay>12</deactivationDelay>
+        <categories>
+          <li>Weapon</li>
+          <li>Melee</li>
+          <li>Burst</li>
+        </categories>
+      </li>
+    </comps>
+
+    <modExtensions>
+      <li Class="BDP.Trigger.VerbChipConfig">
+
+        <!-- 成本配置 -->
+        <cost>
+          <trionPerShot>2</trionPerShot>
+        </cost>
+
+        <!-- 近战配置（分组） -->
+        <melee>
+          <burstCount>3</burstCount>
+          <burstInterval>10</burstInterval>
+          <tools>
+            <li>
+              <label>拳头</label>
+              <capacities>
+                <li>Blunt</li>
+              </capacities>
+              <power>12</power>
+              <cooldownTime>1.2</cooldownTime>
+              <armorPenetration>0.15</armorPenetration>
+            </li>
+          </tools>
+        </melee>
+
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       示例5：双模式芯片（远程主攻击 + 近战副攻击）
+       特点：主攻击远程射击，副攻击近战
+       ══════════════════════════════════════════════════════════════ -->
+  <ThingDef ParentName="BDP_ChipBase">
+    <defName>BDP_Chip_Hybrid</defName>
+    <label>混合芯片</label>
+    <description>主攻击远程射击，副攻击近战。</description>
+
+    <comps>
+      <li Class="BDP.Trigger.CompProperties_TriggerChip">
+        <chipEffectClass>BDP.Trigger.VerbChipEffect</chipEffectClass>
+        <slotRestriction>HandsOnly</slotRestriction>
+        <activationCost>15</activationCost>
+        <allocationCost>45</allocationCost>
+        <activationWarmup>35</activationWarmup>
+        <deactivationDelay>18</deactivationDelay>
+        <categories>
+          <li>Weapon</li>
+          <li>Ranged</li>
+          <li>Melee</li>
+          <li>Hybrid</li>
+        </categories>
+      </li>
+      <li Class="BDP.FireMode.CompProperties_FireMode"/>
+    </comps>
+
+    <modExtensions>
+      <li Class="BDP.Trigger.VerbChipConfig">
+
+        <!-- 主攻击：远程射击 -->
+        <primaryVerbProps>
+          <verbClass>BDP.Trigger.Verb_BDPShoot</verbClass>
+          <hasStandardCommand>true</hasStandardCommand>
+          <defaultProjectile>BDP_Bullet_Normal</defaultProjectile>
+          <warmupTime>0.8</warmupTime>
+          <range>35</range>
+          <burstShotCount>1</burstShotCount>
+          <soundCast>Shot_Pistol</soundCast>
+          <defaultCooldownTime>1.5</defaultCooldownTime>
+        </primaryVerbProps>
+
+        <!-- 副攻击：近战（通过secondaryVerbProps显式定义） -->
+        <secondaryVerbProps>
+          <verbClass>BDP.Trigger.Verb_BDPMelee</verbClass>
+          <meleeDamageDef>Cut</meleeDamageDef>
+          <meleeDamageBaseAmount>15</meleeDamageBaseAmount>
+          <defaultCooldownTime>1.3</defaultCooldownTime>
+        </secondaryVerbProps>
+
+        <!-- 成本配置 -->
+        <cost>
+          <trionPerShot>4</trionPerShot>
+        </cost>
+
+        <!-- 近战配置（用于副攻击） -->
+        <melee>
+          <burstCount>1</burstCount>
+          <tools>
+            <li>
+              <label>刺刀</label>
+              <capacities>
+                <li>Cut</li>
+              </capacities>
+              <power>15</power>
+              <cooldownTime>1.3</cooldownTime>
+            </li>
+          </tools>
+        </melee>
+
+        <!-- 特殊机制配置（用于主攻击） -->
+        <special>
+          <volleySpreadRadius>0</volleySpreadRadius>
+          <guided>
+            <enabled>false</enabled>
+          </guided>
+          <passthroughPower>0</passthroughPower>
+        </special>
+
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+</Defs>

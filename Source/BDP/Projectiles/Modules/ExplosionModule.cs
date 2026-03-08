@@ -1,7 +1,9 @@
+using BDP.Projectiles.Pipeline;
+using BDP.Projectiles.Config;
 using RimWorld;
 using Verse;
 
-namespace BDP.Trigger
+namespace BDP.Projectiles.Modules
 {
     /// <summary>
     /// 爆炸模块——在Impact时触发范围爆炸。

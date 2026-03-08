@@ -103,6 +103,11 @@ namespace BDP.Trigger
         /// Bug1修复：替代原EnsurePrimary，为单侧Verb列表标记侧别label并设isPrimary。
         /// 原因：无label的Verb在CreateAndCacheChipVerbs中被ParseSideLabel(null)→null
         ///       → 错误分配到dualAttackVerb → 单芯片场景无攻击Gizmo。
+        ///
+        /// Bug3修复：Verb_BDPVolley必须强制设置burstShotCount=1。
+        /// 原因：Verb_BDPVolley在TryCastShot内部循环发射所有子弹，
+        ///       如果burstShotCount>1，引擎会多次调用TryCastShot，
+        ///       导致发射数=burstShotCount × 实际齐射数。
         /// </summary>
         private static List<VerbProperties> TagSideAndEnsurePrimary(
             List<VerbProperties> verbs, string sideLabel)
@@ -115,6 +120,14 @@ namespace BDP.Trigger
                 copy.label = sideLabel;
                 copy.hasStandardCommand = false;
                 if (i == 0) copy.isPrimary = true;
+
+                // Bug3修复：Verb_BDPVolley必须强制设置burstShotCount=1
+                if (copy.verbClass == typeof(Verb_BDPVolley))
+                {
+                    copy.burstShotCount = 1;
+                    copy.ticksBetweenBurstShots = 0;
+                }
+
                 result.Add(copy);
             }
             return result;
@@ -219,6 +232,14 @@ namespace BDP.Trigger
                 copy.isPrimary = false;
                 copy.hasStandardCommand = false;
                 copy.label = SideLabel_LeftHand;
+
+                // Bug3修复：Verb_BDPVolley必须强制设置burstShotCount=1
+                if (copy.verbClass == typeof(Verb_BDPVolley))
+                {
+                    copy.burstShotCount = 1;
+                    copy.ticksBetweenBurstShots = 0;
+                }
+
                 result.Add(copy);
             }
 
@@ -231,6 +252,14 @@ namespace BDP.Trigger
                     copy.isPrimary = false;
                     copy.hasStandardCommand = false;
                     copy.label = SideLabel_RightHand;
+
+                    // Bug3修复：Verb_BDPVolley必须强制设置burstShotCount=1
+                    if (copy.verbClass == typeof(Verb_BDPVolley))
+                    {
+                        copy.burstShotCount = 1;
+                        copy.ticksBetweenBurstShots = 0;
+                    }
+
                     result.Add(copy);
                 }
             }
@@ -246,10 +275,47 @@ namespace BDP.Trigger
             int rightBurst = rightVerbs.Max(v => v.burstShotCount);
             var primaryVerb = leftVerbs[0];
 
+            // Bug4修复：检测两侧Verb类型，决定创建哪种双手Verb
+            bool leftIsVolley = leftVerbs.Any(v => v.verbClass == typeof(Verb_BDPVolley));
+            bool rightIsVolley = rightVerbs.Any(v => v.verbClass == typeof(Verb_BDPVolley));
+
+            System.Type dualVerbClass;
+            int dualBurstCount;
+            int dualTicksBetween;
+
+            if (leftIsVolley && rightIsVolley)
+            {
+                // 两侧都是齐射 → Verb_BDPDualVolley（瞬发所有子弹）
+                dualVerbClass = typeof(Verb_BDPDualVolley);
+                dualBurstCount = 1;
+                dualTicksBetween = 0;
+            }
+            else if (!leftIsVolley && !rightIsVolley)
+            {
+                // 两侧都是逐发 → Verb_BDPDualRanged（交替逐发）
+                dualVerbClass = typeof(Verb_BDPDualRanged);
+                dualBurstCount = leftBurst + rightBurst;
+                dualTicksBetween = System.Math.Max(
+                    leftVerbs.Max(v => v.ticksBetweenBurstShots),
+                    rightVerbs.Max(v => v.ticksBetweenBurstShots));
+            }
+            else
+            {
+                // 混合模式（一侧齐射，一侧逐发）→ Verb_BDPDualMixed（交替发射，齐射侧瞬发）
+                dualVerbClass = typeof(Verb_BDPDualMixed);
+                // 混合模式的burstCount：齐射侧算1发，逐发侧算实际发数
+                int volleySideBurst = leftIsVolley ? 1 : 1;  // 齐射侧算1发
+                int shootSideBurst = leftIsVolley ? rightBurst : leftBurst;  // 逐发侧算实际发数
+                dualBurstCount = volleySideBurst + shootSideBurst;
+                dualTicksBetween = System.Math.Max(
+                    leftVerbs.Max(v => v.ticksBetweenBurstShots),
+                    rightVerbs.Max(v => v.ticksBetweenBurstShots));
+            }
+
             // 双武器合成Verb（isPrimary=true，默认攻击）
             result.Add(new VerbProperties
             {
-                verbClass = typeof(Verb_BDPDualRanged),
+                verbClass = dualVerbClass,
                 isPrimary = true,
                 hasStandardCommand = false,
                 defaultProjectile = primaryVerb.defaultProjectile,
@@ -257,13 +323,11 @@ namespace BDP.Trigger
                 muzzleFlashScale = Mathf.Max(
                     leftVerbs.Max(v => v.muzzleFlashScale),
                     rightVerbs.Max(v => v.muzzleFlashScale)),
-                ticksBetweenBurstShots = System.Math.Max(
-                    leftVerbs.Max(v => v.ticksBetweenBurstShots),
-                    rightVerbs.Max(v => v.ticksBetweenBurstShots)),
+                ticksBetweenBurstShots = dualTicksBetween,
                 range = Mathf.Min(leftRange, rightRange),
                 warmupTime = Mathf.Max(leftWarmup, rightWarmup),
                 defaultCooldownTime = Mathf.Max(leftCooldown, rightCooldown),
-                burstShotCount = leftBurst + rightBurst,
+                burstShotCount = dualBurstCount,
             });
 
             return result;

@@ -78,6 +78,9 @@ namespace BDP.Trigger
             // 步骤3+4+5+6：合成芯片VerbProperties → 手动创建Verb实例 → 缓存
             CreateAndCacheChipVerbs(pawn);
 
+            // v14.0：同步ProxyVerb（自动攻击支持）
+            SyncProxyVerb(pawn);
+
             // 诊断日志
             if (Prefs.DevMode)
             {
@@ -166,19 +169,27 @@ namespace BDP.Trigger
                 var vType = verb.GetType();
                 var label = vp.label;
 
-                if (verb is Verb_BDPMelee || verb is Verb_BDPShoot)
+                if (verb is Verb_BDPMelee || verb is Verb_BDPRangedBase)
                 {
                     var side = DualVerbCompositor.ParseSideLabel(label);
                     if (side == SlotSide.LeftHand)
+                    {
                         leftHandAttackVerb = verb;
+                        // 设置chipSide以便运行时精确查找芯片
+                        if (verb is Verb_BDPRangedBase rbL) rbL.chipSide = SlotSide.LeftHand;
+                    }
                     else if (side == SlotSide.RightHand)
+                    {
                         rightHandAttackVerb = verb;
+                        if (verb is Verb_BDPRangedBase rbR) rbR.chipSide = SlotSide.RightHand;
+                    }
                     else
                         dualAttackVerb = verb;
                 }
                 else if (verb is Verb_BDPDualRanged)
                 {
                     dualAttackVerb = verb;
+                    // chipSide保持null——双侧Verb由子类各自处理
                 }
             }
 
@@ -210,52 +221,71 @@ namespace BDP.Trigger
         {
             var leftSlot = GetActiveOrActivatingSlot(SlotSide.LeftHand);
             var rightSlot = GetActiveOrActivatingSlot(SlotSide.RightHand);
-            var leftCfg = leftSlot?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
-            var rightCfg = rightSlot?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
+            var leftCfg = leftSlot?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
+            var rightCfg = rightSlot?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
 
             // 左手副攻击
             if (leftHandAttackVerb != null && leftCfg != null)
-            {
-                leftHandSecondaryVerb = CreateSecondaryVerb(leftCfg, leftHandAttackVerb, pawn, "Left");
-            }
+                leftHandSecondaryVerb = CreateSingleSideSecondaryVerb(leftCfg, pawn, "Left", SlotSide.LeftHand);
 
             // 右手副攻击
             if (rightHandAttackVerb != null && rightCfg != null)
-            {
-                rightHandSecondaryVerb = CreateSecondaryVerb(rightCfg, rightHandAttackVerb, pawn, "Right");
-            }
+                rightHandSecondaryVerb = CreateSingleSideSecondaryVerb(rightCfg, pawn, "Right", SlotSide.RightHand);
 
-            // 双手副攻击：两侧都有副攻击时才创建
+            // 双手副攻击：两侧都有副攻击配置时创建Verb_BDPDualVolley
             if (leftHandSecondaryVerb != null && rightHandSecondaryVerb != null && dualAttackVerb != null)
-            {
-                dualSecondaryVerb = CreateSecondaryVerb(leftCfg, dualAttackVerb, pawn, "Dual");
-            }
+                dualSecondaryVerb = CreateDualSecondaryVerb(leftCfg, rightCfg, pawn);
         }
 
         /// <summary>
-        /// 创建单个副攻击verb实例（v9.0重构）。
-        ///
-        /// 逻辑：
-        ///   1. 如果 cfg.secondaryVerbProps != null，使用它创建verb
-        ///   2. 否则如果 cfg.supportsVolley == true，创建齐射verb（向后兼容）
-        ///   3. 否则返回null
+        /// 创建单侧副攻击verb实例。
+        /// 创建后设置chipSide以便运行时精确查找芯片。
         /// </summary>
-        private Verb CreateSecondaryVerb(WeaponChipConfig cfg, Verb primaryVerb, Pawn pawn, string side)
+        private Verb CreateSingleSideSecondaryVerb(VerbChipConfig cfg, Pawn pawn, string sideTag, SlotSide side)
         {
-            // 优先使用显式配置的secondaryVerbProps
-            if (cfg.secondaryVerbProps != null)
-            {
-                string loadID = $"BDP_Secondary{side}_{parent.ThingID}_{cfg.secondaryVerbProps.label}";
-                return FindOrCreateVerb(cfg.secondaryVerbProps, pawn, loadID);
-            }
+            if (cfg.secondaryVerbProps == null) return null;
 
-            // 向后兼容：supportsVolley=true时自动创建齐射verb
-            if (cfg.supportsVolley)
-            {
-                return CreateLegacyVolleyVerb(primaryVerb, pawn, side);
-            }
+            string loadID = $"BDP_Secondary{sideTag}_{parent.ThingID}_{cfg.secondaryVerbProps.label}";
+            Verb verb = FindOrCreateVerb(cfg.secondaryVerbProps, pawn, loadID);
 
-            return null;
+            // 设置chipSide以便运行时精确查找芯片
+            if (verb is Verb_BDPRangedBase rb)
+                rb.chipSide = side;
+
+            return verb;
+        }
+
+        /// <summary>
+        /// 创建双手副攻击verb实例（Verb_BDPDualVolley）。
+        /// 合成两侧参数：range=min, warmup=max, cooldown=max, burstShotCount=1。
+        /// chipSide不设置（null）——双侧Verb由子类各自处理。
+        /// </summary>
+        private Verb CreateDualSecondaryVerb(VerbChipConfig leftCfg, VerbChipConfig rightCfg, Pawn pawn)
+        {
+            var leftSecVp = leftCfg.secondaryVerbProps;
+            var rightSecVp = rightCfg.secondaryVerbProps;
+
+            // 合成双手副攻击VerbProperties
+            var vp = new VerbProperties
+            {
+                verbClass = typeof(Verb_BDPDualVolley),
+                isPrimary = false,
+                hasStandardCommand = false,
+                defaultProjectile = leftSecVp?.defaultProjectile ?? rightSecVp?.defaultProjectile,
+                soundCast = leftSecVp?.soundCast ?? rightSecVp?.soundCast,
+                muzzleFlashScale = 10f,
+                range = Mathf.Min(leftSecVp?.range ?? 20f, rightSecVp?.range ?? 20f),
+                warmupTime = Mathf.Max(leftSecVp?.warmupTime ?? 1f, rightSecVp?.warmupTime ?? 1f),
+                defaultCooldownTime = Mathf.Max(
+                    leftSecVp?.defaultCooldownTime ?? 1f,
+                    rightSecVp?.defaultCooldownTime ?? 1f),
+                burstShotCount = 1,
+                ticksBetweenBurstShots = 0,
+                label = "双手齐射",
+            };
+
+            string loadID = $"BDP_SecondaryDual_{parent.ThingID}";
+            return FindOrCreateVerb(vp, pawn, loadID);
         }
 
         /// <summary>
@@ -288,40 +318,6 @@ namespace BDP.Trigger
             verb.verbTracker = VerbTracker;
 
             return verb;
-        }
-
-        /// <summary>
-        /// 向后兼容方法：基于primaryVerb自动创建齐射verb（v9.0标记为过时）。
-        /// </summary>
-        [System.Obsolete("Use explicit secondaryVerbProps configuration instead")]
-        private Verb CreateLegacyVolleyVerb(Verb primaryVerb, Pawn pawn, string side)
-        {
-            var srcVp = primaryVerb.verbProps;
-
-            // 确定齐射verb类型
-            System.Type volleyVerbClass = side == "Dual" ? typeof(Verb_BDPDualVolley) : typeof(Verb_BDPVolley);
-
-            // 复制VerbProperties，修改verbClass和burstShotCount
-            var volleyVp = new VerbProperties
-            {
-                verbClass = volleyVerbClass,
-                isPrimary = srcVp.isPrimary,
-                hasStandardCommand = false,
-                defaultProjectile = srcVp.defaultProjectile,
-                soundCast = srcVp.soundCast,
-                muzzleFlashScale = srcVp.muzzleFlashScale,
-                ticksBetweenBurstShots = 0,
-                range = srcVp.range,
-                warmupTime = srcVp.warmupTime,
-                defaultCooldownTime = srcVp.defaultCooldownTime,
-                burstShotCount = 1, // 引擎只调用一次TryCastShot
-                label = "齐射", // 固定label
-                meleeDamageDef = srcVp.meleeDamageDef,
-                meleeDamageBaseAmount = srcVp.meleeDamageBaseAmount,
-            };
-
-            string loadID = $"BDP_LegacyVolley{side}_{parent.ThingID}_{volleyVerbClass.Name}";
-            return FindOrCreateVerb(volleyVp, pawn, loadID);
         }
 
         /// <summary>
@@ -360,30 +356,19 @@ namespace BDP.Trigger
         private Verb CreateComboVerb(ComboVerbDef comboDef, bool isSecondary,
             Pawn pawn, ChipSlot leftSlot, ChipSlot rightSlot)
         {
-            var leftCfg = leftSlot.loadedChip.def.GetModExtension<WeaponChipConfig>();
-            var rightCfg = rightSlot.loadedChip.def.GetModExtension<WeaponChipConfig>();
+            var leftCfg = leftSlot.loadedChip.def.GetModExtension<VerbChipConfig>();
+            var rightCfg = rightSlot.loadedChip.def.GetModExtension<VerbChipConfig>();
             if (leftCfg == null || rightCfg == null) return null;
 
-            // 如果是副攻击但未配置，检查向后兼容
+            // 如果是副攻击但未配置，返回null
             if (isSecondary)
             {
-                // 优先使用secondaryVerbClass
                 if (comboDef.secondaryVerbClass != null)
                 {
-                    // 创建显式配置的副攻击verb
                     return CreateComboVerbFromClass(comboDef, comboDef.secondaryVerbClass,
                         pawn, leftCfg, rightCfg, true);
                 }
-                // 向后兼容：supportsVolley=true时自动创建齐射verb
-                else if (comboDef.supportsVolley)
-                {
-                    return CreateComboVerbFromClass(comboDef, typeof(Verb_BDPComboShoot),
-                        pawn, leftCfg, rightCfg, true);
-                }
-                else
-                {
-                    return null; // 无副攻击
-                }
+                return null; // 无副攻击
             }
 
             // 主攻击逻辑：使用primaryVerbClass
@@ -395,14 +380,14 @@ namespace BDP.Trigger
         /// 从指定Verb类型创建组合技Verb实例（v9.0新增）。
         /// </summary>
         private Verb CreateComboVerbFromClass(ComboVerbDef comboDef, System.Type verbClass,
-            Pawn pawn, WeaponChipConfig leftCfg, WeaponChipConfig rightCfg, bool isSecondary)
+            Pawn pawn, VerbChipConfig leftCfg, VerbChipConfig rightCfg, bool isSecondary)
         {
             // 计算平均参数
             float avgRange = (GetFirstRange(leftCfg) + GetFirstRange(rightCfg)) * 0.5f;
             float avgWarmup = (GetFirstWarmup(leftCfg) + GetFirstWarmup(rightCfg)) * 0.5f;
             float avgCooldown = (GetFirstCooldown(leftCfg) + GetFirstCooldown(rightCfg)) * 0.5f;
             int avgBurst = UnityEngine.Mathf.RoundToInt(
-                (leftCfg.GetFirstBurstCount() + rightCfg.GetFirstBurstCount()) * 0.5f);
+                (leftCfg.GetPrimaryBurstCount() + rightCfg.GetPrimaryBurstCount()) * 0.5f);
             if (avgBurst < 1) avgBurst = 1;
             float avgTrionCost = (leftCfg.trionCostPerShot + rightCfg.trionCostPerShot) * 0.5f;
             float avgAnchorSpread = (leftCfg.anchorSpread + rightCfg.anchorSpread) * 0.5f;
@@ -450,46 +435,31 @@ namespace BDP.Trigger
             return verb;
         }
 
-        // ── 组合技参数读取辅助（从WeaponChipConfig.verbProperties[0]读取） ──
+        // ── 组合技参数读取辅助（从VerbChipConfig.primaryVerbProps读取） ──
 
-        private static float GetFirstRange(WeaponChipConfig cfg)
+        private static float GetFirstRange(VerbChipConfig cfg)
         {
-            if (cfg?.verbProperties != null)
-                foreach (var vp in cfg.verbProperties)
-                    if (vp.range > 0) return vp.range;
-            return 20f;
+            return cfg?.primaryVerbProps?.range ?? 20f;
         }
 
-        private static float GetFirstWarmup(WeaponChipConfig cfg)
+        private static float GetFirstWarmup(VerbChipConfig cfg)
         {
-            if (cfg?.verbProperties != null)
-                foreach (var vp in cfg.verbProperties)
-                    return vp.warmupTime;
-            return 1f;
+            return cfg?.primaryVerbProps?.warmupTime ?? 1f;
         }
 
-        private static float GetFirstCooldown(WeaponChipConfig cfg)
+        private static float GetFirstCooldown(VerbChipConfig cfg)
         {
-            if (cfg?.verbProperties != null)
-                foreach (var vp in cfg.verbProperties)
-                    return vp.defaultCooldownTime;
-            return 1f;
+            return cfg?.primaryVerbProps?.defaultCooldownTime ?? 1f;
         }
 
-        private static int GetFirstTicksBetween(WeaponChipConfig cfg)
+        private static int GetFirstTicksBetween(VerbChipConfig cfg)
         {
-            if (cfg?.verbProperties != null)
-                foreach (var vp in cfg.verbProperties)
-                    return vp.ticksBetweenBurstShots;
-            return 8;
+            return cfg?.primaryVerbProps?.ticksBetweenBurstShots ?? 8;
         }
 
-        private static SoundDef GetFirstSound(WeaponChipConfig cfg)
+        private static SoundDef GetFirstSound(VerbChipConfig cfg)
         {
-            if (cfg?.verbProperties != null)
-                foreach (var vp in cfg.verbProperties)
-                    if (vp.soundCast != null) return vp.soundCast;
-            return null;
+            return cfg?.primaryVerbProps?.soundCast;
         }
 
         /// <summary>
@@ -526,6 +496,59 @@ namespace BDP.Trigger
                 }
             }
             return null;
+        }
+
+        // ── v14.0新增：ProxyVerb自动攻击支持 ──
+
+        /// <summary>
+        /// 同步ProxyVerb（v14.0自动攻击）。
+        /// 在RebuildVerbs末尾调用，根据当前主攻击芯片Verb创建或更新ProxyVerb。
+        /// 无远程芯片时proxyVerb=null，引擎回退到"柄"近战。
+        /// </summary>
+        private void SyncProxyVerb(Pawn pawn)
+        {
+            var primary = GetPrimaryChipVerb();
+            // 无武器芯片或仅近战芯片 → 清空ProxyVerb
+            if (primary == null || primary.IsMeleeAttack)
+            {
+                proxyVerb = null;
+                return;
+            }
+
+            // 创建或复用ProxyVerb实例
+            if (proxyVerb == null)
+            {
+                proxyVerb = new Verb_BDPProxy();
+                proxyVerb.verbTracker = VerbTracker;
+                proxyVerb.loadID = $"BDP_Proxy_{parent.ThingID}";
+            }
+
+            // 绑定caster和同步verbProps
+            proxyVerb.caster = pawn;
+            proxyVerb.SyncFrom(primary, this);
+        }
+
+        /// <summary>
+        /// 驱动芯片Verb的VerbTick（v14.0自动攻击）。
+        /// 由Patch_VerbTracker_VerbsTick调用，防止double-tick。
+        /// 原因：芯片Verb不在VerbTracker.AllVerbs中，引擎不会自动tick，
+        /// 导致burst连射第2发起卡住（ticksToNextBurstShot不递减）。
+        /// </summary>
+        internal void TickChipVerbs()
+        {
+            int curTick = Find.TickManager.TicksGame;
+            if (curTick == lastChipVerbTickedTick) return; // 防double-tick
+            lastChipVerbTickedTick = curTick;
+
+            leftHandAttackVerb?.VerbTick();
+            rightHandAttackVerb?.VerbTick();
+            dualAttackVerb?.VerbTick();
+            // 副攻击和组合技Verb也需要tick（warmup/cooldown计时）
+            leftHandSecondaryVerb?.VerbTick();
+            rightHandSecondaryVerb?.VerbTick();
+            dualSecondaryVerb?.VerbTick();
+            comboAttackVerb?.VerbTick();
+            comboSecondaryVerb?.VerbTick();
         }
     }
 }

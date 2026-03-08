@@ -1,7 +1,9 @@
+using BDP.Projectiles.Pipeline;
+using BDP.Projectiles.Config;
 using UnityEngine;
 using Verse;
 
-namespace BDP.Trigger
+namespace BDP.Projectiles.Modules
 {
     /// <summary>
     /// 拖尾模块——从Bullet_BDP提取的光束拖尾逻辑。
@@ -50,8 +52,22 @@ namespace BDP.Trigger
 
         public void OnSpawn(Bullet_BDP host)
         {
-            // prevPos延迟到首次Observe初始化，因为SpawnSetup时DrawPos还未正确设置
-            // Material延迟到Observe初始化，避免读档时在加载线程调用MaterialPool.MatFrom
+            // Material延迟到OnVisualInit/Observe初始化，避免读档时在加载线程调用MaterialPool.MatFrom
+        }
+
+        /// <summary>
+        /// IBDPVisualObserver.OnVisualInit实现——在首次base.TickInterval之前调用。
+        /// 此时DrawPos ≈ 发射原点，朝飞行方向偏移muzzleOffset格，
+        /// 模拟拖尾从枪口而非pawn中心开始。
+        /// </summary>
+        public void OnVisualInit(Bullet_BDP host)
+        {
+            EnsureMaterial(host);
+            var cfg = config ?? host.def.GetModExtension<BeamTrailConfig>();
+            float offset = cfg?.muzzleOffset ?? 0.6f;
+            // FlightDirection已忽略Y轴，偏移后保持与DrawPos相同的高度层
+            prevPos = host.DrawPos + host.FlightDirection * offset;
+            prevPosInitialized = true;
         }
 
         /// <summary>延迟初始化Material（确保在主线程执行）。</summary>
@@ -70,24 +86,16 @@ namespace BDP.Trigger
         }
 
         /// <summary>
-        /// IBDPVisualObserver实现——每tick创建拖尾线段（零副作用）。
+        /// IBDPVisualObserver.Observe实现——每tick创建拖尾线段（零副作用）。
+        /// prevPos已由OnVisualInit正确初始化，此方法只负责输出线段。
         /// </summary>
         public void Observe(Bullet_BDP host)
         {
-            EnsureMaterial(host);
+            if (!prevPosInitialized || trailMat == null) return;
             var cfg = config ?? host.def.GetModExtension<BeamTrailConfig>();
-            if (cfg == null || !cfg.enabled || trailMat == null) return;
+            if (cfg == null || !cfg.enabled) return;
 
             Vector3 curPos = host.DrawPos;
-
-            // 首次调用：初始化prevPos为当前位置，不创建线段
-            if (!prevPosInitialized)
-            {
-                prevPos = curPos;
-                prevPosInitialized = true;
-                return;
-            }
-
             var comp = BDPEffectMapComponent.GetInstance(host.Map);
             comp?.CreateSegment(
                 prevPos, curPos, trailMat, cfg.trailColor,

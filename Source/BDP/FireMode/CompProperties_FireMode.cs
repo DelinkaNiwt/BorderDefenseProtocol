@@ -1,4 +1,4 @@
-namespace BDP.Trigger
+namespace BDP.FireMode
 {
     /// <summary>
     /// 射击模式Comp属性（v9.0 FireMode系统）。

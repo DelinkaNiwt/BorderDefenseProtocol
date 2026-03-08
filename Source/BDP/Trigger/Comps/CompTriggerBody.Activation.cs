@@ -194,6 +194,90 @@ namespace BDP.Trigger
         }
 
         /// <summary>
+        /// 执行芯片激活（内部方法）。
+        /// 消耗激活成本、注册持续消耗、调用effect.Activate、设置isActive标志。
+        /// </summary>
+        private void DoActivate(ChipSlot slot)
+        {
+            var pawn = OwnerPawn;
+            if (pawn == null) return;
+
+            var chipComp = slot.loadedChip.TryGetComp<TriggerChipComp>();
+            var effect = chipComp?.GetEffect();
+            if (effect == null) return;
+
+            // ── 一次性激活成本 ──
+            float cost = chipComp.Props.activationCost;
+            if (cost > 0f) TrionComp?.Consume(cost);
+
+            // ── v2.1（T32）：统一注册持续消耗 ──
+            if (chipComp.Props.drainPerDay > 0f)
+                TrionComp?.RegisterDrain($"chip_{slot.side}_{slot.index}", chipComp.Props.drainPerDay);
+
+            // 设置激活上下文（供VerbChipEffect等读取侧别和槽位）
+            // C3修复：try/finally保护，防止effect.Activate异常导致上下文残留
+            ActivatingSide = slot.side;
+            ActivatingSlot = slot;
+            try
+            {
+                effect.Activate(pawn, parent);
+            }
+            finally
+            {
+                ActivatingSide = null;
+                ActivatingSlot = null;
+            }
+
+            slot.isActive = true;
+
+            // ── v2.1（T31）：双手锁定 ──
+            if (chipComp.Props.isDualHand)
+                dualHandLockSlot = slot;
+
+            // ── v4.0（F1）：组合能力查询 ──
+            TryGrantComboAbility(pawn);
+        }
+
+        /// <summary>
+        /// 执行芯片停用（内部方法）。
+        /// 注销持续消耗、调用effect.Deactivate、清除isActive标志。
+        /// </summary>
+        /// <param name="pawnOverride">显式Pawn引用，优先于OwnerPawn（卸下装备时OwnerPawn为null）。</param>
+        private void DeactivateSlot(ChipSlot slot, Pawn pawnOverride = null)
+        {
+            if (!slot.isActive || slot.loadedChip == null) return;
+            var pawn = pawnOverride ?? OwnerPawn;
+            var chipComp = slot.loadedChip.TryGetComp<TriggerChipComp>();
+            var effect = chipComp?.GetEffect();
+
+            // ── v2.1（T32）：统一注销持续消耗 ──
+            TrionComp?.UnregisterDrain($"chip_{slot.side}_{slot.index}");
+
+            // 设置激活上下文（供VerbChipEffect等读取侧别和槽位）
+            // C3修复：try/finally保护，防止effect.Deactivate异常导致上下文残留
+            ActivatingSide = slot.side;
+            ActivatingSlot = slot;
+            try
+            {
+                effect?.Deactivate(pawn, parent);
+            }
+            finally
+            {
+                ActivatingSide = null;
+                ActivatingSlot = null;
+            }
+
+            slot.isActive = false;
+
+            // ── v2.1（T31）：清除双手锁定 ──
+            if (dualHandLockSlot == slot)
+                dualHandLockSlot = null;
+
+            // ── v4.0（F1）：组合能力移除（芯片关闭后重新检查） ──
+            TryRevokeComboAbilities(pawn);
+        }
+
+        /// <summary>
         /// 关闭指定侧的当前激活芯片（v6.0：支持后摇）。
         /// 有deactivationDelay时进入WindingDown阶段（芯片仍isActive=true），到期才真正关闭。
         /// 无deactivationDelay时立即关闭。
@@ -278,6 +362,53 @@ namespace BDP.Trigger
 
         // ── 战斗体管理方法已移至 CompTriggerBody.CombatBodySupport.cs ──
 
+        // ═══════════════════════════════════════════
+        //  组合能力管理
+        // ═══════════════════════════════════════════
+
+        /// <summary>
+        /// 芯片激活后检查是否满足组合能力条件，满足则授予。
+        /// </summary>
+        private void TryGrantComboAbility(Pawn pawn)
+        {
+            if (pawn?.abilities == null) return;
+            var leftSlot = GetActiveSlot(SlotSide.LeftHand);
+            var rightSlot = GetActiveSlot(SlotSide.RightHand);
+            if (leftSlot?.loadedChip == null || rightSlot?.loadedChip == null) return;
+
+            foreach (var combo in DefDatabase<ComboAbilityDef>.AllDefs)
+            {
+                if (grantedCombos.Contains(combo)) continue;
+                if (!combo.Matches(leftSlot.loadedChip.def, rightSlot.loadedChip.def)) continue;
+                if (combo.abilityDef == null) continue;
+
+                pawn.abilities.GainAbility(combo.abilityDef);
+                grantedCombos.Add(combo);
+            }
+        }
+
+        /// <summary>
+        /// 芯片关闭后检查已授予的组合能力是否仍然满足条件，不满足则移除。
+        /// </summary>
+        private void TryRevokeComboAbilities(Pawn pawn)
+        {
+            if (pawn?.abilities == null || grantedCombos.Count == 0) return;
+            var leftSlot = GetActiveSlot(SlotSide.LeftHand);
+            var rightSlot = GetActiveSlot(SlotSide.RightHand);
+
+            for (int i = grantedCombos.Count - 1; i >= 0; i--)
+            {
+                var combo = grantedCombos[i];
+                bool stillValid = leftSlot?.loadedChip != null && rightSlot?.loadedChip != null
+                    && combo.Matches(leftSlot.loadedChip.def, rightSlot.loadedChip.def);
+                if (!stillValid)
+                {
+                    if (combo.abilityDef != null)
+                        pawn.abilities.RemoveAbility(combo.abilityDef);
+                    grantedCombos.RemoveAt(i);
+                }
+            }
+        }
 
         // ═══════════════════════════════════════════
         //  CompTick — 已移除
@@ -289,26 +420,8 @@ namespace BDP.Trigger
         //  生命周期
         // ═══════════════════════════════════════════
 
-        // 静态构造函数：订阅部位破坏事件（v12.2新增：手部缺失联动）
-        static CompTriggerBody()
-        {
-            BDPEvents.OnPartDestroyed += OnPartDestroyed;
-        }
-
-        /// <summary>
-        /// 响应部位破坏事件（静态事件处理器）。
-        /// </summary>
-        private static void OnPartDestroyed(PartDestroyedEventArgs args)
-        {
-            if (!args.IsHandPart) return;
-
-            // 找到该Pawn装备的触发体
-            CompTriggerBody comp = args.Pawn.equipment?.Primary?.GetComp<CompTriggerBody>();
-            if (comp != null)
-            {
-                comp.OnHandDestroyed(args.HandSide);
-            }
-        }
+        // 手部缺失联动已改为由Patch_Pawn_PostApplyDamage直接调用
+        // CompTriggerBody.CheckHandIntegrity()，不再依赖BDPEvents事件。
 
         // ═══════════════════════════════════════════
         //  存档

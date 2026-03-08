@@ -1,7 +1,9 @@
+using BDP.Projectiles.Pipeline;
+using BDP.Projectiles.Config;
 using UnityEngine;
 using Verse;
 
-namespace BDP.Trigger
+namespace BDP.Projectiles.Modules
 {
     /// <summary>
     /// 追踪诊断日志开关。
@@ -101,8 +103,7 @@ namespace BDP.Trigger
 
         public void OnSpawn(Bullet_BDP host)
         {
-            // 初始追踪目标 = 弹道的最终目标
-            host.TrackingTarget = host.FinalTarget;
+            // 不再写host.TrackingTarget，宿主已在SpawnSetup中初始化三层目标
         }
 
         // ══════════════════════════════════════════
@@ -126,26 +127,8 @@ namespace BDP.Trigger
                 return;
             }
 
-            bool isTracking = ctx.CurrentPhase == FlightPhase.Tracking;
-            bool isFinalOrTracking = ctx.CurrentPhase == FlightPhase.FinalApproach
-                || ctx.CurrentPhase == FlightPhase.Tracking;
-
-            if (isTracking)
-                hadTrackingLock = true;
-
-            // 丢锁检测：上一tick无模块产出Intent且曾有追踪锁定
-            if (!ctx.PreviousTickHadIntent
-                && hadTrackingLock
-                && ctx.CurrentPhase == FlightPhase.Tracking)
-            {
-                ctx.RequestPhaseChange = FlightPhase.TrackingLost;
-                if (TrackingDiag.Enabled)
-                    Log.Message($"[BDP-Track] LockLost→TrackingLost tick={flyingTicks}");
-            }
-
-            // 目标丢失时的丢锁倒计时
-            bool isLost = ctx.CurrentPhase == FlightPhase.TrackingLost;
-            if (isLost)
+            // 丢锁检测：上一tick无Intent产出 + 曾有追踪锁定
+            if (!ctx.PreviousTickHadIntent && hadTrackingLock)
             {
                 trackingLostTicks++;
                 int destroyAfter = Mathf.Max(1, cfg.lostTrackingSelfDestructTicks);
@@ -164,14 +147,15 @@ namespace BDP.Trigger
                 if (cfg.allowRetarget)
                 {
                     TrySearchNewTarget(host, host.Position, cfg);
-                    if (IsTargetValid(host.TrackingTarget))
+                    if (IsTargetValid(host.LockedTarget))
                     {
                         trackingLostTicks = 0;
-                        ctx.RequestPhaseChange = FlightPhase.Tracking;
+                        // 通过ctx请求修改LockedTarget
+                        ctx.NewLockedTarget = host.LockedTarget;
                     }
                 }
             }
-            else if (ctx.CurrentPhase != FlightPhase.TrackingLost)
+            else if (ctx.PreviousTickHadIntent)
             {
                 trackingLostTicks = 0;
             }
@@ -189,24 +173,20 @@ namespace BDP.Trigger
             // 最终进近阶段——不再重定向，让ticksToImpact自然归零
             if (finalApproach) return;
 
-            // 激活条件：Phase == FinalApproach || Phase == Tracking || Phase == Direct（纯追踪弹）
-            bool canActivate = ctx.CurrentPhase == FlightPhase.FinalApproach
-                || ctx.CurrentPhase == FlightPhase.Tracking
-                || ctx.CurrentPhase == FlightPhase.Direct;
-
-            if (!canActivate)
-                return;
+            // ★ 新激活条件：CurrentTarget和LockedTarget指向同一目标
+            bool targetAligned = IsTargetAligned(ctx.CurrentTarget, ctx.LockedTarget);
+            if (!targetAligned) return;
 
             // 需要有效目标
-            if (!IsTargetValid(host.TrackingTarget))
+            if (!IsTargetValid(ctx.LockedTarget))
                 return;
 
             Vector3 currentPos = host.DrawPos;
 
             // 计算到目标的原始位置（用于距离判断和初始距离记录）
-            Vector3 targetPos = host.TrackingTarget.Thing != null
-                ? host.TrackingTarget.Thing.DrawPos
-                : host.TrackingTarget.Cell.ToVector3Shifted();
+            Vector3 targetPos = ctx.LockedTarget.Thing != null
+                ? ctx.LockedTarget.Thing.DrawPos
+                : ctx.LockedTarget.Cell.ToVector3Shifted();
             Vector3 toTargetRaw = (targetPos - currentPos).Yto0();
             if (toTargetRaw.sqrMagnitude < 0.001f) return;
             float rawDistToTarget = toTargetRaw.magnitude;
@@ -224,7 +204,7 @@ namespace BDP.Trigger
             // ── 速度外推预测（三种模式通用） ──
             Vector3 predictedPos = targetPos;
             if (cfg.enablePrediction && lastTargetPosValid
-                && host.TrackingTarget.Thing is Pawn pTarget
+                && ctx.LockedTarget.Thing is Pawn pTarget
                 && pTarget.pather != null && pTarget.pather.Moving)
             {
                 Vector3 velocity = targetPos - lastTargetPos;
@@ -259,13 +239,13 @@ namespace BDP.Trigger
                     return;
                 }
                 TrySearchNewTarget(host, currentPos.ToIntVec3(), cfg);
-                if (!IsTargetValid(host.TrackingTarget))
+                if (!IsTargetValid(host.LockedTarget))
                 {
                     return;
                 }
 
                 // 找到新目标，重新计算（预测数据下一tick才有效）
-                targetPos = host.TrackingTarget.Thing.DrawPos;
+                targetPos = host.LockedTarget.Thing.DrawPos;
                 predictedPos = targetPos;
                 lastTargetPos = targetPos;
                 toTarget = (predictedPos - currentPos).Yto0();
@@ -432,20 +412,18 @@ namespace BDP.Trigger
         //  IBDPArrivalPolicy — 到达时继续追踪
         // ══════════════════════════════════════════
 
-        public void DecideArrival(Bullet_BDP host, ref ArrivalContextV5 ctx)
+        public void DecideArrival(Bullet_BDP host, ref ArrivalContext ctx)
         {
             var cfg = GetConfig(host);
             if (cfg == null) return;
 
-            // 仅在追踪相关Phase时处理
-            bool isTrackingPhase = ctx.CurrentPhase == FlightPhase.Tracking
-                || ctx.CurrentPhase == FlightPhase.FinalApproach;
-            if (!isTrackingPhase) return;
-            if (!IsTargetValid(host.TrackingTarget)) return;
+            // 仅在CurrentTarget==LockedTarget时（追踪阶段）处理
+            if (!IsTargetAligned(ctx.CurrentTarget, ctx.LockedTarget)) return;
+            if (!IsTargetValid(ctx.LockedTarget)) return;
 
-            Vector3 targetPos = host.TrackingTarget.Thing != null
-                ? host.TrackingTarget.Thing.DrawPos
-                : host.TrackingTarget.Cell.ToVector3Shifted();
+            Vector3 targetPos = ctx.LockedTarget.Thing != null
+                ? ctx.LockedTarget.Thing.DrawPos
+                : ctx.LockedTarget.Cell.ToVector3Shifted();
             float distToTarget = (targetPos - host.DrawPos).Yto0().magnitude;
 
             // 目标足够近（<1格），让vanilla Impact保证命中
@@ -466,7 +444,7 @@ namespace BDP.Trigger
             ctx.NextDestination = host.DrawPos + trackDir * distToTarget;
             arrivalContinueStreak++;
             if (TrackingDiag.Enabled)
-                Log.Message($"[BDP-Track] ArrivalContinue#{arrivalContinueStreak} dist={distToTarget:F2} fa={wasFinalApproach}→false Phase={ctx.CurrentPhase}");
+                Log.Message($"[BDP-Track] ArrivalContinue#{arrivalContinueStreak} dist={distToTarget:F2} fa={wasFinalApproach}→false");
             // 保持当前Phase
         }
 
@@ -491,6 +469,16 @@ namespace BDP.Trigger
             return true;
         }
 
+        /// <summary>CurrentTarget和LockedTarget是否指向同一目标。</summary>
+        private static bool IsTargetAligned(LocalTargetInfo current, LocalTargetInfo locked)
+        {
+            // 两者都指向同一Thing
+            if (current.Thing != null && current.Thing == locked.Thing) return true;
+            // 两者都指向同一Cell且无Thing
+            if (current.Thing == null && locked.Thing == null && current.Cell == locked.Cell) return true;
+            return false;
+        }
+
         /// <summary>尝试搜索新目标。</summary>
         private void TrySearchNewTarget(Bullet_BDP host, IntVec3 position,
             BDPTrackingConfig cfg)
@@ -503,7 +491,8 @@ namespace BDP.Trigger
                 host.Map, position, cfg.searchRadius, host.Launcher);
             if (newTarget.IsValid)
             {
-                host.TrackingTarget = newTarget;
+                host.SetLockedTarget(newTarget);  // 替代 host.TrackingTarget = newTarget
+                host.SetCurrentTarget(newTarget); // CurrentTarget也同步到新目标
                 hadTrackingLock = true;
                 angleInitialized = false;
             }

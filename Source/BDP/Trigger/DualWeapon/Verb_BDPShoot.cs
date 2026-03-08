@@ -9,7 +9,7 @@ namespace BDP.Trigger
     ///
     /// 数据获取路径：
     ///   CasterPawn → equipment.Primary → CompTriggerBody.ActivatingSlot
-    ///     → loadedChip.def.GetModExtension&lt;WeaponChipConfig&gt;().trionCostPerShot
+    ///     → loadedChip.def.GetModExtension&lt;VerbChipConfig&gt;().trionCostPerShot
     ///
     /// 与Verb_BDPDualRanged的区别：
     ///   · Verb_BDPShoot用于单侧射击（XML中直接配置verbClass=Verb_BDPShoot）
@@ -28,7 +28,7 @@ namespace BDP.Trigger
             if (pawn == null) return false;
 
             var triggerComp = GetTriggerComp();
-            float cost = GetTrionCostPerShot(triggerComp);
+            float cost = GetChipConfig()?.cost?.trionPerShot ?? 0f;
 
             // Trion不足时中止射击
             if (cost > 0f)
@@ -45,10 +45,10 @@ namespace BDP.Trigger
             var fm = GetFireMode(chipEquipment);
             if (fm != null)
             {
-                var cfg = chipEquipment?.def?.GetModExtension<WeaponChipConfig>();
+                var cfg = chipEquipment?.def?.GetModExtension<VerbChipConfig>();
                 if (cfg != null)
                 {
-                    int effective = fm.GetEffectiveBurst(cfg.GetFirstBurstCount());
+                    int effective = fm.GetEffectiveBurst(cfg.GetPrimaryBurstCount());
                     int fired = verbProps.burstShotCount - burstShotsLeft;
                     if (fired >= effective) { burstShotsLeft = 0; return false; }
                 }
@@ -66,42 +66,6 @@ namespace BDP.Trigger
             return result;
         }
 
-        /// <summary>
-        /// 从当前激活的武器芯片读取trionCostPerShot。
-        /// 优先通过侧别label精确定位，回退到ActivatingSlot，最终回退到遍历AllActiveSlots。
-        /// </summary>
-        private float GetTrionCostPerShot(CompTriggerBody triggerComp)
-        {
-            if (triggerComp == null) return 0f;
 
-            // 优先通过侧别label精确定位（独立Gizmo场景）
-            SlotSide? side = DualVerbCompositor.ParseSideLabel(verbProps?.label);
-            if (side.HasValue)
-            {
-                var sideSlot = triggerComp.GetActiveSlot(side.Value);
-                if (sideSlot?.loadedChip != null)
-                {
-                    var cfg = sideSlot.loadedChip.def.GetModExtension<WeaponChipConfig>();
-                    if (cfg != null) return cfg.trionCostPerShot;
-                }
-            }
-
-            // 回退：从ActivatingSlot读取
-            var slot = triggerComp.ActivatingSlot;
-            if (slot?.loadedChip != null)
-            {
-                var cfg = slot.loadedChip.def.GetModExtension<WeaponChipConfig>();
-                if (cfg != null) return cfg.trionCostPerShot;
-            }
-
-            // 最终回退：遍历所有激活槽位找第一个有WeaponChipConfig的
-            foreach (var activeSlot in triggerComp.AllActiveSlots())
-            {
-                var cfg = activeSlot.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
-                if (cfg != null) return cfg.trionCostPerShot;
-            }
-
-            return 0f;
-        }
     }
 }

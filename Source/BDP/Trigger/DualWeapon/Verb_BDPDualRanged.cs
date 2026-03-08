@@ -23,50 +23,18 @@ namespace BDP.Trigger
         private ThingDef leftProjectileDef;
         private ThingDef rightProjectileDef;
 
-        /// <summary>任一侧是否支持变化弹。</summary>
-        public bool HasGuidedSide
-        {
-            get
-            {
-                var triggerComp = GetTriggerComp();
-                if (triggerComp == null) return false;
-                var leftCfg = triggerComp.GetActiveSlot(SlotSide.LeftHand)
-                    ?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
-                var rightCfg = triggerComp.GetActiveSlot(SlotSide.RightHand)
-                    ?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
-                return (leftCfg?.supportsGuided == true)
-                    || (rightCfg?.supportsGuided == true);
-            }
-        }
-
-        /// <summary>双侧引导瞄准——查找任一侧的引导配置。</summary>
-        public override void StartAnchorTargeting()
+        /// <summary>查找两侧中支持引导的芯片配置。</summary>
+        protected override VerbChipConfig GetGuidedConfig()
         {
             var triggerComp = GetTriggerComp();
-            if (triggerComp == null) { Find.Targeter.BeginTargeting(this); return; }
-
+            if (triggerComp == null) return null;
             var leftCfg = triggerComp.GetActiveSlot(SlotSide.LeftHand)
-                ?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
+                ?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
             var rightCfg = triggerComp.GetActiveSlot(SlotSide.RightHand)
-                ?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
-            WeaponChipConfig guidedCfg = (leftCfg?.supportsGuided == true) ? leftCfg
-                                       : (rightCfg?.supportsGuided == true) ? rightCfg : null;
-            if (guidedCfg == null) { Find.Targeter.BeginTargeting(this); return; }
-
-            AnchorTargetingHelper.BeginAnchorTargeting(
-                this, CasterPawn, guidedCfg.maxAnchors, verbProps.range,
-                (anchors, finalTarget) =>
-                {
-                    gs.StoreTargetingResult(anchors, finalTarget, guidedCfg.anchorSpread);
-                    OrderForceTargetCore(finalTarget);
-                });
-        }
-
-        public override void OrderForceTarget(LocalTargetInfo target)
-        {
-            if (HasGuidedSide) { StartAnchorTargeting(); return; }
-            gs.ManualAnchorsActive = false;
-            OrderForceTargetCore(target);
+                ?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
+            if (leftCfg?.supportsGuided == true) return leftCfg;
+            if (rightCfg?.supportsGuided == true) return rightCfg;
+            return null;
         }
 
         /// <summary>
@@ -105,17 +73,17 @@ namespace BDP.Trigger
         protected override ThingDef GetAutoRouteProjectileDef()
         {
             var triggerComp = GetTriggerComp();
-            var leftCfg = triggerComp?.GetActiveSlot(SlotSide.LeftHand)?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
-            var rightCfg = triggerComp?.GetActiveSlot(SlotSide.RightHand)?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
+            var leftCfg = triggerComp?.GetActiveSlot(SlotSide.LeftHand)?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
+            var rightCfg = triggerComp?.GetActiveSlot(SlotSide.RightHand)?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
 
             // 自动绕行只对引导弹有意义：优先返回支持引导的一侧弹药。
             if (leftCfg?.supportsGuided == true)
-                return leftCfg.GetFirstProjectileDef() ?? base.GetAutoRouteProjectileDef();
+                return leftCfg.GetPrimaryProjectileDef() ?? base.GetAutoRouteProjectileDef();
             if (rightCfg?.supportsGuided == true)
-                return rightCfg.GetFirstProjectileDef() ?? base.GetAutoRouteProjectileDef();
+                return rightCfg.GetPrimaryProjectileDef() ?? base.GetAutoRouteProjectileDef();
 
-            return leftCfg?.GetFirstProjectileDef()
-                ?? rightCfg?.GetFirstProjectileDef()
+            return leftCfg?.GetPrimaryProjectileDef()
+                ?? rightCfg?.GetPrimaryProjectileDef()
                 ?? base.GetAutoRouteProjectileDef();
         }
 
@@ -134,7 +102,7 @@ namespace BDP.Trigger
                 gs.AttachManualFlight(proj);
             else
                 gs.AttachAutoRouteFlight(proj, gs.ResolveAutoRouteFinalTarget(currentTarget),
-                    GetChipConfig()?.anchorSpread ?? 0.3f);
+                    GetGuidedConfig()?.anchorSpread ?? 0.3f);
         }
 
         /// <summary>
@@ -162,19 +130,6 @@ namespace BDP.Trigger
 
             SlotSide shotSide = GetCurrentShotSide();
             gs.CurrentShotHasPath = gs.ManualAnchorsActive && IsSideGuided(shotSide);
-
-            // 引导模式下，非变化弹侧无直视LOS → 跳过这发
-            if (gs.ManualAnchorsActive && !gs.CurrentShotHasPath)
-            {
-                IntVec3 losCell = gs.SavedThingTarget.IsValid
-                    ? gs.SavedThingTarget.Cell : currentTarget.Cell;
-                if (!GenSight.LineOfSight(caster.Position, losCell, caster.Map))
-                {
-                    dualBurstIndex++;
-                    if (burstShotsLeft <= 1) dualBurstIndex = 0;
-                    return true;
-                }
-            }
 
             float cost = GetSideTrionCost(shotSide);
             if (cost > 0f)
@@ -231,20 +186,45 @@ namespace BDP.Trigger
             }
 
             var leftCfg = triggerComp.GetActiveSlot(SlotSide.LeftHand)
-                ?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
+                ?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
             var rightCfg = triggerComp.GetActiveSlot(SlotSide.RightHand)
-                ?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
+                ?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
 
-            leftRemaining = leftCfg?.GetFirstBurstCount() ?? 0;
-            rightRemaining = rightCfg?.GetFirstBurstCount() ?? 0;
+            leftRemaining = leftCfg?.GetPrimaryBurstCount() ?? 0;
+            rightRemaining = rightCfg?.GetPrimaryBurstCount() ?? 0;
             // v9.0 FireMode：连射数注入
             var leftFm  = GetFireMode(triggerComp.GetActiveSlot(SlotSide.LeftHand)?.loadedChip);
             var rightFm = GetFireMode(triggerComp.GetActiveSlot(SlotSide.RightHand)?.loadedChip);
             if (leftFm  != null) leftRemaining  = leftFm.GetEffectiveBurst(leftRemaining);
             if (rightFm != null) rightRemaining = rightFm.GetEffectiveBurst(rightRemaining);
+
+            // ── 架构修正：在初始化时检查每一侧的LOS ──
+            // 获取最终目标Cell（引导模式下使用SavedThingTarget，否则使用currentTarget）
+            IntVec3 finalTargetCell = gs.SavedThingTarget.IsValid
+                ? gs.SavedThingTarget.Cell
+                : currentTarget.Cell;
+
+            // 左侧LOS检查：如果不支持引导且无直视LOS，排除这一侧
+            if (leftCfg != null && leftRemaining > 0 && !leftCfg.supportsGuided)
+            {
+                if (!GenSight.LineOfSight(caster.Position, finalTargetCell, caster.Map))
+                {
+                    leftRemaining = 0;
+                }
+            }
+
+            // 右侧LOS检查：如果不支持引导且无直视LOS，排除这一侧
+            if (rightCfg != null && rightRemaining > 0 && !rightCfg.supportsGuided)
+            {
+                if (!GenSight.LineOfSight(caster.Position, finalTargetCell, caster.Map))
+                {
+                    rightRemaining = 0;
+                }
+            }
+
             verbProps.burstShotCount = leftRemaining + rightRemaining; // 同步引擎总发数
-            leftProjectileDef = leftCfg?.GetFirstProjectileDef();
-            rightProjectileDef = rightCfg?.GetFirstProjectileDef();
+            leftProjectileDef = leftCfg?.GetPrimaryProjectileDef();
+            rightProjectileDef = rightCfg?.GetPrimaryProjectileDef();
             gs.LeftHasPath = leftCfg?.supportsGuided == true;
             gs.RightHasPath = rightCfg?.supportsGuided == true;
         }
@@ -273,7 +253,7 @@ namespace BDP.Trigger
             if (triggerComp == null) return 0f;
             var slot = triggerComp.GetActiveSlot(side);
             if (slot?.loadedChip == null) return 0f;
-            return slot.loadedChip.def.GetModExtension<WeaponChipConfig>()
+            return slot.loadedChip.def.GetModExtension<VerbChipConfig>()
                 ?.trionCostPerShot ?? 0f;
         }
 

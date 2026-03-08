@@ -4,7 +4,7 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 
-namespace BDP.Trigger
+namespace BDP.Projectiles
 {
     /// <summary>
     /// 多步锚点瞄准静态工具类——封装变化弹的 Shift+点击 瞄准逻辑。

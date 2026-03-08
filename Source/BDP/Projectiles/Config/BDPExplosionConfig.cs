@@ -1,6 +1,6 @@
 using Verse;
 
-namespace BDP.Trigger
+namespace BDP.Projectiles.Config
 {
     /// <summary>
     /// 爆炸模块配置——挂在投射物ThingDef的modExtensions上。

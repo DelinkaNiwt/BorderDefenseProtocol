@@ -1,6 +1,6 @@
 using Verse;
 
-namespace BDP.Trigger
+namespace BDP.Projectiles.Pipeline
 {
     /// <summary>
     /// 命中效果数据包——Impact时依次执行所有命中效果。

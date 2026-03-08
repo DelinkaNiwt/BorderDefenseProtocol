@@ -1,4 +1,5 @@
 using BDP.Core;
+using BDP.Projectiles;
 using UnityEngine;
 using Verse;
 
@@ -54,15 +55,6 @@ namespace BDP.Trigger
                     gs.StoreTargetingResult(anchors, finalTarget, avgAnchorSpread);
                     OrderForceTargetCore(finalTarget);
                 });
-        }
-
-        /// <summary>重写OrderForceTarget：引导弹时启动锚点瞄准。</summary>
-        public override void OrderForceTarget(LocalTargetInfo target)
-        {
-            if (CasterPawn == null) return;
-            if (SupportsGuided) { StartAnchorTargeting(); return; }
-            gs.ManualAnchorsActive = false;
-            OrderForceTargetCore(target);
         }
 
         /// <summary>弹道发射后回调：引导模式走引导路径，否则尝试自动绕行。</summary>

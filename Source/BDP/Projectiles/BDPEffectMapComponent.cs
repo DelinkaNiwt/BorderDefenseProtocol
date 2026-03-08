@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 
-namespace BDP.Trigger
+namespace BDP.Projectiles
 {
     /// <summary>
     /// BDP拖尾效果管理器——MapComponent，管理当前地图上所有BDP拖尾线段。

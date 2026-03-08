@@ -2,6 +2,7 @@ using BDP.Core;
 using BDP.Combat.Snapshot;
 using BDP.Trigger;
 using RimWorld;
+using System.Collections.Generic;
 using Verse;
 
 namespace BDP.Combat
@@ -56,13 +57,10 @@ namespace BDP.Combat
             // 阶段2: 状态转换
             ApplyTransformation(pawn, runtime.Snapshot);
 
-            // 阶段3: 初始化影子HP系统
-            InitializeShadowHP(pawn, runtime);
-
-            // 阶段4: 激活芯片
+            // 阶段3: 激活芯片
             ActivateChips(support);
 
-            // 阶段5: 注册消耗
+            // 阶段4: 注册消耗
             RegisterMaintenance(pawn, runtime);
 
             // 更新状态
@@ -128,8 +126,18 @@ namespace BDP.Combat
                 }
             }
 
-            // 清理战斗体状态（包括影子HP）
+            // 清理战斗体状态：移除所有战斗期间的hediff（伤口、MissingPart等）
+            // BDP_CombatBodyActive 在快照排除列表中，不会被批量移除
             CleanupCombatBodyState(pawn, runtime, runtime.Snapshot);
+
+            // 安全移除 BDP_CombatBodyActive（preventsDeath）
+            // 时序关键：此时战斗伤口已全部清除，Pawn身上无致死条件
+            // 必须在 RestoreAll() 之前移除，避免快照hediff重新添加时与其冲突
+            var combatBodyHediff = pawn.health.hediffSet.GetFirstHediffOfDef(BDP_DefOf.BDP_CombatBodyActive);
+            if (combatBodyHediff != null)
+            {
+                pawn.health.RemoveHediff(combatBodyHediff);
+            }
 
             // 解除触发器系统
             ReleaseTriggerSystem(pawn, isEmergency);
@@ -139,6 +147,10 @@ namespace BDP.Combat
 
             // 恢复快照
             runtime.Snapshot.RestoreAll();
+
+            // 最终清理：确保没有残留的非快照hediff（防御性编程）
+            // 在RestoreAll之后再次检查，因为在解除流程中可能有其他系统添加新hediff
+            FinalCleanupResidualHediffs(pawn, runtime.Snapshot);
 
             // 被动破裂时添加枯竭Hediff
             if (isEmergency)
@@ -289,20 +301,6 @@ namespace BDP.Combat
         }
 
         /// <summary>
-        /// 初始化影子HP系统。
-        /// </summary>
-        private void InitializeShadowHP(Pawn pawn, CombatBodyRuntime runtime)
-        {
-            if (runtime.ShadowHP == null)
-            {
-                Log.Error($"[BDP] InitializeShadowHP: {pawn.LabelShort} 的ShadowHPTracker为null，无法初始化");
-                return;
-            }
-            runtime.ShadowHP.InitializeFromSnapshot(pawn);
-            Log.Message($"[BDP] 影子HP系统初始化完成");
-        }
-
-        /// <summary>
         /// 激活芯片。
         /// </summary>
         private void ActivateChips(ICombatBodySupport support)
@@ -343,19 +341,21 @@ namespace BDP.Combat
 
         /// <summary>
         /// 清理战斗体状态。
+        ///
+        /// 重构说明:
+        /// - 已删除ShadowHP.Clear()调用（影子HP系统已删除）
+        /// - 已删除PartDestruction.Clear()调用（使用原版MissingPart）
+        /// - 已删除WoundHandler.Clear()调用（使用原版Hediff_Injury）
+        /// - 快照系统的RemoveAllHediffsExceptExcluded会自动清理战斗中的所有原版伤口
+        /// - v13.2: 添加灭火步骤，防止回滚后还在着火
         /// </summary>
         private void CleanupCombatBodyState(Pawn pawn, CombatBodyRuntime runtime, CombatBodySnapshot snapshot)
         {
+            // 步骤1: 灭火（优先处理，防止回滚后还在着火）
+            ExtinguishFire(pawn);
+
+            // 步骤2: 清理所有战斗中添加的Hediff（包括原版伤口和MissingPart）
             snapshot.RemoveAllHediffsExceptExcluded();
-
-            // 清理影子HP
-            runtime.ShadowHP?.Clear();
-
-            // 清理部位破坏记录并恢复部位
-            runtime.PartDestruction?.Clear(pawn);
-
-            // 清理战斗体伤口（新增）
-            WoundHandler.Clear(pawn);
         }
 
         /// <summary>
@@ -390,6 +390,80 @@ namespace BDP.Combat
 
             compTrion.UnregisterDrain("CombatBody");
             compTrion.SetFrozen(false);
+        }
+
+        /// <summary>
+        /// 灭火。
+        /// 移除Pawn身上的所有Fire hediff，防止回滚后还在着火。
+        /// </summary>
+        private void ExtinguishFire(Pawn pawn)
+        {
+            if (pawn?.health?.hediffSet == null) return;
+
+            // 查找所有Fire类型的hediff
+            var fireHediffs = new List<Hediff>();
+            foreach (var hediff in pawn.health.hediffSet.hediffs)
+            {
+                // 检查hediff的def是否包含"Fire"或"Flame"
+                if (hediff.def.defName.Contains("Fire") || hediff.def.defName.Contains("Flame"))
+                {
+                    fireHediffs.Add(hediff);
+                }
+            }
+
+            // 移除所有Fire hediff
+            foreach (var hediff in fireHediffs)
+            {
+                pawn.health.RemoveHediff(hediff);
+                Log.Message($"[BDP] 灭火: 移除 {pawn.LabelShort} 的 {hediff.def.defName}");
+            }
+        }
+
+        /// <summary>
+        /// 最终清理残留hediff。
+        /// 在RestoreAll之后执行，确保没有非快照hediff残留。
+        /// 这是防御性编程，防止在解除流程中其他系统添加新hediff。
+        /// </summary>
+        private void FinalCleanupResidualHediffs(Pawn pawn, CombatBodySnapshot snapshot)
+        {
+            if (pawn?.health?.hediffSet == null) return;
+
+            // 查找所有非排除项的hediff
+            var residualHediffs = new List<Hediff>();
+            foreach (var hediff in pawn.health.hediffSet.hediffs)
+            {
+                if (!BDPSnapshotConfigDef.IsExcluded(hediff))
+                {
+                    // 检查这个hediff是否在快照中
+                    bool isInSnapshot = false;
+                    foreach (var record in snapshot.GetHediffSnapshots())
+                    {
+                        if (record.defName == hediff.def.defName &&
+                            record.bodyPartDefName == (hediff.Part?.def?.defName ?? string.Empty))
+                        {
+                            isInSnapshot = true;
+                            break;
+                        }
+                    }
+
+                    // 如果不在快照中，说明是残留的hediff
+                    if (!isInSnapshot)
+                    {
+                        residualHediffs.Add(hediff);
+                    }
+                }
+            }
+
+            // 移除所有残留hediff
+            if (residualHediffs.Count > 0)
+            {
+                Log.Warning($"[BDP] 发现残留hediff {residualHediffs.Count}个，正在清理:");
+                foreach (var hediff in residualHediffs)
+                {
+                    Log.Warning($"[BDP]   - {hediff.def.defName} (Part: {hediff.Part?.def?.defName ?? "None"})");
+                    pawn.health.RemoveHediff(hediff);
+                }
+            }
         }
 
         /// <summary>
@@ -431,6 +505,67 @@ namespace BDP.Combat
         private bool HasEmergencyEscapeChip(Pawn pawn)
         {
             return HasEmergencyEscapeChip(pawn, out _);
+        }
+
+        // ═══════════════════════════════════════════
+        //  破裂触发（静态方法，供HediffComp调用）
+        // ═══════════════════════════════════════════
+
+        /// <summary>
+        /// 触发战斗体破裂流程。
+        /// 由Hediff_CombatBodyActive调用。
+        ///
+        /// 流程:
+        /// 1. 转换状态到Collapsing
+        /// 2. 打断当前动作
+        /// 3. 添加BDP_CombatBodyCollapsing Hediff
+        /// 4. (90 ticks后) Hediff_CombatBodyCollapsing自动触发解除
+        /// </summary>
+        /// <param name="pawn">目标Pawn</param>
+        /// <param name="runtime">战斗体运行时</param>
+        /// <param name="reason">破裂原因</param>
+        public static void TriggerCollapse(Pawn pawn, CombatBodyRuntime runtime, string reason)
+        {
+            if (pawn == null || runtime == null) return;
+
+            Log.Warning($"[BDP] 触发战斗体破裂: {pawn.LabelShort} (原因: {reason})");
+
+            // 转换状态到Collapsing
+            runtime.State.TransitionToCollapsing(reason);
+
+            // 打断当前动作
+            InterruptCurrentAction(pawn, "战斗体破裂");
+
+            // 添加Collapsing Hediff（会自动管理90 ticks倒计时和解除流程）
+            pawn.health.AddHediff(BDP_DefOf.BDP_CombatBodyCollapsing);
+        }
+
+        /// <summary>
+        /// 打断Pawn的当前动作。
+        /// </summary>
+        private static void InterruptCurrentAction(Pawn pawn, string reason)
+        {
+            if (pawn == null) return;
+
+            Log.Message($"[BDP]   打断当前动作: {pawn.LabelShort} (原因: {reason})");
+
+            // 1. 结束当前Job
+            if (pawn.jobs?.curJob != null)
+            {
+                pawn.jobs.EndCurrentJob(Verse.AI.JobCondition.InterruptForced);
+            }
+
+            // 2. 取消战斗姿态
+            if (pawn.stances != null)
+            {
+                pawn.stances.CancelBusyStanceSoft();
+            }
+
+            // 3. 停止移动
+            if (pawn.pather != null)
+            {
+                pawn.pather.StopDead();
+            }
         }
     }
 }

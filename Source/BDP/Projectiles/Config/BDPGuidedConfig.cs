@@ -1,11 +1,11 @@
 using Verse;
 
-namespace BDP.Trigger
+namespace BDP.Projectiles.Config
 {
     /// <summary>
     /// 引导飞行配置——标记类，挂在投射物ThingDef的modExtensions上。
     /// 存在即启用引导飞行模块（GuidedModule）。
-    /// 实际引导参数（maxAnchors/anchorSpread）由Verb层的WeaponChipConfig管理。
+    /// 实际引导参数（maxAnchors/anchorSpread）由Verb层的VerbChipConfig管理。
     /// </summary>
     public class BDPGuidedConfig : DefModExtension
     {

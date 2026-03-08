@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace BDP.Trigger
+namespace BDP.Projectiles.Pipeline
 {
     /// <summary>
     /// 位置修饰数据包——修改显示坐标（不影响逻辑位置）。

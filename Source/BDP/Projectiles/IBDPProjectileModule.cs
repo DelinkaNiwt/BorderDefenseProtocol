@@ -1,6 +1,6 @@
 using Verse;
 
-namespace BDP.Trigger
+namespace BDP.Projectiles
 {
     /// <summary>
     /// BDP投射物模块基础接口——定义模块生命周期基础钩子。

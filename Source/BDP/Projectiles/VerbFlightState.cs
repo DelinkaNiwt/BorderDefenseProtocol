@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using BDP.Projectiles.Config;
 using UnityEngine;
 using Verse;
 
-namespace BDP.Trigger
+namespace BDP.Projectiles
 {
     /// <summary>
     /// Verb飞行状态——管理锚点数据、LOS检查重定向、TryStartCastOn拦截、弹道附加。

@@ -90,50 +90,6 @@ namespace BDP.Trigger
         }
 
         /// <summary>
-        /// 开始战斗体激活流程（v2.2重构版 - 已废弃，保留用于兼容性）。
-        ///
-        /// ⚠️ 此方法已被拆分为TryAllocateTrionForCombatBody + ActivateAllSpecial。
-        /// 新代码应使用拆分后的方法以保证原子性。
-        ///
-        /// 由Gene_TrionGland在战斗体激活时调用。
-        /// 流程：设置标志 → 逐个芯片Allocate → 激活特殊槽。
-        /// </summary>
-        [System.Obsolete("已废弃，请使用TryAllocateTrionForCombatBody + ActivateAllSpecial")]
-        public void BeginCombatBodyActivation()
-        {
-            Log.Message($"[BDP] BeginCombatBodyActivation() 被调用（已废弃）");
-
-            // 1. 设置战斗体激活标志
-            IsCombatBodyActive = true;
-
-            // 2. 遍历所有芯片，逐个Allocate（锁定Trion占用）
-            var trion = TrionComp;
-            float totalAllocated = 0f;
-            foreach (var slot in AllSlots())
-            {
-                if (slot.loadedChip == null) continue;
-                var chipComp = slot.loadedChip.TryGetComp<TriggerChipComp>();
-                if (chipComp != null && chipComp.Props.allocationCost > 0f)
-                {
-                    bool ok = trion?.Allocate(chipComp.Props.allocationCost) ?? false;
-                    if (ok)
-                    {
-                        totalAllocated += chipComp.Props.allocationCost;
-                    }
-                    else
-                    {
-                        Log.Warning($"[BDP] Allocate失败: {slot.loadedChip.def.defName} cost={chipComp.Props.allocationCost} available={trion?.Available ?? 0f:F1}");
-                    }
-                }
-            }
-
-            // 3. 激活特殊槽芯片
-            ActivateAllSpecial();
-
-            Log.Message($"[BDP] 战斗体激活完成 (allocated={totalAllocated:F1}, trion={trion?.Cur:F1}/{trion?.Max:F1})");
-        }
-
-        /// <summary>
         /// 激活所有特殊槽（全部同时激活）。
         /// 特殊槽不参与切换状态机，不受切换冷却影响（不变量⑨⑫）。
         /// 由战斗体模块在战斗体生成时调用。v2.1新增。

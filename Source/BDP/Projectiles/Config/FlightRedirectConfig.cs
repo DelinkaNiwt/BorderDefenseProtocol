@@ -1,6 +1,6 @@
 using Verse;
 
-namespace BDP.Trigger
+namespace BDP.Projectiles.Config
 {
     /// <summary>
     /// 飞行重定向配置——挂在ThingDef.modExtensions上。

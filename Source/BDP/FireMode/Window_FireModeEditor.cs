@@ -1,7 +1,7 @@
 using UnityEngine;
 using Verse;
 
-namespace BDP.Trigger
+namespace BDP.FireMode
 {
     /// <summary>
     /// 射击模式编辑窗口（v9.0 FireMode系统）。

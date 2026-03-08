@@ -14,7 +14,7 @@ namespace BDP.Trigger
         public float activationCost = 0f;
 
         /// <summary>
-        /// IChipEffect实现类（XML中填写全限定类名，如"BDP.Trigger.WeaponChipEffect"）。
+        /// IChipEffect实现类（XML中填写全限定类名，如"BDP.Trigger.VerbChipEffect"）。
         /// 实例化方式：Activator.CreateInstance(chipEffectClass)，要求无参构造函数。
         /// </summary>
         public Type chipEffectClass;

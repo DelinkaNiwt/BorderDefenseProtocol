@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    战斗体专用伤口 HediffDef
+    与原版完全对应，仅修改:
+    - painPerSeverity=0 / averagePainPerSeverityPermanent=0 (无疼痛)
+    - partIgnoreMissingHP=true (伤口不影响部位效率)
+    - 移除 HediffCompProperties_Infecter (战斗体不感染)
+    - 移除 HediffCompProperties_GetsPermanent (战斗伤口不永久化)
+
+    由 Patch_HealthUtility_GetHediffDefFromDamage 在战斗体激活时自动替换
+  -->
+
+  <!-- 基类: 战斗体伤口 -->
+  <HediffDef Name="BDP_InjuryBase" Abstract="True">
+    <hediffClass>Hediff_Injury</hediffClass>
+    <tendable>false</tendable>
+    <displayWound>true</displayWound>
+    <labelNounPretty>{1}的{0}</labelNounPretty>
+    <isBad>true</isBad>
+    <stages>
+      <li>
+        <partIgnoreMissingHP>true</partIgnoreMissingHP>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- 枪伤 (原版: Gunshot) -->
+  <HediffDef ParentName="BDP_InjuryBase">
+    <defName>BDP_Gunshot</defName>
+    <label>枪伤</label>
+    <labelNoun>枪伤</labelNoun>
+    <description>枪伤。（战斗体）</description>
+    <injuryProps>
+      <painPerSeverity>0</painPerSeverity>
+      <averagePainPerSeverityPermanent>0</averagePainPerSeverityPermanent>
+      <bleedRate>0.06</bleedRate>
+      <canMerge>false</canMerge>
+      <destroyedLabel>被射断</destroyedLabel>
+      <destroyedOutLabel>被射出</destroyedOutLabel>
+    </injuryProps>
+  </HediffDef>
+
+  <!-- 切割 (原版: Cut) -->
+  <HediffDef ParentName="BDP_InjuryBase">
+    <defName>BDP_Cut</defName>
+    <label>切割伤</label>
+    <labelNoun>切割伤</labelNoun>
+    <description>切割伤。（战斗体）</description>
+    <injuryProps>
+      <painPerSeverity>0</painPerSeverity>
+      <averagePainPerSeverityPermanent>0</averagePainPerSeverityPermanent>
+      <bleedRate>0.06</bleedRate>
+      <canMerge>false</canMerge>
+      <destroyedLabel>被切断</destroyedLabel>
+      <destroyedOutLabel>被切出</destroyedOutLabel>
+    </injuryProps>
+  </HediffDef>
+
+  <!-- 钝击 (原版: Crush) -->
+  <HediffDef ParentName="BDP_InjuryBase">
+    <defName>BDP_Crush</defName>
+    <label>钝击伤</label>
+    <labelNoun>钝击伤</labelNoun>
+    <description>钝击伤。（战斗体）</description>
+    <injuryProps>
+      <painPerSeverity>0</painPerSeverity>
+      <averagePainPerSeverityPermanent>0</averagePainPerSeverityPermanent>
+      <bleedRate>0.01</bleedRate>
+      <canMerge>true</canMerge>
+      <destroyedLabel>被压碎</destroyedLabel>
+    </injuryProps>
+  </HediffDef>
+
+  <!-- 裂痕 (原版: Crack) -->
+  <HediffDef ParentName="BDP_InjuryBase">
+    <defName>BDP_Crack</defName>
+    <label>裂痕</label>
+    <labelNoun>裂痕</labelNoun>
+    <description>裂痕。（战斗体）</description>
+    <injuryProps>
+      <painPerSeverity>0</painPerSeverity>
+      <averagePainPerSeverityPermanent>0</averagePainPerSeverityPermanent>
+      <destroyedLabel>被粉碎</destroyedLabel>
+    </injuryProps>
+  </HediffDef>
+
+  <!-- 刺伤 (原版: Stab) -->
+  <HediffDef ParentName="BDP_InjuryBase">
+    <defName>BDP_Stab</defName>
+    <label>刺伤</label>
+    <labelNoun>刺伤</labelNoun>
+    <description>刺伤。（战斗体）</description>
+    <injuryProps>
+      <painPerSeverity>0</painPerSeverity>
+      <averagePainPerSeverityPermanent>0</averagePainPerSeverityPermanent>
+      <bleedRate>0.06</bleedRate>
+      <canMerge>false</canMerge>
+      <destroyedLabel>被切断</destroyedLabel>
+      <destroyedOutLabel>被切出</destroyedOutLabel>
+    </injuryProps>
+  </HediffDef>
+
+  <!-- 抓伤 (原版: Scratch) -->
+  <HediffDef ParentName="BDP_InjuryBase">
+    <defName>BDP_Scratch</defName>
+    <label>抓伤</label>
+    <labelNoun>抓伤</labelNoun>
+    <description>抓伤或撕裂。（战斗体）</description>
+    <injuryProps>
+      <painPerSeverity>0</painPerSeverity>
+      <averagePainPerSeverityPermanent>0</averagePainPerSeverityPermanent>
+      <bleedRate>0.06</bleedRate>
+      <canMerge>false</canMerge>
+      <destroyedLabel>被撕断</destroyedLabel>
+      <destroyedOutLabel>被撕出</destroyedOutLabel>
+    </injuryProps>
+  </HediffDef>
+
+  <!-- 咬伤 (原版: Bite) -->
+  <HediffDef ParentName="BDP_InjuryBase">
+    <defName>BDP_Bite</defName>
+    <label>咬伤</label>
+    <labelNoun>咬伤</labelNoun>
+    <description>咬伤。（战斗体）</description>
+    <injuryProps>
+      <painPerSeverity>0</painPerSeverity>
+      <averagePainPerSeverityPermanent>0</averagePainPerSeverityPermanent>
+      <bleedRate>0.06</bleedRate>
+      <canMerge>false</canMerge>
+      <destroyedLabel>被咬断</destroyedLabel>
+      <destroyedOutLabel>被咬出</destroyedOutLabel>
+    </injuryProps>
+  </HediffDef>
+
+  <!-- 烧伤 (原版: Burn) -->
+  <HediffDef ParentName="BDP_InjuryBase">
+    <defName>BDP_Burn</defName>
+    <label>烧伤</label>
+    <labelNoun>烧伤</labelNoun>
+    <description>烧伤。（战斗体）</description>
+    <injuryProps>
+      <painPerSeverity>0</painPerSeverity>
+      <averagePainPerSeverityPermanent>0</averagePainPerSeverityPermanent>
+      <canMerge>true</canMerge>
+      <destroyedLabel>被烧毁</destroyedLabel>
+      <destroyedOutLabel>被烧毁</destroyedOutLabel>
+    </injuryProps>
+  </HediffDef>
+
+  <!-- 撕碎 (原版: Shredded) -->
+  <HediffDef ParentName="BDP_InjuryBase">
+    <defName>BDP_Shredded</defName>
+    <label>撕碎伤</label>
+    <labelNoun>撕碎伤</labelNoun>
+    <description>身体部位被撕碎。（战斗体）</description>
+    <injuryProps>
+      <painPerSeverity>0</painPerSeverity>
+      <averagePainPerSeverityPermanent>0</averagePainPerSeverityPermanent>
+      <bleedRate>0.06</bleedRate>
+      <canMerge>true</canMerge>
+      <destroyedLabel>被撕断</destroyedLabel>
+      <destroyedOutLabel>被撕出</destroyedOutLabel>
+    </injuryProps>
+  </HediffDef>
+
+  <!-- 杂项伤口 (原版: Misc) -->
+  <HediffDef ParentName="BDP_InjuryBase">
+    <defName>BDP_Misc</defName>
+    <label>伤口</label>
+    <labelNoun>伤口</labelNoun>
+    <description>杂项伤口。（战斗体）</description>
+    <injuryProps>
+      <painPerSeverity>0</painPerSeverity>
+      <averagePainPerSeverityPermanent>0</averagePainPerSeverityPermanent>
+      <bleedRate>0.06</bleedRate>
+      <canMerge>false</canMerge>
+      <destroyedLabel>被摧毁</destroyedLabel>
+    </injuryProps>
+  </HediffDef>
+
+  <!-- 淤伤 (原版: Bruise) -->
+  <HediffDef ParentName="BDP_InjuryBase">
+    <defName>BDP_Bruise</defName>
+    <label>淤伤</label>
+    <labelNoun>淤伤</labelNoun>
+    <description>淤伤。（战斗体）</description>
+    <injuryProps>
+      <painPerSeverity>0</painPerSeverity>
+      <averagePainPerSeverityPermanent>0</averagePainPerSeverityPermanent>
+      <canMerge>false</canMerge>
+      <destroyedLabel>被摧毁</destroyedLabel>
+    </injuryProps>
+  </HediffDef>
+
+  <!-- 光束灼伤 (原版: BeamWound) -->
+  <HediffDef ParentName="BDP_InjuryBase">
+    <defName>BDP_BeamWound</defName>
+    <label>光束灼伤</label>
+    <labelNoun>光束灼伤</labelNoun>
+    <description>光束灼伤。（战斗体）</description>
+    <injuryProps>
+      <painPerSeverity>0</painPerSeverity>
+      <averagePainPerSeverityPermanent>0</averagePainPerSeverityPermanent>
+      <bleedRate>0.06</bleedRate>
+      <canMerge>false</canMerge>
+      <destroyedLabel>被烧毁</destroyedLabel>
+      <destroyedOutLabel>被烧毁</destroyedOutLabel>
+    </injuryProps>
+  </HediffDef>
+
+</Defs>

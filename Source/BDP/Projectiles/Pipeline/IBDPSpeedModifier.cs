@@ -1,4 +1,4 @@
-namespace BDP.Trigger
+namespace BDP.Projectiles.Pipeline
 {
     /// <summary>发射时速度修正上下文。输入字段 readonly，输出字段可修改。</summary>
     public struct SpeedContext

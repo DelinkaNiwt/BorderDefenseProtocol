@@ -14,13 +14,16 @@ namespace BDP.Combat
     /// - 简化外部代码的查找逻辑（CombatBodyRuntime.Of(pawn)）
     ///
     /// 职责:
-    /// - 聚合战斗体子系统（State, Snapshot, ShadowHP, PartDestruction）
+    /// - 聚合战斗体子系统（State, Snapshot）
     /// - 提供统一的激活/解除接口
     /// - 提供静态查找方法（Of(pawn)）
     ///
     /// 非职责:
     /// - 不参与序列化（Gene负责序列化各子系统）
     /// - 不持有业务逻辑（委托给Orchestrator）
+    ///
+    /// 重构说明:
+    /// - 已删除ShadowHP和PartDestruction字段（重构后不再需要）
     /// </summary>
     public class CombatBodyRuntime
     {
@@ -33,12 +36,6 @@ namespace BDP.Combat
 
         /// <summary>战斗体快照</summary>
         public CombatBodySnapshot Snapshot { get; }
-
-        /// <summary>影子HP追踪器</summary>
-        public ShadowHPTracker ShadowHP { get; }
-
-        /// <summary>部位破坏处理器</summary>
-        public PartDestructionHandler PartDestruction { get; }
 
         // ═══════════════════════════════════════════
         //  内部引用
@@ -61,16 +58,12 @@ namespace BDP.Combat
             Gene_TrionGland gene,
             CombatBodyState state,
             CombatBodySnapshot snapshot,
-            ShadowHPTracker shadowHP,
-            PartDestructionHandler partDestruction,
             CombatBodyOrchestrator orchestrator)
         {
             this.pawn = pawn;
             this.gene = gene;
             this.State = state;
             this.Snapshot = snapshot;
-            this.ShadowHP = shadowHP;
-            this.PartDestruction = partDestruction;
             this.orchestrator = orchestrator;
         }
 

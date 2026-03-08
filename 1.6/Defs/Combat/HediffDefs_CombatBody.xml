@@ -4,7 +4,7 @@
     <!-- 实现需求: NR-019(疼痛免疫), NR-031(精神崩溃阻止), NR-029(生理需求冻结), NR-018(无限体力), NR-033(环境免疫) -->
     <HediffDef>
         <defName>BDP_CombatBodyActive</defName>
-        <hediffClass>HediffWithComps</hediffClass>
+        <hediffClass>BDP.Combat.Hediff_CombatBodyActive</hediffClass>
         <label>战斗体激活</label>
         <description>Trion战斗体激活状态</description>
         <defaultLabelColor>(0.8, 0.8, 1.0)</defaultLabelColor>
@@ -13,15 +13,34 @@
         <!-- 阻止死亡判定（战斗体保护） -->
         <preventsDeath>true</preventsDeath>
 
-        <!-- 战斗体伤害拦截器 -->
+        <!-- 破裂检测配置（通过modExtensions，由Hediff_CombatBodyActive直接读取） -->
+        <modExtensions>
+            <li Class="BDP.Combat.HediffExtension_RuptureConfig">
+                <criticalParts>
+                    <li>Head</li>
+                    <li>Brain</li>
+                    <li>Heart</li>
+                    <li>Neck</li>
+                    <li>Torso</li>
+                </criticalParts>
+            </li>
+        </modExtensions>
+
+        <!-- 战斗体效果组件 -->
         <comps>
-            <li Class="BDP.Combat.HediffCompProperties_CombatBodyDamageInterceptor" />
+            <!-- Trion伤口流失 - 基于伤口总严重度的持续消耗 -->
+            <li Class="BDP.Combat.HediffCompProperties_TrionWoundDrain">
+                <drainPerSeverityPerDay>5.0</drainPerSeverityPerDay>
+            </li>
         </comps>
 
         <stages>
             <li>
                 <!-- NR-019 疼痛免疫 -->
                 <painFactor>0</painFactor>
+
+                <!-- 出血抑制 (重构新增) -->
+                <totalBleedFactor>0</totalBleedFactor>
 
                 <!-- NR-031 精神崩溃阻止 -->
                 <blocksMentalBreaks>true</blocksMentalBreaks>

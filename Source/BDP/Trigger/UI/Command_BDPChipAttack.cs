@@ -73,15 +73,6 @@ namespace BDP.Trigger
                 ranged.StartAnchorTargeting();
                 return new GizmoResult(GizmoState.Clear);
             }
-            // 双手触发verb含变化弹侧时，左键也启动锚点瞄准
-            if (result.State == GizmoState.Interacted
-                && verb is Verb_BDPDualRanged dual && dual.HasGuidedSide)
-            {
-                SoundDefOf.Tick_Tiny.PlayOneShotOnCamera();
-                dual.StartAnchorTargeting();
-                return new GizmoResult(GizmoState.Clear);
-            }
-
             // 拦截右键：secondaryVerb存在时进入副攻击瞄准
             if (result.State == GizmoState.OpenedFloatMenu && secondaryVerb != null)
             {
@@ -90,11 +81,6 @@ namespace BDP.Trigger
                 if (secondaryVerb is Verb_BDPRangedBase rangedSecondary && rangedSecondary.SupportsGuided)
                 {
                     rangedSecondary.StartAnchorTargeting();
-                }
-                // 双侧副攻击verb含变化弹侧
-                else if (secondaryVerb is Verb_BDPDualVolley dualSecondary && dualSecondary.HasGuidedSide)
-                {
-                    dualSecondary.StartAnchorTargeting();
                 }
                 else
                 {

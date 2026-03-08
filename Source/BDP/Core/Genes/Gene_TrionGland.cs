@@ -32,6 +32,16 @@ namespace BDP.Core
     }
 
     /// <summary>
+    /// 伤害接收事件参数（v13.1新增：破裂检测解耦）。
+    /// 当Pawn受到伤害后触发，用于通知战斗体系统进行Trion消耗和破裂检测。
+    /// </summary>
+    public class DamageReceivedEventArgs
+    {
+        public Pawn Pawn;
+        public float TotalDamageDealt;
+    }
+
+    /// <summary>
     /// 手部侧边枚举。
     /// 从Gene_TrionGland提取到命名空间顶级，便于跨模块引用。
     /// </summary>
@@ -89,12 +99,6 @@ namespace BDP.Core
         // 战斗体协调器（不序列化）
         private CombatBodyOrchestrator orchestrator;
 
-        // 影子HP追踪器
-        private ShadowHPTracker shadowHPTracker;
-
-        // 部位破坏处理器
-        private PartDestructionHandler partDestructionHandler;
-
         /// <summary>
         /// 战斗体运行时聚合体（公开访问）。
         /// 外部代码通过此属性访问战斗体系统。
@@ -124,15 +128,9 @@ namespace BDP.Core
             // 初始化协调器
             orchestrator = new CombatBodyOrchestrator();
 
-            // 初始化影子HP追踪器
-            shadowHPTracker = new ShadowHPTracker();
-
-            // 初始化部位破坏处理器
-            partDestructionHandler = new PartDestructionHandler();
-
             // 创建运行时聚合体
             Runtime = new BDP.Combat.CombatBodyRuntime(
-                pawn, this, state, snapshot, shadowHPTracker, partDestructionHandler, orchestrator);
+                pawn, this, state, snapshot, orchestrator);
 
             // 初始化战斗体装备
             InitializeCombatApparel();
@@ -173,8 +171,6 @@ namespace BDP.Core
 
             Scribe_Deep.Look(ref snapshot, "snapshot", pawn);
             Scribe_Deep.Look(ref state, "state");
-            Scribe_Deep.Look(ref shadowHPTracker, "shadowHPTracker");
-            Scribe_Deep.Look(ref partDestructionHandler, "partDestructionHandler");
 
 
             // 读档后如果snapshot仍为null,尝试重新初始化
@@ -198,25 +194,11 @@ namespace BDP.Core
                 orchestrator = new CombatBodyOrchestrator();
             }
 
-            // 读档后如果shadowHPTracker仍为null,尝试重新初始化
-            if (Scribe.mode == LoadSaveMode.PostLoadInit && shadowHPTracker == null)
-            {
-                Log.Warning($"[BDP] {pawn?.Name} 读档后shadowHPTracker为null,尝试重新初始化");
-                shadowHPTracker = new ShadowHPTracker();
-            }
-
-            // 读档后如果partDestructionHandler仍为null,尝试重新初始化
-            if (Scribe.mode == LoadSaveMode.PostLoadInit && partDestructionHandler == null)
-            {
-                Log.Warning($"[BDP] {pawn?.Name} 读档后partDestructionHandler为null,尝试重新初始化");
-                partDestructionHandler = new PartDestructionHandler();
-            }
-
             // 读档后重建Runtime（不序列化）
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
                 Runtime = new BDP.Combat.CombatBodyRuntime(
-                    pawn, this, state, snapshot, shadowHPTracker, partDestructionHandler, orchestrator);
+                    pawn, this, state, snapshot, orchestrator);
                 Log.Message($"[BDP] {pawn?.Name} 读档后重建Runtime完成");
             }
         }
@@ -325,13 +307,18 @@ namespace BDP.Core
             {
                 var emergencyCmd = new Command_Action();
                 emergencyCmd.defaultLabel = "紧急脱离";
-                emergencyCmd.defaultDesc = "强制解除战斗体（Trion归零+枯竭）";
+                emergencyCmd.defaultDesc = "触发战斗体破裂流程（90 ticks延时后自动解除）";
                 emergencyCmd.icon = TexCommand.DesirePower;
                 emergencyCmd.action = delegate
                 {
                     try
                     {
-                        DeactivateCombatBody(isEmergency: true);
+                        // v13.1：统一走破裂流程（TriggerCollapse → 90 ticks延时 → 自动解除）
+                        var runtime = Runtime;
+                        if (runtime != null && runtime.IsActive)
+                        {
+                            CombatBodyOrchestrator.TriggerCollapse(pawn, runtime, "手动紧急脱离");
+                        }
                     }
                     catch (System.Exception e)
                     {

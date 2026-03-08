@@ -1,4 +1,4 @@
-namespace BDP.Trigger
+namespace BDP.Projectiles.Pipeline
 {
     /// <summary>
     /// Phase转换观察者管线接口——当宿主Phase发生变化时通知模块。

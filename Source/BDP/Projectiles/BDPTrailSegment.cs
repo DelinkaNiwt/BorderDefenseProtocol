@@ -1,7 +1,7 @@
 using UnityEngine;
 using Verse;
 
-namespace BDP.Trigger
+namespace BDP.Projectiles
 {
     /// <summary>
     /// 独立拖尾线段对象——每tick由投射物创建一段(prev→current)。
