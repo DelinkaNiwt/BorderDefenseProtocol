@@ -113,9 +113,6 @@
     </comps>
     <modExtensions>
       <li Class="BDP.Trigger.VerbChipConfig">
-        <volleySpreadRadius>0.3</volleySpreadRadius>
-        <trionCostPerShot>2</trionCostPerShot>
-        <supportsGuided>false</supportsGuided>
         <primaryVerbProps>
           <verbClass>BDP.Trigger.Verb_BDPVolley</verbClass>
           <hasStandardCommand>true</hasStandardCommand>
@@ -133,6 +130,12 @@
           <accuracyMedium>0.55</accuracyMedium>
           <accuracyLong>0.45</accuracyLong>
         </primaryVerbProps>
+        <cost>
+          <trionPerShot>2</trionPerShot>
+        </cost>
+        <ranged>
+          <volleySpreadRadius>0.3</volleySpreadRadius>
+        </ranged>
       </li>
     </modExtensions>
   </ThingDef>
@@ -177,10 +180,6 @@
     </comps>
     <modExtensions>
       <li Class="BDP.Trigger.VerbChipConfig">
-        <volleySpreadRadius>0.3</volleySpreadRadius>
-        <trionCostPerShot>5</trionCostPerShot>
-        <supportsGuided>true</supportsGuided>
-        <maxAnchors>5</maxAnchors>
         <primaryVerbProps>
           <verbClass>BDP.Trigger.Verb_BDPVolley</verbClass>
           <hasStandardCommand>true</hasStandardCommand>
@@ -198,6 +197,16 @@
           <accuracyMedium>0.55</accuracyMedium>
           <accuracyLong>0.45</accuracyLong>
         </primaryVerbProps>
+        <cost>
+          <trionPerShot>5</trionPerShot>
+        </cost>
+        <ranged>
+          <volleySpreadRadius>0.3</volleySpreadRadius>
+          <guided>
+            <maxAnchors>5</maxAnchors>
+            <anchorSpread>0.3</anchorSpread>
+          </guided>
+        </ranged>
       </li>
     </modExtensions>
   </ThingDef>
