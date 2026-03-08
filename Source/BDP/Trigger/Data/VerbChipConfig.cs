@@ -31,7 +31,7 @@ namespace BDP.Trigger
         public VerbProperties secondaryVerbProps;
 
         // ═══════════════════════════════════════════════════════
-        // 功能域配置（分组）
+        // 功能域配置（分组）- v9.0新架构
         // ═══════════════════════════════════════════════════════
 
         /// <summary>
@@ -55,43 +55,44 @@ namespace BDP.Trigger
         public RangedConfig ranged;
 
         // ═══════════════════════════════════════════════════════
-        // 旧字段（向后兼容，阶段3 XML迁移后将移除）
+        // 旧字段（向后兼容层，仅供遗留代码使用）
+        // XML定义不应再使用这些字段
         // ═══════════════════════════════════════════════════════
 
-        /// <summary>近战连击数（默认1=单次攻击）。已废弃，使用primaryVerbProps.burstShotCount。</summary>
-        [Obsolete("Use primaryVerbProps.burstShotCount instead")]
+        /// <summary>近战连击数。已废弃，XML应使用primaryVerbProps.burstShotCount。</summary>
+        [Obsolete("XML should use primaryVerbProps.burstShotCount instead")]
         public int meleeBurstCount = 1;
 
-        /// <summary>近战连击间隔（ticks，默认12≈0.2秒）。已废弃，使用primaryVerbProps.ticksBetweenBurstShots。</summary>
-        [Obsolete("Use primaryVerbProps.ticksBetweenBurstShots instead")]
+        /// <summary>近战连击间隔。已废弃，XML应使用primaryVerbProps.ticksBetweenBurstShots。</summary>
+        [Obsolete("XML should use primaryVerbProps.ticksBetweenBurstShots instead")]
         public int meleeBurstInterval = 12;
 
-        /// <summary>近战武器Tool配置。已废弃，使用melee.tools。</summary>
-        [Obsolete("Use melee.tools instead")]
+        /// <summary>近战武器Tool配置。已废弃，XML应使用melee.tools。</summary>
+        [Obsolete("XML should use melee.tools instead")]
         public List<Tool> tools;
 
-        /// <summary>每发射击Trion消耗。已废弃，使用cost.trionPerShot。</summary>
-        [Obsolete("Use cost.trionPerShot instead")]
+        /// <summary>每发射击Trion消耗。已废弃，XML应使用cost.trionPerShot。</summary>
+        [Obsolete("XML should use cost.trionPerShot instead")]
         public float trionCostPerShot = 0f;
 
-        /// <summary>齐射散布半径。已废弃，使用ranged.volleySpreadRadius。</summary>
-        [Obsolete("Use ranged.volleySpreadRadius instead")]
+        /// <summary>齐射散布半径。已废弃，XML应使用ranged.volleySpreadRadius。</summary>
+        [Obsolete("XML should use ranged.volleySpreadRadius instead")]
         public float volleySpreadRadius = 0f;
 
-        /// <summary>是否支持变化弹。已废弃，使用ranged.guided != null判断。</summary>
-        [Obsolete("Use ranged.guided != null instead")]
+        /// <summary>是否支持变化弹。已废弃，XML应使用ranged.guided != null判断。</summary>
+        [Obsolete("XML should use ranged.guided != null instead")]
         public bool supportsGuided = false;
 
-        /// <summary>最大锚点数。已废弃，使用ranged.guided.maxAnchors。</summary>
-        [Obsolete("Use ranged.guided.maxAnchors instead")]
+        /// <summary>最大锚点数。已废弃，XML应使用ranged.guided.maxAnchors。</summary>
+        [Obsolete("XML should use ranged.guided.maxAnchors instead")]
         public int maxAnchors = 3;
 
-        /// <summary>锚点散布半径。已废弃，使用ranged.guided.anchorSpread。</summary>
-        [Obsolete("Use ranged.guided.anchorSpread instead")]
+        /// <summary>锚点散布半径。已废弃，XML应使用ranged.guided.anchorSpread。</summary>
+        [Obsolete("XML should use ranged.guided.anchorSpread instead")]
         public float anchorSpread = 0.3f;
 
-        /// <summary>穿体穿透力。已废弃，使用ranged.passthroughPower。</summary>
-        [Obsolete("Use ranged.passthroughPower instead")]
+        /// <summary>穿体穿透力。已废弃，XML应使用ranged.passthroughPower。</summary>
+        [Obsolete("XML should use ranged.passthroughPower instead")]
         public float passthroughPower = 0f;
 
         // ═══════════════════════════════════════════════════════
