@@ -22,8 +22,8 @@ namespace BDP.Trigger
             var rightCfg = triggerComp.GetActiveSlot(SlotSide.RightHand)
                 ?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
             // 优先返回左侧，如果左侧不支持则返回右侧
-            if (leftCfg?.supportsGuided == true) return leftCfg;
-            if (rightCfg?.supportsGuided == true) return rightCfg;
+            if (leftCfg?.ranged?.guided != null) return leftCfg;
+            if (rightCfg?.ranged?.guided != null) return rightCfg;
             return null;
         }
 
@@ -34,9 +34,9 @@ namespace BDP.Trigger
             var rightCfg = tc?.GetActiveSlot(SlotSide.RightHand)?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
 
             // 自动绕行只对引导弹有意义：优先返回支持引导的一侧弹药
-            if (leftCfg?.supportsGuided == true)
+            if (leftCfg?.ranged?.guided != null)
                 return leftCfg.GetPrimaryProjectileDef() ?? base.GetAutoRouteProjectileDef();
-            if (rightCfg?.supportsGuided == true)
+            if (rightCfg?.ranged?.guided != null)
                 return rightCfg.GetPrimaryProjectileDef() ?? base.GetAutoRouteProjectileDef();
 
             return leftCfg?.GetPrimaryProjectileDef()
@@ -55,7 +55,7 @@ namespace BDP.Trigger
                 gs.AttachManualFlight(proj);
             else
                 gs.AttachAutoRouteFlight(proj, gs.ResolveAutoRouteFinalTarget(currentTarget),
-                    GetGuidedConfig()?.anchorSpread ?? 0.3f);
+                    GetGuidedConfig()?.ranged?.guided?.anchorSpread ?? 0.3f);
         }
 
         public override bool TryStartCastOn(LocalTargetInfo castTarg, LocalTargetInfo destTarg,
@@ -94,8 +94,8 @@ namespace BDP.Trigger
             // 引导模块支持：标记哪一侧有引导路径
             if (gs.ManualAnchorsActive)
             {
-                gs.LeftHasPath = leftCfg.supportsGuided;
-                gs.RightHasPath = rightCfg.supportsGuided;
+                gs.LeftHasPath = leftCfg.ranged?.guided != null;
+                gs.RightHasPath = rightCfg.ranged?.guided != null;
             }
 
             // 检查LOS：引导模式下，非引导侧需要直视LOS才能发射
@@ -104,14 +104,14 @@ namespace BDP.Trigger
             bool leftWillFire = !gs.ManualAnchorsActive || gs.LeftHasPath || hasDirectLos;
             bool rightWillFire = !gs.ManualAnchorsActive || gs.RightHasPath || hasDirectLos;
 
-            float totalCost = (leftWillFire ? leftCount * leftCfg.trionCostPerShot : 0f)
-                            + (rightWillFire ? rightCount * rightCfg.trionCostPerShot : 0f);
+            float totalCost = (leftWillFire ? leftCount * (leftCfg.cost?.trionPerShot ?? 0f) : 0f)
+                            + (rightWillFire ? rightCount * (rightCfg.cost?.trionPerShot ?? 0f) : 0f);
             var trion = pawn.GetComp<CompTrion>();
             if (totalCost > 0f && (trion == null || trion.Available < totalCost)) return false;
 
             bool anyHit = false;
             ThingDef originalProjectile = verbProps.defaultProjectile;
-            float spread = Mathf.Max(leftCfg.volleySpreadRadius, rightCfg.volleySpreadRadius);
+            float spread = Mathf.Max(leftCfg.ranged?.volleySpreadRadius ?? 0f, rightCfg.ranged?.volleySpreadRadius ?? 0f);
 
             gs.PrepareAutoRoute(caster.Position, currentTarget.Cell, caster.Map, leftProj);
 

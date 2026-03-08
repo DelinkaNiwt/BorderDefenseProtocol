@@ -293,56 +293,56 @@ namespace BDP.Trigger
                 }
 
                 // Trion消耗/发
-                if (cfg.trionCostPerShot > 0f)
+                if ((cfg.cost?.trionPerShot ?? 0f) > 0f)
                 {
                     yield return new StatDrawEntry(
                         StatCategoryDefOf.Weapon_Ranged,
                         "Trion消耗",
-                        cfg.trionCostPerShot.ToString("F1") + " /发",
+                        (cfg.cost.trionPerShot).ToString("F1") + " /发",
                         "每发射击消耗的Trion量。",
                         2485);
                 }
 
                 // 齐射散布
-                if (cfg.volleySpreadRadius > 0f)
+                if ((cfg.ranged?.volleySpreadRadius ?? 0f) > 0f)
                 {
                     yield return new StatDrawEntry(
                         StatCategoryDefOf.Weapon_Ranged,
                         "齐射散布",
-                        cfg.volleySpreadRadius.ToString("F1") + "格",
+                        (cfg.ranged.volleySpreadRadius).ToString("F1") + "格",
                         "齐射时每发子弹起点的随机偏移半径。",
                         2484);
                 }
 
                 // 引导支持
-                if (cfg.supportsGuided)
+                if (cfg.ranged?.guided != null)
                 {
                     yield return new StatDrawEntry(
                         StatCategoryDefOf.Weapon_Ranged,
                         "变化弹支持",
-                        "是 (最多" + cfg.maxAnchors + "锚点)",
+                        "是 (最多" + (cfg.ranged.guided.maxAnchors) + "锚点)",
                         "支持引导飞行模式，可设置路径锚点。",
                         2483);
                 }
 
                 // 穿透力
-                if (cfg.passthroughPower > 0f)
+                if ((cfg.ranged?.passthroughPower ?? 0f) > 0f)
                 {
                     yield return new StatDrawEntry(
                         StatCategoryDefOf.Weapon_Ranged,
                         "穿透力",
-                        cfg.passthroughPower.ToString("F1"),
+                        (cfg.ranged.passthroughPower).ToString("F1"),
                         "穿体穿透力初始值，每次穿透后递减。",
                         2482);
                 }
             }
 
             // ── 近战Tool参数 ──
-            if (cfg.tools != null && cfg.tools.Count > 0)
+            if (cfg.melee?.tools != null && cfg.melee.tools.Count > 0)
             {
                 var sb = new StringBuilder();
                 sb.AppendLine("近战攻击方式：");
-                foreach (var tool in cfg.tools)
+                foreach (var tool in cfg.melee.tools)
                 {
                     sb.AppendLine("• " + tool.label + ": " + tool.power.ToString("F0") + "dmg / " + tool.cooldownTime.ToString("F1") + "秒");
                 }
@@ -350,7 +350,7 @@ namespace BDP.Trigger
                 yield return new StatDrawEntry(
                     StatCategoryDefOf.Weapon_Melee,
                     "近战攻击",
-                    cfg.tools.Count + "种方式",
+                    cfg.melee.tools.Count + "种方式",
                     sb.ToString().TrimEnd(),
                     2480);
             }

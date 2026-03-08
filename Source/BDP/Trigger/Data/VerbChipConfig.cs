@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using Verse;
 
 namespace BDP.Trigger
@@ -31,7 +29,7 @@ namespace BDP.Trigger
         public VerbProperties secondaryVerbProps;
 
         // ═══════════════════════════════════════════════════════
-        // 功能域配置（分组）- v9.0新架构
+        // 功能域配置（分组）
         // ═══════════════════════════════════════════════════════
 
         /// <summary>
@@ -53,47 +51,6 @@ namespace BDP.Trigger
         /// null时表示非远程芯片。
         /// </summary>
         public RangedConfig ranged;
-
-        // ═══════════════════════════════════════════════════════
-        // 旧字段（向后兼容层，仅供遗留代码使用）
-        // XML定义不应再使用这些字段
-        // ═══════════════════════════════════════════════════════
-
-        /// <summary>近战连击数。已废弃，XML应使用primaryVerbProps.burstShotCount。</summary>
-        [Obsolete("XML should use primaryVerbProps.burstShotCount instead")]
-        public int meleeBurstCount = 1;
-
-        /// <summary>近战连击间隔。已废弃，XML应使用primaryVerbProps.ticksBetweenBurstShots。</summary>
-        [Obsolete("XML should use primaryVerbProps.ticksBetweenBurstShots instead")]
-        public int meleeBurstInterval = 12;
-
-        /// <summary>近战武器Tool配置。已废弃，XML应使用melee.tools。</summary>
-        [Obsolete("XML should use melee.tools instead")]
-        public List<Tool> tools;
-
-        /// <summary>每发射击Trion消耗。已废弃，XML应使用cost.trionPerShot。</summary>
-        [Obsolete("XML should use cost.trionPerShot instead")]
-        public float trionCostPerShot = 0f;
-
-        /// <summary>齐射散布半径。已废弃，XML应使用ranged.volleySpreadRadius。</summary>
-        [Obsolete("XML should use ranged.volleySpreadRadius instead")]
-        public float volleySpreadRadius = 0f;
-
-        /// <summary>是否支持变化弹。已废弃，XML应使用ranged.guided != null判断。</summary>
-        [Obsolete("XML should use ranged.guided != null instead")]
-        public bool supportsGuided = false;
-
-        /// <summary>最大锚点数。已废弃，XML应使用ranged.guided.maxAnchors。</summary>
-        [Obsolete("XML should use ranged.guided.maxAnchors instead")]
-        public int maxAnchors = 3;
-
-        /// <summary>锚点散布半径。已废弃，XML应使用ranged.guided.anchorSpread。</summary>
-        [Obsolete("XML should use ranged.guided.anchorSpread instead")]
-        public float anchorSpread = 0.3f;
-
-        /// <summary>穿体穿透力。已废弃，XML应使用ranged.passthroughPower。</summary>
-        [Obsolete("XML should use ranged.passthroughPower instead")]
-        public float passthroughPower = 0f;
 
         // ═══════════════════════════════════════════════════════
         // 辅助方法

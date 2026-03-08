@@ -35,8 +35,8 @@ namespace BDP.Trigger
                 ?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
             var rightCfg = triggerComp.GetActiveSlot(SlotSide.RightHand)
                 ?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
-            if (leftCfg?.supportsGuided == true) return leftCfg;
-            if (rightCfg?.supportsGuided == true) return rightCfg;
+            if (leftCfg?.ranged?.guided != null) return leftCfg;
+            if (rightCfg?.ranged?.guided != null) return rightCfg;
             return null;
         }
 
@@ -46,9 +46,9 @@ namespace BDP.Trigger
             var leftCfg = tc?.GetActiveSlot(SlotSide.LeftHand)?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
             var rightCfg = tc?.GetActiveSlot(SlotSide.RightHand)?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
 
-            if (leftCfg?.supportsGuided == true)
+            if (leftCfg?.ranged?.guided != null)
                 return leftCfg.GetPrimaryProjectileDef() ?? base.GetAutoRouteProjectileDef();
-            if (rightCfg?.supportsGuided == true)
+            if (rightCfg?.ranged?.guided != null)
                 return rightCfg.GetPrimaryProjectileDef() ?? base.GetAutoRouteProjectileDef();
 
             return leftCfg?.GetPrimaryProjectileDef()
@@ -64,7 +64,7 @@ namespace BDP.Trigger
                 gs.AttachManualFlight(proj);
             else
                 gs.AttachAutoRouteFlight(proj, gs.ResolveAutoRouteFinalTarget(currentTarget),
-                    GetGuidedConfig()?.anchorSpread ?? 0.3f);
+                    GetGuidedConfig()?.ranged?.guided?.anchorSpread ?? 0.3f);
         }
 
         public override bool TryStartCastOn(LocalTargetInfo castTarg, LocalTargetInfo destTarg,
@@ -134,7 +134,7 @@ namespace BDP.Trigger
             var fm = GetFireMode(slot.loadedChip);
             if (fm != null) volleyCount = fm.GetEffectiveBurst(volleyCount);
 
-            float totalCost = volleyCount * cfg.trionCostPerShot;
+            float totalCost = volleyCount * (cfg.cost?.trionPerShot ?? 0f);
             var trion = pawn?.GetComp<CompTrion>();
             if (totalCost > 0f && (trion == null || trion.Available < totalCost))
             {
@@ -145,7 +145,7 @@ namespace BDP.Trigger
             bool anyHit = false;
             ThingDef originalProjectile = verbProps.defaultProjectile;
             ThingDef sideProjectile = side == SlotSide.LeftHand ? leftProjectileDef : rightProjectileDef;
-            float spread = cfg.volleySpreadRadius;
+            float spread = cfg.ranged?.volleySpreadRadius ?? 0f;
 
             bool needThingRestore = gs.ManualAnchorsActive && !gs.CurrentShotHasPath && gs.SavedThingTarget.IsValid;
             if (needThingRestore) currentTarget = gs.SavedThingTarget;
@@ -186,7 +186,7 @@ namespace BDP.Trigger
             var cfg = slot.loadedChip.def.GetModExtension<VerbChipConfig>();
             if (cfg == null) { AdvanceBurstIndex(); return false; }
 
-            float cost = cfg.trionCostPerShot;
+            float cost = cfg.cost?.trionPerShot ?? 0f;
             if (cost > 0f)
             {
                 var trion = pawn?.GetComp<CompTrion>();
@@ -278,7 +278,7 @@ namespace BDP.Trigger
                 : currentTarget.Cell;
 
             // 左侧LOS检查：如果不支持引导且无直视LOS，排除这一侧
-            if (leftCfg != null && leftRemaining > 0 && !leftCfg.supportsGuided)
+            if (leftCfg != null && leftRemaining > 0 && leftCfg.ranged?.guided == null)
             {
                 if (!GenSight.LineOfSight(caster.Position, finalTargetCell, caster.Map))
                 {
@@ -287,7 +287,7 @@ namespace BDP.Trigger
             }
 
             // 右侧LOS检查：如果不支持引导且无直视LOS，排除这一侧
-            if (rightCfg != null && rightRemaining > 0 && !rightCfg.supportsGuided)
+            if (rightCfg != null && rightRemaining > 0 && rightCfg.ranged?.guided == null)
             {
                 if (!GenSight.LineOfSight(caster.Position, finalTargetCell, caster.Map))
                 {
@@ -298,8 +298,8 @@ namespace BDP.Trigger
             verbProps.burstShotCount = leftRemaining + rightRemaining;
             leftProjectileDef = leftCfg?.GetPrimaryProjectileDef();
             rightProjectileDef = rightCfg?.GetPrimaryProjectileDef();
-            gs.LeftHasPath = leftCfg?.supportsGuided == true;
-            gs.RightHasPath = rightCfg?.supportsGuided == true;
+            gs.LeftHasPath = leftCfg?.ranged?.guided != null;
+            gs.RightHasPath = rightCfg?.ranged?.guided != null;
 
             leftVolleyFired = false;
             rightVolleyFired = false;

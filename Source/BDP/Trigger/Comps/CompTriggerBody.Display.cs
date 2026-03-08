@@ -432,8 +432,8 @@ namespace BDP.Trigger
                 // Trion消耗
                 if (TriggerBodyDisplayConfig.ShowTrionCost)
                 {
-                    string lv = (leftCfg  != null && leftCfg.trionCostPerShot  > 0f) ? leftCfg.trionCostPerShot.ToString("F1")  : null;
-                    string rv = (rightCfg != null && rightCfg.trionCostPerShot > 0f) ? rightCfg.trionCostPerShot.ToString("F1") : null;
+                    string lv = (leftCfg  != null && (leftCfg.cost?.trionPerShot ?? 0f)  > 0f) ? (leftCfg.cost.trionPerShot).ToString("F1")  : null;
+                    string rv = (rightCfg != null && (rightCfg.cost?.trionPerShot ?? 0f) > 0f) ? (rightCfg.cost.trionPerShot).ToString("F1") : null;
                     if (lv != null || rv != null)
                         ranged.Add((StatCategoryDefOf.Weapon_Ranged, "Trion消耗", lv, rv, "/发",
                             "每发射击消耗的Trion量。", 2484));
@@ -442,8 +442,8 @@ namespace BDP.Trigger
                 // 齐射散布
                 if (TriggerBodyDisplayConfig.ShowVolleySpread)
                 {
-                    string lv = (leftCfg  != null && leftCfg.volleySpreadRadius  > 0f) ? leftCfg.volleySpreadRadius.ToString("F1")  : null;
-                    string rv = (rightCfg != null && rightCfg.volleySpreadRadius > 0f) ? rightCfg.volleySpreadRadius.ToString("F1") : null;
+                    string lv = (leftCfg  != null && (leftCfg.ranged?.volleySpreadRadius ?? 0f)  > 0f) ? (leftCfg.ranged.volleySpreadRadius).ToString("F1")  : null;
+                    string rv = (rightCfg != null && (rightCfg.ranged?.volleySpreadRadius ?? 0f) > 0f) ? (rightCfg.ranged.volleySpreadRadius).ToString("F1") : null;
                     if (lv != null || rv != null)
                         ranged.Add((StatCategoryDefOf.Weapon_Ranged, "齐射散布", lv, rv, "格",
                             "齐射时每发子弹起点的随机偏移半径。", 2483));
@@ -452,8 +452,8 @@ namespace BDP.Trigger
                 // 变化弹支持
                 if (TriggerBodyDisplayConfig.ShowGuidedSupport)
                 {
-                    string lv = (leftCfg  != null && leftCfg.supportsGuided)  ? "是(" + leftCfg.maxAnchors  + "锚点)" : null;
-                    string rv = (rightCfg != null && rightCfg.supportsGuided) ? "是(" + rightCfg.maxAnchors + "锚点)" : null;
+                    string lv = (leftCfg  != null && leftCfg.ranged?.guided != null)  ? "是(" + (leftCfg.ranged.guided.maxAnchors)  + "锚点)" : null;
+                    string rv = (rightCfg != null && rightCfg.ranged?.guided != null) ? "是(" + (rightCfg.ranged.guided.maxAnchors) + "锚点)" : null;
                     if (lv != null || rv != null)
                         ranged.Add((StatCategoryDefOf.Weapon_Ranged, "变化弹支持", lv, rv, "",
                             "支持引导飞行模式，可设置路径锚点。", 2482));
@@ -462,8 +462,8 @@ namespace BDP.Trigger
                 // 穿透力
                 if (TriggerBodyDisplayConfig.ShowPassthroughPower)
                 {
-                    string lv = (leftCfg  != null && leftCfg.passthroughPower  > 0f) ? leftCfg.passthroughPower.ToString("F1")  : null;
-                    string rv = (rightCfg != null && rightCfg.passthroughPower > 0f) ? rightCfg.passthroughPower.ToString("F1") : null;
+                    string lv = (leftCfg  != null && (leftCfg.ranged?.passthroughPower ?? 0f)  > 0f) ? (leftCfg.ranged.passthroughPower).ToString("F1")  : null;
+                    string rv = (rightCfg != null && (rightCfg.ranged?.passthroughPower ?? 0f) > 0f) ? (rightCfg.ranged.passthroughPower).ToString("F1") : null;
                     if (lv != null || rv != null)
                         ranged.Add((StatCategoryDefOf.Weapon_Ranged, "穿透力", lv, rv, "",
                             "穿体穿透力初始值，每次穿透后递减。", 2481));
@@ -558,9 +558,9 @@ namespace BDP.Trigger
             // ── 近战Tool参数（分侧显示） ──
             if (TriggerBodyDisplayConfig.ShowMeleeTools)
             {
-                if (leftCfg?.tools != null)
+                if (leftCfg?.melee?.tools != null)
                 {
-                    foreach (var tool in leftCfg.tools)
+                    foreach (var tool in leftCfg.melee.tools)
                     {
                         yield return new StatDrawEntry(
                             StatCategoryDefOf.Weapon_Melee,
@@ -571,9 +571,9 @@ namespace BDP.Trigger
                     }
                 }
 
-                if (rightCfg?.tools != null)
+                if (rightCfg?.melee?.tools != null)
                 {
-                    foreach (var tool in rightCfg.tools)
+                    foreach (var tool in rightCfg.melee.tools)
                     {
                         yield return new StatDrawEntry(
                             StatCategoryDefOf.Weapon_Melee,

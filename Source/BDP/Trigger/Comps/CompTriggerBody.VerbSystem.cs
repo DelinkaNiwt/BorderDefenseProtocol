@@ -389,9 +389,9 @@ namespace BDP.Trigger
             int avgBurst = UnityEngine.Mathf.RoundToInt(
                 (leftCfg.GetPrimaryBurstCount() + rightCfg.GetPrimaryBurstCount()) * 0.5f);
             if (avgBurst < 1) avgBurst = 1;
-            float avgTrionCost = (leftCfg.trionCostPerShot + rightCfg.trionCostPerShot) * 0.5f;
-            float avgAnchorSpread = (leftCfg.anchorSpread + rightCfg.anchorSpread) * 0.5f;
-            float avgVolleySpread = (leftCfg.volleySpreadRadius + rightCfg.volleySpreadRadius) * 0.5f;
+            float avgTrionCost = ((leftCfg.cost?.trionPerShot ?? 0f) + (rightCfg.cost?.trionPerShot ?? 0f)) * 0.5f;
+            float avgAnchorSpread = ((leftCfg.ranged?.guided?.anchorSpread ?? 0.3f) + (rightCfg.ranged?.guided?.anchorSpread ?? 0.3f)) * 0.5f;
+            float avgVolleySpread = ((leftCfg.ranged?.volleySpreadRadius ?? 0f) + (rightCfg.ranged?.volleySpreadRadius ?? 0f)) * 0.5f;
             int avgTicksBetween = UnityEngine.Mathf.RoundToInt(
                 (GetFirstTicksBetween(leftCfg) + GetFirstTicksBetween(rightCfg)) * 0.5f);
 

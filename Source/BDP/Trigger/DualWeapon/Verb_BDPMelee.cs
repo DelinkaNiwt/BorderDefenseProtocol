@@ -273,7 +273,7 @@ namespace BDP.Trigger
         {
             var slot = triggerComp.GetActiveSlot(side);
             var cfg = slot?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
-            var firstTool = cfg?.tools?.FirstOrDefault();
+            var firstTool = cfg?.melee?.tools?.FirstOrDefault();
 
             // 设置tool（供战斗日志的bodyPartGroup和label使用）
             tool = firstTool;
@@ -373,7 +373,7 @@ namespace BDP.Trigger
             var slot = triggerComp.GetActiveSlot(side);
             if (slot?.loadedChip == null) return 1;
             var ext = slot.loadedChip.def.GetModExtension<VerbChipConfig>();
-            return ext?.meleeBurstCount ?? 1;
+            return ext?.primaryVerbProps?.burstShotCount ?? 1;
         }
 
         /// <summary>获取指定侧芯片的近战连击间隔（ticks）。</summary>
@@ -382,7 +382,7 @@ namespace BDP.Trigger
             var slot = triggerComp.GetActiveSlot(side);
             if (slot?.loadedChip == null) return 12;
             var ext = slot.loadedChip.def.GetModExtension<VerbChipConfig>();
-            return ext?.meleeBurstInterval ?? 12;
+            return ext?.primaryVerbProps?.ticksBetweenBurstShots ?? 12;
         }
     }
 }
