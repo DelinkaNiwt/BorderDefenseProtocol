@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Verse;
 
@@ -30,7 +31,7 @@ namespace BDP.Trigger
         public VerbProperties secondaryVerbProps;
 
         // ═══════════════════════════════════════════════════════
-        // v9.0新增：功能域配置（分组）
+        // 功能域配置（分组）
         // ═══════════════════════════════════════════════════════
 
         /// <summary>
@@ -54,42 +55,43 @@ namespace BDP.Trigger
         public RangedConfig ranged;
 
         // ═══════════════════════════════════════════════════════
-        // 旧字段（阶段2将移除）
+        // 旧字段（向后兼容，阶段3 XML迁移后将移除）
         // ═══════════════════════════════════════════════════════
 
-        /// <summary>近战连击数（默认1=单次攻击）。</summary>
+        /// <summary>近战连击数（默认1=单次攻击）。已废弃，使用primaryVerbProps.burstShotCount。</summary>
+        [Obsolete("Use primaryVerbProps.burstShotCount instead")]
         public int meleeBurstCount = 1;
 
-        /// <summary>近战连击间隔（ticks，默认12≈0.2秒）。仅meleeBurstCount>1时有效。</summary>
+        /// <summary>近战连击间隔（ticks，默认12≈0.2秒）。已废弃，使用primaryVerbProps.ticksBetweenBurstShots。</summary>
+        [Obsolete("Use primaryVerbProps.ticksBetweenBurstShots instead")]
         public int meleeBurstInterval = 12;
 
-        /// <summary>近战武器Tool配置（替代ThingDef.tools，避免IsWeapon=true）。</summary>
+        /// <summary>近战武器Tool配置。已废弃，使用melee.tools。</summary>
+        [Obsolete("Use melee.tools instead")]
         public List<Tool> tools;
 
-        /// <summary>每发射击Trion消耗（0=无消耗）。</summary>
+        /// <summary>每发射击Trion消耗。已废弃，使用cost.trionPerShot。</summary>
+        [Obsolete("Use cost.trionPerShot instead")]
         public float trionCostPerShot = 0f;
 
-        /// <summary>齐射时每发子弹射出起点的随机偏移半径（格）。0=无偏移，0.3=轻微散布，0.6=明显散布。</summary>
+        /// <summary>齐射散布半径。已废弃，使用ranged.volleySpreadRadius。</summary>
+        [Obsolete("Use ranged.volleySpreadRadius instead")]
         public float volleySpreadRadius = 0f;
 
-        /// <summary>是否支持变化弹（引导飞行模式）。</summary>
+        /// <summary>是否支持变化弹。已废弃，使用ranged.guided != null判断。</summary>
+        [Obsolete("Use ranged.guided != null instead")]
         public bool supportsGuided = false;
 
-        /// <summary>最大锚点数（不含最终目标）。仅supportsGuided=true时有效。</summary>
+        /// <summary>最大锚点数。已废弃，使用ranged.guided.maxAnchors。</summary>
+        [Obsolete("Use ranged.guided.maxAnchors instead")]
         public int maxAnchors = 3;
 
-        /// <summary>
-        /// 锚点散布基础半径（格）。每个锚点按递增系数偏移：
-        /// actualAnchor[i] = anchor[i] + Random.insideUnitCircle * anchorSpread * (i / totalAnchors)
-        /// 第一段偏移最小，最后一段偏移最大。齐射时每颗子弹独立计算。
-        /// </summary>
+        /// <summary>锚点散布半径。已废弃，使用ranged.guided.anchorSpread。</summary>
+        [Obsolete("Use ranged.guided.anchorSpread instead")]
         public float anchorSpread = 0.3f;
 
-        /// <summary>
-        /// 穿体穿透力初始值（0=不穿透）。
-        /// 区别于护甲穿透（armorPenetration）——此值决定子弹能否穿过目标继续飞行。
-        /// 每次穿透后由ImpactHandler递减，降至0时停止穿透。
-        /// </summary>
+        /// <summary>穿体穿透力。已废弃，使用ranged.passthroughPower。</summary>
+        [Obsolete("Use ranged.passthroughPower instead")]
         public float passthroughPower = 0f;
 
         // ═══════════════════════════════════════════════════════
