@@ -35,15 +35,7 @@ namespace BDP.Combat
             }
 
             // 检查主武器是否是触发体（通过ICombatBodySupport接口判断）
-            bool hasTriggerBodyComp = false;
-            foreach (var comp in primaryWeapon.AllComps)
-            {
-                if (comp is ICombatBodySupport)
-                {
-                    hasTriggerBodyComp = true;
-                    break;
-                }
-            }
+            bool hasTriggerBodyComp = CombatBodyQuery.FindCombatBodySupport(args.Pawn) != null;
 
             if (!hasTriggerBodyComp)
             {
