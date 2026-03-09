@@ -12,7 +12,7 @@ namespace BDP.Trigger
     ///   · Verb_BDPShoot：引擎burst机制逐发射击（每隔N tick一颗）
     ///   · Verb_BDPVolley：burstShotCount=1，TryCastShot内循环发射所有子弹
     ///
-    /// 发射数来源：从芯片的WeaponChipConfig.verbProperties[0].burstShotCount读取。
+    /// 发射数来源：从芯片的VerbChipConfig.verbProperties[0].burstShotCount读取。
     /// Trion消耗：预检总消耗（volleyCount × trionCostPerShot），不够直接中止。
     ///
     /// 数据获取路径：同Verb_BDPShoot（通过侧别label定位芯片）。
@@ -31,7 +31,7 @@ namespace BDP.Trigger
             Thing chipThing = GetCurrentChipThing(triggerComp);
             if (chipThing == null) return false;
 
-            var cfg = chipThing.def.GetModExtension<WeaponChipConfig>();
+            var cfg = chipThing.def.GetModExtension<VerbChipConfig>();
             if (cfg == null) return false;
 
             // 从芯片配置读取实际发射数
@@ -39,17 +39,14 @@ namespace BDP.Trigger
             // v9.0 FireMode：连射数注入
             var fm = GetFireMode(chipThing);
             if (fm != null) volleyCount = fm.GetEffectiveBurst(volleyCount);
-            float costPerShot = cfg.trionCostPerShot;
 
-            // 预检Trion总消耗
-            float totalCost = volleyCount * costPerShot;
-            var trion = pawn.GetComp<CompTrion>();
-            if (totalCost > 0f && (trion == null || trion.Available < totalCost))
+            // 预检Trion消耗
+            if (!ChipUsageCostHelper.CanAffordUsage(pawn, chipThing))
                 return false;
 
             // 循环发射所有子弹（每颗独立命中判定）
             bool anyHit = false;
-            float spread = cfg.volleySpreadRadius;
+            float spread = cfg.ranged?.volleySpreadRadius ?? 0f;
 
             // ★ 自动绕行：齐射前计算路由（条件2由Verb类型隐含满足）
             gs.PrepareAutoRoute(caster.Position, currentTarget.Cell,
@@ -67,15 +64,15 @@ namespace BDP.Trigger
             }
             shotOriginOffset = Vector3.zero;
 
-            // 一次性扣除Trion
-            if (anyHit && totalCost > 0f)
-                trion?.Consume(totalCost);
+            // 一次性扣除Trion（统一层）- 每次射击动作消耗
+            if (anyHit)
+                ChipUsageCostHelper.ConsumeUsageCost(pawn, chipThing);
 
             return anyHit;
         }
 
-        /// <summary>从WeaponChipConfig读取burstShotCount（实际齐射发射数）。</summary>
-        private static int GetBurstCountFromConfig(WeaponChipConfig cfg)
+        /// <summary>从VerbChipConfig读取burstShotCount（实际齐射发射数）。</summary>
+        private static int GetBurstCountFromConfig(VerbChipConfig cfg)
         {
             return cfg?.primaryVerbProps?.burstShotCount ?? 1;
         }
