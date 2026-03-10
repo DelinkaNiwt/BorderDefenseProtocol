@@ -41,7 +41,7 @@ namespace BDP.Trigger.ShotPipeline
             // 暂无
 
             // Fire 阶段模块（按优先级升序执行）
-            config.FireModules.Add(new VolleySpreadModule());
+            config.FireModules.Add(new VolleySpreadModule(priority: 10, spreadRadius: 0f));
             config.FireModules.Add(new TrionCostModule());
             config.FireModules.Add(new FlightDataModule());
             config.FireModules.Add(new AutoRouteFireModule());

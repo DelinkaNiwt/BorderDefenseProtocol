@@ -61,7 +61,19 @@ namespace BDP.Trigger.ShotPipeline.Modules
             // 检查 Trion 是否足够
             if (finalCost > 0f)
             {
-                var trionComp = session.Context.Caster?.TryGetComp<BDP.Core.CompTrion>();
+                var caster = session.Context.Caster;
+                if (caster == null)
+                {
+                    return new FireIntent
+                    {
+                        AbortShot = true,
+                        AbortReason = "施法者为空",
+                        DamageMultiplier = 1f,
+                        SpeedMultiplier = 1f
+                    };
+                }
+
+                var trionComp = caster.GetComp<BDP.Core.CompTrion>();
                 if (trionComp == null || trionComp.Available < finalCost)
                 {
                     // Trion 不足，中止射击
