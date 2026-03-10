@@ -1,4 +1,5 @@
 using BDP.Core;
+using BDP.Trigger.ShotPipeline;
 using UnityEngine;
 using Verse;
 
@@ -11,6 +12,9 @@ namespace BDP.Trigger
     ///   · Simultaneous：齐射模式，单次TryCastShot内循环瞬发所有子弹
     ///
     /// firingPattern由CompTriggerBody在创建Verb时从VerbChipConfig读取并设置。
+    ///
+    /// v16.0管线重构：移除TryCastShot override，委托管线逻辑给基类，
+    /// 只保留ExecuteFire中的FiringPattern分发逻辑。
     /// </summary>
     public class Verb_BDPSingle : Verb_BDPRangedBase
     {
@@ -19,7 +23,10 @@ namespace BDP.Trigger
         /// </summary>
         internal FiringPattern firingPattern;
 
-        protected override bool TryCastShot()
+        /// <summary>
+        /// 执行射击：根据FiringPattern分发到逐发或齐射逻辑。
+        /// </summary>
+        protected override bool ExecuteFire(ShotSession session)
         {
             var pawn = CasterPawn;
             if (pawn == null) return false;

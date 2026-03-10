@@ -1,5 +1,6 @@
 using BDP.Core;
 using BDP.Projectiles;
+using BDP.Trigger.ShotPipeline;
 using UnityEngine;
 using Verse;
 
@@ -68,7 +69,11 @@ namespace BDP.Trigger
 
         // ── 射击逻辑 ──
 
-        protected override bool TryCastShot()
+        /// <summary>
+        /// ExecuteFire override：组合技调度逻辑。
+        /// 计算两侧芯片的平均参数（burst × FireMode倍率），根据firingPattern分发到齐射/逐发模式。
+        /// </summary>
+        protected override bool ExecuteFire(ShotSession session)
         {
             var pawn = CasterPawn;
             if (pawn == null || comboDef == null) return false;
@@ -105,7 +110,7 @@ namespace BDP.Trigger
                 );
             }
 
-            // 齐射模式：单次TryCastShot内循环发射
+            // 齐射模式：单次ExecuteFire内循环发射
             if (firingPattern == FiringPattern.Simultaneous)
                 return DoSimultaneousShot(pawn, triggerComp, leftSlot, rightSlot, effectiveBurst);
 
