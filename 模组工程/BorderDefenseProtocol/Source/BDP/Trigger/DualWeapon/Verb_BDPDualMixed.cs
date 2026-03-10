@@ -14,58 +14,12 @@ namespace BDP.Trigger
     /// - 左齐射(5发) + 右逐发(7发) → L(瞬发5发) -> R -> R -> R -> R -> R -> R -> R
     /// - 左逐发(6发) + 右齐射(4发) → L -> R(瞬发4发) -> L -> L -> L -> L -> L
     /// </summary>
-    public class Verb_BDPDualMixed : Verb_BDPRangedBase
+    public class Verb_BDPDualMixed : Verb_BDPDualBase
     {
-        private int dualBurstIndex = 0;
-        private int leftRemaining = 0;
-        private int rightRemaining = 0;
-        private ThingDef leftProjectileDef;
-        private ThingDef rightProjectileDef;
         private bool leftIsVolley = false;
         private bool rightIsVolley = false;
         private bool leftVolleyFired = false;
         private bool rightVolleyFired = false;
-
-        /// <summary>查找两侧中支持引导的芯片配置。</summary>
-        protected override VerbChipConfig GetGuidedConfig()
-        {
-            var triggerComp = GetTriggerComp();
-            if (triggerComp == null) return null;
-            var leftCfg = triggerComp.GetActiveSlot(SlotSide.LeftHand)
-                ?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
-            var rightCfg = triggerComp.GetActiveSlot(SlotSide.RightHand)
-                ?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
-            if (leftCfg?.ranged?.guided != null) return leftCfg;
-            if (rightCfg?.ranged?.guided != null) return rightCfg;
-            return null;
-        }
-
-        protected override ThingDef GetAutoRouteProjectileDef()
-        {
-            var tc = GetTriggerComp();
-            var leftCfg = tc?.GetActiveSlot(SlotSide.LeftHand)?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
-            var rightCfg = tc?.GetActiveSlot(SlotSide.RightHand)?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
-
-            if (leftCfg?.ranged?.guided != null)
-                return leftCfg.GetPrimaryProjectileDef() ?? base.GetAutoRouteProjectileDef();
-            if (rightCfg?.ranged?.guided != null)
-                return rightCfg.GetPrimaryProjectileDef() ?? base.GetAutoRouteProjectileDef();
-
-            return leftCfg?.GetPrimaryProjectileDef()
-                ?? rightCfg?.GetPrimaryProjectileDef()
-                ?? base.GetAutoRouteProjectileDef();
-        }
-
-        protected override LocalTargetInfo GetLosCheckTarget() => gs.GetDualLosCheckTarget(currentTarget);
-
-        protected override void OnProjectileLaunched(Projectile proj)
-        {
-            if (gs.ManualAnchorsActive && gs.CurrentShotHasPath)
-                gs.AttachManualFlight(proj);
-            else
-                gs.AttachAutoRouteFlight(proj, gs.ResolveAutoRouteFinalTarget(currentTarget),
-                    GetGuidedConfig()?.ranged?.guided?.anchorSpread ?? 0.3f);
-        }
 
         public override bool TryStartCastOn(LocalTargetInfo castTarg, LocalTargetInfo destTarg,
             bool surpriseAttack = false, bool canHitNonTargetPawns = true,
@@ -89,11 +43,6 @@ namespace BDP.Trigger
         public override void Reset()
         {
             base.Reset();
-            dualBurstIndex = 0;
-            leftRemaining = 0;
-            rightRemaining = 0;
-            leftProjectileDef = null;
-            rightProjectileDef = null;
             leftVolleyFired = false;
             rightVolleyFired = false;
         }
@@ -231,9 +180,6 @@ namespace BDP.Trigger
             dualBurstIndex++;
             if (burstShotsLeft <= 1) dualBurstIndex = 0;
         }
-
-        private bool IsSideGuided(SlotSide side)
-            => side == SlotSide.LeftHand ? gs.LeftHasPath : gs.RightHasPath;
 
         private void InitDualBurst()
         {

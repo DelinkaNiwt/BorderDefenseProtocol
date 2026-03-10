@@ -10,54 +10,8 @@ namespace BDP.Trigger
     /// 在单次TryCastShot()中发射两侧所有子弹。
     /// 支持引导模块：只有带引导模块的一侧才能使用手动引导路径。
     /// </summary>
-    public class Verb_BDPDualVolley : Verb_BDPRangedBase
+    public class Verb_BDPDualVolley : Verb_BDPDualBase
     {
-        /// <summary>查找两侧中支持引导的芯片配置。</summary>
-        protected override VerbChipConfig GetGuidedConfig()
-        {
-            var triggerComp = GetTriggerComp();
-            if (triggerComp == null) return null;
-            var leftCfg = triggerComp.GetActiveSlot(SlotSide.LeftHand)
-                ?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
-            var rightCfg = triggerComp.GetActiveSlot(SlotSide.RightHand)
-                ?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
-            // 优先返回左侧，如果左侧不支持则返回右侧
-            if (leftCfg?.ranged?.guided != null) return leftCfg;
-            if (rightCfg?.ranged?.guided != null) return rightCfg;
-            return null;
-        }
-
-        protected override ThingDef GetAutoRouteProjectileDef()
-        {
-            var tc = GetTriggerComp();
-            var leftCfg = tc?.GetActiveSlot(SlotSide.LeftHand)?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
-            var rightCfg = tc?.GetActiveSlot(SlotSide.RightHand)?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
-
-            // 自动绕行只对引导弹有意义：优先返回支持引导的一侧弹药
-            if (leftCfg?.ranged?.guided != null)
-                return leftCfg.GetPrimaryProjectileDef() ?? base.GetAutoRouteProjectileDef();
-            if (rightCfg?.ranged?.guided != null)
-                return rightCfg.GetPrimaryProjectileDef() ?? base.GetAutoRouteProjectileDef();
-
-            return leftCfg?.GetPrimaryProjectileDef()
-                ?? rightCfg?.GetPrimaryProjectileDef()
-                ?? base.GetAutoRouteProjectileDef();
-        }
-
-        protected override LocalTargetInfo GetLosCheckTarget() => gs.GetDualLosCheckTarget(currentTarget);
-
-        /// <summary>
-        /// 弹道发射后回调：手动引导时走引导路径，否则尝试自动绕行。
-        /// </summary>
-        protected override void OnProjectileLaunched(Projectile proj)
-        {
-            if (gs.ManualAnchorsActive && gs.CurrentShotHasPath)
-                gs.AttachManualFlight(proj);
-            else
-                gs.AttachAutoRouteFlight(proj, gs.ResolveAutoRouteFinalTarget(currentTarget),
-                    GetGuidedConfig()?.ranged?.guided?.anchorSpread ?? 0.3f);
-        }
-
         public override bool TryStartCastOn(LocalTargetInfo castTarg, LocalTargetInfo destTarg,
             bool surpriseAttack = false, bool canHitNonTargetPawns = true,
             bool preventFriendlyFire = false, bool nonInterruptingSelfCast = false)

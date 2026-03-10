@@ -18,21 +18,6 @@ namespace BDP.Trigger
     /// </summary>
     public class Verb_BDPDualRanged : Verb_BDPDualBase
     {
-
-        /// <summary>查找两侧中支持引导的芯片配置。</summary>
-        protected override VerbChipConfig GetGuidedConfig()
-        {
-            var triggerComp = GetTriggerComp();
-            if (triggerComp == null) return null;
-            var leftCfg = triggerComp.GetActiveSlot(SlotSide.LeftHand)
-                ?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
-            var rightCfg = triggerComp.GetActiveSlot(SlotSide.RightHand)
-                ?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
-            if (leftCfg?.ranged?.guided != null) return leftCfg;
-            if (rightCfg?.ranged?.guided != null) return rightCfg;
-            return null;
-        }
-
         /// <summary>
         /// 双侧TryStartCastOn：每次新burst开始时重置双武器状态，
         /// 然后使用双侧专用的InterceptDualCastTarget。
@@ -64,59 +49,6 @@ namespace BDP.Trigger
                 gs.PostDualCastOn(ref currentTarget, actualTarget);
 
             return result;
-        }
-
-        protected override ThingDef GetAutoRouteProjectileDef()
-        {
-            var triggerComp = GetTriggerComp();
-            var leftCfg = triggerComp?.GetActiveSlot(SlotSide.LeftHand)?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
-            var rightCfg = triggerComp?.GetActiveSlot(SlotSide.RightHand)?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
-
-            // 自动绕行只对引导弹有意义：优先返回支持引导的一侧弹药。
-            if (leftCfg?.ranged?.guided != null)
-                return leftCfg.GetPrimaryProjectileDef() ?? base.GetAutoRouteProjectileDef();
-            if (rightCfg?.ranged?.guided != null)
-                return rightCfg.GetPrimaryProjectileDef() ?? base.GetAutoRouteProjectileDef();
-
-            return leftCfg?.GetPrimaryProjectileDef()
-                ?? rightCfg?.GetPrimaryProjectileDef()
-                ?? base.GetAutoRouteProjectileDef();
-        }
-
-        /// <summary>双侧LOS检查：感知CurrentShotHasPath。</summary>
-        protected override LocalTargetInfo GetLosCheckTarget()
-            => gs.GetDualLosCheckTarget(currentTarget);
-
-        /// <summary>
-        /// 双侧弹道发射回调：
-        /// - 手动引导：仅当前发属于引导侧时附加手动锚点路径；
-        /// - 自动绕行：与单侧保持一致，走同一套自动路径挂载流程。
-        /// </summary>
-        protected override void OnProjectileLaunched(Projectile proj)
-        {
-            if (gs.ManualAnchorsActive && gs.CurrentShotHasPath)
-                gs.AttachManualFlight(proj);
-            else
-                gs.AttachAutoRouteFlight(proj, gs.ResolveAutoRouteFinalTarget(currentTarget),
-                    GetGuidedConfig()?.ranged?.guided?.anchorSpread ?? 0.3f);
-        }
-
-        /// <summary>
-        /// 重写Reset：清理双武器burst残留状态。
-        /// 原因：原版Verb.Reset()不知道dualBurstIndex等字段，
-        /// 当burst被外部中断（目标摧毁、LOS丢失等）时，
-        /// TryCastNextBurstShot直接设burstShotsLeft=0结束burst，
-        /// 但dualBurstIndex/remaining/projectileDef未被清理，
-        /// 导致下次攻击InitDualBurst()不被调用，使用残留状态。
-        /// </summary>
-        public override void Reset()
-        {
-            base.Reset();
-            dualBurstIndex = 0;
-            leftRemaining = 0;
-            rightRemaining = 0;
-            leftProjectileDef = null;
-            rightProjectileDef = null;
         }
 
         protected override bool TryCastShot()
@@ -163,9 +95,6 @@ namespace BDP.Trigger
 
             return result;
         }
-
-        private bool IsSideGuided(SlotSide side)
-            => side == SlotSide.LeftHand ? gs.LeftHasPath : gs.RightHasPath;
 
         private void InitDualBurst()
         {
