@@ -65,33 +65,9 @@ namespace BDP.Trigger.ShotPipeline.Modules
         }
     }
 
-    /// <summary>
-    /// 锚点瞄准模块（Stub 实现）
-    /// 完整实现将在 Chunk 2 中完成
-    /// </summary>
-    public class AnchorAimModule : IShotAimModule
-    {
-        public int Priority => 20;
+    // AnchorAimModule 已迁移至独立文件：
+    // Trigger/ShotPipeline/Modules/AnchorAimModule.cs
 
-        public AimIntent ResolveAim(ShotSession session)
-        {
-            // Stub: 不产出锚点
-            return AimIntent.Default;
-        }
-    }
-
-    /// <summary>
-    /// 自动绕行瞄准模块（Stub 实现）
-    /// 完整实现将在 Chunk 2 中完成
-    /// </summary>
-    public class AutoRouteAimModule : IShotAimModule
-    {
-        public int Priority => 30;
-
-        public AimIntent ResolveAim(ShotSession session)
-        {
-            // Stub: 不产出路由
-            return AimIntent.Default;
-        }
-    }
+    // AutoRouteAimModule 已迁移至独立文件：
+    // Trigger/ShotPipeline/Modules/AutoRouteAimModule.cs
 }

@@ -28,8 +28,8 @@ namespace BDP.Trigger.ShotPipeline
 
             // Aim 阶段模块（按优先级升序执行）
             config.AimModules.Add(new LosCheckModule());
-            config.AimModules.Add(new AnchorAimModule());
-            config.AimModules.Add(new AutoRouteAimModule());
+            config.AimModules.Add(new AutoRouteAimModule(priority: 15)); // 必须高于 LosCheckModule(10)
+            config.AimModules.Add(new AnchorAimModule(priority: 20, anchorSpread: 0.3f));
 
             // Aim 渲染器（Targeting 子步骤）
             config.AimRenderers.Add(new AreaIndicatorModule());
