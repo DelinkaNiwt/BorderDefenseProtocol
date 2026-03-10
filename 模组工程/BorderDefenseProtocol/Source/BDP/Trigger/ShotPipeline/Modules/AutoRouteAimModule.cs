@@ -88,6 +88,9 @@ namespace BDP.Trigger.ShotPipeline.Modules
             if (cachedRoute == null || !cachedRoute.Value.IsValid)
                 return intent;
 
+            // 将路由结果写入 ShotSession，供 AutoRouteFireModule 读取
+            session.RouteResult = cachedRoute;
+
             // 选择首锚点作为 LOS 检查目标（迁移自 TryPickLosAnchor）
             if (!TryPickLosAnchor(cachedRoute.Value, ctx.CasterPosition, out IntVec3 losAnchor))
                 return intent;
