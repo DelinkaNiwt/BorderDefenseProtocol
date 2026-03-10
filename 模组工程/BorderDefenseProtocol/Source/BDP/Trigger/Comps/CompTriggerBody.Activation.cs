@@ -214,7 +214,7 @@ namespace BDP.Trigger
             if (chipComp.Props.drainPerDay > 0f)
                 TrionComp?.RegisterDrain($"chip_{slot.side}_{slot.index}", chipComp.Props.drainPerDay);
 
-            // 设置激活上下文（供WeaponChipEffect等读取侧别和槽位）
+            // 设置激活上下文（供VerbChipEffect等读取侧别和槽位）
             // C3修复：try/finally保护，防止effect.Activate异常导致上下文残留
             ActivatingSide = slot.side;
             ActivatingSlot = slot;
@@ -253,7 +253,7 @@ namespace BDP.Trigger
             // ── v2.1（T32）：统一注销持续消耗 ──
             TrionComp?.UnregisterDrain($"chip_{slot.side}_{slot.index}");
 
-            // 设置激活上下文（供WeaponChipEffect等读取侧别和槽位）
+            // 设置激活上下文（供VerbChipEffect等读取侧别和槽位）
             // C3修复：try/finally保护，防止effect.Deactivate异常导致上下文残留
             ActivatingSide = slot.side;
             ActivatingSlot = slot;
@@ -420,26 +420,8 @@ namespace BDP.Trigger
         //  生命周期
         // ═══════════════════════════════════════════
 
-        // 静态构造函数：订阅部位破坏事件（v12.2新增：手部缺失联动）
-        static CompTriggerBody()
-        {
-            BDPEvents.OnPartDestroyed += OnPartDestroyed;
-        }
-
-        /// <summary>
-        /// 响应部位破坏事件（静态事件处理器）。
-        /// </summary>
-        private static void OnPartDestroyed(PartDestroyedEventArgs args)
-        {
-            if (!args.IsHandPart) return;
-
-            // 找到该Pawn装备的触发体
-            CompTriggerBody comp = args.Pawn.equipment?.Primary?.GetComp<CompTriggerBody>();
-            if (comp != null)
-            {
-                comp.OnHandDestroyed(args.HandSide);
-            }
-        }
+        // 手部缺失联动已改为由Patch_Pawn_PostApplyDamage直接调用
+        // CompTriggerBody.CheckHandIntegrity()，不再依赖BDPEvents事件。
 
         // ═══════════════════════════════════════════
         //  存档

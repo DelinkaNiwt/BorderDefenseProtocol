@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- ========================================
+       护盾系统 - Hediff定义
+       ======================================== -->
+
+  <!-- 战斗护盾 - 基础版本（全方位防护） -->
+  <HediffDef>
+    <defName>BDP_Shield</defName>
+    <label>战斗护盾</label>
+    <description>一个能量护盾，可以抵挡来自任意方向的远程攻击。抵挡成功率70%。每次抵挡会消耗Trion能量。</description>
+    <hediffClass>BDP.Trigger.Shield.Hediff_BDPShield</hediffClass>
+    <defaultLabelColor>(0.6, 0.8, 1.0)</defaultLabelColor>
+    <isBad>false</isBad>
+    <comps>
+      <li Class="BDP.Trigger.Shield.HediffCompProperties_BDPShield">
+        <!-- 方向判定：全方位防护 -->
+        <enableAngleCheck>false</enableAngleCheck>
+        <blockAngleRange>360</blockAngleRange>
+        <blockAngleOffset>0</blockAngleOffset>
+
+        <!-- 成功率：70% -->
+        <blockChance>0.7</blockChance>
+
+        <!-- Trion消耗：受到20点伤害，消耗10 Trion (20 × 0.5) -->
+        <trionCostMultiplier>0.5</trionCostMultiplier>
+
+        <!-- 特效配置 -->
+        <blockEffectDef>Interceptor_BlockedProjectilePsychic</blockEffectDef>
+        <effectScale>0.25</effectScale> <!-- 特效缩小到25% (原始的50%) -->
+        <shieldRadius>0.6</shieldRadius> <!-- 护盾半径0.6格，紧贴小人身边 -->
+
+        <!-- 可视化配置 -->
+        <showShieldBubble>true</showShieldBubble>
+        <shieldColor>(100, 150, 255, 50)</shieldColor> <!-- 浅蓝色半透明 -->
+      </li>
+    </comps>
+  </HediffDef>
+
+  <!-- 前方护盾 - 定向防护（仅前方120度） -->
+  <HediffDef>
+    <defName>BDP_ShieldFront</defName>
+    <label>前方护盾</label>
+    <description>一个能量护盾，只能抵挡来自前方120度（左60°右60°）的远程攻击。抵挡成功率100%，但防护范围有限。每次抵挡会消耗Trion能量。</description>
+    <hediffClass>BDP.Trigger.Shield.Hediff_BDPShield</hediffClass>
+    <defaultLabelColor>(0.6, 0.8, 1.0)</defaultLabelColor>
+    <isBad>false</isBad>
+    <comps>
+      <li Class="BDP.Trigger.Shield.HediffCompProperties_BDPShield">
+        <!-- 方向判定：仅前方120度 -->
+        <enableAngleCheck>true</enableAngleCheck>
+        <blockAngleRange>120</blockAngleRange>
+        <blockAngleOffset>0</blockAngleOffset>
+
+        <!-- 成功率：100% -->
+        <blockChance>1.0</blockChance>
+
+        <!-- Trion消耗：与全方位护盾相同 -->
+        <trionCostMultiplier>0.5</trionCostMultiplier>
+
+        <!-- 特效配置 -->
+        <blockEffectDef>Interceptor_BlockedProjectilePsychic</blockEffectDef>
+        <effectScale>0.25</effectScale> <!-- 特效缩小到25% (原始的50%) -->
+        <shieldRadius>0.6</shieldRadius> <!-- 护盾半径0.6格，紧贴小人身边 -->
+
+        <!-- 可视化配置 -->
+        <showShieldBubble>true</showShieldBubble>
+        <shieldColor>(100, 200, 255, 60)</shieldColor> <!-- 更亮的蓝色，区分全方位护盾 -->
+      </li>
+    </comps>
+  </HediffDef>
+
+</Defs>
+

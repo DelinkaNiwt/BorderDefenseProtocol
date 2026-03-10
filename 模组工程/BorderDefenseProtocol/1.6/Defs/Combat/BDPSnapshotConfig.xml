@@ -17,6 +17,7 @@
     <excludedHediffs>
       <li>PsychicAmplifier</li>   <!-- 启灵神经（灵能等级） -->
       <li>MechlinkImplant</li>    <!-- 机控中枢（机械师植入） -->
+      <li>BDP_CombatBodyActive</li>  <!-- 战斗体激活Hediff（preventsDeath），由Orchestrator显式移除 -->
     </excludedHediffs>
 
     <!-- 按C#类排除（含子类自动覆盖） -->

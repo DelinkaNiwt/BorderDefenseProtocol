@@ -14,7 +14,7 @@ namespace BDP.Trigger
         public float activationCost = 0f;
 
         /// <summary>
-        /// IChipEffect实现类（XML中填写全限定类名，如"BDP.Trigger.WeaponChipEffect"）。
+        /// IChipEffect实现类（XML中填写全限定类名，如"BDP.Trigger.VerbChipEffect"）。
         /// 实例化方式：Activator.CreateInstance(chipEffectClass)，要求无参构造函数。
         /// </summary>
         public Type chipEffectClass;
@@ -32,6 +32,16 @@ namespace BDP.Trigger
         /// 0=无持续消耗。RegisterDrain key格式：chip_{side}_{index}。
         /// </summary>
         public float drainPerDay = 0f;
+
+        /// <summary>
+        /// 每次使用消耗（统一层）。
+        /// 适用于：
+        ///   - 武器芯片：每次射击动作消耗（无论burst多少发）
+        ///   - 能力芯片：每次使用能力消耗
+        ///   - 其他芯片：根据具体使用场景定义
+        /// 0=无使用消耗。
+        /// </summary>
+        public float usageCost = 0f;
 
         /// <summary>
         /// 激活预热时间（ticks）。切换时取 max(switchCooldown, warmup)。

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 蚱蜢能力定义 -->
+  <AbilityDef>
+    <defName>BDP_Ability_Grasshopper</defName>
+    <label>蚱蜢</label>
+    <description>凝聚Trion弹射跳板，以爆发性速度弹向目标位置。</description>
+    <iconPath>UI/Abilities/SonicDash</iconPath>
+    <cooldownTicksRange>60</cooldownTicksRange> <!-- 1秒冷却 -->
+    <hostile>false</hostile>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+
+    <verbProperties>
+      <verbClass>BDP.Trigger.Verb_CastAbilityGrasshopper</verbClass>
+      <label>dash</label>
+      <violent>false</violent>
+      <forceNormalTimeSpeed>false</forceNormalTimeSpeed>
+      <warmupTime>0.2</warmupTime>
+      <range>24.9</range>
+      <requireLineOfSight>true</requireLineOfSight>
+      <soundCast>Longjump_Jump</soundCast>
+      <soundLanding>Longjump_Land</soundLanding>
+
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>false</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+
+    <comps>
+      <li Class="BDP.Trigger.CompProperties_AbilityTrionCost"/>
+    </comps>
+
+    <jobDef>CastJump</jobDef>
+  </AbilityDef>
+
+  <!-- PawnFlyer定义 - 蚱蜢弹射器 -->
+  <ThingDef ParentName="PawnFlyerBase">
+    <defName>BDP_PawnFlyer_Grasshopper</defName>
+    <label>grasshopper launcher</label>
+    <thingClass>BDP.Trigger.PawnFlyer_Grasshopper</thingClass>
+
+    <!-- 材质设置 -->
+    <seeThroughFog>true</seeThroughFog>
+    <drawerType>RealtimeOnly</drawerType>
+
+    <!-- 飞行参数 - 炮弹效果：极快爆发+急刹停 -->
+    <pawnFlyer>
+      <flightSpeed>45</flightSpeed> <!-- 提高速度增强爆发感 -->
+      <flightDurationMin>0.1</flightDurationMin> <!-- 最短飞行时间 -->
+      <heightFactor>0</heightFactor> <!-- 贴地飞行 -->
+
+      <!-- 加速曲线 - 炮弹效果（使用SimpleCurve线性插值，不会过冲）-->
+      <!-- Inherit="False" 确保完整替换父级曲线，而非追加合并 -->
+      <progressCurve Inherit="False">
+        <points>
+          <li>(0, 0)</li>
+          <li>(0.1, 0.5)</li>    <!-- 爆发段：10%时间=50%距离，斜率5 -->
+          <li>(0.25, 0.96)</li>  <!-- 高速段：25%时间=96%距离，50-96%段斜率3 -->
+          <li>(0.85, 0.995)</li> <!-- 急刹段：85%时间=99.5%距离 -->
+          <li>(1, 1)</li>        <!-- 完全停止 -->
+        </points>
+      </progressCurve>
+    </pawnFlyer>
+  </ThingDef>
+
+</Defs>

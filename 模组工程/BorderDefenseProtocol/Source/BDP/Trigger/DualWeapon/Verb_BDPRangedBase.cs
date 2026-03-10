@@ -272,7 +272,7 @@ namespace BDP.Trigger
                 gs.AttachManualFlight(proj);
             else
                 gs.AttachAutoRouteFlight(proj, gs.ResolveAutoRouteFinalTarget(currentTarget),
-                    GetGuidedConfig()?.anchorSpread ?? 0.3f);
+                    GetGuidedConfig()?.ranged?.guided?.anchorSpread ?? 0.3f);
         }
 
         // ── PMS重构：引导弹支持（从Verb_BDPGuided上提） ──
@@ -286,10 +286,10 @@ namespace BDP.Trigger
         /// 双侧Verb：子类重写，查找支持引导的那一侧的config。
         /// 用于SupportsGuided、StartAnchorTargeting、OnProjectileLaunched。
         /// </summary>
-        protected virtual WeaponChipConfig GetGuidedConfig() => GetChipConfig();
+        protected virtual VerbChipConfig GetGuidedConfig() => GetChipConfig();
 
         /// <summary>当前芯片是否支持变化弹（引导飞行）。</summary>
-        public virtual bool SupportsGuided => GetGuidedConfig()?.supportsGuided == true;
+        public virtual bool SupportsGuided => GetGuidedConfig()?.ranged?.guided != null;
 
         /// <summary>
         /// 启动多步锚点瞄准（由Command_BDPChipAttack.GizmoOnGUIInt调用）。
@@ -298,17 +298,17 @@ namespace BDP.Trigger
         public virtual void StartAnchorTargeting()
         {
             var cfg = GetGuidedConfig();
-            if (cfg == null || !cfg.supportsGuided)
+            if (cfg?.ranged?.guided == null)
             {
                 Find.Targeter.BeginTargeting(this);
                 return;
             }
 
             AnchorTargetingHelper.BeginAnchorTargeting(
-                this, CasterPawn, cfg.maxAnchors, verbProps.range,
+                this, CasterPawn, cfg.ranged.guided.maxAnchors, verbProps.range,
                 (anchors, finalTarget) =>
                 {
-                    gs.StoreTargetingResult(anchors, finalTarget, cfg.anchorSpread);
+                    gs.StoreTargetingResult(anchors, finalTarget, cfg.ranged.guided.anchorSpread);
                     // 直接调用OrderForceTargetCore创建BDP_ChipRangedAttack job，
                     // 而非BaseOrderForceTarget（原版Verb.OrderForceTarget创建的标准Job
                     // 无法驱动脱离VerbTracker的芯片Verb）
@@ -394,11 +394,11 @@ namespace BDP.Trigger
         }
 
         /// <summary>
-        /// 通过chipSide定位当前芯片的WeaponChipConfig。
+        /// 通过chipSide定位当前芯片的VerbChipConfig。
         /// chipSide由创建时设置，运行时直接按侧别查找。
         /// chipSide为null时返回null（双侧/组合技Verb由子类各自处理）。
         /// </summary>
-        protected WeaponChipConfig GetChipConfig()
+        protected VerbChipConfig GetChipConfig()
         {
             var triggerComp = GetTriggerComp();
             if (triggerComp == null) return null;
@@ -406,7 +406,7 @@ namespace BDP.Trigger
             // chipSide已设置：按侧别精确查找
             if (chipSide.HasValue)
                 return triggerComp.GetActiveSlot(chipSide.Value)
-                    ?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
+                    ?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
 
             // chipSide为null：双侧/组合技Verb
             return null;

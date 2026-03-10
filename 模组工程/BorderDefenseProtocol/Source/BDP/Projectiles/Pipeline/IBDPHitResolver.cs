@@ -7,11 +7,11 @@ namespace BDP.Projectiles.Pipeline
     /// </summary>
     public struct HitContext
     {
-        /// <summary>当前飞行阶段（只读）。</summary>
-        public readonly FlightPhase CurrentPhase;
-
         /// <summary>vanilla命中判定的目标（只读）。</summary>
         public readonly LocalTargetInfo VanillaHitThing;
+
+        /// <summary>锁定目标——供命中修正参考（只读）。</summary>
+        public readonly LocalTargetInfo LockedTarget;
 
         /// <summary>强制打地面（true=忽略usedTarget，Impact(null)）。</summary>
         public bool ForceGround;
@@ -19,10 +19,10 @@ namespace BDP.Projectiles.Pipeline
         /// <summary>覆盖命中目标（非default时替换usedTarget）。</summary>
         public LocalTargetInfo OverrideTarget;
 
-        public HitContext(FlightPhase phase, LocalTargetInfo vanillaHit)
+        public HitContext(LocalTargetInfo vanillaHit, LocalTargetInfo lockedTarget)
         {
-            CurrentPhase = phase;
             VanillaHitThing = vanillaHit;
+            LockedTarget = lockedTarget;
             ForceGround = false;
             OverrideTarget = default;
         }

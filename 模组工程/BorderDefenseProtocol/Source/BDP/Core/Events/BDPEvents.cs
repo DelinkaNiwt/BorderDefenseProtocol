@@ -40,6 +40,12 @@ namespace BDP.Core
         /// </summary>
         public static event Action<PartDestroyedEventArgs> OnPartDestroyed;
 
+        /// <summary>
+        /// 伤害接收事件（v13.1新增：破裂检测解耦）。
+        /// 当Pawn受到伤害后触发，供战斗体系统响应（Trion消耗、破裂检测等）。
+        /// </summary>
+        public static event Action<DamageReceivedEventArgs> OnDamageReceived;
+
         // ═══════════════════════════════════════════
         //  事件触发方法
         // ═══════════════════════════════════════════
@@ -66,6 +72,14 @@ namespace BDP.Core
         public static void TriggerPartDestroyedEvent(PartDestroyedEventArgs args)
         {
             OnPartDestroyed?.Invoke(args);
+        }
+
+        /// <summary>
+        /// 触发伤害接收事件（v13.1新增）。
+        /// </summary>
+        public static void TriggerDamageReceived(DamageReceivedEventArgs args)
+        {
+            OnDamageReceived?.Invoke(args);
         }
     }
 }

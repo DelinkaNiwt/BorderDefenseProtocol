@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+  <!-- 侧别标签 -->
+  <BDP_LeftHand>左手</BDP_LeftHand>
+  <BDP_RightHand>右手</BDP_RightHand>
+  <BDP_Special>特殊</BDP_Special>
+
+  <!-- 武器参数标签 -->
+  <BDP_Range>射程</BDP_Range>
+  <BDP_TrionPerShot>Trion消耗</BDP_TrionPerShot>
+  <BDP_VolleySpread>齐射散布</BDP_VolleySpread>
+  <BDP_GuidedSupport>变化弹支持</BDP_GuidedSupport>
+  <BDP_PassthroughPower>穿透力</BDP_PassthroughPower>
+  <BDP_Damage>伤害</BDP_Damage>
+  <BDP_Warmup>预热时间</BDP_Warmup>
+  <BDP_BurstCount>连射数</BDP_BurstCount>
+  <BDP_BurstRate>连射速率</BDP_BurstRate>
+
+  <!-- 芯片基础信息标签 -->
+  <BDP_ChipCategory>芯片类别</BDP_ChipCategory>
+  <BDP_ActivationCost>激活成本</BDP_ActivationCost>
+  <BDP_AllocationCost>占用成本</BDP_AllocationCost>
+  <BDP_ActivationWarmup>激活预热</BDP_ActivationWarmup>
+  <BDP_DeactivationDelay>关闭后摇</BDP_DeactivationDelay>
+  <BDP_DrainPerDay>持续消耗</BDP_DrainPerDay>
+  <BDP_MinOutputPower>功率要求</BDP_MinOutputPower>
+  <BDP_SlotRestriction>槽位限制</BDP_SlotRestriction>
+  <BDP_DualHand>双手占用</BDP_DualHand>
+  <BDP_ExclusionTags>互斥标签</BDP_ExclusionTags>
+
+  <!-- 触发器配置标签 -->
+  <BDP_NoActiveChips>无激活芯片</BDP_NoActiveChips>
+  <BDP_CurrentConfig>当前配置</BDP_CurrentConfig>
+  <BDP_LoadedChips>装载芯片</BDP_LoadedChips>
+
+  <!-- 芯片效果标签 -->
+  <BDP_GrantedHediff>授予效果</BDP_GrantedHediff>
+  <BDP_GrantedAbility>授予技能</BDP_GrantedAbility>
+
+  <!-- 槽位状态标签 -->
+  <BDP_SlotEmpty>空</BDP_SlotEmpty>
+  <BDP_SlotDisabled>已禁用</BDP_SlotDisabled>
+  <BDP_SlotActive>激活</BDP_SlotActive>
+  <BDP_SlotStandby>待机</BDP_SlotStandby>
+
+  <!-- 通用标签 -->
+  <BDP_Yes>是</BDP_Yes>
+  <BDP_No>否</BDP_No>
+
+  <!-- StatCategory标签（在StatCategoryDefs_BDP.xml中定义） -->
+  <!-- 这些标签会自动从XML的<label>读取，无需在这里重复定义 -->
+
+</LanguageData>

@@ -24,28 +24,33 @@ namespace BDP.Core
         public static JobDef BDP_ChipRangedAttack;
         public static JobDef BDP_ChipMeleeAttack;
 
-        // ── HediffDef（战斗体系统 M1） ──
+        // ── HediffDef（战斗体系统） ──
         public static HediffDef BDP_CombatBodyActive;
         public static HediffDef BDP_Exhaustion;
         public static HediffDef BDP_CombatBodyCollapsing;
         public static HediffDef BDP_CombatBodyPartPending;
 
-        // ── HediffDef（战斗体伤害系统） ──
-        public static HediffDef BDP_CombatBodyPartDestroyed;
+        // ── HediffDef（护盾系统） ──
+        public static HediffDef BDP_Shield;
+        public static HediffDef BDP_ShieldFront;
 
-        // ── HediffDef（战斗体伤口系统） ──
-        public static HediffDef BDP_CombatWound_Bullet;
-        public static HediffDef BDP_CombatWound_Cut;
-        public static HediffDef BDP_CombatWound_Blunt;
-        public static HediffDef BDP_CombatWound_Burn;
-        public static HediffDef BDP_CombatWound_Stab;
-        public static HediffDef BDP_CombatWound_Crack;
-        public static HediffDef BDP_CombatWound_Scratch;
-        public static HediffDef BDP_CombatWound_Bite;
-        public static HediffDef BDP_CombatWound_Shredded;
+        // 重构说明：
+        // - BDP_CombatBodyPartDestroyed 已删除（使用原版 Hediff_MissingPart）
+        // - BDP_CombatWound_* 系列已删除（使用原版 Hediff_Injury）
 
         // ── ThingDef（紧急脱离系统） ──
         public static ThingDef BDP_EmergencyBeacon;
+
+        // ── ThingDef（芯片） ──
+        public static ThingDef BDP_Chip_Shield;
+        public static ThingDef BDP_Chip_ShieldFront;
+
+        // ── ThingDef（PawnFlyer） ──
+        public static ThingDef BDP_PawnFlyer_Grasshopper;
+
+        // ── FleckDef（蚱蜢特效） ──
+        public static FleckDef BDP_GrasshopperPlatform;
+        public static FleckDef BDP_GrasshopperPulse;
 
         static BDP_DefOf()
         {

@@ -114,8 +114,8 @@ namespace BDP.FireMode
 
         // ── UI显示：实际值（从芯片def读取基础数据后乘以倍率） ──
 
-        private WeaponChipConfig GetChipConfig()
-            => parent?.def?.GetModExtension<WeaponChipConfig>();
+        private VerbChipConfig GetChipConfig()
+            => parent?.def?.GetModExtension<VerbChipConfig>();
 
         /// <summary>UI显示用：实际伤害值（整数）。无法读取时返回-1。</summary>
         public int GetDisplayDamage()

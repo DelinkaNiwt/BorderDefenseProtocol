@@ -25,7 +25,7 @@ namespace BDP.Trigger
     ///   - IVerbOwner始终返回占位Verb + 芯片Verb（芯片Verb设hasStandardCommand=false）
     ///   - IVerbOwner.Tools始终返回parent.def.tools（移除近战抑制逻辑）
     ///   - 新增Verb引用缓存（leftHandAttackVerb/rightHandAttackVerb/dualAttackVerb）
-    ///   - RebuildVerbs从WeaponChipEffect搬入，统一管理VerbTracker重建+缓存填充
+    ///   - RebuildVerbs从VerbChipEffect搬入，统一管理VerbTracker重建+缓存填充
     ///   - CompGetEquippedGizmosExtra通过Command_BDPChipAttack生成芯片攻击Gizmo
     ///
     /// v5.1变更（根因修复：芯片Verb脱离VerbTracker）：
@@ -35,6 +35,10 @@ namespace BDP.Trigger
     ///     ① Pawn_MeleeVerbs近战选择池（IsMeleeAttack即入池，hasStandardCommand无效）
     ///     ② VerbTracker.GetVerbsCommands Path B（FirstOrDefault(IsMeleeAttack)绑定Y按钮）
     ///   - 芯片Verb只通过Command_BDPChipAttack gizmo使用
+    ///
+    /// v13.1变更（破裂检测解耦）：
+    ///   - 订阅BDPEvents.OnDamageReceived事件，自行处理手部完整性检查
+    ///   - 消除Patch_Pawn_PostApplyDamage的硬编码调用
     ///
     /// 不变量：
     ///   ① 每侧激活芯片数 ≤ 1（左右手槽）；特殊槽无此限制（全部激活或全部关闭）
@@ -110,6 +114,23 @@ namespace BDP.Trigger
 
         // ── Verb系统方法已移至 CompTriggerBody.VerbSystem.cs ──
 
+        /// <summary>
+        /// 获取当前主攻击芯片Verb（isPrimary=true）。无武器芯片返回null。
+        /// 用于ProxyVerb委托和自动攻击系统（v14.0）。
+        /// </summary>
+        public Verb GetPrimaryChipVerb()
+        {
+            if (dualAttackVerb != null) return dualAttackVerb;
+            if (leftHandAttackVerb?.verbProps?.isPrimary == true) return leftHandAttackVerb;
+            if (rightHandAttackVerb?.verbProps?.isPrimary == true) return rightHandAttackVerb;
+            return leftHandAttackVerb ?? rightHandAttackVerb;
+        }
+
+        /// <summary>
+        /// ProxyVerb属性（v14.0自动攻击）。
+        /// 供Patch_Pawn_TryGetAttackVerb读取，使引擎自动攻击系统能找到芯片远程Verb。
+        /// </summary>
+        public Verb_BDPProxy ProxyVerb => proxyVerb;
 
         // ═══════════════════════════════════════════
         //  预占用值同步（v1.8）

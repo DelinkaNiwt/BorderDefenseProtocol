@@ -41,5 +41,12 @@ namespace BDP.Projectiles.Config
         /// 值越大，光束"硬边"效果越明显。
         /// </summary>
         public float decaySharpness = 1.0f;
+
+        /// <summary>
+        /// 枪口偏移（格）。拖尾起始点朝飞行方向偏移的距离，
+        /// 模拟子弹从枪口而非pawn中心发出的视觉效果。
+        /// 0=从pawn中心开始（原版行为），0.6=推荐默认值。
+        /// </summary>
+        public float muzzleOffset = 0.6f;
     }
 }

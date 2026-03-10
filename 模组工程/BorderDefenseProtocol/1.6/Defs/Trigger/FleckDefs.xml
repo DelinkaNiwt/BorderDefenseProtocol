@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- ========================================
+       护盾拦截特效 - Fleck定义
+       ======================================== -->
+
+  <!-- 正六边形护盾拦截特效（境界触发者风格） -->
+  <FleckDef>
+    <defName>BDP_HexShieldBlock</defName>
+    <fleckSystemClass>FleckSystemThrown</fleckSystemClass>
+    <graphicData>
+      <graphicClass>Graphic_Fleck</graphicClass>
+      <texPath>Effects/HexShield</texPath>
+      <drawSize>2.0</drawSize>
+      <shaderType>MoteGlow</shaderType>
+      <color>(0, 200, 220)</color> <!-- 青色 -->
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.02</fadeInTime>  <!-- 更快出现 -->
+    <solidTime>0.08</solidTime>     <!-- 短暂停留 -->
+    <fadeOutTime>0.1</fadeOutTime>  <!-- 快速消失 -->
+  </FleckDef>
+
+  <!-- 冲击波环特效 -->
+  <FleckDef>
+    <defName>BDP_ShockwaveRing</defName>
+    <fleckSystemClass>FleckSystemThrown</fleckSystemClass>
+    <graphicData>
+      <graphicClass>Graphic_Fleck</graphicClass>
+      <texPath>Effects/ShockwaveRing</texPath>
+      <drawSize>1.5</drawSize>
+      <shaderType>MoteGlow</shaderType>
+      <color>(0, 200, 220)</color> <!-- 青色 -->
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.01</fadeInTime>  <!-- 瞬间出现 -->
+    <solidTime>0.05</solidTime>     <!-- 极短停留 -->
+    <fadeOutTime>0.15</fadeOutTime> <!-- 快速扩散消失 -->
+  </FleckDef>
+
+  <!-- ========================================
+       蚱蜢跳板特效 - Fleck定义
+       ======================================== -->
+
+  <!-- 蚱蜢跳板 - 起跳平台（平面能量板） -->
+  <FleckDef>
+    <defName>BDP_GrasshopperPlatform</defName>
+    <fleckSystemClass>FleckSystemThrown</fleckSystemClass>
+    <graphicData>
+      <graphicClass>Graphic_Fleck</graphicClass>
+      <texPath>Effects/GrasshopperCube</texPath>
+      <drawSize>0.7</drawSize> <!-- 稍微放大 -->
+      <shaderType>MoteGlow</shaderType>
+      <color>(0, 220, 255)</color> <!-- 青色 -->
+    </graphicData>
+    <altitudeLayer>Shadows</altitudeLayer> <!-- 在小人下层 -->
+    <fadeInTime>0.05</fadeInTime>  <!-- 快速出现 -->
+    <solidTime>0.15</solidTime>     <!-- 停留时间 -->
+    <fadeOutTime>0.2</fadeOutTime>  <!-- 消失 -->
+  </FleckDef>
+
+  <!-- 蚱蜢跳板 - 扩散波纹（从中心向外膨胀） -->
+  <FleckDef>
+    <defName>BDP_GrasshopperPulse</defName>
+    <fleckSystemClass>FleckSystemThrown</fleckSystemClass>
+    <graphicData>
+      <graphicClass>Graphic_Fleck</graphicClass>
+      <texPath>Effects/GrasshopperCube</texPath>
+      <drawSize>1.2</drawSize> <!-- 明显更大，增强跃动感 -->
+      <shaderType>MoteGlow</shaderType>
+      <color>(0, 220, 255, 120)</color> <!-- 青色，更明显 -->
+    </graphicData>
+    <altitudeLayer>Shadows</altitudeLayer>
+    <fadeInTime>0.01</fadeInTime>  <!-- 快速出现 -->
+    <solidTime>0.02</solidTime>     <!-- 极短停留 -->
+    <fadeOutTime>0.15</fadeOutTime> <!-- 快速消失 -->
+    <growthRate>0.75</growthRate>   <!-- 扩散幅度 -->
+  </FleckDef>
+
+</Defs>

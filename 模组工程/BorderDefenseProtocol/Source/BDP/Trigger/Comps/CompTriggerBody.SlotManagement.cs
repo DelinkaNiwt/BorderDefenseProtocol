@@ -90,7 +90,7 @@ namespace BDP.Trigger
         //  按侧Verb管理（v2.0 §8.3 新增API）
         // ═══════════════════════════════════════════
 
-        /// <summary>设置指定侧的Verb/Tool数据（供WeaponChipEffect调用）。</summary>
+        /// <summary>设置指定侧的Verb/Tool数据（供VerbChipEffect调用）。</summary>
         public void SetSideVerbs(SlotSide side, List<VerbProperties> verbs, List<Tool> tools)
         {
             if (side == SlotSide.LeftHand)
@@ -102,21 +102,6 @@ namespace BDP.Trigger
             {
                 rightHandActiveVerbProps = verbs;
                 rightHandActiveTools = tools;
-            }
-        }
-
-        /// <summary>清除指定侧的Verb/Tool数据（供WeaponChipEffect调用）。</summary>
-        public void ClearSideVerbs(SlotSide side)
-        {
-            if (side == SlotSide.LeftHand)
-            {
-                leftHandActiveVerbProps = null;
-                leftHandActiveTools = null;
-            }
-            else
-            {
-                rightHandActiveVerbProps = null;
-                rightHandActiveTools = null;
             }
         }
 

@@ -9,7 +9,7 @@ namespace BDP.Trigger
     ///
     /// 数据获取路径：
     ///   CasterPawn → equipment.Primary → CompTriggerBody.ActivatingSlot
-    ///     → loadedChip.def.GetModExtension&lt;WeaponChipConfig&gt;().trionCostPerShot
+    ///     → loadedChip.Props.usageCost（统一层）
     ///
     /// 与Verb_BDPDualRanged的区别：
     ///   · Verb_BDPShoot用于单侧射击（XML中直接配置verbClass=Verb_BDPShoot）
@@ -18,7 +18,7 @@ namespace BDP.Trigger
     public class Verb_BDPShoot : Verb_BDPRangedBase
     {
         /// <summary>
-        /// 重写TryCastShot：射击前从激活武器芯片读取trionCostPerShot，
+        /// 重写TryCastShot：射击前从激活武器芯片读取usageCost，
         /// Trion不足时中止射击，成功后Consume。
         /// B3修复：调用TryCastShotCore传入芯片Thing，使战斗日志显示芯片名。
         /// </summary>
@@ -28,24 +28,24 @@ namespace BDP.Trigger
             if (pawn == null) return false;
 
             var triggerComp = GetTriggerComp();
-            float cost = GetChipConfig()?.trionCostPerShot ?? 0f;
-
-            // Trion不足时中止射击
-            if (cost > 0f)
-            {
-                var trion = pawn.GetComp<CompTrion>();
-                if (trion == null || trion.Available < cost)
-                    return false;
-            }
 
             // B3修复：使用芯片Thing作为equipment source
             Thing chipEquipment = GetCurrentChipThing(triggerComp);
+
+            // 获取使用消耗（统一层）
+            float cost = ChipUsageCostHelper.GetUsageCost(chipEquipment);
+
+            // Trion不足时中止射击
+            if (cost > 0f && !ChipUsageCostHelper.CanAffordUsage(pawn, chipEquipment))
+            {
+                return false;
+            }
 
             // v9.0 FireMode：连射截断（burst 机制截断法）
             var fm = GetFireMode(chipEquipment);
             if (fm != null)
             {
-                var cfg = chipEquipment?.def?.GetModExtension<WeaponChipConfig>();
+                var cfg = chipEquipment?.def?.GetModExtension<VerbChipConfig>();
                 if (cfg != null)
                 {
                     int effective = fm.GetEffectiveBurst(cfg.GetPrimaryBurstCount());
@@ -56,11 +56,10 @@ namespace BDP.Trigger
 
             bool result = TryCastShotCore(chipEquipment);
 
-            // 射击成功后消耗Trion
+            // 射击成功后消耗Trion（统一层）
             if (result && cost > 0f)
             {
-                var trion = pawn.GetComp<CompTrion>();
-                trion?.Consume(cost);
+                ChipUsageCostHelper.ConsumeUsageCost(pawn, chipEquipment);
             }
 
             return result;

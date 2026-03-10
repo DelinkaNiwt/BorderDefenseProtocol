@@ -140,7 +140,7 @@ namespace BDP.Projectiles
         ///
         /// 策略：
         ///   · Direct/Free Phase → 使用当前位置（不后退）
-        ///   · GuidedLeg/Tracking/FinalApproach → 后退originOffsetDistance
+        ///   · Guided/Tracking → 后退originOffsetDistance
         ///   · 首次重定向 → 不后退（避免视觉起点漂移）
         ///
         /// 原理：
@@ -162,9 +162,8 @@ namespace BDP.Projectiles
                 return currentPos;
 
             // 需要偏移的Phase
-            bool needsOffset = phase == FlightPhase.GuidedLeg
-                || phase == FlightPhase.Tracking
-                || phase == FlightPhase.FinalApproach;
+            bool needsOffset = phase == FlightPhase.Guided
+                || phase == FlightPhase.Tracking;
 
             if (!needsOffset)
                 return currentPos;
@@ -174,10 +173,9 @@ namespace BDP.Projectiles
         }
 
         /// <summary>
-        /// 同步usedTarget到追踪目标——在ImpactSomething前调用。
+        /// 同步usedTarget到锁定目标——在ImpactSomething前调用。
         ///
         /// 策略：
-        ///   · 仅在Tracking/FinalApproach Phase同步
         ///   · 仅在目标有效时同步
         ///   · 避免重复同步（检查lastSyncedTarget）
         ///
@@ -190,34 +188,26 @@ namespace BDP.Projectiles
         ///   true=已同步，false=未同步
         /// </summary>
         public bool TrySyncUsedTarget(
-            FlightPhase phase,
-            LocalTargetInfo trackingTarget,
+            LocalTargetInfo lockedTarget,
             ref LocalTargetInfo usedTarget)
         {
             if (!enableUsedTargetSync)
                 return false;
 
-            // 仅在追踪相关Phase同步
-            bool isTrackingPhase = phase == FlightPhase.Tracking
-                || phase == FlightPhase.FinalApproach;
-
-            if (!isTrackingPhase)
-                return false;
-
             // 目标无效 → 不同步
-            if (!IsTargetValid(trackingTarget))
+            if (!IsTargetValid(lockedTarget))
                 return false;
 
             // 目标未变化 → 不同步
-            if (trackingTarget == lastSyncedTarget)
+            if (lockedTarget == lastSyncedTarget)
                 return false;
 
             // 执行同步
-            usedTarget = trackingTarget;
-            lastSyncedTarget = trackingTarget;
+            usedTarget = lockedTarget;
+            lastSyncedTarget = lockedTarget;
 
             if (TrackingDiag.Enabled)
-                Log.Message($"[VanillaAdapter] SyncUsedTarget: {trackingTarget}");
+                Log.Message($"[VanillaAdapter] SyncUsedTarget: {lockedTarget}");
 
             return true;
         }
@@ -227,30 +217,29 @@ namespace BDP.Projectiles
         ///
         /// 职责：
         ///   1. 同步usedTarget（如果需要）
-        ///   2. 检查是否需要强制打地面（TrackingLost/Free Phase）
+        ///   2. 检查是否需要强制打地面（Free Phase）
         ///
         /// 返回：
         ///   ImpactCheckResult结构体，包含ForceGround标志和原因
         /// </summary>
         public ImpactCheckResult CheckBeforeImpact(
             Bullet_BDP host,
-            FlightPhase phase,
-            LocalTargetInfo trackingTarget,
-            ref LocalTargetInfo usedTarget)
+            LocalTargetInfo lockedTarget,
+            ref LocalTargetInfo usedTarget,
+            bool lastTickHadIntent)
         {
-            // 1. 同步usedTarget
-            TrySyncUsedTarget(phase, trackingTarget, ref usedTarget);
+            // 1. 同步usedTarget：当有追踪锁定时同步
+            TrySyncUsedTarget(lockedTarget, ref usedTarget);
 
             // 2. 检查是否强制打地面
-            bool shouldForceGround = phase == FlightPhase.TrackingLost
-                || phase == FlightPhase.Free;
+            bool shouldForceGround = host.Phase == FlightPhase.Free;
 
             if (shouldForceGround)
             {
                 return new ImpactCheckResult
                 {
                     ForceGround = true,
-                    Reason = $"Phase={phase}，追踪失效，打地面"
+                    Reason = "追踪失效，打地面"
                 };
             }
 

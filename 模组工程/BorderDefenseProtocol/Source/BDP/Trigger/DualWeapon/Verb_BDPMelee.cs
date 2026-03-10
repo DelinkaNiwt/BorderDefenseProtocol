@@ -29,7 +29,7 @@ namespace BDP.Trigger
     ///
     /// 数据获取路径：
     ///   this.caster (Pawn) → pawn.equipment.Primary (触发体)
-    ///     → CompTriggerBody → GetActiveSlot(side) → WeaponChipConfig
+    ///     → CompTriggerBody → GetActiveSlot(side) → VerbChipConfig
     /// </summary>
     public class Verb_BDPMelee : Verb_MeleeAttackDamage
     {
@@ -49,7 +49,7 @@ namespace BDP.Trigger
 
         /// <summary>
         /// 通过ToolCapacityDef查找对应的ManeuverDef（缓存版本）。
-        /// 首次调用时构建缓存，后续O(1)查找。供EnsureToolAndManeuver和WeaponChipEffect共用。
+        /// 首次调用时构建缓存，后续O(1)查找。供EnsureToolAndManeuver和VerbChipEffect共用。
         /// </summary>
         internal static ManeuverDef GetManeuverForCapacity(ToolCapacityDef capacity)
         {
@@ -272,8 +272,8 @@ namespace BDP.Trigger
         private void EnsureToolAndManeuver(CompTriggerBody triggerComp, SlotSide side)
         {
             var slot = triggerComp.GetActiveSlot(side);
-            var cfg = slot?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
-            var firstTool = cfg?.tools?.FirstOrDefault();
+            var cfg = slot?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
+            var firstTool = cfg?.melee?.tools?.FirstOrDefault();
 
             // 设置tool（供战斗日志的bodyPartGroup和label使用）
             tool = firstTool;
@@ -372,8 +372,8 @@ namespace BDP.Trigger
         {
             var slot = triggerComp.GetActiveSlot(side);
             if (slot?.loadedChip == null) return 1;
-            var ext = slot.loadedChip.def.GetModExtension<WeaponChipConfig>();
-            return ext?.meleeBurstCount ?? 1;
+            var ext = slot.loadedChip.def.GetModExtension<VerbChipConfig>();
+            return ext?.primaryVerbProps?.burstShotCount ?? 1;
         }
 
         /// <summary>获取指定侧芯片的近战连击间隔（ticks）。</summary>
@@ -381,8 +381,8 @@ namespace BDP.Trigger
         {
             var slot = triggerComp.GetActiveSlot(side);
             if (slot?.loadedChip == null) return 12;
-            var ext = slot.loadedChip.def.GetModExtension<WeaponChipConfig>();
-            return ext?.meleeBurstInterval ?? 12;
+            var ext = slot.loadedChip.def.GetModExtension<VerbChipConfig>();
+            return ext?.primaryVerbProps?.ticksBetweenBurstShots ?? 12;
         }
     }
 }

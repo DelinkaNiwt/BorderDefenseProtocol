@@ -58,15 +58,21 @@ namespace BDP.Projectiles
         /// <summary>从def.modExtensions读取，无配置时用默认值。</summary>
         private FlightRedirectConfig redirectConfig;
 
-        // ── 弹道目标信息 ──
-        /// <summary>
-        /// 弹道的最终目标。
-        /// 普通弹道等同于intendedTarget；引导弹由GuidedModule.ApplyWaypoints()写入真实目标。
-        /// </summary>
-        public LocalTargetInfo FinalTarget;
+        // ── 三层目标模型 ──
+        /// <summary>瞄准目标——发射时锁定，不变。</summary>
+        public LocalTargetInfo AimTarget { get; private set; }
 
-        /// <summary>追踪目标（可能与FinalTarget不同——追踪弹可中途切换目标）。</summary>
-        public LocalTargetInfo TrackingTarget;
+        /// <summary>锁定目标——通常=AimTarget，仅"重定向"机制可改。</summary>
+        public LocalTargetInfo LockedTarget { get; private set; }
+
+        /// <summary>当前目标——此刻飞向谁。引导段=锚点坐标，引导结束/纯追踪=目标实体。</summary>
+        public LocalTargetInfo CurrentTarget { get; private set; }
+
+        /// <summary>设置锁定目标（追踪模块切换目标时调用）。</summary>
+        public void SetLockedTarget(LocalTargetInfo target) { LockedTarget = target; }
+
+        /// <summary>设置当前目标（引导模块设置锚点/回归目标时调用）。</summary>
+        public void SetCurrentTarget(LocalTargetInfo target) { CurrentTarget = target; }
 
         // ── 穿体穿透（由IBDPImpactHandler模块维护） ──
         /// <summary>穿体穿透剩余力——子弹穿过目标继续飞行的能力。默认0=不穿透。</summary>
@@ -153,13 +159,13 @@ namespace BDP.Projectiles
 
         /// <summary>
         /// 初始化引导飞行——由GuidedModule.ApplyWaypoints调用。
-        /// 设置Phase=GuidedLeg，同步FinalTarget/TrackingTarget。
+        /// 设置三层目标，CurrentTarget由GuidedModule首tick ProvideIntent设置。
         /// </summary>
         public void InitGuidedFlight(LocalTargetInfo finalTarget)
         {
-            SetPhase(FlightPhase.GuidedLeg);
-            FinalTarget = finalTarget;
-            TrackingTarget = finalTarget;
+            AimTarget = finalTarget;
+            LockedTarget = finalTarget;
+            // CurrentTarget由GuidedModule首tick ProvideIntent设置为首锚点
         }
 
         /// <summary>
@@ -177,6 +183,38 @@ namespace BDP.Projectiles
             {
                 for (int i = 0; i < phaseObservers.Count; i++)
                     phaseObservers[i].OnPhaseChanged(this, old, newPhase);
+            }
+        }
+
+        /// <summary>
+        /// Phase自动推导——根据三层目标和Intent状态推导Phase。
+        /// 每tick末尾、ApplyFlightRedirect后调用。
+        /// </summary>
+        private void DeriveAndSetPhase(bool hadIntent, bool trackingActivated)
+        {
+            FlightPhase derived;
+            if (hadIntent && trackingActivated)
+                derived = FlightPhase.Tracking;
+            else if (CurrentTarget.Thing != null && CurrentTarget.Thing == LockedTarget.Thing)
+                derived = FlightPhase.Direct;  // C==B，直飞或追踪前
+            else if (CurrentTarget.Cell.IsValid && LockedTarget.Cell.IsValid && CurrentTarget.Cell == LockedTarget.Cell && CurrentTarget.Thing == null && LockedTarget.Thing == null)
+                derived = FlightPhase.Direct;  // 两者都指向同一Cell且无Thing
+            else if (hadIntent)
+                derived = FlightPhase.Guided;  // C≠B，有引导Intent
+            else
+                derived = FlightPhase.Free;
+
+            if (Phase != derived)
+            {
+                var old = Phase;
+                Phase = derived;
+                if (TrackingDiag.Enabled)
+                    Log.Message($"[BDP-Phase-Auto] {old}→{derived} hadIntent={hadIntent} trackingActivated={trackingActivated}");
+                if (phaseObservers != null)
+                {
+                    for (int i = 0; i < phaseObservers.Count; i++)
+                        phaseObservers[i].OnPhaseChanged(this, old, derived);
+                }
             }
         }
 
@@ -267,8 +305,13 @@ namespace BDP.Projectiles
                 modules.Sort((a, b) => a.Priority.CompareTo(b.Priority));
             }
 
-            // 初始化最终目标（引导弹会在ApplyWaypoints时覆盖）
-            FinalTarget = intendedTarget;
+            // 初始化三层目标（引导弹会在ApplyWaypoints时覆盖）
+            if (!respawningAfterLoad)
+            {
+                AimTarget = intendedTarget;
+                LockedTarget = intendedTarget;
+                CurrentTarget = intendedTarget;
+            }
 
             // 初始化发射时间戳
             if (!respawningAfterLoad)
@@ -277,8 +320,8 @@ namespace BDP.Projectiles
             // 初始化穿体穿透力
             if (!respawningAfterLoad)
             {
-                var chipConfig = equipmentDef?.GetModExtension<WeaponChipConfig>();
-                PassthroughPower = chipConfig?.passthroughPower ?? 0f;
+                var chipConfig = equipmentDef?.GetModExtension<VerbChipConfig>();
+                PassthroughPower = chipConfig?.ranged?.passthroughPower ?? 0f;
             }
 
             // 读取飞行重定向配置（无配置时用默认值）
@@ -357,26 +400,32 @@ namespace BDP.Projectiles
             if (!postLaunchInitDone)
             {
                 postLaunchInitDone = true;
-                bool isStale = FinalTarget.Thing == null
-                    && FinalTarget.Cell.x == 0 && FinalTarget.Cell.z == 0;
+                bool isStale = AimTarget.Thing == null
+                    && AimTarget.Cell.x == 0 && AimTarget.Cell.z == 0;
                 if (isStale && intendedTarget.IsValid)
                 {
-                    FinalTarget = intendedTarget;
-                    TrackingTarget = intendedTarget;
+                    AimTarget = intendedTarget;
+                    LockedTarget = intendedTarget;
+                    CurrentTarget = intendedTarget;
                 }
+
+                // 视觉模块初始化：在首次base.TickInterval（子弹移动）之前执行。
+                // 此时DrawPos ≈ 发射原点，是Trail等视觉模块记录起始位置的正确时机。
+                for (int i = 0; i < visualObservers.Count; i++)
+                    visualObservers[i].OnVisualInit(this);
             }
 
             // 阶段1：LifecycleCheck——遍历lifecyclePolicies
             if (lifecyclePolicies.Count > 0)
             {
-                var lcCtx = new LifecycleContext(Phase, lastTickHadIntent);
+                var lcCtx = new LifecycleContext(lastTickHadIntent, AimTarget, LockedTarget, CurrentTarget);
                 for (int i = 0; i < lifecyclePolicies.Count; i++)
                     lifecyclePolicies[i].CheckLifecycle(this, ref lcCtx);
 
-                // 处理Phase转换请求
-                if (lcCtx.RequestPhaseChange.HasValue)
+                // 处理LockedTarget变更请求
+                if (lcCtx.NewLockedTarget.HasValue)
                 {
-                    SetPhase(lcCtx.RequestPhaseChange.Value);
+                    LockedTarget = lcCtx.NewLockedTarget.Value;
                 }
 
                 // 处理销毁请求
@@ -390,36 +439,37 @@ namespace BDP.Projectiles
             }
 
             // 阶段2：FlightIntent——取第一个非null Intent执行ApplyFlightRedirect
+            bool hadIntent = false;
+            bool trackingActivated = false;
             if (flightIntentProviders.Count > 0)
             {
-                var fiCtx = new FlightIntentContext(DrawPos, destination, Phase);
+                var fiCtx = new FlightIntentContext(DrawPos, destination, AimTarget, LockedTarget, CurrentTarget);
                 for (int i = 0; i < flightIntentProviders.Count; i++)
                 {
                     flightIntentProviders[i].ProvideIntent(this, ref fiCtx);
                     if (fiCtx.Intent.HasValue) break;
                 }
 
-                if (fiCtx.Intent.HasValue)
+                hadIntent = fiCtx.Intent.HasValue;
+                if (hadIntent)
                 {
                     var intent = fiCtx.Intent.Value;
-
-                    // 优先处理显式Phase请求
-                    if (fiCtx.RequestPhaseChange.HasValue)
-                    {
-                        SetPhase(fiCtx.RequestPhaseChange.Value);
-                    }
-                    // 追踪激活时的Phase转换（兼容旧路径）
-                    else if (intent.TrackingActivated && Phase != FlightPhase.Tracking)
-                    {
-                        SetPhase(FlightPhase.Tracking);
-                    }
-
+                    trackingActivated = intent.TrackingActivated;
                     ApplyFlightRedirect(intent.TargetPosition, intent.ExactPosition);
                 }
 
+                // 处理CurrentTarget变更请求
+                if (fiCtx.NewCurrentTarget.HasValue)
+                    CurrentTarget = fiCtx.NewCurrentTarget.Value;
+                if (fiCtx.NewLockedTarget.HasValue)
+                    LockedTarget = fiCtx.NewLockedTarget.Value;
+
                 // 记录本tick是否有Intent（供下一tick LifecycleContext使用）
-                lastTickHadIntent = fiCtx.Intent.HasValue;
+                lastTickHadIntent = hadIntent;
             }
+
+            // Phase自动推导
+            DeriveAndSetPhase(hadIntent, trackingActivated);
 
             // 阶段3：vanilla引擎位置计算 + 拦截检查 + 到达判定
             base.TickInterval(delta);
@@ -459,7 +509,7 @@ namespace BDP.Projectiles
             // 阶段6：ArrivalPolicy——决定继续飞还是命中
             if (arrivalPolicies.Count > 0)
             {
-                var arrCtx = new ArrivalContextV5(Phase);
+                var arrCtx = new ArrivalContext(AimTarget, LockedTarget, CurrentTarget);
                 for (int i = 0; i < arrivalPolicies.Count; i++)
                 {
                     arrivalPolicies[i].DecideArrival(this, ref arrCtx);
@@ -468,10 +518,10 @@ namespace BDP.Projectiles
 
                 if (arrCtx.Continue)
                 {
-                    // 处理Phase转换
-                    if (arrCtx.RequestPhaseChange.HasValue)
+                    // 处理CurrentTarget变更请求
+                    if (arrCtx.NewCurrentTarget.HasValue)
                     {
-                        SetPhase(arrCtx.RequestPhaseChange.Value);
+                        CurrentTarget = arrCtx.NewCurrentTarget.Value;
                     }
 
                     arrivalRedirectCount++;
@@ -492,7 +542,7 @@ namespace BDP.Projectiles
 
             // 阶段7：HitResolve——修正命中判定
             // ★ 优先使用适配层统一处理（usedTarget同步 + ForceGround检查）
-            var impactCheck = vanillaAdapter.CheckBeforeImpact(this, Phase, TrackingTarget, ref usedTarget);
+            var impactCheck = vanillaAdapter.CheckBeforeImpact(this, LockedTarget, ref usedTarget, lastTickHadIntent);
             if (impactCheck.ForceGround)
             {
                 if (TrackingDiag.Enabled)
@@ -504,7 +554,7 @@ namespace BDP.Projectiles
             // 其余HitResolver（非TrackingModule）仍可参与
             if (hitResolvers.Count > 0)
             {
-                var hitCtx = new HitContext(Phase, usedTarget);
+                var hitCtx = new HitContext(usedTarget, LockedTarget);
                 for (int i = 0; i < hitResolvers.Count; i++)
                     hitResolvers[i].ResolveHit(this, ref hitCtx);
 
@@ -553,6 +603,12 @@ namespace BDP.Projectiles
 
         public override Vector3 DrawPos => hasPositionModifiers ? modifiedDrawPos : base.DrawPos;
 
+        /// <summary>
+        /// 当前飞行方向（X-Z平面单位向量，忽略Y轴高度差）。
+        /// 供视觉模块（TrailModule等）计算枪口偏移方向，不用于弹道计算。
+        /// </summary>
+        public Vector3 FlightDirection => (destination - origin).Yto0().normalized;
+
         // ── 速度修正接口（供Patch_Projectile_Launch_FireModeSpeed调用） ──
 
         /// <summary>
@@ -563,8 +619,10 @@ namespace BDP.Projectiles
         {
             launchSpeedMult = Mathf.Max(0.01f, speedMult);
 
-            Vector3 dir = (destination - origin).Yto0();
-            float dist = dir.magnitude;
+            // 必须用 3D 距离（不 Yto0），与 StartingTicksToImpact（vanilla 计算同源）保持一致。
+            // 若用 2D 距离，而 StartingTicksToImpact 用 3D，两者不一致会导致
+            // DistanceCoveredFraction > 0，子弹视觉位置在发射瞬间就已前移约2格。
+            float dist = (destination - origin).magnitude;
             if (dist < 0.001f)
             {
                 ticksToImpact = 1;
@@ -608,8 +666,22 @@ namespace BDP.Projectiles
             Scribe_Values.Look(ref phase, "bdpPhase", FlightPhase.Direct);
             Phase = phase;
 
-            Scribe_TargetInfo.Look(ref FinalTarget, "bdpFinalTarget");
-            Scribe_TargetInfo.Look(ref TrackingTarget, "bdpTrackingTarget");
+            // 三层目标模型
+            var aim = AimTarget;
+            Scribe_TargetInfo.Look(ref aim, "bdpAimTarget");
+            if (Scribe.mode == LoadSaveMode.LoadingVars)
+                AimTarget = aim;
+
+            var locked = LockedTarget;
+            Scribe_TargetInfo.Look(ref locked, "bdpLockedTarget");
+            if (Scribe.mode == LoadSaveMode.LoadingVars)
+                LockedTarget = locked;
+
+            var current = CurrentTarget;
+            Scribe_TargetInfo.Look(ref current, "bdpCurrentTarget");
+            if (Scribe.mode == LoadSaveMode.LoadingVars)
+                CurrentTarget = current;
+
             Scribe_Values.Look(ref PassthroughPower, "bdpPassthroughPower", 0f);
             Scribe_Values.Look(ref PassthroughCount, "bdpPassthroughCount", 0);
             Scribe_Values.Look(ref LaunchTick, "bdpLaunchTick", 0);

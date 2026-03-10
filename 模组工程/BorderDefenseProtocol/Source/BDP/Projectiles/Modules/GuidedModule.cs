@@ -47,7 +47,7 @@ namespace BDP.Projectiles.Modules
         /// IBDPArrivalPolicy实现——到达中间锚点时拦截Impact，重定向飞行到下一路径点。
         /// 设置ctx.Continue=true表示继续飞行（宿主跳过Impact）。
         /// </summary>
-        public void DecideArrival(Bullet_BDP host, ref ArrivalContextV5 ctx)
+        public void DecideArrival(Bullet_BDP host, ref ArrivalContext ctx)
         {
             if (controller == null || !controller.IsGuided) return;
             if (!controller.TryAdvanceWaypoint()) return;
@@ -57,14 +57,14 @@ namespace BDP.Projectiles.Modules
                 // ★ 进入最终段：用目标实时位置替代预计算路径点。
                 // 原因：预计算路径点基于开枪瞬间的Cell坐标，
                 //       飞行途中目标pawn可能已移动，导致初始方向偏离实际目标。
-                //       仅当FinalTarget持有有效Thing时生效，Cell目标回退预计算值。
-                Vector3 finalDest = (host.FinalTarget.Thing != null
-                                     && host.FinalTarget.Thing.Spawned)
-                    ? host.FinalTarget.Thing.DrawPos
+                //       仅当LockedTarget持有有效Thing时生效，Cell目标回退预计算值。
+                Vector3 finalDest = (ctx.LockedTarget.Thing?.Spawned == true)
+                    ? ctx.LockedTarget.Thing.DrawPos
                     : controller.CurrentWaypoint;
                 ctx.Continue = true;
                 ctx.NextDestination = finalDest;
-                ctx.RequestPhaseChange = FlightPhase.FinalApproach;
+                // ★ 关键：设CurrentTarget=LockedTarget，追踪模块下tick判断一致后激活
+                ctx.NewCurrentTarget = ctx.LockedTarget;
 
                 if (TrackingDiag.Enabled)
                 {
@@ -79,7 +79,7 @@ namespace BDP.Projectiles.Modules
                 // 中间锚点：使用预计算路径点
                 ctx.Continue = true;
                 ctx.NextDestination = controller.CurrentWaypoint;
-                ctx.RequestPhaseChange = FlightPhase.GuidedLeg;
+                ctx.NewCurrentTarget = new LocalTargetInfo(controller.CurrentWaypoint.ToIntVec3());
 
                 if (TrackingDiag.Enabled)
                 {
@@ -111,6 +111,8 @@ namespace BDP.Projectiles.Modules
                 TargetPosition = controller.CurrentWaypoint,
                 TrackingActivated = false
             };
+            // 设CurrentTarget=锚点坐标（与LockedTarget不同，追踪不会激活）
+            ctx.NewCurrentTarget = new LocalTargetInfo(controller.CurrentWaypoint.ToIntVec3());
         }
 
         /// <summary>
