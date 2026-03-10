@@ -1,4 +1,5 @@
 using BDP.Core;
+using BDP.Trigger.ShotPipeline;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -6,16 +7,20 @@ using Verse;
 namespace BDP.Trigger
 {
     /// <summary>
-    /// 双侧攻击Verb——v15.0合并四个双武器类为统一实现。
+    /// 双侧攻击Verb——v16.0管线重构版。
     /// 通过leftFiringPattern和rightFiringPattern字段区分每侧的发射模式。
     ///
     /// 发射模式组合：
     ///   · Sequential + Sequential：双侧逐发交替
     ///   · Simultaneous + Simultaneous：双侧齐射瞬发
     ///   · Sequential + Simultaneous：混合模式（一侧逐发，另一侧齐射）
-    ///   · Sequential + Simultaneous：混合模式（原DualMixed）
     ///
     /// firingPattern由CompTriggerBody在创建Verb时从VerbChipConfig读取并设置。
+    ///
+    /// v16.0架构变化：
+    ///   - 移除TryCastShot override，委托给管线系统
+    ///   - ExecuteFire实现双侧交替逻辑
+    ///   - LOS检查迁移到GetLosCheckTarget（基类已实现）
     /// </summary>
     public class Verb_BDPDual : Verb_BDPRangedBase
     {
@@ -151,7 +156,7 @@ namespace BDP.Trigger
         }
 
         // ═══════════════════════════════════════════
-        //  统一的TryStartCastOn（合并自三个子类）
+        //  双侧特定的TryStartCastOn（处理双侧初始化）
         // ═══════════════════════════════════════════
 
         public override bool TryStartCastOn(LocalTargetInfo castTarg, LocalTargetInfo destTarg,
@@ -181,10 +186,14 @@ namespace BDP.Trigger
         }
 
         // ═══════════════════════════════════════════
-        //  统一的TryCastShot（根据FiringPattern分发）
+        //  v16.0 ExecuteFire 双侧交替逻辑
         // ═══════════════════════════════════════════
 
-        protected override bool TryCastShot()
+        /// <summary>
+        /// 执行双侧交替射击（v16.0管线重构）。
+        /// 根据FiringPattern分发到对应的发射方法。
+        /// </summary>
+        protected override bool ExecuteFire(ShotSession session)
         {
             if (dualBurstIndex == 0)
             {
