@@ -194,6 +194,25 @@ namespace BDP.Trigger
         }
 
         /// <summary>
+        /// 在激活上下文中执行action（消除DoActivate/DeactivateSlot中的重复代码）。
+        /// 设置ActivatingSide和ActivatingSlot，执行action，然后清理上下文。
+        /// </summary>
+        private void WithActivatingContext(ChipSlot slot, System.Action action)
+        {
+            ActivatingSide = slot.side;
+            ActivatingSlot = slot;
+            try
+            {
+                action();
+            }
+            finally
+            {
+                ActivatingSide = null;
+                ActivatingSlot = null;
+            }
+        }
+
+        /// <summary>
         /// 执行芯片激活（内部方法）。
         /// 消耗激活成本、注册持续消耗、调用effect.Activate、设置isActive标志。
         /// </summary>
@@ -214,19 +233,8 @@ namespace BDP.Trigger
             if (chipComp.Props.drainPerDay > 0f)
                 TrionComp?.RegisterDrain($"chip_{slot.side}_{slot.index}", chipComp.Props.drainPerDay);
 
-            // 设置激活上下文（供VerbChipEffect等读取侧别和槽位）
-            // C3修复：try/finally保护，防止effect.Activate异常导致上下文残留
-            ActivatingSide = slot.side;
-            ActivatingSlot = slot;
-            try
-            {
-                effect.Activate(pawn, parent);
-            }
-            finally
-            {
-                ActivatingSide = null;
-                ActivatingSlot = null;
-            }
+            // 设置激活上下文并调用effect.Activate
+            WithActivatingContext(slot, () => effect.Activate(pawn, parent));
 
             slot.isActive = true;
 
@@ -253,19 +261,8 @@ namespace BDP.Trigger
             // ── v2.1（T32）：统一注销持续消耗 ──
             TrionComp?.UnregisterDrain($"chip_{slot.side}_{slot.index}");
 
-            // 设置激活上下文（供VerbChipEffect等读取侧别和槽位）
-            // C3修复：try/finally保护，防止effect.Deactivate异常导致上下文残留
-            ActivatingSide = slot.side;
-            ActivatingSlot = slot;
-            try
-            {
-                effect?.Deactivate(pawn, parent);
-            }
-            finally
-            {
-                ActivatingSide = null;
-                ActivatingSlot = null;
-            }
+            // 设置激活上下文并调用effect.Deactivate
+            WithActivatingContext(slot, () => effect?.Deactivate(pawn, parent));
 
             slot.isActive = false;
 
