@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using BDP.Trigger.ShotPipeline;
 using Verse;
 
 namespace BDP.Trigger
@@ -65,6 +67,20 @@ namespace BDP.Trigger
         /// null时不显示范围指示器。
         /// </summary>
         public AreaIndicatorConfig areaIndicator;
+
+        /// <summary>
+        /// 瞄准阶段管线模块配置（XML注入）。
+        /// 用于在瞄准阶段执行自定义逻辑（如弹道预测、目标筛选等）。
+        /// null或空列表时不执行瞄准管线。
+        /// </summary>
+        public List<ShotModuleConfig> aimModules;
+
+        /// <summary>
+        /// 射击阶段管线模块配置（XML注入）。
+        /// 用于在射击阶段执行自定义逻辑（如弹道修正、特效生成等）。
+        /// null或空列表时不执行射击管线。
+        /// </summary>
+        public List<ShotModuleConfig> fireModules;
 
         // ═══════════════════════════════════════════════════════
         // 辅助方法

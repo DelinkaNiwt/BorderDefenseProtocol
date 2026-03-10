@@ -131,44 +131,5 @@ namespace BDP.Trigger
 
             return anyHit;
         }
-
-        // ── 范围指示器支持 ──
-
-        /// <summary>
-        /// 绘制单侧范围指示器。
-        /// 读取当前激活芯片的配置，在目标位置绘制影响范围。
-        /// </summary>
-        public override void DrawAreaIndicators(LocalTargetInfo target)
-        {
-            var triggerComp = GetTriggerComp();
-            if (triggerComp == null || !chipSide.HasValue) return;
-
-            // 获取当前侧的激活槽位
-            var slot = triggerComp.GetActiveSlot(chipSide.Value);
-            if (slot?.loadedChip == null) return;
-
-            // 获取芯片配置和投射物定义
-            var chipConfig = slot.loadedChip.def.GetModExtension<VerbChipConfig>();
-            var projectileDef = chipConfig?.GetPrimaryProjectileDef();
-            if (projectileDef == null) return;
-
-            // 获取指示器配置
-            var indicatorConfig = GetAreaIndicatorConfig(projectileDef);
-            if (indicatorConfig == null) return;
-
-            // 创建临时配置（计算实际半径）
-            var tempConfig = new AreaIndicatorConfig
-            {
-                indicatorType = indicatorConfig.indicatorType,
-                radiusSource = indicatorConfig.radiusSource,
-                customRadius = GetIndicatorRadius(projectileDef, indicatorConfig),
-                color = indicatorConfig.color,
-                fillStyle = indicatorConfig.fillStyle
-            };
-
-            // 绘制圆形指示器
-            var indicator = new CircleAreaIndicator();
-            indicator.Draw(target.Cell, caster.Map, tempConfig);
-        }
     }
 }

@@ -183,34 +183,5 @@ namespace BDP.Trigger
             float avgMult = (burstMultA + burstMultB) * 0.5f;
             return Mathf.Max(1, Mathf.RoundToInt(avgBurstCount * avgMult));
         }
-
-        // ── 范围指示器支持 ──
-
-        /// <summary>
-        /// 绘制组合技范围指示器。
-        /// 读取组合技投射物的配置，在目标位置绘制影响范围。
-        /// </summary>
-        public override void DrawAreaIndicators(LocalTargetInfo target)
-        {
-            if (comboDef?.projectileDef == null) return;
-
-            // 获取指示器配置
-            var indicatorConfig = GetAreaIndicatorConfig(comboDef.projectileDef);
-            if (indicatorConfig == null) return;
-
-            // 创建临时配置（计算实际半径）
-            var tempConfig = new AreaIndicatorConfig
-            {
-                indicatorType = indicatorConfig.indicatorType,
-                radiusSource = indicatorConfig.radiusSource,
-                customRadius = GetIndicatorRadius(comboDef.projectileDef, indicatorConfig),
-                color = indicatorConfig.color,
-                fillStyle = indicatorConfig.fillStyle
-            };
-
-            // 绘制圆形指示器
-            var indicator = new CircleAreaIndicator();
-            indicator.Draw(target.Cell, caster.Map, tempConfig);
-        }
     }
 }

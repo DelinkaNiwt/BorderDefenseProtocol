@@ -3,6 +3,7 @@ using BDP.Core;
 using BDP.Projectiles;
 using BDP.Projectiles.Config;
 using BDP.FireMode;
+using BDP.Trigger.ShotPipeline;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -39,6 +40,14 @@ namespace BDP.Trigger
         // ── Fix-5：CompTriggerBody缓存（避免每发子弹多次TryGetComp线性搜索） ──
         private CompTriggerBody cachedTriggerComp;
         private Pawn cachedTriggerPawn;
+
+        // ── ShotPipeline 集成（v16.0 管线重构） ──
+
+        /// <summary>管线配置（首次使用时初始化）</summary>
+        private ShotPipeline.ShotPipeline.PipelineConfig shotPipeline;
+
+        /// <summary>当前射击会话（TryCastShot 期间有效）</summary>
+        protected ShotSession activeSession;
 
         /// <summary>
         /// 获取CasterPawn装备的触发体CompTriggerBody（缓存版本）。
@@ -85,6 +94,191 @@ namespace BDP.Trigger
                 cachedTriggerComp = pawn.equipment?.Primary?.TryGetComp<CompTriggerBody>();
             }
             return cachedTriggerComp;
+        }
+
+        // ── ShotPipeline 管线方法 ──
+
+        /// <summary>
+        /// 初始化射击管线（延迟初始化，首次使用时调用）
+        /// </summary>
+        protected void InitShotPipeline()
+        {
+            if (shotPipeline == null)
+                shotPipeline = ShotPipeline.ShotPipeline.Build();
+        }
+
+        /// <summary>
+        /// 构建射击上下文（子类可重写以提供特定侧别的芯片信息）
+        /// </summary>
+        /// <returns>射击上下文快照</returns>
+        protected virtual ShotContext BuildContext()
+        {
+            var triggerComp = GetTriggerComp();
+            var chipThing = GetCurrentChipThing(triggerComp);
+            var chipConfig = GetChipConfig();
+
+            return new ShotContext(
+                caster: CasterPawn,
+                triggerComp: triggerComp,
+                target: currentTarget,
+                verb: this,
+                chipConfig: chipConfig,
+                chipSide: chipSide,
+                chipThing: chipThing
+            );
+        }
+
+        /// <summary>
+        /// 执行射击（虚方法，由子类重写具体的射击逻辑）。
+        /// 默认实现：回退到 TryCastShotCore。
+        /// </summary>
+        /// <param name="session">射击会话</param>
+        /// <returns>是否成功射击</returns>
+        protected virtual bool ExecuteFire(ShotSession session)
+        {
+            // 默认回退到旧逻辑
+            var chipThing = GetCurrentChipThing(GetTriggerComp());
+            return TryCastShotCore(chipThing);
+        }
+
+        /// <summary>
+        /// 统一发射方法：从 TryCastShotCore 迁移的核心发射逻辑。
+        /// 处理投射物生成、命中判定、掩体计算、弹道发射。
+        /// </summary>
+        /// <param name="chipEquipment">芯片Thing（用于战斗日志）</param>
+        /// <param name="originOffset">视觉起点偏移（齐射散布）</param>
+        /// <returns>是否成功发射</returns>
+        protected bool LaunchProjectile(Thing chipEquipment, Vector3 originOffset = default)
+        {
+            // 无芯片上下文时回退到原版
+            if (chipEquipment == null)
+                return base.TryCastShot();
+
+            // ── 以下复制自 Verb_LaunchProjectile.TryCastShot() ──
+
+            if (currentTarget.HasThing && currentTarget.Thing.Map != caster.Map)
+                return false;
+
+            ThingDef projectileDef = Projectile;
+            if (projectileDef == null)
+                return false;
+
+            // v7.0修复：引导弹只需检查caster→第一锚点的LOS，而非caster→最终目标
+            LocalTargetInfo losTarget = GetLosCheckTarget();
+            bool hasLos = TryFindShootLineFromTo(caster.Position, losTarget, out ShootLine resultingLine);
+            if (verbProps.stopBurstWithoutLos && !hasLos)
+                return false;
+
+            // 通知原始装备（触发体）的组件——这些是装备级组件，不应用芯片
+            if (base.EquipmentSource != null)
+            {
+                base.EquipmentSource.GetComp<CompChangeableProjectile>()?.Notify_ProjectileLaunched();
+                base.EquipmentSource.GetComp<CompApparelVerbOwner_Charged>()?.UsedOnce();
+            }
+
+            lastShotTick = Find.TickManager.TicksGame;
+
+            Thing manningPawn = caster;
+            // ── B3核心修复：使用芯片Thing作为equipmentSource ──
+            Thing equipmentSource = chipEquipment;
+
+            CompMannable compMannable = caster.TryGetComp<CompMannable>();
+            if (compMannable?.ManningPawn != null)
+            {
+                manningPawn = compMannable.ManningPawn;
+                equipmentSource = caster;
+            }
+
+            Vector3 drawPos = caster.DrawPos + originOffset;
+            Projectile proj = (Projectile)GenSpawn.Spawn(projectileDef, resultingLine.Source, caster.Map);
+
+            // CompUniqueWeapon：damageDefOverride + extraDamages（芯片通常无此组件）
+            if (equipmentSource.TryGetComp(out CompUniqueWeapon uniqueWeapon))
+            {
+                foreach (WeaponTraitDef trait in uniqueWeapon.TraitsListForReading)
+                {
+                    if (trait.damageDefOverride != null)
+                        proj.damageDefOverride = trait.damageDefOverride;
+                    if (!trait.extraDamages.NullOrEmpty())
+                    {
+                        if (proj.extraDamages == null)
+                            proj.extraDamages = new List<ExtraDamage>();
+                        proj.extraDamages.AddRange(trait.extraDamages);
+                    }
+                }
+            }
+
+            // ForcedMissRadius处理
+            if (verbProps.ForcedMissRadius > 0.5f)
+            {
+                float missRadius = verbProps.ForcedMissRadius;
+                if (manningPawn is Pawn p)
+                    missRadius *= verbProps.GetForceMissFactorFor(equipmentSource, p);
+                float adjustedMiss = VerbUtility.CalculateAdjustedForcedMiss(missRadius, currentTarget.Cell - caster.Position);
+                if (adjustedMiss > 0.5f)
+                {
+                    IntVec3 forcedMissTarget = GetForcedMissTarget(adjustedMiss);
+                    if (forcedMissTarget != currentTarget.Cell)
+                    {
+                        ProjectileHitFlags flags = ProjectileHitFlags.NonTargetWorld;
+                        if (Rand.Chance(0.5f))
+                            flags = ProjectileHitFlags.All;
+                        if (!canHitNonTargetPawnsNow)
+                            flags &= ~ProjectileHitFlags.NonTargetPawns;
+                        proj.Launch(manningPawn, drawPos, forcedMissTarget, currentTarget, flags, preventFriendlyFire, equipmentSource);
+                        OnProjectileLaunched(proj);
+                        IncrementShotsFired();
+                        return true;
+                    }
+                }
+            }
+
+            // 命中判定
+            ShotReport shotReport = ShotReport.HitReportFor(caster, this, currentTarget);
+            Thing coverThing = shotReport.GetRandomCoverToMissInto();
+            ThingDef targetCoverDef = coverThing?.def;
+
+            // 偏射（wild miss）
+            if (verbProps.canGoWild && !Rand.Chance(shotReport.AimOnTargetChance_IgnoringPosture))
+            {
+                bool flyOverhead = proj?.def?.projectile != null && proj.def.projectile.flyOverhead;
+                resultingLine.ChangeDestToMissWild(shotReport.AimOnTargetChance_StandardTarget, flyOverhead, caster.Map);
+                ProjectileHitFlags flags2 = ProjectileHitFlags.NonTargetWorld;
+                if (Rand.Chance(0.5f) && canHitNonTargetPawnsNow)
+                    flags2 |= ProjectileHitFlags.NonTargetPawns;
+                proj.Launch(manningPawn, drawPos, resultingLine.Dest, currentTarget, flags2, preventFriendlyFire, equipmentSource, targetCoverDef);
+                OnProjectileLaunched(proj);
+                IncrementShotsFired();
+                return true;
+            }
+
+            // 掩体命中（cover miss）
+            if (currentTarget.Thing != null && currentTarget.Thing.def.CanBenefitFromCover && !Rand.Chance(shotReport.PassCoverChance))
+            {
+                ProjectileHitFlags flags3 = ProjectileHitFlags.NonTargetWorld;
+                if (canHitNonTargetPawnsNow)
+                    flags3 |= ProjectileHitFlags.NonTargetPawns;
+                proj.Launch(manningPawn, drawPos, coverThing, currentTarget, flags3, preventFriendlyFire, equipmentSource, targetCoverDef);
+                OnProjectileLaunched(proj);
+                IncrementShotsFired();
+                return true;
+            }
+
+            // 命中目标
+            ProjectileHitFlags flags4 = ProjectileHitFlags.IntendedTarget;
+            if (canHitNonTargetPawnsNow)
+                flags4 |= ProjectileHitFlags.NonTargetPawns;
+            if (!currentTarget.HasThing || currentTarget.Thing.def.Fillage == FillCategory.Full)
+                flags4 |= ProjectileHitFlags.NonTargetWorld;
+
+            if (currentTarget.Thing != null)
+                proj.Launch(manningPawn, drawPos, currentTarget, currentTarget, flags4, preventFriendlyFire, equipmentSource, targetCoverDef);
+            else
+                proj.Launch(manningPawn, drawPos, resultingLine.Dest, currentTarget, flags4, preventFriendlyFire, equipmentSource, targetCoverDef);
+
+            OnProjectileLaunched(proj);
+            IncrementShotsFired();
+            return true;
         }
 
         /// <summary>
@@ -476,7 +670,7 @@ namespace BDP.Trigger
         // ── 范围指示器支持 ──
 
         /// <summary>
-        /// 重写 DrawHighlight 方法，在瞄准时绘制范围指示器和预览连线。
+        /// 重写 DrawHighlight 方法，委托给管线的 AimRenderers。
         /// 此方法由 Targeter 在瞄准阶段自动调用。
         /// </summary>
         /// <param name="target">当前瞄准目标</param>
@@ -484,69 +678,24 @@ namespace BDP.Trigger
         {
             base.DrawHighlight(target);
 
-            if (target.IsValid)
+            if (!target.IsValid)
+                return;
+
+            // 初始化管线
+            InitShotPipeline();
+
+            // 构建临时会话用于渲染
+            var context = BuildContext();
+            var session = new ShotSession(context);
+
+            // 执行 Aim 阶段（生成 AimResult）
+            ShotPipeline.ShotPipeline.ExecuteAim(session, shotPipeline);
+
+            // 调用所有 AimRenderers
+            foreach (var renderer in shotPipeline.AimRenderers)
             {
-                // 绘制施法者到目标的预览连线
-                GenDraw.DrawLineBetween(caster.DrawPos, target.CenterVector3);
-
-                // 绘制范围指示器
-                DrawAreaIndicators(target);
+                renderer.RenderTargeting(session, target);
             }
-        }
-
-        /// <summary>
-        /// 绘制范围指示器（虚方法，由子类重写）。
-        /// 在瞄准阶段调用，显示武器/能力的影响范围。
-        /// </summary>
-        /// <param name="target">当前瞄准目标</param>
-        public virtual void DrawAreaIndicators(LocalTargetInfo target)
-        {
-            // 基类默认不绘制
-        }
-
-        /// <summary>
-        /// 获取范围指示器配置（三级优先级：投射物 > 芯片 > Verb）。
-        /// </summary>
-        /// <param name="projectileDef">投射物定义</param>
-        /// <returns>配置对象，null表示无配置</returns>
-        protected AreaIndicatorConfig GetAreaIndicatorConfig(ThingDef projectileDef)
-        {
-            // 1. 优先从投射物读取
-            if (projectileDef != null)
-            {
-                var config = projectileDef.GetModExtension<AreaIndicatorConfig>();
-                if (config != null) return config;
-            }
-
-            // 2. 其次从芯片读取
-            var chipConfig = GetChipConfig();
-            if (chipConfig?.areaIndicator != null)
-                return chipConfig.areaIndicator;
-
-            // 3. 最后从Verb读取（当前版本未实现）
-            return null;
-        }
-
-        /// <summary>
-        /// 获取指示器半径（根据配置的半径来源）。
-        /// </summary>
-        /// <param name="projectileDef">投射物定义</param>
-        /// <param name="config">指示器配置</param>
-        /// <returns>半径值（米）</returns>
-        protected float GetIndicatorRadius(ThingDef projectileDef, AreaIndicatorConfig config)
-        {
-            if (config == null) return 0f;
-
-            // 从爆炸配置读取半径
-            if (config.radiusSource == RadiusSource.Explosion && projectileDef != null)
-            {
-                var explosionConfig = projectileDef.GetModExtension<BDPExplosionConfig>();
-                if (explosionConfig != null)
-                    return explosionConfig.explosionRadius;
-            }
-
-            // 使用自定义半径
-            return config.customRadius;
         }
     }
 }

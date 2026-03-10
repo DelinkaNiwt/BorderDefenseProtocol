@@ -556,62 +556,6 @@ namespace BDP.Trigger
             else
                 return SlotSide.RightHand;
         }
-
-        // ── 范围指示器支持 ──
-
-        /// <summary>
-        /// 绘制双侧范围指示器。
-        /// 分别读取左右两侧芯片的配置，在目标位置绘制影响范围。
-        /// 两个圆圈使用相同颜色，重叠部分透明度自然叠加。
-        /// </summary>
-        public override void DrawAreaIndicators(LocalTargetInfo target)
-        {
-            var triggerComp = GetTriggerComp();
-            if (triggerComp == null) return;
-
-            // 左侧范围
-            var leftSlot = triggerComp.GetActiveSlot(SlotSide.LeftHand);
-            if (leftSlot?.loadedChip != null)
-            {
-                var leftChipConfig = leftSlot.loadedChip.def.GetModExtension<VerbChipConfig>();
-                var leftProjectileDef = leftChipConfig?.GetPrimaryProjectileDef();
-                DrawSideIndicator(leftProjectileDef, target);
-            }
-
-            // 右侧范围
-            var rightSlot = triggerComp.GetActiveSlot(SlotSide.RightHand);
-            if (rightSlot?.loadedChip != null)
-            {
-                var rightChipConfig = rightSlot.loadedChip.def.GetModExtension<VerbChipConfig>();
-                var rightProjectileDef = rightChipConfig?.GetPrimaryProjectileDef();
-                DrawSideIndicator(rightProjectileDef, target);
-            }
-        }
-
-        /// <summary>
-        /// 绘制单侧范围指示器（辅助方法）。
-        /// </summary>
-        private void DrawSideIndicator(ThingDef projectileDef, LocalTargetInfo target)
-        {
-            if (projectileDef == null) return;
-
-            var indicatorConfig = GetAreaIndicatorConfig(projectileDef);
-            if (indicatorConfig == null) return;
-
-            // 创建临时配置（计算实际半径）
-            var tempConfig = new AreaIndicatorConfig
-            {
-                indicatorType = indicatorConfig.indicatorType,
-                radiusSource = indicatorConfig.radiusSource,
-                customRadius = GetIndicatorRadius(projectileDef, indicatorConfig),
-                color = indicatorConfig.color,
-                fillStyle = indicatorConfig.fillStyle
-            };
-
-            // 绘制圆形指示器
-            var indicator = new CircleAreaIndicator();
-            indicator.Draw(target.Cell, caster.Map, tempConfig);
-        }
     }
 }
 

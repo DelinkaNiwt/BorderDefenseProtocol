@@ -107,9 +107,8 @@ namespace BDP.Projectiles
                 if (target.IsValid)
                     GenDraw.DrawTargetHighlight(target);
 
-                // 范围指示器（如果verb支持）
-                if (verb is BDP.Trigger.Verb_BDPRangedBase bdpVerb && target.IsValid)
-                    bdpVerb.DrawAreaIndicators(target);
+                // 范围指示器由管线的 AimRenderers 处理（通过 DrawHighlight）
+                // 这里不再直接调用 DrawAreaIndicators
             };
 
             // 目标校验：
