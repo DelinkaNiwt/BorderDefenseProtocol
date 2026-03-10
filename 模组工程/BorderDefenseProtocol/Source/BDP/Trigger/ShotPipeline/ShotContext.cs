@@ -26,5 +26,37 @@ namespace BDP.Trigger.ShotPipeline
         public GuidedConfig GuidedConfig { get; private set; }
         public FiringPattern FiringPattern { get; private set; }
         public VerbProperties VerbProps { get; private set; }
+
+        // ══════════════════════════════════════════
+        //  构造函数
+        // ══════════════════════════════════════════
+
+        /// <summary>
+        /// 创建射击上下文（快照所有必要数据）
+        /// </summary>
+        public ShotContext(
+            Pawn caster,
+            CompTriggerBody triggerComp,
+            LocalTargetInfo target,
+            Verb_BDPRangedBase verb,
+            VerbChipConfig chipConfig,
+            SlotSide? chipSide,
+            Thing chipThing)
+        {
+            Caster = caster;
+            TriggerComp = triggerComp;
+            Target = target;
+            CasterPosition = caster.Position;
+            Verb = verb;
+            ChipConfig = chipConfig;
+            ChipSide = chipSide;
+            ChipThing = chipThing;
+
+            // 快照配置（避免后续修改影响管线）
+            RangedConfig = chipConfig?.ranged;
+            GuidedConfig = chipConfig?.ranged?.guided;
+            FiringPattern = chipConfig?.primaryFiringPattern ?? FiringPattern.Sequential;
+            VerbProps = verb?.verbProps;
+        }
     }
 }
