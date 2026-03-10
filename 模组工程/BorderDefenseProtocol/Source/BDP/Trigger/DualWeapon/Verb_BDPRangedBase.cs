@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using BDP.Core;
 using BDP.Projectiles;
+using BDP.Projectiles.Config;
 using BDP.FireMode;
 using RimWorld;
 using UnityEngine;
@@ -18,10 +19,11 @@ namespace BDP.Trigger
     /// 通过SupportsGuided属性条件化启用，消除引导弹专用Verb子类。
     ///
     /// 继承链：Verb → Verb_LaunchProjectile → Verb_Shoot → Verb_BDPRangedBase
-    ///   ├── Verb_BDPShoot（单发射击）
-    ///   ├── Verb_BDPVolley（单侧齐射）
-    ///   ├── Verb_BDPDualRanged（双侧交替连射）
-    ///   └── Verb_BDPDualVolley（双侧齐射）
+    ///   ├── Verb_BDPSingle（单侧攻击，通过FiringPattern区分逐发/齐射）
+    ///   ├── Verb_BDPDual（双侧攻击，每侧独立FiringPattern）
+    ///   ├── Verb_BDPCombo（组合技）
+    ///   ├── Verb_BDPMelee（近战）
+    ///   └── Verb_BDPProxy（自动攻击代理）
     /// </summary>
     public abstract class Verb_BDPRangedBase : Verb_Shoot
     {
@@ -123,6 +125,41 @@ namespace BDP.Trigger
         /// </summary>
         protected virtual ThingDef GetAutoRouteProjectileDef()
             => GetChipConfig()?.GetPrimaryProjectileDef() ?? Projectile;
+
+        /// <summary>
+        /// 重写瞄准参数，根据投射物配置自动决定是否允许瞄准空地。
+        ///
+        /// 架构设计：
+        /// - 爆炸模块（BDPExplosionConfig）：范围伤害，应该能瞄准空地
+        /// - 引导模块（BDPGuidedConfig）：可以绕过障碍物，应该能瞄准空地
+        /// - 普通子弹：只能瞄准实体目标
+        ///
+        /// 这样无论是普通瞄准还是引导瞄准，都使用统一的逻辑，避免重复。
+        /// </summary>
+        public override TargetingParameters targetParams
+        {
+            get
+            {
+                var tp = base.targetParams;
+
+                // 获取投射物定义（子类可重写此方法）
+                var projectileDef = GetAutoRouteProjectileDef();
+                if (projectileDef != null)
+                {
+                    // 检查是否有爆炸模块或引导模块
+                    bool hasExplosion = projectileDef.GetModExtension<BDPExplosionConfig>() != null;
+                    bool hasGuided = projectileDef.GetModExtension<BDPGuidedConfig>() != null;
+
+                    // 爆炸模块或引导模块都允许瞄准空地
+                    if (hasExplosion || hasGuided)
+                    {
+                        tp.canTargetLocations = true;
+                    }
+                }
+
+                return tp;
+            }
+        }
 
         /// <summary>
         /// 复制Verb_LaunchProjectile.TryCastShot() + Verb_Shoot.TryCastShot()逻辑，
@@ -410,6 +447,106 @@ namespace BDP.Trigger
 
             // chipSide为null：双侧/组合技Verb
             return null;
+        }
+
+        /// <summary>
+        /// 执行齐射循环发射（v15.0从双武器基类上提到远程基类）。
+        /// 在单次TryCastShot内循环瞬发多颗子弹，无间隔。
+        /// </summary>
+        /// <param name="volleyCount">齐射子弹数量</param>
+        /// <param name="spread">散布半径（米）</param>
+        /// <param name="chipEquipment">芯片Thing（用于战斗日志）</param>
+        /// <returns>是否至少有一发命中</returns>
+        protected bool FireVolleyLoop(int volleyCount, float spread, Thing chipEquipment)
+        {
+            bool anyHit = false;
+            for (int i = 0; i < volleyCount; i++)
+            {
+                if (spread > 0f)
+                    shotOriginOffset = new Vector3(
+                        Rand.Range(-spread, spread), 0f, Rand.Range(-spread, spread));
+
+                if (TryCastShotCore(chipEquipment))
+                    anyHit = true;
+            }
+            shotOriginOffset = Vector3.zero;
+            return anyHit;
+        }
+
+        // ── 范围指示器支持 ──
+
+        /// <summary>
+        /// 重写 DrawHighlight 方法，在瞄准时绘制范围指示器和预览连线。
+        /// 此方法由 Targeter 在瞄准阶段自动调用。
+        /// </summary>
+        /// <param name="target">当前瞄准目标</param>
+        public override void DrawHighlight(LocalTargetInfo target)
+        {
+            base.DrawHighlight(target);
+
+            if (target.IsValid)
+            {
+                // 绘制施法者到目标的预览连线
+                GenDraw.DrawLineBetween(caster.DrawPos, target.CenterVector3);
+
+                // 绘制范围指示器
+                DrawAreaIndicators(target);
+            }
+        }
+
+        /// <summary>
+        /// 绘制范围指示器（虚方法，由子类重写）。
+        /// 在瞄准阶段调用，显示武器/能力的影响范围。
+        /// </summary>
+        /// <param name="target">当前瞄准目标</param>
+        public virtual void DrawAreaIndicators(LocalTargetInfo target)
+        {
+            // 基类默认不绘制
+        }
+
+        /// <summary>
+        /// 获取范围指示器配置（三级优先级：投射物 > 芯片 > Verb）。
+        /// </summary>
+        /// <param name="projectileDef">投射物定义</param>
+        /// <returns>配置对象，null表示无配置</returns>
+        protected AreaIndicatorConfig GetAreaIndicatorConfig(ThingDef projectileDef)
+        {
+            // 1. 优先从投射物读取
+            if (projectileDef != null)
+            {
+                var config = projectileDef.GetModExtension<AreaIndicatorConfig>();
+                if (config != null) return config;
+            }
+
+            // 2. 其次从芯片读取
+            var chipConfig = GetChipConfig();
+            if (chipConfig?.areaIndicator != null)
+                return chipConfig.areaIndicator;
+
+            // 3. 最后从Verb读取（当前版本未实现）
+            return null;
+        }
+
+        /// <summary>
+        /// 获取指示器半径（根据配置的半径来源）。
+        /// </summary>
+        /// <param name="projectileDef">投射物定义</param>
+        /// <param name="config">指示器配置</param>
+        /// <returns>半径值（米）</returns>
+        protected float GetIndicatorRadius(ThingDef projectileDef, AreaIndicatorConfig config)
+        {
+            if (config == null) return 0f;
+
+            // 从爆炸配置读取半径
+            if (config.radiusSource == RadiusSource.Explosion && projectileDef != null)
+            {
+                var explosionConfig = projectileDef.GetModExtension<BDPExplosionConfig>();
+                if (explosionConfig != null)
+                    return explosionConfig.explosionRadius;
+            }
+
+            // 使用自定义半径
+            return config.customRadius;
         }
     }
 }

@@ -46,6 +46,32 @@ namespace BDP.Trigger.Shield
         /// </summary>
         public float trionCostMultiplier = 0.5f;
 
+        // ==================== Severity叠加配置 ====================
+
+        /// <summary>
+        /// Severity>=2时的显示名称（例如"全方位能量盾"）
+        /// 如果为null或空，使用HediffDef的label
+        /// </summary>
+        public string stackedLabel = null;
+
+        /// <summary>
+        /// Severity>=2时是否启用角度检查
+        /// false=全方位防护，true=使用stackedBlockAngleRange
+        /// </summary>
+        public bool stackedEnableAngleCheck = false;
+
+        /// <summary>
+        /// Severity>=2时的防护角度范围（度数）
+        /// 例如：360表示全方位防护
+        /// </summary>
+        public float stackedBlockAngleRange = 360f;
+
+        /// <summary>
+        /// Severity>=2时的抵挡成功率（0.0-1.0）
+        /// 例如：0.95表示95%成功率
+        /// </summary>
+        public float stackedBlockChance = 0.95f;
+
         // ==================== 特效配置 ====================
 
         /// <summary>

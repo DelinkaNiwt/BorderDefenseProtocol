@@ -13,7 +13,7 @@ namespace BDP.Trigger
     /// v4.0变更（F1 Gizmo架构重设计）：
     ///   · ComposeVerbs返回包含所有独立Verb + 双武器Verb的完整列表
     ///   · 双武器Verb设置isPrimary=true作为默认攻击
-    ///   · 相同芯片只保留1个独立Verb
+    ///   · 始终创建左右两侧独立Verb（即使芯片相同，FireMode配置可能不同）
     ///   · 新增ChipSlot参数用于判断芯片是否相同
     ///
     /// v5.0变更（6.2.1 Gizmo架构重设计）：
@@ -23,8 +23,8 @@ namespace BDP.Trigger
     ///
     /// 组合规则：
     ///   仅一侧有值 → 该侧Verb(isPrimary=true, label=侧别标签)
-    ///   近战+近战 → [左Verb, 右Verb(如不同芯片), DualMeleeVerb(isPrimary=true)]
-    ///   远程+远程 → [左Verb, 右Verb(如不同芯片), DualRangedVerb(isPrimary=true)]
+    ///   近战+近战 → [左Verb, 右Verb, DualMeleeVerb(isPrimary=true)]
+    ///   远程+远程 → [左Verb, 右Verb, DualRangedVerb(isPrimary=true)]
     ///   近战+远程 → [近战Verb(label=近战侧), 远程Verb(label=远程侧, isPrimary=true)]
     ///
     /// 设计约束：无状态纯函数，不持有任何运行时数据。
@@ -44,17 +44,21 @@ namespace BDP.Trigger
         }
 
         /// <summary>
-        /// 合成两侧VerbProperties为最终结果（v4.0重构）。
+        /// 合成两侧VerbProperties为最终结果（v4.0重构，v15.0增加配置参数）。
         /// 返回包含所有独立Verb + 双武器Verb的完整列表。
         /// 双侧均null时返回null（回退到ThingDef.Verbs）。
         /// </summary>
         /// <param name="leftSlot">左手槽（用于判断芯片是否相同和读取芯片label）。</param>
         /// <param name="rightSlot">右手槽（用于判断芯片是否相同和读取芯片label）。</param>
+        /// <param name="leftConfig">左手芯片配置（用于读取firingPattern）。</param>
+        /// <param name="rightConfig">右手芯片配置（用于读取firingPattern）。</param>
         public static List<VerbProperties> ComposeVerbs(
             List<VerbProperties> leftVerbs,
             List<VerbProperties> rightVerbs,
             ChipSlot leftSlot = null,
-            ChipSlot rightSlot = null)
+            ChipSlot rightSlot = null,
+            VerbChipConfig leftConfig = null,
+            VerbChipConfig rightConfig = null)
         {
             if (leftVerbs == null && rightVerbs == null) return null;
 
@@ -62,9 +66,9 @@ namespace BDP.Trigger
             // Bug1修复：EnsurePrimary不设label → ParseSideLabel返回null → Verb被错误分配到dualAttackVerb
             //          → 单芯片场景下无攻击Gizmo。改为TagSideAndEnsurePrimary，显式标记侧别。
             if (leftVerbs == null)
-                return TagSideAndEnsurePrimary(rightVerbs, SideLabel_RightHand);
+                return TagSideAndEnsurePrimary(rightVerbs, SideLabel_RightHand, rightConfig);
             if (rightVerbs == null)
-                return TagSideAndEnsurePrimary(leftVerbs, SideLabel_LeftHand);
+                return TagSideAndEnsurePrimary(leftVerbs, SideLabel_LeftHand, leftConfig);
 
             // 双侧都有武器 → 判断组合类型
             bool leftMelee = IsMeleeOnly(leftVerbs);
@@ -74,10 +78,10 @@ namespace BDP.Trigger
             if (leftMelee && rightMelee)
                 return ComposeDualMelee(leftVerbs, rightVerbs, sameChip);
             if (!leftMelee && !rightMelee)
-                return ComposeDualRanged(leftVerbs, rightVerbs, sameChip);
+                return ComposeDualRanged(leftVerbs, rightVerbs, sameChip, leftConfig, rightConfig);
 
             // 近战+远程混合 → 两个独立Verb，远程isPrimary=true
-            return ComposeMixed(leftVerbs, rightVerbs, leftMelee);
+            return ComposeMixed(leftVerbs, rightVerbs, leftMelee, leftConfig, rightConfig);
         }
 
         /// <summary>合成两侧Tools为最终结果。双侧均null时返回null（回退到ThingDef.tools）。</summary>
@@ -104,13 +108,13 @@ namespace BDP.Trigger
         /// 原因：无label的Verb在CreateAndCacheChipVerbs中被ParseSideLabel(null)→null
         ///       → 错误分配到dualAttackVerb → 单芯片场景无攻击Gizmo。
         ///
-        /// Bug3修复：Verb_BDPVolley必须强制设置burstShotCount=1。
-        /// 原因：Verb_BDPVolley在TryCastShot内部循环发射所有子弹，
+        /// Bug3修复：齐射模式（FiringPattern.Simultaneous）必须强制设置burstShotCount=1。
+        /// 原因：齐射模式在TryCastShot内部循环发射所有子弹，
         ///       如果burstShotCount>1，引擎会多次调用TryCastShot，
         ///       导致发射数=burstShotCount × 实际齐射数。
         /// </summary>
         private static List<VerbProperties> TagSideAndEnsurePrimary(
-            List<VerbProperties> verbs, string sideLabel)
+            List<VerbProperties> verbs, string sideLabel, VerbChipConfig config = null)
         {
             if (verbs == null || verbs.Count == 0) return verbs;
             var result = new List<VerbProperties>(verbs.Count);
@@ -121,11 +125,14 @@ namespace BDP.Trigger
                 copy.hasStandardCommand = false;
                 if (i == 0) copy.isPrimary = true;
 
-                // Bug3修复：Verb_BDPVolley必须强制设置burstShotCount=1
-                if (copy.verbClass == typeof(Verb_BDPVolley))
+                // v15.0：根据firingPattern调整burstShotCount
+                if (copy.verbClass == typeof(Verb_BDPSingle) && config != null)
                 {
-                    copy.burstShotCount = 1;
-                    copy.ticksBetweenBurstShots = 0;
+                    if (config.primaryFiringPattern == FiringPattern.Simultaneous)
+                    {
+                        copy.burstShotCount = 1;
+                        copy.ticksBetweenBurstShots = 0;
+                    }
                 }
 
                 result.Add(copy);
@@ -181,23 +188,20 @@ namespace BDP.Trigger
                 ticksBetweenBurstShots = leftInterval,
             });
 
-            // 相同芯片时不重复添加右侧独立Verb
-            if (!sameChip)
+            // 始终创建右侧独立Verb（即使芯片相同，FireMode配置可能不同）
+            result.Add(new VerbProperties
             {
-                result.Add(new VerbProperties
-                {
-                    verbClass = typeof(Verb_BDPMelee),
-                    isPrimary = false,
-                    hasStandardCommand = false,
-                    defaultCooldownTime = rightCooldown,
-                    meleeDamageDef = rightVerbs[0].meleeDamageDef ?? damageDef,
-                    meleeDamageBaseAmount = rightDmg,
-                    label = SideLabel_RightHand,
-                    // v6.0：单侧burst参数
-                    burstShotCount = rightBurst,
-                    ticksBetweenBurstShots = rightInterval,
-                });
-            }
+                verbClass = typeof(Verb_BDPMelee),
+                isPrimary = false,
+                hasStandardCommand = false,
+                defaultCooldownTime = rightCooldown,
+                meleeDamageDef = rightVerbs[0].meleeDamageDef ?? damageDef,
+                meleeDamageBaseAmount = rightDmg,
+                label = SideLabel_RightHand,
+                // v6.0：单侧burst参数
+                burstShotCount = rightBurst,
+                ticksBetweenBurstShots = rightInterval,
+            });
 
             // 双武器合成Verb（isPrimary=true，默认攻击，无侧别label=双侧模式）
             result.Add(new VerbProperties
@@ -221,7 +225,9 @@ namespace BDP.Trigger
         private static List<VerbProperties> ComposeDualRanged(
             List<VerbProperties> leftVerbs,
             List<VerbProperties> rightVerbs,
-            bool sameChip)
+            bool sameChip,
+            VerbChipConfig leftConfig = null,
+            VerbChipConfig rightConfig = null)
         {
             var result = new List<VerbProperties>();
 
@@ -233,35 +239,38 @@ namespace BDP.Trigger
                 copy.hasStandardCommand = false;
                 copy.label = SideLabel_LeftHand;
 
-                // Bug3修复：Verb_BDPVolley必须强制设置burstShotCount=1
-                if (copy.verbClass == typeof(Verb_BDPVolley))
+                // v15.0：根据firingPattern调整burstShotCount
+                if (copy.verbClass == typeof(Verb_BDPSingle) && leftConfig != null)
                 {
-                    copy.burstShotCount = 1;
-                    copy.ticksBetweenBurstShots = 0;
+                    if (leftConfig.primaryFiringPattern == FiringPattern.Simultaneous)
+                    {
+                        copy.burstShotCount = 1;
+                        copy.ticksBetweenBurstShots = 0;
+                    }
                 }
 
                 result.Add(copy);
             }
 
-            // 相同芯片只保留1个独立Verb
-            if (!sameChip)
+            // 始终创建右侧独立Verb（即使芯片相同，FireMode配置可能不同）
+            foreach (var v in rightVerbs)
             {
-                foreach (var v in rightVerbs)
-                {
-                    var copy = CopyVerbProps(v);
-                    copy.isPrimary = false;
-                    copy.hasStandardCommand = false;
-                    copy.label = SideLabel_RightHand;
+                var copy = CopyVerbProps(v);
+                copy.isPrimary = false;
+                copy.hasStandardCommand = false;
+                copy.label = SideLabel_RightHand;
 
-                    // Bug3修复：Verb_BDPVolley必须强制设置burstShotCount=1
-                    if (copy.verbClass == typeof(Verb_BDPVolley))
+                // v15.0：根据firingPattern调整burstShotCount
+                if (copy.verbClass == typeof(Verb_BDPSingle) && rightConfig != null)
+                {
+                    if (rightConfig.primaryFiringPattern == FiringPattern.Simultaneous)
                     {
                         copy.burstShotCount = 1;
                         copy.ticksBetweenBurstShots = 0;
                     }
-
-                    result.Add(copy);
                 }
+
+                result.Add(copy);
             }
 
             // 取两侧参数的极值
@@ -275,47 +284,31 @@ namespace BDP.Trigger
             int rightBurst = rightVerbs.Max(v => v.burstShotCount);
             var primaryVerb = leftVerbs[0];
 
-            // Bug4修复：检测两侧Verb类型，决定创建哪种双手Verb
-            bool leftIsVolley = leftVerbs.Any(v => v.verbClass == typeof(Verb_BDPVolley));
-            bool rightIsVolley = rightVerbs.Any(v => v.verbClass == typeof(Verb_BDPVolley));
+            // v15.0：根据FiringPattern计算burstShotCount
+            int leftEffective = leftBurst;
+            int rightEffective = rightBurst;
+            if (leftConfig != null && leftConfig.primaryFiringPattern == FiringPattern.Simultaneous)
+                leftEffective = 1;
+            if (rightConfig != null && rightConfig.primaryFiringPattern == FiringPattern.Simultaneous)
+                rightEffective = 1;
 
-            System.Type dualVerbClass;
-            int dualBurstCount;
-            int dualTicksBetween;
-
-            if (leftIsVolley && rightIsVolley)
+            // ⚠️ 架构修正：双侧齐射模式下，burstShotCount应为1（一次TryCastShot完成所有发射）
+            int effectiveBurstShotCount;
+            if (leftConfig != null && rightConfig != null
+                && leftConfig.primaryFiringPattern == FiringPattern.Simultaneous
+                && rightConfig.primaryFiringPattern == FiringPattern.Simultaneous)
             {
-                // 两侧都是齐射 → Verb_BDPDualVolley（瞬发所有子弹）
-                dualVerbClass = typeof(Verb_BDPDualVolley);
-                dualBurstCount = 1;
-                dualTicksBetween = 0;
-            }
-            else if (!leftIsVolley && !rightIsVolley)
-            {
-                // 两侧都是逐发 → Verb_BDPDualRanged（交替逐发）
-                dualVerbClass = typeof(Verb_BDPDualRanged);
-                dualBurstCount = leftBurst + rightBurst;
-                dualTicksBetween = System.Math.Max(
-                    leftVerbs.Max(v => v.ticksBetweenBurstShots),
-                    rightVerbs.Max(v => v.ticksBetweenBurstShots));
+                effectiveBurstShotCount = 1;  // 双侧齐射：FireBothSimultaneous()在一次调用中完成
             }
             else
             {
-                // 混合模式（一侧齐射，一侧逐发）→ Verb_BDPDualMixed（交替发射，齐射侧瞬发）
-                dualVerbClass = typeof(Verb_BDPDualMixed);
-                // 混合模式的burstCount：齐射侧算1发，逐发侧算实际发数
-                int volleySideBurst = leftIsVolley ? 1 : 1;  // 齐射侧算1发
-                int shootSideBurst = leftIsVolley ? rightBurst : leftBurst;  // 逐发侧算实际发数
-                dualBurstCount = volleySideBurst + shootSideBurst;
-                dualTicksBetween = System.Math.Max(
-                    leftVerbs.Max(v => v.ticksBetweenBurstShots),
-                    rightVerbs.Max(v => v.ticksBetweenBurstShots));
+                effectiveBurstShotCount = leftEffective + rightEffective;  // 其他模式：需要多次调用
             }
 
             // 双武器合成Verb（isPrimary=true，默认攻击）
             result.Add(new VerbProperties
             {
-                verbClass = dualVerbClass,
+                verbClass = typeof(Verb_BDPDual),
                 isPrimary = true,
                 hasStandardCommand = false,
                 defaultProjectile = primaryVerb.defaultProjectile,
@@ -323,11 +316,14 @@ namespace BDP.Trigger
                 muzzleFlashScale = Mathf.Max(
                     leftVerbs.Max(v => v.muzzleFlashScale),
                     rightVerbs.Max(v => v.muzzleFlashScale)),
-                ticksBetweenBurstShots = dualTicksBetween,
+                ticksBetweenBurstShots = System.Math.Max(
+                    leftVerbs.Max(v => v.ticksBetweenBurstShots),
+                    rightVerbs.Max(v => v.ticksBetweenBurstShots)),
                 range = Mathf.Min(leftRange, rightRange),
                 warmupTime = Mathf.Max(leftWarmup, rightWarmup),
                 defaultCooldownTime = Mathf.Max(leftCooldown, rightCooldown),
-                burstShotCount = dualBurstCount,
+                // v15.0：根据FiringPattern和发射模式正确计算burstShotCount
+                burstShotCount = effectiveBurstShotCount,
             });
 
             return result;
@@ -341,10 +337,13 @@ namespace BDP.Trigger
         private static List<VerbProperties> ComposeMixed(
             List<VerbProperties> leftVerbs,
             List<VerbProperties> rightVerbs,
-            bool leftIsMelee)
+            bool leftIsMelee,
+            VerbChipConfig leftConfig = null,
+            VerbChipConfig rightConfig = null)
         {
             var meleeVerbs = leftIsMelee ? leftVerbs : rightVerbs;
             var rangedVerbs = leftIsMelee ? rightVerbs : leftVerbs;
+            var rangedConfig = leftIsMelee ? rightConfig : leftConfig;
             // Bug2修复：根据实际侧别分配label
             string meleeLabel = leftIsMelee ? SideLabel_LeftHand : SideLabel_RightHand;
             string rangedLabel = leftIsMelee ? SideLabel_RightHand : SideLabel_LeftHand;
@@ -368,6 +367,17 @@ namespace BDP.Trigger
                 copy.isPrimary = true;
                 copy.hasStandardCommand = false;
                 copy.label = rangedLabel;
+
+                // v15.0：根据firingPattern调整burstShotCount
+                if (copy.verbClass == typeof(Verb_BDPSingle) && rangedConfig != null)
+                {
+                    if (rangedConfig.primaryFiringPattern == FiringPattern.Simultaneous)
+                    {
+                        copy.burstShotCount = 1;
+                        copy.ticksBetweenBurstShots = 0;
+                    }
+                }
+
                 result.Add(copy);
             }
 

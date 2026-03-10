@@ -89,6 +89,13 @@ namespace BDP.Trigger
         /// </summary>
         public List<string> categories;
 
+        /// <summary>
+        /// 芯片主类别（v3.2，单一值，互斥）。
+        /// 用于信息面板的顶层分类展示。默认Unspecified（未分类）。
+        /// 与categories（多维度标签列表）区分：主类别是单一值，categories是列表。
+        /// </summary>
+        public ChipPrimaryCategory primaryCategory = ChipPrimaryCategory.Unspecified;
+
         public CompProperties_TriggerChip()
         {
             compClass = typeof(TriggerChipComp);
@@ -128,6 +135,44 @@ namespace BDP.Trigger
         public IEnumerable<string> GetCategories()
         {
             return categories ?? Enumerable.Empty<string>();
+        }
+
+        // ═══════════════════════════════════════════════════════
+        // 辅助方法 - 主类别查询
+        // ═══════════════════════════════════════════════════════
+
+        /// <summary>
+        /// 获取芯片主类别的本地化显示名称。
+        /// </summary>
+        public string GetPrimaryCategoryLabel()
+        {
+            switch (primaryCategory)
+            {
+                case ChipPrimaryCategory.RangedWeapon: return "远程武器类";
+                case ChipPrimaryCategory.MeleeWeapon:  return "近战武器类";
+                case ChipPrimaryCategory.Defense:      return "防御类";
+                case ChipPrimaryCategory.Ability:      return "能力类";
+                case ChipPrimaryCategory.Passive:      return "被动类";
+                case ChipPrimaryCategory.Unspecified:  return "未分类";
+                default:                               return primaryCategory.ToString();
+            }
+        }
+
+        /// <summary>
+        /// 检查芯片是否属于武器类（远程或近战）。
+        /// </summary>
+        public bool IsWeaponChip()
+        {
+            return primaryCategory == ChipPrimaryCategory.RangedWeapon
+                || primaryCategory == ChipPrimaryCategory.MeleeWeapon;
+        }
+
+        /// <summary>
+        /// 检查芯片是否属于指定主类别。
+        /// </summary>
+        public bool IsPrimaryCategory(ChipPrimaryCategory category)
+        {
+            return primaryCategory == category;
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using BDP.Projectiles.Config;
+using BDP.Projectiles.Modules;
 using UnityEngine;
 using Verse;
 
@@ -273,6 +274,14 @@ namespace BDP.Projectiles
                 LeftAnchors  = leftAnchors,
                 RightAnchors = rightAnchors
             };
+
+            // 输出最终确认的路径（只输出一次）
+            if (TrackingDiag.Enabled)
+            {
+                string leftPath = leftAnchors != null ? $"左侧{leftAnchors.Count}锚点" : "左侧无效";
+                string rightPath = rightAnchors != null ? $"右侧{rightAnchors.Count}锚点" : "右侧无效";
+                Log.Message($"[BDP-自动路径] {leftPath} | {rightPath}");
+            }
         }
 
         /// <summary>

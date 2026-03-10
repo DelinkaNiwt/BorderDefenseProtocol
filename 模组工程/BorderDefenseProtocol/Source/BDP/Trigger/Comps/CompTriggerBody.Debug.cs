@@ -18,6 +18,36 @@ namespace BDP.Trigger
     {
         private IEnumerable<Gizmo> GetDebugGizmos()
         {
+            // 调试按钮：输出当前gizmo信息
+            yield return new Command_Action
+            {
+                defaultLabel = "[Dev] 输出Gizmo信息",
+                defaultDesc = "输出当前所有攻击gizmo的详细信息到日志",
+                action = () =>
+                {
+                    Log.Message("========== [BDP-Gizmo调试] 开始输出 ==========");
+                    var leftSlot = GetActiveSlot(SlotSide.LeftHand);
+                    var rightSlot = GetActiveSlot(SlotSide.RightHand);
+                    Log.Message($"左手槽: {(leftSlot?.loadedChip?.def?.defName ?? "空")}");
+                    Log.Message($"右手槽: {(rightSlot?.loadedChip?.def?.defName ?? "空")}");
+                    Log.Message($"leftHandAttackVerb: {(leftHandAttackVerb != null ? "存在" : "null")}");
+                    Log.Message($"rightHandAttackVerb: {(rightHandAttackVerb != null ? "存在" : "null")}");
+                    Log.Message($"dualAttackVerb: {(dualAttackVerb != null ? "存在" : "null")}");
+
+                    if (leftHandAttackVerb != null && leftSlot?.loadedChip?.def != null)
+                    {
+                        var leftChipDef = leftSlot.loadedChip.def;
+                        Log.Message($"左手gizmo应该生成: attackId=left:{leftChipDef.defName}, label={leftChipDef.label}(左), icon={leftChipDef.uiIcon?.GetHashCode()}");
+                    }
+                    if (rightHandAttackVerb != null && rightSlot?.loadedChip?.def != null)
+                    {
+                        var rightChipDef = rightSlot.loadedChip.def;
+                        Log.Message($"右手gizmo应该生成: attackId=right:{rightChipDef.defName}, label={rightChipDef.label}(右), icon={rightChipDef.uiIcon?.GetHashCode()}");
+                    }
+                    Log.Message("========== [BDP-Gizmo调试] 结束输出 ==========");
+                }
+            };
+
             bool hasEmptyLeft = HasEmptySlot(SlotSide.LeftHand);
             yield return new Command_ActionWithMenu
             {

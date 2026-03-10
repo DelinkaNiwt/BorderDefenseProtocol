@@ -23,10 +23,23 @@ namespace BDP.Trigger
         public VerbProperties primaryVerbProps;
 
         /// <summary>
+        /// 主攻击的发射模式（默认Sequential）。
+        /// Sequential：逐发模式，由引擎burst机制驱动，弹间有间隔。
+        /// Simultaneous：齐射模式，单次TryCastShot内循环瞬发所有子弹。
+        /// </summary>
+        public FiringPattern primaryFiringPattern = FiringPattern.Sequential;
+
+        /// <summary>
         /// 副攻击Verb配置（右键，可选）。
         /// null时右键走默认行为（取消）。
         /// </summary>
         public VerbProperties secondaryVerbProps;
+
+        /// <summary>
+        /// 副攻击的发射模式（默认Sequential）。
+        /// 仅当secondaryVerbProps非null时生效。
+        /// </summary>
+        public FiringPattern secondaryFiringPattern = FiringPattern.Sequential;
 
         // ═══════════════════════════════════════════════════════
         // 功能域配置（分组）
@@ -45,6 +58,13 @@ namespace BDP.Trigger
         /// null时表示非远程芯片。
         /// </summary>
         public RangedConfig ranged;
+
+        /// <summary>
+        /// 范围指示器配置（可选）。
+        /// 用于在瞄准阶段显示武器/能力的影响范围。
+        /// null时不显示范围指示器。
+        /// </summary>
+        public AreaIndicatorConfig areaIndicator;
 
         // ═══════════════════════════════════════════════════════
         // 辅助方法

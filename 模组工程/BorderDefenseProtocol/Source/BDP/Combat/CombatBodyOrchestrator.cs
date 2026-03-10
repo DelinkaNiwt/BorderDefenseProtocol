@@ -87,19 +87,27 @@ namespace BDP.Combat
             if (isEmergency && HasEmergencyEscapeChip(pawn, out ChipSlot chipSlot))
             {
                 IntVec3 origin = pawn.Position;  // 记录起点
-                IntVec3 destination = EmergencyEscapeRouter.FindEscapeDestination(pawn, pawn.Map);
+                Map map = pawn.Map;
+                IntVec3 destination = EmergencyEscapeRouter.FindEscapeDestination(pawn, map);
 
-                if (destination.IsValid && destination != pawn.Position)
+                if (destination.IsValid && destination != origin)
                 {
                     // 播放入口特效
-                    EmergencyEscapeEffects.PlayEntryEffects(origin, pawn.Map);
+                    EmergencyEscapeEffects.PlayEntryEffects(origin, map);
 
-                    // 执行传送
+                    // 执行传送（使用原版方式：直接修改Position + Notify_Teleported）
+                    // 这种方式不会触发ExitMap/Spawn的复杂逻辑，保持pawn的所有状态不变
                     pawn.Position = destination;
-                    pawn.Notify_Teleported(false, true);
+                    pawn.Notify_Teleported(endCurrentJob: true, resetTweenedPos: true);
+
+                    // 确保图形节点已初始化（修复"Node is null"错误）
+                    if (pawn.Drawer != null)
+                    {
+                        pawn.Drawer.renderer.EnsureGraphicsInitialized();
+                    }
 
                     // 播放出口特效
-                    EmergencyEscapeEffects.PlayExitEffects(destination, pawn.Map);
+                    EmergencyEscapeEffects.PlayExitEffects(destination, map);
 
                     // 销毁芯片（一次性使用）
                     if (chipSlot != null && chipSlot.loadedChip != null)
@@ -121,7 +129,7 @@ namespace BDP.Combat
 
                     Messages.Message(
                         $"{pawn.Name} 紧急脱离至安全位置",
-                        new TargetInfo(destination, pawn.Map),
+                        new TargetInfo(destination, map),
                         MessageTypeDefOf.PositiveEvent);
                 }
             }

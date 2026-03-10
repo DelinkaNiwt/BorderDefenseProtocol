@@ -64,4 +64,81 @@
     </modExtensions>
   </ThingDef>
 
+  <!-- ══════════════════════════════════════════════════════
+       BDP_Bullet_Explosive — 炸裂弹（流星芯片使用）
+       使用电荷步枪贴图 + 拖尾效果 + 爆炸模块
+       伤害5（炸伤），护甲穿透0.28，速度84，爆炸半径3格
+       ══════════════════════════════════════════════════════ -->
+  <ThingDef ParentName="BaseBullet">
+    <defName>BDP_Bullet_Explosive</defName>
+    <label>炸裂弹</label>
+    <graphicData>
+      <texPath>Things/Projectile/Charge_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <thingClass>BDP.Projectiles.Bullet_BDP</thingClass>
+    <projectile>
+      <damageDef>Bomb</damageDef>
+      <damageAmountBase>5</damageAmountBase>
+      <armorPenetrationBase>0.28</armorPenetrationBase>
+      <speed>84</speed>
+    </projectile>
+    <modExtensions>
+      <li Class="BDP.Projectiles.Config.BeamTrailConfig">
+        <segmentDuration>30</segmentDuration>
+        <trailWidth>0.13</trailWidth>
+        <trailColor>(1.0, 0.6, 0.2, 1.0)</trailColor>
+        <startOpacity>1.0</startOpacity>
+        <decayTime>0.8</decayTime>
+        <decaySharpness>10.0</decaySharpness>
+      </li>
+      <li Class="BDP.Projectiles.Config.BDPExplosionConfig">
+        <explosionRadius>1.5</explosionRadius>
+      </li>
+      <li Class="BDP.Trigger.AreaIndicatorConfig">
+        <radiusSource>Explosion</radiusSource>
+        <color>(1.0, 0.3, 0.3, 0.35)</color>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- ══════════════════════════════════════════════════════
+       BDP_Bullet_GuidedExplosive — 引导炸裂弹（战斧组合技使用）
+       使用电荷步枪贴图 + 拖尾效果 + 引导模块 + 爆炸模块
+       伤害4（炸伤），护甲穿透0.20，速度77，爆炸半径3格
+       ══════════════════════════════════════════════════════ -->
+  <ThingDef ParentName="BaseBullet">
+    <defName>BDP_Bullet_GuidedExplosive</defName>
+    <label>引导炸裂弹</label>
+    <graphicData>
+      <texPath>Things/Projectile/Charge_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <thingClass>BDP.Projectiles.Bullet_BDP</thingClass>
+    <projectile>
+      <damageDef>Bomb</damageDef>
+      <damageAmountBase>4</damageAmountBase>
+      <armorPenetrationBase>0.20</armorPenetrationBase>
+      <speed>77</speed>
+    </projectile>
+    <modExtensions>
+      <li Class="BDP.Projectiles.Config.BeamTrailConfig">
+        <segmentDuration>30</segmentDuration>
+        <trailWidth>0.13</trailWidth>
+        <trailColor>(0.7, 0.85, 1.0, 1.0)</trailColor>
+        <startOpacity>1.0</startOpacity>
+        <decayTime>0.8</decayTime>
+        <decaySharpness>10.0</decaySharpness>
+      </li>
+      <li Class="BDP.Projectiles.Config.BDPGuidedConfig" />
+      <li Class="BDP.Projectiles.Config.BDPExplosionConfig">
+        <explosionRadius>1.5</explosionRadius>
+      </li>
+      <li Class="BDP.Trigger.AreaIndicatorConfig">
+        <radiusSource>Explosion</radiusSource>
+        <color>(1.0, 0.3, 0.3, 0.35)</color>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
 </Defs>

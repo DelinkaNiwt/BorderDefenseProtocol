@@ -6,22 +6,22 @@ using Verse;
 namespace BDP.Trigger
 {
     /// <summary>
-    /// 组合技攻击Verb（v10.0新增）——B+C芯片组合发射天眼弹。
+    /// 组合技攻击Verb（v10.0新增，v12.0重命名）——B+C芯片组合发射天眼弹。
     ///
     /// 继承Verb_BDPRangedBase，复用引导弹基础设施（gs、StartAnchorTargeting等）。
     /// 参数取两侧芯片的平均值（range、warmup、burst、trionCost、anchorSpread）。
     ///
-    /// 内部通过isVolley标志区分普通/齐射模式，避免新增子类：
-    ///   · isVolley=false：引擎burst机制逐发射击
-    ///   · isVolley=true：burstShotCount=1，TryCastShot内循环发射
+    /// 内部通过firingPattern标志区分普通/齐射模式，避免新增子类：
+    ///   · Sequential：引擎burst机制逐发射击
+    ///   · Simultaneous：burstShotCount=1，TryCastShot内循环发射
     /// </summary>
-    public class Verb_BDPComboShoot : Verb_BDPRangedBase
+    public class Verb_BDPCombo : Verb_BDPRangedBase
     {
         /// <summary>组合技定义引用（由CompTriggerBody.CreateComboVerb设置）。</summary>
         public ComboVerbDef comboDef;
 
-        /// <summary>是否为齐射模式（true=单次TryCastShot内循环发射所有子弹）。</summary>
-        public bool isVolley;
+        /// <summary>发射模式（由CompTriggerBody在创建时设置）。</summary>
+        internal FiringPattern firingPattern;
 
         /// <summary>缓存的平均burstShotCount（由Initialize计算）。</summary>
         public int avgBurstCount;
@@ -84,16 +84,37 @@ namespace BDP.Trigger
             // 计算有效连射数（基础平均值 × FireMode平均倍率）
             int effectiveBurst = ComputeEffectiveBurst(leftSlot.loadedChip, rightSlot.loadedChip);
 
+            // 调试日志：记录组合技攻击信息（仅在burst开始时记录一次）
+            if (burstShotsLeft == verbProps.burstShotCount)
+            {
+                // 齐射模式：开枪1次，发射effectiveBurst颗子弹
+                // 逐发模式：开枪effectiveBurst次，发射effectiveBurst颗子弹
+                int shotCount = verbProps.burstShotCount;
+                int bulletCount = effectiveBurst;
+
+                // v15.0：根据verbProps.isPrimary判断主/副攻击
+                bool isSecondary = !verbProps.isPrimary;
+                VerbAttackLogger.LogComboAttack(
+                    this,
+                    comboDef.defName,
+                    new[] { leftSlot.loadedChip.def.defName, rightSlot.loadedChip.def.defName },
+                    firingPattern,
+                    shotCount,
+                    bulletCount,
+                    isSecondary
+                );
+            }
+
             // 齐射模式：单次TryCastShot内循环发射
-            if (isVolley)
-                return DoVolleyShot(pawn, triggerComp, leftSlot, rightSlot, effectiveBurst);
+            if (firingPattern == FiringPattern.Simultaneous)
+                return DoSimultaneousShot(pawn, triggerComp, leftSlot, rightSlot, effectiveBurst);
 
             // 普通模式：引擎burst机制，逐发射击
-            return DoBurstShot(pawn, triggerComp, leftSlot, rightSlot, effectiveBurst);
+            return DoSequentialShot(pawn, triggerComp, leftSlot, rightSlot, effectiveBurst);
         }
 
         /// <summary>齐射模式：单次TryCastShot内循环发射所有子弹。</summary>
-        private bool DoVolleyShot(Pawn pawn, CompTriggerBody tc,
+        private bool DoSimultaneousShot(Pawn pawn, CompTriggerBody tc,
             ChipSlot leftSlot, ChipSlot rightSlot, int volleyCount)
         {
             // 预检Trion总消耗
@@ -109,18 +130,7 @@ namespace BDP.Trigger
             gs.PrepareAutoRoute(caster.Position, currentTarget.Cell,
                 caster.Map, comboDef.projectileDef);
 
-            bool anyHit = false;
-            for (int i = 0; i < volleyCount; i++)
-            {
-                if (avgVolleySpread > 0f)
-                    shotOriginOffset = new Vector3(
-                        Rand.Range(-avgVolleySpread, avgVolleySpread), 0f,
-                        Rand.Range(-avgVolleySpread, avgVolleySpread));
-
-                if (TryCastShotCore(chipEquipment))
-                    anyHit = true;
-            }
-            shotOriginOffset = Vector3.zero;
+            bool anyHit = FireVolleyLoop(volleyCount, avgVolleySpread, chipEquipment);
 
             if (anyHit && totalCost > 0f)
                 trion?.Consume(totalCost);
@@ -129,7 +139,7 @@ namespace BDP.Trigger
         }
 
         /// <summary>普通模式：引擎burst逐发射击，每发检查Trion。</summary>
-        private bool DoBurstShot(Pawn pawn, CompTriggerBody tc,
+        private bool DoSequentialShot(Pawn pawn, CompTriggerBody tc,
             ChipSlot leftSlot, ChipSlot rightSlot, int effectiveBurst)
         {
             // FireMode连射截断（burst机制截断法）
@@ -172,6 +182,35 @@ namespace BDP.Trigger
             float burstMultB = fmB?.Burst ?? 1f;
             float avgMult = (burstMultA + burstMultB) * 0.5f;
             return Mathf.Max(1, Mathf.RoundToInt(avgBurstCount * avgMult));
+        }
+
+        // ── 范围指示器支持 ──
+
+        /// <summary>
+        /// 绘制组合技范围指示器。
+        /// 读取组合技投射物的配置，在目标位置绘制影响范围。
+        /// </summary>
+        public override void DrawAreaIndicators(LocalTargetInfo target)
+        {
+            if (comboDef?.projectileDef == null) return;
+
+            // 获取指示器配置
+            var indicatorConfig = GetAreaIndicatorConfig(comboDef.projectileDef);
+            if (indicatorConfig == null) return;
+
+            // 创建临时配置（计算实际半径）
+            var tempConfig = new AreaIndicatorConfig
+            {
+                indicatorType = indicatorConfig.indicatorType,
+                radiusSource = indicatorConfig.radiusSource,
+                customRadius = GetIndicatorRadius(comboDef.projectileDef, indicatorConfig),
+                color = indicatorConfig.color,
+                fillStyle = indicatorConfig.fillStyle
+            };
+
+            // 绘制圆形指示器
+            var indicator = new CircleAreaIndicator();
+            indicator.Draw(target.Cell, caster.Map, tempConfig);
         }
     }
 }

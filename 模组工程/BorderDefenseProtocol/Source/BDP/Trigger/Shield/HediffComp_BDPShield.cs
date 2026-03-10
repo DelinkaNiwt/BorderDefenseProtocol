@@ -127,13 +127,38 @@ namespace BDP.Trigger.Shield
 
         /// <summary>
         /// 方向判定：检查攻击是否来自护盾可抵挡的角度范围
+        /// v2.0：根据parent.Severity动态选择配置参数
         /// </summary>
         /// <param name="damageAngle">伤害角度（子弹飞行方向，0-360度）</param>
         /// <returns>true=在范围内，false=不在范围内</returns>
         private bool CheckAngle(float damageAngle)
         {
+            float severity = parent.Severity;
+
+            // 根据Severity选择配置
+            bool enableCheck;
+            float angleRange;
+            float angleOffset = Props.blockAngleOffset; // 偏移量不变
+
+            if (severity >= 2f)
+            {
+                // Severity>=2：使用叠加配置
+                enableCheck = Props.stackedEnableAngleCheck;
+                angleRange = Props.stackedBlockAngleRange;
+            }
+            else
+            {
+                // Severity=1：使用基础配置
+                enableCheck = Props.enableAngleCheck;
+                angleRange = Props.blockAngleRange;
+            }
+
             // 如果未启用角度检查，全方位防护
-            if (!Props.enableAngleCheck) return true;
+            if (!enableCheck)
+            {
+                Log.Message($"[BDP-Shield] {Pawn.LabelShort} 全方位护盾（Severity={severity}），跳过角度检查");
+                return true;
+            }
 
             // 获取pawn朝向（度数）
             float pawnRotation = Pawn.Rotation.AsAngle;
@@ -147,12 +172,12 @@ namespace BDP.Trigger.Shield
             float relativeAngle = Mathf.DeltaAngle(pawnRotation, attackSourceAngle);
 
             // 计算允许的角度范围
-            float minAngle = Props.blockAngleOffset - Props.blockAngleRange / 2f;
-            float maxAngle = Props.blockAngleOffset + Props.blockAngleRange / 2f;
+            float minAngle = angleOffset - angleRange / 2f;
+            float maxAngle = angleOffset + angleRange / 2f;
 
             // 调试日志
             bool inRange = relativeAngle >= minAngle && relativeAngle <= maxAngle;
-            Log.Message($"[BDP-Shield] {Pawn.LabelShort} 护盾角度判定: " +
+            Log.Message($"[BDP-Shield] {Pawn.LabelShort} 护盾角度判定（Severity={severity}）: " +
                        $"pawn朝向={pawnRotation:F1}°, 子弹方向={damageAngle:F1}°, " +
                        $"攻击来源={attackSourceAngle:F1}°, 相对角度={relativeAngle:F1}°, " +
                        $"范围=[{minAngle:F1}°, {maxAngle:F1}°], 结果={inRange}");
@@ -163,15 +188,24 @@ namespace BDP.Trigger.Shield
 
         /// <summary>
         /// 成功率判定：随机检查是否成功抵挡
+        /// v2.0：根据parent.Severity动态选择成功率
         /// </summary>
         /// <returns>true=成功抵挡，false=抵挡失败</returns>
         private bool CheckBlockChance()
         {
+            float severity = parent.Severity;
+
+            // 根据Severity选择成功率
+            float actualChance = (severity >= 2f) ? Props.stackedBlockChance : Props.blockChance;
+
             // 100%成功率，直接返回true
-            if (Props.blockChance >= 1f) return true;
+            if (actualChance >= 1f) return true;
 
             // 随机判定
-            return Rand.Value < Props.blockChance;
+            bool success = Rand.Value < actualChance;
+            Log.Message($"[BDP-Shield] {Pawn.LabelShort} 成功率判定（Severity={severity}）: " +
+                       $"成功率={actualChance * 100}%, 结果={success}");
+            return success;
         }
 
         // ==================== Trion系统 ====================

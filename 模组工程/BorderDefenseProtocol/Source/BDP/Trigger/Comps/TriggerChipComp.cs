@@ -100,6 +100,17 @@ namespace BDP.Trigger
         /// </summary>
         private IEnumerable<StatDrawEntry> BaseInfoStats()
         {
+            // 主类别（优先级高于categories）
+            if (Props.primaryCategory != ChipPrimaryCategory.Unspecified)
+            {
+                yield return new StatDrawEntry(
+                    BDP_StatCategoryDefOf.BDP_ChipInfo,
+                    "主类别",
+                    Props.GetPrimaryCategoryLabel(),
+                    "芯片的主要功能类别（单一值）。",
+                    2501); // 优先级高于categories（2500）
+            }
+
             // 类别标签
             if (Props.categories != null && Props.categories.Count > 0)
             {

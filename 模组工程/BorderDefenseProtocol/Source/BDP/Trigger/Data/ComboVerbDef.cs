@@ -30,8 +30,8 @@ namespace BDP.Trigger
         // v9.0新增：显式Verb类型配置（推荐使用）
         // ═══════════════════════════════════════════════════════
 
-        /// <summary>主攻击Verb类型（默认Verb_BDPComboShoot）。</summary>
-        public Type primaryVerbClass = typeof(Verb_BDPComboShoot);
+        /// <summary>主攻击Verb类型（默认Verb_BDPCombo）。</summary>
+        public Type primaryVerbClass = typeof(Verb_BDPCombo);
 
         /// <summary>副攻击Verb类型（null=无副攻击）。</summary>
         public Type secondaryVerbClass = null;

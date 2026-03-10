@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using BDP.Core;
 using RimWorld;
@@ -126,9 +127,24 @@ namespace BDP.Trigger
             matchedComboDef = null;
 
             // 合成芯片VerbProperties
+            // v15.0：传递VerbChipConfig以便在DualVerbCompositor中设置firingPattern
+            var leftSlotForCompose = GetActiveOrActivatingSlot(SlotSide.LeftHand);
+            var rightSlotForCompose = GetActiveOrActivatingSlot(SlotSide.RightHand);
+
+            Log.Message($"[BDP调试] CreateAndCacheChipVerbs调用: 左槽={leftSlotForCompose?.loadedChip?.def?.defName ?? "null"} | 右槽={rightSlotForCompose?.loadedChip?.def?.defName ?? "null"} | ActivatingSlot={ActivatingSlot?.loadedChip?.def?.defName ?? "null"}");
+
+            var leftConfig = leftSlotForCompose?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
+            var rightConfig = rightSlotForCompose?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
+
+            if (leftConfig != null)
+                Log.Message($"[BDP调试] 左槽配置: primaryFiringPattern={leftConfig.primaryFiringPattern}");
+            if (rightConfig != null)
+                Log.Message($"[BDP调试] 右槽配置: primaryFiringPattern={rightConfig.primaryFiringPattern}");
+
             var chipVerbProps = DualVerbCompositor.ComposeVerbs(
                 leftHandActiveVerbProps, rightHandActiveVerbProps,
-                GetActiveSlot(SlotSide.LeftHand), GetActiveSlot(SlotSide.RightHand));
+                leftSlotForCompose, rightSlotForCompose,
+                leftConfig, rightConfig);
 
             if (chipVerbProps == null) return;
 
@@ -169,6 +185,47 @@ namespace BDP.Trigger
                 var vType = verb.GetType();
                 var label = vp.label;
 
+                // v12.0：为Verb_BDPSingle设置firingPattern
+                if (verb is Verb_BDPSingle singleVerb)
+                {
+                    var side = DualVerbCompositor.ParseSideLabel(label);
+                    if (side.HasValue)
+                    {
+                        var slot = GetActiveOrActivatingSlot(side.Value);
+                        var cfg = slot?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
+                        if (cfg != null)
+                        {
+                            singleVerb.firingPattern = cfg.primaryFiringPattern;
+
+                            // 齐射模式必须设置burstShotCount=1
+                            if (singleVerb.firingPattern == FiringPattern.Simultaneous)
+                            {
+                                verb.verbProps.burstShotCount = 1;
+                                verb.verbProps.ticksBetweenBurstShots = 0;
+                            }
+                        }
+                    }
+                }
+
+                // v12.0：为Verb_BDPDual设置leftFiringPattern和rightFiringPattern
+                // v17.0：使用CalculateDualFiringConfig公共方法
+                if (verb is Verb_BDPDual dualVerb)
+                {
+                    var leftSlot = GetActiveOrActivatingSlot(SlotSide.LeftHand);
+                    var rightSlot = GetActiveOrActivatingSlot(SlotSide.RightHand);
+                    var leftCfg = leftSlot?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
+                    var rightCfg = rightSlot?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
+
+                    if (leftCfg != null && rightCfg != null)
+                    {
+                        var config = CalculateDualFiringConfig(leftCfg, rightCfg, useSecondary: false);
+
+                        dualVerb.leftFiringPattern = config.LeftPattern;
+                        dualVerb.rightFiringPattern = config.RightPattern;
+                        verb.verbProps.burstShotCount = config.TotalBurstCount;
+                    }
+                }
+
                 if (verb is Verb_BDPMelee || verb is Verb_BDPRangedBase)
                 {
                     var side = DualVerbCompositor.ParseSideLabel(label);
@@ -186,7 +243,7 @@ namespace BDP.Trigger
                     else
                         dualAttackVerb = verb;
                 }
-                else if (verb is Verb_BDPDualRanged)
+                else if (verb is Verb_BDPDual)
                 {
                     dualAttackVerb = verb;
                     // chipSide保持null——双侧Verb由子类各自处理
@@ -211,7 +268,9 @@ namespace BDP.Trigger
         ///
         /// 旧逻辑（v6.1）：
         ///   遍历已缓存的burst verb，检查对应芯片的supportsVolley标志，
-        ///   为支持齐射的芯片创建Verb_BDPVolley/Verb_BDPDualVolley实例。
+        ///   为支持齐射的芯片创建独立的齐射Verb类实例。
+        ///
+        /// v15.0变更：发射模式从类级区分改为Def配置级属性（FiringPattern）。
         ///
         /// 注意：使用GetActiveOrActivatingSlot而非GetActiveSlot。
         /// 原因：DoActivate中effect.Activate()触发RebuildVerbs时，
@@ -232,7 +291,7 @@ namespace BDP.Trigger
             if (rightHandAttackVerb != null && rightCfg != null)
                 rightHandSecondaryVerb = CreateSingleSideSecondaryVerb(rightCfg, pawn, "Right", SlotSide.RightHand);
 
-            // 双手副攻击：两侧都有副攻击配置时创建Verb_BDPDualVolley
+            // 双手副攻击：两侧都有副攻击配置时创建Verb_BDPDual
             if (leftHandSecondaryVerb != null && rightHandSecondaryVerb != null && dualAttackVerb != null)
                 dualSecondaryVerb = CreateDualSecondaryVerb(leftCfg, rightCfg, pawn);
         }
@@ -240,6 +299,7 @@ namespace BDP.Trigger
         /// <summary>
         /// 创建单侧副攻击verb实例。
         /// 创建后设置chipSide以便运行时精确查找芯片。
+        /// v12.0：设置firingPattern。
         /// </summary>
         private Verb CreateSingleSideSecondaryVerb(VerbChipConfig cfg, Pawn pawn, string sideTag, SlotSide side)
         {
@@ -252,23 +312,42 @@ namespace BDP.Trigger
             if (verb is Verb_BDPRangedBase rb)
                 rb.chipSide = side;
 
+            // v12.0：为Verb_BDPSingle设置firingPattern
+            if (verb is Verb_BDPSingle singleVerb)
+            {
+                singleVerb.firingPattern = cfg.secondaryFiringPattern;
+                // 齐射模式必须设置burstShotCount=1
+                if (singleVerb.firingPattern == FiringPattern.Simultaneous)
+                {
+                    verb.verbProps.burstShotCount = 1;
+                    verb.verbProps.ticksBetweenBurstShots = 0;
+                }
+            }
+
             return verb;
         }
 
         /// <summary>
-        /// 创建双手副攻击verb实例（Verb_BDPDualVolley）。
-        /// 合成两侧参数：range=min, warmup=max, cooldown=max, burstShotCount=1。
+        /// 创建双手副攻击verb实例（Verb_BDPDual）。
+        /// 合成两侧参数：range=min, warmup=max, cooldown=max, burstShotCount根据FiringPattern计算。
         /// chipSide不设置（null）——双侧Verb由子类各自处理。
+        /// v12.0：改用Verb_BDPDual，设置leftFiringPattern和rightFiringPattern。
         /// </summary>
         private Verb CreateDualSecondaryVerb(VerbChipConfig leftCfg, VerbChipConfig rightCfg, Pawn pawn)
         {
             var leftSecVp = leftCfg.secondaryVerbProps;
             var rightSecVp = rightCfg.secondaryVerbProps;
 
+            // 计算burstShotCount
+            int leftBurst = leftSecVp?.burstShotCount ?? 1;
+            int rightBurst = rightSecVp?.burstShotCount ?? 1;
+            int leftEffective = leftCfg.secondaryFiringPattern == FiringPattern.Simultaneous ? 1 : leftBurst;
+            int rightEffective = rightCfg.secondaryFiringPattern == FiringPattern.Simultaneous ? 1 : rightBurst;
+
             // 合成双手副攻击VerbProperties
             var vp = new VerbProperties
             {
-                verbClass = typeof(Verb_BDPDualVolley),
+                verbClass = typeof(Verb_BDPDual),
                 isPrimary = false,
                 hasStandardCommand = false,
                 defaultProjectile = leftSecVp?.defaultProjectile ?? rightSecVp?.defaultProjectile,
@@ -279,13 +358,23 @@ namespace BDP.Trigger
                 defaultCooldownTime = Mathf.Max(
                     leftSecVp?.defaultCooldownTime ?? 1f,
                     rightSecVp?.defaultCooldownTime ?? 1f),
-                burstShotCount = 1,
-                ticksBetweenBurstShots = 0,
-                label = "双手齐射",
+                burstShotCount = leftEffective + rightEffective,
+                ticksBetweenBurstShots = Mathf.Max(
+                    leftSecVp?.ticksBetweenBurstShots ?? 0,
+                    rightSecVp?.ticksBetweenBurstShots ?? 0),
             };
 
-            string loadID = $"BDP_SecondaryDual_{parent.ThingID}";
-            return FindOrCreateVerb(vp, pawn, loadID);
+            string loadID = $"BDP_DualSecondary_{parent.ThingID}";
+            Verb verb = FindOrCreateVerb(vp, pawn, loadID);
+
+            // v12.0：为Verb_BDPDual设置leftFiringPattern和rightFiringPattern
+            if (verb is Verb_BDPDual dualVerb)
+            {
+                dualVerb.leftFiringPattern = leftCfg.secondaryFiringPattern;
+                dualVerb.rightFiringPattern = rightCfg.secondaryFiringPattern;
+            }
+
+            return verb;
         }
 
         /// <summary>
@@ -350,25 +439,32 @@ namespace BDP.Trigger
         }
 
         /// <summary>
-        /// 创建单个组合技Verb实例（v10.0新增，v9.0重构）。
+        /// 创建单个组合技Verb实例（v10.0新增，v9.0重构，v15.0改为internal）。
         /// 参数取两侧芯片的平均值。
+        /// 由 ComboVerbDef.ActivateEffect 通过 CreateComboVerbsForDef 调用。
         /// </summary>
-        private Verb CreateComboVerb(ComboVerbDef comboDef, bool isSecondary,
+        internal Verb CreateComboVerb(ComboVerbDef comboDef, bool isSecondary,
             Pawn pawn, ChipSlot leftSlot, ChipSlot rightSlot)
         {
             var leftCfg = leftSlot.loadedChip.def.GetModExtension<VerbChipConfig>();
             var rightCfg = rightSlot.loadedChip.def.GetModExtension<VerbChipConfig>();
             if (leftCfg == null || rightCfg == null) return null;
 
-            // 如果是副攻击但未配置，返回null
+            // v16.0：副攻击逻辑 - 两侧都有副攻击配置时才创建组合技副攻击
             if (isSecondary)
             {
-                if (comboDef.secondaryVerbClass != null)
-                {
-                    return CreateComboVerbFromClass(comboDef, comboDef.secondaryVerbClass,
-                        pawn, leftSlot, rightSlot, leftCfg, rightCfg, true);
-                }
-                return null; // 无副攻击
+                // 检查两侧芯片是否都配置了副攻击
+                bool leftHasSecondary = leftCfg.secondaryVerbProps != null;
+                bool rightHasSecondary = rightCfg.secondaryVerbProps != null;
+
+                // 只有两侧都有副攻击时，才创建组合技副攻击
+                if (!leftHasSecondary || !rightHasSecondary)
+                    return null;
+
+                // 如果ComboVerbDef配置了secondaryVerbClass，使用它；否则使用primaryVerbClass
+                Type verbClass = comboDef.secondaryVerbClass ?? comboDef.primaryVerbClass;
+                return CreateComboVerbFromClass(comboDef, verbClass,
+                    pawn, leftSlot, rightSlot, leftCfg, rightCfg, true);
             }
 
             // 主攻击逻辑：使用primaryVerbClass
@@ -382,6 +478,9 @@ namespace BDP.Trigger
         private Verb CreateComboVerbFromClass(ComboVerbDef comboDef, System.Type verbClass,
             Pawn pawn, ChipSlot leftSlot, ChipSlot rightSlot, VerbChipConfig leftCfg, VerbChipConfig rightCfg, bool isSecondary)
         {
+            // v17.0：使用CalculateDualFiringConfig计算发射模式和burstShotCount
+            var firingConfig = CalculateDualFiringConfig(leftCfg, rightCfg, isSecondary);
+
             // 计算平均参数
             float avgRange = (GetFirstRange(leftCfg) + GetFirstRange(rightCfg)) * 0.5f;
             float avgWarmup = (GetFirstWarmup(leftCfg) + GetFirstWarmup(rightCfg)) * 0.5f;
@@ -401,6 +500,7 @@ namespace BDP.Trigger
                 (GetFirstTicksBetween(leftCfg) + GetFirstTicksBetween(rightCfg)) * 0.5f);
 
             // 构建VerbProperties
+            // v17.0：burstShotCount使用CalculateDualFiringConfig的结果，而不是硬编码
             var vp = new VerbProperties
             {
                 verbClass = verbClass,
@@ -412,10 +512,8 @@ namespace BDP.Trigger
                 range = avgRange,
                 warmupTime = avgWarmup,
                 defaultCooldownTime = avgCooldown,
-                // 副攻击模式：burstShotCount=1（TryCastShot内循环）
-                // 主攻击模式：burstShotCount=avgBurst（引擎burst机制）
-                burstShotCount = isSecondary ? 1 : avgBurst,
-                ticksBetweenBurstShots = isSecondary ? 0 : avgTicksBetween,
+                burstShotCount = firingConfig.TotalBurstCount,  // 使用计算出的burst数
+                ticksBetweenBurstShots = firingConfig.IsBothSimultaneous ? 0 : avgTicksBetween,
                 label = isSecondary ? "组合技副攻击" : comboDef.label,
             };
 
@@ -426,11 +524,19 @@ namespace BDP.Trigger
             Verb verb = FindOrCreateVerb(vp, pawn, loadID);
             if (verb == null) return null;
 
-            // 设置组合技专用字段（如果是Verb_BDPComboShoot）
-            if (verb is Verb_BDPComboShoot comboVerb)
+            // v12.0：设置组合技专用字段（Verb_BDPCombo）
+            // v17.0：使用CalculateDualFiringConfig公共方法
+            if (verb is Verb_BDPCombo comboVerb)
             {
                 comboVerb.comboDef = comboDef;
-                comboVerb.isVolley = isSecondary;
+
+                var config = CalculateDualFiringConfig(leftCfg, rightCfg, isSecondary);
+
+                // 组合技：双侧齐射→齐射，其他→逐发
+                comboVerb.firingPattern = config.IsBothSimultaneous
+                    ? FiringPattern.Simultaneous
+                    : FiringPattern.Sequential;
+
                 comboVerb.avgBurstCount = avgBurst;
                 comboVerb.avgTrionCost = avgTrionCost;
                 comboVerb.avgAnchorSpread = avgAnchorSpread;
@@ -438,6 +544,68 @@ namespace BDP.Trigger
             }
 
             return verb;
+        }
+
+        // ── 双侧发射模式配置（v17.0提取公共逻辑） ──
+
+        /// <summary>
+        /// 双侧发射配置结果（v17.0新增）。
+        /// </summary>
+        private struct DualFiringConfig
+        {
+            public FiringPattern LeftPattern;
+            public FiringPattern RightPattern;
+            public int TotalBurstCount;
+            public bool IsBothSimultaneous;
+        }
+
+        /// <summary>
+        /// 为双侧Verb配置发射模式和burstShotCount（v17.0提取公共逻辑）。
+        /// 适用于Verb_BDPDual和Verb_BDPCombo。
+        /// </summary>
+        /// <param name="leftCfg">左侧芯片配置</param>
+        /// <param name="rightCfg">右侧芯片配置</param>
+        /// <param name="useSecondary">是否使用副攻击模式</param>
+        /// <returns>配置结果：(leftPattern, rightPattern, totalBurstCount, isBothSimultaneous)</returns>
+        private static DualFiringConfig CalculateDualFiringConfig(
+            VerbChipConfig leftCfg,
+            VerbChipConfig rightCfg,
+            bool useSecondary = false)
+        {
+            // 1. 读取发射模式
+            FiringPattern leftPattern = useSecondary
+                ? leftCfg?.secondaryFiringPattern ?? FiringPattern.Sequential
+                : leftCfg?.primaryFiringPattern ?? FiringPattern.Sequential;
+
+            FiringPattern rightPattern = useSecondary
+                ? rightCfg?.secondaryFiringPattern ?? FiringPattern.Sequential
+                : rightCfg?.primaryFiringPattern ?? FiringPattern.Sequential;
+
+            // 2. 判断是否双侧齐射
+            bool isBothSimultaneous = (leftPattern == FiringPattern.Simultaneous &&
+                                       rightPattern == FiringPattern.Simultaneous);
+
+            // 3. 计算有效burst数
+            int leftBurst = useSecondary
+                ? (leftCfg?.secondaryVerbProps?.burstShotCount ?? 1)
+                : leftCfg?.GetPrimaryBurstCount() ?? 1;
+            int rightBurst = useSecondary
+                ? (rightCfg?.secondaryVerbProps?.burstShotCount ?? 1)
+                : rightCfg?.GetPrimaryBurstCount() ?? 1;
+
+            int leftEffective = leftPattern == FiringPattern.Simultaneous ? 1 : leftBurst;
+            int rightEffective = rightPattern == FiringPattern.Simultaneous ? 1 : rightBurst;
+
+            // 4. 计算总burst数
+            int totalBurstCount = isBothSimultaneous ? 1 : (leftEffective + rightEffective);
+
+            return new DualFiringConfig
+            {
+                LeftPattern = leftPattern,
+                RightPattern = rightPattern,
+                TotalBurstCount = totalBurstCount,
+                IsBothSimultaneous = isBothSimultaneous
+            };
         }
 
         // ── 组合技参数读取辅助（从VerbChipConfig.primaryVerbProps读取） ──

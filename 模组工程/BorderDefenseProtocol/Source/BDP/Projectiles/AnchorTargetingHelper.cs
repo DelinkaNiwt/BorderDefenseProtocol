@@ -96,7 +96,7 @@ namespace BDP.Projectiles
                 }
             };
 
-            // 高亮绘制：已放置锚点折线 + 射程环 + LOS红线反馈 + 目标高亮
+            // 高亮绘制：已放置锚点折线 + 射程环 + LOS红线反馈 + 目标高亮 + 范围指示器
             Action<LocalTargetInfo> highlightAction = target =>
             {
                 // 射程环
@@ -106,6 +106,10 @@ namespace BDP.Projectiles
                 // 目标脚下白色圆圈（与非引导模式一致）
                 if (target.IsValid)
                     GenDraw.DrawTargetHighlight(target);
+
+                // 范围指示器（如果verb支持）
+                if (verb is BDP.Trigger.Verb_BDPRangedBase bdpVerb && target.IsValid)
+                    bdpVerb.DrawAreaIndicators(target);
             };
 
             // 目标校验：
