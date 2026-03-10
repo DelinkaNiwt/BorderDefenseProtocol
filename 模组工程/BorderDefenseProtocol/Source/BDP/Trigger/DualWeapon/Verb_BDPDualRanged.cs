@@ -14,26 +14,22 @@ namespace BDP.Trigger
     ///
     /// PMS重构：引导弹逻辑由基类Verb_BDPRangedBase统一管理，
     /// 本类仅保留双侧特有的TryStartCastOn/GetLosCheckTarget重写。
+    /// v10.0: 继承Verb_BDPDualBase,消除与其他双侧Verb的重复代码。
     /// </summary>
-    public class Verb_BDPDualRanged : Verb_BDPRangedBase
+    public class Verb_BDPDualRanged : Verb_BDPDualBase
     {
-        private int dualBurstIndex = 0;
-        private int leftRemaining = 0;
-        private int rightRemaining = 0;
-        private ThingDef leftProjectileDef;
-        private ThingDef rightProjectileDef;
 
         /// <summary>查找两侧中支持引导的芯片配置。</summary>
-        protected override WeaponChipConfig GetGuidedConfig()
+        protected override VerbChipConfig GetGuidedConfig()
         {
             var triggerComp = GetTriggerComp();
             if (triggerComp == null) return null;
             var leftCfg = triggerComp.GetActiveSlot(SlotSide.LeftHand)
-                ?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
+                ?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
             var rightCfg = triggerComp.GetActiveSlot(SlotSide.RightHand)
-                ?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
-            if (leftCfg?.supportsGuided == true) return leftCfg;
-            if (rightCfg?.supportsGuided == true) return rightCfg;
+                ?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
+            if (leftCfg?.ranged?.guided != null) return leftCfg;
+            if (rightCfg?.ranged?.guided != null) return rightCfg;
             return null;
         }
 
@@ -73,13 +69,13 @@ namespace BDP.Trigger
         protected override ThingDef GetAutoRouteProjectileDef()
         {
             var triggerComp = GetTriggerComp();
-            var leftCfg = triggerComp?.GetActiveSlot(SlotSide.LeftHand)?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
-            var rightCfg = triggerComp?.GetActiveSlot(SlotSide.RightHand)?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
+            var leftCfg = triggerComp?.GetActiveSlot(SlotSide.LeftHand)?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
+            var rightCfg = triggerComp?.GetActiveSlot(SlotSide.RightHand)?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
 
             // 自动绕行只对引导弹有意义：优先返回支持引导的一侧弹药。
-            if (leftCfg?.supportsGuided == true)
+            if (leftCfg?.ranged?.guided != null)
                 return leftCfg.GetPrimaryProjectileDef() ?? base.GetAutoRouteProjectileDef();
-            if (rightCfg?.supportsGuided == true)
+            if (rightCfg?.ranged?.guided != null)
                 return rightCfg.GetPrimaryProjectileDef() ?? base.GetAutoRouteProjectileDef();
 
             return leftCfg?.GetPrimaryProjectileDef()
@@ -102,7 +98,7 @@ namespace BDP.Trigger
                 gs.AttachManualFlight(proj);
             else
                 gs.AttachAutoRouteFlight(proj, gs.ResolveAutoRouteFinalTarget(currentTarget),
-                    GetGuidedConfig()?.anchorSpread ?? 0.3f);
+                    GetGuidedConfig()?.ranged?.guided?.anchorSpread ?? 0.3f);
         }
 
         /// <summary>
@@ -130,19 +126,6 @@ namespace BDP.Trigger
 
             SlotSide shotSide = GetCurrentShotSide();
             gs.CurrentShotHasPath = gs.ManualAnchorsActive && IsSideGuided(shotSide);
-
-            // 引导模式下，非变化弹侧无直视LOS → 跳过这发
-            if (gs.ManualAnchorsActive && !gs.CurrentShotHasPath)
-            {
-                IntVec3 losCell = gs.SavedThingTarget.IsValid
-                    ? gs.SavedThingTarget.Cell : currentTarget.Cell;
-                if (!GenSight.LineOfSight(caster.Position, losCell, caster.Map))
-                {
-                    dualBurstIndex++;
-                    if (burstShotsLeft <= 1) dualBurstIndex = 0;
-                    return true;
-                }
-            }
 
             float cost = GetSideTrionCost(shotSide);
             if (cost > 0f)
@@ -199,9 +182,9 @@ namespace BDP.Trigger
             }
 
             var leftCfg = triggerComp.GetActiveSlot(SlotSide.LeftHand)
-                ?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
+                ?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
             var rightCfg = triggerComp.GetActiveSlot(SlotSide.RightHand)
-                ?.loadedChip?.def?.GetModExtension<WeaponChipConfig>();
+                ?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
 
             leftRemaining = leftCfg?.GetPrimaryBurstCount() ?? 0;
             rightRemaining = rightCfg?.GetPrimaryBurstCount() ?? 0;
@@ -210,11 +193,36 @@ namespace BDP.Trigger
             var rightFm = GetFireMode(triggerComp.GetActiveSlot(SlotSide.RightHand)?.loadedChip);
             if (leftFm  != null) leftRemaining  = leftFm.GetEffectiveBurst(leftRemaining);
             if (rightFm != null) rightRemaining = rightFm.GetEffectiveBurst(rightRemaining);
+
+            // ── 架构修正：在初始化时检查每一侧的LOS ──
+            // 获取最终目标Cell（引导模式下使用SavedThingTarget，否则使用currentTarget）
+            IntVec3 finalTargetCell = gs.SavedThingTarget.IsValid
+                ? gs.SavedThingTarget.Cell
+                : currentTarget.Cell;
+
+            // 左侧LOS检查：如果不支持引导且无直视LOS，排除这一侧
+            if (leftCfg != null && leftRemaining > 0 && leftCfg.ranged?.guided == null)
+            {
+                if (!GenSight.LineOfSight(caster.Position, finalTargetCell, caster.Map))
+                {
+                    leftRemaining = 0;
+                }
+            }
+
+            // 右侧LOS检查：如果不支持引导且无直视LOS，排除这一侧
+            if (rightCfg != null && rightRemaining > 0 && rightCfg.ranged?.guided == null)
+            {
+                if (!GenSight.LineOfSight(caster.Position, finalTargetCell, caster.Map))
+                {
+                    rightRemaining = 0;
+                }
+            }
+
             verbProps.burstShotCount = leftRemaining + rightRemaining; // 同步引擎总发数
             leftProjectileDef = leftCfg?.GetPrimaryProjectileDef();
             rightProjectileDef = rightCfg?.GetPrimaryProjectileDef();
-            gs.LeftHasPath = leftCfg?.supportsGuided == true;
-            gs.RightHasPath = rightCfg?.supportsGuided == true;
+            gs.LeftHasPath = leftCfg?.ranged?.guided != null;
+            gs.RightHasPath = rightCfg?.ranged?.guided != null;
         }
 
         /// <summary>确定当前发应使用哪一侧（Fix-12：双零防护）。</summary>
@@ -241,8 +249,9 @@ namespace BDP.Trigger
             if (triggerComp == null) return 0f;
             var slot = triggerComp.GetActiveSlot(side);
             if (slot?.loadedChip == null) return 0f;
-            return slot.loadedChip.def.GetModExtension<WeaponChipConfig>()
-                ?.trionCostPerShot ?? 0f;
+
+            // 使用统一工具类获取使用消耗
+            return ChipUsageCostHelper.GetUsageCost(slot.loadedChip);
         }
 
         private Thing GetSideChipThing(SlotSide side)
