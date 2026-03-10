@@ -27,6 +27,12 @@ namespace BDP.Trigger.ShotPipeline
         /// <summary>合并后的瞄准结果（管线输出）</summary>
         public AimResult AimResult { get; set; }
 
+        /// <summary>
+        /// 锚点路径累积（Targeting 子步骤期间由交互逻辑写入）
+        /// 用于引导导弹的多步锚点瞄准
+        /// </summary>
+        public List<IntVec3> AnchorPath { get; set; }
+
         // ══════════════════════════════════════════
         //  射击阶段可变状态
         // ══════════════════════════════════════════
@@ -82,6 +88,7 @@ namespace BDP.Trigger.ShotPipeline
             AimResult = default;
             FireResult = default;
             RouteResult = null;
+            AnchorPath?.Clear();
         }
     }
 }
