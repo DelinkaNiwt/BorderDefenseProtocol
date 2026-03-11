@@ -23,9 +23,7 @@ namespace BDP.Combat
             if (absorbed) return;
 
             // 检查是否处于Collapsing状态
-            if (__instance.health?.hediffSet == null) return;
-
-            if (__instance.health.hediffSet.HasHediff(BDP_DefOf.BDP_CombatBodyCollapsing))
+            if (CombatBodyQuery.IsCollapsing(__instance))
             {
                 absorbed = true; // 吸收所有伤害
             }

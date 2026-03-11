@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ══════════════════════════════════════════════════════
+       BDP_Combo_Tomahawk — 战斧组合技
+       组合条件：流星（BDP_Chip_Meteora）+ 毒蛇（BDP_Chip_Viper）
+       子弹：引导炸裂弹（BDP_Bullet_GuidedExplosive）
+       攻击模式：齐射（Simultaneous）
+       特性：支持引导瞄准 + 爆炸伤害
+       ══════════════════════════════════════════════════════ -->
+  <BDP.Trigger.ComboVerbDef>
+    <defName>BDP_Combo_Tomahawk</defName>
+    <label>战斧</label>
+    <description>流星与毒蛇的组合技。发射引导炸裂弹进行齐射攻击，结合了引导瞄准的精确性和爆炸伤害的范围杀伤力。4发连射，支持锚点折线弹道，每发命中后产生范围爆炸（半径3格）。</description>
+
+    <!-- 组合条件：流星 + 毒蛇（顺序无关） -->
+    <chipA>BDP_Chip_Meteora</chipA>
+    <chipB>BDP_Chip_Viper</chipB>
+
+    <!-- 子弹类型：引导炸裂弹 -->
+    <projectileDef>BDP_Bullet_GuidedExplosive</projectileDef>
+
+    <!-- Verb类型配置 -->
+    <primaryVerbClass>BDP.Trigger.Verb_BDPCombo</primaryVerbClass>
+    <!-- secondaryVerbClass省略，默认为null（无副攻击） -->
+
+    <!-- 引导支持 -->
+    <supportsGuided>true</supportsGuided>
+    <maxAnchors>5</maxAnchors>
+  </BDP.Trigger.ComboVerbDef>
+
+</Defs>

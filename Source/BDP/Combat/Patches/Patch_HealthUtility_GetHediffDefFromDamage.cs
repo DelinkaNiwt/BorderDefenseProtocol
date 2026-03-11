@@ -46,8 +46,7 @@ namespace BDP.Combat.Patches
         static void Postfix(ref HediffDef __result, Pawn pawn)
         {
             // 检查Pawn是否有战斗体激活
-            if (pawn?.health?.hediffSet == null) return;
-            if (!pawn.health.hediffSet.HasHediff(BDP_DefOf.BDP_CombatBodyActive)) return;
+            if (!CombatBodyQuery.IsCombatBodyActive(pawn)) return;
 
             EnsureMapping();
 

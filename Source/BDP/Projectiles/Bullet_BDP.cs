@@ -158,6 +158,60 @@ namespace BDP.Projectiles
         }
 
         /// <summary>
+        /// 从 ShotSession 注入射击管线数据到弹道。
+        /// 新的数据注入入口，用于射击管线集成。
+        /// 替代 VerbFlightState.AttachManualFlight/AttachAutoRouteFlight。
+        /// </summary>
+        /// <param name="aimResult">瞄准结果（包含锚点路径、散布等）</param>
+        /// <param name="fireResult">射击结果（包含速度倍率等）</param>
+        /// <param name="routeResult">自动绕行路由结果（可选）</param>
+        public void InjectShotData(
+            BDP.Trigger.ShotPipeline.AimResult aimResult,
+            BDP.Trigger.ShotPipeline.FireResult fireResult,
+            ObstacleRouteResult? routeResult)
+        {
+            // 1. 注入手动锚点路径（优先级最高）
+            if (aimResult?.HasGuidedPath == true)
+            {
+                TryInitGuidedFlight(
+                    aimResult.AnchorPath,
+                    aimResult.FinalTarget,
+                    aimResult.AnchorSpread);
+                return;
+            }
+
+            // 2. 注入自动绕行路径（无手动锚点时）
+            if (routeResult.HasValue && routeResult.Value.IsValid)
+            {
+                var route = routeResult.Value;
+                List<IntVec3> anchors;
+
+                // 两侧都可绕行时交替分配（简化版，不维护计数器）
+                if (route.LeftAnchors != null && route.RightAnchors != null)
+                {
+                    // 使用弹道ID的奇偶性决定左右侧
+                    anchors = (thingIDNumber % 2 == 0)
+                        ? route.LeftAnchors
+                        : route.RightAnchors;
+                }
+                else
+                {
+                    anchors = route.LeftAnchors ?? route.RightAnchors;
+                }
+
+                if (anchors != null && anchors.Count > 0)
+                {
+                    TryInitGuidedFlight(
+                        anchors,
+                        aimResult?.FinalTarget ?? default,
+                        fireResult?.SpreadRadius ?? 0f);
+                }
+            }
+
+            // 3. 无引导路径时，弹道保持直射（无需额外操作）
+        }
+
+        /// <summary>
         /// 初始化引导飞行——由GuidedModule.ApplyWaypoints调用。
         /// 设置三层目标，CurrentTarget由GuidedModule首tick ProvideIntent设置。
         /// </summary>

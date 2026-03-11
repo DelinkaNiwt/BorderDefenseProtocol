@@ -1,27 +1,28 @@
 using BDP.Core;
 using BDP.Projectiles;
+using BDP.Trigger.ShotPipeline;
 using UnityEngine;
 using Verse;
 
 namespace BDP.Trigger
 {
     /// <summary>
-    /// 组合技攻击Verb（v10.0新增）——B+C芯片组合发射天眼弹。
+    /// 组合技攻击Verb（v10.0新增，v12.0重命名）——B+C芯片组合发射天眼弹。
     ///
     /// 继承Verb_BDPRangedBase，复用引导弹基础设施（gs、StartAnchorTargeting等）。
     /// 参数取两侧芯片的平均值（range、warmup、burst、trionCost、anchorSpread）。
     ///
-    /// 内部通过isVolley标志区分普通/齐射模式，避免新增子类：
-    ///   · isVolley=false：引擎burst机制逐发射击
-    ///   · isVolley=true：burstShotCount=1，TryCastShot内循环发射
+    /// 内部通过firingPattern标志区分普通/齐射模式，避免新增子类：
+    ///   · Sequential：引擎burst机制逐发射击
+    ///   · Simultaneous：burstShotCount=1，TryCastShot内循环发射
     /// </summary>
-    public class Verb_BDPComboShoot : Verb_BDPRangedBase
+    public class Verb_BDPCombo : Verb_BDPRangedBase
     {
         /// <summary>组合技定义引用（由CompTriggerBody.CreateComboVerb设置）。</summary>
         public ComboVerbDef comboDef;
 
-        /// <summary>是否为齐射模式（true=单次TryCastShot内循环发射所有子弹）。</summary>
-        public bool isVolley;
+        /// <summary>发射模式（由CompTriggerBody在创建时设置）。</summary>
+        internal FiringPattern firingPattern;
 
         /// <summary>缓存的平均burstShotCount（由Initialize计算）。</summary>
         public int avgBurstCount;
@@ -52,23 +53,40 @@ namespace BDP.Trigger
                 this, CasterPawn, comboDef.maxAnchors, verbProps.range,
                 (anchors, finalTarget) =>
                 {
-                    gs.StoreTargetingResult(anchors, finalTarget, avgAnchorSpread);
+                    // 将锚点数据存储到 activeSession
+                    if (activeSession != null)
+                    {
+                        activeSession.AnchorPath = new System.Collections.Generic.List<IntVec3>(anchors);
+                        if (activeSession.AimResult == null)
+                            activeSession.AimResult = new ShotPipeline.AimResult();
+                        activeSession.AimResult.AnchorPath = activeSession.AnchorPath;
+                        activeSession.AimResult.FinalTarget = finalTarget;
+                        activeSession.AimResult.AnchorSpread = avgAnchorSpread;
+                    }
                     OrderForceTargetCore(finalTarget);
                 });
         }
 
-        /// <summary>弹道发射后回调：引导模式走引导路径，否则尝试自动绕行。</summary>
+        /// <summary>弹道发射后回调：通过管线系统注入射击数据。</summary>
         protected override void OnProjectileLaunched(Projectile proj)
         {
-            if (gs.ManualAnchorsActive)
-                gs.AttachManualFlight(proj);
-            else
-                gs.AttachAutoRouteFlight(proj, gs.ResolveAutoRouteFinalTarget(currentTarget), avgAnchorSpread);
+            if (!(proj is Bullet_BDP bdp)) return;
+            if (activeSession == null) return;
+
+            // 从管线系统注入射击数据
+            bdp.InjectShotData(
+                activeSession.AimResult,
+                activeSession.FireResult,
+                activeSession.RouteResult);
         }
 
         // ── 射击逻辑 ──
 
-        protected override bool TryCastShot()
+        /// <summary>
+        /// ExecuteFire override：组合技调度逻辑。
+        /// 计算两侧芯片的平均参数（burst × FireMode倍率），根据firingPattern分发到齐射/逐发模式。
+        /// </summary>
+        protected override bool ExecuteFire(ShotSession session)
         {
             var pawn = CasterPawn;
             if (pawn == null || comboDef == null) return false;
@@ -84,16 +102,37 @@ namespace BDP.Trigger
             // 计算有效连射数（基础平均值 × FireMode平均倍率）
             int effectiveBurst = ComputeEffectiveBurst(leftSlot.loadedChip, rightSlot.loadedChip);
 
-            // 齐射模式：单次TryCastShot内循环发射
-            if (isVolley)
-                return DoVolleyShot(pawn, triggerComp, leftSlot, rightSlot, effectiveBurst);
+            // 调试日志：记录组合技攻击信息（仅在burst开始时记录一次）
+            if (burstShotsLeft == verbProps.burstShotCount)
+            {
+                // 齐射模式：开枪1次，发射effectiveBurst颗子弹
+                // 逐发模式：开枪effectiveBurst次，发射effectiveBurst颗子弹
+                int shotCount = verbProps.burstShotCount;
+                int bulletCount = effectiveBurst;
+
+                // v15.0：根据verbProps.isPrimary判断主/副攻击
+                bool isSecondary = !verbProps.isPrimary;
+                VerbAttackLogger.LogComboAttack(
+                    this,
+                    comboDef.defName,
+                    new[] { leftSlot.loadedChip.def.defName, rightSlot.loadedChip.def.defName },
+                    firingPattern,
+                    shotCount,
+                    bulletCount,
+                    isSecondary
+                );
+            }
+
+            // 齐射模式：单次ExecuteFire内循环发射
+            if (firingPattern == FiringPattern.Simultaneous)
+                return DoSimultaneousShot(pawn, triggerComp, leftSlot, rightSlot, effectiveBurst);
 
             // 普通模式：引擎burst机制，逐发射击
-            return DoBurstShot(pawn, triggerComp, leftSlot, rightSlot, effectiveBurst);
+            return DoSequentialShot(pawn, triggerComp, leftSlot, rightSlot, effectiveBurst);
         }
 
         /// <summary>齐射模式：单次TryCastShot内循环发射所有子弹。</summary>
-        private bool DoVolleyShot(Pawn pawn, CompTriggerBody tc,
+        private bool DoSimultaneousShot(Pawn pawn, CompTriggerBody tc,
             ChipSlot leftSlot, ChipSlot rightSlot, int volleyCount)
         {
             // 预检Trion总消耗
@@ -105,22 +144,7 @@ namespace BDP.Trigger
             // 选择一侧芯片作为equipmentSource（战斗日志用）
             Thing chipEquipment = leftSlot.loadedChip;
 
-            // 自动绕行：齐射前计算路由
-            gs.PrepareAutoRoute(caster.Position, currentTarget.Cell,
-                caster.Map, comboDef.projectileDef);
-
-            bool anyHit = false;
-            for (int i = 0; i < volleyCount; i++)
-            {
-                if (avgVolleySpread > 0f)
-                    shotOriginOffset = new Vector3(
-                        Rand.Range(-avgVolleySpread, avgVolleySpread), 0f,
-                        Rand.Range(-avgVolleySpread, avgVolleySpread));
-
-                if (TryCastShotCore(chipEquipment))
-                    anyHit = true;
-            }
-            shotOriginOffset = Vector3.zero;
+            bool anyHit = FireVolleyLoop(volleyCount, avgVolleySpread, chipEquipment);
 
             if (anyHit && totalCost > 0f)
                 trion?.Consume(totalCost);
@@ -129,7 +153,7 @@ namespace BDP.Trigger
         }
 
         /// <summary>普通模式：引擎burst逐发射击，每发检查Trion。</summary>
-        private bool DoBurstShot(Pawn pawn, CompTriggerBody tc,
+        private bool DoSequentialShot(Pawn pawn, CompTriggerBody tc,
             ChipSlot leftSlot, ChipSlot rightSlot, int effectiveBurst)
         {
             // FireMode连射截断（burst机制截断法）
@@ -143,11 +167,6 @@ namespace BDP.Trigger
                 if (trion == null || trion.Available < avgTrionCost)
                     return false;
             }
-
-            // 自动绕行（首发时计算）
-            if (fired == 0)
-                gs.PrepareAutoRoute(caster.Position, currentTarget.Cell,
-                    caster.Map, comboDef.projectileDef);
 
             Thing chipEquipment = leftSlot.loadedChip;
             bool result = TryCastShotCore(chipEquipment);

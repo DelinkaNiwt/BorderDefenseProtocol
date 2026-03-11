@@ -82,7 +82,7 @@ namespace BDP.Combat
             Log.Warning($"[BDP] 战斗体破裂执行: {pawn.LabelShort} (原因: {collapseReason})");
 
             // 打断当前动作（避免破裂完成后继续破裂前的动作）
-            InterruptCurrentAction(pawn, "破裂流程结束");
+            CombatBodyQuery.InterruptCurrentAction(pawn, "破裂流程结束");
 
             // 移除自己
             pawn.health.RemoveHediff(this);
@@ -153,35 +153,5 @@ namespace BDP.Combat
         //  辅助方法
         // ═══════════════════════════════════════════
 
-        /// <summary>
-        /// 打断Pawn的当前动作。
-        /// 用于破裂时强制停止攻击、移动等动作。
-        /// </summary>
-        /// <param name="pawn">目标Pawn</param>
-        /// <param name="reason">打断原因（用于日志）</param>
-        private static void InterruptCurrentAction(Pawn pawn, string reason)
-        {
-            if (pawn == null) return;
-
-            Log.Message($"[BDP]   打断当前动作: {pawn.LabelShort} (原因: {reason})");
-
-            // 1. 结束当前Job
-            if (pawn.jobs?.curJob != null)
-            {
-                pawn.jobs.EndCurrentJob(Verse.AI.JobCondition.InterruptForced);
-            }
-
-            // 2. 取消战斗姿态
-            if (pawn.stances != null)
-            {
-                pawn.stances.CancelBusyStanceSoft();
-            }
-
-            // 3. 停止移动
-            if (pawn.pather != null)
-            {
-                pawn.pather.StopDead();
-            }
-        }
     }
 }

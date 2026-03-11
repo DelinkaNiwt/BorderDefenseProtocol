@@ -30,12 +30,27 @@ namespace BDP.Core
         public static HediffDef BDP_CombatBodyCollapsing;
         public static HediffDef BDP_CombatBodyPartPending;
 
+        // ── HediffDef（护盾系统） ──
+        public static HediffDef BDP_Shield;
+        public static HediffDef BDP_ShieldFront;
+
         // 重构说明：
         // - BDP_CombatBodyPartDestroyed 已删除（使用原版 Hediff_MissingPart）
         // - BDP_CombatWound_* 系列已删除（使用原版 Hediff_Injury）
 
         // ── ThingDef（紧急脱离系统） ──
         public static ThingDef BDP_EmergencyBeacon;
+
+        // ── ThingDef（芯片） ──
+        public static ThingDef BDP_Chip_Shield;
+        public static ThingDef BDP_Chip_ShieldFront;
+
+        // ── ThingDef（PawnFlyer） ──
+        public static ThingDef BDP_PawnFlyer_Grasshopper;
+
+        // ── FleckDef（蚱蜢特效） ──
+        public static FleckDef BDP_GrasshopperPlatform;
+        public static FleckDef BDP_GrasshopperPulse;
 
         static BDP_DefOf()
         {

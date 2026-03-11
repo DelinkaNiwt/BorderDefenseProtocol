@@ -100,6 +100,17 @@ namespace BDP.Trigger
         /// </summary>
         private IEnumerable<StatDrawEntry> BaseInfoStats()
         {
+            // 主类别（优先级高于categories）
+            if (Props.primaryCategory != ChipPrimaryCategory.Unspecified)
+            {
+                yield return new StatDrawEntry(
+                    BDP_StatCategoryDefOf.BDP_ChipInfo,
+                    "主类别",
+                    Props.GetPrimaryCategoryLabel(),
+                    "芯片的主要功能类别（单一值）。",
+                    2501); // 优先级高于categories（2500）
+            }
+
             // 类别标签
             if (Props.categories != null && Props.categories.Count > 0)
             {
@@ -120,6 +131,17 @@ namespace BDP.Trigger
                     Props.activationCost.ToString("F1") + " Trion",
                     "激活时一次性消耗的Trion量。",
                     2490);
+            }
+
+            // 使用消耗（统一层）
+            if (Props.usageCost > 0f)
+            {
+                yield return new StatDrawEntry(
+                    BDP_StatCategoryDefOf.BDP_ChipInfo,
+                    "使用消耗",
+                    Props.usageCost.ToString("F1") + " Trion",
+                    "每次使用/射击消耗的Trion量。",
+                    2485);
             }
 
             // 占用成本
@@ -290,17 +312,6 @@ namespace BDP.Trigger
                             "连射期间每分钟射击发数（60秒/连射间隔）。",
                             2486);
                     }
-                }
-
-                // Trion消耗/发
-                if ((cfg.cost?.trionPerShot ?? 0f) > 0f)
-                {
-                    yield return new StatDrawEntry(
-                        StatCategoryDefOf.Weapon_Ranged,
-                        "Trion消耗",
-                        (cfg.cost.trionPerShot).ToString("F1") + " /发",
-                        "每发射击消耗的Trion量。",
-                        2485);
                 }
 
                 // 齐射散布

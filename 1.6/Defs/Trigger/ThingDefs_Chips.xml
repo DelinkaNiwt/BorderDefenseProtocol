@@ -41,13 +41,55 @@
   </ThingDef>
 
   <!-- ══════════════════════════════════════════════════════
+       #10 BDP_Chip_Grasshopper — 蚱蜢芯片
+       约束：左右手槽位
+       作用：Trion弹射跳板，高速弹向目标位置
+       ══════════════════════════════════════════════════════ -->
+  <ThingDef ParentName="BDP_ChipBase">
+    <defName>BDP_Chip_Grasshopper</defName>
+    <label>蚱蜢</label>
+    <description>机动型芯片。在使用者脚下凝聚出Trion弹射跳板，以爆发性的速度将其弹向面对方向。这种爆炸性的推进力能够实现战场上的快速重新定位，但着陆时的急剧减速需要精确的控制。</description>
+
+    <graphicData>
+      <texPath>Things/Item/Chip/SonicDash</texPath>
+    </graphicData>
+
+    <statBases>
+      <MarketValue>800</MarketValue>
+    </statBases>
+
+    <comps>
+      <li Class="BDP.Trigger.CompProperties_TriggerChip">
+        <chipEffectClass>BDP.Trigger.AbilityChipEffect</chipEffectClass>
+        <primaryCategory>Ability</primaryCategory> <!-- 主类别：能力类 -->
+        <activationCost>0</activationCost> <!-- 无激活成本 -->
+        <allocationCost>15</allocationCost> <!-- 占用15 Trion -->
+        <usageCost>20</usageCost> <!-- 每次使用消耗20 Trion -->
+        <drainPerDay>0</drainPerDay> <!-- 无持续消耗 -->
+        <activationWarmup>0</activationWarmup> <!-- 无预热 -->
+        <slotRestriction>HandsOnly</slotRestriction> <!-- 只能插左右手槽位 -->
+        <categories>
+          <li>Mobility</li>
+          <li>Utility</li>
+        </categories>
+      </li>
+    </comps>
+
+    <modExtensions>
+      <li Class="BDP.Trigger.AbilityChipConfig">
+        <abilityDef>BDP_Ability_Grasshopper</abilityDef>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- ══════════════════════════════════════════════════════
        #9 BDP_Chip_EmergencyEscape — 紧急脱离芯片（特殊槽位）
        约束：只能插特殊槽位
        作用：战斗体被动破裂时触发传送
        ══════════════════════════════════════════════════════ -->
   <ThingDef ParentName="BDP_ChipBase">
     <defName>BDP_Chip_EmergencyEscape</defName>
-    <label>紧急脱离芯片</label>
+    <label>紧急脱离</label>
     <description>特殊系统芯片。装载后，战斗体被动破裂时自动传送到紧急脱离信标位置。只能插入特殊槽位。</description>
     <graphicData>
       <texPath>Things/Trigger/BDP_Chip_Test</texPath>
@@ -58,6 +100,7 @@
     <comps>
       <li Class="BDP.Trigger.CompProperties_TriggerChip">
         <chipEffectClass>BDP.Combat.PassiveChipEffect</chipEffectClass>
+        <primaryCategory>Passive</primaryCategory> <!-- 主类别：被动类 -->
         <slotRestriction>SpecialOnly</slotRestriction>
         <activationCost>0</activationCost>
         <allocationCost>200</allocationCost>
@@ -92,9 +135,11 @@
     <comps>
       <li Class="BDP.Trigger.CompProperties_TriggerChip">
         <chipEffectClass>BDP.Trigger.VerbChipEffect</chipEffectClass>
+        <primaryCategory>RangedWeapon</primaryCategory> <!-- 主类别：远程武器类 -->
         <slotRestriction>HandsOnly</slotRestriction>
         <activationCost>12</activationCost>
         <allocationCost>38</allocationCost>
+        <usageCost>2</usageCost> <!-- 每次射击消耗2 Trion -->
         <drainPerDay>0</drainPerDay>
         <minOutputPower>6</minOutputPower>
         <activationWarmup>30</activationWarmup>
@@ -114,7 +159,7 @@
     <modExtensions>
       <li Class="BDP.Trigger.VerbChipConfig">
         <primaryVerbProps>
-          <verbClass>BDP.Trigger.Verb_BDPVolley</verbClass>
+          <verbClass>BDP.Trigger.Verb_BDPSingle</verbClass>
           <hasStandardCommand>true</hasStandardCommand>
           <defaultProjectile>BDP_Bullet_Normal</defaultProjectile>
           <warmupTime>1.0</warmupTime>
@@ -130,9 +175,7 @@
           <accuracyMedium>0.55</accuracyMedium>
           <accuracyLong>0.45</accuracyLong>
         </primaryVerbProps>
-        <cost>
-          <trionPerShot>2</trionPerShot>
-        </cost>
+        <primaryFiringPattern>Simultaneous</primaryFiringPattern>
         <ranged>
           <volleySpreadRadius>0.3</volleySpreadRadius>
         </ranged>
@@ -159,9 +202,11 @@
     <comps>
       <li Class="BDP.Trigger.CompProperties_TriggerChip">
         <chipEffectClass>BDP.Trigger.VerbChipEffect</chipEffectClass>
+        <primaryCategory>RangedWeapon</primaryCategory> <!-- 主类别：远程武器类 -->
         <slotRestriction>HandsOnly</slotRestriction>
         <activationCost>12</activationCost>
         <allocationCost>38</allocationCost>
+        <usageCost>5</usageCost> <!-- 每次射击消耗5 Trion -->
         <drainPerDay>0</drainPerDay>
         <minOutputPower>6</minOutputPower>
         <activationWarmup>30</activationWarmup>
@@ -181,7 +226,7 @@
     <modExtensions>
       <li Class="BDP.Trigger.VerbChipConfig">
         <primaryVerbProps>
-          <verbClass>BDP.Trigger.Verb_BDPVolley</verbClass>
+          <verbClass>BDP.Trigger.Verb_BDPSingle</verbClass>
           <hasStandardCommand>true</hasStandardCommand>
           <defaultProjectile>BDP_Bullet_Guided</defaultProjectile>
           <warmupTime>1.0</warmupTime>
@@ -192,20 +237,192 @@
           <soundCastTail>GunTail_Medium</soundCastTail>
           <muzzleFlashScale>9</muzzleFlashScale>
           <defaultCooldownTime>2.0</defaultCooldownTime>
-          <accuracyTouch>0.55</accuracyTouch>
-          <accuracyShort>0.64</accuracyShort>
-          <accuracyMedium>0.55</accuracyMedium>
-          <accuracyLong>0.45</accuracyLong>
         </primaryVerbProps>
-        <cost>
-          <trionPerShot>5</trionPerShot>
-        </cost>
+        <primaryFiringPattern>Simultaneous</primaryFiringPattern>
         <ranged>
           <volleySpreadRadius>0.3</volleySpreadRadius>
           <guided>
             <maxAnchors>5</maxAnchors>
             <anchorSpread>0.3</anchorSpread>
           </guided>
+        </ranged>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- ══════════════════════════════════════════════════════
+       BDP_Chip_Shield — 能量盾芯片
+       约束：特殊槽位
+       作用：激活时添加正面180°护盾，抵挡前方攻击（70%成功率）
+       Severity机制：两个芯片同时激活时，防护范围扩展为360°，成功率提升至95%
+       ══════════════════════════════════════════════════════ -->
+  <ThingDef ParentName="BDP_ChipBase">
+    <defName>BDP_Chip_Shield</defName>
+    <label>能量盾</label>
+    <description>防御型芯片。激活后在使用者周围生成正面180度能量护盾，可以抵挡来自前方的远程攻击（70%成功率）。每次抵挡会消耗Trion能量，当Trion不足时护盾失效。只能插入特殊槽位。
+
+【组合效果】同时激活两个能量盾芯片时，防护范围扩展为360°全方位，成功率提升至95%。</description>
+
+    <graphicData>
+      <texPath>Things/Trigger/BDP_Chip_Test</texPath>
+    </graphicData>
+
+    <statBases>
+      <MarketValue>1200</MarketValue>
+    </statBases>
+
+    <comps>
+      <li Class="BDP.Trigger.CompProperties_TriggerChip">
+        <!-- 使用Hediff芯片效果 -->
+        <chipEffectClass>BDP.Trigger.HediffChipEffect</chipEffectClass>
+        <primaryCategory>Defense</primaryCategory> <!-- 主类别：防御类 -->
+
+        <!-- Trion成本配置 -->
+        <activationCost>20</activationCost>      <!-- 激活消耗20 Trion -->
+        <allocationCost>50</allocationCost>      <!-- 占用50 Trion -->
+        <drainPerDay>0</drainPerDay>             <!-- 无持续消耗（护盾抵挡时才消耗） -->
+
+        <!-- 时间配置 -->
+        <activationWarmup>60</activationWarmup>  <!-- 1秒预热 -->
+        <deactivationDelay>30</deactivationDelay> <!-- 0.5秒关闭延迟 -->
+
+        <!-- 槽位限制：只能插特殊槽位 -->
+        <slotRestriction>SpecialOnly</slotRestriction>
+
+        <!-- 芯片类别 -->
+        <categories>
+          <li>Defense</li>
+          <li>Shield</li>
+          <li>HighCost</li>
+        </categories>
+      </li>
+    </comps>
+
+    <!-- Hediff配置：指定要添加的护盾hediff -->
+    <modExtensions>
+      <li Class="BDP.Trigger.HediffChipConfig">
+        <hediffDef>BDP_Shield</hediffDef>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- ══════════════════════════════════════════════════════
+       BDP_Chip_ShieldFront — 前方护盾芯片
+       约束：特殊槽位
+       作用：激活时添加前方120°护盾，抵挡前方攻击（100%成功率）
+       ══════════════════════════════════════════════════════ -->
+  <ThingDef ParentName="BDP_ChipBase">
+    <defName>BDP_Chip_ShieldFront</defName>
+    <label>前方护盾</label>
+    <description>防御型芯片。激活后在使用者前方生成定向能量护盾，可以抵挡来自前方120度（左60°右60°）的远程攻击（100%成功率）。防护范围有限但抵挡可靠。每次抵挡会消耗Trion能量，当Trion不足时护盾失效。只能插入特殊槽位。</description>
+
+    <graphicData>
+      <texPath>Things/Trigger/BDP_Chip_Test</texPath>
+    </graphicData>
+
+    <statBases>
+      <MarketValue>1000</MarketValue>
+    </statBases>
+
+    <comps>
+      <li Class="BDP.Trigger.CompProperties_TriggerChip">
+        <!-- 使用Hediff芯片效果 -->
+        <chipEffectClass>BDP.Trigger.HediffChipEffect</chipEffectClass>
+        <primaryCategory>Defense</primaryCategory> <!-- 主类别：防御类 -->
+
+        <!-- Trion成本配置 -->
+        <activationCost>15</activationCost>      <!-- 激活消耗15 Trion -->
+        <allocationCost>40</allocationCost>      <!-- 占用40 Trion -->
+        <drainPerDay>0</drainPerDay>             <!-- 无持续消耗（护盾抵挡时才消耗） -->
+
+        <!-- 时间配置 -->
+        <activationWarmup>60</activationWarmup>  <!-- 1秒预热 -->
+        <deactivationDelay>30</deactivationDelay> <!-- 0.5秒关闭延迟 -->
+
+        <!-- 槽位限制：只能插特殊槽位 -->
+        <slotRestriction>SpecialOnly</slotRestriction>
+
+        <!-- 芯片类别 -->
+        <categories>
+          <li>Defense</li>
+          <li>Shield</li>
+          <li>Medium</li>
+        </categories>
+      </li>
+    </comps>
+
+    <!-- Hediff配置：指定要添加的护盾hediff -->
+    <modExtensions>
+      <li Class="BDP.Trigger.HediffChipConfig">
+        <hediffDef>BDP_ShieldFront</hediffDef>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- ══════════════════════════════════════════════════════
+       BDP_Chip_Meteora — 流星芯片（远程武器，齐射攻击）
+       模块：拖尾（BeamTrailConfig）+ 爆炸（BDPExplosionConfig）
+       类别：Cube（方块类）+ Explosive（爆炸类）
+       攻击模式：齐射（Simultaneous）
+       子弹：炸裂弹（BDP_Bullet_Explosive）
+       ══════════════════════════════════════════════════════ -->
+  <ThingDef ParentName="BDP_ChipBase">
+    <defName>BDP_Chip_Meteora</defName>
+    <label>流星</label>
+    <description>发射炸裂弹进行齐射攻击的远程芯片。3发连射，中等射程，子弹命中后产生范围爆炸（半径3格）。适合对抗密集目标和轻装甲单位。</description>
+    <graphicData>
+      <texPath>Things/Trigger/BDP_Chip_Test</texPath>
+    </graphicData>
+    <statBases>
+      <MarketValue>1000</MarketValue>
+    </statBases>
+    <comps>
+      <li Class="BDP.Trigger.CompProperties_TriggerChip">
+        <chipEffectClass>BDP.Trigger.VerbChipEffect</chipEffectClass>
+        <primaryCategory>RangedWeapon</primaryCategory>
+        <slotRestriction>HandsOnly</slotRestriction>
+        <activationCost>12</activationCost>
+        <allocationCost>38</allocationCost>
+        <usageCost>2</usageCost>
+        <drainPerDay>0</drainPerDay>
+        <minOutputPower>6</minOutputPower>
+        <activationWarmup>30</activationWarmup>
+        <deactivationDelay>15</deactivationDelay>
+        <categories>
+          <li>Weapon</li>
+          <li>Ranged</li>
+          <li>Medium</li>
+          <li>Physical</li>
+          <li>Rifle</li>
+          <li>Burst</li>
+          <li>Cube</li>
+          <li>Explosive</li>
+        </categories>
+      </li>
+      <li Class="BDP.FireMode.CompProperties_FireMode"/>
+    </comps>
+    <modExtensions>
+      <li Class="BDP.Trigger.VerbChipConfig">
+        <primaryVerbProps>
+          <verbClass>BDP.Trigger.Verb_BDPSingle</verbClass>
+          <hasStandardCommand>true</hasStandardCommand>
+          <defaultProjectile>BDP_Bullet_Explosive</defaultProjectile>
+          <warmupTime>1.0</warmupTime>
+          <range>40</range>
+          <burstShotCount>3</burstShotCount>
+          <ticksBetweenBurstShots>12</ticksBetweenBurstShots>
+          <soundCast>Shot_AssaultRifle</soundCast>
+          <soundCastTail>GunTail_Medium</soundCastTail>
+          <muzzleFlashScale>9</muzzleFlashScale>
+          <defaultCooldownTime>2.0</defaultCooldownTime>
+          <accuracyTouch>0.55</accuracyTouch>
+          <accuracyShort>0.64</accuracyShort>
+          <accuracyMedium>0.55</accuracyMedium>
+          <accuracyLong>0.45</accuracyLong>
+        </primaryVerbProps>
+        <primaryFiringPattern>Simultaneous</primaryFiringPattern>
+        <ranged>
+          <volleySpreadRadius>0.3</volleySpreadRadius>
         </ranged>
       </li>
     </modExtensions>

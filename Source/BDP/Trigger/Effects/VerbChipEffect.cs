@@ -50,7 +50,7 @@ namespace BDP.Trigger
             if (triggerComp == null) return;
 
             var side = triggerComp.ActivatingSide ?? SlotSide.LeftHand;
-            triggerComp.ClearSideVerbs(side);
+            triggerComp.SetSideVerbs(side, null, null);
 
             // v5.0：RebuildVerbs已搬迁至CompTriggerBody
             triggerComp.RebuildVerbs(pawn);

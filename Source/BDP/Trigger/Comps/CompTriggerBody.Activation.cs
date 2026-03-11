@@ -12,8 +12,9 @@ namespace BDP.Trigger
     /// - 前置条件检查（CanActivateChip）
     /// - 芯片激活/关闭（ActivateChip, DeactivateChip, DeactivateAll）
     /// - 特殊槽管理（ActivateAllSpecial, DeactivateAllSpecial）
-    /// - 组合能力管理（TryGrantComboAbility, TryRevokeComboAbilities）
     /// - 战斗体Trion占用（TryAllocateTrionForCombatBody）
+    ///
+    /// v15.0变更：组合效果管理已移至 CompTriggerBody.ComboSystem.cs
     /// </summary>
     public partial class CompTriggerBody
     {
@@ -194,6 +195,25 @@ namespace BDP.Trigger
         }
 
         /// <summary>
+        /// 在激活上下文中执行action（消除DoActivate/DeactivateSlot中的重复代码）。
+        /// 设置ActivatingSide和ActivatingSlot，执行action，然后清理上下文。
+        /// </summary>
+        private void WithActivatingContext(ChipSlot slot, System.Action action)
+        {
+            ActivatingSide = slot.side;
+            ActivatingSlot = slot;
+            try
+            {
+                action();
+            }
+            finally
+            {
+                ActivatingSide = null;
+                ActivatingSlot = null;
+            }
+        }
+
+        /// <summary>
         /// 执行芯片激活（内部方法）。
         /// 消耗激活成本、注册持续消耗、调用effect.Activate、设置isActive标志。
         /// </summary>
@@ -214,19 +234,8 @@ namespace BDP.Trigger
             if (chipComp.Props.drainPerDay > 0f)
                 TrionComp?.RegisterDrain($"chip_{slot.side}_{slot.index}", chipComp.Props.drainPerDay);
 
-            // 设置激活上下文（供VerbChipEffect等读取侧别和槽位）
-            // C3修复：try/finally保护，防止effect.Activate异常导致上下文残留
-            ActivatingSide = slot.side;
-            ActivatingSlot = slot;
-            try
-            {
-                effect.Activate(pawn, parent);
-            }
-            finally
-            {
-                ActivatingSide = null;
-                ActivatingSlot = null;
-            }
+            // 设置激活上下文并调用effect.Activate
+            WithActivatingContext(slot, () => effect.Activate(pawn, parent));
 
             slot.isActive = true;
 
@@ -234,8 +243,8 @@ namespace BDP.Trigger
             if (chipComp.Props.isDualHand)
                 dualHandLockSlot = slot;
 
-            // ── v4.0（F1）：组合能力查询 ──
-            TryGrantComboAbility(pawn);
+            // ── v15.0：统一组合效果更新（替代 TryGrantComboAbility） ──
+            UpdateComboEffects(pawn);
         }
 
         /// <summary>
@@ -253,19 +262,8 @@ namespace BDP.Trigger
             // ── v2.1（T32）：统一注销持续消耗 ──
             TrionComp?.UnregisterDrain($"chip_{slot.side}_{slot.index}");
 
-            // 设置激活上下文（供VerbChipEffect等读取侧别和槽位）
-            // C3修复：try/finally保护，防止effect.Deactivate异常导致上下文残留
-            ActivatingSide = slot.side;
-            ActivatingSlot = slot;
-            try
-            {
-                effect?.Deactivate(pawn, parent);
-            }
-            finally
-            {
-                ActivatingSide = null;
-                ActivatingSlot = null;
-            }
+            // 设置激活上下文并调用effect.Deactivate
+            WithActivatingContext(slot, () => effect?.Deactivate(pawn, parent));
 
             slot.isActive = false;
 
@@ -273,8 +271,8 @@ namespace BDP.Trigger
             if (dualHandLockSlot == slot)
                 dualHandLockSlot = null;
 
-            // ── v4.0（F1）：组合能力移除（芯片关闭后重新检查） ──
-            TryRevokeComboAbilities(pawn);
+            // ── v15.0：统一组合效果更新（替代 TryRevokeComboAbilities） ──
+            UpdateComboEffects(pawn);
         }
 
         /// <summary>
@@ -363,52 +361,8 @@ namespace BDP.Trigger
         // ── 战斗体管理方法已移至 CompTriggerBody.CombatBodySupport.cs ──
 
         // ═══════════════════════════════════════════
-        //  组合能力管理
+        //  组合效果管理（v15.0已移至 CompTriggerBody.ComboSystem.cs）
         // ═══════════════════════════════════════════
-
-        /// <summary>
-        /// 芯片激活后检查是否满足组合能力条件，满足则授予。
-        /// </summary>
-        private void TryGrantComboAbility(Pawn pawn)
-        {
-            if (pawn?.abilities == null) return;
-            var leftSlot = GetActiveSlot(SlotSide.LeftHand);
-            var rightSlot = GetActiveSlot(SlotSide.RightHand);
-            if (leftSlot?.loadedChip == null || rightSlot?.loadedChip == null) return;
-
-            foreach (var combo in DefDatabase<ComboAbilityDef>.AllDefs)
-            {
-                if (grantedCombos.Contains(combo)) continue;
-                if (!combo.Matches(leftSlot.loadedChip.def, rightSlot.loadedChip.def)) continue;
-                if (combo.abilityDef == null) continue;
-
-                pawn.abilities.GainAbility(combo.abilityDef);
-                grantedCombos.Add(combo);
-            }
-        }
-
-        /// <summary>
-        /// 芯片关闭后检查已授予的组合能力是否仍然满足条件，不满足则移除。
-        /// </summary>
-        private void TryRevokeComboAbilities(Pawn pawn)
-        {
-            if (pawn?.abilities == null || grantedCombos.Count == 0) return;
-            var leftSlot = GetActiveSlot(SlotSide.LeftHand);
-            var rightSlot = GetActiveSlot(SlotSide.RightHand);
-
-            for (int i = grantedCombos.Count - 1; i >= 0; i--)
-            {
-                var combo = grantedCombos[i];
-                bool stillValid = leftSlot?.loadedChip != null && rightSlot?.loadedChip != null
-                    && combo.Matches(leftSlot.loadedChip.def, rightSlot.loadedChip.def);
-                if (!stillValid)
-                {
-                    if (combo.abilityDef != null)
-                        pawn.abilities.RemoveAbility(combo.abilityDef);
-                    grantedCombos.RemoveAt(i);
-                }
-            }
-        }
 
         // ═══════════════════════════════════════════
         //  CompTick — 已移除

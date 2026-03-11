@@ -89,10 +89,10 @@ namespace BDP.Trigger
         private int lastChipVerbTickedTick = -1;
 
         /// <summary>
-        /// 已授予的组合能力列表（v10.0）。
-        /// 用于跟踪当前激活的组合技能力，在芯片切换时撤销。
+        /// 已激活的组合效果列表（v15.0统一管理）。
+        /// 统一管理 Verb/Ability/Hediff 所有类型的组合效果。
         /// </summary>
-        private readonly List<ComboAbilityDef> grantedCombos = new List<ComboAbilityDef>();
+        private readonly List<ComboEffectDef> activeComboEffects = new List<ComboEffectDef>();
 
         /// <summary>
         /// 当前正在激活/关闭的槽位侧别（临时上下文）。

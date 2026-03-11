@@ -114,9 +114,9 @@ namespace BDP.Projectiles
                 RightAnchors = rightAnchors
             };
 
-            // 诊断：输出锚点坐标 + 相邻锚点间LOS检查
-            if (TrackingDiag.Enabled)
-                LogRouteResult(result, shooterPos, targetPos, map);
+            // 诊断：输出锚点坐标 + 相邻锚点间LOS检查（已移至VerbFlightState统一输出）
+            // if (TrackingDiag.Enabled)
+            //     LogRouteResult(result, shooterPos, targetPos, map);
 
             return result;
         }

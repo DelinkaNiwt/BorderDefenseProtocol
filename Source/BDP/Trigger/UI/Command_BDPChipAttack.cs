@@ -26,18 +26,24 @@ namespace BDP.Trigger
     ///   · 描述文本根据verb类型动态生成
     ///
     /// v9.0变更：移除类型判断，描述文本从VerbProperties.label读取。
-    ///   · 不再判断verb类型（Verb_BDPVolley等）
+    ///   · 不再判断verb类型（改用FiringPattern配置）
     ///   · 直接从secondaryVerb.verbProps.label读取描述
     ///
-    /// attackId生成规则（基于芯片defName）：
-    ///   独立芯片攻击 → chipDef.defName（如"BDP_ChipArcMoon"）
+    /// v10.0变更：单侧攻击不再合并，确保FireMode配置独立。
+    ///   · 左手攻击：attackId = "left:" + chipDef.defName
+    ///   · 右手攻击：attackId = "right:" + chipDef.defName
+    ///   · 即使芯片相同，左右手也分开显示（因为FireMode可能不同）
+    ///
+    /// attackId生成规则（基于芯片defName + 侧别）：
+    ///   左手芯片攻击 → "left:" + chipDef.defName（如"left:BDP_ChipArcMoon"）
+    ///   右手芯片攻击 → "right:" + chipDef.defName（如"right:BDP_ChipArcMoon"）
     ///   双手触发     → "dual:" + Sort(A,B).Join("+")（如"dual:BDP_ChipArcMoon+BDP_ChipScorpion"）
     ///   组合技能     → "combo:" + comboAbilityDef.defName
     ///
     /// 合并效果：
-    ///   同芯片两侧（弧月+弧月）→ 同defName → 合并为1个gizmo
-    ///   不同芯片（弧月+蝎子）  → 不同defName → 分开显示
-    ///   跨pawn同种芯片          → 同defName → 合并
+    ///   同芯片两侧（弧月+弧月）→ 不同attackId → 分开显示为2个gizmo（左/右）
+    ///   不同芯片（弧月+蝎子）  → 不同attackId → 分开显示
+    ///   跨pawn同侧同芯片       → 同attackId → 合并（如多个pawn的左手弧月）
     /// </summary>
     public class Command_BDPChipAttack : Command_VerbTarget
     {
@@ -49,7 +55,6 @@ namespace BDP.Trigger
 
         public override bool GroupsWith(Gizmo other)
         {
-            // 只与同类型Command合并，不与标准Command_VerbTarget合并
             if (other is Command_BDPChipAttack cmd)
                 return attackId == cmd.attackId;
             return false;
@@ -60,6 +65,8 @@ namespace BDP.Trigger
         ///
         /// PMS重构：统一使用Verb_BDPRangedBase.SupportsGuided判断，
         /// 不再依赖具体Verb子类类型检查。
+        ///
+        /// v11.0变更：在瞄准开始时创建 ShotSession（Task 19）。
         /// </summary>
         protected override GizmoResult GizmoOnGUIInt(Rect butRect, GizmoRenderParms parms)
         {
@@ -70,6 +77,8 @@ namespace BDP.Trigger
                 && verb is Verb_BDPRangedBase ranged && ranged.SupportsGuided)
             {
                 SoundDefOf.Tick_Tiny.PlayOneShotOnCamera();
+                // 在瞄准开始时创建 ShotSession
+                ranged.BeginTargetingSession();
                 ranged.StartAnchorTargeting();
                 return new GizmoResult(GizmoState.Clear);
             }
@@ -80,6 +89,8 @@ namespace BDP.Trigger
                 // 引导副攻击verb：检查是否支持引导
                 if (secondaryVerb is Verb_BDPRangedBase rangedSecondary && rangedSecondary.SupportsGuided)
                 {
+                    // 在瞄准开始时创建 ShotSession
+                    rangedSecondary.BeginTargetingSession();
                     rangedSecondary.StartAnchorTargeting();
                 }
                 else

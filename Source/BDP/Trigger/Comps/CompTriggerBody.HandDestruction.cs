@@ -122,79 +122,43 @@ namespace BDP.Trigger
         {
             Log.Message($"[BDP] 检测到{(side == HandSide.Left ? "左手" : "右手")}被破坏，强制关闭对应槽位");
 
-            if (side == HandSide.Left)
-            {
-                ForceDeactivateLeftSlots("左手缺失");
-            }
-            else
-            {
-                ForceDeactivateRightSlots("右手缺失");
-            }
+            SlotSide slotSide = side == HandSide.Left ? SlotSide.LeftHand : SlotSide.RightHand;
+            string reason = side == HandSide.Left ? "左手缺失" : "右手缺失";
+            ForceDeactivateSideSlots(slotSide, reason);
         }
 
         /// <summary>
-        /// 强制禁用左手槽位（手部/手臂被毁时调用）。
+        /// 强制禁用指定侧槽位（手部/手臂被毁时调用）。
         /// 芯片保留在槽位，但标记为禁用，激活的芯片被关闭。
         /// </summary>
-        private void ForceDeactivateLeftSlots(string reason)
+        private void ForceDeactivateSideSlots(SlotSide side, string reason)
         {
-            if (leftHandSlots == null) return;
+            var slots = side == SlotSide.LeftHand ? leftHandSlots : rightHandSlots;
+            if (slots == null) return;
 
             // 获取装备者（使用CompEquippable的Holder属性）
             Pawn pawn = Holder;
             if (pawn == null)
             {
-                Log.Warning("[BDP] ForceDeactivateLeftSlots: 无法获取装备者Pawn");
+                Log.Warning($"[BDP] ForceDeactivateSideSlots({side}): 无法获取装备者Pawn");
                 return;
             }
 
-            foreach (var slot in leftHandSlots)
+            string sideLabel = side == SlotSide.LeftHand ? "左手" : "右手";
+            foreach (var slot in slots)
             {
                 // 关闭激活的芯片（但不清除loadedChip）
                 if (slot.isActive)
                 {
                     slot.isActive = false;
-                    Log.Message($"[BDP] 左手槽位[{slot.index}]芯片关闭: {slot.loadedChip?.Label ?? "null"} 原因={reason}");
+                    Log.Message($"[BDP] {sideLabel}槽位[{slot.index}]芯片关闭: {slot.loadedChip?.Label ?? "null"} 原因={reason}");
                 }
                 // 标记槽位为禁用
                 slot.isDisabled = true;
             }
 
-            // 清理左手Verb
-            ClearSideVerbs(SlotSide.LeftHand);
-            RebuildVerbs(pawn);
-        }
-
-        /// <summary>
-        /// 强制禁用右手槽位（手部/手臂被毁时调用）。
-        /// 芯片保留在槽位，但标记为禁用，激活的芯片被关闭。
-        /// </summary>
-        private void ForceDeactivateRightSlots(string reason)
-        {
-            if (rightHandSlots == null) return;
-
-            // 获取装备者（使用CompEquippable的Holder属性）
-            Pawn pawn = Holder;
-            if (pawn == null)
-            {
-                Log.Warning("[BDP] ForceDeactivateRightSlots: 无法获取装备者Pawn");
-                return;
-            }
-
-            foreach (var slot in rightHandSlots)
-            {
-                // 关闭激活的芯片（但不清除loadedChip）
-                if (slot.isActive)
-                {
-                    slot.isActive = false;
-                    Log.Message($"[BDP] 右手槽位[{slot.index}]芯片关闭: {slot.loadedChip?.Label ?? "null"} 原因={reason}");
-                }
-                // 标记槽位为禁用
-                slot.isDisabled = true;
-            }
-
-            // 清理右手Verb
-            ClearSideVerbs(SlotSide.RightHand);
+            // 清理该侧Verb
+            SetSideVerbs(side, null, null);
             RebuildVerbs(pawn);
         }
     }

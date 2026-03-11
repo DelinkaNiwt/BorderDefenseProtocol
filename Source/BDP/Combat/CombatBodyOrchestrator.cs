@@ -44,7 +44,7 @@ namespace BDP.Combat
             }
 
             // 入口查一次ICombatBodySupport，后续方法共享
-            var support = FindCombatBodySupport(pawn);
+            var support = CombatBodyQuery.FindCombatBodySupport(pawn);
 
             // 阶段1: Trion占用
             if (!AllocateTrion(pawn, support, out float allocateAmount))
@@ -87,19 +87,27 @@ namespace BDP.Combat
             if (isEmergency && HasEmergencyEscapeChip(pawn, out ChipSlot chipSlot))
             {
                 IntVec3 origin = pawn.Position;  // 记录起点
-                IntVec3 destination = EmergencyEscapeRouter.FindEscapeDestination(pawn, pawn.Map);
+                Map map = pawn.Map;
+                IntVec3 destination = EmergencyEscapeRouter.FindEscapeDestination(pawn, map);
 
-                if (destination.IsValid && destination != pawn.Position)
+                if (destination.IsValid && destination != origin)
                 {
                     // 播放入口特效
-                    EmergencyEscapeEffects.PlayEntryEffects(origin, pawn.Map);
+                    EmergencyEscapeEffects.PlayEntryEffects(origin, map);
 
-                    // 执行传送
+                    // 执行传送（使用原版方式：直接修改Position + Notify_Teleported）
+                    // 这种方式不会触发ExitMap/Spawn的复杂逻辑，保持pawn的所有状态不变
                     pawn.Position = destination;
-                    pawn.Notify_Teleported(false, true);
+                    pawn.Notify_Teleported(endCurrentJob: true, resetTweenedPos: true);
+
+                    // 确保图形节点已初始化（修复"Node is null"错误）
+                    if (pawn.Drawer != null)
+                    {
+                        pawn.Drawer.renderer.EnsureGraphicsInitialized();
+                    }
 
                     // 播放出口特效
-                    EmergencyEscapeEffects.PlayExitEffects(destination, pawn.Map);
+                    EmergencyEscapeEffects.PlayExitEffects(destination, map);
 
                     // 销毁芯片（一次性使用）
                     if (chipSlot != null && chipSlot.loadedChip != null)
@@ -121,7 +129,7 @@ namespace BDP.Combat
 
                     Messages.Message(
                         $"{pawn.Name} 紧急脱离至安全位置",
-                        new TargetInfo(destination, pawn.Map),
+                        new TargetInfo(destination, map),
                         MessageTypeDefOf.PositiveEvent);
                 }
             }
@@ -190,20 +198,6 @@ namespace BDP.Combat
         //  私有辅助方法 - 通用
         // ═══════════════════════════════════════════
 
-        /// <summary>
-        /// 从Pawn主武器查找ICombatBodySupport实现。
-        /// 消除AllocateTrion/ActivateChips/ReleaseTriggerSystem三处重复查找。
-        /// </summary>
-        private static ICombatBodySupport FindCombatBodySupport(Pawn pawn)
-        {
-            var allComps = pawn?.equipment?.Primary?.AllComps;
-            if (allComps == null) return null;
-            foreach (var comp in allComps)
-            {
-                if (comp is ICombatBodySupport s) return s;
-            }
-            return null;
-        }
 
         // ═══════════════════════════════════════════
         //  私有辅助方法 - 激活流程
@@ -363,7 +357,7 @@ namespace BDP.Combat
         /// </summary>
         private void ReleaseTriggerSystem(Pawn pawn, bool isEmergency)
         {
-            var support = FindCombatBodySupport(pawn);
+            var support = CombatBodyQuery.FindCombatBodySupport(pawn);
 
             if (support != null)
             {
@@ -476,7 +470,7 @@ namespace BDP.Combat
         {
             chipSlot = null;
 
-            var support = FindCombatBodySupport(pawn);
+            var support = CombatBodyQuery.FindCombatBodySupport(pawn);
             if (support == null) return false;
 
             // 将ICombatBodySupport转换为CompTriggerBody以访问SpecialSlots
@@ -534,38 +528,11 @@ namespace BDP.Combat
             runtime.State.TransitionToCollapsing(reason);
 
             // 打断当前动作
-            InterruptCurrentAction(pawn, "战斗体破裂");
+            CombatBodyQuery.InterruptCurrentAction(pawn, "战斗体破裂");
 
             // 添加Collapsing Hediff（会自动管理90 ticks倒计时和解除流程）
             pawn.health.AddHediff(BDP_DefOf.BDP_CombatBodyCollapsing);
         }
 
-        /// <summary>
-        /// 打断Pawn的当前动作。
-        /// </summary>
-        private static void InterruptCurrentAction(Pawn pawn, string reason)
-        {
-            if (pawn == null) return;
-
-            Log.Message($"[BDP]   打断当前动作: {pawn.LabelShort} (原因: {reason})");
-
-            // 1. 结束当前Job
-            if (pawn.jobs?.curJob != null)
-            {
-                pawn.jobs.EndCurrentJob(Verse.AI.JobCondition.InterruptForced);
-            }
-
-            // 2. 取消战斗姿态
-            if (pawn.stances != null)
-            {
-                pawn.stances.CancelBusyStanceSoft();
-            }
-
-            // 3. 停止移动
-            if (pawn.pather != null)
-            {
-                pawn.pather.StopDead();
-            }
-        }
     }
 }

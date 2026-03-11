@@ -87,7 +87,7 @@ namespace BDP.Trigger
 
         /// <summary>
         /// 向StringBuilder追加指定侧的芯片状态行。
-        /// 格式：左手: 星尘 12dmg×5 射程40
+        /// 格式：左手: 星尘(远程武器) 12dmg×5 射程40
         /// </summary>
         private void AppendSideStatus(StringBuilder sb, SlotSide side, string sideLabel)
         {
@@ -96,6 +96,13 @@ namespace BDP.Trigger
 
             var chip = slot.loadedChip;
             sb.Append(sideLabel).Append(": ").Append(chip.LabelNoCount);
+
+            // 显示芯片主类别
+            var chipProps = chip.TryGetComp<TriggerChipComp>()?.Props;
+            if (chipProps != null && chipProps.primaryCategory != ChipPrimaryCategory.Unspecified)
+            {
+                sb.Append("(").Append(chipProps.GetPrimaryCategoryLabel()).Append(")");
+            }
 
             // 读取武器配置
             var verbCfg = chip.def.GetModExtension<VerbChipConfig>();
@@ -228,6 +235,27 @@ namespace BDP.Trigger
                 nameValue,
                 configDesc.ToString(),
                 5000);
+
+            // ── 芯片主类别 ──
+            if (leftProps != null || rightProps != null)
+            {
+                string leftCategory = (leftProps != null && leftProps.primaryCategory != ChipPrimaryCategory.Unspecified)
+                    ? leftProps.GetPrimaryCategoryLabel()
+                    : null;
+                string rightCategory = (rightProps != null && rightProps.primaryCategory != ChipPrimaryCategory.Unspecified)
+                    ? rightProps.GetPrimaryCategoryLabel()
+                    : null;
+
+                if (leftCategory != null || rightCategory != null)
+                {
+                    yield return new StatDrawEntry(
+                        BDP_StatCategoryDefOf.BDP_TriggerConfig,
+                        "芯片类别",
+                        FormatSidedValue(leftCategory, rightCategory, ""),
+                        "芯片的主要功能类别。",
+                        4999);
+                }
+            }
 
             // 无芯片时不输出属性对比
             if (leftProps == null && rightProps == null) yield break;
@@ -429,11 +457,13 @@ namespace BDP.Trigger
                             "连射期间每分钟射击发数。", 2485));
                 }
 
-                // Trion消耗
+                // Trion消耗（统一层）
                 if (TriggerBodyDisplayConfig.ShowTrionCost)
                 {
-                    string lv = (leftCfg  != null && (leftCfg.cost?.trionPerShot ?? 0f)  > 0f) ? (leftCfg.cost.trionPerShot).ToString("F1")  : null;
-                    string rv = (rightCfg != null && (rightCfg.cost?.trionPerShot ?? 0f) > 0f) ? (rightCfg.cost.trionPerShot).ToString("F1") : null;
+                    float leftCost = leftSlot?.loadedChip != null ? ChipUsageCostHelper.GetUsageCost(leftSlot.loadedChip) : 0f;
+                    float rightCost = rightSlot?.loadedChip != null ? ChipUsageCostHelper.GetUsageCost(rightSlot.loadedChip) : 0f;
+                    string lv = leftCost > 0f ? leftCost.ToString("F1") : null;
+                    string rv = rightCost > 0f ? rightCost.ToString("F1") : null;
                     if (lv != null || rv != null)
                         ranged.Add((StatCategoryDefOf.Weapon_Ranged, "Trion消耗", lv, rv, "/发",
                             "每发射击消耗的Trion量。", 2484));

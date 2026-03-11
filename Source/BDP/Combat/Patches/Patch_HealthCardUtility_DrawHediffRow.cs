@@ -81,7 +81,7 @@ namespace BDP.Combat.Patches
         static Texture2D GetBleedingIcon()
         {
             // 判断当前Pawn是否有战斗体激活
-            if (currentPawn?.health?.hediffSet?.HasHediff(BDP_DefOf.BDP_CombatBodyActive) == true)
+            if (CombatBodyQuery.IsCombatBodyActive(currentPawn))
             {
                 return BDP.Core.BDP_Assets.CombatBodyBleedingIcon;
             }

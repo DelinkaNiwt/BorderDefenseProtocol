@@ -37,42 +37,58 @@ namespace BDP.Trigger
 
                 if (leftHandAttackVerb != null && leftChipDef != null)
                 {
-                    yield return new Command_BDPChipAttack
+                    var leftCmd = new Command_BDPChipAttack
                     {
                         verb = leftHandAttackVerb,
-                        secondaryVerb = leftHandSecondaryVerb, // v9.0：副攻击（可以是齐射或其他模式）
-                        attackId = leftChipDef.defName,
+                        secondaryVerb = leftHandSecondaryVerb,
+                        attackId = "left:" + leftChipDef.defName,
                         icon = leftChipDef.uiIcon,
-                        defaultLabel = leftChipDef.label,
+                        defaultLabel = leftChipDef.label + "(左)",
+                        groupable = false,
                     };
+                    yield return leftCmd;
                 }
                 if (rightHandAttackVerb != null && rightChipDef != null)
                 {
-                    yield return new Command_BDPChipAttack
+                    var rightCmd = new Command_BDPChipAttack
                     {
                         verb = rightHandAttackVerb,
-                        secondaryVerb = rightHandSecondaryVerb, // v9.0：副攻击（可以是齐射或其他模式）
-                        attackId = rightChipDef.defName,
+                        secondaryVerb = rightHandSecondaryVerb,
+                        attackId = "right:" + rightChipDef.defName,
                         icon = rightChipDef.uiIcon,
-                        defaultLabel = rightChipDef.label,
+                        defaultLabel = rightChipDef.label + "(右)",
+                        groupable = false,
                     };
+                    yield return rightCmd;
                 }
                 if (dualAttackVerb != null && leftChipDef != null && rightChipDef != null)
                 {
-                    // 排序保证A+B=B+A
-                    var a = leftChipDef.defName;
-                    var b = rightChipDef.defName;
-                    if (string.Compare(a, b, System.StringComparison.Ordinal) > 0)
-                    { var tmp = a; a = b; b = tmp; }
+                    // 检查双侧芯片是否都是武器类
+                    var leftChipProps = leftSlot.loadedChip?.TryGetComp<TriggerChipComp>()?.Props;
+                    var rightChipProps = rightSlot.loadedChip?.TryGetComp<TriggerChipComp>()?.Props;
 
-                    yield return new Command_BDPChipAttack
+                    bool leftIsWeapon = leftChipProps?.IsWeaponChip() ?? false;
+                    bool rightIsWeapon = rightChipProps?.IsWeaponChip() ?? false;
+
+                    // 只有双侧都是武器类芯片时才显示双武器攻击gizmo
+                    // 近战+远程混合不会生成dualAttackVerb，所以这里自然过滤
+                    if (leftIsWeapon && rightIsWeapon)
                     {
-                        verb = dualAttackVerb,
-                        secondaryVerb = dualSecondaryVerb, // v9.0：副攻击（可以是齐射或其他模式）
-                        attackId = "dual:" + a + "+" + b,
-                        icon = parent.def.uiIcon, // 触发体图标
-                        defaultLabel = "双手触发",
-                    };
+                        // 排序保证A+B=B+A
+                        var a = leftChipDef.defName;
+                        var b = rightChipDef.defName;
+                        if (string.Compare(a, b, System.StringComparison.Ordinal) > 0)
+                        { var tmp = a; a = b; b = tmp; }
+
+                        yield return new Command_BDPChipAttack
+                        {
+                            verb = dualAttackVerb,
+                            secondaryVerb = dualSecondaryVerb, // v9.0：副攻击（可以是齐射或其他模式）
+                            attackId = "dual:" + a + "+" + b,
+                            icon = parent.def.uiIcon, // 触发体图标
+                            defaultLabel = "双重攻击",
+                        };
+                    }
                 }
 
                 // v10.0：组合技Gizmo（B+C同时激活时显示）

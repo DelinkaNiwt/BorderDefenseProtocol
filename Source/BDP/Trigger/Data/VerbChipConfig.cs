@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using BDP.Trigger.ShotPipeline;
 using Verse;
 
 namespace BDP.Trigger
@@ -23,20 +25,27 @@ namespace BDP.Trigger
         public VerbProperties primaryVerbProps;
 
         /// <summary>
+        /// 主攻击的发射模式（默认Sequential）。
+        /// Sequential：逐发模式，由引擎burst机制驱动，弹间有间隔。
+        /// Simultaneous：齐射模式，单次TryCastShot内循环瞬发所有子弹。
+        /// </summary>
+        public FiringPattern primaryFiringPattern = FiringPattern.Sequential;
+
+        /// <summary>
         /// 副攻击Verb配置（右键，可选）。
         /// null时右键走默认行为（取消）。
         /// </summary>
         public VerbProperties secondaryVerbProps;
 
+        /// <summary>
+        /// 副攻击的发射模式（默认Sequential）。
+        /// 仅当secondaryVerbProps非null时生效。
+        /// </summary>
+        public FiringPattern secondaryFiringPattern = FiringPattern.Sequential;
+
         // ═══════════════════════════════════════════════════════
         // 功能域配置（分组）
         // ═══════════════════════════════════════════════════════
-
-        /// <summary>
-        /// 成本配置（Trion消耗等）。
-        /// null时使用默认值（无消耗）。
-        /// </summary>
-        public CostConfig cost;
 
         /// <summary>
         /// 近战配置（tools等）。
@@ -51,6 +60,27 @@ namespace BDP.Trigger
         /// null时表示非远程芯片。
         /// </summary>
         public RangedConfig ranged;
+
+        /// <summary>
+        /// 范围指示器配置（可选）。
+        /// 用于在瞄准阶段显示武器/能力的影响范围。
+        /// null时不显示范围指示器。
+        /// </summary>
+        public AreaIndicatorConfig areaIndicator;
+
+        /// <summary>
+        /// 瞄准阶段管线模块配置（XML注入）。
+        /// 用于在瞄准阶段执行自定义逻辑（如弹道预测、目标筛选等）。
+        /// null或空列表时不执行瞄准管线。
+        /// </summary>
+        public List<ShotModuleConfig> aimModules;
+
+        /// <summary>
+        /// 射击阶段管线模块配置（XML注入）。
+        /// 用于在射击阶段执行自定义逻辑（如弹道修正、特效生成等）。
+        /// null或空列表时不执行射击管线。
+        /// </summary>
+        public List<ShotModuleConfig> fireModules;
 
         // ═══════════════════════════════════════════════════════
         // 辅助方法

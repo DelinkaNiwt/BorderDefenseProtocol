@@ -105,21 +105,6 @@ namespace BDP.Trigger
             }
         }
 
-        /// <summary>清除指定侧的Verb/Tool数据（供VerbChipEffect调用）。</summary>
-        public void ClearSideVerbs(SlotSide side)
-        {
-            if (side == SlotSide.LeftHand)
-            {
-                leftHandActiveVerbProps = null;
-                leftHandActiveTools = null;
-            }
-            else
-            {
-                rightHandActiveVerbProps = null;
-                rightHandActiveTools = null;
-            }
-        }
-
         /// <summary>查找芯片所在侧别（遍历所有激活槽位）。</summary>
         public SlotSide GetChipSide(Thing chip)
         {

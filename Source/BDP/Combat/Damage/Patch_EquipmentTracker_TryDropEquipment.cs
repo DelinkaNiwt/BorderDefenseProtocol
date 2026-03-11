@@ -27,19 +27,7 @@ namespace BDP.Combat
             if (eq == null) return true;
 
             // 检查被掉落的装备是否为触发体（通过 ICombatBodySupport 接口判断，避免跨模块引用）
-            bool isTriggerBody = false;
-            var comps = eq.AllComps;
-            if (comps != null)
-            {
-                for (int i = 0; i < comps.Count; i++)
-                {
-                    if (comps[i] is ICombatBodySupport)
-                    {
-                        isTriggerBody = true;
-                        break;
-                    }
-                }
-            }
+            bool isTriggerBody = CombatBodyQuery.FindCombatBodySupport(eq) != null;
             if (!isTriggerBody) return true;
 
             // 检查装备者是否战斗体激活中或延时破裂中
