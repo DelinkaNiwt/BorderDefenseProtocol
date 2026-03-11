@@ -126,10 +126,6 @@ namespace BDP.Trigger
             // 循环发射所有子弹（每颗独立命中判定）
             float spread = cfg.ranged?.volleySpreadRadius ?? 0f;
 
-            // ★ 自动绕行：齐射前计算路由（条件2由Verb类型隐含满足）
-            gs.PrepareAutoRoute(caster.Position, currentTarget.Cell,
-                caster.Map, cfg.GetPrimaryProjectileDef());
-
             bool anyHit = FireVolleyLoop(volleyCount, spread, chipThing);
 
             // 一次性扣除Trion（统一层）- 每次射击动作消耗

@@ -53,18 +53,31 @@ namespace BDP.Trigger
                 this, CasterPawn, comboDef.maxAnchors, verbProps.range,
                 (anchors, finalTarget) =>
                 {
-                    gs.StoreTargetingResult(anchors, finalTarget, avgAnchorSpread);
+                    // 将锚点数据存储到 activeSession
+                    if (activeSession != null)
+                    {
+                        activeSession.AnchorPath = new System.Collections.Generic.List<IntVec3>(anchors);
+                        if (activeSession.AimResult == null)
+                            activeSession.AimResult = new ShotPipeline.AimResult();
+                        activeSession.AimResult.AnchorPath = activeSession.AnchorPath;
+                        activeSession.AimResult.FinalTarget = finalTarget;
+                        activeSession.AimResult.AnchorSpread = avgAnchorSpread;
+                    }
                     OrderForceTargetCore(finalTarget);
                 });
         }
 
-        /// <summary>弹道发射后回调：引导模式走引导路径，否则尝试自动绕行。</summary>
+        /// <summary>弹道发射后回调：通过管线系统注入射击数据。</summary>
         protected override void OnProjectileLaunched(Projectile proj)
         {
-            if (gs.ManualAnchorsActive)
-                gs.AttachManualFlight(proj);
-            else
-                gs.AttachAutoRouteFlight(proj, gs.ResolveAutoRouteFinalTarget(currentTarget), avgAnchorSpread);
+            if (!(proj is Bullet_BDP bdp)) return;
+            if (activeSession == null) return;
+
+            // 从管线系统注入射击数据
+            bdp.InjectShotData(
+                activeSession.AimResult,
+                activeSession.FireResult,
+                activeSession.RouteResult);
         }
 
         // ── 射击逻辑 ──
@@ -131,10 +144,6 @@ namespace BDP.Trigger
             // 选择一侧芯片作为equipmentSource（战斗日志用）
             Thing chipEquipment = leftSlot.loadedChip;
 
-            // 自动绕行：齐射前计算路由
-            gs.PrepareAutoRoute(caster.Position, currentTarget.Cell,
-                caster.Map, comboDef.projectileDef);
-
             bool anyHit = FireVolleyLoop(volleyCount, avgVolleySpread, chipEquipment);
 
             if (anyHit && totalCost > 0f)
@@ -158,11 +167,6 @@ namespace BDP.Trigger
                 if (trion == null || trion.Available < avgTrionCost)
                     return false;
             }
-
-            // 自动绕行（首发时计算）
-            if (fired == 0)
-                gs.PrepareAutoRoute(caster.Position, currentTarget.Cell,
-                    caster.Map, comboDef.projectileDef);
 
             Thing chipEquipment = leftSlot.loadedChip;
             bool result = TryCastShotCore(chipEquipment);

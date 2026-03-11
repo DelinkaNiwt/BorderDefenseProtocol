@@ -55,33 +55,13 @@ namespace BDP.Trigger
         /// </summary>
         /// <summary>
         /// 序列化BDP Verb扩展状态：
-        /// 1. 占位VerbProperties防止BuggedAfterLoading判定
-        /// 2. VerbFlightState引导弹状态（锚点、目标、双侧标记）
-        ///    原因：引导弹的LOS检查重定向到第一锚点而非最终目标，
-        ///    若ManualAnchorsActive丢失，读档后verb直接对最终目标做LOS→失败→无法射击。
+        /// 占位VerbProperties防止BuggedAfterLoading判定。
         /// </summary>
         public override void ExposeData()
         {
             base.ExposeData();
             if (Scribe.mode == LoadSaveMode.LoadingVars && verbProps == null)
                 verbProps = new VerbProperties();
-
-            // ── VerbFlightState序列化 ──
-            Scribe_Values.Look(ref gs.ManualAnchorsActive, "gs_manualAnchorsActive");
-            Scribe_Values.Look(ref gs.ManualTargetCell, "gs_manualTargetCell");
-            Scribe_Values.Look(ref gs.CachedAnchorSpread, "gs_anchorSpread");
-            Scribe_Collections.Look(ref gs.RawAnchors, "gs_rawAnchors", LookMode.Value);
-            // LocalTargetInfo需要Scribe_TargetInfo
-            var rawFinal = gs.RawFinalTarget;
-            Scribe_TargetInfo.Look(ref rawFinal, "gs_rawFinalTarget");
-            gs.RawFinalTarget = rawFinal;
-            // 双侧专用
-            var savedThing = gs.SavedThingTarget;
-            Scribe_TargetInfo.Look(ref savedThing, "gs_savedThingTarget");
-            gs.SavedThingTarget = savedThing;
-            Scribe_Values.Look(ref gs.LeftHasPath, "gs_leftHasPath");
-            Scribe_Values.Look(ref gs.RightHasPath, "gs_rightHasPath");
-            Scribe_Values.Look(ref gs.CurrentShotHasPath, "gs_currentShotHasPath");
         }
 
         protected CompTriggerBody GetTriggerComp()
@@ -310,7 +290,10 @@ namespace BDP.Trigger
         /// </summary>
         protected virtual LocalTargetInfo GetLosCheckTarget()
         {
-            return gs.GetLosCheckTarget(currentTarget);
+            // 从管线系统读取瞄准结果
+            if (activeSession?.AimResult?.HasGuidedPath == true)
+                return new LocalTargetInfo(activeSession.AimResult.AnchorPath[0]);
+            return currentTarget;
         }
 
         /// <summary>引导模式下用第一个锚点替代最终目标进行LOS检查。</summary>
@@ -318,15 +301,10 @@ namespace BDP.Trigger
             bool surpriseAttack = false, bool canHitNonTargetPawns = true,
             bool preventFriendlyFire = false, bool nonInterruptingSelfCast = false)
         {
-            ThingDef routeProjectile = GetAutoRouteProjectileDef();
-            gs.PrepareAutoRouteForCast(caster.Position, castTarg, caster.Map, routeProjectile);
-            gs.InterceptCastTarget(ref castTarg, caster.Position, caster.Map);
-
+            // 管线系统已在 BeginTargetingSession 中初始化
+            // 这里直接调用基类逻辑
             bool result = base.TryStartCastOn(castTarg, destTarg, surpriseAttack,
                 canHitNonTargetPawns, preventFriendlyFire, nonInterruptingSelfCast);
-
-            if (result)
-                gs.PostCastOn(ref currentTarget);
 
             return result;
         }
@@ -512,21 +490,21 @@ namespace BDP.Trigger
 
         /// <summary>
         /// 弹道发射后回调（v7.0变化弹）。子类可重写此方法对刚发射的弹道进行后处理。
-        /// 基类默认行为：引导模式下通过GuidedModule附加折线路径。
+        /// 基类默认行为：通过管线系统注入射击数据。
         /// </summary>
         protected virtual void OnProjectileLaunched(Projectile proj)
         {
-            if (gs.ManualAnchorsActive)
-                gs.AttachManualFlight(proj);
-            else
-                gs.AttachAutoRouteFlight(proj, gs.ResolveAutoRouteFinalTarget(currentTarget),
-                    GetGuidedConfig()?.ranged?.guided?.anchorSpread ?? 0.3f);
+            if (!(proj is Bullet_BDP bdp)) return;
+            if (activeSession == null) return;
+
+            // 从管线系统注入射击数据
+            bdp.InjectShotData(
+                activeSession.AimResult,
+                activeSession.FireResult,
+                activeSession.RouteResult);
         }
 
         // ── PMS重构：引导弹支持（从Verb_BDPGuided上提） ──
-
-        /// <summary>引导弹共享状态（PMS重构：从子类上提到基类）。</summary>
-        protected readonly VerbFlightState gs = new VerbFlightState();
 
         /// <summary>
         /// 获取引导弹相关的芯片配置。
@@ -556,10 +534,18 @@ namespace BDP.Trigger
                 this, CasterPawn, cfg.ranged.guided.maxAnchors, verbProps.range,
                 (anchors, finalTarget) =>
                 {
-                    gs.StoreTargetingResult(anchors, finalTarget, cfg.ranged.guided.anchorSpread);
-                    // 直接调用OrderForceTargetCore创建BDP_ChipRangedAttack job，
-                    // 而非BaseOrderForceTarget（原版Verb.OrderForceTarget创建的标准Job
-                    // 无法驱动脱离VerbTracker的芯片Verb）
+                    // 将锚点数据存储到 activeSession
+                    if (activeSession != null)
+                    {
+                        activeSession.AnchorPath = new System.Collections.Generic.List<IntVec3>(anchors);
+                        // 更新 AimResult（如果已存在）
+                        if (activeSession.AimResult == null)
+                            activeSession.AimResult = new ShotPipeline.AimResult();
+                        activeSession.AimResult.AnchorPath = activeSession.AnchorPath;
+                        activeSession.AimResult.FinalTarget = finalTarget;
+                        activeSession.AimResult.AnchorSpread = cfg.ranged.guided.anchorSpread;
+                    }
+                    // 直接调用OrderForceTargetCore创建BDP_ChipRangedAttack job
                     OrderForceTargetCore(finalTarget);
                 });
         }
@@ -577,7 +563,6 @@ namespace BDP.Trigger
                 StartAnchorTargeting();
                 return;
             }
-            gs.ManualAnchorsActive = false;
 
             OrderForceTargetCore(target);
         }

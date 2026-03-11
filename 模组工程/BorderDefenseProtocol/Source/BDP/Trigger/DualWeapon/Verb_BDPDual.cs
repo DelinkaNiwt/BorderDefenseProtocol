@@ -46,6 +46,12 @@ namespace BDP.Trigger
         protected bool leftSimultaneousFired;   // 原leftVolleyFired
         protected bool rightSimultaneousFired;  // 原rightVolleyFired
 
+        // ── 双侧路径判断状态（从 VerbFlightState 迁移） ──
+        private bool leftHasPath;
+        private bool rightHasPath;
+        private bool currentShotHasPath;
+        private LocalTargetInfo savedThingTarget;
+
         // ═══════════════════════════════════════════
         //  Override方法（从DualBase合并）
         // ═══════════════════════════════════════════
@@ -85,16 +91,33 @@ namespace BDP.Trigger
 
         protected override void OnProjectileLaunched(Projectile proj)
         {
-            if (gs.ManualAnchorsActive && gs.CurrentShotHasPath)
-                gs.AttachManualFlight(proj);
-            else
-                gs.AttachAutoRouteFlight(proj, gs.ResolveAutoRouteFinalTarget(currentTarget),
-                    GetGuidedConfig()?.ranged?.guided?.anchorSpread ?? 0.3f);
+            if (!(proj is BDP.Projectiles.Bullet_BDP bdp)) return;
+            if (activeSession == null) return;
+
+            // 双侧特殊逻辑：只有当前射击有路径时才注入引导数据
+            if (activeSession.AimResult?.HasGuidedPath == true && currentShotHasPath)
+            {
+                bdp.InjectShotData(
+                    activeSession.AimResult,
+                    activeSession.FireResult,
+                    activeSession.RouteResult);
+            }
+            else if (activeSession.RouteResult.HasValue)
+            {
+                // 自动绕行路径
+                bdp.InjectShotData(
+                    activeSession.AimResult,
+                    activeSession.FireResult,
+                    activeSession.RouteResult);
+            }
         }
 
         protected override LocalTargetInfo GetLosCheckTarget()
         {
-            return gs.GetDualLosCheckTarget(currentTarget);
+            // 双侧模式：只有当前射击有路径时才使用锚点
+            if (activeSession?.AimResult?.HasGuidedPath == true && currentShotHasPath)
+                return new LocalTargetInfo(activeSession.AimResult.AnchorPath[0]);
+            return currentTarget;
         }
 
         public override void Reset()
@@ -116,17 +139,18 @@ namespace BDP.Trigger
         /// <summary>判断指定侧是否有引导路径。</summary>
         protected bool IsSideGuided(SlotSide side)
         {
-            return side == SlotSide.LeftHand ? gs.LeftHasPath : gs.RightHasPath;
+            return side == SlotSide.LeftHand ? leftHasPath : rightHasPath;
         }
 
         /// <summary>在目标恢复上下文中执行action。</summary>
         protected void WithTargetRestore(System.Action action)
         {
-            bool needRestore = gs.ManualAnchorsActive && !gs.CurrentShotHasPath && gs.SavedThingTarget.IsValid;
+            bool hasManualAnchors = activeSession?.AimResult?.HasGuidedPath == true;
+            bool needRestore = hasManualAnchors && !currentShotHasPath && savedThingTarget.IsValid;
             LocalTargetInfo savedTarget = currentTarget;
 
             if (needRestore)
-                currentTarget = gs.SavedThingTarget;
+                currentTarget = savedThingTarget;
 
             try
             {
@@ -172,15 +196,16 @@ namespace BDP.Trigger
             leftSimultaneousFired = false;
             rightSimultaneousFired = false;
 
-            gs.ResetAutoRouteCastState();
-            LocalTargetInfo actualTarget = gs.InterceptDualCastTarget(
-                ref castTarg, caster.Position, caster.Map);
+            // 双侧模式：保存Thing目标（用于非引导侧恢复）
+            if (castTarg.HasThing)
+                savedThingTarget = castTarg;
 
             bool result = base.TryStartCastOn(castTarg, destTarg, surpriseAttack,
                 canHitNonTargetPawns, preventFriendlyFire, nonInterruptingSelfCast);
 
-            if (result)
-                gs.PostDualCastOn(ref currentTarget, actualTarget);
+            // 锁定currentTarget为Cell（防止Thing移动导致幽灵命中）
+            if (result && activeSession?.AimResult != null)
+                currentTarget = new LocalTargetInfo(activeSession.AimResult.FinalTarget.Cell);
 
             return result;
         }
@@ -263,7 +288,8 @@ namespace BDP.Trigger
 
             // 通用路径：至少一侧是逐发 → 按发射调度
             SlotSide shotSide = GetCurrentShotSide();
-            gs.CurrentShotHasPath = gs.ManualAnchorsActive && IsSideGuided(shotSide);
+            bool hasManualAnchors = activeSession?.AimResult?.HasGuidedPath == true;
+            currentShotHasPath = hasManualAnchors && IsSideGuided(shotSide);
 
             bool isSideSimultaneous =
                 (shotSide == SlotSide.LeftHand && leftFiringPattern == FiringPattern.Simultaneous)
@@ -303,19 +329,18 @@ namespace BDP.Trigger
             if (rightFm != null) rightCount = rightFm.GetEffectiveBurst(rightCount);
 
             // 引导模块支持：标记哪一侧有引导路径
-            if (gs.ManualAnchorsActive)
+            bool hasManualAnchors = activeSession?.AimResult?.HasGuidedPath == true;
+            if (hasManualAnchors)
             {
-                gs.LeftHasPath = leftCfg.ranged?.guided != null;
-                gs.RightHasPath = rightCfg.ranged?.guided != null;
+                leftHasPath = leftCfg.ranged?.guided != null;
+                rightHasPath = rightCfg.ranged?.guided != null;
             }
 
             // 架构修正：降级逻辑——有引导路径或有直视LOS才能发射
-            // 原逻辑错误：!gs.ManualAnchorsActive会导致无引导且无LOS的一侧也发射
-            // 正确逻辑：有引导路径(gs.LeftHasPath/RightHasPath) 或 有直视LOS
             bool hasDirectLos = GenSight.LineOfSight(caster.Position,
-                gs.SavedThingTarget.IsValid ? gs.SavedThingTarget.Cell : currentTarget.Cell, caster.Map);
-            bool leftWillFire = gs.LeftHasPath || hasDirectLos;
-            bool rightWillFire = gs.RightHasPath || hasDirectLos;
+                savedThingTarget.IsValid ? savedThingTarget.Cell : currentTarget.Cell, caster.Map);
+            bool leftWillFire = leftHasPath || hasDirectLos;
+            bool rightWillFire = rightHasPath || hasDirectLos;
 
             // 获取使用消耗（统一层）
             float leftUsageCost = ChipUsageCostHelper.GetUsageCost(leftSlot.loadedChip);
@@ -328,43 +353,43 @@ namespace BDP.Trigger
             ThingDef originalProjectile = verbProps.defaultProjectile;
             float spread = Mathf.Max(leftCfg.ranged?.volleySpreadRadius ?? 0f, rightCfg.ranged?.volleySpreadRadius ?? 0f);
 
-            gs.PrepareAutoRoute(caster.Position, currentTarget.Cell, caster.Map, leftProjectileDef);
-
             try
             {
                 // 左侧齐射
                 if (leftWillFire)
                 {
-                    gs.CurrentShotHasPath = gs.ManualAnchorsActive && gs.LeftHasPath;
+                    currentShotHasPath = hasManualAnchors && leftHasPath;
                     if (leftProjectileDef != null) verbProps.defaultProjectile = leftProjectileDef;
-                    bool needRestoreL = gs.ManualAnchorsActive && !gs.CurrentShotHasPath && gs.SavedThingTarget.IsValid;
-                    if (needRestoreL) currentTarget = gs.SavedThingTarget;
+                    bool needRestoreL = hasManualAnchors && !currentShotHasPath && savedThingTarget.IsValid;
+                    if (needRestoreL) currentTarget = savedThingTarget;
 
                     if (FireVolleyLoop(leftCount, spread, leftSlot.loadedChip))
                         anyHit = true;
 
-                    if (needRestoreL) currentTarget = new LocalTargetInfo(gs.ManualTargetCell);
+                    if (needRestoreL && activeSession?.AimResult != null)
+                        currentTarget = new LocalTargetInfo(activeSession.AimResult.FinalTarget.Cell);
                 }
 
                 // 右侧齐射
                 if (rightWillFire)
                 {
-                    gs.CurrentShotHasPath = gs.ManualAnchorsActive && gs.RightHasPath;
+                    currentShotHasPath = hasManualAnchors && rightHasPath;
                     if (rightProjectileDef != null) verbProps.defaultProjectile = rightProjectileDef;
-                    bool needRestoreR = gs.ManualAnchorsActive && !gs.CurrentShotHasPath && gs.SavedThingTarget.IsValid;
-                    if (needRestoreR) currentTarget = gs.SavedThingTarget;
+                    bool needRestoreR = hasManualAnchors && !currentShotHasPath && savedThingTarget.IsValid;
+                    if (needRestoreR) currentTarget = savedThingTarget;
 
                     if (FireVolleyLoop(rightCount, spread, rightSlot.loadedChip))
                         anyHit = true;
 
-                    if (needRestoreR) currentTarget = new LocalTargetInfo(gs.ManualTargetCell);
+                    if (needRestoreR && activeSession?.AimResult != null)
+                        currentTarget = new LocalTargetInfo(activeSession.AimResult.FinalTarget.Cell);
                 }
             }
             finally
             {
                 verbProps.defaultProjectile = originalProjectile;
                 shotOriginOffset = Vector3.zero;
-                gs.CurrentShotHasPath = false;
+                currentShotHasPath = false;
             }
 
             if (anyHit && totalCost > 0f) trion?.Consume(totalCost);
@@ -478,8 +503,8 @@ namespace BDP.Trigger
                 rightRemaining = 0;
                 leftProjectileDef = null;
                 rightProjectileDef = null;
-                gs.LeftHasPath = false;
-                gs.RightHasPath = false;
+                leftHasPath = false;
+                rightHasPath = false;
                 return;
             }
 
@@ -507,8 +532,8 @@ namespace BDP.Trigger
             }
 
             // 架构修正：在初始化时检查每一侧的LOS
-            IntVec3 finalTargetCell = gs.SavedThingTarget.IsValid
-                ? gs.SavedThingTarget.Cell
+            IntVec3 finalTargetCell = savedThingTarget.IsValid
+                ? savedThingTarget.Cell
                 : currentTarget.Cell;
 
             // 左侧LOS检查：如果不支持引导且无直视LOS，排除这一侧
@@ -530,8 +555,8 @@ namespace BDP.Trigger
 
             leftProjectileDef = leftCfg?.GetPrimaryProjectileDef();
             rightProjectileDef = rightCfg?.GetPrimaryProjectileDef();
-            gs.LeftHasPath = leftCfg?.ranged?.guided != null;
-            gs.RightHasPath = rightCfg?.ranged?.guided != null;
+            leftHasPath = leftCfg?.ranged?.guided != null;
+            rightHasPath = rightCfg?.ranged?.guided != null;
 
             leftSimultaneousFired = false;
             rightSimultaneousFired = false;
