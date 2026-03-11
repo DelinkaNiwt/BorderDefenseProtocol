@@ -181,6 +181,12 @@ namespace BDP.Trigger
                 // （EquipmentSource = (DirectOwner as CompEquippable)?.parent）
                 verb.verbTracker = VerbTracker;
 
+                // v18.0：初始化射击管线（Verb创建后立即初始化）
+                if (verb is Verb_BDPRangedBase rangedVerb)
+                {
+                    rangedVerb.InitShotPipeline();
+                }
+
                 // 按type+label分配到缓存槽位
                 var vType = verb.GetType();
                 var label = vp.label;
@@ -324,6 +330,12 @@ namespace BDP.Trigger
                 }
             }
 
+            // v18.0：初始化射击管线（Verb创建后立即初始化）
+            if (verb is Verb_BDPRangedBase rangedVerb)
+            {
+                rangedVerb.InitShotPipeline();
+            }
+
             return verb;
         }
 
@@ -374,6 +386,12 @@ namespace BDP.Trigger
                 dualVerb.rightFiringPattern = rightCfg.secondaryFiringPattern;
             }
 
+            // v18.0：初始化射击管线（Verb创建后立即初始化）
+            if (verb is Verb_BDPRangedBase rangedVerb)
+            {
+                rangedVerb.InitShotPipeline();
+            }
+
             return verb;
         }
 
@@ -405,6 +423,12 @@ namespace BDP.Trigger
             verb.verbProps = vp;
             verb.caster = pawn;
             verb.verbTracker = VerbTracker;
+
+            // v18.0：初始化射击管线（Verb创建后立即初始化）
+            if (verb is Verb_BDPRangedBase rangedVerb)
+            {
+                rangedVerb.InitShotPipeline();
+            }
 
             return verb;
         }
@@ -541,6 +565,12 @@ namespace BDP.Trigger
                 comboVerb.avgTrionCost = avgTrionCost;
                 comboVerb.avgAnchorSpread = avgAnchorSpread;
                 comboVerb.avgVolleySpread = avgVolleySpread;
+            }
+
+            // v18.0：初始化射击管线（Verb创建后立即初始化）
+            if (verb is Verb_BDPRangedBase rangedVerb)
+            {
+                rangedVerb.InitShotPipeline();
             }
 
             return verb;

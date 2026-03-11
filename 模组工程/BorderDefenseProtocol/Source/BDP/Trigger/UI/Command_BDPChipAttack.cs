@@ -65,6 +65,8 @@ namespace BDP.Trigger
         ///
         /// PMS重构：统一使用Verb_BDPRangedBase.SupportsGuided判断，
         /// 不再依赖具体Verb子类类型检查。
+        ///
+        /// v11.0变更：在瞄准开始时创建 ShotSession（Task 19）。
         /// </summary>
         protected override GizmoResult GizmoOnGUIInt(Rect butRect, GizmoRenderParms parms)
         {
@@ -75,6 +77,8 @@ namespace BDP.Trigger
                 && verb is Verb_BDPRangedBase ranged && ranged.SupportsGuided)
             {
                 SoundDefOf.Tick_Tiny.PlayOneShotOnCamera();
+                // 在瞄准开始时创建 ShotSession
+                BeginTargetingSession(ranged);
                 ranged.StartAnchorTargeting();
                 return new GizmoResult(GizmoState.Clear);
             }
@@ -85,6 +89,8 @@ namespace BDP.Trigger
                 // 引导副攻击verb：检查是否支持引导
                 if (secondaryVerb is Verb_BDPRangedBase rangedSecondary && rangedSecondary.SupportsGuided)
                 {
+                    // 在瞄准开始时创建 ShotSession
+                    BeginTargetingSession(rangedSecondary);
                     rangedSecondary.StartAnchorTargeting();
                 }
                 else
@@ -96,6 +102,24 @@ namespace BDP.Trigger
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// 在瞄准开始时创建 ShotSession。
+        /// 使用占位符 target（LocalTargetInfo.Invalid），在瞄准过程中会被更新。
+        /// </summary>
+        private void BeginTargetingSession(Verb_BDPRangedBase rangedVerb)
+        {
+            if (rangedVerb == null) return;
+
+            // 初始化射击管线
+            rangedVerb.InitShotPipeline();
+
+            // 构建射击上下文（使用占位符 target）
+            var context = rangedVerb.BuildContext();
+
+            // 创建射击会话
+            rangedVerb.activeSession = new ShotPipeline.ShotSession(context);
         }
 
         public override string Desc

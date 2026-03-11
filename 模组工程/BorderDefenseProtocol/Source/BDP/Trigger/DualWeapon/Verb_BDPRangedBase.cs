@@ -99,9 +99,10 @@ namespace BDP.Trigger
         // ── ShotPipeline 管线方法 ──
 
         /// <summary>
-        /// 初始化射击管线（延迟初始化，首次使用时调用）
+        /// 初始化射击管线（延迟初始化，首次使用时调用）。
+        /// v18.0：改为internal，允许CompTriggerBody在Verb创建后立即初始化。
         /// </summary>
-        protected void InitShotPipeline()
+        internal void InitShotPipeline()
         {
             if (shotPipeline == null)
                 shotPipeline = ShotPipeline.ShotPipeline.Build();
