@@ -78,7 +78,7 @@ namespace BDP.Trigger
             {
                 SoundDefOf.Tick_Tiny.PlayOneShotOnCamera();
                 // 在瞄准开始时创建 ShotSession
-                BeginTargetingSession(ranged);
+                ranged.BeginTargetingSession();
                 ranged.StartAnchorTargeting();
                 return new GizmoResult(GizmoState.Clear);
             }
@@ -90,7 +90,7 @@ namespace BDP.Trigger
                 if (secondaryVerb is Verb_BDPRangedBase rangedSecondary && rangedSecondary.SupportsGuided)
                 {
                     // 在瞄准开始时创建 ShotSession
-                    BeginTargetingSession(rangedSecondary);
+                    rangedSecondary.BeginTargetingSession();
                     rangedSecondary.StartAnchorTargeting();
                 }
                 else
@@ -102,24 +102,6 @@ namespace BDP.Trigger
             }
 
             return result;
-        }
-
-        /// <summary>
-        /// 在瞄准开始时创建 ShotSession。
-        /// 使用占位符 target（LocalTargetInfo.Invalid），在瞄准过程中会被更新。
-        /// </summary>
-        private void BeginTargetingSession(Verb_BDPRangedBase rangedVerb)
-        {
-            if (rangedVerb == null) return;
-
-            // 初始化射击管线
-            rangedVerb.InitShotPipeline();
-
-            // 构建射击上下文（使用占位符 target）
-            var context = rangedVerb.BuildContext();
-
-            // 创建射击会话
-            rangedVerb.activeSession = new ShotPipeline.ShotSession(context);
         }
 
         public override string Desc

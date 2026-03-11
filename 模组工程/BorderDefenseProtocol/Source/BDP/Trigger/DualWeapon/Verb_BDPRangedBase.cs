@@ -109,6 +109,22 @@ namespace BDP.Trigger
         }
 
         /// <summary>
+        /// 在瞄准开始时创建 ShotSession（Task 19）。
+        /// 由 Command_BDPChipAttack 在用户点击 Gizmo 时调用。
+        /// </summary>
+        public void BeginTargetingSession()
+        {
+            // 初始化射击管线
+            InitShotPipeline();
+
+            // 构建射击上下文（使用占位符 target）
+            var context = BuildContext();
+
+            // 创建射击会话
+            activeSession = new ShotSession(context);
+        }
+
+        /// <summary>
         /// 构建射击上下文（子类可重写以提供特定侧别的芯片信息）
         /// </summary>
         /// <returns>射击上下文快照</returns>
