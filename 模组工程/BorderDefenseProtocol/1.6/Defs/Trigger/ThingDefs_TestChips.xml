@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 测试芯片：对称双手枪 -->
+  <ThingDef ParentName="BDP_ChipBase">
+    <defName>BDP_Chip_TestDualPistol</defName>
+    <label>测试双手枪芯片</label>
+    <description>用于测试枪口发射系统的双手枪芯片。子弹应从枪口位置发射。</description>
+
+    <graphicData>
+      <texPath>Things/Item/Equipment/WeaponMelee/Knife</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+
+    <statBases>
+      <MarketValue>100</MarketValue>
+      <Mass>0.5</Mass>
+    </statBases>
+
+    <modExtensions>
+      <!-- 武器绘制配置 -->
+      <li Class="BDP.Trigger.WeaponDraw.WeaponDrawChipConfig">
+        <!-- 枪口发射配置 -->
+        <isRangedWeapon>true</isRangedWeapon>
+        <muzzleOffset>(0, 0, 0.25)</muzzleOffset>
+
+        <!-- 武器贴图配置 -->
+        <graphicData>
+          <texPath>Things/Item/Equipment/WeaponMelee/Knife</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <drawSize>(0.8, 0.8)</drawSize>
+        </graphicData>
+
+        <!-- South/North 位置配置 -->
+        <defaultOffset>(-0.2, 0, 0.1)</defaultOffset>
+        <defaultAngle>-15</defaultAngle>
+        <leftHandAngleOffset>30</leftHandAngleOffset>
+
+        <!-- East/West 位置配置 -->
+        <sideBaseX>0.15</sideBaseX>
+        <sideDeltaX>0.05</sideDeltaX>
+        <sideDeltaZ>0.05</sideDeltaZ>
+      </li>
+
+      <!-- 芯片效果配置 -->
+      <li Class="BDP.Trigger.VerbChipConfig">
+        <ranged>
+          <verbClass>BDP.Trigger.Verb_BDPSingle</verbClass>
+          <projectileDef>Bullet_Revolver</projectileDef>
+          <warmupTime>0.3</warmupTime>
+          <range>25</range>
+          <burstShotCount>1</burstShotCount>
+          <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+          <soundCast>Shot_Revolver</soundCast>
+        </ranged>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+</Defs>
