@@ -213,7 +213,32 @@ namespace BDP.Trigger
                 equipmentSource = caster;
             }
 
+            // ── 计算发射位置（优先使用枪口位置） ──
             Vector3 drawPos = caster.DrawPos + originOffset;
+
+            // 尝试从枪口发射（仅远程武器）
+            if (chipSide.HasValue)
+            {
+                var chipThing = GetCurrentChipThing(GetTriggerComp());
+                if (chipThing != null)
+                {
+                    var drawConfig = chipThing.def.GetModExtension<WeaponDrawChipConfig>();
+                    if (drawConfig?.isRangedWeapon == true)
+                    {
+                        // 计算瞄准角度
+                        float aimAngle = (currentTarget.CenterVector3 - caster.DrawPos).AngleFlat();
+
+                        // 获取枪口位置
+                        var muzzlePos = GetMuzzlePosition(drawConfig, chipSide.Value, aimAngle);
+                        if (muzzlePos.HasValue)
+                        {
+                            drawPos = muzzlePos.Value;
+                            // 注意：枪口位置已包含武器偏移，不再叠加originOffset
+                        }
+                    }
+                }
+            }
+
             Projectile proj = (Projectile)GenSpawn.Spawn(projectileDef, resultingLine.Source, caster.Map);
 
             // CompUniqueWeapon：damageDefOverride + extraDamages（芯片通常无此组件）
