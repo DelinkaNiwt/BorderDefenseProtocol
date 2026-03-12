@@ -107,6 +107,12 @@ namespace BDP.Core
         public void RegisterDrain(string key, float drainPerDay)
         {
             if (string.IsNullOrEmpty(key) || drainPerDay <= 0f) return;
+
+            // [诊断日志] 记录注册操作
+            bool existed = drainRegistry.ContainsKey(key);
+            float oldValue = existed ? drainRegistry[key] : 0f;
+            Log.Message($"[BDP诊断] RegisterDrain - key:{key}, 新值:{drainPerDay:F2}/day, 旧值:{oldValue:F2}/day, 覆盖:{existed}, Pawn:{(parent as Pawn)?.LabelShort ?? parent?.Label ?? "unknown"}");
+
             drainRegistry[key] = drainPerDay;
         }
 
@@ -114,6 +120,12 @@ namespace BDP.Core
         public void UnregisterDrain(string key)
         {
             if (string.IsNullOrEmpty(key)) return;
+
+            // [诊断日志] 记录注销操作
+            bool existed = drainRegistry.ContainsKey(key);
+            float oldValue = existed ? drainRegistry[key] : 0f;
+            Log.Message($"[BDP诊断] UnregisterDrain - key:{key}, 存在:{existed}, 旧值:{oldValue:F2}/day, Pawn:{(parent as Pawn)?.LabelShort ?? parent?.Label ?? "unknown"}");
+
             drainRegistry.Remove(key);
         }
 

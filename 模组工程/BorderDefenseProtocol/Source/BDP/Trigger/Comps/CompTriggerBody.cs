@@ -127,6 +127,38 @@ namespace BDP.Trigger
         }
 
         /// <summary>
+        /// 获取主攻击近战芯片Verb（近战自动攻击支持）。
+        /// 供Patch_Pawn_MeleeVerbs_TryMeleeAttack读取。
+        ///
+        /// 返回规则（按优先级）：
+        ///   双近战芯片 → dualAttackVerb（IsMeleeAttack=true）
+        ///   单近战芯片 → isPrimary=true的侧，否则任意一侧
+        ///   无近战芯片（含纯远程）→ null
+        /// </summary>
+        public Verb GetPrimaryMeleeChipVerb()
+        {
+            // 双手合成近战Verb（2近战芯片情况）
+            if (dualAttackVerb != null && dualAttackVerb.IsMeleeAttack)
+                return dualAttackVerb;
+
+            // 单侧近战：优先isPrimary=true的侧（1近战 或 1近战+1远程）
+            if (leftHandAttackVerb != null && leftHandAttackVerb.IsMeleeAttack
+                && leftHandAttackVerb.verbProps?.isPrimary == true)
+                return leftHandAttackVerb;
+            if (rightHandAttackVerb != null && rightHandAttackVerb.IsMeleeAttack
+                && rightHandAttackVerb.verbProps?.isPrimary == true)
+                return rightHandAttackVerb;
+
+            // 兜底：任意一侧近战
+            if (leftHandAttackVerb != null && leftHandAttackVerb.IsMeleeAttack)
+                return leftHandAttackVerb;
+            if (rightHandAttackVerb != null && rightHandAttackVerb.IsMeleeAttack)
+                return rightHandAttackVerb;
+
+            return null;
+        }
+
+        /// <summary>
         /// ProxyVerb属性（v14.0自动攻击）。
         /// 供Patch_Pawn_TryGetAttackVerb读取，使引擎自动攻击系统能找到芯片远程Verb。
         /// </summary>

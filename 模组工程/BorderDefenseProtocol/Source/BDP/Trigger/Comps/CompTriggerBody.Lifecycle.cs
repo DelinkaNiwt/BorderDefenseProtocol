@@ -148,13 +148,15 @@ namespace BDP.Trigger
                         if (slot.isActive && slot.loadedChip != null)
                         {
                             var chipComp = slot.loadedChip.TryGetComp<TriggerChipComp>();
-                            var effect = chipComp?.GetEffect();
+                            var effects = chipComp?.GetModeEffects(slot.currentModeIndex);
                             // C3修复：try/finally保护读档恢复路径
                             ActivatingSide = slot.side;
                             ActivatingSlot = slot;
                             try
                             {
-                                effect?.Activate(pawn, parent);
+                                if (effects != null)
+                                    foreach (var effect in effects)
+                                        effect.Activate(pawn, parent);
                             }
                             finally
                             {

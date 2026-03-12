@@ -18,8 +18,11 @@ namespace BDP.Trigger
     public class PawnFlyer_Grasshopper : PawnFlyer
     {
         // 视觉效果控制
-        private int lastTrailTick = -1;  // 上次生成拖尾的tick
         private bool launchEffectSpawned = false;  // 起跳特效是否已生成
+        // 气浪拖尾控制点（仅在起点、5%、15%三个位置绘制）
+        private bool trailSpawned_0 = false;   // 0% 起点
+        private bool trailSpawned_5 = false;   // 5% 距离
+        private bool trailSpawned_15 = false;  // 15% 距离
         // 固定飞行高度
         private float FlatAltitude => AltitudeLayer.Skyfaller.AltitudeFor();
 
@@ -132,6 +135,11 @@ namespace BDP.Trigger
         /// </summary>
         protected override void Tick()
         {
+            // 在base.Tick()之前缓存位置：
+            // base.Tick()→TickInterval()末尾会执行ticksFlying+=delta，
+            // 之后再调DrawPos拿到的是下一帧位置，导致拖尾靠前。
+            Vector3 trailPos = DrawPos;
+
             base.Tick();
 
             // 起跳时在脚下生成平台特效（只触发一次）
@@ -163,11 +171,22 @@ namespace BDP.Trigger
                 }
             }
 
-            // 每3tick生成一个拖尾粒子
-            if (ticksFlying - lastTrailTick >= 3)
+            // 气浪仅在起点、5%、15%三个控制点绘制，其余位置不画
+            float t2 = EvaluateProgress((float)ticksFlying / Mathf.Max(1, ticksFlightTime));
+            if (!trailSpawned_0)
             {
-                lastTrailTick = ticksFlying;
-                FleckMaker.ThrowDustPuffThick(DrawPos, Map, 0.6f, new Color(0.2f, 1f, 0.6f, 0.5f));
+                trailSpawned_0 = true;
+                FleckMaker.Static(trailPos, Map, Core.BDP_DefOf.BDP_GrasshopperAirPuff, 1.5f);
+            }
+            else if (!trailSpawned_5 && t2 >= 0.05f)
+            {
+                trailSpawned_5 = true;
+                FleckMaker.Static(trailPos, Map, Core.BDP_DefOf.BDP_GrasshopperAirPuff, 1.5f);
+            }
+            else if (!trailSpawned_15 && t2 >= 0.15f)
+            {
+                trailSpawned_15 = true;
+                FleckMaker.Static(trailPos, Map, Core.BDP_DefOf.BDP_GrasshopperAirPuff, 1.5f);
             }
         }
 

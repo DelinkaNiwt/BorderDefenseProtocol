@@ -37,9 +37,12 @@ namespace BDP.Trigger
             // 原版已返回有效远程Verb → 不干预
             if (__result != null && !__result.IsMeleeAttack) return;
 
-            // 检查触发体
-            var triggerComp = __instance.equipment?.Primary?.GetComp<CompTriggerBody>();
+            // 检查触发体（__instance null保护）
+            var triggerComp = __instance?.equipment?.Primary?.GetComp<CompTriggerBody>();
             if (triggerComp == null) return;
+
+            // 战斗体未激活 → 不干预（芯片未就绪）
+            if (!triggerComp.IsCombatBodyActive) return;
 
             var proxy = triggerComp.ProxyVerb;
             if (proxy != null && proxy.Available())

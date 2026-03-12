@@ -14,10 +14,11 @@ namespace BDP.Trigger
         public float activationCost = 0f;
 
         /// <summary>
-        /// IChipEffect实现类（XML中填写全限定类名，如"BDP.Trigger.VerbChipEffect"）。
-        /// 实例化方式：Activator.CreateInstance(chipEffectClass)，要求无参构造函数。
+        /// 芯片形态列表（v4.0 ChipMode系统）。
+        /// 每个形态包含效果类型列表、属性修正、切换成本等。
+        /// 单形态芯片只需一个元素，多形态芯片可支持形态切换。
         /// </summary>
-        public Type chipEffectClass;
+        public List<ChipMode> modes;
 
         // ── v2.1 统一配置协议（T30）──
 

@@ -41,6 +41,17 @@ namespace BDP.Trigger
         /// <summary>组合技是否支持引导瞄准。</summary>
         public override bool SupportsGuided => comboDef?.supportsGuided == true;
 
+        /// <summary>
+        /// 获取上下文用的投射物定义（重写以支持组合技）。
+        /// 组合技的投射物定义存储在comboDef中。
+        /// </summary>
+        protected override ThingDef GetContextProjectileDef()
+        {
+            var fromComboDef = comboDef?.projectileDef;
+            var fromBase = base.GetContextProjectileDef();
+            return fromComboDef ?? fromBase;
+        }
+
         /// <summary>启动引导瞄准（锚点折线弹道）。</summary>
         public override void StartAnchorTargeting()
         {
@@ -112,6 +123,13 @@ namespace BDP.Trigger
 
                 // v15.0：根据verbProps.isPrimary判断主/副攻击
                 bool isSecondary = !verbProps.isPrimary;
+
+                // 诊断日志：追踪isPrimary的值
+                Log.Message($"[BDP-Secondary] Verb_BDPCombo ExecuteFire");
+                Log.Message($"  verbProps.isPrimary: {verbProps.isPrimary}");
+                Log.Message($"  isSecondary: {isSecondary}");
+                Log.Message($"  comboDef: {comboDef?.defName ?? "NULL"}");
+
                 VerbAttackLogger.LogComboAttack(
                     this,
                     comboDef.defName,

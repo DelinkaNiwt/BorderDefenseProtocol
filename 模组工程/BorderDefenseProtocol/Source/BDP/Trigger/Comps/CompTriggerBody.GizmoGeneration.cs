@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using BDP.FireMode;
 using RimWorld;
+using UnityEngine;
 using Verse;
 
 namespace BDP.Trigger
@@ -92,16 +93,39 @@ namespace BDP.Trigger
                 }
 
                 // v10.0：组合技Gizmo（B+C同时激活时显示）
+                // v18.0：增加实时匹配验证，防止芯片状态变化后组合技按钮残留
                 if (comboAttackVerb != null && matchedComboDef != null)
                 {
-                    yield return new Command_BDPChipAttack
+                    // 实时验证当前芯片组合是否仍然匹配
+                    var comboLeftSlot = GetActiveSlot(SlotSide.LeftHand);
+                    var comboRightSlot = GetActiveSlot(SlotSide.RightHand);
+                    bool stillMatches = comboLeftSlot?.loadedChip != null
+                        && comboRightSlot?.loadedChip != null
+                        && matchedComboDef.Matches(comboLeftSlot.loadedChip.def, comboRightSlot.loadedChip.def);
+
+                    if (stillMatches)
                     {
-                        verb = comboAttackVerb,
-                        secondaryVerb = comboSecondaryVerb, // v9.0：副攻击
-                        attackId = "combo:" + matchedComboDef.defName,
-                        icon = parent.def.uiIcon, // 暂用触发体图标
-                        defaultLabel = matchedComboDef.label ?? "组合技",
-                    };
+                        // 图标选择逻辑：优先使用自定义图标，否则使用默认Cube贴图
+                        Texture2D comboIcon;
+                        if (!string.IsNullOrEmpty(matchedComboDef.iconPath))
+                        {
+                            comboIcon = ContentFinder<Texture2D>.Get(matchedComboDef.iconPath, true);
+                        }
+                        else
+                        {
+                            // 默认使用Cube贴图
+                            comboIcon = ContentFinder<Texture2D>.Get("Things/Trigger/Cube/cube", true);
+                        }
+
+                        yield return new Command_BDPChipAttack
+                        {
+                            verb = comboAttackVerb,
+                            secondaryVerb = comboSecondaryVerb, // v9.0：副攻击
+                            attackId = "combo:" + matchedComboDef.defName,
+                            icon = comboIcon,
+                            defaultLabel = matchedComboDef.label ?? "组合技",
+                        };
+                    }
                 }
             }
 
@@ -111,6 +135,40 @@ namespace BDP.Trigger
                 var fm = slot.loadedChip?.TryGetComp<CompFireMode>();
                 if (fm != null)
                     yield return new Gizmo_FireMode(fm, slot.loadedChip.def.label);
+            }
+
+            // v4.0：形态切换Gizmo（多形态芯片显示）
+            foreach (var side in new[] { SlotSide.LeftHand, SlotSide.RightHand })
+            {
+                var slot = GetActiveSlot(side);
+                if (slot?.loadedChip == null) continue;
+
+                var chipComp = slot.loadedChip.TryGetComp<TriggerChipComp>();
+                if (chipComp?.Props.modes == null || chipComp.Props.modes.Count <= 1) continue;
+
+                var currentMode = chipComp.GetCurrentMode(slot);
+                int nextIndex = (slot.currentModeIndex + 1) % chipComp.Props.modes.Count;
+                var nextMode = chipComp.Props.modes[nextIndex];
+
+                var cmd = new Command_Action
+                {
+                    defaultLabel = currentMode.label,
+                    defaultDesc = $"切换形态 → {nextMode.label}\n\n{currentMode.description ?? ""}",
+                    icon = slot.loadedChip.def.uiIcon,
+                    action = () => SwitchChipMode(side, slot.index, nextIndex),
+                };
+
+                // 检查是否可以切换
+                if (!chipComp.CanSwitchMode(slot, nextIndex))
+                {
+                    cmd.Disable("无法切换到此形态");
+                }
+                else if (nextMode.switchCost > 0f && (TrionComp?.Available ?? 0f) < nextMode.switchCost)
+                {
+                    cmd.Disable($"需要 {nextMode.switchCost:F1} Trion");
+                }
+
+                yield return cmd;
             }
 
             // v2.1.1：allowChipManagement=false时不显示状态Gizmo

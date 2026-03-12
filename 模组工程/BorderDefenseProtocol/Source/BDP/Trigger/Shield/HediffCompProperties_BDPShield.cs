@@ -49,12 +49,6 @@ namespace BDP.Trigger.Shield
         // ==================== Severity叠加配置 ====================
 
         /// <summary>
-        /// Severity>=2时的显示名称（例如"全方位能量盾"）
-        /// 如果为null或空，使用HediffDef的label
-        /// </summary>
-        public string stackedLabel = null;
-
-        /// <summary>
         /// Severity>=2时是否启用角度检查
         /// false=全方位防护，true=使用stackedBlockAngleRange
         /// </summary>
@@ -104,12 +98,34 @@ namespace BDP.Trigger.Shield
         /// </summary>
         public ColorInt shieldColor = new ColorInt(100, 150, 255, 50);
 
+        // ==================== 近战防护配置 ====================
+
+        /// <summary>
+        /// 是否可以抵挡近战攻击
+        /// 默认false（仅拦截远程和爆炸伤害）
+        /// </summary>
+        public bool canBlockMelee = false;
+
+        /// <summary>
+        /// 近战抵挡成功率倍率（相对于blockChance）
+        /// 例如：blockChance=0.9，meleeBlockChanceMultiplier=0.7，则近战成功率=0.63
+        /// 默认1.0（与远程相同）
+        /// </summary>
+        public float meleeBlockChanceMultiplier = 1f;
+
+        /// <summary>
+        /// 近战Trion消耗倍率（相对于trionCostMultiplier）
+        /// 例如：trionCostMultiplier=0.5，meleeTrionCostMultiplier=1.5，则近战消耗=0.75
+        /// 默认1.0（与远程相同）
+        /// </summary>
+        public float meleeTrionCostMultiplier = 1f;
+
         // ==================== 伤害类型过滤 ====================
 
         /// <summary>
         /// 可吸收的伤害类型列表（白名单）
         /// 如果指定，则只拦截列表中的伤害类型
-        /// 如果为null或空，则拦截所有远程和爆炸伤害
+        /// 如果为null或空，则拦截所有远程和爆炸伤害（以及近战，如果canBlockMelee=true）
         /// </summary>
         public List<DamageDef> absorbDamageTypes;
 
@@ -147,7 +163,16 @@ namespace BDP.Trigger.Shield
                 return absorbDamageTypes.Contains(damageDef);
 
             // 3. 默认拦截远程和爆炸伤害
-            return damageDef.isRanged || damageDef.isExplosive;
+            bool canAbsorb = damageDef.isRanged || damageDef.isExplosive;
+
+            // 4. 如果启用近战拦截，也拦截近战伤害
+            // 近战伤害的特征：hasForcefulImpact=true（有物理冲击力）
+            if (canBlockMelee && damageDef.hasForcefulImpact)
+            {
+                canAbsorb = true;
+            }
+
+            return canAbsorb;
         }
     }
 }

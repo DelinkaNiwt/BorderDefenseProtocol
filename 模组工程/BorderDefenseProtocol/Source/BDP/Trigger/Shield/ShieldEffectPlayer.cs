@@ -64,7 +64,6 @@ namespace BDP.Trigger.Shield
 
             // 获取自定义特效
             FleckDef hexShieldFleck = DefDatabase<FleckDef>.GetNamedSilentFail("BDP_HexShieldBlock");
-            FleckDef shockwaveRingFleck = DefDatabase<FleckDef>.GetNamedSilentFail("BDP_ShockwaveRing");
             FleckDef explosionFlashFleck = DefDatabase<FleckDef>.GetNamedSilentFail("ExplosionFlash");
 
             if (hexShieldFleck != null)
@@ -76,19 +75,6 @@ namespace BDP.Trigger.Shield
                 {
                     float flashScale = scale * 1.0f; // 增大闪光尺寸
                     FleckMaker.Static(position, map, explosionFlashFleck, flashScale);
-                }
-
-                // 2. 冲击波环 - 多层扩散效果（快速生成不同大小的环模拟扩散）
-                if (shockwaveRingFleck != null)
-                {
-                    // 第一层：小环（起始）
-                    FleckMaker.Static(position, map, shockwaveRingFleck, scale * 1.0f);
-
-                    // 第二层：中环（扩散中）
-                    FleckMaker.Static(position, map, shockwaveRingFleck, scale * 1.3f);
-
-                    // 第三层：大环（扩散末端）
-                    FleckMaker.Static(position, map, shockwaveRingFleck, scale * 1.6f);
                 }
 
                 // 3. 正六边形护盾 - 短促有力的抖动效果（两次快速抖动）

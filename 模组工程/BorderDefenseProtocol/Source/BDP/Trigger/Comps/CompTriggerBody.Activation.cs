@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using BDP.Core;
 using RimWorld;
 using Verse;
@@ -73,9 +74,10 @@ namespace BDP.Trigger
                 }
             }
 
-            // ── 检查5：效果自身的CanActivate ──
-            var effect = chipComp.GetEffect();
-            return effect?.CanActivate(pawn, parent) ?? false;
+            // ── 检查5：效果自身的CanActivate（v4.0：遍历当前形态所有效果） ──
+            var effects = chipComp.GetModeEffects(slot.currentModeIndex);
+            if (effects == null || effects.Count == 0) return false;
+            return effects.All(e => e.CanActivate(pawn, parent));
         }
 
         // ═══════════════════════════════════════════
@@ -216,6 +218,7 @@ namespace BDP.Trigger
         /// <summary>
         /// 执行芯片激活（内部方法）。
         /// 消耗激活成本、注册持续消耗、调用effect.Activate、设置isActive标志。
+        /// v4.0：支持多效果激活（遍历当前形态的所有效果）。
         /// </summary>
         private void DoActivate(ChipSlot slot)
         {
@@ -223,8 +226,8 @@ namespace BDP.Trigger
             if (pawn == null) return;
 
             var chipComp = slot.loadedChip.TryGetComp<TriggerChipComp>();
-            var effect = chipComp?.GetEffect();
-            if (effect == null) return;
+            var effects = chipComp?.GetModeEffects(slot.currentModeIndex);
+            if (effects == null || effects.Count == 0) return;
 
             // ── 一次性激活成本 ──
             float cost = chipComp.Props.activationCost;
@@ -234,8 +237,12 @@ namespace BDP.Trigger
             if (chipComp.Props.drainPerDay > 0f)
                 TrionComp?.RegisterDrain($"chip_{slot.side}_{slot.index}", chipComp.Props.drainPerDay);
 
-            // 设置激活上下文并调用effect.Activate
-            WithActivatingContext(slot, () => effect.Activate(pawn, parent));
+            // 设置激活上下文并调用所有效果的Activate
+            WithActivatingContext(slot, () =>
+            {
+                foreach (var effect in effects)
+                    effect.Activate(pawn, parent);
+            });
 
             slot.isActive = true;
 
@@ -250,22 +257,37 @@ namespace BDP.Trigger
         /// <summary>
         /// 执行芯片停用（内部方法）。
         /// 注销持续消耗、调用effect.Deactivate、清除isActive标志。
+        /// v4.0：支持多效果停用（遍历当前形态的所有效果）。
         /// </summary>
         /// <param name="pawnOverride">显式Pawn引用，优先于OwnerPawn（卸下装备时OwnerPawn为null）。</param>
         private void DeactivateSlot(ChipSlot slot, Pawn pawnOverride = null)
         {
-            if (!slot.isActive || slot.loadedChip == null) return;
+            if (!slot.isActive || slot.loadedChip == null)
+            {
+                return;
+            }
+
             var pawn = pawnOverride ?? OwnerPawn;
             var chipComp = slot.loadedChip.TryGetComp<TriggerChipComp>();
-            var effect = chipComp?.GetEffect();
+            var effects = chipComp?.GetModeEffects(slot.currentModeIndex);
 
             // ── v2.1（T32）：统一注销持续消耗 ──
-            TrionComp?.UnregisterDrain($"chip_{slot.side}_{slot.index}");
+            string drainKey = $"chip_{slot.side}_{slot.index}";
+            Log.Message($"[BDP诊断] 注销芯片消耗 - key:{drainKey}");
+            TrionComp?.UnregisterDrain(drainKey);
 
-            // 设置激活上下文并调用effect.Deactivate
-            WithActivatingContext(slot, () => effect?.Deactivate(pawn, parent));
+            // 设置激活上下文并调用所有效果的Deactivate
+            WithActivatingContext(slot, () =>
+            {
+                if (effects != null)
+                    foreach (var effect in effects)
+                        effect.Deactivate(pawn, parent);
+            });
 
             slot.isActive = false;
+
+            // 重置形态索引为默认值（形态0），下次激活时从巨盾模式开始
+            slot.currentModeIndex = 0;
 
             // ── v2.1（T31）：清除双手锁定 ──
             if (dualHandLockSlot == slot)
@@ -316,9 +338,14 @@ namespace BDP.Trigger
         /// <param name="pawn">显式传入的Pawn引用（卸下装备时OwnerPawn可能已为null）。</param>
         public void DeactivateAll(Pawn pawn = null)
         {
+            // [诊断日志] 记录DeactivateAll调用
+            Log.Message($"[BDP诊断] DeactivateAll开始 - Pawn:{pawn?.LabelShort ?? OwnerPawn?.LabelShort ?? "null"}");
+
+            int deactivatedCount = 0;
             foreach (var slot in AllSlots())
             {
                 if (!slot.isActive) continue;
+                deactivatedCount++;
                 try
                 {
                     DeactivateSlot(slot, pawn);
@@ -330,6 +357,8 @@ namespace BDP.Trigger
                     slot.isActive = false; // 强制标记为关闭，防止残留
                 }
             }
+
+            Log.Message($"[BDP诊断] DeactivateAll完成 - 共关闭{deactivatedCount}个槽位");
 
             // 清除按侧Verb数据（v2.0）
             leftHandActiveVerbProps = null; leftHandActiveTools = null;
@@ -386,6 +415,47 @@ namespace BDP.Trigger
 
 
         // ── Gizmo生成方法已移至 CompTriggerBody.GizmoGeneration.cs ──
+
+        // ═══════════════════════════════════════════
+        //  形态切换（v4.0 ChipMode系统）
+        // ═══════════════════════════════════════════
+
+        /// <summary>
+        /// 切换指定槽位的芯片形态。
+        /// 若芯片当前激活，先关闭旧形态效果，切换形态索引，再激活新形态效果。
+        /// </summary>
+        public bool SwitchChipMode(SlotSide side, int slotIndex, int targetModeIndex)
+        {
+            var slot = GetSlot(side, slotIndex);
+            if (slot?.loadedChip == null) return false;
+
+            var chipComp = slot.loadedChip.TryGetComp<TriggerChipComp>();
+            if (chipComp == null) return false;
+
+            if (!chipComp.CanSwitchMode(slot, targetModeIndex)) return false;
+
+            // 检查切换成本
+            var targetMode = chipComp.Props.modes[targetModeIndex];
+            if (targetMode.switchCost > 0f && (TrionComp?.Available ?? 0f) < targetMode.switchCost)
+                return false;
+
+            bool wasActive = slot.isActive;
+
+            // 先关闭当前形态效果
+            if (wasActive) DeactivateSlot(slot);
+
+            // 消耗切换成本
+            if (targetMode.switchCost > 0f)
+                TrionComp?.Consume(targetMode.switchCost);
+
+            // 切换形态索引
+            slot.currentModeIndex = targetModeIndex;
+
+            // 重新激活新形态效果
+            if (wasActive) DoActivate(slot);
+
+            return true;
+        }
 
     }
 }

@@ -112,7 +112,7 @@ namespace BDP.Combat
             var compTrion = Pawn?.GetComp<CompTrion>();
             if (compTrion != null)
             {
-                compTrion.RegisterDrain("CombatWounds", 0f);
+                compTrion.UnregisterDrain("CombatWounds");
             }
         }
 

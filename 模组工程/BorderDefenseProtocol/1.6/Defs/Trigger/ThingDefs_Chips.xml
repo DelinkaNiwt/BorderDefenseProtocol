@@ -60,7 +60,15 @@
 
     <comps>
       <li Class="BDP.Trigger.CompProperties_TriggerChip">
-        <chipEffectClass>BDP.Trigger.AbilityChipEffect</chipEffectClass>
+        <modes>
+          <li>
+            <label>蚱蜢</label>
+            <description>机动型芯片，提供爆发性弹射能力</description>
+            <effectClasses>
+              <li>BDP.Trigger.AbilityChipEffect</li>
+            </effectClasses>
+          </li>
+        </modes>
         <primaryCategory>Ability</primaryCategory> <!-- 主类别：能力类 -->
         <activationCost>0</activationCost> <!-- 无激活成本 -->
         <allocationCost>15</allocationCost> <!-- 占用15 Trion -->
@@ -99,7 +107,15 @@
     </statBases>
     <comps>
       <li Class="BDP.Trigger.CompProperties_TriggerChip">
-        <chipEffectClass>BDP.Combat.PassiveChipEffect</chipEffectClass>
+        <modes>
+          <li>
+            <label>紧急脱离</label>
+            <description>战斗体破裂时自动传送</description>
+            <effectClasses>
+              <li>BDP.Trigger.PassiveChipEffect</li>
+            </effectClasses>
+          </li>
+        </modes>
         <primaryCategory>Passive</primaryCategory> <!-- 主类别：被动类 -->
         <slotRestriction>SpecialOnly</slotRestriction>
         <activationCost>0</activationCost>
@@ -127,14 +143,22 @@
     <label>小行星</label>
     <description>发射普通弹进行齐射攻击的远程芯片。5发连射，中等射程，具有一定护甲穿透能力。适合对抗中装甲目标。</description>
     <graphicData>
-      <texPath>Things/Trigger/BDP_Chip_Test</texPath>
+      <texPath>Things/Trigger/Cube/cube</texPath>
     </graphicData>
     <statBases>
       <MarketValue>1000</MarketValue>
     </statBases>
     <comps>
       <li Class="BDP.Trigger.CompProperties_TriggerChip">
-        <chipEffectClass>BDP.Trigger.VerbChipEffect</chipEffectClass>
+        <modes>
+          <li>
+            <label>小行星</label>
+            <description>5发齐射，中等射程</description>
+            <effectClasses>
+              <li>BDP.Trigger.VerbChipEffect</li>
+            </effectClasses>
+          </li>
+        </modes>
         <primaryCategory>RangedWeapon</primaryCategory> <!-- 主类别：远程武器类 -->
         <slotRestriction>HandsOnly</slotRestriction>
         <activationCost>12</activationCost>
@@ -180,6 +204,39 @@
           <volleySpreadRadius>0.3</volleySpreadRadius>
         </ranged>
       </li>
+
+      <!-- 武器绘制配置 -->
+      <li Class="BDP.Trigger.WeaponDraw.WeaponDrawChipConfig">
+        <!-- 武器贴图 -->
+        <graphicData>
+          <texPath>Things/Trigger/Cube/cube</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <shaderType>Cutout</shaderType>
+          <drawSize>0.55</drawSize>
+        </graphicData>
+
+        <!-- 发光层贴图 -->
+        <glowGraphicData>
+          <texPath>Things/Trigger/Cube/cube_glow</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <shaderType>MoteGlow</shaderType>
+          <color>(0.8, 0.85, 0.85)</color>  <!-- 接近白色的浅青色发光，85%强度 -->
+          <drawSize>0.55</drawSize>
+        </glowGraphicData>
+
+        <!-- South/North参数 -->
+        <defaultOffset>(-0.35, 0, 0.08)</defaultOffset>
+        <defaultAngle>105</defaultAngle>
+        <defaultAltitudeOffset>0.05</defaultAltitudeOffset>
+        <southZAdjust>-0.03</southZAdjust>
+        <northZAdjust>0.03</northZAdjust>
+
+        <!-- East/West参数 -->
+        <sideBaseX>0.10</sideBaseX>
+        <sideDeltaX>0.04</sideDeltaX>
+        <leftHandAngleOffset>0</leftHandAngleOffset>
+      </li>
+
     </modExtensions>
   </ThingDef>
 
@@ -194,14 +251,22 @@
     <label>毒蛇</label>
     <description>发射引导弹进行齐射攻击的远程芯片。支持路径引导瞄准，5发连射，中等射程。引导弹伤害较低但能精确命中目标，适合对抗轻装甲目标。每发消耗5 Trion。</description>
     <graphicData>
-      <texPath>Things/Trigger/BDP_Chip_Test</texPath>
+      <texPath>Things/Trigger/Cube/cube</texPath>
     </graphicData>
     <statBases>
       <MarketValue>1000</MarketValue>
     </statBases>
     <comps>
       <li Class="BDP.Trigger.CompProperties_TriggerChip">
-        <chipEffectClass>BDP.Trigger.VerbChipEffect</chipEffectClass>
+        <modes>
+          <li>
+            <label>毒蛇</label>
+            <description>5发引导齐射，精确命中</description>
+            <effectClasses>
+              <li>BDP.Trigger.VerbChipEffect</li>
+            </effectClasses>
+          </li>
+        </modes>
         <primaryCategory>RangedWeapon</primaryCategory> <!-- 主类别：远程武器类 -->
         <slotRestriction>HandsOnly</slotRestriction>
         <activationCost>12</activationCost>
@@ -247,6 +312,39 @@
           </guided>
         </ranged>
       </li>
+
+      <!-- 武器绘制配置 -->
+      <li Class="BDP.Trigger.WeaponDraw.WeaponDrawChipConfig">
+        <!-- 武器贴图 -->
+        <graphicData>
+          <texPath>Things/Trigger/Cube/cube</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <shaderType>Cutout</shaderType>
+          <drawSize>0.55</drawSize>
+        </graphicData>
+
+        <!-- 发光层贴图 -->
+        <glowGraphicData>
+          <texPath>Things/Trigger/Cube/cube_glow</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <shaderType>MoteGlow</shaderType>
+          <color>(0.8, 0.85, 0.85)</color>  <!-- 接近白色的浅青色发光，85%强度 -->
+          <drawSize>0.55</drawSize>
+        </glowGraphicData>
+
+        <!-- South/North参数 -->
+        <defaultOffset>(-0.35, 0, 0.08)</defaultOffset>
+        <defaultAngle>105</defaultAngle>
+        <defaultAltitudeOffset>0.05</defaultAltitudeOffset>
+        <southZAdjust>-0.03</southZAdjust>
+        <northZAdjust>0.03</northZAdjust>
+
+        <!-- East/West参数 -->
+        <sideBaseX>0.10</sideBaseX>
+        <sideDeltaX>0.04</sideDeltaX>
+        <leftHandAngleOffset>0</leftHandAngleOffset>
+      </li>
+
     </modExtensions>
   </ThingDef>
 
@@ -273,8 +371,15 @@
 
     <comps>
       <li Class="BDP.Trigger.CompProperties_TriggerChip">
-        <!-- 使用Hediff芯片效果 -->
-        <chipEffectClass>BDP.Trigger.HediffChipEffect</chipEffectClass>
+        <modes>
+          <li>
+            <label>护盾</label>
+            <description>正面180°护盾，70%成功率</description>
+            <effectClasses>
+              <li>BDP.Trigger.StackableHediffChipEffect</li>
+            </effectClasses>
+          </li>
+        </modes>
         <primaryCategory>Defense</primaryCategory> <!-- 主类别：防御类 -->
 
         <!-- Trion成本配置 -->
@@ -326,8 +431,15 @@
 
     <comps>
       <li Class="BDP.Trigger.CompProperties_TriggerChip">
-        <!-- 使用Hediff芯片效果 -->
-        <chipEffectClass>BDP.Trigger.HediffChipEffect</chipEffectClass>
+        <modes>
+          <li>
+            <label>前方护盾</label>
+            <description>前方120°护盾，100%成功率</description>
+            <effectClasses>
+              <li>BDP.Trigger.StackableHediffChipEffect</li>
+            </effectClasses>
+          </li>
+        </modes>
         <primaryCategory>Defense</primaryCategory> <!-- 主类别：防御类 -->
 
         <!-- Trion成本配置 -->
@@ -354,7 +466,7 @@
     <!-- Hediff配置：指定要添加的护盾hediff -->
     <modExtensions>
       <li Class="BDP.Trigger.HediffChipConfig">
-        <hediffDef>BDP_ShieldFront</hediffDef>
+        <hediffDef>BDP_Shield</hediffDef>
       </li>
     </modExtensions>
   </ThingDef>
@@ -371,14 +483,22 @@
     <label>流星</label>
     <description>发射炸裂弹进行齐射攻击的远程芯片。3发连射，中等射程，子弹命中后产生范围爆炸（半径3格）。适合对抗密集目标和轻装甲单位。</description>
     <graphicData>
-      <texPath>Things/Trigger/BDP_Chip_Test</texPath>
+      <texPath>Things/Trigger/Cube/cube</texPath>
     </graphicData>
     <statBases>
       <MarketValue>1000</MarketValue>
     </statBases>
     <comps>
       <li Class="BDP.Trigger.CompProperties_TriggerChip">
-        <chipEffectClass>BDP.Trigger.VerbChipEffect</chipEffectClass>
+        <modes>
+          <li>
+            <label>流星</label>
+            <description>3发炸裂弹齐射，范围爆炸</description>
+            <effectClasses>
+              <li>BDP.Trigger.VerbChipEffect</li>
+            </effectClasses>
+          </li>
+        </modes>
         <primaryCategory>RangedWeapon</primaryCategory>
         <slotRestriction>HandsOnly</slotRestriction>
         <activationCost>12</activationCost>
@@ -424,6 +544,248 @@
         <ranged>
           <volleySpreadRadius>0.3</volleySpreadRadius>
         </ranged>
+      </li>
+
+      <!-- 武器绘制配置 -->
+      <li Class="BDP.Trigger.WeaponDraw.WeaponDrawChipConfig">
+        <!-- 武器贴图 -->
+        <graphicData>
+          <texPath>Things/Trigger/Cube/cube</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <shaderType>Cutout</shaderType>
+          <drawSize>0.55</drawSize>
+        </graphicData>
+
+        <!-- 发光层贴图 -->
+        <glowGraphicData>
+          <texPath>Things/Trigger/Cube/cube_glow</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <shaderType>MoteGlow</shaderType>
+          <color>(0.8, 0.85, 0.85)</color>  <!-- 接近白色的浅青色发光，85%强度 -->
+          <drawSize>0.55</drawSize>
+        </glowGraphicData>
+
+        <!-- South/North参数 -->
+        <defaultOffset>(-0.35, 0, 0.08)</defaultOffset>
+        <defaultAngle>105</defaultAngle>
+        <defaultAltitudeOffset>0.05</defaultAltitudeOffset>
+        <southZAdjust>-0.03</southZAdjust>
+        <northZAdjust>0.03</northZAdjust>
+
+        <!-- East/West参数 -->
+        <sideBaseX>0.10</sideBaseX>
+        <sideDeltaX>0.04</sideDeltaX>
+        <leftHandAngleOffset>0</leftHandAngleOffset>
+      </li>
+
+    </modExtensions>
+  </ThingDef>
+
+  <!-- ══════════════════════════════════════════════════════
+       BDP_Chip_Raygust — 光魂芯片
+       约束：左右手槽位
+       形态1（默认）：巨盾模式 - 前方大盾 + 推进器能力
+       形态2：重刃模式 - 钝击近战武器 + 推进器能力
+       激活期间：移速 -25%
+       ══════════════════════════════════════════════════════ -->
+  <ThingDef ParentName="BDP_ChipBase">
+    <defName>BDP_Chip_Raygust</defName>
+    <label>光魂</label>
+    <description>重型多形态芯片。默认展开前方大盾（巨盾模式），可切换为重型近战武器（重刃模式）。两种形态均内置推进器，可进行爆发性位移。激活期间移动速度降低25%。</description>
+
+    <graphicData>
+      <texPath>Things/Trigger/BDP_Chip_Test</texPath>
+    </graphicData>
+
+    <statBases>
+      <MarketValue>1500</MarketValue>
+    </statBases>
+
+    <comps>
+      <li Class="BDP.Trigger.CompProperties_TriggerChip">
+        <modes>
+          <!-- 形态0：巨盾模式（默认） -->
+          <li>
+            <label>巨盾模式</label>
+            <description>展开前方大盾，抵挡来袭攻击</description>
+            <effectClasses>
+              <li>BDP.Trigger.ModeBasedHediffChipEffect</li>
+              <li>BDP.Trigger.AbilityChipEffect</li>
+            </effectClasses>
+          </li>
+          <!-- 形态1：重刃模式 -->
+          <li>
+            <label>重刃模式</label>
+            <description>收起护盾，切换为重型近战武器</description>
+            <effectClasses>
+              <li>BDP.Trigger.ModeBasedHediffChipEffect</li>
+              <li>BDP.Trigger.VerbChipEffect</li>
+              <li>BDP.Trigger.AbilityChipEffect</li>
+            </effectClasses>
+            <switchCost>15</switchCost>
+          </li>
+        </modes>
+
+        <primaryCategory>Defense</primaryCategory>
+        <slotRestriction>HandsOnly</slotRestriction>
+
+        <activationCost>25</activationCost>
+        <allocationCost>65</allocationCost>
+        <drainPerDay>0</drainPerDay>
+        <activationWarmup>60</activationWarmup>   <!-- 1秒预热 -->
+        <deactivationDelay>30</deactivationDelay> <!-- 0.5秒关闭延迟 -->
+
+        <categories>
+          <li>Defense</li>
+          <li>Shield</li>
+          <li>Melee</li>
+          <li>Heavy</li>
+        </categories>
+      </li>
+    </comps>
+
+    <modExtensions>
+      <!-- 巨盾模式：护盾Hediff（Severity=1） -->
+      <li Class="BDP.Trigger.HediffChipConfig">
+        <hediffDef>BDP_Chip_Raygust_Hediff</hediffDef>
+      </li>
+
+      <!-- 两种形态共用：推进器能力 -->
+      <li Class="BDP.Trigger.AbilityChipConfig">
+        <abilityDef>BDP_Ability_Raygust_Thruster</abilityDef>
+      </li>
+
+      <!-- 重刃模式：钝击近战武器 -->
+      <li Class="BDP.Trigger.VerbChipConfig">
+        <primaryVerbProps>
+          <verbClass>BDP.Trigger.Verb_BDPMelee</verbClass>
+          <hasStandardCommand>true</hasStandardCommand>
+          <meleeDamageBaseAmount>20</meleeDamageBaseAmount>
+          <meleeDamageDef>Blunt</meleeDamageDef>
+          <range>1.5</range>
+          <burstShotCount>2</burstShotCount>
+        </primaryVerbProps>
+        <melee>
+          <tools>
+            <li>
+              <label>重刃</label>
+              <capacities>
+                <li>Blunt</li>
+              </capacities>
+              <power>20</power>
+              <cooldownTime>2.5</cooldownTime>
+              <armorPenetration>0.1</armorPenetration>
+            </li>
+          </tools>
+        </melee>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- ══════════════════════════════════════════════════════
+       BDP_Chip_Kogetsu — 弧月芯片（近战武器，利器）
+       约束：左右手槽位
+       作用：展开弧形能量刃，单次斩击，伤害20
+       ══════════════════════════════════════════════════════ -->
+  <ThingDef ParentName="BDP_ChipBase">
+    <defName>BDP_Chip_Kogetsu</defName>
+    <label>弧月</label>
+    <description>近战型芯片。激活后从手柄中展开弧形能量刃（Kogetsu），以锋利的斩击攻击目标。刀刃由Trion能量凝聚而成，能够切割大多数材质。</description>
+
+    <graphicData>
+      <texPath>Things/Trigger/Chip/kogetsu_handle</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>0.85</drawSize>
+    </graphicData>
+
+    <statBases>
+      <MarketValue>1200</MarketValue>
+    </statBases>
+
+    <comps>
+      <li Class="BDP.Trigger.CompProperties_TriggerChip">
+        <modes>
+          <li>
+            <label>弧月</label>
+            <description>展开能量刃，单次斩击</description>
+            <effectClasses>
+              <li>BDP.Trigger.VerbChipEffect</li>
+            </effectClasses>
+          </li>
+        </modes>
+        <primaryCategory>MeleeWeapon</primaryCategory> <!-- 主类别：近战武器类 -->
+        <slotRestriction>HandsOnly</slotRestriction>    <!-- 只能插左右手槽位 -->
+        <activationCost>10</activationCost>             <!-- 激活消耗10 Trion -->
+        <allocationCost>30</allocationCost>             <!-- 占用30 Trion -->
+        <usageCost>5</usageCost>                        <!-- 每次攻击消耗5 Trion -->
+        <drainPerDay>0</drainPerDay>
+        <activationWarmup>30</activationWarmup>         <!-- 0.5秒预热（展开刀刃） -->
+        <deactivationDelay>15</deactivationDelay>
+        <categories>
+          <li>Weapon</li>
+          <li>Melee</li>
+          <li>Sharp</li>
+          <li>Medium</li>
+        </categories>
+      </li>
+    </comps>
+
+    <modExtensions>
+      <li Class="BDP.Trigger.VerbChipConfig">
+        <primaryVerbProps>
+          <verbClass>BDP.Trigger.Verb_BDPMelee</verbClass>
+          <hasStandardCommand>true</hasStandardCommand>
+          <meleeDamageBaseAmount>20</meleeDamageBaseAmount>
+          <meleeDamageDef>Cut</meleeDamageDef>  <!-- 利器：切割伤害 -->
+          <range>1.5</range>
+          <burstShotCount>1</burstShotCount>    <!-- 单次斩击 -->
+        </primaryVerbProps>
+        <melee>
+          <tools>
+            <li>
+              <label>弧月刃</label>
+              <capacities>
+                <li>Cut</li>
+              </capacities>
+              <power>20</power>
+              <cooldownTime>2.0</cooldownTime>
+              <armorPenetration>0.15</armorPenetration>
+            </li>
+          </tools>
+        </melee>
+      </li>
+
+      <!-- 激活时在小人身上绘制弧月武器贴图 + 发光层 -->
+      <li Class="BDP.Trigger.WeaponDraw.WeaponDrawChipConfig">
+        <graphicData>
+          <texPath>Things/Trigger/Chip/kogetsu_handle</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <shaderType>Cutout</shaderType>
+          <drawSize>1.2</drawSize>
+        </graphicData>
+        <glowGraphicData>
+          <texPath>Things/Trigger/Chip/kogetsu_blade</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <shaderType>MoteGlow</shaderType>
+          <color>(1.0, 1.0, 0.95)</color>  <!-- 接近纯白的黄白色发光 -->
+          <drawSize>1.2</drawSize>
+        </glowGraphicData>
+
+        <!-- South/North 参数：右手South为基准 -->
+        <!-- X=-0.25：右手在屏幕左侧，左手自动镜像到右侧 -->
+        <!-- Z=0.1：武器略靠后（北侧） -->
+        <defaultOffset>(-0.20, 0, 0.1)</defaultOffset>
+        <defaultAngle>-50</defaultAngle>  <!-- 补偿贴图本身的45°斜角；右手额外偏5°（远离方向） -->
+        <!-- AltInc=0.0366，需大于此值才能改变渲染层级；0.05 ≈ 1.4×AltInc -->
+        <defaultAltitudeOffset>0.05</defaultAltitudeOffset>
+        <!-- South略往下，North略往上，体现视角透视感 -->
+        <southZAdjust>-0.05</southZAdjust>
+        <northZAdjust>0.05</northZAdjust>
+
+        <!-- East/West 参数：侧身时两手靠拢，靠前景/背景区分 -->
+        <sideBaseX>0.08</sideBaseX>   <!-- 两手共同X基准（朝东时偏右） -->
+        <sideDeltaX>0.03</sideDeltaX> <!-- 前后手X微分 -->
+        <leftHandAngleOffset>15</leftHandAngleOffset> <!-- 左手相对右手的额外偏转（度） -->
       </li>
     </modExtensions>
   </ThingDef>

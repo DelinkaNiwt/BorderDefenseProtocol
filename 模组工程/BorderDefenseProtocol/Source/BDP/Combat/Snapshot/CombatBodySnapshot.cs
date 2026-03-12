@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using BDP;
 using RimWorld;
 using Verse;
 
@@ -166,7 +168,50 @@ namespace BDP.Combat.Snapshot
                 originalApparelContainer.TryAdd(apparel);
             }
 
-            // 穿上战斗体衣物
+            // 选项B：按原身服装生成战斗体装备副本（相同外观，无品质，耐久满）
+            if (BDPModInstance.Settings.combatApparelMode == CombatApparelMode.MirrorOriginal)
+            {
+                combatApparelContainer.ClearAndDestroyContents();
+                foreach (var original in originalApparelContainer.InnerListForReading)
+                {
+                    // 传入相同 Stuff，保证视觉颜色基底一致
+                    var copy = (Apparel)ThingMaker.MakeThing(original.def, original.Stuff);
+
+                    // 复制自定义颜色（CompColorable）
+                    var srcColor = original.TryGetComp<CompColorable>();
+                    var dstColor = copy.TryGetComp<CompColorable>();
+                    if (srcColor != null && srcColor.Active && dstColor != null)
+                        dstColor.SetColor(srcColor.Color);
+
+                    // 复制意识形态风格（StyleDef）
+                    if (original.StyleDef != null)
+                        copy.StyleDef = original.StyleDef;
+
+                    // 移除品质（战斗体装备无品质）
+                    // ThingWithComps 有三处品质引用需全部清除：
+                    //   1. comps 列表（私有，反射）
+                    //   2. compQuality 缓存字段（公开，直接赋值）
+                    //   3. compsByType 字典缓存（私有，反射）
+                    var qualityComp = copy.TryGetComp<CompQuality>();
+                    if (qualityComp != null)
+                    {
+                        var compsField = typeof(ThingWithComps).GetField(
+                            "comps", BindingFlags.NonPublic | BindingFlags.Instance);
+                        (compsField?.GetValue(copy) as List<ThingComp>)?.Remove(qualityComp);
+
+                        copy.compQuality = null;
+
+                        var byTypeField = typeof(ThingWithComps).GetField(
+                            "compsByType", BindingFlags.NonPublic | BindingFlags.Instance);
+                        (byTypeField?.GetValue(copy) as Dictionary<Type, ThingComp[]>)
+                            ?.Remove(typeof(CompQuality));
+                    }
+
+                    combatApparelContainer.TryAdd(copy);
+                }
+            }
+
+            // 穿上战斗体衣物（选项A/B 通用）
             var combatApparels = combatApparelContainer.InnerListForReading.ToList();
             foreach (var apparel in combatApparels)
             {
@@ -177,12 +222,15 @@ namespace BDP.Combat.Snapshot
 
         private void RestoreApparelFromSnapshot()
         {
-            // 脱下战斗体衣物，放回容器
+            // 脱下战斗体衣物
             var currentApparel = pawn.apparel.WornApparel.ToList();
             foreach (var apparel in currentApparel)
             {
                 pawn.apparel.Remove(apparel);
-                combatApparelContainer.TryAdd(apparel);
+                if (BDPModInstance.Settings.combatApparelMode == CombatApparelMode.MirrorOriginal)
+                    apparel.Destroy(); // 选项B：销毁生成的副本
+                else
+                    combatApparelContainer.TryAdd(apparel); // 选项A：存回容器
             }
 
             // 穿回原衣物并恢复状态

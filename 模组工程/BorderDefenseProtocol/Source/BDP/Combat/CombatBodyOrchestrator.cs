@@ -83,6 +83,10 @@ namespace BDP.Combat
         /// <param name="isEmergency">是否为紧急脱离</param>
         public void Deactivate(Pawn pawn, CombatBodyRuntime runtime, bool isEmergency)
         {
+            // [诊断日志] 记录解除流程开始
+            var trionComp = pawn.GetComp<CompTrion>();
+            Log.Message($"[BDP诊断] 战斗体解除开始 - Pawn:{pawn.LabelShort}, 紧急脱离:{isEmergency}, 解除前TotalDrainPerDay:{trionComp?.TotalDrainPerDay:F2}");
+
             // 紧急脱离时执行传送
             if (isEmergency && HasEmergencyEscapeChip(pawn, out ChipSlot chipSlot))
             {
@@ -101,9 +105,21 @@ namespace BDP.Combat
                     pawn.Notify_Teleported(endCurrentJob: true, resetTweenedPos: true);
 
                     // 确保图形节点已初始化（修复"Node is null"错误）
-                    if (pawn.Drawer != null)
+                    // 原因分析：Notify_Teleported(resetTweenedPos: true)会重置图形状态
+                    // 解决方案：调用SetAllGraphicsDirty()强制重建所有图形，然后调用EnsureGraphicsInitialized()
+                    Log.Message($"[BDP诊断] 紧急脱离传送后 - Pawn: {pawn.LabelShort}, Drawer是否为null: {pawn.Drawer == null}, Spawned: {pawn.Spawned}, Map是否为null: {pawn.Map == null}");
+
+                    if (pawn.Drawer?.renderer != null)
                     {
+                        Log.Message($"[BDP诊断] 调用图形刷新方法");
+                        // 关键修复：先标记所有图形为脏（需要重建），再确保初始化
+                        pawn.Drawer.renderer.SetAllGraphicsDirty();
                         pawn.Drawer.renderer.EnsureGraphicsInitialized();
+                        Log.Message($"[BDP诊断] 图形刷新完成");
+                    }
+                    else
+                    {
+                        Log.Warning($"[BDP诊断] pawn.Drawer或renderer为null，无法初始化图形节点！");
                     }
 
                     // 播放出口特效
@@ -192,6 +208,20 @@ namespace BDP.Combat
 
             string msg = isEmergency ? "紧急脱离战斗体" : "解除战斗体";
             Messages.Message($"{pawn.Name} {msg}", MessageTypeDefOf.PositiveEvent);
+
+            // [关键修复] 在整个解除流程结束后，再次确保图形初始化
+            // 原因：ReleaseTriggerSystem()会触发Verb重建，可能导致图形节点失效
+            // 必须在所有可能触发绘制的操作之后，最后一次确保图形初始化
+            if (isEmergency && pawn.Drawer?.renderer != null)
+            {
+                Log.Message($"[BDP诊断] 解除流程结束前最后一次图形刷新");
+                pawn.Drawer.renderer.SetAllGraphicsDirty();
+                pawn.Drawer.renderer.EnsureGraphicsInitialized();
+            }
+
+            // [诊断日志] 记录解除流程结束
+            var trionCompAfter = pawn.GetComp<CompTrion>();
+            Log.Message($"[BDP诊断] 战斗体解除完成 - Pawn:{pawn.LabelShort}, 解除后TotalDrainPerDay:{trionCompAfter?.TotalDrainPerDay:F2}");
         }
 
         // ═══════════════════════════════════════════
@@ -382,8 +412,25 @@ namespace BDP.Combat
             var compTrion = pawn.GetComp<CompTrion>();
             if (compTrion == null) return;
 
+            // [诊断日志] 记录注销前的消耗注册表（详细）
+            Log.Message($"[BDP诊断] UnregisterMaintenance - 注销前TotalDrainPerDay:{compTrion.TotalDrainPerDay:F2}");
+
+            // 输出所有注册的消耗源
+            var drainRegistry = compTrion.GetType().GetField("drainRegistry", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.GetValue(compTrion) as System.Collections.Generic.Dictionary<string, float>;
+            if (drainRegistry != null && drainRegistry.Count > 0)
+            {
+                Log.Message($"[BDP诊断] 当前注册的消耗源（共{drainRegistry.Count}个）：");
+                foreach (var kv in drainRegistry)
+                {
+                    Log.Message($"[BDP诊断]   - key:{kv.Key}, value:{kv.Value:F2}/day");
+                }
+            }
+
             compTrion.UnregisterDrain("CombatBody");
             compTrion.SetFrozen(false);
+
+            // [诊断日志] 记录注销后的消耗注册表
+            Log.Message($"[BDP诊断] UnregisterMaintenance - 注销后TotalDrainPerDay:{compTrion.TotalDrainPerDay:F2}");
         }
 
         /// <summary>

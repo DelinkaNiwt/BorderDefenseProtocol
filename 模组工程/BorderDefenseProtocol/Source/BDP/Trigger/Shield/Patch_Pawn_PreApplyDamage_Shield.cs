@@ -26,42 +26,27 @@ namespace BDP.Trigger.Shield
         /// </summary>
         public static void Postfix(Pawn __instance, ref DamageInfo dinfo, ref bool absorbed)
         {
-            // 如果伤害已被其他系统吸收，跳过
-            if (absorbed)
-            {
-                Log.Message($"[BDP-Shield-Postfix] {__instance.LabelShort} 伤害已被其他系统吸收");
-                return;
-            }
+            // 伤害已被其他系统吸收，跳过
+            if (absorbed) return;
 
-            // 调试日志：记录进入Postfix
-            Log.Message($"[BDP-Shield-Postfix] {__instance.LabelShort} 受到伤害: " +
-                       $"类型={dinfo.Def?.defName}, 伤害={dinfo.Amount:F1}, 角度={dinfo.Angle:F1}°");
-
-            // 健康系统检查
-            if (__instance.health?.hediffSet == null) return;
+            // 健康系统检查 + 快速退出：无hediff则必无护盾
+            if (__instance?.health?.hediffSet == null) return;
 
             // 遍历所有hediff，查找护盾
             foreach (var hediff in __instance.health.hediffSet.hediffs)
             {
-                // 检查是否是护盾hediff
                 if (hediff is Hediff_BDPShield shieldHediff)
                 {
-                    // 获取护盾组件
                     var shieldComp = shieldHediff.TryGetComp<HediffComp_BDPShield>();
                     if (shieldComp == null) continue;
 
-                    // 尝试抵挡伤害
                     if (shieldComp.TryBlockDamage(ref dinfo))
                     {
                         absorbed = true;
-                        Log.Message($"[BDP-Shield-Postfix] 护盾成功抵挡！标记absorbed=true");
-                        return; // 伤害已被吸收，不再检查其他护盾
+                        return;
                     }
                 }
             }
-
-            // 没有护盾抵挡
-            Log.Message($"[BDP-Shield-Postfix] 无护盾抵挡");
         }
     }
 }
