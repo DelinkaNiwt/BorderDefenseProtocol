@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- ========================================
+       芯片系统 - Hediff定义
+       用于芯片激活时添加到Pawn身上的效果
+       ======================================== -->
+
+  <!-- 能量盾 - 基础版本（正面180°防护，支持Severity叠加） -->
+  <HediffDef>
+    <defName>BDP_Shield</defName>
+    <label>能量盾</label>
+    <description>一个能量护盾，可以抵挡来自正面180度的远程攻击。抵挡成功率70%。每次抵挡会消耗Trion能量。
+
+【Severity机制】激活两个能量盾芯片时，防护范围扩展为360°全方位，成功率提升至95%。</description>
+    <hediffClass>BDP.Trigger.Shield.Hediff_BDPShield</hediffClass>
+    <defaultLabelColor>(0.6, 0.8, 1.0)</defaultLabelColor>
+    <isBad>false</isBad>
+
+    <!-- Severity配置 -->
+    <initialSeverity>1</initialSeverity>
+    <minSeverity>0</minSeverity>
+    <maxSeverity>2</maxSeverity>
+
+    <!-- 阶段配置：根据Severity显示不同名称 -->
+    <stages>
+      <!-- Severity 1: 单芯片，正面180°防护 -->
+      <li>
+        <minSeverity>1</minSeverity>
+        <label>能量盾</label>
+      </li>
+      <!-- Severity 2: 双芯片，全方位360°防护 -->
+      <li>
+        <minSeverity>2</minSeverity>
+        <label>全方位能量盾</label>
+      </li>
+    </stages>
+
+    <comps>
+      <li Class="BDP.Trigger.Shield.HediffCompProperties_BDPShield">
+        <!-- 基础配置（Severity=1）：正面180°防护 -->
+        <enableAngleCheck>true</enableAngleCheck>
+        <blockAngleRange>180</blockAngleRange>
+        <blockAngleOffset>0</blockAngleOffset>
+
+        <!-- 成功率：70% -->
+        <blockChance>0.7</blockChance>
+
+        <!-- Trion消耗：受到20点伤害，消耗14 Trion (20 × 0.7) -->
+        <trionCostMultiplier>0.7</trionCostMultiplier>
+
+        <!-- 叠加配置（Severity>=2）：全方位360°防护 -->
+        <stackedEnableAngleCheck>false</stackedEnableAngleCheck>
+        <stackedBlockAngleRange>360</stackedBlockAngleRange>
+        <stackedBlockChance>0.95</stackedBlockChance>
+
+        <!-- 特效配置 -->
+        <blockEffectDef>Interceptor_BlockedProjectilePsychic</blockEffectDef>
+        <effectScale>0.25</effectScale>
+        <shieldRadius>0.8</shieldRadius>
+
+        <!-- 可视化配置 -->
+        <showShieldBubble>true</showShieldBubble>
+        <shieldColor>(100, 150, 255, 50)</shieldColor>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <!-- 光魂芯片 - 多形态护盾（使用Severity区分巨盾/重刃模式） -->
+  <HediffDef>
+    <defName>BDP_Chip_Raygust_Hediff</defName>
+    <label>光魂</label>
+    <description>光魂芯片的效果。根据形态不同提供不同的防护能力。
+
+【巨盾模式】前方120度防护，可抵挡远程和近战攻击。远程成功率90%，近战成功率72%。激活期间移动速度降低25%。
+
+【重刃模式】禁用护盾，专注于攻击。</description>
+    <hediffClass>BDP.Trigger.Shield.Hediff_BDPShield</hediffClass>
+    <defaultLabelColor>(0.6, 0.8, 1.0)</defaultLabelColor>
+    <isBad>false</isBad>
+
+    <!-- Severity配置：1=巨盾模式，2=重刃模式 -->
+    <initialSeverity>1</initialSeverity>
+    <minSeverity>1</minSeverity>
+    <maxSeverity>2</maxSeverity>
+
+    <!-- 阶段配置：根据Severity区分形态 -->
+    <stages>
+      <!-- Severity 1: 巨盾模式 -->
+      <li>
+        <minSeverity>1</minSeverity>
+        <label>光魂:巨盾模式</label>
+        <statFactors>
+          <MoveSpeed>0.75</MoveSpeed>
+        </statFactors>
+      </li>
+      <!-- Severity 2: 重刃模式 -->
+      <li>
+        <minSeverity>2</minSeverity>
+        <label>光魂:重刃模式</label>
+        <statFactors>
+          <MoveSpeed>0.75</MoveSpeed>
+        </statFactors>
+      </li>
+    </stages>
+
+    <comps>
+      <li Class="BDP.Trigger.Shield.HediffCompProperties_BDPShield">
+        <!-- 基础配置（Severity=1，巨盾模式）：前方120度防护 -->
+        <enableAngleCheck>true</enableAngleCheck>
+        <blockAngleRange>120</blockAngleRange>
+        <blockAngleOffset>0</blockAngleOffset>
+
+        <!-- 成功率：90% -->
+        <blockChance>0.9</blockChance>
+
+        <!-- Trion消耗 -->
+        <trionCostMultiplier>0.5</trionCostMultiplier>
+
+        <!-- 近战防护配置 -->
+        <canBlockMelee>true</canBlockMelee>
+        <meleeBlockChanceMultiplier>0.8</meleeBlockChanceMultiplier>  <!-- 近战成功率=90%×0.8=72% -->
+        <meleeTrionCostMultiplier>1.2</meleeTrionCostMultiplier>      <!-- 近战消耗更多Trion -->
+
+        <!-- 叠加配置（Severity>=2，重刃模式）：禁用护盾 -->
+        <stackedEnableAngleCheck>false</stackedEnableAngleCheck>
+        <stackedBlockAngleRange>0</stackedBlockAngleRange>
+        <stackedBlockChance>0</stackedBlockChance>
+
+        <!-- 特效配置 -->
+        <blockEffectDef>Interceptor_BlockedProjectilePsychic</blockEffectDef>
+        <effectScale>0.25</effectScale>
+        <shieldRadius>0.6</shieldRadius>
+
+        <!-- 可视化配置 -->
+        <showShieldBubble>true</showShieldBubble>
+        <shieldColor>(100, 200, 255, 60)</shieldColor>
+      </li>
+    </comps>
+  </HediffDef>
+
+</Defs>
+
