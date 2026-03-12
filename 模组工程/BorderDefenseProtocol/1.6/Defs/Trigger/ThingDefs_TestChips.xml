@@ -17,6 +17,32 @@
       <Mass>0.5</Mass>
     </statBases>
 
+    <comps>
+      <li Class="BDP.Trigger.CompProperties_TriggerChip">
+        <modes>
+          <li>
+            <label>测试双手枪</label>
+            <description>测试枪口发射系统</description>
+            <effectClasses>
+              <li>BDP.Trigger.VerbChipEffect</li>
+            </effectClasses>
+          </li>
+        </modes>
+        <primaryCategory>RangedWeapon</primaryCategory>
+        <slotRestriction>HandsOnly</slotRestriction>
+        <activationCost>0</activationCost>
+        <allocationCost>10</allocationCost>
+        <usageCost>1</usageCost>
+        <drainPerDay>0</drainPerDay>
+        <activationWarmup>0</activationWarmup>
+        <categories>
+          <li>Weapon</li>
+          <li>Ranged</li>
+          <li>Test</li>
+        </categories>
+      </li>
+    </comps>
+
     <modExtensions>
       <!-- 武器绘制配置 -->
       <li Class="BDP.Trigger.WeaponDraw.WeaponDrawChipConfig">
@@ -44,15 +70,18 @@
 
       <!-- 芯片效果配置 -->
       <li Class="BDP.Trigger.VerbChipConfig">
-        <ranged>
+        <primaryVerbProps>
           <verbClass>BDP.Trigger.Verb_BDPSingle</verbClass>
-          <projectileDef>Bullet_Revolver</projectileDef>
+          <hasStandardCommand>true</hasStandardCommand>
+          <defaultProjectile>Bullet_Revolver</defaultProjectile>
           <warmupTime>0.3</warmupTime>
           <range>25</range>
           <burstShotCount>1</burstShotCount>
           <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
           <soundCast>Shot_Revolver</soundCast>
-        </ranged>
+          <defaultCooldownTime>1.0</defaultCooldownTime>
+        </primaryVerbProps>
+        <primaryFiringPattern>Simultaneous</primaryFiringPattern>
       </li>
     </modExtensions>
   </ThingDef>
