@@ -4,6 +4,7 @@ using BDP.Projectiles;
 using BDP.Projectiles.Config;
 using BDP.FireMode;
 using BDP.Trigger.ShotPipeline;
+using BDP.Trigger.WeaponDraw;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -49,6 +50,9 @@ namespace BDP.Trigger
         /// <summary>当前射击会话（TryCastShot 期间有效）</summary>
         protected ShotSession activeSession;
 
+        /// <summary>自动绕行路径交替索引（用于在左右路径间轮换）</summary>
+        private int autoRouteIndex = 0;
+
         /// <summary>
         /// 获取CasterPawn装备的触发体CompTriggerBody（缓存版本）。
         /// Pawn变化时自动刷新缓存。
@@ -62,6 +66,16 @@ namespace BDP.Trigger
             base.ExposeData();
             if (Scribe.mode == LoadSaveMode.LoadingVars && verbProps == null)
                 verbProps = new VerbProperties();
+        }
+
+        /// <summary>
+        /// Verb重置时清理射击会话。
+        /// 触发场景：burst中断、Job结束、目标切换等。
+        /// </summary>
+        public override void Reset()
+        {
+            base.Reset();
+            activeSession = null;
         }
 
         protected CompTriggerBody GetTriggerComp()
@@ -113,6 +127,7 @@ namespace BDP.Trigger
             var triggerComp = GetTriggerComp();
             var chipThing = GetCurrentChipThing(triggerComp);
             var chipConfig = GetChipConfig();
+            var projectileDef = GetContextProjectileDef();
 
             return new ShotContext(
                 caster: CasterPawn,
@@ -121,8 +136,20 @@ namespace BDP.Trigger
                 verb: this,
                 chipConfig: chipConfig,
                 chipSide: chipSide,
-                chipThing: chipThing
+                chipThing: chipThing,
+                projectileDef: projectileDef
             );
+        }
+
+        /// <summary>
+        /// 获取上下文用的投射物定义（虚方法，子类可重写）。
+        /// 默认实现：从VerbProps或ChipConfig读取。
+        /// </summary>
+        protected virtual ThingDef GetContextProjectileDef()
+        {
+            var fromVerbProps = verbProps?.defaultProjectile;
+            var fromChipConfig = GetChipConfig()?.GetPrimaryProjectileDef();
+            return fromVerbProps ?? fromChipConfig;
         }
 
         /// <summary>
@@ -296,17 +323,154 @@ namespace BDP.Trigger
             return currentTarget;
         }
 
-        /// <summary>引导模式下用第一个锚点替代最终目标进行LOS检查。</summary>
+        /// <summary>
+        /// 引导模式下用第一个锚点替代最终目标进行LOS检查。
+        /// 迁移自 VerbFlightState.InterceptCastTarget() + PostCastOn()。
+        ///
+        /// 架构设计：
+        /// - 手动锚点模式：用户通过锚点瞄准设置了引导路径，用首锚点做LOS检查
+        /// - 自动绕行模式：无手动锚点但弹药支持引导，自动计算绕行路径
+        /// - 成功后锁定currentTarget为Cell形式，防止Thing追踪导致引导弹幽灵命中
+        /// </summary>
         public override bool TryStartCastOn(LocalTargetInfo castTarg, LocalTargetInfo destTarg,
             bool surpriseAttack = false, bool canHitNonTargetPawns = true,
             bool preventFriendlyFire = false, bool nonInterruptingSelfCast = false)
         {
-            // 管线系统已在 BeginTargetingSession 中初始化
-            // 这里直接调用基类逻辑
+            LocalTargetInfo actualTarget = castTarg;
+
+            // ── 手动锚点模式：用户通过锚点瞄准设置了引导路径 ──
+            if (activeSession?.AnchorPath != null && activeSession.AnchorPath.Count > 0)
+            {
+                // 能直视目标→保持朝向目标；不能直视→朝向第一锚点
+                bool canSeeTarget = GenSight.LineOfSight(
+                    caster.Position, actualTarget.Cell, caster.Map, skipFirstCell: true);
+                if (!canSeeTarget)
+                    castTarg = new LocalTargetInfo(activeSession.AnchorPath[0]);
+            }
+            else
+            {
+                // ── 自动绕行模式：无手动锚点时，为不可视目标准备绕行路径 ──
+                TryPrepareAutoRouteForCast(ref castTarg);
+            }
+
             bool result = base.TryStartCastOn(castTarg, destTarg, surpriseAttack,
                 canHitNonTargetPawns, preventFriendlyFire, nonInterruptingSelfCast);
 
+            // 成功后锁定currentTarget为实际目标Cell（防止Thing追踪导致幽灵命中）
+            if (result)
+            {
+                bool hasManualAnchors = activeSession?.AnchorPath != null
+                    && activeSession.AnchorPath.Count > 0;
+                bool hasAutoRoute = activeSession?.RouteResult != null
+                    && activeSession.RouteResult.Value.IsValid;
+                if (hasManualAnchors || hasAutoRoute)
+                    currentTarget = new LocalTargetInfo(actualTarget.Cell);
+            }
+
             return result;
+        }
+
+        /// <summary>
+        /// 为自动绕行准备施法上下文：计算绕行路由，设置LOS首锚点。
+        /// 条件：无手动锚点 + 弹药有引导配置 + 无直接LOS。
+        /// 迁移自 VerbFlightState.PrepareAutoRouteForCast()。
+        /// </summary>
+        private void TryPrepareAutoRouteForCast(ref LocalTargetInfo castTarg)
+        {
+            if (!castTarg.IsValid) return;
+
+            // 有直接LOS则不需要绕行
+            if (GenSight.LineOfSight(
+                caster.Position, castTarg.Cell, caster.Map, skipFirstCell: true))
+                return;
+
+            // 检查投射物是否支持引导
+            var projectileDef = GetAutoRouteProjectileDef();
+            if (projectileDef == null) return;
+            var guidedCfg = projectileDef.GetModExtension<BDPGuidedConfig>();
+            if (guidedCfg == null) return;
+
+            // 计算左右绕行路由
+            var leftAnchors = ObstacleRouter.ComputeIterativeRoute(
+                caster.Position, castTarg.Cell, caster.Map,
+                guidedCfg.maxRouteDepth, guidedCfg.anchorsPerWall, preferLeft: true);
+            var rightAnchors = ObstacleRouter.ComputeIterativeRoute(
+                caster.Position, castTarg.Cell, caster.Map,
+                guidedCfg.maxRouteDepth, guidedCfg.anchorsPerWall, preferLeft: false);
+
+            // 全路径LOS验证
+            if (!ObstacleRouter.IsPathClear(caster.Position, leftAnchors, castTarg.Cell, caster.Map))
+                leftAnchors = null;
+            if (!ObstacleRouter.IsPathClear(caster.Position, rightAnchors, castTarg.Cell, caster.Map))
+                rightAnchors = null;
+            if (leftAnchors == null && rightAnchors == null) return;
+
+            var route = new ObstacleRouteResult
+            {
+                LeftAnchors = leftAnchors,
+                RightAnchors = rightAnchors
+            };
+
+            // 确保session存在，存储路由结果供后续模块使用
+            if (activeSession == null)
+            {
+                InitShotPipeline();
+                activeSession = new ShotSession(BuildContext());
+            }
+            activeSession.RouteResult = route;
+
+            // 选择一侧路径作为锚点（交替分配）
+            var anchors = SelectRouteSide(route);
+            if (anchors != null && anchors.Count > 0)
+            {
+                // 同步到 AimResult，确保 GetLosCheckTarget() 能读取到锚点
+                if (activeSession.AimResult == null)
+                    activeSession.AimResult = new ShotPipeline.AimResult();
+                activeSession.AimResult.AnchorPath = anchors;
+                activeSession.AimResult.FinalTarget = castTarg;
+
+                // 从芯片配置获取锚点散布参数
+                var chipConfig = GetChipConfig();
+                activeSession.AimResult.AnchorSpread =
+                    chipConfig?.ranged?.guided?.anchorSpread ?? 0.3f;
+
+                // 选择首锚点作为LOS检查目标
+                castTarg = new LocalTargetInfo(anchors[0]);
+            }
+        }
+
+        /// <summary>
+        /// 从绕行路由中选择首锚点（两侧都可用时选更近的一侧）。
+        /// 迁移自 VerbFlightState.TryPickLosAnchor()。
+        /// </summary>
+        private bool TryPickFirstAnchor(ObstacleRouteResult route, out IntVec3 anchor)
+        {
+            anchor = default;
+            bool hasLeft = route.LeftAnchors?.Count > 0;
+            bool hasRight = route.RightAnchors?.Count > 0;
+            if (!hasLeft && !hasRight) return false;
+
+            if (hasLeft && hasRight)
+            {
+                int leftDist = (route.LeftAnchors[0] - caster.Position).LengthHorizontalSquared;
+                int rightDist = (route.RightAnchors[0] - caster.Position).LengthHorizontalSquared;
+                anchor = leftDist <= rightDist ? route.LeftAnchors[0] : route.RightAnchors[0];
+                return true;
+            }
+
+            anchor = hasLeft ? route.LeftAnchors[0] : route.RightAnchors[0];
+            return true;
+        }
+
+        /// <summary>
+        /// 从绕行路由中选择一侧锚点路径（交替分配）。
+        /// 两侧都可用时交替选择，单侧可用时返回该侧。
+        /// </summary>
+        private List<IntVec3> SelectRouteSide(ObstacleRouteResult route)
+        {
+            if (route.LeftAnchors != null && route.RightAnchors != null)
+                return (autoRouteIndex++ % 2 == 0) ? route.LeftAnchors : route.RightAnchors;
+            return route.LeftAnchors ?? route.RightAnchors;
         }
 
         /// <summary>
@@ -350,6 +514,35 @@ namespace BDP.Trigger
             }
         }
 
+        // ── 管线驱动点：TryCastShot override ──
+
+        /// <summary>
+        /// 管线驱动入口：重写 Verb_Shoot.TryCastShot()。
+        /// 将射击逻辑委托给子类的 ExecuteFire()，而非使用原版逻辑。
+        ///
+        /// 架构设计：
+        /// - 原版 Verb_Shoot.TryCastShot() 只发射1颗子弹，不知道BDP的芯片系统
+        /// - 本重写确保所有 BDP Verb 子类的自定义射击模式（齐射、双侧交替、组合技等）被正确执行
+        /// - ExecuteFire() 内部调用 TryCastShotCore() 来实际发射投射物
+        /// </summary>
+        protected override bool TryCastShot()
+        {
+            // 确保管线已初始化
+            InitShotPipeline();
+
+            // 如果没有活跃会话，创建一个（非瞄准模式直接射击时）
+            if (activeSession == null)
+                activeSession = new ShotSession(BuildContext());
+
+            // 委托给子类的射击逻辑
+            bool result = ExecuteFire(activeSession);
+
+            // 不在burst结束时清理会话——锚点数据需要跨burst持久化（持续攻击场景）。
+            // 会话在 BeginTargetingSession() 时重建，在 Reset() 时清理。
+
+            return result;
+        }
+
         /// <summary>
         /// 复制Verb_LaunchProjectile.TryCastShot() + Verb_Shoot.TryCastShot()逻辑，
         /// 将equipmentSource替换为chipEquipment参数。
@@ -368,7 +561,18 @@ namespace BDP.Trigger
 
             ThingDef projectileDef = Projectile;
             if (projectileDef == null)
+            {
+                // 诊断日志：投射物为null
+                if (Prefs.DevMode)
+                {
+                    string chipName = chipEquipment?.def?.defName ?? "null";
+                    string verbProjName = verbProps?.defaultProjectile?.defName ?? "null";
+                    Log.Warning($"[BDP诊断] TryCastShotCore失败: projectileDef=null, " +
+                        $"chipEquipment={chipName}, verbClass={GetType().Name}, " +
+                        $"verbProps.defaultProjectile={verbProjName}");
+                }
                 return false;
+            }
 
             // v7.0修复：引导弹只需检查caster→第一锚点的LOS，而非caster→最终目标
             LocalTargetInfo losTarget = GetLosCheckTarget();
@@ -646,8 +850,60 @@ namespace BDP.Trigger
         }
 
         /// <summary>
+        /// 计算指定侧别芯片的枪口世界坐标。
+        /// 使用四元数旋转将枪口从武器局部坐标系转换到世界坐标系。
+        /// </summary>
+        /// <param name="config">芯片的武器绘制配置</param>
+        /// <param name="chipSide">芯片侧别（左手/右手）</param>
+        /// <param name="aimAngle">瞄准角度（度）</param>
+        /// <returns>枪口世界坐标，如果不是远程武器则返回null</returns>
+        protected Vector3? GetMuzzlePosition(WeaponDrawChipConfig config, SlotSide chipSide, float aimAngle)
+        {
+            // 1. 检查是否为远程武器
+            if (config == null || !config.isRangedWeapon)
+                return null;
+
+            // 2. 获取枪口局部偏移（支持左手覆盖）
+            Vector3 localMuzzleOffset = config.muzzleOffset;
+            if (chipSide == SlotSide.LeftHand && config.leftMuzzleOffsetOverride.HasValue)
+                localMuzzleOffset = config.leftMuzzleOffsetOverride.Value;
+
+            // 3. 获取芯片Thing（用于BuildEntry）
+            var triggerComp = GetTriggerComp();
+            if (triggerComp == null) return null;
+            var chipThing = triggerComp.GetActiveSlot(chipSide)?.loadedChip;
+            if (chipThing == null) return null;
+
+            // 4. 计算武器世界位置（复用现有的BuildEntry逻辑）
+            bool isLeft = chipSide == SlotSide.LeftHand;
+            var weaponEntry = CompTriggerBody.BuildEntry(config, chipThing, CasterPawn.Rotation, isLeft);
+            Vector3 weaponWorldPos = CasterPawn.DrawPos + weaponEntry.drawOffset;
+
+            // 5. 计算武器总旋转角度 = 瞄准角度 + 配置角度
+            float totalAngle = aimAngle + weaponEntry.angle;
+
+            // 6. 使用四元数旋转将枪口偏移从局部坐标系转换到世界坐标系
+            Quaternion weaponRotation = Quaternion.AngleAxis(totalAngle, Vector3.up);
+            Vector3 muzzleWorldOffset = weaponRotation * localMuzzleOffset;
+
+            // 7. 枪口世界坐标 = 武器世界坐标 + 枪口世界偏移
+            Vector3 muzzlePos = weaponWorldPos + muzzleWorldOffset;
+
+            // 8. 开发模式下输出诊断信息
+            if (Prefs.DevMode)
+            {
+                Log.Message($"[BDP.Muzzle] {chipSide}: weaponPos={weaponWorldPos}, " +
+                    $"muzzleOffset={localMuzzleOffset}, aimAngle={aimAngle:F1}, " +
+                    $"totalAngle={totalAngle:F1}, muzzlePos={muzzlePos}");
+            }
+
+            return muzzlePos;
+        }
+
+        /// <summary>
         /// 执行齐射循环发射（v15.0从双武器基类上提到远程基类）。
         /// 在单次TryCastShot内循环瞬发多颗子弹，无间隔。
+        /// 散布使用局部坐标系：相对于射击方向的前后和左右偏移。
         /// </summary>
         /// <param name="volleyCount">齐射子弹数量</param>
         /// <param name="spread">散布半径（米）</param>
@@ -656,11 +912,29 @@ namespace BDP.Trigger
         protected bool FireVolleyLoop(int volleyCount, float spread, Thing chipEquipment)
         {
             bool anyHit = false;
+
+            // 计算射击方向（局部坐标系基准）
+            Vector3 shootDir = Vector3.zero;
+            Vector3 rightDir = Vector3.zero;
+            if (spread > 0f && currentTarget.IsValid)
+            {
+                // 从施法者到目标的方向向量
+                shootDir = (currentTarget.CenterVector3 - caster.DrawPos).normalized;
+                // 计算垂直于射击方向的右向量（叉乘：up × forward = right）
+                rightDir = Vector3.Cross(Vector3.up, shootDir).normalized;
+            }
+
             for (int i = 0; i < volleyCount; i++)
             {
                 if (spread > 0f)
-                    shotOriginOffset = new Vector3(
-                        Rand.Range(-spread, spread), 0f, Rand.Range(-spread, spread));
+                {
+                    // 在局部坐标系中生成散布
+                    float forwardSpread = Rand.Range(-spread, spread);  // 前后散布（沿射击方向）
+                    float rightSpread = Rand.Range(-spread, spread);    // 左右散布（垂直于射击方向）
+
+                    // 转换到世界坐标系
+                    shotOriginOffset = shootDir * forwardSpread + rightDir * rightSpread;
+                }
 
                 if (TryCastShotCore(chipEquipment))
                     anyHit = true;
@@ -678,10 +952,29 @@ namespace BDP.Trigger
         /// <param name="target">当前瞄准目标</param>
         public override void DrawHighlight(LocalTargetInfo target)
         {
+
             base.DrawHighlight(target);
 
             if (!target.IsValid)
+            {
                 return;
+            }
+
+            // 条件化预览线绘制：
+            // - 非引导模式：始终绘制直线
+            // - 引导模式 + 可直视：绘制直线（提供视觉反馈）
+            // - 引导模式 + 不可直视：不绘制直线（由AnchorTargetingHelper绘制路径预览）
+            bool isGuidedMode = SupportsGuided;
+            bool hasDirectLOS = GenSight.LineOfSight(caster.Position, target.Cell, caster.Map);
+
+
+            if (!isGuidedMode || hasDirectLOS)
+            {
+                GenDraw.DrawLineBetween(caster.DrawPos, target.CenterVector3);
+            }
+            else
+            {
+            }
 
             // 初始化管线
             InitShotPipeline();
@@ -689,6 +982,8 @@ namespace BDP.Trigger
             // 构建临时会话用于渲染
             var context = BuildContext();
             var session = new ShotSession(context);
+
+            // 诊断日志：检查上下文数据
 
             // 执行 Aim 阶段（生成 AimResult）
             ShotPipeline.ShotPipeline.ExecuteAim(session, shotPipeline);
