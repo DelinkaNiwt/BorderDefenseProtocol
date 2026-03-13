@@ -3,6 +3,7 @@ using BDP.Trigger.ShotPipeline;
 using RimWorld;
 using UnityEngine;
 using Verse;
+using Verse.Sound;
 
 namespace BDP.Trigger
 {
@@ -419,19 +420,22 @@ namespace BDP.Trigger
 
             bool anyHit = false;
             ThingDef originalProjectile = verbProps.defaultProjectile;
-            float spread = Mathf.Max(leftCfg.ranged?.volleySpreadRadius ?? 0f, rightCfg.ranged?.volleySpreadRadius ?? 0f);
+            // 各侧使用自己的散布半径，互不影响
+            float leftSpread = leftCfg.ranged?.volleySpreadRadius ?? 0f;
+            float rightSpread = rightCfg.ranged?.volleySpreadRadius ?? 0f;
 
             try
             {
-                // 左侧齐射
+                // 左侧齐射：临时换成左手音效（引擎在 TryCastNextBurstShot 里统一播放）
                 if (leftWillFire)
                 {
+                    chipSide = SlotSide.LeftHand; // 设置当前发射侧
                     currentShotHasPath = hasManualAnchors && leftHasPath;
                     if (leftProjectileDef != null) verbProps.defaultProjectile = leftProjectileDef;
                     bool needRestoreL = hasManualAnchors && !currentShotHasPath && savedThingTarget.IsValid;
                     if (needRestoreL) currentTarget = savedThingTarget;
 
-                    if (FireVolleyLoop(leftCount, spread, leftSlot.loadedChip))
+                    if (FireVolleyLoop(leftCount, leftSpread, leftSlot.loadedChip))
                         anyHit = true;
 
                     if (needRestoreL && activeSession?.AimResult != null)
@@ -441,12 +445,13 @@ namespace BDP.Trigger
                 // 右侧齐射
                 if (rightWillFire)
                 {
+                    chipSide = SlotSide.RightHand; // 设置当前发射侧
                     currentShotHasPath = hasManualAnchors && rightHasPath;
                     if (rightProjectileDef != null) verbProps.defaultProjectile = rightProjectileDef;
                     bool needRestoreR = hasManualAnchors && !currentShotHasPath && savedThingTarget.IsValid;
                     if (needRestoreR) currentTarget = savedThingTarget;
 
-                    if (FireVolleyLoop(rightCount, spread, rightSlot.loadedChip))
+                    if (FireVolleyLoop(rightCount, rightSpread, rightSlot.loadedChip))
                         anyHit = true;
 
                     if (needRestoreR && activeSession?.AimResult != null)
@@ -492,6 +497,8 @@ namespace BDP.Trigger
             ThingDef sideProjectile = side == SlotSide.LeftHand ? leftProjectileDef : rightProjectileDef;
             float spread = cfg.ranged?.volleySpreadRadius ?? 0f;
 
+            chipSide = side; // 设置当前发射侧
+
             bool anyHit = false;
             WithTargetRestore(() =>
             {
@@ -534,6 +541,8 @@ namespace BDP.Trigger
 
             Thing chipEquipment = slot.loadedChip;
             ThingDef sideProjectile = side == SlotSide.LeftHand ? leftProjectileDef : rightProjectileDef;
+
+            chipSide = side; // 设置当前发射侧（枪口位置计算依赖此字段）
 
             bool result = false;
             WithTargetRestore(() =>

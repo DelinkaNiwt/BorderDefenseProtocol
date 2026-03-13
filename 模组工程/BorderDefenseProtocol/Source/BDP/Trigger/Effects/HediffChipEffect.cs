@@ -159,7 +159,10 @@ namespace BDP.Trigger
     {
         protected override float CalculateActivateSeverity(CompTriggerBody chipComp, ChipSlot slot, HediffDef hediffDef)
         {
-            int activeChipCount = CountActiveChipsWithSameHediff(chipComp, hediffDef);
+            // CountActiveChipsWithSameHediff只统计isActive=true的槽位，
+            // 但DoActivate在effect.Activate()之后才设置isActive=true，
+            // 所以当前正在激活的槽位不会被计入，需要+1补偿
+            int activeChipCount = CountActiveChipsWithSameHediff(chipComp, hediffDef) + 1;
             Log.Message($"[BDP-StackableHediff] 激活芯片数{activeChipCount} → Severity={activeChipCount}");
             return activeChipCount;
         }

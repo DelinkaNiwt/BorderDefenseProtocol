@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 小行星芯片发射音效 -->
+  <SoundDef>
+    <defName>BDP_Shot_Asteroid</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>6</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>Trigger/Shot_BDP_Asteroid</clipPath>
+          </li>
+        </grains>
+        <volumeRange>40~50</volumeRange>
+        <pitchRange>0.95~1.05</pitchRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+</Defs>

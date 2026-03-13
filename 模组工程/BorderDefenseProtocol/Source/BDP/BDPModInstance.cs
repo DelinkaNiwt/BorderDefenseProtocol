@@ -68,6 +68,12 @@ namespace BDP
                 ref Settings.enableDebugLogging,
                 "开启后会在日志中输出更多调试信息，用于排查问题。"
             );
+            listingStandard.Gap(4f);
+            listingStandard.CheckboxLabeled(
+                "启用枪口位置可视化（需开发者模式）",
+                ref Settings.enableMuzzleDebugVisual,
+                "射击时在地图上绘制枪口、武器、发射位置的彩色标记点，用于调试枪口偏移配置。"
+            );
             listingStandard.Gap(12f);
 
             // ═══════════════════════════════════════════════════════════════
@@ -85,6 +91,7 @@ namespace BDP
             {
                 Settings.combatApparelMode = CombatApparelMode.Preset;
                 Settings.enableDebugLogging = false;
+                Settings.enableMuzzleDebugVisual = false;
             }
 
             listingStandard.End();

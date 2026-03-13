@@ -50,6 +50,9 @@ namespace BDP.Trigger.WeaponDraw
 
             if (entries.Count == 0) return true; // 无激活芯片，正常绘制触发体
 
+            // 缓存drawLoc供枪口位置计算使用（drawLoc ≠ Pawn.DrawPos，包含动画偏移）
+            triggerBody.lastDrawLoc = drawLoc;
+
             // 有激活芯片：绘制芯片武器贴图，跳过触发体贴图
             foreach (var entry in entries)
                 DrawEntry(eq, drawLoc, aimAngle, entry);
@@ -85,7 +88,11 @@ namespace BDP.Trigger.WeaponDraw
             // flipHorizontal：切换 mesh + 对 angle 取反
             // 几何关系：plane10Flip@(-A) == plane10@(A) 的水平镜像
             // 用 mesh 切换代替负 scaleX，避免负缩放触发 Unity 背面剔除导致不可见
-            if (entry.flipHorizontal)
+            // 约束：只在接近正南/正北（175°~185° 或 355°~5°）时才应用手侧翻转，
+            //       有东西偏角时不翻转，避免枪管朝向错误。
+            bool isNearSouthNorth = (aimAngle >= 175f && aimAngle <= 185f)
+                                 || (aimAngle >= 355f || aimAngle <= 5f);
+            if (entry.flipHorizontal && isNearSouthNorth)
             {
                 mesh  = (mesh == MeshPool.plane10) ? MeshPool.plane10Flip : MeshPool.plane10;
                 angle = -angle;

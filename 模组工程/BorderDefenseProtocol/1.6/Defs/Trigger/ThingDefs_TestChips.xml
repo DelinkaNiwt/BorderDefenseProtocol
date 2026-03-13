@@ -52,15 +52,15 @@
 
         <!-- 武器贴图配置 -->
         <graphicData>
-          <texPath>Things/Item/Equipment/WeaponMelee/Knife</texPath>
+          <texPath>Things/Item/Equipment/WeaponRanged/ChargeRifle</texPath>
           <graphicClass>Graphic_Single</graphicClass>
           <drawSize>(0.8, 0.8)</drawSize>
         </graphicData>
 
         <!-- South/North 位置配置 -->
         <defaultOffset>(-0.2, 0, 0.1)</defaultOffset>
-        <defaultAngle>-15</defaultAngle>
-        <leftHandAngleOffset>30</leftHandAngleOffset>
+        <defaultAngle>0</defaultAngle>
+        <leftHandAngleOffset>0</leftHandAngleOffset>
 
         <!-- East/West 位置配置 -->
         <sideBaseX>0.15</sideBaseX>

@@ -305,6 +305,21 @@ namespace BDP.Trigger
                 effectiveBurstShotCount = leftEffective + rightEffective;  // 其他模式：需要多次调用
             }
 
+            // 计算ticksBetweenBurstShots：
+            // 齐射侧在一次TryCastShot内完成所有发射，其ticksBetweenBurstShots对双武器Verb无意义。
+            // 混合模式下应使用逐发侧的间隔，避免齐射侧的值拖慢逐发连射速度。
+            int leftTicks = leftVerbs.Max(v => v.ticksBetweenBurstShots);
+            int rightTicks = rightVerbs.Max(v => v.ticksBetweenBurstShots);
+            bool leftIsSim = leftConfig != null && leftConfig.primaryFiringPattern == FiringPattern.Simultaneous;
+            bool rightIsSim = rightConfig != null && rightConfig.primaryFiringPattern == FiringPattern.Simultaneous;
+            int effectiveTicks;
+            if (leftIsSim && !rightIsSim)
+                effectiveTicks = rightTicks;       // 仅右侧逐发：用右侧间隔
+            else if (!leftIsSim && rightIsSim)
+                effectiveTicks = leftTicks;        // 仅左侧逐发：用左侧间隔
+            else
+                effectiveTicks = System.Math.Max(leftTicks, rightTicks); // 双侧同类型：取max
+
             // 双武器合成Verb（isPrimary=true，默认攻击）
             result.Add(new VerbProperties
             {
@@ -316,9 +331,7 @@ namespace BDP.Trigger
                 muzzleFlashScale = Mathf.Max(
                     leftVerbs.Max(v => v.muzzleFlashScale),
                     rightVerbs.Max(v => v.muzzleFlashScale)),
-                ticksBetweenBurstShots = System.Math.Max(
-                    leftVerbs.Max(v => v.ticksBetweenBurstShots),
-                    rightVerbs.Max(v => v.ticksBetweenBurstShots)),
+                ticksBetweenBurstShots = effectiveTicks,
                 range = Mathf.Min(leftRange, rightRange),
                 warmupTime = Mathf.Max(leftWarmup, rightWarmup),
                 defaultCooldownTime = Mathf.Max(leftCooldown, rightCooldown),

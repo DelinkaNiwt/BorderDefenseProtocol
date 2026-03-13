@@ -29,6 +29,11 @@ namespace BDP
         public bool enableDebugLogging = false;
 
         /// <summary>
+        /// 是否启用枪口位置可视化调试（仅开发者模式下生效）。
+        /// </summary>
+        public bool enableMuzzleDebugVisual = false;
+
+        /// <summary>
         /// 战斗体激活时的换装模式。
         /// </summary>
         public CombatApparelMode combatApparelMode = CombatApparelMode.Preset;
@@ -41,6 +46,7 @@ namespace BDP
         {
             base.ExposeData();
             Scribe_Values.Look(ref enableDebugLogging, "enableDebugLogging", false);
+            Scribe_Values.Look(ref enableMuzzleDebugVisual, "enableMuzzleDebugVisual", false);
             Scribe_Values.Look(ref combatApparelMode, "combatApparelMode", CombatApparelMode.Preset);
         }
     }

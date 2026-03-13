@@ -190,7 +190,7 @@
           <range>40</range>
           <burstShotCount>5</burstShotCount>
           <ticksBetweenBurstShots>12</ticksBetweenBurstShots>
-          <soundCast>Shot_AssaultRifle</soundCast>
+          <soundCast>BDP_Shot_Asteroid</soundCast>
           <soundCastTail>GunTail_Medium</soundCastTail>
           <muzzleFlashScale>9</muzzleFlashScale>
           <defaultCooldownTime>2.0</defaultCooldownTime>
@@ -201,12 +201,17 @@
         </primaryVerbProps>
         <primaryFiringPattern>Simultaneous</primaryFiringPattern>
         <ranged>
-          <volleySpreadRadius>0.3</volleySpreadRadius>
+          <!-- 散布半径 = drawSize / 2 = 0.55 / 2，子弹起点不超出方块边界 -->
+          <volleySpreadRadius>0.275</volleySpreadRadius>
         </ranged>
       </li>
 
       <!-- 武器绘制配置 -->
       <li Class="BDP.Trigger.WeaponDraw.WeaponDrawChipConfig">
+        <!-- 枪口发射配置：子弹从方块贴图中心射出 -->
+        <isRangedWeapon>true</isRangedWeapon>
+        <muzzleOffset>(0, 0, 0)</muzzleOffset>
+
         <!-- 武器贴图 -->
         <graphicData>
           <texPath>Things/Trigger/Cube/cube</texPath>
@@ -787,6 +792,107 @@
         <sideDeltaX>0.03</sideDeltaX> <!-- 前后手X微分 -->
         <leftHandAngleOffset>15</leftHandAngleOffset> <!-- 左手相对右手的额外偏转（度） -->
       </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- ══════════════════════════════════════════════════════
+       BDP_Chip_RifleAsteroid — 步枪:小行星（远程武器，逐发射击）
+       类别：Rifle（步枪类）
+       攻击模式：逐发连射（Sequential Burst）
+       散布：0（精准射击）
+       子弹：普通弹（BDP_Bullet_Normal）
+       ══════════════════════════════════════════════════════ -->
+  <ThingDef ParentName="BDP_ChipBase">
+    <defName>BDP_Chip_RifleAsteroid</defName>
+    <label>步枪:小行星</label>
+    <description>步枪型远程芯片。以突击步枪形态展开，逐发精准射击，6发连射，无散布。使用普通弹，适合中远距离精确打击。</description>
+    <graphicData>
+      <texPath>Things/Item/Equipment/WeaponRanged/AssaultRifle</texPath>
+    </graphicData>
+    <statBases>
+      <MarketValue>1000</MarketValue>
+    </statBases>
+    <comps>
+      <li Class="BDP.Trigger.CompProperties_TriggerChip">
+        <modes>
+          <li>
+            <label>步枪:小行星</label>
+            <description>6发逐发连射，精准射击</description>
+            <effectClasses>
+              <li>BDP.Trigger.VerbChipEffect</li>
+            </effectClasses>
+          </li>
+        </modes>
+        <primaryCategory>RangedWeapon</primaryCategory>
+        <slotRestriction>HandsOnly</slotRestriction>
+        <activationCost>12</activationCost>
+        <allocationCost>38</allocationCost>
+        <usageCost>2</usageCost>
+        <drainPerDay>0</drainPerDay>
+        <minOutputPower>6</minOutputPower>
+        <activationWarmup>30</activationWarmup>
+        <deactivationDelay>15</deactivationDelay>
+        <categories>
+          <li>Weapon</li>
+          <li>Ranged</li>
+          <li>Medium</li>
+          <li>Physical</li>
+          <li>Rifle</li>
+          <li>Burst</li>
+        </categories>
+      </li>
+      <li Class="BDP.FireMode.CompProperties_FireMode"/>
+    </comps>
+    <modExtensions>
+      <li Class="BDP.Trigger.VerbChipConfig">
+        <primaryVerbProps>
+          <verbClass>BDP.Trigger.Verb_BDPSingle</verbClass>
+          <hasStandardCommand>true</hasStandardCommand>
+          <defaultProjectile>BDP_Bullet_Normal</defaultProjectile>
+          <warmupTime>1.0</warmupTime>
+          <range>40</range>
+          <burstShotCount>6</burstShotCount>
+          <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+          <soundCast>Shot_AssaultRifle</soundCast>
+          <soundCastTail>GunTail_Medium</soundCastTail>
+          <muzzleFlashScale>9</muzzleFlashScale>
+          <defaultCooldownTime>2.5</defaultCooldownTime>
+          <accuracyTouch>0.50</accuracyTouch>
+          <accuracyShort>0.65</accuracyShort>
+          <accuracyMedium>0.60</accuracyMedium>
+          <accuracyLong>0.50</accuracyLong>
+        </primaryVerbProps>
+        <!-- 逐发射击：不设 primaryFiringPattern，默认顺序连射 -->
+        <!-- 散布0：不设 ranged/volleySpreadRadius -->
+      </li>
+
+      <!-- 武器绘制配置：突击步枪贴图 + 双武器绘制 + 枪口位置 -->
+      <li Class="BDP.Trigger.WeaponDraw.WeaponDrawChipConfig">
+        <!-- 枪口发射配置 -->
+        <isRangedWeapon>true</isRangedWeapon>
+        <muzzleOffset>(0, 0, 0.35)</muzzleOffset>
+
+        <!-- 武器贴图 -->
+        <graphicData>
+          <texPath>Things/Item/Equipment/WeaponRanged/AssaultRifle</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <shaderType>Cutout</shaderType>
+          <drawSize>1.0</drawSize>
+        </graphicData>
+
+        <!-- South/North参数 -->
+        <defaultOffset>(-0.20, 0, 0.1)</defaultOffset>
+        <defaultAngle>0</defaultAngle>
+        <defaultAltitudeOffset>0.05</defaultAltitudeOffset>
+        <southZAdjust>-0.03</southZAdjust>
+        <northZAdjust>0.03</northZAdjust>
+
+        <!-- East/West参数 -->
+        <sideBaseX>0.15</sideBaseX>
+        <sideDeltaX>0.05</sideDeltaX>
+        <leftHandAngleOffset>0</leftHandAngleOffset>
+      </li>
+
     </modExtensions>
   </ThingDef>
 

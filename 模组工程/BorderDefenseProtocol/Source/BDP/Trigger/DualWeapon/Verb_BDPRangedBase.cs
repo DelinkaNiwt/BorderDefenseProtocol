@@ -9,6 +9,7 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 using Verse.AI;
+using Verse.Sound;
 
 namespace BDP.Trigger
 {
@@ -652,6 +653,50 @@ namespace BDP.Trigger
                     {
                         drawPos = muzzlePos.Value + shotOriginOffset;
                         // 注意：枪口位置已包含武器偏移，但仍需叠加shotOriginOffset（齐射散布）
+
+                        // 可视化调试：在枪口位置绘制彩色点标记
+                        if (Prefs.DevMode && BDPModInstance.Settings.enableMuzzleDebugVisual)
+                        {
+                            // 获取武器位置（使用lastDrawLoc，与GetMuzzlePosition一致）
+                            var triggerComp = GetTriggerComp();
+                            var chipThing = triggerComp?.GetActiveSlot(chipSide.Value)?.loadedChip;
+                            if (chipThing != null)
+                            {
+                                bool isLeft = chipSide.Value == SlotSide.LeftHand;
+                                var weaponEntry = CompTriggerBody.BuildEntry(drawConfig, chipThing, CasterPawn.Rotation, isLeft);
+                                // 使用lastDrawLoc而不是DrawPos（与GetMuzzlePosition保持一致）
+                                Vector3 weaponWorldPos = triggerComp.lastDrawLoc + weaponEntry.drawOffset;
+
+                                // 计算各位置之间的距离
+                                float dist_pawn_weapon = Vector3.Distance(caster.DrawPos, weaponWorldPos);
+                                float dist_weapon_muzzle = Vector3.Distance(weaponWorldPos, muzzlePos.Value);
+                                float dist_muzzle_fire = Vector3.Distance(muzzlePos.Value, drawPos);
+
+                                // 详细日志
+                                Log.Warning($"[BDP.Muzzle.Visual] ===== {chipSide.Value} 发射位置分析 =====");
+                                Log.Warning($"  小人中心: {caster.DrawPos}");
+                                Log.Warning($"  武器位置: {weaponWorldPos} (距小人 {dist_pawn_weapon:F3}m)");
+                                Log.Warning($"  枪口位置: {muzzlePos.Value} (距武器 {dist_weapon_muzzle:F3}m)");
+                                Log.Warning($"  发射位置: {drawPos} (距枪口 {dist_muzzle_fire:F3}m)");
+                                Log.Warning($"  齐射偏移: {shotOriginOffset}");
+                                Log.Warning($"  配置偏移: {drawConfig.muzzleOffset}");
+                                Log.Warning($"  瞄准角度: {aimAngle:F1}°");
+                                Log.Warning($"  武器角度: {weaponEntry.angle:F1}°");
+                                Log.Warning($"  总角度: {aimAngle + weaponEntry.angle:F1}°");
+                                Log.Warning($"  defaultOffset配置: {drawConfig.defaultOffset}");
+                                Log.Warning($"  muzzleOffset配置: {drawConfig.muzzleOffset}");
+                                Log.Warning($"  weaponEntry.drawOffset: {weaponEntry.drawOffset}");
+
+                                // 在地图上绘制所有关键位置标记点
+                                DrawAllPositionMarkers(
+                                    caster.DrawPos,      // 小人位置
+                                    weaponWorldPos,      // 武器位置
+                                    muzzlePos.Value,     // 枪口位置
+                                    drawPos,             // 开枪位置
+                                    isLeft               // 是否左手
+                                );
+                            }
+                        }
                     }
                 }
             }
@@ -746,6 +791,12 @@ namespace BDP.Trigger
             IncrementShotsFired();
             return true;
         }
+
+        /// <summary>
+        /// 获取本次发射应播放的音效。基类直接返回 verbProps.soundCast，由引擎正常播放。
+        /// Verb_BDPDual 重写此方法，在发射前把 verbProps.soundCast 换成当前侧音效。
+        /// </summary>
+        protected virtual SoundDef GetShotSound() => verbProps.soundCast;
 
         /// <summary>
         /// 弹道发射后回调（v7.0变化弹）。子类可重写此方法对刚发射的弹道进行后处理。
@@ -929,27 +980,38 @@ namespace BDP.Trigger
             var chipThing = triggerComp.GetActiveSlot(chipSide)?.loadedChip;
             if (chipThing == null) return null;
 
-            // 4. 计算武器世界位置（复用现有的BuildEntry逻辑）
+            // 4. 计算武器世界位置（使用缓存的drawLoc，而非DrawPos）
             bool isLeft = chipSide == SlotSide.LeftHand;
             var weaponEntry = CompTriggerBody.BuildEntry(config, chipThing, CasterPawn.Rotation, isLeft);
-            Vector3 weaponWorldPos = CasterPawn.DrawPos + weaponEntry.drawOffset;
 
-            // 5. 计算武器总旋转角度 = 瞄准角度 + 配置角度
-            float totalAngle = aimAngle + weaponEntry.angle;
+            // 使用triggerComp.lastDrawLoc（武器实际绘制基准点，包含动画偏移）
+            // 注意：lastDrawLoc ≠ CasterPawn.DrawPos，差值可达0.3m
+            Vector3 weaponWorldPos = triggerComp.lastDrawLoc + weaponEntry.drawOffset;
 
-            // 6. 使用四元数旋转将枪口偏移从局部坐标系转换到世界坐标系
-            Quaternion weaponRotation = Quaternion.AngleAxis(totalAngle, Vector3.up);
-            Vector3 muzzleWorldOffset = weaponRotation * localMuzzleOffset;
+            // 5. 同步绘制代码的翻转状态，修正枪口X偏移
+            // 绘制代码在 aimAngle∈(200°,340°) 时切换 plane10Flip（贴图水平翻转）
+            // 注意：手侧翻转（entry.flipHorizontal）只改变枪托朝向，不改变枪管方向，
+            //       因此不影响枪口X方向，不参与此处判断。
+            bool aimFlip = aimAngle > 200f && aimAngle < 340f;
+            if (aimFlip)
+                localMuzzleOffset.x = -localMuzzleOffset.x;
 
-            // 7. 枪口世界坐标 = 武器世界坐标 + 枪口世界偏移
+            // 6. 使用aimAngle旋转muzzleOffset（枪口沿目标方向偏移，而非武器图形朝向）
+            // drawAngle = aimAngle - 90° + entry.angle，包含图形旋转偏移，不适合用于枪口计算
+            Quaternion aimRotation = Quaternion.AngleAxis(aimAngle, Vector3.up);
+            Vector3 muzzleWorldOffset = aimRotation * localMuzzleOffset;
+
+            // 6. 枪口世界坐标 = 武器世界坐标 + 枪口世界偏移
             Vector3 muzzlePos = weaponWorldPos + muzzleWorldOffset;
 
-            // 8. 开发模式下输出诊断信息
+            // 7. 开发模式下输出诊断信息
             if (Prefs.DevMode)
             {
+                float drawAngle = CalculateWeaponDrawAngle(aimAngle, weaponEntry, base.EquipmentSource.def.equippedAngleOffset);
                 Log.Message($"[BDP.Muzzle] {chipSide}: weaponPos={weaponWorldPos}, " +
                     $"muzzleOffset={localMuzzleOffset}, aimAngle={aimAngle:F1}, " +
-                    $"totalAngle={totalAngle:F1}, muzzlePos={muzzlePos}");
+                    $"aimFlip={aimFlip}, entryFlip={weaponEntry.flipHorizontal}, " +
+                    $"drawAngle={drawAngle:F1}, muzzleWorldOffset={muzzleWorldOffset}, muzzlePos={muzzlePos}");
             }
 
             return muzzlePos;
@@ -1001,6 +1063,42 @@ namespace BDP.Trigger
         // ── 范围指示器支持 ──
 
         /// <summary>
+        /// 计算武器实际绘制角度，与Patch_DrawEquipmentAiming_Weapon.DrawEntry逻辑完全一致。
+        /// 用于枪口位置计算时的旋转，确保与贴图对齐。
+        /// </summary>
+        private static float CalculateWeaponDrawAngle(float aimAngle, WeaponDrawEntry entry, float equippedAngleOffset)
+        {
+            float angle = aimAngle - 90f;
+            bool isFlipMesh;
+
+            if (aimAngle > 20f && aimAngle < 160f)
+            {
+                isFlipMesh = false;
+                angle += equippedAngleOffset;
+            }
+            else if (aimAngle > 200f && aimAngle < 340f)
+            {
+                isFlipMesh = true;
+                angle -= 180f;
+                angle -= equippedAngleOffset;
+            }
+            else
+            {
+                isFlipMesh = false;
+                angle += equippedAngleOffset;
+            }
+
+            // 叠加芯片配置角度（flipMesh时取反，与DrawEntry一致）
+            angle += isFlipMesh ? -entry.angle : entry.angle;
+
+            // flipHorizontal时对angle取反
+            if (entry.flipHorizontal)
+                angle = -angle;
+
+            return angle;
+        }
+
+        /// <summary>
         /// 重写 DrawHighlight 方法，委托给管线的 AimRenderers。
         /// 此方法由 Targeter 在瞄准阶段自动调用。
         /// </summary>
@@ -1047,6 +1145,72 @@ namespace BDP.Trigger
             foreach (var renderer in shotPipeline.AimRenderers)
             {
                 renderer.RenderTargeting(session, target);
+            }
+        }
+
+        /// <summary>
+        /// 绘制所有关键位置的彩色标记点（可视化调试）
+        /// </summary>
+        /// <param name="pawnPos">小人中心位置</param>
+        /// <param name="weaponPos">武器位置</param>
+        /// <param name="muzzlePos">枪口位置</param>
+        /// <param name="firePos">实际开枪位置</param>
+        /// <param name="isLeftHand">是否为左手武器</param>
+        private void DrawAllPositionMarkers(Vector3 pawnPos, Vector3 weaponPos, Vector3 muzzlePos, Vector3 firePos, bool isLeftHand)
+        {
+            if (caster?.Map == null) return;
+
+            // 定义颜色方案
+            Color pawnColor = new Color(1f, 1f, 0f, 0.9f);      // 黄色 - 小人位置（共享）
+            Color weaponColor = new Color(0f, 1f, 0f, 0.9f);    // 绿色 - 武器位置
+            Color muzzleColor = isLeftHand
+                ? new Color(0.2f, 0.5f, 1f, 0.9f)               // 蓝色 - 左手枪口
+                : new Color(1f, 0.3f, 0.2f, 0.9f);              // 红色 - 右手枪口
+            Color fireColor = new Color(1f, 0.6f, 0f, 0.9f);    // 橙色 - 开枪位置
+
+            // 绘制各个位置点
+            DrawPositionMarker(pawnPos, pawnColor, 0.4f);       // 小人位置稍大
+            DrawPositionMarker(weaponPos, weaponColor, 0.3f);   // 武器位置
+            DrawPositionMarker(muzzlePos, muzzleColor, 0.35f);  // 枪口位置稍大（重点）
+            DrawPositionMarker(firePos, fireColor, 0.3f);       // 开枪位置
+        }
+
+        /// <summary>
+        /// 在指定位置绘制单个彩色标记点
+        /// </summary>
+        /// <param name="position">位置</param>
+        /// <param name="color">颜色</param>
+        /// <param name="scale">缩放大小</param>
+        private void DrawPositionMarker(Vector3 position, Color color, float scale)
+        {
+            if (caster?.Map == null) return;
+
+            try
+            {
+                // 使用 Mote_PowerBeam 作为标记（简单的光点效果）
+                Mote mote = (Mote)ThingMaker.MakeThing(ThingDefOf.Mote_PowerBeam);
+                if (mote != null)
+                {
+                    mote.exactPosition = position;
+                    mote.Scale = scale;
+                    mote.rotationRate = 0f;
+                    mote.instanceColor = color;
+
+                    GenSpawn.Spawn(mote, position.ToIntVec3(), caster.Map);
+
+                    // 设置生命周期：120 tick (约2秒)
+                    // 注意：这些属性需要在Spawn之后设置才有效
+                    if (mote.def.mote != null)
+                    {
+                        mote.def.mote.fadeInTime = 0f;
+                        mote.def.mote.solidTime = 1.8f;
+                        mote.def.mote.fadeOutTime = 0.2f;
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warning($"[BDP.Muzzle.Visual] 绘制标记点失败: {ex.Message}");
             }
         }
     }
