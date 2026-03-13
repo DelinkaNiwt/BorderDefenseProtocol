@@ -4,7 +4,7 @@
   <!-- ══════════════════════════════════════════════════════
        BDP_Bullet_Normal — 普通弹（小行星芯片使用）
        使用电荷步枪贴图 + 拖尾效果
-       伤害9，护甲穿透0.28，速度105
+       伤害9，护甲穿透0.28，速度120
        ══════════════════════════════════════════════════════ -->
   <ThingDef ParentName="BaseBullet">
     <defName>BDP_Bullet_Normal</defName>
@@ -18,7 +18,7 @@
       <damageDef>Bullet</damageDef>
       <damageAmountBase>9</damageAmountBase>
       <armorPenetrationBase>0.28</armorPenetrationBase>
-      <speed>105</speed>
+      <speed>120</speed>
     </projectile>
     <modExtensions>
       <li Class="BDP.Projectiles.Config.BeamTrailConfig">
@@ -97,7 +97,7 @@
       </li>
       <li Class="BDP.Trigger.AreaIndicatorConfig">
         <radiusSource>Explosion</radiusSource>
-        <color>(1.0, 0.3, 0.3, 0.35)</color>
+        <color>(1, 1, 1, 0.35)</color> <!-- 原版默认白色 -->
       </li>
     </modExtensions>
   </ThingDef>
@@ -136,7 +136,7 @@
       </li>
       <li Class="BDP.Trigger.AreaIndicatorConfig">
         <radiusSource>Explosion</radiusSource>
-        <color>(1.0, 0.3, 0.3, 0.35)</color>
+        <color>(1, 1, 1, 0.35)</color> <!-- 原版默认白色 -->
       </li>
     </modExtensions>
   </ThingDef>

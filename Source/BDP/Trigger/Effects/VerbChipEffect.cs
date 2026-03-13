@@ -38,6 +38,56 @@ namespace BDP.Trigger
             }
 
             var verbs = new List<VerbProperties> { cfg.primaryVerbProps };
+
+            // Bug修复：近战Verb需要从melee.tools中提取伤害值设置到VerbProperties
+            if (cfg.melee?.tools != null && cfg.melee.tools.Count > 0)
+            {
+                var firstTool = cfg.melee.tools[0];
+                if (cfg.primaryVerbProps.meleeDamageBaseAmount == 0 && firstTool.power > 0)
+                {
+                    // 创建VerbProperties的副本并设置伤害值
+                    var verbCopy = new VerbProperties();
+                    // 复制所有字段
+                    verbCopy.verbClass = cfg.primaryVerbProps.verbClass;
+                    verbCopy.hasStandardCommand = cfg.primaryVerbProps.hasStandardCommand;
+                    verbCopy.warmupTime = cfg.primaryVerbProps.warmupTime;
+                    verbCopy.range = cfg.primaryVerbProps.range;
+                    verbCopy.burstShotCount = cfg.primaryVerbProps.burstShotCount;
+                    verbCopy.ticksBetweenBurstShots = cfg.primaryVerbProps.ticksBetweenBurstShots;
+                    verbCopy.defaultCooldownTime = cfg.primaryVerbProps.defaultCooldownTime;
+                    verbCopy.isPrimary = cfg.primaryVerbProps.isPrimary;
+                    verbCopy.label = cfg.primaryVerbProps.label;
+
+                    // 设置近战伤害值（从tool中提取）
+                    verbCopy.meleeDamageBaseAmount = (int)firstTool.power;
+                    verbCopy.meleeDamageDef = firstTool.capacities?.FirstOrDefault()?.VerbsProperties?.FirstOrDefault()?.meleeDamageDef;
+
+                    // 如果没有从capacity获取到damageDef，使用默认的Blunt
+                    if (verbCopy.meleeDamageDef == null)
+                    {
+                        // 根据capacity类型推断damageDef
+                        var capacity = firstTool.capacities?.FirstOrDefault();
+                        if (capacity != null)
+                        {
+                            if (capacity.defName == "Cut" || capacity.defName == "Stab")
+                                verbCopy.meleeDamageDef = DamageDefOf.Cut;
+                            else
+                                verbCopy.meleeDamageDef = DamageDefOf.Blunt;
+                        }
+                        else
+                        {
+                            verbCopy.meleeDamageDef = DamageDefOf.Blunt;
+                        }
+                    }
+
+                    verbs = new List<VerbProperties> { verbCopy };
+
+                    if (Prefs.DevMode)
+                        Log.Message($"[BDP] VerbChipEffect: 从tool提取近战伤害值: power={firstTool.power}, " +
+                            $"meleeDamageDef={verbCopy.meleeDamageDef?.defName ?? "null"}");
+                }
+            }
+
             triggerComp.SetSideVerbs(side, verbs, cfg.melee?.tools);
 
             // v5.0：RebuildVerbs已搬迁至CompTriggerBody

@@ -147,10 +147,13 @@ namespace BDP.Trigger
                 return false;
             }
 
-            // 引擎时序修复：清除burst间的Stance_Cooldown
-            // 原因：VerbsTick()先于StanceTrackerTick()，Stance_Cooldown还剩1tick未过期
-            if (pawn.stances.curStance is Stance_Cooldown)
+            // Bug修复：清除任何导致FullBodyBusy的Stance（包括Warmup和Cooldown）
+            // 原因：TryCastShot()被调用时，Stance_Warmup可能还没有被清除，导致FullBodyBusy=True
+            //       base.TryCastShot()检查FullBodyBusy，如果为true则直接返回false
+            if (pawn.stances.FullBodyBusy)
+            {
                 pawn.stances.SetStance(new Stance_Mobile());
+            }
 
             // 根据hitIndex确定当前侧别和芯片
             SlotSide side = GetSideForHitIndex();
@@ -165,7 +168,7 @@ namespace BDP.Trigger
             //       tool也被用于战斗日志的bodyPartGroup和label
             EnsureToolAndManeuver(triggerComp, side);
 
-            base.TryCastShot();
+            bool baseResult = base.TryCastShot();
 
             // Bug7修复：burst期间始终返回true，防止miss/dodge取消整个burst。
             // 原因：base.TryCastShot()在miss/dodge时返回false，
@@ -298,7 +301,9 @@ namespace BDP.Trigger
         protected override DamageWorker.DamageResult ApplyMeleeDamageToTarget(LocalTargetInfo target)
         {
             if (currentChipDef == null)
+            {
                 return base.ApplyMeleeDamageToTarget(target);
+            }
 
             var result = new DamageWorker.DamageResult();
             float damage = verbProps.AdjustedMeleeDamageAmount(this, CasterPawn);
@@ -306,6 +311,22 @@ namespace BDP.Trigger
             DamageDef damageDef = verbProps.meleeDamageDef;
             BodyPartGroupDef bodyPartGroup = null;
             HediffDef hediffDef = null;
+
+            // Bug修复：如果meleeDamageDef为null，从tool的capacity推断
+            if (damageDef == null && tool?.capacities != null && tool.capacities.Count > 0)
+            {
+                var capacity = tool.capacities[0];
+                if (capacity.defName == "Cut" || capacity.defName == "Stab")
+                    damageDef = DamageDefOf.Cut;
+                else
+                    damageDef = DamageDefOf.Blunt;
+            }
+
+            // 最后的兜底：如果还是null，使用Blunt
+            if (damageDef == null)
+            {
+                damageDef = DamageDefOf.Blunt;
+            }
 
             damage = Rand.Range(damage * 0.8f, damage * 1.2f);
             if (CasterIsPawn)

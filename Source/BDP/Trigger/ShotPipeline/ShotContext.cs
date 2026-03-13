@@ -27,6 +27,9 @@ namespace BDP.Trigger.ShotPipeline
         public FiringPattern FiringPattern { get; private set; }
         public VerbProperties VerbProps { get; private set; }
 
+        // 投射物定义（明确字段，避免模块从多源查找）
+        public ThingDef ProjectileDef { get; private set; }
+
         // ══════════════════════════════════════════
         //  构造函数
         // ══════════════════════════════════════════
@@ -41,7 +44,8 @@ namespace BDP.Trigger.ShotPipeline
             Verb_BDPRangedBase verb,
             VerbChipConfig chipConfig,
             SlotSide? chipSide,
-            Thing chipThing)
+            Thing chipThing,
+            ThingDef projectileDef)
         {
             Caster = caster;
             TriggerComp = triggerComp;
@@ -57,6 +61,7 @@ namespace BDP.Trigger.ShotPipeline
             GuidedConfig = chipConfig?.ranged?.guided;
             FiringPattern = chipConfig?.primaryFiringPattern ?? FiringPattern.Sequential;
             VerbProps = verb?.verbProps;
+            ProjectileDef = projectileDef;
         }
     }
 }

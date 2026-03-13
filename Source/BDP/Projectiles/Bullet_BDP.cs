@@ -170,9 +170,65 @@ namespace BDP.Projectiles
             BDP.Trigger.ShotPipeline.FireResult fireResult,
             ObstacleRouteResult? routeResult)
         {
-            // 1. 注入手动锚点路径（优先级最高）
+            Log.Message($"[BDP-Route] InjectShotData called for Bullet#{thingIDNumber}");
+            Log.Message($"  HasGuidedPath: {aimResult?.HasGuidedPath}");
+            Log.Message($"  RouteResult.HasValue: {routeResult.HasValue}");
+
+            if (routeResult.HasValue)
+            {
+                var route = routeResult.Value;
+                Log.Message($"  RouteResult.IsValid: {route.IsValid}");
+                Log.Message($"  LeftAnchors: {(route.LeftAnchors != null ? route.LeftAnchors.Count.ToString() : "NULL")}");
+                Log.Message($"  RightAnchors: {(route.RightAnchors != null ? route.RightAnchors.Count.ToString() : "NULL")}");
+            }
+
             if (aimResult?.HasGuidedPath == true)
             {
+                Log.Message($"  AnchorPath count: {aimResult.AnchorPath?.Count ?? 0}");
+            }
+
+            // 优先级1：自动绕行路径的左右分配（当存在双路径时）
+            // 这样可以确保同一轮内的子弹分散到左右两侧
+            if (routeResult.HasValue && routeResult.Value.IsValid)
+            {
+                var route = routeResult.Value;
+
+                // 两侧都可绕行时交替分配
+                if (route.LeftAnchors != null && route.RightAnchors != null)
+                {
+                    // 使用弹道ID的奇偶性决定左右侧
+                    bool useLeft = (thingIDNumber % 2 == 0);
+                    var anchors = useLeft ? route.LeftAnchors : route.RightAnchors;
+
+                    Log.Message($"[BDP-Route] Bullet#{thingIDNumber} DualPath=true Selected={(useLeft ? "Left" : "Right")} " +
+                        $"LeftCount={route.LeftAnchors.Count} RightCount={route.RightAnchors.Count}");
+
+                    TryInitGuidedFlight(
+                        anchors,
+                        aimResult?.FinalTarget ?? default,
+                        fireResult?.SpreadRadius ?? 0f);
+                    return;
+                }
+
+                // 只有单侧路径时使用该路径
+                var singleAnchors = route.LeftAnchors ?? route.RightAnchors;
+                if (singleAnchors != null && singleAnchors.Count > 0)
+                {
+                    string side = route.LeftAnchors != null ? "Left" : "Right";
+                    Log.Message($"[BDP-Route] Bullet#{thingIDNumber} DualPath=false Selected={side} Count={singleAnchors.Count}");
+
+                    TryInitGuidedFlight(
+                        singleAnchors,
+                        aimResult?.FinalTarget ?? default,
+                        fireResult?.SpreadRadius ?? 0f);
+                    return;
+                }
+            }
+
+            // 优先级2：手动锚点路径（当没有自动路由或自动路由无效时）
+            if (aimResult?.HasGuidedPath == true)
+            {
+                Log.Message($"[BDP-Route] Using manual AnchorPath (no valid auto-route)");
                 TryInitGuidedFlight(
                     aimResult.AnchorPath,
                     aimResult.FinalTarget,
@@ -180,35 +236,7 @@ namespace BDP.Projectiles
                 return;
             }
 
-            // 2. 注入自动绕行路径（无手动锚点时）
-            if (routeResult.HasValue && routeResult.Value.IsValid)
-            {
-                var route = routeResult.Value;
-                List<IntVec3> anchors;
-
-                // 两侧都可绕行时交替分配（简化版，不维护计数器）
-                if (route.LeftAnchors != null && route.RightAnchors != null)
-                {
-                    // 使用弹道ID的奇偶性决定左右侧
-                    anchors = (thingIDNumber % 2 == 0)
-                        ? route.LeftAnchors
-                        : route.RightAnchors;
-                }
-                else
-                {
-                    anchors = route.LeftAnchors ?? route.RightAnchors;
-                }
-
-                if (anchors != null && anchors.Count > 0)
-                {
-                    TryInitGuidedFlight(
-                        anchors,
-                        aimResult?.FinalTarget ?? default,
-                        fireResult?.SpreadRadius ?? 0f);
-                }
-            }
-
-            // 3. 无引导路径时，弹道保持直射（无需额外操作）
+            // 优先级3：无引导路径时，弹道保持直射
         }
 
         /// <summary>

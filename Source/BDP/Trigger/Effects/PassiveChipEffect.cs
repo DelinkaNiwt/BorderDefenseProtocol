@@ -1,7 +1,6 @@
-using BDP.Trigger;
 using Verse;
 
-namespace BDP.Combat
+namespace BDP.Trigger
 {
     /// <summary>
     /// 被动芯片效果基类——激活时不执行任何操作，效果由其他系统检测和触发。

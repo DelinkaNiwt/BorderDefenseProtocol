@@ -10,41 +10,27 @@ namespace BDP.Trigger.Shield
     public class Hediff_BDPShield : HediffWithComps
     {
         /// <summary>
-        /// 重写Label属性，根据Severity返回不同名称
-        /// Severity>=2：使用Props.stackedLabel（如果配置了）
-        /// Severity=1：使用HediffDef的label
+        /// 重写Label属性，优先使用当前stage的label
+        /// 如果stage没有定义label，则回退到HediffDef的label
         /// </summary>
         public override string Label
         {
             get
             {
-                // 获取护盾组件配置
-                var shieldComp = this.TryGetComp<HediffComp_BDPShield>();
-                if (shieldComp != null && Severity >= 2f)
+                // 优先使用当前stage的label
+                if (CurStage?.label != null)
                 {
-                    // Severity>=2时，使用stackedLabel（如果配置了）
-                    if (!string.IsNullOrEmpty(shieldComp.Props.stackedLabel))
-                    {
-                        return shieldComp.Props.stackedLabel;
-                    }
+                    return CurStage.label;
                 }
 
-                // 默认使用HediffDef的label
+                // 回退到HediffDef的label
                 return def.label ?? "护盾";
             }
         }
 
         /// <summary>
-        /// 重写LabelInBrackets，显示激活芯片数量
-        /// 例如："2芯片"
+        /// 重写LabelInBrackets，不显示额外信息
         /// </summary>
-        public override string LabelInBrackets
-        {
-            get
-            {
-                int chipCount = (int)Severity;
-                return $"{chipCount}芯片";
-            }
-        }
+        public override string LabelInBrackets => null;
     }
 }

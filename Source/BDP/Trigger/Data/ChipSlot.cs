@@ -27,6 +27,12 @@ namespace BDP.Trigger
         public bool isActive;
 
         /// <summary>
+        /// 当前激活的形态索引（v4.0 ChipMode系统）。
+        /// 默认0（第一个形态）。切换形态时更新此值。
+        /// </summary>
+        public int currentModeIndex;
+
+        /// <summary>
         /// 槽位是否被禁用（手部/手臂被毁时设置）。
         /// 禁用状态下芯片保留在槽位但不可激活，战斗体解除时自动恢复。
         /// </summary>
@@ -41,6 +47,7 @@ namespace BDP.Trigger
             this.side = side;
             this.loadedChip = null;
             this.isActive = false;
+            this.currentModeIndex = 0;
             this.isDisabled = false;
         }
 
@@ -50,6 +57,7 @@ namespace BDP.Trigger
             Scribe_Values.Look(ref side, "side");
             Scribe_Deep.Look(ref loadedChip, "loadedChip");
             Scribe_Values.Look(ref isActive, "isActive");
+            Scribe_Values.Look(ref currentModeIndex, "currentModeIndex", 0);
             Scribe_Values.Look(ref isDisabled, "isDisabled");
 
             // 读档后校验不变量⑥：isActive=true时loadedChip必须非null
@@ -61,6 +69,9 @@ namespace BDP.Trigger
         }
 
         public override string ToString()
-            => $"[{side}#{index} chip={loadedChip?.LabelShortCap ?? "empty"} active={isActive} disabled={isDisabled}]";
+            => $"[{side}#{index} chip={loadedChip?.LabelShortCap ?? "empty"} active={isActive} mode={currentModeIndex} disabled={isDisabled}]";
+
+        /// <summary>获取当前形态索引（用于HediffChipEffect等需要根据形态调整效果的场景）。</summary>
+        public int GetCurrentModeIndex() => currentModeIndex;
     }
 }

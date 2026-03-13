@@ -3,6 +3,7 @@ using BDP.Trigger.ShotPipeline;
 using RimWorld;
 using UnityEngine;
 using Verse;
+using Verse.Sound;
 
 namespace BDP.Trigger
 {
@@ -87,6 +88,49 @@ namespace BDP.Trigger
             return leftCfg?.GetPrimaryProjectileDef()
                 ?? rightCfg?.GetPrimaryProjectileDef()
                 ?? base.GetAutoRouteProjectileDef();
+        }
+
+        /// <summary>
+        /// 获取上下文用的投射物定义（重写以支持双侧攻击）。
+        /// 优先返回有范围指示器配置的投射物（用于范围指示器显示）。
+        /// </summary>
+        protected override ThingDef GetContextProjectileDef()
+        {
+            // 瞄准阶段：始终遍历左右两侧投射物，优先返回有范围指示器配置的
+            // 不使用缓存，确保每次都能正确选择投射物
+            var tc = GetTriggerComp();
+            if (tc != null)
+            {
+                var leftCfg = tc.GetActiveSlot(SlotSide.LeftHand)
+                    ?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
+                var rightCfg = tc.GetActiveSlot(SlotSide.RightHand)
+                    ?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
+
+                var leftProjectile = leftCfg?.GetPrimaryProjectileDef();
+                var rightProjectile = rightCfg?.GetPrimaryProjectileDef();
+
+                // 检查哪个投射物有范围指示器配置
+                bool leftHasIndicator = leftProjectile?.HasModExtension<BDP.Trigger.AreaIndicatorConfig>() ?? false;
+                bool rightHasIndicator = rightProjectile?.HasModExtension<BDP.Trigger.AreaIndicatorConfig>() ?? false;
+
+                // 优先返回有范围指示器配置的投射物
+                if (leftHasIndicator && !rightHasIndicator)
+                    return leftProjectile;
+                if (rightHasIndicator && !leftHasIndicator)
+                    return rightProjectile;
+
+                // 如果都有或都没有，回退到引导优先逻辑
+                if (leftCfg?.ranged?.guided != null)
+                    return leftProjectile ?? base.GetAutoRouteProjectileDef();
+                if (rightCfg?.ranged?.guided != null)
+                    return rightProjectile ?? base.GetAutoRouteProjectileDef();
+
+                // 最后回退到任意一侧
+                return leftProjectile ?? rightProjectile;
+            }
+
+            // 回退到运行时获取
+            return GetAutoRouteProjectileDef();
         }
 
         protected override void OnProjectileLaunched(Projectile proj)
@@ -197,8 +241,11 @@ namespace BDP.Trigger
             rightSimultaneousFired = false;
 
             // 双侧模式：保存Thing目标（用于非引导侧恢复）
+            // 如果新目标不是Thing，清空savedThingTarget，避免使用旧目标
             if (castTarg.HasThing)
                 savedThingTarget = castTarg;
+            else
+                savedThingTarget = LocalTargetInfo.Invalid;
 
             bool result = base.TryStartCastOn(castTarg, destTarg, surpriseAttack,
                 canHitNonTargetPawns, preventFriendlyFire, nonInterruptingSelfCast);
@@ -220,6 +267,28 @@ namespace BDP.Trigger
         /// </summary>
         protected override bool ExecuteFire(ShotSession session)
         {
+            // 诊断日志：检查投射物定义
+            if (Prefs.DevMode && dualBurstIndex == 0)
+            {
+                var triggerComp = GetTriggerComp();
+                var leftSlot = triggerComp?.GetActiveSlot(SlotSide.LeftHand);
+                var rightSlot = triggerComp?.GetActiveSlot(SlotSide.RightHand);
+                var leftCfg = leftSlot?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
+                var rightCfg = rightSlot?.loadedChip?.def?.GetModExtension<VerbChipConfig>();
+
+                string leftChipName = leftSlot?.loadedChip?.def?.defName ?? "null";
+                string rightChipName = rightSlot?.loadedChip?.def?.defName ?? "null";
+                string leftProjName = leftProjectileDef?.defName ?? "null";
+                string rightProjName = rightProjectileDef?.defName ?? "null";
+                string verbProjName = verbProps.defaultProjectile?.defName ?? "null";
+
+                Log.Message($"[BDP Dual诊断] ExecuteFire开始: " +
+                    $"leftChip={leftChipName}, rightChip={rightChipName}, " +
+                    $"leftProjectile={leftProjName}, rightProjectile={rightProjName}, " +
+                    $"leftMelee={leftCfg?.melee != null}, rightMelee={rightCfg?.melee != null}, " +
+                    $"verbProps.defaultProjectile={verbProjName}");
+            }
+
             if (dualBurstIndex == 0)
             {
                 InitDualBurst();
@@ -351,19 +420,22 @@ namespace BDP.Trigger
 
             bool anyHit = false;
             ThingDef originalProjectile = verbProps.defaultProjectile;
-            float spread = Mathf.Max(leftCfg.ranged?.volleySpreadRadius ?? 0f, rightCfg.ranged?.volleySpreadRadius ?? 0f);
+            // 各侧使用自己的散布半径，互不影响
+            float leftSpread = leftCfg.ranged?.volleySpreadRadius ?? 0f;
+            float rightSpread = rightCfg.ranged?.volleySpreadRadius ?? 0f;
 
             try
             {
-                // 左侧齐射
+                // 左侧齐射：临时换成左手音效（引擎在 TryCastNextBurstShot 里统一播放）
                 if (leftWillFire)
                 {
+                    chipSide = SlotSide.LeftHand; // 设置当前发射侧
                     currentShotHasPath = hasManualAnchors && leftHasPath;
                     if (leftProjectileDef != null) verbProps.defaultProjectile = leftProjectileDef;
                     bool needRestoreL = hasManualAnchors && !currentShotHasPath && savedThingTarget.IsValid;
                     if (needRestoreL) currentTarget = savedThingTarget;
 
-                    if (FireVolleyLoop(leftCount, spread, leftSlot.loadedChip))
+                    if (FireVolleyLoop(leftCount, leftSpread, leftSlot.loadedChip))
                         anyHit = true;
 
                     if (needRestoreL && activeSession?.AimResult != null)
@@ -373,12 +445,13 @@ namespace BDP.Trigger
                 // 右侧齐射
                 if (rightWillFire)
                 {
+                    chipSide = SlotSide.RightHand; // 设置当前发射侧
                     currentShotHasPath = hasManualAnchors && rightHasPath;
                     if (rightProjectileDef != null) verbProps.defaultProjectile = rightProjectileDef;
                     bool needRestoreR = hasManualAnchors && !currentShotHasPath && savedThingTarget.IsValid;
                     if (needRestoreR) currentTarget = savedThingTarget;
 
-                    if (FireVolleyLoop(rightCount, spread, rightSlot.loadedChip))
+                    if (FireVolleyLoop(rightCount, rightSpread, rightSlot.loadedChip))
                         anyHit = true;
 
                     if (needRestoreR && activeSession?.AimResult != null)
@@ -424,6 +497,8 @@ namespace BDP.Trigger
             ThingDef sideProjectile = side == SlotSide.LeftHand ? leftProjectileDef : rightProjectileDef;
             float spread = cfg.ranged?.volleySpreadRadius ?? 0f;
 
+            chipSide = side; // 设置当前发射侧
+
             bool anyHit = false;
             WithTargetRestore(() =>
             {
@@ -466,6 +541,8 @@ namespace BDP.Trigger
 
             Thing chipEquipment = slot.loadedChip;
             ThingDef sideProjectile = side == SlotSide.LeftHand ? leftProjectileDef : rightProjectileDef;
+
+            chipSide = side; // 设置当前发射侧（枪口位置计算依赖此字段）
 
             bool result = false;
             WithTargetRestore(() =>
@@ -539,14 +616,16 @@ namespace BDP.Trigger
             // 左侧LOS检查：如果不支持引导且无直视LOS，排除这一侧
             if (leftCfg != null && leftRemaining > 0 && leftCfg.ranged?.guided == null)
             {
-                if (!GenSight.LineOfSight(caster.Position, finalTargetCell, caster.Map))
+                bool leftLOS = GenSight.LineOfSight(caster.Position, finalTargetCell, caster.Map);
+                if (!leftLOS)
                     leftRemaining = 0;
             }
 
             // 右侧LOS检查：如果不支持引导且无直视LOS，排除这一侧
             if (rightCfg != null && rightRemaining > 0 && rightCfg.ranged?.guided == null)
             {
-                if (!GenSight.LineOfSight(caster.Position, finalTargetCell, caster.Map))
+                bool rightLOS = GenSight.LineOfSight(caster.Position, finalTargetCell, caster.Map);
+                if (!rightLOS)
                     rightRemaining = 0;
             }
 
@@ -555,6 +634,18 @@ namespace BDP.Trigger
 
             leftProjectileDef = leftCfg?.GetPrimaryProjectileDef();
             rightProjectileDef = rightCfg?.GetPrimaryProjectileDef();
+
+            // 诊断日志：检查配置和投射物
+            if (Prefs.DevMode)
+            {
+                Log.Message($"[BDP.Muzzle.Debug] InitDualBurst: " +
+                    $"leftCfg={leftCfg != null}, rightCfg={rightCfg != null}, " +
+                    $"leftPrimaryVerbProps={leftCfg?.primaryVerbProps != null}, " +
+                    $"rightPrimaryVerbProps={rightCfg?.primaryVerbProps != null}, " +
+                    $"leftProjectileDef={leftProjectileDef?.defName ?? "null"}, " +
+                    $"rightProjectileDef={rightProjectileDef?.defName ?? "null"}");
+            }
+
             leftHasPath = leftCfg?.ranged?.guided != null;
             rightHasPath = rightCfg?.ranged?.guided != null;
 

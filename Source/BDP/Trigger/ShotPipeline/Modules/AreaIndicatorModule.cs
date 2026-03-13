@@ -17,17 +17,35 @@ namespace BDP.Trigger.ShotPipeline.Modules
         /// </summary>
         public void RenderTargeting(ShotSession session, LocalTargetInfo mouseTarget)
         {
-            // 获取投射物定义
-            var projectileDef = session.Context.VerbProps?.defaultProjectile;
-            if (projectileDef == null) return;
+            // 获取投射物定义（从上下文直接读取）
+            var projectileDef = session.Context.ProjectileDef;
+            if (projectileDef == null)
+                return;
 
             // 获取指示器配置（三级优先级：投射物 > 芯片 > Verb）
             var indicatorConfig = GetAreaIndicatorConfig(session, projectileDef);
-            if (indicatorConfig == null) return;
+            if (indicatorConfig == null)
+                return;
+
+            // 目标不可视时的特殊处理：
+            // 检查投射物本身是否有引导能力（通过defName判断）
+            // 如果投射物没有引导能力，目标不可视时不显示范围指示器
+            var caster = session.Context.Caster;
+            bool hasDirectLOS = GenSight.LineOfSight(caster.Position, mouseTarget.Cell, caster.Map);
+            if (!hasDirectLOS)
+            {
+                // 检查投射物是否有引导能力（通过defName包含"Guided"判断）
+                bool projectileHasGuided = projectileDef.defName.Contains("Guided");
+
+                // 如果投射物没有引导能力，目标不可视时不显示范围指示器
+                if (!projectileHasGuided)
+                    return;
+            }
 
             // 计算实际半径
             float radius = GetIndicatorRadius(projectileDef, indicatorConfig);
-            if (radius <= 0f) return;
+            if (radius <= 0f)
+                return;
 
             // 创建临时配置（使用计算后的半径）
             var tempConfig = new AreaIndicatorConfig
@@ -40,7 +58,6 @@ namespace BDP.Trigger.ShotPipeline.Modules
             };
 
             // 委托给指示器系统绘制
-            var caster = session.Context.Caster;
             _circleIndicator.Draw(mouseTarget.Cell, caster.Map, tempConfig);
         }
 

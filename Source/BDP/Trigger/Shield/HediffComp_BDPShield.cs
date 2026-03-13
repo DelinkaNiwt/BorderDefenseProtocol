@@ -28,13 +28,21 @@ namespace BDP.Trigger.Shield
 
         /// <summary>
         /// 护盾是否激活
-        /// 条件：pawn存在、已生成、未死亡、未倒地
+        /// 条件：pawn存在、已生成、未死亡、未倒地、且护盾功能启用
         /// </summary>
-        private bool IsShieldActive =>
-            Pawn != null &&
-            Pawn.Spawned &&
-            !Pawn.Dead &&
-            !Pawn.Downed;
+        private bool IsShieldActive
+        {
+            get
+            {
+                if (Pawn == null || !Pawn.Spawned || Pawn.Dead || Pawn.Downed)
+                    return false;
+
+                // 检查当前配置的护盾成功率
+                // 如果Severity>=2且stackedBlockChance=0，说明护盾被禁用（如重刃模式）
+                float currentBlockChance = parent.Severity >= 2f ? Props.stackedBlockChance : Props.blockChance;
+                return currentBlockChance > 0f;
+            }
+        }
 
         // ==================== 绘制 ====================
 
@@ -90,22 +98,26 @@ namespace BDP.Trigger.Shield
                 return false;
             }
 
-            // 3. 方向判定
+            // 3. 判断是否是近战伤害（用于后续应用不同的倍率）
+            bool isMelee = dinfo.Def.hasForcefulImpact && !dinfo.Def.isRanged;
+
+            // 4. 方向判定
             if (!CheckAngle(dinfo.Angle))
             {
                 Log.Message($"[BDP-Shield] {Pawn.LabelShort} 方向判定失败");
                 return false;
             }
 
-            // 4. 成功率判定
-            if (!CheckBlockChance())
+            // 5. 成功率判定（传入是否近战）
+            if (!CheckBlockChance(isMelee))
             {
-                Log.Warning($"[BDP-Shield] {Pawn.LabelShort} 成功率判定失败（{Props.blockChance * 100}%成功率）");
+                float actualChance = GetActualBlockChance(isMelee);
+                Log.Warning($"[BDP-Shield] {Pawn.LabelShort} 成功率判定失败（{actualChance * 100:F1}%成功率，{(isMelee ? "近战" : "远程")}）");
                 return false;
             }
 
-            // 5. Trion消耗
-            if (!ConsumeTrion(dinfo.Amount))
+            // 6. Trion消耗（传入是否近战）
+            if (!ConsumeTrion(dinfo.Amount, isMelee))
             {
                 // Trion不足，护盾失效
                 Log.Warning($"[BDP-Shield] {Pawn.LabelShort} Trion不足，护盾失效");
@@ -113,13 +125,13 @@ namespace BDP.Trigger.Shield
                 return false;
             }
 
-            // 6. 吸收伤害
+            // 7. 吸收伤害
             dinfo.SetAmount(0f);
 
-            // 7. 播放特效
+            // 8. 播放特效
             PlayBlockEffect(dinfo);
 
-            Log.Message($"[BDP-Shield] {Pawn.LabelShort} 护盾成功抵挡！");
+            Log.Message($"[BDP-Shield] {Pawn.LabelShort} 护盾成功抵挡{(isMelee ? "近战" : "远程")}攻击！");
             return true;
         }
 
@@ -189,40 +201,66 @@ namespace BDP.Trigger.Shield
         /// <summary>
         /// 成功率判定：随机检查是否成功抵挡
         /// v2.0：根据parent.Severity动态选择成功率
+        /// v3.0：支持近战成功率倍率
         /// </summary>
+        /// <param name="isMelee">是否是近战伤害</param>
         /// <returns>true=成功抵挡，false=抵挡失败</returns>
-        private bool CheckBlockChance()
+        private bool CheckBlockChance(bool isMelee = false)
         {
-            float severity = parent.Severity;
-
-            // 根据Severity选择成功率
-            float actualChance = (severity >= 2f) ? Props.stackedBlockChance : Props.blockChance;
+            float actualChance = GetActualBlockChance(isMelee);
 
             // 100%成功率，直接返回true
             if (actualChance >= 1f) return true;
 
             // 随机判定
             bool success = Rand.Value < actualChance;
-            Log.Message($"[BDP-Shield] {Pawn.LabelShort} 成功率判定（Severity={severity}）: " +
-                       $"成功率={actualChance * 100}%, 结果={success}");
+            Log.Message($"[BDP-Shield] {Pawn.LabelShort} 成功率判定（Severity={parent.Severity}, {(isMelee ? "近战" : "远程")}）: " +
+                       $"成功率={actualChance * 100:F1}%, 结果={success}");
             return success;
+        }
+
+        /// <summary>
+        /// 获取实际成功率（考虑Severity和近战倍率）
+        /// </summary>
+        /// <param name="isMelee">是否是近战伤害</param>
+        /// <returns>实际成功率</returns>
+        private float GetActualBlockChance(bool isMelee)
+        {
+            float severity = parent.Severity;
+
+            // 根据Severity选择基础成功率
+            float baseChance = (severity >= 2f) ? Props.stackedBlockChance : Props.blockChance;
+
+            // 如果是近战，应用近战倍率
+            if (isMelee)
+            {
+                baseChance *= Props.meleeBlockChanceMultiplier;
+            }
+
+            return baseChance;
         }
 
         // ==================== Trion系统 ====================
 
         /// <summary>
         /// 消耗Trion
+        /// v3.0：支持近战Trion消耗倍率
         /// </summary>
         /// <param name="damageAmount">伤害值</param>
+        /// <param name="isMelee">是否是近战伤害</param>
         /// <returns>true=消耗成功，false=Trion不足</returns>
-        private bool ConsumeTrion(float damageAmount)
+        private bool ConsumeTrion(float damageAmount, bool isMelee = false)
         {
             // 获取Trion组件
             var trionComp = Pawn.GetComp<CompTrion>();
             if (trionComp == null) return false;
 
-            // 计算Trion消耗：伤害值 × 减免因子
+            // 计算Trion消耗：伤害值 × 基础倍率 × 近战倍率（如果是近战）
             float trionCost = damageAmount * Props.trionCostMultiplier;
+            if (isMelee)
+            {
+                trionCost *= Props.meleeTrionCostMultiplier;
+            }
 
             // 从可用量（Available）中消耗
             return trionComp.Consume(trionCost);

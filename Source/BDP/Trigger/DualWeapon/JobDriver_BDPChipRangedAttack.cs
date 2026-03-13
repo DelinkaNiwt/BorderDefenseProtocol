@@ -42,15 +42,11 @@ namespace BDP.Trigger
                     startedIncapacitated = p.Downed;
                 pawn.pather.StopDead();
             };
-            // ── 每tick调用：手动推进芯片verb的burst计时 ──
-            // 原因：芯片verb不在VerbTracker.AllVerbs中（v5.1设计），
-            //   引擎的VerbTracker.VerbsTick()不会调用它们的VerbTick()，
-            //   导致BurstingTick永远不被调用，burstShotCount>1的连射
-            //   在第1发后ticksToNextBurstShot永远不递减，state卡在Bursting。
-            attackToil.tickAction = delegate
-            {
-                job.verbToUse?.VerbTick();
-            };
+            // ── VerbTick由Patch_VerbTracker_VerbsTick统一驱动 ──
+            // 芯片verb不在VerbTracker.AllVerbs中（v5.1设计），
+            // 但Patch_VerbTracker_VerbsTick（v14.0）已在EquipmentTrackerTick时
+            // 通过TickChipVerbs()统一驱动所有芯片verb的VerbTick。
+            // 此处不再手动调用，避免同一tick内double-tick导致burst以2倍速发射。
             attackToil.tickIntervalAction = delegate
             {
                 // 目标无效或已销毁 → 结束

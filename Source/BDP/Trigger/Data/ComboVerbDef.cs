@@ -14,6 +14,7 @@ namespace BDP.Trigger
     /// 匹配规则：chipA和chipB的顺序无关（对称匹配），同ComboAbilityDef。
     ///
     /// v9.0变更：新增primaryVerbClass/secondaryVerbClass，废弃supportsVolley。
+    /// v19.0变更：新增iconPath，支持自定义组合技图标，默认使用Cube贴图。
     /// </summary>
     public class ComboVerbDef : Def
     {
@@ -25,6 +26,12 @@ namespace BDP.Trigger
 
         /// <summary>组合技发射的弹药ThingDef（如BDP_Bullet_Argus）。</summary>
         public ThingDef projectileDef;
+
+        /// <summary>
+        /// 组合技图标路径（相对于Textures目录）。
+        /// 为空时使用默认Cube贴图（Things/Trigger/Cube/cube）。
+        /// </summary>
+        public string iconPath;
 
         // ═══════════════════════════════════════════════════════
         // v9.0新增：显式Verb类型配置（推荐使用）

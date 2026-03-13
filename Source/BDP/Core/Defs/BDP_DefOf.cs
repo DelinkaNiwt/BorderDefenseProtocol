@@ -32,7 +32,7 @@ namespace BDP.Core
 
         // ── HediffDef（护盾系统） ──
         public static HediffDef BDP_Shield;
-        public static HediffDef BDP_ShieldFront;
+        public static HediffDef BDP_Chip_Raygust_Hediff;
 
         // 重构说明：
         // - BDP_CombatBodyPartDestroyed 已删除（使用原版 Hediff_MissingPart）
@@ -51,6 +51,7 @@ namespace BDP.Core
         // ── FleckDef（蚱蜢特效） ──
         public static FleckDef BDP_GrasshopperPlatform;
         public static FleckDef BDP_GrasshopperPulse;
+        public static FleckDef BDP_GrasshopperAirPuff;
 
         static BDP_DefOf()
         {

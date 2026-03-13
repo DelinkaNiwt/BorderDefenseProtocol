@@ -39,6 +39,24 @@
   </FleckDef>
 
   <!-- ========================================
+       蚱蜢飞行拖尾特效 - Fleck定义
+       ======================================== -->\n
+  <!-- 蚱蜢飞行气浪 - 复用原版AirPuff纹理，朝移动方向旋转 -->
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>BDP_GrasshopperAirPuff</defName>
+    <graphicData>
+      <texPath>Things/Mote/AirPuff</texPath>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.1</fadeInTime>
+    <solidTime>0.1</solidTime>
+    <fadeOutTime>0.25</fadeOutTime>
+    <growthRate>0.3</growthRate>
+    <rotateTowardsMoveDirection>true</rotateTowardsMoveDirection>
+  </FleckDef>
+
+  <!-- ========================================
        蚱蜢跳板特效 - Fleck定义
        ======================================== -->
 

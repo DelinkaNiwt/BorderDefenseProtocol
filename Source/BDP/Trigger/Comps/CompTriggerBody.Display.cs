@@ -667,13 +667,27 @@ namespace BDP.Trigger
 
             foreach (var slot in AllActiveSlots())
             {
+                // 读取芯片配置的StatModifier
                 var cfg = slot.loadedChip?.def.GetModExtension<ChipStatConfig>();
-                if (cfg?.equippedStatOffsets == null) continue;
-
-                foreach (var modifier in cfg.equippedStatOffsets)
+                if (cfg?.equippedStatOffsets != null)
                 {
-                    if (modifier.stat == stat)
-                        total += modifier.value;
+                    foreach (var modifier in cfg.equippedStatOffsets)
+                    {
+                        if (modifier.stat == stat)
+                            total += modifier.value;
+                    }
+                }
+
+                // v4.0：读取当前形态的StatModifier
+                var chipComp = slot.loadedChip?.TryGetComp<TriggerChipComp>();
+                var mode = chipComp?.GetCurrentMode(slot);
+                if (mode?.statOffsets != null)
+                {
+                    foreach (var modifier in mode.statOffsets)
+                    {
+                        if (modifier.stat == stat)
+                            total += modifier.value;
+                    }
                 }
             }
 
@@ -683,6 +697,7 @@ namespace BDP.Trigger
         /// <summary>
         /// 聚合所有激活芯片的stat乘算修正。
         /// RimWorld的StatWorker会调用此方法，将返回值乘到最终stat值上。
+        /// v4.0：支持形态StatModifier。
         /// </summary>
         public override float GetStatFactor(StatDef stat)
         {
@@ -690,13 +705,27 @@ namespace BDP.Trigger
 
             foreach (var slot in AllActiveSlots())
             {
+                // 读取芯片配置的StatModifier
                 var cfg = slot.loadedChip?.def.GetModExtension<ChipStatConfig>();
-                if (cfg?.equippedStatFactors == null) continue;
-
-                foreach (var modifier in cfg.equippedStatFactors)
+                if (cfg?.equippedStatFactors != null)
                 {
-                    if (modifier.stat == stat)
-                        total *= modifier.value;
+                    foreach (var modifier in cfg.equippedStatFactors)
+                    {
+                        if (modifier.stat == stat)
+                            total *= modifier.value;
+                    }
+                }
+
+                // v4.0：读取当前形态的StatModifier
+                var chipComp = slot.loadedChip?.TryGetComp<TriggerChipComp>();
+                var mode = chipComp?.GetCurrentMode(slot);
+                if (mode?.statFactors != null)
+                {
+                    foreach (var modifier in mode.statFactors)
+                    {
+                        if (modifier.stat == stat)
+                            total *= modifier.value;
+                    }
                 }
             }
 

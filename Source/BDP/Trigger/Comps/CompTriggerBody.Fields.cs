@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using BDP.Core;
 using RimWorld;
+using UnityEngine;
 using Verse;
 
 namespace BDP.Trigger
@@ -107,6 +108,13 @@ namespace BDP.Trigger
         /// 供Effect类通过此属性直接读取当前操作槽位的芯片DefModExtension。
         /// </summary>
         internal ChipSlot ActivatingSlot { get; private set; }
+
+        /// <summary>
+        /// 最新的武器绘制基准位置（v16.0枪口系统）。
+        /// 由Patch_DrawEquipmentAiming_Weapon每帧更新，供GetMuzzlePosition使用。
+        /// 注意：drawLoc ≠ Pawn.DrawPos，包含动画偏移等。
+        /// </summary>
+        internal Vector3 lastDrawLoc;
 
         /// <summary>
         /// 战斗体是否处于激活状态（由战斗模块控制）。

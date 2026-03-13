@@ -65,4 +65,39 @@
     </pawnFlyer>
   </ThingDef>
 
+  <!-- 推进器能力 - 光魂芯片专用（复用蚱蜢弹射逻辑，独立label） -->
+  <AbilityDef>
+    <defName>BDP_Ability_Raygust_Thruster</defName>
+    <label>推进器</label>
+    <description>光魂芯片内置推进系统，凝聚Trion弹射跳板，以爆发性速度弹向目标位置。</description>
+    <iconPath>UI/Abilities/SonicDash</iconPath>
+    <cooldownTicksRange>60</cooldownTicksRange>
+    <hostile>false</hostile>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+
+    <verbProperties>
+      <verbClass>BDP.Trigger.Verb_CastAbilityGrasshopper</verbClass>
+      <label>dash</label>
+      <violent>false</violent>
+      <forceNormalTimeSpeed>false</forceNormalTimeSpeed>
+      <warmupTime>0.2</warmupTime>
+      <range>24.9</range>
+      <requireLineOfSight>true</requireLineOfSight>
+      <soundCast>Longjump_Jump</soundCast>
+      <soundLanding>Longjump_Land</soundLanding>
+
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>false</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+
+    <comps>
+      <li Class="BDP.Trigger.CompProperties_AbilityTrionCost"/>
+    </comps>
+
+    <jobDef>CastJump</jobDef>
+  </AbilityDef>
+
 </Defs>

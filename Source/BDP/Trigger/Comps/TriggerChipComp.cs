@@ -12,37 +12,93 @@ namespace BDP.Trigger
     /// 芯片物品上的ThingComp——持有IChipEffect实现实例。
     /// 芯片本身无状态，效果实例由此Comp懒加载创建。
     /// v2.0：添加SpecialDisplayStats，按类型展示芯片完整参数（武器身份代理系统 阶段2）。
+    /// v4.0：支持ChipMode形态系统，每个形态可包含多个效果。
     /// </summary>
     public class TriggerChipComp : ThingComp
     {
-        private IChipEffect effectInstance;
+        /// <summary>形态效果缓存：modeIndex → 效果实例列表（懒加载）</summary>
+        private Dictionary<int, List<IChipEffect>> modeEffectCache;
 
         public CompProperties_TriggerChip Props => (CompProperties_TriggerChip)props;
 
-        /// <summary>
-        /// 获取IChipEffect实例（懒加载）。
-        /// 通过Activator.CreateInstance(chipEffectClass)创建，要求无参构造函数。
-        /// </summary>
-        public IChipEffect GetEffect()
-        {
-            if (effectInstance != null) return effectInstance;
+        // ═══════════════════════════════════════════
+        //  形态系统 API（v4.0）
+        // ═══════════════════════════════════════════
 
-            if (Props.chipEffectClass == null)
+        /// <summary>
+        /// 获取槽位当前激活的形态定义。
+        /// </summary>
+        public ChipMode GetCurrentMode(ChipSlot slot)
+        {
+            if (Props.modes == null || Props.modes.Count == 0)
             {
-                Log.Error($"[BDP] TriggerChipComp on {parent.def.defName}: chipEffectClass未配置");
+                Log.Error($"[BDP] TriggerChipComp on {parent.def.defName}: modes未配置");
                 return null;
             }
 
-            try
+            int index = UnityEngine.Mathf.Clamp(slot.currentModeIndex, 0, Props.modes.Count - 1);
+            return Props.modes[index];
+        }
+
+        /// <summary>
+        /// 获取指定形态的效果实例列表（懒加载，缓存）。
+        /// </summary>
+        public List<IChipEffect> GetModeEffects(int modeIndex)
+        {
+            if (Props.modes == null || modeIndex < 0 || modeIndex >= Props.modes.Count)
+                return null;
+
+            // 初始化缓存
+            if (modeEffectCache == null)
+                modeEffectCache = new Dictionary<int, List<IChipEffect>>();
+
+            // 已缓存则直接返回
+            if (modeEffectCache.TryGetValue(modeIndex, out var cached))
+                return cached;
+
+            // 实例化该形态的所有效果
+            var mode = Props.modes[modeIndex];
+            if (mode.effectClasses == null || mode.effectClasses.Count == 0)
             {
-                effectInstance = (IChipEffect)Activator.CreateInstance(Props.chipEffectClass);
-            }
-            catch (Exception e)
-            {
-                Log.Error($"[BDP] 无法实例化IChipEffect {Props.chipEffectClass}: {e.Message}");
+                modeEffectCache[modeIndex] = new List<IChipEffect>();
+                return modeEffectCache[modeIndex];
             }
 
-            return effectInstance;
+            var effects = new List<IChipEffect>();
+            foreach (var effectType in mode.effectClasses)
+            {
+                try
+                {
+                    var effect = (IChipEffect)Activator.CreateInstance(effectType);
+                    effects.Add(effect);
+                }
+                catch (Exception e)
+                {
+                    Log.Error($"[BDP] 无法实例化IChipEffect {effectType}: {e.Message}");
+                }
+            }
+
+            modeEffectCache[modeIndex] = effects;
+            return effects;
+        }
+
+        /// <summary>
+        /// 检查是否可以切换到目标形态。
+        /// </summary>
+        public bool CanSwitchMode(ChipSlot slot, int targetModeIndex)
+        {
+            if (Props.modes == null || targetModeIndex < 0 || targetModeIndex >= Props.modes.Count)
+                return false;
+
+            // 已经是目标形态
+            if (slot.currentModeIndex == targetModeIndex)
+                return false;
+
+            var targetMode = Props.modes[targetModeIndex];
+
+            // 检查切换成本（需要CompTrion支持，这里简化为true）
+            // 实际检查由CompTriggerBody.SwitchChipMode执行
+            return true;
         }
 
         // ═══════════════════════════════════════════
@@ -100,6 +156,17 @@ namespace BDP.Trigger
         /// </summary>
         private IEnumerable<StatDrawEntry> BaseInfoStats()
         {
+            // 形态数量（多形态芯片显示）
+            if (Props.modes != null && Props.modes.Count > 1)
+            {
+                yield return new StatDrawEntry(
+                    BDP_StatCategoryDefOf.BDP_ChipInfo,
+                    "形态数量",
+                    Props.modes.Count + "种形态",
+                    "此芯片支持多种形态切换，每种形态有不同的效果和属性。",
+                    2502); // 优先级高于主类别
+            }
+
             // 主类别（优先级高于categories）
             if (Props.primaryCategory != ChipPrimaryCategory.Unspecified)
             {

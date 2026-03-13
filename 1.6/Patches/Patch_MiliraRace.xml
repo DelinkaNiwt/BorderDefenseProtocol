@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  将CompTrion注入到Milira种族的ThingDef中。
+  所有Milira种族的Pawn都会获得CompTrion组件。
+  没有Trion腺体基因的Milira，max=0（惰性状态）。
+  前置条件：仅当Milira Race模组（Ancot.MiliraRace）存在时才执行。
+-->
+<Patch>
+  <Operation Class="PatchOperationSequence">
+    <success>Always</success>
+    <operations>
+      <!-- 前置条件：仅当Milira Race模组存在时才执行 -->
+      <li Class="PatchOperationFindMod">
+        <mods>
+          <li>Ancot.MiliraRace</li>
+        </mods>
+      </li>
+      <li Class="PatchOperationAdd">
+        <xpath>/Defs/AlienRace.ThingDef_AlienRace[@Name="Milira_Race"]/comps</xpath>
+        <value>
+          <li Class="BDP.Core.CompProperties_Trion">
+            <showGizmo>true</showGizmo>
+            <barColor>(0.3, 0.85, 0.55, 1.0)</barColor>
+            <allocatedBarColor>(0.25, 0.4, 0.45, 1.0)</allocatedBarColor>
+          </li>
+        </value>
+      </li>
+    </operations>
+  </Operation>
+</Patch>
