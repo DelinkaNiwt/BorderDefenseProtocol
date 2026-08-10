@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 让能够移动的指定受检者自行进入固定 Trion 天赋检测仪。 -->
+  <WorkGiverDef>
+    <!-- 工作分配器唯一名称。 -->
+    <defName>BDP_EnterTrionDetector</defName>
+    <!-- 玩家可见标签。 -->
+    <label>进入Trion天赋检测仪</label>
+    <!-- 复用原版进入建筑工作的薄分配器。 -->
+    <giverClass>BDP.Content.Trion.Talent.WorkGivers.WorkGiver_EnterTrionDetector</giverClass>
+    <!-- 工作动词。 -->
+    <verb>进入</verb>
+    <!-- 工作进行时文本。 -->
+    <gerund>进入Trion天赋检测仪</gerund>
+    <!-- 与原版扫描仪自行入舱保持相同优先级。 -->
+    <priorityInType>90</priorityInType>
+    <!-- 自行入舱需要移动能力。 -->
+    <requiredCapacities>
+      <!-- 原版移动能力。 -->
+      <li>Moving</li>
+    </requiredCapacities>
+    <!-- 机械体不参与人形 Trion 天赋检测。 -->
+    <canBeDoneByMechs>false</canBeDoneByMechs>
+  </WorkGiverDef>
+
+  <!-- 把倒地角色或囚犯搬入固定 Trion 天赋检测仪。 -->
+  <WorkGiverDef>
+    <!-- 工作分配器唯一名称。 -->
+    <defName>BDP_CarryToTrionDetector</defName>
+    <!-- 玩家可见标签。 -->
+    <label>搬运至Trion天赋检测仪</label>
+    <!-- 复用原版搬运至建筑工作的薄分配器。 -->
+    <giverClass>BDP.Content.Trion.Talent.WorkGivers.WorkGiver_CarryToTrionDetector</giverClass>
+    <!-- 使用原版搬运工作类型。 -->
+    <workType>Hauling</workType>
+    <!-- 工作动词。 -->
+    <verb>搬运</verb>
+    <!-- 工作进行时文本。 -->
+    <gerund>搬运至Trion天赋检测仪</gerund>
+    <!-- 与原版扫描仪搬运入舱保持相同优先级。 -->
+    <priorityInType>90</priorityInType>
+    <!-- 搬运需要操作能力。 -->
+    <requiredCapacities>
+      <!-- 原版操作能力。 -->
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <!-- 机械体不参与人形 Trion 天赋检测。 -->
+    <canBeDoneByMechs>false</canBeDoneByMechs>
+  </WorkGiverDef>
+
+  <!-- 由智识至少 10 级的研究员自动操作固定 Trion 天赋检测仪。 -->
+  <WorkGiverDef>
+    <!-- 工作分配器唯一名称。 -->
+    <defName>BDP_OperateTrionDetector</defName>
+    <!-- 玩家可见标签。 -->
+    <label>操作Trion天赋检测仪</label>
+    <!-- 固定检测仪研究工作扫描器。 -->
+    <giverClass>BDP.Content.Trion.Talent.WorkGivers.WorkGiver_OperateTrionDetector</giverClass>
+    <!-- 使用原版研究工作类型。 -->
+    <workType>Research</workType>
+    <!-- 工作动词。 -->
+    <verb>操作</verb>
+    <!-- 工作进行时文本。 -->
+    <gerund>操作Trion天赋检测仪</gerund>
+    <!-- 高于原版普通研究的 100，使待检测任务先被处理。 -->
+    <priorityInType>110</priorityInType>
+    <!-- 仪器操作需要操作能力。 -->
+    <requiredCapacities>
+      <!-- 原版操作能力。 -->
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <!-- 机械体不参与人形 Trion 天赋检测。 -->
+    <canBeDoneByMechs>false</canBeDoneByMechs>
+  </WorkGiverDef>
+
+</Defs>

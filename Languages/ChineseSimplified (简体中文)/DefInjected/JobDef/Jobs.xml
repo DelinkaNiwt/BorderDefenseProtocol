@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Trion 天赋检测工作。 -->
+  <BDP_TrionTalentAssessment.reportString>正在检测TargetB的Trion容量潜质。</BDP_TrionTalentAssessment.reportString>
+  <BDP_WaitForTrionTalentAssessment.reportString>正在接受Trion容量潜质检测。</BDP_WaitForTrionTalentAssessment.reportString>
+  <BDP_OperateTrionDetector.reportString>正在操作Trion天赋检测仪。</BDP_OperateTrionDetector.reportString>
+
+  <!-- 触发器装配工作。 -->
+  <BDP_UseTriggerAssembler.reportString>使用触发器装配台。</BDP_UseTriggerAssembler.reportString>
+  <BDP_HaulToChipStorage.reportString>搬运芯片到芯片仓。</BDP_HaulToChipStorage.reportString>
+
+  <!-- BDP 攻击执行工作。 -->
+  <BDP_RangedAttackExecution.reportString>执行 BDP 远程攻击。</BDP_RangedAttackExecution.reportString>
+  <BDP_MeleeAttackExecution.reportString>执行 BDP 近战攻击。</BDP_MeleeAttackExecution.reportString>
+</LanguageData>

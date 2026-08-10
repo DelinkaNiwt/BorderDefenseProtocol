@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 定制芯片（通用壳）。 -->
+  <BDP_Chip_Custom.label>定制芯片</BDP_Chip_Custom.label>
+  <BDP_Chip_Custom.description>通过芯片制造台动态组合生产的芯片。其名称与能力由当前动作预设和可选枪壳实时决定。</BDP_Chip_Custom.description>
+</LanguageData>

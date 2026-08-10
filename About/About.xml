@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>边境防卫协议</name>
+  <author>Niwt</author>
+  <packageId>Niwt.BDP</packageId>
+  <supportedVersions>
+    <li>1.6</li>
+  </supportedVersions>
+  <description>《境界触发者》核心机制的 RimWorld 模组二次重构工程。一个正式模组包内含严格单向依赖的 Core（核心）与 Content（内容）两个程序集；具体内容只在逐项确认后迁入。</description>
+  <modDependencies>
+    <li>
+      <packageId>Ludeon.RimWorld.Biotech</packageId>
+      <displayName>Biotech</displayName>
+    </li>
+  </modDependencies>
+</ModMetaData>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 正式触发器类别。 -->
+  <BDP_TriggerCategory_Border.label>边境触发器</BDP_TriggerCategory_Border.label>
+  <BDP_TriggerCategory_Border.description>属于边境体系的触发器。</BDP_TriggerCategory_Border.description>
+  <BDP_TriggerCategory_Neighbor.label>近界触发器</BDP_TriggerCategory_Neighbor.label>
+  <BDP_TriggerCategory_Neighbor.description>属于近界体系的触发器。</BDP_TriggerCategory_Neighbor.description>
+  <BDP_TriggerCategory_Black.label>黑触发器</BDP_TriggerCategory_Black.label>
+  <BDP_TriggerCategory_Black.description>属于黑触发器体系的触发器。</BDP_TriggerCategory_Black.description>
+</LanguageData>

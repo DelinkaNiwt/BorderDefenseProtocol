@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    BDP 芯片物品 Def。
+    所有制造成品统一使用 BDP_Chip_Custom，配置由 Content 组合记录组件实时解析。
+  -->
+
+  <!-- 芯片（唯一 ThingDef）。 -->
+  <ThingDef ParentName="ResourceBase">
+    <!-- 芯片不可堆叠，装配台逻辑要求单个操作。 -->
+    <stackLimit>1</stackLimit>
+    <defName>BDP_Chip_Custom</defName>
+    <label>芯片</label>
+    <!-- Content 成品类型按组合记录实时解析名称与配置。 -->
+    <thingClass>BDP.Content.Assembly.ChipManufacturing.Thing.Thing_ManufacturedChip</thingClass>
+    <description>A chip produced from action presets and an optional shell.</description>
+    <graphicData>
+      <texPath>Things/Trigger/Chip/BDP_TriggerChip</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>0.85</drawSize>
+    </graphicData>
+    <thingCategories>
+      <li>ResourcesRaw</li>
+    </thingCategories>
+    <statBases>
+      <Mass>0.2</Mass>
+      <MarketValue>100</MarketValue>
+    </statBases>
+    <comps>
+      <!-- 只保存组合记录；动态配置不进入存档。 -->
+      <li Class="BDP.Content.Assembly.ChipManufacturing.Thing.CompProperties_ManufacturedChip" />
+    </comps>
+  </ThingDef>
+
+</Defs>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    正式能量护盾 Hediff。
+    状态生命周期由 BDP 表达宿主同步链管理，护盾判定由 Content 的 HediffComp 承担。
+  -->
+  <HediffDef>
+    <!-- Hediff Def 唯一名称。 -->
+    <defName>BDP_Hediff_EnergyShield</defName>
+    <!-- 使用新 BDP 正式表达宿主，保证激活、聚合和移除服从主模组现有机制。 -->
+    <hediffClass>BDP.Core.Expressions.BdpExpressionHostHediff</hediffClass>
+    <!-- 单枚护盾的默认显示名称。 -->
+    <label>能量盾</label>
+    <!-- 健康面板说明。 -->
+    <description>由护盾芯片发布的能量防护状态。单枚保护正面 180 度，双枚升级为全防御保护。</description>
+    <!-- 健康面板标签颜色。 -->
+    <defaultLabelColor>(0.6, 0.8, 1.0)</defaultLabelColor>
+    <!-- 护盾属于正向状态。 -->
+    <isBad>false</isBad>
+    <!-- 单枚芯片从 Severity 1 开始。 -->
+    <initialSeverity>1</initialSeverity>
+    <!-- 表达同步移除前允许的最低 Severity。 -->
+    <minSeverity>0</minSeverity>
+    <!-- 主副槽最多聚合两枚护盾芯片。 -->
+    <maxSeverity>2</maxSeverity>
+    <!-- 根据聚合数量显示对应状态名称。 -->
+    <stages>
+      <li>
+        <!-- 单枚护盾阶段。 -->
+        <minSeverity>1</minSeverity>
+        <!-- 单枚护盾标签。 -->
+        <label>能量护盾</label>
+      </li>
+      <li>
+        <!-- 双枚护盾阶段。 -->
+        <minSeverity>2</minSeverity>
+        <!-- 双枚护盾标签。 -->
+        <label>全防御能量护盾</label>
+      </li>
+    </stages>
+    <!-- 护盾业务组件列表。 -->
+    <comps>
+      <li Class="BDP.Content.Shield.HediffCompProperties_EnergyShield">
+        <!-- 单枚护盾启用方向检查。 -->
+        <enableAngleCheck>true</enableAngleCheck>
+        <!-- 单枚护盾覆盖正面 180 度。 -->
+        <blockAngleRange>180</blockAngleRange>
+        <!-- 防护中心不偏离 Pawn 正面。 -->
+        <blockAngleOffset>0</blockAngleOffset>
+        <!-- 单枚护盾抵挡率为 85%。 -->
+        <blockChance>0.85</blockChance>
+        <!-- 成功抵挡消耗伤害值 50% 的 Trion。 -->
+        <trionCostMultiplier>0.5</trionCostMultiplier>
+        <!-- 双枚护盾关闭方向限制，形成全方位防护。 -->
+        <stackedEnableAngleCheck>false</stackedEnableAngleCheck>
+        <!-- 双枚护盾的定义角度为 360 度。 -->
+        <stackedBlockAngleRange>360</stackedBlockAngleRange>
+        <!-- 双枚护盾抵挡率为 95%。 -->
+        <stackedBlockChance>0.95</stackedBlockChance>
+        <!-- 沿用旧 BDP 命中特效缩放。 -->
+        <effectScale>0.25</effectScale>
+        <!-- 沿用旧 BDP 护盾半径。 -->
+        <shieldRadius>0.8</shieldRadius>
+        <!-- 激活期间不显示常驻护盾气泡；成功抵挡时的命中特效不受影响。 -->
+        <showShieldBubble>false</showShieldBubble>
+      </li>
+    </comps>
+  </HediffDef>
+
+</Defs>

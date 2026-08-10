@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 唯一通用芯片配方；具体材料与工作量由账单组合动态计算。 -->
+  <RecipeDef>
+    <defName>BDP_Recipe_ProduceChip</defName>
+    <label>制造芯片</label>
+    <jobString>正在制造芯片。</jobString>
+    <workerClass>BDP.Content.Assembly.ChipManufacturing.Recipe.RecipeWorker_ChipProduction</workerClass>
+    <!-- 临时基础配方：一枚工业零部件作为芯片基底，后续可单独正式化。 -->
+    <ingredients>
+      <li>
+        <filter><thingDefs><li>ComponentIndustrial</li></thingDefs></filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <products>
+      <BDP_Chip_Custom>1</BDP_Chip_Custom>
+    </products>
+    <workAmount>1000</workAmount>
+    <workSkill>Crafting</workSkill>
+    <workSkillLearnFactor>1</workSkillLearnFactor>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <unfinishedThingDef>BDP_Chip_Unfinished</unfinishedThingDef>
+    <allowMixingIngredients>false</allowMixingIngredients>
+    <defaultIngredientFilter><categories><li>Manufactured</li></categories></defaultIngredientFilter>
+  </RecipeDef>
+
+</Defs>

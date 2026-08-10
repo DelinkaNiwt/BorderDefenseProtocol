@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- 复用旧式 MSBuild 工程结构，与 Core、Content 保持一致。 -->
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+
+  <!-- 开发辅助程序集的中性工程标识。 -->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F41B929B-1ED9-4F86-A806-40F2AC46A992}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>BDP.Development</RootNamespace>
+    <AssemblyName>BDP.Development</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+
+  <!-- 发布构建仍输出到仅供本地开发加载的独立目录。 -->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\1.6\Development\Assemblies\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+  <!-- 调试构建与发布构建使用同一个可整体移除的开发目录。 -->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\1.6\Development\Assemblies\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+  <!-- 运行时依赖由 RimWorld 与前置模组加载，不复制进开发目录。 -->
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="0Harmony">
+      <HintPath>C:\NiwtGames\Steam\steamapps\workshop\content\294100\839005762\1.6\Assemblies\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>C:\NiwtGames\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>C:\NiwtGames\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>C:\NiwtGames\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>C:\NiwtGames\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>C:\NiwtGames\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+
+  <!-- 自动纳入开发程序集目录下的全部 C# 源文件。 -->
+  <ItemGroup>
+    <Compile Include="**\*.cs" Exclude="obj\**\*.cs" />
+  </ItemGroup>
+
+  <!-- Development 只能单向读取 Core 与 Content，且不复制其产物。 -->
+  <ItemGroup>
+    <ProjectReference Include="..\BDP\BDP.csproj">
+      <Project>{F26B4168-0D1D-4EE0-AB3B-7FDE7B2B8F91}</Project>
+      <Name>BDP.Core</Name>
+      <ReferenceOutputAssembly>True</ReferenceOutputAssembly>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\BDP.Content\BDP.Content.csproj">
+      <Project>{8F3A0D88-A08B-4A6A-92E1-83A558A455D1}</Project>
+      <Name>BDP.Content</Name>
+      <ReferenceOutputAssembly>True</ReferenceOutputAssembly>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+
+  <!-- 使用标准 C# 构建目标。 -->
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
+  <!-- 防御性清理误复制的正式程序集，保证开发目录可整体移除。 -->
+  <Target Name="RemoveCopiedMainModAssemblies" AfterTargets="Build">
+    <Delete Files="$(OutputPath)BDP.Core.dll;$(OutputPath)BDP.Core.pdb;$(OutputPath)BDP.Content.dll;$(OutputPath)BDP.Content.pdb" />
+  </Target>
+</Project>

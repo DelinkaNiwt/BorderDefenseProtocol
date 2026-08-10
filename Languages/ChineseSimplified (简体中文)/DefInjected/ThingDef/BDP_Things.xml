@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Trion 天赋检测相关物品。 -->
+  <BDP_TrionPortableDetector.label>便携式Trion天赋检测器</BDP_TrionPortableDetector.label>
+  <BDP_TrionPortableDetector.description>一次性 Trion 容量潜质检测器。需要智识至少10级的另一名角色操作，只有成功完成检测后才会消耗。</BDP_TrionPortableDetector.description>
+  <BDP_TrionDetector.label>Trion天赋检测仪</BDP_TrionDetector.label>
+  <BDP_TrionDetector.description>用于准确检测无腺体人形角色先天 Trion 容量潜质的固定仪器。需要智识至少10级的另一名角色操作。</BDP_TrionDetector.description>
+
+  <!-- 触发体与装配建筑。 -->
+  <BDP_TriggerBody_BorderStandard.label>边境标准触发体</BDP_TriggerBody_BorderStandard.label>
+  <BDP_TriggerBody_BorderStandard.description>边境体系的标准触发体，提供主手槽、副手槽和特殊槽，用于装载与控制Trion芯片。</BDP_TriggerBody_BorderStandard.description>
+  <BDP_ChipStorage.label>触发器芯片仓</BDP_ChipStorage.label>
+  <BDP_ChipStorage.description>连接到触发器装配台的专用芯片仓。芯片会被存入建筑内部，并可供附近装配台读取。</BDP_ChipStorage.description>
+  <BDP_TriggerAssembler.label>触发器装配台</BDP_TriggerAssembler.label>
+  <BDP_TriggerAssembler.description>用于为触发体装入、卸载和调整芯片的装配台。需要连接触发器芯片容器。</BDP_TriggerAssembler.description>
+  <BDP_EmergencyEscapeBeacon.label>紧急脱离信标</BDP_EmergencyEscapeBeacon.label>
+  <BDP_EmergencyEscapeBeacon.description>战斗体紧急脱离的优先传送锚点。需要通电，同一地图只能建造一座。</BDP_EmergencyEscapeBeacon.description>
+
+  <!-- 投射物。 -->
+  <BDP_Projectile_SenkuKogetsuWave.label>旋空弧月</BDP_Projectile_SenkuKogetsuWave.label>
+
+  <!-- 非法芯片统一迁移后的普通遗留物。 -->
+  <BDP_InvalidChipRemnant.label>芯片遗留物</BDP_InvalidChipRemnant.label>
+  <BDP_InvalidChipRemnant.description>一枚无法继续由当前芯片规格表达的遗留物。它不再保留原芯片或半成品的材料、工作量与功能，只能被存放、搬运或熔炼。</BDP_InvalidChipRemnant.description>
+</LanguageData>

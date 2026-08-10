@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 解锁个体永久 Trion 潜在容量的正式腺体基因。 -->
+  <GeneDef>
+    <!-- 基因唯一名称。 -->
+    <defName>BDP_Gene_TrionGland</defName>
+    <!-- 基因运行类。 -->
+    <geneClass>BDP.Core.Genes.Gene_TrionGland</geneClass>
+    <!-- 玩家可见名称。 -->
+    <label>Trion腺体</label>
+    <!-- 玩家可见说明。 -->
+    <description>形成能够生成、储存并调动 Trion 的特殊腺体。实际容量取决于个体先天潜质。</description>
+    <!-- 基因图标。 -->
+    <iconPath>UI/Icons/Genes/Gene_TrionGland</iconPath>
+    <!-- 原版基因显示分类。 -->
+    <displayCategory>Miscellaneous</displayCategory>
+    <!-- 分类内显示顺序。 -->
+    <displayOrderInCategory>100</displayOrderInCategory>
+    <!-- 基因复杂度。 -->
+    <biostatCpx>2</biostatCpx>
+    <!-- 暂定代谢代价。 -->
+    <biostatMet>-1</biostatMet>
+    <!-- 不参与原版随机基因选择。 -->
+    <selectionWeight>0</selectionWeight>
+    <!-- 不进入随机生成的基因集合。 -->
+    <canGenerateInGeneSet>false</canGenerateInGeneSet>
+    <!-- 腺体只提供固定恢复；容量由潜在值动态决定。 -->
+    <statOffsets>
+      <!-- 每游戏日恢复 500 点 Trion。 -->
+      <BDP_TrionRecoveryRate>500</BDP_TrionRecoveryRate>
+    </statOffsets>
+  </GeneDef>
+
+</Defs>

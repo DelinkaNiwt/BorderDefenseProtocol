@@ -1,0 +1,10 @@
+﻿Source/BDP/bin/
+Source/BDP/obj/
+Source/BDP.Content/obj/
+Source/BDP.Development/obj/
+1.6/Assemblies/
+1.6/Development/Assemblies/
+1.6/About/
+*.user
+*.suo
+*.cache

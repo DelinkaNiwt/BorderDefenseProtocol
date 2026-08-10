@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    AttackExecution Job 系统 Def。
+    这里定义 BDP 持续攻击推进链使用的正式 JobDef。
+  -->
+
+  <!--
+    BDP 远程持续攻击执行 Job。
+    该 Job 由 AttackExecution 服务发起，用于驱动远程攻击推进流程。
+  -->
+  <JobDef>
+    <!-- Def 唯一名称，供执行层通过名字解析 JobDef。 -->
+    <defName>BDP_RangedAttackExecution</defName>
+
+    <!-- JobDriver 实现类，承载远程攻击执行逻辑。 -->
+    <driverClass>BDP.Core.AttackExecution.JobDriver_BdpRangedAttackExecution</driverClass>
+
+    <!-- Pawn 当前工作报告文本。 -->
+    <reportString>执行 BDP 远程攻击。</reportString>
+
+    <!-- 是否允许机会性前缀工作；持续攻击 Job 不允许被这类前缀插入。 -->
+    <allowOpportunisticPrefix>false</allowOpportunisticPrefix>
+  </JobDef>
+
+  <!--
+    BDP 近战持续攻击执行 Job。
+    该 Job 由 AttackExecution 服务发起，用于驱动近战攻击推进流程。
+  -->
+  <JobDef>
+    <!-- Def 唯一名称，供执行层通过名字解析 JobDef。 -->
+    <defName>BDP_MeleeAttackExecution</defName>
+
+    <!-- JobDriver 实现类，承载近战攻击执行逻辑。 -->
+    <driverClass>BDP.Core.AttackExecution.JobDriver_BdpMeleeAttackExecution</driverClass>
+
+    <!-- Pawn 当前工作报告文本。 -->
+    <reportString>执行 BDP 近战攻击。</reportString>
+
+    <!-- 是否允许机会性前缀工作；持续攻击 Job 不允许被这类前缀插入。 -->
+    <allowOpportunisticPrefix>false</allowOpportunisticPrefix>
+  </JobDef>
+
+</Defs>

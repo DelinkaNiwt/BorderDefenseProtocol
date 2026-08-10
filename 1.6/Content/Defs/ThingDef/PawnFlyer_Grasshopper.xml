@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    BDP_PawnFlyer_Grasshopper — 蚱蜢弹射飞行器
+    使用自定义 PawnFlyer_Grasshopper thingClass，
+    以 SimpleCurve 线性插值代替 AnimationCurve 三次贝塞尔，
+    避免过冲导致的"飞过去又退回来"。
+  -->
+  <ThingDef ParentName="PawnFlyerBase">
+    <defName>BDP_PawnFlyer_Grasshopper</defName>
+    <label>grasshopper launcher</label>
+    <thingClass>BDP.Content.Grasshopper.PawnFlyer_Grasshopper</thingClass>
+
+    <!-- 材质设置 -->
+    <seeThroughFog>true</seeThroughFog>
+    <drawerType>RealtimeOnly</drawerType>
+
+    <!-- 飞行参数 - 炮弹效果：极快爆发+急刹停 -->
+    <pawnFlyer>
+      <flightSpeed>45</flightSpeed> <!-- 提高速度增强爆发感 -->
+      <flightDurationMin>0.1</flightDurationMin> <!-- 最短飞行时间 -->
+      <heightFactor>0</heightFactor> <!-- 贴地飞行 -->
+
+      <!-- 加速曲线 - 炮弹效果（使用SimpleCurve线性插值，不会过冲）-->
+      <!-- Inherit="False" 确保完整替换父级曲线，而非追加合并 -->
+      <progressCurve Inherit="False">
+        <points>
+          <li>(0, 0)</li>
+          <li>(0.1, 0.5)</li>    <!-- 爆发段：10%时间=50%距离，斜率5 -->
+          <li>(0.25, 0.96)</li>  <!-- 高速段：25%时间=96%距离，50-96%段斜率3 -->
+          <li>(0.85, 0.995)</li> <!-- 急刹段：85%时间=99.5%距离 -->
+          <li>(1, 1)</li>        <!-- 完全停止 -->
+        </points>
+      </progressCurve>
+    </pawnFlyer>
+  </ThingDef>
+
+</Defs>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    毒蛇芯片音效 Def。
+    为毒蛇芯片提供专属发射音效，资源从旧 BDP 迁移。
+  -->
+
+  <!-- 毒蛇芯片发射音效（引导弹）。 -->
+  <SoundDef>
+    <!-- SoundDef 唯一名称。 -->
+    <defName>BDP_Sound_ViperCast</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>6</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <!-- 使用旧 BDP 迁移的毒蛇专属音频。 -->
+            <clipPath>Trigger/Viper/Shot_BDP_Viper</clipPath>
+          </li>
+        </grains>
+        <volumeRange>40~50</volumeRange>
+        <pitchRange>0.95~1.05</pitchRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+</Defs>

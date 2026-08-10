@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    弹射砍击 Ability。
+    继承蚱蜢的跳跃框架，使用弹射砍击专属 Verb/Flyer/Comp。
+  -->
+  <AbilityDef>
+    <defName>BDP_Ability_BounceSlash</defName>
+    <label>弹射砍击</label>
+    <description>沿路径多段跳跃，对沿途敌人造成切割伤害。</description>
+
+    <!-- 10秒冷却（600 ticks） -->
+    <cooldownTicksRange>600</cooldownTicksRange>
+    <!-- 射程 24.9 格 -->
+    <verbProperties>
+      <verbClass>BDP.Content.BounceSlash.Verb_BounceSlash</verbClass>
+      <range>24.9</range>
+      <warmupTime>0.4</warmupTime>
+      <!-- 沿路径跳不需要视线 -->
+      <requireLineOfSight>true</requireLineOfSight>
+      <!-- 施法音效 -->
+      <soundCast>Longjump_Jump</soundCast>
+      <soundLanding>Longjump_Land</soundLanding>
+
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>false</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+
+    <!-- 使用 CastJump Job -->
+    <jobDef>CastJump</jobDef>
+    <!-- 视为敌对能力 -->
+    <hostile>true</hostile>
+
+    <!-- Combo 能力需要表达使用条件检查 -->
+    <comps>
+      <!-- Combo 的使用条件（由 Expression 条目的 ComboDefName 实时求值） -->
+      <li Class="BDP.Core.Abilities.CompProperties_AbilityEffect_BdpExpressionUseRequirements" />
+      <!-- Trion 成本组件（费用来自 Combo 正式结果） -->
+      <li Class="BDP.Core.Abilities.CompProperties_AbilityEffect_BdpTrionCost" />
+      <!-- 弹射砍击专属效果 -->
+      <li Class="BDP.Content.BounceSlash.CompProperties_BounceSlash">
+        <pawnFlyerDef>BDP_PawnFlyer_BounceSlash</pawnFlyerDef>
+        <damageDef>Cut</damageDef>
+        <damageAmount>15</damageAmount>
+        <armorPenetration>0</armorPenetration>
+      </li>
+    </comps>
+  </AbilityDef>
+
+</Defs>

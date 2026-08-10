@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 飞锥：小行星双芯片组合技。双 Trigon 供能加速弹丸，射出高速穿甲弹。 -->
+  <BDP.Core.Combos.ComboDef>
+    <defName>BDP_Combo_Gimlet</defName>
+    <label>飞锥</label>
+    <description>小行星双芯片组合技。双 Trigon 供能加速弹丸，射出高速穿甲弹。</description>
+    <chipA>BDP_Preset_Asteroid</chipA>
+    <chipB>BDP_Preset_Asteroid</chipB>
+    <Expression>
+      <Entries>
+        <li>
+          <Id>gimlet_primary</Id>
+          <!-- 组合技展示名称。 -->
+          <DisplayLabel>飞锥</DisplayLabel>
+          <!-- 主 Verb 条目，产出远程射击动作。 -->
+          <Kind>PrimaryVerb</Kind>
+          <WeaponMode>Ranged</WeaponMode>
+          <!-- 弹丸替换为穿甲弹；预热时间 2.16（小行星 1.8×1.2）。 -->
+          <VerbProps>
+            <defaultProjectile>BDP_Projectile_ArmorPiercing</defaultProjectile>
+            <warmupTime>2.16</warmupTime>
+          </VerbProps>
+          <VerbPropsResolve>
+            <RangeResolve>FollowChipMain</RangeResolve>
+            <WarmupTimeResolve>FollowChipMain</WarmupTimeResolve>
+            <BurstShotCountResolve>FollowChipMain</BurstShotCountResolve>
+            <TicksBetweenBurstShotsResolve>FollowChipMain</TicksBetweenBurstShotsResolve>
+            <AccuracyTouchResolve>FollowChipMain</AccuracyTouchResolve>
+            <AccuracyShortResolve>FollowChipMain</AccuracyShortResolve>
+            <AccuracyMediumResolve>FollowChipMain</AccuracyMediumResolve>
+            <AccuracyLongResolve>FollowChipMain</AccuracyLongResolve>
+            <DefaultCooldownTimeResolve>FollowChipMain</DefaultCooldownTimeResolve>
+          </VerbPropsResolve>
+          <!-- 射击节奏跟随 Main 侧。 -->
+          <ExecutionResolve>
+            <RhythmResolve>FollowChipMain</RhythmResolve>
+          </ExecutionResolve>
+          <!-- Trion 费用跟随 Main 侧。 -->
+          <TrionResolve>
+            <UseCostResolve>FollowChipMain</UseCostResolve>
+            <MinimumRequiredResolve>FollowChipMain</MinimumRequiredResolve>
+          </TrionResolve>
+          <!-- 必须直线视线。 -->
+          <DirectTargetLineOfSight>Required</DirectTargetLineOfSight>
+        </li>
+      </Entries>
+    </Expression>
+  </BDP.Core.Combos.ComboDef>
+
+</Defs>

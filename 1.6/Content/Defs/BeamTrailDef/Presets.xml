@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- BDP Content 正式光束拖尾预设。首版颜色待游戏实测后继续校色。 -->
+
+  <BDP.Content.Projectiles.BeamTrail.BeamTrailPresetDef>
+    <!-- Def 唯一名称。 -->
+    <defName>BDP_TrailPreset_BrightMintLong</defName>
+    <!-- 显示名称。 -->
+    <label>亮薄荷绿长拖尾</label>
+    <!-- 拖尾贴图路径。 -->
+    <trailTexPath>Things/Projectile/BDP_BeamTrail</trailTexPath>
+    <!-- 拖尾颜色。 -->
+    <trailColor>(0.855, 0.992, 0.898, 1.0)</trailColor>
+    <!-- 拖尾宽度。 -->
+    <trailWidth>0.1105</trailWidth>
+    <!-- 单段寿命，单位为 tick。 -->
+    <segmentLifetimeTicks>30</segmentLifetimeTicks>
+    <!-- 初始透明度。 -->
+    <startOpacity>1.0</startOpacity>
+    <!-- 淡出时长比例。 -->
+    <fadeRatio>0.8</fadeRatio>
+    <!-- 淡出曲线指数。回退到 6.0，平衡拖尾柔和度与尾部清晰度。 -->
+    <fadeExponent>6.0</fadeExponent>
+    <!-- 显示高度偏移。 -->
+    <altitudeOffset>0</altitudeOffset>
+    <!-- 发射起点前推偏移。 -->
+    <startForwardOffset>0</startForwardOffset>
+    <!-- 调试日志开关。 -->
+    <debugLogging>false</debugLogging>
+  </BDP.Content.Projectiles.BeamTrail.BeamTrailPresetDef>
+
+  <BDP.Content.Projectiles.BeamTrail.BeamTrailPresetDef>
+    <!-- Def 唯一名称。 -->
+    <defName>BDP_TrailPreset_BrightMintShort</defName>
+    <!-- 显示名称。 -->
+    <label>亮薄荷绿短拖尾</label>
+    <!-- 拖尾贴图路径。 -->
+    <trailTexPath>Things/Projectile/BDP_BeamTrail</trailTexPath>
+    <!-- 拖尾颜色。 -->
+    <trailColor>(0.855, 0.992, 0.898, 1.0)</trailColor>
+    <!-- 拖尾宽度。 -->
+    <trailWidth>0.09</trailWidth>
+    <!-- 单段寿命，单位为 tick；数值越小，拖尾越短。 -->
+    <segmentLifetimeTicks>6</segmentLifetimeTicks>
+    <!-- 初始透明度。 -->
+    <startOpacity>0.85</startOpacity>
+    <!-- 淡出时长比例。 -->
+    <fadeRatio>0.55</fadeRatio>
+    <!-- 淡出曲线指数。 -->
+    <fadeExponent>2.5</fadeExponent>
+    <!-- 显示高度偏移。 -->
+    <altitudeOffset>0</altitudeOffset>
+    <!-- 发射起点前推偏移。 -->
+    <startForwardOffset>0</startForwardOffset>
+    <!-- 调试日志开关。 -->
+    <debugLogging>false</debugLogging>
+  </BDP.Content.Projectiles.BeamTrail.BeamTrailPresetDef>
+
+</Defs>

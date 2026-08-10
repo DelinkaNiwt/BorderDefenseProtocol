@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    BDP 装配台系统 Job Def。
+    包含使用装配台和搬运芯片到芯片仓两个 Job。
+  -->
+
+  <!-- ===== 使用触发器装配台 ===== -->
+
+  <JobDef>
+    <!-- Def 唯一名称，供装配台通过名字解析 JobDef。 -->
+    <defName>BDP_UseTriggerAssembler</defName>
+
+    <!-- JobDriver 实现类，负责走到交互格并打开装配窗口。 -->
+    <driverClass>BDP.Content.Assembly.JobDriver_UseTriggerAssembler</driverClass>
+
+    <!-- Pawn 当前工作报告文本。 -->
+    <reportString>使用触发器装配台。</reportString>
+
+    <!-- 是否允许机会性前缀工作；装配窗口入口不需要被前缀工作打断。 -->
+    <allowOpportunisticPrefix>false</allowOpportunisticPrefix>
+  </JobDef>
+
+  <!-- ===== 搬运芯片到芯片仓 ===== -->
+
+  <JobDef>
+    <!-- Def 唯一名称，供 WorkGiver_HaulToChipStorage 解析。 -->
+    <defName>BDP_HaulToChipStorage</defName>
+
+    <!-- JobDriver 实现类，负责搬运、等待并调用芯片仓接收接口。 -->
+    <driverClass>BDP.Content.Assembly.JobDriver_HaulToChipStorage</driverClass>
+
+    <!-- Pawn 当前工作报告文本。 -->
+    <reportString>搬运芯片到芯片仓。</reportString>
+
+    <!-- 允许原版机会性前缀工作，保持搬运任务的原版体验。 -->
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+
+</Defs>

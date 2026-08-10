@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 芯片特征标签——细化芯片的用途和属性倾向。 -->
+
+  <BDP_ChipTag_Entity.label>实体</BDP_ChipTag_Entity.label>
+  <BDP_ChipTag_Entity.description>主要形成实体武装或实体表现的芯片。</BDP_ChipTag_Entity.description>
+  <BDP_ChipTag_Offensive.label>进攻型</BDP_ChipTag_Offensive.label>
+  <BDP_ChipTag_Offensive.description>主要用于进攻方向的芯片。</BDP_ChipTag_Offensive.description>
+  <BDP_ChipTag_KogetsuExclusive.label>弧月专属</BDP_ChipTag_KogetsuExclusive.label>
+  <BDP_ChipTag_KogetsuExclusive.description>只对弧月体系开放或有特殊关联的芯片。</BDP_ChipTag_KogetsuExclusive.description>
+  <BDP_ChipTag_EnergyForm.label>能量体</BDP_ChipTag_EnergyForm.label>
+  <BDP_ChipTag_EnergyForm.description>主要以能量体形式形成表现的芯片。</BDP_ChipTag_EnergyForm.description>
+</LanguageData>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 正式能量护盾 Hediff——由护盾芯片发布。 -->
+
+  <BDP_Hediff_EnergyShield.label>能量盾</BDP_Hediff_EnergyShield.label>
+  <BDP_Hediff_EnergyShield.description>由护盾芯片发布的能量防护状态。单枚保护正面 180 度，双枚升级为全防御保护。</BDP_Hediff_EnergyShield.description>
+</LanguageData>

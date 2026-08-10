@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 操作员执行 Trion 容量潜质检测的正式工作。 -->
+  <JobDef>
+    <!-- 工作唯一名称。 -->
+    <defName>BDP_TrionTalentAssessment</defName>
+    <!-- 操作员工作驱动。 -->
+    <driverClass>BDP.Content.Trion.Talent.Jobs.JobDriver_TrionTalentAssessment</driverClass>
+    <!-- 工作状态文字。 -->
+    <reportString>正在检测TargetB的Trion容量潜质。</reportString>
+    <!-- 玩家命令工作允许随时被更高优先级命令打断。 -->
+    <playerInterruptible>true</playerInterruptible>
+  </JobDef>
+
+  <!-- 受检者配合操作员等待的同步工作。 -->
+  <JobDef>
+    <!-- 工作唯一名称。 -->
+    <defName>BDP_WaitForTrionTalentAssessment</defName>
+    <!-- 受检者工作驱动。 -->
+    <driverClass>BDP.Content.Trion.Talent.Jobs.JobDriver_WaitForTrionTalentAssessment</driverClass>
+    <!-- 工作状态文字。 -->
+    <reportString>正在接受Trion容量潜质检测。</reportString>
+    <!-- 操作员退出时可强制结束。 -->
+    <playerInterruptible>true</playerInterruptible>
+  </JobDef>
+
+  <!-- 研究员自动操作已经装入受检者的固定 Trion 天赋检测仪。 -->
+  <JobDef>
+    <!-- 工作唯一名称。 -->
+    <defName>BDP_OperateTrionDetector</defName>
+    <!-- 固定检测仪操作工作驱动。 -->
+    <driverClass>BDP.Content.Trion.Talent.Jobs.JobDriver_OperateTrionDetector</driverClass>
+    <!-- 工作状态文字。 -->
+    <reportString>正在操作Trion天赋检测仪。</reportString>
+    <!-- 允许研究员在需要时切换到其他工作。 -->
+    <playerInterruptible>true</playerInterruptible>
+  </JobDef>
+
+</Defs>

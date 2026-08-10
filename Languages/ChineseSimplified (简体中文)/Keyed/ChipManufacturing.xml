@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 成品来源 Def 暂时缺失时保留物品，并在名称上给出温和状态提示。 -->
+  <BDP_ChipManufacturing_MissingSourceLabel>{0}（来源缺失）</BDP_ChipManufacturing_MissingSourceLabel>
+  <!-- Content 负责把具体枪壳名格式化为 Core 可直接展示的中性变体标签。 -->
+  <BDP_ChipManufacturing_SourceVariantLabel>{0}型</BDP_ChipManufacturing_SourceVariantLabel>
+  <!-- 制造成品的统一动态名称。 -->
+  <BDP_ChipManufacturing_ProductLabel>触发器芯片:{0}</BDP_ChipManufacturing_ProductLabel>
+  <BDP_ChipManufacturing_ProductLabelWithGunShell>触发器芯片:{0}[{1}型]</BDP_ChipManufacturing_ProductLabelWithGunShell>
+  <!-- 原版半成品名称前缀。 -->
+  <BDP_UnfinishedChip_Incomplete>未完成</BDP_UnfinishedChip_Incomplete>
+  <!-- 制造窗口基础交互文本。 -->
+  <BDP_ChipManufacturing_TabLabel>芯片制造</BDP_ChipManufacturing_TabLabel>
+  <BDP_ChipManufacturing_OverviewTab>制造总览</BDP_ChipManufacturing_OverviewTab>
+  <BDP_ChipManufacturing_Overview_Title>芯片制造</BDP_ChipManufacturing_Overview_Title>
+  <BDP_ChipManufacturing_Overview_Subtitle>选择一个制造方向，进入芯片组合配置。</BDP_ChipManufacturing_Overview_Subtitle>
+  <BDP_ChipManufacturing_Overview_Directions>制造方向</BDP_ChipManufacturing_Overview_Directions>
+  <BDP_ChipManufacturing_Overview_ActionCount>{0} 项动作预设</BDP_ChipManufacturing_Overview_ActionCount>
+  <BDP_ChipManufacturing_GunShellSection>枪壳</BDP_ChipManufacturing_GunShellSection>
+  <BDP_ChipManufacturing_ActionSection>动作预设</BDP_ChipManufacturing_ActionSection>
+  <BDP_ChipManufacturing_SwapActions>交换形态</BDP_ChipManufacturing_SwapActions>
+  <BDP_ChipManufacturing_Quantity>制造数量：{0}</BDP_ChipManufacturing_Quantity>
+  <BDP_ChipManufacturing_NoDescription>暂无额外说明。</BDP_ChipManufacturing_NoDescription>
+  <BDP_ChipManufacturing_PreviewPending>芯片规格与动作属性将在选择后显示于此。</BDP_ChipManufacturing_PreviewPending>
+  <BDP_ChipManufacturing_QueuePending>材料明细与制造队列显示于此。</BDP_ChipManufacturing_QueuePending>
+  <!-- 中栏分组。 -->
+  <BDP_ChipManufacturing_PreviewIncomplete>选择完整且兼容的芯片组合后，这里会显示成品规格与动作属性。</BDP_ChipManufacturing_PreviewIncomplete>
+  <BDP_ChipManufacturing_Preview_Specifications>芯片规格</BDP_ChipManufacturing_Preview_Specifications>
+  <BDP_ChipManufacturing_Preview_GunShellAdjustments>枪壳特征</BDP_ChipManufacturing_Preview_GunShellAdjustments>
+  <BDP_ChipManufacturing_Preview_ActionForm>动作形态：{0}</BDP_ChipManufacturing_Preview_ActionForm>
+  <BDP_ChipManufacturing_Preview_NoNumericMetrics>该动作没有适合在制造面板中比较的数值属性。</BDP_ChipManufacturing_Preview_NoNumericMetrics>
+  <!-- 芯片规格。 -->
+  <BDP_ChipManufacturing_Spec_SlotRegion>槽位区域</BDP_ChipManufacturing_Spec_SlotRegion>
+  <BDP_ChipManufacturing_Spec_SlotOccupancy>槽位占用</BDP_ChipManufacturing_Spec_SlotOccupancy>
+  <BDP_ChipManufacturing_Spec_ActivationDelay>激活延迟</BDP_ChipManufacturing_Spec_ActivationDelay>
+  <BDP_ChipManufacturing_Spec_DeactivationDelay>关闭延迟</BDP_ChipManufacturing_Spec_DeactivationDelay>
+  <BDP_ChipManufacturing_Spec_CapacityCost>容量消耗</BDP_ChipManufacturing_Spec_CapacityCost>
+  <BDP_ChipManufacturing_Spec_ActivationCost>激活消耗</BDP_ChipManufacturing_Spec_ActivationCost>
+  <BDP_ChipManufacturing_Spec_Requirements>使用要求</BDP_ChipManufacturing_Spec_Requirements>
+  <BDP_ChipManufacturing_SlotRegion_MainSub>主／副槽区</BDP_ChipManufacturing_SlotRegion_MainSub>
+  <BDP_ChipManufacturing_SlotRegion_Special>特殊槽区</BDP_ChipManufacturing_SlotRegion_Special>
+  <BDP_ChipManufacturing_SlotRegion_Unspecified>未指定</BDP_ChipManufacturing_SlotRegion_Unspecified>
+  <BDP_ChipManufacturing_SlotOccupancy_Single>单槽</BDP_ChipManufacturing_SlotOccupancy_Single>
+  <BDP_ChipManufacturing_SlotOccupancy_PairedHands>主副同号双槽</BDP_ChipManufacturing_SlotOccupancy_PairedHands>
+  <BDP_ChipManufacturing_SlotOccupancy_Unspecified>未指定</BDP_ChipManufacturing_SlotOccupancy_Unspecified>
+  <!-- 动作属性与单位。 -->
+  <BDP_ChipManufacturing_Metric_Range>射程</BDP_ChipManufacturing_Metric_Range>
+  <BDP_ChipManufacturing_Metric_Accuracy>精度</BDP_ChipManufacturing_Metric_Accuracy>
+  <BDP_ChipManufacturing_Metric_AccuracyTouch>贴身精度</BDP_ChipManufacturing_Metric_AccuracyTouch>
+  <BDP_ChipManufacturing_Metric_AccuracyShort>近距精度</BDP_ChipManufacturing_Metric_AccuracyShort>
+  <BDP_ChipManufacturing_Metric_AccuracyMedium>中距精度</BDP_ChipManufacturing_Metric_AccuracyMedium>
+  <BDP_ChipManufacturing_Metric_AccuracyLong>远距精度</BDP_ChipManufacturing_Metric_AccuracyLong>
+  <BDP_ChipManufacturing_Metric_Warmup>预热</BDP_ChipManufacturing_Metric_Warmup>
+  <BDP_ChipManufacturing_Metric_Cooldown>冷却</BDP_ChipManufacturing_Metric_Cooldown>
+  <BDP_ChipManufacturing_Metric_BurstShotCount>子弹数量</BDP_ChipManufacturing_Metric_BurstShotCount>
+  <BDP_ChipManufacturing_Metric_ProjectileDamage>投射物伤害</BDP_ChipManufacturing_Metric_ProjectileDamage>
+  <BDP_ChipManufacturing_Metric_ProjectileSpeed>投射物速度</BDP_ChipManufacturing_Metric_ProjectileSpeed>
+  <BDP_ChipManufacturing_Seconds>{0} 秒</BDP_ChipManufacturing_Seconds>
+  <BDP_ChipManufacturing_None>无</BDP_ChipManufacturing_None>
+  <!-- 右栏订单与材料。 -->
+  <BDP_ChipManufacturing_Order_Materials>材料与数量</BDP_ChipManufacturing_Order_Materials>
+  <BDP_ChipManufacturing_Order_MaterialLine>{0}　单枚 {1}／可用 {2}／总计 {3}</BDP_ChipManufacturing_Order_MaterialLine>
+  <BDP_ChipManufacturing_Order_ShortageTooltip>当前地图可用材料不足，但仍可先加入任务等待补料。</BDP_ChipManufacturing_Order_ShortageTooltip>
+  <BDP_ChipManufacturing_Order_Quantity>制造数量</BDP_ChipManufacturing_Order_Quantity>
+  <BDP_ChipManufacturing_Order_Enqueue>加入任务</BDP_ChipManufacturing_Order_Enqueue>
+  <!-- 右栏真实账单队列。 -->
+  <BDP_ChipManufacturing_Queue_Title>制造队列</BDP_ChipManufacturing_Queue_Title>
+  <BDP_ChipManufacturing_Queue_Empty>当前没有芯片制造任务。</BDP_ChipManufacturing_Queue_Empty>
+  <BDP_ChipManufacturing_Queue_RowTitle>{0}. {1}</BDP_ChipManufacturing_Queue_RowTitle>
+  <BDP_ChipManufacturing_Queue_Completed>已完成（剩余 0）</BDP_ChipManufacturing_Queue_Completed>
+  <BDP_ChipManufacturing_Queue_Suspended>已暂停（剩余 {0}）</BDP_ChipManufacturing_Queue_Suspended>
+  <BDP_ChipManufacturing_Queue_Waiting>等待制造（剩余 {0}）</BDP_ChipManufacturing_Queue_Waiting>
+  <BDP_ChipManufacturing_Queue_Pause>暂停</BDP_ChipManufacturing_Queue_Pause>
+  <BDP_ChipManufacturing_Queue_Resume>恢复</BDP_ChipManufacturing_Queue_Resume>
+  <BDP_ChipManufacturing_Queue_Load>载入配置</BDP_ChipManufacturing_Queue_Load>
+  <BDP_ChipManufacturing_Queue_Delete>删除</BDP_ChipManufacturing_Queue_Delete>
+  <!-- 上帝模式制造台调试命令。 -->
+  <BDP_ChipManufacturing_DebugCompleteAll>DEV：立刻完成制造</BDP_ChipManufacturing_DebugCompleteAll>
+  <BDP_ChipManufacturing_DebugCompleteAllDesc>无材料、工时和制作者需求，立即完成制造台队列中的全部有效芯片任务。</BDP_ChipManufacturing_DebugCompleteAllDesc>
+  <BDP_ChipManufacturing_DebugCompleteNone>制造队列中没有芯片任务。</BDP_ChipManufacturing_DebugCompleteNone>
+  <BDP_ChipManufacturing_DebugCompleteResult>已立即生成 {0} 枚芯片，完成 {1} 条任务，跳过 {2} 条来源缺失或无法生成的任务。</BDP_ChipManufacturing_DebugCompleteResult>
+  <!-- 左栏禁用条目的首要原因。 -->
+  <BDP_ChipManufacturing_SelectFailure_ActionLimitReached>当前职业已达到动作数量上限。</BDP_ChipManufacturing_SelectFailure_ActionLimitReached>
+  <BDP_ChipManufacturing_SelectFailure_IntrinsicMultiModeMustStandAlone>该动作自身包含多个形态，只能单独制造。</BDP_ChipManufacturing_SelectFailure_IntrinsicMultiModeMustStandAlone>
+  <BDP_ChipManufacturing_SelectFailure_IntrinsicMultiModeAlreadySelected>已选动作自身包含多个形态，不能再组合其它动作。</BDP_ChipManufacturing_SelectFailure_IntrinsicMultiModeAlreadySelected>
+  <BDP_ChipManufacturing_SelectFailure_ProfessionMismatch>该动作不适用于当前职业。</BDP_ChipManufacturing_SelectFailure_ProfessionMismatch>
+  <!-- 组合记录自身损坏时使用的稳定失败原因。 -->
+  <BDP_ChipManufacturing_EmptyCategory>芯片记录缺少主分类。</BDP_ChipManufacturing_EmptyCategory>
+  <BDP_ChipManufacturing_EmptyActionList>芯片记录没有动作来源。</BDP_ChipManufacturing_EmptyActionList>
+  <BDP_ChipManufacturing_EmptyActionKey>芯片记录包含空动作来源。</BDP_ChipManufacturing_EmptyActionKey>
+  <!-- 读档迁移只发送一封温和汇总信，避免逐件提示打断玩家。 -->
+  <BDP_ChipMigration_LetterLabel>芯片规格整理完成</BDP_ChipMigration_LetterLabel>
+  <BDP_ChipMigration_LetterBody>芯片预设发生变化后，系统已完成一次兼容性整理。\n\n已转化为芯片遗留物：{0}\n已移除无法成立的制造任务：{1}\n因来源暂时缺失而保留：{2}\n\n来源缺失的项目没有被删除；相关内容恢复后仍可继续使用。</BDP_ChipMigration_LetterBody>
+</LanguageData>

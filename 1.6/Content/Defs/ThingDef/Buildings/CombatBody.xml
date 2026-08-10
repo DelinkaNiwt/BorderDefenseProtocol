@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    CombatBody 紧急脱离信标建筑 Def。
+    建筑只提供传送锚点服务，不持有紧急脱离流程真值。
+  -->
+
+  <!-- 紧急脱离信标。 -->
+  <ThingDef ParentName="BuildingBase">
+    <!-- Def 唯一名称。 -->
+    <defName>BDP_EmergencyEscapeBeacon</defName>
+
+    <!-- 游戏界面显示名称。 -->
+    <label>紧急脱离信标</label>
+
+    <!-- 玩家可见说明。 -->
+    <description>战斗体紧急脱离的优先传送锚点。需要通电，同一地图只能建造一座。</description>
+
+    <!-- 建筑分类。 -->
+    <category>Building</category>
+
+    <!-- 实例运行时类型。 -->
+    <thingClass>BDP.Content.CombatBody.Escape.Building_EmergencyEscapeBeacon</thingClass>
+
+    <!-- 允许玩家选中。 -->
+    <selectable>true</selectable>
+
+    <!-- 地图绘制类型。 -->
+    <drawerType>MapMeshOnly</drawerType>
+
+    <!-- 绘制高度层。 -->
+    <altitudeLayer>Building</altitudeLayer>
+
+    <!-- 可建造地形要求。 -->
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+
+    <!-- 受击默认音效。 -->
+    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+
+    <!-- 建筑修理效果。 -->
+    <repairEffect>Repair</repairEffect>
+
+    <!-- 被摧毁时留下资源。 -->
+    <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+
+    <!-- 被摧毁时留下瓦砾。 -->
+    <filthLeaving>Filth_RubbleBuilding</filthLeaving>
+
+    <!-- 基础属性。 -->
+    <statBases>
+      <!-- 售价折算。 -->
+      <SellPriceFactor>0.70</SellPriceFactor>
+
+      <!-- 最大耐久。 -->
+      <MaxHitPoints>100</MaxHitPoints>
+
+      <!-- 建造工时。 -->
+      <WorkToBuild>2000</WorkToBuild>
+
+      <!-- 质量。 -->
+      <Mass>5</Mass>
+
+      <!-- 可燃性。 -->
+      <Flammability>0.5</Flammability>
+    </statBases>
+
+    <!-- 图像配置；复用原版轨道贸易信标贴图。 -->
+    <graphicData>
+      <!-- 世界与信息面板图标路径。 -->
+      <texPath>Things/Building/Misc/DropBeacon</texPath>
+
+      <!-- 单贴图建筑图形类。 -->
+      <graphicClass>Graphic_Single</graphicClass>
+
+      <!-- 绘制尺寸。 -->
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+
+    <!-- 建筑占地。 -->
+    <size>(1,1)</size>
+
+    <!-- 是否可旋转。 -->
+    <rotatable>false</rotatable>
+
+    <!-- 通行性。 -->
+    <passability>PassThroughOnly</passability>
+
+    <!-- 填充比例。 -->
+    <fillPercent>0.15</fillPercent>
+
+    <!-- 路径代价。 -->
+    <pathCost>14</pathCost>
+
+    <!-- 禁止与区域重叠。 -->
+    <canOverlapZones>false</canOverlapZones>
+
+    <!-- 放置分类。 -->
+    <designationCategory>Biotech</designationCategory>
+
+    <!-- 建造材料。 -->
+    <costList>
+      <!-- 钢铁。 -->
+      <Steel>50</Steel>
+
+      <!-- 工业零部件。 -->
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+
+    <!-- 建造前置研究。 -->
+    <researchPrerequisites>
+      <!-- 电力研究。 -->
+      <li>Electricity</li>
+    </researchPrerequisites>
+
+    <!-- ThingComp 列表。 -->
+    <comps>
+      <!-- 原版禁止组件。 -->
+      <li Class="CompProperties_Forbiddable" />
+
+      <!-- 原版用电组件。 -->
+      <li Class="CompProperties_Power">
+        <!-- 通电运行组件类型。 -->
+        <compClass>CompPowerTrader</compClass>
+
+        <!-- 基础耗电。 -->
+        <basePowerConsumption>50</basePowerConsumption>
+
+        <!-- 雨中短路。 -->
+        <shortCircuitInRain>true</shortCircuitInRain>
+      </li>
+
+      <!-- 原版开关组件。 -->
+      <li Class="CompProperties_Flickable" />
+
+      <!-- BDP Trion 预留组件；当前不参与路由判断。 -->
+      <li Class="BDP.Core.Trion.CompProperties_Trion">
+        <!-- 非 Pawn 宿主基础最大容量；本轮只预留接口。 -->
+        <baseMax>0</baseMax>
+
+        <!-- 初始百分比。 -->
+        <startPercent>1</startPercent>
+
+        <!-- 每日恢复量；本轮不启用。 -->
+        <recoveryPerDay>0</recoveryPerDay>
+      </li>
+    </comps>
+
+    <!-- 放置辅助器。 -->
+    <placeWorkers>
+      <!-- 同一地图只允许一座该建筑。 -->
+      <li>BDP.Content.CombatBody.Escape.PlaceWorker_EmergencyEscapeBeaconOnlyOnePerMap</li>
+    </placeWorkers>
+  </ThingDef>
+
+</Defs>

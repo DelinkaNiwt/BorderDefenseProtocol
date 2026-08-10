@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    BDP 主模组投射物定义。
+    每种投射物可通过 BeamTrailExtension 引用不同的拖尾预设。
+  -->
+
+  <!-- 普通弹：基础弹丸，小行星芯片默认投射物。 -->
+
+  <!-- 标准狙击弹：朱鹮芯片专用投射物，高伤高速。 -->
+  <ThingDef ParentName="BaseBullet">
+    <defName>BDP_Projectile_SniperStandard</defName>
+    <label>标准狙击弹</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <thingClass>BDP.Core.Projectiles.BdpProjectile</thingClass>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>60</damageAmountBase>
+      <armorPenetrationBase>0.35</armorPenetrationBase>
+      <stoppingPower>2</stoppingPower>
+      <speed>250</speed>
+    </projectile>
+    <modExtensions>
+      <li Class="BDP.Content.Projectiles.BeamTrail.BeamTrailExtension">
+        <preset>BDP_TrailPreset_BrightMintShort</preset>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>BDP_Projectile_Normal</defName>
+    <label>普通弹</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <thingClass>BDP.Core.Projectiles.BdpProjectile</thingClass>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>13</damageAmountBase>
+      <armorPenetrationBase>0.10</armorPenetrationBase>
+      <stoppingPower>2</stoppingPower>
+      <speed>120</speed>
+    </projectile>
+    <modExtensions>
+      <li Class="BDP.Content.Projectiles.BeamTrail.BeamTrailExtension">
+        <preset>BDP_TrailPreset_BrightMintShort</preset>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- 穿甲弹：高伤高速高穿甲，飞锥组合技投射物。 -->
+  <ThingDef ParentName="BaseBullet">
+    <defName>BDP_Projectile_ArmorPiercing</defName>
+    <label>穿甲弹</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <thingClass>BDP.Core.Projectiles.BdpProjectile</thingClass>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>26</damageAmountBase>
+      <armorPenetrationBase>0.35</armorPenetrationBase>
+      <stoppingPower>3</stoppingPower>
+      <speed>180</speed>
+    </projectile>
+    <modExtensions>
+      <li Class="BDP.Content.Projectiles.BeamTrail.BeamTrailExtension">
+        <preset>BDP_TrailPreset_BrightMintShort</preset>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- 变化弹：高速低伤，毒蛇芯片投射物。 -->
+  <ThingDef ParentName="BaseBullet">
+    <defName>BDP_Projectile_Variable</defName>
+    <label>变化弹</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <thingClass>BDP.Core.Projectiles.BdpProjectile</thingClass>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>8</damageAmountBase>
+      <armorPenetrationBase>0.05</armorPenetrationBase>
+      <stoppingPower>1</stoppingPower>
+      <speed>200</speed>
+    </projectile>
+    <modExtensions>
+      <li Class="BDP.Content.Projectiles.BeamTrail.BeamTrailExtension">
+        <preset>BDP_TrailPreset_BrightMintLong</preset>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- 追踪弹：低速中伤，猎犬芯片投射物。 -->
+  <ThingDef ParentName="BaseBullet">
+    <defName>BDP_Projectile_Tracking</defName>
+    <label>追踪弹</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <thingClass>BDP.Core.Projectiles.BdpProjectile</thingClass>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>10</damageAmountBase>
+      <armorPenetrationBase>0.05</armorPenetrationBase>
+      <stoppingPower>1.5</stoppingPower>
+      <speed>85</speed>
+    </projectile>
+    <modExtensions>
+      <li Class="BDP.Content.Projectiles.BeamTrail.BeamTrailExtension">
+        <preset>BDP_TrailPreset_BrightMintLong</preset>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+</Defs>

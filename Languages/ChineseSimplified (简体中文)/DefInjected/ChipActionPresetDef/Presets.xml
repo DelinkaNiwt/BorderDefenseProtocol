@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 制造面板动作预设。 -->
+  <BDP_Preset_Asteroid.label>小行星</BDP_Preset_Asteroid.label>
+  <BDP_Preset_Viper.label>毒蛇</BDP_Preset_Viper.label>
+  <BDP_Preset_Hound.label>猎犬</BDP_Preset_Hound.label>
+  <BDP_Preset_Kogetsu.label>弧月</BDP_Preset_Kogetsu.label>
+  <BDP_Preset_Senku.label>旋空</BDP_Preset_Senku.label>
+  <BDP_Preset_EnergyShield.label>护盾</BDP_Preset_EnergyShield.label>
+  <BDP_Preset_EnergyShield_Auto.label>常驻型自动能量护盾</BDP_Preset_EnergyShield_Auto.label>
+  <BDP_Preset_EmergencyEscape.label>紧急脱离</BDP_Preset_EmergencyEscape.label>
+  <BDP_Preset_Toki.label>朱鹮</BDP_Preset_Toki.label>
+  <BDP_Preset_Grasshopper.label>蚱蜢</BDP_Preset_Grasshopper.label>
+</LanguageData>

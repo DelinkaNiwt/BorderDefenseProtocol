@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    CombatBody 基础设施配置。
+    这里集中放置 CombatBody 快照排除策略与伤口行为策略。
+  -->
+
+  <!-- ===== CombatBody 快照配置 ===== -->
+
+  <!--
+    默认战斗体快照配置。
+    该 Def 用来定义快照保存/恢复时需要主动排除的 Hediff 与 Hediff 类型。
+  -->
+  <BDP.Core.CombatBody.CombatBodySnapshotConfigDef>
+    <!-- Def 唯一名称，供快照策略服务在全局列表中识别。 -->
+    <defName>BDP_DefaultCombatBodySnapshotConfig</defName>
+
+    <!-- 按 DefName 排除的具体 Hediff 列表。 -->
+    <excludedHediffs>
+      <!-- 启灵神经不参与战斗体快照回写。 -->
+      <li>PsychicAmplifier</li>
+      <!-- 机控中枢不参与战斗体快照回写。 -->
+      <li>MechlinkImplant</li>
+      <!-- 战斗体激活态属于运行态 Hediff，不应被写回。 -->
+      <li>BDP_CombatBodyActive</li>
+    </excludedHediffs>
+
+    <!-- 按运行时类型排除的 Hediff 类列表。 -->
+    <excludedHediffClasses>
+      <!-- 原版灵能链接 Hediff 类型。 -->
+      <li>Verse.Hediff_Psylink</li>
+      <!-- 原版机械链接 Hediff 类型。 -->
+      <li>Verse.Hediff_Mechlink</li>
+    </excludedHediffClasses>
+  </BDP.Core.CombatBody.CombatBodySnapshotConfigDef>
+
+  <!-- ===== CombatBody 伤口策略 ===== -->
+
+  <!--
+    CombatBody 伤口策略默认配置。
+    这里只放玩法默认值；系统边界仍由 C# 写死保护。
+  -->
+  <BDP.Core.CombatBody.Wounds.CombatBodyWoundPolicyDef>
+    <!-- 默认策略 Def 名称。 -->
+    <defName>BDP_DefaultCombatBodyWoundPolicy</defName>
+
+    <!-- 战斗体激活期间是否压制单个伤口自己的流血表现。 -->
+    <suppressIndividualBleeding>true</suppressIndividualBleeding>
+
+    <!-- 开启伤口导致的 Trion 持续流失。 -->
+    <trionDrainEnabled>true</trionDrainEnabled>
+
+    <!-- 伤口 Trion 流失按原版伤口严重度计算。 -->
+    <trionDrainMetric>Severity</trionDrainMetric>
+
+    <!-- 每 1.0 原版 rawBleedRate 对应的每秒 Trion 流失；当前 severity 口径不用它。 -->
+    <trionDrainPerRawBleedRatePerSecond>0</trionDrainPerRawBleedRatePerSecond>
+
+    <!-- 每 1 点原版伤口严重度每秒流失 1 点 Trion。 -->
+    <trionDrainPerSeverityPerSecond>1</trionDrainPerSeverityPerSecond>
+
+    <!-- 未来启用流失时，是否把新鲜缺失部位的原版流血潜势纳入口径。 -->
+    <includeMissingPartBleedPotential>true</includeMissingPartBleedPotential>
+
+    <!-- 低频校准间隔。只在 Trion 伤口流失启用时使用。 -->
+    <calibrationIntervalTicks>600</calibrationIntervalTicks>
+
+    <!-- 伤口没有继续发生变化后，Trion 流失保持 600 tick，也就是游戏内 10 秒。 -->
+    <trionDrainIdleTimeoutTicks>600</trionDrainIdleTimeoutTicks>
+  </BDP.Core.CombatBody.Wounds.CombatBodyWoundPolicyDef>
+
+  <!-- ===== CombatBody 宿主通用配置 ===== -->
+
+  <!--
+    战斗体宿主全局配置。
+    这里集中放置不随单个 Pawn/ThingDef 变化的战斗体全局玩法参数。
+  -->
+  <BDP.Core.CombatBody.CombatBodyHostConfigDef>
+    <!-- 默认配置 Def 名称。 -->
+    <defName>BDP_DefaultCombatBodyHostConfig</defName>
+
+    <!-- 战斗体激活后的每秒 Trion 维持消耗。 -->
+    <maintenanceDrainPerSecond>1</maintenanceDrainPerSecond>
+
+    <!-- 一次成功手动生成或解除后，禁止再次手动切换 12 tick。 -->
+    <manualTransformLockTicks>12</manualTransformLockTicks>
+
+    <!-- 当前前台衣物模式；临时切到预设服装，便于观察扫描替换。 -->
+    <frontMode>Preset</frontMode>
+
+    <!-- 当前预设模式使用的临时观察套装。 -->
+    <frontPresetDefName>BDP_TemporaryCombatBodyObservationPreset</frontPresetDefName>
+  </BDP.Core.CombatBody.CombatBodyHostConfigDef>
+
+</Defs>

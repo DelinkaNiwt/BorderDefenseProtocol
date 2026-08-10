@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    BDP_Ability_Grasshopper — 蚱蜢弹射能力
+    在脚下凝聚 Trion 弹射跳板，以爆发性速度弹向目标位置。
+    冷却 5 秒（300 ticks），射程 24.9。
+  -->
+  <AbilityDef>
+    <defName>BDP_Ability_Grasshopper</defName>
+    <label>蚱蜢</label>
+    <description>凝聚Trion弹射跳板，以爆发性速度弹向目标位置。</description>
+    <iconPath>Things/Trigger/Chip/BDP_TriggerChip</iconPath> <!-- TODO: 替换为蚱蜢专用图标 -->
+    <cooldownTicksRange>300</cooldownTicksRange> <!-- 5秒冷却 -->
+    <hostile>false</hostile>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+
+    <verbProperties>
+      <!-- 使用蚱蜢专用 Verb（继承 BdpVerb_CastAbility，复用 Trion 扣费） -->
+      <verbClass>BDP.Content.Grasshopper.Verb_CastAbilityGrasshopper</verbClass>
+      <label>dash</label>
+      <violent>false</violent>
+      <forceNormalTimeSpeed>false</forceNormalTimeSpeed>
+      <warmupTime>0.2</warmupTime>
+      <range>24.9</range>
+      <requireLineOfSight>true</requireLineOfSight>
+      <soundCast>Longjump_Jump</soundCast>
+      <soundLanding>Longjump_Land</soundLanding>
+
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>false</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+
+    <comps>
+      <!-- BDP Trion 成本组件：UseCost/MinimumRequired 由表达系统计算结果 -->
+      <li Class="BDP.Core.Abilities.CompProperties_AbilityEffect_BdpTrionCost" />
+      <!-- 蚱蜢跳跃效果：ability.Activate() → ApplyEffects() 时执行弹射 -->
+      <li Class="BDP.Content.Grasshopper.CompProperties_GrasshopperJump">
+        <pawnFlyerDef>BDP_PawnFlyer_Grasshopper</pawnFlyerDef>
+      </li>
+    </comps>
+
+    <jobDef>CastJump</jobDef>
+  </AbilityDef>
+
+</Defs>

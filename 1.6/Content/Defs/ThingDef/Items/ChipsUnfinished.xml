@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 芯片制造半成品物品。参照原版 UnfinishedThing 模式。 -->
+  <ThingDef ParentName="UnfinishedBase">
+    <stackLimit>1</stackLimit>
+    <defName>BDP_Chip_Unfinished</defName>
+    <label>触发器芯片（未完成）</label>
+    <description>正在制造中的触发器芯片，需要继续在制造台上加工才能完成。</description>
+    <thingClass>BDP.Content.Assembly.Thing_UnfinishedChip</thingClass>
+    <graphicData>
+      <texPath>Things/Trigger/Chip/BDP_TriggerChip</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>0.85</drawSize>
+      <color>(200,200,200,255)</color>
+    </graphicData>
+    <!-- 芯片不使用原版材质系统，但保留 Unfinished 分类与原版半成品行为。 -->
+    <stuffCategories Inherit="false" />
+    <statBases>
+      <Mass>0.20</Mass>
+      <MarketValue>0</MarketValue>
+    </statBases>
+  </ThingDef>
+
+</Defs>

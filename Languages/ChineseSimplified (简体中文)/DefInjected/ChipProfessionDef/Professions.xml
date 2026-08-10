@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 互斥唯一的芯片职业。 -->
+  <BDP_ChipProfession_Attacker.label>攻击手</BDP_ChipProfession_Attacker.label>
+  <BDP_ChipProfession_Attacker.description>使用攻击手原生动作。</BDP_ChipProfession_Attacker.description>
+  <BDP_ChipProfession_Shooter.label>射手</BDP_ChipProfession_Shooter.label>
+  <BDP_ChipProfession_Shooter.description>使用射手原生动作。</BDP_ChipProfession_Shooter.description>
+  <BDP_ChipProfession_Gunner.label>枪手</BDP_ChipProfession_Gunner.label>
+  <BDP_ChipProfession_Gunner.description>可使用枪手和射手原生动作。</BDP_ChipProfession_Gunner.description>
+  <BDP_ChipProfession_Sniper.label>狙击手</BDP_ChipProfession_Sniper.label>
+  <BDP_ChipProfession_Sniper.description>使用狙击手原生动作。</BDP_ChipProfession_Sniper.description>
+</LanguageData>

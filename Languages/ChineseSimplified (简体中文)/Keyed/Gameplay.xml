@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 手部槽位、特殊槽位和通用界面片段。 -->
+  <BDP_Side_Main>主手</BDP_Side_Main>
+  <BDP_Side_Sub>副手</BDP_Side_Sub>
+  <BDP_Side_Special>特殊</BDP_Side_Special>
+  <BDP_Side_MainFull>主手槽</BDP_Side_MainFull>
+  <BDP_Side_SubFull>副手槽</BDP_Side_SubFull>
+  <BDP_Side_SpecialFull>特殊槽</BDP_Side_SpecialFull>
+  <BDP_Slot_Main>主手槽 {0}</BDP_Slot_Main>
+  <BDP_Slot_Sub>副手槽 {0}</BDP_Slot_Sub>
+  <BDP_Slot_Special>特殊槽 {0}</BDP_Slot_Special>
+  <BDP_Slot_Default>槽位 {0}</BDP_Slot_Default>
+  <BDP_Side_ColumnHeader>{0}槽</BDP_Side_ColumnHeader>
+  <BDP_Tick_Seconds>{0}秒</BDP_Tick_Seconds>
+  <BDP_Tick_Ticks>{0}秒</BDP_Tick_Ticks>
+  <BDP_Unit_Level>{0}级</BDP_Unit_Level>
+  <BDP_Yes>是</BDP_Yes>
+  <BDP_No>否</BDP_No>
+  <BDP_None>无</BDP_None>
+</LanguageData>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 芯片制造台。 -->
+  <BDP_ChipFabricator.label>芯片制造台</BDP_ChipFabricator.label>
+  <BDP_ChipFabricator.description>使用动作预设与可选枪壳组合制造芯片的工作台。制造任务沿用原版账单、材料搬运与半成品流程。</BDP_ChipFabricator.description>
+</LanguageData>

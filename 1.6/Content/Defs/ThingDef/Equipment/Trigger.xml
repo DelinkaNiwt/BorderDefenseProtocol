@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 边境标准触发体正式物品定义。 -->
+  <ThingDef ParentName="BaseWeapon">
+    <!-- ThingDef唯一名称。 -->
+    <defName>BDP_TriggerBody_BorderStandard</defName>
+    <!-- 游戏界面显示名称。 -->
+    <label>边境标准触发体</label>
+    <!-- 玩家看到的物品说明。 -->
+    <description>边境体系的标准触发体，提供主槽、副槽和特殊槽，用于装载与控制Trion芯片。</description>
+    <!-- 正式触发体贴图。 -->
+    <graphicData>
+      <!-- 物品贴图路径不带文件扩展名。 -->
+      <texPath>Things/Equipment/Trigger/BDP_BorderStandardTriggerBody</texPath>
+      <!-- 单贴图图像类。 -->
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <!-- 技术等级。 -->
+    <techLevel>Industrial</techLevel>
+    <!-- 基础物品属性保持原有配置数值。 -->
+    <statBases>
+      <!-- 制作工作量。 -->
+      <WorkToMake>500</WorkToMake>
+      <!-- 基础重量。 -->
+      <Mass>1.0</Mass>
+      <!-- 基础价值。 -->
+      <MarketValue>120</MarketValue>
+    </statBases>
+    <!-- 原版近战工具保持原配置。 -->
+    <tools>
+      <li>
+        <!-- 工具标签。 -->
+        <label>敲击</label>
+        <!-- 支持的近战能力。 -->
+        <capacities>
+          <!-- 最小钝击能力。 -->
+          <li>Blunt</li>
+        </capacities>
+        <!-- 近战威力。 -->
+        <power>4</power>
+        <!-- 攻击冷却时间。 -->
+        <cooldownTime>2.0</cooldownTime>
+      </li>
+    </tools>
+    <!-- Content提供玩家可配置芯片面板的显式许可。 -->
+    <modExtensions>
+      <!-- 允许在Trion面板右侧显示芯片控制区。 -->
+      <li Class="BDP.Content.Trigger.UI.TriggerLoadoutPanelExtension" />
+    </modExtensions>
+    <!-- Core提供触发体类别与槽位运行时。 -->
+    <comps Inherit="False">
+      <!-- 保留原版禁止交互能力。 -->
+      <li Class="CompProperties_Forbiddable" />
+      <!-- 触发体正式类别和槽位配置。 -->
+      <li Class="BDP.Core.Trigger.CompProperties_TriggerBody">
+        <!-- 所属触发器类别。 -->
+        <triggerCategory>BDP_TriggerCategory_Border</triggerCategory>
+        <!-- 玩家可通过装配台配置芯片。 -->
+        <loadoutControlMode>PlayerConfigurable</loadoutControlMode>
+        <!-- 主槽数量。 -->
+        <mainSlotCount>4</mainSlotCount>
+        <!-- 副槽数量。 -->
+        <subSlotCount>4</subSlotCount>
+        <!-- 特殊槽数量。 -->
+        <specialSlotCount>2</specialSlotCount>
+      </li>
+      <!-- 保留Styleable，保持原版装备风格接口兼容。 -->
+      <li Class="CompProperties_Styleable" />
+    </comps>
+  </ThingDef>
+
+</Defs>

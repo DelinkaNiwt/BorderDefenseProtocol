@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Trion 天赋检测工作类型。 -->
+  <BDP_EnterTrionDetector.label>进入Trion天赋检测仪</BDP_EnterTrionDetector.label>
+  <BDP_CarryToTrionDetector.label>搬运至Trion天赋检测仪</BDP_CarryToTrionDetector.label>
+  <BDP_OperateTrionDetector.label>操作Trion天赋检测仪</BDP_OperateTrionDetector.label>
+
+  <!-- 芯片仓工作类型。 -->
+  <BDP_HaulToChipStorage.label>搬运芯片到芯片仓</BDP_HaulToChipStorage.label>
+</LanguageData>

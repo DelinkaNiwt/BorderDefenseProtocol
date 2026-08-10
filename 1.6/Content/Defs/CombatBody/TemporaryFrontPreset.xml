@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    临时战斗体服装观察预设。
+    只用于当前扫描变换实测；确认正式美术方案后应替换或删除。
+  -->
+  <BDP.Core.CombatBody.CombatBodyFrontPresetDef>
+    <!-- 临时预设唯一名称，由战斗体宿主全局配置引用。 -->
+    <defName>BDP_TemporaryCombatBodyObservationPreset</defName>
+
+    <!-- 按穿戴顺序生成的原版非材料装备，覆盖腿、躯干多层和头部。 -->
+    <apparelDefNames>
+      <!-- 原版防弹裤：观察腿部和贴身/中层扫描。 -->
+      <li>Apparel_FlakPants</li>
+      <!-- 原版防弹背心：观察躯干中层扫描。 -->
+      <li>Apparel_FlakVest</li>
+      <!-- 原版防弹夹克：观察躯干外层扫描。 -->
+      <li>Apparel_FlakJacket</li>
+      <!-- 原版动力装甲头盔：观察头部扫描边界。 -->
+      <li>Apparel_PowerArmorHelmet</li>
+    </apparelDefNames>
+  </BDP.Core.CombatBody.CombatBodyFrontPresetDef>
+
+</Defs>

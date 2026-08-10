@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 三种正式触发器类别；类别本身只表达所属分类，不决定槽位或玩家控制权。 -->
+
+  <!-- 边境体系触发器类别。 -->
+  <BDP.Core.Trigger.TriggerCategoryDef>
+    <!-- 类别Def唯一名称。 -->
+    <defName>BDP_TriggerCategory_Border</defName>
+    <!-- 玩家看到的类别名称。 -->
+    <label>边境触发器</label>
+    <!-- 玩家看到的类别说明。 -->
+    <description>属于边境体系的触发器。</description>
+  </BDP.Core.Trigger.TriggerCategoryDef>
+
+  <!-- 近界体系触发器类别。 -->
+  <BDP.Core.Trigger.TriggerCategoryDef>
+    <!-- 类别Def唯一名称。 -->
+    <defName>BDP_TriggerCategory_Neighbor</defName>
+    <!-- 玩家看到的类别名称。 -->
+    <label>近界触发器</label>
+    <!-- 玩家看到的类别说明。 -->
+    <description>属于近界体系的触发器。</description>
+  </BDP.Core.Trigger.TriggerCategoryDef>
+
+  <!-- 黑触发器类别。 -->
+  <BDP.Core.Trigger.TriggerCategoryDef>
+    <!-- 类别Def唯一名称。 -->
+    <defName>BDP_TriggerCategory_Black</defName>
+    <!-- 玩家看到的类别名称。 -->
+    <label>黑触发器</label>
+    <!-- 玩家看到的类别说明。 -->
+    <description>属于黑触发器体系的触发器。</description>
+  </BDP.Core.Trigger.TriggerCategoryDef>
+
+</Defs>

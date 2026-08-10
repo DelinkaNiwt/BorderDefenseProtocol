@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 芯片制造枪壳预设。 -->
+  <BDP_GunClass_Revolver.label>左轮手枪</BDP_GunClass_Revolver.label>
+  <BDP_GunClass_Revolver.description>近程敏捷型枪壳。贴身精度高，远距衰减明显。</BDP_GunClass_Revolver.description>
+  <BDP_GunClass_AssaultRifle.label>突击步枪</BDP_GunClass_AssaultRifle.label>
+  <BDP_GunClass_AssaultRifle.description>中远程均衡型枪壳，性能全面。</BDP_GunClass_AssaultRifle.description>
+  <BDP_GunClass_Shotgun.label>霰弹枪</BDP_GunClass_Shotgun.label>
+  <BDP_GunClass_Shotgun.description>极近程爆发型枪壳，弹丸数量翻倍。</BDP_GunClass_Shotgun.description>
+</LanguageData>

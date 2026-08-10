@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 弧月正式单武器双层手持视觉。 -->
+  <BDP.Core.Expressions.ExpressionVisualPresetDef>
+    <!-- 视觉预设唯一名称。 -->
+    <defName>BDP_Visual_Kogetsu</defName>
+    <!-- 诊断显示名称。 -->
+    <label>弧月手持视觉</label>
+    <!-- 手柄主层。 -->
+    <GraphicData>
+      <texPath>Things/Trigger/Chip/Kogetsu/kogetsu_handle</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Cutout</shaderType>
+      <drawSize>(1.2, 1.2)</drawSize>
+    </GraphicData>
+    <!-- 南北姿态。 -->
+    <SouthNorthPose>
+      <DefaultOffset>(-0.20, 0, 0.1)</DefaultOffset>
+      <DefaultAngle>-50</DefaultAngle>
+      <DefaultAltitudeOffset>0.05</DefaultAltitudeOffset>
+      <SouthZAdjust>-0.05</SouthZAdjust>
+      <NorthZAdjust>0.05</NorthZAdjust>
+      <SubHandAngleOffset>15</SubHandAngleOffset>
+    </SouthNorthPose>
+    <!-- 东西姿态。 -->
+    <EastWestPose>
+      <SideBaseX>0.08</SideBaseX>
+      <SideDeltaX>0.03</SideDeltaX>
+      <FrontAltitudeOffset>0.05</FrontAltitudeOffset>
+      <BackAltitudeOffset>-0.05</BackAltitudeOffset>
+      <DefaultAngle>-50</DefaultAngle>
+      <SubHandAngleOffset>15</SubHandAngleOffset>
+    </EastWestPose>
+    <!-- 刀刃附加层。 -->
+    <OverlayLayers>
+      <li>
+        <LayerId>kogetsu_blade</LayerId>
+        <GraphicData>
+          <texPath>Things/Trigger/Chip/Kogetsu/kogetsu_blade</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <shaderType>MoteGlow</shaderType>
+          <color>(1.0, 1.0, 0.95)</color>
+          <drawSize>(1.2, 1.2)</drawSize>
+        </GraphicData>
+      </li>
+    </OverlayLayers>
+  </BDP.Core.Expressions.ExpressionVisualPresetDef>
+
+  <!-- 手枪视觉：引用原版 Revolver 贴图，无显式姿态 → ReplaceTextureOnly。 -->
+  <BDP.Core.Expressions.ExpressionVisualPresetDef>
+    <defName>BDP_Visual_Pistol</defName>
+    <label>手枪手持视觉</label>
+    <GraphicData>
+      <texPath>Things/Item/Equipment/WeaponRanged/Revolver</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </GraphicData>
+  </BDP.Core.Expressions.ExpressionVisualPresetDef>
+
+  <!-- 突击步枪视觉：引用原版 AssaultRifle 贴图。 -->
+  <BDP.Core.Expressions.ExpressionVisualPresetDef>
+    <defName>BDP_Visual_AssaultRifle</defName>
+    <label>突击步枪手持视觉</label>
+    <GraphicData>
+      <texPath>Things/Item/Equipment/WeaponRanged/AssaultRifle</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </GraphicData>
+  </BDP.Core.Expressions.ExpressionVisualPresetDef>
+
+  <!-- 霰弹枪视觉：引用原版 Shotgun（泵动霰弹枪）贴图。 -->
+  <BDP.Core.Expressions.ExpressionVisualPresetDef>
+    <defName>BDP_Visual_Shotgun</defName>
+    <label>霰弹枪手持视觉</label>
+    <GraphicData>
+      <texPath>Things/Item/Equipment/WeaponRanged/Shotgun</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </GraphicData>
+  </BDP.Core.Expressions.ExpressionVisualPresetDef>
+
+  <!-- 狙击步枪视觉：引用原版 SniperRifle 贴图。 -->
+  <BDP.Core.Expressions.ExpressionVisualPresetDef>
+    <defName>BDP_Visual_SniperRifle</defName>
+    <label>狙击步枪手持视觉</label>
+    <GraphicData>
+      <texPath>Things/Item/Equipment/WeaponRanged/SniperRifle</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </GraphicData>
+  </BDP.Core.Expressions.ExpressionVisualPresetDef>
+
+</Defs>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 能量护盾抵挡时使用的正六边形命中特效。 -->
+  <FleckDef>
+    <!-- Fleck Def 唯一名称。 -->
+    <defName>BDP_Fleck_EnergyShieldBlock</defName>
+    <!-- 使用原版抛射 Fleck 系统。 -->
+    <fleckSystemClass>FleckSystemThrown</fleckSystemClass>
+    <!-- 特效图像配置。 -->
+    <graphicData>
+      <!-- 使用原版 Fleck 图像类。 -->
+      <graphicClass>Graphic_Fleck</graphicClass>
+      <!-- 使用正式能量护盾格挡贴图。 -->
+      <texPath>Effects/Shield/energy_shield_block</texPath>
+      <!-- 沿用旧 BDP 绘制尺寸。 -->
+      <drawSize>2.0</drawSize>
+      <!-- 使用原版发光粒子着色器。 -->
+      <shaderType>MoteGlow</shaderType>
+      <!-- 沿用旧 BDP 黄绿色 Trion 色。 -->
+      <color>(180, 235, 140)</color>
+    </graphicData>
+    <!-- 绘制在角色上方。 -->
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <!-- 快速显现。 -->
+    <fadeInTime>0.02</fadeInTime>
+    <!-- 短暂停留。 -->
+    <solidTime>0.08</solidTime>
+    <!-- 快速淡出。 -->
+    <fadeOutTime>0.1</fadeOutTime>
+  </FleckDef>
+
+</Defs>

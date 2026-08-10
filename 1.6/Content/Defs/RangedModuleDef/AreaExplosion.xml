@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    范围爆炸远程模块。
+    参与 Preview（预览）阶段绘制爆炸覆盖范围，
+    参与 Impact（终结结算）阶段在实际落点提交范围爆炸计划。
+    真实爆炸执行回落到原版 GenExplosion.DoExplosion。
+  -->
+
+  <BDP.Core.AttackExecution.BdpRangedAttackModuleDef>
+    <defName>BDP_AreaExplosionModule</defName>
+    <label>范围爆炸模块</label>
+    <runtimeClass>BDP.Content.RangedModules.AreaExplosion.AreaExplosionModule</runtimeClass>
+    <defaultConfig Class="BDP.Content.RangedModules.AreaExplosion.AreaExplosionConfig">
+      <!-- 爆炸半径；必须大于 0 才会生成爆炸与预览。 -->
+      <ExplosionRadius>2.9</ExplosionRadius>
+      <!-- 爆炸伤害类型。 -->
+      <DamageDef>Bomb</DamageDef>
+      <!-- 爆炸伤害量；写 0 表示回退当前投射物伤害量。 -->
+      <DamageAmount>0</DamageAmount>
+      <!-- 护甲穿透；写 -1 表示回退当前投射物护甲穿透。 -->
+      <ArmorPenetration>-1</ArmorPenetration>
+      <!-- 抑制基线单体命中，避免子弹直击与爆炸伤害叠加。 -->
+      <SuppressBaselineImpact>true</SuppressBaselineImpact>
+    </defaultConfig>
+  </BDP.Core.AttackExecution.BdpRangedAttackModuleDef>
+
+</Defs>

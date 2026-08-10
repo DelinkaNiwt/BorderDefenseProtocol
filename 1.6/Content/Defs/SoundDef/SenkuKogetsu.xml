@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    旋空弧月声音 Def。
+    为正式 Ability 提供独立的施放音效入口。
+  -->
+
+  <!--
+    旋空弧月施放音效。
+  -->
+  <SoundDef>
+    <!-- SoundDef 唯一名称。 -->
+    <defName>BDP_Sound_SenkuKogetsuCast</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>6</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <!-- 使用主模组正式旋空弧月音频。 -->
+            <clipPath>Trigger/SenkuKogetsu/senku_kogetsu_cast</clipPath>
+          </li>
+        </grains>
+        <volumeRange>40~50</volumeRange>
+        <pitchRange>0.95~1.05</pitchRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+</Defs>

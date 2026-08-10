@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    旋空弧月波体 ThingDef。
+    该定义承载波体的正式贴图和 Content 运行时类。
+  -->
+
+  <!--
+    旋空弧月波体实体。
+    该实体承载波体推进、伤害与绘制逻辑。
+  -->
+  <ThingDef>
+    <!-- ThingDef 唯一名称。 -->
+    <defName>BDP_Projectile_SenkuKogetsuWave</defName>
+    <!-- 玩家界面显示名称。 -->
+    <label>旋空弧月</label>
+    <!-- 未来运行时类型。 -->
+    <thingClass>BDP.Content.SenkuKogetsu.BdpSenkuKogetsuWave</thingClass>
+    <!-- 使用 Projectile 类别承载波体实体。 -->
+    <category>Projectile</category>
+    <tickerType>Normal</tickerType>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <useHitPoints>false</useHitPoints>
+    <neverMultiSelect>true</neverMultiSelect>
+    <isSaveable>false</isSaveable>
+    <drawOffscreen>true</drawOffscreen>
+    <selectable>false</selectable>
+    <!-- 图像配置。 -->
+    <graphicData>
+      <!-- 使用正式旋空弧月波体贴图。 -->
+      <texPath>Things/Trigger/SenkuKogetsu/senku_kogetsu_wave</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(3, 1.5)</drawSize>
+    </graphicData>
+  </ThingDef>
+
+</Defs>

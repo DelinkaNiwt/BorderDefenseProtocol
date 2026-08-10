@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 100～400：先天储量非常有限。 -->
+  <BDP.Content.Trion.Talent.Capacity.TrionCapacityPotentialBandDef>
+    <defName>BDP_TrionCapacityPotential_Feeble</defName>
+    <label>微弱</label>
+    <minimumCapacity>100</minimumCapacity>
+    <maximumCapacity>400</maximumCapacity>
+    <description>检测到的 Trion 容量潜质非常有限。</description>
+  </BDP.Content.Trion.Talent.Capacity.TrionCapacityPotentialBandDef>
+
+  <!-- 500～700：低于多数人的常见水平。 -->
+  <BDP.Content.Trion.Talent.Capacity.TrionCapacityPotentialBandDef>
+    <defName>BDP_TrionCapacityPotential_Low</defName>
+    <label>偏低</label>
+    <minimumCapacity>500</minimumCapacity>
+    <maximumCapacity>700</maximumCapacity>
+    <description>检测到的 Trion 容量潜质低于常见水平。</description>
+  </BDP.Content.Trion.Talent.Capacity.TrionCapacityPotentialBandDef>
+
+  <!-- 800～1200：最常见的普通水平。 -->
+  <BDP.Content.Trion.Talent.Capacity.TrionCapacityPotentialBandDef>
+    <defName>BDP_TrionCapacityPotential_Ordinary</defName>
+    <label>普通</label>
+    <minimumCapacity>800</minimumCapacity>
+    <maximumCapacity>1200</maximumCapacity>
+    <description>检测到的 Trion 容量潜质处于最常见的水平。</description>
+  </BDP.Content.Trion.Talent.Capacity.TrionCapacityPotentialBandDef>
+
+  <!-- 1300～1700：明显高于普通水平。 -->
+  <BDP.Content.Trion.Talent.Capacity.TrionCapacityPotentialBandDef>
+    <defName>BDP_TrionCapacityPotential_Good</defName>
+    <label>良好</label>
+    <minimumCapacity>1300</minimumCapacity>
+    <maximumCapacity>1700</maximumCapacity>
+    <description>检测到的 Trion 容量潜质明显高于普通水平。</description>
+  </BDP.Content.Trion.Talent.Capacity.TrionCapacityPotentialBandDef>
+
+  <!-- 1800～2400：少见的优秀水平。 -->
+  <BDP.Content.Trion.Talent.Capacity.TrionCapacityPotentialBandDef>
+    <defName>BDP_TrionCapacityPotential_Excellent</defName>
+    <label>优秀</label>
+    <minimumCapacity>1800</minimumCapacity>
+    <maximumCapacity>2400</maximumCapacity>
+    <description>检测到的 Trion 容量潜质十分优秀。</description>
+  </BDP.Content.Trion.Talent.Capacity.TrionCapacityPotentialBandDef>
+
+  <!-- 2500～2900：普通主体的顶端。 -->
+  <BDP.Content.Trion.Talent.Capacity.TrionCapacityPotentialBandDef>
+    <defName>BDP_TrionCapacityPotential_Outstanding</defName>
+    <label>卓越</label>
+    <minimumCapacity>2500</minimumCapacity>
+    <maximumCapacity>2900</maximumCapacity>
+    <description>检测到的 Trion 容量潜质已达到卓越水平。</description>
+  </BDP.Content.Trion.Talent.Capacity.TrionCapacityPotentialBandDef>
+
+  <!-- 3000～3900：极少数天才。 -->
+  <BDP.Content.Trion.Talent.Capacity.TrionCapacityPotentialBandDef>
+    <defName>BDP_TrionCapacityPotential_Genius</defName>
+    <label>天才</label>
+    <minimumCapacity>3000</minimumCapacity>
+    <maximumCapacity>3900</maximumCapacity>
+    <description>检测到极为罕见的天才级 Trion 容量潜质。</description>
+  </BDP.Content.Trion.Talent.Capacity.TrionCapacityPotentialBandDef>
+
+  <!-- 4000～4900：超出常规范畴的破格水平。 -->
+  <BDP.Content.Trion.Talent.Capacity.TrionCapacityPotentialBandDef>
+    <defName>BDP_TrionCapacityPotential_Exceptional</defName>
+    <label>破格</label>
+    <minimumCapacity>4000</minimumCapacity>
+    <maximumCapacity>4900</maximumCapacity>
+    <description>检测到超出常规范畴的破格 Trion 容量潜质。</description>
+  </BDP.Content.Trion.Talent.Capacity.TrionCapacityPotentialBandDef>
+
+  <!-- 5000：独立显示的最高潜质档位。 -->
+  <BDP.Content.Trion.Talent.Capacity.TrionCapacityPotentialBandDef>
+    <defName>BDP_TrionCapacityPotential_SlightlyUnderstands</defName>
+    <label>略懂(?)</label>
+    <minimumCapacity>5000</minimumCapacity>
+    <maximumCapacity>5000</maximumCapacity>
+    <description>检测到无法以常规标准解释的 Trion 容量潜质。</description>
+  </BDP.Content.Trion.Talent.Capacity.TrionCapacityPotentialBandDef>
+
+</Defs>

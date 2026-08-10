@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    CombatBody 健康系统 Def。
+    这里集中定义战斗体进入、退出时会附着到 Pawn 身上的健康状态。
+  -->
+
+  <!--
+    战斗体激活态。
+    该 Hediff 用来标记 Pawn 正处于战斗体激活阶段，并附带一组运行时保护效果。
+  -->
+  <HediffDef>
+    <!-- Def 唯一名称，供代码与其他 Def 通过名字查找。 -->
+    <defName>BDP_CombatBodyActive</defName>
+
+    <!-- 运行时 Hediff 实现类，负责承载激活态的专用逻辑。 -->
+    <hediffClass>BDP.Core.Hediffs.Hediff_BdpCombatBodyActive</hediffClass>
+
+    <!-- 游戏界面显示的名称。 -->
+    <label>战斗体激活</label>
+
+    <!-- 鼠标提示与信息面板中显示的说明文本。 -->
+    <description>战斗体当前处于激活状态。</description>
+
+    <!-- 状态标签显示颜色，用于在健康页里快速识别。 -->
+    <defaultLabelColor>(0.8, 0.8, 1.0)</defaultLabelColor>
+
+    <!-- 是否被视为负面 Hediff；激活态属于正向或中性状态。 -->
+    <isBad>false</isBad>
+
+    <!-- 激活态存在期间阻止 Pawn 因常规健康判定直接死亡。 -->
+    <preventsDeath>true</preventsDeath>
+
+    <!-- 阶段列表；该状态只有一个固定阶段。 -->
+    <stages>
+      <li>
+        <!-- 疼痛系数，0 表示激活态下不受疼痛影响。 -->
+        <painFactor>0</painFactor>
+
+        <!-- 总流血系数，0 表示激活态下不产生流血压力。 -->
+        <totalBleedFactor>0</totalBleedFactor>
+
+        <!-- 是否阻止精神崩溃。 -->
+        <blocksMentalBreaks>true</blocksMentalBreaks>
+
+        <!-- 饥饿下降速率系数，0 表示暂停饥饿消耗。 -->
+        <hungerRateFactor>0</hungerRateFactor>
+
+        <!-- 休息下降速率系数，0 表示暂停休息流失。 -->
+        <restFallFactor>0</restFallFactor>
+
+        <!-- 激活态下禁用的需求列表。 -->
+        <disablesNeeds>
+          <!-- 舒适度需求在战斗体激活时不参与计算。 -->
+          <li>Comfort</li>
+        </disablesNeeds>
+
+        <!-- 能力修正列表。 -->
+        <capMods>
+          <li>
+            <!-- 被修正的能力项。 -->
+            <capacity>Moving</capacity>
+
+            <!-- 最终能力乘区系数；1.0 表示保持基础移动能力。 -->
+            <postFactor>1.0</postFactor>
+          </li>
+        </capMods>
+
+        <!-- 属性偏移列表。 -->
+        <statOffsets>
+          <!-- 最低舒适温度下限偏移，大幅放宽低温适应区间。 -->
+          <ComfyTemperatureMin>-200</ComfyTemperatureMin>
+
+          <!-- 最高舒适温度上限偏移，大幅放宽高温适应区间。 -->
+          <ComfyTemperatureMax>200</ComfyTemperatureMax>
+
+          <!-- 毒性抗性偏移，1 表示完全免疫毒性积累。 -->
+          <ToxicResistance>1</ToxicResistance>
+
+          <!-- 真空抗性，1 表示完全免疫真空暴露、真空灼伤、无需呼吸。 -->
+          <VacuumResistance>1</VacuumResistance>
+
+          <!-- 环境毒素抗性，1 表示免疫有毒尘埃、腐臭、酸雾等。 -->
+          <ToxicEnvironmentResistance>1</ToxicEnvironmentResistance>
+        </statOffsets>
+
+        <!-- 属性乘区列表。 -->
+        <statFactors>
+          <!-- 移动速度倍率，2.0 表示基准速度翻倍。 -->
+          <MoveSpeed>2.0</MoveSpeed>
+        </statFactors>
+
+        <!-- 直接免疫的原版疾病列表。 -->
+        <makeImmuneTo>
+          <!-- 流感。 -->
+          <li>Flu</li>
+          <!-- 鼠疫。 -->
+          <li>Plague</li>
+          <!-- 疟疾。 -->
+          <li>Malaria</li>
+          <!-- 昏睡病。 -->
+          <li>SleepingSickness</li>
+          <!-- 纤维机械体。 -->
+          <li>FibrousMechanites</li>
+          <!-- 感官机械体。 -->
+          <li>SensoryMechanites</li>
+          <!-- 伤口感染；战斗体伤口不应在 Active 期间发展为普通肉体感染。 -->
+          <li>WoundInfection</li>
+        </makeImmuneTo>
+      </li>
+    </stages>
+
+  </HediffDef>
+
+  <!--
+    延时崩解显示态。
+    该 Hediff 只在战斗体 90 tick 崩解表现期存在，用来显示倒计时与直接崩解原因。
+  -->
+  <HediffDef>
+    <!-- Def 唯一名称，供崩解阶段挂载与收尾移除。 -->
+    <defName>BDP_CombatBodyCollapsePending</defName>
+
+    <!-- 运行时 Hediff 实现类，负责动态标签与提示。 -->
+    <hediffClass>BDP.Core.Hediffs.Hediff_BdpCombatBodyCollapsePending</hediffClass>
+
+    <!-- 游戏界面显示名称；实际展示文本由 Hediff 类动态覆写。 -->
+    <label>战斗体破裂中</label>
+
+    <!-- 玩家可见的状态说明。 -->
+    <description>战斗体正在破裂，正在进入最终崩解收尾。</description>
+
+    <!-- 标签颜色，用于提示这是正在进行中的危险状态。 -->
+    <defaultLabelColor>(1.0, 0.55, 0.18)</defaultLabelColor>
+
+    <!-- 是否被视为负面 Hediff。 -->
+    <isBad>true</isBad>
+  </HediffDef>
+
+  <!--
+    被动崩解后遗症。
+    该 Hediff 在战斗体被动崩解后短时间挂到 Pawn 身上，用于表达恢复期的虚弱状态。
+  -->
+  <HediffDef>
+    <!-- Def 唯一名称，供退出事务通过名字附加。 -->
+    <defName>BDP_CombatBodyCollapseAftereffect</defName>
+
+    <!-- 采用带 Comp 的通用 Hediff，实现自动消退。 -->
+    <hediffClass>HediffWithComps</hediffClass>
+
+    <!-- 游戏界面显示名称。 -->
+    <label>战斗体崩解后遗症</label>
+
+    <!-- 玩家可见的状态说明。 -->
+    <description>战斗体被动崩解后留下的短暂衰弱。</description>
+
+    <!-- 标签颜色，用于提示这是需要关注的负面状态。 -->
+    <defaultLabelColor>(1.0, 0.45, 0.45)</defaultLabelColor>
+
+    <!-- 是否被视为负面 Hediff。 -->
+    <isBad>true</isBad>
+
+    <!-- 阶段列表；当前仅包含一个固定衰弱阶段。 -->
+    <stages>
+      <li>
+        <!-- 能力修正列表。 -->
+        <capMods>
+          <li>
+            <!-- 被削弱的移动能力。 -->
+            <capacity>Moving</capacity>
+
+            <!-- 移动能力最终乘区系数。 -->
+            <postFactor>0.75</postFactor>
+          </li>
+          <li>
+            <!-- 被削弱的操作能力。 -->
+            <capacity>Manipulation</capacity>
+
+            <!-- 操作能力最终乘区系数。 -->
+            <postFactor>0.8</postFactor>
+          </li>
+          <li>
+            <!-- 被削弱的意识能力。 -->
+            <capacity>Consciousness</capacity>
+
+            <!-- 意识能力最终乘区系数。 -->
+            <postFactor>0.9</postFactor>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+
+    <!-- 附加组件列表。 -->
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <!-- 自动消退时间；1800 tick 约为 30 秒游戏时间。 -->
+        <disappearsAfterTicks>1800</disappearsAfterTicks>
+      </li>
+    </comps>
+  </HediffDef>
+
+</Defs>

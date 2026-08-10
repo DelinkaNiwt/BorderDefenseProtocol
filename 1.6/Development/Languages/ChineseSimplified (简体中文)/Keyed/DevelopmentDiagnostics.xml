@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 开发期触发体地图画点诊断按钮。 -->
+  <BDP_Command_TriggerDiagnostics_DrawMarkers>画点诊断</BDP_Command_TriggerDiagnostics_DrawMarkers>
+  <BDP_Command_TriggerDiagnostics_DrawMarkersDesc>在当前地图绘制角色、武器、枪口、理论发射中心和实际发射点。</BDP_Command_TriggerDiagnostics_DrawMarkersDesc>
+  <BDP_Command_TriggerDiagnostics_Enabled>已开启触发体地图画点诊断</BDP_Command_TriggerDiagnostics_Enabled>
+  <BDP_Command_TriggerDiagnostics_Disabled>已关闭触发体地图画点诊断</BDP_Command_TriggerDiagnostics_Disabled>
+</LanguageData>

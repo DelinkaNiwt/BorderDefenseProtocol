@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    旋空弧月 Ability Def。
+    当前接入：
+
+    1. 正式 Ability 宿主。
+    2. 正式 Trion 扣费入口。
+    3. 旋空弧月的目标与射程表现。
+
+    真正的月牙剑气业务效果在 Task 2 再补。
+  -->
+
+  <!--
+    旋空弧月 Ability。
+    它作为组合结果的正式 Ability 宿主。
+  -->
+  <AbilityDef>
+    <!-- AbilityDef 唯一名称。 -->
+    <defName>BDP_Ability_SenkuKogetsu</defName>
+    <!-- 玩家界面显示名称。 -->
+    <label>旋空弧月</label>
+    <!-- 提示说明。 -->
+    <description>由弧月与旋空组合形成的远程能量体攻击能力。</description>
+    <!-- 使用弧月手柄图标作为能力图标。 -->
+    <iconPath>Things/Trigger/Chip/Kogetsu/kogetsu_handle</iconPath>
+    <!-- 冷却时间，单位 tick。 -->
+    <cooldownTicksRange>600</cooldownTicksRange>
+    <!-- 是否视为敌对技能。 -->
+    <hostile>true</hostile>
+    <!-- 非征召时不显示按钮。 -->
+    <displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+    <!-- 非征召时禁用按钮。 -->
+    <disableGizmoWhileUndrafted>true</disableGizmoWhileUndrafted>
+    <!-- 施法 Verb 壳。 -->
+    <verbProperties>
+      <!-- 走 BDP 正式 Ability Verb，确保先正式扣费。 -->
+      <verbClass>BDP.Core.Abilities.BdpVerb_CastAbility</verbClass>
+      <!-- 保持已确认的长射程。 -->
+      <range>40</range>
+      <!-- 保持已确认的预热时间。 -->
+      <warmupTime>1.2</warmupTime>
+      <!-- 释放后摇硬直（原版 Stance_Cooldown），约 2 秒内不可行动。 -->
+      <defaultCooldownTime>2.0</defaultCooldownTime>
+      <!-- 使用旋空弧月正式施放音效。 -->
+      <soundCast>BDP_Sound_SenkuKogetsuCast</soundCast>
+      <!-- 保持“不要求直视 LOS”语义。 -->
+      <requireLineOfSight>false</requireLineOfSight>
+      <!-- 保持瞄准扇形显示。 -->
+      <drawAimPie>true</drawAimPie>
+      <!-- 目标参数。 -->
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>true</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+    <!-- Ability 组件。 -->
+    <comps>
+      <li Class="BDP.Core.Abilities.CompProperties_AbilityEffect_BdpExpressionUseRequirements">
+        <!-- Combo 使用条件入口；具体门槛只从绑定的 ComboDef 读取。 -->
+      </li>
+      <li Class="BDP.Core.Abilities.CompProperties_AbilityEffect_BdpTrionCost">
+        <!-- 扣费入口；实际 UseCost / MinimumRequired 来自 combo 正式结果。 -->
+      </li>
+      <li Class="BDP.Content.SenkuKogetsu.CompProperties_SenkuKogetsuWave">
+        <!-- 施放后生成的月牙剑气实体。 -->
+        <waveDef>BDP_Projectile_SenkuKogetsuWave</waveDef>
+        <!-- 射程范围。 -->
+        <minRange>10</minRange>
+        <maxRange>40</maxRange>
+        <!-- 近距离宽扁，远距离窄深。 -->
+        <halfWidthNear>15</halfWidthNear>
+        <halfWidthFar>3</halfWidthFar>
+        <bulgeNear>1.5</bulgeNear>
+        <bulgeFar>8</bulgeFar>
+        <crescentThickness>1</crescentThickness>
+        <!-- 伤害参数。 -->
+        <damageAmount>50</damageAmount>
+        <damageDef>Cut</damageDef>
+        <armorPenetration>0.5</armorPenetration>
+        <stoppingPower>3</stoppingPower>
+        <staggerTicks>95</staggerTicks>
+        <!-- 运动参数。 -->
+        <speedPerTick>1.5</speedPerTick>
+        <burstDist>0.98</burstDist>
+        <burstPhase>0.40</burstPhase>
+        <lingerTicks>45</lingerTicks>
+        <!-- 视觉参数。 -->
+        <glowIntensity>1.5</glowIntensity>
+        <!-- 行为参数。 -->
+        <respectWalls>true</respectWalls>
+        <friendlyFire>true</friendlyFire>
+        <damageBuildings>true</damageBuildings>
+        <buildingDamageFactor>4.0</buildingDamageFactor>
+      </li>
+    </comps>
+  </AbilityDef>
+
+</Defs>

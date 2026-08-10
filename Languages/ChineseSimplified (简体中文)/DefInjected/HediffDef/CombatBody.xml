@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 战斗体状态。 -->
+  <BDP_CombatBodyActive.label>战斗体激活</BDP_CombatBodyActive.label>
+  <BDP_CombatBodyActive.description>战斗体当前处于激活状态。</BDP_CombatBodyActive.description>
+  <BDP_CombatBodyCollapsePending.label>战斗体崩解中</BDP_CombatBodyCollapsePending.label>
+  <BDP_CombatBodyCollapsePending.description>战斗体正在崩解，正在完成最后收尾。</BDP_CombatBodyCollapsePending.description>
+  <BDP_CombatBodyCollapseAftereffect.label>战斗体崩解后遗症</BDP_CombatBodyCollapseAftereffect.label>
+  <BDP_CombatBodyCollapseAftereffect.description>战斗体被动崩解后留下的短暂衰弱。</BDP_CombatBodyCollapseAftereffect.description>
+</LanguageData>

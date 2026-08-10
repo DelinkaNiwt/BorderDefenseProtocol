@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    路线引导远程模块。
+    参与 Targeting（目标选择）、Preview（预览）、Confirm（确认）、
+    Aim（瞄准）、ProjectileInit（投射物初始化）、Arrival（到达）六个阶段，
+    实现毒蛇式折线路径：玩家 Shift+左键 追加锚点，左键确认最终目标，
+    子弹按固定锚点顺序逐段飞行到最终目标。
+  -->
+
+  <BDP.Core.AttackExecution.BdpRangedAttackModuleDef>
+    <defName>BDP_RoutePathModule</defName>
+    <label>路线引导模块</label>
+    <runtimeClass>BDP.Content.RangedModules.RoutePath.RoutePathModule</runtimeClass>
+    <defaultConfig Class="BDP.Content.RangedModules.RoutePath.RoutePathConfig">
+      <MaxAnchors>8</MaxAnchors>
+      <AllowGroundFinal>true</AllowGroundFinal>
+      <AllowThingFinal>true</AllowThingFinal>
+      <ArrivalTolerance>0.35</ArrivalTolerance>
+      <!-- 中间续段相对名义锚点的最大散布半径。 -->
+      <IntermediateSpreadRadius>0.625</IntermediateSpreadRadius>
+      <!-- 最终续段相对冻结最终落点的最大散布半径。 -->
+      <FinalSpreadRadius>0.30</FinalSpreadRadius>
+      <!-- 原版精度达到最高时仍保留的散布比例。 -->
+      <HighAccuracySpreadScale>0.25</HighAccuracySpreadScale>
+      <!-- 候选散布不安全时允许折半收缩的次数。 -->
+      <SpreadSafetyShrinkSteps>4</SpreadSafetyShrinkSteps>
+      <!-- 没有手动锚点且最终目标不可直视时，允许尝试自动绕障锚点。 -->
+      <EnableAutoRoute>true</EnableAutoRoute>
+      <!-- 自动绕障最多递归处理的障碍团层数。 -->
+      <AutoRouteMaxDepth>3</AutoRouteMaxDepth>
+      <!-- 每个障碍团一侧最多选择的绕行锚点数量。 -->
+      <AutoRouteAnchorsPerWall>3</AutoRouteAnchorsPerWall>
+      <!-- 自动绕障扫描单个障碍团时允许扩展的最大格子数。 -->
+      <AutoRouteMaxObstacleCells>200</AutoRouteMaxObstacleCells>
+    </defaultConfig>
+  </BDP.Core.AttackExecution.BdpRangedAttackModuleDef>
+
+</Defs>

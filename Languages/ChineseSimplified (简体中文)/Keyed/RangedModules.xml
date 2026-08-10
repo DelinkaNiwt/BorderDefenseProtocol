@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 路线引导模块——运行时错误提示与 UI 标签。 -->
+
+  <BDP_RoutePath_MustSelectFinalFirst>路线引导：必须先选定最终目标。</BDP_RoutePath_MustSelectFinalFirst>
+  <BDP_RoutePath_AutoRouteFailed>路线引导：自动路径不成立。</BDP_RoutePath_AutoRouteFailed>
+  <BDP_RoutePath_NoAnchorsAvailable>路线引导：当前没有可用锚点。</BDP_RoutePath_NoAnchorsAvailable>
+  <BDP_RoutePath_MaxAnchorsReached>路线引导：锚点数量已达上限。</BDP_RoutePath_MaxAnchorsReached>
+  <BDP_RoutePath_CurrentLegTargetInvalid>路线引导：当前段目标无效。</BDP_RoutePath_CurrentLegTargetInvalid>
+  <BDP_RoutePath_MapInvalid>路线引导：当前地图无效。</BDP_RoutePath_MapInvalid>
+  <BDP_RoutePath_CurrentLegInvalid>路线引导：当前段不成立。</BDP_RoutePath_CurrentLegInvalid>
+  <BDP_RoutePath_AutoRouteOriginTargetInvalid>路线引导：自动路径起点或终点无效。</BDP_RoutePath_AutoRouteOriginTargetInvalid>
+  <BDP_RoutePath_FinalTargetInvalid>路线引导：最终目标无效。</BDP_RoutePath_FinalTargetInvalid>
+  <BDP_RoutePath_ThingTargetNotAllowed>路线引导：当前模块不允许 Thing 作为最终目标。</BDP_RoutePath_ThingTargetNotAllowed>
+  <BDP_RoutePath_GroundTargetNotAllowed>路线引导：当前模块不允许地面格作为最终目标。</BDP_RoutePath_GroundTargetNotAllowed>
+  <BDP_RoutePath_TargetOutOfRange>路线引导：最终目标超出射程。</BDP_RoutePath_TargetOutOfRange>
+  <BDP_RoutePath_FinalTargetRejected>路线引导：当前模块不接受这个最终目标。</BDP_RoutePath_FinalTargetRejected>
+  <BDP_RoutePath_AutoRouteDisabled>路线引导：自动路径未启用。</BDP_RoutePath_AutoRouteDisabled>
+  <BDP_RoutePath_NoDetourPath>路线引导：没有找到可绕行路径。</BDP_RoutePath_NoDetourPath>
+  <BDP_RoutePath_AnchorNotWalkable>路线引导：锚点必须设在可通行位置。</BDP_RoutePath_AnchorNotWalkable>
+  <BDP_RoutePath_AnchorCount>锚点：{0}/{1}</BDP_RoutePath_AnchorCount>
+</LanguageData>

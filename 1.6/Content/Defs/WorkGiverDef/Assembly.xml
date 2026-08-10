@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    芯片仓搬运 WorkGiver 定义。
+    该工作挂在原版 Hauling（搬运）工作类型下。
+  -->
+
+  <!-- 原版账单工作分配器负责芯片制造台。 -->
+  <WorkGiverDef>
+    <defName>BDP_DoBills_ChipFabricator</defName>
+    <label>制造芯片</label>
+    <giverClass>WorkGiver_DoBill</giverClass>
+    <workType>Crafting</workType>
+    <verb>制造芯片</verb>
+    <gerund>正在制造芯片</gerund>
+    <priorityInType>110</priorityInType>
+    <fixedBillGiverDefs>
+      <li>BDP_ChipFabricator</li>
+    </fixedBillGiverDefs>
+  </WorkGiverDef>
+
+  <!-- 搬运有效芯片到芯片仓。 -->
+  <WorkGiverDef>
+    <!-- Def 唯一名称。 -->
+    <defName>BDP_HaulToChipStorage</defName>
+
+    <!-- 工作列表显示标签。 -->
+    <label>搬运芯片到芯片仓</label>
+
+    <!-- 工作扫描器实现类。 -->
+    <giverClass>BDP.Content.Assembly.WorkGiver_HaulToChipStorage</giverClass>
+
+    <!-- 使用原版搬运工作类型。 -->
+    <workType>Hauling</workType>
+
+    <!-- 工作动词。 -->
+    <verb>搬运</verb>
+
+    <!-- 工作进行时文本。 -->
+    <gerund>搬运芯片</gerund>
+
+    <!-- 与原版基因仓入仓工作保持同级优先级。 -->
+    <priorityInType>111</priorityInType>
+
+    <!-- 搬运芯片需要操作能力。 -->
+    <requiredCapacities>
+      <!-- 操作能力。 -->
+      <li>Manipulation</li>
+    </requiredCapacities>
+  </WorkGiverDef>
+
+</Defs>

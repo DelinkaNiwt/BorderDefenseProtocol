@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Trion 腺体基因。 -->
+  <BDP_Gene_TrionGland.label>Trion腺体</BDP_Gene_TrionGland.label>
+  <BDP_Gene_TrionGland.description>形成能够生成、储存并调动 Trion 的特殊腺体。实际容量取决于个体先天潜质。</BDP_Gene_TrionGland.description>
+</LanguageData>

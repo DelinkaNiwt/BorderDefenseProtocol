@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 通用操作与 Trion 消息。 -->
+  <BDP_Message_Chip_Default>该芯片</BDP_Message_Chip_Default>
+  <BDP_Message_Chip_OperationUnavailable>当前无法操作此芯片</BDP_Message_Chip_OperationUnavailable>
+  <BDP_Message_Chip_OperationUnavailableReason>当前无法操作此芯片：{0}</BDP_Message_Chip_OperationUnavailableReason>
+  <BDP_Message_Chip_BoundSlot>此槽位与{0} {1} 关联，请操作主手槽</BDP_Message_Chip_BoundSlot>
+  <BDP_Message_Chip_ActivationFailure>{0}无法启用：</BDP_Message_Chip_ActivationFailure>
+  <BDP_Message_Chip_ContinuousRequirementFailure>{0}不再满足激活条件，正在关闭：</BDP_Message_Chip_ContinuousRequirementFailure>
+  <BDP_Message_Chip_ValidationRejected>该芯片未通过正式芯片定义校验</BDP_Message_Chip_ValidationRejected>
+  <BDP_Message_Chip_SlotRestriction>该芯片的槽区或占用方式不允许装入当前槽位</BDP_Message_Chip_SlotRestriction>
+  <BDP_Message_Chip_PairedHandsOnly>主手/副手成对芯片只能装入主手槽或副手槽。</BDP_Message_Chip_PairedHandsOnly>
+  <BDP_Message_Chip_MissingPartner>主手/副手成对芯片找不到另一手的同编号槽位。</BDP_Message_Chip_MissingPartner>
+  <BDP_Message_Chip_PartnerOccupied>主手/副手成对芯片的另一手同编号槽位已被占用。</BDP_Message_Chip_PartnerOccupied>
+  <BDP_Message_Requirement_MissingEvaluation>{0}：条件未返回检查结果。</BDP_Message_Requirement_MissingEvaluation>
+  <BDP_Message_Expression_DefaultMeleeAttack>近战攻击</BDP_Message_Expression_DefaultMeleeAttack>
+  <BDP_Message_Combo_RequirementsFailure>角色未满足该组合技的使用条件。</BDP_Message_Combo_RequirementsFailure>
+  <BDP_Message_Combo_UseRejected>组合技「{0}」暂时无法使用：
+{1}</BDP_Message_Combo_UseRejected>
+  <BDP_Message_CombatBody_EmergencyEscapeExecuted>战斗体紧急脱离已执行。</BDP_Message_CombatBody_EmergencyEscapeExecuted>
+  <BDP_Message_EmergencyEscape_AlreadyExists>地图内已存在一座{0}。</BDP_Message_EmergencyEscape_AlreadyExists>
+  <BDP_Message_CombatBody_TriggerSwitchFailed>芯片形态切换失败，已保留原形态。</BDP_Message_CombatBody_TriggerSwitchFailed>
+  <!-- 读档时发现旧战斗体宿主事务缺少完整快照的诊断警告。 -->
+  <BDP_Message_CombatBody_LegacyHostRecoveryWarning>检测到{0}的战斗体旧档事务不完整，已切换为安全解除：已应用变换={1}，存在快照={2}，快照已捕获={3}。</BDP_Message_CombatBody_LegacyHostRecoveryWarning>
+  <BDP_Message_CombatBody_CollapseReasonUnknown>未知</BDP_Message_CombatBody_CollapseReasonUnknown>
+  <BDP_Message_CombatBody_CollapseReasonTrionDepleted>Trion储量耗尽</BDP_Message_CombatBody_CollapseReasonTrionDepleted>
+  <BDP_Message_CombatBody_CollapseReasonOther>未知原因（{0}）</BDP_Message_CombatBody_CollapseReasonOther>
+  <BDP_Hediff_CombatBody_TrionDrain>Trion持续消耗：{0}/秒</BDP_Hediff_CombatBody_TrionDrain>
+  <BDP_Hediff_CombatBody_CollapsePendingLabel>战斗体崩解中（{0}）</BDP_Hediff_CombatBody_CollapsePendingLabel>
+  <BDP_Hediff_CombatBody_CollapsePendingTip>剩余：{0}
+原因：{1}</BDP_Hediff_CombatBody_CollapsePendingTip>
+
+  <!-- Trion 状态边界提示。 -->
+  <BDP_Message_Trion_LockedMinimum>Trion 已降至当前锁定下限，不能再继续降低。</BDP_Message_Trion_LockedMinimum>
+  <BDP_Message_Trion_LockedZero>当前存在已锁定 Trion，不能直接置 0。</BDP_Message_Trion_LockedZero>
+  <BDP_Message_Trion_LockedBelow>Trion 已降至当前锁定下限，不能低于已锁定值。</BDP_Message_Trion_LockedBelow>
+  <BDP_Message_Ability_TrionInsufficient>Trion 不足，无法施放该能力。</BDP_Message_Ability_TrionInsufficient>
+  <BDP_Message_Ability_MissingTrionHost>未找到 Trion 宿主，无法施放该能力。</BDP_Message_Ability_MissingTrionHost>
+  <BDP_Message_Trion_RangedInsufficient>Trion不足，无法发射。</BDP_Message_Trion_RangedInsufficient>
+
+  <!-- Trion 天赋检测提示。 -->
+  <BDP_Message_TrionTalent_MissingWorkDefinition>缺少 Trion 天赋检测工作定义。</BDP_Message_TrionTalent_MissingWorkDefinition>
+  <BDP_Message_TrionTalent_AssessmentComplete>Trion天赋检测完成
+容量潜质：{0}
+先天Trion释放力：{1}</BDP_Message_TrionTalent_AssessmentComplete>
+  <BDP_Message_TrionTalent_MissingSubject>缺少受检者。</BDP_Message_TrionTalent_MissingSubject>
+  <BDP_Message_TrionTalent_DeadSubject>死亡角色不能接受 Trion 天赋检测。</BDP_Message_TrionTalent_DeadSubject>
+  <BDP_Message_TrionTalent_PlayerSubjectOnly>只能检测玩家可控制的殖民者、奴隶或囚犯。</BDP_Message_TrionTalent_PlayerSubjectOnly>
+  <BDP_Message_TrionTalent_HumanlikeOnly>只有人形角色具有可检测的 Trion 容量潜质。</BDP_Message_TrionTalent_HumanlikeOnly>
+  <BDP_Message_TrionTalent_HasGland>该角色已有有效 Trion 腺体，容量已经可以直接读取。</BDP_Message_TrionTalent_HasGland>
+  <BDP_Message_TrionTalent_NoPotential>该角色没有可用的 Trion 容量潜质记录。</BDP_Message_TrionTalent_NoPotential>
+  <BDP_Message_TrionTalent_MissingState>该角色缺少 Trion 天赋检测状态宿主。</BDP_Message_TrionTalent_MissingState>
+  <BDP_Message_TrionTalent_AlreadyCompleted>该角色已经完成过 Trion 容量潜质检测。</BDP_Message_TrionTalent_AlreadyCompleted>
+  <BDP_Message_TrionTalent_MissingOperatorOrSubject>缺少操作员或受检者。</BDP_Message_TrionTalent_MissingOperatorOrSubject>
+  <BDP_Message_TrionTalent_SelfAssessment>受检者不能操作自己的 Trion 天赋检测。</BDP_Message_TrionTalent_SelfAssessment>
+  <BDP_Message_TrionTalent_DeadOperator>死亡角色不能操作 Trion 天赋检测。</BDP_Message_TrionTalent_DeadOperator>
+  <BDP_Message_TrionTalent_IntellectualRequired>操作员需要至少 10 级智识。</BDP_Message_TrionTalent_IntellectualRequired>
+  <BDP_Message_TrionTalent_CommitFailed>Trion 天赋检测记录提交失败。</BDP_Message_TrionTalent_CommitFailed>
+  <BDP_Message_TrionTalent_InvalidBand>Trion 容量潜质档位配置无效。</BDP_Message_TrionTalent_InvalidBand>
+  <BDP_Message_TrionTalent_NotSelected>该角色不是当前指定的受检者。</BDP_Message_TrionTalent_NotSelected>
+  <BDP_Message_TrionTalent_DeviceOccupied>Trion 天赋检测仪已经有人。</BDP_Message_TrionTalent_DeviceOccupied>
+  <BDP_Message_TrionTalent_DeviceNoPower>Trion 天赋检测仪未通电。</BDP_Message_TrionTalent_DeviceNoPower>
+  <BDP_Message_TrionTalent_DeviceUnavailable>设备不可用</BDP_Message_TrionTalent_DeviceUnavailable>
+  <BDP_Message_TrionTalent_Unreachable>无法到达</BDP_Message_TrionTalent_Unreachable>
+  <BDP_Message_TrionTalent_IntellectualShort>需要智识10</BDP_Message_TrionTalent_IntellectualShort>
+
+  <!-- 触发器装配与槽位操作提示。 -->
+  <BDP_Message_TriggerAssembly_NoAvailableBody>当前小人没有可装配的触发体。</BDP_Message_TriggerAssembly_NoAvailableBody>
+  <BDP_Message_TriggerAssembly_FixedLoadout>当前触发体的芯片配置已固定，无法修改。</BDP_Message_TriggerAssembly_FixedLoadout>
+  <BDP_Message_TriggerAssembly_NoUse>触发器装配台不可用。</BDP_Message_TriggerAssembly_NoUse>
+  <BDP_Message_TriggerAssembly_MissingJobDef>缺少触发器装配 JobDef。</BDP_Message_TriggerAssembly_MissingJobDef>
+  <BDP_Message_TriggerAssembly_NoPawn>没有可用小人。</BDP_Message_TriggerAssembly_NoPawn>
+  <BDP_Message_TriggerAssembly_Unavailable>触发器装配台不可用。</BDP_Message_TriggerAssembly_Unavailable>
+  <BDP_Message_TriggerAssembly_Unreachable>无法到达触发器装配台。</BDP_Message_TriggerAssembly_Unreachable>
+  <BDP_Message_TriggerAssembly_NoPower>触发器装配台未通电。</BDP_Message_TriggerAssembly_NoPower>
+  <BDP_Message_TriggerAssembly_NoBody>小人没有可装配的触发体。</BDP_Message_TriggerAssembly_NoBody>
+  <BDP_Message_TriggerAssembly_FixedByDefinition>当前触发体的芯片配置已固定，无法修改。</BDP_Message_TriggerAssembly_FixedByDefinition>
+  <BDP_Message_TriggerAssembly_CombatBodyActive>战斗体激活时不能装配触发器。</BDP_Message_TriggerAssembly_CombatBodyActive>
+  <BDP_Message_TriggerAssembly_PlayerNonConfigurable>当前触发体不允许玩家配置芯片。</BDP_Message_TriggerAssembly_PlayerNonConfigurable>
+  <BDP_Message_Assembly_MissingService>缺少装配服务。</BDP_Message_Assembly_MissingService>
+  <BDP_Message_Assembly_TargetSlotMissing>目标槽位不存在。</BDP_Message_Assembly_TargetSlotMissing>
+  <BDP_Message_Assembly_TargetSlotMirror>同步槽位不能直接装配，请操作主手槽。</BDP_Message_Assembly_TargetSlotMirror>
+  <BDP_Message_Assembly_TargetSlotOccupied>目标槽位已有芯片。</BDP_Message_Assembly_TargetSlotOccupied>
+  <BDP_Message_Assembly_ChipMissing>缺少芯片。</BDP_Message_Assembly_ChipMissing>
+  <BDP_Message_Assembly_ChipTakeFailed>无法从容器取出芯片。</BDP_Message_Assembly_ChipTakeFailed>
+  <BDP_Message_Assembly_Loaded>芯片已装入。</BDP_Message_Assembly_Loaded>
+  <BDP_Message_Assembly_LoadFailed>芯片装入失败，已尝试退回容器。</BDP_Message_Assembly_LoadFailed>
+  <BDP_Message_Assembly_SourceSlotMissing>来源槽位不存在。</BDP_Message_Assembly_SourceSlotMissing>
+  <BDP_Message_Assembly_SourceSlotMirror>同步槽位不能直接卸载，请操作主手槽。</BDP_Message_Assembly_SourceSlotMirror>
+  <BDP_Message_Assembly_SourceSlotEmpty>来源槽位没有芯片。</BDP_Message_Assembly_SourceSlotEmpty>
+  <BDP_Message_Assembly_UnloadFailed>芯片卸载失败。</BDP_Message_Assembly_UnloadFailed>
+  <BDP_Message_Assembly_Unloaded>芯片已卸下。</BDP_Message_Assembly_Unloaded>
+  <BDP_Message_Assembly_SameSlot>槽位未变化。</BDP_Message_Assembly_SameSlot>
+  <BDP_Message_Assembly_SlotMissing>来源或目标槽位不存在。</BDP_Message_Assembly_SlotMissing>
+  <BDP_Message_Assembly_SlotMirror>同步槽位不能作为直接拖拽源或目标。</BDP_Message_Assembly_SlotMirror>
+  <BDP_Message_Assembly_SlotActive>激活中的槽位不能移动芯片。</BDP_Message_Assembly_SlotActive>
+  <BDP_Message_Assembly_NewChipMissing>缺少新芯片。</BDP_Message_Assembly_NewChipMissing>
+  <BDP_Message_Assembly_NewChipTakeFailed>无法从容器取出新芯片。</BDP_Message_Assembly_NewChipTakeFailed>
+  <BDP_Message_Assembly_OldUnloadFailed>旧芯片卸载失败，新芯片已退回。</BDP_Message_Assembly_OldUnloadFailed>
+  <BDP_Message_Assembly_Replaced>芯片已替换。</BDP_Message_Assembly_Replaced>
+  <BDP_Message_Assembly_ReplaceFailed>新芯片装入失败，已尝试恢复旧芯片。</BDP_Message_Assembly_ReplaceFailed>
+  <BDP_Message_Assembly_SourceUnloadFailed>来源芯片卸载失败。</BDP_Message_Assembly_SourceUnloadFailed>
+  <BDP_Message_Assembly_Moved>芯片已移动。</BDP_Message_Assembly_Moved>
+  <BDP_Message_Assembly_MoveFailed>目标槽位装入失败，已尝试恢复来源槽位。</BDP_Message_Assembly_MoveFailed>
+  <BDP_Message_Assembly_TargetUnloadFailed>目标芯片卸载失败，已尝试恢复来源槽位。</BDP_Message_Assembly_TargetUnloadFailed>
+  <BDP_Message_Assembly_SwapTargetLoadFailed>来源芯片装入目标槽位失败，已尝试恢复。</BDP_Message_Assembly_SwapTargetLoadFailed>
+  <BDP_Message_Assembly_Swapped>芯片已交换。</BDP_Message_Assembly_Swapped>
+  <BDP_Message_Assembly_SwapSourceLoadFailed>目标芯片装回来源槽位失败，已尝试恢复。</BDP_Message_Assembly_SwapSourceLoadFailed>
+  <BDP_Message_TriggerLoadout_EmptySlot>空槽</BDP_Message_TriggerLoadout_EmptySlot>
+  <BDP_Message_TriggerLoadout_Empty>空</BDP_Message_TriggerLoadout_Empty>
+  <BDP_Message_TriggerLoadout_Active>使用中</BDP_Message_TriggerLoadout_Active>
+  <BDP_Message_TriggerLoadout_Standby>待命</BDP_Message_TriggerLoadout_Standby>
+  <BDP_Message_TriggerLoadout_Disabled>不可用：{0}</BDP_Message_TriggerLoadout_Disabled>
+  <BDP_Message_TriggerLoadout_Binding>关联：与{0} {1}同步，请操作主手槽</BDP_Message_TriggerLoadout_Binding>
+  <BDP_Message_TriggerLoadout_Chip>芯片：{0}</BDP_Message_TriggerLoadout_Chip>
+  <BDP_Message_TriggerLoadout_State>状态：{0}</BDP_Message_TriggerLoadout_State>
+  <BDP_Message_TriggerLoadout_Action>操作：{0}</BDP_Message_TriggerLoadout_Action>
+  <BDP_Message_TriggerLoadout_ActivationRequirements>激活条件</BDP_Message_TriggerLoadout_ActivationRequirements>
+  <BDP_Message_TriggerLoadout_RequirementLine>{0}：&lt;color={1}&gt;{2} / {3}&lt;/color&gt;</BDP_Message_TriggerLoadout_RequirementLine>
+  <BDP_Message_TriggerLoadout_ClickActivate>点击启用</BDP_Message_TriggerLoadout_ClickActivate>
+  <BDP_Message_TriggerLoadout_ClickSwitch>点击切换至此芯片</BDP_Message_TriggerLoadout_ClickSwitch>
+  <BDP_Message_TriggerLoadout_ClickDeactivate>点击关闭</BDP_Message_TriggerLoadout_ClickDeactivate>
+  <BDP_Message_TriggerLoadout_WaitConflict>等待冲突芯片关闭</BDP_Message_TriggerLoadout_WaitConflict>
+  <BDP_Message_TriggerLoadout_Deactivating>正在关闭：剩余 {0}%</BDP_Message_TriggerLoadout_Deactivating>
+  <BDP_Message_TriggerLoadout_Activating>正在启用：进度 {0}%</BDP_Message_TriggerLoadout_Activating>
+  <BDP_Message_TriggerLoadout_NoAction>当前没有可执行操作</BDP_Message_TriggerLoadout_NoAction>
+  <BDP_Message_TriggerLoadout_NoSpecialReason>无特殊原因</BDP_Message_TriggerLoadout_NoSpecialReason>
+  <BDP_Message_TriggerLoadout_MissingSlot>槽位不存在</BDP_Message_TriggerLoadout_MissingSlot>
+  <BDP_Message_TriggerLoadout_DisabledSlot>当前槽位被禁用</BDP_Message_TriggerLoadout_DisabledSlot>
+  <BDP_Message_TriggerLoadout_Switching>当前仍在切换中</BDP_Message_TriggerLoadout_Switching>
+  <BDP_Message_TriggerLoadout_Controlled>当前为同步槽位，请操作主手槽</BDP_Message_TriggerLoadout_Controlled>
+  <BDP_Message_TriggerLoadout_AlreadyActive>当前槽位已激活</BDP_Message_TriggerLoadout_AlreadyActive>
+  <BDP_Message_TriggerLoadout_BattleUnavailable>战斗体不可用</BDP_Message_TriggerLoadout_BattleUnavailable>
+  <BDP_Message_TriggerLoadout_RequirementsUnmet>不满足激活条件</BDP_Message_TriggerLoadout_RequirementsUnmet>
+  <BDP_Message_TriggerLoadout_NotDisabled>未禁用</BDP_Message_TriggerLoadout_NotDisabled>
+  <BDP_Message_TriggerLoadout_MissingBodyPart>缺失必要身体部位</BDP_Message_TriggerLoadout_MissingBodyPart>
+</LanguageData>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    Trion 数值系统分布 Def。
+    这里集中放置 Trion 释放力先天分布和容量潜质分布。
+  -->
+
+  <!-- ===== Trion 释放力先天分布 ===== -->
+
+  <!-- 所有人形角色共用、且与容量潜质独立抽取的先天 Trion 释放力分布。 -->
+  <BDP.Core.Trion.Intensity.TrionIntensityDistributionDef>
+    <!-- 定义唯一名称。 -->
+    <defName>BDP_TrionIntensityDistribution</defName>
+    <!-- 1～10 必须各出现一次；权重只表达彼此之间的相对概率。 -->
+    <values>
+      <!-- 释放力 1。 -->
+      <li><intensity>1</intensity><weight>5</weight></li>
+      <!-- 释放力 2。 -->
+      <li><intensity>2</intensity><weight>10</weight></li>
+      <!-- 释放力 3。 -->
+      <li><intensity>3</intensity><weight>20</weight></li>
+      <!-- 释放力 4。 -->
+      <li><intensity>4</intensity><weight>25</weight></li>
+      <!-- 释放力 5。 -->
+      <li><intensity>5</intensity><weight>20</weight></li>
+      <!-- 释放力 6。 -->
+      <li><intensity>6</intensity><weight>10</weight></li>
+      <!-- 释放力 7。 -->
+      <li><intensity>7</intensity><weight>5</weight></li>
+      <!-- 释放力 8。 -->
+      <li><intensity>8</intensity><weight>3</weight></li>
+      <!-- 释放力 9。 -->
+      <li><intensity>9</intensity><weight>1.5</weight></li>
+      <!-- 释放力 10。 -->
+      <li><intensity>10</intensity><weight>0.5</weight></li>
+    </values>
+  </BDP.Core.Trion.Intensity.TrionIntensityDistributionDef>
+
+  <!-- ===== Trion 容量潜质分布 ===== -->
+
+  <!-- 所有人形角色共用的正式 Trion 潜在容量分布。 -->
+  <BDP.Core.Trion.Capacity.TrionCapacityPotentialDistributionDef>
+    <!-- 定义唯一名称。 -->
+    <defName>BDP_TrionCapacityPotentialDistribution</defName>
+    <!-- 潜在容量下限。 -->
+    <minimumCapacity>100</minimumCapacity>
+    <!-- 潜在容量硬上限。 -->
+    <maximumCapacity>5000</maximumCapacity>
+    <!-- 容量只产生 100 的整数倍。 -->
+    <quantizationUnit>100</quantizationUnit>
+    <!-- 先按权重选择档位，再在档位内等概率选择 100 的整数倍容量。 -->
+    <bands>
+      <!-- 微弱：100～400，占5%。 -->
+      <li>
+        <minimumCapacity>100</minimumCapacity>
+        <maximumCapacity>400</maximumCapacity>
+        <weight>5</weight>
+      </li>
+      <!-- 偏低：500～700，占20%。 -->
+      <li>
+        <minimumCapacity>500</minimumCapacity>
+        <maximumCapacity>700</maximumCapacity>
+        <weight>20</weight>
+      </li>
+      <!-- 普通：800～1200，占30%。 -->
+      <li>
+        <minimumCapacity>800</minimumCapacity>
+        <maximumCapacity>1200</maximumCapacity>
+        <weight>30</weight>
+      </li>
+      <!-- 良好：1300～1700，占20%。 -->
+      <li>
+        <minimumCapacity>1300</minimumCapacity>
+        <maximumCapacity>1700</maximumCapacity>
+        <weight>20</weight>
+      </li>
+      <!-- 优秀：1800～2400，占10%。 -->
+      <li>
+        <minimumCapacity>1800</minimumCapacity>
+        <maximumCapacity>2400</maximumCapacity>
+        <weight>10</weight>
+      </li>
+      <!-- 卓越：2500～2900，占7%。 -->
+      <li>
+        <minimumCapacity>2500</minimumCapacity>
+        <maximumCapacity>2900</maximumCapacity>
+        <weight>7</weight>
+      </li>
+      <!-- 天才：3000～3900，占5%。 -->
+      <li>
+        <minimumCapacity>3000</minimumCapacity>
+        <maximumCapacity>3900</maximumCapacity>
+        <weight>5</weight>
+      </li>
+      <!-- 破格：4000～4900，占2%。 -->
+      <li>
+        <minimumCapacity>4000</minimumCapacity>
+        <maximumCapacity>4900</maximumCapacity>
+        <weight>2</weight>
+      </li>
+      <!-- 略懂(?)：固定5000，占1%。 -->
+      <li>
+        <minimumCapacity>5000</minimumCapacity>
+        <maximumCapacity>5000</maximumCapacity>
+        <weight>1</weight>
+      </li>
+    </bands>
+  </BDP.Core.Trion.Capacity.TrionCapacityPotentialDistributionDef>
+
+</Defs>

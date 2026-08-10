@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 远程攻击模块 Def——label 仅作诊断显示，玩家在芯片界面看到的是芯片本身的名称。 -->
+
+  <BDP_AreaExplosionModule.label>范围爆炸模块</BDP_AreaExplosionModule.label>
+  <BDP_HomingModule.label>制导追踪模块</BDP_HomingModule.label>
+  <BDP_RoutePathModule.label>路线引导模块</BDP_RoutePathModule.label>
+</LanguageData>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    BDP_PawnFlyer_BounceSlash — 弹射砍击飞行器
+    继承蚱蜢的 SimpleCurve 线性飞行曲线 + 沿途碰撞伤害。
+  -->
+  <ThingDef ParentName="PawnFlyerBase">
+    <defName>BDP_PawnFlyer_BounceSlash</defName>
+    <label>bounce slash flyer</label>
+    <thingClass>BDP.Content.BounceSlash.PawnFlyer_BounceSlash</thingClass>
+
+    <!-- 材质设置 -->
+    <seeThroughFog>true</seeThroughFog>
+    <drawerType>RealtimeOnly</drawerType>
+
+    <!-- 飞行参数 — 与蚱蜢相同 -->
+    <pawnFlyer>
+      <flightSpeed>45</flightSpeed>
+      <flightDurationMin>0.1</flightDurationMin>
+      <heightFactor>0</heightFactor>
+
+      <!-- 进度曲线 — 与蚱蜢相同 -->
+      <progressCurve Inherit="False">
+        <points>
+          <li>(0, 0)</li>
+          <li>(0.1, 0.5)</li>
+          <li>(0.25, 0.96)</li>
+          <li>(0.85, 0.995)</li>
+          <li>(1, 1)</li>
+        </points>
+      </progressCurve>
+    </pawnFlyer>
+  </ThingDef>
+
+</Defs>

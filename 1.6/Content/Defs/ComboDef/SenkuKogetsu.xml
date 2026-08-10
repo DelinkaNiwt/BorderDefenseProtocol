@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    旋空弧月组合技 Def。
+    这里固定采用已确认的正式组合语义：
+
+    1. chipA = 弧月
+    2. chipB = 旋空
+    3. 组合结果是 Ability
+    4. 施放 UseCost / MinimumRequired 跟随 chipB 旋空
+  -->
+
+  <!--
+    旋空弧月组合。
+    该组合把弧月与旋空组合为旋空弧月能力。
+  -->
+  <BDP.Core.Combos.ComboDef>
+    <!-- ComboDef 唯一名称。 -->
+    <defName>BDP_Combo_SenkuKogetsu</defName>
+    <!-- 玩家界面显示名称。 -->
+    <label>旋空弧月</label>
+    <!-- 提示说明。 -->
+    <description>将弧月与旋空组合为旋空弧月能力，施放费用和最低要求跟随旋空侧。</description>
+    <!-- 组合所需主副芯片预设。 -->
+    <chipA>BDP_Preset_Kogetsu</chipA>
+    <chipB>BDP_Preset_Senku</chipB>
+    <!-- combo 表达条目。 -->
+    <Expression>
+      <Entries>
+        <!-- 旋空弧月 Ability 结果条目。 -->
+        <li>
+          <Id>combo_senku_kogetsu_ability</Id>
+          <DisplayLabel>旋空弧月</DisplayLabel>
+          <Kind>Ability</Kind>
+          <AbilityDefName>BDP_Ability_SenkuKogetsu</AbilityDefName>
+          <TrionResolve>
+            <!-- 旧行为要求施放消耗跟随旋空侧。 -->
+            <UseCostResolve>FollowChipSub</UseCostResolve>
+            <!-- 旧行为要求最低施放要求也跟随旋空侧。 -->
+            <MinimumRequiredResolve>FollowChipSub</MinimumRequiredResolve>
+          </TrionResolve>
+        </li>
+      </Entries>
+    </Expression>
+  </BDP.Core.Combos.ComboDef>
+
+</Defs>

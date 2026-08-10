@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 五种芯片主分类只表达唯一归属与制造筛选。 -->
+  <BDP.Core.Chips.ChipCategoryDef>
+    <defName>BDP_ChipCategory_Weapon</defName>
+    <label>武装</label>
+    <description>形成直接战斗武装表现的芯片。</description>
+  </BDP.Core.Chips.ChipCategoryDef>
+  <BDP.Core.Chips.ChipCategoryDef>
+    <defName>BDP_ChipCategory_Defense</defName>
+    <label>防护</label>
+    <description>提供防护和承伤能力的芯片。</description>
+  </BDP.Core.Chips.ChipCategoryDef>
+  <BDP.Core.Chips.ChipCategoryDef>
+    <defName>BDP_ChipCategory_Ability</defName>
+    <label>能力</label>
+    <description>提供可主动调用能力的芯片。</description>
+  </BDP.Core.Chips.ChipCategoryDef>
+  <BDP.Core.Chips.ChipCategoryDef>
+    <defName>BDP_ChipCategory_Status</defName>
+    <label>状态</label>
+    <description>改变或维持角色状态的芯片。</description>
+  </BDP.Core.Chips.ChipCategoryDef>
+  <BDP.Core.Chips.ChipCategoryDef>
+    <defName>BDP_ChipCategory_Passive</defName>
+    <label>被动</label>
+    <description>在满足条件时自动发挥作用的芯片。</description>
+  </BDP.Core.Chips.ChipCategoryDef>
+
+  <!-- 独立且互斥的武装职业体系。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipProfessionDef>
+    <defName>BDP_ChipProfession_Attacker</defName>
+    <label>攻击手</label>
+    <description>使用攻击手原生动作。</description>
+    <acceptedActionProfessions>
+      <li>BDP_ChipProfession_Attacker</li>
+    </acceptedActionProfessions>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipProfessionDef>
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipProfessionDef>
+    <defName>BDP_ChipProfession_Shooter</defName>
+    <label>射手</label>
+    <description>使用射手原生动作。</description>
+    <acceptedActionProfessions>
+      <li>BDP_ChipProfession_Shooter</li>
+    </acceptedActionProfessions>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipProfessionDef>
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipProfessionDef>
+    <defName>BDP_ChipProfession_Gunner</defName>
+    <label>枪手</label>
+    <description>可使用枪手和射手原生动作。</description>
+    <acceptedActionProfessions>
+      <li>BDP_ChipProfession_Gunner</li>
+      <li>BDP_ChipProfession_Shooter</li>
+    </acceptedActionProfessions>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipProfessionDef>
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipProfessionDef>
+    <defName>BDP_ChipProfession_Sniper</defName>
+    <label>狙击手</label>
+    <description>使用狙击手原生动作。</description>
+    <acceptedActionProfessions>
+      <li>BDP_ChipProfession_Sniper</li>
+    </acceptedActionProfessions>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipProfessionDef>
+
+  <!-- 可多选的普通特征标签，不承担职业语义。 -->
+  <BDP.Core.Chips.ChipTagDef>
+    <defName>BDP_ChipTag_Entity</defName>
+    <label>实体</label>
+    <description>主要形成实体武装或实体表现。</description>
+  </BDP.Core.Chips.ChipTagDef>
+  <BDP.Core.Chips.ChipTagDef>
+    <defName>BDP_ChipTag_Offensive</defName>
+    <label>进攻型</label>
+    <description>主要用于进攻方向。</description>
+  </BDP.Core.Chips.ChipTagDef>
+  <BDP.Core.Chips.ChipTagDef>
+    <defName>BDP_ChipTag_KogetsuExclusive</defName>
+    <label>弧月专属</label>
+    <description>只对弧月体系开放或有特殊关联。</description>
+  </BDP.Core.Chips.ChipTagDef>
+  <BDP.Core.Chips.ChipTagDef>
+    <defName>BDP_ChipTag_EnergyForm</defName>
+    <label>能量体</label>
+    <description>主要以能量体形式形成表现。</description>
+  </BDP.Core.Chips.ChipTagDef>
+</Defs>

@@ -1,0 +1,6 @@
+C:\NiwtDatas\Projects\RimworldModStudio\模组工程\BorderDefenseProtocol\1.6\Development\Assemblies\BDP.Development.dll
+C:\NiwtDatas\Projects\RimworldModStudio\模组工程\BorderDefenseProtocol\1.6\Development\Assemblies\BDP.Development.pdb
+C:\NiwtDatas\Projects\RimworldModStudio\模组工程\BorderDefenseProtocol\Source\BDP.Development\obj\Release\BDP.Development.csproj.AssemblyReference.cache
+C:\NiwtDatas\Projects\RimworldModStudio\模组工程\BorderDefenseProtocol\Source\BDP.Development\obj\Release\BDP.Development.csproj.CoreCompileInputs.cache
+C:\NiwtDatas\Projects\RimworldModStudio\模组工程\BorderDefenseProtocol\Source\BDP.Development\obj\Release\BDP.Development.dll
+C:\NiwtDatas\Projects\RimworldModStudio\模组工程\BorderDefenseProtocol\Source\BDP.Development\obj\Release\BDP.Development.pdb

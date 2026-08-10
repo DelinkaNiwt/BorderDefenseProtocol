@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 芯片组合生成的攻击能力 Def。 -->
+
+  <BDP_Ability_SenkuKogetsu.label>旋空弧月</BDP_Ability_SenkuKogetsu.label>
+  <BDP_Ability_SenkuKogetsu.description>由弧月与旋空组合形成的远程能量体攻击能力。</BDP_Ability_SenkuKogetsu.description>
+</LanguageData>

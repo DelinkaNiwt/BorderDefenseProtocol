@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    制导追踪远程模块。
+    参与 ProjectileInit（初始化）、Arrival（到达）、Hit（命中判定）阶段，
+    通过 Pursuing→Released→HitCheckPending/FlyAway→Finished 状态机
+    实现弹体对目标的持续追踪、重锁与脱靶飞行。
+  -->
+
+  <BDP.Core.AttackExecution.BdpRangedAttackModuleDef>
+    <defName>BDP_HomingModule</defName>
+    <label>制导追踪模块</label>
+    <runtimeClass>BDP.Content.RangedModules.Homing.HomingModule</runtimeClass>
+    <defaultConfig Class="BDP.Content.RangedModules.Homing.HomingConfig">
+      <InitialSegmentTriggerRatio>0.5</InitialSegmentTriggerRatio>
+      <MaxRelocks>2</MaxRelocks>
+      <HitWindow>0.85</HitWindow>
+      <LossBehindAngle>115</LossBehindAngle>
+      <LossDistanceGrowthTolerance>0.2</LossDistanceGrowthTolerance>
+      <RelockWindow>7.5</RelockWindow>
+      <MinClosingDistance>0.05</MinClosingDistance>
+      <MaxTurnAngleWhenEvading>18</MaxTurnAngleWhenEvading>
+      <PursuitMinTurnAngle>0</PursuitMinTurnAngle>
+      <PursuitTurnResponsiveness>0.3</PursuitTurnResponsiveness>
+      <StaticTargetAngleBypassDistance>0.18</StaticTargetAngleBypassDistance>
+      <PredictionLeadRatio>0.35</PredictionLeadRatio>
+      <RelockLeadRatio>0.18</RelockLeadRatio>
+      <RelockTurnAngle>26</RelockTurnAngle>
+      <RelockMinTurnAngle>2</RelockMinTurnAngle>
+      <RelockTurnResponsiveness>0.36</RelockTurnResponsiveness>
+      <SoftReleaseDistance>2.4</SoftReleaseDistance>
+      <HardReleaseDistance>1.6</HardReleaseDistance>
+      <ReleaseDistanceDecayPerRelock>0.3</ReleaseDistanceDecayPerRelock>
+      <CurveArcStrength>0.45</CurveArcStrength>
+      <InertiaWeight>0.7</InertiaWeight>
+      <CaptureWeight>0.85</CaptureWeight>
+      <TerminalFlyAwayDistance>5.5</TerminalFlyAwayDistance>
+      <PerEmitVariance>0.2</PerEmitVariance>
+    </defaultConfig>
+  </BDP.Core.AttackExecution.BdpRangedAttackModuleDef>
+
+</Defs>

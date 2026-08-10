@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 工作与检测状态。 -->
+  <BDP_Job_TrionTalent_Waiting>正在等待 {0} 入舱。</BDP_Job_TrionTalent_Waiting>
+  <BDP_Job_TrionTalent_Progress>检测进度：{0}</BDP_Job_TrionTalent_Progress>
+  <BDP_Job_TrionTalent_Paused>检测已因断电暂停：{0}</BDP_Job_TrionTalent_Paused>
+  <BDP_Job_TrionTalent_Baseline>（基准耗时：研究速度100%时1游戏小时）</BDP_Job_TrionTalent_Baseline>
+  <BDP_Job_ChipStorage_Stored>已存入芯片</BDP_Job_ChipStorage_Stored>
+</LanguageData>

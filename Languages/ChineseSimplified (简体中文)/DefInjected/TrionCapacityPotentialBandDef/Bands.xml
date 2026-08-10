@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Trion 容量潜质档位。 -->
+  <BDP_TrionCapacityPotential_Feeble.label>微弱</BDP_TrionCapacityPotential_Feeble.label>
+  <BDP_TrionCapacityPotential_Feeble.description>检测到的 Trion 容量潜质非常有限。</BDP_TrionCapacityPotential_Feeble.description>
+  <BDP_TrionCapacityPotential_Low.label>偏低</BDP_TrionCapacityPotential_Low.label>
+  <BDP_TrionCapacityPotential_Low.description>检测到的 Trion 容量潜质低于常见水平。</BDP_TrionCapacityPotential_Low.description>
+  <BDP_TrionCapacityPotential_Ordinary.label>普通</BDP_TrionCapacityPotential_Ordinary.label>
+  <BDP_TrionCapacityPotential_Ordinary.description>检测到的 Trion 容量潜质处于最常见的水平。</BDP_TrionCapacityPotential_Ordinary.description>
+  <BDP_TrionCapacityPotential_Good.label>良好</BDP_TrionCapacityPotential_Good.label>
+  <BDP_TrionCapacityPotential_Good.description>检测到的 Trion 容量潜质明显高于普通水平。</BDP_TrionCapacityPotential_Good.description>
+  <BDP_TrionCapacityPotential_Excellent.label>优秀</BDP_TrionCapacityPotential_Excellent.label>
+  <BDP_TrionCapacityPotential_Excellent.description>检测到的 Trion 容量潜质十分优秀。</BDP_TrionCapacityPotential_Excellent.description>
+  <BDP_TrionCapacityPotential_Outstanding.label>卓越</BDP_TrionCapacityPotential_Outstanding.label>
+  <BDP_TrionCapacityPotential_Outstanding.description>检测到的 Trion 容量潜质已达到卓越水平。</BDP_TrionCapacityPotential_Outstanding.description>
+  <BDP_TrionCapacityPotential_Genius.label>天才</BDP_TrionCapacityPotential_Genius.label>
+  <BDP_TrionCapacityPotential_Genius.description>检测到极为罕见的天才级 Trion 容量潜质。</BDP_TrionCapacityPotential_Genius.description>
+  <BDP_TrionCapacityPotential_Exceptional.label>破格</BDP_TrionCapacityPotential_Exceptional.label>
+  <BDP_TrionCapacityPotential_Exceptional.description>检测到超出常规范畴的破格 Trion 容量潜质。</BDP_TrionCapacityPotential_Exceptional.description>
+  <BDP_TrionCapacityPotential_SlightlyUnderstands.label>略懂(?)</BDP_TrionCapacityPotential_SlightlyUnderstands.label>
+  <BDP_TrionCapacityPotential_SlightlyUnderstands.description>检测到无法以常规标准解释的 Trion 容量潜质。</BDP_TrionCapacityPotential_SlightlyUnderstands.description>
+</LanguageData>

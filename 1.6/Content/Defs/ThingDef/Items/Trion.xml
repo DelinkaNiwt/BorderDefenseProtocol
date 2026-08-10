@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 检测成功后消耗一个的一次性便携 Trion 天赋检测器。 -->
+  <ThingDef ParentName="ResourceBase">
+    <!-- 物品唯一名称。 -->
+    <defName>BDP_TrionPortableDetector</defName>
+    <!-- 物品运行类。 -->
+    <thingClass>BDP.Content.Trion.Talent.Thing_TrionPortableDetector</thingClass>
+    <!-- 玩家可见名称。 -->
+    <label>便携式Trion天赋检测器</label>
+    <!-- 玩家可见说明。 -->
+    <description>一次性 Trion 容量潜质检测器。需要智识至少10级的另一名角色操作，只有成功完成检测后才会消耗。</description>
+    <!-- 地图图形暂用原版高级部件图标。 -->
+    <graphicData>
+      <texPath>Things/Item/Resource/ComponentSpacer</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <!-- 单格最多堆叠十个。 -->
+    <stackLimit>10</stackLimit>
+    <!-- 物品基础属性。 -->
+    <statBases>
+      <MarketValue>180</MarketValue>
+      <Mass>0.5</Mass>
+      <MaxHitPoints>80</MaxHitPoints>
+      <Flammability>1</Flammability>
+    </statBases>
+  </ThingDef>
+
+</Defs>

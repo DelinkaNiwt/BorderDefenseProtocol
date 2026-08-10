@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    弹射砍击组合技 Def。
+    chipA = 蚱蜢，chipB = 弧月。
+    组合结果为 Ability：BDP_Ability_BounceSlash。
+    UseCost=40 由条目显式声明确认。
+  -->
+
+  <!-- 蚱蜢+弧月 → 弹射砍击 -->
+  <BDP.Core.Combos.ComboDef>
+    <defName>BDP_Combo_GrasshopperKogetsu</defName>
+    <label>弹射砍击</label>
+    <description>将蚱蜢和弧月组合为弹射砍击——多段跳跃沿途切割敌人。</description>
+    <!-- 组合所需双芯片预设 -->
+    <chipA>BDP_Preset_Grasshopper</chipA>
+    <chipB>BDP_Preset_Kogetsu</chipB>
+    <!-- 组合表达条目 -->
+    <Expression>
+      <Entries>
+        <li>
+          <Id>combo_bounce_slash</Id>
+          <DisplayLabel>弹射砍击</DisplayLabel>
+          <Kind>Ability</Kind>
+          <AbilityDefName>BDP_Ability_BounceSlash</AbilityDefName>
+          <!-- UseCost=40：每次使用消耗 40 Trion -->
+          <Trion><UseCost>40</UseCost></Trion>
+          <VerbProps>
+            <!-- 稍长预热以突出砍击力度感 -->
+            <warmupTime>0.4</warmupTime>
+          </VerbProps>
+        </li>
+      </Entries>
+    </Expression>
+  </BDP.Core.Combos.ComboDef>
+
+</Defs>

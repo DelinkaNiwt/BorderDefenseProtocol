@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    BDP 装配台系统建筑 Def。
+    包含触发器装配台（玩家交互入口）和芯片仓（内部容器）。
+  -->
+
+  <!-- ===== 触发器装配台 ===== -->
+
+  <!-- 触发器装配台。 -->
+  <ThingDef>
+    <!-- Def 唯一名称，供 Job 和设施连接引用。 -->
+    <defName>BDP_TriggerAssembler</defName>
+
+    <!-- 游戏界面显示名称。 -->
+    <label>触发器装配台</label>
+
+    <!-- 玩家可见的说明文本。 -->
+    <description>用于为触发体装入、卸载和调整芯片的装配台。需要连接触发器芯片容器。</description>
+
+    <!-- 建筑分类。 -->
+    <category>Building</category>
+
+    <!-- 实例运行时类型。 -->
+    <thingClass>BDP.Content.Assembly.Building_TriggerAssembler</thingClass>
+
+    <!-- 选择与绘制设置。 -->
+    <selectable>true</selectable>
+
+    <!-- 地图绘制类型。 -->
+    <drawerType>MapMeshOnly</drawerType>
+
+    <!-- 绘制高度层。 -->
+    <altitudeLayer>Building</altitudeLayer>
+
+    <!-- 可建造地形要求。 -->
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+
+    <!-- 受击默认音效。 -->
+    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+
+    <!-- 建筑修理效果。 -->
+    <repairEffect>Repair</repairEffect>
+
+    <!-- 被摧毁时留下资源。 -->
+    <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+
+    <!-- 被摧毁时留下瓦砾。 -->
+    <filthLeaving>Filth_RubbleBuilding</filthLeaving>
+
+    <!-- 建筑基础属性。 -->
+    <statBases>
+      <!-- 最大耐久。 -->
+      <MaxHitPoints>220</MaxHitPoints>
+
+      <!-- 建造工时。 -->
+      <WorkToBuild>2500</WorkToBuild>
+
+      <!-- 质量。 -->
+      <Mass>35</Mass>
+
+      <!-- 可燃性。 -->
+      <Flammability>0.6</Flammability>
+    </statBases>
+
+    <!-- 图像配置；临时复用原版基因装配器贴图，贴近基因装配器/基因仓体验。 -->
+    <graphicData>
+      <!-- 世界与信息面板图标路径。 -->
+      <texPath>Things/Building/Misc/GeneAssembler/GeneAssembler</texPath>
+
+      <!-- 多朝向建筑图形类。 -->
+      <graphicClass>Graphic_Multi</graphicClass>
+
+      <!-- 绘制尺寸。 -->
+      <drawSize>(3,2)</drawSize>
+    </graphicData>
+
+    <!-- 建筑占地。 -->
+    <size>(3,2)</size>
+
+    <!-- 是否可旋转。 -->
+    <rotatable>true</rotatable>
+
+    <!-- 交互格偏移。 -->
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+
+    <!-- 启用交互格。 -->
+    <hasInteractionCell>true</hasInteractionCell>
+
+    <!-- 交互格图标。 -->
+    <interactionCellIcon>DiningChair</interactionCellIcon>
+
+    <!-- 通行性。 -->
+    <passability>PassThroughOnly</passability>
+
+    <!-- 填充比例。 -->
+    <fillPercent>0.5</fillPercent>
+
+    <!-- 路径代价。 -->
+    <pathCost>50</pathCost>
+
+    <!-- 绘制边缘阴影。 -->
+    <castEdgeShadows>true</castEdgeShadows>
+
+    <!-- 静态日照阴影高度。 -->
+    <staticSunShadowHeight>0.2</staticSunShadowHeight>
+
+    <!-- 放置分类。 -->
+    <designationCategory>Biotech</designationCategory>
+
+    <!-- 建造材料。 -->
+    <costList>
+      <!-- 钢铁。 -->
+      <Steel>80</Steel>
+
+      <!-- 工业零部件。 -->
+      <ComponentIndustrial>3</ComponentIndustrial>
+    </costList>
+
+    <!-- ThingComp 列表。 -->
+    <comps>
+      <!-- 原版禁止组件；与原版基因装配器语义对齐。 -->
+      <li Class="CompProperties_Forbiddable" />
+
+      <!-- 原版用电组件。 -->
+      <li Class="CompProperties_Power">
+        <!-- 通电运行组件类型。 -->
+        <compClass>CompPowerTrader</compClass>
+
+        <!-- 基础耗电。 -->
+        <basePowerConsumption>120</basePowerConsumption>
+
+        <!-- 雨中短路。 -->
+        <shortCircuitInRain>true</shortCircuitInRain>
+      </li>
+
+      <!-- 原版开关组件。 -->
+      <li Class="CompProperties_Flickable" />
+
+      <!-- 原版设施连接读取组件；装配台从连接设施读取芯片容器。 -->
+      <li Class="CompProperties_AffectedByFacilities">
+        <!-- 可连接设施。 -->
+        <linkableFacilities>
+          <!-- BDP 触发器芯片容器。 -->
+          <li>BDP_ChipStorage</li>
+        </linkableFacilities>
+      </li>
+    </comps>
+
+    <!-- 放置辅助器。 -->
+    <placeWorkers>
+      <!-- 显示设施连接线。 -->
+      <li>PlaceWorker_ShowFacilitiesConnections</li>
+
+      <!-- 防止交互格重叠。 -->
+      <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+    </placeWorkers>
+  </ThingDef>
+
+  <!-- ===== 触发器芯片仓 ===== -->
+
+  <!-- 触发器芯片仓。 -->
+  <ThingDef>
+    <!-- Def 唯一名称，供装配台设施连接和搬运工作引用。 -->
+    <defName>BDP_ChipStorage</defName>
+
+    <!-- 游戏界面显示名称。 -->
+    <label>触发器芯片仓</label>
+
+    <!-- 玩家可见的说明文本。 -->
+    <description>连接到触发器装配台的专用芯片仓。芯片会被存入建筑内部，并可供附近装配台读取。</description>
+
+    <!-- 建筑分类，确保原版生成蓝图和建造流程。 -->
+    <category>Building</category>
+
+    <!-- 实例运行时类型；芯片仓自身不是原版储物建筑子类。 -->
+    <thingClass>Building</thingClass>
+
+    <!-- 受击默认音效。 -->
+    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+
+    <!-- 允许玩家选中。 -->
+    <selectable>true</selectable>
+
+    <!-- 地图绘制类型。 -->
+    <drawerType>MapMeshOnly</drawerType>
+
+    <!-- 绘制高度层。 -->
+    <altitudeLayer>Building</altitudeLayer>
+
+    <!-- 可建造地形要求。 -->
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+
+    <!-- 建筑修理效果。 -->
+    <repairEffect>Repair</repairEffect>
+
+    <!-- 被摧毁时留下资源。 -->
+    <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+
+    <!-- 被摧毁时留下瓦砾。 -->
+    <filthLeaving>Filth_RubbleBuilding</filthLeaving>
+
+    <!-- 建筑基础属性。 -->
+    <statBases>
+      <!-- 售价折算。 -->
+      <SellPriceFactor>0.70</SellPriceFactor>
+
+      <!-- 最大耐久。 -->
+      <MaxHitPoints>200</MaxHitPoints>
+
+      <!-- 建造工时。 -->
+      <WorkToBuild>2500</WorkToBuild>
+
+      <!-- 质量。 -->
+      <Mass>20</Mass>
+
+      <!-- 可燃性。 -->
+      <Flammability>0.5</Flammability>
+    </statBases>
+
+    <!-- 图像配置；临时复用原版基因仓贴图。 -->
+    <graphicData>
+      <!-- 世界与信息面板图标路径。 -->
+      <texPath>Things/Building/Misc/Genebank/Genebank</texPath>
+
+      <!-- 多朝向建筑图形类。 -->
+      <graphicClass>Graphic_Multi</graphicClass>
+
+      <!-- 绘制尺寸。 -->
+      <drawSize>(2,1)</drawSize>
+    </graphicData>
+
+    <!-- 建筑占地。 -->
+    <size>(2,1)</size>
+
+    <!-- 通行性。 -->
+    <passability>PassThroughOnly</passability>
+
+    <!-- 填充比例。 -->
+    <fillPercent>0.4</fillPercent>
+
+    <!-- 路径代价。 -->
+    <pathCost>42</pathCost>
+
+    <!-- 绘制边缘阴影。 -->
+    <castEdgeShadows>true</castEdgeShadows>
+
+    <!-- 禁止与区域重叠，避免玩家误认为它仍是货架/储物区。 -->
+    <canOverlapZones>false</canOverlapZones>
+
+    <!-- 放置分类。 -->
+    <designationCategory>Biotech</designationCategory>
+
+    <!-- 建造材料。 -->
+    <costList>
+      <!-- 钢铁。 -->
+      <Steel>50</Steel>
+
+      <!-- 工业零部件。 -->
+      <ComponentIndustrial>1</ComponentIndustrial>
+    </costList>
+
+    <!-- ThingComp 列表。 -->
+    <comps>
+      <!-- 原版禁止组件；玩家可阻止搬运工作继续把芯片放入该仓。 -->
+      <li Class="CompProperties_Forbiddable" />
+
+      <!-- BDP 芯片仓内部容器组件。 -->
+      <li Class="BDP.Content.Assembly.CompProperties_ChipContainer">
+        <!-- 最大内部芯片容量。 -->
+        <maxCapacity>12</maxCapacity>
+      </li>
+
+      <!-- 原版用电组件。 -->
+      <li Class="CompProperties_Power">
+        <!-- 通电运行组件类型。 -->
+        <compClass>CompPowerTrader</compClass>
+
+        <!-- 基础耗电。 -->
+        <basePowerConsumption>60</basePowerConsumption>
+
+        <!-- 雨中短路。 -->
+        <shortCircuitInRain>true</shortCircuitInRain>
+      </li>
+
+      <!-- 原版设施组件；通电时才能被装配台视作有效芯片仓。 -->
+      <li Class="CompProperties_Facility">
+        <!-- 最大同时连接数量。 -->
+        <maxSimultaneous>1</maxSimultaneous>
+
+        <!-- 最大连接距离。 -->
+        <maxDistance>8</maxDistance>
+
+        <!-- 需要视线连接。 -->
+        <requiresLOS>true</requiresLOS>
+
+        <!-- 是否显示最大连接数。 -->
+        <showMaxSimultaneous>false</showMaxSimultaneous>
+
+        <!-- 可连接建筑。 -->
+        <linkableBuildings>
+          <!-- BDP 触发器装配台。 -->
+          <li>BDP_TriggerAssembler</li>
+        </linkableBuildings>
+      </li>
+
+      <!-- 原版开关组件。 -->
+      <li Class="CompProperties_Flickable" />
+    </comps>
+
+    <!-- 检视面板标签页；只显示内部内容，不显示原版储物筛选。 -->
+    <inspectorTabs>
+      <!-- BDP 芯片仓内部内容页签。 -->
+      <li>BDP.Content.Assembly.ITab_ChipStorageContents</li>
+    </inspectorTabs>
+
+    <!-- 放置辅助器。 -->
+    <placeWorkers>
+      <!-- 显示设施连接线。 -->
+      <li>PlaceWorker_ShowFacilitiesConnections</li>
+    </placeWorkers>
+
+    <!-- 选中/放置时显示设施连接辅助线。 -->
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+  </ThingDef>
+
+</Defs>

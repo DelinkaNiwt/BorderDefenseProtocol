@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    战斗体扫描光环 Mote 定义。
+    该 Mote 的绘制完全由 Mote_CombatBodyScan 类的 DrawAt 覆写控制，
+    此处的 graphicData 只用于满足 Def 结构完整性，不会被实际渲染。
+  -->
+  <ThingDef ParentName="MoteBase">
+    <!-- Def 唯一名称，供代码通过 DefDatabase 查找。 -->
+    <defName>BDP_Mote_CombatBodyScan</defName>
+
+    <!-- 自定义 Mote 子类，负责扫描光环动画和绘制。 -->
+    <thingClass>BDP.Content.CombatBody.Transform.Mote_CombatBodyScan</thingClass>
+
+    <!-- 在 Pawn 上层绘制，覆盖身体表面。 -->
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+
+    <!-- 图形数据：提供基本的白亮纹理和辉光 Shader。
+         实际的扫描光环渲染由 DrawAt 覆写中的 Graphics.DrawMesh 完成。
+         graphicClass 必须显式指定，否则覆写 ParentName 的 graphicData 后为 null。 -->
+    <graphicData>
+      <graphicClass>Graphic_Mote</graphicClass>
+      <texPath>BDP/Effects/LeakParticle</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <color>(0.7, 1.0, 0.85, 1.0)</color>
+    </graphicData>
+
+    <!-- Mote 属性：游戏时间驱动（非实时的 UI 时间）。
+         一秒原版寿命只是兜底，正常由 Mote 在第 24 tick 主动销毁。 -->
+    <mote>
+      <realTime>false</realTime>
+      <fadeInTime>0</fadeInTime>
+      <solidTime>1</solidTime>
+      <fadeOutTime>0</fadeOutTime>
+    </mote>
+  </ThingDef>
+
+</Defs>

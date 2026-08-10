@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 核心层：极快、极小、纯白，高亮中心光点。 -->
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>BDP_Fleck_LeakCore</defName>
+    <graphicData>
+      <texPath>BDP/Effects/LeakParticle</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <color>(255, 255, 255, 255)</color>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0</fadeInTime>
+    <solidTime>0.025</solidTime>
+    <fadeOutTime>0.06</fadeOutTime>
+  </FleckDef>
+
+  <!-- 主体层：中速、偏白黄绿，形成主要 Trion 粒子流。 -->
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>BDP_Fleck_LeakMid</defName>
+    <graphicData>
+      <texPath>BDP/Effects/LeakParticle</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <color>(210, 255, 180, 255)</color>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0</fadeInTime>
+    <solidTime>0.02</solidTime>
+    <fadeOutTime>0.11</fadeOutTime>
+  </FleckDef>
+
+  <!-- 散射层：慢速、浅绿，负责边缘扩散。 -->
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>BDP_Fleck_LeakOuter</defName>
+    <graphicData>
+      <texPath>BDP/Effects/LeakParticle</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <color>(160, 230, 120, 255)</color>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0</fadeInTime>
+    <solidTime>0.01</solidTime>
+    <fadeOutTime>0.15</fadeOutTime>
+  </FleckDef>
+
+</Defs>

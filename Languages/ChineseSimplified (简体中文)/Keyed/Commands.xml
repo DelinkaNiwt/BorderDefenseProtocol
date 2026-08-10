@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 战斗体控制按钮。 -->
+  <BDP_Command_CombatBody_Activate>开启战斗体</BDP_Command_CombatBody_Activate>
+  <BDP_Command_CombatBody_ActivateDesc>进入战斗体。</BDP_Command_CombatBody_ActivateDesc>
+  <BDP_Command_CombatBody_Release>解除战斗体</BDP_Command_CombatBody_Release>
+  <BDP_Command_CombatBody_ReleaseDesc>解除当前战斗体。</BDP_Command_CombatBody_ReleaseDesc>
+  <!-- 战斗体短时变换锁提示。 -->
+  <BDP_Command_CombatBody_TransformLocked>战斗体正在完成变换。</BDP_Command_CombatBody_TransformLocked>
+  <BDP_Command_CombatBody_Collapsing>战斗体崩解中</BDP_Command_CombatBody_Collapsing>
+  <BDP_Command_CombatBody_CollapsingDesc>战斗体正在崩解，当前无法切换。</BDP_Command_CombatBody_CollapsingDesc>
+  <BDP_Command_CombatBody_CollapsingDisabled>战斗体正在崩解。</BDP_Command_CombatBody_CollapsingDisabled>
+  <BDP_Command_CombatBody_Cooldown>战斗体冷却中</BDP_Command_CombatBody_Cooldown>
+  <BDP_Command_CombatBody_CooldownDesc>战斗体正在冷却，当前无法重新开启。</BDP_Command_CombatBody_CooldownDesc>
+  <BDP_Command_CombatBody_CooldownDisabled>战斗体正在冷却。</BDP_Command_CombatBody_CooldownDisabled>
+  <BDP_Command_CombatBody_Generic>战斗体</BDP_Command_CombatBody_Generic>
+  <BDP_Command_CombatBody_GenericDesc>当前战斗体状态无法操作。</BDP_Command_CombatBody_GenericDesc>
+  <BDP_Command_CombatBody_GenericDisabled>当前战斗体状态无法操作。</BDP_Command_CombatBody_GenericDisabled>
+
+  <!-- Trion 天赋检测按钮。 -->
+  <BDP_Command_TrionDetector_Select>选择Trion受检者……</BDP_Command_TrionDetector_Select>
+  <BDP_Command_TrionDetector_SelectDesc>选择要进入检测仪的殖民者、奴隶或囚犯。倒地角色和囚犯会由其他殖民者搬运入舱。</BDP_Command_TrionDetector_SelectDesc>
+  <BDP_Command_TrionDetector_CancelWaiting>取消等待入舱</BDP_Command_TrionDetector_CancelWaiting>
+  <BDP_Command_TrionDetector_CancelAssessment>取消Trion天赋检测</BDP_Command_TrionDetector_CancelAssessment>
+  <BDP_Command_TrionDetector_CancelDesc>取消本次检测，清除本次进度并安全放出受检者。</BDP_Command_TrionDetector_CancelDesc>
+  <BDP_Command_TrionDetector_NoSubject>没有可选择的Trion受检者。</BDP_Command_TrionDetector_NoSubject>
+  <BDP_Command_TrionDetector_NoPower>Trion 天赋检测仪未通电。</BDP_Command_TrionDetector_NoPower>
+  <BDP_Command_TrionTalent_Start>开始Trion容量潜质检测</BDP_Command_TrionTalent_Start>
+  <BDP_Command_TrionTalent_StartRejected>开始Trion容量潜质检测（{0}）</BDP_Command_TrionTalent_StartRejected>
+
+  <!-- 芯片仓与装配按钮。 -->
+  <BDP_Command_ChipContainer_EjectAll>全部弹出</BDP_Command_ChipContainer_EjectAll>
+  <BDP_Command_ChipContainer_EjectAllDesc>将芯片仓内部持有的全部芯片弹出到附近地面。</BDP_Command_ChipContainer_EjectAllDesc>
+  <BDP_Command_TriggerAssembly_Use>使用触发器装配台</BDP_Command_TriggerAssembly_Use>
+  <!-- 形态切换按钮。 -->
+  <BDP_Command_ChipMode_Switch>切换至{0}</BDP_Command_ChipMode_Switch>
+  <BDP_Command_ChipMode_Desc>当前形态：{0}
+左键切换到：{1}
+右键可直接选择任意形态。</BDP_Command_ChipMode_Desc>
+  <BDP_Command_ChipMode_CurrentOption>● {0}（当前）</BDP_Command_ChipMode_CurrentOption>
+</LanguageData>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    芯片制造台建筑。
+    采用原版工作台账单流程，专用窗口只负责编辑和预览芯片组合。
+  -->
+
+  <!-- 芯片制造台。 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>BDP_ChipFabricator</defName>
+    <label>芯片制造台</label>
+    <description>用于动态组合制造 BDP 芯片的工作台。选择枪械类别（可选）和表达条目模板，组合制造出定制芯片。</description>
+    <!-- 使用基因装配台贴图作为临时视觉。 -->
+    <graphicData>
+      <texPath>Things/Building/Misc/GeneAssembler/GeneAssembler_South</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(3,2)</drawSize>
+    </graphicData>
+    <!-- 3×2 尺寸，可旋转。 -->
+    <size>(3,2)</size>
+    <rotatable>true</rotatable>
+    <!-- 建造与分类。 -->
+    <designationCategory>Misc</designationCategory>
+    <costList>
+      <Steel>150</Steel>
+      <ComponentIndustrial>4</ComponentIndustrial>
+    </costList>
+    <!-- 仅保留原版工作台身份。 -->
+    <thingClass>BDP.Content.Assembly.Building_ChipFabricator</thingClass>
+    <!-- 交互格在建筑前方。 -->
+    <hasInteractionCell>true</hasInteractionCell>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <!-- 唯一通用配方；页签创建带组合记录的专用账单。 -->
+    <recipes>
+      <li>BDP_Recipe_ProduceChip</li>
+    </recipes>
+    <!-- 需要电力。 -->
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>200</basePowerConsumption>
+        <shortCircuitInRain>true</shortCircuitInRain>
+      </li>
+      <li Class="CompProperties_Flickable" />
+    </comps>
+    <!-- 可开关、可选定。 -->
+    <selectable>true</selectable>
+    <neverMultiSelect>true</neverMultiSelect>
+    <statBases>
+      <MaxHitPoints>180</MaxHitPoints>
+      <WorkTableWorkSpeedFactor>1</WorkTableWorkSpeedFactor>
+      <Flammability>0.5</Flammability>
+    </statBases>
+  </ThingDef>
+
+</Defs>

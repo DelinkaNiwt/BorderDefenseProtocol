@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageInfo>
+  <!-- 当前只提供简体中文；英文翻译将在后续需要时补充。 -->
+  <friendlyNameNative>简体中文</friendlyNameNative>
+  <friendlyNameEnglish>ChineseSimplified</friendlyNameEnglish>
+  <canBeTiny>true</canBeTiny>
+  <languageWorkerClass>LanguageWorker_ChineseSimplified</languageWorkerClass>
+</LanguageInfo>

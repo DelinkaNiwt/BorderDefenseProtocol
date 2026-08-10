@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    Trion 数值系统 Def。
+    这里把 Pawn 侧 Trion 关键数值接入 RimWorld 的 StatDef 体系。
+  -->
+
+  <!--
+    Trion 最大容量。
+    Pawn 宿主的 CompTrion 会通过该 StatDef 读取可储存的总容量。
+  -->
+  <StatDef>
+    <!-- Def 唯一名称，供 DefOf 与运行时读取。 -->
+    <defName>BDP_TrionCapacity</defName>
+
+    <!-- 游戏界面显示名称。 -->
+    <label>Trion容量</label>
+
+    <!-- 玩家可见的属性说明。 -->
+    <description>该个体可储存的最大 Trion 总量。</description>
+
+    <!-- 属性分类；放到 Pawn 基础属性分组。 -->
+    <category>BasicsPawn</category>
+
+    <!-- 默认基础值；未被其他系统修正时从 0 起算。 -->
+    <defaultBaseValue>0</defaultBaseValue>
+
+    <!-- 最小值下界，防止出现负数容量。 -->
+    <minValue>0</minValue>
+
+    <!-- 数值显示格式；保留一位小数。 -->
+    <toStringStyle>FloatOne</toStringStyle>
+
+    <!-- 是否在动物身上显示；当前只面向类人 Pawn。 -->
+    <showOnAnimals>false</showOnAnimals>
+
+    <!-- 是否在机械体身上显示；当前不作为机械体属性显示。 -->
+    <showOnMechanoids>false</showOnMechanoids>
+
+    <!-- 未定义时是否显示；关闭以避免无意义面板项。 -->
+    <showIfUndefined>false</showIfUndefined>
+
+    <!-- 有效腺体把该 Pawn 的永久容量潜质加入实际容量。 -->
+    <parts>
+      <!-- 动态容量潜质投影。 -->
+      <li Class="BDP.Core.Genes.StatPart_TrionCapacityPotential" />
+    </parts>
+  </StatDef>
+
+  <!--
+    Trion 每日恢复速率。
+    Pawn 宿主的 CompTrion 会通过该 StatDef 读取每天自然恢复量。
+  -->
+  <StatDef>
+    <!-- Def 唯一名称，供 DefOf 与运行时读取。 -->
+    <defName>BDP_TrionRecoveryRate</defName>
+
+    <!-- 游戏界面显示名称。 -->
+    <label>Trion恢复速率</label>
+
+    <!-- 玩家可见的属性说明。 -->
+    <description>该个体每日自然恢复的 Trion 总量。</description>
+
+    <!-- 属性分类；放到 Pawn 基础属性分组。 -->
+    <category>BasicsPawn</category>
+
+    <!-- 默认基础值；未被其他系统修正时从 0 起算。 -->
+    <defaultBaseValue>0</defaultBaseValue>
+
+    <!-- 最小值下界，防止出现负数恢复。 -->
+    <minValue>0</minValue>
+
+    <!-- 数值显示格式；保留一位小数。 -->
+    <toStringStyle>FloatOne</toStringStyle>
+
+    <!-- 是否在动物身上显示；当前只面向类人 Pawn。 -->
+    <showOnAnimals>false</showOnAnimals>
+
+    <!-- 是否在机械体身上显示；当前不作为机械体属性显示。 -->
+    <showOnMechanoids>false</showOnMechanoids>
+
+    <!-- 未定义时是否显示；关闭以避免无意义面板项。 -->
+    <showIfUndefined>false</showIfUndefined>
+  </StatDef>
+
+  <!--
+    Trion 释放力。
+    它表达角色能实际驱动多高门槛芯片，并允许原版属性系统继续施加修正。
+  -->
+  <StatDef>
+    <!-- Def 唯一名称，供 DefOf、界面与激活条件读取。 -->
+    <defName>BDP_TrionIntensity</defName>
+
+    <!-- 游戏界面显示名称。 -->
+    <label>Trion释放力</label>
+
+    <!-- 玩家可见的属性说明。 -->
+    <description>该个体当前能够发挥的 Trion 释放强度；数值越高，能够使用的高门槛芯片越多。</description>
+
+    <!-- 只在原版角色基础属性分组中显示。 -->
+    <category>BasicsPawn</category>
+
+    <!-- 先天值由 StatPart 动态加入。 -->
+    <defaultBaseValue>0</defaultBaseValue>
+
+    <!-- 释放力不允许为负数。 -->
+    <minValue>0</minValue>
+
+    <!-- 释放力统一按整数显示。 -->
+    <toStringStyle>Integer</toStringStyle>
+
+    <!-- 所有原版属性界面统一追加等级单位。 -->
+    <formatString>{0}级</formatString>
+
+    <!-- 只面向人形角色。 -->
+    <showOnAnimals>false</showOnAnimals>
+
+    <!-- 当前不面向机械体。 -->
+    <showOnMechanoids>false</showOnMechanoids>
+
+    <!-- 没有有效腺体时不显示正式属性项。 -->
+    <showIfUndefined>false</showIfUndefined>
+
+    <!-- 由专用 Worker（工作器）控制角色面板显示资格。 -->
+    <workerClass>BDP.Core.Genes.StatWorker_TrionIntensity</workerClass>
+
+    <!-- 先加入先天底数，最后再统一向下取整并钳制。 -->
+    <parts>
+      <!-- 永久先天释放力。 -->
+      <li Class="BDP.Core.Genes.StatPart_TrionInnateIntensity" />
+      <!-- 所有将来修正之后的最终整数整理。 -->
+      <li Class="BDP.Core.Genes.StatPart_TrionIntensityFloor" />
+    </parts>
+  </StatDef>
+
+</Defs>

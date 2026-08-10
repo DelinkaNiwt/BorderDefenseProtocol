@@ -1,0 +1,562 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    BDP 芯片动作预设定义。
+    每个 ChipActionPresetDef 承载一个可选动作的静态定义数据。
+    类别和标签决定它在制造面板中如何被筛选和路由。
+  -->
+
+  <!-- ===== 远程射击预设（射手/枪手共用）===== -->
+
+  <!-- 小行星：标准直射远程动作。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipActionPresetDef>
+    <defName>BDP_Preset_Asteroid</defName>
+    <label>小行星</label>
+    <description>标准直射远程动作。子弹沿直线飞行，命中目标造成伤害。远程攻击的基础模板。</description>
+    <profession>BDP_ChipProfession_Shooter</profession>
+    <costList>
+      <Silver>80</Silver>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+    <additionalWorkAmount>500</additionalWorkAmount>
+    <config>
+      <Profile>
+        <Category>BDP_ChipCategory_Weapon</Category>
+        <Tags>
+        </Tags>
+      </Profile>
+      <Loadout>
+        <SlotRegion>MainSub</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <ActivationDelayTicks>60</ActivationDelayTicks>
+        <DeactivationDelayTicks>30</DeactivationDelayTicks>
+      </Loadout>
+      <Trion><CapacityCost>50</CapacityCost><ActivationCost>15</ActivationCost></Trion>
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement"><Minimum>1</Minimum></li>
+      </ActivationRequirements>
+      <Expression>
+        <Entries>
+          <li>
+            <Id>sequential_primary</Id>
+            <DisplayLabel>小行星</DisplayLabel>
+            <Kind>PrimaryVerb</Kind>
+            <WeaponMode>Ranged</WeaponMode>
+            <Trion><UseCost>4</UseCost></Trion>
+            <Execution><Rhythm>Simultaneous</Rhythm></Execution>
+            <VerbProps>
+              <verbClass>BDP.Core.Verbs.BdpVerb_Shoot</verbClass>
+              <hasStandardCommand>true</hasStandardCommand>
+              <label>小行星</label>
+              <defaultProjectile>BDP_Projectile_Normal</defaultProjectile>
+              <range>30.9</range>
+              <burstShotCount>4</burstShotCount>
+              <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+              <warmupTime>1.8</warmupTime>
+              <defaultCooldownTime>1.2</defaultCooldownTime>
+              <accuracyTouch>0.85</accuracyTouch>
+              <accuracyShort>0.75</accuracyShort>
+              <accuracyMedium>0.50</accuracyMedium>
+              <accuracyLong>0.20</accuracyLong>
+              <soundCast>Shot_Revolver</soundCast>
+              <!-- 目标判定与原版枪械一致：不可瞄地面，可瞄单位/建筑 -->
+              <targetParams>
+                <canTargetLocations>false</canTargetLocations>
+                <canTargetBuildings>true</canTargetBuildings>
+                <canTargetPawns>true</canTargetPawns>
+              </targetParams>
+            </VerbProps>
+            <DirectTargetLineOfSight>Required</DirectTargetLineOfSight>
+          </li>
+        </Entries>
+      </Expression>
+    </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipActionPresetDef>
+
+  <!-- 毒蛇：路线引导远程动作。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipActionPresetDef>
+    <defName>BDP_Preset_Viper</defName>
+    <label>毒蛇</label>
+    <description>路线引导远程动作。玩家用 Shift+左键 设定弹道路径锚点，子弹按路径分段飞行。</description>
+    <profession>BDP_ChipProfession_Shooter</profession>
+    <costList>
+      <Silver>120</Silver>
+      <ComponentIndustrial>3</ComponentIndustrial>
+    </costList>
+    <additionalWorkAmount>800</additionalWorkAmount>
+    <config>
+      <Profile>
+        <Category>BDP_ChipCategory_Weapon</Category>
+        <Tags>
+        </Tags>
+      </Profile>
+      <Loadout>
+        <SlotRegion>MainSub</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <ActivationDelayTicks>60</ActivationDelayTicks>
+        <DeactivationDelayTicks>30</DeactivationDelayTicks>
+      </Loadout>
+      <Trion><CapacityCost>80</CapacityCost><ActivationCost>15</ActivationCost></Trion>
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement"><Minimum>1</Minimum></li>
+      </ActivationRequirements>
+      <Expression>
+        <Entries>
+          <li>
+            <Id>viper_primary</Id>
+            <DisplayLabel>毒蛇</DisplayLabel>
+            <Kind>PrimaryVerb</Kind>
+            <WeaponMode>Ranged</WeaponMode>
+            <Trion><UseCost>8</UseCost></Trion>
+            <Execution><Rhythm>Simultaneous</Rhythm></Execution>
+            <VerbProps>
+              <verbClass>BDP.Core.Verbs.BdpVerb_Shoot</verbClass>
+              <hasStandardCommand>true</hasStandardCommand>
+              <label>毒蛇</label>
+              <defaultProjectile>BDP_Projectile_Variable</defaultProjectile>
+              <range>30.9</range>
+              <burstShotCount>4</burstShotCount>
+              <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+              <warmupTime>1.2</warmupTime>
+              <defaultCooldownTime>1.2</defaultCooldownTime>
+              <accuracyTouch>0.85</accuracyTouch>
+              <accuracyShort>0.75</accuracyShort>
+              <accuracyMedium>0.50</accuracyMedium>
+              <accuracyLong>0.22</accuracyLong>
+              <soundCast>BDP_Sound_ViperCast</soundCast>
+              <!-- 路线引导需要可瞄地面 -->
+              <targetParams>
+                <canTargetLocations>true</canTargetLocations>
+                <canTargetBuildings>true</canTargetBuildings>
+                <canTargetPawns>true</canTargetPawns>
+              </targetParams>
+            </VerbProps>
+            <DirectTargetLineOfSight>NotRequired</DirectTargetLineOfSight>
+            <RangedModules>
+              <li><moduleDef>BDP_RoutePathModule</moduleDef></li>
+            </RangedModules>
+          </li>
+        </Entries>
+      </Expression>
+    </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipActionPresetDef>
+
+  <!-- 猎犬：远程追踪动作。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipActionPresetDef>
+    <defName>BDP_Preset_Hound</defName>
+    <label>猎犬</label>
+    <description>远程追踪动作。子弹发射后在有限轮次内持续追踪目标。</description>
+    <profession>BDP_ChipProfession_Shooter</profession>
+    <costList>
+      <Silver>100</Silver>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+    <additionalWorkAmount>600</additionalWorkAmount>
+    <config>
+      <Profile>
+        <Category>BDP_ChipCategory_Weapon</Category>
+        <Tags>
+        </Tags>
+      </Profile>
+      <Loadout>
+        <SlotRegion>MainSub</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <ActivationDelayTicks>60</ActivationDelayTicks>
+        <DeactivationDelayTicks>30</DeactivationDelayTicks>
+      </Loadout>
+      <Trion><CapacityCost>80</CapacityCost><ActivationCost>15</ActivationCost></Trion>
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement"><Minimum>1</Minimum></li>
+      </ActivationRequirements>
+      <Expression>
+        <Entries>
+          <li>
+            <Id>tracking_primary</Id>
+            <DisplayLabel>猎犬</DisplayLabel>
+            <Kind>PrimaryVerb</Kind>
+            <WeaponMode>Ranged</WeaponMode>
+            <Trion><UseCost>6</UseCost></Trion>
+            <Execution><Rhythm>Simultaneous</Rhythm></Execution>
+            <VerbProps>
+              <verbClass>BDP.Core.Verbs.BdpVerb_Shoot</verbClass>
+              <hasStandardCommand>true</hasStandardCommand>
+              <label>猎犬</label>
+              <defaultProjectile>BDP_Projectile_Tracking</defaultProjectile>
+              <range>30.9</range>
+              <burstShotCount>4</burstShotCount>
+              <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+              <warmupTime>1.6</warmupTime>
+              <defaultCooldownTime>1.4</defaultCooldownTime>
+              <accuracyTouch>0.85</accuracyTouch>
+              <accuracyShort>0.75</accuracyShort>
+              <accuracyMedium>0.50</accuracyMedium>
+              <accuracyLong>0.20</accuracyLong>
+              <soundCast>Shot_Revolver</soundCast>
+              <!-- 目标判定与原版枪械一致：不可瞄地面，可瞄单位/建筑 -->
+              <targetParams>
+                <canTargetLocations>false</canTargetLocations>
+                <canTargetBuildings>true</canTargetBuildings>
+                <canTargetPawns>true</canTargetPawns>
+              </targetParams>
+            </VerbProps>
+            <DirectTargetLineOfSight>Required</DirectTargetLineOfSight>
+            <RangedModules>
+              <li><moduleDef>BDP_HomingModule</moduleDef></li>
+            </RangedModules>
+          </li>
+        </Entries>
+      </Expression>
+    </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipActionPresetDef>
+
+  <!-- ===== 实体系/能力系/防护系预设 ===== -->
+
+  <!-- 弧月：近战实体武装。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipActionPresetDef>
+    <defName>BDP_Preset_Kogetsu</defName>
+    <label>弧月</label>
+    <profession>BDP_ChipProfession_Attacker</profession>
+    <description>以实体弧月刃形成近战武装，并作为旋空弧月组合的主侧芯片。</description>
+    <costList>
+      <Silver>150</Silver>
+      <ComponentIndustrial>3</ComponentIndustrial>
+    </costList>
+    <additionalWorkAmount>900</additionalWorkAmount>
+    <config>
+      <Profile>
+        <Category>BDP_ChipCategory_Weapon</Category>
+        <Tags>
+          <li>BDP_ChipTag_Entity</li>
+        </Tags>
+      </Profile>
+      <Loadout>
+        <SlotRegion>MainSub</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <ActivationDelayTicks>30</ActivationDelayTicks>
+        <DeactivationDelayTicks>15</DeactivationDelayTicks>
+      </Loadout>
+      <Trion><CapacityCost>50</CapacityCost><ActivationCost>15</ActivationCost></Trion>
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement"><Minimum>1</Minimum></li>
+      </ActivationRequirements>
+      <Expression>
+        <Entries>
+          <li>
+            <Id>kogetsu_primary</Id>
+            <DisplayLabel>弧月</DisplayLabel>
+            <Kind>PrimaryVerb</Kind>
+            <WeaponMode>Melee</WeaponMode>
+            <!-- 近战不适用 Trion 消耗 -->
+            <Presentation>
+              <VisualPresetDefName>BDP_Visual_Kogetsu</VisualPresetDefName>
+            </Presentation>
+            <tools>
+              <li>
+                <label>弧月刃</label>
+                <capacities><li>Cut</li></capacities>
+                <power>20</power>
+                <cooldownTime>2.0</cooldownTime>
+                <armorPenetration>0.15</armorPenetration>
+              </li>
+            </tools>
+          </li>
+        </Entries>
+      </Expression>
+    </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipActionPresetDef>
+
+  <!-- 旋空：能量体系能力，弧月专属副侧。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipActionPresetDef>
+    <defName>BDP_Preset_Senku</defName>
+    <label>旋空</label>
+    <description>以能量体形式参与旋空弧月组合，为组合结果提供进攻型副侧来源。</description>
+    <costList>
+      <Silver>100</Silver>
+    </costList>
+    <additionalWorkAmount>600</additionalWorkAmount>
+    <config>
+      <Profile>
+        <Category>BDP_ChipCategory_Ability</Category>
+        <Tags>
+          <li>BDP_ChipTag_Offensive</li>
+          <li>BDP_ChipTag_KogetsuExclusive</li>
+          <li>BDP_ChipTag_EnergyForm</li>
+        </Tags>
+      </Profile>
+      <Loadout>
+        <SlotRegion>MainSub</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <ActivationDelayTicks>15</ActivationDelayTicks>
+        <DeactivationDelayTicks>15</DeactivationDelayTicks>
+      </Loadout>
+      <Trion><CapacityCost>50</CapacityCost><ActivationCost>15</ActivationCost></Trion>
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement"><Minimum>4</Minimum></li>
+        <li Class="BDP.Core.Requirements.SkillLevelRequirement">
+          <Skill>Melee</Skill>
+          <MinimumLevel>10</MinimumLevel>
+        </li>
+        <li Class="BDP.Core.Requirements.SkillLevelRequirement">
+          <Skill>Shooting</Skill>
+          <MinimumLevel>6</MinimumLevel>
+        </li>
+      </ActivationRequirements>
+      <Expression>
+        <Entries>
+          <li>
+            <Id>senku_passive</Id>
+            <DisplayLabel>旋空</DisplayLabel>
+            <Kind>Passive</Kind>
+            <PassiveKey>bdp.senku.passive</PassiveKey>
+            <Trion><UseCost>100</UseCost><MinimumRequired>100</MinimumRequired></Trion>
+          </li>
+        </Entries>
+      </Expression>
+    </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipActionPresetDef>
+
+  <!-- 护盾：能量防护。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipActionPresetDef>
+    <defName>BDP_Preset_EnergyShield</defName>
+    <label>护盾</label>
+    <description>形成正面能量护盾。单枚激活时覆盖正面 180 度；主、副槽各激活一枚时升级为全防御能量护盾。成功抵挡会消耗相当于伤害值 50% 的 Trion。</description>
+    <costList>
+      <Silver>120</Silver>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+    <additionalWorkAmount>700</additionalWorkAmount>
+    <config>
+      <Profile>
+        <Category>BDP_ChipCategory_Defense</Category>
+        <Tags>
+          <li>BDP_ChipTag_EnergyForm</li>
+        </Tags>
+      </Profile>
+      <Loadout>
+        <SlotRegion>MainSub</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <ActivationDelayTicks>60</ActivationDelayTicks>
+        <DeactivationDelayTicks>30</DeactivationDelayTicks>
+      </Loadout>
+      <Trion><CapacityCost>50</CapacityCost><ActivationCost>15</ActivationCost></Trion>
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement"><Minimum>1</Minimum></li>
+      </ActivationRequirements>
+      <Expression>
+        <Entries>
+          <li>
+            <Id>energy_shield_primary</Id>
+            <DisplayLabel>能量护盾</DisplayLabel>
+            <Kind>Hediff</Kind>
+            <HediffDefName>BDP_Hediff_EnergyShield</HediffDefName>
+            <HediffApplyModeKey>countToSeverity</HediffApplyModeKey>
+          </li>
+        </Entries>
+      </Expression>
+    </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipActionPresetDef>
+
+  <!-- 常驻型自动能量护盾：特殊槽专用，全方位防护，不聚合。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipActionPresetDef>
+    <defName>BDP_Preset_EnergyShield_Auto</defName>
+    <label>常驻型自动能量护盾</label>
+    <description>常驻型自动能量护盾，特殊槽专用。激活期间始终提供全方位防护，不随激活数量升级。格挡率 70%，成功抵挡消耗 75% 伤害值的 Trion。</description>
+    <costList>
+      <Silver>120</Silver>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+    <additionalWorkAmount>700</additionalWorkAmount>
+    <config>
+      <Profile>
+        <Category>BDP_ChipCategory_Defense</Category>
+        <Tags>
+          <li>BDP_ChipTag_EnergyForm</li>
+        </Tags>
+      </Profile>
+      <Loadout>
+        <SlotRegion>Special</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <!-- 特殊槽芯片秒开秒关。 -->
+        <ActivationDelayTicks>0</ActivationDelayTicks>
+        <DeactivationDelayTicks>0</DeactivationDelayTicks>
+      </Loadout>
+      <Trion><CapacityCost>300</CapacityCost><ActivationCost>0</ActivationCost></Trion>
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement"><Minimum>1</Minimum></li>
+      </ActivationRequirements>
+      <Expression>
+        <Entries>
+          <li>
+            <Id>energy_shield_auto</Id>
+            <DisplayLabel>常驻型自动能量护盾</DisplayLabel>
+            <Kind>Hediff</Kind>
+            <HediffDefName>BDP_Hediff_EnergyShield_Auto</HediffDefName>
+            <!-- 不设 HediffApplyModeKey：纯存在模式，不按数量叠加 Severity。 -->
+          </li>
+        </Entries>
+      </Expression>
+    </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipActionPresetDef>
+
+  <!-- 紧急脱离：被动崩解时自动传送回安全位置。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipActionPresetDef>
+    <defName>BDP_Preset_EmergencyEscape</defName>
+    <label>紧急脱离</label>
+    <description>被动芯片，特殊槽专用。战斗体因 Trion 见底而崩解时自动触发——将装备者传送至安全位置（优先信标锚点），芯片在触发后销毁。</description>
+    <costList>
+      <Silver>150</Silver>
+      <ComponentIndustrial>3</ComponentIndustrial>
+    </costList>
+    <additionalWorkAmount>800</additionalWorkAmount>
+    <config>
+      <Profile>
+        <Category>BDP_ChipCategory_Passive</Category>
+        <Tags>
+          <li>BDP_ChipTag_EnergyForm</li>
+        </Tags>
+      </Profile>
+      <Loadout>
+        <SlotRegion>Special</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <!-- 特殊槽芯片秒开秒关。 -->
+        <ActivationDelayTicks>0</ActivationDelayTicks>
+        <DeactivationDelayTicks>0</DeactivationDelayTicks>
+      </Loadout>
+      <Trion><CapacityCost>400</CapacityCost><ActivationCost>0</ActivationCost></Trion>
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement"><Minimum>1</Minimum></li>
+      </ActivationRequirements>
+      <Expression>
+        <Entries>
+          <li>
+            <Id>emergency_escape_passive</Id>
+            <DisplayLabel>紧急脱离</DisplayLabel>
+            <Kind>Passive</Kind>
+            <PassiveKey>EmergencyEscape</PassiveKey>
+          </li>
+        </Entries>
+      </Expression>
+    </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipActionPresetDef>
+
+  <!-- ===== 狙击预设 ===== -->
+
+  <!-- 朱鹮：超远距精确狙击。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipActionPresetDef>
+    <defName>BDP_Preset_Toki</defName>
+    <label>朱鹮</label>
+    <description>超远距精确狙击芯片。发射标准狙击弹，越远越准，单发高伤害，但预热极慢。</description>
+    <profession>BDP_ChipProfession_Sniper</profession>
+    <costList>
+      <Silver>80</Silver>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+    <additionalWorkAmount>500</additionalWorkAmount>
+    <config>
+      <Profile>
+        <Category>BDP_ChipCategory_Weapon</Category>
+        <Tags>
+        </Tags>
+      </Profile>
+      <Loadout>
+        <SlotRegion>MainSub</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <ActivationDelayTicks>60</ActivationDelayTicks>
+        <DeactivationDelayTicks>30</DeactivationDelayTicks>
+      </Loadout>
+      <Trion><CapacityCost>80</CapacityCost><ActivationCost>30</ActivationCost></Trion>
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement"><Minimum>1</Minimum></li>
+      </ActivationRequirements>
+      <Expression>
+        <Entries>
+          <li>
+            <Id>toki_primary</Id>
+            <DisplayLabel>朱鹮</DisplayLabel>
+            <Kind>PrimaryVerb</Kind>
+            <WeaponMode>Ranged</WeaponMode>
+            <Trion><UseCost>15</UseCost></Trion>
+            <Execution><Rhythm>Sequential</Rhythm></Execution>
+            <VerbProps>
+              <verbClass>BDP.Core.Verbs.BdpVerb_Shoot</verbClass>
+              <hasStandardCommand>true</hasStandardCommand>
+              <label>朱鹮</label>
+              <defaultProjectile>BDP_Projectile_SniperStandard</defaultProjectile>
+              <range>69.9</range>
+              <burstShotCount>1</burstShotCount>
+              <warmupTime>3.5</warmupTime>
+              <defaultCooldownTime>1.5</defaultCooldownTime>
+              <accuracyTouch>0.50</accuracyTouch>
+              <accuracyShort>0.70</accuracyShort>
+              <accuracyMedium>0.88</accuracyMedium>
+              <accuracyLong>0.90</accuracyLong>
+              <soundCast>Shot_SniperRifle</soundCast>
+              <soundCastTail>GunTail_Heavy</soundCastTail>
+              <noiseRadius>25</noiseRadius>
+              <muzzleFlashScale>1.1</muzzleFlashScale>
+              <!-- 目标判定与原版枪械一致：不可瞄地面，可瞄单位/建筑 -->
+              <targetParams>
+                <canTargetLocations>false</canTargetLocations>
+                <canTargetBuildings>true</canTargetBuildings>
+                <canTargetPawns>true</canTargetPawns>
+              </targetParams>
+            </VerbProps>
+            <Presentation>
+              <VisualPresetDefName>BDP_Visual_SniperRifle</VisualPresetDefName>
+            </Presentation>
+            <DirectTargetLineOfSight>Required</DirectTargetLineOfSight>
+          </li>
+        </Entries>
+      </Expression>
+    </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipActionPresetDef>
+
+  <!-- ===== 蚱蜢：机动弹射能力 ===== -->
+
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipActionPresetDef>
+    <defName>BDP_Preset_Grasshopper</defName>
+    <label>蚱蜢</label>
+    <description>机动型芯片。在脚下凝聚Trion弹射跳板，以爆发性速度弹向目标位置。冷却5秒，每次使用消耗30 Trion。</description>
+    <costList>
+      <Silver>80</Silver>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+    <additionalWorkAmount>500</additionalWorkAmount>
+    <config>
+      <Profile>
+        <!-- 能力类芯片 -->
+        <Category>BDP_ChipCategory_Ability</Category>
+        <Tags>
+        </Tags>
+      </Profile>
+      <Loadout>
+        <SlotRegion>MainSub</SlotRegion>                      <!-- 可装主槽或副槽 -->
+        <SlotOccupancy>Single</SlotOccupancy>
+        <ActivationDelayTicks>30</ActivationDelayTicks>       <!-- 0.5秒预热 -->
+        <DeactivationDelayTicks>15</DeactivationDelayTicks>   <!-- 0.25秒关闭延迟 -->
+      </Loadout>
+      <Trion>
+        <CapacityCost>100</CapacityCost>                      <!-- 常驻占用 100 Trion -->
+        <ActivationCost>15</ActivationCost>                   <!-- 激活时一次性消耗 15 Trion -->
+      </Trion>
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement"><Minimum>1</Minimum></li>
+      </ActivationRequirements>
+      <Expression>
+        <Entries>
+          <li>
+            <Id>grasshopper_ability</Id>
+            <DisplayLabel>蚱蜢</DisplayLabel>
+            <Kind>Ability</Kind>                              <!-- 能力类表达条目 -->
+            <AbilityDefName>BDP_Ability_Grasshopper</AbilityDefName>
+            <Trion>
+              <UseCost>20</UseCost>                           <!-- 每次跳跃消耗 20 Trion -->
+            </Trion>
+          </li>
+        </Entries>
+      </Expression>
+    </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipActionPresetDef>
+
+</Defs>

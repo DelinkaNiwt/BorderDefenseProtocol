@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Trion 相关属性。 -->
+  <BDP_TrionCapacity.label>Trion容量</BDP_TrionCapacity.label>
+  <BDP_TrionCapacity.description>该个体可储存的最大 Trion 总量。</BDP_TrionCapacity.description>
+  <BDP_TrionRecoveryRate.label>Trion恢复速率</BDP_TrionRecoveryRate.label>
+  <BDP_TrionRecoveryRate.description>该个体每日自然恢复的 Trion 总量。</BDP_TrionRecoveryRate.description>
+  <BDP_TrionIntensity.label>Trion释放力</BDP_TrionIntensity.label>
+  <BDP_TrionIntensity.description>该个体当前能够发挥的 Trion 释放强度；数值越高，能够使用的高门槛芯片越多。</BDP_TrionIntensity.description>
+</LanguageData>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 战斗体状态徽标。 -->
+  <BDP_Status_CombatBody_Inactive>战斗体：未激活</BDP_Status_CombatBody_Inactive>
+  <BDP_Status_CombatBody_Active>战斗体：已激活</BDP_Status_CombatBody_Active>
+  <BDP_Status_CombatBody_Reason>
+原因：{0}</BDP_Status_CombatBody_Reason>
+  <BDP_Status_CombatBody_Collapsing>战斗体：崩解中
+剩余：{0}{1}</BDP_Status_CombatBody_Collapsing>
+  <BDP_Status_CombatBody_Cooldown>战斗体：冷却中
+剩余：{0}</BDP_Status_CombatBody_Cooldown>
+  <BDP_Status_EmergencyEscape_NotReady>紧急脱离：未就绪</BDP_Status_EmergencyEscape_NotReady>
+  <BDP_Status_EmergencyEscape_Ready>紧急脱离：已就绪</BDP_Status_EmergencyEscape_Ready>
+
+  <!-- Trion 状态条。 -->
+  <BDP_Trion_Status_Title>Trion储量</BDP_Trion_Status_Title>
+  <BDP_Trion_Status_Available>可用：{0} / {1}</BDP_Trion_Status_Available>
+  <BDP_Trion_Status_Drain>持续消耗 {0}/秒</BDP_Trion_Status_Drain>
+  <BDP_Trion_Status_Recovery>恢复 {0}/天</BDP_Trion_Status_Recovery>
+  <BDP_Trion_Status_FrozenOn>Trion恢复冻结：开启</BDP_Trion_Status_FrozenOn>
+  <BDP_Trion_Status_FrozenOff>Trion恢复冻结：关闭</BDP_Trion_Status_FrozenOff>
+  <BDP_Trion_Status_DrainDetailEmpty>Trion持续消耗详情
+当前没有持续消耗。</BDP_Trion_Status_DrainDetailEmpty>
+  <BDP_Trion_Status_DrainDetailHeader>Trion持续消耗详情
+来源列表：</BDP_Trion_Status_DrainDetailHeader>
+  <BDP_Trion_Status_DrainLine>- {0}：{1}/秒</BDP_Trion_Status_DrainLine>
+  <BDP_Trion_DrainSource_CombatBodyWound>战斗体伤口泄露（调试ID：{0}）</BDP_Trion_DrainSource_CombatBodyWound>
+  <BDP_Trion_DrainSource_CombatBodyMaintenance>战斗体维持消耗</BDP_Trion_DrainSource_CombatBodyMaintenance>
+  <BDP_Trion_DrainSource_Expression>表达效果持续消耗（调试ID：{0}）</BDP_Trion_DrainSource_Expression>
+  <BDP_Trion_DrainSource_Hediff>状态表达持续消耗（调试ID：{0}）</BDP_Trion_DrainSource_Hediff>
+  <BDP_Trion_DrainSource_Ability>能力表达持续消耗（调试ID：{0}）</BDP_Trion_DrainSource_Ability>
+  <BDP_Trion_DrainSource_Passive>被动表达持续消耗（调试ID：{0}）</BDP_Trion_DrainSource_Passive>
+  <BDP_Trion_DrainSource_Verb>攻击表达持续消耗（调试ID：{0}）</BDP_Trion_DrainSource_Verb>
+  <BDP_Trion_DrainSource_Unknown>未知来源持续消耗（调试ID：{0}）</BDP_Trion_DrainSource_Unknown>
+
+  <!-- 角色属性报告。 -->
+  <BDP_Stat_TrionCapacityPotential>Trion容量潜质：+{0}</BDP_Stat_TrionCapacityPotential>
+  <BDP_Stat_TrionInnateIntensity>先天Trion释放力：+{0}</BDP_Stat_TrionInnateIntensity>
+  <BDP_Stat_TrionCapacityPotentialLabel>Trion容量潜质</BDP_Stat_TrionCapacityPotentialLabel>
+  <BDP_Stat_TrionIntensityLabel>Trion释放力</BDP_Stat_TrionIntensityLabel>
+  <BDP_Stat_TrionIntensityDescription>该角色当前能够发挥的 Trion 释放力。</BDP_Stat_TrionIntensityDescription>
+  <BDP_Stat_TriggerCategoryLabel>触发器类别</BDP_Stat_TriggerCategoryLabel>
+  <BDP_Stat_TriggerCategoryDescription>该触发体所属的正式触发器类别。</BDP_Stat_TriggerCategoryDescription>
+  <BDP_Requirement_UnknownValue>未知</BDP_Requirement_UnknownValue>
+  <BDP_Requirement_SkillLevelLabel>技能等级</BDP_Requirement_SkillLevelLabel>
+  <BDP_Requirement_SkillLevelMinimum>至少{0}级</BDP_Requirement_SkillLevelMinimum>
+  <BDP_Requirement_SkillLevelFailure>{0}：当前{1}，需要{2}</BDP_Requirement_SkillLevelFailure>
+  <BDP_Requirement_TrionIntensityLabel>Trion释放力</BDP_Requirement_TrionIntensityLabel>
+  <BDP_Requirement_TrionIntensityMinimum>至少{0}</BDP_Requirement_TrionIntensityMinimum>
+  <BDP_Requirement_TrionIntensityFailure>{0}：当前{1}，需要{2}</BDP_Requirement_TrionIntensityFailure>
+  <BDP_Ability_TrionCostWithMinimum>施法消耗：{0} Trion
+最低需求：{1} Trion</BDP_Ability_TrionCostWithMinimum>
+  <BDP_Ability_TrionCost>施法消耗：{0} Trion</BDP_Ability_TrionCost>
+</LanguageData>

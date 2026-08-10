@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 可重复使用、需要另一名高智识角色操作的固定 Trion 天赋检测仪。 -->
+  <ThingDef ParentName="BuildingBase">
+    <!-- 建筑唯一名称。 -->
+    <defName>BDP_TrionDetector</defName>
+    <!-- 建筑运行类。 -->
+    <thingClass>BDP.Content.Trion.Talent.Building_TrionDetector</thingClass>
+    <!-- 玩家可见名称。 -->
+    <label>Trion天赋检测仪</label>
+    <!-- 玩家可见说明。 -->
+    <description>用于准确检测无腺体人形角色先天 Trion 容量潜质的固定仪器。需要智识至少10级的另一名角色操作。</description>
+    <!-- 建造菜单分类。 -->
+    <designationCategory>Biotech</designationCategory>
+    <!-- 与原版培育仓一致的定义占地；默认朝东时地图观感为横向 2×1。 -->
+    <size>(1,2)</size>
+    <!-- 与原版培育仓一致，默认横向放置。 -->
+    <defaultPlacingRot>East</defaultPlacingRot>
+    <!-- 原版进入建筑工作需要一个明确交互格。 -->
+    <hasInteractionCell>true</hasInteractionCell>
+    <!-- 交互格位于建筑南侧。 -->
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <!-- 舱内角色仍可被玩家选中。 -->
+    <containedPawnsSelectable>true</containedPawnsSelectable>
+    <!-- 建筑每 tick 维护扫描视觉状态。 -->
+    <tickerType>Normal</tickerType>
+    <!-- 允许角色进入建筑占地。 -->
+    <passability>PassThroughOnly</passability>
+    <!-- 完整复用原版培育仓的多方向图形参数。 -->
+    <graphicData>
+      <texPath>Things/Building/Misc/GrowthVat/GrowthVat</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(1,2)</drawSize>
+      <shadowData>
+        <!-- 原版培育仓阴影体积。 -->
+        <volume>(0.85,0.3,1.7)</volume>
+      </shadowData>
+    </graphicData>
+    <!-- 与原版培育仓一致地绘制边缘阴影。 -->
+    <castEdgeShadows>true</castEdgeShadows>
+    <!-- 基础耐久、工作量和价值。 -->
+    <statBases>
+      <MaxHitPoints>180</MaxHitPoints>
+      <WorkToBuild>8000</WorkToBuild>
+      <Flammability>1</Flammability>
+      <Beauty>-2</Beauty>
+    </statBases>
+    <!-- 建造材料。 -->
+    <costList>
+      <Steel>120</Steel>
+      <ComponentIndustrial>4</ComponentIndustrial>
+    </costList>
+    <!-- 设备使用原版电力组件。 -->
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>200</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable" />
+    </comps>
+  </ThingDef>
+
+</Defs>

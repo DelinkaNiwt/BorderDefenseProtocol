@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 触发器装配窗口和槽位面板。 -->
+  <BDP_Window_TriggerAssembly_Preview>Trion 预览</BDP_Window_TriggerAssembly_Preview>
+  <BDP_Window_TriggerAssembly_Inventory>芯片库存</BDP_Window_TriggerAssembly_Inventory>
+  <BDP_Window_TriggerAssembly_Detail>详情</BDP_Window_TriggerAssembly_Detail>
+  <BDP_Window_TriggerAssembly_ActivationRequirements>激活条件</BDP_Window_TriggerAssembly_ActivationRequirements>
+  <BDP_Window_TriggerAssembly_NoChips>没有符合当前筛选条件的芯片。</BDP_Window_TriggerAssembly_NoChips>
+  <BDP_Window_TriggerAssembly_FilterAll>全部</BDP_Window_TriggerAssembly_FilterAll>
+  <BDP_Window_TriggerAssembly_FilterHands>主手/副手</BDP_Window_TriggerAssembly_FilterHands>
+  <BDP_Window_TriggerAssembly_FilterSpecial>特殊槽</BDP_Window_TriggerAssembly_FilterSpecial>
+  <BDP_Window_TriggerAssembly_EmptySlot>空槽</BDP_Window_TriggerAssembly_EmptySlot>
+  <BDP_Window_TriggerAssembly_Unknown>未知</BDP_Window_TriggerAssembly_Unknown>
+  <BDP_Window_TriggerAssembly_SingleSlot>单槽</BDP_Window_TriggerAssembly_SingleSlot>
+  <BDP_Window_TriggerAssembly_PairedSlots>主手/副手成对</BDP_Window_TriggerAssembly_PairedSlots>
+  <BDP_Window_TriggerAssembly_Unspecified>未指定</BDP_Window_TriggerAssembly_Unspecified>
+  <BDP_Window_TriggerAssembly_SlotRegion>槽区</BDP_Window_TriggerAssembly_SlotRegion>
+  <BDP_Window_TriggerAssembly_SlotOccupancy>槽位占用</BDP_Window_TriggerAssembly_SlotOccupancy>
+  <BDP_Window_TriggerAssembly_ActivationDelay>启用延迟/关闭延迟</BDP_Window_TriggerAssembly_ActivationDelay>
+  <BDP_Window_TriggerAssembly_DelayValue>启用：{0}秒 / 关闭：{1}秒</BDP_Window_TriggerAssembly_DelayValue>
+  <BDP_Window_TriggerAssembly_UnknownValue>-</BDP_Window_TriggerAssembly_UnknownValue>
+  <BDP_Window_TriggerAssembly_ResidentCost>常驻占用</BDP_Window_TriggerAssembly_ResidentCost>
+  <BDP_Window_TriggerAssembly_ActivationCost>激活成本</BDP_Window_TriggerAssembly_ActivationCost>
+  <BDP_Window_TriggerAssembly_Side>槽区</BDP_Window_TriggerAssembly_Side>
+  <BDP_Window_TriggerAssembly_Index>槽位编号</BDP_Window_TriggerAssembly_Index>
+  <BDP_Window_TriggerAssembly_LoadedChip>已装芯片</BDP_Window_TriggerAssembly_LoadedChip>
+  <BDP_Window_TriggerAssembly_ContainerChips>容器芯片</BDP_Window_TriggerAssembly_ContainerChips>
+  <BDP_Window_TriggerAssembly_Active>激活</BDP_Window_TriggerAssembly_Active>
+  <BDP_Window_TriggerAssembly_Disabled>禁用</BDP_Window_TriggerAssembly_Disabled>
+  <BDP_Window_TriggerAssembly_Mirror>同步槽位</BDP_Window_TriggerAssembly_Mirror>
+  <BDP_Window_TriggerAssembly_Binding>关联槽位</BDP_Window_TriggerAssembly_Binding>
+  <BDP_Window_TriggerAssembly_SlotCount>槽位数量</BDP_Window_TriggerAssembly_SlotCount>
+  <BDP_Window_TriggerAssembly_LoadedCount>已装芯片</BDP_Window_TriggerAssembly_LoadedCount>
+  <BDP_Window_TriggerAssembly_Current>当前 {0} / {1}</BDP_Window_TriggerAssembly_Current>
+  <BDP_Window_TriggerAssembly_Available>可用 {0}</BDP_Window_TriggerAssembly_Available>
+  <BDP_Window_TriggerAssembly_Locked>已锁定 {0}</BDP_Window_TriggerAssembly_Locked>
+  <BDP_Window_TriggerAssembly_Reserved>预占用 {0}</BDP_Window_TriggerAssembly_Reserved>
+  <BDP_Window_TriggerAssembly_AfterAssembly>装配后 {0}</BDP_Window_TriggerAssembly_AfterAssembly>
+  <BDP_Window_TriggerAssembly_Change>变化 {0}</BDP_Window_TriggerAssembly_Change>
+  <BDP_Window_TriggerAssembly_Drain>持续消耗 {0}/秒</BDP_Window_TriggerAssembly_Drain>
+  <BDP_Window_TriggerAssembly_PreviewLine1>当前 {0} / {1}    可用 {2}</BDP_Window_TriggerAssembly_PreviewLine1>
+  <BDP_Window_TriggerAssembly_PreviewLine2>已锁定 {0}    预占用 {1}    装配后 {2}</BDP_Window_TriggerAssembly_PreviewLine2>
+  <BDP_Window_TriggerAssembly_PreviewLine3>变化 {0}    持续消耗 {1}/秒</BDP_Window_TriggerAssembly_PreviewLine3>
+  <BDP_Window_TriggerAssembly_Stored>已存储：{0} / {1}</BDP_Window_TriggerAssembly_Stored>
+  <BDP_Window_TriggerAssembly_Occupancy>占用 {0}    激活 {1}</BDP_Window_TriggerAssembly_Occupancy>
+  <BDP_Window_TriggerAssembly_TrionCost>Trion -</BDP_Window_TriggerAssembly_TrionCost>
+  <BDP_Window_TriggerAssembly_SideInfo>槽区={0}
+槽位编号={1}
+芯片={2}
+同步槽位={3}
+关联槽位={4}</BDP_Window_TriggerAssembly_SideInfo>
+  <BDP_Window_TriggerAssembly_MirrorLocked>同步槽位（锁定）</BDP_Window_TriggerAssembly_MirrorLocked>
+  <BDP_Window_TriggerAssembly_ActiveFlag>已激活</BDP_Window_TriggerAssembly_ActiveFlag>
+  <BDP_Window_TriggerAssembly_DisabledFlag>禁用</BDP_Window_TriggerAssembly_DisabledFlag>
+  <BDP_Window_TriggerAssembly_AvailableFlag>可用</BDP_Window_TriggerAssembly_AvailableFlag>
+  <BDP_Window_TriggerAssembly_MainSubRegion>主手槽/副手槽</BDP_Window_TriggerAssembly_MainSubRegion>
+  <BDP_Window_TriggerAssembly_SpecialRegion>特殊槽</BDP_Window_TriggerAssembly_SpecialRegion>
+  <BDP_Window_TriggerAssembly_ChipTooltip>{0}
+槽区={1}
+槽位占用={2}
+当前槽位兼容={3}</BDP_Window_TriggerAssembly_ChipTooltip>
+  <BDP_Window_ChipStorage_DropTooltip>弹出该芯片到芯片仓附近。</BDP_Window_ChipStorage_DropTooltip>
+
+</LanguageData>

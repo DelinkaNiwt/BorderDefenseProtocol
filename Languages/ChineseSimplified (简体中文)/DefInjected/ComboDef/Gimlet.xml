@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 芯片组合技 Def。 -->
+
+  <BDP_Combo_Gimlet.label>飞锥</BDP_Combo_Gimlet.label>
+  <BDP_Combo_Gimlet.description>小行星双芯片组合技。双 Trigon 供能加速弹丸，射出高速穿甲弹。</BDP_Combo_Gimlet.description>
+</LanguageData>

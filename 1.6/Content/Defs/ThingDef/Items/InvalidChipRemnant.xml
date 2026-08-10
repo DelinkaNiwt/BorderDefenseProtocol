@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 所有明确非法的成品芯片和半成品统一迁移为这一种普通遗留物。 -->
+  <ThingDef ParentName="ResourceBase">
+    <!-- 唯一稳定定义名。 -->
+    <defName>BDP_InvalidChipRemnant</defName>
+    <!-- 非中文环境下的基础名称，中文由 DefInjected 语言包覆盖。 -->
+    <label>invalid chip remnant</label>
+    <!-- 非中文环境下的基础说明，中文由 DefInjected 语言包覆盖。 -->
+    <description>A remnant left by a chip specification that can no longer be represented.</description>
+    <!-- 使用原版部件图形，不引入专用表现类。 -->
+    <graphicData>
+      <texPath>Things/Item/Resource/ComponentIndustrial</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <!-- 普通资源式堆叠，避免生成大量独立无用物品。 -->
+    <stackLimit>75</stackLimit>
+    <!-- 明确禁止任何贸易流通。 -->
+    <tradeability>None</tradeability>
+    <!-- 允许原版搬运与仓储。 -->
+    <alwaysHaulable>true</alwaysHaulable>
+    <!-- 只作为普通资源归类。 -->
+    <thingCategories>
+      <li>ResourcesRaw</li>
+    </thingCategories>
+    <!-- 无经济价值，仅保留少量质量。 -->
+    <statBases>
+      <MarketValue>0</MarketValue>
+      <Mass>0.1</Mass>
+      <MaxHitPoints>30</MaxHitPoints>
+      <Flammability>0</Flammability>
+    </statBases>
+    <!-- 允许原版熔炼，但只得到同一种遗留物。 -->
+    <smeltable>true</smeltable>
+    <smeltProducts>
+      <BDP_InvalidChipRemnant>1</BDP_InvalidChipRemnant>
+    </smeltProducts>
+  </ThingDef>
+
+</Defs>
