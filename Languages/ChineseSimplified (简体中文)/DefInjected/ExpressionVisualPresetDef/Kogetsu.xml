@@ -3,4 +3,8 @@
   <!-- 表达视觉预设 Def。 -->
 
   <BDP_Visual_Kogetsu.label>弧月手持视觉</BDP_Visual_Kogetsu.label>
+  <!-- 光魂三种状态的独立视觉预设。 -->
+  <BDP_Visual_LightSoulShieldMobile.label>光魂大盾灵活姿态视觉</BDP_Visual_LightSoulShieldMobile.label>
+  <BDP_Visual_LightSoulShieldGuard.label>光魂大盾举盾姿态视觉</BDP_Visual_LightSoulShieldGuard.label>
+  <BDP_Visual_LightSoulHeavyBlade.label>光魂重刃手持视觉</BDP_Visual_LightSoulHeavyBlade.label>
 </LanguageData>

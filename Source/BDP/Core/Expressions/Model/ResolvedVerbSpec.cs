@@ -80,6 +80,12 @@ namespace BDP.Core.Expressions
         public float DefaultCooldownTime { get; set; }
 
         /// <summary>
+        /// 当前规格声明的原版枪口闪光尺寸。
+        /// BDP 会把它冻结到每个实际发射计划，不交给宿主在小人中心统一播放。
+        /// </summary>
+        public float MuzzleFlashScale { get; set; }
+
+        /// <summary>
         /// 当前规格是否要求与目标保持直射合法。
         /// 它是 dual 分侧裁定时必须读取的正式真值。
         /// </summary>

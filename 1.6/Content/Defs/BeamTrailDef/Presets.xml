@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-  <!-- BDP Content 正式光束拖尾预设。首版颜色待游戏实测后继续校色。 -->
+  <!-- BDP Content 正式光束拖尾预设：默认外层降低亮度，保留暗环境中的可见亮线。 -->
 
   <BDP.Content.Projectiles.BeamTrail.BeamTrailPresetDef>
     <!-- Def 唯一名称。 -->
@@ -10,8 +10,8 @@
     <label>亮薄荷绿长拖尾</label>
     <!-- 拖尾贴图路径。 -->
     <trailTexPath>Things/Projectile/BDP_BeamTrail</trailTexPath>
-    <!-- 拖尾颜色。 -->
-    <trailColor>(0.855, 0.992, 0.898, 1.0)</trailColor>
+    <!-- 默认拖尾颜色：把之前降低的整体亮度回调一半。 -->
+    <trailColor>(0.8175, 0.971, 0.879, 0.775)</trailColor>
     <!-- 拖尾宽度。 -->
     <trailWidth>0.1105</trailWidth>
     <!-- 单段寿命，单位为 tick。 -->
@@ -37,8 +37,8 @@
     <label>亮薄荷绿短拖尾</label>
     <!-- 拖尾贴图路径。 -->
     <trailTexPath>Things/Projectile/BDP_BeamTrail</trailTexPath>
-    <!-- 拖尾颜色。 -->
-    <trailColor>(0.855, 0.992, 0.898, 1.0)</trailColor>
+    <!-- 默认拖尾颜色：与长拖尾保持一致，并把之前降低的整体亮度回调一半。 -->
+    <trailColor>(0.8175, 0.971, 0.879, 0.775)</trailColor>
     <!-- 拖尾宽度。 -->
     <trailWidth>0.09</trailWidth>
     <!-- 单段寿命，单位为 tick；数值越小，拖尾越短。 -->

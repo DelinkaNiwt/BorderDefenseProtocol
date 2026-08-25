@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+  <!-- 黄蜂组合技本地化。 -->
+  <BDP_Combo_Hornet.label>黄蜂</BDP_Combo_Hornet.label>
+  <BDP_Combo_Hornet.description>猎犬与猎犬组合，沿用猎犬射击配置并使用标准强度追踪。</BDP_Combo_Hornet.description>
+
+</LanguageData>

@@ -23,16 +23,21 @@ namespace BDP.Content.Assembly.ChipManufacturing.Migration
 
             foreach (InvalidChipCandidate candidate in candidates)
             {
-                ChipCombinationResolution resolution = resolver.Resolve(candidate.Record);
-                if (resolution.Status == ChipCombinationResolutionStatus.MissingSource)
+                // 旧持久化格式没有当前组合记录，不能把历史来源重新解释成合法成品。
+                // 它必须直接进入非法物品替换路径，避免旧物品继续留在激活槽位中。
+                if (!candidate.LegacyPersistenceDetected)
                 {
-                    report.RecordPreservedMissingSource();
-                    continue;
-                }
+                    ChipCombinationResolution resolution = resolver.Resolve(candidate.Record);
+                    if (resolution.Status == ChipCombinationResolutionStatus.MissingSource)
+                    {
+                        report.RecordPreservedMissingSource();
+                        continue;
+                    }
 
-                if (resolution.Status != ChipCombinationResolutionStatus.Invalid)
-                {
-                    continue;
+                    if (resolution.Status != ChipCombinationResolutionStatus.Invalid)
+                    {
+                        continue;
+                    }
                 }
 
                 VerseThing remnant = ThingMaker.MakeThing(ThingDef.Named(RemnantDefName));

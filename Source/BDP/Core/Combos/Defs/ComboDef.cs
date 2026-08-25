@@ -11,14 +11,20 @@ namespace BDP.Core.Combos
     public sealed class ComboDef : Def
     {
         /// <summary>
-        /// 组合技来源芯片 A 的 DefName。
+        /// 组合技第一来源动作预设的 DefName。
         /// </summary>
-        public string chipA;
+        public string firstSourceActionDefName;
 
         /// <summary>
-        /// 组合技来源芯片 B 的 DefName。
+        /// 组合技第二来源动作预设的 DefName。
         /// </summary>
-        public string chipB;
+        public string secondSourceActionDefName;
+
+        /// <summary>第一来源项的可选成品身份准入规则。</summary>
+        public ComboSourceAdmissionConfig FirstSourceAdmission;
+
+        /// <summary>第二来源项的可选成品身份准入规则。</summary>
+        public ComboSourceAdmissionConfig SecondSourceAdmission;
 
         /// <summary>
         /// 使用整个组合技前必须持续满足的有序角色条件。
@@ -32,6 +38,12 @@ namespace BDP.Core.Combos
         public ComboExpressionConfig Expression;
 
         /// <summary>
+        /// 是否要求第一、第二来源项使用同一来源变体。
+        /// 默认启用，避免组合结果在来源构型不一致时失去确定语义。
+        /// </summary>
+        public bool RequireSameSourceVariant = true;
+
+        /// <summary>
         /// 把当前 Def 表面写法收拢成统一配置对象。
         /// 读取器和解释器统一消费这份结构，避免各层自己散读字段。
         /// </summary>
@@ -39,8 +51,11 @@ namespace BDP.Core.Combos
         {
             return new ComboDefinitionConfig
             {
-                chipA = chipA,
-                chipB = chipB,
+                firstSourceActionDefName = firstSourceActionDefName,
+                secondSourceActionDefName = secondSourceActionDefName,
+                FirstSourceAdmission = FirstSourceAdmission,
+                SecondSourceAdmission = SecondSourceAdmission,
+                RequireSameSourceVariant = RequireSameSourceVariant,
                 UseRequirements = UseRequirements != null
                     ? new List<PawnRequirement>(UseRequirements)
                     : new List<PawnRequirement>(),

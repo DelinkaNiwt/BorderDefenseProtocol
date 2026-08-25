@@ -14,7 +14,7 @@
     <label>芯片</label>
     <!-- Content 成品类型按组合记录实时解析名称与配置。 -->
     <thingClass>BDP.Content.Assembly.ChipManufacturing.Thing.Thing_ManufacturedChip</thingClass>
-    <description>A chip produced from action presets and an optional shell.</description>
+    <description>由动作预设与可选武装型组合制造的动态芯片。</description>
     <graphicData>
       <texPath>Things/Trigger/Chip/BDP_TriggerChip</texPath>
       <graphicClass>Graphic_Single</graphicClass>

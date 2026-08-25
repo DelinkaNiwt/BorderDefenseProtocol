@@ -14,8 +14,8 @@ $coreRoot = Join-Path $repoRoot 'Source\BDP\Core'
 $defPath = Join-Path $coreRoot 'Chips\Defs\ChipExclusionGroupDef.cs'
 $configPath = Join-Path $coreRoot 'Chips\Config\ChipLoadoutConfig.cs'
 $contractPath = Join-Path $coreRoot 'Chips\Contract\ChipLoadoutContract.cs'
-$resolverPath = Join-Path $coreRoot 'Chips\Contract\DefaultChipDefinitionContractResolver.cs'
-$validatorPath = Join-Path $coreRoot 'Chips\Validation\DefaultChipDefinitionValidator.cs'
+$resolverPath = Join-Path $coreRoot 'Chips\Contract\ChipDefinitionContractResolver.cs'
+$validatorPath = Join-Path $coreRoot 'Chips\Validation\ChipDefinitionValidator.cs'
 $payloadPath = Join-Path $coreRoot 'Expressions\Model\ExpressionRuntimePayload.cs'
 $collectorPath = Join-Path $coreRoot 'Expressions\Pipeline\ExpressionSourceCollector.cs'
 
@@ -44,7 +44,7 @@ Assert-True (
         'IReadOnlyList<ChipExclusionGroupDef>\s+ActivationExclusionGroups'
 ) 'ChipLoadoutContract must carry read-only activation exclusion groups.'
 Assert-True (
-    ($resolverText -match 'ActivationExclusionGroups\s*=\s*config\.ActivationExclusionGroups') -and
+    ($resolverText -match 'ActivationExclusionGroups\s*=\s*config\.ActivationExclusionGroups[\s\S]*new\s+List<ChipExclusionGroupDef>') -and
     ($resolverText -match 'new\s+List<ChipExclusionGroupDef>')
 ) 'The contract resolver must copy Def references without converting them to strings.'
 Assert-True (

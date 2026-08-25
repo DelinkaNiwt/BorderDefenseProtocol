@@ -28,6 +28,11 @@ namespace BDP.Core.Chips
         public List<ChipExclusionGroupDef> ActivationExclusionGroups;
 
         /// <summary>
+        /// 当前芯片可选的激活阶段音效声明。
+        /// </summary>
+        public ChipActivationAudioConfig ActivationAudio;
+
+        /// <summary>
         /// 当前芯片从收到启用命令到正式生效的延迟游戏刻。
         /// -1 表示作者未填写，此时运行时回退到系统默认值。
         /// </summary>

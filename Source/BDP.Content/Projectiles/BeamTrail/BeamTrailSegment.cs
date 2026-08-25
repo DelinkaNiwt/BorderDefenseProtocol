@@ -37,6 +37,26 @@ namespace BDP.Content.Projectiles.BeamTrail
         public Color TrailColor;
 
         /// <summary>
+        /// 当前线段是否追加拖尾内芯。
+        /// </summary>
+        public bool HasTrailCore;
+
+        /// <summary>
+        /// 当前线段内芯颜色。
+        /// </summary>
+        public Color TrailCoreColor;
+
+        /// <summary>
+        /// 当前线段内芯相对外层的宽度比例。
+        /// </summary>
+        public float TrailCoreWidthRatio = 0.45f;
+
+        /// <summary>
+        /// 当前线段内芯透明度倍率。
+        /// </summary>
+        public float TrailCoreOpacity = 1f;
+
+        /// <summary>
         /// 当前线段宽度。
         /// </summary>
         public float TrailWidth;
@@ -83,6 +103,10 @@ namespace BDP.Content.Projectiles.BeamTrail
             End = NormalizePoint(end);
             TrailTexPath = appearance != null ? appearance.TrailTexPath : "Things/Projectile/BDP_BeamTrail";
             TrailColor = appearance != null ? appearance.TrailColor : Color.white;
+            HasTrailCore = appearance != null && appearance.HasTrailCore;
+            TrailCoreColor = appearance != null ? appearance.TrailCoreColor : Color.black;
+            TrailCoreWidthRatio = appearance != null ? appearance.TrailCoreWidthRatio : 0.45f;
+            TrailCoreOpacity = appearance != null ? appearance.TrailCoreOpacity : 1f;
             TrailWidth = appearance != null ? appearance.TrailWidth : 0.1105f;
             SegmentLifetimeTicks = appearance != null ? appearance.SegmentLifetimeTicks : 30;
             TicksAlive = 0;
@@ -120,6 +144,36 @@ namespace BDP.Content.Projectiles.BeamTrail
         /// <param name="material">当前线段使用的材质。</param>
         public void Draw(Material material)
         {
+            DrawInternal(material, TrailWidth, TrailColor, 1f);
+        }
+
+        /// <summary>
+        /// 用独立材质绘制当前线段的灰黑内芯。
+        /// </summary>
+        /// <param name="material">内芯使用的透明材质。</param>
+        public void DrawCore(Material material)
+        {
+            if (!HasTrailCore)
+            {
+                return;
+            }
+
+            DrawInternal(
+                material,
+                TrailWidth * Mathf.Clamp(TrailCoreWidthRatio, 0.05f, 1f),
+                TrailCoreColor,
+                Mathf.Clamp01(TrailCoreOpacity));
+        }
+
+        /// <summary>
+        /// 使用指定外观参数完成一次线段绘制。
+        /// </summary>
+        /// <param name="material">当前绘制使用的材质。</param>
+        /// <param name="width">当前绘制宽度。</param>
+        /// <param name="color">当前绘制颜色。</param>
+        /// <param name="opacityMultiplier">当前绘制透明度倍率。</param>
+        private void DrawInternal(Material material, float width, Color color, float opacityMultiplier)
+        {
             if (material == null)
             {
                 return;
@@ -142,10 +196,10 @@ namespace BDP.Content.Projectiles.BeamTrail
             midpoint.y = AltitudeLayer.MoteOverhead.AltitudeFor() + AltitudeOffset;
 
             Quaternion rotation = Quaternion.LookRotation(direction.Yto0());
-            Vector3 scale = new Vector3(TrailWidth, 1f, length);
+            Vector3 scale = new Vector3(Mathf.Max(0.01f, width), 1f, length);
             Matrix4x4 matrix = Matrix4x4.TRS(midpoint, rotation, scale);
 
-            Color finalColor = new Color(TrailColor.r, TrailColor.g, TrailColor.b, TrailColor.a * opacity);
+            Color finalColor = new Color(color.r, color.g, color.b, color.a * opacity * opacityMultiplier);
             propertyBlock.Clear();
             propertyBlock.SetColor("_Color", finalColor);
             Graphics.DrawMesh(MeshPool.plane10, matrix, material, 0, null, 0, propertyBlock);
@@ -160,6 +214,10 @@ namespace BDP.Content.Projectiles.BeamTrail
             Scribe_Values.Look(ref End, "end");
             Scribe_Values.Look(ref TrailTexPath, "trailTexPath");
             Scribe_Values.Look(ref TrailColor, "trailColor");
+            Scribe_Values.Look(ref HasTrailCore, "hasTrailCore", false);
+            Scribe_Values.Look(ref TrailCoreColor, "trailCoreColor", Color.black);
+            Scribe_Values.Look(ref TrailCoreWidthRatio, "trailCoreWidthRatio", 0.45f);
+            Scribe_Values.Look(ref TrailCoreOpacity, "trailCoreOpacity", 1f);
             Scribe_Values.Look(ref TrailWidth, "trailWidth", 0.1105f);
             Scribe_Values.Look(ref SegmentLifetimeTicks, "segmentLifetimeTicks", 30);
             Scribe_Values.Look(ref TicksAlive, "ticksAlive", 0);

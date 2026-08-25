@@ -33,6 +33,9 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Impact
                 if (contribution.Stop.IsRequested)
                 {
                     plan.SuppressBaselineImpact = true;
+                    plan.DamageDisposition = MergeDamageDisposition(
+                        plan.DamageDisposition,
+                        DamageDisposition.SuppressBaselineImpact);
                     plan.ApplyBaselineDirectDamage = false;
                     plan.BaselineDirectDamage = null;
                     plan.ApplyBaselineAreaEffect = false;
@@ -42,9 +45,38 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Impact
                     plan.ApplyAreaEffect = false;
                     plan.AreaEffect = null;
                     plan.ExtraDamages.Clear();
+                    plan.ExtraEffects.Clear();
                 }
 
                 plan.SuppressBaselineImpact |= contribution.SuppressBaselineImpact;
+                plan.PreserveTargetResolutionWhenDamageSuppressed |=
+                    contribution.PreserveTargetResolutionWhenDamageSuppressed;
+                plan.ProducesAttackTargetEvents |= contribution.ProducesAttackTargetEvents;
+                if (contribution.HasHitFeedbackColor)
+                {
+                    plan.HasHitFeedbackColor = true;
+                    plan.HitFeedbackColor = contribution.HitFeedbackColor;
+                    plan.HitFeedbackTargetScope = contribution.HitFeedbackTargetScope;
+                }
+                if (contribution.InterceptedHitFeedback != ImpactHitFeedbackMode.None)
+                {
+                    plan.InterceptedHitFeedback = contribution.InterceptedHitFeedback;
+                }
+                if (contribution.AreaPresentationPolicyOverride != null)
+                {
+                    plan.AreaPresentationPolicyOverride =
+                        contribution.AreaPresentationPolicyOverride.Clone();
+                }
+                if (contribution.SuppressBaselineImpact)
+                {
+                    plan.DamageDisposition = MergeDamageDisposition(
+                        plan.DamageDisposition,
+                        DamageDisposition.SuppressBaselineImpact);
+                }
+
+                plan.DamageDisposition = MergeDamageDisposition(
+                    plan.DamageDisposition,
+                    contribution.DamageDisposition);
                 if (contribution.HasDirectDamage)
                 {
                     plan.ApplyDirectDamage = contribution.OverrideDirectDamage != null;
@@ -58,6 +90,7 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Impact
                 }
 
                 plan.ExtraDamages.AddRange(contribution.ExtraDamagesToAppend);
+                plan.ExtraEffects.AddRange(contribution.ExtraEffectsToAppend);
                 AppendTags(plan.Tags, contribution.TagsToAppend);
             }
 
@@ -94,6 +127,7 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Impact
             ImpactPlan plan = new ImpactPlan
             {
                 SuppressBaselineImpact = false,
+                ProducesAttackTargetEvents = hasAreaEffect,
                 ApplyBaselineDirectDamage = !hasAreaEffect,
                 BaselineDirectDamage = hasAreaEffect
                     ? null
@@ -143,6 +177,34 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Impact
                     target.Add(source[i]);
                 }
             }
+        }
+
+        /// <summary>
+        /// 合并多个模块提交的伤害处置；更强的全量抑制优先。
+        /// </summary>
+        private static DamageDisposition MergeDamageDisposition(
+            DamageDisposition current,
+            DamageDisposition incoming)
+        {
+            if (incoming == DamageDisposition.SuppressAllProjectileImpact
+                || current == DamageDisposition.SuppressAllProjectileImpact)
+            {
+                return DamageDisposition.SuppressAllProjectileImpact;
+            }
+
+            if (incoming == DamageDisposition.SuppressModuleExtraDamage
+                || current == DamageDisposition.SuppressModuleExtraDamage)
+            {
+                return DamageDisposition.SuppressModuleExtraDamage;
+            }
+
+            if (incoming == DamageDisposition.SuppressBaselineImpact
+                || current == DamageDisposition.SuppressBaselineImpact)
+            {
+                return DamageDisposition.SuppressBaselineImpact;
+            }
+
+            return DamageDisposition.Preserve;
         }
     }
 }

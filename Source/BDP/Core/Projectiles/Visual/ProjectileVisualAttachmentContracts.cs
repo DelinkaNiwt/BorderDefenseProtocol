@@ -14,7 +14,8 @@ namespace BDP.Core.Projectiles.Visual
         /// 为当前投射物创建一份新的视觉附加件实例。
         /// </summary>
         /// <returns>新的视觉附加件；返回空表示当前提供器不参与本发投射物。</returns>
-        IProjectileVisualAttachment CreateAttachment();
+        IProjectileVisualAttachment CreateAttachment(
+            ProjectileVisualAppearanceOverrides visualAppearanceOverrides);
     }
 
     /// <summary>

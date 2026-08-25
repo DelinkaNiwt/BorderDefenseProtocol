@@ -48,11 +48,11 @@ namespace BDP.Content.Assembly.ChipManufacturing.Recipe
                 AppendDefs(universe, actions[index].costList);
             }
 
-            List<ChipGunShellDef> gunShells =
-                DefDatabase<ChipGunShellDef>.AllDefsListForReading;
-            for (int index = 0; index < gunShells.Count; index++)
+            List<ChipArmamentFormDef> armamentForms =
+                DefDatabase<ChipArmamentFormDef>.AllDefsListForReading;
+            for (int index = 0; index < armamentForms.Count; index++)
             {
-                AppendDefs(universe, gunShells[index].additionalCost);
+                AppendDefs(universe, armamentForms[index].additionalCost);
             }
 
             recipe.ingredients = new List<IngredientCount>();

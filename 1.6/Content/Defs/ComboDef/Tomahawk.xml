@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 战斧：毒蛇与美特拉组合，沿用毒蛇路线引导并追加炸裂能力。 -->
+  <BDP.Core.Combos.ComboDef>
+    <!-- 组合技 Def 唯一名称。 -->
+    <defName>BDP_Combo_Tomahawk</defName>
+    <!-- 英文回退名称；简体中文 Def 名称由 DefInjected 语言包提供。 -->
+    <label>Tomahawk</label>
+    <!-- 英文回退说明；简体中文说明由 DefInjected 语言包提供。 -->
+    <description>Viper and Meteora combo. It follows Viper's guided route and adds Meteora's explosive impact.</description>
+    <!-- 第一来源固定为毒蛇。 -->
+    <firstSourceActionDefName>BDP_Preset_Viper</firstSourceActionDefName>
+    <!-- 第二来源固定为美特拉。 -->
+    <secondSourceActionDefName>BDP_Preset_Meteora</secondSourceActionDefName>
+    <!-- 第一来源只允许射手体系武装芯片。 -->
+    <FirstSourceAdmission>
+      <AllowedProfessions>
+        <li>BDP_ChipProfession_Shooter</li>
+      </AllowedProfessions>
+      <AllowedCategories>
+        <li>BDP_ChipCategory_Weapon</li>
+      </AllowedCategories>
+    </FirstSourceAdmission>
+    <!-- 第二来源只允许射手体系武装芯片。 -->
+    <SecondSourceAdmission>
+      <AllowedProfessions>
+        <li>BDP_ChipProfession_Shooter</li>
+      </AllowedProfessions>
+      <AllowedCategories>
+        <li>BDP_ChipCategory_Weapon</li>
+      </AllowedCategories>
+    </SecondSourceAdmission>
+    <Expression>
+      <Entries>
+        <li>
+          <!-- 战斧组合表达唯一标识。 -->
+          <Id>tomahawk_primary</Id>
+          <!-- 玩家可见名称使用稳定语言键；缺少语言键时回退到英文显示名。 -->
+          <DisplayLabel>Tomahawk</DisplayLabel>
+          <DisplayLabelKey>BDP_Expression_Tomahawk</DisplayLabelKey>
+          <Kind>PrimaryVerb</Kind>
+          <WeaponMode>Ranged</WeaponMode>
+          <!-- 变化炸裂弹融合毒蛇投射物参数和美特拉爆炸能力。 -->
+          <VerbProps>
+            <defaultProjectile>BDP_Projectile_Variable_Explosive</defaultProjectile>
+          </VerbProps>
+          <!-- 射击属性以毒蛇为母本。 -->
+          <VerbPropsResolve>
+            <RangeResolve>FollowFirstSource</RangeResolve>
+            <WarmupTimeResolve>FollowFirstSource</WarmupTimeResolve>
+            <BurstShotCountResolve>FollowFirstSource</BurstShotCountResolve>
+            <TicksBetweenBurstShotsResolve>FollowFirstSource</TicksBetweenBurstShotsResolve>
+            <AccuracyTouchResolve>FollowFirstSource</AccuracyTouchResolve>
+            <AccuracyShortResolve>FollowFirstSource</AccuracyShortResolve>
+            <AccuracyMediumResolve>FollowFirstSource</AccuracyMediumResolve>
+            <AccuracyLongResolve>FollowFirstSource</AccuracyLongResolve>
+            <DefaultCooldownTimeResolve>FollowFirstSource</DefaultCooldownTimeResolve>
+          </VerbPropsResolve>
+          <!-- 射击节奏以毒蛇为母本。 -->
+          <ExecutionResolve>
+            <RhythmResolve>FollowFirstSource</RhythmResolve>
+          </ExecutionResolve>
+          <!-- Trion 使用费用和最低要求以毒蛇为母本。 -->
+          <TrionResolve>
+            <UseCostResolve>FollowFirstSource</UseCostResolve>
+            <MinimumRequiredResolve>FollowFirstSource</MinimumRequiredResolve>
+          </TrionResolve>
+          <!-- 保留毒蛇的路线引导模块；爆炸由变化炸裂弹投射物自身提供。 -->
+          <RangedModules>
+            <li><moduleDef>BDP_RoutePathModule</moduleDef></li>
+          </RangedModules>
+          <!-- 毒蛇允许最终目标为地面或单位，不要求最终直射。 -->
+          <DirectTargetLineOfSight>NotRequired</DirectTargetLineOfSight>
+        </li>
+      </Entries>
+    </Expression>
+  </BDP.Core.Combos.ComboDef>
+
+</Defs>

@@ -10,6 +10,8 @@ namespace BDP.Content.RangedModules.Homing
     {
         /// <summary>首段触发比例。</summary>
         public float InitialSegmentTriggerRatio = 0.5f;
+        /// <summary>初始目标为空地时的首段触发比例。</summary>
+        public float GroundTargetInitialSegmentTriggerRatio = 1f;
         /// <summary>最大重锁次数。</summary>
         public int MaxRelocks = 2;
         /// <summary>命中判定窗口半径。</summary>
@@ -56,6 +58,12 @@ namespace BDP.Content.RangedModules.Homing
         public float TerminalFlyAwayDistance = 5.5f;
         /// <summary>每发方差。</summary>
         public float PerEmitVariance = 0.2f;
+        /// <summary>是否允许瞄准空地并在落点检索目标。</summary>
+        public bool AllowGroundTarget;
+        /// <summary>落点检索半径；零表示关闭检索。</summary>
+        public float AcquireRadius;
+        /// <summary>落点检索是否要求视线。</summary>
+        public bool AcquireRequireLineOfSight = true;
 
         public override RangedModuleConfigNode Clone()
         {
@@ -67,6 +75,7 @@ namespace BDP.Content.RangedModules.Homing
             return new HomingConfig
             {
                 InitialSegmentTriggerRatio = InitialSegmentTriggerRatio,
+                GroundTargetInitialSegmentTriggerRatio = GroundTargetInitialSegmentTriggerRatio,
                 MaxRelocks = MaxRelocks,
                 HitWindow = HitWindow,
                 LossBehindAngle = LossBehindAngle,
@@ -89,13 +98,17 @@ namespace BDP.Content.RangedModules.Homing
                 InertiaWeight = InertiaWeight,
                 CaptureWeight = CaptureWeight,
                 TerminalFlyAwayDistance = TerminalFlyAwayDistance,
-                PerEmitVariance = PerEmitVariance
+                PerEmitVariance = PerEmitVariance,
+                AllowGroundTarget = AllowGroundTarget,
+                AcquireRadius = AcquireRadius,
+                AcquireRequireLineOfSight = AcquireRequireLineOfSight
             };
         }
 
         public void ExposeData()
         {
             Scribe_Values.Look(ref InitialSegmentTriggerRatio, "initialSegmentTriggerRatio", 0.5f);
+            Scribe_Values.Look(ref GroundTargetInitialSegmentTriggerRatio, "groundTargetInitialSegmentTriggerRatio", 1f);
             Scribe_Values.Look(ref MaxRelocks, "maxRelocks", 2);
             Scribe_Values.Look(ref HitWindow, "hitWindow", 0.85f);
             Scribe_Values.Look(ref LossBehindAngle, "lossBehindAngle", 115f);
@@ -119,6 +132,9 @@ namespace BDP.Content.RangedModules.Homing
             Scribe_Values.Look(ref CaptureWeight, "captureWeight", 0.85f);
             Scribe_Values.Look(ref TerminalFlyAwayDistance, "terminalFlyAwayDistance", 5.5f);
             Scribe_Values.Look(ref PerEmitVariance, "perEmitVariance", 0.2f);
+            Scribe_Values.Look(ref AllowGroundTarget, "allowGroundTarget", false);
+            Scribe_Values.Look(ref AcquireRadius, "acquireRadius", 0f);
+            Scribe_Values.Look(ref AcquireRequireLineOfSight, "acquireRequireLineOfSight", true);
         }
     }
 }

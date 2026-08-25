@@ -13,6 +13,11 @@ namespace BDP.Core.CombatBody
     public sealed class CombatBodyTriggerGizmoProvider : ITriggerExternalGizmoProvider
     {
         /// <summary>
+        /// 战斗体按钮排序值：位于 Trion 资源面板之后、其它默认排序的 BDP 按钮之前。
+        /// </summary>
+        private const float GizmoOrder = -90f;
+
+        /// <summary>
         /// 基于当前 Trigger 宿主上下文构建 CombatBody 按钮。
         /// </summary>
         public IEnumerable<Gizmo> BuildGizmos(TriggerExternalGizmoContext context)
@@ -38,6 +43,7 @@ namespace BDP.Core.CombatBody
             }
 
             Command_Action command = new Command_Action();
+            command.Order = GizmoOrder;
             switch (reader.Phase)
             {
                 case CombatBodyPhase.Inactive:

@@ -50,6 +50,11 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Model
         public ISemanticContext SemanticContext { get; set; }
 
         /// <summary>
+        /// 当前区域效果的原版爆炸视觉、音效和屏幕震动策略。
+        /// </summary>
+        public ExplosionPresentationPolicy PresentationPolicy { get; set; }
+
+        /// <summary>
         /// 当前区域计划附带的轻量标签集合。
         /// </summary>
         public List<string> Tags { get; set; } = new List<string>();

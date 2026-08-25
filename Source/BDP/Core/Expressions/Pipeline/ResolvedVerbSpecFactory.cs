@@ -45,6 +45,7 @@ namespace BDP.Core.Expressions
                 AccuracyMedium = verbProps.accuracyMedium,
                 AccuracyLong = verbProps.accuracyLong,
                 DefaultCooldownTime = verbProps.defaultCooldownTime,
+                MuzzleFlashScale = verbProps.muzzleFlashScale,
                 RequireLineOfSight = verbProps.requireLineOfSight,
                 RequiresDirectTargetLineOfSight = ResolveDirectTargetLineOfSightRequirement(
                     verbProps,
@@ -86,6 +87,7 @@ namespace BDP.Core.Expressions
                 AccuracyMedium = baseSpec.AccuracyMedium,
                 AccuracyLong = baseSpec.AccuracyLong,
                 DefaultCooldownTime = baseSpec.DefaultCooldownTime,
+                MuzzleFlashScale = baseSpec.MuzzleFlashScale,
                 RequireLineOfSight = baseSpec.RequireLineOfSight,
                 RequiresDirectTargetLineOfSight = baseSpec.RequiresDirectTargetLineOfSight,
                 StopBurstWithoutLos = baseSpec.StopBurstWithoutLos,
@@ -175,7 +177,8 @@ namespace BDP.Core.Expressions
         internal static ResolvedVerbSpec ResolveComboSpec(
             VerbProperties fallbackVerbProps,
             ResolvedVerbSpec fallbackVerbSpec,
-            ComboResolvedVerbProps resolvedVerbProps)
+            ComboResolvedVerbProps resolvedVerbProps,
+            ProjectileOverrides projectileOverrides = null)
         {
             ResolvedVerbSpec baseSpec = fallbackVerbSpec
                 ?? FromDeclared(
@@ -184,7 +187,13 @@ namespace BDP.Core.Expressions
                     new List<Tool>(),
                     new List<MeleeToolSurface>(),
                     null);
-            return ApplyComboOverrides(baseSpec, resolvedVerbProps);
+            ResolvedVerbSpec spec = ApplyComboOverrides(baseSpec, resolvedVerbProps);
+            if (projectileOverrides != null)
+            {
+                spec.ProjectileOverrides = projectileOverrides;
+            }
+
+            return spec;
         }
 
         /// <summary>
@@ -263,7 +272,8 @@ namespace BDP.Core.Expressions
                 soundCast = source.soundCast,
                 soundCastTail = source.soundCastTail,
                 soundAiming = source.soundAiming,
-                muzzleFlashScale = source.muzzleFlashScale,
+                // BDP 按每个实际发射计划在对应枪口播放原版 ShotFlash；宿主中心不得再重复播放。
+                muzzleFlashScale = 0f,
                 impactMote = source.impactMote,
                 impactFleck = source.impactFleck,
                 drawAimPie = source.drawAimPie,

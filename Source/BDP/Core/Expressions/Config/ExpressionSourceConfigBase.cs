@@ -21,6 +21,12 @@ namespace BDP.Core.Expressions
         public string DisplayLabel;
 
         /// <summary>
+        /// 当前条目显示名称的可选语言包键。
+        /// 填写后优先于 DisplayLabel，未填写的既有内容保持原行为。
+        /// </summary>
+        public string DisplayLabelKey;
+
+        /// <summary>
         /// 当前条目的角色键。
         /// 第一版先保留为字符串，不抢先做完整角色词典。
         /// </summary>

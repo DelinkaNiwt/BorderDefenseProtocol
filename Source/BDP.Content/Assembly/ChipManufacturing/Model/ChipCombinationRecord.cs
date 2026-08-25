@@ -18,8 +18,8 @@ namespace BDP.Content.Assembly.ChipManufacturing.Model
         /// <summary>顺序敏感的动作预设 DefName。</summary>
         public List<string> OrderedActionPresetDefNames = new List<string>();
 
-        /// <summary>可空的枪壳 DefName。</summary>
-        public string GunShellDefName;
+        /// <summary>可空的显式武装型 DefName。</summary>
+        public string ArmamentFormDefName;
 
         /// <summary>来源缺失时用于展示的最后成功名称。</summary>
         public string LastResolvedLabel;
@@ -30,8 +30,9 @@ namespace BDP.Content.Assembly.ChipManufacturing.Model
             Scribe_Values.Look(ref CategoryDefName, "categoryDefName");
             Scribe_Values.Look(ref ProfessionDefName, "professionDefName");
             Scribe_Collections.Look(ref OrderedActionPresetDefNames, "orderedActionPresetDefNames", LookMode.Value);
-            Scribe_Values.Look(ref GunShellDefName, "gunShellDefName");
+            Scribe_Values.Look(ref ArmamentFormDefName, "armamentFormDefName");
             Scribe_Values.Look(ref LastResolvedLabel, "lastResolvedLabel");
+
             if (OrderedActionPresetDefNames == null)
             {
                 OrderedActionPresetDefNames = new List<string>();
@@ -48,7 +49,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.Model
                 OrderedActionPresetDefNames = OrderedActionPresetDefNames != null
                     ? new List<string>(OrderedActionPresetDefNames)
                     : new List<string>(),
-                GunShellDefName = GunShellDefName,
+                ArmamentFormDefName = ArmamentFormDefName,
                 LastResolvedLabel = LastResolvedLabel
             };
         }
@@ -61,7 +62,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.Model
             if (other == null
                 || !string.Equals(CategoryDefName, other.CategoryDefName, StringComparison.Ordinal)
                 || !string.Equals(ProfessionDefName, other.ProfessionDefName, StringComparison.Ordinal)
-                || !string.Equals(GunShellDefName, other.GunShellDefName, StringComparison.Ordinal))
+                || !string.Equals(ArmamentFormDefName, other.ArmamentFormDefName, StringComparison.Ordinal))
             {
                 return false;
             }

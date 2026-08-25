@@ -117,6 +117,36 @@ namespace BDP.Core.Trigger
         }
 
         /// <summary>
+        /// 读取某枚芯片当前形态内部的正式姿态键。
+        /// 根槽姿态真值建立前保持为空，避免解释器猜测业务默认值。
+        /// </summary>
+        internal string GetChipStanceKey(Thing chip)
+        {
+            TriggerSlotState rootSlot = FindActiveRootSlotForChip(chip);
+            if (rootSlot == null
+                || !TriggerChipModeService.IsStanceKeyValid(
+                    chip,
+                    rootSlot.CurrentModeKey,
+                    rootSlot.CurrentStanceKey))
+            {
+                return null;
+            }
+
+            return rootSlot.CurrentStanceKey;
+        }
+
+        /// <summary>
+        /// 读取某枚正式启用芯片当前形态内的有序姿态选项。
+        /// </summary>
+        internal IReadOnlyList<ChipStanceOptionSnapshot> GetChipStanceOptions(Thing chip)
+        {
+            TriggerSlotState rootSlot = FindActiveRootSlotForChip(chip);
+            return rootSlot != null
+                ? TriggerChipModeService.BuildStanceOptions(chip, rootSlot.CurrentModeKey)
+                : System.Array.Empty<ChipStanceOptionSnapshot>();
+        }
+
+        /// <summary>
         /// 读取某枚正式启用多形态芯片的有序形态选项。
         /// </summary>
         internal IReadOnlyList<ChipModeOptionSnapshot> GetChipModeOptions(Thing chip)

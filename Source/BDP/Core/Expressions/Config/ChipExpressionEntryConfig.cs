@@ -58,6 +58,12 @@ namespace BDP.Core.Expressions
         public List<Tool> tools;
 
         /// <summary>
+        /// 当前条目全部 Tool 的可选语言包名称键。
+        /// 顺序依次对应单 Tool（若有）和 tools 列表；缺少对应项时沿用 Tool 原始标签。
+        /// </summary>
+        public List<string> ToolLabelKeys;
+
+        /// <summary>
         /// 当前条目声明的 Maneuver。
         /// </summary>
         public ManeuverDef Maneuver;
@@ -98,6 +104,12 @@ namespace BDP.Core.Expressions
         /// 顺序语义完全以 XML 中的书写顺序为准。
         /// </summary>
         public List<RangedModuleMountConfig> RangedModules;
+
+        /// <summary>
+        /// 当前条目向其它符合能力条件的远程表达结果发布的开放式增强声明。
+        /// 它与 RangedModules（当前结果自身模块）严格分开。
+        /// </summary>
+        public List<RangedModuleAugmentationConfig> RangedModuleAugmentations;
 
         /// <summary>
         /// 当前条目的中性投射物属性覆盖。

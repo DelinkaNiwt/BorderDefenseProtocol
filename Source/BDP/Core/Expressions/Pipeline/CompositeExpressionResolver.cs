@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using BDP.Core.AttackExecution;
 using BDP.Core.Combos;
 using BDP.Core.CombatModel;
+using BDP.Core.Expressions.External;
 using BDP.Core.Semantics;
 using BDP.Core.Trigger;
 using BDP.Support.Diagnostics;
@@ -120,7 +121,11 @@ namespace BDP.Core.Expressions
                 return target;
             }
 
-            ComboDefinitionReadResult comboReadResult = ComboSurfaceAccess.FindMatch(mainChip, subChip);
+            string matchFailureReason;
+            ComboDefinitionReadResult comboReadResult = ComboSurfaceAccess.FindMatch(
+                mainChip,
+                subChip,
+                out matchFailureReason);
             if (comboReadResult == null
                 || comboReadResult.Validation == null
                 || !comboReadResult.Validation.IsValid
@@ -138,15 +143,31 @@ namespace BDP.Core.Expressions
                     mainPrimary,
                     subPrimary,
                     "combo表达未成立："
-                    + DescribeComboReadResult(comboReadResult));
+                    + DescribeComboReadResult(comboReadResult)
+                    + " 匹配摘要="
+                    + SafeText(matchFailureReason));
                 return target;
             }
 
+            ComboDefinitionContractResolver comboResolver = ComboSurfaceAccess.ResolveContractResolver();
+            BDP.Core.Requirements.PawnRequirementCheckResult useRequirementCheck =
+                ComboUseRequirementService.Instance.Evaluate(pawn, comboReadResult.ComboDef);
+            List<ComboExpressionEntryConfig> comboEntries = ComboExpressionEntryCloneService.CloneEntries(
+                comboReadResult.Contract.Expression.Config.Entries);
+            string commonSourceVariantKey = ResolveCommonSourceVariantKey(mainMaterial, subMaterial);
+            string commonSourceVariantLabel = ResolveCommonSourceVariantLabel(
+                mainMaterial,
+                subMaterial,
+                commonSourceVariantKey);
+            ComboExpressionVariantModifierRegistry.Apply(comboEntries, commonSourceVariantKey);
+
+            // 只解释已修正的组合条目副本，保证 Content 只修改组合结果显式声明的数据，
+            // 不回写 ComboDef 缓存，也不重复处理第一、第二来源结果。
             ChipExpressionResolvedContract resolvedContract = comboEntryInterpreter.Resolve(
                 null,
                 new ChipExpressionConfig
                 {
-                    Entries = BuildComboInterpreterEntries(comboReadResult.Contract.Expression.Config.Entries)
+                    Entries = BuildComboInterpreterEntries(comboEntries)
                 },
                 triggerLoadoutReader);
             if (resolvedContract == null
@@ -162,16 +183,14 @@ namespace BDP.Core.Expressions
                     subChip,
                     mainPrimary,
                     subPrimary,
-                    "combo表达未成立：条目解释失败。"
+                    "combo表达未成立：组合条目解释失败。"
                     + DescribeResolvedContract(resolvedContract));
                 return target;
             }
-            ComboDefinitionContractResolver comboResolver = ComboSurfaceAccess.ResolveContractResolver();
-            BDP.Core.Requirements.PawnRequirementCheckResult useRequirementCheck =
-                ComboUseRequirementService.Instance.Evaluate(pawn, comboReadResult.ComboDef);
+
             for (int i = 0; i < resolvedContract.Contract.Entries.Count; i++)
             {
-                ComboExpressionEntryConfig entryConfig = comboReadResult.Contract.Expression.Config.Entries[i];
+                ComboExpressionEntryConfig entryConfig = comboEntries[i];
                 ChipExpressionEntryContract entry = resolvedContract.Contract.Entries[i];
                 ComboResolvedVerbProps resolvedVerbProps = comboResolver.ResolveVerbProps(
                     entryConfig,
@@ -191,7 +210,9 @@ namespace BDP.Core.Expressions
                     subPrimary,
                     resolvedVerbProps,
                     resolvedExecution,
-                    useRequirementCheck);
+                    useRequirementCheck,
+                    commonSourceVariantKey,
+                    commonSourceVariantLabel);
                 if (comboResult == null)
                 {
                     continue;
@@ -388,6 +409,53 @@ namespace BDP.Core.Expressions
         }
 
         /// <summary>
+        /// 解析第一、第二来源项共同使用的来源变体键。
+        /// 空白键统一视为没有来源变体；不一致时不构造组合级来源键。
+        /// </summary>
+        private static string ResolveCommonSourceVariantKey(
+            ExpressionSourceMaterial firstSourceMaterial,
+            ExpressionSourceMaterial secondSourceMaterial)
+        {
+            string firstSourceVariantKey = NormalizeSourceVariantKey(firstSourceMaterial?.SourceVariantKey);
+            string secondSourceVariantKey = NormalizeSourceVariantKey(secondSourceMaterial?.SourceVariantKey);
+            if (firstSourceVariantKey == null || secondSourceVariantKey == null)
+            {
+                return null;
+            }
+
+            return string.Equals(
+                    firstSourceVariantKey,
+                    secondSourceVariantKey,
+                    System.StringComparison.OrdinalIgnoreCase)
+                ? firstSourceVariantKey
+                : null;
+        }
+
+        /// <summary>解析共同来源构型的显示标签。</summary>
+        private static string ResolveCommonSourceVariantLabel(
+            ExpressionSourceMaterial firstSourceMaterial,
+            ExpressionSourceMaterial secondSourceMaterial,
+            string commonSourceVariantKey)
+        {
+            if (string.IsNullOrWhiteSpace(commonSourceVariantKey))
+            {
+                return null;
+            }
+
+            return !string.IsNullOrWhiteSpace(firstSourceMaterial?.SourceVariantLabel)
+                ? firstSourceMaterial.SourceVariantLabel
+                : secondSourceMaterial?.SourceVariantLabel;
+        }
+
+        /// <summary>把来源变体键归一化为稳定比较值。</summary>
+        private static string NormalizeSourceVariantKey(string sourceVariantKey)
+        {
+            return string.IsNullOrWhiteSpace(sourceVariantKey)
+                ? null
+                : sourceVariantKey.Trim();
+        }
+
+        /// <summary>
         /// 把组合技解释后的表达条目翻译成正式结果。
         /// 这一层只负责表达总表成立，不在这里新开组合技专用执行语义。
         /// </summary>
@@ -401,7 +469,9 @@ namespace BDP.Core.Expressions
             FormalExpressionResult subPrimary,
             ComboResolvedVerbProps resolvedVerbProps,
             ComboResolvedExecution resolvedExecution,
-            BDP.Core.Requirements.PawnRequirementCheckResult useRequirementCheck)
+            BDP.Core.Requirements.PawnRequirementCheckResult useRequirementCheck,
+            string sourceVariantKey,
+            string sourceVariantLabel)
         {
             return comboResultFactory.Build(new ComboFormalExpressionResolution
             {
@@ -414,7 +484,9 @@ namespace BDP.Core.Expressions
                 SubSourceResult = subPrimary,
                 ResolvedVerbProps = resolvedVerbProps,
                 ResolvedExecution = resolvedExecution,
-                UseRequirementCheck = useRequirementCheck
+                UseRequirementCheck = useRequirementCheck,
+                SourceVariantKey = sourceVariantKey,
+                SourceVariantLabel = sourceVariantLabel
             });
         }
 
@@ -442,7 +514,7 @@ namespace BDP.Core.Expressions
                 /*
                   Combo 的来源材料不能依赖“该侧已有正式发布结果”。
                   像旋空这类只提供 combo 来源、不单独发布业务的 passive 来源条目，
-                  仍然必须把副侧 Trion 来源保留下来，供 FollowChipB 正式求值。
+                  仍然必须把副侧 Trion 来源保留下来，供 FollowSecondSource 正式求值。
                 */
                 return material;
             }
@@ -783,6 +855,7 @@ namespace BDP.Core.Expressions
                 // 同芯片双持——标签和展示名无需合并，取主侧即可。
                 DisplayLabel = BuildDualDisplayLabel(mainPrimary),
                 VisualPresetDefName = null,
+                VisualGraphicOverrideDefName = mainPrimary != null ? mainPrimary.VisualGraphicOverrideDefName : null,
                 CompositeVisualPresetDefName = mainPrimary != null ? mainPrimary.CompositeVisualPresetDefName : null,
                 ForceSuppressHostEquipment = mainPrimary != null && mainPrimary.ForceSuppressHostEquipment,
                 VisualPriority = mainPrimary != null ? mainPrimary.VisualPriority : 0,

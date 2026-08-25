@@ -265,6 +265,22 @@ namespace BDP.Core.Verbs
         private string insufficientTrionPromptLatchedAttackInstanceId;
 
         /// <summary>
+        /// 当前发射计划的首发横向侧别是否已经随机确定。
+        /// </summary>
+        private bool originSpreadSideInitialized;
+
+        /// <summary>
+        /// 已经确定首发横向侧别的正式发射计划引用。
+        /// </summary>
+        private RangedVerbEmissionPlan originSpreadSidePlan;
+
+        /// <summary>
+        /// 当前正式发射计划的首发横向侧别。
+        /// true 表示首发向右，false 表示首发向左。
+        /// </summary>
+        private bool originSpreadStartsRight;
+
+        /// <summary>
         /// 对内暴露当前远程宿主单轮发射状态。
         /// </summary>
         internal RangedVerbRoundState RoundState
@@ -315,6 +331,7 @@ namespace BDP.Core.Verbs
                 SemanticContext = null;
                 currentResolvedVerbSpec = null;
                 ResetInsufficientTrionPromptLatch();
+                ResetOriginSpreadSideState();
                 roundState.Reset();
                 return;
             }
@@ -392,6 +409,10 @@ namespace BDP.Core.Verbs
         internal void BindVerbEmissionPlan(RangedVerbEmissionPlan emissionPlan)
         {
             emissionCursor.BindVerbEmissionPlan(emissionPlan);
+            AttackExecutionVisualRuntimeBridge.PublishAttackParticipants(
+                CasterPawn,
+                HostSessionToken,
+                emissionPlan);
             if (emissionPlan == null)
             {
                 roundState.Reset();
@@ -713,8 +734,9 @@ namespace BDP.Core.Verbs
                 ? rootResolution.RootOriginWorld
                 : drawPos;
             Vector3 theoreticalOrigin = rootOrigin + plan.OriginOffsetWorld;
+            int expectedEmitCount = ResolveExpectedOriginSpreadEmitCount();
             Vector3 launchOrigin = theoreticalOrigin
-                + ResolveRandomOriginSpreadOffset(theoreticalOrigin, navigationTarget, plan);
+                + ResolveRandomOriginSpreadOffset(theoreticalOrigin, navigationTarget, plan, expectedEmitCount);
             TriggerVisualEmissionDiagnosticsAccess.RecordLaunchOrigin(
                 CasterPawn,
                 plan.AttackInstanceId,
@@ -735,6 +757,15 @@ namespace BDP.Core.Verbs
             nextOriginOffset = launchOrigin - drawPos;
             bool emitted = TryLaunchSinglePlan(projectileDef, resultingLine, manningPawn, equipmentSource, launchOrigin, plan, semanticTarget, navigationTarget);
             nextOriginOffset = Vector3.zero;
+            if (emitted && plan.MuzzleFlashScale > 0.01f)
+            {
+                // 继续调用原版射击闪光接口，但位置归属当前实际发射来源的枪口。
+                FleckMaker.Static(
+                    rootOrigin,
+                    caster.Map,
+                    FleckDefOf.ShotFlash,
+                    plan.MuzzleFlashScale);
+            }
             return emitted;
         }
 
@@ -1289,15 +1320,79 @@ namespace BDP.Core.Verbs
         }
 
         /// <summary>
-        /// 仅在显式声明随机散布区间时，按真正发射时的 source/target 几何解算真实发射点随机偏移。
+        /// 读取当前正式发射计划的最终预期发射数量。
         /// </summary>
-        private static Vector3 ResolveRandomOriginSpreadOffset(
+        private int ResolveExpectedOriginSpreadEmitCount()
+        {
+            RangedVerbEmissionPlan emissionPlan = emissionCursor.PendingVerbEmissionPlan;
+            if (emissionPlan != null && emissionPlan.ExpectedEmitCount > 0)
+            {
+                return emissionPlan.ExpectedEmitCount;
+            }
+
+            int remainingCount = emissionCursor.ResolveRemainingProjectileCount();
+            return remainingCount > 0 ? remainingCount : 1;
+        }
+
+        /// <summary>
+        /// 为当前正式发射计划确定一次首发横向侧别。
+        /// </summary>
+        private bool ResolveOriginSpreadStartsRight()
+        {
+            RangedVerbEmissionPlan emissionPlan = emissionCursor.PendingVerbEmissionPlan;
+            if (!originSpreadSideInitialized || originSpreadSidePlan != emissionPlan)
+            {
+                originSpreadSidePlan = emissionPlan;
+                originSpreadStartsRight = Rand.Bool;
+                originSpreadSideInitialized = true;
+            }
+
+            return originSpreadStartsRight;
+        }
+
+        /// <summary>
+        /// 解算当前发射计划应使用的横向随机偏移。
+        /// 多发时按 EmitSequence（发射序号）交替左右，偏移幅度仍保持随机。
+        /// </summary>
+        private static float ResolveAlternatingLateralOffset(
+            ProjectileInitPlan plan,
+            bool startsRight)
+        {
+            float leftMax = Mathf.Max(0f, -plan.OriginSpreadLateralMin);
+            float rightMax = Mathf.Max(0f, plan.OriginSpreadLateralMax);
+            int sequenceParity = plan.EmitSequence % 2;
+            bool rightSide = startsRight ? sequenceParity == 0 : sequenceParity != 0;
+
+            if (rightSide)
+            {
+                if (rightMax > 0f)
+                {
+                    return Rand.Range(0f, rightMax);
+                }
+
+                return -Rand.Range(0f, leftMax);
+            }
+
+            if (leftMax > 0f)
+            {
+                return -Rand.Range(0f, leftMax);
+            }
+
+            return Rand.Range(0f, rightMax);
+        }
+
+        /// <summary>
+        /// 按真正发射时的 source/target 几何解算真实发射点随机偏移。
+        /// </summary>
+        private Vector3 ResolveRandomOriginSpreadOffset(
             Vector3 source,
             LocalTargetInfo target,
-            ProjectileInitPlan plan)
+            ProjectileInitPlan plan,
+            int expectedEmitCount)
         {
             if (plan == null
                 || !plan.HasOriginSpreadRange
+                || expectedEmitCount <= 1
                 || !target.IsValid)
             {
                 return Vector3.zero;
@@ -1315,7 +1410,9 @@ namespace BDP.Core.Verbs
                 rightDir = Vector3.right;
             }
 
-            float lateralOffset = Rand.Range(plan.OriginSpreadLateralMin, plan.OriginSpreadLateralMax);
+            float lateralOffset = ResolveAlternatingLateralOffset(
+                plan,
+                ResolveOriginSpreadStartsRight());
             float forwardOffset = Rand.Range(plan.OriginSpreadForwardMin, plan.OriginSpreadForwardMax);
             return rightDir * lateralOffset + shootDir * forwardOffset;
         }
@@ -1375,7 +1472,18 @@ namespace BDP.Core.Verbs
             SemanticContext = null;
             currentResolvedVerbSpec = null;
             ResetInsufficientTrionPromptLatch();
+            ResetOriginSpreadSideState();
             ClearPendingEmissionPlan();
+        }
+
+        /// <summary>
+        /// 清空正式发射计划的横向首发侧别缓存。
+        /// </summary>
+        private void ResetOriginSpreadSideState()
+        {
+            originSpreadSideInitialized = false;
+            originSpreadSidePlan = null;
+            originSpreadStartsRight = false;
         }
 
         /// <summary>

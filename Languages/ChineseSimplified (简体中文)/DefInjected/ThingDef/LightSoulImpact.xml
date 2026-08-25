@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+  <!-- 光魂抵挡前景动态火花的内部名称。 -->
+  <BDP_Mote_LightSoulSparkThrownFast_Front.label>光魂前景快速火花</BDP_Mote_LightSoulSparkThrownFast_Front.label>
+  <BDP_Mote_LightSoulLongSparkThrown_Front.label>光魂前景长火花</BDP_Mote_LightSoulLongSparkThrown_Front.label>
+
+</LanguageData>

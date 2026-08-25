@@ -23,6 +23,12 @@ namespace BDP.Patches
         private static readonly VisualPoseResolver PoseResolver = new VisualPoseResolver();
 
         /// <summary>
+        /// 当前补丁复用的武器动作阶段解析器。
+        /// </summary>
+        private static readonly WeaponVisualStageResolver WeaponStageResolver =
+            new WeaponVisualStageResolver();
+
+        /// <summary>
         /// 在原版装备绘制前采样姿态并尝试绘制 BDP 视觉条目。
         /// 返回 false 时跳过原版装备贴图。
         /// </summary>
@@ -72,11 +78,21 @@ namespace BDP.Patches
                     DrawResidentEntries(eq, triggerBody, visualProjection, runtimeState, sample);
                     return false;
                 case HostEquipmentRenderMode.ReplaceTextureOnly:
-                    return !TryDrawSingleWeaponTextureReplacement(eq, triggerBody, visualProjection, sample);
+                    return !TryHandleSingleWeaponTextureReplacement(
+                        pawn,
+                        eq,
+                        triggerBody,
+                        visualProjection,
+                        sample);
                 case HostEquipmentRenderMode.Replace:
                 default:
-                    bool drewAny = DrawResidentEntries(eq, triggerBody, visualProjection, runtimeState, sample);
-                    return !drewAny;
+                    bool handledAnyEntry = DrawResidentEntries(
+                        eq,
+                        triggerBody,
+                        visualProjection,
+                        runtimeState,
+                        sample);
+                    return !handledAnyEntry;
             }
         }
 
@@ -90,7 +106,7 @@ namespace BDP.Patches
             TriggerVisualRuntimeState runtimeState,
             EquipmentPoseSample sample)
         {
-            bool drewAny = false;
+            bool handledAnyEntry = false;
             for (int i = 0; i < visualProjection.ResidentEntries.Count; i++)
             {
                 VisualResidentEntry entry = visualProjection.ResidentEntries[i];
@@ -101,11 +117,18 @@ namespace BDP.Patches
                 }
 
                 Thing sourceThing = ResolveSourceThing(triggerBody, entry);
+                WeaponVisualStageSnapshot weaponStageSnapshot = WeaponStageResolver.Resolve(
+                    triggerBody.OwnerPawn,
+                    entry,
+                    triggerBody.PublishedCombatProjection,
+                    runtimeState);
                 ResolvedVisualPose pose = PoseResolver.Resolve(new VisualPoseRequest
                 {
                     Entry = entry,
                     Preset = preset,
+                    GraphicOverridePreset = ResolveGraphicOverridePreset(entry),
                     RuntimeState = runtimeState,
+                    WeaponStageSnapshot = weaponStageSnapshot,
                     PoseSample = sample,
                     SourceThing = sourceThing,
                     EquippedAngleOffset = equipment != null && equipment.def != null
@@ -119,12 +142,18 @@ namespace BDP.Patches
                     continue;
                 }
 
+                handledAnyEntry = true;
+                if (!preset.ResolveStageVisibility(weaponStageSnapshot.Stage))
+                {
+                    continue;
+                }
+
                 ApplyVanillaRecoil(equipment, triggerBody, entry, sample, pose);
+                ApplyExpressionVisualImpulse(triggerBody, entry, pose);
                 DrawPose(pose);
-                drewAny = true;
             }
 
-            return drewAny;
+            return handledAnyEntry;
         }
 
         /// <summary>
@@ -179,10 +208,11 @@ namespace BDP.Patches
         }
 
         /// <summary>
-        /// 单枚激活武器芯片沿用原版手持姿态，只替换主贴图并绘制同预设附加层。
+        /// 单枚激活武器芯片沿用原版手持姿态，只替换视觉图层。
         /// 这里不进入 VisualPoseResolver，避免触发双武器偏移和枪口处理。
         /// </summary>
-        private static bool TryDrawSingleWeaponTextureReplacement(
+        private static bool TryHandleSingleWeaponTextureReplacement(
+            Pawn pawn,
             Thing equipment,
             CompTriggerBody triggerBody,
             VisualExpressionProjection visualProjection,
@@ -201,10 +231,32 @@ namespace BDP.Patches
             }
 
             Thing sourceThing = ResolveSourceThing(triggerBody, entry);
-            Graphic graphic = preset.ResolveGraphic(false, sourceThing);
-            if (graphic == null)
+            TriggerVisualRuntimeState runtimeState = triggerBody.PublishedVisualRuntimeState;
+            WeaponVisualStageSnapshot weaponStageSnapshot = WeaponStageResolver.Resolve(
+                pawn,
+                entry,
+                triggerBody.PublishedCombatProjection,
+                runtimeState);
+            ResolvedVisualPose pose = PoseResolver.ResolveTextureOnly(new VisualPoseRequest
+            {
+                Entry = entry,
+                Preset = preset,
+                RuntimeState = runtimeState,
+                WeaponStageSnapshot = weaponStageSnapshot,
+                PoseSample = sample,
+                SourceThing = sourceThing,
+                EquippedAngleOffset = equipment.def != null ? equipment.def.equippedAngleOffset : 0f,
+                IsExecutionActive = false,
+                IsMuzzleActive = false
+            });
+            if (pose == null || !pose.IsValid)
             {
                 return false;
+            }
+
+            if (!preset.ResolveStageVisibility(weaponStageSnapshot.Stage))
+            {
+                return true;
             }
 
             DrawTextureOnlyReplacement(
@@ -212,9 +264,8 @@ namespace BDP.Patches
                 triggerBody,
                 entry,
                 sourceThing,
-                preset,
-                graphic,
-                sample);
+                sample,
+                pose);
             return true;
         }
 
@@ -272,109 +323,97 @@ namespace BDP.Patches
             CompTriggerBody triggerBody,
             VisualResidentEntry entry,
             Thing sourceThing,
-            ExpressionVisualPresetDef preset,
-            Graphic graphic,
-            EquipmentPoseSample sample)
+            EquipmentPoseSample sample,
+            ResolvedVisualPose pose)
         {
-            float drawAngle = sample.AimAngle - 90f;
-            float equippedAngleOffset = equipment.def != null ? equipment.def.equippedAngleOffset : 0f;
-            Mesh mesh;
-            if (sample.AimAngle > 20f && sample.AimAngle < 160f)
-            {
-                mesh = MeshPool.plane10;
-                drawAngle += equippedAngleOffset;
-            }
-            else if (sample.AimAngle > 200f && sample.AimAngle < 340f)
-            {
-                mesh = MeshPool.plane10Flip;
-                drawAngle -= 180f;
-                drawAngle -= equippedAngleOffset;
-            }
-            else
-            {
-                mesh = MeshPool.plane10;
-                drawAngle += equippedAngleOffset;
-            }
-
-            drawAngle %= 360f;
-            Vector3 drawPosition = sample.DrawLoc;
-            if (equipment.def != null
-                && triggerBody?.VerbHostManager != null
-                && entry != null
-                && triggerBody.VerbHostManager.TryGetByResultId(
-                    entry.ResultId,
-                    out BdpFormalVerbBinding binding)
-                && binding?.RangedVerb != null)
-            {
-                Vector3 drawOffset;
-                float angleOffset;
-                EquipmentUtility.Recoil(
-                    equipment.def,
-                    binding.RangedVerb,
-                    out drawOffset,
-                    out angleOffset,
-                    sample.AimAngle);
-                drawPosition += drawOffset;
-                drawAngle += angleOffset;
-            }
-
+            ApplyVanillaRecoil(equipment, triggerBody, entry, sample, pose);
+            ApplyExpressionVisualImpulse(triggerBody, entry, pose);
             DrawTextureOnlyGraphic(
                 sourceThing,
-                graphic,
-                mesh,
-                drawPosition,
-                drawAngle,
-                1f);
-            DrawTextureOnlyOverlayLayers(
-                preset,
-                sourceThing,
-                mesh,
-                drawPosition,
-                drawAngle);
+                pose.Graphic,
+                ResolveTextureOnlyMesh(pose.MeshKind),
+                pose.DrawPosition,
+                pose.DrawAngle,
+                pose.DrawScale);
+            DrawTextureOnlyOverlayPoses(sourceThing, pose.OverlayPoses);
         }
 
         /// <summary>
-        /// 使用单武器已解析的原版姿态绘制全部未激活态附加层。
+        /// 把当前表达结果的短暂视觉冲量叠加到主贴图及其附加层。
+        /// 枪口、握持锚点和 Pawn 本体不读取该位移。
         /// </summary>
-        private static void DrawTextureOnlyOverlayLayers(
-            ExpressionVisualPresetDef preset,
-            Thing sourceThing,
-            Mesh mesh,
-            Vector3 drawPosition,
-            float drawAngle)
+        private static void ApplyExpressionVisualImpulse(
+            CompTriggerBody triggerBody,
+            VisualResidentEntry entry,
+            ResolvedVisualPose pose)
         {
-            if (preset?.OverlayLayers == null)
+            if (triggerBody?.RuntimeServices?.TriggerVisualRuntimeStateOwner == null
+                || entry == null
+                || pose == null)
             {
                 return;
             }
 
-            for (int i = 0; i < preset.OverlayLayers.Count; i++)
+            int currentTick = Find.TickManager != null ? Find.TickManager.TicksGame : 0;
+            Vector3 offset = triggerBody.RuntimeServices.TriggerVisualRuntimeStateOwner
+                .ResolveExpressionVisualImpulseOffset(entry.ResultId, currentTick);
+            if (offset == Vector3.zero)
             {
-                ExpressionVisualOverlayLayerConfig layer = preset.OverlayLayers[i];
-                if (layer == null || layer.OnlyWhenActive)
+                return;
+            }
+
+            pose.DrawPosition += offset;
+            if (pose.OverlayPoses == null)
+            {
+                return;
+            }
+
+            for (int index = 0; index < pose.OverlayPoses.Count; index++)
+            {
+                ResolvedVisualOverlayPose overlay = pose.OverlayPoses[index];
+                if (overlay != null && overlay.IsValid)
+                {
+                    overlay.DrawPosition += offset;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 使用单武器已解析的原版姿态绘制全部附加层。
+        /// </summary>
+        private static void DrawTextureOnlyOverlayPoses(
+            Thing sourceThing,
+            System.Collections.Generic.IReadOnlyList<ResolvedVisualOverlayPose> overlayPoses)
+        {
+            if (overlayPoses == null)
+            {
+                return;
+            }
+
+            for (int i = 0; i < overlayPoses.Count; i++)
+            {
+                ResolvedVisualOverlayPose overlay = overlayPoses[i];
+                if (overlay == null || !overlay.IsValid)
                 {
                     continue;
                 }
 
-                Graphic overlayGraphic = layer.ResolveGraphic(false, sourceThing);
-                if (overlayGraphic == null)
-                {
-                    continue;
-                }
-
-                Vector3 overlayPosition = drawPosition + layer.LocalOffset;
-                overlayPosition.y += layer.AltitudeOffset;
-                float overlayScale = layer.DrawScale > 0f
-                    ? layer.DrawScale
-                    : preset.ResolveDrawScale();
                 DrawTextureOnlyGraphic(
                     sourceThing,
-                    overlayGraphic,
-                    mesh,
-                    overlayPosition,
-                    drawAngle + layer.AngleOffset,
-                    overlayScale);
+                    overlay.Graphic,
+                    ResolveTextureOnlyMesh(overlay.MeshKind),
+                    overlay.DrawPosition,
+                    overlay.DrawAngle,
+                    overlay.DrawScale);
             }
+        }
+
+        /// <summary>
+        /// 把已解析网格类型转换为 RimWorld 原版装备绘制网格。
+        /// </summary>
+        private static Mesh ResolveTextureOnlyMesh(VisualMeshKind meshKind)
+        {
+            return meshKind == VisualMeshKind.PlaneFlipped ? MeshPool.plane10Flip : MeshPool.plane10;
         }
 
         /// <summary>
@@ -458,6 +497,20 @@ namespace BDP.Patches
         }
 
         /// <summary>
+        /// 解析当前条目的视觉图层局部覆盖预设。
+        /// 它只提供 GraphicData/OverlayLayers，不参与姿态、握持或枪口锚点解析。
+        /// </summary>
+        private static ExpressionVisualPresetDef ResolveGraphicOverridePreset(
+            VisualResidentEntry entry)
+        {
+            return entry == null || string.IsNullOrWhiteSpace(entry.VisualGraphicOverrideDefName)
+                ? null
+                : DefDatabase<ExpressionVisualPresetDef>.GetNamed(
+                    entry.VisualGraphicOverrideDefName,
+                    false);
+        }
+
+        /// <summary>
         /// 判断当前条目是否命中执行焦点。
         /// </summary>
         private static bool ResolveExecutionActive(
@@ -512,7 +565,13 @@ namespace BDP.Patches
         /// </summary>
         private static void DrawPose(ResolvedVisualPose pose)
         {
-            DrawGraphicPose(pose.Graphic, pose.DrawPosition, pose.DrawAngle, pose.MeshKind, pose.DrawScale);
+            DrawGraphicPose(
+                pose.Graphic,
+                pose.DrawMaterial,
+                pose.DrawPosition,
+                pose.DrawAngle,
+                pose.MeshKind,
+                pose.DrawScale);
             if (pose.OverlayPoses == null)
             {
                 return;
@@ -528,6 +587,7 @@ namespace BDP.Patches
 
                 DrawGraphicPose(
                     overlay.Graphic,
+                    overlay.DrawMaterial,
                     overlay.DrawPosition,
                     overlay.DrawAngle,
                     overlay.MeshKind,
@@ -540,12 +600,13 @@ namespace BDP.Patches
         /// </summary>
         private static void DrawGraphicPose(
             Graphic graphic,
+            Material material,
             Vector3 drawPosition,
             float drawAngle,
             VisualMeshKind meshKind,
             float drawScale)
         {
-            if (graphic == null)
+            if (graphic == null || material == null)
             {
                 return;
             }
@@ -559,7 +620,7 @@ namespace BDP.Patches
                     drawPosition,
                     Quaternion.AngleAxis(drawAngle, Vector3.up),
                     new Vector3(drawSize.x * safeScale, 0f, drawSize.y * safeScale)),
-                graphic.MatSingle,
+                material,
                 0);
         }
 

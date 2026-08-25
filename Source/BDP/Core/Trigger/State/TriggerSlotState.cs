@@ -52,6 +52,12 @@ namespace BDP.Core.Trigger
         private string currentModeKey;
 
         /// <summary>
+        /// 当前正式启用根槽在现有形态内部采用的姿态键。
+        /// 未启用、无姿态或镜像槽位必须为空。
+        /// </summary>
+        private string currentStanceKey;
+
+        /// <summary>
         /// 当前是否被外部规则禁用。
         /// </summary>
         private bool isDisabled;
@@ -159,6 +165,15 @@ namespace BDP.Core.Trigger
         }
 
         /// <summary>
+        /// 当前正式启用根槽在现有形态内部采用的姿态键。
+        /// 只供 Core（核心程序集）内部维护。
+        /// </summary>
+        internal string CurrentStanceKey
+        {
+            get { return currentStanceKey; }
+        }
+
+        /// <summary>
         /// 当前是否被禁用。
         /// </summary>
         public bool IsDisabled
@@ -231,6 +246,7 @@ namespace BDP.Core.Trigger
             if (loadedChip != chip)
             {
                 currentModeKey = null;
+                currentStanceKey = null;
             }
 
             loadedChip = chip;
@@ -247,6 +263,7 @@ namespace BDP.Core.Trigger
             if (!isActive)
             {
                 currentModeKey = null;
+                currentStanceKey = null;
             }
         }
 
@@ -262,6 +279,7 @@ namespace BDP.Core.Trigger
             {
                 isActive = false;
                 currentModeKey = null;
+                currentStanceKey = null;
             }
         }
 
@@ -272,6 +290,15 @@ namespace BDP.Core.Trigger
         internal void SetCurrentModeKey(string modeKey)
         {
             currentModeKey = string.IsNullOrWhiteSpace(modeKey) ? null : modeKey;
+        }
+
+        /// <summary>
+        /// 写入当前根槽在现有形态内部的姿态键。
+        /// 空白统一正规化为空，调用方负责确认姿态属于当前形态。
+        /// </summary>
+        internal void SetCurrentStanceKey(string stanceKey)
+        {
+            currentStanceKey = string.IsNullOrWhiteSpace(stanceKey) ? null : stanceKey;
         }
 
         /// <summary>
@@ -290,6 +317,7 @@ namespace BDP.Core.Trigger
             if (isBindingMirror)
             {
                 currentModeKey = null;
+                currentStanceKey = null;
             }
 
             bindingRootSide = rootSide;
@@ -323,6 +351,7 @@ namespace BDP.Core.Trigger
             Scribe_Values.Look(ref loadedChipThingId, "loadedChipThingId");
             Scribe_Values.Look(ref isActive, "isActive", false);
             Scribe_Values.Look(ref currentModeKey, "currentModeKey");
+            Scribe_Values.Look(ref currentStanceKey, "currentStanceKey");
             Scribe_Values.Look(ref isDisabled, "isDisabled", false);
             Scribe_Values.Look(ref disabledReason, "disabledReason", TriggerDisableReason.None);
             Scribe_Values.Look(ref hasBindingPartner, "hasBindingPartner", false);
@@ -360,6 +389,7 @@ namespace BDP.Core.Trigger
                     || isBindingMirror)
                 {
                     currentModeKey = null;
+                    currentStanceKey = null;
                 }
             }
         }
@@ -376,11 +406,13 @@ namespace BDP.Core.Trigger
             {
                 isActive = false;
                 currentModeKey = null;
+                currentStanceKey = null;
             }
 
             if (isBindingMirror)
             {
                 currentModeKey = null;
+                currentStanceKey = null;
             }
         }
     }

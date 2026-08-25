@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BDP.Core.AttackExecution.RangedProtocol.Model;
 using BDP.Core.Trigger;
 using BDP.Core.Trigger.Runtime;
 using Verse;
@@ -28,8 +29,29 @@ namespace BDP.Core.AttackExecution
                     ? context.ProtocolResult.Entry.AttackInstanceId
                     : context.Step != null ? context.Step.AttackInstanceId : null,
                 context.HostResultId,
+                new List<string>(),
                 CollectCastResultIds(context.Step),
                 CollectEmitSourceResultIds(context.Step));
+        }
+
+        /// <summary>
+        /// 在正式远程发射计划完成聚合后，发布当前整轮实际参与的来源结果。
+        /// </summary>
+        internal static void PublishAttackParticipants(
+            Pawn pawn,
+            AttackSessionToken token,
+            RangedVerbEmissionPlan emissionPlan)
+        {
+            if (pawn == null || token == null || emissionPlan == null)
+            {
+                return;
+            }
+
+            TriggerVisualRuntimeStateOwner owner = ResolveOwner(pawn);
+            owner?.PublishAttackParticipants(
+                token.ProjectionVersion,
+                token.AttackInstanceId,
+                emissionPlan.StepSourceResultIds);
         }
 
         /// <summary>
@@ -53,6 +75,7 @@ namespace BDP.Core.AttackExecution
                 context.ProjectionVersion,
                 context.Cast != null ? context.Cast.AttackInstanceId : null,
                 context.Result != null ? context.Result.Id : null,
+                castResultIds,
                 castResultIds,
                 castResultIds);
         }
@@ -79,6 +102,7 @@ namespace BDP.Core.AttackExecution
             int projectionVersion,
             string attackInstanceId,
             string activeHostResultId,
+            IReadOnlyList<string> activeAttackParticipantResultIds,
             IReadOnlyList<string> activeCastResultIds,
             IReadOnlyList<string> activeEmitSourceResultIds)
         {
@@ -92,6 +116,7 @@ namespace BDP.Core.AttackExecution
                 projectionVersion,
                 attackInstanceId,
                 activeHostResultId,
+                activeAttackParticipantResultIds,
                 activeCastResultIds,
                 activeEmitSourceResultIds);
         }

@@ -14,8 +14,8 @@ namespace BDP.Core.Combos
         internal static ComboResolvedFieldValue<float> ResolveFloat(
             float? explicitValue,
             ComboValueResolveMode? mode,
-            float chipAValue,
-            float chipBValue)
+            float firstSourceValue,
+            float secondSourceValue)
         {
             ComboResolvedFieldValue<float> result = new ComboResolvedFieldValue<float>
             {
@@ -37,7 +37,7 @@ namespace BDP.Core.Combos
             }
 
             result.HasResolvedValue = true;
-            result.ResolvedValue = ResolveFloatByMode(mode.Value, chipAValue, chipBValue);
+            result.ResolvedValue = ResolveFloatByMode(mode.Value, firstSourceValue, secondSourceValue);
             return result;
         }
 
@@ -47,8 +47,8 @@ namespace BDP.Core.Combos
         internal static ComboResolvedFieldValue<int> ResolveInt(
             int? explicitValue,
             ComboValueResolveMode? mode,
-            int chipAValue,
-            int chipBValue)
+            int firstSourceValue,
+            int secondSourceValue)
         {
             ComboResolvedFieldValue<int> result = new ComboResolvedFieldValue<int>
             {
@@ -70,7 +70,7 @@ namespace BDP.Core.Combos
             }
 
             result.HasResolvedValue = true;
-            result.ResolvedValue = ResolveIntByMode(mode.Value, chipAValue, chipBValue);
+            result.ResolvedValue = ResolveIntByMode(mode.Value, firstSourceValue, secondSourceValue);
             return result;
         }
 
@@ -81,8 +81,8 @@ namespace BDP.Core.Combos
         internal static string ResolveString(
             string explicitValue,
             ComboValueResolveMode? mode,
-            string chipAValue,
-            string chipBValue)
+            string firstSourceValue,
+            string secondSourceValue)
         {
             if (explicitValue != null)
             {
@@ -96,10 +96,10 @@ namespace BDP.Core.Combos
 
             switch (mode.Value)
             {
-                case ComboValueResolveMode.FollowChipMain:
-                    return chipAValue;
-                case ComboValueResolveMode.FollowChipSub:
-                    return chipBValue;
+                case ComboValueResolveMode.FollowFirstSource:
+                    return firstSourceValue;
+                case ComboValueResolveMode.FollowSecondSource:
+                    return secondSourceValue;
                 default:
                     return null;
             }
@@ -112,8 +112,8 @@ namespace BDP.Core.Combos
         internal static IReadOnlyList<TValue> ResolveList<TValue>(
             IReadOnlyList<TValue> explicitValue,
             ComboValueResolveMode? mode,
-            IReadOnlyList<TValue> chipAValue,
-            IReadOnlyList<TValue> chipBValue)
+            IReadOnlyList<TValue> firstSourceValue,
+            IReadOnlyList<TValue> secondSourceValue)
         {
             if (explicitValue != null)
             {
@@ -127,10 +127,10 @@ namespace BDP.Core.Combos
 
             switch (mode.Value)
             {
-                case ComboValueResolveMode.FollowChipMain:
-                    return CloneList(chipAValue);
-                case ComboValueResolveMode.FollowChipSub:
-                    return CloneList(chipBValue);
+                case ComboValueResolveMode.FollowFirstSource:
+                    return CloneList(firstSourceValue);
+                case ComboValueResolveMode.FollowSecondSource:
+                    return CloneList(secondSourceValue);
                 default:
                     return null;
             }
@@ -139,46 +139,46 @@ namespace BDP.Core.Combos
         /// <summary>
         /// 按模式计算 float 值。
         /// </summary>
-        private static float ResolveFloatByMode(ComboValueResolveMode mode, float chipAValue, float chipBValue)
+        private static float ResolveFloatByMode(ComboValueResolveMode mode, float firstSourceValue, float secondSourceValue)
         {
             switch (mode)
             {
-                case ComboValueResolveMode.FollowChipMain:
-                    return chipAValue;
-                case ComboValueResolveMode.FollowChipSub:
-                    return chipBValue;
+                case ComboValueResolveMode.FollowFirstSource:
+                    return firstSourceValue;
+                case ComboValueResolveMode.FollowSecondSource:
+                    return secondSourceValue;
                 case ComboValueResolveMode.Sum:
-                    return chipAValue + chipBValue;
+                    return firstSourceValue + secondSourceValue;
                 case ComboValueResolveMode.Max:
-                    return chipAValue > chipBValue ? chipAValue : chipBValue;
+                    return firstSourceValue > secondSourceValue ? firstSourceValue : secondSourceValue;
                 case ComboValueResolveMode.Min:
-                    return chipAValue < chipBValue ? chipAValue : chipBValue;
+                    return firstSourceValue < secondSourceValue ? firstSourceValue : secondSourceValue;
                 case ComboValueResolveMode.Average:
                 default:
-                    return (chipAValue + chipBValue) * 0.5f;
+                    return (firstSourceValue + secondSourceValue) * 0.5f;
             }
         }
 
         /// <summary>
         /// 按模式计算 int 值。
         /// </summary>
-        private static int ResolveIntByMode(ComboValueResolveMode mode, int chipAValue, int chipBValue)
+        private static int ResolveIntByMode(ComboValueResolveMode mode, int firstSourceValue, int secondSourceValue)
         {
             switch (mode)
             {
-                case ComboValueResolveMode.FollowChipMain:
-                    return chipAValue;
-                case ComboValueResolveMode.FollowChipSub:
-                    return chipBValue;
+                case ComboValueResolveMode.FollowFirstSource:
+                    return firstSourceValue;
+                case ComboValueResolveMode.FollowSecondSource:
+                    return secondSourceValue;
                 case ComboValueResolveMode.Sum:
-                    return chipAValue + chipBValue;
+                    return firstSourceValue + secondSourceValue;
                 case ComboValueResolveMode.Max:
-                    return chipAValue > chipBValue ? chipAValue : chipBValue;
+                    return firstSourceValue > secondSourceValue ? firstSourceValue : secondSourceValue;
                 case ComboValueResolveMode.Min:
-                    return chipAValue < chipBValue ? chipAValue : chipBValue;
+                    return firstSourceValue < secondSourceValue ? firstSourceValue : secondSourceValue;
                 case ComboValueResolveMode.Average:
                 default:
-                    return (chipAValue + chipBValue) / 2;
+                    return (firstSourceValue + secondSourceValue) / 2;
             }
         }
 

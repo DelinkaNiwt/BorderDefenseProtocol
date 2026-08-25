@@ -34,16 +34,20 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
                 ChipManufacturingDefLookup.FindCategory(record.CategoryDefName);
             ChipProfessionDef profession =
                 ChipManufacturingDefLookup.FindProfession(record.ProfessionDefName);
-            ChipGunShellDef gunShell =
-                ChipManufacturingDefLookup.FindGunShell(record.GunShellDefName);
             List<ChipActionPresetDef> actions = ResolveActions(record);
+            ChipArmamentFormDef armamentForm =
+                ChipManufacturingDefLookup.FindArmamentForm(record.ArmamentFormDefName)
+                ?? ChipManufacturingDefLookup.FindImplicitDefaultArmamentForm(
+                    category,
+                    profession,
+                    actions);
 
             List<ChipCombinationFailureReason> missing = FindMissingSources(
                 record,
                 category,
                 profession,
                 actions,
-                gunShell);
+                armamentForm);
             if (missing.Count > 0)
             {
                 return new ChipCombinationResolution
@@ -51,7 +55,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
                     Status = ChipCombinationResolutionStatus.MissingSource,
                     ResolvedLabel = record.LastResolvedLabel,
                     Actions = actions,
-                    GunShell = gunShell,
+                    ArmamentForm = armamentForm,
                     FailureReasons = missing
                 };
             }
@@ -61,7 +65,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
                     category,
                     profession,
                     actions,
-                    gunShell);
+                    armamentForm);
             if (failures.Count > 0)
             {
                 return new ChipCombinationResolution
@@ -69,7 +73,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
                     Status = ChipCombinationResolutionStatus.Invalid,
                     ResolvedLabel = record.LastResolvedLabel,
                     Actions = actions,
-                    GunShell = gunShell,
+                    ArmamentForm = armamentForm,
                     FailureReasons = failures
                 };
             }
@@ -77,19 +81,19 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
             ChipDefinitionConfig config = actions.Count == 1
                 ? ChipConfigurationMergeService.CloneSingle(actions[0])
                 : ChipConfigurationMergeService.MergeDual(actions[0], actions[1]);
-            ChipGunShellApplicationService.Apply(config, gunShell);
+            ChipArmamentFormApplicationService.Apply(config, armamentForm);
             List<string> actionLabels = new List<string>();
             for (int index = 0; index < actions.Count; index++)
             {
-                actionLabels.Add(actions[index].label);
+                actionLabels.Add(actions[index].ResolvedLabel);
             }
 
             string actionLabel = string.Join("/", actionLabels);
-            string label = gunShell == null
+            string label = armamentForm == null || !armamentForm.includeInProductLabel
                 ? "BDP_ChipManufacturing_ProductLabel".Translate(actionLabel)
-                : "BDP_ChipManufacturing_ProductLabelWithGunShell".Translate(
+                : "BDP_ChipManufacturing_ProductLabelWithArmamentForm".Translate(
                     actionLabel,
-                    gunShell.label);
+                    armamentForm.label);
             record.LastResolvedLabel = label;
 
             return new ChipCombinationResolution
@@ -98,7 +102,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
                 ResolvedLabel = label,
                 ResolvedConfig = config,
                 Actions = actions,
-                GunShell = gunShell,
+                ArmamentForm = armamentForm,
                 FailureReasons = new List<ChipCombinationFailureReason>()
             };
         }
@@ -159,7 +163,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
             ChipCategoryDef category,
             ChipProfessionDef profession,
             IList<ChipActionPresetDef> actions,
-            ChipGunShellDef gunShell)
+            ChipArmamentFormDef armamentForm)
         {
             List<ChipCombinationFailureReason> failures =
                 new List<ChipCombinationFailureReason>();
@@ -182,9 +186,9 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
                 }
             }
 
-            if (!string.IsNullOrWhiteSpace(record.GunShellDefName) && gunShell == null)
+            if (!string.IsNullOrWhiteSpace(record.ArmamentFormDefName) && armamentForm == null)
             {
-                failures.Add(Missing("GunShell"));
+                failures.Add(Missing("ArmamentForm"));
             }
 
             return failures;
@@ -201,14 +205,14 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
         /// <summary>构造无来源上下文的非法结果。</summary>
         private static ChipCombinationResolution Invalid(
             IReadOnlyList<ChipActionPresetDef> actions,
-            ChipGunShellDef gunShell,
+            ChipArmamentFormDef armamentForm,
             ChipCombinationFailureReason failure)
         {
             return new ChipCombinationResolution
             {
                 Status = ChipCombinationResolutionStatus.Invalid,
                 Actions = actions,
-                GunShell = gunShell,
+                ArmamentForm = armamentForm,
                 FailureReasons = new[] { failure }
             };
         }

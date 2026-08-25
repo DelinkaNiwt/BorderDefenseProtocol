@@ -10,7 +10,7 @@ namespace BDP.Core.Abilities
     /// - 在真正触发原版 Ability 效果前，先提交 BDP 的 Trion 施法成本
     /// - 触发施放瞬间的身体抖动动效
     /// </summary>
-    public class BdpVerb_CastAbility : Verb_CastAbility
+    public class BdpVerb_CastAbility : Verb_CastAbility, IBdpExpressionAbilityVerb
     {
         /// <summary>
         /// 先正式提交施法成本，成功后触发施放动效，再继续原版 Ability 激活流程。
@@ -52,21 +52,7 @@ namespace BDP.Core.Abilities
         /// </summary>
         protected virtual bool TryCommitTrionCosts()
         {
-            if (ability?.EffectComps == null)
-            {
-                return true;
-            }
-
-            for (int index = 0; index < ability.EffectComps.Count; index++)
-            {
-                if (ability.EffectComps[index] is CompAbilityEffect_BdpTrionCost trionCostComp
-                    && !trionCostComp.TryCommitCastCost())
-                {
-                    return false;
-                }
-            }
-
-            return true;
+            return BdpAbilityTrionCostCommitter.TryCommit(ability);
         }
     }
 }

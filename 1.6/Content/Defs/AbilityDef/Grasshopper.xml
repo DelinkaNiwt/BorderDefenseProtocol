@@ -18,7 +18,7 @@
     <verbProperties>
       <!-- 使用蚱蜢专用 Verb（继承 BdpVerb_CastAbility，复用 Trion 扣费） -->
       <verbClass>BDP.Content.Grasshopper.Verb_CastAbilityGrasshopper</verbClass>
-      <label>dash</label>
+      <label>弹射</label>
       <violent>false</violent>
       <forceNormalTimeSpeed>false</forceNormalTimeSpeed>
       <warmupTime>0.2</warmupTime>

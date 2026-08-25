@@ -27,15 +27,18 @@ namespace BDP.Core.Combos
                 return BuildResult(errors, warnings);
             }
 
-            if (string.IsNullOrWhiteSpace(contract.ChipADefName))
+            if (string.IsNullOrWhiteSpace(contract.FirstSourceActionDefName))
             {
-                errors.Add(BuildMessage("ComboChipAMissing", null, "chipA", "组合技缺少来源芯片 A 声明。"));
+                errors.Add(BuildMessage("ComboFirstSourceMissing", null, "firstSourceActionDefName", "组合技缺少第一来源动作预设声明。"));
             }
 
-            if (string.IsNullOrWhiteSpace(contract.ChipBDefName))
+            if (string.IsNullOrWhiteSpace(contract.SecondSourceActionDefName))
             {
-                errors.Add(BuildMessage("ComboChipBMissing", null, "chipB", "组合技缺少来源芯片 B 声明。"));
+                errors.Add(BuildMessage("ComboSecondSourceMissing", null, "secondSourceActionDefName", "组合技缺少第二来源动作预设声明。"));
             }
+
+            ValidateSourceAdmission(contract.FirstSourceAdmission, "FirstSourceAdmission", errors);
+            ValidateSourceAdmission(contract.SecondSourceAdmission, "SecondSourceAdmission", errors);
 
             ValidateUseRequirements(contract.UseRequirements, errors);
 
@@ -52,6 +55,52 @@ namespace BDP.Core.Combos
                 contract.Expression != null ? contract.Expression.Config : null,
                 errors);
             return BuildResult(errors, warnings);
+        }
+
+        /// <summary>拒绝来源准入列表中的空白身份键。</summary>
+        private static void ValidateSourceAdmission(
+            ComboSourceAdmissionContract admission,
+            string fieldPrefix,
+            List<ComboDefinitionValidationMessage> errors)
+        {
+            if (admission == null)
+            {
+                return;
+            }
+
+            ValidateIdentityList(admission.AllowedProfessions, fieldPrefix + ".AllowedProfessions", errors);
+            ValidateIdentityList(admission.DeniedProfessions, fieldPrefix + ".DeniedProfessions", errors);
+            ValidateIdentityList(admission.AllowedCategories, fieldPrefix + ".AllowedCategories", errors);
+            ValidateIdentityList(admission.DeniedCategories, fieldPrefix + ".DeniedCategories", errors);
+            ValidateIdentityList(admission.AllowedTags, fieldPrefix + ".AllowedTags", errors);
+            ValidateIdentityList(admission.RequiredTags, fieldPrefix + ".RequiredTags", errors);
+            ValidateIdentityList(admission.DeniedTags, fieldPrefix + ".DeniedTags", errors);
+            ValidateIdentityList(admission.AllowedSourceVariants, fieldPrefix + ".AllowedSourceVariants", errors);
+            ValidateIdentityList(admission.DeniedSourceVariants, fieldPrefix + ".DeniedSourceVariants", errors);
+        }
+
+        /// <summary>校验单个身份键列表。</summary>
+        private static void ValidateIdentityList(
+            IReadOnlyList<string> values,
+            string fieldName,
+            List<ComboDefinitionValidationMessage> errors)
+        {
+            if (values == null)
+            {
+                return;
+            }
+
+            for (int index = 0; index < values.Count; index++)
+            {
+                if (string.IsNullOrWhiteSpace(values[index]))
+                {
+                    errors.Add(BuildMessage(
+                        "ComboSourceAdmissionIdentityMissing",
+                        null,
+                        fieldName + "[" + index + "]",
+                        "组合技来源准入包含空白身份键。"));
+                }
+            }
         }
 
         /// <summary>

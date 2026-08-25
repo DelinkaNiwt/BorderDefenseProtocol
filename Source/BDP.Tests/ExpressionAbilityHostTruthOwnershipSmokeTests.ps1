@@ -34,7 +34,7 @@ Assert-True (
 
 Assert-True (
     ($abilitySynchronizerText -match 'CompProperties_AbilityEffect_BdpTrionCost') -and
-    ($abilitySynchronizerText -match 'BdpVerb_CastAbility')
+    ($abilitySynchronizerText -match 'IBdpExpressionAbilityVerb')
 ) 'Ability synchronizer must identify expression-owned ability shells by their formal host shell markers.'
 
 Assert-True (

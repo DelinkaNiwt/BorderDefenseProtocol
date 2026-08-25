@@ -46,9 +46,10 @@ $developmentBootstrapText = Get-Content -Raw -Encoding UTF8 -LiteralPath $develo
 Assert-True ($contentBootstrapText -notmatch "TriggerVisualMarkerGizmoProvider|BDP\.Development") `
     "正式 Content 启动入口不得引用开发画点诊断或 Development。"
 Assert-True (
-    ($contentBootstrapText | Select-String -AllMatches "TriggerExternalGizmoRegistry\.Register").Matches.Count -eq 1 -and
-    ($contentBootstrapText -match "new\s+ChipModeGizmoProvider\s*\(\s*\)")
-) "正式 Content 必须只注册正式芯片形态按钮提供器。"
+    ($contentBootstrapText | Select-String -AllMatches "TriggerExternalGizmoRegistry\.Register").Matches.Count -eq 2 -and
+    ($contentBootstrapText -match "new\s+ChipModeGizmoProvider\s*\(\s*\)") -and
+    ($contentBootstrapText -match "new\s+ChipStanceGizmoProvider\s*\(\s*\)")
+) "正式 Content 必须且只能注册正式芯片形态与姿态按钮提供器。"
 Assert-True ($developmentBootstrapText -match "TriggerExternalGizmoRegistry\.Register\s*\(\s*new\s+TriggerVisualMarkerGizmoProvider") `
     "Development 启动入口必须接管画点诊断注册。"
 

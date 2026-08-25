@@ -13,12 +13,13 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
             ChipCategoryDef category,
             ChipProfessionDef profession,
             IList<ChipActionPresetDef> actions,
-            ChipGunShellDef gunShell)
+            ChipArmamentFormDef armamentForm)
         {
             List<ChipCombinationFailureReason> failures =
                 new List<ChipCombinationFailureReason>();
             int actionCount = actions != null ? actions.Count : 0;
-            if (actionCount < 1 || actionCount > ChipCombinationSelectionRules.MaxActionCount(profession))
+            if (actionCount < 1
+                || actionCount > ChipCombinationSelectionRules.MaxActionCount(profession, armamentForm))
             {
                 Add(failures, "ActionCount", "BDP_ChipManufacturing_InvalidActionCount");
                 return failures;
@@ -59,12 +60,17 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
                 }
             }
 
-            if (gunShell != null
+            if (armamentForm != null
                 && (profession == null
-                    || gunShell.compatibleProfessions == null
-                    || !gunShell.compatibleProfessions.Contains(profession)))
+                    || armamentForm.compatibleProfessions == null
+                    || !armamentForm.compatibleProfessions.Contains(profession)))
             {
-                Add(failures, "GunShellProfession", "BDP_ChipManufacturing_GunShellProfessionMismatch");
+                Add(failures, "ArmamentFormProfession", "BDP_ChipManufacturing_ArmamentFormProfessionMismatch");
+            }
+
+            if (!ChipCombinationSelectionRules.CanUseArmamentForm(armamentForm, actions))
+            {
+                Add(failures, "ArmamentFormAction", "BDP_ChipManufacturing_ArmamentFormActionMismatch");
             }
 
             if (actionCount == 2)

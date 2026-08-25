@@ -56,6 +56,18 @@ namespace BDP.Core.Trigger
         string GetChipModeKey(Thing chip);
 
         /// <summary>
+        /// 读取某枚芯片在当前形态内部的正式姿态键。
+        /// 当前形态没有姿态或姿态尚未成立时返回 null。
+        /// </summary>
+        string GetChipStanceKey(Thing chip);
+
+        /// <summary>
+        /// 读取某枚芯片当前形态内的有序姿态选项。
+        /// 当前形态没有多个姿态、定义无效或找不到根槽时返回空列表。
+        /// </summary>
+        IReadOnlyList<ChipStanceOptionSnapshot> GetChipStanceOptions(Thing chip);
+
+        /// <summary>
         /// 读取某枚正式启用多形态芯片的有序形态选项。
         /// 未启用、单形态、定义无效或找不到根槽时返回空列表。
         /// </summary>

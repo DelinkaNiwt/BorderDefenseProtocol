@@ -185,9 +185,10 @@ namespace BDP.Core.Expressions
                     continue;
                 }
 
-                if (string.IsNullOrWhiteSpace(mode.DisplayLabel))
+                if (string.IsNullOrWhiteSpace(mode.DisplayLabel)
+                    && string.IsNullOrWhiteSpace(mode.DisplayLabelKey))
                 {
-                    result.Errors.Add("形态 " + mode.ModeKey + " 缺少 DisplayLabel。");
+                    result.Errors.Add("形态 " + mode.ModeKey + " 缺少 DisplayLabel 或 DisplayLabelKey。");
                 }
 
                 modesByKey.Add(mode.ModeKey, mode);
@@ -210,7 +211,7 @@ namespace BDP.Core.Expressions
         }
 
         /// <summary>
-        /// 校验单个形态的条目引用、重复引用和父子顺序。
+        /// 校验单个形态的公共条目，以及可选姿态的最终条目闭包。
         /// </summary>
         private static void ValidateModeEntries(
             ChipExpressionModeConfig mode,
@@ -218,45 +219,175 @@ namespace BDP.Core.Expressions
             HashSet<string> referencedEntryIds,
             ChipExpressionStructureValidation result)
         {
-            if (mode.ActiveEntryIds == null || mode.ActiveEntryIds.Count == 0)
+            bool hasStances = mode.Stances != null && mode.Stances.Count > 0;
+            if ((mode.ActiveEntryIds == null || mode.ActiveEntryIds.Count == 0) && !hasStances)
             {
                 result.Errors.Add("形态 " + mode.ModeKey + " 的 ActiveEntryIds 不能为空。");
                 return;
             }
 
             Dictionary<string, int> positions = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
-            for (int entryIndex = 0; entryIndex < mode.ActiveEntryIds.Count; entryIndex++)
+            AppendSelectedEntries(
+                mode.ActiveEntryIds,
+                positions,
+                entriesById,
+                referencedEntryIds,
+                "形态 " + mode.ModeKey,
+                result);
+
+            if (!hasStances)
             {
-                string entryId = mode.ActiveEntryIds[entryIndex];
-                if (string.IsNullOrWhiteSpace(entryId))
+                if (!string.IsNullOrWhiteSpace(mode.DefaultStanceKey))
+                {
+                    result.Errors.Add("没有姿态的形态 " + mode.ModeKey + " 不得填写 DefaultStanceKey。");
+                }
+
+                ValidateSelectedParentOrder(positions, entriesById, "形态 " + mode.ModeKey, result);
+                return;
+            }
+
+            ValidateModeStances(mode, positions, entriesById, referencedEntryIds, result);
+        }
+
+        /// <summary>
+        /// 校验一个形态内部的姿态键、默认姿态和最终条目闭包。
+        /// </summary>
+        private static void ValidateModeStances(
+            ChipExpressionModeConfig mode,
+            Dictionary<string, int> commonPositions,
+            Dictionary<string, ChipExpressionEntryConfig> entriesById,
+            HashSet<string> referencedEntryIds,
+            ChipExpressionStructureValidation result)
+        {
+            if (string.IsNullOrWhiteSpace(mode.DefaultStanceKey))
+            {
+                result.Errors.Add("含姿态的形态 " + mode.ModeKey + " 必须填写 DefaultStanceKey。");
+            }
+
+            Dictionary<string, ChipExpressionStanceConfig> stancesByKey =
+                new Dictionary<string, ChipExpressionStanceConfig>(StringComparer.OrdinalIgnoreCase);
+            for (int stanceIndex = 0; stanceIndex < mode.Stances.Count; stanceIndex++)
+            {
+                ChipExpressionStanceConfig stance = mode.Stances[stanceIndex];
+                if (stance == null)
+                {
+                    result.Errors.Add("形态 " + mode.ModeKey + " 的 Stances 在位置 " + stanceIndex + " 存在空姿态。");
+                    continue;
+                }
+
+                if (string.IsNullOrWhiteSpace(stance.StanceKey))
+                {
+                    result.Errors.Add("形态 " + mode.ModeKey + " 的 Stances 在位置 " + stanceIndex + " 缺少 StanceKey。");
+                    continue;
+                }
+
+                if (stancesByKey.ContainsKey(stance.StanceKey))
+                {
+                    result.Errors.Add("形态 " + mode.ModeKey + " 的 StanceKey 重复：" + stance.StanceKey + "。");
+                    continue;
+                }
+
+                if (string.IsNullOrWhiteSpace(stance.DisplayLabel)
+                    && string.IsNullOrWhiteSpace(stance.DisplayLabelKey))
                 {
                     result.Errors.Add(
-                        "形态 " + mode.ModeKey + " 的 ActiveEntryIds 在位置 " + entryIndex + " 为空。");
+                        "形态 " + mode.ModeKey + " 的姿态 " + stance.StanceKey
+                        + " 缺少 DisplayLabel 或 DisplayLabelKey。");
+                }
+
+                stancesByKey.Add(stance.StanceKey, stance);
+                Dictionary<string, int> effectivePositions =
+                    new Dictionary<string, int>(commonPositions, StringComparer.OrdinalIgnoreCase);
+                if (stance.ActiveEntryIds == null || stance.ActiveEntryIds.Count == 0)
+                {
+                    result.Errors.Add(
+                        "形态 " + mode.ModeKey + " 的姿态 " + stance.StanceKey
+                        + " 的 ActiveEntryIds 不能为空。");
+                }
+                else
+                {
+                    AppendSelectedEntries(
+                        stance.ActiveEntryIds,
+                        effectivePositions,
+                        entriesById,
+                        referencedEntryIds,
+                        "形态 " + mode.ModeKey + " 的姿态 " + stance.StanceKey,
+                        result);
+                }
+
+                ValidateSelectedParentOrder(
+                    effectivePositions,
+                    entriesById,
+                    "形态 " + mode.ModeKey + " 的姿态 " + stance.StanceKey,
+                    result);
+            }
+
+            if (!string.IsNullOrWhiteSpace(mode.DefaultStanceKey)
+                && !stancesByKey.ContainsKey(mode.DefaultStanceKey))
+            {
+                result.Errors.Add(
+                    "形态 " + mode.ModeKey + " 的 DefaultStanceKey 指向不存在的姿态："
+                    + mode.DefaultStanceKey + "。");
+            }
+        }
+
+        /// <summary>
+        /// 把一组选中条目追加到最终位置表，并统一检查空值、重复和目录引用。
+        /// </summary>
+        private static void AppendSelectedEntries(
+            List<string> entryIds,
+            Dictionary<string, int> positions,
+            Dictionary<string, ChipExpressionEntryConfig> entriesById,
+            HashSet<string> referencedEntryIds,
+            string scope,
+            ChipExpressionStructureValidation result)
+        {
+            if (entryIds == null)
+            {
+                return;
+            }
+
+            for (int entryIndex = 0; entryIndex < entryIds.Count; entryIndex++)
+            {
+                string entryId = entryIds[entryIndex];
+                if (string.IsNullOrWhiteSpace(entryId))
+                {
+                    result.Errors.Add(scope + " 的 ActiveEntryIds 在位置 " + entryIndex + " 为空。");
                     continue;
                 }
 
                 if (positions.ContainsKey(entryId))
                 {
-                    result.Errors.Add("形态 " + mode.ModeKey + " 重复引用表达条目 " + entryId + "。");
+                    result.Errors.Add(scope + " 重复引用表达条目 " + entryId + "。");
                     continue;
                 }
 
-                positions.Add(entryId, entryIndex);
+                positions.Add(entryId, positions.Count);
                 if (!entriesById.ContainsKey(entryId))
                 {
-                    result.Errors.Add("形态 " + mode.ModeKey + " 引用了不存在的表达条目 " + entryId + "。");
+                    result.Errors.Add(scope + " 引用了不存在的表达条目 " + entryId + "。");
                     continue;
                 }
 
                 referencedEntryIds.Add(entryId);
             }
+        }
 
+        /// <summary>
+        /// 校验一个最终条目位置表里的依附父子顺序。
+        /// </summary>
+        private static void ValidateSelectedParentOrder(
+            Dictionary<string, int> positions,
+            Dictionary<string, ChipExpressionEntryConfig> entriesById,
+            string scope,
+            ChipExpressionStructureValidation result)
+        {
             foreach (string entryId in positions.Keys)
             {
                 ChipExpressionEntryConfig entry;
                 if (entriesById.TryGetValue(entryId, out entry))
                 {
-                    ValidateParentOrder(entry, positions, "形态 " + mode.ModeKey, result);
+                    ValidateParentOrder(entry, positions, scope, result);
                 }
             }
         }

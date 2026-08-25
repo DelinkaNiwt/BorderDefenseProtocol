@@ -18,4 +18,34 @@
   <BDP_Yes>是</BDP_Yes>
   <BDP_No>否</BDP_No>
   <BDP_None>无</BDP_None>
+  <!-- 光魂动作与重刃攻击入口显示名。 -->
+  <BDP_ChipAction_LightSoul>光魂</BDP_ChipAction_LightSoul>
+  <BDP_ChipAction_LightSoul_Description>默认展开光魂大盾，并可在灵活姿态与举盾姿态间切换；也可切换为光魂重刃进行近战。所有形态均可使用消耗 Trion 的光魂推进。</BDP_ChipAction_LightSoul_Description>
+  <!-- 铅弹被动芯片与动态远程入口名称。 -->
+  <BDP_ChipAction_LeadShot>铅弹</BDP_ChipAction_LeadShot>
+  <BDP_ChipAction_LeadShot_Description>被动远程增强。激活后，所有有效远程武装的攻击入口前增加铅弹，并使命中目标承受铅块负重；本次投射物不造成伤害并尝试绕过已知护盾。</BDP_ChipAction_LeadShot_Description>
+  <BDP_Expression_LeadShot>铅弹</BDP_Expression_LeadShot>
+  <BDP_ChipAction_Meteora>美特拉</BDP_ChipAction_Meteora>
+  <BDP_ChipAction_Meteora_Description>基于小行星的范围爆炸远程动作。命中后在落点追加范围爆炸。</BDP_ChipAction_Meteora_Description>
+  <BDP_Expression_Meteora>美特拉</BDP_Expression_Meteora>
+  <!-- 战斧组合技表达入口名称。 -->
+  <BDP_Expression_Tomahawk>战斧</BDP_Expression_Tomahawk>
+  <!-- 光魂统一表达目录中的玩家可见名称。 -->
+  <BDP_Expression_LightSoulPropulsion>光魂推进</BDP_Expression_LightSoulPropulsion>
+  <BDP_Expression_LightSoulShieldMobile>光魂大盾（灵活姿态）</BDP_Expression_LightSoulShieldMobile>
+  <BDP_Expression_LightSoulShieldGuard>光魂大盾（举盾姿态）</BDP_Expression_LightSoulShieldGuard>
+  <BDP_Expression_LightSoulShieldBash>光魂大盾钝击</BDP_Expression_LightSoulShieldBash>
+  <BDP_Expression_LightSoulHeavyBlade>光魂重刃</BDP_Expression_LightSoulHeavyBlade>
+  <!-- 光魂重刃两种互斥 Tool（攻击工具）的玩家可见名称。 -->
+  <BDP_Tool_LightSoulHeavyBladeBash>光魂重刃钝击</BDP_Tool_LightSoulHeavyBladeBash>
+  <BDP_Tool_LightSoulHeavyBladeEdge>光魂重刃切割</BDP_Tool_LightSoulHeavyBladeEdge>
+  <BDP_Tool_LightSoulShieldBash>盾面钝击</BDP_Tool_LightSoulShieldBash>
+  <!-- 光魂形态与大盾姿态显示名。 -->
+  <BDP_ChipMode_LightSoulShield>光魂大盾</BDP_ChipMode_LightSoulShield>
+  <BDP_ChipMode_LightSoulHeavyBlade>光魂重刃</BDP_ChipMode_LightSoulHeavyBlade>
+  <BDP_ChipStance_LightSoulMobile>灵活姿态</BDP_ChipStance_LightSoulMobile>
+  <BDP_ChipStance_LightSoulGuard>举盾姿态</BDP_ChipStance_LightSoulGuard>
+  <!-- 光魂举盾姿态的非攻击警戒命令。 -->
+  <BDP_Command_LightSoulGuardWatch>注视警戒</BDP_Command_LightSoulGuardWatch>
+  <BDP_Command_LightSoulGuardWatch_Description>选择一个目标并保持注视警戒。人物不会移动或攻击；目标暂时离开射程或视线时保留锁定，重新进入后继续注视。</BDP_Command_LightSoulGuardWatch_Description>
 </LanguageData>

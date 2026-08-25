@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 变色龙状态名称。 -->
+  <BDP_Hediff_Chameleon.label>隐秘状态·变色龙</BDP_Hediff_Chameleon.label>
+  <!-- 变色龙状态说明。 -->
+  <BDP_Hediff_Chameleon.description>小人处于隐身状态；完成任意攻击动作后自动关闭变色龙芯片。</BDP_Hediff_Chameleon.description>
+</LanguageData>

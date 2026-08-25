@@ -6,7 +6,7 @@ using Verse;
 
 namespace BDP.Content.Assembly.ChipManufacturing.Recipe
 {
-    /// <summary>按基础配方、动作和可选枪壳简单累加单枚芯片成本。</summary>
+    /// <summary>按基础配方、动作和可选武装型简单累加单枚芯片成本。</summary>
     public static class ChipManufacturingCostCalculator
     {
         /// <summary>从持久化组合记录解析当前来源并计算成本；非有效组合返回 null。</summary>
@@ -17,15 +17,15 @@ namespace BDP.Content.Assembly.ChipManufacturing.Recipe
             ChipCombinationResolution resolution =
                 new ChipCombinationResolver().Resolve(record);
             return resolution.Status == ChipCombinationResolutionStatus.Valid
-                ? Calculate(recipe, resolution.Actions, resolution.GunShell)
+                ? Calculate(recipe, resolution.Actions, resolution.ArmamentForm)
                 : null;
         }
 
-        /// <summary>从已解析动作和可选枪壳计算成本。</summary>
+        /// <summary>从已解析动作和可选武装型计算成本。</summary>
         public static ChipManufacturingCost Calculate(
             RecipeDef recipe,
             IReadOnlyList<ChipActionPresetDef> actions,
-            ChipGunShellDef gunShell)
+            ChipArmamentFormDef armamentForm)
         {
             if (recipe == null)
             {
@@ -52,10 +52,10 @@ namespace BDP.Content.Assembly.ChipManufacturing.Recipe
                 }
             }
 
-            if (gunShell != null)
+            if (armamentForm != null)
             {
-                Add(counts, order, gunShell.additionalCost);
-                workAmount += gunShell.additionalWorkAmount;
+                Add(counts, order, armamentForm.additionalCost);
+                workAmount += armamentForm.additionalWorkAmount;
             }
 
             ChipManufacturingCost result = new ChipManufacturingCost

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using BDP.Core.Projectiles.RangedFlightProtocol.Model;
+using BDP.Core.Projectiles.Interaction;
 using BDP.Core.Semantics;
 using UnityEngine;
 using Verse;
@@ -127,6 +128,18 @@ namespace BDP.Core.AttackExecution.RangedProtocol.Model
         public float InitialDamageFactor { get; set; }
 
         /// <summary>
+        /// 当前 projectile 初始停止力倍率。
+        /// 发射后写入 Projectile 实例，供原版 StaggerHandler 消费。
+        /// </summary>
+        public float InitialStoppingPowerFactor { get; set; } = 1f;
+
+        /// <summary>
+        /// 当前发射来源声明的原版枪口闪光尺寸。
+        /// 每个计划独立冻结，保证混合双持仍使用各自武器的视觉参数。
+        /// </summary>
+        public float MuzzleFlashScale { get; set; }
+
+        /// <summary>
         /// 当前投射物在正式开火时冻结的原版精度事实。
         /// 后半段只消费这份快照，不回头读取实时射手或天气。
         /// </summary>
@@ -199,6 +212,36 @@ namespace BDP.Core.AttackExecution.RangedProtocol.Model
         public List<ThingDef> VisualAttachmentProviderDefs { get; set; } = new List<ThingDef>();
 
         /// <summary>
+        /// 当前 projectile 是否携带拖尾颜色覆盖。
+        /// </summary>
+        public bool HasTrailColorOverride { get; set; }
+
+        /// <summary>
+        /// 当前 projectile 冻结的拖尾颜色覆盖。
+        /// </summary>
+        public Color TrailColorOverride { get; set; } = Color.white;
+
+        /// <summary>
+        /// 当前 projectile 是否携带拖尾内芯覆盖。
+        /// </summary>
+        public bool HasTrailCoreOverride { get; set; }
+
+        /// <summary>
+        /// 当前 projectile 冻结的拖尾内芯颜色。
+        /// </summary>
+        public Color TrailCoreColorOverride { get; set; } = Color.black;
+
+        /// <summary>
+        /// 当前 projectile 冻结的拖尾内芯宽度比例。
+        /// </summary>
+        public float TrailCoreWidthRatioOverride { get; set; } = 0.45f;
+
+        /// <summary>
+        /// 当前 projectile 冻结的拖尾内芯透明度倍率。
+        /// </summary>
+        public float TrailCoreOpacityOverride { get; set; } = 1f;
+
+        /// <summary>
         /// 当前 projectile 附带的阶段标签。
         /// </summary>
         public List<string> Tags { get; set; } = new List<string>();
@@ -208,6 +251,11 @@ namespace BDP.Core.AttackExecution.RangedProtocol.Model
         /// 后半段只消费它，不再回头读运行时会话或零散碎片上下文。
         /// </summary>
         public AttackContextSnapshot AttackContextSnapshot { get; set; }
+
+        /// <summary>
+        /// 当前投射物冻结的拦截器与伤害护盾交互策略。
+        /// </summary>
+        public ProjectileInteractionPolicy InteractionPolicy { get; set; }
 
         /// <summary>
         /// 统一序列化当前投射物初始化计划。
@@ -236,6 +284,8 @@ namespace BDP.Core.AttackExecution.RangedProtocol.Model
             RangedProjectileTargetSemantics targetSemantics = TargetSemantics;
             float initialSpeedFactor = InitialSpeedFactor;
             float initialDamageFactor = InitialDamageFactor;
+            float initialStoppingPowerFactor = InitialStoppingPowerFactor;
+            float muzzleFlashScale = MuzzleFlashScale;
             ProjectileAccuracySnapshot accuracySnapshot = AccuracySnapshot;
             float accuracyFactor = AccuracyFactor;
             float forcedMissRadius = ForcedMissRadius;
@@ -251,6 +301,12 @@ namespace BDP.Core.AttackExecution.RangedProtocol.Model
             List<string> tags = Tags;
             AttackContextSnapshot attackContextSnapshot = AttackContextSnapshot;
             List<ThingDef> visualAttachmentProviderDefs = VisualAttachmentProviderDefs;
+            bool hasTrailColorOverride = HasTrailColorOverride;
+            Color trailColorOverride = TrailColorOverride;
+            bool hasTrailCoreOverride = HasTrailCoreOverride;
+            Color trailCoreColorOverride = TrailCoreColorOverride;
+            float trailCoreWidthRatioOverride = TrailCoreWidthRatioOverride;
+            float trailCoreOpacityOverride = TrailCoreOpacityOverride;
 
             Scribe_Values.Look(ref attackInstanceId, "attackInstanceId");
             Scribe_Values.Look(ref resultId, "resultId");
@@ -273,6 +329,8 @@ namespace BDP.Core.AttackExecution.RangedProtocol.Model
             Scribe_Deep.Look(ref targetSemantics, "targetSemantics");
             Scribe_Values.Look(ref initialSpeedFactor, "initialSpeedFactor", 1f);
             Scribe_Values.Look(ref initialDamageFactor, "initialDamageFactor", 1f);
+            Scribe_Values.Look(ref initialStoppingPowerFactor, "initialStoppingPowerFactor", 1f);
+            Scribe_Values.Look(ref muzzleFlashScale, "muzzleFlashScale", 0f);
             Scribe_Deep.Look(ref accuracySnapshot, "accuracySnapshot");
             Scribe_Values.Look(ref accuracyFactor, "accuracyFactor", 1f);
             Scribe_Values.Look(ref forcedMissRadius, "forcedMissRadius", 0f);
@@ -288,6 +346,12 @@ namespace BDP.Core.AttackExecution.RangedProtocol.Model
             Scribe_Collections.Look(ref tags, "tags", LookMode.Value);
             Scribe_Deep.Look(ref attackContextSnapshot, "attackContextSnapshot");
             Scribe_Collections.Look(ref visualAttachmentProviderDefs, "visualAttachmentProviderDefs", LookMode.Def);
+            Scribe_Values.Look(ref hasTrailColorOverride, "hasTrailColorOverride", false);
+            Scribe_Values.Look(ref trailColorOverride, "trailColorOverride", Color.white);
+            Scribe_Values.Look(ref hasTrailCoreOverride, "hasTrailCoreOverride", false);
+            Scribe_Values.Look(ref trailCoreColorOverride, "trailCoreColorOverride", Color.black);
+            Scribe_Values.Look(ref trailCoreWidthRatioOverride, "trailCoreWidthRatioOverride", 0.45f);
+            Scribe_Values.Look(ref trailCoreOpacityOverride, "trailCoreOpacityOverride", 1f);
 
             AttackInstanceId = attackInstanceId;
             ResultId = resultId;
@@ -311,6 +375,8 @@ namespace BDP.Core.AttackExecution.RangedProtocol.Model
             TargetSemantics = targetSemantics;
             InitialSpeedFactor = initialSpeedFactor;
             InitialDamageFactor = initialDamageFactor;
+            InitialStoppingPowerFactor = initialStoppingPowerFactor;
+            MuzzleFlashScale = muzzleFlashScale;
             AccuracySnapshot = accuracySnapshot;
             AccuracyFactor = accuracyFactor;
             ForcedMissRadius = forcedMissRadius;
@@ -326,6 +392,12 @@ namespace BDP.Core.AttackExecution.RangedProtocol.Model
             Tags = tags ?? new List<string>();
             AttackContextSnapshot = attackContextSnapshot;
             VisualAttachmentProviderDefs = visualAttachmentProviderDefs ?? new List<ThingDef>();
+            HasTrailColorOverride = hasTrailColorOverride;
+            TrailColorOverride = trailColorOverride;
+            HasTrailCoreOverride = hasTrailCoreOverride;
+            TrailCoreColorOverride = trailCoreColorOverride;
+            TrailCoreWidthRatioOverride = trailCoreWidthRatioOverride;
+            TrailCoreOpacityOverride = trailCoreOpacityOverride;
             if (TargetSemantics == null)
             {
                 SyncTargetSemanticsFromLegacyTargets();

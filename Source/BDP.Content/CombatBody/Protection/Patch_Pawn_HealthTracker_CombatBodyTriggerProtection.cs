@@ -91,6 +91,31 @@ namespace BDP.Content.CombatBody.Protection
         }
 
         /// <summary>
+        /// 判断当前激活态 BDP 触发体是否已经缺失原版心脏。
+        /// </summary>
+        internal static bool ShouldCollapseFromHeartMissing(Pawn pawn)
+        {
+            if (pawn == null
+                || !IsActivePhase(pawn)
+                || !HasCurrentPrimaryTrigger(pawn)
+                || pawn.health?.hediffSet == null
+                || pawn.RaceProps?.body == null)
+            {
+                return false;
+            }
+
+            foreach (BodyPartRecord part in pawn.RaceProps.body.AllParts)
+            {
+                if (part.def == BodyPartDefOf.Heart && pawn.health.hediffSet.PartIsMissing(part))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
         /// 判断装备是否是 Pawn 当前主装备上的 BDP 触发体。
         /// </summary>
         internal static bool IsCurrentPrimaryTrigger(Pawn pawn, ThingWithComps equipment)
@@ -250,12 +275,16 @@ namespace BDP.Content.CombatBody.Protection
         /// </summary>
         public static void Postfix(Pawn_HealthTracker __instance, bool __state)
         {
-            if (!__state)
+            Pawn pawn = pawnAccessor(__instance);
+            if (__state)
             {
-                return;
+                CombatBodyTriggerProtectionContext.Exit(pawn);
             }
 
-            CombatBodyTriggerProtectionContext.Exit(pawnAccessor(__instance));
+            if (CombatBodyTriggerProtectionUtility.ShouldCollapseFromHeartMissing(pawn))
+            {
+                CombatBodySurfaceAccess.ResolveCommands(pawn)?.TriggerCollapse("HeartMissing");
+            }
         }
     }
 

@@ -6,9 +6,9 @@
     <!-- 唯一稳定定义名。 -->
     <defName>BDP_InvalidChipRemnant</defName>
     <!-- 非中文环境下的基础名称，中文由 DefInjected 语言包覆盖。 -->
-    <label>invalid chip remnant</label>
+    <label>芯片遗留物</label>
     <!-- 非中文环境下的基础说明，中文由 DefInjected 语言包覆盖。 -->
-    <description>A remnant left by a chip specification that can no longer be represented.</description>
+    <description>一枚无法继续由当前芯片规格表达的遗留物。它不再保留原芯片或半成品的材料、工作量与功能，只能被存放、搬运或熔炼。</description>
     <!-- 使用原版部件图形，不引入专用表现类。 -->
     <graphicData>
       <texPath>Things/Item/Resource/ComponentIndustrial</texPath>

@@ -75,8 +75,28 @@ namespace BDP.Core.Chips
                 ActivationExclusionGroups = config.ActivationExclusionGroups != null
                     ? new List<ChipExclusionGroupDef>(config.ActivationExclusionGroups)
                     : new List<ChipExclusionGroupDef>(),
+                ActivationAudio = TranslateActivationAudio(config.ActivationAudio),
                 ActivationDelayTicks = config.ActivationDelayTicks,
                 DeactivationDelayTicks = config.DeactivationDelayTicks
+            };
+        }
+
+        /// <summary>
+        /// 翻译激活音效声明块。
+        /// </summary>
+        private static ChipActivationAudioContract TranslateActivationAudio(
+            ChipActivationAudioConfig config)
+        {
+            if (config == null)
+            {
+                return null;
+            }
+
+            return new ChipActivationAudioContract
+            {
+                WarmupStartSound = config.ActivationWarmupStartSound,
+                WarmupLoopSound = config.ActivationWarmupLoopSound,
+                WarmupEndSound = config.ActivationWarmupEndSound
             };
         }
 

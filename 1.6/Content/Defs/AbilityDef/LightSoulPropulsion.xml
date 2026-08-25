@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 光魂推进：复用战斗体短距跳跃，只增加表达 Trion 扣费组件。 -->
+  <AbilityDef>
+    <!-- AbilityDef（能力定义）唯一名称。 -->
+    <defName>BDP_Ability_LightSoulPropulsion</defName>
+    <!-- 默认中文名称仍允许语言包覆盖。 -->
+    <label>光魂推进</label>
+    <!-- 默认中文说明仍允许语言包覆盖。 -->
+    <description>消耗 Trion 进行一次短距离战术位移。</description>
+    <!-- 暂时复用原版长肢跳跃图标。 -->
+    <iconPath>UI/Abilities/Longjump</iconPath>
+    <!-- 暂时沿用短距跳跃的 30 秒冷却。 -->
+    <cooldownTicksRange>1800</cooldownTicksRange>
+    <!-- 只允许玩家手动使用。 -->
+    <aiCanUse>false</aiCanUse>
+    <!-- 位移不视为敌对攻击。 -->
+    <hostile>false</hostile>
+    <!-- 位移本身不要求暴力能力。 -->
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+    <!-- 只在征召状态显示。 -->
+    <displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+    <showWhenDrafted>true</showWhenDrafted>
+    <!-- 直接复用短距跳跃 Verb（能力动词）与专用飞行器。 -->
+    <verbProperties>
+      <verbClass>BDP.Content.CombatBody.Verb_CastAbilityCombatBodyShortJump</verbClass>
+      <label>光魂推进</label>
+      <violent>false</violent>
+      <onlyManualCast>true</onlyManualCast>
+      <forceNormalTimeSpeed>false</forceNormalTimeSpeed>
+      <warmupTime>0.2</warmupTime>
+      <range>15.9</range>
+      <requireLineOfSight>true</requireLineOfSight>
+      <soundCast>Longjump_Jump</soundCast>
+      <soundLanding>Longjump_Land</soundLanding>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>false</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+    <!-- 复用原版跳跃 Job（工作）。 -->
+    <jobDef>CastJump</jobDef>
+    <!-- Trion 成本只从当前绑定的光魂表达条目读取。 -->
+    <comps>
+      <li Class="BDP.Core.Abilities.CompProperties_AbilityEffect_BdpTrionCost" />
+    </comps>
+  </AbilityDef>
+
+</Defs>

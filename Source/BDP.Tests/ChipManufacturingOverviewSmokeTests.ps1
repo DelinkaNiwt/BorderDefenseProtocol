@@ -7,6 +7,7 @@ $modRoot = Get-BdpModRoot
 $uiRoot = Join-Path $modRoot "Source\BDP.Content\Assembly\ChipManufacturing\UI"
 $windowPath = Join-Path $uiRoot "Window_ChipManufacturing.cs"
 $overviewPath = Join-Path $uiRoot "ChipManufacturingOverviewPanel.cs"
+$queuePath = Join-Path $uiRoot "ChipManufacturingQueuePanel.cs"
 $listPath = Join-Path $uiRoot "ChipManufacturingListModel.cs"
 $languageRoot = Join-Path $modRoot "Languages\ChineseSimplified (简体中文)\Keyed\ChipManufacturing.xml"
 
@@ -14,6 +15,7 @@ Assert-True (Test-Path -LiteralPath $overviewPath) "制造台必须有独立的�
 
 $windowText = Get-Utf8Text $windowPath
 $overviewText = Get-Utf8Text $overviewPath
+$queueText = Get-Utf8Text $queuePath
 $listText = Get-Utf8Text $listPath
 $languageText = Get-Utf8Text $languageRoot
 
@@ -22,10 +24,13 @@ Assert-True ($windowText -match 'overviewPanel\.Draw') "制造窗口必须有总
 Assert-True ($windowText -match 'ChipManufacturingOverviewPanel') "制造窗口必须使用独立总览面板组件。"
 Assert-True ($windowText -match 'isOverview\s*=\s*true') "制造窗口打开时必须默认进入总览页。"
 Assert-True ($windowText -match 'OverviewTab') "顶部导航必须包含制造总览入口。"
+Assert-True ($windowText -match 'CurrentDraft\s*==\s*null[\s\S]*OpenOverview') "无当前草稿时不得进入配置页绘制。"
+Assert-True ($windowText -match 'editorState.Switch\(category,\s*profession\);\s*isOverview\s*=\s*false') "分类导航必须先建立草稿再离开总览。"
 Assert-True ($overviewText -match 'GetActionCount') "总览分类卡片必须显示动作预设数量。"
 Assert-True ($overviewText -match 'onCategorySelected') "总览分类卡片必须能够进入对应分类配置。"
 Assert-True ($overviewText -match 'queuePanel.*Draw') "总览必须复用真实制造队列。"
 Assert-True ($overviewText -match 'onConfigurationLoaded') "总览载入队列配置后必须能够离开总览进入配置页。"
+Assert-True ($queueText -match 'loadedDraft[\s\S]*LoadConfiguration[\s\S]*loadedDraft\s*!=\s*null') "队列载入失败时不得把窗口切进无草稿配置页。"
 Assert-True ($listText -match 'GetActionCount') "列表模型必须提供按主分类统计动作预设数量的读取面。"
 Assert-True ($languageText -match 'BDP_ChipManufacturing_OverviewTab') "语言包必须包含总览页签文本。"
 Assert-True ($languageText -match 'BDP_ChipManufacturing_Overview_ActionCount') "语言包必须包含总览动作数量文本。"

@@ -38,4 +38,10 @@
 左键切换到：{1}
 右键可直接选择任意形态。</BDP_Command_ChipMode_Desc>
   <BDP_Command_ChipMode_CurrentOption>● {0}（当前）</BDP_Command_ChipMode_CurrentOption>
+  <!-- 芯片嵌套姿态切换按钮。 -->
+  <BDP_Command_ChipStance_Switch>切换姿态：{0}</BDP_Command_ChipStance_Switch>
+  <BDP_Command_ChipStance_Desc>当前姿态：{0}
+左键切换至：{1}
+右键可直接选择当前形态内的任意姿态。</BDP_Command_ChipStance_Desc>
+  <BDP_Command_ChipStance_CurrentOption>● {0}（当前）</BDP_Command_ChipStance_CurrentOption>
 </LanguageData>

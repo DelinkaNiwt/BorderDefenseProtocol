@@ -43,4 +43,26 @@ $migrationText = (Get-ChildItem -LiteralPath $migrationRoot -Filter "*.cs" | For
 Assert-True ($migrationText -notmatch '"[^"\r\n]*[\u4e00-\u9fff][^"\r\n]*"') `
     "迁移 C# 不得硬编码玩家可见中文文案。"
 
+# 制造台所有预设入口必须共用统一名称解析，避免动作预设退回 Def.LabelCap 英文原文。
+$manufacturingUiRoot = Join-Path $modRoot "Source\BDP.Content\Assembly\ChipManufacturing\UI"
+$labelResolverPath = Join-Path $manufacturingUiRoot "ChipPresetLabelResolver.cs"
+$manufacturingWindowPath = Join-Path $manufacturingUiRoot "Window_ChipManufacturing.cs"
+$presetInfoPath = Join-Path $manufacturingUiRoot "Window_ChipPresetInfo.cs"
+Assert-True (Test-Path -LiteralPath $labelResolverPath) "制造 UI 缺少统一预设名称解析器。"
+$labelResolverText = Get-Utf8Text $labelResolverPath
+$manufacturingWindowText = Get-Utf8Text $manufacturingWindowPath
+$presetInfoText = Get-Utf8Text $presetInfoPath
+Assert-True ($labelResolverText -match 'ChipActionPresetDef[\s\S]*ResolvedLabel') `
+    "动作预设名称必须读取 ResolvedLabel。"
+Assert-True ($labelResolverText -match 'preset\.LabelCap') `
+    "非动作预设必须继续回退原版 LabelCap。"
+Assert-True ($manufacturingWindowText -match 'ChipPresetLabelResolver\.Resolve\(preset\)') `
+    "制造预设列表必须使用统一名称解析器。"
+Assert-True ($presetInfoText -match 'ChipPresetLabelResolver\.Resolve\(preset\)') `
+    "预设信息弹窗标题必须使用统一名称解析器。"
+Assert-True ($labelResolverText -match 'ChipActionPresetDef[\s\S]*ResolvedDescription') `
+    "动作预设说明必须读取 ResolvedDescription。"
+Assert-True ($presetInfoText -match 'ChipPresetLabelResolver\.ResolveDescription\(preset\)') `
+    "预设信息弹窗说明必须使用统一解析器。"
+
 Write-Host "PASS: 芯片制造分类、职业、面板、状态、迁移信件与遗留物均有语言包覆盖。"

@@ -1,4 +1,6 @@
 using HarmonyLib;
+using BDP.Core.Projectiles.Interaction;
+using BDP.Core.Projectiles.RangedFlightProtocol.Impact;
 using Verse;
 
 namespace BDP.Content.Shield
@@ -14,7 +16,9 @@ namespace BDP.Content.Shield
         /// </summary>
         public static void Postfix(Pawn __instance, ref DamageInfo dinfo, ref bool absorbed)
         {
-            if (absorbed || __instance?.health?.hediffSet?.hediffs == null)
+            if (absorbed
+                || ProjectileInteractionPolicyScope.Current?.BypassRegisteredDamageShields == true
+                || __instance?.health?.hediffSet?.hediffs == null)
             {
                 return;
             }
@@ -28,6 +32,8 @@ namespace BDP.Content.Shield
                 }
 
                 absorbed = true;
+                // 向 Core（中性基础设施）登记“伤害前拦截”事实；Core 不知道这是哪一种具体护盾。
+                DamageResolutionRuntime.MarkAbsorbed(__instance);
                 return;
             }
         }

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 变色龙芯片名称。 -->
+  <BDP_ChipAction_Chameleon>变色龙</BDP_ChipAction_Chameleon>
+  <!-- 变色龙芯片说明。 -->
+  <BDP_ChipAction_Chameleon_Description>进入隐秘状态并隐藏自身；任意攻击动作完成后立即关闭。攻击能力也会触发关闭，位移、治疗和增益能力不会触发。</BDP_ChipAction_Chameleon_Description>
+</LanguageData>

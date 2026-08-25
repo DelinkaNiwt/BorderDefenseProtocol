@@ -267,7 +267,7 @@ namespace BDP.Core.Expressions
         /// <summary>
         /// 判断当前 AbilityDef 是否属于表达系统正式 Ability 宿主壳。
         /// 当前识别边界收紧为：
-        /// 1. 使用 BDP 正式 Ability Verb。
+        /// 1. Ability Verb 实现 BDP 表达宿主标记接口。
         /// 2. 带有表达结果扣费组件。
         /// 这样 stale 宿主会被回收，但不会误伤普通原版或其它非表达 Ability。
         /// </summary>
@@ -276,7 +276,7 @@ namespace BDP.Core.Expressions
             return abilityDef != null
                 && !string.IsNullOrWhiteSpace(abilityDef.defName)
                 && abilityDef.verbProperties?.verbClass != null
-                && typeof(BDP.Core.Abilities.BdpVerb_CastAbility).IsAssignableFrom(
+                && typeof(BDP.Core.Abilities.IBdpExpressionAbilityVerb).IsAssignableFrom(
                     abilityDef.verbProperties.verbClass)
                 && HasExpressionCostComp(abilityDef);
         }

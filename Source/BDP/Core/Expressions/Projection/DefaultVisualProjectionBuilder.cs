@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BDP.Core.AttackExecution;
 using BDP.Core.Trigger;
 using Verse;
 
@@ -17,7 +18,10 @@ namespace BDP.Core.Expressions
         {
             List<VisualResidentEntry> residentEntries = CollectResidentEntries(snapshot);
             int activeWeaponChipInstanceCount = CountActiveWeaponChipInstances(snapshot);
-            VisualExpressionRelationKind relationKind = ResolveRelationKind(snapshot, residentEntries);
+            VisualExpressionRelationKind relationKind = ResolveRelationKind(
+                snapshot,
+                residentEntries,
+                activeWeaponChipInstanceCount);
             return new VisualExpressionProjection
             {
                 RelationKind = relationKind,
@@ -48,7 +52,6 @@ namespace BDP.Core.Expressions
             {
                 FormalExpressionResult entry = snapshot.Results[i];
                 if (entry == null
-                    || entry.ResultKind != ExpressionResultKind.Verb
                     || entry.CompositeKind != CompositeExpressionKind.None
                     || !entry.IsAvailable
                     || !entry.CanProject
@@ -57,9 +60,12 @@ namespace BDP.Core.Expressions
                     continue;
                 }
 
+                string moduleVisualPresetDefName = ResolveModuleWeaponVisualPresetDefName(entry);
                 if (string.IsNullOrWhiteSpace(entry.VisualPresetDefName)
+                    && string.IsNullOrWhiteSpace(entry.VisualGraphicOverrideDefName)
                     && string.IsNullOrWhiteSpace(entry.CompositeVisualPresetDefName)
-                    && !entry.ForceSuppressHostEquipment)
+                    && !entry.ForceSuppressHostEquipment
+                    && string.IsNullOrWhiteSpace(moduleVisualPresetDefName))
                 {
                     continue;
                 }
@@ -70,7 +76,10 @@ namespace BDP.Core.Expressions
                     SourceReference = entry.SourceReference,
                     Side = entry.SourceReference != null ? entry.SourceReference.Side : TriggerSide.Main,
                     SlotIndex = entry.SourceReference != null ? entry.SourceReference.SlotIndex : -1,
-                    VisualPresetDefName = entry.VisualPresetDefName,
+                    VisualPresetDefName = string.IsNullOrWhiteSpace(moduleVisualPresetDefName)
+                        ? entry.VisualPresetDefName
+                        : moduleVisualPresetDefName,
+                    VisualGraphicOverrideDefName = entry.VisualGraphicOverrideDefName,
                     CompositeVisualPresetDefName = entry.CompositeVisualPresetDefName,
                     VerbAttackRole = entry.VerbAttackRole,
                     ForceSuppressHostEquipment = entry.ForceSuppressHostEquipment,
@@ -83,13 +92,44 @@ namespace BDP.Core.Expressions
         }
 
         /// <summary>
+        /// 从当前已激活的远程模块中读取最后一条显式武器贴图覆盖。
+        /// 模块只提供配置，实际绘制仍由既有 DrawEquipmentAiming（瞄准装备绘制）入口完成。
+        /// </summary>
+        private static string ResolveModuleWeaponVisualPresetDefName(FormalExpressionResult entry)
+        {
+            if (entry?.RangedModules == null)
+            {
+                return null;
+            }
+
+            string result = null;
+            for (int i = 0; i < entry.RangedModules.Count; i++)
+            {
+                RangedModuleMountConfig mount = entry.RangedModules[i];
+                if (mount == null
+                    || !mount.enabled
+                    || !(mount.config is IRangedModuleWeaponVisualOverride visualOverride)
+                    || string.IsNullOrWhiteSpace(visualOverride.WeaponVisualPresetDefName))
+                {
+                    continue;
+                }
+
+                result = visualOverride.WeaponVisualPresetDefName;
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// 解析当前视觉关系类型。
-        /// 第一版只基于正式总表里已经成立的高层结果与常驻结果数量判断。
+        /// 显式 Combo（组合）优先；否则按正式 DualWeapon（双武器）结果或实际武器芯片实例数量回退。
         /// </summary>
         private static VisualExpressionRelationKind ResolveRelationKind(
             ExpressionSnapshot snapshot,
-            List<VisualResidentEntry> residentEntries)
+            List<VisualResidentEntry> residentEntries,
+            int activeWeaponChipInstanceCount)
         {
+            bool hasAvailableDualWeaponResult = false;
             if (snapshot?.Results != null)
             {
                 for (int i = 0; i < snapshot.Results.Count; i++)
@@ -103,21 +143,38 @@ namespace BDP.Core.Expressions
                         continue;
                     }
 
-                    if (result.CompositeKind == CompositeExpressionKind.Combo)
+                    if (result.CompositeKind == CompositeExpressionKind.Combo
+                        && HasDeclaredComboVisualRelation(result))
                     {
                         return VisualExpressionRelationKind.Combo;
                     }
 
                     if (result.CompositeKind == CompositeExpressionKind.DualWeapon)
                     {
-                        return VisualExpressionRelationKind.DualWeapon;
+                        hasAvailableDualWeaponResult = true;
                     }
                 }
+            }
+
+            if (hasAvailableDualWeaponResult || activeWeaponChipInstanceCount >= 2)
+            {
+                return VisualExpressionRelationKind.DualWeapon;
             }
 
             return residentEntries != null && residentEntries.Count > 0
                 ? VisualExpressionRelationKind.SingleSide
                 : VisualExpressionRelationKind.None;
+        }
+
+        /// <summary>
+        /// 判断 Combo（组合）结果是否显式声明了手持视觉关系。
+        /// 未声明时必须继续回退到实际武器实例数量，不能遮蔽双武器视觉。
+        /// </summary>
+        private static bool HasDeclaredComboVisualRelation(FormalExpressionResult result)
+        {
+            return result != null
+                && (!string.IsNullOrWhiteSpace(result.VisualPresetDefName)
+                    || !string.IsNullOrWhiteSpace(result.CompositeVisualPresetDefName));
         }
 
         /// <summary>
@@ -145,7 +202,7 @@ namespace BDP.Core.Expressions
                     continue;
                 }
 
-                string key = BuildWeaponChipInstanceKey(result.SourceReference);
+                string key = ExpressionSourceReferenceMatcher.BuildChipInstanceKey(result.SourceReference);
                 if (!string.IsNullOrWhiteSpace(key))
                 {
                     keys.Add(key);
@@ -153,28 +210,6 @@ namespace BDP.Core.Expressions
             }
 
             return keys.Count;
-        }
-
-        /// <summary>
-        /// 为武器结果构建来源芯片实例键。
-        /// 优先使用 ThingID，缺失时回退到槽位坐标，保证读档恢复边界仍能稳定判断。
-        /// </summary>
-        private static string BuildWeaponChipInstanceKey(ExpressionSourceReference sourceReference)
-        {
-            if (sourceReference == null)
-            {
-                return null;
-            }
-
-            if (!string.IsNullOrWhiteSpace(sourceReference.ChipThingId))
-            {
-                return "thing:" + sourceReference.ChipThingId;
-            }
-
-            string chipDefName = !string.IsNullOrWhiteSpace(sourceReference.ChipDefName)
-                ? sourceReference.ChipDefName
-                : "unknown";
-            return "slot:" + sourceReference.Side + ":" + sourceReference.SlotIndex + ":" + chipDefName;
         }
 
         /// <summary>
@@ -194,7 +229,8 @@ namespace BDP.Core.Expressions
 
             if (activeWeaponChipInstanceCount == 1)
             {
-                return HasExplicitPose(residentEntries, relationKind)
+                return HasGraphicOverride(residentEntries)
+                    || HasExplicitPose(residentEntries, relationKind)
                     ? HostEquipmentRenderMode.Replace
                     : HostEquipmentRenderMode.ReplaceTextureOnly;
             }
@@ -228,6 +264,24 @@ namespace BDP.Core.Expressions
                 ExpressionVisualPresetDef preset =
                     DefDatabase<ExpressionVisualPresetDef>.GetNamed(presetDefName, false);
                 if (preset != null && preset.HasExplicitPose)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 判断当前单武器是否声明了视觉图层局部覆盖。
+        /// 局部覆盖必须进入完整姿态解析，不能退回宿主装备的贴图替换模式。
+        /// </summary>
+        private static bool HasGraphicOverride(List<VisualResidentEntry> residentEntries)
+        {
+            for (int i = 0; i < residentEntries.Count; i++)
+            {
+                if (residentEntries[i] != null
+                    && !string.IsNullOrWhiteSpace(residentEntries[i].VisualGraphicOverrideDefName))
                 {
                     return true;
                 }

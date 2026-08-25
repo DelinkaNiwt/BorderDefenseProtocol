@@ -109,6 +109,7 @@ namespace BDP.Content.RangedModules.AreaExplosion
 
             // 默认抑制基线单体命中，避免同一发同时出现单体子弹伤害与爆炸伤害叠加。
             contribution.SuppressBaselineImpact = config != null && config.SuppressBaselineImpact;
+            contribution.ProducesAttackTargetEvents = true;
             contribution.HasAreaEffect = true;
             contribution.OverrideAreaEffect = new AreaEffectPlan
             {

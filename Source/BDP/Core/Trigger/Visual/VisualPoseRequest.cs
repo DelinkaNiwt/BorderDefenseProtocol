@@ -21,9 +21,21 @@ namespace BDP.Core.Trigger.Visual
         public ExpressionVisualPresetDef Preset { get; set; }
 
         /// <summary>
+        /// 当前条目的视觉图层局部覆盖预设。
+        /// 姿态解析仍以 Preset 为准，主贴图和附加层从该预设读取。
+        /// </summary>
+        public ExpressionVisualPresetDef GraphicOverridePreset { get; set; }
+
+        /// <summary>
         /// 当前 Trigger 已发布的视觉运行时状态。
         /// </summary>
         public TriggerVisualRuntimeState RuntimeState { get; set; }
+
+        /// <summary>
+        /// 当前条目从原版攻击时序解析出的武器动作阶段快照。
+        /// 留空时姿态解析按 Idle（空闲）处理，保持旧调用方行为。
+        /// </summary>
+        public WeaponVisualStageSnapshot WeaponStageSnapshot { get; set; }
 
         /// <summary>
         /// 当前装备姿态样本。

@@ -10,6 +10,9 @@ namespace BDP.Core.Chips
         /// <summary>按业务顺序保存的来源键。</summary>
         IReadOnlyList<string> OrderedSourceKeys { get; }
 
+        /// <summary>可空的成品最终职业键。</summary>
+        string SourceProfessionKey { get; }
+
         /// <summary>可空的来源变体键。</summary>
         string SourceVariantKey { get; }
 

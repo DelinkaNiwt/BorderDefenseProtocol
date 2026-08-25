@@ -44,8 +44,15 @@ Assert-True (
     ($diagnosticsSnapshotText -match 'public float ResolvedDrawAngle') -and
     ($diagnosticsSnapshotText -match 'public string MeshKind') -and
     ($diagnosticsSnapshotText -match 'public bool HandMirror') -and
-    ($diagnosticsSnapshotText -match 'public bool SouthNorthMirrorOnNorth')
+    ($diagnosticsSnapshotText -match 'public bool SouthNorthMirrorOnNorth') -and
+    ($diagnosticsSnapshotText -match 'public float SideBaseZ') -and
+    ($diagnosticsSnapshotText -match 'public string WeaponActionStage') -and
+    ($diagnosticsSnapshotText -match 'public bool WeaponStageVisible')
 ) 'Visual diagnostics snapshots must expose facing, aim angle, drawLoc, resolved position, final angle, mesh, and mirror flags.'
+
+Assert-True (
+    $diagnosticsAccessText -match 'snapshot\.SideBaseZ = eastWestPose\.SideBaseZ;'
+) 'Visual diagnostics must expose the East/West shared screen-height baseline from the resolved preset.'
 
 Assert-True (
     ($externalContextText -notmatch 'TriggerVisualPoseDiagnosticsSnapshot|VisualPoseDiagnostics') -and

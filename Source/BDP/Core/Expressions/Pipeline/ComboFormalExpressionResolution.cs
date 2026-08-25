@@ -62,5 +62,15 @@ namespace BDP.Core.Expressions
         /// 当前 Pawn 对整个 Combo 顶层使用条件的检查结果。
         /// </summary>
         public PawnRequirementCheckResult UseRequirementCheck { get; set; }
+
+        /// <summary>
+        /// 第一、第二来源项一致时确定的组合级来源变体键。
+        /// </summary>
+        public string SourceVariantKey { get; set; }
+
+        /// <summary>
+        /// 组合级来源变体显示标签。
+        /// </summary>
+        public string SourceVariantLabel { get; set; }
     }
 }

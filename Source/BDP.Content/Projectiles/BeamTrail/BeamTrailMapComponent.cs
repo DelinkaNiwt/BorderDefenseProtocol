@@ -30,7 +30,7 @@ namespace BDP.Content.Projectiles.BeamTrail
 
         /// <summary>
         /// 当前地图的材质缓存。
-        /// key 只按贴图路径区分；颜色由线段绘制时通过属性块注入。
+        /// key 按贴图路径和绘制层区分；颜色由线段绘制时通过属性块注入。
         /// </summary>
         private readonly Dictionary<string, Material> materialCache = new Dictionary<string, Material>();
 
@@ -276,8 +276,10 @@ namespace BDP.Content.Projectiles.BeamTrail
         /// 解析指定贴图路径对应的材质。
         /// </summary>
         /// <param name="trailTexPath">目标贴图路径。</param>
+        /// <param name="core">是否解析拖尾内芯材质。</param>
+        /// <param name="renderQueue">显式渲染队列；零表示使用 Shader 默认队列。</param>
         /// <returns>可用于拖尾绘制的材质；失败时返回空。</returns>
-        private Material ResolveMaterial(string trailTexPath)
+        private Material ResolveMaterial(string trailTexPath, bool core, int renderQueue = 0)
         {
             if (string.IsNullOrWhiteSpace(trailTexPath))
             {
@@ -285,19 +287,26 @@ namespace BDP.Content.Projectiles.BeamTrail
                 return null;
             }
 
-            if (materialCache.TryGetValue(trailTexPath, out Material cachedMaterial))
+            string cacheKey = (core ? "core|" : "outer|")
+                + trailTexPath
+                + "|queue="
+                + renderQueue;
+            if (materialCache.TryGetValue(cacheKey, out Material cachedMaterial))
             {
                 return cachedMaterial;
             }
 
-            Material material = MaterialPool.MatFrom(trailTexPath, ShaderDatabase.MoteGlow, Color.white);
+            Shader shader = core ? ShaderDatabase.Transparent : ShaderDatabase.MoteGlow;
+            Material material = renderQueue > 0
+                ? MaterialPool.MatFrom(trailTexPath, shader, Color.white, renderQueue)
+                : MaterialPool.MatFrom(trailTexPath, shader, Color.white);
             if (material == null)
             {
                 WarnMissingTextureOnce(trailTexPath);
                 return null;
             }
 
-            materialCache[trailTexPath] = material;
+            materialCache[cacheKey] = material;
             return material;
         }
 
@@ -334,13 +343,22 @@ namespace BDP.Content.Projectiles.BeamTrail
                 return;
             }
 
-            Material material = ResolveMaterial(segment.TrailTexPath);
-            if (material == null)
+            Material outerMaterial = ResolveMaterial(segment.TrailTexPath, false);
+            if (outerMaterial == null)
             {
                 return;
             }
 
-            segment.Draw(material);
+            segment.Draw(outerMaterial);
+            if (segment.HasTrailCore)
+            {
+                int outerRenderQueue = Mathf.Max(3000, outerMaterial.renderQueue);
+                Material coreMaterial = ResolveMaterial(
+                    segment.TrailTexPath,
+                    true,
+                    outerRenderQueue + 1);
+                segment.DrawCore(coreMaterial);
+            }
         }
 
         /// <summary>

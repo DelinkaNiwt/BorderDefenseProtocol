@@ -15,12 +15,12 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
         public List<ChipMetricPreview> Specifications { get; } =
             new List<ChipMetricPreview>();
 
-        /// <summary>枪壳修正只在形态之前显示一次。</summary>
-        public List<ChipAdjustmentPreview> GunShellAdjustments { get; } =
+        /// <summary>武装型修正只在形态之前显示一次。</summary>
+        public List<ChipAdjustmentPreview> ArmamentFormAdjustments { get; } =
             new List<ChipAdjustmentPreview>();
 
-        /// <summary>枪壳统一提供的射击共性属性，只在枪壳区显示一次。</summary>
-        public List<ChipMetricPreview> GunShellMetrics { get; } =
+        /// <summary>武装型统一提供的共性属性，只在武装型区显示一次。</summary>
+        public List<ChipMetricPreview> ArmamentFormMetrics { get; } =
             new List<ChipMetricPreview>();
 
         /// <summary>按实际动作数量上下排列的形态块。</summary>
@@ -43,7 +43,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
         /// <summary>当前字段是否适合显示方向明确的条形图。</summary>
         public bool ShowBar { get; set; }
 
-        /// <summary>当前最终值是否受枪壳修正。</summary>
+        /// <summary>当前最终值是否受武装型修正。</summary>
         public bool IsModified { get; set; }
     }
 
@@ -58,7 +58,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             new List<ChipMetricPreview>();
     }
 
-    /// <summary>枪壳的一条绝对或倍率修正。</summary>
+    /// <summary>武装型的一条绝对或倍率修正。</summary>
     public sealed class ChipAdjustmentPreview
     {
         /// <summary>被修正字段的语言包标签键。</summary>

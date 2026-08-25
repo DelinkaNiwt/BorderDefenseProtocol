@@ -64,6 +64,18 @@ namespace BDP.Development.Trigger.Diagnostics
         private static readonly Material SubMuzzleMaterial = CreatePointMaterial(new Color(0.28f, 0.5f, 1f, 0.6f));
 
         /// <summary>
+        /// 主手（右手）握持点 marker 材质。
+        /// 暖橙色用于和副手握持点快速区分。
+        /// </summary>
+        private static readonly Material MainGripMaterial = CreatePointMaterial(new Color(1f, 0.48f, 0.1f, 0.68f));
+
+        /// <summary>
+        /// 副手（左手）握持点 marker 材质。
+        /// 亮青色用于和主手握持点快速区分。
+        /// </summary>
+        private static readonly Material SubGripMaterial = CreatePointMaterial(new Color(0.05f, 0.9f, 1f, 0.68f));
+
+        /// <summary>
         /// 主手理论中心原点 marker 材质。
         /// 它与主手红色枪口点区分开，用于表达“散布前中心点”。
         /// </summary>
@@ -104,6 +116,18 @@ namespace BDP.Development.Trigger.Diagnostics
         /// </summary>
         private static readonly Material WeaponToMuzzleMaterial =
             SolidColorMaterials.SimpleSolidColorMaterial(new Color(0.55f, 1f, 0.55f, 0.82f));
+
+        /// <summary>
+        /// 绘制主手（右手）武器中心到握持点的连线。
+        /// </summary>
+        private static readonly Material MainWeaponToGripMaterial =
+            SolidColorMaterials.SimpleSolidColorMaterial(new Color(1f, 0.48f, 0.1f, 0.82f));
+
+        /// <summary>
+        /// 绘制副手（左手）武器中心到握持点的连线。
+        /// </summary>
+        private static readonly Material SubWeaponToGripMaterial =
+            SolidColorMaterials.SimpleSolidColorMaterial(new Color(0.05f, 0.9f, 1f, 0.82f));
 
         /// <summary>
         /// 绘制枪口到理论中心原点的连线。
@@ -168,6 +192,12 @@ namespace BDP.Development.Trigger.Diagnostics
                 {
                     DrawPoint(resident.MuzzleWorldPosition, muzzleMaterial, 0.19f);
                     DrawLink(resident.ResolvedDrawPosition, resident.MuzzleWorldPosition, WeaponToMuzzleMaterial, 0.03f);
+                }
+
+                if (resident.HasGripAnchor)
+                {
+                    DrawPoint(resident.GripWorldPosition, ResolveGripPointMaterial(resident.Side), 0.18f);
+                    DrawLink(resident.ResolvedDrawPosition, resident.GripWorldPosition, ResolveGripLinkMaterial(resident.Side), 0.03f);
                 }
             }
 
@@ -286,6 +316,24 @@ namespace BDP.Development.Trigger.Diagnostics
         private static Material ResolveMuzzleMaterial(TriggerSide side)
         {
             return side == TriggerSide.Sub ? SubMuzzleMaterial : MainMuzzleMaterial;
+        }
+
+        /// <summary>
+        /// 根据侧别选择握持点 marker 材质。
+        /// 主手（右手）使用暖橙色，副手（左手）使用亮青色。
+        /// </summary>
+        private static Material ResolveGripPointMaterial(TriggerSide side)
+        {
+            return side == TriggerSide.Sub ? SubGripMaterial : MainGripMaterial;
+        }
+
+        /// <summary>
+        /// 根据侧别选择武器中心到握持点的连线材质。
+        /// 连线与对应握持点保持同色，便于在双持重叠时追踪归属。
+        /// </summary>
+        private static Material ResolveGripLinkMaterial(TriggerSide side)
+        {
+            return side == TriggerSide.Sub ? SubWeaponToGripMaterial : MainWeaponToGripMaterial;
         }
 
         /// <summary>

@@ -27,7 +27,8 @@ namespace BDP.Content.RangedModules.Homing
         IRangedAttackModuleRuntime,
         IProjectileInitStageModule,
         IArrivalStageModule,
-        IHitStageModule
+        IHitStageModule,
+        ITargetingStageModule
     {
         private HomingConfig config;
         private string resultId;
@@ -36,6 +37,14 @@ namespace BDP.Content.RangedModules.Homing
         {
             resultId = context != null ? context.ResultId : null;
             config = ResolveConfigSnapshot(context);
+        }
+
+        void ITargetingStageModule.Contribute(TargetingRecord record)
+        {
+            if (record != null && config != null && config.AllowGroundTarget)
+            {
+                BdpRangedTargetAcquisitionUtility.EnsureGroundTargetingAllowed(record.TargetingParameters);
+            }
         }
 
         void IProjectileInitStageModule.Contribute(in ProjectileInitStageContext context, ProjectileInitContribution contribution)
@@ -53,6 +62,8 @@ namespace BDP.Content.RangedModules.Homing
 
             LocalTargetInfo lockedTarget = ResolveLockedTarget(context);
             HomingConfig frozenConfig = config != null ? config.CloneTyped() : new HomingConfig();
+            bool groundAcquirePending = lockedTarget.IsValid && !lockedTarget.HasThing
+                && frozenConfig.AllowGroundTarget && frozenConfig.AcquireRadius > 0f;
 
             state.FrozenConfig = frozenConfig;
             state.LockedTarget = lockedTarget;
@@ -65,6 +76,7 @@ namespace BDP.Content.RangedModules.Homing
             state.Seed = ResolveSeed(context, lockedTarget);
             state.FlyAwayIssued = false;
             state.FlyAwayEnd = Vector3.zero;
+            state.GroundAcquireDone = !groundAcquirePending;
             ClearReleaseState(state);
 
             if (!lockedTarget.IsValid)
@@ -80,7 +92,9 @@ namespace BDP.Content.RangedModules.Homing
                     HasOverrideCurrentTarget = true,
                     OverrideCurrentTarget = lockedTarget,
                     HasInitialSegmentTriggerRatio = true,
-                    InitialSegmentTriggerRatio = frozenConfig.InitialSegmentTriggerRatio
+                    InitialSegmentTriggerRatio = groundAcquirePending
+                        ? frozenConfig.GroundTargetInitialSegmentTriggerRatio
+                        : frozenConfig.InitialSegmentTriggerRatio
                 });
             }
         }
@@ -122,6 +136,32 @@ namespace BDP.Content.RangedModules.Homing
                 ? (context.Projectile.ExactRotation * Vector3.forward).Yto0()
                 : Vector3.forward;
             HomingConfig frozenConfig = state.FrozenConfig ?? new HomingConfig();
+
+            if (frozenConfig.AllowGroundTarget && !state.GroundAcquireDone
+                && state.LockedTarget.IsValid && !state.LockedTarget.HasThing)
+            {
+                state.GroundAcquireDone = true;
+                LocalTargetInfo acquired = BdpRangedTargetAcquisitionUtility.FindNearestAcquirableTarget(
+                    projectilePos,
+                    context.Map,
+                    context.Launcher != null ? context.Launcher.Faction : null,
+                    frozenConfig.AcquireRadius,
+                    frozenConfig.AcquireRequireLineOfSight,
+                    null);
+                if (acquired.IsValid)
+                {
+                    state.LockedTarget = acquired;
+                    if (HomingPathBuilder.TryResolveTargetPosition(acquired, out Vector3 acquiredPosition))
+                    {
+                        state.HasLastObservedTargetPos = true;
+                        state.LastObservedTargetPos = acquiredPosition;
+                    }
+
+                    state.HasLastDistanceSample = false;
+                    state.LastDistanceToTarget = 0f;
+                    ClearReleaseState(state);
+                }
+            }
 
             if (!HomingPathBuilder.TryResolveTargetPosition(state.LockedTarget, out Vector3 targetCurrentPos))
             {

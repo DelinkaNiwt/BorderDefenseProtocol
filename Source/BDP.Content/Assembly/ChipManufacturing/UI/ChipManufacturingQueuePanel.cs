@@ -204,8 +204,12 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
                 24f),
                 "BDP_ChipManufacturing_Queue_Load".Translate()))
             {
-                ChipBillQueueOperations.LoadConfiguration(editorState, bill);
-                onConfigurationLoaded?.Invoke();
+                ChipManufacturingDraft loadedDraft =
+                    ChipBillQueueOperations.LoadConfiguration(editorState, bill);
+                if (loadedDraft != null)
+                {
+                    onConfigurationLoaded?.Invoke();
+                }
             }
             if (Widgets.ButtonText(new Rect(
                 rect.x + 6f + (third + buttonGap) * 2f,

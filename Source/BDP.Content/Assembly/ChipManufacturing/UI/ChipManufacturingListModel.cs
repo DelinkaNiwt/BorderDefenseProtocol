@@ -6,7 +6,7 @@ using Verse;
 
 namespace BDP.Content.Assembly.ChipManufacturing.UI
 {
-    /// <summary>为页签提供固定排序的分类、职业、枪壳和动作列表。</summary>
+    /// <summary>为页签提供固定排序的分类、职业、武装型和动作列表。</summary>
     public static class ChipManufacturingListModel
     {
         /// <summary>五主分类固定显示顺序。</summary>
@@ -62,10 +62,11 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             return result;
         }
 
-        /// <summary>按主分类与职业筛选动作；枪手通过 CanUseAction 单向包含射手动作。</summary>
+        /// <summary>按主分类筛选动作；仅武装分类继续应用职业接纳规则。</summary>
         public static List<ChipActionPresetDef> GetActions(
             ChipCategoryDef category,
-            ChipProfessionDef profession)
+            ChipProfessionDef profession,
+            ChipArmamentFormDef armamentForm = null)
         {
             List<ChipActionPresetDef> result = new List<ChipActionPresetDef>();
             List<ChipActionPresetDef> all =
@@ -74,7 +75,8 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             {
                 ChipActionPresetDef action = all[index];
                 if (action?.config?.Profile?.Category == category
-                    && ChipCombinationSelectionRules.CanUseAction(profession, action))
+                    && ChipCombinationSelectionRules.CanUseAction(profession, action)
+                    && ChipCombinationSelectionRules.CanUseArmamentFormAction(armamentForm, action))
                 {
                     result.Add(action);
                 }
@@ -106,17 +108,25 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             return count;
         }
 
-        /// <summary>读取当前职业可使用的枪壳。</summary>
-        public static List<ChipGunShellDef> GetGunShells(ChipProfessionDef profession)
+        /// <summary>读取当前职业可见且可使用的武装型；隐藏默认型不进入制造台。</summary>
+        public static List<ChipArmamentFormDef> GetArmamentForms(
+            ChipProfessionDef profession,
+            IList<ChipActionPresetDef> selectedActions = null)
         {
-            List<ChipGunShellDef> result = new List<ChipGunShellDef>();
-            List<ChipGunShellDef> all =
-                DefDatabase<ChipGunShellDef>.AllDefsListForReading;
+            List<ChipArmamentFormDef> result = new List<ChipArmamentFormDef>();
+            List<ChipArmamentFormDef> all =
+                DefDatabase<ChipArmamentFormDef>.AllDefsListForReading;
             for (int index = 0; index < all.Count; index++)
             {
-                if (profession != null
+                if (all[index] != null
+                    && all[index].showInManufacturing
+                    && !all[index].implicitDefault
+                    && profession != null
                     && all[index].compatibleProfessions != null
-                    && all[index].compatibleProfessions.Contains(profession))
+                    && all[index].compatibleProfessions.Contains(profession)
+                    && ChipCombinationSelectionRules.CanUseArmamentForm(
+                        all[index],
+                        selectedActions))
                 {
                     result.Add(all[index]);
                 }

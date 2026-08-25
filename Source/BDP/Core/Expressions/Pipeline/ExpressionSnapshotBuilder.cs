@@ -26,6 +26,11 @@ namespace BDP.Core.Expressions
         private readonly CompositeExpressionResolver compositeExpressionResolver;
 
         /// <summary>
+        /// 开放式表达增强解析器。
+        /// </summary>
+        private readonly ExpressionAugmentationResolver expressionAugmentationResolver;
+
+        /// <summary>
         /// 使用指定依赖构造总表构建器。
         /// </summary>
         public ExpressionSnapshotBuilder(
@@ -35,6 +40,7 @@ namespace BDP.Core.Expressions
             sourceCollector = new ExpressionSourceCollector(declarationProvider, conditionEvaluator);
             singleSideExpressionBuilder = new SingleSideExpressionBuilder();
             compositeExpressionResolver = new CompositeExpressionResolver();
+            expressionAugmentationResolver = new ExpressionAugmentationResolver();
         }
 
         /// <summary>
@@ -55,6 +61,16 @@ namespace BDP.Core.Expressions
             SingleSideExpressionSet resolvedMainSet = specialOverride != null ? specialOverride.MainSet : mainSet;
             SingleSideExpressionSet resolvedSubSet = specialOverride != null ? specialOverride.SubSet : subSet;
             SingleSideExpressionSet resolvedSpecialSet = specialOverride != null ? specialOverride.SpecialSet : specialSet;
+            IReadOnlyList<ExpressionAugmentationDeclaration> augmentations =
+                expressionAugmentationResolver.Collect(
+                    resolvedMainSet,
+                    resolvedSubSet,
+                    resolvedSpecialSet);
+            expressionAugmentationResolver.ApplyModules(
+                augmentations,
+                resolvedMainSet,
+                resolvedSubSet,
+                resolvedSpecialSet);
             CompositeExpressionSet compositeSet = compositeExpressionResolver.Resolve(
                 pawn,
                 resolvedMainSet,
@@ -62,6 +78,12 @@ namespace BDP.Core.Expressions
                 triggerLoadoutReader,
                 materialIndex,
                 collected);
+            expressionAugmentationResolver.ApplyDisplayPrefixes(
+                augmentations,
+                resolvedMainSet,
+                resolvedSubSet,
+                resolvedSpecialSet,
+                compositeSet);
 
             return Assemble(
                 resolvedMainSet,

@@ -67,6 +67,7 @@ namespace BDP.Core.Expressions
                 DisplayLabel = material.DisplayLabel,
                 ManualEntryIconTexPath = material.ManualEntryIconTexPath,
                 VisualPresetDefName = material.VisualPresetDefName,
+                VisualGraphicOverrideDefName = material.VisualGraphicOverrideDefName,
                 CompositeVisualPresetDefName = material.CompositeVisualPresetDefName,
                 ForceSuppressHostEquipment = material.ForceSuppressHostEquipment,
                 VisualPriority = material.VisualPriority,
@@ -93,7 +94,11 @@ namespace BDP.Core.Expressions
                 HediffApplyModeKey = material.HediffApplyModeKey,
                 PassiveKey = material.PassiveKey,
                 ExposedData = material.ExposedData,
-                RangedModules = material.RangedModules != null ? CloneRangedModules(material.RangedModules) : new List<RangedModuleMountConfig>()
+                RangedModules = material.RangedModules != null ? CloneRangedModules(material.RangedModules) : new List<RangedModuleMountConfig>(),
+                RangedModuleAugmentations = material.RangedModuleAugmentations != null
+                    ? CloneRangedModuleAugmentations(material.RangedModuleAugmentations)
+                    : new List<RangedModuleAugmentationConfig>(),
+                DisplayLabelPrefixes = new List<string>()
             };
         }
 
@@ -208,6 +213,31 @@ namespace BDP.Core.Expressions
                 }
 
                 result.Add(module.Clone());
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 对开放式远程增强声明做最小快照复制。
+        /// </summary>
+        private static IReadOnlyList<RangedModuleAugmentationConfig> CloneRangedModuleAugmentations(
+            IReadOnlyList<RangedModuleAugmentationConfig> augmentations)
+        {
+            List<RangedModuleAugmentationConfig> result =
+                new List<RangedModuleAugmentationConfig>();
+            if (augmentations == null)
+            {
+                return result;
+            }
+
+            for (int index = 0; index < augmentations.Count; index++)
+            {
+                RangedModuleAugmentationConfig augmentation = augmentations[index];
+                if (augmentation != null)
+                {
+                    result.Add(augmentation.Clone());
+                }
             }
 
             return result;

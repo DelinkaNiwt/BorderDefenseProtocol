@@ -4,7 +4,7 @@ namespace BDP.Core.Expressions
 {
     /// <summary>
     /// 表达视觉预设中的枪口锚点配置。
-    /// 枪口偏移始终按 aimAngle（瞄准角）旋转，而不是按贴图装饰角旋转。
+    /// 枪口偏移按最终贴图姿态变换，与贴图装饰角和网格镜像保持一致。
     /// </summary>
     public sealed class ExpressionVisualMuzzleConfig
     {
@@ -22,7 +22,7 @@ namespace BDP.Core.Expressions
 
         /// <summary>
         /// 副侧是否使用专门的枪口偏移覆盖。
-        /// false 时副侧使用默认偏移并按瞄准镜像自动修正 X。
+        /// false 时副侧使用默认偏移，并跟随最终贴图镜像。
         /// </summary>
         public bool HasSubHandMuzzleOffsetOverride = false;
 

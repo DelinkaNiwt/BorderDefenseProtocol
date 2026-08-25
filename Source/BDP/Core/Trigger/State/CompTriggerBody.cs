@@ -94,6 +94,11 @@ namespace BDP.Core.Trigger
         private TriggerRuntimeCoordinator runtimeCoordinator;
 
         /// <summary>
+        /// 当前 Trigger owner 的激活音效生命周期控制器。
+        /// </summary>
+        private TriggerActivationAudioController activationAudioController;
+
+        /// <summary>
         /// 当前 `Trigger` owner 专属的运行时服务根。
         /// </summary>
         private readonly TriggerRuntimeServices runtimeServices;
@@ -173,6 +178,7 @@ namespace BDP.Core.Trigger
             verbHostManager = new TriggerBodyVerbHostManager(this);
             runtimeServices = new TriggerRuntimeServices();
             runtimeCoordinator = new TriggerRuntimeCoordinator(this);
+            activationAudioController = new TriggerActivationAudioController();
             loadoutCommandSurface = new TriggerLoadoutCommandSurface(this);
             eventSurface = new TriggerEventSurface(this);
         }
@@ -610,6 +616,98 @@ namespace BDP.Core.Trigger
             MarkCombatProjectionDirty(ProjectionDirtyReason.ChipModeChanged);
             ReportChipModeSwitchFailure(chip, previousModeKey, "next", publishException);
             return false;
+        }
+
+        /// <summary>
+        /// 请求把一枚正式启用芯片切到当前形态内的指定姿态。
+        /// 姿态真值与投影发布作为一个原子动作处理。
+        /// </summary>
+        internal bool RequestSwitchChipStance(Thing chip, string targetStanceKey)
+        {
+            PrepareCommandState();
+            TriggerSlotState rootSlot = FindActiveRootSlotForChip(chip);
+            if (rootSlot == null
+                || !TriggerChipModeService.IsStanceKeyValid(
+                    chip,
+                    rootSlot.CurrentModeKey,
+                    targetStanceKey))
+            {
+                return false;
+            }
+
+            string previousStanceKey = rootSlot.CurrentStanceKey;
+            Exception publishException = null;
+            bool switched = TriggerChipModeService.TrySwitchActiveRootStance(
+                rootSlot,
+                chip,
+                targetStanceKey,
+                () => PublishCombatProjection(ProjectionDirtyReason.ChipStanceChanged),
+                ex => publishException = ex);
+            if (switched)
+            {
+                return true;
+            }
+
+            MarkCombatProjectionDirty(ProjectionDirtyReason.ChipStanceChanged);
+            ReportChipStanceSwitchFailure(
+                chip,
+                previousStanceKey,
+                targetStanceKey,
+                publishException);
+            return false;
+        }
+
+        /// <summary>
+        /// 请求把一枚正式启用芯片切到当前形态内作者顺序的下一姿态。
+        /// </summary>
+        internal bool RequestCycleChipStance(Thing chip)
+        {
+            PrepareCommandState();
+            TriggerSlotState rootSlot = FindActiveRootSlotForChip(chip);
+            if (rootSlot == null)
+            {
+                return false;
+            }
+
+            string previousStanceKey = rootSlot.CurrentStanceKey;
+            Exception publishException = null;
+            bool switched = TriggerChipModeService.TryCycleActiveRootStance(
+                rootSlot,
+                chip,
+                () => PublishCombatProjection(ProjectionDirtyReason.ChipStanceChanged),
+                ex => publishException = ex);
+            if (switched)
+            {
+                return true;
+            }
+
+            MarkCombatProjectionDirty(ProjectionDirtyReason.ChipStanceChanged);
+            ReportChipStanceSwitchFailure(chip, previousStanceKey, "next", publishException);
+            return false;
+        }
+
+        /// <summary>
+        /// 输出一次受节流保护的姿态切换失败诊断，并说明旧姿态仍被保留。
+        /// </summary>
+        private void ReportChipStanceSwitchFailure(
+            Thing chip,
+            string previousStanceKey,
+            string targetStanceKey,
+            Exception exception)
+        {
+            string chipThingId = SafeThingId(chip);
+            BdpDiagnostics.Throttled(
+                "trigger.chip_stance_switch_failed." + chipThingId + "." + targetStanceKey,
+                "芯片姿态切换失败，已恢复旧姿态。trigger=" + SafeThingId(parent)
+                + ", pawn=" + SafeThingId(OwnerPawn)
+                + ", chip=" + chipThingId
+                + ", oldStance=" + (previousStanceKey ?? "null")
+                + ", targetStance=" + (targetStanceKey ?? "null")
+                + ", exception=" + (exception != null ? exception.ToString() : "none"));
+            Messages.Message(
+                "BDP_Message_CombatBody_TriggerSwitchFailed".Translate(),
+                MessageTypeDefOf.RejectInput,
+                false);
         }
 
         /// <summary>

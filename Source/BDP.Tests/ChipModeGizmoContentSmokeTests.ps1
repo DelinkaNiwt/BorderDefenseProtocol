@@ -42,6 +42,9 @@ Assert-True (
     ($providerText -match 'RequestSwitchChipMode')
 ) 'The provider must skip inactive, mirrored, and single-mode chips and wire left/right click commands.'
 
+Assert-True ($providerText -match 'groupable\s*=\s*false') `
+    '每枚芯片的形态按钮必须关闭原版聚合，避免一次输入同时切换多个实例。'
+
 Assert-True (
     ($providerText -match 'GizmoIconTexPath') -and
     ($providerText -match 'chip\.def\.uiIcon')

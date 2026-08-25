@@ -7,14 +7,14 @@ namespace BDP.Core.Combos
     public enum ComboValueResolveMode
     {
         /// <summary>
-        /// 跟随芯片 A。
+        /// 跟随第一来源项。
         /// </summary>
-        FollowChipMain,
+        FollowFirstSource,
 
         /// <summary>
-        /// 跟随芯片 B。
+        /// 跟随第二来源项。
         /// </summary>
-        FollowChipSub,
+        FollowSecondSource,
 
         /// <summary>
         /// 两侧求和。

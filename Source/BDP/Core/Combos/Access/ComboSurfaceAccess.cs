@@ -69,17 +69,32 @@ namespace BDP.Core.Combos
         }
 
         /// <summary>
-        /// 按当前两枚芯片 Thing 匹配唯一命中的组合技。
+        /// 按当前两枚芯片 Thing 匹配第一份动作身份与成品准入都成立的组合技。
         /// 芯片身份只由运行时索引读取中性有序来源键，不解释具体业务变体。
         /// </summary>
-        public static ComboDefinitionReadResult FindMatch(Thing chipA, Thing chipB)
+        public static ComboDefinitionReadResult FindMatch(Thing firstSourceChip, Thing secondSourceChip)
         {
-            if (chipA == null || chipB == null)
+            if (firstSourceChip == null || secondSourceChip == null)
             {
                 return null;
             }
 
-            return definitionReader.FindMatch(chipA, chipB);
+            return definitionReader.FindMatch(firstSourceChip, secondSourceChip);
+        }
+
+        /// <summary>按当前两枚芯片匹配组合技，并返回集中诊断失败摘要。</summary>
+        public static ComboDefinitionReadResult FindMatch(
+            Thing firstSourceChip,
+            Thing secondSourceChip,
+            out string failureReason)
+        {
+            if (firstSourceChip == null || secondSourceChip == null)
+            {
+                failureReason = "Main/Sub 至少一侧没有芯片。";
+                return null;
+            }
+
+            return definitionReader.FindMatch(firstSourceChip, secondSourceChip, out failureReason);
         }
     }
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    小行星芯片音效 Def。
+    为小行星芯片提供专属发射音效，资源来自设计组提供的参考音频。
+  -->
+
+  <!-- 小行星芯片发射音效。 -->
+  <SoundDef>
+    <!-- SoundDef 唯一名称。 -->
+    <defName>BDP_Sound_AsteroidCast</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>6</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <!-- 小行星专属发射音效。 -->
+            <clipPath>Trigger/Asteroid/Shot_BDP_Asteroid</clipPath>
+          </li>
+        </grains>
+        <volumeRange>40~50</volumeRange>
+        <pitchRange>0.95~1.05</pitchRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+</Defs>

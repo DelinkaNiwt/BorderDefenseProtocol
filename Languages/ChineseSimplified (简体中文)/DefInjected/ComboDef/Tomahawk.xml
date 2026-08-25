@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+  <!-- 战斧组合技本地化。 -->
+  <BDP_Combo_Tomahawk.label>战斧</BDP_Combo_Tomahawk.label>
+  <BDP_Combo_Tomahawk.description>毒蛇与美特拉组合，沿用毒蛇的路线引导，并追加美特拉的范围爆炸。</BDP_Combo_Tomahawk.description>
+
+</LanguageData>

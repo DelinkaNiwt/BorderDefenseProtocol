@@ -1,4 +1,5 @@
 using UnityEngine;
+using BDP.Core.Projectiles.Visual;
 
 namespace BDP.Content.Projectiles.BeamTrail
 {
@@ -18,6 +19,26 @@ namespace BDP.Content.Projectiles.BeamTrail
         /// 拖尾颜色。
         /// </summary>
         public Color TrailColor { get; private set; }
+
+        /// <summary>
+        /// 是否追加拖尾内芯。
+        /// </summary>
+        public bool HasTrailCore { get; private set; }
+
+        /// <summary>
+        /// 拖尾内芯颜色。
+        /// </summary>
+        public Color TrailCoreColor { get; private set; }
+
+        /// <summary>
+        /// 拖尾内芯相对外层的宽度比例。
+        /// </summary>
+        public float TrailCoreWidthRatio { get; private set; }
+
+        /// <summary>
+        /// 拖尾内芯透明度倍率。
+        /// </summary>
+        public float TrailCoreOpacity { get; private set; }
 
         /// <summary>
         /// 拖尾宽度。
@@ -66,12 +87,44 @@ namespace BDP.Content.Projectiles.BeamTrail
         /// <returns>已经做过安全回退的一份拖尾外观快照。</returns>
         public static BeamTrailAppearanceSnapshot CreateFrom(BeamTrailPresetDef preset)
         {
+            return CreateFrom(preset, null);
+        }
+
+        /// <summary>
+        /// 从拖尾预设和投射物视觉覆盖创建一份外观快照。
+        /// </summary>
+        /// <param name="preset">当前拖尾预设。</param>
+        /// <param name="visualAppearanceOverrides">当前投射物的可选视觉覆盖。</param>
+        /// <returns>已经做过安全回退的一份拖尾外观快照。</returns>
+        public static BeamTrailAppearanceSnapshot CreateFrom(
+            BeamTrailPresetDef preset,
+            ProjectileVisualAppearanceOverrides visualAppearanceOverrides = null)
+        {
             return new BeamTrailAppearanceSnapshot
             {
                 TrailTexPath = !string.IsNullOrWhiteSpace(preset != null ? preset.trailTexPath : null)
                     ? preset.trailTexPath
                     : "Things/Projectile/BDP_BeamTrail",
-                TrailColor = preset != null ? preset.trailColor : Color.white,
+                TrailColor = visualAppearanceOverrides != null
+                    && visualAppearanceOverrides.HasTrailColor
+                    ? visualAppearanceOverrides.TrailColor
+                    : preset != null ? preset.trailColor : Color.white,
+                HasTrailCore = visualAppearanceOverrides != null
+                    && visualAppearanceOverrides.HasTrailCore,
+                TrailCoreColor = visualAppearanceOverrides != null
+                    && visualAppearanceOverrides.HasTrailCore
+                    ? visualAppearanceOverrides.TrailCoreColor
+                    : Color.black,
+                TrailCoreWidthRatio = Mathf.Clamp(
+                    visualAppearanceOverrides != null && visualAppearanceOverrides.HasTrailCore
+                        ? visualAppearanceOverrides.TrailCoreWidthRatio
+                        : 0.45f,
+                    0.05f,
+                    1f),
+                TrailCoreOpacity = Mathf.Clamp01(
+                    visualAppearanceOverrides != null && visualAppearanceOverrides.HasTrailCore
+                        ? visualAppearanceOverrides.TrailCoreOpacity
+                        : 1f),
                 TrailWidth = Mathf.Max(0.01f, preset != null ? preset.trailWidth : 0.1105f),
                 SegmentLifetimeTicks = Mathf.Max(1, preset != null ? preset.segmentLifetimeTicks : 30),
                 StartOpacity = Mathf.Clamp01(preset != null ? preset.startOpacity : 1f),

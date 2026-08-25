@@ -1,4 +1,5 @@
 using BDP.Core.Semantics;
+using BDP.Core.Projectiles.RangedFlightProtocol.Impact;
 using HarmonyLib;
 using Verse;
 using Verse.Sound;
@@ -21,6 +22,21 @@ namespace BDP.Patches
         /// </summary>
         public static void Prefix(Explosion __instance, SoundDef explosionSound)
         {
+            ExplosionImpactDispatchContext impactContext = ExplosionImpactRuntimeScope.Current;
+            if (impactContext != null)
+            {
+                BdpDamageSemanticBridge.AssignExplosionImpactContext(__instance, impactContext);
+                if (impactContext.PresentationPolicy != null)
+                {
+                    __instance.doVisualEffects = !impactContext.PresentationPolicy.SuppressVanillaVisualEffects;
+                    __instance.doSoundEffects = !impactContext.PresentationPolicy.SuppressVanillaSoundEffects;
+                    if (impactContext.PresentationPolicy.OverrideScreenShakeFactor)
+                    {
+                        __instance.screenShakeFactor = impactContext.PresentationPolicy.ScreenShakeFactor;
+                    }
+                }
+            }
+
             ISemanticContext semanticContext = SemanticRuntimeScope.Current;
             if (semanticContext == null)
             {

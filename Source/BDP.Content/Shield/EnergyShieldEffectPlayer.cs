@@ -18,10 +18,25 @@ namespace BDP.Content.Shield
             Vector3 position,
             Map map,
             EffecterDef effectDef,
-            float scale)
+            float scale,
+            bool showBlockGraphic,
+            FleckDef blockFlashFleckDef)
         {
             if (map == null)
             {
+                return;
+            }
+
+            // 调用方关闭六边形时必须走可拆分的默认链，避免显式 Effecter
+            // 再次生成一张无法单独关闭的完整护盾图。
+            if (!showBlockGraphic)
+            {
+                PlayScaledBlockEffect(
+                    position,
+                    map,
+                    scale,
+                    false,
+                    blockFlashFleckDef);
                 return;
             }
 
@@ -29,7 +44,12 @@ namespace BDP.Content.Shield
                 || effectDef.defName == "Interceptor_BlockedProjectilePsychic";
             if (useScaledDefault && scale != 1f)
             {
-                PlayScaledBlockEffect(position, map, scale);
+                PlayScaledBlockEffect(
+                    position,
+                    map,
+                    scale,
+                    showBlockGraphic,
+                    blockFlashFleckDef);
             }
             else
             {
@@ -40,13 +60,18 @@ namespace BDP.Content.Shield
         /// <summary>
         /// 播放旧版同构的缩放六边形命中特效。
         /// </summary>
-        private static void PlayScaledBlockEffect(Vector3 position, Map map, float scale)
+        private static void PlayScaledBlockEffect(
+            Vector3 position,
+            Map map,
+            float scale,
+            bool showBlockGraphic,
+            FleckDef blockFlashFleckDef)
         {
             float resolvedScale = scale * 0.91f;
             FleckDef shieldFleck =
                 DefDatabase<FleckDef>.GetNamedSilentFail("BDP_Fleck_EnergyShieldBlock");
-            FleckDef flashFleck =
-                DefDatabase<FleckDef>.GetNamedSilentFail("ExplosionFlash");
+            FleckDef flashFleck = blockFlashFleckDef
+                ?? DefDatabase<FleckDef>.GetNamedSilentFail("ExplosionFlash");
 
             if (shieldFleck != null)
             {
@@ -55,24 +80,31 @@ namespace BDP.Content.Shield
                     FleckMaker.Static(position, map, flashFleck, resolvedScale);
                 }
 
-                float baseScale = resolvedScale * 2f;
-                Vector3 firstOffset = new Vector3(
-                    Rand.Range(-0.12f, 0.12f),
-                    0f,
-                    Rand.Range(-0.12f, 0.12f));
-                FleckMaker.Static(position + firstOffset, map, shieldFleck, baseScale * 1.25f);
-                FleckMaker.Static(position, map, shieldFleck, baseScale);
+                if (showBlockGraphic)
+                {
+                    float baseScale = resolvedScale * 2f;
+                    Vector3 firstOffset = new Vector3(
+                        Rand.Range(-0.12f, 0.12f),
+                        0f,
+                        Rand.Range(-0.12f, 0.12f));
+                    FleckMaker.Static(position + firstOffset, map, shieldFleck, baseScale * 1.25f);
+                    FleckMaker.Static(position, map, shieldFleck, baseScale);
 
-                Vector3 secondOffset = new Vector3(
-                    Rand.Range(-0.08f, 0.08f),
-                    0f,
-                    Rand.Range(-0.08f, 0.08f));
-                FleckMaker.Static(position + secondOffset, map, shieldFleck, baseScale * 0.85f);
-                FleckMaker.Static(position, map, shieldFleck, baseScale * 1.05f);
+                    Vector3 secondOffset = new Vector3(
+                        Rand.Range(-0.08f, 0.08f),
+                        0f,
+                        Rand.Range(-0.08f, 0.08f));
+                    FleckMaker.Static(position + secondOffset, map, shieldFleck, baseScale * 0.85f);
+                    FleckMaker.Static(position, map, shieldFleck, baseScale * 1.05f);
+                }
             }
-            else
+            else if (showBlockGraphic)
             {
                 PlayFallbackEffect(position, map, resolvedScale, flashFleck);
+            }
+            else if (flashFleck != null)
+            {
+                FleckMaker.Static(position, map, flashFleck, resolvedScale);
             }
 
             PlayBlockSound(position, map);

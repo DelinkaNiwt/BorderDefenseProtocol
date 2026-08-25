@@ -36,6 +36,12 @@ namespace BDP.Core.AttackExecution.RangedProtocol.Model
 
         public float DamageFactor { get; set; }
 
+        /// <summary>
+        /// 当前发射对应的停止力倍率。
+        /// 它与伤害/速度倍率一样，在 Fire 阶段冻结到每一发。
+        /// </summary>
+        public float StoppingPowerFactor { get; set; } = 1f;
+
         public ThingDef ProjectileOverride { get; set; }
 
         public string ResultId { get; set; }

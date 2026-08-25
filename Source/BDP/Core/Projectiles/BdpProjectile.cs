@@ -3,7 +3,10 @@ using BDP.Core.AttackExecution;
 using BDP.Core.AttackExecution.RangedProtocol.Model;
 using BDP.Core.Projectiles.RangedFlightProtocol;
 using BDP.Core.Projectiles.RangedFlightProtocol.Collision;
+using BDP.Core.Projectiles.RangedFlightProtocol.Effects;
+using BDP.Core.Projectiles.RangedFlightProtocol.Impact;
 using BDP.Core.Projectiles.RangedFlightProtocol.Model;
+using BDP.Core.Projectiles.Interaction;
 using BDP.Core.Projectiles.RangedFlightProtocol.Projection;
 using BDP.Core.Projectiles.Visual;
 using BDP.Core.Semantics;
@@ -35,6 +38,14 @@ namespace BDP.Core.Projectiles
         /// 当前投射物携带的语义上下文。
         /// </summary>
         public ISemanticContext SemanticContext { get; set; }
+
+        /// <summary>
+        /// 当前投射物已经冻结的拦截器与伤害护盾交互策略。
+        /// </summary>
+        public ProjectileInteractionPolicy CurrentInteractionPolicy
+        {
+            get { return launchPlan != null ? launchPlan.InteractionPolicy : null; }
+        }
 
         /// <summary>
         /// 当前宿主复用的飞行协议服务。
@@ -193,6 +204,11 @@ namespace BDP.Core.Projectiles
         public override void Launch(Thing launcher, Vector3 origin, LocalTargetInfo usedTarget, LocalTargetInfo intendedTarget, ProjectileHitFlags hitFlags, bool preventFriendlyFire = false, Thing equipment = null, ThingDef targetCoverDef = null)
         {
             base.Launch(launcher, origin, usedTarget, intendedTarget, hitFlags, preventFriendlyFire, equipment, targetCoverDef);
+            if (launchPlan != null)
+            {
+                // 原版 Launch 已将 Def 与武器特性合并到实例停止力；构型倍率在此对最终实例值生效。
+                stoppingPower *= launchPlan.InitialStoppingPowerFactor;
+            }
             Vector3 vanillaDestination = destination;
             NormalizeFlightSegmentToSharedHeight();
             ProjectileFlightPathSnapshot initialFlightPathSnapshot = launchPlan != null
@@ -906,41 +922,147 @@ namespace BDP.Core.Projectiles
             }
 
             bool executedAnyPlan = false;
+            bool hasAttackTargetProducer = impactPlan.ProducesAttackTargetEvents;
+            bool damageWasProcessed = false;
+            DamageResolution damageResolution = null;
+
             if (!impactPlan.SuppressBaselineImpact)
             {
-                if (impactPlan.ApplyBaselineDirectDamage && hit != null && hit.HitThing != null && impactPlan.BaselineDirectDamage != null)
+                if (!blockedByShield
+                    && impactPlan.DamageDisposition != DamageDisposition.SuppressAllProjectileImpact
+                    && impactPlan.ApplyBaselineDirectDamage
+                    && hit != null
+                    && hit.HitThing != null
+                    && impactPlan.BaselineDirectDamage != null)
                 {
-                    ApplyDirectDamage(impactPlan.BaselineDirectDamage, hit.HitThing, battleLogEntry);
+                    DamageResolution baselineResolution;
+                    ApplyDirectDamage(
+                        impactPlan.BaselineDirectDamage,
+                        hit.HitThing,
+                        battleLogEntry,
+                        ResolveDirectHitFeedbackColor(impactPlan, hasAttackTargetProducer),
+                        out baselineResolution);
                     executedAnyPlan = true;
+                    damageResolution = baselineResolution;
+                    damageWasProcessed |= IsDamageProcessed(baselineResolution);
                 }
 
-                if (impactPlan.ApplyBaselineAreaEffect && impactPlan.BaselineAreaEffect != null && map != null)
+                if (!blockedByShield
+                    && impactPlan.ApplyBaselineAreaEffect
+                    && impactPlan.BaselineAreaEffect != null
+                    && map != null
+                    && (AllowsBaselineDamage(impactPlan)
+                        || impactPlan.PreserveTargetResolutionWhenDamageSuppressed))
                 {
-                    ApplyAreaEffect(impactPlan.BaselineAreaEffect, map);
+                    ApplyAreaEffect(impactPlan.BaselineAreaEffect, map, impactPlan, true);
                     executedAnyPlan = true;
                 }
             }
 
-            if (impactPlan.ApplyDirectDamage && hit != null && hit.HitThing != null && impactPlan.DirectDamage != null)
+            if (!blockedByShield
+                && impactPlan.DamageDisposition != DamageDisposition.SuppressAllProjectileImpact
+                && impactPlan.DamageDisposition != DamageDisposition.SuppressModuleExtraDamage
+                && impactPlan.ApplyDirectDamage
+                && hit != null
+                && hit.HitThing != null
+                && impactPlan.DirectDamage != null)
             {
-                ApplyDirectDamage(impactPlan.DirectDamage, hit.HitThing, battleLogEntry);
+                DamageResolution moduleResolution;
+                ApplyDirectDamage(
+                    impactPlan.DirectDamage,
+                    hit.HitThing,
+                    battleLogEntry,
+                    ResolveDirectHitFeedbackColor(impactPlan, hasAttackTargetProducer),
+                    out moduleResolution);
+                executedAnyPlan = true;
+                damageResolution = moduleResolution;
+                damageWasProcessed |= IsDamageProcessed(moduleResolution);
+            }
+
+            if (blockedByShield && hit != null && hit.HitThing != null)
+            {
+                damageResolution = DamageResolutionRuntime.CreateProjectileInterception(hit.HitThing);
+                executedAnyPlan = true;
+            }
+            else if (!damageWasProcessed
+                && damageResolution == null
+                && !hasAttackTargetProducer
+                && impactPlan.DamageDisposition == DamageDisposition.SuppressAllProjectileImpact
+                && hit != null
+                && hit.HitThing != null)
+            {
+                damageResolution = ResolveSuppressedDirectImpact(impactPlan, hit.HitThing);
                 executedAnyPlan = true;
             }
 
-            if (impactPlan.ApplyAreaEffect && impactPlan.AreaEffect != null && map != null)
+            if (impactPlan.DamageDisposition != DamageDisposition.SuppressAllProjectileImpact
+                && impactPlan.DamageDisposition != DamageDisposition.SuppressModuleExtraDamage)
             {
-                ApplyAreaEffect(impactPlan.AreaEffect, map);
+                for (int i = 0; i < impactPlan.ExtraDamages.Count; i++)
+                {
+                    DamagePlan extra = impactPlan.ExtraDamages[i];
+                    if (extra != null && !blockedByShield && hit != null && hit.HitThing != null)
+                    {
+                        DamageResolution extraResolution;
+                        ApplyDirectDamage(extra, hit.HitThing, battleLogEntry, null, out extraResolution);
+                        executedAnyPlan = true;
+                        damageWasProcessed |= IsDamageProcessed(extraResolution);
+                        if (damageResolution == null)
+                        {
+                            damageResolution = extraResolution;
+                        }
+                    }
+                }
+            }
+
+            // 原版 Bullet（子弹）是在 TakeDamage（承受伤害）返回后才通知 Pawn（人形单位）僵直。
+            // 只有伤害入口实际通过，或模块明确要求补回完整反馈时，才允许产生 Pawn 僵直。
+            if (damageWasProcessed
+                && !blockedByShield
+                && hit != null
+                && hit.HitThing != null)
+            {
+                (hit.HitThing as Pawn)?.stances?.stagger.Notify_BulletImpact(this);
+            }
+
+            if (!blockedByShield
+                && impactPlan.ApplyAreaEffect
+                && impactPlan.AreaEffect != null
+                && map != null
+                && (AllowsModuleAreaDamage(impactPlan)
+                    || impactPlan.PreserveTargetResolutionWhenDamageSuppressed))
+            {
+                ApplyAreaEffect(impactPlan.AreaEffect, map, impactPlan, false);
                 executedAnyPlan = true;
             }
 
-            for (int i = 0; i < impactPlan.ExtraDamages.Count; i++)
+            // 伤害或模块拦截裁决完成后，才派发独立减益效果；护盾拦截不会进入这里。
+            bool canDispatchTargetEffects = damageResolution != null
+                && !damageResolution.IsShieldBlocked
+                && (damageResolution.IsDamageProcessed
+                    || damageResolution.Outcome == DamageResolutionOutcome.ModuleIntercepted);
+            if (canDispatchTargetEffects
+                && !hasAttackTargetProducer
+                && hit != null
+                && hit.HitThing != null)
             {
-                DamagePlan extra = impactPlan.ExtraDamages[i];
-                if (extra != null && hit != null && hit.HitThing != null)
-                {
-                    ApplyDirectDamage(extra, hit.HitThing, battleLogEntry);
-                    executedAnyPlan = true;
-                }
+                executedAnyPlan |= ExecuteDirectAttackTargetEvent(impactPlan, hit, map);
+            }
+
+            // 完全取消真实伤害的模块必须显式声明是否需要补回完整 Pawn 反馈。
+            // 普通攻击不走这里，仍由原版 TakeDamage（目标承伤）链决定反馈。
+            if (damageResolution != null
+                && damageResolution.Outcome == DamageResolutionOutcome.ModuleIntercepted
+                && !hasAttackTargetProducer
+                && hit != null
+                && hit.HitThing != null
+                && impactPlan.InterceptedHitFeedback == ImpactHitFeedbackMode.VanillaPawn)
+            {
+                ApplySuppressedHitFeedback(
+                    hit.HitThing,
+                    ResolveDirectHitFeedbackColor(impactPlan, hasAttackTargetProducer),
+                    true);
+                executedAnyPlan = true;
             }
 
             if (!executedAnyPlan && !blockedByShield)
@@ -950,15 +1072,171 @@ namespace BDP.Core.Projectiles
         }
 
         /// <summary>
-        /// 把单条直接伤害计划落回原版伤害系统。
+        /// 执行没有其他目标生产者时的直接攻击目标事件。
         /// </summary>
-        private void ApplyDirectDamage(DamagePlan damagePlan, Thing hitThing, BattleLogEntry_RangedImpact battleLogEntry)
+        private bool ExecuteDirectAttackTargetEvent(ImpactPlan impactPlan, HitRecord hit, Map map)
         {
-            if (damagePlan == null || hitThing == null)
+            return AttackTargetEventDispatcher.Dispatch(
+                new AttackTargetEvent
+                {
+                    Source = AttackTargetEventSource.DirectImpact,
+                    TargetThing = hit.HitThing,
+                    TargetCell = hit.HitCell,
+                    ExtraEffects = impactPlan.ExtraEffects,
+                    Map = map,
+                    Instigator = launcher,
+                    SourceThing = launchPlan != null ? launchPlan.SourceThing : null,
+                    Projectile = this,
+                    SemanticContext = SemanticContext,
+                    AttackInstanceId = AttackInstanceId,
+                    ResultId = ResultId
+                });
+        }
+
+        /// <summary>
+        /// 判断基线范围伤害是否可以正常执行。
+        /// </summary>
+        private static bool AllowsBaselineDamage(ImpactPlan impactPlan)
+        {
+            return impactPlan != null
+                && impactPlan.DamageDisposition != DamageDisposition.SuppressAllProjectileImpact
+                && impactPlan.DamageDisposition != DamageDisposition.SuppressBaselineImpact;
+        }
+
+        /// <summary>
+        /// 判断模块范围伤害是否可以正常执行。
+        /// </summary>
+        private static bool AllowsModuleAreaDamage(ImpactPlan impactPlan)
+        {
+            return impactPlan != null
+                && impactPlan.DamageDisposition != DamageDisposition.SuppressAllProjectileImpact
+                && impactPlan.DamageDisposition != DamageDisposition.SuppressModuleExtraDamage;
+        }
+
+        /// <summary>
+        /// 判断一次承伤结果是否真正通过了伤害入口。
+        /// </summary>
+        private static bool IsDamageProcessed(DamageResolution resolution)
+        {
+            return resolution != null
+                && resolution.Outcome == DamageResolutionOutcome.DamageProcessed;
+        }
+
+        /// <summary>
+        /// 解析“模块取消伤害但仍需尊重伤害前护盾”的直接命中结果。
+        /// </summary>
+        private DamageResolution ResolveSuppressedDirectImpact(ImpactPlan impactPlan, Thing hitThing)
+        {
+            if (CurrentInteractionPolicy != null
+                && CurrentInteractionPolicy.BypassRegisteredDamageShields)
             {
-                return;
+                return DamageResolutionRuntime.CreateModuleInterception(hitThing);
             }
 
+            DamageInfo probeDamageInfo = BuildDamageInfo(
+                ResolveProbeDamagePlan(impactPlan),
+                hitThing);
+            bool absorbed;
+            bool probed;
+            using (ProjectileInteractionPolicyScope.Push(CurrentInteractionPolicy))
+            using (SemanticRuntimeScope.Push(SemanticContext))
+            {
+                probed = DamageResolutionRuntime.TryProbeDamageInterception(
+                    hitThing,
+                    ref probeDamageInfo,
+                    out absorbed);
+            }
+
+            if (!probed)
+            {
+                return DamageResolutionRuntime.CreateModuleInterception(hitThing);
+            }
+
+            return absorbed
+                ? DamageResolutionRuntime.CreateProjectileInterception(hitThing)
+                : DamageResolutionRuntime.CreateModuleInterception(hitThing);
+        }
+
+        /// <summary>
+        /// 为护盾探针选择一份只用于裁决的伤害计划。
+        /// </summary>
+        private DamagePlan ResolveProbeDamagePlan(ImpactPlan impactPlan)
+        {
+            if (impactPlan != null && impactPlan.DirectDamage != null)
+            {
+                return impactPlan.DirectDamage;
+            }
+
+            if (impactPlan != null && impactPlan.BaselineDirectDamage != null)
+            {
+                return impactPlan.BaselineDirectDamage;
+            }
+
+            return new DamagePlan
+            {
+                DamageDef = base.DamageDef,
+                Amount = DamageAmount,
+                ArmorPenetration = ArmorPenetration,
+                Instigator = launcher,
+                Weapon = launchPlan != null ? launchPlan.SourceThing : null,
+                IntendedTarget = intendedTarget,
+                SemanticContext = SemanticContext
+            };
+        }
+
+        /// <summary>
+        /// 把单条直接伤害计划落回原版伤害系统。
+        /// </summary>
+        private DamageWorker.DamageResult ApplyDirectDamage(
+            DamagePlan damagePlan,
+            Thing hitThing,
+            BattleLogEntry_RangedImpact battleLogEntry,
+            Color? hitFeedbackColorOverride,
+            out DamageResolution resolution)
+        {
+            resolution = null;
+            if (damagePlan == null || hitThing == null)
+            {
+                return new DamageWorker.DamageResult();
+            }
+
+            DamageInfo damageInfo = BuildDamageInfo(damagePlan, hitThing);
+            DamageWorker.DamageResult damageResult;
+            using (ProjectileInteractionPolicyScope.Push(CurrentInteractionPolicy))
+            using (SemanticRuntimeScope.Push(damagePlan.SemanticContext ?? SemanticContext))
+            {
+                damageResult = hitThing.TakeDamage(damageInfo);
+                resolution = DamageResolutionRuntime.ConsumeLast(hitThing);
+                damageResult.AssociateWithLog(battleLogEntry);
+            }
+
+            if (resolution == null)
+            {
+                resolution = new DamageResolution
+                {
+                    TargetThing = hitThing,
+                    Outcome = DamageResolutionOutcome.DamageProcessed,
+                    DamageResult = damageResult
+                };
+            }
+
+            // 只有原版伤害工作器确认实际受伤后，才消费减益模块提交的颜色。
+            // 护盾吸收或 0 伤害都会被结果层挡住，不会污染闪烁颜色。
+            if (hitFeedbackColorOverride.HasValue
+                && damageResult.wounded
+                && hitThing is Pawn hitPawn)
+            {
+                HitFeedbackColorRuntime.Register(hitPawn, hitFeedbackColorOverride.Value);
+            }
+
+            return damageResult;
+        }
+
+        /// <summary>
+        /// 把正式伤害计划转换为原版 DamageInfo（伤害信息）。
+        /// </summary>
+        private DamageInfo BuildDamageInfo(DamagePlan damagePlan, Thing hitThing)
+        {
             bool instigatorGuilty = !(launcher is Pawn pawn) || !pawn.Drafted;
             DamageInfo damageInfo = new DamageInfo(
                 damagePlan.DamageDef ?? base.DamageDef,
@@ -972,22 +1250,129 @@ namespace BDP.Core.Projectiles
                 damagePlan.IntendedTarget.Thing ?? intendedTarget.Thing,
                 instigatorGuilty);
             damageInfo.SetWeaponQuality(equipmentQuality);
+            return damageInfo;
+        }
 
-            using (SemanticRuntimeScope.Push(damagePlan.SemanticContext ?? SemanticContext))
+        /// <summary>
+        /// 仅为完全跳过原版伤害链的无伤害命中补回原版不会自动产生的反馈。
+        /// 普通伤害命中由 DamageWorker（伤害工作器）在 TakeDamage（承受伤害）内部自然触发反馈。
+        /// </summary>
+        internal void ApplySuppressedHitFeedback(
+            Thing hitThing,
+            Color? hitFeedbackColorOverride,
+            bool applyBulletStagger)
+        {
+            Pawn hitPawn = hitThing as Pawn;
+            if (hitPawn == null)
             {
-                hitThing.TakeDamage(damageInfo).AssociateWithLog(battleLogEntry);
+                return;
             }
 
-            (hitThing as Pawn)?.stances?.stagger.Notify_BulletImpact(this);
+            if (hitFeedbackColorOverride.HasValue)
+            {
+                HitFeedbackColorRuntime.Register(hitPawn, hitFeedbackColorOverride.Value);
+            }
+
+            // 原版伤害工作器会先把同一份 DamageInfo（伤害信息）交给 Pawn Drawer（角色绘制器），
+            // 由它触发 JitterHandler（受击抖动器）和受击闪烁；这里用 0 伤害的反馈副本保留视觉，不回灌伤害。
+            bool instigatorGuilty = !(launcher is Pawn pawn) || !pawn.Drafted;
+            DamageInfo feedbackDamageInfo = new DamageInfo(
+                base.DamageDef,
+                0f,
+                ArmorPenetration,
+                ExactRotation.eulerAngles.y,
+                launcher,
+                null,
+                equipmentDef,
+                DamageInfo.SourceCategory.ThingOrUnknown,
+                intendedTarget.Thing,
+                instigatorGuilty);
+            feedbackDamageInfo.SetWeaponQuality(equipmentQuality);
+            hitPawn.Drawer?.Notify_DamageApplied(feedbackDamageInfo);
+
+            // 受击僵直与受击抖动是两个独立的原版反馈，均不等同于伤害本体。
+            if (applyBulletStagger)
+            {
+                hitPawn.stances?.stagger.Notify_BulletImpact(this);
+            }
+        }
+
+        /// <summary>
+        /// 解析直接命中入口是否有适用的命中反馈颜色。
+        /// 攻击生产者存在时，AttackTargetEvents（攻击目标事件）只由生产者逐目标消费，
+        /// 不把生产者的直接撞击点额外当作同一范围目标事件。
+        /// </summary>
+        private static Color? ResolveDirectHitFeedbackColor(
+            ImpactPlan impactPlan,
+            bool hasAttackTargetProducer)
+        {
+            if (impactPlan == null || !impactPlan.HasHitFeedbackColor)
+            {
+                return null;
+            }
+
+            if (impactPlan.HitFeedbackTargetScope == ExtraEffectTargetScope.DirectHitThing
+                || (impactPlan.HitFeedbackTargetScope == ExtraEffectTargetScope.AttackTargetEvents
+                    && !hasAttackTargetProducer))
+            {
+                return impactPlan.HitFeedbackColor;
+            }
+
+            return null;
         }
 
         /// <summary>
         /// 把区域效果计划落回原版爆炸系统。
         /// </summary>
-        private void ApplyAreaEffect(AreaEffectPlan areaEffectPlan, Map map)
+        private void ApplyAreaEffect(
+            AreaEffectPlan areaEffectPlan,
+            Map map,
+            ImpactPlan impactPlan,
+            bool isBaselineAreaEffect)
         {
+            ExplosionPresentationPolicy presentationPolicy = impactPlan != null
+                && impactPlan.AreaPresentationPolicyOverride != null
+                ? impactPlan.AreaPresentationPolicyOverride
+                : areaEffectPlan.PresentationPolicy;
+            bool suppressCurrentAreaDamage = impactPlan != null
+                && (impactPlan.DamageDisposition == DamageDisposition.SuppressAllProjectileImpact
+                    || (isBaselineAreaEffect && impactPlan.DamageDisposition == DamageDisposition.SuppressBaselineImpact)
+                    || (!isBaselineAreaEffect && impactPlan.DamageDisposition == DamageDisposition.SuppressModuleExtraDamage));
+            ExplosionImpactDispatchContext impactContext = impactPlan != null
+                ? new ExplosionImpactDispatchContext
+                {
+                    ExtraEffects = impactPlan.ExtraEffects,
+                    SuppressCurrentAreaDamage = suppressCurrentAreaDamage,
+                    Instigator = areaEffectPlan.Instigator ?? launcher,
+                    SourceThing = areaEffectPlan.Weapon ?? (launchPlan != null ? launchPlan.SourceThing : null),
+                    Projectile = this,
+                    Map = map,
+                    SemanticContext = areaEffectPlan.SemanticContext ?? SemanticContext,
+                    AttackInstanceId = AttackInstanceId,
+                    ResultId = ResultId,
+                    HasHitFeedbackColor = impactPlan.HasHitFeedbackColor,
+                     HitFeedbackColor = impactPlan.HitFeedbackColor,
+                     HitFeedbackTargetScope = impactPlan.HitFeedbackTargetScope,
+                     InterceptedHitFeedback = impactPlan.InterceptedHitFeedback,
+                     PresentationPolicy = presentationPolicy != null ? presentationPolicy.Clone() : null,
+                     InteractionPolicy = CurrentInteractionPolicy != null ? CurrentInteractionPolicy.Clone() : null,
+                     DamageDef = areaEffectPlan.DamageDef ?? base.DamageDef,
+                     DamageAmount = areaEffectPlan.DamageAmount,
+                     ArmorPenetration = areaEffectPlan.ArmorPenetration,
+                     IntendedTarget = intendedTarget
+                 }
+                : null;
+
+            using (ProjectileInteractionPolicyScope.Push(CurrentInteractionPolicy))
+            using (ExplosionImpactRuntimeScope.Push(impactContext))
             using (SemanticRuntimeScope.Push(areaEffectPlan.SemanticContext ?? SemanticContext))
             {
+                bool doVisualEffects = def.projectile.doExplosionVFX
+                    && (presentationPolicy == null || !presentationPolicy.SuppressVanillaVisualEffects);
+                bool doSoundEffects = presentationPolicy == null || !presentationPolicy.SuppressVanillaSoundEffects;
+                float screenShakeFactor = presentationPolicy != null && presentationPolicy.OverrideScreenShakeFactor
+                    ? presentationPolicy.ScreenShakeFactor
+                    : def.projectile.screenShakeFactor;
                 GenExplosion.DoExplosion(
                     areaEffectPlan.Center,
                     map,
@@ -1015,12 +1400,12 @@ namespace BDP.Core.Projectiles
                     origin.AngleToFlat(destination),
                     null,
                     null,
-                    def.projectile.doExplosionVFX,
+                    doVisualEffects,
                     base.DamageDef.expolosionPropagationSpeed,
                     0f,
-                    true,
+                    doSoundEffects,
                     def.projectile.postExplosionSpawnThingDefWater,
-                    def.projectile.screenShakeFactor,
+                    screenShakeFactor,
                     null,
                     null,
                     def.projectile.postExplosionSpawnSingleThingDef,
@@ -1143,7 +1528,14 @@ namespace BDP.Core.Projectiles
             visualAttachmentsTerminated = false;
             visualAttachmentHost.Initialize(
                 def,
-                launchPlan != null ? launchPlan.VisualAttachmentProviderDefs : null);
+                launchPlan != null ? launchPlan.VisualAttachmentProviderDefs : null,
+                new ProjectileVisualAppearanceOverrides(
+                    launchPlan != null && launchPlan.HasTrailColorOverride,
+                    launchPlan != null ? launchPlan.TrailColorOverride : Color.white,
+                    launchPlan != null && launchPlan.HasTrailCoreOverride,
+                    launchPlan != null ? launchPlan.TrailCoreColorOverride : Color.black,
+                    launchPlan != null ? launchPlan.TrailCoreWidthRatioOverride : 0.45f,
+                    launchPlan != null ? launchPlan.TrailCoreOpacityOverride : 1f));
         }
 
         /// <summary>

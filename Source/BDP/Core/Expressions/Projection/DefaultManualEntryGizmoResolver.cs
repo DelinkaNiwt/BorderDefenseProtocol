@@ -133,13 +133,23 @@ namespace BDP.Core.Expressions
                 iconTexture,
                 targetingSource,
                 manualEntryGroupId);
-            PawnRequirementCheckResult requirementCheck =
-                ComboUseRequirementService.Instance.Evaluate(pawn, result.ComboDefName);
-            if (!string.IsNullOrWhiteSpace(result.ComboDefName) && !requirementCheck.Satisfied)
+            // 原版武器按钮优先检查“禁止暴力”；BDP 攻击入口必须保持相同顺序，
+            // 避免按钮仍可进入目标选择，或被较次要的 Combo 条件遮盖真实禁用原因。
+            if (pawn.WorkTagIsDisabled(WorkTags.Violent))
             {
-                string disabledReason =
-                    ComboUseRequirementService.Instance.BuildFailureText(requirementCheck);
-                command.DisableForUseRequirements(disabledReason);
+                command.DisableForUseRequirements(
+                    "IsIncapableOfViolence".Translate(pawn.LabelShort, pawn));
+            }
+            else
+            {
+                PawnRequirementCheckResult requirementCheck =
+                    ComboUseRequirementService.Instance.Evaluate(pawn, result.ComboDefName);
+                if (!string.IsNullOrWhiteSpace(result.ComboDefName) && !requirementCheck.Satisfied)
+                {
+                    string disabledReason =
+                        ComboUseRequirementService.Instance.BuildFailureText(requirementCheck);
+                    command.DisableForUseRequirements(disabledReason);
+                }
             }
 
             return command;
@@ -391,8 +401,9 @@ namespace BDP.Core.Expressions
         /// </summary>
         private static string GetDisplayLabel(FormalExpressionResult result)
         {
-            return result != null && !string.IsNullOrWhiteSpace(result.DisplayLabel)
-                ? result.DisplayLabel
+            string resolvedLabel = ExpressionDisplayLabelResolver.Resolve(result);
+            return !string.IsNullOrWhiteSpace(resolvedLabel)
+                ? resolvedLabel
                 : "(未命名表达)";
         }
     }

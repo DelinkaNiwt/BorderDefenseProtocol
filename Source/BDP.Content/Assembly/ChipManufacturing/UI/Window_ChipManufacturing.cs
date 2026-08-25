@@ -27,7 +27,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
         /// <summary>顶部主分类按钮高度。</summary>
         private const float CategoryTabsHeight = 32f;
 
-        /// <summary>武装职业按钮高度。</summary>
+        /// <summary>职业路径按钮高度。</summary>
         private const float ProfessionTabsHeight = 28f;
 
         /// <summary>三栏之间的固定空隙。</summary>
@@ -39,10 +39,10 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
         /// <summary>右栏占主体宽度的比例。</summary>
         private const float RightColumnRatio = 0.25f;
 
-        /// <summary>左栏枪壳与动作条目的统一紧凑行高。</summary>
+        /// <summary>左栏武装型与动作条目的统一紧凑行高。</summary>
         private const float PresetRowHeight = 30f;
 
-        /// <summary>枪手左栏始终为动作列表保留的最小高度。</summary>
+        /// <summary>左栏始终为动作列表保留的最小高度。</summary>
         private const float MinimumActionSectionHeight = 120f;
 
         /// <summary>右栏始终为队列标题与至少一部分内容保留的最小高度。</summary>
@@ -58,8 +58,8 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
         private readonly ChipManufacturingEditorState editorState =
             new ChipManufacturingEditorState();
 
-        /// <summary>枪壳列表滚动位置。</summary>
-        private Vector2 gunShellScroll;
+        /// <summary>武装型列表滚动位置。</summary>
+        private Vector2 armamentFormScroll;
 
         /// <summary>动作列表滚动位置。</summary>
         private Vector2 actionScroll;
@@ -109,6 +109,12 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
         {
             Rect root = inRect;
             float y = DrawCategoryTabs(new Rect(root.x, root.y, root.width, CategoryTabsHeight));
+            if (!isOverview && editorState.CurrentDraft == null)
+            {
+                OpenOverview();
+                return;
+            }
+
             if (!isOverview && IsWeapon(editorState.CurrentCategory))
             {
                 y += DrawProfessionTabs(new Rect(
@@ -139,7 +145,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
                     ChipManufacturingListModel.GetCategories(),
                     OpenCategory,
                     queuePanel,
-                    () => isOverview = false);
+                    OpenLoadedConfiguration);
                 return;
             }
 
@@ -163,7 +169,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
                 new Rect(rect.x, rect.y, width - 3f, rect.height),
                 "BDP_ChipManufacturing_OverviewTab".Translate(),
                 isOverview,
-                () => isOverview = true);
+                OpenOverview);
             for (int index = 0; index < categories.Count; index++)
             {
                 ChipCategoryDef category = categories[index];
@@ -208,12 +214,27 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             }
         }
 
-        /// <summary>绘制四个固定顺序职业按钮，并返回占用高度。</summary>
+        /// <summary>绘制武装分类的职业路径，并返回占用高度。</summary>
         private float DrawProfessionTabs(Rect rect)
         {
             List<ChipProfessionDef> professions = ChipManufacturingListModel.GetProfessions();
-            DrawDefTabs(rect, professions, editorState.CurrentProfession, profession =>
-                editorState.Switch(editorState.CurrentCategory, profession));
+            int tabCount = professions.Count;
+            if (tabCount <= 0)
+            {
+                return 0f;
+            }
+
+            float width = rect.width / tabCount;
+            for (int index = 0; index < professions.Count; index++)
+            {
+                ChipProfessionDef profession = professions[index];
+                DrawNavigationTab(
+                    new Rect(rect.x + width * index, rect.y, width - 3f, rect.height),
+                    profession.LabelCap,
+                    editorState.CurrentProfession == profession,
+                    () => editorState.Switch(editorState.CurrentCategory, profession));
+            }
+
             return ProfessionTabsHeight;
         }
 
@@ -225,12 +246,29 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
                 return;
             }
 
-            isOverview = false;
+            List<ChipProfessionDef> professions = ChipManufacturingListModel.GetProfessions();
             ChipProfessionDef profession = IsWeapon(category)
-                ? editorState.CurrentProfession
-                    ?? FirstOrNull(ChipManufacturingListModel.GetProfessions())
+                ? professions.Contains(editorState.CurrentProfession)
+                    ? editorState.CurrentProfession
+                    : FirstOrNull(professions)
                 : null;
             editorState.Switch(category, profession);
+            isOverview = false;
+        }
+
+        /// <summary>回到总览页；当前编辑草稿仍由本轮会话保留。</summary>
+        private void OpenOverview()
+        {
+            isOverview = true;
+        }
+
+        /// <summary>仅在成功载入并建立当前草稿后离开总览页。</summary>
+        private void OpenLoadedConfiguration()
+        {
+            if (editorState.CurrentDraft != null)
+            {
+                isOverview = false;
+            }
         }
 
         /// <summary>绘制一组等宽 Def 页签按钮。</summary>
@@ -272,29 +310,31 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             Widgets.DrawLineHorizontal(rect.x, rect.yMax - 1f, rect.width);
         }
 
-        /// <summary>绘制左栏；枪手枪壳区始终位于动作列表上方。</summary>
+        /// <summary>绘制左栏；存在可见武装型时将其放在动作列表上方。</summary>
         private void DrawLeftColumn(Rect rect)
         {
             Widgets.DrawMenuSection(rect);
             Rect inner = rect.ContractedBy(8f);
             float y = inner.y;
-            if (IsGunner(editorState.CurrentProfession))
+            List<ChipArmamentFormDef> forms =
+                ChipManufacturingListModel.GetArmamentForms(
+                    editorState.CurrentProfession,
+                    ResolveSelectedActions());
+            if (forms.Count > 0)
             {
-                List<ChipGunShellDef> shells =
-                    ChipManufacturingListModel.GetGunShells(editorState.CurrentProfession);
-                float desiredGunShellHeight = 26f + shells.Count * PresetRowHeight;
-                float availableGunShellHeight = Mathf.Max(
+                float desiredArmamentFormHeight = 26f + forms.Count * PresetRowHeight;
+                float availableArmamentFormHeight = Mathf.Max(
                     0f,
                     inner.height - MinimumActionSectionHeight - 8f);
-                float gunShellHeight = Mathf.Min(
-                    desiredGunShellHeight,
-                    availableGunShellHeight);
-                if (gunShellHeight >= 24f)
+                float armamentFormHeight = Mathf.Min(
+                    desiredArmamentFormHeight,
+                    availableArmamentFormHeight);
+                if (armamentFormHeight >= 24f)
                 {
-                    DrawGunShellSection(
-                        new Rect(inner.x, y, inner.width, gunShellHeight),
-                        shells);
-                    y += gunShellHeight + 8f;
+                    DrawArmamentFormSection(
+                        new Rect(inner.x, y, inner.width, armamentFormHeight),
+                        forms);
+                    y += armamentFormHeight + 8f;
                 }
             }
 
@@ -305,10 +345,10 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
                 Mathf.Max(0f, inner.yMax - y)));
         }
 
-        /// <summary>绘制枪壳标题与可滚动条目。</summary>
-        private void DrawGunShellSection(
+        /// <summary>绘制武装型标题与可滚动条目。</summary>
+        private void DrawArmamentFormSection(
             Rect rect,
-            List<ChipGunShellDef> shells)
+            List<ChipArmamentFormDef> forms)
         {
             if (rect.width <= 0f || rect.height < 24f)
             {
@@ -316,22 +356,22 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             }
 
             Widgets.Label(new Rect(rect.x, rect.y, rect.width, 24f),
-                "BDP_ChipManufacturing_GunShellSection".Translate());
+                "BDP_ChipManufacturing_ArmamentFormSection".Translate());
             Rect outRect = new Rect(rect.x, rect.y + 24f, rect.width, rect.height - 24f);
             Rect viewRect = new Rect(0f, 0f, outRect.width - 16f,
-                Mathf.Max(outRect.height, shells.Count * PresetRowHeight));
-            Widgets.BeginScrollView(outRect, ref gunShellScroll, viewRect);
-            for (int index = 0; index < shells.Count; index++)
+                Mathf.Max(outRect.height, forms.Count * PresetRowHeight));
+            Widgets.BeginScrollView(outRect, ref armamentFormScroll, viewRect);
+            for (int index = 0; index < forms.Count; index++)
             {
-                ChipGunShellDef shell = shells[index];
-                bool selected = editorState.CurrentDraft.Record.GunShellDefName == shell.defName;
+                ChipArmamentFormDef form = forms[index];
+                bool selected = editorState.CurrentDraft.Record.ArmamentFormDefName == form.defName;
                 DrawPresetRow(
                     new Rect(0f, index * PresetRowHeight, viewRect.width, PresetRowHeight - 2f),
-                    shell,
+                    form,
                     selected,
                     true,
                     null,
-                    () => editorState.CurrentDraft.SelectGunShell(selected ? null : shell));
+                    () => editorState.CurrentDraft.SelectArmamentForm(selected ? null : form));
             }
             Widgets.EndScrollView();
         }
@@ -361,7 +401,9 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
 
             List<ChipActionPresetDef> actions = ChipManufacturingListModel.GetActions(
                 editorState.CurrentCategory,
-                editorState.CurrentProfession);
+                editorState.CurrentProfession,
+                ChipManufacturingDefLookup.FindArmamentForm(
+                    editorState.CurrentDraft.Record.ArmamentFormDefName));
             Rect viewRect = new Rect(0f, 0f, outRect.width - 16f,
                 Mathf.Max(outRect.height, actions.Count * PresetRowHeight));
             Widgets.BeginScrollView(outRect, ref actionScroll, viewRect);
@@ -399,6 +441,29 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             Widgets.EndScrollView();
         }
 
+        /// <summary>按草稿顺序解析当前已选动作，供构型适用范围筛选复用。</summary>
+        private List<ChipActionPresetDef> ResolveSelectedActions()
+        {
+            List<ChipActionPresetDef> result = new List<ChipActionPresetDef>();
+            IList<string> names = editorState.CurrentDraft?.Record?.OrderedActionPresetDefNames;
+            if (names == null)
+            {
+                return result;
+            }
+
+            for (int index = 0; index < names.Count; index++)
+            {
+                ChipActionPresetDef action =
+                    ChipManufacturingDefLookup.FindAction(names[index]);
+                if (action != null)
+                {
+                    result.Add(action);
+                }
+            }
+
+            return result;
+        }
+
         /// <summary>绘制预设行；行本体选择，i 按钮只打开信息卡。</summary>
         private static void DrawPresetRow(
             Rect rect,
@@ -425,7 +490,9 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
 
             Rect infoRect = new Rect(rect.xMax - 28f, rect.y + 3f, 26f, 26f);
             Rect bodyRect = new Rect(rect.x, rect.y, rect.width - 32f, rect.height);
-            Widgets.Label(bodyRect.ContractedBy(6f, 2f), preset.LabelCap);
+            Widgets.Label(
+                bodyRect.ContractedBy(6f, 2f),
+                ChipPresetLabelResolver.Resolve(preset));
             if (enabled && Widgets.ButtonInvisible(bodyRect))
             {
                 onClicked();
@@ -445,7 +512,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             }
         }
 
-        /// <summary>从统一解析结果绘制芯片规格、枪壳修正和动作属性。</summary>
+        /// <summary>从统一解析结果绘制芯片规格、武装型修正和动作属性。</summary>
         private void DrawMiddleColumn(Rect rect)
         {
             ChipCombinationResolution resolution = editorState.CurrentDraft != null
@@ -488,16 +555,10 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             queuePanel.Draw(queueRect, building, editorState);
         }
 
-        /// <summary>判断当前主分类是否为武装。</summary>
+        /// <summary>判断当前分类是否为唯一使用职业筛选的武装分类。</summary>
         private static bool IsWeapon(ChipCategoryDef category)
         {
             return category?.defName == "BDP_ChipCategory_Weapon";
-        }
-
-        /// <summary>判断当前职业是否为枪手。</summary>
-        private static bool IsGunner(ChipProfessionDef profession)
-        {
-            return profession?.defName == "BDP_ChipProfession_Gunner";
         }
 
         /// <summary>读取列表首项或 null。</summary>

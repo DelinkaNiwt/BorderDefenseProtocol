@@ -37,6 +37,11 @@ namespace BDP.Core.Expressions
         public string VisualPresetDefName { get; set; }
 
         /// <summary>
+        /// 当前单侧结果对基础视觉图层的局部覆盖预设 DefName。
+        /// </summary>
+        public string VisualGraphicOverrideDefName { get; set; }
+
+        /// <summary>
         /// 当前结果参与复合表达时使用的视觉预设 DefName。
         /// 它用于组合/双持表象覆写，不改变单侧结果自身身份。
         /// </summary>
@@ -65,7 +70,11 @@ namespace BDP.Core.Expressions
         /// </summary>
         public bool HasVisualPreset
         {
-            get { return !string.IsNullOrWhiteSpace(VisualPresetDefName); }
+            get
+            {
+                return !string.IsNullOrWhiteSpace(VisualPresetDefName)
+                    || !string.IsNullOrWhiteSpace(VisualGraphicOverrideDefName);
+            }
         }
     }
 }

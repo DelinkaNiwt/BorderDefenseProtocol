@@ -33,6 +33,11 @@ namespace BDP.Core.Trigger
             {
                 runtimeCoordinator = new TriggerRuntimeCoordinator(this);
             }
+
+            if (activationAudioController == null)
+            {
+                activationAudioController = new TriggerActivationAudioController();
+            }
         }
 
         /// <summary>
@@ -213,6 +218,14 @@ namespace BDP.Core.Trigger
         }
 
         /// <summary>
+        /// 读取某个芯片的激活音效声明结果。
+        /// </summary>
+        private BDP.Core.Chips.ChipActivationAudioContract GetChipActivationAudio(Thing chip)
+        {
+            return triggerService.GetChipActivationAudio(chip);
+        }
+
+        /// <summary>
         /// 把某个槽位归一到真正受控的槽位上。
         /// </summary>
         private TriggerSlotState NormalizeDirectControlSlot(TriggerSlotState slot)
@@ -309,11 +322,12 @@ namespace BDP.Core.Trigger
                     slot.BindingPartnerIndex);
             }
 
-            // 当前形态属于正式投影输入的一部分。
-            // 必须在绑定关系之后写入，确保镜像槽仍保持无独立形态。
+            // 当前形态与姿态共同属于正式投影输入。
+            // 必须在绑定关系之后写入，确保镜像槽仍保持无独立选择真值。
             if (!clone.IsBindingMirror)
             {
                 clone.SetCurrentModeKey(slot.CurrentModeKey);
+                clone.SetCurrentStanceKey(slot.CurrentStanceKey);
             }
 
             return clone;

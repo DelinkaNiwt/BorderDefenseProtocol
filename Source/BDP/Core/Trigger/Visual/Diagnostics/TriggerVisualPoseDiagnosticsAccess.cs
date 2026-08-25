@@ -18,6 +18,12 @@ namespace BDP.Core.Trigger.Visual.Diagnostics
         private static readonly VisualPoseResolver VisualPoseResolver = new VisualPoseResolver();
 
         /// <summary>
+        /// 当前诊断入口复用的武器动作阶段解析器。
+        /// </summary>
+        private static readonly WeaponVisualStageResolver WeaponVisualStageResolver =
+            new WeaponVisualStageResolver();
+
+        /// <summary>
         /// 捕获指定 Pawn 当前 Trigger 视觉姿态诊断快照。
         /// 它是纯只读入口，不修改任何运行时状态。
         /// </summary>
@@ -161,6 +167,7 @@ namespace BDP.Core.Trigger.Visual.Diagnostics
             {
                 VisualResidentEntry residentEntry = visualProjection.ResidentEntries[i];
                 snapshot.Residents.Add(CaptureResidentSnapshot(
+                    pawn,
                     triggerBody,
                     visualProjection,
                     runtimeState,
@@ -175,6 +182,7 @@ namespace BDP.Core.Trigger.Visual.Diagnostics
         /// 捕获单个常驻视觉条目的诊断快照。
         /// </summary>
         private static TriggerVisualResidentPoseDiagnosticsSnapshot CaptureResidentSnapshot(
+            Pawn pawn,
             CompTriggerBody triggerBody,
             VisualExpressionProjection visualProjection,
             TriggerVisualRuntimeState runtimeState,
@@ -187,6 +195,7 @@ namespace BDP.Core.Trigger.Visual.Diagnostics
                 Side = residentEntry != null ? residentEntry.Side : TriggerSide.Main,
                 SlotIndex = residentEntry != null ? residentEntry.SlotIndex : -1,
                 VisualPresetDefName = residentEntry != null ? residentEntry.VisualPresetDefName : null,
+                VisualGraphicOverrideDefName = residentEntry != null ? residentEntry.VisualGraphicOverrideDefName : null,
                 CompositeVisualPresetDefName = residentEntry != null ? residentEntry.CompositeVisualPresetDefName : null,
                 ResolvedPresetDefName = null,
                 HasPreset = false,
@@ -194,6 +203,10 @@ namespace BDP.Core.Trigger.Visual.Diagnostics
                 SourceThingLabel = null,
                 IsExecutionActive = ResolveExecutionActive(visualProjection, runtimeState, residentEntry),
                 IsMuzzleActive = ResolveMuzzleActive(visualProjection, runtimeState, residentEntry),
+                WeaponActionStage = WeaponVisualActionStage.Idle.ToString(),
+                WeaponStageProgress01 = 0f,
+                WeaponStageTicksRemaining = 0,
+                WeaponStageVisible = true,
                 HasResolvedPose = false,
                 ResolvedDrawPosition = Vector3.zero,
                 ResolvedDrawAngle = 0f,
@@ -201,6 +214,9 @@ namespace BDP.Core.Trigger.Visual.Diagnostics
                 DrawScale = 1f,
                 AimMirror = false,
                 HandMirror = false,
+                HasGripAnchor = false,
+                GripWorldPosition = Vector3.zero,
+                GripLocalOffset = Vector3.zero,
                 HasMuzzleAnchor = false,
                 MuzzleWorldPosition = Vector3.zero,
                 MuzzleLocalOffset = Vector3.zero
@@ -227,6 +243,23 @@ namespace BDP.Core.Trigger.Visual.Diagnostics
                 return snapshot;
             }
 
+            WeaponVisualStageSnapshot weaponStageSnapshot = WeaponVisualStageResolver.Resolve(
+                pawn,
+                residentEntry,
+                triggerBody.PublishedCombatProjection,
+                runtimeState);
+            WeaponVisualActionStage weaponStage = weaponStageSnapshot != null
+                ? weaponStageSnapshot.Stage
+                : WeaponVisualActionStage.Idle;
+            snapshot.WeaponActionStage = weaponStage.ToString();
+            snapshot.WeaponStageProgress01 = weaponStageSnapshot != null
+                ? weaponStageSnapshot.Progress01
+                : 0f;
+            snapshot.WeaponStageTicksRemaining = weaponStageSnapshot != null
+                ? weaponStageSnapshot.StageTicksRemaining
+                : 0;
+            snapshot.WeaponStageVisible = preset.ResolveStageVisibility(weaponStage);
+
             FillPresetConfigSnapshot(snapshot, preset);
 
             if (!rootSnapshot.HasPoseSample || !rootSnapshot.PoseSampleMatchesProjection)
@@ -238,14 +271,18 @@ namespace BDP.Core.Trigger.Visual.Diagnostics
             {
                 Entry = residentEntry,
                 Preset = preset,
+                GraphicOverridePreset = ResolveGraphicOverridePreset(residentEntry),
                 RuntimeState = runtimeState,
+                WeaponStageSnapshot = weaponStageSnapshot,
                 PoseSample = runtimeState != null ? runtimeState.EquipmentPoseSample : null,
                 SourceThing = sourceThing,
                 EquippedAngleOffset = rootSnapshot.EquippedAngleOffset,
                 IsExecutionActive = snapshot.IsExecutionActive,
                 IsMuzzleActive = snapshot.IsMuzzleActive
             };
-            ResolvedVisualPose resolvedPose = VisualPoseResolver.Resolve(request);
+            ResolvedVisualPose resolvedPose = visualProjection.HostEquipmentRenderMode == HostEquipmentRenderMode.ReplaceTextureOnly
+                ? VisualPoseResolver.ResolveTextureOnly(request)
+                : VisualPoseResolver.Resolve(request);
             if (resolvedPose == null || !resolvedPose.IsValid)
             {
                 return snapshot;
@@ -258,6 +295,13 @@ namespace BDP.Core.Trigger.Visual.Diagnostics
             snapshot.DrawScale = resolvedPose.DrawScale;
             snapshot.AimMirror = resolvedPose.AimMirror;
             snapshot.HandMirror = resolvedPose.HandMirror;
+            snapshot.HasGripAnchor = resolvedPose.GripAnchor != null && resolvedPose.GripAnchor.IsValid;
+            snapshot.GripWorldPosition = resolvedPose.GripAnchor != null
+                ? resolvedPose.GripAnchor.WorldPosition
+                : Vector3.zero;
+            snapshot.GripLocalOffset = resolvedPose.GripAnchor != null
+                ? resolvedPose.GripAnchor.LocalOffset
+                : Vector3.zero;
             snapshot.HasMuzzleAnchor = resolvedPose.MuzzleAnchor != null && resolvedPose.MuzzleAnchor.IsValid;
             snapshot.MuzzleWorldPosition = resolvedPose.MuzzleAnchor != null
                 ? resolvedPose.MuzzleAnchor.WorldPosition
@@ -293,6 +337,7 @@ namespace BDP.Core.Trigger.Visual.Diagnostics
             snapshot.SouthNorthMirrorOnNorth = southNorthPose.MirrorOnNorth;
 
             snapshot.SideBaseX = eastWestPose.SideBaseX;
+            snapshot.SideBaseZ = eastWestPose.SideBaseZ;
             snapshot.SideDeltaX = eastWestPose.SideDeltaX;
             snapshot.SideDeltaZ = eastWestPose.SideDeltaZ;
             snapshot.FrontAltitudeOffset = eastWestPose.FrontAltitudeOffset;
@@ -319,6 +364,19 @@ namespace BDP.Core.Trigger.Visual.Diagnostics
             }
 
             return entry != null ? entry.VisualPresetDefName : null;
+        }
+
+        /// <summary>
+        /// 解析当前 resident 条目的视觉图层局部覆盖预设。
+        /// </summary>
+        private static ExpressionVisualPresetDef ResolveGraphicOverridePreset(
+            VisualResidentEntry entry)
+        {
+            return entry == null || string.IsNullOrWhiteSpace(entry.VisualGraphicOverrideDefName)
+                ? null
+                : DefDatabase<ExpressionVisualPresetDef>.GetNamed(
+                    entry.VisualGraphicOverrideDefName,
+                    false);
         }
 
         /// <summary>

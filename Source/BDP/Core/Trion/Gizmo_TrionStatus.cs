@@ -408,11 +408,11 @@ namespace BDP.Core.Trion
 
         /// <summary>
         /// 构建顶部右侧速率文案。
-        /// 未正式锁定时显示恢复，正式锁定后显示消耗。
+        /// 存在正式持续消耗时显示消耗，否则显示自然恢复。
         /// </summary>
         private string BuildRateText()
         {
-            if (reader.Allocated > 0f)
+            if (reader.TotalDrainPerSecond > 0f)
             {
                 return "BDP_Trion_Status_Drain".Translate(
                     reader.TotalDrainPerSecond.ToString("F1"));

@@ -10,14 +10,14 @@ namespace BDP.Core.CombatBody.Wounds.Presentation
     public interface ICombatBodyWoundPresentationProvider
     {
         /// <summary>
-        /// 保存提供器自己的轻量表现状态。
+        /// 保存当前 Pawn 对应的轻量表现状态。
         /// </summary>
-        void ExposeData();
+        void ExposeData(Pawn pawn);
 
         /// <summary>
-        /// 清除当前战斗体派生出的全部表现运行时。
+        /// 清除当前 Pawn 的全部战斗体派生表现运行时。
         /// </summary>
-        void ClearAll();
+        void ClearAll(Pawn pawn);
 
         /// <summary>
         /// 通知一个伤口进入有效的伤口运行时生命周期。
@@ -27,7 +27,7 @@ namespace BDP.Core.CombatBody.Wounds.Presentation
         /// <summary>
         /// 通知一个伤口的派生 Trion 流失生命周期已经结束。
         /// </summary>
-        void NotifyWoundDrainExpired(int hediffLoadId);
+        void NotifyWoundDrainExpired(Pawn pawn, int hediffLoadId);
 
         /// <summary>
         /// 通知一个伤口从 Pawn 身上移除。

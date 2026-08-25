@@ -103,4 +103,4 @@ Assert-True (
     ($compositeResolverText -match 'material\.Side\s*!=\s*side')
 ) 'CompositeExpressionResolver must resolve combo source materials by active side material, not by requiring an already-published side result.'
 
-Write-Output 'SenkuKogetsuTrionFollowChipSubSmokeTests PASS'
+Write-Output 'SenkuKogetsuTrionFollowSecondSourceSmokeTests PASS'

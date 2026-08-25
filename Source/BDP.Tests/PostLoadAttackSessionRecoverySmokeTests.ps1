@@ -24,6 +24,7 @@ $slotStatePath = Join-Path $repoRoot 'Source\BDP\Core\Trigger\State\TriggerSlotS
 $equipmentTickPatchPath = Join-Path $repoRoot 'Source\BDP\Patches\Patch_Pawn_EquipmentTracker_EquipmentTrackerTick.cs'
 $expressionSurfacePath = Join-Path $repoRoot 'Source\BDP\Core\Expressions\Access\Surfaces\ExpressionFormalSurfaces.cs'
 $bodyPath = Join-Path $repoRoot 'Source\BDP\Core\Trigger\State\CompTriggerBody.cs'
+$weaponVisualStageResolverPath = Join-Path $repoRoot 'Source\BDP\Core\Trigger\Visual\WeaponVisualStageResolver.cs'
 
 Assert-True (
     Test-Path -LiteralPath $recoveryPath
@@ -32,6 +33,10 @@ Assert-True (
 Assert-True (
     Test-Path -LiteralPath $pawnPatchPath
 ) 'BDP must hook Pawn.ExposeData for post-load attack-session recovery.'
+
+Assert-True (
+    Test-Path -LiteralPath $weaponVisualStageResolverPath
+) 'Weapon visual stage recovery must remain a read-only view over restored combat truth.'
 
 $recoveryText = Get-Content -LiteralPath $recoveryPath -Raw -Encoding utf8
 $pawnPatchText = Get-Content -LiteralPath $pawnPatchPath -Raw -Encoding utf8
@@ -43,6 +48,7 @@ $slotStateText = Get-Content -LiteralPath $slotStatePath -Raw -Encoding utf8
 $equipmentTickPatchText = Get-Content -LiteralPath $equipmentTickPatchPath -Raw -Encoding utf8
 $expressionSurfaceText = Get-Content -LiteralPath $expressionSurfacePath -Raw -Encoding utf8
 $bodyText = Get-Content -LiteralPath $bodyPath -Raw -Encoding utf8
+$weaponVisualStageResolverText = Get-Content -LiteralPath $weaponVisualStageResolverPath -Raw -Encoding utf8
 
 Assert-True (
     $pawnPatchText -match 'HarmonyPatch\(typeof\(Pawn\), nameof\(Pawn\.ExposeData\)\)'
@@ -145,5 +151,11 @@ Assert-True (
 Assert-True (
     $slotStateText -notmatch 'RestoreLoadedChipReference\(Thing chip\)[\s\S]*if \(loadedChip == null\)[\s\S]*isActive = false;'
 ) 'TriggerSlotState must not clear the saved active state just because the chip reference is temporarily unresolved during post-load restore.'
+
+Assert-True (
+    ($weaponVisualStageResolverText -notmatch 'Scribe') -and
+    ($weaponVisualStageResolverText -match 'HostSessionToken') -and
+    ($weaponVisualStageResolverText -match 'CompositeReferenceIndex')
+) 'Weapon visual stages must not add persistence; the post-load fallback may only read the restored formal-host token and published projection.'
 
 Write-Output 'PostLoadAttackSessionRecoverySmokeTests PASS'

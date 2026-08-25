@@ -7,8 +7,9 @@ $modRoot = Get-BdpModRoot
 $billPath = Join-Path $modRoot "Source\BDP.Content\Assembly\ChipManufacturing\Bill\Bill_ChipProduction.cs"
 $unfinishedPath = Join-Path $modRoot "Source\BDP.Content\Assembly\Thing\Thing_UnfinishedChip.cs"
 $compPath = Join-Path $modRoot "Source\BDP.Content\Assembly\ChipManufacturing\Thing\CompManufacturedChip.cs"
+$recordPath = Join-Path $modRoot "Source\BDP.Content\Assembly\ChipManufacturing\Model\ChipCombinationRecord.cs"
 
-foreach ($path in @($billPath, $unfinishedPath, $compPath))
+foreach ($path in @($billPath, $unfinishedPath, $compPath, $recordPath))
 {
     Assert-True (Test-Path -LiteralPath $path) "缺少持久化数据链文件：$path"
 }
@@ -16,6 +17,7 @@ foreach ($path in @($billPath, $unfinishedPath, $compPath))
 $billText = Get-Utf8Text $billPath
 $unfinishedText = Get-Utf8Text $unfinishedPath
 $compText = Get-Utf8Text $compPath
+$recordText = Get-Utf8Text $recordPath
 
 Assert-True ($billText -match 'class\s+Bill_ChipProduction\s*:\s*Bill_ProductionWithUft') "芯片账单必须继承原版半成品生产账单。"
 Assert-True ($unfinishedText -match 'class\s+Thing_UnfinishedChip\s*:\s*UnfinishedThing') "芯片半成品必须继承原版 UnfinishedThing。"
@@ -32,6 +34,8 @@ Assert-True ($billText -match 'Clone') "复制账单时必须复制组合记录�
 Assert-True ($unfinishedText -match 'StartingWorkAmount') "半成品必须保存开工时总工作量。"
 Assert-True ($unfinishedText -notmatch 'Pawn\s+creator|creatorName|sourcePresetDefNames|queuedConfig') "半成品不得另建制作者或旧来源/配置字段。"
 Assert-True ($compText -notmatch 'Scribe_(Deep|Values|Collections)\.Look\([^\r\n]*ChipDefinitionConfig|manufacturedConfig') "成品组件不得保存完整解析配置。"
+Assert-True ($recordText -match 'ArmamentFormDefName') "组合记录必须只保存新的武装型字段。"
+Assert-True ($recordText -notmatch 'gunShellDefName|legacyGunShellDefName|LoadSaveMode') "组合记录不得读取或迁移旧枪壳字段。"
 
 $unfinishedXml = Get-Utf8Text (Join-Path $modRoot "1.6\Content\Defs\ThingDef\Items\ChipsUnfinished.xml")
 Assert-True ($unfinishedXml -match 'ParentName="UnfinishedBase"') "芯片半成品应沿用原版 UnfinishedBase。"

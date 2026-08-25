@@ -134,4 +134,6 @@
   <BDP_Message_TriggerLoadout_RequirementsUnmet>不满足激活条件</BDP_Message_TriggerLoadout_RequirementsUnmet>
   <BDP_Message_TriggerLoadout_NotDisabled>未禁用</BDP_Message_TriggerLoadout_NotDisabled>
   <BDP_Message_TriggerLoadout_MissingBodyPart>缺失必要身体部位</BDP_Message_TriggerLoadout_MissingBodyPart>
+  <!-- 表达视觉预设配置诊断。 -->
+  <BDP_ConfigError_DuplicateWeaponVisualStage>表达视觉预设 {0} 重复声明了动作阶段 {1}。</BDP_ConfigError_DuplicateWeaponVisualStage>
 </LanguageData>

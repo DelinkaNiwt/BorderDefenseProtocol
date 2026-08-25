@@ -21,8 +21,8 @@ namespace BDP.Content.Assembly.ChipManufacturing.Model
         /// <summary>按玩家顺序解析出的动作。</summary>
         public IReadOnlyList<ChipActionPresetDef> Actions { get; set; }
 
-        /// <summary>解析出的可空枪壳。</summary>
-        public ChipGunShellDef GunShell { get; set; }
+        /// <summary>解析出的可空有效武装型；可能是隐藏默认型。</summary>
+        public ChipArmamentFormDef ArmamentForm { get; set; }
 
         /// <summary>全部稳定失败原因。</summary>
         public IReadOnlyList<ChipCombinationFailureReason> FailureReasons { get; set; }

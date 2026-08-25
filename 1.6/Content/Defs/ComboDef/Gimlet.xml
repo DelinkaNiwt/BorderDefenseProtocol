@@ -6,8 +6,26 @@
     <defName>BDP_Combo_Gimlet</defName>
     <label>飞锥</label>
     <description>小行星双芯片组合技。双 Trigon 供能加速弹丸，射出高速穿甲弹。</description>
-    <chipA>BDP_Preset_Asteroid</chipA>
-    <chipB>BDP_Preset_Asteroid</chipB>
+    <firstSourceActionDefName>BDP_Preset_Asteroid</firstSourceActionDefName>
+    <secondSourceActionDefName>BDP_Preset_Asteroid</secondSourceActionDefName>
+    <!-- 第一来源项只接受最终成品职业为射手的武装芯片。 -->
+    <FirstSourceAdmission>
+      <AllowedProfessions>
+        <li>BDP_ChipProfession_Shooter</li>
+      </AllowedProfessions>
+      <AllowedCategories>
+        <li>BDP_ChipCategory_Weapon</li>
+      </AllowedCategories>
+    </FirstSourceAdmission>
+    <!-- 第二来源项执行同一成品身份约束；枪手兼容射手动作不等于射手成品。 -->
+    <SecondSourceAdmission>
+      <AllowedProfessions>
+        <li>BDP_ChipProfession_Shooter</li>
+      </AllowedProfessions>
+      <AllowedCategories>
+        <li>BDP_ChipCategory_Weapon</li>
+      </AllowedCategories>
+    </SecondSourceAdmission>
     <Expression>
       <Entries>
         <li>
@@ -21,26 +39,28 @@
           <VerbProps>
             <defaultProjectile>BDP_Projectile_ArmorPiercing</defaultProjectile>
             <warmupTime>2.16</warmupTime>
+            <!-- 穿甲弹伤害值在投射物 Def 中按四倍配置；组合技保持单发。 -->
+            <burstShotCount>1</burstShotCount>
           </VerbProps>
           <VerbPropsResolve>
-            <RangeResolve>FollowChipMain</RangeResolve>
-            <WarmupTimeResolve>FollowChipMain</WarmupTimeResolve>
-            <BurstShotCountResolve>FollowChipMain</BurstShotCountResolve>
-            <TicksBetweenBurstShotsResolve>FollowChipMain</TicksBetweenBurstShotsResolve>
-            <AccuracyTouchResolve>FollowChipMain</AccuracyTouchResolve>
-            <AccuracyShortResolve>FollowChipMain</AccuracyShortResolve>
-            <AccuracyMediumResolve>FollowChipMain</AccuracyMediumResolve>
-            <AccuracyLongResolve>FollowChipMain</AccuracyLongResolve>
-            <DefaultCooldownTimeResolve>FollowChipMain</DefaultCooldownTimeResolve>
+            <RangeResolve>FollowFirstSource</RangeResolve>
+            <WarmupTimeResolve>FollowFirstSource</WarmupTimeResolve>
+            <BurstShotCountResolve>FollowFirstSource</BurstShotCountResolve>
+            <TicksBetweenBurstShotsResolve>FollowFirstSource</TicksBetweenBurstShotsResolve>
+            <AccuracyTouchResolve>FollowFirstSource</AccuracyTouchResolve>
+            <AccuracyShortResolve>FollowFirstSource</AccuracyShortResolve>
+            <AccuracyMediumResolve>FollowFirstSource</AccuracyMediumResolve>
+            <AccuracyLongResolve>FollowFirstSource</AccuracyLongResolve>
+            <DefaultCooldownTimeResolve>FollowFirstSource</DefaultCooldownTimeResolve>
           </VerbPropsResolve>
           <!-- 射击节奏跟随 Main 侧。 -->
           <ExecutionResolve>
-            <RhythmResolve>FollowChipMain</RhythmResolve>
+            <RhythmResolve>FollowFirstSource</RhythmResolve>
           </ExecutionResolve>
           <!-- Trion 费用跟随 Main 侧。 -->
           <TrionResolve>
-            <UseCostResolve>FollowChipMain</UseCostResolve>
-            <MinimumRequiredResolve>FollowChipMain</MinimumRequiredResolve>
+            <UseCostResolve>FollowFirstSource</UseCostResolve>
+            <MinimumRequiredResolve>FollowFirstSource</MinimumRequiredResolve>
           </TrionResolve>
           <!-- 必须直线视线。 -->
           <DirectTargetLineOfSight>Required</DirectTargetLineOfSight>

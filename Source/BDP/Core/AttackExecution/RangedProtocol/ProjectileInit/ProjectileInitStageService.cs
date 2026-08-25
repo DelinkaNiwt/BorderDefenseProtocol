@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using BDP.Core.AttackExecution;
 using BDP.Core.AttackExecution.RangedProtocol.Model;
+using BDP.Core.Projectiles.Interaction;
 using BDP.Core.Expressions;
 using BDP.Core.Projectiles.Visual;
 using BDP.Core.Trigger;
@@ -101,6 +102,8 @@ namespace BDP.Core.AttackExecution.RangedProtocol.ProjectileInit
                             : aim != null ? aim.FinalTarget : LocalTargetInfo.Invalid,
                     InitialSpeedFactor = emit != null ? emit.SpeedFactor : 1f,
                     InitialDamageFactor = emit != null ? emit.DamageFactor : 1f,
+                    InitialStoppingPowerFactor = emit != null ? emit.StoppingPowerFactor : 1f,
+                    MuzzleFlashScale = ResolveMuzzleFlashScale(emit, entry),
                     AccuracyFactor = aim != null ? aim.AccuracyFactor : 1f,
                     ForcedMissRadius = aim != null ? aim.ForcedMissRadius : 0f,
                     HasAccuracy = (emit != null ? emit.SourceResult : entry != null ? entry.SourceResult : null)?.VerbProps != null,
@@ -165,6 +168,28 @@ namespace BDP.Core.AttackExecution.RangedProtocol.ProjectileInit
                             plan.InitialFlightPathSnapshot = planContribution.InitialFlightPathSnapshot;
                         }
 
+                        if (planContribution.HasInteractionPolicy
+                            && planContribution.InteractionPolicy != null)
+                        {
+                            plan.InteractionPolicy = MergeInteractionPolicy(
+                                plan.InteractionPolicy,
+                                planContribution.InteractionPolicy);
+                        }
+
+                        if (planContribution.HasTrailColorOverride)
+                        {
+                            plan.HasTrailColorOverride = true;
+                            plan.TrailColorOverride = planContribution.TrailColorOverride;
+                        }
+
+                        if (planContribution.HasTrailCoreOverride)
+                        {
+                            plan.HasTrailCoreOverride = true;
+                            plan.TrailCoreColorOverride = planContribution.TrailCoreColorOverride;
+                            plan.TrailCoreWidthRatioOverride = planContribution.TrailCoreWidthRatioOverride;
+                            plan.TrailCoreOpacityOverride = planContribution.TrailCoreOpacityOverride;
+                        }
+
                         plan.InitialSpeedFactor *= planContribution.InitialSpeedFactorMultiplier;
                         plan.InitialDamageFactor *= planContribution.InitialDamageFactorMultiplier;
                         AppendTags(plan.Tags, planContribution.TagsToAppend);
@@ -222,6 +247,50 @@ namespace BDP.Core.AttackExecution.RangedProtocol.ProjectileInit
                     target.Add(source[i]);
                 }
             }
+        }
+
+        /// <summary>
+        /// 合并多个模块的护盾/拦截器绕过声明。
+        /// 任一模块声明绕过就保留绕过，避免结果依赖模块列表顺序。
+        /// </summary>
+        private static ProjectileInteractionPolicy MergeInteractionPolicy(
+            ProjectileInteractionPolicy current,
+            ProjectileInteractionPolicy incoming)
+        {
+            if (current == null)
+            {
+                return incoming != null ? incoming.Clone() : null;
+            }
+
+            if (incoming == null)
+            {
+                return current.Clone();
+            }
+
+            return new ProjectileInteractionPolicy
+            {
+                BypassProjectileInterceptors = current.BypassProjectileInterceptors
+                    || incoming.BypassProjectileInterceptors,
+                BypassRegisteredDamageShields = current.BypassRegisteredDamageShields
+                    || incoming.BypassRegisteredDamageShields
+            };
+        }
+
+        /// <summary>
+        /// 解析当前发射来源自己的原版枪口闪光尺寸。
+        /// 优先读取正式运行时规格；旧或不完整结果才回退到声明表面。
+        /// </summary>
+        private static float ResolveMuzzleFlashScale(FireEmitRecord emit, RangedAttackEntry entry)
+        {
+            FormalExpressionResult sourceResult = emit != null && emit.SourceResult != null
+                ? emit.SourceResult
+                : entry != null ? entry.SourceResult : null;
+            if (sourceResult?.ResolvedVerbSpec != null)
+            {
+                return sourceResult.ResolvedVerbSpec.MuzzleFlashScale;
+            }
+
+            return sourceResult?.VerbProps?.muzzleFlashScale ?? 0f;
         }
 
         /// <summary>

@@ -4,14 +4,19 @@ using BDP.Content.CombatBody.Transform;
 using BDP.Content.CombatBody.Wounds.Visuals;
 using BDP.Content.Assembly.ChipManufacturing.Validation;
 using BDP.Content.Assembly.ChipManufacturing.Recipe;
+using BDP.Content.Assembly.ChipManufacturing.Resolution;
 using BDP.Content.Trion.Talent;
 using BDP.Content.Trigger.UI;
 using BDP.Content.Trigger.UI.ChipModes;
+using BDP.Content.Trigger.UI.ChipStances;
 using BDP.Core.CombatBody.External;
 using BDP.Core.CombatBody.Presentation;
 using BDP.Core.CombatBody.Wounds.Presentation;
 using BDP.Core.Trigger;
 using BDP.Core.Trion.External;
+using BDP.Core.Expressions.External;
+using BDP.Core.Projectiles.RangedFlightProtocol.Effects;
+using BDP.Content.RangedModules.Debuff;
 using Verse;
 
 namespace BDP.Content
@@ -30,17 +35,21 @@ namespace BDP.Content
         static ContentBootstrap()
         {
             new Harmony("niwt.bdp.content").PatchAll();
+            ExtraEffectPlanExecutorRegistry.TryRegister(new HediffExtraEffectExecutor());
             // 启动期一次性建立扫描裁切网格，避免首次战斗体变换承担 Unity 网格创建开销。
             CombatBodyScanMeshCache.WarmUp();
             PawnTrionTalentAssessmentInjector.Apply();
             PawnCombatBodyEmergencyEscapeStateInjector.Apply();
             ChipManufacturingDefValidator.ValidateAll();
             ChipRecipeIngredientUniverse.InitializeAll();
+            ComboExpressionVariantModifierRegistry.Register(
+                new ChipArmamentFormComboExpressionModifier());
             CombatBodyCollapseExtensionRegistry.Register(new CombatBodyEmergencyEscapeExtensionProvider());
             CombatBodyTransformPresentationRegistry.Register(new CombatBodyTransformScanPresentationProvider());
             CombatBodyWoundPresentationRegistry.Register(new CombatBodyWoundSprayPresentationProvider());
             TrionGizmoExtensionRegistry.RegisterPanel(new TriggerLoadoutPanelProvider());
             TriggerExternalGizmoRegistry.Register(new ChipModeGizmoProvider());
+            TriggerExternalGizmoRegistry.Register(new ChipStanceGizmoProvider());
             TrionGizmoExtensionRegistry.Register(new CombatBodyEmergencyEscapeGizmoExtensionProvider());
         }
     }

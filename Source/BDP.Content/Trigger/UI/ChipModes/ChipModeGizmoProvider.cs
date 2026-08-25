@@ -64,6 +64,8 @@ namespace BDP.Content.Trigger.UI.ChipModes
                         currentModeLabel,
                         nextModeLabel),
                     icon = ResolveIcon(currentMode.GizmoIconTexPath, chip),
+                    // 形态属于芯片实例真值；禁止原版把同名同图标按钮合并后传播一次输入。
+                    groupable = false,
                     action = delegate
                     {
                         commands.RequestCycleChipMode(capturedChip);

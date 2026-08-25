@@ -43,5 +43,15 @@ namespace BDP.Core.Trigger
         /// 请求把一枚正式启用的多形态芯片切换到作者顺序中的下一形态。
         /// </summary>
         bool RequestCycleChipMode(Thing chip);
+
+        /// <summary>
+        /// 请求把一枚正式启用芯片切换到当前形态内的指定姿态。
+        /// </summary>
+        bool RequestSwitchChipStance(Thing chip, string targetStanceKey);
+
+        /// <summary>
+        /// 请求把一枚正式启用芯片切换到当前形态内作者顺序的下一姿态。
+        /// </summary>
+        bool RequestCycleChipStance(Thing chip);
     }
 }

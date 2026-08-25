@@ -15,8 +15,10 @@ namespace BDP.Content.Projectiles.BeamTrail
         /// <summary>
         /// 为本次投射物创建独立的拖尾视觉附加件。
         /// </summary>
+        /// <param name="visualAppearanceOverrides">当前投射物的可选视觉外观覆盖。</param>
         /// <returns>预设有效时返回附加件；否则返回空。</returns>
-        public IProjectileVisualAttachment CreateAttachment()
+        public IProjectileVisualAttachment CreateAttachment(
+            ProjectileVisualAppearanceOverrides visualAppearanceOverrides)
         {
             if (preset == null)
             {
@@ -26,7 +28,8 @@ namespace BDP.Content.Projectiles.BeamTrail
                 return null;
             }
 
-            return new BeamTrailAttachment(BeamTrailAppearanceSnapshot.CreateFrom(preset));
+            return new BeamTrailAttachment(
+                BeamTrailAppearanceSnapshot.CreateFrom(preset, visualAppearanceOverrides));
         }
     }
 }

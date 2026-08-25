@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 隐秘组定义名称。 -->
+  <BDP_ChipExclusionGroup_Stealth.label>隐秘组</BDP_ChipExclusionGroup_Stealth.label>
+  <!-- 隐秘组定义说明。 -->
+  <BDP_ChipExclusionGroup_Stealth.description>同属隐秘组的芯片只能同时启用一枚。</BDP_ChipExclusionGroup_Stealth.description>
+</LanguageData>

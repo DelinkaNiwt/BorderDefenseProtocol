@@ -53,22 +53,22 @@ namespace BDP.Core.CombatBody.Wounds.Presentation
         /// <summary>
         /// 保存全部提供器的表现状态。
         /// </summary>
-        public static void ExposeData()
+        public static void ExposeData(Pawn pawn)
         {
             Invoke("ExposeData", delegate(ICombatBodyWoundPresentationProvider provider)
             {
-                provider.ExposeData();
+                provider.ExposeData(pawn);
             });
         }
 
         /// <summary>
         /// 清除全部提供器的表现状态。
         /// </summary>
-        public static void ClearAll()
+        public static void ClearAll(Pawn pawn)
         {
             Invoke("ClearAll", delegate(ICombatBodyWoundPresentationProvider provider)
             {
-                provider.ClearAll();
+                provider.ClearAll(pawn);
             });
         }
 
@@ -86,11 +86,11 @@ namespace BDP.Core.CombatBody.Wounds.Presentation
         /// <summary>
         /// 通知全部提供器一个伤口的派生生命周期结束。
         /// </summary>
-        public static void NotifyWoundDrainExpired(int hediffLoadId)
+        public static void NotifyWoundDrainExpired(Pawn pawn, int hediffLoadId)
         {
             Invoke("NotifyWoundDrainExpired", delegate(ICombatBodyWoundPresentationProvider provider)
             {
-                provider.NotifyWoundDrainExpired(hediffLoadId);
+                provider.NotifyWoundDrainExpired(pawn, hediffLoadId);
             });
         }
 

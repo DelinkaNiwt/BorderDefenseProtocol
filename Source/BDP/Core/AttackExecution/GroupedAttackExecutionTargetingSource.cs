@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BDP.Core.Expressions;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -155,14 +156,17 @@ namespace BDP.Core.AttackExecution
         }
 
         /// <summary>
-        /// 把已确认的目标逐个回写到组内可执行成员。
-        /// 组级适配层不在成员正式确认链之前预筛业务合法性；每个成员仍通过自己的单体 targetingSource 进入正式下单边界并自行裁定。
+        /// 把已确认目标回写到每个 Pawn 当前应使用的唯一成员。
+        /// 同一 Pawn 的聚合单武器入口优先 Main（主侧），主侧不合法时才回退 Sub（副侧），
+        /// 避免两个独立持续攻击 Job 在同一帧互相覆盖。
         /// </summary>
         public void OrderForceTarget(LocalTargetInfo target)
         {
-            for (int i = 0; i < sources.Count; i++)
+            IReadOnlyList<AttackExecutionTargetingSource> selectedSources =
+                SelectPreferredSourcesByPawn(target);
+            for (int i = 0; i < selectedSources.Count; i++)
             {
-                AttackExecutionTargetingSource source = sources[i];
+                AttackExecutionTargetingSource source = selectedSources[i];
                 if (source == null)
                 {
                     continue;
@@ -177,6 +181,69 @@ namespace BDP.Core.AttackExecution
                 DescribeSourceResultIds(),
                 HasActiveContinuation(),
                 "after_order_force_target");
+        }
+
+        /// <summary>
+        /// 为组内每个 Pawn 选择一个当前目标合法的正式来源。
+        /// Main（主侧）优先级最高；没有合法 Main 时保留最先出现的合法回退来源，通常为 Sub（副侧）。
+        /// </summary>
+        private IReadOnlyList<AttackExecutionTargetingSource> SelectPreferredSourcesByPawn(
+            LocalTargetInfo target)
+        {
+            List<Pawn> pawnOrder = new List<Pawn>();
+            Dictionary<Pawn, AttackExecutionTargetingSource> selectedByPawn =
+                new Dictionary<Pawn, AttackExecutionTargetingSource>();
+
+            for (int i = 0; i < sources.Count; i++)
+            {
+                AttackExecutionTargetingSource source = sources[i];
+                Pawn sourcePawn = source?.CasterPawn;
+                if (sourcePawn == null || !source.CanHitTarget(target))
+                {
+                    continue;
+                }
+
+                if (!selectedByPawn.TryGetValue(sourcePawn, out AttackExecutionTargetingSource selected))
+                {
+                    pawnOrder.Add(sourcePawn);
+                    selectedByPawn.Add(sourcePawn, source);
+                    continue;
+                }
+
+                if (ResolveOriginPriority(source.ResolvedOriginKind)
+                    < ResolveOriginPriority(selected.ResolvedOriginKind))
+                {
+                    selectedByPawn[sourcePawn] = source;
+                }
+            }
+
+            List<AttackExecutionTargetingSource> result =
+                new List<AttackExecutionTargetingSource>(pawnOrder.Count);
+            for (int i = 0; i < pawnOrder.Count; i++)
+            {
+                result.Add(selectedByPawn[pawnOrder[i]]);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 把正式来源侧别转换为聚合单武器派单优先级。
+        /// Main（主侧）优先于 Sub（副侧），其余来源仅作为兼容回退。
+        /// </summary>
+        private static int ResolveOriginPriority(ExpressionOriginKind? originKind)
+        {
+            if (originKind == ExpressionOriginKind.Main)
+            {
+                return 0;
+            }
+
+            if (originKind == ExpressionOriginKind.Sub)
+            {
+                return 1;
+            }
+
+            return 2;
         }
 
         /// <summary>

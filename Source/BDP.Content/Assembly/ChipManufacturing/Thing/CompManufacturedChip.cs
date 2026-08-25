@@ -10,10 +10,26 @@ namespace BDP.Content.Assembly.ChipManufacturing.Thing
     public sealed class CompManufacturedChip : ThingComp,
         IChipInstanceDefinitionProvider,
         IChipSourceReferenceProvider,
-        IChipCombinationRecordHolder
+        IChipCombinationRecordHolder,
+        ILegacyChipPersistenceMarker
     {
         /// <summary>制造完成时从芯片账单复制的组合记录。</summary>
         private ChipCombinationRecord combinationRecord;
+
+        /// <summary>旧版制造组件保存的动作预设来源；只在读档阶段读取，不再写入新存档。</summary>
+        private List<string> legacySourcePresetDefNames;
+
+        /// <summary>旧版制造组件保存的武器类别来源；只用于识别旧物品。</summary>
+        private string legacySourceGunClassDefName;
+
+        /// <summary>旧版制造组件保存的武器类别显示名；只用于识别旧物品。</summary>
+        private string legacySourceGunClassLabel;
+
+        /// <summary>旧版制造组件保存的实例显示名；只用于识别旧物品。</summary>
+        private string legacyCustomLabel;
+
+        /// <summary>读档时发现旧版制造字段后锁存的非法物品标记。</summary>
+        private bool legacyPersistenceDetected;
 
         /// <summary>读取当前成品持有的组合记录。</summary>
         public ChipCombinationRecord CombinationRecord => combinationRecord;
@@ -23,18 +39,41 @@ namespace BDP.Content.Assembly.ChipManufacturing.Thing
             combinationRecord?.OrderedActionPresetDefNames
             ?? (IReadOnlyList<string>)new List<string>();
 
-        /// <summary>以中性变体键公开可空枪壳来源。</summary>
-        public string SourceVariantKey => combinationRecord?.GunShellDefName;
+        /// <summary>直接公开成品记录中的最终职业，不沿用动作兼容关系。</summary>
+        public string SourceProfessionKey => combinationRecord?.ProfessionDefName;
 
-        /// <summary>以中性变体标签公开当前仍存在的枪壳名称。</summary>
+        /// <summary>读取是否发现旧版格式或缺失当前组合记录。</summary>
+        public bool LegacyPersistenceDetected => legacyPersistenceDetected || combinationRecord == null;
+
+        /// <summary>以中性变体键公开显式或逻辑生效的武装型来源。</summary>
+        public string SourceVariantKey
+        {
+            get
+            {
+                if (combinationRecord == null)
+                {
+                    return null;
+                }
+
+                if (!combinationRecord.ArmamentFormDefName.NullOrEmpty())
+                {
+                    return combinationRecord.ArmamentFormDefName;
+                }
+
+                return ResolveCurrent().ArmamentForm?.defName;
+            }
+        }
+
+        /// <summary>以中性变体标签公开玩家可见武装型名称；隐藏默认型不公开标签。</summary>
         public string SourceVariantLabel
         {
             get
             {
                 ChipCombinationResolution resolution = ResolveCurrent();
-                return resolution.GunShell != null
+                return resolution.ArmamentForm != null
+                    && resolution.ArmamentForm.includeInProductLabel
                     ? "BDP_ChipManufacturing_SourceVariantLabel".Translate(
-                        resolution.GunShell.label)
+                        resolution.ArmamentForm.label)
                     : null;
             }
         }
@@ -87,6 +126,22 @@ namespace BDP.Content.Assembly.ChipManufacturing.Thing
         {
             base.PostExposeData();
             Scribe_Deep.Look(ref combinationRecord, "chipCombinationRecord");
+
+            // 旧版本把完整动态配置改为 source* 字段保存；只读这些历史键，避免新存档继续产生兼容字段。
+            if (Scribe.mode == LoadSaveMode.LoadingVars)
+            {
+                Scribe_Collections.Look(
+                    ref legacySourcePresetDefNames,
+                    "sourcePresetDefNames",
+                    LookMode.Value);
+                Scribe_Values.Look(ref legacySourceGunClassDefName, "sourceGunClassDefName");
+                Scribe_Values.Look(ref legacySourceGunClassLabel, "sourceGunClassLabel");
+                Scribe_Values.Look(ref legacyCustomLabel, "customLabel");
+                legacyPersistenceDetected = legacySourcePresetDefNames != null
+                    || !legacySourceGunClassDefName.NullOrEmpty()
+                    || !legacySourceGunClassLabel.NullOrEmpty()
+                    || !legacyCustomLabel.NullOrEmpty();
+            }
         }
 
         /// <summary>调用统一解析器读取当前 Def 下的最新结果。</summary>

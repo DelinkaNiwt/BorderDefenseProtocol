@@ -18,19 +18,53 @@ namespace BDP.Core.Combos
         public ComboDefinitionContract Resolve(ComboDef comboDef)
         {
             ComboDefinitionConfig config = comboDef != null ? comboDef.ToConfig() : null;
-            string chipADefName = config != null ? config.chipA : null;
-            string chipBDefName = config != null ? config.chipB : null;
+            string firstSourceActionDefName = config != null ? config.firstSourceActionDefName : null;
+            string secondSourceActionDefName = config != null ? config.secondSourceActionDefName : null;
             return new ComboDefinitionContract
             {
                 Definition = comboDef,
                 Config = config,
-                ChipADefName = chipADefName,
-                ChipBDefName = chipBDefName,
+                FirstSourceActionDefName = firstSourceActionDefName,
+                SecondSourceActionDefName = secondSourceActionDefName,
+                FirstSourceAdmission = ResolveSourceAdmission(config?.FirstSourceAdmission),
+                SecondSourceAdmission = ResolveSourceAdmission(config?.SecondSourceAdmission),
+                RequireSameSourceVariant = config != null && config.RequireSameSourceVariant,
                 UseRequirements = config?.UseRequirements != null
                     ? new List<PawnRequirement>(config.UseRequirements).AsReadOnly()
                     : new List<PawnRequirement>().AsReadOnly(),
                 Expression = ResolveExpression(config != null ? config.Expression : null)
             };
+        }
+
+        /// <summary>把可空来源准入配置复制为稳定只读契约。</summary>
+        private static ComboSourceAdmissionContract ResolveSourceAdmission(
+            ComboSourceAdmissionConfig config)
+        {
+            if (config == null)
+            {
+                return null;
+            }
+
+            return new ComboSourceAdmissionContract
+            {
+                AllowedProfessions = Copy(config.AllowedProfessions),
+                DeniedProfessions = Copy(config.DeniedProfessions),
+                AllowedCategories = Copy(config.AllowedCategories),
+                DeniedCategories = Copy(config.DeniedCategories),
+                AllowedTags = Copy(config.AllowedTags),
+                RequiredTags = Copy(config.RequiredTags),
+                DeniedTags = Copy(config.DeniedTags),
+                AllowedSourceVariants = Copy(config.AllowedSourceVariants),
+                DeniedSourceVariants = Copy(config.DeniedSourceVariants)
+            };
+        }
+
+        /// <summary>复制字符串列表并固定只读边界。</summary>
+        private static IReadOnlyList<string> Copy(List<string> values)
+        {
+            return values != null
+                ? new List<string>(values).AsReadOnly()
+                : new List<string>().AsReadOnly();
         }
 
         /// <summary>
@@ -53,11 +87,11 @@ namespace BDP.Core.Combos
         /// </summary>
         public ComboResolvedVerbProps ResolveVerbProps(
             ComboExpressionEntryConfig entryConfig,
-            FormalExpressionResult chipASourceResult,
-            FormalExpressionResult chipBSourceResult)
+            FormalExpressionResult firstSourceResult,
+            FormalExpressionResult secondSourceResult)
         {
-            VerbProperties chipAVerbProps = chipASourceResult != null ? chipASourceResult.VerbProps : null;
-            VerbProperties chipBVerbProps = chipBSourceResult != null ? chipBSourceResult.VerbProps : null;
+            VerbProperties firstSourceVerbProps = firstSourceResult != null ? firstSourceResult.VerbProps : null;
+            VerbProperties secondSourceVerbProps = secondSourceResult != null ? secondSourceResult.VerbProps : null;
             ComboVerbPropsResolutionConfig resolution = entryConfig != null ? entryConfig.VerbPropsResolve : null;
             // 条目 VerbProps 增量覆盖层：作者显式声明的字段级 delta。
             // 非 null 字段作为 explicitValue 优先于 VerbPropsResolve 模式。
@@ -68,58 +102,58 @@ namespace BDP.Core.Combos
                 Range = ResolveFloatField(
                     overlay?.range,
                     resolution != null ? resolution.RangeResolve : null,
-                    chipAVerbProps != null ? chipAVerbProps.range : 0f,
-                    chipBVerbProps != null ? chipBVerbProps.range : 0f),
+                    firstSourceVerbProps != null ? firstSourceVerbProps.range : 0f,
+                    secondSourceVerbProps != null ? secondSourceVerbProps.range : 0f),
                 WarmupTime = ResolveFloatField(
                     overlay?.warmupTime,
                     resolution != null ? resolution.WarmupTimeResolve : null,
-                    chipAVerbProps != null ? chipAVerbProps.warmupTime : 0f,
-                    chipBVerbProps != null ? chipBVerbProps.warmupTime : 0f),
+                    firstSourceVerbProps != null ? firstSourceVerbProps.warmupTime : 0f,
+                    secondSourceVerbProps != null ? secondSourceVerbProps.warmupTime : 0f),
                 BurstShotCount = ResolveIntField(
                     overlay?.burstShotCount,
                     resolution != null ? resolution.BurstShotCountResolve : null,
-                    chipAVerbProps != null ? chipAVerbProps.burstShotCount : 1,
-                    chipBVerbProps != null ? chipBVerbProps.burstShotCount : 1),
+                    firstSourceVerbProps != null ? firstSourceVerbProps.burstShotCount : 1,
+                    secondSourceVerbProps != null ? secondSourceVerbProps.burstShotCount : 1),
                 TicksBetweenBurstShots = ResolveIntField(
                     overlay?.ticksBetweenBurstShots,
                     resolution != null ? resolution.TicksBetweenBurstShotsResolve : null,
-                    chipAVerbProps != null ? chipAVerbProps.ticksBetweenBurstShots : 0,
-                    chipBVerbProps != null ? chipBVerbProps.ticksBetweenBurstShots : 0),
+                    firstSourceVerbProps != null ? firstSourceVerbProps.ticksBetweenBurstShots : 0,
+                    secondSourceVerbProps != null ? secondSourceVerbProps.ticksBetweenBurstShots : 0),
                 MinRange = ResolveFloatField(
                     overlay?.minRange,
                     resolution != null ? resolution.MinRangeResolve : null,
-                    chipAVerbProps != null ? chipAVerbProps.minRange : 0f,
-                    chipBVerbProps != null ? chipBVerbProps.minRange : 0f),
+                    firstSourceVerbProps != null ? firstSourceVerbProps.minRange : 0f,
+                    secondSourceVerbProps != null ? secondSourceVerbProps.minRange : 0f),
                 ForcedMissRadius = ResolveFloatField(
                     overlay?.forcedMissRadius,
                     resolution != null ? resolution.ForcedMissRadiusResolve : null,
-                    chipAVerbProps != null ? chipAVerbProps.ForcedMissRadius : 0f,
-                    chipBVerbProps != null ? chipBVerbProps.ForcedMissRadius : 0f),
+                    firstSourceVerbProps != null ? firstSourceVerbProps.ForcedMissRadius : 0f,
+                    secondSourceVerbProps != null ? secondSourceVerbProps.ForcedMissRadius : 0f),
                 AccuracyTouch = ResolveFloatField(
                     overlay?.accuracyTouch,
                     resolution != null ? resolution.AccuracyTouchResolve : null,
-                    chipAVerbProps != null ? chipAVerbProps.accuracyTouch : 0f,
-                    chipBVerbProps != null ? chipBVerbProps.accuracyTouch : 0f),
+                    firstSourceVerbProps != null ? firstSourceVerbProps.accuracyTouch : 0f,
+                    secondSourceVerbProps != null ? secondSourceVerbProps.accuracyTouch : 0f),
                 AccuracyShort = ResolveFloatField(
                     overlay?.accuracyShort,
                     resolution != null ? resolution.AccuracyShortResolve : null,
-                    chipAVerbProps != null ? chipAVerbProps.accuracyShort : 0f,
-                    chipBVerbProps != null ? chipBVerbProps.accuracyShort : 0f),
+                    firstSourceVerbProps != null ? firstSourceVerbProps.accuracyShort : 0f,
+                    secondSourceVerbProps != null ? secondSourceVerbProps.accuracyShort : 0f),
                 AccuracyMedium = ResolveFloatField(
                     overlay?.accuracyMedium,
                     resolution != null ? resolution.AccuracyMediumResolve : null,
-                    chipAVerbProps != null ? chipAVerbProps.accuracyMedium : 0f,
-                    chipBVerbProps != null ? chipBVerbProps.accuracyMedium : 0f),
+                    firstSourceVerbProps != null ? firstSourceVerbProps.accuracyMedium : 0f,
+                    secondSourceVerbProps != null ? secondSourceVerbProps.accuracyMedium : 0f),
                 AccuracyLong = ResolveFloatField(
                     overlay?.accuracyLong,
                     resolution != null ? resolution.AccuracyLongResolve : null,
-                    chipAVerbProps != null ? chipAVerbProps.accuracyLong : 0f,
-                    chipBVerbProps != null ? chipBVerbProps.accuracyLong : 0f),
+                    firstSourceVerbProps != null ? firstSourceVerbProps.accuracyLong : 0f,
+                    secondSourceVerbProps != null ? secondSourceVerbProps.accuracyLong : 0f),
                 DefaultCooldownTime = ResolveFloatField(
                     overlay?.defaultCooldownTime,
                     resolution != null ? resolution.DefaultCooldownTimeResolve : null,
-                    chipAVerbProps != null ? chipAVerbProps.defaultCooldownTime : 0f,
-                    chipBVerbProps != null ? chipBVerbProps.defaultCooldownTime : 0f),
+                    firstSourceVerbProps != null ? firstSourceVerbProps.defaultCooldownTime : 0f,
+                    secondSourceVerbProps != null ? secondSourceVerbProps.defaultCooldownTime : 0f),
                 DefaultProjectile = overlay?.defaultProjectile
             };
         }
@@ -131,29 +165,39 @@ namespace BDP.Core.Combos
         /// </summary>
         public ComboResolvedExecution ResolveExecution(
             ComboExpressionEntryConfig entryConfig,
-            FormalExpressionResult chipASourceResult,
-            FormalExpressionResult chipBSourceResult)
+            FormalExpressionResult firstSourceResult,
+            FormalExpressionResult secondSourceResult)
         {
-            SingleAttackExecutionStyle chipAStyle = chipASourceResult != null ? chipASourceResult.ExecutionStyle?.Single : null;
-            SingleAttackExecutionStyle chipBStyle = chipBSourceResult != null ? chipBSourceResult.ExecutionStyle?.Single : null;
+            SingleAttackExecutionStyle firstSourceStyle = firstSourceResult != null ? firstSourceResult.ExecutionStyle?.Single : null;
+            SingleAttackExecutionStyle secondSourceStyle = secondSourceResult != null ? secondSourceResult.ExecutionStyle?.Single : null;
             ComboExecutionResolutionConfig resolution = entryConfig != null ? entryConfig.ExecutionResolve : null;
+            ChipAttackExecutionConfig explicitExecution = entryConfig != null ? entryConfig.Execution : null;
+            int? explicitHitCount = explicitExecution != null && explicitExecution.HitCount > 0
+                ? explicitExecution.HitCount
+                : (int?)null;
+            int? explicitHitIntervalTicks = explicitExecution != null && explicitExecution.HitIntervalTicks > 0
+                ? explicitExecution.HitIntervalTicks
+                : (int?)null;
+            RangedExecutionRhythm? explicitRhythm = ResolveExplicitRangedRhythm(
+                explicitExecution != null ? explicitExecution.Rhythm : ChipAttackExecutionRhythmConfig.None);
 
             return new ComboResolvedExecution
             {
                 HitCount = ResolveIntField(
-                    null,
+                    explicitHitCount,
                     resolution != null ? resolution.HitCountResolve : null,
-                    chipAStyle != null && chipAStyle.meleeHitCount > 0 ? chipAStyle.meleeHitCount : 1,
-                    chipBStyle != null && chipBStyle.meleeHitCount > 0 ? chipBStyle.meleeHitCount : 1),
+                    firstSourceStyle != null && firstSourceStyle.meleeHitCount > 0 ? firstSourceStyle.meleeHitCount : 1,
+                    secondSourceStyle != null && secondSourceStyle.meleeHitCount > 0 ? secondSourceStyle.meleeHitCount : 1),
                 HitIntervalTicks = ResolveIntField(
-                    null,
+                    explicitHitIntervalTicks,
                     resolution != null ? resolution.HitIntervalTicksResolve : null,
-                    chipAStyle != null ? chipAStyle.meleeHitIntervalTicks : 0,
-                    chipBStyle != null ? chipBStyle.meleeHitIntervalTicks : 0),
+                    firstSourceStyle != null ? firstSourceStyle.meleeHitIntervalTicks : 0,
+                    secondSourceStyle != null ? secondSourceStyle.meleeHitIntervalTicks : 0),
                 Rhythm = ResolveRhythmField(
+                    explicitRhythm,
                     resolution != null ? resolution.RhythmResolve : null,
-                    chipAStyle,
-                    chipBStyle)
+                    firstSourceStyle,
+                    secondSourceStyle)
             };
         }
 
@@ -163,37 +207,46 @@ namespace BDP.Core.Combos
         private static ComboResolvedFieldValue<float> ResolveFloatField(
             float? explicitValue,
             ComboValueResolveMode? declaredMode,
-            float chipAValue,
-            float chipBValue)
+            float firstSourceValue,
+            float secondSourceValue)
         {
             return ComboSourceFieldResolver.ResolveFloat(
                 explicitValue,
                 declaredMode,
-                chipAValue,
-                chipBValue);
+                firstSourceValue,
+                secondSourceValue);
         }
 
         /// <summary>
         /// 解析远程射击节奏字段。
-        /// 只支持 FollowMain / FollowSub 单侧跟随，不做数值合成。
+        /// 只支持 FollowFirstSource / FollowSecondSource 单侧跟随，不做数值合成。
         /// </summary>
         private static ComboResolvedFieldValue<RangedExecutionRhythm> ResolveRhythmField(
+            RangedExecutionRhythm? explicitValue,
             ComboValueResolveMode? declaredMode,
-            SingleAttackExecutionStyle chipAStyle,
-            SingleAttackExecutionStyle chipBStyle)
+            SingleAttackExecutionStyle firstSourceStyle,
+            SingleAttackExecutionStyle secondSourceStyle)
         {
-            RangedExecutionRhythm chipARhythm = chipAStyle != null
-                ? chipAStyle.RangedRhythm
+            RangedExecutionRhythm firstSourceRhythm = firstSourceStyle != null
+                ? firstSourceStyle.RangedRhythm
                 : RangedExecutionRhythm.None;
-            RangedExecutionRhythm chipBRhythm = chipBStyle != null
-                ? chipBStyle.RangedRhythm
+            RangedExecutionRhythm secondSourceRhythm = secondSourceStyle != null
+                ? secondSourceStyle.RangedRhythm
                 : RangedExecutionRhythm.None;
 
             ComboResolvedFieldValue<RangedExecutionRhythm> result = new ComboResolvedFieldValue<RangedExecutionRhythm>
             {
-                HasExplicitValue = false,
+                HasExplicitValue = explicitValue.HasValue,
+                ExplicitValue = explicitValue.HasValue ? explicitValue.Value : RangedExecutionRhythm.None,
                 ResolveMode = declaredMode
             };
+
+            if (explicitValue.HasValue)
+            {
+                result.HasResolvedValue = true;
+                result.ResolvedValue = explicitValue.Value;
+                return result;
+            }
 
             if (!declaredMode.HasValue)
             {
@@ -203,11 +256,11 @@ namespace BDP.Core.Combos
             result.HasResolvedValue = true;
             switch (declaredMode.Value)
             {
-                case ComboValueResolveMode.FollowChipMain:
-                    result.ResolvedValue = chipARhythm;
+                case ComboValueResolveMode.FollowFirstSource:
+                    result.ResolvedValue = firstSourceRhythm;
                     break;
-                case ComboValueResolveMode.FollowChipSub:
-                    result.ResolvedValue = chipBRhythm;
+                case ComboValueResolveMode.FollowSecondSource:
+                    result.ResolvedValue = secondSourceRhythm;
                     break;
                 default:
                     result.HasResolvedValue = false;
@@ -217,20 +270,36 @@ namespace BDP.Core.Combos
             return result;
         }
 
+        /// <summary>把作者侧远程节奏声明翻译成正式节奏；未声明时返回空值。</summary>
+        private static RangedExecutionRhythm? ResolveExplicitRangedRhythm(
+            ChipAttackExecutionRhythmConfig rhythm)
+        {
+            switch (rhythm)
+            {
+                case ChipAttackExecutionRhythmConfig.Simultaneous:
+                    return RangedExecutionRhythm.Simultaneous;
+                case ChipAttackExecutionRhythmConfig.Sequential:
+                case ChipAttackExecutionRhythmConfig.Normal:
+                    return RangedExecutionRhythm.Sequential;
+                default:
+                    return null;
+            }
+        }
+
         /// <summary>
         /// 按统一协议解析 int 字段。
         /// </summary>
         private static ComboResolvedFieldValue<int> ResolveIntField(
             int? explicitValue,
             ComboValueResolveMode? declaredMode,
-            int chipAValue,
-            int chipBValue)
+            int firstSourceValue,
+            int secondSourceValue)
         {
             return ComboSourceFieldResolver.ResolveInt(
                 explicitValue,
                 declaredMode,
-                chipAValue,
-                chipBValue);
+                firstSourceValue,
+                secondSourceValue);
         }
     }
 }

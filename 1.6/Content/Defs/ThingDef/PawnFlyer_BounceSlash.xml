@@ -7,7 +7,7 @@
   -->
   <ThingDef ParentName="PawnFlyerBase">
     <defName>BDP_PawnFlyer_BounceSlash</defName>
-    <label>bounce slash flyer</label>
+    <label>弹射砍击飞行器</label>
     <thingClass>BDP.Content.BounceSlash.PawnFlyer_BounceSlash</thingClass>
 
     <!-- 材质设置 -->

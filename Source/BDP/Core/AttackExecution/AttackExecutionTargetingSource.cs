@@ -100,6 +100,19 @@ namespace BDP.Core.AttackExecution
         internal string DiagnosticResultId => resultId;
 
         /// <summary>
+        /// 当前 targetingSource 绑定的正式来源侧别。
+        /// 组级派单只读取正式结果，不根据按钮或列表顺序猜测主副侧；结果失效时返回空。
+        /// </summary>
+        internal ExpressionOriginKind? ResolvedOriginKind
+        {
+            get
+            {
+                FormalExpressionResult result = ResolveCurrentContext().Result;
+                return result != null ? result.OriginKind : (ExpressionOriginKind?)null;
+            }
+        }
+
+        /// <summary>
         /// 当前施法者是否为 Pawn。
         /// </summary>
         public bool CasterIsPawn => true;
@@ -289,7 +302,7 @@ namespace BDP.Core.AttackExecution
 
             if (PreviewDimensionPolicy.UsesVanilla(previewRecord, PreviewDimension.FieldRadius))
             {
-                DrawVanillaFieldRadius(context.Verb, target);
+                DrawVanillaFieldRadius(context.Verb, target, context.Result);
             }
 
             DrawPreviewItems(previewRecord);
@@ -655,7 +668,10 @@ namespace BDP.Core.AttackExecution
         /// 绘制原版目标周边范围反馈。
         /// 这里按原版 `Verb.DrawHighlightFieldRadiusAroundTarget` 的公开事实做最小桥接。
         /// </summary>
-        private static void DrawVanillaFieldRadius(Verb verb, LocalTargetInfo target)
+        private static void DrawVanillaFieldRadius(
+            Verb verb,
+            LocalTargetInfo target,
+            FormalExpressionResult result)
         {
             if (verb?.verbProps == null || verb.Caster == null || !target.IsValid)
             {
@@ -664,27 +680,67 @@ namespace BDP.Core.AttackExecution
 
             bool needLosToCenter;
             float radius = verb.HighlightFieldRadiusAroundTarget(out needLosToCenter);
-            if (!(radius > 0.2f) || !verb.TryFindShootLineFromTo(verb.Caster.Position, target, out ShootLine resultingLine))
+            if (!(radius > 0.2f))
             {
                 return;
             }
 
-            if (needLosToCenter)
+            ShootLine resultingLine;
+            if (verb.TryFindShootLineFromTo(verb.Caster.Position, target, out resultingLine))
             {
-                GenExplosion.RenderPredictedAreaOfEffect(resultingLine.Dest, radius, verb.verbProps.explosionRadiusRingColor);
-                return;
-            }
-
-            List<IntVec3> cells = new List<IntVec3>();
-            foreach (IntVec3 cell in GenRadial.RadialCellsAround(resultingLine.Dest, radius, useCenter: true))
-            {
-                if (cell.InBounds(Find.CurrentMap))
+                if (needLosToCenter)
                 {
-                    cells.Add(cell);
+                    GenExplosion.RenderPredictedAreaOfEffect(
+                        resultingLine.Dest,
+                        radius,
+                        verb.verbProps.explosionRadiusRingColor);
+                    return;
                 }
+
+                List<IntVec3> cells = new List<IntVec3>();
+                foreach (IntVec3 cell in GenRadial.RadialCellsAround(resultingLine.Dest, radius, useCenter: true))
+                {
+                    if (cell.InBounds(Find.CurrentMap))
+                    {
+                        cells.Add(cell);
+                    }
+                }
+
+                GenDraw.DrawFieldEdges(cells, verb.verbProps.explosionRadiusRingColor);
+                return;
             }
 
-            GenDraw.DrawFieldEdges(cells, verb.verbProps.explosionRadiusRingColor);
+            // 原版 Verb 以“射手到目标的直射线”作为爆炸预览前置条件。
+            // 路线引导表达允许最终目标不直视，此时实际爆炸仍发生在最终目标格，
+            // 因此只在正式规格允许间接目标且目标未超射程时绕过这一个原版前置条件。
+            if (result?.ResolvedVerbSpec == null
+                || result.ResolvedVerbSpec.RequiresDirectTargetLineOfSight
+                || IsOutOfRange(verb, target))
+            {
+                return;
+            }
+
+            GenExplosion.RenderPredictedAreaOfEffect(
+                target.Cell,
+                radius,
+                verb.verbProps.explosionRadiusRingColor);
+        }
+
+        /// <summary>
+        /// 判断间接路线预览目标是否已经超出原版武器射程。
+        /// 绕过直射 LOS 前置条件不等于绕过射程判定。
+        /// </summary>
+        private static bool IsOutOfRange(Verb verb, LocalTargetInfo target)
+        {
+            if (verb == null || verb.Caster == null || !target.IsValid)
+            {
+                return true;
+            }
+
+            CellRect occupiedRect = target.HasThing
+                ? target.Thing.OccupiedRect()
+                : CellRect.SingleCell(target.Cell);
+            return verb.OutOfRange(verb.Caster.Position, target, occupiedRect);
         }
 
         /// <summary>
@@ -813,7 +869,8 @@ namespace BDP.Core.AttackExecution
         /// <summary>
         /// 判断当前候选目标是否仍允许留在 Targeter/确认入口边界。
         /// 模块显式接管已在调用点前置裁定；这里只处理无人接管的场景:
-        /// 远程目标回落原版 Verb 的“现在能否命中”判定(射程+必要 LOS)，恢复原版“不可直视即不可选”的悬停事实；
+        /// 需要目标直射的远程攻击回落原版 Verb 的“现在能否命中”判定；
+        /// 允许间接目标的远程攻击只保留目标射程边界，不能在进入 DrawHighlight 前被原版 LOS 拦截；
         /// 近战保持原版“先选中再接近”语义，不要求现在就能命中，避免把“当前一步非法”误写成“整个目标无效”。
         /// </summary>
         /// <param name="context">当前 targeting 解析上下文。</param>
@@ -823,12 +880,30 @@ namespace BDP.Core.AttackExecution
             ResolvedTargetingContext context,
             LocalTargetInfo target)
         {
-            return context != null
-                && context.Verb != null
-                && context.TargetingRecord != null
-                && context.TargetingRecord.Targetable
-                && target.IsValid
-                && (context.TargetingRecord.IsMeleeAttack || context.Verb.CanHitTarget(target));
+            if (context == null
+                || context.Verb == null
+                || context.TargetingRecord == null
+                || !context.TargetingRecord.Targetable
+                || !target.IsValid)
+            {
+                return false;
+            }
+
+            if (context.TargetingRecord.IsMeleeAttack)
+            {
+                return true;
+            }
+
+            ResolvedVerbSpec resolvedSpec = context.Result?.ResolvedVerbSpec;
+            if (resolvedSpec != null && !resolvedSpec.RequiresDirectTargetLineOfSight)
+            {
+                // 原版 Targeter 会在 DrawHighlight 前调用 CanHitTarget。
+                // 间接目标在这里不能再要求射手到最终目标的直射 LOS，
+                // 但仍保留原版 Verb 的最小射程/最大射程判断。
+                return !IsOutOfRange(context.Verb, target);
+            }
+
+            return context.Verb.CanHitTarget(target);
         }
 
         /// <summary>

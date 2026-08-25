@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using BDP.Core.AttackExecution;
+using BDP.Core.Chips;
 using BDP.Core.CombatModel;
 using BDP.Core.Expressions;
 using BDP.Core.Verbs;
@@ -119,6 +120,12 @@ namespace BDP.Core.Combos
         public List<RangedModuleMountConfig> RangedModules;
 
         /// <summary>
+        /// 当前组合条目的中性投射物属性覆盖。
+        /// 武装构型在组合结果副本上写入，随后随解释链进入正式运行时规格。
+        /// </summary>
+        public ProjectileOverrides ProjectileOverrides;
+
+        /// <summary>
         /// 把组合技条目映射成现有芯片表达解释器可消费的普通条目。
         /// 组合技不新开第二套解释链，只在入口做一次结构对齐。
         /// </summary>
@@ -128,6 +135,7 @@ namespace BDP.Core.Combos
             {
                 Id = Id,
                 DisplayLabel = DisplayLabel,
+                DisplayLabelKey = DisplayLabelKey,
                 RoleKey = RoleKey,
                 Tags = Tags != null ? new List<string>(Tags) : new List<string>(),
                 Conditions = Conditions != null ? new List<ExpressionSourceConditionConfig>(Conditions) : new List<ExpressionSourceConditionConfig>(),
@@ -154,11 +162,13 @@ namespace BDP.Core.Combos
                 PassiveKey = PassiveKey,
                 ExposedData = ExposedData != null ? new List<PassiveExpressionExposedDatumConfig>(ExposedData) : new List<PassiveExpressionExposedDatumConfig>(),
                 RangedModules = RangedModules != null ? CloneRangedModules(RangedModules) : new List<RangedModuleMountConfig>(),
+                ProjectileOverrides = ProjectileOverrides != null ? ProjectileOverrides.Clone() : null,
                 Presentation = Presentation != null
                     ? new ExpressionPresentationConfig
                     {
                         ManualEntryIconTexPath = Presentation.ManualEntryIconTexPath,
                         VisualPresetDefName = Presentation.VisualPresetDefName,
+                        VisualGraphicOverrideDefName = Presentation.VisualGraphicOverrideDefName,
                         CompositeVisualPresetDefName = Presentation.CompositeVisualPresetDefName,
                         ForceSuppressHostEquipment = Presentation.ForceSuppressHostEquipment,
                         VisualPriority = Presentation.VisualPriority

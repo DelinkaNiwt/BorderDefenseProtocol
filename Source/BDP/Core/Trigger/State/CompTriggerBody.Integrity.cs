@@ -55,7 +55,7 @@ namespace BDP.Core.Trigger
 
             }
 
-            NormalizeRestoredChipModes();
+            NormalizeRestoredChipModesAndStances();
             return allResolved;
         }
 
@@ -63,7 +63,7 @@ namespace BDP.Core.Trigger
         /// 在槽位芯片引用恢复后正规化当前形态。
         /// 有效保存值保留；空值或失效值回到默认形态；镜像、失活和单形态槽保持为空。
         /// </summary>
-        private void NormalizeRestoredChipModes()
+        private void NormalizeRestoredChipModesAndStances()
         {
             foreach (TriggerSlotState slot in EnumerateRawSlots())
             {
@@ -77,22 +77,43 @@ namespace BDP.Core.Trigger
                     slot,
                     slot.LoadedChip,
                     out discardedModeKey);
-                if (!changed
+                if (changed
+                    && slot.IsActive
+                    && !slot.IsBindingMirror
+                    && !string.IsNullOrWhiteSpace(discardedModeKey)
+                    && !string.IsNullOrWhiteSpace(slot.CurrentModeKey))
+                {
+                    BdpDiagnostics.Once(
+                        "trigger.chip_mode_post_load_fallback."
+                        + slot.LoadedChipThingId + "." + discardedModeKey,
+                        "读档保存的芯片形态已不存在，已回退默认形态。chipThingId="
+                        + slot.LoadedChipThingId
+                        + ", oldMode=" + discardedModeKey
+                        + ", defaultMode=" + slot.CurrentModeKey);
+                }
+
+                string discardedStanceKey;
+                bool stanceChanged = TriggerChipModeService.NormalizeRestoredActiveRootStance(
+                    slot,
+                    slot.LoadedChip,
+                    out discardedStanceKey);
+                if (!stanceChanged
                     || !slot.IsActive
                     || slot.IsBindingMirror
-                    || string.IsNullOrWhiteSpace(discardedModeKey)
-                    || string.IsNullOrWhiteSpace(slot.CurrentModeKey))
+                    || string.IsNullOrWhiteSpace(discardedStanceKey)
+                    || string.IsNullOrWhiteSpace(slot.CurrentStanceKey))
                 {
                     continue;
                 }
 
                 BdpDiagnostics.Once(
-                    "trigger.chip_mode_post_load_fallback."
-                    + slot.LoadedChipThingId + "." + discardedModeKey,
-                    "读档保存的芯片形态已不存在，已回退默认形态。chipThingId="
+                    "trigger.chip_stance_post_load_fallback."
+                    + slot.LoadedChipThingId + "." + discardedStanceKey,
+                    "读档保存的芯片姿态已不存在，已回退当前形态默认姿态。chipThingId="
                     + slot.LoadedChipThingId
-                    + ", oldMode=" + discardedModeKey
-                    + ", defaultMode=" + slot.CurrentModeKey);
+                    + ", mode=" + slot.CurrentModeKey
+                    + ", oldStance=" + discardedStanceKey
+                    + ", defaultStance=" + slot.CurrentStanceKey);
             }
         }
 
@@ -286,6 +307,7 @@ namespace BDP.Core.Trigger
             }
 
             PublishCombatProjection(ProjectionDirtyReason.SlotActivationCommitted);
+            NotifyActivationAudioCommitted(side, chip);
             SlotActivationCommitted?.Invoke(new TriggerSlotStateChangedArgs
             {
                 Side = side,
@@ -300,6 +322,7 @@ namespace BDP.Core.Trigger
         /// </summary>
         private void NotifySlotDeactivated(TriggerSide side, int slotIndex, Thing chip)
         {
+            NotifyActivationAudioDeactivated(side);
             PublishCombatProjection(ProjectionDirtyReason.SlotDeactivated);
             SlotDeactivated?.Invoke(new TriggerSlotStateChangedArgs
             {

@@ -55,6 +55,7 @@ namespace BDP.Core.Chips
                             OrderedSourceKeys = provider.OrderedSourceKeys != null
                                 ? new List<string>(provider.OrderedSourceKeys).AsReadOnly()
                                 : new List<string>().AsReadOnly(),
+                            SourceProfessionKey = provider.SourceProfessionKey,
                             SourceVariantKey = provider.SourceVariantKey,
                             SourceVariantLabel = provider.SourceVariantLabel
                         };
@@ -65,6 +66,7 @@ namespace BDP.Core.Chips
             return new ChipSourceReferenceSnapshot
             {
                 OrderedSourceKeys = new List<string>().AsReadOnly(),
+                SourceProfessionKey = null,
                 SourceVariantKey = null,
                 SourceVariantLabel = null
             };

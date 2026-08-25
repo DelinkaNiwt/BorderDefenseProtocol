@@ -111,6 +111,14 @@
       </li>
     </stages>
 
+    <!-- 原版授予能力组件；激活态添加时获得短距跳跃，移除时自动回收。 -->
+    <comps>
+      <li Class="HediffCompProperties_GiveAbility">
+        <!-- 由该激活 Hediff 授予的短距跳跃能力。 -->
+        <abilityDef>BDP_Ability_CombatBodyShortJump</abilityDef>
+      </li>
+    </comps>
+
   </HediffDef>
 
   <!--

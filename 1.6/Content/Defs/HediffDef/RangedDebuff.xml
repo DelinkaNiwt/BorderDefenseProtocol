@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 铅块负重：严重度 0~1 对应移动速度降低 0%~100%，标签后缀显示当前降低比例，恢复由 Content HediffComp 逐步处理。 -->
+  <HediffDef>
+    <!-- 铅块负重 Hediff 的稳定 DefName。 -->
+    <defName>BDP_Hediff_LeadWeight</defName>
+    <!-- 使用铅块负重专用 HediffWithComps 生成动态标签，并承载恢复组件。 -->
+    <hediffClass>BDP.Content.RangedModules.Debuff.Hediff_LeadWeight</hediffClass>
+    <!-- 玩家健康面板名称。 -->
+    <label>铅块负重</label>
+    <!-- 玩家健康面板说明。 -->
+    <description>被铅弹命中后附加的负重状态。连续命中会叠加移动速度惩罚，停止命中后逐步恢复。</description>
+    <!-- 该 Hediff 属于负面状态。 -->
+    <isBad>true</isBad>
+    <!-- 首次命中由执行器写入 0.1。 -->
+    <initialSeverity>0</initialSeverity>
+    <!-- 恢复至 0 时由组件请求移除。 -->
+    <minSeverity>0</minSeverity>
+    <!-- 最高严重度对应最高 100% 移动速度惩罚。 -->
+    <maxSeverity>1</maxSeverity>
+    <!-- 使用原版按严重度求值的移动速度因子。 -->
+    <stages>
+      <li>
+        <!-- 最低阶段。 -->
+        <minSeverity>0</minSeverity>
+        <statFactorsBySeverity>
+          <li>
+            <!-- 移动速度随严重度线性下降。 -->
+            <stat>MoveSpeed</stat>
+            <valueBySeverity>
+              <points>
+                <li>(0, 1)</li>
+                <li>(1, 0)</li>
+              </points>
+            </valueBySeverity>
+          </li>
+        </statFactorsBySeverity>
+      </li>
+    </stages>
+    <!-- 命中叠加和延迟恢复组件。 -->
+    <comps>
+      <li Class="BDP.Content.RangedModules.Debuff.HediffCompProperties_StackingRecovery">
+        <!-- 每次有效命中增加 0.1 严重度，即移动速度降低 10%。 -->
+        <severityPerHit>0.1</severityPerHit>
+        <!-- 最多叠加到 1.0，即移动速度降低 100%。 -->
+        <maximumSeverity>1</maximumSeverity>
+        <!-- 最后一次命中后等待 300 tick（5 秒）开始恢复。 -->
+        <recoveryDelayTicks>300</recoveryDelayTicks>
+        <!-- 每 60 tick（1 秒）恢复一次。 -->
+        <recoveryIntervalTicks>60</recoveryIntervalTicks>
+        <!-- 每秒恢复 0.01，即移动速度恢复 1%。 -->
+        <severityRecoveryPerInterval>0.01</severityRecoveryPerInterval>
+      </li>
+    </comps>
+  </HediffDef>
+
+</Defs>

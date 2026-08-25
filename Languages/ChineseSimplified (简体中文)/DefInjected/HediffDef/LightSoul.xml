@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 光魂大盾两种姿态的健康状态。 -->
+  <BDP_Hediff_LightSoulShieldMobile.label>光魂大盾（灵活姿态）</BDP_Hediff_LightSoulShieldMobile.label>
+  <BDP_Hediff_LightSoulShieldMobile.description>以较宽防护角度维持灵活移动的光魂大盾姿态。无法抵挡近战攻击。</BDP_Hediff_LightSoulShieldMobile.description>
+  <BDP_Hediff_LightSoulShieldGuard.label>光魂大盾（举盾姿态）</BDP_Hediff_LightSoulShieldGuard.label>
+  <BDP_Hediff_LightSoulShieldGuard.description>收窄防护角度并稳定举盾，大幅提高抵挡率且允许抵挡近战攻击；移动速度降低 40%，期间无法进行攻击。</BDP_Hediff_LightSoulShieldGuard.description>
+</LanguageData>

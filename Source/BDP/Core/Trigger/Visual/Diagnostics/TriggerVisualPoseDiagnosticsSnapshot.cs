@@ -191,6 +191,11 @@ namespace BDP.Core.Trigger.Visual.Diagnostics
         public string VisualPresetDefName { get; set; }
 
         /// <summary>
+        /// 当前条目视觉图层局部覆盖预设 DefName。
+        /// </summary>
+        public string VisualGraphicOverrideDefName { get; set; }
+
+        /// <summary>
         /// 当前条目复合视觉预设 DefName。
         /// </summary>
         public string CompositeVisualPresetDefName { get; set; }
@@ -226,6 +231,26 @@ namespace BDP.Core.Trigger.Visual.Diagnostics
         public bool IsMuzzleActive { get; set; }
 
         /// <summary>
+        /// 当前条目解析出的武器动作阶段名称。
+        /// </summary>
+        public string WeaponActionStage { get; set; }
+
+        /// <summary>
+        /// 当前武器动作阶段的归一化进度。
+        /// </summary>
+        public float WeaponStageProgress01 { get; set; }
+
+        /// <summary>
+        /// 当前武器动作阶段剩余的原版游戏刻数。
+        /// </summary>
+        public int WeaponStageTicksRemaining { get; set; }
+
+        /// <summary>
+        /// 当前预设在该武器动作阶段是否可见。
+        /// </summary>
+        public bool WeaponStageVisible { get; set; }
+
+        /// <summary>
         /// 当前条目是否成功解析出最终绘制姿态。
         /// </summary>
         public bool HasResolvedPose { get; set; }
@@ -259,6 +284,21 @@ namespace BDP.Core.Trigger.Visual.Diagnostics
         /// 当前姿态是否由主副手规则触发手侧镜像。
         /// </summary>
         public bool HandMirror { get; set; }
+
+        /// <summary>
+        /// 当前条目是否解析出有效握持锚点。
+        /// </summary>
+        public bool HasGripAnchor { get; set; }
+
+        /// <summary>
+        /// 当前条目握持锚点世界坐标。
+        /// </summary>
+        public Vector3 GripWorldPosition { get; set; }
+
+        /// <summary>
+        /// 当前条目握持锚点局部偏移。
+        /// </summary>
+        public Vector3 GripLocalOffset { get; set; }
 
         /// <summary>
         /// 当前条目是否解析出有效枪口锚点。
@@ -319,6 +359,11 @@ namespace BDP.Core.Trigger.Visual.Diagnostics
         /// 当前预设 East/West 侧身 X 基准。
         /// </summary>
         public float SideBaseX { get; set; }
+
+        /// <summary>
+        /// 当前预设 East/West 侧身 Z 共同基准。
+        /// </summary>
+        public float SideBaseZ { get; set; }
 
         /// <summary>
         /// 当前预设 East/West 前后手 X 分离量。

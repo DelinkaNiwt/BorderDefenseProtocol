@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using BDP.Core.AttackExecution.RangedModules.Runtime;
 using BDP.Core.Projectiles.RangedFlightProtocol.Model;
+using BDP.Core.Projectiles.Interaction;
 using UnityEngine;
 using Verse;
 
@@ -33,6 +34,46 @@ namespace BDP.Core.AttackExecution.RangedProtocol.ProjectileInit
     /// </summary>
     public sealed class ProjectileInitPlanContribution
     {
+        /// <summary>
+        /// 当前局部贡献是否提交投射物交互策略。
+        /// </summary>
+        public bool HasInteractionPolicy { get; set; }
+
+        /// <summary>
+        /// 当前局部贡献提交的投射物交互策略。
+        /// </summary>
+        public ProjectileInteractionPolicy InteractionPolicy { get; set; }
+
+        /// <summary>
+        /// 当前局部贡献是否显式覆盖投射物拖尾颜色。
+        /// </summary>
+        public bool HasTrailColorOverride { get; set; }
+
+        /// <summary>
+        /// 当前局部贡献给出的投射物拖尾颜色。
+        /// </summary>
+        public Color TrailColorOverride { get; set; } = Color.white;
+
+        /// <summary>
+        /// 当前局部贡献是否追加投射物拖尾内芯。
+        /// </summary>
+        public bool HasTrailCoreOverride { get; set; }
+
+        /// <summary>
+        /// 当前局部贡献给出的拖尾内芯颜色。
+        /// </summary>
+        public Color TrailCoreColorOverride { get; set; } = Color.black;
+
+        /// <summary>
+        /// 当前局部贡献给出的拖尾内芯宽度比例。
+        /// </summary>
+        public float TrailCoreWidthRatioOverride { get; set; } = 0.45f;
+
+        /// <summary>
+        /// 当前局部贡献给出的拖尾内芯透明度倍率。
+        /// </summary>
+        public float TrailCoreOpacityOverride { get; set; } = 1f;
+
         /// <summary>
         /// 当前局部贡献对应的 emit 序号。
         /// </summary>

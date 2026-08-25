@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 光魂北侧抵挡使用的后景白闪；复用原版 ExplosionFlash 资源。 -->
+  <FleckDef>
+    <!-- 后景白闪唯一名称。 -->
+    <defName>BDP_Fleck_LightSoulExplosionFlash_Back</defName>
+    <!-- 复用原版静态 Fleck 系统。 -->
+    <fleckSystemClass>FleckSystemStatic</fleckSystemClass>
+    <!-- 白闪图像配置。 -->
+    <graphicData>
+      <!-- 复用原版 Fleck 图像类。 -->
+      <graphicClass>Graphic_Fleck</graphicClass>
+      <!-- 复用原版爆炸白闪贴图。 -->
+      <texPath>Things/Mote/ExplosionFlash</texPath>
+      <!-- 复用原版发光着色器。 -->
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <!-- Projectile（弹体层）低于 Pawn（人物层）。 -->
+    <altitudeLayer>Projectile</altitudeLayer>
+    <!-- 保持原版短暂停留时间。 -->
+    <solidTime>0.05</solidTime>
+    <!-- 保持原版淡出时间。 -->
+    <fadeOutTime>0.1</fadeOutTime>
+  </FleckDef>
+
+  <!-- 光魂北侧抵挡使用的后景火花闪光；复用原版 SparkFlash 资源。 -->
+  <FleckDef>
+    <!-- 后景火花闪光唯一名称。 -->
+    <defName>BDP_Fleck_LightSoulSparkFlash_Back</defName>
+    <!-- 复用原版静态 Fleck 系统。 -->
+    <fleckSystemClass>FleckSystemStatic</fleckSystemClass>
+    <!-- 火花闪光图像配置。 -->
+    <graphicData>
+      <!-- 复用原版 Fleck 图像类。 -->
+      <graphicClass>Graphic_Fleck</graphicClass>
+      <!-- 复用原版火花闪光贴图。 -->
+      <texPath>Things/Mote/SparkFlash</texPath>
+      <!-- 复用原版发光着色器。 -->
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <!-- 统一放到人物下方。 -->
+    <altitudeLayer>Projectile</altitudeLayer>
+    <!-- 保持原版短暂停留时间。 -->
+    <solidTime>0.05</solidTime>
+    <!-- 保持原版淡出时间。 -->
+    <fadeOutTime>0.1</fadeOutTime>
+  </FleckDef>
+
+  <!-- 光魂北侧抵挡使用的后景烟尘；复用原版 AirPuff 资源。 -->
+  <FleckDef>
+    <!-- 后景烟尘唯一名称。 -->
+    <defName>BDP_Fleck_LightSoulAirPuff_Back</defName>
+    <!-- 复用原版抛射 Fleck 系统。 -->
+    <fleckSystemClass>FleckSystemThrown</fleckSystemClass>
+    <!-- 烟尘图像配置。 -->
+    <graphicData>
+      <!-- 复用原版 Fleck 图像类。 -->
+      <graphicClass>Graphic_Fleck</graphicClass>
+      <!-- 复用原版烟尘贴图。 -->
+      <texPath>Things/Mote/AirPuff</texPath>
+      <!-- 复用原版普通粒子着色器。 -->
+      <shaderType>Mote</shaderType>
+      <!-- 保持原版实例化绘制。 -->
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+    <!-- 统一放到人物下方。 -->
+    <altitudeLayer>Projectile</altitudeLayer>
+    <!-- 保持原版淡入时间。 -->
+    <fadeInTime>0.04</fadeInTime>
+    <!-- 保持原版短暂停留时间。 -->
+    <solidTime>0.03</solidTime>
+    <!-- 保持原版淡出时间。 -->
+    <fadeOutTime>1</fadeOutTime>
+  </FleckDef>
+
+  <!-- 光魂北侧抵挡使用的后景微火花；复用原版 MicroSparksFast 资源。 -->
+  <FleckDef>
+    <!-- 后景微火花唯一名称。 -->
+    <defName>BDP_Fleck_LightSoulMicroSparksFast_Back</defName>
+    <!-- 复用原版抛射 Fleck 系统。 -->
+    <fleckSystemClass>FleckSystemThrown</fleckSystemClass>
+    <!-- 微火花图像配置。 -->
+    <graphicData>
+      <!-- 复用原版 Fleck 图像类。 -->
+      <graphicClass>Graphic_Fleck</graphicClass>
+      <!-- 复用原版微火花贴图。 -->
+      <texPath>Things/Mote/MicroSparks</texPath>
+      <!-- 复用原版发光着色器。 -->
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <!-- 统一放到人物下方。 -->
+    <altitudeLayer>Projectile</altitudeLayer>
+    <!-- 保持原版淡入时间。 -->
+    <fadeInTime>0.15</fadeInTime>
+    <!-- 保持原版停留时间。 -->
+    <solidTime>0.3</solidTime>
+    <!-- 保持原版淡出时间。 -->
+    <fadeOutTime>0.45</fadeOutTime>
+  </FleckDef>
+
+  <!-- 光魂南侧抵挡使用的前景快速飞散火花；仅调整原版 Mote 高度层。 -->
+  <ThingDef>
+    <!-- 前景快速火花唯一名称。 -->
+    <defName>BDP_Mote_LightSoulSparkThrownFast_Front</defName>
+    <!-- 默认中文内部名称。 -->
+    <label>光魂前景快速火花</label>
+    <!-- 保持原版抛射 Mote 行为。 -->
+    <thingClass>MoteThrown</thingClass>
+    <!-- 声明为原版 Mote 类别。 -->
+    <category>Mote</category>
+    <!-- 快速火花图像配置。 -->
+    <graphicData>
+      <!-- 复用原版 Mote 图像类。 -->
+      <graphicClass>Graphic_Mote</graphicClass>
+      <!-- 复用原版快速火花贴图。 -->
+      <texPath>Things/Mote/SparkThrown</texPath>
+      <!-- 复用原版普通粒子着色器。 -->
+      <shaderType>Mote</shaderType>
+    </graphicData>
+    <!-- MoteOverhead（上层粒子层）高于 Pawn。 -->
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <!-- 保持原版逐 tick 更新。 -->
+    <tickerType>Normal</tickerType>
+    <!-- 粒子不使用生命值。 -->
+    <useHitPoints>false</useHitPoints>
+    <!-- 粒子不进入存档。 -->
+    <isSaveable>false</isSaveable>
+    <!-- 粒子不使用 Thing 朝向。 -->
+    <rotatable>false</rotatable>
+    <!-- 快速火花生命周期参数。 -->
+    <mote>
+      <!-- 保持原版淡入时间。 -->
+      <fadeInTime>0.03</fadeInTime>
+      <!-- 保持原版停留时间。 -->
+      <solidTime>0.04</solidTime>
+      <!-- 保持原版淡出时间。 -->
+      <fadeOutTime>0.13</fadeOutTime>
+      <!-- 保持原版地面碰撞。 -->
+      <collide>true</collide>
+    </mote>
+  </ThingDef>
+
+  <!-- 光魂南侧抵挡使用的前景长火花；仅调整原版 Mote 高度层。 -->
+  <ThingDef>
+    <!-- 前景长火花唯一名称。 -->
+    <defName>BDP_Mote_LightSoulLongSparkThrown_Front</defName>
+    <!-- 默认中文内部名称。 -->
+    <label>光魂前景长火花</label>
+    <!-- 保持原版抛射 Mote 行为。 -->
+    <thingClass>MoteThrown</thingClass>
+    <!-- 声明为原版 Mote 类别。 -->
+    <category>Mote</category>
+    <!-- 长火花图像配置。 -->
+    <graphicData>
+      <!-- 复用原版 Mote 图像类。 -->
+      <graphicClass>Graphic_Mote</graphicClass>
+      <!-- 复用原版长火花贴图。 -->
+      <texPath>Things/Mote/LongSparkThrown</texPath>
+      <!-- 复用原版发光着色器。 -->
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <!-- 统一放到人物上方。 -->
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <!-- 保持原版逐 tick 更新。 -->
+    <tickerType>Normal</tickerType>
+    <!-- 粒子不使用生命值。 -->
+    <useHitPoints>false</useHitPoints>
+    <!-- 粒子不进入存档。 -->
+    <isSaveable>false</isSaveable>
+    <!-- 粒子不使用 Thing 朝向。 -->
+    <rotatable>false</rotatable>
+    <!-- 长火花生命周期参数。 -->
+    <mote>
+      <!-- 保持原版淡入时间。 -->
+      <fadeInTime>0.02</fadeInTime>
+      <!-- 保持原版停留时间。 -->
+      <solidTime>0.05</solidTime>
+      <!-- 保持原版淡出时间。 -->
+      <fadeOutTime>0.2</fadeOutTime>
+      <!-- 保持原版地面碰撞。 -->
+      <collide>true</collide>
+      <!-- 长火花沿移动方向旋转。 -->
+      <rotateTowardsMoveDirection>true</rotateTowardsMoveDirection>
+    </mote>
+  </ThingDef>
+
+  <!-- 光魂南侧及正东、正西抵挡使用的前景组合特效。 -->
+  <EffecterDef>
+    <!-- 前景组合特效唯一名称。 -->
+    <defName>BDP_Effecter_LightSoulDeflect_Front</defName>
+    <!-- 完整复用原版金属弹丸偏转参数，只替换两种 Mote 的高度层。 -->
+    <children>
+      <!-- 播放原版金属偏转声。 -->
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>Deflect_Metal</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <!-- 生成原版前景大火花闪光。 -->
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>SparkFlash</fleckDef>
+        <positionLerpFactor>0.6</positionLerpFactor>
+        <chancePerTick>0.2</chancePerTick>
+        <scale>2.5~4.5</scale>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <!-- 生成原版前景烟尘。 -->
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <positionRadius>0.2</positionRadius>
+        <fleckDef>AirPuff</fleckDef>
+        <burstCount>4~5</burstCount>
+        <speed>0.4~0.8</speed>
+        <scale>0.5~0.8</scale>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <!-- 生成前景快速飞散火花。 -->
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <positionRadius>0.02</positionRadius>
+        <moteDef>BDP_Mote_LightSoulSparkThrownFast_Front</moteDef>
+        <burstCount>4~5</burstCount>
+        <speed>3.3~5</speed>
+        <scale>0.1~0.2</scale>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <!-- 生成原版前景微火花。 -->
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <positionRadius>0.02</positionRadius>
+        <fleckDef>MicroSparksFast</fleckDef>
+        <burstCount>1~1</burstCount>
+        <speed>0.3~0.4</speed>
+        <rotationRate>5~10</rotationRate>
+        <scale>0.3~0.5</scale>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <!-- 生成原版前景小火花闪光。 -->
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <positionRadius>0.1</positionRadius>
+        <fleckDef>SparkFlash</fleckDef>
+        <burstCount>1~1</burstCount>
+        <scale>0.9~1.3</scale>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <!-- 生成前景长火花。 -->
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>BDP_Mote_LightSoulLongSparkThrown_Front</moteDef>
+        <burstCount>1~1</burstCount>
+        <scale>0.38~0.6</scale>
+        <speed>7~14</speed>
+        <angle>135~225</angle>
+        <positionRadius>0.01</positionRadius>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+    </children>
+    <!-- 保持原版沿目标方向偏移 0.25 格。 -->
+    <offsetTowardsTarget>0.25</offsetTowardsTarget>
+    <!-- 保持原版整体随机半径。 -->
+    <positionRadius>0.1</positionRadius>
+  </EffecterDef>
+
+  <!-- 光魂北侧抵挡使用的后景组合特效。 -->
+  <EffecterDef>
+    <!-- 后景组合特效唯一名称。 -->
+    <defName>BDP_Effecter_LightSoulDeflect_Back</defName>
+    <!-- 完整复用原版金属弹丸偏转参数，只把 Fleck 统一替换为后景定义。 -->
+    <children>
+      <!-- 播放原版金属偏转声。 -->
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>Deflect_Metal</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <!-- 生成后景大火花闪光。 -->
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>BDP_Fleck_LightSoulSparkFlash_Back</fleckDef>
+        <positionLerpFactor>0.6</positionLerpFactor>
+        <chancePerTick>0.2</chancePerTick>
+        <scale>2.5~4.5</scale>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <!-- 生成后景烟尘。 -->
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <positionRadius>0.2</positionRadius>
+        <fleckDef>BDP_Fleck_LightSoulAirPuff_Back</fleckDef>
+        <burstCount>4~5</burstCount>
+        <speed>0.4~0.8</speed>
+        <scale>0.5~0.8</scale>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <!-- 复用原版 Projectile 层快速飞散火花。 -->
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <positionRadius>0.02</positionRadius>
+        <moteDef>Mote_SparkThrownFast</moteDef>
+        <burstCount>4~5</burstCount>
+        <speed>3.3~5</speed>
+        <scale>0.1~0.2</scale>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <!-- 生成后景微火花。 -->
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <positionRadius>0.02</positionRadius>
+        <fleckDef>BDP_Fleck_LightSoulMicroSparksFast_Back</fleckDef>
+        <burstCount>1~1</burstCount>
+        <speed>0.3~0.4</speed>
+        <rotationRate>5~10</rotationRate>
+        <scale>0.3~0.5</scale>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <!-- 生成后景小火花闪光。 -->
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <positionRadius>0.1</positionRadius>
+        <fleckDef>BDP_Fleck_LightSoulSparkFlash_Back</fleckDef>
+        <burstCount>1~1</burstCount>
+        <scale>0.9~1.3</scale>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <!-- 复用原版 Projectile 层长火花。 -->
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>Mote_LongSparkThrown</moteDef>
+        <burstCount>1~1</burstCount>
+        <scale>0.38~0.6</scale>
+        <speed>7~14</speed>
+        <angle>135~225</angle>
+        <positionRadius>0.01</positionRadius>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+    </children>
+    <!-- 保持原版沿目标方向偏移 0.25 格。 -->
+    <offsetTowardsTarget>0.25</offsetTowardsTarget>
+    <!-- 保持原版整体随机半径。 -->
+    <positionRadius>0.1</positionRadius>
+  </EffecterDef>
+
+</Defs>

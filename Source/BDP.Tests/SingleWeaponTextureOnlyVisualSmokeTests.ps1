@@ -16,18 +16,21 @@ $repoRoot = Split-Path -Parent $sourceRoot
 $bdpSourceRoot = Join-Path $repoRoot 'Source\BDP'
 
 $visualProjectionBuilderPath = Join-Path $bdpSourceRoot 'Core\Expressions\Projection\DefaultVisualProjectionBuilder.cs'
+$sourceReferenceMatcherPath = Join-Path $bdpSourceRoot 'Core\Expressions\Utilities\ExpressionSourceReferenceMatcher.cs'
 $visualProjectionPath = Join-Path $bdpSourceRoot 'Core\Expressions\Model\VisualExpressionProjection.cs'
 $visualResidentEntryPath = Join-Path $bdpSourceRoot 'Core\Expressions\Model\VisualResidentEntry.cs'
 $hostEquipmentRenderModePath = Join-Path $bdpSourceRoot 'Core\Expressions\Model\HostEquipmentRenderMode.cs'
 $drawPatchPath = Join-Path $bdpSourceRoot 'Patches\Patch_PawnRenderUtility_DrawEquipmentAiming_BdpVisual.cs'
 
 Assert-True (Test-Path -LiteralPath $visualProjectionBuilderPath) 'DefaultVisualProjectionBuilder must exist.'
+Assert-True (Test-Path -LiteralPath $sourceReferenceMatcherPath) 'ExpressionSourceReferenceMatcher must exist.'
 Assert-True (Test-Path -LiteralPath $visualProjectionPath) 'VisualExpressionProjection must exist.'
 Assert-True (Test-Path -LiteralPath $visualResidentEntryPath) 'VisualResidentEntry must exist.'
 Assert-True (Test-Path -LiteralPath $hostEquipmentRenderModePath) 'HostEquipmentRenderMode must exist.'
 Assert-True (Test-Path -LiteralPath $drawPatchPath) 'DrawEquipmentAiming visual patch must exist.'
 
 $visualProjectionBuilderText = Get-Content -LiteralPath $visualProjectionBuilderPath -Raw -Encoding utf8
+$sourceReferenceMatcherText = Get-Content -LiteralPath $sourceReferenceMatcherPath -Raw -Encoding utf8
 $visualProjectionText = Get-Content -LiteralPath $visualProjectionPath -Raw -Encoding utf8
 $visualResidentEntryText = Get-Content -LiteralPath $visualResidentEntryPath -Raw -Encoding utf8
 $hostEquipmentRenderModeText = Get-Content -LiteralPath $hostEquipmentRenderModePath -Raw -Encoding utf8
@@ -40,10 +43,11 @@ Assert-True (
 
 Assert-True (
     ($visualProjectionBuilderText -match 'HashSet<string>') -and
-    ($visualProjectionBuilderText -match 'BuildWeaponChipInstanceKey') -and
-    ($visualProjectionBuilderText -match 'SourceReference\.ChipThingId') -and
-    ($visualProjectionBuilderText -match 'SourceReference\.Side') -and
-    ($visualProjectionBuilderText -match 'SourceReference\.SlotIndex')
+    ($visualProjectionBuilderText -match 'ExpressionSourceReferenceMatcher\.BuildChipInstanceKey') -and
+    ($visualProjectionBuilderText -notmatch 'BuildWeaponChipInstanceKey') -and
+    ($sourceReferenceMatcherText -match 'sourceReference\.ChipThingId') -and
+    ($sourceReferenceMatcherText -match 'sourceReference\.Side') -and
+    ($sourceReferenceMatcherText -match 'sourceReference\.SlotIndex')
 ) 'Single-weapon detection must count distinct source chip instances with slot fallback, so one chip with primary/secondary verbs still counts as one weapon chip.'
 
 Assert-True (
@@ -66,7 +70,7 @@ Assert-True (
 
 Assert-True (
     ($drawPatchText -match 'HostEquipmentRenderMode\.ReplaceTextureOnly') -and
-    ($drawPatchText -match 'TryDrawSingleWeaponTextureReplacement') -and
+    ($drawPatchText -match 'TryHandleSingleWeaponTextureReplacement') -and
     ($drawPatchText -match 'SelectTextureOnlyEntry') -and
     ($drawPatchText -match 'ResolveTextureOnlyPreset') -and
     ($drawPatchText -match 'DrawTextureOnlyReplacement')
@@ -74,17 +78,19 @@ Assert-True (
 
 $textureOnlyMatch = [regex]::Match(
     $drawPatchText,
-    '(?s)private static bool TryDrawSingleWeaponTextureReplacement\(.*?\n        \}')
+    '(?s)private static bool TryHandleSingleWeaponTextureReplacement\(.*?\n        \}')
 
-Assert-True ($textureOnlyMatch.Success) 'TryDrawSingleWeaponTextureReplacement must exist as a small, inspectable helper.'
+Assert-True ($textureOnlyMatch.Success) 'TryHandleSingleWeaponTextureReplacement must exist as a small, inspectable helper.'
 
 $textureOnlyBody = $textureOnlyMatch.Value
 Assert-True (
-    ($textureOnlyBody -notmatch 'PoseResolver') -and
-    ($textureOnlyBody -notmatch 'VisualPoseRequest') -and
+    ($textureOnlyBody -match 'PoseResolver\.ResolveTextureOnly') -and
+    ($textureOnlyBody -match 'VisualPoseRequest') -and
+    ($textureOnlyBody -match 'WeaponStageSnapshot') -and
+    ($textureOnlyBody -match 'ResolveStageVisibility') -and
     ($textureOnlyBody -notmatch 'ResolveExecutionActive') -and
     ($textureOnlyBody -notmatch 'ResolveMuzzleActive')
-) 'Texture-only replacement must not call the dual-weapon pose, execution-focus, or muzzle-focus path.'
+) 'Texture-only replacement must use the shared vanilla-pose resolver without entering dual-weapon execution or muzzle focus.'
 
 Assert-True (
     $drawPatchText -match 'DrawTextureOnlyReplacement\(\s*equipment,\s*triggerBody,\s*entry,'
@@ -95,11 +101,12 @@ $singleDrawMethod = [regex]::Match(
     '(?s)private static void DrawTextureOnlyReplacement\(.*?\r?\n        \}\r?\n\r?\n        /// <summary>').Value
 
 Assert-True (
-    ($singleDrawMethod -match 'triggerBody\.VerbHostManager\.TryGetByResultId\(\s*entry\.ResultId,') -and
-    ($singleDrawMethod -match 'EquipmentUtility\.Recoil\(\s*equipment\.def,\s*binding\.RangedVerb,') -and
-    ($singleDrawMethod -notmatch 'EquipmentUtility\.GetRecoilVerb') -and
-    ($singleDrawMethod -notmatch 'compEquippable\.AllVerbs')
-) '单武器必须读取来源正式 RangedVerb，不得继续读取宿主装备 AllVerbs。'
+    ($singleDrawMethod -match 'ApplyVanillaRecoil\(equipment, triggerBody, entry, sample, pose\)') -and
+    ($drawPatchText -match 'triggerBody\.VerbHostManager\.TryGetByResultId\(\s*entry\.ResultId,') -and
+    ($drawPatchText -match 'EquipmentUtility\.Recoil\(\s*equipment\.def,\s*binding\.RangedVerb,') -and
+    ($drawPatchText -notmatch 'EquipmentUtility\.GetRecoilVerb') -and
+    ($drawPatchText -notmatch 'compEquippable\.AllVerbs')
+) '单武器必须通过共享原版后坐成员读取来源正式 RangedVerb，不得读取宿主装备 AllVerbs。'
 
 Assert-True (
     ($drawPatchText -match 'EquipmentUtility\.Recoil') -and

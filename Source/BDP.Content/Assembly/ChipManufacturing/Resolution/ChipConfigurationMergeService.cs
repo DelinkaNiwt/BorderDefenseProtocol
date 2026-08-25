@@ -59,7 +59,10 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
                         second.Loadout.DeactivationDelayTicks),
                     ActivationExclusionGroups = Union(
                         first.Loadout.ActivationExclusionGroups,
-                        second.Loadout.ActivationExclusionGroups)
+                        second.Loadout.ActivationExclusionGroups),
+                    ActivationAudio = MergeActivationAudio(
+                        first.Loadout.ActivationAudio,
+                        second.Loadout.ActivationAudio)
                 },
                 Trion = new ChipTrionConfig
                 {
@@ -107,8 +110,47 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
                     DeactivationDelayTicks = source.DeactivationDelayTicks,
                     ActivationExclusionGroups = source.ActivationExclusionGroups != null
                         ? new List<ChipExclusionGroupDef>(source.ActivationExclusionGroups)
-                        : null
+                        : null,
+                    ActivationAudio = CloneActivationAudio(source.ActivationAudio)
                 };
+        }
+
+        /// <summary>复制激活音效配置，避免成品配置持有动作预设的可变对象。</summary>
+        private static ChipActivationAudioConfig CloneActivationAudio(
+            ChipActivationAudioConfig source)
+        {
+            return source == null
+                ? null
+                : new ChipActivationAudioConfig
+                {
+                    ActivationWarmupStartSound = source.ActivationWarmupStartSound,
+                    ActivationWarmupLoopSound = source.ActivationWarmupLoopSound,
+                    ActivationWarmupEndSound = source.ActivationWarmupEndSound
+                };
+        }
+
+        /// <summary>
+        /// 合并双动作的激活音效。
+        /// 每个位置按动作顺序取第一个非空声明，避免一次前摇叠放两套音效。
+        /// </summary>
+        private static ChipActivationAudioConfig MergeActivationAudio(
+            ChipActivationAudioConfig first,
+            ChipActivationAudioConfig second)
+        {
+            if (first == null && second == null)
+            {
+                return null;
+            }
+
+            return new ChipActivationAudioConfig
+            {
+                ActivationWarmupStartSound = first?.ActivationWarmupStartSound
+                    ?? second?.ActivationWarmupStartSound,
+                ActivationWarmupLoopSound = first?.ActivationWarmupLoopSound
+                    ?? second?.ActivationWarmupLoopSound,
+                ActivationWarmupEndSound = first?.ActivationWarmupEndSound
+                    ?? second?.ActivationWarmupEndSound
+            };
         }
 
         /// <summary>复制芯片本体 Trion 配置。</summary>

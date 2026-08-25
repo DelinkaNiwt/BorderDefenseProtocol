@@ -68,13 +68,21 @@ namespace BDP.Core.Combos
         }
 
         /// <summary>
-        /// 按两枚芯片 Thing 匹配当前唯一命中的组合技。
-        /// 芯片身份优先取制造预设 defName，回退到 ThingDef.defName。
-        /// 匹配规则不分 chipA / chipB 书写顺序。
+        /// 按两枚芯片 Thing 匹配第一份动作身份与成品准入都成立的组合技。
+        /// 动作身份只取制造来源首个预设 DefName，第一来源/第二来源分配允许正反向尝试。
         /// </summary>
-        internal ComboDefinitionReadResult FindMatch(Thing chipA, Thing chipB)
+        internal ComboDefinitionReadResult FindMatch(Thing firstSourceChip, Thing secondSourceChip)
         {
-            return comboRuntimeIndex.FindMatch(chipA, chipB, Read);
+            return comboRuntimeIndex.FindMatch(firstSourceChip, secondSourceChip, Read);
+        }
+
+        /// <summary>按两枚芯片匹配组合技，并返回集中诊断失败摘要。</summary>
+        internal ComboDefinitionReadResult FindMatch(
+            Thing firstSourceChip,
+            Thing secondSourceChip,
+            out string failureReason)
+        {
+            return comboRuntimeIndex.FindMatch(firstSourceChip, secondSourceChip, Read, out failureReason);
         }
 
         /// <summary>

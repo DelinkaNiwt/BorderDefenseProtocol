@@ -73,6 +73,11 @@ namespace BDP.Core.Expressions
         public string VisualPresetDefName { get; set; }
 
         /// <summary>
+        /// 当前材料对基础视觉图层的局部覆盖预设 DefName。
+        /// </summary>
+        public string VisualGraphicOverrideDefName { get; set; }
+
+        /// <summary>
         /// 当前材料参与复合表达时使用的视觉预设 DefName。
         /// </summary>
         public string CompositeVisualPresetDefName { get; set; }
@@ -207,6 +212,11 @@ namespace BDP.Core.Expressions
         /// 这一层仍只负责顺序与配置快照传递。
         /// </summary>
         public IReadOnlyList<RangedModuleMountConfig> RangedModules { get; set; }
+
+        /// <summary>
+        /// 当前来源向其它远程表达结果发布的开放式增强声明。
+        /// </summary>
+        public IReadOnlyList<RangedModuleAugmentationConfig> RangedModuleAugmentations { get; set; }
 
         /// <summary>
         /// 当前来源的可空变体键，用于身份判定和聚合键区分。

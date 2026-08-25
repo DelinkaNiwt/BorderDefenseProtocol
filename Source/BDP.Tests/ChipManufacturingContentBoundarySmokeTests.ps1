@@ -30,10 +30,13 @@ foreach ($name in $forbidden)
 Assert-True ($coreText -match "IChipInstanceDefinitionProvider") "Core 应保留中性芯片实例提供器。"
 Assert-True ($coreText -match "SourceVariantKey") "Core 表达运行时应使用中性来源变体键。"
 Assert-True ($coreText -match "SourceVariantLabel") "Core 表达运行时应使用中性来源变体标签。"
+Assert-True ($coreText -match "IComboExpressionVariantModifierProvider") "Core 应提供中性的组合条目变体修正接口。"
+Assert-True ($coreText -match "ComboExpressionVariantModifierRegistry") "Core 应提供组合条目变体修正注册表。"
+Assert-True ($coreText -match "ComboExpressionEntryCloneService") "Core 应提供组合条目副本服务。"
 
 $comboSurfaceText = Get-Utf8Text (Join-Path $coreRoot "Core\Combos\Access\ComboSurfaceAccess.cs")
-Assert-True ($comboSurfaceText -notmatch "SourceVariantKey|HasGunShell") `
-    "Core Combo 准入不得把中性来源变体解释成枪壳业务。"
+Assert-True ($comboSurfaceText -notmatch "SourceVariantKey|HasArmamentForm") `
+    "Core Combo 准入不得把中性来源变体解释成构型业务。"
 $collectorText = Get-Utf8Text (Join-Path $coreRoot "Core\Expressions\Pipeline\ExpressionSourceCollector.cs")
 $gizmoText = Get-Utf8Text (Join-Path $coreRoot "Core\Expressions\Projection\DefaultManualEntryGizmoResolver.cs")
 Assert-True (($collectorText + $gizmoText) -notmatch 'SourceVariantLabel[^\r\n]*型|sourceVariantLabel[^\r\n]*型') `

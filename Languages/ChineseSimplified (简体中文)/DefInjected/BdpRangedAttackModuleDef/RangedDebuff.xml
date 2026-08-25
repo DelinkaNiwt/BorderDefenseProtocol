@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 远程减益模块名称。 -->
+  <BDP_RangedDebuff_DirectNoDamage.label>远程减益直击</BDP_RangedDebuff_DirectNoDamage.label>
+  <BDP_RangedDebuff_AreaNoDamage.label>范围减益</BDP_RangedDebuff_AreaNoDamage.label>
+  <BDP_RangedDebuff_LeadWeight.label>铅块负重</BDP_RangedDebuff_LeadWeight.label>
+</LanguageData>

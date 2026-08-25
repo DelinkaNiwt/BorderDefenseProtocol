@@ -63,9 +63,10 @@ namespace BDP.Core.Expressions
             ITriggerLoadoutReader triggerLoadoutReader)
         {
             string currentModeKey = triggerLoadoutReader != null ? triggerLoadoutReader.GetChipModeKey(chip) : null;
+            string currentStanceKey = triggerLoadoutReader != null ? triggerLoadoutReader.GetChipStanceKey(chip) : null;
 
             // 芯片配置来自实例提供器，不适用 Def 级缓存——直接解释。
-            return ResolveUncached(config, currentModeKey);
+            return ResolveUncached(config, currentModeKey, currentStanceKey);
         }
 
         /// <summary>
@@ -73,7 +74,8 @@ namespace BDP.Core.Expressions
         /// </summary>
         private static ChipExpressionResolvedContract ResolveUncached(
             ChipExpressionConfig config,
-            string currentModeKey)
+            string currentModeKey,
+            string currentStanceKey)
         {
             ChipExpressionContractValidationResult validation = new ChipExpressionContractValidationResult
             {
@@ -116,10 +118,15 @@ namespace BDP.Core.Expressions
             }
 
             string effectiveModeKey = ResolveEffectiveModeKey(config, currentModeKey, validation);
+            string effectiveStanceKey = ResolveEffectiveStanceKey(
+                config,
+                effectiveModeKey,
+                currentStanceKey,
+                validation);
             List<ChipExpressionEntryConfig> selectedConfigs =
-                SelectActiveEntryConfigs(config, effectiveModeKey, validation);
+                SelectActiveEntryConfigs(config, effectiveModeKey, effectiveStanceKey, validation);
             List<ChipExpressionEntryContract> entries =
-                TranslateEntries(selectedConfigs, effectiveModeKey, validation);
+                TranslateEntries(selectedConfigs, effectiveModeKey, effectiveStanceKey, validation);
             NormalizeVerbEntries(entries, validation);
 
             return new ChipExpressionResolvedContract
@@ -140,6 +147,7 @@ namespace BDP.Core.Expressions
         private static List<ChipExpressionEntryContract> TranslateEntries(
             List<ChipExpressionEntryConfig> configs,
             string effectiveModeKey,
+            string effectiveStanceKey,
             ChipExpressionContractValidationResult validation)
         {
             List<ChipExpressionEntryContract> result = new List<ChipExpressionEntryContract>();
@@ -157,7 +165,7 @@ namespace BDP.Core.Expressions
                 }
 
                 ValidateEntry(config, validation, "表达条目 " + config.Id);
-                result.Add(TranslateEntry(config, effectiveModeKey));
+                result.Add(TranslateEntry(config, effectiveModeKey, effectiveStanceKey));
             }
 
             return result;
@@ -187,6 +195,46 @@ namespace BDP.Core.Expressions
                 {
                     ModeKey = config.ModeKey,
                     DisplayLabel = config.DisplayLabel,
+                    DisplayLabelKey = config.DisplayLabelKey,
+                    GizmoIconTexPath = string.IsNullOrWhiteSpace(config.GizmoIconTexPath)
+                        ? null
+                        : config.GizmoIconTexPath,
+                    ActiveEntryIds = config.ActiveEntryIds != null
+                        ? new List<string>(config.ActiveEntryIds)
+                        : new List<string>(),
+                    DefaultStanceKey = config.DefaultStanceKey,
+                    Stances = TranslateStances(config.Stances)
+                });
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 翻译一个形态内部的姿态契约集合。
+        /// </summary>
+        private static List<ChipExpressionStanceContract> TranslateStances(
+            List<ChipExpressionStanceConfig> configs)
+        {
+            List<ChipExpressionStanceContract> result = new List<ChipExpressionStanceContract>();
+            if (configs == null)
+            {
+                return result;
+            }
+
+            for (int index = 0; index < configs.Count; index++)
+            {
+                ChipExpressionStanceConfig config = configs[index];
+                if (config == null || string.IsNullOrWhiteSpace(config.StanceKey))
+                {
+                    continue;
+                }
+
+                result.Add(new ChipExpressionStanceContract
+                {
+                    StanceKey = config.StanceKey,
+                    DisplayLabel = config.DisplayLabel,
+                    DisplayLabelKey = config.DisplayLabelKey,
                     GizmoIconTexPath = string.IsNullOrWhiteSpace(config.GizmoIconTexPath)
                         ? null
                         : config.GizmoIconTexPath,
@@ -280,11 +328,46 @@ namespace BDP.Core.Expressions
         }
 
         /// <summary>
+        /// 解析当前有效形态内部真正采用的姿态键。
+        /// 无姿态形态返回空；未知姿态回退本形态默认姿态并保留诊断。
+        /// </summary>
+        private static string ResolveEffectiveStanceKey(
+            ChipExpressionConfig config,
+            string effectiveModeKey,
+            string currentStanceKey,
+            ChipExpressionContractValidationResult validation)
+        {
+            ChipExpressionModeConfig mode = FindMode(config != null ? config.Modes : null, effectiveModeKey);
+            if (mode == null || mode.Stances == null || mode.Stances.Count == 0)
+            {
+                return null;
+            }
+
+            ChipExpressionStanceConfig currentStance = FindStance(mode.Stances, currentStanceKey);
+            if (currentStance != null)
+            {
+                return currentStance.StanceKey;
+            }
+
+            if (!string.IsNullOrWhiteSpace(currentStanceKey) && validation != null)
+            {
+                validation.Warnings.Add(
+                    "当前姿态 " + currentStanceKey
+                    + " 不属于形态 " + mode.ModeKey
+                    + "，已回退默认姿态 " + mode.DefaultStanceKey + "。");
+            }
+
+            ChipExpressionStanceConfig defaultStance = FindStance(mode.Stances, mode.DefaultStanceKey);
+            return defaultStance != null ? defaultStance.StanceKey : mode.DefaultStanceKey;
+        }
+
+        /// <summary>
         /// 按最终形态的引用顺序从统一目录选取表达条目。
         /// </summary>
         private static List<ChipExpressionEntryConfig> SelectActiveEntryConfigs(
             ChipExpressionConfig config,
             string effectiveModeKey,
+            string effectiveStanceKey,
             ChipExpressionContractValidationResult validation)
         {
             if (!HasModes(config))
@@ -314,14 +397,38 @@ namespace BDP.Core.Expressions
                 return result;
             }
 
-            for (int index = 0; index < mode.ActiveEntryIds.Count; index++)
+            List<string> modeEntryIds = mode.ActiveEntryIds ?? new List<string>();
+            for (int index = 0; index < modeEntryIds.Count; index++)
             {
-                string entryId = mode.ActiveEntryIds[index];
+                string entryId = modeEntryIds[index];
                 ChipExpressionEntryConfig entry;
                 if (!entriesById.TryGetValue(entryId, out entry))
                 {
                     validation.IsValid = false;
                     validation.Errors.Add("最终形态 " + mode.ModeKey + " 引用了不存在的表达条目 " + entryId + "。");
+                    continue;
+                }
+
+                result.Add(entry);
+            }
+
+            ChipExpressionStanceConfig stance = FindStance(mode.Stances, effectiveStanceKey);
+            if (stance == null)
+            {
+                return result;
+            }
+
+            List<string> stanceEntryIds = stance.ActiveEntryIds ?? new List<string>();
+            for (int index = 0; index < stanceEntryIds.Count; index++)
+            {
+                string entryId = stanceEntryIds[index];
+                ChipExpressionEntryConfig entry;
+                if (!entriesById.TryGetValue(entryId, out entry))
+                {
+                    validation.IsValid = false;
+                    validation.Errors.Add(
+                        "最终形态 " + mode.ModeKey + " 的姿态 " + stance.StanceKey
+                        + " 引用了不存在的表达条目 " + entryId + "。");
                     continue;
                 }
 
@@ -365,11 +472,39 @@ namespace BDP.Core.Expressions
         }
 
         /// <summary>
+        /// 按不区分大小写的稳定键查找姿态。
+        /// </summary>
+        private static ChipExpressionStanceConfig FindStance(
+            List<ChipExpressionStanceConfig> stances,
+            string stanceKey)
+        {
+            if (stances == null || string.IsNullOrWhiteSpace(stanceKey))
+            {
+                return null;
+            }
+
+            for (int index = 0; index < stances.Count; index++)
+            {
+                ChipExpressionStanceConfig stance = stances[index];
+                if (stance != null
+                    && string.Equals(stance.StanceKey, stanceKey, StringComparison.OrdinalIgnoreCase))
+                {
+                    return stance;
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
         /// 翻译单条统一条目配置。
         /// </summary>
-        private static ChipExpressionEntryContract TranslateEntry(ChipExpressionEntryConfig config, string modeKey)
+        private static ChipExpressionEntryContract TranslateEntry(
+            ChipExpressionEntryConfig config,
+            string modeKey,
+            string stanceKey)
         {
-            List<Tool> declaredTools = ResolveDeclaredTools(config);
+            List<Tool> declaredTools = ResolveDeclaredTools(config.Tool, config.tools, config.ToolLabelKeys);
             Tool resolvedTool = ResolvePrimaryDeclaredTool(declaredTools);
             VerbProperties resolvedVerbProps = ResolveVerbProps(config, resolvedTool);
             ManeuverDef resolvedManeuver = ResolveManeuver(config, resolvedTool);
@@ -387,9 +522,10 @@ namespace BDP.Core.Expressions
             return new ChipExpressionEntryContract
             {
                 Id = config.Id,
-                DisplayLabel = config.DisplayLabel,
+                DisplayLabel = ResolveDisplayLabel(config.DisplayLabel, config.DisplayLabelKey),
                 ManualEntryIconTexPath = config.Presentation != null ? config.Presentation.ManualEntryIconTexPath : null,
                 VisualPresetDefName = config.Presentation != null ? config.Presentation.VisualPresetDefName : null,
+                VisualGraphicOverrideDefName = config.Presentation != null ? config.Presentation.VisualGraphicOverrideDefName : null,
                 CompositeVisualPresetDefName = config.Presentation != null ? config.Presentation.CompositeVisualPresetDefName : null,
                 ForceSuppressHostEquipment = config.Presentation != null && config.Presentation.ForceSuppressHostEquipment,
                 VisualPriority = config.Presentation != null ? config.Presentation.VisualPriority : 0,
@@ -405,6 +541,7 @@ namespace BDP.Core.Expressions
                 ParentEntryId = config.ParentEntryId,
                 WeaponMode = config.WeaponMode,
                 ModeKey = modeKey,
+                StanceKey = stanceKey,
                 ExecutionStyle = ResolveExecutionStyle(config, resolvedTool),
                 VerbProps = ResolvedVerbSpecFactory.CreateSurfaceVerbProps(resolvedVerbSpec),
                 ResolvedVerbSpec = resolvedVerbSpec,
@@ -421,8 +558,21 @@ namespace BDP.Core.Expressions
                 RangedModules = config.RangedModules != null
                     ? CloneRangedModules(config.RangedModules)
                     : new List<RangedModuleMountConfig>(),
+                RangedModuleAugmentations = config.RangedModuleAugmentations != null
+                    ? CloneRangedModuleAugmentations(config.RangedModuleAugmentations)
+                    : new List<RangedModuleAugmentationConfig>(),
                 ProjectileOverrides = config.ProjectileOverrides
             };
+        }
+
+        /// <summary>
+        /// 优先解析条目语言包键；旧内容未声明语言键时沿用直接显示名。
+        /// </summary>
+        private static string ResolveDisplayLabel(string displayLabel, string displayLabelKey)
+        {
+            return !string.IsNullOrWhiteSpace(displayLabelKey)
+                ? displayLabelKey.Translate().ToString()
+                : displayLabel;
         }
 
         /// <summary>
@@ -501,7 +651,8 @@ namespace BDP.Core.Expressions
             {
                 case ChipExpressionEntryKindConfig.PrimaryVerb:
                 case ChipExpressionEntryKindConfig.SecondaryVerb:
-                    List<Tool> declaredTools = ResolveDeclaredTools(config);
+                    // 定义校验只检查原始结构，不应在语言系统尚未稳定时提前冻结运行时名称。
+                    List<Tool> declaredTools = ResolveDeclaredTools(config.Tool, config.tools, null);
                     Tool resolvedTool = ResolvePrimaryDeclaredTool(declaredTools);
                     bool meleeEntry = IsMeleeEntry(config);
 
@@ -577,36 +728,82 @@ namespace BDP.Core.Expressions
         /// 解析作者声明的全部 Tool。
         /// 显式单 Tool 会被并入多 Tool 候选集，最终顺序以作者书写顺序为准。
         /// </summary>
-        private static List<Tool> ResolveDeclaredTools(ChipExpressionEntryConfig config)
+        private static List<Tool> ResolveDeclaredTools(
+            Tool singleTool,
+            IReadOnlyList<Tool> tools,
+            IReadOnlyList<string> toolLabelKeys)
         {
             List<Tool> result = new List<Tool>();
-            if (config == null)
+            int labelKeyIndex = 0;
+            if (singleTool != null)
+            {
+                result.Add(CloneToolWithResolvedLabel(singleTool, ResolveLabelKey(toolLabelKeys, labelKeyIndex)));
+                labelKeyIndex++;
+            }
+
+            if (tools == null)
             {
                 return result;
             }
 
-            if (config.Tool != null)
+            for (int i = 0; i < tools.Count; i++)
             {
-                result.Add(config.Tool);
-            }
-
-            if (config.tools == null)
-            {
-                return result;
-            }
-
-            for (int i = 0; i < config.tools.Count; i++)
-            {
-                Tool declaredTool = config.tools[i];
-                if (declaredTool == null || result.Contains(declaredTool))
+                Tool declaredTool = tools[i];
+                if (declaredTool == null || ReferenceEquals(declaredTool, singleTool))
                 {
+                    labelKeyIndex++;
                     continue;
                 }
 
-                result.Add(declaredTool);
+                result.Add(CloneToolWithResolvedLabel(
+                    declaredTool,
+                    ResolveLabelKey(toolLabelKeys, labelKeyIndex)));
+                labelKeyIndex++;
             }
 
             return result;
+        }
+
+        /// <summary>读取与作者声明顺序对应的可选 Tool 名称键。</summary>
+        private static string ResolveLabelKey(IReadOnlyList<string> toolLabelKeys, int index)
+        {
+            return toolLabelKeys != null && index >= 0 && index < toolLabelKeys.Count
+                ? toolLabelKeys[index]
+                : null;
+        }
+
+        /// <summary>
+        /// 克隆原版 Tool，并只在正式运行时副本上解析名称语言键。
+        /// 这样不会污染 Def 中作为缺省语言回退的原始英文，也能让按钮和伤口来源共用同一个名称。
+        /// </summary>
+        private static Tool CloneToolWithResolvedLabel(Tool source, string resolvedLabelKey)
+        {
+            string resolvedLabel = !string.IsNullOrWhiteSpace(resolvedLabelKey)
+                ? resolvedLabelKey.Translate().ToString()
+                : source.label;
+            return new Tool
+            {
+                id = source.id,
+                label = resolvedLabel,
+                labelNoLocation = source.labelNoLocation,
+                untranslatedLabel = source.untranslatedLabel ?? source.label,
+                labelUsedInLogging = source.labelUsedInLogging,
+                capacities = source.capacities != null
+                    ? new List<ToolCapacityDef>(source.capacities)
+                    : new List<ToolCapacityDef>(),
+                power = source.power,
+                armorPenetration = source.armorPenetration,
+                cooldownTime = source.cooldownTime,
+                surpriseAttack = source.surpriseAttack,
+                hediff = source.hediff,
+                chanceFactor = source.chanceFactor,
+                alwaysTreatAsWeapon = source.alwaysTreatAsWeapon,
+                extraMeleeDamages = source.extraMeleeDamages,
+                soundMeleeHit = source.soundMeleeHit,
+                soundMeleeMiss = source.soundMeleeMiss,
+                linkedBodyPartsGroup = source.linkedBodyPartsGroup,
+                ensureLinkedBodyPartsGroupAlwaysUsable = source.ensureLinkedBodyPartsGroupAlwaysUsable
+            };
         }
 
         /// <summary>
@@ -920,6 +1117,31 @@ namespace BDP.Core.Expressions
                 }
 
                 result.Add(config.Clone());
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 对条目发布的开放式远程增强声明做最小快照复制。
+        /// </summary>
+        private static IReadOnlyList<RangedModuleAugmentationConfig> CloneRangedModuleAugmentations(
+            IReadOnlyList<RangedModuleAugmentationConfig> configs)
+        {
+            List<RangedModuleAugmentationConfig> result =
+                new List<RangedModuleAugmentationConfig>();
+            if (configs == null)
+            {
+                return result;
+            }
+
+            for (int index = 0; index < configs.Count; index++)
+            {
+                RangedModuleAugmentationConfig config = configs[index];
+                if (config != null)
+                {
+                    result.Add(config.Clone());
+                }
             }
 
             return result;

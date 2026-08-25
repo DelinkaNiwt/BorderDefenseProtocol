@@ -19,6 +19,12 @@ namespace BDP.Core.Expressions
         public string VisualPresetDefName;
 
         /// <summary>
+        /// 当前条目对基础视觉图层的局部覆盖预设 DefName。
+        /// 主贴图和附加层取覆盖预设；姿态、握持和其它基础视觉字段继续取 VisualPresetDefName。
+        /// </summary>
+        public string VisualGraphicOverrideDefName;
+
+        /// <summary>
         /// 当前条目参与双持或组合等复合表达时使用的视觉预设 DefName。
         /// 留空表示复合表象继续沿用单侧预设或下游默认规则。
         /// </summary>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 黄蜂：双猎犬组合技，沿用猎犬射击配置并恢复标准强度追踪。 -->
+  <BDP.Core.Combos.ComboDef>
+    <!-- 组合技 Def 唯一名称。 -->
+    <defName>BDP_Combo_Hornet</defName>
+    <!-- 玩家界面显示名称。 -->
+    <label>黄蜂</label>
+    <!-- 组合技说明。 -->
+    <description>猎犬与猎犬组合，沿用猎犬射击配置并使用标准强度追踪。</description>
+    <!-- 两侧均要求猎犬芯片。 -->
+    <firstSourceActionDefName>BDP_Preset_Hound</firstSourceActionDefName>
+    <secondSourceActionDefName>BDP_Preset_Hound</secondSourceActionDefName>
+    <!-- 第一来源只允许射手体系武装芯片。 -->
+    <FirstSourceAdmission>
+      <AllowedProfessions>
+        <li>BDP_ChipProfession_Shooter</li>
+      </AllowedProfessions>
+      <AllowedCategories>
+        <li>BDP_ChipCategory_Weapon</li>
+      </AllowedCategories>
+    </FirstSourceAdmission>
+    <!-- 第二来源执行同一成品身份约束。 -->
+    <SecondSourceAdmission>
+      <AllowedProfessions>
+        <li>BDP_ChipProfession_Shooter</li>
+      </AllowedProfessions>
+      <AllowedCategories>
+        <li>BDP_ChipCategory_Weapon</li>
+      </AllowedCategories>
+    </SecondSourceAdmission>
+    <Expression>
+      <Entries>
+        <li>
+          <!-- 组合技表达条目唯一标识。 -->
+          <Id>hornet_primary</Id>
+          <DisplayLabel>黄蜂</DisplayLabel>
+          <Kind>PrimaryVerb</Kind>
+          <WeaponMode>Ranged</WeaponMode>
+          <!-- 追踪弹沿用猎犬使用的正式投射物。 -->
+          <VerbProps>
+            <defaultProjectile>BDP_Projectile_Tracking</defaultProjectile>
+            <!-- 追踪弹伤害值在投射物 Def 中按四倍配置；组合技保持单发。 -->
+            <burstShotCount>1</burstShotCount>
+          </VerbProps>
+          <!-- 射击参数沿用主侧猎犬。 -->
+          <VerbPropsResolve>
+            <RangeResolve>FollowFirstSource</RangeResolve>
+            <WarmupTimeResolve>FollowFirstSource</WarmupTimeResolve>
+            <BurstShotCountResolve>FollowFirstSource</BurstShotCountResolve>
+            <TicksBetweenBurstShotsResolve>FollowFirstSource</TicksBetweenBurstShotsResolve>
+            <AccuracyTouchResolve>FollowFirstSource</AccuracyTouchResolve>
+            <AccuracyShortResolve>FollowFirstSource</AccuracyShortResolve>
+            <AccuracyMediumResolve>FollowFirstSource</AccuracyMediumResolve>
+            <AccuracyLongResolve>FollowFirstSource</AccuracyLongResolve>
+            <DefaultCooldownTimeResolve>FollowFirstSource</DefaultCooldownTimeResolve>
+          </VerbPropsResolve>
+          <ExecutionResolve>
+            <RhythmResolve>FollowFirstSource</RhythmResolve>
+          </ExecutionResolve>
+          <TrionResolve>
+            <UseCostResolve>FollowFirstSource</UseCostResolve>
+            <MinimumRequiredResolve>FollowFirstSource</MinimumRequiredResolve>
+          </TrionResolve>
+          <!-- 黄蜂唯一的行为差异：使用标准强度追踪预设。 -->
+          <RangedModules>
+            <li><moduleDef>BDP_HomingModule_Strong</moduleDef></li>
+          </RangedModules>
+          <DirectTargetLineOfSight>Required</DirectTargetLineOfSight>
+        </li>
+      </Entries>
+    </Expression>
+  </BDP.Core.Combos.ComboDef>
+
+</Defs>

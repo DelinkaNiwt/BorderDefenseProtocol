@@ -4,7 +4,7 @@ using Verse;
 
 namespace BDP.Content.Assembly.ChipManufacturing.UI
 {
-    /// <summary>按芯片规格、枪壳修正、动作形态的顺序绘制中栏。</summary>
+    /// <summary>按芯片规格、武装型修正、动作形态的顺序绘制中栏。</summary>
     public static class ChipManufacturingPreviewPanel
     {
         /// <summary>普通字段行高。</summary>
@@ -47,26 +47,26 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
                 DrawMetric(viewRect.width, ref y, model.Specifications[index]);
             }
 
-            if (model.GunShellMetrics.Count > 0
-                || model.GunShellAdjustments.Count > 0)
+            if (model.ArmamentFormMetrics.Count > 0
+                || model.ArmamentFormAdjustments.Count > 0)
             {
                 y += 10f;
                 DrawHeader(
                     viewRect.width,
                     ref y,
-                    "BDP_ChipManufacturing_Preview_GunShellAdjustments".Translate());
-                for (int index = 0; index < model.GunShellMetrics.Count; index++)
+                    "BDP_ChipManufacturing_Preview_ArmamentFormAdjustments".Translate());
+                for (int index = 0; index < model.ArmamentFormMetrics.Count; index++)
                 {
-                    DrawMetric(viewRect.width, ref y, model.GunShellMetrics[index]);
+                    DrawMetric(viewRect.width, ref y, model.ArmamentFormMetrics[index]);
                 }
 
-                if (model.GunShellAdjustments.Count > 0)
+                if (model.ArmamentFormAdjustments.Count > 0)
                 {
                     y += 4f;
                     DrawAdjustmentGrid(
                         viewRect.width,
                         ref y,
-                        model.GunShellAdjustments);
+                        model.ArmamentFormAdjustments);
                 }
             }
 
@@ -168,7 +168,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             y += rowHeight;
         }
 
-        /// <summary>把枪壳修正按两列紧凑绘制。</summary>
+        /// <summary>把武装型修正按两列紧凑绘制。</summary>
         private static void DrawAdjustmentGrid(
             float width,
             ref float y,
@@ -192,7 +192,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             }
         }
 
-        /// <summary>在一列内绘制一项紧凑枪壳修正。</summary>
+        /// <summary>在一列内绘制一项紧凑武装型修正。</summary>
         private static void DrawAdjustmentCell(
             Rect rect,
             ChipAdjustmentPreview adjustment)
@@ -223,19 +223,19 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             {
                 height += MetricHeight(width, model.Specifications[index]);
             }
-            if (model.GunShellMetrics.Count > 0
-                || model.GunShellAdjustments.Count > 0)
+            if (model.ArmamentFormMetrics.Count > 0
+                || model.ArmamentFormAdjustments.Count > 0)
             {
                 height += 10f + HeaderHeight;
-                for (int index = 0; index < model.GunShellMetrics.Count; index++)
+                for (int index = 0; index < model.ArmamentFormMetrics.Count; index++)
                 {
-                    height += MetricHeight(width, model.GunShellMetrics[index]);
+                    height += MetricHeight(width, model.ArmamentFormMetrics[index]);
                 }
 
-                if (model.GunShellAdjustments.Count > 0)
+                if (model.ArmamentFormAdjustments.Count > 0)
                 {
                     height += 4f
-                        + Mathf.CeilToInt(model.GunShellAdjustments.Count / 2f) * RowHeight;
+                        + Mathf.CeilToInt(model.ArmamentFormAdjustments.Count / 2f) * RowHeight;
                 }
             }
 

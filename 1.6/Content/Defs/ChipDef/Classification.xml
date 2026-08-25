@@ -27,6 +27,13 @@
     <description>在满足条件时自动发挥作用的芯片。</description>
   </BDP.Core.Chips.ChipCategoryDef>
 
+  <!-- 隐秘组：同组芯片不能同时启用，只能在主副槽之间切换。 -->
+  <BDP.Core.Chips.ChipExclusionGroupDef>
+    <defName>BDP_ChipExclusionGroup_Stealth</defName>
+    <label>隐秘组</label>
+    <description>同属隐秘组的芯片只能同时启用一枚。</description>
+  </BDP.Core.Chips.ChipExclusionGroupDef>
+
   <!-- 独立且互斥的武装职业体系。 -->
   <BDP.Content.Assembly.ChipManufacturing.Defs.ChipProfessionDef>
     <defName>BDP_ChipProfession_Attacker</defName>

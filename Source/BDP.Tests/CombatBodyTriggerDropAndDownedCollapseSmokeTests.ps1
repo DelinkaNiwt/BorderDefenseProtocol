@@ -28,5 +28,9 @@ Assert-True ($patchText -match 'CheckForStateChange') 'Protection must cover man
 Assert-True ($patchText -match 'Notify_PawnSpawned') 'Protection must cover downed spawn compensation.'
 Assert-True ($patchText -match 'TriggerCollapse\("PawnDowned"\)') 'Active downed transition must request PawnDowned collapse.'
 Assert-True ($patchText -match 'CombatBodySurfaceAccess\.ResolveCommands') 'Collapse must use the formal combat body command surface.'
+Assert-True ($patchText -match 'ShouldCollapseFromHeartMissing\(Pawn pawn\)') 'Active heart loss must have a dedicated collapse predicate.'
+Assert-True ($patchText -match 'ShouldCollapseFromHeartMissing\(Pawn pawn\)[\s\S]*IsActivePhase\(pawn\)[\s\S]*HasCurrentPrimaryTrigger\(pawn\)') 'Heart loss collapse must be limited to active BDP trigger-body sessions.'
+Assert-True ($patchText -match 'BodyPartDefOf\.Heart[\s\S]*PartIsMissing') 'Heart loss predicate must inspect the original Heart body part.'
+Assert-True ($patchText -match 'TriggerCollapse\("HeartMissing"\)') 'Active heart loss must request HeartMissing collapse.'
 
 Write-Output 'CombatBodyTriggerDropAndDownedCollapseSmokeTests PASS'

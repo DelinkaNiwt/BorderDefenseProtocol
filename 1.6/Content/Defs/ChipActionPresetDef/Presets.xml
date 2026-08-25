@@ -45,13 +45,14 @@
             <WeaponMode>Ranged</WeaponMode>
             <Trion><UseCost>4</UseCost></Trion>
             <Execution><Rhythm>Simultaneous</Rhythm></Execution>
+            <!-- 小行星的统一武器贴图由射手默认 Trion 立方体型提供。 -->
             <VerbProps>
               <verbClass>BDP.Core.Verbs.BdpVerb_Shoot</verbClass>
               <hasStandardCommand>true</hasStandardCommand>
               <label>小行星</label>
               <defaultProjectile>BDP_Projectile_Normal</defaultProjectile>
               <range>30.9</range>
-              <burstShotCount>4</burstShotCount>
+              <burstShotCount>1</burstShotCount>
               <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
               <warmupTime>1.8</warmupTime>
               <defaultCooldownTime>1.2</defaultCooldownTime>
@@ -59,8 +60,86 @@
               <accuracyShort>0.75</accuracyShort>
               <accuracyMedium>0.50</accuracyMedium>
               <accuracyLong>0.20</accuracyLong>
-              <soundCast>Shot_Revolver</soundCast>
+              <soundCast>BDP_Sound_AsteroidCast</soundCast>
               <!-- 目标判定与原版枪械一致：不可瞄地面，可瞄单位/建筑 -->
+              <targetParams>
+                <canTargetLocations>false</canTargetLocations>
+                <canTargetBuildings>true</canTargetBuildings>
+                <canTargetPawns>true</canTargetPawns>
+              </targetParams>
+            </VerbProps>
+            <DirectTargetLineOfSight>Required</DirectTargetLineOfSight>
+          </li>
+        </Entries>
+      </Expression>
+    </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipActionPresetDef>
+
+  <!-- 美特拉（Meteora）：基于小行星的范围爆炸远程动作，使用专用炸裂弹投射物。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipActionPresetDef>
+    <!-- 美特拉芯片唯一名称。 -->
+    <defName>BDP_Preset_Meteora</defName>
+    <!-- 玩家可见芯片名称。 -->
+    <label>美特拉</label>
+    <labelKey>BDP_ChipAction_Meteora</labelKey>
+    <!-- 玩家可见芯片说明。 -->
+    <description>基于小行星的范围爆炸远程动作。命中后在落点追加范围爆炸。</description>
+    <descriptionKey>BDP_ChipAction_Meteora_Description</descriptionKey>
+    <!-- 沿用小行星的射手职业。 -->
+    <profession>BDP_ChipProfession_Shooter</profession>
+    <!-- 沿用小行星的制造成本。 -->
+    <costList>
+      <Silver>80</Silver>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+    <additionalWorkAmount>500</additionalWorkAmount>
+    <config>
+      <!-- 沿用小行星的武装分类。 -->
+      <Profile>
+        <Category>BDP_ChipCategory_Weapon</Category>
+        <Tags>
+        </Tags>
+      </Profile>
+      <!-- 美特拉可装主槽或副槽。 -->
+      <Loadout>
+        <SlotRegion>MainSub</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <ActivationDelayTicks>60</ActivationDelayTicks>
+        <DeactivationDelayTicks>30</DeactivationDelayTicks>
+      </Loadout>
+      <!-- 沿用小行星的 Trion 参数。 -->
+      <Trion><CapacityCost>50</CapacityCost><ActivationCost>15</ActivationCost></Trion>
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement"><Minimum>1</Minimum></li>
+      </ActivationRequirements>
+      <Expression>
+        <Entries>
+          <li>
+            <!-- 美特拉使用标准直射表达，爆炸由炸裂弹投射物 Def 的 explosionRadius 提供。 -->
+            <Id>meteora_primary</Id>
+            <DisplayLabel>美特拉</DisplayLabel>
+            <DisplayLabelKey>BDP_Expression_Meteora</DisplayLabelKey>
+            <Kind>PrimaryVerb</Kind>
+            <WeaponMode>Ranged</WeaponMode>
+            <Trion><UseCost>4</UseCost></Trion>
+            <Execution><Rhythm>Simultaneous</Rhythm></Execution>
+            <!-- 美特拉的统一武器贴图由射手默认 Trion 立方体型提供。 -->
+            <VerbProps>
+              <verbClass>BDP.Core.Verbs.BdpVerb_Shoot</verbClass>
+              <hasStandardCommand>true</hasStandardCommand>
+              <label>美特拉</label>
+              <defaultProjectile>BDP_Projectile_Explosive</defaultProjectile>
+              <range>30.9</range>
+              <burstShotCount>1</burstShotCount>
+              <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+              <warmupTime>1.8</warmupTime>
+              <defaultCooldownTime>1.2</defaultCooldownTime>
+              <accuracyTouch>0.85</accuracyTouch>
+              <accuracyShort>0.75</accuracyShort>
+              <accuracyMedium>0.50</accuracyMedium>
+              <accuracyLong>0.20</accuracyLong>
+              <soundCast>BDP_Sound_AsteroidCast</soundCast>
+              <!-- 沿用小行星的目标判定。 -->
               <targetParams>
                 <canTargetLocations>false</canTargetLocations>
                 <canTargetBuildings>true</canTargetBuildings>
@@ -110,13 +189,14 @@
             <WeaponMode>Ranged</WeaponMode>
             <Trion><UseCost>8</UseCost></Trion>
             <Execution><Rhythm>Simultaneous</Rhythm></Execution>
+            <!-- 毒蛇的统一武器贴图由射手默认 Trion 立方体型提供。 -->
             <VerbProps>
               <verbClass>BDP.Core.Verbs.BdpVerb_Shoot</verbClass>
               <hasStandardCommand>true</hasStandardCommand>
               <label>毒蛇</label>
               <defaultProjectile>BDP_Projectile_Variable</defaultProjectile>
               <range>30.9</range>
-              <burstShotCount>4</burstShotCount>
+              <burstShotCount>1</burstShotCount>
               <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
               <warmupTime>1.2</warmupTime>
               <defaultCooldownTime>1.2</defaultCooldownTime>
@@ -178,13 +258,14 @@
             <WeaponMode>Ranged</WeaponMode>
             <Trion><UseCost>6</UseCost></Trion>
             <Execution><Rhythm>Simultaneous</Rhythm></Execution>
+            <!-- 猎犬的统一武器贴图由射手默认 Trion 立方体型提供。 -->
             <VerbProps>
               <verbClass>BDP.Core.Verbs.BdpVerb_Shoot</verbClass>
               <hasStandardCommand>true</hasStandardCommand>
               <label>猎犬</label>
               <defaultProjectile>BDP_Projectile_Tracking</defaultProjectile>
               <range>30.9</range>
-              <burstShotCount>4</burstShotCount>
+              <burstShotCount>1</burstShotCount>
               <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
               <warmupTime>1.6</warmupTime>
               <defaultCooldownTime>1.4</defaultCooldownTime>
@@ -202,7 +283,8 @@
             </VerbProps>
             <DirectTargetLineOfSight>Required</DirectTargetLineOfSight>
             <RangedModules>
-              <li><moduleDef>BDP_HomingModule</moduleDef></li>
+              <!-- 猎犬使用弱追踪预设：前 90% 直飞，转向与前导较弱，追丢不重锁。 -->
+              <li><moduleDef>BDP_HomingModule_Weak</moduleDef></li>
             </RangedModules>
           </li>
         </Entries>
@@ -211,6 +293,202 @@
   </BDP.Content.Assembly.ChipManufacturing.Defs.ChipActionPresetDef>
 
   <!-- ===== 实体系/能力系/防护系预设 ===== -->
+
+  <!-- 光魂：默认大盾形态内嵌两种姿态，可切换为近战重刃形态。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipActionPresetDef>
+    <!-- 动作预设唯一名称。 -->
+    <defName>BDP_Preset_LightSoul</defName>
+    <!-- 默认中文名称仍允许语言包覆盖。 -->
+    <label>光魂</label>
+    <!-- 玩家可见名称显式走 Keyed（键值语言包），避免自定义 Def 注入失效。 -->
+    <labelKey>BDP_ChipAction_LightSoul</labelKey>
+    <!-- 缺少对应语言键时使用的默认中文说明。 -->
+    <description>默认展开光魂大盾，并可在灵活姿态与举盾姿态间切换；也可切换为光魂重刃进行近战。所有形态均可使用消耗 Trion 的光魂推进。</description>
+    <!-- 玩家可见说明显式走 Keyed（键值语言包）。 -->
+    <descriptionKey>BDP_ChipAction_LightSoul_Description</descriptionKey>
+    <!-- 光魂属于攻击手职业体系。 -->
+    <profession>BDP_ChipProfession_Attacker</profession>
+    <!-- 制造材料采用普通中型芯片成本。 -->
+    <costList>
+      <Silver>180</Silver>
+      <ComponentIndustrial>3</ComponentIndustrial>
+    </costList>
+    <!-- 额外制造工作量。 -->
+    <additionalWorkAmount>900</additionalWorkAmount>
+    <!-- 芯片正式配置。 -->
+    <config>
+      <!-- 分类与标签。 -->
+      <Profile>
+        <!-- 主分类：防护。 -->
+        <Category>BDP_ChipCategory_Defense</Category>
+        <!-- 光魂以实体外形承载能量效果。 -->
+        <Tags>
+          <li>BDP_ChipTag_Entity</li>
+        </Tags>
+      </Profile>
+      <!-- 装载参数。 -->
+      <Loadout>
+        <!-- 可装入主手或副手槽。 -->
+        <SlotRegion>MainSub</SlotRegion>
+        <!-- 只占一个槽位。 -->
+        <SlotOccupancy>Single</SlotOccupancy>
+        <!-- 启用延迟。 -->
+        <ActivationDelayTicks>30</ActivationDelayTicks>
+        <!-- 停用延迟。 -->
+        <DeactivationDelayTicks>15</DeactivationDelayTicks>
+      </Loadout>
+      <!-- 容量与启用成本。 -->
+      <Trion><CapacityCost>100</CapacityCost><ActivationCost>15</ActivationCost></Trion>
+      <!-- 最低 Trion 强度要求。 -->
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement"><Minimum>1</Minimum></li>
+      </ActivationRequirements>
+      <!-- 统一表达目录、形态和姿态选择表。 -->
+      <Expression>
+        <!-- 全部可能启用的表达条目。 -->
+        <Entries>
+          <!-- 两个大形态共用的光魂推进。 -->
+          <li>
+            <Id>light_soul_propulsion</Id>
+            <DisplayLabel>光魂推进</DisplayLabel>
+            <DisplayLabelKey>BDP_Expression_LightSoulPropulsion</DisplayLabelKey>
+            <Kind>Ability</Kind>
+            <AbilityDefName>BDP_Ability_LightSoulPropulsion</AbilityDefName>
+            <!-- 每次成功使用消耗 20 Trion。 -->
+            <Trion><UseCost>20</UseCost></Trion>
+          </li>
+          <!-- 灵活姿态护盾及其独立视觉。 -->
+          <li>
+            <Id>light_soul_shield_mobile</Id>
+            <DisplayLabel>光魂大盾（灵活姿态）</DisplayLabel>
+            <DisplayLabelKey>BDP_Expression_LightSoulShieldMobile</DisplayLabelKey>
+            <Kind>Hediff</Kind>
+            <HediffDefName>BDP_Hediff_LightSoulShieldMobile</HediffDefName>
+            <Presentation>
+              <VisualPresetDefName>BDP_Visual_LightSoulShieldMobile</VisualPresetDefName>
+              <!-- 与另一把真实武器共存时，切换到向主副手外侧展开的盾面姿态。 -->
+              <CompositeVisualPresetDefName>BDP_Visual_LightSoulShieldMobile_Dual</CompositeVisualPresetDefName>
+            </Presentation>
+          </li>
+          <!-- 大盾形态共用的真实武器身份；两种姿态的防御和盾面视觉仍由各自 Hediff 承担。 -->
+          <li>
+            <Id>light_soul_shield_weapon</Id>
+            <DisplayLabel>光魂大盾钝击</DisplayLabel>
+            <DisplayLabelKey>BDP_Expression_LightSoulShieldBash</DisplayLabelKey>
+            <Kind>PrimaryVerb</Kind>
+            <WeaponMode>Melee</WeaponMode>
+            <!-- 每轮只执行一次盾面钝击。 -->
+            <Execution><HitCount>1</HitCount></Execution>
+            <tools>
+              <li>
+                <label>盾面钝击</label>
+                <capacities><li>Blunt</li></capacities>
+                <power>5</power>
+                <cooldownTime>2.0</cooldownTime>
+                <armorPenetration>0</armorPenetration>
+                <chanceFactor>1.0</chanceFactor>
+              </li>
+            </tools>
+            <!-- 与上方 Tool 顺序对应的玩家可见攻击方式名称。 -->
+            <ToolLabelKeys><li>BDP_Tool_LightSoulShieldBash</li></ToolLabelKeys>
+          </li>
+          <!-- 举盾姿态护盾及其独立视觉。 -->
+          <li>
+            <Id>light_soul_shield_guard</Id>
+            <DisplayLabel>光魂大盾（举盾姿态）</DisplayLabel>
+            <DisplayLabelKey>BDP_Expression_LightSoulShieldGuard</DisplayLabelKey>
+            <Kind>Hediff</Kind>
+            <HediffDefName>BDP_Hediff_LightSoulShieldGuard</HediffDefName>
+            <Presentation>
+              <VisualPresetDefName>BDP_Visual_LightSoulShieldGuard</VisualPresetDefName>
+              <!-- 与另一把真实武器共存时，切换到保持竖直且向手侧外移的盾面姿态。 -->
+              <CompositeVisualPresetDefName>BDP_Visual_LightSoulShieldGuard_Dual</CompositeVisualPresetDefName>
+            </Presentation>
+          </li>
+          <!-- 重刃近战表达；每轮只从两把 Tool 中择一攻击一次。 -->
+          <li>
+            <Id>light_soul_heavy_blade</Id>
+            <DisplayLabel>光魂重刃</DisplayLabel>
+            <!-- 手动攻击按钮显式走 Keyed（键值语言包）。 -->
+            <DisplayLabelKey>BDP_Expression_LightSoulHeavyBlade</DisplayLabelKey>
+            <Kind>PrimaryVerb</Kind>
+            <WeaponMode>Melee</WeaponMode>
+            <Execution><HitCount>1</HitCount></Execution>
+            <Presentation>
+              <VisualPresetDefName>BDP_Visual_LightSoulHeavyBlade</VisualPresetDefName>
+            </Presentation>
+            <tools>
+              <!-- 钝击：20 伤、0 穿透；权重 1.7，与伤害平方共同形成约 75% 概率。 -->
+              <li>
+                <label>光魂重刃钝击</label>
+                <capacities><li>Blunt</li></capacities>
+                <power>20</power>
+                <cooldownTime>2.0</cooldownTime>
+                <armorPenetration>0</armorPenetration>
+                <chanceFactor>1.7</chanceFactor>
+              </li>
+              <!-- 切割：15 伤、10% 穿透；较低基础权重。 -->
+              <li>
+                <label>光魂重刃切割</label>
+                <capacities><li>Cut</li></capacities>
+                <power>15</power>
+                <cooldownTime>2.0</cooldownTime>
+                <armorPenetration>0.10</armorPenetration>
+                <chanceFactor>1.0</chanceFactor>
+              </li>
+            </tools>
+            <!-- 与上方 tools 顺序对应的玩家可见攻击方式名称。 -->
+            <ToolLabelKeys>
+              <li>BDP_Tool_LightSoulHeavyBladeBash</li>
+              <li>BDP_Tool_LightSoulHeavyBladeEdge</li>
+            </ToolLabelKeys>
+          </li>
+        </Entries>
+        <!-- 默认进入大盾形态。 -->
+        <DefaultModeKey>shield</DefaultModeKey>
+        <!-- 两个大形态。 -->
+        <Modes>
+          <!-- 大盾形态：共用推进，并在两种姿态中择一启用护盾。 -->
+          <li>
+            <ModeKey>shield</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_LightSoulShield</DisplayLabelKey>
+            <ActiveEntryIds>
+              <!-- 两个盾姿态共用推进与唯一真实盾牌武器。 -->
+              <li>light_soul_propulsion</li>
+              <li>light_soul_shield_weapon</li>
+            </ActiveEntryIds>
+            <!-- 每次进入大盾形态都重置到灵活姿态。 -->
+            <DefaultStanceKey>mobile</DefaultStanceKey>
+            <Stances>
+              <!-- 灵活姿态。 -->
+              <li>
+                <StanceKey>mobile</StanceKey>
+                <DisplayLabelKey>BDP_ChipStance_LightSoulMobile</DisplayLabelKey>
+                <!-- 姿态只切换防御 Hediff；武器身份由大盾形态公共条目提供。 -->
+                <ActiveEntryIds><li>light_soul_shield_mobile</li></ActiveEntryIds>
+              </li>
+              <!-- 举盾姿态。 -->
+              <li>
+                <StanceKey>guard</StanceKey>
+                <DisplayLabelKey>BDP_ChipStance_LightSoulGuard</DisplayLabelKey>
+                <!-- 姿态只切换防御 Hediff；现有 Violent 禁用仍会阻止公共盾击。 -->
+                <ActiveEntryIds><li>light_soul_shield_guard</li></ActiveEntryIds>
+              </li>
+            </Stances>
+          </li>
+          <!-- 重刃形态：保留推进，关闭护盾并启用近战武器。 -->
+          <li>
+            <ModeKey>heavy_blade</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_LightSoulHeavyBlade</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>light_soul_propulsion</li>
+              <li>light_soul_heavy_blade</li>
+            </ActiveEntryIds>
+          </li>
+        </Modes>
+      </Expression>
+    </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipActionPresetDef>
 
   <!-- 弧月：近战实体武装。 -->
   <BDP.Content.Assembly.ChipManufacturing.Defs.ChipActionPresetDef>
@@ -440,6 +718,70 @@
     </config>
   </BDP.Content.Assembly.ChipManufacturing.Defs.ChipActionPresetDef>
 
+  <!-- 铅弹：开放式被动远程增强，不绑定猎犬、枪壳或任何具体目标芯片。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipActionPresetDef>
+    <!-- 被动芯片唯一名称。 -->
+    <defName>BDP_Preset_LeadShot</defName>
+    <!-- 玩家可见芯片名称。 -->
+    <label>铅弹</label>
+    <labelKey>BDP_ChipAction_LeadShot</labelKey>
+    <!-- 玩家可见芯片说明。 -->
+    <description>被动远程增强。激活后，所有有效远程武装的攻击入口前增加铅弹，并使命中目标承受铅块负重；本次投射物不造成伤害并尝试绕过已知护盾。</description>
+    <descriptionKey>BDP_ChipAction_LeadShot_Description</descriptionKey>
+    <!-- 铅弹属于被动芯片分类。 -->
+    <config>
+      <!-- 分类与标签。 -->
+      <Profile>
+        <Category>BDP_ChipCategory_Passive</Category>
+        <Tags>
+          <li>BDP_ChipTag_Offensive</li>
+        </Tags>
+      </Profile>
+      <!-- 铅弹使用主槽或副槽，不生成独立攻击按钮。 -->
+      <Loadout>
+        <SlotRegion>MainSub</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <ActivationDelayTicks>0</ActivationDelayTicks>
+        <DeactivationDelayTicks>0</DeactivationDelayTicks>
+      </Loadout>
+      <!-- 被动芯片容量与激活参数。 -->
+      <Trion><CapacityCost>100</CapacityCost><ActivationCost>0</ActivationCost></Trion>
+      <!-- 激活最低 Trion 强度要求。 -->
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement"><Minimum>1</Minimum></li>
+      </ActivationRequirements>
+      <!-- 表达条目只发布开放式远程增强声明。 -->
+      <Expression>
+        <Entries>
+          <li>
+            <!-- 被动表达条目标识。 -->
+            <Id>lead_shot_passive</Id>
+            <!-- 该名称也作为动态远程入口名称前缀来源。 -->
+            <DisplayLabel>铅弹</DisplayLabel>
+            <DisplayLabelKey>BDP_Expression_LeadShot</DisplayLabelKey>
+            <Kind>Passive</Kind>
+            <PassiveKey>BDP_LeadShot</PassiveKey>
+            <!-- 按远程武装能力匹配，不指定目标芯片。 -->
+            <RangedModuleAugmentations>
+              <li>
+                <!-- 所有有效远程武装结果均可接收。 -->
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <!-- 名称前缀使用本表达条目的玩家可见名称。 -->
+                <DisplayNamePrefixMode>SourceExpressionLabel</DisplayNamePrefixMode>
+                <!-- 追加铅块负重命中模块。 -->
+                <Modules>
+                  <li>
+                    <moduleDef>BDP_RangedDebuff_LeadWeight</moduleDef>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+        </Entries>
+      </Expression>
+    </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipActionPresetDef>
+
   <!-- ===== 狙击预设 ===== -->
 
   <!-- 朱鹮：超远距精确狙击。 -->
@@ -552,6 +894,85 @@
             <AbilityDefName>BDP_Ability_Grasshopper</AbilityDefName>
             <Trion>
               <UseCost>20</UseCost>                           <!-- 每次跳跃消耗 20 Trion -->
+            </Trion>
+          </li>
+        </Entries>
+      </Expression>
+    </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipActionPresetDef>
+
+  <!-- ===== 变色龙：可在攻击后自动关闭的隐身状态 ===== -->
+
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipActionPresetDef>
+    <defName>BDP_Preset_Chameleon</defName>
+    <!-- 缺少语言键时使用的默认名称。 -->
+    <label>变色龙</label>
+    <!-- 正式名称走语言包。 -->
+    <labelKey>BDP_ChipAction_Chameleon</labelKey>
+    <!-- 缺少语言键时使用的默认说明。 -->
+    <description>进入隐秘状态并隐藏自身；任意攻击动作完成后立即关闭。</description>
+    <!-- 正式说明走语言包。 -->
+    <descriptionKey>BDP_ChipAction_Chameleon_Description</descriptionKey>
+    <!-- 状态芯片不绑定攻击职业。 -->
+    <costList>
+      <Silver>100</Silver>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+    <!-- 与同档状态芯片保持一致的制造工作量。 -->
+    <additionalWorkAmount>600</additionalWorkAmount>
+    <config>
+      <!-- 变色龙只声明状态主分类。 -->
+      <Profile>
+        <Category>BDP_ChipCategory_Status</Category>
+        <Tags>
+        </Tags>
+      </Profile>
+      <!-- 互斥组芯片必须走可切换的主副槽。 -->
+      <Loadout>
+        <SlotRegion>MainSub</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <ActivationExclusionGroups>
+          <li>BDP_ChipExclusionGroup_Stealth</li>
+        </ActivationExclusionGroups>
+        <!-- 使用原版 Core 音效，不引用皇权灵能或其它 DLC。 -->
+        <ActivationAudio>
+          <!-- 激活前摇开始提示。 -->
+          <ActivationWarmupStartSound>Power_OnSmall</ActivationWarmupStartSound>
+          <!-- 激活前摇期间的持续提示。 -->
+          <ActivationWarmupLoopSound>GasReleasing</ActivationWarmupLoopSound>
+          <!-- 芯片正式激活完成提示。 -->
+          <ActivationWarmupEndSound>Power_OffSmall</ActivationWarmupEndSound>
+        </ActivationAudio>
+        <ActivationDelayTicks>30</ActivationDelayTicks>
+        <DeactivationDelayTicks>0</DeactivationDelayTicks>
+      </Loadout>
+      <!-- 容量占用由战斗体生成/解除生命周期处理；激活费只在芯片正式激活时结算。 -->
+      <Trion>
+        <CapacityCost>100</CapacityCost>
+        <ActivationCost>15</ActivationCost>
+      </Trion>
+      <!-- 变色龙的最低 Trion 释放力门槛。 -->
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement">
+          <Minimum>1</Minimum>
+        </li>
+      </ActivationRequirements>
+      <Expression>
+        <Entries>
+          <!-- 隐身状态由正式 Hediff 表达宿主承载。 -->
+          <li>
+            <Id>chameleon_stealth_state</Id>
+            <DisplayLabel>隐秘状态·变色龙</DisplayLabel>
+            <Kind>Hediff</Kind>
+            <HediffDefName>BDP_Hediff_Chameleon</HediffDefName>
+            <Trion>
+              <!-- 单枚有效来源时整组隐身效果每秒消耗 5 Trion。 -->
+              <SustainCostBySourceCount>
+                <li>
+                  <SourceCount>1</SourceCount>
+                  <TotalPerSecond>5</TotalPerSecond>
+                </li>
+              </SustainCostBySourceCount>
             </Trion>
           </li>
         </Entries>

@@ -17,5 +17,21 @@ namespace BDP.Core.Chips
 
         /// <summary>伤害类型 DefName 覆盖。</summary>
         public string damageDef;
+
+        /// <summary>
+        /// 深复制当前投射物覆盖块。
+        /// 组合结果和制造结果都必须拥有自己的可变配置副本。
+        /// </summary>
+        public ProjectileOverrides Clone()
+        {
+            return new ProjectileOverrides
+            {
+                damageMultiplier = damageMultiplier,
+                speedMultiplier = speedMultiplier,
+                stoppingPowerMultiplier = stoppingPowerMultiplier,
+                beamTrailPreset = beamTrailPreset,
+                damageDef = damageDef
+            };
+        }
     }
 }

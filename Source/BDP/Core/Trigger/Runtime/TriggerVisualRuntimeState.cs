@@ -26,6 +26,12 @@ namespace BDP.Core.Trigger.Runtime
         public string ActiveHostResultId { get; set; }
 
         /// <summary>
+        /// 当前整轮攻击实际参与的结果标识集合。
+        /// 它服务跨运行步骤共享的动作阶段，不等于当前 cast 或 emit 焦点。
+        /// </summary>
+        public IReadOnlyList<string> ActiveAttackParticipantResultIds { get; set; }
+
+        /// <summary>
         /// 当前 cast（施放动作）正在涉及的结果标识集合。
         /// </summary>
         public IReadOnlyList<string> ActiveCastResultIds { get; set; }
@@ -50,6 +56,7 @@ namespace BDP.Core.Trigger.Runtime
             {
                 return !string.IsNullOrWhiteSpace(AttackInstanceId)
                     || !string.IsNullOrWhiteSpace(ActiveHostResultId)
+                    || (ActiveAttackParticipantResultIds != null && ActiveAttackParticipantResultIds.Count > 0)
                     || (ActiveCastResultIds != null && ActiveCastResultIds.Count > 0)
                     || (ActiveEmitSourceResultIds != null && ActiveEmitSourceResultIds.Count > 0);
             }
@@ -65,6 +72,7 @@ namespace BDP.Core.Trigger.Runtime
                 ProjectionVersion = projectionVersion,
                 AttackInstanceId = null,
                 ActiveHostResultId = null,
+                ActiveAttackParticipantResultIds = new List<string>(),
                 ActiveCastResultIds = new List<string>(),
                 ActiveEmitSourceResultIds = new List<string>(),
                 EquipmentPoseSample = null

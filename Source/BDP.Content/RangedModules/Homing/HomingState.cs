@@ -48,6 +48,8 @@ namespace BDP.Content.RangedModules.Homing
 
         /// <summary>释放阶段预期命中点。</summary>
         public Vector3 ReleaseExpectedImpactPoint { get; set; } = Vector3.zero;
+        /// <summary>是否已完成一次空地落点检索。</summary>
+        public bool GroundAcquireDone { get; set; }
 
         public IAttackContextNode Clone()
         {
@@ -65,7 +67,8 @@ namespace BDP.Content.RangedModules.Homing
                 FlyAwayIssued = FlyAwayIssued,
                 FlyAwayEnd = FlyAwayEnd,
                 HasReleaseExpectedImpactPoint = HasReleaseExpectedImpactPoint,
-                ReleaseExpectedImpactPoint = ReleaseExpectedImpactPoint
+                ReleaseExpectedImpactPoint = ReleaseExpectedImpactPoint,
+                GroundAcquireDone = GroundAcquireDone
             };
         }
 
@@ -84,6 +87,7 @@ namespace BDP.Content.RangedModules.Homing
             Vector3 flyAwayEnd = FlyAwayEnd;
             bool hasReleaseExpectedImpactPoint = HasReleaseExpectedImpactPoint;
             Vector3 releaseExpectedImpactPoint = ReleaseExpectedImpactPoint;
+            bool groundAcquireDone = GroundAcquireDone;
 
             Scribe_Deep.Look(ref frozenConfig, "frozenConfig");
             Scribe_TargetInfo.Look(ref lockedTarget, "lockedTarget");
@@ -98,6 +102,7 @@ namespace BDP.Content.RangedModules.Homing
             Scribe_Values.Look(ref flyAwayEnd, "flyAwayEnd");
             Scribe_Values.Look(ref hasReleaseExpectedImpactPoint, "hasReleaseExpectedImpactPoint", false);
             Scribe_Values.Look(ref releaseExpectedImpactPoint, "releaseExpectedImpactPoint");
+            Scribe_Values.Look(ref groundAcquireDone, "groundAcquireDone", false);
 
             FrozenConfig = frozenConfig ?? new HomingConfig();
             LockedTarget = lockedTarget;
@@ -112,6 +117,7 @@ namespace BDP.Content.RangedModules.Homing
             FlyAwayEnd = flyAwayEnd;
             HasReleaseExpectedImpactPoint = hasReleaseExpectedImpactPoint;
             ReleaseExpectedImpactPoint = releaseExpectedImpactPoint;
+            GroundAcquireDone = groundAcquireDone;
         }
     }
 

@@ -21,14 +21,20 @@ namespace BDP.Core.Combos
         public ComboDefinitionConfig Config;
 
         /// <summary>
-        /// 来源芯片 A 的 DefName。
+        /// 第一来源动作预设的 DefName。
         /// </summary>
-        public string ChipADefName;
+        public string FirstSourceActionDefName;
 
         /// <summary>
-        /// 来源芯片 B 的 DefName。
+        /// 第二来源动作预设的 DefName。
         /// </summary>
-        public string ChipBDefName;
+        public string SecondSourceActionDefName;
+
+        /// <summary>第一来源项的成品身份准入契约。</summary>
+        public ComboSourceAdmissionContract FirstSourceAdmission;
+
+        /// <summary>第二来源项的成品身份准入契约。</summary>
+        public ComboSourceAdmissionContract SecondSourceAdmission;
 
         /// <summary>
         /// 使用整个组合技前必须持续满足的有序角色条件。
@@ -39,6 +45,11 @@ namespace BDP.Core.Combos
         /// 当前组合技的表达声明句柄。
         /// </summary>
         public ComboExpressionContractHandle Expression;
+
+        /// <summary>
+        /// 是否要求第一、第二来源项使用同一来源变体。
+        /// </summary>
+        public bool RequireSameSourceVariant;
 
     }
 }

@@ -1,6 +1,7 @@
 using System.Runtime.CompilerServices;
 using RimWorld;
 using Verse;
+using BDP.Core.Projectiles.RangedFlightProtocol.Impact;
 
 namespace BDP.Core.Semantics
 {
@@ -15,6 +16,11 @@ namespace BDP.Core.Semantics
         /// 这里用弱表临时挂语义，爆炸对象销毁后记录也会一起释放。
         /// </summary>
         private static readonly ConditionalWeakTable<Explosion, SemanticContextHolder> explosionContexts = new ConditionalWeakTable<Explosion, SemanticContextHolder>();
+
+        /// <summary>
+        /// 爆炸实例对应的 BDP 逐目标命中上下文。
+        /// </summary>
+        private static readonly ConditionalWeakTable<Explosion, ExplosionImpactContextHolder> explosionImpactContexts = new ConditionalWeakTable<Explosion, ExplosionImpactContextHolder>();
 
         /// <summary>
         /// 从实现了语义承载接口的对象上读取当前语义。
@@ -78,6 +84,41 @@ namespace BDP.Core.Semantics
         }
 
         /// <summary>
+        /// 把范围命中计划挂到爆炸实例上。
+        /// </summary>
+        public static void AssignExplosionImpactContext(
+            Explosion explosion,
+            ExplosionImpactDispatchContext context)
+        {
+            if (explosion == null || context == null)
+            {
+                return;
+            }
+
+            explosionImpactContexts.Remove(explosion);
+            explosionImpactContexts.Add(
+                explosion,
+                new ExplosionImpactContextHolder { Context = context });
+        }
+
+        /// <summary>
+        /// 读取范围爆炸实例上的 BDP 逐目标命中上下文。
+        /// </summary>
+        public static ExplosionImpactDispatchContext GetExplosionImpactContext(Explosion explosion)
+        {
+            if (explosion == null)
+            {
+                return null;
+            }
+
+            return explosionImpactContexts.TryGetValue(
+                explosion,
+                out ExplosionImpactContextHolder holder)
+                ? holder.Context
+                : null;
+        }
+
+        /// <summary>
         /// 判断一份攻击语义是否可以拿来作为伤口来源名。
         /// 第一阶段规则很简单：只要有非空显示名就算有效。
         /// </summary>
@@ -128,6 +169,17 @@ namespace BDP.Core.Semantics
             /// 当前暂存的攻击语义。
             /// </summary>
             public ISemanticContext Context;
+        }
+
+        /// <summary>
+        /// 范围命中上下文的弱表引用壳。
+        /// </summary>
+        private sealed class ExplosionImpactContextHolder
+        {
+            /// <summary>
+            /// 当前爆炸命中上下文。
+            /// </summary>
+            public ExplosionImpactDispatchContext Context;
         }
     }
 }

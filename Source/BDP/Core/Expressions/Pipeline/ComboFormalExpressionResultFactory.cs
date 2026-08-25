@@ -41,7 +41,10 @@ namespace BDP.Core.Expressions
                 ? ResolvedVerbSpecFactory.ResolveComboSpec(
                     fallbackVerbProps,
                     fallbackVerbSpec,
-                    resolution.ResolvedVerbProps)
+                    resolution.ResolvedVerbProps,
+                    entry.ResolvedVerbSpec != null
+                        ? entry.ResolvedVerbSpec.ProjectileOverrides
+                        : null)
                 : null;
             ExpressionSourceTrionConfig resolvedTrion = ResolveResultTrion(resolution);
 
@@ -53,11 +56,14 @@ namespace BDP.Core.Expressions
                 OriginKind = ExpressionOriginKind.Composite,
                 CompositeKind = CompositeExpressionKind.Combo,
                 ComboDefName = comboReadResult.ComboDef.defName,
+                SourceVariantKey = resolution.SourceVariantKey,
+                SourceVariantLabel = resolution.SourceVariantLabel,
                 DisplayLabel = !string.IsNullOrWhiteSpace(entry.DisplayLabel)
                     ? entry.DisplayLabel
                     : comboReadResult.ComboDef.label,
                 ManualEntryIconTexPath = entry.ManualEntryIconTexPath,
                 VisualPresetDefName = entry.VisualPresetDefName,
+                VisualGraphicOverrideDefName = entry.VisualGraphicOverrideDefName,
                 CompositeVisualPresetDefName = entry.CompositeVisualPresetDefName,
                 ForceSuppressHostEquipment = entry.ForceSuppressHostEquipment,
                 VisualPriority = entry.VisualPriority,

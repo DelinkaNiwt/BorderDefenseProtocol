@@ -20,12 +20,15 @@
       <DefaultAngle>-50</DefaultAngle>
       <DefaultAltitudeOffset>0.05</DefaultAltitudeOffset>
       <SouthZAdjust>-0.05</SouthZAdjust>
-      <NorthZAdjust>0.05</NorthZAdjust>
+      <!-- 抵消朝北时基础 Z 反转，使 BDP 南北额外偏移相同并保留原版高度差。 -->
+      <NorthZAdjust>0.15</NorthZAdjust>
       <SubHandAngleOffset>15</SubHandAngleOffset>
     </SouthNorthPose>
     <!-- 东西姿态。 -->
     <EastWestPose>
       <SideBaseX>0.08</SideBaseX>
+      <!-- 与南向使用相同的共同屏幕纵向偏移。 -->
+      <SideBaseZ>0.05</SideBaseZ>
       <SideDeltaX>0.03</SideDeltaX>
       <FrontAltitudeOffset>0.05</FrontAltitudeOffset>
       <BackAltitudeOffset>-0.05</BackAltitudeOffset>
@@ -42,6 +45,214 @@
           <shaderType>MoteGlow</shaderType>
           <color>(1.0, 1.0, 0.95)</color>
           <drawSize>(1.2, 1.2)</drawSize>
+        </GraphicData>
+      </li>
+    </OverlayLayers>
+  </BDP.Core.Expressions.ExpressionVisualPresetDef>
+
+  <!-- 临时攻击手构型测试视觉：只替换主贴图为原版破墙斧。 -->
+  <BDP.Core.Expressions.ExpressionVisualPresetDef>
+    <defName>BDP_Visual_Temporary_BreachAxe</defName>
+    <label>Temporary Breach Axe Visual</label>
+    <GraphicData>
+      <texPath>Things/Item/Equipment/WeaponMelee/BreachAxe</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Cutout</shaderType>
+    </GraphicData>
+  </BDP.Core.Expressions.ExpressionVisualPresetDef>
+
+  <!-- 光魂大盾灵活姿态视觉：较小盾面，斜持以保留移动感。 -->
+  <BDP.Core.Expressions.ExpressionVisualPresetDef>
+    <defName>BDP_Visual_LightSoulShieldMobile</defName>
+    <!-- 默认英文名称由 DefInjected（定义注入语言包）覆盖。 -->
+    <label>光魂大盾灵活姿态视觉</label>
+    <!-- 暂时复用正式能量盾六边形贴图，后续可独立替换路径。 -->
+    <GraphicData>
+      <texPath>Effects/Shield/energy_shield_block</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <color>(0.65, 0.95, 1.0)</color>
+      <drawSize>(1.0, 1.0)</drawSize>
+    </GraphicData>
+    <!-- 南北向斜持姿态。 -->
+    <SouthNorthPose>
+      <DefaultOffset>(-0.24, 0, 0.10)</DefaultOffset>
+      <DefaultAngle>-18</DefaultAngle>
+      <DefaultAltitudeOffset>0.05</DefaultAltitudeOffset>
+      <!-- 抵消朝北时基础 Z 反转，使 BDP 南北额外偏移相同并保留原版高度差。 -->
+      <NorthZAdjust>0.20</NorthZAdjust>
+    </SouthNorthPose>
+    <!-- 东西向侧前方姿态。 -->
+    <EastWestPose>
+      <SideBaseX>0.20</SideBaseX>
+      <!-- 与南向使用相同的共同屏幕纵向偏移。 -->
+      <SideBaseZ>0.10</SideBaseZ>
+      <SideDeltaX>0.04</SideDeltaX>
+      <FrontAltitudeOffset>0.05</FrontAltitudeOffset>
+      <BackAltitudeOffset>-0.05</BackAltitudeOffset>
+      <DefaultAngle>-18</DefaultAngle>
+    </EastWestPose>
+  </BDP.Core.Expressions.ExpressionVisualPresetDef>
+
+  <!-- 光魂大盾灵活姿态的双武器视觉：保持原斜持角，只把盾面向所属手侧外移。 -->
+  <BDP.Core.Expressions.ExpressionVisualPresetDef>
+    <defName>BDP_Visual_LightSoulShieldMobile_Dual</defName>
+    <label>光魂大盾灵活姿态双武器视觉</label>
+    <!-- 复用灵活姿态原六边形盾面。 -->
+    <GraphicData>
+      <texPath>Effects/Shield/energy_shield_block</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <color>(0.65, 0.95, 1.0)</color>
+      <drawSize>(1.0, 1.0)</drawSize>
+    </GraphicData>
+    <!-- 南北向比单侧姿态增加手侧分离距离，避免与另一把武器中央叠放。 -->
+    <SouthNorthPose>
+      <DefaultOffset>(0.42, 0, 0.10)</DefaultOffset>
+      <DefaultAngle>-18</DefaultAngle>
+      <DefaultAltitudeOffset>0.05</DefaultAltitudeOffset>
+      <!-- 抵消朝北时基础 Z 反转，使 BDP 南北额外偏移相同并保留原版高度差。 -->
+      <NorthZAdjust>0.20</NorthZAdjust>
+    </SouthNorthPose>
+    <!-- 东西向同步扩大共同侧移，继续沿用既有前后手层级。 -->
+    <EastWestPose>
+      <SideBaseX>0.34</SideBaseX>
+      <!-- 与南向使用相同的共同屏幕纵向偏移。 -->
+      <SideBaseZ>0.10</SideBaseZ>
+      <SideDeltaX>0.04</SideDeltaX>
+      <FrontAltitudeOffset>0.05</FrontAltitudeOffset>
+      <BackAltitudeOffset>-0.05</BackAltitudeOffset>
+      <DefaultAngle>-18</DefaultAngle>
+    </EastWestPose>
+  </BDP.Core.Expressions.ExpressionVisualPresetDef>
+
+  <!-- 光魂大盾举盾姿态视觉：更大盾面，正面竖直架盾。 -->
+  <BDP.Core.Expressions.ExpressionVisualPresetDef>
+    <defName>BDP_Visual_LightSoulShieldGuard</defName>
+    <!-- 默认英文名称由 DefInjected（定义注入语言包）覆盖。 -->
+    <label>光魂大盾举盾姿态视觉</label>
+    <!-- 举盾姿态独占脚本绘制的弧面矩形盾贴图，不影响灵活姿态与通用格挡特效。 -->
+    <GraphicData>
+      <texPath>Effects/Shield/energy_shield_block_curved</texPath>
+      <!-- 原版多朝向贴图：南北读取宽版盾面，东西读取窄版侧视盾面。 -->
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <color>(0.45, 0.85, 1.0)</color>
+      <drawSize>(1.45, 1.45)</drawSize>
+    </GraphicData>
+    <!-- 盾牌继续随目标移动，但屏幕内旋转限制在当前四向基准附近。 -->
+    <AimRotationLimit>15</AimRotationLimit>
+    <!-- 南北向正面举盾姿态：补齐整体抬高，并让朝北再额外抬高 0.05 格。 -->
+    <SouthNorthPose>
+      <DefaultOffset>(0.12, 0, 0.23)</DefaultOffset>
+      <!-- 竖向源贴图先抵消原版 53 度持械角，再保留 15 度斜握。 -->
+      <DefaultAngle>-68</DefaultAngle>
+      <!-- 举盾不参与攻击；静默手侧镜像让屏幕左侧盾与右侧盾形成向内对称斜率。 -->
+      <HandMirrorOnlyWhenIdle>true</HandMirrorOnlyWhenIdle>
+      <DefaultAltitudeOffset>0.08</DefaultAltitudeOffset>
+      <!-- 抵消朝北基础 Z 反转后再额外抬高，使朝北最终 BDP 纵向偏移为 +0.28。 -->
+      <NorthZAdjust>0.51</NorthZAdjust>
+    </SouthNorthPose>
+    <!-- 单持东西向固定最终结果：朝东原图、朝西镜像，二者都在前景并贴近人物。 -->
+    <EastWestPose>
+      <SideBaseX>0.08</SideBaseX>
+      <!-- 与南向使用相同的 +0.23 屏幕纵向偏移。 -->
+      <SideBaseZ>0.23</SideBaseZ>
+      <!-- 单持不再区分实际安装手位的近远位置。 -->
+      <SideDeltaX>0</SideDeltaX>
+      <FrontAltitudeOffset>0.08</FrontAltitudeOffset>
+      <!-- 两条内部手位分支都固定在前景层，保证最终表现不受实际安装手位影响。 -->
+      <BackAltitudeOffset>0.08</BackAltitudeOffset>
+      <!-- 抵消原版 53 度持械角，使竖向侧视资源保持屏幕竖直。 -->
+      <DefaultAngle>-53</DefaultAngle>
+      <!-- 关闭额外手位镜像，只保留原版朝西基础镜像。 -->
+      <HandMirror>false</HandMirror>
+      <FinalMirrorByHandOnly>false</FinalMirrorByHandOnly>
+      <MainHandAlwaysFront>false</MainHandAlwaysFront>
+    </EastWestPose>
+  </BDP.Core.Expressions.ExpressionVisualPresetDef>
+
+  <!-- 光魂大盾举盾姿态的双武器视觉：保持竖直，只把大盾向所属手侧外移。 -->
+  <BDP.Core.Expressions.ExpressionVisualPresetDef>
+    <defName>BDP_Visual_LightSoulShieldGuard_Dual</defName>
+    <label>光魂大盾举盾姿态双武器视觉</label>
+    <!-- 复用举盾姿态的脚本弧面矩形盾贴图。 -->
+    <GraphicData>
+      <texPath>Effects/Shield/energy_shield_block_curved</texPath>
+      <!-- 与单持共用原版多朝向资源；双武器也允许盾面贴身并遮挡人物。 -->
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <color>(0.45, 0.85, 1.0)</color>
+      <drawSize>(1.45, 1.45)</drawSize>
+    </GraphicData>
+    <!-- 双武器盾牌使用与单持相同的有限目标跟随旋转。 -->
+    <AimRotationLimit>15</AimRotationLimit>
+    <!-- 南北向保持单持横向距离，屏幕位置略微抬高，并把南北遮挡层分别推到其它武器之前／之后。 -->
+    <SouthNorthPose>
+      <DefaultOffset>(0.12, 0, 0.23)</DefaultOffset>
+      <DefaultAngle>-68</DefaultAngle>
+      <HandMirrorOnlyWhenIdle>true</HandMirrorOnlyWhenIdle>
+      <!-- 这里只控制 Y 绘制层：南向 +0.12 在其它武器前，北向自动取 -0.12 到其它武器后。 -->
+      <DefaultAltitudeOffset>0.12</DefaultAltitudeOffset>
+      <!-- 抵消朝北基础 Z 反转后再额外抬高，使朝北最终 BDP 纵向偏移为 +0.28。 -->
+      <NorthZAdjust>0.51</NorthZAdjust>
+    </SouthNorthPose>
+    <!-- 东西向进一步贴近人物并略微抬高；最终镜像只看手位，前后景与近远随朝向交换。 -->
+    <EastWestPose>
+      <SideBaseX>0.12</SideBaseX>
+      <!-- 与南向使用相同的 +0.23 屏幕纵向偏移。 -->
+      <SideBaseZ>0.23</SideBaseZ>
+      <SideDeltaX>0.04</SideDeltaX>
+      <FrontAltitudeOffset>0.08</FrontAltitudeOffset>
+      <BackAltitudeOffset>-0.05</BackAltitudeOffset>
+      <DefaultAngle>-53</DefaultAngle>
+      <HandMirror>true</HandMirror>
+      <!-- 与单持共用最终手位镜像和朝向前后景规律。 -->
+      <FinalMirrorByHandOnly>true</FinalMirrorByHandOnly>
+      <MainHandAlwaysFront>false</MainHandAlwaysFront>
+    </EastWestPose>
+  </BDP.Core.Expressions.ExpressionVisualPresetDef>
+
+  <!-- 光魂重刃视觉：复用正式手柄与光刃资源，放大并改成重型握持姿态。 -->
+  <BDP.Core.Expressions.ExpressionVisualPresetDef>
+    <defName>BDP_Visual_LightSoulHeavyBlade</defName>
+    <!-- 默认英文名称由 DefInjected（定义注入语言包）覆盖。 -->
+    <label>光魂重刃手持视觉</label>
+    <!-- 手柄主层。 -->
+    <GraphicData>
+      <texPath>Things/Trigger/Chip/Kogetsu/kogetsu_handle</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Cutout</shaderType>
+      <drawSize>(1.65, 1.65)</drawSize>
+    </GraphicData>
+    <!-- 南北向重型斜持姿态。 -->
+    <SouthNorthPose>
+      <DefaultOffset>(-0.28, 0, 0.12)</DefaultOffset>
+      <DefaultAngle>-38</DefaultAngle>
+      <DefaultAltitudeOffset>0.06</DefaultAltitudeOffset>
+      <!-- 抵消朝北时基础 Z 反转，使 BDP 南北额外偏移相同并保留原版高度差。 -->
+      <NorthZAdjust>0.24</NorthZAdjust>
+    </SouthNorthPose>
+    <!-- 东西向重型斜持姿态。 -->
+    <EastWestPose>
+      <SideBaseX>0.12</SideBaseX>
+      <!-- 与南向使用相同的共同屏幕纵向偏移。 -->
+      <SideBaseZ>0.12</SideBaseZ>
+      <SideDeltaX>0.04</SideDeltaX>
+      <FrontAltitudeOffset>0.06</FrontAltitudeOffset>
+      <BackAltitudeOffset>-0.05</BackAltitudeOffset>
+      <DefaultAngle>-38</DefaultAngle>
+    </EastWestPose>
+    <!-- 放大的光刃附加层。 -->
+    <OverlayLayers>
+      <li>
+        <LayerId>light_soul_heavy_blade_edge</LayerId>
+        <GraphicData>
+          <texPath>Things/Trigger/Chip/Kogetsu/kogetsu_blade</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <shaderType>MoteGlow</shaderType>
+          <color>(0.85, 0.95, 1.0)</color>
+          <drawSize>(1.65, 1.65)</drawSize>
         </GraphicData>
       </li>
     </OverlayLayers>
@@ -67,12 +278,82 @@
     </GraphicData>
   </BDP.Core.Expressions.ExpressionVisualPresetDef>
 
-  <!-- 霰弹枪视觉：引用原版 Shotgun（泵动霰弹枪）贴图。 -->
-  <BDP.Core.Expressions.ExpressionVisualPresetDef>
+  <!-- 中型枪械正式单武器基准：具体武器继承后只需声明自己的贴图。 -->
+  <BDP.Core.Expressions.ExpressionVisualPresetDef Name="BDP_VisualBase_RangedMedium" Abstract="True">
+    <!-- 中型枪械标准贴图按原始尺寸绘制。 -->
+    <DrawScale>1</DrawScale>
+    <!-- 标准握持点位于 512 像素画布中心向枪尾 100 像素处；单武器仍保持原版姿态。 -->
+    <Grip>
+      <GripOffset>(0, 0, -0.1953125)</GripOffset>
+    </Grip>
+    <!-- 标准枪口位于 512 像素画布中心向枪口 250 像素处。 -->
+    <Muzzle>
+      <IsRangedWeapon>true</IsRangedWeapon>
+      <MuzzleOffset>(0, 0, 0.48828125)</MuzzleOffset>
+    </Muzzle>
+  </BDP.Core.Expressions.ExpressionVisualPresetDef>
+
+  <!-- 中型枪械正式双武器基准：继承标准锚点，并增加四朝向姿态与握持定位。 -->
+  <BDP.Core.Expressions.ExpressionVisualPresetDef Name="BDP_VisualBase_RangedMedium_Dual" ParentName="BDP_VisualBase_RangedMedium" Abstract="True">
+    <!-- 南北向：两手外分并略微前移；仅整体静默时以手侧镜像形成倒 V。 -->
+    <SouthNorthPose>
+      <DefaultOffset>(0.24, 0, 0.03)</DefaultOffset>
+      <!-- 抵消朝北时基础 Z 反转，使 BDP 南北额外偏移相同并保留原版高度差。 -->
+      <NorthZAdjust>0.06</NorthZAdjust>
+      <HandMirrorOnlyWhenIdle>true</HandMirrorOnlyWhenIdle>
+    </SouthNorthPose>
+    <!-- 东西向：以前后位置和绘制层差明确主副手遮挡关系。 -->
+    <EastWestPose>
+      <SideBaseX>0.04</SideBaseX>
+      <!-- 让双武器高度中心与南向一致，再由 SideDeltaZ 保留前低后高透视差。 -->
+      <SideBaseZ>0.03</SideBaseZ>
+      <SideDeltaX>0.03</SideDeltaX>
+      <SideDeltaZ>0.10</SideDeltaZ>
+      <FrontAltitudeOffset>0.05</FrontAltitudeOffset>
+      <BackAltitudeOffset>-0.05</BackAltitudeOffset>
+    </EastWestPose>
+    <!-- 双武器姿态位置解释为目标手位，由继承的标准握持点反推贴图中心。 -->
+    <Grip>
+      <UseAsPoseOrigin>true</UseAsPoseOrigin>
+    </Grip>
+  </BDP.Core.Expressions.ExpressionVisualPresetDef>
+
+  <!-- 远程武器基准参考视觉：继承中型枪械标准，具体条目只声明贴图。 -->
+  <BDP.Core.Expressions.ExpressionVisualPresetDef ParentName="BDP_VisualBase_RangedMedium">
+    <defName>BDP_Visual_RangedWeaponReference</defName>
+    <!-- 512×512 画布内放置居中的 500×150 有向矩形。 -->
+    <GraphicData>
+      <texPath>Things/Trigger/Visual/RangedWeaponReference</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </GraphicData>
+  </BDP.Core.Expressions.ExpressionVisualPresetDef>
+
+  <!-- 双武器远程参考视觉：继承中型枪械双持标准，仅保留自己的贴图。 -->
+  <BDP.Core.Expressions.ExpressionVisualPresetDef ParentName="BDP_VisualBase_RangedMedium_Dual">
+    <defName>BDP_Visual_RangedWeaponReference_Dual</defName>
+    <!-- 与单武器基准预设复用同一张 512×512 参考贴图。 -->
+    <GraphicData>
+      <texPath>Things/Trigger/Visual/RangedWeaponReference</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </GraphicData>
+  </BDP.Core.Expressions.ExpressionVisualPresetDef>
+
+  <!-- 霰弹枪单武器视觉：继承中型枪械标准，只替换为岚参考贴图。 -->
+  <BDP.Core.Expressions.ExpressionVisualPresetDef ParentName="BDP_VisualBase_RangedMedium">
     <defName>BDP_Visual_Shotgun</defName>
     <label>霰弹枪手持视觉</label>
     <GraphicData>
-      <texPath>Things/Item/Equipment/WeaponRanged/Shotgun</texPath>
+      <texPath>Things/Trigger/Visual/ShotgunReferenceLan</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </GraphicData>
+  </BDP.Core.Expressions.ExpressionVisualPresetDef>
+
+  <!-- 霰弹枪双武器视觉：继承中型枪械双持标准，只替换为岚参考贴图。 -->
+  <BDP.Core.Expressions.ExpressionVisualPresetDef ParentName="BDP_VisualBase_RangedMedium_Dual">
+    <defName>BDP_Visual_Shotgun_Dual</defName>
+    <label>霰弹枪双武器手持视觉</label>
+    <GraphicData>
+      <texPath>Things/Trigger/Visual/ShotgunReferenceLan</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </GraphicData>
   </BDP.Core.Expressions.ExpressionVisualPresetDef>
@@ -85,6 +366,142 @@
       <texPath>Things/Item/Equipment/WeaponRanged/SniperRifle</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </GraphicData>
+  </BDP.Core.Expressions.ExpressionVisualPresetDef>
+
+  <!-- Trion 立方体远程视觉：只替换主贴图并叠加发光贴图，不声明尺寸或手持姿态。 -->
+  <BDP.Core.Expressions.ExpressionVisualPresetDef>
+    <!-- 视觉预设唯一名称。 -->
+    <defName>BDP_Visual_TrionCube</defName>
+    <!-- 诊断显示名称。 -->
+    <label>Trion 立方体双层视觉</label>
+    <!-- 不发光主贴图。 -->
+    <GraphicData>
+      <texPath>Things/Trigger/Chip/Trion/trion_cube_base</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Cutout</shaderType>
+    </GraphicData>
+    <!-- 枪口锚点落在最终武器绘制位；真实发射点偏移由构型散布配置负责。 -->
+    <Muzzle>
+      <IsRangedWeapon>true</IsRangedWeapon>
+      <MuzzleOffset>(0, 0, 0)</MuzzleOffset>
+    </Muzzle>
+    <!-- 发光叠层。 -->
+    <OverlayLayers>
+      <li>
+        <!-- 发光层稳定标识。 -->
+        <LayerId>trion_cube_glow</LayerId>
+        <!-- 带发光贴图。 -->
+        <GraphicData>
+          <texPath>Things/Trigger/Chip/Trion/trion_cube_glow</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <shaderType>MoteGlow</shaderType>
+          <!-- Trion 个体青绿色：取自发光贴图的代表性像素颜色，不改变透明度。 -->
+          <color>(0.72, 1.0, 0.76)</color>
+        </GraphicData>
+      </li>
+    </OverlayLayers>
+    <!-- Trion 立方体在动作阶段中的预热切图和射击/冷却隐藏规则。 -->
+    <StageVisuals>
+      <!-- 预热阶段切换为切割展开的 Trion 立方体主层和发光层。 -->
+      <li>
+        <Stage>Warmup</Stage>
+        <GraphicData>
+          <texPath>Things/Trigger/Chip/Trion/trion_cube_warmup_base</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <shaderType>Cutout</shaderType>
+        </GraphicData>
+        <OverlayLayers>
+          <!-- 预热阶段的切割展开发光叠层。 -->
+          <li>
+            <LayerId>trion_cube_warmup_glow</LayerId>
+            <GraphicData>
+              <texPath>Things/Trigger/Chip/Trion/trion_cube_warmup_glow</texPath>
+              <graphicClass>Graphic_Single</graphicClass>
+              <shaderType>MoteGlow</shaderType>
+              <color>(0.72, 1.0, 0.76)</color>
+            </GraphicData>
+          </li>
+        </OverlayLayers>
+      </li>
+      <!-- 射击阶段隐藏完整 Trion 立方体视觉。 -->
+      <li>
+        <Stage>Firing</Stage>
+        <Visible>false</Visible>
+      </li>
+      <!-- 冷却阶段隐藏完整 Trion 立方体视觉。 -->
+      <li>
+        <Stage>Cooldown</Stage>
+        <Visible>false</Visible>
+      </li>
+    </StageVisuals>
+  </BDP.Core.Expressions.ExpressionVisualPresetDef>
+
+  <!-- Trion 立方体双武器视觉：复用标准远程双武器绘制设施，只替换两层贴图。 -->
+  <BDP.Core.Expressions.ExpressionVisualPresetDef ParentName="BDP_VisualBase_RangedMedium_Dual">
+    <!-- 双武器视觉预设唯一名称。 -->
+    <defName>BDP_Visual_TrionCube_Dual</defName>
+    <!-- 诊断显示名称。 -->
+    <label>Trion 立方体双武器视觉</label>
+    <!-- 双武器主层仍使用不发光贴图。 -->
+    <GraphicData>
+      <texPath>Things/Trigger/Chip/Trion/trion_cube_base</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Cutout</shaderType>
+    </GraphicData>
+    <!-- 双武器两侧的枪口锚点均落在各自最终武器绘制位。 -->
+    <Muzzle>
+      <IsRangedWeapon>true</IsRangedWeapon>
+      <MuzzleOffset>(0, 0, 0)</MuzzleOffset>
+    </Muzzle>
+    <!-- 双武器发光叠层。 -->
+    <OverlayLayers>
+      <li>
+        <!-- 双武器发光层稳定标识。 -->
+        <LayerId>trion_cube_glow_dual</LayerId>
+        <!-- 双武器带发光贴图。 -->
+        <GraphicData>
+          <texPath>Things/Trigger/Chip/Trion/trion_cube_glow</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <shaderType>MoteGlow</shaderType>
+          <!-- 双武器 Trion 个体青绿色与单武器一致，不改变其它发光层默认行为。 -->
+          <color>(0.72, 1.0, 0.76)</color>
+        </GraphicData>
+      </li>
+    </OverlayLayers>
+    <!-- Trion 立方体在双武器动作阶段中的预热切图和射击/冷却隐藏规则。 -->
+    <StageVisuals>
+      <!-- 双武器预热阶段切换为切割展开的 Trion 立方体主层和发光层。 -->
+      <li>
+        <Stage>Warmup</Stage>
+        <GraphicData>
+          <texPath>Things/Trigger/Chip/Trion/trion_cube_warmup_base</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <shaderType>Cutout</shaderType>
+        </GraphicData>
+        <OverlayLayers>
+          <!-- 双武器预热阶段的切割展开发光叠层。 -->
+          <li>
+            <LayerId>trion_cube_warmup_glow_dual</LayerId>
+            <GraphicData>
+              <texPath>Things/Trigger/Chip/Trion/trion_cube_warmup_glow</texPath>
+              <graphicClass>Graphic_Single</graphicClass>
+              <shaderType>MoteGlow</shaderType>
+              <color>(0.72, 1.0, 0.76)</color>
+            </GraphicData>
+          </li>
+        </OverlayLayers>
+      </li>
+      <!-- 双武器射击阶段隐藏完整 Trion 立方体视觉。 -->
+      <li>
+        <Stage>Firing</Stage>
+        <Visible>false</Visible>
+      </li>
+      <!-- 双武器冷却阶段隐藏完整 Trion 立方体视觉。 -->
+      <li>
+        <Stage>Cooldown</Stage>
+        <Visible>false</Visible>
+      </li>
+    </StageVisuals>
   </BDP.Core.Expressions.ExpressionVisualPresetDef>
 
 </Defs>

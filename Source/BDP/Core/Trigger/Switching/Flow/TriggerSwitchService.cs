@@ -159,6 +159,13 @@ namespace BDP.Core.Trigger
             return readResult.Contract.Loadout;
         }
 
+        /// <summary>读取芯片的正式激活音效声明。</summary>
+        public ChipActivationAudioContract GetChipActivationAudio(Thing chip)
+        {
+            ChipLoadoutContract loadout = GetChipLoadout(chip);
+            return loadout != null ? loadout.ActivationAudio : null;
+        }
+
         /// <summary>解析某枚芯片的启用延迟。</summary>
         public int ResolveChipActivationDelayTicks(Thing chip)
         {

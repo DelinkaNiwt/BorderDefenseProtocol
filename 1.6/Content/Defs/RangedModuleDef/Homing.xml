@@ -9,11 +9,12 @@
   -->
 
   <BDP.Core.AttackExecution.BdpRangedAttackModuleDef>
-    <defName>BDP_HomingModule</defName>
-    <label>制导追踪模块</label>
+    <defName>BDP_HomingModule_Strong</defName>
+    <label>制导追踪模块（强）</label>
     <runtimeClass>BDP.Content.RangedModules.Homing.HomingModule</runtimeClass>
     <defaultConfig Class="BDP.Content.RangedModules.Homing.HomingConfig">
       <InitialSegmentTriggerRatio>0.5</InitialSegmentTriggerRatio>
+      <GroundTargetInitialSegmentTriggerRatio>1</GroundTargetInitialSegmentTriggerRatio>
       <MaxRelocks>2</MaxRelocks>
       <HitWindow>0.85</HitWindow>
       <LossBehindAngle>115</LossBehindAngle>
@@ -37,6 +38,33 @@
       <CaptureWeight>0.85</CaptureWeight>
       <TerminalFlyAwayDistance>5.5</TerminalFlyAwayDistance>
       <PerEmitVariance>0.2</PerEmitVariance>
+      <AllowGroundTarget>true</AllowGroundTarget>
+      <AcquireRadius>5</AcquireRadius>
+      <AcquireRequireLineOfSight>true</AcquireRequireLineOfSight>
+    </defaultConfig>
+  </BDP.Core.AttackExecution.BdpRangedAttackModuleDef>
+
+  <!--
+    制导追踪模块（弱）——弱性能追踪预设。
+    前 90% 路程直飞（与普通子弹一致），最后 10% 才开始追踪；
+    追丢后不重锁，直接脱靶飘走。
+    仅显式写两个差异字段，其余 22 字段回退到 HomingConfig 代码默认值（即标准预设取值）。
+  -->
+
+  <BDP.Core.AttackExecution.BdpRangedAttackModuleDef>
+    <defName>BDP_HomingModule_Weak</defName>
+    <label>制导追踪模块（弱）</label>
+    <runtimeClass>BDP.Content.RangedModules.Homing.HomingModule</runtimeClass>
+    <defaultConfig Class="BDP.Content.RangedModules.Homing.HomingConfig">
+      <InitialSegmentTriggerRatio>0.9</InitialSegmentTriggerRatio>
+      <GroundTargetInitialSegmentTriggerRatio>1</GroundTargetInitialSegmentTriggerRatio>
+      <MaxRelocks>0</MaxRelocks>
+      <MaxTurnAngleWhenEvading>12</MaxTurnAngleWhenEvading>
+      <PursuitTurnResponsiveness>0.18</PursuitTurnResponsiveness>
+      <PredictionLeadRatio>0.15</PredictionLeadRatio>
+      <AllowGroundTarget>true</AllowGroundTarget>
+      <AcquireRadius>3</AcquireRadius>
+      <AcquireRequireLineOfSight>true</AcquireRequireLineOfSight>
     </defaultConfig>
   </BDP.Core.AttackExecution.BdpRangedAttackModuleDef>
 

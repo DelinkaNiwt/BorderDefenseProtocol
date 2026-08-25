@@ -19,6 +19,11 @@ namespace BDP.Core.Trigger.Visual
         public Graphic Graphic { get; set; }
 
         /// <summary>
+        /// 当前附加层按人物朝向解析出的最终材质。
+        /// </summary>
+        public Material DrawMaterial { get; set; }
+
+        /// <summary>
         /// 当前附加层世界绘制位置。
         /// </summary>
         public Vector3 DrawPosition { get; set; }

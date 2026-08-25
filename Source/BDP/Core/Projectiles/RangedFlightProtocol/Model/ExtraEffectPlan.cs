@@ -10,6 +10,11 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Model
     public sealed class ExtraEffectPlan
     {
         /// <summary>
+        /// 当前效果从哪一种原版命中范围取得目标。
+        /// </summary>
+        public ExtraEffectTargetScope TargetScope { get; set; } = ExtraEffectTargetScope.DirectHitThing;
+
+        /// <summary>
         /// 当前额外效果的种类键。
         /// </summary>
         public string EffectKind { get; set; }
@@ -33,5 +38,24 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Model
         /// 当前额外效果附带的轻量标签集合。
         /// </summary>
         public List<string> Tags { get; set; } = new List<string>();
+
+        /// <summary>
+        /// 复制当前效果并替换逐目标上下文。
+        /// </summary>
+        public ExtraEffectPlan CloneForTarget(Thing targetThing, IntVec3 targetCell)
+        {
+            ExtraEffectPlan result = new ExtraEffectPlan
+            {
+                TargetScope = TargetScope,
+                EffectKind = EffectKind,
+                TargetThing = targetThing,
+                TargetCell = targetCell,
+                Parameters = Parameters != null
+                    ? new Dictionary<string, string>(Parameters)
+                    : new Dictionary<string, string>(),
+                Tags = Tags != null ? new List<string>(Tags) : new List<string>()
+            };
+            return result;
+        }
     }
 }

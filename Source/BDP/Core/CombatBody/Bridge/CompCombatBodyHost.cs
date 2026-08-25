@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using BDP.Core.CombatBody.Wounds;
+using BDP.Core.CombatBody.Wounds.Presentation;
 using BDP.Core.CombatBodySession;
 using Verse;
 
@@ -130,6 +131,7 @@ namespace BDP.Core.CombatBody
             Scribe_Deep.Look(ref state, "combatBodyState");
             Scribe_Deep.Look(ref hostState, "hostState");
             Scribe_Deep.Look(ref woundRuntime, "woundRuntime");
+            CombatBodyWoundPresentationRegistry.ExposeData(parent as Pawn);
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {

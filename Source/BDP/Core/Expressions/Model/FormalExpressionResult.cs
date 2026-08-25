@@ -79,6 +79,11 @@ namespace BDP.Core.Expressions
         public string VisualPresetDefName { get; set; }
 
         /// <summary>
+        /// 当前结果对基础视觉图层的局部覆盖预设 DefName。
+        /// </summary>
+        public string VisualGraphicOverrideDefName { get; set; }
+
+        /// <summary>
         /// 当前结果参与复合表达时使用的视觉预设 DefName。
         /// </summary>
         public string CompositeVisualPresetDefName { get; set; }
@@ -226,5 +231,17 @@ namespace BDP.Core.Expressions
         /// 它是后续交互前置链与执行主骨架的统一模块来源。
         /// </summary>
         public IReadOnlyList<RangedModuleMountConfig> RangedModules { get; set; }
+
+        /// <summary>
+        /// 当前结果向其它远程表达结果发布的开放式增强声明。
+        /// 被动结果只通过它发布“可追加什么”，不记录目标芯片身份。
+        /// </summary>
+        public IReadOnlyList<RangedModuleAugmentationConfig> RangedModuleAugmentations { get; set; }
+
+        /// <summary>
+        /// 当前结果在最终入口显示时应追加的名称前缀列表。
+        /// 来源变体后缀仍由 SourceVariantLabel 单独负责。
+        /// </summary>
+        public IReadOnlyList<string> DisplayLabelPrefixes { get; set; }
     }
 }

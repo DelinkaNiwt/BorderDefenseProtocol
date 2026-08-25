@@ -36,6 +36,11 @@ namespace BDP.Core.Expressions
         public string VisualPresetDefName;
 
         /// <summary>
+        /// 当前条目对基础视觉图层的局部覆盖预设 DefName。
+        /// </summary>
+        public string VisualGraphicOverrideDefName;
+
+        /// <summary>
         /// 当前条目参与复合表达时使用的视觉预设 DefName。
         /// </summary>
         public string CompositeVisualPresetDefName;
@@ -100,6 +105,12 @@ namespace BDP.Core.Expressions
         /// 当前条目所属的形态键。
         /// </summary>
         public string ModeKey;
+
+        /// <summary>
+        /// 当前条目最终解析时所属的姿态键。
+        /// 所属形态没有姿态时为空。
+        /// </summary>
+        public string StanceKey;
 
         /// <summary>
         /// 当前条目声明的 Verb 属性定义。
@@ -176,7 +187,12 @@ namespace BDP.Core.Expressions
         public IReadOnlyList<RangedModuleMountConfig> RangedModules;
 
         /// <summary>
-        /// 当前条目的投射物属性覆盖（来自 GunClass 合并后）。
+        /// 当前条目发布给其它远程表达结果的开放式增强声明快照。
+        /// </summary>
+        public IReadOnlyList<RangedModuleAugmentationConfig> RangedModuleAugmentations;
+
+        /// <summary>
+        /// 当前条目的投射物属性覆盖（来自武装型合并后）。
         /// 为 null = 不覆盖任何投射物属性。
         /// </summary>
         public ProjectileOverrides ProjectileOverrides;

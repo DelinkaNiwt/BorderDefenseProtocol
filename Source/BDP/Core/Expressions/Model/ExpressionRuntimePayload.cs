@@ -308,14 +308,14 @@ namespace BDP.Core.Expressions
         public string Label { get; set; }
 
         /// <summary>
-        /// Combo 声明的芯片 A DefName。
+        /// Combo 声明的第一来源动作预设 DefName。
         /// </summary>
-        public string ChipADefName { get; set; }
+        public string FirstSourceActionDefName { get; set; }
 
         /// <summary>
-        /// Combo 声明的芯片 B DefName。
+        /// Combo 声明的第二来源动作预设 DefName。
         /// </summary>
-        public string ChipBDefName { get; set; }
+        public string SecondSourceActionDefName { get; set; }
 
         /// <summary>
         /// Combo 本体级 Trion 参数。
@@ -331,8 +331,8 @@ namespace BDP.Core.Expressions
             {
                 ComboDefName = ComboDefName,
                 Label = Label,
-                ChipADefName = ChipADefName,
-                ChipBDefName = ChipBDefName,
+                FirstSourceActionDefName = FirstSourceActionDefName,
+                SecondSourceActionDefName = SecondSourceActionDefName,
                 ChipTrion = ChipTrion != null ? ChipTrion.Clone() : null
             };
         }
@@ -372,6 +372,11 @@ namespace BDP.Core.Expressions
         /// 单侧视觉预设 DefName。
         /// </summary>
         public string VisualPresetDefName { get; set; }
+
+        /// <summary>
+        /// 单侧视觉图层局部覆盖预设 DefName。
+        /// </summary>
+        public string VisualGraphicOverrideDefName { get; set; }
 
         /// <summary>
         /// 复合视觉预设 DefName。
@@ -446,6 +451,7 @@ namespace BDP.Core.Expressions
                 DisplayLabel = DisplayLabel,
                 ManualEntryIconTexPath = ManualEntryIconTexPath,
                 VisualPresetDefName = VisualPresetDefName,
+                VisualGraphicOverrideDefName = VisualGraphicOverrideDefName,
                 CompositeVisualPresetDefName = CompositeVisualPresetDefName,
                 ForceSuppressHostEquipment = ForceSuppressHostEquipment,
                 VisualPriority = VisualPriority,

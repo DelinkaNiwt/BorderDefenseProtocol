@@ -34,7 +34,6 @@ namespace BDP.Core.CombatBody.Wounds
         public void ExposeData()
         {
             trionBinding.ExposeData();
-            CombatBodyWoundPresentationRegistry.ExposeData();
             Scribe_Values.Look(ref nextCalibrationTick, "nextCalibrationTick", 0);
         }
 
@@ -51,7 +50,7 @@ namespace BDP.Core.CombatBody.Wounds
             }
 
             trionBinding.ClearAll(pawn);
-            CombatBodyWoundPresentationRegistry.ClearAll();
+            CombatBodyWoundPresentationRegistry.ClearAll(pawn);
             ScheduleNextCalibration(CombatBodyWoundPolicy.Resolve());
         }
 
@@ -68,7 +67,7 @@ namespace BDP.Core.CombatBody.Wounds
             if (!CombatBodyWoundPolicy.IsCombatBodyWoundRuntimeApplicable(pawn))
             {
                 trionBinding.RemoveWoundDrain(pawn, hediff);
-                CombatBodyWoundPresentationRegistry.NotifyWoundDrainExpired(hediff.loadID);
+                CombatBodyWoundPresentationRegistry.NotifyWoundDrainExpired(pawn, hediff.loadID);
                 return;
             }
 
@@ -76,7 +75,7 @@ namespace BDP.Core.CombatBody.Wounds
             int expiryTick = trionBinding.UpdateWoundDrain(pawn, hediff, CurrentGameTick(), ResolveIdleTimeoutTicks(policy));
             if (expiryTick <= 0)
             {
-                CombatBodyWoundPresentationRegistry.NotifyWoundDrainExpired(hediff.loadID);
+                CombatBodyWoundPresentationRegistry.NotifyWoundDrainExpired(pawn, hediff.loadID);
                 return;
             }
 
@@ -102,7 +101,7 @@ namespace BDP.Core.CombatBody.Wounds
         internal void ClearActiveRuntime(Pawn pawn)
         {
             trionBinding.ClearAll(pawn);
-            CombatBodyWoundPresentationRegistry.ClearAll();
+            CombatBodyWoundPresentationRegistry.ClearAll(pawn);
             nextCalibrationTick = 0;
         }
 
@@ -156,7 +155,7 @@ namespace BDP.Core.CombatBody.Wounds
                 int nextExpiryTick = trionBinding.ExpireIdleDrains(pawn, ticksGame, expiredDrainIds);
                 for (int index = 0; index < expiredDrainIds.Count; index++)
                 {
-                    CombatBodyWoundPresentationRegistry.NotifyWoundDrainExpired(expiredDrainIds[index]);
+                    CombatBodyWoundPresentationRegistry.NotifyWoundDrainExpired(pawn, expiredDrainIds[index]);
                 }
 
                 expiredDrainIds.Clear();

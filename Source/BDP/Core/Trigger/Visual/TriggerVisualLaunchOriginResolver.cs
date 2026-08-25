@@ -227,20 +227,29 @@ namespace BDP.Core.Trigger.Visual
                 return false;
             }
 
+            WeaponVisualStageSnapshot weaponStageSnapshot = new WeaponVisualStageResolver().Resolve(
+                pawn,
+                residentEntry,
+                triggerBody.PublishedCombatProjection,
+                runtimeState);
             VisualPoseResolver resolver = new VisualPoseResolver();
-            if (!resolver.TryResolveMuzzleAnchor(
-                    new VisualPoseRequest
-                    {
-                        Entry = residentEntry,
-                        Preset = preset,
-                        RuntimeState = runtimeState,
-                        PoseSample = sample,
-                        SourceThing = ResolveSourceThing(triggerBody, residentEntry),
-                        EquippedAngleOffset = ResolveEquippedAngleOffset(pawn),
-                        IsExecutionActive = ResolveExecutionActive(visualProjection, runtimeState, residentEntry),
-                        IsMuzzleActive = ResolveMuzzleActive(visualProjection, runtimeState, residentEntry)
-                    },
-                    out ResolvedMuzzleAnchor anchor))
+            VisualPoseRequest request = new VisualPoseRequest
+            {
+                Entry = residentEntry,
+                Preset = preset,
+                GraphicOverridePreset = ResolveGraphicOverridePreset(residentEntry),
+                RuntimeState = runtimeState,
+                WeaponStageSnapshot = weaponStageSnapshot,
+                PoseSample = sample,
+                SourceThing = ResolveSourceThing(triggerBody, residentEntry),
+                EquippedAngleOffset = ResolveEquippedAngleOffset(pawn),
+                IsExecutionActive = ResolveExecutionActive(visualProjection, runtimeState, residentEntry),
+                IsMuzzleActive = ResolveMuzzleActive(visualProjection, runtimeState, residentEntry)
+            };
+            bool resolved = visualProjection.HostEquipmentRenderMode == HostEquipmentRenderMode.ReplaceTextureOnly
+                ? resolver.TryResolveTextureOnlyMuzzleAnchor(request, out ResolvedMuzzleAnchor anchor)
+                : resolver.TryResolveMuzzleAnchor(request, out anchor);
+            if (!resolved)
             {
                 resolution.VisualFailureKind = TriggerVisualLaunchOriginSourceKind.ResolveMuzzleFailed;
                 return false;
@@ -314,6 +323,19 @@ namespace BDP.Core.Trigger.Visual
             return string.IsNullOrWhiteSpace(presetDefName)
                 ? null
                 : DefDatabase<ExpressionVisualPresetDef>.GetNamed(presetDefName, false);
+        }
+
+        /// <summary>
+        /// 解析当前 resident 条目的视觉图层局部覆盖预设。
+        /// </summary>
+        private static ExpressionVisualPresetDef ResolveGraphicOverridePreset(
+            VisualResidentEntry entry)
+        {
+            return entry == null || string.IsNullOrWhiteSpace(entry.VisualGraphicOverrideDefName)
+                ? null
+                : DefDatabase<ExpressionVisualPresetDef>.GetNamed(
+                    entry.VisualGraphicOverrideDefName,
+                    false);
         }
 
         /// <summary>

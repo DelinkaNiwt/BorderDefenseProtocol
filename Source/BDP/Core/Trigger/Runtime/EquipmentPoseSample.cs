@@ -22,7 +22,7 @@ namespace BDP.Core.Trigger.Runtime
 
         /// <summary>
         /// 原版传入的瞄准角度。
-        /// 枪口偏移按这个角度旋转。
+        /// 它参与最终贴图姿态计算，枪口随最终贴图姿态一起变换。
         /// </summary>
         public float AimAngle { get; set; }
 

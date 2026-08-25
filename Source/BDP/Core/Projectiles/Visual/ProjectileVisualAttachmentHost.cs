@@ -27,17 +27,23 @@ namespace BDP.Core.Projectiles.Visual
         /// </summary>
         /// <param name="projectileDef">当前投射物定义。</param>
         /// <param name="visualAttachmentProviderDefs">当前投射物优先消费的来源视觉提供器定义集合。</param>
-        internal void Initialize(ThingDef projectileDef, IReadOnlyList<ThingDef> visualAttachmentProviderDefs = null)
+        /// <param name="visualAppearanceOverrides">当前投射物冻结的可选视觉外观覆盖。</param>
+        internal void Initialize(
+            ThingDef projectileDef,
+            IReadOnlyList<ThingDef> visualAttachmentProviderDefs = null,
+            ProjectileVisualAppearanceOverrides visualAppearanceOverrides = null)
         {
             attachments.Clear();
             projectileDefName = projectileDef != null ? projectileDef.defName : null;
-            int sourceAttachmentCount = TryInitializeFromProviderDefs(visualAttachmentProviderDefs);
+            int sourceAttachmentCount = TryInitializeFromProviderDefs(
+                visualAttachmentProviderDefs,
+                visualAppearanceOverrides);
             if (sourceAttachmentCount > 0)
             {
                 return;
             }
 
-            TryInitializeFromDef(projectileDef);
+            TryInitializeFromDef(projectileDef, visualAppearanceOverrides);
         }
 
         /// <summary>
@@ -46,7 +52,9 @@ namespace BDP.Core.Projectiles.Visual
         /// </summary>
         /// <param name="providerDefs">当前来源定义集合。</param>
         /// <returns>成功创建的视觉附加件数量。</returns>
-        private int TryInitializeFromProviderDefs(IReadOnlyList<ThingDef> providerDefs)
+        private int TryInitializeFromProviderDefs(
+            IReadOnlyList<ThingDef> providerDefs,
+            ProjectileVisualAppearanceOverrides visualAppearanceOverrides)
         {
             if (providerDefs == null)
             {
@@ -56,7 +64,7 @@ namespace BDP.Core.Projectiles.Visual
             int createdCount = 0;
             for (int i = 0; i < providerDefs.Count; i++)
             {
-                createdCount += TryInitializeFromDef(providerDefs[i]);
+                createdCount += TryInitializeFromDef(providerDefs[i], visualAppearanceOverrides);
             }
 
             return createdCount;
@@ -67,7 +75,9 @@ namespace BDP.Core.Projectiles.Visual
         /// </summary>
         /// <param name="providerDef">当前提供视觉附加件的定义。</param>
         /// <returns>成功创建的视觉附加件数量。</returns>
-        private int TryInitializeFromDef(ThingDef providerDef)
+        private int TryInitializeFromDef(
+            ThingDef providerDef,
+            ProjectileVisualAppearanceOverrides visualAppearanceOverrides)
         {
             if (providerDef == null || providerDef.modExtensions == null)
             {
@@ -84,7 +94,7 @@ namespace BDP.Core.Projectiles.Visual
 
                 try
                 {
-                    IProjectileVisualAttachment attachment = provider.CreateAttachment();
+                    IProjectileVisualAttachment attachment = provider.CreateAttachment(visualAppearanceOverrides);
                     if (attachment != null)
                     {
                         attachments.Add(attachment);

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 光魂大盾灵活姿态：正面 180 度、50% 抵挡、不挡近战。 -->
+  <HediffDef>
+    <defName>BDP_Hediff_LightSoulShieldMobile</defName>
+    <!-- 服从表达 Hediff（健康状态）宿主生命周期。 -->
+    <hediffClass>BDP.Core.Expressions.BdpExpressionHostHediff</hediffClass>
+    <!-- 默认中文名称；DefInjected（定义注入语言包）仍可覆盖。 -->
+    <label>光魂大盾（灵活姿态）</label>
+    <!-- 默认中文说明；DefInjected（定义注入语言包）仍可覆盖。 -->
+    <description>以较宽防护角度维持灵活移动的光魂大盾姿态。无法抵挡近战攻击。</description>
+    <defaultLabelColor>(0.45, 0.9, 1.0)</defaultLabelColor>
+    <isBad>false</isBad>
+    <initialSeverity>1</initialSeverity>
+    <minSeverity>0</minSeverity>
+    <maxSeverity>1</maxSeverity>
+    <comps>
+      <li Class="BDP.Content.Shield.HediffCompProperties_EnergyShield">
+        <enableAngleCheck>true</enableAngleCheck>
+        <blockAngleRange>180</blockAngleRange>
+        <blockAngleOffset>0</blockAngleOffset>
+        <blockChance>0.5</blockChance>
+        <allowMeleeDamage>false</allowMeleeDamage>
+        <!-- 成功抵挡消耗伤害值 50% 的 Trion。 -->
+        <trionCostMultiplier>0.5</trionCostMultiplier>
+        <!-- 当前姿态不使用 Severity 聚合。 -->
+        <stackedEnableAngleCheck>true</stackedEnableAngleCheck>
+        <stackedBlockAngleRange>180</stackedBlockAngleRange>
+        <stackedBlockChance>0.5</stackedBlockChance>
+        <effectScale>0.25</effectScale>
+        <!-- 光魂已有常驻盾面，抵挡时不再弹出额外完整六边形。 -->
+        <showBlockGraphic>false</showBlockGraphic>
+        <shieldRadius>0.8</shieldRadius>
+        <!-- 命中闪光、火花与声音沿来袭方向贴近盾面。 -->
+        <impactEffectRadius>0.4</impactEffectRadius>
+        <showShieldBubble>false</showShieldBubble>
+        <!-- 抵挡后盾面沿受击方向内缩并在 8 tick 内小幅回弹。 -->
+        <blockVisualImpulseTicks>8</blockVisualImpulseTicks>
+        <!-- 盾面最大内缩距离提高到 0.03 格。 -->
+        <blockVisualImpulseDistance>0.03</blockVisualImpulseDistance>
+        <!-- 按攻击来源的地图南北关系切换整组命中特效前后景。 -->
+        <useDirectionalImpactDepth>true</useDirectionalImpactDepth>
+        <!-- 北侧命中的白闪使用人物下方定义。 -->
+        <backgroundBlockFlashFleckDef>BDP_Fleck_LightSoulExplosionFlash_Back</backgroundBlockFlashFleckDef>
+        <!-- 南侧及正东、正西命中的金属火花统一位于人物上方。 -->
+        <foregroundDeflectEffectDef>BDP_Effecter_LightSoulDeflect_Front</foregroundDeflectEffectDef>
+        <!-- 北侧命中的金属火花统一位于人物下方。 -->
+        <backgroundDeflectEffectDef>BDP_Effecter_LightSoulDeflect_Back</backgroundDeflectEffectDef>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <!-- 光魂大盾举盾姿态：正面 120 度、98% 抵挡、允许挡近战、减速并禁攻。 -->
+  <HediffDef>
+    <defName>BDP_Hediff_LightSoulShieldGuard</defName>
+    <!-- 服从表达 Hediff（健康状态）宿主生命周期。 -->
+    <hediffClass>BDP.Core.Expressions.BdpExpressionHostHediff</hediffClass>
+    <!-- 默认中文名称；DefInjected（定义注入语言包）仍可覆盖。 -->
+    <label>光魂大盾（举盾姿态）</label>
+    <!-- 默认中文说明；DefInjected（定义注入语言包）仍可覆盖。 -->
+    <description>收窄防护角度并稳定举盾，大幅提高抵挡率且允许抵挡近战攻击；移动速度降低 40%，期间无法进行攻击。</description>
+    <defaultLabelColor>(0.35, 0.8, 1.0)</defaultLabelColor>
+    <isBad>false</isBad>
+    <initialSeverity>1</initialSeverity>
+    <minSeverity>0</minSeverity>
+    <maxSeverity>1</maxSeverity>
+    <!-- 原版 HediffStage（健康状态阶段）承担减速和暴力禁用。 -->
+    <stages>
+      <li>
+        <statFactors>
+          <!-- 移动速度减少 40%。 -->
+          <MoveSpeed>0.6</MoveSpeed>
+        </statFactors>
+        <disabledWorkTags>
+          <!-- 禁止一切暴力攻击入口。 -->
+          <li>Violent</li>
+        </disabledWorkTags>
+      </li>
+    </stages>
+    <comps>
+      <li Class="BDP.Content.Shield.HediffCompProperties_EnergyShield">
+        <enableAngleCheck>true</enableAngleCheck>
+        <blockAngleRange>120</blockAngleRange>
+        <blockAngleOffset>0</blockAngleOffset>
+        <blockChance>0.98</blockChance>
+        <allowMeleeDamage>true</allowMeleeDamage>
+        <!-- 成功抵挡消耗伤害值 50% 的 Trion。 -->
+        <trionCostMultiplier>0.5</trionCostMultiplier>
+        <!-- 当前姿态不使用 Severity 聚合。 -->
+        <stackedEnableAngleCheck>true</stackedEnableAngleCheck>
+        <stackedBlockAngleRange>120</stackedBlockAngleRange>
+        <stackedBlockChance>0.98</stackedBlockChance>
+        <effectScale>0.25</effectScale>
+        <!-- 光魂已有常驻盾面，抵挡时不再弹出额外完整六边形。 -->
+        <showBlockGraphic>false</showBlockGraphic>
+        <shieldRadius>0.8</shieldRadius>
+        <!-- 命中闪光、火花与声音沿来袭方向贴近盾面。 -->
+        <impactEffectRadius>0.4</impactEffectRadius>
+        <showShieldBubble>false</showShieldBubble>
+        <!-- 抵挡后盾面沿受击方向内缩并在 8 tick 内小幅回弹。 -->
+        <blockVisualImpulseTicks>8</blockVisualImpulseTicks>
+        <!-- 盾面最大内缩距离提高到 0.03 格。 -->
+        <blockVisualImpulseDistance>0.03</blockVisualImpulseDistance>
+        <!-- 按攻击来源的地图南北关系切换整组命中特效前后景。 -->
+        <useDirectionalImpactDepth>true</useDirectionalImpactDepth>
+        <!-- 北侧命中的白闪使用人物下方定义。 -->
+        <backgroundBlockFlashFleckDef>BDP_Fleck_LightSoulExplosionFlash_Back</backgroundBlockFlashFleckDef>
+        <!-- 南侧及正东、正西命中的金属火花统一位于人物上方。 -->
+        <foregroundDeflectEffectDef>BDP_Effecter_LightSoulDeflect_Front</foregroundDeflectEffectDef>
+        <!-- 北侧命中的金属火花统一位于人物下方。 -->
+        <backgroundDeflectEffectDef>BDP_Effecter_LightSoulDeflect_Back</backgroundDeflectEffectDef>
+      </li>
+      <!-- 注视警戒：由同一个正式 Verb 承担手动选取和自动索敌。 -->
+      <li Class="BDP.Content.LightSoul.HediffCompProperties_LightSoulGuardWatch">
+        <verbs>
+          <!-- 非攻击警戒 Verb：只下达注视作业，绝不施放攻击。 -->
+          <li>
+            <!-- 正式注视警戒行为类。 -->
+            <verbClass>BDP.Content.LightSoul.Verb_LightSoulGuardWatch</verbClass>
+            <!-- 声明为组件主行为，供原版 VerbTracker.PrimaryVerb 读取。 -->
+            <isPrimary>true</isPrimary>
+            <!-- 默认中文名；界面按钮仍由语言包覆盖。 -->
+            <label>注视警戒</label>
+            <!-- 临时射程；手动选择与自动索敌统一读取此项。 -->
+            <range>15.9</range>
+            <!-- 像远程攻击一样要求人物与目标之间有视线。 -->
+            <requireLineOfSight>true</requireLineOfSight>
+            <!-- 该行为不是武器，不能进入原版武器攻击作业。 -->
+            <ai_IsWeapon>false</ai_IsWeapon>
+            <!-- 该行为不属于暴力，举盾时仍允许玩家使用。 -->
+            <violent>false</violent>
+            <!-- 允许原版目标选择器接收玩家点选。 -->
+            <targetable>true</targetable>
+            <!-- 本组件自行投影按钮，避免原版只为装备生成 Verb 按钮的限制。 -->
+            <hasStandardCommand>false</hasStandardCommand>
+            <!-- 使用原版攻击目标类型：人物、建筑和可自动攻击物品。 -->
+            <targetParams>
+              <canTargetPawns>true</canTargetPawns>
+              <canTargetBuildings>true</canTargetBuildings>
+              <canTargetItems>true</canTargetItems>
+              <mapObjectTargetsMustBeAutoAttackable>true</mapObjectTargetsMustBeAutoAttackable>
+            </targetParams>
+            <!-- 暂用原版集火图标，后续可直接替换贴图路径。 -->
+            <commandIcon>UI/Commands/SquadAttack</commandIcon>
+          </li>
+        </verbs>
+      </li>
+    </comps>
+  </HediffDef>
+
+</Defs>

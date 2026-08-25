@@ -41,6 +41,7 @@
     <thingClass>BDP.Core.Projectiles.BdpProjectile</thingClass>
     <projectile>
       <damageDef>Bullet</damageDef>
+      <!-- 小行星单发伤害按本次平衡降为 13。 -->
       <damageAmountBase>13</damageAmountBase>
       <armorPenetrationBase>0.10</armorPenetrationBase>
       <stoppingPower>2</stoppingPower>
@@ -49,6 +50,75 @@
     <modExtensions>
       <li Class="BDP.Content.Projectiles.BeamTrail.BeamTrailExtension">
         <preset>BDP_TrailPreset_BrightMintShort</preset>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- 炸裂弹：美特拉专用投射物；范围爆炸由投射物自身的爆炸字段触发。 -->
+  <ThingDef ParentName="BaseBullet">
+    <!-- 炸裂弹的内部 Def 标识名，不使用美特拉的动作标识。 -->
+    <defName>BDP_Projectile_Explosive</defName>
+    <!-- 英文回退名称；简体中文名称由 DefInjected 语言包提供。 -->
+    <label>explosive projectile</label>
+    <!-- 沿用 BDP 基础子弹的弹体贴图。 -->
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <!-- 保留 BDP 投射物生命周期与远程动作协议。 -->
+    <thingClass>BDP.Core.Projectiles.BdpProjectile</thingClass>
+    <projectile>
+      <!-- 爆炸伤害类型沿用范围爆炸模块的 Bomb。 -->
+      <damageDef>Bomb</damageDef>
+      <!-- 美特拉的炸裂伤害直接落在投射物 Def，并按本次平衡降为 13。 -->
+      <damageAmountBase>13</damageAmountBase>
+      <!-- 爆炸模块未单独指定护甲穿透，因此迁移当前普通弹穿透 0.10。 -->
+      <armorPenetrationBase>0.10</armorPenetrationBase>
+      <!-- 保持当前普通弹的停止力与飞行速度。 -->
+      <stoppingPower>2</stoppingPower>
+      <speed>120</speed>
+      <!-- 原范围爆炸模块的爆炸半径。 -->
+      <explosionRadius>2.9</explosionRadius>
+    </projectile>
+    <!-- 保持当前 BDP 子弹的短亮薄荷色拖尾。 -->
+    <modExtensions>
+      <li Class="BDP.Content.Projectiles.BeamTrail.BeamTrailExtension">
+        <preset>BDP_TrailPreset_BrightMintShort</preset>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- 变化炸裂弹：战斧组合技投射物；融合毒蛇变化弹与美特拉炸裂能力。 -->
+  <ThingDef ParentName="BaseBullet">
+    <!-- 变化炸裂弹的内部 Def 标识名，由 Variable 与 Explosive 拼接而成。 -->
+    <defName>BDP_Projectile_Variable_Explosive</defName>
+    <!-- 英文回退名称；简体中文名称由 DefInjected 语言包提供。 -->
+    <label>variable explosive projectile</label>
+    <!-- 沿用 BDP 基础子弹的弹体贴图。 -->
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <!-- 继续使用统一 BDP 投射物宿主。 -->
+    <thingClass>BDP.Core.Projectiles.BdpProjectile</thingClass>
+    <projectile>
+      <!-- 爆炸伤害类型沿用美特拉。 -->
+      <damageDef>Bomb</damageDef>
+      <!-- 伤害沿用毒蛇变化弹的四分之一基准。 -->
+      <damageAmountBase>8</damageAmountBase>
+      <!-- 护甲穿透沿用毒蛇变化弹。 -->
+      <armorPenetrationBase>0.05</armorPenetrationBase>
+      <!-- 停止力沿用毒蛇变化弹。 -->
+      <stoppingPower>1</stoppingPower>
+      <!-- 飞行速度为毒蛇变化弹的 70%。 -->
+      <speed>140</speed>
+      <!-- 爆炸半径沿用美特拉。 -->
+      <explosionRadius>2.9</explosionRadius>
+    </projectile>
+    <!-- 沿用毒蛇变化弹的长亮薄荷色拖尾。 -->
+    <modExtensions>
+      <li Class="BDP.Content.Projectiles.BeamTrail.BeamTrailExtension">
+        <preset>BDP_TrailPreset_BrightMintLong</preset>
       </li>
     </modExtensions>
   </ThingDef>
@@ -64,6 +134,7 @@
     <thingClass>BDP.Core.Projectiles.BdpProjectile</thingClass>
     <projectile>
       <damageDef>Bullet</damageDef>
+      <!-- 飞锥单发伤害按本次平衡降为 26；Trion 立方体仍保留四发。 -->
       <damageAmountBase>26</damageAmountBase>
       <armorPenetrationBase>0.35</armorPenetrationBase>
       <stoppingPower>3</stoppingPower>
@@ -87,6 +158,7 @@
     <thingClass>BDP.Core.Projectiles.BdpProjectile</thingClass>
     <projectile>
       <damageDef>Bullet</damageDef>
+      <!-- 毒蛇单发伤害按本次平衡降为 8；Trion 立方体仍保留四发。 -->
       <damageAmountBase>8</damageAmountBase>
       <armorPenetrationBase>0.05</armorPenetrationBase>
       <stoppingPower>1</stoppingPower>
@@ -110,6 +182,7 @@
     <thingClass>BDP.Core.Projectiles.BdpProjectile</thingClass>
     <projectile>
       <damageDef>Bullet</damageDef>
+      <!-- 猎犬与黄蜂单发伤害按本次平衡降为 10；Trion 立方体仍保留四发。 -->
       <damageAmountBase>10</damageAmountBase>
       <armorPenetrationBase>0.05</armorPenetrationBase>
       <stoppingPower>1.5</stoppingPower>

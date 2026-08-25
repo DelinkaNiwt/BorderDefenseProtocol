@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 铅块负重状态名称与说明。 -->
+  <BDP_Hediff_LeadWeight.label>铅块负重</BDP_Hediff_LeadWeight.label>
+  <BDP_Hediff_LeadWeight.description>被铅弹命中后附加的负重状态。连续命中会叠加移动速度惩罚，停止命中后逐步恢复。</BDP_Hediff_LeadWeight.description>
+</LanguageData>

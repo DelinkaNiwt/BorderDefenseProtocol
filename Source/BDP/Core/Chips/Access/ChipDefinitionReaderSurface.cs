@@ -108,6 +108,13 @@ namespace BDP.Core.Chips
                 {
                     SlotRegion = loadout != null ? loadout.SlotRegion : ChipSlotRegion.Unspecified,
                     SlotOccupancy = loadout != null ? loadout.SlotOccupancy : ChipSlotOccupancy.Unspecified,
+                    ActivationExclusionGroups = loadout != null
+                        && loadout.ActivationExclusionGroups != null
+                        ? new List<ChipExclusionGroupDef>(loadout.ActivationExclusionGroups)
+                        : new List<ChipExclusionGroupDef>(),
+                    ActivationAudio = TranslateActivationAudio(loadout != null
+                        ? loadout.ActivationAudio
+                        : null),
                     ActivationDelayTicks = loadout != null ? loadout.ActivationDelayTicks : -1,
                     DeactivationDelayTicks = loadout != null ? loadout.DeactivationDelayTicks : -1
                 },
@@ -136,6 +143,25 @@ namespace BDP.Core.Chips
                 ThingDef = thingDef,
                 Contract = contract,
                 Validation = validation
+            };
+        }
+
+        /// <summary>
+        /// 把动态实例配置中的激活音效声明翻译为运行时契约。
+        /// </summary>
+        private static ChipActivationAudioContract TranslateActivationAudio(
+            ChipActivationAudioConfig config)
+        {
+            if (config == null)
+            {
+                return null;
+            }
+
+            return new ChipActivationAudioContract
+            {
+                WarmupStartSound = config.ActivationWarmupStartSound,
+                WarmupLoopSound = config.ActivationWarmupLoopSound,
+                WarmupEndSound = config.ActivationWarmupEndSound
             };
         }
     }

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    BDP_Ability_CombatBodyShortJump — 战斗体短距跳跃能力。
+    该能力只在征召状态显示，不消耗任何资源，使用冷却限制施放频率。
+  -->
+  <AbilityDef>
+    <!-- AbilityDef 唯一名称。 -->
+    <defName>BDP_Ability_CombatBodyShortJump</defName>
+
+    <!-- 默认中文名称仍允许语言包覆盖。 -->
+    <label>短距跳跃</label>
+
+    <!-- 默认中文说明仍允许语言包覆盖。 -->
+    <description>战斗体进行快速短距离位移。</description>
+
+    <!-- 复用 Biotech 原版长肢跳跃图标。 -->
+    <iconPath>UI/Abilities/Longjump</iconPath>
+
+    <!-- 1200 ticks 等于正常游戏速度下的 20 秒。 -->
+    <cooldownTicksRange>1800</cooldownTicksRange>
+
+    <!-- 这是玩家战术位移能力，不允许 AI 自动使用。 -->
+    <aiCanUse>false</aiCanUse>
+
+    <!-- 位移不造成伤害，也不要求施法者具备暴力能力。 -->
+    <hostile>false</hostile>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+
+    <!-- 只在征召状态显示能力按钮。 -->
+    <displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+    <showWhenDrafted>true</showWhenDrafted>
+
+    <!-- 跳跃入口使用 Content 侧 Verb，以选择 BDP 专用快速飞行器。 -->
+    <verbProperties>
+      <verbClass>BDP.Content.CombatBody.Verb_CastAbilityCombatBodyShortJump</verbClass>
+      <label>跳跃</label>
+      <violent>false</violent>
+      <onlyManualCast>true</onlyManualCast>
+      <forceNormalTimeSpeed>false</forceNormalTimeSpeed>
+
+      <!-- 预热时间；保留短暂反应窗口。 -->
+      <warmupTime>0.2</warmupTime>
+
+      <!-- 短距跳跃有效射程。 -->
+      <range>15.9</range>
+      <requireLineOfSight>true</requireLineOfSight>
+      <soundCast>Longjump_Jump</soundCast>
+      <soundLanding>Longjump_Land</soundLanding>
+
+      <!-- 只允许选择地面落点，不允许选择 Pawn 或建筑。 -->
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>false</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+
+    <!-- 复用原版跳跃 Job（工作）。 -->
+    <jobDef>CastJump</jobDef>
+  </AbilityDef>
+
+</Defs>

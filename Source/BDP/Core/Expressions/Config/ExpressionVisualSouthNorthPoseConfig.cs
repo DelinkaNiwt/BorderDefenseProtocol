@@ -9,15 +9,15 @@ namespace BDP.Core.Expressions
     public sealed class ExpressionVisualSouthNorthPoseConfig
     {
         /// <summary>
-        /// 主侧 South 基准偏移。
-        /// X 控制主副手左右分离，Z 控制相对持握点前后位置。
-        /// 副侧装载时 X 自动取反。
+        /// South/North（南北朝向）基础偏移。
+        /// X 的绝对值控制主副手左右分离距离，不表达屏幕方向；Z 控制相对持握点前后位置。
+        /// 屏幕左右由 VisualPoseResolver（视觉姿态解析器）根据主副手和人物朝向统一裁定。
         /// </summary>
         public Vector3 DefaultOffset = Vector3.zero;
 
         /// <summary>
         /// 主贴图默认装饰角度。
-        /// 该角度只影响贴图旋转，不参与枪口偏移旋转。
+        /// 贴图、握持锚点和枪口锚点共同使用该最终角度。
         /// </summary>
         public float DefaultAngle = 0f;
 
@@ -48,6 +48,13 @@ namespace BDP.Core.Expressions
         /// 手侧镜像由主/副手和南北朝向共同决定，独立于瞄准半区。
         /// </summary>
         public bool HandMirror = true;
+
+        /// <summary>
+        /// 是否只在整体静默时应用手侧镜像。
+        /// 默认关闭；开启后，任意视觉条目进入攻击执行都会让两侧退出手侧镜像。
+        /// 整体静默时会跳过正南北瞄准角门槛，强制应用既有手侧镜像裁决。
+        /// </summary>
+        public bool HandMirrorOnlyWhenIdle = false;
 
         /// <summary>
         /// North 朝向是否额外做一次整枪最终镜像。

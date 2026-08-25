@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    BDP_PawnFlyer_CombatBodyShortJump — 战斗体短距跳跃专用飞行器。
+    只调整飞行时间参数，其他飞行行为继承原版 PawnFlyerBase。
+  -->
+  <ThingDef ParentName="PawnFlyerBase">
+    <!-- ThingDef 唯一名称。 -->
+    <defName>BDP_PawnFlyer_CombatBodyShortJump</defName>
+
+    <!-- 默认英文名称；该飞行器不作为普通物品展示。 -->
+    <label>短距跳跃飞行器</label>
+
+    <!-- 复用原版 PawnFlyer 类，不新增飞行器代码。 -->
+    <thingClass>PawnFlyer</thingClass>
+
+    <!-- 飞行速度为原版默认值的两倍，最短飞行时间缩短为 0.25 秒。 -->
+    <pawnFlyer>
+      <flightSpeed>24</flightSpeed>
+      <flightDurationMin>0.25</flightDurationMin>
+    </pawnFlyer>
+  </ThingDef>
+
+</Defs>

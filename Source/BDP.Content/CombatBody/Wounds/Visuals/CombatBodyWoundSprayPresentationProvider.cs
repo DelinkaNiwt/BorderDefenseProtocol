@@ -10,24 +10,31 @@ namespace BDP.Content.CombatBody.Wounds.Visuals
     public sealed class CombatBodyWoundSprayPresentationProvider : ICombatBodyWoundPresentationProvider
     {
         /// <summary>
-        /// 喷溅视觉运行时实例。
+        /// 按 Pawn 身份隔离的喷溅视觉运行时。
         /// </summary>
-        private readonly CombatBodyWoundSprayRuntime runtime = new CombatBodyWoundSprayRuntime();
+        private readonly Dictionary<int, CombatBodyWoundSprayRuntime> runtimesByPawnId =
+            new Dictionary<int, CombatBodyWoundSprayRuntime>();
 
         /// <summary>
         /// 保存喷溅视觉需要的轻量状态。
         /// </summary>
-        public void ExposeData()
+        public void ExposeData(Pawn pawn)
         {
-            runtime.ExposeData();
+            ResolveRuntime(pawn, true)?.ExposeData();
         }
 
         /// <summary>
         /// 清理当前战斗体派生出的喷溅视觉状态。
         /// </summary>
-        public void ClearAll()
+        public void ClearAll(Pawn pawn)
         {
+            if (pawn == null || !runtimesByPawnId.TryGetValue(pawn.thingIDNumber, out CombatBodyWoundSprayRuntime runtime))
+            {
+                return;
+            }
+
             runtime.ClearAll();
+            runtimesByPawnId.Remove(pawn.thingIDNumber);
         }
 
         /// <summary>
@@ -35,15 +42,15 @@ namespace BDP.Content.CombatBody.Wounds.Visuals
         /// </summary>
         public void NotifyWoundAdded(Pawn pawn, Hediff hediff)
         {
-            runtime.NotifyWoundAdded(pawn, hediff);
+            ResolveRuntime(pawn, true)?.NotifyWoundAdded(pawn, hediff);
         }
 
         /// <summary>
         /// 响应伤口 drain 到期或注销。
         /// </summary>
-        public void NotifyWoundDrainExpired(int hediffLoadId)
+        public void NotifyWoundDrainExpired(Pawn pawn, int hediffLoadId)
         {
-            runtime.NotifyWoundDrainExpired(hediffLoadId);
+            ResolveRuntime(pawn, false)?.NotifyWoundDrainExpired(hediffLoadId);
         }
 
         /// <summary>
@@ -52,7 +59,7 @@ namespace BDP.Content.CombatBody.Wounds.Visuals
         /// </summary>
         public void NotifyWoundRemoved(Pawn pawn, Hediff hediff)
         {
-            runtime.NotifyWoundDrainExpired(hediff != null ? hediff.loadID : 0);
+            ResolveRuntime(pawn, false)?.NotifyWoundDrainExpired(hediff != null ? hediff.loadID : 0);
         }
 
         /// <summary>
@@ -60,7 +67,7 @@ namespace BDP.Content.CombatBody.Wounds.Visuals
         /// </summary>
         public void RebuildFromActiveDrains(Pawn pawn, IEnumerable<int> activeHediffLoadIds)
         {
-            runtime.RebuildFromActiveDrains(pawn, activeHediffLoadIds);
+            ResolveRuntime(pawn, true)?.RebuildFromActiveDrains(pawn, activeHediffLoadIds);
         }
 
         /// <summary>
@@ -68,7 +75,33 @@ namespace BDP.Content.CombatBody.Wounds.Visuals
         /// </summary>
         public void Tick(Pawn pawn)
         {
-            runtime.Tick(pawn);
+            ResolveRuntime(pawn, false)?.Tick(pawn);
+        }
+
+        /// <summary>
+        /// 按 Pawn 身份读取或创建独立喷溅运行时。
+        /// </summary>
+        private CombatBodyWoundSprayRuntime ResolveRuntime(Pawn pawn, bool createIfMissing)
+        {
+            if (pawn == null)
+            {
+                return null;
+            }
+
+            int pawnId = pawn.thingIDNumber;
+            if (runtimesByPawnId.TryGetValue(pawnId, out CombatBodyWoundSprayRuntime runtime))
+            {
+                return runtime;
+            }
+
+            if (!createIfMissing)
+            {
+                return null;
+            }
+
+            runtime = new CombatBodyWoundSprayRuntime();
+            runtimesByPawnId.Add(pawnId, runtime);
+            return runtime;
         }
     }
 }

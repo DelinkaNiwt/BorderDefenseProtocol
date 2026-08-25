@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 远程减益模块定义：把命中后的业务效果提交给 Core 中性 Impact 链。 -->
+  <BDP.Core.AttackExecution.BdpRangedAttackModuleDef>
+    <!-- 直接命中减益模块的稳定 DefName。 -->
+    <defName>BDP_RangedDebuff_DirectNoDamage</defName>
+    <!-- 模块在 Def 列表中的默认名称。 -->
+    <label>远程减益直击</label>
+    <!-- Content 运行时模块类型。 -->
+    <runtimeClass>BDP.Content.RangedModules.Debuff.RangedDebuffModule</runtimeClass>
+    <!-- 直接命中 Pawn、施加 Hediff，并取消本次投射物全部伤害。 -->
+    <defaultConfig Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+      <!-- 由 Content 注册的 Hediff 效果执行器键。 -->
+      <EffectKind>hediff</EffectKind>
+      <!-- 该通用预设的 Hediff 由具体挂载配置覆盖。 -->
+      <TargetScope>DirectHitThing</TargetScope>
+      <!-- 正式目标只允许 Pawn。 -->
+      <TargetFilter>PawnsOnly</TargetFilter>
+      <!-- 取消本次投射物产生的全部伤害。 -->
+      <DamageSuppression>SuppressAllProjectileImpact</DamageSuppression>
+      <!-- 已知拦截器和伤害护盾均尝试绕过。 -->
+      <BypassProjectileInterceptors>true</BypassProjectileInterceptors>
+      <BypassRegisteredDamageShields>true</BypassRegisteredDamageShields>
+    </defaultConfig>
+  </BDP.Core.AttackExecution.BdpRangedAttackModuleDef>
+
+  <!-- 原版范围爆炸逐目标减益模块。 -->
+  <BDP.Core.AttackExecution.BdpRangedAttackModuleDef>
+    <!-- 范围减益模块的稳定 DefName。 -->
+    <defName>BDP_RangedDebuff_AreaNoDamage</defName>
+    <!-- 模块默认名称。 -->
+    <label>范围减益</label>
+    <!-- Content 运行时模块类型。 -->
+    <runtimeClass>BDP.Content.RangedModules.Debuff.RangedDebuffModule</runtimeClass>
+    <!-- 保留原版爆炸范围取得 Pawn，但关闭原版爆炸表现并取消伤害。 -->
+    <defaultConfig Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+      <!-- 由 Content 注册的 Hediff 效果执行器键。 -->
+      <EffectKind>hediff</EffectKind>
+      <!-- 使用原版爆炸逐目标链路。 -->
+      <TargetScope>VanillaExplosionAffectedPawns</TargetScope>
+      <!-- 正式范围只允许 Pawn，不区分敌我。 -->
+      <TargetFilter>PawnsOnly</TargetFilter>
+      <!-- 取消本次投射物产生的全部伤害。 -->
+      <DamageSuppression>SuppressAllProjectileImpact</DamageSuppression>
+      <!-- 伤害取消时仍保留爆炸生产者的目标解析。 -->
+      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+      <!-- 已知拦截器和伤害护盾均尝试绕过。 -->
+      <BypassProjectileInterceptors>true</BypassProjectileInterceptors>
+      <BypassRegisteredDamageShields>true</BypassRegisteredDamageShields>
+      <!-- 无伤害范围效果不播放原版爆炸贴图、音效和屏幕震动。 -->
+      <SuppressVanillaExplosionVisualEffects>true</SuppressVanillaExplosionVisualEffects>
+      <SuppressVanillaExplosionSoundEffects>true</SuppressVanillaExplosionSoundEffects>
+      <SuppressVanillaExplosionScreenShake>true</SuppressVanillaExplosionScreenShake>
+    </defaultConfig>
+  </BDP.Core.AttackExecution.BdpRangedAttackModuleDef>
+
+  <!-- 铅块负重正式模块：由铅弹被动增强动态追加到任意有效远程表达。 -->
+  <BDP.Core.AttackExecution.BdpRangedAttackModuleDef>
+    <!-- 铅块负重模块的稳定 DefName。 -->
+    <defName>BDP_RangedDebuff_LeadWeight</defName>
+    <!-- 模块默认名称。 -->
+    <label>铅块负重</label>
+    <!-- Content 运行时模块类型。 -->
+    <runtimeClass>BDP.Content.RangedModules.Debuff.RangedDebuffModule</runtimeClass>
+    <!-- 每次命中给 Pawn 增加铅块负重，伤害层完全取消。 -->
+    <defaultConfig Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+      <!-- 由 Content 注册的 Hediff 效果执行器键。 -->
+      <EffectKind>hediff</EffectKind>
+      <!-- 铅弹订阅所有攻击生产者产生的目标事件，适用于普通子弹、爆炸和未来其他攻击生产者。 -->
+      <TargetScope>AttackTargetEvents</TargetScope>
+      <!-- 只对 Pawn 生效，不区分敌我。 -->
+      <TargetFilter>PawnsOnly</TargetFilter>
+      <!-- 伤害取消与减益附加彼此独立。 -->
+      <DamageSuppression>SuppressAllProjectileImpact</DamageSuppression>
+      <!-- 伤害取消时仍保留攻击生产者的目标解析。 -->
+      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+      <!-- 铅弹只为自身订阅的攻击目标启用灰黑色受击闪烁；其他减益模块默认不改颜色。 -->
+      <HasHitFeedbackColor>true</HasHitFeedbackColor>
+      <HitFeedbackColor>(0.12, 0.12, 0.12, 1)</HitFeedbackColor>
+      <!-- 铅弹取消真实伤害后，仍补回完整的原版 Pawn 受击反馈与子弹僵直。 -->
+      <InterceptedHitFeedback>VanillaPawn</InterceptedHitFeedback>
+      <!-- 铅弹保留原有发光拖尾外层，不再整体覆盖拖尾颜色。 -->
+      <!-- 铅弹在发光外层内部追加一条灰黑色非发光内芯。 -->
+      <HasProjectileTrailCore>true</HasProjectileTrailCore>
+      <ProjectileTrailCoreColor>(0.12, 0.12, 0.12, 1)</ProjectileTrailCoreColor>
+      <!-- 内芯宽度为原有发光外层的 60%，提高小画面下的像素覆盖率。 -->
+      <ProjectileTrailCoreWidthRatio>0.60</ProjectileTrailCoreWidthRatio>
+      <!-- 内芯保持较高不透明度，使灰黑色能够压住发光中心。 -->
+      <ProjectileTrailCoreOpacity>0.9</ProjectileTrailCoreOpacity>
+      <!-- 每次有效命中按铅块负重组件处理叠加。 -->
+      <HediffDef>BDP_Hediff_LeadWeight</HediffDef>
+      <Severity>0.1</Severity>
+      <DurationTicks>0</DurationTicks>
+      <StackMode>Add</StackMode>
+      <!-- 铅弹较重，初始飞行速度为原版的 75%；其它投射物属性仍交给原版链路。 -->
+      <ProjectileSpeedMultiplier>0.75</ProjectileSpeedMultiplier>
+      <!-- 追加模块使投射物无视已知拦截器和伤害前护盾。 -->
+      <BypassProjectileInterceptors>true</BypassProjectileInterceptors>
+      <BypassRegisteredDamageShields>true</BypassRegisteredDamageShields>
+    </defaultConfig>
+  </BDP.Core.AttackExecution.BdpRangedAttackModuleDef>
+
+</Defs>

@@ -3,7 +3,7 @@ using Verse;
 
 namespace BDP.Content.Assembly.ChipManufacturing.UI
 {
-    /// <summary>按需显示动作或枪壳说明，不占用制造窗口固定区域。</summary>
+    /// <summary>按需显示动作或武装型说明，不占用制造窗口固定区域。</summary>
     public sealed class Window_ChipPresetInfo : Window
     {
         /// <summary>当前要说明的 Def。</summary>
@@ -28,11 +28,14 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
         public override void DoWindowContents(Rect inRect)
         {
             Text.Font = GameFont.Medium;
-            Widgets.Label(new Rect(0f, 0f, inRect.width, 36f), preset?.LabelCap ?? "");
+            Widgets.Label(
+                new Rect(0f, 0f, inRect.width, 36f),
+                ChipPresetLabelResolver.Resolve(preset));
             Text.Font = GameFont.Small;
 
-            string description = preset != null && !preset.description.NullOrEmpty()
-                ? preset.description
+            string resolvedDescription = ChipPresetLabelResolver.ResolveDescription(preset);
+            string description = !resolvedDescription.NullOrEmpty()
+                ? resolvedDescription
                 : "BDP_ChipManufacturing_NoDescription".Translate().ToString();
             Rect outRect = new Rect(0f, 48f, inRect.width, inRect.height - 48f);
             float viewHeight = Mathf.Max(outRect.height, Text.CalcHeight(description, outRect.width - 20f));

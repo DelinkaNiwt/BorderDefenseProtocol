@@ -986,6 +986,7 @@ namespace BDP.Core.AttackExecution.RangedProtocol
                 OriginSpreadForwardMax = source != null ? source.OriginSpreadForwardMax : 0f,
                 SpeedFactor = source != null ? source.SpeedFactor : 1f,
                 DamageFactor = source != null ? source.DamageFactor : 1f,
+                StoppingPowerFactor = source != null ? source.StoppingPowerFactor : 1f,
                 ProjectileOverride = source != null ? source.ProjectileOverride : null,
                 ResultId = source != null ? source.ResultId : null,
                 SourceResultId = source != null ? source.SourceResultId : null,

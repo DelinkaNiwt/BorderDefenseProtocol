@@ -516,6 +516,33 @@ namespace BDP.Core.Expressions
             }
 
             /// <summary>
+            /// 读取某枚芯片当前形态内部的正式姿态键。
+            /// 无有效姿态时返回空，不由读取面猜测默认值。
+            /// </summary>
+            public string GetChipStanceKey(Thing chip)
+            {
+                TriggerSlotState rootSlot = FindActiveRootSlotForChip(chip);
+                return rootSlot != null
+                    && TriggerChipModeService.IsStanceKeyValid(
+                        chip,
+                        rootSlot.CurrentModeKey,
+                        rootSlot.CurrentStanceKey)
+                    ? rootSlot.CurrentStanceKey
+                    : null;
+            }
+
+            /// <summary>
+            /// 读取投影快照中芯片当前形态内的姿态选项。
+            /// </summary>
+            public IReadOnlyList<ChipStanceOptionSnapshot> GetChipStanceOptions(Thing chip)
+            {
+                TriggerSlotState rootSlot = FindActiveRootSlotForChip(chip);
+                return rootSlot != null
+                    ? TriggerChipModeService.BuildStanceOptions(chip, rootSlot.CurrentModeKey)
+                    : System.Array.Empty<ChipStanceOptionSnapshot>();
+            }
+
+            /// <summary>
             /// 读取某枚正式启用多形态芯片的有序形态选项。
             /// </summary>
             public IReadOnlyList<ChipModeOptionSnapshot> GetChipModeOptions(Thing chip)

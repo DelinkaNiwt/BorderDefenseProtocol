@@ -42,7 +42,8 @@ namespace BDP.Core.Expressions
         /// </summary>
         private static ManualEntryProjectionGroup BuildGroup(FormalExpressionResult result)
         {
-            string label = !string.IsNullOrWhiteSpace(result.DisplayLabel) ? result.DisplayLabel : result.Id;
+            string resolvedLabel = ExpressionDisplayLabelResolver.Resolve(result);
+            string label = !string.IsNullOrWhiteSpace(resolvedLabel) ? resolvedLabel : result.Id;
             string aggregationKey = !string.IsNullOrWhiteSpace(result.ManualEntryAggregationKey)
                 ? result.ManualEntryAggregationKey
                 : result.Id;

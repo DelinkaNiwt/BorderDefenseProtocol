@@ -143,7 +143,11 @@ namespace BDP.Core.AttackExecution
         public static bool TryGetAutoRangedVerb(Pawn pawn, bool allowManualCastWeapons, Thing target, out Verb verb)
         {
             verb = null;
-            if (pawn == null || ResolveEntry(pawn) == null)
+            // 对齐原版 Pawn.TryStartAttack 与自动攻击门槛：暴力已禁用时，
+            // 不得再由 BDP 后置补丁把任何正式远程攻击 Verb 填回去。
+            if (pawn == null
+                || pawn.WorkTagIsDisabled(WorkTags.Violent)
+                || ResolveEntry(pawn) == null)
             {
                 return false;
             }

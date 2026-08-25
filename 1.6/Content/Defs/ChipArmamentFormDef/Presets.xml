@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    BDP 武装型预设。
+    每个 ChipArmamentFormDef 定义一类武装特征覆盖集，
+    在芯片制造时作为可选的后置修正层叠加到武装表达条目上。
+    未声明的字段保留表达模板原值。
+  -->
+
+  <!-- 左轮手枪：近程高精度，反应快，单发，高伤害。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipArmamentFormDef>
+    <defName>BDP_GunClass_Revolver</defName>
+    <label>左轮手枪</label>
+    <description>近程敏捷型枪械。贴身精度极高，远距衰减明显，单发高伤害。</description>
+    <maxActionCount>2</maxActionCount>
+    <compatibleProfessions>
+      <li>BDP_ChipProfession_Gunner</li>
+    </compatibleProfessions>
+    <additionalCost>
+      <Steel>20</Steel>
+    </additionalCost>
+    <additionalWorkAmount>800</additionalWorkAmount>
+    <overrides>
+      <!-- 射程与精度：近程贴脸高精度，中远距大幅衰减。 -->
+      <range>15</range>
+      <!-- 显式覆盖射击模式为逐射。 -->
+      <rhythm>Sequential</rhythm>
+      <accuracyTouch>0.80</accuracyTouch>
+      <accuracyShort>0.75</accuracyShort>
+      <accuracyMedium>0.30</accuracyMedium>
+      <accuracyLong>0.18</accuracyLong>
+      <!-- 射击节奏：单发，与原版左轮手枪一致。 -->
+      <warmupTime>0.3</warmupTime>
+      <defaultCooldownTime>1.6</defaultCooldownTime>
+      <burstShotCount>1</burstShotCount>
+      <ticksBetweenBurstShots>15</ticksBetweenBurstShots>
+      <!-- 音效：手枪声小，传播半径近。 -->
+      <soundCast>Shot_Revolver</soundCast>
+      <noiseRadius>8</noiseRadius>
+      <muzzleFlashScale>0.6</muzzleFlashScale>
+      <!-- 视觉：替换为原版 Revolver 贴图。 -->
+      <visualPresetDefName>BDP_Visual_Pistol</visualPresetDefName>
+    </overrides>
+    <!-- 投射物属性覆盖：单发高伤害、高停止力。 -->
+    <projectileOverrides>
+      <damageMultiplier>5</damageMultiplier>
+      <stoppingPowerMultiplier>2.5</stoppingPowerMultiplier>
+    </projectileOverrides>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipArmamentFormDef>
+
+  <!-- 突击步枪：中远程均衡型，四连发，泛用性最强。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipArmamentFormDef>
+    <defName>BDP_GunClass_AssaultRifle</defName>
+    <label>突击步枪</label>
+    <description>中远程均衡型枪械。全距离精度平滑，四连发射击，性能全面。</description>
+    <maxActionCount>2</maxActionCount>
+    <compatibleProfessions>
+      <li>BDP_ChipProfession_Gunner</li>
+    </compatibleProfessions>
+    <additionalCost>
+      <Steel>40</Steel>
+    </additionalCost>
+    <additionalWorkAmount>1200</additionalWorkAmount>
+    <overrides>
+      <!-- 射程与精度：与原版突击步枪一致。 -->
+      <range>30.9</range>
+      <!-- 显式覆盖射击模式为逐射。 -->
+      <rhythm>Sequential</rhythm>
+      <accuracyTouch>0.60</accuracyTouch>
+      <accuracyShort>0.70</accuracyShort>
+      <accuracyMedium>0.65</accuracyMedium>
+      <accuracyLong>0.55</accuracyLong>
+      <!-- 射击节奏：四连发，与原版预热/冷却一致。 -->
+      <warmupTime>1.0</warmupTime>
+      <defaultCooldownTime>1.7</defaultCooldownTime>
+      <burstShotCount>4</burstShotCount>
+      <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+      <!-- 音效：步枪声，传播半径中等。 -->
+      <soundCast>Shot_AssaultRifle</soundCast>
+      <noiseRadius>18</noiseRadius>
+      <muzzleFlashScale>0.9</muzzleFlashScale>
+      <!-- 单武器视觉：只替换为参考贴图，位置、角度和镜像继续服从原版。 -->
+      <visualPresetDefName>BDP_Visual_RangedWeaponReference</visualPresetDefName>
+      <!-- 双武器视觉：切换到带主副手对称分离的复合参考预设。 -->
+      <compositeVisualPresetDefName>BDP_Visual_RangedWeaponReference_Dual</compositeVisualPresetDefName>
+    </overrides>
+    <!-- 投射物属性覆盖：标准停止力。 -->
+    <projectileOverrides>
+      <stoppingPowerMultiplier>1</stoppingPowerMultiplier>
+    </projectileOverrides>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipArmamentFormDef>
+
+  <!-- 霰弹枪：极近程爆发型，与原版链式霰弹枪参数一致，弹数为芯片预设的2倍。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipArmamentFormDef>
+    <defName>BDP_GunClass_Shotgun</defName>
+    <label>霰弹枪</label>
+    <description>极近程爆发型枪械。与原版链式霰弹枪参数一致，弹丸数量翻倍。</description>
+    <maxActionCount>2</maxActionCount>
+    <compatibleProfessions>
+      <li>BDP_ChipProfession_Gunner</li>
+    </compatibleProfessions>
+    <additionalCost>
+      <Steel>50</Steel>
+    </additionalCost>
+    <additionalWorkAmount>1500</additionalWorkAmount>
+    <overrides>
+      <!-- 射程与精度：近程贴身可靠，中远距大幅衰减。 -->
+      <range>12.9</range>
+      <!-- 显式覆盖射击模式为齐射。 -->
+      <rhythm>Simultaneous</rhythm>
+      <accuracyTouch>0.57</accuracyTouch>
+      <accuracyShort>0.64</accuracyShort>
+      <accuracyMedium>0.55</accuracyMedium>
+      <accuracyLong>0.45</accuracyLong>
+      <!-- 射击节奏：与原版链式霰弹枪一致，弹数 2 倍率。 -->
+      <warmupTime>1.2</warmupTime>
+      <defaultCooldownTime>1.35</defaultCooldownTime>
+      <burstShotCountMultiplier>2</burstShotCountMultiplier>
+      <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+      <!-- 音效：霰弹枪声大，传播半径远。 -->
+      <soundCast>Shot_Shotgun</soundCast>
+      <noiseRadius>24</noiseRadius>
+      <muzzleFlashScale>1.2</muzzleFlashScale>
+      <!-- 单武器视觉：替换为岚参考贴图，姿态继续保持原版默认。 -->
+      <visualPresetDefName>BDP_Visual_Shotgun</visualPresetDefName>
+      <!-- 双武器视觉：使用与当前远程武器基准相同的数据，仅贴图改为岚参考图。 -->
+      <compositeVisualPresetDefName>BDP_Visual_Shotgun_Dual</compositeVisualPresetDefName>
+    </overrides>
+    <!-- 投射物属性覆盖：高停止力。 -->
+    <projectileOverrides>
+      <stoppingPowerMultiplier>3</stoppingPowerMultiplier>
+    </projectileOverrides>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipArmamentFormDef>
+
+  <!-- 临时攻击手型：只用于验证动作适用范围与构型贴图覆盖。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipArmamentFormDef>
+    <defName>BDP_ArmamentForm_Temporary</defName>
+    <label>Temporary</label>
+    <description>Temporary attacker visual probe.</description>
+    <compatibleProfessions>
+      <li>BDP_ChipProfession_Attacker</li>
+    </compatibleProfessions>
+    <compatibleActionPresetDefNames>
+      <li>BDP_Preset_Kogetsu</li>
+    </compatibleActionPresetDefNames>
+    <overrides>
+      <!-- 唯一覆盖：替换视觉图层，弧月姿态继续由动作视觉预设提供。 -->
+      <visualGraphicOverrideDefName>BDP_Visual_Temporary_BreachAxe</visualGraphicOverrideDefName>
+    </overrides>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipArmamentFormDef>
+
+  <!-- 射手远程武装的隐藏默认型：只进入逻辑，不进入制造台和芯片名称。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipArmamentFormDef>
+    <defName>BDP_ArmamentForm_TrionCube</defName>
+    <label>Trion立方体</label>
+    <description>射手远程武装默认采用的内部统一特征型。</description>
+    <compatibleProfessions>
+      <li>BDP_ChipProfession_Shooter</li>
+    </compatibleProfessions>
+    <maxActionCount>1</maxActionCount>
+    <showInManufacturing>false</showInManufacturing>
+    <includeInProductLabel>false</includeInProductLabel>
+    <implicitDefault>true</implicitDefault>
+    <overrides>
+      <!-- 四发配合各远程预设的四分之一单发伤害，保持原预设的总量基准。 -->
+      <burstShotCount>4</burstShotCount>
+      <!-- Trion 构型枪口闪光：显式增强到 1.8，保证射击瞬间清晰可见。 -->
+      <muzzleFlashScale>1.8</muzzleFlashScale>
+      <!-- 真实发射点随机散布：左右偏移 ±0.3，沿射击方向只向前偏移 0 至 0.105。 -->
+      <originSpread>
+        <LateralMin>-0.3</LateralMin>
+        <LateralMax>0.3</LateralMax>
+        <ForwardMin>0</ForwardMin>
+        <ForwardMax>0.105</ForwardMax>
+      </originSpread>
+      <!-- 射手体系统一使用 Trion 立方体单武器贴图。 -->
+      <visualPresetDefName>BDP_Visual_TrionCube</visualPresetDefName>
+      <!-- 双武器表达沿用同一套 Trion 立方体复合贴图。 -->
+      <compositeVisualPresetDefName>BDP_Visual_TrionCube_Dual</compositeVisualPresetDefName>
+    </overrides>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipArmamentFormDef>
+
+</Defs>

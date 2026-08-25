@@ -28,11 +28,23 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
 
             ChipDefinitionConfig config = resolution.ResolvedConfig;
             model.ProductLabel = resolution.ResolvedLabel;
+            ChipArmamentFormDef visibleForm = GetVisibleArmamentForm(resolution.ArmamentForm);
             AddSpecifications(model, config);
-            AddGunShellAdjustments(model, resolution.GunShell);
-            AddGunShellMetrics(model, resolution);
-            AddActionForms(model, resolution);
+            AddArmamentFormAdjustments(model, visibleForm);
+            AddArmamentFormMetrics(model, resolution, visibleForm);
+            AddActionForms(model, resolution, visibleForm);
             return model;
+        }
+
+        /// <summary>隐藏默认型只参与逻辑解析，不在制造预览中形成独立可视分组。</summary>
+        private static ChipArmamentFormDef GetVisibleArmamentForm(
+            ChipArmamentFormDef armamentForm)
+        {
+            return armamentForm != null
+                && armamentForm.showInManufacturing
+                && !armamentForm.implicitDefault
+                ? armamentForm
+                : null;
         }
 
         /// <summary>加入槽位、延迟、Trion 成本和使用要求。</summary>
@@ -64,13 +76,13 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
                 FormatRequirements(config.ActivationRequirements)));
         }
 
-        /// <summary>加入一次枪壳绝对覆盖和倍率修正。</summary>
-        private static void AddGunShellAdjustments(
+        /// <summary>加入一次武装型绝对覆盖和倍率修正。</summary>
+        private static void AddArmamentFormAdjustments(
             ChipManufacturingPreviewModel model,
-            ChipGunShellDef gunShell)
+            ChipArmamentFormDef armamentForm)
         {
-            ChipGunShellOverrides ov = gunShell?.overrides;
-            if (ov == null && gunShell?.projectileOverrides == null)
+            ChipArmamentFormOverrides ov = armamentForm?.overrides;
+            if (ov == null && armamentForm?.projectileOverrides == null)
             {
                 return;
             }
@@ -78,16 +90,17 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             AddMultiplier(
                 model,
                 "ProjectileSpeed",
-                gunShell?.projectileOverrides?.speedMultiplier);
+                armamentForm?.projectileOverrides?.speedMultiplier);
         }
 
-        /// <summary>把已选枪壳最终统一的射击属性抽成单独指标组。</summary>
-        private static void AddGunShellMetrics(
+        /// <summary>把可见武装型最终统一的属性抽成单独指标组。</summary>
+        private static void AddArmamentFormMetrics(
             ChipManufacturingPreviewModel model,
-            ChipCombinationResolution resolution)
+            ChipCombinationResolution resolution,
+            ChipArmamentFormDef visibleArmamentForm)
         {
-            ChipGunShellDef gunShell = resolution?.GunShell;
-            if (gunShell == null
+            ChipArmamentFormDef armamentForm = visibleArmamentForm;
+            if (armamentForm == null
                 || resolution.Actions == null
                 || resolution.Actions.Count == 0)
             {
@@ -106,40 +119,40 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             }
 
             VerbProperties props = entry.VerbProps;
-            model.GunShellMetrics.Add(BarMetric(
+            model.ArmamentFormMetrics.Add(BarMetric(
                 "Range",
                 props.range,
                 ChipMetricBarScale.RangeMaximum,
                 true));
-            model.GunShellMetrics.Add(AccuracyMetric(
+            model.ArmamentFormMetrics.Add(AccuracyMetric(
                 "AccuracyTouch",
                 props.accuracyTouch,
                 true));
-            model.GunShellMetrics.Add(AccuracyMetric(
+            model.ArmamentFormMetrics.Add(AccuracyMetric(
                 "AccuracyShort",
                 props.accuracyShort,
                 true));
-            model.GunShellMetrics.Add(AccuracyMetric(
+            model.ArmamentFormMetrics.Add(AccuracyMetric(
                 "AccuracyMedium",
                 props.accuracyMedium,
                 true));
-            model.GunShellMetrics.Add(AccuracyMetric(
+            model.ArmamentFormMetrics.Add(AccuracyMetric(
                 "AccuracyLong",
                 props.accuracyLong,
                 true));
-            model.GunShellMetrics.Add(BarTextMetric(
+            model.ArmamentFormMetrics.Add(BarTextMetric(
                 "Warmup",
                 props.warmupTime,
                 ChipMetricBarScale.WarmupMaximum,
                 FormatSeconds(props.warmupTime),
                 true));
-            model.GunShellMetrics.Add(BarTextMetric(
+            model.ArmamentFormMetrics.Add(BarTextMetric(
                 "Cooldown",
                 props.defaultCooldownTime,
                 ChipMetricBarScale.CooldownMaximum,
                 FormatSeconds(props.defaultCooldownTime),
                 true));
-            model.GunShellMetrics.Add(BarTextMetric(
+            model.ArmamentFormMetrics.Add(BarTextMetric(
                 "BurstShotCount",
                 props.burstShotCount,
                 ChipMetricBarScale.BurstShotCountMaximum,
@@ -150,7 +163,8 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
         /// <summary>按一个或两个实际动作建立上下形态块。</summary>
         private static void AddActionForms(
             ChipManufacturingPreviewModel model,
-            ChipCombinationResolution resolution)
+            ChipCombinationResolution resolution,
+            ChipArmamentFormDef visibleArmamentForm)
         {
             IReadOnlyList<ChipActionPresetDef> actions = resolution.Actions;
             if (actions == null)
@@ -163,12 +177,12 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
                 ChipActionPresetDef action = actions[index];
                 ChipActionFormPreview form = new ChipActionFormPreview
                 {
-                    Label = action.label
+                    Label = action.ResolvedLabel
                 };
                 ChipExpressionEntryConfig entry = FindRepresentativeEntry(
                     resolution.ResolvedConfig.Expression,
                     actions.Count == 2 ? action.defName : null);
-                AddActionMetrics(form, entry, resolution.GunShell);
+                AddActionMetrics(form, entry, visibleArmamentForm);
                 model.ActionForms.Add(form);
             }
         }
@@ -211,15 +225,15 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
         private static void AddActionMetrics(
             ChipActionFormPreview form,
             ChipExpressionEntryConfig entry,
-            ChipGunShellDef gunShell)
+            ChipArmamentFormDef armamentForm)
         {
             if (entry?.VerbProps == null)
             {
                 return;
             }
 
-            bool showGunShellCommonMetrics = gunShell == null;
-            if (showGunShellCommonMetrics)
+            bool showArmamentFormCommonMetrics = armamentForm == null;
+            if (showArmamentFormCommonMetrics)
             {
                 form.Metrics.Add(BarMetric(
                     "Range",
@@ -267,11 +281,11 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
 
             form.Metrics.Add(BarMetric("ProjectileDamage", damage,
                 ChipMetricBarScale.DamageMaximum,
-                gunShell?.projectileOverrides?.damageMultiplier != null
-                    || gunShell?.projectileOverrides?.damageDef != null));
+                armamentForm?.projectileOverrides?.damageMultiplier != null
+                    || armamentForm?.projectileOverrides?.damageDef != null));
             form.Metrics.Add(BarMetric("ProjectileSpeed", speed,
                 ChipMetricBarScale.SpeedMaximum,
-                gunShell?.projectileOverrides?.speedMultiplier != null));
+                armamentForm?.projectileOverrides?.speedMultiplier != null));
         }
 
         /// <summary>建立普通文本字段。</summary>
@@ -350,7 +364,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
         {
             if (value.HasValue)
             {
-                model.GunShellAdjustments.Add(new ChipAdjustmentPreview
+                model.ArmamentFormAdjustments.Add(new ChipAdjustmentPreview
                 {
                     LabelKey = Key(name),
                     OperationText = "→ " + FormatNumber(value.Value)
@@ -366,7 +380,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
         {
             if (value.HasValue)
             {
-                model.GunShellAdjustments.Add(new ChipAdjustmentPreview
+                model.ArmamentFormAdjustments.Add(new ChipAdjustmentPreview
                 {
                     LabelKey = Key(name),
                     OperationText = "× " + FormatNumber(value.Value)

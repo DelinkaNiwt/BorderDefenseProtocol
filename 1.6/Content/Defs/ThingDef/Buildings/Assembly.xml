@@ -287,10 +287,10 @@
       <!-- 原版设施组件；通电时才能被装配台视作有效芯片仓。 -->
       <li Class="CompProperties_Facility">
         <!-- 最大同时连接数量。 -->
-        <maxSimultaneous>1</maxSimultaneous>
+        <maxSimultaneous>100</maxSimultaneous>
 
         <!-- 最大连接距离。 -->
-        <maxDistance>8</maxDistance>
+        <maxDistance>12.9</maxDistance>
 
         <!-- 需要视线连接。 -->
         <requiresLOS>true</requiresLOS>

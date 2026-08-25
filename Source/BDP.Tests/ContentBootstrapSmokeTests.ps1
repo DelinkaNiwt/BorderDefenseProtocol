@@ -32,9 +32,10 @@ Assert-True ($bootstrapText -match "public\s+static\s+class\s+ContentBootstrap")
 Assert-True ($bootstrapText -match "static\s+ContentBootstrap\s*\(\s*\)") "正式启动类必须使用静态构造函数接线。"
 Assert-True ($bootstrapText -match "new\s+Harmony\s*\(\s*""niwt\.bdp\.content""\s*\)\.PatchAll\s*\(\s*\)") "Harmony 标识必须使用正式内容语义。"
 Assert-True (
-    ($bootstrapText | Select-String -AllMatches "TriggerExternalGizmoRegistry\.Register").Matches.Count -eq 1 -and
-    ($bootstrapText -match "TriggerExternalGizmoRegistry\.Register\s*\(\s*new\s+ChipModeGizmoProvider\s*\(\s*\)\s*\)")
-) "Content 必须只注册正式通用芯片形态按钮提供器，不得注册开发画点诊断。"
+    ($bootstrapText | Select-String -AllMatches "TriggerExternalGizmoRegistry\.Register").Matches.Count -eq 2 -and
+    ($bootstrapText -match "TriggerExternalGizmoRegistry\.Register\s*\(\s*new\s+ChipModeGizmoProvider\s*\(\s*\)\s*\)") -and
+    ($bootstrapText -match "TriggerExternalGizmoRegistry\.Register\s*\(\s*new\s+ChipStanceGizmoProvider\s*\(\s*\)\s*\)")
+) "Content 必须且只能注册正式通用的芯片形态与姿态按钮提供器，不得注册开发画点诊断。"
 Assert-True ($bootstrapText -notmatch "TriggerVisualMarkerGizmoProvider|BDP\.Content\.Trigger\.Diagnostics") `
     "Content 启动入口不得引用开发画点诊断。"
 Assert-True (

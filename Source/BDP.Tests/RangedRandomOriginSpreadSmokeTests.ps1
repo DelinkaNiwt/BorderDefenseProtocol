@@ -16,14 +16,10 @@ $repoRoot = Split-Path -Parent $sourceRoot
 $devHarnessRoot = Join-Path (Split-Path -Parent $repoRoot) 'BorderDefenseProtocol.DevHarness'
 
 $verbPath = Join-Path $repoRoot 'Source\BDP\Core\Verbs\BdpVerb_Shoot.cs'
-$emitPath = Join-Path $repoRoot 'Source\BDP\Core\AttackExecution\AttackExecutionEmit.cs'
-$planPath = Join-Path $repoRoot 'Source\BDP\Core\AttackExecution\RangedProtocol\Model\ProjectileInitPlan.cs'
 $chipDefsPath = Join-Path $devHarnessRoot '1.6\Defs\Things\Items\Chips\Test\ThingDefs_TestChips_Combat.xml'
 $devHarnessDefsRoot = Join-Path $devHarnessRoot '1.6\Defs'
 
 $verbText = Get-Content -LiteralPath $verbPath -Raw -Encoding utf8
-$emitText = Get-Content -LiteralPath $emitPath -Raw -Encoding utf8
-$planText = Get-Content -LiteralPath $planPath -Raw -Encoding utf8
 $chipDefsText = Get-Content -LiteralPath $chipDefsPath -Raw -Encoding utf8
 $devHarnessDefsText = Get-ChildItem -LiteralPath $devHarnessDefsRoot -Filter '*.xml' -Recurse |
     ForEach-Object { Get-Content -LiteralPath $_.FullName -Raw -Encoding utf8 } |
@@ -35,12 +31,12 @@ Assert-True (
 ) 'BdpVerb_Shoot must resolve launch-origin spread by random range sampling.'
 
 Assert-True (
-    ($verbText -notmatch 'ResolveCenteredSequenceRatio') -and
-    ($verbText -notmatch 'OriginSpreadSequenceIndex') -and
-    ($verbText -notmatch 'OriginSpreadSequenceCount') -and
-    ($emitText -notmatch 'OriginSpreadSequenceIndex') -and
-    ($planText -notmatch 'OriginSpreadSequenceIndex')
-) 'Launch-origin spread must not use fixed sequence fields or centered sequence ratios.'
+    ($verbText -match 'ExpectedEmitCount') -and
+    ($verbText -match 'EmitSequence') -and
+    ($verbText -match 'expectedEmitCount\s*<=\s*1') -and
+    ($verbText -match 'EmitSequence\s*%\s*2') -and
+    ($verbText -match 'Rand\.Bool')
+) 'Launch-origin spread must center single shots and alternate the lateral side for multi-shot emissions.'
 
 Assert-True (
     ($devHarnessDefsText -notmatch '<SpreadRadius>') -and

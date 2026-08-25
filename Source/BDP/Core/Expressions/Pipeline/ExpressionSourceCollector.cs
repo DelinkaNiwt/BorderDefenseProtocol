@@ -126,6 +126,7 @@ namespace BDP.Core.Expressions
                 DisplayLabel = declaration.DisplayLabel,
                 ManualEntryIconTexPath = ResolveManualEntryIconTexPath(slot, declaration),
                 VisualPresetDefName = declaration.VisualPresetDefName,
+                VisualGraphicOverrideDefName = declaration.VisualGraphicOverrideDefName,
                 CompositeVisualPresetDefName = declaration.CompositeVisualPresetDefName,
                 ForceSuppressHostEquipment = declaration.ForceSuppressHostEquipment,
                 VisualPriority = declaration.VisualPriority,
@@ -152,6 +153,9 @@ namespace BDP.Core.Expressions
                 PassiveKey = declaration.PassiveKey,
                 ExposedData = declaration.ExposedData,
                 RangedModules = declaration.RangedModules != null ? CloneRangedModules(declaration.RangedModules) : new List<RangedModuleMountConfig>(),
+                RangedModuleAugmentations = declaration.RangedModuleAugmentations != null
+                    ? CloneRangedModuleAugmentations(declaration.RangedModuleAugmentations)
+                    : new List<RangedModuleAugmentationConfig>(),
                 SourceVariantKey = sourceVariantKey,
                 SourceVariantLabel = sourceVariantLabel
             };
@@ -261,6 +265,7 @@ namespace BDP.Core.Expressions
                 DisplayLabel = declaration.DisplayLabel,
                 ManualEntryIconTexPath = declaration.ManualEntryIconTexPath,
                 VisualPresetDefName = declaration.VisualPresetDefName,
+                VisualGraphicOverrideDefName = declaration.VisualGraphicOverrideDefName,
                 CompositeVisualPresetDefName = declaration.CompositeVisualPresetDefName,
                 ForceSuppressHostEquipment = declaration.ForceSuppressHostEquipment,
                 VisualPriority = declaration.VisualPriority,
@@ -436,9 +441,9 @@ namespace BDP.Core.Expressions
         }
 
         /// <summary>
-        /// 把枪壳标签合并到显示名后缀。
-        /// 格式与 UI 层保持一致："显示名(枪壳型)"，如"小行星(手枪型)"。
-        /// 无枪壳时直接返回原始显示名。
+        /// 把来源变体标签合并到显示名后缀。
+        /// 格式与 UI 层保持一致："显示名[变体名]"，如"小行星[手枪型]"。
+        /// 无来源变体时直接返回原始显示名。
         /// </summary>
         private static string MergeSourceVariantSuffix(
             string displayLabel,
@@ -562,6 +567,31 @@ namespace BDP.Core.Expressions
                 }
 
                 result.Add(module.Clone());
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 对开放式远程增强声明做最小快照复制。
+        /// </summary>
+        private static IReadOnlyList<RangedModuleAugmentationConfig> CloneRangedModuleAugmentations(
+            IReadOnlyList<RangedModuleAugmentationConfig> augmentations)
+        {
+            List<RangedModuleAugmentationConfig> result =
+                new List<RangedModuleAugmentationConfig>();
+            if (augmentations == null)
+            {
+                return result;
+            }
+
+            for (int index = 0; index < augmentations.Count; index++)
+            {
+                RangedModuleAugmentationConfig augmentation = augmentations[index];
+                if (augmentation != null)
+                {
+                    result.Add(augmentation.Clone());
+                }
             }
 
             return result;

@@ -72,7 +72,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
                 }
 
                 ChipExpressionEntryConfig clone =
-                    ChipGunShellExpressionService.CloneEntry(sourceEntry, prefix);
+                    ChipArmamentFormExpressionService.CloneEntry(sourceEntry, prefix);
                 if (!string.IsNullOrWhiteSpace(prefix)
                     && !string.IsNullOrWhiteSpace(sourceEntry.ParentEntryId))
                 {
@@ -127,9 +127,12 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
             return new ChipExpressionModeConfig
             {
                 ModeKey = action.defName,
-                DisplayLabel = action.label,
+                DisplayLabel = action.ResolvedLabel,
+                DisplayLabelKey = sourceMode?.DisplayLabelKey,
                 GizmoIconTexPath = sourceMode?.GizmoIconTexPath,
-                ActiveEntryIds = activeIds
+                ActiveEntryIds = activeIds,
+                DefaultStanceKey = sourceMode?.DefaultStanceKey,
+                Stances = CloneStancesWithPrefix(sourceMode?.Stances, prefix)
             };
         }
 
@@ -155,10 +158,64 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
                 {
                     ModeKey = mode.ModeKey,
                     DisplayLabel = mode.DisplayLabel,
+                    DisplayLabelKey = mode.DisplayLabelKey,
                     GizmoIconTexPath = mode.GizmoIconTexPath,
                     ActiveEntryIds = mode.ActiveEntryIds != null
                         ? new List<string>(mode.ActiveEntryIds)
-                        : new List<string>()
+                        : new List<string>(),
+                    DefaultStanceKey = mode.DefaultStanceKey,
+                    Stances = CloneStances(mode.Stances)
+                });
+            }
+
+            return result;
+        }
+
+        /// <summary>复制形态内的姿态列表，不改变条目标识。</summary>
+        private static List<ChipExpressionStanceConfig> CloneStances(
+            IList<ChipExpressionStanceConfig> source)
+        {
+            return CloneStancesWithPrefix(source, null);
+        }
+
+        /// <summary>复制形态内姿态，并按需给双动作条目标识增加前缀。</summary>
+        private static List<ChipExpressionStanceConfig> CloneStancesWithPrefix(
+            IList<ChipExpressionStanceConfig> source,
+            string prefix)
+        {
+            if (source == null)
+            {
+                return null;
+            }
+
+            List<ChipExpressionStanceConfig> result = new List<ChipExpressionStanceConfig>();
+            for (int index = 0; index < source.Count; index++)
+            {
+                ChipExpressionStanceConfig stance = source[index];
+                if (stance == null)
+                {
+                    continue;
+                }
+
+                List<string> activeEntryIds = new List<string>();
+                if (stance.ActiveEntryIds != null)
+                {
+                    for (int entryIndex = 0; entryIndex < stance.ActiveEntryIds.Count; entryIndex++)
+                    {
+                        string entryId = stance.ActiveEntryIds[entryIndex];
+                        activeEntryIds.Add(string.IsNullOrWhiteSpace(prefix)
+                            ? entryId
+                            : prefix + "_" + entryId);
+                    }
+                }
+
+                result.Add(new ChipExpressionStanceConfig
+                {
+                    StanceKey = stance.StanceKey,
+                    DisplayLabel = stance.DisplayLabel,
+                    DisplayLabelKey = stance.DisplayLabelKey,
+                    GizmoIconTexPath = stance.GizmoIconTexPath,
+                    ActiveEntryIds = activeEntryIds
                 });
             }
 

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 光魂推进能力。 -->
+  <BDP_Ability_LightSoulPropulsion.label>光魂推进</BDP_Ability_LightSoulPropulsion.label>
+  <BDP_Ability_LightSoulPropulsion.description>消耗 Trion 进行一次短距离战术位移。</BDP_Ability_LightSoulPropulsion.description>
+  <BDP_Ability_LightSoulPropulsion.verbProperties.label>光魂推进</BDP_Ability_LightSoulPropulsion.verbProperties.label>
+</LanguageData>

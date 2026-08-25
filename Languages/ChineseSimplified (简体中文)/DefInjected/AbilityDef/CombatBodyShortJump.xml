@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 战斗体短距跳跃能力。 -->
+  <BDP_Ability_CombatBodyShortJump.label>短距跳跃</BDP_Ability_CombatBodyShortJump.label>
+  <BDP_Ability_CombatBodyShortJump.description>战斗体进行快速短距离位移。</BDP_Ability_CombatBodyShortJump.description>
+</LanguageData>

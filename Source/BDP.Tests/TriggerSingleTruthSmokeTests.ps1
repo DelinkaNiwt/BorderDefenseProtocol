@@ -215,6 +215,10 @@ Assert-True (
 ) 'CompTriggerBody must expose owner-internal build-input capture helpers for Task 2.'
 
 Assert-True (
+    $contextsText -match 'clone\.SetCurrentModeKey\(slot\.CurrentModeKey\);[\s\S]*clone\.SetCurrentStanceKey\(slot\.CurrentStanceKey\);'
+) 'Projection slot snapshots must copy both current mode and current stance truth.'
+
+Assert-True (
     $bodyText -notmatch 'TryLoadChip\(TriggerSide side, int slotIndex, Thing chip\)[\s\S]*RefreshProjectedOutputs\(\);'
 ) 'TryLoadChip must stop performing projection publication directly.'
 
@@ -436,4 +440,3 @@ Assert-True (
 ) 'Missing-part patches must remain fact publishers instead of becoming business truth owners.'
 
 Write-Output 'TriggerSingleTruth PASS'
-

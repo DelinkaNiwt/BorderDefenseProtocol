@@ -2,11 +2,11 @@
 <LanguageData>
   <!-- 成品来源 Def 暂时缺失时保留物品，并在名称上给出温和状态提示。 -->
   <BDP_ChipManufacturing_MissingSourceLabel>{0}（来源缺失）</BDP_ChipManufacturing_MissingSourceLabel>
-  <!-- Content 负责把具体枪壳名格式化为 Core 可直接展示的中性变体标签。 -->
+  <!-- Content 负责把具体武装型名格式化为 Core 可直接展示的中性变体标签。 -->
   <BDP_ChipManufacturing_SourceVariantLabel>{0}型</BDP_ChipManufacturing_SourceVariantLabel>
   <!-- 制造成品的统一动态名称。 -->
   <BDP_ChipManufacturing_ProductLabel>触发器芯片:{0}</BDP_ChipManufacturing_ProductLabel>
-  <BDP_ChipManufacturing_ProductLabelWithGunShell>触发器芯片:{0}[{1}型]</BDP_ChipManufacturing_ProductLabelWithGunShell>
+  <BDP_ChipManufacturing_ProductLabelWithArmamentForm>触发器芯片:{0}[{1}型]</BDP_ChipManufacturing_ProductLabelWithArmamentForm>
   <!-- 原版半成品名称前缀。 -->
   <BDP_UnfinishedChip_Incomplete>未完成</BDP_UnfinishedChip_Incomplete>
   <!-- 制造窗口基础交互文本。 -->
@@ -16,7 +16,7 @@
   <BDP_ChipManufacturing_Overview_Subtitle>选择一个制造方向，进入芯片组合配置。</BDP_ChipManufacturing_Overview_Subtitle>
   <BDP_ChipManufacturing_Overview_Directions>制造方向</BDP_ChipManufacturing_Overview_Directions>
   <BDP_ChipManufacturing_Overview_ActionCount>{0} 项动作预设</BDP_ChipManufacturing_Overview_ActionCount>
-  <BDP_ChipManufacturing_GunShellSection>枪壳</BDP_ChipManufacturing_GunShellSection>
+  <BDP_ChipManufacturing_ArmamentFormSection>武装型</BDP_ChipManufacturing_ArmamentFormSection>
   <BDP_ChipManufacturing_ActionSection>动作预设</BDP_ChipManufacturing_ActionSection>
   <BDP_ChipManufacturing_SwapActions>交换形态</BDP_ChipManufacturing_SwapActions>
   <BDP_ChipManufacturing_Quantity>制造数量：{0}</BDP_ChipManufacturing_Quantity>
@@ -26,7 +26,7 @@
   <!-- 中栏分组。 -->
   <BDP_ChipManufacturing_PreviewIncomplete>选择完整且兼容的芯片组合后，这里会显示成品规格与动作属性。</BDP_ChipManufacturing_PreviewIncomplete>
   <BDP_ChipManufacturing_Preview_Specifications>芯片规格</BDP_ChipManufacturing_Preview_Specifications>
-  <BDP_ChipManufacturing_Preview_GunShellAdjustments>枪壳特征</BDP_ChipManufacturing_Preview_GunShellAdjustments>
+  <BDP_ChipManufacturing_Preview_ArmamentFormAdjustments>武装型特征</BDP_ChipManufacturing_Preview_ArmamentFormAdjustments>
   <BDP_ChipManufacturing_Preview_ActionForm>动作形态：{0}</BDP_ChipManufacturing_Preview_ActionForm>
   <BDP_ChipManufacturing_Preview_NoNumericMetrics>该动作没有适合在制造面板中比较的数值属性。</BDP_ChipManufacturing_Preview_NoNumericMetrics>
   <!-- 芯片规格。 -->
@@ -84,6 +84,7 @@
   <BDP_ChipManufacturing_SelectFailure_IntrinsicMultiModeMustStandAlone>该动作自身包含多个形态，只能单独制造。</BDP_ChipManufacturing_SelectFailure_IntrinsicMultiModeMustStandAlone>
   <BDP_ChipManufacturing_SelectFailure_IntrinsicMultiModeAlreadySelected>已选动作自身包含多个形态，不能再组合其它动作。</BDP_ChipManufacturing_SelectFailure_IntrinsicMultiModeAlreadySelected>
   <BDP_ChipManufacturing_SelectFailure_ProfessionMismatch>该动作不适用于当前职业。</BDP_ChipManufacturing_SelectFailure_ProfessionMismatch>
+  <BDP_ChipManufacturing_ArmamentFormActionMismatch>当前武装型不适用于所选动作。</BDP_ChipManufacturing_ArmamentFormActionMismatch>
   <!-- 组合记录自身损坏时使用的稳定失败原因。 -->
   <BDP_ChipManufacturing_EmptyCategory>芯片记录缺少主分类。</BDP_ChipManufacturing_EmptyCategory>
   <BDP_ChipManufacturing_EmptyActionList>芯片记录没有动作来源。</BDP_ChipManufacturing_EmptyActionList>

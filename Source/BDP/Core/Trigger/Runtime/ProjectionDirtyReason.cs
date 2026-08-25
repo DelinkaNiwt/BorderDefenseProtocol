@@ -59,7 +59,11 @@
         /// <summary>
         /// Combo 自己的角色使用条件满足状态发生变化。
         /// </summary>
-        ComboUseRequirementChanged = 10
+        ComboUseRequirementChanged = 10,
+
+        /// <summary>
+        /// 正式启用芯片在当前形态内的姿态发生变化。
+        /// </summary>
+        ChipStanceChanged = 11
     }
 }
-

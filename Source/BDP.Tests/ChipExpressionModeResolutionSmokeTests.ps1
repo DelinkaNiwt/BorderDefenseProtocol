@@ -68,9 +68,10 @@ $assembly = [System.Reflection.Assembly]::LoadFrom($assemblyPath)
 $configType = $assembly.GetType('BDP.Core.Expressions.ChipExpressionConfig', $true)
 $entryType = $assembly.GetType('BDP.Core.Expressions.ChipExpressionEntryConfig', $true)
 $modeType = $assembly.GetType('BDP.Core.Expressions.ChipExpressionModeConfig', $true)
+$stanceType = $assembly.GetType('BDP.Core.Expressions.ChipExpressionStanceConfig', $true)
 $entryKindType = $assembly.GetType('BDP.Core.Expressions.ChipExpressionEntryKindConfig', $true)
 $relationKindType = $assembly.GetType('BDP.Core.Expressions.ChipExpressionRelationKindConfig', $true)
-$interpreterType = $assembly.GetType('BDP.Core.Expressions.DefaultChipExpressionContractInterpreter', $true)
+$interpreterType = $assembly.GetType('BDP.Core.Expressions.ChipExpressionContractInterpreter', $true)
 
 Assert-True ($null -ne $configType.GetField('DefaultModeKey')) `
     'ChipExpressionConfig must expose DefaultModeKey.'
@@ -106,7 +107,9 @@ function New-Mode {
         [string]$ModeKey,
         [string[]]$ActiveEntryIds,
         [string]$DisplayLabel = ($ModeKey + '形态'),
-        [string]$GizmoIconTexPath = $null
+        [string]$GizmoIconTexPath = $null,
+        [object[]]$Stances = $null,
+        [string]$DefaultStanceKey = $null
     )
 
     $mode = [Activator]::CreateInstance($modeType)
@@ -120,7 +123,35 @@ function New-Mode {
         }
     }
     Set-FieldValue $mode 'ActiveEntryIds' $ids
+    Set-FieldValue $mode 'DefaultStanceKey' $DefaultStanceKey
+    if ($null -ne $Stances) {
+        $stanceList = New-TypedList $stanceType
+        foreach ($stance in $Stances) {
+            [void]$stanceList.Add($stance)
+        }
+        Set-FieldValue $mode 'Stances' $stanceList
+    }
     return $mode
+}
+
+function New-Stance {
+    param(
+        [string]$StanceKey,
+        [string[]]$ActiveEntryIds,
+        [string]$DisplayLabel = ($StanceKey + '姿态')
+    )
+
+    $stance = [Activator]::CreateInstance($stanceType)
+    Set-FieldValue $stance 'StanceKey' $StanceKey
+    Set-FieldValue $stance 'DisplayLabel' $DisplayLabel
+    $ids = New-TypedList ([string])
+    if ($null -ne $ActiveEntryIds) {
+        foreach ($id in $ActiveEntryIds) {
+            [void]$ids.Add($id)
+        }
+    }
+    Set-FieldValue $stance 'ActiveEntryIds' $ids
+    return $stance
 }
 
 function New-Config {
@@ -158,10 +189,11 @@ Assert-True ($null -ne $resolveMethod) 'Interpreter must retain a private uncach
 function Resolve-Config {
     param(
         [object]$Config,
-        [string]$CurrentModeKey = $null
+        [string]$CurrentModeKey = $null,
+        [string]$CurrentStanceKey = $null
     )
 
-    return $resolveMethod.Invoke($null, [object[]]@($Config, $CurrentModeKey))
+    return $resolveMethod.Invoke($null, [object[]]@($Config, $CurrentModeKey, $CurrentStanceKey))
 }
 
 function Get-ResolvedIds {
@@ -247,6 +279,43 @@ Assert-Sequence (Get-ResolvedIds $unknownResolved) @('dash', 'shield_guard') `
 $unknownWarnings = Get-FieldValue (Get-FieldValue $unknownResolved 'Validation') 'Warnings'
 Assert-True ($unknownWarnings.Count -gt 0) 'Unknown runtime mode fallback must emit a diagnostic warning.'
 
+$stanceConfig = New-Config `
+    @((New-Entry 'dash'), (New-Entry 'shield_mobile'), (New-Entry 'shield_guard'), (New-Entry 'blade_melee')) `
+    @(
+        (New-Mode 'shield' @('dash') -Stances @(
+            (New-Stance 'mobile' @('shield_mobile')),
+            (New-Stance 'guard' @('shield_guard'))
+        ) -DefaultStanceKey 'mobile'),
+        (New-Mode 'blade' @('dash', 'blade_melee'))
+    ) `
+    'shield'
+
+$defaultStanceResolved = Resolve-Config $stanceConfig
+Assert-Valid $defaultStanceResolved 'Missing runtime stance must use the current mode default stance.'
+Assert-Sequence (Get-ResolvedIds $defaultStanceResolved) @('dash', 'shield_mobile') `
+    'The effective entry order must be mode common entries followed by default stance entries.'
+foreach ($entry in (Get-FieldValue (Get-FieldValue $defaultStanceResolved 'Contract') 'Entries')) {
+    Assert-True ((Get-FieldValue $entry 'StanceKey') -eq 'mobile') `
+        'Entries in a stance mode must carry the effective stance key.'
+}
+
+$guardResolved = Resolve-Config $stanceConfig 'shield' 'guard'
+Assert-Valid $guardResolved 'An explicit valid stance must resolve.'
+Assert-Sequence (Get-ResolvedIds $guardResolved) @('dash', 'shield_guard') `
+    'Explicit stance must replace only the stance-specific entries.'
+
+$unknownStanceResolved = Resolve-Config $stanceConfig 'shield' 'missing_stance'
+Assert-Valid $unknownStanceResolved 'Unknown runtime stance must safely fall back to the current mode default stance.'
+Assert-Sequence (Get-ResolvedIds $unknownStanceResolved) @('dash', 'shield_mobile') `
+    'Unknown runtime stance fallback must publish the current mode default stance entries.'
+$unknownStanceWarnings = Get-FieldValue (Get-FieldValue $unknownStanceResolved 'Validation') 'Warnings'
+Assert-True ($unknownStanceWarnings.Count -gt 0) 'Unknown runtime stance fallback must emit a diagnostic warning.'
+
+$bladeWithStaleStance = Resolve-Config $stanceConfig 'blade' 'guard'
+Assert-Valid $bladeWithStaleStance 'A mode without stances must ignore a stale stance key.'
+Assert-Sequence (Get-ResolvedIds $bladeWithStaleStance) @('dash', 'blade_melee') `
+    'A mode without stances must publish only its mode entries.'
+
 Assert-Invalid (New-Config @((New-Entry 'dash')) $null 'shield') `
     'Single-mode config must reject DefaultModeKey.'
 Assert-Invalid (New-Config @((New-Entry 'dash')) @((New-Mode 'shield' @('dash')))) `
@@ -291,5 +360,32 @@ Assert-Invalid (
         @((New-Mode 'shield' @('child', 'parent'))) `
         'shield'
 ) 'Attached entry must follow its parent in each mode selection.'
+Assert-Invalid (
+    New-Config `
+        @((New-Entry 'dash'), (New-Entry 'shield_mobile')) `
+        @((New-Mode 'shield' @('dash') -Stances @((New-Stance 'mobile' @('shield_mobile'))))) `
+        'shield'
+) 'A mode with stances must declare DefaultStanceKey.'
+Assert-Invalid (
+    New-Config `
+        @((New-Entry 'dash'), (New-Entry 'shield_mobile')) `
+        @((New-Mode 'shield' @('dash') -Stances @((New-Stance 'mobile' @('shield_mobile'))) -DefaultStanceKey 'missing')) `
+        'shield'
+) 'DefaultStanceKey must reference a stance in the current mode.'
+Assert-Invalid (
+    New-Config `
+        @((New-Entry 'dash'), (New-Entry 'shield_mobile')) `
+        @((New-Mode 'shield' @('dash') -Stances @(
+            (New-Stance 'mobile' @('shield_mobile')),
+            (New-Stance 'MOBILE' @('shield_mobile'))
+        ) -DefaultStanceKey 'mobile')) `
+        'shield'
+) 'StanceKey comparison must reject case-insensitive duplicates inside one mode.'
+Assert-Invalid (
+    New-Config `
+        @((New-Entry 'dash'), (New-Entry 'shield_mobile')) `
+        @((New-Mode 'shield' @('dash') -Stances @((New-Stance 'mobile' @('dash', 'shield_mobile'))) -DefaultStanceKey 'mobile')) `
+        'shield'
+) 'A stance must not repeat a mode common entry.'
 
 Write-Output 'ChipExpressionModeResolutionSmokeTests PASS'

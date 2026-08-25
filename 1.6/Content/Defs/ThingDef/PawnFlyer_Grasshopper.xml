@@ -9,7 +9,7 @@
   -->
   <ThingDef ParentName="PawnFlyerBase">
     <defName>BDP_PawnFlyer_Grasshopper</defName>
-    <label>grasshopper launcher</label>
+    <label>蚱蜢弹射飞行器</label>
     <thingClass>BDP.Content.Grasshopper.PawnFlyer_Grasshopper</thingClass>
 
     <!-- 材质设置 -->

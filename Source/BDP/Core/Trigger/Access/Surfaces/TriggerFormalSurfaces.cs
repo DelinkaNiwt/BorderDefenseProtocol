@@ -88,6 +88,22 @@ namespace BDP.Core.Trigger
         }
 
         /// <summary>
+        /// 读取某枚芯片当前形态内部的正式姿态键。
+        /// </summary>
+        public string GetChipStanceKey(Thing chip)
+        {
+            return owner.GetChipStanceKey(chip);
+        }
+
+        /// <summary>
+        /// 读取某枚芯片当前形态内的有序姿态选项。
+        /// </summary>
+        public IReadOnlyList<ChipStanceOptionSnapshot> GetChipStanceOptions(Thing chip)
+        {
+            return owner.GetChipStanceOptions(chip);
+        }
+
+        /// <summary>
         /// 读取某枚正式启用多形态芯片的有序形态选项。
         /// </summary>
         public IReadOnlyList<ChipModeOptionSnapshot> GetChipModeOptions(Thing chip)
@@ -222,6 +238,22 @@ namespace BDP.Core.Trigger
         public bool RequestCycleChipMode(Thing chip)
         {
             return owner.RequestCycleChipMode(chip);
+        }
+
+        /// <summary>
+        /// 请求切换到当前形态内的指定芯片姿态。
+        /// </summary>
+        public bool RequestSwitchChipStance(Thing chip, string targetStanceKey)
+        {
+            return owner.RequestSwitchChipStance(chip, targetStanceKey);
+        }
+
+        /// <summary>
+        /// 请求切换到当前形态内作者顺序的下一芯片姿态。
+        /// </summary>
+        public bool RequestCycleChipStance(Thing chip)
+        {
+            return owner.RequestCycleChipStance(chip);
         }
     }
 

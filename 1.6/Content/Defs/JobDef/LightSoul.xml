@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 光魂举盾姿态的注视警戒；只接管朝向，不移动也不攻击。 -->
+  <JobDef>
+    <!-- 作业唯一名称。 -->
+    <defName>BDP_LightSoulGuardWatch</defName>
+    <!-- 正式内容程序集中的举盾朝向驱动。 -->
+    <driverClass>BDP.Content.LightSoul.JobDriver_LightSoulGuardWatch</driverClass>
+    <!-- 默认中文报告文本；语言包可继续覆盖。 -->
+    <reportString>正在对TargetA保持注视警戒。</reportString>
+    <!-- 玩家下达其它命令时允许原版直接替换本作业。 -->
+    <playerInterruptible>true</playerInterruptible>
+    <!-- 纯朝向命令不插入机会性工作。 -->
+    <allowOpportunisticPrefix>false</allowOpportunisticPrefix>
+  </JobDef>
+
+</Defs>

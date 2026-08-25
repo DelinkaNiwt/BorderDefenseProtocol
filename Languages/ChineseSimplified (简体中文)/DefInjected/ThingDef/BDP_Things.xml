@@ -18,6 +18,8 @@
 
   <!-- 投射物。 -->
   <BDP_Projectile_SenkuKogetsuWave.label>旋空弧月</BDP_Projectile_SenkuKogetsuWave.label>
+  <BDP_Projectile_Explosive.label>炸裂弹</BDP_Projectile_Explosive.label>
+  <BDP_Projectile_Variable_Explosive.label>变化炸裂弹</BDP_Projectile_Variable_Explosive.label>
 
   <!-- 非法芯片统一迁移后的普通遗留物。 -->
   <BDP_InvalidChipRemnant.label>芯片遗留物</BDP_InvalidChipRemnant.label>

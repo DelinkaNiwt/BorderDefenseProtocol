@@ -134,6 +134,8 @@ namespace BDP.Core.Trigger.Runtime
                 MarkDirty(ProjectionDirtyReason.SwitchTransitionResolved);
             }
 
+            owner.SyncActivationAudioForRuntimeTick();
+
             owner.CheckActiveActivationRequirementsForRuntimeTick();
 
             int currentTick = Find.TickManager != null ? Find.TickManager.TicksGame : 0;
@@ -235,6 +237,7 @@ namespace BDP.Core.Trigger.Runtime
         /// </summary>
         internal void ClearPublishedProjection(Pawn pawn)
         {
+            owner?.ClearActivationAudio();
             int nextProjectionVersion = currentProjectionVersion + 1;
             Publish(
                 TriggerCombatProjectionState.CreateEmpty(nextProjectionVersion),
@@ -294,4 +297,3 @@ namespace BDP.Core.Trigger.Runtime
         }
     }
 }
-

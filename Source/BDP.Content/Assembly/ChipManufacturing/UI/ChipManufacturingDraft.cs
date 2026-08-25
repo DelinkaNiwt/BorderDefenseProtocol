@@ -49,10 +49,16 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             return ChipCombinationSelectionRules.Swap(Record);
         }
 
-        /// <summary>选择或清空枪壳。</summary>
-        public void SelectGunShell(ChipGunShellDef gunShell)
+        /// <summary>选择或清空武装型；若新型只允许单动作则保留首个动作。</summary>
+        public void SelectArmamentForm(ChipArmamentFormDef armamentForm)
         {
-            Record.GunShellDefName = gunShell?.defName;
+            Record.ArmamentFormDefName = armamentForm?.defName;
+            int maximum = ChipCombinationSelectionRules.MaxActionCount(null, armamentForm);
+            while (Record.OrderedActionPresetDefNames.Count > maximum)
+            {
+                Record.OrderedActionPresetDefNames.RemoveAt(
+                    Record.OrderedActionPresetDefNames.Count - 1);
+            }
         }
 
         /// <summary>把制造数量限制在玩家可操作的正整数范围。</summary>
@@ -72,7 +78,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             ChipCombinationRecord copy = source.Clone();
             Record.CategoryDefName = copy.CategoryDefName;
             Record.ProfessionDefName = copy.ProfessionDefName;
-            Record.GunShellDefName = copy.GunShellDefName;
+            Record.ArmamentFormDefName = copy.ArmamentFormDefName;
             Record.LastResolvedLabel = copy.LastResolvedLabel;
             Record.OrderedActionPresetDefNames = copy.OrderedActionPresetDefNames;
             SetQuantity(Mathf.Max(1, quantity));

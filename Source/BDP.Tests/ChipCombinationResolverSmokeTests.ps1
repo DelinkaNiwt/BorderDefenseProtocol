@@ -15,7 +15,7 @@ $requiredFiles = @(
     "ChipRequirementMergeRegistry.cs",
     "IChipExtensionMergeRule.cs",
     "ChipExtensionMergeRegistry.cs",
-    "ChipGunShellApplicationService.cs"
+    "ChipArmamentFormApplicationService.cs"
 )
 foreach ($fileName in $requiredFiles)
 {
@@ -29,7 +29,7 @@ $mergeText = Get-Utf8Text (Join-Path $resolutionRoot "ChipConfigurationMergeServ
 $expressionText = Get-Utf8Text (Join-Path $resolutionRoot "ChipExpressionMergeService.cs")
 $requirementText = Get-Utf8Text (Join-Path $resolutionRoot "ChipRequirementMergeRegistry.cs")
 $extensionText = Get-Utf8Text (Join-Path $resolutionRoot "ChipExtensionMergeRegistry.cs")
-$gunShellText = Get-Utf8Text (Join-Path $resolutionRoot "ChipGunShellApplicationService.cs")
+$armamentFormText = Get-Utf8Text (Join-Path $resolutionRoot "ChipArmamentFormApplicationService.cs")
 
 Assert-True ($resolverText -match 'ChipCombinationResolution\s+Resolve\s*\(ChipCombinationRecord\s+record\)') "解析器必须公开唯一 Resolve(record) 主入口。"
 Assert-True ($resolverText -match 'MissingSource') "来源缺失必须独立返回 MissingSource。"
@@ -37,9 +37,9 @@ Assert-True ($resolverText -match 'LastResolvedLabel') "成功解析必须回写
 Assert-True ($resolverText -match 'Invalid') "来源齐全但规则不满足时必须返回 Invalid。"
 Assert-True ($resolverText -match 'string\.Join\s*\(\s*"/"') "双动作成品名称必须使用无空格斜线连接动作名称。"
 Assert-True ($resolverText -match 'BDP_ChipManufacturing_ProductLabel') "组合解析器必须通过语言键生成完整触发器芯片名称。"
-Assert-True ($resolverText -match 'BDP_ChipManufacturing_ProductLabelWithGunShell') "有枪型时组合解析器必须通过独立语言键追加方括号枪型。"
-Assert-True ($languageText -match '<BDP_ChipManufacturing_ProductLabel>触发器芯片:\{0\}</BDP_ChipManufacturing_ProductLabel>') "语言包缺少英文冒号无枪型成品名称规范。"
-Assert-True ($languageText -match '<BDP_ChipManufacturing_ProductLabelWithGunShell>触发器芯片:\{0\}\[\{1\}型\]</BDP_ChipManufacturing_ProductLabelWithGunShell>') "语言包缺少英文冒号带方括号枪型的成品名称规范。"
+Assert-True ($resolverText -match 'BDP_ChipManufacturing_ProductLabelWithArmamentForm') "有可见武装型时组合解析器必须通过独立语言键追加方括号型名。"
+Assert-True ($languageText -match '<BDP_ChipManufacturing_ProductLabel>触发器芯片:\{0\}</BDP_ChipManufacturing_ProductLabel>') "语言包缺少英文冒号无武装型成品名称规范。"
+Assert-True ($languageText -match '<BDP_ChipManufacturing_ProductLabelWithArmamentForm>触发器芯片:\{0\}\[\{1\}型\]</BDP_ChipManufacturing_ProductLabelWithArmamentForm>') "语言包缺少英文冒号带方括号武装型名称规范。"
 Assert-True ($resolverText -notmatch 'label\s*\+\s*" / "') "成品名称不得保留带空格的旧动作分隔格式。"
 
 Assert-True ($compatibilityText -match 'SlotRegion') "双动作必须检查槽位区域。"
@@ -64,7 +64,7 @@ Assert-True ($extensionText -match 'rules\.Count\s*==\s*0|Rules\.Count\s*==\s*0'
 Assert-True ($expressionText -match 'DefaultModeKey\s*=\s*firstAction\.defName') "动作顺序一必须成为默认形态。"
 Assert-True ($expressionText -match 'UseCost') "表达合并必须保留各形态自己的使用消耗。"
 Assert-True ($expressionText -match 'MinimumRequired') "表达合并必须保留各形态自己的最低需求。"
-Assert-True ($gunShellText -match 'Apply') "枪壳覆盖必须集中在单一应用服务。"
+Assert-True ($armamentFormText -match 'Apply') "武装型覆盖必须集中在单一应用服务。"
 
 function Assert-Equal
 {
@@ -223,10 +223,14 @@ $actionA.profession = $shooter
 $actionB.profession = $shooter
 $actionType = $actionA.GetType()
 $actions = New-TypedList $actionType @($actionA, $actionB)
+$formType = $contentAssembly.GetType("BDP.Content.Assembly.ChipManufacturing.Defs.ChipArmamentFormDef", $true)
+$gunForm = New-ReflectedInstance $contentAssembly "BDP.Content.Assembly.ChipManufacturing.Defs.ChipArmamentFormDef"
+$gunForm.maxActionCount = 2
+$gunForm.compatibleProfessions = New-TypedList $professionType @($gunner)
 $compatibilityType = $contentAssembly.GetType("BDP.Content.Assembly.ChipManufacturing.Resolution.ChipCombinationCompatibilityService", $true)
 
 $configB.Loadout.SlotRegion = [Enum]::Parse($configB.Loadout.GetType().GetField("SlotRegion").FieldType, "Special")
-$slotFailures = $compatibilityType.GetMethod("Validate").Invoke($null, @($category, $gunner, $actions, $null))
+$slotFailures = $compatibilityType.GetMethod("Validate").Invoke($null, @($category, $gunner, $actions, $gunForm))
 Assert-True (($slotFailures | Where-Object { $_.Code -eq "SlotRegionMismatch" }).Count -eq 1) "槽位区域不同时必须返回稳定非法原因。"
 $configB.Loadout.SlotRegion = [Enum]::Parse($configB.Loadout.GetType().GetField("SlotRegion").FieldType, "MainSub")
 
@@ -234,7 +238,7 @@ $secondSourceMode = [Activator]::CreateInstance($modeType)
 $secondSourceMode.ModeKey = "source_mode_2"
 $secondSourceMode.ActiveEntryIds = New-TypedList ([string]) @("entry_b")
 $configB.Expression.Modes = New-TypedList $modeType @($sourceMode, $secondSourceMode)
-$modeFailures = $compatibilityType.GetMethod("Validate").Invoke($null, @($category, $gunner, $actions, $null))
+$modeFailures = $compatibilityType.GetMethod("Validate").Invoke($null, @($category, $gunner, $actions, $gunForm))
 Assert-True (($modeFailures | Where-Object { $_.Code -eq "IntrinsicMultiMode" }).Count -eq 1) "预设自身多形态参与双动作时必须返回稳定非法原因。"
 
 # 未知 DefName 只应进入 MissingSource（来源缺失），不能被误判为 Invalid（非法组合）。
@@ -250,4 +254,4 @@ $malformedRecord = New-ReflectedInstance $contentAssembly "BDP.Content.Assembly.
 $malformedResolution = $resolver.Resolve($malformedRecord)
 Assert-Equal $malformedResolution.Status.ToString() "Invalid" "空分类或空动作记录必须返回 Invalid。"
 
-Write-Host "PASS: 组合解析器区分来源缺失与非法组合，并按既定规则合成配置、形态、条件和枪壳。"
+Write-Host "PASS: 组合解析器区分来源缺失与非法组合，并按既定规则合成配置、形态、条件和武装型。"

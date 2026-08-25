@@ -68,6 +68,7 @@ namespace BDP.Core.AttackExecution.RangedProtocol.Fire
                 ProjectileOverrides projectileOv = entry?.SourceResult?.ResolvedVerbSpec?.ProjectileOverrides;
                 float baseSpeedFactor = projectileOv?.speedMultiplier ?? 1f;
                 float baseDamageFactor = projectileOv?.damageMultiplier ?? 1f;
+                float baseStoppingPowerFactor = projectileOv?.stoppingPowerMultiplier ?? 1f;
                 FireEmitRecord emit = new FireEmitRecord
                 {
                     EmitIndex = emitIndex,
@@ -87,6 +88,7 @@ namespace BDP.Core.AttackExecution.RangedProtocol.Fire
                     OriginSpreadForwardMax = baselineEmit != null ? baselineEmit.OriginSpreadForwardMax : 0f,
                     SpeedFactor = baseSpeedFactor,
                     DamageFactor = baseDamageFactor,
+                    StoppingPowerFactor = baseStoppingPowerFactor,
                     ProjectileOverride = baselineEmit != null ? baselineEmit.ProjectileDef : null,
                     ResultId = baselineEmit != null ? baselineEmit.ResultId : entry != null ? entry.SourceResultId : null,
                     SourceResultId = baselineEmit != null ? baselineEmit.SourceResultId : entry != null ? entry.SourceResultId : null,

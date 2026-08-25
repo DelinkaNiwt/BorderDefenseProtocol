@@ -3,6 +3,7 @@ using BDP.Core.Combos;
 using BDP.Core.Requirements;
 using BDP.Core.Trigger;
 using BDP.Core.Trigger.Runtime;
+using Verse;
 
 namespace BDP.Core.AttackExecution
 {
@@ -153,6 +154,7 @@ namespace BDP.Core.AttackExecution
             AttackSessionToken sessionToken = request != null ? request.SessionToken : null;
             return request != null
                 && request.Pawn != null
+                && !request.Pawn.WorkTagIsDisabled(WorkTags.Violent)
                 && sessionToken != null
                 && sessionToken.IsValid
                 && sessionToken.BelongsTo(request.Pawn);

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 变色龙隐秘状态；由 BDP 表达系统负责状态生命周期。 -->
+  <HediffDef>
+    <!-- Hediff Def 唯一名称。 -->
+    <defName>BDP_Hediff_Chameleon</defName>
+    <!-- 使用 BDP 表达宿主，让状态来源与芯片激活保持同步。 -->
+    <hediffClass>BDP.Core.Expressions.BdpExpressionHostHediff</hediffClass>
+    <!-- 缺少语言包时的默认状态名称。 -->
+    <label>隐秘状态·变色龙</label>
+    <!-- 缺少语言包时的默认状态说明。 -->
+    <description>进入隐身状态；完成任意攻击动作后自动关闭变色龙芯片。</description>
+    <!-- 隐身属于正向状态。 -->
+    <isBad>false</isBad>
+    <!-- 状态存在即进入隐身组件。 -->
+    <initialSeverity>1</initialSeverity>
+    <minSeverity>0</minSeverity>
+    <maxSeverity>1</maxSeverity>
+    <comps>
+      <!-- 复用原版隐身组件的表现与可见性计算，不依赖皇权 DLC。 -->
+      <li Class="BDP.Content.Chameleon.HediffCompProperties_BdpInvisibility">
+        <visibleToPlayer>true</visibleToPlayer>
+      </li>
+    </comps>
+  </HediffDef>
+
+</Defs>

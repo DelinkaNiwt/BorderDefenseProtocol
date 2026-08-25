@@ -158,7 +158,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             return ChipManufacturingCostCalculator.Calculate(
                 recipe,
                 resolution.Actions,
-                resolution.GunShell);
+                resolution.ArmamentForm);
         }
 
         /// <summary>按当前栏宽计算完整材料区内容高度。</summary>
