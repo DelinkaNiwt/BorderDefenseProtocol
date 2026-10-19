@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <!-- Development 权威业务规则的简体中文显示文本。 -->
+  <BDP_Development_CustomBarrierRule_Experimental.label>实验性屏障规则</BDP_Development_CustomBarrierRule_Experimental.label>
+  <BDP_Development_CustomBarrierRule_Experimental.description>为实验性屏障语义提供反射比例。</BDP_Development_CustomBarrierRule_Experimental.description>
+</LanguageData>

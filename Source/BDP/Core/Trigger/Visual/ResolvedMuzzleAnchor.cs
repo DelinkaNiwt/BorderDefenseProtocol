@@ -29,7 +29,7 @@ namespace BDP.Core.Trigger.Visual
         public float AimAngle { get; set; }
 
         /// <summary>
-        /// 当前枪口解算使用的局部偏移。
+        /// 当前枪口解算使用的归一化贴图局部坐标。
         /// </summary>
         public Vector3 LocalOffset { get; set; }
     }

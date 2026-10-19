@@ -24,40 +24,62 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             };
         }
 
-        /// <summary>复用集中规则选择动作；单形态会直接替换旧动作。</summary>
-        public bool TrySelectAction(
+        /// <summary>复用集中规则选择芯片功能模板；单形态会直接替换旧选择。</summary>
+        public bool TrySelectFunction(
             ChipProfessionDef profession,
-            ChipActionPresetDef action,
+            ChipManufacturingPresetDef function,
             out string failureCode)
         {
-            return ChipCombinationSelectionRules.TrySelect(
+            bool selected = ChipCombinationSelectionRules.TrySelect(
                 Record,
                 profession,
-                action,
+                function,
                 out failureCode);
+            if (selected)
+            {
+                UpdateRangedProfession();
+            }
+            return selected;
         }
 
         /// <summary>取消指定形态；取消第一项时第二项自动前移。</summary>
-        public void RemoveActionAt(int index)
+        public void RemoveFunctionAt(int index)
         {
             ChipCombinationSelectionRules.RemoveAt(Record, index);
+            if (Record.OrderedChipFunctionDefNames.Count == 0)
+            {
+                SelectArmamentForm(null);
+            }
         }
 
-        /// <summary>交换恰好两个动作的形态顺序。</summary>
-        public bool SwapActions()
+        /// <summary>交换恰好两个芯片功能模板的形态顺序。</summary>
+        public bool SwapFunctions()
         {
             return ChipCombinationSelectionRules.Swap(Record);
         }
 
-        /// <summary>选择或清空武装型；若新型只允许单动作则保留首个动作。</summary>
+        /// <summary>选择或清空武装型；若新型只允许一个芯片功能模板则保留首项。</summary>
         public void SelectArmamentForm(ChipArmamentFormDef armamentForm)
         {
             Record.ArmamentFormDefName = armamentForm?.defName;
-            int maximum = ChipCombinationSelectionRules.MaxActionCount(null, armamentForm);
-            while (Record.OrderedActionPresetDefNames.Count > maximum)
+            int maximum = ChipCombinationSelectionRules.MaxFunctionCount(null, armamentForm);
+            while (Record.OrderedChipFunctionDefNames.Count > maximum)
             {
-                Record.OrderedActionPresetDefNames.RemoveAt(
-                    Record.OrderedActionPresetDefNames.Count - 1);
+                Record.OrderedChipFunctionDefNames.RemoveAt(
+                    Record.OrderedChipFunctionDefNames.Count - 1);
+            }
+            UpdateRangedProfession();
+        }
+
+        /// <summary>合页成品职业只由显式构型决定；隐藏默认 Trion 构型不计入选择。</summary>
+        private void UpdateRangedProfession()
+        {
+            if (Record.ProfessionDefName == "BDP_ChipProfession_Shooter"
+                || Record.ProfessionDefName == "BDP_ChipProfession_Gunner")
+            {
+                Record.ProfessionDefName = string.IsNullOrWhiteSpace(Record.ArmamentFormDefName)
+                    ? "BDP_ChipProfession_Shooter"
+                    : "BDP_ChipProfession_Gunner";
             }
         }
 
@@ -80,7 +102,8 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             Record.ProfessionDefName = copy.ProfessionDefName;
             Record.ArmamentFormDefName = copy.ArmamentFormDefName;
             Record.LastResolvedLabel = copy.LastResolvedLabel;
-            Record.OrderedActionPresetDefNames = copy.OrderedActionPresetDefNames;
+            Record.OrderedChipFunctionDefNames = copy.OrderedChipFunctionDefNames;
+            UpdateRangedProfession();
             SetQuantity(Mathf.Max(1, quantity));
         }
     }

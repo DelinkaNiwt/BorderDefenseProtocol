@@ -27,13 +27,13 @@ Assert-True (
 
 Assert-True (
     ($resolverText -match 'ResolveWeaponStage\(request\)') -and
-    ($resolverText -match 'ResolveGraphic\(\s*request\.IsExecutionActive,\s*weaponStage,\s*request\.SourceThing\)') -and
-    ($resolverText -match 'ResolveGraphic\(false,\s*weaponStage,\s*request\.SourceThing\)')
+    ([regex]::Matches($resolverText, 'ResolveMainGraphic\(request,\s*weaponStage\)').Count -ge 2) -and
+    ($resolverText -match 'ResolveGraphic\(\s*request\.IsExecutionActive,\s*weaponStage,\s*request\.SourceThing\)')
 ) 'Both complete and texture-only pose paths must select their main graphic by the same resolved stage.'
 
 Assert-True (
-    ($resolverText -match 'ResolveGripAnchor\(request, calculation\)') -and
-    ($resolverText -match 'ResolveMuzzleAnchor\(request, calculation\)')
+    ($resolverText -match 'ResolveGripAnchor\(request, calculation, graphic, drawScale\)') -and
+    ($resolverText -match 'ResolveMuzzleAnchor\(request, calculation, graphic, drawScale\)')
 ) 'Stage-aware graphic selection must leave the existing grip and muzzle anchor formulas in place.'
 
 Assert-True (

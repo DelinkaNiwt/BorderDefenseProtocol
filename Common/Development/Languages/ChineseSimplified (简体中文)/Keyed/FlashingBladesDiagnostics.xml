@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 原版开发菜单中的主动诊断入口。 -->
+  <BDP_Dev_FB_Menu>刀光剑影兼容诊断</BDP_Dev_FB_Menu>
+  <!-- 开启或撤销本诊断的观察补丁。 -->
+  <BDP_Dev_FB_Toggle>开启／关闭刀光来源观察</BDP_Dev_FB_Toggle>
+  <!-- 观察器生命周期；默认关闭，无逐帧日志。 -->
+  <BDP_Dev_FB_On>[BDP.FB诊断] 已开启。打开刀光武器配置页可输出目录；攻击时输出来源与生成入口计数。</BDP_Dev_FB_On>
+  <!-- 主动关闭通知。 -->
+  <BDP_Dev_FB_Off>[BDP.FB诊断] 已关闭。</BDP_Dev_FB_Off>
+  <!-- 正式兼容没有启用时拒绝安装观察。 -->
+  <BDP_Dev_FB_Unavailable>[BDP.FB诊断] 正式刀光适配未启用，无法观察。</BDP_Dev_FB_Unavailable>
+  <!-- 观察异常仅停止诊断。 -->
+  <BDP_Dev_FB_Error>[BDP.FB诊断] 观察器发生异常，已自行关闭：{0}</BDP_Dev_FB_Error>
+  <!-- 分类状态及事件阶段。 -->
+  <BDP_Dev_FB_Matched>匹配</BDP_Dev_FB_Matched>
+  <!-- 有攻击但未能解析目录来源。 -->
+  <BDP_Dev_FB_Unmatched>来源失配，按真实工具回退</BDP_Dev_FB_Unmatched>
+  <!-- 外部已构建一个有效攻击上下文。 -->
+  <BDP_Dev_FB_Build>上下文构建</BDP_Dev_FB_Build>
+  <!-- 外部筛选后进入效果生成。 -->
+  <BDP_Dev_FB_Spawn>生成入口</BDP_Dev_FB_Spawn>
+  <!-- 只读冻结选择；生成次数指通过外部筛选后的尝试，不能证明最终渲染。 -->
+  <BDP_Dev_FB_Event>[BDP.FB诊断] {0}；{1}；构建次数={2}；生成次数={3}；结果={4}；芯片={5}；形态={6}；姿态={7}；配置键={8}；自动类别={9}；手动纹理={10}</BDP_Dev_FB_Event>
+  <!-- 目录只在开启后的首次窗口刷新输出，便于核对三个光魂状态。 -->
+  <BDP_Dev_FB_Entry>[BDP.FB诊断] 目录：键={0}；名称={1}；各来源自动类别={2}</BDP_Dev_FB_Entry>
+</LanguageData>

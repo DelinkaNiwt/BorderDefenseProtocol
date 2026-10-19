@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using BDP.Core.Projectiles;
+using BDP.Core.Projectiles.Interaction;
 using BDP.Core.Projectiles.RangedFlightProtocol.Model;
 using BDP.Core.Projectiles.RangedFlightProtocol.Projection;
 using RimWorld;
@@ -18,6 +21,29 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Collision
         /// 步长越小，越不容易漏掉“曲线外鼓”碰到的墙格。
         /// </summary>
         private const float MaxCurveSampleStep = 0.25f;
+
+        /// <summary>
+        /// 客观穿格扫描允许使用的最大坐标绝对值。
+        /// 正常 RimWorld 地图远小于该范围；它只用于阻止异常路径坐标进入 IntVec3 转换。
+        /// </summary>
+        private const float MaxTraversalCoordinateMagnitude = 4096f;
+
+        /// <summary>
+        /// 单个线段允许追加的最大格子数量。
+        /// 它是异常输入的熔断边界，不替代正常的终点收敛逻辑。
+        /// </summary>
+        private const int MaxTraversedCellCount = 4096;
+
+        /// <summary>
+        /// 视觉终点相对首个阻挡格的反向安全余量。
+        /// 它避免拖尾发光边缘压入阻挡格内部。
+        /// </summary>
+        private const float VisualBlockerBackoffDistance = 0.08f;
+
+        /// <summary>
+        /// 视觉终点安全回退的最大尝试次数。
+        /// </summary>
+        private const int VisualBlockerBackoffAttempts = 8;
 
         /// <summary>
         /// 首次进入阻挡格的二分逼近迭代次数。
@@ -51,6 +77,27 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Collision
         }
 
         /// <summary>
+        /// 基于完整 flight path snapshot 扫描当前飞行段，并可选择不把首个已进入格升级为客观阻挡。
+        /// 穿格序列仍保留首格；该选项只影响客观阻挡事实，供续段准入处理已经进入的起点格。
+        /// </summary>
+        /// <param name="projectile">当前投射物宿主。</param>
+        /// <param name="flightPathSnapshot">当前段 flight path 几何快照。</param>
+        /// <param name="ignoreInitialCellForObjectiveBlocker">是否忽略首个起点格中的客观阻挡。</param>
+        /// <returns>当前段的客观碰撞扫描结果。</returns>
+        public static SegmentCollisionRecord ScanSegment(
+            Projectile projectile,
+            ProjectileFlightPathSnapshot flightPathSnapshot,
+            bool ignoreInitialCellForObjectiveBlocker)
+        {
+            return ScanSegment(
+                projectile,
+                flightPathSnapshot,
+                0f,
+                1f,
+                ignoreInitialCellForObjectiveBlocker);
+        }
+
+        /// <summary>
         /// 基于 flight path snapshot 的局部进度区间扫描当前飞行段。
         /// 该重载主要服务于“真实命中前已经实际走过了哪一段曲线”的诊断口径。
         /// </summary>
@@ -64,6 +111,30 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Collision
             ProjectileFlightPathSnapshot flightPathSnapshot,
             float startProgress,
             float endProgress)
+        {
+            return ScanSegment(
+                projectile,
+                flightPathSnapshot,
+                startProgress,
+                endProgress,
+                false);
+        }
+
+        /// <summary>
+        /// 基于 flight path snapshot 的局部进度区间扫描当前飞行段，并可选择不把首个已进入格升级为客观阻挡。
+        /// </summary>
+        /// <param name="projectile">当前投射物宿主。</param>
+        /// <param name="flightPathSnapshot">当前段 flight path 几何快照。</param>
+        /// <param name="startProgress">扫描起始进度，范围 [0,1]。</param>
+        /// <param name="endProgress">扫描终止进度，范围 [0,1]。</param>
+        /// <param name="ignoreInitialCellForObjectiveBlocker">是否忽略首个起点格中的客观阻挡。</param>
+        /// <returns>当前进度区间的客观碰撞扫描结果。</returns>
+        public static SegmentCollisionRecord ScanSegment(
+            Projectile projectile,
+            ProjectileFlightPathSnapshot flightPathSnapshot,
+            float startProgress,
+            float endProgress,
+            bool ignoreInitialCellForObjectiveBlocker)
         {
             float clampedStartProgress = Mathf.Clamp01(startProgress);
             float clampedEndProgress = Mathf.Clamp01(endProgress);
@@ -111,7 +182,8 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Collision
                 clampedStartProgress,
                 clampedEndProgress,
                 traversedCells,
-                record);
+                record,
+                ignoreInitialCellForObjectiveBlocker);
 
             return record;
         }
@@ -130,7 +202,7 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Collision
             float endProgress)
         {
             List<Vector3> sampledPoints = new List<Vector3>();
-            if (flightPathSnapshot == null)
+            if (flightPathSnapshot == null || !IsFiniteFlightPathSnapshot(flightPathSnapshot))
             {
                 return sampledPoints;
             }
@@ -146,8 +218,12 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Collision
 
             if (Mathf.Approximately(clampedStartProgress, clampedEndProgress))
             {
-                sampledPoints.Add(NormalizeFlightPlanePoint(
-                    ProjectileFlightPathUtility.EvaluatePosition(flightPathSnapshot, clampedEndProgress)));
+                Vector3 singlePoint = NormalizeFlightPlanePoint(
+                    ProjectileFlightPathUtility.EvaluatePosition(flightPathSnapshot, clampedEndProgress));
+                if (IsFiniteFlightPlanePoint(singlePoint))
+                {
+                    sampledPoints.Add(singlePoint);
+                }
                 return sampledPoints;
             }
 
@@ -158,7 +234,14 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Collision
                     ? clampedEndProgress
                     : Mathf.Lerp(clampedStartProgress, clampedEndProgress, (float)i / (samplePointCount - 1));
                 Vector3 sampledPoint = ProjectileFlightPathUtility.EvaluatePosition(flightPathSnapshot, stepProgress);
-                AppendSamplePoint(sampledPoints, NormalizeFlightPlanePoint(sampledPoint));
+                sampledPoint = NormalizeFlightPlanePoint(sampledPoint);
+                if (!IsFiniteFlightPlanePoint(sampledPoint))
+                {
+                    sampledPoints.Clear();
+                    return sampledPoints;
+                }
+
+                AppendSamplePoint(sampledPoints, sampledPoint);
             }
 
             return sampledPoints;
@@ -217,6 +300,15 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Collision
                 return false;
             }
 
+            if (projectile is BdpProjectile bdpProjectile
+                && ProjectileInterceptionDecision.ShouldPassThroughNonTarget(
+                    thing,
+                    bdpProjectile.CurrentInterceptionTarget,
+                    bdpProjectile.CurrentInteractionPolicy))
+            {
+                return false;
+            }
+
             if (thing is Building_Door door)
             {
                 return !door.Open;
@@ -260,7 +352,8 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Collision
             float startProgress,
             float endProgress,
             List<IntVec3> traversedCells,
-            SegmentCollisionRecord record)
+            SegmentCollisionRecord record,
+            bool ignoreInitialCellForObjectiveBlocker)
         {
             if (projectile == null
                 || projectile.Map == null
@@ -274,6 +367,13 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Collision
             for (int i = 0; i < traversedCells.Count; i++)
             {
                 IntVec3 cell = traversedCells[i];
+                if (ignoreInitialCellForObjectiveBlocker
+                    && i == 0
+                    && record.SegmentStart.ToIntVec3() == cell)
+                {
+                    continue;
+                }
+
                 if (!TryResolveObjectiveBlockerInCell(projectile, cell, out Thing blocker, out string audit))
                 {
                     continue;
@@ -292,6 +392,15 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Collision
                     flightPathSnapshot,
                     record.FirstObjectiveBlockerProgress,
                     cell);
+                if (TryResolveFirstObjectiveBlockerVisualPosition(
+                        flightPathSnapshot,
+                        record.FirstObjectiveBlockerProgress,
+                        cell,
+                        out Vector3 visualPosition))
+                {
+                    record.HasFirstObjectiveBlockerVisualPosition = true;
+                    record.FirstObjectiveBlockerVisualPosition = visualPosition;
+                }
                 return;
             }
         }
@@ -383,6 +492,98 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Collision
             return evaluatedPosition.ToIntVec3() == blockerCell
                 ? evaluatedPosition
                 : blockerCell.ToVector3Shifted();
+        }
+
+        /// <summary>
+        /// 解析首个阻挡格外的视觉终点。
+        /// 逻辑命中可以落在阻挡格中心，但视觉拖尾必须停在进入阻挡格之前。
+        /// </summary>
+        /// <param name="flightPathSnapshot">当前真实飞行路径。</param>
+        /// <param name="progress">首次触达阻挡格的大致进度。</param>
+        /// <param name="blockerCell">首个阻挡格。</param>
+        /// <param name="visualPosition">解析出的阻挡格外视觉终点。</param>
+        /// <returns>成功解析阻挡格外视觉终点时返回 true。</returns>
+        private static bool TryResolveFirstObjectiveBlockerVisualPosition(
+            ProjectileFlightPathSnapshot flightPathSnapshot,
+            float progress,
+            IntVec3 blockerCell,
+            out Vector3 visualPosition)
+        {
+            visualPosition = Vector3.zero;
+            if (flightPathSnapshot == null || !blockerCell.IsValid || progress < 0f)
+            {
+                return false;
+            }
+
+            Vector3 pathStart = NormalizeFlightPlanePoint(
+                ProjectileFlightPathUtility.EvaluatePosition(flightPathSnapshot, 0f));
+            if (pathStart.ToIntVec3() == blockerCell)
+            {
+                return false;
+            }
+
+            float pathLength = flightPathSnapshot.ApproximateLength > 0.001f
+                ? flightPathSnapshot.ApproximateLength
+                : ProjectileFlightPathUtility.EstimateLength(flightPathSnapshot);
+            float progressStep = Mathf.Clamp(
+                VisualBlockerBackoffDistance / Mathf.Max(0.001f, pathLength),
+                0.0005f,
+                0.25f);
+            float candidateProgress = Mathf.Clamp01(progress - progressStep);
+            for (int attempt = 0; attempt < VisualBlockerBackoffAttempts; attempt++)
+            {
+                Vector3 candidate = NormalizeFlightPlanePoint(
+                    ProjectileFlightPathUtility.EvaluatePosition(flightPathSnapshot, candidateProgress));
+                if (candidate.ToIntVec3() != blockerCell
+                    && !DoesSubPathTraverseCell(flightPathSnapshot, 0f, candidateProgress, blockerCell))
+                {
+                    visualPosition = candidate;
+                    return true;
+                }
+
+                candidateProgress = Mathf.Max(0f, candidateProgress - progressStep);
+            }
+
+            if (!DoesSubPathTraverseCell(flightPathSnapshot, 0f, 0f, blockerCell))
+            {
+                visualPosition = pathStart;
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 解析真实路径进入指定终端格之前的视觉终点。
+        /// 该接口不要求指定格是硬阻挡，供原版掩体拦截等“逻辑命中但不升级为硬碰撞”的分支消费。
+        /// </summary>
+        /// <param name="flightPathSnapshot">当前真实飞行路径。</param>
+        /// <param name="targetCell">逻辑命中的终端格。</param>
+        /// <param name="visualPosition">进入终端格前的视觉终点。</param>
+        /// <returns>成功解析时返回 true。</returns>
+        internal static bool TryResolveVisualEndpointBeforeCell(
+            ProjectileFlightPathSnapshot flightPathSnapshot,
+            IntVec3 targetCell,
+            out Vector3 visualPosition)
+        {
+            visualPosition = Vector3.zero;
+            if (flightPathSnapshot == null
+                || !targetCell.IsValid
+                || !DoesSubPathTraverseCell(flightPathSnapshot, 0f, 1f, targetCell))
+            {
+                return false;
+            }
+
+            float progress = ResolveFirstObjectiveBlockerProgress(
+                flightPathSnapshot,
+                0f,
+                1f,
+                targetCell);
+            return TryResolveFirstObjectiveBlockerVisualPosition(
+                flightPathSnapshot,
+                progress,
+                targetCell,
+                out visualPosition);
         }
 
         /// <summary>
@@ -558,9 +759,28 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Collision
         {
             Vector3 start = NormalizeFlightPlanePoint(segmentStart);
             Vector3 end = NormalizeFlightPlanePoint(segmentEnd);
+            List<IntVec3> cells = new List<IntVec3>();
+
+            if (!IsFiniteFlightPlanePoint(start)
+                || !IsFiniteFlightPlanePoint(end)
+                || Mathf.Abs(start.x) > MaxTraversalCoordinateMagnitude
+                || Mathf.Abs(start.z) > MaxTraversalCoordinateMagnitude
+                || Mathf.Abs(end.x) > MaxTraversalCoordinateMagnitude
+                || Mathf.Abs(end.z) > MaxTraversalCoordinateMagnitude)
+            {
+                return cells;
+            }
+
             IntVec3 startCell = start.ToIntVec3();
             IntVec3 endCell = end.ToIntVec3();
-            List<IntVec3> cells = new List<IntVec3>();
+            long cellSpan = Math.Abs((long)endCell.x - startCell.x)
+                + Math.Abs((long)endCell.z - startCell.z);
+            if (cellSpan > MaxTraversedCellCount)
+            {
+                return cells;
+            }
+
+            cells.Capacity = (int)cellSpan + 1;
             AppendTraversedCell(cells, startCell);
 
             if (startCell == endCell)
@@ -584,32 +804,39 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Collision
                 : float.PositiveInfinity;
             int currentX = startCell.x;
             int currentZ = startCell.z;
+            int iterationCount = 0;
 
             while (currentX != endCell.x || currentZ != endCell.z)
             {
-                if (Mathf.Approximately(tMaxX, tMaxZ))
+                if (++iterationCount > MaxTraversedCellCount)
                 {
-                    if (stepX != 0)
-                    {
-                        AppendTraversedCell(cells, new IntVec3(currentX + stepX, 0, currentZ));
-                    }
+                    break;
+                }
 
-                    if (stepZ != 0)
-                    {
-                        AppendTraversedCell(cells, new IntVec3(currentX, 0, currentZ + stepZ));
-                    }
+                bool canStepX = stepX != 0 && currentX != endCell.x;
+                bool canStepZ = stepZ != 0 && currentZ != endCell.z;
+                if (!canStepX && !canStepZ)
+                {
+                    break;
+                }
+
+                if (canStepX && canStepZ && Mathf.Approximately(tMaxX, tMaxZ))
+                {
+                    AppendTraversedCell(cells, new IntVec3(currentX + stepX, 0, currentZ));
+
+                    AppendTraversedCell(cells, new IntVec3(currentX, 0, currentZ + stepZ));
 
                     currentX += stepX;
                     currentZ += stepZ;
                     tMaxX += tDeltaX;
                     tMaxZ += tDeltaZ;
                 }
-                else if (tMaxX < tMaxZ)
+                else if (canStepX && (!canStepZ || tMaxX < tMaxZ))
                 {
                     currentX += stepX;
                     tMaxX += tDeltaX;
                 }
-                else
+                else if (canStepZ)
                 {
                     currentZ += stepZ;
                     tMaxZ += tDeltaZ;
@@ -628,6 +855,11 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Collision
         /// <param name="cell">当前待追加格子。</param>
         private static void AppendTraversedCell(List<IntVec3> cells, IntVec3 cell)
         {
+            if (cells.Count >= MaxTraversedCellCount)
+            {
+                return;
+            }
+
             if (cells.Count == 0 || cells[cells.Count - 1] != cell)
             {
                 cells.Add(cell);
@@ -657,6 +889,45 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Collision
         {
             point.y = 0f;
             return point;
+        }
+
+        /// <summary>
+        /// 判断平面路径点的横纵坐标是否为有限数值。
+        /// </summary>
+        /// <param name="point">待检查的平面路径点。</param>
+        /// <returns>坐标均为有限数值时返回 true。</returns>
+        private static bool IsFiniteFlightPlanePoint(Vector3 point)
+        {
+            return !float.IsNaN(point.x)
+                && !float.IsInfinity(point.x)
+                && !float.IsNaN(point.z)
+                && !float.IsInfinity(point.z);
+        }
+
+        /// <summary>
+        /// 判断路径快照的几何控制点是否都能安全进入客观穿格扫描。
+        /// </summary>
+        /// <param name="flightPathSnapshot">待检查的路径快照。</param>
+        /// <returns>路径控制点均为有限且处于合理坐标范围时返回 true。</returns>
+        private static bool IsFiniteFlightPathSnapshot(ProjectileFlightPathSnapshot flightPathSnapshot)
+        {
+            if (flightPathSnapshot == null)
+            {
+                return false;
+            }
+
+            return IsFiniteFlightPlanePoint(flightPathSnapshot.Start)
+                && IsFiniteFlightPlanePoint(flightPathSnapshot.ControlA)
+                && IsFiniteFlightPlanePoint(flightPathSnapshot.ControlB)
+                && IsFiniteFlightPlanePoint(flightPathSnapshot.End)
+                && Mathf.Abs(flightPathSnapshot.Start.x) <= MaxTraversalCoordinateMagnitude
+                && Mathf.Abs(flightPathSnapshot.Start.z) <= MaxTraversalCoordinateMagnitude
+                && Mathf.Abs(flightPathSnapshot.ControlA.x) <= MaxTraversalCoordinateMagnitude
+                && Mathf.Abs(flightPathSnapshot.ControlA.z) <= MaxTraversalCoordinateMagnitude
+                && Mathf.Abs(flightPathSnapshot.ControlB.x) <= MaxTraversalCoordinateMagnitude
+                && Mathf.Abs(flightPathSnapshot.ControlB.z) <= MaxTraversalCoordinateMagnitude
+                && Mathf.Abs(flightPathSnapshot.End.x) <= MaxTraversalCoordinateMagnitude
+                && Mathf.Abs(flightPathSnapshot.End.z) <= MaxTraversalCoordinateMagnitude;
         }
     }
 }

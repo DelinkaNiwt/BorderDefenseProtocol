@@ -52,13 +52,12 @@ namespace BDP.Content.Assembly.ChipManufacturing.Migration
                     "BDP_ChipMigration_LetterLabel".Translate(),
                     "BDP_ChipMigration_LetterBody".Translate(
                         report.ReplacedItemCount,
-                        report.DeletedBillCount,
-                        report.PreservedMissingSourceCount),
+                        report.DeletedBillCount),
                     LetterDefOf.NeutralEvent);
             }
         }
 
-        /// <summary>删除明确非法账单；来源缺失账单保留等待来源恢复。</summary>
+        /// <summary>删除所有当前无法确认合法的芯片制造账单。</summary>
         private static void RemoveInvalidBills(InvalidChipMigrationReport report)
         {
             ChipCombinationResolver resolver = new ChipCombinationResolver();
@@ -83,14 +82,10 @@ namespace BDP.Content.Assembly.ChipManufacturing.Migration
 
                         ChipCombinationResolution resolution =
                             resolver.Resolve(bill.CombinationRecord);
-                        if (resolution.Status == ChipCombinationResolutionStatus.Invalid)
+                        if (resolution.Status != ChipCombinationResolutionStatus.Valid)
                         {
                             stack.Delete(bill);
                             report.RecordDeletedBill();
-                        }
-                        else if (resolution.Status == ChipCombinationResolutionStatus.MissingSource)
-                        {
-                            report.RecordPreservedMissingSource();
                         }
                     }
                 }

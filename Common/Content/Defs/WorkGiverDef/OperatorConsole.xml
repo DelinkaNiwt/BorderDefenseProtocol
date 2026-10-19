@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 只响应玩家直接指派的控制台操作工作，不参与自动扫描。 -->
+  <WorkGiverDef>
+    <!-- 工作分配器唯一名称。 -->
+    <defName>BDP_OperateOperatorConsole</defName>
+    <!-- 工作分配器实现类。 -->
+    <giverClass>BDP.Content.OperatorConsole.WorkGiver_OperateOperatorConsole</giverClass>
+    <!-- 归入基础工作类型，仅用于直接指派入口。 -->
+    <workType>BasicWorker</workType>
+    <!-- 工作文本由语言包提供。 -->
+    <label>BDP_OperateOperatorConsole.label</label>
+    <verb>BDP_OperateOperatorConsole.verb</verb>
+    <gerund>BDP_OperateOperatorConsole.gerund</gerund>
+    <!-- 标记为玩家可直接指派。 -->
+    <directOrderable>true</directOrderable>
+    <priorityInType>90</priorityInType>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <canBeDoneByMechs>false</canBeDoneByMechs>
+  </WorkGiverDef>
+
+</Defs>

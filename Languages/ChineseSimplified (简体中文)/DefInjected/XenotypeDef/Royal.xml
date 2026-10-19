@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 薇瑟皇裔异种名称。 -->
+  <BDP_Xenotype_ViserRoyal.label>薇瑟皇裔</BDP_Xenotype_ViserRoyal.label>
+  <!-- 简要说明异种与皇室血脉的关系。 -->
+  <BDP_Xenotype_ViserRoyal.description>薇瑟帝国皇室血脉所承载的可遗传基因组合。</BDP_Xenotype_ViserRoyal.description>
+</LanguageData>

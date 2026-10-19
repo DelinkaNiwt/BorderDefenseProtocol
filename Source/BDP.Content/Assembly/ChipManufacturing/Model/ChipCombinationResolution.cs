@@ -15,11 +15,17 @@ namespace BDP.Content.Assembly.ChipManufacturing.Model
         /// <summary>当前动态成品名称。</summary>
         public string ResolvedLabel { get; set; }
 
+        /// <summary>成品记录确定的最终职业 DefName。</summary>
+        public string SourceProfessionKey { get; set; }
+
         /// <summary>当前动态芯片配置。</summary>
         public ChipDefinitionConfig ResolvedConfig { get; set; }
 
-        /// <summary>按玩家顺序解析出的动作。</summary>
-        public IReadOnlyList<ChipActionPresetDef> Actions { get; set; }
+        /// <summary>应用武装构型前的有效基础配置，用于信息来源链追踪。</summary>
+        public ChipDefinitionConfig DeclaredConfig { get; set; }
+
+        /// <summary>按玩家顺序解析出的芯片功能定义。</summary>
+        public IReadOnlyList<ChipManufacturingPresetDef> FunctionDefs { get; set; }
 
         /// <summary>解析出的可空有效武装型；可能是隐藏默认型。</summary>
         public ChipArmamentFormDef ArmamentForm { get; set; }

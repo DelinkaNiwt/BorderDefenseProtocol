@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using BDP.Core.Abilities;
+using BDP.Support.Diagnostics;
 using RimWorld;
 using Verse;
 
@@ -85,7 +87,7 @@ namespace BDP.Core.Expressions
             for (int i = 0; i < snapshot.Results.Count; i++)
             {
                 FormalExpressionResult expressionResult = snapshot.Results[i];
-                if (expressionResult == null || expressionResult.ResultKind != ExpressionResultKind.Ability)
+                if (expressionResult == null || expressionResult.OutputChannel != ExpressionOutputChannel.Ability)
                 {
                     continue;
                 }
@@ -93,7 +95,7 @@ namespace BDP.Core.Expressions
                 entries.Add(new ExpressionPublicationEntry
                 {
                     ResultId = expressionResult.Id,
-                    ResultKind = expressionResult.ResultKind,
+                    OutputChannel = expressionResult.OutputChannel,
                     PublishedKey = expressionResult.AbilityDefName,
                     IsPublished = expressionResult.IsAvailable
                         && !string.IsNullOrWhiteSpace(expressionResult.AbilityDefName),
@@ -128,7 +130,7 @@ namespace BDP.Core.Expressions
             {
                 FormalExpressionResult expressionResult = snapshot.Results[i];
                 if (expressionResult == null
-                    || expressionResult.ResultKind != ExpressionResultKind.Ability
+                    || expressionResult.OutputChannel != ExpressionOutputChannel.Ability
                     || !expressionResult.IsAvailable
                     || string.IsNullOrWhiteSpace(expressionResult.AbilityDefName))
                 {
@@ -163,7 +165,66 @@ namespace BDP.Core.Expressions
                 return;
             }
 
+            LogAbilityPublication(pawn, currentResults);
             BoundAbilityResultsByPawn[pawnKey] = new Dictionary<string, FormalExpressionResult>(currentResults);
+        }
+
+        /// <summary>
+        /// 记录 Ability 结果进入 Pawn 绑定表前的运行时快照。
+        /// 这里只观察最终结果，不复制、修正或替换结果字段。
+        /// </summary>
+        private static void LogAbilityPublication(
+            Pawn pawn,
+            Dictionary<string, FormalExpressionResult> currentResults)
+        {
+            if (pawn == null || currentResults == null)
+            {
+                return;
+            }
+
+            foreach (KeyValuePair<string, FormalExpressionResult> pair in currentResults)
+            {
+                FormalExpressionResult result = pair.Value;
+                if (result == null)
+                {
+                    continue;
+                }
+
+                string abilityDefName = string.IsNullOrWhiteSpace(result.AbilityDefName)
+                    ? pair.Key
+                    : result.AbilityDefName;
+                string source = result.SourceReference != null
+                    ? (result.SourceReference.ChipThingId ?? "null")
+                        + "/"
+                        + (result.SourceReference.ChipDefName ?? "null")
+                    : "null";
+                string requiresDirectTargetLos = result.ResolvedVerbSpec != null
+                    ? result.ResolvedVerbSpec.RequiresDirectTargetLineOfSight.ToString()
+                    : "null";
+
+                BdpDiagnostics.Throttled(
+                    "expression.ability_publication." + pawn.ThingID + "." + abilityDefName,
+                    "表达式发布诊断 | stage=ability_publication"
+                    + " | pawn=" + pawn.ThingID
+                    + " | resultId=" + (result.Id ?? "null")
+                    + " | abilityDef=" + (abilityDefName ?? "null")
+                    + " | source=" + source
+                    + " | requiresDirectTargetLos=" + requiresDirectTargetLos
+                    + " | declaredKeys=" + FormatDeclaredPermissionKeys(result.DeclaredPermissionKeys));
+            }
+        }
+
+        /// <summary>
+        /// 将最终结果的声明许可键压缩为单行诊断文本。
+        /// </summary>
+        private static string FormatDeclaredPermissionKeys(IReadOnlyList<string> declaredPermissionKeys)
+        {
+            if (declaredPermissionKeys == null || declaredPermissionKeys.Count == 0)
+            {
+                return "none";
+            }
+
+            return string.Join(",", declaredPermissionKeys);
         }
 
         /// <summary>
@@ -190,6 +251,13 @@ namespace BDP.Core.Expressions
                     continue;
                 }
 
+                // 只有显式声明保留的能力休眠：原版对象继续更新、保存次数和充能。
+                // 不把缺少来源理解成免费可用；生命周期组件统一阻止施放与隐藏按钮。
+                if (RetainsInactiveAbility(def))
+                {
+                    continue;
+                }
+
                 if (pawn.abilities.GetAbility(def, true) != null)
                 {
                     pawn.abilities.RemoveAbility(def);
@@ -202,6 +270,18 @@ namespace BDP.Core.Expressions
             {
                 addedDefNames.Remove(removedDefs[i]);
             }
+        }
+
+        /// <summary>读取能力自己的中性保留策略，不依据任何具体芯片名称。</summary>
+        private static bool RetainsInactiveAbility(AbilityDef def)
+        {
+            if (def?.comps == null) return false;
+            foreach (AbilityCompProperties comp in def.comps)
+            {
+                var lifecycle = comp as CompProperties_AbilityEffect_BdpExpressionLifecycle;
+                if (lifecycle != null && lifecycle.retainWhenInactive) return true;
+            }
+            return false;
         }
 
         /// <summary>
@@ -315,13 +395,39 @@ namespace BDP.Core.Expressions
                     continue;
                 }
 
-                if (pawn.abilities.GetAbility(def, true) != null)
+                Ability existing = pawn.abilities.GetAbility(def, true);
+                if (existing != null)
                 {
+                    EnsureAbilityVerbBinding(existing);
+                    AbilityReleaseCooldownService.RestoreAbilityCooldown(pawn, existing, def);
                     continue;
                 }
 
                 pawn.abilities.GainAbility(def);
                 addedDefNames.Add(defName);
+
+                Ability added = pawn.abilities.GetAbility(def, true);
+                EnsureAbilityVerbBinding(added);
+                AbilityReleaseCooldownService.RestoreAbilityCooldown(pawn, added, def);
+            }
+        }
+
+        /// <summary>
+        /// 修复读档时 VerbTracker 因 Verb 类型变化而重建 Verb 后丢失的 Ability 回引用。
+        /// 原版 Ability.Initialize 发生在 VerbTracker 读档重建之前，不能覆盖这个时序窗口。
+        /// </summary>
+        private static void EnsureAbilityVerbBinding(Ability ability)
+        {
+            if (ability == null)
+            {
+                return;
+            }
+
+            Verb verb = ability.verb;
+            IAbilityVerb abilityVerb = verb as IAbilityVerb;
+            if (abilityVerb != null && abilityVerb.Ability != ability)
+            {
+                abilityVerb.Ability = ability;
             }
         }
 

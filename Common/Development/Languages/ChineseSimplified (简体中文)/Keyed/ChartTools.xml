@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <!-- Development 中性图表工具预览文案。 -->
+  <BDP_Development_ChartTools_Title>中性图表工具预览</BDP_Development_ChartTools_Title>
+  <BDP_Development_ChartTools_Description>固定假数据；仅用于验证 Core 图表绘制、坐标和裁切能力。</BDP_Development_ChartTools_Description>
+  <BDP_Development_ChartTools_Radar>六轴雷达图</BDP_Development_ChartTools_Radar>
+  <BDP_Development_ChartTools_RadarSmall>四轴雷达图</BDP_Development_ChartTools_RadarSmall>
+  <BDP_Development_ChartTools_Line>二维折线图（精度走势等价样例）</BDP_Development_ChartTools_Line>
+</LanguageData>

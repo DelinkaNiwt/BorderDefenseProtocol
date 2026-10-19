@@ -80,6 +80,12 @@ namespace BDP.Core.CombatBody
             get { return allocatedTrion; }
         }
 
+        /// <summary>既有会话调整占用时同步实际金额，不重新进入相位或覆盖宿主快照。</summary>
+        public void UpdateAllocatedTrion(float amount)
+        {
+            allocatedTrion = Mathf.Max(0f, amount);
+        }
+
         /// <summary>
         /// 进入激活相位时记录的绝对 tick。
         /// </summary>
@@ -97,12 +103,18 @@ namespace BDP.Core.CombatBody
         }
 
         /// <summary>
-        /// 判断当前是否允许进入激活相位。
+        /// 判断系统是否允许进入激活相位；真实崩解冷却仍须结束。
         /// </summary>
         public bool CanActivate()
         {
             ResolveCooldownIfFinished();
-            return phase == CombatBodyPhase.Inactive && !IsManualTransformLocked();
+            return phase == CombatBodyPhase.Inactive;
+        }
+
+        /// <summary>玩家激活在系统阶段准入上叠加手动锁；换装重初始化不能被该锁挡住。</summary>
+        public bool CanManualActivate()
+        {
+            return CanActivate() && !IsManualTransformLocked();
         }
 
         /// <summary>

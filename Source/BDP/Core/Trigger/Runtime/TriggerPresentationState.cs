@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BDP.Core.Information;
 using BDP.Core.Expressions;
 
 namespace BDP.Core.Trigger.Runtime
@@ -16,10 +17,13 @@ namespace BDP.Core.Trigger.Runtime
         public int ProjectionVersion { get; set; }
 
         /// <summary>
-        /// 当前已发布的说明投影。
-        /// 常规 UI 读取默认直接消费它，不再自行重建说明结果。
+        /// 当前已发布的激活芯片统一信息模型集合。
+        /// 每枚芯片各自保留身份和来源链，避免多枚芯片的同名字段相互覆盖。
         /// </summary>
-        public ExpressionInfoProjection InfoProjection { get; set; }
+        public IReadOnlyList<ChipInformationModel> ChipInformations { get; set; }
+
+        /// <summary>已发布组合结果按结果 Id 索引的中性功能信息。</summary>
+        public IReadOnlyDictionary<string, ChipFeatureResolutionResult> ComboFeatureInformations { get; set; }
 
         /// <summary>
         /// 当前已发布的手动入口投影。
@@ -42,13 +46,8 @@ namespace BDP.Core.Trigger.Runtime
             return new TriggerPresentationState
             {
                 ProjectionVersion = projectionVersion,
-                InfoProjection = new ExpressionInfoProjection
-                {
-                    Lines = new List<string>(),
-                    Entries = new List<ExpressionInfoProjectionEntry>(),
-                    ContractDiagnostics = new List<ExpressionContractDiagnosticEntry>(),
-                    ChipDefinitionDiagnostics = new List<ChipDefinitionDiagnosticEntry>()
-                },
+                ChipInformations = new List<ChipInformationModel>(),
+                ComboFeatureInformations = new Dictionary<string, ChipFeatureResolutionResult>(),
                 ManualProjection = new ManualEntryProjection
                 {
                     Groups = new List<ManualEntryProjectionGroup>()

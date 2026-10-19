@@ -31,12 +31,14 @@ namespace BDP.Content.Assembly.ChipManufacturing.Bill
         /// <summary>读取当前账单持有的组合记录副本，防止外部改写任务身份。</summary>
         public ChipCombinationRecord CombinationRecord => combinationRecord?.Clone();
 
-        /// <summary>只有当前组合有效且原版有限账单仍需执行时才允许工作。</summary>
+        /// <summary>组合有效且研究已开放时执行原版账单；保留的旧配置不能绕过制造研究。</summary>
         public override bool ShouldDoNow()
         {
             ChipCombinationResolution resolution =
                 new ChipCombinationResolver().Resolve(combinationRecord);
             return resolution.Status == ChipCombinationResolutionStatus.Valid
+                && ChipManufacturingResearch.IsUnlocked(resolution)
+                && recipe.AvailableNow
                 && base.ShouldDoNow();
         }
 

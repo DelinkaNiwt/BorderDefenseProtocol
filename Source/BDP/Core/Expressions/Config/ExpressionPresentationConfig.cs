@@ -31,6 +31,12 @@ namespace BDP.Core.Expressions
         public string CompositeVisualPresetDefName;
 
         /// <summary>
+        /// 当前条目作为组合技攻击入口时，在预热、射击和冷却阶段使用的视觉预设 DefName。
+        /// 留空表示组合技攻击阶段继续沿用现有视觉关系。
+        /// </summary>
+        public string ComboAttackVisualPresetDefName;
+
+        /// <summary>
         /// 当前条目是否强制压制宿主原装备贴图。
         /// 这是作者声明的静态表现意图，不是运行时执行态。
         /// </summary>

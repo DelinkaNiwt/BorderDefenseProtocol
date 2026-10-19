@@ -49,8 +49,8 @@ namespace BDP.Core.CombatBody
                 case CombatBodyPhase.Inactive:
                     command.defaultLabel = "BDP_Command_CombatBody_Activate".Translate();
                     command.defaultDesc = "BDP_Command_CombatBody_ActivateDesc".Translate();
-                    command.action = () => commands.TryActivate();
-                    if (!reader.CanActivate())
+                    command.action = () => commands.TryActivateManually();
+                    if (!reader.CanManualActivate())
                     {
                         command.Disable("BDP_Command_CombatBody_TransformLocked".Translate());
                     }

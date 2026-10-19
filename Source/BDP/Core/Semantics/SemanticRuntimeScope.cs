@@ -26,14 +26,10 @@ namespace BDP.Core.Semantics
         /// <summary>
         /// 进入一段新的攻击语义作用域。
         /// 离开 using 块时会自动弹出。
+        /// 空值也必须压栈：独立嵌套伤害要屏蔽外层来源，不能继续继承。
         /// </summary>
         public static IDisposable Push(ISemanticContext semanticContext)
         {
-            if (semanticContext == null)
-            {
-                return NoopScope.Instance;
-            }
-
             if (stack == null)
             {
                 stack = new Stack<ScopeFrame>();
@@ -131,23 +127,5 @@ namespace BDP.Core.Semantics
             }
         }
 
-        /// <summary>
-        /// 空作用域。
-        /// 没有语义时也能统一用 `using` 写法。
-        /// </summary>
-        private sealed class NoopScope : IDisposable
-        {
-            /// <summary>
-            /// 空作用域单例。
-            /// </summary>
-            public static readonly NoopScope Instance = new NoopScope();
-
-            /// <summary>
-            /// 空作用域离开时不做任何事。
-            /// </summary>
-            public void Dispose()
-            {
-            }
-        }
     }
 }

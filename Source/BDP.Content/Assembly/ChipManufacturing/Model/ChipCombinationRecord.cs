@@ -15,8 +15,8 @@ namespace BDP.Content.Assembly.ChipManufacturing.Model
         /// <summary>可空且唯一的最终职业 DefName。</summary>
         public string ProfessionDefName;
 
-        /// <summary>顺序敏感的动作预设 DefName。</summary>
-        public List<string> OrderedActionPresetDefNames = new List<string>();
+        /// <summary>顺序敏感的芯片功能模板 DefName。</summary>
+        public List<string> OrderedChipFunctionDefNames = new List<string>();
 
         /// <summary>可空的显式武装型 DefName。</summary>
         public string ArmamentFormDefName;
@@ -29,13 +29,13 @@ namespace BDP.Content.Assembly.ChipManufacturing.Model
         {
             Scribe_Values.Look(ref CategoryDefName, "categoryDefName");
             Scribe_Values.Look(ref ProfessionDefName, "professionDefName");
-            Scribe_Collections.Look(ref OrderedActionPresetDefNames, "orderedActionPresetDefNames", LookMode.Value);
+            Scribe_Collections.Look(ref OrderedChipFunctionDefNames, "orderedChipFunctionDefNames", LookMode.Value);
             Scribe_Values.Look(ref ArmamentFormDefName, "armamentFormDefName");
             Scribe_Values.Look(ref LastResolvedLabel, "lastResolvedLabel");
 
-            if (OrderedActionPresetDefNames == null)
+            if (OrderedChipFunctionDefNames == null)
             {
-                OrderedActionPresetDefNames = new List<string>();
+                OrderedChipFunctionDefNames = new List<string>();
             }
         }
 
@@ -46,8 +46,8 @@ namespace BDP.Content.Assembly.ChipManufacturing.Model
             {
                 CategoryDefName = CategoryDefName,
                 ProfessionDefName = ProfessionDefName,
-                OrderedActionPresetDefNames = OrderedActionPresetDefNames != null
-                    ? new List<string>(OrderedActionPresetDefNames)
+                OrderedChipFunctionDefNames = OrderedChipFunctionDefNames != null
+                    ? new List<string>(OrderedChipFunctionDefNames)
                     : new List<string>(),
                 ArmamentFormDefName = ArmamentFormDefName,
                 LastResolvedLabel = LastResolvedLabel
@@ -55,7 +55,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.Model
         }
 
         /// <summary>
-        /// 比较决定制造身份的字段；动作顺序敏感，最后成功标签不参与。
+        /// 比较决定制造身份的字段；芯片功能模板顺序敏感，最后成功标签不参与。
         /// </summary>
         public bool SameConfigurationAs(ChipCombinationRecord other)
         {
@@ -67,9 +67,9 @@ namespace BDP.Content.Assembly.ChipManufacturing.Model
                 return false;
             }
 
-            int count = OrderedActionPresetDefNames != null ? OrderedActionPresetDefNames.Count : 0;
-            int otherCount = other.OrderedActionPresetDefNames != null
-                ? other.OrderedActionPresetDefNames.Count
+            int count = OrderedChipFunctionDefNames != null ? OrderedChipFunctionDefNames.Count : 0;
+            int otherCount = other.OrderedChipFunctionDefNames != null
+                ? other.OrderedChipFunctionDefNames.Count
                 : 0;
             if (count != otherCount)
             {
@@ -79,8 +79,8 @@ namespace BDP.Content.Assembly.ChipManufacturing.Model
             for (int index = 0; index < count; index++)
             {
                 if (!string.Equals(
-                    OrderedActionPresetDefNames[index],
-                    other.OrderedActionPresetDefNames[index],
+                    OrderedChipFunctionDefNames[index],
+                    other.OrderedChipFunctionDefNames[index],
                     StringComparison.Ordinal))
                 {
                     return false;

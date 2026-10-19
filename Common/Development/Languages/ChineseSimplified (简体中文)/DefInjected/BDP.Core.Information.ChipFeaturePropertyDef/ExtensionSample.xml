@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <!-- Development 扩展示例的属性名称和说明。 -->
+  <BDP_Property_ExperimentalReflectionRatio.label>实验性反射比例</BDP_Property_ExperimentalReflectionRatio.label>
+  <BDP_Property_ExperimentalReflectionRatio.description>实验性屏障将受到的效果反射回攻击来源的比例。</BDP_Property_ExperimentalReflectionRatio.description>
+</LanguageData>

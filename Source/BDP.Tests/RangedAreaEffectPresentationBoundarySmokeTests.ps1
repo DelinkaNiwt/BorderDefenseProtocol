@@ -9,7 +9,7 @@ $damagePatchPath = Join-Path $PSScriptRoot '..\BDP\Patches\Patch_DamageWorker_Ex
 $areaPlan = Get-Content -LiteralPath $areaPlanPath -Raw -Encoding UTF8
 $presentation = Get-Content -LiteralPath $presentationPath -Raw -Encoding UTF8
 $bridge = Get-Content -LiteralPath $bridgePath -Raw -Encoding UTF8
-$startPatch = Get-Content -LiteralPath $startPatchPath -Raw -Encoding UTF8
+$projectile = Get-Content -LiteralPath (Join-Path $PSScriptRoot '..\BDP\Core\Projectiles\BdpProjectile.cs') -Raw -Encoding UTF8
 $damagePatch = Get-Content -LiteralPath $damagePatchPath -Raw -Encoding UTF8
 
 if ($areaPlan -notmatch 'PresentationPolicy') {
@@ -26,8 +26,14 @@ if ($bridge -notmatch 'AssignExplosionImpactContext' -or $bridge -notmatch 'GetE
     throw '爆炸语义桥没有保存逐目标命中上下文。'
 }
 
-if ($startPatch -notmatch 'doVisualEffects' -or $startPatch -notmatch 'doSoundEffects') {
-    throw '爆炸启动入口没有消费视觉和音效策略。'
+if (Test-Path -LiteralPath $startPatchPath) {
+    throw '重复爆炸启动表现补丁应已删除。'
+}
+if ($projectile -notmatch 'def.projectile.doExplosionVFX\s*&&' -or $projectile -notmatch '!presentationPolicy.SuppressVanillaVisualEffects') {
+    throw '自有爆炸参数必须同时遵守定义视觉开关和模块抑制。'
+}
+foreach ($member in @('doVisualEffects', 'doSoundEffects', 'screenShakeFactor', 'OverrideScreenShakeFactor')) {
+    if ($projectile -notmatch ('\b' + $member + '\b')) { throw "自有爆炸参数缺少表现决策：$member" }
 }
 
 if ($damagePatch -notmatch 'ExecuteAreaEffects' -or $damagePatch -notmatch 'ExplosionDamageThing') {

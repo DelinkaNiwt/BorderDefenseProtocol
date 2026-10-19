@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- Trion 中继核心；由皇室绑定资格和独立储量共同维持运行。 -->
+  <ThingDef ParentName="BuildingBase">
+    <!-- 建筑唯一 Def 名称。 -->
+    <defName>BDP_TrionFacility</defName>
+    <!-- 建造或制造须满足所有研究；不影响现有装备使用。 -->
+    <researchPrerequisites><li>BDP_Research_TrionTheory</li></researchPrerequisites>
+
+    <!-- 建筑运行类。 -->
+    <thingClass>BDP.Content.Trion.Facility.Building_TrionFacility</thingClass>
+
+    <!-- 默认中文名称与说明；语言包提供正式本地化覆盖。 -->
+    <label>Trion中继核心</label>
+    <description>本地图的 Trion 中继核心。需要绑定一名正式加入殖民地的皇室成员，并具有资源储量才能运行，为本地图提供 Trion 恢复与设施运行许可。绑定者失去意识时暂停运行，外出不影响运行；解绑保留储量。补充门槛只限制继续补充，已经入账的超额储量不会丢失。</description>
+
+    <!-- 基础建筑身份与绘制。 -->
+    <category>Building</category>
+    <!-- 建造菜单分类；与现有 Trion 检测仪保持一致。 -->
+    <designationCategory>Biotech</designationCategory>
+    <selectable>true</selectable>
+    <!-- 复用运输容器内容页，分列显示本批供物的待搬与已搬实物。 -->
+    <inspectorTabs>
+      <li>BDP.Content.Trion.Facility.Sacrifice.ITab_TrionFacilitySacrifice</li>
+    </inspectorTabs>
+    <drawerType>MapMeshOnly</drawerType>
+    <altitudeLayer>Building</altitudeLayer>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <tickerType>Normal</tickerType>
+    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+    <repairEffect>Repair</repairEffect>
+    <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+    <filthLeaving>Filth_RubbleBuilding</filthLeaving>
+
+    <!-- 实际占地与视觉绘制边界严格一致，均为 7×7。 -->
+    <size>(7,7)</size>
+    <rotatable>false</rotatable>
+    <passability>Impassable</passability>
+    <fillPercent>1</fillPercent>
+    <pathCost>80</pathCost>
+    <canOverlapZones>false</canOverlapZones>
+    <hasInteractionCell>true</hasInteractionCell>
+    <interactionCellOffset>(0,0,-4)</interactionCellOffset>
+
+    <!-- 临时复用原版飞船反应堆贴图，只借用视觉，不继承反应堆组件。 -->
+    <graphicData>
+      <texPath>Things/Building/Ship/ShipReactor</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(7,7)</drawSize>
+      <shadowData>
+        <!-- 阴影范围与建筑视觉边界保持一致。 -->
+        <volume>(6.5,0.6,6.5)</volume>
+      </shadowData>
+    </graphicData>
+    <castEdgeShadows>true</castEdgeShadows>
+
+    <!-- 地标建筑基础属性；最终平衡数值另行调整。 -->
+    <statBases>
+      <MaxHitPoints>1200</MaxHitPoints>
+      <WorkToBuild>16000</WorkToBuild>
+      <Mass>180</Mass>
+      <Flammability>0</Flammability>
+      <Beauty>15</Beauty>
+    </statBases>
+
+    <!-- 建造材料；不代表建筑运行时消耗。 -->
+    <costList>
+      <!-- 分析保留的实体核心用于建造；研究资格由原版独立保存。 -->
+      <BDP_TrionDriveCore>1</BDP_TrionDriveCore>
+      <Steel>425</Steel>
+      <ComponentIndustrial>10</ComponentIndustrial>
+      <Plasteel>25</Plasteel>
+    </costList>
+
+    <!-- 原版指定建材完整返还：拆除与被摧毁都返还建造所用的1颗驱动核心；其它建材沿原版比例回收。 -->
+    <building>
+      <forcedCostLeavings>
+        <li>BDP_TrionDriveCore</li>
+      </forcedCostLeavings>
+    </building>
+
+    <!-- 挂载资源、皇室归属及现有升级状态组件，不挂电力、开关或设施连接组件。 -->
+    <comps>
+      <!-- 运作时使用原版小范围发光；是否点亮由建筑的 IThingGlower 状态决定。 -->
+      <li Class="CompProperties_Glower">
+        <!-- Trion 中继核心提供小范围冷色照明。 -->
+        <glowRadius>4.9</glowRadius>
+        <!-- 青蓝色光照；alpha 沿用原版光照 Def 的约定。 -->
+        <glowColor>(0,218,255,0)</glowColor>
+      </li>
+      <li Class="BDP.Content.Trion.Facility.CompProperties_TrionFacilityResource">
+        <!-- 补充门槛；献祭业务最多允许最后一件供物完整溢出，已入账余额不截断。 -->
+        <maxResource>1000</maxResource>
+        <!-- 当前基础每日消耗速率；外部心情规则未来可修正。 -->
+        <baseDrainPerDay>10</baseDrainPerDay>
+        <!-- 每 250 刻统一结算资源并检测绑定者；各核心错开检查时点。 -->
+        <settleInterval>250</settleInterval>
+      </li>
+      <!-- 皇室归属与契约者权限只在本建筑内部处理，不侵入原版人物系统。 -->
+      <li Class="BDP.Content.Trion.Facility.CompProperties_TrionFacilityControl">
+        <!-- 正式皇室身份与具体人物契约的定义来源。 -->
+        <royalGene>BDP_Gene_RoyalBloodline</royalGene>
+        <contractHediff>BDP_Hediff_RoyalContract</contractHediff>
+      </li>
+      <li Class="BDP.Content.Trion.Facility.CompProperties_TrionFacilityUpgrade" />
+      <!-- 仅用原版运输容器的装载和存档机制；最后献祭仍要求已选皇室或契约者执行。 -->
+      <li Class="BDP.Content.Trion.Facility.Sacrifice.CompProperties_TrionFacilitySacrifice" />
+    </comps>
+  </ThingDef>
+
+</Defs>

@@ -30,7 +30,8 @@ namespace BDP.Core.Genes
         public override string ExplanationPart(StatRequest req)
         {
             Pawn pawn = req.Thing as Pawn;
-            if (!TrionGlandEligibility.HasActiveTrionGland(pawn))
+            if (!TrionGlandEligibility.HasActiveTrionGland(pawn)
+                || !TrionResourceRuleRegistry.GetRules(pawn).CapacityInfoVisible)
             {
                 return null;
             }

@@ -1,0 +1,53 @@
+{
+  "sourceFileCount": 78,
+  "auditRows": 119,
+  "sourceClassRows": 103,
+  "manualTargetRows": 16,
+  "filesMissingFromReport": [],
+  "metadataPatchTypes": 101,
+  "metadataNotCovered": [],
+  "sourceRowsUnavailableInMetadata": [
+    "Patch_PathFinderMapData_ParameterizeGridJob_FloatingFlight",
+    "Patch_PathFinder_MakeDestination_FloatingFlight"
+  ],
+  "sourceClassMarkerMissing": [
+    "BDP.Content.Assembly.ChipManufacturing.Patches.Patch_WorkGiver_DoBill_ChipUnfinishedThing"
+  ],
+  "metadataErrors": [
+    {
+      "assembly": "BDP.Content",
+      "unloadedTypes": 2,
+      "messages": [
+        "接口中的非抽象、非 .cctor 方法。"
+      ]
+    },
+    {
+      "type": "BDP.Content.FloatingFlight.Patches.Patch_PathFinderMapData_ParameterizeGridJob_FloatingFlight",
+      "error": "接口中的非抽象、非 .cctor 方法。"
+    },
+    {
+      "type": "BDP.Content.FloatingFlight.Patches.Patch_PathFinder_MakeDestination_FloatingFlight",
+      "error": "接口中的非抽象、非 .cctor 方法。"
+    }
+  ],
+  "coveredDeclarationFiles": 78,
+  "helperImplementationFiles": [
+    "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabRuntime.cs"
+  ],
+  "findingCountBeforeDeduplication": 15,
+  "duplicateFindingMapping": {
+    "MS04": "CORE-002"
+  },
+  "distinctFindings": 14,
+  "uniquePrimaryImplementationFiles": 78,
+  "moduleRows": {
+    "Core": 42,
+    "Content": 51,
+    "Development": 10,
+    "CompatibilityManualTargets": 16
+  },
+  "xmlOperations": 4,
+  "startupDefinitionChanges": 7,
+  "baselineCommit": "79326c6b",
+  "productionFilesModified": false
+}

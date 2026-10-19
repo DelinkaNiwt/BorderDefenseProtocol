@@ -16,7 +16,11 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Impact
         /// 该方法不建立唯一目标集合，也不按 TargetThing（目标对象）去重。
         /// 调用者每调用一次，就代表生产者产生了一次目标判定。
         /// </remarks>
-        public static bool Dispatch(AttackTargetEvent targetEvent)
+        /// <param name="targetEvent">待派发的攻击目标事件。</param>
+        /// <param name="executionTiming">本次只执行指定时序的额外效果。</param>
+        public static bool Dispatch(
+            AttackTargetEvent targetEvent,
+            ExtraEffectExecutionTiming executionTiming = ExtraEffectExecutionTiming.AfterDamage)
         {
             if (targetEvent == null
                 || targetEvent.TargetThing == null
@@ -29,7 +33,9 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Impact
             for (int index = 0; index < targetEvent.ExtraEffects.Count; index++)
             {
                 ExtraEffectPlan effectPlan = targetEvent.ExtraEffects[index];
-                if (effectPlan == null || !Matches(effectPlan.TargetScope, targetEvent))
+                if (effectPlan == null
+                    || effectPlan.ExecutionTiming != executionTiming
+                    || !Matches(effectPlan.TargetScope, targetEvent))
                 {
                     continue;
                 }
@@ -37,11 +43,18 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Impact
                 ExtraEffectPlan targetPlan = effectPlan.CloneForTarget(
                     targetEvent.TargetThing,
                     targetEvent.TargetCell);
+                if (targetPlan.PartTargetMode == ExtraEffectPartTargetMode.ImpactPart)
+                {
+                    targetPlan.HitPart = targetEvent.Source == AttackTargetEventSource.DirectImpact
+                        ? targetEvent.HitPart : null;
+                }
                 executed |= ExtraEffectPlanExecutorRegistry.TryExecute(
                     targetPlan,
                     new ExtraEffectExecutionContext
                     {
                         TargetThing = targetEvent.TargetThing,
+                        HitPart = targetPlan.HitPart,
+                        BattleLogEntry = targetEvent.BattleLogEntry,
                         TargetCell = targetEvent.TargetCell,
                         Map = targetEvent.Map ?? targetEvent.TargetThing.Map,
                         Instigator = targetEvent.Instigator,

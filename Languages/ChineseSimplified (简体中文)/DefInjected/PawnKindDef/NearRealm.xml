@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 近界宙域基础袭击角色名称。 -->
+  <BDP_NearRealm_Combatant.label>近界民战斗员</BDP_NearRealm_Combatant.label>
+  <!-- 皇室任务追兵使用的角色名称。 -->
+  <BDP_NearRealm_Scout.label>近界民斥候</BDP_NearRealm_Scout.label>
+</LanguageData>

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BDP.Core.Information;
 using BDP.Core.Requirements;
 
 namespace BDP.Core.Combos
@@ -10,20 +11,26 @@ namespace BDP.Core.Combos
     internal sealed class ComboDefinitionConfig
     {
         /// <summary>
-        /// 组合技第一来源动作预设的 DefName。
+        /// 组合技第一来源芯片功能模板的 DefName。
         /// </summary>
-        public string firstSourceActionDefName;
+        public string firstSourceKey;
 
         /// <summary>
-        /// 组合技第二来源动作预设的 DefName。
+        /// 组合技第二来源芯片功能模板的 DefName。
         /// </summary>
-        public string secondSourceActionDefName;
+        public string secondSourceKey;
 
         /// <summary>第一来源项的可选成品身份准入规则。</summary>
         public ComboSourceAdmissionConfig FirstSourceAdmission;
 
         /// <summary>第二来源项的可选成品身份准入规则。</summary>
         public ComboSourceAdmissionConfig SecondSourceAdmission;
+
+        /// <summary>第一来源项的可选运行时形态与姿态范围。</summary>
+        public ComboSourceScopeConfig FirstSourceScope;
+
+        /// <summary>第二来源项的可选运行时形态与姿态范围。</summary>
+        public ComboSourceScopeConfig SecondSourceScope;
 
         /// <summary>
         /// 使用整个组合技前必须满足的有序角色条件镜像。
@@ -34,6 +41,12 @@ namespace BDP.Core.Combos
         /// 组合技表达声明块。
         /// </summary>
         public ComboExpressionConfig Expression;
+
+        /// <summary>
+        /// 组合技最终结果自己的功能语义声明。
+        /// 它不等于两枚来源芯片信息的简单拼接。
+        /// </summary>
+        public List<ChipFeatureDeclaration> Features;
 
         /// <summary>
         /// 是否要求第一、第二来源项使用同一来源变体。

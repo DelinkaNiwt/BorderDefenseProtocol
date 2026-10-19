@@ -32,14 +32,14 @@ $extensionText = Get-Utf8Text (Join-Path $resolutionRoot "ChipExtensionMergeRegi
 $armamentFormText = Get-Utf8Text (Join-Path $resolutionRoot "ChipArmamentFormApplicationService.cs")
 
 Assert-True ($resolverText -match 'ChipCombinationResolution\s+Resolve\s*\(ChipCombinationRecord\s+record\)') "解析器必须公开唯一 Resolve(record) 主入口。"
-Assert-True ($resolverText -match 'MissingSource') "来源缺失必须独立返回 MissingSource。"
+Assert-True ($resolverText -notmatch 'ChipCombinationResolutionStatus\.MissingSource') "解析器不得再暴露来源缺失独立状态。"
 Assert-True ($resolverText -match 'LastResolvedLabel') "成功解析必须回写最后成功名称。"
 Assert-True ($resolverText -match 'Invalid') "来源齐全但规则不满足时必须返回 Invalid。"
 Assert-True ($resolverText -match 'string\.Join\s*\(\s*"/"') "双动作成品名称必须使用无空格斜线连接动作名称。"
 Assert-True ($resolverText -match 'BDP_ChipManufacturing_ProductLabel') "组合解析器必须通过语言键生成完整触发器芯片名称。"
-Assert-True ($resolverText -match 'BDP_ChipManufacturing_ProductLabelWithArmamentForm') "有可见武装型时组合解析器必须通过独立语言键追加方括号型名。"
+Assert-True ($resolverText -match 'BDP_ChipManufacturing_ProductLabelWithArmamentForm') "有可见武装构型时组合解析器必须通过独立语言键追加构型名。"
 Assert-True ($languageText -match '<BDP_ChipManufacturing_ProductLabel>触发器芯片:\{0\}</BDP_ChipManufacturing_ProductLabel>') "语言包缺少英文冒号无武装型成品名称规范。"
-Assert-True ($languageText -match '<BDP_ChipManufacturing_ProductLabelWithArmamentForm>触发器芯片:\{0\}\[\{1\}型\]</BDP_ChipManufacturing_ProductLabelWithArmamentForm>') "语言包缺少英文冒号带方括号武装型名称规范。"
+Assert-True ($languageText -match '<BDP_ChipManufacturing_ProductLabelWithArmamentForm>触发器芯片:\{0\}·\{1\}构型</BDP_ChipManufacturing_ProductLabelWithArmamentForm>') "语言包缺少英文冒号与间隔点武装构型名称规范。"
 Assert-True ($resolverText -notmatch 'label\s*\+\s*" / "') "成品名称不得保留带空格的旧动作分隔格式。"
 
 Assert-True ($compatibilityText -match 'SlotRegion') "双动作必须检查槽位区域。"
@@ -61,7 +61,7 @@ Assert-True ($requirementText -match 'SkillLevelRequirement') "条件注册表�
 Assert-True ($requirementText -match 'Math\.Max') "同类条件门槛必须取大值。"
 Assert-True ($extensionText -match 'rules\.Count\s*==\s*0|Rules\.Count\s*==\s*0') "空扩展注册表必须明确拒绝双动作扩展。"
 
-Assert-True ($expressionText -match 'DefaultModeKey\s*=\s*firstAction\.defName') "动作顺序一必须成为默认形态。"
+Assert-True ($expressionText -match 'DefaultModeKey\s*=\s*firstFunction\.defName') "芯片功能模板顺序一必须成为默认形态。"
 Assert-True ($expressionText -match 'UseCost') "表达合并必须保留各形态自己的使用消耗。"
 Assert-True ($expressionText -match 'MinimumRequired') "表达合并必须保留各形态自己的最低需求。"
 Assert-True ($armamentFormText -match 'Apply') "武装型覆盖必须集中在单一应用服务。"
@@ -180,17 +180,17 @@ $sourceMode = [Activator]::CreateInstance($modeType)
 $sourceMode.ModeKey = "source_mode"
 $sourceMode.ActiveEntryIds = New-TypedList ([string]) @("entry_a")
 $configA.Expression.Modes = New-TypedList $modeType @($sourceMode)
-$actionA = New-ReflectedInstance $contentAssembly "BDP.Content.Assembly.ChipManufacturing.Defs.ChipActionPresetDef"
-$actionA.defName = "ActionA"
-$actionA.label = "动作甲"
-$actionA.config = $configA
-$actionB = New-ReflectedInstance $contentAssembly "BDP.Content.Assembly.ChipManufacturing.Defs.ChipActionPresetDef"
-$actionB.defName = "ActionB"
-$actionB.label = "动作乙"
-$actionB.config = $configB
+$functionA = New-ReflectedInstance $contentAssembly "BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef"
+$functionA.defName = "FunctionA"
+$functionA.label = "功能甲"
+$functionA.config = $configA
+$functionB = New-ReflectedInstance $contentAssembly "BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef"
+$functionB.defName = "FunctionB"
+$functionB.label = "功能乙"
+$functionB.config = $configB
 
 $mergeType = $contentAssembly.GetType("BDP.Content.Assembly.ChipManufacturing.Resolution.ChipConfigurationMergeService", $true)
-$merged = $mergeType.GetMethod("MergeDual").Invoke($null, @($actionA, $actionB))
+$merged = $mergeType.GetMethod("MergeDual").Invoke($null, @($functionA, $functionB))
 Assert-Equal $merged.Trion.CapacityCost 30 "容量消耗应相加。"
 Assert-Equal $merged.Trion.ActivationCost 12 "激活消耗应相加。"
 Assert-Equal $merged.Loadout.ActivationDelayTicks 60 "激活延迟应取大值。"
@@ -202,13 +202,13 @@ Assert-Equal $merged.Loadout.ActivationExclusionGroups.Count 2 "激活排斥组�
 Assert-Equal $merged.ActivationRequirements.Count 2 "Trion 与技能条件应分别保留。"
 Assert-Equal $merged.ActivationRequirements[0].Minimum 4 "同类 Trion 条件应取大值。"
 Assert-Equal $merged.ActivationRequirements[1].MinimumLevel 10 "同技能条件应取大值。"
-Assert-Equal $merged.Expression.DefaultModeKey "ActionA" "动作顺序一应成为默认形态。"
-Assert-Equal $merged.Expression.Modes.Count 2 "双动作应生成两个形态。"
+Assert-Equal $merged.Expression.DefaultModeKey "FunctionA" "芯片功能模板顺序一应成为默认形态。"
+Assert-Equal $merged.Expression.Modes.Count 2 "双芯片功能模板应生成两个形态。"
 Assert-Equal $merged.Expression.Entries[0].Trion.UseCost 3 "形态一使用消耗应独立保留。"
 Assert-Equal $merged.Expression.Entries[2].Trion.UseCost 7 "形态二使用消耗应独立保留。"
 Assert-Equal $merged.Expression.Entries[0].Trion.MinimumRequired 5 "形态一最低需求应独立保留。"
 Assert-Equal $merged.Expression.Entries[2].Trion.MinimumRequired 9 "形态二最低需求应独立保留。"
-Assert-Equal $merged.Expression.Modes[0].ActiveEntryIds.Count 1 "原动作单形态的启用条目范围必须保留。"
+Assert-Equal $merged.Expression.Modes[0].ActiveEntryIds.Count 1 "原芯片功能模板单形态的启用条目范围必须保留。"
 Assert-Equal $merged.Expression.Modes[0].ActiveEntryIds[0] "mfg_0_entry_a" "形态条目 Id 必须同步增加前缀。"
 Assert-Equal $merged.Expression.Entries[1].ParentEntryId "mfg_0_entry_a" "父子条目引用必须同步增加前缀。"
 
@@ -218,19 +218,19 @@ $shooter = [Activator]::CreateInstance($professionType)
 $shooter.defName = "BDP_ChipProfession_Shooter"
 $gunner = [Activator]::CreateInstance($professionType)
 $gunner.defName = "BDP_ChipProfession_Gunner"
-$gunner.acceptedActionProfessions = New-TypedList $professionType @($shooter)
-$actionA.profession = $shooter
-$actionB.profession = $shooter
-$actionType = $actionA.GetType()
-$actions = New-TypedList $actionType @($actionA, $actionB)
+$gunner.acceptedSourceProfessions = New-TypedList $professionType @($shooter)
+$functionA.profession = $shooter
+$functionB.profession = $shooter
+$functionType = $functionA.GetType()
+$functions = New-TypedList $functionType @($functionA, $functionB)
 $formType = $contentAssembly.GetType("BDP.Content.Assembly.ChipManufacturing.Defs.ChipArmamentFormDef", $true)
 $gunForm = New-ReflectedInstance $contentAssembly "BDP.Content.Assembly.ChipManufacturing.Defs.ChipArmamentFormDef"
-$gunForm.maxActionCount = 2
+$gunForm.maxFunctionCount = 2
 $gunForm.compatibleProfessions = New-TypedList $professionType @($gunner)
 $compatibilityType = $contentAssembly.GetType("BDP.Content.Assembly.ChipManufacturing.Resolution.ChipCombinationCompatibilityService", $true)
 
 $configB.Loadout.SlotRegion = [Enum]::Parse($configB.Loadout.GetType().GetField("SlotRegion").FieldType, "Special")
-$slotFailures = $compatibilityType.GetMethod("Validate").Invoke($null, @($category, $gunner, $actions, $gunForm))
+$slotFailures = $compatibilityType.GetMethod("Validate").Invoke($null, @($category, $gunner, $functions, $gunForm))
 Assert-True (($slotFailures | Where-Object { $_.Code -eq "SlotRegionMismatch" }).Count -eq 1) "槽位区域不同时必须返回稳定非法原因。"
 $configB.Loadout.SlotRegion = [Enum]::Parse($configB.Loadout.GetType().GetField("SlotRegion").FieldType, "MainSub")
 
@@ -238,20 +238,20 @@ $secondSourceMode = [Activator]::CreateInstance($modeType)
 $secondSourceMode.ModeKey = "source_mode_2"
 $secondSourceMode.ActiveEntryIds = New-TypedList ([string]) @("entry_b")
 $configB.Expression.Modes = New-TypedList $modeType @($sourceMode, $secondSourceMode)
-$modeFailures = $compatibilityType.GetMethod("Validate").Invoke($null, @($category, $gunner, $actions, $gunForm))
-Assert-True (($modeFailures | Where-Object { $_.Code -eq "IntrinsicMultiMode" }).Count -eq 1) "预设自身多形态参与双动作时必须返回稳定非法原因。"
+$modeFailures = $compatibilityType.GetMethod("Validate").Invoke($null, @($category, $gunner, $functions, $gunForm))
+Assert-True (($modeFailures | Where-Object { $_.Code -eq "IntrinsicMultiMode" }).Count -eq 1) "芯片功能模板自身多形态参与双模板时必须返回稳定非法原因。"
 
-# 未知 DefName 只应进入 MissingSource（来源缺失），不能被误判为 Invalid（非法组合）。
+# 未知 DefName 必须按当前无法成立的芯片组合进入 Invalid（非法组合）。
 $record = New-ReflectedInstance $contentAssembly "BDP.Content.Assembly.ChipManufacturing.Model.ChipCombinationRecord"
 $record.CategoryDefName = "BDP_Test_MissingCategory"
-$record.OrderedActionPresetDefNames.Add("BDP_Test_MissingAction")
+$record.OrderedChipFunctionDefNames.Add("BDP_Test_MissingFunction")
 $resolver = New-ReflectedInstance $contentAssembly "BDP.Content.Assembly.ChipManufacturing.Resolution.ChipCombinationResolver"
 $resolution = $resolver.Resolve($record)
-Assert-Equal $resolution.Status.ToString() "MissingSource" "来源 Def 不存在时必须返回 MissingSource。"
+Assert-Equal $resolution.Status.ToString() "Invalid" "来源 Def 不存在时必须返回 Invalid。"
 
 # 记录自身缺少必要键时不可伪装成可恢复的来源缺失。
 $malformedRecord = New-ReflectedInstance $contentAssembly "BDP.Content.Assembly.ChipManufacturing.Model.ChipCombinationRecord"
 $malformedResolution = $resolver.Resolve($malformedRecord)
-Assert-Equal $malformedResolution.Status.ToString() "Invalid" "空分类或空动作记录必须返回 Invalid。"
+Assert-Equal $malformedResolution.Status.ToString() "Invalid" "空分类或空功能记录必须返回 Invalid。"
 
-Write-Host "PASS: 组合解析器区分来源缺失与非法组合，并按既定规则合成配置、形态、条件和武装型。"
+Write-Host "PASS: 组合解析器将当前无法成立的来源与非法组合统一判为 Invalid，并按既定规则合成配置、形态、条件和武装型。"

@@ -9,6 +9,7 @@ namespace BDP.Content.CombatBody.Transform
     /// 战斗体低开销扫描 Mote。
     /// 每帧互补裁切形态切换前后的完整人物快照，并叠加一条白色核心光与青绿色柔光。
     /// </summary>
+    [StaticConstructorOnStartup]
     public sealed class Mote_CombatBodyScan : MoteAttached
     {
         /// <summary>

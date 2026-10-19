@@ -5,12 +5,41 @@
   <packageId>Niwt.BDP</packageId>
   <supportedVersions>
     <li>1.6</li>
+    <li>1.7</li>
   </supportedVersions>
-  <description>《境界触发者》核心机制的 RimWorld 模组二次重构工程。一个正式模组包内含严格单向依赖的 Core（核心）与 Content（内容）两个程序集；具体内容只在逐项确认后迁入。</description>
+  <!-- 面向玩家的简介；About.xml 不支持语言包，文案直接写在此处。 -->
+  <description>以《境界触发者》（World Trigger）为蓝本的战斗模组。
+
+· 触发体：可装配芯片的特殊武器，分主侧、副侧、特殊槽位，自由组合射击、近战、机动与防御芯片
+· Trion：由 Trion 腺体基因决定的战斗能量，驱动一切触发器功能
+· 战斗体：启动后以 Trion 躯体作战，受损耗尽会被迫解除，可紧急脱离
+· 组合技：特定芯片组合解锁合成招式，如旋空弧月
+· 黑触发器：由英雄牺牲凝结而成的独一无二的触发器，需要适格者才能使用
+· 生产链：芯片制造、触发体装配、Trion 检测与操作员控制台
+
+当前为开发测试版，内容与平衡仍在调整中。
+需要：Harmony、Biotech、Royalty
+
+A World Trigger–inspired combat mod: chip-based trigger weapons, Trion energy, combat bodies and black triggers. (Chinese only for now)</description>
+  <!-- 前置依赖：Harmony 提供运行时补丁；Biotech、Royalty 为官方 DLC。 -->
   <modDependencies>
+    <li>
+      <packageId>brrainz.harmony</packageId>
+      <displayName>Harmony</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+      <downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+    </li>
     <li>
       <packageId>Ludeon.RimWorld.Biotech</packageId>
       <displayName>Biotech</displayName>
     </li>
+    <li>
+      <packageId>Ludeon.RimWorld.Royalty</packageId>
+      <displayName>Royalty</displayName>
+    </li>
   </modDependencies>
+  <!-- 加载顺序：确保 Harmony 先于本模组加载。 -->
+  <loadAfter>
+    <li>brrainz.harmony</li>
+  </loadAfter>
 </ModMetaData>

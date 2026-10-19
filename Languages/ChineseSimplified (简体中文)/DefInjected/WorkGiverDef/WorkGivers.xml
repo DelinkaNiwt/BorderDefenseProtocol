@@ -7,4 +7,8 @@
 
   <!-- 芯片仓工作类型。 -->
   <BDP_HaulToChipStorage.label>搬运芯片到芯片仓</BDP_HaulToChipStorage.label>
+  <!-- 操作员控制台手动值守工作。 -->
+  <BDP_OperateOperatorConsole.label>操作员控制台值守</BDP_OperateOperatorConsole.label>
+  <BDP_OperateOperatorConsole.verb>值守</BDP_OperateOperatorConsole.verb>
+  <BDP_OperateOperatorConsole.gerund>操作员控制台值守</BDP_OperateOperatorConsole.gerund>
 </LanguageData>

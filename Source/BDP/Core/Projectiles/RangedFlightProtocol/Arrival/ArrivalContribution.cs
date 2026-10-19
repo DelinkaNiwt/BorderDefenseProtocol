@@ -18,12 +18,13 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Arrival
         public RangedStageStopRequest Stop { get; } = new RangedStageStopRequest();
 
         /// <summary>
-        /// 当前局部贡献是否显式接管“本段之后是否继续飞行”的裁定。
-        /// 为 `false` 时，宿主继续沿用聚合前的默认结论。
+        /// 本贡献合并后独占下一段导航，后序模块仍可附加非导航信息。
         /// </summary>
+        public bool ExclusiveFlightControl { get; set; }
+
+        /// <summary>是否显式接管继续飞行裁定。</summary>
         public bool HasOverrideContinueFlight { get; set; }
 
-        /// <summary>
         /// <summary>
         /// 当前局部贡献给出的“本段之后继续飞行”结论。
         /// 只有 `HasOverrideContinueFlight（已接管继续飞行裁定）` 为 `true` 时它才生效。
@@ -31,13 +32,11 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Arrival
         public bool OverrideContinueFlight { get; set; }
 
         /// <summary>
-        /// <summary>
         /// 当前局部贡献是否显式接管下一段目的地。
         /// 这里的“目的地”只表达几何落点，不直接表达命中语义。
         /// </summary>
         public bool HasNextDestination { get; set; }
 
-        /// <summary>
         /// <summary>
         /// 当前局部贡献给出的下一段目的地。
         /// 它服务后续飞行路径推进，不等同于正式语义目标。
@@ -45,13 +44,11 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Arrival
         public Vector3 NextDestination { get; set; }
 
         /// <summary>
-        /// <summary>
         /// 当前局部贡献是否显式接管下一段正式目标。
         /// 这里的目标是后续阶段消费的目标位，不负责回写整次攻击的最终确认。
         /// </summary>
         public bool HasNextTarget { get; set; }
 
-        /// <summary>
         /// <summary>
         /// 当前局部贡献给出的下一段正式目标。
         /// 它通常和 `NextDestination（下一段目的地）` 配套，但两者仍保持分离，避免把导航与语义混成一值。
@@ -59,12 +56,12 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Arrival
         public LocalTargetInfo NextTarget { get; set; }
 
         /// <summary>
-        /// 褰撳墠灞€閮ㄨ础鐚槸鍚︽樉寮忔帴绠′笅涓€娈?vanilla 鍛戒腑缁戝畾鐩爣銆?
+        /// 下一段原版命中绑定目标。
         /// </summary>
         public bool HasNextBindingTarget { get; set; }
 
         /// <summary>
-        /// 褰撳墠灞€閮ㄨ础鐚粰鍑虹殑涓嬩竴娈?vanilla 鍛戒腑缁戝畾鐩爣銆?
+        /// 下一段原版命中绑定目标。
         /// </summary>
         public LocalTargetInfo NextBindingTarget { get; set; }
 

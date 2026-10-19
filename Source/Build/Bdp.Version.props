@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- 必须由调用者显式指定 RimWorldVersion；此处不推断或默认选择游戏版本。 -->
+  <PropertyGroup>
+    <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
+    <Platform Condition="'$(Platform)' == ''">AnyCPU</Platform>
+    <BaseIntermediateOutputPath>obj\$(RimWorldVersion)\</BaseIntermediateOutputPath>
+    <IntermediateOutputPath>$(BaseIntermediateOutputPath)$(Configuration)\</IntermediateOutputPath>
+    <MSBuildProjectExtensionsPath>$(MSBuildProjectDirectory)\$(BaseIntermediateOutputPath)</MSBuildProjectExtensionsPath>
+    <BdpVersionRoot>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\..\$(RimWorldVersion)'))</BdpVersionRoot>
+    <BdpCommonRoot>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\..\Common'))</BdpCommonRoot>
+  </PropertyGroup>
+
+  <!-- 本机路径不入库；两个版本分别配置，缺失时由构建检查明确阻止。 -->
+  <Import Project="$(MSBuildThisFileDirectory)Bdp.Local.props" Condition="Exists('$(MSBuildThisFileDirectory)Bdp.Local.props')" />
+  <PropertyGroup Condition="'$(RimWorldVersion)' == '1.6'">
+    <RimWorldReferenceDir>$(RimWorld16ReferenceDir)</RimWorldReferenceDir>
+    <HarmonyReferencePath>$(Harmony16AssemblyPath)</HarmonyReferencePath>
+    <BdpVersionDefine>BDP_RIMWORLD_1_6</BdpVersionDefine>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(RimWorldVersion)' == '1.7'">
+    <RimWorldReferenceDir>$(RimWorld17ReferenceDir)</RimWorldReferenceDir>
+    <HarmonyReferencePath>$(Harmony17AssemblyPath)</HarmonyReferencePath>
+    <BdpVersionDefine>BDP_RIMWORLD_1_7</BdpVersionDefine>
+    <TargetFramework>net10.0</TargetFramework>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <GenerateDependencyFile>false</GenerateDependencyFile>
+  </PropertyGroup>
+
+  <!-- 游戏和补丁库由对应版本的游戏负责加载，绝不复制到模组输出目录。 -->
+  <ItemGroup>
+    <!-- 本版本真实游戏核心程序集。 -->
+    <Reference Include="Assembly-CSharp">
+      <HintPath>$(RimWorldReferenceDir)\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <!-- 本版本对应的运行时补丁库。 -->
+    <Reference Include="0Harmony">
+      <HintPath>$(HarmonyReferencePath)</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <!-- 1.7 的 Unity 兼容接口来自新引擎程序集，不借用 1.6 的 Unity 模块。 -->
+  <ItemGroup Condition="'$(RimWorldVersion)' == '1.7'">
+    <!-- 原 Unity 数据类型的兼容声明。 -->
+    <Reference Include="UnityStubs">
+      <HintPath>$(RimWorldReferenceDir)\UnityStubs.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <!-- 新引擎提供的 Unity 接口兼容实现。 -->
+    <Reference Include="Waylith.UnityCompat">
+      <HintPath>$(RimWorldReferenceDir)\Waylith.UnityCompat.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <!-- 兼容接口所需的新引擎类型。 -->
+    <Reference Include="Waylith">
+      <HintPath>$(RimWorldReferenceDir)\Waylith.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+</Project>

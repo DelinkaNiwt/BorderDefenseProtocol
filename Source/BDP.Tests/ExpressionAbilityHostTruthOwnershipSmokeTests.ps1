@@ -38,6 +38,12 @@ Assert-True (
 ) 'Ability synchronizer must identify expression-owned ability shells by their formal host shell markers.'
 
 Assert-True (
+    ($abilitySynchronizerText -match 'EnsureAbilityVerbBinding') -and
+    ($abilitySynchronizerText -match 'EnsureAbilityVerbBinding\(existing\)') -and
+    ($abilitySynchronizerText -match 'EnsureAbilityVerbBinding\(added\)')
+) 'Ability synchronizer must restore the Ability reference after a saved Verb is replaced during load.'
+
+Assert-True (
     ($abilitySynchronizerText -match 'RemoveInactiveAbilities\(\s*Pawn pawn,\s*HashSet<string> currentDefNames,\s*HashSet<string> ownedDefNames,\s*HashSet<string> addedDefNames\s*\)') -and
     ($abilitySynchronizerText -match 'foreach\s*\(string defName in ownedDefNames\)')
 ) 'Ability synchronizer must revoke stale ability hosts from the owned-def set, not only from AddedAbilityDefsByPawn.'

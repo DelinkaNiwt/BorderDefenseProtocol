@@ -9,6 +9,7 @@ using Verse.AI;
 namespace BDP.Content.Assembly.ChipManufacturing.Patches
 {
     /// <summary>让同地图任意合格角色续作相同组合的芯片半成品。</summary>
+    [HarmonyPatch]
     public static class Patch_WorkGiver_DoBill_ChipUnfinishedThing
     {
         /// <summary>只替换芯片账单的最近半成品查找；普通账单回退原版。</summary>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 护城盾开发验证能力：十次储备，每十秒逐次恢复，批量目标由原版作业保存。 -->
+  <AbilityDef>
+    <defName>BDP_Ability_CastleShield</defName>
+    <!-- 玩家名称和说明由开发语言包注入。 -->
+    <label>BDP_Ability_CastleShield</label>
+    <abilityClass>BDP.Core.Abilities.BdpBatchAbility</abilityClass>
+    <gizmoClass>BDP.Core.Abilities.Command_BdpBatchAbility</gizmoClass>
+    <iconPath>Things/Trigger/Chip/BDP_TriggerChip</iconPath>
+    <!-- 恢复计时不会阻止剩余次数继续使用，不另加释放冷却。 -->
+    <charges>10</charges>
+    <cooldownPerCharge>true</cooldownPerCharge>
+    <cooldownTicksRange>600</cooldownTicksRange>
+    <!-- 开发样例也沿原版只在征召时显示战斗操作按钮。 -->
+    <displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+    <canUseAoeToGetTargets>false</canUseAoeToGetTargets>
+    <aiCanUse>false</aiCanUse>
+    <hostile>false</hostile>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+    <targetRequired>true</targetRequired>
+    <!-- 两端完整合法即可确认，中间不合法格跳过，只对实际生成格结算。 -->
+    <modExtensions>
+      <li Class="BDP.Core.Abilities.BdpBatchTargetingExtension">
+        <skipInvalidInteriorTargets>true</skipInvalidInteriorTargets>
+      </li>
+    </modExtensions>
+    <verbProperties>
+      <!-- 每次拖拽仅执行一次动作，前摇一秒；两端检查十五格距离和视线。 -->
+      <verbClass>BDP.Core.Abilities.BdpVerb_CastBatchAbility</verbClass>
+      <violent>false</violent>
+      <onlyManualCast>true</onlyManualCast>
+      <warmupTime>1</warmupTime>
+      <defaultCooldownTime>0</defaultCooldownTime>
+      <burstShotCount>1</burstShotCount>
+      <range>15</range>
+      <requireLineOfSight>true</requireLineOfSight>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>false</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetItems>false</canTargetItems>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <!-- 关闭只禁止使用，角色的原版能力对象继续更新与存档。 -->
+      <li Class="BDP.Core.Abilities.CompProperties_AbilityEffect_BdpExpressionLifecycle">
+        <retainWhenInactive>true</retainWhenInactive>
+      </li>
+      <!-- 每格单价唯一来自芯片表达结果，不在能力定义重复填写。 -->
+      <li Class="BDP.Core.Abilities.CompProperties_AbilityEffect_BdpTrionCost" />
+      <!-- 只生成原版玻璃钢墙，暂不设计正式专用墙体。 -->
+      <li Class="BDP.Content.Abilities.CompProperties_AbilityEffect_BatchBuildingSpawn">
+        <buildingDef>Wall</buildingDef>
+        <stuffDef>Plasteel</stuffDef>
+      </li>
+      <!-- 建筑全部生成后逐格播放原版升壁尘土，一批只播放一次升壁音效与震屏。 -->
+      <li Class="BDP.Development.Abilities.CompProperties_CastleShieldPresentation">
+        <sound MayRequire="ludeon.rimworld.royalty">PsycastWallraise</sound>
+        <screenShakeIntensity>1</screenShakeIntensity>
+      </li>
+    </comps>
+  </AbilityDef>
+</Defs>

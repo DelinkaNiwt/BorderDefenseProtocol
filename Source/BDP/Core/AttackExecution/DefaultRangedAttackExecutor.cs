@@ -77,7 +77,7 @@ namespace BDP.Core.AttackExecution
                 && request.Request.Pawn != null
                 && request.Request.Target.IsValid
                 && request.Result != null
-                && request.Result.ResultKind == ExpressionResultKind.Verb
+                && request.Result.OutputChannel == ExpressionOutputChannel.Verb
                 && request.Result.WeaponMode == WeaponExpressionMode.Ranged;
         }
 

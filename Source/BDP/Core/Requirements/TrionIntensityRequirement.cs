@@ -23,7 +23,8 @@ namespace BDP.Core.Requirements
         {
             return PawnRequirementSnapshot.Description(
                 Label,
-                "BDP_Requirement_TrionIntensityMinimum".Translate(FormatMinimum()));
+                "BDP_Requirement_TrionIntensityMinimum".Translate(FormatMinimum()),
+                FormatMinimum());
         }
 
         /// <summary>释放力门槛必须是有限正整数。</summary>

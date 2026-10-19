@@ -34,6 +34,8 @@ Assert-True ($bindingText -match 'ExposeData') 'Wound Trion binding must save ac
 Assert-True ($bindingText -match 'RestoreAfterLoad') 'Wound Trion binding must republish active wound drains after load.'
 Assert-True ($bindingText -match 'GetActiveHediffLoadIds') 'Wound Trion binding must expose active drain ids for spray rebuild.'
 Assert-True ($bindingText -match 'RegisterDrain') 'Restore must republish saved wound drains to Trion.'
-Assert-True ($bindingText -match 'FindWoundByLoadId') 'Wound Trion binding must match saved drain records back to live Hediff load IDs.'
+Assert-True ($bindingText -match 'FindRepresentativeWound') '每个保存部位必须选择一个仍存在的伤口用于表现。'
+$recordText = Get-Content -LiteralPath (Join-Path $repoRoot 'Source/BDP/Core/CombatBody/Wounds/CombatBodyWoundDrain.cs') -Raw -Encoding utf8
+Assert-True ($recordText -match 'Scribe_References\.Look\(ref wound' -and $recordText -match 'Scribe_Values\.Look\(ref drainPerSecond' -and $recordText -match 'Scribe_Values\.Look\(ref expiryTick') '存档必须保存原版最终伤口引用、登记速率和绝对期限。'
 
 Write-Output 'CombatBodyWoundTrionPersistenceSmokeTests PASS'

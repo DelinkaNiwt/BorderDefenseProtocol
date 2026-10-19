@@ -6,7 +6,7 @@ $ErrorActionPreference = "Stop"
 $modRoot = Get-BdpModRoot
 $coreRoot = Join-Path $modRoot "Source\BDP\Core"
 $contentRoot = Join-Path $modRoot "Source\BDP.Content"
-$presetPath = Join-Path $modRoot "1.6\Content\Defs\ChipActionPresetDef\Presets.xml"
+$presetPath = Join-Path $modRoot "1.6\Content\Defs\ChipManufacturingPresetDef\Presets.xml"
 
 $configPath = Join-Path $coreRoot "Chips\Config\ChipActivationAudioConfig.cs"
 $contractPath = Join-Path $coreRoot "Chips\Contract\ChipActivationAudioContract.cs"
@@ -44,6 +44,9 @@ $coordinatorText = Get-Utf8Text $coordinatorPath
 $integrityText = Get-Utf8Text $integrityPath
 $contextText = Get-Utf8Text $contextPath
 $presetText = Get-Utf8Text $presetPath
+$chameleonMatch = [regex]::Match(
+    $presetText,
+    '(?s)<BDP\.Content\.Assembly\.ChipManufacturing\.Defs\.ChipManufacturingPresetDef>\s*<defName>BDP_ChipFunction_Chameleon</defName>.*?</BDP\.Content\.Assembly\.ChipManufacturing\.Defs\.ChipManufacturingPresetDef>')
 
 Assert-True ($loadoutConfigText -match 'ChipActivationAudioConfig\s+ActivationAudio') '装载配置必须承载可选激活音效块。'
 Assert-True ($loadoutContractText -match 'ChipActivationAudioContract\s+ActivationAudio') '装载契约必须承载激活音效结果。'
@@ -73,9 +76,8 @@ Assert-True ($coordinatorText -match 'SyncActivationAudioForRuntimeTick') '运�
 Assert-True ($integrityText -match 'NotifyActivationAudioCommitted') '正式激活提交路径必须触发完成音效。'
 Assert-True ($contextText -match 'ActivationAudio') 'Trigger 上下文或运行时读取链必须能取得音效声明。'
 
-Assert-True ($presetText -match '<ActivationWarmupStartSound>Power_OnSmall</ActivationWarmupStartSound>') '变色龙必须配置不依赖 DLC 的开始音效。'
-Assert-True ($presetText -match '<ActivationWarmupLoopSound>GasReleasing</ActivationWarmupLoopSound>') '变色龙必须配置不依赖 DLC 的持续音效。'
-Assert-True ($presetText -match '<ActivationWarmupEndSound>Power_OffSmall</ActivationWarmupEndSound>') '变色龙必须配置不依赖 DLC 的完成音效。'
+Assert-True $chameleonMatch.Success '变色龙芯片定义必须存在，才能验证芯片激活音效已经迁移。'
+Assert-True ($chameleonMatch.Value -notmatch '<ActivationAudio>') '变色龙不得在芯片激活阶段播放原有音效。'
 Assert-True ($controllerText -notmatch 'Psycast|Royalty') 'BDP Core 激活音效设施不得依赖皇权灵能实现。'
 
 Write-Host 'PASS: 芯片激活音效配置传播与生命周期边界已固定。'

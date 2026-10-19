@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 动态芯片名称、说明与表达标签。 -->
+  <BDP_ChipFunction_CastleShield>护城盾</BDP_ChipFunction_CastleShield>
+  <BDP_ChipFunction_CastleShield_Description>开发验证用防护芯片，主副槽单格。启用占用五十触力能容量并消耗十五触力能，启用延迟一秒、关闭延迟半秒。在十五格内拖出直线，起终点须合法且视线通畅；准备一秒后生成原版玻璃钢墙，中间不能建墙的格子跳过，只按实际生成格数消耗次数及每格二十触力能。上限十次，每十秒逐次补回一次，关闭继续恢复。没有持续消耗，测试墙按原版规则保留。</BDP_ChipFunction_CastleShield_Description>
+  <BDP_Expression_CastleShield>护城盾</BDP_Expression_CastleShield>
+  <!-- 原版开发菜单与生成提示。 -->
+  <BDP_Dev_CastleShield_Menu>护城盾验证</BDP_Dev_CastleShield_Menu>
+  <BDP_Dev_CastleShield_Spawn>生成一枚护城盾芯片</BDP_Dev_CastleShield_Spawn>
+  <BDP_Dev_CastleShield_Validate>验证已加载的护城盾配置</BDP_Dev_CastleShield_Validate>
+  <BDP_Dev_CastleShield_Output>输出选中人物的护城盾状态</BDP_Dev_CastleShield_Output>
+  <!-- 只读格子对照工具，避免把射程、视线或原版建造拒绝都猜成有草。 -->
+  <BDP_Dev_CastleShield_PlacementTool>点击格子对照原版建墙判定</BDP_Dev_CastleShield_PlacementTool>
+  <BDP_Dev_CastleShield_PlacementReport>[护城盾格子对照] 位置={0}；原版建造={1}；建筑效果={2}；能力目标（含射程、视线和组件门槛）={3}；当前格实体={4}</BDP_Dev_CastleShield_PlacementReport>
+  <BDP_Dev_CastleShield_PlacementAllowed>允许</BDP_Dev_CastleShield_PlacementAllowed>
+  <BDP_Dev_CastleShield_PlacementDenied>拒绝：{0}</BDP_Dev_CastleShield_PlacementDenied>
+  <BDP_Dev_CastleShield_PlacementRejected>拒绝</BDP_Dev_CastleShield_PlacementRejected>
+  <BDP_Dev_CastleShield_NoOccupants>无</BDP_Dev_CastleShield_NoOccupants>
+  <BDP_Dev_CastleShield_Observe>开关护城盾状态观测</BDP_Dev_CastleShield_Observe>
+  <BDP_Dev_CastleShield_SelectPawn>请先选择地图上的一名人物。</BDP_Dev_CastleShield_SelectPawn>
+  <BDP_Dev_CastleShield_CreateFailed>护城盾芯片创建失败，诊断代码：{0}</BDP_Dev_CastleShield_CreateFailed>
+  <BDP_Dev_CastleShield_PlaceFailed>附近没有位置放置护城盾芯片。</BDP_Dev_CastleShield_PlaceFailed>
+  <BDP_Dev_CastleShield_Created>已生成护城盾芯片，请按普通流程装入可配置触发体。</BDP_Dev_CastleShield_Created>
+  <!-- 开关与只读状态日志。 -->
+  <BDP_Dev_CastleShield_ObserveOn>护城盾状态观测已开启，仅在选中人物的能力状态变化时输出。</BDP_Dev_CastleShield_ObserveOn>
+  <BDP_Dev_CastleShield_ObserveOff>护城盾状态观测已关闭。</BDP_Dev_CastleShield_ObserveOff>
+  <BDP_Dev_CastleShield_Header>[护城盾验证] 人物={0}，标识={1}，游戏刻={2}</BDP_Dev_CastleShield_Header>
+  <BDP_Dev_CastleShield_Resource>触力能总量={0}，可用={1}，锁定={2}，预占={3}；功能费用规则={4}</BDP_Dev_CastleShield_Resource>
+  <BDP_Dev_CastleShield_CostsOn>实际支付</BDP_Dev_CastleShield_CostsOn>
+  <BDP_Dev_CastleShield_CostsOff>当前身份免耗</BDP_Dev_CastleShield_CostsOff>
+  <BDP_Dev_CastleShield_NoAbility>尚未获得护城盾能力；请检查芯片是否装载、启用并完成正式表达发布。</BDP_Dev_CastleShield_NoAbility>
+  <BDP_Dev_CastleShield_Ability>能力对象={0}，来源={1}，充能={2}/{3}，下次恢复剩余秒数={4}，在途候选格数={5}，最近施放游戏刻={6}</BDP_Dev_CastleShield_Ability>
+  <BDP_Dev_CastleShield_SourceOn>有效</BDP_Dev_CastleShield_SourceOn>
+  <BDP_Dev_CastleShield_SourceOff>停用／无资格</BDP_Dev_CastleShield_SourceOff>
+  <BDP_Dev_CastleShield_Walls>当前地图原版玻璃钢墙总数={0}（包含已有墙，验证时比较前后差值）</BDP_Dev_CastleShield_Walls>
+  <!-- 实际加载后的定义验证结果。 -->
+  <BDP_Dev_CastleShield_ConfigValid>[护城盾验证] 已加载配置检查通过；这不代表游戏内施放已实测。</BDP_Dev_CastleShield_ConfigValid>
+  <BDP_Dev_CastleShield_ConfigInvalid>[护城盾验证] 已加载配置检查未通过：
+{0}</BDP_Dev_CastleShield_ConfigInvalid>
+  <BDP_Dev_CastleShield_InvalidAbility>能力类型、次数、恢复、射程、视线或施放时序不符合测试规则。</BDP_Dev_CastleShield_InvalidAbility>
+  <BDP_Dev_CastleShield_InvalidBuilding>生成物应是一格原版墙，材料应为兼容的原版玻璃钢。</BDP_Dev_CastleShield_InvalidBuilding>
+  <BDP_Dev_CastleShield_InvalidComponents>能力缺少来源保留、触力能成本或升壁尘土组件。</BDP_Dev_CastleShield_InvalidComponents>
+  <BDP_Dev_CastleShield_InvalidFunction>芯片功能的制造入口、分类、槽位、开关／容量费用或能力单价引用不符合测试规则。</BDP_Dev_CastleShield_InvalidFunction>
+</LanguageData>

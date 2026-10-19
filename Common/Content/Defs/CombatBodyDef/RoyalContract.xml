@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 契约是永久人物关系，不随原身快照回滚；仅追加本业务排除项。 -->
+  <BDP.Core.CombatBody.CombatBodySnapshotConfigDef>
+    <defName>BDP_RoyalContractCombatBodySnapshotConfig</defName>
+    <excludedHediffs>
+      <li>BDP_Hediff_RoyalContract</li>
+    </excludedHediffs>
+  </BDP.Core.CombatBody.CombatBodySnapshotConfigDef>
+</Defs>

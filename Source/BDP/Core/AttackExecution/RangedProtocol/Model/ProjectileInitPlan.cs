@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using BDP.Core.Projectiles.RangedFlightProtocol.Model;
 using BDP.Core.Projectiles.Interaction;
+using BDP.Core.Projectiles.Visual;
 using BDP.Core.Semantics;
 using UnityEngine;
 using Verse;
@@ -83,6 +84,16 @@ namespace BDP.Core.AttackExecution.RangedProtocol.Model
         public float OriginSpreadForwardMax { get; set; }
 
         /// <summary>
+        /// 当前 projectile 是否显式携带已解析的发射点散布偏移。
+        /// </summary>
+        public bool HasOriginSpreadOffsetOverride { get; set; }
+
+        /// <summary>
+        /// 已解析的发射点散布偏移；宿主消费后不再重复随机。
+        /// </summary>
+        public Vector3 OriginSpreadOffsetOverrideWorld { get; set; }
+
+        /// <summary>
         /// 当前 projectile 是否显式声明绝对发射原点覆盖。
         /// 只有显式覆盖时，宿主才绕过原版实时 DrawPos 取点。
         /// </summary>
@@ -146,6 +157,28 @@ namespace BDP.Core.AttackExecution.RangedProtocol.Model
         public ProjectileAccuracySnapshot AccuracySnapshot { get; set; }
 
         /// <summary>
+        /// 当前投射物最终进攻段的起点格。
+        /// 该字段来自轨迹，不引入射击者语义；无路线时由发射入口回退到实际发射源格。
+        /// </summary>
+        public bool HasFinalApproachStartCell { get; set; }
+
+        /// <summary>
+        /// 当前投射物最终进攻段的起点格。
+        /// </summary>
+        public IntVec3 FinalApproachStartCell { get; set; } = IntVec3.Invalid;
+
+        /// <summary>
+        /// 当前投射物按最终进攻段生成的终端掩体事实。
+        /// </summary>
+        public TrajectoryCoverSnapshot TrajectoryCover { get; set; } = new TrajectoryCoverSnapshot();
+
+        /// <summary>
+        /// 当前投射物在正式发射时冻结的首发分支与后续路线事实。
+        /// 后半段不得根据 HitFlags 或名义目标重新猜测该结果。
+        /// </summary>
+        public ProjectileLaunchResolution LaunchResolution { get; set; } = new ProjectileLaunchResolution();
+
+        /// <summary>
         /// 当前 projectile 继承的命中倍率真值。
         /// 宿主发射裁决只消费它，不再回头重算 Aim 阶段概率。
         /// </summary>
@@ -185,8 +218,11 @@ namespace BDP.Core.AttackExecution.RangedProtocol.Model
         public float AccuracyLong { get; set; }
 
         /// <summary>
-        /// 当前 projectile 是否显式声明首段触发比例。
+        /// 初始化是否曾由前序贡献独占导航。
         /// </summary>
+        public bool InitialExclusiveFlightControl { get; set; }
+
+        /// <summary>是否提交首段触发比例。</summary>
         public bool HasInitialSegmentTriggerRatio { get; set; }
 
         /// <summary>
@@ -210,6 +246,12 @@ namespace BDP.Core.AttackExecution.RangedProtocol.Model
         /// 这些 Def 只提供中性视觉 provider；读档后用它们重建每发独立附加件。
         /// </summary>
         public List<ThingDef> VisualAttachmentProviderDefs { get; set; } = new List<ThingDef>();
+
+        /// <summary>
+        /// 当前 projectile 携带的中性视觉轨迹参数。
+        /// 不存在时沿用原版绘制位置。
+        /// </summary>
+        public ProjectileVisualTrajectoryProfile VisualTrajectoryProfile { get; set; }
 
         /// <summary>
         /// 当前 projectile 是否携带拖尾颜色覆盖。
@@ -276,6 +318,8 @@ namespace BDP.Core.AttackExecution.RangedProtocol.Model
             float originSpreadLateralMax = OriginSpreadLateralMax;
             float originSpreadForwardMin = OriginSpreadForwardMin;
             float originSpreadForwardMax = OriginSpreadForwardMax;
+            bool hasOriginSpreadOffsetOverride = HasOriginSpreadOffsetOverride;
+            Vector3 originSpreadOffsetOverrideWorld = OriginSpreadOffsetOverrideWorld;
             bool hasAbsoluteOriginWorld = HasAbsoluteOriginWorld;
             Vector3 absoluteOriginWorld = AbsoluteOriginWorld;
             LocalTargetInfo launchTarget = LaunchTarget;
@@ -287,6 +331,10 @@ namespace BDP.Core.AttackExecution.RangedProtocol.Model
             float initialStoppingPowerFactor = InitialStoppingPowerFactor;
             float muzzleFlashScale = MuzzleFlashScale;
             ProjectileAccuracySnapshot accuracySnapshot = AccuracySnapshot;
+            bool hasFinalApproachStartCell = HasFinalApproachStartCell;
+            IntVec3 finalApproachStartCell = FinalApproachStartCell;
+            TrajectoryCoverSnapshot trajectoryCover = TrajectoryCover;
+            ProjectileLaunchResolution launchResolution = LaunchResolution;
             float accuracyFactor = AccuracyFactor;
             float forcedMissRadius = ForcedMissRadius;
             bool hasAccuracy = HasAccuracy;
@@ -294,6 +342,7 @@ namespace BDP.Core.AttackExecution.RangedProtocol.Model
             float accuracyShort = AccuracyShort;
             float accuracyMedium = AccuracyMedium;
             float accuracyLong = AccuracyLong;
+            bool initialExclusiveFlightControl = InitialExclusiveFlightControl;
             bool hasInitialSegmentTriggerRatio = HasInitialSegmentTriggerRatio;
             float initialSegmentTriggerRatio = InitialSegmentTriggerRatio;
             ProjectileFlightPathSnapshot initialFlightPathSnapshot = InitialFlightPathSnapshot;
@@ -301,6 +350,7 @@ namespace BDP.Core.AttackExecution.RangedProtocol.Model
             List<string> tags = Tags;
             AttackContextSnapshot attackContextSnapshot = AttackContextSnapshot;
             List<ThingDef> visualAttachmentProviderDefs = VisualAttachmentProviderDefs;
+            ProjectileVisualTrajectoryProfile visualTrajectoryProfile = VisualTrajectoryProfile;
             bool hasTrailColorOverride = HasTrailColorOverride;
             Color trailColorOverride = TrailColorOverride;
             bool hasTrailCoreOverride = HasTrailCoreOverride;
@@ -321,6 +371,8 @@ namespace BDP.Core.AttackExecution.RangedProtocol.Model
             Scribe_Values.Look(ref originSpreadLateralMax, "originSpreadLateralMax", 0f);
             Scribe_Values.Look(ref originSpreadForwardMin, "originSpreadForwardMin", 0f);
             Scribe_Values.Look(ref originSpreadForwardMax, "originSpreadForwardMax", 0f);
+            Scribe_Values.Look(ref hasOriginSpreadOffsetOverride, "hasOriginSpreadOffsetOverride", false);
+            Scribe_Values.Look(ref originSpreadOffsetOverrideWorld, "originSpreadOffsetOverrideWorld");
             Scribe_Values.Look(ref hasAbsoluteOriginWorld, "hasAbsoluteOriginWorld", false);
             Scribe_Values.Look(ref absoluteOriginWorld, "absoluteOriginWorld");
             Scribe_TargetInfo.Look(ref launchTarget, "launchTarget");
@@ -332,6 +384,10 @@ namespace BDP.Core.AttackExecution.RangedProtocol.Model
             Scribe_Values.Look(ref initialStoppingPowerFactor, "initialStoppingPowerFactor", 1f);
             Scribe_Values.Look(ref muzzleFlashScale, "muzzleFlashScale", 0f);
             Scribe_Deep.Look(ref accuracySnapshot, "accuracySnapshot");
+            Scribe_Values.Look(ref hasFinalApproachStartCell, "hasFinalApproachStartCell", false);
+            Scribe_Values.Look(ref finalApproachStartCell, "finalApproachStartCell", IntVec3.Invalid);
+            Scribe_Deep.Look(ref trajectoryCover, "trajectoryCover");
+            Scribe_Deep.Look(ref launchResolution, "launchResolution");
             Scribe_Values.Look(ref accuracyFactor, "accuracyFactor", 1f);
             Scribe_Values.Look(ref forcedMissRadius, "forcedMissRadius", 0f);
             Scribe_Values.Look(ref hasAccuracy, "hasAccuracy", false);
@@ -339,6 +395,7 @@ namespace BDP.Core.AttackExecution.RangedProtocol.Model
             Scribe_Values.Look(ref accuracyShort, "accuracyShort", 0f);
             Scribe_Values.Look(ref accuracyMedium, "accuracyMedium", 0f);
             Scribe_Values.Look(ref accuracyLong, "accuracyLong", 0f);
+            Scribe_Values.Look(ref initialExclusiveFlightControl, "initialExclusiveFlightControl", false);
             Scribe_Values.Look(ref hasInitialSegmentTriggerRatio, "hasInitialSegmentTriggerRatio", false);
             Scribe_Values.Look(ref initialSegmentTriggerRatio, "initialSegmentTriggerRatio", 0f);
             Scribe_Deep.Look(ref initialFlightPathSnapshot, "initialFlightPathSnapshot");
@@ -346,6 +403,7 @@ namespace BDP.Core.AttackExecution.RangedProtocol.Model
             Scribe_Collections.Look(ref tags, "tags", LookMode.Value);
             Scribe_Deep.Look(ref attackContextSnapshot, "attackContextSnapshot");
             Scribe_Collections.Look(ref visualAttachmentProviderDefs, "visualAttachmentProviderDefs", LookMode.Def);
+            Scribe_Deep.Look(ref visualTrajectoryProfile, "visualTrajectoryProfile");
             Scribe_Values.Look(ref hasTrailColorOverride, "hasTrailColorOverride", false);
             Scribe_Values.Look(ref trailColorOverride, "trailColorOverride", Color.white);
             Scribe_Values.Look(ref hasTrailCoreOverride, "hasTrailCoreOverride", false);
@@ -367,6 +425,8 @@ namespace BDP.Core.AttackExecution.RangedProtocol.Model
             OriginSpreadLateralMax = originSpreadLateralMax;
             OriginSpreadForwardMin = originSpreadForwardMin;
             OriginSpreadForwardMax = originSpreadForwardMax;
+            HasOriginSpreadOffsetOverride = hasOriginSpreadOffsetOverride;
+            OriginSpreadOffsetOverrideWorld = originSpreadOffsetOverrideWorld;
             HasAbsoluteOriginWorld = hasAbsoluteOriginWorld;
             AbsoluteOriginWorld = absoluteOriginWorld;
             LaunchTarget = launchTarget;
@@ -378,6 +438,10 @@ namespace BDP.Core.AttackExecution.RangedProtocol.Model
             InitialStoppingPowerFactor = initialStoppingPowerFactor;
             MuzzleFlashScale = muzzleFlashScale;
             AccuracySnapshot = accuracySnapshot;
+            HasFinalApproachStartCell = hasFinalApproachStartCell;
+            FinalApproachStartCell = finalApproachStartCell;
+            TrajectoryCover = trajectoryCover ?? new TrajectoryCoverSnapshot();
+            LaunchResolution = launchResolution ?? new ProjectileLaunchResolution();
             AccuracyFactor = accuracyFactor;
             ForcedMissRadius = forcedMissRadius;
             HasAccuracy = hasAccuracy;
@@ -385,6 +449,7 @@ namespace BDP.Core.AttackExecution.RangedProtocol.Model
             AccuracyShort = accuracyShort;
             AccuracyMedium = accuracyMedium;
             AccuracyLong = accuracyLong;
+            InitialExclusiveFlightControl = initialExclusiveFlightControl;
             HasInitialSegmentTriggerRatio = hasInitialSegmentTriggerRatio;
             InitialSegmentTriggerRatio = initialSegmentTriggerRatio;
             InitialFlightPathSnapshot = initialFlightPathSnapshot;
@@ -392,6 +457,7 @@ namespace BDP.Core.AttackExecution.RangedProtocol.Model
             Tags = tags ?? new List<string>();
             AttackContextSnapshot = attackContextSnapshot;
             VisualAttachmentProviderDefs = visualAttachmentProviderDefs ?? new List<ThingDef>();
+            VisualTrajectoryProfile = visualTrajectoryProfile;
             HasTrailColorOverride = hasTrailColorOverride;
             TrailColorOverride = trailColorOverride;
             HasTrailCoreOverride = hasTrailCoreOverride;

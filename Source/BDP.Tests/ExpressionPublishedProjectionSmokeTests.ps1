@@ -79,7 +79,11 @@ $gizmoServiceText = Get-Content -LiteralPath $gizmoServicePath -Raw -Encoding ut
 $hostSynchronizerText = Get-Content -LiteralPath $hostSynchronizerPath -Raw -Encoding utf8
 $abilitySynchronizerText = Get-Content -LiteralPath $abilitySynchronizerPath -Raw -Encoding utf8
 $hediffSynchronizerText = Get-Content -LiteralPath $hediffSynchronizerPath -Raw -Encoding utf8
-$infoProjectorText = Get-Content -LiteralPath $infoProjectorPath -Raw -Encoding utf8
+$infoProjectorText = if (Test-Path -LiteralPath $infoProjectorPath) {
+    Get-Content -LiteralPath $infoProjectorPath -Raw -Encoding utf8
+} else {
+    ''
+}
 
 Assert-True (
     Test-Path -LiteralPath $presentationStatePath
@@ -87,7 +91,7 @@ Assert-True (
 
 Assert-True (
     ($presentationStateText -match 'int\s+ProjectionVersion\s*\{') -and
-    ($presentationStateText -match 'ExpressionInfoProjection\s+InfoProjection\s*\{') -and
+    ($presentationStateText -match 'IReadOnlyList<ChipInformationModel>\s+ChipInformations\s*\{') -and
     ($presentationStateText -match 'ManualEntryProjection\s+ManualProjection\s*\{') -and
     ($presentationStateText -match 'VisualExpressionProjection\s+VisualProjection\s*\{')
 ) 'TriggerPresentationState must expose projection version, info projection, manual projection, and visual projection.'
@@ -133,7 +137,7 @@ Assert-True (
 
 Assert-True (
     ($expressionSurfaceText -notmatch 'GetSnapshot\(Pawn pawn\)\s*\{\s*return BuildSelectedSnapshot\(pawn\);') -and
-    ($expressionSurfaceText -notmatch 'GetInfoProjection\(Pawn pawn, bool includeDiagnostics = false\)\s*\{[\s\S]*infoProjector\.Build\(BuildSelectedSnapshot\(pawn\)\)') -and
+    ($expressionSurfaceText -notmatch 'GetInfoProjection\(Pawn pawn, bool includeDiagnostics = false\)') -and
     ($expressionSurfaceText -notmatch 'GetManualProjection\(Pawn pawn\)\s*\{[\s\S]*manualProjector\.Build\(BuildSelectedSnapshot\(pawn\)\)') -and
     ($expressionSurfaceText -notmatch 'GetVisualProjection\(Pawn pawn\)\s*\{[\s\S]*visualProjector\.Build\(BuildSelectedSnapshot\(pawn\)\)')
 ) 'ExpressionService default read surfaces must stop rebuilding selected snapshots on ordinary reads.'
@@ -191,13 +195,19 @@ Assert-True (
 ) 'Hediff host synchronizer must retain result-level publication trace.'
 
 Assert-True (
-    ($expressionSurfaceText -match 'PublicationSnapshot') -and
-    ($infoProjectorText -match 'PublishedKey')
-) 'Info projection pipeline must be able to carry side-band publication diagnostics.'
+    ($expressionSurfaceText -match 'BuildPublishedChipInformations') -and
+    ($expressionSurfaceText -match 'ChipInformationExpressionSnapshotAdapter')
+) 'Expression pipeline must publish the unified chip information models from formal results.'
 
 Assert-True (
-    ($abilitySynchronizerText -match 'ExpressionResultKind\.Ability') -and
-    ($hediffSynchronizerText -match 'ExpressionResultKind\.Hediff')
+    (-not (Test-Path -LiteralPath $infoProjectorPath)) -and
+    ($presentationStateText -notmatch 'ExpressionInfoProjection|InfoProjection') -and
+    ($expressionSurfaceText -notmatch 'ExpressionInfoProjection|InfoProjection|DefaultExpressionInfoProjector')
+) 'The retired expression information projection layer must be fully removed.'
+
+Assert-True (
+    ($abilitySynchronizerText -match 'ExpressionOutputChannel\.Ability') -and
+    ($hediffSynchronizerText -match 'ExpressionOutputChannel\.Hediff')
 ) 'Ability/Hediff minimal closure must stay in the published host synchronization chain rather than moving back into Trigger truth mutation.'
 
 Assert-True (
@@ -239,7 +249,7 @@ Assert-True (
     ($publishedProjectionText -match 'VerbResultsBySlotKey') -and
     ($publishedProjectionText -match 'AbilityResultsByDefName') -and
     ($publishedProjectionText -match 'HediffResultsByDefName') -and
-    ($publishedProjectionText -match 'PassiveResultsByKey') -and
+    ($publishedProjectionText -match 'PassiveResultsByIdentityKey') -and
     ($publishedProjectionText -match 'CompositeReferenceIndex')
 ) 'Public published projection snapshot must expose unified result index, four-channel grouping, and composite reference index.'
 

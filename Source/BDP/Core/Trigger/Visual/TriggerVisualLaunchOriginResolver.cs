@@ -213,32 +213,44 @@ namespace BDP.Core.Trigger.Visual
                 return false;
             }
 
-            VisualResidentEntry residentEntry = FindResidentEntry(visualProjection, sourceResultId);
+            VisualResidentEntry sourceEntry = TriggerVisualEffectiveEntryResolver.FindLaunchSourceEntry(
+                visualProjection,
+                sourceResultId);
+            VisualResidentEntry residentEntry = sourceEntry;
             if (residentEntry == null)
             {
                 resolution.VisualFailureKind = TriggerVisualLaunchOriginSourceKind.MissingResidentEntry;
                 return false;
             }
 
-            ExpressionVisualPresetDef preset = ResolvePreset(visualProjection, residentEntry);
-            if (preset == null)
+            WeaponVisualStageResolver weaponStageResolver = new WeaponVisualStageResolver();
+            WeaponVisualStageSnapshot weaponStageSnapshot = weaponStageResolver.Resolve(
+                pawn,
+                sourceEntry,
+                triggerBody.PublishedCombatProjection,
+                runtimeState);
+            if (!TriggerVisualEffectiveEntryResolver.TryResolveLaunch(
+                visualProjection,
+                sourceEntry,
+                weaponStageSnapshot,
+                out residentEntry,
+                out ExpressionVisualPresetDef preset,
+                out ExpressionVisualPresetDef graphicOverridePreset))
             {
                 resolution.VisualFailureKind = TriggerVisualLaunchOriginSourceKind.MissingVisualPreset;
                 return false;
             }
 
-            WeaponVisualStageSnapshot weaponStageSnapshot = new WeaponVisualStageResolver().Resolve(
-                pawn,
-                residentEntry,
-                triggerBody.PublishedCombatProjection,
-                runtimeState);
             VisualPoseResolver resolver = new VisualPoseResolver();
             VisualPoseRequest request = new VisualPoseRequest
             {
                 Entry = residentEntry,
                 Preset = preset,
-                GraphicOverridePreset = ResolveGraphicOverridePreset(residentEntry),
-                RuntimeState = runtimeState,
+                GraphicOverridePreset = graphicOverridePreset,
+                IsMatchingAttackStanceActive = weaponStageResolver.IsMatchingAttackStanceActive(
+                    pawn,
+                    triggerBody.PublishedCombatProjection,
+                    runtimeState),
                 WeaponStageSnapshot = weaponStageSnapshot,
                 PoseSample = sample,
                 SourceThing = ResolveSourceThing(triggerBody, residentEntry),
@@ -277,65 +289,6 @@ namespace BDP.Core.Trigger.Visual
                 ProjectionVersion = 0,
                 PoseSampleTick = 0
             };
-        }
-
-        /// <summary>
-        /// 在已发布视觉 resident 条目里按正式结果标识查找来源条目。
-        /// </summary>
-        private static VisualResidentEntry FindResidentEntry(
-            VisualExpressionProjection visualProjection,
-            string sourceResultId)
-        {
-            if (visualProjection?.ResidentEntries == null || string.IsNullOrWhiteSpace(sourceResultId))
-            {
-                return null;
-            }
-
-            for (int i = 0; i < visualProjection.ResidentEntries.Count; i++)
-            {
-                VisualResidentEntry entry = visualProjection.ResidentEntries[i];
-                if (entry != null && string.Equals(entry.ResultId, sourceResultId, System.StringComparison.Ordinal))
-                {
-                    return entry;
-                }
-            }
-
-            return null;
-        }
-
-        /// <summary>
-        /// 解析当前 resident 条目在当前视觉关系下应使用的预设。
-        /// </summary>
-        private static ExpressionVisualPresetDef ResolvePreset(
-            VisualExpressionProjection visualProjection,
-            VisualResidentEntry entry)
-        {
-            if (entry == null)
-            {
-                return null;
-            }
-
-            string presetDefName = visualProjection != null
-                && visualProjection.RelationKind != VisualExpressionRelationKind.SingleSide
-                && !string.IsNullOrWhiteSpace(entry.CompositeVisualPresetDefName)
-                    ? entry.CompositeVisualPresetDefName
-                    : entry.VisualPresetDefName;
-            return string.IsNullOrWhiteSpace(presetDefName)
-                ? null
-                : DefDatabase<ExpressionVisualPresetDef>.GetNamed(presetDefName, false);
-        }
-
-        /// <summary>
-        /// 解析当前 resident 条目的视觉图层局部覆盖预设。
-        /// </summary>
-        private static ExpressionVisualPresetDef ResolveGraphicOverridePreset(
-            VisualResidentEntry entry)
-        {
-            return entry == null || string.IsNullOrWhiteSpace(entry.VisualGraphicOverrideDefName)
-                ? null
-                : DefDatabase<ExpressionVisualPresetDef>.GetNamed(
-                    entry.VisualGraphicOverrideDefName,
-                    false);
         }
 
         /// <summary>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!-- 隐藏的生命印记耗尽记录，保证尸体移除后其它复活途径也不能重复形成。 -->
+  <RecordDef>
+    <defName>BDP_BlackTriggerLifeImprintExhausted</defName>
+    <label>生命印记已耗尽</label>
+    <!-- MarkExhausted 以整数计数器写入；不声明类型时原版默认为时间记录，AddTo 会报错。 -->
+    <type>Int</type>
+  </RecordDef>
+</Defs>

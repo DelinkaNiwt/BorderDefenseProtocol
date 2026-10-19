@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 冲锋枪单持视觉名称。 -->
+  <BDP_Visual_SubmachineGun.label>冲锋枪手持视觉</BDP_Visual_SubmachineGun.label>
+  <!-- 冲锋枪双持视觉名称。 -->
+  <BDP_Visual_SubmachineGun_Dual.label>冲锋枪双武器手持视觉</BDP_Visual_SubmachineGun_Dual.label>
+</LanguageData>

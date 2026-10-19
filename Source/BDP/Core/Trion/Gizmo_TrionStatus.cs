@@ -318,7 +318,8 @@ namespace BDP.Core.Trion
             Rect titleLabelRect = new Rect(titleRect.x, titleRect.y + 1f, Mathf.Max(0f, rightCursor - titleRect.x), titleRect.height - 1f);
 
             Text.Anchor = TextAnchor.MiddleLeft;
-            Widgets.Label(titleLabelRect, "BDP_Trion_Status_Title".Translate());
+            string ownerLabel = owner != null ? owner.LabelShortCap : string.Empty;
+            Widgets.Label(titleLabelRect, "BDP_Trion_Status_Title".Translate(ownerLabel));
 
             if (badgeAreaWidth > 0f)
             {
@@ -419,7 +420,7 @@ namespace BDP.Core.Trion
             }
 
             return "BDP_Trion_Status_Recovery".Translate(
-                reader.RecoveryPerDay.ToString("F1"));
+                reader.EffectiveRecoveryPerDay.ToString("F1"));
         }
 
         /// <summary>

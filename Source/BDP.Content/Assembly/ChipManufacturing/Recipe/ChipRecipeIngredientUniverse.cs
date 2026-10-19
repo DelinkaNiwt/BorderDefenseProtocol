@@ -41,11 +41,11 @@ namespace BDP.Content.Assembly.ChipManufacturing.Recipe
 
             List<ThingDef> universe = new List<ThingDef>();
             AppendDefs(universe, baseCosts);
-            List<ChipActionPresetDef> actions =
-                DefDatabase<ChipActionPresetDef>.AllDefsListForReading;
-            for (int index = 0; index < actions.Count; index++)
+            List<ChipManufacturingPresetDef> functionDefs =
+                DefDatabase<ChipManufacturingPresetDef>.AllDefsListForReading;
+            for (int index = 0; index < functionDefs.Count; index++)
             {
-                AppendDefs(universe, actions[index].costList);
+                AppendDefs(universe, functionDefs[index].costList);
             }
 
             List<ChipArmamentFormDef> armamentForms =

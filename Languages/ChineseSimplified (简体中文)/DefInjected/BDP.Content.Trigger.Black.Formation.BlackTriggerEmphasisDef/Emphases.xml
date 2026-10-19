@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 战斗侧重名称。 -->
+  <BDP_BlackTriggerEmphasis_Frontline.label>正面压制</BDP_BlackTriggerEmphasis_Frontline.label>
+  <BDP_BlackTriggerEmphasis_Ranged.label>远程打击</BDP_BlackTriggerEmphasis_Ranged.label>
+  <BDP_BlackTriggerEmphasis_Precision.label>精确猎杀</BDP_BlackTriggerEmphasis_Precision.label>
+  <BDP_BlackTriggerEmphasis_Mobility.label>机动突袭</BDP_BlackTriggerEmphasis_Mobility.label>
+  <BDP_BlackTriggerEmphasis_Defense.label>防护承受</BDP_BlackTriggerEmphasis_Defense.label>
+  <BDP_BlackTriggerEmphasis_Control.label>控制干扰</BDP_BlackTriggerEmphasis_Control.label>
+  <BDP_BlackTriggerEmphasis_Support.label>支援构筑</BDP_BlackTriggerEmphasis_Support.label>
+  <BDP_BlackTriggerEmphasis_Strategy.label>战略侦察</BDP_BlackTriggerEmphasis_Strategy.label>
+</LanguageData>

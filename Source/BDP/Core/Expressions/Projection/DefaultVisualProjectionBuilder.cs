@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System;
 using BDP.Core.AttackExecution;
 using BDP.Core.Trigger;
 using Verse;
@@ -16,7 +17,11 @@ namespace BDP.Core.Expressions
         /// </summary>
         public VisualExpressionProjection Build(ExpressionSnapshot snapshot)
         {
-            List<VisualResidentEntry> residentEntries = CollectResidentEntries(snapshot);
+            List<ComboAttackVisualBinding> comboAttackVisualBindings =
+                CollectComboAttackVisualBindings(snapshot);
+            List<VisualResidentEntry> residentEntries = CollectResidentEntries(
+                snapshot,
+                comboAttackVisualBindings);
             int activeWeaponChipInstanceCount = CountActiveWeaponChipInstances(snapshot);
             VisualExpressionRelationKind relationKind = ResolveRelationKind(
                 snapshot,
@@ -26,11 +31,13 @@ namespace BDP.Core.Expressions
             {
                 RelationKind = relationKind,
                 ResidentEntries = residentEntries,
+                ComboAttackVisualBindings = comboAttackVisualBindings,
                 ActiveWeaponChipInstanceCount = activeWeaponChipInstanceCount,
                 HostEquipmentRenderMode = ResolveHostEquipmentRenderMode(
                     residentEntries,
                     activeWeaponChipInstanceCount,
-                    relationKind),
+                    relationKind,
+                    comboAttackVisualBindings),
                 ExecutionFocusPolicy = ResolveExecutionFocusPolicy(residentEntries, activeWeaponChipInstanceCount),
                 MuzzleFollowPolicy = ResolveMuzzleFollowPolicy(residentEntries, activeWeaponChipInstanceCount)
             };
@@ -39,8 +46,12 @@ namespace BDP.Core.Expressions
         /// <summary>
         /// 收集当前可进入常驻视觉读取的结果条目。
         /// Resident 只保留单侧结果；Dual/Combo 的复合表象通过每条单侧结果携带的 CompositeVisualPresetDefName 解释。
+        /// 组合技专用阶段预设即使没有单侧待命预设，也要为其归属来源补一个阶段绘制候选；
+        /// 该候选在 Idle（待命）阶段不会自行产生绘制。
         /// </summary>
-        private static List<VisualResidentEntry> CollectResidentEntries(ExpressionSnapshot snapshot)
+        private static List<VisualResidentEntry> CollectResidentEntries(
+            ExpressionSnapshot snapshot,
+            IReadOnlyList<ComboAttackVisualBinding> comboAttackVisualBindings)
         {
             List<VisualResidentEntry> result = new List<VisualResidentEntry>();
             if (snapshot?.Results == null)
@@ -87,8 +98,103 @@ namespace BDP.Core.Expressions
                 });
             }
 
+            AddComboAttackVisualOwnerEntries(
+                snapshot,
+                result,
+                comboAttackVisualBindings);
             result.Sort(CompareResidentEntries);
             return result;
+        }
+
+        /// <summary>
+        /// 为只有组合技阶段视觉预设的来源结果补充一个最小常驻条目。
+        /// 它只负责让阶段绘制链找到来源；待命阶段因没有普通视觉预设仍会自然跳过。
+        /// </summary>
+        private static void AddComboAttackVisualOwnerEntries(
+            ExpressionSnapshot snapshot,
+            List<VisualResidentEntry> residentEntries,
+            IReadOnlyList<ComboAttackVisualBinding> comboAttackVisualBindings)
+        {
+            if (snapshot?.Results == null
+                || residentEntries == null
+                || comboAttackVisualBindings == null
+                || comboAttackVisualBindings.Count == 0)
+            {
+                return;
+            }
+
+            HashSet<string> residentResultIds = new HashSet<string>(StringComparer.Ordinal);
+            for (int index = 0; index < residentEntries.Count; index++)
+            {
+                VisualResidentEntry residentEntry = residentEntries[index];
+                if (!string.IsNullOrWhiteSpace(residentEntry?.ResultId))
+                {
+                    residentResultIds.Add(residentEntry.ResultId);
+                }
+            }
+
+            for (int bindingIndex = 0; bindingIndex < comboAttackVisualBindings.Count; bindingIndex++)
+            {
+                ComboAttackVisualBinding binding = comboAttackVisualBindings[bindingIndex];
+                if (binding == null
+                    || string.IsNullOrWhiteSpace(binding.OwnerSourceResultId)
+                    || residentResultIds.Contains(binding.OwnerSourceResultId))
+                {
+                    continue;
+                }
+
+                FormalExpressionResult ownerResult = FindResultById(
+                    snapshot.Results,
+                    binding.OwnerSourceResultId);
+                if (ownerResult == null
+                    || ownerResult.CompositeKind != CompositeExpressionKind.None
+                    || !ownerResult.IsAvailable
+                    || !ownerResult.CanProject
+                    || ownerResult.SourceReference == null)
+                {
+                    continue;
+                }
+
+                residentEntries.Add(new VisualResidentEntry
+                {
+                    ResultId = ownerResult.Id,
+                    SourceReference = ownerResult.SourceReference,
+                    Side = ownerResult.SourceReference.Side,
+                    SlotIndex = ownerResult.SourceReference.SlotIndex,
+                    VisualPresetDefName = ownerResult.VisualPresetDefName,
+                    VisualGraphicOverrideDefName = ownerResult.VisualGraphicOverrideDefName,
+                    CompositeVisualPresetDefName = ownerResult.CompositeVisualPresetDefName,
+                    VerbAttackRole = ownerResult.VerbAttackRole,
+                    ForceSuppressHostEquipment = ownerResult.ForceSuppressHostEquipment,
+                    VisualPriority = ownerResult.VisualPriority
+                });
+                residentResultIds.Add(ownerResult.Id);
+            }
+        }
+
+        /// <summary>
+        /// 按结果标识寻找正式结果。
+        /// </summary>
+        private static FormalExpressionResult FindResultById(
+            IReadOnlyList<FormalExpressionResult> results,
+            string resultId)
+        {
+            if (results == null || string.IsNullOrWhiteSpace(resultId))
+            {
+                return null;
+            }
+
+            for (int index = 0; index < results.Count; index++)
+            {
+                FormalExpressionResult result = results[index];
+                if (result != null
+                    && string.Equals(result.Id, resultId, StringComparison.Ordinal))
+                {
+                    return result;
+                }
+            }
+
+            return null;
         }
 
         /// <summary>
@@ -161,7 +267,7 @@ namespace BDP.Core.Expressions
                 return VisualExpressionRelationKind.DualWeapon;
             }
 
-            return residentEntries != null && residentEntries.Count > 0
+            return HasNormalVisualDeclaration(residentEntries)
                 ? VisualExpressionRelationKind.SingleSide
                 : VisualExpressionRelationKind.None;
         }
@@ -193,7 +299,7 @@ namespace BDP.Core.Expressions
             {
                 FormalExpressionResult result = snapshot.Results[i];
                 if (result == null
-                    || result.ResultKind != ExpressionResultKind.Verb
+                    || result.OutputChannel != ExpressionOutputChannel.Verb
                     || result.CompositeKind != CompositeExpressionKind.None
                     || result.WeaponMode == WeaponExpressionMode.None
                     || !result.IsAvailable
@@ -220,11 +326,19 @@ namespace BDP.Core.Expressions
         private static HostEquipmentRenderMode ResolveHostEquipmentRenderMode(
             List<VisualResidentEntry> residentEntries,
             int activeWeaponChipInstanceCount,
-            VisualExpressionRelationKind relationKind)
+            VisualExpressionRelationKind relationKind,
+            IReadOnlyList<ComboAttackVisualBinding> comboAttackVisualBindings)
         {
             if (residentEntries == null || residentEntries.Count == 0)
             {
                 return HostEquipmentRenderMode.Keep;
+            }
+
+            // 组合技阶段预设必须进入完整常驻绘制入口；否则单芯片或无待命预设时，
+            // ReplaceTextureOnly（仅替换贴图）会绕过 DrawResidentEntries（常驻条目绘制）。
+            if (comboAttackVisualBindings != null && comboAttackVisualBindings.Count > 0)
+            {
+                return HostEquipmentRenderMode.Replace;
             }
 
             if (activeWeaponChipInstanceCount == 1)
@@ -244,6 +358,34 @@ namespace BDP.Core.Expressions
             }
 
             return HostEquipmentRenderMode.Replace;
+        }
+
+        /// <summary>
+        /// 判断常驻条目是否声明了待命或复合阶段的普通视觉内容。
+        /// 组合技专用阶段候选不计入这里，避免改变没有待命视觉时的关系回退。
+        /// </summary>
+        private static bool HasNormalVisualDeclaration(
+            List<VisualResidentEntry> residentEntries)
+        {
+            if (residentEntries == null)
+            {
+                return false;
+            }
+
+            for (int index = 0; index < residentEntries.Count; index++)
+            {
+                VisualResidentEntry entry = residentEntries[index];
+                if (entry != null
+                    && (!string.IsNullOrWhiteSpace(entry.VisualPresetDefName)
+                        || !string.IsNullOrWhiteSpace(entry.VisualGraphicOverrideDefName)
+                        || !string.IsNullOrWhiteSpace(entry.CompositeVisualPresetDefName)
+                        || entry.ForceSuppressHostEquipment))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -270,6 +412,96 @@ namespace BDP.Core.Expressions
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// 从正式 Combo 结果和复合来源引用构建攻击阶段视觉绑定。
+        /// 该绑定不参与待命视觉关系判断，避免单纯声明阶段视觉就改变双武器待命外观。
+        /// </summary>
+        private static List<ComboAttackVisualBinding> CollectComboAttackVisualBindings(
+            ExpressionSnapshot snapshot)
+        {
+            List<ComboAttackVisualBinding> result = new List<ComboAttackVisualBinding>();
+            if (snapshot?.Results == null || snapshot.CompositeReferences == null)
+            {
+                return result;
+            }
+
+            for (int resultIndex = 0; resultIndex < snapshot.Results.Count; resultIndex++)
+            {
+                FormalExpressionResult comboResult = snapshot.Results[resultIndex];
+                if (comboResult == null
+                    || comboResult.CompositeKind != CompositeExpressionKind.Combo
+                    || !comboResult.IsAvailable
+                    || !comboResult.CanProject
+                    || (comboResult.UseRequirementCheck != null
+                        && !comboResult.UseRequirementCheck.Satisfied)
+                    || string.IsNullOrWhiteSpace(comboResult.Id)
+                    || string.IsNullOrWhiteSpace(comboResult.ComboAttackVisualPresetDefName))
+                {
+                    continue;
+                }
+
+                CompositeExpressionReference reference = FindCompositeReference(
+                    snapshot.CompositeReferences,
+                    comboResult.Id);
+                string ownerSourceResultId = ResolveComboVisualOwnerResultId(reference);
+                if (reference == null || string.IsNullOrWhiteSpace(ownerSourceResultId))
+                {
+                    continue;
+                }
+
+                result.Add(new ComboAttackVisualBinding
+                {
+                    ComboResultId = comboResult.Id,
+                    VisualPresetDefName = comboResult.ComboAttackVisualPresetDefName,
+                    OwnerSourceResultId = ownerSourceResultId
+                });
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 按组合结果标识寻找其来源引用。
+        /// </summary>
+        private static CompositeExpressionReference FindCompositeReference(
+            IReadOnlyList<CompositeExpressionReference> references,
+            string compositeId)
+        {
+            for (int index = 0; index < references.Count; index++)
+            {
+                CompositeExpressionReference reference = references[index];
+                if (reference != null
+                    && string.Equals(reference.CompositeId, compositeId, System.StringComparison.Ordinal)
+                    && reference.CompositeKind == CompositeExpressionKind.Combo)
+                {
+                    return reference;
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// 解析组合技视觉的稳定绘制归属；优先使用主侧来源，缺失时回退来源列表首项。
+        /// </summary>
+        private static string ResolveComboVisualOwnerResultId(
+            CompositeExpressionReference reference)
+        {
+            if (reference == null)
+            {
+                return null;
+            }
+
+            if (!string.IsNullOrWhiteSpace(reference.MainSourceResultId))
+            {
+                return reference.MainSourceResultId;
+            }
+
+            return reference.SourceResultIds != null && reference.SourceResultIds.Count > 0
+                ? reference.SourceResultIds[0]
+                : null;
         }
 
         /// <summary>

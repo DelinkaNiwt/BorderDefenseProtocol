@@ -43,6 +43,20 @@ namespace BDP.Content.Assembly
         }
 
         /// <summary>
+        /// 汇总所有有效连接芯片仓的容量上限。
+        /// </summary>
+        public int GetStorageCapacityLimit()
+        {
+            int capacity = 0;
+            foreach (CompChipContainer storage in EnumerateActiveStorageComps())
+            {
+                capacity += storage.CapacityLimit;
+            }
+
+            return capacity;
+        }
+
+        /// <summary>
         /// 从持有该芯片的有效连接容器中取出芯片。
         /// </summary>
         public bool TryTakeChip(Thing chip)

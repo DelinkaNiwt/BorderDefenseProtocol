@@ -308,14 +308,14 @@ namespace BDP.Core.Expressions
         public string Label { get; set; }
 
         /// <summary>
-        /// Combo 声明的第一来源动作预设 DefName。
+        /// Combo 声明的第一来源芯片功能模板 DefName。
         /// </summary>
-        public string FirstSourceActionDefName { get; set; }
+        public string FirstSourceKey { get; set; }
 
         /// <summary>
-        /// Combo 声明的第二来源动作预设 DefName。
+        /// Combo 声明的第二来源芯片功能模板 DefName。
         /// </summary>
-        public string SecondSourceActionDefName { get; set; }
+        public string SecondSourceKey { get; set; }
 
         /// <summary>
         /// Combo 本体级 Trion 参数。
@@ -331,8 +331,8 @@ namespace BDP.Core.Expressions
             {
                 ComboDefName = ComboDefName,
                 Label = Label,
-                FirstSourceActionDefName = FirstSourceActionDefName,
-                SecondSourceActionDefName = SecondSourceActionDefName,
+                FirstSourceKey = FirstSourceKey,
+                SecondSourceKey = SecondSourceKey,
                 ChipTrion = ChipTrion != null ? ChipTrion.Clone() : null
             };
         }
@@ -351,7 +351,7 @@ namespace BDP.Core.Expressions
         /// <summary>
         /// 表达结果类别。
         /// </summary>
-        public ExpressionResultKind ResultKind { get; set; }
+        public ExpressionOutputChannel OutputChannel { get; set; }
 
         /// <summary>
         /// 表达武器模式。
@@ -382,6 +382,11 @@ namespace BDP.Core.Expressions
         /// 复合视觉预设 DefName。
         /// </summary>
         public string CompositeVisualPresetDefName { get; set; }
+
+        /// <summary>
+        /// 当前来源参与组合技攻击时使用的阶段视觉预设 DefName。
+        /// </summary>
+        public string ComboAttackVisualPresetDefName { get; set; }
 
         /// <summary>
         /// 是否强制压制宿主装备贴图。
@@ -434,9 +439,14 @@ namespace BDP.Core.Expressions
         public string HediffApplyModeKey { get; set; }
 
         /// <summary>
+        /// Hediff 生命周期控制模式。
+        /// </summary>
+        public string HediffControlMode { get; set; }
+
+        /// <summary>
         /// Passive 键。
         /// </summary>
-        public string PassiveKey { get; set; }
+        public string PassiveIdentityKey { get; set; }
 
         /// <summary>
         /// 克隆表达条目快照。
@@ -446,13 +456,14 @@ namespace BDP.Core.Expressions
             return new ExpressionEntrySnapshot
             {
                 Id = Id,
-                ResultKind = ResultKind,
+                OutputChannel = OutputChannel,
                 WeaponMode = WeaponMode,
                 DisplayLabel = DisplayLabel,
                 ManualEntryIconTexPath = ManualEntryIconTexPath,
                 VisualPresetDefName = VisualPresetDefName,
                 VisualGraphicOverrideDefName = VisualGraphicOverrideDefName,
                 CompositeVisualPresetDefName = CompositeVisualPresetDefName,
+                ComboAttackVisualPresetDefName = ComboAttackVisualPresetDefName,
                 ForceSuppressHostEquipment = ForceSuppressHostEquipment,
                 VisualPriority = VisualPriority,
                 RoleKey = RoleKey,
@@ -463,7 +474,8 @@ namespace BDP.Core.Expressions
                 AbilityDefName = AbilityDefName,
                 HediffDefName = HediffDefName,
                 HediffApplyModeKey = HediffApplyModeKey,
-                PassiveKey = PassiveKey
+                HediffControlMode = HediffControlMode,
+                PassiveIdentityKey = PassiveIdentityKey
             };
         }
     }

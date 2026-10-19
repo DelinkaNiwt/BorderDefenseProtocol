@@ -9,7 +9,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
     /// <summary>右栏对原版真实账单栈执行的集中操作。</summary>
     public static class ChipBillQueueOperations
     {
-        /// <summary>检查配置、正数量和队列容量；材料存量有意不参与。</summary>
+        /// <summary>检查配置、研究、正数量和队列容量；材料存量有意不参与。</summary>
         public static bool CanEnqueue(
             ChipCombinationResolution resolution,
             int quantity,
@@ -17,6 +17,8 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
         {
             return resolution != null
                 && resolution.Status == ChipCombinationResolutionStatus.Valid
+                && ChipManufacturingResearch.IsUnlocked(resolution)
+                && DefDatabase<RecipeDef>.GetNamedSilentFail("BDP_Recipe_ProduceChip")?.AvailableNow == true
                 && quantity > 0
                 && queueCount < BillStack.MaxCount;
         }
@@ -52,7 +54,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
         }
 
         /// <summary>在合法边界内调用原版账单栈重排。</summary>
-        public static void Move(BillStack stack, Bill_ChipProduction bill, int offset)
+        public static void Move(BillStack stack, Bill_Production bill, int offset)
         {
             if (stack == null || bill == null || offset == 0)
             {
@@ -68,7 +70,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
         }
 
         /// <summary>调用原版账单栈删除指定任务。</summary>
-        public static void Delete(BillStack stack, Bill_ChipProduction bill)
+        public static void Delete(BillStack stack, Bill_Production bill)
         {
             if (stack != null && bill != null && stack.IndexOf(bill) >= 0)
             {
@@ -77,7 +79,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
         }
 
         /// <summary>切换原版账单暂停字段。</summary>
-        public static void ToggleSuspended(Bill_ChipProduction bill)
+        public static void ToggleSuspended(Bill_Production bill)
         {
             if (bill != null)
             {
@@ -86,7 +88,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
         }
 
         /// <summary>只修改有限账单的剩余迭代次数，零表示已完成但仍保留。</summary>
-        public static void SetRemainingCount(Bill_ChipProduction bill, int count)
+        public static void SetRemainingCount(Bill_Production bill, int count)
         {
             if (bill != null && bill.repeatMode == BillRepeatModeDefOf.RepeatCount)
             {

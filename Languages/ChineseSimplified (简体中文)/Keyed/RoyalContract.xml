@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 皇室健康记录中的绑定对象。 -->
+  <BDP_RoyalContractPartner>契约对象：{0}</BDP_RoyalContractPartner>
+  <!-- 施放者资格校验。 -->
+  <BDP_RoyalContractInvalidCaster>需要已正式加入殖民地、拥有有效皇室血脉的存活人物。</BDP_RoyalContractInvalidCaster>
+  <BDP_RoyalContractAlreadyBound>已缔结皇室契约，无法再次缔约。</BDP_RoyalContractAlreadyBound>
+  <!-- 目标资格校验。 -->
+  <BDP_RoyalContractInvalidTarget>需要选择另一名已正式加入殖民地的存活殖民者。</BDP_RoyalContractInvalidTarget>
+  <BDP_RoyalContractTargetBound>目标已有皇室契约。</BDP_RoyalContractTargetBound>
+  <BDP_RoyalContractInactiveGland>目标的 Trion 腺体基因无法生效，未缔结契约。</BDP_RoyalContractInactiveGland>
+  <!-- 原版手动能力确认框，避免永久后果仅藏在说明中。 -->
+  <BDP_RoyalContractConfirm>{0}将与{1}缔结终身契约，并赋予对方 Trion 腺体基因。已有有效腺体时不重复授予。\n\n每名皇室成员一生只有一次机会。双方任何一人真正死亡，另一人也会死亡。受伤、倒地及战斗体崩解不触发。\n\n确定缔约？</BDP_RoyalContractConfirm>
+  <!-- 成功反馈。 -->
+  <BDP_RoyalContractEstablished>{0}与{1}缔结了皇室契约。</BDP_RoyalContractEstablished>
+</LanguageData>

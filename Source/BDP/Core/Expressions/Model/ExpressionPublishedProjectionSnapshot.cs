@@ -79,9 +79,9 @@ namespace BDP.Core.Expressions
         public IReadOnlyDictionary<string, IReadOnlyList<ExpressionPublishedResultSnapshot>> HediffResultsByDefName { get; internal set; }
 
         /// <summary>
-        /// 按 PassiveKey 建好的 Passive 结果索引。
+        /// 按 PassiveIdentityKey 建好的 Passive 结果索引。
         /// </summary>
-        public IReadOnlyDictionary<string, IReadOnlyList<ExpressionPublishedResultSnapshot>> PassiveResultsByKey { get; internal set; }
+        public IReadOnlyDictionary<string, IReadOnlyList<ExpressionPublishedResultSnapshot>> PassiveResultsByIdentityKey { get; internal set; }
 
         /// <summary>
         /// 按 CompositeId 建好的公开复合引用索引。
@@ -139,7 +139,7 @@ namespace BDP.Core.Expressions
                 VerbResultsBySlotKey = new Dictionary<string, IReadOnlyList<ExpressionPublishedResultSnapshot>>(),
                 AbilityResultsByDefName = new Dictionary<string, IReadOnlyList<ExpressionPublishedResultSnapshot>>(),
                 HediffResultsByDefName = new Dictionary<string, IReadOnlyList<ExpressionPublishedResultSnapshot>>(),
-                PassiveResultsByKey = new Dictionary<string, IReadOnlyList<ExpressionPublishedResultSnapshot>>(),
+                PassiveResultsByIdentityKey = new Dictionary<string, IReadOnlyList<ExpressionPublishedResultSnapshot>>(),
                 CompositeReferenceIndex = new Dictionary<string, ExpressionPublishedCompositeReference>()
             };
         }

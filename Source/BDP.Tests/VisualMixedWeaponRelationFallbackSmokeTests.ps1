@@ -30,7 +30,7 @@ function New-WeaponResult
 
     $result = [Activator]::CreateInstance($formalResultType, $true)
     Set-Property $result 'Id' $Id
-    Set-Property $result 'ResultKind' $verbResultKind
+    Set-Property $result 'OutputChannel' $verbOutputChannel
     Set-Property $result 'WeaponMode' $rangedWeaponMode
     Set-Property $result 'SourceReference' $source
     Set-Property $result 'CompositeKind' $noneCompositeKind
@@ -48,7 +48,7 @@ function New-ComboResult
 
     $result = [Activator]::CreateInstance($formalResultType, $true)
     Set-Property $result 'Id' 'combo'
-    Set-Property $result 'ResultKind' $verbResultKind
+    Set-Property $result 'OutputChannel' $verbOutputChannel
     Set-Property $result 'WeaponMode' $rangedWeaponMode
     Set-Property $result 'CompositeKind' $comboCompositeKind
     Set-Property $result 'VisualPresetDefName' $VisualPresetDefName
@@ -62,7 +62,7 @@ function New-DualWeaponResult
 {
     $result = [Activator]::CreateInstance($formalResultType, $true)
     Set-Property $result 'Id' 'dual'
-    Set-Property $result 'ResultKind' $verbResultKind
+    Set-Property $result 'OutputChannel' $verbOutputChannel
     Set-Property $result 'WeaponMode' $rangedWeaponMode
     Set-Property $result 'CompositeKind' $dualCompositeKind
     Set-Property $result 'IsAvailable' $true
@@ -94,13 +94,13 @@ $formalResultType = $coreAssembly.GetType('BDP.Core.Expressions.FormalExpression
 $sourceReferenceType = $coreAssembly.GetType('BDP.Core.Expressions.ExpressionSourceReference', $true)
 $snapshotType = $coreAssembly.GetType('BDP.Core.Expressions.ExpressionSnapshot', $true)
 $builderType = $coreAssembly.GetType('BDP.Core.Expressions.DefaultVisualProjectionBuilder', $true)
-$resultKindType = $coreAssembly.GetType('BDP.Core.Expressions.ExpressionResultKind', $true)
+$resultKindType = $coreAssembly.GetType('BDP.Core.Expressions.ExpressionOutputChannel', $true)
 $weaponModeType = $coreAssembly.GetType('BDP.Core.Expressions.WeaponExpressionMode', $true)
 $compositeKindType = $coreAssembly.GetType('BDP.Core.Expressions.CompositeExpressionKind', $true)
 $relationKindType = $coreAssembly.GetType('BDP.Core.Expressions.VisualExpressionRelationKind', $true)
 $triggerSideType = $coreAssembly.GetType('BDP.Core.Trigger.TriggerSide', $true)
 
-$verbResultKind = [Enum]::Parse($resultKindType, 'Verb')
+$verbOutputChannel = [Enum]::Parse($resultKindType, 'Verb')
 $rangedWeaponMode = [Enum]::Parse($weaponModeType, 'Ranged')
 $noneCompositeKind = [Enum]::Parse($compositeKindType, 'None')
 $dualCompositeKind = [Enum]::Parse($compositeKindType, 'DualWeapon')

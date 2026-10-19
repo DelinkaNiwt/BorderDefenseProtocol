@@ -53,6 +53,12 @@ namespace BDP.Core.AttackExecution
         public FormalExpressionResult Result { get; private set; }
 
         /// <summary>
+        /// 当前近战计划冻结的可选命中部位策略。
+        /// 每次主伤害仍会按目标当前身体重新解析具体部位。
+        /// </summary>
+        public HitPartPolicyConfig HitPartPolicy { get; private set; }
+
+        /// <summary>
         /// 当前近战结果对应的正式运行时 Verb 规格。
         /// </summary>
         public ResolvedVerbSpec ResolvedVerbSpec { get; private set; }
@@ -165,6 +171,7 @@ namespace BDP.Core.AttackExecution
                 PlanDispatchIntent = request.DispatchIntent,
                 PlanReason = request.Request.Reason,
                 Result = result,
+                HitPartPolicy = result.HitPartPolicy != null ? result.HitPartPolicy.Clone() : null,
                 ResolvedVerbSpec = result.ResolvedVerbSpec,
                 Step = step,
                 Cast = cast,

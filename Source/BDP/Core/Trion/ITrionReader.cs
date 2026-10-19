@@ -39,12 +39,18 @@ namespace BDP.Core.Trion
         float RecoveryPerDay { get; }
 
         /// <summary>
-        /// 当前聚合持续消耗总速率，单位为 Trion/秒。
+        /// 当前实际生效的每日自然恢复量。
+        /// 已统一应用冻结状态和恢复许可门控。
+        /// </summary>
+        float EffectiveRecoveryPerDay { get; }
+
+        /// <summary>
+        /// 当前规则下实际生效的聚合持续消耗总速率，单位为 Trion/秒。
         /// </summary>
         float TotalDrainPerSecond { get; }
 
         /// <summary>
-        /// 读取当前持续消耗注册表快照。
+        /// 读取当前持续消耗注册表的声明速率快照，不按免耗规则过滤。
         /// 这是只读 UI 和外部展示层允许读取的正式资料，不允许拿它改写账本。
         /// </summary>
         IReadOnlyDictionary<TrionDrainKey, float> GetDrainSnapshot();
@@ -53,6 +59,11 @@ namespace BDP.Core.Trion
         /// 当前是否冻结自然恢复。
         /// </summary>
         bool Frozen { get; }
+
+        /// <summary>
+        /// 当前容器是否已经绑定到外部 Trion 合并池。
+        /// </summary>
+        bool IsBoundToExternalPool { get; }
 
         /// <summary>
         /// 角色尚未被腺体解锁的永久潜在容量。

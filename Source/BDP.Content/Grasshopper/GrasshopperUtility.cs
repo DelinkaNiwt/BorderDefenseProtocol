@@ -2,6 +2,7 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 using Verse.AI;
+using BDP.Content.GroundDash;
 
 namespace BDP.Content.Grasshopper
 {
@@ -12,7 +13,7 @@ namespace BDP.Content.Grasshopper
     public static class GrasshopperUtility
     {
         /// <summary>
-        /// 执行蚱蜢跳跃 — 生成自定义 PawnFlyer 并发射 Pawn。
+        /// 执行蚱蜢跳跃 — 通过中性地面冲刺设施生成自定义 PawnFlyer。
         /// </summary>
         /// <param name="pawn">跳跃的 Pawn</param>
         /// <param name="targetCell">目标单元格</param>
@@ -25,34 +26,7 @@ namespace BDP.Content.Grasshopper
             VerbProperties verbProps,
             ThingDef pawnFlyerDef)
         {
-            Map map = pawn.Map;
-            IntVec3 position = pawn.Position;
-            Vector3 vector = (targetCell - position).ToVector3();
-            vector.Normalize();
-            bool flag = Find.Selector.IsSelected(pawn);
-
-            // 使用原版 PawnFlyer.MakeFlyer，传入自定义 PawnFlyer ThingDef
-            PawnFlyer pawnFlyer = PawnFlyer.MakeFlyer(
-                pawnFlyerDef,
-                pawn,
-                targetCell,
-                verbProps?.flightEffecterDef,
-                verbProps?.soundLanding,
-                verbProps?.flyWithCarriedThing ?? false,
-                null
-            );
-
-            if (pawnFlyer != null)
-            {
-                FleckMaker.ThrowDustPuff(position.ToVector3Shifted() - vector, map, 2f);
-                GenSpawn.Spawn(pawnFlyer, targetCell, map);
-                if (flag)
-                {
-                    Find.Selector.Select(pawn, playSound: false, forceDesignatorDeselect: false);
-                }
-                return true;
-            }
-            return false;
+            return GroundDashUtility.DoDash(pawn, targetCell, verbProps, pawnFlyerDef);
         }
 
         /// <summary>
@@ -82,7 +56,12 @@ namespace BDP.Content.Grasshopper
             IntVec3 cell = targ.Cell;
             if ((float)pawn.Position.DistanceToSquared(cell) <= num)
             {
-                return GenSight.LineOfSight(root, cell, pawn.Map);
+            return GroundDashUtility.CanReachRequestedCell(
+                pawn.Map,
+                root,
+                cell,
+                range)
+                && GenSight.LineOfSight(root, cell, pawn.Map);
             }
             return false;
         }
@@ -93,25 +72,7 @@ namespace BDP.Content.Grasshopper
         /// </summary>
         public static bool ValidJumpTarget(Map map, IntVec3 cell)
         {
-            if (!cell.IsValid || !cell.InBounds(map))
-            {
-                return false;
-            }
-            if (cell.Impassable(map) || !cell.Walkable(map) || cell.Fogged(map))
-            {
-                return false;
-            }
-            Building edifice = cell.GetEdifice(map);
-            // C# 7.3兼容写法：is 模式匹配不适用，用 as + null 判断
-            if (edifice != null)
-            {
-                Building_Door door = edifice as Building_Door;
-                if (door != null && !door.Open)
-                {
-                    return false;
-                }
-            }
-            return true;
+            return GroundDashUtility.IsValidDashCell(map, cell);
         }
     }
 }

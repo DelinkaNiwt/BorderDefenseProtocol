@@ -27,6 +27,18 @@ namespace BDP.Content.Projectiles.BeamTrail
         public Vector3 End;
 
         /// <summary>
+        /// 产生当前线段的投射物实体标识。
+        /// 该字段只服务绘制阶段的同源线段合并，不参与飞行与命中逻辑。
+        /// </summary>
+        public string OwnerProjectileThingId;
+
+        /// <summary>
+        /// 当前投射物拖尾线段的连续序号。
+        /// 该字段只用于在地图组件回收换位后恢复同一条拖尾的先后顺序。
+        /// </summary>
+        public int SequenceId;
+
+        /// <summary>
         /// 当前线段贴图路径。
         /// </summary>
         public string TrailTexPath;
@@ -101,6 +113,8 @@ namespace BDP.Content.Projectiles.BeamTrail
         {
             Start = NormalizePoint(start);
             End = NormalizePoint(end);
+            OwnerProjectileThingId = null;
+            SequenceId = 0;
             TrailTexPath = appearance != null ? appearance.TrailTexPath : "Things/Projectile/BDP_BeamTrail";
             TrailColor = appearance != null ? appearance.TrailColor : Color.white;
             HasTrailCore = appearance != null && appearance.HasTrailCore;
@@ -144,7 +158,20 @@ namespace BDP.Content.Projectiles.BeamTrail
         /// <param name="material">当前线段使用的材质。</param>
         public void Draw(Material material)
         {
-            DrawInternal(material, TrailWidth, TrailColor, 1f);
+            DrawInternal(material, Start, End, TrailWidth, TrailColor, ResolveOpacity(), 1f);
+        }
+
+        /// <summary>
+        /// 绘制一条只在当前帧存在的合并线段。
+        /// 合并只改变绘制几何，不改变原始线段的寿命、年龄或存档数据。
+        /// </summary>
+        /// <param name="material">当前线段使用的材质。</param>
+        /// <param name="start">合并线段起点。</param>
+        /// <param name="end">合并线段终点。</param>
+        /// <param name="opacity">合并线段使用的安全透明度。</param>
+        public void DrawTransient(Material material, Vector3 start, Vector3 end, float opacity)
+        {
+            DrawInternal(material, start, end, TrailWidth, TrailColor, opacity, 1f);
         }
 
         /// <summary>
@@ -160,8 +187,35 @@ namespace BDP.Content.Projectiles.BeamTrail
 
             DrawInternal(
                 material,
+                Start,
+                End,
                 TrailWidth * Mathf.Clamp(TrailCoreWidthRatio, 0.05f, 1f),
                 TrailCoreColor,
+                ResolveOpacity(),
+                Mathf.Clamp01(TrailCoreOpacity));
+        }
+
+        /// <summary>
+        /// 绘制一条只在当前帧存在的合并内芯线段。
+        /// </summary>
+        /// <param name="material">内芯使用的透明材质。</param>
+        /// <param name="start">合并线段起点。</param>
+        /// <param name="end">合并线段终点。</param>
+        /// <param name="opacity">合并线段使用的安全透明度。</param>
+        public void DrawCoreTransient(Material material, Vector3 start, Vector3 end, float opacity)
+        {
+            if (!HasTrailCore)
+            {
+                return;
+            }
+
+            DrawInternal(
+                material,
+                start,
+                end,
+                TrailWidth * Mathf.Clamp(TrailCoreWidthRatio, 0.05f, 1f),
+                TrailCoreColor,
+                opacity,
                 Mathf.Clamp01(TrailCoreOpacity));
         }
 
@@ -169,37 +223,47 @@ namespace BDP.Content.Projectiles.BeamTrail
         /// 使用指定外观参数完成一次线段绘制。
         /// </summary>
         /// <param name="material">当前绘制使用的材质。</param>
+        /// <param name="start">当前绘制起点。</param>
+        /// <param name="end">当前绘制终点。</param>
         /// <param name="width">当前绘制宽度。</param>
         /// <param name="color">当前绘制颜色。</param>
-        /// <param name="opacityMultiplier">当前绘制透明度倍率。</param>
-        private void DrawInternal(Material material, float width, Color color, float opacityMultiplier)
+        /// <param name="opacity">当前绘制透明度。</param>
+        /// <param name="opacityMultiplier">当前绘制额外透明度倍率。</param>
+        private void DrawInternal(
+            Material material,
+            Vector3 start,
+            Vector3 end,
+            float width,
+            Color color,
+            float opacity,
+            float opacityMultiplier)
         {
             if (material == null)
             {
                 return;
             }
 
-            float opacity = ResolveOpacity();
-            if (opacity <= 0.0001f)
+            float safeOpacity = Mathf.Clamp01(opacity);
+            if (safeOpacity <= 0.0001f)
             {
                 return;
             }
 
-            Vector3 direction = End - Start;
+            Vector3 direction = end - start;
             float length = direction.MagnitudeHorizontal();
             if (length <= 0.0001f)
             {
                 return;
             }
 
-            Vector3 midpoint = (Start + End) * 0.5f;
+            Vector3 midpoint = (start + end) * 0.5f;
             midpoint.y = AltitudeLayer.MoteOverhead.AltitudeFor() + AltitudeOffset;
 
             Quaternion rotation = Quaternion.LookRotation(direction.Yto0());
             Vector3 scale = new Vector3(Mathf.Max(0.01f, width), 1f, length);
             Matrix4x4 matrix = Matrix4x4.TRS(midpoint, rotation, scale);
 
-            Color finalColor = new Color(color.r, color.g, color.b, color.a * opacity * opacityMultiplier);
+            Color finalColor = new Color(color.r, color.g, color.b, color.a * safeOpacity * opacityMultiplier);
             propertyBlock.Clear();
             propertyBlock.SetColor("_Color", finalColor);
             Graphics.DrawMesh(MeshPool.plane10, matrix, material, 0, null, 0, propertyBlock);
@@ -212,6 +276,8 @@ namespace BDP.Content.Projectiles.BeamTrail
         {
             Scribe_Values.Look(ref Start, "start");
             Scribe_Values.Look(ref End, "end");
+            Scribe_Values.Look(ref OwnerProjectileThingId, "ownerProjectileThingId");
+            Scribe_Values.Look(ref SequenceId, "sequenceId", 0);
             Scribe_Values.Look(ref TrailTexPath, "trailTexPath");
             Scribe_Values.Look(ref TrailColor, "trailColor");
             Scribe_Values.Look(ref HasTrailCore, "hasTrailCore", false);

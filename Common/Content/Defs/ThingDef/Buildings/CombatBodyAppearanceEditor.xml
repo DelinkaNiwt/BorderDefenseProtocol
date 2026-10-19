@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 战斗体编辑台建筑定义。 -->
+  <ThingDef>
+    <!-- 建筑 Def 唯一名称。 -->
+    <defName>BDP_CombatBodyAppearanceEditor</defName>
+    <!-- 建造或制造须满足所有研究；不影响现有装备使用。 -->
+    <researchPrerequisites><li>BDP_Research_CombatBodyAppearance</li></researchPrerequisites>
+
+    <!-- 语言包提供玩家可见名称。 -->
+    <label>战斗体编辑台</label>
+
+    <!-- 语言包提供玩家可见说明。 -->
+    <description>用于保存和管理小人个人战斗体服装模板的编辑台。</description>
+
+    <!-- 原版建筑分类。 -->
+    <category>Building</category>
+
+    <!-- Content 建筑运行时类型。 -->
+    <thingClass>BDP.Content.CombatBody.Appearance.Building_CombatBodyEditor</thingClass>
+
+    <!-- 建筑可被玩家选中。 -->
+    <selectable>true</selectable>
+
+    <!-- 地图绘制类型。 -->
+    <drawerType>MapMeshOnly</drawerType>
+
+    <!-- 绘制高度层。 -->
+    <altitudeLayer>Building</altitudeLayer>
+
+    <!-- 可建造地形要求。 -->
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+
+    <!-- 受击默认音效。 -->
+    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+
+    <!-- 建筑修理效果。 -->
+    <repairEffect>Repair</repairEffect>
+
+    <!-- 建筑被摧毁时留下资源。 -->
+    <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+
+    <!-- 建筑被摧毁时留下瓦砾。 -->
+    <filthLeaving>Filth_RubbleBuilding</filthLeaving>
+
+    <!-- 建筑基础属性。 -->
+    <statBases>
+      <!-- 最大耐久。 -->
+      <MaxHitPoints>220</MaxHitPoints>
+
+      <!-- 建造工时。 -->
+      <WorkToBuild>3000</WorkToBuild>
+
+      <!-- 建筑质量。 -->
+      <Mass>35</Mass>
+
+      <!-- 建筑可燃性。 -->
+      <Flammability>0.6</Flammability>
+    </statBases>
+
+    <!-- 复用原版基因装配器贴图。 -->
+    <graphicData>
+      <!-- 原版基因装配器贴图路径。 -->
+      <texPath>Things/Building/Misc/GeneAssembler/GeneAssembler</texPath>
+
+      <!-- 多朝向建筑图形类。 -->
+      <graphicClass>Graphic_Multi</graphicClass>
+
+      <!-- 建筑绘制尺寸。 -->
+      <drawSize>(3,2)</drawSize>
+    </graphicData>
+
+    <!-- 建筑占地。 -->
+    <size>(3,2)</size>
+
+    <!-- 建筑可旋转。 -->
+    <rotatable>true</rotatable>
+
+    <!-- 编辑台交互格偏移。 -->
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+
+    <!-- 启用编辑台交互格。 -->
+    <hasInteractionCell>true</hasInteractionCell>
+
+    <!-- 交互格图标。 -->
+    <interactionCellIcon>DiningChair</interactionCellIcon>
+
+    <!-- 建筑通行性。 -->
+    <passability>PassThroughOnly</passability>
+
+    <!-- 建筑填充比例。 -->
+    <fillPercent>0.5</fillPercent>
+
+    <!-- 建筑路径代价。 -->
+    <pathCost>50</pathCost>
+
+    <!-- 绘制边缘阴影。 -->
+    <castEdgeShadows>true</castEdgeShadows>
+
+    <!-- 静态日照阴影高度。 -->
+    <staticSunShadowHeight>0.2</staticSunShadowHeight>
+
+    <!-- 放置分类。 -->
+    <designationCategory>Biotech</designationCategory>
+
+    <!-- 建造材料。 -->
+    <costList>
+      <Steel>130</Steel>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+
+    <!-- 原版建筑组件。 -->
+    <comps>
+      <!-- 原版禁止组件。 -->
+      <li Class="CompProperties_Forbiddable" />
+
+      <!-- 原版用电组件。 -->
+      <li Class="CompProperties_Power">
+        <!-- 通电运行组件类型。 -->
+        <compClass>CompPowerTrader</compClass>
+
+        <!-- 基础耗电。 -->
+        <basePowerConsumption>120</basePowerConsumption>
+
+        <!-- 雨中短路。 -->
+        <shortCircuitInRain>true</shortCircuitInRain>
+      </li>
+
+      <!-- 原版开关组件。 -->
+      <li Class="CompProperties_Flickable" />
+    </comps>
+
+    <!-- 放置辅助器。 -->
+    <placeWorkers>
+      <!-- 防止交互格重叠。 -->
+      <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+    </placeWorkers>
+  </ThingDef>
+
+</Defs>

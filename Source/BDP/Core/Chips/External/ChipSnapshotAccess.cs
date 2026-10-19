@@ -29,6 +29,7 @@ namespace BDP.Core.Chips
                 {
                     ThingDef = chip.def,
                     IsValid = true,
+                    CategoryDefName = manufactured.Profile?.Category?.defName,
                     SlotRegion = loadout != null ? loadout.SlotRegion : ChipSlotRegion.Unspecified,
                     SlotOccupancy = loadout != null ? loadout.SlotOccupancy : ChipSlotOccupancy.Unspecified,
                     CapacityCost = trion != null ? trion.CapacityCost : 0f,
@@ -60,6 +61,7 @@ namespace BDP.Core.Chips
                 IsValid = result != null
                     && result.Validation != null
                     && result.Validation.IsValid,
+                CategoryDefName = result?.Contract?.Profile?.Category?.defName,
                 SlotRegion = loadout != null ? loadout.SlotRegion : ChipSlotRegion.Unspecified,
                 SlotOccupancy = loadout != null ? loadout.SlotOccupancy : ChipSlotOccupancy.Unspecified,
                 CapacityCost = trion != null ? trion.CapacityCost : 0f,

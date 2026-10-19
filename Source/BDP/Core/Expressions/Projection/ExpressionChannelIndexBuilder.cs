@@ -27,7 +27,7 @@ namespace BDP.Core.Expressions
                 new Dictionary<string, List<FormalExpressionResult>>();
             Dictionary<string, List<FormalExpressionResult>> hediffResultsByDefName =
                 new Dictionary<string, List<FormalExpressionResult>>();
-            Dictionary<string, List<FormalExpressionResult>> passiveResultsByKey =
+            Dictionary<string, List<FormalExpressionResult>> passiveResultsByIdentityKey =
                 new Dictionary<string, List<FormalExpressionResult>>();
 
             for (int i = 0; i < snapshot.Results.Count; i++)
@@ -43,27 +43,27 @@ namespace BDP.Core.Expressions
                 // Ability 必须保留给原版按钮宿主；其它自动消费通道只收录当前可使用结果。
                 bool useAllowed = result.UseRequirementCheck == null
                     || result.UseRequirementCheck.Satisfied;
-                if (!useAllowed && result.ResultKind != ExpressionResultKind.Ability)
+                if (!useAllowed && result.OutputChannel != ExpressionOutputChannel.Ability)
                 {
                     continue;
                 }
 
-                switch (result.ResultKind)
+                switch (result.OutputChannel)
                 {
-                    case ExpressionResultKind.Verb:
+                    case ExpressionOutputChannel.Verb:
                         verbResults.Add(result);
                         break;
-                    case ExpressionResultKind.Ability:
+                    case ExpressionOutputChannel.Ability:
                         abilityResults.Add(result);
                         AddToLookup(abilityResultsByDefName, result.AbilityDefName, result);
                         break;
-                    case ExpressionResultKind.Hediff:
+                    case ExpressionOutputChannel.Hediff:
                         hediffResults.Add(result);
                         AddToLookup(hediffResultsByDefName, result.HediffDefName, result);
                         break;
-                    case ExpressionResultKind.Passive:
+                    case ExpressionOutputChannel.Passive:
                         passiveResults.Add(result);
-                        AddToLookup(passiveResultsByKey, result.PassiveKey, result);
+                    AddToLookup(passiveResultsByIdentityKey, result.PassiveIdentityKey, result);
                         break;
                 }
             }
@@ -77,7 +77,7 @@ namespace BDP.Core.Expressions
                 PassiveResults = passiveResults,
                 AbilityResultsByDefName = FreezeLookup(abilityResultsByDefName),
                 HediffResultsByDefName = FreezeLookup(hediffResultsByDefName),
-                PassiveResultsByKey = FreezeLookup(passiveResultsByKey)
+                PassiveResultsByIdentityKey = FreezeLookup(passiveResultsByIdentityKey)
             };
         }
 

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 开发实体只提供验证用文案。 -->
+  <BDP_DebugTrionUnitRace.label>轻型试作兵01</BDP_DebugTrionUnitRace.label>
+  <BDP_DebugTrionUnitRace.description>可移除的Trion轻型测试兵：Trion容量1000，释放力10，内置阿莱克托与自动盾。出生即永久战斗体，可直接征召或开启自动战斗；不消耗电力，也没有自然资源恢复。仅供开发测试。</BDP_DebugTrionUnitRace.description>
+  <BDP_DebugTrionUnitTrigger.label>内部测试触发体</BDP_DebugTrionUnitTrigger.label>
+  <BDP_DebugTrionUnitTrigger.description>不可装卸的内部预载，仅供Trion兵基底验证。</BDP_DebugTrionUnitTrigger.description>
+  <BDP_DebugTrionUnitTrigger.tools.0.label>敲击</BDP_DebugTrionUnitTrigger.tools.0.label>
+  <BDP_DebugTrionUnitSource.label>试作兵测试座</BDP_DebugTrionUnitSource.label>
+  <BDP_DebugTrionUnitSource.description>为本图试作兵提供独立测试许可和2点测试带宽。生成玩家试作兵时自动放置并绑定，不用电、不提供资源恢复或身体修复。仅供开发测试。</BDP_DebugTrionUnitSource.description>
+</LanguageData>

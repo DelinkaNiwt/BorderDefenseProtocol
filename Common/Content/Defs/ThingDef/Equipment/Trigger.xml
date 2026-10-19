@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 边境标准触发体正式物品定义。 -->
+  <ThingDef ParentName="BaseWeapon">
+    <!-- ThingDef唯一名称。 -->
+    <defName>BDP_TriggerBody_BorderStandard</defName>
+    <!-- 游戏界面显示名称。 -->
+    <label>边境标准触发体</label>
+    <!-- 玩家看到的物品说明。 -->
+    <description>边境体系的标准触发体，提供主槽、副槽和特殊槽，用于装载与控制Trion芯片。</description>
+    <!-- 正式触发体贴图。 -->
+    <graphicData>
+      <!-- 物品贴图路径不带文件扩展名。 -->
+      <texPath>Things/Equipment/Trigger/BDP_BorderStandardTriggerBody</texPath>
+      <!-- 单贴图图像类。 -->
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <!-- 标准触发体的原生科技档：太空时代。 -->
+    <techLevel>Spacer</techLevel>
+    <!-- 基础物品属性保持原有配置数值。 -->
+    <statBases>
+      <!-- 制作工作量。 -->
+      <WorkToMake>85000</WorkToMake>
+      <!-- 基础重量。 -->
+      <Mass>1.0</Mass>
+      <!-- 基础价值。 -->
+      <MarketValue>120</MarketValue>
+    </statBases>
+    <!-- 原版近战工具保持原配置。 -->
+    <tools>
+      <li>
+        <!-- 工具标签。 -->
+        <label>敲击</label>
+        <!-- 支持的近战能力。 -->
+        <capacities>
+          <!-- 最小钝击能力。 -->
+          <li>Blunt</li>
+        </capacities>
+        <!-- 近战威力。 -->
+        <power>4</power>
+        <!-- 攻击冷却时间。 -->
+        <cooldownTime>2.0</cooldownTime>
+      </li>
+    </tools>
+    <!-- Content提供玩家可配置芯片面板的显式许可。 -->
+    <modExtensions>
+      <!-- 允许在Trion面板右侧显示芯片控制区。 -->
+      <li Class="BDP.Content.Trigger.UI.TriggerLoadoutPanelExtension" />
+    </modExtensions>
+    <!-- Core提供触发体类别与槽位运行时。 -->
+    <comps Inherit="False">
+      <!-- 保留原版禁止交互能力。 -->
+      <li Class="CompProperties_Forbiddable" />
+      <!-- 按正式装载芯片合成触发体市场价值。 -->
+      <li Class="BDP.Content.Trigger.CompProperties_TriggerBodyMarketValue" />
+      <!-- 触发体正式类别和槽位配置。 -->
+      <li Class="BDP.Core.Trigger.CompProperties_TriggerBody">
+        <!-- 所属触发器类别。 -->
+        <triggerCategory>BDP_TriggerCategory_Border</triggerCategory>
+        <!-- 玩家可通过装配台配置芯片。 -->
+        <loadoutControlMode>PlayerConfigurable</loadoutControlMode>
+        <!-- 主槽数量。 -->
+        <mainSlotCount>4</mainSlotCount>
+        <!-- 副槽数量。 -->
+        <subSlotCount>4</subSlotCount>
+        <!-- 特殊槽数量。 -->
+        <specialSlotCount>2</specialSlotCount>
+      </li>
+      <!-- 保留Styleable，保持原版装备风格接口兼容。 -->
+      <li Class="CompProperties_Styleable" />
+    </comps>
+  </ThingDef>
+
+  <!-- 边境特制触发体正式物品定义。 -->
+  <ThingDef ParentName="BaseWeapon">
+    <!-- ThingDef唯一名称。 -->
+    <defName>BDP_TriggerBody_BorderSpecial</defName>
+    <!-- 游戏界面显示名称。 -->
+    <label>边境特制触发体</label>
+    <!-- 玩家看到的物品说明。 -->
+    <description>边境体系的特制触发体，提供7个主槽、7个副槽和2个特殊槽，用于装载与控制Trion芯片。</description>
+    <!-- 沿用边境标准触发体正式贴图。 -->
+    <graphicData>
+      <!-- 物品贴图路径不带文件扩展名。 -->
+      <texPath>Things/Equipment/Trigger/BDP_BorderStandardTriggerBody</texPath>
+      <!-- 单贴图图像类。 -->
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <!-- 特制触发体的原生科技档：极致时代。 -->
+    <techLevel>Ultra</techLevel>
+    <!-- 基础物品属性保持标准触发体配置。 -->
+    <statBases>
+      <!-- 制作工作量。 -->
+      <WorkToMake>150000</WorkToMake>
+      <!-- 基础重量。 -->
+      <Mass>1.0</Mass>
+      <!-- 基础价值。 -->
+      <MarketValue>120</MarketValue>
+    </statBases>
+    <!-- 原版近战工具保持标准触发体配置。 -->
+    <tools>
+      <li>
+        <!-- 工具标签。 -->
+        <label>敲击</label>
+        <!-- 支持的近战能力。 -->
+        <capacities>
+          <!-- 最小钝击能力。 -->
+          <li>Blunt</li>
+        </capacities>
+        <!-- 近战威力。 -->
+        <power>4</power>
+        <!-- 攻击冷却时间。 -->
+        <cooldownTime>2.0</cooldownTime>
+      </li>
+    </tools>
+    <!-- Content提供玩家可配置芯片面板的显式许可。 -->
+    <modExtensions>
+      <!-- 允许在Trion面板右侧显示芯片控制区。 -->
+      <li Class="BDP.Content.Trigger.UI.TriggerLoadoutPanelExtension" />
+    </modExtensions>
+    <!-- Core提供触发体类别与槽位运行时。 -->
+    <comps Inherit="False">
+      <!-- 保留原版禁止交互能力。 -->
+      <li Class="CompProperties_Forbiddable" />
+      <!-- 按正式装载芯片合成触发体市场价值。 -->
+      <li Class="BDP.Content.Trigger.CompProperties_TriggerBodyMarketValue" />
+      <!-- 触发体正式类别和槽位配置。 -->
+      <li Class="BDP.Core.Trigger.CompProperties_TriggerBody">
+        <!-- 所属触发器类别。 -->
+        <triggerCategory>BDP_TriggerCategory_Border</triggerCategory>
+        <!-- 玩家可通过装配台配置芯片。 -->
+        <loadoutControlMode>PlayerConfigurable</loadoutControlMode>
+        <!-- 主槽数量。 -->
+        <mainSlotCount>7</mainSlotCount>
+        <!-- 副槽数量。 -->
+        <subSlotCount>7</subSlotCount>
+        <!-- 特殊槽数量。 -->
+        <specialSlotCount>2</specialSlotCount>
+      </li>
+      <!-- 保留Styleable，保持原版装备风格接口兼容。 -->
+      <li Class="CompProperties_Styleable" />
+    </comps>
+  </ThingDef>
+
+  <!-- 风刃测试触发体正式物品定义。 -->
+  <ThingDef ParentName="BaseWeapon">
+    <!-- ThingDef唯一名称。 -->
+    <defName>BDP_TriggerBody_Fujin</defName>
+    <!-- 游戏界面显示名称。 -->
+    <label>风刃</label>
+    <!-- 玩家看到的物品说明。 -->
+    <description>风刃测试触发体，提供1个主槽和6个特殊槽，并预装风刃·远程斩击与风刃芯片。</description>
+    <!-- 使用风刃测试触发体专用贴图。 -->
+    <graphicData>
+      <!-- 物品贴图路径不带文件扩展名。 -->
+      <texPath>Things/Equipment/Trigger/BDP_FujinTriggerBody</texPath>
+      <!-- 单贴图图像类。 -->
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <!-- 风刃的原生科技档：超凡时代。 -->
+    <techLevel>Archotech</techLevel>
+    <!-- 基础物品属性保持标准触发体配置。 -->
+    <statBases>
+      <!-- 基础重量。 -->
+      <Mass>1.0</Mass>
+      <!-- 基础价值。 -->
+      <MarketValue>120</MarketValue>
+    </statBases>
+    <!-- 原版近战工具保持标准触发体配置。 -->
+    <tools>
+      <li>
+        <!-- 工具标签。 -->
+        <label>敲击</label>
+        <!-- 支持的近战能力。 -->
+        <capacities>
+          <!-- 最小钝击能力。 -->
+          <li>Blunt</li>
+        </capacities>
+        <!-- 近战威力。 -->
+        <power>4</power>
+        <!-- 攻击冷却时间。 -->
+        <cooldownTime>2.0</cooldownTime>
+      </li>
+    </tools>
+    <!-- 黑触发器不进入交易或礼物系统。 -->
+    <tradeability>None</tradeability>
+    <!-- 风刃的形成路线与首次装备适格定义。 -->
+    <modExtensions>
+      <li Class="BDP.Content.Trigger.Black.Formation.BlackTriggerFormationExtension">
+        <!-- 风刃由格斗能力与突出的远程攻击经历共同形成。 -->
+        <formationRoutes>
+          <li>
+            <!-- 目之所及皆可一斩毙命，归入精确猎杀侧重。 -->
+            <emphasis>BDP_BlackTriggerEmphasis_Precision</emphasis>
+            <!-- 刀的本质要求格斗进入来源人物最高三项有效技能。 -->
+            <allOf>
+              <li>
+                <skill>Melee</skill>
+              </li>
+            </allOf>
+            <!-- 爆头或长期开火经历至少有一项进入殖民者记录前三。 -->
+            <anyOfMinimum>1</anyOfMinimum>
+            <anyOf>
+              <li>
+                <record>Headshots</record>
+              </li>
+              <li>
+                <record>ShotsFired</record>
+              </li>
+            </anyOf>
+          </li>
+        </formationRoutes>
+        <!-- 风刃广泛适配，只排斥射击技能被完全禁用的人物。 -->
+        <eligibilityGroups>
+          <li>
+            <noneOf>
+              <li>
+                <kind>SkillDisabled</kind>
+                <skill>Shooting</skill>
+              </li>
+            </noneOf>
+          </li>
+        </eligibilityGroups>
+      </li>
+    </modExtensions>
+    <!-- 近界测试触发体不可由玩家配置芯片，因此不添加玩家控制面板。 -->
+    <comps Inherit="False">
+      <!-- 保留原版禁止交互能力。 -->
+      <li Class="CompProperties_Forbiddable" />
+      <!-- 按正式装载芯片合成触发体市场价值。 -->
+      <li Class="BDP.Content.Trigger.CompProperties_TriggerBodyMarketValue" />
+      <!-- 复用原版生物编码作为绑定生命周期。 -->
+      <li Class="BDP.Content.Trigger.Black.Formation.CompProperties_BlackTriggerBiocodable" />
+      <!-- 保存来源人物、最终侧重、形成证据、传承人与继承特性。 -->
+      <li Class="BDP.Content.Trigger.Black.Formation.CompProperties_BlackTriggerImprint" />
+      <!-- 触发体正式类别、槽位和固定预装配置。 -->
+      <li Class="BDP.Core.Trigger.CompProperties_TriggerBody">
+        <!-- 所属触发器类别。 -->
+        <triggerCategory>BDP_TriggerCategory_Black</triggerCategory>
+        <!-- 玩家不能通过装配入口修改芯片。 -->
+        <loadoutControlMode>PlayerNonConfigurable</loadoutControlMode>
+        <!-- 主槽数量。 -->
+        <mainSlotCount>1</mainSlotCount>
+        <!-- 副槽数量。 -->
+        <subSlotCount>0</subSlotCount>
+        <!-- 特殊槽数量。 -->
+        <specialSlotCount>6</specialSlotCount>
+        <!-- 首次生成时由Content成品工厂创建两个动态芯片。 -->
+        <fixedLoadout>
+          <li>
+            <!-- 目标槽区。 -->
+            <side>Special</side>
+            <!-- 风刃·远程斩击放入特殊槽1。 -->
+            <slotNumber>1</slotNumber>
+            <!-- 动态芯片的实体物品Def。 -->
+            <chipDef>BDP_Chip_Custom</chipDef>
+            <!-- 由芯片功能预设工厂初始化组合记录。 -->
+            <initializationKey>BDP_ChipFunction_FujinRangedStrike</initializationKey>
+          </li>
+          <li>
+            <!-- 目标槽区。 -->
+            <side>Special</side>
+            <!-- 风刃放入特殊槽2。 -->
+            <slotNumber>2</slotNumber>
+            <!-- 动态芯片的实体物品Def。 -->
+            <chipDef>BDP_Chip_Custom</chipDef>
+            <!-- 由芯片功能预设工厂初始化组合记录。 -->
+            <initializationKey>BDP_ChipFunction_Fujin</initializationKey>
+          </li>
+        </fixedLoadout>
+      </li>
+      <!-- 黑触发器独立 Trion 容器；容量合并期间由 Pawn 合并池统一恢复。 -->
+      <li Class="BDP.Core.Trion.CompProperties_Trion">
+        <!-- 本测试黑触发器提供的固定容量上限。 -->
+        <baseMax>1000</baseMax>
+        <!-- 首次生成时以满容量开始。 -->
+        <startPercent>1</startPercent>
+        <!-- 未装备时不进行独立自然恢复。 -->
+        <recoveryPerDay>0</recoveryPerDay>
+      </li>
+      <!-- 保留Styleable，保持原版装备风格接口兼容。 -->
+      <li Class="CompProperties_Styleable" />
+    </comps>
+  </ThingDef>
+
+  <!-- 卵之冠正式黑触发体物品定义。 -->
+  <ThingDef ParentName="BaseWeapon">
+    <!-- ThingDef唯一名称；Alektor是本触发体的技术标识。 -->
+    <defName>BDP_TriggerBody_Alektor</defName>
+    <!-- 游戏界面显示名称。 -->
+    <label>卵之冠</label>
+    <!-- 玩家看到的物品说明。 -->
+    <description>卵之冠黑触发器，提供6个特殊槽，并固定预装卵之冠与浮空芯片。</description>
+    <!-- 本次需求未新增专用贴图，复用中性边境标准触发体贴图。 -->
+    <graphicData>
+      <!-- 物品贴图路径不带文件扩展名。 -->
+      <texPath>Things/Equipment/Trigger/BDP_BorderStandardTriggerBody</texPath>
+      <!-- 单贴图图像类。 -->
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <!-- 卵之冠的原生科技档：超凡时代。 -->
+    <techLevel>Archotech</techLevel>
+    <!-- 黑触发器不进入交易或礼物系统。 -->
+    <tradeability>None</tradeability>
+    <!-- 卵之冠的形成路线与首次装备适格定义。 -->
+    <modExtensions>
+      <li Class="BDP.Content.Trigger.Black.Formation.BlackTriggerFormationExtension">
+        <!-- 卵之冠由结构拆解、远程战斗与构造能力共同形成。 -->
+        <formationRoutes>
+          <li>
+            <!-- 通过结构解离持续瓦解正面防御，归入正面压制侧重。 -->
+            <emphasis>BDP_BlackTriggerEmphasis_Frontline</emphasis>
+            <!-- 拆解经历与远程战斗经历缺一不可。 -->
+            <allOf>
+              <li>
+                <record>ThingsDeconstructed</record>
+              </li>
+              <li>
+                <record>ShotsFired</record>
+              </li>
+            </allOf>
+            <!-- 手工或建造至少一项属于来源人物最高三项有效技能。 -->
+            <anyOfMinimum>1</anyOfMinimum>
+            <anyOf>
+              <li>
+                <skill>Crafting</skill>
+              </li>
+              <li>
+                <skill>Construction</skill>
+              </li>
+            </anyOf>
+          </li>
+        </formationRoutes>
+        <!-- 卵之冠对拥有 Anomaly 心灵宰杀能力的来源人物提高隐藏形成权重；未加载 Anomaly 时自动跳过。 -->
+        <adaptedAbilities>
+          <li>
+            <abilityDefName>PsychicSlaughter</abilityDefName>
+            <sourcePackageId>ludeon.rimworld.anomaly</sourcePackageId>
+          </li>
+        </adaptedAbilities>
+        <!-- 卵之冠暂时广泛适配，只排斥射击技能被完全禁用的人物。 -->
+        <eligibilityGroups>
+          <li>
+            <noneOf>
+              <li>
+                <kind>SkillDisabled</kind>
+                <skill>Shooting</skill>
+              </li>
+            </noneOf>
+          </li>
+        </eligibilityGroups>
+      </li>
+    </modExtensions>
+    <!-- 未指定独立基础属性时沿用标准触发体档位。 -->
+    <statBases>
+      <!-- 基础重量。 -->
+      <Mass>1.0</Mass>
+      <!-- 基础价值。 -->
+      <MarketValue>120</MarketValue>
+    </statBases>
+    <!-- 保留原版近战工具，避免新触发体失去基础近战能力。 -->
+    <tools>
+      <li>
+        <!-- 工具标签。 -->
+        <label>敲击</label>
+        <!-- 支持的近战能力。 -->
+        <capacities>
+          <!-- 最小钝击能力。 -->
+          <li>Blunt</li>
+        </capacities>
+        <!-- 近战威力。 -->
+        <power>4</power>
+        <!-- 攻击冷却时间。 -->
+        <cooldownTime>2.0</cooldownTime>
+      </li>
+    </tools>
+    <!-- Core提供黑触发器类别、特殊槽和固定预载运行时。 -->
+    <comps Inherit="False">
+      <!-- 保留原版禁止交互能力。 -->
+      <li Class="CompProperties_Forbiddable" />
+      <!-- 按正式装载芯片合成触发体市场价值。 -->
+      <li Class="BDP.Content.Trigger.CompProperties_TriggerBodyMarketValue" />
+      <!-- 复用原版生物编码作为绑定生命周期。 -->
+      <li Class="BDP.Content.Trigger.Black.Formation.CompProperties_BlackTriggerBiocodable" />
+      <!-- 保存来源人物、最终侧重、形成证据、传承人与继承特性。 -->
+      <li Class="BDP.Content.Trigger.Black.Formation.CompProperties_BlackTriggerImprint" />
+      <!-- 触发体类别、槽位数量和首次生成固定预载。 -->
+      <li Class="BDP.Core.Trigger.CompProperties_TriggerBody">
+        <!-- 所属触发器类别。 -->
+        <triggerCategory>BDP_TriggerCategory_Black</triggerCategory>
+        <!-- 卵之冠是固定构型，不开放玩家装卸。 -->
+        <loadoutControlMode>PlayerNonConfigurable</loadoutControlMode>
+        <!-- 不提供主槽。 -->
+        <mainSlotCount>0</mainSlotCount>
+        <!-- 不提供副槽。 -->
+        <subSlotCount>0</subSlotCount>
+        <!-- 提供6个特殊槽。 -->
+        <specialSlotCount>6</specialSlotCount>
+        <!-- 首次生成时把卵之冠与浮空芯片固定预载到特殊槽1和2。 -->
+        <fixedLoadout>
+          <!-- 卵之冠芯片放入特殊槽1。 -->
+          <li>
+            <!-- 目标槽区。 -->
+            <side>Special</side>
+            <!-- 卵之冠芯片放入特殊槽1。 -->
+            <slotNumber>1</slotNumber>
+            <!-- 动态芯片实体物品Def。 -->
+            <chipDef>BDP_Chip_Custom</chipDef>
+            <!-- 由Content芯片功能工厂初始化卵之冠组合记录。 -->
+            <initializationKey>BDP_ChipFunction_Alektor</initializationKey>
+          </li>
+          <!-- 浮空芯片放入特殊槽2；现有6格容量足够，无需扩槽。 -->
+          <li>
+            <!-- 目标槽区。 -->
+            <side>Special</side>
+            <!-- 浮空芯片放入特殊槽2。 -->
+            <slotNumber>2</slotNumber>
+            <!-- 动态芯片实体物品Def。 -->
+            <chipDef>BDP_Chip_Custom</chipDef>
+            <!-- 由Content芯片功能工厂初始化浮空组合记录。 -->
+            <initializationKey>BDP_ChipFunction_Floating</initializationKey>
+          </li>
+        </fixedLoadout>
+      </li>
+      <!-- 黑触发器独立Trion容器；容量档位沿用现有固定测试触发体。 -->
+      <li Class="BDP.Core.Trion.CompProperties_Trion">
+        <!-- 固定容量上限。 -->
+        <baseMax>1000</baseMax>
+        <!-- 首次生成时以满容量开始。 -->
+        <startPercent>1</startPercent>
+        <!-- 未装备时不进行独立自然恢复。 -->
+        <recoveryPerDay>0</recoveryPerDay>
+      </li>
+      <!-- 保留Styleable，保持原版装备风格接口兼容。 -->
+      <li Class="CompProperties_Styleable" />
+    </comps>
+  </ThingDef>
+
+</Defs>

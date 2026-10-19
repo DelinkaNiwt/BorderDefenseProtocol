@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using BDP.Core.AttackExecution;
 using BDP.Core.Chips;
+using BDP.Core.Information;
 using BDP.Core.Requirements;
 using BDP.Core.CombatBody;
 using BDP.Core.Trigger.Projection;
@@ -159,7 +160,7 @@ namespace BDP.Core.Trigger
         public CompTriggerBody()
         {
             chipContainer = new ThingOwner<Thing>(this);
-            triggerService = new TriggerService();
+            triggerService = new TriggerService(() => OwnerPawn);
             loadoutReaderSurface = new TriggerLoadoutReaderSurface(this);
             interactionSurface = new TriggerInteractionSurface(this);
             interactionInterpreter = new TriggerInteractionInterpreter(
@@ -173,7 +174,8 @@ namespace BDP.Core.Trigger
                 GetCurrentTick,
                 triggerService.ResolveChipActivationDelayTicks,
                 triggerService.ResolveChipDeactivationDelayTicks,
-                () => CombatBodySurfaceAccess.ResolveReader(OwnerPawn)?.Phase == CombatBodyPhase.Active,
+                () => CombatBodyMaterialAccess.IsActive(OwnerPawn),
+                chip => TriggerChipActivationControlRegistry.HasIndependentActivationControl(chip),
                 chip => ChipActivationRequirementService.Instance.Evaluate(OwnerPawn, chip));
             verbHostManager = new TriggerBodyVerbHostManager(this);
             runtimeServices = new TriggerRuntimeServices();
@@ -270,17 +272,24 @@ namespace BDP.Core.Trigger
         internal TriggerProjectionBuildInput BuildProjectionBuildInput()
         {
             EnsureInternalState();
+            List<TriggerSlotState> mainSlots = SnapshotSlotsForProjectionBuild(TriggerSide.Main);
+            List<TriggerSlotState> subSlots = SnapshotSlotsForProjectionBuild(TriggerSide.Sub);
+            List<TriggerSlotState> specialSlots = SnapshotSlotsForProjectionBuild(TriggerSide.Special);
             return new TriggerProjectionBuildInput
             {
-                MainSlots = SnapshotSlotsForProjectionBuild(TriggerSide.Main),
-                SubSlots = SnapshotSlotsForProjectionBuild(TriggerSide.Sub),
-                SpecialSlots = SnapshotSlotsForProjectionBuild(TriggerSide.Special),
+                MainSlots = mainSlots,
+                SubSlots = subSlots,
+                SpecialSlots = specialSlots,
                 MainSwitchContext = CloneSwitchContextForProjectionBuild(mainSwitchContext),
                 SubSwitchContext = CloneSwitchContextForProjectionBuild(subSwitchContext),
                 SpecialSwitchContext = CloneSwitchContextForProjectionBuild(specialSwitchContext),
                 IsMainContainerConsistent = IsContainerConsistentForProjectionBuild(TriggerSide.Main),
                 IsSubContainerConsistent = IsContainerConsistentForProjectionBuild(TriggerSide.Sub),
-                IsSpecialContainerConsistent = IsContainerConsistentForProjectionBuild(TriggerSide.Special)
+                IsSpecialContainerConsistent = IsContainerConsistentForProjectionBuild(TriggerSide.Special),
+                InformationInputs = BuildInformationInputsForProjectionBuild(
+                    mainSlots,
+                    subSlots,
+                    specialSlots)
             };
         }
 
@@ -330,13 +339,25 @@ namespace BDP.Core.Trigger
                 return false;
             }
 
-            if (!ForceSyncDisabledStateFromOwnerPawn())
+            long bodyConstraintStart = BdpDiagnostics.BeginTiming();
+            bool bodyConstraintChanged = ForceSyncDisabledStateFromOwnerPawn();
+            BdpDiagnostics.TraceTiming(
+                "身体约束同步 | stage=force_rescan | pawn=" + SafeThingId(OwnerPawn)
+                + " | changed=" + bodyConstraintChanged,
+                bodyConstraintStart);
+            if (!bodyConstraintChanged)
             {
                 return false;
             }
 
             MarkCombatProjectionDirty(ProjectionDirtyReason.DisableStateChanged);
-            return runtimeCoordinator == null || runtimeCoordinator.RebuildAndPublish();
+            long rebuildStart = BdpDiagnostics.BeginTiming();
+            bool rebuilt = runtimeCoordinator == null || runtimeCoordinator.RebuildAndPublish();
+            BdpDiagnostics.TraceTiming(
+                "身体约束同步 | stage=rebuild_after_change | pawn=" + SafeThingId(OwnerPawn)
+                + " | rebuilt=" + rebuilt,
+                rebuildStart);
+            return rebuilt;
         }
 
         /// <summary>
@@ -361,6 +382,14 @@ namespace BDP.Core.Trigger
         private CompProperties_TriggerBody Props
         {
             get { return (CompProperties_TriggerBody)props; }
+        }
+
+        /// <summary>
+        /// 返回当前触发体的物品宿主，供通用生命周期服务使用。
+        /// </summary>
+        public ThingWithComps ParentThing
+        {
+            get { return parent; }
         }
 
         /// <summary>
@@ -421,6 +450,12 @@ namespace BDP.Core.Trigger
             runtimeCoordinator?.MarkDirty(reason);
         }
 
+        /// <summary>外部业务条件变化只请求中性重建；正式表达与宿主仍由既有发布链负责。</summary>
+        internal void NotifySourceConditionsChanged()
+        {
+            PublishCombatProjection(ProjectionDirtyReason.SourceConditionsChanged);
+        }
+
         /// <summary>
         /// 按当前 owner 真值立即尝试发布一轮战斗投影。
         /// 成功与否只反映本轮是否完成发布，不附带攻击执行语义。
@@ -428,7 +463,14 @@ namespace BDP.Core.Trigger
         private bool PublishCombatProjection(ProjectionDirtyReason reason)
         {
             MarkCombatProjectionDirty(reason);
-            return runtimeCoordinator == null || runtimeCoordinator.RebuildAndPublish();
+            long publishStart = BdpDiagnostics.BeginTiming();
+            bool published = runtimeCoordinator == null || runtimeCoordinator.RebuildAndPublish();
+            BdpDiagnostics.TraceTiming(
+                "触发体投影发布 | reason=" + reason
+                + " | trigger=" + SafeThingId(parent)
+                + " | published=" + published,
+                publishStart);
+            return published;
         }
 
         /// <summary>
@@ -437,9 +479,10 @@ namespace BDP.Core.Trigger
         /// </summary>
         private float CalculateReservedTrionCost()
         {
-            return runtimeServices.TriggerTrionBindingService.CalculateReservedTrionCost(
+            float declaredAmount = runtimeServices.TriggerTrionBindingService.CalculateReservedTrionCost(
                 EnumerateRawSlots(),
                 triggerService);
+            return TrionResourceRuleRegistry.ResolveCapacityCost(OwnerPawn, declaredAmount);
         }
 
         /// <summary>
@@ -537,13 +580,39 @@ namespace BDP.Core.Trigger
         /// </summary>
         internal bool RequestActivate(TriggerSide side, int slotIndex)
         {
-            if (CombatBodySurfaceAccess.ResolveReader(OwnerPawn)?.Phase != CombatBodyPhase.Active)
+            if (!CombatBodyMaterialAccess.IsActive(OwnerPawn))
             {
+                TraceSlotBoundary(
+                    "activate_request_rejected",
+                    "side=" + side
+                    + " | slot=" + slotIndex
+                    + " | reason=combat_body_not_active");
                 return false;
             }
 
             PrepareCommandState();
-            return triggerService.RequestActivate(BuildSwitchContext(), side, slotIndex);
+            TriggerSlotState slot = GetSlot(side, slotIndex);
+            bool independentControl = slot != null
+                && (side == TriggerSide.Special
+                    || (slot.LoadedChip != null
+                        && TriggerChipActivationControlRegistry.HasIndependentActivationControl(slot.LoadedChip)));
+            TraceSlotBoundary(
+                "activate_request_begin",
+                "side=" + side
+                + " | slot=" + slotIndex
+                + " | chip=" + SafeThingId(slot != null ? slot.LoadedChip : null)
+                + " | controlScope=" + (independentControl ? "slot" : "side")
+                + " | sideContextBefore=" + DescribeSideSwitchContextForDiagnostics(side)
+                + " | slotContextBefore=" + (slot != null ? DescribeSwitchContextForDiagnostics(slot.SlotSwitchContext) : "none"));
+            bool success = triggerService.RequestActivate(BuildSwitchContext(), side, slotIndex);
+            TraceSlotBoundary(
+                "activate_request_returned",
+                "side=" + side
+                + " | slot=" + slotIndex
+                + " | accepted=" + success
+                + " | sideContextAfter=" + DescribeSideSwitchContextForDiagnostics(side)
+                + " | slotContextAfter=" + (slot != null ? DescribeSwitchContextForDiagnostics(slot.SlotSwitchContext) : "none"));
+            return success;
         }
 
         /// <summary>
@@ -558,12 +627,21 @@ namespace BDP.Core.Trigger
         }
 
         /// <summary>
+        /// 按精确槽位提交关闭请求。
+        /// </summary>
+        internal bool RequestDeactivate(TriggerSide side, int slotIndex)
+        {
+            PrepareCommandState();
+            return triggerService.RequestDeactivate(BuildSwitchContext(), side, slotIndex);
+        }
+
+        /// <summary>
         /// 请求把一枚正式启用的多形态芯片切到指定形态。
         /// 形态真值与投影发布作为一个原子动作处理，发布失败时保留旧形态。
         /// </summary>
         internal bool RequestSwitchChipMode(Thing chip, string targetModeKey)
         {
-            PrepareCommandState();
+            PrepareChipSelectionCommandState();
             TriggerSlotState rootSlot = FindActiveRootSlotForChip(chip);
             if (rootSlot == null || !TriggerChipModeService.IsModeKeyValid(chip, targetModeKey))
             {
@@ -594,7 +672,7 @@ namespace BDP.Core.Trigger
         /// </summary>
         internal bool RequestCycleChipMode(Thing chip)
         {
-            PrepareCommandState();
+            PrepareChipSelectionCommandState();
             TriggerSlotState rootSlot = FindActiveRootSlotForChip(chip);
             if (rootSlot == null)
             {
@@ -624,7 +702,7 @@ namespace BDP.Core.Trigger
         /// </summary>
         internal bool RequestSwitchChipStance(Thing chip, string targetStanceKey)
         {
-            PrepareCommandState();
+            PrepareChipSelectionCommandState();
             TriggerSlotState rootSlot = FindActiveRootSlotForChip(chip);
             if (rootSlot == null
                 || !TriggerChipModeService.IsStanceKeyValid(
@@ -662,7 +740,7 @@ namespace BDP.Core.Trigger
         /// </summary>
         internal bool RequestCycleChipStance(Thing chip)
         {
-            PrepareCommandState();
+            PrepareChipSelectionCommandState();
             TriggerSlotState rootSlot = FindActiveRootSlotForChip(chip);
             if (rootSlot == null)
             {
@@ -740,24 +818,38 @@ namespace BDP.Core.Trigger
         public override void Notify_Equipped(Pawn pawn)
         {
             base.Notify_Equipped(pawn);
+            TraceLifecycle("equipped_begin", "equipPawn=" + SafeThingId(pawn));
+            if (pawn != null)
+            {
+                lastKnownOwnerPawn = pawn;
+            }
+
+            if (!TriggerBodyEquipmentEligibility.ValidateEquipped(pawn, this))
+            {
+                TraceLifecycle("equipped_rejected", "reason=eligibility_failed");
+                return;
+            }
+
+            TriggerTrionCapacityBindingRegistry.NotifyEquipped(pawn, this);
             SyncReservedTrion();
             ApplyBodyConstraintChangeImmediately();
+            TraceSlotBoundary("equipped_complete", "equipPawn=" + SafeThingId(pawn));
         }
 
         /// <summary>
-        /// 装备解除时显式刷新这把 Trigger 对应的外围投影。
-        /// 这里只清空已发布投影和 formal host，不处理攻击运行时结束判定。
+        /// 装备卸下时结束活跃战斗体，并清空外围投影与正式攻击宿主。
+        /// 系统退出不能复用玩家主动解除，否则换装同刻的重新激活会被手动锁拒绝。
         /// </summary>
         public override void Notify_Unequipped(Pawn pawn)
         {
-            if (CombatBodySurfaceAccess.ResolveReader(pawn)?.Phase == CombatBodyPhase.Active)
-            {
-                CombatBodySurfaceAccess.ResolveCommands(pawn)?.RequestRelease();
-            }
+            TraceSlotBoundary("unequipped_begin", "detachPawn=" + SafeThingId(pawn));
+            CombatBodySurfaceAccess.ResolveCommands(pawn)?.ReleaseForEquipmentDetach();
 
+            TriggerTrionCapacityBindingRegistry.NotifyUnequipped(pawn, this);
             base.Notify_Unequipped(pawn);
             SyncReservedTrion(pawn, 0f);
             ForceTeardownOnDetach(pawn);
+            TraceSlotBoundary("unequipped_complete", "detachPawn=" + SafeThingId(pawn));
         }
 
         /// <summary>

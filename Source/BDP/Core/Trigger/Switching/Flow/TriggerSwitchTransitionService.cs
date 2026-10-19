@@ -25,6 +25,7 @@ namespace BDP.Core.Trigger
             Func<TriggerSide, TriggerSlotState> getActiveSlotRaw,
             IReadOnlyList<TriggerSlotState> activationBlockers,
             Func<TriggerSlotState, IReadOnlyList<TriggerSlotState>> resolveActivationBlockers,
+            Func<TriggerSlotState, bool> requestBlockerDeactivation,
             Func<TriggerSlotState, bool> isPendingTargetValid,
             Func<TriggerSide, SwitchContext> getSwitchContext,
             Action<TriggerSide, SwitchContext> setSwitchContext,
@@ -57,6 +58,7 @@ namespace BDP.Core.Trigger
                     getSlot,
                     getActiveSlot,
                     getActiveSlotRaw,
+                    requestBlockerDeactivation,
                     getSwitchContext,
                     setSwitchContext,
                     resolveChipActivationDelayTicks,
@@ -150,6 +152,381 @@ namespace BDP.Core.Trigger
 
             setSwitchContext?.Invoke(side, switchContext);
             return true;
+        }
+
+        /// <summary>
+        /// 处理一枚需要独立槽位上下文的芯片启用请求。
+        /// 过程按槽位保存上下文，因此同侧多个被动槽位可以同时等待各自的延迟。
+        /// </summary>
+        public static bool RequestSlotActivate(
+            TriggerSlotState nextSlot,
+            Func<TriggerSide, int, TriggerSlotState> getSlot,
+            Func<TriggerSlotState, IReadOnlyList<TriggerSlotState>> resolveActivationBlockers,
+            Func<TriggerSlotState, bool> isPendingTargetValid,
+            Func<TriggerSlotState, SwitchContext> getSlotSwitchContext,
+            Action<TriggerSlotState, SwitchContext> setSlotSwitchContext,
+            Func<TriggerSlotState, bool> requestBlockerDeactivation,
+            Func<Thing, int> resolveChipActivationDelayTicks,
+            int currentTick,
+            Action<TriggerSide, int, Thing> notifySlotActivationCommitted)
+        {
+            nextSlot = NormalizeDirectControlSlot(nextSlot, getSlot);
+            if (nextSlot == null || nextSlot.LoadedChip == null || nextSlot.IsDisabled)
+            {
+                return false;
+            }
+
+            if (nextSlot.IsActive)
+            {
+                return true;
+            }
+
+            SwitchContext currentContext = getSlotSwitchContext != null
+                ? getSlotSwitchContext(nextSlot)
+                : null;
+            if (currentContext != null
+                && currentContext.targetChipThingId == nextSlot.LoadedChip.ThingID)
+            {
+                return true;
+            }
+
+            IReadOnlyList<TriggerSlotState> blockers = resolveActivationBlockers != null
+                ? resolveActivationBlockers(nextSlot)
+                : new List<TriggerSlotState>();
+            RequestBlockerDeactivations(blockers, requestBlockerDeactivation);
+            blockers = resolveActivationBlockers != null
+                ? resolveActivationBlockers(nextSlot)
+                : blockers;
+            if (blockers != null && blockers.Count > 0)
+            {
+                setSlotSwitchContext?.Invoke(
+                    nextSlot,
+                    BuildWaitingForConflictsContext(
+                        nextSlot.Index,
+                        nextSlot.LoadedChip.ThingID));
+                return true;
+            }
+
+            return BeginSlotTargetActivation(
+                nextSlot,
+                getSlot,
+                isPendingTargetValid,
+                setSlotSwitchContext,
+                resolveChipActivationDelayTicks,
+                currentTick,
+                notifySlotActivationCommitted);
+        }
+
+        /// <summary>
+        /// 处理一枚芯片的精确槽位关闭请求。
+        /// 该入口用于被动槽位手动关闭、战斗体退出和持续条件失效。
+        /// </summary>
+        public static bool RequestSlotDeactivate(
+            TriggerSlotState targetSlot,
+            Func<TriggerSide, int, TriggerSlotState> getSlot,
+            Func<TriggerSlotState, SwitchContext> getSlotSwitchContext,
+            Action<TriggerSlotState, SwitchContext> setSlotSwitchContext,
+            Func<Thing, int> resolveChipDeactivationDelayTicks,
+            int currentTick,
+            Action<TriggerSide, int, Thing> notifySlotDeactivated)
+        {
+            targetSlot = NormalizeDirectControlSlot(targetSlot, getSlot);
+            if (targetSlot == null)
+            {
+                return false;
+            }
+
+            SwitchContext currentContext = getSlotSwitchContext != null
+                ? getSlotSwitchContext(targetSlot)
+                : null;
+            if (!targetSlot.IsActive)
+            {
+                if (currentContext != null)
+                {
+                    setSlotSwitchContext?.Invoke(targetSlot, null);
+                    return true;
+                }
+
+                return false;
+            }
+
+            if (currentContext != null && currentContext.phase == SwitchPhase.Deactivating)
+            {
+                return true;
+            }
+
+            if (currentContext != null)
+            {
+                setSlotSwitchContext?.Invoke(targetSlot, null);
+            }
+
+            SwitchContext switchContext = BuildDeactivatingContext(
+                resolveChipDeactivationDelayTicks != null
+                    ? resolveChipDeactivationDelayTicks(targetSlot.LoadedChip)
+                    : 0,
+                currentTick,
+                -1,
+                targetSlot.Index,
+                null);
+            if (switchContext == null)
+            {
+                if (IsPairedOccupancySlot(targetSlot))
+                {
+                    DeactivateBoundSlotImmediate(targetSlot, getSlot, null, notifySlotDeactivated);
+                }
+                else
+                {
+                    DeactivateSlot(targetSlot);
+                    notifySlotDeactivated?.Invoke(targetSlot.Side, targetSlot.Index, targetSlot.LoadedChip);
+                }
+
+                return true;
+            }
+
+            setSlotSwitchContext?.Invoke(targetSlot, switchContext);
+            return true;
+        }
+
+        /// <summary>
+        /// 结算全部槽位上的独立切换上下文。
+        /// </summary>
+        public static void ResolveDueSlotTransitions(
+            int currentTick,
+            IEnumerable<TriggerSlotState> slots,
+            Func<TriggerSlotState, IReadOnlyList<TriggerSlotState>> resolveActivationBlockers,
+            Func<TriggerSlotState, bool> isPendingTargetValid,
+            Func<TriggerSlotState, SwitchContext> getSlotSwitchContext,
+            Action<TriggerSlotState, SwitchContext> setSlotSwitchContext,
+            Func<TriggerSlotState, bool> requestBlockerDeactivation,
+            Func<Thing, int> resolveChipActivationDelayTicks,
+            Func<Thing, int> resolveChipDeactivationDelayTicks,
+            Func<TriggerSide, int, TriggerSlotState> getSlot,
+            Action<TriggerSide, int, Thing> notifySlotActivationCommitted,
+            Action<TriggerSide, int, Thing> notifySlotDeactivated)
+        {
+            List<TriggerSlotState> pendingSlots = (slots ?? Enumerable.Empty<TriggerSlotState>())
+                .Where(slot => slot != null && getSlotSwitchContext != null && getSlotSwitchContext(slot) != null)
+                .ToList();
+            for (int i = 0; i < pendingSlots.Count; i++)
+            {
+                ResolveDueSlotTransition(
+                    pendingSlots[i],
+                    currentTick,
+                    resolveActivationBlockers,
+                    isPendingTargetValid,
+                    getSlotSwitchContext,
+                    setSlotSwitchContext,
+                    requestBlockerDeactivation,
+                    resolveChipActivationDelayTicks,
+                    resolveChipDeactivationDelayTicks,
+                    getSlot,
+                    notifySlotActivationCommitted,
+                    notifySlotDeactivated);
+            }
+        }
+
+        /// <summary>
+        /// 请求关闭目标当前发现的全部阻挡者。
+        /// </summary>
+        private static void RequestBlockerDeactivations(
+            IReadOnlyList<TriggerSlotState> blockers,
+            Func<TriggerSlotState, bool> requestBlockerDeactivation)
+        {
+            if (blockers == null || requestBlockerDeactivation == null)
+            {
+                return;
+            }
+
+            for (int i = 0; i < blockers.Count; i++)
+            {
+                TriggerSlotState blocker = blockers[i];
+                if (blocker != null)
+                {
+                    requestBlockerDeactivation(blocker);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 开始目标的启用延迟，或在零延迟时直接提交正式激活。
+        /// </summary>
+        private static bool BeginSlotTargetActivation(
+            TriggerSlotState targetSlot,
+            Func<TriggerSide, int, TriggerSlotState> getSlot,
+            Func<TriggerSlotState, bool> isPendingTargetValid,
+            Action<TriggerSlotState, SwitchContext> setSlotSwitchContext,
+            Func<Thing, int> resolveChipActivationDelayTicks,
+            int currentTick,
+            Action<TriggerSide, int, Thing> notifySlotActivationCommitted)
+        {
+            if (targetSlot == null
+                || targetSlot.LoadedChip == null
+                || targetSlot.IsDisabled
+                || (isPendingTargetValid != null && !isPendingTargetValid(targetSlot)))
+            {
+                setSlotSwitchContext?.Invoke(targetSlot, null);
+                return false;
+            }
+
+            int delayTicks = resolveChipActivationDelayTicks != null
+                ? resolveChipActivationDelayTicks(targetSlot.LoadedChip)
+                : 0;
+            SwitchContext context = BuildActivatingContext(
+                delayTicks,
+                currentTick,
+                targetSlot.Index,
+                targetSlot.LoadedChip.ThingID);
+            if (context != null)
+            {
+                setSlotSwitchContext?.Invoke(targetSlot, context);
+                return true;
+            }
+
+            setSlotSwitchContext?.Invoke(targetSlot, null);
+            if (IsPairedOccupancySlot(targetSlot))
+            {
+                return ActivateBoundSlotImmediate(
+                    targetSlot,
+                    getSlot,
+                    notifySlotActivationCommitted);
+            }
+
+            if (!ActivateSlot(targetSlot))
+            {
+                return false;
+            }
+
+            notifySlotActivationCommitted?.Invoke(
+                targetSlot.Side,
+                targetSlot.Index,
+                targetSlot.LoadedChip);
+            return true;
+        }
+
+        /// <summary>
+        /// 结算一个槽位的独立切换过程。
+        /// </summary>
+        private static void ResolveDueSlotTransition(
+            TriggerSlotState slot,
+            int currentTick,
+            Func<TriggerSlotState, IReadOnlyList<TriggerSlotState>> resolveActivationBlockers,
+            Func<TriggerSlotState, bool> isPendingTargetValid,
+            Func<TriggerSlotState, SwitchContext> getSlotSwitchContext,
+            Action<TriggerSlotState, SwitchContext> setSlotSwitchContext,
+            Func<TriggerSlotState, bool> requestBlockerDeactivation,
+            Func<Thing, int> resolveChipActivationDelayTicks,
+            Func<Thing, int> resolveChipDeactivationDelayTicks,
+            Func<TriggerSide, int, TriggerSlotState> getSlot,
+            Action<TriggerSide, int, Thing> notifySlotActivationCommitted,
+            Action<TriggerSide, int, Thing> notifySlotDeactivated)
+        {
+            SwitchContext context = getSlotSwitchContext(slot);
+            if (context == null)
+            {
+                return;
+            }
+
+            if (context.phase == SwitchPhase.Deactivating)
+            {
+                if (currentTick < context.phaseEndTick)
+                {
+                    return;
+                }
+
+                setSlotSwitchContext(slot, null);
+                if (!slot.IsActive)
+                {
+                    return;
+                }
+
+                if (IsPairedOccupancySlot(slot))
+                {
+                    DeactivateBoundSlotImmediate(
+                        slot,
+                        getSlot,
+                        null,
+                        notifySlotDeactivated);
+                    return;
+                }
+
+                Thing chip = slot.LoadedChip;
+                DeactivateSlot(slot);
+                notifySlotDeactivated?.Invoke(slot.Side, slot.Index, chip);
+                return;
+            }
+
+            if (!IsSlotPendingTargetValid(context, slot, isPendingTargetValid))
+            {
+                setSlotSwitchContext(slot, null);
+                return;
+            }
+
+            IReadOnlyList<TriggerSlotState> blockers = resolveActivationBlockers != null
+                ? resolveActivationBlockers(slot)
+                : new List<TriggerSlotState>();
+            if (blockers != null && blockers.Count > 0)
+            {
+                RequestBlockerDeactivations(blockers, requestBlockerDeactivation);
+                blockers = resolveActivationBlockers != null
+                    ? resolveActivationBlockers(slot)
+                    : blockers;
+                if (blockers != null && blockers.Count > 0)
+                {
+                    setSlotSwitchContext(
+                        slot,
+                        BuildWaitingForConflictsContext(slot.Index, slot.LoadedChip.ThingID));
+                    return;
+                }
+            }
+
+            if (context.phase == SwitchPhase.WaitingForConflicts)
+            {
+                BeginSlotTargetActivation(
+                    slot,
+                    getSlot,
+                    isPendingTargetValid,
+                    setSlotSwitchContext,
+                    resolveChipActivationDelayTicks,
+                    currentTick,
+                    notifySlotActivationCommitted);
+                return;
+            }
+
+            if (context.phase != SwitchPhase.Activating || currentTick < context.phaseEndTick)
+            {
+                return;
+            }
+
+            setSlotSwitchContext(slot, null);
+            if (IsPairedOccupancySlot(slot))
+            {
+                ActivateBoundSlotImmediate(slot, getSlot, notifySlotActivationCommitted);
+                return;
+            }
+
+            if (!ActivateSlot(slot))
+            {
+                return;
+            }
+
+            notifySlotActivationCommitted?.Invoke(slot.Side, slot.Index, slot.LoadedChip);
+        }
+
+        /// <summary>
+        /// 检查独立上下文中的目标身份、当前槽位事实和持续合法性。
+        /// </summary>
+        private static bool IsSlotPendingTargetValid(
+            SwitchContext context,
+            TriggerSlotState targetSlot,
+            Func<TriggerSlotState, bool> isPendingTargetValid)
+        {
+            return context != null
+                && targetSlot != null
+                && targetSlot.LoadedChip != null
+                && !targetSlot.IsDisabled
+                && !string.IsNullOrEmpty(context.targetChipThingId)
+                && targetSlot.LoadedChip.ThingID == context.targetChipThingId
+                && (isPendingTargetValid == null || isPendingTargetValid(targetSlot));
         }
 
         /// <summary>
@@ -352,15 +729,16 @@ namespace BDP.Core.Trigger
             Func<TriggerSide, int, TriggerSlotState> getSlot,
             Func<TriggerSide, TriggerSlotState> getActiveSlotRaw,
             Func<TriggerSlotState, IReadOnlyList<TriggerSlotState>> resolveActivationBlockers,
+            Func<TriggerSlotState, bool> requestBlockerDeactivation,
             Func<TriggerSlotState, bool> isPendingTargetValid,
             Action<TriggerSlotState> deactivateBoundSlotImmediate,
             Action<int, int> activateSynchronizedTargets,
             Action<TriggerSide, int, Thing> notifySlotActivationCommitted,
             Action<TriggerSide, int, Thing> notifySlotDeactivated)
         {
-            ResolveDueSwitchTransition(TriggerSide.Main, currentTick, resolveChipActivationDelayTicks, resolveChipDeactivationDelayTicks, getSwitchContext, setSwitchContext, getSlot, getActiveSlotRaw, resolveActivationBlockers, isPendingTargetValid, deactivateBoundSlotImmediate, activateSynchronizedTargets, notifySlotActivationCommitted, notifySlotDeactivated);
-            ResolveDueSwitchTransition(TriggerSide.Sub, currentTick, resolveChipActivationDelayTicks, resolveChipDeactivationDelayTicks, getSwitchContext, setSwitchContext, getSlot, getActiveSlotRaw, resolveActivationBlockers, isPendingTargetValid, deactivateBoundSlotImmediate, activateSynchronizedTargets, notifySlotActivationCommitted, notifySlotDeactivated);
-            ResolveDueSwitchTransition(TriggerSide.Special, currentTick, resolveChipActivationDelayTicks, resolveChipDeactivationDelayTicks, getSwitchContext, setSwitchContext, getSlot, getActiveSlotRaw, resolveActivationBlockers, isPendingTargetValid, deactivateBoundSlotImmediate, activateSynchronizedTargets, notifySlotActivationCommitted, notifySlotDeactivated);
+            ResolveDueSwitchTransition(TriggerSide.Main, currentTick, resolveChipActivationDelayTicks, resolveChipDeactivationDelayTicks, getSwitchContext, setSwitchContext, getSlot, getActiveSlotRaw, resolveActivationBlockers, requestBlockerDeactivation, isPendingTargetValid, deactivateBoundSlotImmediate, activateSynchronizedTargets, notifySlotActivationCommitted, notifySlotDeactivated);
+            ResolveDueSwitchTransition(TriggerSide.Sub, currentTick, resolveChipActivationDelayTicks, resolveChipDeactivationDelayTicks, getSwitchContext, setSwitchContext, getSlot, getActiveSlotRaw, resolveActivationBlockers, requestBlockerDeactivation, isPendingTargetValid, deactivateBoundSlotImmediate, activateSynchronizedTargets, notifySlotActivationCommitted, notifySlotDeactivated);
+            ResolveDueSwitchTransition(TriggerSide.Special, currentTick, resolveChipActivationDelayTicks, resolveChipDeactivationDelayTicks, getSwitchContext, setSwitchContext, getSlot, getActiveSlotRaw, resolveActivationBlockers, requestBlockerDeactivation, isPendingTargetValid, deactivateBoundSlotImmediate, activateSynchronizedTargets, notifySlotActivationCommitted, notifySlotDeactivated);
         }
 
         /// <summary>
@@ -562,6 +940,7 @@ namespace BDP.Core.Trigger
             Func<TriggerSide, int, TriggerSlotState> getSlot,
             Func<TriggerSide, TriggerSlotState> getActiveSlot,
             Func<TriggerSide, TriggerSlotState> getActiveSlotRaw,
+            Func<TriggerSlotState, bool> requestBlockerDeactivation,
             Func<TriggerSide, SwitchContext> getSwitchContext,
             Action<TriggerSide, SwitchContext> setSwitchContext,
             Func<Thing, int> resolveChipActivationDelayTicks,
@@ -583,18 +962,25 @@ namespace BDP.Core.Trigger
                     continue;
                 }
 
-                RequestDeactivate(
-                    normalizedBlocker.Side,
-                    getActiveSlot,
-                    getActiveSlotRaw,
-                    getSlot,
-                    getSwitchContext,
-                    setSwitchContext,
-                    resolveChipActivationDelayTicks,
-                    resolveChipDeactivationDelayTicks,
-                    currentTick,
-                    notifySlotActivationCommitted,
-                    notifySlotDeactivated);
+                if (requestBlockerDeactivation != null)
+                {
+                    requestBlockerDeactivation(normalizedBlocker);
+                }
+                else
+                {
+                    RequestDeactivate(
+                        normalizedBlocker.Side,
+                        getActiveSlot,
+                        getActiveSlotRaw,
+                        getSlot,
+                        getSwitchContext,
+                        setSwitchContext,
+                        resolveChipActivationDelayTicks,
+                        resolveChipDeactivationDelayTicks,
+                        currentTick,
+                        notifySlotActivationCommitted,
+                        notifySlotDeactivated);
+                }
             }
 
             AttachTargetToWindingContexts(
@@ -1126,6 +1512,7 @@ namespace BDP.Core.Trigger
             Func<TriggerSide, int, TriggerSlotState> getSlot,
             Func<TriggerSide, TriggerSlotState> getActiveSlotRaw,
             Func<TriggerSlotState, IReadOnlyList<TriggerSlotState>> resolveActivationBlockers,
+            Func<TriggerSlotState, bool> requestBlockerDeactivation,
             Func<TriggerSlotState, bool> isPendingTargetValid,
             Action<TriggerSlotState> deactivateBoundSlotImmediate,
             Action<int, int> activateSynchronizedTargets,
@@ -1168,6 +1555,7 @@ namespace BDP.Core.Trigger
                     getSlot,
                     getActiveSlotRaw,
                     resolveActivationBlockers,
+                    requestBlockerDeactivation,
                     isPendingTargetValid,
                     notifySlotActivationCommitted,
                     notifySlotDeactivated);
@@ -1197,6 +1585,7 @@ namespace BDP.Core.Trigger
             Func<TriggerSide, int, TriggerSlotState> getSlot,
             Func<TriggerSide, TriggerSlotState> getActiveSlotRaw,
             Func<TriggerSlotState, IReadOnlyList<TriggerSlotState>> resolveActivationBlockers,
+            Func<TriggerSlotState, bool> requestBlockerDeactivation,
             Func<TriggerSlotState, bool> isPendingTargetValid,
             Action<TriggerSide, int, Thing> notifySlotActivationCommitted,
             Action<TriggerSide, int, Thing> notifySlotDeactivated)
@@ -1232,6 +1621,7 @@ namespace BDP.Core.Trigger
                     getSlot,
                     getActiveSlotRaw,
                     getActiveSlotRaw,
+                    requestBlockerDeactivation,
                     getSwitchContext,
                     setSwitchContext,
                     resolveChipActivationDelayTicks,

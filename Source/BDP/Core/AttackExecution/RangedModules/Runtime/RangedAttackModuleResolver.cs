@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using BDP.Core.Expressions;
 using BDP.Core.AttackExecution.RangedModules.Runtime;
+using BDP.Core.Permissions;
 using BDP.Support.Diagnostics;
 using Verse;
 
@@ -16,14 +17,24 @@ namespace BDP.Core.AttackExecution
         /// <summary>
         /// 按正式结果上的模块挂载快照解析运行时实例列表。
         /// </summary>
-        internal IReadOnlyList<RangedAttackModuleSlot> ResolveSlots(Pawn pawn, FormalExpressionResult result)
+        internal IReadOnlyList<RangedAttackModuleSlot> ResolveSlots(
+            Pawn pawn,
+            FormalExpressionResult result,
+            MapPermissionContext permissionContext = null)
         {
             List<RangedAttackModuleSlot> slots = new List<RangedAttackModuleSlot>();
+            // 同一单侧来源泳道内，一个模块定义只允许成功解析一次；主、副泳道各自拥有独立解析集合。
+            HashSet<string> seenModuleKeys = new HashSet<string>(StringComparer.Ordinal);
             IReadOnlyList<RangedModuleMountConfig> mounts = result != null ? result.RangedModules : null;
             if (mounts == null)
             {
                 return slots;
             }
+
+            permissionContext = permissionContext ?? new MapPermissionContext(
+                pawn,
+                result != null ? result.Id : null,
+                result != null ? result.DeclaredPermissionKeys : null);
 
             for (int i = 0; i < mounts.Count; i++)
             {
@@ -34,6 +45,12 @@ namespace BDP.Core.AttackExecution
                 }
 
                 if (!typeof(IRangedAttackModuleRuntime).IsAssignableFrom(mount.moduleDef.runtimeClass))
+                {
+                    continue;
+                }
+
+                string moduleKey = mount.moduleDef.defName;
+                if (seenModuleKeys.Contains(moduleKey))
                 {
                     continue;
                 }
@@ -50,6 +67,7 @@ namespace BDP.Core.AttackExecution
                     {
                         MountIndex = i,
                         Pawn = pawn,
+                        Permissions = permissionContext,
                         Result = result,
                         Mount = mount.Clone(),
                         ModuleDef = mount.moduleDef,
@@ -61,6 +79,8 @@ namespace BDP.Core.AttackExecution
                         MountIndex = i,
                         Runtime = runtime
                     });
+                    // 只有实例创建和初始化均成功后才登记；失败挂载不能阻止后续同定义项重试。
+                    seenModuleKeys.Add(moduleKey);
                 }
                 catch (Exception ex)
                 {

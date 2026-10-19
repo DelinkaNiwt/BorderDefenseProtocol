@@ -157,7 +157,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
                 "BDP_Recipe_ProduceChip");
             return ChipManufacturingCostCalculator.Calculate(
                 recipe,
-                resolution.Actions,
+                resolution.FunctionDefs,
                 resolution.ArmamentForm);
         }
 

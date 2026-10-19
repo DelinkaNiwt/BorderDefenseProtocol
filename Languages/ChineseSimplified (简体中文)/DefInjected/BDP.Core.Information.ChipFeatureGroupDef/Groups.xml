@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <!-- 近战攻击的信息组名称与说明。 -->
+  <BDP_FeatureGroup_MeleeAttackMethod.label>攻击方式</BDP_FeatureGroup_MeleeAttackMethod.label>
+  <BDP_FeatureGroup_MeleeAttackMethod.description>一套独立近战攻击方式及其关联参数。</BDP_FeatureGroup_MeleeAttackMethod.description>
+  <!-- 机动方式的信息组名称与说明。 -->
+  <BDP_FeatureGroup_MovementMethod.label>机动方式</BDP_FeatureGroup_MovementMethod.label>
+  <BDP_FeatureGroup_MovementMethod.description>一套独立机动方式及其适用参数。</BDP_FeatureGroup_MovementMethod.description>
+  <!-- 通用额外效果子组名称与说明。 -->
+  <BDP_FeatureGroup_ExtraEffect.label>额外效果</BDP_FeatureGroup_ExtraEffect.label>
+  <BDP_FeatureGroup_ExtraEffect.description>依附所属功能或信息组产生的一项次要玩法结果。</BDP_FeatureGroup_ExtraEffect.description>
+</LanguageData>

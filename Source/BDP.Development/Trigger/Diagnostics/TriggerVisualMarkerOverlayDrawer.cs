@@ -460,9 +460,12 @@ namespace BDP.Development.Trigger.Diagnostics
             {
                 name = $"BDP_TriggerVisualMarkerPoint_{ColorUtility.ToHtmlStringRGBA(color)}",
                 color = color,
-                mainTexture = MarkerTexture,
-                hideFlags = HideFlags.HideAndDontSave
+                mainTexture = MarkerTexture
             };
+#if !BDP_RIMWORLD_1_7
+            // 1.6 的 Unity 需要此标记隐藏诊断材质；1.7 兼容层的 setter 为空实现且会写入 Stub! 警告。
+            material.hideFlags = HideFlags.HideAndDontSave;
+#endif
             material.SetTexture("_MainTex", MarkerTexture);
             material.SetColor("_Color", color);
             return material;

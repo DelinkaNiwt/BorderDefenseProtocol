@@ -43,13 +43,15 @@ Assert-True (
 ) 'ArrivalContribution must expose a separate next-segment vanilla binding target surface.'
 
 Assert-True (
-    $arrivalRecordText -match '\bLocalTargetInfo\s+NextBindingTarget\b'
+    ($arrivalRecordText -match '\bLocalTargetInfo\s+NextBindingTarget\b') -and
+    ($arrivalRecordText -match '\bHasNextBindingTargetOverride\b')
 ) 'ArrivalRecord must carry the next-segment vanilla binding target separately from the semantic target.'
 
 Assert-True (
     ($arrivalServiceText -match 'NextBindingTarget\s*=\s*flight\s*!=\s*null\s*\?\s*flight\.CurrentTarget\s*:\s*Verse\.LocalTargetInfo\.Invalid') -and
     ($arrivalServiceText -match 'if\s*\(contribution\.HasNextBindingTarget\)') -and
-    ($arrivalServiceText -match 'record\.NextBindingTarget\s*=\s*contribution\.NextBindingTarget')
+    ($arrivalServiceText -match 'record\.NextBindingTarget\s*=\s*contribution\.NextBindingTarget') -and
+    ($arrivalServiceText -match 'record\.HasNextBindingTargetOverride\s*=\s*true')
 ) 'ArrivalStageService must seed and apply the separate next binding target field.'
 
 Assert-True (
@@ -67,7 +69,7 @@ Assert-True (
 
 Assert-True (
     ($projectileText -match '\bLocalTargetInfo\s+nextBindingTarget\b') -and
-    ($projectileText -match 'arrival\.NextBindingTarget\.IsValid') -and
+    ($projectileText -match 'arrival\.HasNextBindingTargetOverride') -and
     ($projectileText -match 'usedTarget\s*=\s*nextBindingTarget') -and
     ($projectileText -match 'currentFlightRecord\.CurrentTarget\s*=\s*nextTarget') -and
     ($projectileText -match 'arrivalNextBindingTarget') -and

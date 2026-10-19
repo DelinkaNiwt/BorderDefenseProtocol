@@ -2,13 +2,13 @@
 
 ## 问题与根因
 
-1. 光魂已具备 Keyed（键值语言包）名称，但制造台预设列表和信息弹窗仍直接读取原版 `Def.LabelCap`，绕过了动作预设的 `ResolvedLabel`（已解析名称）。
+1. 光魂已具备 Keyed（键值语言包）名称，但制造台预设列表和信息弹窗仍直接读取原版 `Def.LabelCap`，绕过了芯片功能模板的 `ResolvedLabel`（已解析名称）。
 2. 光魂关闭的是常驻护盾球；成功格挡时仍会额外生成四层六边形 Fleck（瞬时特效贴图）。六边形、白色闪光、金属偏转火花和声音来自不同调用，可以分别控制。
 3. 格挡命中位置与护盾球共用 `shieldRadius=0.8`，使光魂的闪光和火花离角色、盾面过远。
 
 ## 设计
 
-- 在制造 UI（界面）建立统一的预设名称解析入口：动作预设使用 `ResolvedLabel`，其他 Def（定义）继续使用原版 `LabelCap`。列表与信息弹窗标题共用该入口。
+- 在制造 UI（界面）建立统一的预设名称解析入口：芯片功能模板使用 `ResolvedLabel`，其他 Def（定义）继续使用原版 `LabelCap`。列表与信息弹窗标题共用该入口。
 - 在现有能量护盾配置增加 `showBlockGraphic`（是否显示六边形格挡贴图），默认开启，保证旧护盾行为不变。
 - 增加独立的 `impactEffectRadius`（命中特效距离）；负值表示沿用 `shieldRadius`，保持既有定义兼容。
 - 光魂灵活、举盾两种姿态均设置：`showBlockGraphic=false`、`impactEffectRadius=0.4`。

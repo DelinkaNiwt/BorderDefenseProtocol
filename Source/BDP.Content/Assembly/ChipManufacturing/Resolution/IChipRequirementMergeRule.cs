@@ -3,7 +3,7 @@ using BDP.Core.Requirements;
 
 namespace BDP.Content.Assembly.ChipManufacturing.Resolution
 {
-    /// <summary>一种角色条件参与双动作合并时的显式规则。</summary>
+    /// <summary>一种角色条件参与双芯片功能模板合并时的显式规则。</summary>
     public interface IChipRequirementMergeRule
     {
         /// <summary>当前规则负责的条件具体类型。</summary>

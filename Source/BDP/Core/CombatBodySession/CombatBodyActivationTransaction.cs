@@ -1,10 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using BDP.Core.Chips;
 using BDP.Core.CombatBody;
 using BDP.Core.CombatBody.External;
+using BDP.Core.Genes;
 using BDP.Core.Trigger;
 using BDP.Core.Trion;
+using BDP.Support.Diagnostics;
 using Verse;
 
 namespace BDP.Core.CombatBodySession
@@ -62,44 +64,87 @@ namespace BDP.Core.CombatBodySession
         /// </summary>
         public bool TryActivate(Pawn ownerPawn)
         {
-            if (!rawCombatBodyService.CanActivate())
+            long activationStart = BdpDiagnostics.BeginTiming();
+            BdpDiagnostics.Trace(
+                "战斗体激活"
+                + " | stage=begin"
+                + " | pawn=" + (ownerPawn != null ? ownerPawn.ThingID : "null")
+                + " | phase=" + rawCombatBodyService.Phase);
+            if (!TrionGlandEligibility.HasActiveTrionGland(ownerPawn)
+                || !rawCombatBodyService.CanActivate()
+                || !policy.HasOperationalTrion(ownerPawn))
             {
+                BdpDiagnostics.Trace(
+                    "战斗体激活"
+                    + " | stage=rejected"
+                    + " | pawn=" + (ownerPawn != null ? ownerPawn.ThingID : "null")
+                    + " | reason=gland_or_phase_not_ready");
                 return false;
             }
 
             if (!policy.TryResolvePrimaryTrigger(ownerPawn, out CompTriggerBody trigger))
             {
+                BdpDiagnostics.Trace(
+                    "战斗体激活"
+                    + " | stage=rejected"
+                    + " | pawn=" + (ownerPawn != null ? ownerPawn.ThingID : "null")
+                    + " | reason=primary_trigger_not_resolved");
                 return false;
             }
+
+            trigger.TraceLifecycle(
+                "combat_body_activation_trigger_resolved",
+                "phase=" + rawCombatBodyService.Phase
+                + " | specialSlots=" + trigger.DescribeSlotsForDiagnostics(TriggerSide.Special));
 
             ITrionCommands trionCommands = TrionSurfaceAccess.ResolveCommands(ownerPawn);
             if (trionCommands == null)
             {
+                trigger.TraceLifecycle("combat_body_activation_rejected", "reason=trion_commands_missing");
                 return false;
             }
 
+            long allocationStart = BdpDiagnostics.BeginTiming();
             float allocateAmount = CalculateCombatBodyAllocateAmount(trigger);
+            BdpDiagnostics.TraceTiming(
+                "战斗体激活 | stage=calculate_allocate | pawn=" + ownerPawn.ThingID
+                + " | allocateTrion=" + allocateAmount,
+                allocationStart);
+            trigger.TraceLifecycle(
+                "combat_body_activation_resource_check",
+                "allocateTrion=" + allocateAmount);
             if (allocateAmount > 0f && !trionCommands.CanAfford(allocateAmount))
             {
+                trigger.TraceLifecycle("combat_body_activation_rejected", "reason=trion_not_affordable");
                 return false;
             }
 
             if (allocateAmount > 0f && !trionCommands.Allocate(allocateAmount))
             {
+                trigger.TraceLifecycle("combat_body_activation_rejected", "reason=trion_allocate_failed");
                 return false;
             }
 
             try
             {
+                long enterActiveStart = BdpDiagnostics.BeginTiming();
                 if (!rawCombatBodyService.TryEnterActive(allocateAmount))
                 {
+                    BdpDiagnostics.TraceTiming(
+                        "战斗体激活 | stage=enter_active_rejected | pawn=" + ownerPawn.ThingID,
+                        enterActiveStart);
                     if (allocateAmount > 0f)
                     {
                         trionCommands.Release(allocateAmount);
                     }
 
+                    trigger.TraceLifecycle("combat_body_activation_rejected", "reason=raw_enter_active_failed");
                     return false;
                 }
+
+                BdpDiagnostics.TraceTiming(
+                    "战斗体激活 | stage=enter_active | pawn=" + ownerPawn.ThingID,
+                    enterActiveStart);
             }
             catch
             {
@@ -111,21 +156,57 @@ namespace BDP.Core.CombatBodySession
                 throw;
             }
 
+            long triggerDisableStart = BdpDiagnostics.BeginTiming();
             trigger.SetCombatBodyUnavailableDisabled(false);
+            BdpDiagnostics.TraceTiming(
+                "战斗体激活 | stage=trigger_disable_clear | pawn=" + ownerPawn.ThingID,
+                triggerDisableStart);
             CombatBodyCollapseExtensionRegistry.Clear(ownerPawn);
+
+            long specialActivationStart = BdpDiagnostics.BeginTiming();
             TryAutoActivateSpecialSlots(trigger);
+            BdpDiagnostics.TraceTiming(
+                "战斗体激活 | stage=special_auto_activation | pawn=" + ownerPawn.ThingID,
+                specialActivationStart);
+
+            long primaryActivationStart = BdpDiagnostics.BeginTiming();
             TryAutoActivatePrimarySlots(ownerPawn);
+            BdpDiagnostics.TraceTiming(
+                "战斗体激活 | stage=primary_auto_activation | pawn=" + ownerPawn.ThingID,
+                primaryActivationStart);
+
+            long trionRuntimeStart = BdpDiagnostics.BeginTiming();
             trionBinding.BindActiveRuntime();
+            BdpDiagnostics.TraceTiming(
+                "战斗体激活 | stage=bind_active_runtime | pawn=" + ownerPawn.ThingID,
+                trionRuntimeStart);
+
+            long woundRuntimeStart = BdpDiagnostics.BeginTiming();
             owner.WoundRuntime.RebuildActiveWounds(ownerPawn);
+            BdpDiagnostics.TraceTiming(
+                "战斗体激活 | stage=rebuild_wound_runtime | pawn=" + ownerPawn.ThingID,
+                woundRuntimeStart);
             trionCommands.SetFrozen(true);
+
+            long sessionNotifyStart = BdpDiagnostics.BeginTiming();
             notifyCombatBodySessionStateChanged();
+            BdpDiagnostics.TraceTiming(
+                "战斗体激活 | stage=notify_session_changed | pawn=" + ownerPawn.ThingID,
+                sessionNotifyStart);
+            trigger.TraceSlotBoundary(
+                "combat_body_activation_complete",
+                "phase=" + rawCombatBodyService.Phase
+                + " | specialSideContext=" + trigger.DescribeSideSwitchContextForDiagnostics(TriggerSide.Special));
+            BdpDiagnostics.TraceTiming(
+                "战斗体激活 | stage=total | pawn=" + ownerPawn.ThingID,
+                activationStart);
             return true;
         }
 
         /// <summary>
         /// 计算当前战斗体激活时需要正式锁定的 `Trion` 总量。
         /// </summary>
-        private float CalculateCombatBodyAllocateAmount(CompTriggerBody trigger)
+        internal float CalculateCombatBodyAllocateAmount(CompTriggerBody trigger)
         {
             ITriggerLoadoutReader loadoutReader = trigger != null ? trigger.LoadoutReaderSurface : null;
             if (loadoutReader == null)
@@ -154,7 +235,7 @@ namespace BDP.Core.CombatBodySession
                 }
             }
 
-            return total;
+            return TrionResourceRuleRegistry.ResolveCapacityCost(trigger.OwnerPawn, total);
         }
 
         /// <summary>
@@ -197,22 +278,7 @@ namespace BDP.Core.CombatBodySession
         /// </summary>
         private void TryAutoActivateSpecialSlots(CompTriggerBody trigger)
         {
-            ITriggerLoadoutReader loadoutReader = trigger != null ? trigger.LoadoutReaderSurface : null;
-            ITriggerLoadoutCommands triggerLoadoutCommands = trigger != null ? trigger.LoadoutCommandSurface : null;
-            if (loadoutReader == null || triggerLoadoutCommands == null)
-            {
-                return;
-            }
-
-            foreach (ITriggerSlotState slot in loadoutReader.GetSlots(TriggerSide.Special))
-            {
-                if (slot == null || slot.LoadedChip == null || slot.IsDisabled || slot.IsActive)
-                {
-                    continue;
-                }
-
-                triggerLoadoutCommands.RequestActivate(TriggerSide.Special, slot.Index);
-            }
+            trigger?.AutoActivateSpecialSlots();
         }
 
         /// <summary>
@@ -253,6 +319,6 @@ namespace BDP.Core.CombatBodySession
 
             loadoutCommands.RequestActivate(interaction.ControlSide, interaction.ControlSlotIndex);
         }
+
     }
 }
-

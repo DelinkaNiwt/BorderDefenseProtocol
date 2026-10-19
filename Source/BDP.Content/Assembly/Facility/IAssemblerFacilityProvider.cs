@@ -15,6 +15,11 @@ namespace BDP.Content.Assembly
         IReadOnlyList<Thing> GetAvailableChips();
 
         /// <summary>
+        /// 读取所有有效连接芯片仓的容量上限总和。
+        /// </summary>
+        int GetStorageCapacityLimit();
+
+        /// <summary>
         /// 从连接容器中取出指定芯片。
         /// </summary>
         bool TryTakeChip(Thing chip);

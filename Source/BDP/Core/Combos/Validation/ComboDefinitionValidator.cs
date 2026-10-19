@@ -27,18 +27,20 @@ namespace BDP.Core.Combos
                 return BuildResult(errors, warnings);
             }
 
-            if (string.IsNullOrWhiteSpace(contract.FirstSourceActionDefName))
+            if (string.IsNullOrWhiteSpace(contract.FirstSourceKey))
             {
-                errors.Add(BuildMessage("ComboFirstSourceMissing", null, "firstSourceActionDefName", "组合技缺少第一来源动作预设声明。"));
+                errors.Add(BuildMessage("ComboFirstSourceMissing", null, "firstSourceKey", "组合技缺少第一来源芯片功能模板声明。"));
             }
 
-            if (string.IsNullOrWhiteSpace(contract.SecondSourceActionDefName))
+            if (string.IsNullOrWhiteSpace(contract.SecondSourceKey))
             {
-                errors.Add(BuildMessage("ComboSecondSourceMissing", null, "secondSourceActionDefName", "组合技缺少第二来源动作预设声明。"));
+                errors.Add(BuildMessage("ComboSecondSourceMissing", null, "secondSourceKey", "组合技缺少第二来源芯片功能模板声明。"));
             }
 
             ValidateSourceAdmission(contract.FirstSourceAdmission, "FirstSourceAdmission", errors);
             ValidateSourceAdmission(contract.SecondSourceAdmission, "SecondSourceAdmission", errors);
+            ValidateSourceScope(contract.FirstSourceScope, "FirstSourceScope", errors);
+            ValidateSourceScope(contract.SecondSourceScope, "SecondSourceScope", errors);
 
             ValidateUseRequirements(contract.UseRequirements, errors);
 
@@ -77,6 +79,48 @@ namespace BDP.Core.Combos
             ValidateIdentityList(admission.DeniedTags, fieldPrefix + ".DeniedTags", errors);
             ValidateIdentityList(admission.AllowedSourceVariants, fieldPrefix + ".AllowedSourceVariants", errors);
             ValidateIdentityList(admission.DeniedSourceVariants, fieldPrefix + ".DeniedSourceVariants", errors);
+        }
+
+        /// <summary>校验来源范围的形态/姿态层级关系。</summary>
+        private static void ValidateSourceScope(
+            ComboSourceScopeContract scope,
+            string fieldPrefix,
+            List<ComboDefinitionValidationMessage> errors)
+        {
+            if (scope == null)
+            {
+                return;
+            }
+
+            if (!string.IsNullOrWhiteSpace(scope.ModeKey)
+                && scope.ModeKey.IndexOf('/') >= 0)
+            {
+                errors.Add(BuildMessage(
+                    "ComboSourceScopeModeKeyContainsSeparator",
+                    null,
+                    fieldPrefix + ".ModeKey",
+                    "组合技来源范围的 ModeKey 不得包含上下文路径分隔符 /。"));
+            }
+
+            if (!string.IsNullOrWhiteSpace(scope.StanceKey)
+                && scope.StanceKey.IndexOf('/') >= 0)
+            {
+                errors.Add(BuildMessage(
+                    "ComboSourceScopeStanceKeyContainsSeparator",
+                    null,
+                    fieldPrefix + ".StanceKey",
+                    "组合技来源范围的 StanceKey 不得包含上下文路径分隔符 /。"));
+            }
+
+            if (!string.IsNullOrWhiteSpace(scope.StanceKey)
+                && string.IsNullOrWhiteSpace(scope.ModeKey))
+            {
+                errors.Add(BuildMessage(
+                    "ComboSourceScopeModeMissing",
+                    null,
+                    fieldPrefix + ".StanceKey",
+                    "组合技来源范围指定姿态时必须同时指定形态。"));
+            }
         }
 
         /// <summary>校验单个身份键列表。</summary>

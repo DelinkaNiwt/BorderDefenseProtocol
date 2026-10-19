@@ -12,10 +12,10 @@ namespace BDP.Content.CombatBody.Escape
     internal sealed class CombatBodyEmergencyEscapeResolver
     {
         /// <summary>
-        /// 紧急脱离正式被动键。
+        /// 紧急脱离正式被动身份键。
         /// 执行解析与展示状态解析必须共用同一语义键。
         /// </summary>
-        internal const string EmergencyEscapePassiveKey = "EmergencyEscape";
+        internal const string EmergencyEscapePassiveIdentityKey = "EmergencyEscape";
 
         /// <summary>
         /// 解析当前 Pawn 是否具备紧急脱离附加阶段。
@@ -55,8 +55,8 @@ namespace BDP.Content.CombatBody.Escape
         private static ExpressionPublishedResultSnapshot FindAvailablePassive(
             ExpressionPublishedProjectionSnapshot projection)
         {
-            if (projection?.PassiveResultsByKey == null
-                || !projection.PassiveResultsByKey.TryGetValue(EmergencyEscapePassiveKey, out IReadOnlyList<ExpressionPublishedResultSnapshot> results)
+            if (projection?.PassiveResultsByIdentityKey == null
+                || !projection.PassiveResultsByIdentityKey.TryGetValue(EmergencyEscapePassiveIdentityKey, out IReadOnlyList<ExpressionPublishedResultSnapshot> results)
                 || results == null)
             {
                 return null;

@@ -63,7 +63,7 @@ namespace BDP.Core.VerbHosting
         /// 按当前已发布战斗投影刷新全部绑定状态。
         /// formal host 壳由 BDP 内部长期持有，不再依赖原版 VerbTracker 枚举。
         /// </summary>
-        public void Refresh(TriggerCombatProjectionState projection)
+        public ISet<Verb> Refresh(TriggerCombatProjectionState projection, TriggerCombatProjectionState continuityProjection = null)
         {
             EnsureFormalBindings();
             ResetBindings();
@@ -99,7 +99,7 @@ namespace BDP.Core.VerbHosting
                 }
             }
 
-            SyncFormalShells();
+            return SyncFormalShells(continuityProjection, projection);
         }
 
         /// <summary>
@@ -135,11 +135,16 @@ namespace BDP.Core.VerbHosting
                 if (binding.RangedVerb != null && binding.RangedVerb.ShouldTickAsFormalHost())
                 {
                     binding.RangedVerb.VerbTick();
+                    if (binding.RangedVerb.ShouldResetAfterTargetLifecycleChange())
+                    {
+                        binding.RangedVerb.Reset();
+                    }
                 }
 
                 if (binding.MeleeVerb != null && binding.MeleeVerb.ShouldTickAsFormalHost())
                 {
                     binding.MeleeVerb.VerbTick();
+                    binding.MeleeVerb.TickAutomaticContinuation();
                 }
 
                 if (!binding.ShouldTickAsFormalHost())
@@ -179,6 +184,40 @@ namespace BDP.Core.VerbHosting
         {
             EnsureFormalBindings();
             TryAddActiveSlot(slot);
+        }
+
+        /// <summary>原版再次请求近战时，先交付其原任务下已经开始的有限计划剩余段。</summary>
+        internal bool TryPrepareAutomaticMeleeContinuation(Thing target, out Verb verb)
+        {
+            verb = null;
+            EnsureFormalBindings();
+            foreach (BdpFormalVerbBinding binding in bindings.Values)
+            {
+                if (binding?.MeleeVerb != null
+                    && binding.MeleeVerb.TryPrepareAutomaticContinuation(target, out verb))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// 把目标生命周期变化转发给当前 owner 的远程正式宿主。
+        /// 它只在倒地、死亡或恢复事件发生时调用，不进入每刻常驻扫描。
+        /// </summary>
+        internal void NotifyTargetLifecycleChanged(Pawn target)
+        {
+            if (target == null)
+            {
+                return;
+            }
+
+            EnsureFormalBindings();
+            foreach (KeyValuePair<BdpFormalVerbHostSlot, BdpFormalVerbBinding> pair in bindings)
+            {
+                pair.Value?.RangedVerb?.NotifyTargetLifecycleChanged(target);
+            }
         }
 
         /// <summary>
@@ -363,8 +402,11 @@ namespace BDP.Core.VerbHosting
         /// <summary>
         /// 把当前 binding 状态同步回 BDP 内部持有的正式壳 verb。
         /// </summary>
-        private void SyncFormalShells()
+        private ISet<Verb> SyncFormalShells(TriggerCombatProjectionState before = null, TriggerCombatProjectionState after = null)
         {
+            HashSet<string> unchanged = AttackSessionContinuity.GetUnchangedResultIds(before, after);
+            int previousVersion = before != null ? before.ProjectionVersion : 0;
+            HashSet<Verb> rejected = before != null ? new HashSet<Verb>() : null;
             foreach (KeyValuePair<BdpFormalVerbHostSlot, BdpFormalVerbBinding> pair in bindings)
             {
                 BdpFormalVerbBinding binding = pair.Value;
@@ -382,22 +424,36 @@ namespace BDP.Core.VerbHosting
 
                 if (binding.RangedVerb != null)
                 {
+                    bool preserve = bindRanged && binding.RangedVerb.HostResultId == binding.ResultId
+                        && AttackSessionContinuity.CanMigrateToken(binding.RangedVerb.HostSessionToken,
+                            previousVersion, binding.State.SessionToken, unchanged);
+                    if (!preserve) rejected?.Add(binding.RangedVerb);
                     binding.RangedVerb.InitializeFormalHost(owner, binding.Slot);
                     binding.RangedVerb.SyncFormalBinding(
                         bindRanged ? binding.State : CreateUnavailableState(binding.Slot),
-                        owner.GetFormalHostFallbackVerbProps(binding.Slot, WeaponExpressionMode.Ranged));
+                        owner.GetFormalHostFallbackVerbProps(binding.Slot, WeaponExpressionMode.Ranged),
+                        preserve);
                 }
 
                 if (binding.MeleeVerb != null)
                 {
+                    bool preserve = bindMelee && binding.MeleeVerb.ResultId == binding.ResultId
+                        && AttackSessionContinuity.CanMigrateToken(binding.MeleeVerb.HostSessionToken,
+                            previousVersion, binding.State.SessionToken, unchanged)
+                        && (binding.MeleeVerb.PlanSessionToken == null
+                            || AttackSessionContinuity.CanMigrateToken(binding.MeleeVerb.PlanSessionToken,
+                                previousVersion, binding.State.SessionToken, unchanged));
+                    if (!preserve) rejected?.Add(binding.MeleeVerb);
                     binding.MeleeVerb.InitializeFormalHost(owner, binding.Slot);
                     binding.MeleeVerb.SyncFormalBinding(
                         bindMelee ? binding.State : CreateUnavailableState(binding.Slot),
-                        owner.GetFormalHostFallbackVerbProps(binding.Slot, WeaponExpressionMode.Melee));
+                        owner.GetFormalHostFallbackVerbProps(binding.Slot, WeaponExpressionMode.Melee),
+                        preserve);
                 }
             }
 
             RebuildActiveVerbQueue();
+            return rejected;
         }
 
         /// <summary>
@@ -511,6 +567,14 @@ namespace BDP.Core.VerbHosting
                 return true;
             }
 
+            if (result.OriginKind == ExpressionOriginKind.Special
+                && result.VerbAttackRole == VerbAttackRole.Primary)
+            {
+                // 特殊槽只有一个主武器宿主，远程与近战由绑定结果的武器模式选择对应壳。
+                slot = BdpFormalVerbHostSlot.SpecialPrimary;
+                return true;
+            }
+
             if (result.OriginKind == ExpressionOriginKind.Main)
             {
                 slot = result.VerbAttackRole == VerbAttackRole.Secondary
@@ -537,7 +601,7 @@ namespace BDP.Core.VerbHosting
         {
             bindingState = null;
             if (result == null
-                || result.ResultKind != ExpressionResultKind.Verb
+                || result.OutputChannel != ExpressionOutputChannel.Verb
                 || string.IsNullOrWhiteSpace(result.Id)
                 || result.VerbProps == null)
             {
@@ -564,7 +628,7 @@ namespace BDP.Core.VerbHosting
             bindingState = null;
             if (result == null
                 || slot == BdpFormalVerbHostSlot.None
-                || result.ResultKind != ExpressionResultKind.Verb
+                || result.OutputChannel != ExpressionOutputChannel.Verb
                 || string.IsNullOrWhiteSpace(result.Id)
                 || result.VerbProps == null)
             {

@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 小兵短剑：沿用钢铁匕首的三种工具类型与冷却，执行两连击且单次威力减半。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+    <!-- 小兵短剑芯片功能标识。 -->
+    <defName>BDP_ChipFunction_SoldierShortSword</defName>
+    <!-- 该芯片仅供固定装载，隐藏于玩家制造入口。 -->
+    <showInManufacturing>false</showInManufacturing>
+    <!-- 名称和说明由简体中文 DefInjected 提供。 -->
+    <label>BDP_ChipFunction_SoldierShortSword.label</label>
+    <description>BDP_ChipFunction_SoldierShortSword.description</description>
+    <!-- 近战武器使用攻击者职业。 -->
+    <profession>BDP_ChipProfession_Attacker</profession>
+    <config>
+      <!-- 该芯片属于实体武装。 -->
+      <Profile>
+        <Category>BDP_ChipCategory_Weapon</Category>
+        <Tags>
+          <li>BDP_ChipTag_Entity</li>
+        </Tags>
+      </Profile>
+      <!-- 小兵短剑可装主槽或副槽，启停无延迟。 -->
+      <Loadout>
+        <SlotRegion>MainSub</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <ActivationDelayTicks>0</ActivationDelayTicks>
+        <DeactivationDelayTicks>0</DeactivationDelayTicks>
+      </Loadout>
+      <!-- 固定占用 20 Trion，启动不额外消耗。 -->
+      <Trion>
+        <CapacityCost>20</CapacityCost>
+        <ActivationCost>0</ActivationCost>
+      </Trion>
+      <!-- 沿用现有实体攻击的最低释放力要求。 -->
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement">
+          <Minimum>1</Minimum>
+        </li>
+      </ActivationRequirements>
+      <Expression>
+        <Entries>
+          <!-- 三种工具组成一枚短剑近战芯片。 -->
+          <li>
+            <Id>soldier_short_sword_primary</Id>
+            <DisplayLabel>BDP_SoldierShortSword</DisplayLabel>
+            <DisplayLabelKey>BDP_SoldierShortSword</DisplayLabelKey>
+            <EntryType>PrimaryVerb</EntryType>
+            <WeaponMode>Melee</WeaponMode>
+            <!-- 暂时复用蝎子的单持贴图，并沿用蝎子双持组合视觉。 -->
+            <Presentation>
+              <VisualPresetDefName>BDP_Visual_Scorpion</VisualPresetDefName>
+              <CompositeVisualPresetDefName>BDP_Visual_Scorpion_Dual</CompositeVisualPresetDefName>
+            </Presentation>
+            <!-- 每次短剑攻击命中两次；三种工具的单次威力均已减半。 -->
+            <Execution>
+              <HitCount>2</HitCount>
+              <!-- 两次连击之间间隔 5 tick。 -->
+              <HitIntervalTicks>5</HitIntervalTicks>
+            </Execution>
+            <tools>
+              <!-- 匕首握柄：钝击威力减半为 4.5，攻击冷却 2 秒。 -->
+              <li>
+                <label>BDP_SoldierShortSword_Handle</label>
+                <capacities>
+                  <li>Blunt</li>
+                </capacities>
+                <power>4.5</power>
+                <cooldownTime>2.0</cooldownTime>
+              </li>
+              <!-- 匕首刃部：切割威力减半为 6，攻击冷却 1.5 秒。 -->
+              <li>
+                <label>BDP_SoldierShortSword_Blade</label>
+                <capacities>
+                  <li>Cut</li>
+                </capacities>
+                <power>6</power>
+                <cooldownTime>1.5</cooldownTime>
+              </li>
+              <!-- 匕首尖端：刺击威力减半为 6.5，攻击冷却 2 秒。 -->
+              <li>
+                <label>BDP_SoldierShortSword_Tip</label>
+                <capacities>
+                  <li>Stab</li>
+                </capacities>
+                <power>6.5</power>
+                <cooldownTime>2.0</cooldownTime>
+              </li>
+            </tools>
+          </li>
+        </Entries>
+      </Expression>
+      <!-- 三种钢铁匕首工具分别作为可读的近战参数组显示。 -->
+      <Features>
+        <li>
+          <Id>soldier_short_sword_melee</Id>
+          <Feature>BDP_Feature_MeleeAttack</Feature>
+          <Groups>
+            <!-- 握柄钝击的数据来源为第一种近战工具。 -->
+            <li>
+              <Id>soldier_short_sword_handle</Id>
+              <Group>BDP_FeatureGroup_MeleeAttackMethod</Group>
+              <LabelKey>BDP_SoldierShortSword_Handle</LabelKey>
+              <Sources>
+                <li Class="BDP.Content.Information.Features.Sources.MeleeAttackMethodFeatureSourceConfig">
+                  <Id>soldier_short_sword_handle_source</Id>
+                  <EntryId>soldier_short_sword_primary</EntryId>
+                  <ToolIndex>0</ToolIndex>
+                </li>
+              </Sources>
+            </li>
+            <!-- 刃部切割的数据来源为第二种近战工具。 -->
+            <li>
+              <Id>soldier_short_sword_blade</Id>
+              <Group>BDP_FeatureGroup_MeleeAttackMethod</Group>
+              <LabelKey>BDP_SoldierShortSword_Blade</LabelKey>
+              <Sources>
+                <li Class="BDP.Content.Information.Features.Sources.MeleeAttackMethodFeatureSourceConfig">
+                  <Id>soldier_short_sword_blade_source</Id>
+                  <EntryId>soldier_short_sword_primary</EntryId>
+                  <ToolIndex>1</ToolIndex>
+                </li>
+              </Sources>
+            </li>
+            <!-- 尖端刺击的数据来源为第三种近战工具。 -->
+            <li>
+              <Id>soldier_short_sword_tip</Id>
+              <Group>BDP_FeatureGroup_MeleeAttackMethod</Group>
+              <LabelKey>BDP_SoldierShortSword_Tip</LabelKey>
+              <Sources>
+                <li Class="BDP.Content.Information.Features.Sources.MeleeAttackMethodFeatureSourceConfig">
+                  <Id>soldier_short_sword_tip_source</Id>
+                  <EntryId>soldier_short_sword_primary</EntryId>
+                  <ToolIndex>2</ToolIndex>
+                </li>
+              </Sources>
+            </li>
+          </Groups>
+        </li>
+      </Features>
+    </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+
+  <!-- 小兵弹丸：沿用自动手枪射击参数，使用 BDP 普通弹，不开放玩家制造。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+    <!-- 小兵弹丸芯片功能标识。 -->
+    <defName>BDP_ChipFunction_SoldierBullet</defName>
+    <!-- 该芯片仅供固定装载，隐藏于玩家制造入口。 -->
+    <showInManufacturing>false</showInManufacturing>
+    <!-- 名称和说明由简体中文 DefInjected 提供。 -->
+    <label>BDP_ChipFunction_SoldierBullet.label</label>
+    <description>BDP_ChipFunction_SoldierBullet.description</description>
+    <!-- 远程武器使用射手职业。 -->
+    <profession>BDP_ChipProfession_Shooter</profession>
+    <!-- 固定装载时按小兵弹丸功能与自动手枪构型组合解析。 -->
+    <fixedLoadoutArmamentForm>BDP_ArmamentForm_Autopistol</fixedLoadoutArmamentForm>
+    <config>
+      <!-- 该芯片属于远程武装。 -->
+      <Profile>
+        <Category>BDP_ChipCategory_Weapon</Category>
+        <Tags />
+      </Profile>
+      <!-- 小兵弹丸可装主槽或副槽，启停无延迟。 -->
+      <Loadout>
+        <SlotRegion>MainSub</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <ActivationDelayTicks>0</ActivationDelayTicks>
+        <DeactivationDelayTicks>0</DeactivationDelayTicks>
+      </Loadout>
+      <!-- 固定占用 20 Trion，启动不额外消耗。 -->
+      <Trion>
+        <CapacityCost>20</CapacityCost>
+        <ActivationCost>0</ActivationCost>
+      </Trion>
+      <!-- 沿用现有远程攻击的最低释放力要求。 -->
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement">
+          <Minimum>1</Minimum>
+        </li>
+      </ActivationRequirements>
+      <Expression>
+        <Entries>
+          <!-- 一发自动手枪子弹消耗 2 Trion。 -->
+          <li>
+            <Id>soldier_bullet_primary</Id>
+            <DisplayLabel>BDP_SoldierBullet</DisplayLabel>
+            <DisplayLabelKey>BDP_SoldierBullet</DisplayLabelKey>
+            <EntryType>PrimaryVerb</EntryType>
+            <WeaponMode>Ranged</WeaponMode>
+            <Trion>
+              <UseCost>2</UseCost>
+            </Trion>
+            <Execution>
+              <Rhythm>Simultaneous</Rhythm>
+            </Execution>
+            <!-- 射程、预热、冷却和精度沿用自动手枪；投射物使用 BDP 普通弹。 -->
+            <VerbProps>
+              <verbClass>BDP.Core.Verbs.BdpVerb_Shoot</verbClass>
+              <hasStandardCommand>true</hasStandardCommand>
+              <label>BDP_SoldierBullet</label>
+              <defaultProjectile>BDP_Projectile_Normal</defaultProjectile>
+              <range>25.9</range>
+              <burstShotCount>1</burstShotCount>
+              <warmupTime>0.3</warmupTime>
+              <defaultCooldownTime>1.0</defaultCooldownTime>
+              <accuracyTouch>0.80</accuracyTouch>
+              <accuracyShort>0.70</accuracyShort>
+              <accuracyMedium>0.40</accuracyMedium>
+              <accuracyLong>0.30</accuracyLong>
+              <!-- 沿用原版自动手枪枪声、尾音和枪口闪光。 -->
+              <soundCast>Shot_Autopistol</soundCast>
+              <soundCastTail>GunTail_Light</soundCastTail>
+              <muzzleFlashScale>9</muzzleFlashScale>
+              <targetParams>
+                <canTargetLocations>false</canTargetLocations>
+                <canTargetBuildings>true</canTargetBuildings>
+                <canTargetPawns>true</canTargetPawns>
+              </targetParams>
+            </VerbProps>
+            <DirectTargetLineOfSight>Required</DirectTargetLineOfSight>
+          </li>
+        </Entries>
+      </Expression>
+      <!-- 远程攻击参数从该自动手枪式攻击条目读取。 -->
+      <Features>
+        <li>
+          <Id>soldier_bullet_ranged_attack</Id>
+          <Feature>BDP_Feature_RangedAttack</Feature>
+          <Sources>
+            <li Class="BDP.Content.Information.Features.Sources.RangedAttackFeatureSourceConfig">
+              <Id>soldier_bullet_primary_source</Id>
+              <EntryId>soldier_bullet_primary</EntryId>
+            </li>
+          </Sources>
+        </li>
+      </Features>
+    </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+
+  <!-- 小兵护盾：特殊槽专用的低性能正面能量防护，不开放玩家制造。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+    <!-- 小兵护盾芯片功能标识。 -->
+    <defName>BDP_ChipFunction_SoldierShield</defName>
+    <!-- 该芯片仅供固定装载，隐藏于玩家制造入口。 -->
+    <showInManufacturing>false</showInManufacturing>
+    <!-- 名称和说明由简体中文 DefInjected 提供。 -->
+    <label>BDP_ChipFunction_SoldierShield.label</label>
+    <description>BDP_ChipFunction_SoldierShield.description</description>
+    <config>
+      <!-- 该芯片属于防御功能。 -->
+      <Profile>
+        <Category>BDP_ChipCategory_Defense</Category>
+        <Tags>
+          <li>BDP_ChipTag_EnergyForm</li>
+        </Tags>
+      </Profile>
+      <!-- 小兵护盾固定占用特殊槽，启停无延迟。 -->
+      <Loadout>
+        <SlotRegion>Special</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <ActivationDelayTicks>0</ActivationDelayTicks>
+        <DeactivationDelayTicks>0</DeactivationDelayTicks>
+      </Loadout>
+      <!-- 固定占用 20 Trion，启动不额外消耗。 -->
+      <Trion>
+        <CapacityCost>20</CapacityCost>
+        <ActivationCost>0</ActivationCost>
+      </Trion>
+      <!-- 沿用现有防御功能的最低释放力要求。 -->
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement">
+          <Minimum>1</Minimum>
+        </li>
+      </ActivationRequirements>
+      <Expression>
+        <Entries>
+          <!-- 护盾完整时发布对应健康状态和防护事实。 -->
+          <li>
+            <Id>soldier_shield</Id>
+            <DisplayLabel>BDP_SoldierShield</DisplayLabel>
+            <DisplayLabelKey>BDP_SoldierShield</DisplayLabelKey>
+            <EntryType>Hediff</EntryType>
+            <HediffDefName>BDP_Hediff_EnergyShield_Soldier</HediffDefName>
+            <Conditions>
+              <li Class="BDP.Content.Shield.ShieldIntactExpressionCondition">
+                <GroupKey>energy_shield_soldier</GroupKey>
+              </li>
+            </Conditions>
+          </li>
+        </Entries>
+      </Expression>
+      <!-- 防护事实直接读取小兵护盾 Hediff 组件配置。 -->
+      <Features>
+        <li>
+          <Id>soldier_shield_feature</Id>
+          <Feature>BDP_Feature_Shield</Feature>
+          <Sources>
+            <li Class="BDP.Content.Information.Features.Sources.ShieldFeatureSourceConfig">
+              <Id>soldier_shield_source</Id>
+              <EntryId>soldier_shield</EntryId>
+            </li>
+          </Sources>
+        </li>
+      </Features>
+    </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+
+</Defs>

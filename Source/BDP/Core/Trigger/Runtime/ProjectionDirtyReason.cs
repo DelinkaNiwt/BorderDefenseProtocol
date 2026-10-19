@@ -64,6 +64,9 @@
         /// <summary>
         /// 正式启用芯片在当前形态内的姿态发生变化。
         /// </summary>
-        ChipStanceChanged = 11
+        ChipStanceChanged = 11,
+
+        /// <summary>外部来源条件的运行真值发生离散变化，需要重新求值。</summary>
+        SourceConditionsChanged = 12
     }
 }

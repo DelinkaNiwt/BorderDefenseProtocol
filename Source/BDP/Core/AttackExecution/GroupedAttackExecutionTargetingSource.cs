@@ -111,10 +111,16 @@ namespace BDP.Core.AttackExecution
         /// </summary>
         public bool CanHitTarget(LocalTargetInfo target)
         {
+            return CanHitTarget(target, TargetingInputRuntimeFacts.FromEvent(UnityEngine.Event.current));
+        }
+
+        /// <summary>所有成员共用一次冻结的只读探测输入。</summary>
+        internal bool CanHitTarget(LocalTargetInfo target, TargetingInputRuntimeFacts inputFacts)
+        {
             for (int i = 0; i < sources.Count; i++)
             {
                 AttackExecutionTargetingSource source = sources[i];
-                if (source != null && source.CanHitTarget(target))
+                if (source != null && source.CanHitTarget(target, inputFacts))
                 {
                     return true;
                 }
@@ -129,17 +135,23 @@ namespace BDP.Core.AttackExecution
         /// </summary>
         public bool ValidateTarget(LocalTargetInfo target, bool showMessages = true)
         {
+            return ValidateTarget(target, showMessages, TargetingInputRuntimeFacts.FromEvent(UnityEngine.Event.current));
+        }
+
+        /// <summary>拒绝反馈和成员探测都读取同一输入，不重新读取被消费的事件。</summary>
+        internal bool ValidateTarget(LocalTargetInfo target, bool showMessages, TargetingInputRuntimeFacts inputFacts)
+        {
             for (int i = 0; i < sources.Count; i++)
             {
                 AttackExecutionTargetingSource source = sources[i];
-                if (source != null && source.ValidateTarget(target, false))
+                if (source != null && source.ValidateTarget(target, false, inputFacts))
                 {
                     return true;
                 }
             }
 
             AttackExecutionTargetingSource representative = ResolveRepresentativeSource();
-            return representative != null && representative.ValidateTarget(target, showMessages);
+            return representative != null && representative.ValidateTarget(target, showMessages, inputFacts);
         }
 
         /// <summary>
@@ -162,8 +174,14 @@ namespace BDP.Core.AttackExecution
         /// </summary>
         public void OrderForceTarget(LocalTargetInfo target)
         {
+            OrderForceTarget(target, TargetingInputRuntimeFacts.FromEvent(UnityEngine.Event.current));
+        }
+
+        /// <summary>先冻结后选择与分发；首个成员消费事件也不能影响后续成员。</summary>
+        internal void OrderForceTarget(LocalTargetInfo target, TargetingInputRuntimeFacts inputFacts)
+        {
             IReadOnlyList<AttackExecutionTargetingSource> selectedSources =
-                SelectPreferredSourcesByPawn(target);
+                SelectPreferredSourcesByPawn(target, inputFacts);
             for (int i = 0; i < selectedSources.Count; i++)
             {
                 AttackExecutionTargetingSource source = selectedSources[i];
@@ -172,7 +190,7 @@ namespace BDP.Core.AttackExecution
                     continue;
                 }
 
-                source.OrderForceTarget(target);
+                source.OrderForceTarget(target, inputFacts);
             }
 
             AttackExecutionDiagnostics.LogGroupedManualTargetingContinuation(
@@ -188,7 +206,7 @@ namespace BDP.Core.AttackExecution
         /// Main（主侧）优先级最高；没有合法 Main 时保留最先出现的合法回退来源，通常为 Sub（副侧）。
         /// </summary>
         private IReadOnlyList<AttackExecutionTargetingSource> SelectPreferredSourcesByPawn(
-            LocalTargetInfo target)
+            LocalTargetInfo target, TargetingInputRuntimeFacts inputFacts)
         {
             List<Pawn> pawnOrder = new List<Pawn>();
             Dictionary<Pawn, AttackExecutionTargetingSource> selectedByPawn =
@@ -198,7 +216,7 @@ namespace BDP.Core.AttackExecution
             {
                 AttackExecutionTargetingSource source = sources[i];
                 Pawn sourcePawn = source?.CasterPawn;
-                if (sourcePawn == null || !source.CanHitTarget(target))
+                if (sourcePawn == null || !source.CanHitTarget(target, inputFacts))
                 {
                     continue;
                 }

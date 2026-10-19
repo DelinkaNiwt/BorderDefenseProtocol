@@ -18,17 +18,17 @@ $armamentFormXml = [xml](Get-Content -LiteralPath $armamentFormPath -Raw -Encodi
 $visualText = Get-Content -LiteralPath $visualPath -Raw -Encoding utf8
 
 $assaultShell = @($armamentFormXml.Defs.'BDP.Content.Assembly.ChipManufacturing.Defs.ChipArmamentFormDef') |
-    Where-Object { $_.defName -eq 'BDP_GunClass_AssaultRifle' } |
+    Where-Object { $_.defName -eq 'BDP_ArmamentForm_AssaultRifle' } |
     Select-Object -First 1
 Assert-True ($null -ne $assaultShell) 'Assault rifle gun shell must exist.'
 Assert-True (
-    ($assaultShell.overrides.visualPresetDefName -eq 'BDP_Visual_RangedWeaponReference') -and
-    ($assaultShell.overrides.compositeVisualPresetDefName -eq 'BDP_Visual_RangedWeaponReference_Dual')
+    ($assaultShell.overrides.visualPresetDefName -eq 'BDP_Visual_AssaultRifle') -and
+    ($assaultShell.overrides.compositeVisualPresetDefName -eq 'BDP_Visual_AssaultRifle_Dual')
 ) 'Assault rifle must still bind the expected single and dual visual presets.'
 
 $targetPresetNames = @(
-    'BDP_Visual_RangedWeaponReference',
-    'BDP_Visual_RangedWeaponReference_Dual'
+    'BDP_Visual_AssaultRifle',
+    'BDP_Visual_AssaultRifle_Dual'
 )
 
 foreach ($presetName in $targetPresetNames) {
@@ -43,11 +43,14 @@ foreach ($presetName in $targetPresetNames) {
 
 $targetBlocks = [regex]::Matches(
     $visualText,
-    '(?s)<BDP\.Core\.Expressions\.ExpressionVisualPresetDef(?:\s+[^>]*)?>\s*(?:(?!</BDP\.Core\.Expressions\.ExpressionVisualPresetDef>).)*?<defName>BDP_Visual_RangedWeaponReference(?:_Dual)?</defName>.*?</BDP\.Core\.Expressions\.ExpressionVisualPresetDef>')
+    '(?s)<BDP\.Core\.Expressions\.ExpressionVisualPresetDef(?:\s+[^>]*)?>\s*(?:(?!</BDP\.Core\.Expressions\.ExpressionVisualPresetDef>).)*?<defName>BDP_Visual_AssaultRifle(?:_Dual)?</defName>.*?</BDP\.Core\.Expressions\.ExpressionVisualPresetDef>')
 Assert-True ($targetBlocks.Count -eq 2) 'Both assault-rifle visual preset XML blocks must be inspectable.'
 foreach ($targetBlock in $targetBlocks) {
     Assert-True ($targetBlock.Value -notmatch '<StageVisuals>') `
         'Assault-rifle visual presets must contain only their normal graphic and inherited baseline data.'
 }
+
+Assert-True ($visualText -notmatch 'defName>BDP_Visual_RangedWeaponReference(?:_Dual)?<') `
+    'The old ranged-weapon-reference visual DefNames must be removed after the assault-rifle rename.'
 
 Write-Output 'AssaultRifleWeaponStageVisualSmokeTests PASS'

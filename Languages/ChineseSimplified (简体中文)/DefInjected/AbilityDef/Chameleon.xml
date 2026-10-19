@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 变色龙隐秘状态释放能力名称。 -->
+  <BDP_Ability_Chameleon.label>释放隐秘状态</BDP_Ability_Chameleon.label>
+  <!-- 变色龙隐秘状态释放能力说明。 -->
+  <BDP_Ability_Chameleon.description>释放变色龙隐秘状态。</BDP_Ability_Chameleon.description>
+  <!-- 变色龙隐秘状态释放能力的 Verb 名称。 -->
+  <BDP_Ability_Chameleon.verbProperties.label>释放状态</BDP_Ability_Chameleon.verbProperties.label>
+</LanguageData>

@@ -30,8 +30,18 @@ $managedRoot = "C:\NiwtGames\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\
 [void][Reflection.Assembly]::LoadFrom((Join-Path $managedRoot "UnityEngine.CoreModule.dll"))
 [void][Reflection.Assembly]::LoadFrom((Join-Path $managedRoot "UnityEngine.dll"))
 [void][Reflection.Assembly]::LoadFrom((Join-Path $managedRoot "Assembly-CSharp.dll"))
-$coreAssembly = [Reflection.Assembly]::LoadFrom((Join-Path $modRoot "1.6\Assemblies\BDP.Core.dll"))
-$contentAssembly = [Reflection.Assembly]::LoadFrom((Join-Path $modRoot "1.6\Assemblies\BDP.Content.dll"))
+$coreAssemblyPath = if ([string]::IsNullOrWhiteSpace($env:BDP_CORE_TEST_ASSEMBLY_PATH)) {
+    Join-Path $modRoot "1.6\Assemblies\BDP.Core.dll"
+} else {
+    $env:BDP_CORE_TEST_ASSEMBLY_PATH
+}
+$coreAssembly = [Reflection.Assembly]::LoadFrom($coreAssemblyPath)
+$contentAssemblyPath = if ([string]::IsNullOrWhiteSpace($env:BDP_CONTENT_TEST_ASSEMBLY_PATH)) {
+    Join-Path $modRoot "1.6\Assemblies\BDP.Content.dll"
+} else {
+    $env:BDP_CONTENT_TEST_ASSEMBLY_PATH
+}
+$contentAssembly = [Reflection.Assembly]::LoadFrom($contentAssemblyPath)
 $flags = [Reflection.BindingFlags]::Public -bor [Reflection.BindingFlags]::NonPublic -bor [Reflection.BindingFlags]::Static
 
 $entryType = $coreAssembly.GetType("BDP.Core.Combos.ComboExpressionEntryConfig", $true)
@@ -51,8 +61,11 @@ function Set-FieldValue
 }
 
 $entry = [Activator]::CreateInstance($entryType)
-Set-FieldValue $entry "Kind" ([Enum]::Parse($entryType.GetField("Kind").FieldType, "PrimaryVerb"))
+Set-FieldValue $entry "EntryType" ([Enum]::Parse($entryType.GetField("EntryType").FieldType, "PrimaryVerb"))
 Set-FieldValue $entry "WeaponMode" ([Enum]::Parse($entryType.GetField("WeaponMode").FieldType, "Ranged"))
+$entryPresentation = [Activator]::CreateInstance($coreAssembly.GetType("BDP.Core.Expressions.ExpressionPresentationConfig", $true))
+Set-FieldValue $entryPresentation "ComboAttackVisualPresetDefName" "BDP_Visual_ComboSpecific"
+Set-FieldValue $entry "Presentation" $entryPresentation
 $overlay = [Activator]::CreateInstance($overlayType)
 Set-FieldValue $overlay "range" ([Nullable[float]]30)
 Set-FieldValue $entry "VerbProps" $overlay
@@ -63,6 +76,7 @@ $form = [Activator]::CreateInstance($formType)
 $formOverrides = [Activator]::CreateInstance($overrideType)
 Set-FieldValue $formOverrides "rangeMultiplier" ([Nullable[float]]1.2)
 Set-FieldValue $formOverrides "hitCount" ([Nullable[int]]3)
+Set-FieldValue $formOverrides "comboAttackVisualPresetDefName" "BDP_Visual_TrionCube"
 Set-FieldValue $form "overrides" $formOverrides
 
 $comboApplyMethod = @($serviceType.GetMethods($flags) |
@@ -75,12 +89,13 @@ Assert-True ($null -ne $comboApplyMethod) "武装构型表达服务缺少组合�
 $comboApplyMethod.Invoke($null, @($entry, $form))
 Assert-True ([Math]::Abs(([float]$entry.VerbProps.range) - 36.0) -lt 0.001) "组合结果显式射程必须只被构型倍率修正一次。"
 Assert-True ([int]$entry.Execution.HitCount -eq 3) "组合结果显式执行字段必须接受构型修正。"
+Assert-True ([string]$entry.Presentation.ComboAttackVisualPresetDefName -eq "BDP_Visual_ComboSpecific") "组合技定义显式视觉预设必须优先于武装构型默认值。"
 
 $cloneMethod = @($cloneType.GetMethods($flags) |
     Where-Object { $_.Name -eq "Clone" -and $_.GetParameters().Count -eq 1 }) | Select-Object -First 1
 Assert-True ($null -ne $cloneMethod) "组合条目副本服务缺少单条复制方法。"
 $original = [Activator]::CreateInstance($entryType)
-Set-FieldValue $original "Kind" ([Enum]::Parse($entryType.GetField("Kind").FieldType, "PrimaryVerb"))
+Set-FieldValue $original "EntryType" ([Enum]::Parse($entryType.GetField("EntryType").FieldType, "PrimaryVerb"))
 Set-FieldValue $original "WeaponMode" ([Enum]::Parse($entryType.GetField("WeaponMode").FieldType, "Ranged"))
 $originalOverlay = [Activator]::CreateInstance($overlayType)
 Set-FieldValue $originalOverlay "range" ([Nullable[float]]30)
@@ -90,9 +105,10 @@ $comboApplyMethod.Invoke($null, @($cloned, $form))
 Assert-True ([Math]::Abs(([float]$original.VerbProps.range) - 30.0) -lt 0.001) "构型修正不得回写 ComboDef 原始条目。"
 
 $inheritedOnly = [Activator]::CreateInstance($entryType)
-Set-FieldValue $inheritedOnly "Kind" ([Enum]::Parse($entryType.GetField("Kind").FieldType, "PrimaryVerb"))
+Set-FieldValue $inheritedOnly "EntryType" ([Enum]::Parse($entryType.GetField("EntryType").FieldType, "PrimaryVerb"))
 Set-FieldValue $inheritedOnly "WeaponMode" ([Enum]::Parse($entryType.GetField("WeaponMode").FieldType, "Ranged"))
 $comboApplyMethod.Invoke($null, @($inheritedOnly, $form))
 Assert-True ($null -eq $inheritedOnly.VerbProps) "未显式声明射程的组合结果不得凭空创建 VerbProps。"
+Assert-True ([string]$inheritedOnly.Presentation.ComboAttackVisualPresetDefName -eq "BDP_Visual_TrionCube") "组合技条目缺省时必须接受武装构型提供的组合技攻击视觉预设。"
 
 Write-Host "PASS: 组合结果显式字段的武装构型传播边界完整。"

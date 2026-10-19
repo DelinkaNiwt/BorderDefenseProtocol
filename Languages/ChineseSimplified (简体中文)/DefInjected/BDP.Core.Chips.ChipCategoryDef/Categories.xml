@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 芯片主分类——决定芯片归属哪个大类别。 -->
+
+  <BDP_ChipCategory_Weapon.label>武装</BDP_ChipCategory_Weapon.label>
+  <BDP_ChipCategory_Weapon.description>主要用于形成直接战斗武装表现的芯片。</BDP_ChipCategory_Weapon.description>
+  <BDP_ChipCategory_GeneralSkill.label>通用技能</BDP_ChipCategory_GeneralSkill.label>
+  <BDP_ChipCategory_GeneralSkill.description>主要用于提供可主动调用的通用技能和状态效果。</BDP_ChipCategory_GeneralSkill.description>
+  <BDP_ChipCategory_Defense.label>防护</BDP_ChipCategory_Defense.label>
+  <BDP_ChipCategory_Defense.description>主要用于提供防护和承伤能力的芯片。</BDP_ChipCategory_Defense.description>
+  <BDP_ChipCategory_Accessory.label>配件</BDP_ChipCategory_Accessory.label>
+  <BDP_ChipCategory_Accessory.description>作为独立配件提供附加战斗效果的芯片。</BDP_ChipCategory_Accessory.description>
+</LanguageData>

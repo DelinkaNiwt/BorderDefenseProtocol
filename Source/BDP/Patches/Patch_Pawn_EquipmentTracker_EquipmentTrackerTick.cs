@@ -1,4 +1,6 @@
+using BDP.Core.Genes;
 using BDP.Core.Trigger;
+using BDP.Core.Trigger.Runtime;
 using HarmonyLib;
 using Verse;
 
@@ -17,6 +19,8 @@ namespace BDP.Patches
         /// </summary>
         public static void Postfix(Pawn_EquipmentTracker __instance)
         {
+            TriggerBodyEquipmentEligibility.ValidateAfterLoadOrTick(__instance?.pawn);
+
             ThingWithComps primaryEquipment = __instance?.Primary;
             if (primaryEquipment == null)
             {
@@ -24,6 +28,12 @@ namespace BDP.Patches
             }
 
             CompTriggerBody triggerBody = primaryEquipment?.TryGetComp<CompTriggerBody>();
+            if (triggerBody != null
+                && TriggerBodyEquipmentEligibility.CanEquip(primaryEquipment, __instance?.pawn))
+            {
+                TriggerTrionCapacityBindingRegistry.NotifyEquipped(__instance.pawn, triggerBody);
+            }
+
             triggerBody?.RuntimeTick();
         }
     }

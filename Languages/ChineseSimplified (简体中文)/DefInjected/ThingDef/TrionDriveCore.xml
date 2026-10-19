@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 材料暂定名称。 -->
+  <BDP_TrionDriveCore.label>Trion驱动核心</BDP_TrionDriveCore.label>
+  <!-- 分析与建造均已接入原版；分析资格和实体材料分别承担研究与建设条件。 -->
+  <BDP_TrionDriveCore.description>皇室人物携带的一颗高度凝聚的Trion核心材料。分析后可研究Trion基础理论，材料会保留，可用于建造Trion中继核心。</BDP_TrionDriveCore.description>
+  <!-- ResourceBase继承的可禁止组件占索引0；原版分析组件为索引1。 -->
+  <BDP_TrionDriveCore.comps.1.completedLetterLabel>驱动核心分析完成：解锁{RESEARCH}</BDP_TrionDriveCore.comps.1.completedLetterLabel>
+  <BDP_TrionDriveCore.comps.1.completedLetter>{PAWN_nameDef}完成了对Trion驱动核心的分析。现在可以研究：{RESEARCH}。核心材料已保留。</BDP_TrionDriveCore.comps.1.completedLetter>
+  <BDP_TrionDriveCore.comps.1.activateLabelString>分析驱动核心</BDP_TrionDriveCore.comps.1.activateLabelString>
+  <BDP_TrionDriveCore.comps.1.activateDescString>分析这颗Trion驱动核心，为研究Trion基础理论做准备。分析后保留核心。</BDP_TrionDriveCore.comps.1.activateDescString>
+  <BDP_TrionDriveCore.comps.1.jobString>正在分析驱动核心。</BDP_TrionDriveCore.comps.1.jobString>
+  <BDP_TrionDriveCore.comps.1.guiLabelString>选择分析者</BDP_TrionDriveCore.comps.1.guiLabelString>
+  <BDP_TrionDriveCore.comps.1.inspectString>可由一名殖民者进行分析。</BDP_TrionDriveCore.comps.1.inspectString>
+</LanguageData>

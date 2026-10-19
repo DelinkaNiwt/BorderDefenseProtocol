@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 调试检查及保存控制物名称。 -->
+  <BDP_GateArrivalController.label>黑洞门出场控制器</BDP_GateArrivalController.label>
+  <!-- 隐形门持有物的内部定义名称。 -->
+  <BDP_GateArrivalPawnHolder.label>黑洞门人物持有物</BDP_GateArrivalPawnHolder.label>
+</LanguageData>

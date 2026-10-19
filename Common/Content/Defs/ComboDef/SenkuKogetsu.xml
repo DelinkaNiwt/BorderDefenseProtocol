@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    旋空弧月组合技 Def。
+    这里固定采用已确认的正式组合语义：
+
+    1. 第一来源动作 = 弧月
+    2. 第二来源动作 = 旋空
+    3. 组合结果是 Ability
+    4. 施放 UseCost / MinimumRequired 跟随第二来源动作 旋空
+  -->
+
+  <!--
+    旋空弧月组合。
+    该组合把弧月与旋空组合为旋空弧月能力。
+  -->
+  <BDP.Core.Combos.ComboDef>
+    <!-- ComboDef 唯一名称。 -->
+    <defName>BDP_Combo_SenkuKogetsu</defName>
+    <!-- 玩家界面显示名称。 -->
+    <label>旋空弧月</label>
+    <!-- 提示说明。 -->
+    <description>将弧月与旋空组合为旋空弧月能力，施放费用和最低要求跟随旋空侧。</description>
+    <!-- 组合所需主副芯片功能定义。 -->
+    <firstSourceKey>BDP_ChipFunction_Kogetsu</firstSourceKey>
+    <secondSourceKey>BDP_ChipFunction_Senku</secondSourceKey>
+    <!-- combo 表达条目。 -->
+    <Expression>
+      <Entries>
+        <!-- 旋空弧月 Ability 结果条目。 -->
+        <li>
+          <Id>combo_senku_kogetsu_ability</Id>
+          <DisplayLabel>旋空弧月</DisplayLabel>
+          <EntryType>Ability</EntryType>
+          <AbilityDefName>BDP_Ability_SenkuKogetsu</AbilityDefName>
+          <TrionResolve>
+            <!-- 旧行为要求施放消耗跟随旋空侧。 -->
+            <UseCostResolve>FollowSecondSource</UseCostResolve>
+            <!-- 旧行为要求最低施放要求也跟随旋空侧。 -->
+            <MinimumRequiredResolve>FollowSecondSource</MinimumRequiredResolve>
+          </TrionResolve>
+        </li>
+      </Entries>
+    </Expression>
+    <!-- 组合以能力为父语义；经审议的近战攻击是能力产生的完整子功能。 -->
+    <Features>
+      <li>
+        <Id>senku_kogetsu_ability</Id>
+        <Feature>BDP_Feature_GenericAbility</Feature>
+        <Sources>
+          <li Class="BDP.Content.Information.Features.Sources.AbilityLifecycleFeatureSourceConfig">
+            <Id>senku_kogetsu_ability_source</Id>
+            <EntryId>combo_senku_kogetsu_ability</EntryId>
+          </li>
+        </Sources>
+        <Children>
+          <li>
+            <Id>senku_kogetsu_melee_attack</Id>
+            <Feature>BDP_Feature_MeleeAttack</Feature>
+            <Groups>
+              <li>
+                <Id>senku_kogetsu_melee_method</Id>
+                <Group>BDP_FeatureGroup_MeleeAttackMethod</Group>
+                <LabelKey>BDP_MeleeMethod_SenkuKogetsu</LabelKey>
+                <Sources>
+                  <li Class="BDP.Content.Information.Features.Sources.AbilityMeleeAttackFeatureSourceConfig">
+                    <Id>senku_kogetsu_melee_source</Id>
+                    <EntryId>combo_senku_kogetsu_ability</EntryId>
+                    <EffectIndex>0</EffectIndex>
+                  </li>
+                </Sources>
+              </li>
+            </Groups>
+          </li>
+        </Children>
+      </li>
+    </Features>
+  </BDP.Core.Combos.ComboDef>
+
+</Defs>

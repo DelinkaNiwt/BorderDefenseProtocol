@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    触发器制造台建筑，保留原定义标识。
+    采用原版工作台账单流程，专用窗口选择触发体配方或配置芯片组合。
+  -->
+
+  <!-- 芯片制造台。 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>BDP_ChipFabricator</defName>
+    <!-- 建造或制造须满足所有研究；不影响现有装备使用。 -->
+    <researchPrerequisites><li>BDP_Research_BasicTriggerEngineering</li></researchPrerequisites>
+    <!-- 显示名称和说明由语言包注入。 -->
+    <label>BDP_ChipFabricator</label>
+    <description>BDP_ChipFabricator</description>
+    <!-- 使用基因装配台多方向贴图作为临时视觉；路径不带方向后缀，由 Graphic_Multi 自动选择。 -->
+    <graphicData>
+      <texPath>Things/Building/Misc/GeneAssembler/GeneAssembler</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(3,2)</drawSize>
+    </graphicData>
+    <!-- 3×2 尺寸，可旋转。 -->
+    <size>(3,2)</size>
+    <rotatable>true</rotatable>
+    <!-- 建造与分类。 -->
+    <designationCategory>Misc</designationCategory>
+    <costList>
+      <Steel>200</Steel>
+      <ComponentIndustrial>7</ComponentIndustrial>
+    </costList>
+    <!-- 仅保留原版工作台身份。 -->
+    <thingClass>BDP.Content.Assembly.Building_ChipFabricator</thingClass>
+    <!-- 交互格在建筑前方。 -->
+    <hasInteractionCell>true</hasInteractionCell>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <!-- 芯片使用组合专用账单；普通触发体使用原版配方账单。 -->
+    <recipes>
+      <li>BDP_Recipe_ProduceChip</li>
+      <li>BDP_Recipe_ProduceBorderStandardTriggerBody</li>
+    </recipes>
+    <!-- 需要电力。 -->
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>200</basePowerConsumption>
+        <shortCircuitInRain>true</shortCircuitInRain>
+      </li>
+      <li Class="CompProperties_Flickable" />
+    </comps>
+    <!-- 可开关、可选定。 -->
+    <selectable>true</selectable>
+    <neverMultiSelect>true</neverMultiSelect>
+    <statBases>
+      <!-- 首版建造工作量，与制造成本方案统一。 -->
+      <WorkToBuild>4500</WorkToBuild>
+      <MaxHitPoints>180</MaxHitPoints>
+      <WorkTableWorkSpeedFactor>1</WorkTableWorkSpeedFactor>
+      <Flammability>0.5</Flammability>
+    </statBases>
+  </ThingDef>
+
+</Defs>

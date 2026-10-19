@@ -1,5 +1,9 @@
 using BDP.Development.Diagnostics;
 using BDP.Development.Trigger.Diagnostics;
+using BDP.Development.FloatingFlight;
+using BDP.Development.Information;
+using BDP.Development.CombatAI;
+using BDP.Content.FloatingFlight;
 using BDP.Support.Diagnostics;
 using BDP.Core.Trigger;
 using HarmonyLib;
@@ -27,10 +31,25 @@ namespace BDP.Development
             try
             {
                 BdpDiagnosticSinkRegistry.Register(DiagnosticSink);
+                BdpDiagnostics.BindAttackExecutionSwitchResolver(IsDeveloperModeEnabled);
+                BdpDiagnostics.Once(
+                    "development.diagnostics.sink_registered",
+                    "Development 诊断接收器已注册；风刃流程诊断可用。"
+                );
+                BdpDiagnostics.Once(
+                    "development.chip-feature-diagnostics.available",
+                    "芯片功能语义诊断已注册；可从开发者菜单捕获声明、来源和裁定结果。"
+                );
+#if BDP_RIMWORLD_1_7
+                // 朝向诊断本身仅在 1.7 存在，1.6 不注册不存在的入口。
+                RangedDraftedFacingDiagnostics.Initialize();
+#endif
                 if (IsDeveloperModeEnabled())
                 {
                     new Harmony("niwt.bdp.development").PatchAll();
                     TriggerExternalGizmoRegistry.Register(new TriggerVisualMarkerGizmoProvider());
+                    FloatingFlightNonPlayerModeProviderRegistry.Register(
+                        FloatingFlightNonPlayerModeProvider.Instance);
                 }
             }
             catch

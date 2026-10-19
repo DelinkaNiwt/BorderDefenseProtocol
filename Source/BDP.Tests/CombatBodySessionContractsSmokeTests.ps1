@@ -82,8 +82,8 @@ Assert-True (
 
 Assert-True (
     ($serviceText -match 'public bool TryActivate\(\)[\s\S]*if \(!CanActivate\(\)\)[\s\S]*bool activated = activationTransaction\.TryActivate\(OwnerPawn\);') -and
-    ($serviceText -match 'if \(activated\)[\s\S]*BeginManualTransformLock\(\);[\s\S]*return activated;')
-) 'CombatBodySessionService.TryActivate() must guard admission, delegate activation order, and lock only after success.'
+    ($serviceText -match 'public bool TryActivateManually\(\)[\s\S]*!CanManualActivate\(\) \|\| !TryActivate\(\)[\s\S]*BeginManualTransformLock\(\);')
+) '系统激活必须检查准入并委托正式事务；只有玩家主动激活才启动手动锁。'
 
 Assert-True (
     ($serviceText -match 'private void ExecuteExit\(CombatBodySessionExitMode exitMode\)') -and

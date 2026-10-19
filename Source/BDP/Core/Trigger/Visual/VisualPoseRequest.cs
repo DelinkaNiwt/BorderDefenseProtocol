@@ -6,7 +6,7 @@ namespace BDP.Core.Trigger.Visual
 {
     /// <summary>
     /// 视觉姿态解析请求。
-    /// 它把已发布静态投影、运行时动态状态和原版装备姿态样本收束成一次纯计算输入。
+    /// 它把视觉条目、已校验的实时攻击姿态真值和原版装备姿态样本收束成一次纯计算输入。
     /// </summary>
     internal sealed class VisualPoseRequest
     {
@@ -27,9 +27,16 @@ namespace BDP.Core.Trigger.Visual
         public ExpressionVisualPresetDef GraphicOverridePreset { get; set; }
 
         /// <summary>
-        /// 当前 Trigger 已发布的视觉运行时状态。
+        /// 当前 Pawn 是否处于身份匹配的 BDP 实时攻击姿态。
+        /// 它继续控制原有 Pawn 级待机镜像规则，不以仍未清理的执行记录推断攻击正在进行。
         /// </summary>
-        public TriggerVisualRuntimeState RuntimeState { get; set; }
+        public bool IsMatchingAttackStanceActive { get; set; }
+
+        /// <summary>
+        /// 当前视觉条目是否参与这次 BDP 攻击；未显式提供时沿用 Pawn 级状态。
+        /// 它只控制逐条目的静止专用装饰角，不改变既有的 Pawn 级镜像规则。
+        /// </summary>
+        public bool? IsMatchingEntryAttackStanceActive { get; set; }
 
         /// <summary>
         /// 当前条目从原版攻击时序解析出的武器动作阶段快照。

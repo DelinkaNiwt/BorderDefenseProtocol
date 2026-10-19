@@ -33,14 +33,15 @@ Assert-True (
 ) 'The player control must remain visible but blocked with one formal unmet-requirement reason.'
 
 Assert-True (
-    ([regex]::Matches($detailText, '"激活条件"').Count -eq 1) -and
-    ($detailText -notmatch '"功率要求"')
-) 'The Core static detail must replace the old power line with one tidy activation-requirement section.'
+    ($detailText -match 'DrawChipDetail') -and
+    ($detailText -notmatch 'ChipInformationInstanceInputAdapter|ChipInformationSurfaceAccess\.Read|ActivationRequirement')
+) 'The assembly detail panel must remain empty while preserving its draw entry point.'
 
 Assert-True (
-    ([regex]::Matches($contentText, '"激活条件"').Count -eq 1) -and
-    ($contentText -match '<color=') -and
+    ([regex]::Matches($contentText, 'BDP_Message_TriggerLoadout_ActivationRequirements').Count -eq 1) -and
+    ($contentText -match 'BDP_Message_TriggerLoadout_RequirementLine') -and
+    ($contentText -match 'requirement\.IsSatisfied') -and
     ($contentText -notmatch 'TrionIntensityRequirement|SkillLevelRequirement')
-) 'The Content tooltip must render one colored section from snapshots without reimplementing concrete rules.'
+) 'The Content tooltip must render one localized colored section from snapshots without reimplementing concrete rules.'
 
 Write-Output 'ChipActivationRequirementContentPanelSmokeTests PASS'

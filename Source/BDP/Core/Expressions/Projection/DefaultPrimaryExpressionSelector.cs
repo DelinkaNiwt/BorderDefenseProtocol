@@ -82,7 +82,7 @@ namespace BDP.Core.Expressions
         private static bool IsSelectableVerb(FormalExpressionResult result)
         {
             return result != null
-                && result.ResultKind == ExpressionResultKind.Verb
+                && result.OutputChannel == ExpressionOutputChannel.Verb
                 && result.IsAvailable
                 && (result.UseRequirementCheck == null
                     || result.UseRequirementCheck.Satisfied);
@@ -107,7 +107,8 @@ namespace BDP.Core.Expressions
                 && result.CompositeKind == CompositeExpressionKind.None
                 && result.VerbAttackRole == VerbAttackRole.Primary
                 && (result.OriginKind == ExpressionOriginKind.Main
-                    || result.OriginKind == ExpressionOriginKind.Sub);
+                    || result.OriginKind == ExpressionOriginKind.Sub
+                    || result.OriginKind == ExpressionOriginKind.Special);
         }
     }
 }

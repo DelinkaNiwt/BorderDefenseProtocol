@@ -20,7 +20,7 @@ $exitTransactionPath = Join-Path $repoRoot 'Source\BDP\Core\CombatBodySession\Co
 $hostStatePath = Join-Path $repoRoot 'Source\BDP\Core\CombatBody\Bridge\HostState.cs'
 $providerPath = Join-Path $repoRoot 'Source\BDP.Content\CombatBody\Escape\CombatBodyEmergencyEscapeExtensionProvider.cs'
 $expressionReaderPath = Join-Path $repoRoot 'Source\BDP\Core\Expressions\Access\Contracts\IExpressionReader.cs'
-$resultKindPath = Join-Path $repoRoot 'Source\BDP\Core\Expressions\Model\ExpressionResultKind.cs'
+$resultKindPath = Join-Path $repoRoot 'Source\BDP\Core\Expressions\Model\ExpressionOutputChannel.cs'
 $devHarnessChipDefsPath = Join-Path (Split-Path -Parent $repoRoot) 'BorderDefenseProtocol.DevHarness\1.6\Defs\Things\Items\Chips\Test\ThingDefs_TestChips_PassiveMixed.xml'
 
 Assert-True -Condition (Test-Path -LiteralPath $resolverPath) -Message 'CombatBodyEmergencyEscapeResolver must exist.'
@@ -37,14 +37,14 @@ $devHarnessChipDefsText = Get-Content -LiteralPath $devHarnessChipDefsPath -Raw 
 
 Assert-True -Condition ($expressionReaderText -match 'TriggerCombatProjectionState GetCombatProjection\(Pawn pawn\);') -Message 'Expression reader must expose the published combat projection.'
 Assert-True -Condition ($expressionReaderText -match 'GetPassiveResults') -Message 'Expression reader must expose formal Passive queries.'
-Assert-True -Condition ($expressionReaderText -match 'HasPassiveKey') -Message 'Expression reader must expose Passive key checks.'
+Assert-True -Condition ($expressionReaderText -match 'HasPassiveIdentityKey') -Message 'Expression reader must expose Passive identity key checks.'
 Assert-True -Condition ($expressionReaderText -match 'TryGetPassive') -Message 'Expression reader must expose single Passive lookup.'
-Assert-True -Condition ($resultKindText -match 'Passive') -Message 'ExpressionResultKind must include Passive.'
+Assert-True -Condition ($resultKindText -match 'Passive') -Message 'ExpressionOutputChannel must include Passive.'
 
 Assert-True -Condition ($resolverText -match 'ExpressionSurfaceAccess\.ResolvePublishedProjection\(pawn\)') -Message 'Resolver must read the public published expression projection.'
-Assert-True -Condition ($resolverText -match 'PassiveResultsByKey') -Message 'Resolver must use the public Passive result index.'
+Assert-True -Condition ($resolverText -match 'PassiveResultsByIdentityKey') -Message 'Resolver must use the public Passive result index.'
 Assert-True -Condition ($resolverText -match 'TryGetCompositeReference') -Message 'Emergency escape resolver must read public composite references when passive result is composite.'
-Assert-True -Condition ($resolverText -notmatch 'result\.ResultKind != ExpressionResultKind\.Passive') -Message 'Resolver must stop owning raw Passive scan logic.'
+Assert-True -Condition ($resolverText -notmatch 'result\.OutputChannel != ExpressionOutputChannel\.Passive') -Message 'Resolver must stop owning raw Passive scan logic.'
 Assert-True -Condition ($resolverText -notmatch 'ChipSurfaceAccess|ChipTrionContract|SupportsEmergencyEscape|TriggerSurfaceAccess\.ResolveLoadoutReader') -Message 'Resolver must not scan chip declaration or Trigger loadout internals directly.'
 Assert-True -Condition ($resolverText -notmatch 'TriggerCollapse|EnterCooldown|RequestRelease|RequestDeactivate') -Message 'Resolver must not execute CombatBody flow directly.'
 Assert-True -Condition ($resolutionText -match 'public bool IsAvailable;') -Message 'Resolution must expose IsAvailable.'

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 战斗体编辑台名称。 -->
+  <BDP_CombatBodyAppearanceEditor.label>战斗体编辑台</BDP_CombatBodyAppearanceEditor.label>
+
+  <!-- 战斗体编辑台说明。 -->
+  <BDP_CombatBodyAppearanceEditor.description>用于保存和管理小人个人战斗体服装模板的编辑台。</BDP_CombatBodyAppearanceEditor.description>
+</LanguageData>

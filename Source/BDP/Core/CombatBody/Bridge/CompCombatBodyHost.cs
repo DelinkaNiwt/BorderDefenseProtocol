@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using BDP.Core.CombatBody.Wounds;
 using BDP.Core.CombatBody.Wounds.Presentation;
 using BDP.Core.CombatBodySession;
+using BDP.Support.Diagnostics;
 using Verse;
 
 namespace BDP.Core.CombatBody
@@ -10,7 +11,7 @@ namespace BDP.Core.CombatBody
     /// 战斗体主链宿主 Comp。
     /// 它是附着在 Pawn 上的薄宿主位，只负责承接战斗体主链对象，不新增第四个真值 owner。
     /// </summary>
-    public sealed class CompCombatBodyHost : ThingComp, IThingHolder
+    public sealed class CompCombatBodyHost : ThingComp, IThingHolder, ICombatBodyMaterialHost
     {
         /// <summary>
         /// 战斗体相位真值。
@@ -69,9 +70,16 @@ namespace BDP.Core.CombatBody
             }
         }
 
-        /// <summary>
-        /// 对内暴露战斗体伤口运行时。
-        /// </summary>
+        /// <summary>现有人类材料身份仍从原会话相位派生。</summary>
+        public bool IsCombatBodyActive => Service.Phase == CombatBodyPhase.Active;
+        /// <summary>人类崩解表现期也继续维护伤口。</summary>
+        public bool HasCombatBodyWoundRuntime => IsCombatBodyActive || Service.Phase == CombatBodyPhase.Collapsing;
+        /// <summary>人类仍使用原版可流血部位准入。</summary>
+        public bool RequiresBiologicalWoundPart => true;
+        /// <summary>共用接点返回原有实例，不迁移存档与持有位置。</summary>
+        public CombatBodyWoundRuntime CombatBodyWounds => WoundRuntime;
+
+        /// <summary>对内暴露战斗体原位伤口运行时。</summary>
         internal CombatBodyWoundRuntime WoundRuntime
         {
             get
@@ -150,6 +158,7 @@ namespace BDP.Core.CombatBody
         {
             base.CompTick();
             CombatBodySessionService service = Service;
+            service.ReconcileResourceRules();
             woundRuntime?.Tick(parent as Pawn);
             if (service.Phase == CombatBodyPhase.Collapsing && service.GetCollapseRemaining() <= 0)
             {
@@ -163,14 +172,31 @@ namespace BDP.Core.CombatBody
         /// </summary>
         private void EnsureInternalState()
         {
+            bool shouldTraceInitialization = BdpDiagnostics.Enabled
+                && (state == null
+                    || hostState == null
+                    || snapshotPolicy == null
+                    || snapshotService == null
+                    || host == null
+                    || rawCombatBodyService == null
+                    || combatBodySessionPolicy == null
+                    || combatBodySessionService == null
+                    || woundRuntime == null);
+            long initializationStart = shouldTraceInitialization
+                ? BdpDiagnostics.BeginTiming()
+                : 0L;
+            List<string> createdParts = shouldTraceInitialization ? new List<string>() : null;
+
             if (state == null)
             {
                 state = new CombatBodyState();
+                createdParts?.Add("state");
             }
 
             if (hostState == null)
             {
                 hostState = new HostState();
+                createdParts?.Add("hostState");
             }
 
             hostState.EnsureSnapshotState(this);
@@ -179,17 +205,20 @@ namespace BDP.Core.CombatBody
             if (snapshotPolicy == null)
             {
                 snapshotPolicy = new CombatBodySnapshotPolicy();
+                createdParts?.Add("snapshotPolicy");
             }
 
             if (snapshotService == null)
             {
                 snapshotService = new CombatBodySnapshotService(snapshotPolicy);
+                createdParts?.Add("snapshotService");
             }
 
             Pawn pawn = parent as Pawn;
             if (host == null || host.Pawn != pawn)
             {
                 host = new PawnCombatBodyBridge(pawn, hostState, snapshotService, snapshotPolicy);
+                createdParts?.Add("pawnBridge");
             }
 
             if (rawCombatBodyService == null)
@@ -198,11 +227,13 @@ namespace BDP.Core.CombatBody
                     state,
                     host,
                     Props.collapseCooldownTicks);
+                createdParts?.Add("combatBodyService");
             }
 
             if (combatBodySessionPolicy == null)
             {
                 combatBodySessionPolicy = new CombatBodySessionPolicy();
+                createdParts?.Add("sessionPolicy");
             }
 
             if (combatBodySessionService == null)
@@ -211,11 +242,24 @@ namespace BDP.Core.CombatBody
                     this,
                     rawCombatBodyService,
                     combatBodySessionPolicy);
+                createdParts?.Add("sessionService");
             }
 
             if (woundRuntime == null)
             {
                 woundRuntime = new CombatBodyWoundRuntime();
+                createdParts?.Add("woundRuntime");
+            }
+
+            if (shouldTraceInitialization)
+            {
+                BdpDiagnostics.TraceTiming(
+                    "战斗体宿主初始化"
+                    + " | pawn=" + (pawn != null ? pawn.ThingID : "null")
+                    + " | created=" + (createdParts != null && createdParts.Count > 0
+                        ? string.Join(",", createdParts)
+                        : "none"),
+                    initializationStart);
             }
         }
 

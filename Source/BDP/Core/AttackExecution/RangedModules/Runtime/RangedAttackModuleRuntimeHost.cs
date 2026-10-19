@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using BDP.Core.Expressions;
 using BDP.Core.AttackExecution.RangedModules.Runtime;
+using BDP.Core.Permissions;
 using Verse;
 
 namespace BDP.Core.AttackExecution
@@ -30,7 +31,11 @@ namespace BDP.Core.AttackExecution
         internal RangedAttackModuleSession CreateSession(Pawn pawn, FormalExpressionResult result)
         {
             IReadOnlyList<RangedModuleMountConfig> mounts = result != null ? CloneMounts(result.RangedModules) : new List<RangedModuleMountConfig>();
-            IReadOnlyList<RangedAttackModuleSlot> slots = resolver.ResolveSlots(pawn, result);
+            MapPermissionContext permissionContext = new MapPermissionContext(
+                pawn,
+                result != null ? result.Id : null,
+                result != null ? result.DeclaredPermissionKeys : null);
+            IReadOnlyList<RangedAttackModuleSlot> slots = resolver.ResolveSlots(pawn, result, permissionContext);
             return new RangedAttackModuleSession
             {
                 AttackContext = new AttackContext(),

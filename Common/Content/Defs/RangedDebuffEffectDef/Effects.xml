@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!-- 部位崩解效果包：只负责同部位标记和满层移除。 -->
+  <BDP.Content.RangedModules.Debuff.Effects.BodyPartDisintegrationEffectDef>
+    <defName>BDP_DebuffEffect_BodyPartDisintegration</defName>
+    <label>部位崩解</label>
+    <hediffDef>BDP_Hediff_BodyPartDisintegration</hediffDef>
+    <hitsToDisintegrate>4</hitsToDisintegrate>
+    <directResultRulePack>BDP_PlayerLog_ResultPartRemoved</directResultRulePack>
+  </BDP.Content.RangedModules.Debuff.Effects.BodyPartDisintegrationEffectDef>
+  <!-- 铅块负重效果包：状态定义承载移动曲线和延迟恢复组件。 -->
+  <BDP.Content.RangedModules.Debuff.Effects.LeadWeightEffectDef>
+    <defName>BDP_DebuffEffect_LeadWeight</defName>
+    <label>铅块负重</label>
+    <hediffDef>BDP_Hediff_LeadWeight</hediffDef>
+    <severityPerHit>0.1</severityPerHit>
+    <severityPerExplosionHit>0.01</severityPerExplosionHit>
+    <directResultRulePack>BDP_PlayerLog_ResultWeight</directResultRulePack>
+  </BDP.Content.RangedModules.Debuff.Effects.LeadWeightEffectDef>
+</Defs>

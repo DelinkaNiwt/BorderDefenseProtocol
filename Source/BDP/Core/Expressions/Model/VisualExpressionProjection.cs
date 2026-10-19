@@ -20,6 +20,12 @@ namespace BDP.Core.Expressions
         public IReadOnlyList<VisualResidentEntry> ResidentEntries { get; set; }
 
         /// <summary>
+        /// 当前组合结果可选的攻击阶段视觉绑定集合。
+        /// 它只在组合技宿主进入非待命阶段时被消费，不参与待命关系选择。
+        /// </summary>
+        public IReadOnlyList<ComboAttackVisualBinding> ComboAttackVisualBindings { get; set; }
+
+        /// <summary>
         /// 当前正式表达中可用的激活武器芯片实例数量。
         /// 一枚芯片声明主副两个 Verb 时仍只算一个实例。
         /// </summary>

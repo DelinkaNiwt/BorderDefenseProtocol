@@ -1,17 +1,18 @@
 using System.Collections.Generic;
+using BDP.Content.GroundDash;
 using RimWorld;
 using Verse;
 
 namespace BDP.Content.BounceSlash
 {
     /// <summary>
-    /// 弹射砍击飞行器 — 继承蚱蜢的直线贴地弹射，附加沿途碰撞伤害。
+    /// 弹射砍击飞行器 — 继承中性地面冲刺，附加沿途碰撞伤害。
     ///
     /// 每帧沿飞行线段（Bresenham 栅格化）检测沿途 Pawn，
     /// 本段内每目标最多伤害一次，跨段自动刷新。
     /// 伤害来源名称格式："sourceLabel(施法者名)"。
     /// </summary>
-    public class PawnFlyer_BounceSlash : Grasshopper.PawnFlyer_Grasshopper
+    public class PawnFlyer_BounceSlash : PawnFlyer_GroundDash
     {
         /// <summary>本段飞行中已伤害过的 Pawn（每段起跳时清空）。</summary>
         private HashSet<Pawn> hurtThisSegment = new HashSet<Pawn>();
@@ -30,9 +31,6 @@ namespace BDP.Content.BounceSlash
 
         /// <summary>伤害来源名称（不含施法者——实际显示会拼接为"名称(施法者)"）。</summary>
         public string sourceLabel = "弹射砍击";
-
-        /// <summary>关闭蚱蜢专属踏板/气浪特效（后续可替换为砍击专属特效）。</summary>
-        protected override bool ShowGrasshopperTrailFx => true;
 
         /// <summary>
         /// 每帧 Tick：飞行推进 + 沿途碰撞检测。

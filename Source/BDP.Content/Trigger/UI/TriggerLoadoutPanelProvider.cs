@@ -5,6 +5,7 @@ using BDP.Core.Trigger;
 using RimWorld;
 using UnityEngine;
 using Verse;
+using Verse.AI.Group;
 
 namespace BDP.Content.Trigger.UI
 {
@@ -45,6 +46,11 @@ namespace BDP.Content.Trigger.UI
         private const float RowGap = 4f;
 
         /// <summary>
+        /// 成对槽位关联线颜色。
+        /// </summary>
+        private static readonly Color PairedLinkColor = new Color(0.36f, 0.65f, 0.62f, 0.72f);
+
+        /// <summary>
         /// 槽位外层暗凹底色。
         /// </summary>
         private static readonly Color SlotOuterColor = new Color(0.05f, 0.06f, 0.07f, 0.58f);
@@ -78,11 +84,6 @@ namespace BDP.Content.Trigger.UI
         /// 禁用槽位边框色。
         /// </summary>
         private static readonly Color DisabledBorderColor = new Color(0.72f, 0.24f, 0.22f, 0.82f);
-
-        /// <summary>
-        /// 镜像槽位边框色。
-        /// </summary>
-        private static readonly Color MirrorBorderColor = new Color(0.42f, 0.62f, 0.92f, 0.82f);
 
         /// <summary>
         /// 槽位行标签颜色。
@@ -154,8 +155,11 @@ namespace BDP.Content.Trigger.UI
             Rect mainRect = new Rect(innerRect.x, innerRect.y, innerRect.width, RowHeight);
             Rect subRect = new Rect(innerRect.x, mainRect.yMax + RowGap, innerRect.width, RowHeight);
 
-            IEnumerable<ITriggerSlotState> mainSlots = reader.GetSlots(TriggerSide.Main);
-            IEnumerable<ITriggerSlotState> subSlots = reader.GetSlots(TriggerSide.Sub);
+            List<ITriggerSlotState> mainSlots = SnapshotSlots(reader.GetSlots(TriggerSide.Main));
+            List<ITriggerSlotState> subSlots = SnapshotSlots(reader.GetSlots(TriggerSide.Sub));
+
+            // 先画关联线，再画槽位底色，确保连线只出现在两行之间。
+            DrawPairedSlotConnectors(mainRect, subRect, mainSlots, subSlots);
 
             bool interacted = false;
             interacted |= DrawSideRow(
@@ -194,7 +198,10 @@ namespace BDP.Content.Trigger.UI
         private static bool IsPanelAllowed(Pawn pawn)
         {
             ThingWithComps equipment = pawn?.equipment?.Primary;
-            return equipment?.def?.GetModExtension<TriggerLoadoutPanelExtension>() != null;
+            // 这是芯片操作面板；不可控人物仍可显示独立资源状态，但不能启停芯片。
+            return pawn != null && pawn.IsPlayerControlled
+                && (pawn.GetLord()?.AllowsDrafting(pawn) ?? (AcceptanceReport)true)
+                && equipment?.def?.GetModExtension<TriggerLoadoutPanelExtension>() != null;
         }
 
         /// <summary>
@@ -253,7 +260,7 @@ namespace BDP.Content.Trigger.UI
                 ITriggerSlotInteractionState interaction = interactionReader != null
                     ? interactionReader.GetSlotInteraction(side, slot.Index)
                     : null;
-                interacted |= DrawSlotCell(slotRect, side, slot, interaction, reader, commands);
+                interacted |= DrawSlotCell(slotRect, side, slot, interaction, interactionReader, reader, commands);
                 visualIndex++;
             }
 
@@ -268,6 +275,7 @@ namespace BDP.Content.Trigger.UI
             TriggerSide side,
             ITriggerSlotState slot,
             ITriggerSlotInteractionState interaction,
+            ITriggerInteractionReader interactionReader,
             ITriggerLoadoutReader reader,
             ITriggerLoadoutCommands commands)
         {
@@ -276,10 +284,15 @@ namespace BDP.Content.Trigger.UI
                 return false;
             }
 
+            ITriggerSlotState statusSlot = ResolveBindingRoot(slot, reader);
+            ITriggerSlotInteractionState statusInteraction = statusSlot == slot || interactionReader == null
+                ? interaction
+                : interactionReader.GetSlotInteraction(statusSlot.Side, statusSlot.Index);
+
             DrawSlotRecess(slotRect);
-            DrawLoadedChipIcon(slotRect, slot, interaction);
-            DrawSoftSlotBorder(slotRect, slot, interaction);
-            DrawSwitchProgress(slotRect, side, slot, reader);
+            DrawLoadedChipIcon(slotRect, statusSlot, statusInteraction);
+            DrawSoftSlotBorder(slotRect, statusSlot, statusInteraction);
+            DrawSwitchProgress(slotRect, statusSlot.Side, statusSlot, reader);
 
             if (Mouse.IsOver(slotRect))
             {
@@ -334,12 +347,41 @@ namespace BDP.Content.Trigger.UI
         /// <summary>
         /// 绘制槽位低对比边框。
         /// </summary>
-        private static void DrawSoftSlotBorder(Rect slotRect, ITriggerSlotState slot, ITriggerSlotInteractionState interaction)
+        private static void DrawSoftSlotBorder(
+            Rect slotRect,
+            ITriggerSlotState slot,
+            ITriggerSlotInteractionState interaction)
         {
             Color oldColor = GUI.color;
             GUI.color = ResolveBorderColor(slot, interaction);
             Widgets.DrawBox(slotRect, 1);
             GUI.color = oldColor;
+        }
+
+        /// <summary>
+        /// 为镜像槽解析唯一的绑定根槽，使成对两侧使用同一状态颜色。
+        /// </summary>
+        private static ITriggerSlotState ResolveBindingRoot(ITriggerSlotState slot, ITriggerLoadoutReader reader)
+        {
+            if (slot == null || !slot.HasBindingPartner || reader == null)
+            {
+                return slot;
+            }
+
+            foreach (ITriggerSlotState candidate in reader.GetSlots(slot.BindingRootSide))
+            {
+                if (candidate != null
+                    && candidate.Index == slot.BindingRootIndex
+                    && candidate.HasBindingPartner
+                    && !candidate.IsBindingMirror
+                    && candidate.BindingPartnerSide == slot.Side
+                    && candidate.BindingPartnerIndex == slot.Index)
+                {
+                    return candidate;
+                }
+            }
+
+            return slot;
         }
 
         /// <summary>
@@ -357,17 +399,102 @@ namespace BDP.Content.Trigger.UI
                 return WaitingBorderColor;
             }
 
-            if (interaction != null && interaction.OperationKind == TriggerInteractionOperationKind.Mirror)
-            {
-                return MirrorBorderColor;
-            }
-
             if (slot.IsActive)
             {
                 return ActiveBorderColor;
             }
 
             return slot.LoadedChip != null ? LoadedBorderColor : EmptySlotBorderColor;
+        }
+
+        /// <summary>
+        /// 复制主手/副手槽状态，保证布局和连线共用同一组槽位事实。
+        /// </summary>
+        private static List<ITriggerSlotState> SnapshotSlots(IEnumerable<ITriggerSlotState> slots)
+        {
+            List<ITriggerSlotState> result = new List<ITriggerSlotState>();
+            if (slots == null)
+            {
+                return result;
+            }
+
+            foreach (ITriggerSlotState slot in slots)
+            {
+                result.Add(slot);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 在主手和副手槽之间绘制实际绑定关系的细线。
+        /// </summary>
+        private static void DrawPairedSlotConnectors(
+            Rect mainRect,
+            Rect subRect,
+            List<ITriggerSlotState> mainSlots,
+            List<ITriggerSlotState> subSlots)
+        {
+            DrawPairedSlotConnectorsForRoots(mainRect, subRect, mainSlots, subSlots, TriggerSide.Main);
+            DrawPairedSlotConnectorsForRoots(mainRect, subRect, subSlots, mainSlots, TriggerSide.Sub);
+        }
+
+        /// <summary>
+        /// 只为完整有效的根槽与镜像槽绑定绘制连接线。
+        /// </summary>
+        private static void DrawPairedSlotConnectorsForRoots(
+            Rect mainRect,
+            Rect subRect,
+            List<ITriggerSlotState> roots,
+            List<ITriggerSlotState> partners,
+            TriggerSide rootSide)
+        {
+            if (roots == null || partners == null)
+            {
+                return;
+            }
+
+            foreach (ITriggerSlotState root in roots)
+            {
+                if (root == null || !root.HasBindingPartner || root.IsBindingMirror)
+                {
+                    continue;
+                }
+
+                // 主、副槽按连续索引顺序绘制；成对占槽绑定同号位置。
+                int partnerIndex = root.BindingPartnerIndex;
+                if (root.Side != rootSide
+                    || root.BindingRootSide != root.Side
+                    || root.BindingRootIndex != root.Index
+                    || root.BindingPartnerSide == rootSide
+                    || partnerIndex != root.Index
+                    || partnerIndex < 0
+                    || partnerIndex >= partners.Count)
+                {
+                    continue;
+                }
+
+                ITriggerSlotState partner = partners[partnerIndex];
+                if (partner == null
+                    || partner.Side != root.BindingPartnerSide
+                    || partner.Index != partnerIndex
+                    || !partner.HasBindingPartner
+                    || !partner.IsBindingMirror
+                    || partner.BindingRootSide != root.Side
+                    || partner.BindingRootIndex != root.Index
+                    || partner.BindingPartnerSide != root.Side
+                    || partner.BindingPartnerIndex != root.Index)
+                {
+                    continue;
+                }
+
+                float x = mainRect.x + RowLabelWidth + root.Index * (SlotSize + SlotGap) + SlotSize * 0.5f;
+                Widgets.DrawLine(
+                    new Vector2(x, mainRect.y + (RowHeight + SlotSize) * 0.5f),
+                    new Vector2(x, subRect.y + (RowHeight - SlotSize) * 0.5f),
+                    PairedLinkColor,
+                    1f);
+            }
         }
 
         /// <summary>
@@ -431,18 +558,7 @@ namespace BDP.Content.Trigger.UI
 
             if (interaction.OperationKind == TriggerInteractionOperationKind.Deactivate)
             {
-                return commands.RequestDeactivate(interaction.ControlSide);
-            }
-
-            if (interaction.OperationKind == TriggerInteractionOperationKind.Mirror)
-            {
-                Messages.Message(
-                    "BDP_Message_TriggerLoadout_Binding".Translate(
-                        BuildSideLabel(slot.BindingRootSide),
-                        GetPlayerSlotNumber(slot.BindingRootIndex)),
-                    MessageTypeDefOf.NeutralEvent,
-                    false);
-                return false;
+                return commands.RequestDeactivate(interaction.ControlSide, interaction.ControlSlotIndex);
             }
 
             return false;
@@ -540,31 +656,42 @@ namespace BDP.Content.Trigger.UI
             ITriggerSlotInteractionState interaction,
             ITriggerLoadoutReader reader)
         {
-            string chipText = slot.LoadedChip != null
-                ? slot.LoadedChip.LabelShortCap
+            ITriggerSlotState statusSlot = ResolveBindingRoot(slot, reader);
+            string chipText = statusSlot.LoadedChip != null
+                ? statusSlot.LoadedChip.LabelShortCap
                 : "BDP_Message_TriggerLoadout_EmptySlot".Translate().ToString();
-            string stateText = slot.IsDisabled
-                ? "BDP_Message_TriggerLoadout_Disabled".Translate(DescribeDisableReason(slot.DisabledReason)).ToString()
-                : slot.IsActive
+            string stateText = statusSlot.IsDisabled
+                ? "BDP_Message_TriggerLoadout_Disabled".Translate(DescribeDisableReason(statusSlot.DisabledReason)).ToString()
+                : statusSlot.IsActive
                 ? "BDP_Message_TriggerLoadout_Active".Translate().ToString()
-                    : slot.LoadedChip != null
+                    : statusSlot.LoadedChip != null
                         ? "BDP_Message_TriggerLoadout_Standby".Translate().ToString()
                         : "BDP_Message_TriggerLoadout_Empty".Translate().ToString();
-            string bindingText = slot.IsBindingMirror
-                ? "\n" + "BDP_Message_TriggerLoadout_Binding".Translate(
-                    BuildSideLabel(slot.BindingRootSide),
-                    GetPlayerSlotNumber(slot.BindingRootIndex)).ToString()
+            string bindingText = statusSlot.HasBindingPartner
+                ? "\n" + BuildBindingDescription(statusSlot)
                 : string.Empty;
-            string switchText = BuildSwitchTooltip(slot.Side, slot.Index, reader);
+            string switchText = BuildSwitchTooltip(statusSlot.Side, statusSlot.Index, reader);
 
             return BuildPlayerSlotLabel(slot.Side, slot.Index)
                 + "\n" + "BDP_Message_TriggerLoadout_Chip".Translate(chipText)
                 + "\n" + "BDP_Message_TriggerLoadout_State".Translate(stateText)
                 + bindingText
                 + "\n" + "BDP_Message_TriggerLoadout_Action".Translate(
-                    BuildPlayerActionText(slot, interaction))
+                    BuildPlayerActionText(interaction))
                 + (string.IsNullOrEmpty(switchText) ? string.Empty : "\n" + switchText)
                 + BuildActivationRequirementTooltip(interaction);
+        }
+
+        /// <summary>
+        /// 用根槽的稳定顺序生成双方一致的成对关系提示。
+        /// </summary>
+        private static string BuildBindingDescription(ITriggerSlotState rootSlot)
+        {
+            return "BDP_Message_TriggerLoadout_Binding".Translate(
+                BuildSideLabel(rootSlot.BindingRootSide),
+                GetPlayerSlotNumber(rootSlot.BindingRootIndex),
+                BuildSideLabel(rootSlot.BindingPartnerSide),
+                GetPlayerSlotNumber(rootSlot.BindingPartnerIndex)).ToString();
         }
 
         /// <summary>
@@ -659,9 +786,7 @@ namespace BDP.Content.Trigger.UI
         /// <summary>
         /// 构建玩家可直接理解的当前点击动作。
         /// </summary>
-        private static string BuildPlayerActionText(
-            ITriggerSlotState slot,
-            ITriggerSlotInteractionState interaction)
+        private static string BuildPlayerActionText(ITriggerSlotInteractionState interaction)
         {
             if (interaction == null)
             {
@@ -682,10 +807,6 @@ namespace BDP.Content.Trigger.UI
                     return "BDP_Message_TriggerLoadout_ClickSwitch".Translate();
                 case TriggerInteractionOperationKind.Deactivate:
                     return "BDP_Message_TriggerLoadout_ClickDeactivate".Translate();
-                case TriggerInteractionOperationKind.Mirror:
-                    return "BDP_Message_TriggerLoadout_Binding".Translate(
-                        BuildSideLabel(slot.BindingRootSide),
-                        GetPlayerSlotNumber(slot.BindingRootIndex));
                 default:
                     return "BDP_Message_Chip_OperationUnavailable".Translate();
             }

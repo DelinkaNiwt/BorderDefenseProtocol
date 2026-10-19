@@ -11,6 +11,25 @@ namespace BDP.Core.Combos
         /// <summary>从芯片正式定义和实例来源记录构建成品身份快照。</summary>
         public static ComboSourceAdmissionSnapshot BuildSnapshot(Thing chip)
         {
+            return BuildSnapshot(chip, null, null, false);
+        }
+
+        /// <summary>从芯片正式定义和当前运行时形态/姿态构建来源快照。</summary>
+        public static ComboSourceAdmissionSnapshot BuildSnapshot(
+            Thing chip,
+            string modeKey,
+            string stanceKey)
+        {
+            return BuildSnapshot(chip, modeKey, stanceKey, true);
+        }
+
+        /// <summary>构建来源快照并标记调用方是否提供了运行时状态。</summary>
+        private static ComboSourceAdmissionSnapshot BuildSnapshot(
+            Thing chip,
+            string modeKey,
+            string stanceKey,
+            bool hasRuntimeState)
+        {
             ChipSourceReferenceSnapshot source = ChipInstanceSurfaceAccess.ReadSourceReference(chip);
             ChipDefinitionReadResult readResult = ChipSurfaceAccess.Read(chip);
             ChipProfileContract profile = readResult?.Contract?.Profile;
@@ -31,8 +50,34 @@ namespace BDP.Core.Combos
                 ProfessionKey = source.SourceProfessionKey,
                 CategoryKey = profile?.Category?.defName,
                 TagKeys = tags.AsReadOnly(),
-                SourceVariantKey = source.SourceVariantKey
+                SourceVariantKey = source.SourceVariantKey,
+                ModeKey = NormalizeScopeKey(modeKey),
+                StanceKey = NormalizeScopeKey(stanceKey),
+                HasRuntimeState = hasRuntimeState
             };
+        }
+
+        /// <summary>按声明配置与正式成品来源记录构建理论准入快照，复用实际芯片的同一字段含义。</summary>
+        internal static ComboSourceAdmissionSnapshot BuildSnapshot(
+            ChipDefinitionConfig config, ChipSourceReferenceSnapshot source)
+        {
+            List<string> tags = new List<string>();
+            if (config?.Profile?.Tags != null)
+                foreach (ChipTagDef tag in config.Profile.Tags)
+                    if (tag != null) tags.Add(tag.defName);
+            return new ComboSourceAdmissionSnapshot
+            {
+                ProfessionKey = source?.SourceProfessionKey,
+                CategoryKey = config?.Profile?.Category?.defName,
+                TagKeys = tags.AsReadOnly(),
+                SourceVariantKey = source?.SourceVariantKey
+            };
+        }
+
+        /// <summary>把运行时范围键归一化为非空稳定比较值。</summary>
+        private static string NormalizeScopeKey(string key)
+        {
+            return string.IsNullOrWhiteSpace(key) ? null : key.Trim();
         }
 
         /// <summary>检查一枚实际芯片是否满足指定 Combo 侧的全部维度。</summary>

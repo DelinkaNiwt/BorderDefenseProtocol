@@ -20,7 +20,7 @@ Assert-True (Test-Path -LiteralPath $exitTransactionPath) 'CombatBodyExitTransac
 
 $exitText = Get-Content -LiteralPath $exitTransactionPath -Raw -Encoding utf8
 $normalized = $exitText -replace '\s+', ''
-$cooldownCall = 'rawCombatBodyService.EnterCooldown(ResolveCooldownTicks(exitMode),ResolveExitReason(exitMode));'
+$cooldownCall = 'rawCombatBodyService.EnterCooldown(ResolveCooldownTicks(exitMode),ResolveExitReason(exitMode,forceRelease,forcedReleaseReason));'
 $woundClearCall = 'owner.WoundRuntime.ClearActiveRuntime(ownerPawn);'
 $cooldownIndex = $normalized.IndexOf($cooldownCall)
 $woundClearIndex = $normalized.IndexOf($woundClearCall)

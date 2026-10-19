@@ -71,6 +71,14 @@ namespace BDP.Core.Trion
         }
 
         /// <summary>
+        /// 转发当前实际生效的每日自然恢复量。
+        /// </summary>
+        public float EffectiveRecoveryPerDay
+        {
+            get { return owner.EffectiveRecoveryPerDay; }
+        }
+
+        /// <summary>
         /// 转发聚合持续消耗速率。
         /// </summary>
         public float TotalDrainPerSecond
@@ -84,6 +92,14 @@ namespace BDP.Core.Trion
         public bool Frozen
         {
             get { return owner.Frozen; }
+        }
+
+        /// <summary>
+        /// 转发外部 Trion 合并绑定状态。
+        /// </summary>
+        public bool IsBoundToExternalPool
+        {
+            get { return owner.BoundToExternalPool; }
         }
 
         /// <summary>
@@ -137,9 +153,9 @@ namespace BDP.Core.Trion
         /// <summary>
         /// 代宿主注册持续消耗来源。
         /// </summary>
-        public void RegisterDrain(TrionDrainKey key, float perSecond)
+        public void RegisterDrain(TrionDrainKey key, float perSecond, TrionDrainKind kind = TrionDrainKind.Function)
         {
-            owner.RegisterDrain(key, perSecond);
+            owner.RegisterDrain(key, perSecond, kind);
         }
 
         /// <summary>
@@ -180,6 +196,14 @@ namespace BDP.Core.Trion
         public void SetFrozen(bool frozen)
         {
             owner.SetFrozen(frozen);
+        }
+
+        /// <summary>
+        /// 转发外部 Trion 合并绑定状态设置。
+        /// </summary>
+        public void SetBoundToExternalPool(bool bound)
+        {
+            owner.SetBoundToExternalPool(bound);
         }
 
         /// <summary>

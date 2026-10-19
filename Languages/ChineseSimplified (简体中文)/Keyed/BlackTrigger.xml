@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <BDP_BlackTrigger_Formation_LetterLabel>未决的黑触发器形成</BDP_BlackTrigger_Formation_LetterLabel>
+  <BDP_BlackTrigger_Formation_LetterText>{0} 留下的生命印记正在尸体旁凝结，剩余 {1}。你可以现在决定，也可以在期限内稍后处理；到期后必须形成或拒绝。</BDP_BlackTrigger_Formation_LetterText>
+  <BDP_BlackTrigger_Formation_LetterUrgentText>{0} 留下的生命印记已经抵达极限。现在必须决定让它形成黑触发器，或让它就此消散。</BDP_BlackTrigger_Formation_LetterUrgentText>
+  <BDP_BlackTrigger_Formation_Title>黑触发器形成：{0}</BDP_BlackTrigger_Formation_Title>
+  <BDP_BlackTrigger_Formation_SourceSummary>{0}留下的生命印记正在凝结；生前能力与经历已经限定了可形成的方向。</BDP_BlackTrigger_Formation_SourceSummary>
+  <BDP_BlackTrigger_Formation_Remaining>剩余时间：{0}</BDP_BlackTrigger_Formation_Remaining>
+  <BDP_BlackTrigger_Formation_DeadlineReached>生命印记已到极限，必须立即决定</BDP_BlackTrigger_Formation_DeadlineReached>
+  <BDP_BlackTrigger_Formation_LifeData>生命印记资料</BDP_BlackTrigger_Formation_LifeData>
+  <BDP_BlackTrigger_Formation_TopSkills>最擅长的技能</BDP_BlackTrigger_Formation_TopSkills>
+  <BDP_BlackTrigger_Formation_InfluentialRecords>留下影响的经历</BDP_BlackTrigger_Formation_InfluentialRecords>
+  <BDP_BlackTrigger_Formation_MatchedFacts>本次匹配依据</BDP_BlackTrigger_Formation_MatchedFacts>
+  <BDP_BlackTrigger_Formation_OtherSkills>其它生前优势</BDP_BlackTrigger_Formation_OtherSkills>
+  <BDP_BlackTrigger_Formation_NoInfluentialRecords>本次候选由技能条件成立，没有额外的生涯记录参与。</BDP_BlackTrigger_Formation_NoInfluentialRecords>
+  <BDP_BlackTrigger_Formation_NoMatchedFacts>候选路线没有额外的正向资料条件；形成资格来自黑触发器自身的路线定义。</BDP_BlackTrigger_Formation_NoMatchedFacts>
+  <BDP_BlackTrigger_Formation_NoLifeData>暂无可显示的生命资料。</BDP_BlackTrigger_Formation_NoLifeData>
+  <BDP_BlackTrigger_Formation_NoOtherSkills>前三项技能都已作为本次匹配依据。</BDP_BlackTrigger_Formation_NoOtherSkills>
+  <BDP_BlackTrigger_Formation_SkillLine>{0}　等级 {1}　{2}</BDP_BlackTrigger_Formation_SkillLine>
+  <BDP_BlackTrigger_Formation_RecordLine>{0}　{1}　殖民地第 {2} 名</BDP_BlackTrigger_Formation_RecordLine>
+  <BDP_BlackTrigger_Passion_Major>双重兴趣</BDP_BlackTrigger_Passion_Major>
+  <BDP_BlackTrigger_Passion_Minor>兴趣</BDP_BlackTrigger_Passion_Minor>
+  <BDP_BlackTrigger_Passion_None>无兴趣</BDP_BlackTrigger_Passion_None>
+  <BDP_BlackTrigger_Formation_SelectEmphasisTitle>选择战斗侧重</BDP_BlackTrigger_Formation_SelectEmphasisTitle>
+  <BDP_BlackTrigger_Formation_EmphasisEvidence>匹配依据：
+{0}</BDP_BlackTrigger_Formation_EmphasisEvidence>
+  <BDP_BlackTrigger_Formation_EmphasisSingle>可形成方向已经确定</BDP_BlackTrigger_Formation_EmphasisSingle>
+  <BDP_BlackTrigger_Formation_UnknownEmphasis>未命名战斗侧重</BDP_BlackTrigger_Formation_UnknownEmphasis>
+  <BDP_BlackTrigger_Formation_HeirTitle>选择传承人</BDP_BlackTrigger_Formation_HeirTitle>
+  <BDP_BlackTrigger_Formation_HeirHelp>可选传承人仅限玩家派系的存活殖民者，包括地图外、商队和世界旅行中的殖民者。指定后，这名人物可以无视本件黑触发器的适格条件；不指定时按正常适格规则判断。</BDP_BlackTrigger_Formation_HeirHelp>
+  <BDP_BlackTrigger_Formation_HeirNoneChoice>不指定传承人</BDP_BlackTrigger_Formation_HeirNoneChoice>
+  <BDP_BlackTrigger_Formation_HeirLine>{0}；死亡前好感 {1}；位置：{2}</BDP_BlackTrigger_Formation_HeirLine>
+  <BDP_BlackTrigger_Formation_HeirWorldLocation>世界旅行中</BDP_BlackTrigger_Formation_HeirWorldLocation>
+  <BDP_BlackTrigger_Formation_TraitTitle>选择继承特性</BDP_BlackTrigger_Formation_TraitTitle>
+  <BDP_BlackTrigger_Formation_TraitHelp>装备期间临时获得所选特性，卸下后移除；若与现有特性冲突或受到基因规则压制，可能不会生效。</BDP_BlackTrigger_Formation_TraitHelp>
+  <BDP_BlackTrigger_Formation_TraitDetail>{0}{1}</BDP_BlackTrigger_Formation_TraitDetail>
+  <BDP_BlackTrigger_Formation_TraitNoDescription>这项特性没有可显示的详细说明。</BDP_BlackTrigger_Formation_TraitNoDescription>
+  <BDP_BlackTrigger_Formation_TraitSuppressed>（死亡前受压制）</BDP_BlackTrigger_Formation_TraitSuppressed>
+  <BDP_BlackTrigger_Formation_TraitNone>不继承特性</BDP_BlackTrigger_Formation_TraitNone>
+  <BDP_BlackTrigger_Formation_SelectEmphasis>请选择一种战斗侧重。</BDP_BlackTrigger_Formation_SelectEmphasis>
+  <BDP_BlackTrigger_Formation_SelectHeir>请选择传承人，或明确选择“不指定”。</BDP_BlackTrigger_Formation_SelectHeir>
+  <BDP_BlackTrigger_Formation_SelectTrait>请选择一项继承特性，或明确选择“不继承”。</BDP_BlackTrigger_Formation_SelectTrait>
+  <BDP_BlackTrigger_Formation_MissingSelections>尚未决定：{0}</BDP_BlackTrigger_Formation_MissingSelections>
+  <BDP_BlackTrigger_Formation_MissingEmphasis>战斗侧重</BDP_BlackTrigger_Formation_MissingEmphasis>
+  <BDP_BlackTrigger_Formation_MissingHeir>传承人</BDP_BlackTrigger_Formation_MissingHeir>
+  <BDP_BlackTrigger_Formation_MissingTrait>继承特性</BDP_BlackTrigger_Formation_MissingTrait>
+  <BDP_BlackTrigger_Formation_HeirUnavailable>选定的传承人已经死亡或失去有效引用，请重新选择。</BDP_BlackTrigger_Formation_HeirUnavailable>
+  <BDP_BlackTrigger_Formation_TraitUnavailable>选定的继承特性不再属于本次冻结选项。</BDP_BlackTrigger_Formation_TraitUnavailable>
+  <BDP_BlackTrigger_Formation_CandidateUnavailable>当前侧重已经没有仍可形成的黑触发器，请改选；若所有侧重都消失，只能拒绝形成。</BDP_BlackTrigger_Formation_CandidateUnavailable>
+  <BDP_BlackTrigger_Formation_Abandon>放弃形成</BDP_BlackTrigger_Formation_Abandon>
+  <BDP_BlackTrigger_Formation_Reject>拒绝形成</BDP_BlackTrigger_Formation_Reject>
+  <BDP_BlackTrigger_Formation_Later>稍后决定</BDP_BlackTrigger_Formation_Later>
+  <BDP_BlackTrigger_Formation_Confirm>确认形成</BDP_BlackTrigger_Formation_Confirm>
+  <BDP_BlackTrigger_Formation_AbandonConfirm>确定放弃这次形成吗？尸体不会被本系统销毁，但这次生命印记会消散，事件不会恢复。</BDP_BlackTrigger_Formation_AbandonConfirm>
+  <BDP_BlackTrigger_Formation_RejectConfirm>期限已经结束。确定拒绝形成吗？尸体不会被本系统销毁，但这次生命印记会永久消散。</BDP_BlackTrigger_Formation_RejectConfirm>
+  <BDP_BlackTrigger_Formation_MissingEvent>这次形成事件已经结束。</BDP_BlackTrigger_Formation_MissingEvent>
+  <BDP_BlackTrigger_Formation_TechnicalFailure>形成暂时未完成。尸体、事件和当前决定仍然保留，可以重试。</BDP_BlackTrigger_Formation_TechnicalFailure>
+  <BDP_BlackTrigger_Formation_PlacementFailed>无法在尸体当前所在位置安全放置黑触发器。尸体和决定均已保留。</BDP_BlackTrigger_Formation_PlacementFailed>
+  <BDP_BlackTrigger_Formation_Open>决定黑触发器形成</BDP_BlackTrigger_Formation_Open>
+  <BDP_BlackTrigger_Formation_OpenDesc>查看这具尸体承载的生命印记，并决定是否形成黑触发器。</BDP_BlackTrigger_Formation_OpenDesc>
+  <BDP_BlackTrigger_Formation_CorpseInspect>承载未决的黑触发器形成；剩余 {0}</BDP_BlackTrigger_Formation_CorpseInspect>
+  <BDP_BlackTrigger_Formation_NoCandidate>生前能力和经历没有匹配到任何可形成的黑触发器。</BDP_BlackTrigger_Formation_NoCandidate>
+  <BDP_BlackTrigger_Formation_SourceInvalid>该人物不符合黑触发器形成的基础资格。</BDP_BlackTrigger_Formation_SourceInvalid>
+  <BDP_BlackTrigger_Formation_AnotherPending>当前已有一项未决的黑触发器形成。</BDP_BlackTrigger_Formation_AnotherPending>
+  <BDP_BlackTrigger_Formation_Cooldown>本日已经发生过一次黑触发器形成，暂时不会再次触发。</BDP_BlackTrigger_Formation_Cooldown>
+  <BDP_BlackTrigger_Formation_ChanceMissed>这次死亡没有留下足以形成黑触发器的生命印记。</BDP_BlackTrigger_Formation_ChanceMissed>
+
+  <BDP_BlackTrigger_Source_Death>在伤病死亡时</BDP_BlackTrigger_Source_Death>
+  <BDP_BlackTrigger_Source_Sacrifice>在危急关头燃尽生命时</BDP_BlackTrigger_Source_Sacrifice>
+  <BDP_BlackTrigger_Success_Label>黑触发器已经形成</BDP_BlackTrigger_Success_Label>
+  <BDP_BlackTrigger_Success_Text>{0} 留下的生命印记凝成了黑触发器“{1}”，最终侧重为“{2}”。原身尸体已经随形成过程消失。</BDP_BlackTrigger_Success_Text>
+
+  <BDP_BlackTrigger_Imprint_GizmoLabel>查看生命印记</BDP_BlackTrigger_Imprint_GizmoLabel>
+  <BDP_BlackTrigger_Imprint_GizmoDesc>查看这件黑触发器的来源、战斗侧重、形成依据、传承人和继承特性。</BDP_BlackTrigger_Imprint_GizmoDesc>
+  <BDP_BlackTrigger_Imprint_Title>黑触发器生命印记</BDP_BlackTrigger_Imprint_Title>
+  <BDP_BlackTrigger_Imprint_StatLabel>生命印记</BDP_BlackTrigger_Imprint_StatLabel>
+  <BDP_BlackTrigger_Imprint_Maker>生命印记来源：{0}</BDP_BlackTrigger_Imprint_Maker>
+  <BDP_BlackTrigger_Imprint_Source>留下方式：{0}</BDP_BlackTrigger_Imprint_Source>
+  <BDP_BlackTrigger_Imprint_Emphasis>战斗侧重：{0}</BDP_BlackTrigger_Imprint_Emphasis>
+  <BDP_BlackTrigger_Imprint_Evidence>形成依据</BDP_BlackTrigger_Imprint_Evidence>
+  <BDP_BlackTrigger_Imprint_Heir>传承人：{0}</BDP_BlackTrigger_Imprint_Heir>
+  <BDP_BlackTrigger_Imprint_None>未指定</BDP_BlackTrigger_Imprint_None>
+  <BDP_BlackTrigger_Imprint_InheritedTrait>继承特性：{0}</BDP_BlackTrigger_Imprint_InheritedTrait>
+  <BDP_BlackTrigger_Imprint_InheritedTraitStatus>当前继承状态：{0}</BDP_BlackTrigger_Imprint_InheritedTraitStatus>
+  <BDP_BlackTrigger_Imprint_InspectSummary>生命印记来源：{0}；战斗侧重：{1}</BDP_BlackTrigger_Imprint_InspectSummary>
+  <BDP_BlackTrigger_Inheritance_TemporarySource>黑触发器继承：临时由当前装备的黑触发器赋予。</BDP_BlackTrigger_Inheritance_TemporarySource>
+  <BDP_BlackTrigger_Inheritance_StatusUnequipped>尚未装备，因此未赋予</BDP_BlackTrigger_Inheritance_StatusUnequipped>
+  <BDP_BlackTrigger_Inheritance_StatusActive>已作为真实特性生效</BDP_BlackTrigger_Inheritance_StatusActive>
+  <BDP_BlackTrigger_Inheritance_StatusSuppressed>已添加，但正由原版基因或特性规则压制</BDP_BlackTrigger_Inheritance_StatusSuppressed>
+  <BDP_BlackTrigger_Inheritance_StatusAlreadyOwned>持有者本来就拥有同一特性，未重复添加</BDP_BlackTrigger_Inheritance_StatusAlreadyOwned>
+  <BDP_BlackTrigger_Inheritance_StatusConflict>与持有者现有特性冲突，因此未添加</BDP_BlackTrigger_Inheritance_StatusConflict>
+  <BDP_BlackTrigger_Inheritance_StatusPending>当前尚未应用；重新装备或移除冲突特性后会再次协调</BDP_BlackTrigger_Inheritance_StatusPending>
+
+  <BDP_BlackTrigger_Emphasis_Frontline_Summary>从正面持续施压，直接撕开敌方战线。</BDP_BlackTrigger_Emphasis_Frontline_Summary>
+  <BDP_BlackTrigger_Emphasis_Frontline_Detail>生命印记将力量凝聚在正面对抗和持续压制上。</BDP_BlackTrigger_Emphasis_Frontline_Detail>
+  <BDP_BlackTrigger_Emphasis_Ranged_Summary>从距离外施加稳定而直接的战斗影响。</BDP_BlackTrigger_Emphasis_Ranged_Summary>
+  <BDP_BlackTrigger_Emphasis_Ranged_Detail>生命印记将经验凝聚成跨越距离的攻击手段。</BDP_BlackTrigger_Emphasis_Ranged_Detail>
+  <BDP_BlackTrigger_Emphasis_Precision_Summary>锁定关键目标，以精确结果改变战局。</BDP_BlackTrigger_Emphasis_Precision_Summary>
+  <BDP_BlackTrigger_Emphasis_Precision_Detail>生命印记偏向高精度、高价值目标和决定性打击。</BDP_BlackTrigger_Emphasis_Precision_Detail>
+  <BDP_BlackTrigger_Emphasis_Mobility_Summary>借助速度、位置和突入制造战机。</BDP_BlackTrigger_Emphasis_Mobility_Summary>
+  <BDP_BlackTrigger_Emphasis_Mobility_Detail>生命印记把行动能力转化为快速介入与脱离战场的优势。</BDP_BlackTrigger_Emphasis_Mobility_Detail>
+  <BDP_BlackTrigger_Emphasis_Defense_Summary>承受威胁，并保护人员或阵地继续战斗。</BDP_BlackTrigger_Emphasis_Defense_Summary>
+  <BDP_BlackTrigger_Emphasis_Defense_Detail>生命印记偏向防护、承受和维持战线。</BDP_BlackTrigger_Emphasis_Defense_Detail>
+  <BDP_BlackTrigger_Emphasis_Control_Summary>限制、削弱或扰乱敌方行动。</BDP_BlackTrigger_Emphasis_Control_Summary>
+  <BDP_BlackTrigger_Emphasis_Control_Detail>生命印记以改变敌人的行动条件来取得优势。</BDP_BlackTrigger_Emphasis_Control_Detail>
+  <BDP_BlackTrigger_Emphasis_Support_Summary>治疗、强化、补给或构筑有利战场。</BDP_BlackTrigger_Emphasis_Support_Summary>
+  <BDP_BlackTrigger_Emphasis_Support_Detail>生命印记以维持友军和塑造战场条件来支援战斗。</BDP_BlackTrigger_Emphasis_Support_Detail>
+  <BDP_BlackTrigger_Emphasis_Strategy_Summary>通过侦察、信息和全局判断支配战斗。</BDP_BlackTrigger_Emphasis_Strategy_Summary>
+  <BDP_BlackTrigger_Emphasis_Strategy_Detail>生命印记把观察和判断转化为战略层面的战斗优势。</BDP_BlackTrigger_Emphasis_Strategy_Detail>
+
+  <BDP_BlackTrigger_FactGroup_Skill>技能</BDP_BlackTrigger_FactGroup_Skill>
+  <BDP_BlackTrigger_RecordGroup_Combat>战斗与狩猎</BDP_BlackTrigger_RecordGroup_Combat>
+  <BDP_BlackTrigger_RecordGroup_Medicine>医疗与救援</BDP_BlackTrigger_RecordGroup_Medicine>
+  <BDP_BlackTrigger_RecordGroup_Social>社交与驯养</BDP_BlackTrigger_RecordGroup_Social>
+  <BDP_BlackTrigger_RecordGroup_Production>生产与工程</BDP_BlackTrigger_RecordGroup_Production>
+  <BDP_BlackTrigger_RecordGroup_Research>研究与探索</BDP_BlackTrigger_RecordGroup_Research>
+  <BDP_BlackTrigger_RecordGroup_Adversity>伤病与磨难</BDP_BlackTrigger_RecordGroup_Adversity>
+  <BDP_BlackTrigger_RecordGroup_Experience>身份与特殊经历</BDP_BlackTrigger_RecordGroup_Experience>
+  <BDP_BlackTrigger_RecordGroup_Other>其它</BDP_BlackTrigger_RecordGroup_Other>
+  <BDP_BlackTrigger_Relation_CloseFriend>至交</BDP_BlackTrigger_Relation_CloseFriend>
+  <BDP_BlackTrigger_UnknownMaker>未知人物</BDP_BlackTrigger_UnknownMaker>
+
+  <BDP_BlackTrigger_Compatibility_Accepted>适格</BDP_BlackTrigger_Compatibility_Accepted>
+  <BDP_BlackTrigger_Compatibility_NotBlackTrigger>这不是黑触发器。</BDP_BlackTrigger_Compatibility_NotBlackTrigger>
+  <BDP_BlackTrigger_Compatibility_BoundToOther>这件黑触发器已经绑定其他人物。</BDP_BlackTrigger_Compatibility_BoundToOther>
+  <BDP_BlackTrigger_Compatibility_AlreadyHasBlackTrigger>该人物已经绑定另一件黑触发器。</BDP_BlackTrigger_Compatibility_AlreadyHasBlackTrigger>
+  <BDP_BlackTrigger_Compatibility_ConditionsFailed>该人物不满足这件黑触发器声明的适格条件。</BDP_BlackTrigger_Compatibility_ConditionsFailed>
+
+  <BDP_BlackTrigger_Sacrifice_AlertLabel>个人危机：可燃尽生命</BDP_BlackTrigger_Sacrifice_AlertLabel>
+  <BDP_BlackTrigger_Sacrifice_AlertExplanation>这名殖民者正处于个人生命危机。如果其生前资料存在可匹配的黑触发器，可以主动燃尽余下生命并进入形成流程。</BDP_BlackTrigger_Sacrifice_AlertExplanation>
+  <BDP_BlackTrigger_Sacrifice_GizmoLabel>燃尽生命</BDP_BlackTrigger_Sacrifice_GizmoLabel>
+  <BDP_BlackTrigger_Sacrifice_GizmoDesc>仅在个人危急关头结束生命，并尝试留下黑触发器形成事件。</BDP_BlackTrigger_Sacrifice_GizmoDesc>
+  <BDP_BlackTrigger_Sacrifice_Confirm>确定让 {0} 在危急关头燃尽余下生命吗？此操作不可逆。</BDP_BlackTrigger_Sacrifice_Confirm>
+  <BDP_BlackTrigger_Sacrifice_NoLongerAvailable>个人危机已经结束，燃尽生命的入口已经关闭。</BDP_BlackTrigger_Sacrifice_NoLongerAvailable>
+  <BDP_BlackTrigger_Sacrifice_Unavailable>当前不具备燃尽生命的资格。</BDP_BlackTrigger_Sacrifice_Unavailable>
+  <BDP_BlackTrigger_Sacrifice_NoCompatibleTrigger>该人物的生前能力和经历无法匹配任何可形成的黑触发器，因此不会结束生命。</BDP_BlackTrigger_Sacrifice_NoCompatibleTrigger>
+  <BDP_BlackTrigger_Sacrifice_Bleedout>失血倒计时已经进入最后阶段。</BDP_BlackTrigger_Sacrifice_Bleedout>
+  <BDP_BlackTrigger_Sacrifice_LethalHediff>致死病症已经逼近生命极限。</BDP_BlackTrigger_Sacrifice_LethalHediff>
+  <BDP_BlackTrigger_Sacrifice_LifeThreatening>人物已经倒地，并存在直接威胁生命的伤病。</BDP_BlackTrigger_Sacrifice_LifeThreatening>
+  <BDP_BlackTrigger_Sacrifice_NotCritical>尚未进入个人危急关头。</BDP_BlackTrigger_Sacrifice_NotCritical>
+
+  <BDP_BlackTrigger_Debug_NoPawn>请先单选一个仍然存活的玩家殖民者。</BDP_BlackTrigger_Debug_NoPawn>
+  <BDP_BlackTrigger_Debug_NoTrigger>当前对象没有黑触发器。</BDP_BlackTrigger_Debug_NoTrigger>
+  <BDP_BlackTrigger_Debug_ResetDone>已经重置该黑触发器种类的开发唯一登记。</BDP_BlackTrigger_Debug_ResetDone>
+  <BDP_BlackTrigger_Test_DefMissing>临时黑触发器测试定义未加载。</BDP_BlackTrigger_Test_DefMissing>
+  <BDP_BlackTrigger_Test_SpawnFailed>临时黑触发器无法放置到当前殖民者附近。</BDP_BlackTrigger_Test_SpawnFailed>
+  <BDP_BlackTrigger_Test_Spawned>已在附近生成 {0}。</BDP_BlackTrigger_Test_Spawned>
+</LanguageData>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 当前模式按钮及查看信息。 -->
+  <BDP_GateInducer_ModeCommand>诱导：{0}</BDP_GateInducer_ModeCommand>
+  <!-- 两种模式直接切换，停运使用建筑开关。 -->
+  <BDP_GateInducer_ModeDescription>切换诱导对象：仅敌方袭击，或全部BDP黑洞门（包括友方和任务出场）。要停止诱导，请关闭建筑开关。</BDP_GateInducer_ModeDescription>
+  <!-- 默认对象。 -->
+  <BDP_GateInducer_HostileRaids>仅敌方袭击</BDP_GateInducer_HostileRaids>
+  <!-- 不区分出场用途。 -->
+  <BDP_GateInducer_AllGates>全部门</BDP_GateInducer_AllGates>
+  <!-- 正常运行状态。 -->
+  <BDP_GateInducer_Running>状态：运作中</BDP_GateInducer_Running>
+  <!-- 调试覆盖运行状态。 -->
+  <BDP_GateInducer_ForcedRunning>状态：强制运作中</BDP_GateInducer_ForcedRunning>
+  <!-- 关闭、故障、无电力或核心许可时的状态。 -->
+  <BDP_GateInducer_Stopped>状态：已停运（需开启开关、供电、无故障及Trion中继核心许可）</BDP_GateInducer_Stopped>
+  <!-- 显示当前建筑配置的单门判定成功率。 -->
+  <BDP_GateInducer_SuccessChance>诱导成功率：{0}</BDP_GateInducer_SuccessChance>
+</LanguageData>

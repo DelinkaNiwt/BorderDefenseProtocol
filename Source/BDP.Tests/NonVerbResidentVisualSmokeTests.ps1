@@ -15,7 +15,7 @@ $collectMatch = [regex]::Match(
 Assert-True $collectMatch.Success '必须保留常驻视觉条目收集边界。'
 
 $collectText = $collectMatch.Value
-Assert-True (-not ($collectText -match 'ResultKind\s*!=\s*ExpressionResultKind\.Verb')) `
+Assert-True (-not ($collectText -match 'OutputChannel\s*!=\s*ExpressionOutputChannel\.Verb')) `
     '带预设的 Hediff（健康状态）或 Passive（被动）条目也必须能进入常驻视觉。'
 Assert-True (
     ($collectText -match 'VisualPresetDefName') -and

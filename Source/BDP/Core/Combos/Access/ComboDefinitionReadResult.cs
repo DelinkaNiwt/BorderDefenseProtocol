@@ -20,5 +20,11 @@ namespace BDP.Core.Combos
         /// 当前目标的最低合法性校验结果。
         /// </summary>
         public ComboDefinitionValidationResult Validation;
+
+        /// <summary>
+        /// 当前运行时匹配采用的第一、第二实际来源芯片。
+        /// 直接读取 ComboDef 时为空；只有 FindMatch 会填充它。
+        /// </summary>
+        public ComboSourceBinding SourceBinding;
     }
 }

@@ -20,7 +20,7 @@ function Read-Source {
 $modRoot = Join-Path $PSScriptRoot '..\..'
 $coreRoot = Join-Path $modRoot 'Source\BDP\Core'
 $contentRoot = Join-Path $modRoot 'Source\BDP.Content'
-$xmlPath = Join-Path $modRoot '1.6\Content\Defs\RangedModuleDef\RangedDebuff.xml'
+$xmlPath = Join-Path $modRoot 'Common\Content\Defs\ChipManufacturingPresetDef\Presets.xml'
 
 $appearancePath = Join-Path $coreRoot 'Projectiles\Visual\ProjectileVisualAppearanceOverrides.cs'
 $planContributionPath = Join-Path $coreRoot 'AttackExecution\RangedProtocol\ProjectileInit\ProjectileInitContribution.cs'
@@ -86,14 +86,15 @@ Assert-True (
     ($mapComponentText -match 'renderQueue')
 ) '内芯必须使用高于外层发光材质的显式渲染队列。'
 
-$leadShotMatch = [regex]::Match(
-    $xmlText,
-    '(?s)<defName>BDP_RangedDebuff_LeadWeight</defName>.*?</defaultConfig>')
-Assert-True $leadShotMatch.Success '找不到铅块负重模块 XML 配置。'
-$leadShotText = $leadShotMatch.Value
+[xml]$mountXml = $xmlText
+$leadMount = $mountXml.SelectSingleNode("/Defs/*[defName='BDP_ChipFunction_LeadShotModified']//li[moduleDef='BDP_RangedDebuffModule']/config")
+Assert-True ($null -ne $leadMount) '找不到铅弹实际挂载配置。'
+$leadShotText = $leadMount.OuterXml
+
 Assert-True ($leadShotText -match '<HasProjectileTrailCore>true</HasProjectileTrailCore>') '铅弹必须启用拖尾灰黑内芯。'
 Assert-True ($leadShotText -match '<ProjectileTrailCoreColor>\(0\.12, 0\.12, 0\.12, 1\)</ProjectileTrailCoreColor>') '铅弹内芯必须使用灰黑色。'
 Assert-True ($leadShotText -match '<ProjectileTrailCoreWidthRatio>0\.60</ProjectileTrailCoreWidthRatio>') '铅弹内芯必须加粗到外层的 60%。'
-Assert-True ($leadShotText -notmatch '<HasProjectileTrailColor>true</HasProjectileTrailColor>') '铅弹不能再把原有发光外层整体改成灰黑色。'
+Assert-True ($leadShotText -match '<HasProjectileTrailColor>true</HasProjectileTrailColor>') '铅弹必须启用独立的光束外层颜色覆盖。'
+Assert-True ($leadShotText -match '<ProjectileTrailColor>\(1\.0,\s*0\.35,\s*0\.30,\s*0\.775\)</ProjectileTrailColor>') '铅弹光束外层必须使用偏红色。'
 
 Write-Output 'ProjectileTrailInnerCoreBoundarySmokeTests PASS'

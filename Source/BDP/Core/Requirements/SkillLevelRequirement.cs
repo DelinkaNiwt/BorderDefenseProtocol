@@ -26,7 +26,8 @@ namespace BDP.Core.Requirements
         {
             return PawnRequirementSnapshot.Description(
                 Label,
-                "BDP_Requirement_SkillLevelMinimum".Translate(FormatMinimumLevel()));
+                "BDP_Requirement_SkillLevelMinimum".Translate(FormatMinimumLevel()),
+                FormatMinimumResult());
         }
 
         /// <summary>技能引用必须有效，等级必须是 1～20 的整数。</summary>
@@ -52,18 +53,20 @@ namespace BDP.Core.Requirements
             SkillRecord record = Skill != null ? pawn?.skills?.GetSkill(Skill) : null;
             int minimum = Mathf.FloorToInt(MinimumLevel);
             int? current = record != null ? (int?)record.Level : null;
+            string currentText = current.HasValue ? FormatResult(current.Value) : "无";
+            string requiredText = FormatResult(minimum);
             bool satisfied = MeetsLevel(current, minimum);
             return PawnRequirementSnapshot.Evaluation(
                 Label,
-                current.HasValue ? current.Value.ToString() : "无",
-                minimum.ToString(),
+                currentText,
+                requiredText,
                 satisfied,
                 satisfied
                     ? null
                     : "BDP_Requirement_SkillLevelFailure".Translate(
                         Label,
-                        current.HasValue ? current.Value.ToString() : "无",
-                        minimum));
+                        currentText,
+                        requiredText));
         }
 
         /// <summary>无副作用比较技能记录是否达到门槛。</summary>
@@ -78,6 +81,20 @@ namespace BDP.Core.Requirements
             return ValidateDefinition() == null
                 ? Mathf.FloorToInt(MinimumLevel).ToString()
                 : MinimumLevel.ToString();
+        }
+
+        /// <summary>把合法技能门槛格式化为带等级单位的结果。</summary>
+        private string FormatMinimumResult()
+        {
+            return ValidateDefinition() == null
+                ? FormatResult(Mathf.FloorToInt(MinimumLevel))
+                : MinimumLevel.ToString();
+        }
+
+        /// <summary>把技能等级格式化为玩家可读的带单位文本。</summary>
+        private static string FormatResult(int level)
+        {
+            return "BDP_Unit_Level".Translate(Mathf.Max(0, level)).ToString();
         }
     }
 }

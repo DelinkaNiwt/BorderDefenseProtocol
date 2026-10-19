@@ -43,5 +43,15 @@ namespace BDP.Core.Expressions
                 }
             }
         }
+
+        /// <summary>
+        /// 原版已将 Hediff 从 HediffSet 移除后，通知表达系统立即重新对账实际宿主状态。
+        /// 这样自动到期、外部移除和能力关闭都走同一条通用生命周期入口。
+        /// </summary>
+        public override void PostRemoved()
+        {
+            base.PostRemoved();
+            ExpressionSurfaceAccess.SynchronizePublishedExpressionHostsImmediately(pawn);
+        }
     }
 }

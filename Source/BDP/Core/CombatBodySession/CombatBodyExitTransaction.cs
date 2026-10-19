@@ -3,6 +3,7 @@ using BDP.Core.CombatBody;
 using BDP.Core.CombatBody.External;
 using BDP.Core.Trigger;
 using BDP.Core.Trion;
+using BDP.Support.Diagnostics;
 using RimWorld;
 using Verse;
 
@@ -54,8 +55,40 @@ namespace BDP.Core.CombatBodySession
         /// </summary>
         public void Execute(Pawn ownerPawn, CombatBodySessionExitMode exitMode)
         {
-            if (!CanDeactivate(exitMode))
+            ExecuteInternal(ownerPawn, exitMode, false, null);
+        }
+
+        /// <summary>
+        /// 因系统生命周期变化强制释放战斗体；不受手动锁限制，也不走崩解后遗症分支。
+        /// </summary>
+        public void ExecuteForcedRelease(Pawn ownerPawn, string reason)
+        {
+            ExecuteInternal(ownerPawn, CombatBodySessionExitMode.Release, true, reason);
+        }
+
+        /// <summary>
+        /// 执行普通或系统强制退出的共同清理主链。
+        /// </summary>
+        private void ExecuteInternal(Pawn ownerPawn, CombatBodySessionExitMode exitMode, bool forceRelease, string forcedReleaseReason)
+        {
+            CompTriggerBody trigger = TriggerSurfaceAccess.ResolveComp(ownerPawn);
+            BdpDiagnostics.Trace(
+                "战斗体关闭 | stage=begin"
+                + " | pawn=" + (ownerPawn != null ? ownerPawn.ThingID : "null")
+                + " | exitMode=" + exitMode
+                + " | forceRelease=" + forceRelease
+                + " | phase=" + rawCombatBodyService.Phase
+                + " | trigger=" + (trigger != null ? "resolved" : "missing")
+                + " | slots=" + (trigger != null ? trigger.DescribeAllSlotsForDiagnostics() : "none"));
+
+            if (!CanDeactivate(exitMode, forceRelease))
             {
+                BdpDiagnostics.Trace(
+                    "战斗体关闭 | stage=rejected"
+                    + " | pawn=" + (ownerPawn != null ? ownerPawn.ThingID : "null")
+                    + " | exitMode=" + exitMode
+                    + " | forceRelease=" + forceRelease
+                    + " | phase=" + rawCombatBodyService.Phase);
                 return;
             }
 
@@ -67,12 +100,18 @@ namespace BDP.Core.CombatBodySession
                 // 取消征召是崩解主链的固定步骤，不依赖任何外部附加扩展。
                 TryReleaseDraft(ownerPawn);
             }
+            else if (forceRelease)
+            {
+                // 系统强制退出不触发崩解表现，但要清掉可能已经挂上的待崩解显示 hediff。
+                RemoveCollapsePendingHediff(ownerPawn);
+            }
 
             ITrionCommands trionCommands = TrionSurfaceAccess.ResolveCommands(ownerPawn);
+            ITriggerLoadoutReader triggerLoadoutReader = TriggerSurfaceAccess.ResolveLoadoutReader(ownerPawn);
             ITriggerLoadoutCommands triggerLoadoutCommands = TriggerSurfaceAccess.ResolveLoadoutCommands(ownerPawn);
             if (exitMode == CombatBodySessionExitMode.Release)
             {
-                DeactivateAllSlots(triggerLoadoutCommands);
+                DeactivateAllSlots(triggerLoadoutReader, triggerLoadoutCommands);
             }
 
             trionBinding.ClearActiveRuntime();
@@ -83,7 +122,7 @@ namespace BDP.Core.CombatBodySession
                 trionCommands.SetFrozen(false);
             }
 
-            rawCombatBodyService.EnterCooldown(ResolveCooldownTicks(exitMode), ResolveExitReason(exitMode));
+            rawCombatBodyService.EnterCooldown(ResolveCooldownTicks(exitMode), ResolveExitReason(exitMode, forceRelease, forcedReleaseReason));
             owner.WoundRuntime.ClearActiveRuntime(ownerPawn);
 
             if (exitMode == CombatBodySessionExitMode.Collapse)
@@ -92,9 +131,21 @@ namespace BDP.Core.CombatBodySession
                 ApplyCollapseAftereffect(ownerPawn);
                 TriggerSurfaceAccess.ResolveComp(ownerPawn)?.SetCombatBodyUnavailableDisabled(false);
             }
+            else if (forceRelease)
+            {
+                TriggerSurfaceAccess.ResolveComp(ownerPawn)?.SetCombatBodyUnavailableDisabled(false);
+            }
 
             CombatBodyCollapseExtensionRegistry.Clear(ownerPawn);
             notifyCombatBodySessionStateChanged();
+
+            BdpDiagnostics.Trace(
+                "战斗体关闭 | stage=complete"
+                + " | pawn=" + (ownerPawn != null ? ownerPawn.ThingID : "null")
+                + " | exitMode=" + exitMode
+                + " | forceRelease=" + forceRelease
+                + " | phase=" + rawCombatBodyService.Phase
+                + " | slots=" + (trigger != null ? trigger.DescribeAllSlotsForDiagnostics() : "none"));
         }
 
         /// <summary>
@@ -141,11 +192,11 @@ namespace BDP.Core.CombatBodySession
         /// <summary>
         /// 判断当前是否允许退出。
         /// </summary>
-        private bool CanDeactivate(CombatBodySessionExitMode exitMode)
+        private bool CanDeactivate(CombatBodySessionExitMode exitMode, bool forceRelease)
         {
             if (exitMode == CombatBodySessionExitMode.Release)
             {
-                return rawCombatBodyService.CanManualDeactivate();
+                return forceRelease || rawCombatBodyService.CanManualDeactivate();
             }
 
             CombatBodyPhase phase = rawCombatBodyService.Phase;
@@ -155,11 +206,26 @@ namespace BDP.Core.CombatBodySession
         /// <summary>
         /// 关闭三侧 Trigger 激活入口。
         /// </summary>
-        private void DeactivateAllSlots(ITriggerLoadoutCommands triggerLoadoutCommands)
+        private void DeactivateAllSlots(
+            ITriggerLoadoutReader triggerLoadoutReader,
+            ITriggerLoadoutCommands triggerLoadoutCommands)
         {
             triggerLoadoutCommands?.RequestDeactivate(TriggerSide.Main);
             triggerLoadoutCommands?.RequestDeactivate(TriggerSide.Sub);
             triggerLoadoutCommands?.RequestDeactivate(TriggerSide.Special);
+
+            foreach (ITriggerSlotState slot in triggerLoadoutReader?.GetActiveSlots()
+                ?? System.Array.Empty<ITriggerSlotState>())
+            {
+                if (slot == null
+                    || slot.IsBindingMirror
+                    || slot.LoadedChip == null)
+                {
+                    continue;
+                }
+
+                triggerLoadoutCommands?.RequestDeactivate(slot.Side, slot.Index);
+            }
         }
 
         /// <summary>
@@ -175,8 +241,10 @@ namespace BDP.Core.CombatBodySession
         /// <summary>
         /// 解析退出原因。
         /// </summary>
-        private string ResolveExitReason(CombatBodySessionExitMode exitMode)
+        private string ResolveExitReason(CombatBodySessionExitMode exitMode, bool forceRelease, string forcedReleaseReason)
         {
+            // 系统退出须准确广播生命周期原因，不能向订阅者宣称是人物主动解除。
+            if (forceRelease) return forcedReleaseReason;
             switch (exitMode)
             {
                 case CombatBodySessionExitMode.Collapse:

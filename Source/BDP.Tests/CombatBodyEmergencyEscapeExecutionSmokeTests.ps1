@@ -50,7 +50,8 @@ if ($exitNormalized.IndexOf("CombatBodyEmergencyEscape") -ge 0 -or $exitNormaliz
 if ($hostStateNormalized.IndexOf("CachedCollapseEmergencyEscape") -ge 0) { throw "HostState must not persist a business-specific emergency escape cache." }
 
 $executeIndex = $exitNormalized.IndexOf("CombatBodyCollapseExtensionRegistry.Execute(ownerPawn)")
-$cooldownIndex = $exitNormalized.IndexOf("EnterCooldown(ResolveCooldownTicks(exitMode),ResolveExitReason(exitMode));")
+# 强制资格退出已增加原因参数；仍检查紧急脱离、冷却、资源清零与后遗症的真实先后顺序。
+$cooldownIndex = $exitNormalized.IndexOf("EnterCooldown(ResolveCooldownTicks(exitMode),ResolveExitReason(exitMode,forceRelease,forcedReleaseReason));")
 $clearCurIndex = $exitNormalized.IndexOf("trionCommands?.TrySetCurrent(0f);")
 $aftereffectIndex = $exitNormalized.IndexOf("ApplyCollapseAftereffect(ownerPawn);")
 if (-not ($executeIndex -lt $cooldownIndex -and $cooldownIndex -lt $clearCurIndex -and $clearCurIndex -lt $aftereffectIndex)) { throw "Collapse extension must execute before cooldown and later collapse cleanup." }

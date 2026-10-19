@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- 防止旧命令行的 OutputPath 或 obj 覆盖参数把新版本产物写进旧版本。 -->
+  <PropertyGroup>
+    <BdpExpectedOutputPath>$(BdpVersionRoot)\Assemblies\</BdpExpectedOutputPath>
+    <BdpExpectedOutputPath Condition="'$(AssemblyName)' == 'BDP.Development'">$(BdpVersionRoot)\Development\Assemblies\</BdpExpectedOutputPath>
+    <BdpActualOutputPath>$([System.IO.Path]::Combine('$(MSBuildProjectDirectory)', '$(OutputPath)'))</BdpActualOutputPath>
+    <BdpActualOutputPath>$([System.IO.Path]::GetFullPath('$(BdpActualOutputPath)'))</BdpActualOutputPath>
+    <BdpActualIntermediatePath>$([System.IO.Path]::Combine('$(MSBuildProjectDirectory)', '$(IntermediateOutputPath)'))</BdpActualIntermediatePath>
+    <BdpActualIntermediatePath>$([System.IO.Path]::GetFullPath('$(BdpActualIntermediatePath)'))</BdpActualIntermediatePath>
+    <BdpExpectedIntermediatePath>$(MSBuildProjectDirectory)\obj\$(RimWorldVersion)\$(Configuration)\</BdpExpectedIntermediatePath>
+  </PropertyGroup>
+  <!-- 在还原、编译、引用解析及清理之前阻止不明确版本或跨版本借用引用。 -->
+  <Target Name="ValidateBdpGameVersion" BeforeTargets="Restore;PrepareForBuild;ResolveReferences;Clean">
+    <Error Condition="'$(RimWorldVersion)' != '1.6' and '$(RimWorldVersion)' != '1.7'"
+           Text="必须显式指定目标游戏版本：-p:RimWorldVersion=1.6 或 1.7；禁止猜测版本。" />
+    <Error Condition="'$(BdpActualOutputPath)' != '$(BdpExpectedOutputPath)'"
+           Text="禁止覆盖版本输出路径。目标 $(RimWorldVersion) 的 $(AssemblyName) 必须输出到 $(BdpExpectedOutputPath)。" />
+    <Error Condition="'$(BdpActualIntermediatePath)' != '$(BdpExpectedIntermediatePath)' or '$(MSBuildProjectExtensionsPath)' != '$(MSBuildProjectDirectory)\obj\$(RimWorldVersion)\'"
+           Text="禁止混用版本中间目录。目标 $(RimWorldVersion) 必须使用本工程的 obj\$(RimWorldVersion) 目录。" />
+    <Error Condition="'$(RimWorldReferenceDir)' == '' or !Exists('$(RimWorldReferenceDir)\Assembly-CSharp.dll')"
+           Text="缺少 RimWorld $(RimWorldVersion) 的真实游戏引用。请配置对应版本的 Bdp.Local.props，不能借用另一版本程序集。" />
+    <Error Condition="'$(RimWorldVersion)' == '1.6' and (!Exists('$(RimWorldReferenceDir)\UnityEngine.CoreModule.dll') or Exists('$(RimWorldReferenceDir)\Waylith.UnityCompat.dll'))"
+           Text="1.6 必须使用独立的原版 Unity 程序集目录，不能使用 1.7 的游戏根目录。" />
+    <Error Condition="'$(RimWorldVersion)' == '1.7' and !Exists('$(RimWorldReferenceDir)\UnityStubs.dll')"
+           Text="1.7 必须使用对应 Waylith 游戏目录的程序集，不能回退到 1.6。" />
+    <Error Condition="'$(HarmonyReferencePath)' == '' or !Exists('$(HarmonyReferencePath)')"
+           Text="缺少 RimWorld $(RimWorldVersion) 对应的 Harmony 程序集路径。" />
+    <Error Condition="'%(Reference.HintPath)' != '' and !Exists('%(Reference.HintPath)')"
+           Text="目标版本 $(RimWorldVersion) 缺少构建引用：%(Reference.HintPath)" />
+  </Target>
+</Project>

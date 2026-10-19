@@ -3,7 +3,12 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)]
-    [string]$ModRoot
+    [string]$ModRoot,
+
+    # 必须检查用户明确指定的版本，禁止默认借用 1.6 目录。
+    [Parameter(Mandatory = $true)]
+    [ValidateSet("1.6", "1.7")]
+    [string]$RimWorldVersion
 )
 
 $ErrorActionPreference = "Stop"
@@ -56,8 +61,11 @@ foreach ($sourceRoot in $formalSourceRoots)
 }
 
 $formalXmlRoots = @(
-    (Join-Path $resolvedModRoot "1.6\Defs"),
-    (Join-Path $resolvedModRoot "1.6\Content"),
+    (Join-Path $resolvedModRoot "Common\Defs"),
+    (Join-Path $resolvedModRoot "Common\Content"),
+    (Join-Path $resolvedModRoot "$RimWorldVersion\Defs"),
+    (Join-Path $resolvedModRoot "$RimWorldVersion\Content"),
+    (Join-Path $resolvedModRoot "$RimWorldVersion\Languages"),
     (Join-Path $resolvedModRoot "Languages")
 )
 foreach ($xmlRoot in $formalXmlRoots)
@@ -83,7 +91,7 @@ if ($mentions.Count -gt 0)
     throw "正式源码或 XML 不得写出 BDP.Development：`n$($mentions -join "`n")"
 }
 
-$developmentAssemblies = Join-Path $resolvedModRoot "1.6\Development\Assemblies"
+$developmentAssemblies = Join-Path $resolvedModRoot "$RimWorldVersion\Development\Assemblies"
 if (Test-Path -LiteralPath $developmentAssemblies)
 {
     $copiedFormalAssemblies = @(Get-ChildItem -LiteralPath $developmentAssemblies -File | Where-Object {

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 01 Trion基础理论。 -->
+  <BDP_Research_TrionTheory.label>Trion基础理论</BDP_Research_TrionTheory.label>
+  <BDP_Research_TrionTheory.description>理解Trion的基础性质，建立中继核心与固定天赋检测设施。研究前需要分析Trion驱动核心。</BDP_Research_TrionTheory.description>
+  <!-- 02 原型试做工程。 -->
+  <BDP_Research_PrototypeEngineering.label>原型试做工程</BDP_Research_PrototypeEngineering.label>
+  <BDP_Research_PrototypeEngineering.description>掌握近界原型触发体的制造，了解固定预载武装的基础构造。</BDP_Research_PrototypeEngineering.description>
+  <!-- 03 基础触发器工程。 -->
+  <BDP_Research_BasicTriggerEngineering.label>基础触发器工程</BDP_Research_BasicTriggerEngineering.label>
+  <BDP_Research_BasicTriggerEngineering.description>建立触发体制造、芯片制造与装配的基础生产体系。</BDP_Research_BasicTriggerEngineering.description>
+  <!-- 04 便携天赋检测。 -->
+  <BDP_Research_PortableTalentDetection.label>便携天赋检测</BDP_Research_PortableTalentDetection.label>
+  <BDP_Research_PortableTalentDetection.description>将天赋检测设备缩小到便于携带的尺寸，能够制造一次性的便携式Trion天赋检测器。</BDP_Research_PortableTalentDetection.description>
+  <!-- 05 常规武装构型。 -->
+  <BDP_Research_ConventionalArmamentForms.label>常规武装构型</BDP_Research_ConventionalArmamentForms.label>
+  <BDP_Research_ConventionalArmamentForms.description>将基础远程功能整合为适用于常规作战的枪械构型。</BDP_Research_ConventionalArmamentForms.description>
+  <!-- 06 战斗体外观设计。 -->
+  <BDP_Research_CombatBodyAppearance.label>战斗体外观设计</BDP_Research_CombatBodyAppearance.label>
+  <BDP_Research_CombatBodyAppearance.description>建立战斗体外观编辑设施，管理殖民者的个人外观模板。</BDP_Research_CombatBodyAppearance.description>
+  <!-- 07 形变技术。 -->
+  <BDP_Research_MorphingTechnology.label>形变技术</BDP_Research_MorphingTechnology.label>
+  <BDP_Research_MorphingTechnology.description>控制Trion武装的形态变化。</BDP_Research_MorphingTechnology.description>
+  <!-- 08 爆破技术。 -->
+  <BDP_Research_ExplosiveTechnology.label>爆破技术</BDP_Research_ExplosiveTechnology.label>
+  <BDP_Research_ExplosiveTechnology.description>研究Trion能量外放与炸裂弹的应用。</BDP_Research_ExplosiveTechnology.description>
+  <!-- 09 物质化技术。 -->
+  <BDP_Research_MaterializationTechnology.label>物质化技术</BDP_Research_MaterializationTechnology.label>
+  <BDP_Research_MaterializationTechnology.description>研究Trion生成实体结构的应用。当前暂无对应产物，未来与防护原理共同开放护城盾。</BDP_Research_MaterializationTechnology.description>
+  <!-- 10 基础战术机能。 -->
+  <BDP_Research_BasicTacticalFunctions.label>基础战术机能</BDP_Research_BasicTacticalFunctions.label>
+  <BDP_Research_BasicTacticalFunctions.description>开发攻击与防护之外的常规功能性芯片。</BDP_Research_BasicTacticalFunctions.description>
+  <!-- 11 防护原理。 -->
+  <BDP_Research_DefensivePrinciples.label>防护原理</BDP_Research_DefensivePrinciples.label>
+  <BDP_Research_DefensivePrinciples.description>研究Trion防护的基本原理与能量护盾。</BDP_Research_DefensivePrinciples.description>
+  <!-- 12 弹道控制技术。 -->
+  <BDP_Research_TrajectoryControl.label>弹道控制技术</BDP_Research_TrajectoryControl.label>
+  <BDP_Research_TrajectoryControl.description>开发预设弹道与追踪目标的远程功能。</BDP_Research_TrajectoryControl.description>
+  <!-- 13 特化武装构型。 -->
+  <BDP_Research_SpecializedArmamentForms.label>特化武装构型</BDP_Research_SpecializedArmamentForms.label>
+  <BDP_Research_SpecializedArmamentForms.description>开发适用场景更专门的武装构型与狙击功能。</BDP_Research_SpecializedArmamentForms.description>
+  <!-- 14 强化选装功能。 -->
+  <BDP_Research_EnhancedOptionalFunctions.label>强化选装功能</BDP_Research_EnhancedOptionalFunctions.label>
+  <BDP_Research_EnhancedOptionalFunctions.description>扩展现有武装的选装功能，提供更多装备搭配方式。</BDP_Research_EnhancedOptionalFunctions.description>
+  <!-- 15 立体机动。 -->
+  <BDP_Research_SpatialMobility.label>立体机动</BDP_Research_SpatialMobility.label>
+  <BDP_Research_SpatialMobility.description>开发弹射等立体移动手段，改善战斗中的位置调整能力。</BDP_Research_SpatialMobility.description>
+  <!-- 16 特殊战术机能。 -->
+  <BDP_Research_SpecialTacticalFunctions.label>特殊战术机能</BDP_Research_SpecialTacticalFunctions.label>
+  <BDP_Research_SpecialTacticalFunctions.description>开发通常具有较高占用代价、能够改变战术安排的特殊功能。</BDP_Research_SpecialTacticalFunctions.description>
+  <!-- 17 支援设施。 -->
+  <BDP_Research_SupportFacilities.label>支援设施</BDP_Research_SupportFacilities.label>
+  <BDP_Research_SupportFacilities.description>建设队伍支援设施，由操作员提供已有的基地与队伍支援。</BDP_Research_SupportFacilities.description>
+  <!-- 18 试验性工程技术。 -->
+  <BDP_Research_ExperimentalEngineering.label>试验性工程技术</BDP_Research_ExperimentalEngineering.label>
+  <BDP_Research_ExperimentalEngineering.description>研究试验性触发器工程，制造具有更大预装空间的边境特制触发体。</BDP_Research_ExperimentalEngineering.description>
+</LanguageData>

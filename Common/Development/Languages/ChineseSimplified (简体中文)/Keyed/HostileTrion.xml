@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 原版开发菜单入口及测试动作。 -->
+  <BDP_Dev_HostileTrion_Menu>BDP：敌方 Trion 资源测试</BDP_Dev_HostileTrion_Menu>
+  <!-- 直接装备已有原型，使用其固定预载。 -->
+  <BDP_Dev_HostileTrion_Spawn>生成原型触发体战斗体：弧月＋小行星</BDP_Dev_HostileTrion_Spawn>
+  <!-- 原型无特殊槽，标准版本仅用于护盾公共资源验证。 -->
+  <BDP_Dev_HostileTrion_SpawnShield>生成标准触发体战斗体：弧月＋小行星＋自动护盾</BDP_Dev_HostileTrion_SpawnShield>
+  <!-- 使用正式追兵队伍验证崩解后恢复原身继续进攻。 -->
+  <BDP_Dev_HostileTrion_SpawnPursuer>生成皇室任务追兵：原型战斗体，原身继续进攻</BDP_Dev_HostileTrion_SpawnPursuer>
+  <!-- 暂停时输出当前样本。 -->
+  <BDP_Dev_HostileTrion_Output>输出选中人物资源日志</BDP_Dev_HostileTrion_Output>
+  <!-- 默认关闭的运行期观测。 -->
+  <BDP_Dev_HostileTrion_Observe>切换选中人物持续资源日志</BDP_Dev_HostileTrion_Observe>
+  <!-- 调试写入真实余量，不改最大容量。 -->
+  <BDP_Dev_HostileTrion_Full>选中人物：Trion 设为满值</BDP_Dev_HostileTrion_Full>
+  <!-- 用低余量快速验证免耗及伤口耗尽。 -->
+  <BDP_Dev_HostileTrion_Low>选中人物：Trion 设为 1%</BDP_Dev_HostileTrion_Low>
+  <!-- 验证已有见底事件。 -->
+  <BDP_Dev_HostileTrion_Zero>选中人物：Trion 设为零</BDP_Dev_HostileTrion_Zero>
+  <!-- 经原版受伤入口造伤，护盾仍可拦截。 -->
+  <BDP_Dev_HostileTrion_Wound>选中战斗体：外部部位受 5 点切割伤害</BDP_Dev_HostileTrion_Wound>
+  <!-- 生成位置限制。 -->
+  <BDP_Dev_HostileTrion_BadCell>请点击可站立且没有人物的空地。</BDP_Dev_HostileTrion_BadCell>
+  <!-- 不擅自新建派系或修改外交。 -->
+  <BDP_Dev_HostileTrion_NoFaction>当前世界没有可用于测试的敌对人类派系。</BDP_Dev_HostileTrion_NoFaction>
+  <!-- 通用选中对象限制。 -->
+  <BDP_Dev_HostileTrion_NoPawn>请先选中拥有 Trion 资源组件的人物。</BDP_Dev_HostileTrion_NoPawn>
+  <!-- 正式资源写入口拒绝的补充提示。 -->
+  <BDP_Dev_HostileTrion_WriteRejected>资源调整受现有锁定下界限制。</BDP_Dev_HostileTrion_WriteRejected>
+  <!-- 只对真实激活会话造伤。 -->
+  <BDP_Dev_HostileTrion_NotActive>选中人物当前未处于激活的战斗体状态。</BDP_Dev_HostileTrion_NotActive>
+  <!-- 避免直接破坏核心部位。 -->
+  <BDP_Dev_HostileTrion_NoPart>没有适合本次造伤的完整外部非核心部位。</BDP_Dev_HostileTrion_NoPart>
+  <!-- 生成成功且已经正式激活。 -->
+  <BDP_Dev_HostileTrion_Spawned>已生成敌方战斗体：{0}。可在同一菜单开启资源日志。</BDP_Dev_HostileTrion_Spawned>
+  <!-- 开发错误含完整异常供定位。 -->
+  <BDP_Dev_HostileTrion_Failed>[BDP 敌方资源测试] 生成失败，已清理本次对象：{0}</BDP_Dev_HostileTrion_Failed>
+  <!-- 明确观测开启。 -->
+  <BDP_Dev_HostileTrion_ObserveOn>已开启选中人物的持续资源日志；每秒核对，变化时输出。</BDP_Dev_HostileTrion_ObserveOn>
+  <!-- 明确观测关闭。 -->
+  <BDP_Dev_HostileTrion_ObserveOff>已关闭选中人物的持续资源日志。</BDP_Dev_HostileTrion_ObserveOff>
+  <!-- 日志可搜索的统一标题。 -->
+  <BDP_Dev_HostileTrion_Snapshot>[BDP 敌方资源测试] {0}（{1}），游戏刻 {2}\n{3}</BDP_Dev_HostileTrion_Snapshot>
+  <!-- 区分真实金额、相位记录、有效结算与恢复。 -->
+  <BDP_Dev_HostileTrion_Values>余量／容量：{0}／{1}；预占用：{2}；正式占用：{3}；相位占用：{4}；有效持续消耗：{5}/秒；有效恢复：{6}/天。</BDP_Dev_HostileTrion_Values>
+  <!-- 规则来自正式提供器，工具不另作敌对判定。 -->
+  <BDP_Dev_HostileTrion_Rules>战斗体：{0}；功能费用：{1}；搭载占用：{2}；容量显示：{3}；恢复冻结：{4}。</BDP_Dev_HostileTrion_Rules>
+  <!-- 声明金额不是免耗后的实际扣减。 -->
+  <BDP_Dev_HostileTrion_Drain>声明账本 {0}：{1}/秒。</BDP_Dev_HostileTrion_Drain>
+  <!-- 槽位名称为机器标记，便于对应源代码。 -->
+  <BDP_Dev_HostileTrion_Slot>槽位 {0} {1}：{2}；激活：{3}。</BDP_Dev_HostileTrion_Slot>
+  <!-- 布尔状态简体中文。 -->
+  <BDP_Dev_HostileTrion_Enabled>开启</BDP_Dev_HostileTrion_Enabled>
+  <!-- 布尔状态简体中文。 -->
+  <BDP_Dev_HostileTrion_Disabled>关闭</BDP_Dev_HostileTrion_Disabled>
+  <!-- 相位名称显示。 -->
+  <BDP_Dev_HostileTrion_Phase_Inactive>原身</BDP_Dev_HostileTrion_Phase_Inactive>
+  <!-- 相位名称显示。 -->
+  <BDP_Dev_HostileTrion_Phase_Active>激活</BDP_Dev_HostileTrion_Phase_Active>
+  <!-- 相位名称显示。 -->
+  <BDP_Dev_HostileTrion_Phase_Collapsing>崩解中</BDP_Dev_HostileTrion_Phase_Collapsing>
+  <!-- 相位名称显示。 -->
+  <BDP_Dev_HostileTrion_Phase_Cooldown>原身冷却</BDP_Dev_HostileTrion_Phase_Cooldown>
+</LanguageData>

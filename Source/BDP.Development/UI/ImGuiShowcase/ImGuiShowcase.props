@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- 展示仅编译到 1.7 开发程序集；正式图表和 1.6 不认识这些依赖。 -->
+  <ItemGroup Condition="'$(RimWorldVersion)' == '1.7'">
+    <!-- 随游戏提供的原生即时界面接口，不打包复制。 -->
+    <Reference Include="Brutal.ImGui"><HintPath>$(RimWorldReferenceDir)\Brutal.ImGui.dll</HintPath><Private>False</Private></Reference>
+    <!-- 原生坐标及颜色数据类型，不打包复制。 -->
+    <Reference Include="Brutal.Core.Numerics"><HintPath>$(RimWorldReferenceDir)\Brutal.Core.Numerics.dll</HintPath><Private>False</Private></Reference>
+  </ItemGroup>
+</Project>

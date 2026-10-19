@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 操作员控制台。 -->
+  <BDP_OperatorConsole.label>操作员控制台</BDP_OperatorConsole.label>
+  <BDP_OperatorConsole.description>需要电力、玩家派系小人操作和 Trion 中继核心许可。运作时向本地图玩家派系芯片使用者发布控制台许可。</BDP_OperatorConsole.description>
+</LanguageData>

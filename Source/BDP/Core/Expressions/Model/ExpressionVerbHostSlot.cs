@@ -48,6 +48,11 @@ namespace BDP.Core.Expressions
         /// <summary>
         /// 组合技副攻击 Verb 入口。
         /// </summary>
-        ComboSecondaryVerb = 8
+        ComboSecondaryVerb = 8,
+
+        /// <summary>
+        /// 特殊槽唯一主攻击 Verb 入口。
+        /// </summary>
+        SpecialPrimaryVerb = 9
     }
 }

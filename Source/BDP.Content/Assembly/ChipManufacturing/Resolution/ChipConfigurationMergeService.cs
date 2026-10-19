@@ -6,23 +6,41 @@ using BDP.Core.Requirements;
 
 namespace BDP.Content.Assembly.ChipManufacturing.Resolution
 {
-    /// <summary>按已确认合法的动作组合合成芯片正式配置。</summary>
+    /// <summary>按已确认合法的芯片功能模板组合合成芯片正式配置。</summary>
     public static class ChipConfigurationMergeService
     {
-        /// <summary>复制单动作配置，不让成品持有可变的 Def 列表。</summary>
-        public static ChipDefinitionConfig CloneSingle(ChipActionPresetDef action)
+        /// <summary>复制单芯片功能模板配置，不让成品持有可变的 Def 列表。</summary>
+        public static ChipDefinitionConfig CloneSingle(ChipManufacturingPresetDef function)
         {
-            ChipDefinitionConfig source = action?.config;
+            ChipDefinitionConfig source = function?.config;
             if (source == null)
             {
                 return new ChipDefinitionConfig();
             }
 
+            return CloneConfig(source);
+        }
+
+        /// <summary>复制一份尚未应用武装构型的有效配置。</summary>
+        public static ChipDefinitionConfig CloneConfig(ChipDefinitionConfig source)
+        {
+            if (source == null)
+            {
+                return new ChipDefinitionConfig();
+            }
+
+            ChipFeatureCloneContext context = new ChipFeatureCloneContext();
             return new ChipDefinitionConfig
             {
                 Profile = CloneProfile(source.Profile),
                 Loadout = CloneLoadout(source.Loadout),
-                Expression = ChipExpressionMergeService.CloneSingle(source.Expression),
+                Expression = ChipExpressionMergeService.CloneSingle(
+                    source.Expression,
+                    context,
+                    null),
+                Features = ChipFeatureMergeService.CloneFeatures(
+                    source.Features,
+                    context),
                 Trion = CloneTrion(source.Trion),
                 ActivationRequirements = source.ActivationRequirements != null
                     ? new List<PawnRequirement>(source.ActivationRequirements)
@@ -33,13 +51,14 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
             };
         }
 
-        /// <summary>合成双动作：本体成本相加，延迟取大值，集合字段并集。</summary>
+        /// <summary>合成双芯片功能模板：本体成本相加，延迟取大值，集合字段并集。</summary>
         public static ChipDefinitionConfig MergeDual(
-            ChipActionPresetDef firstAction,
-            ChipActionPresetDef secondAction)
+            ChipManufacturingPresetDef firstFunction,
+            ChipManufacturingPresetDef secondFunction)
         {
-            ChipDefinitionConfig first = firstAction.config;
-            ChipDefinitionConfig second = secondAction.config;
+            ChipDefinitionConfig first = firstFunction.config;
+            ChipDefinitionConfig second = secondFunction.config;
+            ChipFeatureCloneContext context = new ChipFeatureCloneContext();
             return new ChipDefinitionConfig
             {
                 Profile = new ChipProfileConfig
@@ -78,8 +97,13 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
                     first.Extensions,
                     second.Extensions),
                 Expression = ChipExpressionMergeService.MergeDual(
-                    firstAction,
-                    secondAction)
+                    firstFunction,
+                    secondFunction,
+                    context),
+                Features = ChipFeatureMergeService.MergeDual(
+                    firstFunction,
+                    secondFunction,
+                    context)
             };
         }
 
@@ -115,7 +139,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
                 };
         }
 
-        /// <summary>复制激活音效配置，避免成品配置持有动作预设的可变对象。</summary>
+        /// <summary>复制激活音效配置，避免成品配置持有芯片功能模板的可变对象。</summary>
         private static ChipActivationAudioConfig CloneActivationAudio(
             ChipActivationAudioConfig source)
         {
@@ -130,8 +154,8 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
         }
 
         /// <summary>
-        /// 合并双动作的激活音效。
-        /// 每个位置按动作顺序取第一个非空声明，避免一次前摇叠放两套音效。
+        /// 合并双芯片功能模板的激活音效。
+        /// 每个位置按功能模板顺序取第一个非空声明，避免一次前摇叠放两套音效。
         /// </summary>
         private static ChipActivationAudioConfig MergeActivationAudio(
             ChipActivationAudioConfig first,

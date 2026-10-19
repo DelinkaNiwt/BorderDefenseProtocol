@@ -43,7 +43,11 @@ function New-TypedList {
 
 $sourceRoot = Split-Path -Parent $PSScriptRoot
 $repoRoot = Split-Path -Parent $sourceRoot
-$assemblyPath = Join-Path $repoRoot '1.6\Assemblies\BDP.Core.dll'
+$assemblyPath = if ([string]::IsNullOrWhiteSpace($env:BDP_CORE_TEST_ASSEMBLY_PATH)) {
+    Join-Path $repoRoot '1.6\Assemblies\BDP.Core.dll'
+} else {
+    $env:BDP_CORE_TEST_ASSEMBLY_PATH
+}
 $managedRoot = 'C:\NiwtGames\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed'
 $harmonyPath = 'C:\NiwtGames\Steam\steamapps\workshop\content\294100\839005762\1.6\Assemblies\0Harmony.dll'
 
@@ -69,7 +73,7 @@ $configType = $assembly.GetType('BDP.Core.Expressions.ChipExpressionConfig', $tr
 $entryType = $assembly.GetType('BDP.Core.Expressions.ChipExpressionEntryConfig', $true)
 $modeType = $assembly.GetType('BDP.Core.Expressions.ChipExpressionModeConfig', $true)
 $stanceType = $assembly.GetType('BDP.Core.Expressions.ChipExpressionStanceConfig', $true)
-$entryKindType = $assembly.GetType('BDP.Core.Expressions.ChipExpressionEntryKindConfig', $true)
+$entryKindType = $assembly.GetType('BDP.Core.Expressions.ChipExpressionEntryTypeConfig', $true)
 $relationKindType = $assembly.GetType('BDP.Core.Expressions.ChipExpressionRelationKindConfig', $true)
 $interpreterType = $assembly.GetType('BDP.Core.Expressions.ChipExpressionContractInterpreter', $true)
 
@@ -95,8 +99,8 @@ function New-Entry {
 
     $entry = [Activator]::CreateInstance($entryType)
     Set-FieldValue $entry 'Id' $Id
-    Set-FieldValue $entry 'Kind' $passiveKind
-    Set-FieldValue $entry 'PassiveKey' ($Id + '_passive')
+    Set-FieldValue $entry 'EntryType' $passiveKind
+    Set-FieldValue $entry 'PassiveIdentityKey' ($Id + '_passive')
     Set-FieldValue $entry 'RelationKind' $RelationKind
     Set-FieldValue $entry 'ParentEntryId' $ParentEntryId
     return $entry

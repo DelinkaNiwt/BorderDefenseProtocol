@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <!-- 近界原型触发体的玩家名称。 -->
+  <BDP_TriggerBody_NeighborPrototype.label>近界原型触发体</BDP_TriggerBody_NeighborPrototype.label>
+  <!-- 说明已确定的固定预载和不可装卸规则。 -->
+  <BDP_TriggerBody_NeighborPrototype.description>主槽固定预载小兵短剑，副槽固定预载小兵弹丸，特殊槽固定预载小兵护盾。用于初次试用战斗体与触发器的基础功能，不能装卸或更换芯片。</BDP_TriggerBody_NeighborPrototype.description>
+  <!-- 原型触发体基础钝击工具的名称。 -->
+  <BDP_TriggerBody_NeighborPrototype.tools.0.label>敲击</BDP_TriggerBody_NeighborPrototype.tools.0.label>
+</LanguageData>

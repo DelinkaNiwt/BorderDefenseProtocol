@@ -1,4 +1,7 @@
-using System.Collections.Generic;
+using System;
+using System.Runtime.CompilerServices;
+using BDP.Core.Semantics;
+using BDP.Core.Projectiles.Interaction;
 using System.Reflection;
 using Verse;
 
@@ -51,6 +54,9 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Impact
         /// </summary>
         public DamageWorker.DamageResult DamageResult { get; internal set; }
 
+        /// <summary>该结果刚关联的原版日志，只有当前调用消费，不建立历史表。</summary>
+        public LogEntry_DamageResult BattleLogEntry { get; internal set; }
+
         /// <summary>
         /// 当前结果分类。
         /// </summary>
@@ -73,295 +79,225 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Impact
         }
     }
 
-    /// <summary>
-    /// 记录原版伤害入口的短生命周期结果，并为外部护盾实现提供中性登记口。
-    /// </summary>
+    /// <summary>只有明确请求才捕获结果；普通嵌套调用只建立空边界，禁止继承外层效果。</summary>
     public static class DamageResolutionRuntime
     {
-        /// <summary>
-        /// 当前线程正在执行的 TakeDamage（目标承伤）调用栈。
-        /// </summary>
-        [System.ThreadStatic]
-        private static Stack<Capture> captures;
+        /// <summary>下一次预定承伤请求；请求只允许被入口消费一次。</summary>
+        [ThreadStatic] private static Request pendingRequest;
+        /// <summary>当前真实承伤或护盾探针的边界。</summary>
+        [ThreadStatic] private static Capture currentCapture;
+        /// <summary>按真实原版结果对象短暂关联日志；弱键不建立历史人物表。</summary>
+        private static readonly ConditionalWeakTable<DamageWorker.DamageResult, DamageResolution> completedResults =
+            new ConditionalWeakTable<DamageWorker.DamageResult, DamageResolution>();
 
-        /// <summary>
-        /// 当前线程最近一次已完成的承伤结果。
-        /// </summary>
-        [System.ThreadStatic]
-        private static DamageResolution lastCompleted;
-
-        /// <summary>
-        /// 读取最近一次已完成结果。
-        /// </summary>
-        public static DamageResolution LastCompleted
+        /// <summary>显式预定单个目标、单份伤害；调用者必须紧接着进入原版承伤入口。</summary>
+        public static Request BeginRequest(Thing targetThing, DamageInfo damageInfo,
+            ISemanticContext semanticContext, ProjectileInteractionPolicy interactionPolicy,
+            ExplosionImpactDispatchContext impactContext)
         {
-            get { return lastCompleted; }
+            Request request = new Request(targetThing, damageInfo, semanticContext, interactionPolicy, impactContext, pendingRequest);
+            pendingRequest = request;
+            return request;
         }
 
-        /// <summary>
-        /// 创建“模块主动拦截伤害”的结果，不伪造 TakeDamage（目标承伤）调用。
-        /// </summary>
+        /// <summary>由已有 BDP 来源把单份伤害落回原版，并直接取得本次结果。</summary>
+        public static DamageWorker.DamageResult ApplyDamage(Thing targetThing, DamageInfo damageInfo,
+            out DamageResolution resolution, ISemanticContext semanticContext = null,
+            ProjectileInteractionPolicy interactionPolicy = null, ExplosionImpactDispatchContext impactContext = null)
+        {
+            resolution = null;
+            using (Request request = BeginRequest(targetThing, damageInfo, semanticContext, interactionPolicy, impactContext))
+            {
+                DamageWorker.DamageResult result = targetThing.TakeDamage(damageInfo);
+                resolution = request.Resolution;
+                return result;
+            }
+        }
+
+        /// <summary>创建模块主动取消真实伤害的结果。</summary>
         public static DamageResolution CreateModuleInterception(Thing targetThing)
         {
-            return new DamageResolution
-            {
-                TargetThing = targetThing,
-                Outcome = DamageResolutionOutcome.ModuleIntercepted
-            };
+            return new DamageResolution { TargetThing = targetThing, Outcome = DamageResolutionOutcome.ModuleIntercepted };
         }
 
-        /// <summary>
-        /// 创建“外部投射物拦截器已挡住”的结果。
-        /// </summary>
+        /// <summary>创建外部投射物拦截或护盾已挡住的结果。</summary>
         public static DamageResolution CreateProjectileInterception(Thing targetThing)
         {
-            return new DamageResolution
-            {
-                TargetThing = targetThing,
-                Outcome = DamageResolutionOutcome.ShieldBlocked
-            };
+            return new DamageResolution { TargetThing = targetThing, Outcome = DamageResolutionOutcome.ShieldBlocked };
         }
 
-        /// <summary>
-        /// 只调用一次原版伤害前裁决，用于“模块取消伤害但仍需尊重护盾”的路径。
-        /// 这不会进入 DamageWorker（伤害工作器），因此不会造成真实伤害。
-        /// </summary>
-        public static bool TryProbeDamageInterception(
-            Thing targetThing,
-            ref DamageInfo damageInfo,
-            out bool absorbed)
+        /// <summary>只调用实际类型的原版伤害前裁决；不产生真实伤害，回调中的独立伤害仍隔离。</summary>
+        public static bool TryProbeDamageInterception(Thing targetThing, ref DamageInfo damageInfo, out bool absorbed,
+            ISemanticContext semanticContext = null, ProjectileInteractionPolicy interactionPolicy = null,
+            ExplosionImpactDispatchContext impactContext = null)
         {
             absorbed = false;
-            if (targetThing == null)
+            if (targetThing == null) return false;
+            MethodInfo method = ResolvePreApplyDamageMethod(targetThing.GetType());
+            if (method == null) return false;
+            using (Capture scope = new Capture(targetThing, damageInfo, null, semanticContext, interactionPolicy, impactContext))
             {
-                return false;
+                object[] arguments = { damageInfo, false };
+                method.Invoke(targetThing, arguments);
+                if (arguments[0] is DamageInfo updated) damageInfo = updated;
+                absorbed = arguments[1] is bool value && value;
             }
-
-            MethodInfo preApplyDamage = ResolvePreApplyDamageMethod(targetThing.GetType());
-            if (preApplyDamage == null)
-            {
-                return false;
-            }
-
-            object[] arguments = { damageInfo, false };
-            preApplyDamage.Invoke(targetThing, arguments);
-            if (arguments[0] is DamageInfo updatedDamageInfo)
-            {
-                damageInfo = updatedDamageInfo;
-            }
-
-            absorbed = arguments[1] is bool value && value;
             return true;
         }
 
-        /// <summary>
-        /// 开始记录一次原版承伤调用。
-        /// </summary>
+        /// <summary>原版承伤入口只领取同一目标、同份伤害的未消费请求；普通外层不分配。</summary>
         internal static Capture Begin(Thing targetThing, DamageInfo damageInfo)
         {
-            if (captures == null)
-            {
-                captures = new Stack<Capture>();
-            }
-
-            Capture capture = new Capture(targetThing, damageInfo);
-            captures.Push(capture);
-            return capture;
+            Request request = pendingRequest;
+            if (request == null || request.Claimed || request.TargetThing != targetThing || !request.DamageInfo.Equals(damageInfo))
+                request = null;
+            if (request != null) request.Claimed = true;
+            if (request == null && currentCapture == null && SemanticRuntimeScope.Current == null
+                && ProjectileInteractionPolicyScope.Current == null && ExplosionImpactRuntimeScope.Current == null)
+                return null;
+            return new Capture(targetThing, damageInfo, request, request?.SemanticContext, request?.InteractionPolicy, request?.ImpactContext);
         }
 
-        /// <summary>
-        /// 记录伤害前入口已经判定为吸收。
-        /// </summary>
+        /// <summary>只登记最内层同目标真实请求；不能穿过独立嵌套边界污染外层。</summary>
         public static void MarkAbsorbed(Thing targetThing)
         {
-            Capture capture = FindCapture(targetThing);
-            if (capture != null)
-            {
-                capture.Absorbed = true;
-            }
+            if (currentCapture?.Request != null && currentCapture.TargetThing == targetThing)
+                currentCapture.Absorbed = true;
         }
 
-        /// <summary>
-        /// 记录原版 PreApplyDamage（承伤前处理）最终的 absorbed（已吸收）值。
-        /// </summary>
+        /// <summary>读取原版伤害前最终吸收值。</summary>
         internal static void ObservePreApplyDamage(Thing targetThing, bool absorbed)
         {
-            if (absorbed)
-            {
-                MarkAbsorbed(targetThing);
-            }
+            if (absorbed) MarkAbsorbed(targetThing);
         }
 
-        /// <summary>
-        /// 完成一次承伤记录，并把它发布为最近结果供当前外层调用者消费。
-        /// </summary>
-        internal static void Complete(
-            Capture capture,
-            DamageWorker.DamageResult damageResult,
-            bool completedNormally)
+        /// <summary>完成当前显式请求，结果直接归还请求对象，不保存全局最近结果。</summary>
+        internal static void Complete(Capture capture, DamageWorker.DamageResult damageResult, bool completedNormally)
         {
-            if (capture == null)
+            if (capture == null) return;
+            if (capture.Request != null)
             {
-                return;
-            }
-
-            capture.Resolution.DamageResult = damageResult;
-            capture.Resolution.Outcome = !capture.HasPositiveDamage
-                ? DamageResolutionOutcome.NoDamage
-                : capture.Absorbed
-                    ? DamageResolutionOutcome.ShieldBlocked
-                    : completedNormally
-                        ? DamageResolutionOutcome.DamageProcessed
-                        : DamageResolutionOutcome.NotResolved;
-            lastCompleted = capture.Resolution;
-            RemoveCapture(capture);
-        }
-
-        /// <summary>
-        /// 清理异常退出的承伤记录，避免错误状态泄漏到下一次攻击。
-        /// </summary>
-        internal static void Abort(Capture capture)
-        {
-            if (capture == null)
-            {
-                return;
-            }
-
-            capture.Resolution.Outcome = DamageResolutionOutcome.NotResolved;
-            RemoveCapture(capture);
-        }
-
-        /// <summary>
-        /// 消费指定目标的最近结果；目标不匹配时返回空，避免串用其它目标的结果。
-        /// </summary>
-        public static DamageResolution ConsumeLast(Thing targetThing)
-        {
-            if (lastCompleted == null || lastCompleted.TargetThing != targetThing)
-            {
-                return null;
-            }
-
-            DamageResolution result = lastCompleted;
-            lastCompleted = null;
-            return result;
-        }
-
-        /// <summary>
-        /// 查找当前目标最内层的承伤记录。
-        /// </summary>
-        private static Capture FindCapture(Thing targetThing)
-        {
-            if (captures == null)
-            {
-                return null;
-            }
-
-            foreach (Capture capture in captures)
-            {
-                if (capture != null && capture.TargetThing == targetThing)
+                DamageResolution resolution = capture.Request.Resolution;
+                resolution.DamageResult = damageResult;
+                resolution.Outcome = !capture.HasPositiveDamage ? DamageResolutionOutcome.NoDamage
+                    : capture.Absorbed ? DamageResolutionOutcome.ShieldBlocked
+                    : completedNormally ? DamageResolutionOutcome.DamageProcessed : DamageResolutionOutcome.NotResolved;
+                if (damageResult != null)
                 {
-                    return capture;
+                    completedResults.Remove(damageResult);
+                    completedResults.Add(damageResult, resolution);
                 }
             }
-
-            return null;
+            capture.Dispose();
         }
 
-        /// <summary>
-        /// 从当前线程调用栈移除已完成记录。
-        /// </summary>
-        private static void RemoveCapture(Capture capture)
+        /// <summary>异常退出只清理本次边界；保留原异常和未完成分类。</summary>
+        internal static void Abort(Capture capture) { capture?.Dispose(); }
+
+        /// <summary>只有已登记的同一个 BDP 结果才能取得日志，关联后即移除短暂登记。</summary>
+        internal static void AssociateLog(DamageWorker.DamageResult result, LogEntry_DamageResult entry)
         {
-            if (captures == null || captures.Count == 0 || captures.Peek() == capture)
+            if (result != null && entry != null && completedResults.TryGetValue(result, out DamageResolution resolution))
             {
-                if (captures != null && captures.Count > 0)
-                {
-                    captures.Pop();
-                }
-
-                return;
-            }
-
-            Stack<Capture> remaining = new Stack<Capture>();
-            while (captures.Count > 0)
-            {
-                Capture current = captures.Pop();
-                if (current == capture)
-                {
-                    break;
-                }
-
-                remaining.Push(current);
-            }
-
-            while (remaining.Count > 0)
-            {
-                captures.Push(remaining.Pop());
+                resolution.BattleLogEntry = entry;
+                completedResults.Remove(result);
             }
         }
 
-        /// <summary>
-        /// 从目标实际运行时类型解析 protected PreApplyDamage（伤害前处理）覆盖。
-        /// </summary>
-        private static MethodInfo ResolvePreApplyDamageMethod(System.Type targetType)
+        /// <summary>从目标实际类型解析原版受保护的伤害前覆写。</summary>
+        private static MethodInfo ResolvePreApplyDamageMethod(Type targetType)
         {
             while (targetType != null)
             {
-                MethodInfo method = targetType.GetMethod(
-                    "PreApplyDamage",
-                    BindingFlags.Instance | BindingFlags.NonPublic,
-                    null,
-                    new[] { typeof(DamageInfo).MakeByRefType(), typeof(bool).MakeByRefType() },
-                    null);
-                if (method != null)
-                {
-                    return method;
-                }
-
+                MethodInfo method = targetType.GetMethod("PreApplyDamage", BindingFlags.Instance | BindingFlags.NonPublic,
+                    null, new[] { typeof(DamageInfo).MakeByRefType(), typeof(bool).MakeByRefType() }, null);
+                if (method != null) return method;
                 targetType = targetType.BaseType;
             }
-
             return null;
         }
 
-        /// <summary>
-        /// Harmony（运行时补丁）使用的内部记录对象。
-        /// </summary>
-        public sealed class Capture
+        /// <summary>调用者持有的单次请求；同目标独立嵌套也不能二次领取。</summary>
+        public sealed class Request : IDisposable
         {
-            /// <summary>
-            /// 创建一次目标承伤记录。
-            /// </summary>
-            internal Capture(Thing targetThing, DamageInfo damageInfo)
+            /// <summary>预定目标。</summary>
+            internal readonly Thing TargetThing;
+            /// <summary>进入入口前的实际伤害。</summary>
+            internal readonly DamageInfo DamageInfo;
+            /// <summary>本次来源语义。</summary>
+            internal readonly ISemanticContext SemanticContext;
+            /// <summary>本次盾交互策略。</summary>
+            internal readonly ProjectileInteractionPolicy InteractionPolicy;
+            /// <summary>本次范围反馈配置。</summary>
+            internal readonly ExplosionImpactDispatchContext ImpactContext;
+            /// <summary>调用者外层预定请求。</summary>
+            private readonly Request previous;
+            /// <summary>是否已领取。</summary>
+            internal bool Claimed;
+            /// <summary>保证退出幂等。</summary>
+            private bool disposed;
+            /// <summary>只属于本次请求的结果。</summary>
+            public DamageResolution Resolution { get; }
+
+            /// <summary>冻结本次请求数据。</summary>
+            internal Request(Thing target, DamageInfo info, ISemanticContext semantic,
+                ProjectileInteractionPolicy policy, ExplosionImpactDispatchContext impact, Request previous)
             {
-                TargetThing = targetThing;
-                HasPositiveDamage = damageInfo.Amount > 0f;
-                Resolution = new DamageResolution
-                {
-                    TargetThing = targetThing,
-                    Outcome = DamageResolutionOutcome.NotResolved
-                };
+                TargetThing = target; DamageInfo = info; SemanticContext = semantic;
+                InteractionPolicy = policy; ImpactContext = impact; this.previous = previous;
+                Resolution = new DamageResolution { TargetThing = target, Outcome = DamageResolutionOutcome.NotResolved };
             }
 
-            /// <summary>
-            /// 当前目标。
-            /// </summary>
-            internal Thing TargetThing { get; }
+            /// <summary>恢复外层预定请求，不延长结果或目标的全局生命周期。</summary>
+            public void Dispose()
+            {
+                if (disposed) return;
+                disposed = true;
+                if (pendingRequest == this) pendingRequest = previous;
+            }
+        }
 
-            /// <summary>
-            /// 原版入口开始时是否携带正伤害量。
-            /// </summary>
-            internal bool HasPositiveDamage { get; }
+        /// <summary>原版真实承伤边界；无请求的嵌套边界不创建结果，只屏蔽并恢复外层。</summary>
+        public sealed class Capture : IDisposable
+        {
+            /// <summary>所属显式请求；独立嵌套或探针为空。</summary>
+            internal readonly Request Request;
+            /// <summary>本次目标。</summary>
+            internal readonly Thing TargetThing;
+            /// <summary>起始是否正伤害。</summary>
+            internal readonly bool HasPositiveDamage;
+            /// <summary>本次是否吸收。</summary>
+            internal bool Absorbed;
+            /// <summary>外层真实调用。</summary>
+            private readonly Capture previous;
+            /// <summary>本次语义边界。</summary>
+            private readonly IDisposable semanticScope;
+            /// <summary>本次盾策略边界。</summary>
+            private readonly IDisposable interactionScope;
+            /// <summary>本次范围反馈边界。</summary>
+            private readonly IDisposable impactScope;
+            /// <summary>清理幂等标志。</summary>
+            private bool disposed;
 
-            /// <summary>
-            /// 是否被伤害前入口吸收。
-            /// </summary>
-            internal bool Absorbed { get; set; }
+            /// <summary>空上下文也压入隔离边界，防止原版或第三方同步独立伤害继承来源。</summary>
+            internal Capture(Thing target, DamageInfo info, Request request, ISemanticContext semantic,
+                ProjectileInteractionPolicy policy, ExplosionImpactDispatchContext impact)
+            {
+                TargetThing = target; HasPositiveDamage = info.Amount > 0f; Request = request;
+                previous = currentCapture; currentCapture = this;
+                semanticScope = SemanticRuntimeScope.Push(semantic);
+                interactionScope = ProjectileInteractionPolicyScope.Push(policy);
+                impactScope = ExplosionImpactRuntimeScope.Push(impact);
+            }
 
-            /// <summary>
-            /// 对外发布的结果对象。
-            /// </summary>
-            internal DamageResolution Resolution { get; }
+            /// <summary>正常与异常出口共用；重复退出不破坏外层调用。</summary>
+            public void Dispose()
+            {
+                if (disposed) return;
+                disposed = true;
+                impactScope.Dispose(); interactionScope.Dispose(); semanticScope.Dispose();
+                if (currentCapture == this) currentCapture = previous;
+            }
         }
     }
 }

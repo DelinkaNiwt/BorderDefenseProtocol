@@ -168,12 +168,12 @@ namespace BDP.Core.Abilities
 
             if (minimumRequired > cost)
             {
-                return "BDP_Ability_TrionCostWithMinimum".Translate(
+                return (parent is BdpBatchAbility ? "BDP_BatchAbility_UnitCostWithMinimum" : "BDP_Ability_TrionCostWithMinimum").Translate(
                     cost.ToString("0.##"),
                     minimumRequired.ToString("0.##"));
             }
 
-            return "BDP_Ability_TrionCost".Translate(cost.ToString("0.##"));
+            return (parent is BdpBatchAbility ? "BDP_BatchAbility_UnitCost" : "BDP_Ability_TrionCost").Translate(cost.ToString("0.##"));
         }
 
         /// <summary>

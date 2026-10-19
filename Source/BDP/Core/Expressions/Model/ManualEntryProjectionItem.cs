@@ -35,7 +35,7 @@ namespace BDP.Core.Expressions
         /// <summary>
         /// 当前入口项对应的表达结果类型。
         /// </summary>
-        public ExpressionResultKind ResultKind { get; set; }
+        public ExpressionOutputChannel OutputChannel { get; set; }
 
         /// <summary>
         /// 当前入口项对应的武器模式。

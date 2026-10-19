@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!-- 浮空实际状态；存在即实际飞行，且必须显示在健康面板。 -->
+  <HediffDef>
+    <defName>BDP_Hediff_FloatingFlight</defName>
+    <hediffClass>BDP.Content.FloatingFlight.Hediff_FloatingFlight</hediffClass>
+    <label>浮空中</label>
+    <description>该角色当前处于浮空状态，能够快速移动并跨越部分露天障碍，但无法在屋顶区域飞行或停留。</description>
+    <stages>
+      <li>
+        <!-- 明确覆盖原版阶段默认值，保证健康面板可观察状态。 -->
+        <becomeVisible>true</becomeVisible>
+        <!-- 浮空速度直接遵循 Hediff 的原版属性修正规则。 -->
+        <statFactors>
+          <MoveSpeed>2.0</MoveSpeed>
+        </statFactors>
+      </li>
+    </stages>
+    <modExtensions>
+      <!-- 使用联合重工式正弦起伏；每个 Pawn 的相位由代码独立计算。 -->
+      <li Class="BDP.Content.FloatingFlight.FloatingFlightSettingsExtension">
+        <!-- 轻微上下浮动幅度。 -->
+        <bobAmplitude>0.05</bobAmplitude>
+        <!-- 完整起伏周期为 240 tick，约 4 秒。 -->
+        <bobPeriodTicks>240</bobPeriodTicks>
+      </li>
+    </modExtensions>
+  </HediffDef>
+</Defs>

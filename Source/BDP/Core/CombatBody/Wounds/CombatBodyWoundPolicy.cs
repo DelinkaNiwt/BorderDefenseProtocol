@@ -34,8 +34,7 @@ namespace BDP.Core.CombatBody.Wounds
         /// </summary>
         internal static bool IsCombatBodyActive(Pawn pawn)
         {
-            ICombatBodyReader reader = CombatBodySurfaceAccess.ResolveReader(pawn);
-            return reader != null && reader.Phase == CombatBodyPhase.Active;
+            return CombatBodyMaterialAccess.IsActive(pawn);
         }
 
         /// <summary>
@@ -44,9 +43,7 @@ namespace BDP.Core.CombatBody.Wounds
         /// </summary>
         internal static bool IsCombatBodyWoundRuntimeApplicable(Pawn pawn)
         {
-            ICombatBodyReader reader = CombatBodySurfaceAccess.ResolveReader(pawn);
-            return reader != null
-                && (reader.Phase == CombatBodyPhase.Active || reader.Phase == CombatBodyPhase.Collapsing);
+            return CombatBodyMaterialAccess.Resolve(pawn)?.HasCombatBodyWoundRuntime == true;
         }
 
         /// <summary>

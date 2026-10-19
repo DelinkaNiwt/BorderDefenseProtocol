@@ -51,7 +51,7 @@ Assert-True ($runtimeText -match 'CombatBodyWoundPresentationRegistry') 'Wound r
 Assert-True ($runtimeText -match 'using BDP\.Core\.CombatBody\.Wounds\.Presentation;') 'Wound runtime must import neutral presentation namespace.'
 Assert-True ($hostText -match 'CombatBodyWoundPresentationRegistry\.ExposeData\(parent as Pawn\)') 'CombatBody host must save presentation provider state with its owning Pawn.'
 Assert-True (($updateIndex -ge 0) -and ($sprayAddedIndex -gt $updateIndex)) 'Wound spray must start only after successful drain registration.'
-Assert-True ($notifyText -match 'expiryTick\s*<=\s*0[\s\S]*CombatBodyWoundPresentationRegistry\.NotifyWoundDrainExpired') 'Failed drain registration must stop any existing presentation.'
+Assert-True ($notifyText -match 'RefreshPresentation\(pawn\)' -and $runtimeText -match 'GetActiveHediffLoadIds\(pawn\)') '登记后表现必须同步真实活跃部位来源，清理失效伤口。'
 Assert-True ($runtimeText -match 'NotifyWoundRemoved\(Pawn pawn,\s*Hediff hediff\)[\s\S]*CombatBodyWoundPresentationRegistry\.NotifyWoundRemoved') 'Wound removal must notify presentation providers.'
 Assert-True ($runtimeText -match 'ClearActiveRuntime\(Pawn pawn\)[\s\S]*CombatBodyWoundPresentationRegistry\.ClearAll\(pawn\)') 'Clearing active wound runtime must clear only the current Pawn presentation.'
 Assert-True ($rebuildText -match 'CombatBodyWoundPolicy\.IsCombatBodyWoundRuntimeApplicable\(pawn\)') 'Rebuild must preserve wound runtime through Active and Collapsing phases.'
@@ -63,6 +63,6 @@ Assert-True ($tickText -match 'CombatBodyWoundPresentationRegistry\.Tick\(pawn\)
 Assert-True ($tickText -match 'CombatBodyWoundPolicy\.IsCombatBodyWoundRuntimeApplicable\(pawn\)') 'Spray tick must continue during Active and Collapsing phases.'
 Assert-True ($tickText.IndexOf('trionBinding.ExpireIdleDrains') -lt $tickText.IndexOf('CombatBodyWoundPresentationRegistry.Tick')) 'Drain expiry must run before presentation tick.'
 Assert-True ($restoreText -match 'CombatBodyWoundPolicy\.IsCombatBodyWoundRuntimeApplicable\(pawn\)') 'RestoreAfterLoad must preserve spray runtime during Active and Collapsing phases.'
-Assert-True ($restoreText -match 'CombatBodyWoundPresentationRegistry\.RebuildFromActiveDrains\([\s\r\n]*pawn,\s*trionBinding\.GetActiveHediffLoadIds\(\)\)') 'RestoreAfterLoad must rebuild presentations from active drain ids.'
+Assert-True ($restoreText -match 'CombatBodyWoundPresentationRegistry\.RebuildFromActiveDrains\([\s\r\n]*pawn,\s*trionBinding\.GetActiveHediffLoadIds\(pawn\)\)') '读档后表现必须从真实部位来源恢复。'
 
 Write-Output 'CombatBodyWoundSprayLifecycleSmokeTests PASS'

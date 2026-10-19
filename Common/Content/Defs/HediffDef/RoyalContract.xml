@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 永久人物关系兼皇室已用记录；不是疾病、不提供附加属性。 -->
+  <HediffDef>
+    <defName>BDP_Hediff_RoyalContract</defName>
+    <hediffClass>BDP.Content.Trion.Royalty.Contract.Hediff_RoyalContract</hediffClass>
+    <label>BDP_Hediff_RoyalContract</label>
+    <description>BDP_Hediff_RoyalContract.description</description>
+    <isBad>false</isBad>
+    <!-- 不进入原版复制，也不能用普通治疗道具移除契约。 -->
+    <duplicationAllowed>false</duplicationAllowed>
+    <everCurableByItem>false</everCurableByItem>
+    <initialSeverity>1</initialSeverity>
+  </HediffDef>
+</Defs>

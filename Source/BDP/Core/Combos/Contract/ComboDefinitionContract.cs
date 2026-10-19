@@ -21,20 +21,26 @@ namespace BDP.Core.Combos
         public ComboDefinitionConfig Config;
 
         /// <summary>
-        /// 第一来源动作预设的 DefName。
+        /// 第一来源芯片功能模板的 DefName。
         /// </summary>
-        public string FirstSourceActionDefName;
+        public string FirstSourceKey;
 
         /// <summary>
-        /// 第二来源动作预设的 DefName。
+        /// 第二来源芯片功能模板的 DefName。
         /// </summary>
-        public string SecondSourceActionDefName;
+        public string SecondSourceKey;
 
         /// <summary>第一来源项的成品身份准入契约。</summary>
         public ComboSourceAdmissionContract FirstSourceAdmission;
 
         /// <summary>第二来源项的成品身份准入契约。</summary>
         public ComboSourceAdmissionContract SecondSourceAdmission;
+
+        /// <summary>第一来源项的运行时形态与姿态范围契约。</summary>
+        public ComboSourceScopeContract FirstSourceScope;
+
+        /// <summary>第二来源项的运行时形态与姿态范围契约。</summary>
+        public ComboSourceScopeContract SecondSourceScope;
 
         /// <summary>
         /// 使用整个组合技前必须持续满足的有序角色条件。

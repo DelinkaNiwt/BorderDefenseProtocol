@@ -18,6 +18,10 @@ $billText = Get-Utf8Text $billPath
 $unfinishedText = Get-Utf8Text $unfinishedPath
 $compText = Get-Utf8Text $compPath
 $recordText = Get-Utf8Text $recordPath
+$legacySourceFunctionField = 'source' + 'PresetDefNames'
+$legacySourceVariantField = 'source' + 'ArmamentFormDefName'
+$legacySourceVariantLabelField = 'source' + 'ArmamentFormLabel'
+$legacyInstanceLabelField = 'custom' + 'Label'
 
 Assert-True ($billText -match 'class\s+Bill_ChipProduction\s*:\s*Bill_ProductionWithUft') "芯片账单必须继承原版半成品生产账单。"
 Assert-True ($unfinishedText -match 'class\s+Thing_UnfinishedChip\s*:\s*UnfinishedThing') "芯片半成品必须继承原版 UnfinishedThing。"
@@ -32,7 +36,10 @@ Assert-True ($billText -match 'GetWorkAmount') "芯片账单必须提供动态�
 Assert-True ($billText -match 'Notify_BillWorkStarted') "开工时必须把组合与起始工作量写入新半成品。"
 Assert-True ($billText -match 'Clone') "复制账单时必须复制组合记录。"
 Assert-True ($unfinishedText -match 'StartingWorkAmount') "半成品必须保存开工时总工作量。"
-Assert-True ($unfinishedText -notmatch 'Pawn\s+creator|creatorName|sourcePresetDefNames|queuedConfig') "半成品不得另建制作者或旧来源/配置字段。"
+Assert-True ($unfinishedText -notmatch ('Pawn\s+creator|creatorName|' + [regex]::Escape($legacySourceFunctionField) + '|queuedConfig')) "半成品不得另建制作者或旧来源/配置字段。"
+Assert-True ($compText -match 'chipCombinationRecord') "成品组件必须保存当前组合记录。"
+Assert-True ($compText -match 'orderedChipFunctionDefNames') "成品组合记录必须使用芯片功能定义顺序字段。"
+Assert-True ($compText -notmatch (([regex]::Escape($legacySourceFunctionField)) + '|' + [regex]::Escape($legacySourceVariantField) + '|' + [regex]::Escape($legacySourceVariantLabelField) + '|' + [regex]::Escape($legacyInstanceLabelField) + '|LegacyPersistence')) "成品组件不得读取旧版来源或实例字段。"
 Assert-True ($compText -notmatch 'Scribe_(Deep|Values|Collections)\.Look\([^\r\n]*ChipDefinitionConfig|manufacturedConfig') "成品组件不得保存完整解析配置。"
 Assert-True ($recordText -match 'ArmamentFormDefName') "组合记录必须只保存新的武装型字段。"
 Assert-True ($recordText -notmatch 'gunShellDefName|legacyGunShellDefName|LoadSaveMode') "组合记录不得读取或迁移旧枪壳字段。"

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using BDP.Core.Expressions;
+using BDP.Core.Permissions;
 using BDP.Core.Trigger.Runtime;
 using BDP.Core.VerbHosting;
 using RimWorld;
@@ -236,19 +237,24 @@ namespace BDP.Core.AttackExecution
         /// </summary>
         public bool CanHitTarget(LocalTargetInfo target)
         {
-            ResolvedTargetingContext context = ResolveCurrentContext();
+            return CanHitTarget(target, TargetingInputRuntimeFacts.FromEvent(Event.current));
+        }
+
+        /// <summary>显式只读输入入口；程序调用传空事实，分组调用传同一冻结事实。</summary>
+        internal bool CanHitTarget(LocalTargetInfo target, TargetingInputRuntimeFacts inputFacts)
+        {
+            ResolvedTargetingContext context = ResolveCurrentContext(inputFacts);
             bool currentTargetLegality;
             if (TryEvaluateDualWeaponTargetLegality(context, target, false, false, out currentTargetLegality))
             {
                 return currentTargetLegality;
             }
 
-            if (TryEvaluateCurrentTargetLegality(context, target, false, out currentTargetLegality))
-            {
-                return currentTargetLegality;
-            }
-
-            return CanEnterNeutralTargetingBoundary(context, target);
+            return TryEvaluateUnifiedTargetLegality(
+                context,
+                target,
+                false,
+                out _);
         }
 
         /// <summary>
@@ -257,19 +263,31 @@ namespace BDP.Core.AttackExecution
         /// </summary>
         public bool ValidateTarget(LocalTargetInfo target, bool showMessages = true)
         {
-            ResolvedTargetingContext context = ResolveCurrentContext();
+            return ValidateTarget(target, showMessages, TargetingInputRuntimeFacts.FromEvent(Event.current));
+        }
+
+        /// <summary>显式传递确认前探测事实，不把探测转为点击。</summary>
+        internal bool ValidateTarget(LocalTargetInfo target, bool showMessages, TargetingInputRuntimeFacts inputFacts)
+        {
+            ResolvedTargetingContext context = ResolveCurrentContext(inputFacts);
             bool currentTargetLegality;
             if (TryEvaluateDualWeaponTargetLegality(context, target, true, showMessages, out currentTargetLegality))
             {
                 return currentTargetLegality;
             }
 
-            if (TryEvaluateCurrentTargetLegality(context, target, showMessages, out currentTargetLegality))
+            bool moduleHandled;
+            if (!TryEvaluateUnifiedTargetLegality(
+                    context,
+                    target,
+                    showMessages,
+                    out moduleHandled))
             {
-                return currentTargetLegality;
+                return false;
             }
 
-            return CanValidateTargetAtNeutralBoundary(context, target, showMessages);
+            // 模块显式接管时沿用原有模块确认语义；普通直射目标才补原版确认校验。
+            return moduleHandled || CanValidateTargetAtNeutralBoundary(context, target, showMessages);
         }
 
         /// <summary>
@@ -278,7 +296,7 @@ namespace BDP.Core.AttackExecution
         /// </summary>
         public void DrawHighlight(LocalTargetInfo target)
         {
-            ResolvedTargetingContext context = ResolveCurrentContext();
+            ResolvedTargetingContext context = ResolveCurrentContext(TargetingInputRuntimeFacts.FromEvent(Event.current));
             PreviewRecord previewRecord = BuildPreviewRecord(context, target);
             if (context.Verb == null || previewRecord == null)
             {
@@ -314,8 +332,14 @@ namespace BDP.Core.AttackExecution
         /// </summary>
         public void OrderForceTarget(LocalTargetInfo target)
         {
+            OrderForceTarget(target, TargetingInputRuntimeFacts.FromEvent(Event.current));
+        }
+
+        /// <summary>确认入口显式消费本轮事实；直接程序调用可传空事实，不借用其他界面事件。</summary>
+        internal void OrderForceTarget(LocalTargetInfo target, TargetingInputRuntimeFacts inputFacts)
+        {
             pendingDriveResult = null;
-            ResolvedTargetingContext context = ResolveCurrentContext();
+            ResolvedTargetingContext context = ResolveCurrentContext(inputFacts);
             if (!target.IsValid
                 || pawn == null
                 || attackExecutionEntry == null
@@ -333,7 +357,7 @@ namespace BDP.Core.AttackExecution
                 context.Verb,
                 context.ModuleSession,
                 context.AttackContext,
-                CreateSelectionInputFrame(target));
+                CreateSelectionInputFrame(target, inputFacts));
             pendingDriveResult = interactionDriver.Drive(targetingRecord);
             if (pendingDriveResult == null)
             {
@@ -394,7 +418,7 @@ namespace BDP.Core.AttackExecution
                 return;
             }
 
-            Messages.Message(message, pawn, MessageTypeDefOf.RejectInput, historical: false);
+            Messages.Message(message.Translate().ToString(), pawn, MessageTypeDefOf.RejectInput, historical: false);
         }
 
         /// <summary>
@@ -411,7 +435,7 @@ namespace BDP.Core.AttackExecution
             string message = !string.IsNullOrWhiteSpace(confirmRecord.RejectReason)
                 ? confirmRecord.RejectReason
                 : "bdp_ranged_confirm_rejected";
-            Messages.Message(message, pawn, MessageTypeDefOf.RejectInput, historical: false);
+            Messages.Message(message.Translate().ToString(), pawn, MessageTypeDefOf.RejectInput, historical: false);
         }
 
         /// <summary>
@@ -420,7 +444,7 @@ namespace BDP.Core.AttackExecution
         /// </summary>
         public void OnGUI(LocalTargetInfo target)
         {
-            ResolvedTargetingContext context = ResolveCurrentContext();
+            ResolvedTargetingContext context = ResolveCurrentContext(TargetingInputRuntimeFacts.FromEvent(Event.current));
             PreviewRecord previewRecord = BuildPreviewRecord(context, target);
             if (context.Verb == null || previewRecord == null)
             {
@@ -430,8 +454,11 @@ namespace BDP.Core.AttackExecution
 
             if (PreviewDimensionPolicy.UsesVanilla(previewRecord, PreviewDimension.MouseAttachment))
             {
-                if (TryEvaluateCurrentTargetLegality(context, target, false, out bool currentTargetIsLegal)
-                    && !currentTargetIsLegal)
+                if (!TryEvaluateUnifiedTargetLegality(
+                        context,
+                        target,
+                        false,
+                        out _))
                 {
                     GenUI.DrawMouseAttachment(TexCommand.CannotShoot);
                 }
@@ -448,7 +475,7 @@ namespace BDP.Core.AttackExecution
         /// 解析当前读取时刻对应的正式结果和正式宿主壳 Verb。
         /// targeting 继续读取原版动态表面，但模块会话必须固定为按钮点击时那一份。
         /// </summary>
-        private ResolvedTargetingContext ResolveCurrentContext()
+        private ResolvedTargetingContext ResolveCurrentContext(TargetingInputRuntimeFacts inputFacts = null)
         {
             TriggerCombatProjectionState projection = null;
             int projectionVersion = 0;
@@ -459,6 +486,7 @@ namespace BDP.Core.AttackExecution
             {
                 return new ResolvedTargetingContext
                 {
+                    InputFacts = inputFacts,
                     Projection = projection,
                     ProjectionVersion = projection != null ? projection.ProjectionVersion : 0,
                     Result = moduleSession != null ? moduleSession.Result : result,
@@ -485,6 +513,7 @@ namespace BDP.Core.AttackExecution
 
             return new ResolvedTargetingContext
             {
+                InputFacts = inputFacts,
                 Projection = projection,
                 ProjectionVersion = projectionVersion,
                 Result = result,
@@ -522,7 +551,9 @@ namespace BDP.Core.AttackExecution
                 Targetable = true,
                 MultiSelect = false,
                 HidePawnTooltips = verb != null && verb.HidePawnTooltips,
-                TargetingParameters = verb != null ? verb.targetParams : UnavailableTargetParams,
+                // 原版 Verb.targetParams 是共享对象；目标阶段只能在本次交互副本上叠加运行时能力。
+                TargetingParameters = TargetingParametersCopyUtility.Clone(
+                    verb != null ? verb.targetParams : UnavailableTargetParams),
                 InputFrame = currentInputFrame,
                 AdvanceDecision = BuildDefaultAdvanceDecision(currentInputFrame)
             };
@@ -578,7 +609,30 @@ namespace BDP.Core.AttackExecution
                         record.AttackContext?.ToSnapshot()));
             }
 
+            // 最终门控放在全部目标阶段之后，避免追踪模块的默认空地能力绕过许可。
+            ApplyGroundTargetingPermission(record);
+
             return record;
+        }
+
+        /// <summary>
+        /// 对显式声明地面目标许可的表达应用当前地图许可结果。
+        /// 未声明或没有适用解析器时保留原有目标模块结果。
+        /// </summary>
+        /// <param name="record">当前目标阶段记录。</param>
+        private static void ApplyGroundTargetingPermission(TargetingRecord record)
+        {
+            if (record == null
+                || record.TargetingParameters == null
+                || !GroundTargetingPermissionAccess.TryResolveGroundTargeting(
+                    record.Pawn,
+                    record.Result,
+                    out bool allowed))
+            {
+                return;
+            }
+
+            record.TargetingParameters.canTargetLocations = allowed;
         }
 
         /// <summary>
@@ -588,6 +642,7 @@ namespace BDP.Core.AttackExecution
         {
             PreviewRecord record = new PreviewRecord
             {
+                InputFrame = CreateProbeInputFrame(target, context?.InputFacts),
                 Pawn = context != null && context.ModuleSession != null ? context.ModuleSession.Pawn : null,
                 Result = context != null ? context.Result : null,
                 Verb = context != null ? context.Verb : null,
@@ -834,9 +889,8 @@ namespace BDP.Core.AttackExecution
         /// </summary>
         /// <param name="target">玩家当前点击的目标。</param>
         /// <returns>交给目标交互驱动器消费的一轮输入事实。</returns>
-        private static TargetingInputFrame CreateSelectionInputFrame(LocalTargetInfo target)
+        private static TargetingInputFrame CreateSelectionInputFrame(LocalTargetInfo target, TargetingInputRuntimeFacts runtimeFacts)
         {
-            TargetingInputRuntimeFacts runtimeFacts = TargetingInputRuntimeScope.Current;
             return new TargetingInputFrame
             {
                 HoveredTarget = target,
@@ -853,9 +907,8 @@ namespace BDP.Core.AttackExecution
         /// </summary>
         /// <param name="target">当前鼠标所在候选目标。</param>
         /// <returns>只服务 CanHitTarget / ValidateTarget 探测的一轮输入事实。</returns>
-        private static TargetingInputFrame CreateProbeInputFrame(LocalTargetInfo target)
+        private static TargetingInputFrame CreateProbeInputFrame(LocalTargetInfo target, TargetingInputRuntimeFacts runtimeFacts)
         {
-            TargetingInputRuntimeFacts runtimeFacts = TargetingInputRuntimeScope.Current;
             return new TargetingInputFrame
             {
                 HoveredTarget = target,
@@ -903,6 +956,15 @@ namespace BDP.Core.AttackExecution
                 return !IsOutOfRange(context.Verb, target);
             }
 
+            if (DirectTargetLineOfSightPermissionAccess.ShouldRelaxDirectTargetLineOfSight(
+                    context.Verb.CasterPawn,
+                    context.Result,
+                    target))
+            {
+                // 动态许可只放宽射手到目标的直视要求，仍保留正式 Verb 的射程边界。
+                return !IsOutOfRange(context.Verb, target);
+            }
+
             return context.Verb.CanHitTarget(target);
         }
 
@@ -926,6 +988,36 @@ namespace BDP.Core.AttackExecution
                 && context.TargetingRecord.Targetable
                 && target.IsValid
                 && (context.TargetingRecord.IsMeleeAttack || context.Verb.ValidateTarget(target, showMessages));
+        }
+
+        /// <summary>
+        /// 统一解析当前候选目标的远程合法性。
+        /// 模块显式裁定、悬停显示和点击确认都必须经过同一入口，避免原版 Targeter 对 Pawn 的特殊路径漏掉直视许可。
+        /// </summary>
+        /// <param name="context">当前目标解析上下文。</param>
+        /// <param name="target">当前候选目标。</param>
+        /// <param name="showMessages">是否允许模块反馈拒绝原因。</param>
+        /// <param name="moduleHandled">输出当前候选是否已由模块显式接管。</param>
+        /// <returns>当前候选目标合法时为 true。</returns>
+        private bool TryEvaluateUnifiedTargetLegality(
+            ResolvedTargetingContext context,
+            LocalTargetInfo target,
+            bool showMessages,
+            out bool moduleHandled)
+        {
+            moduleHandled = false;
+            if (TryEvaluateCurrentTargetLegality(
+                    context,
+                    target,
+                    showMessages,
+                    out bool currentTargetLegality))
+            {
+                moduleHandled = true;
+                return currentTargetLegality;
+            }
+
+            // 未被模块接管时，统一走必要直视、动态许可、射程和原版当前命中事实。
+            return CanEnterNeutralTargetingBoundary(context, target);
         }
 
         /// <summary>
@@ -958,7 +1050,7 @@ namespace BDP.Core.AttackExecution
                 context.Verb,
                 context.ModuleSession,
                 context.AttackContext,
-                CreateProbeInputFrame(target));
+                CreateProbeInputFrame(target, context.InputFacts));
             if (probeRecord == null || !probeRecord.HasCurrentTargetLegalityOverride)
             {
                 return false;
@@ -967,7 +1059,10 @@ namespace BDP.Core.AttackExecution
             isLegal = probeRecord.CurrentTargetIsLegal;
             if (!isLegal && showMessages && !string.IsNullOrWhiteSpace(probeRecord.CurrentTargetRejectReason))
             {
-                Messages.Message(probeRecord.CurrentTargetRejectReason, MessageTypeDefOf.RejectInput, false);
+                Messages.Message(
+                    probeRecord.CurrentTargetRejectReason.Translate().ToString(),
+                    MessageTypeDefOf.RejectInput,
+                    false);
             }
 
             return true;
@@ -1437,6 +1532,9 @@ namespace BDP.Core.AttackExecution
         /// </summary>
         private sealed class ResolvedTargetingContext
         {
+            /// <summary>只属于当前界面调用的冻结事实，不保存到攻击运行态或存档。</summary>
+            public TargetingInputRuntimeFacts InputFacts { get; set; }
+
             /// <summary>
             /// 当前读取命中的已发布战斗投影。
             /// </summary>

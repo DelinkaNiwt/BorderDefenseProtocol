@@ -1,6 +1,7 @@
 using BDP.Core.Abilities;
 using BDP.Core.PathInput;
 using BDP.Core.Trion;
+using BDP.Content.GroundDash;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -151,10 +152,10 @@ namespace BDP.Content.Grasshopper
             bool hasMoreSegments = verb.HasPendingWaypoints;
             if (hasMoreSegments)
             {
-                PawnFlyer_Grasshopper grasshopperFlyer = flyer as PawnFlyer_Grasshopper;
-                if (grasshopperFlyer != null)
+                PawnFlyer_GroundDash groundDashFlyer = flyer as PawnFlyer_GroundDash;
+                if (groundDashFlyer != null)
                 {
-                    grasshopperFlyer.onLanded = () =>
+                    groundDashFlyer.onLanded = () =>
                     {
                         ExecuteChainJump(pawn, verb, verbProps, flyerDef, isFirstSegment: false);
                     };

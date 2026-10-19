@@ -9,8 +9,8 @@ namespace BDP.Core.Expressions
     public sealed class ExpressionVisualGripConfig
     {
         /// <summary>
-        /// 握持点相对主贴图中心的局部偏移。
-        /// X 表示左右，Y 表示高度，Z 表示武器朝向上的前后。
+        /// 握持点相对主贴图中心的局部坐标。
+        /// X、Z 分别按贴图纵向和横向画布比例填写；Y 是不随贴图缩放的世界高度偏移。
         /// </summary>
         public Vector3 GripOffset = Vector3.zero;
 

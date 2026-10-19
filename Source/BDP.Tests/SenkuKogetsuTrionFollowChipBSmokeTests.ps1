@@ -62,8 +62,8 @@ Assert-True (
 Assert-True (
     ($senkuMatch.Groups[1].Value -match '<UseCost>50</UseCost>') -and
     ($senkuMatch.Groups[1].Value -match '<MinimumRequired>50</MinimumRequired>') -and
-    ($senkuMatch.Groups[1].Value -match '<Kind>Passive</Kind>') -and
-    ($senkuMatch.Groups[1].Value -match '<PassiveKey>bdp\.senku\.passive</PassiveKey>') -and
+    ($senkuMatch.Groups[1].Value -match '<EntryType>Passive</EntryType>') -and
+    ($senkuMatch.Groups[1].Value -match '<PassiveIdentityKey>bdp\.senku\.passive</PassiveIdentityKey>') -and
     (-not ($senkuMatch.Groups[1].Value -match '<AbilityDefName>')) -and
     (-not ($senkuMatch.Groups[1].Value -match '<ConditionKey>mode\.senku_placeholder_never_true</ConditionKey>'))
 ) 'BDP_Chip_Senku must keep the higher UseCost/MinimumRequired on chipB and stay a passive source entry instead of an unpublished ability placeholder.'

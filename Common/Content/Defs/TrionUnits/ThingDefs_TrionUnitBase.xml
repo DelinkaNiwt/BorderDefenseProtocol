@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 永久身体保留材料效果，正常健康页隐藏，不阻止原版死亡，不授予人类转换能力。 -->
+  <HediffDef>
+    <defName>BDP_PermanentCombatBody</defName>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <stages>
+      <!-- 材料身体无生理疼痛或失血；Trion 泄露另走既有伤口登记。 -->
+      <li>
+        <!-- 原版阶段隐藏只阻止新状态显露，存档中已显露的旧实例需重建。 -->
+        <becomeVisible>false</becomeVisible>
+        <!-- 材料身体不承受生理疼痛。 -->
+        <painFactor>0</painFactor>
+        <!-- 生理失血关闭，既有伤口仍结算 Trion 泄露。 -->
+        <totalBleedFactor>0</totalBleedFactor>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- 正式款型共用抽象种族；容量、身体、外观及内部触发体由实际款型填写。 -->
+  <ThingDef Name="BDP_TrionUnitBase" ParentName="BasePawn" Abstract="True">
+    <!-- 继承原版角色的健康页、装备页和选择显示，只覆盖机械材料与本兵行为。 -->
+    <drawerType>RealtimeOnly</drawerType>
+    <race>
+      <!-- 保留机械体身份和原版装备、能力设施，不挂监管或电能需求组件。 -->
+      <fleshType>Mechanoid</fleshType>
+      <intelligence>ToolUser</intelligence>
+      <hasGenders>false</hasGenders>
+      <needsRest>false</needsRest>
+      <foodType>None</foodType>
+      <thinkTreeMain>BDP_TrionUnit</thinkTreeMain>
+      <thinkTreeConstant>BDP_TrionUnitConstant</thinkTreeConstant>
+      <hasCorpse>true</hasCorpse>
+      <hasMeat>false</hasMeat>
+      <lifeExpectancy>2500</lifeExpectancy>
+      <allowedOnCaravan>true</allowedOnCaravan>
+      <lifeStageAges>
+        <!-- 出生即完整机械身体，不经过肉体幼年或转换阶段。 -->
+        <li><def>MechanoidFullyFormed</def><minAge>0</minAge></li>
+      </lifeStageAges>
+      <deathAction><workerClass>DeathActionWorker_Simple</workerClass></deathAction>
+    </race>
+    <!-- 机械材料种族必须声明拆解产物；沿用原版轻型机械体的默认钢材产物，具体款型可覆盖。 -->
+    <butcherProducts>
+      <!-- 与原版 LightMechanoid（轻型机械体）基底一致。 -->
+      <Steel>10</Steel>
+    </butcherProducts>
+    <statBases>
+      <!-- 款型覆盖容量与释放力；永久身体没有自然恢复或日常维持消耗。 -->
+      <BDP_TrionCapacity>0</BDP_TrionCapacity>
+      <BDP_TrionRecoveryRate>0</BDP_TrionRecoveryRate>
+      <BDP_TrionIntensity>1</BDP_TrionIntensity>
+      <BandwidthCost>1</BandwidthCost>
+    </statBases>
+    <comps Inherit="False">
+      <!-- 保留原版角色附着显示设施，不继承监管、电力或可唤醒休眠业务。 -->
+      <li><compClass>CompAttachBase</compClass></li>
+      <!-- 资源组件必须先完成首次初始化，兵组件才判断生命余额。 -->
+      <li Class="BDP.Core.Trion.CompProperties_Trion"><startPercent>1</startPercent></li>
+      <!-- 当前默认消费许可键；条件实现可在具体款型中替换。 -->
+      <li Class="BDP.Content.Trion.Units.CompProperties_TrionUnit">
+        <operationPermissionKey>BDP.TrionRelayCore.Active</operationPermissionKey>
+        <bodyMarker>BDP_PermanentCombatBody</bodyMarker>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- 内部承载共用抽象配置；不创造第二套能力或芯片类型。 -->
+  <ThingDef Name="BDP_TrionUnitInternalTriggerBase" ParentName="BaseWeapon" Abstract="True">
+    <graphicData>
+      <!-- 仅供原版物品配置有效性，宿主显示显式隐藏。 -->
+      <texPath>Things/Equipment/Trigger/BDP_BorderStandardTriggerBody</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <techLevel>Spacer</techLevel>
+    <tradeability>None</tradeability>
+    <statBases><Mass>0</Mass><MarketValue>0</MarketValue></statBases>
+    <comps Inherit="False">
+      <!-- 款型在这一配置中填写特殊槽数量及既有固定芯片列表。 -->
+      <li Class="BDP.Core.Trigger.CompProperties_TriggerBody">
+        <triggerCategory>BDP_TriggerCategory_Border</triggerCategory>
+        <requiresTrionGland>false</requiresTrionGland>
+        <hideHostEquipment>true</hideHostEquipment>
+        <loadoutControlMode>PlayerNonConfigurable</loadoutControlMode>
+        <mainSlotCount>0</mainSlotCount><subSlotCount>0</subSlotCount><specialSlotCount>0</specialSlotCount>
+      </li>
+    </comps>
+  </ThingDef>
+</Defs>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <BDP_TriggerBody_BlackTest.label>临时黑触发器测试体</BDP_TriggerBody_BlackTest.label>
+  <BDP_TriggerBody_BlackTest.description>仅用于验证黑触发器形成、信件、事实匹配和绑定流程的临时测试物品。</BDP_TriggerBody_BlackTest.description>
+</LanguageData>

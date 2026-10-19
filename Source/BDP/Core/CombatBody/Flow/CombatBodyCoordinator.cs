@@ -90,6 +90,12 @@ namespace BDP.Core.CombatBody
             return phaseState.CanActivate();
         }
 
+        /// <summary>转发玩家激活准入，保留手动切换锁约束。</summary>
+        public bool CanManualActivate()
+        {
+            return phaseState.CanManualActivate();
+        }
+
         /// <summary>
         /// 判断当前是否允许手动退出。
         /// </summary>
@@ -145,6 +151,12 @@ namespace BDP.Core.CombatBody
             phaseState.EnterActive(allocatedTrion);
             NotifyPhaseChanged(previousPhase, phaseState.Phase, null);
             return true;
+        }
+
+        /// <summary>同步当前会话的实际资源锁定，不触发新的形态变换。</summary>
+        internal void UpdateAllocatedTrion(float amount)
+        {
+            phaseState.UpdateAllocatedTrion(amount);
         }
 
         /// <summary>

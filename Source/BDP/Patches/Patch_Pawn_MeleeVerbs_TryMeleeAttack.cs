@@ -6,39 +6,34 @@ using Verse;
 namespace BDP.Patches
 {
     /// <summary>
-    /// 自动近战入口桥。
-    /// 当前版本只在表达系统给出合法默认近战主攻击时接管自动近战，否则完整放行原版近战池。
+    /// 自动近战入口桥：只提供合法默认攻击，由原版方法执行，原任务继续管理时序。
     /// </summary>
     [HarmonyPatch(typeof(Pawn_MeleeVerbs), nameof(Pawn_MeleeVerbs.TryMeleeAttack))]
-    /// <summary>
-    /// 自动近战起手转发补丁。
-    /// </summary>
     public static class Patch_Pawn_MeleeVerbs_TryMeleeAttack
     {
         /// <summary>
-        /// 只有原版还没明确给出 verbToUse 时，才尝试把自动近战起手翻译成正式攻击请求。
+        /// 只有原版还没明确给出 verbToUse 时，才准备默认近战并注入该参数。
         /// 另外，玩家手动点原版近战按钮时虽然 verbToUse 也可能为空，
         /// 但那属于原版基线手动命令，不应被自动近战桥误接管。
         /// 表达系统没有合法 PrimaryMelee 时，这里完全回退原版。
         /// </summary>
-        public static bool Prefix(Pawn_MeleeVerbs __instance, Thing target, Verb verbToUse, ref bool __result)
+        public static void Prefix(Pawn_MeleeVerbs __instance, Thing target, ref Verb verbToUse)
         {
             if (verbToUse != null
                 || __instance?.Pawn == null
+                || __instance.Pawn.stances.FullBodyBusy
+                || !__instance.Pawn.kindDef.canMeleeAttack
                 || target == null
                 || !target.Spawned
                 || IsPlayerForcedVanillaMeleeOrder(__instance.Pawn, target))
             {
-                return true;
+                return;
             }
 
-            if (!AttackExecutionSurfaceAccess.TryExecuteAutoMelee(__instance.Pawn, target))
+            if (AttackExecutionSurfaceAccess.TryPrepareAutoMelee(__instance.Pawn, target, out Verb preparedVerb))
             {
-                return true;
+                verbToUse = preparedVerb;
             }
-
-            __result = true;
-            return false;
         }
 
         /// <summary>

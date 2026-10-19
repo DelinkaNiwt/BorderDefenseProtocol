@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 开发者专用完整触发体；普通制造、交易和随机生成均不会引用它。 -->
+  <ThingDef ParentName="BaseWeapon">
+    <defName>BDP_TriggerBody_DeveloperWeapon</defName>
+    <label>开发者武器</label>
+    <description>开发者测试用预装触发体，固定装载精确部位移除芯片。</description>
+    <graphicData>
+      <texPath>Things/Equipment/Trigger/BDP_BorderStandardTriggerBody</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <!-- 开发者武器保留原有工业档，满足原版可保留装备的科技校验。 -->
+    <techLevel>Industrial</techLevel>
+    <statBases>
+      <Mass>1.0</Mass>
+      <MarketValue>0</MarketValue>
+    </statBases>
+    <!-- 复用现有触发体的原版近战工具，满足 BaseWeapon 的静态装备校验。 -->
+    <tools>
+      <li>
+        <label>敲击</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>4</power>
+        <cooldownTime>2.0</cooldownTime>
+      </li>
+    </tools>
+    <tradeability>None</tradeability>
+    <modExtensions>
+      <!-- 复用现有芯片形态按钮提供器。 -->
+      <li Class="BDP.Content.Trigger.UI.TriggerLoadoutPanelExtension" />
+    </modExtensions>
+    <comps Inherit="False">
+      <li Class="CompProperties_Forbiddable" />
+      <!-- 按正式装载芯片合成触发体市场价值。 -->
+      <li Class="BDP.Content.Trigger.CompProperties_TriggerBodyMarketValue" />
+      <li Class="BDP.Core.Trigger.CompProperties_TriggerBody">
+        <triggerCategory>BDP_TriggerCategory_Border</triggerCategory>
+        <loadoutControlMode>PlayerNonConfigurable</loadoutControlMode>
+        <mainSlotCount>2</mainSlotCount>
+        <subSlotCount>2</subSlotCount>
+        <specialSlotCount>6</specialSlotCount>
+        <fixedLoadout>
+          <!-- 生成物创建时直接原子装载完整测试芯片。 -->
+          <li>
+            <side>Main</side>
+            <slotNumber>1</slotNumber>
+            <chipDef>BDP_Chip_Custom</chipDef>
+            <initializationKey>BDP_ChipFunction_ExactBodyPartRemoval</initializationKey>
+          </li>
+        </fixedLoadout>
+      </li>
+      <li Class="BDP.Core.Trion.CompProperties_Trion">
+        <baseMax>1000</baseMax>
+        <startPercent>1</startPercent>
+        <recoveryPerDay>0</recoveryPerDay>
+      </li>
+      <li Class="CompProperties_Styleable" />
+    </comps>
+  </ThingDef>
+
+</Defs>

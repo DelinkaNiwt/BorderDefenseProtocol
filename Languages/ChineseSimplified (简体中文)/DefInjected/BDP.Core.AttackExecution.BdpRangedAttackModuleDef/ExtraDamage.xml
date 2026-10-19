@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 通用远程额外伤害模块的玩家可见名称。 -->
+  <BDP_RangedExtraDamageModule.label>通用额外伤害模块</BDP_RangedExtraDamageModule.label>
+</LanguageData>

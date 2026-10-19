@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
 using Verse;
 
 namespace BDP.Support.Diagnostics
@@ -175,6 +177,49 @@ namespace BDP.Support.Diagnostics
 
             LastTickByKey[key] = currentTick;
             SafeLog("[BDP攻击执行] " + message);
+        }
+
+        /// <summary>
+        /// 输出一条不节流的开发诊断日志。
+        /// 只在开发模式下生效，不参与任何正式业务判断。
+        /// </summary>
+        public static void Trace(string message)
+        {
+            if (!Enabled)
+            {
+                return;
+            }
+
+            SafeLog("[BDP诊断] " + (message ?? "none"));
+        }
+
+        /// <summary>
+        /// 开始一次开发诊断计时。
+        /// 未开启开发模式时返回 0，避免正式运行额外读取高精度计时器。
+        /// </summary>
+        public static long BeginTiming()
+        {
+            return Enabled ? Stopwatch.GetTimestamp() : 0L;
+        }
+
+        /// <summary>
+        /// 输出一次开发诊断计时结果。
+        /// 计时只观察耗时，不参与任何业务判断或流程控制。
+        /// </summary>
+        public static void TraceTiming(string message, long startTimestamp)
+        {
+            if (!Enabled || startTimestamp <= 0L)
+            {
+                return;
+            }
+
+            double elapsedMilliseconds =
+                (Stopwatch.GetTimestamp() - startTimestamp) * 1000.0 / Stopwatch.Frequency;
+            Trace(
+                "耗时诊断 | "
+                + (message ?? "none")
+                + " | elapsedMs="
+                + elapsedMilliseconds.ToString("0.###", CultureInfo.InvariantCulture));
         }
 
         /// <summary>

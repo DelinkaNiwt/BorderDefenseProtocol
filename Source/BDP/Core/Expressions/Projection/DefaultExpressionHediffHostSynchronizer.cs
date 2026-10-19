@@ -32,10 +32,12 @@ namespace BDP.Core.Expressions
             }
 
             Dictionary<string, HediffExpressionDemand> demands = CollectDemands(snapshot);
+            HashSet<string> manualControlledDefs = CollectManualControlledDefs(snapshot);
             HashSet<string> publishedDefs = GetPublishedHediffDefs(pawn, createIfMissing: true);
 
-            RemoveInactiveHediffs(pawn, demands, publishedDefs);
+            RemoveInactiveHediffs(pawn, demands, manualControlledDefs, publishedDefs);
             ApplyCurrentHediffs(pawn, demands, publishedDefs);
+            SyncExistingManualHediffs(pawn, snapshot, manualControlledDefs, publishedDefs);
         }
 
         /// <summary>
@@ -54,7 +56,7 @@ namespace BDP.Core.Expressions
             for (int i = 0; i < snapshot.Results.Count; i++)
             {
                 FormalExpressionResult expressionResult = snapshot.Results[i];
-                if (expressionResult == null || expressionResult.ResultKind != ExpressionResultKind.Hediff)
+                if (expressionResult == null || expressionResult.OutputChannel != ExpressionOutputChannel.Hediff)
                 {
                     continue;
                 }
@@ -62,7 +64,7 @@ namespace BDP.Core.Expressions
                 entries.Add(new ExpressionPublicationEntry
                 {
                     ResultId = expressionResult.Id,
-                    ResultKind = expressionResult.ResultKind,
+                    OutputChannel = expressionResult.OutputChannel,
                     PublishedKey = expressionResult.HediffDefName,
                     IsPublished = expressionResult.IsAvailable
                         && (expressionResult.UseRequirementCheck == null
@@ -91,11 +93,16 @@ namespace BDP.Core.Expressions
             {
                 FormalExpressionResult expressionResult = snapshot.Results[i];
                 if (expressionResult == null
-                    || expressionResult.ResultKind != ExpressionResultKind.Hediff
+                    || expressionResult.OutputChannel != ExpressionOutputChannel.Hediff
                     || !expressionResult.IsAvailable
                     || (expressionResult.UseRequirementCheck != null
                         && !expressionResult.UseRequirementCheck.Satisfied)
                     || string.IsNullOrWhiteSpace(expressionResult.HediffDefName))
+                {
+                    continue;
+                }
+
+                if (HediffControlModeKeys.IsAbilityButton(expressionResult.HediffControlMode))
                 {
                     continue;
                 }
@@ -121,17 +128,50 @@ namespace BDP.Core.Expressions
         }
 
         /// <summary>
+        /// 收集由 Ability 按钮控制的 HediffDef。
+        /// 这类结果只允许同步器维护已存在宿主的绑定，不允许同步器主动添加 Hediff。
+        /// </summary>
+        private static HashSet<string> CollectManualControlledDefs(ExpressionSnapshot snapshot)
+        {
+            HashSet<string> result = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            if (snapshot?.Results == null)
+            {
+                return result;
+            }
+
+            for (int i = 0; i < snapshot.Results.Count; i++)
+            {
+                FormalExpressionResult expressionResult = snapshot.Results[i];
+                if (expressionResult == null
+                    || expressionResult.OutputChannel != ExpressionOutputChannel.Hediff
+                    || !expressionResult.IsAvailable
+                    || (expressionResult.UseRequirementCheck != null
+                        && !expressionResult.UseRequirementCheck.Satisfied)
+                    || string.IsNullOrWhiteSpace(expressionResult.HediffDefName)
+                    || !HediffControlModeKeys.IsAbilityButton(expressionResult.HediffControlMode))
+                {
+                    continue;
+                }
+
+                result.Add(expressionResult.HediffDefName);
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// 移除当前不再成立的表达宿主 Hediff。
         /// </summary>
         private static void RemoveInactiveHediffs(
             Pawn pawn,
             Dictionary<string, HediffExpressionDemand> demands,
+            HashSet<string> manualControlledDefs,
             HashSet<string> publishedDefs)
         {
             List<string> removedDefs = new List<string>();
             foreach (string defName in publishedDefs)
             {
-                if (demands.ContainsKey(defName))
+                if (demands.ContainsKey(defName) || manualControlledDefs.Contains(defName))
                 {
                     continue;
                 }
@@ -148,6 +188,26 @@ namespace BDP.Core.Expressions
             for (int i = 0; i < removedDefs.Count; i++)
             {
                 publishedDefs.Remove(removedDefs[i]);
+            }
+
+            // 按钮新增的 Hediff 可能尚未进入本会话发布集合，仍需在芯片停用后清理。
+            List<Hediff> expressionHediffs = new List<Hediff>();
+            pawn.health.hediffSet.GetHediffs(
+                ref expressionHediffs,
+                hediff => hediff is BdpExpressionHostHediff);
+            for (int i = 0; i < expressionHediffs.Count; i++)
+            {
+                Hediff hediff = expressionHediffs[i];
+                string defName = hediff?.def?.defName;
+                if (string.IsNullOrWhiteSpace(defName)
+                    || demands.ContainsKey(defName)
+                    || manualControlledDefs.Contains(defName))
+                {
+                    continue;
+                }
+
+                pawn.health.RemoveHediff(hediff);
+                publishedDefs.Remove(defName);
             }
         }
 
@@ -196,6 +256,67 @@ namespace BDP.Core.Expressions
 
                 publishedDefs.Add(pair.Key);
             }
+        }
+
+        /// <summary>
+        /// 同步按钮已经打开的 Hediff 宿主绑定，但不负责创建宿主。
+        /// </summary>
+        private static void SyncExistingManualHediffs(
+            Pawn pawn,
+            ExpressionSnapshot snapshot,
+            HashSet<string> manualControlledDefs,
+            HashSet<string> publishedDefs)
+        {
+            foreach (string defName in manualControlledDefs)
+            {
+                HediffDef def = DefDatabase<HediffDef>.GetNamedSilentFail(defName);
+                if (!IsExpressionHostHediffDef(def))
+                {
+                    continue;
+                }
+
+                BdpExpressionHostHediff hostHediff =
+                    pawn.health.hediffSet.GetFirstHediffOfDef(def, false) as BdpExpressionHostHediff;
+                if (hostHediff == null)
+                {
+                    continue;
+                }
+
+                hostHediff.SyncExpressionResults(CollectActiveResultsForDef(snapshot, defName));
+                publishedDefs.Add(defName);
+            }
+        }
+
+        /// <summary>
+        /// 收集指定 HediffDef 当前仍有效的全部正式结果。
+        /// </summary>
+        private static List<FormalExpressionResult> CollectActiveResultsForDef(
+            ExpressionSnapshot snapshot,
+            string defName)
+        {
+            List<FormalExpressionResult> result = new List<FormalExpressionResult>();
+            if (snapshot?.Results == null || string.IsNullOrWhiteSpace(defName))
+            {
+                return result;
+            }
+
+            for (int i = 0; i < snapshot.Results.Count; i++)
+            {
+                FormalExpressionResult expressionResult = snapshot.Results[i];
+                if (expressionResult == null
+                    || expressionResult.OutputChannel != ExpressionOutputChannel.Hediff
+                    || !expressionResult.IsAvailable
+                    || (expressionResult.UseRequirementCheck != null
+                        && !expressionResult.UseRequirementCheck.Satisfied)
+                    || !string.Equals(expressionResult.HediffDefName, defName, StringComparison.OrdinalIgnoreCase))
+                {
+                    continue;
+                }
+
+                result.Add(expressionResult);
+            }
+
+            return result;
         }
 
         /// <summary>

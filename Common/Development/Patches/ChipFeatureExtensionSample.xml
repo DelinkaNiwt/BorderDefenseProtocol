@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <!-- 纯 XML Patch 向既有护盾语义追加第三方属性接收槽位。 -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/BDP.Core.Information.ChipFeatureDef[defName="BDP_Feature_Shield"]/Properties</xpath>
+    <value>
+      <li><Property>BDP_Property_ExperimentalReflectionRatio</Property><Order>440</Order></li>
+    </value>
+  </Operation>
+
+  <!-- 新语义示例：通过 XML Class + WorkerClass 挂接自定义实现路线。 -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef[defName="BDP_ChipFunction_ExactBodyPartRemoval"]/config/Features</xpath>
+    <value>
+      <li>
+        <Id>exact_experimental_barrier</Id>
+        <Feature>BDP_Feature_ExperimentalBarrier</Feature>
+        <Sources>
+          <li Class="BDP.Development.Information.Samples.CustomBarrierFeatureSourceConfig">
+            <Id>exact_experimental_barrier_source</Id>
+            <WorkerClass>BDP.Development.Information.Samples.CustomBarrierFeatureSourceWorker</WorkerClass>
+            <RuleDefName>BDP_Development_CustomBarrierRule_Experimental</RuleDefName>
+          </li>
+        </Sources>
+      </li>
+    </value>
+  </Operation>
+
+  <!-- 同义实现示例：同一个 Worker 也可为既有护盾语义提供扩展属性值。 -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef[defName="BDP_ChipFunction_ExactBodyPartRemoval"]/config/Features</xpath>
+    <value>
+      <li>
+        <Id>exact_custom_shield</Id>
+        <Feature>BDP_Feature_Shield</Feature>
+        <Sources>
+          <li Class="BDP.Development.Information.Samples.CustomBarrierFeatureSourceConfig">
+            <Id>exact_custom_shield_source</Id>
+            <WorkerClass>BDP.Development.Information.Samples.CustomBarrierFeatureSourceWorker</WorkerClass>
+            <RuleDefName>BDP_Development_CustomBarrierRule_Experimental</RuleDefName>
+          </li>
+        </Sources>
+      </li>
+    </value>
+  </Operation>
+</Patch>

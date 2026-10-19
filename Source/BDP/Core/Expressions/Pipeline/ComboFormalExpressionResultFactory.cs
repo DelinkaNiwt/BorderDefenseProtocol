@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BDP.Core.CombatLog;
 using BDP.Core.AttackExecution;
 using BDP.Core.CombatModel;
 using BDP.Core.Combos;
@@ -26,18 +27,18 @@ namespace BDP.Core.Expressions
                 return null;
             }
 
-            ExpressionResultKind resultKind = TranslateResultKind(entry.Kind);
+            ExpressionOutputChannel resultKind = TranslateOutputChannel(entry.EntryType);
             WeaponExpressionMode weaponMode = TranslateWeaponMode(entry.WeaponMode);
-            FormalExpressionResult mainSourceResult = resolution.MainSourceResult;
-            FormalExpressionResult subSourceResult = resolution.SubSourceResult;
-            // 基底：Main 侧完整 VerbProps / ResolvedVerbSpec。
+            FormalExpressionResult firstSourceResult = resolution.FirstSourceResult;
+            FormalExpressionResult secondSourceResult = resolution.SecondSourceResult;
+            // 基底：第一来源完整 VerbProps / ResolvedVerbSpec。
             // 条目侧是 VerbPropsOverlay（增量），类型不兼容 VerbProperties，
             // 无法被误当基底——从结构上排除了旧 bug。
-            VerbProperties fallbackVerbProps = (mainSourceResult != null ? mainSourceResult.VerbProps : null)
-                ?? (subSourceResult != null ? subSourceResult.VerbProps : null);
-            ResolvedVerbSpec fallbackVerbSpec = (mainSourceResult != null ? mainSourceResult.ResolvedVerbSpec : null)
-                ?? (subSourceResult != null ? subSourceResult.ResolvedVerbSpec : null);
-            ResolvedVerbSpec resolvedVerbSpec = resultKind == ExpressionResultKind.Verb
+            VerbProperties fallbackVerbProps = (firstSourceResult != null ? firstSourceResult.VerbProps : null)
+                ?? (secondSourceResult != null ? secondSourceResult.VerbProps : null);
+            ResolvedVerbSpec fallbackVerbSpec = (firstSourceResult != null ? firstSourceResult.ResolvedVerbSpec : null)
+                ?? (secondSourceResult != null ? secondSourceResult.ResolvedVerbSpec : null);
+            ResolvedVerbSpec resolvedVerbSpec = resultKind == ExpressionOutputChannel.Verb
                 ? ResolvedVerbSpecFactory.ResolveComboSpec(
                     fallbackVerbProps,
                     fallbackVerbSpec,
@@ -50,8 +51,13 @@ namespace BDP.Core.Expressions
 
             return new FormalExpressionResult
             {
-                Id = BuildComboResultId(comboReadResult.ComboDef.defName, entry.Id),
-                ResultKind = resultKind,
+                Id = BuildComboResultId(
+                    comboReadResult.ComboDef.defName,
+                    entry.Id,
+                    resolution.FirstSourceMaterial,
+                    resolution.SecondSourceMaterial),
+                SourceEntryId = entry.Id,
+                OutputChannel = resultKind,
                 WeaponMode = weaponMode,
                 OriginKind = ExpressionOriginKind.Composite,
                 CompositeKind = CompositeExpressionKind.Combo,
@@ -65,22 +71,32 @@ namespace BDP.Core.Expressions
                 VisualPresetDefName = entry.VisualPresetDefName,
                 VisualGraphicOverrideDefName = entry.VisualGraphicOverrideDefName,
                 CompositeVisualPresetDefName = entry.CompositeVisualPresetDefName,
+                ComboAttackVisualPresetDefName = entry.ComboAttackVisualPresetDefName,
                 ForceSuppressHostEquipment = entry.ForceSuppressHostEquipment,
                 VisualPriority = entry.VisualPriority,
-                ManualEntryAggregationKey = BuildComboAggregationKey(comboReadResult.ComboDef.defName, entry.Id),
+                ManualEntryAggregationKey = BuildComboAggregationKey(
+                    comboReadResult.ComboDef.defName,
+                    entry.Id,
+                    resolution.FirstSourceMaterial,
+                    resolution.SecondSourceMaterial),
                 RoleKey = entry.RoleKey,
                 VerbAttackRole = entry.VerbAttackRole,
                 Tags = entry.Tags != null ? new List<string>(entry.Tags) : new List<string>(),
+                DeclaredPermissionKeys = entry.DeclaredPermissionKeys != null ? new List<string>(entry.DeclaredPermissionKeys) : new List<string>(),
                 ExecutionSlotKey = BuildComboExecutionSlotKey(entry, weaponMode),
                 IsSecondaryAttack = entry.VerbAttackRole == VerbAttackRole.Secondary,
                 Trion = resolvedTrion,
                 IsAvailable = true,
                 UseRequirementCheck = resolution.UseRequirementCheck,
                 CanProject = true,
-                SemanticContext = BuildComboSemanticContext(comboReadResult.ComboDef, entry),
+                SemanticContext = BuildComboSemanticContext(
+                    comboReadResult.ComboDef,
+                    entry,
+                    resolution.FirstSourceMaterial,
+                    resolution.SecondSourceMaterial),
                 ModeKey = entry.ModeKey,
                 ExecutionStyle = ResolveComboExecutionStyle(resolution),
-                VerbProps = resultKind == ExpressionResultKind.Verb
+                VerbProps = resultKind == ExpressionOutputChannel.Verb
                     ? ResolvedVerbSpecFactory.CreateSurfaceVerbProps(resolvedVerbSpec)
                     : null,
                 ResolvedVerbSpec = resolvedVerbSpec,
@@ -91,30 +107,60 @@ namespace BDP.Core.Expressions
                 AbilityDefName = entry.AbilityDefName,
                 HediffDefName = entry.HediffDefName,
                 HediffApplyModeKey = entry.HediffApplyModeKey,
-                PassiveKey = entry.PassiveKey,
+                HediffControlMode = entry.HediffControlMode,
+                PassiveIdentityKey = entry.PassiveIdentityKey,
                 ExposedData = TranslateComboExposedData(entry.ExposedData),
-                RangedModules = entry.RangedModules != null ? CloneRangedModules(entry.RangedModules) : new List<RangedModuleMountConfig>()
+                RangedModules = entry.RangedModules != null ? CloneRangedModules(entry.RangedModules) : new List<RangedModuleMountConfig>(),
+                HitPartPolicy = CloneHitPartPolicy(entry.HitPartPolicy)
             };
         }
 
         /// <summary>
         /// 为组合技结果构建稳定结果标识。
         /// </summary>
-        private static string BuildComboResultId(string comboDefName, string entryId)
+        private static string BuildComboResultId(
+            string comboDefName,
+            string entryId,
+            ExpressionSourceMaterial firstSourceMaterial,
+            ExpressionSourceMaterial secondSourceMaterial)
         {
             string safeComboDefName = !string.IsNullOrWhiteSpace(comboDefName) ? comboDefName : "combo";
             string safeEntryId = !string.IsNullOrWhiteSpace(entryId) ? entryId : "entry";
-            return "combo:" + safeComboDefName + ":" + safeEntryId;
+            return "combo:" + safeComboDefName + ":" + safeEntryId
+                + ":" + BuildSourceIdentity(firstSourceMaterial)
+                + ":" + BuildSourceIdentity(secondSourceMaterial);
         }
 
         /// <summary>
         /// 为组合技入口构建稳定的手动聚合键。
         /// </summary>
-        private static string BuildComboAggregationKey(string comboDefName, string entryId)
+        private static string BuildComboAggregationKey(
+            string comboDefName,
+            string entryId,
+            ExpressionSourceMaterial firstSourceMaterial,
+            ExpressionSourceMaterial secondSourceMaterial)
         {
             string safeComboDefName = !string.IsNullOrWhiteSpace(comboDefName) ? comboDefName : "combo";
             string safeEntryId = !string.IsNullOrWhiteSpace(entryId) ? entryId : "entry";
-            return "combo:" + safeComboDefName + ":" + safeEntryId;
+            return "combo:" + safeComboDefName + ":" + safeEntryId
+                + ":" + BuildSourceIdentity(firstSourceMaterial)
+                + ":" + BuildSourceIdentity(secondSourceMaterial);
+        }
+
+        /// <summary>
+        /// 生成来源对的稳定实例身份，避免同一 ComboDef/条目覆盖不同候选对。
+        /// </summary>
+        private static string BuildSourceIdentity(ExpressionSourceMaterial material)
+        {
+            string chipId = material?.SourceChip != null ? material.SourceChip.ThingID : null;
+            if (!string.IsNullOrWhiteSpace(chipId))
+            {
+                return chipId;
+            }
+
+            return material != null
+                ? material.Side + "-" + material.SlotIndex
+                : "none";
         }
 
         /// <summary>
@@ -125,7 +171,7 @@ namespace BDP.Core.Expressions
             ChipExpressionEntryContract entry,
             WeaponExpressionMode weaponMode)
         {
-            if (entry == null || TranslateResultKind(entry.Kind) != ExpressionResultKind.Verb)
+            if (entry == null || TranslateOutputChannel(entry.EntryType) != ExpressionOutputChannel.Verb)
             {
                 return null;
             }
@@ -138,15 +184,31 @@ namespace BDP.Core.Expressions
         /// <summary>
         /// 为组合技结果构建最小语义上下文。
         /// </summary>
-        private static ISemanticContext BuildComboSemanticContext(ComboDef comboDef, ChipExpressionEntryContract entry)
+        private static ISemanticContext BuildComboSemanticContext(
+            ComboDef comboDef,
+            ChipExpressionEntryContract entry,
+            ExpressionSourceMaterial firstSourceMaterial,
+            ExpressionSourceMaterial secondSourceMaterial)
         {
             return new SemanticContext
             {
-                Id = BuildComboResultId(comboDef != null ? comboDef.defName : null, entry != null ? entry.Id : null),
+                Id = BuildComboResultId(
+                    comboDef != null ? comboDef.defName : null,
+                    entry != null ? entry.Id : null,
+                    firstSourceMaterial,
+                    secondSourceMaterial),
                 DisplayLabel = !string.IsNullOrWhiteSpace(entry?.DisplayLabel)
                     ? entry.DisplayLabel
                     : comboDef != null ? comboDef.label : null,
-                SourceKind = entry != null ? entry.SemanticSourceKind : SemanticSourceKind.Unknown
+                SourceKind = entry != null ? entry.SemanticSourceKind : SemanticSourceKind.Unknown,
+                MutableExtraData = new Dictionary<string, string>
+                {
+                    [BattleLogEntryFactoryAccess.SourceTypeKey] = typeof(ComboDef).FullName,
+                    [BattleLogEntryFactoryAccess.SourceDefKey] = comboDef?.defName,
+                    [BattleLogEntryFactoryAccess.SourceEntryKey] = entry?.Id,
+                    [BattleLogEntryFactoryAccess.SourceVariantKey] = firstSourceMaterial?.SourceVariantKey == secondSourceMaterial?.SourceVariantKey
+                        ? firstSourceMaterial?.SourceVariantKey : null
+                }
             };
         }
 
@@ -188,13 +250,13 @@ namespace BDP.Core.Expressions
         private static AttackExecutionStyle ResolveComboExecutionStyle(ComboFormalExpressionResolution resolution)
         {
             ChipExpressionEntryContract entry = resolution != null ? resolution.EntryContract : null;
-            FormalExpressionResult mainSourceResult = resolution != null ? resolution.MainSourceResult : null;
-            FormalExpressionResult subSourceResult = resolution != null ? resolution.SubSourceResult : null;
+            FormalExpressionResult firstSourceResult = resolution != null ? resolution.FirstSourceResult : null;
+            FormalExpressionResult secondSourceResult = resolution != null ? resolution.SecondSourceResult : null;
             ComboResolvedExecution resolvedExecution = resolution != null ? resolution.ResolvedExecution : null;
 
-            // 基底：Main > Sub > 条目
-            AttackExecutionStyle baseStyle = (mainSourceResult?.ExecutionStyle?.Clone())
-                ?? (subSourceResult?.ExecutionStyle?.Clone())
+            // 基底：第一来源 > 第二来源 > 条目
+            AttackExecutionStyle baseStyle = (firstSourceResult?.ExecutionStyle?.Clone())
+                ?? (secondSourceResult?.ExecutionStyle?.Clone())
                 ?? (entry?.ExecutionStyle?.Clone());
 
             if (baseStyle != null)
@@ -294,23 +356,23 @@ namespace BDP.Core.Expressions
                 return null;
             }
 
-            ExpressionSourceTrionConfig mainTrion = resolution.MainSourceMaterial != null
-                ? resolution.MainSourceMaterial.Trion
+            ExpressionSourceTrionConfig firstTrion = resolution.FirstSourceMaterial != null
+                ? resolution.FirstSourceMaterial.Trion
                 : null;
-            ExpressionSourceTrionConfig subTrion = resolution.SubSourceMaterial != null
-                ? resolution.SubSourceMaterial.Trion
+            ExpressionSourceTrionConfig secondTrion = resolution.SecondSourceMaterial != null
+                ? resolution.SecondSourceMaterial.Trion
                 : null;
 
             ComboResolvedFieldValue<float> use = ComboSourceFieldResolver.ResolveFloat(
                 null,
                 trionResolve.UseCostResolve,
-                mainTrion != null ? mainTrion.UseCost : 0f,
-                subTrion != null ? subTrion.UseCost : 0f);
+                firstTrion != null ? firstTrion.UseCost : 0f,
+                secondTrion != null ? secondTrion.UseCost : 0f);
             ComboResolvedFieldValue<float> minimum = ComboSourceFieldResolver.ResolveFloat(
                 null,
                 trionResolve.MinimumRequiredResolve,
-                mainTrion != null ? mainTrion.MinimumRequired : 0f,
-                subTrion != null ? subTrion.MinimumRequired : 0f);
+                firstTrion != null ? firstTrion.MinimumRequired : 0f,
+                secondTrion != null ? secondTrion.MinimumRequired : 0f);
 
             if (!use.HasResolvedValue
                 && !minimum.HasResolvedValue)
@@ -378,21 +440,21 @@ namespace BDP.Core.Expressions
         /// <summary>
         /// 把表达条目种类翻译成正式结果种类。
         /// </summary>
-        private static ExpressionResultKind TranslateResultKind(ChipExpressionEntryKind kind)
+        private static ExpressionOutputChannel TranslateOutputChannel(ChipExpressionEntryType entryType)
         {
-            switch (kind)
+            switch (entryType)
             {
-                case ChipExpressionEntryKind.PrimaryVerb:
-                case ChipExpressionEntryKind.SecondaryVerb:
-                    return ExpressionResultKind.Verb;
-                case ChipExpressionEntryKind.Ability:
-                    return ExpressionResultKind.Ability;
-                case ChipExpressionEntryKind.Hediff:
-                    return ExpressionResultKind.Hediff;
-                case ChipExpressionEntryKind.Passive:
-                    return ExpressionResultKind.Passive;
+                case ChipExpressionEntryType.PrimaryVerb:
+                case ChipExpressionEntryType.SecondaryVerb:
+                    return ExpressionOutputChannel.Verb;
+                case ChipExpressionEntryType.Ability:
+                    return ExpressionOutputChannel.Ability;
+                case ChipExpressionEntryType.Hediff:
+                    return ExpressionOutputChannel.Hediff;
+                case ChipExpressionEntryType.Passive:
+                    return ExpressionOutputChannel.Passive;
                 default:
-                    return ExpressionResultKind.Verb;
+                    return ExpressionOutputChannel.Verb;
             }
         }
 
@@ -488,6 +550,14 @@ namespace BDP.Core.Expressions
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// 复制组合技条目的可选命中部位策略。
+        /// </summary>
+        private static HitPartPolicyConfig CloneHitPartPolicy(HitPartPolicyConfig policy)
+        {
+            return policy != null ? policy.Clone() : null;
         }
     }
 }

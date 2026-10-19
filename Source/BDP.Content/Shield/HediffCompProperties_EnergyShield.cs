@@ -5,10 +5,29 @@ namespace BDP.Content.Shield
 {
     /// <summary>
     /// 正式能量护盾的 HediffComp 配置。
-    /// 这里只承载旧版护盾实际使用的业务参数，不扩展主模组协议。
+    /// 防护判定与共享耐久参数均由正式内容配置，不向核心层写入业务。
     /// </summary>
     public sealed class HediffCompProperties_EnergyShield : HediffCompProperties
     {
+        /// <summary>同人物同组共享耐久和恢复计时；姿态变更必须保持组键一致。</summary>
+        public string durabilityGroupKey;
+        /// <summary>可选的盾组状态卡标题语言键；同组各姿态使用相同键，未配置时使用定义名称。</summary>
+        public string statusCardLabelKey;
+        /// <summary>每个有效来源贡献的最大耐久。</summary>
+        public float maximumDurability = 120f;
+        /// <summary>是否按 Severity（严重度）中的有效来源数量相加上限。</summary>
+        public bool aggregateDurability;
+        /// <summary>成功格挡的独立耐久损耗倍率，不与能量扣费倍率耦合。</summary>
+        public float durabilityLossMultiplier = 1f;
+        /// <summary>破盾恢复时长，单位游戏刻；默认 10 秒。</summary>
+        public int recoveryTicks = 600;
+        /// <summary>恢复量是否按上限比例解释；默认使用每秒固定点数。</summary>
+        public bool naturalRecoveryUsePercentage;
+        /// <summary>每游戏秒恢复量；固定模式为点数，百分比模式中 0.1 表示 10%，零关闭恢复。</summary>
+        public float naturalRecoveryPerSecond = 24f;
+        /// <summary>最后实际扣耐力到开始自然恢复的等待时长，单位游戏刻。</summary>
+        public int naturalRecoveryDelayTicks;
+
         /// <summary>
         /// 单枚护盾是否检查攻击来源角度。
         /// </summary>
@@ -141,6 +160,8 @@ namespace BDP.Content.Shield
         {
             DamageDef damageDef = damageInfo.Def;
             return damageDef != null
+                // 原版和其他模组声明的穿盾伤害先行退出，不扣能量或盾耐久。
+                && !damageDef.ignoreShields
                 && (damageDef.isRanged
                     || damageDef.isExplosive
                     || (allowMeleeDamage && EnergyShieldBlockPolicy.IsMeleeDamage(damageInfo)));

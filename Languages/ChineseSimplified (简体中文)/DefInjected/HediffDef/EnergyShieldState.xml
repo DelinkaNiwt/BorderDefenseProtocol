@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <!-- 持久记录隐藏，标签仍提供语言包。 -->
+  <BDP_Hediff_EnergyShieldState.label>护盾状态</BDP_Hediff_EnergyShieldState.label>
+  <!-- 与状态定义对应的完整描述，隐藏状态也需满足原版配置检查。 -->
+  <BDP_Hediff_EnergyShieldState.description>记录人物护盾组的剩余耐久与恢复时间。关闭芯片后保留记录，恢复计时继续。</BDP_Hediff_EnergyShieldState.description>
+  <!-- 常驻表示芯片启用后维持，不表示破损期间仍有防护。 -->
+  <BDP_Hediff_EnergyShield_Auto.description>常驻型自动能量护盾，激活期间提供全方位防护，不随激活数量升级。成功抵挡消耗能量和耐久；破盾后暂时停止防护，恢复满耐久后继续展开。</BDP_Hediff_EnergyShield_Auto.description>
+</LanguageData>

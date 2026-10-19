@@ -11,6 +11,9 @@ namespace BDP.Core.AttackExecution
     /// </summary>
     public sealed class PreviewRecord
     {
+        /// <summary>本轮预览的只读输入事实；没有点击、确认或取消推进语义。</summary>
+        public TargetingInputFrame InputFrame { get; internal set; } = new TargetingInputFrame();
+
         /// <summary>
         /// 当前记录绑定的统一攻击上下文。
         /// 预览阶段只从这里读取目标交互推进状态，不再挂独立主干字段。

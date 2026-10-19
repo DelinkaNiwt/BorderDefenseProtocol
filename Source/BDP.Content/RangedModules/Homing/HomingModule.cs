@@ -1,9 +1,11 @@
 using BDP.Core.AttackExecution;
 using BDP.Core.AttackExecution.RangedModules.Runtime;
 using BDP.Core.AttackExecution.RangedProtocol.ProjectileInit;
+using BDP.Core.Projectiles;
 using BDP.Core.Projectiles.RangedFlightProtocol.Arrival;
 using BDP.Core.Projectiles.RangedFlightProtocol.Hit;
 using BDP.Core.Projectiles.RangedFlightProtocol.Model;
+using BDP.Core.Projectiles.RangedFlightProtocol.Projection;
 using BDP.Support.Diagnostics;
 using UnityEngine;
 using Verse;
@@ -21,7 +23,7 @@ namespace BDP.Content.RangedModules.Homing
     /// 3. Hit（命中判定） — 判定是否命中锁定目标，非命中时强制落空。
     /// 4. 内部驱动飞行路径持续更新。
     ///
-    /// 核心状态机：Pursuing → Released → HitCheckPending / FlyAway → Finished
+    /// 核心状态机：Pursuing → HitCheckPending / Relocking / FlyAway → Finished
     /// </remarks>
     public sealed class HomingModule :
         IRangedAttackModuleRuntime,
@@ -67,10 +69,14 @@ namespace BDP.Content.RangedModules.Homing
 
             state.FrozenConfig = frozenConfig;
             state.LockedTarget = lockedTarget;
+            state.HasTakenFlightControl = false;
             state.Phase = HomingPhase.Pursuing;
             state.RelocksUsed = 0;
             state.HasLastObservedTargetPos = TryResolveTargetPosition(lockedTarget, out Vector3 targetPos);
             state.LastObservedTargetPos = state.HasLastObservedTargetPos ? targetPos : Vector3.zero;
+            state.LastTargetObservationTick = GetSafeCurrentTick();
+            state.HasExpectedTargetPosition = state.HasLastObservedTargetPos;
+            state.ExpectedTargetPosition = state.HasExpectedTargetPosition ? targetPos : Vector3.zero;
             state.HasLastDistanceSample = TryResolveInitialDistance(context.Pawn, lockedTarget, out float distanceToTarget);
             state.LastDistanceToTarget = state.HasLastDistanceSample ? distanceToTarget : 0f;
             state.Seed = ResolveSeed(context, lockedTarget);
@@ -101,7 +107,7 @@ namespace BDP.Content.RangedModules.Homing
 
         void IArrivalStageModule.Contribute(in ArrivalStageContext context, ArrivalContribution contribution)
         {
-            if (contribution == null)
+            if (contribution == null || context.PreviousExclusiveFlightControl)
             {
                 return;
             }
@@ -137,6 +143,26 @@ namespace BDP.Content.RangedModules.Homing
                 : Vector3.forward;
             HomingConfig frozenConfig = state.FrozenConfig ?? new HomingConfig();
 
+            if (context.InitialExclusiveFlightControl && !state.HasTakenFlightControl)
+            {
+                state.HasTakenFlightControl = true;
+                if (TryResolveTargetPosition(state.LockedTarget, out Vector3 handoffTarget))
+                {
+                    state.HasLastObservedTargetPos = true;
+                    state.LastObservedTargetPos = handoffTarget;
+                    state.LastTargetObservationTick = GetSafeCurrentTick();
+                    SetExpectedTargetPosition(state, handoffTarget);
+                    state.HasLastDistanceSample = true;
+                    state.LastDistanceToTarget = HomingPathBuilder.ComputeDistanceToTarget(projectilePos, handoffTarget);
+                    ClearReleaseState(state);
+                    float ratio = !state.GroundAcquireDone
+                        ? frozenConfig.GroundTargetInitialSegmentTriggerRatio : frozenConfig.InitialSegmentTriggerRatio;
+                    ContinueTracking(contribution, state.LockedTarget,
+                        ProjectileFlightPathUtility.CreateLinear(projectilePos, Vector3.Lerp(projectilePos, handoffTarget, Mathf.Clamp01(ratio))));
+                    return;
+                }
+            }
+
             if (frozenConfig.AllowGroundTarget && !state.GroundAcquireDone
                 && state.LockedTarget.IsValid && !state.LockedTarget.HasThing)
             {
@@ -155,6 +181,8 @@ namespace BDP.Content.RangedModules.Homing
                     {
                         state.HasLastObservedTargetPos = true;
                         state.LastObservedTargetPos = acquiredPosition;
+                        state.LastTargetObservationTick = GetSafeCurrentTick();
+                        SetExpectedTargetPosition(state, acquiredPosition);
                     }
 
                     state.HasLastDistanceSample = false;
@@ -179,6 +207,7 @@ namespace BDP.Content.RangedModules.Homing
                     state.LastDistanceToTarget,
                     float.NaN,
                     float.NaN,
+                    float.NaN,
                     false,
                     float.NaN,
                     float.NaN,
@@ -192,6 +221,16 @@ namespace BDP.Content.RangedModules.Homing
             Vector3 targetStepOffset = state.HasLastObservedTargetPos
                 ? targetCurrentPos - state.LastObservedTargetPos
                 : Vector3.zero;
+            int currentTick = GetSafeCurrentTick();
+            float targetObservationTicks = ResolveTargetObservationTicks(state, currentTick);
+            float nextSegmentTicks = HomingPathBuilder.ResolvePredictionTicks(
+                distanceToTarget,
+                context.Projectile is BdpProjectile bdpProjectile
+                    ? bdpProjectile.SpeedTilesPerTick
+                    : context.Projectile != null && context.Projectile.def != null && context.Projectile.def.projectile != null
+                    ? context.Projectile.def.projectile.SpeedTilesPerTick
+                    : 1f);
+            float targetPredictionResidual = ResolveTargetPredictionResidual(state, targetCurrentPos);
             bool hadLastDistanceSample = state.HasLastDistanceSample;
             float previousDistanceToTarget = state.LastDistanceToTarget;
             HomingPathBuilder.ResolveReleaseDistances(
@@ -203,6 +242,10 @@ namespace BDP.Content.RangedModules.Homing
 
             state.HasLastObservedTargetPos = true;
             state.LastObservedTargetPos = targetCurrentPos;
+            if (currentTick >= 0)
+            {
+                state.LastTargetObservationTick = currentTick;
+            }
             state.HasLastDistanceSample = true;
             state.LastDistanceToTarget = distanceToTarget;
 
@@ -211,11 +254,17 @@ namespace BDP.Content.RangedModules.Homing
                 previousDistanceToTarget,
                 distanceToTarget,
                 turnAngleToTarget,
+                targetPredictionResidual,
+                frozenConfig);
+            bool closingHitWindow = IsClosingHitWindowCandidate(
+                distanceToTarget,
+                hadLastDistanceSample,
+                previousDistanceToTarget,
                 frozenConfig);
 
             if (phaseBefore == HomingPhase.Released)
             {
-                if (!targetLost && distanceToTarget <= frozenConfig.HitWindow)
+                if (closingHitWindow)
                 {
                     ClearReleaseState(state);
                     state.Phase = HomingPhase.HitCheckPending;
@@ -224,7 +273,7 @@ namespace BDP.Content.RangedModules.Homing
                         state,
                         phaseBefore,
                         HomingPhase.HitCheckPending,
-                        "released_enter_hit_check",
+                        targetLost ? "released_enter_hit_check_closing" : "released_enter_hit_check",
                         projectilePos,
                         projectileForward,
                         targetCurrentPos,
@@ -233,7 +282,8 @@ namespace BDP.Content.RangedModules.Homing
                         previousDistanceToTarget,
                         distanceToTarget,
                         turnAngleToTarget,
-                        false,
+                        targetPredictionResidual,
+                        targetLost,
                         softReleaseDistance,
                         hardReleaseDistance,
                         releaseExpectedImpactPoint);
@@ -260,6 +310,7 @@ namespace BDP.Content.RangedModules.Homing
                     previousDistanceToTarget,
                     distanceToTarget,
                     turnAngleToTarget,
+                    targetPredictionResidual,
                     false,
                     softReleaseDistance,
                     hardReleaseDistance,
@@ -278,6 +329,8 @@ namespace BDP.Content.RangedModules.Homing
                     distanceToTarget,
                     turnAngleToTarget,
                     targetLost,
+                    targetObservationTicks,
+                    nextSegmentTicks,
                     softReleaseDistance,
                     hardReleaseDistance,
                     releaseExpectedImpactPoint);
@@ -305,6 +358,7 @@ namespace BDP.Content.RangedModules.Homing
                     previousDistanceToTarget,
                     distanceToTarget,
                     turnAngleToTarget,
+                    targetPredictionResidual,
                     true,
                     softReleaseDistance,
                     hardReleaseDistance,
@@ -323,13 +377,15 @@ namespace BDP.Content.RangedModules.Homing
                     distanceToTarget,
                     turnAngleToTarget,
                     true,
+                    targetObservationTicks,
+                    nextSegmentTicks,
                     softReleaseDistance,
                     hardReleaseDistance,
                     releaseExpectedImpactPoint);
                 return;
             }
 
-            if (distanceToTarget <= frozenConfig.HitWindow)
+            if (closingHitWindow)
             {
                 ClearReleaseState(state);
                 state.Phase = HomingPhase.HitCheckPending;
@@ -338,7 +394,7 @@ namespace BDP.Content.RangedModules.Homing
                     state,
                     phaseBefore,
                     HomingPhase.HitCheckPending,
-                    "enter_hit_check",
+                    targetLost ? "enter_hit_check_closing" : "enter_hit_check",
                     projectilePos,
                     projectileForward,
                     targetCurrentPos,
@@ -347,7 +403,8 @@ namespace BDP.Content.RangedModules.Homing
                     previousDistanceToTarget,
                     distanceToTarget,
                     turnAngleToTarget,
-                    false,
+                    targetPredictionResidual,
+                    targetLost,
                     softReleaseDistance,
                     hardReleaseDistance,
                     InvalidVector());
@@ -358,44 +415,40 @@ namespace BDP.Content.RangedModules.Homing
 
             if (distanceToTarget <= hardReleaseDistance)
             {
-                int releasePathSeed = Gen.HashCombineInt(
+                int terminalPathSeed = Gen.HashCombineInt(
                     state.Seed + (context.EmitIndex * 193) + state.RelocksUsed,
                     131);
-                float releaseLeadRatio = ResolveReleaseLeadRatio(phaseBefore, frozenConfig);
-                ProjectileFlightPathSnapshot releaseFlightPathSnapshot = HomingPathBuilder.BuildReleasePath(
+                ProjectileFlightPathSnapshot terminalFlightPathSnapshot = HomingPathBuilder.BuildTerminalApproachPath(
                     projectilePos,
                     projectileForward,
                     targetCurrentPos,
-                    targetStepOffset,
-                    releaseLeadRatio,
-                    frozenConfig,
-                    releasePathSeed,
-                    out releaseExpectedImpactPoint);
+                    frozenConfig);
 
-                state.Phase = HomingPhase.Released;
-                state.HasReleaseExpectedImpactPoint = true;
-                state.ReleaseExpectedImpactPoint = releaseExpectedImpactPoint;
+                ClearReleaseState(state);
+                state.Phase = HomingPhase.Pursuing;
                 LogPathBuild(
                     in context,
                     state,
-                    "release",
+                    "terminal_approach",
                     projectilePos,
                     projectileForward,
                     targetCurrentPos,
                     targetStepOffset,
-                    releaseLeadRatio,
                     0f,
-                    0f,
-                    0f,
-                    0f,
-                    releasePathSeed,
-                    releaseFlightPathSnapshot);
+                    frozenConfig.PursuitMinTurnAngle,
+                    frozenConfig.MaxTurnAngleWhenEvading,
+                    frozenConfig.PursuitTurnResponsiveness,
+                    1f,
+                    terminalPathSeed,
+                    terminalFlightPathSnapshot,
+                    targetObservationTicks,
+                    nextSegmentTicks);
                 LogArrivalDecision(
                     in context,
                     state,
                     phaseBefore,
-                    HomingPhase.Released,
-                    "enter_release",
+                    HomingPhase.Pursuing,
+                    "terminal_approach",
                     projectilePos,
                     projectileForward,
                     targetCurrentPos,
@@ -404,11 +457,13 @@ namespace BDP.Content.RangedModules.Homing
                     previousDistanceToTarget,
                     distanceToTarget,
                     turnAngleToTarget,
+                    targetPredictionResidual,
                     false,
                     softReleaseDistance,
                     hardReleaseDistance,
-                    releaseExpectedImpactPoint);
-                ContinueTracking(contribution, state.LockedTarget, releaseFlightPathSnapshot);
+                    InvalidVector());
+                SetExpectedTargetPosition(state, targetCurrentPos);
+                ContinueTracking(contribution, state.LockedTarget, terminalFlightPathSnapshot);
                 return;
             }
 
@@ -425,8 +480,11 @@ namespace BDP.Content.RangedModules.Homing
                 frozenConfig,
                 pursuitPathSeed,
                 turnScale,
+                targetObservationTicks,
+                nextSegmentTicks,
                 out float effectiveMaxTurnAngle,
-                out float effectiveTurnResponsiveness);
+                out float effectiveTurnResponsiveness,
+                out Vector3 predictedTargetPos);
 
             ClearReleaseState(state);
             state.Phase = HomingPhase.Pursuing;
@@ -444,7 +502,9 @@ namespace BDP.Content.RangedModules.Homing
                 effectiveTurnResponsiveness,
                 turnScale,
                 pursuitPathSeed,
-                nextFlightPathSnapshot);
+                nextFlightPathSnapshot,
+                targetObservationTicks,
+                nextSegmentTicks);
             LogArrivalDecision(
                 in context,
                 state,
@@ -459,10 +519,12 @@ namespace BDP.Content.RangedModules.Homing
                 previousDistanceToTarget,
                 distanceToTarget,
                 turnAngleToTarget,
+                targetPredictionResidual,
                 false,
                 softReleaseDistance,
                 hardReleaseDistance,
                 InvalidVector());
+            SetExpectedTargetPosition(state, predictedTargetPos);
             ContinueTracking(contribution, state.LockedTarget, nextFlightPathSnapshot);
         }
 
@@ -603,6 +665,7 @@ namespace BDP.Content.RangedModules.Homing
             float previousDistanceToTarget,
             float distanceToTarget,
             float turnAngleToTarget,
+            float targetPredictionResidual,
             bool targetLost,
             float softReleaseDistance,
             float hardReleaseDistance,
@@ -630,6 +693,11 @@ namespace BDP.Content.RangedModules.Homing
                 + ", distanceToTarget=" + DescribeFloat(distanceToTarget)
                 + ", distanceGrowth=" + DescribeFloat(distanceGrowth)
                 + ", turnAngleToTarget=" + DescribeFloat(turnAngleToTarget)
+                + ", targetPredictionResidual=" + DescribeFloat(targetPredictionResidual)
+                + ", expectedTargetPosition=" + DescribeVectorOrInvalid(
+                    state != null && state.HasExpectedTargetPosition
+                        ? state.ExpectedTargetPosition
+                        : InvalidVector())
                 + ", targetLost=" + targetLost
                 + ", softReleaseDistance=" + DescribeFloat(softReleaseDistance)
                 + ", hardReleaseDistance=" + DescribeFloat(hardReleaseDistance)
@@ -650,12 +718,16 @@ namespace BDP.Content.RangedModules.Homing
             float turnResponsiveness,
             float turnScale,
             int pathSeed,
-            ProjectileFlightPathSnapshot snapshot)
+            ProjectileFlightPathSnapshot snapshot,
+            float observationTicks = 1f,
+            float nextSegmentTicks = 1f)
         {
             Vector3 predictedTargetPos = HomingPathBuilder.ComputePredictedTargetPositionWithLead(
                 targetCurrentPos,
                 targetStepOffset,
                 leadRatio,
+                observationTicks,
+                nextSegmentTicks,
                 state != null ? state.FrozenConfig : null,
                 pathSeed);
             Vector3 desiredForward = (predictedTargetPos - projectilePos.Yto0()).Yto0();
@@ -697,6 +769,8 @@ namespace BDP.Content.RangedModules.Homing
                 + ", maxTurnAngle=" + DescribeFloat(maxTurnAngle)
                 + ", turnResponsiveness=" + DescribeFloat(turnResponsiveness)
                 + ", turnScale=" + DescribeFloat(turnScale)
+                + ", observationTicks=" + DescribeFloat(observationTicks)
+                + ", nextSegmentTicks=" + DescribeFloat(nextSegmentTicks)
                 + ", limitedForward=" + limitedForward
                 + ", segmentStart=" + DescribeFlightPoint(snapshot != null ? snapshot.Start : Vector3.zero)
                 + ", controlA=" + DescribeFlightPoint(snapshot != null ? snapshot.ControlA : Vector3.zero)
@@ -774,14 +848,68 @@ namespace BDP.Content.RangedModules.Homing
             return new Vector3(float.NaN, float.NaN, float.NaN);
         }
 
+        /// <summary>安全读取当前游戏 tick（游戏刻），未就绪时返回 -1。</summary>
+        private static int GetSafeCurrentTick()
+        {
+            try
+            {
+                return Find.TickManager != null ? Find.TickManager.TicksGame : -1;
+            }
+            catch
+            {
+                return -1;
+            }
+        }
+
+        /// <summary>计算两次目标位置观测之间的游戏 tick（游戏刻）间隔。</summary>
+        private static float ResolveTargetObservationTicks(HomingState state, int currentTick)
+        {
+            if (state == null || currentTick < 0 || state.LastTargetObservationTick < 0)
+            {
+                return 1f;
+            }
+
+            return Mathf.Max(1f, currentTick - state.LastTargetObservationTick);
+        }
+
+        /// <summary>判断目标是否在命中窗口内且距离仍未持续增大。</summary>
+        private static bool IsClosingHitWindowCandidate(
+            float distanceToTarget,
+            bool hadLastDistanceSample,
+            float previousDistanceToTarget,
+            HomingConfig config)
+        {
+            HomingConfig safeConfig = config ?? new HomingConfig();
+            if (float.IsNaN(distanceToTarget) || distanceToTarget > safeConfig.HitWindow)
+            {
+                return false;
+            }
+
+            if (!hadLastDistanceSample)
+            {
+                return true;
+            }
+
+            float allowedGrowth = Mathf.Max(0f, safeConfig.LossDistanceGrowthTolerance);
+            return distanceToTarget <= previousDistanceToTarget + allowedGrowth;
+        }
+
         private static bool IsTargetLost(
             bool hadLastDistanceSample,
             float previousDistanceToTarget,
             float currentDistanceToTarget,
             float turnAngleToTarget,
+            float targetPredictionResidual,
             HomingConfig config)
         {
-            float safeLossBehindAngle = Mathf.Max(90f, config.LossBehindAngle);
+            HomingConfig safeConfig = config ?? new HomingConfig();
+            float residualTolerance = Mathf.Max(0.05f, safeConfig.LossDistanceGrowthTolerance);
+            if (float.IsNaN(targetPredictionResidual) || targetPredictionResidual <= residualTolerance)
+            {
+                return false;
+            }
+
+            float safeLossBehindAngle = Mathf.Max(90f, safeConfig.LossBehindAngle);
             if (turnAngleToTarget >= safeLossBehindAngle)
             {
                 return true;
@@ -793,7 +921,7 @@ namespace BDP.Content.RangedModules.Homing
             }
 
             float distanceGrowth = currentDistanceToTarget - previousDistanceToTarget;
-            return distanceGrowth > Mathf.Max(0f, config.LossDistanceGrowthTolerance)
+            return distanceGrowth > Mathf.Max(0f, safeConfig.LossDistanceGrowthTolerance)
                 && turnAngleToTarget >= 90f;
         }
 
@@ -828,6 +956,7 @@ namespace BDP.Content.RangedModules.Homing
             {
                 HomingConfig frozenConfig = state.FrozenConfig ?? new HomingConfig();
                 ClearReleaseState(state);
+                ClearExpectedTargetPosition(state);
                 ProjectileFlightPathSnapshot flyAwayPath = HomingPathBuilder.BuildFlyAwayPath(
                     projectilePos,
                     projectileForward,
@@ -871,6 +1000,8 @@ namespace BDP.Content.RangedModules.Homing
             float distanceToTarget,
             float turnAngleToTarget,
             bool targetLost,
+            float targetObservationTicks,
+            float nextSegmentTicks,
             float softReleaseDistance,
             float hardReleaseDistance,
             Vector3 releaseExpectedImpactPoint)
@@ -890,7 +1021,10 @@ namespace BDP.Content.RangedModules.Homing
                     targetCurrentPos,
                     targetStepOffset,
                     frozenConfig,
-                    pathSeed);
+                    pathSeed,
+                    targetObservationTicks,
+                    nextSegmentTicks,
+                    out Vector3 predictedTargetPos);
 
                 state.RelocksUsed += 1;
                 state.Phase = HomingPhase.Relocking;
@@ -908,8 +1042,11 @@ namespace BDP.Content.RangedModules.Homing
                     frozenConfig.RelockTurnResponsiveness,
                     1f,
                     Gen.HashCombineInt(pathSeed, 71),
-                    relockFlightPathSnapshot);
+                    relockFlightPathSnapshot,
+                    targetObservationTicks,
+                    nextSegmentTicks);
                 ClearReleaseState(state);
+                SetExpectedTargetPosition(state, predictedTargetPos);
                 ContinueTracking(contribution, state.LockedTarget, relockFlightPathSnapshot);
                 return;
             }
@@ -918,21 +1055,48 @@ namespace BDP.Content.RangedModules.Homing
             IssueFlyAway(in context, contribution, state, projectilePos, projectileForward);
         }
 
-        private static float ResolveReleaseLeadRatio(
-            HomingPhase phaseBefore,
-            HomingConfig config)
-        {
-            HomingConfig safeConfig = config ?? new HomingConfig();
-            return phaseBefore == HomingPhase.Relocking
-                ? safeConfig.RelockLeadRatio
-                : safeConfig.PredictionLeadRatio;
-        }
-
         private static Vector3 ResolveReleaseExpectedImpactPoint(HomingState state)
         {
             return state != null && state.HasReleaseExpectedImpactPoint
                 ? state.ReleaseExpectedImpactPoint
                 : InvalidVector();
+        }
+
+        /// <summary>计算目标当前位置相对上一段追踪预期点的运动学残差。</summary>
+        private static float ResolveTargetPredictionResidual(HomingState state, Vector3 targetCurrentPos)
+        {
+            if (state == null || !state.HasExpectedTargetPosition)
+            {
+                return float.NaN;
+            }
+
+            return Vector3.Distance(
+                state.ExpectedTargetPosition.Yto0(),
+                targetCurrentPos.Yto0());
+        }
+
+        /// <summary>记录追踪控制器下一段路径使用的预期目标位置。</summary>
+        private static void SetExpectedTargetPosition(HomingState state, Vector3 expectedTargetPosition)
+        {
+            if (state == null)
+            {
+                return;
+            }
+
+            state.HasExpectedTargetPosition = true;
+            state.ExpectedTargetPosition = expectedTargetPosition.Yto0();
+        }
+
+        /// <summary>清除追踪控制器的预期目标位置。</summary>
+        private static void ClearExpectedTargetPosition(HomingState state)
+        {
+            if (state == null)
+            {
+                return;
+            }
+
+            state.HasExpectedTargetPosition = false;
+            state.ExpectedTargetPosition = Vector3.zero;
         }
 
         private static void ClearReleaseState(HomingState state)

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <!-- 投射物身份字段；具体名称读取对应投射物定义的译名。 -->
+  <BDP_Property_Projectile.label>投射物</BDP_Property_Projectile.label>
+  <BDP_Property_Projectile.description>远程攻击实际发射的投射物及其本地化名称。</BDP_Property_Projectile.description>
+  <!-- 远程与近战共用的主要攻击结果。 -->
+  <BDP_Property_DamageAmount.label>单次伤害</BDP_Property_DamageAmount.label>
+  <BDP_Property_DamageType.label>伤害类型</BDP_Property_DamageType.label>
+  <BDP_Property_ArmorPenetration.label>护甲穿透</BDP_Property_ArmorPenetration.label>
+  <!-- 远程和近战共用的攻击节奏。 -->
+  <BDP_Property_AttackBurstCount.label>攻击次数</BDP_Property_AttackBurstCount.label>
+  <BDP_Property_AttackBurstInterval.label>攻击间隔</BDP_Property_AttackBurstInterval.label>
+  <!-- 远程攻击专用信息。 -->
+  <BDP_Property_RangedShotRhythm.label>射击节奏</BDP_Property_RangedShotRhythm.label>
+  <BDP_Property_AccuracyTouch.label>贴身精度</BDP_Property_AccuracyTouch.label>
+  <BDP_Property_AccuracyShort.label>近距精度</BDP_Property_AccuracyShort.label>
+  <BDP_Property_AccuracyMedium.label>中距精度</BDP_Property_AccuracyMedium.label>
+  <BDP_Property_AccuracyLong.label>远距精度</BDP_Property_AccuracyLong.label>
+  <BDP_Property_ProjectileSpeed.label>投射物速度</BDP_Property_ProjectileSpeed.label>
+  <BDP_Property_ProjectileFlightFeatures.label>飞行特征</BDP_Property_ProjectileFlightFeatures.label>
+  <BDP_Property_StoppingPower.label>停止力</BDP_Property_StoppingPower.label>
+
+</LanguageData>

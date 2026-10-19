@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- Development 样例以此业务 Def 作为反射比例的唯一权威来源。 -->
+  <BDP.Development.Information.Samples.CustomBarrierRuleDef>
+    <defName>BDP_Development_CustomBarrierRule_Experimental</defName>
+    <PropertyDefName>BDP_Property_ExperimentalReflectionRatio</PropertyDefName>
+    <ReflectionRatio>0.35</ReflectionRatio>
+  </BDP.Development.Information.Samples.CustomBarrierRuleDef>
+</Defs>

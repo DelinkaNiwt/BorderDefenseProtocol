@@ -16,6 +16,18 @@ namespace BDP.Core.Expressions
             RangedModuleAugmentationTargetCapability.RangedWeapon;
 
         /// <summary>
+        /// 当前增强声明相对来源侧别的作用范围。
+        /// </summary>
+        public RangedModuleAugmentationScope Scope =
+            RangedModuleAugmentationScope.AllSides;
+
+        /// <summary>
+        /// 当前增强允许接收的来源变体键列表。
+        /// 为空时不限制目标结果的来源变体。
+        /// </summary>
+        public List<string> AllowedSourceVariantKeys = new List<string>();
+
+        /// <summary>
         /// 当前增强声明追加的远程模块列表。
         /// </summary>
         public List<RangedModuleMountConfig> Modules = new List<RangedModuleMountConfig>();
@@ -40,10 +52,20 @@ namespace BDP.Core.Expressions
             RangedModuleAugmentationConfig result = new RangedModuleAugmentationConfig
             {
                 AppliesToCapability = AppliesToCapability,
+                Scope = Scope,
+                AllowedSourceVariantKeys = new List<string>(),
                 DisplayNamePrefixMode = DisplayNamePrefixMode,
                 DisplayNamePrefix = DisplayNamePrefix,
                 Modules = new List<RangedModuleMountConfig>()
             };
+
+            if (AllowedSourceVariantKeys != null)
+            {
+                for (int index = 0; index < AllowedSourceVariantKeys.Count; index++)
+                {
+                    result.AllowedSourceVariantKeys.Add(AllowedSourceVariantKeys[index]);
+                }
+            }
 
             if (Modules == null)
             {
@@ -72,6 +94,22 @@ namespace BDP.Core.Expressions
         /// 可执行的远程武装表达结果。
         /// </summary>
         RangedWeapon
+    }
+
+    /// <summary>
+    /// 被动远程增强相对来源侧别的作用范围。
+    /// </summary>
+    public enum RangedModuleAugmentationScope
+    {
+        /// <summary>
+        /// 对所有侧别生效。
+        /// </summary>
+        AllSides,
+
+        /// <summary>
+        /// 只对 Main/Sub 的另一侧生效。
+        /// </summary>
+        OppositeSide
     }
 
     /// <summary>

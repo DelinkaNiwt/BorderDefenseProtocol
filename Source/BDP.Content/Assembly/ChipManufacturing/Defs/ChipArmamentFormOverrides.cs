@@ -8,8 +8,8 @@ using Verse;
 namespace BDP.Content.Assembly.ChipManufacturing.Defs
 {
     /// <summary>
-    /// 武装型对表达动作字段的可选覆盖块。
-    /// 所有可空字段只有在显式声明时才覆盖动作原值。
+    /// 武装型对表达条目字段的可选覆盖块。
+    /// 所有可空字段只有在显式声明时才覆盖表达条目原值。
     /// </summary>
     public sealed class ChipArmamentFormOverrides
     {
@@ -85,10 +85,10 @@ namespace BDP.Content.Assembly.ChipManufacturing.Defs
         /// <summary>冷却时间倍率。</summary>
         public float? cooldownMultiplier;
 
-        /// <summary>一次攻击内部动作数量绝对值。</summary>
+        /// <summary>一次攻击内部功能数量绝对值。</summary>
         public int? hitCount;
 
-        /// <summary>一次攻击内部动作间隔绝对值。</summary>
+        /// <summary>一次攻击内部表达间隔绝对值。</summary>
         public int? hitIntervalTicks;
 
         /// <summary>远程或近战攻击节奏覆盖。</summary>
@@ -100,11 +100,14 @@ namespace BDP.Content.Assembly.ChipManufacturing.Defs
         /// <summary>单侧视觉预设 DefName。</summary>
         public string visualPresetDefName;
 
-        /// <summary>单侧视觉图层覆盖预设 DefName；替换主贴图和附加层，保留动作基础视觉姿态。</summary>
+        /// <summary>单侧视觉图层覆盖预设 DefName；替换主贴图和附加层，保留表达基础视觉姿态。</summary>
         public string visualGraphicOverrideDefName;
 
         /// <summary>复合视觉预设 DefName。</summary>
         public string compositeVisualPresetDefName;
+
+        /// <summary>组合技攻击阶段视觉预设 DefName。</summary>
+        public string comboAttackVisualPresetDefName;
 
         /// <summary>是否强制隐藏宿主装备。</summary>
         public bool? forceSuppressHostEquipment;

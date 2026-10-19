@@ -20,8 +20,8 @@ $assemblerPath = Join-Path $assemblyRoot 'Building\Building_TriggerAssembler.cs'
 $chipContainerPath = Join-Path $assemblyRoot 'Building\CompChipContainer.cs'
 $itabsPath = Join-Path $assemblyRoot 'Building\ITab_ChipStorageContents.cs'
 $providerPath = Join-Path $assemblyRoot 'Facility\DefaultAssemblerFacilityProvider.cs'
-$assemblerDefPath = Join-Path $repoRoot '1.6\Content\Defs\Buildings\Assembly\ThingDefs_TriggerAssembler.xml'
-$storageDefPath = Join-Path $repoRoot '1.6\Content\Defs\Buildings\Assembly\ThingDefs_ChipStorage.xml'
+$assemblerDefPath = Join-Path $repoRoot '1.6\Content\Defs\ThingDef\Buildings\Assembly.xml'
+$storageDefPath = $assemblerDefPath
 
 Assert-True (Test-Path -LiteralPath $assemblerPath) 'Building_TriggerAssembler must exist.'
 Assert-True (Test-Path -LiteralPath $chipContainerPath) 'CompChipContainer must exist.'

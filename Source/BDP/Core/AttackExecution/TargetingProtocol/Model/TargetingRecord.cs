@@ -28,6 +28,9 @@ namespace BDP.Core.AttackExecution
         /// </summary>
         public Pawn Pawn { get; set; }
 
+        /// <summary>前序模块已明确导航过程，后序直达轨迹规则不再接管。</summary>
+        public bool HasExplicitNavigation { get; set; }
+
         /// <summary>
         /// 当前 Targeting 阶段绑定的正式结果。
         /// </summary>

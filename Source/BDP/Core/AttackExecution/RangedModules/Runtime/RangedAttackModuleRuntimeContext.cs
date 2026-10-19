@@ -1,4 +1,5 @@
 using BDP.Core.Expressions;
+using BDP.Core.Permissions;
 using Verse;
 
 namespace BDP.Core.AttackExecution
@@ -19,6 +20,12 @@ namespace BDP.Core.AttackExecution
         /// 当前攻击的宿主 Pawn。
         /// </summary>
         public Pawn Pawn { get; set; }
+
+        /// <summary>
+        /// 当前攻击可供芯片业务读取的地图许可上下文。
+        /// 许可状态由业务在实际动作阶段自行再次查询，不在这里冻结效果。
+        /// </summary>
+        public MapPermissionContext Permissions { get; internal set; }
 
         /// <summary>
         /// 当前攻击绑定的正式表达结果。

@@ -1,7 +1,9 @@
 ﻿using System;
 using BDP.Core.CombatBody;
 using BDP.Core.CombatBody.External;
+using BDP.Core.Genes;
 using BDP.Core.Trigger;
+using BDP.Core.Trion;
 using BDP.Core.Trigger.Runtime;
 using Verse;
 using Verse.AI;
@@ -131,11 +133,77 @@ namespace BDP.Core.CombatBodySession
         }
 
         /// <summary>
-        /// 判断当前是否允许激活。
+        /// 判断系统当前是否允许激活；内部初始化不复用玩家切换锁。
         /// </summary>
         public bool CanActivate()
         {
-            return rawCombatBodyService.CanActivate();
+            return !isExitInProgress
+                && TrionGlandEligibility.HasActiveTrionGland(OwnerPawn)
+                && rawCombatBodyService.CanActivate()
+                && policy.HasOperationalTrion(OwnerPawn);
+        }
+
+        /// <summary>玩家激活额外遵守手动切换锁，资格和资源仍由共同准入检查。</summary>
+        public bool CanManualActivate()
+        {
+            return CanActivate() && rawCombatBodyService.CanManualActivate();
+        }
+
+        /// <summary>最近核对过的容量规则；运行时重算，不作为永久人物身份保存。</summary>
+        private bool? lastCapacityCostsEnabled;
+
+        /// <summary>在既有生命周期核对有效占用，同时更新资源账本和本轮相位记录。</summary>
+        internal void ReconcileResourceRules()
+        {
+            bool capacityCostsEnabled = TrionResourceRuleRegistry.GetRules(OwnerPawn).CapacityCostsEnabled;
+            if (lastCapacityCostsEnabled == capacityCostsEnabled)
+            {
+                return;
+            }
+
+            lastCapacityCostsEnabled = capacityCostsEnabled;
+            if (!policy.TryResolvePrimaryTrigger(OwnerPawn, out CompTriggerBody trigger))
+            {
+                return;
+            }
+
+            ITrionCommands commands = TrionSurfaceAccess.ResolveCommands(OwnerPawn);
+            if (commands == null)
+            {
+                return;
+            }
+
+            float desired = activationTransaction.CalculateCombatBodyAllocateAmount(trigger);
+            commands.SetReserved(desired);
+            CombatBodyPhase phase = rawCombatBodyService.Phase;
+            if (phase != CombatBodyPhase.Active && phase != CombatBodyPhase.Collapsing)
+            {
+                return;
+            }
+
+            float previous = rawCombatBodyService.AllocatedTrion;
+            // 已经退出中的会话不追加新锁定，仍允许清除变为免占用的旧锁定。
+            if (phase == CombatBodyPhase.Collapsing)
+            {
+                desired = Math.Min(previous, desired);
+            }
+
+            if (desired > previous && !commands.Allocate(desired - previous))
+            {
+                TriggerCollapse("CapacityAllocationUnavailable");
+                return;
+            }
+
+            if (desired < previous)
+            {
+                commands.Release(previous - desired);
+            }
+
+            if (desired != previous)
+            {
+                rawCombatBodyService.UpdateAllocatedTrion(desired);
+                NotifyCombatBodySessionStateChanged();
+            }
         }
 
         /// <summary>
@@ -171,7 +239,7 @@ namespace BDP.Core.CombatBodySession
         }
 
         /// <summary>
-        /// 请求激活战斗体。
+        /// 系统请求激活战斗体，不检查或启动玩家手动切换锁。
         /// 激活顺序统一收口在这里，raw combat body service 只负责相位和宿主变换。
         /// </summary>
         public bool TryActivate()
@@ -184,10 +252,22 @@ namespace BDP.Core.CombatBodySession
             bool activated = activationTransaction.TryActivate(OwnerPawn);
             if (activated)
             {
-                BeginManualTransformLock();
+                lastCapacityCostsEnabled = TrionResourceRuleRegistry.GetRules(OwnerPawn).CapacityCostsEnabled;
             }
 
             return activated;
+        }
+
+        /// <summary>玩家主动激活成功后才启动手动锁；系统准备和重新换装统一使用 TryActivate。</summary>
+        public bool TryActivateManually()
+        {
+            if (!CanManualActivate() || !TryActivate())
+            {
+                return false;
+            }
+
+            BeginManualTransformLock();
+            return true;
         }
 
         /// <summary>
@@ -202,6 +282,45 @@ namespace BDP.Core.CombatBodySession
 
             ExecuteExit(CombatBodySessionExitMode.Release);
             BeginManualTransformLock();
+        }
+
+        /// <summary>
+        /// 因 Trion 腺体资格失效而强制执行普通解除。
+        /// 它绕过手动解除锁，但不触发崩解副作用。
+        /// </summary>
+        public void ForceReleaseForEligibilityLoss()
+        {
+            ForceRelease("ForcedEligibilityLoss");
+        }
+
+        /// <summary>装备卸下属于系统退出；锁内也必须清理，但已切入崩解时保留原崩解流程。</summary>
+        public void ReleaseForEquipmentDetach()
+        {
+            if (rawCombatBodyService.Phase == CombatBodyPhase.Active)
+            {
+                ForceRelease("EquipmentDetached");
+            }
+        }
+
+        /// <summary>系统退出共用完整清理事务和重入保护，不检查或启动手动切换锁。</summary>
+        private void ForceRelease(string reason)
+        {
+            if (isExitInProgress
+                || (rawCombatBodyService.Phase != CombatBodyPhase.Active
+                    && rawCombatBodyService.Phase != CombatBodyPhase.Collapsing))
+            {
+                return;
+            }
+
+            isExitInProgress = true;
+            try
+            {
+                exitTransaction.ExecuteForcedRelease(OwnerPawn, reason);
+            }
+            finally
+            {
+                isExitInProgress = false;
+            }
         }
 
         /// <summary>

@@ -19,13 +19,10 @@ namespace BDP.Core.AttackExecution
         private readonly MeleeVerbContinuationPlanner continuationPlanner = new MeleeVerbContinuationPlanner();
 
         /// <summary>
-        /// 当前已经成功启动过多少次近战施放。
+        /// 当前连续攻击轮次已经成功启动过多少次施放。
+        /// 多击由同一个原版 burst 承担，因此一次轮次只会增加一次。
         /// </summary>
         private int castCount;
-
-        private int currentStepIndex;
-
-        private int nextStepDelayTicks;
 
         /// <summary>
         /// 序列化近战推进器自身的轻量状态。
@@ -34,8 +31,6 @@ namespace BDP.Core.AttackExecution
         {
             base.ExposeData();
             Scribe_Values.Look(ref castCount, "castCount", 0);
-            Scribe_Values.Look(ref currentStepIndex, "currentStepIndex", 0);
-            Scribe_Values.Look(ref nextStepDelayTicks, "nextStepDelayTicks", 0);
         }
 
         /// <summary>
@@ -104,18 +99,9 @@ namespace BDP.Core.AttackExecution
                 return true;
             }
 
-            if (nextStepDelayTicks > 0)
-            {
-                nextStepDelayTicks--;
-                return true;
-            }
-
-            if (castCount >= ResolveRequiredCastCount())
-            {
-                return TryContinueWithPreparedRun(targetThing, verb);
-            }
-
-            if (verb.state == VerbState.Bursting)
+            // TryStartCastOn 成功后，预热和 burst 的每一击都由原版 VerbTick 推进。
+            // JobDriver 不能在中间重新起手，否则会重复预热并破坏整轮冷却。
+            if (verb.WarmingUp || verb.state == VerbState.Bursting)
             {
                 return true;
             }
@@ -123,6 +109,39 @@ namespace BDP.Core.AttackExecution
             if (ShouldWaitForBusyStance(verb))
             {
                 return true;
+            }
+
+            if (castCount > 0)
+            {
+                // 普通最终冷却结束后才续接；仅双持主手到副手的交接允许提前续接。
+                if (!TryContinueWithPreparedRun(targetThing, verb))
+                {
+                    return false;
+                }
+
+                // 续段也可能正常结束或切换作业；旧推进器不能再起手。
+                if (pawn.CurJob != job || pawn.jobs.curDriver != this)
+                {
+                    return true;
+                }
+
+                // 准备成功后必须同次更新起手；额外空档会让原版把征召人物转回朝南。
+                // 续段会重绑动作和目标，不能沿用上轮的局部变量。
+                targetThing = job.GetTarget(TargetIndex.A).Thing;
+                targetPawn = targetThing as Pawn;
+                if (targetThing == null
+                    || !targetThing.Spawned
+                    || (targetPawn != null && targetPawn.IsPsychologicallyInvisible()))
+                {
+                    EndJobWith(JobCondition.Succeeded);
+                    return true;
+                }
+
+                verb = job.verbToUse;
+                if (verb == null)
+                {
+                    return false;
+                }
             }
 
             if (!pawn.CanReachImmediate(targetThing, PathEndMode.Touch))
@@ -142,26 +161,45 @@ namespace BDP.Core.AttackExecution
             }
 
             TryBindCurrentStepToolSurface(verb, targetThing);
-            if (!pawn.meleeVerbs.TryMeleeAttack(targetThing, verb))
+            bool canHitCurrentTarget = verb.CanHitTarget(targetThing);
+            bool canHitTargetFromCurrentPos = verb.CanHitTargetFrom(pawn.Position, targetThing);
+            int requiredCastCount = ResolveJobCastLimit();
+            AttackExecutionDiagnostics.LogContinuousJobCastAttempt(
+                pawn,
+                verb,
+                targetThing,
+                castCount,
+                requiredCastCount,
+                canHitCurrentTarget,
+                canHitTargetFromCurrentPos);
+
+            bool started = verb.TryStartCastOn(targetThing);
+            AttackExecutionDiagnostics.LogContinuousJobCastResult(
+                pawn,
+                verb,
+                targetThing,
+                castCount,
+                requiredCastCount,
+                started ? "started" : "verb_start_returned_false",
+                started,
+                canHitTargetFromCurrentPos,
+                false,
+                verb.state.ToString());
+            if (!started)
             {
                 return false;
             }
 
-            nextStepDelayTicks = ResolveIntervalTicksAfterStep(verb, currentStepIndex);
-            castCount++;
-            currentStepIndex = ResolveNextStepIndex(verb, currentStepIndex);
-            if (IsCurrentRunConsumed(verb))
-            {
-                return TryContinueWithPreparedRun(targetThing, verb);
-            }
-
+            // 只有原版明确接受了这次起手，才推进施放计数。
+            castCount = 1;
             return true;
         }
 
         /// <summary>
-        /// 读取本次 job 需要成功启动的近战施放次数。
+        /// 读取 job 的连续轮次上限，仅用于诊断和状态说明。
+        /// 连续多击的每击数量不由 job 计数，而由原版 Verb burstShotCount 承担。
         /// </summary>
-        private int ResolveRequiredCastCount()
+        private int ResolveJobCastLimit()
         {
             return job != null && job.maxNumMeleeAttacks > 0
                 ? job.maxNumMeleeAttacks
@@ -179,66 +217,13 @@ namespace BDP.Core.AttackExecution
                 return;
             }
 
-            int stepCount = formalHost.ResolvePreparedStepCount();
-            if (stepCount <= 0)
+            const int burstStepCount = 1;
+            if (formalHost.ResolvePreparedStepToolCount() != burstStepCount)
             {
-                stepCount = 1;
+                formalHost.PrepareStepToolSequenceForCurrentRound(targetThing, burstStepCount, castCount);
             }
 
-            if (currentStepIndex == 0
-                || formalHost.ResolvePreparedStepToolCount() != stepCount)
-            {
-                int roundOrdinal = castCount / stepCount;
-                formalHost.PrepareStepToolSequenceForCurrentRound(targetThing, stepCount, roundOrdinal);
-            }
-
-            formalHost.ApplyStepToolSurface(currentStepIndex);
-        }
-
-        private static int ResolveIntervalTicksAfterStep(Verb verb, int currentStepIndex)
-        {
-            if (verb is BdpVerb_MeleeAttackDamage meleeVerb)
-            {
-                return meleeVerb.ResolveIntervalTicksAfterStep(currentStepIndex);
-            }
-
-            return 0;
-        }
-
-        private static int ResolveNextStepIndex(Verb verb, int currentStepIndex)
-        {
-            if (verb is BdpVerb_MeleeAttackDamage meleeVerb)
-            {
-                int stepCount = meleeVerb.ResolvePreparedStepCount();
-                if (stepCount > 0)
-                {
-                    return (currentStepIndex + 1) % stepCount;
-                }
-            }
-
-            return currentStepIndex + 1;
-        }
-
-        /// <summary>
-        /// 判断当前近战 run 是否已经把本轮声明的 step 全部消费完。
-        /// run 消费完后，JobDriver 会优先尝试续到下一段，而不是直接结束。
-        /// </summary>
-        private bool IsCurrentRunConsumed(Verb verb)
-        {
-            if (!(verb is BdpVerb_MeleeAttackDamage meleeVerb))
-            {
-                return castCount > 0;
-            }
-
-            int stepCount = meleeVerb.ResolvePreparedStepCount();
-            if (stepCount <= 0)
-            {
-                return castCount > 0;
-            }
-
-            return castCount > 0
-                && currentStepIndex == 0
-                && castCount % stepCount == 0;
+            formalHost.ApplyStepToolSurface(stepIndex: 0);
         }
 
         /// <summary>
@@ -299,8 +284,6 @@ namespace BDP.Core.AttackExecution
             }
 
             castCount = 0;
-            currentStepIndex = 0;
-            nextStepDelayTicks = 0;
             AttackExecutionDiagnostics.LogMeleeContinuationSwitch(
                 pawn,
                 verb,
@@ -311,6 +294,9 @@ namespace BDP.Core.AttackExecution
             return true;
         }
 
+        /// <summary>
+        /// 判断本次派单是否要求持续攻击，整轮结束后仍需继续准备下一轮。
+        /// </summary>
         private static bool IsPersistentAttackOrder(AttackDispatchIntent dispatchIntent)
         {
             return dispatchIntent == AttackDispatchIntent.ForceTargetOrder
@@ -318,10 +304,8 @@ namespace BDP.Core.AttackExecution
         }
 
         /// <summary>
-        /// BDP 近战 step 调度拥有连击内部的节奏控制权。
-        /// 若当前 busy stance 只是上一段同一条 formal melee verb 留下的 cooldown，
-        /// 且 step 间延迟已经由 JobDriver 自己走完，就主动释放该 stance，
-        /// 让下一段继续按准备好的 step 推进。
+        /// 等待原版忙碌姿态；仅双持主手到副手的完整冷却允许按计划提前续接。
+        /// 连击内部间隔、普通近战冷却和双持副手后的最终冷却仍由原版 Verb 生命周期推进。
         /// </summary>
         private bool ShouldWaitForBusyStance(Verb verb)
         {
@@ -330,43 +314,8 @@ namespace BDP.Core.AttackExecution
                 return false;
             }
 
-            if (TryConsumeOwnedCooldownStance(verb))
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        /// 只消费当前连击内部、由同一条 formal melee verb 留下的 cooldown stance。
-        /// 外部打断、其它 verb 的忙碌态、以及 warmup/burst 过程都不在这里清除。
-        /// </summary>
-        private bool TryConsumeOwnedCooldownStance(Verb verb)
-        {
-            if (castCount <= 0)
-            {
-                return false;
-            }
-
-            if (currentStepIndex == 0)
-            {
-                return false;
-            }
-
-            Stance_Busy busyStance = pawn?.stances?.curStance as Stance_Busy;
-            if (!(busyStance is Stance_Cooldown))
-            {
-                return false;
-            }
-
-            if (busyStance.verb == verb)
-            {
-                pawn.stances.CancelBusyStanceHard();
-                return true;
-            }
-
-            return false;
+            return !(verb is BdpVerb_MeleeAttackDamage meleeVerb
+                && meleeVerb.CanSkipDualMeleeHandoffCooldown());
         }
 
         /// <summary>

@@ -29,10 +29,12 @@ $sinkText = Get-Content -Raw -Encoding UTF8 -LiteralPath $sinkPath
 
 Assert-True ($sinkText -match 'class\s+VerseLogDiagnosticSink\s*:\s*IBdpDiagnosticSink') `
     "Development 日志接收器必须实现 Core 中性接口。"
-Assert-True ($sinkText -match '\bLog\.Message\s*\(\s*message\s*\)') `
+Assert-True ($sinkText -match '\bLog\.Message\s*\(\s*(?:Prefix\s*\+\s*)?message\s*\)') `
     "Development 日志接收器必须负责实际 Verse 日志输出。"
 Assert-True ($bootstrapText -match 'BdpDiagnosticSinkRegistry\.Register\s*\(') `
     "Development 启动入口必须注册日志接收器。"
+Assert-True ($bootstrapText -match 'development\.diagnostics\.sink_registered') `
+    "Development 启动入口必须提供一次性诊断接线标记。"
 Assert-True ($bootstrapText -match 'Prefs\.DevMode') `
     "Development 临时补丁必须安全读取开发者模式。"
 Assert-True ($bootstrapText -match '\.PatchAll\s*\(') `

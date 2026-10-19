@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using BDP.Core.Chips;
+using BDP.Core.Information;
 using BDP.Core.Requirements;
 using BDP.Core.CombatBody;
 using BDP.Core.Trigger.Runtime;
@@ -193,6 +194,8 @@ namespace BDP.Core.Trigger
                 GetActiveSlotRaw = GetActiveSlotRaw,
                 GetSwitchContext = GetSwitchContext,
                 SetSwitchContext = SetSwitchContext,
+                GetSlotSwitchContext = slot => slot != null ? slot.SlotSwitchContext : null,
+                SetSlotSwitchContext = (slot, context) => slot?.SetSlotSwitchContext(context),
                 FindActivationBlockers = target => triggerService.FindActivationBlockers(
                     target,
                     GetActiveSlotsRaw(),
@@ -254,7 +257,7 @@ namespace BDP.Core.Trigger
         /// </summary>
         private bool IsPendingTargetValid(TriggerSlotState targetSlot)
         {
-            if (CombatBodySurfaceAccess.ResolveReader(OwnerPawn)?.Phase != CombatBodyPhase.Active
+            if (!CombatBodyMaterialAccess.IsActive(OwnerPawn)
                 || !IsPendingTargetSlotValid(targetSlot))
             {
                 return false;
@@ -296,6 +299,52 @@ namespace BDP.Core.Trigger
             }
 
             return snapshot;
+        }
+
+        /// <summary>把激活根槽的有效芯片定义转换为统一信息输入。</summary>
+        private static IReadOnlyList<ChipInformationParseInput> BuildInformationInputsForProjectionBuild(
+            IEnumerable<TriggerSlotState> mainSlots,
+            IEnumerable<TriggerSlotState> subSlots,
+            IEnumerable<TriggerSlotState> specialSlots)
+        {
+            List<ChipInformationParseInput> result = new List<ChipInformationParseInput>();
+            AddInformationInputs(result, mainSlots);
+            AddInformationInputs(result, subSlots);
+            AddInformationInputs(result, specialSlots);
+            return result;
+        }
+
+        /// <summary>从单侧槽位提取正式激活芯片的信息输入。</summary>
+        private static void AddInformationInputs(
+            ICollection<ChipInformationParseInput> target,
+            IEnumerable<TriggerSlotState> slots)
+        {
+            if (target == null || slots == null)
+            {
+                return;
+            }
+
+            foreach (TriggerSlotState slot in slots)
+            {
+                if (slot == null || !slot.IsActive || slot.IsBindingMirror || slot.LoadedChip == null)
+                {
+                    continue;
+                }
+
+                ChipInformationRuntimeState runtime =
+                    ChipInformationRuntimeInputAdapter.Create(
+                        true,
+                        slot.CurrentModeKey,
+                        slot.CurrentStanceKey);
+                ChipInformationParseInput informationInput;
+                if (ChipInformationInstanceInputAdapter.TryCreate(
+                        slot.LoadedChip,
+                        runtime,
+                        out informationInput))
+                {
+                    target.Add(informationInput);
+                }
+            }
         }
 
         /// <summary>
@@ -360,15 +409,23 @@ namespace BDP.Core.Trigger
         /// </summary>
         private TriggerSlotState GetActiveSlotRaw(TriggerSide side)
         {
+            TriggerSlotState passiveSlot = null;
             foreach (TriggerSlotState slot in GetRawSlots(side))
             {
-                if (slot.IsActive)
+                if (!slot.IsActive)
+                {
+                    continue;
+                }
+
+                if (!TriggerChipActivationControlRegistry.HasIndependentActivationControl(slot.LoadedChip))
                 {
                     return slot;
                 }
+
+                passiveSlot = passiveSlot ?? slot;
             }
 
-            return null;
+            return passiveSlot;
         }
 
         /// <summary>

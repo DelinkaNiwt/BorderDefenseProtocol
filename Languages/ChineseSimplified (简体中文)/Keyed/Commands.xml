@@ -44,4 +44,17 @@
 左键切换至：{1}
 右键可直接选择当前形态内的任意姿态。</BDP_Command_ChipStance_Desc>
   <BDP_Command_ChipStance_CurrentOption>● {0}（当前）</BDP_Command_ChipStance_CurrentOption>
-</LanguageData>
+  <!-- 浮空模式按钮。 -->
+  <BDP_Command_FloatingFlight_Switch>浮空：{0}</BDP_Command_FloatingFlight_Switch>
+  <BDP_Command_FloatingFlight_Description>当前模式：{0}
+左键切换至：{1}
+右键可直接选择任意模式。</BDP_Command_FloatingFlight_Description>
+  <BDP_Command_FloatingFlight_CurrentOption>● {0}（当前）</BDP_Command_FloatingFlight_CurrentOption>
+  <BDP_Command_FloatingFlight_AlwaysBlocked>屋顶下无法开启始终浮空。</BDP_Command_FloatingFlight_AlwaysBlocked>
+  <BDP_Command_FloatingFlight_AlwaysSuppressed>当前位于屋顶下，始终浮空偏好暂时受压制。</BDP_Command_FloatingFlight_AlwaysSuppressed>
+  <BDP_Command_FloatingFlight_NoCapability>当前没有可用的浮空芯片能力。</BDP_Command_FloatingFlight_NoCapability>
+  <BDP_Command_FloatingFlight_InvalidMode>浮空模式无效。</BDP_Command_FloatingFlight_InvalidMode>
+  <BDP_Command_FloatingFlight_Unavailable>当前无法保存浮空偏好。</BDP_Command_FloatingFlight_Unavailable>
+  <!-- 光魂防护形态提供的攻击准入拒绝原因。 -->
+  <BDP_AttackBlocked_LightSoulDefense>防护形态下不能进行远程攻击。</BDP_AttackBlocked_LightSoulDefense>
+  </LanguageData>

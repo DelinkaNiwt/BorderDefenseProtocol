@@ -1,0 +1,4821 @@
+{
+  "baselineCommit": "79326c6b",
+  "scope": "BDP 主模组发布内容，不含退役测试模组、Legacy 或测试工程夹具",
+  "patches": [
+    {
+      "className": "Patch_Verb_TryCastNextBurstShot_BdpAttackActionSuccess",
+      "source": "Source/BDP/Patches/Patch_Verb_TryCastNextBurstShot_BdpAttackActionSuccess.cs",
+      "line": 15,
+      "target": "Verse.Verb.TryCastNextBurstShot",
+      "kind": [
+        "Prefix",
+        "Postfix"
+      ],
+      "purpose": "广播普通远程/近战成功动作，供 BDP 隐身组件破隐。",
+      "gate": "仅 Verb_LaunchProjectile/Verb_MeleeAttack；Ability 排除。以 burstShotsLeft 变小推断成功；BDP 近战额外核验自己保存的实际完成/命中标志。",
+      "foreignPath": "不改原方法/原返回值；普通非 BDP Pawn 无消费者行为。但剩余连射数在原版失败时也清零，仍触发事件，可能取消该角色的 BDP 隐身。",
+      "verdict": "疑似遗漏/兼容风险",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_Verb_TryCastNextBurstShot_BdpAttackActionSuccess.cs",
+          "line": 15,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_Verb_TryCastNextBurstShot_BdpAttackActionSuccess.cs",
+          "line": 36,
+          "note": "成功判据只看剩余数下降，无法区分失败清零。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_Verb_TryCastNextBurstShot_BdpAttackActionSuccess.cs",
+          "line": 52,
+          "note": "下降后发布 Hit=true 的武器事件。"
+        },
+        {
+          "source": "Source/BDP.Content/Chameleon/HediffComp_BdpInvisibility.cs",
+          "line": 45,
+          "note": "只核对攻击 Pawn；收到错误成功事件也会移除状态。"
+        }
+      ],
+      "issues": [
+        "CORE-001"
+      ],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_Verb_MeleeAttack_TryCastShot_BdpAttackActionSuccess",
+      "source": "Source/BDP/Patches/Patch_Verb_MeleeAttack_TryCastShot_BdpAttackActionSuccess.cs",
+      "line": 13,
+      "target": "RimWorld.Verb_MeleeAttack.TryCastShot",
+      "kind": [
+        "Prefix",
+        "Postfix"
+      ],
+      "purpose": "把原版实际完成的近战未命中/被躲闪也作为攻击动作通知，满足挥刀破隐。",
+      "gate": "Prefix 校验已生成施放者、无 FullBodyBusy、目标有效；Postfix 仅在原版返回 false 且起手门槛成立时通知。实际影响仍由 BDP 隐身 Pawn 消费。",
+      "foreignPath": "不改原返回值/攻击流程；无 BDP 状态无行为变化。真实原版 TryCastShot 的忙碌/未生成提前失败被 Prefix 排除，后续 false 是 miss/dodge，观察范围合理。",
+      "verdict": "广泛观察但必要且最终消费有BDP条件",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_Verb_MeleeAttack_TryCastShot_BdpAttackActionSuccess.cs",
+          "line": 13,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_Verb_MeleeAttack_TryCastShot_BdpAttackActionSuccess.cs",
+          "line": 18,
+          "note": "保存原版早退条件，与真实 TryCastShot 的未生成/忙碌门槛相符。"
+        },
+        {
+          "source": "Source/BDP/Core/AttackExecution/AttackActionSuccessDispatcher.cs",
+          "line": 26,
+          "note": "仅广播，没有改变原版命中判定。"
+        },
+        {
+          "source": "Source/BDP.Content/Chameleon/HediffComp_BdpInvisibility.cs",
+          "line": 45,
+          "note": "动作通知的正式玩法消费者只处理自身 BDP 隐身状态。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_Verb_MeleeAttack_CreateCombatLog_BdpEntry",
+      "source": "Source/BDP/Patches/Patch_Verb_MeleeAttack_CreateCombatLog_BdpEntry.cs",
+      "line": 14,
+      "target": "RimWorld.Verb_MeleeAttack.CreateCombatLog",
+      "kind": [
+        "Transpiler"
+      ],
+      "purpose": "在日志构造点让 BDP 近战使用扩展条目，原版其余日志流程保持。",
+      "gate": "IL 全局改写构造点，工厂内 verb 必须是 BdpVerb_MeleeAttackDamage 且提供器存在。",
+      "foreignPath": "普通近战工厂原样创建同类型、同参数 BattleLogEntry_MeleeCombat；不替换普通日志内容。构造点恰好一个的校验会与改写同处 IL 的模组产生安装兼容边界。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_Verb_MeleeAttack_CreateCombatLog_BdpEntry.cs",
+          "line": 14,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Core/CombatLog/BattleLogEntryFactoryAccess.cs",
+          "line": 56,
+          "note": "BDP 近战类型准入，否则原构造。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_Verb_MeleeAttack_CreateCombatLog_BdpEntry.cs",
+          "line": 26,
+          "note": "转译要求构造点唯一。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_VerbProperties_AdjustedAccuracy",
+      "source": "Source/BDP/Patches/Patch_VerbProperties_AdjustedAccuracy.cs",
+      "line": 27,
+      "target": "Verse.VerbProperties.AdjustedAccuracy",
+      "kind": [
+        "Prefix"
+      ],
+      "purpose": "触发体攻击使用当前芯片 VerbProperties 的四档精度，避免物理触发体宿主精度覆盖芯片。",
+      "gate": "equipment 非空且具有 CompTriggerBody。",
+      "foreignPath": "普通武器返回 true 完整保留原方法；BDP 武器有意跳过宿主装备射击精度 Stat，芯片档位成为精度来源。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_VerbProperties_AdjustedAccuracy.cs",
+          "line": 27,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_VerbProperties_AdjustedAccuracy.cs",
+          "line": 45,
+          "note": "空装备与无 CompTriggerBody 装备完全放行。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_VerbProperties_AdjustedAccuracy.cs",
+          "line": 57,
+          "note": "仅命中 BDP 准入后替换档位精度。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_Thing_TakeDamage_BdpResolution",
+      "source": "Source/BDP/Patches/Patch_Thing_TakeDamage_BdpResolution.cs",
+      "line": 12,
+      "target": "Verse.Thing.TakeDamage",
+      "kind": [
+        "Prefix",
+        "Postfix",
+        "Finalizer"
+      ],
+      "purpose": "记录一次原版承伤是否被吸收、无伤害或正常完成，供 BDP 命中模块/日志消费。",
+      "gate": "没有源 BDP 或目标 BDP 条件；每个 TakeDamage 都 Begin/Complete。MarkAbsorbed 只找当前同一目标调用；ConsumeLast 只校验目标。",
+      "foreignPath": "不改 dinfo、原返回值或异常；但普通伤害也分配 Capture/Resolution，写线程 lastCompleted 强引用，直到下一次伤害/消费。最终消费者目前仅 BDP，但全量采集必要性不足；也未隔离嵌套伤害的外层策略。",
+      "verdict": "疑似遗漏/兼容风险",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_Thing_TakeDamage_BdpResolution.cs",
+          "line": 12,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Core/Projectiles/RangedFlightProtocol/Impact/DamageResolutionRuntime.cs",
+          "line": 163,
+          "note": "无条件分配并压栈 Capture。"
+        },
+        {
+          "source": "Source/BDP/Core/Projectiles/RangedFlightProtocol/Impact/DamageResolutionRuntime.cs",
+          "line": 201,
+          "note": "完成后无条件写 lastCompleted。"
+        },
+        {
+          "source": "Source/BDP/Core/Projectiles/RangedFlightProtocol/Impact/DamageResolutionRuntime.cs",
+          "line": 240,
+          "note": "消费仅比目标，不含本次调用/伤害身份。"
+        },
+        {
+          "source": "Source/BDP/Core/Projectiles/BdpProjectile.cs",
+          "line": 1702,
+          "note": "BDP 外层伤害作用域中同步执行整个原版 TakeDamage。"
+        }
+      ],
+      "issues": [
+        "CORE-002",
+        "CORE-007"
+      ],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_ThingWithComps_PreApplyDamage_BdpResolution",
+      "source": "Source/BDP/Patches/Patch_ThingWithComps_PreApplyDamage_BdpResolution.cs",
+      "line": 11,
+      "target": "Verse.ThingWithComps.PreApplyDamage",
+      "kind": [
+        "Postfix"
+      ],
+      "purpose": "观察原版承伤前裁决的 absorbed 结果，避免 BDP 额外效果误绕过护盾。",
+      "gate": "广泛观察；只有 absorbed 为 true 且 DamageResolutionRuntime 存在同目标当前 Capture 才记录。",
+      "foreignPath": "不改 absorbed/dinfo，不跳过原逻辑；非 BDP 因 Thing.TakeDamage 全量采集也会记录内部状态，实际消费目前仅 BDP。",
+      "verdict": "广泛观察但必要且最终消费有BDP条件",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_ThingWithComps_PreApplyDamage_BdpResolution.cs",
+          "line": 11,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Core/Projectiles/RangedFlightProtocol/Impact/DamageResolutionRuntime.cs",
+          "line": 190,
+          "note": "仅吸收结果才 MarkAbsorbed。"
+        },
+        {
+          "source": "Source/BDP/Core/Projectiles/RangedFlightProtocol/Impact/DamageResolutionRuntime.cs",
+          "line": 264,
+          "note": "按目标查最内层 Capture，不修改原版护盾判定。"
+        }
+      ],
+      "issues": [
+        "CORE-007"
+      ],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_Targeter_OrderPawnForceTarget_TargetingInput",
+      "source": "Source/BDP/Patches/Patch_Targeter_OrderPawnForceTarget_TargetingInput.cs",
+      "line": 17,
+      "target": "RimWorld.Targeter.OrderPawnForceTarget",
+      "kind": [
+        "Prefix",
+        "Finalizer"
+      ],
+      "purpose": "把当前原版点击事件/修饰键提供给正式目标交互协议。",
+      "gate": "所有此入口暂存中性输入事实；实际读取来自 BDP AttackExecutionTargetingSource 和路线模块。",
+      "foreignPath": "不拦截原方法、不改目标/原返回值；Finalizer 原样返回异常并弹出作用域。普通目标系统仅承担临时输入快照，没有玩法改变或永久表。",
+      "verdict": "广泛观察但必要且最终消费有BDP条件",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_Targeter_OrderPawnForceTarget_TargetingInput.cs",
+          "line": 17,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Core/AttackExecution/TargetingProtocol/Interaction/TargetingInputRuntimeScope.cs",
+          "line": 30,
+          "note": "线程栈保存短期输入，退出恢复。"
+        },
+        {
+          "source": "Source/BDP/Core/AttackExecution/AttackExecutionTargetingSource.cs",
+          "line": 871,
+          "note": "BDP 目标交互构造输入帧时消费。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_Pawn_TryGetAttackVerb",
+      "source": "Source/BDP/Patches/Patch_Pawn_TryGetAttackVerb.cs",
+      "line": 15,
+      "target": "Verse.Pawn.TryGetAttackVerb",
+      "kind": [
+        "Postfix"
+      ],
+      "purpose": "把 BDP 已发布远程正式宿主接入原版自动攻击选取。",
+      "gate": "ResolveEntry 必须能定位当前主触发体；禁暴力 Pawn 不接管；需合法可用的已发布正式结果，并保留原版 onlyManualCast 边界。",
+      "foreignPath": "无触发体或无合法 BDP 主攻直接保持原返回值。成功进入 BDP 时才替换结果或明确抑制原候选。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_Pawn_TryGetAttackVerb.cs",
+          "line": 15,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Core/AttackExecution/AttackExecutionSurfaceAccess.cs",
+          "line": 154,
+          "note": "禁暴力 + BDP 正式入口准入。"
+        },
+        {
+          "source": "Source/BDP/Core/AttackExecution/AttackExecutionSurfaceAccess.cs",
+          "line": 346,
+          "note": "结果从当前已发布表达读取，校验 IsAvailable 与正式绑定。"
+        },
+        {
+          "source": "Source/BDP/Core/Trigger/Access/Surfaces/TriggerSurfaceAccess.cs",
+          "line": 50,
+          "note": "入口定位仅认 Pawn 主装备上的 CompTriggerBody。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_Pawn_PreApplyDamage_BdpResolution",
+      "source": "Source/BDP/Patches/Patch_Pawn_PreApplyDamage_BdpResolution.cs",
+      "line": 11,
+      "target": "Verse.Pawn.PreApplyDamage",
+      "kind": [
+        "Postfix"
+      ],
+      "purpose": "观察原版承伤前裁决的 absorbed 结果，避免 BDP 额外效果误绕过护盾。",
+      "gate": "广泛观察；只有 absorbed 为 true 且 DamageResolutionRuntime 存在同目标当前 Capture 才记录。",
+      "foreignPath": "不改 absorbed/dinfo，不跳过原逻辑；非 BDP 因 Thing.TakeDamage 全量采集也会记录内部状态，实际消费目前仅 BDP。",
+      "verdict": "广泛观察但必要且最终消费有BDP条件",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_Pawn_PreApplyDamage_BdpResolution.cs",
+          "line": 11,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Core/Projectiles/RangedFlightProtocol/Impact/DamageResolutionRuntime.cs",
+          "line": 190,
+          "note": "仅吸收结果才 MarkAbsorbed。"
+        },
+        {
+          "source": "Source/BDP/Core/Projectiles/RangedFlightProtocol/Impact/DamageResolutionRuntime.cs",
+          "line": 264,
+          "note": "按目标查最内层 Capture，不修改原版护盾判定。"
+        }
+      ],
+      "issues": [
+        "CORE-007"
+      ],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_Pawn_MeleeVerbs_TryMeleeAttack",
+      "source": "Source/BDP/Patches/Patch_Pawn_MeleeVerbs_TryMeleeAttack.cs",
+      "line": 16,
+      "target": "RimWorld.Pawn_MeleeVerbs.TryMeleeAttack",
+      "kind": [
+        "Prefix"
+      ],
+      "purpose": "把无显式攻击指定的 BDP 自动近战起手转入正式攻击执行。",
+      "gate": "必须有 Pawn、已生成的目标、没有显式 verbToUse；玩家强制原版近战命令放行；TryExecuteAutoMelee 需当前主触发体与合法 PrimaryMelee。",
+      "foreignPath": "没有 BDP 入口/合法主近战或执行未接管时返回 true，原近战池继续；显式原版近战命令不改。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_Pawn_MeleeVerbs_TryMeleeAttack.cs",
+          "line": 16,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Core/AttackExecution/AttackExecutionSurfaceAccess.cs",
+          "line": 249,
+          "note": "ResolveEntry 和正式 PrimaryMelee 双重门槛；成功执行才接管。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_Pawn_MeleeVerbs_TryMeleeAttack.cs",
+          "line": 54,
+          "note": "保留玩家强制 AttackMelee 原作业。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_Pawn_HealthTracker_RestorePart_CombatBodyWounds",
+      "source": "Source/BDP/Patches/Patch_Pawn_HealthTracker_RestorePart_CombatBodyWounds.cs",
+      "line": 10,
+      "target": "Verse.Pawn_HealthTracker.RestorePart",
+      "kind": [
+        "Postfix"
+      ],
+      "purpose": "身体部位恢复后清理 BDP 战斗体已失效伤口来源。",
+      "gate": "CombatBodyWoundPolicy.IsCombatBodyWoundRuntimeApplicable 要求 Active/Collapsing。",
+      "foreignPath": "非战斗体 Pawn 不调用辅助运行时；原部位恢复流程不拦截、不改返回值。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_Pawn_HealthTracker_RestorePart_CombatBodyWounds.cs",
+          "line": 10,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_Pawn_HealthTracker_RestorePart_CombatBodyWounds.cs",
+          "line": 20,
+          "note": "仅伤口运行时适用相位触发校准。"
+        },
+        {
+          "source": "Source/BDP/Core/CombatBody/Wounds/CombatBodyWoundRuntime.cs",
+          "line": 107,
+          "note": "只校准已有活跃部位，不重启旧伤口流失。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_Pawn_HealthTracker_RemoveHediff_CombatBodyWounds",
+      "source": "Source/BDP/Patches/Patch_Pawn_HealthTracker_RemoveHediff_CombatBodyWounds.cs",
+      "line": 13,
+      "target": "Verse.Pawn_HealthTracker.RemoveHediff",
+      "kind": [
+        "Postfix"
+      ],
+      "purpose": "移除原版伤口后清理 BDP 战斗体对应资源流失与表现。",
+      "gate": "只认支持的 Injury/MissingPart；Pawn 必须带 BDP CompCombatBodyHost 才调用其 WoundRuntime。不要求当前仍 Active，允许退出时清理。",
+      "foreignPath": "不改原版移除方法；没有宿主的 Pawn 无操作；未激活的 BDP 宿主只清已有派生状态/表现，不制造流失。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_Pawn_HealthTracker_RemoveHediff_CombatBodyWounds.cs",
+          "line": 13,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_Pawn_HealthTracker_RemoveHediff_CombatBodyWounds.cs",
+          "line": 20,
+          "note": "支持伤口并定位 BDP 宿主。"
+        },
+        {
+          "source": "Source/BDP/Core/CombatBody/Wounds/CombatBodyWoundRuntime.cs",
+          "line": 88,
+          "note": "移除既有 drain，再重建已有活跃列表表现，没有新增伤口事实。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_Pawn_HealthTracker_RemoveHediff_BodyConstraintSignal",
+      "source": "Source/BDP/Patches/Patch_Pawn_HealthTracker_RemoveHediff_BodyConstraintSignal.cs",
+      "line": 15,
+      "target": "Verse.Pawn_HealthTracker.RemoveHediff",
+      "kind": [
+        "Postfix"
+      ],
+      "purpose": "断肢增删后发布中性身体约束版本变化，触发当前触发体槽位即时禁用/恢复。",
+      "gate": "所有 Pawn 的 Hediff_MissingPart 都发布；真正槽位变化由桥定位当前主装备 CompTriggerBody。",
+      "foreignPath": "原版断肢添加/移除不改；普通 Pawn 没有触发体则不改玩法，但仍给静态 VersionByPawnId 永久字典登记/增加版本。广泛事件通知合理，全量永久记录必要性不足。",
+      "verdict": "疑似遗漏/兼容风险",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_Pawn_HealthTracker_RemoveHediff_BodyConstraintSignal.cs",
+          "line": 15,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Core/BodyConstraints/PawnBodyConstraintSignalHub.cs",
+          "line": 28,
+          "note": "所有断肢 Pawn 无条件写静态版本字典并广播。"
+        },
+        {
+          "source": "Source/BDP/Core/Trigger/Bridge/TriggerBodyConstraintSignalBridge.cs",
+          "line": 36,
+          "note": "真正禁用只定位当前主装备的 CompTriggerBody。"
+        },
+        {
+          "source": "Source/BDP/Core/Trigger/Switching/Flow/TriggerDisableSync.cs",
+          "line": 37,
+          "note": "版本只用于触发体已有同步缓存失效。"
+        }
+      ],
+      "issues": [
+        "CORE-007"
+      ],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_Pawn_HealthTracker_NotifyHediffChanged_CombatBodyWounds",
+      "source": "Source/BDP/Patches/Patch_Pawn_HealthTracker_NotifyHediffChanged_CombatBodyWounds.cs",
+      "line": 12,
+      "target": "Verse.Pawn_HealthTracker.Notify_HediffChanged",
+      "kind": [
+        "Postfix"
+      ],
+      "purpose": "全量健康变化时校准 BDP 战斗体已有伤口派生来源。",
+      "gate": "仅 hediff==null 的全量通知，随后必须有 CompCombatBodyHost；WoundRuntime 再核验 Active/Collapsing。",
+      "foreignPath": "普通 Pawn 无宿主直接返回；有宿主但不在战斗体相位只清理 BDP 派生资源/表现。原版健康变化和返回值不改。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_Pawn_HealthTracker_NotifyHediffChanged_CombatBodyWounds.cs",
+          "line": 12,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_Pawn_HealthTracker_NotifyHediffChanged_CombatBodyWounds.cs",
+          "line": 25,
+          "note": "普通具体 hediff 通知不做全量校准。"
+        },
+        {
+          "source": "Source/BDP/Core/CombatBody/Wounds/CombatBodyWoundRuntime.cs",
+          "line": 99,
+          "note": "非适用相位清派生运行时；适用相位只校准当前来源。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_Pawn_HealthTracker_MakeDowned_AttackTargetLifecycle",
+      "source": "Source/BDP/Patches/Patch_Pawn_HealthTracker_AttackTargetLifecycle.cs",
+      "line": 23,
+      "target": "Verse.Pawn_HealthTracker.MakeDowned",
+      "kind": [
+        "Prefix",
+        "Postfix"
+      ],
+      "purpose": "目标倒地/死亡/恢复后通知 BDP 自动远程会话按原版目标事实收口。",
+      "gate": "所有原版目标可成为 BDP 攻击对象；辅助函数只找到各地图 Pawn 主装备的 BDP 触发体，并最终仅处理 sessionTarget==该目标 的 BDP 远程宿主；手动 BDP 攻击作业排除。",
+      "foreignPath": "不改目标健康/死亡/原返回值；普通攻击者没有触发体不接收，受击目标自身不需要 BDP 身份。事件时会扫描全部已生成 Pawn，但无常驻全局目标表。",
+      "verdict": "广泛观察但必要且最终消费有BDP条件",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_Pawn_HealthTracker_AttackTargetLifecycle.cs",
+          "line": 23,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_Pawn_HealthTracker_AttackTargetLifecycle.cs",
+          "line": 40,
+          "note": "原先未倒地且现在倒地才通知。"
+        },
+        {
+          "source": "Source/BDP/Core/AttackExecution/AttackTargetLifecycleAccess.cs",
+          "line": 39,
+          "note": "只向主装备 BDP 触发体宿主传递。"
+        },
+        {
+          "source": "Source/BDP/Core/Verbs/BdpVerb_Shoot.cs",
+          "line": 1836,
+          "note": "同一会话目标身份及排除手动自定义作业后才标记/Reset。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_Pawn_HealthTracker_SetDead_AttackTargetLifecycle",
+      "source": "Source/BDP/Patches/Patch_Pawn_HealthTracker_AttackTargetLifecycle.cs",
+      "line": 51,
+      "target": "Verse.Pawn_HealthTracker.SetDead",
+      "kind": [
+        "Prefix",
+        "Postfix"
+      ],
+      "purpose": "目标倒地/死亡/恢复后通知 BDP 自动远程会话按原版目标事实收口。",
+      "gate": "所有原版目标可成为 BDP 攻击对象；辅助函数只找到各地图 Pawn 主装备的 BDP 触发体，并最终仅处理 sessionTarget==该目标 的 BDP 远程宿主；手动 BDP 攻击作业排除。",
+      "foreignPath": "不改目标健康/死亡/原返回值；普通攻击者没有触发体不接收，受击目标自身不需要 BDP 身份。事件时会扫描全部已生成 Pawn，但无常驻全局目标表。",
+      "verdict": "广泛观察但必要且最终消费有BDP条件",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_Pawn_HealthTracker_AttackTargetLifecycle.cs",
+          "line": 51,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_Pawn_HealthTracker_AttackTargetLifecycle.cs",
+          "line": 68,
+          "note": "原先未死亡且现在死亡才通知。"
+        },
+        {
+          "source": "Source/BDP/Core/AttackExecution/AttackTargetLifecycleAccess.cs",
+          "line": 39,
+          "note": "只向主装备 BDP 触发体宿主传递。"
+        },
+        {
+          "source": "Source/BDP/Core/Verbs/BdpVerb_Shoot.cs",
+          "line": 1836,
+          "note": "同一会话目标身份及排除手动自定义作业后才标记/Reset。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_Pawn_HealthTracker_MakeUndowned_AttackTargetLifecycle",
+      "source": "Source/BDP/Patches/Patch_Pawn_HealthTracker_AttackTargetLifecycle.cs",
+      "line": 79,
+      "target": "Verse.Pawn_HealthTracker.MakeUndowned",
+      "kind": [
+        "Prefix",
+        "Postfix"
+      ],
+      "purpose": "目标倒地/死亡/恢复后通知 BDP 自动远程会话按原版目标事实收口。",
+      "gate": "所有原版目标可成为 BDP 攻击对象；辅助函数只找到各地图 Pawn 主装备的 BDP 触发体，并最终仅处理 sessionTarget==该目标 的 BDP 远程宿主；手动 BDP 攻击作业排除。",
+      "foreignPath": "不改目标健康/死亡/原返回值；普通攻击者没有触发体不接收，受击目标自身不需要 BDP 身份。事件时会扫描全部已生成 Pawn，但无常驻全局目标表。",
+      "verdict": "广泛观察但必要且最终消费有BDP条件",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_Pawn_HealthTracker_AttackTargetLifecycle.cs",
+          "line": 79,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_Pawn_HealthTracker_AttackTargetLifecycle.cs",
+          "line": 96,
+          "note": "原先倒地且现在恢复才通知。"
+        },
+        {
+          "source": "Source/BDP/Core/AttackExecution/AttackTargetLifecycleAccess.cs",
+          "line": 39,
+          "note": "只向主装备 BDP 触发体宿主传递。"
+        },
+        {
+          "source": "Source/BDP/Core/Verbs/BdpVerb_Shoot.cs",
+          "line": 1836,
+          "note": "同一会话目标身份及排除手动自定义作业后才标记/Reset。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_Pawn_HealthTracker_NotifyResurrected_AttackTargetLifecycle",
+      "source": "Source/BDP/Patches/Patch_Pawn_HealthTracker_AttackTargetLifecycle.cs",
+      "line": 107,
+      "target": "Verse.Pawn_HealthTracker.Notify_Resurrected",
+      "kind": [
+        "Postfix"
+      ],
+      "purpose": "目标倒地/死亡/恢复后通知 BDP 自动远程会话按原版目标事实收口。",
+      "gate": "所有原版目标可成为 BDP 攻击对象；辅助函数只找到各地图 Pawn 主装备的 BDP 触发体，并最终仅处理 sessionTarget==该目标 的 BDP 远程宿主；手动 BDP 攻击作业排除。",
+      "foreignPath": "不改目标健康/死亡/原返回值；普通攻击者没有触发体不接收，受击目标自身不需要 BDP 身份。事件时会扫描全部已生成 Pawn，但无常驻全局目标表。",
+      "verdict": "广泛观察但必要且最终消费有BDP条件",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_Pawn_HealthTracker_AttackTargetLifecycle.cs",
+          "line": 107,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_Pawn_HealthTracker_AttackTargetLifecycle.cs",
+          "line": 115,
+          "note": "复活完成后通知。"
+        },
+        {
+          "source": "Source/BDP/Core/AttackExecution/AttackTargetLifecycleAccess.cs",
+          "line": 39,
+          "note": "只向主装备 BDP 触发体宿主传递。"
+        },
+        {
+          "source": "Source/BDP/Core/Verbs/BdpVerb_Shoot.cs",
+          "line": 1836,
+          "note": "同一会话目标身份及排除手动自定义作业后才标记/Reset。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_Pawn_ExposeData_PostLoadAttackRecovery",
+      "source": "Source/BDP/Patches/Patch_Pawn_ExposeData_PostLoadAttackRecovery.cs",
+      "line": 12,
+      "target": "Verse.Pawn.ExposeData",
+      "kind": [
+        "Postfix"
+      ],
+      "purpose": "读档最后阶段校验并续接或收口 BDP 正式攻击会话。",
+      "gate": "仅 PostLoadInit；辅助函数进一步要求 BDP 自定义攻击作业或 BDP 正式宿主忙碌姿态。",
+      "foreignPath": "普通作业和普通姿态在辅助函数 59–62 行直接返回，不停止作业/不清姿态。",
+      "verdict": "广泛观察但必要且最终消费有BDP条件",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_Pawn_ExposeData_PostLoadAttackRecovery.cs",
+          "line": 12,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Core/AttackExecution/AttackExecutionPostLoadRecovery.cs",
+          "line": 57,
+          "note": "无 BDP 作业/姿态直接返回。"
+        },
+        {
+          "source": "Source/BDP/Core/AttackExecution/AttackExecutionPostLoadRecovery.cs",
+          "line": 95,
+          "note": "BDP 准入由正式 Verb 类型或自定义 JobDef 判断。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_Pawn_EquipmentTracker_EquipmentTrackerTick",
+      "source": "Source/BDP/Patches/Patch_Pawn_EquipmentTracker_EquipmentTrackerTick.cs",
+      "line": 14,
+      "target": "Verse.Pawn_EquipmentTracker.EquipmentTrackerTick",
+      "kind": [
+        "Postfix"
+      ],
+      "purpose": "推进触发体运行时，并补校验绕过装备入口/读档后非法持有触发体的情况。",
+      "gate": "入口对每个装备追踪器观察；物品移除仅限 CompTriggerBody；战斗体强制解除还要求其相位 Active/Collapsing。",
+      "foreignPath": "非 BDP 装备不移除；无战斗体活跃会话不执行解除。不过无腺体普通 Pawn 每刻也经过辅助资格清理并新建装备快照，属于可收紧的全局工作。",
+      "verdict": "疑似遗漏/兼容风险",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_Pawn_EquipmentTracker_EquipmentTrackerTick.cs",
+          "line": 14,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Core/Trigger/Eligibility/TriggerBodyEquipmentEligibility.cs",
+          "line": 95,
+          "note": "所有无激活腺体 Pawn 都调用 HandleGlandEligibilityLost。"
+        },
+        {
+          "source": "Source/BDP/Core/Trigger/Eligibility/TriggerBodyEquipmentEligibility.cs",
+          "line": 60,
+          "note": "无论是否持有触发体都分配装备快照；真正加入快照只认 CompTriggerBody。"
+        },
+        {
+          "source": "Source/BDP/Core/CombatBodySession/CombatBodySessionService.cs",
+          "line": 275,
+          "note": "ForceReleaseForEligibilityLoss 在非激活/崩解相位返回。"
+        }
+      ],
+      "issues": [
+        "CORE-007"
+      ],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_PawnWoundDrawer_RenderPawnOverlay_CombatBodySuppress",
+      "source": "Source/BDP/Patches/Patch_PawnWoundDrawer_RenderPawnOverlay_CombatBodySuppress.cs",
+      "line": 13,
+      "target": "RimWorld.PawnOverlayDrawer.RenderPawnOverlay",
+      "kind": [
+        "Prefix"
+      ],
+      "purpose": "战斗体 Active/Collapsing 期间隐藏原版伤口覆盖绘制，由 BDP 伤口表现提供器承担。",
+      "gate": "__instance 必须是 PawnWoundDrawer，且所属 Pawn 战斗体伤口运行时适用。",
+      "foreignPath": "其他 PawnOverlayDrawer 类型继续原版；普通角色伤口覆盖继续原版；不压制火泡沫/其他覆盖器。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_PawnWoundDrawer_RenderPawnOverlay_CombatBodySuppress.cs",
+          "line": 13,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_PawnWoundDrawer_RenderPawnOverlay_CombatBodySuppress.cs",
+          "line": 26,
+          "note": "先筛 PawnWoundDrawer。"
+        },
+        {
+          "source": "Source/BDP/Core/CombatBody/Wounds/CombatBodyWoundPolicy.cs",
+          "line": 45,
+          "note": "只接受 BDP 战斗体 Active/Collapsing。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_PawnRenderUtility_DrawEquipmentAiming_BdpVisual",
+      "source": "Source/BDP/Patches/Patch_PawnRenderUtility_DrawEquipmentAiming_BdpVisual.cs",
+      "line": 18,
+      "target": "Verse.PawnRenderUtility.DrawEquipmentAiming",
+      "kind": [
+        "Prefix"
+      ],
+      "purpose": "在原版装备绘制边界采样姿态，按触发体已发布视觉投影附加、替换或隐藏宿主图层。",
+      "gate": "eq 必须带 CompTriggerBody；视觉替换进一步要求当前投影、有效条目/预设与姿态。",
+      "foreignPath": "普通装备在 42–46 行直接放行，不写姿态、不绘制额外图层；BDP Keep 模式绘制附加层但保留原图。Suppress 只由 BDP 当前投影显式指定。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_PawnRenderUtility_DrawEquipmentAiming_BdpVisual.cs",
+          "line": 18,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_PawnRenderUtility_DrawEquipmentAiming_BdpVisual.cs",
+          "line": 42,
+          "note": "所有采样和绘制之前检查触发体组件。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_PawnRenderUtility_DrawEquipmentAiming_BdpVisual.cs",
+          "line": 59,
+          "note": "原图处理取决于当前已发布视觉投影。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_PawnRenderUtility_DrawEquipmentAiming_BdpVisual.cs",
+          "line": 180,
+          "note": "后坐力只从该触发体已发布结果对应正式 Verb 读取，复用原版 EquipmentUtility.Recoil。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_PawnRenderer_GetDrawParms_BdpHitFeedbackColor",
+      "source": "Source/BDP/Patches/Patch_PawnRenderer_BdpHitFeedbackColor.cs",
+      "line": 12,
+      "target": "Verse.PawnRenderer.GetDrawParms",
+      "kind": [
+        "Postfix"
+      ],
+      "purpose": "把曾被 BDP 彩色命中确实击伤者的原版短暂红色闪烁改为模块颜色。",
+      "gate": "排除 Cache/Portrait；TryGetColor 必须找到这个 Pawn 的近期登记。登记来源仅 BDP 直接伤害或爆炸颜色补丁，不要求受击者属于 BDP。",
+      "foreignPath": "无该 Pawn 有效颜色登记时原绘制参数/材质原样；被 BDP 打中的原版 Pawn 显示指定颜色是功能所需。字典只在这个 Pawn 再次被绘制且已过期时移除，未绘制对象没有自动清理。材质补丁还直接写原版返回材质颜色，共享池兼容性未实测。",
+      "verdict": "疑似遗漏/兼容风险",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_PawnRenderer_BdpHitFeedbackColor.cs",
+          "line": 12,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_PawnRenderer_BdpHitFeedbackColor.cs",
+          "line": 23,
+          "note": "缓存/头像不改；必须有当前 Pawn 的有效颜色。"
+        },
+        {
+          "source": "Source/BDP/Core/Projectiles/RangedFlightProtocol/Impact/HitFeedbackColorRuntime.cs",
+          "line": 60,
+          "note": "按 Pawn 身份及 16 Tick 窗口限制。"
+        },
+        {
+          "source": "Source/BDP/Core/Projectiles/RangedFlightProtocol/Impact/HitFeedbackColorRuntime.cs",
+          "line": 75,
+          "note": "过期移除仅在 TryGetColor，被移出地图/不再绘制的对象仍被静态表持有。"
+        }
+      ],
+      "issues": [
+        "CORE-004"
+      ],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_PawnRenderer_OverrideMaterialIfNeeded_BdpHitFeedbackColor",
+      "source": "Source/BDP/Patches/Patch_PawnRenderer_BdpHitFeedbackColor.cs",
+      "line": 44,
+      "target": "Verse.PawnRenderer.OverrideMaterialIfNeeded",
+      "kind": [
+        "Postfix"
+      ],
+      "purpose": "把曾被 BDP 彩色命中确实击伤者的原版短暂红色闪烁改为模块颜色。",
+      "gate": "排除 Cache/Portrait；TryGetColor 必须找到这个 Pawn 的近期登记。登记来源仅 BDP 直接伤害或爆炸颜色补丁，不要求受击者属于 BDP。",
+      "foreignPath": "无该 Pawn 有效颜色登记时原返回材质保持。登记存在时直接写返回材质颜色；原版正式调用者对隐身者禁用缓存分支，故不能确认原版隐身池污染。第三方改写此绘制路径时仍有共享缓存风险。字典未绘制对象的过期清理见 CORE-004。",
+      "verdict": "疑似遗漏/兼容风险",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_PawnRenderer_BdpHitFeedbackColor.cs",
+          "line": 44,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_PawnRenderer_BdpHitFeedbackColor.cs",
+          "line": 55,
+          "note": "缓存/头像不改；必须有当前 Pawn 的有效颜色。"
+        },
+        {
+          "source": "Source/BDP/Core/Projectiles/RangedFlightProtocol/Impact/HitFeedbackColorRuntime.cs",
+          "line": 60,
+          "note": "按 Pawn 身份及 16 Tick 窗口限制。"
+        },
+        {
+          "source": "Source/BDP/Core/Projectiles/RangedFlightProtocol/Impact/HitFeedbackColorRuntime.cs",
+          "line": 75,
+          "note": "过期移除仅在 TryGetColor，被移出地图/不再绘制的对象仍被静态表持有。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_PawnRenderer_BdpHitFeedbackColor.cs",
+          "line": 69,
+          "note": "直接修改 __result.color；真实正式调用链及隐身缓存排除见 notes，不能仅因 InvisibilityMatPool 缓存就断言原版串色。"
+        }
+      ],
+      "issues": [
+        "CORE-004"
+      ],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_PawnAttackGizmoUtility_RangedWeapon",
+      "source": "Source/BDP/Patches/Patch_PawnAttackGizmoUtility_RangedWeapon.cs",
+      "line": 14,
+      "target": "RimWorld.PawnAttackGizmoUtility.AtLeastOneSelectedPlayerPawnHasRangedWeapon",
+      "kind": [
+        "Postfix"
+      ],
+      "purpose": "让已激活远程芯片的触发体显示原版远程攻击命令。",
+      "gate": "原结果 false、选中玩家 Pawn、主装备有 CompTriggerBody 且有激活远程芯片。",
+      "foreignPath": "原结果 true 不覆盖；普通装备不会改变 false 结果。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_PawnAttackGizmoUtility_RangedWeapon.cs",
+          "line": 14,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Core/Trigger/State/CompTriggerBody.Reads.cs",
+          "line": 468,
+          "note": "只读已发布 PrimaryRanged 及 IsAvailable。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_Hediff_MissingPart_BleedRate_CombatBodyWounds",
+      "source": "Source/BDP/Patches/Patch_Hediff_MissingPart_BleedRate_CombatBodyWounds.cs",
+      "line": 11,
+      "target": "Verse.Hediff_MissingPart.BleedRate.get",
+      "kind": [
+        "Postfix"
+      ],
+      "purpose": "战斗体激活时压制原版单伤口/断肢流血，由战斗体伤口运行时提供对应资源流失。",
+      "gate": "支持的原版伤口类型、BDP 战斗体读口存在且 Phase==Active，策略启用 suppressIndividualBleeding。",
+      "foreignPath": "普通 Pawn 或未激活战斗体完全保留原 BleedRate；Collapsing 也不改返回值。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_Hediff_MissingPart_BleedRate_CombatBodyWounds.cs",
+          "line": 11,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Core/CombatBody/Wounds/CombatBodyWoundPolicy.cs",
+          "line": 55,
+          "note": "原版伤口 + 策略 + 激活战斗体三重准入。"
+        },
+        {
+          "source": "Source/BDP/Core/CombatBody/Access/Surfaces/CombatBodySurfaceAccess.cs",
+          "line": 41,
+          "note": "战斗体读口来自 BDP CompCombatBodyHost。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_Hediff_Injury_TryMergeWith_BdpSemantics",
+      "source": "Source/BDP/Patches/Patch_Hediff_Injury_TryMergeWith_BdpSemantics.cs",
+      "line": 16,
+      "target": "Verse.Hediff_Injury.TryMergeWith",
+      "kind": [
+        "Postfix"
+      ],
+      "purpose": "BDP 伤口合并成功后保留当次攻击语义来源名称。",
+      "gate": "原版合并成功且当前 SemanticRuntimeScope 非空；实际写入还要求非空显示名。",
+      "foreignPath": "无当前语义/未成功合并都不改原伤口。BDP 伤口合并进旧原版伤口的来源更新是显示 BDP 攻击所需；嵌套独立伤害继承语义同样存在风险。",
+      "verdict": "疑似遗漏/兼容风险",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_Hediff_Injury_TryMergeWith_BdpSemantics.cs",
+          "line": 16,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_Hediff_Injury_TryMergeWith_BdpSemantics.cs",
+          "line": 24,
+          "note": "先要求原版合并成功。"
+        },
+        {
+          "source": "Source/BDP/Core/Semantics/BdpDamageSemanticBridge.cs",
+          "line": 142,
+          "note": "无有效语义名称完全不写入。"
+        }
+      ],
+      "issues": [
+        "CORE-002"
+      ],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_Hediff_Injury_BleedRate_CombatBodyWounds",
+      "source": "Source/BDP/Patches/Patch_Hediff_Injury_BleedRate_CombatBodyWounds.cs",
+      "line": 11,
+      "target": "Verse.Hediff_Injury.BleedRate.get",
+      "kind": [
+        "Postfix"
+      ],
+      "purpose": "战斗体激活时压制原版单伤口/断肢流血，由战斗体伤口运行时提供对应资源流失。",
+      "gate": "支持的原版伤口类型、BDP 战斗体读口存在且 Phase==Active，策略启用 suppressIndividualBleeding。",
+      "foreignPath": "普通 Pawn 或未激活战斗体完全保留原 BleedRate；Collapsing 也不改返回值。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_Hediff_Injury_BleedRate_CombatBodyWounds.cs",
+          "line": 11,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Core/CombatBody/Wounds/CombatBodyWoundPolicy.cs",
+          "line": 55,
+          "note": "原版伤口 + 策略 + 激活战斗体三重准入。"
+        },
+        {
+          "source": "Source/BDP/Core/CombatBody/Access/Surfaces/CombatBodySurfaceAccess.cs",
+          "line": 41,
+          "note": "战斗体读口来自 BDP CompCombatBodyHost。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_HediffSet_AddDirect_CombatBodyWounds",
+      "source": "Source/BDP/Patches/Patch_HediffSet_AddDirect_CombatBodyWounds.cs",
+      "line": 13,
+      "target": "Verse.HediffSet.AddDirect",
+      "kind": [
+        "Prefix",
+        "Postfix"
+      ],
+      "purpose": "观察战斗体实际新增/合并伤口后的部位血量下降，更新伤口资源流失与表现。",
+      "gate": "原版 Injury/MissingPart、有效 Part、战斗体 Active/Collapsing；前后部位健康确实下降。",
+      "foreignPath": "普通角色不采样、不派发。原版 AddDirect 仍完整执行，不改伤口事实或返回值。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_HediffSet_AddDirect_CombatBodyWounds.cs",
+          "line": 13,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_HediffSet_AddDirect_CombatBodyWounds.cs",
+          "line": 22,
+          "note": "采样前要求战斗体伤口运行时适用。"
+        },
+        {
+          "source": "Source/BDP/Core/CombatBody/Wounds/CombatBodyWoundRuntime.cs",
+          "line": 66,
+          "note": "更新时再次校验相位，否则清理已有 BDP 派生状态。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_HediffSet_AddDirect_BodyConstraintSignal",
+      "source": "Source/BDP/Patches/Patch_HediffSet_AddDirect_BodyConstraintSignal.cs",
+      "line": 15,
+      "target": "Verse.HediffSet.AddDirect",
+      "kind": [
+        "Postfix"
+      ],
+      "purpose": "断肢增删后发布中性身体约束版本变化，触发当前触发体槽位即时禁用/恢复。",
+      "gate": "所有 Pawn 的 Hediff_MissingPart 都发布；真正槽位变化由桥定位当前主装备 CompTriggerBody。",
+      "foreignPath": "原版断肢添加/移除不改；普通 Pawn 没有触发体则不改玩法，但仍给静态 VersionByPawnId 永久字典登记/增加版本。广泛事件通知合理，全量永久记录必要性不足。",
+      "verdict": "疑似遗漏/兼容风险",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_HediffSet_AddDirect_BodyConstraintSignal.cs",
+          "line": 15,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Core/BodyConstraints/PawnBodyConstraintSignalHub.cs",
+          "line": 28,
+          "note": "所有断肢 Pawn 无条件写静态版本字典并广播。"
+        },
+        {
+          "source": "Source/BDP/Core/Trigger/Bridge/TriggerBodyConstraintSignalBridge.cs",
+          "line": 36,
+          "note": "真正禁用只定位当前主装备的 CompTriggerBody。"
+        },
+        {
+          "source": "Source/BDP/Core/Trigger/Switching/Flow/TriggerDisableSync.cs",
+          "line": 37,
+          "note": "版本只用于触发体已有同步缓存失效。"
+        }
+      ],
+      "issues": [
+        "CORE-007"
+      ],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_FloatMenuUtility_GetRangedAttackAction",
+      "source": "Source/BDP/Patches/Patch_FloatMenuUtility_GetRangedAttackAction.cs",
+      "line": 16,
+      "target": "RimWorld.FloatMenuUtility.GetRangedAttackAction",
+      "kind": [
+        "Prefix",
+        "Postfix"
+      ],
+      "purpose": "给触发体 PrimaryVerb 的无参数读取暂存本次目标，双侧射程不同时选择可覆盖目标的一侧。",
+      "gate": "Pawn 当前主装备有 CompTriggerBody；辅助函数还要求已发布远程单侧结果。",
+      "foreignPath": "普通装备不写提示，原方法/返回值不变；BDP 提示正常在 Postfix 清空。",
+      "verdict": "疑似遗漏/兼容风险",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_FloatMenuUtility_GetRangedAttackAction.cs",
+          "line": 16,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Core/Trigger/State/CompTriggerBody.Reads.cs",
+          "line": 488,
+          "note": "先清空并暂存目标选择结果。"
+        },
+        {
+          "source": "Source/BDP/Core/Trigger/State/CompTriggerBody.Reads.cs",
+          "line": 517,
+          "note": "后续 PrimaryVerb 查询会持续使用提示，直到外部显式清空。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_FloatMenuUtility_GetRangedAttackAction.cs",
+          "line": 35,
+          "note": "只有 Postfix 清理，没有异常 Finalizer，且重新解析当前装备。"
+        }
+      ],
+      "issues": [
+        "CORE-006"
+      ],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_Explosion_StartExplosion_BdpSemantics",
+      "source": "Source/BDP/Patches/Patch_Explosion_StartExplosion_BdpSemantics.cs",
+      "line": 17,
+      "target": "Verse.Explosion.StartExplosion",
+      "kind": [
+        "Prefix"
+      ],
+      "purpose": "把 BDP 爆炸语义及命中上下文绑定到爆炸实例，支持后续跨刻逐目标结算；调整模块指定的视听表现。",
+      "gate": "读当前线程 ExplosionImpactRuntimeScope 和 SemanticRuntimeScope，非空才绑定；没有校验此次 Explosion 是否就是准备生成的那个。",
+      "foreignPath": "普通独立爆炸没有上下文，原字段/方法不改；BDP 作用域内同步产生的独立爆炸会继承绑定，继而被当成 BDP 爆炸处理。",
+      "verdict": "疑似遗漏/兼容风险",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_Explosion_StartExplosion_BdpSemantics.cs",
+          "line": 17,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_Explosion_StartExplosion_BdpSemantics.cs",
+          "line": 25,
+          "note": "当前线程上下文直接写入任意传入爆炸。"
+        },
+        {
+          "source": "Source/BDP/Core/Semantics/BdpDamageSemanticBridge.cs",
+          "line": 89,
+          "note": "按 Explosion 实例弱表保存上下文，但绑定前没有核验来源。"
+        },
+        {
+          "source": "Source/BDP/Core/Projectiles/BdpProjectile.cs",
+          "line": 1875,
+          "note": "作用域覆盖整个 GenExplosion.DoExplosion，包括原版同步回调。"
+        }
+      ],
+      "issues": [
+        "CORE-002"
+      ],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_EquipmentUtility_CanEquip_TriggerBodyGlandRequirement",
+      "source": "Source/BDP/Patches/Patch_EquipmentUtility_CanEquip_TriggerBodyGlandRequirement.cs",
+      "line": 15,
+      "target": "RimWorld.EquipmentUtility.CanEquip(Thing,Pawn,ref string,bool)",
+      "kind": [
+        "Postfix"
+      ],
+      "purpose": "触发体装备必须有激活 Trion 腺体。",
+      "gate": "原版先允许装备；CanEquip 仅对带 CompTriggerBody 的物品追加腺体资格。",
+      "foreignPath": "普通物品辅助函数恒 true，不改原版结果；原版已拒绝的物品不覆盖原理由。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_EquipmentUtility_CanEquip_TriggerBodyGlandRequirement.cs",
+          "line": 15,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Core/Trigger/Eligibility/TriggerBodyEquipmentEligibility.cs",
+          "line": 24,
+          "note": "非触发体直接通过；只限制触发体装备。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_DamageWorker_ExplosionDamageThing_BdpSemantics",
+      "source": "Source/BDP/Patches/Patch_DamageWorker_ExplosionDamageThing_BdpSemantics.cs",
+      "line": 22,
+      "target": "Verse.DamageWorker.ExplosionDamageThing",
+      "kind": [
+        "Prefix",
+        "Postfix",
+        "Finalizer"
+      ],
+      "purpose": "恢复爆炸逐目标语义/穿盾策略；模块取消范围伤害时保留去重、忽略与护盾裁决；在通过护盾后派发额外效果。",
+      "gate": "实际取消伤害/派发效果必须该 Explosion 弱表有 BDP ImpactContext，目标通过类别去重/忽略；结果必须非 ShieldBlocked 且已处理/模块拦截。",
+      "foreignPath": "无 BDP 上下文完整保留原版伤害方法；仍创建临时 ScopeState，将穿盾策略压为 null，Finalizer 恢复并原样传异常。语义 Push(null) 却没有隔离外层语义；且未恢复爆炸颜色上下文。",
+      "verdict": "疑似遗漏/兼容风险",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_DamageWorker_ExplosionDamageThing_BdpSemantics.cs",
+          "line": 22,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_DamageWorker_ExplosionDamageThing_BdpSemantics.cs",
+          "line": 35,
+          "note": "读取该爆炸绑定，只恢复语义与交互策略，不恢复 ExplosionImpactRuntimeScope。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_DamageWorker_ExplosionDamageThing_BdpSemantics.cs",
+          "line": 43,
+          "note": "无 BDP 绑定返回 true，普通原方法继续。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_DamageWorker_ExplosionDamageThing_BdpSemantics.cs",
+          "line": 106,
+          "note": "消费本次目标结果，护盾挡住时不派发额外效果。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_DamageWorker_ExplosionDamageThing_BdpSemantics.cs",
+          "line": 244,
+          "note": "Finalizer 清理临时作用域，异常原样返回。"
+        }
+      ],
+      "issues": [
+        "CORE-002",
+        "CORE-003"
+      ],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_DamageWorker_ExplosionDamageThing_BdpLogEntry",
+      "source": "Source/BDP/Patches/Patch_DamageWorker_ExplosionDamageThing_BdpLogEntry.cs",
+      "line": 13,
+      "target": "Verse.DamageWorker.ExplosionDamageThing",
+      "kind": [
+        "Transpiler"
+      ],
+      "purpose": "把逐目标爆炸日志构造替换成工厂调用；仅 BDP 爆炸才使用扩展条目。",
+      "gate": "IL 构造点全局替换；工厂必须读到该 Explosion 的 BDP 绑定才进入提供器。",
+      "foreignPath": "普通爆炸工厂使用原构造函数、同参数、同 BattleLogEntry_ExplosionImpact 类型；没有全量日志登记。其他模组若先删掉/复制构造点会触发数量校验异常，属于明确的转译补丁兼容边界。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_DamageWorker_ExplosionDamageThing_BdpLogEntry.cs",
+          "line": 13,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_DamageWorker_ExplosionDamageThing_BdpLogEntry.cs",
+          "line": 22,
+          "note": "要求目标构造点恰好一个。"
+        },
+        {
+          "source": "Source/BDP/Core/CombatLog/BattleLogEntryFactoryAccess.cs",
+          "line": 84,
+          "note": "无该爆炸 BDP 上下文时原样 new 原版条目。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_CompProjectileInterceptor_BdpPolicy",
+      "source": "Source/BDP/Patches/Patch_CompProjectileInterceptor_BdpPolicy.cs",
+      "line": 12,
+      "target": "RimWorld.CompProjectileInterceptor.CheckIntercept",
+      "kind": [
+        "Prefix"
+      ],
+      "purpose": "执行 BDP 投射物显式声明的拦截器绕过策略。",
+      "gate": "projectile 是 BdpProjectile，且 CurrentInteractionPolicy.BypassProjectileInterceptors 为 true。",
+      "foreignPath": "普通投射物直接返回 true 继续原方法，不修改 __result；受击者/拦截器可为原版，这是源 BDP 穿透效果需要覆盖的对象。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_CompProjectileInterceptor_BdpPolicy.cs",
+          "line": 12,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_CompProjectileInterceptor_BdpPolicy.cs",
+          "line": 19,
+          "note": "从传入投射物实例读取策略，没有依赖线程策略。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_CompEquippable_PrimaryVerb",
+      "source": "Source/BDP/Patches/Patch_CompEquippable_PrimaryVerb.cs",
+      "line": 13,
+      "target": "Verse.CompEquippable.PrimaryVerb.get",
+      "kind": [
+        "Postfix"
+      ],
+      "purpose": "让原版装备入口读取触发体当前已发布的正式远程攻击。",
+      "gate": "__instance 必须是 CompTriggerBody；还需激活远程结果与对应正式绑定。",
+      "foreignPath": "普通 CompEquippable 原返回值保持不变；BDP 无有效远程结果也保持原值。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_CompEquippable_PrimaryVerb.cs",
+          "line": 13,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Core/Trigger/State/CompTriggerBody.Reads.cs",
+          "line": 517,
+          "note": "HasActiveRangedChip + 已发布结果身份 + VerbHostSurfaceAccess 才返回替代攻击。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_Ability_Activate_BdpAttackActionSuccess",
+      "source": "Source/BDP/Patches/Patch_Ability_Activate_BdpAttackActionSuccess.cs",
+      "line": 14,
+      "target": [
+        "RimWorld.Ability.Activate(LocalTargetInfo,LocalTargetInfo)",
+        "RimWorld.Ability.Activate(GlobalTargetInfo)"
+      ],
+      "kind": [
+        "Postfix"
+      ],
+      "purpose": "广播原版/BDP 攻击能力成功激活的事实，让持有 BDP 变色龙隐身状态者任意攻击后破隐。",
+      "gate": "原返回值 true 且 AbilityDef.hostile 或 verbProperties.violent；广播不要求能力本身 BDP。实际消费者必须该隐身组件所属 Pawn 与攻击 Pawn 相同。",
+      "foreignPath": "普通能力原流程/原返回值不改；没有 BDP 隐身组件的 Pawn 无行为变化。原版攻击能力也应取消 BDP 隐身，因此广泛观察必要。",
+      "verdict": "广泛观察但必要且最终消费有BDP条件",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_Ability_Activate_BdpAttackActionSuccess.cs",
+          "line": 14,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_Ability_Activate_BdpAttackActionSuccess.cs",
+          "line": 34,
+          "note": "成功且攻击能力才广播。"
+        },
+        {
+          "source": "Source/BDP/Core/AttackExecution/AttackActionSuccessDispatcher.cs",
+          "line": 19,
+          "note": "只发布事件，不注册攻击历史/不改原版动作。"
+        },
+        {
+          "source": "Source/BDP.Content/Chameleon/HediffComp_BdpInvisibility.cs",
+          "line": 45,
+          "note": "唯一正式消费者核对 attack.Pawn == Pawn，只移除自己的 BDP 隐身状态。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_DamageWorker_AddInjury_SourceLabel",
+      "source": "Source/BDP/Patches/Patch_DamageWorker_AddInjury_SourceLabel.cs",
+      "line": 16,
+      "target": "Verse.DamageWorker_AddInjury.FinalizeAndAddInjury(Pawn,Hediff_Injury,DamageInfo,DamageResult)",
+      "kind": [
+        "Prefix"
+      ],
+      "purpose": "让 BDP 伤口来源显示当前攻击语义名称。",
+      "gate": "当前线程 SemanticRuntimeScope 必须有非空显示名。",
+      "foreignPath": "普通独立伤害没有语义时 TryApplyInjurySource 返回 false，伤口原字段不变；受击者是原版 Pawn 也应显示 BDP 来源。但嵌套独立伤害未隔离，可能误挂 BDP 来源。",
+      "verdict": "疑似遗漏/兼容风险",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_DamageWorker_AddInjury_SourceLabel.cs",
+          "line": 16,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Core/Semantics/BdpDamageSemanticBridge.cs",
+          "line": 135,
+          "note": "伤口写入只需语义显示名，不校验当前 dinfo/目标身份。"
+        },
+        {
+          "source": "Source/BDP/Core/Semantics/SemanticRuntimeScope.cs",
+          "line": 30,
+          "note": "Push(null) 不覆盖当前语义。"
+        }
+      ],
+      "issues": [
+        "CORE-002"
+      ],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_DamageResult_AssociateWithLog_BdpEntry",
+      "source": "Source/BDP/Patches/Patch_DamageResult_AssociateWithLog_BdpEntry.cs",
+      "line": 10,
+      "target": "Verse.DamageWorker.DamageResult.AssociateWithLog",
+      "kind": [
+        "Postfix"
+      ],
+      "purpose": "把刚完成承伤结果对应的原版日志引用传给 BDP 结果处理，不建立历史日志表。",
+      "gate": "SemanticRuntimeScope.Current 非空、log 非空，辅助函数严格匹配同一个 DamageResult 对象。",
+      "foreignPath": "无 BDP 语义时不操作；原方法/原关联原样保留。非 BDP 嵌套伤害可继承外层语义，但仍只关联同一结果，不替换日志类型。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_DamageResult_AssociateWithLog_BdpEntry.cs",
+          "line": 10,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Core/Projectiles/RangedFlightProtocol/Impact/DamageResolutionRuntime.cs",
+          "line": 253,
+          "note": "ReferenceEquals 结果身份，补引用不篡改原关联。"
+        }
+      ],
+      "issues": [
+        "CORE-002"
+      ],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_DamageWorker_AddInjury_BdpHitFeedbackColor",
+      "source": "Source/BDP/Patches/Patch_DamageWorker_AddInjury_BdpHitFeedbackColor.cs",
+      "line": 12,
+      "target": "Verse.DamageWorker_AddInjury.ApplyToPawn",
+      "kind": [
+        "Postfix"
+      ],
+      "purpose": "在 BDP 范围攻击确实造成伤口后登记指定命中闪烁颜色。",
+      "gate": "当前线程 ExplosionImpactRuntimeScope 非空、声明颜色、DamageResult.wounded 且目标范围允许 Pawn。",
+      "foreignPath": "普通独立伤害无上下文不改；正常跨刻 BDP 爆炸上下文未恢复，反而启动作用域内同步无关承伤可继承颜色；准入依赖范围上下文却没有绑定当前伤害/目标。",
+      "verdict": "疑似遗漏/兼容风险",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_DamageWorker_AddInjury_BdpHitFeedbackColor.cs",
+          "line": 12,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_DamageWorker_AddInjury_BdpHitFeedbackColor.cs",
+          "line": 21,
+          "note": "只读线程上下文，未从实际爆炸/当前目标身份读取。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_DamageWorker_ExplosionDamageThing_BdpSemantics.cs",
+          "line": 36,
+          "note": "逐目标前缀未压入 ExplosionImpactRuntimeScope。"
+        },
+        {
+          "source": "Source/BDP/Core/Projectiles/RangedFlightProtocol/Impact/ExplosionImpactDispatchContext.cs",
+          "line": 133,
+          "note": "上下文生命周期仅随 Push/Dispose，没有跨刻自动恢复。"
+        }
+      ],
+      "issues": [
+        "CORE-002",
+        "CORE-003"
+      ],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_Ability_CooldownTicksTotal_BdpReleaseCooldown",
+      "source": "Source/BDP/Core/Abilities/Patch_Ability_CooldownTicksTotal_BdpReleaseCooldown.cs",
+      "line": 11,
+      "target": "RimWorld.Ability.CooldownTicksTotal.get",
+      "kind": [
+        "Postfix"
+      ],
+      "purpose": "把来源释放时保存的冷却总时长交给原版进度显示。",
+      "gate": "能力定义必须显式携带 CompProperties_AbilityReleaseCooldown、非空冷却键，并在当前游戏账本存在记录。",
+      "foreignPath": "普通能力没有该组件，辅助函数返回 false，不改原返回值；无全局能力重写。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP/Core/Abilities/Patch_Ability_CooldownTicksTotal_BdpReleaseCooldown.cs",
+          "line": 11,
+          "note": "实际补丁类；细节见本类入口及以下辅助函数。"
+        },
+        {
+          "source": "Source/BDP/Core/Abilities/AbilityReleaseCooldownService.cs",
+          "line": 82,
+          "note": "先检查 Pawn，再读组件冷却键与当前账本。"
+        },
+        {
+          "source": "Source/BDP/Core/Abilities/AbilityReleaseCooldownService.cs",
+          "line": 114,
+          "note": "只认 BDP 的通用释放冷却组件。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "core"
+    },
+    {
+      "className": "Patch_FloatingFlightPathContext",
+      "target": [
+        "Pawn.GetPathContext",
+        "Pathing.For(TraverseParms)"
+      ],
+      "kind": "Postfix",
+      "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_FloatingFlightPathContext.cs",
+      "line": 18,
+      "purpose": "为浮空人物选择 BDP 混合或始终浮空网格。",
+      "gate": "ResolvePathKind != Vanilla；路径种类由 BDP 被动能力/浮空 Hediff 决定。",
+      "foreignPath": "普通人物完整保留原方法及其他补丁的返回值。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_FloatingFlightPathContext.cs",
+          "line": 18,
+          "note": "实际补丁入口。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Pathing/FloatingFlightPathUtility.cs",
+          "line": 14,
+          "note": "无地图返回 Vanilla；只有有效 BDP_FloatingFlight 被动能力对应模式或 BDP 浮空 Hediff 才返回 Hybrid/Always。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/FloatingFlightModeResolver.cs",
+          "line": 23,
+          "note": "ResolveEffectiveMode 先检查 FloatingFlightCapabilityResolver.HasCapability；能力读取 BDP_FloatingFlight 身份的已发布、可用表达结果。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/FloatingFlightUtility.cs",
+          "line": 11,
+          "note": "实际飞行只认 BDP_Hediff_FloatingFlight 的精确 Def 身份。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "movement-shield"
+    },
+    {
+      "className": "Patch_FloatingFlightPresentation",
+      "target": [
+        "Pawn_DrawTracker.get_DrawPos",
+        "PawnRenderer.DrawShadowInternal"
+      ],
+      "kind": [
+        "Postfix",
+        "Prefix"
+      ],
+      "source": "Source/BDP.Content/FloatingFlight/Presentation/Patch_FloatingFlightPresentation.cs",
+      "line": 18,
+      "purpose": "只调整 BDP 起降/浮空的绘制坐标，并复用原版飞行影子材质。",
+      "gate": "GetPresentationFactor 要有既有浮空记录，人物已生成、非死亡倒地，且 BDP Hediff 或起降插值因子非零。",
+      "foreignPath": "无记录普通人物偏移为零，影子仍执行原版；MS01 创建的普通记录通常因子也为零，故不会立即改变显示。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Presentation/Patch_FloatingFlightPresentation.cs",
+          "line": 18,
+          "note": "实际补丁入口。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Presentation/FloatingFlightPresentationUtility.cs",
+          "line": 10,
+          "note": "无既有记录返回 0；GetOffset 对因子 0 返回 Vector3.zero。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/FloatingFlightStateController.cs",
+          "line": 198,
+          "note": "视觉因子目标由实际 BDP 浮空 Hediff 决定，兼顾已移除 Hediff 的落地过渡。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "movement-shield"
+    },
+    {
+      "className": "Patch_PathFinderMapData_ParameterizeGridJob_FloatingFlight",
+      "target": "PathFinderMapData.ParameterizeGridJob",
+      "kind": "Postfix",
+      "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PathFinderMapData_ParameterizeGridJob_FloatingFlight.cs",
+      "line": 19,
+      "purpose": "把本次浮空请求的 BDP 直接代价网格交给原版后台寻路作业。",
+      "gate": "请求的 customizer 必须是 BDP 自有 FloatingFlightPathGridCustomizer；网格须已创建。",
+      "foreignPath": "原版和其他模组请求的 job.pathGridDirect 不写入；原版其余网格参数与已有定制器偏移保留。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PathFinderMapData_ParameterizeGridJob_FloatingFlight.cs",
+          "line": 19,
+          "note": "实际补丁入口。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Pathing/FloatingFlightPathGridCustomizer.cs",
+          "line": 58,
+          "note": "只通过 as 自有封装类型读取种类，不凭共享字段猜来源。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Pathing/FloatingFlightPathGridCustomizer.cs",
+          "line": 75,
+          "note": "GetOffsetGrid 转发原请求已有定制器的偏移网格。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "movement-shield"
+    },
+    {
+      "className": "Patch_PathFinder_CreateRequest_FloatingFlight",
+      "target": "PathFinder.CreateRequest(IntVec3, LocalTargetInfo, IntVec3?, TraverseParms, PathFinderCostTuning?, PathEndMode, Pawn, IPathGridCustomizer)",
+      "kind": "Postfix",
+      "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PathFinderMapData_ParameterizeGridJob_FloatingFlight.cs",
+      "line": 69,
+      "purpose": "为 BDP 浮空请求提供独立网格缓存身份，避免普通、混合、始终浮空结果混用。",
+      "gate": "__result.pawn 非空、ResolvePathKind 非 Vanilla，且未已有 BDP 封装。",
+      "foreignPath": "普通请求不包装；BDP 请求原 customizer 作为 inner 保留。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PathFinderMapData_ParameterizeGridJob_FloatingFlight.cs",
+          "line": 69,
+          "note": "实际补丁入口。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Pathing/FloatingFlightPathUtility.cs",
+          "line": 14,
+          "note": "无地图返回 Vanilla；只有有效 BDP_FloatingFlight 被动能力对应模式或 BDP 浮空 Hediff 才返回 Hybrid/Always。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/FloatingFlightModeResolver.cs",
+          "line": 23,
+          "note": "ResolveEffectiveMode 先检查 FloatingFlightCapabilityResolver.HasCapability；能力读取 BDP_FloatingFlight 身份的已发布、可用表达结果。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Pathing/FloatingFlightPathGridCustomizer.cs",
+          "line": 36,
+          "note": "Wrap 对无其他定制器使用稳定身份，有其他定制器则包裹保留。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "movement-shield"
+    },
+    {
+      "className": "Patch_PathUtility_GetDoorCost_FloatingFlight",
+      "target": "PathUtility.GetDoorCost",
+      "kind": "Prefix",
+      "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PathUtility_GetDoorCost_FloatingFlight.cs",
+      "line": 14,
+      "purpose": "BDP 露天实际飞行时不计算开门、等待、破门代价。",
+      "gate": "具体人物实际拥有 BDP 浮空 Hediff，门格在人物地图范围内且露天。",
+      "foreignPath": "其他人物、地面状态、屋顶门均返回 true 继续原版；仅 BDP 飞行请求返回 0 并短路。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PathUtility_GetDoorCost_FloatingFlight.cs",
+          "line": 14,
+          "note": "实际补丁入口。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/FloatingFlightUtility.cs",
+          "line": 11,
+          "note": "实际飞行只认 BDP_Hediff_FloatingFlight 的精确 Def 身份。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "movement-shield"
+    },
+    {
+      "className": "Patch_PawnDraftController_FloatingFlight",
+      "target": "Pawn_DraftController.set_Drafted",
+      "kind": "Prefix",
+      "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnDraftController_FloatingFlight.cs",
+      "line": 14,
+      "purpose": "取消征召时在原版工作清理前收地；非玩家模式沿既有浮空规则处理。",
+      "gate": "value == false 后辅助函数再次要求有 BDP 浮空能力或实际 BDP 浮空 Hediff，且非读写存档阶段。",
+      "foreignPath": "普通取消征召会进入一次只读辅助检查后返回；不改状态、位置、作业，也不取消原 setter。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnDraftController_FloatingFlight.cs",
+          "line": 14,
+          "note": "实际补丁入口。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/FloatingFlightStateController.cs",
+          "line": 82,
+          "note": "91–95 行同时无能力且无实际飞行便直接退出；117 行后的收地只属于已准入人物。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/FloatingFlightUtility.cs",
+          "line": 11,
+          "note": "实际飞行只认 BDP_Hediff_FloatingFlight 的精确 Def 身份。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/FloatingFlightModeResolver.cs",
+          "line": 23,
+          "note": "ResolveEffectiveMode 先检查 FloatingFlightCapabilityResolver.HasCapability；能力读取 BDP_FloatingFlight 身份的已发布、可用表达结果。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "movement-shield"
+    },
+    {
+      "className": "Patch_PawnPathFollower_StartPath_FloatingFlight",
+      "target": "Pawn_PathFollower.StartPath",
+      "kind": "Transpiler",
+      "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnPathFollower_StartPath_FloatingFlight.cs",
+      "line": 16,
+      "purpose": "在原版无 Pawn 的可达性预检处补回当前人物，只给 BDP 浮空请求使用自有可达性。",
+      "gate": "插入包装函数后再检查 ResolvePathKind 非 Vanilla；匹配唯一精确原版 CanReach 调用，非唯一则保留原指令。",
+      "foreignPath": "普通人物仍以原 receiver、start、dest、peMode 和原 TraverseParms 调用同一个原版 CanReach 方法；不强加 Pawn 参数改变普通语义。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnPathFollower_StartPath_FloatingFlight.cs",
+          "line": 16,
+          "note": "实际补丁入口。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Pathing/FloatingFlightPathUtility.cs",
+          "line": 14,
+          "note": "无地图返回 Vanilla；只有有效 BDP_FloatingFlight 被动能力对应模式或 BDP 浮空 Hediff 才返回 Hybrid/Always。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnPathFollower_StartPath_FloatingFlight.cs",
+          "line": 56,
+          "note": "64–68 行只对浮空走新分支，71 行完整回调原版。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "movement-shield"
+    },
+    {
+      "className": "Patch_PawnPathFollower_Steps_FloatingFlight.PawnCanOccupyPatch",
+      "target": "Pawn_PathFollower.PawnCanOccupy",
+      "kind": [
+        "Prefix",
+        "Transpiler"
+      ],
+      "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnPathFollower_Steps_FloatingFlight.cs",
+      "line": 184,
+      "purpose": "允许 BDP 露天实际飞行人物暂处建筑或关闭门格，避免原版强制恢复位置。",
+      "gate": "Prefix 的 IsOpenAirFlight 要有 BDP 实际飞行 Hediff、地图、有效露天格；插入 IL 的旁路也检查同一 BDP 状态。",
+      "foreignPath": "普通或屋顶人物执行原方法，旁路判定失败后原 WalkableBy/已有同签名调用保留。飞行时 Prefix 已短路，后续 Transpiler 旁路通常不被执行。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnPathFollower_Steps_FloatingFlight.cs",
+          "line": 184,
+          "note": "实际补丁入口。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/FloatingFlightUtility.cs",
+          "line": 11,
+          "note": "实际飞行只认 BDP_Hediff_FloatingFlight 的精确 Def 身份。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnPathFollower_Steps_FloatingFlight.cs",
+          "line": 42,
+          "note": "IsOpenAirFlight 的全部门槛。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnPathFollower_Steps_FloatingFlight.cs",
+          "line": 23,
+          "note": "CanBypassWalkableCheck 只对同地图 BDP 实际飞行且网格可走的露天格返回 true。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "movement-shield"
+    },
+    {
+      "className": "Patch_PawnPathFollower_Steps_FloatingFlight.IsNextCellWalkablePatch",
+      "target": "Pawn_PathFollower.IsNextCellWalkable",
+      "kind": "Transpiler",
+      "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnPathFollower_Steps_FloatingFlight.cs",
+      "line": 213,
+      "purpose": "在路径跟随的单格通行检查处允许 BDP 实际露天飞行越过地面障碍。",
+      "gate": "插入 CanBypassWalkableCheck；人物必须实际持有 BDP 浮空 Hediff、与地图一致、露天且 BDP 网格可走。",
+      "foreignPath": "普通人物旁路返回 false，原通行调用继续执行。BDP 飞行短路通行检查本身为业务需要，但找不到原版锚点后的宽松匹配可能跳过其他模组的不同判定。",
+      "verdict": "疑似遗漏/兼容风险",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnPathFollower_Steps_FloatingFlight.cs",
+          "line": 213,
+          "note": "实际补丁入口。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/FloatingFlightUtility.cs",
+          "line": 11,
+          "note": "实际飞行只认 BDP_Hediff_FloatingFlight 的精确 Def 身份。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnPathFollower_Steps_FloatingFlight.cs",
+          "line": 23,
+          "note": "严格的运行时 BDP 门槛。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnPathFollower_Steps_FloatingFlight.cs",
+          "line": 120,
+          "note": "先找精确 WalkableBy；135–142 行后备方案只凭静态 bool(IntVec3, Map, Pawn) 形状和成功分支匹配。"
+        }
+      ],
+      "issues": [
+        "MS02"
+      ],
+      "auditGroup": "movement-shield"
+    },
+    {
+      "className": "Patch_PawnPathFollower_Steps_FloatingFlight.SetupMoveIntoNextCellPatch",
+      "target": "Pawn_PathFollower.SetupMoveIntoNextCell",
+      "kind": "Transpiler",
+      "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnPathFollower_Steps_FloatingFlight.cs",
+      "line": 227,
+      "purpose": "在路径跟随的单格通行检查处允许 BDP 实际露天飞行越过地面障碍。",
+      "gate": "插入 CanBypassWalkableCheck；人物必须实际持有 BDP 浮空 Hediff、与地图一致、露天且 BDP 网格可走。",
+      "foreignPath": "普通人物旁路返回 false，原通行调用继续执行。BDP 飞行短路通行检查本身为业务需要，但找不到原版锚点后的宽松匹配可能跳过其他模组的不同判定。",
+      "verdict": "疑似遗漏/兼容风险",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnPathFollower_Steps_FloatingFlight.cs",
+          "line": 227,
+          "note": "实际补丁入口。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/FloatingFlightUtility.cs",
+          "line": 11,
+          "note": "实际飞行只认 BDP_Hediff_FloatingFlight 的精确 Def 身份。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnPathFollower_Steps_FloatingFlight.cs",
+          "line": 23,
+          "note": "严格的运行时 BDP 门槛。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnPathFollower_Steps_FloatingFlight.cs",
+          "line": 120,
+          "note": "先找精确 WalkableBy；135–142 行后备方案只凭静态 bool(IntVec3, Map, Pawn) 形状和成功分支匹配。"
+        }
+      ],
+      "issues": [
+        "MS02"
+      ],
+      "auditGroup": "movement-shield"
+    },
+    {
+      "className": "Patch_PawnPathFollower_Steps_FloatingFlight.NeedNewPathPatch",
+      "target": "Pawn_PathFollower.NeedNewPath",
+      "kind": "Transpiler",
+      "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnPathFollower_Steps_FloatingFlight.cs",
+      "line": 241,
+      "purpose": "在路径跟随的单格通行检查处允许 BDP 实际露天飞行越过地面障碍。",
+      "gate": "插入 CanBypassWalkableCheck；人物必须实际持有 BDP 浮空 Hediff、与地图一致、露天且 BDP 网格可走。",
+      "foreignPath": "普通人物旁路返回 false，原通行调用继续执行。BDP 飞行短路通行检查本身为业务需要，但找不到原版锚点后的宽松匹配可能跳过其他模组的不同判定。",
+      "verdict": "疑似遗漏/兼容风险",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnPathFollower_Steps_FloatingFlight.cs",
+          "line": 241,
+          "note": "实际补丁入口。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/FloatingFlightUtility.cs",
+          "line": 11,
+          "note": "实际飞行只认 BDP_Hediff_FloatingFlight 的精确 Def 身份。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnPathFollower_Steps_FloatingFlight.cs",
+          "line": 23,
+          "note": "严格的运行时 BDP 门槛。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnPathFollower_Steps_FloatingFlight.cs",
+          "line": 120,
+          "note": "先找精确 WalkableBy；135–142 行后备方案只凭静态 bool(IntVec3, Map, Pawn) 形状和成功分支匹配。"
+        }
+      ],
+      "issues": [
+        "MS02"
+      ],
+      "auditGroup": "movement-shield"
+    },
+    {
+      "className": "Patch_PawnPathFollower_Steps_FloatingFlight.BuildingBlockingNextPathCellPatch",
+      "target": "Pawn_PathFollower.BuildingBlockingNextPathCell",
+      "kind": "Prefix",
+      "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnPathFollower_Steps_FloatingFlight.cs",
+      "line": 255,
+      "purpose": "BDP 露天实际飞行时不把建筑或门视为路径跟随阻挡。",
+      "gate": "IsOpenAirFlight(___pawn, ___nextCell)。",
+      "foreignPath": "普通人物和屋顶路段仍走原版；BDP 飞行明确返回 null 跳过地面障碍。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnPathFollower_Steps_FloatingFlight.cs",
+          "line": 255,
+          "note": "实际补丁入口。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/FloatingFlightUtility.cs",
+          "line": 11,
+          "note": "实际飞行只认 BDP_Hediff_FloatingFlight 的精确 Def 身份。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnPathFollower_Steps_FloatingFlight.cs",
+          "line": 42,
+          "note": "精确 BDP Hediff、地图、有界露天格。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "movement-shield"
+    },
+    {
+      "className": "Patch_PawnPathFollower_Steps_FloatingFlight.NextCellDoorPatch",
+      "target": "Pawn_PathFollower.NextCellDoorToWaitForOrManuallyOpen",
+      "kind": "Prefix",
+      "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnPathFollower_Steps_FloatingFlight.cs",
+      "line": 275,
+      "purpose": "BDP 露天实际飞行时跳过等待和手动开门。",
+      "gate": "IsOpenAirFlight(___pawn, ___nextCell)。",
+      "foreignPath": "普通人物和屋顶路段不改返回值或原逻辑；只有 BDP 飞行返回 null。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnPathFollower_Steps_FloatingFlight.cs",
+          "line": 275,
+          "note": "实际补丁入口。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/FloatingFlightUtility.cs",
+          "line": 11,
+          "note": "实际飞行只认 BDP_Hediff_FloatingFlight 的精确 Def 身份。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnPathFollower_Steps_FloatingFlight.cs",
+          "line": 42,
+          "note": "精确 BDP Hediff、地图、有界露天格。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "movement-shield"
+    },
+    {
+      "className": "Patch_PawnPathFollower_Steps_FloatingFlight.TryEnterNextPathCellPatch",
+      "target": "Pawn_PathFollower.TryEnterNextPathCell",
+      "kind": "Prefix",
+      "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnPathFollower_Steps_FloatingFlight.cs",
+      "line": 295,
+      "purpose": "在 BDP 浮空进屋顶路段前暂停路径、降落，始终浮空则重算避屋顶路线。",
+      "gate": "缺失提前准入：进入屋顶分支后先 GetOrCreateRecord(___pawn)，342 行才检查 IsActuallyFlying。非屋顶分支仅查询已有记录，反而未创建。",
+      "foreignPath": "普通人物进入屋顶也创建持久浮空记录，原移动通常继续但每 tick 进入 BDP 状态控制；并非无副作用的全局只读观察。",
+      "verdict": "疑似遗漏/兼容风险",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnPathFollower_Steps_FloatingFlight.cs",
+          "line": 295,
+          "note": "实际补丁入口。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnPathFollower_Steps_FloatingFlight.cs",
+          "line": 326,
+          "note": "GetOrCreateRecord 在 342 行实际飞行判断之前执行。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/GameComponent_FloatingFlight.cs",
+          "line": 49,
+          "note": "仅 pawn == null 会拒绝新记录；所有非空人物均可追加 records。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/GameComponent_FloatingFlight.cs",
+          "line": 113,
+          "note": "每 tick 遍历所有登记记录并 Reconcile，记录只在 Destroyed && Discarded 时移除。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/FloatingFlightStateController.cs",
+          "line": 263,
+          "note": "ForceGroundedImmediately 不检查有无 BDP 飞行经历；已生成且普通地面网格不可走时直接重新寻找格并写 Pawn.Position。"
+        }
+      ],
+      "issues": [
+        "MS01"
+      ],
+      "auditGroup": "movement-shield"
+    },
+    {
+      "className": "Patch_Reachability_CanReach_FloatingFlight",
+      "target": "Reachability.CanReach(IntVec3, LocalTargetInfo, PathEndMode, TraverseParms)",
+      "kind": "Prefix",
+      "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_Reachability_CanReach_FloatingFlight.cs",
+      "line": 16,
+      "purpose": "BDP 浮空可达性不用地面区域连通性，改用 BDP 网格逐格连通检查。",
+      "gate": "TraverseParms.pawn 非空且 ResolvePathKind 非 Vanilla。",
+      "foreignPath": "普通人物、无 Pawn 的通用请求仍执行原版及其他补丁；只有 BDP 浮空请求短路并给新结果。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_Reachability_CanReach_FloatingFlight.cs",
+          "line": 16,
+          "note": "实际补丁入口。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Pathing/FloatingFlightPathUtility.cs",
+          "line": 14,
+          "note": "无地图返回 Vanilla；只有有效 BDP_FloatingFlight 被动能力对应模式或 BDP 浮空 Hediff 才返回 Hybrid/Always。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/FloatingFlightModeResolver.cs",
+          "line": 23,
+          "note": "ResolveEffectiveMode 先检查 FloatingFlightCapabilityResolver.HasCapability；能力读取 BDP_FloatingFlight 身份的已发布、可用表达结果。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Pathing/FloatingFlightReachability.cs",
+          "line": 14,
+          "note": "新实现仍检查同地图、合法目标，使用允许区域、危险等级和最终可落地格；未改任何原版网格。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "movement-shield"
+    },
+    {
+      "className": "Patch_PathFinder_MakeDestination_FloatingFlight",
+      "target": "PathFinder.MakeDestination",
+      "kind": "Postfix",
+      "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PathFinder_MakeDestination_FloatingFlight.cs",
+      "line": 14,
+      "purpose": "从 BDP 浮空路径终点候选中排除非法地面停留格和始终浮空的屋顶格。",
+      "gate": "PathingContext.pathGrid.def 必须为 BDP 两个浮空 Def 之一。",
+      "foreignPath": "原版/其他模组路径上下文不修改；BDP 也只追加 excluded，保留原终点 rect。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PathFinder_MakeDestination_FloatingFlight.cs",
+          "line": 14,
+          "note": "实际补丁入口。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Pathing/FloatingFlightPathUtility.cs",
+          "line": 72,
+          "note": "按自有两个 Def 的对象身份准入。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Pathing/FloatingFlightPathUtility.cs",
+          "line": 83,
+          "note": "终点合法性沿用原版 Normal.pathGrid，始终浮空额外排除屋顶。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "movement-shield"
+    },
+    {
+      "className": "Patch_RoofGrid_SetRoof_FloatingFlight",
+      "target": "RoofGrid.SetRoof",
+      "kind": "Postfix",
+      "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_RoofGrid_SetRoof_FloatingFlight.cs",
+      "line": 15,
+      "purpose": "任何屋顶写入后刷新受影响格子的两张 BDP 路径缓存；房屋变化不能只等待当前浮空人物附近事件。；全局环境观察有必要，但不等于必须使用 Harmony，原版已有 RoofChanged 事件。",
+      "gate": "观察所有有效地图的 SetRoof，但只写 BDP_PathGrid_FloatingHybrid / BDP_PathGrid_FloatingAlways 指定上下文，不要求当下存在 BDP 人物。",
+      "foreignPath": "正常原 SetRoof 完整执行，普通/其他网格的代价值不被改。额外两个网格重算可能按原版 PathGrid 通知机制清空共享可达缓存、标记区域脏；属于缓存维护副作用。重复写同一屋顶值也会多算，非玩法结果改写。",
+      "verdict": "广泛观察但必要且消费有BDP条件",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_RoofGrid_SetRoof_FloatingFlight.cs",
+          "line": 15,
+          "note": "实际补丁入口。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_RoofGrid_SetRoof_FloatingFlight.cs",
+          "line": 23,
+          "note": "目标 Def 固定为 BDP 两张网格；Recalculate 未动 map.pathing.Normal。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Pathing/PathGrid_FloatingAlways.cs",
+          "line": 18,
+          "note": "屋顶状态决定 BDP 始终浮空缓存格是否通行。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Pathing/PathGrid_FloatingHybrid.cs",
+          "line": 18,
+          "note": "屋顶状态决定混合缓存格采用空中还是原版地面代价。"
+        }
+      ],
+      "issues": [
+        "MS05"
+      ],
+      "auditGroup": "movement-shield"
+    },
+    {
+      "className": "Patch_JobDriver_Wait_CheckForAutoAttack",
+      "target": "JobDriver_Wait.CheckForAutoAttack",
+      "kind": "Postfix",
+      "source": "Source/BDP.Content/LightSoul/Patches/Patch_JobDriver_Wait_CheckForAutoAttack.cs",
+      "line": 15,
+      "purpose": "沿原版自动攻击节奏更新光魂举盾自动警戒目标。",
+      "gate": "当前 driver 仍为被调用实例且 ResolveVerb 返回光魂业务 Verb；后者只从指定业务组件取出。",
+      "foreignPath": "普通人物扫描后没有业务 Verb，完全不刷新目标；原版自动近战先执行，忙碌态警戒清空/不覆盖。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/LightSoul/Patches/Patch_JobDriver_Wait_CheckForAutoAttack.cs",
+          "line": 15,
+          "note": "实际补丁入口。"
+        },
+        {
+          "source": "Source/BDP.Content/LightSoul/LightSoulGuardWatchUtility.cs",
+          "line": 72,
+          "note": "遍历健康状态，只返回 HediffComp_LightSoulGuardWatch 持有的 Verb_LightSoulGuardWatch；普通人物返回 null。"
+        },
+        {
+          "source": "Source/BDP.Content/LightSoul/Verb_LightSoulGuardWatch.cs",
+          "line": 282,
+          "note": "警戒要求 Wait_Combat、允许远程上下文、开火自由、非忙碌/倒地/搬运等；近战忙碌不被抢朝向。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "movement-shield"
+    },
+    {
+      "className": "Patch_Pawn_RotationTracker_UpdateRotation",
+      "target": "Pawn_RotationTracker.UpdateRotation",
+      "kind": "Postfix",
+      "source": "Source/BDP.Content/LightSoul/Patches/Patch_Pawn_RotationTracker_UpdateRotation.cs",
+      "line": 15,
+      "purpose": "让光魂举盾等待人物朝向当前合法自动警戒目标。",
+      "gate": "ResolveVerb 业务组件存在，且 TryGetAutomaticWatchTarget 确认仍为可用战斗等待上下文和可命中目标。",
+      "foreignPath": "普通人物朝向不写；近战忙碌、其他作业、无目标时保留原朝向。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/LightSoul/Patches/Patch_Pawn_RotationTracker_UpdateRotation.cs",
+          "line": 15,
+          "note": "实际补丁入口。"
+        },
+        {
+          "source": "Source/BDP.Content/LightSoul/LightSoulGuardWatchUtility.cs",
+          "line": 72,
+          "note": "遍历健康状态，只返回 HediffComp_LightSoulGuardWatch 持有的 Verb_LightSoulGuardWatch；普通人物返回 null。"
+        },
+        {
+          "source": "Source/BDP.Content/LightSoul/Verb_LightSoulGuardWatch.cs",
+          "line": 223,
+          "note": "重新校验当前 driver、上下文及目标，失效目标不 FaceTarget。"
+        },
+        {
+          "source": "Source/BDP.Content/LightSoul/Verb_LightSoulGuardWatch.cs",
+          "line": 282,
+          "note": "明确排除 FullBodyBusy。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "movement-shield"
+    },
+    {
+      "className": "Patch_PawnRenderUtility_DrawEquipmentAiming_LightSoulGuardWatch",
+      "target": "PawnRenderUtility.DrawEquipmentAiming",
+      "kind": "Prefix",
+      "source": "Source/BDP.Content/LightSoul/Patches/Patch_PawnRenderUtility_DrawEquipmentAiming_LightSoulGuardWatch.cs",
+      "line": 39,
+      "purpose": "光魂举盾警戒时为其当前装备提供与目标一致的连续瞄准角度和绘制偏移。",
+      "gate": "从 eq 所属人物解析光魂业务 Verb，再要求当前有效手动/自动目标与非零方向。",
+      "foreignPath": "普通装备/普通持有人不改参数。光魂举盾人物即使装备其他模组武器，也随此 BDP 姿态改变视觉，这是人物姿态业务范围；仍执行原版绘制，未全局换绘制器。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/LightSoul/Patches/Patch_PawnRenderUtility_DrawEquipmentAiming_LightSoulGuardWatch.cs",
+          "line": 39,
+          "note": "实际补丁入口。"
+        },
+        {
+          "source": "Source/BDP.Content/LightSoul/LightSoulGuardWatchUtility.cs",
+          "line": 72,
+          "note": "遍历健康状态，只返回 HediffComp_LightSoulGuardWatch 持有的 Verb_LightSoulGuardWatch；普通人物返回 null。"
+        },
+        {
+          "source": "Source/BDP.Content/LightSoul/Verb_LightSoulGuardWatch.cs",
+          "line": 243,
+          "note": "手动目标须属于 BDP_LightSoulGuardWatch 作业及同一 Verb，否则回到严格自动警戒准入。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "movement-shield"
+    },
+    {
+      "className": "Patch_Pawn_TryGetAttackVerb_LightSoulGuardWatch",
+      "target": "Pawn.TryGetAttackVerb",
+      "kind": "Postfix",
+      "source": "Source/BDP.Content/LightSoul/Patches/Patch_Pawn_TryGetAttackVerb_LightSoulGuardWatch.cs",
+      "line": 17,
+      "purpose": "举盾等待查询返回业务警戒射程；有目标且已找到合法近战时保留近战。",
+      "gate": "ResolveVerb 非空且警戒 Verb Available；仅 target == null 或结果为空/非近战时替换。",
+      "foreignPath": "普通人物原/其他模组结果不变；光魂举盾时会改写该人物的其他模组远程选择，这是禁远程/警戒必要语义，不是所有人物改写。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/LightSoul/Patches/Patch_Pawn_TryGetAttackVerb_LightSoulGuardWatch.cs",
+          "line": 17,
+          "note": "实际补丁入口。"
+        },
+        {
+          "source": "Source/BDP.Content/LightSoul/LightSoulGuardWatchUtility.cs",
+          "line": 72,
+          "note": "遍历健康状态，只返回 HediffComp_LightSoulGuardWatch 持有的 Verb_LightSoulGuardWatch；普通人物返回 null。"
+        },
+        {
+          "source": "Source/BDP.Content/LightSoul/Patches/Patch_Pawn_TryGetAttackVerb_LightSoulGuardWatch.cs",
+          "line": 21,
+          "note": "有目标且结果 IsMeleeAttack 为 true 时不覆盖。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "movement-shield"
+    },
+    {
+      "className": "Patch_TooltipUtility_ShotCalculationTipString",
+      "target": "TooltipUtility.ShotCalculationTipString",
+      "kind": "Prefix",
+      "source": "Source/BDP.Content/LightSoul/Patches/Patch_TooltipUtility_ShotCalculationTipString.cs",
+      "line": 15,
+      "purpose": "选中光魂举盾人物时隐藏不再适用的射击命中率附加提示。",
+      "gate": "Find.Selector.SingleSelectedThing 是携带光魂业务警戒组件的人物。",
+      "foreignPath": "普通人物继续原版；只短路射击附加提示方法，不短路物件/人物普通提示整体。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/LightSoul/Patches/Patch_TooltipUtility_ShotCalculationTipString.cs",
+          "line": 15,
+          "note": "实际补丁入口。"
+        },
+        {
+          "source": "Source/BDP.Content/LightSoul/LightSoulGuardWatchUtility.cs",
+          "line": 72,
+          "note": "遍历健康状态，只返回 HediffComp_LightSoulGuardWatch 持有的 Verb_LightSoulGuardWatch；普通人物返回 null。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "movement-shield"
+    },
+    {
+      "className": "Patch_Verb_Available_LightSoulGuard",
+      "target": "Verb.Available",
+      "kind": "Postfix",
+      "source": "Source/BDP.Content/LightSoul/Patches/Patch_Verb_LightSoulGuardRangedRestriction.cs",
+      "line": 12,
+      "purpose": "让按钮、自动武器选择跳过光魂举盾人物的远程武器。",
+      "gate": "仅既有 __result == true 且 IsRangedBlocked == true。",
+      "foreignPath": "普通人物、近战、非攻击能力都不修改；原/其他补丁已经 false 的结果也不抬为 true。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/LightSoul/Patches/Patch_Verb_LightSoulGuardRangedRestriction.cs",
+          "line": 12,
+          "note": "实际补丁入口。"
+        },
+        {
+          "source": "Source/BDP.Content/LightSoul/LightSoulGuardWatchUtility.cs",
+          "line": 72,
+          "note": "遍历健康状态，只返回 HediffComp_LightSoulGuardWatch 持有的 Verb_LightSoulGuardWatch；普通人物返回 null。"
+        },
+        {
+          "source": "Source/BDP.Content/LightSoul/LightSoulGuardWatchUtility.cs",
+          "line": 21,
+          "note": "先排除 IsMeleeAttack，再识别发射投射物或 ai_IsWeapon && violent；限制还须 ResolveVerb(verb.CasterPawn) 非空。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "movement-shield"
+    },
+    {
+      "className": "Patch_Verb_TryStartCastOn_LightSoulGuard",
+      "target": "Verb.TryStartCastOn(LocalTargetInfo, LocalTargetInfo, bool, bool, bool, bool)",
+      "kind": "Prefix",
+      "source": "Source/BDP.Content/LightSoul/Patches/Patch_Verb_LightSoulGuardRangedRestriction.cs",
+      "line": 22,
+      "purpose": "直接施放入口拒绝光魂举盾人物远程起手，避免调用方绕开选择检查。",
+      "gate": "IsRangedBlocked：业务警戒姿态人物 + 远程武器行为。",
+      "foreignPath": "普通人物、近战、位移等继续原起手；仅 BDP 举盾远程返回 false 并短路。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/LightSoul/Patches/Patch_Verb_LightSoulGuardRangedRestriction.cs",
+          "line": 22,
+          "note": "实际补丁入口。"
+        },
+        {
+          "source": "Source/BDP.Content/LightSoul/LightSoulGuardWatchUtility.cs",
+          "line": 72,
+          "note": "遍历健康状态，只返回 HediffComp_LightSoulGuardWatch 持有的 Verb_LightSoulGuardWatch；普通人物返回 null。"
+        },
+        {
+          "source": "Source/BDP.Content/LightSoul/LightSoulGuardWatchUtility.cs",
+          "line": 21,
+          "note": "先排除 IsMeleeAttack，再识别发射投射物或 ai_IsWeapon && violent；限制还须 ResolveVerb(verb.CasterPawn) 非空。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "movement-shield"
+    },
+    {
+      "className": "Patch_Verb_TryCastNextBurstShot_LightSoulGuard",
+      "target": "Verb.TryCastNextBurstShot",
+      "kind": "Prefix",
+      "source": "Source/BDP.Content/LightSoul/Patches/Patch_Verb_LightSoulGuardRangedRestriction.cs",
+      "line": 35,
+      "purpose": "跨举盾切换的剩余远程连射停止，保留近战连击。",
+      "gate": "IsRangedBlocked：业务警戒姿态人物 + 远程武器行为。",
+      "foreignPath": "普通人物不 Reset、不取消连射；只有指定人物指定远程行为被 Reset。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/LightSoul/Patches/Patch_Verb_LightSoulGuardRangedRestriction.cs",
+          "line": 35,
+          "note": "实际补丁入口。"
+        },
+        {
+          "source": "Source/BDP.Content/LightSoul/LightSoulGuardWatchUtility.cs",
+          "line": 72,
+          "note": "遍历健康状态，只返回 HediffComp_LightSoulGuardWatch 持有的 Verb_LightSoulGuardWatch；普通人物返回 null。"
+        },
+        {
+          "source": "Source/BDP.Content/LightSoul/LightSoulGuardWatchUtility.cs",
+          "line": 21,
+          "note": "先排除 IsMeleeAttack，再识别发射投射物或 ai_IsWeapon && violent；限制还须 ResolveVerb(verb.CasterPawn) 非空。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "movement-shield"
+    },
+    {
+      "className": "Patch_Pawn_DrawAt_EnergyShield",
+      "target": "Pawn.DrawAt",
+      "kind": "Postfix",
+      "source": "Source/BDP.Content/Shield/Patch_Pawn_DrawAt_EnergyShield.cs",
+      "line": 16,
+      "purpose": "原人物绘制后按 BDP 健康护盾组件叠加球形护盾。",
+      "gate": "Hediff 必须有 BDP 自有 HediffComp_EnergyShield；DrawShieldBubble 还检查实际有效盾、非倒地/死亡、完好及 showShieldBubble。",
+      "foreignPath": "普通人物只扫描健康列表，没有 BDP 组件则不绘图；原版人物/装备绘制完整保留。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/Shield/Patch_Pawn_DrawAt_EnergyShield.cs",
+          "line": 16,
+          "note": "实际补丁入口。"
+        },
+        {
+          "source": "Source/BDP.Content/Shield/HediffComp_EnergyShield.cs",
+          "line": 47,
+          "note": "IsShieldActive 的业务健康、概率和耐久准入。"
+        },
+        {
+          "source": "Source/BDP.Content/Shield/HediffComp_EnergyShield.cs",
+          "line": 103,
+          "note": "无效/配置不显示时不绘制。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "movement-shield"
+    },
+    {
+      "className": "Patch_Pawn_PreApplyDamage_EnergyShield",
+      "target": "Pawn.PreApplyDamage",
+      "kind": "Postfix",
+      "source": "Source/BDP.Content/Shield/Patch_Pawn_PreApplyDamage_EnergyShield.cs",
+      "line": 17,
+      "purpose": "原受伤前处理之后，若尚未被别人吸收，尝试 BDP 护盾吸收并登记中性伤害结果。",
+      "gate": "未 absorbed、无 BDP 既有穿盾投射物策略、人物有 BDP HediffComp_EnergyShield；组件继续检查完好、配置伤害类别、穿盾 API、角度、概率及 Trion 支付。",
+      "foreignPath": "普通人物无自有组件不改伤害；已被原版/其他系统吸收则不动。但带 ignoreShields 的其他模组攻击命中 BDP 护盾时未尊重该原版标志（MS03）；ThreadStatic 穿盾策略的嵌套伤害风险见 MS04。",
+      "verdict": "疑似遗漏/兼容风险",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/Shield/Patch_Pawn_PreApplyDamage_EnergyShield.cs",
+          "line": 17,
+          "note": "实际补丁入口。"
+        },
+        {
+          "source": "Source/BDP.Content/Shield/HediffComp_EnergyShield.cs",
+          "line": 63,
+          "note": "TryBlockDamage 成功支付后把伤害设零，再扣耐久；失败返回不改原伤害。"
+        },
+        {
+          "source": "Source/BDP.Content/Shield/HediffCompProperties_EnergyShield.cs",
+          "line": 153,
+          "note": "CanAbsorb 只看远程、爆炸和可选近战，不读取 ignoreShields。"
+        },
+        {
+          "source": "Source/BDP/Core/Projectiles/Interaction/ProjectileInteractionPolicy.cs",
+          "line": 41,
+          "note": "当前策略仅绑定线程，不绑定实际伤害或目标。"
+        }
+      ],
+      "issues": [
+        "MS03",
+        "MS04"
+      ],
+      "auditGroup": "movement-shield"
+    },
+    {
+      "className": "Patch_CompShield_BdpPolicy",
+      "target": "CompShield.PostPreApplyDamage",
+      "kind": "Prefix",
+      "source": "Source/BDP.Content/Shield/Patch_CompShield_BdpPolicy.cs",
+      "line": 17,
+      "purpose": "携带 BDP 穿盾交互策略的攻击跳过原版护盾腰带吸收，不要求受击者使用 BDP 装备。",
+      "gate": "ProjectileInteractionPolicyScope.Current?.BypassRegisteredDamageShields == true；策略由 BDP 实际命中/爆炸结算作用域建立。",
+      "foreignPath": "普通攻击没有策略继续完整原 CompShield；非 BDP 受击者的原版盾被 BDP 穿盾攻击穿过为预期。唯嵌套无关伤害可能继承同线程策略，见 MS04。",
+      "verdict": "疑似遗漏/兼容风险",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/Shield/Patch_CompShield_BdpPolicy.cs",
+          "line": 17,
+          "note": "实际补丁入口。"
+        },
+        {
+          "source": "Source/BDP/Core/Projectiles/Interaction/ProjectileInteractionPolicy.cs",
+          "line": 46,
+          "note": "ThreadStatic 作用域只存 policy，Push/Dispose 维护嵌套但没有伤害身份。"
+        },
+        {
+          "source": "Source/BDP/Core/Projectiles/BdpProjectile.cs",
+          "line": 1702,
+          "note": "直接实际命中在 using 策略作用域内结算；异常释放能恢复策略。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_DamageWorker_ExplosionDamageThing_BdpSemantics.cs",
+          "line": 35,
+          "note": "爆炸按目标恢复 Explosion 携带的 BDP 策略；普通无上下文爆炸会 Push(null)。"
+        }
+      ],
+      "issues": [
+        "MS04"
+      ],
+      "auditGroup": "movement-shield"
+    },
+    {
+      "className": "Patch_PawnRenderNodeWorker_OverlayWounds_AssemblyPortrait",
+      "target": [
+        "Verse.PawnRenderNodeWorker_OverlayWounds.CanDrawNow"
+      ],
+      "kind": "Prefix",
+      "source": "Source/BDP.Content/Assembly/Window/Patch_PawnRenderNodeWorker_OverlayWounds_AssemblyPortrait.cs",
+      "line": 10,
+      "purpose": "装配台人物肖像捕获时不绘制伤口覆盖层。",
+      "gate": "只在 AssemblyPawnPortraitCapture 的 capturingPawn 与当前绘图人物为同一实例时返回 false。",
+      "foreignPath": "其他人物及同一人物的普通世界绘图返回 true，不改原返回值；无健康数据写入。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/Assembly/Window/Patch_PawnRenderNodeWorker_OverlayWounds_AssemblyPortrait.cs",
+          "line": 10,
+          "note": "补丁声明及实际入口已逐行检查。"
+        },
+        {
+          "source": "Source/BDP.Content/Assembly/Window/AssemblyPawnPortraitCapture.cs",
+          "line": 26,
+          "note": "准入比较真实 Pawn 引用；Capture 同步调用期间设置，finally 清空 capturingPawn 并恢复相机。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "content-other"
+    },
+    {
+      "className": "Patch_PawnRenderer_RenderPawnAt_CombatBodyScan",
+      "target": [
+        "Verse.PawnRenderer.RenderPawnAt"
+      ],
+      "kind": "Prefix",
+      "source": "Source/BDP.Content/CombatBody/Transform/Patch_PawnRenderer_RenderPawnAt_CombatBodyScan.cs",
+      "line": 10,
+      "purpose": "战斗体切换扫描动画短时接管人物完整绘图。",
+      "gate": "ShouldSuppress 要求该人物 thingIDNumber 已由 BDP 扫描 Mote 登记，并未超时；隐藏特效时也不抑制。",
+      "foreignPath": "未登记的人物返回 true，完整执行原版绘图。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/CombatBody/Transform/Patch_PawnRenderer_RenderPawnAt_CombatBodyScan.cs",
+          "line": 10,
+          "note": "补丁声明及实际入口已逐行检查。"
+        },
+        {
+          "source": "Source/BDP.Content/CombatBody/Transform/CombatBodyPawnRenderSuppression.cs",
+          "line": 48,
+          "note": "ShouldSuppress 无登记或过期即 false。"
+        },
+        {
+          "source": "Source/BDP.Content/CombatBody/Transform/Mote_CombatBodyScan.cs",
+          "line": 117,
+          "note": "扫描 Mote 成功生成后 Begin；Destroy 前按 Pawn 和 token 注销。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "content-other"
+    },
+    {
+      "className": "Patch_Pawn_HealthTracker_MakeDowned_CombatBodyTriggerProtection",
+      "target": [
+        "Verse.Pawn_HealthTracker.MakeDowned"
+      ],
+      "kind": "Prefix+Postfix",
+      "source": "Source/BDP.Content/CombatBody/Protection/Patch_Pawn_HealthTracker_CombatBodyTriggerProtection.cs",
+      "line": 166,
+      "purpose": "原版倒地清装备期间保留触发体；战斗体倒地后请求崩解。",
+      "gate": "保护上下文只为 Active/Collapsing 战斗体且主装备有 CompTriggerBody 的人物建立；崩解只为此前未倒地的 Active 战斗体。",
+      "foreignPath": "普通人物仍执行原版倒地、掉落、征召解除；仅会产生临时 __state，不进入保护表、不请求崩解。",
+      "verdict": "正常路径限定充分；异常清理存在遗漏",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/CombatBody/Protection/Patch_Pawn_HealthTracker_CombatBodyTriggerProtection.cs",
+          "line": 166,
+          "note": "补丁声明及实际入口已逐行检查。"
+        },
+        {
+          "source": "Source/BDP.Content/CombatBody/Protection/Patch_Pawn_HealthTracker_CombatBodyTriggerProtection.cs",
+          "line": 181,
+          "note": "PreserveTrigger 与 CollapseAfterDowned 分别检查战斗体阶段；Postfix 209 行 Exit。"
+        },
+        {
+          "source": "Source/BDP/Core/CombatBody/Access/Surfaces/CombatBodySurfaceAccess.cs",
+          "line": 41,
+          "note": "ResolveReader 读取 BDP CompCombatBodyHost 的正式阶段。"
+        }
+      ],
+      "issues": [
+        "COTHER-02"
+      ],
+      "auditGroup": "content-other"
+    },
+    {
+      "className": "Patch_Pawn_HealthTracker_CheckForStateChange_CombatBodyTriggerProtection",
+      "target": [
+        "Verse.Pawn_HealthTracker.CheckForStateChange"
+      ],
+      "kind": "Prefix+Postfix+Finalizer",
+      "source": "Source/BDP.Content/CombatBody/Protection/Patch_Pawn_HealthTracker_CombatBodyTriggerProtection.cs",
+      "line": 253,
+      "purpose": "战斗体保护阶段临时禁止倒地随机致死，操控能力丧失时保留触发体，缺心脏时请求崩解。",
+      "gate": "Prefix 只有 Active/Collapsing 进入，操控保护另要求主装备 CompTriggerBody；心脏检查要求 Active 且当前主触发体。",
+      "foreignPath": "非保护阶段 __state=null，不覆盖原版死亡概率；Postfix 心脏检查亦返回 false；Finalizer 原样返回异常。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/CombatBody/Protection/Patch_Pawn_HealthTracker_CombatBodyTriggerProtection.cs",
+          "line": 253,
+          "note": "补丁声明及实际入口已逐行检查。"
+        },
+        {
+          "source": "Source/BDP.Content/CombatBody/Protection/Patch_Pawn_HealthTracker_CombatBodyTriggerProtection.cs",
+          "line": 269,
+          "note": "无保护阶段直接 return；279 行仅在保护阶段把 overrideDeathOnDownedChance 置 0。"
+        },
+        {
+          "source": "Source/BDP.Content/CombatBody/Protection/Patch_Pawn_HealthTracker_CombatBodyTriggerProtection.cs",
+          "line": 290,
+          "note": "正常和异常退出共用 Restore，幂等清理上下文并恢复原概率。"
+        },
+        {
+          "source": "Source/BDP.Content/CombatBody/Protection/Patch_Pawn_HealthTracker_CombatBodyTriggerProtection.cs",
+          "line": 97,
+          "note": "缺失心脏崩解还要求 Active、主触发体及有效身体。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "content-other"
+    },
+    {
+      "className": "Patch_Pawn_EquipmentTracker_Notify_PawnSpawned_CombatBodyTriggerProtection",
+      "target": [
+        "Verse.Pawn_EquipmentTracker.Notify_PawnSpawned"
+      ],
+      "kind": "Prefix+Postfix",
+      "source": "Source/BDP.Content/CombatBody/Protection/Patch_Pawn_HealthTracker_CombatBodyTriggerProtection.cs",
+      "line": 345,
+      "purpose": "人物重新生成时原版倒地掉装补偿中保留 BDP 触发体。",
+      "gate": "人物倒地、不在床上、Active/Collapsing 战斗体、主装备有 CompTriggerBody 才进入上下文。",
+      "foreignPath": "普通人物 __state=false，仍执行原版 Notify_PawnSpawned 的全部逻辑。",
+      "verdict": "正常路径限定充分；异常清理存在遗漏",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/CombatBody/Protection/Patch_Pawn_HealthTracker_CombatBodyTriggerProtection.cs",
+          "line": 345,
+          "note": "补丁声明及实际入口已逐行检查。"
+        },
+        {
+          "source": "Source/BDP.Content/CombatBody/Protection/Patch_Pawn_HealthTracker_CombatBodyTriggerProtection.cs",
+          "line": 152,
+          "note": "ShouldProtectDownedSpawn 的完整门槛。"
+        },
+        {
+          "source": "Source/BDP.Content/CombatBody/Protection/Patch_Pawn_HealthTracker_CombatBodyTriggerProtection.cs",
+          "line": 350,
+          "note": "Prefix Enter，Postfix Exit；没有异常出口。"
+        }
+      ],
+      "issues": [
+        "COTHER-02"
+      ],
+      "auditGroup": "content-other"
+    },
+    {
+      "className": "Patch_Pawn_EquipmentTracker_TryDropEquipment_CombatBodyTriggerProtection",
+      "target": [
+        "Verse.Pawn_EquipmentTracker.TryDropEquipment"
+      ],
+      "kind": "Prefix",
+      "source": "Source/BDP.Content/CombatBody/Protection/Patch_Pawn_HealthTracker_CombatBodyTriggerProtection.cs",
+      "line": 376,
+      "purpose": "仅在指定原版清理调用内阻止当前触发体实际掉落。",
+      "gate": "必须同时命中当前 Pawn 的保护上下文、战斗体保护阶段、eq 是主装备且含 CompTriggerBody。",
+      "foreignPath": "任意其他物品、普通人物、手动正常卸装在无上下文时返回 true，不动 resultingEq 和 __result。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/CombatBody/Protection/Patch_Pawn_HealthTracker_CombatBodyTriggerProtection.cs",
+          "line": 376,
+          "note": "补丁声明及实际入口已逐行检查。"
+        },
+        {
+          "source": "Source/BDP.Content/CombatBody/Protection/Patch_Pawn_HealthTracker_CombatBodyTriggerProtection.cs",
+          "line": 388,
+          "note": "三个条件同时通过后才把原方法转换为成功空操作；其余都放行。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "content-other"
+    },
+    {
+      "className": "Patch_Widgets_DefIcon_ChipManufacturing",
+      "target": [
+        "Verse.Widgets.DefIcon"
+      ],
+      "kind": "Prefix",
+      "source": "Source/BDP.Content/Patches/Patch_Widgets_DefIcon_ChipManufacturing.cs",
+      "line": 9,
+      "purpose": "为原版不认识的芯片功能/构型 Def 显示已有芯片图标。",
+      "gate": "只接受 ChipManufacturingPresetDef 或 ChipArmamentFormDef 类型，且 BDP_Chip_Custom 图标载体存在。",
+      "foreignPath": "普通 Def 不改参数；图标载体不存在也不改 def。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/Patches/Patch_Widgets_DefIcon_ChipManufacturing.cs",
+          "line": 9,
+          "note": "补丁声明及实际入口已逐行检查。"
+        },
+        {
+          "source": "Source/BDP.Content/Patches/Patch_Widgets_DefIcon_ChipManufacturing.cs",
+          "line": 14,
+          "note": "按 BDP 自定义 Def 类型准入，只替换本次 def 参数，不改共享定义。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "content-other"
+    },
+    {
+      "className": "Patch_Thing_TakeDamage_CombatBodyApparel",
+      "target": [
+        "Verse.Thing.TakeDamage"
+      ],
+      "kind": "Prefix",
+      "source": "Source/BDP.Content/Patches/Patch_Thing_TakeDamage_CombatBodyApparel.cs",
+      "line": 12,
+      "purpose": "BDP 战斗体前台衣物是外观层，禁止进入原版衣物耐久伤害。",
+      "gate": "CombatBodyFrontApparelRuntime.IsActive 判断当前游戏登记表内的具体 Apparel 实例。",
+      "foreignPath": "普通衣物和同 Def 的非登记衣物原方法照常执行；只有 BDP 登记的外观实例跳过伤害链。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/Patches/Patch_Thing_TakeDamage_CombatBodyApparel.cs",
+          "line": 12,
+          "note": "补丁声明及实际入口已逐行检查。"
+        },
+        {
+          "source": "Source/BDP/Core/CombatBody/External/CombatBodyFrontApparelRuntime.cs",
+          "line": 57,
+          "note": "IsActive 比较实例 HashSet，不靠宽泛的衣物类型或 Def。"
+        },
+        {
+          "source": "Source/BDP/Core/CombatBody/Bridge/PawnCombatBodyBridge.cs",
+          "line": 320,
+          "note": "只有 BDP 前台衣物替换成功穿戴后登记。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "content-other"
+    },
+    {
+      "className": "Patch_Thing_GetCustomLabelNoCount_CombatBodyApparel",
+      "target": [
+        "Verse.ThingWithComps.GetCustomLabelNoCount"
+      ],
+      "kind": "Prefix",
+      "source": "Source/BDP.Content/Patches/Patch_Thing_GetCustomLabelNoCount_CombatBodyApparel.cs",
+      "line": 11,
+      "purpose": "隐藏战斗体外观衣物标签上的耐久后缀。",
+      "gate": "当前游戏已登记的战斗体前台衣物实例才把 includeHp 置 false。",
+      "foreignPath": "普通物品 includeHp 不变，原标签生成逻辑保持。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/Patches/Patch_Thing_GetCustomLabelNoCount_CombatBodyApparel.cs",
+          "line": 11,
+          "note": "补丁声明及实际入口已逐行检查。"
+        },
+        {
+          "source": "Source/BDP/Core/CombatBody/External/CombatBodyFrontApparelRuntime.cs",
+          "line": 57,
+          "note": "实例登记准入，游戏切换会清空登记表。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "content-other"
+    },
+    {
+      "className": "Patch_ThingWithComps_SpecialDisplayStats_TriggerBodyWeaponInfo",
+      "target": [
+        "Verse.ThingWithComps.SpecialDisplayStats"
+      ],
+      "kind": "Postfix",
+      "source": "Source/BDP.Content/Patches/Patch_ThingWithComps_SpecialDisplayStats_TriggerBodyWeaponInfo.cs",
+      "line": 15,
+      "purpose": "把触发体占位武器统计替换为已发布攻击的动态统计。",
+      "gate": "物品必须有 CompTriggerBody；动态统计 TryBuild 成功且条目非空才替换枚举。",
+      "foreignPath": "无 BDP 触发体组件或动态统计失败时 __result 不变；其余类别条目保留。",
+      "verdict": "准入充分；目标内部存在宽类别过滤兼容风险",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/Patches/Patch_ThingWithComps_SpecialDisplayStats_TriggerBodyWeaponInfo.cs",
+          "line": 15,
+          "note": "补丁声明及实际入口已逐行检查。"
+        },
+        {
+          "source": "Source/BDP.Content/Patches/Patch_ThingWithComps_SpecialDisplayStats_TriggerBodyWeaponInfo.cs",
+          "line": 25,
+          "note": "只有 BDP 触发体且动态发布成功才替换。"
+        },
+        {
+          "source": "Source/BDP.Content/Patches/Patch_ThingWithComps_SpecialDisplayStats_TriggerBodyWeaponInfo.cs",
+          "line": 51,
+          "note": "进入 BDP 分支后按 Weapon_Melee/Weapon_Ranged 整类过滤，没有区分第三方新增条目。"
+        }
+      ],
+      "issues": [
+        "COTHER-03"
+      ],
+      "auditGroup": "content-other"
+    },
+    {
+      "className": "Patch_ThingWithComps_GetTooltip_CombatBodyApparel",
+      "target": [
+        "Verse.ThingWithComps.GetTooltip"
+      ],
+      "kind": "Postfix",
+      "source": "Source/BDP.Content/Patches/Patch_ThingWithComps_GetTooltip_CombatBodyApparel.cs",
+      "line": 11,
+      "purpose": "隐藏战斗体外观衣物悬停提示中的原版耐久行。",
+      "gate": "当前游戏登记的前台衣物实例，且 useHitPoints=true、提示文本非空。",
+      "foreignPath": "普通物品 __result 完全不变；在 BDP 衣物中只去掉对应数值的换行，不替换整个提示。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/Patches/Patch_ThingWithComps_GetTooltip_CombatBodyApparel.cs",
+          "line": 11,
+          "note": "补丁声明及实际入口已逐行检查。"
+        },
+        {
+          "source": "Source/BDP.Content/Patches/Patch_ThingWithComps_GetTooltip_CombatBodyApparel.cs",
+          "line": 18,
+          "note": "实例身份、耐久功能和非空文本三层门槛。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "content-other"
+    },
+    {
+      "className": "Patch_ResearchProjectDef_UnlockedDefs_ChipManufacturing",
+      "target": [
+        "Verse.ResearchProjectDef.get_UnlockedDefs"
+      ],
+      "kind": "Postfix",
+      "source": "Source/BDP.Content/Patches/Patch_ResearchProjectDef_UnlockedDefs_ChipManufacturing.cs",
+      "line": 11,
+      "purpose": "BDP 研究解锁列表追加具体芯片功能和显式构型。",
+      "gate": "研究必须位于 defName 为 BDP_ResearchTab 的页签；辅助 Build 再次检查相同条件。",
+      "foreignPath": "其他研究 __result 原引用保持；BDP 分支复制列表，不污染原版缓存，其他原产物保留。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/Patches/Patch_ResearchProjectDef_UnlockedDefs_ChipManufacturing.cs",
+          "line": 11,
+          "note": "补丁声明及实际入口已逐行检查。"
+        },
+        {
+          "source": "Source/BDP.Content/Research/ResearchUnlockDisplay.cs",
+          "line": 21,
+          "note": "非 BDP 研究直接原样返回；27 行复制，28 行只删除 BDP_Chip_Custom/null。"
+        },
+        {
+          "source": "Source/BDP.Content/Research/ResearchUnlockDisplay.cs",
+          "line": 31,
+          "note": "新增内容必须显式关联当前研究，保留原版信息界面。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "content-other"
+    },
+    {
+      "className": "Patch_WorkGiver_DoBill_ZeroChipIngredients",
+      "target": [
+        "RimWorld.WorkGiver_DoBill.TryFindBestIngredientsInSet_NoMixHelper"
+      ],
+      "kind": "Prefix",
+      "source": "Source/BDP.Content/Assembly/ChipManufacturing/Patches/Patch_WorkGiver_DoBill_ZeroChipIngredients.cs",
+      "line": 11,
+      "purpose": "组合制造账单中删除需求数为零的材料槽，避免原版无混料分支找无须材料。",
+      "gate": "只接受 Bill_ChipProduction 且 ingredients 非空。",
+      "foreignPath": "普通账单材料列表不改，仍执行原版方法；BDP 账单传新列表，不原地删共享配置。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/Assembly/ChipManufacturing/Patches/Patch_WorkGiver_DoBill_ZeroChipIngredients.cs",
+          "line": 11,
+          "note": "补丁声明及实际入口已逐行检查。"
+        },
+        {
+          "source": "Source/BDP.Content/Assembly/ChipManufacturing/Patches/Patch_WorkGiver_DoBill_ZeroChipIngredients.cs",
+          "line": 16,
+          "note": "BDP 账单类型门槛；21 行创建新列表。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "content-other"
+    },
+    {
+      "className": "Patch_WorkGiver_DoBill_ChipUnfinishedThing",
+      "target": [
+        "RimWorld.WorkGiver_DoBill.ClosestUnfinishedThingForBill",
+        "RimWorld.WorkGiver_DoBill.FinishUftJob"
+      ],
+      "kind": "Prefix（两个目标；当前未被 PatchAll 注册）",
+      "source": "Source/BDP.Content/Assembly/ChipManufacturing/Patches/Patch_WorkGiver_DoBill_ChipUnfinishedThing.cs",
+      "line": 12,
+      "purpose": "允许同地图合格人物续作同组合芯片半成品，移除原版必须本人制作的限制。",
+      "gate": "两个方法入口都只接受 Bill_ChipProduction；最近半成品还要求 Thing_UnfinishedChip、相同配方与组合、材料许可、可保留和可到达。",
+      "foreignPath": "如果被注册，普通账单返回 true，保留原版全部逻辑；当前实际 PatchAll 因类无 Harmony 属性跳过，BDP 和普通账单都执行原版。",
+      "verdict": "准入设计充分；补丁注册遗漏（已确认）",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/Assembly/ChipManufacturing/Patches/Patch_WorkGiver_DoBill_ChipUnfinishedThing.cs",
+          "line": 12,
+          "note": "补丁声明及实际入口已逐行检查。"
+        },
+        {
+          "source": "Source/BDP.Content/Assembly/ChipManufacturing/Patches/Patch_WorkGiver_DoBill_ChipUnfinishedThing.cs",
+          "line": 12,
+          "note": "类级无任何 Harmony 属性；方法 15/16、53/54 行才有属性。"
+        },
+        {
+          "source": "Source/BDP.Content/ContentBootstrap.cs",
+          "line": 96,
+          "note": "唯一自动注册 new Harmony(...).PatchAll()；未发现该类的单独注册。"
+        }
+      ],
+      "issues": [
+        "COTHER-04"
+      ],
+      "auditGroup": "content-other"
+    },
+    {
+      "className": "Patch_PregnancyUtility_RoyalBloodlineInheritance",
+      "target": [
+        "RimWorld.PregnancyUtility.GetInheritedGenes(Pawn,Pawn,out bool)"
+      ],
+      "kind": "Transpiler",
+      "source": "Source/BDP.Content/Trion/Royalty/Patch_PregnancyUtility_RoyalBloodlineInheritance.cs",
+      "line": 16,
+      "purpose": "允许 BDP 皇室内源超凡基因进入原版自然遗传候选池。",
+      "gate": "虽然 IL 全局改写，但 GetArchiteValueForInheritance 仅 defName == BDP_Gene_RoyalBloodline 返回 0，其余基因返回原 biostatArc。",
+      "foreignPath": "无皇室基因时两处调用均返回完全相同的原版值；概率、组合、内源筛选和共享 GeneDef 不改；匹配不是两处就整项放弃。",
+      "verdict": "广泛入口但必要且实际消费仅限 BDP",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/Trion/Royalty/Patch_PregnancyUtility_RoyalBloodlineInheritance.cs",
+          "line": 16,
+          "note": "补丁声明及实际入口已逐行检查。"
+        },
+        {
+          "source": "Source/BDP.Content/Trion/Royalty/Patch_PregnancyUtility_RoyalBloodlineInheritance.cs",
+          "line": 33,
+          "note": "业务例外只有一个精确基因标识。"
+        },
+        {
+          "source": "Source/BDP.Content/Trion/Royalty/Patch_PregnancyUtility_RoyalBloodlineInheritance.cs",
+          "line": 54,
+          "note": "父母两处 ldfld 必须都匹配；失败时回原指令，避免只改一方。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "content-other"
+    },
+    {
+      "className": "Patch_Trait_TipString_BlackTriggerSource",
+      "target": [
+        "RimWorld.Trait.TipString"
+      ],
+      "kind": "Postfix",
+      "source": "Source/BDP.Content/Trigger/Black/Formation/Inheritance/Patch_Trait_TipString_BlackTriggerSource.cs",
+      "line": 9,
+      "purpose": "临时继承特性的提示追加 BDP 黑触发器来源。",
+      "gate": "__instance 必须为 Trait_BlackTriggerInherited 子类。",
+      "foreignPath": "普通及第三方特性提示完全不变；目标提示只追加原文。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/Trigger/Black/Formation/Inheritance/Patch_Trait_TipString_BlackTriggerSource.cs",
+          "line": 9,
+          "note": "补丁声明及实际入口已逐行检查。"
+        },
+        {
+          "source": "Source/BDP.Content/Trigger/Black/Formation/Inheritance/Patch_Trait_TipString_BlackTriggerSource.cs",
+          "line": 14,
+          "note": "按 BDP 临时特性真实子类准入。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "content-other"
+    },
+    {
+      "className": "Patch_TraitSet_BlackTriggerReconcile",
+      "target": [
+        "RimWorld.TraitSet.RemoveTrait"
+      ],
+      "kind": "Postfix",
+      "source": "Source/BDP.Content/Trigger/Black/Formation/Inheritance/Patch_TraitSet_BlackTriggerReconcile.cs",
+      "line": 8,
+      "purpose": "外部移除普通冲突特性后恢复当前黑触发器应提供的临时继承。",
+      "gate": "入口观察所有非空普通特性移除；Reconcile 只查装备 CompBlackTriggerImprint，并只删除 Trait_BlackTriggerInherited 孤儿。",
+      "foreignPath": "没有黑触发器且没有 BDP 临时特性的普通人物只做读取；不增加 Hediff/Comp，不删除普通特性，不改原 RemoveTrait 结果。",
+      "verdict": "广泛观察但必要且实际消费仅限 BDP",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/Trigger/Black/Formation/Inheritance/Patch_TraitSet_BlackTriggerReconcile.cs",
+          "line": 8,
+          "note": "补丁声明及实际入口已逐行检查。"
+        },
+        {
+          "source": "Source/BDP.Content/Trigger/Black/Formation/Inheritance/BlackTriggerInheritedTraitService.cs",
+          "line": 66,
+          "note": "装备收集只筛 CompBlackTriggerImprint；72 行孤儿收集只筛 BDP 临时特性。"
+        },
+        {
+          "source": "Source/BDP.Content/Trigger/Black/Formation/Inheritance/Patch_TraitSet_BlackTriggerReconcile.cs",
+          "line": 13,
+          "note": "排除 BDP 自己清理，阻止递归。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "content-other"
+    },
+    {
+      "className": "Patch_JobGiver_BlackTriggerPickup",
+      "target": [
+        "RimWorld.JobGiver_PickUpOpportunisticWeapon.ShouldEquipWeapon"
+      ],
+      "kind": "Postfix",
+      "source": "Source/BDP.Content/Trigger/Black/Formation/Binding/Patch_JobGiver_BlackTriggerPickup.cs",
+      "line": 10,
+      "purpose": "禁止非玩家人物机会性搜武器时捡起黑触发器，允许作者显式预装。",
+      "gate": "原结果为 true、人物非玩家阵营、候选物品有 CompBlackTriggerBiocodable 才改为 false。",
+      "foreignPath": "普通武器不变，原版拒绝仍拒绝，玩家原规则保持；不改显式预装路径。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/Trigger/Black/Formation/Binding/Patch_JobGiver_BlackTriggerPickup.cs",
+          "line": 10,
+          "note": "补丁声明及实际入口已逐行检查。"
+        },
+        {
+          "source": "Source/BDP.Content/Trigger/Black/Formation/Binding/Patch_JobGiver_BlackTriggerPickup.cs",
+          "line": 21,
+          "note": "行为变化以黑触发器组件为必要条件。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "content-other"
+    },
+    {
+      "className": "Patch_EquipmentUtility_BlackTriggerCompatibility",
+      "target": [
+        "RimWorld.EquipmentUtility.CanEquip(Thing,Pawn,out string,bool)"
+      ],
+      "kind": "Postfix",
+      "source": "Source/BDP.Content/Trigger/Black/Formation/Binding/Patch_EquipmentUtility_BlackTriggerCompatibility.cs",
+      "line": 10,
+      "purpose": "首次装备黑触发器时追加适格判断。",
+      "gate": "原版必须允许装备、物品有 CompBlackTriggerBiocodable、人物非空。",
+      "foreignPath": "普通物品不动许可和原因；原版拒绝不被反转为允许；只给 BDP 对象追加拒绝条件。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/Trigger/Black/Formation/Binding/Patch_EquipmentUtility_BlackTriggerCompatibility.cs",
+          "line": 10,
+          "note": "补丁声明及实际入口已逐行检查。"
+        },
+        {
+          "source": "Source/BDP.Content/Trigger/Black/Formation/Binding/Patch_EquipmentUtility_BlackTriggerCompatibility.cs",
+          "line": 22,
+          "note": "保留原版拒绝；适格失败才写 __result 与 cantReason。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "content-other"
+    },
+    {
+      "className": "Patch_Pawn_Kill_BlackTriggerFormation",
+      "target": [
+        "Verse.Pawn.Kill"
+      ],
+      "kind": "Prefix+Postfix",
+      "source": "Source/BDP.Content/Trigger/Black/Formation/Patches/Patch_Pawn_Kill_BlackTriggerFormation.cs",
+      "line": 8,
+      "purpose": "死亡前解除黑触发器绑定、去临时特性并冻结形成候选；原版产尸后建 BDP 待决事件。",
+      "gate": "解绑由只存 CompBlackTriggerBiocodable 的索引筛选；形成要求未死玩家殖民者、印记未耗尽、非排除主动致死、有 BDP 扩展路线候选、概率/冷却/唯一检查。临时特性清理的 suppression 重算未限定到实际有 BDP 特性。",
+      "foreignPath": "动物/敌人/无候选人物不会形成 BDP 事件，Kill 原方法始终执行；但任何有 traits 的人物死亡都额外 RecalculateSuppression，即使没有 BDP 临时特性。",
+      "verdict": "形成的广泛观察必要；死亡清理存在确定准入遗漏",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/Trigger/Black/Formation/Patches/Patch_Pawn_Kill_BlackTriggerFormation.cs",
+          "line": 8,
+          "note": "补丁声明及实际入口已逐行检查。"
+        },
+        {
+          "source": "Source/BDP.Content/Trigger/Black/Formation/Patches/Patch_Pawn_Kill_BlackTriggerFormation.cs",
+          "line": 20,
+          "note": "清理在 CanCapture 前，无论是否 BDP 参与均调用。"
+        },
+        {
+          "source": "Source/BDP.Content/Trigger/Black/Formation/Inheritance/BlackTriggerInheritedTraitService.cs",
+          "line": 54,
+          "note": "只判 traits 存在；55 行列表可为空，59 行仍无条件重算。"
+        },
+        {
+          "source": "Source/BDP.Content/Trigger/Black/Formation/World/BlackTriggerFormationWorldService.cs",
+          "line": 26,
+          "note": "形成来源门槛；39 行无候选即 return；51 行概率只在匹配后的 BDP 形成路径消费。"
+        },
+        {
+          "source": "Source/BDP.Content/Trigger/Black/Formation/Binding/BlackTriggerBindingIndex.cs",
+          "line": 60,
+          "note": "索引未命中返回 null；仅有效 BDP 编码组件可解绑。"
+        }
+      ],
+      "issues": [
+        "COTHER-01"
+      ],
+      "auditGroup": "content-other"
+    },
+    {
+      "className": "Patch_Pawn_GetGizmos_BlackTriggerSacrifice",
+      "target": [
+        "Verse.Pawn.GetGizmos"
+      ],
+      "kind": "Postfix（枚举追加）",
+      "source": "Source/BDP.Content/Trigger/Black/Formation/Patches/Patch_Pawn_GetGizmos_BlackTriggerSacrifice.cs",
+      "line": 9,
+      "purpose": "符合形成条件且处于个人致命危机的玩家人物追加主动献祭按钮。",
+      "gate": "IsCrisis 先检查成年玩家殖民者、意识、清醒、非精神状态、无印记耗尽、无待决和冷却；然后要求匹配 BDP 黑触发器形成候选，再判致命危机。",
+      "foreignPath": "所有原 Gizmo 都先 yield；非玩家/无 BDP 形成路线候选/无危机不追加；不因此给人物添加状态。普通原版人物可以成为黑触发器来源，故不要求预持 BDP 装备。",
+      "verdict": "广泛观察但必要且实际消费仅限 BDP",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/Trigger/Black/Formation/Patches/Patch_Pawn_GetGizmos_BlackTriggerSacrifice.cs",
+          "line": 9,
+          "note": "补丁声明及实际入口已逐行检查。"
+        },
+        {
+          "source": "Source/BDP.Content/Trigger/Black/Formation/Sacrifice/BlackTriggerPersonalCrisisEvaluator.cs",
+          "line": 70,
+          "note": "基础资格门槛。"
+        },
+        {
+          "source": "Source/BDP.Content/Trigger/Black/Formation/Sacrifice/BlackTriggerPersonalCrisisEvaluator.cs",
+          "line": 25,
+          "note": "候选由 BDP 形成扩展定义匹配，候选零则不提供献祭按钮。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "content-other"
+    },
+    {
+      "className": "Patch_Corpse_BlackTriggerFormation",
+      "target": [
+        "Verse.Thing.GetGizmos"
+      ],
+      "kind": "Postfix（枚举追加）",
+      "source": "Source/BDP.Content/Trigger/Black/Formation/Patches/Patch_Corpse_BlackTriggerFormation.cs",
+      "line": 10,
+      "purpose": "拥有当前 BDP 形成待决事件的尸体追加决策按钮。",
+      "gate": "首先要求 Corpse 类型，再要求当前 BDP PendingEvent.Corpse 与该实体为同一引用。",
+      "foreignPath": "所有原 Gizmo 都保留；普通 Thing/其他尸体不追加按钮。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/Trigger/Black/Formation/Patches/Patch_Corpse_BlackTriggerFormation.cs",
+          "line": 10,
+          "note": "补丁声明及实际入口已逐行检查。"
+        },
+        {
+          "source": "Source/BDP.Content/Trigger/Black/Formation/Patches/Patch_Corpse_BlackTriggerFormation.cs",
+          "line": 16,
+          "note": "实体类型与唯一 BDP 事件引用双重限定。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "content-other"
+    },
+    {
+      "className": "Patch_Corpse_BlackTriggerFormationInspect",
+      "target": [
+        "Verse.Corpse.GetInspectString"
+      ],
+      "kind": "Postfix",
+      "source": "Source/BDP.Content/Trigger/Black/Formation/Patches/Patch_Corpse_BlackTriggerFormation.cs",
+      "line": 32,
+      "purpose": "当前 BDP 形成待决尸体显示剩余决策时间。",
+      "gate": "只在 PendingEvent.Corpse == __instance 时追加文本。",
+      "foreignPath": "非事件尸体原检查文字不变；目标尸体保留原文再追加。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/Trigger/Black/Formation/Patches/Patch_Corpse_BlackTriggerFormation.cs",
+          "line": 32,
+          "note": "补丁声明及实际入口已逐行检查。"
+        },
+        {
+          "source": "Source/BDP.Content/Trigger/Black/Formation/Patches/Patch_Corpse_BlackTriggerFormation.cs",
+          "line": 38,
+          "note": "只命中当前事件尸体引用。"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "content-other"
+    },
+    {
+      "className": "Patch_CommandAbility_ProcessInput",
+      "target": "Command_Ability.ProcessInput",
+      "kind": "前置",
+      "source": "Source/BDP.Development/Abilities/FujinRangedStrikeCastFlowDiagnostics.cs",
+      "line": 25,
+      "purpose": "记录风刃远程施放的按钮点击阶段",
+      "gate": "启动时开启开发者模式才安装；实际记录只允许 BDP_Ability_FujinRangedStrike；通用作业还要求 BdpVerb_AbilityShoot 与 UseVerbOnThing",
+      "foreignPath": "仅观察；其它能力/作业不记录，不修改返回值、不取消原方法。关闭开发者模式后日志开关仍会过滤。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Development/Abilities/FujinRangedStrikeCastFlowDiagnostics.cs",
+          "line": 371,
+          "note": "能力定义身份检查"
+        },
+        {
+          "source": "Source/BDP.Development/Abilities/FujinRangedStrikeCastFlowDiagnostics.cs",
+          "line": 430,
+          "note": "通用作业身份检查"
+        },
+        {
+          "source": "Source/BDP.Development/DevelopmentBootstrap.cs",
+          "line": 42,
+          "note": "开发者模式安装门槛"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "compatibility-development"
+    },
+    {
+      "className": "Patch_Ability_QueueCastingJob",
+      "target": "Ability.QueueCastingJob(LocalTargetInfo,LocalTargetInfo)",
+      "kind": "前置",
+      "source": "Source/BDP.Development/Abilities/FujinRangedStrikeCastFlowDiagnostics.cs",
+      "line": 50,
+      "purpose": "记录风刃远程施放的能力作业排队阶段",
+      "gate": "启动时开启开发者模式才安装；实际记录只允许 BDP_Ability_FujinRangedStrike；通用作业还要求 BdpVerb_AbilityShoot 与 UseVerbOnThing",
+      "foreignPath": "仅观察；其它能力/作业不记录，不修改返回值、不取消原方法。关闭开发者模式后日志开关仍会过滤。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Development/Abilities/FujinRangedStrikeCastFlowDiagnostics.cs",
+          "line": 371,
+          "note": "能力定义身份检查"
+        },
+        {
+          "source": "Source/BDP.Development/Abilities/FujinRangedStrikeCastFlowDiagnostics.cs",
+          "line": 430,
+          "note": "通用作业身份检查"
+        },
+        {
+          "source": "Source/BDP.Development/DevelopmentBootstrap.cs",
+          "line": 42,
+          "note": "开发者模式安装门槛"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "compatibility-development"
+    },
+    {
+      "className": "Patch_Verb_OrderForceTarget",
+      "target": "Verb.OrderForceTarget",
+      "kind": "前置＋后置",
+      "source": "Source/BDP.Development/Abilities/FujinRangedStrikeCastFlowDiagnostics.cs",
+      "line": 81,
+      "purpose": "记录风刃远程施放的通用目标确认阶段",
+      "gate": "启动时开启开发者模式才安装；实际记录只允许 BDP_Ability_FujinRangedStrike；通用作业还要求 BdpVerb_AbilityShoot 与 UseVerbOnThing",
+      "foreignPath": "仅观察；其它能力/作业不记录，不修改返回值、不取消原方法。关闭开发者模式后日志开关仍会过滤。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Development/Abilities/FujinRangedStrikeCastFlowDiagnostics.cs",
+          "line": 371,
+          "note": "能力定义身份检查"
+        },
+        {
+          "source": "Source/BDP.Development/Abilities/FujinRangedStrikeCastFlowDiagnostics.cs",
+          "line": 430,
+          "note": "通用作业身份检查"
+        },
+        {
+          "source": "Source/BDP.Development/DevelopmentBootstrap.cs",
+          "line": 42,
+          "note": "开发者模式安装门槛"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "compatibility-development"
+    },
+    {
+      "className": "Patch_PawnJobTracker_TryTakeOrderedJob",
+      "target": "Pawn_JobTracker.TryTakeOrderedJob",
+      "kind": "前置＋后置",
+      "source": "Source/BDP.Development/Abilities/FujinRangedStrikeCastFlowDiagnostics.cs",
+      "line": 128,
+      "purpose": "记录风刃远程施放的人物作业提交阶段",
+      "gate": "启动时开启开发者模式才安装；实际记录只允许 BDP_Ability_FujinRangedStrike；通用作业还要求 BdpVerb_AbilityShoot 与 UseVerbOnThing",
+      "foreignPath": "仅观察；其它能力/作业不记录，不修改返回值、不取消原方法。关闭开发者模式后日志开关仍会过滤。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Development/Abilities/FujinRangedStrikeCastFlowDiagnostics.cs",
+          "line": 371,
+          "note": "能力定义身份检查"
+        },
+        {
+          "source": "Source/BDP.Development/Abilities/FujinRangedStrikeCastFlowDiagnostics.cs",
+          "line": 430,
+          "note": "通用作业身份检查"
+        },
+        {
+          "source": "Source/BDP.Development/DevelopmentBootstrap.cs",
+          "line": 42,
+          "note": "开发者模式安装门槛"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "compatibility-development"
+    },
+    {
+      "className": "Patch_PawnJobTracker_StartJob",
+      "target": "Pawn_JobTracker.StartJob",
+      "kind": "前置",
+      "source": "Source/BDP.Development/Abilities/FujinRangedStrikeCastFlowDiagnostics.cs",
+      "line": 175,
+      "purpose": "记录风刃远程施放的人物作业起动阶段",
+      "gate": "启动时开启开发者模式才安装；实际记录只允许 BDP_Ability_FujinRangedStrike；通用作业还要求 BdpVerb_AbilityShoot 与 UseVerbOnThing",
+      "foreignPath": "仅观察；其它能力/作业不记录，不修改返回值、不取消原方法。关闭开发者模式后日志开关仍会过滤。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Development/Abilities/FujinRangedStrikeCastFlowDiagnostics.cs",
+          "line": 371,
+          "note": "能力定义身份检查"
+        },
+        {
+          "source": "Source/BDP.Development/Abilities/FujinRangedStrikeCastFlowDiagnostics.cs",
+          "line": 430,
+          "note": "通用作业身份检查"
+        },
+        {
+          "source": "Source/BDP.Development/DevelopmentBootstrap.cs",
+          "line": 42,
+          "note": "开发者模式安装门槛"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "compatibility-development"
+    },
+    {
+      "className": "Patch_JobDriver_NotifyStarting",
+      "target": "JobDriver.Notify_Starting",
+      "kind": "前置",
+      "source": "Source/BDP.Development/Abilities/FujinRangedStrikeCastFlowDiagnostics.cs",
+      "line": 218,
+      "purpose": "记录风刃远程施放的通用作业驱动起动阶段",
+      "gate": "启动时开启开发者模式才安装；实际记录只允许 BDP_Ability_FujinRangedStrike；通用作业还要求 BdpVerb_AbilityShoot 与 UseVerbOnThing",
+      "foreignPath": "仅观察；其它能力/作业不记录，不修改返回值、不取消原方法。关闭开发者模式后日志开关仍会过滤。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Development/Abilities/FujinRangedStrikeCastFlowDiagnostics.cs",
+          "line": 371,
+          "note": "能力定义身份检查"
+        },
+        {
+          "source": "Source/BDP.Development/Abilities/FujinRangedStrikeCastFlowDiagnostics.cs",
+          "line": 430,
+          "note": "通用作业身份检查"
+        },
+        {
+          "source": "Source/BDP.Development/DevelopmentBootstrap.cs",
+          "line": 42,
+          "note": "开发者模式安装门槛"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "compatibility-development"
+    },
+    {
+      "className": "Patch_JobDriver_SetupToils",
+      "target": "JobDriver.SetupToils",
+      "kind": "前置＋后置",
+      "source": "Source/BDP.Development/Abilities/FujinRangedStrikeCastFlowDiagnostics.cs",
+      "line": 243,
+      "purpose": "记录风刃远程施放的作业步骤构造阶段",
+      "gate": "启动时开启开发者模式才安装；实际记录只允许 BDP_Ability_FujinRangedStrike；通用作业还要求 BdpVerb_AbilityShoot 与 UseVerbOnThing",
+      "foreignPath": "仅观察；其它能力/作业不记录，不修改返回值、不取消原方法。关闭开发者模式后日志开关仍会过滤。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Development/Abilities/FujinRangedStrikeCastFlowDiagnostics.cs",
+          "line": 371,
+          "note": "能力定义身份检查"
+        },
+        {
+          "source": "Source/BDP.Development/Abilities/FujinRangedStrikeCastFlowDiagnostics.cs",
+          "line": 430,
+          "note": "通用作业身份检查"
+        },
+        {
+          "source": "Source/BDP.Development/DevelopmentBootstrap.cs",
+          "line": 42,
+          "note": "开发者模式安装门槛"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "compatibility-development"
+    },
+    {
+      "className": "Patch_JobDriver_ReadyForNextToil",
+      "target": "JobDriver.ReadyForNextToil",
+      "kind": "前置",
+      "source": "Source/BDP.Development/Abilities/FujinRangedStrikeCastFlowDiagnostics.cs",
+      "line": 286,
+      "purpose": "记录风刃远程施放的进入下一步骤阶段",
+      "gate": "启动时开启开发者模式才安装；实际记录只允许 BDP_Ability_FujinRangedStrike；通用作业还要求 BdpVerb_AbilityShoot 与 UseVerbOnThing",
+      "foreignPath": "仅观察；其它能力/作业不记录，不修改返回值、不取消原方法。关闭开发者模式后日志开关仍会过滤。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Development/Abilities/FujinRangedStrikeCastFlowDiagnostics.cs",
+          "line": 371,
+          "note": "能力定义身份检查"
+        },
+        {
+          "source": "Source/BDP.Development/Abilities/FujinRangedStrikeCastFlowDiagnostics.cs",
+          "line": 430,
+          "note": "通用作业身份检查"
+        },
+        {
+          "source": "Source/BDP.Development/DevelopmentBootstrap.cs",
+          "line": 42,
+          "note": "开发者模式安装门槛"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "compatibility-development"
+    },
+    {
+      "className": "Patch_Ability_GetJob",
+      "target": "Ability.GetJob(LocalTargetInfo,LocalTargetInfo)",
+      "kind": "后置",
+      "source": "Source/BDP.Development/Abilities/FujinRangedStrikeCastFlowDiagnostics.cs",
+      "line": 312,
+      "purpose": "记录风刃远程施放的施放作业创建阶段",
+      "gate": "启动时开启开发者模式才安装；实际记录只允许 BDP_Ability_FujinRangedStrike；通用作业还要求 BdpVerb_AbilityShoot 与 UseVerbOnThing",
+      "foreignPath": "仅观察；其它能力/作业不记录，不修改返回值、不取消原方法。关闭开发者模式后日志开关仍会过滤。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Development/Abilities/FujinRangedStrikeCastFlowDiagnostics.cs",
+          "line": 371,
+          "note": "能力定义身份检查"
+        },
+        {
+          "source": "Source/BDP.Development/Abilities/FujinRangedStrikeCastFlowDiagnostics.cs",
+          "line": 430,
+          "note": "通用作业身份检查"
+        },
+        {
+          "source": "Source/BDP.Development/DevelopmentBootstrap.cs",
+          "line": 42,
+          "note": "开发者模式安装门槛"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "compatibility-development"
+    },
+    {
+      "className": "Patch_JobDriverCastAbility_NotifyStarting",
+      "target": "JobDriver_CastAbility.Notify_Starting",
+      "kind": "前置",
+      "source": "Source/BDP.Development/Abilities/FujinRangedStrikeCastFlowDiagnostics.cs",
+      "line": 345,
+      "purpose": "记录风刃远程施放的能力作业驱动起动阶段",
+      "gate": "启动时开启开发者模式才安装；实际记录只允许 BDP_Ability_FujinRangedStrike；通用作业还要求 BdpVerb_AbilityShoot 与 UseVerbOnThing",
+      "foreignPath": "仅观察；其它能力/作业不记录，不修改返回值、不取消原方法。关闭开发者模式后日志开关仍会过滤。",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Development/Abilities/FujinRangedStrikeCastFlowDiagnostics.cs",
+          "line": 371,
+          "note": "能力定义身份检查"
+        },
+        {
+          "source": "Source/BDP.Development/Abilities/FujinRangedStrikeCastFlowDiagnostics.cs",
+          "line": 430,
+          "note": "通用作业身份检查"
+        },
+        {
+          "source": "Source/BDP.Development/DevelopmentBootstrap.cs",
+          "line": 42,
+          "note": "开发者模式安装门槛"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "compatibility-development"
+    },
+    {
+      "className": "NIT.EquippedItem.UpdateStats",
+      "target": "NiceInventoryTab.EquippedItem.UpdateStats",
+      "kind": "后置",
+      "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabRuntime.cs",
+      "line": 98,
+      "purpose": "动态武器统计刷新",
+      "gate": "外部程序集存在、主版本为1且必需结构齐全才安装；TryGetSnapshot：物品有 CompTriggerBody 且能生成有效攻击显示快照",
+      "foreignPath": "普通物品不重写第三方字段",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabProjectionAdapter.cs",
+          "line": 59,
+          "note": "投影版本先检查 CompTriggerBody"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabProjectionAdapter.cs",
+          "line": 111,
+          "note": "快照先检查 CompTriggerBody"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabProjectionAdapter.cs",
+          "line": 251,
+          "note": "非 BDP 近远程分类回退"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabAdapter.cs",
+          "line": 37,
+          "note": "可选兼容发现及部分失败卸载"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "compatibility-development"
+    },
+    {
+      "className": "NIT.EquippedItem.DrawWeaponInfo",
+      "target": "NiceInventoryTab.EquippedItem.DrawWeaponInfo",
+      "kind": "前置＋后置＋指令改写＋异常清理",
+      "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabRuntime.cs",
+      "line": 116,
+      "purpose": "动态武器近远程界面分类与数值同步",
+      "gate": "外部程序集存在、主版本为1且必需结构齐全才安装；绘制上下文中的物品能生成 BDP 快照，才替换近远程分类；刷新先检查 CompTriggerBody 投影版本",
+      "foreignPath": "普通物品分类桥返回原 ThingDef.IsRangedWeapon/IsMeleeWeapon；异常原样传播，退出清理自己的上下文",
+      "verdict": "广泛观察但必要",
+      "evidence": [
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabProjectionAdapter.cs",
+          "line": 59,
+          "note": "投影版本先检查 CompTriggerBody"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabProjectionAdapter.cs",
+          "line": 111,
+          "note": "快照先检查 CompTriggerBody"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabProjectionAdapter.cs",
+          "line": 251,
+          "note": "非 BDP 近远程分类回退"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabAdapter.cs",
+          "line": 37,
+          "note": "可选兼容发现及部分失败卸载"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "compatibility-development"
+    },
+    {
+      "className": "NIT.EquippedItem.DrawBars",
+      "target": "NiceInventoryTab.EquippedItem.DrawBars",
+      "kind": "前置＋后置＋指令改写＋异常清理",
+      "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabRuntime.cs",
+      "line": 116,
+      "purpose": "动态武器统计条分类与同步",
+      "gate": "外部程序集存在、主版本为1且必需结构齐全才安装；同 DrawWeaponInfo；已核对当前 NIT 原绘制只查询本实例 Item.def",
+      "foreignPath": "普通物品维持原版分类和数值",
+      "verdict": "广泛观察但必要",
+      "evidence": [
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabProjectionAdapter.cs",
+          "line": 59,
+          "note": "投影版本先检查 CompTriggerBody"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabProjectionAdapter.cs",
+          "line": 111,
+          "note": "快照先检查 CompTriggerBody"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabProjectionAdapter.cs",
+          "line": 251,
+          "note": "非 BDP 近远程分类回退"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabAdapter.cs",
+          "line": 37,
+          "note": "可选兼容发现及部分失败卸载"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "compatibility-development"
+    },
+    {
+      "className": "NIT.InfoWidget.SetItem",
+      "target": "NiceInventoryTab.InfoWidget.SetItem",
+      "kind": "后置",
+      "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabRuntime.cs",
+      "line": 130,
+      "purpose": "记录信息栏人物上下文及当前投影版本",
+      "gate": "外部程序集存在、主版本为1且必需结构齐全才安装；对全部 NIT 信息栏维护本适配器自身弱引用缓存；有效 BDP 快照才使用投影版本与显示数据",
+      "foreignPath": "普通物品只更新自有缓存，不更改人物/物品真值，也不重建第三方统计",
+      "verdict": "广泛观察但必要",
+      "evidence": [
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabProjectionAdapter.cs",
+          "line": 59,
+          "note": "投影版本先检查 CompTriggerBody"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabProjectionAdapter.cs",
+          "line": 111,
+          "note": "快照先检查 CompTriggerBody"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabProjectionAdapter.cs",
+          "line": 251,
+          "note": "非 BDP 近远程分类回退"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabAdapter.cs",
+          "line": 37,
+          "note": "可选兼容发现及部分失败卸载"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "compatibility-development"
+    },
+    {
+      "className": "NIT.InfoWidget.Draw",
+      "target": "NiceInventoryTab.InfoWidget.Draw",
+      "kind": "前置",
+      "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabRuntime.cs",
+      "line": 150,
+      "purpose": "信息栏绘制前按投影版本刷新",
+      "gate": "外部程序集存在、主版本为1且必需结构齐全才安装；EnsureInfoWidgetSynchronized 先 TryGetProjectionVersion，要求 CompTriggerBody",
+      "foreignPath": "普通物品直接返回，不调用第三方 SetItem 重建",
+      "verdict": "广泛观察但必要",
+      "evidence": [
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabProjectionAdapter.cs",
+          "line": 59,
+          "note": "投影版本先检查 CompTriggerBody"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabProjectionAdapter.cs",
+          "line": 111,
+          "note": "快照先检查 CompTriggerBody"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabProjectionAdapter.cs",
+          "line": 251,
+          "note": "非 BDP 近远程分类回退"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabAdapter.cs",
+          "line": 37,
+          "note": "可选兼容发现及部分失败卸载"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "compatibility-development"
+    },
+    {
+      "className": "NIT.DamageUtility.MeleeDPSForItem",
+      "target": "NiceInventoryTab.DamageUtility.MeleeDPSForItem",
+      "kind": "前置",
+      "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabRuntime.cs",
+      "line": 313,
+      "purpose": "将第三方统计计算适配为 BDP 当前武装投影",
+      "gate": "可选兼容安装门槛；InfoWidget.CurrentItem 必须含 CompTriggerBody 且当前有效显示快照成立",
+      "foreignPath": "快照不存在或异常时返回 true，让 NIT 继续计算自身结果；成功仅替换 BDP 当前物品的统计值",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabProjectionAdapter.cs",
+          "line": 197,
+          "note": "统计覆盖门槛"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabProjectionAdapter.cs",
+          "line": 89,
+          "note": "读取第三方原本使用的 CurrentItem"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabRuntime.cs",
+          "line": 310,
+          "note": "前置无快照放行，异常回退"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "compatibility-development"
+    },
+    {
+      "className": "NIT.DamageUtility.RangedDPSForItem",
+      "target": "NiceInventoryTab.DamageUtility.RangedDPSForItem",
+      "kind": "前置",
+      "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabRuntime.cs",
+      "line": 313,
+      "purpose": "将第三方统计计算适配为 BDP 当前武装投影",
+      "gate": "可选兼容安装门槛；InfoWidget.CurrentItem 必须含 CompTriggerBody 且当前有效显示快照成立",
+      "foreignPath": "快照不存在或异常时返回 true，让 NIT 继续计算自身结果；成功仅替换 BDP 当前物品的统计值",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabProjectionAdapter.cs",
+          "line": 197,
+          "note": "统计覆盖门槛"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabProjectionAdapter.cs",
+          "line": 89,
+          "note": "读取第三方原本使用的 CurrentItem"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabRuntime.cs",
+          "line": 310,
+          "note": "前置无快照放行，异常回退"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "compatibility-development"
+    },
+    {
+      "className": "NIT.DamageUtility.ArmorPenForItem",
+      "target": "NiceInventoryTab.DamageUtility.ArmorPenForItem",
+      "kind": "前置",
+      "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabRuntime.cs",
+      "line": 313,
+      "purpose": "将第三方统计计算适配为 BDP 当前武装投影",
+      "gate": "可选兼容安装门槛；InfoWidget.CurrentItem 必须含 CompTriggerBody 且当前有效显示快照成立",
+      "foreignPath": "快照不存在或异常时返回 true，让 NIT 继续计算自身结果；成功仅替换 BDP 当前物品的统计值",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabProjectionAdapter.cs",
+          "line": 197,
+          "note": "统计覆盖门槛"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabProjectionAdapter.cs",
+          "line": 89,
+          "note": "读取第三方原本使用的 CurrentItem"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabRuntime.cs",
+          "line": 310,
+          "note": "前置无快照放行，异常回退"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "compatibility-development"
+    },
+    {
+      "className": "NIT.DamageUtility.FireRateForItem",
+      "target": "NiceInventoryTab.DamageUtility.FireRateForItem",
+      "kind": "前置",
+      "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabRuntime.cs",
+      "line": 313,
+      "purpose": "将第三方统计计算适配为 BDP 当前武装投影",
+      "gate": "可选兼容安装门槛；InfoWidget.CurrentItem 必须含 CompTriggerBody 且当前有效显示快照成立",
+      "foreignPath": "快照不存在或异常时返回 true，让 NIT 继续计算自身结果；成功仅替换 BDP 当前物品的统计值",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabProjectionAdapter.cs",
+          "line": 197,
+          "note": "统计覆盖门槛"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabProjectionAdapter.cs",
+          "line": 89,
+          "note": "读取第三方原本使用的 CurrentItem"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabRuntime.cs",
+          "line": 310,
+          "note": "前置无快照放行，异常回退"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "compatibility-development"
+    },
+    {
+      "className": "NIT.DamageUtility.AtkSpeedForItem",
+      "target": "NiceInventoryTab.DamageUtility.AtkSpeedForItem",
+      "kind": "前置",
+      "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabRuntime.cs",
+      "line": 313,
+      "purpose": "将第三方统计计算适配为 BDP 当前武装投影",
+      "gate": "可选兼容安装门槛；InfoWidget.CurrentItem 必须含 CompTriggerBody 且当前有效显示快照成立",
+      "foreignPath": "快照不存在或异常时返回 true，让 NIT 继续计算自身结果；成功仅替换 BDP 当前物品的统计值",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabProjectionAdapter.cs",
+          "line": 197,
+          "note": "统计覆盖门槛"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabProjectionAdapter.cs",
+          "line": 89,
+          "note": "读取第三方原本使用的 CurrentItem"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabRuntime.cs",
+          "line": 310,
+          "note": "前置无快照放行，异常回退"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "compatibility-development"
+    },
+    {
+      "className": "NIT.Tooltip.WeaponReloadTimeShort",
+      "target": "NiceInventoryTab.FieldTooltipHelper.WeaponReloadTimeShort",
+      "kind": "前置（可选）",
+      "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabRuntime.cs",
+      "line": 338,
+      "purpose": "为 BDP 动态武器提供准确且安全的第三方悬停说明",
+      "gate": "目标提示方法存在才安装；物品有效 BDP 快照＋对应近战/远程显示模式才替换",
+      "foreignPath": "非 BDP、未支持模式或异常全部放行第三方原提示方法",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabAdapter.cs",
+          "line": 121,
+          "note": "六个可选提示目标"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabProjectionAdapter.cs",
+          "line": 111,
+          "note": "快照准入"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabRuntime.cs",
+          "line": 338,
+          "note": "提示前置回退"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "compatibility-development"
+    },
+    {
+      "className": "NIT.Tooltip.WeaponStoppingPower",
+      "target": "NiceInventoryTab.FieldTooltipHelper.WeaponStoppingPower",
+      "kind": "前置（可选）",
+      "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabRuntime.cs",
+      "line": 338,
+      "purpose": "为 BDP 动态武器提供准确且安全的第三方悬停说明",
+      "gate": "目标提示方法存在才安装；物品有效 BDP 快照＋对应近战/远程显示模式才替换",
+      "foreignPath": "非 BDP、未支持模式或异常全部放行第三方原提示方法",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabAdapter.cs",
+          "line": 121,
+          "note": "六个可选提示目标"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabProjectionAdapter.cs",
+          "line": 111,
+          "note": "快照准入"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabRuntime.cs",
+          "line": 338,
+          "note": "提示前置回退"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "compatibility-development"
+    },
+    {
+      "className": "NIT.Tooltip.WeaponFireRate",
+      "target": "NiceInventoryTab.FieldTooltipHelper.WeaponFireRate",
+      "kind": "前置（可选）",
+      "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabRuntime.cs",
+      "line": 338,
+      "purpose": "为 BDP 动态武器提供准确且安全的第三方悬停说明",
+      "gate": "目标提示方法存在才安装；物品有效 BDP 快照＋对应近战/远程显示模式才替换",
+      "foreignPath": "非 BDP、未支持模式或异常全部放行第三方原提示方法",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabAdapter.cs",
+          "line": 121,
+          "note": "六个可选提示目标"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabProjectionAdapter.cs",
+          "line": 111,
+          "note": "快照准入"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabRuntime.cs",
+          "line": 338,
+          "note": "提示前置回退"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "compatibility-development"
+    },
+    {
+      "className": "NIT.Tooltip.WeaponMeleeAttackSpeed",
+      "target": "NiceInventoryTab.FieldTooltipHelper.WeaponMeleeAttackSpeed",
+      "kind": "前置（可选）",
+      "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabRuntime.cs",
+      "line": 338,
+      "purpose": "为 BDP 动态武器提供准确且安全的第三方悬停说明",
+      "gate": "目标提示方法存在才安装；物品有效 BDP 快照＋对应近战/远程显示模式才替换",
+      "foreignPath": "非 BDP、未支持模式或异常全部放行第三方原提示方法",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabAdapter.cs",
+          "line": 121,
+          "note": "六个可选提示目标"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabProjectionAdapter.cs",
+          "line": 111,
+          "note": "快照准入"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabRuntime.cs",
+          "line": 338,
+          "note": "提示前置回退"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "compatibility-development"
+    },
+    {
+      "className": "NIT.Tooltip.WeaponMeleeAccuracy",
+      "target": "NiceInventoryTab.FieldTooltipHelper.WeaponMeleeAccuracy",
+      "kind": "前置（可选）",
+      "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabRuntime.cs",
+      "line": 338,
+      "purpose": "为 BDP 动态武器提供准确且安全的第三方悬停说明",
+      "gate": "目标提示方法存在才安装；物品有效 BDP 快照＋对应近战/远程显示模式才替换",
+      "foreignPath": "非 BDP、未支持模式或异常全部放行第三方原提示方法",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabAdapter.cs",
+          "line": 121,
+          "note": "六个可选提示目标"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabProjectionAdapter.cs",
+          "line": 111,
+          "note": "快照准入"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabRuntime.cs",
+          "line": 338,
+          "note": "提示前置回退"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "compatibility-development"
+    },
+    {
+      "className": "NIT.Tooltip.WeaponMeleeDamage",
+      "target": "NiceInventoryTab.FieldTooltipHelper.WeaponMeleeDamage",
+      "kind": "前置（可选）",
+      "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabRuntime.cs",
+      "line": 338,
+      "purpose": "为 BDP 动态武器提供准确且安全的第三方悬停说明",
+      "gate": "目标提示方法存在才安装；物品有效 BDP 快照＋对应近战/远程显示模式才替换",
+      "foreignPath": "非 BDP、未支持模式或异常全部放行第三方原提示方法",
+      "verdict": "限定充分",
+      "evidence": [
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabAdapter.cs",
+          "line": 121,
+          "note": "六个可选提示目标"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabProjectionAdapter.cs",
+          "line": 111,
+          "note": "快照准入"
+        },
+        {
+          "source": "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabRuntime.cs",
+          "line": 338,
+          "note": "提示前置回退"
+        }
+      ],
+      "issues": [],
+      "auditGroup": "compatibility-development"
+    }
+  ],
+  "xmlOperations": [
+    {
+      "className": "RoyalArrivalOpening.PatchOperationAdd",
+      "target": "全部 StorytellerDef.comps（叙事者部件列表），排除已有 BDP 首发事件者",
+      "kind": "XML 追加定义",
+      "source": "1.6/Content/Patches/RoyalArrivalOpening.xml",
+      "line": 4,
+      "purpose": "让所选原版或第三方叙事者在第八天尝试派发 BDP 皇室首发任务。",
+      "gate": "定义层有意覆盖所有叙事者，只追加 BDP_GiveQuest_RoyalArrivalOpening，已有同事件不重复追加；任务 TestRunInt 再检查基因扩展启用、有效 BDP 资源、允许暴力任务、地图和敌对派系、无正式皇室与无待定同类任务。",
+      "foreignPath": "不替换或删除叙事者原有部件；会给第三方叙事者额外添加一项 BDP 定时事件，这是真实的广泛业务介入，不能称为完全不碰其他模组。",
+      "verdict": "广泛定义修改有明确业务目的；增量限定于 BDP 事件",
+      "evidence": [
+        {
+          "source": "1.6/Content/Patches/RoyalArrivalOpening.xml",
+          "line": 6,
+          "note": "全叙事者 XPath（定义定位表达式），只排重 BDP 事件。"
+        },
+        {
+          "source": "Source/BDP.Content/Royal/Quest/QuestNode_Root_RoyalArrival.cs",
+          "line": 32,
+          "note": "任务实际生成条件。"
+        },
+        {
+          "source": "1.6/Content/Defs/IncidentDef/RoyalArrivalOpening.xml",
+          "line": 10,
+          "note": "复用原版 IncidentWorker_GiveQuest（任务事件执行器）。"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "className": "ChipFeatureExtensionSample.AddShieldProperty",
+      "target": "BDP_Feature_Shield.Properties",
+      "kind": "XML 追加定义",
+      "source": "1.6/Development/Patches/ChipFeatureExtensionSample.xml",
+      "line": 5,
+      "purpose": "为 BDP 护盾语义追加实验反射比例属性接收槽。",
+      "gate": "精确 BDP 定义名与 BDP 自定义类型，只操作本模组属性列表。",
+      "foreignPath": "原版和其他模组定义不匹配；若其他模组有意复用此 BDP 语义，也会得到该示例属性槽。",
+      "verdict": "BDP 限定充分；开发示例加载未受开发者模式限制",
+      "evidence": [
+        {
+          "source": "LoadFolders.xml",
+          "line": 8,
+          "note": "Development（开发内容）文件夹当前始终加载，XML 没有 Prefs.DevMode（开发者模式）条件。"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "className": "ChipFeatureExtensionSample.AddExperimentalBarrier",
+      "target": "BDP_ChipFunction_ExactBodyPartRemoval.config.Features",
+      "kind": "XML 追加定义",
+      "source": "1.6/Development/Patches/ChipFeatureExtensionSample.xml",
+      "line": 13,
+      "purpose": "为指定 BDP 制造预设追加实验屏障语义实现示例。",
+      "gate": "精确 BDP 自定义预设类型及定义名。",
+      "foreignPath": "不修改原版/第三方预设；会修改该 BDP 预设的实际配置。",
+      "verdict": "BDP 限定充分；开发示例加载未受开发者模式限制",
+      "evidence": [
+        {
+          "source": "LoadFolders.xml",
+          "line": 8,
+          "note": "开发示例随模组加载，区别于只在开发者模式安装的开发 Harmony 补丁。"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "className": "ChipFeatureExtensionSample.AddCustomShield",
+      "target": "BDP_ChipFunction_ExactBodyPartRemoval.config.Features",
+      "kind": "XML 追加定义",
+      "source": "1.6/Development/Patches/ChipFeatureExtensionSample.xml",
+      "line": 31,
+      "purpose": "为指定 BDP 制造预设追加同义护盾扩展示例。",
+      "gate": "精确 BDP 自定义预设类型及定义名。",
+      "foreignPath": "不修改原版/第三方预设；会修改该 BDP 预设的实际配置。",
+      "verdict": "BDP 限定充分；开发示例加载未受开发者模式限制",
+      "evidence": [
+        {
+          "source": "LoadFolders.xml",
+          "line": 8,
+          "note": "开发示例随模组加载，可整体移除开发内容文件夹；本次只说明现状。"
+        }
+      ],
+      "issues": []
+    }
+  ],
+  "startupDefinitionChanges": [
+    {
+      "className": "PawnTrionCompInjector",
+      "target": [
+        "所有已加载 ThingDef 中 category==Pawn、race!=null、race.Humanlike==true 的定义；不区分原版或第三方、阵营、是否殖民者、是否有 BDP 基因或装备；默认不覆盖非类人动物、机械族。"
+      ],
+      "kind": "启动期 Def.comps 追加（非 Harmony）",
+      "source": "Source/BDP/Core/Bootstrap/Injectors/PawnTrionCompInjector.cs",
+      "line": 14,
+      "purpose": "为所有类人提供原版 ThingComp 资源宿主和可永久保存的先天容量潜质、释放力，使原版/第三方人物后来接受检测、植入腺体时可直接参与 BDP。",
+      "gate": "定义注入只检查类人并去重；默认 baseMax=0、recoveryPerDay=0。运行时潜质面向所有类人生成；实际容量潜质加入、资格界面和玩法由有效 BDP_Gene_TrionGland 等具体业务条件决定。",
+      "foreignPath": "原版和第三方类人定义都会多一个 CompTrion；人物生成/读档会初始化 BDP 自有账本与先天潜质，后续保存其字段并进入组件逐刻结算；未启用腺体的普通人物默认实际容量/恢复为0，不改原版健康、攻击或种族属性。不能说完全没有动作。",
+      "verdict": "广泛定义接线有明确必要性；业务激活准入充分；常驻开销需如实说明",
+      "evidence": [
+        {
+          "source": "Source/BDP/Core/Bootstrap/PawnCompBootstrap.cs",
+          "line": 22,
+          "note": "核心启动构造调用该注入器。"
+        },
+        {
+          "source": "Source/BDP/Core/Bootstrap/Injectors/PawnTrionCompInjector.cs",
+          "line": 64,
+          "note": "只按类人种族筛选，不是仅 BDP 人物。"
+        },
+        {
+          "source": "Source/BDP/Core/Bootstrap/Injectors/PawnTrionCompInjector.cs",
+          "line": 104,
+          "note": "默认宿主 baseMax=0/recoveryPerDay=0。"
+        },
+        {
+          "source": "Source/BDP/Core/Trion/CompTrion.cs",
+          "line": 311,
+          "note": "PostSpawnSetup 和 PostLoadInit 会生成未初始化的先天容量；661/677 行两项先天值只要求类人。"
+        },
+        {
+          "source": "Source/BDP/Core/Genes/StatPart_TrionCapacityPotential.cs",
+          "line": 15,
+          "note": "实际加入容量要求有效 BDP 腺体基因。"
+        },
+        {
+          "source": "Source/BDP/Core/Trion/CompTrion.cs",
+          "line": 340,
+          "note": "所有有该组件的人物进入 CompTick，按60/150刻间隔结算；不是完全无逐刻开销。"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "className": "PawnCombatBodyCompInjector",
+      "target": [
+        "所有已加载 ThingDef 中 category==Pawn、race!=null、race.Humanlike==true 的定义；不区分原版或第三方、阵营、是否殖民者、是否有 BDP 基因或装备；默认不覆盖非类人动物、机械族。"
+      ],
+      "kind": "启动期 Def.comps 追加（非 Harmony）",
+      "source": "Source/BDP/Core/Bootstrap/Injectors/PawnCombatBodyCompInjector.cs",
+      "line": 12,
+      "purpose": "为现在或将来取得 BDP 基因/触发体的类人提供中性战斗体会话宿主，复用原版组件及存档/物品容器机制。",
+      "gate": "定义注入只检查类人并去重；真正 TryActivate 同时要求有效 Trion 腺体、可激活阶段、资源条件，并必须解析当前主装备 CompTriggerBody；伤口业务只适用 Active/Collapsing。",
+      "foreignPath": "所有原版与第三方类人都会多 CompCombatBodyHost；组件自有状态和容器在初始化/读档/事件绑定或首次Tick时建立，CompTick 每刻核对资源规则；普通未使用者不会因此改变健康、装备或战斗体阶段。",
+      "verdict": "广泛定义接线有明确必要性；业务激活准入充分；常驻开销需如实说明",
+      "evidence": [
+        {
+          "source": "Source/BDP/Core/Bootstrap/PawnCompBootstrap.cs",
+          "line": 23,
+          "note": "核心启动调用。"
+        },
+        {
+          "source": "Source/BDP/Core/Bootstrap/Injectors/PawnCombatBodyCompInjector.cs",
+          "line": 57,
+          "note": "注入范围是全部类人。"
+        },
+        {
+          "source": "Source/BDP/Core/CombatBodySession/CombatBodyActivationTransaction.cs",
+          "line": 73,
+          "note": "激活事务重新验证腺体/阶段/资源，85行无主触发体即拒绝。"
+        },
+        {
+          "source": "Source/BDP/Core/CombatBody/Bridge/CompCombatBodyHost.cs",
+          "line": 150,
+          "note": "CompTick 无玩法资格早退，Service 会 EnsureInternalState，并 ReconcileResourceRules、Tick 伤口。"
+        },
+        {
+          "source": "Source/BDP/Core/CombatBody/Wounds/CombatBodyWoundRuntime.cs",
+          "line": 158,
+          "note": "伤口 Tick 先检查配置和战斗体适用阶段，普通人物不注册流失。"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "className": "CombatBodyWoundTrionInfoInjector",
+      "target": [
+        "所有已加载 HediffDef 中 hediffClass 派生自 Hediff_Injury 或 Hediff_MissingPart 的定义；覆盖原版和第三方相应伤口、断肢类型，组件会存在于使用这些定义的任意种族实例。"
+      ],
+      "kind": "启动期 Def.comps 追加（非 Harmony）",
+      "source": "Source/BDP/Core/CombatBody/Wounds/CombatBodyWoundTrionInfoInjector.cs",
+      "line": 10,
+      "purpose": "利用原版 HediffComp 的提示扩展显示战斗体部位流失，避免额外补丁健康面板。",
+      "gate": "定义层按真实继承类型筛选并按属性/compClass 去重；显示要求真实存活伤口、有效部位、没有缺失祖先，并且人物资源账本已发布对应 CombatBody/Wound 来源的正数流失。流失发布本身只有 Active/Collapsing 战斗体且配置开启。",
+      "foreignPath": "普通及第三方伤口会追加一个只实现 CompTipStringExtra 的提示组件；无 BDP 已发布正数流失时返回 null，保留提示原样；不修改伤口严重度、血流、部位或健康计算。",
+      "verdict": "广泛定义接线必要；实际消费仅限 BDP 已发布流失",
+      "evidence": [
+        {
+          "source": "Source/BDP/Core/Bootstrap/CombatBodyWoundInfoBootstrap.cs",
+          "line": 18,
+          "note": "核心启动调用伤口组件注入。"
+        },
+        {
+          "source": "Source/BDP/Core/CombatBody/Wounds/CombatBodyWoundTrionInfoInjector.cs",
+          "line": 39,
+          "note": "伤口/缺失部位真实派生类筛选，包含其他模组子类。"
+        },
+        {
+          "source": "Source/BDP/Core/CombatBody/Wounds/CombatBodyWoundTrionInfoHediffComp.cs",
+          "line": 15,
+          "note": "仅提示扩展，无自定义伤害或Tick行为；条件不符返回null。"
+        },
+        {
+          "source": "Source/BDP/Core/CombatBody/Wounds/CombatBodyWoundTrionDrainUtility.cs",
+          "line": 34,
+          "note": "提示只读取已发布的正数 CombatBody/Wound 资源来源。"
+        },
+        {
+          "source": "Source/BDP/Core/CombatBody/Wounds/CombatBodyWoundTrionDrainUtility.cs",
+          "line": 18,
+          "note": "实际流失计算要求 BDP 战斗体阶段、配置和真实伤口。"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "className": "PawnTrionTalentAssessmentInjector",
+      "target": [
+        "所有已加载 ThingDef 中 category==Pawn、race!=null、race.Humanlike==true 的定义；不区分原版或第三方、阵营、是否殖民者、是否有 BDP 基因或装备；默认不覆盖非类人动物、机械族。"
+      ],
+      "kind": "启动期 Def.comps 追加（非 Harmony）",
+      "source": "Source/BDP.Content/Trion/Talent/PawnTrionTalentAssessmentInjector.cs",
+      "line": 9,
+      "purpose": "保存类人人物是否完成 BDP 天赋检测，允许普通玩家人物在尚无腺体时检测先天潜质。",
+      "gate": "定义注入按类人并去重；完成记录由 TryCommit 再次检查检测资格后写入。受检者要求活的玩家殖民者/奴隶/囚犯、类人、没有有效腺体、有潜质、未完成；操作员另要求非同一人、活着且智识至少10。人物统计仅 completed=true 才追加。",
+      "foreignPath": "所有类人都有检测组件和 completed 存档字段；默认 false，无自定义Tick，普通未检测人物不出现检测结果、不给予腺体资格。",
+      "verdict": "广泛定义接线必要；业务消费只在明确检测流程",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/ContentBootstrap.cs",
+          "line": 115,
+          "note": "Content启动调用。"
+        },
+        {
+          "source": "Source/BDP.Content/Trion/Talent/PawnTrionTalentAssessmentInjector.cs",
+          "line": 46,
+          "note": "仅种族类型筛选，非阵营/当前BDP身份筛选。"
+        },
+        {
+          "source": "Source/BDP.Content/Trion/Talent/CompTrionTalentAssessment.cs",
+          "line": 70,
+          "note": "未完成不追加人物统计。"
+        },
+        {
+          "source": "Source/BDP.Content/Trion/Talent/TrionTalentAssessmentEligibility.cs",
+          "line": 22,
+          "note": "受检者完整条件。"
+        },
+        {
+          "source": "Source/BDP.Content/Trion/Talent/TrionTalentAssessmentEligibility.cs",
+          "line": 71,
+          "note": "操作员完整条件。"
+        },
+        {
+          "source": "Source/BDP.Content/Trion/Talent/TrionTalentAssessmentService.cs",
+          "line": 31,
+          "note": "提交前重新验证，49行才写完成。"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "className": "PawnCombatBodyEmergencyEscapeStateInjector",
+      "target": [
+        "所有已加载 ThingDef 中 category==Pawn、race!=null、race.Humanlike==true 的定义；不区分原版或第三方、阵营、是否殖民者、是否有 BDP 基因或装备；默认不覆盖非类人动物、机械族。"
+      ],
+      "kind": "启动期 Def.comps 追加（非 Harmony）",
+      "source": "Source/BDP.Content/CombatBody/Escape/PawnCombatBodyEmergencyEscapeStateInjector.cs",
+      "line": 9,
+      "purpose": "让 BDP 崩解前后保存同一次紧急脱离解析缓存，业务状态留在 Content，避免中性Core持有具体逃生类型。",
+      "gate": "定义注入只检查类人并去重；缓存默认 null，只有 BDP 战斗体崩解扩展调用 Prepare 时设置。解析要求已发布且可用的 EmergencyEscape 被动结果，执行还要求 IsAvailable、人物已生成、有可用目的地。",
+      "foreignPath": "所有类人都有缓存组件及其存档入口；无自定义Tick、无自动传送、无直接健康修改；未进入 BDP 崩解生命周期者保持空缓存。",
+      "verdict": "广泛定义接线有明确用途；业务消费只在 BDP 崩解及被动能力条件",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/ContentBootstrap.cs",
+          "line": 116,
+          "note": "Content启动调用。"
+        },
+        {
+          "source": "Source/BDP.Content/CombatBody/Escape/PawnCombatBodyEmergencyEscapeStateInjector.cs",
+          "line": 46,
+          "note": "注入全部类人，未把现有腺体/装备当作定义筛选。"
+        },
+        {
+          "source": "Source/BDP.Content/CombatBody/Escape/CompCombatBodyEmergencyEscapeState.cs",
+          "line": 15,
+          "note": "空缓存字段；只由明确Set/Clear调用变化。"
+        },
+        {
+          "source": "Source/BDP.Content/CombatBody/Escape/CombatBodyEmergencyEscapeExtensionProvider.cs",
+          "line": 25,
+          "note": "缓存只在崩解扩展 Prepare 读取业务结果。"
+        },
+        {
+          "source": "Source/BDP.Content/CombatBody/Escape/CombatBodyEmergencyEscapeResolver.cs",
+          "line": 63,
+          "note": "必须有 EmergencyEscape 对应已发布、可用被动结果。"
+        },
+        {
+          "source": "Source/BDP.Content/CombatBody/Escape/CombatBodyEmergencyEscapeService.cs",
+          "line": 23,
+          "note": "实际位置变化之前检查可用、已生成和目的地。"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "className": "PawnCombatBodyPlayerLogInjector",
+      "target": [
+        "所有已加载 category==Pawn 且 comps 中已有 CompProperties_CombatBodyHost 的 ThingDef；核心默认已为所有类人注入该宿主，因此实际默认覆盖全部类人；还会覆盖作者显式接入战斗体宿主的其他Pawn定义。"
+      ],
+      "kind": "启动期 Def.comps 追加（非 Harmony）",
+      "source": "Source/BDP.Content/PlayerLog/CombatBody/PawnCombatBodyPlayerLogInjector.cs",
+      "line": 10,
+      "purpose": "订阅战斗体确认阶段事件并写原版战斗日志，不另存一份阶段事实。",
+      "gate": "启动先强制执行 PawnCompBootstrap，避免程序集静态构造顺序不保证。定义要求已有 BDP 战斗体宿主，并按 compClass 去重；真正记录要求发生实际 Active/Collapsing/特定 Release 到 Cooldown 的阶段变化。",
+      "foreignPath": "不是只给当前 BDP 玩家角色，而是所有有宿主定义的人物都会订阅；绑定可能初始化其自有战斗体服务。普通人物没有相关阶段变化就不产生日志；组件无独立逐刻逻辑，无额外存档真值。",
+      "verdict": "广泛宿主观察必要；真正日志消费只在 BDP 阶段事件",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/ContentBootstrap.cs",
+          "line": 117,
+          "note": "Content启动调用。"
+        },
+        {
+          "source": "Source/BDP.Content/PlayerLog/CombatBody/PawnCombatBodyPlayerLogInjector.cs",
+          "line": 16,
+          "note": "先执行核心宿主注入再筛已有宿主；所以默认范围仍为全部类人。"
+        },
+        {
+          "source": "Source/BDP.Content/PlayerLog/CombatBody/CompCombatBodyPlayerLog.cs",
+          "line": 41,
+          "note": "生命周期绑定正式事件口，替换/销毁解绑。"
+        },
+        {
+          "source": "Source/BDP.Content/PlayerLog/CombatBody/CompCombatBodyPlayerLog.cs",
+          "line": 58,
+          "note": "只根据真实阶段变化选择日志语言键；未发生变化不记录。"
+        }
+      ],
+      "issues": []
+    },
+    {
+      "className": "ChipRecipeIngredientUniverse",
+      "target": [
+        "所有已加载 RecipeDef 中 workerClass 精确等于 BDP.Content.Assembly.ChipManufacturing.Recipe.RecipeWorker_ChipProduction 的定义。"
+      ],
+      "kind": "启动期 RecipeDef 配方重建（非 Harmony）",
+      "source": "Source/BDP.Content/Assembly/ChipManufacturing/Recipe/ChipRecipeIngredientUniverse.cs",
+      "line": 12,
+      "purpose": "保存芯片配方基础材料，并把具体功能/构型材料展开为原版可检查的固定材料槽全集，实际组合数量由 BDP 配方工作器计算。",
+      "gate": "InitializeAll 精确匹配 BDP 配方工作器；Initialize 按 RecipeDef 实例缓存防止重复展开。材料全集只来自基础材料及 BDP 自定义功能/构型Def费用。",
+      "foreignPath": "普通原版和第三方配方不改；主动选择 BDP 工作器的配方会重建 ingredients、fixedIngredientFilter、defaultIngredientFilter，并 allowMixingIngredients=false，是显式业务接入。",
+      "verdict": "限定充分；重建范围是明确接入 BDP 制造流程的配方",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/ContentBootstrap.cs",
+          "line": 120,
+          "note": "启动期明确初始化芯片配方。"
+        },
+        {
+          "source": "Source/BDP.Content/Assembly/ChipManufacturing/Recipe/ChipRecipeIngredientUniverse.cs",
+          "line": 24,
+          "note": "仅精确 BDP workerClass 命中才 Initialize。"
+        },
+        {
+          "source": "Source/BDP.Content/Assembly/ChipManufacturing/Recipe/ChipRecipeIngredientUniverse.cs",
+          "line": 35,
+          "note": "原始基础材料先保存，重复实例不重新改写。"
+        },
+        {
+          "source": "Source/BDP.Content/Assembly/ChipManufacturing/Recipe/ChipRecipeIngredientUniverse.cs",
+          "line": 58,
+          "note": "材料列表和过滤器明确重建；73行关闭混料。"
+        }
+      ],
+      "issues": []
+    }
+  ],
+  "findings": [
+    {
+      "id": "MS01",
+      "title": "进入屋顶的普通人物被错误加入浮空账本",
+      "certainty": "代码确定：持久化记录污染、额外逐 tick 处理；搬动普通人物为满足额外条件的可证风险，尚未游戏实测。",
+      "reason": "TryEnterNextPathCellPatch 为检查既有降落过渡直接 GetOrCreateRecord，创建在实际 BDP 飞行准入之前；GetOrCreateRecord 只检查非空人物。",
+      "impact": "所有走进屋顶格的普通人物都可能写入存档并被逐 tick 处理；记录除永久销毁外一直保留。若普通登记人物倒地/死亡等并处于普通地面不可通行格，ForceGroundedImmediately 会寻找合法格并直接改位置，可能干扰其他模组的放置/运输机制。",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnPathFollower_Steps_FloatingFlight.cs",
+          "line": 326,
+          "note": "先创建"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnPathFollower_Steps_FloatingFlight.cs",
+          "line": 342,
+          "note": "后判断实际飞行"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/GameComponent_FloatingFlight.cs",
+          "line": 49,
+          "note": "任何非空人物都可创建"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/GameComponent_FloatingFlight.cs",
+          "line": 113,
+          "note": "逐 tick 对所有记录 Reconcile"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/FloatingFlightStateController.cs",
+          "line": 30,
+          "note": "倒地/死亡等无条件进 ForceGroundedImmediately"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/FloatingFlightStateController.cs",
+          "line": 270,
+          "note": "未检查 BDP 状态便可能改人物 Position"
+        }
+      ],
+      "recommendation": "过渡检查先 TryGetRecord；仅实际 BDP 飞行或明确既有 BDP 起降过渡才消费/创建记录。另核对强制落地只对真正 BDP 飞行经历人物执行，并针对当前存档已有普通污染记录制定必要清理。用户本次是审查，暂不修改。",
+      "reportId": "F01",
+      "category": "确定遗漏：普通对象被额外登记"
+    },
+    {
+      "id": "COTHER-01",
+      "title": "普通人物死亡也会被额外重算基因对特性的抑制",
+      "certainty": "确定：调用和写入已从当前源码、原版程序集确认；尚未证明某第三方模组的实际冲突",
+      "reason": "Pawn.Kill Prefix 在 CanCapture 前对所有人物调用 RemoveAllTemporary。该服务只检查 traits 存在，即使 OfType<Trait_BlackTriggerInherited>() 为空，仍调用 RecalculateSuppression。当前原版实现确实逐特性写 suppressedByGene，并非纯读取。BDP 没有临时特性时没有必要新增这次写入。",
+      "impact": "普通原版、其他种族或其他模组人物只要有 story.traits 都可额外进入抑制重算；通常结果相同，但第三方临时抑制或对重算的补丁也会被无依据触发。死亡入口的 BDP 隔离不完整。",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/Trigger/Black/Formation/Patches/Patch_Pawn_Kill_BlackTriggerFormation.cs",
+          "line": 20,
+          "note": "无条件清理位于 CanCapture 之前。"
+        },
+        {
+          "source": "Source/BDP.Content/Trigger/Black/Formation/Inheritance/BlackTriggerInheritedTraitService.cs",
+          "line": 59,
+          "note": "无条件重算，与是否实际移除 BDP 特性无关；原版 RimWorld.TraitSet.RecalculateSuppression，vanilla MVID 61e4173561894da49d210260257b5097:0600D1D4:M，确实写 suppressedByGene。"
+        }
+      ],
+      "recommendation": "在临时特性清理服务中先收集 BDP 临时特性，空集合直接返回；只在实际移除后进行必要重算。保持绑定死亡观察和形成候选观察的各自门槛。",
+      "reportId": "F02",
+      "category": "确定遗漏：普通对象被额外写入"
+    },
+    {
+      "id": "CORE-002",
+      "title": "攻击语义与穿盾作用域没有独立嵌套伤害身份隔离",
+      "certainty": "确定缺少身份隔离；具体串用影响需同步独立回调触发，尚未游戏复现。",
+      "reason": "BdpProjectile 把整个原版 TakeDamage 包在线程策略和语义作用域内，原版 TakeDamage 会调用 DamageWorker.Apply、攻击者 Hediff.Notify_PawnDamagedThing 等同步扩展回调。回调内若另行对任意目标调用普通 TakeDamage，没有推入自己的策略，便继承外层穿盾与来源语义。普通爆炸逐目标补丁会 Push(null) 清穿盾策略，但 SemanticRuntimeScope.Push(null) 是 Noop，仍继承外层语义。爆炸启动绑定还只看当前线程上下文，不认爆炸身份，BDP GenExplosion.DoExplosion 同步通知里新生成的独立爆炸可误挂 BDP 上下文。",
+      "impact": "独立嵌套伤害可能不必要地绕过原版/BDP 盾、显示错误伤口来源；独立同步爆炸可能继承 BDP 抑制伤害/额外效果/视听设置。源 BDP 正常伤害对普通受击者执行穿盾是必要行为，本问题只针对独立嵌套请求。",
+      "evidence": [
+        {
+          "source": "Source/BDP/Core/Projectiles/Interaction/ProjectileInteractionPolicy.cs",
+          "line": 60,
+          "note": "Push 仅替换 ThreadStatic current，无目标或伤害调用身份。"
+        },
+        {
+          "source": "Source/BDP/Core/Projectiles/BdpProjectile.cs",
+          "line": 1702,
+          "note": "策略与语义覆盖整个 TakeDamage。真实方法 61e4173561894da49d210260257b5097:0600399D:M（Verse.Thing.TakeDamage）调用 DamageWorker.Apply 后同步 Notify_PawnDamagedThing。"
+        },
+        {
+          "source": "Source/BDP/Core/Semantics/SemanticRuntimeScope.cs",
+          "line": 32,
+          "note": "null 不压空栈，因而不形成非 BDP 嵌套调用隔离。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_DamageWorker_ExplosionDamageThing_BdpSemantics.cs",
+          "line": 36,
+          "note": "普通爆炸逐目标清交互策略，但语义空值并没有清外层值；也不为独立嵌套 TakeDamage 设置身份。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_Explosion_StartExplosion_BdpSemantics.cs",
+          "line": 25,
+          "note": "无身份地向当前爆炸绑定线程上下文。真实 61e4173561894da49d210260257b5097:06003732:M（Verse.Explosion.StartExplosion）含 allThings.Notify_Explosion 同步回调；上层 61e4173561894da49d210260257b5097:0600551C:M（Verse.GenExplosion.DoExplosion）调用它后返回。"
+        }
+      ],
+      "recommendation": "在真实单次伤害/单个爆炸创建边界传递并核验请求身份，明确同源子结算与独立嵌套请求的规则；独立调用形成空上下文边界，退出时恢复。由 Core 中性结算设施承载，不在每个盾消费者追加各自的绕过补丁。",
+      "reportId": "F03",
+      "category": "隔离缺口确定；串用影响有触发条件"
+    },
+    {
+      "id": "COTHER-02",
+      "title": "倒地及重新生成的装备保护上下文没有异常出口清理",
+      "certainty": "确定：异常清理缺失已确认；残留影响是条件性风险，未作游戏内异常复现",
+      "reason": "MakeDowned 与 Notify_PawnSpawned 的 Prefix 都可能 Enter(Pawn)，但只有 Postfix Exit。原版或其他补丁抛异常时 Harmony 正常 Postfix 不保证执行；保护表按 Pawn 记录深度，之后仍可能 Contains=true。邻近 CheckForStateChange 已有幂等 Restore+Finalizer，另外两条路径遗漏。",
+      "impact": "残留不会让无战斗体的普通人物自动免掉装，因为 TryDropEquipment 还检查阶段和主触发体；但同一个 BDP 人物在 Active/Collapsing 时的后续普通卸装可能被误认为保护调用，改变原版或其他模组动作。",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/CombatBody/Protection/Patch_Pawn_HealthTracker_CombatBodyTriggerProtection.cs",
+          "line": 193,
+          "note": "MakeDowned Enter，209 行正常 Postfix Exit，没有 Finalizer。"
+        },
+        {
+          "source": "Source/BDP.Content/CombatBody/Protection/Patch_Pawn_HealthTracker_CombatBodyTriggerProtection.cs",
+          "line": 352,
+          "note": "Notify_PawnSpawned 建上下文，363 行仅正常 Postfix 退出。"
+        },
+        {
+          "source": "Source/BDP.Content/CombatBody/Protection/Patch_Pawn_HealthTracker_CombatBodyTriggerProtection.cs",
+          "line": 388,
+          "note": "后续 TryDropEquipment 依赖 Contains 与阶段和装备组合；泄漏会扩大本应限定于当前调用的行为范围。"
+        },
+        {
+          "source": "Source/BDP.Content/CombatBody/Protection/Patch_Pawn_HealthTracker_CombatBodyTriggerProtection.cs",
+          "line": 302,
+          "note": "同文件 CheckForStateChange 已示范异常出口幂等 Restore。"
+        }
+      ],
+      "recommendation": "为这两个临时上下文补齐异常出口清理，与正常出口共用幂等状态恢复；保留原异常，不吞异常，不扩展保护对象。",
+      "reportId": "F04",
+      "category": "异常出口遗漏；影响限定于 BDP 人物"
+    },
+    {
+      "id": "CORE-006",
+      "title": "远程菜单目标提示的异常/换装备退出不保证清理",
+      "certainty": "确定清理只有正常 Postfix；异常或同步换装备时的影响为条件性兼容风险。",
+      "reason": "Prefix 把提示写入当时主装备的 CompTriggerBody；Postfix 再读取当前主装备后清空。没有 Finalizer 清理异常路径，也没有保存真正写入的组件身份。原方法/其他补丁在提示设置之后抛异常或换装备，原触发体会保留旧提示。",
+      "impact": "只影响 BDP 触发体之后的 PrimaryVerb 选择，可能继续返回上一次菜单目标所选的侧；普通装备原流程不变。该风险不应误称普通玩家必然遭遇的问题。",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_FloatMenuUtility_GetRangedAttackAction.cs",
+          "line": 26,
+          "note": "Prefix 写入当时触发体。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_FloatMenuUtility_GetRangedAttackAction.cs",
+          "line": 35,
+          "note": "Postfix 清理的是此刻主装备，未保存 __state/无 Finalizer。"
+        },
+        {
+          "source": "Source/BDP/Core/Trigger/State/CompTriggerBody.Reads.cs",
+          "line": 522,
+          "note": "属性读取使用提示且不消费，直到外部显式清空。"
+        }
+      ],
+      "recommendation": "用短期作用域保存当时组件与旧提示，正常/异常退出均恢复写入的同一组件；无需扩大原版菜单行为。",
+      "reportId": "F05",
+      "category": "异常或换装出口遗漏；影响限定于 BDP 触发体"
+    },
+    {
+      "id": "CORE-001",
+      "title": "连射剩余数下降不能证明实际发射成功",
+      "certainty": "确定：真实原版控制流与补丁判据不符；未游戏实测。",
+      "reason": "补丁把 burstShotsLeft 下降当作 TryCastShot 成功。原版 Verse.Verb.TryCastNextBurstShot 在 Available()/TryCastShot 为 false 时也直接把 burstShotsLeft 设为 0；只要进入前大于 0，就会被错误广播为命中成功。BDP 近战有专用实际结果校验，但远程没有。",
+      "impact": "原版或 BDP 远程攻击失效、目标/资源变化导致未发射时，仍可能移除该角色的 BDP 变色龙隐身状态。没有 BDP 隐身组件的普通角色不改变玩法。",
+      "evidence": [
+        {
+          "source": "Source/BDP/Patches/Patch_Verb_TryCastNextBurstShot_BdpAttackActionSuccess.cs",
+          "line": 36,
+          "note": "实际成功判据只比较连射剩余数；真实方法规范 ID 61e4173561894da49d210260257b5097:0600580E:M（Verse.Verb.TryCastNextBurstShot），get_source_slice 45–60 行：成功分支递减，失败分支同样清零。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_Verb_TryCastNextBurstShot_BdpAttackActionSuccess.cs",
+          "line": 52,
+          "note": "之后直接发布 AttackActionSuccess.FromWeapon(__instance,true)。"
+        },
+        {
+          "source": "Source/BDP.Content/Chameleon/HediffComp_BdpInvisibility.cs",
+          "line": 45,
+          "note": "消费者核对 Pawn 身份后移除隐身，未再次证明发射成功。"
+        }
+      ],
+      "recommendation": "在真实成功动作边界观察成功事实，或由中性单次执行结果明确登记；不要用连射数/作业结束推测成功。广泛观察原版攻击本身应保留，因为原版武器攻击也需要取消 BDP 隐身。",
+      "reportId": "F06",
+      "category": "确定功能判据错误；不是全局越界"
+    },
+    {
+      "id": "CORE-003",
+      "title": "跨刻爆炸命中颜色没有恢复对应爆炸上下文",
+      "certainty": "确定：原版爆炸时序与作用域接线缺失可由源码证明；未游戏视觉实测。",
+      "reason": "AddInjury 颜色补丁读取 ExplosionImpactRuntimeScope.Current。BdpProjectile 只在启动 GenExplosion.DoExplosion 时压该作用域；原版 DoExplosion 调 StartExplosion 后返回，StartExplosion 不执行逐格 AffectCell，后续 Explosion.Tick 才造成范围伤害。逐目标补丁虽然从 Explosion 弱表读到正确上下文，却只恢复语义和穿盾策略，未恢复 ExplosionImpactRuntimeScope。",
+      "impact": "正常 BDP 范围攻击跨刻造成实际伤口时不会在该补丁登记模块命中色；若启动期同步回调产生独立伤害，则反而可能误读启动期颜色上下文。这是上下文放置时序问题，不能靠在颜色读取处放宽条件修复。",
+      "evidence": [
+        {
+          "source": "Source/BDP/Core/Projectiles/BdpProjectile.cs",
+          "line": 1875,
+          "note": "唯一范围上下文 Push 覆盖启动调用，返回后 Dispose。真实 61e4173561894da49d210260257b5097:0600551C:M（Verse.GenExplosion.DoExplosion）末尾仅 StartExplosion。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_DamageWorker_ExplosionDamageThing_BdpSemantics.cs",
+          "line": 35,
+          "note": "拿到了该 Explosion 的上下文，却没有恢复范围上下文作用域。真实 61e4173561894da49d210260257b5097:06003733:M（Verse.Explosion.Tick）11 行 AffectCell；61e4173561894da49d210260257b5097:06000ED1:M（Verse.DamageWorker.ExplosionDamageThing）31 行 TakeDamage。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_DamageWorker_AddInjury_BdpHitFeedbackColor.cs",
+          "line": 21,
+          "note": "只读线程 ExplosionImpactRuntimeScope.Current，跨刻时为 null。"
+        }
+      ],
+      "recommendation": "让逐目标承伤边界恢复该爆炸的全部消费上下文并按目标身份约束，或把登记颜色移到已有逐目标结果消费边界；同时处理 CORE-002 的独立嵌套隔离。",
+      "reportId": "F07",
+      "category": "确定跨刻接线遗漏；不是全局越界"
+    },
+    {
+      "id": "MS03",
+      "title": "BDP 能量护盾不遵守原版 DamageDef.ignoreShields 标志",
+      "certainty": "确定行为差异；未找到声明为刻意业务特例的设计，暂归疑似语义遗漏。",
+      "reason": "补丁有足够 BDP 受击组件门槛，但 CanAbsorb 在远程/爆炸类别中没有读取 ignoreShields；真实原版 CompShield.PostPreApplyDamage 显式以 !dinfo.Def.ignoreShields 为条件。",
+      "impact": "其他模组/原版以该伤害定义标志声明的穿盾伤害，命中有 BDP 护盾的人物时仍可能被挡、扣 Trion 和盾耐久；普通无 BDP 护盾人物不受影响。",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/Shield/Patch_Pawn_PreApplyDamage_EnergyShield.cs",
+          "line": 28,
+          "note": "调用 TryBlockDamage。"
+        },
+        {
+          "source": "Source/BDP.Content/Shield/HediffComp_EnergyShield.cs",
+          "line": 65,
+          "note": "业务准入调用 Props.CanAbsorb。"
+        },
+        {
+          "source": "Source/BDP.Content/Shield/HediffCompProperties_EnergyShield.cs",
+          "line": 153,
+          "note": "类别准入无 ignoreShields。"
+        }
+      ],
+      "recommendation": "先明确 BDP 能量盾是否应继承原版穿盾标志；若无有据的例外，在共同伤害准入处保留该原版语义，同时保留新增显式 BDP 穿盾 API。不能声称所有第三方穿盾机制都已兼容。",
+      "reportId": "F08",
+      "category": "行为差异确定；业务意图待确认"
+    },
+    {
+      "id": "CORE-004",
+      "title": "短暂命中色记录只靠再次绘制清理",
+      "certainty": "确定的静态强引用清理缺口；未做长期内存量测。",
+      "reason": "HitFeedbackColorRuntime 使用 Dictionary<Pawn,...> 强引用保存受击者。过期删除只发生在 TryGetColor 对同一 Pawn 的再次查询；记录对象若离开地图、死亡后不再绘制或结束当前游戏，没有 Tick/游戏切换/退出清理。",
+      "impact": "被 BDP 彩色命中但之后不再绘制的原版或 BDP Pawn 会留在进程静态表。颜色准入本身有 Pawn 身份与 16 Tick 窗口，不属于普遍改写普通 Pawn 的颜色；问题是临时状态生命周期长于功能需要。",
+      "evidence": [
+        {
+          "source": "Source/BDP/Core/Projectiles/RangedFlightProtocol/Impact/HitFeedbackColorRuntime.cs",
+          "line": 37,
+          "note": "静态 Dictionary 的键强持有 Pawn。"
+        },
+        {
+          "source": "Source/BDP/Core/Projectiles/RangedFlightProtocol/Impact/HitFeedbackColorRuntime.cs",
+          "line": 75,
+          "note": "唯一过期移除点是该 Pawn 被查询时。"
+        },
+        {
+          "source": "Source/BDP/Patches/Patch_PawnRenderer_BdpHitFeedbackColor.cs",
+          "line": 92,
+          "note": "查询仅由绘制器当前 Pawn 的颜色读取触发。"
+        }
+      ],
+      "recommendation": "将记录寿命收束到所属游戏/短暂视觉状态，并提供过期与游戏结束清理，或使用不强持有 Pawn 的短期键；不要增加全局逐 Pawn 常驻扫描。",
+      "reportId": "F09",
+      "category": "确定临时记录清理缺口"
+    },
+    {
+      "id": "CORE-007",
+      "title": "非 BDP 路径存在无法证明必要的全量采集与永久版本登记",
+      "certainty": "工作量与状态登记确定；收益/性能影响未量测，归为必要性待确认，不是已证实普通玩法错误。",
+      "reason": "Thing.TakeDamage 对所有原版伤害分配 Capture/Resolution 并写 lastCompleted；身体缺失信号给所有原版 Pawn 永久写 VersionByPawnId；EquipmentTrackerTick 在所有无激活腺体 Pawn 每刻进入资格清理，分配装备快照，即使没有触发体或激活战斗体。真正消费者分别是 BDP 结果调用、当前触发体同步缓存和 BDP 战斗体/触发体清理。",
+      "impact": "普通 Pawn/原版伤害保留原玩法，但付出额外分配/查找，且全量身体版本表没有游戏退出清理。广泛通知可有必要；全量永久记录和无消费者工作不自动因此必要。",
+      "evidence": [
+        {
+          "source": "Source/BDP/Core/Projectiles/RangedFlightProtocol/Impact/DamageResolutionRuntime.cs",
+          "line": 163,
+          "note": "无条件创建当前调用 Capture 与 Resolution；201 行完成后保存 lastCompleted。"
+        },
+        {
+          "source": "Source/BDP/Core/BodyConstraints/PawnBodyConstraintSignalHub.cs",
+          "line": 43,
+          "note": "所有发布对象都永久写入静态 ID 字典；GetVersion 唯一消费用于触发体缓存。"
+        },
+        {
+          "source": "Source/BDP/Core/Trigger/Eligibility/TriggerBodyEquipmentEligibility.cs",
+          "line": 95,
+          "note": "所有无激活腺体 Pawn 都进入 HandleGlandEligibilityLost。"
+        },
+        {
+          "source": "Source/BDP/Core/Trigger/Eligibility/TriggerBodyEquipmentEligibility.cs",
+          "line": 60,
+          "note": "即使没有触发体仍创建并扫描装备快照。"
+        },
+        {
+          "source": "Source/BDP/Core/CombatBodySession/CombatBodySessionService.cs",
+          "line": 275,
+          "note": "解除仅活跃/崩解战斗体需要。"
+        }
+      ],
+      "recommendation": "先确认每项全量采集的明确消费者需求；通过中性显式记录请求、只保存已有订阅/缓存所需版本、在资格清理前检查 BDP 触发体或活跃会话来收紧。保留原版受击目标/原版攻击武器能服务 BDP 功能的必要观察，不把目标身份粗暴限为 BDP。",
+      "reportId": "F10",
+      "category": "全量工作确定；必要性和开销待确认"
+    },
+    {
+      "id": "MS02",
+      "title": "通行补丁的同签名锚点后备匹配过宽",
+      "certainty": "确定匹配规则宽；是否遇到真实其他模组冲突尚未实测。",
+      "reason": "FindWalkabilityCall 的后备方案可匹配任意静态 bool(IntVec3, Map, Pawn)，没有确认是替换 WalkableBy 的包装器。BDP 飞行旁路跳转成功分支，会绕过被匹配函数。",
+      "impact": "不影响普通人物原调用，但当其他模组改了 IL 且消除原版 WalkableBy 时，BDP 浮空人物可能跳过该模组不同语义的检查；主要涉及 IsNextCellWalkable、SetupMoveIntoNextCell、NeedNewPath。",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnPathFollower_Steps_FloatingFlight.cs",
+          "line": 60,
+          "note": "IsWalkabilityPredicate 对后备只检查静态、bool 与三个参数类型。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnPathFollower_Steps_FloatingFlight.cs",
+          "line": 120,
+          "note": "匹配第一个满足形状与成功分支的调用。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_PawnPathFollower_Steps_FloatingFlight.cs",
+          "line": 99,
+          "note": "满足 BDP 旁路后直接跳至成功分支，原调用被跳过。"
+        }
+      ],
+      "recommendation": "保留精确原版锚点；未知改写安全退出，或只支持已确认的具体包装器及完整 IL 上下文。现有 BDP 运行时门槛仍保留，不能用加普通人物条件掩盖锚点问题。",
+      "reportId": "F11",
+      "category": "条件兼容风险；普通人物分支保留"
+    },
+    {
+      "id": "COTHER-03",
+      "title": "触发体动态信息卡按整个武器类别移除条目，可能覆盖第三方给 BDP 武器追加的信息",
+      "certainty": "确定：整类过滤已确认；具体第三方条目丢失需对应模组/补丁顺序实测",
+      "reason": "准入确实只针对 CompTriggerBody，但 ReplaceWeaponEntries 对所有 Weapon_Melee/Weapon_Ranged 分类条目一律丢弃。若其他模组在同一 BDP 触发体信息枚举中追加该类条目，也可能一起被删除。替换 BDP 占位武器统计是必要的，是否必须删整个类别值得收紧。",
+      "impact": "不影响原版和第三方的普通武器；风险限定在带 BDP CompTriggerBody 的对象，且是显示信息兼容风险，不是攻击机制改写。",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/Patches/Patch_ThingWithComps_SpecialDisplayStats_TriggerBodyWeaponInfo.cs",
+          "line": 51,
+          "note": "过滤依据仅 category，不区分条目来源。"
+        },
+        {
+          "source": "Source/BDP.Content/Patches/Patch_ThingWithComps_SpecialDisplayStats_TriggerBodyWeaponInfo.cs",
+          "line": 76,
+          "note": "两个武器类别都会整体过滤。"
+        }
+      ],
+      "recommendation": "记录该目标内的兼容限制。若确有第三方扩展信息需求，按明确的占位武器统计条目识别替换，或提供保留扩展条目的接入口；本次审查不擅自重构。",
+      "reportId": "F12",
+      "category": "条件显示兼容风险；限定 BDP 物品"
+    },
+    {
+      "id": "COTHER-04",
+      "title": "两个芯片半成品续作补丁缺少类级 Harmony 标记，实际自动扫描不会注册",
+      "certainty": "确定：当前源码、唯一注册方式以及当前 0Harmony.dll 扫描实现均已确认",
+      "reason": "Patch_WorkGiver_DoBill_ChipUnfinishedThing 类自身没有任何 Harmony 属性，只有两个方法有 HarmonyPrefix/HarmonyPatch。ContentBootstrap 仅 PatchAll 注册。当前 Harmony.PatchAll(Assembly) 以 Type.HasHarmonyAttribute 过滤，该函数只查 GetFromType(type).Count，因此该类不会进入处理。",
+      "impact": "最近半成品搜索及续作工作仍执行原版的 Creator==pawn 限制，BDP 希望不同人物接手同组合半成品的功能未真正生效；普通账单不受改变。不能把源码中声明的 2 个入口算成已启用补丁。",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/Assembly/ChipManufacturing/Patches/Patch_WorkGiver_DoBill_ChipUnfinishedThing.cs",
+          "line": 12,
+          "note": "类级无属性；方法级属性在15/16与53/54行。"
+        },
+        {
+          "source": "Source/BDP.Content/ContentBootstrap.cs",
+          "line": 96,
+          "note": "仅自动 PatchAll 注册。当前 Harmony MVID e53399289d9b419d83f9f5b02c5cf609，Harmony.PatchAll(Assembly):0600023E:M；HasHarmonyAttribute:060007AA:M；两者确认按类属性过滤。"
+        }
+      ],
+      "recommendation": "类声明前补齐 [HarmonyPatch]，再验证两个目标实际出现在 Harmony 已注册补丁表；保留现有 Bill_ChipProduction 准入，不改变其他配方。",
+      "reportId": "F13",
+      "category": "确定注册遗漏；声明的补丁尚未启用"
+    },
+    {
+      "id": "MS05",
+      "title": "屋顶刷新可直接使用原版事件，当前 Harmony 接入并非唯一必要方式",
+      "certainty": "本版真实程序集已确认 RoofGrid.SetRoof 只在值变化后调用 map.events.Notify_RoofChanged，后者同步触发公开 RoofChanged 事件；替代接入生命周期尚未实施验证。",
+      "reason": "现有 Postfix 对所有 SetRoof 调用重算，包括值实际未变化；原版已经给出仅真实变化触发的事件入口。",
+      "impact": "当前仅维护 BDP 网格，有业务必要和消费边界；这是减法/原版优先改进点，不是普通人物玩法逻辑泄漏。采用事件可以减少一个全局方法补丁和重复写屋顶值的无效重算。",
+      "evidence": [
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Patches/Patch_RoofGrid_SetRoof_FloatingFlight.cs",
+          "line": 15,
+          "note": "Postfix 没有区分本次屋顶是否实际改变。"
+        },
+        {
+          "source": "Source/BDP.Content/FloatingFlight/Pathing/PathGrid_FloatingAlways.cs",
+          "line": 12,
+          "note": "自有网格已有按 Map 构造的生命周期，可作为后续事件订阅位置候选。"
+        }
+      ],
+      "recommendation": "后续维护评估在自有 PathGrid 或现有地图组件生命周期中订阅原版 MapEvents.RoofChanged，只刷新两张 BDP 网格；正确处理加载、地图清理并复核原版区域缓存通知。此次不改代码。",
+      "reportId": "F14",
+      "category": "减法建议；不是越界错误"
+    }
+  ],
+  "auditNotes": {
+    "core": [
+      "本报告只审查 Core：38 个补丁文件、42 个实际补丁类，BDPMod.cs 的 PatchAll 是安装入口而非额外补丁类。没有修改业务代码、没有建分支/工作树、没有提交；只写本报告。",
+      "所有 source 均为 BorderDefenseProtocol 模组根目录相对路径；跨程序集的 Content 文件只作为实际消费者证据，不重复负责 Content 补丁审查。目标类型/成员名保持英文标识。",
+      "原版真实程序集由 DecompilerServer 的 vanilla 上下文读取，MVID=61e4173561894da49d210260257b5097；没有凭记忆断言控制流，没有游戏内复现、视觉验收或长期性能量测。本轮代码审查未重新构建程序集。",
+      "广泛观察不等于无条件改写原版：原版武器/能力攻击需要驱动 BDP 隐身破除；原版敌人倒地死亡需要驱动 BDP 攻击者会话收口；被 BDP 投射物打中的原版角色需要执行相应穿盾/来源/命中色效果。把这些目标本身限定为 BDP 会破坏业务。",
+      "没有发现必须无条件改变所有非 BDP 对象原版玩法的 Core 补丁。多数真正返回值/流程改写都已按 CompTriggerBody、BDP 战斗体相位、BdpProjectile 或显式上下文限定。疑似问题集中于作用域身份与临时状态生命期，而非原版目标方法过于通用。",
+      "实际调用链：61e4173561894da49d210260257b5097:0600551C:M（Verse.GenExplosion.DoExplosion）→06003732:M（Verse.Explosion.StartExplosion：准备格子并同步 Notify_Explosion）→稍后06003733:M（Verse.Explosion.Tick：AffectCell）→06000ED1:M（Verse.DamageWorker.ExplosionDamageThing）→0600399D:M（Verse.Thing.TakeDamage）→DamageWorker.Apply/伤口创建/同步状态通知。范围上下文需要在后续逐目标边界恢复。",
+      "实际攻击链：61e4173561894da49d210260257b5097:0600580E:M（Verse.Verb.TryCastNextBurstShot）成功时 burstShotsLeft--，失败时 burstShotsLeft=0；61e4173561894da49d210260257b5097:06013C2F:M（RimWorld.Verb_MeleeAttack.TryCastShot）提前失败仅未生成/全身忙碌，后续 false 为 miss/dodge。两种观察的成功判据不能混用。",
+      "命中色共享材质风险已追正式调用者并降级：06002730:M（Verse.PawnRenderer.RenderPawnAt）在 useCached 时调用0600273B:M（OverrideMaterialIfNeeded，传 PawnRenderFlags.None）；06002735:M（ParallelGetPreRenderResults）在06002738:M（PawnNeedsHediffMaterial）为 true 时禁止 useCached，而后者对心理隐身者返回 true。所以原版正式时序不会走 OverrideMaterialIfNeeded 的隐身材质分支，不能声称已证实原版隐身串色。",
+      "材质相关真实方法：0600273B:M（PawnRenderer.OverrideMaterialIfNeeded）隐身时返回06002777:M（Verse.InvisibilityMatPool.GetInvisibleMat：缓存创建后不再次设置颜色），否则060026F7:M（Verse.DamageFlasher.GetDamagedMat）→060026FA:M（Verse.DamagedMatPool.GetDamageFlashMat：每次主动重新计算颜色）。补丁直接写返回材质仍有第三方改变绘制路径时的共享缓存风险；本报告不将其列为已证实原版问题。0600273A:M（PawnRenderer.GetDrawParms）原版 tint 包含隐身 alpha，BDP 参数补丁保留该 alpha。",
+      "两个日志 Transpiler 全局替换构造点，但工厂明确保持非 BDP 原条目类型/参数；构造点恰好一个的检查属于其他转译补丁兼容边界。本轮没有加载额外第三方补丁链，因此无法声称全模组组合兼容。",
+      "全量生命周期事件目前按 Find.Maps 中所有已生成 Pawn 查询触发体，事件瞬间扫描而非逐刻常驻扫描；只对当前会话同一目标的 BDP 自动远程宿主生效。跨地图扫描可能可优化，但无已证实非 BDP 行为改写，未作为必须修项。"
+    ],
+    "movement-shield": [
+      "范围：FloatingFlight、LightSoul、Shield 共 19 个带 HarmonyPatch 的源码文件、28 个实际补丁类（含嵌套类），覆盖 30 个不同目标方法；外围未带 HarmonyPatch 的静态帮助类不计补丁。",
+      "本分区只审查并写报告，无业务改动、构建、日志或提交。",
+      "ContentBootstrap.cs 第 96 行以 niwt.bdp.content 执行本程序集 PatchAll。所有入口和主要辅助门槛已读，不只凭 if/注释分类。",
+      "广泛观察不等于广泛改写：地图屋顶缓存依赖环境变化，需要任何建/拆屋顶事件；维护目标严格是 BDP 两个 PathGridDef，没有必要以当前地图是否存在浮空人物作为唯一准入。",
+      "原版后台 PathFinderMapData.ParameterizeGridJob 的默认直接代价取 normalCost/fenceBlockedCost；本分区只在 BDP 自有 customizer 请求上替换 pathGridDirect，其余原版字段保留。",
+      "真实原版程序集 MVID=61e4173561894da49d210260257b5097，已由 DecompilerServer vanilla 上下文确认以下方法：Pathing..ctor :06006331:M；Pathing.Get :06006336:M；Pathing.RecalculatePerceivedPathCostAt :0600633B:M；PathGrid..ctor :0600631D:M；PathGrid.RecalculatePerceivedPathCostAt(IntVec3,ref bool) :06006324:M；PathGrid.NotifyCellDirtied :06006326:M；RoofGrid.SetRoof :0600225C:M；Pawn_PathFollower.PawnCanOccupy :0600636D:M；StartPath :06006365:M；TryEnterNextPathCell :0600637A:M；JobDriver_Wait.CheckForAutoAttack :06005E41:M；CompShield.PostPreApplyDamage :06010A63:M；PathFinderMapData.ParameterizeGridJob :06002623:M；PathFinder.CreateRequest :060025E0:M / :060025E1:M。",
+      "原版证据：Pathing 构造遍历全部 PathGridDef 并为每图创建各上下文，Get 仅字典取值。RoofGrid.SetRoof 改屋顶并通知 RoofChanged，不直接重算路径网格；PathGrid 构造不订阅屋顶事件。BDP 两个自定义网格类也无该订阅，故屋顶补丁承担必要缓存维护。",
+      "缓存副作用：PathGrid.NotifyCellDirtied 调 map.reachability.ClearCache 与 regionDirtyer.Notify_WalkabilityChanged。屋顶补丁即使只改 BDP 网格，也不是零额外成本；不应表述为对原版完全无执行影响。",
+      "原版证据：PawnCanOccupy 先 WalkableBy，再检查关闭门是否可开；BDP 露天 Prefix 全短路这两项是飞行越障必要语义。TryEnter 原法没有 BDP 账本准入，自有 Prefix 必须自己把准入放在创建记录之前。",
+      "原版证据：CheckForAutoAttack 先用 pawn.meleeVerbs.TryMeleeAttack 处理近敌，再尝试远程。光魂 Postfix 和朝向函数要求 !FullBodyBusy，当前代码可确认合法近战不被警戒朝向抢占。",
+      "原版证据：CompShield.PostPreApplyDamage 中远程/爆炸吸收条件是 !dinfo.Def.ignoreShields && (isRanged || isExplosive)，而 BDP CanAbsorb 缺少 ignoreShields。",
+      "MS04 已提醒主代理让投射物分区复核并合并，不应重复当成两个已复现故障。",
+      "原版公开 RoofChanged 事件可作为减法接入候选，Notify_RoofChanged :06001EF0:M 已确认事件同步 Invoke(cell)。屋顶缓存维护是必要业务，Harmony 全局 Postfix 本身并非不可替代。"
+    ],
+    "content-other": [
+      "覆盖 Source/BDP.Content 除 FloatingFlight、LightSoul、Shield 外全部 Harmony 声明：19 个补丁文件、23 个补丁类、24 个目标方法声明。半成品类的两个目标当前因注册遗漏未启用。",
+      "只审查，没有修改功能代码、配置、日志或提交。",
+      "所有 BDP 证据使用当前工作区源文件；原版疑问使用 DecompilerServer vanilla 上下文真实 Assembly-CSharp.dll，MVID 61e4173561894da49d210260257b5097；Harmony 扫描疑问使用当前依赖 0Harmony.dll，MVID e53399289d9b419d83f9f5b02c5cf609。",
+      "皇家遗传原版方法父母各一处 biostatArc<=0 候选筛选已确认；芯片半成品原版最近查找和 FinishUftJob 都有 Creator==pawn 检查已确认；原版 Notify_PawnSpawned 的倒地掉装分支与 MakeDowned 的 DropAndForbidEverything 也已确认。",
+      "战斗体保护准入的关键是 Active/Collapsing 阶段和当前触发体，不把所有人可能都装有中性 CompCombatBodyHost 当作保护资格。",
+      "黑触发器形成允许符合路线的普通玩家殖民者成为 BDP 物品来源；因此死亡和危机观察不能仅限定于预持 BDP 装备的人物。形成事件、概率抽取和按钮均有候选及业务条件。",
+      "对第三方模组的实际冲突未作游戏内混装复现；明确区分代码确定的行为与条件性兼容影响。"
+    ],
+    "compatibility-development": [
+      "兼容层没有 HarmonyPatch 属性类，而是发现 NIT 后手动安装10个核心目标＋最多6个可选提示目标。",
+      "已读取当前安装 NiceInventoryTab.dll 的 DrawWeaponInfo、DrawBars、MeleeDPSForItem 和 InfoWidget.SetItem；MVID 85c51fc850434c49a030969a930db740。绘制分类当前只查询本实例 Item.def，统计当前原生也从 InfoWidget.CurrentItem 取物品，因此不能仅凭桥接器使用线程上下文或 CurrentItem 判为影响所有物品。",
+      "NIT 的绘制上下文采用单个线程局部字段，未来若其它模组新增重入或查询不同物品定义的路径，需要复核；当前真实方法中未确认该情形。",
+      "开发层只在启动时开发者模式开启才安装补丁；审查包含已声明但当前条件下可能未安装的补丁，不等于附着到正在运行游戏进程的实时列表。"
+    ],
+    "xml": [
+      "正式 XML 共 2 个文件、4 个操作；测试工程夹具未进入发布加载目录。",
+      "皇家首发必须覆盖玩家所选叙事者才能完成当前业务目的，但原版/第三方叙事者新增 BDP 事件也是实际修改。若未来要求可选择关闭首发，应以独立业务配置解决，不应假称已有仅 BDP 叙事者门槛。",
+      "Development（开发内容）的 3 个 XML 操作仅针对 BDP，但当前不受开发者模式开关限制；此点不属于侵扰原版，只是开发内容加载边界。"
+    ],
+    "startup-injections": [
+      "本清单是7处启动期运行时Def定义写入，不属于Harmony方法补丁，不应与Harmony类/目标数量相加。",
+      "6个组件注入器：5种人物组件（Core的Trion、战斗体；Content的检测状态、紧急脱离缓存、战斗体日志），1种伤口提示组件。另有1处BDP芯片配方材料定义重建。",
+      "人物组件定义覆盖不是仅BDP人物：所有Humanlike原版和第三方种族均覆盖，包括敌人、商队、囚犯、奴隶以及未来才可能获得BDP资格的角色。日志注入按已有宿主覆盖，还允许作者显式接入的其他Pawn。",
+      "这种覆盖是当前原版ThingComp宿主方案的明确设计：Def属于种族共享，启动时不能按未来每个Pawn的基因、装备或玩家身份筛选。真正玩法条件放在组件的业务消费处；不是无条件赋予战斗体或护盾效果。",
+      "不能把宿主称为完全无动作的休眠：CompTrion会为普通类人生成永久先天潜质/释放力，生成器消费原版Rand随机值，保存自有字段并进入Tick；CompCombatBodyHost存在无资格早退之前的服务初始化和每刻资源规则核对。确认的是自有状态/常驻开销，未做性能量化，不能据此宣称游戏卡顿。",
+      "三个Content业务状态组件不改原版人物已有状态；检测记录与缓存使用自有存档字段，战斗体日志只在正式阶段事件时写原版日志。",
+      "伤口提示组件虽然注入所有原版及第三方Injury/MissingPart定义，但自身只提供CompTipStringExtra，没有自定义伤害、治疗或Tick逻辑；非BDP正数流失返回null。",
+      "检索已覆盖Core/Content的启动引导器、所有StaticConstructorOnStartup类及全局Def集合修改语句，除本清单外未发现其他启动期共享ThingDef/HediffDef/RecipeDef写入。ChipManufacturingDefValidator和BlackTriggerFormationDefValidator只检查/记录错误或本模块无效定义集合，不修改被检Def；资源/界面/事件注册只改BDP自有注册表，不计为Def修改。",
+      "XML补丁由主代理另行审查，不属于本清单。",
+      "未发现本范围确定的原版行为改写遗漏；保留广泛宿主开销作为明确说明，不把未经实测的性能担忧伪装为功能错误。"
+    ]
+  },
+  "coverage": {
+    "sourceFileCount": 78,
+    "auditRows": 119,
+    "sourceClassRows": 103,
+    "manualTargetRows": 16,
+    "filesMissingFromReport": [],
+    "metadataPatchTypes": 101,
+    "metadataNotCovered": [],
+    "sourceRowsUnavailableInMetadata": [
+      "Patch_PathFinderMapData_ParameterizeGridJob_FloatingFlight",
+      "Patch_PathFinder_MakeDestination_FloatingFlight"
+    ],
+    "sourceClassMarkerMissing": [
+      "BDP.Content.Assembly.ChipManufacturing.Patches.Patch_WorkGiver_DoBill_ChipUnfinishedThing"
+    ],
+    "metadataErrors": [
+      {
+        "assembly": "BDP.Content",
+        "unloadedTypes": 2,
+        "messages": [
+          "接口中的非抽象、非 .cctor 方法。"
+        ]
+      },
+      {
+        "type": "BDP.Content.FloatingFlight.Patches.Patch_PathFinderMapData_ParameterizeGridJob_FloatingFlight",
+        "error": "接口中的非抽象、非 .cctor 方法。"
+      },
+      {
+        "type": "BDP.Content.FloatingFlight.Patches.Patch_PathFinder_MakeDestination_FloatingFlight",
+        "error": "接口中的非抽象、非 .cctor 方法。"
+      }
+    ],
+    "coveredDeclarationFiles": 78,
+    "helperImplementationFiles": [
+      "Source/BDP.Compatibility/NiceInventoryTab/NiceInventoryTabRuntime.cs"
+    ],
+    "findingCountBeforeDeduplication": 15,
+    "duplicateFindingMapping": {
+      "MS04": "CORE-002"
+    },
+    "distinctFindings": 14,
+    "uniquePrimaryImplementationFiles": 78,
+    "moduleRows": {
+      "Core": 42,
+      "Content": 51,
+      "Development": 10,
+      "CompatibilityManualTargets": 16
+    },
+    "xmlOperations": 4,
+    "startupDefinitionChanges": 7,
+    "baselineCommit": "79326c6b",
+    "productionFilesModified": false
+  }
+}

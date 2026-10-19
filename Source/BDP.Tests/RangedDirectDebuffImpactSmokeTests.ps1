@@ -5,7 +5,7 @@ $impactPath = Join-Path $PSScriptRoot '..\BDP\Core\Projectiles\RangedFlightProto
 $projectile = Get-Content -LiteralPath $projectilePath -Raw -Encoding UTF8
 $impact = Get-Content -LiteralPath $impactPath -Raw -Encoding UTF8
 
-if ($projectile -notmatch 'ExecuteDirectExtraEffects') {
+if ($projectile -notmatch 'ExecuteDirectAttackTargetEvent') {
     throw '直接命中路径没有调用独立额外效果执行器。'
 }
 

@@ -23,13 +23,14 @@ $muzzleMethod = [regex]::Match(
 Assert-True (-not [string]::IsNullOrWhiteSpace($muzzleMethod)) `
     '必须保留单一的枪口锚点解析成员。'
 Assert-True (
-    ($muzzleMethod -match 'TransformGraphicLocalOffset\(localOffset, calculation\)') -and
+    ($muzzleMethod -match 'TransformGraphicLocalOffset\(\s*localOffset,\s*calculation,\s*graphic,\s*drawScale\s*\)') -and
     ($muzzleMethod -notmatch 'Quaternion\.AngleAxis\(request\.PoseSample\.AimAngle') -and
     ($muzzleMethod -notmatch 'IsAimMirrored\(request\.PoseSample\.AimAngle\)')
 ) '枪口锚点必须复用最终贴图角度与网格镜像变换，不得继续走独立瞄准角公式。'
 
 Assert-True (
-    ($muzzleConfigText -match '最终贴图姿态') -and
+    ($muzzleConfigText -match '贴图画布比例') -and
+    ($muzzleConfigText -match '贴图尺寸、缩放') -and
     ($muzzleConfigText -notmatch '枪口偏移始终按 aimAngle') -and
     ($poseConfigText -notmatch '该角度只影响贴图旋转，不参与枪口偏移旋转')
 ) '枪口和装饰角的作者注释必须反映贴图、握持点与枪口共用最终姿态。'

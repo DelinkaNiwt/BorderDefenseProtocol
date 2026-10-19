@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 一波门的保存及更新宿主；画面由地图部件绘制，不占格、不受伤、不提供玩家建筑交互。 -->
+  <ThingDef>
+    <defName>BDP_GateArrivalController</defName>
+    <label>BDP_GateArrivalController.label</label>
+    <thingClass>BDP.Content.Factions.GateArrival.Thing_GateArrival</thingClass>
+    <category>Ethereal</category>
+    <tickerType>Normal</tickerType>
+    <drawerType>None</drawerType>
+    <useHitPoints>false</useHitPoints>
+    <selectable>false</selectable>
+    <saveCompressible>false</saveCompressible>
+  </ThingDef>
+  <!-- 每扇门独立持有人物；原版 Pawn.PositionHeld 通过它解析门位箭头。 -->
+  <ThingDef>
+    <defName>BDP_GateArrivalPawnHolder</defName>
+    <label>BDP_GateArrivalPawnHolder.label</label>
+    <thingClass>BDP.Content.Factions.GateArrival.Thing_GateArrivalPawnHolder</thingClass>
+    <category>Ethereal</category>
+    <tickerType>Never</tickerType>
+    <drawerType>None</drawerType>
+    <useHitPoints>false</useHitPoints>
+    <selectable>false</selectable>
+    <saveCompressible>false</saveCompressible>
+  </ThingDef>
+</Defs>

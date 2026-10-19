@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <!-- Development 专用总览文案；正式玩家文案由主语言包统一提供。 -->
+  <BDP_BlackTrigger_Dev_CatalogTitle>BDP：黑触发器系统总览</BDP_BlackTrigger_Dev_CatalogTitle>
+  <BDP_BlackTrigger_Dev_Refresh>刷新扫描</BDP_BlackTrigger_Dev_Refresh>
+  <BDP_BlackTrigger_Dev_TabDefinition>定义</BDP_BlackTrigger_Dev_TabDefinition>
+  <BDP_BlackTrigger_Dev_TabCurrentEvent>当前事件</BDP_BlackTrigger_Dev_TabCurrentEvent>
+  <BDP_BlackTrigger_Dev_TabWorldState>世界状态</BDP_BlackTrigger_Dev_TabWorldState>
+</LanguageData>

@@ -22,6 +22,8 @@ namespace BDP.Core.Trigger
             Func<TriggerSide, List<TriggerSlotState>> getRawSlots,
             Func<TriggerSide, SwitchContext> getSwitchContext,
             Action<TriggerSide, SwitchContext> setSwitchContext,
+            Func<TriggerSlotState, SwitchContext> getSlotSwitchContext,
+            Action<TriggerSlotState, SwitchContext> setSlotSwitchContext,
             Action<TriggerSlotState> deactivateBoundSlotImmediate,
             Func<TriggerSide, TriggerDisableReason> resolveExternalDisableReason,
             Action<TriggerSide, int, Thing, TriggerDisableReason> notifySlotDisableStateChanged,
@@ -55,9 +57,9 @@ namespace BDP.Core.Trigger
                 ? resolveExternalDisableReason(TriggerSide.Special)
                 : TriggerDisableReason.None;
 
-            ApplySideDisableState(getRawSlots, getSwitchContext, setSwitchContext, deactivateBoundSlotImmediate, notifySlotDisableStateChanged, TriggerSide.Main, mainReason != TriggerDisableReason.None, mainReason);
-            ApplySideDisableState(getRawSlots, getSwitchContext, setSwitchContext, deactivateBoundSlotImmediate, notifySlotDisableStateChanged, TriggerSide.Sub, subReason != TriggerDisableReason.None, subReason);
-            ApplySideDisableState(getRawSlots, getSwitchContext, setSwitchContext, deactivateBoundSlotImmediate, notifySlotDisableStateChanged, TriggerSide.Special, specialReason != TriggerDisableReason.None, specialReason);
+            ApplySideDisableState(getRawSlots, getSwitchContext, setSwitchContext, getSlotSwitchContext, setSlotSwitchContext, deactivateBoundSlotImmediate, notifySlotDisableStateChanged, TriggerSide.Main, mainReason != TriggerDisableReason.None, mainReason);
+            ApplySideDisableState(getRawSlots, getSwitchContext, setSwitchContext, getSlotSwitchContext, setSlotSwitchContext, deactivateBoundSlotImmediate, notifySlotDisableStateChanged, TriggerSide.Sub, subReason != TriggerDisableReason.None, subReason);
+            ApplySideDisableState(getRawSlots, getSwitchContext, setSwitchContext, getSlotSwitchContext, setSlotSwitchContext, deactivateBoundSlotImmediate, notifySlotDisableStateChanged, TriggerSide.Special, specialReason != TriggerDisableReason.None, specialReason);
         }
 
         /// <summary>
@@ -77,6 +79,8 @@ namespace BDP.Core.Trigger
             Func<TriggerSide, List<TriggerSlotState>> getRawSlots,
             Func<TriggerSide, SwitchContext> getSwitchContext,
             Action<TriggerSide, SwitchContext> setSwitchContext,
+            Func<TriggerSlotState, SwitchContext> getSlotSwitchContext,
+            Action<TriggerSlotState, SwitchContext> setSlotSwitchContext,
             Action<TriggerSlotState> deactivateBoundSlotImmediate,
             Action<TriggerSide, int, Thing, TriggerDisableReason> notifySlotDisableStateChanged,
             TriggerSide side,
@@ -105,6 +109,13 @@ namespace BDP.Core.Trigger
                 }
 
                 Thing chip = slot.LoadedChip;
+                if (shouldDisable
+                    && getSlotSwitchContext != null
+                    && getSlotSwitchContext(slot) != null)
+                {
+                    setSlotSwitchContext?.Invoke(slot, null);
+                }
+
                 if (shouldDisable && slot.IsActive)
                 {
                     deactivateBoundSlotImmediate(slot);

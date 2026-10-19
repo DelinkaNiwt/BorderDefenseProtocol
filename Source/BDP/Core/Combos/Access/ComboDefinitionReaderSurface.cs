@@ -68,7 +68,7 @@ namespace BDP.Core.Combos
         }
 
         /// <summary>
-        /// 按两枚芯片 Thing 匹配第一份动作身份与成品准入都成立的组合技。
+        /// 按两枚芯片 Thing 匹配第一份动作身份、成品准入与运行时范围都成立的组合技。
         /// 动作身份只取制造来源首个预设 DefName，第一来源/第二来源分配允许正反向尝试。
         /// </summary>
         internal ComboDefinitionReadResult FindMatch(Thing firstSourceChip, Thing secondSourceChip)
@@ -83,6 +83,27 @@ namespace BDP.Core.Combos
             out string failureReason)
         {
             return comboRuntimeIndex.FindMatch(firstSourceChip, secondSourceChip, Read, out failureReason);
+        }
+
+        /// <summary>按两枚芯片及其当前形态/姿态匹配组合技，并返回集中诊断失败摘要。</summary>
+        internal ComboDefinitionReadResult FindMatch(
+            Thing firstSourceChip,
+            Thing secondSourceChip,
+            string firstModeKey,
+            string firstStanceKey,
+            string secondModeKey,
+            string secondStanceKey,
+            out string failureReason)
+        {
+            return comboRuntimeIndex.FindMatch(
+                firstSourceChip,
+                secondSourceChip,
+                firstModeKey,
+                firstStanceKey,
+                secondModeKey,
+                secondStanceKey,
+                Read,
+                out failureReason);
         }
 
         /// <summary>

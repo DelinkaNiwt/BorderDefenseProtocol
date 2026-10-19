@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <!-- 开发者测试触发体的定义回退文案。 -->
+  <BDP_TriggerBody_DeveloperWeapon.label>开发者武器</BDP_TriggerBody_DeveloperWeapon.label>
+  <BDP_TriggerBody_DeveloperWeapon.description>开发者测试用预装触发体，固定装载精确部位移除芯片。</BDP_TriggerBody_DeveloperWeapon.description>
+</LanguageData>

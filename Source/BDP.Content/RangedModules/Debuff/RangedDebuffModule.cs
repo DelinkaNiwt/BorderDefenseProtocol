@@ -5,7 +5,6 @@ using BDP.Core.AttackExecution.RangedProtocol.ProjectileInit;
 using BDP.Core.Projectiles.Interaction;
 using BDP.Core.Projectiles.RangedFlightProtocol.Impact;
 using BDP.Core.Projectiles.RangedFlightProtocol.Model;
-using UnityEngine;
 using Verse;
 
 namespace BDP.Content.RangedModules.Debuff
@@ -32,6 +31,8 @@ namespace BDP.Content.RangedModules.Debuff
             config = context != null && context.Config is RangedDebuffConfig typedConfig
                 ? typedConfig.CloneTyped()
                 : new RangedDebuffConfig();
+            if (config.EffectDef == null)
+                Log.Error("BDP_RangedEffect_Missing".Translate(context?.ResultId ?? "RangedDebuffModule"));
         }
 
         /// <summary>
@@ -43,6 +44,14 @@ namespace BDP.Content.RangedModules.Debuff
         {
             if (contribution == null || config == null)
             {
+                return;
+            }
+
+            if (config.EffectDef != null && config.EffectDef.RequiresHitPart
+                && (config.TargetScope != ExtraEffectTargetScope.DirectHitThing
+                    || IsAreaProjectile(context.ProjectileDef)))
+            {
+                // 部位作用域在投射物初始化阶段也不改变范围投射物的护盾或拦截语义。
                 return;
             }
 
@@ -80,12 +89,24 @@ namespace BDP.Content.RangedModules.Debuff
                 return;
             }
 
+            if (config.EffectDef == null || (config.EffectDef.RequiresHitPart
+                && (!context.IsValidHit || !(context.HitThing is Pawn)
+                    || config.TargetScope != ExtraEffectTargetScope.DirectHitThing
+                    || IsAreaProjectile(context.Projectile)))) return;
+
+            // 宿主只声明效果包和部位需求，不解释包的业务、不选择身体部位。
             ExtraEffectPlan effectPlan = new ExtraEffectPlan
             {
-                EffectKind = string.IsNullOrWhiteSpace(config.EffectKind) ? "hediff" : config.EffectKind,
+                EffectKind = "rangedDebuff",
                 TargetScope = config.TargetScope,
+                PartTargetMode = config.EffectDef.RequiresHitPart
+                    ? ExtraEffectPartTargetMode.ImpactPart : ExtraEffectPartTargetMode.None,
                 TargetCell = context.HitCell,
-                Parameters = BuildParameters()
+                Parameters = new Dictionary<string, string>
+                {
+                    { "effectDef", config.EffectDef.defName },
+                    { "targetFilter", config.TargetFilter.ToString() }
+                }
             };
             contribution.ExtraEffectsToAppend.Add(effectPlan);
             contribution.DamageDisposition = config.DamageSuppression;
@@ -117,18 +138,21 @@ namespace BDP.Content.RangedModules.Debuff
         }
 
         /// <summary>
-        /// 构造传给 Core 执行器的中性参数。
+        /// 判断当前投射物是否会进入范围爆炸链。
         /// </summary>
-        private Dictionary<string, string> BuildParameters()
+        private static bool IsAreaProjectile(Projectile projectile)
         {
-            return new Dictionary<string, string>
-            {
-                { "hediffDef", config.HediffDef != null ? config.HediffDef.defName : null },
-                { "targetFilter", config.TargetFilter.ToString() },
-                { "severity", config.Severity.ToString(System.Globalization.CultureInfo.InvariantCulture) },
-                { "durationTicks", config.DurationTicks.ToString(System.Globalization.CultureInfo.InvariantCulture) },
-                { "stackMode", config.StackMode.ToString() }
-            };
+            return IsAreaProjectile(projectile != null ? projectile.def : null);
+        }
+
+        /// <summary>
+        /// 判断投射物 Def 是否声明了范围爆炸。
+        /// </summary>
+        private static bool IsAreaProjectile(ThingDef projectileDef)
+        {
+            return projectileDef != null
+                && projectileDef.projectile != null
+                && projectileDef.projectile.explosionRadius > 0f;
         }
 
     }

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    常驻型自动能量护盾 Hediff。
+    特殊槽专用，不参与 Severity 聚合，激活即存在、关闭即移除。
+    状态生命周期由 BDP 表达宿主同步链管理，护盾判定由 Content 的 HediffComp 承担。
+  -->
+  <HediffDef>
+    <!-- Hediff Def 唯一名称。 -->
+    <defName>BDP_Hediff_EnergyShield_Auto</defName>
+    <!-- 使用新 BDP 正式表达宿主，保证激活、聚合和移除服从主模组现有机制。 -->
+    <hediffClass>BDP.Core.Expressions.BdpExpressionHostHediff</hediffClass>
+    <!-- 常驻护盾的默认显示名称。 -->
+    <label>常驻型自动能量盾</label>
+    <!-- 健康面板说明。 -->
+    <description>常驻型自动能量护盾，激活期间提供全方位防护，不随激活数量升级。成功抵挡消耗能量和耐久；破盾后暂时停止防护，恢复满耐久后继续展开。</description>
+    <!-- 健康面板标签颜色。 -->
+    <defaultLabelColor>(0.6, 0.8, 1.0)</defaultLabelColor>
+    <!-- 护盾属于正向状态。 -->
+    <isBad>false</isBad>
+    <!-- 激活即固定 Severity 1，不聚合。 -->
+    <initialSeverity>1</initialSeverity>
+    <!-- 最高只到 1，不随数量升级。 -->
+    <maxSeverity>1</maxSeverity>
+    <!-- 固定单阶段。 -->
+    <stages>
+      <li>
+        <!-- 常驻阶段。 -->
+        <minSeverity>1</minSeverity>
+        <!-- 常驻护盾标签。 -->
+        <label>常驻型自动能量护盾</label>
+      </li>
+    </stages>
+    <!-- 护盾业务组件列表。 -->
+    <comps>
+      <li Class="BDP.Content.Shield.HediffCompProperties_EnergyShield">
+        <!-- 同人物同组共享耐久，关闭和姿态切换不刷新。 -->
+        <durabilityGroupKey>energy_shield_auto</durabilityGroupKey>
+        <!-- 自动护盾状态卡标题由语言包提供。 -->
+        <statusCardLabelKey>BDP_Shield_Status_AutoTitle</statusCardLabelKey>
+        <!-- 每个有效来源贡献的最大耐久。 -->
+        <maximumDurability>240</maximumDurability>
+        <!-- 仅普通盾按来源数量相加耐久上限。 -->
+        <aggregateDurability>false</aggregateDurability>
+        <!-- 成功吸收每点伤害扣一点耐久。 -->
+        <durabilityLossMultiplier>1</durabilityLossMultiplier>
+        <!-- 600 游戏刻为 10 秒，关闭后计时继续。 -->
+        <recoveryTicks>600</recoveryTicks>
+        <!-- 不设自然恢复等待，关闭芯片后继续恢复。 -->
+        <naturalRecoveryDelayTicks>0</naturalRecoveryDelayTicks>
+        <!-- 使用每秒固定点数恢复；改为 true 时，恢复量按上限比例解释。 -->
+        <naturalRecoveryUsePercentage>false</naturalRecoveryUsePercentage>
+        <!-- 每游戏秒恢复 24 点，同组多来源不叠加恢复速度。 -->
+        <naturalRecoveryPerSecond>24</naturalRecoveryPerSecond>
+        <!-- 常驻护盾关闭角度检查，形成全方位防护。 -->
+        <enableAngleCheck>false</enableAngleCheck>
+        <!-- 全方位定义角度 360 度。 -->
+        <blockAngleRange>360</blockAngleRange>
+        <!-- 常驻护盾抵挡率为 70%。 -->
+        <blockChance>0.7</blockChance>
+        <!-- 成功抵挡消耗伤害值 75% 的 Trion。 -->
+        <trionCostMultiplier>0.75</trionCostMultiplier>
+        <!-- 沿用现有护盾命中特效缩放。 -->
+        <effectScale>0.25</effectScale>
+        <!-- 沿用现有护盾半径。 -->
+        <shieldRadius>0.8</shieldRadius>
+        <!-- 激活期间不显示常驻护盾气泡；成功抵挡时的命中特效不受影响。 -->
+        <showShieldBubble>false</showShieldBubble>
+      </li>
+    </comps>
+  </HediffDef>
+
+</Defs>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 近界宙域专用黑洞门抵达方式；两种模式由 BDP 的派系限定抽选入口按抵达权重选择。 -->
+  <PawnsArrivalModeDef>
+    <!-- 旧黑洞门抵达方式标识；沿用边缘落点。 -->
+    <defName>BDP_NearRealmGate</defName>
+    <!-- 使用黑洞门抵达工作类。 -->
+    <workerClass>BDP.Content.Factions.GateArrival.PawnsArrivalModeWorker_Gate</workerClass>
+    <!-- 敌方黑洞门抵达说明来自简体中文语言包。 -->
+    <textEnemy>BDP_NearRealmGate.textEnemy</textEnemy>
+    <!-- 友方黑洞门抵达说明来自简体中文语言包。 -->
+    <textFriendly>BDP_NearRealmGate.textFriendly</textFriendly>
+    <!-- 延迟抵达预告来自简体中文语言包。 -->
+    <textWillArrive>BDP_NearRealmGate.textWillArrive</textWillArrive>
+    <!-- 不作为备用抵达方式。 -->
+    <canBeBackup>false</canBeBackup>
+    <!-- 标记该抵达方式为步行式袭击。 -->
+    <walkIn>true</walkIn>
+    <!-- 使用原版抵达方式权重曲线参与 BDP 专用抽选。 -->
+    <selectionWeightCurve>
+      <points>
+        <!-- 基础抽选权重为 1，与空间突袭抵达方式相同。 -->
+        <li>(0, 1)</li>
+      </points>
+    </selectionWeightCurve>
+    <modExtensions>
+      <!-- 开门和出兵分别配置；60刻为标准速度下的一秒。每波保存参数副本。 -->
+      <li Class="BDP.Content.Factions.GateArrival.GateArrivalModeExtension">
+        <!-- 原有普通进攻保留边缘落点。 -->
+        <landingPattern>Edge</landingPattern>
+        <settings>
+          <!-- 按实际袭击人数分门：每门目标 4 人，避免小队生成过多门。 -->
+          <pawnsPerGate>4</pawnsPerGate>
+          <!-- 大规模袭击最多同时生成 6 扇门；实际数量还受合法落点限制。 -->
+          <maxGateCount>6</maxGateCount>
+          <!-- 门点附近允许放置人物的半径。 -->
+          <placementRadius>8</placementRadius>
+          <!-- 袭击抵达后到首扇门开始展开前等待 60 刻（约 1 秒）。 -->
+          <openDelayTicks>60</openDelayTicks>
+          <!-- 连续开门时，相邻门的开启间隔；0 表示同时开启。 -->
+          <gateOpenIntervalTicks>0</gateOpenIntervalTicks>
+          <!-- 首门之后各门独立偏移0～90刻，总随机窗口最多1.5秒，不逐门累加。 -->
+          <gateOpenRandomOffsetTicks>0~90</gateOpenRandomOffsetTicks>
+          <!-- 后续门有40%概率与首门同时开启；首门自身始终为零延迟。 -->
+          <gateOpenZeroProbability>0.4</gateOpenZeroProbability>
+          <!-- 正延迟权重按当前窗口归一化，修改最大延迟时无需改曲线横轴。 -->
+          <gateOpenDelayWeightCurve>
+            <points>
+              <!-- 正延迟起端权重最高。 --><li>(0, 1)</li>
+              <!-- 末端只保留少量概率。 --><li>(1, 0.05)</li>
+            </points>
+          </gateOpenDelayWeightCurve>
+          <!-- 黑洞门从出现到完全展开的时长。 -->
+          <openingTicks>12</openingTicks>
+          <!-- 为 true 时，等所有门展开后才开始出兵。 -->
+          <waitForAllGates>false</waitForAllGates>
+          <!-- 为 true 时，每扇门一次放出全部分配人员。 -->
+          <releaseAllAtOnce>false</releaseAllAtOnce>
+          <!-- 分批出兵时每批放出的人数。 -->
+          <batchSize>1</batchSize>
+          <!-- 门开始显现后等待 300 刻（约 5 秒）再放出首批人员；展开动画更长时会等动画结束。 -->
+          <releaseDelayTicks>300</releaseDelayTicks>
+          <!-- 全波最后一人落地后再保持 60 刻（约 1 秒）才开始关门。 -->
+          <closeDelayTicks>60</closeDelayTicks>
+          <!-- 两批出兵之间的间隔；地图放置受阻时也按此间隔重试。 -->
+          <releaseIntervalTicks>60</releaseIntervalTicks>
+          <!-- 为 true 时等全波人员全部落地后再统一关门。 -->
+          <closeTogether>true</closeTogether>
+          <!-- 开门后至少保持的时长；即使没有待出场人员也生效。 -->
+          <minimumOpenTicks>0</minimumOpenTicks>
+          <!-- 黑洞门从开始关闭到完全收起的时长。 -->
+          <closingTicks>12</closingTicks>
+          <!-- 相对原版折跃门特效的缩放。 -->
+          <size>1</size>
+          <!-- 维持阶段随机生成少量原版电火花；移除此引用可停用。 -->
+          <maintainEffecter>BDP_GateMaintainedElectricity</maintainEffecter>
+        </settings>
+      </li>
+    </modExtensions>
+  </PawnsArrivalModeDef>
+
+  <!-- 越过防线的黑洞门抵达方式；与旧边缘门同属抵达方式，不改变原版袭击策略。 -->
+  <PawnsArrivalModeDef>
+    <!-- 空间突袭抵达方式标识。 -->
+    <defName>BDP_SpaceRaid</defName>
+    <!-- 复用同一黑洞门生成和出兵流程。 -->
+    <workerClass>BDP.Content.Factions.GateArrival.PawnsArrivalModeWorker_Gate</workerClass>
+    <!-- 敌方空间突袭说明来自简体中文语言包。 -->
+    <textEnemy>BDP_SpaceRaid.textEnemy</textEnemy>
+    <!-- 友方抵达说明来自简体中文语言包。 -->
+    <textFriendly>BDP_SpaceRaid.textFriendly</textFriendly>
+    <!-- 空间突袭预告来自简体中文语言包。 -->
+    <textWillArrive>BDP_SpaceRaid.textWillArrive</textWillArrive>
+    <!-- 不作为备用抵达方式。 -->
+    <canBeBackup>false</canBeBackup>
+    <!-- 标记该抵达方式为步行式袭击。 -->
+    <walkIn>true</walkIn>
+    <!-- 使用原版抵达方式权重曲线参与 BDP 专用抽选。 -->
+    <selectionWeightCurve>
+      <points>
+        <!-- 基础抽选权重为 1，与旧边缘门抵达方式相同。 -->
+        <li>(0, 1)</li>
+      </points>
+    </selectionWeightCurve>
+    <modExtensions>
+      <!-- 空间突袭独立配置落点样式和门时序。 -->
+      <li Class="BDP.Content.Factions.GateArrival.GateArrivalModeExtension">
+        <!-- 依原版避险网格，从防卫火力线内侧寻找候选门点。 -->
+        <landingPattern>BreachLine</landingPattern>
+        <settings>
+          <!-- 固定间隔保持0；各门在首门后最多1.5秒内随机开启。 -->
+          <gateOpenRandomOffsetTicks>0~90</gateOpenRandomOffsetTicks>
+          <!-- 后续门有40%概率同时开启。 -->
+          <gateOpenZeroProbability>0.4</gateOpenZeroProbability>
+          <!-- 曲线横轴为窗口中的相对位置，正延迟越长概率越低。 -->
+          <gateOpenDelayWeightCurve>
+            <points>
+              <!-- 正延迟起端权重。 --><li>(0, 1)</li>
+              <!-- 正延迟末端权重。 --><li>(1, 0.05)</li>
+            </points>
+          </gateOpenDelayWeightCurve>
+          <!-- 门开始显现后等待 300 刻（约 5 秒）再放出首批人员；展开动画更长时会等动画结束。 -->
+          <releaseDelayTicks>300</releaseDelayTicks>
+          <!-- 全波最后一人落地后再保持 60 刻（约 1 秒）才开始关门。 -->
+          <closeDelayTicks>60</closeDelayTicks>
+          <!-- 展开后持续至开始关门，频率/尺寸/环形范围由独立效果定义配置。 -->
+          <maintainEffecter>BDP_GateMaintainedElectricity</maintainEffecter>
+        </settings>
+      </li>
+    </modExtensions>
+  </PawnsArrivalModeDef>
+</Defs>

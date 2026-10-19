@@ -14,6 +14,10 @@ $singleBase = $visualXml.SelectSingleNode(
     "/Defs/BDP.Core.Expressions.ExpressionVisualPresetDef[@Name='BDP_VisualBase_RangedMedium']")
 $dualBase = $visualXml.SelectSingleNode(
     "/Defs/BDP.Core.Expressions.ExpressionVisualPresetDef[@Name='BDP_VisualBase_RangedMedium_Dual']")
+$smallBase = $visualXml.SelectSingleNode(
+    "/Defs/BDP.Core.Expressions.ExpressionVisualPresetDef[@Name='BDP_VisualBase_RangedSmall']")
+$smallDualBase = $visualXml.SelectSingleNode(
+    "/Defs/BDP.Core.Expressions.ExpressionVisualPresetDef[@Name='BDP_VisualBase_RangedSmall_Dual']")
 
 Assert-True (
     ($null -ne $singleBase) -and
@@ -52,9 +56,44 @@ Assert-True (
     ($null -eq $dualBase.Muzzle)
 ) '双武器基准必须只增加保留原版南北高度差的双持姿态、静默镜像与握持定位，不复制中型枪械锚点。'
 
+Assert-True (
+    ($null -ne $smallBase) -and
+    ($smallBase.Abstract -eq 'True') -and
+    ($null -eq $smallBase.ParentName) -and
+    ($smallBase.GetAttribute('Name') -eq 'BDP_VisualBase_RangedSmall')
+) '小型枪械单武器基准必须作为中型枪械基准的同级抽象预设。'
+Assert-True (
+    ($smallBase.DrawScale -eq '1') -and
+    ($smallBase.Grip.GripOffset -eq '(0, 0, -0.1953125)') -and
+    ($smallBase.Muzzle.IsRangedWeapon -eq 'true') -and
+    ($smallBase.Muzzle.MuzzleOffset -eq '(0, 0, 0.3203125)') -and
+    ($null -eq $smallBase.SouthNorthPose) -and
+    ($null -eq $smallBase.EastWestPose)
+) '小型枪械单武器基准必须提供小型枪口、握持点和原版姿态边界。'
+Assert-True (
+    ($null -ne $smallDualBase) -and
+    ($smallDualBase.Abstract -eq 'True') -and
+    ($smallDualBase.ParentName -eq 'BDP_VisualBase_RangedSmall') -and
+    ($smallDualBase.GetAttribute('Name') -eq 'BDP_VisualBase_RangedSmall_Dual')
+) '小型枪械双武器基准必须继承小型枪械单武器基准。'
+Assert-True (
+    ($smallDualBase.SouthNorthPose.DefaultOffset -eq '(0.24, 0, 0.13)') -and
+    ($smallDualBase.SouthNorthPose.NorthZAdjust -eq '0.26') -and
+    ($smallDualBase.SouthNorthPose.HandMirrorOnlyWhenIdle -eq 'true') -and
+    ($smallDualBase.EastWestPose.SideBaseX -eq '0.04') -and
+    ($smallDualBase.EastWestPose.SideBaseZ -eq '0.03') -and
+    ($smallDualBase.EastWestPose.SideDeltaX -eq '0.03') -and
+    ($smallDualBase.EastWestPose.SideDeltaZ -eq '0.10') -and
+    ($smallDualBase.EastWestPose.FrontAltitudeOffset -eq '0.05') -and
+    ($smallDualBase.EastWestPose.BackAltitudeOffset -eq '-0.05') -and
+    ($smallDualBase.Grip.UseAsPoseOrigin -eq 'true') -and
+    ($null -eq $smallDualBase.Grip.GripOffset) -and
+    ($null -eq $smallDualBase.Muzzle)
+) '小型枪械双武器基准必须只改变南北握持目标，并沿用中型东西透视规则。'
+
 $expectations = @(
-    @{ DefName = 'BDP_Visual_RangedWeaponReference'; Parent = 'BDP_VisualBase_RangedMedium'; Texture = 'Things/Trigger/Visual/RangedWeaponReference'; AllowsStage = $false },
-    @{ DefName = 'BDP_Visual_RangedWeaponReference_Dual'; Parent = 'BDP_VisualBase_RangedMedium_Dual'; Texture = 'Things/Trigger/Visual/RangedWeaponReference'; AllowsStage = $false },
+    @{ DefName = 'BDP_Visual_AssaultRifle'; Parent = 'BDP_VisualBase_RangedMedium'; Texture = 'Things/Trigger/Visual/RangedWeaponReference'; AllowsStage = $false },
+    @{ DefName = 'BDP_Visual_AssaultRifle_Dual'; Parent = 'BDP_VisualBase_RangedMedium_Dual'; Texture = 'Things/Trigger/Visual/RangedWeaponReference'; AllowsStage = $false },
     @{ DefName = 'BDP_Visual_Shotgun'; Parent = 'BDP_VisualBase_RangedMedium'; Texture = 'Things/Trigger/Visual/ShotgunReferenceLan'; AllowsStage = $false },
     @{ DefName = 'BDP_Visual_Shotgun_Dual'; Parent = 'BDP_VisualBase_RangedMedium_Dual'; Texture = 'Things/Trigger/Visual/ShotgunReferenceLan'; AllowsStage = $false }
 )

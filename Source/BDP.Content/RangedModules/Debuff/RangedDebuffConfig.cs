@@ -1,6 +1,7 @@
 using BDP.Core.Projectiles.RangedFlightProtocol.Impact;
 using BDP.Core.Projectiles.RangedFlightProtocol.Model;
 using BDP.Core.AttackExecution;
+using BDP.Content.RangedModules.Debuff.Effects;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -12,15 +13,8 @@ namespace BDP.Content.RangedModules.Debuff
     /// </summary>
     public sealed class RangedDebuffConfig : RangedModuleConfigNode, IRangedModuleWeaponVisualOverride
     {
-        /// <summary>
-        /// 额外效果执行器键。
-        /// </summary>
-        public string EffectKind = "hediff";
-
-        /// <summary>
-        /// 命中后要施加的 Hediff Def。
-        /// </summary>
-        public HediffDef HediffDef;
+        /// <summary>由本宿主承载的独立效果包，定义自身不存人物运行状态。</summary>
+        public RangedDebuffEffectDef EffectDef;
 
         /// <summary>
         /// 额外效果使用的中性目标事件来源。
@@ -102,21 +96,6 @@ namespace BDP.Content.RangedModules.Debuff
         public float ProjectileSpeedMultiplier = 1f;
 
         /// <summary>
-        /// 每次有效命中的初始严重度或叠加量。
-        /// </summary>
-        public float Severity = 0.1f;
-
-        /// <summary>
-        /// 模块声明的 Hediff 持续时间，交给具体 Hediff 方案消费。
-        /// </summary>
-        public int DurationTicks = 300;
-
-        /// <summary>
-        /// 叠加策略键。
-        /// </summary>
-        public RangedDebuffStackMode StackMode = RangedDebuffStackMode.Add;
-
-        /// <summary>
         /// 是否在投射物阶段绕过原版投射物拦截器。
         /// </summary>
         public bool BypassProjectileInterceptors = true;
@@ -148,8 +127,7 @@ namespace BDP.Content.RangedModules.Debuff
         {
             return new RangedDebuffConfig
             {
-                EffectKind = EffectKind,
-                HediffDef = HediffDef,
+                EffectDef = EffectDef,
                 TargetScope = TargetScope,
                 TargetFilter = TargetFilter,
                 DamageSuppression = DamageSuppression,
@@ -165,9 +143,6 @@ namespace BDP.Content.RangedModules.Debuff
                 ProjectileTrailCoreOpacity = ProjectileTrailCoreOpacity,
                 WeaponVisualPresetDefName = WeaponVisualPresetDefName,
                 ProjectileSpeedMultiplier = ProjectileSpeedMultiplier,
-                Severity = Severity,
-                DurationTicks = DurationTicks,
-                StackMode = StackMode,
                 BypassProjectileInterceptors = BypassProjectileInterceptors,
                 BypassRegisteredDamageShields = BypassRegisteredDamageShields,
                 SuppressVanillaExplosionVisualEffects = SuppressVanillaExplosionVisualEffects,
@@ -209,29 +184,4 @@ namespace BDP.Content.RangedModules.Debuff
         AnyThing
     }
 
-    /// <summary>
-    /// 远程减益叠加策略。
-    /// </summary>
-    public enum RangedDebuffStackMode
-    {
-        /// <summary>
-        /// 每次有效命中增加严重度。
-        /// </summary>
-        Add,
-
-        /// <summary>
-        /// 每次有效命中替换严重度。
-        /// </summary>
-        Replace,
-
-        /// <summary>
-        /// 保留较高严重度。
-        /// </summary>
-        Max,
-
-        /// <summary>
-        /// 刷新为至少当前严重度。
-        /// </summary>
-        Refresh
-    }
 }

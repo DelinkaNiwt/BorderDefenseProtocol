@@ -35,8 +35,8 @@ Assert-True (
 ) 'ExecuteExit() must ignore nested exit requests and reset the guard in finally.'
 
 Assert-True (
-    $triggerBodyText -match 'public override void Notify_Unequipped\(Pawn pawn\)[\s\S]*CombatBodySurfaceAccess\.ResolveCommands\(pawn\)\?\.RequestRelease\(\);'
-) 'Trigger detach should keep requesting release through the formal command surface; the session guard owns reentry suppression.'
+    $triggerBodyText -match 'public override void Notify_Unequipped\(Pawn pawn\)[\s\S]*CombatBodySurfaceAccess\.ResolveCommands\(pawn\)\?\.ReleaseForEquipmentDetach\(\);'
+) '触发体卸下须通过系统退出命令完成清理，由会话保护阻止重入。'
 
 Assert-True (
     $stateText -match 'throw new InvalidOperationException\("Only Active or Collapsing combat body can enter Cooldown\."\);'

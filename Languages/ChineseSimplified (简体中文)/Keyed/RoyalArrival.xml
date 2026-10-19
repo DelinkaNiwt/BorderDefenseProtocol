@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 不补未确定的剧情背景，只说明本轮任务目标。 -->
+  <BDP_RoyalArrivalName>皇室求援</BDP_RoyalArrivalName>
+  <!-- 提供实际配置中的人数和间隔，不另写死平衡数值。 -->
+  <BDP_RoyalArrivalDescription>{0}请求加入你的殖民地，并携带一颗Trion驱动核心。接受任务后，{0}将加入殖民地，你可以安排其工作与战斗。
+
+追兵共{1}人，预计在接受任务后{2}天抵达。他们直接装备近界原型触发体，并以战斗体状态进攻；战斗体崩解后，原身仍会继续作战。
+
+接受任务后，皇室人物正式加入殖民地。皇室人物死亡或被敌人带走会导致任务失败，受伤或倒地不会。</BDP_RoyalArrivalDescription>
+  <!-- 说明接受任务时加入，追兵仍会按任务安排抵达。 -->
+  <BDP_RoyalArrivalArrivedLabel>皇室人物抵达</BDP_RoyalArrivalArrivedLabel>
+  <!-- 不增加操作教学或契约强制施放。 -->
+  <BDP_RoyalArrivalArrivedText>{0}已加入殖民地。</BDP_RoyalArrivalArrivedText>
+  <!-- 明确这一波袭击属于当前任务。 -->
+  <BDP_RoyalArrivalRaidLabel>皇室任务追兵抵达</BDP_RoyalArrivalRaidLabel>
+  <!-- 只提示玩家当前面对的特殊战斗阶段。 -->
+  <BDP_RoyalArrivalRaidText>追兵已抵达殖民地，并立即以战斗体进攻。战斗体崩解后，他们的原身仍会继续作战。</BDP_RoyalArrivalRaidText>
+  <!-- 异常必须可搜索，不能默默派出未激活的追兵。 -->
+  <BDP_RoyalArrivalPursuerInitializationFailed>[BDP 皇室任务] 追兵{0}未能在抵达前完成战斗体激活，任务已结束。</BDP_RoyalArrivalPursuerInitializationFailed>
+</LanguageData>

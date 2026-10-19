@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using BDP.Core.AttackExecution;
 using BDP.Core.Chips;
 using BDP.Core.Combos;
+using BDP.Core.Verbs;
 using RimWorld;
 using Verse;
 
@@ -13,6 +14,26 @@ namespace BDP.Core.Expressions
     /// </summary>
     internal static class ResolvedVerbSpecFactory
     {
+        /// <summary>
+        /// 创建没有显式 Verb 或 Maneuver 时使用的最小原版近战表面。
+        /// 这些值对应 Verse.VerbProperties 的原版默认近战初始化值；详情界面只消费该表面，不自行补值。
+        /// </summary>
+        internal static VerbProperties CreateMeleeFallbackVerbProps(DamageDef damageDef)
+        {
+            return new VerbProperties
+            {
+                verbClass = typeof(BdpVerb_FormalHostMelee),
+                hasStandardCommand = false,
+                range = 1.42f,
+                minRange = 0f,
+                warmupTime = 0f,
+                burstShotCount = 1,
+                ticksBetweenBurstShots = 15,
+                meleeDamageDef = damageDef,
+                defaultCooldownTime = 0f
+            };
+        }
+
         /// <summary>
         /// 从一份已声明的 VerbProps 构建正式规格。
         /// </summary>
@@ -58,6 +79,36 @@ namespace BDP.Core.Expressions
                 DeclaredMeleeToolSurfaces = declaredMeleeToolSurfaces,
                 Maneuver = maneuver
             };
+        }
+
+        /// <summary>
+        /// 从正式 AbilityDef（能力定义）的 verbProperties 构建远程规格。
+        /// Ability 结果没有普通 Verb 来源时，仍必须拥有完整的远程协议输入。
+        /// </summary>
+        internal static ResolvedVerbSpec FromAbilityDef(
+            string abilityDefName,
+            ProjectileOverrides projectileOverrides = null)
+        {
+            if (string.IsNullOrWhiteSpace(abilityDefName))
+            {
+                return null;
+            }
+
+            AbilityDef abilityDef = DefDatabase<AbilityDef>.GetNamedSilentFail(abilityDefName);
+            if (abilityDef?.verbProperties == null)
+            {
+                return null;
+            }
+
+            ResolvedVerbSpec spec = FromDeclared(
+                abilityDef.verbProperties,
+                null,
+                new List<Tool>(),
+                new List<MeleeToolSurface>(),
+                null,
+                DirectTargetLineOfSightRequirementConfig.FromVerb,
+                projectileOverrides);
+            return spec;
         }
 
         /// <summary>

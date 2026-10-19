@@ -13,9 +13,9 @@
   <BDP_Status_EmergencyEscape_Ready>紧急脱离：已就绪</BDP_Status_EmergencyEscape_Ready>
 
   <!-- Trion 状态条。 -->
-  <BDP_Trion_Status_Title>Trion储量</BDP_Trion_Status_Title>
+  <BDP_Trion_Status_Title>Trion储量（{0}）</BDP_Trion_Status_Title>
   <BDP_Trion_Status_Available>可用：{0} / {1}</BDP_Trion_Status_Available>
-  <BDP_Trion_Status_Drain>持续消耗 {0}/秒</BDP_Trion_Status_Drain>
+  <BDP_Trion_Status_Drain>消耗 {0}/秒</BDP_Trion_Status_Drain>
   <BDP_Trion_Status_Recovery>恢复 {0}/天</BDP_Trion_Status_Recovery>
   <BDP_Trion_Status_FrozenOn>Trion恢复冻结：开启</BDP_Trion_Status_FrozenOn>
   <BDP_Trion_Status_FrozenOff>Trion恢复冻结：关闭</BDP_Trion_Status_FrozenOff>
@@ -24,7 +24,7 @@
   <BDP_Trion_Status_DrainDetailHeader>Trion持续消耗详情
 来源列表：</BDP_Trion_Status_DrainDetailHeader>
   <BDP_Trion_Status_DrainLine>- {0}：{1}/秒</BDP_Trion_Status_DrainLine>
-  <BDP_Trion_DrainSource_CombatBodyWound>战斗体伤口泄露（调试ID：{0}）</BDP_Trion_DrainSource_CombatBodyWound>
+  <BDP_Trion_DrainSource_CombatBodyWound>战斗体受伤部位：{0}</BDP_Trion_DrainSource_CombatBodyWound>
   <BDP_Trion_DrainSource_CombatBodyMaintenance>战斗体维持消耗</BDP_Trion_DrainSource_CombatBodyMaintenance>
   <BDP_Trion_DrainSource_Expression>表达效果持续消耗（调试ID：{0}）</BDP_Trion_DrainSource_Expression>
   <BDP_Trion_DrainSource_Hediff>状态表达持续消耗（调试ID：{0}）</BDP_Trion_DrainSource_Hediff>
@@ -41,6 +41,8 @@
   <BDP_Stat_TrionIntensityDescription>该角色当前能够发挥的 Trion 释放力。</BDP_Stat_TrionIntensityDescription>
   <BDP_Stat_TriggerCategoryLabel>触发器类别</BDP_Stat_TriggerCategoryLabel>
   <BDP_Stat_TriggerCategoryDescription>该触发体所属的正式触发器类别。</BDP_Stat_TriggerCategoryDescription>
+  <!-- 临时原版统计表面只供原版 Worker 读取，不作为正式物品展示。 -->
+  <BDP_VanillaWeaponStatSurfaceLabel>BDP 原版武器统计表面</BDP_VanillaWeaponStatSurfaceLabel>
   <BDP_Requirement_UnknownValue>未知</BDP_Requirement_UnknownValue>
   <BDP_Requirement_SkillLevelLabel>技能等级</BDP_Requirement_SkillLevelLabel>
   <BDP_Requirement_SkillLevelMinimum>至少{0}级</BDP_Requirement_SkillLevelMinimum>

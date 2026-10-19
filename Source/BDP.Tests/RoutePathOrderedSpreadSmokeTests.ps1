@@ -25,20 +25,22 @@ $configPath = Join-Path $routeRoot 'RoutePathConfig.cs'
 $statePath = Join-Path $routeRoot 'RoutePathState.cs'
 $resolverPath = Join-Path $routeRoot 'RouteSegmentResolver.cs'
 $modulePath = Join-Path $routeRoot 'RoutePathModule.cs'
-$xmlPath = Join-Path $repoRoot '1.6\Content\Defs\RangedModuleDef\RoutePath.xml'
+$xmlPath = Join-Path $repoRoot 'Common\Content\Defs\RangedModuleDef\RoutePath.xml'
+$spreadPath = Join-Path $repoRoot 'Source\BDP.Content\RangedModules\OrderedSpread\OrderedSpreadSampler.cs'
 
 $configText = Read-Source $configPath
 $stateText = Read-Source $statePath
 $resolverText = Read-Source $resolverPath
 $moduleText = Read-Source $modulePath
 $xmlText = Read-Source $xmlPath
-$contentText = $configText + $stateText + $resolverText + $moduleText
+$spreadText = Read-Source $spreadPath
+$contentText = $configText + $stateText + $resolverText + $moduleText + $spreadText
 
 Assert-True (
     ($configText -match 'public\s+float\s+IntermediateSpreadRadius\s*=\s*0\.625f') -and
     ($configText -match 'public\s+float\s+FinalSpreadRadius\s*=\s*0\.30f') -and
     ($configText -match 'public\s+float\s+HighAccuracySpreadScale\s*=\s*0\.25f') -and
-    ($configText -match 'public\s+int\s+SpreadSafetyShrinkSteps\s*=\s*4')
+    ($configText -notmatch 'SpreadSafetyShrinkSteps|ArrivalTolerance')
 ) 'RoutePathConfig must expose ordered-spread parameters.'
 
 Assert-True (
@@ -50,46 +52,43 @@ Assert-True (
     ($stateText -match 'public\s+float\s+IntermediateSpreadRadius') -and
     ($stateText -match 'public\s+float\s+FinalSpreadRadius') -and
     ($stateText -match 'public\s+float\s+HighAccuracySpreadScale') -and
-    ($stateText -match 'public\s+int\s+SpreadSafetyShrinkSteps') -and
+    ($stateText -notmatch 'SpreadSafetyShrinkSteps|ArrivalTolerance') -and
     ($stateText -notmatch 'AnchorSpreadRadius')
 ) 'RoutePathContext must persist the ordered-spread snapshot without legacy aliases.'
 
 Assert-True (
     ($resolverText -match 'float\s+intermediateSpreadRadius') -and
     ($resolverText -match 'float\s+finalSpreadRadius') -and
-    ($resolverText -match 'float\s+highAccuracySpreadScale') -and
-    ($resolverText -match 'int\s+spreadSafetyShrinkSteps')
+    ($resolverText -match 'float\s+highAccuracySpreadScale')
 ) 'RouteSegmentResolver must freeze every ordered-spread parameter.'
 
 Assert-True (
-    ($resolverText -match 'ProjectileAccuracySnapshot') -and
-    ($resolverText -match 'ResolveAccuracyQuality') -and
+    ($spreadText -match 'ProjectileAccuracySnapshot') -and
+    ($spreadText -match 'StandardAimChance') -and
     ($resolverText -match 'IntermediateSpreadRadius') -and
     ($resolverText -match 'FinalSpreadRadius') -and
     ($resolverText -match 'HighAccuracySpreadScale') -and
-    ($resolverText -match 'SpreadSafetyShrinkSteps') -and
-    ($resolverText -match 'GenSight\.LineOfSight') -and
-    ($resolverText -match 'CanBeSeenOverFast') -and
-    ($resolverText -match 'offset\s*\*=\s*0\.5f')
-) 'Route resolver must build stable accuracy-driven safe spread.'
+    ($resolverText -notmatch 'GenSight|CanBeSeenOverFast|Map\s+map|TryResolveSafeSpreadDestination|IsExactSegmentClear')
+) '路线偏移只消费精度与稳定种子，不能感知墙体回收散布。'
 
 Assert-True (
-    ($resolverText -match 'SampleKind') -and
-    ($resolverText -match 'Gen\.HashCombineInt') -and
-    ($resolverText -match 'Rand\.PushState') -and
-    ($resolverText -match 'Rand\.PopState')
-) 'Intermediate and final samples must use distinct stable seeds.'
+    ($spreadText -match 'ResolveScaledRadius') -and
+    ($spreadText -match 'SampleOffset') -and
+    ($spreadText -match 'Gen\.HashCombineInt') -and
+    ($spreadText -match 'Rand\.PushState') -and
+    ($spreadText -match 'Rand\.PopState') -and
+    ($resolverText -match 'OrderedSpreadSampler\.ResolveScaledRadius') -and
+    ($resolverText -match 'OrderedSpreadSampler\.SampleOffset')
+) 'Intermediate and final samples must use one shared stable-seed utility.'
 
 Assert-True (
     ($resolverText -match 'TryResolveContinuation') -and
-    ($resolverText -match 'out\s+bool\s+advanceLeg') -and
-    ($resolverText -match 'ArrivalTolerance') -and
+    ($resolverText -notmatch 'out\s+bool\s+advanceLeg|IsWithinArrivalTolerance') -and
     ($resolverText -match 'CurrentLegIndex')
-) 'Route resolver must distinguish normal advancement from recovery continuation.'
+) '续段应正常推进，不再保留为避墙而回接名义点的分支。'
 
 Assert-True (
     ($moduleText -match 'context\.AccuracySnapshot') -and
-    ($moduleText -match 'if\s*\(advanceLeg\)') -and
     ($moduleText -match 'TryAdvanceLeg')
 ) 'Arrival must consume accuracy facts and advance only for a normal next leg.'
 
@@ -104,13 +103,14 @@ Assert-True (
     ($xmlText -match '<IntermediateSpreadRadius>0\.625</IntermediateSpreadRadius>') -and
     ($xmlText -match '<FinalSpreadRadius>0\.30</FinalSpreadRadius>') -and
     ($xmlText -match '<HighAccuracySpreadScale>0\.25</HighAccuracySpreadScale>') -and
-    ($xmlText -match '<SpreadSafetyShrinkSteps>4</SpreadSafetyShrinkSteps>')
+    ($xmlText -notmatch 'SpreadSafetyShrinkSteps|ArrivalTolerance')
 ) 'RoutePath Def must declare ordered-spread defaults.'
 
 Assert-True (
     ($contentText -notmatch 'ShotReport\.HitReportFor') -and
     ($moduleText -notmatch 'SkillDefOf\.Shooting') -and
-    ($moduleText -notmatch 'ProjectileHitFlags')
+    ($moduleText -notmatch 'ProjectileHitFlags') -and
+    ($moduleText -match 'LaunchResolution')
 ) 'Content route business must consume frozen facts without rerunning or rewriting original hit logic.'
 
 Write-Output 'RoutePathOrderedSpreadSmokeTests PASS'

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 首版献祭参数；科技断档与市值档内差异独立，所有数值可重新平衡。 -->
+  <BDP.Content.Trion.Facility.Sacrifice.TrionFacilitySacrificeSettingsDef>
+    <defName>BDP_TrionFacilitySacrificeSettings</defName>
+    <!-- 原生科技在新石器至超凡范围即准入，不再限制类别或材质；未标档位不猜测。 -->
+    <!-- 原版组件没有标注科技档位，明确指定；不从原料或配方猜测。 -->
+    <techLevelOverrides>
+      <li><thing>ComponentIndustrial</thing><techLevel>Industrial</techLevel></li>
+      <li><thing>ComponentSpacer</thing><techLevel>Spacer</techLevel></li>
+    </techLevelOverrides>
+    <!-- 参考固有市值，对应本档收益中点；不用商人的买卖报价。 -->
+    <referenceMarketValue>100</referenceMarketValue>
+    <yieldTiers>
+      <!-- 新石器档试用区间。 -->
+      <li><techLevel>Neolithic</techLevel><minYield>1</minYield><maxYield>2</maxYield></li>
+      <!-- 中世纪档试用区间。 -->
+      <li><techLevel>Medieval</techLevel><minYield>3</minYield><maxYield>6</maxYield></li>
+      <!-- 工业档试用区间。 -->
+      <li><techLevel>Industrial</techLevel><minYield>10</minYield><maxYield>20</maxYield></li>
+      <!-- 太空档试用区间。 -->
+      <li><techLevel>Spacer</techLevel><minYield>100</minYield><maxYield>200</maxYield></li>
+      <!-- 极致时代档试用区间。 -->
+      <li><techLevel>Ultra</techLevel><minYield>1000</minYield><maxYield>2000</maxYield></li>
+      <!-- 超凡档试用区间。 -->
+      <li><techLevel>Archotech</techLevel><minYield>10000</minYield><maxYield>20000</maxYield></li>
+    </yieldTiers>
+  </BDP.Content.Trion.Facility.Sacrifice.TrionFacilitySacrificeSettingsDef>
+</Defs>

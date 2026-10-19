@@ -4,6 +4,7 @@ using BDP.Core.AttackExecution;
 using BDP.Core.Expressions;
 using BDP.Core.Trigger;
 using BDP.Core.VerbHosting;
+using HarmonyLib;
 using Verse;
 
 namespace BDP.Core.Verbs
@@ -14,6 +15,20 @@ namespace BDP.Core.Verbs
     /// </summary>
     public sealed class BdpVerb_FormalHostMelee : BdpVerb_MeleeAttackDamage
     {
+        /// <summary>
+        /// 原版 Verb 对 ticksBetweenBurstShots（连击间隔）的私有缓存访问器。
+        /// formal host 复用同一个 Verb 实例，切换 verbProps 后必须让原版重新解析。
+        /// </summary>
+        private static readonly AccessTools.FieldRef<Verb, int?> CachedTicksBetweenBurstShotsAccessor =
+            AccessTools.FieldRefAccess<Verb, int?>("cachedTicksBetweenBurstShots");
+
+        /// <summary>
+        /// 原版 Verb 对 burstShotCount（连续攻击次数）的私有缓存访问器。
+        /// 它与连击间隔缓存依赖同一份 verbProps，必须一起失效。
+        /// </summary>
+        private static readonly AccessTools.FieldRef<Verb, int?> CachedBurstShotCountAccessor =
+            AccessTools.FieldRefAccess<Verb, int?>("cachedBurstShotCount");
+
         /// <summary>
         /// 当前正式宿主壳所属的 Trigger owner。
         /// </summary>
@@ -84,7 +99,8 @@ namespace BDP.Core.Verbs
         /// <summary>
         /// 按当前 binding 同步正式宿主壳的最小运行时表面。
         /// </summary>
-        internal void SyncFormalBinding(BdpFormalVerbBindingState bindingState, VerbProperties fallbackVerbProps)
+        internal void SyncFormalBinding(BdpFormalVerbBindingState bindingState, VerbProperties fallbackVerbProps,
+            bool preserveCurrentSession = false)
         {
             string previousResultId = ResultId;
             AttackSessionToken previousToken = HostSessionToken != null ? HostSessionToken.Clone() : null;
@@ -97,7 +113,7 @@ namespace BDP.Core.Verbs
             Tool nextBindingTool = bindingState != null ? bindingState.Tool : null;
             ManeuverDef nextBindingManeuver = bindingState != null ? bindingState.Maneuver : null;
             string resetReason = DescribeBindingResetReason(bindingState, fallbackVerbProps);
-            bool resetApplied = ShouldResetForBindingChange(bindingState, fallbackVerbProps);
+            bool resetApplied = !preserveCurrentSession && ShouldResetForBindingChange(bindingState, fallbackVerbProps);
             if (resetApplied)
             {
                 AttackExecutionDiagnostics.LogFormalHostBindingReset(
@@ -125,6 +141,7 @@ namespace BDP.Core.Verbs
                     true,
                     "before_binding_reset");
                 Reset();
+                InvalidateVanillaVerbPropertyCaches();
             }
 
             if (previousResultId != nextResultId)
@@ -139,7 +156,14 @@ namespace BDP.Core.Verbs
             }
 
             ResultId = nextResultId;
-            if (resetApplied || HostSessionToken == null)
+            if (preserveCurrentSession)
+            {
+                // 连续段依赖计划令牌；与宿主一起迁移版本，不能重建上下文或回退动作游标。
+                HostSessionToken = HostSessionToken.WithProjectionVersion(nextSessionToken.ProjectionVersion);
+                if (PlanSessionToken != null)
+                    PlanSessionToken = PlanSessionToken.WithProjectionVersion(nextSessionToken.ProjectionVersion);
+            }
+            else if (resetApplied || HostSessionToken == null)
             {
                 HostSessionToken = nextSessionToken != null ? nextSessionToken.Clone() : null;
             }
@@ -163,6 +187,8 @@ namespace BDP.Core.Verbs
             bindingVerbProps = nextBindingVerbProps;
             bindingTool = nextBindingTool;
             bindingManeuver = nextBindingManeuver;
+            // 保留本刀已选中的工具表面；下一刀仍由既有工具序列推进。
+            if (preserveCurrentSession) return;
             verbProps = nextBindingVerbProps;
             tool = nextBindingTool;
             maneuver = nextBindingManeuver;
@@ -215,6 +241,17 @@ namespace BDP.Core.Verbs
             verbProps = surface.VerbProps ?? bindingVerbProps;
             tool = surface.Tool ?? bindingTool;
             maneuver = surface.Maneuver ?? bindingManeuver;
+            InvalidateVanillaVerbPropertyCaches();
+        }
+
+        /// <summary>
+        /// 清理原版 Verb 中依赖可变 verbProps 的私有惰性缓存。
+        /// formal host 切换芯片或当前 Tool 表面后，次数和间隔必须重新读取。
+        /// </summary>
+        private void InvalidateVanillaVerbPropertyCaches()
+        {
+            CachedTicksBetweenBurstShotsAccessor(this) = null;
+            CachedBurstShotCountAccessor(this) = null;
         }
 
         /// <summary>
@@ -441,6 +478,7 @@ namespace BDP.Core.Verbs
                 nonInterruptingSelfCast);
             if (started)
             {
+                NotifyAutomaticPlanStarted();
                 owner?.VerbHostManager?.NotifyFormalHostSessionStarted(slot);
             }
 

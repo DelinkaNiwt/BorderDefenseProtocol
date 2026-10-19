@@ -4,6 +4,7 @@ using BDP.Content.PathInput;
 using BDP.Core.AttackExecution;
 using BDP.Core.AttackExecution.RangedModules.Runtime;
 using BDP.Core.AttackExecution.RangedProtocol.Aim;
+using BDP.Core.AttackExecution.RangedProtocol.Model;
 using BDP.Core.AttackExecution.RangedProtocol.ProjectileInit;
 using BDP.Core.PathInput;
 using BDP.Core.Projectiles.RangedFlightProtocol.Arrival;
@@ -23,7 +24,7 @@ namespace BDP.Content.RangedModules.RoutePath
     /// 1. Targeting（目标选择） — 玩家 Shift+左键 追加锚点，左键确认最终目标，右键取消。
     /// 2. Preview（预览） — 绘制锚点折线与锚点计数提示。
     /// 3. Confirm（确认） — 冻结锚点链与最终目标，零手动锚点时尝试自动绕障。
-    /// 4. Aim（瞄准） — 当前不参与瞄准阶段的具体贡献。
+    /// 4. Aim（瞄准） — 准备阶段不预算精度，正式射击报告生成后按配置修正标准概率。
     /// 5. ProjectileInit（投射物初始化） — 按锚点链为每个 emit 设置首段目标与最终目标。
     /// 6. Arrival（到达段） — 逐段推进路径，到达一段末后切换到下一段。
     ///
@@ -36,6 +37,7 @@ namespace BDP.Content.RangedModules.RoutePath
         IPreviewStageModule,
         IConfirmStageModule,
         IAimStageModule,
+        IAimChanceModifier,
         IProjectileInitStageModule,
         IArrivalStageModule
     {
@@ -75,6 +77,7 @@ namespace BDP.Content.RangedModules.RoutePath
                 return;
             }
 
+            record.HasExplicitNavigation = HasManualAnchors(state);
             ApplyCurrentTargetLegality(record, state);
             if (record.InputFrame == null || record.InputFrame.PressedButton != TargetingInputButton.Left) return;
 
@@ -119,7 +122,7 @@ namespace BDP.Content.RangedModules.RoutePath
             {
                 pathSource = RoutePathSource.Manual;
             }
-            else
+            else if (!config.AllowUnroutedFinalTarget)
             {
                 RouteAutoResult autoRouteResult;
                 if (!TryResolveAutoRouteForFinalTarget(record.Pawn, null, state, state.InputState.FinalTarget, out autoRouteResult)
@@ -153,11 +156,26 @@ namespace BDP.Content.RangedModules.RoutePath
             record.Target = RouteSegmentResolver.TryResolveFirstLegTarget(state.ConfirmedSnapshot, out firstTarget)
                 ? firstTarget : state.ConfirmedSnapshot.FinalTarget;
             record.SemanticTarget = state.InputState.FinalTarget;
+            record.HasExplicitNavigation = frozenAnchors.Count > 0;
         }
 
         void IAimStageModule.Contribute(in AimStageContext context, AimContribution contribution)
         {
-            // 当前路线引导模块不参与瞄准阶段的贡献，保留接口以备后续扩展。
+            // 不在准备阶段预计算概率；正式发射时消费该发真实射击报告。
+        }
+
+        /// <summary>只修正本模块来源的该发概率，原版已统一计算特性、装备与身体能力。</summary>
+        float IAimChanceModifier.ModifyStandardAimChance(in AimChanceContext context)
+        {
+            if (config == null || config.AimReferenceErrorPower <= 1f
+                || (!string.IsNullOrWhiteSpace(sourceResultId)
+                    && !string.Equals(sourceResultId, context.ResultId, StringComparison.Ordinal))
+                || !(context.Caster is Pawn pawn))
+                return context.StandardAimChance;
+
+            return RouteAimAccuracyUtility.AdjustChance(
+                context.StandardAimChance, pawn.GetStatValue(StatDefOf.ShootingAccuracyPawn),
+                config.AimReferenceAccuracy, config.AimReferenceErrorPower, config.AimErrorGrowthExponent);
         }
 
         void IProjectileInitStageModule.Contribute(in ProjectileInitStageContext context, ProjectileInitContribution contribution)
@@ -168,11 +186,11 @@ namespace BDP.Content.RangedModules.RoutePath
             RouteConfirmedSnapshot confirmedSnapshot = state != null ? state.ConfirmedSnapshot : null;
             if (state == null || confirmedSnapshot == null || !confirmedSnapshot.HasFinalTarget) return;
 
+            if (config.AllowUnroutedFinalTarget && confirmedSnapshot.Anchors.Count == 0) return;
+
             RouteSegmentResolver.PopulatePathSnapshot(
                 state.PathSnapshot, confirmedSnapshot,
-                ResolveArrivalTolerance(), ResolveIntermediateSpreadRadius(),
-                ResolveFinalSpreadRadius(), ResolveHighAccuracySpreadScale(),
-                ResolveSpreadSafetyShrinkSteps());
+                ResolveIntermediateSpreadRadius(), ResolveFinalSpreadRadius(), ResolveHighAccuracySpreadScale());
             state.PathSnapshot.AssignedEmitIndex = -1;
 
             for (int emitIndex = 0; emitIndex < context.EmitCount; emitIndex++)
@@ -187,6 +205,9 @@ namespace BDP.Content.RangedModules.RoutePath
                 ProjectileInitPlanContribution planContribution = new ProjectileInitPlanContribution
                 {
                     EmitIndex = emitIndex,
+                    ExclusiveFlightControl = config.ReleaseControlAfterLastAnchor && emitSnapshot.Anchors.Count > 0,
+                    HasInitialSegmentTriggerRatio = config.ReleaseControlAfterLastAnchor && emitSnapshot.Anchors.Count > 0,
+                    InitialSegmentTriggerRatio = 1f,
                     HasOverrideLaunchTarget = firstTarget.IsValid,
                     OverrideLaunchTarget = firstTarget,
                     HasOverrideAimTarget = confirmedSnapshot.FinalTarget.IsValid,
@@ -194,6 +215,15 @@ namespace BDP.Content.RangedModules.RoutePath
                     HasOverrideCurrentTarget = confirmedSnapshot.FinalTarget.IsValid,
                     OverrideCurrentTarget = confirmedSnapshot.FinalTarget
                 };
+                if (emitSnapshot.Anchors != null && emitSnapshot.Anchors.Count > 0)
+                {
+                    PathAnchor finalApproachAnchor = emitSnapshot.Anchors[emitSnapshot.Anchors.Count - 1];
+                    if (finalApproachAnchor != null)
+                    {
+                        planContribution.HasFinalApproachStartCell = true;
+                        planContribution.FinalApproachStartCell = finalApproachAnchor.ToCell();
+                    }
+                }
                 contribution.PlanContributions.Add(planContribution);
             }
         }
@@ -201,6 +231,14 @@ namespace BDP.Content.RangedModules.RoutePath
         void IArrivalStageModule.Contribute(in ArrivalStageContext context, ArrivalContribution contribution)
         {
             if (contribution == null) return;
+
+            ProjectileLaunchResolution launchResolution = context.LaunchResolution;
+            if (launchResolution == null
+                || launchResolution.Disposition == ProjectileLaunchDisposition.Unknown
+                || launchResolution.ContinuationMode == ProjectileLaunchContinuationMode.None)
+            {
+                return;
+            }
 
             RoutePathState state = context.GetPrivateContext<RoutePathState>();
             EnsurePathSnapshotForEmit(state, context.EmitIndex);
@@ -212,29 +250,44 @@ namespace BDP.Content.RangedModules.RoutePath
                 return;
             }
 
+            RouteSegmentResolver.ApplyLaunchResolution(state.PathSnapshot, launchResolution);
+            if (launchResolution.TerminalTarget.IsValid)
+            {
+                // 冻结末端结果必须由路线收口，后序追踪不能越过锚点或在到达掩体后再回接原人物。
+                contribution.ExclusiveFlightControl = true;
+                contribution.HasOverrideContinueFlight = true;
+                contribution.OverrideContinueFlight = false;
+            }
+            if (config.ReleaseControlAfterLastAnchor && !launchResolution.TerminalTarget.IsValid)
+            {
+                if (state.PathSnapshot.ControlReleased || state.PathSnapshot.Anchors.Count == 0) return;
+                // 到达阶段只在实际段末执行；最后锚点释放后由后序模块建立自己的首段。
+                if (state.PathSnapshot.CurrentLegIndex >= state.PathSnapshot.Anchors.Count - 1)
+                {
+                    state.PathSnapshot.ControlReleased = true;
+                    return;
+                }
+                contribution.ExclusiveFlightControl = true;
+            }
+
             if (!RouteSegmentResolver.TryResolveCurrentLegTarget(state.PathSnapshot, out _)) return;
 
             if (!RouteSegmentResolver.TryResolveContinuation(
                     state.PathSnapshot,
-                    context.Map,
                     context.Projectile.ExactPosition,
                     context.AccuracySnapshot,
                     context.AttackInstanceId,
                     context.ResultId,
                     context.EmitIndex,
-                    out bool advanceLeg,
                     out LocalTargetInfo nextLegTarget,
                     out ProjectileFlightPathSnapshot nextSnapshot))
             {
                 return;
             }
 
-            if (advanceLeg)
+            if (!RouteSegmentResolver.TryAdvanceLeg(state.PathSnapshot))
             {
-                if (!RouteSegmentResolver.TryAdvanceLeg(state.PathSnapshot))
-                {
-                    return;
-                }
+                return;
             }
 
             contribution.HasOverrideContinueFlight = true;
@@ -245,6 +298,11 @@ namespace BDP.Content.RangedModules.RoutePath
             contribution.NextTarget = nextLegTarget;
             contribution.HasNextFlightPathSnapshot = true;
             contribution.NextFlightPathSnapshot = nextSnapshot;
+            if (launchResolution.ContinuationMode == ProjectileLaunchContinuationMode.WildMissOffsetRoute)
+            {
+                contribution.HasNextBindingTarget = true;
+                contribution.NextBindingTarget = new LocalTargetInfo(nextSnapshot.End.ToIntVec3());
+            }
         }
 
         private bool ShouldApplyToEmit(in ProjectileInitStageContext context, int emitIndex)
@@ -372,7 +430,7 @@ namespace BDP.Content.RangedModules.RoutePath
         {
             rejectReason = null;
             if (record == null || record.Pawn == null || !record.Target.IsValid) return false;
-            if (IsPreviewingAnchorCandidate(state) && !TryValidateAnchorCell(record.Pawn.Map, record.Target, out rejectReason)) return true;
+            if (IsPreviewingAnchorCandidate(record, state) && !TryValidateAnchorCell(record.Pawn.Map, record.Target, out rejectReason)) return true;
             return !TryValidatePreviewFinalRouteCandidate(record, state, record.Target, out rejectReason);
         }
 
@@ -382,6 +440,8 @@ namespace BDP.Content.RangedModules.RoutePath
             if (HasManualAnchors(state))
                 return TryValidatePreviewSegmentCandidate(record, state, target, out rejectReason);
 
+            if (config.AllowUnroutedFinalTarget) { rejectReason = null; return true; }
+
             RouteAutoResult autoRouteResult;
             if (TryResolveAutoRouteForFinalTarget(record != null ? record.Pawn : null, record != null ? record.Verb : null,
                     state, target, out autoRouteResult) && autoRouteResult.Succeeded)
@@ -390,10 +450,10 @@ namespace BDP.Content.RangedModules.RoutePath
             return false;
         }
 
-        private bool IsPreviewingAnchorCandidate(RoutePathState state)
+        /// <summary>路径预览读取宿主显式传入的修饰键，不读取全局事件或线程状态。</summary>
+        private bool IsPreviewingAnchorCandidate(PreviewRecord record, RoutePathState state)
         {
-            TargetingInputRuntimeFacts runtimeFacts = TargetingInputRuntimeScope.Current;
-            return runtimeFacts != null && HasShiftModifier(runtimeFacts.Modifiers)
+            return record?.InputFrame != null && HasShiftModifier(record.InputFrame.Modifiers)
                 && state != null && state.InputState != null
                 && state.InputState.Anchors.Count < ResolveMaxAnchors();
         }
@@ -469,6 +529,8 @@ namespace BDP.Content.RangedModules.RoutePath
             if (!TryValidateFinalTarget(record, state, target, out rejectReason)) return false;
             if (HasManualAnchors(state)) return TryValidateSegmentCandidate(record, state, target, out rejectReason);
 
+            if (config.AllowUnroutedFinalTarget) { rejectReason = null; return true; }
+
             RouteAutoResult autoRouteResult;
             if (TryResolveAutoRouteForFinalTarget(record != null ? record.Pawn : null, record != null ? record.Verb : null,
                     state, target, out autoRouteResult) && autoRouteResult.Succeeded)
@@ -503,7 +565,7 @@ namespace BDP.Content.RangedModules.RoutePath
             Pawn pawn, Verb verb, RoutePathState state, LocalTargetInfo target, out RouteAutoResult routeResult)
         {
             routeResult = null;
-            if (HasManualAnchors(state)) return false;
+            if (HasManualAnchors(state) || config.AllowUnroutedFinalTarget) return false;
             if (pawn == null || pawn.Map == null || !target.IsValid)
             { routeResult = RouteAutoResult.Failure("BDP_RoutePath_AutoRouteOriginTargetInvalid".Translate()); return true; }
 
@@ -571,22 +633,18 @@ namespace BDP.Content.RangedModules.RoutePath
             if (state.ConfirmedSnapshot.PathSource != RoutePathSource.Auto) return;
             if (state.PathSnapshot.AssignedEmitIndex == emitIndex) return;
 
-            float arrivalTolerance = state.PathSnapshot.ArrivalTolerance > 0f ? state.PathSnapshot.ArrivalTolerance : 0.35f;
             float intermediateSpreadRadius = state.PathSnapshot.IntermediateSpreadRadius;
             float finalSpreadRadius = state.PathSnapshot.FinalSpreadRadius;
             float highAccuracySpreadScale = state.PathSnapshot.HighAccuracySpreadScale;
-            int spreadSafetyShrinkSteps = state.PathSnapshot.SpreadSafetyShrinkSteps;
             bool hasFrozenFinalDestination = state.PathSnapshot.HasFrozenFinalDestination;
             Vector3 frozenFinalDestination = state.PathSnapshot.FrozenFinalDestination;
             RouteConfirmedSnapshot emitSnapshot = BuildConfirmedSnapshotForEmit(state.ConfirmedSnapshot, emitIndex);
             RouteSegmentResolver.PopulatePathSnapshot(
                 state.PathSnapshot,
                 emitSnapshot,
-                arrivalTolerance,
                 intermediateSpreadRadius,
                 finalSpreadRadius,
-                highAccuracySpreadScale,
-                spreadSafetyShrinkSteps);
+                highAccuracySpreadScale);
             // 自动路线这里只重选本发锚点，不得把发射时冻结的最终落点刷新为目标实时位置。
             state.PathSnapshot.HasFrozenFinalDestination = hasFrozenFinalDestination;
             state.PathSnapshot.FrozenFinalDestination = frozenFinalDestination;
@@ -661,8 +719,6 @@ namespace BDP.Content.RangedModules.RoutePath
 
         private int ResolveMaxAnchors() => config != null && config.MaxAnchors > 0 ? config.MaxAnchors : 8;
 
-        private float ResolveArrivalTolerance() => config != null && config.ArrivalTolerance > 0f ? config.ArrivalTolerance : 0.35f;
-
         /// <summary>读取中间续段最大散布半径。</summary>
         private float ResolveIntermediateSpreadRadius()
             => Mathf.Max(0f, config != null ? config.IntermediateSpreadRadius : 0.625f);
@@ -674,10 +730,6 @@ namespace BDP.Content.RangedModules.RoutePath
         /// <summary>读取高精度情况下仍保留的散布比例。</summary>
         private float ResolveHighAccuracySpreadScale()
             => Mathf.Clamp01(config != null ? config.HighAccuracySpreadScale : 0.25f);
-
-        /// <summary>读取候选散布不安全时的折半收缩次数。</summary>
-        private int ResolveSpreadSafetyShrinkSteps()
-            => Mathf.Clamp(config != null ? config.SpreadSafetyShrinkSteps : 4, 0, 8);
 
         private static RoutePathConfig ResolveConfigSnapshot(RangedAttackModuleRuntimeContext context)
         {

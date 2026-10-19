@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 普通标准触发体的制造账单名称。 -->
+  <BDP_Recipe_ProduceBorderStandardTriggerBody.label>制造边境标准触发体</BDP_Recipe_ProduceBorderStandardTriggerBody.label>
+  <!-- 原版制作任务的进度提示。 -->
+  <BDP_Recipe_ProduceBorderStandardTriggerBody.jobString>正在制造边境标准触发体。</BDP_Recipe_ProduceBorderStandardTriggerBody.jobString>
+  <!-- 两座工作台共用的近界原型制造账单名称。 -->
+  <BDP_Recipe_ProduceNeighborPrototypeTriggerBody.label>制造近界原型触发体</BDP_Recipe_ProduceNeighborPrototypeTriggerBody.label>
+  <!-- 原版制作任务的进度提示。 -->
+  <BDP_Recipe_ProduceNeighborPrototypeTriggerBody.jobString>正在制造近界原型触发体。</BDP_Recipe_ProduceNeighborPrototypeTriggerBody.jobString>
+  <!-- 触发器制造台的边境特制型制造账单名称。 -->
+  <BDP_Recipe_ProduceBorderSpecialTriggerBody.label>制造边境特制触发体</BDP_Recipe_ProduceBorderSpecialTriggerBody.label>
+  <!-- 原版制作任务的进度提示。 -->
+  <BDP_Recipe_ProduceBorderSpecialTriggerBody.jobString>正在制造边境特制触发体。</BDP_Recipe_ProduceBorderSpecialTriggerBody.jobString>
+</LanguageData>

@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using BDP.Content.Trion.Facility;
 using BDP.Core.CombatBody;
+using BDP.Core.Permissions;
 using BDP.Core.Trigger;
 using RimWorld;
 using Verse;
@@ -13,6 +15,12 @@ namespace BDP.Content.Assembly
     /// </summary>
     public class Building_TriggerAssembler : Building
     {
+        /// <summary>按建筑地图与派系读取核心当前运行许可，不缓存旧状态。</summary>
+        public bool HasTrionRelayCorePermission
+        {
+            get { return MapPermissionAccess.HasPermission(Map, Faction, TrionRelayCorePermissionProvider.ActivePermissionKey); }
+        }
+
         /// <summary>
         /// 玩家右键菜单显示的正式入口文本。
         /// </summary>
@@ -100,6 +108,11 @@ namespace BDP.Content.Assembly
             if (!IsPoweredForAssembly)
             {
                 return "BDP_Message_TriggerAssembly_NoPower".Translate();
+            }
+
+            if (!HasTrionRelayCorePermission)
+            {
+                return "BDP_Message_TriggerAssembly_NoTrionPermission".Translate();
             }
 
             ITriggerLoadoutReader loadoutReader = TriggerSurfaceAccess.ResolveLoadoutReader(pawn);

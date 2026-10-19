@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <!-- 开发者测试芯片的定义回退文案。 -->
+  <BDP_ChipFunction_ExactBodyPartRemoval.label>开发者精确部位移除</BDP_ChipFunction_ExactBodyPartRemoval.label>
+  <BDP_ChipFunction_ExactBodyPartRemoval.description>开发者测试用远程武装。先选择身体部位，再直接命中 Pawn 后移除该部位。</BDP_ChipFunction_ExactBodyPartRemoval.description>
+</LanguageData>

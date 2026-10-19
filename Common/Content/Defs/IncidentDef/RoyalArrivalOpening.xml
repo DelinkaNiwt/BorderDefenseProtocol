@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 皇室入口的专门首发事件，直接复用原版任务派发流程。 -->
+  <IncidentDef>
+    <!-- 独立 BDP 标识，不改动皇权原有开场事件。 -->
+    <defName>BDP_GiveQuest_RoyalArrivalOpening</defName>
+    <!-- 显示名称由中文语言包注入。 -->
+    <label>BDP_GiveQuest_RoyalArrivalOpening</label>
+    <!-- 原版检查现有任务的完整准入，然后生成并发送任务通知。 -->
+    <workerClass>IncidentWorker_GiveQuest</workerClass>
+    <!-- 按任务事件处理，目标与皇权开场一样为世界。 -->
+    <category>GiveQuest</category>
+    <targetTags>
+      <li>World</li>
+    </targetTags>
+    <!-- 本事件只由定时部件调用；随机再次接触沿任务定义的候选权重。 -->
+    <baseChance>0</baseChance>
+    <!-- 引用零随机权重的首发入口；继承随机入口的同一份任务流程。 -->
+    <questScriptDef>BDP_RoyalArrivalOpening</questScriptDef>
+  </IncidentDef>
+</Defs>

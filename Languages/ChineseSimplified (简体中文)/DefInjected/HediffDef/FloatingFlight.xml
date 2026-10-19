@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 浮空实际状态。 -->
+  <BDP_Hediff_FloatingFlight.label>浮空中</BDP_Hediff_FloatingFlight.label>
+  <BDP_Hediff_FloatingFlight.description>该角色当前处于浮空状态，能够快速移动并跨越部分露天障碍，但无法在屋顶区域飞行或停留。</BDP_Hediff_FloatingFlight.description>
+</LanguageData>

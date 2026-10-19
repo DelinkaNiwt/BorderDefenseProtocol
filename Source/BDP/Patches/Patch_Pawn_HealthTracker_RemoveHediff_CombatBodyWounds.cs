@@ -23,7 +23,7 @@ namespace BDP.Patches
             }
 
             Pawn pawn = hediff.pawn;
-            pawn?.GetComp<CompCombatBodyHost>()?.WoundRuntime.NotifyWoundRemoved(pawn, hediff);
+            CombatBodyMaterialAccess.Wounds(pawn)?.NotifyWoundRemoved(pawn, hediff);
         }
     }
 }

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <!-- Development 扩展示例的玩家向名称和说明。 -->
+  <BDP_Feature_ExperimentalBarrier.label>实验性屏障</BDP_Feature_ExperimentalBarrier.label>
+  <BDP_Feature_ExperimentalBarrier.description>以不同技术路线实现的实验性防护屏障。</BDP_Feature_ExperimentalBarrier.description>
+</LanguageData>

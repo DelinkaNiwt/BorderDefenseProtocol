@@ -37,6 +37,37 @@ namespace BDP.Core.Chips
         }
 
         /// <summary>
+        /// 遍历实例组件并读取第一份基础芯片定义。
+        /// 没有基础定义提供器时，调用方应把当前定义视为未构型的声明定义。
+        /// </summary>
+        public static bool TryGetDeclaredDefinition(
+            Thing thing,
+            out ChipDefinitionConfig definition)
+        {
+            definition = null;
+            ThingWithComps thingWithComps = thing as ThingWithComps;
+            if (thingWithComps?.AllComps == null)
+            {
+                return false;
+            }
+
+            for (int index = 0; index < thingWithComps.AllComps.Count; index++)
+            {
+                IChipInstanceDeclaredDefinitionProvider provider =
+                    thingWithComps.AllComps[index] as IChipInstanceDeclaredDefinitionProvider;
+                if (provider != null
+                    && provider.TryGetDeclaredChipDefinition(out definition)
+                    && definition != null)
+                {
+                    return true;
+                }
+            }
+
+            definition = null;
+            return false;
+        }
+
+        /// <summary>
         /// 遍历实例组件并复制第一份来源身份；不存在时返回空快照。
         /// </summary>
         public static ChipSourceReferenceSnapshot ReadSourceReference(Thing thing)

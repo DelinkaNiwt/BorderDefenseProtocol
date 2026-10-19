@@ -9,6 +9,7 @@ namespace BDP.Content.CombatBody.Escape
     /// <summary>
     /// 紧急脱离 Trion 徽标 Content 提供器。
     /// </summary>
+    [StaticConstructorOnStartup]
     public sealed class CombatBodyEmergencyEscapeGizmoExtensionProvider : ITrionGizmoExtensionProvider
     {
         /// <summary>

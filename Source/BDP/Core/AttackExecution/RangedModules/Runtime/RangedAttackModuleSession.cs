@@ -61,6 +61,7 @@ namespace BDP.Core.AttackExecution
         /// </summary>
         public IReadOnlyList<RangedAttackModuleSlot> Slots { get; set; }
 
+        /// <summary>
         /// 当前瞄准过程绑定的目标交互会话。
         /// 它承载上游多轮输入的中性推进状态。
         /// </summary>
@@ -193,6 +194,14 @@ namespace BDP.Core.AttackExecution
         internal IReadOnlyList<IAimStageModule> GetAimModules()
         {
             List<IAimStageModule> result = new List<IAimStageModule>();
+            AppendStageModules(result);
+            return result;
+        }
+
+        /// <summary>读取正式射击报告生成后参与逐发精度修正的模块。</summary>
+        internal IReadOnlyList<IAimChanceModifier> GetAimChanceModifiers()
+        {
+            List<IAimChanceModifier> result = new List<IAimChanceModifier>();
             AppendStageModules(result);
             return result;
         }

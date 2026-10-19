@@ -22,7 +22,7 @@ Assert-True (Test-Path -LiteralPath $rulesPath) "缺少芯片组合选择规则�
 
 $recordText = Get-Utf8Text (Join-Path $modelRoot "ChipCombinationRecord.cs")
 $rulesText = Get-Utf8Text $rulesPath
-foreach ($field in @("CategoryDefName", "ProfessionDefName", "OrderedActionPresetDefNames", "ArmamentFormDefName", "LastResolvedLabel"))
+foreach ($field in @("CategoryDefName", "ProfessionDefName", "OrderedChipFunctionDefNames", "ArmamentFormDefName", "LastResolvedLabel"))
 {
     Assert-True ($recordText -match $field) "组合记录缺少字段：$field"
 }
@@ -30,15 +30,15 @@ Assert-True ($recordText -notmatch 'Material|Ingredient|WorkAmount|Quantity|Reso
 Assert-True ($recordText -match 'SameConfigurationAs') "组合记录缺少顺序敏感配置比较。"
 Assert-True ($recordText -match 'ExposeData') "组合记录必须可存档。"
 
-Assert-True ($rulesText -match 'maxActionCount') "选择规则必须读取武装型声明的动作数量能力。"
+Assert-True ($rulesText -match 'maxFunctionCount') "选择规则必须读取武装型声明的功能数量能力。"
 Assert-True ($rulesText -notmatch 'BDP_ChipProfession_Gunner') "选择规则不得硬编码枪手职业。"
-Assert-True ($rulesText -match 'acceptedActionProfessions') "职业兼容必须来自 Def 单向接纳表。"
+Assert-True ($rulesText -match 'acceptedSourceProfessions') "职业兼容必须来自 Def 单向接纳表。"
 Assert-True ($rulesText -match 'Modes\.Count\s*>\s*1') "内置多形态必须由解释配置的形态数量判断。"
-Assert-True ($rulesText -match 'MaxActionCount') "选择规则必须公开最大动作数。"
-Assert-True ($rulesText -match 'compatibleActionPresetDefNames|CompatibleAction') "选择规则必须支持构型动作适用范围。"
-Assert-True ($rulesText -match '全部动作|all actions|AllActions|CanUseArmamentForm') "选择规则必须集中判断构型动作适用范围。"
+Assert-True ($rulesText -match 'MaxFunctionCount') "选择规则必须公开最大功能数量。"
+Assert-True ($rulesText -match 'compatibleChipFunctionDefNames|CanUseArmamentFormFunction') "选择规则必须支持构型功能适用范围。"
+Assert-True ($rulesText -match '全部芯片功能模板|all functions|AllFunctions|CanUseArmamentForm') "选择规则必须集中判断构型功能适用范围。"
 Assert-True ($rulesText -match 'Swap') "选择规则必须支持交换形态顺序。"
 Assert-True ($rulesText -match 'RemoveAt') "取消形态一必须通过列表前移保留形态二。"
 Assert-True ($rulesText -notmatch 'ChipTag') "职业选择规则不得重新依赖普通标签。"
 
-Write-Host "PASS: 组合记录只保存玩家选择，职业、动作数、多形态和顺序规则集中定义。"
+Write-Host "PASS: 组合记录只保存玩家选择，职业、功能数量、多形态和顺序规则集中定义。"

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 近界芯片表达和攻击方式显示名称。 -->
+  <BDP_SoldierShortSword>小兵短剑</BDP_SoldierShortSword>
+  <BDP_SoldierShortSword_Handle>握柄钝击</BDP_SoldierShortSword_Handle>
+  <BDP_SoldierShortSword_Blade>刃部切割</BDP_SoldierShortSword_Blade>
+  <BDP_SoldierShortSword_Tip>尖端刺击</BDP_SoldierShortSword_Tip>
+  <BDP_SoldierBullet>小兵弹丸</BDP_SoldierBullet>
+  <BDP_SoldierShield>小兵护盾</BDP_SoldierShield>
+  <!-- 小兵护盾耐久状态卡标题。 -->
+  <BDP_Shield_Status_SoldierTitle>小兵护盾耐久</BDP_Shield_Status_SoldierTitle>
+  <!-- 近界宙域 Pawn 生成后未能进入战斗体状态时的诊断日志。 -->
+  <BDP_NearRealm_CombatBodyInitializationFailed>近界宙域成员战斗体初始化失败：{0}</BDP_NearRealm_CombatBodyInitializationFailed>
+</LanguageData>

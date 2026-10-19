@@ -11,7 +11,7 @@ namespace BDP.Core.CombatBody.Wounds
     {
         /// <summary>
         /// 给当前加载的伤口 Def 追加 BDP 伤口提示组件。
-        /// 第一版只接入 Hediff_Injury，缺失部位是否显示流失以后再单独决定。
+        /// 普通伤口和真实断口均显示自身已登记的泄露。
         /// </summary>
         internal static void Apply()
         {
@@ -38,7 +38,9 @@ namespace BDP.Core.CombatBody.Wounds
         /// </summary>
         private static bool ShouldInject(HediffDef def)
         {
-            return def?.hediffClass != null && typeof(Hediff_Injury).IsAssignableFrom(def.hediffClass);
+            return def?.hediffClass != null
+                && (typeof(Hediff_Injury).IsAssignableFrom(def.hediffClass)
+                    || typeof(Hediff_MissingPart).IsAssignableFrom(def.hediffClass));
         }
 
         /// <summary>

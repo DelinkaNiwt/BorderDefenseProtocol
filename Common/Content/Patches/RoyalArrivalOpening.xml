@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- 只追加 BDP 专属派发部件；既有皇权开场和其它叙事者安排保持原样。 -->
+  <Operation Class="PatchOperationAdd">
+    <!-- 排除已有本事件的列表，避免重复追加；叙事者照常使用各自其它部件。 -->
+    <xpath>/Defs/StorytellerDef/comps[not(li/incident="BDP_GiveQuest_RoyalArrivalOpening")]</xpath>
+    <value>
+      <!-- 复用皇权开场的原版单次定时派发，不增加代码补丁或全局扫描。 -->
+      <li Class="StorytellerCompProperties_SingleOnceFixed">
+        <!-- 派发现有任务的 BDP 专属事件。 -->
+        <incident>BDP_GiveQuest_RoyalArrivalOpening</incident>
+        <!-- 暂定第八天；调整时同步任务定义中的随机最早日。 -->
+        <fireAfterDaysPassed>8</fireAfterDaysPassed>
+        <!-- 不等待三人；单人开局同样可以接触入口。 -->
+        <minColonistCount>0</minColonistCount>
+        <!-- 不因极端生态跳过；是否能生成仍服从任务自身准入。 -->
+        <skipIfOnExtremeBiome>false</skipIfOnExtremeBiome>
+        <!-- 沿用原版开场的世界目标，避免多张地图分别派发。 -->
+        <allowedTargetTags>
+          <li>World</li>
+        </allowedTargetTags>
+      </li>
+    </value>
+  </Operation>
+</Patch>

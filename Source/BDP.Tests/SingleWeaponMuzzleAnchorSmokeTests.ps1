@@ -20,7 +20,7 @@ $diagnosticsText = Get-Content -Raw -Encoding utf8 -LiteralPath $diagnosticsPath
 Assert-True (
     ($resolverText -match 'ResolveTextureOnly\(VisualPoseRequest request\)') -and
     ($resolverText -match 'CalculateVanillaPose\(request\)') -and
-    ($resolverText -match 'MuzzleAnchor = ResolveMuzzleAnchor\(request, calculation\)')
+    ($resolverText -match 'MuzzleAnchor = ResolveMuzzleAnchor\(request, calculation, graphic, 1f\)')
 ) '视觉姿态解析器必须提供按原版贴图姿态解算单武器枪口锚点的入口。'
 
 $textureOnlyMethod = [regex]::Match(

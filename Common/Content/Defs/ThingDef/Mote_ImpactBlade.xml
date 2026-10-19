@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    命中三角刀刃 Mote 公共配置。
+    实际轮廓由 Mote_ImpactBlade 直接建立三角网格，纹理只提供亮芯和边缘颜色。
+  -->
+  <ThingDef ParentName="MoteBase" Name="BDP_Mote_ImpactBladeBase" Abstract="True">
+    <!-- 自定义 Mote 类，负责绘制水平底边三角刀刃。 -->
+    <thingClass>BDP.Content.RangedModules.ImpactVisual.Mote_ImpactBlade</thingClass>
+
+    <!-- 透明刀刃纹理只作为三角网格内部的颜色来源。 -->
+    <graphicData>
+      <!-- 使用单张图形材质入口，几何由自定义 Mote 接管。 -->
+      <graphicClass>Graphic_Single</graphicClass>
+      <!-- 复用现有实体刀刃纹理。 -->
+      <texPath>Effects/ImpactBlade/ImpactBlade</texPath>
+      <!-- 保留绿色边缘与浅色亮芯。 -->
+      <shaderType>MoteGlow</shaderType>
+      <!-- 材质基础色，运行时再乘入透明度和 Effecter 颜色。 -->
+      <color>(0.45, 1.0, 0.55, 1.0)</color>
+    </graphicData>
+
+    <!-- Mote 生命周期与从零伸长曲线。 -->
+    <mote>
+      <!-- 使用游戏 Tick 驱动，暂停时不会脱离游戏时间。 -->
+      <realTime>false</realTime>
+      <!-- 刀刃立即可见，不做额外淡入。 -->
+      <fadeInTime>0</fadeInTime>
+      <!-- 最晚刀刃延迟 6 Tick 后仍有完整轮廓停留。 -->
+      <solidTime>0.20</solidTime>
+      <!-- 尾段快速淡出，总生命周期约 0.32 秒。 -->
+      <fadeOutTime>0.12</fadeOutTime>
+    </mote>
+  </ThingDef>
+
+  <!-- 后景刀刃：位于 Pawn 后方。 -->
+  <ThingDef ParentName="BDP_Mote_ImpactBladeBase">
+    <!-- 后景 Mote 唯一名称。 -->
+    <defName>BDP_Mote_ImpactBlade_Back</defName>
+    <!-- 使用 Projectile 层形成后景遮挡。 -->
+    <altitudeLayer>Projectile</altitudeLayer>
+  </ThingDef>
+
+  <!-- 前景刀刃：位于 Pawn 前方。 -->
+  <ThingDef ParentName="BDP_Mote_ImpactBladeBase">
+    <!-- 前景 Mote 唯一名称。 -->
+    <defName>BDP_Mote_ImpactBlade_Front</defName>
+    <!-- 使用 MoteOverhead 层覆盖在 Pawn 前方。 -->
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+  </ThingDef>
+
+</Defs>

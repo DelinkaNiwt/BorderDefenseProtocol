@@ -45,8 +45,8 @@ Assert-True ($stateText -match '\bReady\b') 'Badge state must represent ready em
 Assert-True ($stateResolverText -match 'TriggerSurfaceAccess\.ResolveLoadoutReader\(pawn\)') 'Mounted state must read Trigger formal loadout.'
 Assert-True ($stateResolverText -match 'GetModExtension<ChipExpressionConfig>\(\)') 'Mounted state must read the formal chip definition.'
 Assert-True ($stateResolverText -match 'IsBindingMirror') 'Mounted state must ignore binding mirror duplicates.'
-Assert-True ($stateResolverText -match 'ChipExpressionEntryKindConfig\.Passive') 'Mounted state must require a Passive declaration.'
-Assert-True ($stateResolverText -match 'EmergencyEscapePassiveKey') 'Mounted state must share the formal emergency escape key.'
+Assert-True ($stateResolverText -match 'ChipExpressionEntryTypeConfig\.Passive') 'Mounted state must require a Passive declaration.'
+Assert-True ($stateResolverText -match 'EmergencyEscapePassiveIdentityKey') 'Mounted state must share the formal emergency escape identity key.'
 Assert-True (
     ($stateResolverText -match 'ContainsEmergencyEscape\(config\.Entries\)') -and
     ($stateResolverText -notmatch 'ContainsEmergencyEscape\(config\.Modes\)') -and
@@ -54,7 +54,7 @@ Assert-True (
 ) 'Mounted state must scan the unified entry catalog instead of removed mode operations.'
 Assert-True ($stateResolverText -match 'CompCombatBodyEmergencyEscapeState') 'Collapsing state must read Content-owned cached readiness.'
 Assert-True ($stateResolverText -match 'CombatBodyEmergencyEscapeResolver') 'Ready state must reuse the formal emergency escape resolver.'
-Assert-True ($escapeResolverText -match 'internal const string EmergencyEscapePassiveKey = "EmergencyEscape";') 'Emergency escape key must have one shared declaration.'
+Assert-True ($escapeResolverText -match 'internal const string EmergencyEscapePassiveIdentityKey = "EmergencyEscape";') 'Emergency escape identity key must have one shared declaration.'
 
 # CombatBody 徽标提供器只消费三态结果，不回头扫描来源系统。
 Assert-True ($providerText -match 'CombatBodyEmergencyEscapeBadgeStateResolver') 'Content badge provider must consume the three-state resolver.'

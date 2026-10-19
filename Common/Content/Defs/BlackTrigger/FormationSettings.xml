@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!-- 黑触发器形成系统全局设置；具体形成路线由完整 ThingDef 自身声明。 -->
+  <BDP.Content.Trigger.Black.Formation.BlackTriggerFormationSettingsDef>
+    <defName>BDP_BlackTriggerFormationSettings</defName>
+    <label>黑触发器形成设置</label>
+    <!-- 主动燃尽仍只在个人生命危机中开放。 -->
+    <crisisBleedoutTicks>2500</crisisBleedoutTicks>
+    <crisisLethalSeverityRatio>0.9</crisisLethalSeverityRatio>
+    <!-- 普通伤病死亡通过匹配后仍使用形成概率。 -->
+    <naturalFormationChance>0.15</naturalFormationChance>
+    <!-- 待决时限为三个游戏小时。 -->
+    <pendingEventTicks>7500</pendingEventTicks>
+    <!-- 普通流程成功建立后，一天内不再建立第二次事件。 -->
+    <normalCooldownTicks>60000</normalCooldownTicks>
+    <!-- 每 60 Tick 检查尸体、复活和截止时间。 -->
+    <eventScanIntervalTicks>60</eventScanIntervalTicks>
+  </BDP.Content.Trigger.Black.Formation.BlackTriggerFormationSettingsDef>
+</Defs>

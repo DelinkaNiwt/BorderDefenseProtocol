@@ -30,10 +30,10 @@ Assert-True (
 
 $orderMethod = [regex]::Match(
     $groupedSourceText,
-    '(?s)public void OrderForceTarget\(LocalTargetInfo target\).*?\n        \}')
+    '(?s)internal void OrderForceTarget\(LocalTargetInfo target, TargetingInputRuntimeFacts inputFacts\).*?\n        \}')
 Assert-True $orderMethod.Success '组级 OrderForceTarget 方法必须存在。'
 Assert-True (
-    ($orderMethod.Value -match 'SelectPreferredSourcesByPawn\(target\)') -and
+    ($orderMethod.Value -match 'SelectPreferredSourcesByPawn\(target, inputFacts\)') -and
     ($orderMethod.Value -notmatch 'for\s*\(int i = 0; i < sources\.Count; i\+\+\)')
 ) '组级正式下单不得再盲目遍历全部成员，必须只提交每个 Pawn 选中的唯一来源。'
 

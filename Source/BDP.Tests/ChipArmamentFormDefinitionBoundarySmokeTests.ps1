@@ -24,26 +24,26 @@ $validatorText = Get-Utf8Text $validatorPath
 $presetText = Get-Utf8Text $presetPath
 
 Assert-True ($definitionText -match 'class\s+ChipArmamentFormDef\s*:\s*Def') "武装型必须是 Content Def。"
-foreach ($field in @("compatibleProfessions", "compatibleActionPresetDefNames", "overrides", "projectileOverrides", "additionalCost", "additionalWorkAmount", "maxActionCount", "showInManufacturing", "includeInProductLabel", "implicitDefault"))
+foreach ($field in @("compatibleProfessions", "compatibleChipFunctionDefNames", "overrides", "projectileOverrides", "additionalCost", "additionalWorkAmount", "maxFunctionCount", "showInManufacturing", "includeInProductLabel", "implicitDefault"))
 {
     Assert-True ($definitionText -match $field) "武装型缺少字段：$field"
 }
-Assert-True ($definitionText -match 'maxActionCount\s*=\s*1') "默认动作数量必须是 1。"
-Assert-True ($overrideText -match 'hitCount|hitIntervalTicks|manualEntryIconTexPath') "统一特征修正缺少现有表达动作字段。"
-Assert-True ($validatorText -match 'compatibleActionPresetDefNames') "定义校验必须检查动作适用范围。"
+foreach ($field in @("labelKey", "ResolvedLabel", "descriptionKey", "ResolvedDescription"))
+{
+    Assert-True ($definitionText -match $field) "武装型缺少本地化字段或解析：$field"
+}
+Assert-True ($definitionText -match 'maxFunctionCount\s*=\s*1') "默认功能数量必须是 1。"
+Assert-True ($overrideText -match 'hitCount|hitIntervalTicks|manualEntryIconTexPath') "统一特征修正缺少现有表达条目字段。"
+Assert-True ($validatorText -match 'compatibleChipFunctionDefNames') "定义校验必须检查功能适用范围。"
 Assert-True ($validatorText -match 'ValidateImplicitDefaultConflicts') "定义校验必须检查隐式默认型冲突。"
 Assert-True ($validatorText -match 'rangedModules|tools') "定义校验必须检查覆盖列表空项。"
 Assert-True ($presetText -match 'ChipArmamentFormDef') "武装型 XML 必须使用通用定义类型。"
 Assert-True ($presetText -match 'BDP_ArmamentForm_TrionCube') "射手远程武装必须有隐藏 Trion 立方体默认型。"
 Assert-True ($presetText -match '<showInManufacturing>false</showInManufacturing>') "Trion 立方体默认型不得出现在制造台。"
 Assert-True ($presetText -match '<includeInProductLabel>false</includeInProductLabel>') "Trion 立方体默认型不得进入芯片动态名称。"
-Assert-True ($presetText -match 'BDP_ArmamentForm_Temporary') "必须提供临时攻击手武装型测试样本。"
-Assert-True ($presetText -match '<label>Temporary</label>') "临时攻击手武装型必须使用稳定的英文 Def 标签。"
-Assert-True ($presetText -match '<description>Temporary attacker visual probe\.</description>') "临时攻击手武装型必须有可翻译说明。"
-$languagePath = Join-Path $modRoot "Languages\ChineseSimplified (简体中文)\DefInjected\ChipArmamentFormDef\Presets.xml"
-$languageText = Get-Utf8Text $languagePath
-Assert-True ($languageText -match '<BDP_ArmamentForm_Temporary\.label>临时</BDP_ArmamentForm_Temporary\.label>') "临时攻击手武装型必须显示为临时。"
-Assert-True ($presetText -match '<compatibleActionPresetDefNames>[\s\S]*BDP_Preset_Kogetsu') "临时武装型必须只允许弧月动作。"
-Assert-True ($presetText -match 'BDP_Visual_Temporary_BreachAxe') "临时武装型必须绑定破墙斧贴图视觉。"
+$keyedPath = Join-Path $modRoot "Languages\ChineseSimplified (简体中文)\Keyed\ChipManufacturing.xml"
+Assert-True (Test-Path -LiteralPath $keyedPath) "武装型 Keyed 中文语言包必须存在。"
+$keyedText = Get-Utf8Text $keyedPath
+Assert-True (-not (Test-Path -LiteralPath (Join-Path $modRoot "Languages\ChineseSimplified (简体中文)\DefInjected\ChipArmamentFormDef\Presets.xml"))) "武装型不得继续使用旧 DefInjected 语言包。"
 
-Write-Host "PASS: 通用武装型定义、默认动作数量和隐藏 Trion 默认型边界存在。"
+Write-Host "PASS: 通用武装型定义、默认功能数量和隐藏 Trion 默认型边界存在。"

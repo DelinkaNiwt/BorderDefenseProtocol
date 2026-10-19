@@ -37,9 +37,9 @@ namespace BDP.Core.Trion
         void Release(float amount);
 
         /// <summary>
-        /// 注册一条持续消耗，单位为 Trion/秒。
+        /// 注册一条声明的持续消耗，单位为 Trion/秒；类别决定当前规则下是否实际结算。
         /// </summary>
-        void RegisterDrain(TrionDrainKey key, float perSecond);
+        void RegisterDrain(TrionDrainKey key, float perSecond, TrionDrainKind kind = TrionDrainKind.Function);
 
         /// <summary>
         /// 注销一条持续消耗。
@@ -50,6 +50,11 @@ namespace BDP.Core.Trion
         /// 设置是否冻结自然恢复。
         /// </summary>
         void SetFrozen(bool frozen);
+
+        /// <summary>
+        /// 设置当前容器是否已经绑定到外部 Trion 合并池。
+        /// </summary>
+        void SetBoundToExternalPool(bool bound);
 
         /// <summary>
         /// 按增减量调整当前值。

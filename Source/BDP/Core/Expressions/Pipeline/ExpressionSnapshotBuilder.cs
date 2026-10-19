@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using BDP.Core.Permissions;
 using BDP.Core.Trigger;
+using BDP.Support.Diagnostics;
 using Verse;
 
 namespace BDP.Core.Expressions
@@ -49,7 +51,16 @@ namespace BDP.Core.Expressions
         /// </summary>
         public ExpressionSnapshot Build(Pawn pawn, ITriggerLoadoutReader triggerLoadoutReader)
         {
+            long totalStart = BdpDiagnostics.BeginTiming();
+            long sourceCollectionStart = BdpDiagnostics.BeginTiming();
             IReadOnlyList<ExpressionSourceMaterial> collected = sourceCollector.Collect(pawn, triggerLoadoutReader);
+            BdpDiagnostics.TraceTiming(
+                "表达快照构建 | stage=collect_sources"
+                + " | pawn=" + (pawn != null ? pawn.ThingID : "null")
+                + " | collected=" + (collected != null ? collected.Count.ToString() : "null"),
+                sourceCollectionStart);
+
+            long resolveStart = BdpDiagnostics.BeginTiming();
             IReadOnlyList<ExpressionSourceMaterial> filtered = Filter(collected);
             IReadOnlyDictionary<string, ExpressionSourceMaterial> materialIndex = BuildMaterialIndex(filtered);
 
@@ -84,13 +95,54 @@ namespace BDP.Core.Expressions
                 resolvedSubSet,
                 resolvedSpecialSet,
                 compositeSet);
+            BdpDiagnostics.TraceTiming(
+                "表达快照构建 | stage=resolve_expression_sets"
+                + " | pawn=" + (pawn != null ? pawn.ThingID : "null")
+                + " | filtered=" + (filtered != null ? filtered.Count.ToString() : "null")
+                + " | augmentations=" + (augmentations != null ? augmentations.Count.ToString() : "null"),
+                resolveStart);
 
-            return Assemble(
+            long assembleStart = BdpDiagnostics.BeginTiming();
+            ExpressionSnapshot snapshot = Assemble(
                 resolvedMainSet,
                 resolvedSubSet,
                 resolvedSpecialSet,
                 compositeSet,
                 specialOverride);
+            NotifyPermissionReceivers(pawn, snapshot);
+            BdpDiagnostics.TraceTiming(
+                "表达快照构建 | stage=assemble_and_notify"
+                + " | pawn=" + (pawn != null ? pawn.ThingID : "null")
+                + " | results=" + (snapshot?.Results != null ? snapshot.Results.Count.ToString() : "null"),
+                assembleStart);
+            BdpDiagnostics.TraceTiming(
+                "表达快照构建 | stage=total | pawn=" + (pawn != null ? pawn.ThingID : "null"),
+                totalStart);
+            return snapshot;
+        }
+
+        /// <summary>
+        /// 将当前 Pawn 的全部正式芯片表达结果交给可选业务接收器。
+        /// Core 只传递上下文，不解释任何许可效果。
+        /// </summary>
+        private static void NotifyPermissionReceivers(Pawn pawn, ExpressionSnapshot snapshot)
+        {
+            if (snapshot?.Results == null)
+            {
+                return;
+            }
+
+            for (int index = 0; index < snapshot.Results.Count; index++)
+            {
+                FormalExpressionResult result = snapshot.Results[index];
+                if (result == null)
+                {
+                    continue;
+                }
+
+                ChipFunctionPermissionReceiverRegistry.Notify(
+                    new MapPermissionContext(pawn, result.Id, result.DeclaredPermissionKeys));
+            }
         }
 
         /// <summary>
@@ -238,7 +290,7 @@ namespace BDP.Core.Expressions
                 for (int i = 0; i < set.Results.Count; i++)
                 {
                     FormalExpressionResult result = set.Results[i];
-                    if (result == null || result.ResultKind == ExpressionResultKind.Verb)
+                    if (result == null || result.OutputChannel == ExpressionOutputChannel.Verb)
                     {
                         continue;
                     }

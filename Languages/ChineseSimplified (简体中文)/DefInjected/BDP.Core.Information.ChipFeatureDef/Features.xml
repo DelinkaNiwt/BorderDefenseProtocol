@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <!-- 芯片功能语义名称与说明。 -->
+  <BDP_Feature_RangedAttack.label>远程攻击</BDP_Feature_RangedAttack.label>
+  <BDP_Feature_RangedAttack.description>从远处对目标造成攻击或投射物效果。</BDP_Feature_RangedAttack.description>
+  <BDP_Feature_MeleeAttack.label>近战攻击</BDP_Feature_MeleeAttack.label>
+  <BDP_Feature_MeleeAttack.description>在近距离使用攻击方式对目标造成效果。</BDP_Feature_MeleeAttack.description>
+  <BDP_Feature_Shield.label>护盾</BDP_Feature_Shield.label>
+  <BDP_Feature_Shield.description>阻挡、减免、反射或转化指定攻击的防护功能。</BDP_Feature_Shield.description>
+  <BDP_Feature_Movement.label>机动</BDP_Feature_Movement.label>
+  <BDP_Feature_Movement.description>改变使用者位置、移动方式或空间可达性的功能。</BDP_Feature_Movement.description>
+  <!-- 泛用能力语义名称与说明。 -->
+  <BDP_Feature_GenericAbility.label>能力</BDP_Feature_GenericAbility.label>
+  <BDP_Feature_GenericAbility.description>具有独立释放生命周期、但暂无专属信息语义的玩家能力。</BDP_Feature_GenericAbility.description>
+</LanguageData>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 任务候选标签。 -->
+  <BDP_RoyalArrival.label>皇室求援</BDP_RoyalArrival.label>
+  <!-- 原版名称预览规则；正式名称同样从中文语言键读取。 -->
+  <BDP_RoyalArrival.questNameRules.rulesStrings.0>questName->皇室求援</BDP_RoyalArrival.questNameRules.rulesStrings.0>
+  <!-- 首发入口继承同一任务流程，但独立定义需要自己的语言注入路径。 -->
+  <BDP_RoyalArrivalOpening.label>皇室求援</BDP_RoyalArrivalOpening.label>
+  <BDP_RoyalArrivalOpening.questNameRules.rulesStrings.0>questName->皇室求援</BDP_RoyalArrivalOpening.questNameRules.rulesStrings.0>
+</LanguageData>

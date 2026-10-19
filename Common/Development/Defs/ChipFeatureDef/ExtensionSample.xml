@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 纯 XML 声明的新玩家语义；不依赖任何 BDP Core 业务类型。 -->
+  <BDP.Core.Information.ChipFeatureDef>
+    <defName>BDP_Feature_ExperimentalBarrier</defName>
+    <DisplayOrder>350</DisplayOrder>
+    <Properties>
+      <!-- 新语义自己的通用属性。 -->
+      <li><Property>BDP_Property_ExperimentalReflectionRatio</Property><Order>100</Order></li>
+    </Properties>
+  </BDP.Core.Information.ChipFeatureDef>
+</Defs>

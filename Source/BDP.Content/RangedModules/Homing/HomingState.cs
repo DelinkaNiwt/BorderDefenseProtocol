@@ -28,6 +28,15 @@ namespace BDP.Content.RangedModules.Homing
         /// <summary>上一次观察到的目标位置。</summary>
         public Vector3 LastObservedTargetPos { get; set; } = Vector3.zero;
 
+        /// <summary>上一次观察目标位置时的游戏 tick（游戏刻）；旧存档缺失时为 -1。</summary>
+        public int LastTargetObservationTick { get; set; } = -1;
+
+        /// <summary>是否存在追踪控制器上一段路径使用的预期目标位置。</summary>
+        public bool HasExpectedTargetPosition { get; set; }
+
+        /// <summary>追踪控制器上一段路径使用的预期目标位置。</summary>
+        public Vector3 ExpectedTargetPosition { get; set; } = Vector3.zero;
+
         /// <summary>是否存在上一次距离采样。</summary>
         public bool HasLastDistanceSample { get; set; }
 
@@ -51,6 +60,9 @@ namespace BDP.Content.RangedModules.Homing
         /// <summary>是否已完成一次空地落点检索。</summary>
         public bool GroundAcquireDone { get; set; }
 
+        /// <summary>延后追踪是否已从交接位置建立初始飞行段。</summary>
+        public bool HasTakenFlightControl { get; set; }
+
         public IAttackContextNode Clone()
         {
             return new HomingState
@@ -61,6 +73,9 @@ namespace BDP.Content.RangedModules.Homing
                 RelocksUsed = RelocksUsed,
                 HasLastObservedTargetPos = HasLastObservedTargetPos,
                 LastObservedTargetPos = LastObservedTargetPos,
+                LastTargetObservationTick = LastTargetObservationTick,
+                HasExpectedTargetPosition = HasExpectedTargetPosition,
+                ExpectedTargetPosition = ExpectedTargetPosition,
                 HasLastDistanceSample = HasLastDistanceSample,
                 LastDistanceToTarget = LastDistanceToTarget,
                 Seed = Seed,
@@ -68,6 +83,7 @@ namespace BDP.Content.RangedModules.Homing
                 FlyAwayEnd = FlyAwayEnd,
                 HasReleaseExpectedImpactPoint = HasReleaseExpectedImpactPoint,
                 ReleaseExpectedImpactPoint = ReleaseExpectedImpactPoint,
+                HasTakenFlightControl = HasTakenFlightControl,
                 GroundAcquireDone = GroundAcquireDone
             };
         }
@@ -80,6 +96,9 @@ namespace BDP.Content.RangedModules.Homing
             int relocksUsed = RelocksUsed;
             bool hasLastObservedTargetPos = HasLastObservedTargetPos;
             Vector3 lastObservedTargetPos = LastObservedTargetPos;
+            int lastTargetObservationTick = LastTargetObservationTick;
+            bool hasExpectedTargetPosition = HasExpectedTargetPosition;
+            Vector3 expectedTargetPosition = ExpectedTargetPosition;
             bool hasLastDistanceSample = HasLastDistanceSample;
             float lastDistanceToTarget = LastDistanceToTarget;
             int seed = Seed;
@@ -88,6 +107,7 @@ namespace BDP.Content.RangedModules.Homing
             bool hasReleaseExpectedImpactPoint = HasReleaseExpectedImpactPoint;
             Vector3 releaseExpectedImpactPoint = ReleaseExpectedImpactPoint;
             bool groundAcquireDone = GroundAcquireDone;
+            bool hasTakenFlightControl = HasTakenFlightControl;
 
             Scribe_Deep.Look(ref frozenConfig, "frozenConfig");
             Scribe_TargetInfo.Look(ref lockedTarget, "lockedTarget");
@@ -95,6 +115,9 @@ namespace BDP.Content.RangedModules.Homing
             Scribe_Values.Look(ref relocksUsed, "relocksUsed", 0);
             Scribe_Values.Look(ref hasLastObservedTargetPos, "hasLastObservedTargetPos", false);
             Scribe_Values.Look(ref lastObservedTargetPos, "lastObservedTargetPos");
+            Scribe_Values.Look(ref lastTargetObservationTick, "lastTargetObservationTick", -1);
+            Scribe_Values.Look(ref hasExpectedTargetPosition, "hasExpectedTargetPosition", false);
+            Scribe_Values.Look(ref expectedTargetPosition, "expectedTargetPosition");
             Scribe_Values.Look(ref hasLastDistanceSample, "hasLastDistanceSample", false);
             Scribe_Values.Look(ref lastDistanceToTarget, "lastDistanceToTarget", 0f);
             Scribe_Values.Look(ref seed, "seed", 0);
@@ -102,6 +125,7 @@ namespace BDP.Content.RangedModules.Homing
             Scribe_Values.Look(ref flyAwayEnd, "flyAwayEnd");
             Scribe_Values.Look(ref hasReleaseExpectedImpactPoint, "hasReleaseExpectedImpactPoint", false);
             Scribe_Values.Look(ref releaseExpectedImpactPoint, "releaseExpectedImpactPoint");
+            Scribe_Values.Look(ref hasTakenFlightControl, "hasTakenFlightControl", false);
             Scribe_Values.Look(ref groundAcquireDone, "groundAcquireDone", false);
 
             FrozenConfig = frozenConfig ?? new HomingConfig();
@@ -110,6 +134,9 @@ namespace BDP.Content.RangedModules.Homing
             RelocksUsed = relocksUsed;
             HasLastObservedTargetPos = hasLastObservedTargetPos;
             LastObservedTargetPos = lastObservedTargetPos;
+            LastTargetObservationTick = lastTargetObservationTick;
+            HasExpectedTargetPosition = hasExpectedTargetPosition;
+            ExpectedTargetPosition = expectedTargetPosition;
             HasLastDistanceSample = hasLastDistanceSample;
             LastDistanceToTarget = lastDistanceToTarget;
             Seed = seed;
@@ -118,6 +145,7 @@ namespace BDP.Content.RangedModules.Homing
             HasReleaseExpectedImpactPoint = hasReleaseExpectedImpactPoint;
             ReleaseExpectedImpactPoint = releaseExpectedImpactPoint;
             GroundAcquireDone = groundAcquireDone;
+            HasTakenFlightControl = hasTakenFlightControl;
         }
     }
 

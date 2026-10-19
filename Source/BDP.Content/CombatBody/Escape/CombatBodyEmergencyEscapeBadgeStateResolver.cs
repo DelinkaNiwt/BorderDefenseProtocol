@@ -132,10 +132,10 @@ namespace BDP.Content.CombatBody.Escape
         private static bool IsEmergencyEscapeEntry(ChipExpressionEntryConfig entry)
         {
             return entry != null
-                && entry.Kind == ChipExpressionEntryKindConfig.Passive
+                && entry.EntryType == ChipExpressionEntryTypeConfig.Passive
                 && string.Equals(
-                    entry.PassiveKey,
-                    CombatBodyEmergencyEscapeResolver.EmergencyEscapePassiveKey,
+                    entry.PassiveIdentityKey,
+                    CombatBodyEmergencyEscapeResolver.EmergencyEscapePassiveIdentityKey,
                     StringComparison.Ordinal);
         }
     }

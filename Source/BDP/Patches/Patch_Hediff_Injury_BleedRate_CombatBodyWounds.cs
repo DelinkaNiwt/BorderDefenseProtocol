@@ -15,11 +15,6 @@ namespace BDP.Patches
         /// </summary>
         public static void Postfix(Hediff_Injury __instance, ref float __result)
         {
-            if (CombatBodyWoundRawMetrics.IsBypassingBleedSuppression)
-            {
-                return;
-            }
-
             if (CombatBodyWoundPolicy.ShouldSuppressIndividualBleeding(__instance))
             {
                 __result = 0f;

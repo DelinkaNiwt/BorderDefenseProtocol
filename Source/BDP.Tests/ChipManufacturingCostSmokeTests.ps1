@@ -24,12 +24,12 @@ $workerText = Get-Utf8Text (Join-Path $recipeRoot "RecipeWorker_ChipProduction.c
 Assert-True ($costText -match 'List<ThingDefCountClass>\s+Ingredients') "成本结果必须提供合并后的具体材料。"
 Assert-True ($costText -match 'float\s+WorkAmount') "成本结果必须提供单枚总工作量。"
 Assert-True ($calculatorText -match 'recipe\.workAmount') "总工作量必须包含通用配方基础工作量。"
-Assert-True ($calculatorText -match 'costList') "总材料必须累加每个动作材料。"
+Assert-True ($calculatorText -match 'costList') "总材料必须累加每个芯片功能模板材料。"
 Assert-True ($calculatorText -match 'additionalCost') "总材料必须最多累加一次武装型材料。"
-Assert-True ($calculatorText -match 'additionalWorkAmount') "工作量必须累加动作与武装型附加工时。"
+Assert-True ($calculatorText -match 'additionalWorkAmount') "工作量必须累加芯片功能模板与武装型附加工时。"
 Assert-True ($calculatorText -match 'Dictionary<ThingDef,\s*int>') "同类材料必须按 ThingDef 合并。"
 
-Assert-True ($universeText -match 'DefDatabase<ChipActionPresetDef>') "材料槽全集必须包含所有动作出现过的材料。"
+Assert-True ($universeText -match 'DefDatabase<ChipManufacturingPresetDef>') "材料槽全集必须包含所有芯片功能模板出现过的材料。"
 Assert-True ($universeText -match 'DefDatabase<ChipArmamentFormDef>') "材料槽全集必须包含所有武装型出现过的材料。"
 Assert-True ($universeText -match 'allowMixingIngredients\s*=\s*false') "芯片配方必须禁止混合材料。"
 Assert-True ($workerText -match 'Bill_ChipProduction') "动态材料数只允许芯片生产账单读取。"
@@ -51,7 +51,7 @@ function New-TypedList
     return ,$list
 }
 
-# 加载正式程序集，实际构造基础配方、两个动作与一个武装型验证累加结果。
+# 加载正式程序集，实际构造基础配方、两个芯片功能模板与一个武装型验证累加结果。
 $managedRoot = "C:\NiwtGames\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed"
 [void][Reflection.Assembly]::LoadFrom((Join-Path $managedRoot "UnityEngine.CoreModule.dll"))
 [void][Reflection.Assembly]::LoadFrom((Join-Path $managedRoot "UnityEngine.dll"))
@@ -79,14 +79,14 @@ $universeType = $contentAssembly.GetType("BDP.Content.Assembly.ChipManufacturing
 $baseField = $universeType.GetField("BaseIngredients", [Reflection.BindingFlags]"NonPublic,Static")
 $baseField.GetValue($null).Add($recipe, $baseCosts)
 
-$actionType = $contentAssembly.GetType("BDP.Content.Assembly.ChipManufacturing.Defs.ChipActionPresetDef", $true)
-$actionA = [Activator]::CreateInstance($actionType)
-$actionA.costList = New-TypedList $countType @((New-Count $steel 10), (New-Count $silver 15))
-$actionA.additionalWorkAmount = 500
-$actionB = [Activator]::CreateInstance($actionType)
-$actionB.costList = New-TypedList $countType @((New-Count $steel 5), (New-Count $silver 25))
-$actionB.additionalWorkAmount = 300
-$actions = New-TypedList $actionType @($actionA, $actionB)
+$functionType = $contentAssembly.GetType("BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef", $true)
+$functionA = [Activator]::CreateInstance($functionType)
+$functionA.costList = New-TypedList $countType @((New-Count $steel 10), (New-Count $silver 15))
+$functionA.additionalWorkAmount = 500
+$functionB = [Activator]::CreateInstance($functionType)
+$functionB.costList = New-TypedList $countType @((New-Count $steel 5), (New-Count $silver 25))
+$functionB.additionalWorkAmount = 300
+$functions = New-TypedList $functionType @($functionA, $functionB)
 
 $shellType = $contentAssembly.GetType("BDP.Content.Assembly.ChipManufacturing.Defs.ChipArmamentFormDef", $true)
 $shell = [Activator]::CreateInstance($shellType)
@@ -97,11 +97,11 @@ $calculatorType = $contentAssembly.GetType("BDP.Content.Assembly.ChipManufacturi
 $calculateMethod = $calculatorType.GetMethods() |
     Where-Object { $_.Name -eq "Calculate" -and $_.GetParameters().Count -eq 3 } |
     Select-Object -First 1
-$cost = $calculateMethod.Invoke($null, @($recipe, $actions, $shell))
+$cost = $calculateMethod.Invoke($null, @($recipe, $functions, $shell))
 Assert-Equal ($cost.CountOf($chipBase)) 1 "基础材料必须保留。"
-Assert-Equal ($cost.CountOf($steel)) 35 "动作与武装型的同类钢铁必须相加。"
-Assert-Equal ($cost.CountOf($silver)) 40 "两个动作的同类白银必须相加。"
-Assert-Equal $cost.WorkAmount 2600 "工作量必须按基础、动作和武装型相加。"
+Assert-Equal ($cost.CountOf($steel)) 35 "芯片功能模板与武装型的同类钢铁必须相加。"
+Assert-Equal ($cost.CountOf($silver)) 40 "两个芯片功能模板的同类白银必须相加。"
+Assert-Equal $cost.WorkAmount 2600 "工作量必须按基础、芯片功能模板和武装型相加。"
 Assert-Equal $cost.Ingredients.Count 3 "同类材料必须合并为一个条目。"
 
-Write-Host "PASS: 芯片单枚成本由基础配方、全部动作和可选武装型简单累加，同类材料合并。"
+Write-Host "PASS: 芯片单枚成本由基础配方、全部芯片功能模板和可选武装型简单累加，同类材料合并。"

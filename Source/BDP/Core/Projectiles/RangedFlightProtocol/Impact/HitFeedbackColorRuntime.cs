@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using Verse;
 
@@ -32,10 +32,10 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Impact
         }
 
         /// <summary>
-        /// 当前仍处于受击闪烁窗口的 Pawn 颜色记录。
+        /// 颜色记录只随 Pawn 实例存活，不强持有已离图且不再绘制的角色。
         /// </summary>
-        private static readonly Dictionary<Pawn, ColorOverrideEntry> Overrides =
-            new Dictionary<Pawn, ColorOverrideEntry>();
+        private static readonly ConditionalWeakTable<Pawn, ColorOverrideEntry> Overrides =
+            new ConditionalWeakTable<Pawn, ColorOverrideEntry>();
 
         /// <summary>
         /// 为 Pawn 注册一次命中反馈颜色覆盖。
@@ -47,11 +47,12 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Impact
                 return;
             }
 
-            Overrides[pawn] = new ColorOverrideEntry
+            Overrides.Remove(pawn);
+            Overrides.Add(pawn, new ColorOverrideEntry
             {
                 Color = color,
                 LastAppliedTick = CurrentTick()
-            };
+            });
         }
 
         /// <summary>

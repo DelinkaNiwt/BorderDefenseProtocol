@@ -27,7 +27,7 @@ $sourceRoot = Split-Path -Parent $PSScriptRoot
 $repoRoot = Split-Path -Parent $sourceRoot
 $presetPath = Join-Path $repoRoot 'Source\BDP\Core\Expressions\Config\ExpressionVisualPresetDef.cs'
 $resolverPath = Join-Path $repoRoot 'Source\BDP\Core\Trigger\Visual\VisualPoseResolver.cs'
-$visualPath = Join-Path $repoRoot '1.6\Content\Defs\ExpressionDef\Visual.xml'
+$visualPath = Join-Path $repoRoot 'Common\Content\Defs\ExpressionDef\Visual.xml'
 
 Assert-True (Test-Path -LiteralPath $presetPath) '视觉预设定义必须存在。'
 Assert-True (Test-Path -LiteralPath $resolverPath) '视觉姿态解析器必须存在。'
@@ -49,11 +49,11 @@ Assert-True ($resolverText -match 'PoseSample\.DrawLoc\s*\+\s*offset\.WorldOffse
     '有限旋转不得把连续目标位置改回离散四向位置。'
 
 foreach ($defName in @(
-    'BDP_Visual_LightSoulShieldGuard',
-    'BDP_Visual_LightSoulShieldGuard_Dual')) {
+    'BDP_Visual_LightSoulDefenseShield',
+    'BDP_Visual_LightSoulDefenseShield_Dual')) {
     $node = Get-RequiredNode $visualXml `
         ('/Defs/BDP.Core.Expressions.ExpressionVisualPresetDef[defName="' + $defName + '"]') `
-        ('缺少光魂举盾视觉预设：' + $defName)
+        ('缺少光魂防护视觉预设：' + $defName)
     Assert-True ([single]$node.AimRotationLimit -eq [single]15) `
         ($defName + ' 必须启用 15 度瞄准旋转限幅。')
 }

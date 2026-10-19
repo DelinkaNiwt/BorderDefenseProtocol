@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 光魂推进组合技：光魂 + 推进器。 -->
+  <BDP.Core.Combos.ComboDef>
+    <!-- ComboDef（组合技定义）唯一名称。 -->
+    <defName>BDP_Combo_LightSoulPropulsion</defName>
+    <!-- 玩家界面显示名称。 -->
+    <label>光魂推进</label>
+    <!-- 组合技说明。 -->
+    <description>将光魂与推进器组合为光魂推进，沿地面冲刺并推挤路径上的敌人。</description>
+    <!-- 组合所需的第一、第二来源芯片功能。 -->
+    <firstSourceKey>BDP_ChipFunction_LightSoul</firstSourceKey>
+    <secondSourceKey>BDP_ChipFunction_Thruster</secondSourceKey>
+    <!-- 防护、冲拳和推进读取同一持久盾组，破盾期间推进按钮不可用。 -->
+    <UseRequirements>
+      <li Class="BDP.Content.Shield.ShieldIntactRequirement"><GroupKey>light_soul</GroupKey></li>
+    </UseRequirements>
+    <!-- 光魂推进只匹配防护形态；防护不下分姿态。 -->
+    <FirstSourceScope>
+      <ModeKey>defense</ModeKey>
+    </FirstSourceScope>
+    <!-- 组合技表达结果。 -->
+    <Expression>
+      <Entries>
+        <!-- 组合技主动能力结果。 -->
+        <li>
+          <Id>combo_light_soul_propulsion_ability</Id>
+          <DisplayLabel>光魂推进</DisplayLabel>
+          <EntryType>Ability</EntryType>
+          <AbilityDefName>BDP_Ability_LightSoulPropulsion</AbilityDefName>
+          <TrionResolve>
+            <!-- 使用消耗和最低要求跟随光魂第一来源。 -->
+            <UseCostResolve>FollowFirstSource</UseCostResolve>
+            <MinimumRequiredResolve>FollowFirstSource</MinimumRequiredResolve>
+          </TrionResolve>
+        </li>
+      </Entries>
+    </Expression>
+    <!-- 组合的玩家结果是一次能力释放，并产生机动子功能。 -->
+    <Features>
+      <li>
+        <Id>light_soul_propulsion_ability</Id>
+        <Feature>BDP_Feature_GenericAbility</Feature>
+        <Sources>
+          <li Class="BDP.Content.Information.Features.Sources.AbilityLifecycleFeatureSourceConfig">
+            <Id>light_soul_propulsion_ability_source</Id>
+            <EntryId>combo_light_soul_propulsion_ability</EntryId>
+          </li>
+        </Sources>
+        <Children>
+          <li>
+            <Id>light_soul_propulsion_movement</Id>
+            <Feature>BDP_Feature_Movement</Feature>
+            <Groups>
+              <li>
+                <Id>light_soul_propulsion_movement_method</Id>
+                <Group>BDP_FeatureGroup_MovementMethod</Group>
+                <Sources>
+                  <li Class="BDP.Content.Information.Features.Sources.MovementMethodFeatureSourceConfig">
+                    <Id>light_soul_propulsion_movement_source</Id>
+                    <EntryId>combo_light_soul_propulsion_ability</EntryId>
+                  </li>
+                </Sources>
+              </li>
+            </Groups>
+          </li>
+        </Children>
+      </li>
+    </Features>
+  </BDP.Core.Combos.ComboDef>
+
+</Defs>

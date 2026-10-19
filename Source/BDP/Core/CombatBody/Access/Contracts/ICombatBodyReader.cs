@@ -27,9 +27,12 @@ namespace BDP.Core.CombatBody
         string CollapseReason { get; }
 
         /// <summary>
-        /// 现在是否允许再次激活战斗体。
+        /// 系统现在是否允许激活战斗体；不受玩家手动切换锁限制。
         /// </summary>
         bool CanActivate();
+
+        /// <summary>现在是否允许玩家手动激活战斗体，包含手动切换锁检查。</summary>
+        bool CanManualActivate();
 
         /// <summary>
         /// 现在是否允许玩家手动关闭战斗体。

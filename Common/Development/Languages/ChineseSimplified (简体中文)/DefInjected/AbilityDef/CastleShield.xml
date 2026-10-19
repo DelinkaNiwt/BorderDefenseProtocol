@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 原版能力按钮与说明；费用单位为一格墙。 -->
+  <BDP_Ability_CastleShield.label>护城盾</BDP_Ability_CastleShield.label>
+  <BDP_Ability_CastleShield.description>开发验证：在十五格内拖出一条直线，起终点须满足原版建墙条件及距离、视线要求。准备一秒后生成原版玻璃钢墙，中间不能生成的格子跳过；中间不逐格要求视线，只按实际生成格数扣次数及每格二十触力能。上限十次，每十秒依次恢复一次，关闭芯片仍继续恢复。植物清理和物品移位沿用原版规则，关闭芯片不会删墙。</BDP_Ability_CastleShield.description>
+</LanguageData>

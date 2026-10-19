@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 战斗体编辑台工作定义。 -->
+  <JobDef>
+    <!-- JobDef 唯一名称。 -->
+    <defName>BDP_UseCombatBodyAppearanceEditor</defName>
+
+    <!-- Content JobDriver 实现类。 -->
+    <driverClass>BDP.Content.CombatBody.Appearance.JobDriver_UseCombatBodyEditor</driverClass>
+
+    <!-- 语言包提供 Pawn 工作报告。 -->
+    <reportString>使用战斗体编辑台。</reportString>
+
+    <!-- 编辑窗口入口不使用机会性前缀工作。 -->
+    <allowOpportunisticPrefix>false</allowOpportunisticPrefix>
+  </JobDef>
+
+</Defs>

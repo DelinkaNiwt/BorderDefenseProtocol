@@ -1,243 +1,172 @@
-using System.Collections.Generic;
-using BDP.Core.Chips;
-using BDP.Core.Requirements;
-using BDP.Core.Trigger;
+using BDP.Content.Assembly.ChipManufacturing.Production;
 using UnityEngine;
 using Verse;
 
 namespace BDP.Content.Assembly
 {
     /// <summary>
-    /// 触发器装配窗口右侧芯片与槽位详情面板。
+    /// 触发器装配窗口右侧芯片详情面板。
+    /// 面板只消费统一解析模型；没有选中芯片时保持空白，不保留上一枚芯片的详情。
     /// </summary>
     internal sealed class Panel_ChipDetail
     {
-        /// <summary>
-        /// 绘制芯片或槽位详情。
-        /// </summary>
+        /// <summary>右栏面板底色，与左栏和中栏保持一致。</summary>
+        private static readonly Color PanelColor = new Color(0.035f, 0.095f, 0.115f, 0.96f);
+
+        /// <summary>右栏面板边框色，与左栏和中栏保持一致。</summary>
+        private static readonly Color BorderColor = new Color(0.18f, 0.42f, 0.46f, 0.92f);
+
+        /// <summary>右栏标题高度。</summary>
+        private const float HeaderHeight = 58f;
+
+        /// <summary>详情滚动位置。</summary>
+        private Vector2 scrollPosition;
+
+        /// <summary>当前详情所对应的芯片实例。</summary>
+        private Thing displayedChip;
+
+        /// <summary>绘制选中芯片详情。</summary>
         internal void DrawChipDetail(
             Rect rect,
             Thing selectedChip,
-            ITriggerSlotState selectedSlot,
-            ITriggerLoadoutReader reader,
-            int availableChipCount)
+            ChipInformationComparisonModel comparison)
         {
-            Widgets.DrawMenuSection(rect);
-            Rect inner = rect.ContractedBy(10f);
-
-            Text.Font = GameFont.Small;
-            Widgets.Label(
-                new Rect(inner.x, inner.y, inner.width, 24f),
-                "BDP_Window_TriggerAssembly_Detail".Translate());
-            Text.Font = GameFont.Tiny;
-
-            if (selectedChip != null)
+            DrawPanelFrame(rect, true);
+            if (selectedChip == null || comparison == null || comparison.Current == null)
             {
-                DrawSelectedChip(new Rect(inner.x, inner.y + 34f, inner.width, inner.height - 34f), selectedChip);
-                return;
-            }
-
-            if (selectedSlot != null)
-            {
-                DrawSelectedSlot(new Rect(inner.x, inner.y + 34f, inner.width, inner.height - 34f), selectedSlot);
-                return;
-            }
-
-            DrawSummary(new Rect(inner.x, inner.y + 34f, inner.width, inner.height - 34f), reader, availableChipCount);
-        }
-
-        /// <summary>
-        /// 绘制选中芯片详情。
-        /// </summary>
-        private static void DrawSelectedChip(Rect rect, Thing chip)
-        {
-            Widgets.ThingIcon(new Rect(rect.x, rect.y, 54f, 54f), chip);
-            Widgets.Label(new Rect(rect.x + 62f, rect.y, rect.width - 62f, 24f), chip.LabelShortCap);
-
-            ChipDefinitionSnapshot snapshot = ChipSnapshotAccess.Read(chip);
-            bool valid = snapshot != null && snapshot.IsValid;
-
-            float y = rect.y + 68f;
-            DrawLine(
-                rect,
-                ref y,
-                "BDP_Window_TriggerAssembly_SlotRegion".Translate(),
-                 valid ? FormatSlotRegion(snapshot) : "BDP_Window_TriggerAssembly_Unknown".Translate().ToString());
-            DrawLine(
-                rect,
-                ref y,
-                "BDP_Window_TriggerAssembly_SlotOccupancy".Translate(),
-                 valid ? FormatSlotOccupancy(snapshot) : "BDP_Window_TriggerAssembly_Unknown".Translate().ToString());
-            DrawLine(
-                rect,
-                ref y,
-                "BDP_Window_TriggerAssembly_ActivationDelay".Translate(),
-                valid
-                    ? "BDP_Window_TriggerAssembly_DelayValue".Translate(
-                        (snapshot.ActivationDelayTicks / 60f).ToString("0.#"),
-                        (snapshot.DeactivationDelayTicks / 60f).ToString("0.#")).ToString()
-                     : "BDP_Window_TriggerAssembly_UnknownValue".Translate().ToString());
-            DrawLine(
-                rect,
-                ref y,
-                "BDP_Window_TriggerAssembly_ResidentCost".Translate(),
-                 valid ? snapshot.CapacityCost.ToString("0.#") : "BDP_Window_TriggerAssembly_UnknownValue".Translate().ToString());
-            DrawLine(
-                rect,
-                ref y,
-                "BDP_Window_TriggerAssembly_ActivationCost".Translate(),
-                 valid ? snapshot.ActivationCost.ToString("0.#") : "BDP_Window_TriggerAssembly_UnknownValue".Translate().ToString());
-            DrawActivationRequirements(rect, ref y, chip);
-        }
-
-        /// <summary>
-        /// 在资源行之后绘制唯一的静态激活条件分区。
-        /// </summary>
-        private static void DrawActivationRequirements(Rect rect, ref float y, Thing chip)
-        {
-            IReadOnlyList<PawnRequirementSnapshot> requirements =
-                ChipActivationRequirementService.Instance.Describe(chip);
-            if (requirements == null || requirements.Count == 0)
-            {
-                return;
-            }
-
-            y += 8f;
-            Widgets.Label(
-                new Rect(rect.x, y, rect.width, 22f),
-                "BDP_Window_TriggerAssembly_ActivationRequirements".Translate());
-            y += 22f;
-            for (int i = 0; i < requirements.Count; i++)
-            {
-                PawnRequirementSnapshot requirement = requirements[i];
-                if (requirement != null)
+                if (displayedChip != null)
                 {
-                    DrawLine(rect, ref y, requirement.Label, requirement.RequiredValueText);
+                    ChipInformationDetailRenderer.ResetDeclaredComboExpansion();
                 }
+                displayedChip = null;
+                scrollPosition = Vector2.zero;
+                return;
             }
-        }
 
-        /// <summary>
-        /// 把槽位占用方式转换成玩家可读文字。
-        /// </summary>
-        private static string FormatSlotOccupancy(ChipDefinitionSnapshot snapshot)
-        {
-            if (snapshot == null)
+            if (!ReferenceEquals(displayedChip, selectedChip))
             {
-                return "BDP_Window_TriggerAssembly_Unknown".Translate();
+                ChipInformationDetailRenderer.ResetDeclaredComboExpansion();
+                displayedChip = selectedChip;
+                scrollPosition = Vector2.zero;
             }
 
-            switch (snapshot.SlotOccupancy)
-            {
-                case ChipSlotOccupancy.Single:
-                    return "BDP_Window_TriggerAssembly_SingleSlot".Translate();
-                case ChipSlotOccupancy.PairedHands:
-                    return "BDP_Window_TriggerAssembly_PairedSlots".Translate();
-                default:
-                    return "BDP_Window_TriggerAssembly_Unspecified".Translate();
-            }
-        }
-
-        /// <summary>把槽位区域转换成玩家可读文字。</summary>
-        private static string FormatSlotRegion(ChipDefinitionSnapshot snapshot)
-        {
-            if (snapshot == null)
-            {
-                return "BDP_Window_TriggerAssembly_Unknown".Translate();
-            }
-
-            return snapshot.SlotRegion == ChipSlotRegion.Special
-                ? "BDP_Window_TriggerAssembly_SpecialRegion".Translate()
-                : "BDP_Window_TriggerAssembly_MainSubRegion".Translate();
-        }
-
-        /// <summary>
-        /// 绘制选中槽位详情。
-        /// </summary>
-        private static void DrawSelectedSlot(Rect rect, ITriggerSlotState slot)
-        {
-            float y = rect.y;
-            DrawLine(rect, ref y, "BDP_Window_TriggerAssembly_Side".Translate(), FormatSide(slot.Side));
-            DrawLine(rect, ref y, "BDP_Window_TriggerAssembly_Index".Translate(), slot.Index.ToString());
-            DrawLine(
+            DrawScrollableContent(
                 rect,
-                ref y,
-                "BDP_Window_TriggerAssembly_LoadedChip".Translate(),
-                 slot.LoadedChip != null ? slot.LoadedChip.LabelShortCap : "BDP_None".Translate().ToString());
-            DrawLine(rect, ref y, "BDP_Window_TriggerAssembly_Active".Translate(), slot.IsActive ? "BDP_Yes".Translate().ToString() : "BDP_No".Translate().ToString());
-            DrawLine(rect, ref y, "BDP_Window_TriggerAssembly_Disabled".Translate(), slot.IsDisabled ? FormatDisableReason(slot.DisabledReason) : "BDP_No".Translate().ToString());
-            DrawLine(rect, ref y, "BDP_Window_TriggerAssembly_Mirror".Translate(), slot.IsBindingMirror ? "BDP_Yes".Translate().ToString() : "BDP_No".Translate().ToString());
-            DrawLine(
+                selectedChip.LabelCap.ToString(),
+                comparison,
+                ref scrollPosition,
+                new ChipInformationDetailRenderer.ChipDetailIconSource(selectedChip));
+        }
+
+        /// <summary>绘制制造台预览并复用同一面板框架、滚动区与详情渲染器。</summary>
+        internal static void DrawManufacturingChipDetail(
+            Rect rect,
+            string chipLabel,
+            ChipInformationComparisonModel comparison,
+            string statusText,
+            ref Vector2 scrollPosition)
+        {
+            DrawPanelFrame(rect, false);
+            if (!statusText.NullOrEmpty())
+            {
+                Rect statusRect = new Rect(rect.x + 12f, rect.y + HeaderHeight + 12f,
+                    rect.width - 24f, rect.height - HeaderHeight - 24f);
+                DrawLabel(statusRect, statusText, GameFont.Small,
+                    new Color(0.78f, 0.82f, 0.88f, 1f), TextAnchor.UpperLeft);
+                return;
+            }
+
+            if (comparison?.Current == null)
+            {
+                return;
+            }
+
+            ThingDef fallbackDef = DefDatabase<ThingDef>.GetNamedSilentFail(
+                ChipProductCreationService.ManufacturedChipDefName);
+            DrawScrollableContent(
                 rect,
-                ref y,
-                "BDP_Window_TriggerAssembly_Binding".Translate(),
-                slot.HasBindingPartner
-                    ? FormatSide(slot.BindingPartnerSide) + ":" + slot.BindingPartnerIndex
-                     : "BDP_None".Translate().ToString());
+                chipLabel,
+                comparison,
+                ref scrollPosition,
+                fallbackDef == null ? null : new ChipInformationDetailRenderer.ChipDetailIconSource(fallbackDef));
         }
 
-        /// <summary>
-        /// 绘制未选中时的摘要。
-        /// </summary>
-        private static void DrawSummary(Rect rect, ITriggerLoadoutReader reader, int availableChipCount)
+        /// <summary>使用统一详情渲染器绘制当前面板的可滚动内容。</summary>
+        private static void DrawScrollableContent(
+            Rect rect,
+            string chipLabel,
+            ChipInformationComparisonModel comparison,
+            ref Vector2 currentScrollPosition,
+            ChipInformationDetailRenderer.ChipDetailIconSource iconSource = null)
         {
-            int slotCount = 0;
-            int loadedCount = 0;
-            foreach (ITriggerSlotState slot in reader.GetAllSlots())
+            chipLabel = ChipDisplayNameFormatter.Format(chipLabel);
+            Rect body = new Rect(
+                rect.x + 1f,
+                rect.y + HeaderHeight + 1f,
+                rect.width - 2f,
+                rect.height - HeaderHeight - 2f);
+            Rect inner = body.ContractedBy(10f);
+            Rect outRect = new Rect(inner.x, inner.y, inner.width, inner.height);
+            float contentHeight = ChipInformationDetailRenderer.MeasureContentHeight(
+                chipLabel,
+                comparison,
+                inner.width - 16f);
+            Rect viewRect = new Rect(0f, 0f, inner.width - 16f, Mathf.Max(inner.height, contentHeight));
+
+            Widgets.BeginScrollView(outRect, ref currentScrollPosition, viewRect);
+            Rect visibleContentRect = new Rect(
+                currentScrollPosition.x,
+                currentScrollPosition.y,
+                outRect.width,
+                outRect.height);
+            ChipInformationDetailRenderer.DrawContent(
+                new Rect(0f, 0f, viewRect.width, contentHeight),
+                chipLabel,
+                comparison,
+                visibleContentRect,
+                iconSource);
+            Widgets.EndScrollView();
+        }
+
+        /// <summary>绘制右栏外框和芯片详情标题。</summary>
+        private static void DrawPanelFrame(Rect rect, bool showAssemblyLabel)
+        {
+            Widgets.DrawBoxSolidWithOutline(rect, PanelColor, BorderColor);
+            Rect headerRect = new Rect(rect.x + 1f, rect.y + 1f, rect.width - 2f, HeaderHeight);
+            Widgets.DrawBoxSolid(headerRect, new Color(0.04f, 0.15f, 0.17f, 0.94f));
+            if (showAssemblyLabel)
             {
-                slotCount++;
-                if (slot.LoadedChip != null && !slot.IsBindingMirror)
-                {
-                    loadedCount++;
-                }
+                DrawLabel(
+                    new Rect(headerRect.x + 12f, headerRect.y + 8f, headerRect.width - 24f, 14f),
+                    "BDP_Window_TriggerAssembly_DetailPanel".Translate().ToString(),
+                    GameFont.Tiny,
+                    new Color(0.29f, 0.84f, 0.82f, 1f),
+                    TextAnchor.MiddleLeft);
             }
 
-            float y = rect.y;
-            DrawLine(rect, ref y, "BDP_Window_TriggerAssembly_SlotCount".Translate(), slotCount.ToString());
-            DrawLine(rect, ref y, "BDP_Window_TriggerAssembly_LoadedCount".Translate(), loadedCount.ToString());
-            DrawLine(rect, ref y, "BDP_Window_TriggerAssembly_ContainerChips".Translate(), availableChipCount.ToString());
+            DrawLabel(
+                new Rect(headerRect.x + 12f, headerRect.y + (showAssemblyLabel ? 25f : 16f), headerRect.width - 24f, 24f),
+                "BDP_Window_TriggerAssembly_DetailPanelTitle".Translate().ToString(),
+                GameFont.Medium,
+                new Color(0.86f, 0.95f, 0.93f, 1f),
+                TextAnchor.MiddleLeft);
+            Widgets.DrawLineHorizontal(headerRect.x + 10f, headerRect.yMax, headerRect.width - 20f);
         }
 
-        /// <summary>把侧别转换成玩家可读名称。</summary>
-        private static string FormatSide(TriggerSide side)
+        /// <summary>绘制统一样式的右栏文字。</summary>
+        private static void DrawLabel(Rect rect, string text, GameFont font, Color color, TextAnchor anchor)
         {
-            switch (side)
-            {
-                case TriggerSide.Main:
-                    return "BDP_Side_MainFull".Translate();
-                case TriggerSide.Sub:
-                    return "BDP_Side_SubFull".Translate();
-                case TriggerSide.Special:
-                    return "BDP_Side_SpecialFull".Translate();
-                default:
-                    return side.ToString();
-            }
+            GameFont oldFont = Text.Font;
+            TextAnchor oldAnchor = Text.Anchor;
+            Color oldColor = GUI.color;
+            Text.Font = font;
+            Text.Anchor = anchor;
+            GUI.color = color;
+            Widgets.Label(rect, text ?? string.Empty);
+            Text.Font = oldFont;
+            Text.Anchor = oldAnchor;
+            GUI.color = oldColor;
         }
 
-        /// <summary>把禁用原因转换成玩家可读名称。</summary>
-        private static string FormatDisableReason(TriggerDisableReason reason)
-        {
-            switch (reason)
-            {
-                case TriggerDisableReason.None:
-                    return "BDP_Message_TriggerLoadout_NotDisabled".Translate();
-                case TriggerDisableReason.MissingRequiredBodyPart:
-                    return "BDP_Message_TriggerLoadout_MissingBodyPart".Translate();
-                case TriggerDisableReason.CombatBodyUnavailable:
-                    return "BDP_Message_TriggerLoadout_BattleUnavailable".Translate();
-                default:
-                    return reason.ToString();
-            }
-        }
-
-        /// <summary>
-        /// 绘制一行键值详情。
-        /// </summary>
-        private static void DrawLine(Rect rect, ref float y, string label, string value)
-        {
-            Widgets.Label(new Rect(rect.x, y, 88f, 22f), label);
-            Widgets.Label(new Rect(rect.x + 92f, y, rect.width - 92f, 22f), value);
-            y += 24f;
-        }
     }
 }

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 组合原版子树和节点，不带入充电、带宽机控者工作组或失控行为。 -->
+  <ThinkTreeDef>
+    <defName>BDP_TrionUnit</defName>
+    <thinkRoot Class="ThinkNode_Priority">
+      <subNodes>
+        <!-- 离图和真实倒地先交回原版人物生命周期。 -->
+        <li Class="ThinkNode_Subtree"><treeDef>Despawned</treeDef></li>
+        <li Class="ThinkNode_Subtree"><treeDef>Downed</treeDef></li>
+        <!-- 停机优先于队列、玩家命令和战斗；不伪造身体倒地。 -->
+        <li Class="BDP.Content.Trion.Units.ThinkNode_ConditionalTrionUnitOperational">
+          <invert>true</invert>
+          <subNodes><li Class="BDP.Content.Trion.Units.JobGiver_TrionUnitStopped" /></subNodes>
+        </li>
+        <!-- 原版直接命令也先入队再重新求作业；队列必须先于征召待命，否则命令一直留队。 -->
+        <li Class="ThinkNode_QueuedJob" />
+        <!-- 玩家征召命令优先于自主战斗；取消征召后才重新判断接管资格。 -->
+        <li Class="ThinkNode_ConditionalOfPlayerFaction">
+          <subNodes><li Class="JobGiver_MoveToStandable" /><li Class="JobGiver_Orders" /></subNodes>
+        </li>
+        <!-- 开关与接管资格是稳定机制，具体战术可独立替换此子树。 -->
+        <li Class="BDP.Content.Trion.Units.ThinkNode_ConditionalTrionUnitAutoCombat">
+          <subNodes><li Class="ThinkNode_Subtree"><treeDef>BDP_TrionUnitAutoCombat</treeDef></li></subNodes>
+        </li>
+        <!-- 无玩家命令或自主战斗作业时，编队职责、区域限制及日常行为沿原版。 -->
+        <li Class="ThinkNode_Subtree"><treeDef>LordDuty</treeDef></li>
+        <li Class="JobGiver_SeekAllowedArea" />
+        <!-- 非玩家保持现成战斗行为，不能被默认关闭的玩家开关限制。 -->
+        <li Class="ThinkNode_ConditionalOfPlayerFaction">
+          <invert>true</invert>
+          <subNodes><li Class="JobGiver_AIFightEnemies"><chaseTarget>false</chaseTarget></li></subNodes>
+        </li>
+        <li Class="JobGiver_WanderAnywhere"><wanderRadius>7</wanderRadius></li>
+      </subNodes>
+    </thinkRoot>
+  </ThinkTreeDef>
+  <!-- 临时基础战术：复用原版选敌、寻路和攻击，不在开关里写死具体动作。 -->
+  <ThinkTreeDef>
+    <defName>BDP_TrionUnitAutoCombat</defName>
+    <thinkRoot Class="ThinkNode_Priority">
+      <subNodes>
+        <!-- 薄节点只提供抢占优先级；具体选敌与战斗作业仍由原版父类生成。 -->
+        <li Class="BDP.Content.Trion.Units.JobGiver_TrionUnitAutoCombat">
+          <chaseTarget>true</chaseTarget>
+          <targetAcquireRadius>9999</targetAcquireRadius><targetKeepRadius>9999</targetKeepRadius>
+        </li>
+      </subNodes>
+    </thinkRoot>
+  </ThinkTreeDef>
+  <!-- 暂无额外持续任务；不继承原版机械体点名能力与机控者业务。 -->
+  <ThinkTreeDef><defName>BDP_TrionUnitConstant</defName><thinkRoot Class="ThinkNode_Priority" /></ThinkTreeDef>
+</Defs>

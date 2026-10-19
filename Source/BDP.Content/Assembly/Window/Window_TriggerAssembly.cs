@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using BDP.Core.Information;
+using BDP.Core.Expressions;
 using BDP.Core.Trigger;
 using UnityEngine;
 using Verse;
@@ -12,6 +14,15 @@ namespace BDP.Content.Assembly
     /// </summary>
     public class Window_TriggerAssembly : Window
     {
+        /// <summary>装配台窗口目标宽度；实际尺寸不会超过当前屏幕。</summary>
+        private const float TargetWidth = 1360f;
+
+        /// <summary>装配台窗口目标高度；实际尺寸不会超过当前屏幕。</summary>
+        private const float TargetHeight = 720f;
+
+        /// <summary>屏幕边缘与窗口之间保留的安全空隙。</summary>
+        private const float ScreenMargin = 80f;
+
         /// <summary>
         /// 打开窗口的小人。
         /// </summary>
@@ -52,6 +63,15 @@ namespace BDP.Content.Assembly
         /// </summary>
         private Thing selectedChip;
 
+        /// <summary>当前选中芯片对应的统一详情比较模型缓存。</summary>
+        private ChipInformationComparisonModel selectedChipInformationComparison;
+
+        /// <summary>详情模型缓存对应的芯片对象。</summary>
+        private Thing selectedChipInformationSource;
+
+        /// <summary>是否已经尝试构建当前详情模型。</summary>
+        private bool selectedChipInformationResolved;
+
         /// <summary>
         /// 当前是否选中了槽位。
         /// </summary>
@@ -87,6 +107,12 @@ namespace BDP.Content.Assembly
         /// </summary>
         private Rect inventoryPanelRect;
 
+        /// <summary>装配台操作者的缓存正面肖像。</summary>
+        private AssemblyPawnPortraitSnapshot operatorPortrait;
+
+        /// <summary>是否已经完成本窗口生命周期内的肖像捕获尝试。</summary>
+        private bool operatorPortraitCaptureAttempted;
+
         /// <summary>
         /// 构造触发器装配窗口。
         /// </summary>
@@ -98,16 +124,19 @@ namespace BDP.Content.Assembly
             closeOnClickedOutside = false;
             absorbInputAroundWindow = true;
             doCloseX = true;
+            draggable = true;
         }
 
         /// <summary>
-        /// 固定窗口尺寸；后续三栏 UI 以这个尺寸为基准分配布局。
+        /// 按当前 UI 屏幕限制窗口尺寸，由原版窗口栈负责居中。
         /// </summary>
         public override Vector2 InitialSize
         {
             get
             {
-                return new Vector2(1180f, 720f);
+                return new Vector2(
+                    Mathf.Min(TargetWidth, Mathf.Max(1f, Verse.UI.screenWidth - ScreenMargin)),
+                    Mathf.Min(TargetHeight, Mathf.Max(1f, Verse.UI.screenHeight - ScreenMargin)));
             }
         }
 
@@ -123,6 +152,8 @@ namespace BDP.Content.Assembly
                 : "BDP_Message_TriggerAssembly_NoUse".Translate().ToString();
             if (!rejectReason.NullOrEmpty())
             {
+                // 所有拖拽事务均在本次准入通过后同步提交；停运时取消尚未提交的拖拽。
+                dragState.Clear();
                 Widgets.Label(inRect, rejectReason);
                 return;
             }
@@ -140,8 +171,9 @@ namespace BDP.Content.Assembly
             }
 
             const float gap = 10f;
-            const float assemblyWidth = 390f;
-            const float inventoryWidth = 420f;
+            const float assemblyWidth = 500f;
+            // 芯片列表只承担检索和拖拽；把固定空间让给右栏图表，避免详情区被压扁。
+            const float inventoryWidth = 300f;
             float detailWidth = inRect.width - assemblyWidth - inventoryWidth - gap * 2f;
 
             Rect assemblyRect = new Rect(inRect.x, inRect.y, assemblyWidth, inRect.height);
@@ -163,22 +195,42 @@ namespace BDP.Content.Assembly
         /// </summary>
         private void DrawAssemblyPanel(Rect rect)
         {
+            if (!operatorPortraitCaptureAttempted)
+            {
+                operatorPortrait = AssemblyPawnPortraitCapture.Capture(pawn);
+                operatorPortraitCaptureAttempted = true;
+            }
+
             TriggerAssemblyPreviewSnapshot preview = previewService.BuildSnapshot(
                 pawn,
-                loadoutReader,
-                hasSelectedSlot,
-                selectedSide,
-                selectedIndex,
-                selectedChip);
+                loadoutReader);
 
             slotLayoutPanel.DrawSlotLayout(
                 rect,
+                pawn,
+                operatorPortrait,
                 loadoutReader,
                 preview,
                 dragState,
                 hasSelectedSlot,
                 selectedSide,
                 selectedIndex);
+        }
+
+        /// <summary>
+        /// 关闭窗口并释放运行时 Pawn 肖像纹理。
+        /// </summary>
+        public override void PostClose()
+        {
+            if (operatorPortrait != null)
+            {
+                operatorPortrait.DestroyResources();
+                operatorPortrait = null;
+            }
+
+            operatorPortraitCaptureAttempted = false;
+
+            base.PostClose();
         }
 
         /// <summary>
@@ -189,13 +241,17 @@ namespace BDP.Content.Assembly
             IReadOnlyList<Thing> chips = facilityProvider != null
                 ? facilityProvider.GetAvailableChips()
                 : new List<Thing>();
+            int capacityLimit = facilityProvider != null
+                ? facilityProvider.GetStorageCapacityLimit()
+                : 0;
 
             chipInventoryPanel.DrawChipInventory(
                 rect,
                 chips,
                 selectedChip,
                 hasSelectedSlot,
-                selectedSide);
+                selectedSide,
+                capacityLimit);
         }
 
         /// <summary>
@@ -203,20 +259,11 @@ namespace BDP.Content.Assembly
         /// </summary>
         private void DrawDetailPanel(Rect rect)
         {
-            ITriggerSlotState selectedSlot = hasSelectedSlot
-                ? FindSlot(selectedSide, selectedIndex)
-                : null;
-
-            int availableChipCount = facilityProvider != null
-                ? facilityProvider.GetAvailableChips().Count
-                : 0;
-
+            ChipInformationComparisonModel comparison = GetSelectedChipInformation();
             chipDetailPanel.DrawChipDetail(
                 rect,
                 selectedChip,
-                selectedSlot,
-                loadoutReader,
-                availableChipCount);
+                comparison);
         }
 
         /// <summary>
@@ -247,7 +294,8 @@ namespace BDP.Content.Assembly
             if (slotHit != null)
             {
                 SelectSlot(slotHit.Slot.Side, slotHit.Slot.Index);
-                if (slotHit.Slot.LoadedChip != null && !slotHit.Slot.IsBindingMirror)
+
+                if (slotHit.Slot.LoadedChip != null)
                 {
                     dragState.BeginSlotChip(slotHit.Slot.LoadedChip, slotHit.Slot.Side, slotHit.Slot.Index, current.mousePosition);
                 }
@@ -259,8 +307,20 @@ namespace BDP.Content.Assembly
             TriggerAssemblyInventoryHit inventoryHit = chipInventoryPanel.HitAt(current.mousePosition);
             if (inventoryHit != null)
             {
-                selectedChip = inventoryHit.Chip;
+                if (selectedChip != inventoryHit.Chip)
+                {
+                    selectedChip = inventoryHit.Chip;
+                    InvalidateSelectedChipInformation();
+                }
+
                 dragState.BeginInventoryChip(inventoryHit.Chip, current.mousePosition);
+                current.Use();
+                return;
+            }
+
+            if (slotLayoutPanel.IsBlankAreaAt(current.mousePosition))
+            {
+                ClearSlotSelection();
                 current.Use();
             }
         }
@@ -306,6 +366,11 @@ namespace BDP.Content.Assembly
             }
 
             ShowOperationResult(result);
+            if (result != null && result.Success)
+            {
+                InvalidateSelectedChipInformation();
+            }
+
             dragState.Clear();
             current.Use();
         }
@@ -352,10 +417,85 @@ namespace BDP.Content.Assembly
             selectedIndex = index;
 
             ITriggerSlotState slot = FindSlot(side, index);
-            if (slot != null && slot.LoadedChip != null)
+            if (slot?.LoadedChip != null)
             {
                 selectedChip = slot.LoadedChip;
+                InvalidateSelectedChipInformation();
             }
+        }
+
+        /// <summary>
+        /// 清除槽位板块的整组选中状态；空白区点击同时清除中栏卡片和右栏详情。
+        /// </summary>
+        private void ClearSlotSelection()
+        {
+            hasSelectedSlot = false;
+            selectedChip = null;
+            InvalidateSelectedChipInformation();
+        }
+
+        /// <summary>按真实芯片对象缓存统一详情模型，避免每帧重复解析。</summary>
+        private ChipInformationComparisonModel GetSelectedChipInformation()
+        {
+            if (selectedChip == null)
+            {
+                InvalidateSelectedChipInformation();
+                return null;
+            }
+
+            if (!selectedChipInformationResolved
+                || selectedChipInformationSource != selectedChip)
+            {
+                selectedChipInformationSource = selectedChip;
+                selectedChipInformationResolved = true;
+                ChipInformationRuntimeState runtime = BuildSelectedChipRuntimeState(selectedChip);
+                ExpressionPublishedProjectionSnapshot publishedProjection = pawn == null
+                    ? null
+                    : ExpressionSurfaceAccess.ResolvePublishedProjection(pawn);
+                ChipAssemblyDetailModelBuilder.TryBuild(
+                    selectedChip,
+                    out selectedChipInformationComparison,
+                    runtime,
+                    publishedProjection);
+            }
+
+            return selectedChipInformationComparison;
+        }
+
+        /// <summary>从 Trigger 正式读取口附加当前芯片的形态、姿态和激活状态。</summary>
+        private ChipInformationRuntimeState BuildSelectedChipRuntimeState(Thing chip)
+        {
+            if (chip == null || loadoutReader == null)
+            {
+                return ChipInformationRuntimeInputAdapter.CreateStatic();
+            }
+
+            bool isActive = false;
+            IEnumerable<ITriggerSlotState> activeSlots = loadoutReader.GetActiveSlots();
+            if (activeSlots != null)
+            {
+                foreach (ITriggerSlotState slot in activeSlots)
+                {
+                    if (slot != null && ReferenceEquals(slot.LoadedChip, chip))
+                    {
+                        isActive = true;
+                        break;
+                    }
+                }
+            }
+
+            return ChipInformationRuntimeInputAdapter.Create(
+                isActive,
+                loadoutReader.GetChipModeKey(chip),
+                loadoutReader.GetChipStanceKey(chip));
+        }
+
+        /// <summary>清除详情缓存；装配事务成功后必须重新读取真实模型。</summary>
+        private void InvalidateSelectedChipInformation()
+        {
+            selectedChipInformationComparison = null;
+            selectedChipInformationSource = null;
+            selectedChipInformationResolved = false;
         }
 
         /// <summary>

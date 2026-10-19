@@ -1,4 +1,5 @@
 using HarmonyLib;
+using BDP.Core.AttackExecution;
 using RimWorld;
 using Verse;
 
@@ -12,6 +13,30 @@ namespace BDP.Core.Abilities
     /// </summary>
     public class BdpVerb_CastAbility : Verb_CastAbility, IBdpExpressionAbilityVerb
     {
+        /// <summary>能力可用性原生查询中性限制，具体分类由业务规则决定。</summary>
+        public override bool Available()
+        {
+            return AttackAdmissionAccess.Evaluate(CasterPawn, this).Accepted && base.Available();
+        }
+
+        /// <summary>预热和效果执行前检查准入。</summary>
+        public override bool TryStartCastOn(LocalTargetInfo castTarg, LocalTargetInfo destTarg,
+            bool surpriseAttack = false, bool canHitNonTargetPawns = true,
+            bool preventFriendlyFire = false, bool nonInterruptingSelfCast = false)
+        {
+            if (!AttackAdmissionAccess.Evaluate(CasterPawn, this).Accepted) return false;
+            return TryStartAdmittedCast(castTarg, destTarg, surpriseAttack, canHitNonTargetPawns,
+                preventFriendlyFire, nonInterruptingSelfCast);
+        }
+
+        /// <summary>已经在自有准备前通过准入的派生能力继续原版起手，避免再次查询同一规则。</summary>
+        protected bool TryStartAdmittedCast(LocalTargetInfo castTarg, LocalTargetInfo destTarg,
+            bool surpriseAttack, bool canHitNonTargetPawns, bool preventFriendlyFire, bool nonInterruptingSelfCast)
+        {
+            return base.TryStartCastOn(castTarg, destTarg, surpriseAttack, canHitNonTargetPawns,
+                preventFriendlyFire, nonInterruptingSelfCast);
+        }
+
         /// <summary>
         /// 先正式提交施法成本，成功后触发施放动效，再继续原版 Ability 激活流程。
         /// </summary>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 上帝模式与开发按钮中的运行覆盖。 -->
+  <BDP_Dev_GateInducer_ForceOperation>调试：强制运作</BDP_Dev_GateInducer_ForceOperation>
+  <!-- 覆盖电力、故障与核心许可，不覆盖玩家手动停运及诱导模式。 -->
+  <BDP_Dev_GateInducer_ForceOperationDescription>绕过供电、故障和Trion中继核心许可，使本装置强制运作。仍遵守建筑开关、诱导模式和合法门位限制；诱导成功率照常判定。此覆盖随存档保存。</BDP_Dev_GateInducer_ForceOperationDescription>
+</LanguageData>

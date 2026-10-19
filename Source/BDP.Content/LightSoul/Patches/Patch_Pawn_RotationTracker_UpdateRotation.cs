@@ -14,7 +14,7 @@ namespace BDP.Content.LightSoul.Patches
         /// </summary>
         public static void Postfix(Pawn ___pawn, Pawn_RotationTracker __instance)
         {
-            Verb_LightSoulGuardWatch verb = LightSoulGuardWatchUtility.ResolveVerb(___pawn);
+            Verb_LightSoulDefenseWatch verb = LightSoulDefenseWatchUtility.ResolveVerb(___pawn);
             if (verb == null
                 || __instance == null
                 || !verb.TryGetAutomaticWatchTarget(out LocalTargetInfo target))

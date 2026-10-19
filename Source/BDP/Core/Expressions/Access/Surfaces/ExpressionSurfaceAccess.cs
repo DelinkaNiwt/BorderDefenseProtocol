@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using BDP.Core.Expressions.Runtime;
+using BDP.Core.Information;
 using BDP.Core.Trigger;
 using BDP.Core.Trigger.Runtime;
 using BDP.Core.VerbHosting;
@@ -13,15 +15,58 @@ namespace BDP.Core.Expressions
     /// </summary>
     public static class ExpressionSurfaceAccess
     {
+        /// <summary>业务来源条件发生离散变化时，复用唯一发布者重新求值，不携带业务判断。</summary>
+        public static void NotifySourceConditionsChanged(Pawn pawn)
+        {
+            TriggerSurfaceAccess.ResolveComp(pawn)?.NotifySourceConditionsChanged();
+        }
+
         /// <summary>
         /// 读取当前 Pawn 已发布的公开表达投影快照。
         /// 这条口只读当前正式发布状态，不触发表达重建。
         /// </summary>
         public static ExpressionPublishedProjectionSnapshot ResolvePublishedProjection(Pawn pawn)
         {
-            return TryGetPublishedCombatProjection(pawn, out TriggerCombatProjectionState projection)
-                ? ExpressionPublishedSnapshotBuilder.Build(projection)
-                : ExpressionPublishedProjectionSnapshot.Empty();
+            CompTriggerBody triggerBody = TriggerSurfaceAccess.ResolveComp(pawn);
+            TriggerCombatProjectionState projection = triggerBody != null
+                ? triggerBody.PublishedCombatProjection
+                : null;
+            if (projection == null || projection.IsEmpty)
+            {
+                return ExpressionPublishedProjectionSnapshot.Empty();
+            }
+
+            TriggerPresentationState presentation = triggerBody.PublishedPresentationProjection;
+            IReadOnlyDictionary<string, ChipFeatureResolutionResult> comboFeatureInformations =
+                presentation != null
+                    && presentation.ProjectionVersion == projection.ProjectionVersion
+                    ? presentation.ComboFeatureInformations
+                    : null;
+            return ExpressionPublishedSnapshotBuilder.Build(
+                projection,
+                comboFeatureInformations);
+        }
+
+        /// <summary>
+        /// 读取当前 Pawn 已发布的统一芯片信息模型。
+        /// </summary>
+        public static ChipInformationModel ResolveChipInformation(Pawn pawn)
+        {
+            ExpressionService service = ResolveService(pawn);
+            return service != null
+                ? service.GetChipInformation(pawn)
+                : new ChipInformationModel(
+                    new ChipInformationNode(null, "chip", null, null, 0, null, null),
+                    null);
+        }
+
+        /// <summary>读取当前 Pawn 已发布的全部激活芯片信息模型。</summary>
+        public static IReadOnlyList<ChipInformationModel> ResolveChipInformations(Pawn pawn)
+        {
+            ExpressionService service = ResolveService(pawn);
+            return service != null
+                ? service.GetChipInformations(pawn)
+                : new List<ChipInformationModel>();
         }
 
         /// <summary>
@@ -178,6 +223,15 @@ namespace BDP.Core.Expressions
         }
 
         /// <summary>
+        /// 在实际表达宿主 Hediff 发生离散变化后，立即复用当前已发布快照完成宿主与持续消耗对账。
+        /// </summary>
+        internal static void SynchronizePublishedExpressionHostsImmediately(Pawn pawn)
+        {
+            CompTriggerBody triggerBody = TriggerSurfaceAccess.ResolveComp(pawn);
+            triggerBody?.RuntimeCoordinator?.SynchronizePublishedExpressionHostsImmediately();
+        }
+
+        /// <summary>
         /// 读取表达系统共享运行时仓库。
         /// </summary>
         internal static ExpressionRuntimeRepository ResolveRuntimeRepository(Pawn pawn)
@@ -186,16 +240,5 @@ namespace BDP.Core.Expressions
             return triggerBody != null ? triggerBody.RuntimeServices?.ExpressionRuntimeRepository : null;
         }
 
-        /// <summary>
-        /// 读取指定 Pawn 当前已发布的战斗投影。
-        /// 公开读取面只消费已发布状态，不在这里顺手推进 Trigger runtime。
-        /// </summary>
-        private static bool TryGetPublishedCombatProjection(Pawn pawn, out TriggerCombatProjectionState projection)
-        {
-            projection = null;
-            CompTriggerBody triggerBody = TriggerSurfaceAccess.ResolveComp(pawn);
-            projection = triggerBody != null ? triggerBody.PublishedCombatProjection : null;
-            return projection != null && !projection.IsEmpty;
-        }
     }
 }

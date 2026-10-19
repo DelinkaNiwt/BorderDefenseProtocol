@@ -1,0 +1,102 @@
+{
+  "SourceCommit": "2ebdac6a7",
+  "RecordedAt": "2026-10-18 11:01:07",
+  "TimeZone": "Asia/Shanghai",
+  "Note": "仅归档各版本程序集；SourceCommit记录程序集来源。原来源提交的公共XML存在飞锥、毒蛇、猎犬弹速误改为25，且卵之冠后续修订为速度20、两击崩解；公共资源必须包含对应验收记录修正。资源修订无需替换本归档程序集。Core、Content、Development已分别构建；Compatibility未改动、未重建。未游戏实测，未部署。",
+  "Artifacts": [
+    {
+      "Version": "1.6",
+      "Archive": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\输出\\版本候选\\20261018-远程武装-2ebdac6a7\\1.6.zip",
+      "SHA256": "B31F2AC957F46AD2912D4847137E97C72073548C217B013B14817BC3172DF838",
+      "Files": [
+        {
+          "Path": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\BorderDefenseProtocol\\1.6\\Assemblies\\BDP.Compatibility.dll",
+          "SHA256": "CAED7BE26CF1165A6940CEC526FFDB640B982BC8BEE125833B0EBA76D18DDA20",
+          "Rebuilt": false
+        },
+        {
+          "Path": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\BorderDefenseProtocol\\1.6\\Assemblies\\BDP.Compatibility.pdb",
+          "SHA256": "5C47EF6BF179D533E5ADDE2B7520CD83FA0645E1B558C6FC075A302D339CB4D4",
+          "Rebuilt": false
+        },
+        {
+          "Path": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\BorderDefenseProtocol\\1.6\\Assemblies\\BDP.Content.dll",
+          "SHA256": "F050CD826191E90B4CF7421D09E1F6AE5A7056A3201EAF6FD68C4AD0A84380F4",
+          "Rebuilt": true
+        },
+        {
+          "Path": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\BorderDefenseProtocol\\1.6\\Assemblies\\BDP.Content.pdb",
+          "SHA256": "1C3BD67C34B70E2A221B242D5FD867FE1F2081894462CDBE03150A39C82F3157",
+          "Rebuilt": true
+        },
+        {
+          "Path": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\BorderDefenseProtocol\\1.6\\Assemblies\\BDP.Core.dll",
+          "SHA256": "0AAC3C79C6B6526D9A997F3A7D8B81064F60AAF33C6E61107E10FE8963CCFBE3",
+          "Rebuilt": true
+        },
+        {
+          "Path": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\BorderDefenseProtocol\\1.6\\Assemblies\\BDP.Core.pdb",
+          "SHA256": "E2E818A5B52FFAA3594276C912DF4F7E5D66318F6FEEF99897EBD047463E7EDD",
+          "Rebuilt": true
+        },
+        {
+          "Path": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\BorderDefenseProtocol\\1.6\\Development\\Assemblies\\BDP.Development.dll",
+          "SHA256": "5715A382F332BA021F061E3063B74206EE5436AA79FC49BCF6B587F96360BC0E",
+          "Rebuilt": true
+        },
+        {
+          "Path": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\BorderDefenseProtocol\\1.6\\Development\\Assemblies\\BDP.Development.pdb",
+          "SHA256": "64056A3A917ADD358DA4B388A250DE1A96369AEAA078D2116706701CD11DBA58",
+          "Rebuilt": true
+        }
+      ]
+    },
+    {
+      "Version": "1.7",
+      "Archive": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\输出\\版本候选\\20261018-远程武装-2ebdac6a7\\1.7.zip",
+      "SHA256": "055AA95DEA5B3AA2DAA548F842DB7710DD76457CC15E0AFEC636AFD39DF8BD99",
+      "Files": [
+        {
+          "Path": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\BorderDefenseProtocol\\1.7\\Assemblies\\BDP.Compatibility.dll",
+          "SHA256": "DCCB228C4B867954AE0BD53559386CE0DBC361430C0D274DBA3D36541A03A26E",
+          "Rebuilt": false
+        },
+        {
+          "Path": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\BorderDefenseProtocol\\1.7\\Assemblies\\BDP.Compatibility.pdb",
+          "SHA256": "BD71EF25E0A8F0ED4C94FE91B4A2AE255C8CF75A1ED94736BD0EAC86B960CBB2",
+          "Rebuilt": false
+        },
+        {
+          "Path": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\BorderDefenseProtocol\\1.7\\Assemblies\\BDP.Content.dll",
+          "SHA256": "2073D534223CBF56DFA4EA6BA15B6C6F348B63CB096B74917E74C32E95905381",
+          "Rebuilt": true
+        },
+        {
+          "Path": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\BorderDefenseProtocol\\1.7\\Assemblies\\BDP.Content.pdb",
+          "SHA256": "D4300877187840D3ECA403A9348817343A5A84820FBA699C0FD0F5CBEEA28F2E",
+          "Rebuilt": true
+        },
+        {
+          "Path": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\BorderDefenseProtocol\\1.7\\Assemblies\\BDP.Core.dll",
+          "SHA256": "1CF6F104E9149BAA67C9CDB0CCF6F944D645D1C63F084F30854ACD9922C79195",
+          "Rebuilt": true
+        },
+        {
+          "Path": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\BorderDefenseProtocol\\1.7\\Assemblies\\BDP.Core.pdb",
+          "SHA256": "56DB857DFDDA728FAFBD6E8F399C3D5371CCF7491946ED46312A8987C5D15EE9",
+          "Rebuilt": true
+        },
+        {
+          "Path": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\BorderDefenseProtocol\\1.7\\Development\\Assemblies\\BDP.Development.dll",
+          "SHA256": "48BDDC76F3AA32EC5C25F6DD5CC007CD6269811269507F8C8F03851D0FE6F966",
+          "Rebuilt": true
+        },
+        {
+          "Path": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\BorderDefenseProtocol\\1.7\\Development\\Assemblies\\BDP.Development.pdb",
+          "SHA256": "D452CC071C3A44FE12B30C50B723FC2D73C3041AA082FE8C6DB24911B6F0F651",
+          "Rebuilt": true
+        }
+      ]
+    }
+  ]
+}

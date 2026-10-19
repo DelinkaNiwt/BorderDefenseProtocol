@@ -46,6 +46,11 @@ namespace BDP.Core.Expressions
         public string CompositeVisualPresetDefName;
 
         /// <summary>
+        /// 当前条目作为组合技攻击入口时使用的阶段视觉预设 DefName。
+        /// </summary>
+        public string ComboAttackVisualPresetDefName;
+
+        /// <summary>
         /// 当前条目是否强制压制宿主原装备贴图。
         /// </summary>
         public bool ForceSuppressHostEquipment = false;
@@ -58,7 +63,7 @@ namespace BDP.Core.Expressions
         /// <summary>
         /// 当前条目的正式种类。
         /// </summary>
-        public ChipExpressionEntryKind Kind = ChipExpressionEntryKind.PrimaryVerb;
+        public ChipExpressionEntryType EntryType = ChipExpressionEntryType.PrimaryVerb;
 
         /// <summary>
         /// 当前 Verb 条目的正规化主副身份。
@@ -75,6 +80,9 @@ namespace BDP.Core.Expressions
         /// 当前条目的轻量标签集合。
         /// </summary>
         public List<string> Tags;
+
+        /// <summary>当前条目显式声明接入的许可键快照。</summary>
+        public IReadOnlyList<string> DeclaredPermissionKeys;
 
         /// <summary>
         /// 当前条目的成立条件集合。
@@ -166,9 +174,14 @@ namespace BDP.Core.Expressions
         public string HediffApplyModeKey;
 
         /// <summary>
+        /// 当前条目的 Hediff 生命周期控制模式。
+        /// </summary>
+        public string HediffControlMode;
+
+        /// <summary>
         /// 当前条目声明的被动键。
         /// </summary>
-        public string PassiveKey;
+        public string PassiveIdentityKey;
 
         /// <summary>
         /// 当前条目暴露的轻量附加数据。
@@ -185,6 +198,11 @@ namespace BDP.Core.Expressions
         /// 顺序语义已冻结为作者书写顺序。
         /// </summary>
         public IReadOnlyList<RangedModuleMountConfig> RangedModules;
+
+        /// <summary>
+        /// 当前条目可选的近战命中部位策略快照。
+        /// </summary>
+        public HitPartPolicyConfig HitPartPolicy;
 
         /// <summary>
         /// 当前条目发布给其它远程表达结果的开放式增强声明快照。

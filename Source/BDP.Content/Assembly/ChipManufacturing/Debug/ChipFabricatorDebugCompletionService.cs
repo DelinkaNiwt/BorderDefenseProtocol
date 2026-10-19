@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using BDP.Content.Assembly.ChipManufacturing.Bill;
 using BDP.Content.Assembly.ChipManufacturing.Model;
+using BDP.Content.Assembly.ChipManufacturing.Production;
 using BDP.Content.Assembly.ChipManufacturing.Resolution;
-using BDP.Content.Assembly.ChipManufacturing.Thing;
 using RimWorld;
 using Verse;
 using Verse.AI;
@@ -99,15 +99,17 @@ namespace BDP.Content.Assembly.ChipManufacturing.Debug
                 return false;
             }
 
-            VerseThing product = ThingMaker.MakeThing(productDef);
-            CompManufacturedChip comp = product.TryGetComp<CompManufacturedChip>();
-            if (comp == null)
+            VerseThing product;
+            string failureReason;
+            if (!ChipProductCreationService.TryCreateProduct(
+                productDef,
+                record,
+                out product,
+                out failureReason))
             {
-                product.Destroy(DestroyMode.Vanish);
                 return false;
             }
 
-            comp.InitializeFromBill(record);
             if (GenPlace.TryPlaceThing(
                 product,
                 building.InteractionCell,

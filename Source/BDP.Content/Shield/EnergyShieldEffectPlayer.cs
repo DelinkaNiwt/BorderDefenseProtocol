@@ -11,6 +11,15 @@ namespace BDP.Content.Shield
     /// </summary>
     internal static class EnergyShieldEffectPlayer
     {
+        /// <summary>在地图上的护盾持有者处播放原版破盾音效，不追加原版破盾的粒子表现。</summary>
+        internal static void PlayBreakSound(Pawn pawn)
+        {
+            if (pawn == null || !pawn.Spawned) return;
+            // 原版 Shield_Break（护盾破碎）特效中的声音，直接复用以保留本模组既有视觉。
+            DefDatabase<SoundDef>.GetNamed("EnergyShield_Broken")
+                .PlayOneShot(new TargetInfo(pawn.Position, pawn.Map));
+        }
+
         /// <summary>
         /// 播放一次护盾抵挡表现。
         /// </summary>

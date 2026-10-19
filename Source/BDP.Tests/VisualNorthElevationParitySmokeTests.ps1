@@ -64,7 +64,7 @@ function Get-PresetName {
 # 定位主模组正式视觉配置。
 $sourceRoot = Split-Path -Parent $PSScriptRoot
 $repoRoot = Split-Path -Parent $sourceRoot
-$visualPath = Join-Path $repoRoot '1.6\Content\Defs\ExpressionDef\Visual.xml'
+$visualPath = Join-Path $repoRoot 'Common\Content\Defs\ExpressionDef\Visual.xml'
 
 Assert-True (Test-Path -LiteralPath $visualPath) '主模组正式视觉配置必须存在。'
 [xml]$visualXml = Get-Content -Raw -Encoding utf8 -LiteralPath $visualPath
@@ -75,11 +75,10 @@ $explicitPosePresets = @($visualXml.SelectNodes(
 $expectedExplicitPresetNames = @(
     'BDP_Visual_Kogetsu',
     'BDP_Visual_LightSoulHeavyBlade',
-    'BDP_Visual_LightSoulShieldGuard',
-    'BDP_Visual_LightSoulShieldGuard_Dual',
-    'BDP_Visual_LightSoulShieldMobile',
-    'BDP_Visual_LightSoulShieldMobile_Dual',
-    'BDP_VisualBase_RangedMedium_Dual'
+    'BDP_Visual_LightSoulDefenseShield',
+    'BDP_Visual_LightSoulDefenseShield_Dual',
+    'BDP_VisualBase_RangedMedium_Dual',
+    'BDP_VisualBase_RangedSmall_Dual'
 )
 $actualExplicitPresetNames = @($explicitPosePresets | ForEach-Object { Get-PresetName $_ } | Sort-Object)
 
@@ -93,8 +92,8 @@ $vanillaNorthZ = [single]-0.11
 $vanillaNorthElevation = [single]0.11
 $tolerance = [single]0.0001
 $northExtraByPreset = @{
-    'BDP_Visual_LightSoulShieldGuard' = [single]0.05
-    'BDP_Visual_LightSoulShieldGuard_Dual' = [single]0.05
+    'BDP_Visual_LightSoulDefenseShield' = [single]0.05
+    'BDP_Visual_LightSoulDefenseShield_Dual' = [single]0.05
 }
 
 foreach ($preset in $explicitPosePresets) {
@@ -128,7 +127,6 @@ foreach ($preset in $explicitPosePresets) {
 $textureOnlyPresetNames = @(
     'BDP_Visual_Pistol',
     'BDP_Visual_AssaultRifle',
-    'BDP_Visual_RangedWeaponReference',
     'BDP_Visual_Shotgun',
     'BDP_Visual_SniperRifle'
 )

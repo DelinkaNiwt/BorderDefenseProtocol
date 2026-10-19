@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    BDP 主模组投射物定义。
+    每种投射物可通过 BeamTrailExtension 引用不同的拖尾预设。
+  -->
+
+  <!-- 普通弹：基础弹丸，小行星芯片默认投射物。 -->
+
+  <!-- 标准狙击弹：朱鹮芯片专用投射物，高伤高速。 -->
+  <ThingDef ParentName="BaseBullet">
+    <defName>BDP_Projectile_SniperStandard</defName>
+    <label>标准狙击弹</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <thingClass>BDP.Core.Projectiles.BdpProjectile</thingClass>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>40</damageAmountBase>
+      <armorPenetrationBase>0.35</armorPenetrationBase>
+      <stoppingPower>2</stoppingPower>
+      <speed>150</speed>
+    </projectile>
+    <modExtensions>
+      <li Class="BDP.Content.Projectiles.BeamTrail.BeamTrailExtension">
+        <preset>BDP_TrailPreset_BrightMintShort</preset>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>BDP_Projectile_Normal</defName>
+    <label>普通弹</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <thingClass>BDP.Core.Projectiles.BdpProjectile</thingClass>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <!-- 小行星单发伤害按本次平衡降为 13。 -->
+      <damageAmountBase>13</damageAmountBase>
+      <armorPenetrationBase>0.10</armorPenetrationBase>
+      <stoppingPower>2</stoppingPower>
+      <speed>120</speed>
+    </projectile>
+    <modExtensions>
+      <li Class="BDP.Content.Projectiles.BeamTrail.BeamTrailExtension">
+        <preset>BDP_TrailPreset_BrightMintShort</preset>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- 炸裂弹：美特拉专用投射物；范围爆炸由投射物自身的爆炸字段触发。 -->
+  <ThingDef ParentName="BaseBullet">
+    <!-- 炸裂弹的内部 Def 标识名，不使用美特拉的动作标识。 -->
+    <defName>BDP_Projectile_Explosive</defName>
+    <!-- 英文回退名称；简体中文名称由 DefInjected 语言包提供。 -->
+    <label>explosive projectile</label>
+    <!-- 沿用 BDP 基础子弹的弹体贴图。 -->
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <!-- 保留 BDP 投射物生命周期与远程动作协议。 -->
+    <thingClass>BDP.Core.Projectiles.BdpProjectile</thingClass>
+    <projectile>
+      <!-- 爆炸伤害类型沿用范围爆炸模块的 Bomb。 -->
+      <damageDef>Bomb</damageDef>
+      <!-- 美特拉炸裂伤害为6。 -->
+      <damageAmountBase>6</damageAmountBase>
+      <!-- 美特拉护甲穿透为0。 -->
+      <armorPenetrationBase>0</armorPenetrationBase>
+      <!-- 停止力保持2，飞行速度调整为80。 -->
+      <stoppingPower>2</stoppingPower>
+      <speed>80</speed>
+      <!-- 美特拉爆炸半径为1.9格。 -->
+      <explosionRadius>1.9</explosionRadius>
+    </projectile>
+    <!-- 保持当前 BDP 子弹的短亮薄荷色拖尾。 -->
+    <modExtensions>
+      <li Class="BDP.Content.Projectiles.BeamTrail.BeamTrailExtension">
+        <preset>BDP_TrailPreset_BrightMintShort</preset>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- 变化炸裂弹：战斧组合技投射物；融合毒蛇变化弹与美特拉炸裂能力。 -->
+  <ThingDef ParentName="BDP_Projectile_Variable_Base">
+    <!-- 弹道、停止力、弹速与拖尾继承毒蛇；三项爆炸数据由启动解析器读取美特拉。 -->
+    <defName>BDP_Projectile_Variable_Explosive</defName>
+    <label>变化炸裂弹</label>
+    <projectile>
+      <!-- 保留范围爆炸伤害类型。 -->
+      <damageDef>Bomb</damageDef>
+    </projectile>
+  </ThingDef>
+
+  <!-- 穿甲弹：高伤高速高穿甲，飞锥组合技投射物。 -->
+  <ThingDef ParentName="BaseBullet">
+    <defName>BDP_Projectile_ArmorPiercing</defName>
+    <label>穿甲弹</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <thingClass>BDP.Core.Projectiles.BdpProjectile</thingClass>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <!-- 飞锥单发伤害按本次平衡降为 26；Trion 立方体仍保留四发。 -->
+      <damageAmountBase>26</damageAmountBase>
+      <armorPenetrationBase>0.35</armorPenetrationBase>
+      <stoppingPower>3</stoppingPower>
+      <speed>180</speed>
+    </projectile>
+    <modExtensions>
+      <li Class="BDP.Content.Projectiles.BeamTrail.BeamTrailExtension">
+        <preset>BDP_TrailPreset_BrightMintShort</preset>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- 变化弹：中速低伤，毒蛇芯片投射物。 -->
+  <ThingDef ParentName="BaseBullet" Name="BDP_Projectile_Variable_Base">
+    <defName>BDP_Projectile_Variable</defName>
+    <label>变化弹</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <thingClass>BDP.Core.Projectiles.BdpProjectile</thingClass>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <!-- 毒蛇单发伤害按本次平衡降为 8；Trion 立方体仍保留四发。 -->
+      <damageAmountBase>8</damageAmountBase>
+      <armorPenetrationBase>0.05</armorPenetrationBase>
+      <stoppingPower>1</stoppingPower>
+      <speed>120</speed>
+    </projectile>
+    <modExtensions>
+      <li Class="BDP.Content.Projectiles.BeamTrail.BeamTrailExtension">
+        <preset>BDP_TrailPreset_BrightMintLong</preset>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- 追踪弹：低速中伤，猎犬芯片投射物。 -->
+  <ThingDef ParentName="BaseBullet" Name="BDP_Projectile_Tracking_Base">
+    <defName>BDP_Projectile_Tracking</defName>
+    <label>追踪弹</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <thingClass>BDP.Core.Projectiles.BdpProjectile</thingClass>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <!-- 猎犬与黄蜂单发伤害为 8；Trion 立方体仍保留四发。 -->
+      <damageAmountBase>8</damageAmountBase>
+      <armorPenetrationBase>0.05</armorPenetrationBase>
+      <stoppingPower>1.5</stoppingPower>
+      <speed>85</speed>
+    </projectile>
+    <modExtensions>
+      <li Class="BDP.Content.Projectiles.BeamTrail.BeamTrailExtension">
+        <preset>BDP_TrailPreset_BrightMintLong</preset>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- 追踪弹的高角变体：只切换原版越顶飞行规则，其余参数继承追踪弹。 -->
+  <ThingDef ParentName="BDP_Projectile_Tracking_Base">
+    <defName>BDP_Projectile_Tracking_Overhead</defName>
+    <label>overhead tracking projectile</label>
+    <projectile>
+      <flyOverhead>true</flyOverhead>
+    </projectile>
+  </ThingDef>
+
+  <!-- 溃体飞行物：卵之冠芯片专用的低伤害追踪投射物。 -->
+  <ThingDef ParentName="BaseBullet">
+    <!-- 使用行为语义命名，避免把投射物内部标识绑定到单一触发体名称。 -->
+    <defName>BDP_Projectile_BodyCollapse</defName>
+    <!-- 游戏界面显示名称。 -->
+    <label>溃体飞行物</label>
+    <!-- 复用现有小型子弹贴图，不扩大本次美术范围。 -->
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <!-- 复用BDP投射物宿主的飞行、命中和模块交互流程。 -->
+    <thingClass>BDP.Core.Projectiles.BdpProjectile</thingClass>
+    <projectile>
+      <!-- 伤害类型保持原版Bullet；部位崩溃模块会抑制直接命中伤害。 -->
+      <damageDef>Bullet</damageDef>
+      <!-- 投射物基础伤害按需求为1。 -->
+      <damageAmountBase>1</damageAmountBase>
+      <!-- 投射物基础护甲穿透按需求为0。 -->
+      <armorPenetrationBase>0</armorPenetrationBase>
+      <!-- 未指定停止力，沿用低伤害变化弹的中性档位。 -->
+      <stoppingPower>1</stoppingPower>
+      <!-- 卵之冠投射物飞行速度调整为20。 -->
+      <speed>20</speed>
+    </projectile>
+    <modExtensions>
+      <!-- 暂时使用现有亮薄荷绿短拖尾。 -->
+      <li Class="BDP.Content.Projectiles.BeamTrail.BeamTrailExtension">
+        <preset>BDP_TrailPreset_BrightMintShort</preset>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+</Defs>

@@ -12,46 +12,46 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
         public static List<ChipCombinationFailureReason> Validate(
             ChipCategoryDef category,
             ChipProfessionDef profession,
-            IList<ChipActionPresetDef> actions,
+            IList<ChipManufacturingPresetDef> functionDefs,
             ChipArmamentFormDef armamentForm)
         {
             List<ChipCombinationFailureReason> failures =
                 new List<ChipCombinationFailureReason>();
-            int actionCount = actions != null ? actions.Count : 0;
-            if (actionCount < 1
-                || actionCount > ChipCombinationSelectionRules.MaxActionCount(profession, armamentForm))
+            int functionCount = functionDefs != null ? functionDefs.Count : 0;
+            if (functionCount < 1
+                || functionCount > ChipCombinationSelectionRules.MaxFunctionCount(profession, armamentForm))
             {
-                Add(failures, "ActionCount", "BDP_ChipManufacturing_InvalidActionCount");
+                Add(failures, "FunctionCount", "BDP_ChipManufacturing_InvalidFunctionCount");
                 return failures;
             }
 
-            HashSet<string> actionNames = new HashSet<string>();
-            for (int index = 0; index < actionCount; index++)
+            HashSet<string> functionNames = new HashSet<string>();
+            for (int index = 0; index < functionCount; index++)
             {
-                ChipActionPresetDef action = actions[index];
-                if (action == null)
+                ChipManufacturingPresetDef function = functionDefs[index];
+                if (function == null)
                 {
-                    Add(failures, "MissingAction", "BDP_ChipManufacturing_MissingAction");
+                    Add(failures, "MissingFunction", "BDP_ChipManufacturing_MissingFunction");
                     continue;
                 }
 
-                if (!actionNames.Add(action.defName))
+                if (!functionNames.Add(function.defName))
                 {
-                    Add(failures, "DuplicateAction", "BDP_ChipManufacturing_DuplicateAction");
+                    Add(failures, "DuplicateFunction", "BDP_ChipManufacturing_DuplicateFunction");
                 }
 
-                if (action.config?.Profile?.Category != category)
+                if (function.config?.Profile?.Category != category)
                 {
                     Add(failures, "CategoryMismatch", "BDP_ChipManufacturing_CategoryMismatch");
                 }
 
-                if (!ChipCombinationSelectionRules.CanUseAction(profession, action))
+                if (!ChipCombinationSelectionRules.CanUseFunction(profession, function))
                 {
                     Add(failures, "ProfessionMismatch", "BDP_ChipManufacturing_ProfessionMismatch");
                 }
 
-                if (actionCount > 1
-                    && ChipCombinationSelectionRules.HasIntrinsicMultipleModes(action))
+                if (functionCount > 1
+                    && ChipCombinationSelectionRules.HasIntrinsicMultipleModes(function))
                 {
                     Add(
                         failures,
@@ -68,23 +68,23 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
                 Add(failures, "ArmamentFormProfession", "BDP_ChipManufacturing_ArmamentFormProfessionMismatch");
             }
 
-            if (!ChipCombinationSelectionRules.CanUseArmamentForm(armamentForm, actions))
+            if (!ChipCombinationSelectionRules.CanUseArmamentForm(armamentForm, functionDefs))
             {
-                Add(failures, "ArmamentFormAction", "BDP_ChipManufacturing_ArmamentFormActionMismatch");
+                Add(failures, "ArmamentFormFunction", "BDP_ChipManufacturing_ArmamentFormFunctionMismatch");
             }
 
-            if (actionCount == 2)
+            if (functionCount == 2)
             {
-                ValidateDualStructure(actions[0], actions[1], failures);
+                ValidateDualStructure(functionDefs[0], functionDefs[1], failures);
             }
 
             return failures;
         }
 
-        /// <summary>检查双动作必须相同的结构，以及显式可合并字段。</summary>
+        /// <summary>检查双芯片功能模板必须相同的结构，以及显式可合并字段。</summary>
         private static void ValidateDualStructure(
-            ChipActionPresetDef first,
-            ChipActionPresetDef second,
+            ChipManufacturingPresetDef first,
+            ChipManufacturingPresetDef second,
             List<ChipCombinationFailureReason> failures)
         {
             ChipDefinitionConfig firstConfig = first?.config;

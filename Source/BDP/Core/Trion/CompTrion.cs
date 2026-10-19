@@ -63,6 +63,12 @@ namespace BDP.Core.Trion
         private bool frozen;
 
         /// <summary>
+        /// 当前容器的实际值是否已经并入另一个外部 Trion 合并池。
+        /// 该标记只表达通用绑定状态，不承载具体业务类别。
+        /// </summary>
+        private bool boundToExternalPool;
+
+        /// <summary>
         /// 是否已经完成首次初始化，避免反复生成时覆盖状态。
         /// </summary>
         private bool initialized;
@@ -89,9 +95,9 @@ namespace BDP.Core.Trion
 
         /// <summary>
         /// 当前持续消耗注册表。
-        /// key 是业务身份，value 的单位为 Trion/秒。
+        /// key 是业务身份，value 保存声明速率及损耗用途。
         /// </summary>
-        private Dictionary<TrionDrainKey, float> drainRegistry;
+        private Dictionary<TrionDrainKey, TrionDrainRegistration> drainRegistry;
 
         /// <summary>
         /// 下次持续消耗结算时机。
@@ -194,6 +200,29 @@ namespace BDP.Core.Trion
         }
 
         /// <summary>
+        /// 当前实际生效的每日自然恢复量。
+        /// 与 CompTick 和 Trion Gizmo 共用同一套冻结、恢复倍率判断。
+        /// </summary>
+        internal float EffectiveRecoveryPerDay
+        {
+            get
+            {
+                if (frozen)
+                {
+                    return 0f;
+                }
+
+                float multiplier = TrionRecoveryGateRegistry.GetRecoveryMultiplier(parent as Pawn);
+                if (multiplier <= 0f)
+                {
+                    return 0f;
+                }
+
+                return RecoveryPerDay * multiplier;
+            }
+        }
+
+        /// <summary>
         /// 当前所有持续消耗来源合并后的“每秒总消耗量”。
         /// </summary>
         internal float TotalDrainPerSecond
@@ -206,9 +235,13 @@ namespace BDP.Core.Trion
                 }
 
                 float total = 0f;
-                foreach (KeyValuePair<TrionDrainKey, float> pair in drainRegistry)
+                TrionResourceRules rules = TrionResourceRuleRegistry.GetRules(parent);
+                foreach (KeyValuePair<TrionDrainKey, TrionDrainRegistration> pair in drainRegistry)
                 {
-                    total += pair.Value;
+                    if (pair.Value.Kind == TrionDrainKind.WoundLeak || rules.FunctionCostsEnabled)
+                    {
+                        total += pair.Value.PerSecond;
+                    }
                 }
 
                 return Mathf.Max(0f, total);
@@ -221,6 +254,14 @@ namespace BDP.Core.Trion
         internal bool Frozen
         {
             get { return frozen; }
+        }
+
+        /// <summary>
+        /// 当前容器是否已经绑定到外部 Trion 合并池。
+        /// </summary>
+        internal bool BoundToExternalPool
+        {
+            get { return boundToExternalPool; }
         }
 
         /// <summary>
@@ -309,10 +350,11 @@ namespace BDP.Core.Trion
                 drainSettleTick = currentTick + Mathf.Max(1, Props.drainSettleInterval);
             }
 
-            if (!frozen && RecoveryPerDay > 0f && currentTick >= recoveryTick)
+            if (currentTick >= recoveryTick)
             {
-                RecoverByInterval();
+                // 到恢复间隔才读取许可；停运或冻结也推进时间，避免逐刻重查和补发停机期间恢复。
                 recoveryTick = currentTick + Mathf.Max(1, Props.recoveryInterval);
+                RecoverByInterval();
             }
         }
 
@@ -328,6 +370,7 @@ namespace BDP.Core.Trion
             Scribe_Values.Look(ref allocated, "allocated", 0f);
             Scribe_Values.Look(ref reserved, "reserved", 0f);
             Scribe_Values.Look(ref frozen, "frozen", false);
+            Scribe_Values.Look(ref boundToExternalPool, "boundToExternalPool", false);
             Scribe_Values.Look(ref initialized, "initialized", false);
             Scribe_Values.Look(ref trionCapacityPotential, "trionCapacityPotential", 0);
             Scribe_Values.Look(ref trionCapacityPotentialInitialized, "trionCapacityPotentialInitialized", false);
@@ -375,7 +418,7 @@ namespace BDP.Core.Trion
         /// </summary>
         internal bool CanAfford(float cost)
         {
-            return cost <= 0f || Available >= cost;
+            return cost <= 0f || !TrionResourceRuleRegistry.GetRules(parent).FunctionCostsEnabled || Available >= cost;
         }
 
         /// <summary>
@@ -384,7 +427,7 @@ namespace BDP.Core.Trion
         /// </summary>
         internal bool TryConsume(float cost)
         {
-            if (cost <= 0f)
+            if (cost <= 0f || !TrionResourceRuleRegistry.GetRules(parent).FunctionCostsEnabled)
             {
                 return true;
             }
@@ -408,7 +451,7 @@ namespace BDP.Core.Trion
         /// </summary>
         internal void ConsumeUntilDepleted(float amount)
         {
-            if (amount <= 0f || Available <= 0f)
+            if (amount <= 0f || Available <= 0f || !TrionResourceRuleRegistry.GetRules(parent).FunctionCostsEnabled)
             {
                 return;
             }
@@ -427,7 +470,7 @@ namespace BDP.Core.Trion
         /// </summary>
         internal void SetReserved(float amount)
         {
-            reserved = Mathf.Max(0f, amount);
+            reserved = Mathf.Max(0f, TrionResourceRuleRegistry.ResolveCapacityCost(parent, amount));
         }
 
         /// <summary>
@@ -438,6 +481,12 @@ namespace BDP.Core.Trion
             if (amount <= 0f)
             {
                 return false;
+            }
+
+            // 免占用宿主不建立锁定；战斗会话必须先归一化金额再记录相位。
+            if (!TrionResourceRuleRegistry.GetRules(parent).CapacityCostsEnabled)
+            {
+                return true;
             }
 
             // Allocate 不减少总量，只把一部分自由量转成正式占用量。
@@ -468,7 +517,7 @@ namespace BDP.Core.Trion
         /// <summary>
         /// 注册一个持续消耗来源，单位为 Trion/秒。
         /// </summary>
-        internal void RegisterDrain(TrionDrainKey key, float perSecond)
+        internal void RegisterDrain(TrionDrainKey key, float perSecond, TrionDrainKind kind = TrionDrainKind.Function)
         {
             EnsureInternalState();
 
@@ -478,7 +527,7 @@ namespace BDP.Core.Trion
             }
 
             // 同一个 key 再注册时直接覆盖，保证同一业务只保留一份当前值。
-            drainRegistry[key] = perSecond;
+            drainRegistry[key] = new TrionDrainRegistration(perSecond, kind);
         }
 
         /// <summary>
@@ -500,7 +549,13 @@ namespace BDP.Core.Trion
         internal IReadOnlyDictionary<TrionDrainKey, float> GetDrainSnapshot()
         {
             EnsureInternalState();
-            return new Dictionary<TrionDrainKey, float>(drainRegistry);
+            // 对账使用声明金额，免耗规则只作用于真实结算，不改写来源费用。
+            var snapshot = new Dictionary<TrionDrainKey, float>();
+            foreach (KeyValuePair<TrionDrainKey, TrionDrainRegistration> pair in drainRegistry)
+            {
+                snapshot.Add(pair.Key, pair.Value.PerSecond);
+            }
+            return snapshot;
         }
 
         /// <summary>
@@ -509,6 +564,14 @@ namespace BDP.Core.Trion
         internal void SetFrozen(bool value)
         {
             frozen = value;
+        }
+
+        /// <summary>
+        /// 设置当前容器是否已经绑定到外部 Trion 合并池。
+        /// </summary>
+        internal void SetBoundToExternalPool(bool value)
+        {
+            boundToExternalPool = value;
         }
 
         /// <summary>
@@ -577,7 +640,7 @@ namespace BDP.Core.Trion
             if (drainRegistry == null)
             {
                 // 聚合持续消耗统一收在这里。
-                drainRegistry = new Dictionary<TrionDrainKey, float>();
+                drainRegistry = new Dictionary<TrionDrainKey, TrionDrainRegistration>();
             }
         }
 
@@ -663,13 +726,14 @@ namespace BDP.Core.Trion
         /// </summary>
         private void RecoverByInterval()
         {
-            if (RecoveryPerDay <= 0f || cur >= max)
+            float effectiveRecoveryPerDay = EffectiveRecoveryPerDay;
+            if (effectiveRecoveryPerDay <= 0f || cur >= max)
             {
                 return;
             }
 
             // 自然恢复也按“每天总量 -> 当前间隔增量”折算。
-            float perTick = RecoveryPerDay / TicksPerDay;
+            float perTick = effectiveRecoveryPerDay / TicksPerDay;
             float intervalGain = perTick * Mathf.Max(1, Props.recoveryInterval);
             cur = Mathf.Min(max, cur + intervalGain);
             ClampState();

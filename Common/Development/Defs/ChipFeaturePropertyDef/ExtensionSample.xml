@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 纯 XML 声明的新属性；通用展示器无需改代码即可显示。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef>
+    <defName>BDP_Property_ExperimentalReflectionRatio</defName>
+    <ValueKind>Percentage</ValueKind>
+  </BDP.Core.Information.ChipFeaturePropertyDef>
+</Defs>

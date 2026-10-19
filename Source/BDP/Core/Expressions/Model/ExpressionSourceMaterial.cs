@@ -32,7 +32,7 @@ namespace BDP.Core.Expressions
         /// <summary>
         /// 当前材料的结果大类。
         /// </summary>
-        public ExpressionResultKind ResultKind { get; set; }
+        public ExpressionOutputChannel OutputChannel { get; set; }
 
         /// <summary>
         /// 当前材料的武器模式。
@@ -83,6 +83,11 @@ namespace BDP.Core.Expressions
         public string CompositeVisualPresetDefName { get; set; }
 
         /// <summary>
+        /// 当前来源参与组合技攻击时使用的阶段视觉预设 DefName。
+        /// </summary>
+        public string ComboAttackVisualPresetDefName { get; set; }
+
+        /// <summary>
         /// 当前材料是否强制压制宿主原装备贴图。
         /// </summary>
         public bool ForceSuppressHostEquipment { get; set; }
@@ -107,6 +112,9 @@ namespace BDP.Core.Expressions
         /// 当前材料附带的轻量标签集合。
         /// </summary>
         public IReadOnlyList<string> Tags { get; set; }
+
+        /// <summary>当前材料显式声明接入的许可键快照。</summary>
+        public IReadOnlyList<string> DeclaredPermissionKeys { get; set; }
 
         /// <summary>
         /// 当前材料的 Trion 参数块。
@@ -198,9 +206,14 @@ namespace BDP.Core.Expressions
         public string HediffApplyModeKey { get; set; }
 
         /// <summary>
+        /// 当前材料的 Hediff 生命周期控制模式。
+        /// </summary>
+        public string HediffControlMode { get; set; }
+
+        /// <summary>
         /// 当前材料的被动键。
         /// </summary>
-        public string PassiveKey { get; set; }
+        public string PassiveIdentityKey { get; set; }
 
         /// <summary>
         /// 当前材料附带的被动暴露数据。
@@ -212,6 +225,11 @@ namespace BDP.Core.Expressions
         /// 这一层仍只负责顺序与配置快照传递。
         /// </summary>
         public IReadOnlyList<RangedModuleMountConfig> RangedModules { get; set; }
+
+        /// <summary>
+        /// 当前材料可选的近战命中部位策略。
+        /// </summary>
+        public HitPartPolicyConfig HitPartPolicy { get; set; }
 
         /// <summary>
         /// 当前来源向其它远程表达结果发布的开放式增强声明。

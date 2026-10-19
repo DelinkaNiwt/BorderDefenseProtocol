@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 小兵护盾的单枚耐久状态；防护逻辑复用现有通用能量护盾组件。 -->
+  <HediffDef>
+    <!-- 小兵护盾状态唯一标识。 -->
+    <defName>BDP_Hediff_EnergyShield_Soldier</defName>
+    <!-- 由 BDP 表达宿主同步状态生命周期。 -->
+    <hediffClass>BDP.Core.Expressions.BdpExpressionHostHediff</hediffClass>
+    <!-- 名称和说明由简体中文 DefInjected 提供。 -->
+    <label>BDP_Hediff_EnergyShield_Soldier.label</label>
+    <description>BDP_Hediff_EnergyShield_Soldier.description</description>
+    <!-- 护盾属于正向状态。 -->
+    <isBad>false</isBad>
+    <!-- 激活时创建单层状态，不随数量聚合。 -->
+    <initialSeverity>1</initialSeverity>
+    <minSeverity>0</minSeverity>
+    <maxSeverity>1</maxSeverity>
+    <stages>
+      <!-- 单枚小兵护盾阶段。 -->
+      <li>
+        <minSeverity>1</minSeverity>
+        <label>BDP_Hediff_EnergyShield_Soldier.stage</label>
+      </li>
+    </stages>
+    <comps>
+      <!-- 耐久、恢复和格挡均交由现有通用能量护盾组件处理。 -->
+      <li Class="BDP.Content.Shield.HediffCompProperties_EnergyShield">
+        <!-- 使用独立耐久组，不与其它护盾共享容量。 -->
+        <durabilityGroupKey>energy_shield_soldier</durabilityGroupKey>
+        <!-- 护盾状态卡标题由简体中文语言包提供。 -->
+        <statusCardLabelKey>BDP_Shield_Status_SoldierTitle</statusCardLabelKey>
+        <!-- 小兵护盾耐久上限为 120。 -->
+        <maximumDurability>120</maximumDurability>
+        <aggregateDurability>false</aggregateDurability>
+        <durabilityLossMultiplier>1</durabilityLossMultiplier>
+        <!-- 破盾后等待 10 秒再恢复满耐久。 -->
+        <recoveryTicks>600</recoveryTicks>
+        <!-- 未破盾期间不额外等待，自然恢复速度为每秒 12 点。 -->
+        <naturalRecoveryDelayTicks>0</naturalRecoveryDelayTicks>
+        <naturalRecoveryUsePercentage>false</naturalRecoveryUsePercentage>
+        <naturalRecoveryPerSecond>12</naturalRecoveryPerSecond>
+        <!-- 仅覆盖 Pawn 正面 180 度，格挡概率 50%。 -->
+        <enableAngleCheck>true</enableAngleCheck>
+        <blockAngleRange>180</blockAngleRange>
+        <blockAngleOffset>0</blockAngleOffset>
+        <blockChance>0.5</blockChance>
+        <!-- 成功格挡消耗来袭伤害值 50% 的 Trion。 -->
+        <trionCostMultiplier>0.5</trionCostMultiplier>
+        <!-- 使用现有护盾命中特效，不显示常驻气泡。 -->
+        <effectScale>0.25</effectScale>
+        <shieldRadius>0.8</shieldRadius>
+        <showShieldBubble>false</showShieldBubble>
+      </li>
+    </comps>
+  </HediffDef>
+
+</Defs>

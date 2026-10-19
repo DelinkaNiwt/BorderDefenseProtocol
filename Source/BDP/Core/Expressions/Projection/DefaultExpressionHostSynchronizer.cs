@@ -100,7 +100,7 @@ namespace BDP.Core.Expressions
             for (int i = 0; i < snapshot.Results.Count; i++)
             {
                 FormalExpressionResult result = snapshot.Results[i];
-                if (result == null || result.ResultKind != ExpressionResultKind.Verb)
+                if (result == null || result.OutputChannel != ExpressionOutputChannel.Verb)
                 {
                     continue;
                 }
@@ -108,7 +108,7 @@ namespace BDP.Core.Expressions
                 entries.Add(new ExpressionPublicationEntry
                 {
                     ResultId = result.Id,
-                    ResultKind = result.ResultKind,
+                    OutputChannel = result.OutputChannel,
                     PublishedKey = result.ExecutionSlotKey,
                     IsPublished = result.IsAvailable
                         && (result.UseRequirementCheck == null
@@ -135,7 +135,7 @@ namespace BDP.Core.Expressions
             for (int i = 0; i < snapshot.Results.Count; i++)
             {
                 FormalExpressionResult result = snapshot.Results[i];
-                if (result == null || result.ResultKind != ExpressionResultKind.Passive)
+                if (result == null || result.OutputChannel != ExpressionOutputChannel.Passive)
                 {
                     continue;
                 }
@@ -143,12 +143,12 @@ namespace BDP.Core.Expressions
                 entries.Add(new ExpressionPublicationEntry
                 {
                     ResultId = result.Id,
-                    ResultKind = result.ResultKind,
-                    PublishedKey = result.PassiveKey,
+                    OutputChannel = result.OutputChannel,
+                    PublishedKey = result.PassiveIdentityKey,
                     IsPublished = result.IsAvailable
                         && (result.UseRequirementCheck == null
                             || result.UseRequirementCheck.Satisfied)
-                        && !string.IsNullOrWhiteSpace(result.PassiveKey),
+                        && !string.IsNullOrWhiteSpace(result.PassiveIdentityKey),
                     SourceResultIds = ResolveSourceResultIds(snapshot, result.Id)
                 });
             }

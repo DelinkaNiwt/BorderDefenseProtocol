@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 契约手动能力名称与永久后果说明。 -->
+  <BDP_Ability_RoyalContract.label>缔结皇室契约</BDP_Ability_RoyalContract.label>
+  <BDP_Ability_RoyalContract.description>走到另一名殖民者身旁，与其缔结终身契约，赋予其可自然遗传的 Trion 腺体基因。每名皇室成员一生仅可缔约一次，双方任何一人真正死亡，另一人也会死亡。受伤、倒地及战斗体崩解不会触发。</BDP_Ability_RoyalContract.description>
+</LanguageData>

@@ -12,6 +12,7 @@ namespace BDP.Content.Trion.Talent
     /// 可重复使用、需要供电的固定 Trion 天赋检测仪。
     /// 受检者选择、入舱和搬运均服从原版 Building_Enterable 工作流。
     /// </summary>
+    [StaticConstructorOnStartup]
     public sealed class Building_TrionDetector : Building_Enterable
     {
         /// <summary>研究速度 100% 时需要完成的基础工作量，即 1 个游戏小时。</summary>

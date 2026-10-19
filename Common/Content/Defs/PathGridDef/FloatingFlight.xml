@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!-- 仅移动时浮空使用：露天走飞行网格，屋顶走原版地面规则。 -->
+  <PathGridDef>
+    <defName>BDP_PathGrid_FloatingHybrid</defName>
+    <workerType>BDP.Content.FloatingFlight.Pathing.PathGrid_FloatingHybrid</workerType>
+    <fencePassable>true</fencePassable>
+    <flying>true</flying>
+  </PathGridDef>
+
+  <!-- 始终浮空使用：所有屋顶格不可通行，露天格走飞行规则。 -->
+  <PathGridDef>
+    <defName>BDP_PathGrid_FloatingAlways</defName>
+    <workerType>BDP.Content.FloatingFlight.Pathing.PathGrid_FloatingAlways</workerType>
+    <fencePassable>true</fencePassable>
+    <flying>true</flying>
+  </PathGridDef>
+</Defs>

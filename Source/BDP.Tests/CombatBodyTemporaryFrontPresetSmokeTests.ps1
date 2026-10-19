@@ -15,28 +15,14 @@ $sourceRoot = Split-Path -Parent $PSScriptRoot
 $modRoot = Split-Path -Parent $sourceRoot
 $presetPath = Join-Path $modRoot '1.6\Content\Defs\CombatBody\TemporaryFrontPreset.xml'
 $configPath = Join-Path $modRoot '1.6\Defs\CombatBodyDef\Config.xml'
+$frontPresetDefPath = Join-Path $sourceRoot 'BDP\Core\CombatBody\Bridge\CombatBodyFrontPresetDef.cs'
 
-Assert-True -Condition (Test-Path -LiteralPath $presetPath) -Message '缺少临时战斗体服装观察预设。'
-
-[xml]$presetXml = Get-Content -LiteralPath $presetPath -Raw -Encoding utf8
-$presetText = Get-Content -LiteralPath $presetPath -Raw -Encoding utf8
 $configText = Get-Content -LiteralPath $configPath -Raw -Encoding utf8
+$frontPresetDefText = Get-Content -LiteralPath $frontPresetDefPath -Raw -Encoding utf8
 
-Assert-True -Condition ($presetText -match '<BDP\.Core\.CombatBody\.CombatBodyFrontPresetDef>') -Message '临时文件必须只声明正式前台预设 Def。'
-Assert-True -Condition ($presetText -match '<defName>BDP_TemporaryCombatBodyObservationPreset</defName>') -Message '临时预设 DefName 与全局配置不一致。'
-Assert-True -Condition ($configText -match '<frontPresetDefName>BDP_TemporaryCombatBodyObservationPreset</frontPresetDefName>') -Message '全局配置必须指向临时观察预设。'
+Assert-True -Condition (-not (Test-Path -LiteralPath $presetPath)) -Message '临时战斗体服装观察预设必须退役。'
+Assert-True -Condition ($configText -match '<frontMode>MirrorOriginal</frontMode>') -Message '全局配置默认必须回到镜像模式。'
+Assert-True -Condition ($configText -notmatch '<frontPresetDefName>') -Message '全局配置不得继续引用临时观察预设。'
+Assert-True -Condition ($frontPresetDefText -match 'class CombatBodyFrontPresetDef\s*:\s*Def') -Message 'Core 通用前台预设类型必须保留。'
 
-$expectedApparel = @(
-    'Apparel_FlakPants',
-    'Apparel_FlakVest',
-    'Apparel_FlakJacket',
-    'Apparel_PowerArmorHelmet'
-)
-
-foreach ($apparelDefName in $expectedApparel) {
-    Assert-True -Condition ($presetText -match "<li>$apparelDefName</li>") -Message "临时预设缺少原版衣物：$apparelDefName"
-}
-
-Assert-True -Condition ($presetText -notmatch '<ThingDef') -Message '临时预设不得复制或修改原版衣物 ThingDef。'
-
-Write-Output 'CombatBodyTemporaryFrontPreset PASS'
+Write-Output 'CombatBodyTemporaryFrontPresetRetirement PASS'

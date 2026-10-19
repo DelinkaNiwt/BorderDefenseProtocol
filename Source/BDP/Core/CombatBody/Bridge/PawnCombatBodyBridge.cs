@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
+using BDP.Core.CombatBody.External;
 using BDP.Core.CombatBody.Presentation;
+using BDP.Support.Diagnostics;
 using RimWorld;
+using UnityEngine;
 using Verse;
 
 namespace BDP.Core.CombatBody
@@ -62,6 +64,11 @@ namespace BDP.Core.CombatBody
 
             bool requiresActiveHost = phase == CombatBodyPhase.Active
                 || phase == CombatBodyPhase.Collapsing;
+            if (requiresActiveHost)
+            {
+                ReconcileActiveFrontApparel();
+            }
+
             if (!requiresActiveHost || HasValidRollbackSnapshot())
             {
                 return;
@@ -88,21 +95,43 @@ namespace BDP.Core.CombatBody
                 return;
             }
 
+            long transformationStart = BdpDiagnostics.BeginTiming();
+            long recoveredItemsStart = BdpDiagnostics.BeginTiming();
             TryRestoreRecoveredItemsToInventory();
+            BdpDiagnostics.TraceTiming(
+                "战斗体变换 | direction=enter | stage=restore_recovered_items | pawn=" + Pawn.ThingID,
+                recoveredItemsStart);
 
             // 表现层必须在原衣物离身前捕获退场外观；失败由注册表隔离，不影响宿主事务。
             CombatBodyTransformPresentationRegistry.NotifyBegin(
                 Pawn,
                 CombatBodyTransformDirection.Enter);
 
+            long snapshotStart = BdpDiagnostics.BeginTiming();
             snapshotService?.Capture(Pawn, hostState);
+            BdpDiagnostics.TraceTiming(
+                "战斗体变换 | direction=enter | stage=capture_snapshot | pawn=" + Pawn.ThingID,
+                snapshotStart);
+
+            long frontReplacementStart = BdpDiagnostics.BeginTiming();
             ApplyFrontReplacement(hostState.FrontState);
+            BdpDiagnostics.TraceTiming(
+                "战斗体变换 | direction=enter | stage=apply_front_replacement | pawn=" + Pawn.ThingID,
+                frontReplacementStart);
+
+            long hediffStart = BdpDiagnostics.BeginTiming();
             RemoveCombatBodyEntryHediffs();
             AddCombatBodyActiveHediff();
+            BdpDiagnostics.TraceTiming(
+                "战斗体变换 | direction=enter | stage=update_hediffs | pawn=" + Pawn.ThingID,
+                hediffStart);
             hostState.TransformationApplied = true;
             CombatBodyTransformPresentationRegistry.NotifyEnd(
                 Pawn,
                 CombatBodyTransformDirection.Enter);
+            BdpDiagnostics.TraceTiming(
+                "战斗体变换 | direction=enter | stage=total | pawn=" + Pawn.ThingID,
+                transformationStart);
         }
 
         /// <summary>
@@ -228,6 +257,7 @@ namespace BDP.Core.CombatBody
         /// </summary>
         private void ClearInvalidHostTransactionRecords()
         {
+            UnregisterActiveFrontApparel(hostState.FrontState);
             hostState.TransformationApplied = false;
             hostState.HasSnapshot = false;
 
@@ -249,32 +279,74 @@ namespace BDP.Core.CombatBody
                 return;
             }
 
+            UnregisterActiveFrontApparel(frontState);
             frontState.ClearActiveRecord();
-            CombatBodyHostConfigDef config = CombatBodyHostConfigResolver.Resolve();
-
-            switch (config.frontMode)
+            CombatBodyFrontAppearancePlan personalPlan;
+            if (CombatBodyFrontAppearanceRegistry.TryResolve(Pawn, out personalPlan))
             {
-                case CombatBodyFrontMode.MirrorOriginal:
-                    ApplyMirrorOriginalFrontReplacement(frontState);
-                    frontState.IsMirrorOriginal = true;
-                    break;
-                case CombatBodyFrontMode.Preset:
-                default:
-                    ApplyPresetFrontReplacement(frontState, config);
-                    frontState.IsMirrorOriginal = false;
-                    break;
+                ApplyPersonalFrontReplacement(frontState, personalPlan);
+            }
+            else
+            {
+                CombatBodyHostConfigDef config = CombatBodyHostConfigResolver.Resolve();
+                switch (config.frontMode)
+                {
+                    case CombatBodyFrontMode.MirrorOriginal:
+                        ApplyMirrorOriginalFrontReplacement(frontState);
+                        frontState.IsMirrorOriginal = true;
+                        break;
+                    case CombatBodyFrontMode.Preset:
+                    default:
+                        ApplyPresetFrontReplacement(frontState, config);
+                        frontState.IsMirrorOriginal = false;
+                        break;
+                }
             }
 
             List<Apparel> combatApparels = frontState.CombatApparelContainer.InnerListForReading.ToList();
             for (int i = 0; i < combatApparels.Count; i++)
             {
                 Apparel apparel = combatApparels[i];
+                CombatBodyFrontApparelRegistry.Prepare(apparel);
                 frontState.CombatApparelContainer.Remove(apparel);
                 Pawn.apparel.Wear(apparel, dropReplacedApparel: false, locked: true);
+
+                if (!Pawn.apparel.WornApparel.Contains(apparel))
+                {
+                    frontState.CombatApparelContainer.TryAdd(apparel);
+                    continue;
+                }
+
+                CombatBodyFrontApparelRuntime.Register(apparel);
                 frontState.ActiveApparelThingIds.Add(apparel.thingIDNumber);
             }
 
             frontState.IsApplied = frontState.ActiveApparelThingIds.Count > 0;
+        }
+
+        /// <summary>
+        /// 应用 Content 提供的个人前台外观计划。
+        /// </summary>
+        private void ApplyPersonalFrontReplacement(
+            CombatBodyFrontState frontState,
+            CombatBodyFrontAppearancePlan plan)
+        {
+            if (plan == null || plan.Mode == CombatBodyFrontMode.MirrorOriginal)
+            {
+                ApplyMirrorOriginalFrontReplacement(frontState);
+                frontState.IsMirrorOriginal = true;
+                return;
+            }
+
+            if (plan.Mode == CombatBodyFrontMode.Preset && plan.IsDynamic)
+            {
+                ApplyDynamicPresetFrontReplacement(frontState, plan);
+                frontState.IsMirrorOriginal = false;
+                return;
+            }
+
+            ApplyMirrorOriginalFrontReplacement(frontState);
+            frontState.IsMirrorOriginal = true;
         }
 
         /// <summary>
@@ -295,6 +367,7 @@ namespace BDP.Core.CombatBody
             for (int i = 0; i < currentApparel.Count; i++)
             {
                 Apparel apparel = currentApparel[i];
+                CombatBodyFrontApparelRuntime.Unregister(apparel);
                 Pawn.apparel.Remove(apparel);
 
                 if (frontState.IsMirrorOriginal)
@@ -337,7 +410,36 @@ namespace BDP.Core.CombatBody
                     continue;
                 }
 
-                Apparel apparel = ThingMaker.MakeThing(apparelDef) as Apparel;
+                Apparel apparel = CombatBodyFrontApparelFactory.Create(
+                    apparelDef,
+                    null,
+                    false,
+                    Color.white,
+                    null);
+                if (apparel != null)
+                {
+                    frontState.CombatApparelContainer.TryAdd(apparel);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 按个人动态预设生成前台衣物层。
+        /// 每次进入前清理旧缓存，确保模板切换后不会继续复用旧服装。
+        /// </summary>
+        private void ApplyDynamicPresetFrontReplacement(
+            CombatBodyFrontState frontState,
+            CombatBodyFrontAppearancePlan plan)
+        {
+            frontState.CombatApparelContainer.ClearAndDestroyContents();
+            if (plan?.Entries == null)
+            {
+                return;
+            }
+
+            for (int i = 0; i < plan.Entries.Count; i++)
+            {
+                Apparel apparel = CombatBodyFrontApparelFactory.Create(plan.Entries[i]);
                 if (apparel != null)
                 {
                     frontState.CombatApparelContainer.TryAdd(apparel);
@@ -361,7 +463,13 @@ namespace BDP.Core.CombatBody
             List<Apparel> originalApparels = hostState.SnapshotState.OriginalApparelContainer.InnerListForReading.ToList();
             for (int i = 0; i < originalApparels.Count; i++)
             {
-                Apparel mirroredApparel = CreateMirroredApparel(originalApparels[i]);
+                Apparel originalApparel = originalApparels[i];
+                if (!CombatBodyFrontApparelRegistry.CanMirror(originalApparel))
+                {
+                    continue;
+                }
+
+                Apparel mirroredApparel = CombatBodyFrontApparelFactory.CreateMirrored(originalApparel);
                 if (mirroredApparel != null)
                 {
                     frontState.CombatApparelContainer.TryAdd(mirroredApparel);
@@ -383,71 +491,49 @@ namespace BDP.Core.CombatBody
         }
 
         /// <summary>
-        /// 复制单件原衣物，生成战斗体镜像副本。
+        /// 读档后重建当前战斗体前台衣物的运行时身份，并重新进入公共准备入口。
         /// </summary>
-        private static Apparel CreateMirroredApparel(Apparel original)
+        private void ReconcileActiveFrontApparel()
         {
-            if (original == null)
-            {
-                return null;
-            }
-
-            Apparel copy = ThingMaker.MakeThing(original.def, original.Stuff) as Apparel;
-            if (copy == null)
-            {
-                return null;
-            }
-
-            CopyApparelColor(original, copy);
-            CopyApparelStyle(original, copy);
-            RemoveQualityComp(copy);
-            return copy;
-        }
-
-        /// <summary>
-        /// 复制衣物颜色。
-        /// </summary>
-        private static void CopyApparelColor(Apparel original, Apparel copy)
-        {
-            CompColorable originalColorable = original.TryGetComp<CompColorable>();
-            CompColorable copiedColorable = copy.TryGetComp<CompColorable>();
-            if (originalColorable != null && originalColorable.Active && copiedColorable != null)
-            {
-                copiedColorable.SetColor(originalColorable.Color);
-            }
-        }
-
-        /// <summary>
-        /// 复制衣物风格。
-        /// </summary>
-        private static void CopyApparelStyle(Apparel original, Apparel copy)
-        {
-            if (original.StyleDef != null)
-            {
-                copy.StyleDef = original.StyleDef;
-            }
-        }
-
-        /// <summary>
-        /// 去掉镜像副本上的品质部件，保持旧版“前台副本无品质”表象。
-        /// </summary>
-        private static void RemoveQualityComp(Apparel copy)
-        {
-            CompQuality qualityComp = copy.TryGetComp<CompQuality>();
-            if (qualityComp == null)
+            CombatBodyFrontState frontState = hostState.FrontState;
+            if (frontState == null || Pawn?.apparel == null)
             {
                 return;
             }
 
-            FieldInfo compsField = typeof(ThingWithComps).GetField("comps", BindingFlags.NonPublic | BindingFlags.Instance);
-            List<ThingComp> comps = compsField?.GetValue(copy) as List<ThingComp>;
-            comps?.Remove(qualityComp);
+            CombatBodyFrontApparelRuntime.Rebuild(Pawn, frontState.ActiveApparelThingIds);
+            HashSet<int> activeThingIds = new HashSet<int>(frontState.ActiveApparelThingIds);
+            List<Apparel> wornApparel = Pawn.apparel.WornApparel;
+            for (int index = 0; index < wornApparel.Count; index++)
+            {
+                Apparel apparel = wornApparel[index];
+                if (apparel != null && activeThingIds.Contains(apparel.thingIDNumber))
+                {
+                    CombatBodyFrontApparelRegistry.Prepare(apparel);
+                }
+            }
+        }
 
-            copy.compQuality = null;
+        /// <summary>
+        /// 从运行时登记表移除当前宿主仍记录为激活的前台衣物。
+        /// </summary>
+        private void UnregisterActiveFrontApparel(CombatBodyFrontState frontState)
+        {
+            if (frontState == null || Pawn?.apparel == null)
+            {
+                return;
+            }
 
-            FieldInfo compsByTypeField = typeof(ThingWithComps).GetField("compsByType", BindingFlags.NonPublic | BindingFlags.Instance);
-            Dictionary<Type, ThingComp[]> compsByType = compsByTypeField?.GetValue(copy) as Dictionary<Type, ThingComp[]>;
-            compsByType?.Remove(typeof(CompQuality));
+            HashSet<int> activeThingIds = new HashSet<int>(frontState.ActiveApparelThingIds);
+            List<Apparel> wornApparel = Pawn.apparel.WornApparel;
+            for (int index = 0; index < wornApparel.Count; index++)
+            {
+                Apparel apparel = wornApparel[index];
+                if (apparel != null && activeThingIds.Contains(apparel.thingIDNumber))
+                {
+                    CombatBodyFrontApparelRuntime.Unregister(apparel);
+                }
+            }
         }
 
         /// <summary>

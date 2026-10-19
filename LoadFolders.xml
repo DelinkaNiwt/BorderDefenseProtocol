@@ -1,9 +1,29 @@
-﻿<loadFolders>
+<loadFolders>
+  <!-- 公共资源只存一份；版本目录只加载本版本的程序集与实际差异。 -->
   <v1.6>
+    <!-- 根目录保留共同语言文件和模组元数据。 -->
     <li>/</li>
+    <!-- 中性定义、贴图与音效共用，版本差异随后加载。 -->
+    <li>Common</li>
     <li>1.6</li>
+    <!-- 正式业务资源共用，版本专属内容保留独立入口。 -->
+    <li>Common/Content</li>
     <li>1.6/Content</li>
-    <!-- 最后加载可整体移除的开发辅助内容。 -->
+    <!-- 最后加载公共开发资源和本版本开发程序集，可整体移除。 -->
+    <li>Common/Development</li>
     <li>1.6/Development</li>
   </v1.6>
+  <!-- 1.7 独立加载；不得回退到 1.6 的程序集、定义或资源目录。 -->
+  <v1.7>
+    <!-- 共同语言、公共资源和本版本程序集按顺序加载。 -->
+    <li>/</li>
+    <li>Common</li>
+    <li>1.7</li>
+    <!-- 公共业务资源和仅限 1.7 的内容差异。 -->
+    <li>Common/Content</li>
+    <li>1.7/Content</li>
+    <!-- 开发内容仍可整体移除，不改变正式程序集的依赖方向。 -->
+    <li>Common/Development</li>
+    <li>1.7/Development</li>
+  </v1.7>
 </loadFolders>

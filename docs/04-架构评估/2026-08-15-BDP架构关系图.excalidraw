@@ -1724,9 +1724,9 @@
    "textAlign": "center",
    "verticalAlign": "middle",
    "containerId": "el_1sk8wgh4",
-   "originalText": "ChipManufacturing 芯片制造\nChipPresetDef 菜单化 + 三套模板",
+   "originalText": "ChipManufacturing 芯片制造\nChipFunctionDef 芯片功能模板化 + 三套模板",
    "lineHeight": 1.25,
-   "text": "ChipManufacturing 芯片制造\nChipPresetDef 菜单化 + 三套模板"
+   "text": "ChipManufacturing 芯片制造\nChipFunctionDef 芯片功能模板化 + 三套模板"
   },
   {
    "id": "el_tqjgaxz2",

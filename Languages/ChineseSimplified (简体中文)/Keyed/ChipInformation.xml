@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 身份行和激活条件的紧凑字段格式。 -->
+  <BDP_Info_InlineField>{0}：{1}</BDP_Info_InlineField>
+  <!-- 无框激活条件行中相邻条件的轻量分隔符。 -->
+  <BDP_Info_ActivationConditionSeparator>·</BDP_Info_ActivationConditionSeparator>
+  <!-- 详情身份行使用的主分类标签。 -->
+  <BDP_Info_Field_MainCategory>主类别</BDP_Info_Field_MainCategory>
+  <!-- 攻击参数配对卡片的简短冷却标签。 -->
+  <BDP_Info_AttackCooldown>冷却时间</BDP_Info_AttackCooldown>
+  <!-- 近战雷达轴专用距离名称，不影响远程射程。 -->
+  <BDP_Info_Field_MeleeAttackRange>攻击距离</BDP_Info_Field_MeleeAttackRange>
+  <!-- 远程攻击卡片的发射数量标签。 -->
+  <BDP_Info_ProjectileCount>子弹数量</BDP_Info_ProjectileCount>
+  <!-- 远程攻击卡片的数量单位。 -->
+  <BDP_Info_ProjectileCountValue>{0} 发</BDP_Info_ProjectileCountValue>
+  <!-- 当前参数结果不同于对应基准值时，紧邻参数名称显示的标记。 -->
+  <BDP_Info_ChangedValueMarker>*</BDP_Info_ChangedValueMarker>
+  <!-- 近战参数四张卡中缺少声明属性的占位文字。 -->
+  <BDP_Info_EmptyAttackStat>None</BDP_Info_EmptyAttackStat>
+  <!-- 功能类别与具体条目名称组合。 -->
+  <BDP_Info_FeatureInstanceTitle>{0} - {1}</BDP_Info_FeatureInstanceTitle>
+  <!-- 激活门槛使用原版技能译名。 -->
+  <BDP_Info_ActivationSkill>{0}技能</BDP_Info_ActivationSkill>
+  <!-- 芯片信息模型：信息块标题。 -->
+  <!-- 芯片详情概览区标题。 -->
+  <BDP_Info_ChipOverview>芯片概览</BDP_Info_ChipOverview>
+  <!-- 芯片详情图表及几何示意标题。 -->
+  <BDP_Info_Chart_RadarTitle>统计图表</BDP_Info_Chart_RadarTitle>
+  <BDP_Info_Chart_AccuracyTitle>四距离精度</BDP_Info_Chart_AccuracyTitle>
+  <BDP_Info_Chart_Current>当前</BDP_Info_Chart_Current>
+  <BDP_Info_Chart_Baseline>基准</BDP_Info_Chart_Baseline>
+  <BDP_Info_Chart_RPM>RPM</BDP_Info_Chart_RPM>
+  <BDP_Info_Chart_APM>APM</BDP_Info_Chart_APM>
+  <BDP_Info_Chart_BlockArcTitle>抵挡角度</BDP_Info_Chart_BlockArcTitle>
+  <BDP_Info_Chart_BlockArcValue>{0}°</BDP_Info_Chart_BlockArcValue>
+  <BDP_Info_Relation_Combination>组合技</BDP_Info_Relation_Combination>
+  <!-- 组合技标题从功能类型、组合名称和两个真实来源构成。 -->
+  <BDP_Info_ComboSources>{0}+{1}</BDP_Info_ComboSources>
+  <BDP_Info_ComboNameWithSources>{0}（{1}）</BDP_Info_ComboNameWithSources>
+  <BDP_Info_ComboFeatureSeparator>、</BDP_Info_ComboFeatureSeparator>
+  <BDP_Info_Block_Profile>芯片画像</BDP_Info_Block_Profile>
+  <BDP_Info_Block_Loadout>装配信息</BDP_Info_Block_Loadout>
+  <BDP_Info_Block_Trion>Trion 信息</BDP_Info_Block_Trion>
+  <BDP_Info_Block_Activation>激活条件</BDP_Info_Block_Activation>
+  <BDP_Info_Block_RangedAttack>远程表达</BDP_Info_Block_RangedAttack>
+  <BDP_Info_Block_MeleeAttack>近战表达</BDP_Info_Block_MeleeAttack>
+  <BDP_Info_Block_Ability>能力表达</BDP_Info_Block_Ability>
+  <BDP_Info_Block_Descriptions>芯片描述</BDP_Info_Block_Descriptions>
+  <BDP_Info_Block_ChipSpecifications>芯片规格</BDP_Info_Block_ChipSpecifications>
+  <BDP_Info_Category_ChipSpecifications>芯片规格</BDP_Info_Category_ChipSpecifications>
+  <BDP_Info_Category_MeleeTool>武器(近战)·{0}</BDP_Info_Category_MeleeTool>
+  <BDP_Info_Report_MeleeTool>武器(近战)·{0}</BDP_Info_Report_MeleeTool>
+  <BDP_Info_Report_MeleeToolDamage>该工具的近战每秒伤害。&#xA;单次伤害：{0}&#xA;连击次数：{1}&#xA;连击间隔：{2} tick（游戏刻）&#xA;攻击冷却：{3} 秒&#xA;最终值：{4}</BDP_Info_Report_MeleeToolDamage>
+  <BDP_Info_Report_MeleeToolArmorPenetration>该工具的近战护甲穿透。&#xA;最终值：{0}</BDP_Info_Report_MeleeToolArmorPenetration>
+  <BDP_Info_Report_FieldFinalValue>最终值：{0}</BDP_Info_Report_FieldFinalValue>
+  <BDP_Info_Report_FieldProvenance>来源明细：</BDP_Info_Report_FieldProvenance>
+  <BDP_Info_Report_ContributionLine>{0}：{1}（{2}）</BDP_Info_Report_ContributionLine>
+  <BDP_Info_Report_Contribution_Base>基础值</BDP_Info_Report_Contribution_Base>
+  <BDP_Info_Report_Contribution_Variant>构型修正</BDP_Info_Report_Contribution_Variant>
+  <BDP_Info_Report_Contribution_Runtime>运行结果</BDP_Info_Report_Contribution_Runtime>
+  <BDP_Info_Report_Contribution_Replacement>替换值</BDP_Info_Report_Contribution_Replacement>
+  <BDP_Info_Report_Contribution_Addition>加法贡献</BDP_Info_Report_Contribution_Addition>
+  <BDP_Info_Report_Contribution_Multiplier>倍率贡献</BDP_Info_Report_Contribution_Multiplier>
+  <BDP_Info_Report_Contribution_Derived>派生值</BDP_Info_Report_Contribution_Derived>
+  <BDP_Info_Report_Contribution_Suppressed>已抑制</BDP_Info_Report_Contribution_Suppressed>
+  <BDP_Info_Report_Contribution_Unknown>未分类贡献</BDP_Info_Report_Contribution_Unknown>
+  <BDP_Info_Report_Source>{0}：{1}</BDP_Info_Report_Source>
+  <BDP_Info_Report_Source_BaseDefinition>基础定义</BDP_Info_Report_Source_BaseDefinition>
+  <BDP_Info_Report_Source_Variant>武装构型</BDP_Info_Report_Source_Variant>
+  <BDP_Info_Report_Source_Runtime>运行时结果</BDP_Info_Report_Source_Runtime>
+  <BDP_Info_Report_Source_Other>其它来源</BDP_Info_Report_Source_Other>
+  <BDP_Info_Block_Description>描述</BDP_Info_Block_Description>
+  <BDP_Info_Block_AbilityDef>能力定义</BDP_Info_Block_AbilityDef>
+  <BDP_Info_Block_VerbProperties>动作参数</BDP_Info_Block_VerbProperties>
+  <BDP_Info_Block_AbilityComponents>能力效果组件</BDP_Info_Block_AbilityComponents>
+  <BDP_Info_Block_AbilityComponent>能力效果参数</BDP_Info_Block_AbilityComponent>
+  <BDP_Info_Block_ExtraDamages>附加伤害列表</BDP_Info_Block_ExtraDamages>
+  <BDP_Info_Block_ExtraDamage>附加伤害</BDP_Info_Block_ExtraDamage>
+  <BDP_Info_Block_ArmamentForm>武装构型参数</BDP_Info_Block_ArmamentForm>
+  <BDP_Info_Block_ToolExtraDamages>近战附加伤害列表</BDP_Info_Block_ToolExtraDamages>
+  <BDP_Info_Block_ToolSurpriseExtraDamages>偷袭附加伤害列表</BDP_Info_Block_ToolSurpriseExtraDamages>
+  <BDP_Info_Block_Hediff>健康状态表达</BDP_Info_Block_Hediff>
+  <BDP_Info_Block_Passive>被动表达</BDP_Info_Block_Passive>
+  <BDP_Info_Block_Contexts>形态与姿态</BDP_Info_Block_Contexts>
+  <BDP_Info_Block_Provenance>来源记录</BDP_Info_Block_Provenance>
+  <BDP_Info_Block_ExpressionModes>表达形态配置</BDP_Info_Block_ExpressionModes>
+  <BDP_Info_Block_Modes>形态列表</BDP_Info_Block_Modes>
+  <BDP_Info_Block_Mode>形态</BDP_Info_Block_Mode>
+  <BDP_Info_Block_Stances>姿态列表</BDP_Info_Block_Stances>
+  <BDP_Info_Block_Stance>姿态</BDP_Info_Block_Stance>
+  <BDP_Info_Block_Execution>执行</BDP_Info_Block_Execution>
+  <BDP_Info_Block_OriginSpread>发射点散布</BDP_Info_Block_OriginSpread>
+  <BDP_Info_Block_Presentation>表现</BDP_Info_Block_Presentation>
+  <BDP_Info_Block_Targeting>目标</BDP_Info_Block_Targeting>
+  <BDP_Info_Block_TargetParams>目标参数</BDP_Info_Block_TargetParams>
+  <BDP_Info_Block_TargetSpecificThing>指定目标</BDP_Info_Block_TargetSpecificThing>
+  <BDP_Info_Block_Projectile>投射物</BDP_Info_Block_Projectile>
+  <BDP_Info_Block_MeleeTools>近战工具列表</BDP_Info_Block_MeleeTools>
+  <BDP_Info_Block_MeleeTool>近战工具</BDP_Info_Block_MeleeTool>
+  <BDP_Info_Block_RangedModules>远程模块列表</BDP_Info_Block_RangedModules>
+  <BDP_Info_Block_RangedModule>远程模块</BDP_Info_Block_RangedModule>
+  <BDP_Info_Block_ModuleConfig>模块配置</BDP_Info_Block_ModuleConfig>
+  <BDP_Info_Block_ModuleConfigEntry>模块配置项</BDP_Info_Block_ModuleConfigEntry>
+  <BDP_Info_Block_RangedModuleAugmentations>远程模块增强列表</BDP_Info_Block_RangedModuleAugmentations>
+  <BDP_Info_Block_RangedModuleAugmentation>远程模块增强</BDP_Info_Block_RangedModuleAugmentation>
+  <BDP_Info_Block_Modules>模块列表</BDP_Info_Block_Modules>
+  <BDP_Info_Block_Shield>护盾</BDP_Info_Block_Shield>
+  <BDP_Info_Block_GuardWatch>注视警戒</BDP_Info_Block_GuardWatch>
+  <BDP_Info_Block_Verbs>Verb 列表（行为列表）</BDP_Info_Block_Verbs>
+  <BDP_Info_Block_Verb>Verb（行为）</BDP_Info_Block_Verb>
+  <BDP_Info_Block_Tools>Tool 列表（工具列表）</BDP_Info_Block_Tools>
+  <BDP_Info_Block_Tool>Tool（工具）</BDP_Info_Block_Tool>
+  <BDP_Info_Block_HediffStages>健康状态阶段</BDP_Info_Block_HediffStages>
+  <BDP_Info_Block_HediffStage>健康状态阶段</BDP_Info_Block_HediffStage>
+  <BDP_Info_Block_StatFactors>属性倍率列表</BDP_Info_Block_StatFactors>
+  <BDP_Info_Block_StatFactor>属性倍率</BDP_Info_Block_StatFactor>
+  <BDP_Info_Block_Color>颜色分量</BDP_Info_Block_Color>
+  <BDP_Info_Block_SustainCostBySourceCount>按来源数量的持续消耗</BDP_Info_Block_SustainCostBySourceCount>
+  <BDP_Info_Block_SustainCostBySourceCountEntry>持续消耗档位</BDP_Info_Block_SustainCostBySourceCountEntry>
+
+  <!-- 芯片信息模型：通用字段标签。 -->
+  <BDP_Info_Field_Category>分类</BDP_Info_Field_Category>
+  <BDP_Info_Field_Tags>标签</BDP_Info_Field_Tags>
+  <!-- 成品芯片所属的最终职业体系。 -->
+  <BDP_Info_Field_Profession>职业体系</BDP_Info_Field_Profession>
+  <BDP_Info_Field_SlotRegion>槽位区域</BDP_Info_Field_SlotRegion>
+  <BDP_Info_Field_SlotOccupancy>槽位占用</BDP_Info_Field_SlotOccupancy>
+  <BDP_Info_Field_ActivationDelay>激活延迟</BDP_Info_Field_ActivationDelay>
+  <BDP_Info_Field_DeactivationDelay>停用延迟</BDP_Info_Field_DeactivationDelay>
+  <BDP_Info_Field_ActivationExclusionGroups>激活互斥组</BDP_Info_Field_ActivationExclusionGroups>
+  <!-- 激活前摇开始时的音效定义引用。 -->
+  <BDP_Info_Field_ActivationWarmupStartSound>激活前摇开始音效</BDP_Info_Field_ActivationWarmupStartSound>
+  <!-- 激活前摇期间循环播放的音效定义引用。 -->
+  <BDP_Info_Field_ActivationWarmupLoopSound>激活前摇循环音效</BDP_Info_Field_ActivationWarmupLoopSound>
+  <!-- 芯片完成激活时的音效定义引用。 -->
+  <BDP_Info_Field_ActivationWarmupEndSound>激活完成音效</BDP_Info_Field_ActivationWarmupEndSound>
+  <BDP_Info_Field_CapacityCost>常驻占用</BDP_Info_Field_CapacityCost>
+  <BDP_Info_Field_ActivationCost>激活成本</BDP_Info_Field_ActivationCost>
+  <BDP_Info_Field_ActivationRequirement>激活要求</BDP_Info_Field_ActivationRequirement>
+  <BDP_Info_Field_Expression>表达</BDP_Info_Field_Expression>
+  <BDP_Info_Field_Description>描述</BDP_Info_Field_Description>
+  <BDP_Info_Field_ProjectileDef>投射物</BDP_Info_Field_ProjectileDef>
+  <BDP_Info_Field_VerbLabel>动作名称</BDP_Info_Field_VerbLabel>
+  <BDP_Info_Field_VerbCategory>动作类别</BDP_Info_Field_VerbCategory>
+  <BDP_Info_Field_WeaponMode>武器模式</BDP_Info_Field_WeaponMode>
+  <BDP_Info_Field_Range>射程</BDP_Info_Field_Range>
+  <BDP_Info_Field_MinRange>最小射程</BDP_Info_Field_MinRange>
+  <BDP_Info_Field_Warmup>预热时间</BDP_Info_Field_Warmup>
+  <BDP_Info_Field_BurstShotCount>发射数量</BDP_Info_Field_BurstShotCount>
+  <BDP_Info_Field_AccuracyTouch>贴身精度</BDP_Info_Field_AccuracyTouch>
+  <BDP_Info_Field_AccuracyShort>近距离精度</BDP_Info_Field_AccuracyShort>
+  <BDP_Info_Field_AccuracyMedium>中距离精度</BDP_Info_Field_AccuracyMedium>
+  <BDP_Info_Field_AccuracyLong>远距离精度</BDP_Info_Field_AccuracyLong>
+  <BDP_Info_Field_Cooldown>冷却时间</BDP_Info_Field_Cooldown>
+  <BDP_Info_Field_ProjectileDamage>单发伤害</BDP_Info_Field_ProjectileDamage>
+  <!-- 近战与远程共用图表规则，但伤害标签按实际攻击含义区分。 -->
+  <BDP_Info_Field_AttackDamage>单次伤害</BDP_Info_Field_AttackDamage>
+  <BDP_Info_Field_ProjectileSpeed>弹速</BDP_Info_Field_ProjectileSpeed>
+  <BDP_Info_Field_Tool>近战工具</BDP_Info_Field_Tool>
+  <BDP_Info_Field_ToolPower>工具威力</BDP_Info_Field_ToolPower>
+  <BDP_Info_Field_ToolCooldown>工具冷却</BDP_Info_Field_ToolCooldown>
+  <BDP_Info_Field_Ability>能力</BDP_Info_Field_Ability>
+  <BDP_Info_Field_AbilityLabel>能力名称</BDP_Info_Field_AbilityLabel>
+  <BDP_Info_Field_AbilityDescription>能力说明</BDP_Info_Field_AbilityDescription>
+  <BDP_Info_Field_TargetRequired>需要目标</BDP_Info_Field_TargetRequired>
+  <BDP_Info_Field_TargetWorldCell>目标为世界地图格</BDP_Info_Field_TargetWorldCell>
+  <BDP_Info_Field_Hostile>敌对能力</BDP_Info_Field_Hostile>
+  <BDP_Info_Field_CasterMustBeCapableOfViolence>施法者必须具备暴力能力</BDP_Info_Field_CasterMustBeCapableOfViolence>
+  <BDP_Info_Field_CooldownMin>最短冷却时间</BDP_Info_Field_CooldownMin>
+  <BDP_Info_Field_CooldownMax>最长冷却时间</BDP_Info_Field_CooldownMax>
+  <BDP_Info_Field_Charges>充能次数</BDP_Info_Field_Charges>
+  <BDP_Info_Field_CooldownPerCharge>每次充能独立冷却</BDP_Info_Field_CooldownPerCharge>
+  <BDP_Info_Field_HasExternallyHandledCooldown>由外部逻辑处理冷却</BDP_Info_Field_HasExternallyHandledCooldown>
+  <BDP_Info_Field_EffectRadius>效果半径</BDP_Info_Field_EffectRadius>
+  <BDP_Info_Field_EffectDuration>效果持续时间</BDP_Info_Field_EffectDuration>
+  <BDP_Info_Field_Hediff>健康状态</BDP_Info_Field_Hediff>
+  <BDP_Info_Field_HediffApplyMode>健康状态应用方式</BDP_Info_Field_HediffApplyMode>
+  <BDP_Info_Field_HediffControlMode>健康状态控制方式</BDP_Info_Field_HediffControlMode>
+  <!-- None 模式的玩家可见名称。 -->
+  <BDP_Info_WeaponMode_None>未指定</BDP_Info_WeaponMode_None>
+  <!-- Melee 模式的玩家可见名称。 -->
+  <BDP_Info_WeaponMode_Melee>近战</BDP_Info_WeaponMode_Melee>
+  <!-- Ranged 模式的玩家可见名称。 -->
+  <BDP_Info_WeaponMode_Ranged>远程</BDP_Info_WeaponMode_Ranged>
+  <!-- countToSeverity 模式的玩家可见名称。 -->
+  <BDP_Info_HediffApplyMode_CountToSeverity>按结果数量映射强度</BDP_Info_HediffApplyMode_CountToSeverity>
+  <!-- Automatic 模式的玩家可见名称。 -->
+  <BDP_Info_HediffControlMode_Automatic>自动</BDP_Info_HediffControlMode_Automatic>
+  <!-- AbilityButton 模式的玩家可见名称。 -->
+  <BDP_Info_HediffControlMode_AbilityButton>能力按钮</BDP_Info_HediffControlMode_AbilityButton>
+  <BDP_Info_Field_Passive>被动</BDP_Info_Field_Passive>
+  <BDP_Info_Field_ExposedData>附加数据</BDP_Info_Field_ExposedData>
+  <BDP_Info_Field_PublishedKey>发布键</BDP_Info_Field_PublishedKey>
+  <BDP_Info_Field_Available>可用</BDP_Info_Field_Available>
+  <BDP_Info_Field_CanProject>允许投影</BDP_Info_Field_CanProject>
+  <BDP_Info_Field_Role>角色</BDP_Info_Field_Role>
+  <BDP_Info_Field_Variant>构型变体</BDP_Info_Field_Variant>
+  <BDP_Info_Field_Mode>形态</BDP_Info_Field_Mode>
+  <BDP_Info_Field_Stance>姿态</BDP_Info_Field_Stance>
+  <BDP_Info_Field_SourceKind>来源类型</BDP_Info_Field_SourceKind>
+  <BDP_Info_Field_Consumption>消耗</BDP_Info_Field_Consumption>
+  <BDP_Info_Field_UseCost>使用消耗</BDP_Info_Field_UseCost>
+  <BDP_Info_Field_MinimumRequired>最低Trion要求</BDP_Info_Field_MinimumRequired>
+  <BDP_Info_Field_SustainCost>维持消耗</BDP_Info_Field_SustainCost>
+  <BDP_Info_Field_SustainCostLine>{0}个来源：{1}</BDP_Info_Field_SustainCostLine>
+  <BDP_Info_Field_SourceCount>来源数量</BDP_Info_Field_SourceCount>
+  <BDP_Info_Field_TotalPerSecond>每秒总消耗</BDP_Info_Field_TotalPerSecond>
+  <BDP_Info_Field_Rhythm>执行节奏</BDP_Info_Field_Rhythm>
+  <BDP_Info_Field_HitCount>命中次数</BDP_Info_Field_HitCount>
+  <BDP_Info_Field_HitIntervalTicks>命中间隔游戏刻</BDP_Info_Field_HitIntervalTicks>
+  <BDP_Info_Field_LateralMin>横向最小偏移</BDP_Info_Field_LateralMin>
+  <BDP_Info_Field_LateralMax>横向最大偏移</BDP_Info_Field_LateralMax>
+  <BDP_Info_Field_ForwardMin>前后最小偏移</BDP_Info_Field_ForwardMin>
+  <BDP_Info_Field_ForwardMax>前后最大偏移</BDP_Info_Field_ForwardMax>
+  <BDP_Info_Field_ManualEntryIconTexPath>手动入口贴图路径</BDP_Info_Field_ManualEntryIconTexPath>
+  <BDP_Info_Field_VisualPresetDefName>视觉预设 DefName</BDP_Info_Field_VisualPresetDefName>
+  <BDP_Info_Field_VisualGraphicOverrideDefName>视觉图形覆盖预设 DefName</BDP_Info_Field_VisualGraphicOverrideDefName>
+  <BDP_Info_Field_CompositeVisualPresetDefName>复合视觉预设 DefName</BDP_Info_Field_CompositeVisualPresetDefName>
+  <BDP_Info_Field_ComboAttackVisualPresetDefName>组合技攻击视觉预设 DefName</BDP_Info_Field_ComboAttackVisualPresetDefName>
+  <BDP_Info_Field_ForceSuppressHostEquipment>强制压制宿主装备表现</BDP_Info_Field_ForceSuppressHostEquipment>
+  <BDP_Info_Field_VisualPriority>视觉优先级</BDP_Info_Field_VisualPriority>
+  <BDP_Info_Field_DirectTargetLineOfSight>目标直线视线要求</BDP_Info_Field_DirectTargetLineOfSight>
+  <BDP_Info_Field_TicksBetweenBurstShots>连发射击间隔游戏刻</BDP_Info_Field_TicksBetweenBurstShots>
+  <BDP_Info_Field_NoiseRadius>声音传播半径</BDP_Info_Field_NoiseRadius>
+  <BDP_Info_Field_MuzzleFlashScale>枪口闪光缩放</BDP_Info_Field_MuzzleFlashScale>
+  <BDP_Info_Field_ForcedMissRadius>强制脱靶半径</BDP_Info_Field_ForcedMissRadius>
+  <BDP_Info_Field_ForcedMissEvenDispersal>均匀分布脱靶</BDP_Info_Field_ForcedMissEvenDispersal>
+  <BDP_Info_Field_MustCastOnOpenGround>必须在开阔地施放</BDP_Info_Field_MustCastOnOpenGround>
+  <BDP_Info_Field_ForceNormalTimeSpeed>强制正常时间速度</BDP_Info_Field_ForceNormalTimeSpeed>
+  <BDP_Info_Field_OnlyManualCast>仅允许手动施放</BDP_Info_Field_OnlyManualCast>
+  <BDP_Info_Field_StopBurstWithoutLos>失去视线时停止连发</BDP_Info_Field_StopBurstWithoutLos>
+  <BDP_Info_Field_CanGoWild>允许低命中时飞偏</BDP_Info_Field_CanGoWild>
+  <BDP_Info_Field_MeleeDamageDef>近战基础伤害类型</BDP_Info_Field_MeleeDamageDef>
+  <BDP_Info_Field_MeleeDamageBaseAmount>近战基础伤害</BDP_Info_Field_MeleeDamageBaseAmount>
+  <BDP_Info_Field_MeleeArmorPenetration>近战基础护甲穿透</BDP_Info_Field_MeleeArmorPenetration>
+  <BDP_Info_Field_DamageMultiplier>伤害倍率</BDP_Info_Field_DamageMultiplier>
+  <BDP_Info_Field_SpeedMultiplier>速度倍率</BDP_Info_Field_SpeedMultiplier>
+  <BDP_Info_Field_StoppingPowerMultiplier>停止力倍率</BDP_Info_Field_StoppingPowerMultiplier>
+  <BDP_Info_Field_DamageDefOverride>伤害类型覆盖声明</BDP_Info_Field_DamageDefOverride>
+  <BDP_Info_Field_ProjectileArmorPenetration>护甲穿透</BDP_Info_Field_ProjectileArmorPenetration>
+  <BDP_Info_Field_ProjectileStoppingPower>停止力</BDP_Info_Field_ProjectileStoppingPower>
+  <BDP_Info_Field_ProjectileFlyOverhead>投射物越过头顶飞行</BDP_Info_Field_ProjectileFlyOverhead>
+  <BDP_Info_Field_ProjectileAlwaysFreeIntercept>投射物始终可被免费拦截</BDP_Info_Field_ProjectileAlwaysFreeIntercept>
+  <BDP_Info_Field_ProjectileArcHeightFactor>投射物弧高比例</BDP_Info_Field_ProjectileArcHeightFactor>
+  <BDP_Info_Field_ExplosionDelay>爆炸延迟游戏刻</BDP_Info_Field_ExplosionDelay>
+  <BDP_Info_Field_ExplosionDamageFalloff>爆炸伤害衰减</BDP_Info_Field_ExplosionDamageFalloff>
+  <BDP_Info_Field_ApplyDamageToExplosionCellsNeighbors>伤害爆炸邻近格</BDP_Info_Field_ApplyDamageToExplosionCellsNeighbors>
+  <BDP_Info_Field_ExplosionChanceToStartFire>爆炸起火概率</BDP_Info_Field_ExplosionChanceToStartFire>
+  <BDP_Info_Field_NumExtraHitCells>额外命中格数量</BDP_Info_Field_NumExtraHitCells>
+  <BDP_Info_Field_PreExplosionSpawnThingDef>爆炸前生成对象</BDP_Info_Field_PreExplosionSpawnThingDef>
+  <BDP_Info_Field_PreExplosionSpawnChance>爆炸前生成概率</BDP_Info_Field_PreExplosionSpawnChance>
+  <BDP_Info_Field_PreExplosionSpawnThingCount>爆炸前生成数量</BDP_Info_Field_PreExplosionSpawnThingCount>
+  <BDP_Info_Field_PostExplosionSpawnThingDef>爆炸后生成对象</BDP_Info_Field_PostExplosionSpawnThingDef>
+  <BDP_Info_Field_PostExplosionSpawnThingDefWater>水中爆炸后生成对象</BDP_Info_Field_PostExplosionSpawnThingDefWater>
+  <BDP_Info_Field_PostExplosionSpawnChance>爆炸后生成概率</BDP_Info_Field_PostExplosionSpawnChance>
+  <BDP_Info_Field_PostExplosionSpawnThingCount>爆炸后生成数量</BDP_Info_Field_PostExplosionSpawnThingCount>
+  <BDP_Info_Field_PostExplosionGasType>爆炸后气体类型</BDP_Info_Field_PostExplosionGasType>
+  <BDP_Info_Field_ProjectileFilth>投射物污物类型</BDP_Info_Field_ProjectileFilth>
+  <BDP_Info_Field_ProjectileFilthChance>生成污物概率</BDP_Info_Field_ProjectileFilthChance>
+  <BDP_Info_Field_ExplosionSpawnsSingleFilth>爆炸生成单个污物</BDP_Info_Field_ExplosionSpawnsSingleFilth>
+  <BDP_Info_Field_SpawnTerrain>生成地形</BDP_Info_Field_SpawnTerrain>
+  <BDP_Info_Field_TerrainChance>生成地形概率</BDP_Info_Field_TerrainChance>
+  <BDP_Info_Field_TerrainReplacesFloors>生成地形替换地板</BDP_Info_Field_TerrainReplacesFloors>
+  <BDP_Info_Field_SpawnsThingDef>生成对象</BDP_Info_Field_SpawnsThingDef>
+  <BDP_Info_Field_TryAdjacentFreeSpaces>尝试邻近空位</BDP_Info_Field_TryAdjacentFreeSpaces>
+  <BDP_Info_Field_SpawnsPawnKind>生成 Pawn 种类</BDP_Info_Field_SpawnsPawnKind>
+  <BDP_Info_Field_ExtraDamageChance>附加伤害概率</BDP_Info_Field_ExtraDamageChance>
+  <BDP_Info_Field_AbilityComponentParameter>能力组件参数</BDP_Info_Field_AbilityComponentParameter>
+  <BDP_Info_Field_SpeedPerTick>每刻推进距离</BDP_Info_Field_SpeedPerTick>
+  <BDP_Info_Field_RespectWalls>受墙体阻挡</BDP_Info_Field_RespectWalls>
+  <BDP_Info_Field_FriendlyFire>允许友伤</BDP_Info_Field_FriendlyFire>
+  <BDP_Info_Field_DamageBuildings>对建筑造成伤害</BDP_Info_Field_DamageBuildings>
+  <BDP_Info_Field_BuildingDamageFactor>建筑伤害倍率</BDP_Info_Field_BuildingDamageFactor>
+  <BDP_Info_Field_RangeMultiplier>射程倍率</BDP_Info_Field_RangeMultiplier>
+  <BDP_Info_Field_AccuracyMultiplier>精度倍率</BDP_Info_Field_AccuracyMultiplier>
+  <BDP_Info_Field_WarmupMultiplier>预热时间倍率</BDP_Info_Field_WarmupMultiplier>
+  <BDP_Info_Field_CooldownMultiplier>冷却时间倍率</BDP_Info_Field_CooldownMultiplier>
+  <BDP_Info_Field_BurstShotCountMultiplier>发射数量倍率</BDP_Info_Field_BurstShotCountMultiplier>
+  <BDP_Info_Field_ToolCapacities>工具能力类型</BDP_Info_Field_ToolCapacities>
+  <BDP_Info_Field_ToolArmorPenetration>工具护甲穿透</BDP_Info_Field_ToolArmorPenetration>
+  <BDP_Info_Field_ToolChanceFactor>工具攻击方式权重</BDP_Info_Field_ToolChanceFactor>
+  <BDP_Info_Field_ToolHediff>工具附加健康状态</BDP_Info_Field_ToolHediff>
+  <BDP_Info_Field_ToolAlwaysTreatAsWeapon>始终视为武器</BDP_Info_Field_ToolAlwaysTreatAsWeapon>
+  <BDP_Info_Field_ToolLinkedBodyPartsGroup>关联身体部位组</BDP_Info_Field_ToolLinkedBodyPartsGroup>
+  <BDP_Info_Field_ToolEnsureLinkedBodyPartsGroupAlwaysUsable>确保关联身体部位始终可用</BDP_Info_Field_ToolEnsureLinkedBodyPartsGroupAlwaysUsable>
+  <BDP_Info_Field_ModuleDef>模块 DefName</BDP_Info_Field_ModuleDef>
+  <BDP_Info_Field_ModuleEnabled>模块已启用</BDP_Info_Field_ModuleEnabled>
+  <BDP_Info_Field_SourceResultId>来源结果标识</BDP_Info_Field_SourceResultId>
+  <BDP_Info_Field_ModuleRuntimeClass>模块运行时类型</BDP_Info_Field_ModuleRuntimeClass>
+  <BDP_Info_Field_AppliesToCapability>适用能力</BDP_Info_Field_AppliesToCapability>
+  <BDP_Info_Field_AugmentationScope>增强作用范围</BDP_Info_Field_AugmentationScope>
+  <BDP_Info_Field_AllowedSourceVariantKeys>允许来源变体键</BDP_Info_Field_AllowedSourceVariantKeys>
+  <BDP_Info_Field_DisplayNamePrefixMode>显示名称前缀模式</BDP_Info_Field_DisplayNamePrefixMode>
+  <BDP_Info_Field_DisplayNamePrefix>显示名称前缀</BDP_Info_Field_DisplayNamePrefix>
+  <BDP_Info_Field_DefaultModeKey>默认形态键</BDP_Info_Field_DefaultModeKey>
+  <BDP_Info_Field_ModeKey>形态键</BDP_Info_Field_ModeKey>
+  <BDP_Info_Field_DisplayLabel>显示名称</BDP_Info_Field_DisplayLabel>
+  <BDP_Info_Field_DisplayLabelKey>显示名称语言包键</BDP_Info_Field_DisplayLabelKey>
+  <BDP_Info_Field_GizmoIconTexPath>Gizmo 贴图路径（操作按钮贴图路径）</BDP_Info_Field_GizmoIconTexPath>
+  <BDP_Info_Field_ActiveEntryIds>启用表达条目标识</BDP_Info_Field_ActiveEntryIds>
+  <BDP_Info_Field_DefaultStanceKey>默认姿态键</BDP_Info_Field_DefaultStanceKey>
+  <BDP_Info_Field_StanceKey>姿态键</BDP_Info_Field_StanceKey>
+  <BDP_Info_Field_ThingId>ThingID（对象标识）</BDP_Info_Field_ThingId>
+  <BDP_Info_Field_ThingDef>Thing DefName（对象定义名称）</BDP_Info_Field_ThingDef>
+  <BDP_Info_Field_OnlyTargetFactions>仅目标派系</BDP_Info_Field_OnlyTargetFactions>
+  <BDP_Info_Field_Validator>Validator 存在（校验器存在）</BDP_Info_Field_Validator>
+  <BDP_Info_Field_CanTargetLocations>可选择地图位置</BDP_Info_Field_CanTargetLocations>
+  <BDP_Info_Field_CanTargetSelf>可选择自身</BDP_Info_Field_CanTargetSelf>
+  <BDP_Info_Field_CanTargetPawns>可选择 Pawn（人物）</BDP_Info_Field_CanTargetPawns>
+  <BDP_Info_Field_CanTargetFires>可选择火焰</BDP_Info_Field_CanTargetFires>
+  <BDP_Info_Field_CanTargetBuildings>可选择建筑</BDP_Info_Field_CanTargetBuildings>
+  <BDP_Info_Field_CanTargetItems>可选择物品</BDP_Info_Field_CanTargetItems>
+  <BDP_Info_Field_CanTargetAnimals>可选择动物</BDP_Info_Field_CanTargetAnimals>
+  <BDP_Info_Field_CanTargetHumans>可选择人类</BDP_Info_Field_CanTargetHumans>
+  <BDP_Info_Field_CanTargetMechs>可选择机械族</BDP_Info_Field_CanTargetMechs>
+  <BDP_Info_Field_CanTargetPlants>可选择植物</BDP_Info_Field_CanTargetPlants>
+  <BDP_Info_Field_CanTargetSubhumans>可选择亚人</BDP_Info_Field_CanTargetSubhumans>
+  <BDP_Info_Field_CanTargetEntities>可选择实体</BDP_Info_Field_CanTargetEntities>
+  <BDP_Info_Field_OnlyTargetFlammables>仅目标可燃物</BDP_Info_Field_OnlyTargetFlammables>
+  <BDP_Info_Field_MustBeSelectable>必须可选择</BDP_Info_Field_MustBeSelectable>
+  <BDP_Info_Field_NeverTargetDoors>不目标门</BDP_Info_Field_NeverTargetDoors>
+  <BDP_Info_Field_NeverTargetIncapacitated>不目标失去行动能力者</BDP_Info_Field_NeverTargetIncapacitated>
+  <BDP_Info_Field_NeverTargetHostileFaction>不目标敌对派系</BDP_Info_Field_NeverTargetHostileFaction>
+  <BDP_Info_Field_OnlyTargetSameIdeo>仅目标相同意识形态</BDP_Info_Field_OnlyTargetSameIdeo>
+  <BDP_Info_Field_OnlyTargetThingsAffectingRegions>仅目标影响区域的对象</BDP_Info_Field_OnlyTargetThingsAffectingRegions>
+  <BDP_Info_Field_OnlyTargetDamagedThings>仅目标受损对象</BDP_Info_Field_OnlyTargetDamagedThings>
+  <BDP_Info_Field_MapObjectTargetsMustBeAutoAttackable>地图对象必须可自动攻击</BDP_Info_Field_MapObjectTargetsMustBeAutoAttackable>
+  <BDP_Info_Field_OnlyTargetIncapacitatedPawns>仅目标失去行动能力的 Pawn</BDP_Info_Field_OnlyTargetIncapacitatedPawns>
+  <BDP_Info_Field_OnlyTargetColonistsOrPrisoners>仅目标殖民者或囚犯</BDP_Info_Field_OnlyTargetColonistsOrPrisoners>
+  <BDP_Info_Field_OnlyTargetColonistsOrPrisonersOrSlaves>仅目标殖民者、囚犯或奴隶</BDP_Info_Field_OnlyTargetColonistsOrPrisonersOrSlaves>
+  <BDP_Info_Field_OnlyTargetColonistsOrPrisonersOrSlavesAllowMinorMentalBreaks>允许轻微精神崩溃的殖民者、囚犯或奴隶</BDP_Info_Field_OnlyTargetColonistsOrPrisonersOrSlavesAllowMinorMentalBreaks>
+  <BDP_Info_Field_OnlyTargetControlledPawns>仅目标受控 Pawn</BDP_Info_Field_OnlyTargetControlledPawns>
+  <BDP_Info_Field_OnlyTargetColonists>仅目标殖民者</BDP_Info_Field_OnlyTargetColonists>
+  <BDP_Info_Field_OnlyTargetPrisonersOfColony>仅目标本殖民地囚犯</BDP_Info_Field_OnlyTargetPrisonersOfColony>
+  <BDP_Info_Field_OnlyTargetPsychicSensitive>仅目标灵能敏感者</BDP_Info_Field_OnlyTargetPsychicSensitive>
+  <BDP_Info_Field_OnlyTargetAnimaTrees>仅目标精神树</BDP_Info_Field_OnlyTargetAnimaTrees>
+  <BDP_Info_Field_CanTargetBloodfeeders>可选择血食者</BDP_Info_Field_CanTargetBloodfeeders>
+  <BDP_Info_Field_OnlyRepairableMechs>仅目标可修理机械族</BDP_Info_Field_OnlyRepairableMechs>
+  <BDP_Info_Field_ThingCategory>Thing 类别（对象类别）</BDP_Info_Field_ThingCategory>
+  <BDP_Info_Field_OnlyTargetDoors>仅目标门</BDP_Info_Field_OnlyTargetDoors>
+  <BDP_Info_Field_CanTargetCorpses>可选择尸体</BDP_Info_Field_CanTargetCorpses>
+  <BDP_Info_Field_OnlyTargetCorpses>仅目标尸体</BDP_Info_Field_OnlyTargetCorpses>
+  <BDP_Info_Field_MapBoundsContractedBy>地图边界收缩格数</BDP_Info_Field_MapBoundsContractedBy>
+  <BDP_Info_Field_EnableAngleCheck>启用角度检查</BDP_Info_Field_EnableAngleCheck>
+  <BDP_Info_Field_BlockAngleRange>抵挡角度范围</BDP_Info_Field_BlockAngleRange>
+  <BDP_Info_Field_BlockAngleOffset>抵挡角度偏移</BDP_Info_Field_BlockAngleOffset>
+  <BDP_Info_Field_BlockChance>抵挡成功率</BDP_Info_Field_BlockChance>
+  <BDP_Info_Field_AllowMeleeDamage>允许近战伤害</BDP_Info_Field_AllowMeleeDamage>
+  <BDP_Info_Field_TrionCostMultiplier>Trion 成本倍率</BDP_Info_Field_TrionCostMultiplier>
+  <BDP_Info_Field_StackedEnableAngleCheck>聚合护盾启用角度检查</BDP_Info_Field_StackedEnableAngleCheck>
+  <BDP_Info_Field_StackedBlockAngleRange>聚合护盾抵挡角度范围</BDP_Info_Field_StackedBlockAngleRange>
+  <BDP_Info_Field_StackedBlockChance>聚合护盾抵挡成功率</BDP_Info_Field_StackedBlockChance>
+  <BDP_Info_Field_BlockEffectDef>抵挡特效 DefName</BDP_Info_Field_BlockEffectDef>
+  <BDP_Info_Field_EffectScale>特效缩放</BDP_Info_Field_EffectScale>
+  <BDP_Info_Field_ShowBlockGraphic>显示抵挡图形</BDP_Info_Field_ShowBlockGraphic>
+  <BDP_Info_Field_ShieldRadius>护盾半径</BDP_Info_Field_ShieldRadius>
+  <BDP_Info_Field_ImpactEffectRadius>命中特效半径</BDP_Info_Field_ImpactEffectRadius>
+  <BDP_Info_Field_ShowShieldBubble>显示护盾球</BDP_Info_Field_ShowShieldBubble>
+  <BDP_Info_Field_BlockVisualImpulseTicks>抵挡视觉冲量游戏刻</BDP_Info_Field_BlockVisualImpulseTicks>
+  <BDP_Info_Field_BlockVisualImpulseDistance>抵挡视觉冲量距离</BDP_Info_Field_BlockVisualImpulseDistance>
+  <BDP_Info_Field_UseDirectionalImpactDepth>使用方向命中景深</BDP_Info_Field_UseDirectionalImpactDepth>
+  <BDP_Info_Field_BackgroundBlockFlashFleckDef>后景抵挡闪光 Fleck DefName</BDP_Info_Field_BackgroundBlockFlashFleckDef>
+  <BDP_Info_Field_ForegroundDeflectEffectDef>前景偏转特效 DefName</BDP_Info_Field_ForegroundDeflectEffectDef>
+  <BDP_Info_Field_BackgroundDeflectEffectDef>后景偏转特效 DefName</BDP_Info_Field_BackgroundDeflectEffectDef>
+  <BDP_Info_Field_OwnerTypeOverride>拥有者类型覆盖 DefName</BDP_Info_Field_OwnerTypeOverride>
+  <BDP_Info_Field_VerbClass>Verb 类型</BDP_Info_Field_VerbClass>
+  <BDP_Info_Field_IsPrimary>主 Verb</BDP_Info_Field_IsPrimary>
+  <BDP_Info_Field_RequireLineOfSight>要求直线视线</BDP_Info_Field_RequireLineOfSight>
+  <BDP_Info_Field_Ai_IsWeapon>AI 武器标记</BDP_Info_Field_Ai_IsWeapon>
+  <BDP_Info_Field_Violent>暴力标记</BDP_Info_Field_Violent>
+  <BDP_Info_Field_Targetable>可作为目标</BDP_Info_Field_Targetable>
+  <BDP_Info_Field_HasStandardCommand>有标准命令</BDP_Info_Field_HasStandardCommand>
+  <BDP_Info_Field_CommandIcon>命令贴图</BDP_Info_Field_CommandIcon>
+  <BDP_Info_Field_MinSeverity>最低严重度</BDP_Info_Field_MinSeverity>
+  <BDP_Info_Field_DisabledWorkTags>禁用工作标签</BDP_Info_Field_DisabledWorkTags>
+  <BDP_Info_Field_Stat>属性 DefName</BDP_Info_Field_Stat>
+  <BDP_Info_Field_Value>数值</BDP_Info_Field_Value>
+  <BDP_Info_Field_R>红色分量</BDP_Info_Field_R>
+  <BDP_Info_Field_G>绿色分量</BDP_Info_Field_G>
+  <BDP_Info_Field_B>蓝色分量</BDP_Info_Field_B>
+  <BDP_Info_Field_A>透明度分量</BDP_Info_Field_A>
+  <!-- 远程模块配置字段。 -->
+  <BDP_Info_Field_MaxAnchors>最大锚点数量</BDP_Info_Field_MaxAnchors>
+  <BDP_Info_Field_AllowGroundFinal>允许地面最终目标</BDP_Info_Field_AllowGroundFinal>
+  <BDP_Info_Field_AllowThingFinal>允许 Thing 最终目标</BDP_Info_Field_AllowThingFinal>
+  <BDP_Info_Field_ArrivalTolerance>到达容差</BDP_Info_Field_ArrivalTolerance>
+  <BDP_Info_Field_IntermediateSpreadRadius>中间散布半径</BDP_Info_Field_IntermediateSpreadRadius>
+  <BDP_Info_Field_FinalSpreadRadius>最终散布半径</BDP_Info_Field_FinalSpreadRadius>
+  <BDP_Info_Field_HighAccuracySpreadScale>高精度散布比例</BDP_Info_Field_HighAccuracySpreadScale>
+  <BDP_Info_Field_SpreadSafetyShrinkSteps>散布安全收缩次数</BDP_Info_Field_SpreadSafetyShrinkSteps>
+  <BDP_Info_Field_EnableAutoRoute>启用自动路线</BDP_Info_Field_EnableAutoRoute>
+  <BDP_Info_Field_AutoRouteMaxDepth>自动路线最大深度</BDP_Info_Field_AutoRouteMaxDepth>
+  <BDP_Info_Field_AutoRouteAnchorsPerWall>每个障碍团锚点数</BDP_Info_Field_AutoRouteAnchorsPerWall>
+  <BDP_Info_Field_AutoRouteMaxObstacleCells>最大障碍格扫描数</BDP_Info_Field_AutoRouteMaxObstacleCells>
+  <BDP_Info_Field_InitialSegmentTriggerRatio>首段触发比例</BDP_Info_Field_InitialSegmentTriggerRatio>
+  <BDP_Info_Field_GroundTargetInitialSegmentTriggerRatio>地面目标首段触发比例</BDP_Info_Field_GroundTargetInitialSegmentTriggerRatio>
+  <BDP_Info_Field_MaxRelocks>最大重锁次数</BDP_Info_Field_MaxRelocks>
+  <BDP_Info_Field_HitWindow>命中窗口</BDP_Info_Field_HitWindow>
+  <BDP_Info_Field_LossBehindAngle>身后丢失角度</BDP_Info_Field_LossBehindAngle>
+  <BDP_Info_Field_LossDistanceGrowthTolerance>距离增长容忍度</BDP_Info_Field_LossDistanceGrowthTolerance>
+  <BDP_Info_Field_RelockWindow>重锁窗口</BDP_Info_Field_RelockWindow>
+  <BDP_Info_Field_MinClosingDistance>最小接近距离</BDP_Info_Field_MinClosingDistance>
+  <BDP_Info_Field_MaxTurnAngleWhenEvading>回避最大转角</BDP_Info_Field_MaxTurnAngleWhenEvading>
+  <BDP_Info_Field_PursuitMinTurnAngle>追踪最小转角</BDP_Info_Field_PursuitMinTurnAngle>
+  <BDP_Info_Field_PursuitTurnResponsiveness>追踪转向响应度</BDP_Info_Field_PursuitTurnResponsiveness>
+  <BDP_Info_Field_StaticTargetAngleBypassDistance>静态目标角度旁路距离</BDP_Info_Field_StaticTargetAngleBypassDistance>
+  <BDP_Info_Field_PredictionLeadRatio>预测前导比例</BDP_Info_Field_PredictionLeadRatio>
+  <BDP_Info_Field_RelockLeadRatio>重锁前导比例</BDP_Info_Field_RelockLeadRatio>
+  <BDP_Info_Field_RelockTurnAngle>重锁转角</BDP_Info_Field_RelockTurnAngle>
+  <BDP_Info_Field_RelockMinTurnAngle>重锁最小转角</BDP_Info_Field_RelockMinTurnAngle>
+  <BDP_Info_Field_RelockTurnResponsiveness>重锁转向响应度</BDP_Info_Field_RelockTurnResponsiveness>
+  <BDP_Info_Field_SoftReleaseDistance>软释放距离</BDP_Info_Field_SoftReleaseDistance>
+  <BDP_Info_Field_HardReleaseDistance>硬释放距离</BDP_Info_Field_HardReleaseDistance>
+  <BDP_Info_Field_ReleaseDistanceDecayPerRelock>重锁后释放距离衰减</BDP_Info_Field_ReleaseDistanceDecayPerRelock>
+  <BDP_Info_Field_CurveArcStrength>曲线弧度强度</BDP_Info_Field_CurveArcStrength>
+  <BDP_Info_Field_InertiaWeight>惯性权重</BDP_Info_Field_InertiaWeight>
+  <BDP_Info_Field_CaptureWeight>捕获权重</BDP_Info_Field_CaptureWeight>
+  <BDP_Info_Field_TerminalFlyAwayDistance>终端飞离距离</BDP_Info_Field_TerminalFlyAwayDistance>
+  <BDP_Info_Field_PerEmitVariance>每发方差</BDP_Info_Field_PerEmitVariance>
+  <BDP_Info_Field_AllowGroundTarget>允许地面目标</BDP_Info_Field_AllowGroundTarget>
+  <BDP_Info_Field_AcquireRadius>检索半径</BDP_Info_Field_AcquireRadius>
+  <BDP_Info_Field_AcquireRequireLineOfSight>检索要求视线</BDP_Info_Field_AcquireRequireLineOfSight>
+  <BDP_Info_Field_EffectKind>效果类型</BDP_Info_Field_EffectKind>
+  <BDP_Info_Field_HediffDef>健康状态 DefName</BDP_Info_Field_HediffDef>
+  <BDP_Info_Field_TargetScope>目标来源范围</BDP_Info_Field_TargetScope>
+  <BDP_Info_Field_PartTargetMode>部位作用域</BDP_Info_Field_PartTargetMode>
+  <BDP_Info_Field_HitPartSelectionMode>命中部位选择</BDP_Info_Field_HitPartSelectionMode>
+  <BDP_Info_Field_MaximumSeverityAction>最大严重度动作</BDP_Info_Field_MaximumSeverityAction>
+  <BDP_Info_Field_TargetFilter>目标筛选</BDP_Info_Field_TargetFilter>
+  <BDP_Info_Field_DamageSuppression>伤害处置</BDP_Info_Field_DamageSuppression>
+  <BDP_Info_Field_PreserveTargetResolutionWhenDamageSuppressed>伤害取消时保留目标解析</BDP_Info_Field_PreserveTargetResolutionWhenDamageSuppressed>
+  <BDP_Info_Field_InterceptedHitFeedback>拦截命中反馈</BDP_Info_Field_InterceptedHitFeedback>
+  <BDP_Info_Field_HasHitFeedbackColor>有命中反馈颜色</BDP_Info_Field_HasHitFeedbackColor>
+  <BDP_Info_Field_HasProjectileTrailColor>有投射物拖尾颜色</BDP_Info_Field_HasProjectileTrailColor>
+  <BDP_Info_Field_HasProjectileTrailCore>有投射物拖尾内芯</BDP_Info_Field_HasProjectileTrailCore>
+  <BDP_Info_Field_ProjectileTrailCoreWidthRatio>投射物拖尾内芯宽度比例</BDP_Info_Field_ProjectileTrailCoreWidthRatio>
+  <BDP_Info_Field_ProjectileTrailCoreOpacity>投射物拖尾内芯透明度</BDP_Info_Field_ProjectileTrailCoreOpacity>
+  <BDP_Info_Field_WeaponVisualPresetDefName>武器视觉预设 DefName</BDP_Info_Field_WeaponVisualPresetDefName>
+  <BDP_Info_Field_ProjectileSpeedMultiplier>投射物速度倍率</BDP_Info_Field_ProjectileSpeedMultiplier>
+  <BDP_Info_Field_Severity>严重度</BDP_Info_Field_Severity>
+  <BDP_Info_Field_DurationTicks>持续时间游戏刻</BDP_Info_Field_DurationTicks>
+  <BDP_Info_Field_StackMode>叠加模式</BDP_Info_Field_StackMode>
+  <BDP_Info_Field_BypassProjectileInterceptors>绕过投射物拦截器</BDP_Info_Field_BypassProjectileInterceptors>
+  <BDP_Info_Field_BypassRegisteredDamageShields>绕过已注册伤害护盾</BDP_Info_Field_BypassRegisteredDamageShields>
+  <BDP_Info_Field_SuppressVanillaExplosionVisualEffects>抑制原版爆炸视觉</BDP_Info_Field_SuppressVanillaExplosionVisualEffects>
+  <BDP_Info_Field_SuppressVanillaExplosionSoundEffects>抑制原版爆炸声音</BDP_Info_Field_SuppressVanillaExplosionSoundEffects>
+  <BDP_Info_Field_SuppressVanillaExplosionScreenShake>抑制原版爆炸震屏</BDP_Info_Field_SuppressVanillaExplosionScreenShake>
+  <BDP_Info_Field_ExplosionRadius>爆炸半径</BDP_Info_Field_ExplosionRadius>
+  <BDP_Info_Field_DamageDef>伤害 DefName</BDP_Info_Field_DamageDef>
+  <BDP_Info_Field_DamageAmount>伤害量</BDP_Info_Field_DamageAmount>
+  <BDP_Info_Field_ArmorPenetration>护甲穿透</BDP_Info_Field_ArmorPenetration>
+  <BDP_Info_Field_SuppressBaselineImpact>抑制基线直击</BDP_Info_Field_SuppressBaselineImpact>
+
+  <!-- 芯片信息模型：单位和兜底值。 -->
+  <BDP_Info_Unit_Trion>{0} Trion</BDP_Info_Unit_Trion>
+  <BDP_Info_Unit_TrionPerSecond>{0} Trion / 秒</BDP_Info_Unit_TrionPerSecond>
+  <BDP_Info_Unit_Seconds>{0} 秒</BDP_Info_Unit_Seconds>
+  <!-- 游戏刻整数的单位，不转换为秒。 -->
+  <BDP_Info_Unit_Ticks>{0} 游戏刻</BDP_Info_Unit_Ticks>
+  <BDP_Unit_Distance>{0} 格</BDP_Unit_Distance>
+  <!-- 芯片构型保留的原版游戏刻数单位。 -->
+  <BDP_Unit_GameTick>{0} 游戏刻</BDP_Unit_GameTick>
+  <BDP_Unit_Degree>{0}°</BDP_Unit_Degree>
+  <BDP_Unit_Percent>{0}%</BDP_Unit_Percent>
+  <!-- 语义功能展示的通用标题和空状态文字。 -->
+  <BDP_Info_Feature_Semantics>功能语义</BDP_Info_Feature_Semantics>
+  <BDP_Info_Feature_NoProperties>暂无可展示属性</BDP_Info_Feature_NoProperties>
+  <!-- 芯片功能标准属性使用的单位。 -->
+  <BDP_Unit_DistancePerSecond>{0} 格/秒</BDP_Unit_DistancePerSecond>
+  <!-- 芯片额外效果子组的玩家可读名称。 -->
+  <BDP_Info_ExtraEffect_BodyPartDisintegration>部位裂解标记</BDP_Info_ExtraEffect_BodyPartDisintegration>
+  <BDP_Info_ExtraEffect_LightSoulDefenseMovementReduction>防护形态期间移动速度降低</BDP_Info_ExtraEffect_LightSoulDefenseMovementReduction>
+  <BDP_Info_ExtraEffect_LightSoulDefenseAttackRestriction>防护形态期间禁止远程武器攻击，允许近战</BDP_Info_ExtraEffect_LightSoulDefenseAttackRestriction>
+  <!-- 能力目标类型稳定值的玩家名称。 -->
+  <BDP_TargetType_Self>自身</BDP_TargetType_Self>
+  <BDP_TargetType_Pawn>角色</BDP_TargetType_Pawn>
+  <BDP_TargetType_Building>建筑</BDP_TargetType_Building>
+  <BDP_TargetType_Location>地点</BDP_TargetType_Location>
+  <BDP_TargetType_Thing>物体</BDP_TargetType_Thing>
+  <BDP_TargetType_Area>区域</BDP_TargetType_Area>
+  <!-- 护盾抵挡攻击类别稳定值的玩家名称。 -->
+  <BDP_BlockAttackType_Melee>近战</BDP_BlockAttackType_Melee>
+  <BDP_BlockAttackType_Ranged>远程</BDP_BlockAttackType_Ranged>
+  <BDP_BlockAttackType_Explosive>爆炸</BDP_BlockAttackType_Explosive>
+  <!-- 远程攻击节奏稳定值的玩家名称。 -->
+  <BDP_RangedShotRhythm_Sequential>逐射</BDP_RangedShotRhythm_Sequential>
+  <BDP_RangedShotRhythm_Simultaneous>齐射</BDP_RangedShotRhythm_Simultaneous>
+  <!-- 常见投射物飞行特征的玩家名称；未知键由消费端回退显示。 -->
+  <BDP_ProjectileFlightFeature_Homing>追踪</BDP_ProjectileFlightFeature_Homing>
+  <BDP_ProjectileFlightFeature_Guided>引导</BDP_ProjectileFlightFeature_Guided>
+  <BDP_ProjectileFlightFeature_Turning>变向</BDP_ProjectileFlightFeature_Turning>
+  <BDP_ProjectileFlightFeature_Arcing>曲射</BDP_ProjectileFlightFeature_Arcing>
+  <BDP_ProjectileFlightFeature_ObstaclePassing>穿越障碍</BDP_ProjectileFlightFeature_ObstaclePassing>
+  <BDP_ProjectileFlightFeature_Returning>返回</BDP_ProjectileFlightFeature_Returning>
+  <!-- 路径目标选择失败时向玩家说明原因。 -->
+  <BDP_PathInput_InternalError>路径目标选择状态无效，请重新下达命令。</BDP_PathInput_InternalError>
+  <BDP_PathInput_NoTarget>请先选择有效目标。</BDP_PathInput_NoTarget>
+  <BDP_PathInput_InvalidAnchorCell>不能将此位置设为路径点。</BDP_PathInput_InvalidAnchorCell>
+  <BDP_PathInput_SegmentBlocked>路径点之间的路线被阻挡。</BDP_PathInput_SegmentBlocked>
+  <BDP_PathInput_DuplicateAnchor>该路径点与上一个路径点重复。</BDP_PathInput_DuplicateAnchor>
+  <BDP_PathInput_ThingTargetNotAllowed>此能力不允许将物体作为最终目标。</BDP_PathInput_ThingTargetNotAllowed>
+  <BDP_PathInput_GroundTargetNotAllowed>此能力不允许将地面位置作为最终目标。</BDP_PathInput_GroundTargetNotAllowed>
+  <BDP_Grasshopper_OutOfRange>目标超出有效距离。</BDP_Grasshopper_OutOfRange>
+</LanguageData>

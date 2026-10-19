@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 独立诊断注册，不依赖开局时已开启开发模式。 -->
+  <BDP_Dev_CombatAI_hooks_ready>本轮战斗诊断已自动启用，无需额外开关</BDP_Dev_CombatAI_hooks_ready>
+  <!-- 每个方法单独注册，便于确认观察范围没有缺项。 -->
+  <BDP_Dev_CombatAI_hook_installed>诊断观察入口已注册</BDP_Dev_CombatAI_hook_installed>
+  <!-- 失败不静默，不干扰正式逻辑。 -->
+  <BDP_Dev_CombatAI_Error>战斗诊断发生错误，请保留本条及后续心跳日志</BDP_Dev_CombatAI_Error>
+  <!-- 地图创建完成即输出，开发模式关闭时也有反馈。 -->
+  <BDP_Dev_CombatAI_map_ready>地图战斗诊断已加载并自动观测</BDP_Dev_CombatAI_map_ready>
+  <!-- 无敌人到场时仍证明诊断正在运行。 -->
+  <BDP_Dev_CombatAI_map_pulse>地图战斗诊断心跳</BDP_Dev_CombatAI_map_pulse>
+  <!-- 首次看见非玩家 BDP 装备持有者。 -->
+  <BDP_Dev_CombatAI_pawn_registered>敌方战斗样本已登记</BDP_Dev_CombatAI_pawn_registered>
+  <!-- 每五秒固定反馈，包括从未调用的攻击入口计数。 -->
+  <BDP_Dev_CombatAI_pawn_pulse>人物战斗状态与入口累计次数</BDP_Dev_CombatAI_pawn_pulse>
+  <!-- 每秒采样主要状态，变化或节流到期时输出。 -->
+  <BDP_Dev_CombatAI_state_sample>人物任务与行动状态采样</BDP_Dev_CombatAI_state_sample>
+  <!-- 原版职责各分支开始尝试。 -->
+  <BDP_Dev_CombatAI_decision_enter>原版决策分支开始派工</BDP_Dev_CombatAI_decision_enter>
+  <!-- 返回空值也是有效诊断结果。 -->
+  <BDP_Dev_CombatAI_decision_result>原版决策分支派工结果</BDP_Dev_CombatAI_decision_result>
+  <!-- 旧敌人保留、丢失、更换。 -->
+  <BDP_Dev_CombatAI_target_update>原版战斗目标更新</BDP_Dev_CombatAI_target_update>
+  <!-- 区分找不到射击位置和攻击方式被清空。 -->
+  <BDP_Dev_CombatAI_shoot_position>原版射击位置搜索结果</BDP_Dev_CombatAI_shoot_position>
+  <!-- 原版与 BDP 的任务替换共用此处。 -->
+  <BDP_Dev_CombatAI_job_start_attempt>任务启动或替换请求</BDP_Dev_CombatAI_job_start_attempt>
+  <!-- 请求不等于最终启动成功。 -->
+  <BDP_Dev_CombatAI_job_started>任务启动后的实际状态</BDP_Dev_CombatAI_job_started>
+  <!-- 成功、失败、被打断等结束条件。 -->
+  <BDP_Dev_CombatAI_job_cleanup>当前任务开始清理</BDP_Dev_CombatAI_job_cleanup>
+  <!-- 观察清理后旧射击会话是否仍在。 -->
+  <BDP_Dev_CombatAI_job_cleaned>当前任务清理后的状态</BDP_Dev_CombatAI_job_cleaned>
+  <!-- 原版实际触发重决策时记录。 -->
+  <BDP_Dev_CombatAI_override_enter>原版开始检查任务替换</BDP_Dev_CombatAI_override_enter>
+  <!-- 重决策不保证一定获得新任务。 -->
+  <BDP_Dev_CombatAI_override_result>原版检查任务替换后的结果</BDP_Dev_CombatAI_override_result>
+  <!-- 不主动额外搜索，仅观察原版到期门槛。 -->
+  <BDP_Dev_CombatAI_nearby_enemies>原版附近敌人判断结果</BDP_Dev_CombatAI_nearby_enemies>
+  <!-- 所有攻击查询补丁处理后的最终候选。 -->
+  <BDP_Dev_CombatAI_attack_query>原版攻击方式查询最终结果</BDP_Dev_CombatAI_attack_query>
+  <!-- 精确对照 BDP 接入前后。 -->
+  <BDP_Dev_CombatAI_bdp_query_transform>BDP 对原版攻击候选的处理前后对照</BDP_Dev_CombatAI_bdp_query_transform>
+  <!-- 记录是否明确清空原版候选。 -->
+  <BDP_Dev_CombatAI_ranged_query>BDP 默认远程攻击候选查询结果</BDP_Dev_CombatAI_ranged_query>
+  <!-- 没有攻击动作时仍确认战斗等待检查在运行。 -->
+  <BDP_Dev_CombatAI_wait_auto>原版等待任务检查自动攻击</BDP_Dev_CombatAI_wait_auto>
+  <!-- 先于 BDP 接管记录一次真正的近战请求。 -->
+  <BDP_Dev_CombatAI_melee_request>原版发出近战出手请求</BDP_Dev_CombatAI_melee_request>
+  <!-- 返回成功与实际挥刀不是同一概念。 -->
+  <BDP_Dev_CombatAI_melee_result>近战请求返回与任务接管结果</BDP_Dev_CombatAI_melee_result>
+  <!-- 观察等待、追击和起手门槛。 -->
+  <BDP_Dev_CombatAI_melee_tick>BDP 持续近战执行门槛</BDP_Dev_CombatAI_melee_tick>
+  <!-- 持续推进失败必须输出。 -->
+  <BDP_Dev_CombatAI_melee_tick_failed>BDP 持续近战推进失败</BDP_Dev_CombatAI_melee_tick_failed>
+  <!-- 读取正式执行链已经得到的校验结果。 -->
+  <BDP_Dev_CombatAI_session_validation>BDP 攻击会话有效性校验结果</BDP_Dev_CombatAI_session_validation>
+  <!-- 区分外层准备与原版真正起手入口。 -->
+  <BDP_Dev_CombatAI_cast_request>攻击行为尝试起手</BDP_Dev_CombatAI_cast_request>
+  <!-- 成功和失败都保留。 -->
+  <BDP_Dev_CombatAI_cast_result>攻击行为起手结果</BDP_Dev_CombatAI_cast_result>
+  <!-- 以实际单击区分未命中和完全没有攻击动作。 -->
+  <BDP_Dev_CombatAI_melee_shot>小兵短剑实际单击结果</BDP_Dev_CombatAI_melee_shot>
+  <!-- 真正经过远程发射执行，而非仅接单。 -->
+  <BDP_Dev_CombatAI_ranged_shot>BDP 远程实际发射执行结果</BDP_Dev_CombatAI_ranged_shot>
+  <!-- 正式会话收尾入口。 -->
+  <BDP_Dev_CombatAI_ranged_reset>BDP 远程宿主正在重置</BDP_Dev_CombatAI_ranged_reset>
+</LanguageData>

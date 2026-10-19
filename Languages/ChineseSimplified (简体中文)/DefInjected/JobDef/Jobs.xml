@@ -12,4 +12,5 @@
   <!-- BDP 攻击执行工作。 -->
   <BDP_RangedAttackExecution.reportString>执行 BDP 远程攻击。</BDP_RangedAttackExecution.reportString>
   <BDP_MeleeAttackExecution.reportString>执行 BDP 近战攻击。</BDP_MeleeAttackExecution.reportString>
+  <BDP_OperateOperatorConsole.reportString>正在操作员控制台值守。</BDP_OperateOperatorConsole.reportString>
 </LanguageData>

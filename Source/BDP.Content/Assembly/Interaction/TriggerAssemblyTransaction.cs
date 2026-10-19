@@ -53,15 +53,10 @@ namespace BDP.Content.Assembly
                 return controlResult;
             }
 
-            ITriggerSlotState targetSlot = FindSlot(side, slotIndex);
+            ITriggerSlotState targetSlot = ResolveBindingRoot(FindSlot(side, slotIndex));
             if (targetSlot == null)
             {
                 return TriggerAssemblyOperationResult.Fail("target_slot_missing", "BDP_Message_Assembly_TargetSlotMissing".Translate());
-            }
-
-            if (targetSlot.IsBindingMirror)
-            {
-                return TriggerAssemblyOperationResult.Fail("target_slot_mirror", "BDP_Message_Assembly_TargetSlotMirror".Translate());
             }
 
             if (targetSlot.LoadedChip != null)
@@ -108,15 +103,10 @@ namespace BDP.Content.Assembly
                 return controlResult;
             }
 
-            ITriggerSlotState slot = FindSlot(side, slotIndex);
+            ITriggerSlotState slot = ResolveBindingRoot(FindSlot(side, slotIndex));
             if (slot == null)
             {
                 return TriggerAssemblyOperationResult.Fail("source_slot_missing", "BDP_Message_Assembly_SourceSlotMissing".Translate());
-            }
-
-            if (slot.IsBindingMirror)
-            {
-                return TriggerAssemblyOperationResult.Fail("source_slot_mirror", "BDP_Message_Assembly_SourceSlotMirror".Translate());
             }
 
             Thing loadedChip = slot.LoadedChip;
@@ -154,21 +144,17 @@ namespace BDP.Content.Assembly
                 return controlResult;
             }
 
-            if (sourceSide == targetSide && sourceIndex == targetIndex)
-            {
-                return TriggerAssemblyOperationResult.Ok("same_slot", "BDP_Message_Assembly_SameSlot".Translate());
-            }
-
-            ITriggerSlotState sourceSlot = FindSlot(sourceSide, sourceIndex);
-            ITriggerSlotState targetSlot = FindSlot(targetSide, targetIndex);
+            ITriggerSlotState sourceSlot = ResolveBindingRoot(FindSlot(sourceSide, sourceIndex));
+            ITriggerSlotState targetSlot = ResolveBindingRoot(FindSlot(targetSide, targetIndex));
             if (sourceSlot == null || targetSlot == null)
             {
                 return TriggerAssemblyOperationResult.Fail("slot_missing", "BDP_Message_Assembly_SlotMissing".Translate());
             }
 
-            if (sourceSlot.IsBindingMirror || targetSlot.IsBindingMirror)
+            if ((sourceSlot.Side == targetSlot.Side && sourceSlot.Index == targetSlot.Index)
+                || (sourceSlot.LoadedChip != null && ReferenceEquals(sourceSlot.LoadedChip, targetSlot.LoadedChip)))
             {
-                return TriggerAssemblyOperationResult.Fail("slot_mirror", "BDP_Message_Assembly_SlotMirror".Translate());
+                return TriggerAssemblyOperationResult.Ok("same_slot", "BDP_Message_Assembly_SameSlot".Translate());
             }
 
             if (sourceSlot.IsActive || targetSlot.IsActive)
@@ -207,15 +193,10 @@ namespace BDP.Content.Assembly
                 return controlResult;
             }
 
-            ITriggerSlotState targetSlot = FindSlot(targetSide, targetIndex);
+            ITriggerSlotState targetSlot = ResolveBindingRoot(FindSlot(targetSide, targetIndex));
             if (targetSlot == null)
             {
                 return TriggerAssemblyOperationResult.Fail("target_slot_missing", "BDP_Message_Assembly_TargetSlotMissing".Translate());
-            }
-
-            if (targetSlot.IsBindingMirror)
-            {
-                return TriggerAssemblyOperationResult.Fail("target_slot_mirror", "BDP_Message_Assembly_TargetSlotMirror".Translate());
             }
 
             Thing oldChip = targetSlot.LoadedChip;
@@ -382,6 +363,30 @@ namespace BDP.Content.Assembly
             }
 
             return null;
+        }
+
+        /// <summary>将有效镜像槽归一到绑定根槽，令装配事务以一枚芯片为单位。</summary>
+        private ITriggerSlotState ResolveBindingRoot(ITriggerSlotState slot)
+        {
+            if (slot == null || !slot.HasBindingPartner || !slot.IsBindingMirror)
+            {
+                return slot;
+            }
+
+            ITriggerSlotState root = FindSlot(slot.BindingRootSide, slot.BindingRootIndex);
+            if (root == null
+                || !root.HasBindingPartner
+                || root.IsBindingMirror
+                || root.BindingPartnerSide != slot.Side
+                || root.BindingPartnerIndex != slot.Index
+                || slot.BindingPartnerSide != root.Side
+                || slot.BindingPartnerIndex != root.Index
+                || !ReferenceEquals(root.LoadedChip, slot.LoadedChip))
+            {
+                return null;
+            }
+
+            return root;
         }
 
         /// <summary>

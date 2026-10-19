@@ -1,0 +1,55 @@
+{
+  "date": "2026-10-18",
+  "sourceBaseline": "e0d2b8eeb",
+  "note": "配套本任务公共定义、语言包和源码；未部署游戏安装目录，未游戏内实测。",
+  "artifacts": [
+    {
+      "version": "1.6",
+      "source": "模组工程\\BorderDefenseProtocol\\1.6\\Assemblies\\BDP.Core.dll",
+      "archive": "输出\\版本候选\\20261018-光魂形态重组-e0d2b8eeb\\1.6\\BDP.Core.dll",
+      "sha256": "79F72AE78DA65A26945215D802966F8F662B7E170BE5BF1867622F58D43A8548"
+    },
+    {
+      "version": "1.6",
+      "source": "模组工程\\BorderDefenseProtocol\\1.6\\Assemblies\\BDP.Core.pdb",
+      "archive": "输出\\版本候选\\20261018-光魂形态重组-e0d2b8eeb\\1.6\\BDP.Core.pdb",
+      "sha256": "6296F4A880E3F66E83B1863F79EAEBCC731B2A93FC5282D2320104944B1AA36F"
+    },
+    {
+      "version": "1.6",
+      "source": "模组工程\\BorderDefenseProtocol\\1.6\\Assemblies\\BDP.Content.dll",
+      "archive": "输出\\版本候选\\20261018-光魂形态重组-e0d2b8eeb\\1.6\\BDP.Content.dll",
+      "sha256": "2D3E17866AC6E7E88EAC4F7E2B6012221CB29695DD16004B5178F8274D564F07"
+    },
+    {
+      "version": "1.6",
+      "source": "模组工程\\BorderDefenseProtocol\\1.6\\Assemblies\\BDP.Content.pdb",
+      "archive": "输出\\版本候选\\20261018-光魂形态重组-e0d2b8eeb\\1.6\\BDP.Content.pdb",
+      "sha256": "31B77BA71BA034B765BE881C8C3CC7A2C4D57F7C9B8371147F7E3364BBF5FD47"
+    },
+    {
+      "version": "1.7",
+      "source": "模组工程\\BorderDefenseProtocol\\1.7\\Assemblies\\BDP.Core.dll",
+      "archive": "输出\\版本候选\\20261018-光魂形态重组-e0d2b8eeb\\1.7\\BDP.Core.dll",
+      "sha256": "BCE43A5A6B0FBF935FC6DD37C33B407BEA901328851C3138D5CBA1437977ACFF"
+    },
+    {
+      "version": "1.7",
+      "source": "模组工程\\BorderDefenseProtocol\\1.7\\Assemblies\\BDP.Core.pdb",
+      "archive": "输出\\版本候选\\20261018-光魂形态重组-e0d2b8eeb\\1.7\\BDP.Core.pdb",
+      "sha256": "EF7C47F107682E34AE9366F02C87E9EFDC617865DFD6F81BC18113F90CBC9E65"
+    },
+    {
+      "version": "1.7",
+      "source": "模组工程\\BorderDefenseProtocol\\1.7\\Assemblies\\BDP.Content.dll",
+      "archive": "输出\\版本候选\\20261018-光魂形态重组-e0d2b8eeb\\1.7\\BDP.Content.dll",
+      "sha256": "62A2F611EFD58F33B0763F9FF8A27352A5F7F6FDDEE56BDA87C558073E45EAAB"
+    },
+    {
+      "version": "1.7",
+      "source": "模组工程\\BorderDefenseProtocol\\1.7\\Assemblies\\BDP.Content.pdb",
+      "archive": "输出\\版本候选\\20261018-光魂形态重组-e0d2b8eeb\\1.7\\BDP.Content.pdb",
+      "sha256": "003B4557A1B82DFD9AA531684AF532788B5C8CB4D10CC66A65F16EB1EC89F6F3"
+    }
+  ]
+}

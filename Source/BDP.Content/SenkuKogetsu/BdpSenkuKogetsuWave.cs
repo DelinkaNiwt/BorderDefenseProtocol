@@ -1,4 +1,7 @@
 using System.Collections.Generic;
+using BDP.Core.CombatLog;
+using BDP.Core.Semantics;
+using BDP.Core.Projectiles.RangedFlightProtocol.Impact;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -25,6 +28,9 @@ namespace BDP.Content.SenkuKogetsu
         /// 当前月牙剑气的施法者。
         /// </summary>
         private Pawn launcher;
+
+        /// <summary>生成波体的固定能力定义，只用于日志来源，不读取后续装备。</summary>
+        private AbilityDef logSourceDef;
 
         /// <summary>
         /// 当前飞行阶段总 tick 数。
@@ -283,14 +289,17 @@ namespace BDP.Content.SenkuKogetsu
         /// <param name="destination">当前理论终点。</param>
         /// <param name="setRange">当前设定射程。</param>
         /// <param name="props">当前使用的效果配置。</param>
+        /// <param name="logSourceDef">本次实际施放的能力定义。</param>
         public void Launch(
             Pawn launcher,
             Vector3 origin,
             Vector3 destination,
             float setRange,
-            CompProperties_SenkuKogetsuWave props)
+            CompProperties_SenkuKogetsuWave props,
+            AbilityDef logSourceDef)
         {
             this.launcher = launcher;
+            this.logSourceDef = logSourceDef;
             this.origin = origin;
             this.destination = destination;
             this.setRange = setRange;
@@ -333,10 +342,27 @@ namespace BDP.Content.SenkuKogetsu
             prevProgress = 0f;
         }
 
-        /// <summary>
-        /// 推进当前月牙剑气实体。
-        /// 飞行阶段持续扫掠伤害；结束后进入滞留渐隐，再自动消失。
-        /// </summary>
+        /// <summary>只额外保存日志来源定义；不增加波体玩法状态或重播记录。</summary>
+        public override void ExposeData()
+        {
+            base.ExposeData();
+            Scribe_Defs.Look(ref logSourceDef, "bdpLogSourceDef");
+        }
+
+        /// <summary>生成本条命中所需的最小来源身份，不修改伤害作用域。</summary>
+        private ISemanticContext CreateLogSourceContext()
+        {
+            return logSourceDef == null ? null : new SemanticContext
+            {
+                MutableExtraData = new Dictionary<string, string>
+                {
+                    [BattleLogEntryFactoryAccess.SourceTypeKey] = typeof(AbilityDef).FullName,
+                    [BattleLogEntryFactoryAccess.SourceDefKey] = logSourceDef.defName
+                }
+            };
+        }
+
+        /// <summary>推进波体既有飞行与伤害逻辑。</summary>
         protected override void Tick()
         {
             base.Tick();
@@ -476,7 +502,7 @@ namespace BDP.Content.SenkuKogetsu
                     }
 
                     BattleLogEntry_RangedImpact log =
-                        new BattleLogEntry_RangedImpact(launcher, target, target, null, def, null);
+                        BattleLogEntryFactoryAccess.CreateRangedImpact(launcher, target, target, null, def, null, CreateLogSourceContext());
                     Find.BattleLog.Add(log);
 
                     float angle = (target.DrawPos - origin).AngleFlat();
@@ -487,7 +513,9 @@ namespace BDP.Content.SenkuKogetsu
                         angle,
                         launcher,
                         weapon: def);
-                    target.TakeDamage(damageInfo).AssociateWithLog(log);
+                    DamageResolution resolution;
+                    DamageResolutionRuntime.ApplyDamage(target, damageInfo, out resolution).AssociateWithLog(log);
+                    BattleLogEntryFactoryAccess.CompleteDamageResult(log, resolution);
                     SenkuKogetsuDiagnostics.LogTargetResolution(target, "pawn_hit", damageAmount);
 
                     if (stoppingPower > 0f && target.BodySize <= stoppingPower)

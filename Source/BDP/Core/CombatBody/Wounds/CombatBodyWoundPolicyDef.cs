@@ -20,24 +20,9 @@ namespace BDP.Core.CombatBody.Wounds
         public bool trionDrainEnabled = false;
 
         /// <summary>
-        /// 伤口 Trion 流失的默认计算口径。
+        /// 每 1 点原版新增有效损伤对应的每秒 Trion 流失，按最终伤口独立登记。
         /// </summary>
-        public CombatBodyWoundTrionDrainMetric trionDrainMetric = CombatBodyWoundTrionDrainMetric.RawBleedRate;
-
-        /// <summary>
-        /// 每 1.0 原版 rawBleedRate 对应的每秒 Trion 流失。
-        /// </summary>
-        public float trionDrainPerRawBleedRatePerSecond = 0f;
-
-        /// <summary>
-        /// 每 1 点原版伤口严重度对应的每秒 Trion 流失。
-        /// </summary>
-        public float trionDrainPerSeverityPerSecond = 0f;
-
-        /// <summary>
-        /// 是否把新鲜缺失部位的原版流血潜势纳入 Trion 流失口径。
-        /// </summary>
-        public bool includeMissingPartBleedPotential = true;
+        public float trionDrainPerDamagePerSecond = 0f;
 
         /// <summary>
         /// 低频校准间隔。只在 Trion 伤口流失启用时使用。

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 通用远程额外伤害模块：具体伤害类型、模式和比例由挂载处配置。 -->
+  <BDP.Core.AttackExecution.BdpRangedAttackModuleDef>
+    <!-- 通用额外伤害模块的稳定 DefName。 -->
+    <defName>BDP_RangedExtraDamageModule</defName>
+    <!-- 缺少语言包时的英文回退名称。 -->
+    <label>Ranged extra damage module</label>
+    <!-- Content 通用额外伤害运行时类型。 -->
+    <runtimeClass>BDP.Content.RangedModules.ExtraDamage.RangedExtraDamageModule</runtimeClass>
+    <!-- 中性默认配置；具体武装不得依赖这里承载业务属性。 -->
+    <defaultConfig Class="BDP.Content.RangedModules.ExtraDamage.RangedExtraDamageConfig">
+      <!-- 默认不主动产生固定伤害。 -->
+      <AmountMode>Fixed</AmountMode>
+      <Amount>0</Amount>
+      <!-- 默认独立解析额外伤害的命中部位。 -->
+      <HitPartResolutionMode>Independent</HitPartResolutionMode>
+      <!-- 默认允许所有 Thing 目标，由挂载处按业务需要收窄。 -->
+      <OnlyPawns>false</OnlyPawns>
+    </defaultConfig>
+  </BDP.Core.AttackExecution.BdpRangedAttackModuleDef>
+
+</Defs>

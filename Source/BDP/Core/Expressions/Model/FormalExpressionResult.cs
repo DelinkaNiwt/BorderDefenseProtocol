@@ -20,14 +20,33 @@ namespace BDP.Core.Expressions
         public string Id { get; set; }
 
         /// <summary>
+        /// 当前结果由哪条正式声明条目生成。
+        /// 组合结果的信息投影用它把最终结果映射回 ComboDef.Features 的来源定位键。
+        /// </summary>
+        public string SourceEntryId { get; set; }
+
+        /// <summary>
         /// 当前结果的结果大类。
         /// </summary>
-        public ExpressionResultKind ResultKind { get; set; }
+        public ExpressionOutputChannel OutputChannel { get; set; }
 
         /// <summary>
         /// 当前结果的武器模式。
         /// </summary>
         public WeaponExpressionMode WeaponMode { get; set; }
+
+        /// <summary>
+        /// 当前正式结果是否支持通用远程间接攻击许可。
+        /// 所有完整的远程表达默认支持；具体是否生效仍由运行时许可与目标屋顶后置条件决定。
+        /// </summary>
+        public bool SupportsIndirectTargeting
+        {
+            get
+            {
+                return WeaponMode == WeaponExpressionMode.Ranged
+                    && ResolvedVerbSpec != null;
+            }
+        }
 
         /// <summary>
         /// 当前结果的来源关系。
@@ -89,6 +108,11 @@ namespace BDP.Core.Expressions
         public string CompositeVisualPresetDefName { get; set; }
 
         /// <summary>
+        /// 当前结果作为组合技攻击入口时使用的阶段视觉预设 DefName。
+        /// </summary>
+        public string ComboAttackVisualPresetDefName { get; set; }
+
+        /// <summary>
         /// 当前结果是否强制压制宿主原装备贴图。
         /// </summary>
         public bool ForceSuppressHostEquipment { get; set; }
@@ -119,6 +143,9 @@ namespace BDP.Core.Expressions
         /// 当前结果附带的轻量标签集合。
         /// </summary>
         public IReadOnlyList<string> Tags { get; set; }
+
+        /// <summary>当前正式结果显式声明接入的许可键快照。</summary>
+        public IReadOnlyList<string> DeclaredPermissionKeys { get; set; }
 
         /// <summary>
         /// 当前结果暴露给攻击编排层的执行槽位键。
@@ -217,9 +244,14 @@ namespace BDP.Core.Expressions
         public string HediffApplyModeKey { get; set; }
 
         /// <summary>
+        /// 当前结果的 Hediff 生命周期控制模式。
+        /// </summary>
+        public string HediffControlMode { get; set; }
+
+        /// <summary>
         /// 当前结果的被动键。
         /// </summary>
-        public string PassiveKey { get; set; }
+        public string PassiveIdentityKey { get; set; }
 
         /// <summary>
         /// 当前结果附带的被动暴露数据。
@@ -231,6 +263,11 @@ namespace BDP.Core.Expressions
         /// 它是后续交互前置链与执行主骨架的统一模块来源。
         /// </summary>
         public IReadOnlyList<RangedModuleMountConfig> RangedModules { get; set; }
+
+        /// <summary>
+        /// 当前结果可选的近战命中部位策略快照。
+        /// </summary>
+        public HitPartPolicyConfig HitPartPolicy { get; set; }
 
         /// <summary>
         /// 当前结果向其它远程表达结果发布的开放式增强声明。

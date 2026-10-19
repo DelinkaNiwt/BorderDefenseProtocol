@@ -1,4 +1,5 @@
 using UnityEngine;
+using BDP.Core.AttackExecution.RangedProtocol.Model;
 using Verse;
 
 namespace BDP.Core.Projectiles.Visual
@@ -92,6 +93,18 @@ namespace BDP.Core.Projectiles.Visual
         /// </summary>
         public Vector3 LaunchDirection { get; }
 
+        /// <summary>发射时冻结的首发分支。</summary>
+        public ProjectileLaunchDisposition LaunchDisposition { get; }
+
+        /// <summary>发射时冻结的原定目标命中资格。</summary>
+        public bool CanHitIntendedTarget { get; }
+
+        /// <summary>原版发射时实际使用的首发目标。</summary>
+        public LocalTargetInfo ActualLaunchTarget { get; }
+
+        /// <summary>原版发射时实际使用的首发目的地。</summary>
+        public Vector3 ActualLaunchDestination { get; }
+
         /// <summary>
         /// 用一组中性发射事实初始化发射上下文。
         /// </summary>
@@ -102,6 +115,10 @@ namespace BDP.Core.Projectiles.Visual
         /// <param name="resultId">当前正式结果标识。</param>
         /// <param name="launchOrigin">当前投射物发射起点。</param>
         /// <param name="launchDirection">当前投射物发射方向。</param>
+        /// <param name="launchDisposition">发射时冻结的首发分支。</param>
+        /// <param name="canHitIntendedTarget">发射时冻结的原定目标命中资格。</param>
+        /// <param name="actualLaunchTarget">原版发射时实际使用的首发目标。</param>
+        /// <param name="actualLaunchDestination">原版发射时实际使用的首发目的地。</param>
         public ProjectileVisualLaunchContext(
             Map map,
             ThingDef projectileDef,
@@ -109,7 +126,11 @@ namespace BDP.Core.Projectiles.Visual
             string attackInstanceId,
             string resultId,
             Vector3 launchOrigin,
-            Vector3 launchDirection)
+            Vector3 launchDirection,
+            ProjectileLaunchDisposition launchDisposition,
+            bool canHitIntendedTarget,
+            LocalTargetInfo actualLaunchTarget,
+            Vector3 actualLaunchDestination)
         {
             Map = map;
             ProjectileDef = projectileDef;
@@ -118,6 +139,10 @@ namespace BDP.Core.Projectiles.Visual
             ResultId = resultId;
             LaunchOrigin = launchOrigin;
             LaunchDirection = launchDirection;
+            LaunchDisposition = launchDisposition;
+            CanHitIntendedTarget = canHitIntendedTarget;
+            ActualLaunchTarget = actualLaunchTarget;
+            ActualLaunchDestination = actualLaunchDestination;
         }
     }
 
@@ -154,13 +179,13 @@ namespace BDP.Core.Projectiles.Visual
 
         /// <summary>
         /// 当前样本起点。
-        /// 坐标已归一到共享飞行平面。
+        /// 坐标的 y 已归一到共享飞行平面；视觉轨迹按原版迫击炮约定在 z 轴携带视觉偏移。
         /// </summary>
         public Vector3 SampleStart { get; }
 
         /// <summary>
         /// 当前样本终点。
-        /// 坐标已归一到共享飞行平面。
+        /// 坐标的 y 已归一到共享飞行平面；视觉轨迹按原版迫击炮约定在 z 轴携带视觉偏移。
         /// </summary>
         public Vector3 SampleEnd { get; }
 
@@ -300,6 +325,12 @@ namespace BDP.Core.Projectiles.Visual
         public Vector3 CurrentPosition { get; }
 
         /// <summary>
+        /// 当前结束位置是否适合作为视觉拖尾终点。
+        /// 物理阻挡命中若无法解析阻挡格外安全点，则为 false。
+        /// </summary>
+        public bool IsVisualEndpointSafe { get; }
+
+        /// <summary>
         /// 用一组中性结束事实初始化结束上下文。
         /// </summary>
         /// <param name="map">当前地图。</param>
@@ -308,13 +339,15 @@ namespace BDP.Core.Projectiles.Visual
         /// <param name="attackInstanceId">当前攻击实例标识。</param>
         /// <param name="resultId">当前正式结果标识。</param>
         /// <param name="currentPosition">当前结束位置。</param>
+        /// <param name="isVisualEndpointSafe">当前结束位置是否适合作为视觉拖尾终点。</param>
         public ProjectileVisualTerminateContext(
             Map map,
             ThingDef projectileDef,
             string projectileThingId,
             string attackInstanceId,
             string resultId,
-            Vector3 currentPosition)
+            Vector3 currentPosition,
+            bool isVisualEndpointSafe)
         {
             Map = map;
             ProjectileDef = projectileDef;
@@ -322,6 +355,7 @@ namespace BDP.Core.Projectiles.Visual
             AttackInstanceId = attackInstanceId;
             ResultId = resultId;
             CurrentPosition = currentPosition;
+            IsVisualEndpointSafe = isVisualEndpointSafe;
         }
     }
 }

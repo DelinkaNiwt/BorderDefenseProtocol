@@ -24,7 +24,7 @@ namespace BDP.Patches
             foreach (object obj in Find.Selector.SelectedObjectsListForReading)
             {
                 if (obj is Pawn pawn
-                    && pawn.IsColonistPlayerControlled
+                    && pawn.IsPlayerControlled
                     && pawn.equipment?.Primary != null)
                 {
                     CompTriggerBody triggerBody = pawn.equipment.Primary.TryGetComp<CompTriggerBody>();

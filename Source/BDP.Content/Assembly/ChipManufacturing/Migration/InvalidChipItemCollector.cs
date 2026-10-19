@@ -16,8 +16,6 @@ namespace BDP.Content.Assembly.ChipManufacturing.Migration
         /// <summary>实体持有的组合记录。</summary>
         public ChipCombinationRecord Record { get; set; }
 
-        /// <summary>实体命中旧版制造芯片持久化格式。</summary>
-        public bool LegacyPersistenceDetected { get; set; }
     }
 
     /// <summary>从地图、递归容器、世界对象和触发体槽位收集芯片实体。</summary>
@@ -143,43 +141,14 @@ namespace BDP.Content.Assembly.ChipManufacturing.Migration
             }
 
             ChipCombinationRecord record = ResolveRecord(thing);
-            bool legacyPersistenceDetected = HasLegacyPersistence(thing);
-            if (record != null || legacyPersistenceDetected)
+            if (record != null)
             {
                 candidates.Add(new InvalidChipCandidate
                 {
                     Item = thing,
-                    Record = record,
-                    LegacyPersistenceDetected = legacyPersistenceDetected
+                    Record = record
                 });
             }
-        }
-
-        /// <summary>从物品本体或组件读取旧版制造芯片格式标记。</summary>
-        private static bool HasLegacyPersistence(VerseThing thing)
-        {
-            ILegacyChipPersistenceMarker direct = thing as ILegacyChipPersistenceMarker;
-            if (direct != null && direct.LegacyPersistenceDetected)
-            {
-                return true;
-            }
-
-            ThingWithComps thingWithComps = thing as ThingWithComps;
-            if (thingWithComps?.AllComps == null)
-            {
-                return false;
-            }
-
-            foreach (ThingComp comp in thingWithComps.AllComps)
-            {
-                ILegacyChipPersistenceMarker marker = comp as ILegacyChipPersistenceMarker;
-                if (marker != null && marker.LegacyPersistenceDetected)
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
 
         /// <summary>从物品本体或其组件读取 Content 组合记录。</summary>

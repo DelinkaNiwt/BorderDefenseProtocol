@@ -25,6 +25,7 @@ namespace BDP.Core.Trigger
                 stableThingId,
                 EnumerateRawSlots(),
                 GetSwitchContext,
+                slot => slot != null ? slot.SlotSwitchContext : null,
                 out activeRoots))
             {
                 return false;
@@ -43,7 +44,7 @@ namespace BDP.Core.Trigger
                     continue;
                 }
 
-                if (triggerService.RequestDeactivate(BuildSwitchContext(), rootSlot.Side))
+                if (triggerService.RequestDeactivate(BuildSwitchContext(), rootSlot.Side, rootSlot.Index))
                 {
                     submittedAnyDeactivation = true;
                     Messages.Message(

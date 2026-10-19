@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using BDP.Core.AttackExecution;
+using BDP.Core.Expressions;
 using BDP.Core.Semantics;
+using BDP.Core.Projectiles.RangedFlightProtocol.Impact;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -12,8 +14,36 @@ namespace BDP.Core.Verbs
     /// BDP 近战伤害 Verb 宿主。
     /// 第一阶段保留原版近战伤害规则，只在伤害真正落地前压入当前攻击语义。
     /// </summary>
-    public class BdpVerb_MeleeAttackDamage : Verb_MeleeAttackDamage, IBdpSemanticCarrier, IAttackEffectTraceCarrier
+    public partial class BdpVerb_MeleeAttackDamage : Verb_MeleeAttackDamage, IBdpSemanticCarrier, IAttackEffectTraceCarrier
     {
+        /// <summary>
+        /// 把 BDP 的 burstShotCount（连续攻击次数）接入原版近战实际连击初始化。
+        /// 原版近战默认 ShotsPerBurst（本轮实际攻击次数）为 1，若不重写则只会执行首击。
+        /// </summary>
+        protected override int ShotsPerBurst => BurstShotCount;
+
+        /// <summary>
+        /// 当前 burst 最近一击是否真正命中目标。
+        /// 它只保存瞬时结果，不参与存档。
+        /// </summary>
+        internal bool LastMeleeBurstShotHit { get; private set; }
+
+        /// <summary>
+        /// 当前 burst 最近一击是否已经完成合法的近战判定。
+        /// miss/dodge（未命中/闪避）也属于已完成的一击，但目标失效等硬失败不属于。
+        /// 通常只作瞬时判定；已起手的自动有限计划单独保存它，防止读档误取消剩余段。
+        /// </summary>
+        internal bool LastMeleeBurstShotCompleted { get; private set; }
+
+        /// <summary>
+        /// 清除一次 burst 入口尚未产生结果时的瞬时状态。
+        /// </summary>
+        internal void ClearLastMeleeBurstShotResult()
+        {
+            LastMeleeBurstShotHit = false;
+            LastMeleeBurstShotCompleted = false;
+        }
+
         /// <summary>
         /// 当前近战轮每个 step 结束后的等待 tick 序列。
         /// </summary>
@@ -141,6 +171,12 @@ namespace BDP.Core.Verbs
         public ISemanticContext SemanticContext { get; set; }
 
         /// <summary>
+        /// 当前近战计划携带的可选命中部位策略。
+        /// 具体命中部位不在这里冻结，避免连击沿用已经失效的旧部位。
+        /// </summary>
+        private HitPartPolicyConfig hitPartPolicy;
+
+        /// <summary>
         /// 序列化近战 formal host 会话跨档续接所需的最小版本身份。
         /// </summary>
         public override void ExposeData()
@@ -155,6 +191,7 @@ namespace BDP.Core.Verbs
             Scribe_Values.Look(ref planReason, "planReason", AttackExecutionReason.Manual);
             Scribe_Collections.Look(ref stepIntervalTicks, "stepIntervalTicks", LookMode.Value);
             Scribe_Collections.Look(ref preparedStepToolIndices, "preparedStepToolIndices", LookMode.Value);
+            ExposeAutomaticContinuation();
         }
 
         /// <summary>
@@ -163,6 +200,7 @@ namespace BDP.Core.Verbs
         /// </summary>
         internal void ApplyExecutionContext(MeleeAttackExecutionContext context)
         {
+            CancelAutomaticContinuation();
             AttackSessionToken previousSessionToken = HostSessionToken != null ? HostSessionToken.Clone() : null;
             if (context == null)
             {
@@ -176,6 +214,7 @@ namespace BDP.Core.Verbs
                 PlanDispatchIntent = AttackDispatchIntent.ImmediateCast;
                 PlanReason = AttackExecutionReason.Manual;
                 SemanticContext = null;
+                hitPartPolicy = null;
                 return;
             }
 
@@ -194,6 +233,7 @@ namespace BDP.Core.Verbs
             PlanDispatchIntent = context.PlanDispatchIntent;
             PlanReason = context.PlanReason;
             SemanticContext = context.Result != null ? context.Result.SemanticContext : null;
+            hitPartPolicy = context.HitPartPolicy != null ? context.HitPartPolicy.Clone() : null;
             stepIntervalTicks = context.StepIntervalTicks != null
                 ? new List<int>(context.StepIntervalTicks)
                 : null;
@@ -202,11 +242,219 @@ namespace BDP.Core.Verbs
         }
 
         /// <summary>
+        /// 在原版 burst 的每一击真正执行前重新确认目标合法。
+        /// 原版近战 TryCastShot 对失去射程的情况只记录警告，BDP 虚拟攻击不能接受这种继续命中的结果。
+        /// </summary>
+        protected override bool TryCastShot()
+        {
+            ClearLastMeleeBurstShotResult();
+            LocalTargetInfo target = CurrentTarget;
+            bool targetValid = target.IsValid;
+            bool canHitTarget = targetValid && CanHitTarget(target);
+            if (!canHitTarget)
+            {
+                AttackExecutionDiagnostics.LogMeleeBurstShot(
+                    CasterPawn,
+                    this,
+                    target,
+                    Find.TickManager != null ? Find.TickManager.TicksGame : -1,
+                    targetValid,
+                    false,
+                    false,
+                    "bdp_target_precheck_rejected");
+                return false;
+            }
+
+            Pawn casterPawn = CasterPawn;
+            bool ownBurstCooldown = IsOwnBurstCooldownStance(casterPawn);
+            bool dualMeleeHandoffCooldown = !ownBurstCooldown
+                && IsPreviousDualMeleeHandoffCooldown(casterPawn);
+            if (casterPawn == null
+                || !casterPawn.Spawned
+                || casterPawn.stances == null
+                || (casterPawn.stances.FullBodyBusy
+                    && !ownBurstCooldown
+                    && !dualMeleeHandoffCooldown))
+            {
+                AttackExecutionDiagnostics.LogMeleeBurstShot(
+                    casterPawn,
+                    this,
+                    target,
+                    Find.TickManager != null ? Find.TickManager.TicksGame : -1,
+                    true,
+                    true,
+                    false,
+                    "bdp_caster_precheck_rejected");
+                return false;
+            }
+
+            Stance originalStance = null;
+            Stance temporaryStance = null;
+            if (ownBurstCooldown || dualMeleeHandoffCooldown)
+            {
+                // 原版会把冷却姿态视为不可攻击；这里只临时放行本轮连击间隔，
+                // 或同一双持计划中主手到副手的那一次冷却交接。
+                originalStance = casterPawn.stances.curStance;
+                temporaryStance = new Stance_Mobile();
+                casterPawn.stances.curStance = temporaryStance;
+            }
+
+            bool hitResult;
+            try
+            {
+                hitResult = base.TryCastShot();
+            }
+            finally
+            {
+                if (originalStance != null
+                    && ReferenceEquals(casterPawn.stances.curStance, temporaryStance))
+                {
+                    casterPawn.stances.curStance = originalStance;
+                }
+            }
+
+            LastMeleeBurstShotHit = hitResult;
+            LastMeleeBurstShotCompleted = true;
+            AttackExecutionDiagnostics.LogMeleeBurstShot(
+                casterPawn,
+                this,
+                target,
+                Find.TickManager != null ? Find.TickManager.TicksGame : -1,
+                true,
+                true,
+                hitResult,
+                "vanilla_melee_try_cast_shot");
+
+            // 原版 TryCastNextBurstShot 会把 false 视为“终止整轮 burst”。
+            // 对已完成的 BDP 近战 miss/dodge，返回 true 只表示消耗这一击并继续，真实命中结果由上面的状态单独保留。
+            return hitResult || LastMeleeBurstShotCompleted;
+        }
+
+        /// <summary>
+        /// 判断当前身体忙碌是否正是本 Verb 连击之间由原版设置的等待姿态。
+        /// 只有这一种忙碌可以被当前 burst 临时放行。
+        /// </summary>
+        private bool IsOwnBurstCooldownStance(Pawn pawn)
+        {
+            if (pawn == null
+                || pawn.stances == null
+                || state != VerbState.Bursting
+                || pawn.stances.stunner == null
+                || pawn.stances.stunner.Stunned)
+            {
+                return false;
+            }
+
+            Stance_Cooldown cooldownStance = pawn.stances.curStance as Stance_Cooldown;
+            return cooldownStance != null && cooldownStance.verb == this;
+        }
+
+        /// <summary>
+        /// 判断当前完整冷却是否正好位于双持近战主手与副手之间。
+        /// 该条件供两个续接入口判断是否可提前交接；普通近战和双持计划收尾均不满足。
+        /// </summary>
+        internal bool CanSkipDualMeleeHandoffCooldown()
+        {
+            Pawn pawn = CasterPawn;
+            if (pawn == null
+                || pawn.stances == null
+                || !pawn.stances.FullBodyBusy
+                || pawn.stances.stunner == null
+                || pawn.stances.stunner.Stunned
+                || !IsDualMeleeMainSideWithPendingSub(pawn, null))
+            {
+                return false;
+            }
+
+            Stance_Cooldown cooldownStance = pawn.stances.curStance as Stance_Cooldown;
+            return cooldownStance != null && cooldownStance.verb == this;
+        }
+
+        /// <summary>
+        /// 判断当前宿主是否持有有效的双持主手段，并且计划下一步确实是副手段。
+        /// 未提供副手宿主时只检查当前段，供续接入口放行；提供时还校验即将起手的副手宿主。
+        /// </summary>
+        private bool IsDualMeleeMainSideWithPendingSub(
+            Pawn pawn,
+            BdpVerb_MeleeAttackDamage nextVerb)
+        {
+            if (pawn == null
+                || pawn != CasterPawn
+                || state != VerbState.Idle
+                || WarmingUp
+                || Bursting
+                || !LastMeleeBurstShotCompleted
+                || NextRuntimeStepIndex <= 0
+                || PlanSessionToken == null
+                || !PlanSessionToken.IsValid
+                || !PlanSessionToken.BelongsTo(pawn)
+                || !AttackExecutionPostLoadRecovery.IsCurrentAttackSessionValid(this)
+                || !AttackExecutionSurfaceAccess.TryGetPublishedResult(
+                    pawn,
+                    PlanSessionToken.ResultId,
+                    out var projection,
+                    out FormalExpressionResult dualResult)
+                || projection.ProjectionVersion != PlanSessionToken.ProjectionVersion
+                || dualResult.CompositeKind != CompositeExpressionKind.DualWeapon
+                || projection.CompositeReferenceIndex == null
+                || !projection.CompositeReferenceIndex.TryGetValue(dualResult.Id, out CompositeExpressionReference reference)
+                || reference == null
+                || reference.CompositeKind != CompositeExpressionKind.DualWeapon)
+            {
+                return false;
+            }
+
+            string mainSourceResultId = !string.IsNullOrWhiteSpace(reference.MainSourceResultId)
+                ? reference.MainSourceResultId
+                : reference.SourceResultIds != null && reference.SourceResultIds.Count > 0
+                    ? reference.SourceResultIds[0]
+                    : null;
+            string subSourceResultId = !string.IsNullOrWhiteSpace(reference.SubSourceResultId)
+                ? reference.SubSourceResultId
+                : reference.SourceResultIds != null && reference.SourceResultIds.Count > 1
+                    ? reference.SourceResultIds[1]
+                    : null;
+
+            if (string.IsNullOrWhiteSpace(mainSourceResultId)
+                || string.IsNullOrWhiteSpace(subSourceResultId)
+                || mainSourceResultId == subSourceResultId
+                || ResultId != mainSourceResultId)
+            {
+                return false;
+            }
+
+            return nextVerb == null
+                || (nextVerb.ResultId == subSourceResultId
+                    && nextVerb.PlanSessionToken != null
+                    && nextVerb.PlanSessionToken.Equals(PlanSessionToken));
+        }
+
+        /// <summary>
+        /// 判断当前击是否只需临时跨过上一侧双持近战宿主留下的完整冷却姿态。
+        /// </summary>
+        private bool IsPreviousDualMeleeHandoffCooldown(Pawn pawn)
+        {
+            if (pawn == null
+                || pawn.stances == null
+                || pawn.stances.stunner == null
+                || pawn.stances.stunner.Stunned
+                || !(pawn.stances.curStance is Stance_Cooldown cooldownStance)
+                || !(cooldownStance.verb is BdpVerb_MeleeAttackDamage previousVerb)
+                || previousVerb == this)
+            {
+                return false;
+            }
+
+            return previousVerb.IsDualMeleeMainSideWithPendingSub(pawn, this);
+        }
+
+        /// <summary>
         /// 清空当前近战宿主挂着的瞬时执行态，避免旧会话状态残留到新结果上。
         /// </summary>
         public override void Reset()
         {
             LogSessionClearedIfNeeded("reset");
+            CancelAutomaticContinuation();
             AttackSessionToken previousSessionToken = HostSessionToken != null ? HostSessionToken.Clone() : null;
             base.Reset();
             AttackExecutionVisualRuntimeBridge.Clear(CasterPawn, previousSessionToken);
@@ -219,6 +467,8 @@ namespace BDP.Core.Verbs
             PlanDispatchIntent = AttackDispatchIntent.ImmediateCast;
             PlanReason = AttackExecutionReason.Manual;
             SemanticContext = null;
+            hitPartPolicy = null;
+            ClearLastMeleeBurstShotResult();
             stepIntervalTicks = null;
             preparedStepToolIndices = null;
         }
@@ -322,11 +572,11 @@ namespace BDP.Core.Verbs
 
         /// <summary>
         /// 判断当前近战 formal host 是否仍需要留在活跃 tick 队列中。
-        /// 近战宿主没有额外的发射计划缓存，因此只要仍在暖机或 burst，就视为活跃。
+        /// 自动有限计划还须跨过最终冷却推进下一段；手动持续计划仍由原任务推进器负责。
         /// </summary>
         internal bool RequiresFormalHostRuntimeTick()
         {
-            return WarmingUp || Bursting;
+            return WarmingUp || Bursting || automaticPlanStarted;
         }
 
         /// <summary>
@@ -343,10 +593,8 @@ namespace BDP.Core.Verbs
                     break;
                 }
 
-                using (SemanticRuntimeScope.Push(SemanticContext))
-                {
-                    result = target.Thing.TakeDamage(item);
-                }
+                DamageResolution resolution;
+                result = DamageResolutionRuntime.ApplyDamage(target.Thing, item, out resolution, SemanticContext);
 
             }
 
@@ -396,7 +644,19 @@ namespace BDP.Core.Verbs
 
             Vector3 direction = (target.Thing.Position - CasterPawn.Position).ToVector3();
             bool instigatorGuilty = !(caster is Pawn pawn) || !pawn.Drafted;
-            DamageInfo damageInfo = new DamageInfo(damageDef, num, armorPenetration, -1f, caster, null, sourceDef, DamageInfo.SourceCategory.ThingOrUnknown, null, instigatorGuilty);
+            BodyPartRecord hitPart = null;
+            if (hitPartPolicy != null)
+            {
+                HitPartPolicyResolverAccess.TryResolve(
+                    CasterPawn,
+                    target.Thing,
+                    damageDef,
+                    bodyPartGroup,
+                    hitPartPolicy,
+                    out hitPart);
+            }
+
+            DamageInfo damageInfo = new DamageInfo(damageDef, num, armorPenetration, -1f, caster, hitPart, sourceDef, DamageInfo.SourceCategory.ThingOrUnknown, null, instigatorGuilty);
             damageInfo.SetBodyRegion(BodyPartHeight.Undefined, BodyPartDepth.Outside);
             damageInfo.SetWeaponBodyPartGroup(bodyPartGroup);
             damageInfo.SetWeaponHediff(hediffDef);

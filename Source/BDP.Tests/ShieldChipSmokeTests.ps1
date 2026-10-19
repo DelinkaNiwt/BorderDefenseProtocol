@@ -62,7 +62,7 @@ Assert-True ([int]$config.Loadout.DeactivationDelayTicks -eq 30) '护盾关闭�
 Assert-True ([float]$config.Trion.CapacityCost -eq 50) '护盾占用必须为 50 Trion。'
 Assert-True ([float]$config.Trion.ActivationCost -eq 20) '护盾激活成本必须为 20 Trion。'
 $entry = $config.Expression.Entries.li
-Assert-True ($entry.Kind -eq 'Hediff') '护盾必须通过 Hediff 表达发布。'
+Assert-True ($entry.EntryType -eq 'Hediff') '护盾必须通过 Hediff 表达发布。'
 Assert-True ($entry.HediffDefName -eq 'BDP_Hediff_EnergyShield') '护盾表达引用错误。'
 Assert-True ($entry.HediffApplyModeKey -eq 'countToSeverity') '双护盾必须按数量聚合 Severity。'
 

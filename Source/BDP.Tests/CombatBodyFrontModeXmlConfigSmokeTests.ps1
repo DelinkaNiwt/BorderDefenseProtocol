@@ -33,8 +33,8 @@ Assert-True -Condition ($bridgeText -match 'switch \(config\.frontMode\)') -Mess
 Assert-True -Condition ($bridgeText -match 'ResolveFrontPresetDef\(CombatBodyHostConfigDef config\)') -Message '预设解析必须接收同一份全局配置。'
 Assert-True -Condition ($bridgeText -match 'config\.frontPresetDefName') -Message '预设名必须来自全局 XML 配置。'
 Assert-True -Condition ($hostText -notmatch 'new PawnCombatBodyBridge\(pawn, Props,') -Message '宿主桥不应再接收注入式 CompProperties 前台配置。'
-Assert-True -Condition ($configXmlText -match '<frontMode>Preset</frontMode>') -Message '当前游戏观察配置必须暂时选择 Preset。'
-Assert-True -Condition ($configXmlText -match '<frontPresetDefName>BDP_TemporaryCombatBodyObservationPreset</frontPresetDefName>') -Message '当前游戏观察配置必须指向临时套装预设。'
+Assert-True -Condition ($configXmlText -match '<frontMode>MirrorOriginal</frontMode>') -Message '当前 BDP 默认配置必须选择 MirrorOriginal。'
+Assert-True -Condition ($configXmlText -notmatch '<frontPresetDefName>') -Message '当前 BDP 默认配置不得继续引用固定套装预设。'
 Assert-True -Condition ($bridgeText -match 'ApplyMirrorOriginalFrontReplacement\(frontState\)') -Message '镜像原身路径必须保持存在。'
 
 Write-Output 'CombatBodyFrontModeXmlConfig PASS'

@@ -2,9 +2,17 @@
 Source/BDP/obj/
 Source/BDP.Content/obj/
 Source/BDP.Development/obj/
+Source/BDP.Compatibility/bin/
+Source/BDP.Compatibility/obj/
 1.6/Assemblies/
 1.6/Development/Assemblies/
 1.6/About/
+# 版本输出与本机引用配置不入库；保留 1.7 空输出目录标记。
+1.7/Assemblies/*
+!1.7/Assemblies/.keep
+1.7/Development/Assemblies/*
+!1.7/Development/Assemblies/.keep
+Source/Build/Bdp.Local.props
 *.user
 *.suo
 *.cache

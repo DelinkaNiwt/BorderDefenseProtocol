@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 标准空触发体：沿基础触发器工程制造，材料和工作量采用已确认首版成本。 -->
+  <RecipeDef>
+    <!-- 配方身份，显示文案由简体中文语言包注入。 -->
+    <defName>BDP_Recipe_ProduceBorderStandardTriggerBody</defName>
+    <!-- 建造或制造须满足所有研究；不影响现有装备使用。 -->
+    <researchPrerequisites><li>BDP_Research_BasicTriggerEngineering</li></researchPrerequisites>
+    <label>BDP_Recipe_ProduceBorderStandardTriggerBody</label>
+    <jobString>BDP_Recipe_ProduceBorderStandardTriggerBody</jobString>
+    <!-- 标准型材料：钢铁225、工业零部件12、玻璃钢15；芯片另行制造。 -->
+    <ingredients>
+      <li><filter><thingDefs><li>Steel</li></thingDefs></filter><count>225</count></li>
+      <li><filter><thingDefs><li>ComponentIndustrial</li></thingDefs></filter><count>12</count></li>
+      <li><filter><thingDefs><li>Plasteel</li></thingDefs></filter><count>15</count></li>
+    </ingredients>
+    <!-- 产出一件可配置但未装芯片的标准触发体。 -->
+    <products><BDP_TriggerBody_BorderStandard>1</BDP_TriggerBody_BorderStandard></products>
+    <!-- 首版工作量和原版制作技能配置。 -->
+    <workAmount>85000</workAmount>
+    <workSkill>Crafting</workSkill>
+    <workSkillLearnFactor>1</workSkillLearnFactor>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <!-- 复用原版武器半成品，停运或中断后保留材料与工作进度。 -->
+    <unfinishedThingDef>UnfinishedWeapon</unfinishedThingDef>
+    <allowMixingIngredients>false</allowMixingIngredients>
+    <!-- 仅放行本配方列出的钢铁、工业零部件与玻璃钢。 -->
+    <defaultIngredientFilter><thingDefs><li>Steel</li><li>ComponentIndustrial</li><li>Plasteel</li></thingDefs></defaultIngredientFilter>
+  </RecipeDef>
+  <!-- 近界原型：两座工作台共用一条配方，成品沿用固定双预载。 -->
+  <RecipeDef>
+    <!-- 配方身份；玩家文案由简体中文语言包注入。 -->
+    <defName>BDP_Recipe_ProduceNeighborPrototypeTriggerBody</defName>
+    <label>BDP_Recipe_ProduceNeighborPrototypeTriggerBody</label>
+    <jobString>BDP_Recipe_ProduceNeighborPrototypeTriggerBody</jobString>
+    <!-- 原型研究提供独立制造机会，不要求正式芯片功能研究。 -->
+    <researchPrerequisites><li>BDP_Research_PrototypeEngineering</li></researchPrerequisites>
+    <!-- 不同时写入建筑recipes，防止原版AllRecipes重复列出。 -->
+    <recipeUsers><li>TableMachining</li><li>BDP_ChipFabricator</li></recipeUsers>
+    <!-- 固定双预载的整机材料投入；制造后不另收预载芯片成本。 -->
+    <ingredients>
+      <li><filter><thingDefs><li>Steel</li></thingDefs></filter><count>180</count></li>
+      <li><filter><thingDefs><li>ComponentIndustrial</li></thingDefs></filter><count>10</count></li>
+    </ingredients>
+    <!-- 原版成品生成触发既有初始化：弧月主槽、小行星副槽，不另加制造后装载逻辑。 -->
+    <products><BDP_TriggerBody_NeighborPrototype>1</BDP_TriggerBody_NeighborPrototype></products>
+    <!-- 已确认首版工作量及原版制作工作属性。 -->
+    <workAmount>65000</workAmount>
+    <workSkill>Crafting</workSkill>
+    <workSkillLearnFactor>1</workSkillLearnFactor>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <!-- 复用武器半成品，原型预载只在最终成品生成时初始化。 -->
+    <unfinishedThingDef>UnfinishedWeapon</unfinishedThingDef>
+    <allowMixingIngredients>false</allowMixingIngredients>
+    <!-- 只接收本配方明确列出的常规材料。 -->
+    <defaultIngredientFilter><thingDefs><li>Steel</li><li>ComponentIndustrial</li></thingDefs></defaultIngredientFilter>
+  </RecipeDef>
+  <!-- 边境特制型：偏后期的大预装空间成品，不是黑触发器量产。 -->
+  <RecipeDef>
+    <!-- 配方身份；玩家文案由简体中文语言包注入。 -->
+    <defName>BDP_Recipe_ProduceBorderSpecialTriggerBody</defName>
+    <label>BDP_Recipe_ProduceBorderSpecialTriggerBody</label>
+    <jobString>BDP_Recipe_ProduceBorderSpecialTriggerBody</jobString>
+    <!-- 沿用试验性工程技术及其现有精密装配阶段前置。 -->
+    <researchPrerequisites><li>BDP_Research_ExperimentalEngineering</li></researchPrerequisites>
+    <!-- 新配方由原版汇总到现有触发体制造页面，无需增加界面逻辑。 -->
+    <recipeUsers><li>BDP_ChipFabricator</li></recipeUsers>
+    <!-- 特制型采用玻璃钢与高级零部件，体现进阶承载投入。 -->
+    <ingredients>
+      <li><filter><thingDefs><li>Steel</li></thingDefs></filter><count>225</count></li>
+      <li><filter><thingDefs><li>ComponentIndustrial</li></thingDefs></filter><count>16</count></li>
+      <li><filter><thingDefs><li>Plasteel</li></thingDefs></filter><count>80</count></li>
+      <li><filter><thingDefs><li>ComponentSpacer</li></thingDefs></filter><count>3</count></li>
+    </ingredients>
+    <!-- 沿用7主槽、7副槽、2特殊槽的可配置空成品。 -->
+    <products><BDP_TriggerBody_BorderSpecial>1</BDP_TriggerBody_BorderSpecial></products>
+    <!-- 已确认首版工作量及原版制作工作属性。 -->
+    <workAmount>150000</workAmount>
+    <workSkill>Crafting</workSkill>
+    <workSkillLearnFactor>1</workSkillLearnFactor>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <!-- 复用武器半成品，服从制造台现有许可与原版中断恢复。 -->
+    <unfinishedThingDef>UnfinishedWeapon</unfinishedThingDef>
+    <allowMixingIngredients>false</allowMixingIngredients>
+    <!-- 只接收本配方明确列出的材料。 -->
+    <defaultIngredientFilter><thingDefs><li>Steel</li><li>ComponentIndustrial</li><li>Plasteel</li><li>ComponentSpacer</li></thingDefs></defaultIngredientFilter>
+  </RecipeDef>
+</Defs>

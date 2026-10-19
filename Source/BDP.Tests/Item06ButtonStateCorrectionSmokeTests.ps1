@@ -41,7 +41,7 @@ Assert-True (
 Assert-True (
     ([regex]::Matches($combatButtonText, 'new Command_Action')).Count -eq 1 -and
     ($combatButtonText -match 'switch \(reader\.Phase\)') -and
-    ($combatButtonText -match 'case CombatBodyPhase\.Inactive:[\s\S]*BDP_Command_CombatBody_Activate[\s\S]*commands\.TryActivate\(\)[\s\S]*!reader\.CanActivate\(\)[\s\S]*BDP_Command_CombatBody_TransformLocked') -and
+    ($combatButtonText -match 'case CombatBodyPhase\.Inactive:[\s\S]*BDP_Command_CombatBody_Activate[\s\S]*commands\.TryActivateManually\(\)[\s\S]*!reader\.CanManualActivate\(\)[\s\S]*BDP_Command_CombatBody_TransformLocked') -and
     ($combatButtonText -match 'case CombatBodyPhase\.Active:[\s\S]*BDP_Command_CombatBody_Release[\s\S]*commands\.RequestRelease[\s\S]*!reader\.CanManualDeactivate\(\)[\s\S]*BDP_Command_CombatBody_TransformLocked') -and
     ($combatButtonText -match 'case CombatBodyPhase\.Collapsing:[\s\S]*command\.Disable\(') -and
     ($combatButtonText -match 'case CombatBodyPhase\.Cooldown:[\s\S]*command\.Disable\(')

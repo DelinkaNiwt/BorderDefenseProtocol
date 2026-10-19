@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- 先隔离版本路径；仅 1.7 导入 .NET 10 SDK，1.6 保留原编译方式。 -->
+  <Import Project="..\Build\Bdp.Version.props" />
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" Condition="'$(RimWorldVersion)' == '1.7'" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="'$(RimWorldVersion)' != '1.7' and Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D56E3E45-53C2-4A72-A4E2-CEB4AD4D5019}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>BDP.Compatibility</RootNamespace>
+    <AssemblyName>BDP.Compatibility</AssemblyName>
+    <TargetFrameworkVersion Condition="'$(RimWorldVersion)' != '1.7'">v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>$(BdpVersionRoot)\Assemblies\</OutputPath>
+    <DefineConstants>TRACE;$(BdpVersionDefine)</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>$(BdpVersionRoot)\Assemblies\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;$(BdpVersionDefine)</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+  <!-- 1.6 仍引用原 Unity 模块；1.7 引用在共同版本配置中独立声明。 -->
+  <ItemGroup Condition="'$(RimWorldVersion)' == '1.6'">
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="UnityEngine">
+      <HintPath>$(RimWorldReferenceDir)\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(RimWorldReferenceDir)\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>$(RimWorldReferenceDir)\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <!-- 原版配置行文字布局所需的 Unity 文本模块，不引入业务或外部模组依赖。 -->
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>$(RimWorldReferenceDir)\UnityEngine.TextRenderingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="**\*.cs" Exclude="obj\**\*.cs;bin\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BDP\BDP.csproj">
+      <Project>{F26B4168-0D1D-4EE0-AB3B-7FDE7B2B8F91}</Project>
+      <Name>BDP.Core</Name>
+      <ReferenceOutputAssembly>True</ReferenceOutputAssembly>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" Condition="'$(RimWorldVersion)' != '1.7'" />
+  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" Condition="'$(RimWorldVersion)' == '1.7'" />
+  <Import Project="..\Build\Bdp.Version.targets" />
+</Project>

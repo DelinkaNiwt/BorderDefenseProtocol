@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 批量能力划选只开放原版直线，不新增鼠标几何算法。 -->
+  <DrawStyleCategoryDef>
+    <defName>BDP_BatchAbility_Line</defName>
+    <styles><li>Line</li></styles>
+  </DrawStyleCategoryDef>
+</Defs>

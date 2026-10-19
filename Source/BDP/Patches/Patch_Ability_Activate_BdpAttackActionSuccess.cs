@@ -33,7 +33,7 @@ namespace BDP.Patches
         /// </summary>
         public static void Postfix(Ability __instance, bool __result)
         {
-            if (!__result || !IsOffensive(__instance))
+            if (!__result || !AttackActionSuccess.IsOffensiveAbility(__instance))
             {
                 return;
             }
@@ -43,25 +43,5 @@ namespace BDP.Patches
                 AttackActionSuccess.FromAbility(__instance, verb));
         }
 
-        /// <summary>
-        /// 判断能力 Def 是否属于攻击能力。
-        /// Ability.Def 是原版私有字段，使用 Harmony 读取而不修改原版状态。
-        /// </summary>
-        private static bool IsOffensive(Ability ability)
-        {
-            if (ability == null)
-            {
-                return false;
-            }
-
-            AbilityDef def = Traverse.Create(ability).Field("def").GetValue<AbilityDef>();
-            if (def == null)
-            {
-                return false;
-            }
-
-            return def.hostile
-                || (def.verbProperties != null && def.verbProperties.violent);
-        }
     }
 }

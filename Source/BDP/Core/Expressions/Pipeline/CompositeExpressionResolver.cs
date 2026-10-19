@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using BDP.Core.AttackExecution;
 using BDP.Core.Combos;
 using BDP.Core.CombatModel;
@@ -31,6 +32,30 @@ namespace BDP.Core.Expressions
             new ComboFormalExpressionResultFactory();
 
         /// <summary>
+        /// 一枚合法组合候选来源的最小运行时记录。
+        /// </summary>
+        private sealed class ComboSourceCandidate
+        {
+            /// <summary>候选来源对应的正式槽位。</summary>
+            public ITriggerSlotState Slot;
+
+            /// <summary>候选来源芯片实体。</summary>
+            public Thing Chip;
+
+            /// <summary>候选来源的第一条材料。</summary>
+            public ExpressionSourceMaterial Material;
+
+            /// <summary>候选来源的主 Verb 结果，供组合字段回退。</summary>
+            public FormalExpressionResult PrimaryResult;
+
+            /// <summary>候选来源用于引用列表的正式结果。</summary>
+            public FormalExpressionResult ReferenceResult;
+
+            /// <summary>是否拥有独立激活控制范围。</summary>
+            public bool HasIndependentActivationControl;
+        }
+
+        /// <summary>
         /// 根据 Main / Sub 单侧结果重算复合结果集合。
         /// </summary>
         internal CompositeExpressionSet Resolve(
@@ -46,15 +71,12 @@ namespace BDP.Core.Expressions
 
             FormalExpressionResult mainPrimary = FindSingleSidePrimary(mainSet);
             FormalExpressionResult subPrimary = FindSingleSidePrimary(subSet);
-            ExpressionSourceMaterial mainMaterial = ResolveSourceMaterial(sourceMaterials, TriggerSide.Main);
-            ExpressionSourceMaterial subMaterial = ResolveSourceMaterial(sourceMaterials, TriggerSide.Sub);
             List<FormalExpressionResult> comboResults = BuildComboResults(
                 pawn,
                 triggerLoadoutReader,
-                mainMaterial,
-                subMaterial,
-                mainPrimary,
-                subPrimary,
+                sourceMaterials,
+                mainSet,
+                subSet,
                 references);
             // 双持判定需要精确匹配 PrimaryVerb 对应的来源材料，不能取侧第一条。
             // 否则多形态芯片的 RuntimePayload.Entry.Id 可能来自非 Verb 条目，导致动作比较失准。
@@ -82,10 +104,9 @@ namespace BDP.Core.Expressions
         private static List<FormalExpressionResult> BuildComboResults(
             Pawn pawn,
             ITriggerLoadoutReader triggerLoadoutReader,
-            ExpressionSourceMaterial mainMaterial,
-            ExpressionSourceMaterial subMaterial,
-            FormalExpressionResult mainPrimary,
-            FormalExpressionResult subPrimary,
+            IReadOnlyList<ExpressionSourceMaterial> sourceMaterials,
+            SingleSideExpressionSet mainSet,
+            SingleSideExpressionSet subSet,
             List<CompositeExpressionReference> references)
         {
             List<FormalExpressionResult> target = new List<FormalExpressionResult>();
@@ -98,71 +119,156 @@ namespace BDP.Core.Expressions
                 return target;
             }
 
-            ITriggerSlotState mainSlot = triggerLoadoutReader.GetActiveSlot(TriggerSide.Main);
-            ITriggerSlotState subSlot = triggerLoadoutReader.GetActiveSlot(TriggerSide.Sub);
-            Thing mainChip = mainSlot != null ? mainSlot.LoadedChip : null;
-            Thing subChip = subSlot != null ? subSlot.LoadedChip : null;
-            LogComboProbe(
-                "active_pair",
-                mainChip,
-                subChip,
-                mainPrimary,
-                subPrimary,
-                "开始解析 combo。");
-            if (mainChip?.def == null || subChip?.def == null)
+            List<ComboSourceCandidate> candidates = BuildComboCandidates(
+                triggerLoadoutReader,
+                sourceMaterials,
+                mainSet,
+                subSet);
+            List<ComboSourceCandidate> normalMain = candidates
+                .Where(candidate => candidate.Slot.Side == TriggerSide.Main && !candidate.HasIndependentActivationControl)
+                .ToList();
+            List<ComboSourceCandidate> normalSub = candidates
+                .Where(candidate => candidate.Slot.Side == TriggerSide.Sub && !candidate.HasIndependentActivationControl)
+                .ToList();
+            List<ComboSourceCandidate> independentControlMain = candidates
+                .Where(candidate => candidate.Slot.Side == TriggerSide.Main && candidate.HasIndependentActivationControl)
+                .ToList();
+            List<ComboSourceCandidate> independentControlSub = candidates
+                .Where(candidate => candidate.Slot.Side == TriggerSide.Sub && candidate.HasIndependentActivationControl)
+                .ToList();
+
+            // 合法候选只有：普通 Main + 普通 Sub、普通 Main + 同侧独立控制 Main、普通 Sub + 同侧独立控制 Sub。
+            for (int i = 0; i < normalMain.Count; i++)
             {
-                LogComboProbe(
-                    "missing_active_chip",
-                    mainChip,
-                    subChip,
-                    mainPrimary,
-                    subPrimary,
-                    "combo表达未成立：Main/Sub 激活槽缺少芯片 Def。");
-                return target;
+                for (int j = 0; j < normalSub.Count; j++)
+                {
+                    AppendComboResultsForPair(pawn, triggerLoadoutReader, normalMain[i], normalSub[j], references, target);
+                }
+
+                for (int j = 0; j < independentControlMain.Count; j++)
+                {
+                    AppendComboResultsForPair(pawn, triggerLoadoutReader, normalMain[i], independentControlMain[j], references, target);
+                }
+            }
+
+            for (int i = 0; i < normalSub.Count; i++)
+            {
+                for (int j = 0; j < independentControlSub.Count; j++)
+                {
+                    AppendComboResultsForPair(pawn, triggerLoadoutReader, normalSub[i], independentControlSub[j], references, target);
+                }
+            }
+
+            return target;
+        }
+
+        /// <summary>
+        /// 从全部正式激活槽位构建组合候选，不读取 Special，也不把镜像槽当独立来源。
+        /// </summary>
+        private static List<ComboSourceCandidate> BuildComboCandidates(
+            ITriggerLoadoutReader triggerLoadoutReader,
+            IReadOnlyList<ExpressionSourceMaterial> sourceMaterials,
+            SingleSideExpressionSet mainSet,
+            SingleSideExpressionSet subSet)
+        {
+            List<ComboSourceCandidate> result = new List<ComboSourceCandidate>();
+            foreach (ITriggerSlotState slot in triggerLoadoutReader.GetActiveSlots() ?? new List<ITriggerSlotState>())
+            {
+                if (slot == null
+                    || slot.LoadedChip == null
+                    || slot.IsBindingMirror
+                    || (slot.Side != TriggerSide.Main && slot.Side != TriggerSide.Sub))
+                {
+                    continue;
+                }
+
+                result.Add(new ComboSourceCandidate
+                {
+                    Slot = slot,
+                    Chip = slot.LoadedChip,
+                    Material = ResolveSourceMaterialForSlot(sourceMaterials, slot),
+                    PrimaryResult = FindSingleSidePrimaryForSlot(slot.Side == TriggerSide.Main ? mainSet : subSet, slot),
+                    ReferenceResult = FindFirstResultForSlot(slot.Side == TriggerSide.Main ? mainSet : subSet, slot),
+                    HasIndependentActivationControl = TriggerChipActivationControlRegistry.HasIndependentActivationControl(slot.LoadedChip)
+                });
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 为一个合法候选对匹配 ComboDef，并逐条追加全部组合表达结果。
+        /// </summary>
+        private static void AppendComboResultsForPair(
+            Pawn pawn,
+            ITriggerLoadoutReader triggerLoadoutReader,
+            ComboSourceCandidate firstCandidate,
+            ComboSourceCandidate secondCandidate,
+            List<CompositeExpressionReference> references,
+            List<FormalExpressionResult> target)
+        {
+            if (firstCandidate?.Chip?.def == null || secondCandidate?.Chip?.def == null)
+            {
+                return;
             }
 
             string matchFailureReason;
             ComboDefinitionReadResult comboReadResult = ComboSurfaceAccess.FindMatch(
-                mainChip,
-                subChip,
+                firstCandidate.Chip,
+                secondCandidate.Chip,
+                triggerLoadoutReader.GetChipModeKey(firstCandidate.Chip),
+                triggerLoadoutReader.GetChipStanceKey(firstCandidate.Chip),
+                triggerLoadoutReader.GetChipModeKey(secondCandidate.Chip),
+                triggerLoadoutReader.GetChipStanceKey(secondCandidate.Chip),
                 out matchFailureReason);
             if (comboReadResult == null
                 || comboReadResult.Validation == null
                 || !comboReadResult.Validation.IsValid
-                || comboReadResult.Contract == null
-                || comboReadResult.Contract.Expression == null
+                || comboReadResult.Contract?.Expression == null
                 || !comboReadResult.Contract.Expression.HasExpressionBlock
-                || comboReadResult.Contract.Expression.Config == null
-                || comboReadResult.Contract.Expression.Config.Entries == null
+                || comboReadResult.Contract.Expression.Config?.Entries == null
                 || comboReadResult.Contract.Expression.Config.Entries.Count == 0)
             {
                 LogComboProbe(
                     "find_or_validate_failed",
-                    mainChip,
-                    subChip,
-                    mainPrimary,
-                    subPrimary,
+                    firstCandidate.Chip,
+                    secondCandidate.Chip,
+                    firstCandidate.PrimaryResult,
+                    secondCandidate.PrimaryResult,
                     "combo表达未成立："
                     + DescribeComboReadResult(comboReadResult)
                     + " 匹配摘要="
                     + SafeText(matchFailureReason));
-                return target;
+                return;
             }
+
+            ComboSourceCandidate firstSource = ResolveBoundCandidate(
+                comboReadResult.SourceBinding?.FirstSourceChip,
+                firstCandidate,
+                secondCandidate);
+            ComboSourceCandidate secondSource = ResolveBoundCandidate(
+                comboReadResult.SourceBinding?.SecondSourceChip,
+                firstCandidate,
+                secondCandidate);
+            ExpressionSourceMaterial firstMaterial = EnsureSourceMaterial(firstSource);
+            ExpressionSourceMaterial secondMaterial = EnsureSourceMaterial(secondSource);
+            FormalExpressionResult firstPrimary = firstSource?.PrimaryResult;
+            FormalExpressionResult secondPrimary = secondSource?.PrimaryResult;
+            FormalExpressionResult firstReference = firstSource?.ReferenceResult;
+            FormalExpressionResult secondReference = secondSource?.ReferenceResult;
 
             ComboDefinitionContractResolver comboResolver = ComboSurfaceAccess.ResolveContractResolver();
             BDP.Core.Requirements.PawnRequirementCheckResult useRequirementCheck =
                 ComboUseRequirementService.Instance.Evaluate(pawn, comboReadResult.ComboDef);
             List<ComboExpressionEntryConfig> comboEntries = ComboExpressionEntryCloneService.CloneEntries(
                 comboReadResult.Contract.Expression.Config.Entries);
-            string commonSourceVariantKey = ResolveCommonSourceVariantKey(mainMaterial, subMaterial);
+            string commonSourceVariantKey = ResolveCommonSourceVariantKey(firstMaterial, secondMaterial);
             string commonSourceVariantLabel = ResolveCommonSourceVariantLabel(
-                mainMaterial,
-                subMaterial,
+                firstMaterial,
+                secondMaterial,
                 commonSourceVariantKey);
             ComboExpressionVariantModifierRegistry.Apply(comboEntries, commonSourceVariantKey);
 
-            // 只解释已修正的组合条目副本，保证 Content 只修改组合结果显式声明的数据，
-            // 不回写 ComboDef 缓存，也不重复处理第一、第二来源结果。
             ChipExpressionResolvedContract resolvedContract = comboEntryInterpreter.Resolve(
                 null,
                 new ChipExpressionConfig
@@ -179,35 +285,35 @@ namespace BDP.Core.Expressions
             {
                 LogComboProbe(
                     "entry_contract_invalid",
-                    mainChip,
-                    subChip,
-                    mainPrimary,
-                    subPrimary,
+                    firstCandidate.Chip,
+                    secondCandidate.Chip,
+                    firstPrimary,
+                    secondPrimary,
                     "combo表达未成立：组合条目解释失败。"
                     + DescribeResolvedContract(resolvedContract));
-                return target;
+                return;
             }
 
-            for (int i = 0; i < resolvedContract.Contract.Entries.Count; i++)
+            for (int i = 0; i < resolvedContract.Contract.Entries.Count && i < comboEntries.Count; i++)
             {
                 ComboExpressionEntryConfig entryConfig = comboEntries[i];
                 ChipExpressionEntryContract entry = resolvedContract.Contract.Entries[i];
                 ComboResolvedVerbProps resolvedVerbProps = comboResolver.ResolveVerbProps(
                     entryConfig,
-                    mainPrimary,
-                    subPrimary);
+                    firstPrimary,
+                    secondPrimary);
                 ComboResolvedExecution resolvedExecution = comboResolver.ResolveExecution(
                     entryConfig,
-                    mainPrimary,
-                    subPrimary);
+                    firstPrimary,
+                    secondPrimary);
                 FormalExpressionResult comboResult = BuildComboResult(
                     comboReadResult,
                     entryConfig,
                     entry,
-                    mainMaterial,
-                    subMaterial,
-                    mainPrimary,
-                    subPrimary,
+                    firstMaterial,
+                    secondMaterial,
+                    firstPrimary,
+                    secondPrimary,
                     resolvedVerbProps,
                     resolvedExecution,
                     useRequirementCheck,
@@ -219,25 +325,22 @@ namespace BDP.Core.Expressions
                 }
 
                 target.Add(comboResult);
-                if (references != null)
+                references?.Add(new CompositeExpressionReference
                 {
-                    references.Add(new CompositeExpressionReference
-                    {
-                        CompositeId = comboResult.Id,
-                        CompositeKind = CompositeExpressionKind.Combo,
-                        SourceResultIds = BuildComboSourceIds(mainPrimary, subPrimary),
-                        MainSourceResultId = mainPrimary != null ? mainPrimary.Id : null,
-                        SubSourceResultId = subPrimary != null ? subPrimary.Id : null
-                    });
-                }
+                    CompositeId = comboResult.Id,
+                    CompositeKind = CompositeExpressionKind.Combo,
+                    SourceResultIds = BuildComboSourceIds(firstReference, secondReference),
+                    MainSourceResultId = firstReference?.Id,
+                    SubSourceResultId = secondReference?.Id
+                });
             }
 
             LogComboProbe(
                 "resolved_success",
-                mainChip,
-                subChip,
-                mainPrimary,
-                subPrimary,
+                firstCandidate.Chip,
+                secondCandidate.Chip,
+                firstPrimary,
+                secondPrimary,
                 "combo表达成立：comboDef="
                 + comboReadResult.ComboDef.defName
                 + ", configEntries="
@@ -246,7 +349,45 @@ namespace BDP.Core.Expressions
                 + resolvedContract.Contract.Entries.Count
                 + ", formalResults="
                 + target.Count);
-            return target;
+        }
+
+        /// <summary>
+        /// 按运行时匹配器返回的第一/第二芯片身份恢复候选对象。
+        /// </summary>
+        private static ComboSourceCandidate ResolveBoundCandidate(
+            Thing boundChip,
+            ComboSourceCandidate firstCandidate,
+            ComboSourceCandidate secondCandidate)
+        {
+            if (boundChip == firstCandidate?.Chip || boundChip?.ThingID == firstCandidate?.Chip?.ThingID)
+            {
+                return firstCandidate;
+            }
+
+            if (boundChip == secondCandidate?.Chip || boundChip?.ThingID == secondCandidate?.Chip?.ThingID)
+            {
+                return secondCandidate;
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// 为没有独立材料的被动来源补一个只含槽位身份的材料壳。
+        /// </summary>
+        private static ExpressionSourceMaterial EnsureSourceMaterial(ComboSourceCandidate candidate)
+        {
+            if (candidate == null)
+            {
+                return null;
+            }
+
+            return candidate.Material ?? new ExpressionSourceMaterial
+            {
+                Side = candidate.Slot.Side,
+                SlotIndex = candidate.Slot.Index,
+                SourceChip = candidate.Chip
+            };
         }
 
         /// <summary>
@@ -463,10 +604,10 @@ namespace BDP.Core.Expressions
             ComboDefinitionReadResult comboReadResult,
             ComboExpressionEntryConfig entryConfig,
             ChipExpressionEntryContract entry,
-            ExpressionSourceMaterial mainMaterial,
-            ExpressionSourceMaterial subMaterial,
-            FormalExpressionResult mainPrimary,
-            FormalExpressionResult subPrimary,
+            ExpressionSourceMaterial firstMaterial,
+            ExpressionSourceMaterial secondMaterial,
+            FormalExpressionResult firstPrimary,
+            FormalExpressionResult secondPrimary,
             ComboResolvedVerbProps resolvedVerbProps,
             ComboResolvedExecution resolvedExecution,
             BDP.Core.Requirements.PawnRequirementCheckResult useRequirementCheck,
@@ -478,10 +619,10 @@ namespace BDP.Core.Expressions
                 ComboReadResult = comboReadResult,
                 EntryConfig = entryConfig,
                 EntryContract = entry,
-                MainSourceMaterial = mainMaterial,
-                SubSourceMaterial = subMaterial,
-                MainSourceResult = mainPrimary,
-                SubSourceResult = subPrimary,
+                FirstSourceMaterial = firstMaterial,
+                SecondSourceMaterial = secondMaterial,
+                FirstSourceResult = firstPrimary,
+                SecondSourceResult = secondPrimary,
                 ResolvedVerbProps = resolvedVerbProps,
                 ResolvedExecution = resolvedExecution,
                 UseRequirementCheck = useRequirementCheck,
@@ -491,14 +632,14 @@ namespace BDP.Core.Expressions
         }
 
         /// <summary>
-        /// 按单侧结果集合回到该侧第一条内部来源材料。
-        /// 这里只恢复“这侧芯片上下文是什么”，不把它等同成某一条主 Verb 结果。
+        /// 按正式槽位精确回到该槽位第一条来源材料。
+        /// 同侧存在多个独立控制芯片时，不能再用“这一侧第一条材料”代替具体来源。
         /// </summary>
-        private static ExpressionSourceMaterial ResolveSourceMaterial(
+        private static ExpressionSourceMaterial ResolveSourceMaterialForSlot(
             IReadOnlyList<ExpressionSourceMaterial> sourceMaterials,
-            TriggerSide side)
+            ITriggerSlotState slot)
         {
-            if (sourceMaterials == null)
+            if (sourceMaterials == null || slot == null)
             {
                 return null;
             }
@@ -506,20 +647,90 @@ namespace BDP.Core.Expressions
             for (int i = 0; i < sourceMaterials.Count; i++)
             {
                 ExpressionSourceMaterial material = sourceMaterials[i];
-                if (material == null || material.Side != side)
+                if (material == null
+                    || material.Side != slot.Side
+                    || material.SlotIndex != slot.Index
+                    || material.SourceChip != slot.LoadedChip)
                 {
                     continue;
                 }
 
-                /*
-                  Combo 的来源材料不能依赖“该侧已有正式发布结果”。
-                  像旋空这类只提供 combo 来源、不单独发布业务的 passive 来源条目，
-                  仍然必须把副侧 Trion 来源保留下来，供 FollowSecondSource 正式求值。
-                */
                 return material;
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// 精确读取指定槽位的主 Verb 结果。
+        /// </summary>
+        private static FormalExpressionResult FindSingleSidePrimaryForSlot(
+            SingleSideExpressionSet set,
+            ITriggerSlotState slot)
+        {
+            if (set?.WeaponResults == null || slot == null)
+            {
+                return null;
+            }
+
+            for (int i = 0; i < set.WeaponResults.Count; i++)
+            {
+                FormalExpressionResult result = set.WeaponResults[i];
+                if (IsResultFromSlot(result, slot)
+                    && result.CompositeKind == CompositeExpressionKind.None
+                    && result.VerbAttackRole == VerbAttackRole.Primary
+                    && result.IsAvailable)
+                {
+                    return result;
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// 精确读取指定槽位用于来源引用的正式结果。
+        /// 主 Verb 优先；没有主 Verb 时保留该槽位的第一条独立结果。
+        /// </summary>
+        private static FormalExpressionResult FindFirstResultForSlot(
+            SingleSideExpressionSet set,
+            ITriggerSlotState slot)
+        {
+            FormalExpressionResult primary = FindSingleSidePrimaryForSlot(set, slot);
+            if (primary != null)
+            {
+                return primary;
+            }
+
+            if (set?.Results == null || slot == null)
+            {
+                return null;
+            }
+
+            for (int i = 0; i < set.Results.Count; i++)
+            {
+                FormalExpressionResult result = set.Results[i];
+                if (IsResultFromSlot(result, slot) && result.IsAvailable)
+                {
+                    return result;
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// 判断正式结果是否来自指定槽位。
+        /// </summary>
+        private static bool IsResultFromSlot(
+            FormalExpressionResult result,
+            ITriggerSlotState slot)
+        {
+            return result?.SourceReference != null
+                && slot != null
+                && result.SourceReference.Side == slot.Side
+                && result.SourceReference.SlotIndex == slot.Index
+                && result.SourceReference.ChipThingId == slot.LoadedChip?.ThingID;
         }
 
         /// <summary>
@@ -589,7 +800,7 @@ namespace BDP.Core.Expressions
             ChipExpressionEntryContract entry,
             WeaponExpressionMode weaponMode)
         {
-            if (entry == null || TranslateResultKind(entry.Kind) != ExpressionResultKind.Verb)
+            if (entry == null || TranslateOutputChannel(entry.EntryType) != ExpressionOutputChannel.Verb)
             {
                 return null;
             }
@@ -764,21 +975,21 @@ namespace BDP.Core.Expressions
         /// <summary>
         /// 把表达条目种类翻译成正式结果种类。
         /// </summary>
-        private static ExpressionResultKind TranslateResultKind(ChipExpressionEntryKind kind)
+        private static ExpressionOutputChannel TranslateOutputChannel(ChipExpressionEntryType entryType)
         {
-            switch (kind)
+            switch (entryType)
             {
-                case ChipExpressionEntryKind.PrimaryVerb:
-                case ChipExpressionEntryKind.SecondaryVerb:
-                    return ExpressionResultKind.Verb;
-                case ChipExpressionEntryKind.Ability:
-                    return ExpressionResultKind.Ability;
-                case ChipExpressionEntryKind.Hediff:
-                    return ExpressionResultKind.Hediff;
-                case ChipExpressionEntryKind.Passive:
-                    return ExpressionResultKind.Passive;
+                case ChipExpressionEntryType.PrimaryVerb:
+                case ChipExpressionEntryType.SecondaryVerb:
+                    return ExpressionOutputChannel.Verb;
+                case ChipExpressionEntryType.Ability:
+                    return ExpressionOutputChannel.Ability;
+                case ChipExpressionEntryType.Hediff:
+                    return ExpressionOutputChannel.Hediff;
+                case ChipExpressionEntryType.Passive:
+                    return ExpressionOutputChannel.Passive;
                 default:
-                    return ExpressionResultKind.Verb;
+                    return ExpressionOutputChannel.Verb;
             }
         }
 
@@ -846,7 +1057,7 @@ namespace BDP.Core.Expressions
             FormalExpressionResult dualResult = new FormalExpressionResult
             {
                 Id = resultId,
-                ResultKind = ExpressionResultKind.Verb,
+                OutputChannel = ExpressionOutputChannel.Verb,
                 WeaponMode = mainPrimary.WeaponMode,
                 OriginKind = ExpressionOriginKind.Composite,
                 SourceVariantKey = mainPrimary != null ? mainPrimary.SourceVariantKey : null,
@@ -863,6 +1074,7 @@ namespace BDP.Core.Expressions
                 RoleKey = mainPrimary.RoleKey,
                 VerbAttackRole = VerbAttackRole.Primary,
                 Tags = mainPrimary?.Tags != null ? new List<string>(mainPrimary.Tags) : new List<string>(),
+                DeclaredPermissionKeys = MergeDeclaredPermissionKeys(mainPrimary, subPrimary),
                 ExecutionSlotKey = "DualPrimary",
                 IsSecondaryAttack = false,
                 Trion = BuildDualAggregateTrion(mainPrimary),
@@ -880,7 +1092,8 @@ namespace BDP.Core.Expressions
                 // 双侧模块分别克隆并标记来源，供暖机续建时的泳道重映射（CopyDualLanePrivateContexts）
                 // 按 sourceResultId 精确对位。同芯片双持时两侧模块一致，拼接后数量翻倍；
                 // 异构双持时各自保留自身模块，不会丢失副侧模块。
-                RangedModules = BuildDualRangedModules(mainPrimary, subPrimary)
+                RangedModules = BuildDualRangedModules(mainPrimary, subPrimary),
+                HitPartPolicy = CloneHitPartPolicy(mainPrimary != null ? mainPrimary.HitPartPolicy : null)
             };
 
             if (references != null)
@@ -931,8 +1144,8 @@ namespace BDP.Core.Expressions
         {
             return mainPrimary != null
                 && subPrimary != null
-                && mainPrimary.ResultKind == ExpressionResultKind.Verb
-                && subPrimary.ResultKind == ExpressionResultKind.Verb
+                && mainPrimary.OutputChannel == ExpressionOutputChannel.Verb
+                && subPrimary.OutputChannel == ExpressionOutputChannel.Verb
                 && mainPrimary.WeaponMode != WeaponExpressionMode.None
                 && mainPrimary.WeaponMode == subPrimary.WeaponMode
                 && IsSameChipIdentity(mainMaterial, subMaterial)
@@ -1096,6 +1309,14 @@ namespace BDP.Core.Expressions
         }
 
         /// <summary>
+        /// 双侧入口只承接主侧的近战命中部位策略，避免一次主伤害产生两套互相竞争的策略。
+        /// </summary>
+        private static HitPartPolicyConfig CloneHitPartPolicy(HitPartPolicyConfig policy)
+        {
+            return policy != null ? policy.Clone() : null;
+        }
+
+        /// <summary>
         /// 按来源结果标识克隆单侧模块挂载列表。
         /// 克隆后的每个挂载都绑定到指定来源结果，供运行时按来源隔离影响范围。
         /// </summary>
@@ -1149,6 +1370,35 @@ namespace BDP.Core.Expressions
             }
 
             return result;
+        }
+
+        /// <summary>合并双侧结果的显式许可声明，避免复合结果丢失任一侧业务意图。</summary>
+        private static IReadOnlyList<string> MergeDeclaredPermissionKeys(
+            FormalExpressionResult first,
+            FormalExpressionResult second)
+        {
+            List<string> result = new List<string>();
+            AddDeclaredPermissionKeys(result, first?.DeclaredPermissionKeys);
+            AddDeclaredPermissionKeys(result, second?.DeclaredPermissionKeys);
+            return result;
+        }
+
+        /// <summary>按稳定键去重追加许可声明。</summary>
+        private static void AddDeclaredPermissionKeys(List<string> target, IReadOnlyList<string> source)
+        {
+            if (target == null || source == null)
+            {
+                return;
+            }
+
+            for (int index = 0; index < source.Count; index++)
+            {
+                string key = source[index];
+                if (!string.IsNullOrWhiteSpace(key) && !target.Contains(key))
+                {
+                    target.Add(key);
+                }
+            }
         }
 
         /// <summary>

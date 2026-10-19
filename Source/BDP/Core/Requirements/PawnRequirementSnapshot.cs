@@ -15,6 +15,9 @@ namespace BDP.Core.Requirements
         /// <summary>定义声明的最低要求。</summary>
         public string RequiredValueText { get; private set; }
 
+        /// <summary>供紧凑界面直接展示的结果值，可为空。</summary>
+        public string ResultValueText { get; private set; }
+
         /// <summary>有运行时求值时，该条件是否满足。</summary>
         public bool IsSatisfied { get; private set; }
 
@@ -22,13 +25,17 @@ namespace BDP.Core.Requirements
         public string FailureReason { get; private set; }
 
         /// <summary>创建一条不绑定角色的静态条件说明。</summary>
-        public static PawnRequirementSnapshot Description(string label, string requirementText)
+        public static PawnRequirementSnapshot Description(
+            string label,
+            string requirementText,
+            string resultValueText = null)
         {
             return new PawnRequirementSnapshot
             {
                 Label = label,
                 CurrentValueText = null,
                 RequiredValueText = requirementText,
+                ResultValueText = resultValueText,
                 IsSatisfied = true,
                 FailureReason = null
             };
@@ -47,6 +54,7 @@ namespace BDP.Core.Requirements
                 Label = label,
                 CurrentValueText = currentValueText,
                 RequiredValueText = requiredValueText,
+                ResultValueText = null,
                 IsSatisfied = isSatisfied,
                 FailureReason = failureReason
             };

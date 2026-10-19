@@ -84,6 +84,12 @@ namespace BDP.Core.Expressions.Runtime
                     continue;
                 }
 
+                if (result.OutputChannel == ExpressionOutputChannel.Hediff
+                    && !HasExpressionHostHediff(pawn, result.HediffDefName))
+                {
+                    continue;
+                }
+
                 TrionDrainKey key = ExpressionSustainDrainKeyFactory.Create(result);
                 List<FormalExpressionResult> group;
                 if (!groups.TryGetValue(key, out group))
@@ -114,6 +120,26 @@ namespace BDP.Core.Expressions.Runtime
             }
 
             return desired;
+        }
+
+        /// <summary>
+        /// Hediff 通道只有在实际表达宿主存在时才登记持续消耗。
+        /// 其它表达通道仍以正式结果可用状态为准。
+        /// </summary>
+        private static bool HasExpressionHostHediff(Pawn pawn, string hediffDefName)
+        {
+            if (pawn?.health?.hediffSet == null || string.IsNullOrWhiteSpace(hediffDefName))
+            {
+                return false;
+            }
+
+            HediffDef def = DefDatabase<HediffDef>.GetNamedSilentFail(hediffDefName);
+            if (def == null)
+            {
+                return false;
+            }
+
+            return pawn.health.hediffSet.GetFirstHediffOfDef(def, false) is BdpExpressionHostHediff;
         }
 
         /// <summary>

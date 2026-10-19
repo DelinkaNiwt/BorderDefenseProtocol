@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using BDP.Core.AttackExecution;
+using BDP.Core.Trigger;
 
 namespace BDP.Core.Expressions
 {
@@ -53,15 +54,25 @@ namespace BDP.Core.Expressions
             ApplyDisplayPrefixesToSet(augmentations, mainSet);
             ApplyDisplayPrefixesToSet(augmentations, subSet);
             ApplyDisplayPrefixesToSet(augmentations, specialSet);
+            List<FormalExpressionResult> sourceResults = BuildSourceResults(
+                mainSet,
+                subSet,
+                specialSet);
             ApplyDisplayPrefixesToResults(
                 augmentations,
-                compositeSet != null ? compositeSet.DualWeaponResults : null);
+                compositeSet != null ? compositeSet.DualWeaponResults : null,
+                sourceResults,
+                compositeSet != null ? compositeSet.References : null);
             ApplyDisplayPrefixesToResults(
                 augmentations,
-                compositeSet != null ? compositeSet.ComboResults : null);
+                compositeSet != null ? compositeSet.ComboResults : null,
+                sourceResults,
+                compositeSet != null ? compositeSet.References : null);
             ApplyDisplayPrefixesToResults(
                 augmentations,
-                compositeSet != null ? compositeSet.NonCombatCompositeResults : null);
+                compositeSet != null ? compositeSet.NonCombatCompositeResults : null,
+                sourceResults,
+                compositeSet != null ? compositeSet.References : null);
         }
 
         /// <summary>
@@ -81,7 +92,7 @@ namespace BDP.Core.Expressions
             {
                 FormalExpressionResult source = set.Results[index];
                 if (source == null
-                    || source.ResultKind != ExpressionResultKind.Passive
+                    || source.OutputChannel != ExpressionOutputChannel.Passive
                     || !source.IsAvailable
                     || source.RangedModuleAugmentations == null)
                 {
@@ -146,7 +157,12 @@ namespace BDP.Core.Expressions
                 for (int index = 0; index < augmentations.Count; index++)
                 {
                     ExpressionAugmentationDeclaration augmentation = augmentations[index];
-                    if (!IsApplicable(augmentation?.Config, RangedModuleAugmentationTargetCapability.RangedWeapon))
+                    if (!IsApplicable(
+                            augmentation,
+                            target,
+                            RangedModuleAugmentationTargetCapability.RangedWeapon,
+                            null,
+                            null))
                     {
                         continue;
                     }
@@ -178,7 +194,11 @@ namespace BDP.Core.Expressions
             IReadOnlyList<ExpressionAugmentationDeclaration> augmentations,
             SingleSideExpressionSet set)
         {
-            ApplyDisplayPrefixesToResults(augmentations, set != null ? set.Results : null);
+            ApplyDisplayPrefixesToResults(
+                augmentations,
+                set != null ? set.Results : null,
+                set != null ? set.Results : null,
+                null);
         }
 
         /// <summary>
@@ -186,7 +206,9 @@ namespace BDP.Core.Expressions
         /// </summary>
         private static void ApplyDisplayPrefixesToResults(
             IReadOnlyList<ExpressionAugmentationDeclaration> augmentations,
-            IReadOnlyList<FormalExpressionResult> results)
+            IReadOnlyList<FormalExpressionResult> results,
+            IReadOnlyList<FormalExpressionResult> sourceResults,
+            IReadOnlyList<CompositeExpressionReference> compositeReferences)
         {
             if (results == null)
             {
@@ -210,13 +232,20 @@ namespace BDP.Core.Expressions
                          augmentationIndex < augmentations.Count;
                          augmentationIndex++)
                     {
-                        RangedModuleAugmentationConfig config = augmentations[augmentationIndex]?.Config;
-                        if (!IsApplicable(config, RangedModuleAugmentationTargetCapability.RangedWeapon))
+                        ExpressionAugmentationDeclaration augmentation = augmentations[augmentationIndex];
+                        if (!IsApplicable(
+                                augmentation,
+                                target,
+                                RangedModuleAugmentationTargetCapability.RangedWeapon,
+                                sourceResults,
+                                compositeReferences))
                         {
                             continue;
                         }
 
-                        string prefix = ResolvePrefix(config, augmentations[augmentationIndex].SourceResult);
+                        string prefix = ResolvePrefix(
+                            augmentation.Config,
+                            augmentation.SourceResult);
                         if (!string.IsNullOrWhiteSpace(prefix) && !prefixes.Contains(prefix))
                         {
                             prefixes.Add(prefix);
@@ -234,7 +263,7 @@ namespace BDP.Core.Expressions
         private static bool IsRangedWeaponResult(FormalExpressionResult result)
         {
             return result != null
-                && result.ResultKind == ExpressionResultKind.Verb
+                && result.OutputChannel == ExpressionOutputChannel.Verb
                 && result.WeaponMode == WeaponExpressionMode.Ranged
                 && result.IsAvailable
                 && result.CanProject;
@@ -244,10 +273,250 @@ namespace BDP.Core.Expressions
         /// 判断增强声明是否匹配指定中性能力。
         /// </summary>
         private static bool IsApplicable(
-            RangedModuleAugmentationConfig config,
-            RangedModuleAugmentationTargetCapability capability)
+            ExpressionAugmentationDeclaration augmentation,
+            FormalExpressionResult target,
+            RangedModuleAugmentationTargetCapability capability,
+            IReadOnlyList<FormalExpressionResult> sourceResults,
+            IReadOnlyList<CompositeExpressionReference> compositeReferences)
         {
-            return config != null && config.AppliesToCapability == capability;
+            RangedModuleAugmentationConfig config = augmentation != null
+                ? augmentation.Config
+                : null;
+            if (config == null || config.AppliesToCapability != capability)
+            {
+                return false;
+            }
+
+            if (!IsSourceVariantAllowed(
+                    config,
+                    target,
+                    sourceResults,
+                    compositeReferences))
+            {
+                return false;
+            }
+
+            if (config.Scope == RangedModuleAugmentationScope.AllSides)
+            {
+                return true;
+            }
+
+            if (config.Scope != RangedModuleAugmentationScope.OppositeSide
+                || augmentation.SourceResult == null
+                || target == null)
+            {
+                return false;
+            }
+
+            if (target.CompositeKind == CompositeExpressionKind.None)
+            {
+                return AreOppositeSides(augmentation.SourceResult, target);
+            }
+
+            CompositeExpressionReference reference = FindCompositeReference(
+                target,
+                compositeReferences);
+            if (reference?.SourceResultIds == null || sourceResults == null)
+            {
+                return false;
+            }
+
+            for (int index = 0; index < reference.SourceResultIds.Count; index++)
+            {
+                FormalExpressionResult sourceResult = FindResultById(
+                    sourceResults,
+                    reference.SourceResultIds[index]);
+                if (AreOppositeSides(augmentation.SourceResult, sourceResult))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 判断目标结果的来源变体是否命中增强白名单。
+        /// 复合结果按已有来源引用逐项追溯，不把复合结果自身的聚合键当成单侧真值。
+        /// </summary>
+        private static bool IsSourceVariantAllowed(
+            RangedModuleAugmentationConfig config,
+            FormalExpressionResult target,
+            IReadOnlyList<FormalExpressionResult> sourceResults,
+            IReadOnlyList<CompositeExpressionReference> compositeReferences)
+        {
+            if (config == null
+                || config.AllowedSourceVariantKeys == null
+                || config.AllowedSourceVariantKeys.Count == 0)
+            {
+                return true;
+            }
+
+            if (target == null)
+            {
+                return false;
+            }
+
+            if (target.CompositeKind == CompositeExpressionKind.None)
+            {
+                return IsSourceVariantKeyAllowed(
+                    config,
+                    target.SourceVariantKey);
+            }
+
+            CompositeExpressionReference reference = FindCompositeReference(
+                target,
+                compositeReferences);
+            if (reference?.SourceResultIds == null || sourceResults == null)
+            {
+                return false;
+            }
+
+            for (int index = 0; index < reference.SourceResultIds.Count; index++)
+            {
+                FormalExpressionResult sourceResult = FindResultById(
+                    sourceResults,
+                    reference.SourceResultIds[index]);
+                if (sourceResult != null
+                    && IsSourceVariantKeyAllowed(
+                        config,
+                        sourceResult.SourceVariantKey))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 按稳定来源变体键判断单个结果是否命中白名单。
+        /// </summary>
+        private static bool IsSourceVariantKeyAllowed(
+            RangedModuleAugmentationConfig config,
+            string sourceVariantKey)
+        {
+            if (config == null || string.IsNullOrWhiteSpace(sourceVariantKey))
+            {
+                return false;
+            }
+
+            string normalizedSourceVariantKey = sourceVariantKey.Trim();
+            for (int index = 0; index < config.AllowedSourceVariantKeys.Count; index++)
+            {
+                string allowedSourceVariantKey = config.AllowedSourceVariantKeys[index];
+                if (!string.IsNullOrWhiteSpace(allowedSourceVariantKey)
+                    && string.Equals(
+                        normalizedSourceVariantKey,
+                        allowedSourceVariantKey.Trim(),
+                        System.StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 判断两个结果是否分别属于 Main 和 Sub 两侧。
+        /// </summary>
+        private static bool AreOppositeSides(
+            FormalExpressionResult source,
+            FormalExpressionResult target)
+        {
+            TriggerSide sourceSide = source.SourceReference != null
+                ? source.SourceReference.Side
+                : TriggerSide.Special;
+            TriggerSide targetSide = target.SourceReference != null
+                ? target.SourceReference.Side
+                : TriggerSide.Special;
+            return (sourceSide == TriggerSide.Main && targetSide == TriggerSide.Sub)
+                || (sourceSide == TriggerSide.Sub && targetSide == TriggerSide.Main);
+        }
+
+        /// <summary>
+        /// 按复合结果标识读取其来源引用。
+        /// </summary>
+        private static CompositeExpressionReference FindCompositeReference(
+            FormalExpressionResult target,
+            IReadOnlyList<CompositeExpressionReference> references)
+        {
+            if (target == null || references == null || string.IsNullOrWhiteSpace(target.Id))
+            {
+                return null;
+            }
+
+            for (int index = 0; index < references.Count; index++)
+            {
+                CompositeExpressionReference reference = references[index];
+                if (reference != null && reference.CompositeId == target.Id)
+                {
+                    return reference;
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// 按稳定结果标识读取复合结果的单侧来源结果。
+        /// </summary>
+        private static FormalExpressionResult FindResultById(
+            IReadOnlyList<FormalExpressionResult> results,
+            string resultId)
+        {
+            if (results == null || string.IsNullOrWhiteSpace(resultId))
+            {
+                return null;
+            }
+
+            for (int index = 0; index < results.Count; index++)
+            {
+                FormalExpressionResult result = results[index];
+                if (result != null && result.Id == resultId)
+                {
+                    return result;
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// 合并三侧结果，供复合结果按来源标识追溯侧别。
+        /// </summary>
+        private static List<FormalExpressionResult> BuildSourceResults(
+            SingleSideExpressionSet mainSet,
+            SingleSideExpressionSet subSet,
+            SingleSideExpressionSet specialSet)
+        {
+            List<FormalExpressionResult> result = new List<FormalExpressionResult>();
+            AppendResults(result, mainSet != null ? mainSet.Results : null);
+            AppendResults(result, subSet != null ? subSet.Results : null);
+            AppendResults(result, specialSet != null ? specialSet.Results : null);
+            return result;
+        }
+
+        /// <summary>
+        /// 将结果集合追加到复合来源索引。
+        /// </summary>
+        private static void AppendResults(
+            List<FormalExpressionResult> target,
+            IReadOnlyList<FormalExpressionResult> source)
+        {
+            if (target == null || source == null)
+            {
+                return;
+            }
+
+            for (int index = 0; index < source.Count; index++)
+            {
+                if (source[index] != null)
+                {
+                    target.Add(source[index]);
+                }
+            }
         }
 
         /// <summary>

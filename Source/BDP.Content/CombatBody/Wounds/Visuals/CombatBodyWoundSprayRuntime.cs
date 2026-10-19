@@ -146,33 +146,37 @@ namespace BDP.Content.CombatBody.Wounds.Visuals
         }
 
         /// <summary>
-        /// 读档后按仍然活跃的伤口 drain 重建喷射器。
-        /// 重建不触发 burst，只恢复持续喷射。
+        /// 按活跃来源同步喷射器，保留未变化部位的待发爆发及发射计数。
+        /// 读档时集合为空，仅恢复持续喷射，不主动重播受伤爆发。
         /// </summary>
         internal void RebuildFromActiveDrains(Pawn pawn, IEnumerable<int> activeHediffLoadIds)
         {
             EnsureInternalState();
-            emitters.Clear();
             tmpActiveIds.Clear();
 
             if (pawn?.health?.hediffSet == null || activeHediffLoadIds == null)
             {
-                RemoveInactiveCutTilts();
+                RemoveInactiveEmittersAndCutTilts();
                 return;
             }
 
             foreach (int hediffLoadId in activeHediffLoadIds)
             {
-                if (hediffLoadId <= 0 || !tmpActiveIds.Add(hediffLoadId))
+                if (hediffLoadId > 0 && FindWoundByLoadId(pawn, hediffLoadId) != null)
+                {
+                    tmpActiveIds.Add(hediffLoadId);
+                }
+            }
+
+            RemoveInactiveEmittersAndCutTilts();
+            foreach (int hediffLoadId in tmpActiveIds)
+            {
+                if (emitters.ContainsKey(hediffLoadId) || emitters.Count >= MaxActiveEmitters)
                 {
                     continue;
                 }
 
                 Hediff hediff = FindWoundByLoadId(pawn, hediffLoadId);
-                if (hediff == null || emitters.Count >= MaxActiveEmitters)
-                {
-                    continue;
-                }
 
                 float? savedCutTilt = null;
                 if (cutTiltByHediffLoadId.TryGetValue(hediffLoadId, out float cutTilt))
@@ -185,7 +189,6 @@ namespace BDP.Content.CombatBody.Wounds.Visuals
                 cutTiltByHediffLoadId[hediffLoadId] = emitter.CutTilt;
             }
 
-            RemoveInactiveCutTilts();
         }
 
         /// <summary>
@@ -212,9 +215,9 @@ namespace BDP.Content.CombatBody.Wounds.Visuals
         }
 
         /// <summary>
-        /// 移除已经不在 active drain 集合内的切口倾斜角记录。
+        /// 移除已停止来源的喷射器及其切口倾斜角记录。
         /// </summary>
-        private void RemoveInactiveCutTilts()
+        private void RemoveInactiveEmittersAndCutTilts()
         {
             tmpStaleIds.Clear();
             foreach (int hediffLoadId in cutTiltByHediffLoadId.Keys)
@@ -227,6 +230,7 @@ namespace BDP.Content.CombatBody.Wounds.Visuals
 
             for (int index = 0; index < tmpStaleIds.Count; index++)
             {
+                emitters.Remove(tmpStaleIds[index]);
                 cutTiltByHediffLoadId.Remove(tmpStaleIds[index]);
             }
 

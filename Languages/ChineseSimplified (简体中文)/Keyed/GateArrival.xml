@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 外部扩展异常不会中断出兵或导致容器丢失人物。 -->
+  <BDP_GateArrival_HookError>黑洞门扩展回调发生错误：{0}</BDP_GateArrival_HookError>
+  <!-- 启动前统一检查人物归属、重复人物以及点位合法性。 -->
+  <BDP_GateArrival_InvalidGroups>黑洞门分组无效：需要有效点位和互不重复、尚未落地、未被其它容器持有的存活人物。</BDP_GateArrival_InvalidGroups>
+</LanguageData>

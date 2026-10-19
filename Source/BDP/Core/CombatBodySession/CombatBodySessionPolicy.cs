@@ -1,5 +1,6 @@
 ﻿using BDP.Core.CombatBody;
 using BDP.Core.Trigger;
+using BDP.Core.Trion;
 using Verse;
 
 namespace BDP.Core.CombatBodySession
@@ -10,6 +11,18 @@ namespace BDP.Core.CombatBodySession
     /// </summary>
     internal sealed class CombatBodySessionPolicy
     {
+        /// <summary>免功能成本只免费用，不允许真实资源见底的宿主启动新战斗体。</summary>
+        public bool HasOperationalTrion(Pawn pawn)
+        {
+            if (TrionResourceRuleRegistry.GetRules(pawn).FunctionCostsEnabled)
+            {
+                return true;
+            }
+
+            ITrionReader reader = TrionSurfaceAccess.ResolveReader(pawn);
+            return reader != null && reader.Cur > 0f;
+        }
+
         /// <summary>
         /// 解析当前 Pawn 主武器上的 Trigger。
         /// </summary>
@@ -38,7 +51,9 @@ namespace BDP.Core.CombatBodySession
                 return false;
             }
 
-            return ReferenceEquals(TriggerSurfaceAccess.ResolveComp(pawn), trigger) && IsBattleModeActive(pawn);
+            // 投影只要求材料身体成立；人类转换、崩解仍使用上方专用会话判断。
+            return ReferenceEquals(TriggerSurfaceAccess.ResolveComp(pawn), trigger)
+                && CombatBodyMaterialAccess.IsActive(pawn);
         }
     }
 }

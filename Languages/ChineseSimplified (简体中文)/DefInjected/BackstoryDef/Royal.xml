@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 皇室人物童年背景标题。 -->
+  <BDP_Royal_FallenChild.title>宫廷幼学</BDP_Royal_FallenChild.title>
+  <!-- 皇室人物童年背景短标题。 -->
+  <BDP_Royal_FallenChild.titleShort>幼学</BDP_Royal_FallenChild.titleShort>
+  <!-- 只用一句话说明皇室血脉，不展开王朝细节。 -->
+  <BDP_Royal_FallenChild.description>[PAWN_nameDef]出生于薇瑟帝国皇室血脉，并在宫廷中长大，自幼接受礼仪、学识与艺术教导。</BDP_Royal_FallenChild.description>
+  <!-- 皇室人物成年背景标题。 -->
+  <BDP_Royal_FallenAdult.title>流亡求援</BDP_Royal_FallenAdult.title>
+  <!-- 皇室人物成年背景短标题。 -->
+  <BDP_Royal_FallenAdult.titleShort>流亡者</BDP_Royal_FallenAdult.titleShort>
+  <!-- 帝国覆灭后携带核心逃亡求援，不补充未确定的覆灭或追捕原因。 -->
+  <BDP_Royal_FallenAdult.description>薇瑟帝国覆灭后，[PAWN_nameDef]带着一颗Trion驱动核心离开故土，向外界寻求庇护。追兵逼近时，[PAWN_nameDef]向你的殖民地发出求援。</BDP_Royal_FallenAdult.description>
+</LanguageData>

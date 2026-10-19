@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 小兵护盾状态名称和说明。 -->
+  <BDP_Hediff_EnergyShield_Soldier.label>小兵护盾</BDP_Hediff_EnergyShield_Soldier.label>
+  <BDP_Hediff_EnergyShield_Soldier.description>小兵护盾的独立耐久状态。耐久耗尽后等待 10 秒，再以每秒 12 点的速度恢复。</BDP_Hediff_EnergyShield_Soldier.description>
+  <BDP_Hediff_EnergyShield_Soldier.stages.0.label>小兵护盾</BDP_Hediff_EnergyShield_Soldier.stages.0.label>
+</LanguageData>

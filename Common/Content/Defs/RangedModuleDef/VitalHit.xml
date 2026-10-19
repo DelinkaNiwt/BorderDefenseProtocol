@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 动态要害命中模块：默认在理想命中条件下 100% 指定要害候选部位。 -->
+  <BDP.Core.AttackExecution.BdpRangedAttackModuleDef>
+    <!-- 要害命中模块的稳定 DefName。 -->
+    <defName>BDP_VitalHitModule</defName>
+    <!-- 默认标签由简体中文 DefInjected 覆盖。 -->
+    <label>Vital hit module</label>
+    <!-- Content 运行时模块类型。 -->
+    <runtimeClass>BDP.Content.RangedModules.VitalHit.VitalHitModule</runtimeClass>
+    <!-- 1 表示命中目标且存在候选要害时必定提交命中部位覆盖。 -->
+    <defaultConfig Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+      <VitalHitChance>1</VitalHitChance>
+      <!-- 默认优先要害；需要避开要害时可在具体挂载配置覆盖为 AvoidVital。 -->
+      <SelectionMode>PreferVital</SelectionMode>
+    </defaultConfig>
+  </BDP.Core.AttackExecution.BdpRangedAttackModuleDef>
+
+</Defs>

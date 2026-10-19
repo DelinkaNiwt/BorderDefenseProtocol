@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 原版定义信息窗口使用的名称与说明；动态芯片另通过语言键读取同一语义。 -->
+  <BDP_ChipFunction_CastleShield.label>护城盾</BDP_ChipFunction_CastleShield.label>
+  <BDP_ChipFunction_CastleShield.description>开发验证用防护芯片。十五格内直线生成原版玻璃钢墙，起终点须合法且视线通畅，中间不能建墙的格子跳过；释放前摇一秒，只按实际生成格数消耗充能及每格二十触力能。上限十次，每十秒依次补回一次。关闭继续充能，切换不刷新。主副槽单格，占用容量五十、启用消耗十五，启用延迟一秒、关闭延迟半秒，无持续消耗。</BDP_ChipFunction_CastleShield.description>
+</LanguageData>

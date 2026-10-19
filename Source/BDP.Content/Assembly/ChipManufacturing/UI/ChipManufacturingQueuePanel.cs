@@ -15,7 +15,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
         /// <summary>队列滚动位置。</summary>
         private Vector2 scrollPosition;
 
-        /// <summary>绘制真实芯片账单队列。</summary>
+        /// <summary>绘制触发体与芯片共用的真实生产账单队列。</summary>
         public void Draw(
             Rect rect,
             Building_ChipFabricator building,
@@ -33,7 +33,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
 
             Rect outRect = new Rect(inner.x, inner.y + 26f, inner.width, inner.height - 26f);
             BillStack stack = building?.BillStack;
-            List<Bill_ChipProduction> bills = CollectChipBills(stack);
+            List<Bill_Production> bills = CollectProductionBills(stack);
             if (bills.Count == 0)
             {
                 Widgets.Label(
@@ -50,7 +50,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             float y = 0f;
             for (int index = 0; index < bills.Count; index++)
             {
-                Bill_ChipProduction bill = bills[index];
+                Bill_Production bill = bills[index];
                 string title = BuildRowTitle(bill, index);
                 float rowHeight = CalculateRowHeight(viewRect.width, title);
                 Rect row = new Rect(0f, y, viewRect.width, rowHeight);
@@ -71,7 +71,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
         /// <summary>累计所有动态卡片高度，作为队列滚动内容高度。</summary>
         private static float CalculateContentHeight(
             float width,
-            IList<Bill_ChipProduction> bills)
+            IList<Bill_Production> bills)
         {
             float height = 0f;
             for (int index = 0; index < bills.Count; index++)
@@ -82,10 +82,18 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             return height;
         }
 
-        /// <summary>建立含完整动态芯片名的队列标题。</summary>
-        private static string BuildRowTitle(Bill_ChipProduction bill, int index)
+        /// <summary>普通账单使用产物名称；芯片账单保留完整动态名称。</summary>
+        private static string BuildRowTitle(Bill_Production bill, int index)
         {
-            ChipCombinationRecord record = bill?.CombinationRecord;
+            if (!(bill is Bill_ChipProduction chipBill))
+            {
+                string productLabel = bill.recipe.ProducedThingDef != null
+                    ? bill.recipe.ProducedThingDef.LabelCap.ToString()
+                    : bill.recipe.LabelCap.ToString();
+                return "BDP_ChipManufacturing_Queue_RowTitle".Translate(index + 1, productLabel);
+            }
+
+            ChipCombinationRecord record = chipBill.CombinationRecord;
             ChipCombinationResolution resolution =
                 new ChipCombinationResolver().Resolve(record);
             string label = !resolution.ResolvedLabel.NullOrEmpty()
@@ -101,10 +109,10 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             return 6f + titleHeight + 4f + 22f + 6f + 26f + 4f + 24f + 6f;
         }
 
-        /// <summary>收集账单栈中的芯片账单，顺序与真实队列一致。</summary>
-        private static List<Bill_ChipProduction> CollectChipBills(BillStack stack)
+        /// <summary>收集生产账单，不按产品类别过滤，确保混合任务的顺序可见。</summary>
+        private static List<Bill_Production> CollectProductionBills(BillStack stack)
         {
-            List<Bill_ChipProduction> result = new List<Bill_ChipProduction>();
+            List<Bill_Production> result = new List<Bill_Production>();
             if (stack == null)
             {
                 return result;
@@ -112,7 +120,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
 
             for (int index = 0; index < stack.Bills.Count; index++)
             {
-                if (stack.Bills[index] is Bill_ChipProduction bill)
+                if (stack.Bills[index] is Bill_Production bill)
                 {
                     result.Add(bill);
                 }
@@ -125,7 +133,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
         private static void DrawBillRow(
             Rect rect,
             BillStack stack,
-            Bill_ChipProduction bill,
+            Bill_Production bill,
             int index,
             int count,
             ChipManufacturingEditorState editorState,
@@ -202,10 +210,11 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
                 secondY,
                 third,
                 24f),
-                "BDP_ChipManufacturing_Queue_Load".Translate()))
+                "BDP_ChipManufacturing_Queue_Load".Translate(),
+                active: bill is Bill_ChipProduction))
             {
                 ChipManufacturingDraft loadedDraft =
-                    ChipBillQueueOperations.LoadConfiguration(editorState, bill);
+                    ChipBillQueueOperations.LoadConfiguration(editorState, bill as Bill_ChipProduction);
                 if (loadedDraft != null)
                 {
                     onConfigurationLoaded?.Invoke();

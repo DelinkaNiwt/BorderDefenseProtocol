@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 护城盾验证功能：允许正常制造，同时保留开发菜单生成入口。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+    <defName>BDP_ChipFunction_CastleShield</defName>
+    <showInManufacturing>true</showInManufacturing>
+    <!-- 制造研究沿用同防护分类的普通护盾，不限制已有芯片使用。 -->
+    <researchPrerequisites><li>BDP_Research_DefensivePrinciples</li></researchPrerequisites>
+    <label>BDP_ChipFunction_CastleShield</label>
+    <labelKey>BDP_ChipFunction_CastleShield</labelKey>
+    <descriptionKey>BDP_ChipFunction_CastleShield_Description</descriptionKey>
+    <!-- 在通用芯片基础配方上追加普通护盾档位的材料与工作量。 -->
+    <costList>
+      <Steel>50</Steel>
+      <Plasteel>25</Plasteel>
+      <ComponentIndustrial>1</ComponentIndustrial>
+    </costList>
+    <additionalWorkAmount>12000</additionalWorkAmount>
+    <config>
+      <!-- 用户指定防护主分类，不额外绑定职业。 -->
+      <Profile>
+        <Category>BDP_ChipCategory_Defense</Category>
+        <Tags />
+      </Profile>
+      <!-- 主副槽单格；启用、关闭沿用普通护盾的常见配置。 -->
+      <Loadout>
+        <SlotRegion>MainSub</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <ActivationDelayTicks>60</ActivationDelayTicks>
+        <DeactivationDelayTicks>30</DeactivationDelayTicks>
+      </Loadout>
+      <!-- 芯片本体占用与启用费用，不计入每次造墙的按格消耗。 -->
+      <Trion>
+        <CapacityCost>50</CapacityCost>
+        <ActivationCost>15</ActivationCost>
+      </Trion>
+      <!-- 沿用多数标准芯片的最低释放力要求。 -->
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement"><Minimum>1</Minimum></li>
+      </ActivationRequirements>
+      <Expression>
+        <Entries>
+          <!-- 一格对应一个使用单位，按整批目标数量支付。 -->
+          <li>
+            <Id>castle_shield_ability</Id>
+            <DisplayLabelKey>BDP_Expression_CastleShield</DisplayLabelKey>
+            <EntryType>Ability</EntryType>
+            <AbilityDefName>BDP_Ability_CastleShield</AbilityDefName>
+            <Trion><UseCost>20</UseCost></Trion>
+          </li>
+        </Entries>
+      </Expression>
+      <!-- 复用能力生命周期信息，说明中的费用单位明确为每格。 -->
+      <Features>
+        <li>
+          <Id>castle_shield_ability</Id>
+          <Feature>BDP_Feature_GenericAbility</Feature>
+          <Sources>
+            <li Class="BDP.Content.Information.Features.Sources.AbilityLifecycleFeatureSourceConfig">
+              <Id>castle_shield_lifecycle</Id>
+              <EntryId>castle_shield_ability</EntryId>
+            </li>
+          </Sources>
+        </li>
+      </Features>
+    </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+</Defs>

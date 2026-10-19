@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 突击步枪单持视觉名称。 -->
+  <BDP_Visual_AssaultRifle.label>突击步枪手持视觉</BDP_Visual_AssaultRifle.label>
+  <!-- 突击步枪双持视觉名称。 -->
+  <BDP_Visual_AssaultRifle_Dual.label>突击步枪双武器手持视觉</BDP_Visual_AssaultRifle_Dual.label>
+</LanguageData>

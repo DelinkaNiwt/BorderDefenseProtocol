@@ -12,7 +12,7 @@ using VerseUI = Verse.UI;
 
 namespace BDP.Content.Assembly.ChipManufacturing.UI
 {
-    /// <summary>由芯片制造台命令打开的三栏制造窗口。</summary>
+    /// <summary>由触发器制造台命令打开的三栏制造窗口。</summary>
     public sealed class Window_ChipManufacturing : Window
     {
         /// <summary>目标宽度；实际尺寸不会超过当前 UI 屏幕。</summary>
@@ -39,11 +39,11 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
         /// <summary>右栏占主体宽度的比例。</summary>
         private const float RightColumnRatio = 0.25f;
 
-        /// <summary>左栏武装型与动作条目的统一紧凑行高。</summary>
-        private const float PresetRowHeight = 30f;
+        /// <summary>左栏武装型与芯片功能模板条目的统一紧凑行高。</summary>
+        private const float ManufacturingDefRowHeight = 30f;
 
-        /// <summary>左栏始终为动作列表保留的最小高度。</summary>
-        private const float MinimumActionSectionHeight = 120f;
+        /// <summary>左栏始终为芯片功能模板列表保留的最小高度。</summary>
+        private const float MinimumFunctionSectionHeight = 120f;
 
         /// <summary>右栏始终为队列标题与至少一部分内容保留的最小高度。</summary>
         private const float MinimumQueueSectionHeight = 120f;
@@ -54,6 +54,13 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
         /// <summary>当前是否停留在制造台首页总览。</summary>
         private bool isOverview = true;
 
+        /// <summary>当前是否在独立触发体制造页，不要求存在芯片草稿。</summary>
+        private bool isTriggerBodyPage;
+
+        /// <summary>触发体制造页的选择和数量仅在本次窗口会话中保留。</summary>
+        private readonly TriggerBodyManufacturingPanel triggerBodyPanel =
+            new TriggerBodyManufacturingPanel();
+
         /// <summary>一轮打开期间的草稿会话。</summary>
         private readonly ChipManufacturingEditorState editorState =
             new ChipManufacturingEditorState();
@@ -61,10 +68,10 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
         /// <summary>武装型列表滚动位置。</summary>
         private Vector2 armamentFormScroll;
 
-        /// <summary>动作列表滚动位置。</summary>
-        private Vector2 actionScroll;
+        /// <summary>芯片功能模板列表滚动位置。</summary>
+        private Vector2 functionScroll;
 
-        /// <summary>中栏规格与动作属性滚动位置。</summary>
+        /// <summary>中栏规格与功能属性滚动位置。</summary>
         private Vector2 previewScroll;
 
         /// <summary>右栏订单提交面板。</summary>
@@ -109,13 +116,13 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
         {
             Rect root = inRect;
             float y = DrawCategoryTabs(new Rect(root.x, root.y, root.width, CategoryTabsHeight));
-            if (!isOverview && editorState.CurrentDraft == null)
+            if (!isOverview && !isTriggerBodyPage && editorState.CurrentDraft == null)
             {
                 OpenOverview();
                 return;
             }
 
-            if (!isOverview && IsWeapon(editorState.CurrentCategory))
+            if (!isOverview && !isTriggerBodyPage)
             {
                 y += DrawProfessionTabs(new Rect(
                     root.x,
@@ -149,16 +156,22 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
                 return;
             }
 
+            if (isTriggerBodyPage)
+            {
+                triggerBodyPanel.Draw(left, middle, right, building, editorState, queuePanel, OpenLoadedConfiguration);
+                return;
+            }
+
             DrawLeftColumn(left);
             DrawMiddleColumn(middle);
             DrawRightColumn(right);
         }
 
-        /// <summary>绘制制造总览与五个固定顺序主分类按钮。</summary>
+        /// <summary>绘制总览、触发体制造及芯片主分类按钮。</summary>
         private float DrawCategoryTabs(Rect rect)
         {
             List<ChipCategoryDef> categories = ChipManufacturingListModel.GetCategories();
-            int tabCount = categories.Count + 1;
+            int tabCount = categories.Count + 2;
             if (tabCount <= 0)
             {
                 return CategoryTabsHeight;
@@ -170,17 +183,22 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
                 "BDP_ChipManufacturing_OverviewTab".Translate(),
                 isOverview,
                 OpenOverview);
+            DrawNavigationTab(
+                new Rect(rect.x + width, rect.y, width - 3f, rect.height),
+                "BDP_TriggerBodyManufacturing_Tab".Translate(),
+                isTriggerBodyPage,
+                OpenTriggerBodyPage);
             for (int index = 0; index < categories.Count; index++)
             {
                 ChipCategoryDef category = categories[index];
                 DrawNavigationTab(
                     new Rect(
-                        rect.x + width * (index + 1),
+                        rect.x + width * (index + 2),
                         rect.y,
                         width - 3f,
                         rect.height),
                     category.LabelCap,
-                    !isOverview && editorState.CurrentCategory == category,
+                    !isOverview && !isTriggerBodyPage && editorState.CurrentCategory == category,
                     () => OpenCategory(category));
             }
 
@@ -214,7 +232,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             }
         }
 
-        /// <summary>绘制武装分类的职业路径，并返回占用高度。</summary>
+        /// <summary>绘制所有主分类共用的职业路径，并返回占用高度。</summary>
         private float DrawProfessionTabs(Rect rect)
         {
             List<ChipProfessionDef> professions = ChipManufacturingListModel.GetProfessions();
@@ -230,7 +248,9 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
                 ChipProfessionDef profession = professions[index];
                 DrawNavigationTab(
                     new Rect(rect.x + width * index, rect.y, width - 3f, rect.height),
-                    profession.LabelCap,
+                    profession.defName == "BDP_ChipProfession_Shooter"
+                        ? "BDP_ChipManufacturing_RangedProfessionTab".Translate().ToString()
+                        : profession.LabelCap.ToString(),
                     editorState.CurrentProfession == profession,
                     () => editorState.Switch(editorState.CurrentCategory, profession));
             }
@@ -247,19 +267,26 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             }
 
             List<ChipProfessionDef> professions = ChipManufacturingListModel.GetProfessions();
-            ChipProfessionDef profession = IsWeapon(category)
-                ? professions.Contains(editorState.CurrentProfession)
-                    ? editorState.CurrentProfession
-                    : FirstOrNull(professions)
-                : null;
+            ChipProfessionDef profession = professions.Contains(editorState.CurrentProfession)
+                ? editorState.CurrentProfession
+                : FirstOrNull(professions);
             editorState.Switch(category, profession);
             isOverview = false;
+            isTriggerBodyPage = false;
+        }
+
+        /// <summary>进入触发体页；不清除已编辑的芯片草稿。</summary>
+        private void OpenTriggerBodyPage()
+        {
+            isOverview = false;
+            isTriggerBodyPage = true;
         }
 
         /// <summary>回到总览页；当前编辑草稿仍由本轮会话保留。</summary>
         private void OpenOverview()
         {
             isOverview = true;
+            isTriggerBodyPage = false;
         }
 
         /// <summary>仅在成功载入并建立当前草稿后离开总览页。</summary>
@@ -268,6 +295,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             if (editorState.CurrentDraft != null)
             {
                 isOverview = false;
+                isTriggerBodyPage = false;
             }
         }
 
@@ -310,7 +338,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             Widgets.DrawLineHorizontal(rect.x, rect.yMax - 1f, rect.width);
         }
 
-        /// <summary>绘制左栏；存在可见武装型时将其放在动作列表上方。</summary>
+        /// <summary>左栏先显示功能；选中功能后，在其下方内联展开合法构型列表。</summary>
         private void DrawLeftColumn(Rect rect)
         {
             Widgets.DrawMenuSection(rect);
@@ -318,31 +346,44 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             float y = inner.y;
             List<ChipArmamentFormDef> forms =
                 ChipManufacturingListModel.GetArmamentForms(
+                    editorState.CurrentCategory,
                     editorState.CurrentProfession,
-                    ResolveSelectedActions());
+                    ResolveSelectedFunctions());
+            float armamentFormHeight = 0f;
             if (forms.Count > 0)
             {
-                float desiredArmamentFormHeight = 26f + forms.Count * PresetRowHeight;
+                float desiredArmamentFormHeight = 26f + forms.Count * ManufacturingDefRowHeight;
                 float availableArmamentFormHeight = Mathf.Max(
                     0f,
-                    inner.height - MinimumActionSectionHeight - 8f);
-                float armamentFormHeight = Mathf.Min(
+                    inner.height - MinimumFunctionSectionHeight - 8f);
+                armamentFormHeight = Mathf.Min(
                     desiredArmamentFormHeight,
                     availableArmamentFormHeight);
-                if (armamentFormHeight >= 24f)
+                if (armamentFormHeight < 24f)
                 {
-                    DrawArmamentFormSection(
-                        new Rect(inner.x, y, inner.width, armamentFormHeight),
-                        forms);
-                    y += armamentFormHeight + 8f;
+                    armamentFormHeight = 0f;
                 }
             }
 
-            DrawActionSection(new Rect(
+            float functionHeight = Mathf.Max(0f, inner.height - armamentFormHeight
+                - (armamentFormHeight > 0f ? 8f : 0f));
+            if (armamentFormHeight > 0f)
+            {
+                // 构型紧接功能列表，不让功能列表的空白把第二步推到栏底。
+                functionHeight = Mathf.Min(functionHeight,
+                    26f + ResolveFunctionDefs().Count * ManufacturingDefRowHeight);
+            }
+            DrawFunctionSection(new Rect(
                 inner.x,
                 y,
                 inner.width,
-                Mathf.Max(0f, inner.yMax - y)));
+                functionHeight));
+            if (armamentFormHeight >= 24f)
+            {
+                DrawArmamentFormSection(
+                    new Rect(inner.x, y + functionHeight + 8f, inner.width, armamentFormHeight),
+                    forms);
+            }
         }
 
         /// <summary>绘制武装型标题与可滚动条目。</summary>
@@ -359,14 +400,14 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
                 "BDP_ChipManufacturing_ArmamentFormSection".Translate());
             Rect outRect = new Rect(rect.x, rect.y + 24f, rect.width, rect.height - 24f);
             Rect viewRect = new Rect(0f, 0f, outRect.width - 16f,
-                Mathf.Max(outRect.height, forms.Count * PresetRowHeight));
+                Mathf.Max(outRect.height, forms.Count * ManufacturingDefRowHeight));
             Widgets.BeginScrollView(outRect, ref armamentFormScroll, viewRect);
             for (int index = 0; index < forms.Count; index++)
             {
                 ChipArmamentFormDef form = forms[index];
                 bool selected = editorState.CurrentDraft.Record.ArmamentFormDefName == form.defName;
-                DrawPresetRow(
-                    new Rect(0f, index * PresetRowHeight, viewRect.width, PresetRowHeight - 2f),
+                DrawManufacturingDefRow(
+                    new Rect(0f, index * ManufacturingDefRowHeight, viewRect.width, ManufacturingDefRowHeight - 2f),
                     form,
                     selected,
                     true,
@@ -376,8 +417,8 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             Widgets.EndScrollView();
         }
 
-        /// <summary>绘制动作标题、交换按钮和可滚动动作列表。</summary>
-        private void DrawActionSection(Rect rect)
+        /// <summary>绘制芯片功能模板标题、交换按钮和可滚动功能模板列表。</summary>
+        private void DrawFunctionSection(Rect rect)
         {
             if (rect.width <= 0f || rect.height <= 0f)
             {
@@ -385,12 +426,12 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             }
 
             Widgets.Label(new Rect(rect.x, rect.y, rect.width - 90f, 24f),
-                "BDP_ChipManufacturing_ActionSection".Translate());
-            if (editorState.CurrentDraft?.Record?.OrderedActionPresetDefNames?.Count == 2
+                "BDP_ChipManufacturing_FunctionSection".Translate());
+            if (editorState.CurrentDraft?.Record?.OrderedChipFunctionDefNames?.Count == 2
                 && Widgets.ButtonText(new Rect(rect.xMax - 86f, rect.y, 86f, 26f),
-                    "BDP_ChipManufacturing_SwapActions".Translate()))
+                    "BDP_ChipManufacturing_SwapFunctions".Translate()))
             {
-                editorState.CurrentDraft.SwapActions();
+                editorState.CurrentDraft.SwapFunctions();
             }
 
             Rect outRect = new Rect(rect.x, rect.y + 26f, rect.width, rect.height - 26f);
@@ -399,27 +440,25 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
                 return;
             }
 
-            List<ChipActionPresetDef> actions = ChipManufacturingListModel.GetActions(
-                editorState.CurrentCategory,
-                editorState.CurrentProfession,
-                ChipManufacturingDefLookup.FindArmamentForm(
-                    editorState.CurrentDraft.Record.ArmamentFormDefName));
+            ChipProfessionDef productProfession = ChipManufacturingDefLookup.FindProfession(
+                editorState.CurrentDraft.Record.ProfessionDefName);
+            List<ChipManufacturingPresetDef> functionDefs = ResolveFunctionDefs();
             Rect viewRect = new Rect(0f, 0f, outRect.width - 16f,
-                Mathf.Max(outRect.height, actions.Count * PresetRowHeight));
-            Widgets.BeginScrollView(outRect, ref actionScroll, viewRect);
-            for (int index = 0; index < actions.Count; index++)
+                Mathf.Max(outRect.height, functionDefs.Count * ManufacturingDefRowHeight));
+            Widgets.BeginScrollView(outRect, ref functionScroll, viewRect);
+            for (int index = 0; index < functionDefs.Count; index++)
             {
-                ChipActionPresetDef action = actions[index];
-                int selectedIndex = editorState.CurrentDraft.Record.OrderedActionPresetDefNames.IndexOf(action.defName);
+                ChipManufacturingPresetDef function = functionDefs[index];
+                int selectedIndex = editorState.CurrentDraft.Record.OrderedChipFunctionDefNames.IndexOf(function.defName);
                 string failureCode = null;
-                bool enabled = selectedIndex >= 0 || ChipManufacturingListModel.CanSelectAction(
+                bool enabled = selectedIndex >= 0 || ChipManufacturingListModel.CanSelectFunction(
                     editorState.CurrentDraft,
-                    editorState.CurrentProfession,
-                    action,
+                    productProfession,
+                    function,
                     out failureCode);
-                DrawPresetRow(
-                    new Rect(0f, index * PresetRowHeight, viewRect.width, PresetRowHeight - 2f),
-                    action,
+                DrawManufacturingDefRow(
+                    new Rect(0f, index * ManufacturingDefRowHeight, viewRect.width, ManufacturingDefRowHeight - 2f),
+                    function,
                     selectedIndex >= 0,
                     enabled,
                     failureCode,
@@ -427,13 +466,13 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
                     {
                         if (selectedIndex >= 0)
                         {
-                            editorState.CurrentDraft.RemoveActionAt(selectedIndex);
+                            editorState.CurrentDraft.RemoveFunctionAt(selectedIndex);
                         }
                         else
                         {
-                            editorState.CurrentDraft.TrySelectAction(
-                                editorState.CurrentProfession,
-                                action,
+                            editorState.CurrentDraft.TrySelectFunction(
+                                productProfession,
+                                function,
                                 out _);
                         }
                     });
@@ -441,11 +480,21 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             Widgets.EndScrollView();
         }
 
-        /// <summary>按草稿顺序解析当前已选动作，供构型适用范围筛选复用。</summary>
-        private List<ChipActionPresetDef> ResolveSelectedActions()
+        /// <summary>功能列表按草稿真实职业与已选构型过滤，不把合页身份当成品职业。</summary>
+        private List<ChipManufacturingPresetDef> ResolveFunctionDefs()
         {
-            List<ChipActionPresetDef> result = new List<ChipActionPresetDef>();
-            IList<string> names = editorState.CurrentDraft?.Record?.OrderedActionPresetDefNames;
+            ChipCombinationRecord record = editorState.CurrentDraft.Record;
+            return ChipManufacturingListModel.GetChipFunctionDefs(
+                editorState.CurrentCategory,
+                ChipManufacturingDefLookup.FindProfession(record.ProfessionDefName),
+                ChipManufacturingDefLookup.FindArmamentForm(record.ArmamentFormDefName));
+        }
+
+        /// <summary>按草稿顺序解析当前已选芯片功能模板，供构型适用范围筛选复用。</summary>
+        private List<ChipManufacturingPresetDef> ResolveSelectedFunctions()
+        {
+            List<ChipManufacturingPresetDef> result = new List<ChipManufacturingPresetDef>();
+            IList<string> names = editorState.CurrentDraft?.Record?.OrderedChipFunctionDefNames;
             if (names == null)
             {
                 return result;
@@ -453,21 +502,21 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
 
             for (int index = 0; index < names.Count; index++)
             {
-                ChipActionPresetDef action =
-                    ChipManufacturingDefLookup.FindAction(names[index]);
-                if (action != null)
+                ChipManufacturingPresetDef function =
+                    ChipManufacturingDefLookup.FindChipFunctionDef(names[index]);
+                if (function != null)
                 {
-                    result.Add(action);
+                    result.Add(function);
                 }
             }
 
             return result;
         }
 
-        /// <summary>绘制预设行；行本体选择，i 按钮只打开信息卡。</summary>
-        private static void DrawPresetRow(
+        /// <summary>绘制制造定义行；行本体选择，i 按钮只打开信息卡。</summary>
+        private static void DrawManufacturingDefRow(
             Rect rect,
-            Def preset,
+            Def definition,
             bool selected,
             bool enabled,
             string failureCode,
@@ -492,7 +541,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             Rect bodyRect = new Rect(rect.x, rect.y, rect.width - 32f, rect.height);
             Widgets.Label(
                 bodyRect.ContractedBy(6f, 2f),
-                ChipPresetLabelResolver.Resolve(preset));
+                ChipManufacturingDefLabelResolver.Resolve(definition));
             if (enabled && Widgets.ButtonInvisible(bodyRect))
             {
                 onClicked();
@@ -501,7 +550,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             GUI.color = oldColor;
             if (Widgets.ButtonText(infoRect, "i"))
             {
-                Find.WindowStack.Add(new Window_ChipPresetInfo(preset));
+                Find.WindowStack.Add(new Window_ChipManufacturingDefInfo(definition));
             }
 
             if (!enabled && !failureCode.NullOrEmpty())
@@ -512,7 +561,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             }
         }
 
-        /// <summary>从统一解析结果绘制芯片规格、武装型修正和动作属性。</summary>
+        /// <summary>从统一解析结果绘制芯片规格、武装型修正和功能属性。</summary>
         private void DrawMiddleColumn(Rect rect)
         {
             ChipCombinationResolution resolution = editorState.CurrentDraft != null
@@ -553,12 +602,6 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
                 inner.width,
                 Mathf.Max(0f, inner.yMax - queueY));
             queuePanel.Draw(queueRect, building, editorState);
-        }
-
-        /// <summary>判断当前分类是否为唯一使用职业筛选的武装分类。</summary>
-        private static bool IsWeapon(ChipCategoryDef category)
-        {
-            return category?.defName == "BDP_ChipCategory_Weapon";
         }
 
         /// <summary>读取列表首项或 null。</summary>

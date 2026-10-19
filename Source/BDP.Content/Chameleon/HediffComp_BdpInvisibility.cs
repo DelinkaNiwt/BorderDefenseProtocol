@@ -5,7 +5,7 @@ namespace BDP.Content.Chameleon
 {
     /// <summary>
     /// 变色龙隐身运行时组件。
-    /// 复用原版隐身状态计算，只补上不依赖 DLC 的攻击目标缓存刷新和攻击后关断通知。
+    /// 复用原版隐身状态计算，只补上不依赖 DLC 的攻击目标缓存刷新和攻击后破隐。
     /// </summary>
     public sealed class HediffComp_BdpInvisibility : HediffComp_Invisibility
     {
@@ -38,7 +38,7 @@ namespace BDP.Content.Chameleon
         }
 
         /// <summary>
-        /// 当前 Pawn 完成任意攻击动作后，立刻请求关闭变色龙芯片。
+        /// 当前 Pawn 完成任意攻击动作后，只移除当前隐身 Hediff。
         /// </summary>
         private void OnAttackActionSucceeded(AttackActionSuccess attack)
         {
@@ -47,7 +47,10 @@ namespace BDP.Content.Chameleon
                 return;
             }
 
-            ChameleonAttackShutdownService.TryDeactivateImmediately(attack);
+            if (Pawn?.health != null && parent != null)
+            {
+                Pawn.health.RemoveHediff(parent);
+            }
         }
 
         /// <summary>

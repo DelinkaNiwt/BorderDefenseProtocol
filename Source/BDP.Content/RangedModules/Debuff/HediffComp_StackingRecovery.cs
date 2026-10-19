@@ -35,7 +35,7 @@ namespace BDP.Content.RangedModules.Debuff
             if (parent != null && Props != null)
             {
                 parent.Severity = UnityEngine.Mathf.Min(
-                    Props.maximumSeverity,
+                    parent.def.maxSeverity,
                     parent.Severity);
             }
         }

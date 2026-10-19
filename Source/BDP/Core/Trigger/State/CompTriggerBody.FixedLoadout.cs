@@ -25,9 +25,18 @@ namespace BDP.Core.Trigger
                 return;
             }
 
+            long loadoutStart = BdpDiagnostics.BeginTiming();
+            long stateReadyStart = BdpDiagnostics.BeginTiming();
             EnsureInternalState();
             EnsureChipContainer();
             EnsureSlots();
+            BdpDiagnostics.TraceTiming(
+                "固定芯片装载 | stage=state_ready | trigger=" + SafeThingId(parent),
+                stateReadyStart);
+
+            TraceLifecycle(
+                "fixed_loadout_begin",
+                "entryCount=" + properties.fixedLoadout.Count);
 
             List<Thing> createdChips = new List<Thing>();
             for (int entryIndex = 0; entryIndex < properties.fixedLoadout.Count; entryIndex++)
@@ -46,7 +55,28 @@ namespace BDP.Core.Trigger
                 Thing chip = null;
                 try
                 {
-                    chip = ThingMaker.MakeThing(entry.chipDef);
+                    long chipCreationStart = BdpDiagnostics.BeginTiming();
+                    if (!string.IsNullOrWhiteSpace(entry.initializationKey))
+                    {
+                        if (!TriggerFixedLoadoutFactoryRegistry.TryCreate(
+                            entry.chipDef,
+                            entry.initializationKey,
+                            out chip))
+                        {
+                            ReportInitialFixedLoadoutFailure(entry, entryIndex, "factory_failed", null);
+                            RollbackInitialFixedLoadout(createdChips);
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        chip = ThingMaker.MakeThing(entry.chipDef);
+                    }
+                    BdpDiagnostics.TraceTiming(
+                        "固定芯片装载 | stage=chip_created | entry=" + (entryIndex + 1)
+                        + " | chipDef=" + entry.chipDef.defName,
+                        chipCreationStart);
+
                     if (chip == null)
                     {
                         ReportInitialFixedLoadoutFailure(entry, entryIndex, "thing_creation_failed", null);
@@ -55,6 +85,7 @@ namespace BDP.Core.Trigger
                     }
 
                     createdChips.Add(chip);
+                    long loadChipStart = BdpDiagnostics.BeginTiming();
                     if (!TriggerLoadoutService.TryLoadChip(
                         BuildLoadoutContext(),
                         entry.side,
@@ -65,6 +96,20 @@ namespace BDP.Core.Trigger
                         RollbackInitialFixedLoadout(createdChips);
                         return;
                     }
+                    BdpDiagnostics.TraceTiming(
+                        "固定芯片装载 | stage=chip_loaded | entry=" + (entryIndex + 1)
+                        + " | side=" + entry.side
+                        + " | slot=" + entry.slotNumber,
+                        loadChipStart);
+
+                    TraceLifecycle(
+                        "fixed_loadout_entry_loaded",
+                        "entry=" + (entryIndex + 1)
+                        + " | side=" + entry.side
+                        + " | slot=" + entry.slotNumber
+                        + " | initializationKey=" + (entry.initializationKey ?? "none")
+                        + " | chip=" + SafeThingId(chip)
+                        + " | chipDef=" + (chip.def != null ? chip.def.defName : "null"));
                 }
                 catch (Exception exception)
                 {
@@ -73,6 +118,13 @@ namespace BDP.Core.Trigger
                     return;
                 }
             }
+
+            TraceSlotBoundary(
+                "fixed_loadout_complete",
+                "entryCount=" + properties.fixedLoadout.Count);
+            BdpDiagnostics.TraceTiming(
+                "固定芯片装载 | stage=total | entryCount=" + properties.fixedLoadout.Count,
+                loadoutStart);
         }
 
         /// <summary>
@@ -134,6 +186,15 @@ namespace BDP.Core.Trigger
             string side = entry != null ? entry.side.ToString() : "<null>";
             int slotNumber = entry != null ? entry.slotNumber : 0;
             string exceptionText = exception != null ? exception.GetType().Name + ":" + exception.Message : "none";
+
+            TraceLifecycle(
+                "fixed_loadout_failed",
+                "entry=" + (entryIndex + 1)
+                + " | chipDef=" + chipDefName
+                + " | side=" + side
+                + " | slot=" + slotNumber
+                + " | reason=" + reason
+                + " | exception=" + exceptionText);
 
             BdpDiagnostics.Once(
                 "trigger.fixed_loadout.initialization_failed." + triggerDefName,

@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using BDP.Core.Expressions;
+using BDP.Core.Information;
 using BDP.Core.Trigger.Runtime;
 
 namespace BDP.Core.Trigger.Projection
@@ -14,6 +16,16 @@ namespace BDP.Core.Trigger.Projection
         /// </summary>
         internal TriggerPresentationState Build(ExpressionService expressionService, ExpressionSnapshot snapshot, int projectionVersion)
         {
+            return Build(expressionService, snapshot, null, projectionVersion);
+        }
+
+        /// <summary>从正式快照和激活芯片信息输入构建表现投影。</summary>
+        internal TriggerPresentationState Build(
+            ExpressionService expressionService,
+            ExpressionSnapshot snapshot,
+            IReadOnlyList<ChipInformationParseInput> informationInputs,
+            int projectionVersion)
+        {
             if (expressionService == null || snapshot == null)
             {
                 return TriggerPresentationState.CreateEmpty(projectionVersion);
@@ -22,7 +34,10 @@ namespace BDP.Core.Trigger.Projection
             return new TriggerPresentationState
             {
                 ProjectionVersion = projectionVersion,
-                InfoProjection = expressionService.BuildPublishedInfoProjection(snapshot),
+                ChipInformations = expressionService.BuildPublishedChipInformations(
+                    snapshot,
+                    informationInputs),
+                ComboFeatureInformations = ComboFeatureInformationSnapshotBuilder.Build(snapshot),
                 ManualProjection = expressionService.BuildPublishedManualProjection(snapshot),
                 VisualProjection = expressionService.BuildPublishedVisualProjection(snapshot)
             };

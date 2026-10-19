@@ -1,3 +1,4 @@
+using System.Reflection;
 using BDP.Core.Expressions;
 using BDP.Core.Trigger;
 using BDP.Core.Trigger.Runtime;
@@ -29,6 +30,17 @@ namespace BDP.Patches
             new WeaponVisualStageResolver();
 
         /// <summary>
+        /// 只读引用原版待机持械点；原版字段为私有字段，按其朝向顺序读取而不复制常量。
+        /// </summary>
+        private static readonly FieldInfo[] VanillaCarriedEquipmentOffsetFields =
+        {
+            AccessTools.Field(typeof(PawnRenderUtility), "EqLocNorth"),
+            AccessTools.Field(typeof(PawnRenderUtility), "EqLocEast"),
+            AccessTools.Field(typeof(PawnRenderUtility), "EqLocSouth"),
+            AccessTools.Field(typeof(PawnRenderUtility), "EqLocWest")
+        };
+
+        /// <summary>
         /// 在原版装备绘制前采样姿态并尝试绘制 BDP 视觉条目。
         /// 返回 false 时跳过原版装备贴图。
         /// </summary>
@@ -45,6 +57,7 @@ namespace BDP.Patches
                 return true;
             }
 
+            bool hideHost = ((CompProperties_TriggerBody)triggerBody.props).hideHostEquipment;
             Pawn pawn = ResolveOwnerPawn(eq, triggerBody);
             Rot4 facing = pawn != null ? pawn.Rotation : Rot4.South;
             int projectionVersion = ResolveProjectionVersion(triggerBody);
@@ -64,8 +77,8 @@ namespace BDP.Patches
                 || visualProjection.ResidentEntries == null
                 || visualProjection.ResidentEntries.Count == 0)
             {
-                return visualProjection == null
-                    || visualProjection.HostEquipmentRenderMode != HostEquipmentRenderMode.Suppress;
+                return !hideHost && (visualProjection == null
+                    || visualProjection.HostEquipmentRenderMode != HostEquipmentRenderMode.Suppress);
             }
 
             TriggerVisualRuntimeState runtimeState = triggerBody.PublishedVisualRuntimeState;
@@ -73,17 +86,14 @@ namespace BDP.Patches
             {
                 case HostEquipmentRenderMode.Keep:
                     DrawResidentEntries(eq, triggerBody, visualProjection, runtimeState, sample);
-                    return true;
+                    return !hideHost;
                 case HostEquipmentRenderMode.Suppress:
                     DrawResidentEntries(eq, triggerBody, visualProjection, runtimeState, sample);
                     return false;
                 case HostEquipmentRenderMode.ReplaceTextureOnly:
-                    return !TryHandleSingleWeaponTextureReplacement(
-                        pawn,
-                        eq,
-                        triggerBody,
-                        visualProjection,
-                        sample);
+                    bool textureHandled = TryHandleSingleWeaponTextureReplacement(
+                        pawn, eq, triggerBody, visualProjection, sample);
+                    return !hideHost && !textureHandled;
                 case HostEquipmentRenderMode.Replace:
                 default:
                     bool handledAnyEntry = DrawResidentEntries(
@@ -92,7 +102,7 @@ namespace BDP.Patches
                         visualProjection,
                         runtimeState,
                         sample);
-                    return !handledAnyEntry;
+                    return !hideHost && !handledAnyEntry;
             }
         }
 
@@ -107,35 +117,63 @@ namespace BDP.Patches
             EquipmentPoseSample sample)
         {
             bool handledAnyEntry = false;
+            // 只用 Pawn 级攻击状态判断本次原版绘制点是否需要拆分成逐条目姿态。
+            bool hasMatchingAttackStance = WeaponStageResolver.IsMatchingAttackStanceActive(
+                triggerBody.OwnerPawn,
+                triggerBody.PublishedCombatProjection,
+                runtimeState);
+            EquipmentPoseSample idlePoseSample = sample;
+            if (hasMatchingAttackStance)
+            {
+                CreateVanillaIdlePoseSample(
+                    triggerBody.OwnerPawn,
+                    equipment,
+                    sample,
+                    out idlePoseSample);
+            }
+
             for (int i = 0; i < visualProjection.ResidentEntries.Count; i++)
             {
-                VisualResidentEntry entry = visualProjection.ResidentEntries[i];
-                ExpressionVisualPresetDef preset = ResolvePreset(visualProjection, entry, runtimeState);
-                if (entry == null || preset == null)
+                VisualResidentEntry residentEntry = visualProjection.ResidentEntries[i];
+                if (residentEntry == null)
                 {
                     continue;
                 }
 
-                Thing sourceThing = ResolveSourceThing(triggerBody, entry);
                 WeaponVisualStageSnapshot weaponStageSnapshot = WeaponStageResolver.Resolve(
                     triggerBody.OwnerPawn,
-                    entry,
+                    residentEntry,
                     triggerBody.PublishedCombatProjection,
                     runtimeState);
+                if (!TriggerVisualEffectiveEntryResolver.TryResolve(
+                    visualProjection,
+                    residentEntry,
+                    weaponStageSnapshot,
+                    out VisualResidentEntry drawEntry,
+                    out ExpressionVisualPresetDef preset,
+                    out ExpressionVisualPresetDef graphicOverridePreset))
+                {
+                    continue;
+                }
+
+                bool isEntryAttackStanceActive = weaponStageSnapshot.Stage != WeaponVisualActionStage.Idle
+                    && !string.IsNullOrWhiteSpace(weaponStageSnapshot.MatchedSourceResultId);
+                Thing sourceThing = ResolveSourceThing(triggerBody, drawEntry);
                 ResolvedVisualPose pose = PoseResolver.Resolve(new VisualPoseRequest
                 {
-                    Entry = entry,
+                    Entry = drawEntry,
                     Preset = preset,
-                    GraphicOverridePreset = ResolveGraphicOverridePreset(entry),
-                    RuntimeState = runtimeState,
+                    GraphicOverridePreset = graphicOverridePreset,
+                    IsMatchingAttackStanceActive = hasMatchingAttackStance,
+                    IsMatchingEntryAttackStanceActive = isEntryAttackStanceActive,
                     WeaponStageSnapshot = weaponStageSnapshot,
-                    PoseSample = sample,
+                    PoseSample = isEntryAttackStanceActive ? sample : idlePoseSample,
                     SourceThing = sourceThing,
                     EquippedAngleOffset = equipment != null && equipment.def != null
                         ? equipment.def.equippedAngleOffset
                         : 0f,
-                    IsExecutionActive = ResolveExecutionActive(visualProjection, runtimeState, entry),
-                    IsMuzzleActive = ResolveMuzzleActive(visualProjection, runtimeState, entry)
+                    IsExecutionActive = ResolveExecutionActive(visualProjection, runtimeState, drawEntry),
+                    IsMuzzleActive = ResolveMuzzleActive(visualProjection, runtimeState, drawEntry)
                 });
                 if (pose == null || !pose.IsValid)
                 {
@@ -148,12 +186,93 @@ namespace BDP.Patches
                     continue;
                 }
 
-                ApplyVanillaRecoil(equipment, triggerBody, entry, sample, pose);
-                ApplyExpressionVisualImpulse(triggerBody, entry, pose);
+                if (isEntryAttackStanceActive)
+                {
+                    ApplyVanillaRecoil(equipment, triggerBody, drawEntry, sample, pose);
+                }
+
+                ApplyExpressionVisualImpulse(triggerBody, drawEntry, pose);
                 DrawPose(pose);
             }
 
             return handledAnyEntry;
+        }
+
+        /// <summary>
+        /// 用原版待机持械角和持械点替换瞄准绘制样本，同时保留本帧 Pawn 的动画绘制基点。
+        /// </summary>
+        private static void CreateVanillaIdlePoseSample(
+            Pawn pawn,
+            Thing equipment,
+            EquipmentPoseSample aimingSample,
+            out EquipmentPoseSample idleSample)
+        {
+            idleSample = aimingSample;
+            if (aimingSample == null)
+            {
+                return;
+            }
+
+            float idleAimAngle = aimingSample.Facing == Rot4.West ? 217f : 143f;
+            idleSample = EquipmentPoseSample.Create(
+                aimingSample.ProjectionVersion,
+                aimingSample.DrawLoc,
+                idleAimAngle,
+                aimingSample.Facing,
+                aimingSample.SampleTick);
+            if (pawn == null
+                || equipment?.def == null
+                || pawn.ageTracker?.CurLifeStage == null
+                || pawn.stances == null)
+            {
+                return;
+            }
+
+            Stance_Busy busyStance = pawn.stances.curStance as Stance_Busy;
+            if (busyStance == null || busyStance.neverAimWeapon || !busyStance.focusTarg.IsValid)
+            {
+                return;
+            }
+
+            // 即使原版私有偏移字段变化，也先撤销瞄准位移，避免空闲贴图仍停在抬起的位置。
+            float equipmentDrawDistanceFactor = pawn.ageTracker.CurLifeStage.equipmentDrawDistanceFactor;
+            Vector3 aimedDrawOffset = new Vector3(
+                    0f,
+                    0f,
+                    0.4f + equipment.def.equippedDistanceOffset)
+                .RotatedBy(aimingSample.AimAngle)
+                * equipmentDrawDistanceFactor;
+            Vector3 animatedDrawBase = aimingSample.DrawLoc - aimedDrawOffset;
+            idleSample = EquipmentPoseSample.Create(
+                aimingSample.ProjectionVersion,
+                animatedDrawBase,
+                idleAimAngle,
+                aimingSample.Facing,
+                aimingSample.SampleTick);
+
+            int facingIndex = aimingSample.Facing.AsInt;
+            if (facingIndex < 0
+                || facingIndex >= VanillaCarriedEquipmentOffsetFields.Length
+                || VanillaCarriedEquipmentOffsetFields[facingIndex] == null)
+            {
+                return;
+            }
+
+            FieldInfo carriedOffsetField = VanillaCarriedEquipmentOffsetFields[facingIndex];
+            object carriedOffsetValue = carriedOffsetField.GetValue(null);
+            if (!(carriedOffsetValue is Vector3))
+            {
+                return;
+            }
+
+            Vector3 carriedOffset = (Vector3)carriedOffsetValue;
+            Vector3 idleDrawLoc = animatedDrawBase + carriedOffset * equipmentDrawDistanceFactor;
+            idleSample = EquipmentPoseSample.Create(
+                aimingSample.ProjectionVersion,
+                idleDrawLoc,
+                idleAimAngle,
+                aimingSample.Facing,
+                aimingSample.SampleTick);
         }
 
         /// <summary>
@@ -241,7 +360,6 @@ namespace BDP.Patches
             {
                 Entry = entry,
                 Preset = preset,
-                RuntimeState = runtimeState,
                 WeaponStageSnapshot = weaponStageSnapshot,
                 PoseSample = sample,
                 SourceThing = sourceThing,
@@ -456,58 +574,6 @@ namespace BDP.Patches
             }
 
             return sourceThing != null ? graphic.MatSingleFor(sourceThing) : graphic.MatSingle;
-        }
-
-        /// <summary>
-        /// 按当前视觉关系解析条目应使用的视觉预设。
-        /// </summary>
-        private static ExpressionVisualPresetDef ResolvePreset(
-            VisualExpressionProjection visualProjection,
-            VisualResidentEntry entry,
-            TriggerVisualRuntimeState runtimeState)
-        {
-            if (entry == null)
-            {
-                return null;
-            }
-
-            string presetDefName = ResolvePresetDefName(visualProjection, entry, runtimeState);
-            return string.IsNullOrWhiteSpace(presetDefName)
-                ? null
-                : DefDatabase<ExpressionVisualPresetDef>.GetNamed(presetDefName, false);
-        }
-
-        /// <summary>
-        /// 解析当前条目应使用的视觉预设 DefName。
-        /// 复合关系成立时优先使用 CompositeVisualPresetDefName。
-        /// </summary>
-        private static string ResolvePresetDefName(
-            VisualExpressionProjection visualProjection,
-            VisualResidentEntry entry,
-            TriggerVisualRuntimeState runtimeState)
-        {
-            if (visualProjection != null
-                && visualProjection.RelationKind != VisualExpressionRelationKind.SingleSide
-                && !string.IsNullOrWhiteSpace(entry.CompositeVisualPresetDefName))
-            {
-                return entry.CompositeVisualPresetDefName;
-            }
-
-            return entry.VisualPresetDefName;
-        }
-
-        /// <summary>
-        /// 解析当前条目的视觉图层局部覆盖预设。
-        /// 它只提供 GraphicData/OverlayLayers，不参与姿态、握持或枪口锚点解析。
-        /// </summary>
-        private static ExpressionVisualPresetDef ResolveGraphicOverridePreset(
-            VisualResidentEntry entry)
-        {
-            return entry == null || string.IsNullOrWhiteSpace(entry.VisualGraphicOverrideDefName)
-                ? null
-                : DefDatabase<ExpressionVisualPresetDef>.GetNamed(
-                    entry.VisualGraphicOverrideDefName,
-                    false);
         }
 
         /// <summary>

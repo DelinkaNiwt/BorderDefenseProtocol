@@ -30,8 +30,8 @@ Assert-True ($componentText -match 'completedThisSession') "同一游戏会话�
 Assert-True ($componentText -match 'ReceiveLetter') "整次扫描必须只在组件末尾发送一封汇总信。"
 Assert-True ($collectorText -match 'ThingID') "跨地图与容器收集必须按 ThingID 去重。"
 Assert-True ($collectorText -match 'GetAllThingsRecursively') "收集器必须递归覆盖 ThingOwner。"
-Assert-True ($replacementText -match 'ChipCombinationResolutionStatus\.Invalid') "只允许替换明确 Invalid 物品。"
-Assert-True ($replacementText -match 'ChipCombinationResolutionStatus\.MissingSource') "来源缺失物品必须识别并保留。"
+Assert-True ($replacementText -notmatch 'ChipCombinationResolutionStatus\.MissingSource') "迁移不得再保留来源缺失物品。"
+Assert-True ($replacementText -match 'resolution\.Status\s*==\s*ChipCombinationResolutionStatus\.Valid') "只有有效物品可以跳过遗留物替换。"
 Assert-True ($replacementText -match 'BDP_InvalidChipRemnant') "所有明确非法物品必须变成同一种废弃物。"
 Assert-True ($replacementText -notmatch 'refund|返还|StartingWorkAmount|ingredients') "迁移不得返还或读取旧材料与工作量。"
 Assert-True ($placementText -match 'DestroyMode\.Vanish') "旧物品必须直接消失，不触发半成品取消返还。"
@@ -41,7 +41,8 @@ Assert-True ($placementText -match 'InterruptRelatedPawnJobs') "销毁正在加�
 Assert-True ($triggerText -match 'TryDestroyLoadedChip') "触发体内非法芯片必须先经正式命令安全卸除引用。"
 Assert-True ($reportText -match 'ReplacedItemCount') "报告必须汇总物品替换数。"
 Assert-True ($reportText -match 'DeletedBillCount') "报告必须汇总非法账单删除数。"
-Assert-True ($reportText -match 'PreservedMissingSourceCount') "报告必须汇总来源缺失保留数。"
+Assert-True ($reportText -notmatch 'PreservedMissingSourceCount|RecordPreservedMissingSource') "报告不得再汇总来源缺失保留数。"
+Assert-True ($componentText -notmatch 'PreservedMissingSource|MissingSource') "读档迁移不得再保留来源缺失项目。"
 
 $remnantPath = Join-Path $modRoot "1.6\Content\Defs\ThingDef\Items\InvalidChipRemnant.xml"
 Assert-True (Test-Path -LiteralPath $remnantPath) "缺少统一废弃物 ThingDef。"
@@ -52,4 +53,4 @@ Assert-True ($remnantText -match '<tradeability>None</tradeability>') "废弃物
 Assert-True ($remnantText -match '<smeltProducts>[\s\S]*BDP_InvalidChipRemnant') "熔炼废弃物只能得到同一种废弃物。"
 Assert-True ($remnantText -notmatch '<thingClass>|CompArt|Art|Install|ChipDefinitionConfig') "废弃物不得有自定义类、艺术、安装或芯片运行组件。"
 
-Write-Host "PASS: 明确非法物品一对一变为统一普通废弃物，来源缺失保留，非法账单删除且整次只汇总一封信。"
+Write-Host "PASS: 所有非有效物品一对一变为统一普通遗留物，非有效账单删除且整次只汇总一封信。"

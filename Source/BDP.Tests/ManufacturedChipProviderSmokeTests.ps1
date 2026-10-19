@@ -21,7 +21,7 @@ Assert-True ($compText -match 'IChipInstanceDefinitionProvider') "成品组件�
 Assert-True ($compText -match 'IChipSourceReferenceProvider') "成品组件必须实现 Core 中性来源提供器。"
 Assert-True ($compText -match 'IChipCombinationRecordHolder') "成品组件必须实现 Content 组合记录持有器。"
 Assert-True ($compText -match 'new\s+ChipCombinationResolver\s*\(\)\.Resolve') "每次读取必须从当前预设重新解析。"
-Assert-True ($compText -match 'MissingSource') "来源缺失必须保留物品并提供状态名称。"
+Assert-True ($compText -notmatch 'MissingSource') "成品组件不得再提供来源缺失保留分支。"
 Assert-True ($compText -match 'SourceVariantKey') "枪壳必须通过中性来源变体键提供给 Core。"
 Assert-True ($thingText -match 'Notify_RecipeProduced') "原版生成成品时必须从当前芯片账单复制组合记录。"
 Assert-True ($thingText -match 'LabelNoCount') "成品物品必须显示当前动态名称。"

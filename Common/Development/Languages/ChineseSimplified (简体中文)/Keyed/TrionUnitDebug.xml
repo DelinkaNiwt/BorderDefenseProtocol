@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 可整体移除的开发菜单与实测输出。 -->
+  <BDP_Dev_TrionUnit_Menu>Trion兵基底验证</BDP_Dev_TrionUnit_Menu>
+  <BDP_Dev_TrionUnit_Spawn>生成轻型试作兵01与测试座</BDP_Dev_TrionUnit_Spawn>
+  <BDP_Dev_TrionUnit_SpawnEnemy>生成敌方轻型试作兵01</BDP_Dev_TrionUnit_SpawnEnemy>
+  <BDP_Dev_TrionUnit_Bind>选中测试兵后点击建筑重新绑定</BDP_Dev_TrionUnit_Bind>
+  <BDP_Dev_TrionUnit_Permit>切换测试运行许可</BDP_Dev_TrionUnit_Permit>
+  <BDP_Dev_TrionUnit_NoBandwidth>测试带宽归零</BDP_Dev_TrionUnit_NoBandwidth>
+  <BDP_Dev_TrionUnit_Bandwidth>恢复测试带宽</BDP_Dev_TrionUnit_Bandwidth>
+  <BDP_Dev_TrionUnit_Unbind>解除控制归属</BDP_Dev_TrionUnit_Unbind>
+  <BDP_Dev_TrionUnit_DestroyOwner>销毁测试归属对象</BDP_Dev_TrionUnit_DestroyOwner>
+  <BDP_Dev_TrionUnit_Wound>添加测试伤口</BDP_Dev_TrionUnit_Wound>
+  <BDP_Dev_TrionUnit_Zero>耗尽生命资源</BDP_Dev_TrionUnit_Zero>
+  <BDP_Dev_TrionUnit_Check>检查身体、装配与停机效果</BDP_Dev_TrionUnit_Check>
+  <BDP_Dev_TrionUnit_Select>请先选中一名轻型试作兵01。</BDP_Dev_TrionUnit_Select>
+  <BDP_Dev_TrionUnit_InvalidOwner>此测试座只接受同派系的轻型试作兵01。</BDP_Dev_TrionUnit_InvalidOwner>
+  <BDP_Dev_TrionUnit_Snapshot>接入检查通过={0}；运行={1}；Trion={2}/{3}；激活特殊槽={4}。</BDP_Dev_TrionUnit_Snapshot>
+  <!-- 样本生成、重复测试和独立清除所需文案。 -->
+  <BDP_Dev_TrionUnit_Refill>补满所选试作兵Trion（不修复身体）</BDP_Dev_TrionUnit_Refill>
+  <BDP_Dev_TrionUnit_ClearMap>清除本图试作兵、尸体与测试座</BDP_Dev_TrionUnit_ClearMap>
+  <BDP_Dev_TrionUnit_Cleared>已清除本图{0}个试作样本对象。</BDP_Dev_TrionUnit_Cleared>
+  <BDP_Dev_TrionUnit_InvalidCell>请选择可站立的地面；生成玩家试作兵时，右侧还需一格空地放置测试座。</BDP_Dev_TrionUnit_InvalidCell>
+  <BDP_Dev_TrionUnit_PlayerSpawned>轻型试作兵01与测试座已生成并绑定。运行后可直接征召，也可打开“自动战斗”。</BDP_Dev_TrionUnit_PlayerSpawned>
+  <BDP_Dev_TrionUnit_EnemySpawned>敌方轻型试作兵01已生成，无需玩家许可或控制归属。</BDP_Dev_TrionUnit_EnemySpawned>
+  <BDP_Dev_TrionUnit_WaitInitialization>试作兵尚未完成初始化，请让游戏运行片刻后重试。</BDP_Dev_TrionUnit_WaitInitialization>
+  <BDP_Dev_TrionUnit_CombatSnapshot>自动战斗={0}；征召={1}；当前作业={2}。</BDP_Dev_TrionUnit_CombatSnapshot>
+  <!-- 复活前后核对当前装备本体及真实装载数量。 -->
+  <BDP_Dev_TrionUnit_LoadoutSnapshot>内部触发体={0}；实际主装备={1}；已装芯片={2}。</BDP_Dev_TrionUnit_LoadoutSnapshot>
+  <!-- 每个槽独立输出芯片标识与正式状态，避免仅凭按钮判断。 -->
+  <BDP_Dev_TrionUnit_SlotSnapshot>槽位={0}/{1}；芯片={2}（{3}）；激活={4}；禁用={5}。</BDP_Dev_TrionUnit_SlotSnapshot>
+</LanguageData>

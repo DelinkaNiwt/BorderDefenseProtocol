@@ -134,7 +134,20 @@ namespace BDP.Content.Projectiles.BeamTrail
         public void OnTerminate(in ProjectileVisualTerminateContext context)
         {
             BeamTrailMapComponent mapComponent = BeamTrailMapComponent.GetOrCreate(context.Map);
-            mapComponent?.ClearLiveSegment(context.ProjectileThingId);
+            if (mapComponent != null)
+            {
+                if (context.IsVisualEndpointSafe)
+                {
+                    mapComponent.FinalizeLiveSegment(
+                        context.ProjectileThingId,
+                        context.CurrentPosition);
+                }
+                else
+                {
+                    mapComponent.ClearLiveSegment(context.ProjectileThingId);
+                }
+            }
+
             lastAnchor = NormalizePoint(context.CurrentPosition);
             hasAnchor = false;
             LogIfNeeded(

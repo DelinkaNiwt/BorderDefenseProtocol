@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 正常任务流程的开发入口。 -->
+  <BDP_Dev_RoyalArrivalMenu>BDP：皇室加入任务测试</BDP_Dev_RoyalArrivalMenu>
+  <!-- 不直接生成正式殖民者，便于检查借住身份与加入时点。 -->
+  <BDP_Dev_RoyalArrivalGenerate>生成皇室求援任务</BDP_Dev_RoyalArrivalGenerate>
+  <!-- 拒绝信息说明正式准入，不修改游戏状态绕过条件。 -->
+  <BDP_Dev_RoyalArrivalUnavailable>当前不能生成：需要缺少正式皇室成员、没有同类待接受或进行中的任务、有可用的地面殖民地及敌对人类派系，并允许战斗任务。</BDP_Dev_RoyalArrivalUnavailable>
+  <!-- 玩家从普通任务界面自行接受。 -->
+  <BDP_Dev_RoyalArrivalGenerated>已生成“皇室求援”，请在任务界面查看并接受。</BDP_Dev_RoyalArrivalGenerated>
+</LanguageData>

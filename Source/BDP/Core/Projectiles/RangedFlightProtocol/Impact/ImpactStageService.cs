@@ -83,6 +83,12 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Impact
                     plan.DirectDamage = contribution.OverrideDirectDamage;
                 }
 
+                if (contribution.HasHitPartOverride || contribution.HitPartOverride != null)
+                {
+                    plan.HasHitPartOverride = true;
+                    plan.HitPartOverride = contribution.HitPartOverride;
+                }
+
                 if (contribution.HasAreaEffect)
                 {
                     plan.ApplyAreaEffect = contribution.OverrideAreaEffect != null;

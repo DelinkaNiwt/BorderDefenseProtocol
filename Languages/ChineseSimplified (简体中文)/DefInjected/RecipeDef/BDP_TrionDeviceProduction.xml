@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 原版机械加工台的便携检测器制造账单。 -->
+  <BDP_Recipe_ProduceTrionPortableDetector.label>制造便携式Trion天赋检测器</BDP_Recipe_ProduceTrionPortableDetector.label>
+  <!-- 原版制作任务的进度提示。 -->
+  <BDP_Recipe_ProduceTrionPortableDetector.jobString>正在制造便携式Trion天赋检测器。</BDP_Recipe_ProduceTrionPortableDetector.jobString>
+</LanguageData>

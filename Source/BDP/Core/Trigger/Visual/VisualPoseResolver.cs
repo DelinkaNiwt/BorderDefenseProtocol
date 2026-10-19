@@ -30,7 +30,8 @@ namespace BDP.Core.Trigger.Visual
                 return ResolvedVisualPose.Invalid();
             }
 
-            AlignDrawPositionToGrip(request, calculation);
+            float drawScale = request.Preset.ResolveDrawScale();
+            AlignDrawPositionToGrip(request, calculation, graphic, drawScale);
             ResolvedVisualPose resolved = new ResolvedVisualPose
             {
                 IsValid = true,
@@ -42,12 +43,12 @@ namespace BDP.Core.Trigger.Visual
                 DrawPosition = calculation.DrawPosition,
                 DrawAngle = calculation.DrawAngle,
                 MeshKind = calculation.MeshKind,
-                DrawScale = request.Preset.ResolveDrawScale(),
+                DrawScale = drawScale,
                 AimMirror = calculation.AimMirror,
                 HandMirror = calculation.HandMirror,
                 OverlayPoses = ResolveOverlayPoses(request, calculation, weaponStage),
-                GripAnchor = ResolveGripAnchor(request, calculation),
-                MuzzleAnchor = ResolveMuzzleAnchor(request, calculation)
+                GripAnchor = ResolveGripAnchor(request, calculation, graphic, drawScale),
+                MuzzleAnchor = ResolveMuzzleAnchor(request, calculation, graphic, drawScale)
             };
             return resolved;
         }
@@ -87,7 +88,7 @@ namespace BDP.Core.Trigger.Visual
                 HandMirror = false,
                 OverlayPoses = ResolveOverlayPoses(request, calculation, weaponStage),
                 GripAnchor = new ResolvedGripAnchor { IsValid = false },
-                MuzzleAnchor = ResolveMuzzleAnchor(request, calculation)
+                MuzzleAnchor = ResolveMuzzleAnchor(request, calculation, graphic, 1f)
             };
         }
 
@@ -266,7 +267,8 @@ namespace BDP.Core.Trigger.Visual
         {
             EquipmentPoseSample sample = request.PoseSample;
             ExpressionVisualSouthNorthPoseConfig pose = request.Preset.ResolveSouthNorthPose();
-            bool isAnyExecutionActive = IsAnyExecutionActive(request);
+            bool isAttackStanceActive = IsAnyAttackStanceActive(request);
+            bool isEntryAttackStanceActive = IsEntryAttackStanceActive(request);
             // X 是左右手之间的无方向分离距离；屏幕方向只由手侧和人物朝向裁定，避免作者用正负号颠倒主副手语义。
             float sideDistanceX = Mathf.Abs(pose.DefaultOffset.x);
             float offsetZ = pose.DefaultOffset.z;
@@ -277,8 +279,8 @@ namespace BDP.Core.Trigger.Visual
             float finalZ = (sample.Facing == Rot4.North ? -offsetZ : offsetZ) + zAdjust;
             bool handMirror = pose.HandMirror
                 && !pose.MirrorOnNorth
-                // 静默专用镜像不能由“当前条目是否执行”裁定；单侧攻击期间两把武器都必须退出静默姿态。
-                && (!pose.HandMirrorOnlyWhenIdle || !isAnyExecutionActive)
+                // 手侧镜像继续沿用 Pawn 级攻击状态；当前修复只隔离未攻击条目的瞄准与装饰角。
+                && (!pose.HandMirrorOnlyWhenIdle || !isAttackStanceActive)
                 // 镜像恒跟随屏幕左侧：South（南向）是主手，North（北向）是副手。
                 && (isSubHand ^ sample.Facing == Rot4.South);
             float altitude = sample.Facing == Rot4.North
@@ -288,23 +290,37 @@ namespace BDP.Core.Trigger.Visual
             {
                 WorldOffset = new Vector3(finalX, 0f, finalZ),
                 AltitudeOffset = altitude,
-                DecorativeAngle = pose.DefaultAngle + (isSubHand ? pose.SubHandAngleOffset : 0f),
+                DecorativeAngle = pose.DecorativeAngleOnlyWhenIdle && isEntryAttackStanceActive
+                    ? 0f
+                    : pose.DefaultAngle + (isSubHand ? pose.SubHandAngleOffset : 0f),
                 HandMirror = handMirror,
                 HandMirrorAllowed = pose.HandMirror && !pose.MirrorOnNorth,
-                ForceHandMirror = pose.HandMirrorOnlyWhenIdle && !isAnyExecutionActive,
+                ForceHandMirror = pose.HandMirrorOnlyWhenIdle && !isAttackStanceActive,
                 FacingMirror = sample.Facing == Rot4.North && pose.MirrorOnNorth
             };
         }
 
         /// <summary>
-        /// 判断当前双武器视觉是否处于任意攻击执行中。
-        /// 条目执行态只表示某一侧命中执行焦点；整体静默必须读取整轮运行时状态。
+        /// 判断当前 Pawn 是否处于匹配的实时攻击姿态。
         /// </summary>
-        private static bool IsAnyExecutionActive(VisualPoseRequest request)
+        private static bool IsAnyAttackStanceActive(VisualPoseRequest request)
         {
-            // 只认整轮运行时状态，不能用 request.IsExecutionActive（单条执行焦点）回退，
-            // 否则单侧攻击时两把武器会再次分裂成攻击姿态与静默姿态。
-            return request?.RuntimeState?.HasExecutionState == true;
+            // 兼容非装备绘制调用方，并保留原有 Pawn 级镜像规则。
+            return request?.IsMatchingAttackStanceActive == true;
+        }
+
+        /// <summary>
+        /// 判断当前视觉条目是否参与实时攻击；旧调用方默认沿用 Pawn 级状态。
+        /// </summary>
+        private static bool IsEntryAttackStanceActive(VisualPoseRequest request)
+        {
+            if (request == null)
+            {
+                return false;
+            }
+
+            return request.IsMatchingEntryAttackStanceActive
+                ?? request.IsMatchingAttackStanceActive;
         }
 
         /// <summary>
@@ -314,6 +330,8 @@ namespace BDP.Core.Trigger.Visual
         {
             EquipmentPoseSample sample = request.PoseSample;
             ExpressionVisualEastWestPoseConfig pose = request.Preset.ResolveEastWestPose();
+            bool isAttackStanceActive = IsAnyAttackStanceActive(request);
+            bool isEntryAttackStanceActive = IsEntryAttackStanceActive(request);
             bool facingWest = sample.Facing == Rot4.West;
             bool isFront = pose.MainHandAlwaysFront
                 ? !isSubHand
@@ -332,7 +350,9 @@ namespace BDP.Core.Trigger.Visual
             {
                 WorldOffset = new Vector3(finalX, 0f, finalZ),
                 AltitudeOffset = altitude,
-                DecorativeAngle = pose.DefaultAngle + (isSubHand ? pose.SubHandAngleOffset : 0f),
+                DecorativeAngle = pose.DecorativeAngleOnlyWhenIdle && isEntryAttackStanceActive
+                    ? 0f
+                    : pose.DefaultAngle + (isSubHand ? pose.SubHandAngleOffset : 0f),
                 HandMirror = handMirror,
                 HandMirrorAllowed = pose.HandMirror,
                 ForceHandMirror = pose.HandMirror,
@@ -481,7 +501,9 @@ namespace BDP.Core.Trigger.Visual
         /// </summary>
         private static void AlignDrawPositionToGrip(
             VisualPoseRequest request,
-            PoseCalculation calculation)
+            PoseCalculation calculation,
+            Graphic graphic,
+            float drawScale)
         {
             ExpressionVisualGripConfig grip = request.Preset.ResolveGrip();
             if (grip == null || !grip.UseAsPoseOrigin)
@@ -491,7 +513,9 @@ namespace BDP.Core.Trigger.Visual
 
             calculation.DrawPosition -= TransformGraphicLocalOffset(
                 grip.GripOffset,
-                calculation);
+                calculation,
+                graphic,
+                drawScale);
         }
 
         /// <summary>
@@ -500,7 +524,9 @@ namespace BDP.Core.Trigger.Visual
         /// </summary>
         private static ResolvedGripAnchor ResolveGripAnchor(
             VisualPoseRequest request,
-            PoseCalculation calculation)
+            PoseCalculation calculation,
+            Graphic graphic,
+            float drawScale)
         {
             ExpressionVisualGripConfig grip = request.Preset.ResolveGrip();
             if (grip == null)
@@ -509,7 +535,11 @@ namespace BDP.Core.Trigger.Visual
             }
 
             Vector3 localOffset = grip.GripOffset;
-            Vector3 worldOffset = TransformGraphicLocalOffset(localOffset, calculation);
+            Vector3 worldOffset = TransformGraphicLocalOffset(
+                localOffset,
+                calculation,
+                graphic,
+                drawScale);
             return new ResolvedGripAnchor
             {
                 IsValid = true,
@@ -521,16 +551,23 @@ namespace BDP.Core.Trigger.Visual
 
         /// <summary>
         /// 把贴图局部点转换为世界偏移。
-        /// 配置 Z 对应贴图水平方向，配置 X 对应贴图垂直方向；翻转网格会反转贴图水平方向。
+        /// 配置 Z、X 分别是贴图宽、高方向的画布比例；Y 保持世界高度偏移。
+        /// 平面坐标按当前贴图尺寸和绘制缩放换算，翻转网格会反转贴图水平方向。
         /// </summary>
         private static Vector3 TransformGraphicLocalOffset(
             Vector3 localOffset,
-            PoseCalculation calculation)
+            PoseCalculation calculation,
+            Graphic graphic,
+            float drawScale)
         {
+            Vector2 drawSize = graphic.drawSize;
+            float safeScale = drawScale > 0f ? drawScale : 1f;
+            float graphicHorizontalOffset = localOffset.z * drawSize.x * safeScale;
+            float graphicVerticalOffset = -localOffset.x * drawSize.y * safeScale;
             float meshForward = calculation.MeshKind == VisualMeshKind.PlaneFlipped
-                ? -localOffset.z
-                : localOffset.z;
-            Vector3 meshLocalOffset = new Vector3(meshForward, localOffset.y, -localOffset.x);
+                ? -graphicHorizontalOffset
+                : graphicHorizontalOffset;
+            Vector3 meshLocalOffset = new Vector3(meshForward, localOffset.y, graphicVerticalOffset);
             Quaternion visualRotation = Quaternion.AngleAxis(calculation.DrawAngle, Vector3.up);
             return visualRotation * meshLocalOffset;
         }
@@ -540,7 +577,9 @@ namespace BDP.Core.Trigger.Visual
         /// </summary>
         private static ResolvedMuzzleAnchor ResolveMuzzleAnchor(
             VisualPoseRequest request,
-            PoseCalculation calculation)
+            PoseCalculation calculation,
+            Graphic graphic,
+            float drawScale)
         {
             ExpressionVisualMuzzleConfig muzzle = request.Preset.ResolveMuzzle();
             if (muzzle == null || !muzzle.IsRangedWeapon)
@@ -549,7 +588,11 @@ namespace BDP.Core.Trigger.Visual
             }
 
             Vector3 localOffset = ResolveMuzzleLocalOffset(request, muzzle);
-            Vector3 worldOffset = TransformGraphicLocalOffset(localOffset, calculation);
+            Vector3 worldOffset = TransformGraphicLocalOffset(
+                localOffset,
+                calculation,
+                graphic,
+                drawScale);
             return new ResolvedMuzzleAnchor
             {
                 IsValid = true,

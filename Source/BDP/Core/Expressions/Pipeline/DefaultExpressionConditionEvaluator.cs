@@ -48,7 +48,10 @@ namespace BDP.Core.Expressions
             for (int i = 0; i < declaration.Conditions.Count; i++)
             {
                 ExpressionSourceConditionConfig condition = declaration.Conditions[i];
-                ExpressionConditionEvaluation conditionResult = EvaluateSingleCondition(pawn, slot, condition);
+                bool? customResult = condition?.Evaluate(pawn, slot?.LoadedChip);
+                ExpressionConditionEvaluation conditionResult = customResult.HasValue
+                    ? new ExpressionConditionEvaluation { IsSatisfied = customResult.Value }
+                    : EvaluateSingleCondition(pawn, slot, condition);
                 if (conditionResult == null)
                 {
                     hasUnknownConditions = true;

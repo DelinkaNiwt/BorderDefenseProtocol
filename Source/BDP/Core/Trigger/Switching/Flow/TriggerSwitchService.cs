@@ -12,6 +12,15 @@ namespace BDP.Core.Trigger
     /// <summary>Trigger 切换请求与规则服务，保留入口、装载规则和排斥校验。</summary>
     internal sealed class TriggerService
     {
+        /// <summary>按需读取当前持有者，装备转移后不沿用旧人物身份。</summary>
+        private readonly Func<Pawn> resolveOwner;
+
+        /// <summary>绑定持有者读取口，供启停延迟的中性规则解析使用。</summary>
+        public TriggerService(Func<Pawn> resolveOwner)
+        {
+            this.resolveOwner = resolveOwner;
+        }
+
         /// <summary>
         /// 芯片启用延迟默认值。
         /// 1 秒 = 60 ticks。
@@ -67,6 +76,13 @@ namespace BDP.Core.Trigger
                 return false;
             }
 
+            if (nextSlot.Side == TriggerSide.Special
+                || TriggerChipActivationControlRegistry.HasIndependentActivationControl(nextSlot.LoadedChip))
+            {
+                // Special 槽结构上就是多槽并行控制；不能因芯片类别未登记而回落到共享侧上下文。
+                return RequestSlotActivate(context, nextSlot);
+            }
+
             TriggerSwitchTransitionService.CancelConflictingPendingTargets(
                 nextSlot,
                 context.GetSwitchContext,
@@ -84,6 +100,7 @@ namespace BDP.Core.Trigger
                 context.GetActiveSlotRaw,
                 blockers,
                 context.FindActivationBlockers,
+                blocker => RequestDeactivate(context, blocker.Side, blocker.Index),
                 context.IsPendingTargetValid,
                 context.GetSwitchContext,
                 context.SetSwitchContext,
@@ -92,6 +109,43 @@ namespace BDP.Core.Trigger
                 context.CurrentTick,
                 context.NotifySlotActivationCommitted,
                 context.NotifySlotDeactivated);
+        }
+
+        /// <summary>
+        /// 处理一枚需要独立槽位上下文的芯片正式启用请求。
+        /// 该路径仍复用现有条件、阻挡者、延迟和正式提交链。
+        /// </summary>
+        private bool RequestSlotActivate(TriggerSwitchContext context, TriggerSlotState targetSlot)
+        {
+            if (context == null || targetSlot == null)
+            {
+                return false;
+            }
+
+            targetSlot = TriggerSwitchTransitionService.NormalizeDirectControlSlot(targetSlot, context.GetSlot);
+            if (targetSlot == null
+                || targetSlot.LoadedChip == null
+                || targetSlot.IsDisabled)
+            {
+                return false;
+            }
+
+            if (targetSlot.IsActive)
+            {
+                return true;
+            }
+
+            return TriggerSwitchTransitionService.RequestSlotActivate(
+                targetSlot,
+                context.GetSlot,
+                context.FindActivationBlockers,
+                context.IsPendingTargetValid,
+                context.GetSlotSwitchContext,
+                context.SetSlotSwitchContext,
+                blocker => RequestDeactivate(context, blocker.Side, blocker.Index),
+                context.ResolveChipActivationDelayTicks,
+                context.CurrentTick,
+                context.NotifySlotActivationCommitted);
         }
 
         /// <summary>
@@ -130,6 +184,23 @@ namespace BDP.Core.Trigger
                 return false;
             }
 
+            if (side == TriggerSide.Special)
+            {
+                // Special 侧没有唯一的“当前槽”；退出和精确按钮会逐槽提交停用请求。
+                return false;
+            }
+
+            TriggerSlotState activeSlot = context.GetActiveSlot != null
+                ? context.GetActiveSlot(side)
+                : null;
+            if (activeSlot != null
+                && activeSlot.LoadedChip != null
+                && TriggerChipActivationControlRegistry.HasIndependentActivationControl(activeSlot.LoadedChip))
+            {
+                // 侧级入口只服务普通玩家控制芯片；独立控制芯片由槽位按钮精确关闭。
+                return false;
+            }
+
             return TriggerSwitchTransitionService.RequestDeactivate(
                 side,
                 context.GetActiveSlot,
@@ -142,6 +213,48 @@ namespace BDP.Core.Trigger
                 context.CurrentTick,
                 context.NotifySlotActivationCommitted,
                 context.NotifySlotDeactivated);
+        }
+
+        /// <summary>
+        /// 按精确槽位提交停用请求。
+        /// 独立控制芯片走槽位自己的独立上下文；普通芯片仍要求该槽位就是当前侧的普通控制槽。
+        /// </summary>
+        public bool RequestDeactivate(TriggerSwitchContext context, TriggerSide side, int slotIndex)
+        {
+            if (context == null || context.GetSlot == null)
+            {
+                return false;
+            }
+
+            TriggerSlotState targetSlot = TriggerSwitchTransitionService.NormalizeDirectControlSlot(
+                context.GetSlot(side, slotIndex),
+                context.GetSlot);
+            if (targetSlot == null)
+            {
+                return false;
+            }
+
+            if (targetSlot.Side == TriggerSide.Special
+                || (targetSlot.LoadedChip != null
+                    && TriggerChipActivationControlRegistry.HasIndependentActivationControl(targetSlot.LoadedChip)))
+            {
+                // Special 槽必须按槽位上下文精确停用，不能误写共享 Special 侧上下文。
+                return TriggerSwitchTransitionService.RequestSlotDeactivate(
+                    targetSlot,
+                    context.GetSlot,
+                    context.GetSlotSwitchContext,
+                    context.SetSlotSwitchContext,
+                    context.ResolveChipDeactivationDelayTicks,
+                    context.CurrentTick,
+                    context.NotifySlotDeactivated);
+            }
+
+            TriggerSlotState currentSlot = context.GetActiveSlot != null
+                ? TriggerSwitchTransitionService.NormalizeDirectControlSlot(
+                    context.GetActiveSlot(side),
+                    context.GetSlot)
+                : null;
+            return currentSlot == targetSlot && RequestDeactivate(context, side);
         }
 
         /// <summary>读取芯片的正式装载声明。</summary>
@@ -170,18 +283,20 @@ namespace BDP.Core.Trigger
         public int ResolveChipActivationDelayTicks(Thing chip)
         {
             ChipLoadoutContract loadout = GetChipLoadout(chip);
-            return loadout != null && loadout.ActivationDelayTicks >= 0
+            int configuredTicks = loadout != null && loadout.ActivationDelayTicks >= 0
                 ? loadout.ActivationDelayTicks
                 : DefaultChipActivationDelayTicks;
+            return TriggerSwitchDelayPolicyRegistry.ResolveDelayTicks(resolveOwner?.Invoke(), configuredTicks);
         }
 
         /// <summary>解析某枚芯片的停用延迟。</summary>
         public int ResolveChipDeactivationDelayTicks(Thing chip)
         {
             ChipLoadoutContract loadout = GetChipLoadout(chip);
-            return loadout != null && loadout.DeactivationDelayTicks >= 0
+            int configuredTicks = loadout != null && loadout.DeactivationDelayTicks >= 0
                 ? loadout.DeactivationDelayTicks
                 : DefaultChipDeactivationDelayTicks;
+            return TriggerSwitchDelayPolicyRegistry.ResolveDelayTicks(resolveOwner?.Invoke(), configuredTicks);
         }
 
         /// <summary>读取芯片的正式 Trion 声明。</summary>
@@ -224,11 +339,20 @@ namespace BDP.Core.Trigger
                     continue;
                 }
 
+                bool hasExplicitConflict = HasActivationExclusionConflict(normalizedTarget, normalizedActive);
                 bool mustYield = TriggerSwitchTransitionService.SharesActivationControlScope(
                     normalizedTarget,
                     normalizedActive);
+                if (mustYield
+                    && !hasExplicitConflict
+                    && (TriggerChipActivationControlRegistry.HasIndependentActivationControl(normalizedTarget.LoadedChip)
+                        || TriggerChipActivationControlRegistry.HasIndependentActivationControl(normalizedActive.LoadedChip)))
+                {
+                    mustYield = false;
+                }
+
                 if (!mustYield
-                    && !HasActivationExclusionConflict(normalizedTarget, normalizedActive))
+                    && !hasExplicitConflict)
                 {
                     continue;
                 }
@@ -407,6 +531,16 @@ namespace BDP.Core.Trigger
         /// 读取指定侧别当前原始激活槽位。
         /// </summary>
         public Func<TriggerSide, TriggerSlotState> GetActiveSlotRaw;
+
+        /// <summary>
+        /// 读取指定槽位当前保存的独立过程上下文。
+        /// </summary>
+        public Func<TriggerSlotState, SwitchContext> GetSlotSwitchContext;
+
+        /// <summary>
+        /// 写回指定槽位的独立过程上下文。
+        /// </summary>
+        public Action<TriggerSlotState, SwitchContext> SetSlotSwitchContext;
 
         /// <summary>
         /// 读取指定侧别当前保存的切换上下文。

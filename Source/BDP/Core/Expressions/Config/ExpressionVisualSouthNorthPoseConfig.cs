@@ -44,6 +44,11 @@ namespace BDP.Core.Expressions
         public float SubHandAngleOffset = 0f;
 
         /// <summary>
+        /// 是否仅在当前视觉条目未参与攻击时应用装饰角度。
+        /// </summary>
+        public bool DecorativeAngleOnlyWhenIdle = false;
+
+        /// <summary>
         /// 是否应用手侧镜像。
         /// 手侧镜像由主/副手和南北朝向共同决定，独立于瞄准半区。
         /// </summary>

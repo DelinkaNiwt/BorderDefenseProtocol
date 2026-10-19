@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 轻型试作兵01只在开发目录加载，整组源码／定义／语言可独立移除。 -->
+  <ThingDef ParentName="BDP_TrionUnitBase">
+    <defName>BDP_DebugTrionUnitRace</defName>
+    <race><body>Mech_Light</body></race>
+    <statBases>
+      <!-- 数值仅用于观察泄露、能力与带宽接入，不表达正式平衡。 -->
+      <BDP_TrionCapacity>1000</BDP_TrionCapacity><BDP_TrionIntensity>10</BDP_TrionIntensity>
+      <MoveSpeed>4.6</MoveSpeed><Mass>60</Mass><Flammability>0</Flammability>
+    </statBases>
+    <comps Inherit="False">
+      <!-- 与正式基底一致保留原版附着设施。 -->
+      <li><compClass>CompAttachBase</compClass></li>
+      <!-- 保持资源在兵组件之前初始化。 -->
+      <li Class="BDP.Core.Trion.CompProperties_Trion"><startPercent>1</startPercent></li>
+      <li Class="BDP.Content.Trion.Units.CompProperties_TrionUnit">
+        <operationPermissionKey>BDP.TrionUnit.DebugPermit</operationPermissionKey>
+        <bodyMarker>BDP_PermanentCombatBody</bodyMarker>
+        <internalTrigger>BDP_DebugTrionUnitTrigger</internalTrigger>
+      </li>
+    </comps>
+  </ThingDef>
+  <!-- 只供开发菜单创建，复用原版搬运机贴图。 -->
+  <PawnKindDef>
+    <defName>BDP_DebugTrionUnit</defName><race>BDP_DebugTrionUnitRace</race><combatPower>50</combatPower>
+    <lifeStages>
+      <li><bodyGraphicData><texPath>Things/Pawn/Mechanoid/Lifter</texPath><graphicClass>Graphic_Multi</graphicClass><drawSize>1.1</drawSize></bodyGraphicData></li>
+    </lifeStages>
+  </PawnKindDef>
+  <!-- 真实预载两枚现成特殊槽芯片，验证武器与常驻防护同时激活。 -->
+  <ThingDef ParentName="BDP_TrionUnitInternalTriggerBase">
+    <defName>BDP_DebugTrionUnitTrigger</defName>
+    <tools><li><capacities><li>Blunt</li></capacities><power>4</power><cooldownTime>2</cooldownTime></li></tools>
+    <comps Inherit="False">
+      <li Class="BDP.Core.Trigger.CompProperties_TriggerBody">
+        <triggerCategory>BDP_TriggerCategory_Border</triggerCategory>
+        <requiresTrionGland>false</requiresTrionGland><hideHostEquipment>true</hideHostEquipment>
+        <loadoutControlMode>PlayerNonConfigurable</loadoutControlMode>
+        <mainSlotCount>0</mainSlotCount><subSlotCount>0</subSlotCount><specialSlotCount>2</specialSlotCount>
+        <fixedLoadout>
+          <!-- 直接调用现成芯片成品工厂与模板，不复制能力定义。 -->
+          <li><side>Special</side><slotNumber>1</slotNumber><chipDef>BDP_Chip_Custom</chipDef><initializationKey>BDP_ChipFunction_Alektor</initializationKey></li>
+          <li><side>Special</side><slotNumber>2</slotNumber><chipDef>BDP_Chip_Custom</chipDef><initializationKey>BDP_ChipFunction_EnergyShield_Auto</initializationKey></li>
+        </fixedLoadout>
+      </li>
+    </comps>
+  </ThingDef>
+  <!-- 开发归属样本：没有生产、耗能或玩家建造菜单，不代表正式前置设计。 -->
+  <ThingDef>
+    <defName>BDP_DebugTrionUnitSource</defName><thingClass>Building</thingClass><category>Building</category>
+    <altitudeLayer>Building</altitudeLayer><tickerType>Normal</tickerType><selectable>true</selectable>
+    <graphicData><texPath>Things/Equipment/Trigger/BDP_BorderStandardTriggerBody</texPath><graphicClass>Graphic_Single</graphicClass></graphicData>
+    <statBases><MaxHitPoints>100</MaxHitPoints><Flammability>0</Flammability></statBases>
+    <building />
+    <comps><li Class="BDP.Development.Trion.Units.CompProperties_TrionUnitDebugSource" /></comps>
+  </ThingDef>
+</Defs>

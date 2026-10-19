@@ -14,7 +14,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
         /// <summary>当前主分类。</summary>
         public ChipCategoryDef CurrentCategory { get; private set; }
 
-        /// <summary>当前可空职业。</summary>
+        /// <summary>当前可空职业分页；射手与枪手共用射手键，不代表成品职业。</summary>
         public ChipProfessionDef CurrentProfession { get; private set; }
 
         /// <summary>当前路径草稿。</summary>
@@ -25,6 +25,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             ChipCategoryDef category,
             ChipProfessionDef profession)
         {
+            profession = ChipManufacturingListModel.GetProfessionPage(profession);
             CurrentCategory = category;
             CurrentProfession = profession;
             ChipManufacturingDraftKey key = new ChipManufacturingDraftKey(

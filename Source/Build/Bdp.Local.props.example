@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- 复制为 Bdp.Local.props，再填写经过核实的独立版本引用；没有的版本保持空白。 -->
+  <PropertyGroup>
+    <!-- 1.6 原游戏的 Managed 目录及对应 Harmony DLL。 -->
+    <RimWorld16ReferenceDir></RimWorld16ReferenceDir>
+    <Harmony16AssemblyPath></Harmony16AssemblyPath>
+    <!-- 1.7 Waylith 游戏根目录及对应 Harmony DLL。 -->
+    <RimWorld17ReferenceDir></RimWorld17ReferenceDir>
+    <Harmony17AssemblyPath></Harmony17AssemblyPath>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 内容层独立睡眠恢复配置；不修改基础恢复属性的定义。 -->
+  <BDP.Content.Trion.Facility.TrionRecoverySettingsDef>
+    <!-- 正式配置的唯一名称，供原版定义引用绑定。 -->
+    <defName>BDP_TrionRecoverySettings</defName>
+    <!-- 无运行核心许可时，实际睡眠相对于基准恢复率的倍率。 -->
+    <sleepWithoutCoreMultiplier>0.2</sleepWithoutCoreMultiplier>
+    <!-- 同时有运行核心许可与实际睡眠时，相对于基准恢复率的倍率。 -->
+    <sleepWithCoreMultiplier>1.2</sleepWithCoreMultiplier>
+  </BDP.Content.Trion.Facility.TrionRecoverySettingsDef>
+</Defs>

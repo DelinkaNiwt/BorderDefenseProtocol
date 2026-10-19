@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using BDP.Core.Chips;
 using BDP.Core.AttackExecution;
 using BDP.Core.Trigger;
+using BDP.Support.Diagnostics;
 using Verse;
 
 namespace BDP.Core.Expressions
@@ -76,7 +77,9 @@ namespace BDP.Core.Expressions
                     continue;
                 }
 
-                result.Add(BuildDeclaration(entry));
+                ExpressionSourceDeclaration declaration = BuildDeclaration(entry);
+                result.Add(declaration);
+                LogAbilitySourceDeclaration(chip, declaration);
             }
 
             return result;
@@ -124,18 +127,20 @@ namespace BDP.Core.Expressions
             return new ExpressionSourceDeclaration
             {
                 Id = entry.Id,
-                ResultKind = TranslateResultKind(entry.Kind),
+                OutputChannel = TranslateOutputChannel(entry.EntryType),
                 WeaponMode = TranslateWeaponMode(entry.WeaponMode),
                 DisplayLabel = entry.DisplayLabel,
                 ManualEntryIconTexPath = entry.ManualEntryIconTexPath,
                 VisualPresetDefName = entry.VisualPresetDefName,
                 VisualGraphicOverrideDefName = entry.VisualGraphicOverrideDefName,
                 CompositeVisualPresetDefName = entry.CompositeVisualPresetDefName,
+                ComboAttackVisualPresetDefName = entry.ComboAttackVisualPresetDefName,
                 ForceSuppressHostEquipment = entry.ForceSuppressHostEquipment,
                 VisualPriority = entry.VisualPriority,
                 RoleKey = entry.RoleKey,
                 VerbAttackRole = entry.VerbAttackRole,
                 Tags = entry.Tags,
+                DeclaredPermissionKeys = entry.DeclaredPermissionKeys != null ? new List<string>(entry.DeclaredPermissionKeys) : new List<string>(),
                 Trion = entry.Trion,
                 Conditions = entry.Conditions,
                 SemanticSourceKind = entry.SemanticSourceKind,
@@ -150,9 +155,11 @@ namespace BDP.Core.Expressions
                 AbilityDefName = entry.AbilityDefName,
                 HediffDefName = entry.HediffDefName,
                 HediffApplyModeKey = entry.HediffApplyModeKey,
-                PassiveKey = entry.PassiveKey,
+                HediffControlMode = entry.HediffControlMode,
+                PassiveIdentityKey = entry.PassiveIdentityKey,
                 ExposedData = TranslateExposedData(entry.ExposedData),
                 RangedModules = entry.RangedModules != null ? CloneRangedModules(entry.RangedModules) : new List<RangedModuleMountConfig>(),
+                HitPartPolicy = CloneHitPartPolicy(entry.HitPartPolicy),
                 RangedModuleAugmentations = entry.RangedModuleAugmentations != null
                     ? CloneRangedModuleAugmentations(entry.RangedModuleAugmentations)
                     : new List<RangedModuleAugmentationConfig>()
@@ -162,21 +169,21 @@ namespace BDP.Core.Expressions
         /// <summary>
         /// 把契约条目种类翻译成结果种类。
         /// </summary>
-        private static ExpressionResultKind TranslateResultKind(ChipExpressionEntryKind kind)
+        private static ExpressionOutputChannel TranslateOutputChannel(ChipExpressionEntryType entryType)
         {
-            switch (kind)
+            switch (entryType)
             {
-                case ChipExpressionEntryKind.PrimaryVerb:
-                case ChipExpressionEntryKind.SecondaryVerb:
-                    return ExpressionResultKind.Verb;
-                case ChipExpressionEntryKind.Ability:
-                    return ExpressionResultKind.Ability;
-                case ChipExpressionEntryKind.Hediff:
-                    return ExpressionResultKind.Hediff;
-                case ChipExpressionEntryKind.Passive:
-                    return ExpressionResultKind.Passive;
+                case ChipExpressionEntryType.PrimaryVerb:
+                case ChipExpressionEntryType.SecondaryVerb:
+                    return ExpressionOutputChannel.Verb;
+                case ChipExpressionEntryType.Ability:
+                    return ExpressionOutputChannel.Ability;
+                case ChipExpressionEntryType.Hediff:
+                    return ExpressionOutputChannel.Hediff;
+                case ChipExpressionEntryType.Passive:
+                    return ExpressionOutputChannel.Passive;
                 default:
-                    return ExpressionResultKind.Verb;
+                    return ExpressionOutputChannel.Verb;
             }
         }
 
@@ -283,6 +290,61 @@ namespace BDP.Core.Expressions
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// 复制可选命中部位策略快照。
+        /// </summary>
+        private static HitPartPolicyConfig CloneHitPartPolicy(HitPartPolicyConfig policy)
+        {
+            return policy != null ? policy.Clone() : null;
+        }
+
+        /// <summary>
+        /// 记录 Ability 来源声明边界的运行时快照。
+        /// 这里只观察翻译结果，不改变来源声明内容。
+        /// </summary>
+        private static void LogAbilitySourceDeclaration(
+            Thing chip,
+            ExpressionSourceDeclaration declaration)
+        {
+            if (declaration == null || declaration.OutputChannel != ExpressionOutputChannel.Ability)
+            {
+                return;
+            }
+
+            string chipThingId = chip != null ? chip.ThingID : "null";
+            string chipDefName = chip?.def != null ? chip.def.defName : "null";
+            string entryId = string.IsNullOrWhiteSpace(declaration.Id) ? "null" : declaration.Id;
+            string abilityDefName = string.IsNullOrWhiteSpace(declaration.AbilityDefName)
+                ? "null"
+                : declaration.AbilityDefName;
+            string requiresDirectTargetLos = declaration.ResolvedVerbSpec != null
+                ? declaration.ResolvedVerbSpec.RequiresDirectTargetLineOfSight.ToString()
+                : "null";
+
+            BdpDiagnostics.Throttled(
+                "expression.source_declaration." + chipThingId + "." + entryId,
+                "表达式来源诊断 | stage=source_declaration"
+                + " | chip=" + chipThingId
+                + " | chipDef=" + chipDefName
+                + " | resultId=" + entryId
+                + " | abilityDef=" + abilityDefName
+                + " | requiresDirectTargetLos=" + requiresDirectTargetLos
+                + " | declaredKeys=" + FormatDeclaredPermissionKeys(declaration.DeclaredPermissionKeys));
+        }
+
+        /// <summary>
+        /// 将声明许可键压缩为单行诊断文本。
+        /// </summary>
+        private static string FormatDeclaredPermissionKeys(IReadOnlyList<string> declaredPermissionKeys)
+        {
+            if (declaredPermissionKeys == null || declaredPermissionKeys.Count == 0)
+            {
+                return "none";
+            }
+
+            return string.Join(",", declaredPermissionKeys);
         }
 
         /// <summary>

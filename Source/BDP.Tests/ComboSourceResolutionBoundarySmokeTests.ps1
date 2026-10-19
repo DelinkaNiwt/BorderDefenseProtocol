@@ -42,9 +42,10 @@ Assert-True ($comboResolverText -match 'ComboSourceFieldResolver') 'ComboDefinit
 Assert-True ($compositeResolverText -match 'ComboFormalExpressionResultFactory') 'CompositeExpressionResolver must delegate combo result construction.'
 Assert-True ($compositeResolverText -notmatch 'Trion = mainPrimary != null \? mainPrimary\.Trion') 'Combo result construction must not hard-code Trion from main/sub result.'
 Assert-True ($comboFactoryText -notmatch 'sourceResult\.RuntimePayload') 'Combo factory must not read payload back from formal source results.'
-Assert-True ($compositeResolverText -match 'ResolveSourceMaterial\(sourceMaterials,\s*TriggerSide\.Main\)') 'Composite resolver must resolve main source material from the unfiltered source material set.'
-Assert-True ($compositeResolverText -match 'ResolveSourceMaterial\(sourceMaterials,\s*TriggerSide\.Sub\)') 'Composite resolver must resolve sub source material from the unfiltered source material set.'
-Assert-True ($comboFactoryText -match 'MainSourceMaterial') 'Combo factory must read main source material for source-side context.'
-Assert-True ($comboFactoryText -match 'SubSourceMaterial') 'Combo factory must read sub source material for source-side context.'
+Assert-True ($compositeResolverText -match 'ResolveSourceMaterialForSlot\(sourceMaterials,\s*slot\)') 'Composite resolver must resolve source material from the unfiltered source material set by exact slot.'
+Assert-True ($compositeResolverText -match 'material\.Side\s*!=\s*slot\.Side' -and
+    $compositeResolverText -match 'material\.SlotIndex\s*!=\s*slot\.Index') 'Composite resolver must keep side and slot identity when resolving source material.'
+Assert-True ($comboFactoryText -match 'FirstSourceMaterial') 'Combo factory must read first source material for source-side context.'
+Assert-True ($comboFactoryText -match 'SecondSourceMaterial') 'Combo factory must read second source material for source-side context.'
 
 Write-Output 'ComboSourceResolutionBoundarySmokeTests PASS'

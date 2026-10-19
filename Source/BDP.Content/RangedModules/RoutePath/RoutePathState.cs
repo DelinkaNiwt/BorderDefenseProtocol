@@ -211,8 +211,8 @@ namespace BDP.Content.RangedModules.RoutePath
         /// <summary>已按哪个 emit 序号完成自动路径分配。-1 表示未分配。</summary>
         public int AssignedEmitIndex { get; set; } = -1;
 
-        /// <summary>当前段末匹配使用的容差半径。</summary>
-        public float ArrivalTolerance { get; set; } = 0.35f;
+        /// <summary>本发已到达最后锚点并释放控制，不再重复接管。</summary>
+        public bool ControlReleased { get; set; }
 
         /// <summary>当前投射物中间续段使用的最大散布半径。</summary>
         public float IntermediateSpreadRadius { get; set; } = 0.625f;
@@ -223,14 +223,17 @@ namespace BDP.Content.RangedModules.RoutePath
         /// <summary>原版精度达到最高时仍保留的散布比例。</summary>
         public float HighAccuracySpreadScale { get; set; } = 0.25f;
 
-        /// <summary>候选散布不安全时允许折半收缩的次数。</summary>
-        public int SpreadSafetyShrinkSteps { get; set; } = 4;
-
         /// <summary>是否已冻结最终段基准落点。</summary>
         public bool HasFrozenFinalDestination { get; set; }
 
         /// <summary>冻结下来的最终段基准落点。</summary>
         public Vector3 FrozenFinalDestination { get; set; }
+
+        /// <summary>当前路线是否携带发射时冻结的随机未命中偏移。</summary>
+        public bool HasWildMissOffset { get; set; }
+
+        /// <summary>随机未命中相对名义路线冻结的平面偏移。</summary>
+        public Vector3 WildMissOffset { get; set; }
 
         /// <summary>清空当前投射物路径上下文。</summary>
         public void Reset()
@@ -242,13 +245,14 @@ namespace BDP.Content.RangedModules.RoutePath
             PathSource = RoutePathSource.Direct;
             CurrentLegIndex = 0;
             AssignedEmitIndex = -1;
-            ArrivalTolerance = 0.35f;
+            ControlReleased = false;
             IntermediateSpreadRadius = 0.625f;
             FinalSpreadRadius = 0.30f;
             HighAccuracySpreadScale = 0.25f;
-            SpreadSafetyShrinkSteps = 4;
             HasFrozenFinalDestination = false;
             FrozenFinalDestination = Vector3.zero;
+            HasWildMissOffset = false;
+            WildMissOffset = Vector3.zero;
         }
 
         /// <summary>复制当前投射物路径上下文。</summary>
@@ -262,13 +266,14 @@ namespace BDP.Content.RangedModules.RoutePath
                 PathSource = PathSource,
                 CurrentLegIndex = CurrentLegIndex,
                 AssignedEmitIndex = AssignedEmitIndex,
-                ArrivalTolerance = ArrivalTolerance,
+                ControlReleased = ControlReleased,
                 IntermediateSpreadRadius = IntermediateSpreadRadius,
                 FinalSpreadRadius = FinalSpreadRadius,
                 HighAccuracySpreadScale = HighAccuracySpreadScale,
-                SpreadSafetyShrinkSteps = SpreadSafetyShrinkSteps,
                 HasFrozenFinalDestination = HasFrozenFinalDestination,
-                FrozenFinalDestination = FrozenFinalDestination
+                FrozenFinalDestination = FrozenFinalDestination,
+                HasWildMissOffset = HasWildMissOffset,
+                WildMissOffset = WildMissOffset
             };
 
             for (int i = 0; i < Anchors.Count; i++)
@@ -279,6 +284,7 @@ namespace BDP.Content.RangedModules.RoutePath
             return clone;
         }
 
+        /// <summary>保存实际使用的路线及散布快照，不保存已移除的避墙收缩状态。</summary>
         public void ExposeData()
         {
             List<PathAnchor> anchors = Anchors;
@@ -288,13 +294,14 @@ namespace BDP.Content.RangedModules.RoutePath
             RoutePathSource pathSource = PathSource;
             int currentLegIndex = CurrentLegIndex;
             int assignedEmitIndex = AssignedEmitIndex;
-            float arrivalTolerance = ArrivalTolerance;
+            bool controlReleased = ControlReleased;
             float intermediateSpreadRadius = IntermediateSpreadRadius;
             float finalSpreadRadius = FinalSpreadRadius;
             float highAccuracySpreadScale = HighAccuracySpreadScale;
-            int spreadSafetyShrinkSteps = SpreadSafetyShrinkSteps;
             bool hasFrozenFinalDestination = HasFrozenFinalDestination;
             Vector3 frozenFinalDestination = FrozenFinalDestination;
+            bool hasWildMissOffset = HasWildMissOffset;
+            Vector3 wildMissOffset = WildMissOffset;
 
             Scribe_Collections.Look(ref anchors, "anchors", LookMode.Deep);
             Scribe_Values.Look(ref hasFinalTarget, "hasFinalTarget", false);
@@ -302,14 +309,15 @@ namespace BDP.Content.RangedModules.RoutePath
             Scribe_Values.Look(ref finalIsThing, "finalIsThing", false);
             Scribe_Values.Look(ref pathSource, "pathSource", RoutePathSource.Direct);
             Scribe_Values.Look(ref currentLegIndex, "currentLegIndex", 0);
+            Scribe_Values.Look(ref controlReleased, "controlReleased", false);
             Scribe_Values.Look(ref assignedEmitIndex, "assignedEmitIndex", -1);
-            Scribe_Values.Look(ref arrivalTolerance, "arrivalTolerance", 0.35f);
             Scribe_Values.Look(ref intermediateSpreadRadius, "intermediateSpreadRadius", 1.25f);
             Scribe_Values.Look(ref finalSpreadRadius, "finalSpreadRadius", 0.30f);
             Scribe_Values.Look(ref highAccuracySpreadScale, "highAccuracySpreadScale", 0.25f);
-            Scribe_Values.Look(ref spreadSafetyShrinkSteps, "spreadSafetyShrinkSteps", 4);
             Scribe_Values.Look(ref hasFrozenFinalDestination, "hasFrozenFinalDestination", false);
             Scribe_Values.Look(ref frozenFinalDestination, "frozenFinalDestination");
+            Scribe_Values.Look(ref hasWildMissOffset, "hasWildMissOffset", false);
+            Scribe_Values.Look(ref wildMissOffset, "wildMissOffset");
 
             Anchors = anchors ?? new List<PathAnchor>();
             HasFinalTarget = hasFinalTarget;
@@ -318,13 +326,14 @@ namespace BDP.Content.RangedModules.RoutePath
             PathSource = pathSource;
             CurrentLegIndex = currentLegIndex < 0 ? 0 : currentLegIndex;
             AssignedEmitIndex = assignedEmitIndex;
-            ArrivalTolerance = arrivalTolerance;
+            ControlReleased = controlReleased;
             IntermediateSpreadRadius = Mathf.Max(0f, intermediateSpreadRadius);
             FinalSpreadRadius = Mathf.Max(0f, finalSpreadRadius);
             HighAccuracySpreadScale = Mathf.Clamp01(highAccuracySpreadScale);
-            SpreadSafetyShrinkSteps = Mathf.Clamp(spreadSafetyShrinkSteps, 0, 8);
             HasFrozenFinalDestination = hasFrozenFinalDestination;
             FrozenFinalDestination = frozenFinalDestination;
+            HasWildMissOffset = hasWildMissOffset;
+            WildMissOffset = wildMissOffset;
         }
     }
 }

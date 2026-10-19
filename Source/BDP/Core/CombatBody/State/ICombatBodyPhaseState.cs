@@ -13,12 +13,19 @@ namespace BDP.Core.CombatBody
         /// </summary>
         void BeginManualTransformLock(int lockTicks);
 
+        /// <summary>记录当前会话真正锁定的资源量，不重新切换形态。</summary>
+        void UpdateAllocatedTrion(float amount);
+
+        /// <summary>进入激活阶段并记录实际锁定。</summary>
         void EnterActive(float allocatedTrion);
 
+        /// <summary>进入崩解表现阶段。</summary>
         void EnterCollapsing(string reason);
 
+        /// <summary>结束当前会话并进入冷却。</summary>
         void EnterCooldown(int cooldownTicks);
 
+        /// <summary>回到非激活阶段。</summary>
         void EnterInactive();
     }
 }

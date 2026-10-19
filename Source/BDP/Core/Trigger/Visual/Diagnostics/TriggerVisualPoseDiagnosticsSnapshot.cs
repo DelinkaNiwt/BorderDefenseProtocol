@@ -296,7 +296,7 @@ namespace BDP.Core.Trigger.Visual.Diagnostics
         public Vector3 GripWorldPosition { get; set; }
 
         /// <summary>
-        /// 当前条目握持锚点局部偏移。
+        /// 当前条目握持锚点归一化贴图局部坐标。
         /// </summary>
         public Vector3 GripLocalOffset { get; set; }
 
@@ -311,7 +311,7 @@ namespace BDP.Core.Trigger.Visual.Diagnostics
         public Vector3 MuzzleWorldPosition { get; set; }
 
         /// <summary>
-        /// 当前条目枪口锚点局部偏移。
+        /// 当前条目枪口锚点归一化贴图局部坐标。
         /// </summary>
         public Vector3 MuzzleLocalOffset { get; set; }
 

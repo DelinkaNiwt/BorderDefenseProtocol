@@ -27,15 +27,15 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
                 : DefDatabase<ChipProfessionDef>.GetNamedSilentFail(defName);
         }
 
-        /// <summary>查找动作预设。</summary>
-        public static ChipActionPresetDef FindAction(string defName)
+        /// <summary>查找芯片功能模板。</summary>
+        public static ChipManufacturingPresetDef FindChipFunctionDef(string defName)
         {
             return string.IsNullOrWhiteSpace(defName)
                 ? null
-                : DefDatabase<ChipActionPresetDef>.GetNamedSilentFail(defName);
+                : DefDatabase<ChipManufacturingPresetDef>.GetNamedSilentFail(defName);
         }
 
-        /// <summary>查找武装型预设。</summary>
+        /// <summary>查找武装构型定义。</summary>
         public static ChipArmamentFormDef FindArmamentForm(string defName)
         {
             return string.IsNullOrWhiteSpace(defName)
@@ -44,15 +44,15 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
         }
 
         /// <summary>
-        /// 按职业和动作内容查找隐藏默认武装型。
+        /// 按职业和芯片功能模板内容查找隐藏默认武装型。
         /// 默认型只参与逻辑解析，不参与制造台列表和动态名称。
         /// </summary>
         public static ChipArmamentFormDef FindImplicitDefaultArmamentForm(
             ChipCategoryDef category,
             ChipProfessionDef profession,
-            IList<ChipActionPresetDef> actions)
+            IList<ChipManufacturingPresetDef> functionDefs)
         {
-            if (category == null || profession == null || actions == null || actions.Count == 0)
+            if (category == null || profession == null || functionDefs == null || functionDefs.Count == 0)
             {
                 return null;
             }
@@ -70,8 +70,8 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
                     continue;
                 }
 
-                if (HasRangedWeaponAction(category, actions)
-                    && ChipCombinationSelectionRules.CanUseArmamentForm(candidate, actions))
+                if (HasRangedWeaponFunction(category, functionDefs)
+                    && ChipCombinationSelectionRules.CanUseArmamentForm(candidate, functionDefs))
                 {
                     return candidate;
                 }
@@ -80,20 +80,20 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
             return null;
         }
 
-        /// <summary>判断动作集合是否含有远程武装表达条目。</summary>
-        private static bool HasRangedWeaponAction(
+        /// <summary>判断芯片功能模板集合是否含有远程武装表达条目。</summary>
+        private static bool HasRangedWeaponFunction(
             ChipCategoryDef category,
-            IList<ChipActionPresetDef> actions)
+            IList<ChipManufacturingPresetDef> functionDefs)
         {
             if (category.defName != "BDP_ChipCategory_Weapon")
             {
                 return false;
             }
 
-            for (int index = 0; index < actions.Count; index++)
+            for (int index = 0; index < functionDefs.Count; index++)
             {
                 List<ChipExpressionEntryConfig> entries =
-                    actions[index]?.config?.Expression?.Entries;
+                    functionDefs[index]?.config?.Expression?.Entries;
                 if (entries == null)
                 {
                     continue;
@@ -102,9 +102,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
                 for (int entryIndex = 0; entryIndex < entries.Count; entryIndex++)
                 {
                     ChipExpressionEntryConfig entry = entries[entryIndex];
-                    if ((entry?.Kind == ChipExpressionEntryKindConfig.PrimaryVerb
-                            || entry?.Kind == ChipExpressionEntryKindConfig.SecondaryVerb)
-                        && entry.WeaponMode == VerbExpressionModeConfig.Ranged)
+                    if (ChipExpressionCapabilityResolver.HasExecutableRangedSurface(entry))
                     {
                         return true;
                     }

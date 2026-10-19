@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Verse;
 
 namespace BDP.Core.BodyConstraints
@@ -11,10 +11,17 @@ namespace BDP.Core.BodyConstraints
     internal static class PawnBodyConstraintSignalHub
     {
         /// <summary>
-        /// 每个 Pawn 当前的身体约束版本。
-        /// 键使用 thingIDNumber，避免长期强持有 Pawn 引用。
+        /// 身体版本属于真实 Pawn 实例；弱键在角色释放时自动释放记录，不跨存档串编号。
         /// </summary>
-        private static readonly Dictionary<int, int> VersionByPawnId = new Dictionary<int, int>();
+        private static readonly ConditionalWeakTable<Pawn, VersionState> Versions =
+            new ConditionalWeakTable<Pawn, VersionState>();
+
+        /// <summary>弱表所需的可变版本值，不保存 Pawn 反向引用。</summary>
+        private sealed class VersionState
+        {
+            /// <summary>该角色已发布的身体约束版本。</summary>
+            public int Version;
+        }
 
         /// <summary>
         /// 身体约束变化时广播。
@@ -32,15 +39,8 @@ namespace BDP.Core.BodyConstraints
                 return;
             }
 
-            int pawnId = pawn.thingIDNumber;
-            int nextVersion = 1;
-            int currentVersion;
-            if (VersionByPawnId.TryGetValue(pawnId, out currentVersion))
-            {
-                nextVersion = currentVersion + 1;
-            }
-
-            VersionByPawnId[pawnId] = nextVersion;
+            VersionState state = Versions.GetValue(pawn, key => new VersionState());
+            int nextVersion = ++state.Version;
             Changed?.Invoke(new PawnBodyConstraintChangedArgs
             {
                 Pawn = pawn,
@@ -60,8 +60,8 @@ namespace BDP.Core.BodyConstraints
                 return 0;
             }
 
-            int version;
-            return VersionByPawnId.TryGetValue(pawn.thingIDNumber, out version) ? version : 0;
+            VersionState state;
+            return Versions.TryGetValue(pawn, out state) ? state.Version : 0;
         }
     }
 }

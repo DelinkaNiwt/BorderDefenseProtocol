@@ -1,6 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <!-- 先隔离版本路径；仅 1.7 导入 .NET 10 SDK，1.6 保留原编译方式。 -->
+  <Import Project="..\Build\Bdp.Version.props" />
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" Condition="'$(RimWorldVersion)' == '1.7'" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="'$(RimWorldVersion)' != '1.7' and Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
 
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
@@ -9,7 +12,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>BDP</RootNamespace>
     <AssemblyName>BDP.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion Condition="'$(RimWorldVersion)' != '1.7'">v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <LangVersion>7.3</LangVersion>
   </PropertyGroup>
@@ -17,8 +20,8 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\1.6\Assemblies\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <OutputPath>$(BdpVersionRoot)\Assemblies\</OutputPath>
+    <DefineConstants>TRACE;$(BdpVersionDefine)</DefineConstants>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
 
@@ -26,55 +29,62 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\1.6\Assemblies\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <OutputPath>$(BdpVersionRoot)\Assemblies\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;$(BdpVersionDefine)</DefineConstants>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
 
-  <ItemGroup>
+  <!-- 1.6 仍引用原 Unity 模块；1.7 引用在共同版本配置中独立声明。 -->
+  <ItemGroup Condition="'$(RimWorldVersion)' == '1.6'">
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="0Harmony">
-      <HintPath>C:\NiwtGames\Steam\steamapps\workshop\content\294100\839005762\1.6\Assemblies\0Harmony.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Assembly-CSharp">
-      <HintPath>C:\NiwtGames\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>C:\NiwtGames\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>$(RimWorldReferenceDir)\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>C:\NiwtGames\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>$(RimWorldReferenceDir)\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule">
-      <HintPath>C:\NiwtGames\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+      <HintPath>$(RimWorldReferenceDir)\UnityEngine.IMGUIModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.InputLegacyModule">
-      <HintPath>C:\NiwtGames\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
+      <HintPath>$(RimWorldReferenceDir)\UnityEngine.InputLegacyModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.TextRenderingModule">
-      <HintPath>C:\NiwtGames\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+      <HintPath>$(RimWorldReferenceDir)\UnityEngine.TextRenderingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+
+  <!-- 1.7 图表直接使用游戏原生几何；仅引用，不打包游戏运行库。 -->
+  <ItemGroup Condition="'$(RimWorldVersion)' == '1.7'">
+    <Reference Include="Brutal.ImGui">
+      <HintPath>$(RimWorldReferenceDir)\Brutal.ImGui.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Brutal.Core.Numerics">
+      <HintPath>$(RimWorldReferenceDir)\Brutal.Core.Numerics.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="**\*.cs" Exclude="obj\**\*.cs" />
+    <Compile Include="**\*.cs" Exclude="obj\**\*.cs;bin\**\*.cs" />
   </ItemGroup>
 
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" Condition="'$(RimWorldVersion)' != '1.7'" />
+  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" Condition="'$(RimWorldVersion)' == '1.7'" />
+  <Import Project="..\Build\Bdp.Version.targets" />
 
   <!-- 每次正式编译后检查 Core 不依赖其他任何本模组程序集。 -->
   <Target
     Name="VerifyBdpCoreModAssemblyIsolation"
     AfterTargets="Build"
     Condition="'$(DesignTimeBuild)' != 'true'">
-    <Exec Command="powershell.exe -NoProfile -ExecutionPolicy Bypass -File &quot;$(MSBuildProjectDirectory)\..\Build\Verify-BdpCoreIsolation.ps1&quot; -CoreProjectPath &quot;$(MSBuildProjectFullPath)&quot; -CoreAssemblyPath &quot;$(TargetPath)&quot; -ModSourceRoot &quot;$(MSBuildProjectDirectory)\..&quot; -CoreSourceRoot &quot;$(MSBuildProjectDirectory)&quot; -CoreDefsRoot &quot;$(MSBuildProjectDirectory)\..\..\1.6\Defs&quot;" />
+    <Exec Command="powershell.exe -NoProfile -ExecutionPolicy Bypass -File &quot;$(MSBuildProjectDirectory)\..\Build\Verify-BdpCoreIsolation.ps1&quot; -CoreProjectPath &quot;$(MSBuildProjectFullPath)&quot; -CoreAssemblyPath &quot;$(TargetPath)&quot; -ModSourceRoot &quot;$(MSBuildProjectDirectory)\..&quot; -CoreSourceRoot &quot;$(MSBuildProjectDirectory)&quot; -CoreDefsRoot &quot;$(BdpCommonRoot)\Defs&quot; -VersionCoreDefsRoot &quot;$(BdpVersionRoot)\Defs&quot;" />
   </Target>
 </Project>

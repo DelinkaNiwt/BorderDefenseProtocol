@@ -396,6 +396,26 @@ namespace BDP.Core.AttackExecution
                 && token.OwnerPawnThingId == cleanupOwnedOwnerPawnThingId;
         }
 
+        /// <summary>
+        /// 已批准同一次攻击跨条件发布续接时，同步作业的清理归属版本。
+        /// 只认本作业锁存的旧令牌及相同攻击实例，不能在后续逐刻覆盖到另一轮会话。
+        /// </summary>
+        internal void MigrateCleanupOwnedSession(BdpVerb_Shoot verb, AttackSessionToken previousToken, int nextVersion)
+        {
+            AttackSessionToken current = verb != null ? verb.HostSessionToken : null;
+            if (job?.verbToUse != verb || previousToken == null || current == null
+                || !HasCapturedCleanupOwnedSession()
+                || cleanupOwnedProjectionVersion != previousToken.ProjectionVersion
+                || cleanupOwnedAttackInstanceId != previousToken.AttackInstanceId
+                || cleanupOwnedResultId != previousToken.ResultId
+                || cleanupOwnedOwnerPawnThingId != previousToken.OwnerPawnThingId
+                || current.ProjectionVersion != nextVersion
+                || current.AttackInstanceId != previousToken.AttackInstanceId
+                || current.ResultId != previousToken.ResultId
+                || current.OwnerPawnThingId != previousToken.OwnerPawnThingId) return;
+            cleanupOwnedProjectionVersion = nextVersion;
+        }
+
         private bool HasCapturedCleanupOwnedSession()
         {
             return !string.IsNullOrWhiteSpace(cleanupOwnedResultId)

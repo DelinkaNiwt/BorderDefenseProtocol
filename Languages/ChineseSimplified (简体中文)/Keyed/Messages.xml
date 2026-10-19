@@ -20,12 +20,34 @@
   <BDP_Message_CombatBody_EmergencyEscapeExecuted>战斗体紧急脱离已执行。</BDP_Message_CombatBody_EmergencyEscapeExecuted>
   <BDP_Message_EmergencyEscape_AlreadyExists>地图内已存在一座{0}。</BDP_Message_EmergencyEscape_AlreadyExists>
   <BDP_Message_CombatBody_TriggerSwitchFailed>芯片形态切换失败，已保留原形态。</BDP_Message_CombatBody_TriggerSwitchFailed>
+  <!-- 战斗体个人服装模板上传结果。 -->
+  <BDP_CombatBodyEditor_DefaultTemplateName>模板 {0}</BDP_CombatBodyEditor_DefaultTemplateName>
+  <BDP_Message_CombatBodyAppearance_MissingPawn>缺少可操作的小人。</BDP_Message_CombatBodyAppearance_MissingPawn>
+  <BDP_Message_CombatBodyAppearance_MissingContainer>小人的服装栏或库存当前不可用。</BDP_Message_CombatBodyAppearance_MissingContainer>
+  <BDP_Message_CombatBodyAppearance_CaptureFailed>读取当前服装外观失败，未上传模板。</BDP_Message_CombatBodyAppearance_CaptureFailed>
+  <BDP_Message_CombatBodyAppearance_TransferFailed>服装转入库存失败，已恢复原穿着状态。</BDP_Message_CombatBodyAppearance_TransferFailed>
+  <BDP_Message_CombatBodyAppearance_LedgerUnavailable>个人服装模板账本当前不可用。</BDP_Message_CombatBodyAppearance_LedgerUnavailable>
+  <BDP_Message_CombatBodyAppearance_CommitFailed>个人服装模板保存失败，已恢复原穿着状态。</BDP_Message_CombatBodyAppearance_CommitFailed>
+  <!-- 战斗体编辑台入口提示。 -->
+  <BDP_Command_CombatBodyEditor_Use>使用战斗体编辑台</BDP_Command_CombatBodyEditor_Use>
+  <BDP_Message_CombatBodyEditor_NoPawn>没有可操作的小人。</BDP_Message_CombatBodyEditor_NoPawn>
+  <BDP_Message_CombatBodyEditor_Unavailable>战斗体编辑台当前不可用。</BDP_Message_CombatBodyEditor_Unavailable>
+  <BDP_Message_CombatBodyEditor_Unreachable>无法到达战斗体编辑台。</BDP_Message_CombatBodyEditor_Unreachable>
+  <BDP_Message_CombatBodyEditor_NoPower>战斗体编辑台未通电。</BDP_Message_CombatBodyEditor_NoPower>
+  <BDP_Message_CombatBodyEditor_CombatBodyActive>战斗体激活或崩解期间不能使用编辑台。</BDP_Message_CombatBodyEditor_CombatBodyActive>
+  <BDP_Message_CombatBodyEditor_MissingJobDef>缺少战斗体编辑台 JobDef。</BDP_Message_CombatBodyEditor_MissingJobDef>
+  <BDP_Message_CombatBodyAppearance_PreviewFailed>预览捕获失败，当前显示为空。</BDP_Message_CombatBodyAppearance_PreviewFailed>
+  <BDP_Message_CombatBodyAppearance_PresetUnavailable>没有可用模板，预设模式不可用。</BDP_Message_CombatBodyAppearance_PresetUnavailable>
+  <BDP_Message_CombatBodyAppearance_DeleteConfirm>确定删除模板“{0}”吗？已转入库存的原服装不会被删除。</BDP_Message_CombatBodyAppearance_DeleteConfirm>
+  <BDP_Message_CombatBodyAppearance_UploadConfirm>上传后当前服装会从身上移入库存，并保存为新的个人模板。</BDP_Message_CombatBodyAppearance_UploadConfirm>
   <!-- 读档时发现旧战斗体宿主事务缺少完整快照的诊断警告。 -->
   <BDP_Message_CombatBody_LegacyHostRecoveryWarning>检测到{0}的战斗体旧档事务不完整，已切换为安全解除：已应用变换={1}，存在快照={2}，快照已捕获={3}。</BDP_Message_CombatBody_LegacyHostRecoveryWarning>
   <BDP_Message_CombatBody_CollapseReasonUnknown>未知</BDP_Message_CombatBody_CollapseReasonUnknown>
   <BDP_Message_CombatBody_CollapseReasonTrionDepleted>Trion储量耗尽</BDP_Message_CombatBody_CollapseReasonTrionDepleted>
+  <!-- 原版致死核心部位或致死能力条件导致战斗体崩解。 -->
+  <BDP_Message_CombatBody_CollapseReasonFatalBodyCondition>致命身体状态</BDP_Message_CombatBody_CollapseReasonFatalBodyCondition>
   <BDP_Message_CombatBody_CollapseReasonOther>未知原因（{0}）</BDP_Message_CombatBody_CollapseReasonOther>
-  <BDP_Hediff_CombatBody_TrionDrain>Trion持续消耗：{0}/秒</BDP_Hediff_CombatBody_TrionDrain>
+  <BDP_Hediff_CombatBody_TrionDrain>本伤口的Trion泄露：{0}/秒</BDP_Hediff_CombatBody_TrionDrain>
   <BDP_Hediff_CombatBody_CollapsePendingLabel>战斗体崩解中（{0}）</BDP_Hediff_CombatBody_CollapsePendingLabel>
   <BDP_Hediff_CombatBody_CollapsePendingTip>剩余：{0}
 原因：{1}</BDP_Hediff_CombatBody_CollapsePendingTip>
@@ -37,6 +59,7 @@
   <BDP_Message_Ability_TrionInsufficient>Trion 不足，无法施放该能力。</BDP_Message_Ability_TrionInsufficient>
   <BDP_Message_Ability_MissingTrionHost>未找到 Trion 宿主，无法施放该能力。</BDP_Message_Ability_MissingTrionHost>
   <BDP_Message_Trion_RangedInsufficient>Trion不足，无法发射。</BDP_Message_Trion_RangedInsufficient>
+  <BDP_Message_Trigger_RequiresTrionGland>需要激活中的 Trion 腺体才能装备触发体。</BDP_Message_Trigger_RequiresTrionGland>
 
   <!-- Trion 天赋检测提示。 -->
   <BDP_Message_TrionTalent_MissingWorkDefinition>缺少 Trion 天赋检测工作定义。</BDP_Message_TrionTalent_MissingWorkDefinition>
@@ -73,26 +96,25 @@
   <BDP_Message_TriggerAssembly_Unavailable>触发器装配台不可用。</BDP_Message_TriggerAssembly_Unavailable>
   <BDP_Message_TriggerAssembly_Unreachable>无法到达触发器装配台。</BDP_Message_TriggerAssembly_Unreachable>
   <BDP_Message_TriggerAssembly_NoPower>触发器装配台未通电。</BDP_Message_TriggerAssembly_NoPower>
+  <!-- 装配台需要本地图核心的运行许可。 -->
+  <BDP_Message_TriggerAssembly_NoTrionPermission>触发器装配台需要本地图的 Trion 中继核心运行。</BDP_Message_TriggerAssembly_NoTrionPermission>
   <BDP_Message_TriggerAssembly_NoBody>小人没有可装配的触发体。</BDP_Message_TriggerAssembly_NoBody>
   <BDP_Message_TriggerAssembly_FixedByDefinition>当前触发体的芯片配置已固定，无法修改。</BDP_Message_TriggerAssembly_FixedByDefinition>
   <BDP_Message_TriggerAssembly_CombatBodyActive>战斗体激活时不能装配触发器。</BDP_Message_TriggerAssembly_CombatBodyActive>
   <BDP_Message_TriggerAssembly_PlayerNonConfigurable>当前触发体不允许玩家配置芯片。</BDP_Message_TriggerAssembly_PlayerNonConfigurable>
   <BDP_Message_Assembly_MissingService>缺少装配服务。</BDP_Message_Assembly_MissingService>
   <BDP_Message_Assembly_TargetSlotMissing>目标槽位不存在。</BDP_Message_Assembly_TargetSlotMissing>
-  <BDP_Message_Assembly_TargetSlotMirror>同步槽位不能直接装配，请操作主手槽。</BDP_Message_Assembly_TargetSlotMirror>
   <BDP_Message_Assembly_TargetSlotOccupied>目标槽位已有芯片。</BDP_Message_Assembly_TargetSlotOccupied>
   <BDP_Message_Assembly_ChipMissing>缺少芯片。</BDP_Message_Assembly_ChipMissing>
   <BDP_Message_Assembly_ChipTakeFailed>无法从容器取出芯片。</BDP_Message_Assembly_ChipTakeFailed>
   <BDP_Message_Assembly_Loaded>芯片已装入。</BDP_Message_Assembly_Loaded>
   <BDP_Message_Assembly_LoadFailed>芯片装入失败，已尝试退回容器。</BDP_Message_Assembly_LoadFailed>
   <BDP_Message_Assembly_SourceSlotMissing>来源槽位不存在。</BDP_Message_Assembly_SourceSlotMissing>
-  <BDP_Message_Assembly_SourceSlotMirror>同步槽位不能直接卸载，请操作主手槽。</BDP_Message_Assembly_SourceSlotMirror>
   <BDP_Message_Assembly_SourceSlotEmpty>来源槽位没有芯片。</BDP_Message_Assembly_SourceSlotEmpty>
   <BDP_Message_Assembly_UnloadFailed>芯片卸载失败。</BDP_Message_Assembly_UnloadFailed>
   <BDP_Message_Assembly_Unloaded>芯片已卸下。</BDP_Message_Assembly_Unloaded>
   <BDP_Message_Assembly_SameSlot>槽位未变化。</BDP_Message_Assembly_SameSlot>
   <BDP_Message_Assembly_SlotMissing>来源或目标槽位不存在。</BDP_Message_Assembly_SlotMissing>
-  <BDP_Message_Assembly_SlotMirror>同步槽位不能作为直接拖拽源或目标。</BDP_Message_Assembly_SlotMirror>
   <BDP_Message_Assembly_SlotActive>激活中的槽位不能移动芯片。</BDP_Message_Assembly_SlotActive>
   <BDP_Message_Assembly_NewChipMissing>缺少新芯片。</BDP_Message_Assembly_NewChipMissing>
   <BDP_Message_Assembly_NewChipTakeFailed>无法从容器取出新芯片。</BDP_Message_Assembly_NewChipTakeFailed>
@@ -111,7 +133,8 @@
   <BDP_Message_TriggerLoadout_Active>使用中</BDP_Message_TriggerLoadout_Active>
   <BDP_Message_TriggerLoadout_Standby>待命</BDP_Message_TriggerLoadout_Standby>
   <BDP_Message_TriggerLoadout_Disabled>不可用：{0}</BDP_Message_TriggerLoadout_Disabled>
-  <BDP_Message_TriggerLoadout_Binding>关联：与{0} {1}同步，请操作主手槽</BDP_Message_TriggerLoadout_Binding>
+  <!-- 成对芯片的绑定关系在根槽和镜像槽提示中使用相同文本。 -->
+  <BDP_Message_TriggerLoadout_Binding>成对关联：{0}槽位 {1} ↔ {2}槽位 {3}</BDP_Message_TriggerLoadout_Binding>
   <BDP_Message_TriggerLoadout_Chip>芯片：{0}</BDP_Message_TriggerLoadout_Chip>
   <BDP_Message_TriggerLoadout_State>状态：{0}</BDP_Message_TriggerLoadout_State>
   <BDP_Message_TriggerLoadout_Action>操作：{0}</BDP_Message_TriggerLoadout_Action>

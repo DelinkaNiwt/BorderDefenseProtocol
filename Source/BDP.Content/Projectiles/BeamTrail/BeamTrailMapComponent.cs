@@ -12,6 +12,32 @@ namespace BDP.Content.Projectiles.BeamTrail
     public sealed class BeamTrailMapComponent : MapComponent
     {
         /// <summary>
+        /// 只对短采样段启用绘制阶段合并。
+        /// 超过该长度的线段保持原有一段一绘制，避免改变高速弹的既有观感。
+        /// </summary>
+        private const float MaxCoalescedSegmentLength = 1.25f;
+
+        /// <summary>
+        /// 单次绘制最多合并的原始线段数量。
+        /// </summary>
+        private const int MaxVisualCoalesceSegments = 3;
+
+        /// <summary>
+        /// 允许合并的相邻线段最大转角。
+        /// </summary>
+        private const float VisualCoalesceAngleThreshold = 4f;
+
+        /// <summary>
+        /// 允许合并的相邻线段透明度最大差异。
+        /// </summary>
+        private const float VisualCoalesceOpacityDifference = 0.12f;
+
+        /// <summary>
+        /// 当前地图组件已经分配的拖尾顺序号。
+        /// </summary>
+        private int nextSequenceId;
+
+        /// <summary>
         /// 当前地图上的全部活动线段。
         /// 它们都是已经沉淀成历史痕迹的线段，会正常淡出并进入存档。
         /// </summary>
@@ -33,6 +59,27 @@ namespace BDP.Content.Projectiles.BeamTrail
         /// key 按贴图路径和绘制层区分；颜色由线段绘制时通过属性块注入。
         /// </summary>
         private readonly Dictionary<string, Material> materialCache = new Dictionary<string, Material>();
+
+        /// <summary>
+        /// 绘制阶段按投射物分组的历史线段缓存。
+        /// 它只用于当前帧的可视合并，不进入存档。
+        /// </summary>
+        private readonly Dictionary<string, List<BeamTrailSegment>> drawHistoryByProjectileId =
+            new Dictionary<string, List<BeamTrailSegment>>();
+
+        /// <summary>
+        /// 当前活体头段在渲染帧中的显示终点。
+        /// 它只服务视觉插值，不进入存档，也不参与投射物真实位置。
+        /// </summary>
+        private readonly Dictionary<string, Vector3> liveRenderEnds =
+            new Dictionary<string, Vector3>();
+
+        /// <summary>
+        /// 当前活体头段上一次执行渲染插值的帧号。
+        /// 防止同一帧被重复绘制时重复推进显示位置。
+        /// </summary>
+        private readonly Dictionary<string, int> liveRenderFrames =
+            new Dictionary<string, int>();
 
         /// <summary>
         /// 当前地图已经警告过的贴图路径。
@@ -126,6 +173,20 @@ namespace BDP.Content.Projectiles.BeamTrail
             }
 
             segment.Reset(start, end, appearance);
+            segment.OwnerProjectileThingId = projectileThingId;
+            if (liveRenderEnds.TryGetValue(projectileThingId, out Vector3 previousRenderEnd))
+            {
+                liveRenderEnds[projectileThingId] = ProjectPointOntoSegment(
+                    previousRenderEnd,
+                    segment.Start,
+                    segment.End);
+            }
+            else
+            {
+                liveRenderEnds[projectileThingId] = segment.Start;
+            }
+
+            liveRenderFrames.Remove(projectileThingId);
         }
 
         /// <summary>
@@ -143,6 +204,42 @@ namespace BDP.Content.Projectiles.BeamTrail
             }
 
             liveSegmentsByProjectileId.Remove(projectileThingId);
+            liveRenderEnds.Remove(projectileThingId);
+            liveRenderFrames.Remove(projectileThingId);
+            segment.SequenceId = ++nextSequenceId;
+            activeSegments.Add(segment);
+        }
+
+        /// <summary>
+        /// 在投射物终止时固化最后活动头段。
+        /// 终点来自宿主提供的视觉终点，不从目标语义重新构造线段。
+        /// </summary>
+        /// <param name="projectileThingId">目标投射物实体标识。</param>
+        /// <param name="terminalPosition">宿主提供的视觉终止位置。</param>
+        internal void FinalizeLiveSegment(string projectileThingId, Vector3 terminalPosition)
+        {
+            if (string.IsNullOrWhiteSpace(projectileThingId)
+                || !liveSegmentsByProjectileId.TryGetValue(projectileThingId, out BeamTrailSegment segment)
+                || segment == null)
+            {
+                return;
+            }
+
+            Vector3 normalizedTerminalPosition = terminalPosition.Yto0();
+            if ((normalizedTerminalPosition - segment.Start).MagnitudeHorizontal() <= 0.0001f)
+            {
+                liveSegmentsByProjectileId.Remove(projectileThingId);
+                liveRenderEnds.Remove(projectileThingId);
+                liveRenderFrames.Remove(projectileThingId);
+                pool.Push(segment);
+                return;
+            }
+
+            segment.End = normalizedTerminalPosition;
+            liveSegmentsByProjectileId.Remove(projectileThingId);
+            liveRenderEnds.Remove(projectileThingId);
+            liveRenderFrames.Remove(projectileThingId);
+            segment.SequenceId = ++nextSequenceId;
             activeSegments.Add(segment);
         }
 
@@ -160,6 +257,8 @@ namespace BDP.Content.Projectiles.BeamTrail
             }
 
             liveSegmentsByProjectileId.Remove(projectileThingId);
+            liveRenderEnds.Remove(projectileThingId);
+            liveRenderFrames.Remove(projectileThingId);
             if (segment != null)
             {
                 pool.Push(segment);
@@ -219,15 +318,35 @@ namespace BDP.Content.Projectiles.BeamTrail
             }
 
             CellRect visibleRect = Find.CameraDriver.CurrentViewRect.ExpandedBy(2);
+            drawHistoryByProjectileId.Clear();
             for (int i = 0; i < activeSegments.Count; i++)
             {
                 BeamTrailSegment segment = activeSegments[i];
-                DrawSegmentIfVisible(segment, visibleRect);
+                if (segment == null || string.IsNullOrWhiteSpace(segment.OwnerProjectileThingId))
+                {
+                    DrawSegmentIfVisible(segment, visibleRect);
+                    continue;
+                }
+
+                if (!drawHistoryByProjectileId.TryGetValue(
+                    segment.OwnerProjectileThingId,
+                    out List<BeamTrailSegment> historySegments))
+                {
+                    historySegments = new List<BeamTrailSegment>();
+                    drawHistoryByProjectileId.Add(segment.OwnerProjectileThingId, historySegments);
+                }
+
+                historySegments.Add(segment);
             }
 
-            foreach (BeamTrailSegment segment in liveSegmentsByProjectileId.Values)
+            foreach (List<BeamTrailSegment> historySegments in drawHistoryByProjectileId.Values)
             {
-                DrawSegmentIfVisible(segment, visibleRect);
+                DrawHistorySegments(historySegments, visibleRect);
+            }
+
+            foreach (KeyValuePair<string, BeamTrailSegment> liveEntry in liveSegmentsByProjectileId)
+            {
+                DrawLiveSegmentIfVisible(liveEntry.Key, liveEntry.Value, visibleRect);
             }
         }
 
@@ -247,6 +366,18 @@ namespace BDP.Content.Projectiles.BeamTrail
 
                 materialCache.Clear();
                 warnedTexturePaths.Clear();
+                nextSequenceId = 0;
+                drawHistoryByProjectileId.Clear();
+                liveRenderEnds.Clear();
+                liveRenderFrames.Clear();
+                for (int i = 0; i < activeSegments.Count; i++)
+                {
+                    BeamTrailSegment segment = activeSegments[i];
+                    if (segment != null && segment.SequenceId > nextSequenceId)
+                    {
+                        nextSequenceId = segment.SequenceId;
+                    }
+                }
                 liveSegmentsByProjectileId.Clear();
                 RegisterSelfToCache();
                 if (Prefs.DevMode)
@@ -270,6 +401,9 @@ namespace BDP.Content.Projectiles.BeamTrail
             }
 
             liveSegmentsByProjectileId.Clear();
+            drawHistoryByProjectileId.Clear();
+            liveRenderEnds.Clear();
+            liveRenderFrames.Clear();
         }
 
         /// <summary>
@@ -318,6 +452,11 @@ namespace BDP.Content.Projectiles.BeamTrail
         /// <returns>为真表示值得继续绘制。</returns>
         private static bool IsPotentiallyVisible(BeamTrailSegment segment, CellRect visibleRect)
         {
+            if (segment == null)
+            {
+                return false;
+            }
+
             float halfWidth = Mathf.Max(0.01f, segment.TrailWidth) * 0.5f;
             float minX = Mathf.Min(segment.Start.x, segment.End.x) - halfWidth;
             float maxX = Mathf.Max(segment.Start.x, segment.End.x) + halfWidth;
@@ -328,6 +467,293 @@ namespace BDP.Content.Projectiles.BeamTrail
                 && minX <= visibleRect.maxX + 1f
                 && maxZ >= visibleRect.minZ
                 && minZ <= visibleRect.maxZ + 1f;
+        }
+
+        /// <summary>
+        /// 判断指定绘制端点的覆盖范围是否与当前视口相交。
+        /// </summary>
+        /// <param name="start">绘制起点。</param>
+        /// <param name="end">绘制终点。</param>
+        /// <param name="width">绘制宽度。</param>
+        /// <param name="visibleRect">当前可见范围。</param>
+        /// <returns>为真表示值得继续绘制。</returns>
+        private static bool IsPotentiallyVisible(
+            Vector3 start,
+            Vector3 end,
+            float width,
+            CellRect visibleRect)
+        {
+            float halfWidth = Mathf.Max(0.01f, width) * 0.5f;
+            float minX = Mathf.Min(start.x, end.x) - halfWidth;
+            float maxX = Mathf.Max(start.x, end.x) + halfWidth;
+            float minZ = Mathf.Min(start.z, end.z) - halfWidth;
+            float maxZ = Mathf.Max(start.z, end.z) + halfWidth;
+
+            return maxX >= visibleRect.minX
+                && minX <= visibleRect.maxX + 1f
+                && maxZ >= visibleRect.minZ
+                && minZ <= visibleRect.maxZ + 1f;
+        }
+
+        /// <summary>
+        /// 按投射物和时间顺序绘制历史拖尾，并把近共线的短段临时合并。
+        /// 原始线段仍独立推进寿命，合并只存在于当前绘制帧。
+        /// </summary>
+        /// <param name="historySegments">同一投射物的历史线段。</param>
+        /// <param name="visibleRect">当前可见范围。</param>
+        private void DrawHistorySegments(
+            List<BeamTrailSegment> historySegments,
+            CellRect visibleRect)
+        {
+            if (historySegments == null || historySegments.Count == 0)
+            {
+                return;
+            }
+
+            if (historySegments.Count > 1)
+            {
+                historySegments.Sort(
+                    (left, right) => left.SequenceId.CompareTo(right.SequenceId));
+            }
+
+            int groupStartIndex = 0;
+            while (groupStartIndex < historySegments.Count)
+            {
+                BeamTrailSegment first = historySegments[groupStartIndex];
+                BeamTrailSegment last = first;
+                float groupOpacity = first.ResolveOpacity();
+                float previousOpacity = groupOpacity;
+                int groupEndIndex = groupStartIndex + 1;
+
+                while (groupEndIndex < historySegments.Count
+                    && groupEndIndex - groupStartIndex < MaxVisualCoalesceSegments)
+                {
+                    BeamTrailSegment next = historySegments[groupEndIndex];
+                    if (!CanCoalesce(last, next, previousOpacity, out float nextOpacity))
+                    {
+                        break;
+                    }
+
+                    last = next;
+                    groupOpacity = Mathf.Min(groupOpacity, nextOpacity);
+                    previousOpacity = nextOpacity;
+                    groupEndIndex++;
+                }
+
+                if (groupEndIndex - groupStartIndex == 1)
+                {
+                    DrawSegmentIfVisible(first, visibleRect);
+                }
+                else
+                {
+                    DrawCoalescedSegmentIfVisible(
+                        first,
+                        last,
+                        groupOpacity,
+                        visibleRect);
+                }
+
+                groupStartIndex = groupEndIndex;
+            }
+        }
+
+        /// <summary>
+        /// 判断两个相邻历史段是否可以在当前帧合并绘制。
+        /// </summary>
+        /// <param name="previous">前一条历史线段。</param>
+        /// <param name="next">后一条历史线段。</param>
+        /// <param name="previousOpacity">前一条线段的透明度。</param>
+        /// <param name="nextOpacity">后一条线段的透明度。</param>
+        /// <returns>为真表示两条线段可以临时合并。</returns>
+        private static bool CanCoalesce(
+            BeamTrailSegment previous,
+            BeamTrailSegment next,
+            float previousOpacity,
+            out float nextOpacity)
+        {
+            nextOpacity = 0f;
+            if (previous == null
+                || next == null
+                || previous.SequenceId <= 0
+                || next.SequenceId != previous.SequenceId + 1
+                || previous.OwnerProjectileThingId != next.OwnerProjectileThingId)
+            {
+                return false;
+            }
+
+            Vector3 previousDirection = previous.End - previous.Start;
+            Vector3 nextDirection = next.End - next.Start;
+            float previousLength = previousDirection.MagnitudeHorizontal();
+            float nextLength = nextDirection.MagnitudeHorizontal();
+            if (previousLength <= 0.0001f
+                || nextLength <= 0.0001f
+                || previousLength > MaxCoalescedSegmentLength
+                || nextLength > MaxCoalescedSegmentLength
+                || (next.Start - previous.End).MagnitudeHorizontal() > 0.05f)
+            {
+                return false;
+            }
+
+            float angle = Vector3.Angle(previousDirection.Yto0(), nextDirection.Yto0());
+            if (angle > VisualCoalesceAngleThreshold)
+            {
+                return false;
+            }
+
+            nextOpacity = next.ResolveOpacity();
+            return Mathf.Abs(nextOpacity - previousOpacity)
+                <= VisualCoalesceOpacityDifference;
+        }
+
+        /// <summary>
+        /// 绘制一组已通过安全条件的临时合并线段。
+        /// 合并透明度取组内最低值，确保不会比最旧原始段更亮或更难消失。
+        /// </summary>
+        /// <param name="first">合并组首段。</param>
+        /// <param name="last">合并组末段。</param>
+        /// <param name="opacity">合并组使用的透明度。</param>
+        /// <param name="visibleRect">当前可见范围。</param>
+        private void DrawCoalescedSegmentIfVisible(
+            BeamTrailSegment first,
+            BeamTrailSegment last,
+            float opacity,
+            CellRect visibleRect)
+        {
+            if (first == null
+                || last == null
+                || !IsPotentiallyVisible(first.Start, last.End, first.TrailWidth, visibleRect))
+            {
+                return;
+            }
+
+            Material outerMaterial = ResolveMaterial(first.TrailTexPath, false);
+            if (outerMaterial == null)
+            {
+                return;
+            }
+
+            first.DrawTransient(outerMaterial, first.Start, last.End, opacity);
+            if (first.HasTrailCore)
+            {
+                int outerRenderQueue = Mathf.Max(3000, outerMaterial.renderQueue);
+                Material coreMaterial = ResolveMaterial(
+                    first.TrailTexPath,
+                    true,
+                    outerRenderQueue + 1);
+                first.DrawCoreTransient(coreMaterial, first.Start, last.End, opacity);
+            }
+        }
+
+        /// <summary>
+        /// 绘制一个经过渲染插值的活体头段。
+        /// 插值只改变当前帧的显示终点，不改变投射物真实终点。
+        /// </summary>
+        /// <param name="projectileThingId">目标投射物实体标识。</param>
+        /// <param name="segment">当前活体头段。</param>
+        /// <param name="visibleRect">当前可见范围。</param>
+        private void DrawLiveSegmentIfVisible(
+            string projectileThingId,
+            BeamTrailSegment segment,
+            CellRect visibleRect)
+        {
+            if (segment == null)
+            {
+                return;
+            }
+
+            Vector3 drawEnd = ResolveLiveDrawEnd(projectileThingId, segment);
+            if (!IsPotentiallyVisible(segment.Start, drawEnd, segment.TrailWidth, visibleRect))
+            {
+                return;
+            }
+
+            Material outerMaterial = ResolveMaterial(segment.TrailTexPath, false);
+            if (outerMaterial == null)
+            {
+                return;
+            }
+
+            float opacity = segment.ResolveOpacity();
+            segment.DrawTransient(outerMaterial, segment.Start, drawEnd, opacity);
+            if (segment.HasTrailCore)
+            {
+                int outerRenderQueue = Mathf.Max(3000, outerMaterial.renderQueue);
+                Material coreMaterial = ResolveMaterial(
+                    segment.TrailTexPath,
+                    true,
+                    outerRenderQueue + 1);
+                segment.DrawCoreTransient(coreMaterial, segment.Start, drawEnd, opacity);
+            }
+        }
+
+        /// <summary>
+        /// 计算活体头段当前帧的显示终点。
+        /// 使用原版实时帧间隔推进到最近的真实样本，不把插值结果写回飞行状态。
+        /// </summary>
+        /// <param name="projectileThingId">目标投射物实体标识。</param>
+        /// <param name="segment">当前活体头段。</param>
+        /// <returns>当前帧实际绘制的终点。</returns>
+        private Vector3 ResolveLiveDrawEnd(
+            string projectileThingId,
+            BeamTrailSegment segment)
+        {
+            if (!liveRenderEnds.TryGetValue(projectileThingId, out Vector3 renderEnd))
+            {
+                renderEnd = segment.Start;
+            }
+
+            int frameCount = RealTime.frameCount;
+            if (liveRenderFrames.TryGetValue(projectileThingId, out int lastFrame)
+                && lastFrame == frameCount)
+            {
+                return renderEnd;
+            }
+
+            liveRenderFrames[projectileThingId] = frameCount;
+            float tickRateMultiplier = Find.TickManager != null
+                ? Mathf.Max(0f, Find.TickManager.TickRateMultiplier)
+                : 1f;
+            float frameProgress = Mathf.Clamp01(RealTime.deltaTime * 60f * tickRateMultiplier);
+            if (Find.TickManager != null && Find.TickManager.TicksThisFrame > 1)
+            {
+                frameProgress = 1f;
+            }
+
+            Vector3 targetEnd = segment.End;
+            float sampleLength = (targetEnd - segment.Start).MagnitudeHorizontal();
+            renderEnd = Vector3.MoveTowards(
+                renderEnd,
+                targetEnd,
+                sampleLength * frameProgress);
+            renderEnd = ProjectPointOntoSegment(renderEnd, segment.Start, targetEnd);
+            liveRenderEnds[projectileThingId] = renderEnd;
+            return renderEnd;
+        }
+
+        /// <summary>
+        /// 把上一帧活体头段终点投影到本次真实样本线段上。
+        /// 这样追踪方向变化时不会把旧方向的插值点带进新线段。
+        /// </summary>
+        /// <param name="point">待投影点。</param>
+        /// <param name="start">当前线段起点。</param>
+        /// <param name="end">当前线段终点。</param>
+        /// <returns>位于当前线段上的投影点。</returns>
+        private static Vector3 ProjectPointOntoSegment(
+            Vector3 point,
+            Vector3 start,
+            Vector3 end)
+        {
+            Vector3 direction = (end - start).Yto0();
+            float lengthSquared = direction.sqrMagnitude;
+            if (lengthSquared <= 0.0001f)
+            {
+                return start;
+            }
+
+            float progress = Vector3.Dot(
+                (point - start).Yto0(),
+                direction) / lengthSquared;
+            return Vector3.Lerp(start, end, Mathf.Clamp01(progress));
         }
 
         /// <summary>

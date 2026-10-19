@@ -137,10 +137,14 @@ namespace BDP.Core.AttackExecution
 
         /// <summary>
         /// 尝试为原版自动远程入口读取表达系统选出的默认远程 formal host 壳。
-        /// 自动战斗继续使用原版持续攻击会话，但入口选择不再依赖原版 PrimaryVerb 候选链。
+        /// 这里只读已发布结果，不创建会话、不因旧目标清空武器能力；会话准备留到实际起手。
         /// target 用于单侧回退场景下的射程感知主攻选择；为 null 时跳过。
         /// </summary>
-        public static bool TryGetAutoRangedVerb(Pawn pawn, bool allowManualCastWeapons, Thing target, out Verb verb)
+        public static bool TryGetAutoRangedVerb(
+            Pawn pawn,
+            bool allowManualCastWeapons,
+            Thing target,
+            out Verb verb)
         {
             verb = null;
             // 对齐原版 Pawn.TryStartAttack 与自动攻击门槛：暴力已禁用时，
@@ -156,8 +160,8 @@ namespace BDP.Core.AttackExecution
                     pawn,
                     WeaponExpressionMode.Ranged,
                     target,
-                    out TriggerCombatProjectionState projection,
-                    out FormalExpressionResult result,
+                    out _,
+                    out _,
                     out Verb rangedVerb))
             {
                 return false;
@@ -166,35 +170,6 @@ namespace BDP.Core.AttackExecution
             if (!PassesVanillaManualAutoGate(pawn, rangedVerb, allowManualCastWeapons))
             {
                 return false;
-            }
-
-            if (rangedVerb is BdpVerb_Shoot shootVerb)
-            {
-                if (!shootVerb.CanAcceptAutoRangedEntryStaging())
-                {
-                    verb = rangedVerb;
-                    return true;
-                }
-
-                AttackSessionToken previousToken = shootVerb.HostSessionToken != null
-                    ? shootVerb.HostSessionToken.Clone()
-                    : null;
-                _ = previousToken;
-                RangedAttackModuleSession residentSession = shootVerb.HostModuleSession;
-                RangedAttackModuleSession stagedSession = CreateRangedModuleSession(pawn, result);
-                // 自动远程首发也必须带上命中时刻的正式会话令牌，
-                // 否则 TryStartCastOn 内部的正式续射准备会把它当成过期会话直接拒绝。
-                AttackSessionToken token = AttackSessionToken.Create(
-                    pawn,
-                    result.Id,
-                    projection.ProjectionVersion);
-                shootVerb.StageEntryModuleSession(stagedSession);
-                // 自动查询链只准备下一次起手，不得覆盖仍在执行的正式会话令牌。
-                // 否则手动 job 结束时的代际清理会误判为非本代而跳过 Reset。
-                if (residentSession == null)
-                {
-                    shootVerb.HostSessionToken = token;
-                }
             }
 
             verb = rangedVerb;
@@ -227,11 +202,12 @@ namespace BDP.Core.AttackExecution
         }
 
         /// <summary>
-        /// 尝试把原版自动近战起手翻译成正式攻击请求。
-        /// 只有表达系统给出合法 PrimaryMelee 时才接管；否则完全放行原版近战池。
+        /// 为原版的一次近战请求准备默认近战攻击，原版仍管理任务、次数、期限和突袭参数。
+        /// 这里只绑定有限攻击上下文，不调用执行器派工，避免把一刻等待替换成一刻近战的循环。
         /// </summary>
-        public static bool TryExecuteAutoMelee(Pawn pawn, Thing target)
+        public static bool TryPrepareAutoMelee(Pawn pawn, Thing target, out Verb verb)
         {
+            verb = null;
             if (pawn == null
                 || target == null
                 || !target.Spawned
@@ -240,6 +216,13 @@ namespace BDP.Core.AttackExecution
                 return false;
             }
 
+            TriggerBodyVerbHostManager hosts = TriggerSurfaceAccess.ResolveComp(pawn)?.VerbHostManager;
+            if (hosts != null && hosts.TryPrepareAutomaticMeleeContinuation(target, out verb))
+            {
+                return true;
+            }
+
+            Job sourceJob = pawn.CurJob;
             if (!TryResolveAutoPrimaryVerb(
                     pawn,
                     WeaponExpressionMode.Melee,
@@ -252,7 +235,7 @@ namespace BDP.Core.AttackExecution
             }
 
             RangedAttackModuleSession moduleSession = CreateRangedModuleSession(pawn, result);
-            return ResolveEntry(pawn).TryExecute(new AttackExecutionRequest
+            if (!ResolveEntry(pawn).TryPreparePlan(new AttackExecutionRequest
             {
                 Pawn = pawn,
                 SessionToken = AttackSessionToken.Create(
@@ -262,8 +245,17 @@ namespace BDP.Core.AttackExecution
                 AttackContextSnapshot = CreateAttackContextSnapshot(moduleSession),
                 Target = target,
                 Reason = AttackExecutionReason.AutoMelee,
-                DispatchIntent = AttackDispatchIntent.AutoAttackOrder
-            });
+                DispatchIntent = AttackDispatchIntent.ImmediateCast
+            }, out AttackExecutionPreparedContext prepared)
+                || !MeleeAttackExecutionContext.TryCreate(prepared, out MeleeAttackExecutionContext context))
+            {
+                return false;
+            }
+
+            MeleeAttackExecutor.BindVerbContext(context);
+            (context.Verb as BdpVerb_MeleeAttackDamage)?.BindAutomaticContinuation(sourceJob, target);
+            verb = context.Verb;
+            return verb != null;
         }
 
         /// <summary>
@@ -424,7 +416,7 @@ namespace BDP.Core.AttackExecution
                 return null;
 
             var candidates = snapshot.Results
-                .Where(r => r.ResultKind == ExpressionResultKind.Verb
+                .Where(r => r.OutputChannel == ExpressionOutputChannel.Verb
                     && r.IsAvailable
                     && r.WeaponMode == WeaponExpressionMode.Ranged
                     && r.CompositeKind == CompositeExpressionKind.None
@@ -470,7 +462,7 @@ namespace BDP.Core.AttackExecution
             foreach (FormalExpressionResult r in snapshot.Results)
             {
                 if (r == null
-                    || r.ResultKind != ExpressionResultKind.Verb
+                    || r.OutputChannel != ExpressionOutputChannel.Verb
                     || !r.IsAvailable
                     || r.WeaponMode != WeaponExpressionMode.Ranged
                     || r.CompositeKind != CompositeExpressionKind.None

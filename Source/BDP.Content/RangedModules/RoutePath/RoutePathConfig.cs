@@ -10,14 +10,26 @@ namespace BDP.Content.RangedModules.RoutePath
         /// <summary>允许玩家追加的最大锚点数量。</summary>
         public int MaxAnchors = 8;
 
+        /// <summary>原版每格精度的能力定标参照，0.99对应健康20级常态。</summary>
+        public float AimReferenceAccuracy = 0.99f;
+
+        /// <summary>参照能力下的误差压缩强度；默认1保持其它路线使用者中性。</summary>
+        public float AimReferenceErrorPower = 1f;
+
+        /// <summary>误差压缩强度随实际射击能力成长的指数。</summary>
+        public float AimErrorGrowthExponent = 1.58275869f;
+
+        /// <summary>最后一个手动锚点到达后释放导航控制。</summary>
+        public bool ReleaseControlAfterLastAnchor;
+
+        /// <summary>零锚点允许后续模块决定直射或越顶，不调用自动寻路。</summary>
+        public bool AllowUnroutedFinalTarget;
+
         /// <summary>是否允许把地面格作为最终目标。</summary>
         public bool AllowGroundFinal = true;
 
         /// <summary>是否允许把 Thing 作为最终目标。</summary>
         public bool AllowThingFinal = true;
-
-        /// <summary>到达阶段用于匹配段末的容差半径。</summary>
-        public float ArrivalTolerance = 0.35f;
 
         /// <summary>中间续段相对名义锚点的最大散布半径。</summary>
         public float IntermediateSpreadRadius = 0.625f;
@@ -27,9 +39,6 @@ namespace BDP.Content.RangedModules.RoutePath
 
         /// <summary>原版精度达到最高时仍保留的散布比例。</summary>
         public float HighAccuracySpreadScale = 0.25f;
-
-        /// <summary>候选散布不安全时允许折半收缩的次数。</summary>
-        public int SpreadSafetyShrinkSteps = 4;
 
         /// <summary>是否允许零手动锚点时尝试自动绕障路径。</summary>
         public bool EnableAutoRoute = true;
@@ -49,18 +58,22 @@ namespace BDP.Content.RangedModules.RoutePath
             return CloneTyped();
         }
 
+        /// <summary>复制全部路线参数。</summary>
         public RoutePathConfig CloneTyped()
         {
             return new RoutePathConfig
             {
                 MaxAnchors = MaxAnchors,
+                AimReferenceAccuracy = AimReferenceAccuracy,
+                AimReferenceErrorPower = AimReferenceErrorPower,
+                AimErrorGrowthExponent = AimErrorGrowthExponent,
+                ReleaseControlAfterLastAnchor = ReleaseControlAfterLastAnchor,
+                AllowUnroutedFinalTarget = AllowUnroutedFinalTarget,
                 AllowGroundFinal = AllowGroundFinal,
                 AllowThingFinal = AllowThingFinal,
-                ArrivalTolerance = ArrivalTolerance,
                 IntermediateSpreadRadius = IntermediateSpreadRadius,
                 FinalSpreadRadius = FinalSpreadRadius,
                 HighAccuracySpreadScale = HighAccuracySpreadScale,
-                SpreadSafetyShrinkSteps = SpreadSafetyShrinkSteps,
                 EnableAutoRoute = EnableAutoRoute,
                 AutoRouteMaxDepth = AutoRouteMaxDepth,
                 AutoRouteAnchorsPerWall = AutoRouteAnchorsPerWall,

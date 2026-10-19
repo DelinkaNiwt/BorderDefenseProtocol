@@ -8,7 +8,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.Defs
     /// </summary>
     public sealed class ChipProfessionDef : Def
     {
-        /// <summary>当前职业允许选择的动作原生职业。</summary>
-        public List<ChipProfessionDef> acceptedActionProfessions;
+        /// <summary>当前职业允许选择的芯片功能模板原生职业。</summary>
+        public List<ChipProfessionDef> acceptedSourceProfessions;
     }
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 制造面板芯片功能模板。 -->
+  <BDP_ChipFunction_Asteroid.label>小行星</BDP_ChipFunction_Asteroid.label>
+  <BDP_ChipFunction_Viper.label>毒蛇</BDP_ChipFunction_Viper.label>
+  <BDP_ChipFunction_Hound.label>猎犬</BDP_ChipFunction_Hound.label>
+  <BDP_ChipFunction_Alektor.label>卵之冠</BDP_ChipFunction_Alektor.label>
+  <BDP_ChipFunction_Kogetsu.label>弧月</BDP_ChipFunction_Kogetsu.label>
+  <BDP_ChipFunction_Senku.label>旋空</BDP_ChipFunction_Senku.label>
+  <BDP_ChipFunction_EnergyShield.label>护盾</BDP_ChipFunction_EnergyShield.label>
+  <BDP_ChipFunction_EnergyShield_Auto.label>常驻型自动能量护盾</BDP_ChipFunction_EnergyShield_Auto.label>
+  <BDP_ChipFunction_EmergencyEscape.label>紧急脱离</BDP_ChipFunction_EmergencyEscape.label>
+  <BDP_ChipFunction_Toki.label>朱鹮</BDP_ChipFunction_Toki.label>
+  <BDP_ChipFunction_Grasshopper.label>蚱蜢</BDP_ChipFunction_Grasshopper.label>
+  <BDP_ChipFunction_Chameleon.label>变色龙</BDP_ChipFunction_Chameleon.label>
+  <BDP_ChipFunction_Fujin.label>风刃</BDP_ChipFunction_Fujin.label>
+  <BDP_ChipFunction_FujinRangedStrike.label>风刃·远程斩击</BDP_ChipFunction_FujinRangedStrike.label>
+  <!-- 推进器芯片功能。 -->
+  <BDP_ChipFunction_Thruster.label>推进器</BDP_ChipFunction_Thruster.label>
+  <BDP_ChipFunction_Thruster.description>提供地面冲刺推进能力，作为光魂推进组合的配件来源。</BDP_ChipFunction_Thruster.description>
+  <!-- 浮空芯片。 -->
+  <BDP_ChipFunction_Floating.label>浮空</BDP_ChipFunction_Floating.label>
+  <BDP_ChipFunction_Floating.description>提供可控的浮空移动能力。征召后可在关闭浮空、仅移动时浮空和始终浮空之间切换；无法在屋顶区域飞行。</BDP_ChipFunction_Floating.description>
+</LanguageData>

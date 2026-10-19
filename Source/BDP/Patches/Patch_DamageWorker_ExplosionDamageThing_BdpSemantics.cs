@@ -1,4 +1,8 @@
 using System;
+using System.Linq;
+using System.Reflection.Emit;
+using BDP.Support.Diagnostics;
+using BDP.Core.CombatLog;
 using BDP.Core.Projectiles;
 using BDP.Core.Projectiles.RangedFlightProtocol.Effects;
 using BDP.Core.Projectiles.RangedFlightProtocol.Impact;
@@ -12,7 +16,7 @@ namespace BDP.Patches
 {
     /// <summary>
     /// 爆炸对具体目标造成伤害前的最小接线。
-    /// 它只负责把挂在 Explosion 上的语义重新压回当前伤害作用域。
+    /// 它把实例绑定的来源传给单次真实承伤，并收集本目标的处理结果。
     /// </summary>
     [HarmonyPatch(typeof(DamageWorker), "ExplosionDamageThing")]
     /// <summary>
@@ -20,8 +24,11 @@ namespace BDP.Patches
     /// </summary>
     public static class Patch_DamageWorker_ExplosionDamageThing_BdpSemantics
     {
+        /// <summary>仅保存当前爆炸逐目标结果归属；不暴露攻击语义或盾策略。</summary>
+        [ThreadStatic] private static ImpactDamageScopeState currentScope;
+
         /// <summary>
-        /// 爆炸真正准备对某个目标调用 `TakeDamage` 前，把挂在 Explosion 上的语义压回当前线程作用域。
+        /// 在原版逐目标处理前准备结果归属；攻击来源只在实际承伤入口恢复。
         /// </summary>
         public static bool Prefix(
             Explosion explosion,
@@ -32,12 +39,10 @@ namespace BDP.Patches
             out ImpactDamageScopeState __state)
         {
             ExplosionImpactDispatchContext impactContext = BdpDamageSemanticBridge.GetExplosionImpactContext(explosion);
-            __state = new ImpactDamageScopeState(
-                SemanticRuntimeScope.Push(BdpDamageSemanticBridge.GetExplosionContext(explosion)),
-                ProjectileInteractionPolicyScope.Push(impactContext != null ? impactContext.InteractionPolicy : null),
-                impactContext,
-                t,
-                cell);
+            __state = null;
+            if (impactContext == null && BdpDamageSemanticBridge.GetExplosionContext(explosion) == null)
+                return true;
+            __state = new ImpactDamageScopeState(explosion, impactContext, t, cell);
 
             if (impactContext == null || t == null || t.def == null || damagedThings == null)
             {
@@ -79,6 +84,14 @@ namespace BDP.Patches
             if (impactContext.SuppressCurrentAreaDamage)
             {
                 __state.Resolution = ResolveSuppressedAreaImpact(impactContext, t);
+                if (t is Pawn && __state.Resolution != null)
+                {
+                    // 原版方法被取消时不会产生逐目标条目，只在已接受的真实角色目标补一条。
+                    __state.BattleLogEntry = BattleLogEntryFactoryAccess.CreateExplosionImpact(
+                        impactContext.Instigator, t, explosion.weapon, explosion.projectile,
+                        impactContext.DamageDef, impactContext.SemanticContext);
+                    Find.BattleLog.Add(__state.BattleLogEntry);
+                }
             }
 
             return !impactContext.SuppressCurrentAreaDamage;
@@ -94,9 +107,9 @@ namespace BDP.Patches
                 return;
             }
 
-            DamageResolution resolution = __state.Resolution != null
-                ? __state.Resolution
-                : DamageResolutionRuntime.ConsumeLast(__state.TargetThing);
+            DamageResolution resolution = __state.Resolution;
+            LogEntry_DamageResult log = __state.BattleLogEntry ?? resolution?.BattleLogEntry;
+            BattleLogEntryFactoryAccess.CompleteDamageResult(log, resolution);
             if (resolution == null || resolution.IsShieldBlocked)
             {
                 return;
@@ -108,7 +121,7 @@ namespace BDP.Patches
                 return;
             }
 
-            ExecuteAreaEffects(__state.ImpactContext, __state.TargetThing, __state.TargetCell);
+            ExecuteAreaEffects(__state.ImpactContext, __state.TargetThing, __state.TargetCell, log);
         }
 
         /// <summary>
@@ -117,7 +130,8 @@ namespace BDP.Patches
         private static void ExecuteAreaEffects(
             ExplosionImpactDispatchContext impactContext,
             Thing targetThing,
-            IntVec3 targetCell)
+            IntVec3 targetCell,
+            LogEntry_DamageResult battleLogEntry)
         {
             if (impactContext == null || impactContext.ExtraEffects == null)
             {
@@ -129,6 +143,7 @@ namespace BDP.Patches
                 {
                     Source = AttackTargetEventSource.ProducedTarget,
                     TargetThing = targetThing,
+                    BattleLogEntry = battleLogEntry,
                     TargetCell = targetCell,
                     ExtraEffects = impactContext.ExtraEffects,
                     Map = targetThing.Map,
@@ -190,7 +205,7 @@ namespace BDP.Patches
             if (!DamageResolutionRuntime.TryProbeDamageInterception(
                 targetThing,
                 ref probeDamageInfo,
-                out absorbed))
+                out absorbed, impactContext.SemanticContext, impactContext.InteractionPolicy, impactContext))
             {
                 return DamageResolutionRuntime.CreateModuleInterception(targetThing);
             }
@@ -224,8 +239,47 @@ namespace BDP.Patches
             }
         }
 
+        /// <summary>只在真实 TakeDamage（承伤）调用点预定请求，避免日志或扩展回调提前消费来源。</summary>
+        [HarmonyTranspiler]
+        public static System.Collections.Generic.IEnumerable<CodeInstruction> Transpiler(
+            System.Collections.Generic.IEnumerable<CodeInstruction> instructions)
+        {
+            var code = instructions.ToList();
+            var takeDamage = AccessTools.Method(typeof(Thing), nameof(Thing.TakeDamage));
+            if (code.Count(item => item.Calls(takeDamage)) != 1)
+            {
+                BdpDiagnostics.Once("damage.boundary.explosion_anchor_missing",
+                    "BDP_DamageBoundaryPatchUnavailable".Translate());
+                return code;
+            }
+            int index = code.FindIndex(item => item.Calls(takeDamage));
+            CodeInstruction original = code[index];
+            CodeInstruction loadExplosion = new CodeInstruction(OpCodes.Ldarg_1);
+            loadExplosion.labels.AddRange(original.labels);
+            loadExplosion.blocks.AddRange(original.blocks);
+            code[index] = loadExplosion;
+            code.Insert(index + 1, new CodeInstruction(OpCodes.Call,
+                AccessTools.Method(typeof(Patch_DamageWorker_ExplosionDamageThing_BdpSemantics), nameof(ApplyExplosionDamage))));
+            return code;
+        }
+
+        /// <summary>保留普通爆炸原调用；BDP 爆炸以实例绑定的上下文恢复单个真实承伤。</summary>
+        public static DamageWorker.DamageResult ApplyExplosionDamage(Thing targetThing, DamageInfo damageInfo, Explosion explosion)
+        {
+            ExplosionImpactDispatchContext context = BdpDamageSemanticBridge.GetExplosionImpactContext(explosion);
+            ISemanticContext semantic = BdpDamageSemanticBridge.GetExplosionContext(explosion);
+            if (context == null && semantic == null)
+                return targetThing.TakeDamage(damageInfo);
+            DamageResolution resolution;
+            DamageWorker.DamageResult result = DamageResolutionRuntime.ApplyDamage(targetThing, damageInfo, out resolution,
+                context?.SemanticContext ?? semantic, context?.InteractionPolicy, context);
+            if (currentScope != null && currentScope.Explosion == explosion && currentScope.TargetThing == targetThing)
+                currentScope.Resolution = resolution;
+            return result;
+        }
+
         /// <summary>
-        /// 无论这次爆炸伤害是正常结束还是异常退出，都把这一小段临时语义作用域弹掉。
+        /// 无论正常结束还是异常退出，都清理本目标的临时结果归属。
         /// </summary>
         [HarmonyFinalizer]
         public static Exception Finalizer(ImpactDamageScopeState __state, Exception __exception)
@@ -235,12 +289,16 @@ namespace BDP.Patches
         }
 
         /// <summary>
-        /// 把语义作用域与投射物交互策略作用域作为一个可回收状态传递给 Harmony。
+        /// 把本次逐目标结果归属作为一个可回收状态传递给 Harmony。
         /// </summary>
         public sealed class ImpactDamageScopeState : IDisposable
         {
-            private readonly IDisposable semanticScope;
-            private readonly IDisposable interactionScope;
+            /// <summary>实际所属爆炸。</summary>
+            public Explosion Explosion { get; }
+            /// <summary>外层逐目标请求。</summary>
+            private readonly ImpactDamageScopeState previous;
+            /// <summary>保证异常出口与正常出口清理幂等。</summary>
+            private bool disposed;
 
             /// <summary>
             /// 当前范围上下文。
@@ -267,24 +325,31 @@ namespace BDP.Patches
             /// </summary>
             public DamageResolution Resolution { get; set; }
 
+            /// <summary>原版范围伤害被取消时补出的本次目标条目。</summary>
+            public LogEntry_DamageResult BattleLogEntry { get; set; }
+
+            /// <summary>构造仅存活于本次逐目标调用的作用域状态。</summary>
             public ImpactDamageScopeState(
-                IDisposable semanticScope,
-                IDisposable interactionScope,
+                Explosion explosion,
                 ExplosionImpactDispatchContext impactContext,
                 Thing targetThing,
                 IntVec3 targetCell)
             {
-                this.semanticScope = semanticScope;
-                this.interactionScope = interactionScope;
+                Explosion = explosion;
+                previous = currentScope;
+                currentScope = this;
                 ImpactContext = impactContext;
                 TargetThing = targetThing;
                 TargetCell = targetCell;
             }
 
+            /// <summary>退出本次目标调用，清理临时引用并恢复原作用域。</summary>
             public void Dispose()
             {
-                interactionScope?.Dispose();
-                semanticScope?.Dispose();
+                if (disposed) return;
+                disposed = true;
+                BattleLogEntry = null;
+                if (currentScope == this) currentScope = previous;
             }
         }
     }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 可整体移除的远程验收菜单与诊断。 -->
+  <BDP_RangedAcceptance_Menu>BDP：远程模块验收</BDP_RangedAcceptance_Menu>
+  <BDP_RangedAcceptance_Generate>生成并选中验收人物</BDP_RangedAcceptance_Generate>
+  <BDP_RangedAcceptance_Collapse>选中人物：崩解两击、分部位与失效验收（会移除手脚）</BDP_RangedAcceptance_Collapse>
+  <BDP_RangedAcceptance_Lead>选中人物：负重直击、范围、上限与恢复观察</BDP_RangedAcceptance_Lead>
+  <BDP_RangedAcceptance_NativeAction>选中人物：正常伤害部位对照（会造成伤口）</BDP_RangedAcceptance_NativeAction>
+  <BDP_RangedAcceptance_Watch>切换实际飞行与负重恢复观察</BDP_RangedAcceptance_Watch>
+  <BDP_RangedAcceptance_WatchState>[BDP远程验收] 观察已启用：{0}</BDP_RangedAcceptance_WatchState>
+  <BDP_RangedAcceptance_Generated>[BDP远程验收] 已生成并选中验收人物：{0}。后续验收动作会改变所选人物健康状态。</BDP_RangedAcceptance_Generated>
+  <BDP_RangedAcceptance_NeedPawn>[BDP远程验收] 请选中存活的验收人物。</BDP_RangedAcceptance_NeedPawn>
+  <BDP_RangedAcceptance_NeedParts>[BDP远程验收] 目标需要至少两处未缺失的手或脚。</BDP_RangedAcceptance_NeedParts>
+  <BDP_RangedAcceptance_Check>[BDP远程验收] {0}，通过：{1}</BDP_RangedAcceptance_Check>
+  <BDP_RangedAcceptance_FirstHitHalf>同部位首次命中后累积为二分之一</BDP_RangedAcceptance_FirstHitHalf>
+  <BDP_RangedAcceptance_SeparateParts>第二次移除第一部位，第二部位独立保留二分之一</BDP_RangedAcceptance_SeparateParts>
+  <BDP_RangedAcceptance_NoReselect>指定部位缺失后不重新随机选择</BDP_RangedAcceptance_NoReselect>
+  <BDP_RangedAcceptance_VanillaFallback>不挂选择模块时使用原版部位选择并生效</BDP_RangedAcceptance_VanillaFallback>
+  <BDP_RangedAcceptance_NoInjury>抑制伤害时不增加真实伤口</BDP_RangedAcceptance_NoInjury>
+  <BDP_RangedAcceptance_DirectWeight>直击增加百分之十负重</BDP_RangedAcceptance_DirectWeight>
+  <BDP_RangedAcceptance_AreaWeight>范围目标增加百分之一负重</BDP_RangedAcceptance_AreaWeight>
+  <BDP_RangedAcceptance_WeightCap>负重上限为一</BDP_RangedAcceptance_WeightCap>
+  <BDP_RangedAcceptance_Hit>[BDP远程验收] 效果包={0}，交付部位={1}，实际应用={2}</BDP_RangedAcceptance_Hit>
+  <BDP_RangedAcceptance_NativeResult>[BDP远程验收] 初始选择部位={0}，原版伤害结果最后部位={1}</BDP_RangedAcceptance_NativeResult>
+  <BDP_RangedAcceptance_Health>[BDP远程验收] 游戏刻={0}，状态={1}，实际部位={2}，层数={3}，最后命中刻={4}</BDP_RangedAcceptance_Health>
+  <BDP_RangedAcceptance_RouteState> 路线段={0}，已释放={1}；</BDP_RangedAcceptance_RouteState>
+  <BDP_RangedAcceptance_HomingState> 交接后首追踪段已建立={0}，阶段={1}，重锁次数={2}；</BDP_RangedAcceptance_HomingState>
+  <BDP_RangedAcceptance_PathState> 路径起点={0}，终点={1}；</BDP_RangedAcceptance_PathState>
+  <BDP_RangedAcceptance_Flight>[BDP远程验收] 游戏刻={0}，投射物={1}，{2}</BDP_RangedAcceptance_Flight>
+</LanguageData>

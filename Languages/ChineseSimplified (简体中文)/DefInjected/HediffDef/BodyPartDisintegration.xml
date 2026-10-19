@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 身体部位裂解标记名称与说明。 -->
+  <BDP_Hediff_BodyPartDisintegration.label>部位裂解标记</BDP_Hediff_BodyPartDisintegration.label>
+  <BDP_Hediff_BodyPartDisintegration.description>命中身体部位后叠加的裂解标记。每个部位独立累计，达到最大层数后移除该部位。</BDP_Hediff_BodyPartDisintegration.description>
+</LanguageData>

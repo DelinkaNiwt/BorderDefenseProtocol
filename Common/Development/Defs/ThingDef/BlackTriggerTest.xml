@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!-- 临时开发测试黑触发器；删除本文件即可整体移除。 -->
+  <ThingDef ParentName="BaseWeapon">
+    <defName>BDP_TriggerBody_BlackTest</defName>
+    <label>临时黑触发器测试体</label>
+    <description>用于验证黑触发器形成匹配、侧重选择、限时信件、生成事务和绑定流程的临时测试物品。</description>
+    <graphicData>
+      <texPath>Things/Equipment/Trigger/BDP_FujinTriggerBody</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <!-- 临时黑触发器测试体的原生科技档：超凡时代。 -->
+    <techLevel>Archotech</techLevel>
+    <!-- 测试体不可制造，仅保留重量与基础价值。 -->
+    <statBases><Mass>1.0</Mass><MarketValue>120</MarketValue></statBases>
+    <tools>
+      <li><label>敲击</label><capacities><li>Blunt</li></capacities><power>4</power><cooldownTime>2.0</cooldownTime></li>
+    </tools>
+    <tradeability>None</tradeability>
+    <modExtensions>
+      <li Class="BDP.Content.Trigger.Black.Formation.BlackTriggerFormationExtension">
+        <!-- 同一完整物品声明多条形成路线，用于验证去重和侧重分配。 -->
+        <formationRoutes>
+          <li>
+            <emphasis>BDP_BlackTriggerEmphasis_Frontline</emphasis>
+            <allOf><li><skill>Shooting</skill></li><li><skill>Melee</skill></li></allOf>
+          </li>
+          <li>
+            <emphasis>BDP_BlackTriggerEmphasis_Support</emphasis>
+            <allOf><li><skill>Medicine</skill></li></allOf>
+            <anyOfMinimum>1</anyOfMinimum>
+            <anyOf><li><record>OperationsPerformed</record></li><li><record>TimesTendedOther</record></li></anyOf>
+            <noneOf><li><record>AnimalsSlaughtered</record></li></noneOf>
+          </li>
+          <li>
+            <emphasis>BDP_BlackTriggerEmphasis_Precision</emphasis>
+            <anyOfMinimum>1</anyOfMinimum>
+            <anyOf><li><record>DamageDealt</record></li><li><record>KillsHumanlikes</record></li><li><record>ShotsFired</record></li></anyOf>
+          </li>
+        </formationRoutes>
+        <!-- 测试隐藏适应权重：Psychopath 匹配任意 degree，Beauty 只匹配 degree 2。 -->
+        <adaptedTraits>
+          <li>
+            <trait>Psychopath</trait>
+          </li>
+          <li>
+            <trait>Beauty</trait>
+            <degree>2</degree>
+          </li>
+        </adaptedTraits>
+        <!-- 测试可选 Anomaly 能力：未加载 Anomaly 时这些字符串声明自动跳过。 -->
+        <adaptedAbilities>
+          <li><abilityDefName>PsychicSlaughter</abilityDefName><sourcePackageId>ludeon.rimworld.anomaly</sourcePackageId></li>
+          <li><abilityDefName>ShapeFlesh</abilityDefName><sourcePackageId>ludeon.rimworld.anomaly</sourcePackageId></li>
+          <li><abilityDefName>TransmuteSteel</abilityDefName><sourcePackageId>ludeon.rimworld.anomaly</sourcePackageId></li>
+          <li><abilityDefName>ReleaseDeadlifeDust</abilityDefName><sourcePackageId>ludeon.rimworld.anomaly</sourcePackageId></li>
+          <li><abilityDefName>UnnaturalHealing</abilityDefName><sourcePackageId>ludeon.rimworld.anomaly</sourcePackageId></li>
+        </adaptedAbilities>
+        <!-- 测试适格：前三技能之一，或最低 Trion 潜力。 -->
+        <eligibilityGroups>
+          <li><anyOfMinimum>1</anyOfMinimum><anyOf><li><kind>SkillInTopThree</kind><skill>Shooting</skill></li><li><kind>SkillInTopThree</kind><skill>Melee</skill></li><li><kind>SkillInTopThree</kind><skill>Medicine</skill></li></anyOf></li>
+          <li><allOf><li><kind>MinimumTrionPotential</kind><minimumValue>0</minimumValue></li></allOf></li>
+        </eligibilityGroups>
+      </li>
+    </modExtensions>
+    <comps Inherit="False">
+      <li Class="CompProperties_Forbiddable" />
+      <!-- 按正式装载芯片合成触发体市场价值。 -->
+      <li Class="BDP.Content.Trigger.CompProperties_TriggerBodyMarketValue" />
+      <li Class="BDP.Content.Trigger.Black.Formation.CompProperties_BlackTriggerBiocodable" />
+      <li Class="BDP.Content.Trigger.Black.Formation.CompProperties_BlackTriggerImprint" />
+      <li Class="BDP.Core.Trigger.CompProperties_TriggerBody">
+        <triggerCategory>BDP_TriggerCategory_Black</triggerCategory><loadoutControlMode>PlayerNonConfigurable</loadoutControlMode><mainSlotCount>1</mainSlotCount><subSlotCount>0</subSlotCount><specialSlotCount>6</specialSlotCount>
+        <fixedLoadout>
+          <li><side>Special</side><slotNumber>1</slotNumber><chipDef>BDP_Chip_Custom</chipDef><initializationKey>BDP_ChipFunction_FujinRangedStrike</initializationKey></li>
+          <li><side>Special</side><slotNumber>2</slotNumber><chipDef>BDP_Chip_Custom</chipDef><initializationKey>BDP_ChipFunction_Fujin</initializationKey></li>
+        </fixedLoadout>
+      </li>
+      <li Class="BDP.Core.Trion.CompProperties_Trion"><baseMax>1000</baseMax><startPercent>1</startPercent><recoveryPerDay>0</recoveryPerDay></li>
+      <li Class="CompProperties_Styleable" />
+    </comps>
+  </ThingDef>
+</Defs>

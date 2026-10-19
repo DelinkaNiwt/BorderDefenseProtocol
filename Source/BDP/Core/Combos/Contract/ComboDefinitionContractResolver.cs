@@ -18,16 +18,18 @@ namespace BDP.Core.Combos
         public ComboDefinitionContract Resolve(ComboDef comboDef)
         {
             ComboDefinitionConfig config = comboDef != null ? comboDef.ToConfig() : null;
-            string firstSourceActionDefName = config != null ? config.firstSourceActionDefName : null;
-            string secondSourceActionDefName = config != null ? config.secondSourceActionDefName : null;
+            string firstSourceKey = config != null ? config.firstSourceKey : null;
+            string secondSourceKey = config != null ? config.secondSourceKey : null;
             return new ComboDefinitionContract
             {
                 Definition = comboDef,
                 Config = config,
-                FirstSourceActionDefName = firstSourceActionDefName,
-                SecondSourceActionDefName = secondSourceActionDefName,
+                FirstSourceKey = firstSourceKey,
+                SecondSourceKey = secondSourceKey,
                 FirstSourceAdmission = ResolveSourceAdmission(config?.FirstSourceAdmission),
                 SecondSourceAdmission = ResolveSourceAdmission(config?.SecondSourceAdmission),
+                FirstSourceScope = ResolveSourceScope(config?.FirstSourceScope),
+                SecondSourceScope = ResolveSourceScope(config?.SecondSourceScope),
                 RequireSameSourceVariant = config != null && config.RequireSameSourceVariant,
                 UseRequirements = config?.UseRequirements != null
                     ? new List<PawnRequirement>(config.UseRequirements).AsReadOnly()
@@ -57,6 +59,28 @@ namespace BDP.Core.Combos
                 AllowedSourceVariants = Copy(config.AllowedSourceVariants),
                 DeniedSourceVariants = Copy(config.DeniedSourceVariants)
             };
+        }
+
+        /// <summary>把可空来源范围配置复制为正式契约。</summary>
+        private static ComboSourceScopeContract ResolveSourceScope(
+            ComboSourceScopeConfig config)
+        {
+            if (config == null)
+            {
+                return null;
+            }
+
+            return new ComboSourceScopeContract
+            {
+                ModeKey = NormalizeScopeKey(config.ModeKey),
+                StanceKey = NormalizeScopeKey(config.StanceKey)
+            };
+        }
+
+        /// <summary>把空白范围键归一化为空值，保持通配语义稳定。</summary>
+        private static string NormalizeScopeKey(string key)
+        {
+            return string.IsNullOrWhiteSpace(key) ? null : key.Trim();
         }
 
         /// <summary>复制字符串列表并固定只读边界。</summary>

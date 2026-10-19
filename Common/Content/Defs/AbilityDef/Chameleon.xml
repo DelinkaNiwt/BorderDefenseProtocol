@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 变色龙隐秘状态释放能力；通用效果只按配置应用目标表达 Hediff。 -->
+  <AbilityDef>
+    <!-- AbilityDef 唯一名称。 -->
+    <defName>BDP_Ability_Chameleon</defName>
+    <!-- 缺少语言包时的默认能力名称。 -->
+    <label>变色龙状态切换</label>
+    <!-- 缺少语言包时的默认能力说明。 -->
+    <description>释放变色龙隐秘状态。</description>
+    <!-- 复用 BDP 芯片图标，避免引入新的美术资源。 -->
+    <iconPath>Things/Trigger/Chip/BDP_TriggerChip</iconPath>
+    <!-- Ability 成功释放后使用原版 40 秒冷却；来源级冷却组件负责跨宿主重建保留该状态。 -->
+    <cooldownTicksRange>2400</cooldownTicksRange>
+    <!-- 芯片战斗操作按钮沿原版只在征召时显示。 -->
+    <displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+    <!-- 仅供玩家手动操作，不让 AI 自动释放状态。 -->
+    <aiCanUse>false</aiCanUse>
+    <hostile>false</hostile>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+    <!-- AbilityDef 的目标模式：释放自身状态，不要求额外目标。 -->
+    <targetRequired>false</targetRequired>
+    <!-- 能力释放前摇期间复用芯片原有的三段音效。 -->
+    <warmupStartSound>Power_OnSmall</warmupStartSound>
+    <warmupSound>GasReleasing</warmupSound>
+    <warmupPreEndSound>Power_OffSmall</warmupPreEndSound>
+    <warmupPreEndSoundSeconds>0.1</warmupPreEndSoundSeconds>
+
+    <verbProperties>
+      <!-- 使用 Core 通用自施放 Verb，保留 Ability 生命周期但跳过远程瞄准准备。 -->
+      <verbClass>BDP.Core.Abilities.BdpVerb_CastSelfAbility</verbClass>
+      <label>释放状态</label>
+      <violent>false</violent>
+      <onlyManualCast>true</onlyManualCast>
+      <!-- 释放动作增加 0.5 秒前摇预热。 -->
+      <warmupTime>0.5</warmupTime>
+      <!-- 这是自身状态能力，不显示远程能力的目标范围。 -->
+      <targetable>false</targetable>
+      <range>0</range>
+      <drawAimPie>false</drawAimPie>
+      <requireLineOfSight>false</requireLineOfSight>
+      <targetParams>
+        <canTargetSelf>true</canTargetSelf>
+      </targetParams>
+    </verbProperties>
+
+    <comps>
+      <!-- Ability 每次释放只应用一次目标 Hediff，不承担芯片生命周期。 -->
+      <li Class="BDP.Core.Abilities.CompProperties_AbilityEffect_ApplyExpressionHediff">
+        <hediffDefName>BDP_Hediff_Chameleon</hediffDefName>
+      </li>
+      <!-- 共享冷却键由变色龙业务声明，Core 只按键保存和恢复。 -->
+      <li Class="BDP.Core.Abilities.CompProperties_AbilityReleaseCooldown">
+        <cooldownKey>BDP_AbilityCooldown_Chameleon</cooldownKey>
+      </li>
+    </comps>
+  </AbilityDef>
+
+</Defs>

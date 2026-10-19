@@ -48,8 +48,8 @@ Assert-True (
 
 Assert-True (
     ($poseResolverText -match 'ResolveWeaponStage\(request\)') -and
-    ($poseResolverText -match 'ResolveGripAnchor\(request, calculation\)') -and
-    ($poseResolverText -match 'ResolveMuzzleAnchor\(request, calculation\)')
+    ($poseResolverText -match 'ResolveGripAnchor\(request, calculation, graphic, drawScale\)') -and
+    ($poseResolverText -match 'ResolveMuzzleAnchor\(request, calculation, graphic, drawScale\)')
 ) 'Stage-aware graphics must continue through the shared pose, grip and muzzle resolver instead of creating a parallel pose path.'
 
 Assert-True (

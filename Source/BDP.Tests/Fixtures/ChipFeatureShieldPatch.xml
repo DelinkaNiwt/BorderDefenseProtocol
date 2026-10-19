@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 测试用第三方扩展示例；只验证 XML 形态，不作为正式游戏内容加载。 -->
+<Patch>
+  <!-- 向既有护盾语义追加一个实现可提供的反射比例属性。 -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/BDP.Core.Information.ChipFeatureDef[defName="BDP_Feature_Shield"]/Properties</xpath>
+    <value>
+      <li>
+        <Property>OtherMod_Property_ShieldReflectionRatio</Property>
+        <Order>850</Order>
+      </li>
+    </value>
+  </Operation>
+</Patch>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    弹射砍击组合技 Def。
+    第一来源动作 = 蚱蜢，第二来源动作 = 蝎子。
+    组合结果为 Ability：BDP_Ability_BounceSlash。
+    UseCost=40 由条目显式声明确认。
+  -->
+
+  <!-- 蚱蜢+蝎子 → 弹射砍击 -->
+  <BDP.Core.Combos.ComboDef>
+    <defName>BDP_Combo_BounceSlash</defName>
+    <label>弹射砍击</label>
+    <description>将蚱蜢和蝎子组合为弹射砍击——多段跳跃沿途切割敌人。</description>
+    <!-- 组合所需双芯片功能定义。 -->
+    <firstSourceKey>BDP_ChipFunction_Grasshopper</firstSourceKey>
+    <secondSourceKey>BDP_ChipFunction_Scorpion</secondSourceKey>
+    <!-- 组合表达条目 -->
+    <Expression>
+      <Entries>
+        <li>
+          <Id>combo_bounce_slash</Id>
+          <DisplayLabel>弹射砍击</DisplayLabel>
+          <EntryType>Ability</EntryType>
+          <AbilityDefName>BDP_Ability_BounceSlash</AbilityDefName>
+          <!-- UseCost=40：每次使用消耗 40 Trion -->
+          <Trion><UseCost>40</UseCost></Trion>
+          <VerbProps>
+            <!-- 稍长预热以突出砍击力度感 -->
+            <warmupTime>0.4</warmupTime>
+          </VerbProps>
+        </li>
+      </Entries>
+    </Expression>
+    <!-- 组合结果是能力；机动与近战攻击是该能力产生的完整玩家结果。 -->
+    <Features>
+      <li>
+        <Id>bounce_slash_ability</Id>
+        <Feature>BDP_Feature_GenericAbility</Feature>
+        <Sources>
+          <li Class="BDP.Content.Information.Features.Sources.AbilityLifecycleFeatureSourceConfig">
+            <Id>bounce_slash_ability_source</Id>
+            <EntryId>combo_bounce_slash</EntryId>
+          </li>
+        </Sources>
+        <Children>
+          <li>
+            <Id>bounce_slash_movement</Id>
+            <Feature>BDP_Feature_Movement</Feature>
+            <Groups>
+              <li>
+                <Id>bounce_slash_movement_method</Id>
+                <Group>BDP_FeatureGroup_MovementMethod</Group>
+                <Sources>
+                  <li Class="BDP.Content.Information.Features.Sources.MovementMethodFeatureSourceConfig">
+                    <Id>bounce_slash_movement_source</Id>
+                    <EntryId>combo_bounce_slash</EntryId>
+                  </li>
+                </Sources>
+              </li>
+            </Groups>
+          </li>
+          <li>
+            <Id>bounce_slash_melee</Id>
+            <Feature>BDP_Feature_MeleeAttack</Feature>
+            <Groups>
+              <li>
+                <Id>bounce_slash_melee_method</Id>
+                <Group>BDP_FeatureGroup_MeleeAttackMethod</Group>
+                <LabelKey>BDP_MeleeMethod_BounceSlash</LabelKey>
+                <Sources>
+                  <li Class="BDP.Content.Information.Features.Sources.AbilityMeleeAttackFeatureSourceConfig">
+                    <Id>bounce_slash_melee_source</Id>
+                    <EntryId>combo_bounce_slash</EntryId>
+                    <EffectIndex>0</EffectIndex>
+                  </li>
+                </Sources>
+              </li>
+            </Groups>
+          </li>
+        </Children>
+      </li>
+    </Features>
+  </BDP.Core.Combos.ComboDef>
+
+</Defs>

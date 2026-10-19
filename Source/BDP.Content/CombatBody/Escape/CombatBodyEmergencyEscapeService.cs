@@ -1,4 +1,5 @@
 using BDP.Core.Expressions;
+using BDP.Content.PlayerLog.CombatBody;
 using BDP.Core.Trigger;
 using BDP.Support.Diagnostics;
 using RimWorld;
@@ -45,6 +46,10 @@ namespace BDP.Content.CombatBody.Escape
             CombatBodyEmergencyEscapeEffects.PlayExitEffects(destination, map);
 
             TryConsumeSourceChips(pawn, resolution.SourceReferences);
+
+            // 只在本次实际移位成功后记录，不把准备脱离方案当作已脱离。
+            if (pawn.Position != origin)
+                CombatBodyPlayerLog.Record(pawn, "BDP_Log_CombatBodyEscaped");
 
             // 取消征召已移交崩解主链(CombatBodyExitTransaction),紧急脱离分支不再负责。
             Messages.Message(

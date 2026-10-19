@@ -33,13 +33,7 @@ namespace BDP.Patches
                 return;
             }
 
-            CompCombatBodyHost host = pawn.GetComp<CompCombatBodyHost>();
-            if (host == null)
-            {
-                return;
-            }
-
-            host.WoundRuntime.RebuildActiveWounds(pawn);
+            CombatBodyMaterialAccess.Wounds(pawn)?.ReconcileActiveWounds(pawn);
         }
 
         /// <summary>

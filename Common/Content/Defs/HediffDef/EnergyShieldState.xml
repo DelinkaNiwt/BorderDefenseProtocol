@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!-- 持久盾组真值；与随启停和姿态移除的表达宿主分离。 -->
+  <HediffDef>
+    <!-- 状态定义身份。 -->
+    <defName>BDP_Hediff_EnergyShieldState</defName>
+    <!-- Content（正式内容）持久存档类型。 -->
+    <hediffClass>BDP.Content.Shield.Hediff_EnergyShieldState</hediffClass>
+    <!-- 默认标签由语言包覆盖；正式健康列表隐藏此记录。 -->
+    <label>护盾状态</label>
+    <!-- 隐藏状态仍须提供原版配置检查要求的描述，由语言包覆盖。 -->
+    <description>记录人物护盾组的剩余耐久与恢复时间。关闭芯片后保留记录，恢复计时继续。</description>
+    <!-- 持久状态自身不是疾病或伤害。 -->
+    <isBad>false</isBad>
+    <!-- 固定初始化严重度，不作为耐久。 -->
+    <initialSeverity>1</initialSeverity>
+  </HediffDef>
+  <!-- 复用原有快照排除机制，让原身恢复不回滚护盾的战斗真值。 -->
+  <BDP.Core.CombatBody.CombatBodySnapshotConfigDef>
+    <!-- 排除配置身份。 -->
+    <defName>BDP_ShieldStateSnapshotExclusion</defName>
+    <!-- 只排除本业务的持久状态；不干预其它健康状态。 -->
+    <excludedHediffs><li>BDP_Hediff_EnergyShieldState</li></excludedHediffs>
+  </BDP.Core.CombatBody.CombatBodySnapshotConfigDef>
+</Defs>

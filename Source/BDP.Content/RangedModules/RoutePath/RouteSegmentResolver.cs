@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BDP.Content.RangedModules.OrderedSpread;
 using BDP.Core.AttackExecution.RangedProtocol.Model;
 using BDP.Core.PathInput;
 using BDP.Core.Projectiles.RangedFlightProtocol.Model;
@@ -14,16 +15,6 @@ namespace BDP.Content.RangedModules.RoutePath
     /// </summary>
     public static class RouteSegmentResolver
     {
-        /// <summary>用于隔离中间段与最终段的稳定随机样本。</summary>
-        private enum SampleKind
-        {
-            /// <summary>中间续段偏航样本。</summary>
-            Intermediate = 1,
-
-            /// <summary>最终续段收束样本。</summary>
-            Final = 2
-        }
-
         /// <summary>归一化一组锚点，去掉连续重复格。</summary>
         public static List<PathAnchor> NormalizeAnchors(IReadOnlyList<PathAnchor> source)
         {
@@ -45,9 +36,7 @@ namespace BDP.Content.RangedModules.RoutePath
         /// <summary>把确认快照写入投射物路径上下文。</summary>
         public static void PopulatePathSnapshot(
             RoutePathContext target, RouteConfirmedSnapshot snapshot,
-            float arrivalTolerance, float intermediateSpreadRadius,
-            float finalSpreadRadius, float highAccuracySpreadScale,
-            int spreadSafetyShrinkSteps)
+            float intermediateSpreadRadius, float finalSpreadRadius, float highAccuracySpreadScale)
         {
             if (target == null) return;
             target.Reset();
@@ -58,14 +47,32 @@ namespace BDP.Content.RangedModules.RoutePath
             target.FinalTarget = snapshot.FinalTarget;
             target.FinalIsThing = snapshot.FinalIsThing;
             target.PathSource = snapshot.PathSource;
-            target.ArrivalTolerance = arrivalTolerance > 0f ? arrivalTolerance : 0.35f;
             target.IntermediateSpreadRadius = Mathf.Max(0f, intermediateSpreadRadius);
             target.FinalSpreadRadius = Mathf.Max(0f, finalSpreadRadius);
             target.HighAccuracySpreadScale = Mathf.Clamp01(highAccuracySpreadScale);
-            target.SpreadSafetyShrinkSteps = Mathf.Clamp(spreadSafetyShrinkSteps, 0, 8);
             target.HasFrozenFinalDestination = snapshot.HasFinalTarget && snapshot.FinalTarget.IsValid;
             target.FrozenFinalDestination = target.HasFrozenFinalDestination
                 ? ResolveFrozenFinalDestination(snapshot.FinalTarget) : Vector3.zero;
+        }
+
+        /// <summary>把唯一一次发射裁定应用于路线，保留锚点且不重新抽取命中或掩体。</summary>
+        public static void ApplyLaunchResolution(RoutePathContext snapshot, ProjectileLaunchResolution resolution)
+        {
+            if (snapshot == null || resolution == null) return;
+            if (resolution.ContinuationMode == ProjectileLaunchContinuationMode.WildMissOffsetRoute)
+            {
+                snapshot.HasWildMissOffset = true;
+                snapshot.WildMissOffset = resolution.WildMissOffset.Yto0();
+            }
+            if (!resolution.TerminalTarget.IsValid) return;
+
+            snapshot.HasFinalTarget = true;
+            snapshot.FinalTarget = resolution.TerminalTarget;
+            snapshot.FinalIsThing = resolution.TerminalTarget.HasThing;
+            snapshot.HasFrozenFinalDestination = true;
+            snapshot.FrozenFinalDestination = resolution.TerminalDestination.Yto0();
+            // 掩体已是本发确定的拦截结果，不能在末段再加一次散布把落点推离掩体。
+            snapshot.FinalSpreadRadius = 0f;
         }
 
         /// <summary>解析首段目标。</summary>
@@ -101,7 +108,7 @@ namespace BDP.Content.RangedModules.RoutePath
 
         /// <summary>为当前段构造线性飞行路径快照（含散布偏移）。</summary>
         public static ProjectileFlightPathSnapshot BuildCurrentLegFlightPathSnapshot(
-            RoutePathContext snapshot, Map map,
+            RoutePathContext snapshot,
             ProjectileAccuracySnapshot accuracySnapshot, Vector3 start,
             string attackInstanceId, string resultId, int emitIndex)
         {
@@ -111,7 +118,6 @@ namespace BDP.Content.RangedModules.RoutePath
                 snapshot,
                 segments,
                 legIndex,
-                map,
                 accuracySnapshot,
                 start,
                 attackInstanceId,
@@ -123,21 +129,18 @@ namespace BDP.Content.RangedModules.RoutePath
         }
 
         /// <summary>
-        /// 解析当前到达点之后应提交的续段，并区分正常推进与回接当前名义锚点。
+        /// 解析当前到达点之后的续段；只按精度采样偏移，不读取墙体或回接名义点。
         /// </summary>
         public static bool TryResolveContinuation(
             RoutePathContext snapshot,
-            Map map,
             Vector3 start,
             ProjectileAccuracySnapshot accuracySnapshot,
             string attackInstanceId,
             string resultId,
             int emitSequence,
-            out bool advanceLeg,
             out LocalTargetInfo nextTarget,
             out ProjectileFlightPathSnapshot nextPath)
         {
-            advanceLeg = false;
             nextTarget = LocalTargetInfo.Invalid;
             nextPath = null;
 
@@ -153,7 +156,6 @@ namespace BDP.Content.RangedModules.RoutePath
                     snapshot,
                     segments,
                     nextIndex,
-                    map,
                     accuracySnapshot,
                     start,
                     attackInstanceId,
@@ -161,44 +163,10 @@ namespace BDP.Content.RangedModules.RoutePath
                     emitSequence,
                     out nextPath))
             {
-                advanceLeg = true;
                 nextTarget = nextNominalTarget;
                 return true;
             }
-
-            if (!TryResolveSegmentAtIndex(segments, currentIndex, out LocalTargetInfo currentNominalTarget))
-            {
-                return false;
-            }
-
-            Vector3 currentNominalDestination = ResolveSegmentBaseDestination(
-                snapshot,
-                currentNominalTarget,
-                currentIndex,
-                segments.Count);
-            if (!IsWithinArrivalTolerance(
-                    start,
-                    currentNominalDestination,
-                    snapshot != null ? snapshot.ArrivalTolerance : 0.35f))
-            {
-                nextTarget = currentNominalTarget;
-                nextPath = ProjectileFlightPathUtility.CreateLinear(
-                    NormalizePoint(start),
-                    currentNominalDestination);
-                return nextPath != null;
-            }
-
-            advanceLeg = true;
-            nextTarget = nextNominalTarget;
-            Vector3 nextNominalDestination = ResolveSegmentBaseDestination(
-                snapshot,
-                nextNominalTarget,
-                nextIndex,
-                segments.Count);
-            nextPath = ProjectileFlightPathUtility.CreateLinear(
-                NormalizePoint(start),
-                nextNominalDestination);
-            return nextPath != null;
+            return false;
         }
 
         /// <summary>推进到下一段。</summary>
@@ -231,40 +199,11 @@ namespace BDP.Content.RangedModules.RoutePath
             return result;
         }
 
-        /// <summary>把冻结的原版瞄准概率归一化为路线散布质量。</summary>
-        private static float ResolveAccuracyQuality(ProjectileAccuracySnapshot snapshot)
-        {
-            return snapshot != null && snapshot.IsAvailable
-                ? Mathf.Clamp01(snapshot.StandardAimChance)
-                : 0.5f;
-        }
-
-        /// <summary>按原版精度事实解析当前续段实际使用的散布半径。</summary>
-        private static float ResolveSegmentSpreadRadius(
-            RoutePathContext snapshot,
-            ProjectileAccuracySnapshot accuracySnapshot,
-            bool isFinal)
-        {
-            if (snapshot == null)
-            {
-                return 0f;
-            }
-
-            float quality = ResolveAccuracyQuality(accuracySnapshot);
-            float highAccuracyScale = Mathf.Clamp01(snapshot.HighAccuracySpreadScale);
-            float spreadScale = Mathf.Lerp(1f, highAccuracyScale, quality);
-            float baseRadius = isFinal
-                ? snapshot.FinalSpreadRadius
-                : snapshot.IntermediateSpreadRadius;
-            return Mathf.Max(0f, baseRadius * spreadScale);
-        }
-
-        /// <summary>为指定名义段生成通过安全约束的稳定偏航飞行快照。</summary>
+        /// <summary>为指定名义段生成按冻结精度缩放的稳定偏航快照，撞墙由宿主正常处理。</summary>
         private static bool TryBuildLegFlightPath(
             RoutePathContext snapshot,
             IReadOnlyList<LocalTargetInfo> segments,
             int legIndex,
-            Map map,
             ProjectileAccuracySnapshot accuracySnapshot,
             Vector3 start,
             string attackInstanceId,
@@ -279,53 +218,29 @@ namespace BDP.Content.RangedModules.RoutePath
             }
 
             bool isFinal = legIndex == segments.Count - 1;
-            LocalTargetInfo followingNominalTarget = LocalTargetInfo.Invalid;
-            if (!isFinal)
-            {
-                TryResolveSegmentAtIndex(segments, legIndex + 1, out followingNominalTarget);
-            }
-
             Vector3 nominalDestination = ResolveSegmentBaseDestination(
                 snapshot,
                 currentTarget,
                 legIndex,
                 segments.Count);
-            float spreadRadius = ResolveSegmentSpreadRadius(snapshot, accuracySnapshot, isFinal);
-            Vector3 sampledOffset = SampleSpreadOffset(
+            float spreadRadius = OrderedSpreadSampler.ResolveScaledRadius(
+                accuracySnapshot,
+                isFinal ? snapshot.FinalSpreadRadius : snapshot.IntermediateSpreadRadius,
+                snapshot.HighAccuracySpreadScale);
+            Vector3 sampledOffset = OrderedSpreadSampler.SampleOffset(
                 spreadRadius,
                 attackInstanceId,
                 resultId,
                 emitSequence,
                 legIndex,
-                isFinal ? SampleKind.Final : SampleKind.Intermediate);
-            if (!TryResolveSafeSpreadDestination(
-                    map,
-                    start,
-                    nominalDestination,
-                    followingNominalTarget,
-                    isFinal,
-                    sampledOffset,
-                    snapshot != null ? snapshot.SpreadSafetyShrinkSteps : 0,
-                    out Vector3 destination))
-            {
-                return false;
-            }
-
+                isFinal
+                    ? OrderedSpreadSampler.SampleKind.Final
+                    : OrderedSpreadSampler.SampleKind.Intermediate);
+            // 每段围绕名义点独立采样；不检测障碍、不折半、不因撞墙风险收回偏移。
             path = ProjectileFlightPathUtility.CreateLinear(
                 NormalizePoint(start),
-                destination);
+                (nominalDestination + sampledOffset).Yto0());
             return path != null;
-        }
-
-        /// <summary>判断实际到达点是否已经回到当前名义段目标的容差范围。</summary>
-        private static bool IsWithinArrivalTolerance(
-            Vector3 current,
-            Vector3 nominal,
-            float tolerance)
-        {
-            float safeTolerance = tolerance > 0f ? tolerance : 0.35f;
-            return (current.Yto0() - nominal.Yto0()).sqrMagnitude
-                <= safeTolerance * safeTolerance;
         }
 
         private static Vector3 ResolveSegmentBaseDestination(
@@ -334,142 +249,13 @@ namespace BDP.Content.RangedModules.RoutePath
         {
             bool isFinal = segmentCount > 0 && segmentIndex == segmentCount - 1;
             if (isFinal && snapshot != null && snapshot.HasFrozenFinalDestination)
-                return NormalizePoint(snapshot.FrozenFinalDestination);
+                return NormalizePoint(snapshot.FrozenFinalDestination)
+                    + (snapshot.HasWildMissOffset ? snapshot.WildMissOffset.Yto0() : Vector3.zero);
             return segmentTarget.IsValid
-                ? NormalizePoint(segmentTarget.Cell.ToVector3Shifted()) : Vector3.zero;
-        }
-
-        /// <summary>按攻击、发射序号、段序号和样本类型生成稳定的圆盘偏移。</summary>
-        private static Vector3 SampleSpreadOffset(
-            float spreadRadius,
-            string attackInstanceId,
-            string resultId,
-            int emitIndex,
-            int segmentIndex,
-            SampleKind sampleKind)
-        {
-            float safeRadius = Mathf.Max(0f, spreadRadius);
-            if (safeRadius <= 0f)
-            {
-                return Vector3.zero;
-            }
-
-            int seed = BuildSpreadSeed(
-                attackInstanceId,
-                resultId,
-                emitIndex,
-                segmentIndex,
-                sampleKind);
-            Rand.PushState(seed);
-            try
-            {
-                float angle = Rand.Value * Mathf.PI * 2f;
-                float radius = Mathf.Sqrt(Rand.Value) * safeRadius;
-                return new Vector3(
-                    Mathf.Cos(angle) * radius,
-                    0f,
-                    Mathf.Sin(angle) * radius);
-            }
-            finally
-            {
-                Rand.PopState();
-            }
-        }
-
-        /// <summary>构造不依赖全局随机状态的稳定散布种子。</summary>
-        private static int BuildSpreadSeed(
-            string attackInstanceId,
-            string resultId,
-            int emitIndex,
-            int segmentIndex,
-            SampleKind sampleKind)
-        {
-            int seed = 143921;
-            seed = Gen.HashCombineInt(seed, !string.IsNullOrWhiteSpace(attackInstanceId)
-                ? GenText.StableStringHash(attackInstanceId) : 0);
-            seed = Gen.HashCombineInt(seed, !string.IsNullOrWhiteSpace(resultId)
-                ? GenText.StableStringHash(resultId) : 0);
-            seed = Gen.HashCombineInt(seed, emitIndex);
-            seed = Gen.HashCombineInt(seed, segmentIndex);
-            seed = Gen.HashCombineInt(seed, (int)sampleKind);
-            return seed;
-        }
-
-        /// <summary>折半收缩候选偏移，直到当前段和后继名义段都保持安全。</summary>
-        private static bool TryResolveSafeSpreadDestination(
-            Map map,
-            Vector3 start,
-            Vector3 nominalDestination,
-            LocalTargetInfo followingNominalTarget,
-            bool isFinal,
-            Vector3 sampledOffset,
-            int shrinkSteps,
-            out Vector3 destination)
-        {
-            int safeShrinkSteps = Mathf.Clamp(shrinkSteps, 0, 8);
-            Vector3 offset = sampledOffset.Yto0();
-            for (int attempt = 0; attempt <= safeShrinkSteps; attempt++)
-            {
-                Vector3 candidate = (nominalDestination + offset).Yto0();
-                if (IsSafeSpreadDestination(
-                        map,
-                        start,
-                        candidate,
-                        followingNominalTarget,
-                        isFinal))
-                {
-                    destination = candidate;
-                    return true;
-                }
-
-                offset *= 0.5f;
-            }
-
-            destination = nominalDestination.Yto0();
-            return IsSafeSpreadDestination(
-                map,
-                start,
-                destination,
-                followingNominalTarget,
-                isFinal);
-        }
-
-        /// <summary>检查候选落点不会主动破坏当前段或下一名义段的可通行视线。</summary>
-        private static bool IsSafeSpreadDestination(
-            Map map,
-            Vector3 start,
-            Vector3 candidate,
-            LocalTargetInfo followingNominalTarget,
-            bool isFinal)
-        {
-            if (map == null)
-            {
-                return false;
-            }
-
-            IntVec3 startCell = start.ToIntVec3();
-            IntVec3 candidateCell = candidate.ToIntVec3();
-            if (!startCell.IsValid
-                || !startCell.InBounds(map)
-                || !candidateCell.IsValid
-                || !candidateCell.InBounds(map)
-                || !candidateCell.CanBeSeenOverFast(map)
-                || !GenSight.LineOfSight(startCell, candidateCell, map))
-            {
-                return false;
-            }
-
-            if (isFinal)
-            {
-                return true;
-            }
-
-            IntVec3 followingCell = followingNominalTarget.IsValid
-                ? followingNominalTarget.Cell
-                : IntVec3.Invalid;
-            return followingCell.IsValid
-                && followingCell.InBounds(map)
-                && GenSight.LineOfSight(candidateCell, followingCell, map);
+                ? NormalizePoint(segmentTarget.Cell.ToVector3Shifted())
+                    + (snapshot != null && snapshot.HasWildMissOffset
+                        ? snapshot.WildMissOffset.Yto0() : Vector3.zero)
+                : Vector3.zero;
         }
 
         private static Vector3 ResolveFrozenFinalDestination(LocalTargetInfo finalTarget)

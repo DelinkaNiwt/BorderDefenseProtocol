@@ -14,6 +14,14 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Model
         /// </summary>
         public ExtraEffectTargetScope TargetScope { get; set; } = ExtraEffectTargetScope.DirectHitThing;
 
+        /// <summary>效果是否消费本次直接命中的部位事实；不承载选择策略。</summary>
+        public ExtraEffectPartTargetMode PartTargetMode { get; set; }
+
+        /// <summary>
+        /// 当前额外效果相对于投射物伤害的执行时序。
+        /// </summary>
+        public ExtraEffectExecutionTiming ExecutionTiming { get; set; } = ExtraEffectExecutionTiming.AfterDamage;
+
         /// <summary>
         /// 当前额外效果的种类键。
         /// </summary>
@@ -23,6 +31,12 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Model
         /// 当前额外效果命中的 Thing。
         /// </summary>
         public Thing TargetThing { get; set; }
+
+        /// <summary>
+        /// 当前额外效果对应的命中身体部位；为空表示效果不限定到部位。
+        /// 这里只传递命中事实，不承载部位选择或健康后果逻辑。
+        /// </summary>
+        public BodyPartRecord HitPart { get; set; }
 
         /// <summary>
         /// 当前额外效果命中的格子。
@@ -47,8 +61,11 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Model
             ExtraEffectPlan result = new ExtraEffectPlan
             {
                 TargetScope = TargetScope,
+                PartTargetMode = PartTargetMode,
+                ExecutionTiming = ExecutionTiming,
                 EffectKind = EffectKind,
                 TargetThing = targetThing,
+                HitPart = HitPart,
                 TargetCell = targetCell,
                 Parameters = Parameters != null
                     ? new Dictionary<string, string>(Parameters)

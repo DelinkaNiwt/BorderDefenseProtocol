@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 近界宙域派系显示名称。 -->
+  <BDP_Faction_NearRealm.label>近界宙域</BDP_Faction_NearRealm.label>
+  <!-- 近界宙域固定派系名称。 -->
+  <BDP_Faction_NearRealm.fixedName>近界宙域</BDP_Faction_NearRealm.fixedName>
+  <!-- 近界宙域正式派系说明。 -->
+  <BDP_Faction_NearRealm.description>永久敌对的追兵派系。成员使用人类 Pawn，当前以固定装载近界原型触发体的战斗体出场；奥德赛加载时也允许轨道抵达。</BDP_Faction_NearRealm.description>
+  <!-- 近界宙域袭击消息中的单个角色称谓。 -->
+  <BDP_Faction_NearRealm.pawnSingular>近界民战斗员</BDP_Faction_NearRealm.pawnSingular>
+  <!-- 近界宙域袭击消息中的多个角色称谓。 -->
+  <BDP_Faction_NearRealm.pawnsPlural>近界民战斗员</BDP_Faction_NearRealm.pawnsPlural>
+
+  <!-- 薇瑟帝国任务临时派系名称与说明。 -->
+  <BDP_Faction_ViserEmpire.label>薇瑟帝国</BDP_Faction_ViserEmpire.label>
+  <BDP_Faction_ViserEmpire.fixedName>薇瑟帝国</BDP_Faction_ViserEmpire.fixedName>
+  <BDP_Faction_ViserEmpire.description>仅在皇室加入任务期间出现的中立临时派系。</BDP_Faction_ViserEmpire.description>
+  <BDP_Faction_ViserEmpire.pawnSingular>薇瑟帝国成员</BDP_Faction_ViserEmpire.pawnSingular>
+  <BDP_Faction_ViserEmpire.pawnsPlural>薇瑟帝国成员</BDP_Faction_ViserEmpire.pawnsPlural>
+</LanguageData>

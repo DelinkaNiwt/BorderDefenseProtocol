@@ -30,6 +30,7 @@ namespace BDP.Core.Trigger.Runtime
             int stableThingId,
             IEnumerable<TriggerSlotState> slots,
             Func<TriggerSide, SwitchContext> getSwitchContext,
+            Func<TriggerSlotState, SwitchContext> getSlotSwitchContext,
             out IReadOnlyList<TriggerSlotState> activeRoots)
         {
             int stableThingOffset = NormalizeOffset(stableThingId);
@@ -52,7 +53,11 @@ namespace BDP.Core.Trigger.Runtime
 
                 SwitchContext switchContext =
                     getSwitchContext != null ? getSwitchContext(slot.Side) : null;
-                if (switchContext != null && switchContext.phase == SwitchPhase.Deactivating)
+                SwitchContext slotSwitchContext = getSlotSwitchContext != null
+                    ? getSlotSwitchContext(slot)
+                    : null;
+                if ((IsDeactivatingSlotContext(switchContext, slot.Index)
+                    || IsDeactivatingSlotContext(slotSwitchContext, slot.Index)))
                 {
                     continue;
                 }
@@ -78,6 +83,20 @@ namespace BDP.Core.Trigger.Runtime
         {
             int offset = stableThingId % CheckIntervalTicks;
             return offset < 0 ? offset + CheckIntervalTicks : offset;
+        }
+
+        /// <summary>
+        /// 判断指定关闭上下文是否正对应当前槽位。
+        /// 侧级上下文的 -1 只表示整侧关闭，不能让同侧其它独立激活槽被误跳过。
+        /// </summary>
+        private static bool IsDeactivatingSlotContext(
+            SwitchContext context,
+            int slotIndex)
+        {
+            return context != null
+                && context.phase == SwitchPhase.Deactivating
+                && (context.deactivatingSlotIndex < 0
+                    || context.deactivatingSlotIndex == slotIndex);
         }
     }
 }

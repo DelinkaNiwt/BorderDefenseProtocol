@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 皇室身份与一次性契约入口：任务赋予时应作为内源基因。 -->
+  <GeneDef>
+    <!-- 唯一皇室基因标识，也是遗传例外的业务边界。 -->
+    <defName>BDP_Gene_RoyalBloodline</defName>
+    <!-- 复用原版基因类，不增加自定义生命周期。 -->
+    <geneClass>Verse.Gene</geneClass>
+    <!-- 玩家名称从简体中文语言包注入。 -->
+    <label>BDP_Gene_RoyalBloodline</label>
+    <!-- 玩家说明从简体中文语言包注入。 -->
+    <description>BDP_Gene_RoyalBloodline.description</description>
+    <!-- 暂复用原版超凡代谢图标，不赋予该原版基因的能力。 -->
+    <iconPath>UI/Icons/Genes/Gene_ArchiteMetabolism</iconPath>
+    <!-- 沿用原版杂项分类。 -->
+    <displayCategory>Miscellaneous</displayCategory>
+    <!-- 放在已有腺体基因附近。 -->
+    <displayOrderInCategory>110</displayOrderInCategory>
+    <!-- 正值使原版按超凡基因处理并禁止普通提取；不是最终平衡数值。 -->
+    <biostatArc>1</biostatArc>
+    <!-- 身份基础暂不增加复杂度。 -->
+    <biostatCpx>0</biostatCpx>
+    <!-- 身份基础暂不改变代谢，也不干扰遗传组合代谢检查。 -->
+    <biostatMet>0</biostatMet>
+    <!-- 不通过原版随机基因选择散布身份。 -->
+    <selectionWeight>0</selectionWeight>
+    <!-- 不进入原版随机基因组生成。 -->
+    <canGenerateInGeneSet>false</canGenerateInGeneSet>
+    <!-- 原版基因获取流程赋予能力，契约与使用记录独立保存于人物健康状态。 -->
+    <abilities>
+      <li>BDP_Ability_RoyalContract</li>
+    </abilities>
+  </GeneDef>
+</Defs>

@@ -2,6 +2,6 @@
 <LanguageData>
   <!-- 光魂推进能力。 -->
   <BDP_Ability_LightSoulPropulsion.label>光魂推进</BDP_Ability_LightSoulPropulsion.label>
-  <BDP_Ability_LightSoulPropulsion.description>消耗 Trion 进行一次短距离战术位移。</BDP_Ability_LightSoulPropulsion.description>
+  <BDP_Ability_LightSoulPropulsion.description>沿地面冲刺至玩家选定位置；路径上的敌人会受到一次钝伤并被推向终点，撞到墙体或过大目标时，已被推动的敌人会短暂晕眩。</BDP_Ability_LightSoulPropulsion.description>
   <BDP_Ability_LightSoulPropulsion.verbProperties.label>光魂推进</BDP_Ability_LightSoulPropulsion.verbProperties.label>
 </LanguageData>

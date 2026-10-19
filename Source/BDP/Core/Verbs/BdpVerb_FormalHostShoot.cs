@@ -1,8 +1,11 @@
 using System;
 using BDP.Core.AttackExecution;
 using BDP.Core.Expressions;
+using BDP.Core.Permissions;
 using BDP.Core.Trigger;
+using BDP.Core.Trigger.Runtime;
 using BDP.Core.VerbHosting;
+using HarmonyLib;
 using Verse;
 
 namespace BDP.Core.Verbs
@@ -13,6 +16,20 @@ namespace BDP.Core.Verbs
     /// </summary>
     public sealed class BdpVerb_FormalHostShoot : BdpVerb_Shoot
     {
+        /// <summary>
+        /// 原版 Verb 对 ticksBetweenBurstShots 的私有缓存访问器。
+        /// formal host 会复用同一 Verb 实例，切换 verbProps 后必须让原版重新解析。
+        /// </summary>
+        private static readonly AccessTools.FieldRef<Verb, int?> CachedTicksBetweenBurstShotsAccessor =
+            AccessTools.FieldRefAccess<Verb, int?>("cachedTicksBetweenBurstShots");
+
+        /// <summary>
+        /// 原版 Verb 对 burstShotCount 的私有缓存访问器。
+        /// 它与连发间隔缓存使用相同的 verbProps 前提，必须在同一边界失效。
+        /// </summary>
+        private static readonly AccessTools.FieldRef<Verb, int?> CachedBurstShotCountAccessor =
+            AccessTools.FieldRefAccess<Verb, int?>("cachedBurstShotCount");
+
         /// <summary>
         /// 当前正式宿主壳所属的 Trigger owner。
         /// </summary>
@@ -67,7 +84,8 @@ namespace BDP.Core.Verbs
         /// <summary>
         /// 按当前 binding 同步正式宿主壳的最小运行时表面。
         /// </summary>
-        internal void SyncFormalBinding(BdpFormalVerbBindingState bindingState, VerbProperties fallbackVerbProps)
+        internal void SyncFormalBinding(BdpFormalVerbBindingState bindingState, VerbProperties fallbackVerbProps,
+            bool preserveCurrentSession = false)
         {
             string previousResultId = HostResultId;
             AttackSessionToken previousToken = HostSessionToken != null ? HostSessionToken.Clone() : null;
@@ -75,7 +93,7 @@ namespace BDP.Core.Verbs
             AttackSessionToken nextSessionToken = bindingState != null && bindingState.IsAvailable
                 ? bindingState.SessionToken
                 : null;
-            bool resetApplied = ShouldResetForBindingChange(bindingState, fallbackVerbProps);
+            bool resetApplied = !preserveCurrentSession && ShouldResetForBindingChange(bindingState, fallbackVerbProps);
             RangedAttackModuleSession sessionBeforeReset = HostModuleSession;
             if (resetApplied)
             {
@@ -92,6 +110,7 @@ namespace BDP.Core.Verbs
                     true,
                     "before_binding_reset");
                 Reset();
+                InvalidateVanillaVerbPropertyCaches();
             }
 
             if (previousResultId != nextResultId)
@@ -105,7 +124,12 @@ namespace BDP.Core.Verbs
                     resetApplied);
             }
 
-            if (resetApplied || HostSessionToken == null)
+            if (preserveCurrentSession)
+            {
+                // 仅迁移版本，冻结模块、已付费状态、目标与剩余连射均沿用同一次攻击。
+                HostSessionToken = HostSessionToken.WithProjectionVersion(nextSessionToken.ProjectionVersion);
+            }
+            else if (resetApplied || HostSessionToken == null)
             {
                 HostSessionToken = nextSessionToken != null ? nextSessionToken.Clone() : null;
             }
@@ -126,11 +150,27 @@ namespace BDP.Core.Verbs
                     "after_binding_sync");
             }
 
+            if (preserveCurrentSession)
+            {
+                (CasterPawn?.jobs?.curDriver as JobDriver_BdpRangedAttackExecution)
+                    ?.MigrateCleanupOwnedSession(this, previousToken, nextSessionToken.ProjectionVersion);
+                return;
+            }
             verbProps = bindingState != null && bindingState.VerbProps != null ? bindingState.VerbProps : fallbackVerbProps;
             tool = bindingState != null ? bindingState.Tool : null;
             maneuver = bindingState != null ? bindingState.Maneuver : null;
             caster = owner != null ? owner.OwnerPawn : caster;
             verbTracker = owner != null ? owner.VerbTracker : verbTracker;
+        }
+
+        /// <summary>
+        /// 清理原版 Verb 中依赖可变 verbProps 的私有惰性缓存。
+        /// 这是 formal host 切换武装构型时恢复原版参数解析语义的必要边界。
+        /// </summary>
+        private void InvalidateVanillaVerbPropertyCaches()
+        {
+            CachedTicksBetweenBurstShotsAccessor(this) = null;
+            CachedBurstShotCountAccessor(this) = null;
         }
 
         private static bool AttackSessionTokensEquivalent(AttackSessionToken left, AttackSessionToken right)
@@ -205,7 +245,55 @@ namespace BDP.Core.Verbs
                 return anySideAllowed;
             }
 
+            FormalExpressionResult result = ResolveEffectiveResult();
+            if (DirectTargetLineOfSightPermissionAccess.ShouldRelaxDirectTargetLineOfSight(
+                    CasterPawn,
+                    result,
+                    targ))
+            {
+                return CanHitTargetFromWithoutDirectLineOfSight(root, targ);
+            }
+
             return base.CanHitTargetFrom(root, targ);
+        }
+
+        /// <summary>
+        /// 在动态许可已允许时，临时关闭当前 formal host 表面的直接视线要求，
+        /// 仍由原版命中判定保留射程、目标类型和其它规则。
+        /// </summary>
+        private bool CanHitTargetFromWithoutDirectLineOfSight(IntVec3 root, LocalTargetInfo target)
+        {
+            if (verbProps == null || !verbProps.requireLineOfSight)
+            {
+                return base.CanHitTargetFrom(root, target);
+            }
+
+            bool previousRequirement = verbProps.requireLineOfSight;
+            verbProps.requireLineOfSight = false;
+            try
+            {
+                return base.CanHitTargetFrom(root, target);
+            }
+            finally
+            {
+                verbProps.requireLineOfSight = previousRequirement;
+            }
+        }
+
+        /// <summary>
+        /// 读取当前 formal host 壳绑定的正式表达结果。
+        /// </summary>
+        private FormalExpressionResult ResolveEffectiveResult()
+        {
+            string effectiveResultId = ResolveEffectiveResultId();
+            if (owner?.PublishedCombatProjection?.ResultIndex == null
+                || string.IsNullOrWhiteSpace(effectiveResultId))
+            {
+                return null;
+            }
+
+            owner.PublishedCombatProjection.ResultIndex.TryGetValue(effectiveResultId, out FormalExpressionResult result);
+            return result;
         }
 
         /// <summary>
@@ -235,6 +323,46 @@ namespace BDP.Core.Verbs
                 && binding.IsAvailable
                 && binding.ResolveActiveVerb() == this
                 && RequiresFormalHostRuntimeTick();
+        }
+
+        /// <summary>自动攻击在实际起手时准备当前槽位的会话；原版仍负责选择任务和目标。</summary>
+        protected override bool TryPrepareCastSession(LocalTargetInfo target)
+        {
+            Verse.AI.Job currentJob = CasterPawn?.CurJob;
+            if (currentJob != null && currentJob.def == AttackExecutionJobDefs.RangedAttackExecution)
+                return true;
+
+            // 在用的预热、连发及冷却不能被新一次自动请求清理或覆盖。
+            if (WarmingUp || Bursting || CasterPawn?.stances?.FullBodyBusy == true)
+                return false;
+
+            // 同语义目标的有限攻击可能尚未进入预热，必须保留已确认输入。
+            // 原版取消预热不会清理待发计划；无实际动作时，不同目标须继续走下方完整换目标流程。
+            if (RequiresFormalHostRuntimeTick() && MatchesAutomaticCastTarget(target)) return true;
+
+            BdpFormalVerbBinding binding = owner?.VerbHostManager?.TryGetBinding(slot);
+            TriggerCombatProjectionState projection = owner?.PublishedCombatProjection;
+            if (binding == null || !binding.IsAvailable || binding.ResolveActiveVerb() != this
+                || projection?.ResultIndex == null || string.IsNullOrWhiteSpace(binding.ResultId)
+                || !projection.ResultIndex.TryGetValue(binding.ResultId, out FormalExpressionResult result)
+                || result == null || !result.IsAvailable)
+                return false;
+
+            if (HostSessionToken != null
+                && HostSessionToken.ResultId == binding.ResultId
+                && HostSessionToken.ProjectionVersion == projection.ProjectionVersion
+                && !string.IsNullOrWhiteSpace(HostSessionToken.AttackInstanceId)
+                && MatchesAutomaticCastTarget(target))
+                return true;
+
+            RangedAttackModuleSession session = AttackExecutionSurfaceAccess.CreateRangedModuleSession(CasterPawn, result);
+            if (session == null) return false;
+
+            // 旧目标的冻结上下文只在真正换目标起手时关闭，绝不在查询武器能力时抹掉候选。
+            Reset();
+            HostSessionToken = AttackSessionToken.Create(CasterPawn, result.Id, projection.ProjectionVersion);
+            StageEntryModuleSession(session);
+            return true;
         }
 
         /// <summary>
@@ -381,6 +509,14 @@ namespace BDP.Core.Verbs
             }
 
             Verb sourceVerb = binding.ResolveActiveVerb();
+            if (DirectTargetLineOfSightPermissionAccess.ShouldRelaxDirectTargetLineOfSight(
+                    CasterPawn,
+                    sourceResult,
+                    target))
+            {
+                return sourceVerb != null && sourceVerb.CanHitTargetFrom(root, target);
+            }
+
             return sourceVerb != null && sourceVerb.CanHitTargetFrom(root, target);
         }
     }

@@ -34,7 +34,7 @@ namespace BDP.Core.Expressions
 
                     FormalExpressionResult result = BuildResult(side, material);
                     allResults.Add(result);
-                    if (result.ResultKind == ExpressionResultKind.Verb)
+                    if (result.OutputChannel == ExpressionOutputChannel.Verb)
                     {
                         weaponResults.Add(result);
                     }
@@ -57,7 +57,7 @@ namespace BDP.Core.Expressions
             return new FormalExpressionResult
             {
                 Id = material.Id,
-                ResultKind = material.ResultKind,
+                OutputChannel = material.OutputChannel,
                 WeaponMode = material.WeaponMode,
                 OriginKind = ToOriginKind(side),
                 SourceReference = material.SourceReference,
@@ -69,12 +69,14 @@ namespace BDP.Core.Expressions
                 VisualPresetDefName = material.VisualPresetDefName,
                 VisualGraphicOverrideDefName = material.VisualGraphicOverrideDefName,
                 CompositeVisualPresetDefName = material.CompositeVisualPresetDefName,
+                ComboAttackVisualPresetDefName = material.ComboAttackVisualPresetDefName,
                 ForceSuppressHostEquipment = material.ForceSuppressHostEquipment,
                 VisualPriority = material.VisualPriority,
                 ManualEntryAggregationKey = BuildManualEntryAggregationKey(material),
                 RoleKey = material.RoleKey,
                 VerbAttackRole = material.VerbAttackRole,
                 Tags = material.Tags,
+                DeclaredPermissionKeys = material.DeclaredPermissionKeys != null ? new List<string>(material.DeclaredPermissionKeys) : new List<string>(),
                 ExecutionSlotKey = BuildExecutionSlotKey(material),
                 IsSecondaryAttack = material.VerbAttackRole == VerbAttackRole.Secondary,
                 Trion = material.Trion,
@@ -92,9 +94,11 @@ namespace BDP.Core.Expressions
                 AbilityDefName = material.AbilityDefName,
                 HediffDefName = material.HediffDefName,
                 HediffApplyModeKey = material.HediffApplyModeKey,
-                PassiveKey = material.PassiveKey,
+                HediffControlMode = material.HediffControlMode,
+                PassiveIdentityKey = material.PassiveIdentityKey,
                 ExposedData = material.ExposedData,
                 RangedModules = material.RangedModules != null ? CloneRangedModules(material.RangedModules) : new List<RangedModuleMountConfig>(),
+                HitPartPolicy = CloneHitPartPolicy(material.HitPartPolicy),
                 RangedModuleAugmentations = material.RangedModuleAugmentations != null
                     ? CloneRangedModuleAugmentations(material.RangedModuleAugmentations)
                     : new List<RangedModuleAugmentationConfig>(),
@@ -141,7 +145,7 @@ namespace BDP.Core.Expressions
 
         private static string BuildExecutionSlotKey(ExpressionSourceMaterial material)
         {
-            if (material == null || material.ResultKind != ExpressionResultKind.Verb)
+            if (material == null || material.OutputChannel != ExpressionOutputChannel.Verb)
             {
                 return null;
             }
@@ -156,7 +160,13 @@ namespace BDP.Core.Expressions
                 return material.VerbAttackRole == VerbAttackRole.Secondary ? "SubSecondary" : "SubPrimary";
             }
 
-            return material.VerbAttackRole == VerbAttackRole.Secondary ? "Secondary" : "Primary";
+            if (material.Side == TriggerSide.Special)
+            {
+                // 特殊槽只保留唯一主武器入口，禁止生成模糊的 Secondary 执行键。
+                return material.VerbAttackRole == VerbAttackRole.Primary ? "SpecialPrimary" : null;
+            }
+
+            return null;
         }
 
         /// <summary>
@@ -216,6 +226,14 @@ namespace BDP.Core.Expressions
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// 复制可选命中部位策略快照。
+        /// </summary>
+        private static HitPartPolicyConfig CloneHitPartPolicy(HitPartPolicyConfig policy)
+        {
+            return policy != null ? policy.Clone() : null;
         }
 
         /// <summary>

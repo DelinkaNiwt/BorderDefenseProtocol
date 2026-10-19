@@ -17,11 +17,11 @@ namespace BDP.Core.Expressions
         private static readonly DefaultManualEntryGizmoResolver GizmoResolver = new DefaultManualEntryGizmoResolver();
 
         /// <summary>
-        /// 为指定 Pawn 构建当前手动入口对应的按钮集合。
+        /// 为已征召角色构建手动战斗按钮；仅限制玩家界面，不撤销能力或自动战斗。
         /// </summary>
         public static IEnumerable<Gizmo> BuildGizmos(Pawn pawn)
         {
-            if (pawn == null)
+            if (pawn == null || !pawn.Drafted)
             {
                 yield break;
             }

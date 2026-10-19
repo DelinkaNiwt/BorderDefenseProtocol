@@ -9,9 +9,10 @@ $contentRoot = Join-Path $modRoot "Source\BDP.Content"
 $coreFiles = Get-ChildItem -LiteralPath $coreRoot -Recurse -Filter "*.cs"
 $coreText = ($coreFiles | ForEach-Object { Get-Utf8Text $_.FullName }) -join "`n"
 
+$legacyTypeName = "Chip" + "PresetDef"
 $forbidden = @(
-    "ChipPresetDef",
-    "GunClassDef",
+    $legacyTypeName,
+    "ArmamentFormDef",
     "ChipConfigBuilder",
     "ExpressionEntryMergeService",
     "ChipManufacturingSettings",
@@ -19,8 +20,8 @@ $forbidden = @(
     "Thing_CustomChip",
     "gunClassName",
     "gunClassLabel",
-    "GunClassName",
-    "GunClassLabel"
+    "ArmamentFormName",
+    "ArmamentFormLabel"
 )
 foreach ($name in $forbidden)
 {
@@ -43,8 +44,8 @@ Assert-True (($collectorText + $gizmoText) -notmatch 'SourceVariantLabel[^\r\n]*
     "Core 不得给任意中性变体标签强加“型”业务后缀。"
 
 $validatorText = Get-Utf8Text (Join-Path $coreRoot "Core\Combos\Validation\ComboDefinitionValidator.cs")
-Assert-True ($validatorText -notmatch "DefDatabase<ChipActionPresetDef>|DefDatabase<ChipPresetDef>") `
-    "Core 组合技校验不得查询 Content 动作预设。"
+Assert-True ($validatorText -notmatch ("DefDatabase<ChipManufacturingPresetDef>|DefDatabase<" + [regex]::Escape($legacyTypeName) + ">")) `
+    "Core 组合技校验不得查询 Content 芯片功能模板。"
 
 $consumerPaths = @(
     "Trigger\UI\ChipModes\ChipModeGizmoProvider.cs",

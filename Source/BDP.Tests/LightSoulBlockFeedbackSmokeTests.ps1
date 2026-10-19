@@ -1,3 +1,4 @@
+param([Parameter(Mandatory)][ValidateSet('1.6','1.7')][string]$RimWorldVersion)
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 
@@ -10,7 +11,7 @@ $visualFeedbackPath = Join-Path $modRoot 'Source\BDP\Core\Trigger\Access\Surface
 $visualImpulsePath = Join-Path $modRoot 'Source\BDP\Core\Trigger\Runtime\ExpressionVisualImpulse.cs'
 $visualOwnerPath = Join-Path $modRoot 'Source\BDP\Core\Trigger\Runtime\TriggerVisualRuntimeStateOwner.cs'
 $drawPatchPath = Join-Path $modRoot 'Source\BDP\Patches\Patch_PawnRenderUtility_DrawEquipmentAiming_BdpVisual.cs'
-$lightSoulPath = Join-Path $modRoot '1.6\Content\Defs\HediffDef\LightSoul.xml'
+$lightSoulPath = Join-Path $modRoot 'Common\Content\Defs\HediffDef\LightSoul.xml'
 
 # 断言一个条件必须成立。
 function Assert-True {
@@ -77,10 +78,10 @@ Assert-True (
     ($impulseText -match 'Vector3\.zero')
 ) '表达视觉冲量必须实现短促内缩、反向回弹和归零。'
 
-# 两个光魂盾姿态都应显式启用同一组可调回弹参数。
+# 防护盾显式启用既有可调回弹参数。
 [xml]$lightSoulXml = Get-Content -Raw -Encoding UTF8 $lightSoulPath
-$hediffs = @($lightSoulXml.Defs.HediffDef)
-Assert-True ($hediffs.Count -eq 2) '光魂必须保留灵活、举盾两个 Hediff。'
+$hediffs = @($lightSoulXml.SelectNodes('/Defs/HediffDef[comps/li[@Class="BDP.Content.Shield.HediffCompProperties_EnergyShield"]]'))
+Assert-True ($hediffs.Count -eq 1) '光魂只保留一个防护盾宿主；独立防护状态不参与格挡反馈。'
 foreach ($hediff in $hediffs) {
     $props = @($hediff.comps.li) | Where-Object {
         $_.Class -eq 'BDP.Content.Shield.HediffCompProperties_EnergyShield'
@@ -92,11 +93,10 @@ foreach ($hediff in $hediffs) {
 }
 
 # 装入真实程序集，验证回弹曲线关键帧：首次内缩、半程反弹、结束归零。
-$managedRoot = 'C:\NiwtGames\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed'
-[Reflection.Assembly]::LoadFrom((Join-Path $managedRoot 'UnityEngine.CoreModule.dll')) | Out-Null
-[Reflection.Assembly]::LoadFrom((Join-Path $managedRoot 'UnityEngine.dll')) | Out-Null
-[Reflection.Assembly]::LoadFrom((Join-Path $managedRoot 'Assembly-CSharp.dll')) | Out-Null
-$coreAssembly = [Reflection.Assembly]::LoadFrom((Join-Path $modRoot '1.6\Assemblies\BDP.Core.dll'))
+. (Join-Path $PSScriptRoot 'TestSupport/RangedVersionTestSupport.ps1')
+Initialize-RangedVersionTest -RimWorldVersion $RimWorldVersion
+$coreAssembly = $script:RangedCore
+
 $impulseType = $coreAssembly.GetType('BDP.Core.Trigger.Runtime.ExpressionVisualImpulse', $true)
 $bindingFlags = [Reflection.BindingFlags]::Instance -bor [Reflection.BindingFlags]::Public -bor [Reflection.BindingFlags]::NonPublic
 $impulse = [Activator]::CreateInstance($impulseType, $true)

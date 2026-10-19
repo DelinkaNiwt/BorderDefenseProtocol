@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!-- 皇室角色童年背景，保持技能和工作能力中性。 -->
+  <BackstoryDef>
+    <!-- 童年背景唯一标识。 -->
+    <defName>BDP_Royal_FallenChild</defName>
+    <!-- 背景标题从简体中文语言包读取。 -->
+    <title>BDP_Royal_FallenChild.title</title>
+    <!-- 背景短标题从简体中文语言包读取。 -->
+    <titleShort>BDP_Royal_FallenChild.titleShort</titleShort>
+    <!-- 背景描述从简体中文语言包读取。 -->
+    <description>BDP_Royal_FallenChild.description</description>
+    <!-- 这是童年阶段背景。 -->
+    <slot>Childhood</slot>
+    <!-- 仅由亡国皇室角色类型固定引用，不进入原版随机背景池。 -->
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+  <!-- 皇室角色成年背景，承接帝国覆灭后的逃亡求援。 -->
+  <BackstoryDef>
+    <!-- 成年背景唯一标识。 -->
+    <defName>BDP_Royal_FallenAdult</defName>
+    <!-- 背景标题从简体中文语言包读取。 -->
+    <title>BDP_Royal_FallenAdult.title</title>
+    <!-- 背景短标题从简体中文语言包读取。 -->
+    <titleShort>BDP_Royal_FallenAdult.titleShort</titleShort>
+    <!-- 背景描述从简体中文语言包读取。 -->
+    <description>BDP_Royal_FallenAdult.description</description>
+    <!-- 这是成年阶段背景。 -->
+    <slot>Adulthood</slot>
+    <!-- 仅由亡国皇室角色类型固定引用，不进入原版随机背景池。 -->
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+</Defs>

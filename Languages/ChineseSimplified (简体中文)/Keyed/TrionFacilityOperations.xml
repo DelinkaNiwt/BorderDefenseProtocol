@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 核心归属与缓存停运原因。 -->
+  <BDP_TrionFacility_Unbound>未绑定皇室成员</BDP_TrionFacility_Unbound>
+  <BDP_TrionFacility_Unconscious>绑定皇室失去意识，暂停运行</BDP_TrionFacility_Unconscious>
+  <BDP_TrionFacility_BoundRoyal>绑定皇室：{0}</BDP_TrionFacility_BoundRoyal>
+  <!-- 正式动作由选定人物亲自前往核心交互格执行。 -->
+  <BDP_TrionFacility_Bind>绑定皇室</BDP_TrionFacility_Bind>
+  <BDP_TrionFacility_BindDesc>选择一名正式加入殖民地的皇室成员前往绑定。绑定者具有核心的全部操作权限，其契约者可执行绑定、解绑以外的普通操作。外出不影响核心运行。</BDP_TrionFacility_BindDesc>
+  <BDP_TrionFacility_Unbind>解除绑定</BDP_TrionFacility_Unbind>
+  <BDP_TrionFacility_UnbindDesc>由当前绑定皇室前往解除归属并停止运行。储量保留，不改变人物之间的契约。</BDP_TrionFacility_UnbindDesc>
+  <!-- 没有候选或任务执行前资格变化时的反馈。 -->
+  <BDP_TrionFacility_NoEligibleRoyal>没有可执行此操作的皇室成员</BDP_TrionFacility_NoEligibleRoyal>
+  <BDP_TrionFacility_BindingFailed>核心归属或人物资格已变化，无法完成此次绑定操作。</BDP_TrionFacility_BindingFailed>
+  <!-- 正式献祭入口、原版准备窗口及预览。 -->
+  <BDP_TrionFacility_Sacrifice>献祭补充</BDP_TrionFacility_Sacrifice>
+  <BDP_TrionFacility_SacrificeDesc>选择本核心的绑定皇室或其契约者负责最终献祭，普通搬运者可以协助将供物装入核心。接收科技档位明确的物品及指定例外。收益以科技档位为主、物品自身价值为辅，最多允许你最后加入的一件供物溢出；储量达到补充门槛后不再接收。</BDP_TrionFacility_SacrificeDesc>
+  <BDP_TrionFacility_Sacrifice_Title>献祭补充</BDP_TrionFacility_Sacrifice_Title>
+  <BDP_TrionFacility_Sacrifice_Description>选择献祭者，填写各类供物的总数量。搬运者会协助将供物装入核心，备齐后由所选献祭者自动前往完成。可在核心的“供物”页查看待搬与已搬清单。最多允许你最后加入的一件供物溢出，预计储量达到门槛后只能减量；取消准备会退回已搬供物。</BDP_TrionFacility_Sacrifice_Description>
+  <!-- 紧凑的操作者选择，不占独立清单栏。 -->
+  <BDP_TrionFacility_Sacrifice_Operator>献祭者</BDP_TrionFacility_Sacrifice_Operator>
+  <BDP_TrionFacility_Sacrifice_SelectOperator>选择献祭者</BDP_TrionFacility_Sacrifice_SelectOperator>
+  <BDP_TrionFacility_Sacrifice_Start>开始准备</BDP_TrionFacility_Sacrifice_Start>
+  <BDP_TrionFacility_Sacrifice_Preview>当前储量：{0}（补充门槛：{1}）\n本次补充：{2}\n完成后储量：{3}（最多最后加入的一件溢出）</BDP_TrionFacility_Sacrifice_Preview>
+  <BDP_TrionFacility_Sacrifice_UnitYield>单件收益：{0}　可用：{1}</BDP_TrionFacility_Sacrifice_UnitYield>
+  <!-- 选择、预留和最终提交的共同反馈。 -->
+  <BDP_TrionFacility_Sacrifice_NoOperator>本地图没有能现场操作此核心的绑定皇室或契约者。</BDP_TrionFacility_Sacrifice_NoOperator>
+  <BDP_TrionFacility_Sacrifice_NoSupplies>当前地图没有可献祭的供物。</BDP_TrionFacility_Sacrifice_NoSupplies>
+  <BDP_TrionFacility_Sacrifice_Unavailable>核心已不可用。</BDP_TrionFacility_Sacrifice_Unavailable>
+  <BDP_TrionFacility_Sacrifice_InvalidActor>请选择有权且能现场操作的人物。</BDP_TrionFacility_Sacrifice_InvalidActor>
+  <BDP_TrionFacility_Sacrifice_Full>储量已达到补充门槛。</BDP_TrionFacility_Sacrifice_Full>
+  <BDP_TrionFacility_Sacrifice_OverflowLimit>供物数量超过补充上限，最多允许最后加入的一件溢出。未消费供物。</BDP_TrionFacility_Sacrifice_OverflowLimit>
+  <BDP_TrionFacility_Sacrifice_NoGoods>请填写供物数量。</BDP_TrionFacility_Sacrifice_NoGoods>
+  <BDP_TrionFacility_Sacrifice_InvalidGoods>供物已变化或不完整，未消费供物。</BDP_TrionFacility_Sacrifice_InvalidGoods>
+  <BDP_TrionFacility_Sacrifice_Blocked>献祭者无法到达或预留核心。</BDP_TrionFacility_Sacrifice_Blocked>
+  <!-- 协作搬运的原版容器内容页、进度与取消入口。 -->
+  <BDP_TrionFacility_Sacrifice_Tab>供物</BDP_TrionFacility_Sacrifice_Tab>
+  <BDP_TrionFacility_Sacrifice_LoadedGoods>已搬到的供物</BDP_TrionFacility_Sacrifice_LoadedGoods>
+  <BDP_TrionFacility_Sacrifice_LoadingProgress>供物已搬：{0}／{1}，待搬：{2}\n献祭者：{3}</BDP_TrionFacility_Sacrifice_LoadingProgress>
+  <BDP_TrionFacility_Sacrifice_Ready>供物备齐，等待献祭者执行</BDP_TrionFacility_Sacrifice_Ready>
+  <BDP_TrionFacility_Sacrifice_CancelPreparation>取消献祭准备</BDP_TrionFacility_Sacrifice_CancelPreparation>
+  <BDP_TrionFacility_Sacrifice_CancelPreparationDesc>取消本批供物搬运和最终献祭，将已经搬入核心的供物放回附近。不会消费供物。</BDP_TrionFacility_Sacrifice_CancelPreparationDesc>
+  <BDP_TrionFacility_Sacrifice_AlreadyPreparing>核心已有一批供物准备中，请先完成或取消。</BDP_TrionFacility_Sacrifice_AlreadyPreparing>
+  <BDP_TrionFacility_Sacrifice_MissingSupplies>部分待搬供物已经不存在，请取消准备并重新选择。缺失供物不会算作已搬齐。</BDP_TrionFacility_Sacrifice_MissingSupplies>
+  <!-- 原版定义加载期的配置诊断，不静默容忍错误档位或无限收益。 -->
+  <BDP_TrionFacility_Config_Reference>{0}：献祭参考市值必须为有限正数。</BDP_TrionFacility_Config_Reference>
+  <BDP_TrionFacility_Config_Tier>{0}：献祭收益档位重复或区间无效。</BDP_TrionFacility_Config_Tier>
+  <BDP_TrionFacility_Config_Gap>{0}：档位{1}缺失或没有形成独立收益断档。</BDP_TrionFacility_Config_Gap>
+  <BDP_TrionFacility_Config_Override>{0}：献祭物品例外缺失、重复或科技档位无效。</BDP_TrionFacility_Config_Override>
+</LanguageData>

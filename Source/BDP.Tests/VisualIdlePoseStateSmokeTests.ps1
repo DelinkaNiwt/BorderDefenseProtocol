@@ -26,25 +26,26 @@ $resolverText = Get-Content -Raw -Encoding utf8 -LiteralPath $resolverPath
 
 Assert-True (
     ($configText -match 'public bool HandMirrorOnlyWhenIdle = false;') -and
-    ($configText -notmatch 'DecorativeAngleOnlyWhenIdle')
-) '南北姿态必须保留静默手侧镜像配置，并移除已无使用者的静默装饰角配置。'
+    ($configText -match 'public bool DecorativeAngleOnlyWhenIdle = false;')
+) '南北姿态必须保留默认关闭的静默手侧镜像和装饰角配置。'
 
 Assert-True (
-    ($resolverText -match 'bool isAnyExecutionActive = IsAnyExecutionActive\(request\);') -and
-    ($resolverText -match 'pose\.HandMirrorOnlyWhenIdle\s*&& !isAnyExecutionActive') -and
-    ($resolverText -notmatch 'DecorativeAngleOnlyWhenIdle')
-) '南北姿态必须只按整轮执行态裁定静默镜像。'
+    ([regex]::Matches($resolverText, 'bool isAttackStanceActive = IsAnyAttackStanceActive\(request\);').Count -ge 2) -and
+    ($resolverText -match 'pose\.HandMirrorOnlyWhenIdle\s*&& !isAttackStanceActive') -and
+    ($resolverText -match 'pose\.DecorativeAngleOnlyWhenIdle\s*&& isAttackStanceActive')
+) '南北与东西姿态的静默镜像、装饰角都必须只按同一实时 Pawn 攻击姿态裁定。'
 
 Assert-True (
     ($eastWestConfigText -match 'public bool HandMirror = false;') -and
-    ($resolverText -match 'bool handMirror = pose\.HandMirror && isSubHand;') -and
+    ($resolverText -match 'bool handMirror = pose\.HandMirror\s*&&\s*\(pose\.FinalMirrorByHandOnly') -and
     ($resolverText -match 'ForceHandMirror = pose\.HandMirror')
 ) '东西姿态必须默认关闭手侧镜像，并仅在作者显式开启时强制应用副手镜像。'
 
 Assert-True (
-    ($resolverText -match 'request\?\.RuntimeState\?\.HasExecutionState == true') -and
+    ($resolverText -match 'return request\?\.IsMatchingAttackStanceActive == true;') -and
+    ($resolverText -notmatch 'RuntimeState\?\.HasExecutionState') -and
     ($resolverText -notmatch 'ForceHandMirrorWhenInactive') -and
     ($resolverText -notmatch 'pose\.HandMirrorOnlyWhenIdle\s*&& !request\.IsExecutionActive')
-) '静默姿态不得再由单条视觉是否命中执行焦点决定。'
+) '静默姿态必须读取共享的实时攻击姿态标记，不能使用残留的运行时记录或单条焦点。'
 
 Write-Output 'VisualIdlePoseStateSmokeTests PASS'

@@ -115,7 +115,7 @@ Assert-True (
 
 Assert-True (
     ($presentationProjectionText -match 'ProjectionVersion') -and
-    ($presentationProjectionText -match 'ExpressionInfoProjection InfoProjection') -and
+    ($presentationProjectionText -match 'IReadOnlyList<ChipInformationModel> ChipInformations') -and
     ($presentationProjectionText -match 'ManualEntryProjection ManualProjection') -and
     ($presentationProjectionText -match 'VisualExpressionProjection VisualProjection')
 ) 'TriggerPresentationState must expose the minimal published presentation members required by Task 3.'
@@ -157,7 +157,7 @@ Assert-True (
 Assert-True (
     ($presentationBuilderText -match 'sealed class TriggerPresentationBuilder') -and
     ($presentationBuilderText -match 'Build\(ExpressionService expressionService, ExpressionSnapshot snapshot, int projectionVersion\)') -and
-    ($presentationBuilderText -match 'BuildPublishedInfoProjection') -and
+    ($presentationBuilderText -match 'BuildPublishedChipInformations') -and
     ($presentationBuilderText -match 'BuildPublishedManualProjection') -and
     ($presentationBuilderText -match 'BuildPublishedVisualProjection')
 ) 'TriggerPresentationBuilder must build published presentation state from an already-selected snapshot.'
@@ -350,11 +350,11 @@ Assert-True (
     $contextsText -match 'SyncContainerFromSlotTruth'
 ) 'Trigger loadout context must expose derived container synchronization, not direct add/remove delegates.'
 
-$expressionUsesLoadoutReader =
-    ($expressionSurfaceText -match 'ResolveLoadoutReader') -and
+$expressionUsesPublishedInformation =
+    ($expressionSurfaceText -match 'BuildPublishedChipInformations') -and
     ($expressionSurfaceText -notmatch 'chipContainer')
 
-Assert-True $expressionUsesLoadoutReader 'Expression surface must derive its business input from the trigger loadout reader, not chipContainer.'
+Assert-True $expressionUsesPublishedInformation 'Expression surface must derive information from the published model, not chipContainer.'
 
 Assert-True (
     $verbHostManagerText -notmatch 'chipContainer'

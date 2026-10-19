@@ -66,5 +66,16 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Model
         /// 该位置用于宿主层裁短续段时提供中性的几何参考。
         /// </summary>
         public Vector3 FirstObjectiveBlockerExactPosition { get; set; }
+
+        /// <summary>
+        /// 当前扫描段是否成功解析出阻挡格外的视觉安全终点。
+        /// </summary>
+        public bool HasFirstObjectiveBlockerVisualPosition { get; set; }
+
+        /// <summary>
+        /// 当前扫描段首次触达阻挡格前的视觉安全终点。
+        /// 它只服务视觉拖尾，不覆盖逻辑命中位置。
+        /// </summary>
+        public Vector3 FirstObjectiveBlockerVisualPosition { get; set; }
     }
 }

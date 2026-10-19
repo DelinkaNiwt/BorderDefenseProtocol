@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 随机再接触入口，同时作为首发入口的继承模板，共用一份任务流程。 -->
+  <QuestScriptDef Name="BDP_RoyalArrivalBase">
+    <!-- 任务标识也是内容节点防重复的边界。 -->
+    <defName>BDP_RoyalArrival</defName>
+    <!-- 标签从语言包注入。 -->
+    <label>BDP_RoyalArrival</label>
+    <!-- 沿用普通任务候选权重，后续可按实际出现节奏调整。 -->
+    <rootSelectionWeight>1</rootSelectionWeight>
+    <!-- 随机渠道同样从第八天开放，避免早于专门首发；调整时同步派发部件的天数。 -->
+    <rootEarliestDay>8</rootEarliestDay>
+    <!-- 原版随机可接受任务必须设置邀请有效期；沿用难民任务范围，与保护时限无关。 -->
+    <expireDaysRange>4~8</expireDaysRange>
+    <!-- 人数暂不随威胁点数放大，保证入口为独立可调整的单波设计。 -->
+    <affectedByPoints>false</affectedByPoints>
+    <!-- 正式加入会增加人口，沿用原版人口导向。 -->
+    <rootIncreasesPopulation>true</rootIncreasesPopulation>
+    <!-- 普通地面入口，不擅自添加太空抵达方案。 -->
+    <neverPossibleInSpace>true</neverPossibleInSpace>
+    <!-- 地点整体搬迁沿原版结束规则，不用跨地图定时扫描补救。 -->
+    <endOnColonyMove>true</endOnColonyMove>
+    <!-- 名称预览的原版规则由语言包翻译；正式描述由内容节点读取中文语言键。 -->
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->BDP_RoyalArrival</li>
+      </rulesStrings>
+    </questNameRules>
+    <!-- 正式业务节点及其可调整参数。 -->
+    <root Class="BDP.Content.Royal.Quest.QuestNode_Root_RoyalArrival">
+      <!-- 皇室人物使用专属、可遗传的薇瑟皇裔异种定义。 -->
+      <royalXenotype>BDP_Xenotype_ViserRoyal</royalXenotype>
+      <!-- 追兵必备腺体，不是给玩家另发首个胚芽。 -->
+      <glandGene>BDP_Gene_TrionGland</glandGene>
+      <!-- 直接装备已经确定的双预载原型，战利品就是这把装备。 -->
+      <prototype>BDP_TriggerBody_NeighborPrototype</prototype>
+      <!-- 皇室携带此前描述的一颗实体驱动核心。 -->
+      <driveCore>BDP_TrionDriveCore</driveCore>
+      <!-- 数量不是长期平衡标准。 -->
+      <driveCoreCount>1</driveCoreCount>
+      <!-- 用户未另定前的首版测试人数，整波只建立一个队伍。 -->
+      <pursuerCount>1</pursuerCount>
+      <!-- 暂用半天准备间隔；不是保护时限，经过此时间不会自动成功。 -->
+      <raidDelayTicks>30000</raidDelayTicks>
+    </root>
+  </QuestScriptDef>
+  <!-- 专门事件只引用此入口；原版禁止事件任务同时具有随机抽取权重。 -->
+  <QuestScriptDef ParentName="BDP_RoyalArrivalBase">
+    <!-- 与随机入口分开身份，人物、追兵、邀请期限等配置全部继承。 -->
+    <defName>BDP_RoyalArrivalOpening</defName>
+    <!-- 首发仅由原版单次定时事件派发，不进入随机任务池。 -->
+    <rootSelectionWeight>0</rootSelectionWeight>
+  </QuestScriptDef>
+</Defs>

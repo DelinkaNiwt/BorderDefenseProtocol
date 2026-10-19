@@ -24,6 +24,12 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Impact
         /// </summary>
         public Thing TargetThing { get; set; }
 
+        /// <summary>本次直接命中的原版部位事实；范围目标不得借用其他目标的部位。</summary>
+        public BodyPartRecord HitPart { get; set; }
+
+        /// <summary>本次实际目标的原版结果条目；为空时不关联其它目标的记录。</summary>
+        public LogEntry_DamageResult BattleLogEntry { get; set; }
+
         /// <summary>
         /// 当前攻击目标所在格子。
         /// </summary>

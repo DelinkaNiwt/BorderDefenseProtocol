@@ -60,6 +60,14 @@ Assert-True (
 ) 'Projectile visual attachment contexts must expose neutral launch, sample, restore, and terminate facts.'
 
 Assert-True (
+    ($contractsText -match 'LaunchDisposition') -and
+    ($contractsText -match 'CanHitIntendedTarget') -and
+    ($contractsText -match 'ActualLaunchTarget') -and
+    ($contractsText -match 'ActualLaunchDestination') -and
+    ($projectileText -match 'LaunchResolution\.Disposition')
+) 'Visual launch context must carry frozen launch facts without allowing visual code to rewrite the target.'
+
+Assert-True (
     ($contractsText -notmatch 'ProjectileInitPlan') -and
     ($contractsText -notmatch 'RangedAttackModuleSession')
 ) 'Projectile visual attachment contracts must not leak internal business types.'

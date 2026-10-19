@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using BDP.Core.AttackExecution.RangedProtocol.Model;
 using BDP.Core.AttackExecution.RangedModules.Runtime;
 using BDP.Core.Semantics;
@@ -16,8 +17,9 @@ namespace BDP.Core.AttackExecution.RangedProtocol.ProjectileInit
             AimRecord aim,
             PrepareRecord prepare,
             FireRecord fire,
-            IRangedAttackModuleRuntime currentRuntime)
+            IRangedAttackModuleRuntime currentRuntime, IReadOnlyList<ProjectileInitContribution> previousContributions = null)
         {
+            PreviousContributions = previousContributions;
             Entry = entry;
             Aim = aim;
             Prepare = prepare;
@@ -44,6 +46,19 @@ namespace BDP.Core.AttackExecution.RangedProtocol.ProjectileInit
                 ? entry.RuntimeStep.StepIndex * EmitCount
                 : 0;
             SemanticContext = entry != null ? entry.SemanticContext : null;
+        }
+
+        /// <summary>前序贡献仅供读取控制权；不向业务暴露计划对象。</summary>
+        private IReadOnlyList<ProjectileInitContribution> PreviousContributions { get; }
+
+        /// <summary>检查该发是否已被前序贡献独占。</summary>
+        public bool HasPreviousExclusiveFlightControl(int emitIndex)
+        {
+            if (PreviousContributions == null) return false;
+            for (int i = 0; i < PreviousContributions.Count; i++)
+                foreach (ProjectileInitPlanContribution plan in PreviousContributions[i].PlanContributions)
+                    if (plan != null && plan.EmitIndex == emitIndex && plan.ExclusiveFlightControl) return true;
+            return false;
         }
 
         internal RangedAttackEntry Entry { get; }
@@ -130,6 +145,7 @@ namespace BDP.Core.AttackExecution.RangedProtocol.ProjectileInit
         /// </summary>
         public int EmitSequenceBase { get; }
 
+        /// <summary>
         /// 当前攻击继承的统一语义上下文。
         /// </summary>
         public ISemanticContext SemanticContext { get; }
@@ -148,6 +164,39 @@ namespace BDP.Core.AttackExecution.RangedProtocol.ProjectileInit
 
             sourceResultId = Fire.Emits[emitIndex]?.SourceResultId;
             return !string.IsNullOrWhiteSpace(sourceResultId);
+        }
+
+        /// <summary>
+        /// 读取指定 emit 声明的原版发射点散布区间。
+        /// 这是初始化阶段的中性事实访问器，模块可据此协调自己的发射几何。
+        /// </summary>
+        public bool TryGetEmitOriginSpread(
+            int emitIndex,
+            out float lateralMin,
+            out float lateralMax,
+            out float forwardMin,
+            out float forwardMax)
+        {
+            lateralMin = 0f;
+            lateralMax = 0f;
+            forwardMin = 0f;
+            forwardMax = 0f;
+            if (Fire?.Emits == null || emitIndex < 0 || emitIndex >= Fire.Emits.Count)
+            {
+                return false;
+            }
+
+            FireEmitRecord emit = Fire.Emits[emitIndex];
+            if (emit == null || !emit.HasOriginSpreadRange)
+            {
+                return false;
+            }
+
+            lateralMin = emit.OriginSpreadLateralMin;
+            lateralMax = emit.OriginSpreadLateralMax;
+            forwardMin = emit.OriginSpreadForwardMin;
+            forwardMax = emit.OriginSpreadForwardMax;
+            return true;
         }
 
         /// <summary>

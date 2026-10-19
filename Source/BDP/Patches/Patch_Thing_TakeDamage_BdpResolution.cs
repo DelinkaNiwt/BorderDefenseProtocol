@@ -12,8 +12,9 @@ namespace BDP.Patches
     public static class Patch_Thing_TakeDamage_BdpResolution
     {
         /// <summary>
-        /// 在原版承伤入口开始时建立短生命周期捕获记录。
+        /// 只为显式请求捕获结果；独立嵌套承伤建立空隔离边界，普通外层直接早退。
         /// </summary>
+        [HarmonyPriority(Priority.First)]
         public static void Prefix(
             Thing __instance,
             DamageInfo dinfo,
@@ -39,11 +40,7 @@ namespace BDP.Patches
             Exception __exception,
             DamageResolutionRuntime.Capture __state)
         {
-            if (__exception != null)
-            {
-                DamageResolutionRuntime.Abort(__state);
-            }
-
+            DamageResolutionRuntime.Abort(__state);
             return __exception;
         }
     }

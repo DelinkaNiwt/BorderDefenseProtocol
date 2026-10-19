@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <!-- 玩家选择或受影响的目标类别。 -->
+  <BDP_Property_TargetType.label>目标类型</BDP_Property_TargetType.label>
+  <!-- 功能发动时是否需要使用者直视目标。 -->
+  <BDP_Property_RequiresLineOfSight.label>需要视线</BDP_Property_RequiresLineOfSight.label>
+  <!-- 到目标或作用点的最大有效距离。 -->
+  <BDP_Property_CastRange.label>有效距离</BDP_Property_CastRange.label>
+  <!-- 近距离禁用区的距离下限。 -->
+  <BDP_Property_MinimumCastRange.label>最小距离</BDP_Property_MinimumCastRange.label>
+  <!-- 目标点周围的实际作用半径。 -->
+  <BDP_Property_EffectRadius.label>效果半径</BDP_Property_EffectRadius.label>
+  <!-- 一次作用能够影响的目标数量上限。 -->
+  <BDP_Property_MaxTargets.label>目标数量上限</BDP_Property_MaxTargets.label>
+  <!-- 发射或生效前的等待时间。 -->
+  <BDP_Property_WarmupDuration.label>预热时间</BDP_Property_WarmupDuration.label>
+  <!-- 动作完成后恢复行动所需时间。 -->
+  <BDP_Property_ActionCooldownDuration.label>行动冷却时间</BDP_Property_ActionCooldownDuration.label>
+  <!-- 玩家能力再次可用前的完整冷却时长。 -->
+  <BDP_Property_AbilityCooldownDuration.label>能力冷却计时</BDP_Property_AbilityCooldownDuration.label>
+  <!-- 固定持续的功能效果时间。 -->
+  <BDP_Property_EffectDuration.label>持续时间</BDP_Property_EffectDuration.label>
+  <!-- 离散可用次数的储备上限。 -->
+  <BDP_Property_ChargeCapacity.label>充能上限</BDP_Property_ChargeCapacity.label>
+  <!-- 恢复一次离散充能需要的时间。 -->
+  <BDP_Property_ChargeRecoveryDuration.label>充能恢复时间</BDP_Property_ChargeRecoveryDuration.label>
+  <!-- 每次完整功能释放结算的 Trion 数量。 -->
+  <BDP_Property_UseCost.label>使用消耗</BDP_Property_UseCost.label>
+  <!-- 按有效来源数量记录功能维持期间的每秒 Trion 消耗分档。 -->
+  <BDP_Property_SustainCost.label>维持消耗</BDP_Property_SustainCost.label>
+  <!-- 容量消耗或受损后开始恢复前的等待时间。 -->
+  <BDP_Property_RecoveryDelay.label>恢复延迟</BDP_Property_RecoveryDelay.label>
+  <!-- 额外效果对移动速度施加的倍率。 -->
+  <BDP_Property_MovementSpeedMultiplier.label>移动速度倍率</BDP_Property_MovementSpeedMultiplier.label>
+  <!-- 额外效果对投射物速度施加的倍率。 -->
+  <BDP_Property_ProjectileSpeedMultiplier.label>投射物速度倍率</BDP_Property_ProjectileSpeedMultiplier.label>
+  <!-- 效果施加的玩家可读状态名称。 -->
+  <BDP_Property_AppliedStatus.label>施加状态</BDP_Property_AppliedStatus.label>
+  <!-- 状态或效果的强度数值。 -->
+  <BDP_Property_StatusStrength.label>状态强度</BDP_Property_StatusStrength.label>
+  <!-- 同一状态或效果可叠加的最大层数。 -->
+  <BDP_Property_StackLimit.label>叠加上限</BDP_Property_StackLimit.label>
+
+</LanguageData>

@@ -314,8 +314,8 @@ namespace BDP.Core.Chips
                 return;
             }
 
-            if (entry.Kind == BDP.Core.Expressions.ChipExpressionEntryKindConfig.PrimaryVerb
-                || entry.Kind == BDP.Core.Expressions.ChipExpressionEntryKindConfig.SecondaryVerb)
+            if (entry.EntryType == BDP.Core.Expressions.ChipExpressionEntryTypeConfig.PrimaryVerb
+                || entry.EntryType == BDP.Core.Expressions.ChipExpressionEntryTypeConfig.SecondaryVerb)
             {
                 bool meleeEntry = IsMeleeEntry(entry);
                 Tool resolvedTool = ResolvePrimaryDeclaredTool(ResolveDeclaredTools(entry));
@@ -370,19 +370,19 @@ namespace BDP.Core.Chips
                 return;
             }
 
-            if (entry.Kind == BDP.Core.Expressions.ChipExpressionEntryKindConfig.Ability)
+            if (entry.EntryType == BDP.Core.Expressions.ChipExpressionEntryTypeConfig.Ability)
             {
                 ValidateAbilityExpressionEntry(entry, context, errors);
                 return;
             }
 
-            if (entry.Kind == BDP.Core.Expressions.ChipExpressionEntryKindConfig.Hediff)
+            if (entry.EntryType == BDP.Core.Expressions.ChipExpressionEntryTypeConfig.Hediff)
             {
                 ValidateHediffExpressionEntry(entry, context, errors, warnings);
                 return;
             }
 
-            if (entry.Kind == BDP.Core.Expressions.ChipExpressionEntryKindConfig.Passive)
+            if (entry.EntryType == BDP.Core.Expressions.ChipExpressionEntryTypeConfig.Passive)
             {
                 ValidatePassiveExpressionEntry(entry, context, errors);
             }
@@ -458,6 +458,7 @@ namespace BDP.Core.Chips
 
             if (string.IsNullOrWhiteSpace(entry.HediffApplyModeKey))
             {
+                ValidateHediffControlMode(entry, context, errors);
                 return;
             }
 
@@ -469,6 +470,40 @@ namespace BDP.Core.Chips
                     ChipDefinitionDeclaredBlock.Expression,
                     context + " 的 HediffApplyModeKey 当前只支持留空或 countToSeverity。"));
             }
+
+            ValidateHediffControlMode(entry, context, errors);
+        }
+
+        /// <summary>
+        /// 校验 Hediff 宿主生命周期控制模式。
+        /// </summary>
+        private static void ValidateHediffControlMode(
+            BDP.Core.Expressions.ChipExpressionEntryConfig entry,
+            string context,
+            List<ChipDefinitionValidationMessage> errors)
+        {
+            if (entry == null || errors == null || string.IsNullOrWhiteSpace(entry.HediffControlMode))
+            {
+                return;
+            }
+
+            if (string.Equals(
+                    entry.HediffControlMode,
+                    BDP.Core.Expressions.HediffControlModeKeys.Automatic,
+                    StringComparison.OrdinalIgnoreCase)
+                || string.Equals(
+                    entry.HediffControlMode,
+                    BDP.Core.Expressions.HediffControlModeKeys.AbilityButton,
+                    StringComparison.OrdinalIgnoreCase))
+            {
+                return;
+            }
+
+            errors.Add(BuildMessage(
+                "ExpressionHediffControlModeUnsupported",
+                ChipDefinitionValidationSeverity.Error,
+                ChipDefinitionDeclaredBlock.Expression,
+                context + " 的 HediffControlMode 当前只支持留空、Automatic 或 AbilityButton。"));
         }
 
         /// <summary>
@@ -484,13 +519,13 @@ namespace BDP.Core.Chips
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(entry.PassiveKey))
+            if (string.IsNullOrWhiteSpace(entry.PassiveIdentityKey))
             {
                 errors.Add(BuildMessage(
-                    "ExpressionPassiveKeyMissing",
+                    "ExpressionPassiveIdentityKeyMissing",
                     ChipDefinitionValidationSeverity.Error,
                     ChipDefinitionDeclaredBlock.Expression,
-                    context + " 缺少 PassiveKey。"));
+                    context + " 缺少 PassiveIdentityKey。"));
             }
         }
 
@@ -521,9 +556,8 @@ namespace BDP.Core.Chips
         /// </summary>
         private static bool IsMeleeEntry(BDP.Core.Expressions.ChipExpressionEntryConfig entry)
         {
-            return entry != null
-                && (entry.WeaponMode == BDP.Core.Expressions.VerbExpressionModeConfig.Melee
-                    || (entry.VerbProps != null && entry.VerbProps.IsMeleeAttack));
+            return BDP.Core.Expressions.ChipExpressionCapabilityResolver.ResolveWeaponMode(entry)
+                == BDP.Core.Expressions.VerbExpressionModeConfig.Melee;
         }
 
         /// <summary>

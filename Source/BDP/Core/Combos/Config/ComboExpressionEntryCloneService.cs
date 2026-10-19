@@ -54,11 +54,12 @@ namespace BDP.Core.Combos
                 DisplayLabelKey = source.DisplayLabelKey,
                 RoleKey = source.RoleKey,
                 Tags = CloneStrings(source.Tags),
+                DeclaredPermissionKeys = CloneStrings(source.DeclaredPermissionKeys),
                 Conditions = CloneConditions(source.Conditions),
                 Trion = CloneTrion(source.Trion),
                 SemanticSourceKind = source.SemanticSourceKind,
                 Presentation = ClonePresentation(source.Presentation),
-                Kind = source.Kind,
+                EntryType = source.EntryType,
                 RelationKind = source.RelationKind,
                 ParentEntryId = source.ParentEntryId,
                 WeaponMode = source.WeaponMode,
@@ -74,9 +75,11 @@ namespace BDP.Core.Combos
                 AbilityDefName = source.AbilityDefName,
                 HediffDefName = source.HediffDefName,
                 HediffApplyModeKey = source.HediffApplyModeKey,
-                PassiveKey = source.PassiveKey,
+                HediffControlMode = source.HediffControlMode,
+                PassiveIdentityKey = source.PassiveIdentityKey,
                 ExposedData = CloneExposedData(source.ExposedData),
                 RangedModules = CloneRangedModules(source.RangedModules),
+                HitPartPolicy = source.HitPartPolicy != null ? source.HitPartPolicy.Clone() : null,
                 ProjectileOverrides = source.ProjectileOverrides != null
                     ? source.ProjectileOverrides.Clone()
                     : null
@@ -150,6 +153,7 @@ namespace BDP.Core.Combos
                 VisualPresetDefName = source.VisualPresetDefName,
                 VisualGraphicOverrideDefName = source.VisualGraphicOverrideDefName,
                 CompositeVisualPresetDefName = source.CompositeVisualPresetDefName,
+                ComboAttackVisualPresetDefName = source.ComboAttackVisualPresetDefName,
                 ForceSuppressHostEquipment = source.ForceSuppressHostEquipment,
                 VisualPriority = source.VisualPriority
             };

@@ -4,7 +4,7 @@ namespace BDP.Core.Expressions
 {
     /// <summary>
     /// 表达视觉预设中的枪口锚点配置。
-    /// 枪口偏移按最终贴图姿态变换，与贴图装饰角和网格镜像保持一致。
+    /// 枪口点按贴图画布比例记录，再随实际贴图尺寸、缩放、角度和镜像一起变换。
     /// </summary>
     public sealed class ExpressionVisualMuzzleConfig
     {
@@ -15,8 +15,8 @@ namespace BDP.Core.Expressions
         public bool IsRangedWeapon = false;
 
         /// <summary>
-        /// 主侧默认枪口局部偏移。
-        /// X 表示左右，Y 表示高度，Z 表示朝向目标的前后。
+        /// 主侧默认枪口贴图局部坐标。
+        /// X、Z 分别按贴图纵向和横向画布比例填写；Y 是不随贴图缩放的世界高度偏移。
         /// </summary>
         public Vector3 MuzzleOffset = Vector3.zero;
 
@@ -27,7 +27,7 @@ namespace BDP.Core.Expressions
         public bool HasSubHandMuzzleOffsetOverride = false;
 
         /// <summary>
-        /// 副侧专用枪口局部偏移。
+        /// 副侧专用枪口贴图局部坐标，单位与 MuzzleOffset 相同。
         /// 只有 HasSubHandMuzzleOffsetOverride 为 true 时才生效。
         /// </summary>
         public Vector3 SubHandMuzzleOffsetOverride = Vector3.zero;

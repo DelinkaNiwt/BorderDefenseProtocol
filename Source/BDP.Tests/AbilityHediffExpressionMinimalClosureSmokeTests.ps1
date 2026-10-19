@@ -15,7 +15,7 @@ $sourceRoot = Split-Path -Parent $PSScriptRoot
 $repoRoot = Split-Path -Parent $sourceRoot
 
 $formalResultPath = Join-Path $repoRoot 'Source\BDP\Core\Expressions\Model\FormalExpressionResult.cs'
-$infoEntryPath = Join-Path $repoRoot 'Source\BDP\Core\Expressions\Model\ExpressionInfoProjectionEntry.cs'
+$informationSnapshotAdapterPath = Join-Path $repoRoot 'Source\BDP\Core\Information\Input\ChipInformationExpressionSnapshotAdapter.cs'
 $expressionSurfacePath = Join-Path $repoRoot 'Source\BDP\Core\Expressions\Access\Surfaces\ExpressionFormalSurfaces.cs'
 $abilitySynchronizerPath = Join-Path $repoRoot 'Source\BDP\Core\Expressions\Projection\DefaultExpressionAbilityHostSynchronizer.cs'
 $hediffSynchronizerPath = Join-Path $repoRoot 'Source\BDP\Core\Expressions\Projection\DefaultExpressionHediffHostSynchronizer.cs'
@@ -23,12 +23,12 @@ $hostSynchronizerPath = Join-Path $repoRoot 'Source\BDP\Core\Expressions\Project
 $publicationSnapshotPath = Join-Path $repoRoot 'Source\BDP\Core\Expressions\Projection\ExpressionPublicationSnapshot.cs'
 $runtimeCoordinatorPath = Join-Path $repoRoot 'Source\BDP\Core\Trigger\Runtime\TriggerRuntimeCoordinator.cs'
 $triggerBodyPath = Join-Path $repoRoot 'Source\BDP\Core\Trigger\State\CompTriggerBody.cs'
-$validatorPath = Join-Path $repoRoot 'Source\BDP\Core\Chips\Validation\DefaultChipDefinitionValidator.cs'
+$validatorPath = Join-Path $repoRoot 'Source\BDP\Core\Chips\Validation\ChipDefinitionValidator.cs'
 $hostHediffPath = Join-Path $repoRoot 'Source\BDP\Core\Expressions\Projection\BdpExpressionHostHediff.cs'
 $abilityCostPath = Join-Path $repoRoot 'Source\BDP\Core\Abilities\CompAbilityEffect_BdpTrionCost.cs'
 
 $formalResultText = Get-Content -LiteralPath $formalResultPath -Raw -Encoding utf8
-$infoEntryText = Get-Content -LiteralPath $infoEntryPath -Raw -Encoding utf8
+$informationSnapshotAdapterText = Get-Content -LiteralPath $informationSnapshotAdapterPath -Raw -Encoding utf8
 $expressionSurfaceText = Get-Content -LiteralPath $expressionSurfacePath -Raw -Encoding utf8
 $abilitySynchronizerText = Get-Content -LiteralPath $abilitySynchronizerPath -Raw -Encoding utf8
 $hediffSynchronizerText = Get-Content -LiteralPath $hediffSynchronizerPath -Raw -Encoding utf8
@@ -49,9 +49,10 @@ Assert-True -Condition (
 ) -Message '正式结果层必须统一使用 HediffApplyModeKey，不再保留旧 ApplyModeKey 口径。'
 
 Assert-True -Condition (
-    $infoEntryText.Contains('public string HediffApplyModeKey { get; set; }') -and
-    (-not $infoEntryText.Contains('public string ApplyModeKey { get; set; }'))
-) -Message '说明投影条目必须同步改成 HediffApplyModeKey。'
+    $informationSnapshotAdapterText.Contains('result.HediffDefName') -and
+    $informationSnapshotAdapterText.Contains('ChipInformationSourceKind.RuntimeResult') -and
+    (-not $informationSnapshotAdapterText.Contains('ExpressionInfoProjection'))
+) -Message '统一芯片信息模型必须读取正式 Hediff 结果，并保留运行时来源，而不是回到旧说明投影条目。'
 
 Assert-True -Condition (
     $expressionSurfaceText.Contains('internal void SyncProjectedHosts(Pawn pawn, ExpressionSnapshot snapshot)') -and

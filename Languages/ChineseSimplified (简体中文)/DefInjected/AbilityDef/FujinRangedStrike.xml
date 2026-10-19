@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 风刃 Ability 的玩家可见名称与说明。 -->
+  <BDP_Ability_FujinRangedStrike.label>风刃·远程斩击</BDP_Ability_FujinRangedStrike.label>
+  <BDP_Ability_FujinRangedStrike.description>远距离发射风刃，飞行中分段追踪目标；命中目标本身造成切割伤害。</BDP_Ability_FujinRangedStrike.description>
+  <BDP_Ability_FujinRangedStrike.verbProperties.label>风刃·远程斩击</BDP_Ability_FujinRangedStrike.verbProperties.label>
+</LanguageData>

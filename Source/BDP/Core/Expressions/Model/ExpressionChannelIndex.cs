@@ -44,9 +44,9 @@ namespace BDP.Core.Expressions
         public IReadOnlyDictionary<string, IReadOnlyList<FormalExpressionResult>> HediffResultsByDefName { get; set; }
 
         /// <summary>
-        /// 按 PassiveKey 建好的结果索引。
+        /// 按 PassiveIdentityKey 建好的结果索引。
         /// </summary>
-        public IReadOnlyDictionary<string, IReadOnlyList<FormalExpressionResult>> PassiveResultsByKey { get; set; }
+        public IReadOnlyDictionary<string, IReadOnlyList<FormalExpressionResult>> PassiveResultsByIdentityKey { get; set; }
 
         /// <summary>
         /// 构建一份空的四类并联索引。
@@ -62,7 +62,7 @@ namespace BDP.Core.Expressions
                 PassiveResults = new List<FormalExpressionResult>(),
                 AbilityResultsByDefName = new Dictionary<string, IReadOnlyList<FormalExpressionResult>>(),
                 HediffResultsByDefName = new Dictionary<string, IReadOnlyList<FormalExpressionResult>>(),
-                PassiveResultsByKey = new Dictionary<string, IReadOnlyList<FormalExpressionResult>>()
+                PassiveResultsByIdentityKey = new Dictionary<string, IReadOnlyList<FormalExpressionResult>>()
             };
         }
     }

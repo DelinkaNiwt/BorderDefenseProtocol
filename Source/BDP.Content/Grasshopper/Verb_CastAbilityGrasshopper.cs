@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BDP.Content.GroundDash;
 using BDP.Content.PathInput;
 using BDP.Core.Abilities;
 using BDP.Core.PathInput;
@@ -18,7 +19,7 @@ namespace BDP.Content.Grasshopper
     /// 多段跳跃通过 PawnFlyer 落地回调链式触发，所有跳跃在一次激活内完成。
     /// TryCommitTrionCosts 覆写为按段数×单段成本预扣。
     /// </summary>
-    public class Verb_CastAbilityGrasshopper : BdpVerb_CastAbility
+    public class Verb_CastAbilityGrasshopper : Verb_CastAbilityGroundDash
     {
         // ─── 路径输入状态 ───
         protected PathInputState pathInputState = new PathInputState();
@@ -285,10 +286,13 @@ namespace BDP.Content.Grasshopper
         /// </summary>
         public override bool CanHitTargetFrom(IntVec3 root, LocalTargetInfo targ)
         {
-            float num = EffectiveRange * EffectiveRange;
-            if ((float)EffectiveOrigin.DistanceToSquared(targ.Cell) > num)
+            if (!GenSight.LineOfSight(EffectiveOrigin, targ.Cell, CasterPawn.Map))
                 return false;
-            return GenSight.LineOfSight(EffectiveOrigin, targ.Cell, CasterPawn.Map);
+            return GroundDashUtility.CanReachRequestedCell(
+                CasterPawn.Map,
+                EffectiveOrigin,
+                targ.Cell,
+                EffectiveRange);
         }
 
         /// <summary>绘制射程指示圈、有效落点高亮和路径预览折线。</summary>
@@ -299,8 +303,7 @@ namespace BDP.Content.Grasshopper
                 DrawPathPreview(target);
             }
 
-            if (target.IsValid
-                && GrasshopperUtility.ValidJumpTarget(caster.Map, target.Cell))
+            if (target.IsValid && CanHitTarget(target))
             {
                 GenDraw.DrawTargetHighlightWithLayer(
                     target.CenterVector3, AltitudeLayer.MetaOverlays);
@@ -309,7 +312,11 @@ namespace BDP.Content.Grasshopper
             GenDraw.DrawRadiusRing(
                 EffectiveOrigin, EffectiveRange, Color.white,
                 (IntVec3 c) => GenSight.LineOfSight(EffectiveOrigin, c, caster.Map)
-                    && GrasshopperUtility.ValidJumpTarget(caster.Map, c));
+                    && GroundDashUtility.CanReachRequestedCell(
+                        caster.Map,
+                        EffectiveOrigin,
+                        c,
+                        EffectiveRange));
         }
     }
 }

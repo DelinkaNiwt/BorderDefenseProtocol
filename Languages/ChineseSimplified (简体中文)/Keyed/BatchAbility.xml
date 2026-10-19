@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 批量请求缺失、配置不兼容或数量无效。 -->
+  <BDP_BatchAbility_InvalidRequest>批量施放请求无效。</BDP_BatchAbility_InvalidRequest>
+  <!-- 数量检查使用整批目标数及当前原生次数。 -->
+  <BDP_BatchAbility_NotEnoughCharges>本次需要 {0} 次充能，当前剩余 {1} 次。</BDP_BatchAbility_NotEnoughCharges>
+  <!-- 来源关闭只禁止使用，不清除次数和恢复计时。 -->
+  <BDP_BatchAbility_SourceInactive>该能力当前没有有效的启用来源。</BDP_BatchAbility_SourceInactive>
+  <!-- 地图、范围、可见性或内容组件拒绝目标。 -->
+  <BDP_BatchAbility_InvalidCell>所选范围包含不能作用的格子。</BDP_BatchAbility_InvalidCell>
+  <!-- 跳过中间格的能力仍不能自动截短非法端点。 -->
+  <BDP_BatchAbility_InvalidEndpoints>所选范围的起点或终点不能作用。</BDP_BatchAbility_InvalidEndpoints>
+  <!-- 原版鼠标附着说明。 -->
+  <BDP_BatchAbility_TargetCount>本次目标：{0} 格</BDP_BatchAbility_TargetCount>
+  <!-- 被明确跳过的中间格不计入目标数量或费用。 -->
+  <BDP_BatchAbility_SkippedCount>本次跳过：{0} 格</BDP_BatchAbility_SkippedCount>
+  <!-- 与正式数量结算共用的整批费用。 -->
+  <BDP_BatchAbility_TotalCost>本次触力能：{0}</BDP_BatchAbility_TotalCost>
+  <!-- 能力说明中的单位费用，不能误写为整次施放费用。 -->
+  <BDP_BatchAbility_UnitCost>每格触力能消耗：{0}</BDP_BatchAbility_UnitCost>
+  <!-- 最低门槛只检查一次，不按格倍增。 -->
+  <BDP_BatchAbility_UnitCostWithMinimum>每格触力能消耗：{0}；施放时至少需要 {1} 可用触力能。</BDP_BatchAbility_UnitCostWithMinimum>
+  <!-- 确认失败不产生资源及次数消耗。 -->
+  <BDP_BatchAbility_RequestRejected>无法确认本次批量施放，请检查来源、位置和可用充能。</BDP_BatchAbility_RequestRejected>
+</LanguageData>

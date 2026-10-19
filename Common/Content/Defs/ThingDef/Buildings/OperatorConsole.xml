@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 操作员控制台：需要通电并由玩家指派 Pawn 持续操作。 -->
+  <ThingDef ParentName="BuildingBase">
+    <!-- 建筑 Def 唯一名称。 -->
+    <defName>BDP_OperatorConsole</defName>
+    <!-- 建造或制造须满足所有研究；不影响现有装备使用。 -->
+    <researchPrerequisites><li>BDP_Research_SupportFacilities</li></researchPrerequisites>
+
+    <!-- 建筑运行类。 -->
+    <thingClass>BDP.Content.OperatorConsole.Building_OperatorConsole</thingClass>
+
+    <!-- 默认名称和说明由简体中文语言包覆盖。 -->
+    <label>BDP_OperatorConsole</label>
+    <description>BDP_OperatorConsole</description>
+
+    <!-- 基础建筑身份。 -->
+    <category>Building</category>
+    <designationCategory>Biotech</designationCategory>
+    <selectable>true</selectable>
+    <drawerType>MapMeshOnly</drawerType>
+    <altitudeLayer>Building</altitudeLayer>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <tickerType>Normal</tickerType>
+    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+    <repairEffect>Repair</repairEffect>
+    <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+    <filthLeaving>Filth_RubbleBuilding</filthLeaving>
+
+    <!-- 逻辑占地为 3×2，可旋转；视觉尺寸沿用原版通信台 5×4。 -->
+    <size>(3,2)</size>
+    <rotatable>true</rotatable>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.5</fillPercent>
+    <pathCost>50</pathCost>
+    <hasInteractionCell>true</hasInteractionCell>
+    <!-- 复用原版通信台的南向默认朝向，确保贴图正面与操作员位置一致。 -->
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <!-- 沿用原版通信台的南侧交互点偏移。 -->
+    <interactionCellOffset>(0,0,2)</interactionCellOffset>
+    <interactionCellIcon>DiningChair</interactionCellIcon>
+    <canOverlapZones>false</canOverlapZones>
+
+    <!-- 暂时复用原版通信台多朝向贴图，不新增自定义 PNG。 -->
+    <graphicData>
+      <texPath>Things/Building/Misc/CommsConsole</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(5,4)</drawSize>
+    </graphicData>
+
+    <!-- 控制台基础属性。 -->
+    <statBases>
+      <MaxHitPoints>250</MaxHitPoints>
+      <WorkToBuild>4000</WorkToBuild>
+      <Mass>40</Mass>
+      <Flammability>0.6</Flammability>
+    </statBases>
+
+    <!-- 暂定建造材料。 -->
+    <costList>
+      <Steel>160</Steel>
+      <ComponentIndustrial>6</ComponentIndustrial>
+    </costList>
+
+    <!-- 控制台运行组件。 -->
+    <comps>
+      <!-- 运作时使用原版小范围发光；是否点亮由建筑的 IThingGlower 状态决定。 -->
+      <li Class="CompProperties_Glower">
+        <!-- 操作员控制台提供比中继核心更小的局部照明。 -->
+        <glowRadius>3.5</glowRadius>
+        <!-- 浅蓝色光照，与控制台的制导用途保持一致。 -->
+        <glowColor>(120,180,255,0)</glowColor>
+      </li>
+      <!-- 玩家可禁止控制台参与工作。 -->
+      <li Class="CompProperties_Forbiddable" />
+
+      <!-- 原版电力组件；功耗 200 W。 -->
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>200</basePowerConsumption>
+        <shortCircuitInRain>true</shortCircuitInRain>
+      </li>
+
+      <!-- 原版开关组件，允许按电网逻辑关闭。 -->
+      <li Class="CompProperties_Flickable" />
+
+      <!-- BDP 控制台运行状态和地图许可组件。 -->
+      <li Class="BDP.Content.OperatorConsole.CompProperties_OperatorConsole">
+        <operatorHeartbeatWindowTicks>120</operatorHeartbeatWindowTicks>
+      </li>
+    </comps>
+  </ThingDef>
+
+</Defs>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!-- 开发精确移除只改变崩解效果的满层次数，不增加新远程模块。 -->
+  <BDP.Content.RangedModules.Debuff.Effects.BodyPartDisintegrationEffectDef>
+    <defName>BDP_DebuffEffect_ExactBodyPartRemoval</defName>
+    <label>精确部位移除</label>
+    <hediffDef>BDP_Hediff_BodyPartDisintegration</hediffDef>
+    <hitsToDisintegrate>1</hitsToDisintegrate>
+    <directResultRulePack>BDP_PlayerLog_ResultPartRemoved</directResultRulePack>
+  </BDP.Content.RangedModules.Debuff.Effects.BodyPartDisintegrationEffectDef>
+</Defs>

@@ -109,10 +109,107 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Impact
     }
 
     /// <summary>
-    /// 只在当前同步爆炸启动调用栈内保存 BDP 范围上下文。
+    /// 在原版创建边界绑定实例，在单次真实承伤边界恢复 BDP 范围上下文。
     /// </summary>
     public static class ExplosionImpactRuntimeScope
     {
+        /// <summary>当前预定的单个爆炸创建请求；不会作为伤害作用域被消费者读取。</summary>
+        [System.ThreadStatic]
+        private static CreationRequest pendingCreation;
+
+        /// <summary>预定紧接着进入的原版爆炸创建调用；请求不向生成回调暴露。</summary>
+        public static System.IDisposable PrepareExplosion(Map map, IntVec3 center,
+            ExplosionImpactDispatchContext context, ISemanticContext semanticContext)
+        {
+            CreationRequest request = new CreationRequest(map, center, context, semanticContext, pendingCreation);
+            pendingCreation = request;
+            return request;
+        }
+
+        /// <summary>当前原版创建调用；独立嵌套创建会压入空请求，不能抢走外层来源。</summary>
+        [System.ThreadStatic] private static CreationScope currentCreation;
+
+        /// <summary>在生成回调发生前领取请求；普通外层创建不分配状态。</summary>
+        public static System.IDisposable EnterCreation(Map map, IntVec3 center)
+        {
+            CreationRequest request = pendingCreation;
+            if (request == null || request.Claimed || map != request.Map || center != request.Center)
+                request = null;
+            if (request != null) request.Claimed = true;
+            if (request == null && currentCreation == null) return null;
+            return new CreationScope(request);
+        }
+
+        /// <summary>只在原版唯一启动调用点绑定实际创建对象，不按位置猜测对象身份。</summary>
+        public static void BindCreatedExplosion(Explosion explosion)
+        {
+            CreationRequest request = currentCreation?.Request;
+            if (explosion == null || request == null || request.Bound) return;
+            request.Bound = true;
+            BdpDamageSemanticBridge.AssignExplosionImpactContext(explosion, request.Context);
+            BdpDamageSemanticBridge.AssignExplosionContext(explosion, request.SemanticContext);
+        }
+
+        /// <summary>保存创建调用的实际归属，并在正常或异常退出时恢复外层。</summary>
+        private sealed class CreationScope : System.IDisposable
+        {
+            /// <summary>本次显式请求；独立嵌套为空。</summary>
+            internal readonly CreationRequest Request;
+            /// <summary>外层创建调用。</summary>
+            private readonly CreationScope previous;
+            /// <summary>保证清理幂等。</summary>
+            private bool disposed;
+            /// <summary>建立真实创建调用边界。</summary>
+            internal CreationScope(CreationRequest request)
+            {
+                Request = request; previous = currentCreation; currentCreation = this;
+            }
+            /// <summary>恢复外层创建调用，不影响其已绑定实例。</summary>
+            public void Dispose()
+            {
+                if (disposed) return;
+                disposed = true;
+                if (currentCreation == this) currentCreation = previous;
+            }
+        }
+
+        /// <summary>短暂的创建请求，不覆盖实际承伤上下文。</summary>
+        private sealed class CreationRequest : System.IDisposable
+        {
+            /// <summary>预定地图。</summary>
+            internal readonly Map Map;
+            /// <summary>预定中心。</summary>
+            internal readonly IntVec3 Center;
+            /// <summary>范围配置。</summary>
+            internal readonly ExplosionImpactDispatchContext Context;
+            /// <summary>冻结来源。</summary>
+            internal readonly ISemanticContext SemanticContext;
+            /// <summary>已经领取。</summary>
+            internal bool Claimed;
+            /// <summary>已经绑定到该调用实际产生的爆炸。</summary>
+            internal bool Bound;
+            /// <summary>外层创建请求。</summary>
+            private readonly CreationRequest previous;
+            /// <summary>保证退出幂等。</summary>
+            private bool disposed;
+
+            /// <summary>保存本次预定，不给同步扩展回调暴露伤害效果。</summary>
+            internal CreationRequest(Map map, IntVec3 center, ExplosionImpactDispatchContext context,
+                ISemanticContext semanticContext, CreationRequest previous)
+            {
+                Map = map; Center = center; Context = context;
+                SemanticContext = semanticContext; this.previous = previous;
+            }
+
+            /// <summary>恢复外层预定，取消尚未领取的本次请求。</summary>
+            public void Dispose()
+            {
+                if (disposed) return;
+                disposed = true;
+                if (pendingCreation == this) pendingCreation = previous;
+            }
+        }
+
         /// <summary>
         /// 当前线程上的范围上下文。
         /// </summary>
@@ -142,13 +239,16 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Impact
         /// </summary>
         private sealed class Scope : System.IDisposable
         {
+            /// <summary>进入本次承伤前的范围上下文。</summary>
             private readonly ExplosionImpactDispatchContext previous;
 
+            /// <summary>保存外层范围上下文。</summary>
             public Scope(ExplosionImpactDispatchContext previous)
             {
                 this.previous = previous;
             }
 
+            /// <summary>恢复进入前的范围上下文，由所属承伤边界保证只退出一次。</summary>
             public void Dispose()
             {
                 current = previous;

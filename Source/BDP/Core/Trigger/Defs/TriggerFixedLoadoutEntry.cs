@@ -23,5 +23,11 @@ namespace BDP.Core.Trigger
         /// 要创建并装入目标槽位的芯片物品定义。
         /// </summary>
         public ThingDef chipDef;
+
+        /// <summary>
+        /// 可选的实体芯片初始化键。
+        /// 为空时直接按chipDef创建；非空时交给已注册的Content成品工厂创建动态芯片。
+        /// </summary>
+        public string initializationKey;
     }
 }

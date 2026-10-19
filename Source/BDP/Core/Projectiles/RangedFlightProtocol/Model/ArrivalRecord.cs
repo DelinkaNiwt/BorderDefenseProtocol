@@ -11,8 +11,11 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Model
     internal sealed class ArrivalRecord
     {
         /// <summary>
-        /// 当前到达快照是否要求进入下一段飞行。
+        /// 当前到达快照是否已经有前序模块独占下一段导航。
         /// </summary>
+        public bool ExclusiveFlightControl { get; set; }
+
+        /// <summary>是否继续下一段飞行。</summary>
         public bool ContinueFlight { get; set; }
 
         /// <summary>
@@ -31,9 +34,15 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Model
         public LocalTargetInfo NextTarget { get; set; }
 
         /// <summary>
-        /// 褰撳墠鍒拌揪蹇収瑁佸畾鍑虹殑涓嬩竴娈?vanilla 鍛戒腑缁戝畾鐩爣銆?
+        /// 下一段原版命中绑定目标。
         /// </summary>
         public LocalTargetInfo NextBindingTarget { get; set; }
+
+        /// <summary>
+        /// 当前到达快照是否由模块显式提交了下一段的 vanilla 命中绑定目标。
+        /// 未显式提交时，宿主必须使用 NextTarget，不能继续继承上一段 CurrentTarget。
+        /// </summary>
+        public bool HasNextBindingTargetOverride { get; set; }
 
         /// <summary>
         /// 当前到达快照裁定出的下一段飞行路径快照。

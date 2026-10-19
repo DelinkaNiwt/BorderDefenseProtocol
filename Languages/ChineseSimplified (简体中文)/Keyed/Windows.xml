@@ -38,20 +38,23 @@
   <BDP_Window_TriggerAssembly_AfterAssembly>装配后 {0}</BDP_Window_TriggerAssembly_AfterAssembly>
   <BDP_Window_TriggerAssembly_Change>变化 {0}</BDP_Window_TriggerAssembly_Change>
   <BDP_Window_TriggerAssembly_Drain>持续消耗 {0}/秒</BDP_Window_TriggerAssembly_Drain>
+  <!-- 芯片详情档案式概览中的 Trion 消耗。 -->
+  <BDP_Window_TriggerAssembly_TrionAmount>{0} Trion</BDP_Window_TriggerAssembly_TrionAmount>
+  <BDP_Window_TriggerAssembly_UseCostValue>{0} / 次</BDP_Window_TriggerAssembly_UseCostValue>
+  <BDP_Window_TriggerAssembly_SustainCostTier>{0}来源：{1} / 秒</BDP_Window_TriggerAssembly_SustainCostTier>
   <BDP_Window_TriggerAssembly_PreviewLine1>当前 {0} / {1}    可用 {2}</BDP_Window_TriggerAssembly_PreviewLine1>
   <BDP_Window_TriggerAssembly_PreviewLine2>已锁定 {0}    预占用 {1}    装配后 {2}</BDP_Window_TriggerAssembly_PreviewLine2>
   <BDP_Window_TriggerAssembly_PreviewLine3>变化 {0}    持续消耗 {1}/秒</BDP_Window_TriggerAssembly_PreviewLine3>
   <BDP_Window_TriggerAssembly_Stored>已存储：{0} / {1}</BDP_Window_TriggerAssembly_Stored>
   <BDP_Window_TriggerAssembly_Occupancy>占用 {0}    激活 {1}</BDP_Window_TriggerAssembly_Occupancy>
   <BDP_Window_TriggerAssembly_TrionCost>Trion -</BDP_Window_TriggerAssembly_TrionCost>
+  <!-- 根槽和镜像槽显示统一的成对关系，不暴露内部副本标记。 -->
   <BDP_Window_TriggerAssembly_SideInfo>槽区={0}
 槽位编号={1}
 芯片={2}
-同步槽位={3}
-关联槽位={4}</BDP_Window_TriggerAssembly_SideInfo>
-  <BDP_Window_TriggerAssembly_MirrorLocked>同步槽位（锁定）</BDP_Window_TriggerAssembly_MirrorLocked>
-  <BDP_Window_TriggerAssembly_ActiveFlag>已激活</BDP_Window_TriggerAssembly_ActiveFlag>
-  <BDP_Window_TriggerAssembly_DisabledFlag>禁用</BDP_Window_TriggerAssembly_DisabledFlag>
+成对槽位={3}</BDP_Window_TriggerAssembly_SideInfo>
+  <!-- 供成对芯片任一槽位的提示共同使用。 -->
+  <BDP_Window_TriggerAssembly_PairedSlotRelation>{0}槽位 {1} ↔ {2}槽位 {3}</BDP_Window_TriggerAssembly_PairedSlotRelation>
   <BDP_Window_TriggerAssembly_AvailableFlag>可用</BDP_Window_TriggerAssembly_AvailableFlag>
   <BDP_Window_TriggerAssembly_MainSubRegion>主手槽/副手槽</BDP_Window_TriggerAssembly_MainSubRegion>
   <BDP_Window_TriggerAssembly_SpecialRegion>特殊槽</BDP_Window_TriggerAssembly_SpecialRegion>
@@ -60,5 +63,72 @@
 槽位占用={2}
 当前槽位兼容={3}</BDP_Window_TriggerAssembly_ChipTooltip>
   <BDP_Window_ChipStorage_DropTooltip>弹出该芯片到芯片仓附近。</BDP_Window_ChipStorage_DropTooltip>
+
+  <!-- 战斗体编辑台个人服装模板窗口。 -->
+  <BDP_Window_CombatBodyAppearance_Title>战斗体编辑台 · {0}</BDP_Window_CombatBodyAppearance_Title>
+  <BDP_Window_CombatBodyAppearance_CurrentMode>当前模式：{0}</BDP_Window_CombatBodyAppearance_CurrentMode>
+  <BDP_Window_CombatBodyAppearance_Mirror>镜像</BDP_Window_CombatBodyAppearance_Mirror>
+  <BDP_Window_CombatBodyAppearance_Preset>预设</BDP_Window_CombatBodyAppearance_Preset>
+  <BDP_Window_CombatBodyAppearance_Templates>个人模板</BDP_Window_CombatBodyAppearance_Templates>
+  <BDP_Window_CombatBodyAppearance_Preview>外观预览</BDP_Window_CombatBodyAppearance_Preview>
+  <BDP_Window_CombatBodyAppearance_Details>模板详情</BDP_Window_CombatBodyAppearance_Details>
+  <BDP_Window_CombatBodyAppearance_NewTemplate>新建空模板</BDP_Window_CombatBodyAppearance_NewTemplate>
+  <BDP_Window_CombatBodyAppearance_Rename>重命名</BDP_Window_CombatBodyAppearance_Rename>
+  <BDP_Window_CombatBodyAppearance_Delete>删除</BDP_Window_CombatBodyAppearance_Delete>
+  <BDP_Window_CombatBodyAppearance_Close>关闭</BDP_Window_CombatBodyAppearance_Close>
+  <BDP_Window_CombatBodyAppearance_Upload>上传当前服装为新模板</BDP_Window_CombatBodyAppearance_Upload>
+  <BDP_Window_CombatBodyAppearance_TemplateName>模板名称</BDP_Window_CombatBodyAppearance_TemplateName>
+  <BDP_Window_CombatBodyAppearance_NoTemplate>未选择模板</BDP_Window_CombatBodyAppearance_NoTemplate>
+  <BDP_Window_CombatBodyAppearance_ApparelCount>服装数量：{0}</BDP_Window_CombatBodyAppearance_ApparelCount>
+  <BDP_Window_CombatBodyAppearance_Stuff>材料：{0}</BDP_Window_CombatBodyAppearance_Stuff>
+  <BDP_Window_CombatBodyAppearance_Style>风格：{0}</BDP_Window_CombatBodyAppearance_Style>
+  <BDP_Window_CombatBodyAppearance_Color>颜色：{0}</BDP_Window_CombatBodyAppearance_Color>
+  <BDP_Window_CombatBodyAppearance_InvalidEntry>无效服装条目</BDP_Window_CombatBodyAppearance_InvalidEntry>
+  <BDP_Window_CombatBodyAppearance_None>无</BDP_Window_CombatBodyAppearance_None>
+
+  <!-- 芯片详情模型、来源标记与图表。 -->
+  <BDP_Window_TriggerAssembly_Description>芯片描述</BDP_Window_TriggerAssembly_Description>
+  <BDP_Window_TriggerAssembly_CommonFacts>芯片规格</BDP_Window_TriggerAssembly_CommonFacts>
+  <BDP_Window_TriggerAssembly_NoDescription>解析模型和芯片定义都没有提供描述。</BDP_Window_TriggerAssembly_NoDescription>
+  <BDP_Window_TriggerAssembly_Profession>职业体系：{0}</BDP_Window_TriggerAssembly_Profession>
+  <BDP_Window_TriggerAssembly_Radar>能力雷达</BDP_Window_TriggerAssembly_Radar>
+  <!-- 远程攻击节奏雷达轴。 -->
+  <BDP_Window_TriggerAssembly_RpmAxis>分均射速</BDP_Window_TriggerAssembly_RpmAxis>
+  <!-- 近战攻击节奏雷达轴。 -->
+  <BDP_Window_TriggerAssembly_ApmAxis>分均攻速</BDP_Window_TriggerAssembly_ApmAxis>
+  <!-- 雷达图标题。 -->
+  <BDP_Window_TriggerAssembly_AccuracyCurve>精度 / 距离</BDP_Window_TriggerAssembly_AccuracyCurve>
+  <BDP_Window_TriggerAssembly_MeleeToolNumber>近战工具 {0}</BDP_Window_TriggerAssembly_MeleeToolNumber>
+  <BDP_Window_TriggerAssembly_ComparisonTooltip>{0}基准值：{1}
+当前最终值：{2}</BDP_Window_TriggerAssembly_ComparisonTooltip>
+  <BDP_Window_TriggerAssembly_ProvenanceTooltip>基础值：{0}
+最终值：{1}</BDP_Window_TriggerAssembly_ProvenanceTooltip>
+  <BDP_Window_TriggerAssembly_DurationValue>{0} 秒</BDP_Window_TriggerAssembly_DurationValue>
+  <BDP_Window_TriggerAssembly_StateInactive>未激活</BDP_Window_TriggerAssembly_StateInactive>
+  <BDP_Window_TriggerAssembly_StateUnavailable>不可用</BDP_Window_TriggerAssembly_StateUnavailable>
+  <BDP_Window_TriggerAssembly_StateInvalid>无效</BDP_Window_TriggerAssembly_StateInvalid>
+  <BDP_Window_TriggerAssembly_StateConflict>冲突</BDP_Window_TriggerAssembly_StateConflict>
+  <BDP_Window_TriggerAssembly_StateUnknown>未知</BDP_Window_TriggerAssembly_StateUnknown>
+  <BDP_Window_TriggerAssembly_Diagnostics>解析诊断</BDP_Window_TriggerAssembly_Diagnostics>
+
+  <!-- 触发器装配台左栏与中栏原型式布局。 -->
+  <BDP_Window_TriggerAssembly_AssemblyProfile>01 // ASSEMBLY STATUS</BDP_Window_TriggerAssembly_AssemblyProfile>
+  <BDP_Window_TriggerAssembly_AssemblyProfileTitle>装配状态</BDP_Window_TriggerAssembly_AssemblyProfileTitle>
+  <BDP_Window_TriggerAssembly_LiveResult>LIVE RESULT</BDP_Window_TriggerAssembly_LiveResult>
+  <BDP_Window_TriggerAssembly_OperatorName>触发器操作者 · {0}</BDP_Window_TriggerAssembly_OperatorName>
+  <BDP_Window_TriggerAssembly_MainColumn>主手槽</BDP_Window_TriggerAssembly_MainColumn>
+  <BDP_Window_TriggerAssembly_SubColumn>副手槽</BDP_Window_TriggerAssembly_SubColumn>
+  <BDP_Window_TriggerAssembly_SpecialChannel>特殊槽位</BDP_Window_TriggerAssembly_SpecialChannel>
+  <BDP_Window_TriggerAssembly_SpecialChannelNote>SPECIAL CHANNEL</BDP_Window_TriggerAssembly_SpecialChannelNote>
+  <BDP_Window_TriggerAssembly_NoSpecialSlots>暂无特殊槽位</BDP_Window_TriggerAssembly_NoSpecialSlots>
+  <BDP_Window_TriggerAssembly_TrionCapacity>芯片预占用</BDP_Window_TriggerAssembly_TrionCapacity>
+  <BDP_Window_TriggerAssembly_ChipDepotNetwork>02 // CHIP DEPOT NETWORK</BDP_Window_TriggerAssembly_ChipDepotNetwork>
+  <BDP_Window_TriggerAssembly_ChipInventoryTitle>芯片库</BDP_Window_TriggerAssembly_ChipInventoryTitle>
+  <BDP_Window_TriggerAssembly_ChipCount>库存芯片 · {0} / {1} 枚</BDP_Window_TriggerAssembly_ChipCount>
+  <!-- 触发器装配台右栏标题。 -->
+  <BDP_Window_TriggerAssembly_DetailPanel>03 // CHIP DETAIL</BDP_Window_TriggerAssembly_DetailPanel>
+  <BDP_Window_TriggerAssembly_DetailPanelTitle>芯片详情</BDP_Window_TriggerAssembly_DetailPanelTitle>
+  <BDP_Window_TriggerAssembly_SearchPlaceholder>搜索名称…</BDP_Window_TriggerAssembly_SearchPlaceholder>
+  <BDP_Window_TriggerAssembly_ChipCardMeta>占用 {0} · 激活 {1} · {2}</BDP_Window_TriggerAssembly_ChipCardMeta>
 
 </LanguageData>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    可复用的远程攻击模块。
+    模块只描述本能力所需的距离重定向，运行时复用 Content 中的中性模块实现。
+  -->
+
+  <!-- 按距离阶段将投射物重定向到实时目标。 -->
+  <BDP.Core.AttackExecution.BdpRangedAttackModuleDef>
+    <defName>BDP_RangedModule_DistanceRevector</defName>
+    <!-- 缺少语言包时的英文回退名称。 -->
+    <label>Distance revector</label>
+    <runtimeClass>BDP.Content.RangedModules.DistanceRevector.DistanceRevectorModule</runtimeClass>
+    <defaultConfig Class="BDP.Content.RangedModules.DistanceRevector.DistanceRevectorConfig">
+      <!-- 发射后立即进入外张，20% 开始保持平行；最后的 1.0 由运行时自动补入并回到原版命中流程。 -->
+      <CheckpointRatios>
+        <li>0.20</li>
+        <li>0.45</li>
+        <li>0.70</li>
+        <li>0.85</li>
+        <li>0.93</li>
+        <li>0.97</li>
+      </CheckpointRatios>
+      <!-- 中间距离检查点沿用路线引导的段级散布半径。 -->
+      <IntermediateSpreadRadius>0.625</IntermediateSpreadRadius>
+      <!-- 最终距离检查点使用较小散布，保持末段向目标收束但不完全重合。 -->
+      <FinalSpreadRadius>0.30</FinalSpreadRadius>
+      <!-- 按当前配置的精度缩放散布，不额外改写命中结果。 -->
+      <HighAccuracySpreadScale>0.25</HighAccuracySpreadScale>
+      <!-- 可选：按发次固定有序横向车道，中段保持大致平行，末端共同收束。 -->
+      <UseOrderedParallelLanes>true</UseOrderedParallelLanes>
+    </defaultConfig>
+  </BDP.Core.AttackExecution.BdpRangedAttackModuleDef>
+
+  <!-- 投射物真实命中选定目标后生成命中刀刃，不参与飞行与伤害裁决。 -->
+  <BDP.Core.AttackExecution.BdpRangedAttackModuleDef>
+    <!-- 命中视觉模块唯一名称。 -->
+    <defName>BDP_RangedModule_ImpactVisual</defName>
+    <!-- 缺少语言包时的英文回退名称。 -->
+    <label>Impact visual</label>
+    <!-- Content 中的命中阶段模块实现。 -->
+    <runtimeClass>BDP.Content.RangedModules.ImpactVisual.ImpactVisualModule</runtimeClass>
+    <defaultConfig Class="BDP.Content.RangedModules.ImpactVisual.ImpactVisualConfig">
+      <!-- 绑定六道刀刃组合特效。 -->
+      <EffecterDef>BDP_Effecter_ImpactBladeBurst</EffecterDef>
+    </defaultConfig>
+  </BDP.Core.AttackExecution.BdpRangedAttackModuleDef>
+
+</Defs>

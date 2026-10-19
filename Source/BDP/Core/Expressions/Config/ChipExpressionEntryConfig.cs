@@ -16,7 +16,7 @@ namespace BDP.Core.Expressions
         /// <summary>
         /// 当前条目的定义种类。
         /// </summary>
-        public ChipExpressionEntryKindConfig Kind = ChipExpressionEntryKindConfig.PrimaryVerb;
+        public ChipExpressionEntryTypeConfig EntryType = ChipExpressionEntryTypeConfig.PrimaryVerb;
 
         /// <summary>
         /// 当前条目的轻量关系种类。
@@ -44,6 +44,12 @@ namespace BDP.Core.Expressions
         /// 它只表达 dual 等入口层的必要直射语义，不覆盖模块内部的路径段 LOS 规则。
         /// </summary>
         public DirectTargetLineOfSightRequirementConfig DirectTargetLineOfSight = DirectTargetLineOfSightRequirementConfig.FromVerb;
+
+        /// <summary>
+        /// 当前条目显式声明接入的许可键列表。
+        /// 空列表表示该条目不接受任何许可业务回调。
+        /// </summary>
+        public List<string> DeclaredPermissionKeys;
 
         /// <summary>
         /// 当前条目声明的近战 Tool。
@@ -90,9 +96,14 @@ namespace BDP.Core.Expressions
         public string HediffApplyModeKey;
 
         /// <summary>
+        /// 当前条目的 Hediff 生命周期控制模式；留空按 Automatic 处理。
+        /// </summary>
+        public string HediffControlMode;
+
+        /// <summary>
         /// 当前条目向外声明的被动键。
         /// </summary>
-        public string PassiveKey;
+        public string PassiveIdentityKey;
 
         /// <summary>
         /// 当前条目向外暴露的轻量附加数据。
@@ -104,6 +115,12 @@ namespace BDP.Core.Expressions
         /// 顺序语义完全以 XML 中的书写顺序为准。
         /// </summary>
         public List<RangedModuleMountConfig> RangedModules;
+
+        /// <summary>
+        /// 当前条目可选的近战命中部位策略。
+        /// 留空时近战完全沿用原版随机命中部位。
+        /// </summary>
+        public HitPartPolicyConfig HitPartPolicy;
 
         /// <summary>
         /// 当前条目向其它符合能力条件的远程表达结果发布的开放式增强声明。

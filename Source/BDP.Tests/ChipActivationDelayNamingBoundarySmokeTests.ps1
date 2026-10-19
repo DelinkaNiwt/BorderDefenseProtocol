@@ -98,10 +98,9 @@ Assert-True (
 ) 'The content panel must read the formal activation delay state names.'
 
 Assert-True (
-    ($detailPanelText -match '"启用延迟/停用延迟"') -and
-    ($detailPanelText -match 'snapshot\.ActivationDelayTicks') -and
-    ($detailPanelText -match 'snapshot\.DeactivationDelayTicks')
-) 'The chip detail panel must present the formal activation delay names.'
+    ($detailPanelText -match 'DrawChipDetail') -and
+    ($detailPanelText -notmatch 'ActivationDelayTicks|DeactivationDelayTicks|启用延迟/停用延迟')
+) 'The chip detail panel must remain empty and must not present the old activation delay details.'
 
 Assert-True (
     ($chipXmlText -notmatch '<WarmupTicks>|<WinddownTicks>') -and

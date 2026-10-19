@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 皇室加入任务专用角色类型。 -->
+  <PawnKindDef>
+    <!-- 亡国皇室角色类型唯一标识。 -->
+    <defName>BDP_Royal_FallenRoyal</defName>
+    <!-- 角色名称由简体中文 DefInjected 提供。 -->
+    <label>BDP_Royal_FallenRoyal.label</label>
+    <!-- 该角色仍是原版人类 Pawn。 -->
+    <race>Human</race>
+    <!-- 默认派系为任务专用的薇瑟帝国模板。 -->
+    <defaultFactionDef>BDP_Faction_ViserEmpire</defaultFactionDef>
+    <!-- 原版要求提供非负战力；该角色仅作为任务加入者，不计入战斗点数。 -->
+    <combatPower>0</combatPower>
+    <!-- 原版人形角色类型必需字段；任务接受时直接加入，不带初始意志。 -->
+    <initialWillRange>0~0</initialWillRange>
+    <!-- 原版人形角色类型必需字段；任务接受时直接加入，不带初始抵抗。 -->
+    <initialResistanceRange>0~0</initialResistanceRange>
+    <!-- 生理年龄限制为刚成年不久。 -->
+    <minGenerationAge>20</minGenerationAge>
+    <!-- 生理年龄限制为刚成年不久。 -->
+    <maxGenerationAge>25</maxGenerationAge>
+    <!-- 实际年龄同步限制，避免休眠设定生成远超生理年龄的皇室人物。 -->
+    <chronologicalAgeRange>20~25</chronologicalAgeRange>
+    <!-- 留空时由原版随机性别；需要时可在此设为 Male 或 Female。 -->
+    <!-- 皇室任务使用固定童年背景。 -->
+    <fixedChildBackstories>
+      <!-- 出生于皇室血脉并在宫廷成长。 -->
+      <li>BDP_Royal_FallenChild</li>
+    </fixedChildBackstories>
+    <!-- 皇室任务使用固定成年背景。 -->
+    <fixedAdultBackstories>
+      <!-- 帝国覆灭后携核心逃亡求援。 -->
+      <li>BDP_Royal_FallenAdult</li>
+    </fixedAdultBackstories>
+    <!-- 避免生成和无暴力基因相冲突的暴力倾向特性。 -->
+    <disallowedTraits>
+      <!-- 嗜血与无暴力基因语义冲突。 -->
+      <li>Bloodlust</li>
+      <!-- 格斗家与无暴力基因语义冲突。 -->
+      <li>Brawler</li>
+      <!-- 射击相关特性所有等级均与无暴力基因冲突。 -->
+      <li>ShootingAccuracy</li>
+      <!-- 食人者与皇室人物定位不符。 -->
+      <li>Cannibal</li>
+      <!-- 裸体主义与皇室人物的穿着定位不符。 -->
+      <li>Nudist</li>
+      <!-- 直来直去会使其他角色不满。 -->
+      <li>Abrasive</li>
+      <!-- 烦人的声音会使其他角色不喜欢该人物。 -->
+      <li>AnnoyingVoice</li>
+      <!-- 恶心的呼吸声会使其他角色不喜欢该人物。 -->
+      <li>CreepyBreathing</li>
+      <!-- 贪心会因卧室条件不满足而产生不满。 -->
+      <li>Greedy</li>
+      <!-- 妒忌会因卧室条件不满足而产生不满。 -->
+      <li>Jealous</li>
+      <!-- 贪食者更容易饥饿并可能暴饮暴食。 -->
+      <li>Gourmand</li>
+      <!-- 纵火狂可能纵火且不会灭火。 -->
+      <li>Pyromaniac</li>
+      <!-- 脑子慢会降低学习速度。 -->
+      <li>SlowLearner</li>
+      <!-- 厌恶男性会造成针对男性角色的社交冲突。 -->
+      <li>DislikesMen</li>
+      <!-- 厌恶女性会造成针对女性角色的社交冲突。 -->
+      <li>DislikesWomen</li>
+    </disallowedTraits>
+    <!-- 排除指定的负等级，不影响同一特性的其他等级随机。 -->
+    <disallowedTraitsWithDegree>
+      <!-- 容貌特性负等级与魅力出众基因相反。 -->
+      <Beauty>-1</Beauty>
+      <!-- 容貌特性负等级与魅力出众基因相反。 -->
+      <Beauty>-2</Beauty>
+      <!-- 心灵敏感度负等级与心灵过敏基因相反。 -->
+      <PsychicSensitivity>-1</PsychicSensitivity>
+      <!-- 心灵敏感度负等级与心灵过敏基因相反。 -->
+      <PsychicSensitivity>-2</PsychicSensitivity>
+      <!-- 悲观等级具有持续负面情绪倾向。 -->
+      <NaturalMood>-1</NaturalMood>
+      <!-- 抑郁等级具有持续负面情绪倾向。 -->
+      <NaturalMood>-2</NaturalMood>
+      <!-- 意志紧张会提高精神崩溃风险。 -->
+      <Nerves>-1</Nerves>
+      <!-- 意志动荡会显著提高精神崩溃风险。 -->
+      <Nerves>-2</Nerves>
+      <!-- 体弱多病与强免疫基因相冲突。 -->
+      <Immunity>-1</Immunity>
+      <!-- 慢性子会进一步降低移动速度。 -->
+      <SpeedOffset>-1</SpeedOffset>
+    </disallowedTraitsWithDegree>
+    <!-- 先用非白色启用原版染色组件；下方逐件服装要求会再覆盖为白色。 -->
+    <apparelColor>(0.2,0.2,0.2)</apparelColor>
+    <!-- 固定贵族套装使用专用空标签，阻止原版候选池额外随机搭配衣物。 -->
+    <apparelTags>
+      <!-- 具体衣物由下方原版指定服装要求生成；此标签不匹配任何实际衣物。 -->
+      <li>BDP_RoyalDailyPresetOnly</li>
+    </apparelTags>
+    <!-- 保持固定日常套装，不按当地季节追加保暖衣物。 -->
+    <apparelIgnoreSeasons>true</apparelIgnoreSeasons>
+    <!-- 保持固定日常套装，不按地图污染追加防护衣物。 -->
+    <apparelIgnorePollution>true</apparelIgnorePollution>
+    <!-- 使用原版指定服装生成器固定物品、材质、颜色和品质。 -->
+    <specificApparelRequirements>
+      <!-- 男女共穿褶边礼服衬衫，使用合成纤维、白色和普通品质。 -->
+      <li>
+        <apparelDef>Apparel_ShirtRuffle</apparelDef>
+        <requiredTag>RoyalTier2</requiredTag>
+        <stuff>Synthread</stuff>
+        <color>(255,255,255)</color>
+        <quality>Normal</quality>
+      </li>
+      <!-- 男女共穿原版裤子，使用合成纤维、白色和普通品质。 -->
+      <li>
+        <apparelDef>Apparel_Pants</apparelDef>
+        <requiredTag>IndustrialBasic</requiredTag>
+        <stuff>Synthread</stuff>
+        <color>(255,255,255)</color>
+        <quality>Normal</quality>
+      </li>
+      <!-- 原版可穿着检查仅为男性生成高顶礼帽。 -->
+      <li>
+        <apparelDef>Apparel_HatTop</apparelDef>
+        <requiredTag>RoyalTier2</requiredTag>
+        <stuff>Synthread</stuff>
+        <color>(255,255,255)</color>
+        <quality>Normal</quality>
+      </li>
+      <!-- 原版可穿着检查仅为女性生成淑女帽。 -->
+      <li>
+        <apparelDef>Apparel_HatLadies</apparelDef>
+        <requiredTag>RoyalTier2</requiredTag>
+        <stuff>Synthread</stuff>
+        <color>(255,255,255)</color>
+        <quality>Normal</quality>
+      </li>
+    </specificApparelRequirements>
+  </PawnKindDef>
+
+</Defs>

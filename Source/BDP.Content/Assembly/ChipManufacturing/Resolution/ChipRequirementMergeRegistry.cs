@@ -4,7 +4,7 @@ using BDP.Core.Requirements;
 
 namespace BDP.Content.Assembly.ChipManufacturing.Resolution
 {
-    /// <summary>芯片双动作条件合并规则的唯一登记表。</summary>
+    /// <summary>芯片双功能模板条件合并规则的唯一登记表。</summary>
     public static class ChipRequirementMergeRegistry
     {
         /// <summary>当前正式支持的条件规则。</summary>

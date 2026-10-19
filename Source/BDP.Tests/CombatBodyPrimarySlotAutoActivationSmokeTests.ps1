@@ -53,4 +53,12 @@ Assert-True (
     $text -match 'RequestActivate\(interaction\.ControlSide, interaction\.ControlSlotIndex\)'
 ) 'Primary slot automation must submit the formal control slot, including mirror resolution.'
 
+Assert-True (
+    $text -notmatch 'TryAutoActivatePassiveSlots'
+) 'Combat-body activation must not auto-activate passive Main/Sub chips.'
+
+Assert-True (
+    $text -notmatch 'RequestAutomaticActivate'
+) 'Passive chips must not have a dedicated automatic activation request.'
+
 Write-Output 'CombatBodyPrimarySlotAutoActivationSmokeTests PASS'

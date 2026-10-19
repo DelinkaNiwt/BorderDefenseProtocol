@@ -64,21 +64,19 @@ function Get-PresetName {
 # 定位主模组正式视觉配置。
 $sourceRoot = Split-Path -Parent $PSScriptRoot
 $repoRoot = Split-Path -Parent $sourceRoot
-$visualPath = Join-Path $repoRoot '1.6\Content\Defs\ExpressionDef\Visual.xml'
+$visualPath = Join-Path $repoRoot 'Common\Content\Defs\ExpressionDef\Visual.xml'
 
 Assert-True (Test-Path -LiteralPath $visualPath) '主模组正式视觉配置必须存在。'
 [xml]$visualXml = Get-Content -Raw -Encoding utf8 -LiteralPath $visualPath
 
-# 所有正式显式四向姿态都必须满足同一套东西高度关系。
+# 现有正式显式四向姿态都必须满足同一套东西高度关系；小型枪械仅按需求调整南北握持点，单独由其预设测试校验。
 $explicitPosePresets = @($visualXml.SelectNodes(
-    '/Defs/BDP.Core.Expressions.ExpressionVisualPresetDef[SouthNorthPose and EastWestPose]'))
+    "/Defs/BDP.Core.Expressions.ExpressionVisualPresetDef[SouthNorthPose and EastWestPose and not(@Name='BDP_VisualBase_RangedSmall_Dual')]"))
 $expectedPresetNames = @(
     'BDP_Visual_Kogetsu',
     'BDP_Visual_LightSoulHeavyBlade',
-    'BDP_Visual_LightSoulShieldGuard',
-    'BDP_Visual_LightSoulShieldGuard_Dual',
-    'BDP_Visual_LightSoulShieldMobile',
-    'BDP_Visual_LightSoulShieldMobile_Dual',
+    'BDP_Visual_LightSoulDefenseShield',
+    'BDP_Visual_LightSoulDefenseShield_Dual',
     'BDP_VisualBase_RangedMedium_Dual'
 )
 $actualPresetNames = @($explicitPosePresets | ForEach-Object { Get-PresetName $_ } | Sort-Object)
@@ -134,7 +132,6 @@ Assert-True (
 foreach ($presetName in @(
     'BDP_Visual_Pistol',
     'BDP_Visual_AssaultRifle',
-    'BDP_Visual_RangedWeaponReference',
     'BDP_Visual_Shotgun',
     'BDP_Visual_SniperRifle')) {
     $preset = $visualXml.SelectSingleNode(

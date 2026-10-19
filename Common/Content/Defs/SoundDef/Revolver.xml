@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    左轮手枪构型专属开枪音效 Def。
+    音频资源从参考资源复制到主模组正式 Sounds 目录，避免依赖原版 Shot_Revolver。
+  -->
+
+  <!-- 左轮手枪构型开枪音效。 -->
+  <SoundDef>
+    <!-- SoundDef 唯一名称。 -->
+    <defName>BDP_Sound_RevolverCast</defName>
+    <!-- 只在地图内播放。 -->
+    <context>MapOnly</context>
+    <!-- 允许多枚投射物或多名单位同时播放。 -->
+    <maxSimultaneous>6</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <!-- 左轮手枪专属开枪音频。 -->
+            <clipPath>Trigger/Revolver/Shot_BDP_Revolver</clipPath>
+          </li>
+        </grains>
+        <!-- 沿用 BDP 其他枪械专属音效的音量与音调范围。 -->
+        <volumeRange>40~50</volumeRange>
+        <pitchRange>0.95~1.05</pitchRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+</Defs>

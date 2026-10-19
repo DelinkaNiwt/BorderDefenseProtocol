@@ -1,3 +1,4 @@
+using System;
 using BDP.Core.Expressions;
 using BDP.Core.Verbs;
 using Verse;
@@ -54,7 +55,7 @@ namespace BDP.Core.AttackExecution
                 && request.Request.Pawn != null
                 && request.Request.Target.IsValid
                 && request.Result != null
-                && request.Result.ResultKind == ExpressionResultKind.Verb
+                && request.Result.OutputChannel == ExpressionOutputChannel.Verb
                 && request.Result.WeaponMode == WeaponExpressionMode.Melee;
         }
 
@@ -98,7 +99,37 @@ namespace BDP.Core.AttackExecution
             Job job = JobMaker.MakeJob(jobDef, context.Target);
             job.verbToUse = context.Verb;
             job.maxNumMeleeAttacks = context.RequiredStepCount;
+            if (context.PlanDispatchIntent == AttackDispatchIntent.AutoAttackOrder)
+            {
+                Job sourceJob = context.Pawn.CurJob;
+                if (sourceJob == null)
+                {
+                    return false;
+                }
+
+                ApplyAutomaticJobSettings(job, sourceJob, Find.TickManager.TicksGame);
+                // 自动接管不是玩家下令，不读取排队快捷键或清空玩家命令队列。
+                // 保留原版决策来源及剩余判断时间，允许其重新选择目标和远程／近战。
+                context.Pawn.jobs.StartJob(job, JobCondition.InterruptForced, sourceJob.jobGiver,
+                    cancelBusyStances: false, thinkTree: sourceJob.jobGiverThinkTree);
+                return context.Pawn.CurJob == job;
+            }
+
             return context.Pawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
+        }
+
+        /// <summary>自动接管沿用原任务判断截止刻与条件，不把持续执行误标为玩家强制。</summary>
+        private static void ApplyAutomaticJobSettings(Job job, Job sourceJob, int currentTick)
+        {
+            job.playerForced = false;
+            job.expiryInterval = sourceJob.expiryInterval > 0
+                ? Math.Max(1, sourceJob.expiryInterval - Math.Max(0, currentTick - sourceJob.startTick))
+                : sourceJob.expiryInterval;
+            job.checkOverrideOnExpire = sourceJob.checkOverrideOnExpire;
+            job.expireRequiresEnemiesNearby = sourceJob.expireRequiresEnemiesNearby;
+            job.expireOnEnemiesNearby = sourceJob.expireOnEnemiesNearby;
+            job.killIncappedTarget = sourceJob.killIncappedTarget;
+            job.source = sourceJob.source;
         }
     }
 }

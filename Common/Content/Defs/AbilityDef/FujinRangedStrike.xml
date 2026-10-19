@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    FujinRangedStrike（风刃·远程斩击）独立 AbilityDef。
+    该能力不依附任何现有芯片或组合技；业务远程模块由芯片功能表达条目挂载。
+  -->
+  <AbilityDef>
+    <!-- AbilityDef 唯一名称。 -->
+    <defName>BDP_Ability_FujinRangedStrike</defName>
+    <!-- 缺少语言包时的英文回退名称。 -->
+    <label>Fujin ranged strike</label>
+    <!-- 缺少语言包时的英文回退说明。 -->
+    <description>A long-range wind blade that redirects toward its target and cuts along the final flight direction.</description>
+    <!-- 复用现有 BDP 芯片图标，暂不新增美术资源。 -->
+    <iconPath>Things/Trigger/Chip/BDP_TriggerChip</iconPath>
+    <!-- 采用现有远程能力的冷却档位；具体平衡数值可后续单独调整。 -->
+    <cooldownTicksRange>600</cooldownTicksRange>
+    <!-- 战斗操作按钮沿原版只在征召时显示。 -->
+    <displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+    <hostile>true</hostile>
+    <casterMustBeCapableOfViolence>true</casterMustBeCapableOfViolence>
+
+    <verbProperties>
+      <!-- 使用 Core 通用 Ability 远程射击宿主。 -->
+      <verbClass>BDP.Core.Abilities.BdpVerb_AbilityShoot</verbClass>
+      <!-- 缺少语言包时的英文回退 Verb 名称。 -->
+      <label>Fujin ranged strike</label>
+      <violent>true</violent>
+      <hasStandardCommand>true</hasStandardCommand>
+      <warmupTime>1.2</warmupTime>
+      <!-- 采用原版大范围写法，500 格覆盖正常地图的最大距离。 -->
+      <range>500</range>
+      <!-- 要求施法者到目标之间存在原版直接视线；投射物飞行逻辑保持不变。 -->
+      <requireLineOfSight>true</requireLineOfSight>
+      <!-- 默认齐射 10 发；不声明 maximumBurstShotCount，不人为限制更高配置。 -->
+      <burstShotCount>10</burstShotCount>
+      <ticksBetweenBurstShots>0</ticksBetweenBurstShots>
+      <!-- 四段原版精度均为 80%，不额外写必中补丁。 -->
+      <accuracyTouch>0.8</accuracyTouch>
+      <accuracyShort>0.8</accuracyShort>
+      <accuracyMedium>0.8</accuracyMedium>
+      <accuracyLong>0.8</accuracyLong>
+      <defaultProjectile>BDP_Projectile_FujinRangedStrike</defaultProjectile>
+      <soundCast>BDP_Sound_AsteroidCast</soundCast>
+      <drawAimPie>true</drawAimPie>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>true</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+
+    <comps>
+      <!-- BDP 表达使用条件组件。 -->
+      <li Class="BDP.Core.Abilities.CompProperties_AbilityEffect_BdpExpressionUseRequirements" />
+      <!-- BDP Trion 消耗组件；实际消耗由风刃·远程斩击芯片表达结果提供。 -->
+      <li Class="BDP.Core.Abilities.CompProperties_AbilityEffect_BdpTrionCost" />
+    </comps>
+  </AbilityDef>
+
+</Defs>

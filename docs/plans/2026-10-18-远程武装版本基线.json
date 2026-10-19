@@ -1,0 +1,86 @@
+{
+  "SourceCommit": "00a46b060",
+  "RecordedAt": "2026-10-18 09:16:11",
+  "TimeZone": "Asia/Shanghai",
+  "Note": "源码基线与当前版本产物分别保存；本轮未构建，不声明两者同步。归档不含游戏及前置程序集。",
+  "Artifacts": [
+    {
+      "Version": "1.6",
+      "Archive": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\输出\\版本基线\\20261018-远程武装-00a46b060\\1.6.zip",
+      "SHA256": "0AEE59630A4C5E0A33CB8094F75A99DF8D8EED892596865889C3A8DB3F69CF16",
+      "Files": [
+        {
+          "Path": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\BorderDefenseProtocol\\1.6\\Assemblies\\BDP.Compatibility.dll",
+          "SHA256": "CAED7BE26CF1165A6940CEC526FFDB640B982BC8BEE125833B0EBA76D18DDA20"
+        },
+        {
+          "Path": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\BorderDefenseProtocol\\1.6\\Assemblies\\BDP.Compatibility.pdb",
+          "SHA256": "5C47EF6BF179D533E5ADDE2B7520CD83FA0645E1B558C6FC075A302D339CB4D4"
+        },
+        {
+          "Path": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\BorderDefenseProtocol\\1.6\\Assemblies\\BDP.Content.dll",
+          "SHA256": "A418B20DDD76A9725E3846F94AC7C0259A02D0A0FA986EE0209F4FE4C28E0839"
+        },
+        {
+          "Path": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\BorderDefenseProtocol\\1.6\\Assemblies\\BDP.Content.pdb",
+          "SHA256": "067BE0CCC141EA0E5B18B444BC59766F2BA5953DF6356612BDFCC681E9A914B1"
+        },
+        {
+          "Path": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\BorderDefenseProtocol\\1.6\\Assemblies\\BDP.Core.dll",
+          "SHA256": "CCFE3CB66B88CF26E56E8A801443C910248EE42B5C26FA8238C114BF05C9554F"
+        },
+        {
+          "Path": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\BorderDefenseProtocol\\1.6\\Assemblies\\BDP.Core.pdb",
+          "SHA256": "8E82A6990F54741731D398257D041D72EBDEE3F3CDD8DBF1C48C7CFFA5DF56A7"
+        },
+        {
+          "Path": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\BorderDefenseProtocol\\1.6\\Development\\Assemblies\\BDP.Development.dll",
+          "SHA256": "1EDE5A7E3F927DE64FCC8A06DBA70B339A907C69D18A19B7FAF4833234FE83BF"
+        },
+        {
+          "Path": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\BorderDefenseProtocol\\1.6\\Development\\Assemblies\\BDP.Development.pdb",
+          "SHA256": "BFB2761B6BA6CC13CC2A668F9DBB9CCAD43155B13E16158D6CBE944FCE7B27F1"
+        }
+      ]
+    },
+    {
+      "Version": "1.7",
+      "Archive": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\输出\\版本基线\\20261018-远程武装-00a46b060\\1.7.zip",
+      "SHA256": "364A08752F1895F161908FEF36A6FA51512503B935E1F3BBDFA5757038FA296C",
+      "Files": [
+        {
+          "Path": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\BorderDefenseProtocol\\1.7\\Assemblies\\BDP.Compatibility.dll",
+          "SHA256": "DCCB228C4B867954AE0BD53559386CE0DBC361430C0D274DBA3D36541A03A26E"
+        },
+        {
+          "Path": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\BorderDefenseProtocol\\1.7\\Assemblies\\BDP.Compatibility.pdb",
+          "SHA256": "BD71EF25E0A8F0ED4C94FE91B4A2AE255C8CF75A1ED94736BD0EAC86B960CBB2"
+        },
+        {
+          "Path": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\BorderDefenseProtocol\\1.7\\Assemblies\\BDP.Content.dll",
+          "SHA256": "92FDE202AB153C930F83B108E7BDCFFDDA4FD768CA53F6EB8CBBA1DBAF7E5C44"
+        },
+        {
+          "Path": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\BorderDefenseProtocol\\1.7\\Assemblies\\BDP.Content.pdb",
+          "SHA256": "C25B15C6944ED7B8673F580F316BE0D35432A0E2A9DDD85B4412ABD9482A6378"
+        },
+        {
+          "Path": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\BorderDefenseProtocol\\1.7\\Assemblies\\BDP.Core.dll",
+          "SHA256": "FECBE751A1F04077585262354DEDEB522A4986DB380FC159293B01CB46B86404"
+        },
+        {
+          "Path": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\BorderDefenseProtocol\\1.7\\Assemblies\\BDP.Core.pdb",
+          "SHA256": "F492EC79B105E7C6AE048780700EB2AFFE3CAECE2931532E78D8EC4D91B57BB9"
+        },
+        {
+          "Path": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\BorderDefenseProtocol\\1.7\\Development\\Assemblies\\BDP.Development.dll",
+          "SHA256": "5DB07CC9757397415A7DE270A7E6364B1E5C370E9D1AC728E4C866077CC4C5CA"
+        },
+        {
+          "Path": "C:\\NiwtDatas\\Projects\\RimworldModStudio\\模组工程\\BorderDefenseProtocol\\1.7\\Development\\Assemblies\\BDP.Development.pdb",
+          "SHA256": "351E1E543C816FDFD3BD41F5BE9623711C71A807AB08FC670E3F923492D6C26C"
+        }
+      ]
+    }
+  ]
+}

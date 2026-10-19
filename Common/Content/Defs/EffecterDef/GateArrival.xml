@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 黑洞门维持期的可选视觉，复用折跃电火花，不包含原版整套折跃爆发。 -->
+  <EffecterDef>
+    <!-- 由抵达方式参数引用，也可被其它视觉定义替换。 -->
+    <defName>BDP_GateMaintainedElectricity</defName>
+    <!-- 只使用原版随机喷发子效果。 -->
+    <children>
+      <li>
+        <!-- 原版发射器管理概率、触发间隔和喷发数量。 -->
+        <subEffecterClass>Verse.SubEffecter_SprayerChance</subEffecterClass>
+        <!-- 直接引用原版折跃使用的电火花，寿命约0.25秒。 -->
+        <fleckDef>ElectricalSpark</fleckDef>
+        <!-- 每组1～2个，避免形成覆盖门和人物的强闪。 -->
+        <burstCount>1~2</burstCount>
+        <!-- 每个可触发游戏刻5%概率，与冷却合成平均约半秒一组的随机节奏。 -->
+        <chancePerTick>0.05</chancePerTick>
+        <!-- 两组最少间隔12刻，约0.2秒；不会约束最长间隔。 -->
+        <chancePeriodTicks>12</chancePeriodTicks>
+        <!-- 展开阶段结束后由控制器启动，无额外固定起始等待。 -->
+        <initialDelayTicks>0</initialDelayTicks>
+        <!-- 生成中心使用当前门格。 -->
+        <spawnLocType>OnSource</spawnLocType>
+        <!-- 门边缘的环形随机范围；原版Effecter.scale会随门尺寸同比缩放。 -->
+        <positionRadiusMin>0.8</positionRadiusMin>
+        <!-- 默认最大位置半径。 -->
+        <positionRadius>1.3</positionRadius>
+        <!-- 放大电弧以对照可见性，上限采用原版前两批的尺寸；同样随门尺寸缩放。 -->
+        <scale>1.8~2.5</scale>
+        <!-- 每个电弧独立随机方向。 -->
+        <rotation>0~360</rotation>
+        <!-- 静止闪烁，由原版粒子淡入淡出。 -->
+        <speed>0</speed>
+        <!-- 不在生成时额外触发一轮爆发。 -->
+        <subTriggerOnSpawn>false</subTriggerOnSpawn>
+      </li>
+    </children>
+  </EffecterDef>
+</Defs>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 触发体市场价值详情中的芯片明细分组标题。 -->
+  <BDP_TriggerBodyMarketValue_ChipsHeader>装载芯片</BDP_TriggerBodyMarketValue_ChipsHeader>
+  <!-- 单种芯片的数量及其合计市场价值贡献。 -->
+  <BDP_TriggerBodyMarketValue_ChipContribution>{0} ×{1}：{2}</BDP_TriggerBodyMarketValue_ChipContribution>
+</LanguageData>

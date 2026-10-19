@@ -1,11 +1,11 @@
 $ErrorActionPreference = 'Stop'
 
 $modRoot = Join-Path $PSScriptRoot '..\..'
-$presetPath = Join-Path $modRoot '1.6\Content\Defs\ChipActionPresetDef\Presets.xml'
-$projectilePath = Join-Path $modRoot '1.6\Content\Defs\ThingDef\Projectiles\Projectiles.xml'
+$presetPath = Join-Path $modRoot 'Common\Content\Defs\ChipManufacturingPresetDef\Presets.xml'
+$projectilePath = Join-Path $modRoot 'Common\Content\Defs\ThingDef\Projectiles\Projectiles.xml'
 $languagePath = Join-Path $modRoot 'Languages\ChineseSimplified (简体中文)\DefInjected\ThingDef\BDP_Things.xml'
 if (-not (Test-Path -LiteralPath $presetPath)) {
-    throw ('缺少芯片预设 XML：' + $presetPath)
+throw ('缺少芯片功能模板 XML：' + $presetPath)
 }
 if (-not (Test-Path -LiteralPath $projectilePath)) {
     throw ('缺少投射物 XML：' + $projectilePath)
@@ -17,11 +17,11 @@ if (-not (Test-Path -LiteralPath $languagePath)) {
 $xml = [xml](Get-Content -LiteralPath $presetPath -Raw -Encoding UTF8)
 $projectileXml = [xml](Get-Content -LiteralPath $projectilePath -Raw -Encoding UTF8)
 $languageXml = [xml](Get-Content -LiteralPath $languagePath -Raw -Encoding UTF8)
-$meteora = $xml.SelectSingleNode("//*[defName='BDP_Preset_Meteora']")
-$asteroid = $xml.SelectSingleNode("//*[defName='BDP_Preset_Asteroid']")
+$meteora = $xml.SelectSingleNode("//*[defName='BDP_ChipFunction_Meteora']")
+$asteroid = $xml.SelectSingleNode("//*[defName='BDP_ChipFunction_Asteroid']")
 $explosiveProjectile = $projectileXml.SelectSingleNode("//*[defName='BDP_Projectile_Explosive']")
 if ($null -eq $meteora -or $null -eq $asteroid) {
-    throw '美特拉或小行星预设不存在。'
+throw '美特拉或小行星芯片功能模板不存在。'
 }
 if ($null -eq $explosiveProjectile) {
     throw '炸裂弹投射物 Def 不存在。'
@@ -35,16 +35,16 @@ if ($explosiveProjectile.projectile.damageDef -ne 'Bomb') {
     throw '炸裂弹必须使用 Bomb 伤害定义。'
 }
 
-if ([int]$explosiveProjectile.projectile.damageAmountBase -ne 13) {
-    throw '炸裂弹的基础伤害必须按本次平衡保持为 13。'
+if ([int]$explosiveProjectile.projectile.damageAmountBase -ne 6) {
+    throw '炸裂弹的基础伤害必须按本次平衡为 6。'
 }
 
-if ([math]::Abs(([double]$explosiveProjectile.projectile.armorPenetrationBase) - 0.10) -gt 0.0001) {
-    throw '炸裂弹的护甲穿透必须保持为 0.10。'
+if ([math]::Abs(([double]$explosiveProjectile.projectile.armorPenetrationBase) - 0.0) -gt 0.0001) {
+    throw '炸裂弹的护甲穿透必须为 0。'
 }
 
-if ([math]::Abs(([double]$explosiveProjectile.projectile.explosionRadius) - 2.9) -gt 0.0001) {
-    throw '炸裂弹的爆炸半径必须保持为 2.9。'
+if ([math]::Abs(([double]$explosiveProjectile.projectile.explosionRadius) - 1.9) -gt 0.0001) {
+    throw '炸裂弹的爆炸半径必须为 1.9。'
 }
 
 $localizedProjectileLabel = $languageXml.SelectSingleNode("//*[local-name()='BDP_Projectile_Explosive.label']")

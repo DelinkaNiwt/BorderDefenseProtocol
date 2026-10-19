@@ -16,6 +16,12 @@ namespace BDP.Core.Projectiles.Interaction
         public bool BypassRegisteredDamageShields { get; set; }
 
         /// <summary>
+        /// 是否允许当前投射物穿过非目标实体。
+        /// 该语义同时供原版 ProjectileHitFlags 适配与 BDP 自有路径扫描使用。
+        /// </summary>
+        public bool AllowNonTargetPassThrough { get; set; }
+
+        /// <summary>
         /// 复制当前交互策略。
         /// </summary>
         public ProjectileInteractionPolicy Clone()
@@ -23,7 +29,8 @@ namespace BDP.Core.Projectiles.Interaction
             return new ProjectileInteractionPolicy
             {
                 BypassProjectileInterceptors = BypassProjectileInterceptors,
-                BypassRegisteredDamageShields = BypassRegisteredDamageShields
+                BypassRegisteredDamageShields = BypassRegisteredDamageShields,
+                AllowNonTargetPassThrough = AllowNonTargetPassThrough
             };
         }
     }

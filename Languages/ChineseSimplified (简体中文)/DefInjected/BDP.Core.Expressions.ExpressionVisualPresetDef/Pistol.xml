@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 左轮手枪双武器视觉诊断名称。 -->
+  <BDP_Visual_Pistol_Dual.label>左轮手枪双武器手持视觉</BDP_Visual_Pistol_Dual.label>
+  <!-- 自动手枪单持与双持视觉名称。 -->
+  <BDP_Visual_Autopistol.label>自动手枪单武器手持视觉</BDP_Visual_Autopistol.label>
+  <BDP_Visual_Autopistol_Dual.label>自动手枪双武器手持视觉</BDP_Visual_Autopistol_Dual.label>
+</LanguageData>

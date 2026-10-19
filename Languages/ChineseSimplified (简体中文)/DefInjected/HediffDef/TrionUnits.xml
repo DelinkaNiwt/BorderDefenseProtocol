@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 永久身体不是原身转换状态，不附带延时崩解或死亡保护。 -->
+  <BDP_PermanentCombatBody.label>永久战斗体</BDP_PermanentCombatBody.label>
+  <BDP_PermanentCombatBody.description>该个体从制造完成起就是战斗体，没有原身。停机不改变身体形态；身体破裂或Trion耗尽即死亡。</BDP_PermanentCombatBody.description>
+</LanguageData>

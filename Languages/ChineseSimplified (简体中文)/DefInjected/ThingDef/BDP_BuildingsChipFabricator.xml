@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-  <!-- 芯片制造台。 -->
-  <BDP_ChipFabricator.label>芯片制造台</BDP_ChipFabricator.label>
-  <BDP_ChipFabricator.description>使用动作预设与可选武装型组合制造芯片的工作台。制造任务沿用原版账单、材料搬运与半成品流程。</BDP_ChipFabricator.description>
+  <!-- 制造台扩展为同时制作触发体与芯片，保留原定义标识。 -->
+  <BDP_ChipFabricator.label>触发器制造台</BDP_ChipFabricator.label>
+  <!-- 制造台用途与核心运行要求。 -->
+  <BDP_ChipFabricator.description>用于制作触发体，以及使用功能模板与可选武装构型组合制造芯片的工作台。制造任务沿用原版账单、材料搬运与半成品流程。需要本地图的 Trion 中继核心运行。</BDP_ChipFabricator.description>
 </LanguageData>

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using BDP.Core.AttackExecution.RangedModules.Runtime;
 using BDP.Core.Projectiles.RangedFlightProtocol.Model;
 using UnityEngine;
+using Verse;
 
 namespace BDP.Core.Projectiles.RangedFlightProtocol.Impact
 {
@@ -67,6 +68,15 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Impact
         /// 当前模块是否提交了直接伤害计划覆盖。
         /// </summary>
         public bool HasDirectDamage { get; set; }
+
+        /// <summary>
+        /// 当前模块提交的主直接伤害命中部位覆盖值。
+        /// Core（核心基础设施）只搬运已解析的身体部位，不解释其是否属于要害。
+        /// </summary>
+        public BodyPartRecord HitPartOverride { get; set; }
+
+        /// <summary>显式部位裁定已完成；空结果表示指定部位失效，不能另随机选择。</summary>
+        public bool HasHitPartOverride { get; set; }
 
         /// <summary>
         /// 当前模块提交的直接伤害计划覆盖。

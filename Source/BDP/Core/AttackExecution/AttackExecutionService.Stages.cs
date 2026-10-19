@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using BDP.Core.CombatModel;
 using BDP.Core.Expressions;
+using BDP.Core.Permissions;
 using BDP.Core.VerbHosting;
 using UnityEngine;
 using Verse;
@@ -96,7 +97,7 @@ namespace BDP.Core.AttackExecution
             }
 
             request.Cursor = CreateInitialCursor(request.Plan);
-            if (request.Result.ResultKind != ExpressionResultKind.Verb)
+            if (request.Result.OutputChannel != ExpressionOutputChannel.Verb)
             {
                 return false;
             }
@@ -604,36 +605,32 @@ namespace BDP.Core.AttackExecution
             bool isMainSide,
             int groupStartIndex)
         {
-            SingleAttackExecutionStyle single = result.ExecutionStyle?.Single;
-            int meleeHitCount = single != null && single.meleeHitCount > 0 ? single.meleeHitCount : 1;
-            int interval = single != null && single.meleeHitIntervalTicks > 0 ? single.meleeHitIntervalTicks : 0;
-            for (int i = 0; i < meleeHitCount; i++)
-            {
-                casts.Add(BuildCast(
-                    result,
-                    target,
-                    groupStartIndex + i,
-                    0,
-                    i + 1,
-                    interval,
-                    isMainSide,
-                    new[]
-                    {
-                        BuildSingleEmit(
-                            result,
-                            target,
-                            groupStartIndex + i,
-                            0,
-                            i + 1,
-                            0,
-                            Vector3.zero,
-                            false,
-                            0f,
-                            0f,
-                            0f,
-                            0f)
-                    }));
-            }
+            // 近战 HitCount 已经投影到当前 Verb 的 burstShotCount。
+            // 这里必须只创建一个计划层 cast，否则 JobDriver 会把每一击误当成新的预热/冷却轮次。
+            casts.Add(BuildCast(
+                result,
+                target,
+                groupStartIndex,
+                0,
+                1,
+                0,
+                isMainSide,
+                new[]
+                {
+                    BuildSingleEmit(
+                        result,
+                        target,
+                        groupStartIndex,
+                        0,
+                        1,
+                        0,
+                        Vector3.zero,
+                        false,
+                        0f,
+                        0f,
+                        0f,
+                        0f)
+                }));
         }
 
         /// <summary>
@@ -1337,6 +1334,10 @@ namespace BDP.Core.AttackExecution
 
             ResolvedVerbSpec resolvedSpec = result.ResolvedVerbSpec;
             bool requiresDirectTargetLos = resolvedSpec != null && resolvedSpec.RequiresDirectTargetLineOfSight;
+            bool relaxDirectTargetLos = DirectTargetLineOfSightPermissionAccess.ShouldRelaxDirectTargetLineOfSight(
+                pawn,
+                result,
+                semanticTarget);
             bool requiresVerbLos = resolvedSpec != null
                 ? resolvedSpec.RequireLineOfSight
                 : result.VerbProps != null && result.VerbProps.requireLineOfSight;
@@ -1391,7 +1392,11 @@ namespace BDP.Core.AttackExecution
                 verb = binding.ResolveActiveVerb();
                 canHitDirectTarget = verb != null && verb.CanHitTargetFrom(pawn.Position, semanticTarget);
                 allowed = canHitDirectTarget;
-                reason = verb == null ? "binding_has_no_active_verb" : canHitDirectTarget ? "required_direct_los_pass" : "required_direct_los_blocked";
+                reason = verb == null
+                    ? "binding_has_no_active_verb"
+                    : relaxDirectTargetLos
+                        ? (canHitDirectTarget ? "permission_relaxed_direct_los_pass" : "permission_relaxed_direct_los_blocked")
+                        : (canHitDirectTarget ? "required_direct_los_pass" : "required_direct_los_blocked");
                 AttackExecutionDiagnostics.LogDualRangedSideLegality(
                     pawn,
                     hostResult != null ? hostResult.Id : null,

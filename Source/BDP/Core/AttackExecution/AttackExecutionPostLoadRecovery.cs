@@ -2,6 +2,7 @@ using BDP.Core.Expressions;
 using BDP.Core.Trigger;
 using BDP.Core.Trigger.Runtime;
 using BDP.Core.Verbs;
+using System.Collections.Generic;
 using Verse;
 using Verse.AI;
 
@@ -26,9 +27,9 @@ namespace BDP.Core.AttackExecution
         /// 在已发布投影换版后，主动中断当前已经失效的 BDP 攻击会话。
         /// 这条路径不允许把旧会话偷偷续接到新版本，只负责“打断，然后交还上层”。
         /// </summary>
-        internal static void InterruptInvalidAttackSession(Pawn pawn)
+        internal static void InterruptInvalidAttackSession(Pawn pawn, ISet<Verb> rejectedSessions = null)
         {
-            ReconcileAttackSession(pawn, allowLoadedProjectionRebind: false);
+            ReconcileAttackSession(pawn, allowLoadedProjectionRebind: false, rejectedSessions: rejectedSessions);
         }
 
         /// <summary>
@@ -45,7 +46,8 @@ namespace BDP.Core.AttackExecution
         /// 按当前上下文统一收口或续接 BDP 攻击会话。
         /// 读档恢复允许把同一业务身份的旧会话重绑到当前版本；live invalidation 则只允许中断。
         /// </summary>
-        private static void ReconcileAttackSession(Pawn pawn, bool allowLoadedProjectionRebind)
+        private static void ReconcileAttackSession(Pawn pawn, bool allowLoadedProjectionRebind,
+            ISet<Verb> rejectedSessions = null)
         {
             if (pawn == null)
             {
@@ -60,10 +62,10 @@ namespace BDP.Core.AttackExecution
             }
 
             AttackSessionValidationState jobState = hasBdpJob
-                ? ValidateCurrentAttackSession(pawn.jobs?.curJob?.verbToUse, allowLoadedProjectionRebind)
+                ? ValidateCurrentAttackSession(pawn.jobs?.curJob?.verbToUse, allowLoadedProjectionRebind, rejectedSessions)
                 : AttackSessionValidationState.Valid;
             AttackSessionValidationState stanceState = hasBdpBusyStance
-                ? ValidateCurrentAttackSession((pawn.stances?.curStance as Stance_Busy)?.verb, allowLoadedProjectionRebind)
+                ? ValidateCurrentAttackSession((pawn.stances?.curStance as Stance_Busy)?.verb, allowLoadedProjectionRebind, rejectedSessions)
                 : AttackSessionValidationState.Valid;
 
             if (jobState == AttackSessionValidationState.Invalid && pawn.jobs?.curJob != null)
@@ -101,8 +103,12 @@ namespace BDP.Core.AttackExecution
         /// </summary>
         private static AttackSessionValidationState ValidateCurrentAttackSession(
             Verb verb,
-            bool allowLoadedProjectionRebind)
+            bool allowLoadedProjectionRebind,
+            ISet<Verb> rejectedSessions = null)
         {
+            // 换绑生成的新版基础令牌只服务下一次起手，不能使发布前已失效的旧作业继续。
+            if (verb != null && rejectedSessions != null && rejectedSessions.Contains(verb))
+                return AttackSessionValidationState.Invalid;
             if (verb is BdpVerb_FormalHostShoot shootVerb)
             {
                 return ValidateRangedFormalHostSession(shootVerb, allowLoadedProjectionRebind);

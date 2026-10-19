@@ -179,6 +179,12 @@ namespace BDP.Core.Expressions
                     continue;
                 }
 
+                if (mode.ModeKey.IndexOf('/') >= 0)
+                {
+                    result.Errors.Add(
+                        "形态 " + mode.ModeKey + " 的 ModeKey 不得包含上下文路径分隔符 /。");
+                }
+
                 if (modesByKey.ContainsKey(mode.ModeKey))
                 {
                     result.Errors.Add("ModeKey 重复：" + mode.ModeKey + "。");
@@ -279,6 +285,13 @@ namespace BDP.Core.Expressions
                 {
                     result.Errors.Add("形态 " + mode.ModeKey + " 的 Stances 在位置 " + stanceIndex + " 缺少 StanceKey。");
                     continue;
+                }
+
+                if (stance.StanceKey.IndexOf('/') >= 0)
+                {
+                    result.Errors.Add(
+                        "形态 " + mode.ModeKey + " 的 StanceKey " + stance.StanceKey
+                        + " 不得包含上下文路径分隔符 /。");
                 }
 
                 if (stancesByKey.ContainsKey(stance.StanceKey))

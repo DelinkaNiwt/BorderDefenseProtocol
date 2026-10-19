@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 独立开发菜单入口。 -->
+  <BDP_Dev_ImGui_Open>打开 ImGui（即时界面库）能力展示</BDP_Dev_ImGui_Open>
+  <!-- 展示标题。 -->
+  <BDP_Dev_ImGui_Title>ImGui（即时界面库）能力展示 · 1.7 原生接口</BDP_Dev_ImGui_Title>
+  <!-- 展示边界和操作说明。 -->
+  <BDP_Dev_ImGui_Intro>全部使用示例数据，与游戏业务无关。向下滚动浏览；关闭窗口即丢弃全部调整。</BDP_Dev_ImGui_Intro>
+  <!-- 控件区标题。 -->
+  <BDP_Dev_ImGui_Controls>原生交互控件 · 修改后立即观察下方效果</BDP_Dev_ImGui_Controls>
+  <!-- 动画开关。 -->
+  <BDP_Dev_ImGui_Animate>播放动画</BDP_Dev_ImGui_Animate>
+  <!-- 抗锯齿开关。 -->
+  <BDP_Dev_ImGui_Antialias>抗锯齿（平滑边缘）</BDP_Dev_ImGui_Antialias>
+  <!-- 填充透明度滑块。 -->
+  <BDP_Dev_ImGui_Opacity>填充不透明度</BDP_Dev_ImGui_Opacity>
+  <!-- 线宽滑块。 -->
+  <BDP_Dev_ImGui_Thickness>线条宽度</BDP_Dev_ImGui_Thickness>
+  <!-- 颜色编辑器。 -->
+  <BDP_Dev_ImGui_Color>强调色 · 点击色块选色</BDP_Dev_ImGui_Color>
+  <!-- 按钮示例。 -->
+  <BDP_Dev_ImGui_Click>点我计数</BDP_Dev_ImGui_Click>
+  <!-- 点击次数。 -->
+  <BDP_Dev_ImGui_Clicks>已点击 {0} 次</BDP_Dev_ImGui_Clicks>
+  <!-- 重置按钮。 -->
+  <BDP_Dev_ImGui_Reset>恢复初始状态</BDP_Dev_ImGui_Reset>
+  <!-- 进度条标签。 -->
+  <BDP_Dev_ImGui_Progress>动态进度条 · 仅为示例</BDP_Dev_ImGui_Progress>
+  <!-- 颜色分区标题。 -->
+  <BDP_Dev_ImGui_ColorsTitle>01 · 颜色、透明叠加与四角渐变</BDP_Dev_ImGui_ColorsTitle>
+  <!-- 颜色分区说明。 -->
+  <BDP_Dev_ImGui_ColorsDescription>左侧圆在棋盘格上混色；右侧渐变直接由顶点颜色生成；下方为圆角填充与描边。</BDP_Dev_ImGui_ColorsDescription>
+  <!-- 几何分区标题。 -->
+  <BDP_Dev_ImGui_ShapesTitle>02 · 基本形状、凹多边形与曲线</BDP_Dev_ImGui_ShapesTitle>
+  <!-- 几何分区说明。 -->
+  <BDP_Dev_ImGui_ShapesDescription>圆、三角形、星形和圆弧；下方曲线由贝塞尔控制点生成，不需要预制贴图。</BDP_Dev_ImGui_ShapesDescription>
+  <!-- 抗锯齿对照标题。 -->
+  <BDP_Dev_ImGui_AATitle>03 · 抗锯齿对照</BDP_Dev_ImGui_AATitle>
+  <!-- 抗锯齿对照说明。 -->
+  <BDP_Dev_ImGui_AADescription>左侧关闭平滑边缘，右侧开启；两侧使用相同的线和圆，可调整线宽观察区别。</BDP_Dev_ImGui_AADescription>
+  <!-- 图表分区标题。 -->
+  <BDP_Dev_ImGui_ChartsTitle>04 · 同一套图元可以组合成图表</BDP_Dev_ImGui_ChartsTitle>
+  <!-- 图表分区说明。 -->
+  <BDP_Dev_ImGui_ChartsDescription>左侧雷达与半透明填充；右侧折线、数据点、虚线和柱状图。数值全是演示数据。</BDP_Dev_ImGui_ChartsDescription>
+  <!-- 裁切交互分区标题。 -->
+  <BDP_Dev_ImGui_ClipTitle>05 · 局部裁切与鼠标交互</BDP_Dev_ImGui_ClipTitle>
+  <!-- 裁切交互分区说明。 -->
+  <BDP_Dev_ImGui_ClipDescription>移动圆只显示在橙色框内。按住并拖动画布任意位置，十字跟随鼠标。</BDP_Dev_ImGui_ClipDescription>
+  <!-- 动画分区标题。 -->
+  <BDP_Dev_ImGui_AnimationTitle>06 · 动态仪表、轨道与波形</BDP_Dev_ImGui_AnimationTitle>
+  <!-- 动画分区说明。 -->
+  <BDP_Dev_ImGui_AnimationDescription>连续更新二维图元即可形成动画；暂停游戏也能播放，可用顶部开关单独暂停。</BDP_Dev_ImGui_AnimationDescription>
+  <!-- 结束说明。 -->
+  <BDP_Dev_ImGui_Footer>图表布局和数据含义仍由作者定义；这个库提供控件、交互和绘制能力。</BDP_Dev_ImGui_Footer>
+</LanguageData>

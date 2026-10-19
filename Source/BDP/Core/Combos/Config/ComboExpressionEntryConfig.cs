@@ -18,7 +18,7 @@ namespace BDP.Core.Combos
         /// <summary>
         /// 当前条目的定义种类。
         /// </summary>
-        public ChipExpressionEntryKindConfig Kind = ChipExpressionEntryKindConfig.PrimaryVerb;
+        public ChipExpressionEntryTypeConfig EntryType = ChipExpressionEntryTypeConfig.PrimaryVerb;
 
         /// <summary>
         /// 当前条目的轻量关系种类。
@@ -48,6 +48,9 @@ namespace BDP.Core.Combos
         /// 它只表达 dual 等入口层的必要直射语义，不覆盖模块内部的路径段 LOS 规则。
         /// </summary>
         public DirectTargetLineOfSightRequirementConfig DirectTargetLineOfSight = DirectTargetLineOfSightRequirementConfig.FromVerb;
+
+        /// <summary>当前组合条目显式声明接入的许可键列表。</summary>
+        public List<string> DeclaredPermissionKeys;
 
         /// <summary>
         /// 当前条目缺失 VerbProps 字段时的自动求值声明。
@@ -103,9 +106,14 @@ namespace BDP.Core.Combos
         public string HediffApplyModeKey;
 
         /// <summary>
+        /// 当前条目的 Hediff 生命周期控制模式；留空按 Automatic 处理。
+        /// </summary>
+        public string HediffControlMode;
+
+        /// <summary>
         /// 当前条目向外声明的被动键。
         /// </summary>
-        public string PassiveKey;
+        public string PassiveIdentityKey;
 
         /// <summary>
         /// 当前条目向外暴露的轻量附加数据。
@@ -118,6 +126,11 @@ namespace BDP.Core.Combos
         /// 这样它们进入正式结果层后才能被完全等价对待。
         /// </summary>
         public List<RangedModuleMountConfig> RangedModules;
+
+        /// <summary>
+        /// 当前组合条目可选的近战命中部位策略。
+        /// </summary>
+        public HitPartPolicyConfig HitPartPolicy;
 
         /// <summary>
         /// 当前组合条目的中性投射物属性覆盖。
@@ -138,10 +151,11 @@ namespace BDP.Core.Combos
                 DisplayLabelKey = DisplayLabelKey,
                 RoleKey = RoleKey,
                 Tags = Tags != null ? new List<string>(Tags) : new List<string>(),
+                DeclaredPermissionKeys = DeclaredPermissionKeys != null ? new List<string>(DeclaredPermissionKeys) : new List<string>(),
                 Conditions = Conditions != null ? new List<ExpressionSourceConditionConfig>(Conditions) : new List<ExpressionSourceConditionConfig>(),
                 Trion = Trion,
                 SemanticSourceKind = SemanticSourceKind,
-                Kind = Kind,
+                EntryType = EntryType,
                 RelationKind = RelationKind,
                 ParentEntryId = ParentEntryId,
                 WeaponMode = WeaponMode,
@@ -159,9 +173,11 @@ namespace BDP.Core.Combos
                 AbilityDefName = AbilityDefName,
                 HediffDefName = HediffDefName,
                 HediffApplyModeKey = HediffApplyModeKey,
-                PassiveKey = PassiveKey,
+                HediffControlMode = HediffControlMode,
+                PassiveIdentityKey = PassiveIdentityKey,
                 ExposedData = ExposedData != null ? new List<PassiveExpressionExposedDatumConfig>(ExposedData) : new List<PassiveExpressionExposedDatumConfig>(),
                 RangedModules = RangedModules != null ? CloneRangedModules(RangedModules) : new List<RangedModuleMountConfig>(),
+                HitPartPolicy = HitPartPolicy != null ? HitPartPolicy.Clone() : null,
                 ProjectileOverrides = ProjectileOverrides != null ? ProjectileOverrides.Clone() : null,
                 Presentation = Presentation != null
                     ? new ExpressionPresentationConfig
@@ -170,6 +186,7 @@ namespace BDP.Core.Combos
                         VisualPresetDefName = Presentation.VisualPresetDefName,
                         VisualGraphicOverrideDefName = Presentation.VisualGraphicOverrideDefName,
                         CompositeVisualPresetDefName = Presentation.CompositeVisualPresetDefName,
+                        ComboAttackVisualPresetDefName = Presentation.ComboAttackVisualPresetDefName,
                         ForceSuppressHostEquipment = Presentation.ForceSuppressHostEquipment,
                         VisualPriority = Presentation.VisualPriority
                     }

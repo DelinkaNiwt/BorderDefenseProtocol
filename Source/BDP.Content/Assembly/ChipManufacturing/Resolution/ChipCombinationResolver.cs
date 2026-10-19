@@ -18,6 +18,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
                 return Invalid(
                     null,
                     null,
+                    null,
                     new ChipCombinationFailureReason(
                         "NullRecord",
                         "BDP_ChipManufacturing_NullRecord"));
@@ -27,34 +28,35 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
                 FindMalformedRecord(record);
             if (malformedRecord != null)
             {
-                return Invalid(null, null, malformedRecord);
+                return Invalid(record.ProfessionDefName, null, null, malformedRecord);
             }
 
             ChipCategoryDef category =
                 ChipManufacturingDefLookup.FindCategory(record.CategoryDefName);
             ChipProfessionDef profession =
                 ChipManufacturingDefLookup.FindProfession(record.ProfessionDefName);
-            List<ChipActionPresetDef> actions = ResolveActions(record);
+            List<ChipManufacturingPresetDef> functionDefs = ResolveChipFunctionDefs(record);
             ChipArmamentFormDef armamentForm =
                 ChipManufacturingDefLookup.FindArmamentForm(record.ArmamentFormDefName)
                 ?? ChipManufacturingDefLookup.FindImplicitDefaultArmamentForm(
                     category,
                     profession,
-                    actions);
+                    functionDefs);
 
             List<ChipCombinationFailureReason> missing = FindMissingSources(
                 record,
                 category,
                 profession,
-                actions,
+                functionDefs,
                 armamentForm);
             if (missing.Count > 0)
             {
                 return new ChipCombinationResolution
                 {
-                    Status = ChipCombinationResolutionStatus.MissingSource,
+                    Status = ChipCombinationResolutionStatus.Invalid,
                     ResolvedLabel = record.LastResolvedLabel,
-                    Actions = actions,
+                    SourceProfessionKey = record.ProfessionDefName,
+                    FunctionDefs = functionDefs,
                     ArmamentForm = armamentForm,
                     FailureReasons = missing
                 };
@@ -64,7 +66,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
                 ChipCombinationCompatibilityService.Validate(
                     category,
                     profession,
-                    actions,
+                    functionDefs,
                     armamentForm);
             if (failures.Count > 0)
             {
@@ -72,36 +74,40 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
                 {
                     Status = ChipCombinationResolutionStatus.Invalid,
                     ResolvedLabel = record.LastResolvedLabel,
-                    Actions = actions,
+                    SourceProfessionKey = record.ProfessionDefName,
+                    FunctionDefs = functionDefs,
                     ArmamentForm = armamentForm,
                     FailureReasons = failures
                 };
             }
 
-            ChipDefinitionConfig config = actions.Count == 1
-                ? ChipConfigurationMergeService.CloneSingle(actions[0])
-                : ChipConfigurationMergeService.MergeDual(actions[0], actions[1]);
+            ChipDefinitionConfig config = functionDefs.Count == 1
+                ? ChipConfigurationMergeService.CloneSingle(functionDefs[0])
+                : ChipConfigurationMergeService.MergeDual(functionDefs[0], functionDefs[1]);
+            ChipDefinitionConfig declaredConfig = ChipConfigurationMergeService.CloneConfig(config);
             ChipArmamentFormApplicationService.Apply(config, armamentForm);
-            List<string> actionLabels = new List<string>();
-            for (int index = 0; index < actions.Count; index++)
+            List<string> functionLabels = new List<string>();
+            for (int index = 0; index < functionDefs.Count; index++)
             {
-                actionLabels.Add(actions[index].ResolvedLabel);
+                functionLabels.Add(functionDefs[index].ResolvedLabel);
             }
 
-            string actionLabel = string.Join("/", actionLabels);
+            string functionLabel = string.Join("/", functionLabels);
             string label = armamentForm == null || !armamentForm.includeInProductLabel
-                ? "BDP_ChipManufacturing_ProductLabel".Translate(actionLabel)
+                ? "BDP_ChipManufacturing_ProductLabel".Translate(functionLabel)
                 : "BDP_ChipManufacturing_ProductLabelWithArmamentForm".Translate(
-                    actionLabel,
-                    armamentForm.label);
+                    functionLabel,
+                    armamentForm.ResolvedLabel);
             record.LastResolvedLabel = label;
 
             return new ChipCombinationResolution
             {
                 Status = ChipCombinationResolutionStatus.Valid,
                 ResolvedLabel = label,
+                SourceProfessionKey = record.ProfessionDefName,
                 ResolvedConfig = config,
-                Actions = actions,
+                DeclaredConfig = declaredConfig,
+                FunctionDefs = functionDefs,
                 ArmamentForm = armamentForm,
                 FailureReasons = new List<ChipCombinationFailureReason>()
             };
@@ -118,43 +124,43 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
                     "BDP_ChipManufacturing_EmptyCategory");
             }
 
-            if (record.OrderedActionPresetDefNames == null
-                || record.OrderedActionPresetDefNames.Count == 0)
+            if (record.OrderedChipFunctionDefNames == null
+                || record.OrderedChipFunctionDefNames.Count == 0)
             {
                 return new ChipCombinationFailureReason(
-                    "EmptyActionList",
-                    "BDP_ChipManufacturing_EmptyActionList");
+                    "EmptyFunctionList",
+                    "BDP_ChipManufacturing_EmptyFunctionList");
             }
 
-            for (int index = 0; index < record.OrderedActionPresetDefNames.Count; index++)
+            for (int index = 0; index < record.OrderedChipFunctionDefNames.Count; index++)
             {
-                if (string.IsNullOrWhiteSpace(record.OrderedActionPresetDefNames[index]))
+                if (string.IsNullOrWhiteSpace(record.OrderedChipFunctionDefNames[index]))
                 {
                     return new ChipCombinationFailureReason(
-                        "EmptyActionKey",
-                        "BDP_ChipManufacturing_EmptyActionKey");
+                        "EmptyFunctionKey",
+                        "BDP_ChipManufacturing_EmptyFunctionKey");
                 }
             }
 
             return null;
         }
 
-        /// <summary>按记录顺序查找动作，并以 null 占住缺失来源的位置。</summary>
-        private static List<ChipActionPresetDef> ResolveActions(ChipCombinationRecord record)
+        /// <summary>按记录顺序查找芯片功能定义，并以 null 占住缺失来源的位置。</summary>
+        private static List<ChipManufacturingPresetDef> ResolveChipFunctionDefs(ChipCombinationRecord record)
         {
-            List<ChipActionPresetDef> actions = new List<ChipActionPresetDef>();
-            if (record.OrderedActionPresetDefNames == null)
+            List<ChipManufacturingPresetDef> functionDefs = new List<ChipManufacturingPresetDef>();
+            if (record.OrderedChipFunctionDefNames == null)
             {
-                return actions;
+                return functionDefs;
             }
 
-            for (int index = 0; index < record.OrderedActionPresetDefNames.Count; index++)
+            for (int index = 0; index < record.OrderedChipFunctionDefNames.Count; index++)
             {
-                actions.Add(ChipManufacturingDefLookup.FindAction(
-                    record.OrderedActionPresetDefNames[index]));
+                functionDefs.Add(ChipManufacturingDefLookup.FindChipFunctionDef(
+                    record.OrderedChipFunctionDefNames[index]));
             }
 
-            return actions;
+            return functionDefs;
         }
 
         /// <summary>在业务合法性之前，完整识别所有命名来源缺失。</summary>
@@ -162,7 +168,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
             ChipCombinationRecord record,
             ChipCategoryDef category,
             ChipProfessionDef profession,
-            IList<ChipActionPresetDef> actions,
+            IList<ChipManufacturingPresetDef> functionDefs,
             ChipArmamentFormDef armamentForm)
         {
             List<ChipCombinationFailureReason> failures =
@@ -177,11 +183,11 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
                 failures.Add(Missing("Profession"));
             }
 
-            for (int index = 0; index < actions.Count; index++)
+            for (int index = 0; index < functionDefs.Count; index++)
             {
-                if (actions[index] == null)
+                if (functionDefs[index] == null)
                 {
-                    failures.Add(Missing("Action"));
+                    failures.Add(Missing("Function"));
                     break;
                 }
             }
@@ -204,14 +210,16 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
 
         /// <summary>构造无来源上下文的非法结果。</summary>
         private static ChipCombinationResolution Invalid(
-            IReadOnlyList<ChipActionPresetDef> actions,
+            string sourceProfessionKey,
+            IReadOnlyList<ChipManufacturingPresetDef> functionDefs,
             ChipArmamentFormDef armamentForm,
             ChipCombinationFailureReason failure)
         {
             return new ChipCombinationResolution
             {
                 Status = ChipCombinationResolutionStatus.Invalid,
-                Actions = actions,
+                SourceProfessionKey = sourceProfessionKey,
+                FunctionDefs = functionDefs,
                 ArmamentForm = armamentForm,
                 FailureReasons = new[] { failure }
             };

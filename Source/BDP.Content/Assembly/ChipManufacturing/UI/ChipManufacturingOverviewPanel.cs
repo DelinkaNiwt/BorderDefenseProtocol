@@ -117,7 +117,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
             Widgets.EndScrollView();
         }
 
-        /// <summary>绘制单个分类卡片及其动作数量概览。</summary>
+        /// <summary>绘制单个分类卡片及其功能数量概览。</summary>
         private static void DrawCategoryCard(
             Rect rect,
             ChipCategoryDef category,
@@ -144,8 +144,8 @@ namespace BDP.Content.Assembly.ChipManufacturing.UI
                 description);
             Widgets.Label(
                 new Rect(rect.x + 10f, rect.y + 57f, rect.width - 20f, 18f),
-                "BDP_ChipManufacturing_Overview_ActionCount".Translate(
-                    ChipManufacturingListModel.GetActionCount(category)));
+                "BDP_ChipManufacturing_Overview_FunctionCount".Translate(
+                    ChipManufacturingListModel.GetFunctionCount(category)));
             Text.Font = oldFont;
             Text.Anchor = oldAnchor;
 

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 虚拟武器条目的来源功能、形态及姿态名称。 -->
+  <BDP_FB_WithFunction>{0}〔功能：{1}〕</BDP_FB_WithFunction>
+  <!-- 追加实际存在的形态。 -->
+  <BDP_FB_WithMode>{0}〔形态：{1}〕</BDP_FB_WithMode>
+  <!-- 追加当前形态所属姿态。 -->
+  <BDP_FB_WithStance>{0}〔姿态：{1}〕</BDP_FB_WithStance>
+  <!-- 无状态构型共享设置，但自动类别取决于实际功能来源。 -->
+  <BDP_FB_AutoBySource>随实际来源</BDP_FB_AutoBySource>
+  <!-- 只读展示有效攻击表面参数，不接入外部扩距覆盖。 -->
+  <BDP_FB_AttackRangeReadOnly>近战范围参数：{0}（只读）</BDP_FB_AttackRangeReadOnly>
+  <!-- 没有声明表面时明确说明，不猜测距离。 -->
+  <BDP_FB_ParameterUnavailable>未提供</BDP_FB_ParameterUnavailable>
+  <!-- 外部刀光缩放诊断读取芯片尺寸及最终倍率。 -->
+  <BDP_FB_VisualScaleDiagnostic>芯片视觉尺寸={0}；刀光最终倍率={1}</BDP_FB_VisualScaleDiagnostic>
+  <!-- 长名称完整显示于悬浮说明。 -->
+  <BDP_FB_RowTooltip>{0}\n所属模组：{1}\n自动刀光：{2}\n有效近战范围参数：{3}（只读；多个值表示不同攻击表面或来源）。\n真实近战由 BDP 与原版接触规则判定，此数值不等于圆形攻击半径，也不是刀光长度。\n刀光动态缩放读取本次芯片攻击的有效视觉尺寸，并沿用刀光剑影的全局倍率；不继承触发体的扩距倍率。</BDP_FB_RowTooltip>
+  <!-- 当前配置窗口的模组计数。 -->
+  <BDP_FB_ModCount>{0}（{1}）</BDP_FB_ModCount>
+  <!-- 适配器独立停用，不影响其它兼容项。 -->
+  <BDP_FB_Failed>刀光剑影兼容已停用：{0}</BDP_FB_Failed>
+</LanguageData>

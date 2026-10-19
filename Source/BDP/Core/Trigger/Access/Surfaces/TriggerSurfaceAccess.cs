@@ -18,6 +18,17 @@ namespace BDP.Core.Trigger
         }
 
         /// <summary>
+        /// 从触发体物品直接读取正式装载面，供未装备在 Pawn 身上的触发体内容读取使用。
+        /// </summary>
+        public static ITriggerLoadoutReader ResolveLoadoutReaderFromThing(ThingWithComps triggerBody)
+        {
+            CompTriggerBody comp = triggerBody != null
+                ? triggerBody.TryGetComp<CompTriggerBody>()
+                : null;
+            return comp != null ? comp.LoadoutReaderSurface : null;
+        }
+
+        /// <summary>
         /// 读取 Pawn 当前主装备上的 Trigger 交互语义读取口。
         /// </summary>
         public static ITriggerInteractionReader ResolveInteractionReader(Pawn pawn)

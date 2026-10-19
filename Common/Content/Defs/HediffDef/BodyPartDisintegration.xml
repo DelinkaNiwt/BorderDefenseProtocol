@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 身体部位裂解标记；层数由崩解效果包按命中部位独立累加。 -->
+  <HediffDef>
+    <!-- Hediff 的稳定 DefName。 -->
+    <defName>BDP_Hediff_BodyPartDisintegration</defName>
+    <!-- 使用专用表现类实时显示当前严重度百分比。 -->
+    <hediffClass>BDP.Content.Hediffs.Hediff_BodyPartDisintegration</hediffClass>
+    <!-- 缺少语言包时的回退名称。 -->
+    <label>Body-part disintegration</label>
+    <!-- 缺少语言包时的回退说明。 -->
+    <description>A mark that accumulates on the struck body part and removes it at maximum severity.</description>
+    <!-- 该标记属于负面健康状态。 -->
+    <isBad>true</isBad>
+    <!-- 新建标记时从零层开始，再由命中执行器增加层数。 -->
+    <initialSeverity>0</initialSeverity>
+    <!-- 严重度归零时允许原版移除。 -->
+    <minSeverity>0</minSeverity>
+    <!-- 严重度 1 对应满值；所需命中次数由效果包声明。 -->
+    <maxSeverity>1</maxSeverity>
+  </HediffDef>
+
+</Defs>

@@ -3,7 +3,7 @@ using UnityEngine;
 namespace BDP.Core.AttackExecution
 {
     /// <summary>
-    /// 原版 Targeter 当前这一小段点击调用链对应的输入事实快照。
+    /// BDP 自有界面边界冻结的本轮输入事实快照。
     /// 它只承载运行时按钮与修饰键，不持有任何业务解释。
     /// </summary>
     public sealed class TargetingInputRuntimeFacts
@@ -11,12 +11,20 @@ namespace BDP.Core.AttackExecution
         /// <summary>
         /// 当前输入对应的按钮事实。
         /// </summary>
-        public TargetingInputButton PressedButton { get; set; } = TargetingInputButton.None;
+        public TargetingInputButton PressedButton { get; }
 
         /// <summary>
         /// 当前输入对应的修饰键事实。
         /// </summary>
-        public TargetingInputModifiers Modifiers { get; set; } = TargetingInputModifiers.None;
+        public TargetingInputModifiers Modifiers { get; }
+
+        /// <summary>冻结值而非事件对象；分组成员不能改写其他成员将读取的事实。</summary>
+        public TargetingInputRuntimeFacts(TargetingInputButton pressedButton = TargetingInputButton.None,
+            TargetingInputModifiers modifiers = TargetingInputModifiers.None)
+        {
+            PressedButton = pressedButton;
+            Modifiers = modifiers;
+        }
 
         /// <summary>
         /// 从当前原版事件构建一份中性输入事实快照。
@@ -29,11 +37,10 @@ namespace BDP.Core.AttackExecution
                 return new TargetingInputRuntimeFacts();
             }
 
-            return new TargetingInputRuntimeFacts
-            {
-                PressedButton = ResolveButton(currentEvent.button),
-                Modifiers = ResolveModifiers(currentEvent)
-            };
+            // 重绘和布局也有默认 button=0；只有鼠标按下才能携带点击事实。
+            return new TargetingInputRuntimeFacts(
+                currentEvent.type == EventType.MouseDown ? ResolveButton(currentEvent.button) : TargetingInputButton.None,
+                ResolveModifiers(currentEvent));
         }
 
         /// <summary>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 缺失对象的完整通用措辞。 -->
+  <BDP_Log_UnknownActor>某个攻击者</BDP_Log_UnknownActor>
+  <!-- 缺少弹体或工具名时的通用攻击名。 -->
+  <BDP_Log_UnknownAttack>攻击</BDP_Log_UnknownAttack>
+  <!-- 开火句式：参数依次为行动者、正式来源、目标；缺信息时省略对应成分。 -->
+  <BDP_Log_Fire>{0}开火。</BDP_Log_Fire>
+  <!-- 已知来源、未指定人物目标的开火。 -->
+  <BDP_Log_FireSource>{0}用{1}开火。</BDP_Log_FireSource>
+  <!-- 已知目标、缺少正式来源的开火。 -->
+  <BDP_Log_FireTarget>{0}向{2}开火。</BDP_Log_FireTarget>
+  <!-- 正式来源和人物目标均已知的开火。 -->
+  <BDP_Log_FireTargetSource>{0}用{1}向{2}开火。</BDP_Log_FireTargetSource>
+  <!-- 无普通伤害部位的直接交互；不由零伤害推断未命中。 -->
+  <BDP_Log_Contact>{0}的{1}击中了{2}。</BDP_Log_Contact>
+  <!-- 范围交互必须用波及，不能宣称子弹直接碰撞了全部目标。 -->
+  <BDP_Log_AreaContact>{0}的{1}波及了{2}。</BDP_Log_AreaContact>
+  <!-- 只确认伤害被挡住时明确限定为伤害。 -->
+  <BDP_Log_DamageBlocked>{0}的{1}对{2}造成的伤害被挡住了。</BDP_Log_DamageBlocked>
+  <!-- 直接结果只作为同一次交互的短句后缀。 -->
+  <BDP_Log_ResultWithClause>{0}，{1}。</BDP_Log_ResultWithClause>
+  <!-- 内容声明的主要附着结果，以效果定义提供名称。 -->
+  <BDP_Log_ResultEffect>使其受到{0}影响</BDP_Log_ResultEffect>
+  <!-- 当前攻击确实增加负重时使用，不输出层数流水。 -->
+  <BDP_Log_ResultWeight>使其负重增加</BDP_Log_ResultWeight>
+  <!-- 实际部位移除的中性描述，同时适用于生物与战斗体。 -->
+  <BDP_Log_ResultPartRemoved>使其失去{0}</BDP_Log_ResultPartRemoved>
+  <!-- 身体定义或部位已不可解析时的通用名称。 -->
+  <BDP_Log_UnknownPart>受影响的身体部位</BDP_Log_UnknownPart>
+  <!-- 只描述已经发生的战斗体关键事件，不叙述情绪或未确认结果。 -->
+  <BDP_Log_CombatBodyActivated>{0}启动了战斗体。</BDP_Log_CombatBodyActivated>
+  <!-- 只用于主动解除完成，不用于资格失效强制退出。 -->
+  <BDP_Log_CombatBodyReleased>{0}解除了战斗体。</BDP_Log_CombatBodyReleased>
+  <!-- 未确认具体原因时只记录开始崩解。 -->
+  <BDP_Log_CombatBodyCollapsed>{0}的战斗体开始崩解。</BDP_Log_CombatBodyCollapsed>
+  <!-- 原因确认为储量耗尽时使用。 -->
+  <BDP_Log_CombatBodyCollapsedDepleted>{0}的战斗体因Trion储量耗尽而开始崩解。</BDP_Log_CombatBodyCollapsedDepleted>
+  <!-- 实际完成紧急脱离移位后使用，不承诺目的地安全。 -->
+  <BDP_Log_CombatBodyEscaped>{0}进行了紧急脱离。</BDP_Log_CombatBodyEscaped>
+</LanguageData>

@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- 独立进程直接验证游戏原生库和实际图表源码，不加载正在运行的游戏。 -->
+  <Import Project="../../Source/Build/Bdp.Local.props" />
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <DefineConstants>BDP_RIMWORLD_1_7</DefineConstants>
+    <GameDir>$(RimWorld17ReferenceDir)</GameDir>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- 这些库由游戏安装提供，测试输出也不复制一套游戏库。 -->
+    <Reference Include="UnityStubs"><HintPath>$(GameDir)/UnityStubs.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Brutal.ImGui"><HintPath>$(GameDir)/Brutal.ImGui.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Brutal.Core.Numerics"><HintPath>$(GameDir)/Brutal.Core.Numerics.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Brutal.Core.Common"><HintPath>$(GameDir)/Brutal.Core.Common.dll</HintPath><Private>false</Private></Reference>
+    <Compile Include="../../Source/BDP/Core/UI/Charts/ChartGeometryRenderer*.cs" Link="%(Filename)%(Extension)" />
+  </ItemGroup>
+  <Target Name="CheckGameReferences" BeforeTargets="PrepareForBuild">
+    <Error Condition="!Exists('$(GameDir)/Brutal.ImGui.dll')" Text="必须配置真实 1.7 游戏引用，禁止借用其它版本。" />
+  </Target>
+</Project>

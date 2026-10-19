@@ -2,6 +2,11 @@
 <LanguageData>
   <!-- 路线引导模块——运行时错误提示与 UI 标签。 -->
 
+  <!-- 高角射击屋顶约束。 -->
+  <BDP_HighAngle_SourceUnderRoof>高角射击：发射者处于屋顶下，无法进行高角射击。</BDP_HighAngle_SourceUnderRoof>
+  <BDP_HighAngle_TargetUnderThickRoof>高角射击：目标处于山顶屋顶下，无法进行高角射击。</BDP_HighAngle_TargetUnderThickRoof>
+  <BDP_HighAngle_TargetUnderThinRoof>高角射击：当前配置不允许攻击普通屋顶下的目标。</BDP_HighAngle_TargetUnderThinRoof>
+
   <BDP_RoutePath_MustSelectFinalFirst>路线引导：必须先选定最终目标。</BDP_RoutePath_MustSelectFinalFirst>
   <BDP_RoutePath_AutoRouteFailed>路线引导：自动路径不成立。</BDP_RoutePath_AutoRouteFailed>
   <BDP_RoutePath_NoAnchorsAvailable>路线引导：当前没有可用锚点。</BDP_RoutePath_NoAnchorsAvailable>
@@ -19,4 +24,7 @@
   <BDP_RoutePath_NoDetourPath>路线引导：没有找到可绕行路径。</BDP_RoutePath_NoDetourPath>
   <BDP_RoutePath_AnchorNotWalkable>路线引导：锚点必须设在可通行位置。</BDP_RoutePath_AnchorNotWalkable>
   <BDP_RoutePath_AnchorCount>锚点：{0}/{1}</BDP_RoutePath_AnchorCount>
+  <BDP_RangedEffect_Missing>远程减益缺少效果包定义：{0}</BDP_RangedEffect_Missing>
+  <BDP_RangedEffect_ConcreteRequired>远程效果定义必须使用具体效果子类。</BDP_RangedEffect_ConcreteRequired>
+  <BDP_RangedEffect_HediffMissing>远程效果 {0} 缺少健康状态定义。</BDP_RangedEffect_HediffMissing>
 </LanguageData>

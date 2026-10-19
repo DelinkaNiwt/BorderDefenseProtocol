@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 远程模块的玩家可见名称。 -->
+  <BDP_RangedModule_DistanceRevector.label>距离重定向</BDP_RangedModule_DistanceRevector.label>
+  <BDP_RangedModule_ImpactVisual.label>命中视觉</BDP_RangedModule_ImpactVisual.label>
+</LanguageData>

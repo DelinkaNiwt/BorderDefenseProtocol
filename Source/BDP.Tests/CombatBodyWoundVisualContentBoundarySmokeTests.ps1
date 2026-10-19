@@ -13,7 +13,7 @@ $corePresentationRoot = Join-Path $coreRoot 'CombatBody\Wounds\Presentation'
 $contentVisualRoot = Join-Path $contentRoot 'CombatBody\Wounds\Visuals'
 $coreWoundRuntimePath = Join-Path $coreRoot 'CombatBody\Wounds\CombatBodyWoundRuntime.cs'
 $bootstrapPath = Join-Path $contentRoot 'ContentBootstrap.cs'
-$contentFleckPath = Join-Path $repoRoot '1.6\Content\Defs\Flecks\FleckDefs_WoundSpray.xml'
+$contentFleckPath = Join-Path $repoRoot '1.6\Content\Defs\FleckDef\CombatBody.xml'
 $oldFleckPath = Join-Path $repoRoot '1.6\Defs\Flecks\FleckDefs_WoundSpray.xml'
 
 $presentationInterfacePath = Join-Path $corePresentationRoot 'ICombatBodyWoundPresentationProvider.cs'

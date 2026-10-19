@@ -7,10 +7,13 @@ namespace BDP.Content.RangedModules.Homing
 {
     /// <summary>
     /// 制导路径构建器。
-    /// 负责计算追踪曲线、释放直线、重锁曲线和脱靶飞行路径。
+    /// 负责计算追踪曲线、终端追踪段、释放直线、重锁曲线和脱靶飞行路径。
     /// </summary>
     public static class HomingPathBuilder
     {
+        /// <summary>限制预测最多向前外推的游戏 tick（游戏刻）。</summary>
+        private const float MaximumPredictionSegmentTicks = 12f;
+
         /// <summary>尝试解析目标世界坐标。</summary>
         public static bool TryResolveTargetPosition(LocalTargetInfo target, out Vector3 targetPos)
         {
@@ -68,7 +71,9 @@ namespace BDP.Content.RangedModules.Homing
                 targetStepOffset,
                 safeConfig.PredictionLeadRatio,
                 safeConfig,
-                seed);
+                seed,
+                1f,
+                1f);
         }
 
         /// <summary>按指定前导比例计算预测位置。</summary>
@@ -85,7 +90,30 @@ namespace BDP.Content.RangedModules.Homing
                 targetStepOffset,
                 leadRatio,
                 safeConfig,
-                seed);
+                seed,
+                1f,
+                1f);
+        }
+
+        /// <summary>按目标观测间隔和下一段飞行时间计算有限前导预测。</summary>
+        public static Vector3 ComputePredictedTargetPositionWithLead(
+            Vector3 targetCurrentPos,
+            Vector3 targetStepOffset,
+            float leadRatio,
+            float observationTicks,
+            float nextSegmentTicks,
+            HomingConfig config,
+            int seed)
+        {
+            HomingConfig safeConfig = config ?? new HomingConfig();
+            return ComputePredictedTargetPosition(
+                targetCurrentPos,
+                targetStepOffset,
+                leadRatio,
+                safeConfig,
+                seed,
+                observationTicks,
+                nextSegmentTicks);
         }
 
         /// <summary>构建追踪路径曲线。</summary>
@@ -100,9 +128,75 @@ namespace BDP.Content.RangedModules.Homing
             out float effectiveMaxTurnAngle,
             out float effectiveTurnResponsiveness)
         {
+            return BuildTrackingPath(
+                projectilePos,
+                projectileForward,
+                targetCurrentPos,
+                targetStepOffset,
+                config,
+                seed,
+                turnScale,
+                1f,
+                1f,
+                out effectiveMaxTurnAngle,
+                out effectiveTurnResponsiveness,
+                out _);
+        }
+
+        /// <summary>构建带时间感知前导预测的追踪路径曲线。</summary>
+        public static ProjectileFlightPathSnapshot BuildTrackingPath(
+            Vector3 projectilePos,
+            Vector3 projectileForward,
+            Vector3 targetCurrentPos,
+            Vector3 targetStepOffset,
+            HomingConfig config,
+            int seed,
+            float turnScale,
+            float observationTicks,
+            float nextSegmentTicks,
+            out float effectiveMaxTurnAngle,
+            out float effectiveTurnResponsiveness)
+        {
+            return BuildTrackingPath(
+                projectilePos,
+                projectileForward,
+                targetCurrentPos,
+                targetStepOffset,
+                config,
+                seed,
+                turnScale,
+                observationTicks,
+                nextSegmentTicks,
+                out effectiveMaxTurnAngle,
+                out effectiveTurnResponsiveness,
+                out _);
+        }
+
+        /// <summary>构建追踪路径，并返回本段实际采用的预测目标位置。</summary>
+        public static ProjectileFlightPathSnapshot BuildTrackingPath(
+            Vector3 projectilePos,
+            Vector3 projectileForward,
+            Vector3 targetCurrentPos,
+            Vector3 targetStepOffset,
+            HomingConfig config,
+            int seed,
+            float turnScale,
+            float observationTicks,
+            float nextSegmentTicks,
+            out float effectiveMaxTurnAngle,
+            out float effectiveTurnResponsiveness,
+            out Vector3 predictedTargetPos)
+        {
             HomingConfig safeConfig = config ?? new HomingConfig();
             float clampedTurnScale = Mathf.Clamp01(turnScale);
-            Vector3 predictedTargetPos = ComputePredictedTargetPosition(targetCurrentPos, targetStepOffset, safeConfig, seed);
+            predictedTargetPos = ComputePredictedTargetPosition(
+                targetCurrentPos,
+                targetStepOffset,
+                safeConfig.PredictionLeadRatio,
+                safeConfig,
+                seed,
+                observationTicks,
+                nextSegmentTicks);
             effectiveMaxTurnAngle = Mathf.Max(
                 safeConfig.PursuitMinTurnAngle,
                 safeConfig.MaxTurnAngleWhenEvading * clampedTurnScale);
@@ -127,22 +221,90 @@ namespace BDP.Content.RangedModules.Homing
             HomingConfig config,
             int seed)
         {
+            return BuildRelockPath(
+                projectilePos,
+                projectileForward,
+                targetCurrentPos,
+                targetStepOffset,
+                config,
+                seed,
+                1f,
+                1f,
+                out _);
+        }
+
+        /// <summary>构建带时间感知前导预测的重锁路径。</summary>
+        public static ProjectileFlightPathSnapshot BuildRelockPath(
+            Vector3 projectilePos,
+            Vector3 projectileForward,
+            Vector3 targetCurrentPos,
+            Vector3 targetStepOffset,
+            HomingConfig config,
+            int seed,
+            float observationTicks,
+            float nextSegmentTicks)
+        {
+            return BuildRelockPath(
+                projectilePos,
+                projectileForward,
+                targetCurrentPos,
+                targetStepOffset,
+                config,
+                seed,
+                observationTicks,
+                nextSegmentTicks,
+                out _);
+        }
+
+        /// <summary>构建重锁路径，并返回本段实际采用的预测目标位置。</summary>
+        public static ProjectileFlightPathSnapshot BuildRelockPath(
+            Vector3 projectilePos,
+            Vector3 projectileForward,
+            Vector3 targetCurrentPos,
+            Vector3 targetStepOffset,
+            HomingConfig config,
+            int seed,
+            float observationTicks,
+            float nextSegmentTicks,
+            out Vector3 predictedTargetPos)
+        {
             HomingConfig safeConfig = config ?? new HomingConfig();
-            Vector3 relockTargetPos = ComputePredictedTargetPosition(
+            predictedTargetPos = ComputePredictedTargetPosition(
                 targetCurrentPos,
                 targetStepOffset,
                 safeConfig.RelockLeadRatio,
                 safeConfig,
-                Gen.HashCombineInt(seed, 71));
+                Gen.HashCombineInt(seed, 71),
+                observationTicks,
+                nextSegmentTicks);
             return BuildPursuitCurve(
                 projectilePos.Yto0(),
                 projectileForward,
-                relockTargetPos,
+                predictedTargetPos,
                 safeConfig,
                 safeConfig.RelockMinTurnAngle,
                 safeConfig.RelockTurnAngle,
                 safeConfig.RelockTurnResponsiveness,
                 true);
+        }
+
+        /// <summary>构建目标仍有效时的终端追踪段，不沿旧前进方向无条件释放。</summary>
+        public static ProjectileFlightPathSnapshot BuildTerminalApproachPath(
+            Vector3 projectilePos,
+            Vector3 projectileForward,
+            Vector3 targetCurrentPos,
+            HomingConfig config)
+        {
+            HomingConfig safeConfig = config ?? new HomingConfig();
+            return BuildPursuitCurve(
+                projectilePos.Yto0(),
+                projectileForward,
+                targetCurrentPos,
+                safeConfig,
+                safeConfig.PursuitMinTurnAngle,
+                safeConfig.MaxTurnAngleWhenEvading,
+                safeConfig.PursuitTurnResponsiveness,
+                false);
         }
 
         /// <summary>构建脱靶飞行路径。</summary>
@@ -211,6 +373,16 @@ namespace BDP.Content.RangedModules.Homing
             }
 
             return Mathf.InverseLerp(hardReleaseDistance, softReleaseDistance, distanceToTarget);
+        }
+
+        /// <summary>根据目标距离和投射物速度估算下一段预测时间。</summary>
+        public static float ResolvePredictionTicks(float distanceToTarget, float projectileSpeedTilesPerTick)
+        {
+            float safeDistance = float.IsNaN(distanceToTarget) ? 1f : Mathf.Max(1f, distanceToTarget);
+            float safeSpeed = float.IsNaN(projectileSpeedTilesPerTick)
+                ? 1f
+                : Mathf.Max(0.01f, projectileSpeedTilesPerTick);
+            return Mathf.Clamp(safeDistance / safeSpeed, 1f, MaximumPredictionSegmentTicks);
         }
 
         /// <summary>构建释放阶段直线路径。</summary>
@@ -413,11 +585,21 @@ namespace BDP.Content.RangedModules.Homing
             Vector3 targetStepOffset,
             float leadRatio,
             HomingConfig config,
-            int seed)
+            int seed,
+            float observationTicks,
+            float nextSegmentTicks)
         {
             float variance = ResolveSignedVariance(seed, 17) * Mathf.Max(0f, config.PerEmitVariance);
             float effectiveLeadRatio = Mathf.Max(0f, leadRatio * (1f + variance));
-            return targetCurrentPos.Yto0() + targetStepOffset.Yto0() * effectiveLeadRatio;
+            float safeObservationTicks = observationTicks > 0f && !float.IsNaN(observationTicks)
+                ? observationTicks
+                : 1f;
+            float safeNextSegmentTicks = nextSegmentTicks > 0f && !float.IsNaN(nextSegmentTicks)
+                ? Mathf.Clamp(nextSegmentTicks, 1f, MaximumPredictionSegmentTicks)
+                : 1f;
+            float targetMotionFactor = safeNextSegmentTicks / safeObservationTicks;
+            return targetCurrentPos.Yto0()
+                + targetStepOffset.Yto0() * targetMotionFactor * effectiveLeadRatio;
         }
 
         private static Vector3 NormalizeFlat(Vector3 value)

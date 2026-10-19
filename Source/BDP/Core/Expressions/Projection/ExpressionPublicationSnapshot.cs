@@ -28,7 +28,7 @@ namespace BDP.Core.Expressions
         /// <summary>
         /// 当前条目对应的正式结果大类。
         /// </summary>
-        public ExpressionResultKind ResultKind { get; set; }
+        public ExpressionOutputChannel OutputChannel { get; set; }
 
         /// <summary>
         /// 当前条目发布到下游时使用的键。

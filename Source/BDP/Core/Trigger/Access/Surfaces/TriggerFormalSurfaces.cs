@@ -217,6 +217,14 @@ namespace BDP.Core.Trigger
         }
 
         /// <summary>
+        /// 请求精确关闭指定槽位。
+        /// </summary>
+        public bool RequestDeactivate(TriggerSide side, int slotIndex)
+        {
+            return owner.RequestDeactivate(side, slotIndex);
+        }
+
+        /// <summary>
         /// 请求销毁指定槽位中与目标 ThingID 匹配的已装载芯片。
         /// </summary>
         public bool TryDestroyLoadedChip(TriggerSide side, int slotIndex, string expectedThingId)

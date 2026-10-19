@@ -2,9 +2,9 @@
 
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
-**Goal:** 让制造台所有动作预设入口显示语言包名称，并让光魂格挡只保留贴近盾面的闪光、火花与声音。
+**Goal:** 让制造台所有芯片功能模板入口显示语言包名称，并让光魂格挡只保留贴近盾面的闪光、火花与声音。
 
-**Architecture:** Content.dll（内容程序集）的制造 UI（界面）统一解析动作预设标签；现有能量护盾组件增加两个向后兼容的表现参数。光魂只通过 XML（配置文件）选择关闭六边形格挡贴图和 0.4 格命中距离。
+**Architecture:** Content.dll（内容程序集）的制造 UI（界面）统一解析芯片功能模板标签；现有能量护盾组件增加两个向后兼容的表现参数。光魂只通过 XML（配置文件）选择关闭六边形格挡贴图和 0.4 格命中距离。
 
 **Tech Stack:** C#、RimWorld Verse API（原版模组接口）、XML、PowerShell 回归检查。
 
@@ -17,7 +17,7 @@
 - Modify: `Source/BDP.Tests/ChipManufacturingLocalizationSmokeTests.ps1`
 
 **Steps:**
-1. 断言制造列表和信息弹窗调用统一动作标签解析器，不再直接显示动作 `LabelCap`。
+1. 断言制造列表和信息弹窗调用统一芯片功能模板标签解析器，不再直接显示芯片功能模板 `LabelCap`。
 2. 断言护盾配置包含默认开启的 `showBlockGraphic` 和回退 `shieldRadius` 的 `impactEffectRadius`。
 3. 断言光魂两种姿态设置 `showBlockGraphic=false`、`impactEffectRadius=0.4`。
 4. 运行两项测试，确认因设施尚不存在而失败。
@@ -30,7 +30,7 @@
 - Create: `Source/BDP.Content/Assembly/ChipManufacturing/UI/ChipPresetLabelResolver.cs`
 
 **Steps:**
-1. 建立动作预设使用 `ResolvedLabel`、其他定义使用 `LabelCap` 的统一解析器。
+1. 建立芯片功能模板使用 `ResolvedLabel`、其他定义使用 `LabelCap` 的统一解析器。
 2. 列表和信息弹窗标题改用该解析器。
 3. 运行制造本地化测试，确认通过。
 

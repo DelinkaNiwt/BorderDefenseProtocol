@@ -9,17 +9,35 @@
   <!-- 触发体与装配建筑。 -->
   <BDP_TriggerBody_BorderStandard.label>边境标准触发体</BDP_TriggerBody_BorderStandard.label>
   <BDP_TriggerBody_BorderStandard.description>边境体系的标准触发体，提供主手槽、副手槽和特殊槽，用于装载与控制Trion芯片。</BDP_TriggerBody_BorderStandard.description>
+  <BDP_TriggerBody_BorderSpecial.label>边境特制触发体</BDP_TriggerBody_BorderSpecial.label>
+  <BDP_TriggerBody_BorderSpecial.description>边境体系的特制触发体，提供7个主槽、7个副槽和2个特殊槽，用于装载与控制Trion芯片。</BDP_TriggerBody_BorderSpecial.description>
+  <BDP_TriggerBody_Fujin.label>风刃</BDP_TriggerBody_Fujin.label>
+  <BDP_TriggerBody_Fujin.description>风刃测试触发体，提供1个主槽和6个特殊槽，并预装风刃·远程斩击与风刃芯片。</BDP_TriggerBody_Fujin.description>
+  <BDP_TriggerBody_Alektor.label>卵之冠</BDP_TriggerBody_Alektor.label>
+  <BDP_TriggerBody_Alektor.description>卵之冠黑触发器，提供6个特殊槽，并固定预装卵之冠与浮空芯片。</BDP_TriggerBody_Alektor.description>
   <BDP_ChipStorage.label>触发器芯片仓</BDP_ChipStorage.label>
   <BDP_ChipStorage.description>连接到触发器装配台的专用芯片仓。芯片会被存入建筑内部，并可供附近装配台读取。</BDP_ChipStorage.description>
   <BDP_TriggerAssembler.label>触发器装配台</BDP_TriggerAssembler.label>
-  <BDP_TriggerAssembler.description>用于为触发体装入、卸载和调整芯片的装配台。需要连接触发器芯片容器。</BDP_TriggerAssembler.description>
+  <!-- 装配台用途、电力与核心运行要求。 -->
+  <BDP_TriggerAssembler.description>用于为触发体装入、卸载和调整芯片的装配台。需要连接触发器芯片容器，并保持通电及本地图的 Trion 中继核心运行。</BDP_TriggerAssembler.description>
   <BDP_EmergencyEscapeBeacon.label>紧急脱离信标</BDP_EmergencyEscapeBeacon.label>
   <BDP_EmergencyEscapeBeacon.description>战斗体紧急脱离的优先传送锚点。需要通电，同一地图只能建造一座。</BDP_EmergencyEscapeBeacon.description>
+  <BDP_TrionFacility.label>Trion中继核心</BDP_TrionFacility.label>
+  <BDP_TrionFacility.description>本地图的 Trion 中继核心。需要绑定一名正式加入殖民地的皇室成员，并具有资源储量才能运行，为本地图提供 Trion 恢复与设施运行许可。绑定者失去意识时暂停运行，外出不影响运行；解绑保留储量。补充门槛只限制继续补充，已经入账的超额储量不会丢失。</BDP_TrionFacility.description>
 
   <!-- 投射物。 -->
   <BDP_Projectile_SenkuKogetsuWave.label>旋空弧月</BDP_Projectile_SenkuKogetsuWave.label>
   <BDP_Projectile_Explosive.label>炸裂弹</BDP_Projectile_Explosive.label>
   <BDP_Projectile_Variable_Explosive.label>变化炸裂弹</BDP_Projectile_Variable_Explosive.label>
+  <BDP_Projectile_BodyCollapse.label>溃体飞行物</BDP_Projectile_BodyCollapse.label>
+
+  <!-- 内部视觉效果 Def 的本地化名称，避免继承原版通用 Mote 标签。 -->
+  <!-- 战斗体扫描光环的内部粒子效果。 -->
+  <BDP_Mote_CombatBodyScan.label>战斗体扫描光环</BDP_Mote_CombatBodyScan.label>
+  <!-- 冲击刀刃的后景粒子效果。 -->
+  <BDP_Mote_ImpactBlade_Back.label>冲击刀刃（后景）</BDP_Mote_ImpactBlade_Back.label>
+  <!-- 冲击刀刃的前景粒子效果。 -->
+  <BDP_Mote_ImpactBlade_Front.label>冲击刀刃（前景）</BDP_Mote_ImpactBlade_Front.label>
 
   <!-- 非法芯片统一迁移后的普通遗留物。 -->
   <BDP_InvalidChipRemnant.label>芯片遗留物</BDP_InvalidChipRemnant.label>

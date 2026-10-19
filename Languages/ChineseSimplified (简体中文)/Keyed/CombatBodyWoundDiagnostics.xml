@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 开发模式选中战斗体人物时输出，只由开发程序集使用。 -->
+  <BDP_Development_WoundDrain_Snapshot>[BDP伤口流失] {0}，游戏刻={1}，活跃伤口来源={2}\n{3}</BDP_Development_WoundDrain_Snapshot>
+  <!-- 最大/当前生命值来自原版，登记与账本速率应一致；60刻等于一秒。 -->
+  <BDP_Development_WoundDrain_Wound>伤口#{0}，部位={1}：最大生命值={2}，当前生命值={3}，登记={4}/秒，账本={5}/秒，到期刻={6}，剩余={7}刻</BDP_Development_WoundDrain_Wound>
+</LanguageData>

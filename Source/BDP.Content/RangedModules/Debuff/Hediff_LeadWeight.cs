@@ -1,4 +1,4 @@
-using UnityEngine;
+using BDP.Content.Hediffs;
 using Verse;
 
 namespace BDP.Content.RangedModules.Debuff
@@ -17,7 +17,9 @@ namespace BDP.Content.RangedModules.Debuff
         {
             get
             {
-                return base.LabelBase + Mathf.Clamp01(Severity).ToStringPercent("0");
+                return HediffLabelUtility.AppendSeverityPercent(
+                    base.LabelBase,
+                    Severity);
             }
         }
     }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BDP.Core.Information;
 
 namespace BDP.Core.Trigger.Projection
 {
@@ -53,5 +54,10 @@ namespace BDP.Core.Trigger.Projection
         /// 特殊侧槽位引用与正式容器是否一致。
         /// </summary>
         public bool IsSpecialContainerConsistent { get; set; }
+
+        /// <summary>
+        /// 当前激活根槽对应的中性芯片信息输入。
+        /// </summary>
+        public IReadOnlyList<ChipInformationParseInput> InformationInputs { get; set; }
     }
 }

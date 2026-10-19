@@ -9,14 +9,13 @@ namespace BDP.Core.CombatBody.Wounds
     /// 战斗体伤口运行时接线层。
     /// 它只维护 Active / Collapsing 期间的伤口派生运行时，不持有伤口事实。
     /// </summary>
-    internal sealed class CombatBodyWoundRuntime : IExposable
+    public sealed class CombatBodyWoundRuntime : IExposable
     {
         /// <summary>
         /// 伤口 Trion drain 发布绑定。
         /// </summary>
         private readonly CombatBodyWoundTrionBinding trionBinding = new CombatBodyWoundTrionBinding();
 
-        /// <summary>
         /// <summary>
         /// 本 tick 已过期的伤口 drain id 复用列表。
         /// </summary>
@@ -57,7 +56,7 @@ namespace BDP.Core.CombatBody.Wounds
         /// <summary>
         /// 响应伤口新增或变化。
         /// </summary>
-        internal void NotifyWoundAddedOrChanged(Pawn pawn, Hediff hediff)
+        internal void NotifyWoundAddedOrChanged(Pawn pawn, Hediff hediff, float effectiveDamage)
         {
             if (hediff == null || !CombatBodyWoundPolicy.IsSupportedWound(hediff))
             {
@@ -66,21 +65,21 @@ namespace BDP.Core.CombatBody.Wounds
 
             if (!CombatBodyWoundPolicy.IsCombatBodyWoundRuntimeApplicable(pawn))
             {
-                trionBinding.RemoveWoundDrain(pawn, hediff);
-                CombatBodyWoundPresentationRegistry.NotifyWoundDrainExpired(pawn, hediff.loadID);
+                ClearActiveRuntime(pawn);
                 return;
             }
 
             CombatBodyWoundPolicyDef policy = CombatBodyWoundPolicy.Resolve();
-            int expiryTick = trionBinding.UpdateWoundDrain(pawn, hediff, CurrentGameTick(), ResolveIdleTimeoutTicks(policy));
+            int expiryTick = trionBinding.UpdateWoundDrain(pawn, hediff, effectiveDamage, CurrentGameTick(), ResolveIdleTimeoutTicks(policy));
+            RefreshPresentation(pawn);
             if (expiryTick <= 0)
             {
-                CombatBodyWoundPresentationRegistry.NotifyWoundDrainExpired(pawn, hediff.loadID);
                 return;
             }
 
             ScheduleNextExpiry(expiryTick);
-            CombatBodyWoundPresentationRegistry.NotifyWoundAdded(pawn, hediff);
+            Hediff representative = trionBinding.FindRepresentativeWound(hediff.Part);
+            CombatBodyWoundPresentationRegistry.NotifyWoundAdded(pawn, representative);
         }
 
         /// <summary>
@@ -93,12 +92,33 @@ namespace BDP.Core.CombatBody.Wounds
             {
                 CombatBodyWoundPresentationRegistry.NotifyWoundRemoved(pawn, hediff);
             }
+            RefreshPresentation(pawn);
+        }
+
+        /// <summary>全量健康变化或部位恢复后只清理已有来源，不续期、不重新激活旧伤。</summary>
+        internal void ReconcileActiveWounds(Pawn pawn)
+        {
+            if (!CombatBodyWoundPolicy.IsCombatBodyWoundRuntimeApplicable(pawn))
+            {
+                ClearActiveRuntime(pawn);
+                return;
+            }
+
+            trionBinding.ReconcileActiveWounds(pawn);
+            RefreshPresentation(pawn);
+        }
+
+        /// <summary>每个活跃部位只交给表现层一个仍存在的伤口或断口。</summary>
+        private void RefreshPresentation(Pawn pawn)
+        {
+            CombatBodyWoundPresentationRegistry.RebuildFromActiveDrains(
+                pawn, trionBinding.GetActiveHediffLoadIds(pawn));
         }
 
         /// <summary>
         /// 清理当前派生出的伤口运行时。
         /// </summary>
-        internal void ClearActiveRuntime(Pawn pawn)
+        public void ClearActiveRuntime(Pawn pawn)
         {
             trionBinding.ClearAll(pawn);
             CombatBodyWoundPresentationRegistry.ClearAll(pawn);
@@ -108,7 +128,7 @@ namespace BDP.Core.CombatBody.Wounds
         /// <summary>
         /// 读档后按当前相位恢复伤口运行时。
         /// </summary>
-        internal void RestoreAfterLoad(Pawn pawn)
+        public void RestoreAfterLoad(Pawn pawn)
         {
             if (!CombatBodyWoundPolicy.IsCombatBodyWoundRuntimeApplicable(pawn))
             {
@@ -120,7 +140,7 @@ namespace BDP.Core.CombatBody.Wounds
             int nextExpiryTick = trionBinding.RestoreAfterLoad(pawn, CurrentGameTick());
             CombatBodyWoundPresentationRegistry.RebuildFromActiveDrains(
                 pawn,
-                trionBinding.GetActiveHediffLoadIds());
+                trionBinding.GetActiveHediffLoadIds(pawn));
             nextCalibrationTick = 0;
             if (nextExpiryTick > 0)
             {
@@ -135,7 +155,7 @@ namespace BDP.Core.CombatBody.Wounds
         /// 推进低频伤口流失过期检查。
         /// 只注销长时间没有继续变化的派生 drain，不重新注册旧伤口。
         /// </summary>
-        internal void Tick(Pawn pawn)
+        public void Tick(Pawn pawn)
         {
             CombatBodyWoundPolicyDef policy = CombatBodyWoundPolicy.Resolve();
             if (!HasEnabledDrain(policy))
@@ -159,9 +179,10 @@ namespace BDP.Core.CombatBody.Wounds
                 }
 
                 expiredDrainIds.Clear();
+                RefreshPresentation(pawn);
                 if (nextExpiryTick > 0)
                 {
-                    ScheduleNextExpiry(nextExpiryTick);
+                    nextCalibrationTick = nextExpiryTick;
                 }
                 else
                 {
@@ -224,12 +245,7 @@ namespace BDP.Core.CombatBody.Wounds
                 return false;
             }
 
-            if (policy.trionDrainMetric == CombatBodyWoundTrionDrainMetric.Severity)
-            {
-                return policy.trionDrainPerSeverityPerSecond > 0f;
-            }
-
-            return policy.trionDrainPerRawBleedRatePerSecond > 0f;
+            return policy.trionDrainPerDamagePerSecond > 0f;
         }
     }
 }

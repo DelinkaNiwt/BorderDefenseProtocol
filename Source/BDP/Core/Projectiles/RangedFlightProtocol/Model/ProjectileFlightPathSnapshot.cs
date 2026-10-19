@@ -37,6 +37,17 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Model
         public Vector3 End { get; set; }
 
         /// <summary>
+        /// 当前路径是否提供了可用于终端掩体解析的最终进攻段起点。
+        /// </summary>
+        public bool HasFinalApproach { get; set; }
+
+        /// <summary>
+        /// 当前最终进攻段的起点格。
+        /// 它是掩体几何原点，不携带射击者语义。
+        /// </summary>
+        public IntVec3 FinalApproachStart { get; set; } = IntVec3.Invalid;
+
+        /// <summary>
         /// 当前路径的近似长度。
         /// 它服务宿主时长重算，不承诺绝对精确弧长。
         /// </summary>
@@ -52,6 +63,8 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Model
             Vector3 controlA = ControlA;
             Vector3 controlB = ControlB;
             Vector3 end = End;
+            bool hasFinalApproach = HasFinalApproach;
+            IntVec3 finalApproachStart = FinalApproachStart;
             float approximateLength = ApproximateLength;
 
             Scribe_Values.Look(ref kind, "kind", ProjectileFlightPathKind.Linear);
@@ -59,6 +72,8 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Model
             Scribe_Values.Look(ref controlA, "controlA");
             Scribe_Values.Look(ref controlB, "controlB");
             Scribe_Values.Look(ref end, "end");
+            Scribe_Values.Look(ref hasFinalApproach, "hasFinalApproach", false);
+            Scribe_Values.Look(ref finalApproachStart, "finalApproachStart", IntVec3.Invalid);
             Scribe_Values.Look(ref approximateLength, "approximateLength", 0f);
 
             Kind = kind;
@@ -66,6 +81,8 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Model
             ControlA = controlA;
             ControlB = controlB;
             End = end;
+            HasFinalApproach = hasFinalApproach;
+            FinalApproachStart = finalApproachStart;
             ApproximateLength = approximateLength;
         }
     }

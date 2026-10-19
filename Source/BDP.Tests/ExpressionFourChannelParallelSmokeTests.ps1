@@ -14,8 +14,8 @@ function Assert-True {
 $sourceRoot = Split-Path -Parent $PSScriptRoot
 $repoRoot = Split-Path -Parent $sourceRoot
 
-$resultKindPath = Join-Path $repoRoot 'Source\BDP\Core\Expressions\Model\ExpressionResultKind.cs'
-$entryKindPath = Join-Path $repoRoot 'Source\BDP\Core\Expressions\Contract\ChipExpressionEntryKind.cs'
+$resultKindPath = Join-Path $repoRoot 'Source\BDP\Core\Expressions\Model\ExpressionOutputChannel.cs'
+$entryKindPath = Join-Path $repoRoot 'Source\BDP\Core\Expressions\Contract\ChipExpressionEntryType.cs'
 $channelIndexPath = Join-Path $repoRoot 'Source\BDP\Core\Expressions\Model\ExpressionChannelIndex.cs'
 $channelIndexBuilderPath = Join-Path $repoRoot 'Source\BDP\Core\Expressions\Projection\ExpressionChannelIndexBuilder.cs'
 $projectionStatePath = Join-Path $repoRoot 'Source\BDP\Core\Trigger\Runtime\TriggerCombatProjectionState.cs'
@@ -30,10 +30,10 @@ $projectionBuilderText = Get-Content -LiteralPath $projectionBuilderPath -Raw -E
 $readerText = Get-Content -LiteralPath $readerPath -Raw -Encoding utf8
 $serviceText = Get-Content -LiteralPath $servicePath -Raw -Encoding utf8
 
-Assert-True ($resultKindText -match 'Verb') 'ExpressionResultKind must keep Verb.'
-Assert-True ($resultKindText -match 'Ability') 'ExpressionResultKind must keep Ability.'
-Assert-True ($resultKindText -match 'Hediff') 'ExpressionResultKind must keep Hediff.'
-Assert-True ($resultKindText -match 'Passive') 'ExpressionResultKind must keep Passive.'
+Assert-True ($resultKindText -match 'Verb') 'ExpressionOutputChannel must keep Verb.'
+Assert-True ($resultKindText -match 'Ability') 'ExpressionOutputChannel must keep Ability.'
+Assert-True ($resultKindText -match 'Hediff') 'ExpressionOutputChannel must keep Hediff.'
+Assert-True ($resultKindText -match 'Passive') 'ExpressionOutputChannel must keep Passive.'
 
 Assert-True ($entryKindText -match 'PrimaryVerb') 'Authoring must keep PrimaryVerb.'
 Assert-True ($entryKindText -match 'SecondaryVerb') 'Authoring must keep SecondaryVerb.'
@@ -50,7 +50,7 @@ Assert-True ($channelIndexText -match 'VerbResults') 'Channel index must expose 
 Assert-True ($channelIndexText -match 'AbilityResults') 'Channel index must expose AbilityResults.'
 Assert-True ($channelIndexText -match 'HediffResults') 'Channel index must expose HediffResults.'
 Assert-True ($channelIndexText -match 'PassiveResults') 'Channel index must expose PassiveResults.'
-Assert-True ($channelIndexText -match 'PassiveResultsByKey') 'Channel index must index Passive by key.'
+Assert-True ($channelIndexText -match 'PassiveResultsByIdentityKey') 'Channel index must index Passive by identity key.'
 Assert-True ($projectionStateText -match 'ExpressionChannelIndex') 'Combat projection state must carry channel index.'
 Assert-True ($projectionBuilderText -match 'ExpressionChannelIndexBuilder') 'Combat projection builder must build channel index.'
 
@@ -59,7 +59,7 @@ Assert-True ($readerText -match 'GetVerbResults') 'Reader must expose Verb resul
 Assert-True ($readerText -match 'GetAbilityResults') 'Reader must expose Ability result query.'
 Assert-True ($readerText -match 'GetHediffResults') 'Reader must expose Hediff result query.'
 Assert-True ($readerText -match 'GetPassiveResults') 'Reader must expose Passive result query.'
-Assert-True ($readerText -match 'HasPassiveKey') 'Reader must expose Passive key check.'
+Assert-True ($readerText -match 'HasPassiveIdentityKey') 'Reader must expose Passive identity key check.'
 Assert-True ($readerText -match 'TryGetPassive') 'Reader must expose single Passive lookup.'
 Assert-True ($serviceText -match 'ChannelIndex') 'ExpressionService must read from published channel index.'
 

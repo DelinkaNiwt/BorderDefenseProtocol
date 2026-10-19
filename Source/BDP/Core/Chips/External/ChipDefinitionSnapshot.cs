@@ -19,6 +19,12 @@ namespace BDP.Core.Chips
         public bool IsValid { get; internal set; }
 
         /// <summary>
+        /// 当前芯片画像所属类别的 DefName。
+        /// Core 只公开稳定身份字符串，具体类别解释由外部内容程序集完成。
+        /// </summary>
+        public string CategoryDefName { get; internal set; }
+
+        /// <summary>
         /// 当前芯片所属的槽位区域。
         /// </summary>
         public ChipSlotRegion SlotRegion { get; internal set; }

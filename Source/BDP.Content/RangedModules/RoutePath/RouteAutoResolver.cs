@@ -126,7 +126,7 @@ namespace BDP.Content.RangedModules.RoutePath
             if (config != null && !config.EnableAutoRoute)
                 return RouteAutoResult.Failure("BDP_RoutePath_AutoRouteDisabled".Translate());
 
-            if (GenSight.LineOfSight(originCell, targetCell, map))
+            if (HasOriginalTerminalVisibility(originCell, targetCell, map))
                 return RouteAutoResult.Success(new List<IntVec3>());
 
             int maxDepth = ResolveMaxDepth(config);
@@ -167,7 +167,7 @@ namespace BDP.Content.RangedModules.RoutePath
 
             for (int depth = 0; depth < maxDepth; depth++)
             {
-                if (GenSight.LineOfSight(currentOrigin, targetCell, map))
+                if (HasOriginalTerminalVisibility(currentOrigin, targetCell, map))
                     return anchors.Count > 0 ? anchors : null;
 
                 RouteOptions routeOptions = ComputeSingleObstacleRoute(
@@ -182,7 +182,7 @@ namespace BDP.Content.RangedModules.RoutePath
                 currentOrigin = anchors[anchors.Count - 1];
             }
 
-            if (!GenSight.LineOfSight(currentOrigin, targetCell, map))
+            if (!HasOriginalTerminalVisibility(currentOrigin, targetCell, map))
             { rejectReason = "BDP_RoutePath_AutoRouteFailed".Translate(); return null; }
 
             return anchors.Count > 0 ? anchors : null;
@@ -351,7 +351,20 @@ namespace BDP.Content.RangedModules.RoutePath
                     return false;
                 currentOrigin = anchor;
             }
-            return GenSight.LineOfSight(currentOrigin, targetCell, map);
+            return HasOriginalTerminalVisibility(currentOrigin, targetCell, map);
+        }
+
+        /// <summary>
+        /// 终端目标沿用原版边缘可见性：目标贴墙/山体时，只要原版允许看到目标边缘，
+        /// 就不把终端掩体误判成必须绕开的路线硬阻挡。
+        /// </summary>
+        private static bool HasOriginalTerminalVisibility(
+            IntVec3 originCell,
+            IntVec3 targetCell,
+            Map map)
+        {
+            return GenSight.LineOfSight(originCell, targetCell, map)
+                || GenSight.LineOfSightToEdges(originCell, targetCell, map);
         }
 
         private static void AppendDistinctAnchors(List<IntVec3> target, List<IntVec3> source)

@@ -1,9 +1,13 @@
 using System.Collections.Generic;
+using BDP.Core.CombatLog;
 using BDP.Core.AttackExecution;
 using BDP.Core.AttackExecution.RangedProtocol;
+using BDP.Core.AttackExecution.RangedProtocol.Aim;
 using BDP.Core.AttackExecution.RangedProtocol.Model;
 using BDP.Core.Expressions;
+using BDP.Core.Permissions;
 using BDP.Core.Projectiles;
+using BDP.Core.Projectiles.Interaction;
 using BDP.Core.Projectiles.RangedFlightProtocol.Model;
 using BDP.Core.Semantics;
 using BDP.Core.Trigger.Visual;
@@ -84,25 +88,21 @@ namespace BDP.Core.Verbs
         }
 
         /// <summary>
-        /// 判断自动远程入口当前是否可以写入新的起手暂存会话。
-        /// 只要宿主仍持有正式会话、暖机/发射状态或冻结上下文，就说明它不是空闲壳。
+        /// 判断实际起手目标是否仍与当前自动会话一致；实体和格子目标都必须精确匹配。
         /// </summary>
-        internal bool CanAcceptAutoRangedEntryStaging()
+        internal bool MatchesAutomaticCastTarget(LocalTargetInfo target)
         {
-            if (HostModuleSession != null
-                || hostAttackContextSnapshot != null)
+            if (!TryResolveCurrentSemanticTarget(out LocalTargetInfo currentTarget)
+                && sessionTarget.IsValid)
             {
-                return false;
+                currentTarget = sessionTarget;
             }
 
-            if (HostSessionToken != null
-                && !string.IsNullOrWhiteSpace(HostSessionToken.AttackInstanceId))
-            {
-                return false;
-            }
-
-            return !RequiresFormalHostRuntimeTick();
+            return target.IsValid && currentTarget == target;
         }
+
+        /// <summary>实际可命中的起手才允许准备会话；普通远程基类沿用已经准备好的上下文。</summary>
+        protected virtual bool TryPrepareCastSession(LocalTargetInfo target) => true;
 
         /// <summary>
         /// 当前这次远程发射携带的战斗语义。
@@ -238,6 +238,12 @@ namespace BDP.Core.Verbs
         private LocalTargetInfo sessionTarget = LocalTargetInfo.Invalid;
 
         /// <summary>
+        /// 当前自动远程会话的目标是否经历过一次倒地、死亡或恢复行动。
+        /// 标记只保留到安全的宿主收口点，不进入正式存档契约。
+        /// </summary>
+        private bool targetLifecycleChanged;
+
+        /// <summary>
         /// 当前下一发投射物的发射原点偏移。
         /// 它只在宿主实际生成投射物时消费，不参与协议真值裁决。
         /// </summary>
@@ -328,6 +334,7 @@ namespace BDP.Core.Verbs
                 hostAttackContextSnapshot = null;
                 ClearStagedEntryModuleSession();
                 sessionTarget = LocalTargetInfo.Invalid;
+                targetLifecycleChanged = false;
                 SemanticContext = null;
                 currentResolvedVerbSpec = null;
                 ResetInsufficientTrionPromptLatch();
@@ -419,6 +426,13 @@ namespace BDP.Core.Verbs
             }
         }
 
+        /// <summary>自有远程入口原生执行动态准入，再保留原版可用性。</summary>
+        public override bool Available()
+        {
+            return AttackAdmissionAccess.Evaluate(CasterPawn, this).Accepted && base.Available();
+        }
+
+        /// <summary>准备发射计划和资源承诺前先检查攻击准入。</summary>
         public override bool TryStartCastOn(
             LocalTargetInfo castTarg,
             LocalTargetInfo destTarg,
@@ -427,6 +441,7 @@ namespace BDP.Core.Verbs
             bool preventFriendlyFire = false,
             bool nonInterruptingSelfCast = false)
         {
+            if (!AttackAdmissionAccess.Evaluate(CasterPawn, this).Accepted) return false;
             LocalTargetInfo target = castTarg.IsValid ? castTarg : destTarg;
             if (!target.IsValid)
             {
@@ -487,6 +502,9 @@ namespace BDP.Core.Verbs
                     ResolveRemainingProjectileCount());
                 return false;
             }
+
+            // 武器查询不得占有攻击会话。实际起手在可命中检查之后才处理换目标和首次准备。
+            if (!TryPrepareCastSession(target)) return false;
 
             // 每次新的起手请求都必须丢弃旧 plan，避免 formal host 壳把上一轮目标泄漏到第一枪。
             ClearPendingEmissionPlan();
@@ -549,6 +567,8 @@ namespace BDP.Core.Verbs
                 out preparedCurrentTarget);
             LogPreparedTargetMismatchIfNeeded(target);
             LocalTargetInfo baseCastTarget = ResolveBaseVerbStartTarget(target, preparedLaunchTarget);
+            // 传给原版的首段目标同时决定 Stance_Warmup 和后续 Stance_Cooldown 的焦点。
+            // 毒蛇起手成功后不能把 currentTarget 改回请求目标，否则首发后会转向最终目标。
             bool started = base.TryStartCastOn(baseCastTarget, destTarg, surpriseAttack, canHitNonTargetPawns, preventFriendlyFire, nonInterruptingSelfCast);
             // 原版 Verb.TryStartCastOn 在 CanHitTarget 通过后，还会调用 TryFindShootLineFromTo 做暖机瞄准线检查。
             // 对毒蛇这类 DirectTargetLineOfSight=NotRequired 的武器，CanHitTarget 可通过 dual adapter 放行，
@@ -570,10 +590,6 @@ namespace BDP.Core.Verbs
                     baseCastTarget.Pawn.stances.stunner.StunFor(ticks, null, addBattleLog: false);
                 }
                 started = true;
-            }
-            if (started && target.IsValid && !TargetsEquivalent(currentTarget, target))
-            {
-                currentTarget = target;
             }
 
             AttackExecutionDiagnostics.LogVerbCastResult(
@@ -617,7 +633,9 @@ namespace BDP.Core.Verbs
             }
             if (!rebuildSucceeded)
             {
-                state = VerbState.Idle;
+                // 暖机完成时续射准备失败，当前正式宿主已经无法继续承担本轮攻击。
+                // 必须完整关闭会话，否则原版姿态结束后会再次尝试同一份失效上下文。
+                Reset();
                 return;
             }
 
@@ -683,6 +701,19 @@ namespace BDP.Core.Verbs
             {
                 return false;
             }
+
+            ThingDef projectileDef = plan.ProjectileDef
+                ?? (currentResolvedVerbSpec != null ? currentResolvedVerbSpec.ProjectileDef : null)
+                ?? Projectile;
+            if (projectileDef == null)
+            {
+                return false;
+            }
+
+            // 原版 VerbProperties.stopBurstWithoutLos 默认开启；高角投射物本身就是绕过地面直视线的能力边界。
+            // 先解析本发计划，才能在无直视线时识别 flyOverhead 并继续进入原版 Launch（发射）。
+            bool allowsMissingShootLine = projectileDef.projectile != null
+                && projectileDef.projectile.flyOverhead;
             AttackInstanceId = plan.AttackInstanceId;
             ResultId = plan.ResultId;
             SemanticContext = plan.SemanticContext;
@@ -694,7 +725,21 @@ namespace BDP.Core.Verbs
 
             ShootLine resultingLine;
             bool hasLine = TryFindShootLineFromTo(caster.Position, navigationTarget, out resultingLine);
-            if (verbProps.stopBurstWithoutLos && !hasLine)
+            bool hasIndirectAttackPermission = !hasLine
+                && !allowsMissingShootLine
+                && TryResolveIndirectAttackPermission(
+                    plan,
+                    semanticTarget,
+                    out _);
+            if (!hasLine && hasIndirectAttackPermission)
+            {
+                // 原版 TryFindShootLineFromTo 只提供直射线；间接许可通过后，
+                // 仍需给后续 ShotReport、Launch 和路线协议一条稳定的几何射击线。
+                resultingLine = new ShootLine(caster.Position, navigationTarget.Cell);
+            }
+
+            bool canLaunchWithoutShootLine = allowsMissingShootLine || hasIndirectAttackPermission;
+            if (verbProps.stopBurstWithoutLos && !hasLine && !canLaunchWithoutShootLine)
             {
                 return false;
             }
@@ -707,20 +752,6 @@ namespace BDP.Core.Verbs
                 manningPawn = compMannable.ManningPawn;
                 equipmentSource = caster;
             }
-
-            ThingDef projectileDef = plan.ProjectileDef
-                ?? (currentResolvedVerbSpec != null ? currentResolvedVerbSpec.ProjectileDef : null)
-                ?? Projectile;
-            if (projectileDef == null)
-            {
-                return false;
-            }
-
-            EquipmentSource?.GetComp<CompChangeableProjectile>()?.Notify_ProjectileLaunched();
-            EquipmentSource?.GetComp<CompApparelVerbOwner_Charged>()?.UsedOnce();
-            int shotTick = Find.TickManager.TicksGame;
-            NotifyShotFiredForRecoil(shotTick);
-            NotifySourceShotFiredForRecoil(plan.ResultId, shotTick);
 
             Vector3 drawPos = caster.DrawPos;
             TriggerVisualLaunchOriginResolution rootResolution =
@@ -757,6 +788,35 @@ namespace BDP.Core.Verbs
             nextOriginOffset = launchOrigin - drawPos;
             bool emitted = TryLaunchSinglePlan(projectileDef, resultingLine, manningPawn, equipmentSource, launchOrigin, plan, semanticTarget, navigationTarget);
             nextOriginOffset = Vector3.zero;
+            if (emitted)
+            {
+                // 只有原版 Launch（发射）成功后才消费弹药、充能和后坐力时刻。
+                // 射击报告或发射前校验失败时，不应留下“已消费但没有子弹”的半次攻击。
+                EquipmentSource?.GetComp<CompChangeableProjectile>()?.Notify_ProjectileLaunched();
+                EquipmentSource?.GetComp<CompApparelVerbOwner_Charged>()?.UsedOnce();
+                int shotTick = Find.TickManager.TicksGame;
+                NotifyShotFiredForRecoil(shotTick);
+                NotifySourceShotFiredForRecoil(plan.ResultId, shotTick);
+                // 临时诊断：记录真实 projectile 落地 Tick，并同时记录原版声明值与解析值。
+                // 这里不改变攻击状态，只为确认双持变慢发生在“每发间隔”还是“整轮窗口数量”。
+                AttackExecutionDiagnostics.LogRangedShotTiming(
+                    CasterPawn,
+                    this,
+                    shotTick,
+                    emissionCursor.PendingWindowIndex,
+                    emissionCursor.PendingEmissionWindows != null
+                        ? emissionCursor.PendingEmissionWindows.Count
+                        : 0,
+                    verbProps != null ? verbProps.ticksBetweenBurstShots : -1,
+                    TicksBetweenBurstShots,
+                    plan.AttackInstanceId,
+                    HostResultId,
+                    plan.ResultId,
+                    burstShotsLeft,
+                    emissionCursor.ResolveRemainingWindowCount(),
+                    CasterPawn?.stances?.FullBodyBusy ?? false,
+                    state.ToString());
+            }
             if (emitted && plan.MuzzleFlashScale > 0.01f)
             {
                 // 继续调用原版射击闪光接口，但位置归属当前实际发射来源的枪口。
@@ -769,14 +829,56 @@ namespace BDP.Core.Verbs
             return emitted;
         }
 
-        protected override bool TryCastShot()
+        /// <summary>
+        /// 查询当前发射计划是否获得了可绕过原版直射线发射前置的间接攻击许可。
+        /// 目标合法性阶段已经做过一次查询；这里在真正发射前再次按当前计划和目标读取，
+        /// 避免只放宽瞄准界面而仍被原版 stopBurstWithoutLos（无直视停止连发）拦截。
+        /// </summary>
+        private bool TryResolveIndirectAttackPermission(
+            ProjectileInitPlan plan,
+            LocalTargetInfo target,
+            out IndirectRangedAttackPermissionGrant grant)
         {
-            if (!HasPendingEmissionPlan() && !TryPreparePendingEmission(sessionTarget.IsValid ? sessionTarget : currentTarget))
+            grant = null;
+            string resultId = plan != null && !string.IsNullOrWhiteSpace(plan.ResultId)
+                ? plan.ResultId
+                : HostResultId;
+            if (CasterPawn == null || string.IsNullOrWhiteSpace(resultId))
             {
                 return false;
             }
 
+            if (!AttackExecutionSurfaceAccess.TryGetPublishedResult(
+                    CasterPawn,
+                    resultId,
+                    out _,
+                    out FormalExpressionResult result))
+            {
+                return false;
+            }
+
+            return IndirectRangedAttackPermissionAccess.TryResolve(
+                CasterPawn,
+                result,
+                target,
+                out grant);
+        }
+
+        protected override bool TryCastShot()
+        {
+            if (!HasPendingEmissionPlan() && !TryPreparePendingEmission(sessionTarget.IsValid ? sessionTarget : currentTarget))
+            {
+                Reset();
+                return false;
+            }
+
             if (!TryGetCurrentWindow(out RangedVerbEmissionWindowPlan window))
+            {
+                Reset();
+                return false;
+            }
+
+            if (!TryValidateCurrentEmissionWindowTargets())
             {
                 return false;
             }
@@ -837,40 +939,6 @@ namespace BDP.Core.Verbs
             LocalTargetInfo semanticTarget,
             LocalTargetInfo navigationTarget)
         {
-            Projectile projectileThing = (Projectile)GenSpawn.Spawn(projectileDef, resultingLine.Source, caster.Map);
-            BdpDamageSemanticBridge.AssignContext(projectileThing, SemanticContext);
-            if (projectileThing is IAttackEffectTraceCarrier traceCarrier)
-            {
-                traceCarrier.AttackInstanceId = AttackInstanceId;
-                traceCarrier.ResultId = ResultId;
-            }
-
-            if (projectileThing is BdpProjectile projectile)
-            {
-                projectile.BindLaunchPlan(plan);
-            }
-
-            if (equipmentSource.TryGetComp(out CompUniqueWeapon comp))
-            {
-                foreach (WeaponTraitDef item in comp.TraitsListForReading)
-                {
-                    if (item.damageDefOverride != null)
-                    {
-                        projectileThing.damageDefOverride = item.damageDefOverride;
-                    }
-
-                    if (!item.extraDamages.NullOrEmpty())
-                    {
-                        if (projectileThing.extraDamages == null)
-                        {
-                            projectileThing.extraDamages = new List<ExtraDamage>();
-                        }
-
-                        projectileThing.extraDamages.AddRange(item.extraDamages);
-                    }
-                }
-            }
-
             float accuracyFactor = ResolveAccuracyFactor(plan);
             float forcedMissRadius = ResolveForcedMissRadius(plan);
             if (forcedMissRadius > 0.5f)
@@ -886,6 +954,16 @@ namespace BDP.Core.Verbs
                     IntVec3 forcedMissTarget = GetForcedMissTarget(adjustedForcedMiss);
                     if (forcedMissTarget != navigationTarget.Cell)
                     {
+                        Projectile projectileThing = CreateProjectileForLaunch(
+                            projectileDef,
+                            resultingLine.Source,
+                            equipmentSource,
+                            plan);
+                        if (projectileThing == null)
+                        {
+                            return false;
+                        }
+
                         ProjectileHitFlags projectileHitFlags = ProjectileHitFlags.NonTargetWorld;
                         if (Rand.Chance(0.5f))
                         {
@@ -913,6 +991,15 @@ namespace BDP.Core.Verbs
                             null,
                             forcedMissRadius,
                             accuracyFactor);
+                        FreezeLaunchResolution(
+                            plan,
+                            ProjectileLaunchDisposition.ForcedMiss,
+                            false,
+                            ProjectileLaunchContinuationMode.None,
+                            new LocalTargetInfo(forcedMissTarget),
+                            forcedMissTarget.ToVector3Shifted(),
+                            Vector3.zero,
+                            null);
                         projectileThing.Launch(manningPawn, drawPos, forcedMissTarget, semanticTarget, projectileHitFlags, preventFriendlyFire, equipmentSource);
                         return true;
                     }
@@ -952,15 +1039,42 @@ namespace BDP.Core.Verbs
                 }
             }
 
+            // 必须消费该发真实报告：来源芯片、距离、天气与既有倍率在此已明确。
+            // 模块只改变瞄准概率，仍由下面的原版分支完成唯一一次随机判定。
+            accuracyFactor = ResolveReportAccuracyFactor(plan, shotReport, accuracyFactor);
             CaptureAccuracySnapshot(plan, shotReport, accuracyFactor, forcedMissRadius);
             float adjustedAimOnTargetIgnoringPosture = Mathf.Clamp01(shotReport.AimOnTargetChance_IgnoringPosture * accuracyFactor);
             float adjustedAimOnTargetStandardTarget = Mathf.Clamp01(shotReport.AimOnTargetChance_StandardTarget * accuracyFactor);
-            Thing randomCoverToMissInto = shotReport.GetRandomCoverToMissInto();
+            IntVec3 coverOriginCell = ResolveCoverOriginCell(plan, resultingLine, semanticTarget);
+            TrajectoryCoverSnapshot trajectoryCover = TrajectoryCoverSnapshot.Create(
+                semanticTarget,
+                coverOriginCell,
+                caster.Map);
+            plan.HasFinalApproachStartCell = trajectoryCover.HasCoverOriginCell;
+            plan.FinalApproachStartCell = trajectoryCover.CoverOriginCell;
+            plan.TrajectoryCover = trajectoryCover;
+            Thing randomCoverToMissInto = trajectoryCover.RandomCover;
             ThingDef targetCoverDef = randomCoverToMissInto?.def;
+            if (plan.AccuracySnapshot != null)
+            {
+                plan.AccuracySnapshot.PassCoverChance = Mathf.Clamp01(1f - trajectoryCover.OverallBlockChance);
+            }
             if (verbProps.canGoWild && !Rand.Chance(adjustedAimOnTargetIgnoringPosture))
             {
-                bool flyOverhead = projectileThing.def?.projectile != null && projectileThing.def.projectile.flyOverhead;
+                bool flyOverhead = projectileDef.projectile != null && projectileDef.projectile.flyOverhead;
+                Vector3 nominalWildDestination = resultingLine.Dest.ToVector3Shifted();
                 resultingLine.ChangeDestToMissWild(adjustedAimOnTargetStandardTarget, flyOverhead, caster.Map);
+                Vector3 actualWildDestination = resultingLine.Dest.ToVector3Shifted();
+                Projectile projectileThing = CreateProjectileForLaunch(
+                    projectileDef,
+                    resultingLine.Source,
+                    equipmentSource,
+                    plan);
+                if (projectileThing == null)
+                {
+                    return false;
+                }
+
                 ProjectileHitFlags projectileHitFlags = ProjectileHitFlags.NonTargetWorld;
                 if (Rand.Chance(0.5f) && canHitNonTargetPawnsNow)
                 {
@@ -983,18 +1097,45 @@ namespace BDP.Core.Verbs
                     targetCoverDef,
                     forcedMissRadius,
                     accuracyFactor);
+                FreezeLaunchResolution(
+                    plan,
+                    ProjectileLaunchDisposition.WildMiss,
+                    false,
+                    ProjectileLaunchContinuationMode.WildMissOffsetRoute,
+                    new LocalTargetInfo(resultingLine.Dest),
+                    actualWildDestination,
+                    actualWildDestination - nominalWildDestination,
+                    targetCoverDef);
                 projectileThing.Launch(manningPawn, drawPos, resultingLine.Dest, semanticTarget, projectileHitFlags, preventFriendlyFire, equipmentSource, targetCoverDef);
                 return true;
             }
 
-            if (semanticTarget.Thing != null && semanticTarget.Thing.def.CanBenefitFromCover && !Rand.Chance(shotReport.PassCoverChance))
+            if (semanticTarget.Thing != null
+                && semanticTarget.Thing.def.CanBenefitFromCover
+                && !Rand.Chance(Mathf.Clamp01(1f - trajectoryCover.OverallBlockChance)))
             {
+                Projectile projectileThing = CreateProjectileForLaunch(
+                    projectileDef,
+                    resultingLine.Source,
+                    equipmentSource,
+                    plan);
+                if (projectileThing == null)
+                {
+                    return false;
+                }
+
                 ProjectileHitFlags projectileHitFlags = ProjectileHitFlags.NonTargetWorld;
                 if (canHitNonTargetPawnsNow)
                 {
                     projectileHitFlags |= ProjectileHitFlags.NonTargetPawns;
                 }
 
+                LocalTargetInfo coverTarget = randomCoverToMissInto != null
+                    ? new LocalTargetInfo(randomCoverToMissInto)
+                    : new LocalTargetInfo(resultingLine.Dest);
+                LocalTargetInfo coverLaunchTarget = BdpProjectileLaunchService.FreezeCoverLaunchResolution(
+                    plan, navigationTarget, semanticTarget, coverTarget,
+                    coverTarget.CenterVector3, targetCoverDef);
                 LogProjectileLaunchDecision(
                     "cover_intercept",
                     projectileThing,
@@ -1003,7 +1144,7 @@ namespace BDP.Core.Verbs
                     resultingLine,
                     semanticTarget,
                     navigationTarget,
-                    randomCoverToMissInto,
+                    coverLaunchTarget,
                     semanticTarget,
                     projectileHitFlags,
                     preventFriendlyFire,
@@ -1011,7 +1152,7 @@ namespace BDP.Core.Verbs
                     targetCoverDef,
                     forcedMissRadius,
                     accuracyFactor);
-                projectileThing.Launch(manningPawn, drawPos, randomCoverToMissInto, semanticTarget, projectileHitFlags, preventFriendlyFire, equipmentSource, targetCoverDef);
+                projectileThing.Launch(manningPawn, drawPos, coverLaunchTarget, semanticTarget, projectileHitFlags, preventFriendlyFire, equipmentSource, targetCoverDef);
                 return true;
             }
 
@@ -1026,8 +1167,23 @@ namespace BDP.Core.Verbs
                 intendedHitFlags |= ProjectileHitFlags.NonTargetWorld;
             }
 
+            intendedHitFlags = ProjectileInterceptionDecision.ResolveIntendedLaunchHitFlags(
+                intendedHitFlags,
+                semanticTarget,
+                plan != null ? plan.InteractionPolicy : null);
+
             if (semanticTarget.Thing != null)
             {
+                Projectile projectileThing = CreateProjectileForLaunch(
+                    projectileDef,
+                    resultingLine.Source,
+                    equipmentSource,
+                    plan);
+                if (projectileThing == null)
+                {
+                    return false;
+                }
+
                 LogProjectileLaunchDecision(
                     "intended_thing",
                     projectileThing,
@@ -1044,10 +1200,29 @@ namespace BDP.Core.Verbs
                     targetCoverDef,
                     forcedMissRadius,
                     accuracyFactor);
+                FreezeLaunchResolution(
+                    plan,
+                    ProjectileLaunchDisposition.IntendedTarget,
+                    true,
+                    ProjectileLaunchContinuationMode.IntendedRoute,
+                    navigationTarget,
+                    navigationTarget.CenterVector3,
+                    Vector3.zero,
+                    targetCoverDef);
                 projectileThing.Launch(manningPawn, drawPos, navigationTarget, semanticTarget, intendedHitFlags, preventFriendlyFire, equipmentSource, targetCoverDef);
             }
             else
             {
+                Projectile projectileThing = CreateProjectileForLaunch(
+                    projectileDef,
+                    resultingLine.Source,
+                    equipmentSource,
+                    plan);
+                if (projectileThing == null)
+                {
+                    return false;
+                }
+
                 LogProjectileLaunchDecision(
                     "intended_cell",
                     projectileThing,
@@ -1064,10 +1239,104 @@ namespace BDP.Core.Verbs
                     targetCoverDef,
                     forcedMissRadius,
                     accuracyFactor);
+                FreezeLaunchResolution(
+                    plan,
+                    ProjectileLaunchDisposition.IntendedTarget,
+                    true,
+                    ProjectileLaunchContinuationMode.IntendedRoute,
+                    new LocalTargetInfo(resultingLine.Dest),
+                    resultingLine.Dest.ToVector3Shifted(),
+                    Vector3.zero,
+                    targetCoverDef);
                 projectileThing.Launch(manningPawn, drawPos, resultingLine.Dest, semanticTarget, intendedHitFlags, preventFriendlyFire, equipmentSource, targetCoverDef);
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// 在所有目标相关裁定完成后创建并初始化投射物。
+        /// 只有进入明确的发射分支才允许生成 Thing（实体），避免射击报告失败留下未发射投射物。
+        /// </summary>
+        /// <param name="projectileDef">本发投射物定义。</param>
+        /// <param name="spawnCell">原版投射物生成格。</param>
+        /// <param name="equipmentSource">当前发射装备来源。</param>
+        /// <param name="plan">当前投射物初始化计划。</param>
+        /// <returns>已经完成 BDP 初始化、等待原版 Launch（发射）的投射物；生成失败时返回 null。</returns>
+        private Projectile CreateProjectileForLaunch(
+            ThingDef projectileDef,
+            IntVec3 spawnCell,
+            Thing equipmentSource,
+            ProjectileInitPlan plan)
+        {
+            if (projectileDef == null || caster?.Map == null || !spawnCell.IsValid)
+            {
+                return null;
+            }
+
+            return BdpProjectileLaunchService.CreateProjectileForLaunch(
+                caster,
+                projectileDef,
+                spawnCell,
+                equipmentSource,
+                plan,
+                SemanticContext,
+                AttackInstanceId,
+                ResultId);
+        }
+
+        /// <summary>
+        /// 在原版 Launch（发射）调用前冻结本发首发结果，供后续路线、碰撞和视觉阶段只读消费。
+        /// </summary>
+        private static void FreezeLaunchResolution(
+            ProjectileInitPlan plan,
+            ProjectileLaunchDisposition disposition,
+            bool canHitIntendedTarget,
+            ProjectileLaunchContinuationMode continuationMode,
+            LocalTargetInfo actualLaunchTarget,
+            Vector3 actualLaunchDestination,
+            Vector3 wildMissOffset,
+            ThingDef targetCoverDef)
+        {
+            if (plan == null)
+            {
+                return;
+            }
+
+            plan.LaunchResolution = new ProjectileLaunchResolution
+            {
+                Disposition = disposition,
+                CanHitIntendedTarget = canHitIntendedTarget,
+                ContinuationMode = continuationMode,
+                ActualLaunchTarget = actualLaunchTarget,
+                ActualLaunchDestination = actualLaunchDestination,
+                WildMissOffset = wildMissOffset,
+                TargetCoverDef = targetCoverDef
+            };
+        }
+
+        /// <summary>
+        /// 解析终端掩体的几何起点。
+        /// 有路线时使用最后有效路径段起点；无路线时使用实际射击线发射源格。
+        /// </summary>
+        private static IntVec3 ResolveCoverOriginCell(
+            ProjectileInitPlan plan,
+            ShootLine resultingLine,
+            LocalTargetInfo target)
+        {
+            if (plan != null
+                && plan.HasFinalApproachStartCell
+                && plan.FinalApproachStartCell.IsValid)
+            {
+                return plan.FinalApproachStartCell;
+            }
+
+            if (resultingLine.Source.IsValid)
+            {
+                return resultingLine.Source;
+            }
+
+            return target.IsValid ? target.Cell : IntVec3.Invalid;
         }
 
         /// <summary>
@@ -1103,6 +1372,39 @@ namespace BDP.Core.Verbs
         }
 
         /// <summary>
+        /// 把逐发标准概率修正转换为等效倍率，保持原版体型及姿态结算位置。
+        /// 双持可能没有单一宿主会话，此时沿用已发布结果重建模块的既有机制。
+        /// </summary>
+        private float ResolveReportAccuracyFactor(
+            ProjectileInitPlan plan, ShotReport shotReport, float accuracyFactor)
+        {
+            float originalChance = Mathf.Clamp01(shotReport.AimOnTargetChance_StandardTarget * accuracyFactor);
+            if (originalChance <= 0f || plan == null) return accuracyFactor;
+
+            RangedAttackModuleSession session = HostModuleSession;
+            if (session == null && plan.Launcher != null
+                && !string.IsNullOrWhiteSpace(plan.ResultId)
+                && AttackExecutionSurfaceAccess.TryGetPublishedResult(
+                    plan.Launcher, plan.ResultId, out _, out FormalExpressionResult result))
+            {
+                session = AttackExecutionSurfaceAccess.CreateRangedModuleSession(plan.Launcher, result);
+                session?.ImportPrivateContexts(plan.AttackContextSnapshot);
+            }
+            if (session == null) return accuracyFactor;
+
+            float chance = originalChance;
+            IReadOnlyList<IAimChanceModifier> modifiers = session.GetAimChanceModifiers();
+            for (int i = 0; i < modifiers.Count; i++)
+            {
+                AimChanceContext context = new AimChanceContext(caster, plan.ResultId, chance);
+                float adjusted = modifiers[i].ModifyStandardAimChance(context);
+                if (!float.IsNaN(adjusted) && !float.IsInfinity(adjusted))
+                    chance = Mathf.Clamp01(adjusted);
+            }
+            return accuracyFactor * (chance / originalChance);
+        }
+
+        /// <summary>
         /// 把本发原版射击报告的公开精度事实冻结到正式投射物计划。
         /// 不保存随机命中分支，也不改变后续原版命中裁定。
         /// </summary>
@@ -1121,7 +1423,7 @@ namespace BDP.Core.Verbs
                 return;
             }
 
-            float safeAccuracyFactor = accuracyFactor > 0f ? accuracyFactor : 1f;
+            float safeAccuracyFactor = Mathf.Max(0f, accuracyFactor);
             plan.AccuracySnapshot = new ProjectileAccuracySnapshot
             {
                 IsAvailable = true,
@@ -1206,8 +1508,22 @@ namespace BDP.Core.Verbs
                 + ", canHitNonTargetPawns=" + canHitNonTargetPawns
                 + ", forcedMissRadius=" + forcedMissRadius.ToString("F3")
                 + ", accuracyFactor=" + accuracyFactor.ToString("F3")
-                + ", hasInitialFlightPath=" + (initialFlightPath != null)
-                + ", initialFlightPath=" + DescribeFlightPathForDiagnostic(initialFlightPath));
+                + ", aimChanceStandard=" + (plan != null && plan.AccuracySnapshot != null
+                    ? plan.AccuracySnapshot.StandardAimChance.ToString("F3") : "<none>")
+                + ", aimChanceIgnoringPosture=" + (plan != null && plan.AccuracySnapshot != null
+                    ? plan.AccuracySnapshot.IgnoringPostureAimChance.ToString("F3") : "<none>")
+                + ", trajectoryCoverBlockChance=" + (plan != null && plan.TrajectoryCover != null
+                    ? plan.TrajectoryCover.OverallBlockChance.ToString("F3") : "<none>")
+                + ", trajectoryCoverPassChance=" + (plan != null && plan.AccuracySnapshot != null
+                    ? plan.AccuracySnapshot.PassCoverChance.ToString("F3") : "<none>")
+                + ", coverOriginCell=" + (plan != null && plan.HasFinalApproachStartCell
+                    ? plan.FinalApproachStartCell.ToString() : IntVec3.Invalid.ToString())
+                + ", semanticDistance=" + (caster != null && semanticTarget.IsValid
+                    ? (semanticTarget.Cell - caster.Position).LengthHorizontal.ToString("F1") : "<none>")
+                + ", configuredAccuracyLong=" + (plan != null && plan.HasAccuracy
+                    ? plan.AccuracyLong.ToString("F3") : verbProps.accuracyLong.ToString("F3"))
+                 + ", hasInitialFlightPath=" + (initialFlightPath != null)
+                 + ", initialFlightPath=" + DescribeFlightPathForDiagnostic(initialFlightPath));
         }
 
         private static string DescribeThingDefForDiagnostic(ThingDef thingDef)
@@ -1273,14 +1589,17 @@ namespace BDP.Core.Verbs
 
         private void LogWarmupBattleEntry()
         {
-            Thing targetThing = currentTarget.HasThing ? currentTarget.Thing : null;
+            // currentTarget 是原版姿态焦点，毒蛇可能把它设为第一锚点；战斗日志仍读取最终语义目标。
+            LocalTargetInfo semanticTarget = sessionTarget.IsValid ? sessionTarget : currentTarget;
+            Thing targetThing = semanticTarget.HasThing ? semanticTarget.Thing : null;
             bool burst = ResolveRemainingProjectileCount() > 1;
-            BattleLogEntry_RangedFire battleLogEntry = new BattleLogEntry_RangedFire(
+            BattleLogEntry_RangedFire battleLogEntry = BattleLogEntryFactoryAccess.CreateRangedFire(
                 caster,
                 targetThing,
                 ResolveVanillaBattleLogWeaponDef(),
                 Projectile,
-                burst);
+                burst,
+                SemanticContext);
             Find.BattleLog.Add(battleLogEntry);
         }
 
@@ -1299,7 +1618,9 @@ namespace BDP.Core.Verbs
         /// </summary>
         private void GrantShootingExperience()
         {
-            Pawn targetPawn = currentTarget.Thing as Pawn;
+            // 射击经验按最终语义目标结算，不把第一锚点误当成 Pawn（角色）目标。
+            LocalTargetInfo semanticTarget = sessionTarget.IsValid ? sessionTarget : currentTarget;
+            Pawn targetPawn = semanticTarget.Thing as Pawn;
             if (targetPawn != null
                 && !targetPawn.Downed
                 && !targetPawn.IsColonyMech
@@ -1469,6 +1790,7 @@ namespace BDP.Core.Verbs
             hostAttackContextSnapshot = null;
             ClearStagedEntryModuleSession();
             sessionTarget = LocalTargetInfo.Invalid;
+            targetLifecycleChanged = false;
             SemanticContext = null;
             currentResolvedVerbSpec = null;
             ResetInsufficientTrionPromptLatch();
@@ -1519,6 +1841,35 @@ namespace BDP.Core.Verbs
         internal bool RequiresFormalHostRuntimeTick()
         {
             return WarmingUp || Bursting || HasPendingEmissionPlan();
+        }
+
+        /// <summary>
+        /// 接收目标生命周期变化，并只标记自动远程宿主需要收口。
+        /// 手动强制攻击由自己的 Job（任务）生命周期负责，不能被这里提前打断。
+        /// </summary>
+        internal void NotifyTargetLifecycleChanged(Pawn target)
+        {
+            if (target == null
+                || !sessionTarget.HasThing
+                || sessionTarget.Thing != target
+                || CasterPawn?.CurJob?.def == AttackExecutionJobDefs.RangedAttackExecution)
+            {
+                return;
+            }
+
+            targetLifecycleChanged = true;
+            if (!RequiresFormalHostRuntimeTick())
+            {
+                Reset();
+            }
+        }
+
+        /// <summary>
+        /// 判断当前远程宿主是否已经完成本轮活动，可以安全清理目标生命周期残留。
+        /// </summary>
+        internal bool ShouldResetAfterTargetLifecycleChange()
+        {
+            return targetLifecycleChanged && !RequiresFormalHostRuntimeTick();
         }
 
         /// <summary>
@@ -1575,6 +1926,71 @@ namespace BDP.Core.Verbs
             launchTarget = plan.LaunchTarget;
             aimTarget = plan.AimTarget;
             currentPlanTarget = plan.CurrentTarget;
+        }
+
+        /// <summary>
+        /// 验证当前发射窗口内所有计划的语义实体目标仍可交给原版射击报告。
+        /// 格子目标不要求 Thing（实体）；实体目标必须仍在当前地图且保持已生成状态。
+        /// </summary>
+        /// <returns>当前窗口可以安全进入 Trion 提交和投射物发射时返回 true。</returns>
+        private bool TryValidateCurrentEmissionWindowTargets()
+        {
+            if (!TryGetCurrentWindow(out RangedVerbEmissionWindowPlan window)
+                || window.ProjectilePlans == null
+                || window.ProjectilePlans.Count == 0)
+            {
+                Reset();
+                return false;
+            }
+
+            int firstPlanIndex = emissionCursor.PendingWindowProjectilePlanIndex;
+            for (int i = firstPlanIndex; i < window.ProjectilePlans.Count; i++)
+            {
+                ProjectileInitPlan plan = window.ProjectilePlans[i];
+                if (plan == null)
+                {
+                    Reset();
+                    return false;
+                }
+
+                LocalTargetInfo semanticTarget = plan.CurrentTarget.IsValid
+                    ? plan.CurrentTarget
+                    : plan.AimTarget.IsValid
+                    ? plan.AimTarget
+                    : currentTarget;
+                if (!IsLiveEmissionTarget(semanticTarget))
+                {
+                    // 目标已经失效时关闭整条宿主会话，避免下一次姿态 tick（游戏刻）重复重建并消费资源。
+                    Reset();
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// 判断一个远程发射语义目标是否仍满足原版 Thing 访问前提。
+        /// </summary>
+        /// <param name="target">待验证的目标。</param>
+        /// <returns>格子目标或当前地图内的已生成实体目标返回 true。</returns>
+        private bool IsLiveEmissionTarget(LocalTargetInfo target)
+        {
+            if (!target.IsValid)
+            {
+                return false;
+            }
+
+            if (!target.HasThing)
+            {
+                return true;
+            }
+
+            Thing thing = target.Thing;
+            return thing != null
+                && thing.Spawned
+                && !thing.Destroyed
+                && thing.Map == caster.Map;
         }
 
         /// <summary>

@@ -24,7 +24,8 @@ $allText = $orderText + "`n" + $queueText + "`n" + $operationsText
 Assert-True ($operationsText -match 'BillStack\.MaxCount') "队列满时必须禁止加入。"
 Assert-True ($operationsText -match 'ChipCombinationResolutionStatus\.Valid') "配置不完整或非法时必须禁止加入。"
 Assert-True ($operationsText -match 'quantity\s*>\s*0') "数量必须是正整数。"
-Assert-True ($operationsText -notmatch 'available|shortage|缺少材料') "材料不足不得进入加入任务的硬门槛。"
+# 原版配方 AvailableNow 检查研究解锁，不代表当前材料库存。
+Assert-True ($operationsText -notmatch 'AvailableMaterial|AvailableIngredient|shortage|缺少材料') "材料不足不得进入加入任务的硬门槛。"
 Assert-True ($operationsText -match 'new\s+Bill_ChipProduction') "每次加入必须新建独立芯片账单。"
 Assert-True ($operationsText -match 'repeatMode\s*=\s*BillRepeatModeDefOf\.RepeatCount') "芯片账单必须固定为有限次数。"
 Assert-True ($operationsText -match 'SetStoreMode\s*\(BillStoreModeDefOf\.DropOnFloor') "产物必须默认原地落地。"

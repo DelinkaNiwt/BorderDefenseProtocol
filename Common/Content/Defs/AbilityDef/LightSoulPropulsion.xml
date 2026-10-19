@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 光魂推进组合结果：沿地面冲刺，并把路径上的可推动敌人推到终点。 -->
+  <AbilityDef>
+    <!-- AbilityDef（能力定义）唯一名称。 -->
+    <defName>BDP_Ability_LightSoulPropulsion</defName>
+    <!-- 默认中文名称仍允许语言包覆盖。 -->
+    <label>光魂推进</label>
+    <!-- 默认中文说明仍允许语言包覆盖。 -->
+    <description>沿地面冲刺至玩家选定位置；路径上的敌人会受到一次钝伤并被推向终点，撞到墙体或过大目标时，已被推动的敌人会短暂晕眩。</description>
+    <!-- 复用 BDP 通用芯片图标；不再使用跳跃图标。 -->
+    <iconPath>Things/Trigger/Chip/BDP_TriggerChip</iconPath>
+    <!-- 沿用原光魂推进的 30 秒冷却。 -->
+    <cooldownTicksRange>1800</cooldownTicksRange>
+    <!-- 只允许玩家手动使用。 -->
+    <aiCanUse>false</aiCanUse>
+    <!-- 沿途对敌钝伤属于攻击内容；原版激活记录战斗并发布攻击通知，不能按纯位移漏报。 -->
+    <hostile>true</hostile>
+    <!-- 位移本身不要求暴力能力。 -->
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+    <!-- 只在征召状态显示。 -->
+    <displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+    <showWhenDrafted>true</showWhenDrafted>
+    <!-- 使用中性地面冲刺 Verb（能力动词）与专用飞行器。 -->
+    <verbProperties>
+      <verbClass>BDP.Content.LightSoul.Propulsion.Verb_CastAbilityLightSoulPropulsion</verbClass>
+      <label>光魂推进</label>
+      <!-- 保留既有位移准入，不归入防护形态禁止的远程武器；攻击性质由能力敌对声明报告。 -->
+      <violent>false</violent>
+      <onlyManualCast>true</onlyManualCast>
+      <forceNormalTimeSpeed>false</forceNormalTimeSpeed>
+      <warmupTime>0.2</warmupTime>
+      <!-- 使用原版 Verb 冷却姿态限制释放者行动 1 秒。 -->
+      <defaultCooldownTime>1.0</defaultCooldownTime>
+      <range>15.9</range>
+      <requireLineOfSight>true</requireLineOfSight>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>false</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+    <!-- 组合技使用条件、Trion 成本与光魂推进专属碰撞效果。 -->
+    <comps>
+      <!-- 组合技使用条件由当前绑定的 ComboDef（组合技定义）实时读取。 -->
+      <li Class="BDP.Core.Abilities.CompProperties_AbilityEffect_BdpExpressionUseRequirements" />
+      <!-- Trion 成本由光魂第一来源的正式表达结果提供。 -->
+      <li Class="BDP.Core.Abilities.CompProperties_AbilityEffect_BdpTrionCost" />
+      <!-- 光魂推进的地面冲刺、推挤、钝伤和撞墙晕眩。 -->
+      <li Class="BDP.Content.LightSoul.Propulsion.CompProperties_LightSoulPropulsion">
+        <pawnFlyerDef>BDP_PawnFlyer_LightSoulPropulsion</pawnFlyerDef>
+        <damageDef>Blunt</damageDef>
+        <damageAmount>20</damageAmount>
+        <armorPenetration>0</armorPenetration>
+        <pushStoppingPower>1.0</pushStoppingPower>
+        <stunTicks>120</stunTicks>
+      </li>
+    </comps>
+  </AbilityDef>
+
+</Defs>

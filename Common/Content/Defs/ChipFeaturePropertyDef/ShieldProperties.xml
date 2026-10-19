@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 护盾自身独立可消耗的防护储量上限。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_ShieldCapacity</defName><label>护盾容量</label><description>护盾自身可消耗的独立防护储量上限。</description><ValueKind>Number</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 独立护盾容量每秒恢复的数量。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_ShieldRecovery</defName><label>护盾恢复速度</label><description>护盾自身独立容量每秒恢复的数量。</description><ValueKind>Number</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 护盾覆盖的完整连续方向角度。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_BlockArc</defName><label>抵挡角度</label><description>护盾能够防护的连续方向范围。</description><ValueKind>Number</ValueKind><UnitKey>BDP_Unit_Degree</UnitKey></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 满足角度、类别与资源条件后成功抵挡的概率。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_BlockChance</defName><label>抵挡概率</label><description>符合其它条件的攻击被护盾成功抵挡的概率。</description><ValueKind>Percentage</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 护盾功能能够处理的攻击发生方式列表。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_BlockAttackTypes</defName><label>抵挡攻击类型</label><description>护盾能够处理的攻击发生方式列表。</description><ValueKind>List</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 成功抵挡时吸收来袭伤害的比例。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_DamageAbsorptionRatio</defName><label>伤害吸收比例</label><description>成功抵挡时被护盾吸收的来袭伤害比例。</description><ValueKind>Percentage</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 护盾成功抵挡时相对于来袭伤害的资源消耗倍率。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_BlockCost</defName><label>抵挡消耗</label><description>成功抵挡时相对于来袭伤害的资源消耗倍率。</description><ValueKind>Number</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+
+</Defs>

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BDP.Core.CombatLog;
 using BDP.Core.AttackExecution;
 using BDP.Core.Chips;
 using BDP.Core.CombatModel;
@@ -118,7 +119,7 @@ namespace BDP.Core.Expressions
                 Id = BuildMaterialId(slot, declaration),
                 Side = slot.Side,
                 SlotIndex = slot.Index,
-                ResultKind = declaration.ResultKind,
+                OutputChannel = declaration.OutputChannel,
                 WeaponMode = declaration.WeaponMode,
                 SourceChip = slot.LoadedChip,
                 SourceReference = BuildSourceReference(slot),
@@ -128,16 +129,18 @@ namespace BDP.Core.Expressions
                 VisualPresetDefName = declaration.VisualPresetDefName,
                 VisualGraphicOverrideDefName = declaration.VisualGraphicOverrideDefName,
                 CompositeVisualPresetDefName = declaration.CompositeVisualPresetDefName,
+                ComboAttackVisualPresetDefName = declaration.ComboAttackVisualPresetDefName,
                 ForceSuppressHostEquipment = declaration.ForceSuppressHostEquipment,
                 VisualPriority = declaration.VisualPriority,
                 RoleKey = declaration.RoleKey,
                 VerbAttackRole = declaration.VerbAttackRole,
                 Tags = declaration.Tags,
+                DeclaredPermissionKeys = declaration.DeclaredPermissionKeys != null ? new List<string>(declaration.DeclaredPermissionKeys) : new List<string>(),
                 Trion = declaration.Trion,
                 ConditionEvaluation = conditionEvaluation,
                 IsEnabled = conditionEvaluation != null && conditionEvaluation.IsSatisfied,
                 ModeKey = declaration.ModeKey,
-                SemanticContext = BuildSemanticContext(pawn, declaration, sourceVariantLabel),
+                SemanticContext = BuildSemanticContext(pawn, slot, declaration, sourceVariantKey, sourceVariantLabel),
                 VerbHostKey = BuildVerbHostKey(slot, declaration, hostSlot),
                 VerbHostSlot = hostSlot,
                 ExecutionStyle = declaration.ExecutionStyle != null ? declaration.ExecutionStyle.Clone() : null,
@@ -150,9 +153,11 @@ namespace BDP.Core.Expressions
                 AbilityDefName = declaration.AbilityDefName,
                 HediffDefName = declaration.HediffDefName,
                 HediffApplyModeKey = declaration.HediffApplyModeKey,
-                PassiveKey = declaration.PassiveKey,
+                HediffControlMode = declaration.HediffControlMode,
+                PassiveIdentityKey = declaration.PassiveIdentityKey,
                 ExposedData = declaration.ExposedData,
                 RangedModules = declaration.RangedModules != null ? CloneRangedModules(declaration.RangedModules) : new List<RangedModuleMountConfig>(),
+                HitPartPolicy = CloneHitPartPolicy(declaration.HitPartPolicy),
                 RangedModuleAugmentations = declaration.RangedModuleAugmentations != null
                     ? CloneRangedModuleAugmentations(declaration.RangedModuleAugmentations)
                     : new List<RangedModuleAugmentationConfig>(),
@@ -260,13 +265,14 @@ namespace BDP.Core.Expressions
             return new ExpressionEntrySnapshot
             {
                 Id = declaration.Id,
-                ResultKind = declaration.ResultKind,
+                OutputChannel = declaration.OutputChannel,
                 WeaponMode = declaration.WeaponMode,
                 DisplayLabel = declaration.DisplayLabel,
                 ManualEntryIconTexPath = declaration.ManualEntryIconTexPath,
                 VisualPresetDefName = declaration.VisualPresetDefName,
                 VisualGraphicOverrideDefName = declaration.VisualGraphicOverrideDefName,
                 CompositeVisualPresetDefName = declaration.CompositeVisualPresetDefName,
+                ComboAttackVisualPresetDefName = declaration.ComboAttackVisualPresetDefName,
                 ForceSuppressHostEquipment = declaration.ForceSuppressHostEquipment,
                 VisualPriority = declaration.VisualPriority,
                 RoleKey = declaration.RoleKey,
@@ -277,7 +283,8 @@ namespace BDP.Core.Expressions
                 AbilityDefName = declaration.AbilityDefName,
                 HediffDefName = declaration.HediffDefName,
                 HediffApplyModeKey = declaration.HediffApplyModeKey,
-                PassiveKey = declaration.PassiveKey
+                HediffControlMode = declaration.HediffControlMode,
+                PassiveIdentityKey = declaration.PassiveIdentityKey
             };
         }
 
@@ -426,7 +433,9 @@ namespace BDP.Core.Expressions
         /// </summary>
         private static ISemanticContext BuildSemanticContext(
             Pawn pawn,
+            ITriggerSlotState slot,
             ExpressionSourceDeclaration declaration,
+            string sourceVariantKey,
             string sourceVariantLabel)
         {
             string displayLabel = declaration != null ? declaration.DisplayLabel : null;
@@ -436,13 +445,43 @@ namespace BDP.Core.Expressions
                 DisplayLabel = MergeSourceVariantSuffix(displayLabel, sourceVariantLabel),
                 SourceKind = declaration != null ? declaration.SemanticSourceKind : SemanticSourceKind.Unknown,
                 ReasonKey = declaration != null ? declaration.Id : null,
-                Instigator = pawn
+                Instigator = pawn,
+                // 日志和其它延迟展示消费身份，不读取之后的槽位或保存已翻译整句。
+                MutableExtraData = new Dictionary<string, string>
+                {
+                    [BattleLogEntryFactoryAccess.SourceTypeKey] = typeof(ThingDef).FullName,
+                    [BattleLogEntryFactoryAccess.SourceDefKey] = slot?.LoadedChip?.def?.defName,
+                    [BattleLogEntryFactoryAccess.SourceEntryKey] = declaration?.Id,
+                    [BattleLogEntryFactoryAccess.SourceVariantKey] = sourceVariantKey,
+                    [BattleLogEntryFactoryAccess.SourceLabelKey] = ResolveSourceLabelKey(slot?.LoadedChip, declaration?.Id),
+                    // 只搬运实例提供的中性来源键；Core不解释功能模板或制造条目前缀。
+                    [BattleLogEntryFactoryAccess.SourceOriginKeys] = string.Join("|",
+                        ChipInstanceSurfaceAccess.ReadSourceReference(slot?.LoadedChip).OrderedSourceKeys)
+                }
             };
+        }
+
+        /// <summary>从原始动态或静态声明复制语言键，不改变现有契约名称解析。</summary>
+        private static string ResolveSourceLabelKey(Thing chip, string entryId)
+        {
+            ChipDefinitionConfig dynamicDefinition;
+            ChipInstanceSurfaceAccess.TryGetDefinition(chip, out dynamicDefinition);
+            ChipExpressionConfig config = dynamicDefinition?.Expression
+                ?? chip?.def?.GetModExtension<ChipDefinitionConfig>()?.Expression
+                ?? chip?.def?.GetModExtension<ChipExpressionConfig>();
+            if (config?.Entries != null)
+            {
+                for (int index = 0; index < config.Entries.Count; index++)
+                {
+                    if (config.Entries[index]?.Id == entryId) return config.Entries[index].DisplayLabelKey;
+                }
+            }
+            return null;
         }
 
         /// <summary>
         /// 把来源变体标签合并到显示名后缀。
-        /// 格式与 UI 层保持一致："显示名[变体名]"，如"小行星[手枪型]"。
+        /// 格式与 UI 层保持一致："显示名·变体名"，如"小行星·左轮手枪构型"。
         /// 无来源变体时直接返回原始显示名。
         /// </summary>
         private static string MergeSourceVariantSuffix(
@@ -455,7 +494,7 @@ namespace BDP.Core.Expressions
                 return displayLabel;
             }
 
-            return displayLabel + "[" + sourceVariantLabel + "]";
+            return displayLabel + "BDP_SourceVariant_NameSeparator".Translate() + sourceVariantLabel;
         }
 
         /// <summary>
@@ -467,7 +506,7 @@ namespace BDP.Core.Expressions
         {
             if (slot == null
                 || declaration == null
-                || declaration.ResultKind != ExpressionResultKind.Verb)
+                || declaration.OutputChannel != ExpressionOutputChannel.Verb)
             {
                 return ExpressionVerbHostSlot.None;
             }
@@ -482,6 +521,11 @@ namespace BDP.Core.Expressions
                     return declaration.VerbAttackRole == VerbAttackRole.Secondary
                         ? ExpressionVerbHostSlot.SubSecondaryVerb
                         : ExpressionVerbHostSlot.SubPrimaryVerb;
+                case TriggerSide.Special:
+                    // 特殊槽只允许一条主武器入口，不为 Secondary 建立宿主身份。
+                    return declaration.VerbAttackRole == VerbAttackRole.Primary
+                        ? ExpressionVerbHostSlot.SpecialPrimaryVerb
+                        : ExpressionVerbHostSlot.None;
                 default:
                     return ExpressionVerbHostSlot.None;
             }
@@ -498,7 +542,7 @@ namespace BDP.Core.Expressions
             if (slot == null
                 || slot.LoadedChip == null
                 || declaration == null
-                || declaration.ResultKind != ExpressionResultKind.Verb
+                || declaration.OutputChannel != ExpressionOutputChannel.Verb
                 || hostSlot == ExpressionVerbHostSlot.None)
             {
                 return null;
@@ -570,6 +614,14 @@ namespace BDP.Core.Expressions
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// 复制可选命中部位策略快照。
+        /// </summary>
+        private static HitPartPolicyConfig CloneHitPartPolicy(HitPartPolicyConfig policy)
+        {
+            return policy != null ? policy.Clone() : null;
         }
 
         /// <summary>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 远程攻击实际发射的投射物定义引用；显示名称由该定义的当前语言译名提供。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_Projectile</defName><label>投射物</label><description>远程攻击实际发射的投射物及其本地化名称。</description><ValueKind>Enum</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+
+  <!-- 一次独立攻击事件造成的主要伤害。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_DamageAmount</defName><label>单次伤害</label><description>一次独立攻击事件造成的主要直接伤害。</description><ValueKind>Number</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 主要直接攻击结果使用的伤害种类。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_DamageType</defName><label>伤害类型</label><description>主要直接命中造成的伤害种类。</description><ValueKind>Enum</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 攻击结果对护甲的穿透比例。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_ArmorPenetration</defName><label>护甲穿透</label><description>攻击对目标护甲的穿透比例。</description><ValueKind>Percentage</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 一次完整攻击行动中执行的独立攻击事件数。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_AttackBurstCount</defName><label>攻击次数</label><description>一次完整攻击行动中执行的独立攻击事件数量。</description><ValueKind>Integer</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 顺序攻击事件之间的有效等待时间。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_AttackBurstInterval</defName><label>攻击间隔</label><description>一轮攻击中相邻两个顺序攻击事件之间的等待时间。</description><ValueKind>Duration</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 多次远程攻击事件按顺序或同时发生。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_RangedShotRhythm</defName><label>射击节奏</label><description>多次远程攻击事件采用逐射或齐射的方式。</description><ValueKind>Enum</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 原版贴身距离精度因子。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_AccuracyTouch</defName><label>贴身精度</label><description>攻击定义在原版贴身距离档的精度因子。</description><ValueKind>Percentage</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 原版近距离精度因子。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_AccuracyShort</defName><label>近距精度</label><description>攻击定义在原版近距离档的精度因子。</description><ValueKind>Percentage</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 原版中距离精度因子。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_AccuracyMedium</defName><label>中距精度</label><description>攻击定义在原版中距离档的精度因子。</description><ValueKind>Percentage</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 原版远距离精度因子。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_AccuracyLong</defName><label>远距精度</label><description>攻击定义在原版远距离档的精度因子。</description><ValueKind>Percentage</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 投射物在地图上的实际飞行速度。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_ProjectileSpeed</defName><label>投射物速度</label><description>投射物在地图上的飞行速度。</description><ValueKind>Number</ValueKind><UnitKey>BDP_Unit_DistancePerSecond</UnitKey></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 投射物飞行过程中的可扩展稳定特征列表。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_ProjectileFlightFeatures</defName><label>飞行特征</label><description>投射物飞行过程中值得说明的特征键列表。</description><ValueKind>List</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 投射物命中角色时造成短暂踉跄或硬直的能力。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_StoppingPower</defName><label>停止力</label><description>投射物命中角色时造成短暂踉跄或硬直的能力。</description><ValueKind>Number</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+
+</Defs>

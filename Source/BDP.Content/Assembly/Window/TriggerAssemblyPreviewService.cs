@@ -17,26 +17,10 @@ namespace BDP.Content.Assembly
         /// </summary>
         internal TriggerAssemblyPreviewSnapshot BuildSnapshot(
             Pawn pawn,
-            ITriggerLoadoutReader reader,
-            bool hasPreviewSlot,
-            TriggerSide previewSide,
-            int previewIndex,
-            Thing previewChip)
+            ITriggerLoadoutReader reader)
         {
             ITrionReader trionReader = TrionSurfaceAccess.ResolveReader(pawn);
             float loadedReserved = CalculateLoadedCapacity(reader);
-            float previewReserved = loadedReserved;
-
-            if (hasPreviewSlot && previewChip != null)
-            {
-                Thing oldChip = FindSlot(reader, previewSide, previewIndex)?.LoadedChip;
-                if (oldChip != null && !ReferenceEquals(oldChip, previewChip))
-                {
-                    previewReserved -= ResolveCapacityCost(oldChip);
-                }
-
-                previewReserved += ResolveCapacityCost(previewChip);
-            }
 
             return new TriggerAssemblyPreviewSnapshot
             {
@@ -46,8 +30,7 @@ namespace BDP.Content.Assembly
                 Reserved = loadedReserved,
                 Available = trionReader != null ? trionReader.Available : 0f,
                 TotalDrainPerSecond = trionReader != null ? trionReader.TotalDrainPerSecond : 0f,
-                PreviewReserved = previewReserved,
-                ReservedDelta = previewReserved - loadedReserved
+                PreviewReserved = loadedReserved
             };
         }
 
@@ -75,27 +58,6 @@ namespace BDP.Content.Assembly
             }
 
             return total;
-        }
-
-        /// <summary>
-        /// 查找指定槽位。
-        /// </summary>
-        private static ITriggerSlotState FindSlot(ITriggerLoadoutReader reader, TriggerSide side, int index)
-        {
-            if (reader == null)
-            {
-                return null;
-            }
-
-            foreach (ITriggerSlotState slot in reader.GetAllSlots())
-            {
-                if (slot != null && slot.Side == side && slot.Index == index)
-                {
-                    return slot;
-                }
-            }
-
-            return null;
         }
 
         /// <summary>
@@ -144,13 +106,9 @@ namespace BDP.Content.Assembly
         internal float TotalDrainPerSecond;
 
         /// <summary>
-        /// 预览操作后的估算占用。
+        /// 当前实际已装芯片累计预占用；保留快照字段供现有资源条读取。
         /// </summary>
         internal float PreviewReserved;
 
-        /// <summary>
-        /// 预览占用变化。
-        /// </summary>
-        internal float ReservedDelta;
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using BDP.Core.AttackExecution;
 using UnityEngine;
 
 namespace BDP.Core.Trigger.Runtime
@@ -54,6 +55,24 @@ namespace BDP.Core.Trigger.Runtime
         {
             publishedState = TriggerVisualRuntimeState.CreateEmpty(projectionVersion);
             expressionVisualImpulses.Clear();
+        }
+
+        /// <summary>
+        /// 条件刷新后恢复已经续接的同一攻击执行焦点，装备采样和旧冲量仍保持清空。
+        /// 调用方必须先完成正式宿主的攻击一致性判断，不能凭结果编号自行恢复。
+        /// </summary>
+        internal void RestoreContinuedExecutionState(TriggerVisualRuntimeState previous,
+            AttackSessionToken currentToken, int previousVersion)
+        {
+            if (previous == null || currentToken == null || !currentToken.IsValid || publishedState == null
+                || previous.ProjectionVersion != previousVersion
+                || publishedState.ProjectionVersion != currentToken.ProjectionVersion
+                || string.IsNullOrWhiteSpace(previous.AttackInstanceId)
+                || previous.AttackInstanceId != currentToken.AttackInstanceId
+                || previous.ActiveHostResultId != currentToken.ResultId) return;
+            PublishExecutionState(currentToken.ProjectionVersion, currentToken.AttackInstanceId,
+                previous.ActiveHostResultId, previous.ActiveAttackParticipantResultIds,
+                previous.ActiveCastResultIds, previous.ActiveEmitSourceResultIds);
         }
 
         /// <summary>为指定正式表达结果发布一次短暂视觉冲量。</summary>

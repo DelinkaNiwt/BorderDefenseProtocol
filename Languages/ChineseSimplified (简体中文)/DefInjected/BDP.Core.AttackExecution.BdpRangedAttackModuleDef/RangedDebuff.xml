@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 统一远程减益宿主名称，具体效果由独立效果包提供。 -->
+  <BDP_RangedDebuffModule.label>远程减益</BDP_RangedDebuffModule.label>
+</LanguageData>

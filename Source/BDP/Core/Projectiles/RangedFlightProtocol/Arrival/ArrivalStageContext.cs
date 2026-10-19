@@ -14,8 +14,10 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Arrival
     /// </summary>
     public readonly struct ArrivalStageContext
     {
-        internal ArrivalStageContext(Projectile projectile, ProjectileInitPlan initPlan, FlightRecord flight, IRangedAttackModuleRuntime currentRuntime, RangedAttackModuleSession moduleSession)
+        internal ArrivalStageContext(Projectile projectile, ProjectileInitPlan initPlan, FlightRecord flight, IRangedAttackModuleRuntime currentRuntime, RangedAttackModuleSession moduleSession, bool previousExclusiveFlightControl = false)
         {
+            PreviousExclusiveFlightControl = previousExclusiveFlightControl;
+            InitialExclusiveFlightControl = initPlan != null && initPlan.InitialExclusiveFlightControl;
             Projectile = projectile;
             InitPlan = initPlan;
             Flight = flight;
@@ -34,6 +36,7 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Arrival
             ContinueFlight = flight != null && flight.ContinueFlight;
             AttackContextSnapshot = initPlan != null ? initPlan.AttackContextSnapshot : null;
             AccuracySnapshot = initPlan != null ? initPlan.AccuracySnapshot : null;
+            LaunchResolution = initPlan != null ? initPlan.LaunchResolution : null;
             SemanticContext = initPlan != null ? initPlan.SemanticContext : null;
         }
 
@@ -41,6 +44,12 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Arrival
         /// 当前到达阶段所属投射物宿主。
         /// </summary>
         public Projectile Projectile { get; }
+
+        /// <summary>本次到达是否已有前序模块独占后续导航。</summary>
+        public bool PreviousExclusiveFlightControl { get; }
+
+        /// <summary>初始化曾由前序模块独占，可据此延后首次接管。</summary>
+        public bool InitialExclusiveFlightControl { get; }
 
         internal ProjectileInitPlan InitPlan { get; }
 
@@ -112,6 +121,11 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Arrival
 
         /// <summary>当前投射物在正式开火时冻结的原版精度事实。</summary>
         public ProjectileAccuracySnapshot AccuracySnapshot { get; }
+
+        /// <summary>
+        /// 当前投射物在正式发射时冻结的首发分支与路线事实。
+        /// </summary>
+        public ProjectileLaunchResolution LaunchResolution { get; }
 
         /// <summary>
         /// 当前投射物继承的统一语义上下文。

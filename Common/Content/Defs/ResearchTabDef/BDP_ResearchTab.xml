@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- BDP的原版研究分页；不改变原版研究界面。 -->
+  <ResearchTabDef>
+    <defName>BDP_ResearchTab</defName>
+    <label>BDP_ResearchTab</label>
+  </ResearchTabDef>
+</Defs>

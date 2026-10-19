@@ -272,7 +272,10 @@ namespace BDP.Core.Trigger.Visual.Diagnostics
                 Entry = residentEntry,
                 Preset = preset,
                 GraphicOverridePreset = ResolveGraphicOverridePreset(residentEntry),
-                RuntimeState = runtimeState,
+                IsMatchingAttackStanceActive = WeaponVisualStageResolver.IsMatchingAttackStanceActive(
+                    pawn,
+                    triggerBody.PublishedCombatProjection,
+                    runtimeState),
                 WeaponStageSnapshot = weaponStageSnapshot,
                 PoseSample = runtimeState != null ? runtimeState.EquipmentPoseSample : null,
                 SourceThing = sourceThing,

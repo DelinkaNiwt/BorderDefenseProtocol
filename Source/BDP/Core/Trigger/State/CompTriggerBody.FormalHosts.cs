@@ -31,7 +31,8 @@ namespace BDP.Core.Trigger
             BdpFormalVerbHostSlot.DualPrimary,
             BdpFormalVerbHostSlot.DualSecondary,
             BdpFormalVerbHostSlot.ComboPrimary,
-            BdpFormalVerbHostSlot.ComboSecondary
+            BdpFormalVerbHostSlot.ComboSecondary,
+            BdpFormalVerbHostSlot.SpecialPrimary
         };
 
         /// <summary>
@@ -78,6 +79,13 @@ namespace BDP.Core.Trigger
         /// </summary>
         private static VerbProperties BuildFormalHostVerbProps(BdpFormalVerbHostSlot slot, WeaponExpressionMode weaponMode)
         {
+            if (weaponMode == WeaponExpressionMode.Melee)
+            {
+                VerbProperties meleeFallback = ResolvedVerbSpecFactory.CreateMeleeFallbackVerbProps(DamageDefOf.Blunt);
+                meleeFallback.label = "BDP Formal Host " + slot + " " + weaponMode;
+                return meleeFallback;
+            }
+
             VerbProperties verbProps = new VerbProperties
             {
                 verbClass = weaponMode == WeaponExpressionMode.Melee
@@ -88,12 +96,6 @@ namespace BDP.Core.Trigger
                 range = weaponMode == WeaponExpressionMode.Melee ? 1.42f : 90f,
                 warmupTime = 0f
             };
-
-            if (weaponMode == WeaponExpressionMode.Melee)
-            {
-                verbProps.meleeDamageDef = DamageDefOf.Blunt;
-                verbProps.defaultCooldownTime = 0f;
-            }
 
             return verbProps;
         }

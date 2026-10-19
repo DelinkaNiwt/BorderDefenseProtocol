@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 皇室在入口任务中携带的核心材料；原版分析保留实物，之后用于建造中继核心。 -->
+  <ThingDef ParentName="ResourceBase">
+    <!-- 正式材料标识。 -->
+    <defName>BDP_TrionDriveCore</defName>
+    <!-- 皇室携带驱动核心的原生科技档：超凡时代。 -->
+    <techLevel>Archotech</techLevel>
+    <!-- 玩家文本由简体中文语言包注入。 -->
+    <label>BDP_TrionDriveCore</label>
+    <!-- 物品与分析说明由语言包注入。 -->
+    <description>BDP_TrionDriveCore.description</description>
+    <!-- 暂用已依赖的皇权 DLC 原版图标占位，水晶球外观留到美术制作。 -->
+    <graphicData>
+      <texPath>Things/Item/Special/PsylinkNeuroformer</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <!-- 暂按独立核心物品处理；本轮不新增配方或贸易供货配置。 -->
+    <stackLimit>1</stackLimit>
+    <!-- 首版物品属性可在定义中重新平衡。 -->
+    <statBases>
+      <Mass>0.5</Mass>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Flammability>0</Flammability>
+    </statBases>
+    <!-- 使用原版分析解锁研究：普通殖民者分析一次，完成后保留材料。 -->
+    <comps>
+      <li Class="CompProperties_CompAnalyzableUnlockResearch">
+        <analysisID>204731601</analysisID>
+        <requiresMechanitor>false</requiresMechanitor>
+        <analysisRequiredRange>1</analysisRequiredRange>
+        <destroyedOnAnalyzed>false</destroyedOnAnalyzed>
+        <analysisDurationHours>0.5</analysisDurationHours>
+        <allowRepeatAnalysis>false</allowRepeatAnalysis>
+        <completedLetterLabel>BDP_CoreAnalysis_CompletedLabel</completedLetterLabel>
+        <completedLetter>BDP_CoreAnalysis_Completed</completedLetter>
+        <completedLetterDef>PositiveEvent</completedLetterDef>
+        <activateLabelString>BDP_CoreAnalysis_ActivateLabel</activateLabelString>
+        <activateDescString>BDP_CoreAnalysis_ActivateDesc</activateDescString>
+        <jobString>BDP_CoreAnalysis_Job</jobString>
+        <guiLabelString>BDP_CoreAnalysis_Gui</guiLabelString>
+        <inspectString>BDP_CoreAnalysis_Inspect</inspectString>
+        <activateTexPath>UI/Icons/Study</activateTexPath>
+      </li>
+    </comps>
+  </ThingDef>
+</Defs>

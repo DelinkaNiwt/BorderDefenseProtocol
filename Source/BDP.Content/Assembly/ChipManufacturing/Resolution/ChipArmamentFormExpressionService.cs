@@ -15,8 +15,8 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
     /// 将 ChipArmamentFormDef 的覆盖层应用到武装表达条目上。
     ///
     /// 规则：
-    /// 1. 仅对 Kind=PrimaryVerb|SecondaryVerb 且 WeaponMode=Melee|Ranged 的条目生效。
-    /// 2. 标量字段：武装型声明了就使用武装型值，未声明则保留动作原值。
+    /// 1. 仅对 EntryType=PrimaryVerb|SecondaryVerb 且 WeaponMode=Melee|Ranged 的条目生效。
+    /// 2. 标量字段：武装型声明了就使用武装型值，未声明则保留表达条目原值。
     /// 3. 列表字段：按显式的 MergeStrategy 决定 Append 或 Replace。
     /// 4. 始终返回新构造的对象，不修改原始数据。
     /// </summary>
@@ -64,8 +64,8 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
         /// </summary>
         private static bool ShouldApplyArmamentFormOverride(ChipExpressionEntryConfig entry)
         {
-            if (entry.Kind != ChipExpressionEntryKindConfig.PrimaryVerb
-                && entry.Kind != ChipExpressionEntryKindConfig.SecondaryVerb)
+            if (entry.EntryType != ChipExpressionEntryTypeConfig.PrimaryVerb
+                && entry.EntryType != ChipExpressionEntryTypeConfig.SecondaryVerb)
             {
                 return false;
             }
@@ -76,13 +76,13 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
 
         /// <summary>
         /// 判断组合结果条目是否具备接受武装构型修正的资格。
-        /// 组合结果只允许近战/远程主动作条目进入该业务修正入口。
+        /// 组合结果只允许近战/远程主表达条目进入该业务修正入口。
         /// </summary>
         internal static bool ShouldApplyArmamentFormOverride(ComboExpressionEntryConfig entry)
         {
             if (entry == null
-                || (entry.Kind != ChipExpressionEntryKindConfig.PrimaryVerb
-                    && entry.Kind != ChipExpressionEntryKindConfig.SecondaryVerb))
+                || (entry.EntryType != ChipExpressionEntryTypeConfig.PrimaryVerb
+                    && entry.EntryType != ChipExpressionEntryTypeConfig.SecondaryVerb))
             {
                 return false;
             }
@@ -225,6 +225,11 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
             if (ov.compositeVisualPresetDefName != null)
             {
                 entry.Presentation.CompositeVisualPresetDefName = ov.compositeVisualPresetDefName;
+            }
+
+            if (ov.comboAttackVisualPresetDefName != null)
+            {
+                entry.Presentation.ComboAttackVisualPresetDefName = ov.comboAttackVisualPresetDefName;
             }
 
             if (ov.forceSuppressHostEquipment.HasValue)
@@ -470,6 +475,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
             if (ov.visualPresetDefName == null
                 && ov.visualGraphicOverrideDefName == null
                 && ov.compositeVisualPresetDefName == null
+                && ov.comboAttackVisualPresetDefName == null
                 && !ov.forceSuppressHostEquipment.HasValue
                 && !ov.visualPriority.HasValue
                 && ov.manualEntryIconTexPath == null)
@@ -485,6 +491,12 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
             if (ov.visualPresetDefName != null) entry.Presentation.VisualPresetDefName = ov.visualPresetDefName;
             if (ov.visualGraphicOverrideDefName != null) entry.Presentation.VisualGraphicOverrideDefName = ov.visualGraphicOverrideDefName;
             if (ov.compositeVisualPresetDefName != null) entry.Presentation.CompositeVisualPresetDefName = ov.compositeVisualPresetDefName;
+            // 组合技定义可以声明自己的专用阶段预设；武装构型只提供缺省值，不能覆盖组合技显式意图。
+            if (ov.comboAttackVisualPresetDefName != null
+                && string.IsNullOrWhiteSpace(entry.Presentation.ComboAttackVisualPresetDefName))
+            {
+                entry.Presentation.ComboAttackVisualPresetDefName = ov.comboAttackVisualPresetDefName;
+            }
             if (ov.forceSuppressHostEquipment.HasValue) entry.Presentation.ForceSuppressHostEquipment = ov.forceSuppressHostEquipment.Value;
             if (ov.visualPriority.HasValue) entry.Presentation.VisualPriority = ov.visualPriority.Value;
             if (ov.manualEntryIconTexPath != null) entry.Presentation.ManualEntryIconTexPath = ov.manualEntryIconTexPath;
@@ -609,15 +621,19 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
                     ? new List<string>(source.ToolLabelKeys)
                     : null,
                 RoleKey = source.RoleKey,
-                Kind = source.Kind,
+                EntryType = source.EntryType,
                 RelationKind = source.RelationKind,
                 ParentEntryId = source.ParentEntryId,
                 WeaponMode = source.WeaponMode,
                 DirectTargetLineOfSight = source.DirectTargetLineOfSight,
+                DeclaredPermissionKeys = source.DeclaredPermissionKeys != null
+                    ? new List<string>(source.DeclaredPermissionKeys)
+                    : null,
                 AbilityDefName = source.AbilityDefName,
                 HediffDefName = source.HediffDefName,
                 HediffApplyModeKey = source.HediffApplyModeKey,
-                PassiveKey = source.PassiveKey,
+                HediffControlMode = source.HediffControlMode,
+                PassiveIdentityKey = source.PassiveIdentityKey,
                 SemanticSourceKind = source.SemanticSourceKind
             };
 
@@ -646,6 +662,12 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
             if (source.RangedModules != null)
             {
                 clone.RangedModules = CloneModuleList(source.RangedModules);
+            }
+
+            // HitPartPolicy — 深拷贝可选近战命中部位策略
+            if (source.HitPartPolicy != null)
+            {
+                clone.HitPartPolicy = source.HitPartPolicy.Clone();
             }
 
             // RangedModuleAugmentations — 深拷贝开放式远程增强声明
@@ -727,6 +749,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
                 VisualPresetDefName = source.VisualPresetDefName,
                 VisualGraphicOverrideDefName = source.VisualGraphicOverrideDefName,
                 CompositeVisualPresetDefName = source.CompositeVisualPresetDefName,
+                ComboAttackVisualPresetDefName = source.ComboAttackVisualPresetDefName,
                 ForceSuppressHostEquipment = source.ForceSuppressHostEquipment,
                 VisualPriority = source.VisualPriority
             };
@@ -757,7 +780,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.Resolution
 
         /// <summary>
         /// 深拷贝开放式远程增强声明列表。
-        /// 制造成品芯片必须保留被动芯片发布的增强，不能只复制自身远程模块。
+        /// 制造成品芯片必须保留 Passive 表达通道发布的增强，不能只复制自身远程模块。
         /// </summary>
         private static List<RangedModuleAugmentationConfig> CloneRangedModuleAugmentations(
             List<RangedModuleAugmentationConfig> source)

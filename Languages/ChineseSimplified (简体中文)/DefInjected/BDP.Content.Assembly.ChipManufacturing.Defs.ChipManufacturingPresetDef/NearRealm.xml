@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 小兵短剑制造预设名称和说明。 -->
+  <BDP_ChipFunction_SoldierShortSword.label>小兵短剑</BDP_ChipFunction_SoldierShortSword.label>
+  <BDP_ChipFunction_SoldierShortSword.description>小型近战芯片，采用钢铁匕首的三种工具：握柄钝击、刃部切割和尖端刺击。每次攻击连续命中两次，单次威力减半。占用 20 Trion，启动与停用均无延迟。</BDP_ChipFunction_SoldierShortSword.description>
+
+  <!-- 小兵弹丸制造预设名称和说明。 -->
+  <BDP_ChipFunction_SoldierBullet.label>小兵弹丸</BDP_ChipFunction_SoldierBullet.label>
+  <BDP_ChipFunction_SoldierBullet.description>小型远程芯片，沿用自动手枪的射程、预热、冷却和精度，使用 BDP 普通弹（伤害 13、护甲穿透 0.10、停止力 2、速度 120）；每发消耗 2 Trion。占用 20 Trion，启动与停用均无延迟。</BDP_ChipFunction_SoldierBullet.description>
+
+  <!-- 小兵护盾制造预设名称和说明。 -->
+  <BDP_ChipFunction_SoldierShield.label>小兵护盾</BDP_ChipFunction_SoldierShield.label>
+  <BDP_ChipFunction_SoldierShield.description>特殊槽专用的低性能护盾，正面覆盖 180 度，格挡率 50%，耐久 120，每秒恢复 12；完全破盾后等待 10 秒再恢复。占用 20 Trion，启动与停用均无延迟。</BDP_ChipFunction_SoldierShield.description>
+
+  <!-- 小兵短剑三个近战工具及小兵弹丸的攻击显示名称。 -->
+  <BDP_ChipFunction_SoldierShortSword.config.Expression.Entries.0.tools.0.label>柄部</BDP_ChipFunction_SoldierShortSword.config.Expression.Entries.0.tools.0.label>
+  <BDP_ChipFunction_SoldierShortSword.config.Expression.Entries.0.tools.1.label>刃部</BDP_ChipFunction_SoldierShortSword.config.Expression.Entries.0.tools.1.label>
+  <BDP_ChipFunction_SoldierShortSword.config.Expression.Entries.0.tools.2.label>尖端</BDP_ChipFunction_SoldierShortSword.config.Expression.Entries.0.tools.2.label>
+  <BDP_ChipFunction_SoldierBullet.config.Expression.Entries.0.VerbProps.label>小兵弹丸</BDP_ChipFunction_SoldierBullet.config.Expression.Entries.0.VerbProps.label>
+</LanguageData>

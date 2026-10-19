@@ -28,10 +28,17 @@ namespace BDP.Core.Chips
         }
 
         /// <summary>
-        /// 按 XML 顺序检查全部条件，并一次收集所有失败项。
+        /// 按 XML 顺序检查条件；显式宿主豁免统一覆盖首次启用、交互读取和持续复查。
         /// </summary>
         public PawnRequirementCheckResult Evaluate(Pawn pawn, Thing chip)
         {
+            // 豁免只属于芯片激活，不修改芯片声明或组合等通用角色条件。
+            if (pawn?.AllComps != null)
+            {
+                foreach (ThingComp comp in pawn.AllComps)
+                    if (comp is IChipActivationRequirementExemption host && host.IgnoresChipActivationRequirements)
+                        return PawnRequirementEvaluator.Instance.Evaluate(pawn, null);
+            }
             return PawnRequirementEvaluator.Instance.Evaluate(pawn, ResolveRequirements(chip));
         }
 

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 近战攻击中每套独立 Tool 或等价实现的参数组。 -->
+  <BDP.Core.Information.ChipFeatureGroupDef>
+    <defName>BDP_FeatureGroup_MeleeAttackMethod</defName>
+    <label>攻击方式</label>
+    <description>一套独立近战攻击方式及其关联参数。</description>
+    <DisplayOrder>100</DisplayOrder>
+    <Properties>
+      <!-- 当前方式的有效攻击距离。 -->
+      <li><Property>BDP_Property_CastRange</Property><Order>100</Order></li>
+      <!-- 当前方式发动前的预热时间。 -->
+      <li><Property>BDP_Property_WarmupDuration</Property><Order>200</Order></li>
+      <!-- 当前方式完成后的行动冷却。 -->
+      <li><Property>BDP_Property_ActionCooldownDuration</Property><Order>210</Order></li>
+      <!-- 当前近战方式每次发动的 Trion 消耗。 -->
+      <li><Property>BDP_Property_UseCost</Property><Order>250</Order></li>
+      <!-- 当前近战方式效果维持期间按来源数量变化的 Trion 消耗。 -->
+      <li><Property>BDP_Property_SustainCost</Property><Order>260</Order></li>
+      <!-- 每次独立攻击事件造成的主要伤害。 -->
+      <li><Property>BDP_Property_DamageAmount</Property><Order>300</Order></li>
+      <!-- 主要直接命中的伤害类型。 -->
+      <li><Property>BDP_Property_DamageType</Property><Order>310</Order></li>
+      <!-- 当前方式的有效护甲穿透。 -->
+      <li><Property>BDP_Property_ArmorPenetration</Property><Order>320</Order></li>
+      <!-- 一轮攻击中的独立攻击事件次数。 -->
+      <li><Property>BDP_Property_AttackBurstCount</Property><Order>400</Order></li>
+      <!-- 顺序攻击事件之间的等待时间。 -->
+      <li><Property>BDP_Property_AttackBurstInterval</Property><Order>410</Order></li>
+    </Properties>
+    <Subgroups>
+      <!-- 该攻击方式独有的次要结果。 -->
+      <li><Group>BDP_FeatureGroup_ExtraEffect</Group><Order>100</Order></li>
+    </Subgroups>
+  </BDP.Core.Information.ChipFeatureGroupDef>
+
+  <!-- 每种可重复机动方式保留自己的空间、时间与目标参数。 -->
+  <BDP.Core.Information.ChipFeatureGroupDef>
+    <defName>BDP_FeatureGroup_MovementMethod</defName>
+    <label>机动方式</label>
+    <description>一套独立机动方式及其适用参数。</description>
+    <DisplayOrder>300</DisplayOrder>
+    <Properties>
+      <!-- 该方式的最大有效距离。 -->
+      <li><Property>BDP_Property_CastRange</Property><Order>100</Order></li>
+      <!-- 该方式的最小有效距离。 -->
+      <li><Property>BDP_Property_MinimumCastRange</Property><Order>110</Order></li>
+      <!-- 目标点周围的实际作用半径。 -->
+      <li><Property>BDP_Property_EffectRadius</Property><Order>120</Order></li>
+      <!-- 一次作用允许命中的目标数量上限。 -->
+      <li><Property>BDP_Property_MaxTargets</Property><Order>130</Order></li>
+      <!-- 玩家能够选择的目标种类。 -->
+      <li><Property>BDP_Property_TargetType</Property><Order>140</Order></li>
+      <!-- 目标选择与发动是否必须满足直视条件。 -->
+      <li><Property>BDP_Property_RequiresLineOfSight</Property><Order>150</Order></li>
+      <!-- 开始移动到产生结果前的等待时间。 -->
+      <li><Property>BDP_Property_WarmupDuration</Property><Order>200</Order></li>
+      <!-- 动作完成后的行动冷却。 -->
+      <li><Property>BDP_Property_ActionCooldownDuration</Property><Order>210</Order></li>
+      <!-- 机动产生的整体效果固定有效时间。 -->
+      <li><Property>BDP_Property_EffectDuration</Property><Order>300</Order></li>
+    </Properties>
+    <Subgroups>
+      <!-- 该机动方式自身产生的次要结果。 -->
+      <li><Group>BDP_FeatureGroup_ExtraEffect</Group><Order>100</Order></li>
+    </Subgroups>
+  </BDP.Core.Information.ChipFeatureGroupDef>
+
+  <!-- 所有功能可复用的一层次要结果结构；具体实例以语言键命名。 -->
+  <BDP.Core.Information.ChipFeatureGroupDef>
+    <defName>BDP_FeatureGroup_ExtraEffect</defName>
+    <label>额外效果</label>
+    <description>依附所属功能或信息组产生的一项次要玩法结果。</description>
+    <DisplayOrder>900</DisplayOrder>
+    <Properties>
+      <!-- 次要结果自身造成的伤害。 -->
+      <li><Property>BDP_Property_DamageAmount</Property><Order>100</Order></li>
+      <!-- 次要结果自身的伤害类型。 -->
+      <li><Property>BDP_Property_DamageType</Property><Order>110</Order></li>
+      <!-- 次要伤害对护甲的穿透程度。 -->
+      <li><Property>BDP_Property_ArmorPenetration</Property><Order>120</Order></li>
+      <!-- 次要结果作用的空间半径。 -->
+      <li><Property>BDP_Property_EffectRadius</Property><Order>200</Order></li>
+      <!-- 次要结果固定持续的时间。 -->
+      <li><Property>BDP_Property_EffectDuration</Property><Order>210</Order></li>
+      <!-- 次要结果允许作用的目标种类。 -->
+      <li><Property>BDP_Property_TargetType</Property><Order>220</Order></li>
+      <!-- 次要结果施加的玩家可读状态名称。 -->
+      <li><Property>BDP_Property_AppliedStatus</Property><Order>300</Order></li>
+      <!-- 次要状态施加时的强度。 -->
+      <li><Property>BDP_Property_StatusStrength</Property><Order>310</Order></li>
+      <!-- 同一状态或效果允许叠加的最大层数。 -->
+      <li><Property>BDP_Property_StackLimit</Property><Order>320</Order></li>
+      <!-- 次要结果对移动速度造成的倍率变化。 -->
+      <li><Property>BDP_Property_MovementSpeedMultiplier</Property><Order>400</Order></li>
+      <!-- 投射物速度相对于宿主攻击的倍率。 -->
+      <li><Property>BDP_Property_ProjectileSpeedMultiplier</Property><Order>410</Order></li>
+    </Properties>
+  </BDP.Core.Information.ChipFeatureGroupDef>
+</Defs>

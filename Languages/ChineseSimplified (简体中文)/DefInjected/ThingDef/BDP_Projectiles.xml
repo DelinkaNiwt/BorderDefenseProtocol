@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 风刃远程斩击投射物的玩家可见名称。 -->
+  <BDP_Projectile_FujinRangedStrike.label>风刃远程斩击弹</BDP_Projectile_FujinRangedStrike.label>
+  <!-- 追踪弹高角变体的中文名称。 -->
+  <BDP_Projectile_Tracking_Overhead.label>追踪弹（高角）</BDP_Projectile_Tracking_Overhead.label>
+</LanguageData>

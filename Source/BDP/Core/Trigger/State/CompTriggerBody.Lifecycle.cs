@@ -4,6 +4,7 @@ using BDP.Support.Diagnostics;
 using BDP.Core.Trigger.Runtime;
 using RimWorld;
 using Verse;
+using Verse.AI.Group;
 
 namespace BDP.Core.Trigger
 {
@@ -13,6 +14,11 @@ namespace BDP.Core.Trigger
     /// </summary>
     public sealed partial class CompTriggerBody
     {
+        /// <summary>
+        /// 最近一次已知的装备 Pawn；用于物品先脱离容器后才进入销毁回调的边界情况。
+        /// </summary>
+        private Pawn lastKnownOwnerPawn;
+
         /// <summary>
         /// 当前装备这把武器的 Pawn。
         /// </summary>
@@ -27,6 +33,14 @@ namespace BDP.Core.Trigger
 
                 return parent?.ParentHolder?.ParentHolder as Pawn;
             }
+        }
+
+        /// <summary>
+        /// 当前触发体所属的中性 TriggerCategoryDef；具体业务通过该读取口判断类别。
+        /// </summary>
+        public TriggerCategoryDef TriggerCategory
+        {
+            get { return Props != null ? Props.triggerCategory : null; }
         }
 
         /// <summary>
@@ -57,8 +71,18 @@ namespace BDP.Core.Trigger
         /// </summary>
         public override void PostPostMake()
         {
+            long lifecycleStart = BdpDiagnostics.BeginTiming();
             base.PostPostMake();
+            TraceLifecycle("post_make_begin", "respawningAfterLoad=false");
+            long fixedLoadoutStart = BdpDiagnostics.BeginTiming();
             TryInstallInitialFixedLoadout();
+            BdpDiagnostics.TraceTiming(
+                "触发体生成 | stage=fixed_loadout",
+                fixedLoadoutStart);
+            TraceSlotBoundary("post_make_complete", "fixedLoadoutApplied=true");
+            BdpDiagnostics.TraceTiming(
+                "触发体生成 | stage=post_make_total | trigger=" + SafeThingId(parent),
+                lifecycleStart);
         }
 
         /// <summary>
@@ -67,16 +91,51 @@ namespace BDP.Core.Trigger
         /// </summary>
         public override void PostSpawnSetup(bool respawningAfterLoad)
         {
+            long lifecycleStart = BdpDiagnostics.BeginTiming();
             base.PostSpawnSetup(respawningAfterLoad);
+            long ensureStateStart = BdpDiagnostics.BeginTiming();
             EnsureInternalState();
             EnsureChipContainer();
             EnsureSlots();
+            BdpDiagnostics.TraceTiming(
+                "触发体生成 | stage=post_spawn_state_ready | respawningAfterLoad=" + respawningAfterLoad,
+                ensureStateStart);
+
+            TraceLifecycle(
+                "post_spawn_setup",
+                "respawningAfterLoad=" + respawningAfterLoad
+                + " | owner=" + SafeThingId(OwnerPawn));
 
             if (OwnerPawn != null)
             {
+                lastKnownOwnerPawn = OwnerPawn;
+                long trionBindingStart = BdpDiagnostics.BeginTiming();
+                TriggerTrionCapacityBindingRegistry.NotifyEquipped(OwnerPawn, this);
                 SyncReservedTrion();
+                BdpDiagnostics.TraceTiming(
+                    "触发体生成 | stage=post_spawn_trion_binding | pawn=" + SafeThingId(OwnerPawn),
+                    trionBindingStart);
+
+                long bodyConstraintStart = BdpDiagnostics.BeginTiming();
                 ApplyBodyConstraintChangeImmediately();
+                BdpDiagnostics.TraceTiming(
+                    "触发体生成 | stage=post_spawn_body_constraint | pawn=" + SafeThingId(OwnerPawn),
+                    bodyConstraintStart);
             }
+
+            BdpDiagnostics.TraceTiming(
+                "触发体生成 | stage=post_spawn_total | trigger=" + SafeThingId(parent),
+                lifecycleStart);
+        }
+
+        /// <summary>
+        /// 触发体被摧毁时通知容量绑定器清理外部合并池。
+        /// </summary>
+        public override void PostDestroy(DestroyMode mode, Map previousMap)
+        {
+            Pawn ownerPawn = OwnerPawn ?? lastKnownOwnerPawn;
+            TriggerTrionCapacityBindingRegistry.NotifyDestroyed(ownerPawn, this);
+            base.PostDestroy(mode, previousMap);
         }
 
         /// <summary>
@@ -157,6 +216,15 @@ namespace BDP.Core.Trigger
         /// </summary>
         public override IEnumerable<Gizmo> CompGetEquippedGizmosExtra()
         {
+            // 原版在筛选装备攻击按钮之前就枚举组件额外按钮，组件必须自行校验控制资格。
+            // 这里只约束玩家操作界面，敌方自动攻击与触发体运行继续使用原有入口。
+            if (OwnerPawn == null || !OwnerPawn.IsPlayerControlled)
+            {
+                yield break;
+            }
+
+            AcceptanceReport allowsDrafting = OwnerPawn.GetLord()?.AllowsDrafting(OwnerPawn) ?? (AcceptanceReport)true;
+
             foreach (Gizmo gizmo in base.CompGetEquippedGizmosExtra())
             {
                 yield return gizmo;
@@ -167,7 +235,7 @@ namespace BDP.Core.Trigger
             // 此处直接操作 pawn.drafter.FireAtWill，与原版行为完全一致。
             if (OwnerPawn?.drafter != null && OwnerPawn.drafter.Drafted && HasActiveRangedChip())
             {
-                yield return new Command_Toggle
+                var fireAtWillCommand = new Command_Toggle
                 {
                     hotKey = KeyBindingDefOf.Misc6,
                     isActive = () => OwnerPawn?.drafter?.FireAtWill ?? false,
@@ -181,10 +249,20 @@ namespace BDP.Core.Trigger
                     defaultDesc = "CommandFireAtWillDesc".Translate(),
                     tutorTag = "FireAtWillToggle"
                 };
+                if (!allowsDrafting)
+                {
+                    fireAtWillCommand.Disable(allowsDrafting.Reason);
+                }
+                yield return fireAtWillCommand;
             }
 
             foreach (Gizmo gizmo in TriggerEquippedGizmoService.BuildEquippedGizmos(LoadoutReaderSurface, LoadoutCommandSurface, OwnerPawn))
             {
+                // 与原版攻击命令一致：任务禁止征召时保留按钮并展示原版禁用原因。
+                if (!allowsDrafting && gizmo is Command command && !command.Disabled)
+                {
+                    command.Disable(allowsDrafting.Reason);
+                }
                 yield return gizmo;
             }
         }

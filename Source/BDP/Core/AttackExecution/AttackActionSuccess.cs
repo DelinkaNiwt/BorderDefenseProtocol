@@ -30,7 +30,8 @@ namespace BDP.Core.AttackExecution
         public Ability Ability { get; private set; }
 
         /// <summary>
-        /// 本次动作是否实际命中；不影响“动作已完成”的通知语义。
+        /// 武器侧报告命中；能力侧表示成功执行，并非其延迟投射物已命中或造成生命伤害。
+        /// 两者都不影响“攻击动作已完成”的通知语义。
         /// </summary>
         public bool IsHit { get; private set; }
 
@@ -65,7 +66,7 @@ namespace BDP.Core.AttackExecution
         }
 
         /// <summary>
-        /// 从 Ability.Activate（能力激活）构造能力攻击通知。
+        /// 从成功能力激活或自有能力发射构造攻击通知，不把延迟伤害结算当成再次施放。
         /// </summary>
         public static AttackActionSuccess FromAbility(Ability ability, Verb verb)
         {
@@ -75,6 +76,13 @@ namespace BDP.Core.AttackExecution
                 verb,
                 ability,
                 true);
+        }
+
+        /// <summary>沿用原版定义的敌对/暴力声明判断攻击能力，不把治疗、位移或自伤代价等同于攻击。</summary>
+        public static bool IsOffensiveAbility(Ability ability)
+        {
+            AbilityDef def = ability?.def;
+            return def != null && (def.hostile || (def.verbProperties != null && def.verbProperties.violent));
         }
     }
 

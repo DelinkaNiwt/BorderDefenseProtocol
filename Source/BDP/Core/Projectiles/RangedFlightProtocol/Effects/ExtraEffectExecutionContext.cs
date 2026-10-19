@@ -13,6 +13,12 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Effects
         /// </summary>
         public Thing TargetThing { get; set; }
 
+        /// <summary>本次实际效果目标的命中部位；没有有效事实时为空。</summary>
+        public BodyPartRecord HitPart { get; set; }
+
+        /// <summary>仅属于当前交互目标的可空原版结果条目。</summary>
+        public LogEntry_DamageResult BattleLogEntry { get; set; }
+
         /// <summary>
         /// 当前实际效果格子。
         /// </summary>

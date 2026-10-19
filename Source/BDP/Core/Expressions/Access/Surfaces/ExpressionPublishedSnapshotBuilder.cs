@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BDP.Core.Information;
 using BDP.Core.Trigger.Runtime;
 
 namespace BDP.Core.Expressions
@@ -13,6 +14,14 @@ namespace BDP.Core.Expressions
         /// 从内部已发布战斗投影构建一份公开快照。
         /// </summary>
         internal static ExpressionPublishedProjectionSnapshot Build(TriggerCombatProjectionState projection)
+        {
+            return Build(projection, null);
+        }
+
+        /// <summary>从已发布战斗投影和同版本表现状态构建公开快照。</summary>
+        internal static ExpressionPublishedProjectionSnapshot Build(
+            TriggerCombatProjectionState projection,
+            IReadOnlyDictionary<string, ChipFeatureResolutionResult> comboFeatureInformations)
         {
             if (projection == null || projection.IsEmpty)
             {
@@ -34,7 +43,7 @@ namespace BDP.Core.Expressions
                 new Dictionary<string, List<ExpressionPublishedResultSnapshot>>();
             Dictionary<string, List<ExpressionPublishedResultSnapshot>> hediffResultsByDefName =
                 new Dictionary<string, List<ExpressionPublishedResultSnapshot>>();
-            Dictionary<string, List<ExpressionPublishedResultSnapshot>> passiveResultsByKey =
+            Dictionary<string, List<ExpressionPublishedResultSnapshot>> passiveResultsByIdentityKey =
                 new Dictionary<string, List<ExpressionPublishedResultSnapshot>>();
 
             IReadOnlyList<FormalExpressionResult> publishedResults = projection.Snapshot != null
@@ -53,7 +62,14 @@ namespace BDP.Core.Expressions
                     compositeReferenceIndex.TryGetValue(
                         result.Id ?? string.Empty,
                         out ExpressionPublishedCompositeReference compositeReference);
-                    ExpressionPublishedResultSnapshot snapshot = BuildResultSnapshot(result, compositeReference);
+                    ChipFeatureResolutionResult featureInformation = null;
+                    comboFeatureInformations?.TryGetValue(
+                        result.Id ?? string.Empty,
+                        out featureInformation);
+                    ExpressionPublishedResultSnapshot snapshot = BuildResultSnapshot(
+                        result,
+                        compositeReference,
+                        featureInformation);
                     allResults.Add(snapshot);
 
                     if (!string.IsNullOrWhiteSpace(snapshot.ResultId) && !resultIndex.ContainsKey(snapshot.ResultId))
@@ -82,7 +98,7 @@ namespace BDP.Core.Expressions
                             break;
                         case ExpressionPublishedChannelKind.Passive:
                             passiveResults.Add(snapshot);
-                            AddToLookup(passiveResultsByKey, snapshot.PassiveKey, snapshot);
+                            AddToLookup(passiveResultsByIdentityKey, snapshot.PassiveIdentityKey, snapshot);
                             break;
                     }
                 }
@@ -104,7 +120,7 @@ namespace BDP.Core.Expressions
                 VerbResultsBySlotKey = FreezeLookup(verbResultsBySlotKey),
                 AbilityResultsByDefName = FreezeLookup(abilityResultsByDefName),
                 HediffResultsByDefName = FreezeLookup(hediffResultsByDefName),
-                PassiveResultsByKey = FreezeLookup(passiveResultsByKey),
+                PassiveResultsByIdentityKey = FreezeLookup(passiveResultsByIdentityKey),
                 CompositeReferenceIndex = compositeReferenceIndex
             };
         }
@@ -114,12 +130,13 @@ namespace BDP.Core.Expressions
         /// </summary>
         private static ExpressionPublishedResultSnapshot BuildResultSnapshot(
             FormalExpressionResult result,
-            ExpressionPublishedCompositeReference compositeReference)
+            ExpressionPublishedCompositeReference compositeReference,
+            ChipFeatureResolutionResult featureInformation)
         {
             return new ExpressionPublishedResultSnapshot
             {
                 ResultId = result.Id,
-                ChannelKind = MapChannel(result.ResultKind),
+                ChannelKind = MapChannel(result.OutputChannel),
                 WeaponModeKey = result.WeaponMode.ToString(),
                 OriginKindKey = result.OriginKind.ToString(),
                 CompositeKindKey = result.CompositeKind.ToString(),
@@ -130,7 +147,8 @@ namespace BDP.Core.Expressions
                 AbilityDefName = result.AbilityDefName,
                 HediffDefName = result.HediffDefName,
                 HediffApplyModeKey = result.HediffApplyModeKey,
-                PassiveKey = result.PassiveKey,
+                HediffControlMode = result.HediffControlMode,
+                PassiveIdentityKey = result.PassiveIdentityKey,
                 RoleKey = result.RoleKey,
                 VerbAttackRole = result.VerbAttackRole,
                 Tags = CloneStrings(result.Tags),
@@ -149,7 +167,8 @@ namespace BDP.Core.Expressions
                 TrionMinimumRequired = result.Trion != null ? result.Trion.MinimumRequired : 0f,
                 TrionSustainCostBySourceCount = CloneSustainCostBySourceCount(
                     result.Trion != null ? result.Trion.SustainCostBySourceCount : null),
-                ExposedData = CloneExposedData(result.ExposedData)
+                ExposedData = CloneExposedData(result.ExposedData),
+                FeatureInformation = featureInformation
             };
         }
 
@@ -339,15 +358,15 @@ namespace BDP.Core.Expressions
         /// <summary>
         /// 把内部结果类别映射成公开通道类别。
         /// </summary>
-        private static ExpressionPublishedChannelKind MapChannel(ExpressionResultKind resultKind)
+        private static ExpressionPublishedChannelKind MapChannel(ExpressionOutputChannel outputChannel)
         {
-            switch (resultKind)
+            switch (outputChannel)
             {
-                case ExpressionResultKind.Ability:
+                case ExpressionOutputChannel.Ability:
                     return ExpressionPublishedChannelKind.Ability;
-                case ExpressionResultKind.Hediff:
+                case ExpressionOutputChannel.Hediff:
                     return ExpressionPublishedChannelKind.Hediff;
-                case ExpressionResultKind.Passive:
+                case ExpressionOutputChannel.Passive:
                     return ExpressionPublishedChannelKind.Passive;
                 default:
                     return ExpressionPublishedChannelKind.Verb;
@@ -364,14 +383,14 @@ namespace BDP.Core.Expressions
                 return null;
             }
 
-            switch (result.ResultKind)
+            switch (result.OutputChannel)
             {
-                case ExpressionResultKind.Ability:
+                case ExpressionOutputChannel.Ability:
                     return result.AbilityDefName;
-                case ExpressionResultKind.Hediff:
+                case ExpressionOutputChannel.Hediff:
                     return result.HediffDefName;
-                case ExpressionResultKind.Passive:
-                    return result.PassiveKey;
+                case ExpressionOutputChannel.Passive:
+                    return result.PassiveIdentityKey;
                 default:
                     return result.ExecutionSlotKey;
             }
@@ -388,21 +407,21 @@ namespace BDP.Core.Expressions
             }
 
             // Ability 按钮即使受阻也必须保留；其它通道不向自动消费者发布受阻 Combo。
-            if (result.ResultKind != ExpressionResultKind.Ability
+            if (result.OutputChannel != ExpressionOutputChannel.Ability
                 && result.UseRequirementCheck != null
                 && !result.UseRequirementCheck.Satisfied)
             {
                 return false;
             }
 
-            switch (result.ResultKind)
+            switch (result.OutputChannel)
             {
-                case ExpressionResultKind.Ability:
+                case ExpressionOutputChannel.Ability:
                     return !string.IsNullOrWhiteSpace(result.AbilityDefName);
-                case ExpressionResultKind.Hediff:
+                case ExpressionOutputChannel.Hediff:
                     return !string.IsNullOrWhiteSpace(result.HediffDefName);
-                case ExpressionResultKind.Passive:
-                    return !string.IsNullOrWhiteSpace(result.PassiveKey);
+                case ExpressionOutputChannel.Passive:
+                    return !string.IsNullOrWhiteSpace(result.PassiveIdentityKey);
                 default:
                     return result.CanProject && !string.IsNullOrWhiteSpace(result.ExecutionSlotKey);
             }

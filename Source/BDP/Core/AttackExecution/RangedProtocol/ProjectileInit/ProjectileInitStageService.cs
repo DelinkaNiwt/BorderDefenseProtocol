@@ -4,6 +4,7 @@ using BDP.Core.AttackExecution.RangedProtocol.Model;
 using BDP.Core.Projectiles.Interaction;
 using BDP.Core.Expressions;
 using BDP.Core.Projectiles.Visual;
+using BDP.Core.Permissions;
 using BDP.Core.Trigger;
 using BDP.Core.Trigger.Runtime;
 using UnityEngine;
@@ -49,7 +50,7 @@ namespace BDP.Core.AttackExecution.RangedProtocol.ProjectileInit
             List<ProjectileInitContribution> contributions = new List<ProjectileInitContribution>();
             for (int i = 0; i < modules.Count; i++)
             {
-                ProjectileInitStageContext context = new ProjectileInitStageContext(entry, aim, prepare, fire, modules[i] as IRangedAttackModuleRuntime);
+                ProjectileInitStageContext context = new ProjectileInitStageContext(entry, aim, prepare, fire, modules[i] as IRangedAttackModuleRuntime, contributions);
                 ProjectileInitContribution contribution = new ProjectileInitContribution();
                 modules[i].Contribute(context, contribution);
                 contributions.Add(contribution);
@@ -136,36 +137,58 @@ namespace BDP.Core.AttackExecution.RangedProtocol.ProjectileInit
                             continue;
                         }
 
-                        if (planContribution.HasOverrideOriginWorld)
+                        if (!plan.InitialExclusiveFlightControl)
                         {
-                            plan.HasAbsoluteOriginWorld = true;
-                            plan.AbsoluteOriginWorld = planContribution.OverrideOriginWorld;
-                        }
+                            if (planContribution.HasOverrideProjectileDef
+                                && planContribution.OverrideProjectileDef != null)
+                            {
+                                plan.ProjectileDef = planContribution.OverrideProjectileDef;
+                            }
 
-                        if (planContribution.HasOverrideLaunchTarget)
-                        {
-                            plan.LaunchTarget = planContribution.OverrideLaunchTarget;
-                        }
+                            if (planContribution.HasOverrideOriginWorld)
+                            {
+                                plan.HasAbsoluteOriginWorld = true;
+                                plan.AbsoluteOriginWorld = planContribution.OverrideOriginWorld;
+                            }
 
-                        if (planContribution.HasOverrideAimTarget)
-                        {
-                            plan.AimTarget = planContribution.OverrideAimTarget;
-                        }
+                            if (planContribution.HasOriginSpreadOffsetOverride)
+                            {
+                                plan.HasOriginSpreadOffsetOverride = true;
+                                plan.OriginSpreadOffsetOverrideWorld = planContribution.OriginSpreadOffsetOverrideWorld;
+                            }
 
-                        if (planContribution.HasOverrideCurrentTarget)
-                        {
-                            plan.CurrentTarget = planContribution.OverrideCurrentTarget;
-                        }
+                            if (planContribution.HasOverrideLaunchTarget)
+                            {
+                                plan.LaunchTarget = planContribution.OverrideLaunchTarget;
+                            }
 
-                        if (planContribution.HasInitialSegmentTriggerRatio)
-                        {
-                            plan.HasInitialSegmentTriggerRatio = true;
-                            plan.InitialSegmentTriggerRatio = planContribution.InitialSegmentTriggerRatio;
-                        }
+                            if (planContribution.HasFinalApproachStartCell)
+                            {
+                                plan.HasFinalApproachStartCell = true;
+                                plan.FinalApproachStartCell = planContribution.FinalApproachStartCell;
+                            }
 
-                        if (planContribution.HasInitialFlightPathSnapshot)
-                        {
-                            plan.InitialFlightPathSnapshot = planContribution.InitialFlightPathSnapshot;
+                            if (planContribution.HasOverrideAimTarget)
+                            {
+                                plan.AimTarget = planContribution.OverrideAimTarget;
+                            }
+
+                            if (planContribution.HasOverrideCurrentTarget)
+                            {
+                                plan.CurrentTarget = planContribution.OverrideCurrentTarget;
+                            }
+
+                            if (planContribution.HasInitialSegmentTriggerRatio)
+                            {
+                                plan.HasInitialSegmentTriggerRatio = true;
+                                plan.InitialSegmentTriggerRatio = planContribution.InitialSegmentTriggerRatio;
+                            }
+
+                            if (planContribution.HasInitialFlightPathSnapshot)
+                            {
+                                plan.InitialFlightPathSnapshot = planContribution.InitialFlightPathSnapshot;
+                            }
+
                         }
 
                         if (planContribution.HasInteractionPolicy
@@ -174,6 +197,16 @@ namespace BDP.Core.AttackExecution.RangedProtocol.ProjectileInit
                             plan.InteractionPolicy = MergeInteractionPolicy(
                                 plan.InteractionPolicy,
                                 planContribution.InteractionPolicy);
+                        }
+
+                        if (!plan.InitialExclusiveFlightControl)
+                        {
+                            if (planContribution.HasVisualTrajectoryProfile
+                                && planContribution.VisualTrajectoryProfile != null)
+                            {
+                                plan.VisualTrajectoryProfile = planContribution.VisualTrajectoryProfile.Clone();
+                            }
+                            plan.InitialExclusiveFlightControl = planContribution.ExclusiveFlightControl;
                         }
 
                         if (planContribution.HasTrailColorOverride)
@@ -196,6 +229,24 @@ namespace BDP.Core.AttackExecution.RangedProtocol.ProjectileInit
                     }
 
                     AppendTags(plan.Tags, contribution.TagsToAppend);
+                }
+
+                // 目标与模块结果都冻结后，再用同一份目标感知许可补充通用投射物交互策略。
+                // Core 不认识具体业务；浮空、控制台等来源通过许可注册表接入。
+                FormalExpressionResult indirectSourceResult = emit != null && emit.SourceResult != null
+                    ? emit.SourceResult
+                    : entry != null ? entry.SourceResult : null;
+                if (IndirectRangedAttackPermissionAccess.TryResolve(
+                        entry != null ? entry.Pawn : null,
+                        indirectSourceResult,
+                        plan.CurrentTarget,
+                        out IndirectRangedAttackPermissionGrant indirectGrant)
+                    && indirectGrant != null
+                    && indirectGrant.InteractionPolicy != null)
+                {
+                    plan.InteractionPolicy = MergeInteractionPolicy(
+                        plan.InteractionPolicy,
+                        indirectGrant.InteractionPolicy);
                 }
 
                 plan.SyncTargetSemanticsFromLegacyTargets();
@@ -272,7 +323,9 @@ namespace BDP.Core.AttackExecution.RangedProtocol.ProjectileInit
                 BypassProjectileInterceptors = current.BypassProjectileInterceptors
                     || incoming.BypassProjectileInterceptors,
                 BypassRegisteredDamageShields = current.BypassRegisteredDamageShields
-                    || incoming.BypassRegisteredDamageShields
+                    || incoming.BypassRegisteredDamageShields,
+                AllowNonTargetPassThrough = current.AllowNonTargetPassThrough
+                    || incoming.AllowNonTargetPassThrough
             };
         }
 

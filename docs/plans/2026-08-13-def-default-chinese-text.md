@@ -26,7 +26,7 @@
 - Modify: `1.6/Content/Defs/AbilityDef/CombatBodyShortJump.xml`
 - Modify: `1.6/Content/Defs/AbilityDef/Grasshopper.xml`
 - Modify: `1.6/Content/Defs/AbilityDef/LightSoulPropulsion.xml`
-- Modify: `1.6/Content/Defs/ChipActionPresetDef/Presets.xml`
+- Modify: `1.6/Content/Defs/ChipFunctionDef/Presets.xml`
 - Modify: `1.6/Content/Defs/ExpressionDef/Visual.xml`
 - Modify: `1.6/Content/Defs/HediffDef/LightSoul.xml`
 - Modify: `1.6/Content/Defs/ThingDef/Items/Chips.xml`

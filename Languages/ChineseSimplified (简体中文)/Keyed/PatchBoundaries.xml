@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 无法定位原版爆炸的唯一承伤调用时，保留原版方法并提示接线未启用。 -->
+  <BDP_DamageBoundaryPatchUnavailable>无法定位爆炸的单次承伤入口，BDP 范围伤害接线未启用。</BDP_DamageBoundaryPatchUnavailable>
+  <!-- 原版单次发射虚调用的唯一锚点失配时，保留原方法，不猜测攻击成功。 -->
+  <BDP_AttackSuccessPatchUnavailable>无法定位攻击的单次发射入口，BDP 攻击成功观察未启用。</BDP_AttackSuccessPatchUnavailable>
+  <!-- 原版爆炸实例启动锚点失配时，保留原方法，不向未知爆炸写入配置。 -->
+  <BDP_ExplosionCreationPatchUnavailable>无法定位爆炸的实例启动入口，BDP 爆炸配置接线未启用。</BDP_ExplosionCreationPatchUnavailable>
+  <!-- 健康页血滴槽的显示、贴图与尺寸三处接线必须完整匹配，失配时保留原版。 -->
+  <BDP_TrionLeakIconPatchUnavailable>无法定位健康页伤口图标的完整显示入口，BDP 泄露图标未启用。</BDP_TrionLeakIconPatchUnavailable>
+</LanguageData>

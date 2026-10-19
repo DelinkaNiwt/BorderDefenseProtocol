@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 皇室现场绑定核心；不要求先缔结人物契约。 -->
+  <JobDef>
+    <defName>BDP_BindTrionFacility</defName>
+    <driverClass>BDP.Content.Trion.Facility.Jobs.JobDriver_ChangeTrionFacilityBinding</driverClass>
+    <!-- 本地化覆盖见语言包 JobDef 条目。 -->
+    <reportString>正在绑定TargetA。</reportString>
+    <playerInterruptible>true</playerInterruptible>
+  </JobDef>
+  <!-- 只有该核心的绑定皇室能执行解绑；保留储量与人物契约。 -->
+  <JobDef>
+    <defName>BDP_UnbindTrionFacility</defName>
+    <driverClass>BDP.Content.Trion.Facility.Jobs.JobDriver_ChangeTrionFacilityBinding</driverClass>
+    <!-- 本地化覆盖见语言包 JobDef 条目。 -->
+    <reportString>正在解除TargetA的绑定。</reportString>
+    <playerInterruptible>true</playerInterruptible>
+  </JobDef>
+  <!-- 普通搬运者通过原版运输容器任务备齐；此任务只由指定献祭者最终提交。 -->
+  <JobDef>
+    <defName>BDP_SacrificeToTrionFacility</defName>
+    <driverClass>BDP.Content.Trion.Facility.Jobs.JobDriver_SacrificeToTrionFacility</driverClass>
+    <!-- 本地化覆盖见语言包 JobDef 条目。 -->
+    <reportString>正在向TargetA献祭供物。</reportString>
+    <playerInterruptible>true</playerInterruptible>
+  </JobDef>
+</Defs>

@@ -15,7 +15,10 @@ param(
     [string]$CoreSourceRoot,
 
     [Parameter(Mandatory = $true)]
-    [string]$CoreDefsRoot
+    [string]$CoreDefsRoot,
+
+    # 版本专属中性定义可不存在；存在时和公共定义一同检查，不能漏检。
+    [string]$VersionCoreDefsRoot
 )
 
 $ErrorActionPreference = "Stop"
@@ -126,7 +129,7 @@ function Find-SpecificNameMentions
 {
     param(
         [string]$SourceRoot,
-        [string]$DefsRoot,
+        [string[]]$DefsRoots,
         [string[]]$SpecificNames
     )
 
@@ -139,9 +142,12 @@ function Find-SpecificNameMentions
             Where-Object { $_.FullName -notmatch "[\\/](obj|bin)[\\/]" })
     }
 
-    if (Test-Path -LiteralPath $DefsRoot)
+    foreach ($defsRoot in $DefsRoots)
     {
-        $files += @(Get-ChildItem -LiteralPath $DefsRoot -Filter "*.xml" -File -Recurse)
+        if (-not [string]::IsNullOrWhiteSpace($defsRoot) -and (Test-Path -LiteralPath $defsRoot))
+        {
+            $files += @(Get-ChildItem -LiteralPath $defsRoot -Filter "*.xml" -File -Recurse)
+        }
     }
 
     foreach ($file in $files)
@@ -264,7 +270,7 @@ foreach ($otherProject in $otherProjects)
 
 $specificMentions = @(Find-SpecificNameMentions `
     -SourceRoot $resolvedCoreSourceRoot `
-    -DefsRoot $resolvedCoreDefsRoot `
+    -DefsRoots @($resolvedCoreDefsRoot, $VersionCoreDefsRoot) `
     -SpecificNames @($specificNames | Sort-Object { $_.Length } -Descending))
 
 foreach ($specificMention in $specificMentions)

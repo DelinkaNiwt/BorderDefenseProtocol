@@ -61,13 +61,13 @@ function New-Admission
     return $contract
 }
 
-$shooter = New-Snapshot "BDP_ChipProfession_Shooter" "BDP_ChipCategory_Weapon" @("Entity", "Offensive") "BDP_GunClass_AssaultRifle"
-$gunner = New-Snapshot "BDP_ChipProfession_Gunner" "BDP_ChipCategory_Weapon" @("Entity", "Offensive") "BDP_GunClass_AssaultRifle"
-$missingTag = New-Snapshot "BDP_ChipProfession_Shooter" "BDP_ChipCategory_Weapon" @("Entity") "BDP_GunClass_AssaultRifle"
-$deniedTag = New-Snapshot "BDP_ChipProfession_Shooter" "BDP_ChipCategory_Weapon" @("Entity", "Offensive", "Energy") "BDP_GunClass_AssaultRifle"
+$shooter = New-Snapshot "BDP_ChipProfession_Shooter" "BDP_ChipCategory_Weapon" @("Entity", "Offensive") "BDP_ArmamentForm_AssaultRifle"
+$gunner = New-Snapshot "BDP_ChipProfession_Gunner" "BDP_ChipCategory_Weapon" @("Entity", "Offensive") "BDP_ArmamentForm_AssaultRifle"
+$missingTag = New-Snapshot "BDP_ChipProfession_Shooter" "BDP_ChipCategory_Weapon" @("Entity") "BDP_ArmamentForm_AssaultRifle"
+$deniedTag = New-Snapshot "BDP_ChipProfession_Shooter" "BDP_ChipCategory_Weapon" @("Entity", "Offensive", "Energy") "BDP_ArmamentForm_AssaultRifle"
 $bare = New-Snapshot "BDP_ChipProfession_Shooter" "BDP_ChipCategory_Weapon" @("Entity", "Offensive") $null
-$shooterAdmission = New-Admission "BDP_ChipProfession_Shooter" @("Entity", "Offensive") @("Energy") "BDP_GunClass_AssaultRifle"
-$gunnerAdmission = New-Admission "BDP_ChipProfession_Gunner" @("Entity") @() "BDP_GunClass_AssaultRifle"
+$shooterAdmission = New-Admission "BDP_ChipProfession_Shooter" @("Entity", "Offensive") @("Energy") "BDP_ArmamentForm_AssaultRifle"
+$gunnerAdmission = New-Admission "BDP_ChipProfession_Gunner" @("Entity") @() "BDP_ArmamentForm_AssaultRifle"
 
 Assert-True ([bool]$isAllowedMethod.Invoke($null, @($shooter, $shooterAdmission))) "完整射手身份必须通过。"
 Assert-True (-not [bool]$isAllowedMethod.Invoke($null, @($gunner, $shooterAdmission))) "枪手最终职业不得冒充射手。"

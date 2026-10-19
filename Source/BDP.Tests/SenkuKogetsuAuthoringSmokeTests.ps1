@@ -58,11 +58,11 @@ Assert-True (
 ) 'BDP_Chip_Kogetsu must stay a hands-only chip with a lower UseCost than Senku.'
 
 Assert-True (
-    ($senkuMatch.Groups[1].Value -match '<Category>BDP_ChipCategory_Ability</Category>') -and
+    ($senkuMatch.Groups[1].Value -match '<Category>BDP_ChipCategory_GeneralSkill</Category>') -and
     ($senkuMatch.Groups[1].Value -match '<SlotRegion>MainSub</SlotRegion>') -and
     ($senkuMatch.Groups[1].Value -match '<UseCost>50</UseCost>') -and
-    ($senkuMatch.Groups[1].Value -match '<Kind>Passive</Kind>') -and
-    ($senkuMatch.Groups[1].Value -match '<PassiveKey>bdp\.senku\.passive</PassiveKey>') -and
+    ($senkuMatch.Groups[1].Value -match '<EntryType>Passive</EntryType>') -and
+    ($senkuMatch.Groups[1].Value -match '<PassiveIdentityKey>bdp\.senku\.passive</PassiveIdentityKey>') -and
     (-not ($senkuMatch.Groups[1].Value -match '<AbilityDefName>'))
 ) 'BDP_Chip_Senku must be a hands-only passive source chip whose UseCost drives combo casting.'
 
@@ -74,7 +74,7 @@ Assert-True $abilityMatch.Success 'BDP_Ability_SenkuKogetsu must exist as the fo
 Assert-True (
     ($abilityMatch.Groups[1].Value -match '<verbClass>BDP\.Core\.Abilities\.BdpVerb_CastAbility</verbClass>') -and
     ($abilityMatch.Groups[1].Value -match 'Class\s*=\s*\"BDP\.Core\.Abilities\.CompProperties_AbilityEffect_BdpTrionCost\"') -and
-    ($abilityMatch.Groups[1].Value -match '<range>40</range>') -and
+    ($abilityMatch.Groups[1].Value -match '<range>25</range>') -and
     ($abilityMatch.Groups[1].Value -match '<requireLineOfSight>false</requireLineOfSight>')
 ) 'BDP_Ability_SenkuKogetsu must bind to the formal Bdp ability cast/cost path and preserve the confirmed long-range no-LOS behavior.'
 
@@ -86,7 +86,7 @@ Assert-True $comboMatch.Success 'BDP_Combo_SenkuKogetsu must exist as the formal
 Assert-True (
     ($comboMatch.Groups[1].Value -match '<chipA>BDP_Chip_Kogetsu</chipA>') -and
     ($comboMatch.Groups[1].Value -match '<chipB>BDP_Chip_Senku</chipB>') -and
-    ($comboMatch.Groups[1].Value -match '<Kind>Ability</Kind>') -and
+    ($comboMatch.Groups[1].Value -match '<EntryType>Ability</EntryType>') -and
     ($comboMatch.Groups[1].Value -match '<AbilityDefName>BDP_Ability_SenkuKogetsu</AbilityDefName>') -and
     ($comboMatch.Groups[1].Value -match '<UseCostResolve>FollowChipSub</UseCostResolve>') -and
     ($comboMatch.Groups[1].Value -match '<MinimumRequiredResolve>FollowChipSub</MinimumRequiredResolve>')

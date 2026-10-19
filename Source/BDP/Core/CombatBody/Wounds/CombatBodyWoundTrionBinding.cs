@@ -5,291 +5,167 @@ using Verse;
 
 namespace BDP.Core.CombatBody.Wounds
 {
-    /// <summary>
-    /// 战斗体伤口 Trion 持续消耗绑定。
-    /// 它只负责把伤口策略结果发布到 Trion 账本，不参与资源结算。
-    /// </summary>
+    /// <summary>每条最终伤口发布一条持续消耗，扣费由资源账本统一处理。</summary>
     internal sealed class CombatBodyWoundTrionBinding
     {
-        /// <summary>
-        /// 当前运行期已经发布过的伤口 drain。
-        /// </summary>
-        private Dictionary<int, TrionDrainKey> publishedKeysByHediffLoadId =
-            new Dictionary<int, TrionDrainKey>();
+        /// <summary>独立伤口的速率与期限，不迁移旧版部位派生登记。</summary>
+        private List<CombatBodyWoundDrain> woundDrains = new List<CombatBodyWoundDrain>();
+        /// <summary>注销使用实际发布键，避免标签变化后遗留来源。</summary>
+        private readonly Dictionary<Hediff, TrionDrainKey> publishedKeys = new Dictionary<Hediff, TrionDrainKey>();
 
-        /// <summary>
-        /// 当前运行期每个伤口 drain 的到期 tick。
-        /// 伤口没有继续发生变化时，到期后自动注销。
-        /// </summary>
-        private Dictionary<int, int> expiryTickByHediffLoadId =
-            new Dictionary<int, int>();
-
-        /// <summary>
-        /// 过期检查复用列表，避免每次低频检查都分配新列表。
-        /// </summary>
-        private List<int> expiredHediffLoadIds = new List<int>();
-
-        /// <summary>
-        /// 保存仍在生效的伤口 drain 到期 tick。
-        /// 已发布 key 可由 live Hediff 重建，避免把同一事实存两份。
-        /// </summary>
+        /// <summary>只保存派生登记，原版健康系统仍保存伤口本体。</summary>
         internal void ExposeData()
         {
-            Scribe_Collections.Look(
-                ref expiryTickByHediffLoadId,
-                "expiryTickByHediffLoadId",
-                LookMode.Value,
-                LookMode.Value);
-
+            Scribe_Collections.Look(ref woundDrains, "woundDrains", LookMode.Deep);
             EnsureInternalState();
         }
 
-        /// <summary>
-        /// 按当前伤口状态注册、更新或注销 drain。
-        /// 每次明确伤口变化都会刷新该伤口的流失到期时间。
-        /// </summary>
-        internal int UpdateWoundDrain(Pawn pawn, Hediff hediff, int currentTick, int idleTimeoutTicks)
+        /// <summary>只累加本次有效损伤；已过期来源重新开始，断口不重复累加。</summary>
+        internal int UpdateWoundDrain(Pawn pawn, Hediff wound, float effectiveDamage, int currentTick, int idleTimeoutTicks)
         {
-            EnsureInternalState();
-
-            if (pawn == null || hediff == null || !CombatBodyWoundPolicy.IsSupportedWound(hediff))
-            {
-                return 0;
-            }
-
-            if (!CombatBodyWoundTrionDrainUtility.TryResolveDrainPerSecond(hediff, out float drainPerSecond))
-            {
-                RemoveWoundDrain(pawn, hediff);
-                return 0;
-            }
-
+            // 本刻受伤可能早于宿主Tick（逐刻更新）；先收掉到期来源，表现代表不能继续选旧伤。
+            ExpireIdleDrains(pawn, currentTick, null);
+            ReconcileActiveWounds(pawn);
+            if (wound?.pawn != pawn
+                || !CombatBodyWoundTrionDrainUtility.TryResolveWoundDrainPerSecond(wound, effectiveDamage, out float rate)) return 0;
             ITrionCommands commands = TrionSurfaceAccess.ResolveCommands(pawn);
-            if (commands == null || hediff.loadID <= 0)
+            if (commands == null) return 0;
+            CombatBodyWoundDrain drain = FindDrain(wound);
+            if (drain == null)
             {
-                return 0;
+                drain = new CombatBodyWoundDrain { wound = wound };
+                woundDrains.Add(drain);
             }
-
-            TrionDrainKey key = BuildDrainKey(hediff);
-            int expiryTick = currentTick + Math.Max(1, idleTimeoutTicks);
-            commands.RegisterDrain(key, drainPerSecond);
-            publishedKeysByHediffLoadId[hediff.loadID] = key;
-            expiryTickByHediffLoadId[hediff.loadID] = expiryTick;
-            return expiryTick;
+            // 原版断肢递归结束后可能再次通知同一断口，断口始终覆盖为一次全额。
+            drain.drainPerSecond = wound is Hediff_MissingPart || currentTick >= drain.expiryTick
+                ? rate : drain.drainPerSecond + rate;
+            drain.expiryTick = currentTick + Math.Max(1, idleTimeoutTicks);
+            Publish(commands, drain);
+            return drain.expiryTick;
         }
 
-        /// <summary>
-        /// 注销所有已经超过空闲时间的伤口 drain。
-        /// 这一步只处理 BDP 派生 drain，不会扫描或改写原版伤口事实。
-        /// 返回仍在生效的最早到期 tick；没有活跃 drain 时返回 0。
-        /// </summary>
+        /// <summary>到期只删除本伤口来源，返回其他伤口中最早的期限。</summary>
         internal int ExpireIdleDrains(Pawn pawn, int currentTick, List<int> expiredIdsOut)
         {
             EnsureInternalState();
             expiredIdsOut?.Clear();
-
-            if (expiryTickByHediffLoadId.Count == 0)
+            for (int index = woundDrains.Count - 1; index >= 0; index--)
             {
-                return 0;
+                CombatBodyWoundDrain drain = woundDrains[index];
+                if (currentTick < drain.expiryTick) continue;
+                if (drain.wound != null) expiredIdsOut?.Add(drain.wound.loadID);
+                RemoveAt(pawn, index);
             }
-
-            expiredHediffLoadIds.Clear();
-            foreach (KeyValuePair<int, int> pair in expiryTickByHediffLoadId)
-            {
-                if (currentTick >= pair.Value)
-                {
-                    expiredHediffLoadIds.Add(pair.Key);
-                }
-            }
-
-            if (expiredHediffLoadIds.Count == 0)
-            {
-                return ResolveNextExpiryTick();
-            }
-
-            ITrionCommands commands = TrionSurfaceAccess.ResolveCommands(pawn);
-            for (int index = 0; index < expiredHediffLoadIds.Count; index++)
-            {
-                int hediffLoadId = expiredHediffLoadIds[index];
-                if (commands != null && publishedKeysByHediffLoadId.TryGetValue(hediffLoadId, out TrionDrainKey key))
-                {
-                    commands.UnregisterDrain(key);
-                }
-
-                expiredIdsOut?.Add(hediffLoadId);
-                publishedKeysByHediffLoadId.Remove(hediffLoadId);
-                expiryTickByHediffLoadId.Remove(hediffLoadId);
-            }
-
-            expiredHediffLoadIds.Clear();
             return ResolveNextExpiryTick();
         }
 
-        /// <summary>
-        /// 注销指定伤口 drain。
-        /// </summary>
+        /// <summary>移除后核对最终列表，其他有效来源不重算、不续期。</summary>
         internal void RemoveWoundDrain(Pawn pawn, Hediff hediff)
         {
-            EnsureInternalState();
-
-            if (pawn == null || hediff == null || hediff.loadID <= 0)
-            {
-                return;
-            }
-
-            if (!publishedKeysByHediffLoadId.TryGetValue(hediff.loadID, out TrionDrainKey key))
-            {
-                key = BuildDrainKey(hediff);
-            }
-
-            TrionSurfaceAccess.ResolveCommands(pawn)?.UnregisterDrain(key);
-            publishedKeysByHediffLoadId.Remove(hediff.loadID);
-            expiryTickByHediffLoadId.Remove(hediff.loadID);
+            ReconcileActiveWounds(pawn);
         }
 
-        /// <summary>
-        /// 清理当前运行期所有战斗体伤口 drain。
-        /// </summary>
+        /// <summary>清理被移除、愈合或断肢替代的伤口，不注册旧伤。</summary>
+        internal void ReconcileActiveWounds(Pawn pawn)
+        {
+            EnsureInternalState();
+            for (int index = woundDrains.Count - 1; index >= 0; index--)
+                if (woundDrains[index]?.wound?.pawn != pawn
+                    || !CombatBodyWoundTrionDrainUtility.IsLiveWound(woundDrains[index].wound)) RemoveAt(pawn, index);
+        }
+
+        /// <summary>战斗体最终退出时注销全部派生来源。</summary>
         internal void ClearAll(Pawn pawn)
         {
             EnsureInternalState();
-
-            ITrionCommands commands = TrionSurfaceAccess.ResolveCommands(pawn);
-            if (commands != null)
-            {
-                foreach (TrionDrainKey key in publishedKeysByHediffLoadId.Values)
-                {
-                    commands.UnregisterDrain(key);
-                }
-            }
-
-            publishedKeysByHediffLoadId.Clear();
-            expiryTickByHediffLoadId.Clear();
-            expiredHediffLoadIds.Clear();
+            for (int index = woundDrains.Count - 1; index >= 0; index--) RemoveAt(pawn, index);
         }
 
-        /// <summary>
-        /// 读档后把已存的伤口 drain 重新发布到 Trion 账本。
-        /// 返回当前仍在生效的最早到期 tick；没有活跃 drain 时返回 0。
-        /// </summary>
+        /// <summary>读档只重发保存速率，严格保留期限与仍有效的原版引用。</summary>
         internal int RestoreAfterLoad(Pawn pawn, int currentTick)
         {
             EnsureInternalState();
-            publishedKeysByHediffLoadId.Clear();
-
-            if (pawn?.health?.hediffSet == null || expiryTickByHediffLoadId.Count == 0)
+            publishedKeys.Clear();
+            ITrionCommands commands = pawn != null ? TrionSurfaceAccess.ResolveCommands(pawn) : null;
+            for (int index = woundDrains.Count - 1; index >= 0; index--)
             {
-                return 0;
-            }
-
-            expiredHediffLoadIds.Clear();
-            foreach (KeyValuePair<int, int> pair in expiryTickByHediffLoadId)
-            {
-                if (currentTick >= pair.Value)
+                CombatBodyWoundDrain drain = woundDrains[index];
+                if (commands == null || drain?.wound?.pawn != pawn || drain.drainPerSecond <= 0f
+                    || currentTick >= drain.expiryTick || !CombatBodyWoundTrionDrainUtility.IsLiveWound(drain.wound))
                 {
-                    expiredHediffLoadIds.Add(pair.Key);
+                    woundDrains.RemoveAt(index);
                     continue;
                 }
-
-                Hediff hediff = FindWoundByLoadId(pawn, pair.Key);
-                if (hediff == null || !CombatBodyWoundTrionDrainUtility.TryResolveDrainPerSecond(hediff, out float drainPerSecond))
-                {
-                    expiredHediffLoadIds.Add(pair.Key);
-                    continue;
-                }
-
-                TrionDrainKey key = BuildDrainKey(hediff);
-                TrionSurfaceAccess.ResolveCommands(pawn)?.RegisterDrain(key, drainPerSecond);
-                publishedKeysByHediffLoadId[pair.Key] = key;
+                Publish(commands, drain);
             }
-
-            for (int index = 0; index < expiredHediffLoadIds.Count; index++)
-            {
-                expiryTickByHediffLoadId.Remove(expiredHediffLoadIds[index]);
-            }
-
-            expiredHediffLoadIds.Clear();
             return ResolveNextExpiryTick();
         }
 
-        /// <summary>
-        /// 返回当前仍由伤口 drain 生命周期托管的 Hediff loadID。
-        /// 只用于读档后重建视觉运行时，不对外暴露可写集合。
-        /// </summary>
-        internal IEnumerable<int> GetActiveHediffLoadIds()
+        /// <summary>每部位只选一个尚有效来源供地图喷射，不增加既有粒子密度。</summary>
+        internal IEnumerable<int> GetActiveHediffLoadIds(Pawn pawn)
         {
             EnsureInternalState();
-            return expiryTickByHediffLoadId.Keys;
+            List<int> ids = new List<int>();
+            HashSet<BodyPartRecord> parts = new HashSet<BodyPartRecord>();
+            for (int index = 0; index < woundDrains.Count; index++)
+            {
+                Hediff wound = woundDrains[index].wound;
+                if (CombatBodyWoundTrionDrainUtility.IsLiveWound(wound) && parts.Add(wound.Part)) ids.Add(wound.loadID);
+            }
+            return ids;
         }
 
-        /// <summary>
-        /// 为伤口实例生成稳定 drain 键。
-        /// </summary>
-        private static TrionDrainKey BuildDrainKey(Hediff hediff)
+        /// <summary>本部位表现代表只能来自现存有效登记，不能随便选旧伤。</summary>
+        internal Hediff FindRepresentativeWound(BodyPartRecord part)
         {
-            return CombatBodyWoundTrionDrainUtility.BuildDrainKey(hediff);
-        }
-
-        /// <summary>
-        /// 按 Hediff loadID 找回仍存在的原版伤口。
-        /// </summary>
-        private static Hediff FindWoundByLoadId(Pawn pawn, int hediffLoadId)
-        {
-            if (pawn?.health?.hediffSet?.hediffs == null || hediffLoadId <= 0)
-            {
-                return null;
-            }
-
-            List<Hediff> hediffs = pawn.health.hediffSet.hediffs;
-            for (int index = 0; index < hediffs.Count; index++)
-            {
-                Hediff hediff = hediffs[index];
-                if (hediff != null && hediff.loadID == hediffLoadId && CombatBodyWoundPolicy.IsSupportedWound(hediff))
-                {
-                    return hediff;
-                }
-            }
-
+            for (int index = 0; index < woundDrains.Count; index++)
+                if (woundDrains[index].wound?.Part == part
+                    && CombatBodyWoundTrionDrainUtility.IsLiveWound(woundDrains[index].wound)) return woundDrains[index].wound;
             return null;
         }
 
-        /// <summary>
-        /// 解析当前仍在生效的最早 drain 到期 tick。
-        /// </summary>
-        private int ResolveNextExpiryTick()
+        /// <summary>按原版最终对象找到唯一登记。</summary>
+        private CombatBodyWoundDrain FindDrain(Hediff wound)
         {
-            EnsureInternalState();
-
-            int nextExpiryTick = 0;
-            foreach (int expiryTick in expiryTickByHediffLoadId.Values)
-            {
-                if (nextExpiryTick == 0 || expiryTick < nextExpiryTick)
-                {
-                    nextExpiryTick = expiryTick;
-                }
-            }
-
-            return nextExpiryTick;
+            for (int index = 0; index < woundDrains.Count; index++)
+                if (woundDrains[index].wound == wound) return woundDrains[index];
+            return null;
         }
 
-        /// <summary>
-        /// 补齐存档恢复后可能为空的运行容器。
-        /// </summary>
+        /// <summary>发布保存速率，标签变化时先注销实际旧键。</summary>
+        private void Publish(ITrionCommands commands, CombatBodyWoundDrain drain)
+        {
+            TrionDrainKey key = CombatBodyWoundTrionDrainUtility.BuildDrainKey(drain.wound);
+            if (publishedKeys.TryGetValue(drain.wound, out TrionDrainKey oldKey) && oldKey != key) commands.UnregisterDrain(oldKey);
+            commands.RegisterDrain(key, drain.drainPerSecond, TrionDrainKind.WoundLeak);
+            publishedKeys[drain.wound] = key;
+        }
+
+        /// <summary>注销实际键并移除对应保存记录。</summary>
+        private void RemoveAt(Pawn pawn, int index)
+        {
+            Hediff wound = woundDrains[index]?.wound;
+            if (wound != null && publishedKeys.TryGetValue(wound, out TrionDrainKey key))
+            {
+                TrionSurfaceAccess.ResolveCommands(pawn)?.UnregisterDrain(key);
+                publishedKeys.Remove(wound);
+            }
+            woundDrains.RemoveAt(index);
+        }
+
+        /// <summary>返回剩余伤口中最早的期限。</summary>
+        private int ResolveNextExpiryTick()
+        {
+            int next = 0;
+            for (int index = 0; index < woundDrains.Count; index++)
+                if (next <= 0 || woundDrains[index].expiryTick < next) next = woundDrains[index].expiryTick;
+            return next;
+        }
+
+        /// <summary>缺少本版节点时使用空表，不启动存档旧伤。</summary>
         private void EnsureInternalState()
         {
-            if (publishedKeysByHediffLoadId == null)
-            {
-                publishedKeysByHediffLoadId = new Dictionary<int, TrionDrainKey>();
-            }
-
-            if (expiryTickByHediffLoadId == null)
-            {
-                expiryTickByHediffLoadId = new Dictionary<int, int>();
-            }
-
-            if (expiredHediffLoadIds == null)
-            {
-                expiredHediffLoadIds = new List<int>();
-            }
+            if (woundDrains == null) woundDrains = new List<CombatBodyWoundDrain>();
         }
     }
 }

@@ -72,7 +72,7 @@ namespace BDP.Core.Expressions
         /// <summary>
         /// 解释一份芯片表达契约。
         /// </summary>
-        private static ChipExpressionResolvedContract ResolveUncached(
+        internal static ChipExpressionResolvedContract ResolveUncached(
             ChipExpressionConfig config,
             string currentModeKey,
             string currentStanceKey)
@@ -506,19 +506,34 @@ namespace BDP.Core.Expressions
         {
             List<Tool> declaredTools = ResolveDeclaredTools(config.Tool, config.tools, config.ToolLabelKeys);
             Tool resolvedTool = ResolvePrimaryDeclaredTool(declaredTools);
-            VerbProperties resolvedVerbProps = ResolveVerbProps(config, resolvedTool);
-            ManeuverDef resolvedManeuver = ResolveManeuver(config, resolvedTool);
-            IReadOnlyList<MeleeToolSurface> declaredMeleeToolSurfaces = BuildDeclaredMeleeToolSurfaces(
+            ManeuverDef resolvedManeuver = MeleeToolSurfaceBuilder.ResolveManeuver(config, resolvedTool);
+            AttackExecutionStyle executionStyle = ResolveExecutionStyle(config, resolvedTool);
+            DamageDef resolvedDamageDef = MeleeToolSurfaceBuilder.ResolveDamageDef(resolvedTool, resolvedManeuver);
+            VerbProperties resolvedVerbProps = config.VerbProps
+                ?? MeleeToolSurfaceBuilder.ResolveVerbProps(
+                    config,
+                    resolvedTool,
+                    resolvedManeuver,
+                    resolvedDamageDef);
+            ResolvedVerbSpec resolvedVerbSpec = config.EntryType == ChipExpressionEntryTypeConfig.Ability
+                && config.WeaponMode == VerbExpressionModeConfig.Ranged
+                && resolvedVerbProps == null
+                ? ResolvedVerbSpecFactory.FromAbilityDef(
+                    config.AbilityDefName,
+                    config.ProjectileOverrides)
+                : ResolvedVerbSpecFactory.FromDeclared(
+                    resolvedVerbProps,
+                    resolvedTool,
+                    declaredTools,
+                    null,
+                    resolvedManeuver,
+                    config.DirectTargetLineOfSight,
+                    config.ProjectileOverrides);
+            ApplyMeleeBurstExecution(resolvedVerbSpec, config, executionStyle);
+            IReadOnlyList<MeleeToolSurface> declaredMeleeToolSurfaces = MeleeToolSurfaceBuilder.Build(
                 config,
-                declaredTools);
-            ResolvedVerbSpec resolvedVerbSpec = ResolvedVerbSpecFactory.FromDeclared(
-                resolvedVerbProps,
-                resolvedTool,
                 declaredTools,
-                declaredMeleeToolSurfaces,
-                resolvedManeuver,
-                config.DirectTargetLineOfSight,
-                config.ProjectileOverrides);
+                executionStyle);
             return new ChipExpressionEntryContract
             {
                 Id = config.Id,
@@ -527,22 +542,24 @@ namespace BDP.Core.Expressions
                 VisualPresetDefName = config.Presentation != null ? config.Presentation.VisualPresetDefName : null,
                 VisualGraphicOverrideDefName = config.Presentation != null ? config.Presentation.VisualGraphicOverrideDefName : null,
                 CompositeVisualPresetDefName = config.Presentation != null ? config.Presentation.CompositeVisualPresetDefName : null,
+                ComboAttackVisualPresetDefName = config.Presentation != null ? config.Presentation.ComboAttackVisualPresetDefName : null,
                 ForceSuppressHostEquipment = config.Presentation != null && config.Presentation.ForceSuppressHostEquipment,
                 VisualPriority = config.Presentation != null ? config.Presentation.VisualPriority : 0,
-                Kind = TranslateEntryKind(config.Kind),
-                VerbAttackRole = ResolveDeclaredVerbAttackRole(config.Kind),
+                EntryType = TranslateEntryType(config.EntryType),
+                VerbAttackRole = ResolveDeclaredVerbAttackRole(config.EntryType),
                 RoleKey = config.RoleKey,
                 Tags = config.Tags != null ? new List<string>(config.Tags) : new List<string>(),
+                DeclaredPermissionKeys = CloneDeclaredPermissionKeys(config.DeclaredPermissionKeys),
                 Conditions = config.Conditions != null
                     ? new List<ExpressionSourceConditionConfig>(config.Conditions)
                     : new List<ExpressionSourceConditionConfig>(),
                 Trion = config.Trion,
                 RelationKind = TranslateRelationKind(config.RelationKind),
                 ParentEntryId = config.ParentEntryId,
-                WeaponMode = config.WeaponMode,
+                WeaponMode = ChipExpressionCapabilityResolver.ResolveWeaponMode(config),
                 ModeKey = modeKey,
                 StanceKey = stanceKey,
-                ExecutionStyle = ResolveExecutionStyle(config, resolvedTool),
+                ExecutionStyle = executionStyle,
                 VerbProps = ResolvedVerbSpecFactory.CreateSurfaceVerbProps(resolvedVerbSpec),
                 ResolvedVerbSpec = resolvedVerbSpec,
                 Tool = resolvedTool,
@@ -552,12 +569,14 @@ namespace BDP.Core.Expressions
                 AbilityDefName = config.AbilityDefName,
                 HediffDefName = config.HediffDefName,
                 HediffApplyModeKey = config.HediffApplyModeKey,
-                PassiveKey = config.PassiveKey,
+                HediffControlMode = config.HediffControlMode,
+                PassiveIdentityKey = config.PassiveIdentityKey,
                 ExposedData = config.ExposedData,
                 SemanticSourceKind = config.SemanticSourceKind,
                 RangedModules = config.RangedModules != null
                     ? CloneRangedModules(config.RangedModules)
                     : new List<RangedModuleMountConfig>(),
+                HitPartPolicy = CloneHitPartPolicy(config.HitPartPolicy),
                 RangedModuleAugmentations = config.RangedModuleAugmentations != null
                     ? CloneRangedModuleAugmentations(config.RangedModuleAugmentations)
                     : new List<RangedModuleAugmentationConfig>(),
@@ -578,33 +597,33 @@ namespace BDP.Core.Expressions
         /// <summary>
         /// 翻译条目种类。
         /// </summary>
-        private static ChipExpressionEntryKind TranslateEntryKind(ChipExpressionEntryKindConfig kind)
+        private static ChipExpressionEntryType TranslateEntryType(ChipExpressionEntryTypeConfig entryType)
         {
-            switch (kind)
+            switch (entryType)
             {
-                case ChipExpressionEntryKindConfig.SecondaryVerb:
-                    return ChipExpressionEntryKind.SecondaryVerb;
-                case ChipExpressionEntryKindConfig.Ability:
-                    return ChipExpressionEntryKind.Ability;
-                case ChipExpressionEntryKindConfig.Hediff:
-                    return ChipExpressionEntryKind.Hediff;
-                case ChipExpressionEntryKindConfig.Passive:
-                    return ChipExpressionEntryKind.Passive;
+                case ChipExpressionEntryTypeConfig.SecondaryVerb:
+                    return ChipExpressionEntryType.SecondaryVerb;
+                case ChipExpressionEntryTypeConfig.Ability:
+                    return ChipExpressionEntryType.Ability;
+                case ChipExpressionEntryTypeConfig.Hediff:
+                    return ChipExpressionEntryType.Hediff;
+                case ChipExpressionEntryTypeConfig.Passive:
+                    return ChipExpressionEntryType.Passive;
                 default:
-                    return ChipExpressionEntryKind.PrimaryVerb;
+                    return ChipExpressionEntryType.PrimaryVerb;
             }
         }
 
         /// <summary>
         /// 把作者写法的 Verb 主副意图翻译成内部主副标记。
         /// </summary>
-        private static VerbAttackRole ResolveDeclaredVerbAttackRole(ChipExpressionEntryKindConfig kind)
+        private static VerbAttackRole ResolveDeclaredVerbAttackRole(ChipExpressionEntryTypeConfig entryType)
         {
-            switch (kind)
+            switch (entryType)
             {
-                case ChipExpressionEntryKindConfig.SecondaryVerb:
+                case ChipExpressionEntryTypeConfig.SecondaryVerb:
                     return VerbAttackRole.Secondary;
-                case ChipExpressionEntryKindConfig.PrimaryVerb:
+                case ChipExpressionEntryTypeConfig.PrimaryVerb:
                     return VerbAttackRole.Primary;
                 default:
                     return VerbAttackRole.None;
@@ -647,10 +666,10 @@ namespace BDP.Core.Expressions
                 validation.Errors.Add(sustainErrors[i]);
             }
 
-            switch (config.Kind)
+            switch (config.EntryType)
             {
-                case ChipExpressionEntryKindConfig.PrimaryVerb:
-                case ChipExpressionEntryKindConfig.SecondaryVerb:
+                case ChipExpressionEntryTypeConfig.PrimaryVerb:
+                case ChipExpressionEntryTypeConfig.SecondaryVerb:
                     // 定义校验只检查原始结构，不应在语言系统尚未稳定时提前冻结运行时名称。
                     List<Tool> declaredTools = ResolveDeclaredTools(config.Tool, config.tools, null);
                     Tool resolvedTool = ResolvePrimaryDeclaredTool(declaredTools);
@@ -687,7 +706,7 @@ namespace BDP.Core.Expressions
                     ValidateExecutionStyle(config, context, meleeEntry, validation);
                     break;
 
-                case ChipExpressionEntryKindConfig.Ability:
+                case ChipExpressionEntryTypeConfig.Ability:
                     if (string.IsNullOrWhiteSpace(config.AbilityDefName))
                     {
                         validation.IsValid = false;
@@ -695,7 +714,7 @@ namespace BDP.Core.Expressions
                     }
                     break;
 
-                case ChipExpressionEntryKindConfig.Hediff:
+                case ChipExpressionEntryTypeConfig.Hediff:
                     if (string.IsNullOrWhiteSpace(config.HediffDefName))
                     {
                         validation.IsValid = false;
@@ -703,11 +722,11 @@ namespace BDP.Core.Expressions
                     }
                     break;
 
-                case ChipExpressionEntryKindConfig.Passive:
-                    if (string.IsNullOrWhiteSpace(config.PassiveKey))
+                case ChipExpressionEntryTypeConfig.Passive:
+                    if (string.IsNullOrWhiteSpace(config.PassiveIdentityKey))
                     {
                         validation.IsValid = false;
-                        validation.Errors.Add(context + " 缺少 PassiveKey。");
+                        validation.Errors.Add(context + " 缺少 PassiveIdentityKey。");
                     }
                     break;
             }
@@ -719,9 +738,8 @@ namespace BDP.Core.Expressions
         /// </summary>
         private static bool IsMeleeEntry(ChipExpressionEntryConfig config)
         {
-            return config != null
-                && (config.WeaponMode == VerbExpressionModeConfig.Melee
-                    || (config.VerbProps != null && config.VerbProps.IsMeleeAttack));
+            return ChipExpressionCapabilityResolver.ResolveWeaponMode(config)
+                == VerbExpressionModeConfig.Melee;
         }
 
         /// <summary>
@@ -818,41 +836,6 @@ namespace BDP.Core.Expressions
         }
 
         /// <summary>
-        /// 为当前条目声明的每把 Tool 生成一份近战运行时表面。
-        /// 多 tool 仍读取原版字段，只是不再在解释入口丢掉后续项。
-        /// </summary>
-        private static IReadOnlyList<MeleeToolSurface> BuildDeclaredMeleeToolSurfaces(
-            ChipExpressionEntryConfig config,
-            IReadOnlyList<Tool> declaredTools)
-        {
-            List<MeleeToolSurface> result = new List<MeleeToolSurface>();
-            if (config == null || !IsMeleeEntry(config) || declaredTools == null)
-            {
-                return result;
-            }
-
-            for (int i = 0; i < declaredTools.Count; i++)
-            {
-                Tool declaredTool = declaredTools[i];
-                if (declaredTool == null)
-                {
-                    continue;
-                }
-
-                result.Add(new MeleeToolSurface
-                {
-                    Tool = declaredTool,
-                    VerbProps = ResolveVerbProps(config, declaredTool),
-                    Maneuver = ResolveManeuver(config, declaredTool),
-                    DamageDef = ResolveDamageDef(declaredTool),
-                    DeclaredIndex = i
-                });
-            }
-
-            return result;
-        }
-
-        /// <summary>
         /// 解析最终要进入正式契约的执行风格。
         /// 作者优先写统一 Execution；若缺省，则按武器模式补最小默认风格。
         /// </summary>
@@ -889,6 +872,33 @@ namespace BDP.Core.Expressions
                     RangedRhythm = RangedExecutionRhythm.Sequential
                 }
             };
+        }
+
+        /// <summary>
+        /// 把作者声明的近战连续命中投影到原版 burst 生命周期。
+        /// 一次 burst 只预热一次、每击独立执行，最后统一进入原版冷却。
+        /// </summary>
+        private static void ApplyMeleeBurstExecution(
+            ResolvedVerbSpec target,
+            ChipExpressionEntryConfig config,
+            AttackExecutionStyle executionStyle)
+        {
+            if (target == null
+                || config == null
+                || !IsMeleeEntry(config)
+                || config.Execution == null
+                || executionStyle?.Single == null)
+            {
+                return;
+            }
+
+            int hitCount = executionStyle.Single.meleeHitCount > 0
+                ? executionStyle.Single.meleeHitCount
+                : 1;
+            target.BurstShotCount = hitCount;
+            target.TicksBetweenBurstShots = executionStyle.Single.meleeHitIntervalTicks > 0
+                ? executionStyle.Single.meleeHitIntervalTicks
+                : 0;
         }
 
         /// <summary>
@@ -997,105 +1007,6 @@ namespace BDP.Core.Expressions
         }
 
         /// <summary>
-        /// 解析最终要进入正式契约的 VerbProps。
-        /// 近战作者省略 VerbProps 时，这里按最小规则自动合成。
-        /// </summary>
-        private static VerbProperties ResolveVerbProps(ChipExpressionEntryConfig config, Tool tool)
-        {
-            if (config == null)
-            {
-                return null;
-            }
-
-            if (config.VerbProps != null)
-            {
-                return config.VerbProps;
-            }
-
-            if (!IsMeleeEntry(config) || tool == null)
-            {
-                return null;
-            }
-
-            return new VerbProperties
-            {
-                verbClass = typeof(BdpVerb_MeleeAttackDamage),
-                hasStandardCommand = true,
-                label = !string.IsNullOrWhiteSpace(tool.label)
-                    ? tool.label
-                    : (!string.IsNullOrWhiteSpace(config.DisplayLabel)
-                        ? config.DisplayLabel
-                        : "BDP_Message_Expression_DefaultMeleeAttack".Translate().ToString()),
-                range = 1.42f,
-                meleeDamageBaseAmount = tool.power > 0f ? (int)Math.Round(tool.power) : 1,
-                meleeDamageDef = ResolveDamageDef(tool),
-                defaultCooldownTime = tool.cooldownTime > 0f ? tool.cooldownTime : 1f
-            };
-        }
-
-        /// <summary>
-        /// 解析最终要进入正式契约的 Maneuver。
-        /// 作者未显式声明时，按 Tool 的首个 capacity 推导。
-        /// </summary>
-        private static ManeuverDef ResolveManeuver(ChipExpressionEntryConfig config, Tool tool)
-        {
-            if (config?.Maneuver != null)
-            {
-                return config.Maneuver;
-            }
-
-            ToolCapacityDef capacity = ResolvePrimaryCapacity(tool);
-            if (capacity == null)
-            {
-                return null;
-            }
-
-            List<ManeuverDef> allDefs = DefDatabase<ManeuverDef>.AllDefsListForReading;
-            for (int i = 0; i < allDefs.Count; i++)
-            {
-                ManeuverDef current = allDefs[i];
-                if (current != null && current.requiredCapacity == capacity)
-                {
-                    return current;
-                }
-            }
-
-            return allDefs.Count > 0 ? allDefs[0] : null;
-        }
-
-        /// <summary>
-        /// 从 Tool 推导近战伤害类型。
-        /// </summary>
-        private static DamageDef ResolveDamageDef(Tool tool)
-        {
-            ToolCapacityDef capacity = ResolvePrimaryCapacity(tool);
-            string capacityDefName = capacity != null ? capacity.defName : null;
-            if (string.Equals(capacityDefName, "Stab", StringComparison.OrdinalIgnoreCase))
-            {
-                return DamageDefOf.Stab;
-            }
-
-            if (string.Equals(capacityDefName, "Blunt", StringComparison.OrdinalIgnoreCase))
-            {
-                return DamageDefOf.Blunt;
-            }
-
-            return DamageDefOf.Cut;
-        }
-
-        /// <summary>
-        /// 读取 Tool 的首个 capacity。
-        /// </summary>
-        private static ToolCapacityDef ResolvePrimaryCapacity(Tool tool)
-        {
-            return tool != null
-                && tool.capacities != null
-                && tool.capacities.Count > 0
-                ? tool.capacities[0]
-                : null;
-        }
-
-        /// <summary>
         /// 对条目声明的模块挂载列表做最小快照复制。
         /// 当前只冻结顺序与显式配置，不在这里解释业务语义。
         /// </summary>
@@ -1123,6 +1034,14 @@ namespace BDP.Core.Expressions
         }
 
         /// <summary>
+        /// 复制可选命中部位策略快照，不在 Core 解释策略键。
+        /// </summary>
+        private static HitPartPolicyConfig CloneHitPartPolicy(HitPartPolicyConfig policy)
+        {
+            return policy != null ? policy.Clone() : null;
+        }
+
+        /// <summary>
         /// 对条目发布的开放式远程增强声明做最小快照复制。
         /// </summary>
         private static IReadOnlyList<RangedModuleAugmentationConfig> CloneRangedModuleAugmentations(
@@ -1145,6 +1064,12 @@ namespace BDP.Core.Expressions
             }
 
             return result;
+        }
+
+        /// <summary>复制作者显式声明的许可键列表。</summary>
+        private static IReadOnlyList<string> CloneDeclaredPermissionKeys(IReadOnlyList<string> declaredPermissionKeys)
+        {
+            return declaredPermissionKeys != null ? new List<string>(declaredPermissionKeys) : new List<string>();
         }
 
         /// <summary>
@@ -1257,7 +1182,7 @@ namespace BDP.Core.Expressions
             for (int i = 0; i < entries.Count; i++)
             {
                 ChipExpressionEntryContract entry = entries[i];
-                if (entry != null && IsVerbEntry(entry.Kind))
+                if (entry != null && IsVerbEntry(entry.EntryType))
                 {
                     verbEntries.Add(entry);
                 }
@@ -1300,12 +1225,12 @@ namespace BDP.Core.Expressions
                 }
             }
 
-            primary.Kind = ChipExpressionEntryKind.PrimaryVerb;
+            primary.EntryType = ChipExpressionEntryType.PrimaryVerb;
             primary.VerbAttackRole = VerbAttackRole.Primary;
 
             if (secondary != null)
             {
-                secondary.Kind = ChipExpressionEntryKind.SecondaryVerb;
+                secondary.EntryType = ChipExpressionEntryType.SecondaryVerb;
                 secondary.VerbAttackRole = VerbAttackRole.Secondary;
             }
         }
@@ -1313,10 +1238,10 @@ namespace BDP.Core.Expressions
         /// <summary>
         /// 判断当前条目是否属于 Verb 通道。
         /// </summary>
-        private static bool IsVerbEntry(ChipExpressionEntryKind kind)
+        private static bool IsVerbEntry(ChipExpressionEntryType entryType)
         {
-            return kind == ChipExpressionEntryKind.PrimaryVerb
-                || kind == ChipExpressionEntryKind.SecondaryVerb;
+            return entryType == ChipExpressionEntryType.PrimaryVerb
+                || entryType == ChipExpressionEntryType.SecondaryVerb;
         }
     }
 }

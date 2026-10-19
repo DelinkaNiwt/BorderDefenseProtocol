@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 原版或其他补丁改变遗传结构时，完整回退，避免只放行一方父母。 -->
+  <BDP_RoyalBloodlineInheritancePatchMismatch>BDP 皇室血脉遗传补丁未能完整匹配父母两处超凡检查（实际匹配 {0} 处），已保留原有遗传指令。</BDP_RoyalBloodlineInheritancePatchMismatch>
+</LanguageData>

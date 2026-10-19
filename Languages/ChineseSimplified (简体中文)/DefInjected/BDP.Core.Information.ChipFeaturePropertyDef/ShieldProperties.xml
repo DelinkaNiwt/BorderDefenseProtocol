@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <!-- 护盾本体可选信息。 -->
+  <BDP_Property_ShieldCapacity.label>护盾容量</BDP_Property_ShieldCapacity.label>
+  <BDP_Property_ShieldRecovery.label>护盾恢复速度</BDP_Property_ShieldRecovery.label>
+  <!-- 护盾功能及其抵挡属性的简体中文名称。 -->
+  <BDP_Property_BlockArc.label>抵挡角度</BDP_Property_BlockArc.label>
+  <BDP_Property_BlockChance.label>抵挡概率</BDP_Property_BlockChance.label>
+  <BDP_Property_BlockAttackTypes.label>抵挡攻击类型</BDP_Property_BlockAttackTypes.label>
+  <BDP_Property_DamageAbsorptionRatio.label>伤害吸收比例</BDP_Property_DamageAbsorptionRatio.label>
+  <BDP_Property_BlockCost.label>抵挡消耗</BDP_Property_BlockCost.label>
+
+</LanguageData>

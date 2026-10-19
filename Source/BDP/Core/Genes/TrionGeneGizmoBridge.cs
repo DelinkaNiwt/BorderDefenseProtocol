@@ -16,7 +16,8 @@ namespace BDP.Core.Genes
         /// </summary>
         public static IEnumerable<Gizmo> BuildGizmos(Pawn pawn)
         {
-            if (pawn == null || pawn.Faction != Faction.OfPlayer)
+            if (pawn == null || pawn.Faction != Faction.OfPlayer
+                || !TrionResourceRuleRegistry.GetRules(pawn).CapacityInfoVisible)
             {
                 yield break;
             }
@@ -29,7 +30,7 @@ namespace BDP.Core.Genes
 
             yield return new Gizmo_TrionStatus(pawn, reader);
 
-            if (!DebugSettings.godMode)
+            if (!DebugSettings.godMode || !pawn.IsPlayerControlled)
             {
                 yield break;
             }

@@ -45,8 +45,7 @@ Assert-True (
 ) 'ResolveVisualSampleEnd must prioritize frozen terminal truth and must no longer use theoretical path end or sampleStart as the primary destroyed-path visual endpoint.'
 
 Assert-True (
-    ($projectileText -match 'FreezeTerminalVisualExactPosition\s*\(\s*NormalizeFlightPlanePoint\s*\(\s*ExactPosition\s*\)\s*\)\s*;') -or
-    ($projectileText -match 'FreezeTerminalVisualExactPosition\s*\(\s*ResolveCurrentTerminalVisualExactPosition\s*\(\s*\)\s*\)\s*;')
+    ($projectileText -match 'FreezeTerminalVisualExactPosition\s*\([\s\S]*?ResolveCurrentTerminalVisualExactPosition\s*\(\s*\)')
 ) 'BdpProjectile must freeze the real current projectile truth before destroy-time cleanup.'
 
 Write-Output 'RangedTerminalVisualSampleTruthSmokeTests PASS'

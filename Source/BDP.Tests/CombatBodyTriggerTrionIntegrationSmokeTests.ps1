@@ -83,13 +83,13 @@ Assert-True (
 ) 'CombatBodyService must expose internal EnterCollapsing(string reason).'
 
 Assert-True (
-    ($combatBodySessionServiceText -match 'public bool TryActivate\(\)[\s\S]*return activationTransaction\.TryActivate\(OwnerPawn\);') -and
+    ($combatBodySessionServiceText -match 'public bool TryActivate\(\)[\s\S]*activationTransaction\.TryActivate\(OwnerPawn\)[\s\S]*return activated;') -and
     ($battleActivationTransactionText -match 'public bool TryActivate\(Pawn ownerPawn\)[\s\S]*rawCombatBodyService\.CanActivate\(\)[\s\S]*policy\.TryResolvePrimaryTrigger\(ownerPawn, out CompTriggerBody trigger\)[\s\S]*CalculateCombatBodyAllocateAmount\(trigger\)[\s\S]*trionCommands\.CanAfford\(allocateAmount\)[\s\S]*trionCommands\.Allocate\(allocateAmount\)[\s\S]*rawCombatBodyService\.TryEnterActive\(allocateAmount\)[\s\S]*TryAutoActivateSpecialSlots\(trigger\)[\s\S]*trionBinding\.BindActiveRuntime\(\)[\s\S]*trionCommands\.SetFrozen\(true\)[\s\S]*notifyCombatBodySessionStateChanged\(\)')
 ) 'CombatBodySessionService.TryActivate() must delegate to CombatBodyActivationTransaction, and the transaction must own the activation chain order.'
 
 Assert-True (
     ($combatBodySessionServiceText -match 'private void ExecuteExit\(CombatBodySessionExitMode exitMode\)[\s\S]*exitTransaction\.Execute\(OwnerPawn, exitMode\);') -and
-    ($battleExitTransactionText -match 'public void Execute\(Pawn ownerPawn, CombatBodySessionExitMode exitMode\)[\s\S]*TriggerSurfaceAccess\.ResolveLoadoutCommands\(ownerPawn\)[\s\S]*DeactivateAllSlots\(triggerLoadoutCommands\)[\s\S]*trionBinding\.ClearActiveRuntime\(\)[\s\S]*trionCommands\.Release\(rawCombatBodyService\.AllocatedTrion\)[\s\S]*trionCommands\.SetFrozen\(false\)[\s\S]*rawCombatBodyService\.EnterCooldown\(ResolveCooldownTicks\(exitMode\), ResolveExitReason\(exitMode\)\)[\s\S]*notifyCombatBodySessionStateChanged\(\)')
+    ($battleExitTransactionText -match 'private void ExecuteInternal\(Pawn ownerPawn, CombatBodySessionExitMode exitMode, bool forceRelease\)[\s\S]*TriggerSurfaceAccess\.ResolveLoadoutCommands\(ownerPawn\)[\s\S]*DeactivateAllSlots\(triggerLoadoutReader, triggerLoadoutCommands\)[\s\S]*trionBinding\.ClearActiveRuntime\(\)[\s\S]*trionCommands\.Release\(rawCombatBodyService\.AllocatedTrion\)[\s\S]*trionCommands\.SetFrozen\(false\)[\s\S]*rawCombatBodyService\.EnterCooldown\(ResolveCooldownTicks\(exitMode\), ResolveExitReason\(exitMode\)\)[\s\S]*notifyCombatBodySessionStateChanged\(\)')
 ) 'CombatBodySessionService release/collapse exit chain must delegate to CombatBodyExitTransaction, and the transaction must own the ordered cleanup.'
 
 Assert-True (
@@ -209,8 +209,8 @@ Assert-True (
 ) 'CombatBodyTriggerGizmoBootstrap must register CombatBodyTriggerGizmoProvider into TriggerExternalGizmoRegistry.'
 
 Assert-True (
-    ($combatBodyTriggerGizmoProviderText -match 'defaultLabel = "开启战斗体"') -and
-    ($combatBodyTriggerGizmoProviderText -match 'defaultLabel = "解除战斗体"') -and
+    ($combatBodyTriggerGizmoProviderText -match 'BDP_Command_CombatBody_Activate') -and
+    ($combatBodyTriggerGizmoProviderText -match 'BDP_Command_CombatBody_Release') -and
     ($combatBodyTriggerGizmoProviderText -match 'action = commands\.RequestRelease') -and
     ($combatBodyTriggerGizmoProviderText -notmatch 'RequestDeactivate\(false\)')
 ) 'Formal combat-body buttons must expose the confirmed labels and use RequestRelease.'
@@ -225,4 +225,3 @@ Assert-True (
 ) 'CombatBody collapse must enter the formal disabled state immediately, and activation must clear that disabled state before re-entering battle mode.'
 
 Write-Output 'CombatBodyTriggerTrionIntegration PASS'
-

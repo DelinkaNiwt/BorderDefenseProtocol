@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BDP.Core.Trigger;
 using BDP.Core.Trion;
 using RimWorld;
 using Verse;
@@ -42,6 +43,7 @@ namespace BDP.Core.Genes
         public override void PostRemove()
         {
             base.PostRemove();
+            TriggerBodyEquipmentEligibility.HandleGlandEligibilityLost(pawn);
             RefreshTrionDerivedStats(TrionEligibilityChangeReason.Lost);
             activeObservationInitialized = false;
         }
@@ -66,6 +68,11 @@ namespace BDP.Core.Genes
             }
 
             lastObservedActive = active;
+            if (!active)
+            {
+                TriggerBodyEquipmentEligibility.HandleGlandEligibilityLost(pawn);
+            }
+
             RefreshTrionDerivedStats(
                 active
                     ? TrionEligibilityChangeReason.RuntimeGranted

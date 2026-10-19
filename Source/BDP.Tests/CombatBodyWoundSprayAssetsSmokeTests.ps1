@@ -14,7 +14,7 @@ function Assert-True {
 $sourceRoot = Split-Path -Parent $PSScriptRoot
 $repoRoot = Split-Path -Parent $sourceRoot
 
-$fleckXmlPath = Join-Path $repoRoot '1.6\Content\Defs\Flecks\FleckDefs_WoundSpray.xml'
+$fleckXmlPath = Join-Path $repoRoot '1.6\Content\Defs\FleckDef\CombatBody.xml'
 $texturePath = Join-Path $repoRoot '1.6\Textures\BDP\Effects\LeakParticle.png'
 
 Assert-True (Test-Path -LiteralPath $fleckXmlPath) 'Wound spray FleckDefs XML must exist.'

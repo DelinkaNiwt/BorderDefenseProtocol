@@ -48,7 +48,7 @@ $hasProjectileExposeData =
     $projectileText.Contains("public override void ExposeData()") -and
     $projectileText.Contains("Scribe_Deep.Look(ref launchPlan") -and
     $projectileText.Contains("Scribe_Deep.Look(ref currentFlightRecord") -and
-    $projectileText.Contains("Scribe_Values.Look(ref speedTickRemainder") -and
+    $planText.Contains('InitialSpeedFactor = initialSpeedFactor') -and
     $projectileText.Contains("SemanticContext = launchPlan != null ? launchPlan.SemanticContext : null")
 Assert-True $hasProjectileExposeData "BdpProjectile must persist and restore the launch plan, flight record, and semantic bridge state."
 

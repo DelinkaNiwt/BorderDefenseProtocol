@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using RimWorld;
 using UnityEngine;
 using Verse;
+using BDP.Content.Information.Features;
 
 namespace BDP.Content.SenkuKogetsu
 {
@@ -9,7 +10,8 @@ namespace BDP.Content.SenkuKogetsu
     /// 旋空弧月 Ability 效果配置。
     /// 它集中保存旧 BDP 月牙剑气业务需要的形状、伤害、运动与视觉参数。
     /// </summary>
-    public sealed class CompProperties_SenkuKogetsuWave : CompProperties_AbilityEffect
+    public sealed class CompProperties_SenkuKogetsuWave : CompProperties_AbilityEffect,
+        IAbilityMeleeAttackInformation
     {
         /// <summary>
         /// 当前 Ability 施放后生成的月牙剑气实体 Def。
@@ -116,6 +118,15 @@ namespace BDP.Content.SenkuKogetsu
         /// 当前月牙剑气是否对建筑造成伤害。
         /// </summary>
         public bool damageBuildings = false;
+
+        /// <summary>向只读信息解析提供当前近战伤害。</summary>
+        int IAbilityMeleeAttackInformation.DamageAmount => damageAmount;
+
+        /// <summary>向只读信息解析提供当前近战伤害类型。</summary>
+        DamageDef IAbilityMeleeAttackInformation.DamageDef => damageDef;
+
+        /// <summary>向只读信息解析提供当前近战护甲穿透。</summary>
+        float IAbilityMeleeAttackInformation.ArmorPenetration => armorPenetration;
 
         /// <summary>
         /// 当前月牙剑气对建筑的伤害倍率。
@@ -227,7 +238,8 @@ namespace BDP.Content.SenkuKogetsu
 
             BdpSenkuKogetsuWave wave =
                 (BdpSenkuKogetsuWave)GenSpawn.Spawn(Props.waveDef, pawn.Position, map);
-            wave.Launch(pawn, origin, destination, setRange, Props);
+            // 波体延迟命中时不能再读取当前芯片；把本次实际施放的能力定义交给波体保存。
+            wave.Launch(pawn, origin, destination, setRange, Props, parent.def);
         }
 
         /// <summary>

@@ -20,7 +20,7 @@ function Read-Source {
 $modRoot = Join-Path $PSScriptRoot '..\..'
 $coreRoot = Join-Path $modRoot 'Source\BDP\Core'
 $contentRoot = Join-Path $modRoot 'Source\BDP.Content'
-$xmlPath = Join-Path $modRoot '1.6\Content\Defs\RangedModuleDef\RangedDebuff.xml'
+$xmlPath = Join-Path $modRoot 'Common\Content\Defs\ChipManufacturingPresetDef\Presets.xml'
 
 $appearancePath = Join-Path $coreRoot 'Projectiles\Visual\ProjectileVisualAppearanceOverrides.cs'
 $contractsPath = Join-Path $coreRoot 'Projectiles\Visual\ProjectileVisualAttachmentContracts.cs'
@@ -109,6 +109,13 @@ Assert-True (
     ($xmlText -match '<HasProjectileTrailColor>') -or
     ($configText -match 'HasProjectileTrailColor')
 ) '远程减益配置仍必须保留可选的拖尾颜色覆盖接口。'
+
+[xml]$mountXml = $xmlText
+$leadMount = $mountXml.SelectSingleNode("/Defs/*[defName='BDP_ChipFunction_LeadShotModified']//li[moduleDef='BDP_RangedDebuffModule']/config")
+Assert-True ($null -ne $leadMount) '找不到铅弹实际挂载配置。'
+$leadWeightBlock = $leadMount.OuterXml
+Assert-True ($leadWeightBlock -match '<HasProjectileTrailColor>true</HasProjectileTrailColor>') '铅弹必须启用光束外层颜色覆盖。'
+Assert-True ($leadWeightBlock -match '<ProjectileTrailColor>\(1\.0,\s*0\.35,\s*0\.30,\s*0\.775\)</ProjectileTrailColor>') '铅弹光束外层必须使用偏红色。'
 
 Assert-True (
     ($xmlText -match '<HasProjectileTrailCore>true</HasProjectileTrailCore>') -and

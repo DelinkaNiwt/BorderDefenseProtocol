@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 玩家指派 Pawn 持续操作操作员控制台。 -->
+  <JobDef>
+    <!-- 工作唯一名称。 -->
+    <defName>BDP_OperateOperatorConsole</defName>
+    <!-- 工作驱动。 -->
+    <driverClass>BDP.Content.OperatorConsole.JobDriver_OperateOperatorConsole</driverClass>
+    <!-- 正式文本由语言包提供。 -->
+    <reportString>BDP_OperateOperatorConsole.reportString</reportString>
+    <playerInterruptible>true</playerInterruptible>
+  </JobDef>
+
+</Defs>

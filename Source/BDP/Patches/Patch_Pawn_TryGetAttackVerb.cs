@@ -26,7 +26,11 @@ namespace BDP.Patches
                 return;
             }
 
-            if (!AttackExecutionSurfaceAccess.TryGetAutoRangedVerb(__instance, allowManualCastWeapons, target, out Verb rangedVerb))
+            if (!AttackExecutionSurfaceAccess.TryGetAutoRangedVerb(
+                    __instance,
+                    allowManualCastWeapons,
+                    target,
+                    out Verb rangedVerb))
             {
                 return;
             }

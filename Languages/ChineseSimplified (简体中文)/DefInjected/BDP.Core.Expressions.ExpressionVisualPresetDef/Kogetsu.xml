@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 表达视觉预设 Def。 -->
+
+  <BDP_Visual_Kogetsu.label>弧月手持视觉</BDP_Visual_Kogetsu.label>
+  <BDP_Visual_Fujin.label>风刃手持视觉</BDP_Visual_Fujin.label>
+  <!-- 蝎子手持视觉预设名称。 -->
+  <BDP_Visual_Scorpion.label>蝎子手持视觉</BDP_Visual_Scorpion.label>
+  <!-- 蝎子双持视觉预设名称。 -->
+  <BDP_Visual_Scorpion_Dual.label>蝎子双持视觉</BDP_Visual_Scorpion_Dual.label>
+  <!-- 光魂防护与重刃的独立视觉预设。 -->
+  <BDP_Visual_LightSoulDefenseShield.label>光魂防护形态视觉</BDP_Visual_LightSoulDefenseShield.label>
+  <!-- 保留的复合视觉与公共定义使用相同的防护命名。 -->
+  <BDP_Visual_LightSoulDefenseShield_Dual.label>光魂防护形态双武器视觉</BDP_Visual_LightSoulDefenseShield_Dual.label>
+  <BDP_Visual_LightSoulHeavyBlade.label>光魂重刃手持视觉</BDP_Visual_LightSoulHeavyBlade.label>
+</LanguageData>

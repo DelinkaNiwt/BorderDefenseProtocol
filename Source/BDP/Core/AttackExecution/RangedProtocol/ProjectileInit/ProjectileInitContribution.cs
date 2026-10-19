@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using BDP.Core.AttackExecution.RangedModules.Runtime;
 using BDP.Core.Projectiles.RangedFlightProtocol.Model;
 using BDP.Core.Projectiles.Interaction;
+using BDP.Core.Projectiles.Visual;
 using UnityEngine;
 using Verse;
 
@@ -34,6 +35,18 @@ namespace BDP.Core.AttackExecution.RangedProtocol.ProjectileInit
     /// </summary>
     public sealed class ProjectileInitPlanContribution
     {
+        /// <summary>本贡献合并后独占该发的初始导航与轨迹；不锁定其他效果。</summary>
+        public bool ExclusiveFlightControl { get; set; }
+        /// <summary>
+        /// 当前局部贡献是否显式覆盖投射物 Def。
+        /// </summary>
+        public bool HasOverrideProjectileDef { get; set; }
+
+        /// <summary>
+        /// 当前局部贡献给出的投射物 Def 覆盖值。
+        /// </summary>
+        public ThingDef OverrideProjectileDef { get; set; }
+
         /// <summary>
         /// 当前局部贡献是否提交投射物交互策略。
         /// </summary>
@@ -43,6 +56,16 @@ namespace BDP.Core.AttackExecution.RangedProtocol.ProjectileInit
         /// 当前局部贡献提交的投射物交互策略。
         /// </summary>
         public ProjectileInteractionPolicy InteractionPolicy { get; set; }
+
+        /// <summary>
+        /// 当前局部贡献是否显式提供视觉轨迹参数。
+        /// </summary>
+        public bool HasVisualTrajectoryProfile { get; set; }
+
+        /// <summary>
+        /// 当前局部贡献给出的视觉轨迹参数。
+        /// </summary>
+        public ProjectileVisualTrajectoryProfile VisualTrajectoryProfile { get; set; }
 
         /// <summary>
         /// 当前局部贡献是否显式覆盖投射物拖尾颜色。
@@ -90,6 +113,17 @@ namespace BDP.Core.AttackExecution.RangedProtocol.ProjectileInit
         public Vector3 OverrideOriginWorld { get; set; }
 
         /// <summary>
+        /// 当前局部贡献是否显式覆盖发射点散布偏移。
+        /// 该字段只承载已解析的中性世界偏移，不携带具体能力语义。
+        /// </summary>
+        public bool HasOriginSpreadOffsetOverride { get; set; }
+
+        /// <summary>
+        /// 当前局部贡献给出的发射点散布偏移。
+        /// </summary>
+        public Vector3 OriginSpreadOffsetOverrideWorld { get; set; }
+
+        /// <summary>
         /// 当前局部贡献是否显式覆盖 LaunchTarget。
         /// 它只承载当前 projectile 的首段导航目标，不承担正式命中语义。
         /// </summary>
@@ -100,6 +134,17 @@ namespace BDP.Core.AttackExecution.RangedProtocol.ProjectileInit
         /// 它只服务首段物理导航与 LOS，不得被当作最终命中目标。
         /// </summary>
         public LocalTargetInfo OverrideLaunchTarget { get; set; }
+
+        /// <summary>
+        /// 当前局部贡献是否显式提供最终进攻段起点格。
+        /// 该字段只描述轨迹几何，不携带射击者语义。
+        /// </summary>
+        public bool HasFinalApproachStartCell { get; set; }
+
+        /// <summary>
+        /// 当前局部贡献给出的最终进攻段起点格。
+        /// </summary>
+        public IntVec3 FinalApproachStartCell { get; set; } = IntVec3.Invalid;
 
         /// <summary>
         /// 当前局部贡献是否显式覆盖 AimTarget。

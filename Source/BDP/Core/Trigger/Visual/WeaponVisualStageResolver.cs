@@ -17,6 +17,43 @@ namespace BDP.Core.Trigger.Visual
     internal sealed class WeaponVisualStageResolver
     {
         /// <summary>
+        /// 判断 Pawn 当前是否处于与已发布攻击状态匹配的 BDP 正式忙碌姿态。
+        /// </summary>
+        internal bool IsMatchingAttackStanceActive(
+            Pawn pawn,
+            TriggerCombatProjectionState combatProjection,
+            TriggerVisualRuntimeState visualRuntimeState)
+        {
+            if (pawn == null
+                || pawn.stances == null
+                || visualRuntimeState == null
+                || !visualRuntimeState.HasExecutionState)
+            {
+                return false;
+            }
+
+            Stance currentStance = pawn.stances.curStance;
+            Stance_Busy busyStance = currentStance as Stance_Busy;
+            Verb hostVerb = busyStance != null ? busyStance.verb : null;
+            AttackSessionToken token = ResolveFormalHostSessionToken(hostVerb);
+
+            if (hostVerb == null
+                || (!(currentStance is Stance_Warmup)
+                    && !hostVerb.Bursting
+                    && !(currentStance is Stance_Cooldown)))
+            {
+                return false;
+            }
+
+            return HasValidFormalSession(
+                pawn,
+                hostVerb,
+                token,
+                combatProjection,
+                visualRuntimeState);
+        }
+
+        /// <summary>
         /// 为一个常驻视觉条目解析当前动作阶段。
         /// 任何正式身份矛盾都会回退到空闲态，不猜测缺失的攻击真值。
         /// </summary>
@@ -30,10 +67,8 @@ namespace BDP.Core.Trigger.Visual
                 ? pawn.stances.curStance
                 : null;
             Stance_Busy busyStance = currentStance as Stance_Busy;
-            BdpVerb_FormalHostShoot hostVerb = busyStance != null
-                ? busyStance.verb as BdpVerb_FormalHostShoot
-                : null;
-            AttackSessionToken token = hostVerb != null ? hostVerb.HostSessionToken : null;
+            Verb hostVerb = busyStance != null ? busyStance.verb : null;
+            AttackSessionToken token = ResolveFormalHostSessionToken(hostVerb);
 
             if (!HasValidFormalSession(pawn, hostVerb, token, combatProjection, visualRuntimeState))
             {
@@ -52,10 +87,11 @@ namespace BDP.Core.Trigger.Visual
 
             if (currentStance is Stance_Warmup)
             {
+                BdpVerb_FormalHostShoot rangedHost = hostVerb as BdpVerb_FormalHostShoot;
                 return CreateSnapshot(
                     WeaponVisualActionStage.Warmup,
-                    Mathf.Clamp01(hostVerb.WarmupProgress),
-                    Math.Max(0, hostVerb.WarmupTicksLeft),
+                    rangedHost != null ? Mathf.Clamp01(rangedHost.WarmupProgress) : 0f,
+                    Math.Max(0, busyStance.ticksLeft),
                     matchedSourceResultId,
                     token);
             }
@@ -91,11 +127,26 @@ namespace BDP.Core.Trigger.Visual
         }
 
         /// <summary>
-        /// 校验姿态中的正式远程宿主、令牌、投影和可用视觉执行态是否属于同一会话。
+        /// 读取正式远程或近战宿主保存的当前攻击会话令牌。
+        /// </summary>
+        private static AttackSessionToken ResolveFormalHostSessionToken(Verb hostVerb)
+        {
+            BdpVerb_FormalHostShoot rangedHost = hostVerb as BdpVerb_FormalHostShoot;
+            if (rangedHost != null)
+            {
+                return rangedHost.HostSessionToken;
+            }
+
+            BdpVerb_FormalHostMelee meleeHost = hostVerb as BdpVerb_FormalHostMelee;
+            return meleeHost != null ? meleeHost.HostSessionToken : null;
+        }
+
+        /// <summary>
+        /// 校验姿态中的正式远程或近战宿主、令牌、投影和可用视觉执行态是否属于同一会话。
         /// </summary>
         private static bool HasValidFormalSession(
             Pawn pawn,
-            BdpVerb_FormalHostShoot hostVerb,
+            Verb hostVerb,
             AttackSessionToken token,
             TriggerCombatProjectionState combatProjection,
             TriggerVisualRuntimeState visualRuntimeState)

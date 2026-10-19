@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BDP.Core.Information;
 
 namespace BDP.Core.Expressions
 {
@@ -46,7 +47,7 @@ namespace BDP.Core.Expressions
 
         /// <summary>
         /// 当前结果在公开通道上的稳定发布键。
-        /// Verb 对应执行槽位，Ability 对应 AbilityDefName，Hediff 对应 HediffDefName，Passive 对应 PassiveKey。
+        /// Verb 对应执行槽位，Ability 对应 AbilityDefName，Hediff 对应 HediffDefName，Passive 对应 PassiveIdentityKey。
         /// </summary>
         public string PublishedKey { get; internal set; }
 
@@ -71,9 +72,14 @@ namespace BDP.Core.Expressions
         public string HediffApplyModeKey { get; internal set; }
 
         /// <summary>
+        /// 当前 Hediff 结果的生命周期控制模式。
+        /// </summary>
+        public string HediffControlMode { get; internal set; }
+
+        /// <summary>
         /// 当前 Passive 结果的被动键。
         /// </summary>
-        public string PassiveKey { get; internal set; }
+        public string PassiveIdentityKey { get; internal set; }
 
         /// <summary>
         /// 当前结果角色键。
@@ -156,5 +162,10 @@ namespace BDP.Core.Expressions
         /// 当前结果公开暴露的轻量键值数据集合。
         /// </summary>
         public IReadOnlyList<ExpressionPublishedDatum> ExposedData { get; internal set; }
+
+        /// <summary>当前正式组合结果对应的中性功能树；非组合结果为空。</summary>
+        public ChipFeatureResolutionResult FeatureInformation { get; internal set; }
+
+        /// <summary>
     }
 }

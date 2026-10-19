@@ -24,7 +24,7 @@ namespace BDP.Core.Trigger.Visual
         public Vector3 WorldPosition { get; set; }
 
         /// <summary>
-        /// 当前握持锚点解算使用的局部偏移。
+        /// 当前握持锚点解算使用的归一化贴图局部坐标。
         /// </summary>
         public Vector3 LocalOffset { get; set; }
     }

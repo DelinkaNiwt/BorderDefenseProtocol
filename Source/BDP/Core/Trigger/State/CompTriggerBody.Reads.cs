@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using BDP.Core.AttackExecution;
 using BDP.Core.Expressions;
@@ -66,15 +67,23 @@ namespace BDP.Core.Trigger
         /// </summary>
         internal ITriggerSlotState GetActiveSlot(TriggerSide side)
         {
+            TriggerSlotState passiveSlot = null;
             foreach (TriggerSlotState slot in GetSlots(side))
             {
-                if (slot.IsActive)
+                if (!slot.IsActive)
+                {
+                    continue;
+                }
+
+                if (!TriggerChipActivationControlRegistry.HasIndependentActivationControl(slot.LoadedChip))
                 {
                     return slot;
                 }
+
+                passiveSlot = passiveSlot ?? slot;
             }
 
-            return null;
+            return passiveSlot;
         }
 
         /// <summary>
@@ -279,6 +288,15 @@ namespace BDP.Core.Trigger
         }
 
         /// <summary>
+        /// 芯片模式/姿态选择命令只结算到期切换，不因改变表达选择而强制重扫持有者身体。
+        /// 身体约束仍由激活、停用、装卸命令和身体事实信号同步流程负责。
+        /// </summary>
+        private void PrepareChipSelectionCommandState()
+        {
+            ResolveDueSwitchTransitions();
+        }
+
+        /// <summary>
         /// 装卸芯片前只强制重扫禁用状态，不在这里推进切换。
         /// </summary>
         private void PrepareLoadoutCommandState()
@@ -301,9 +319,23 @@ namespace BDP.Core.Trigger
                 GetSlot,
                 GetActiveSlotRaw,
                 target => triggerService.FindActivationBlockers(target, GetActiveSlotsRaw(), GetSlot),
+                blocker => triggerService.RequestDeactivate(BuildSwitchContext(), blocker.Side, blocker.Index),
                 IsPendingTargetValid,
                 slot => TriggerSwitchTransitionService.DeactivateBoundSlotImmediate(slot, GetSlot, SetSwitchContext, NotifySlotDeactivated),
                 null,
+                NotifySlotActivationCommitted,
+                NotifySlotDeactivated);
+            TriggerSwitchTransitionService.ResolveDueSlotTransitions(
+                GetCurrentTick(),
+                EnumerateRawSlots(),
+                target => triggerService.FindActivationBlockers(target, GetActiveSlotsRaw(), GetSlot),
+                IsPendingTargetValid,
+                slot => slot != null ? slot.SlotSwitchContext : null,
+                (slot, context) => slot?.SetSlotSwitchContext(context),
+                blocker => triggerService.RequestDeactivate(BuildSwitchContext(), blocker.Side, blocker.Index),
+                triggerService.ResolveChipActivationDelayTicks,
+                triggerService.ResolveChipDeactivationDelayTicks,
+                GetSlot,
                 NotifySlotActivationCommitted,
                 NotifySlotDeactivated);
         }
@@ -336,6 +368,7 @@ namespace BDP.Core.Trigger
                     hash = CombineRuntimeStateStamp(hash, slot.IsActive ? 1 : 0);
                     hash = CombineRuntimeStateStamp(hash, slot.IsDisabled ? 1 : 0);
                     hash = CombineRuntimeStateStamp(hash, (int)slot.DisabledReason);
+                    hash = CombineRuntimeStateStamp(hash, CaptureSwitchContextRuntimeStamp(slot.SlotSwitchContext));
                 }
 
                 return hash;
@@ -393,6 +426,8 @@ namespace BDP.Core.Trigger
                 GetRawSlots,
                 GetSwitchContext,
                 SetSwitchContext,
+                slot => slot != null ? slot.SlotSwitchContext : null,
+                (slot, context) => slot?.SetSlotSwitchContext(context),
                 slot => TriggerSwitchTransitionService.DeactivateBoundSlotImmediate(slot, GetSlot, SetSwitchContext, NotifySlotDeactivated),
                 ResolveExternalDisableReason,
                 NotifySlotDisableStateChanged,
@@ -442,7 +477,7 @@ namespace BDP.Core.Trigger
 
         /// <summary>
         /// 当前挂起的远程攻击目标提示。
-        /// 由 GetRangedAttackAction Prefix 设置，在 TryGetActiveRangedPrimaryVerb 中消费一次后清空。
+        /// 由菜单查询作用域设置；整个查询共用，退出后恢复外层提示。
         /// 使属性级 PrimaryVerb 在无参数约束下仍能按目标射程选择正确 Verb。
         /// </summary>
         private FormalExpressionResult pendingRangedTargetResultHint;
@@ -477,7 +512,7 @@ namespace BDP.Core.Trigger
         /// 获取当前活跃的远程主攻 formal host verb。
         /// 优先检查挂起的 target hint（来自 GetRangedAttackAction Prefix），
         /// 没有 hint 时回退到默认 PrimaryRanged。
-        /// hint 由外部 Postfix 显式清除，不在此处消费。
+        /// hint 由菜单查询作用域恢复，不在此处消费。
         /// 供补丁桥接到 CompEquippable.PrimaryVerb 时使用。
         /// </summary>
         internal Verb TryGetActiveRangedPrimaryVerb()
@@ -498,11 +533,47 @@ namespace BDP.Core.Trigger
         }
 
         /// <summary>
-        /// 清除挂起的 target hint。由 GetRangedAttackAction Postfix 调用。
+        /// 创建绑定当前组件的目标提示作用域；准备失败也恢复旧值。
         /// </summary>
-        internal void ClearPendingRangedTargetHint()
+        internal IDisposable BeginRangedTargetHint(Thing target)
         {
-            pendingRangedTargetResultHint = null;
+            RangedTargetHintScope scope = new RangedTargetHintScope(this, pendingRangedTargetResultHint);
+            try
+            {
+                PrepareRangedVerbForTarget(target);
+                return scope;
+            }
+            catch
+            {
+                scope.Dispose();
+                throw;
+            }
+        }
+
+        /// <summary>只恢复真正写入的组件，不重新查找退出时可能变化的主装备。</summary>
+        private sealed class RangedTargetHintScope : IDisposable
+        {
+            /// <summary>本次实际写入的组件。</summary>
+            private readonly CompTriggerBody owner;
+            /// <summary>进入本轮查询前的提示，可能属于外层查询。</summary>
+            private readonly FormalExpressionResult previous;
+            /// <summary>压住正常与异常出口的重复恢复。</summary>
+            private bool disposed;
+
+            /// <summary>保存当前组件与旧提示。</summary>
+            internal RangedTargetHintScope(CompTriggerBody owner, FormalExpressionResult previous)
+            {
+                this.owner = owner;
+                this.previous = previous;
+            }
+
+            /// <summary>恢复本轮进入前的提示，重复调用不影响后续查询。</summary>
+            public void Dispose()
+            {
+                if (disposed) return;
+                disposed = true;
+                owner.pendingRangedTargetResultHint = previous;
+            }
         }
 
     }

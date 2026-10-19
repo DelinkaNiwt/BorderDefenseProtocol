@@ -69,6 +69,37 @@ namespace BDP.Core.AttackExecution
         }
 
         /// <summary>
+        /// 记录一次近战 burst 中真正进入 TryCastShot 的单击尝试。
+        /// 这条日志用于区分“预设声明了几击”和“原版 Verb 实际推进了几击”。
+        /// </summary>
+        public static void LogMeleeBurstShot(
+            Pawn pawn,
+            Verb verb,
+            LocalTargetInfo target,
+            int shotTick,
+            bool targetValid,
+            bool canHitTarget,
+            bool hitResult,
+            string outcome)
+        {
+            BdpDiagnostics.AttackExecution(
+                "event=melee_burst_shot"
+                + ", pawn=" + DescribePawn(pawn)
+                + ", target=" + DescribeTarget(target)
+                + ", shotTick=" + shotTick
+                + ", targetValid=" + targetValid
+                + ", canHitTarget=" + canHitTarget
+                + ", hitResult=" + hitResult
+                + ", outcome=" + SafeText(outcome)
+                + ", burstShotCount=" + (verb != null ? verb.BurstShotCount : 0)
+                + ", ticksBetweenBurstShots=" + (verb != null ? verb.TicksBetweenBurstShots : 0)
+                + ", verbState=" + (verb != null ? verb.state.ToString() : "null")
+                + ", attackId=" + SafeText((verb as BdpVerb_MeleeAttackDamage)?.AttackInstanceId)
+                + ", resultId=" + SafeText((verb as BdpVerb_MeleeAttackDamage)?.ResultId)
+                + ", verb=" + DescribeVerb(verb));
+        }
+
+        /// <summary>
         /// 记录一次近战 run 打完后，准备续接下一段前的最小事实。
         /// </summary>
         public static void LogMeleeContinuationPrepare(
@@ -152,6 +183,43 @@ namespace BDP.Core.AttackExecution
                 + ", windows=" + CountWindows(emissionPlan)
                 + ", emitted=" + hostEmissionConsumedCount + "/" + CountExpectedEmits(emissionPlan)
                 + ", completed=" + stepCompleted
+                + ", verb=" + DescribeVerb(verb));
+        }
+
+        /// <summary>
+        /// 记录远程宿主真实落地的单发 Tick（游戏刻）以及原版连发间隔解析值。
+        /// 该日志只用于区分“窗口数量变多”和“每发实际间隔变长”这两个不同问题。
+        /// </summary>
+        public static void LogRangedShotTiming(
+            Pawn pawn,
+            Verb verb,
+            int shotTick,
+            int windowIndex,
+            int windowCount,
+            int declaredInterval,
+            int resolvedInterval,
+            string attackInstanceId,
+            string hostResultId,
+            string sourceResultId,
+            int burstShotsLeft,
+            int remainingWindows,
+            bool fullBodyBusy,
+            string verbState)
+        {
+            BdpDiagnostics.AttackExecution(
+                "event=ranged_shot_timing"
+                + ", pawn=" + DescribePawn(pawn)
+                + ", tick=" + shotTick
+                + ", window=" + windowIndex + "/" + windowCount
+                + ", declaredInterval=" + declaredInterval
+                + ", resolvedInterval=" + resolvedInterval
+                + ", attackId=" + SafeText(attackInstanceId)
+                + ", hostResultId=" + SafeText(hostResultId)
+                + ", sourceResultId=" + SafeText(sourceResultId)
+                + ", burstShotsLeft=" + burstShotsLeft
+                + ", remainingWindows=" + remainingWindows
+                + ", fullBodyBusy=" + fullBodyBusy
+                + ", verbState=" + SafeText(verbState)
                 + ", verb=" + DescribeVerb(verb));
         }
 

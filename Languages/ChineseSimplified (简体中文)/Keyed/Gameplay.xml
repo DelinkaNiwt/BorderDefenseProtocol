@@ -19,33 +19,107 @@
   <BDP_No>否</BDP_No>
   <BDP_None>无</BDP_None>
   <!-- 光魂动作与重刃攻击入口显示名。 -->
-  <BDP_ChipAction_LightSoul>光魂</BDP_ChipAction_LightSoul>
-  <BDP_ChipAction_LightSoul_Description>默认展开光魂大盾，并可在灵活姿态与举盾姿态间切换；也可切换为光魂重刃进行近战。所有形态均可使用消耗 Trion 的光魂推进。</BDP_ChipAction_LightSoul_Description>
-  <!-- 铅弹被动芯片与动态远程入口名称。 -->
-  <BDP_ChipAction_LeadShot>铅弹</BDP_ChipAction_LeadShot>
-  <BDP_ChipAction_LeadShot_Description>被动远程增强。激活后，所有有效远程武装的攻击入口前增加铅弹，并使命中目标承受铅块负重；本次投射物不造成伤害并尝试绕过已知护盾。</BDP_ChipAction_LeadShot_Description>
-  <BDP_Expression_LeadShot>铅弹</BDP_Expression_LeadShot>
-  <BDP_ChipAction_Meteora>美特拉</BDP_ChipAction_Meteora>
-  <BDP_ChipAction_Meteora_Description>基于小行星的范围爆炸远程动作。命中后在落点追加范围爆炸。</BDP_ChipAction_Meteora_Description>
+  <BDP_ChipFunction_LightSoul>光魂</BDP_ChipFunction_LightSoul>
+  <BDP_ChipFunction_LightSoul_Description>默认展开光魂防护形态；进攻形态可在重刃姿态与冲拳姿态间切换。防护形态装备推进器后可组合为光魂推进。</BDP_ChipFunction_LightSoul_Description>
+  <BDP_ChipFunction_Thruster>推进器</BDP_ChipFunction_Thruster>
+  <BDP_ChipFunction_Thruster_Description>提供地面冲刺推进能力，作为光魂推进组合的配件来源。</BDP_ChipFunction_Thruster_Description>
+  <BDP_ChipFunction_Viper_Description>路线引导远程功能。玩家用 Shift+左键设定弹道路径锚点，子弹按路径分段飞行。</BDP_ChipFunction_Viper_Description>
+  <BDP_ChipFunction_Kogetsu_Description>以实体弧月刃形成近战武装，并作为旋空弧月组合的主侧芯片。</BDP_ChipFunction_Kogetsu_Description>
+  <!-- 弧月攻击方式组名称。 -->
+  <BDP_Tool_KogetsuBlade>弧月刃</BDP_Tool_KogetsuBlade>
+  <BDP_ChipFunction_Scorpion>蝎子</BDP_ChipFunction_Scorpion>
+  <BDP_ChipFunction_Scorpion_Description>以实体毒蝎刃形成近战武装；每次攻击连续进行三次，每击间隔 5 tick。</BDP_ChipFunction_Scorpion_Description>
+  <BDP_ChipFunction_EnergyShield_Description>形成正面能量护盾。单枚激活时覆盖正面 180 度；主、副槽各激活一枚时升级为全防御能量护盾。成功抵挡消耗能量和耐久，能量成本相当于伤害值的 50%。双盾共用耐久和恢复计时；耐久耗尽后暂时无法防护，关闭芯片也会继续恢复计时。</BDP_ChipFunction_EnergyShield_Description>
+  <BDP_ChipFunction_Grasshopper_Description>机动型芯片。在脚下凝聚 Trion 弹射跳板，以爆发性速度弹向目标位置。冷却 5 秒，每次使用消耗 30 Trion。</BDP_ChipFunction_Grasshopper_Description>
+  <BDP_ChipFunction_Fujin>风刃</BDP_ChipFunction_Fujin>
+  <BDP_ChipFunction_Fujin_Description>以风刃色实体刀形成近战武装；属性与弧月一致，装载于特殊槽。</BDP_ChipFunction_Fujin_Description>
+  <BDP_Expression_Fujin>风刃</BDP_Expression_Fujin>
+  <BDP_Tool_FujinRealBlade>实刃</BDP_Tool_FujinRealBlade>
+  <BDP_ChipFunction_FujinRangedStrike>风刃·远程斩击</BDP_ChipFunction_FujinRangedStrike>
+  <BDP_ChipFunction_FujinRangedStrike_Description>独立的远程风刃能力。投射物飞行中分段追踪目标，命中目标本身造成切割伤害。</BDP_ChipFunction_FujinRangedStrike_Description>
+  <BDP_ChipFunction_Alektor>卵之冠</BDP_ChipFunction_Alektor>
+  <BDP_ChipFunction_Alektor_Description>远程部位崩解功能。优先避开要害，直接命中人物后不造成伤害；同一部位命中四次后移除该部位。</BDP_ChipFunction_Alektor_Description>
+  <BDP_Expression_Alektor>卵之冠</BDP_Expression_Alektor>
+  <BDP_Expression_FujinRangedStrike>风刃·远程斩击</BDP_Expression_FujinRangedStrike>
+  <BDP_ChipFunction_EmergencyEscape_Description>被动芯片，特殊槽专用。战斗体因 Trion 见底而崩解时自动触发，将装备者传送至安全位置，芯片在触发后销毁。</BDP_ChipFunction_EmergencyEscape_Description>
+  <!-- 铅弹双分支芯片与动态远程入口名称。 -->
+  <BDP_ChipFunction_LeadShotModified>铅弹·改</BDP_ChipFunction_LeadShotModified>
+  <BDP_ChipFunction_LeadShotModified_Description>被动远程增强。激活后，主、副两侧符合左轮手枪构型的有效远程武装的攻击入口前增加铅弹·改，并使命中目标承受铅块负重；本次投射物不造成伤害并尝试绕过已知护盾。</BDP_ChipFunction_LeadShotModified_Description>
+  <BDP_Expression_LeadShotModified>铅弹·改</BDP_Expression_LeadShotModified>
+  <BDP_ChipFunction_LeadShotOppositeSide>铅弹</BDP_ChipFunction_LeadShotOppositeSide>
+  <BDP_ChipFunction_LeadShotOppositeSide_Description>能力类远程增强。激活后，只对另一侧有效远程武装的攻击入口前增加铅弹，并使命中目标承受铅块负重；本次投射物不造成伤害并尝试绕过已知护盾。</BDP_ChipFunction_LeadShotOppositeSide_Description>
+  <BDP_Expression_LeadShotOppositeSide>铅弹</BDP_Expression_LeadShotOppositeSide>
+  <BDP_ChipFunction_Meteora>美特拉</BDP_ChipFunction_Meteora>
+  <BDP_ChipFunction_Meteora_Description>基于小行星的范围爆炸远程动作。命中后在落点追加范围爆炸。</BDP_ChipFunction_Meteora_Description>
   <BDP_Expression_Meteora>美特拉</BDP_Expression_Meteora>
   <!-- 战斧组合技表达入口名称。 -->
   <BDP_Expression_Tomahawk>战斧</BDP_Expression_Tomahawk>
   <!-- 光魂统一表达目录中的玩家可见名称。 -->
   <BDP_Expression_LightSoulPropulsion>光魂推进</BDP_Expression_LightSoulPropulsion>
-  <BDP_Expression_LightSoulShieldMobile>光魂大盾（灵活姿态）</BDP_Expression_LightSoulShieldMobile>
-  <BDP_Expression_LightSoulShieldGuard>光魂大盾（举盾姿态）</BDP_Expression_LightSoulShieldGuard>
-  <BDP_Expression_LightSoulShieldBash>光魂大盾钝击</BDP_Expression_LightSoulShieldBash>
+  <BDP_Expression_Thruster>推进器</BDP_Expression_Thruster>
+  <BDP_Expression_LightSoulDefenseState>光魂防护状态</BDP_Expression_LightSoulDefenseState>
+  <BDP_Expression_LightSoulDefenseShield>光魂防护</BDP_Expression_LightSoulDefenseShield>
+  <BDP_Expression_LightSoulPunch>光魂冲拳</BDP_Expression_LightSoulPunch>
   <BDP_Expression_LightSoulHeavyBlade>光魂重刃</BDP_Expression_LightSoulHeavyBlade>
+  <BDP_Expression_Scorpion>蝎子</BDP_Expression_Scorpion>
+  <BDP_Tool_ScorpionBlade>毒蝎刃</BDP_Tool_ScorpionBlade>
+  <!-- 弹射砍击组合技的近战攻击方式组名称。 -->
+  <BDP_MeleeMethod_BounceSlash>弹射砍击</BDP_MeleeMethod_BounceSlash>
+  <!-- 旋空弧月组合技的近战攻击方式组名称。 -->
+  <BDP_MeleeMethod_SenkuKogetsu>旋空弧月</BDP_MeleeMethod_SenkuKogetsu>
   <!-- 光魂重刃两种互斥 Tool（攻击工具）的玩家可见名称。 -->
   <BDP_Tool_LightSoulHeavyBladeBash>光魂重刃钝击</BDP_Tool_LightSoulHeavyBladeBash>
   <BDP_Tool_LightSoulHeavyBladeEdge>光魂重刃切割</BDP_Tool_LightSoulHeavyBladeEdge>
-  <BDP_Tool_LightSoulShieldBash>盾面钝击</BDP_Tool_LightSoulShieldBash>
-  <!-- 光魂形态与大盾姿态显示名。 -->
-  <BDP_ChipMode_LightSoulShield>光魂大盾</BDP_ChipMode_LightSoulShield>
-  <BDP_ChipMode_LightSoulHeavyBlade>光魂重刃</BDP_ChipMode_LightSoulHeavyBlade>
-  <BDP_ChipStance_LightSoulMobile>灵活姿态</BDP_ChipStance_LightSoulMobile>
-  <BDP_ChipStance_LightSoulGuard>举盾姿态</BDP_ChipStance_LightSoulGuard>
-  <!-- 光魂举盾姿态的非攻击警戒命令。 -->
-  <BDP_Command_LightSoulGuardWatch>注视警戒</BDP_Command_LightSoulGuardWatch>
-  <BDP_Command_LightSoulGuardWatch_Description>选择一个目标并保持注视警戒。人物不会移动或攻击；目标暂时离开射程或视线时保留锁定，重新进入后继续注视。</BDP_Command_LightSoulGuardWatch_Description>
-</LanguageData>
+  <BDP_Tool_LightSoulPunch>冲拳钝击</BDP_Tool_LightSoulPunch>
+  <!-- 光魂防护、进攻形态及进攻姿态显示名。 -->
+  <BDP_ChipMode_LightSoulAttack>进攻形态</BDP_ChipMode_LightSoulAttack>
+  <BDP_ChipStance_LightSoulPunch>冲拳姿态</BDP_ChipStance_LightSoulPunch>
+  <BDP_ChipMode_LightSoulDefense>防护形态</BDP_ChipMode_LightSoulDefense>
+  <BDP_ChipStance_LightSoulHeavyBlade>重刃姿态</BDP_ChipStance_LightSoulHeavyBlade>
+  <!-- 光魂防护形态的非攻击警戒命令。 -->
+  <BDP_Command_LightSoulDefenseWatch>注视警戒</BDP_Command_LightSoulDefenseWatch>
+  <BDP_Command_LightSoulDefenseWatch_Description>选择一个目标并保持注视警戒。人物不会移动或攻击；目标暂时离开射程或视线时保留锁定，重新进入后继续注视。</BDP_Command_LightSoulDefenseWatch_Description>
+  <!-- Trion 地标设施资源状态。 -->
+  <BDP_TrionFacility_Resource>储量：{0}（补充门槛：{1}）</BDP_TrionFacility_Resource>
+  <BDP_TrionFacility_Drain>每日消耗：{0}</BDP_TrionFacility_Drain>
+  <BDP_TrionFacility_Status_Running>运行中</BDP_TrionFacility_Status_Running>
+  <BDP_TrionFacility_Status_Stopped>已停止</BDP_TrionFacility_Status_Stopped>
+  <!-- Trion 地标设施上帝模式调试按钮。 -->
+  <BDP_TrionFacility_Debug_Add50>调试：资源 +50</BDP_TrionFacility_Debug_Add50>
+  <BDP_TrionFacility_Debug_Add50Desc>调试用：向设施资源容器增加 50 点资源。</BDP_TrionFacility_Debug_Add50Desc>
+  <BDP_TrionFacility_Debug_Remove50>调试：资源 -50</BDP_TrionFacility_Debug_Remove50>
+  <BDP_TrionFacility_Debug_Remove50Desc>调试用：从设施资源容器减少 50 点资源。</BDP_TrionFacility_Debug_Remove50Desc>
+  <BDP_TrionFacility_Debug_Fill>调试：资源填满</BDP_TrionFacility_Debug_Fill>
+  <BDP_TrionFacility_Debug_FillDesc>调试用：将设施储量设为补充门槛数值。</BDP_TrionFacility_Debug_FillDesc>
+  <BDP_TrionFacility_Debug_Empty>调试：资源清空</BDP_TrionFacility_Debug_Empty>
+  <BDP_TrionFacility_Debug_EmptyDesc>调试用：将设施资源容器清空。</BDP_TrionFacility_Debug_EmptyDesc>
+  <BDP_TrionFacility_Debug_ForceOperation>调试：强制运行</BDP_TrionFacility_Debug_ForceOperation>
+  <BDP_TrionFacility_Debug_ForceOperationDesc>调试用：忽略绑定资格与资源不足，强制允许该设施运行。</BDP_TrionFacility_Debug_ForceOperationDesc>
+  <BDP_TrionFacility_Status_ForcedRunning>运行中（调试强制）</BDP_TrionFacility_Status_ForcedRunning>
+  <!-- 操作员控制台建筑与运行状态。 -->
+  <BDP_OperatorConsole_Label>操作员控制台</BDP_OperatorConsole_Label>
+  <BDP_OperatorConsole_Description>需要电力、玩家派系小人操作和 Trion 中继核心许可。运作时向本地图玩家派系芯片使用者发布控制台许可。</BDP_OperatorConsole_Description>
+  <BDP_OperatorConsole_Status_Running>运行中</BDP_OperatorConsole_Status_Running>
+  <BDP_OperatorConsole_Status_Stopped>已停止（需要电力、操作员和 Trion 中继核心许可）</BDP_OperatorConsole_Status_Stopped>
+  <!-- 操作员控制台直接指派入口的灰显失败原因。 -->
+  <BDP_OperatorConsole_CannotOperate_NoPower>控制台未通电。</BDP_OperatorConsole_CannotOperate_NoPower>
+  <BDP_OperatorConsole_CannotOperate_NoTrionPermission>未收到 Trion 中继核心许可。</BDP_OperatorConsole_CannotOperate_NoTrionPermission>
+  <BDP_OperatorConsole_CannotOperate_NoPowerAndTrion>控制台未通电且未收到 Trion 中继核心许可。</BDP_OperatorConsole_CannotOperate_NoPowerAndTrion>
+  <BDP_OperatorConsole_Status_ForcedRunning>运行中（调试强制）</BDP_OperatorConsole_Status_ForcedRunning>
+  <BDP_OperatorConsole_Debug_ForceOperation>调试：强制运行</BDP_OperatorConsole_Debug_ForceOperation>
+  <BDP_OperatorConsole_Debug_ForceOperationDesc>调试用：绕过电力、操作员和 Trion 中继核心许可，强制发布操作员控制台许可。</BDP_OperatorConsole_Debug_ForceOperationDesc>
+  <BDP_OperateOperatorConsole_Report>正在操作员控制台值守。</BDP_OperateOperatorConsole_Report>
+  <BDP_OperatorConsole_Operating>操作员控制台值守</BDP_OperatorConsole_Operating>
+  <!-- 浮空芯片制造界面的 Keyed 名称；ChipManufacturingPresetDef.ResolvedLabel 读取裸键。 -->
+  <BDP_ChipFunction_Floating>浮空</BDP_ChipFunction_Floating>
+  <!-- 浮空模式名称与状态。 -->
+  <BDP_ChipFunction_Floating_Description>提供可控的浮空移动能力。征召后可在关闭浮空、仅移动时浮空和始终浮空之间切换；无法在屋顶区域飞行。</BDP_ChipFunction_Floating_Description>
+  <BDP_FloatingFlight_Mode_Off>关闭浮空</BDP_FloatingFlight_Mode_Off>
+  <BDP_FloatingFlight_Mode_MoveOnly>仅移动时浮空</BDP_FloatingFlight_Mode_MoveOnly>
+  <BDP_FloatingFlight_Mode_Always>始终浮空</BDP_FloatingFlight_Mode_Always>
+  <BDP_FloatingFlight_ModeShort_Off>关闭</BDP_FloatingFlight_ModeShort_Off>
+  <BDP_FloatingFlight_ModeShort_MoveOnly>移动</BDP_FloatingFlight_ModeShort_MoveOnly>
+  <BDP_FloatingFlight_ModeShort_Always>始终</BDP_FloatingFlight_ModeShort_Always>
+  <BDP_FloatingFlight_Status_Flying>浮空中</BDP_FloatingFlight_Status_Flying>
+  <BDP_FloatingFlight_Status_Grounded>地面移动</BDP_FloatingFlight_Status_Grounded>
+  </LanguageData>

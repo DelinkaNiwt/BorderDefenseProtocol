@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 皇室身份基因名称。 -->
+  <BDP_Gene_RoyalBloodline.label>皇室血脉</BDP_Gene_RoyalBloodline.label>
+  <!-- 说明身份与自然传承边界，不承诺每个后代都会继承。 -->
+  <BDP_Gene_RoyalBloodline.description>承载皇室血脉的超凡基因。作为内源基因时可自然传给后代，但无法通过普通基因提取器提取。赋予一次性皇室契约能力：与另一名殖民者绑定并授予 Trion 腺体，双方同生共死。继承血脉的后代各有自己的一次机会。</BDP_Gene_RoyalBloodline.description>
+</LanguageData>

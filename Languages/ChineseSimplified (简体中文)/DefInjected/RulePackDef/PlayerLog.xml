@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 完整句式沿用同一文法根，具体中文句子从Keyed/PlayerLog.xml读取。 -->
+  <BDP_PlayerLog_Sentence.rulePack.rulesStrings><li>r_logentry->[bdp_sentence]</li></BDP_PlayerLog_Sentence.rulePack.rulesStrings>
+  <!-- 直接结果共用文法，实际中文内容来自Keyed语言键。 -->
+  <BDP_PlayerLog_ResultEffect.rulePack.rulesStrings><li>bdp_result->[bdp_result_effect]</li></BDP_PlayerLog_ResultEffect.rulePack.rulesStrings>
+  <!-- 负重直接结果共用根节点。 -->
+  <BDP_PlayerLog_ResultWeight.rulePack.rulesStrings><li>bdp_result->[bdp_result_weight]</li></BDP_PlayerLog_ResultWeight.rulePack.rulesStrings>
+  <!-- 部位移除直接结果共用根节点。 -->
+  <BDP_PlayerLog_ResultPartRemoved.rulePack.rulesStrings><li>bdp_result->[bdp_result_part]</li></BDP_PlayerLog_ResultPartRemoved.rulePack.rulesStrings>
+  <!-- 战斗体关键事件根节点；实际句式由语言键提供。 -->
+  <BDP_PlayerLog_CombatBodyEvent.rulePack.rulesStrings>
+    <li>r_logentry->[bdp_sentence]</li>
+  </BDP_PlayerLog_CombatBodyEvent.rulePack.rulesStrings>
+</LanguageData>

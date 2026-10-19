@@ -6,7 +6,7 @@ using Verse;
 
 namespace BDP.Content.Assembly.ChipManufacturing.Recipe
 {
-    /// <summary>按基础配方、动作和可选武装型简单累加单枚芯片成本。</summary>
+    /// <summary>按基础配方、芯片功能模板和可选武装型简单累加单枚芯片成本。</summary>
     public static class ChipManufacturingCostCalculator
     {
         /// <summary>从持久化组合记录解析当前来源并计算成本；非有效组合返回 null。</summary>
@@ -17,14 +17,14 @@ namespace BDP.Content.Assembly.ChipManufacturing.Recipe
             ChipCombinationResolution resolution =
                 new ChipCombinationResolver().Resolve(record);
             return resolution.Status == ChipCombinationResolutionStatus.Valid
-                ? Calculate(recipe, resolution.Actions, resolution.ArmamentForm)
+                ? Calculate(recipe, resolution.FunctionDefs, resolution.ArmamentForm)
                 : null;
         }
 
-        /// <summary>从已解析动作和可选武装型计算成本。</summary>
+        /// <summary>从已解析芯片功能模板和可选武装型计算成本。</summary>
         public static ChipManufacturingCost Calculate(
             RecipeDef recipe,
-            IReadOnlyList<ChipActionPresetDef> actions,
+            IReadOnlyList<ChipManufacturingPresetDef> functionDefs,
             ChipArmamentFormDef armamentForm)
         {
             if (recipe == null)
@@ -37,18 +37,18 @@ namespace BDP.Content.Assembly.ChipManufacturing.Recipe
             Add(counts, order, ChipRecipeIngredientUniverse.GetBaseIngredients(recipe));
 
             float workAmount = recipe.workAmount;
-            if (actions != null)
+            if (functionDefs != null)
             {
-                for (int index = 0; index < actions.Count; index++)
+                for (int index = 0; index < functionDefs.Count; index++)
                 {
-                    ChipActionPresetDef action = actions[index];
-                    if (action == null)
+                    ChipManufacturingPresetDef function = functionDefs[index];
+                    if (function == null)
                     {
                         continue;
                     }
 
-                    Add(counts, order, action.costList);
-                    workAmount += action.additionalWorkAmount;
+                    Add(counts, order, function.costList);
+                    workAmount += function.additionalWorkAmount;
                 }
             }
 

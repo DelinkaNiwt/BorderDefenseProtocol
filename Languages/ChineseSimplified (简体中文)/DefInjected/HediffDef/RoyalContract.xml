@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 人物级契约关系，不是可被普通治疗治愈的疾病。 -->
+  <BDP_Hediff_RoyalContract.label>皇室契约</BDP_Hediff_RoyalContract.label>
+  <BDP_Hediff_RoyalContract.description>双方生命相连：任一方真正死亡，另一方也会死亡；受伤、倒地和战斗体崩解不触发。契约及皇室已用资格不随基因移除而消失，不随基因遗传、提取或人物复制传播。</BDP_Hediff_RoyalContract.description>
+</LanguageData>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 独立部位崩解效果包名称。 -->
+  <BDP_DebuffEffect_BodyPartDisintegration.label>部位崩解</BDP_DebuffEffect_BodyPartDisintegration.label>
+  <!-- 独立铅块负重效果包名称。 -->
+  <BDP_DebuffEffect_LeadWeight.label>铅块负重</BDP_DebuffEffect_LeadWeight.label>
+</LanguageData>

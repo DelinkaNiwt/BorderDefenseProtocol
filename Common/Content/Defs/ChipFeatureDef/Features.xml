@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 玩家可感知的远程攻击；投射物身份及实际参数由来源读取。 -->
+  <BDP.Core.Information.ChipFeatureDef>
+    <defName>BDP_Feature_RangedAttack</defName>
+    <label>远程攻击</label>
+    <description>从远处对目标发动攻击或产生投射物结果。</description>
+    <DisplayOrder>100</DisplayOrder>
+    <Properties>
+      <!-- 远程攻击可以选择的目标种类。 -->
+      <li><Property>BDP_Property_TargetType</Property><Order>100</Order></li>
+      <!-- 发动攻击时是否需要直视目标。 -->
+      <li><Property>BDP_Property_RequiresLineOfSight</Property><Order>110</Order></li>
+      <!-- 发动攻击的最大有效距离。 -->
+      <li><Property>BDP_Property_CastRange</Property><Order>200</Order></li>
+      <!-- 近距离禁射时的最小距离。 -->
+      <li><Property>BDP_Property_MinimumCastRange</Property><Order>210</Order></li>
+      <!-- 发射第一发前的预热时间。 -->
+      <li><Property>BDP_Property_WarmupDuration</Property><Order>300</Order></li>
+      <!-- 发动后恢复行动所需时间。 -->
+      <li><Property>BDP_Property_ActionCooldownDuration</Property><Order>310</Order></li>
+      <!-- 每次完整攻击行动产生的 Trion 消耗。 -->
+      <li><Property>BDP_Property_UseCost</Property><Order>320</Order></li>
+      <!-- 攻击效果维持期间按来源数量变化的 Trion 消耗。 -->
+      <li><Property>BDP_Property_SustainCost</Property><Order>330</Order></li>
+      <!-- 实际发射的投射物定义；供下游读取当前语言名称。 -->
+      <li><Property>BDP_Property_Projectile</Property><Order>390</Order></li>
+      <!-- 每次独立远程攻击事件的主要伤害。 -->
+      <li><Property>BDP_Property_DamageAmount</Property><Order>400</Order></li>
+      <!-- 主要直接命中的伤害类型。 -->
+      <li><Property>BDP_Property_DamageType</Property><Order>410</Order></li>
+      <!-- 主要攻击结果的护甲穿透比例。 -->
+      <li><Property>BDP_Property_ArmorPenetration</Property><Order>420</Order></li>
+      <!-- 一轮攻击中的独立攻击事件次数。 -->
+      <li><Property>BDP_Property_AttackBurstCount</Property><Order>500</Order></li>
+      <!-- 多次攻击事件按顺序发生或同时发生。 -->
+      <li><Property>BDP_Property_RangedShotRhythm</Property><Order>510</Order></li>
+      <!-- 顺序攻击事件之间的时间间隔。 -->
+      <li><Property>BDP_Property_AttackBurstInterval</Property><Order>520</Order></li>
+      <!-- 原版贴身距离精度因子。 -->
+      <li><Property>BDP_Property_AccuracyTouch</Property><Order>600</Order></li>
+      <!-- 原版近距离精度因子。 -->
+      <li><Property>BDP_Property_AccuracyShort</Property><Order>610</Order></li>
+      <!-- 原版中距离精度因子。 -->
+      <li><Property>BDP_Property_AccuracyMedium</Property><Order>620</Order></li>
+      <!-- 原版远距离精度因子。 -->
+      <li><Property>BDP_Property_AccuracyLong</Property><Order>630</Order></li>
+      <!-- 实际投射物在地图上的飞行速度。 -->
+      <li><Property>BDP_Property_ProjectileSpeed</Property><Order>700</Order></li>
+      <!-- 可扩展的显著投射物飞行特征键列表。 -->
+      <li><Property>BDP_Property_ProjectileFlightFeatures</Property><Order>710</Order></li>
+      <!-- 投射物命中角色时造成的停止力。 -->
+      <li><Property>BDP_Property_StoppingPower</Property><Order>720</Order></li>
+      <!-- 攻击本体具有范围效果时使用的半径。 -->
+      <li><Property>BDP_Property_EffectRadius</Property><Order>800</Order></li>
+      <!-- 攻击本体具有固定多目标上限时使用。 -->
+      <li><Property>BDP_Property_MaxTargets</Property><Order>810</Order></li>
+    </Properties>
+    <Subgroups>
+      <!-- 由整项远程攻击共同产生的次要结果。 -->
+      <li><Group>BDP_FeatureGroup_ExtraEffect</Group><Order>100</Order></li>
+    </Subgroups>
+  </BDP.Core.Information.ChipFeatureDef>
+
+  <!-- 玩家可感知的近战攻击；每种攻击方式的数据保持在独立信息组。 -->
+  <BDP.Core.Information.ChipFeatureDef>
+    <defName>BDP_Feature_MeleeAttack</defName>
+    <label>近战攻击</label>
+    <description>在近距离通过一种或多种攻击方式对目标造成效果。</description>
+    <DisplayOrder>200</DisplayOrder>
+    <Groups>
+      <!-- 每个 Tool 或等价实现独立形成一组攻击参数。 -->
+      <li><Group>BDP_FeatureGroup_MeleeAttackMethod</Group><Order>100</Order></li>
+    </Groups>
+    <Subgroups>
+      <!-- 由整项近战攻击共同产生的次要结果。 -->
+      <li><Group>BDP_FeatureGroup_ExtraEffect</Group><Order>100</Order></li>
+    </Subgroups>
+  </BDP.Core.Information.ChipFeatureDef>
+
+  <!-- 玩家可感知的防护功能；护盾容量与抵挡参数都直接属于该功能。 -->
+  <BDP.Core.Information.ChipFeatureDef>
+    <defName>BDP_Feature_Shield</defName>
+    <label>护盾</label>
+    <description>阻挡、吸收或改变来袭攻击结果的防护功能。</description>
+    <DisplayOrder>300</DisplayOrder>
+    <Properties>
+      <!-- 护盾具有独立可消耗容量时提供容量上限。 -->
+      <li><Property>BDP_Property_ShieldCapacity</Property><Order>100</Order></li>
+      <!-- 独立护盾容量逐渐恢复时提供恢复速度。 -->
+      <li><Property>BDP_Property_ShieldRecovery</Property><Order>110</Order></li>
+      <!-- 受损或消耗后开始恢复前的等待时间。 -->
+      <li><Property>BDP_Property_RecoveryDelay</Property><Order>120</Order></li>
+      <!-- 护盾具有固定有效时长时提供。 -->
+      <li><Property>BDP_Property_EffectDuration</Property><Order>130</Order></li>
+      <!-- 护盾能够保护中心周围区域时提供。 -->
+      <li><Property>BDP_Property_EffectRadius</Property><Order>140</Order></li>
+      <!-- 护盾能够处理的攻击发生方式列表。 -->
+      <li><Property>BDP_Property_BlockAttackTypes</Property><Order>200</Order></li>
+      <!-- 护盾覆盖的连续方向范围。 -->
+      <li><Property>BDP_Property_BlockArc</Property><Order>210</Order></li>
+      <!-- 符合护盾自身抵挡条件后成功抵挡的概率。 -->
+      <li><Property>BDP_Property_BlockChance</Property><Order>220</Order></li>
+      <!-- 成功抵挡时被护盾吸收的来袭伤害比例。 -->
+      <li><Property>BDP_Property_DamageAbsorptionRatio</Property><Order>230</Order></li>
+      <!-- 成功抵挡时相对于来袭伤害的资源消耗倍率。 -->
+      <li><Property>BDP_Property_BlockCost</Property><Order>240</Order></li>
+    </Properties>
+    <Subgroups>
+      <!-- 整体护盾产生的次要结果。 -->
+      <li><Group>BDP_FeatureGroup_ExtraEffect</Group><Order>100</Order></li>
+    </Subgroups>
+  </BDP.Core.Information.ChipFeatureDef>
+
+  <!-- 玩家可感知的机动功能；多种方式以独立信息组保留关联。 -->
+  <BDP.Core.Information.ChipFeatureDef>
+    <defName>BDP_Feature_Movement</defName>
+    <label>机动</label>
+    <description>改变使用者位置、移动能力或空间可达性的功能。</description>
+    <DisplayOrder>400</DisplayOrder>
+    <Groups>
+      <!-- 每种独立位移或移动能力分别声明。 -->
+      <li><Group>BDP_FeatureGroup_MovementMethod</Group><Order>100</Order></li>
+    </Groups>
+    <Subgroups>
+      <!-- 由整项机动功能共同产生的次要结果。 -->
+      <li><Group>BDP_FeatureGroup_ExtraEffect</Group><Order>100</Order></li>
+    </Subgroups>
+  </BDP.Core.Information.ChipFeatureDef>
+
+  <!-- 有独立玩家释放生命周期的泛用能力；完整结果通过 Children 表达。 -->
+  <BDP.Core.Information.ChipFeatureDef>
+    <defName>BDP_Feature_GenericAbility</defName>
+    <label>能力</label>
+    <description>具有独立释放生命周期、但暂无专属信息语义的玩家能力。</description>
+    <DisplayOrder>500</DisplayOrder>
+    <Properties>
+      <!-- 能力再次可用前的完整冷却计时。 -->
+      <li><Property>BDP_Property_AbilityCooldownDuration</Property><Order>320</Order></li>
+      <!-- 能力整体效果固定有效的时间。 -->
+      <li><Property>BDP_Property_EffectDuration</Property><Order>330</Order></li>
+      <!-- 能力自己的离散储备次数上限。 -->
+      <li><Property>BDP_Property_ChargeCapacity</Property><Order>400</Order></li>
+      <!-- 恢复一次离散能力充能所需时间。 -->
+      <li><Property>BDP_Property_ChargeRecoveryDuration</Property><Order>410</Order></li>
+      <!-- 每次完整能力释放实际结算的 Trion 数量。 -->
+      <li><Property>BDP_Property_UseCost</Property><Order>500</Order></li>
+      <!-- 能力效果维持期间按来源数量变化的 Trion 消耗。 -->
+      <li><Property>BDP_Property_SustainCost</Property><Order>510</Order></li>
+    </Properties>
+    <Subgroups>
+      <!-- 由整个能力释放产生的次要结果。 -->
+      <li><Group>BDP_FeatureGroup_ExtraEffect</Group><Order>100</Order></li>
+    </Subgroups>
+  </BDP.Core.Information.ChipFeatureDef>
+
+</Defs>

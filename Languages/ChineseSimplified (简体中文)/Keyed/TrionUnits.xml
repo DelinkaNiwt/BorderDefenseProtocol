@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 玩家意图开关，征召和运行资格始终优先。 -->
+  <BDP_TrionUnit_AutoCombat>自动战斗</BDP_TrionUnit_AutoCombat>
+  <BDP_TrionUnit_AutoCombatDesc>允许在未征召、运行正常且地图有有效敌情时自主战斗。征召后交回玩家控制；关闭后结束自动战斗作业。具体战术由款型的行为配置决定。</BDP_TrionUnit_AutoCombatDesc>
+  <!-- 运行状态与各独立前置的显示原因。 -->
+  <BDP_TrionUnit_Initializing>永久战斗体：正在恢复运行条件。</BDP_TrionUnit_Initializing>
+  <BDP_TrionUnit_Running>永久战斗体：运作中。</BDP_TrionUnit_Running>
+  <BDP_TrionUnit_Stopped>永久战斗体：停机。{0}</BDP_TrionUnit_Stopped>
+  <BDP_TrionUnit_Block_OffMap>当前地图许可不覆盖离图状态。</BDP_TrionUnit_Block_OffMap>
+  <BDP_TrionUnit_Block_Permission>运行许可未满足。</BDP_TrionUnit_Block_Permission>
+  <BDP_TrionUnit_Block_Ownership>没有有效控制归属。</BDP_TrionUnit_Block_Ownership>
+  <BDP_TrionUnit_Block_Bandwidth>归属方未提供带宽覆盖。</BDP_TrionUnit_Block_Bandwidth>
+  <BDP_TrionUnit_FunctionUnavailable>Trion兵当前处于停机状态，无法执行命令或能力。</BDP_TrionUnit_FunctionUnavailable>
+  <BDP_TrionUnit_Incapacitated>当前身体状态无法征召。</BDP_TrionUnit_Incapacitated>
+</LanguageData>

@@ -17,10 +17,14 @@ $repoRoot = Split-Path -Parent $sourceRoot
 $projectilePath = Join-Path $repoRoot 'Source\BDP\Core\Projectiles\BdpProjectile.cs'
 $collisionRecordPath = Join-Path $repoRoot 'Source\BDP\Core\Projectiles\RangedFlightProtocol\Model\SegmentCollisionRecord.cs'
 $pathUtilityPath = Join-Path $repoRoot 'Source\BDP\Core\Projectiles\RangedFlightProtocol\Projection\ProjectileFlightPathUtility.cs'
+$arrivalRecordPath = Join-Path $repoRoot 'Source\BDP\Core\Projectiles\RangedFlightProtocol\Model\ArrivalRecord.cs'
+$arrivalStageServicePath = Join-Path $repoRoot 'Source\BDP\Core\Projectiles\RangedFlightProtocol\Arrival\ArrivalStageService.cs'
 
 $projectileText = Get-Content -LiteralPath $projectilePath -Raw -Encoding utf8
 $collisionRecordText = Get-Content -LiteralPath $collisionRecordPath -Raw -Encoding utf8
 $pathUtilityText = Get-Content -LiteralPath $pathUtilityPath -Raw -Encoding utf8
+$arrivalRecordText = Get-Content -LiteralPath $arrivalRecordPath -Raw -Encoding utf8
+$arrivalStageServiceText = Get-Content -LiteralPath $arrivalStageServicePath -Raw -Encoding utf8
 
 Assert-True (
     ($collisionRecordText -match 'FirstObjectiveBlockerProgress') -and
@@ -36,5 +40,12 @@ Assert-True (
 Assert-True (
     $projectileText -match 'SegmentCollisionRecord\s+\w+\s*=\s*SegmentCollisionService\.ScanSegment\(this,\s*nextFlightPathSnapshot\)[\s\S]*CrossedObjectiveBlocker[\s\S]*FirstObjectiveBlockerProgress[\s\S]*ProjectileFlightPathUtility\.CreatePrefix'
 ) 'BdpProjectile 在绑定下一段前，必须先根据客观阻挡扫描结果裁短路径，而不是整段放行到墙后。'
+
+Assert-True (
+    ($arrivalRecordText -match 'HasNextBindingTargetOverride') -and
+    ($arrivalStageServiceText -match 'record\.HasNextBindingTargetOverride\s*=\s*true') -and
+    ($projectileText -match 'arrival\.HasNextBindingTargetOverride') -and
+    ($projectileText -match 'arrivalNextBindingTargetOverride')
+) 'Arrival 阶段必须区分模块显式提交的绑定目标与默认继承值，避免最终目标实体被上一段锚点格覆盖。'
 
 Write-Output 'ProjectileContinuationAdmissionBoundarySmokeTests PASS'

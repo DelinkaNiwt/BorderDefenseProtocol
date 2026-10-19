@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  文档示例，不参与游戏加载。
+  三个 Aim 字段已于2026-10-19实现，正式毒蛇挂载使用同组参数；本文件保留为可复制示例。
+  放置位置为毒蛇自身攻击条目的 RangedModules，不修改公共模块默认值。
+  现有挂载 config 是整块配置；未列字段使用配置类默认值，并非逐项叠加模块 Def 默认配置。
+-->
+<RangedModules>
+  <!-- 毒蛇单独使用的路线引导配置。 -->
+  <li>
+    <!-- 已有：引用正式路线引导模块。 -->
+    <moduleDef>BDP_RoutePathModule</moduleDef>
+    <!-- 已有：为本次挂载指定独立配置。 -->
+    <config Class="BDP.Content.RangedModules.RoutePath.RoutePathConfig">
+      <!-- 已有：最多允许8个锚点。 -->
+      <MaxAnchors>8</MaxAnchors>
+
+      <!-- 已实现：原版每格精度的定标参照；0.99对应健康20级常态射手。 -->
+      <AimReferenceAccuracy>0.99</AimReferenceAccuracy>
+      <!-- 已实现：参照能力下的误差压缩强度；增大此值会整体降低随机偏射。 -->
+      <AimReferenceErrorPower>4.01188474</AimReferenceErrorPower>
+      <!-- 已实现：强度随能力成长的速度；增大可拉开低于和高于参照能力的差距。 -->
+      <AimErrorGrowthExponent>1.58275869</AimErrorGrowthExponent>
+
+      <!-- 已有：中间段基础最大偏移半径，单位为格。 -->
+      <IntermediateSpreadRadius>0.625</IntermediateSpreadRadius>
+      <!-- 已有：最终段基础最大偏移半径，单位为格。 -->
+      <FinalSpreadRadius>0.30</FinalSpreadRadius>
+      <!-- 已有：最高精度仍保留25%的基础散布，保持有序散乱。 -->
+      <HighAccuracySpreadScale>0.25</HighAccuracySpreadScale>
+    </config>
+  </li>
+</RangedModules>

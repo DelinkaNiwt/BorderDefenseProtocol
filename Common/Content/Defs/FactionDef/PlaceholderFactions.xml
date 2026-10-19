@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 近界宙域：常驻敌对的近界追兵；无定居点，但可组织常规袭击。 -->
+  <FactionDef ParentName="FactionBase">
+    <!-- 近界宙域正式派系标识。 -->
+    <defName>BDP_Faction_NearRealm</defName>
+    <!-- 派系类型名称由简体中文 DefInjected 提供。 -->
+    <label>BDP_Faction_NearRealm.label</label>
+    <!-- 固定派系名称由简体中文 DefInjected 提供。 -->
+    <fixedName>BDP_Faction_NearRealm.fixedName</fixedName>
+    <!-- 派系说明由简体中文 DefInjected 提供。 -->
+    <description>BDP_Faction_NearRealm.description</description>
+    <!-- 该派系由人类角色组成。 -->
+    <humanlikeFaction>true</humanlikeFaction>
+    <!-- 给人类角色保留可用的背景故事类别。 -->
+    <backstoryFilters>
+      <li>
+        <categories>
+          <li>Offworld</li>
+          <li>Outlander</li>
+          <li>Pirate</li>
+        </categories>
+      </li>
+    </backstoryFilters>
+    <!-- 用于袭击消息的角色名称由简体中文 DefInjected 提供。 -->
+    <pawnSingular>BDP_Faction_NearRealm.pawnSingular</pawnSingular>
+    <!-- 用于袭击消息的复数角色名称由简体中文 DefInjected 提供。 -->
+    <pawnsPlural>BDP_Faction_NearRealm.pawnsPlural</pawnsPlural>
+    <!-- 沿用太空时代派系装备生成范围。 -->
+    <techLevel>Spacer</techLevel>
+    <!-- 常规袭击使用这一唯一基础 PawnKind；精英和头目档位留待后续设计。 -->
+    <basicMemberKind>BDP_NearRealm_Combatant</basicMemberKind>
+    <!-- 可见的人类派系需要领袖；沿用现有近界民战斗员作为固定领袖类型。 -->
+    <fixedLeaderKinds>
+      <li>BDP_NearRealm_Combatant</li>
+    </fixedLeaderKinds>
+    <!-- 正式派系在新世界中创建；不参与开局派系选择。hidden=false 时原版会生成初始据点，权重 0 仅不参与后续随机据点分配。 -->
+    <requiredCountAtGameStart>1</requiredCountAtGameStart>
+    <maxConfigurableAtWorldCreation>0</maxConfigurableAtWorldCreation>
+    <displayInFactionSelection>false</displayInFactionSelection>
+    <!-- 允许角色信息卡和派系界面显示近界宙域。 -->
+    <hidden>false</hidden>
+    <settlementGenerationWeight>0</settlementGenerationWeight>
+    <!-- 原版关系生成据此把近界宙域设为对所有派系永久敌对。 -->
+    <permanentEnemy>true</permanentEnemy>
+    <!-- 允许地表袭击；加载奥德赛时再允许轨道抵达。 -->
+    <arrivalLayerWhitelist>
+      <li>Surface</li>
+      <li MayRequire="Ludeon.RimWorld.Odyssey">Orbit</li>
+    </arrivalLayerWhitelist>
+    <!-- 近界立即进攻只在两种黑洞门抵达方式中抽选。 -->
+    <arrivalModeWhitelist>
+      <!-- 原有的边缘落点黑洞门。 -->
+      <li>BDP_NearRealmGate</li>
+      <!-- 越过防线落点的空间突袭黑洞门。 -->
+      <li>BDP_SpaceRaid</li>
+    </arrivalModeWhitelist>
+    <!-- 该派系只参与袭击，不请求贸易、援军或任务地点。 -->
+    <canStageAttacks>true</canStageAttacks>
+    <canRequestTraders>false</canRequestTraders>
+    <canRequestOrbitalTrader>false</canRequestOrbitalTrader>
+    <canRequestMilitaryAid>false</canRequestMilitaryAid>
+    <canGenerateQuestSites>false</canGenerateQuestSites>
+    <!-- 袭击威胁曲线沿用奥德赛打捞者的原版结构，PawnKind 强度仍是暂定值。 -->
+    <raidCommonalityFromPointsCurve>
+      <points>
+        <li>(0, 1)</li>
+      </points>
+    </raidCommonalityFromPointsCurve>
+    <maxPawnCostPerTotalPointsCurve>
+      <points>
+        <li>(0, 35)</li>
+        <li>(70, 50)</li>
+        <!-- 100 点袭击预算开始允许生成暂定 80 点战力的近界民战斗员。 -->
+        <li>(100, 80)</li>
+        <li>(700, 100)</li>
+        <li>(1300, 150)</li>
+        <li>(100000, 10000)</li>
+      </points>
+    </maxPawnCostPerTotalPointsCurve>
+    <!-- 地表和轨道袭击都从同一近界战斗员 PawnKind 生成。 -->
+    <pawnGroupMakers>
+      <li>
+        <kindDef>Combat</kindDef>
+        <options>
+          <BDP_NearRealm_Combatant>1</BDP_NearRealm_Combatant>
+        </options>
+      </li>
+    </pawnGroupMakers>
+  </FactionDef>
+
+  <!-- 薇瑟帝国：仅作为皇室加入任务临时派系的生成模板，不加入新世界。 -->
+  <FactionDef ParentName="FactionBase">
+    <!-- 薇瑟帝国临时派系模板标识。 -->
+    <defName>BDP_Faction_ViserEmpire</defName>
+    <!-- 派系类型名称由简体中文 DefInjected 提供。 -->
+    <label>BDP_Faction_ViserEmpire.label</label>
+    <!-- 固定派系名称由简体中文 DefInjected 提供。 -->
+    <fixedName>BDP_Faction_ViserEmpire.fixedName</fixedName>
+    <!-- 派系说明由简体中文 DefInjected 提供。 -->
+    <description>BDP_Faction_ViserEmpire.description</description>
+    <!-- 临时派系成员由人类角色组成。 -->
+    <humanlikeFaction>true</humanlikeFaction>
+    <!-- 为皇室成员保留原版难民使用的背景故事范围。 -->
+    <backstoryFilters>
+      <li>
+        <categories>
+          <!-- 保留原版难民可用的星际背景故事。 -->
+          <li>Offworld</li>
+          <!-- 保留原版难民可用的流浪者背景故事。 -->
+          <li>Outlander</li>
+        </categories>
+      </li>
+    </backstoryFilters>
+    <!-- 任务通知中的单个角色称谓由简体中文 DefInjected 提供。 -->
+    <pawnSingular>BDP_Faction_ViserEmpire.pawnSingular</pawnSingular>
+    <!-- 任务通知中的多个角色称谓由简体中文 DefInjected 提供。 -->
+    <pawnsPlural>BDP_Faction_ViserEmpire.pawnsPlural</pawnsPlural>
+    <!-- 中立临时派系沿用太空时代分类。 -->
+    <techLevel>Spacer</techLevel>
+    <naturalEnemy>false</naturalEnemy>
+    <permanentEnemy>false</permanentEnemy>
+    <!-- 该派系只在任务中由代码创建，不参与新世界开局派系生成。 -->
+    <requiredCountAtGameStart>0</requiredCountAtGameStart>
+    <maxConfigurableAtWorldCreation>0</maxConfigurableAtWorldCreation>
+    <displayInFactionSelection>false</displayInFactionSelection>
+    <!-- 模板默认可见；任务生成时先隐藏阻止据点创建，再显示临时派系。 -->
+    <hidden>false</hidden>
+    <settlementGenerationWeight>0</settlementGenerationWeight>
+    <!-- 不为临时派系生成战斗队伍或领袖候选。 -->
+    <canStageAttacks>false</canStageAttacks>
+    <canRequestTraders>false</canRequestTraders>
+    <canRequestOrbitalTrader>false</canRequestOrbitalTrader>
+    <canRequestMilitaryAid>false</canRequestMilitaryAid>
+    <canGenerateQuestSites>false</canGenerateQuestSites>
+  </FactionDef>
+
+</Defs>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 弹射砍击组合技的玩家可见名称。 -->
+  <BDP_Combo_BounceSlash.label>弹射砍击</BDP_Combo_BounceSlash.label>
+  <!-- 弹射砍击组合技的玩家可见说明。 -->
+  <BDP_Combo_BounceSlash.description>将蚱蜢和蝎子组合为弹射砍击——多段跳跃沿途切割敌人。</BDP_Combo_BounceSlash.description>
+</LanguageData>

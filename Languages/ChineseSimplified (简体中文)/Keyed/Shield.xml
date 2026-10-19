@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <!-- 普通盾组状态卡标题；双来源共享一张卡。 -->
+  <BDP_Shield_Status_NormalTitle>护盾耐久</BDP_Shield_Status_NormalTitle>
+  <!-- 自动护盾状态卡标题。 -->
+  <BDP_Shield_Status_AutoTitle>自动护盾耐久</BDP_Shield_Status_AutoTitle>
+  <!-- 光魂防护盾组的状态卡标题。 -->
+  <BDP_Shield_Status_LightSoulTitle>光魂护盾耐久</BDP_Shield_Status_LightSoulTitle>
+  <!-- 正常状态显示当前耐久与有效上限。 -->
+  <BDP_Shield_Status_Durability>{0} / {1}</BDP_Shield_Status_Durability>
+  <!-- 破盾状态显示剩余游戏秒数；数字保留一位小数。 -->
+  <BDP_Shield_Status_Seconds>{0} 秒</BDP_Shield_Status_Seconds>
+  <!-- 正常状态的卡片悬停说明。 -->
+  <BDP_Shield_Status_DurabilityTip>成功抵挡攻击会扣除护盾耐久；未破盾时，护盾按配置的延迟与速度自然恢复，延迟为零时无需等待。耐久耗尽后，护盾暂时停止防护，冷却结束后恢复满耐久。同一盾组共用耐久与恢复计时，关闭芯片后也继续恢复。</BDP_Shield_Status_DurabilityTip>
+  <!-- 恢复状态的卡片悬停说明；显隐不控制后台计时。 -->
+  <BDP_Shield_Status_RecoveringTip>护盾正在恢复，数值条显示已完成的恢复进度。倒计时结束后恢复满耐久。关闭芯片会隐藏卡片，但恢复计时继续。</BDP_Shield_Status_RecoveringTip>
+  <!-- 持久护盾状态与能力准入提示。 -->
+  <BDP_Shield_RequireIntact>护盾完好</BDP_Shield_RequireIntact>
+  <BDP_Shield_Intact>完好</BDP_Shield_Intact>
+  <BDP_Shield_Broken>破损恢复中</BDP_Shield_Broken>
+  <BDP_Shield_RequireIntactFailure>护盾正在恢复，暂时不能使用此动作。</BDP_Shield_RequireIntactFailure>
+  <BDP_Shield_GroupMissing>护盾条件必须配置共享盾组。</BDP_Shield_GroupMissing>
+  <!-- 可插拔开发菜单。普通测试伤害仍服从真实格挡概率。 -->
+  <BDP_Dev_Shield_Menu>护盾耐久与破盾测试</BDP_Dev_Shield_Menu>
+  <BDP_Dev_Shield_Output>输出选中人物护盾状态</BDP_Dev_Shield_Output>
+  <BDP_Dev_Shield_Hit5>正面弹伤 5（未挡住会受伤）</BDP_Dev_Shield_Hit5>
+  <BDP_Dev_Shield_Hit25>正面弹伤 25（未挡住会受伤）</BDP_Dev_Shield_Hit25>
+  <BDP_Dev_Shield_Bypass5>穿过本类护盾的弹伤 5</BDP_Dev_Shield_Bypass5>
+  <BDP_Dev_Shield_Break>破坏当前本类护盾</BDP_Dev_Shield_Break>
+  <BDP_Dev_Shield_BreakResult>[BDP护盾诊断] 本次进入破盾的组数：{0}</BDP_Dev_Shield_BreakResult>
+  <BDP_Dev_Shield_Observe>切换护盾状态观测</BDP_Dev_Shield_Observe>
+  <BDP_Dev_Shield_ObserveOn>[BDP护盾诊断] 已开启选中人物状态变化观测。</BDP_Dev_Shield_ObserveOn>
+  <BDP_Dev_Shield_ObserveOff>[BDP护盾诊断] 已关闭状态观测。</BDP_Dev_Shield_ObserveOff>
+  <BDP_Dev_Shield_SelectPawn>请先选中一名人物。</BDP_Dev_Shield_SelectPawn>
+  <BDP_Dev_Shield_Header>[BDP护盾诊断] 人物：{0}（{1}）；能量：{2}；游戏刻：{3}</BDP_Dev_Shield_Header>
+  <BDP_Dev_Shield_NoState>尚无已登记的盾组。</BDP_Dev_Shield_NoState>
+  <BDP_Dev_Shield_Row>组：{0}；耐久：{1}/{2}；比例：{3}%；恢复完成刻：{4}；状态：{5}；防护宿主：{6}。关闭或破盾时的上限仅为最近宿主配置参考值。</BDP_Dev_Shield_Row>
+  <BDP_Dev_Shield_HostOn>存在</BDP_Dev_Shield_HostOn>
+  <BDP_Dev_Shield_HostOff>不存在</BDP_Dev_Shield_HostOff>
+</LanguageData>

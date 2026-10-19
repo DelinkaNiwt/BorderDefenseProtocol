@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    FujinRangedStrike（风刃·远程斩击）专用投射物。
+    使用原版 Cut 伤害与 BDP 投射物宿主；不启用原版 flyOverhead，避免原版 HitFlags 变为 None
+    而无法命中目标 Pawn。BDP 自有路线扫描由本次投射物冻结的通用交互策略补足放行。
+  -->
+  <ThingDef ParentName="BaseBullet">
+    <!-- ThingDef 唯一名称。 -->
+    <defName>BDP_Projectile_FujinRangedStrike</defName>
+    <!-- 缺少语言包时的英文回退名称。 -->
+    <label>Fujin ranged strike projectile</label>
+    <!-- 复用现有小型子弹贴图，避免本次需求扩大美术范围。 -->
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <!-- 复用 BDP 投射物宿主的飞行、命中与伤害落地流程。 -->
+    <thingClass>BDP.Core.Projectiles.BdpProjectile</thingClass>
+    <projectile>
+      <!-- 主目标和后方斩击均使用原版 Cut 伤害类型。 -->
+      <damageDef>Cut</damageDef>
+      <damageAmountBase>40</damageAmountBase>
+      <armorPenetrationBase>0.6</armorPenetrationBase>
+      <stoppingPower>3</stoppingPower>
+      <speed>180</speed>
+      <!-- 不启用 flyOverhead；该字段会让原版投射物失去实体命中资格。 -->
+    </projectile>
+    <modExtensions>
+      <!-- 使用风刃专用细长拖尾预设。 -->
+      <li Class="BDP.Content.Projectiles.BeamTrail.BeamTrailExtension">
+        <preset>BDP_TrailPreset_SlimBrightGreen</preset>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+</Defs>

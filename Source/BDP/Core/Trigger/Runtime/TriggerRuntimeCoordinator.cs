@@ -1,8 +1,11 @@
-﻿using BDP.Core.AttackExecution;
+using BDP.Core.AttackExecution;
 using BDP.Core.CombatBodySession;
+using System.Collections.Generic;
 using BDP.Core.Combos;
 using BDP.Core.Expressions;
 using BDP.Core.Trigger.Projection;
+using BDP.Core.Verbs;
+using BDP.Core.VerbHosting;
 using BDP.Support.Diagnostics;
 using Verse;
 
@@ -168,6 +171,25 @@ namespace BDP.Core.Trigger.Runtime
         }
 
         /// <summary>
+        /// 按当前已经发布的表达快照立即同步外围表达宿主。
+        /// 能力按钮改变实际 Hediff 后复用这条入口，避免重新解析 Trigger 投影或让能力组件直接操作持续消耗账本。
+        /// </summary>
+        internal void SynchronizePublishedExpressionHostsImmediately()
+        {
+            Pawn ownerPawn = owner != null ? owner.OwnerPawn : null;
+            TriggerCombatProjectionState publishedProjection = currentCombatProjection;
+            if (ownerPawn == null || publishedProjection == null || publishedProjection.Snapshot == null)
+            {
+                return;
+            }
+
+            ExpressionService expressionService = owner.RuntimeServices != null
+                ? owner.RuntimeServices.ExpressionService
+                : null;
+            expressionService?.SyncProjectedHosts(ownerPawn, publishedProjection.Snapshot);
+        }
+
+        /// <summary>
         /// 按当前 owner 正式真值重建并发布战斗/表现投影。
         /// 可按调用场景决定发布后是中断旧会话，还是允许读档会话重绑到当前版本。
         /// </summary>
@@ -184,25 +206,57 @@ namespace BDP.Core.Trigger.Runtime
                 return false;
             }
 
+            ProjectionDirtyReason rebuildReason = dirtyReason;
+            long rebuildStart = BdpDiagnostics.BeginTiming();
+
             if (!combatBodySessionPolicy.ShouldPublishCombatProjection(ownerPawn, owner))
             {
+                long emptyPublishStart = BdpDiagnostics.BeginTiming();
                 Publish(
                     TriggerCombatProjectionState.CreateEmpty(currentProjectionVersion + 1),
                     TriggerPresentationState.CreateEmpty(currentProjectionVersion + 1),
                     ownerPawn,
                     allowLoadedProjectionRebind);
+                BdpDiagnostics.TraceTiming(
+                    "表达投影重建 | stage=empty_publish | reason=" + rebuildReason
+                    + " | pawn=" + ownerPawn.ThingID,
+                    emptyPublishStart);
+                BdpDiagnostics.TraceTiming(
+                    "表达投影重建 | stage=total | reason=" + rebuildReason
+                    + " | pawn=" + ownerPawn.ThingID,
+                    rebuildStart);
                 return true;
             }
 
             ExpressionService expressionService = owner.RuntimeServices != null
                 ? owner.RuntimeServices.ExpressionService
                 : null;
+            long buildInputStart = BdpDiagnostics.BeginTiming();
             TriggerProjectionBuildInput buildInput = owner.BuildProjectionBuildInput();
+            BdpDiagnostics.TraceTiming(
+                "表达投影重建 | stage=build_input | reason=" + rebuildReason
+                + " | pawn=" + ownerPawn.ThingID,
+                buildInputStart);
+            LogProjectionStage(
+                ownerPawn,
+                "projection_rebuild_enter",
+                "dirtyReason=" + dirtyReason
+                + " | hasBuildInput=" + (buildInput != null)
+                + " | hasExpressionService=" + (expressionService != null));
             int nextProjectionVersion = currentProjectionVersion + 1;
+            long combatProjectionStart = BdpDiagnostics.BeginTiming();
             TriggerCombatProjectionState combatProjection =
                 combatProjectionBuilder.Build(buildInput, ownerPawn, expressionService, nextProjectionVersion);
+            BdpDiagnostics.TraceTiming(
+                "表达投影重建 | stage=build_combat_projection | reason=" + rebuildReason
+                + " | pawn=" + ownerPawn.ThingID,
+                combatProjectionStart);
+            LogProjectionStage(
+                ownerPawn,
+                "projection_rebuild_result",
+                DescribeCombatProjection(combatProjection));
             ExpressionSnapshot snapshot = combatProjection != null ? combatProjection.Snapshot : null;
-            if (owner.HasHeldChipsInFormalContainer
+            if (TriggerFunctionAvailability.Allows(ownerPawn) && owner.HasHeldChipsInFormalContainer
                 && (snapshot == null || snapshot.Results == null || snapshot.Results.Count == 0))
             {
                 BdpDiagnostics.Once(
@@ -213,9 +267,28 @@ namespace BDP.Core.Trigger.Runtime
                     + ownerPawn.ThingID);
             }
 
+            long presentationStart = BdpDiagnostics.BeginTiming();
             TriggerPresentationState presentationProjection =
-                presentationBuilder.Build(expressionService, snapshot, nextProjectionVersion);
+                presentationBuilder.Build(
+                    expressionService,
+                    snapshot,
+                    buildInput != null ? buildInput.InformationInputs : null,
+                    nextProjectionVersion);
+            BdpDiagnostics.TraceTiming(
+                "表达投影重建 | stage=build_presentation_projection | reason=" + rebuildReason
+                + " | pawn=" + ownerPawn.ThingID,
+                presentationStart);
+
+            long publishStart = BdpDiagnostics.BeginTiming();
             Publish(combatProjection, presentationProjection, ownerPawn, allowLoadedProjectionRebind);
+            BdpDiagnostics.TraceTiming(
+                "表达投影重建 | stage=publish | reason=" + rebuildReason
+                + " | pawn=" + ownerPawn.ThingID,
+                publishStart);
+            BdpDiagnostics.TraceTiming(
+                "表达投影重建 | stage=total | reason=" + rebuildReason
+                + " | pawn=" + ownerPawn.ThingID,
+                rebuildStart);
             return true;
         }
 
@@ -255,6 +328,11 @@ namespace BDP.Core.Trigger.Runtime
             Pawn ownerPawn,
             bool allowLoadedProjectionRebind)
         {
+            // 条件变化只使受影响结果失效；保留上一版供宿主逐条比较，读档和其它换版不走此入口。
+            TriggerCombatProjectionState continuityProjection = !allowLoadedProjectionRebind
+                && dirtyReason == ProjectionDirtyReason.SourceConditionsChanged ? currentCombatProjection : null;
+            TriggerVisualRuntimeStateOwner visualOwner = owner?.RuntimeServices?.TriggerVisualRuntimeStateOwner;
+            TriggerVisualRuntimeState previousVisualState = continuityProjection != null ? visualOwner?.PublishedState : null;
             TriggerCombatProjectionState publishedCombatProjection =
                 combatProjection ?? TriggerCombatProjectionState.CreateEmpty(currentProjectionVersion + 1);
             TriggerPresentationState publishedPresentationProjection =
@@ -267,20 +345,58 @@ namespace BDP.Core.Trigger.Runtime
             currentPresentationProjection = publishedPresentationProjection;
             projectionDirty = false;
             dirtyReason = ProjectionDirtyReason.None;
+            LogProjectionStage(
+                ownerPawn,
+                "projection_published",
+                DescribeCombatProjection(publishedCombatProjection)
+                + " | allowLoadedProjectionRebind=" + allowLoadedProjectionRebind);
+            long visualStateStart = BdpDiagnostics.BeginTiming();
             owner?.RuntimeServices?.TriggerVisualRuntimeStateOwner?.ResetForPublishedProjection(currentProjectionVersion);
+            BdpDiagnostics.TraceTiming(
+                "表达投影发布 | stage=reset_visual_state | pawn=" + (ownerPawn != null ? ownerPawn.ThingID : "null"),
+                visualStateStart);
 
             if (ownerPawn != null)
             {
                 ExpressionService expressionService = owner.RuntimeServices != null
                     ? owner.RuntimeServices.ExpressionService
                     : null;
+                long hostSyncStart = BdpDiagnostics.BeginTiming();
                 expressionService?.SyncProjectedHosts(ownerPawn, publishedCombatProjection.Snapshot);
+                BdpDiagnostics.TraceTiming(
+                    "表达投影发布 | stage=sync_projected_hosts | pawn=" + ownerPawn.ThingID,
+                    hostSyncStart);
+                LogProjectionStage(
+                    ownerPawn,
+                    "projection_host_sync_returned",
+                    "hasExpressionService=" + (expressionService != null)
+                    + " | " + DescribeCombatProjection(publishedCombatProjection));
             }
 
+            long comboNoticeStart = BdpDiagnostics.BeginTiming();
             comboUseRequirementNoticeTracker.Sync(
                 ownerPawn,
                 publishedCombatProjection.Snapshot);
-            owner?.VerbHostManager?.Refresh(publishedCombatProjection);
+            BdpDiagnostics.TraceTiming(
+                "表达投影发布 | stage=sync_combo_notice | pawn=" + (ownerPawn != null ? ownerPawn.ThingID : "null"),
+                comboNoticeStart);
+
+            long verbHostStart = BdpDiagnostics.BeginTiming();
+            ISet<Verb> rejectedSessions = owner?.VerbHostManager?.Refresh(publishedCombatProjection, continuityProjection);
+            if (previousVisualState != null
+                && owner.VerbHostManager.TryGetByResultId(previousVisualState.ActiveHostResultId, out BdpFormalVerbBinding visualBinding))
+            {
+                Verb activeVerb = visualBinding.ResolveActiveVerb();
+                if (activeVerb != null && rejectedSessions != null && !rejectedSessions.Contains(activeVerb))
+                {
+                    AttackSessionToken token = activeVerb is BdpVerb_FormalHostShoot shoot ? shoot.HostSessionToken
+                        : (activeVerb as BdpVerb_FormalHostMelee)?.HostSessionToken;
+                    visualOwner?.RestoreContinuedExecutionState(previousVisualState, token, continuityProjection.ProjectionVersion);
+                }
+            }
+            BdpDiagnostics.TraceTiming(
+                "表达投影发布 | stage=refresh_verb_hosts | pawn=" + (ownerPawn != null ? ownerPawn.ThingID : "null"),
+                verbHostStart);
 
             if (ownerPawn == null)
             {
@@ -289,11 +405,74 @@ namespace BDP.Core.Trigger.Runtime
 
             if (allowLoadedProjectionRebind)
             {
+                long recoveryStart = BdpDiagnostics.BeginTiming();
                 AttackExecutionPostLoadRecovery.RecoverStaleAttackSession(ownerPawn);
+                BdpDiagnostics.TraceTiming(
+                    "表达投影发布 | stage=recover_post_load_attack | pawn=" + ownerPawn.ThingID,
+                    recoveryStart);
                 return;
             }
 
-            AttackExecutionPostLoadRecovery.InterruptInvalidAttackSession(ownerPawn);
+            long interruptStart = BdpDiagnostics.BeginTiming();
+            AttackExecutionPostLoadRecovery.InterruptInvalidAttackSession(ownerPawn, rejectedSessions);
+            BdpDiagnostics.TraceTiming(
+                "表达投影发布 | stage=interrupt_invalid_attack | pawn=" + ownerPawn.ThingID,
+                interruptStart);
+        }
+
+        /// <summary>
+        /// 记录 Trigger 投影生命周期的大方向边界。
+        /// 这里只观察重建、发布和宿主同步，不改变投影内容或发布时序。
+        /// </summary>
+        private void LogProjectionStage(Pawn pawn, string stage, string details)
+        {
+            if (pawn == null)
+            {
+                return;
+            }
+
+            BdpDiagnostics.Throttled(
+                "expression.projection.lifecycle." + pawn.ThingID + "." + stage,
+                "表达投影生命周期 | stage=" + stage
+                + " | pawn=" + pawn.ThingID
+                + " | activeSlots=" + (owner != null ? owner.DescribeAllSlotsForDiagnostics() : "none")
+                + " | " + (details ?? "none"));
+        }
+
+        /// <summary>
+        /// 压缩一份战斗投影的结构摘要，供大方向断点诊断使用。
+        /// </summary>
+        private static string DescribeCombatProjection(TriggerCombatProjectionState projection)
+        {
+            ExpressionSnapshot snapshot = projection != null ? projection.Snapshot : null;
+            int resultCount = snapshot?.Results != null ? snapshot.Results.Count : 0;
+            int abilityCount = 0;
+            List<string> abilityResults = new List<string>();
+            if (snapshot?.Results != null)
+            {
+                for (int index = 0; index < snapshot.Results.Count; index++)
+                {
+                    FormalExpressionResult result = snapshot.Results[index];
+                    if (result == null || result.OutputChannel != ExpressionOutputChannel.Ability)
+                    {
+                        continue;
+                    }
+
+                    abilityCount++;
+                    abilityResults.Add(
+                        (result.Id ?? "null")
+                        + "->"
+                        + (result.AbilityDefName ?? "null"));
+                }
+            }
+
+            return "projectionVersion=" + (projection != null ? projection.ProjectionVersion.ToString() : "null")
+                + " | hasSnapshot=" + (snapshot != null)
+                + " | resultCount=" + resultCount
+                + " | abilityCount=" + abilityCount
+                + " | abilityResults=" + (abilityResults.Count > 0
+                    ? string.Join(",", abilityResults)
+                    : "none");
         }
     }
 }

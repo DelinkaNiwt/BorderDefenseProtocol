@@ -15,10 +15,12 @@ $sourceRoot = Split-Path -Parent $PSScriptRoot
 $repoRoot = Split-Path -Parent $sourceRoot
 $attackSurfacePath = Join-Path $repoRoot 'Source\BDP\Core\AttackExecution\AttackExecutionSurfaceAccess.cs'
 $shootVerbPath = Join-Path $repoRoot 'Source\BDP\Core\Verbs\BdpVerb_Shoot.cs'
+$formalHostPath = Join-Path $repoRoot 'Source\BDP\Core\Verbs\BdpVerb_FormalHostShoot.cs'
 $continuationPlannerPath = Join-Path $repoRoot 'Source\BDP\Core\Verbs\RangedVerbContinuationPlanner.cs'
 
 $attackSurfaceText = Get-Content -LiteralPath $attackSurfacePath -Raw -Encoding utf8
 $shootVerbText = Get-Content -LiteralPath $shootVerbPath -Raw -Encoding utf8
+$formalHostText = Get-Content -LiteralPath $formalHostPath -Raw -Encoding utf8
 $continuationPlannerText = Get-Content -LiteralPath $continuationPlannerPath -Raw -Encoding utf8
 
 Assert-True (
@@ -26,8 +28,8 @@ Assert-True (
 ) 'Auto-ranged bridge must not overwrite the committed host module session directly.'
 
 Assert-True (
-    $attackSurfaceText -match 'StageEntryModuleSession\s*\('
-) 'Auto-ranged bridge must stage entry module state through a dedicated staging surface.'
+    $formalHostText -match 'StageEntryModuleSession\s*\('
+) '正式远程宿主应在实际起手阶段准备入口会话。'
 
 Assert-True (
     $shootVerbText -match 'private\s+RangedAttackModuleSession\s+stagedEntryModuleSession'

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 命中动态刀刃阵列特效。 -->
+  <EffecterDef>
+    <!-- 命中特效唯一名称。 -->
+    <defName>BDP_Effecter_ImpactBladeBurst</defName>
+    <!-- 覆盖动态刀刃最晚错峰、生长、停留与淡出生命周期。 -->
+    <maintainTicks>20</maintainTicks>
+    <children>
+      <!-- 后景动态阵列：按目标宽度生成约一半刀刃。 -->
+      <li>
+        <subEffecterClass>BDP.Content.RangedModules.ImpactVisual.SubEffecter_ImpactBladeBurst</subEffecterClass>
+        <moteDef>BDP_Mote_ImpactBlade_Back</moteDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>1~1</burstCount>
+        <positionRadius>0.01</positionRadius>
+      </li>
+      <!-- 前景动态阵列：按目标宽度生成另一半刀刃。 -->
+      <li>
+        <subEffecterClass>BDP.Content.RangedModules.ImpactVisual.SubEffecter_ImpactBladeBurst</subEffecterClass>
+        <moteDef>BDP_Mote_ImpactBlade_Front</moteDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>1~1</burstCount>
+        <positionRadius>0.01</positionRadius>
+      </li>
+    </children>
+  </EffecterDef>
+
+</Defs>

@@ -49,6 +49,12 @@ namespace BDP.Core.VerbHosting
         /// <summary>
         /// 组合技副攻击槽位。
         /// </summary>
-        ComboSecondary
+        ComboSecondary,
+
+        /// <summary>
+        /// 特殊槽唯一主攻击槽位。
+        /// 特殊槽武器表达不区分远程与近战宿主身份，由武器模式选择对应正式宿主壳。
+        /// </summary>
+        SpecialPrimary
     }
 }

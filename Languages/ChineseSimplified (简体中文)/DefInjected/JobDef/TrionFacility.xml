@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 皇室现场完成核心归属动作的原版任务报告。 -->
+  <BDP_BindTrionFacility.reportString>正在绑定TargetA。</BDP_BindTrionFacility.reportString>
+  <BDP_UnbindTrionFacility.reportString>正在解除TargetA的绑定。</BDP_UnbindTrionFacility.reportString>
+  <!-- 单人完整交付供物的工作状态。 -->
+  <BDP_SacrificeToTrionFacility.reportString>正在向TargetA献祭供物。</BDP_SacrificeToTrionFacility.reportString>
+</LanguageData>

@@ -30,6 +30,12 @@ namespace BDP.Core.Trigger
         bool RequestDeactivate(TriggerSide side);
 
         /// <summary>
+        /// 请求精确关闭指定槽位。
+        /// 该入口用于同侧多激活槽位的精确关闭，不改变普通侧级关闭语义。
+        /// </summary>
+        bool RequestDeactivate(TriggerSide side, int slotIndex);
+
+        /// <summary>
         /// 销毁指定槽位中与目标 ThingID 匹配的已装载芯片。
         /// </summary>
         bool TryDestroyLoadedChip(TriggerSide side, int slotIndex, string expectedThingId);

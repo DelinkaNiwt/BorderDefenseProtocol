@@ -67,6 +67,11 @@ namespace BDP.Core.Trigger
         private readonly Func<bool> isBattleModeActive;
 
         /// <summary>
+        /// 判断芯片是否拥有独立激活控制范围。
+        /// </summary>
+        private readonly Func<Thing, bool> hasIndependentActivationControl;
+
+        /// <summary>
         /// 对指定芯片执行当前角色的激活条件求值。
         /// </summary>
         private readonly Func<Thing, PawnRequirementCheckResult> evaluateActivationRequirements;
@@ -86,6 +91,7 @@ namespace BDP.Core.Trigger
             Func<Thing, int> resolveChipActivationDelayTicks,
             Func<Thing, int> resolveChipDeactivationDelayTicks,
             Func<bool> isBattleModeActive,
+            Func<Thing, bool> hasIndependentActivationControl,
             Func<Thing, PawnRequirementCheckResult> evaluateActivationRequirements)
         {
             this.getSlot = getSlot;
@@ -99,6 +105,7 @@ namespace BDP.Core.Trigger
             this.resolveChipActivationDelayTicks = resolveChipActivationDelayTicks;
             this.resolveChipDeactivationDelayTicks = resolveChipDeactivationDelayTicks;
             this.isBattleModeActive = isBattleModeActive;
+            this.hasIndependentActivationControl = hasIndependentActivationControl;
             this.evaluateActivationRequirements = evaluateActivationRequirements;
         }
 
@@ -124,16 +131,7 @@ namespace BDP.Core.Trigger
             TriggerSlotState controlSlot = normalizeDirectControlSlot(slot);
             if (slot.IsBindingMirror && controlSlot != null && controlSlot != slot)
             {
-                return TriggerSlotInteractionSnapshot.Create(
-                    side,
-                    slotIndex,
-                    controlSlot.Side,
-                    controlSlot.Index,
-                    false,
-                    TriggerInteractionOperationKind.Mirror,
-                    TriggerInteractionAvailability.InformationalOnly,
-                    TriggerInteractionReason.MirrorControlledByRoot,
-                    TriggerInteractionTransitionMode.None);
+                return GetBindingMirrorSlotInteraction(side, slotIndex, controlSlot);
             }
 
             if (slot.LoadedChip == null)
@@ -240,6 +238,29 @@ namespace BDP.Core.Trigger
         }
 
         /// <summary>
+        /// 让镜像槽沿用根槽的完整交互结果，同时保留玩家当前查看的槽位位置。
+        /// </summary>
+        private ITriggerSlotInteractionState GetBindingMirrorSlotInteraction(
+            TriggerSide side,
+            int slotIndex,
+            TriggerSlotState controlSlot)
+        {
+            ITriggerSlotInteractionState controlInteraction =
+                GetSlotInteraction(controlSlot.Side, controlSlot.Index, controlSlot);
+            return TriggerSlotInteractionSnapshot.Create(
+                side,
+                slotIndex,
+                controlInteraction.ControlSide,
+                controlInteraction.ControlSlotIndex,
+                false,
+                controlInteraction.OperationKind,
+                controlInteraction.Availability,
+                controlInteraction.Reason,
+                controlInteraction.TransitionMode,
+                controlInteraction.ActivationRequirements);
+        }
+
+        /// <summary>
         /// 通过 Core 唯一服务读取条件；没有求值入口时返回无条件通过结果。
         /// </summary>
         private PawnRequirementCheckResult EvaluateActivationRequirements(Thing chip)
@@ -268,6 +289,25 @@ namespace BDP.Core.Trigger
             bool isSwitching = switchState.IsActive;
             int controlSlotIndex = activeControl != null ? activeControl.Index : -1;
             TriggerSide controlSide = activeControl != null ? activeControl.Side : side;
+
+            if (activeRaw != null
+                && (side == TriggerSide.Special
+                    || (hasIndependentActivationControl != null
+                        && hasIndependentActivationControl(activeRaw.LoadedChip))))
+            {
+                // Special 侧可以同时存在多个激活槽，侧级入口没有唯一停用目标。
+                return TriggerSideInteractionSnapshot.Create(
+                    side,
+                    side,
+                    -1,
+                    hasActiveSlot,
+                    false,
+                    -1,
+                    TriggerInteractionOperationKind.None,
+                    TriggerInteractionAvailability.InformationalOnly,
+                    TriggerInteractionReason.NoFormalAction,
+                    TriggerInteractionTransitionMode.None);
+            }
 
             if (isSwitching)
             {
@@ -339,6 +379,11 @@ namespace BDP.Core.Trigger
                 return false;
             }
 
+            if (controlSlot.SlotSwitchContext != null)
+            {
+                return true;
+            }
+
             if (shouldUseSynchronizedHandTransition(controlSlot))
             {
                 return getActiveSwitchContext(TriggerSide.Main) != null || getActiveSwitchContext(TriggerSide.Sub) != null;
@@ -363,6 +408,15 @@ namespace BDP.Core.Trigger
                 return false;
             }
 
+            SwitchContext slotSwitchContext = controlSlot.SlotSwitchContext;
+            if (slotSwitchContext != null
+                && slotSwitchContext.targetSlotIndex == controlSlot.Index
+                && controlSlot.LoadedChip != null
+                && slotSwitchContext.targetChipThingId == controlSlot.LoadedChip.ThingID)
+            {
+                return true;
+            }
+
             ITriggerSwitchState switchState = getSwitchState(controlSlot.Side);
             return switchState.IsActive && switchState.TargetSlotIndex == controlSlot.Index;
         }
@@ -375,7 +429,12 @@ namespace BDP.Core.Trigger
         {
             if (!IsCurrentSwitchTarget(slot))
             {
-                return false;
+                SwitchContext slotSwitchContext = slot != null
+                    ? normalizeDirectControlSlot(slot)?.SlotSwitchContext
+                    : null;
+                return slotSwitchContext != null
+                    && (slotSwitchContext.phase == SwitchPhase.WaitingForConflicts
+                        || slotSwitchContext.phase == SwitchPhase.Deactivating);
             }
 
             TriggerSlotState controlSlot = normalizeDirectControlSlot(slot);

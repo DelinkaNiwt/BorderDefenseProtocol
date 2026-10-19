@@ -15,6 +15,12 @@ namespace BDP.Core.Trigger
         /// </summary>
         public TriggerCategoryDef triggerCategory;
 
+        /// <summary>普通触发体要求有效腺体；专属内部装配可显式免除此项。</summary>
+        public bool requiresTrionGland = true;
+
+        /// <summary>仅隐藏承载物本身；芯片表达武器仍沿原视觉投影绘制。</summary>
+        public bool hideHostEquipment = false;
+
         /// <summary>
         /// 当前触发体的芯片配置是否允许玩家修改。
         /// 默认保持现有触发体的可配置行为；玩家不可配置的触发体应显式填写 PlayerNonConfigurable。

@@ -79,13 +79,14 @@ namespace BDP.Content.Trigger.UI.ChipModes
         }
 
         /// <summary>
-        /// 判断当前主装备是否明确许可普通玩家控制芯片。
+        /// 只在征召时开放战斗形态操作，并要求当前主装备明确许可玩家控制芯片。
         /// 与 Trion 芯片面板共用同一许可，避免隐藏业务触发体意外暴露按钮。
         /// </summary>
         private static bool IsPlayerControlAllowed(Pawn pawn)
         {
             ThingWithComps equipment = pawn?.equipment?.Primary;
-            return equipment?.def?.GetModExtension<TriggerLoadoutPanelExtension>() != null;
+            return pawn?.Drafted == true
+                && equipment?.def?.GetModExtension<TriggerLoadoutPanelExtension>() != null;
         }
 
         /// <summary>

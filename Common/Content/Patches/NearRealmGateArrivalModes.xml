@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- 将黑洞门加入原版立即进攻的抵达候选；抵达工作类只允许近界宙域使用。 -->
+  <Operation Class="PatchOperationAdd">
+    <!-- 原版立即进攻抵达列表中尚未包含旧边缘门时才追加。 -->
+    <xpath>/Defs/RaidStrategyDef[defName="ImmediateAttack"]/arriveModes[not(li="BDP_NearRealmGate")]</xpath>
+    <value>
+      <!-- 保留近界宙域现有的边缘门进场方式。 -->
+      <li>BDP_NearRealmGate</li>
+    </value>
+  </Operation>
+  <!-- 空间突袭作为第二种抵达方式参加原版权重抽选，不创建新的袭击策略。 -->
+  <Operation Class="PatchOperationAdd">
+    <!-- 原版立即进攻抵达列表中尚未包含空间突袭门时才追加。 -->
+    <xpath>/Defs/RaidStrategyDef[defName="ImmediateAttack"]/arriveModes[not(li="BDP_SpaceRaid")]</xpath>
+    <value>
+      <!-- 越过防线的近界宙域专属抵达方式。 -->
+      <li>BDP_SpaceRaid</li>
+    </value>
+  </Operation>
+</Patch>

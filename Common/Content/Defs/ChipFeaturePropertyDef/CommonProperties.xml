@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 玩家可选择或受影响的目标类别列表。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_TargetType</defName><label>目标类型</label><description>功能可以选择或作用于的目标种类。</description><ValueKind>List</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 发动功能时是否需要使用者直视目标。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_RequiresLineOfSight</defName><label>需要视线</label><description>选择目标并发动功能时是否要求存在直视条件。</description><ValueKind>Boolean</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 功能允许作用的最大有效距离。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_CastRange</defName><label>有效距离</label><description>使用者到目标或作用点的最大有效距离。</description><ValueKind>Number</ValueKind><UnitKey>BDP_Unit_Distance</UnitKey></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 功能存在近距离禁用区时的距离下限。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_MinimumCastRange</defName><label>最小距离</label><description>距离低于该数值时不能发动功能。</description><ValueKind>Number</ValueKind><UnitKey>BDP_Unit_Distance</UnitKey></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 以作用点为中心的实际效果范围半径。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_EffectRadius</defName><label>效果半径</label><description>以目标点或结果位置为中心的实际作用半径。</description><ValueKind>Number</ValueKind><UnitKey>BDP_Unit_Distance</UnitKey></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 单次作用具有固定硬上限时的目标数量。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_MaxTargets</defName><label>目标数量上限</label><description>一次作用最多影响的不同目标数量。</description><ValueKind>Integer</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 开始发动到第一次产生结果前的准备时间。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_WarmupDuration</defName><label>预热时间</label><description>从开始发动功能到第一次产生结果前的等待时间。</description><ValueKind>Duration</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 动作完成后到能够再次行动所需的等待时间。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_ActionCooldownDuration</defName><label>行动冷却时间</label><description>动作完成后角色恢复行动所需的等待时间。</description><ValueKind>Duration</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 玩家能力再次可用前的完整静态冷却时长。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_AbilityCooldownDuration</defName><label>能力冷却计时</label><description>同一能力再次可用前需要经过的完整冷却时长。</description><ValueKind>Duration</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 功能整体效果固定有效的时间。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_EffectDuration</defName><label>持续时间</label><description>功能效果保持有效的固定时长。</description><ValueKind>Duration</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 功能拥有的离散储备次数上限。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_ChargeCapacity</defName><label>充能上限</label><description>功能最多能够储存的可用次数。</description><ValueKind>Integer</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 恢复一次离散储备次数所需的时间。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_ChargeRecoveryDuration</defName><label>充能恢复时间</label><description>恢复一次可用充能所需的时间。</description><ValueKind>Duration</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 每次完整功能释放实际结算的 Trion 数量。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_UseCost</defName><label>使用消耗</label><description>每次完整发动功能实际消耗的 Trion 数量。</description><ValueKind>Number</ValueKind><UnitKey>BDP_Info_Unit_Trion</UnitKey></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 按有效来源数量保留功能效果维持期间的每秒 Trion 消耗分档。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_SustainCost</defName><label>维持消耗</label><description>按有效来源数量记录功能效果维持期间每秒消耗的 Trion 数量。</description><ValueKind>List</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 容量受损或消耗后开始恢复之前的等待时间。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_RecoveryDelay</defName><label>恢复延迟</label><description>可恢复容量受损或消耗后，到开始恢复之间的等待时间。</description><ValueKind>Duration</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 次要效果对移动速度造成的倍率修正。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_MovementSpeedMultiplier</defName><label>移动速度倍率</label><description>额外效果对目标移动速度施加的倍率修正。</description><ValueKind>Number</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 次要效果对投射物速度造成的倍率修正。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_ProjectileSpeedMultiplier</defName><label>投射物速度倍率</label><description>额外效果对宿主攻击投射物速度施加的倍率修正。</description><ValueKind>Number</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 次要效果施加的玩家可读状态名称，不暴露实现 Def 身份。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_AppliedStatus</defName><label>施加状态</label><description>功能会施加的玩家可读状态名称。</description><ValueKind>Text</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 被施加状态或效果的强度值。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_StatusStrength</defName><label>状态强度</label><description>被施加状态或效果的强度数值。</description><ValueKind>Number</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+  <!-- 同一状态或效果允许叠加的最大层数。 -->
+  <BDP.Core.Information.ChipFeaturePropertyDef><defName>BDP_Property_StackLimit</defName><label>叠加上限</label><description>同一状态或效果允许叠加的最大层数。</description><ValueKind>Integer</ValueKind></BDP.Core.Information.ChipFeaturePropertyDef>
+
+</Defs>

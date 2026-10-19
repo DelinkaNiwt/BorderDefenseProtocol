@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 开发款型不进入正式派系生成或制造列表。 -->
+  <BDP_DebugTrionUnit.label>轻型试作兵01</BDP_DebugTrionUnit.label>
+  <BDP_DebugTrionUnit.labelPlural>轻型试作兵01</BDP_DebugTrionUnit.labelPlural>
+</LanguageData>

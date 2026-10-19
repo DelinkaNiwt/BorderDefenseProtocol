@@ -8,7 +8,7 @@ namespace BDP.Content.Shield
 {
     /// <summary>
     /// 正式能量护盾的运行时 HediffComp。
-    /// 负责伤害判定、Trion 扣费和护盾表现，不持有 Trigger 或表达真值。
+    /// 负责伤害判定、Trion 扣费和护盾表现；持久耐久归属独立盾组状态。
     /// </summary>
     [StaticConstructorOnStartup]
     public sealed class HediffComp_EnergyShield : HediffComp
@@ -27,6 +27,19 @@ namespace BDP.Content.Shield
             get { return (HediffCompProperties_EnergyShield)props; }
         }
 
+        /// <summary>当前有效来源的耐久上限；比例保存在盾组，切换数量不刷新剩余比例。</summary>
+        public float MaximumDurability
+        {
+            get { return Props.maximumDurability * (Props.aggregateDurability ? Mathf.Max(1f, parent.Severity) : 1f); }
+        }
+
+        /// <summary>来源正式启用时登记盾组；关闭和宿主移除不删除持久记录。</summary>
+        public override void CompPostPostAdd(DamageInfo? dinfo)
+        {
+            base.CompPostPostAdd(dinfo);
+            EnergyShieldApi.Bind(this);
+        }
+
         /// <summary>
         /// 当前 Pawn 是否满足护盾运行条件。
         /// </summary>
@@ -39,7 +52,8 @@ namespace BDP.Content.Shield
                     return false;
                 }
 
-                return ResolveCurrentBlockChance() > 0f;
+                return ResolveCurrentBlockChance() > 0f
+                    && EnergyShieldApi.IsIntact(Pawn, Props.durabilityGroupKey);
             }
         }
 
@@ -48,7 +62,8 @@ namespace BDP.Content.Shield
         /// </summary>
         public bool TryBlockDamage(ref DamageInfo damageInfo)
         {
-            if (!IsShieldActive || !Props.CanAbsorb(damageInfo))
+            if (!IsShieldActive || !Props.CanAbsorb(damageInfo)
+                || EnergyShieldApi.ShouldBypass(Pawn, Props.durabilityGroupKey))
             {
                 return false;
             }
@@ -70,9 +85,15 @@ namespace BDP.Content.Shield
                 return false;
             }
 
+            float blockedDamage = damageInfo.Amount;
             damageInfo.SetAmount(0f);
             PlayBlockEffect(damageInfo, attackTravelAngle);
             PlayBlockVisualImpulse(attackTravelAngle);
+            // 必须先吸收这一击并播放反馈，再破盾；表达宿主移除不能把本次伤害漏给人物。
+            var state = EnergyShieldApi.Bind(this);
+            if (state.ApplyBlockedDamage(blockedDamage, MaximumDurability,
+                Props.durabilityLossMultiplier, EnergyShieldApi.CurrentTick, Props.recoveryTicks))
+                EnergyShieldApi.NotifyBroken(Pawn);
             return true;
         }
 

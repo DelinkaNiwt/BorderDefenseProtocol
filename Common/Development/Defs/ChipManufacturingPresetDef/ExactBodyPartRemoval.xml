@@ -1,0 +1,2788 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 开发者专用精确部位移除芯片；隐藏于制造界面，只由测试触发体固定装载。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+    <defName>BDP_ChipFunction_ExactBodyPartRemoval</defName>
+    <showInManufacturing>false</showInManufacturing>
+    <label>开发者精确部位移除</label>
+    <labelKey>BDP_ChipFunction_ExactBodyPartRemoval</labelKey>
+    <description>开发者测试用远程武装。先选择身体部位，再直接命中 Pawn 后移除该部位。</description>
+    <descriptionKey>BDP_ChipFunction_ExactBodyPartRemoval_Description</descriptionKey>
+    <profession>BDP_ChipProfession_Shooter</profession>
+    <!-- 仅用于开发者武器固定预载，没有制造入口，不声明制造成本。 -->
+    <config>
+      <Profile>
+        <Category>BDP_ChipCategory_Weapon</Category>
+        <Tags>
+        </Tags>
+      </Profile>
+      <Loadout>
+        <SlotRegion>MainSub</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <ActivationDelayTicks>0</ActivationDelayTicks>
+        <DeactivationDelayTicks>0</DeactivationDelayTicks>
+      </Loadout>
+      <Trion>
+        <CapacityCost>0</CapacityCost>
+        <ActivationCost>0</ActivationCost>
+      </Trion>
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement"><Minimum>0</Minimum></li>
+      </ActivationRequirements>
+      <Expression>
+        <Entries>
+          <!-- 所有形态共用这一条远程射击入口。 -->
+          <li>
+            <Id>exact_primary</Id>
+            <DisplayLabel>精确部位测试射击</DisplayLabel>
+            <DisplayLabelKey>BDP_Expression_ExactBodyPartRemoval</DisplayLabelKey>
+            <EntryType>PrimaryVerb</EntryType>
+            <WeaponMode>Ranged</WeaponMode>
+            <Trion><UseCost>0</UseCost></Trion>
+            <Execution><Rhythm>Sequential</Rhythm></Execution>
+            <VerbProps>
+              <verbClass>BDP.Core.Verbs.BdpVerb_Shoot</verbClass>
+              <hasStandardCommand>true</hasStandardCommand>
+              <label>精确部位测试射击</label>
+              <defaultProjectile>BDP_Projectile_ExactBodyPartRemoval</defaultProjectile>
+              <range>500</range>
+              <burstShotCount>1</burstShotCount>
+              <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+              <warmupTime>1.0</warmupTime>
+              <defaultCooldownTime>0.5</defaultCooldownTime>
+              <accuracyTouch>1</accuracyTouch>
+              <accuracyShort>1</accuracyShort>
+              <accuracyMedium>1</accuracyMedium>
+              <accuracyLong>1</accuracyLong>
+              <soundCast>Shot_AssaultRifle</soundCast>
+              <!-- 测试入口只接受 Pawn 目标。 -->
+              <targetParams>
+                <canTargetLocations>false</canTargetLocations>
+                <canTargetBuildings>false</canTargetBuildings>
+                <canTargetPawns>true</canTargetPawns>
+              </targetParams>
+            </VerbProps>
+            <DirectTargetLineOfSight>Required</DirectTargetLineOfSight>
+            <RangedModules>
+              <!-- 复用风刃·远程斩击的逐段重定向模块。 -->
+              <li><moduleDef>BDP_RangedModule_DistanceRevector</moduleDef></li>
+            </RangedModules>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_torso_passive</Id>
+            <DisplayLabel>躯干</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_torso</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.torso</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Torso</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>0</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_ribcage_passive</Id>
+            <DisplayLabel>胸腔</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_ribcage</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.ribcage</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Ribcage</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>0</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_sternum_passive</Id>
+            <DisplayLabel>胸骨</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_sternum</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.sternum</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Sternum</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>0</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_pelvis_passive</Id>
+            <DisplayLabel>骨盆</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_pelvis</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.pelvis</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Pelvis</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>0</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_spine_passive</Id>
+            <DisplayLabel>脊柱</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_spine</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.spine</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Spine</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>0</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_stomach_passive</Id>
+            <DisplayLabel>胃</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_stomach</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.stomach</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Stomach</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>0</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_heart_passive</Id>
+            <DisplayLabel>心脏</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_heart</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.heart</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Heart</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>0</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_lung_left_passive</Id>
+            <DisplayLabel>左肺</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_lung_left</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.lung_left</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Lung</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>0</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_lung_right_passive</Id>
+            <DisplayLabel>右肺</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_lung_right</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.lung_right</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Lung</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>1</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_kidney_left_passive</Id>
+            <DisplayLabel>左肾</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_kidney_left</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.kidney_left</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Kidney</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>0</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_kidney_right_passive</Id>
+            <DisplayLabel>右肾</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_kidney_right</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.kidney_right</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Kidney</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>1</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_liver_passive</Id>
+            <DisplayLabel>肝脏</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_liver</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.liver</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Liver</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>0</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_neck_passive</Id>
+            <DisplayLabel>颈部</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_neck</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.neck</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Neck</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>0</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_head_passive</Id>
+            <DisplayLabel>头部</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_head</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.head</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Head</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>0</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_skull_passive</Id>
+            <DisplayLabel>颅骨</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_skull</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.skull</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Skull</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>0</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_brain_passive</Id>
+            <DisplayLabel>大脑</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_brain</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.brain</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Brain</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>0</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_eye_left_passive</Id>
+            <DisplayLabel>左眼</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_eye_left</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.eye_left</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Eye</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>0</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_eye_right_passive</Id>
+            <DisplayLabel>右眼</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_eye_right</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.eye_right</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Eye</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>1</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_ear_left_passive</Id>
+            <DisplayLabel>左耳</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_ear_left</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.ear_left</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Ear</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>0</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_ear_right_passive</Id>
+            <DisplayLabel>右耳</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_ear_right</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.ear_right</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Ear</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>1</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_nose_passive</Id>
+            <DisplayLabel>鼻子</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_nose</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.nose</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Nose</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>0</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_jaw_passive</Id>
+            <DisplayLabel>下颌</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_jaw</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.jaw</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Jaw</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>0</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_tongue_passive</Id>
+            <DisplayLabel>舌头</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_tongue</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.tongue</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Tongue</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>0</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_shoulder_left_passive</Id>
+            <DisplayLabel>左肩</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_shoulder_left</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.shoulder_left</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Shoulder</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>0</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_clavicle_left_passive</Id>
+            <DisplayLabel>左锁骨</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_clavicle_left</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.clavicle_left</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Clavicle</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>0</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_arm_left_passive</Id>
+            <DisplayLabel>左臂</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_arm_left</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.arm_left</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Arm</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>0</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_humerus_left_passive</Id>
+            <DisplayLabel>左肱骨</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_humerus_left</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.humerus_left</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Humerus</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>0</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_radius_left_passive</Id>
+            <DisplayLabel>左桡骨</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_radius_left</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.radius_left</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Radius</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>0</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_hand_left_passive</Id>
+            <DisplayLabel>左手</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_hand_left</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.hand_left</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Hand</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>0</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_finger_left_little_passive</Id>
+            <DisplayLabel>左小指</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_finger_left_little</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.finger_left_little</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Finger</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>0</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_finger_left_ring_passive</Id>
+            <DisplayLabel>左无名指</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_finger_left_ring</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.finger_left_ring</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Finger</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>1</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_finger_left_middle_passive</Id>
+            <DisplayLabel>左中指</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_finger_left_middle</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.finger_left_middle</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Finger</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>2</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_finger_left_index_passive</Id>
+            <DisplayLabel>左食指</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_finger_left_index</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.finger_left_index</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Finger</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>3</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_finger_left_thumb_passive</Id>
+            <DisplayLabel>左拇指</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_finger_left_thumb</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.finger_left_thumb</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Finger</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>4</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_shoulder_right_passive</Id>
+            <DisplayLabel>右肩</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_shoulder_right</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.shoulder_right</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Shoulder</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>1</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_clavicle_right_passive</Id>
+            <DisplayLabel>右锁骨</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_clavicle_right</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.clavicle_right</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Clavicle</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>1</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_arm_right_passive</Id>
+            <DisplayLabel>右臂</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_arm_right</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.arm_right</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Arm</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>1</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_humerus_right_passive</Id>
+            <DisplayLabel>右肱骨</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_humerus_right</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.humerus_right</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Humerus</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>1</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_radius_right_passive</Id>
+            <DisplayLabel>右桡骨</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_radius_right</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.radius_right</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Radius</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>1</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_hand_right_passive</Id>
+            <DisplayLabel>右手</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_hand_right</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.hand_right</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Hand</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>1</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_finger_right_little_passive</Id>
+            <DisplayLabel>右小指</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_finger_right_little</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.finger_right_little</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Finger</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>5</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_finger_right_ring_passive</Id>
+            <DisplayLabel>右无名指</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_finger_right_ring</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.finger_right_ring</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Finger</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>6</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_finger_right_middle_passive</Id>
+            <DisplayLabel>右中指</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_finger_right_middle</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.finger_right_middle</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Finger</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>7</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_finger_right_index_passive</Id>
+            <DisplayLabel>右食指</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_finger_right_index</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.finger_right_index</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Finger</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>8</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_finger_right_thumb_passive</Id>
+            <DisplayLabel>右拇指</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_finger_right_thumb</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.finger_right_thumb</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Finger</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>9</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_waist_passive</Id>
+            <DisplayLabel>腰部</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_waist</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.waist</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Waist</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>0</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_leg_left_passive</Id>
+            <DisplayLabel>左腿</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_leg_left</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.leg_left</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Leg</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>0</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_femur_left_passive</Id>
+            <DisplayLabel>左股骨</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_femur_left</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.femur_left</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Femur</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>0</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_tibia_left_passive</Id>
+            <DisplayLabel>左胫骨</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_tibia_left</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.tibia_left</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Tibia</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>0</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_foot_left_passive</Id>
+            <DisplayLabel>左脚</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_foot_left</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.foot_left</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Foot</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>0</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_toe_left_little_passive</Id>
+            <DisplayLabel>左小趾</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_toe_left_little</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.toe_left_little</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Toe</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>0</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_toe_left_fourth_passive</Id>
+            <DisplayLabel>左第四趾</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_toe_left_fourth</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.toe_left_fourth</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Toe</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>1</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_toe_left_middle_passive</Id>
+            <DisplayLabel>左中趾</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_toe_left_middle</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.toe_left_middle</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Toe</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>2</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_toe_left_index_passive</Id>
+            <DisplayLabel>左食趾</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_toe_left_index</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.toe_left_index</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Toe</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>3</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_toe_left_big_passive</Id>
+            <DisplayLabel>左大趾</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_toe_left_big</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.toe_left_big</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Toe</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>4</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_leg_right_passive</Id>
+            <DisplayLabel>右腿</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_leg_right</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.leg_right</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Leg</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>1</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_femur_right_passive</Id>
+            <DisplayLabel>右股骨</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_femur_right</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.femur_right</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Femur</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>1</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_tibia_right_passive</Id>
+            <DisplayLabel>右胫骨</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_tibia_right</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.tibia_right</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Tibia</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>1</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_foot_right_passive</Id>
+            <DisplayLabel>右脚</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_foot_right</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.foot_right</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Foot</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>1</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_toe_right_little_passive</Id>
+            <DisplayLabel>右小趾</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_toe_right_little</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.toe_right_little</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Toe</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>5</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_toe_right_fourth_passive</Id>
+            <DisplayLabel>右第四趾</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_toe_right_fourth</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.toe_right_fourth</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Toe</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>6</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_toe_right_middle_passive</Id>
+            <DisplayLabel>右中趾</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_toe_right_middle</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.toe_right_middle</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Toe</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>7</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_toe_right_index_passive</Id>
+            <DisplayLabel>右食趾</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_toe_right_index</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.toe_right_index</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Toe</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>8</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+          <!-- 当前形态只发布对应部位的被动远程增强。 -->
+          <li>
+            <Id>exact_toe_right_big_passive</Id>
+            <DisplayLabel>右大趾</DisplayLabel>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_toe_right_big</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP.ExactBodyPart.toe_right_big</PassiveIdentityKey>
+            <RangedModuleAugmentations>
+              <li>
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <Scope>AllSides</Scope>
+                <DisplayNamePrefixMode>None</DisplayNamePrefixMode>
+                <Modules>
+                  <!-- 精确选择和一次满层崩解效果彼此独立。 -->
+                  <li>
+                    <moduleDef>BDP_VitalHitModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                      <SelectionMode>ExactDefOccurrence</SelectionMode>
+                      <ExactBodyPartDef>Toe</ExactBodyPartDef>
+                      <ExactBodyPartOccurrenceIndex>9</ExactBodyPartOccurrenceIndex>
+                    </config>
+                  </li>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_ExactBodyPartRemoval</EffectDef>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+        </Entries>
+        <DefaultModeKey>hand_left</DefaultModeKey>
+        <Modes>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>torso</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_torso</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_torso_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>ribcage</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_ribcage</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_ribcage_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>sternum</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_sternum</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_sternum_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>pelvis</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_pelvis</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_pelvis_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>spine</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_spine</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_spine_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>stomach</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_stomach</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_stomach_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>heart</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_heart</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_heart_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>lung_left</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_lung_left</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_lung_left_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>lung_right</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_lung_right</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_lung_right_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>kidney_left</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_kidney_left</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_kidney_left_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>kidney_right</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_kidney_right</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_kidney_right_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>liver</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_liver</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_liver_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>neck</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_neck</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_neck_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>head</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_head</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_head_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>skull</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_skull</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_skull_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>brain</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_brain</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_brain_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>eye_left</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_eye_left</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_eye_left_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>eye_right</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_eye_right</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_eye_right_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>ear_left</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_ear_left</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_ear_left_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>ear_right</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_ear_right</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_ear_right_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>nose</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_nose</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_nose_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>jaw</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_jaw</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_jaw_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>tongue</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_tongue</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_tongue_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>shoulder_left</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_shoulder_left</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_shoulder_left_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>clavicle_left</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_clavicle_left</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_clavicle_left_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>arm_left</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_arm_left</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_arm_left_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>humerus_left</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_humerus_left</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_humerus_left_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>radius_left</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_radius_left</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_radius_left_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>hand_left</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_hand_left</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_hand_left_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>finger_left_little</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_finger_left_little</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_finger_left_little_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>finger_left_ring</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_finger_left_ring</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_finger_left_ring_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>finger_left_middle</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_finger_left_middle</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_finger_left_middle_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>finger_left_index</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_finger_left_index</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_finger_left_index_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>finger_left_thumb</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_finger_left_thumb</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_finger_left_thumb_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>shoulder_right</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_shoulder_right</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_shoulder_right_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>clavicle_right</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_clavicle_right</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_clavicle_right_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>arm_right</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_arm_right</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_arm_right_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>humerus_right</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_humerus_right</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_humerus_right_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>radius_right</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_radius_right</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_radius_right_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>hand_right</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_hand_right</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_hand_right_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>finger_right_little</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_finger_right_little</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_finger_right_little_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>finger_right_ring</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_finger_right_ring</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_finger_right_ring_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>finger_right_middle</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_finger_right_middle</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_finger_right_middle_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>finger_right_index</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_finger_right_index</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_finger_right_index_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>finger_right_thumb</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_finger_right_thumb</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_finger_right_thumb_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>waist</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_waist</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_waist_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>leg_left</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_leg_left</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_leg_left_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>femur_left</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_femur_left</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_femur_left_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>tibia_left</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_tibia_left</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_tibia_left_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>foot_left</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_foot_left</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_foot_left_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>toe_left_little</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_toe_left_little</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_toe_left_little_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>toe_left_fourth</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_toe_left_fourth</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_toe_left_fourth_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>toe_left_middle</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_toe_left_middle</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_toe_left_middle_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>toe_left_index</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_toe_left_index</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_toe_left_index_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>toe_left_big</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_toe_left_big</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_toe_left_big_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>leg_right</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_leg_right</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_leg_right_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>femur_right</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_femur_right</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_femur_right_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>tibia_right</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_tibia_right</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_tibia_right_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>foot_right</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_foot_right</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_foot_right_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>toe_right_little</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_toe_right_little</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_toe_right_little_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>toe_right_fourth</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_toe_right_fourth</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_toe_right_fourth_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>toe_right_middle</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_toe_right_middle</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_toe_right_middle_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>toe_right_index</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_toe_right_index</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_toe_right_index_passive</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 形态选择先于目标选择，目标与部位解耦。 -->
+          <li>
+            <ModeKey>toe_right_big</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_ExactBodyPart_toe_right_big</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>exact_primary</li>
+              <li>exact_toe_right_big_passive</li>
+            </ActiveEntryIds>
+          </li>
+        </Modes>
+      </Expression>
+      <!-- 玩家语义：远程攻击；选定部位的裂解效果归入远程攻击额外效果。 -->
+      <Features>
+        <li>
+          <Id>exact_body_part_ranged_attack</Id>
+          <Feature>BDP_Feature_RangedAttack</Feature>
+          <Sources>
+            <li Class="BDP.Content.Information.Features.Sources.RangedAttackFeatureSourceConfig">
+              <Id>exact_primary_source</Id>
+              <EntryId>exact_primary</EntryId>
+            </li>
+          </Sources>
+          <Subgroups>
+            <li>
+              <Id>exact_selected_body_part_effect</Id>
+              <Group>BDP_FeatureGroup_ExtraEffect</Group>
+              <LabelKey>BDP_Info_ExtraEffect_BodyPartDisintegration</LabelKey>
+            </li>
+          </Subgroups>
+        </li>
+      </Features>
+    </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+
+</Defs>

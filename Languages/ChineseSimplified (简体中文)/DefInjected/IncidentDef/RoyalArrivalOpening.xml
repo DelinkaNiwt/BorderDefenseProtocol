@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 专门首发事件的玩家显示名称，与既有任务使用相同中文概念。 -->
+  <BDP_GiveQuest_RoyalArrivalOpening.label>皇室求援</BDP_GiveQuest_RoyalArrivalOpening.label>
+</LanguageData>

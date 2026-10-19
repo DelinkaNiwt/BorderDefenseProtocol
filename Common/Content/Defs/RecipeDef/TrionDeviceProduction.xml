@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 便携检测器：复用原版机械加工台，不要求BDP制造台或核心许可。 -->
+  <RecipeDef>
+    <!-- 配方身份；名称及任务进度由简体中文语言包注入。 -->
+    <defName>BDP_Recipe_ProduceTrionPortableDetector</defName>
+    <label>BDP_Recipe_ProduceTrionPortableDetector</label>
+    <jobString>BDP_Recipe_ProduceTrionPortableDetector</jobString>
+    <!-- 只控制正常制造，不影响现有物品的检测使用。 -->
+    <researchPrerequisites><li>BDP_Research_PortableTalentDetection</li></researchPrerequisites>
+    <!-- 原版工作台汇总配方使用者，避免给原版建筑打XML补丁。 -->
+    <recipeUsers><li>TableMachining</li></recipeUsers>
+    <!-- 便携检测器的已确认首版材料，不要求其它BDP产线。 -->
+    <ingredients>
+      <li><filter><thingDefs><li>Steel</li></thingDefs></filter><count>40</count></li>
+      <li><filter><thingDefs><li>ComponentIndustrial</li></thingDefs></filter><count>3</count></li>
+    </ingredients>
+    <!-- 成品沿用既有检测成功后消耗一个的行为。 -->
+    <products><BDP_TrionPortableDetector>1</BDP_TrionPortableDetector></products>
+    <!-- 已确认首版工作量及原版制作工作属性。 -->
+    <workAmount>10000</workAmount>
+    <workSkill>Crafting</workSkill>
+    <workSkillLearnFactor>1</workSkillLearnFactor>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <!-- 复用零部件半成品，制作中断保留材料与进度。 -->
+    <unfinishedThingDef>UnfinishedComponent</unfinishedThingDef>
+    <allowMixingIngredients>false</allowMixingIngredients>
+    <!-- 只接收本配方明确列出的常规材料。 -->
+    <defaultIngredientFilter><thingDefs><li>Steel</li><li>ComponentIndustrial</li></thingDefs></defaultIngredientFilter>
+  </RecipeDef>
+</Defs>

@@ -45,19 +45,19 @@ Assert-True (
 ) '最终视觉姿态必须携带已解算握持锚点。'
 
 Assert-True (
-    ($resolverText -match 'GripAnchor = ResolveGripAnchor\(request, calculation\)') -and
+    ($resolverText -match 'GripAnchor = ResolveGripAnchor\(request, calculation, graphic, drawScale\)') -and
     ($resolverText -match 'ExpressionVisualGripConfig grip = request\.Preset\.ResolveGrip\(\)') -and
-    ($resolverText -match 'TransformGraphicLocalOffset\(localOffset, calculation\)') -and
+    ($resolverText -match 'TransformGraphicLocalOffset\(\s*localOffset,\s*calculation,\s*graphic,\s*drawScale\s*\)') -and
     ($resolverText -match 'calculation\.MeshKind == VisualMeshKind\.PlaneFlipped') -and
     ($resolverText -match 'Quaternion\.AngleAxis\(calculation\.DrawAngle, Vector3\.up\)') -and
     ($resolverText -match 'WorldPosition = calculation\.DrawPosition \+ worldOffset')
 ) '握持锚点必须跟随最终绘制角和网格镜像解算。'
 
 Assert-True (
-    ($resolverText -match 'AlignDrawPositionToGrip\(request, calculation\);') -and
+    ($resolverText -match 'AlignDrawPositionToGrip\(request, calculation, graphic, drawScale\);') -and
     ($resolverText -match 'private static void AlignDrawPositionToGrip') -and
     ($resolverText -match 'grip == null \|\| !grip\.UseAsPoseOrigin') -and
-    ($resolverText -match 'calculation\.DrawPosition -= TransformGraphicLocalOffset\(\s*grip\.GripOffset,\s*calculation\s*\)')
+    ($resolverText -match 'calculation\.DrawPosition -= TransformGraphicLocalOffset\(\s*grip\.GripOffset,\s*calculation,\s*graphic,\s*drawScale\s*\)')
 ) '仅在显式开启时，解析器必须从目标握持位置反推出主贴图中心。'
 
 Write-Output 'VisualGripAnchorSmokeTests PASS'

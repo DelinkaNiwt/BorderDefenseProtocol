@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 独立高角射击模块：不可视目标使用原版 flyOverhead 变体并套用视觉轨迹参数。 -->
+  <BDP.Core.AttackExecution.BdpRangedAttackModuleDef>
+    <defName>BDP_HighAngleShootingModule</defName>
+    <label>high-angle shooting module</label>
+    <runtimeClass>BDP.Content.RangedModules.HighAngleShooting.HighAngleShootingModule</runtimeClass>
+    <defaultConfig Class="BDP.Content.RangedModules.HighAngleShooting.HighAngleShootingConfig">
+      <OverheadProjectileDefName>BDP_Projectile_Tracking_Overhead</OverheadProjectileDefName>
+      <StartHeight>0</StartHeight>
+      <EndHeight>0</EndHeight>
+      <ArcHeight>4.8</ArcHeight>
+      <!-- 默认禁止把普通薄屋顶下的目标作为高角射击目标；厚屋顶始终禁止。 -->
+      <AllowTargetUnderThinRoof>false</AllowTargetUnderThinRoof>
+    </defaultConfig>
+  </BDP.Core.AttackExecution.BdpRangedAttackModuleDef>
+
+</Defs>

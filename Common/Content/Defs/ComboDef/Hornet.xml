@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 黄蜂：双猎犬组合技，沿用猎犬射击配置并恢复标准强度追踪。 -->
+  <BDP.Core.Combos.ComboDef>
+    <!-- 组合技 Def 唯一名称。 -->
+    <defName>BDP_Combo_Hornet</defName>
+    <!-- 玩家界面显示名称。 -->
+    <label>黄蜂</label>
+    <!-- 组合技说明。 -->
+    <description>猎犬与猎犬组合，沿用猎犬射击配置并使用标准强度追踪。</description>
+    <!-- 两侧均要求猎犬芯片。 -->
+    <firstSourceKey>BDP_ChipFunction_Hound</firstSourceKey>
+    <secondSourceKey>BDP_ChipFunction_Hound</secondSourceKey>
+    <!-- 第一来源只允许射手体系武装芯片。 -->
+    <FirstSourceAdmission>
+      <AllowedProfessions>
+        <li>BDP_ChipProfession_Shooter</li>
+      </AllowedProfessions>
+      <AllowedCategories>
+        <li>BDP_ChipCategory_Weapon</li>
+      </AllowedCategories>
+    </FirstSourceAdmission>
+    <!-- 第二来源执行同一成品身份约束。 -->
+    <SecondSourceAdmission>
+      <AllowedProfessions>
+        <li>BDP_ChipProfession_Shooter</li>
+      </AllowedProfessions>
+      <AllowedCategories>
+        <li>BDP_ChipCategory_Weapon</li>
+      </AllowedCategories>
+    </SecondSourceAdmission>
+    <Expression>
+      <Entries>
+        <li>
+          <!-- 组合技表达条目唯一标识。 -->
+          <Id>hornet_primary</Id>
+          <DisplayLabel>黄蜂</DisplayLabel>
+          <EntryType>PrimaryVerb</EntryType>
+          <WeaponMode>Ranged</WeaponMode>
+          <!-- 无弹种或连射常量覆盖；完整基础射击属性直接沿用猎犬。 -->
+          <!-- 射击参数沿用主侧猎犬。 -->
+          <VerbPropsResolve>
+            <RangeResolve>FollowFirstSource</RangeResolve>
+            <WarmupTimeResolve>FollowFirstSource</WarmupTimeResolve>
+            <BurstShotCountResolve>FollowFirstSource</BurstShotCountResolve>
+            <TicksBetweenBurstShotsResolve>FollowFirstSource</TicksBetweenBurstShotsResolve>
+            <AccuracyTouchResolve>FollowFirstSource</AccuracyTouchResolve>
+            <AccuracyShortResolve>FollowFirstSource</AccuracyShortResolve>
+            <AccuracyMediumResolve>FollowFirstSource</AccuracyMediumResolve>
+            <AccuracyLongResolve>FollowFirstSource</AccuracyLongResolve>
+            <DefaultCooldownTimeResolve>FollowFirstSource</DefaultCooldownTimeResolve>
+          </VerbPropsResolve>
+          <ExecutionResolve>
+            <RhythmResolve>FollowFirstSource</RhythmResolve>
+          </ExecutionResolve>
+          <TrionResolve>
+            <UseCostResolve>FollowFirstSource</UseCostResolve>
+            <MinimumRequiredResolve>FollowFirstSource</MinimumRequiredResolve>
+          </TrionResolve>
+          <!-- 黄蜂唯一的行为差异：使用标准强度追踪预设。 -->
+          <RangedModules>
+            <!-- 黄蜂使用标准强度追踪预设。 -->
+            <li><moduleDef>BDP_HomingModule_Strong</moduleDef></li>
+            <!-- 不可视目标由独立高角射击模块切换到原版越顶飞行。 -->
+            <li><moduleDef>BDP_HighAngleShootingModule</moduleDef></li>
+          </RangedModules>
+          <DirectTargetLineOfSight>Required</DirectTargetLineOfSight>
+          <DeclaredPermissionKeys>
+            <li>BDP.OperatorConsole.Active</li>
+          </DeclaredPermissionKeys>
+        </li>
+      </Entries>
+    </Expression>
+    <!-- 组合最终玩家语义是远程攻击；追踪模块仍属于最终结果来源事实。 -->
+    <Features>
+      <li>
+        <Id>hornet_ranged_attack</Id>
+        <Feature>BDP_Feature_RangedAttack</Feature>
+        <Sources>
+          <li Class="BDP.Content.Information.Features.Sources.RangedAttackFeatureSourceConfig">
+            <Id>hornet_final_expression_source</Id>
+            <EntryId>hornet_primary</EntryId>
+          </li>
+        </Sources>
+      </li>
+    </Features>
+  </BDP.Core.Combos.ComboDef>
+
+</Defs>

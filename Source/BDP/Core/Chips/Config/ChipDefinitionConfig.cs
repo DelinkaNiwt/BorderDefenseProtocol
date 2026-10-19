@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BDP.Core.Information;
 using BDP.Core.Requirements;
 using BDP.Core.Expressions;
 using Verse;
@@ -29,6 +30,12 @@ namespace BDP.Core.Chips
         /// 它继续沿用表达系统自己的配置结构。
         /// </summary>
         public ChipExpressionConfig Expression;
+
+        /// <summary>
+        /// 芯片面向玩家的功能语义声明。
+        /// 它只供信息解析和展示读取，不参与任何芯片执行行为。
+        /// </summary>
+        public List<ChipFeatureDeclaration> Features;
 
         /// <summary>
         /// 芯片的 Trion 声明块。

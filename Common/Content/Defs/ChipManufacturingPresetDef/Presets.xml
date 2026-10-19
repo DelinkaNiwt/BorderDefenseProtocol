@@ -1,0 +1,1785 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    BDP 芯片芯片功能模板定义。
+    每个 ChipManufacturingPresetDef 承载一个可选芯片功能模板的静态定义数据。
+    类别和标签决定它在制造面板中如何被筛选和路由。
+  -->
+
+  <!-- ===== 远程射击功能模板（射手/枪手共用）===== -->
+
+  <!-- 小行星：标准直射远程功能。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+    <defName>BDP_ChipFunction_Asteroid</defName>
+    <!-- 建造或制造须满足所有研究；不影响现有装备使用。 -->
+    <researchPrerequisites><li>BDP_Research_BasicTriggerEngineering</li></researchPrerequisites>
+    <label>小行星</label>
+    <description>标准直射远程功能。子弹沿直线飞行，命中目标造成伤害。远程攻击的基础模板。</description>
+    <profession>BDP_ChipProfession_Shooter</profession>
+    <costList>
+      <Steel>40</Steel>
+      <ComponentIndustrial>5</ComponentIndustrial>
+    </costList>
+    <additionalWorkAmount>24000</additionalWorkAmount>
+    <config>
+      <Profile>
+        <Category>BDP_ChipCategory_Weapon</Category>
+        <Tags>
+        </Tags>
+      </Profile>
+      <Loadout>
+        <SlotRegion>MainSub</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <ActivationDelayTicks>60</ActivationDelayTicks>
+        <DeactivationDelayTicks>30</DeactivationDelayTicks>
+      </Loadout>
+      <Trion><CapacityCost>50</CapacityCost><ActivationCost>15</ActivationCost></Trion>
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement"><Minimum>1</Minimum></li>
+      </ActivationRequirements>
+      <Expression>
+        <Entries>
+          <li>
+            <Id>sequential_primary</Id>
+            <DisplayLabel>小行星</DisplayLabel>
+            <EntryType>PrimaryVerb</EntryType>
+            <WeaponMode>Ranged</WeaponMode>
+            <Trion><UseCost>4</UseCost></Trion>
+            <Execution><Rhythm>Simultaneous</Rhythm></Execution>
+            <!-- 小行星的统一武器贴图由射手默认 Trion 立方体型提供。 -->
+            <VerbProps>
+              <verbClass>BDP.Core.Verbs.BdpVerb_Shoot</verbClass>
+              <hasStandardCommand>true</hasStandardCommand>
+              <label>小行星</label>
+              <defaultProjectile>BDP_Projectile_Normal</defaultProjectile>
+              <range>30.9</range>
+              <burstShotCount>1</burstShotCount>
+              <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+              <warmupTime>1.8</warmupTime>
+              <defaultCooldownTime>1.2</defaultCooldownTime>
+              <accuracyTouch>0.85</accuracyTouch>
+              <accuracyShort>0.75</accuracyShort>
+              <accuracyMedium>0.50</accuracyMedium>
+              <accuracyLong>0.20</accuracyLong>
+              <soundCast>BDP_Sound_AsteroidCast</soundCast>
+              <!-- 目标判定与原版枪械一致：不可瞄地面，可瞄单位/建筑 -->
+              <targetParams>
+                <canTargetLocations>false</canTargetLocations>
+                <canTargetBuildings>true</canTargetBuildings>
+                <canTargetPawns>true</canTargetPawns>
+              </targetParams>
+            </VerbProps>
+            <DirectTargetLineOfSight>Required</DirectTargetLineOfSight>
+          </li>
+        </Entries>
+      </Expression>
+      <!-- 玩家语义：远程攻击；Verb 只是当前实现来源。 -->
+      <Features><!-- 玩家语义：远程攻击 -->
+        <!-- 显式功能实例或来源 Id，保持稳定且可追溯。 -->
+        <li><Id>asteroid_ranged_attack</Id><Feature>BDP_Feature_RangedAttack</Feature><Sources><li Class="BDP.Content.Information.Features.Sources.RangedAttackFeatureSourceConfig"><Id>asteroid_primary_source</Id><EntryId>sequential_primary</EntryId></li></Sources></li></Features>
+      </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+
+  <!-- 美特拉（Meteora）：基于小行星的范围爆炸远程功能，使用专用炸裂弹投射物。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+    <!-- 美特拉芯片唯一名称。 -->
+    <defName>BDP_ChipFunction_Meteora</defName>
+    <!-- 建造或制造须满足所有研究；不影响现有装备使用。 -->
+    <researchPrerequisites><li>BDP_Research_ExplosiveTechnology</li></researchPrerequisites>
+    <!-- 玩家可见芯片名称。 -->
+    <label>美特拉</label>
+    <labelKey>BDP_ChipFunction_Meteora</labelKey>
+    <!-- 玩家可见芯片说明。 -->
+    <description>基于小行星的范围爆炸远程功能。命中后在落点追加范围爆炸。</description>
+    <descriptionKey>BDP_ChipFunction_Meteora_Description</descriptionKey>
+    <!-- 沿用小行星的射手职业。 -->
+    <profession>BDP_ChipProfession_Shooter</profession>
+    <!-- 爆破功能的独立材料增量，另计芯片基础和构型。 -->
+    <costList>
+      <Steel>55</Steel>
+      <ComponentIndustrial>7</ComponentIndustrial>
+    </costList>
+    <additionalWorkAmount>34000</additionalWorkAmount>
+    <config>
+      <!-- 沿用小行星的武装分类。 -->
+      <Profile>
+        <Category>BDP_ChipCategory_Weapon</Category>
+        <Tags>
+        </Tags>
+      </Profile>
+      <!-- 美特拉可装主槽或副槽。 -->
+      <Loadout>
+        <SlotRegion>MainSub</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <ActivationDelayTicks>60</ActivationDelayTicks>
+        <DeactivationDelayTicks>30</DeactivationDelayTicks>
+      </Loadout>
+      <!-- 沿用小行星的 Trion 参数。 -->
+      <Trion><CapacityCost>50</CapacityCost><ActivationCost>15</ActivationCost></Trion>
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement"><Minimum>1</Minimum></li>
+      </ActivationRequirements>
+      <Expression>
+        <Entries>
+          <li>
+            <!-- 美特拉使用标准直射表达，爆炸由炸裂弹投射物 Def 的 explosionRadius 提供。 -->
+            <Id>meteora_primary</Id>
+            <DisplayLabel>美特拉</DisplayLabel>
+            <DisplayLabelKey>BDP_Expression_Meteora</DisplayLabelKey>
+            <EntryType>PrimaryVerb</EntryType>
+            <WeaponMode>Ranged</WeaponMode>
+            <Trion><UseCost>4</UseCost></Trion>
+            <Execution><Rhythm>Simultaneous</Rhythm></Execution>
+            <!-- 美特拉的统一武器贴图由射手默认 Trion 立方体型提供。 -->
+            <VerbProps>
+              <verbClass>BDP.Core.Verbs.BdpVerb_Shoot</verbClass>
+              <hasStandardCommand>true</hasStandardCommand>
+              <label>美特拉</label>
+              <defaultProjectile>BDP_Projectile_Explosive</defaultProjectile>
+              <range>30.9</range>
+              <burstShotCount>1</burstShotCount>
+              <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+              <warmupTime>1.8</warmupTime>
+              <defaultCooldownTime>1.2</defaultCooldownTime>
+              <accuracyTouch>0.85</accuracyTouch>
+              <accuracyShort>0.75</accuracyShort>
+              <accuracyMedium>0.50</accuracyMedium>
+              <accuracyLong>0.20</accuracyLong>
+              <soundCast>BDP_Sound_AsteroidCast</soundCast>
+              <!-- 沿用小行星的目标判定。 -->
+              <targetParams>
+                <canTargetLocations>false</canTargetLocations>
+                <canTargetBuildings>true</canTargetBuildings>
+                <canTargetPawns>true</canTargetPawns>
+              </targetParams>
+            </VerbProps>
+            <DirectTargetLineOfSight>Required</DirectTargetLineOfSight>
+          </li>
+        </Entries>
+      </Expression>
+      <!-- 玩家语义：远程攻击；爆炸半径属于攻击本体结果。 -->
+      <Features><!-- 玩家语义：远程攻击；爆炸半径由投射物真实配置读取。 -->
+        <li><Id>meteora_ranged_attack</Id><Feature>BDP_Feature_RangedAttack</Feature><Sources><li Class="BDP.Content.Information.Features.Sources.RangedAttackFeatureSourceConfig"><Id>meteora_primary_source</Id><EntryId>meteora_primary</EntryId></li></Sources></li>
+      </Features>
+      </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+
+  <!-- 毒蛇：路线引导远程功能。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+    <defName>BDP_ChipFunction_Viper</defName>
+    <!-- 建造或制造须满足所有研究；不影响现有装备使用。 -->
+    <researchPrerequisites><li>BDP_Research_TrajectoryControl</li></researchPrerequisites>
+    <descriptionKey>BDP_ChipFunction_Viper_Description</descriptionKey>
+    <label>毒蛇</label>
+    <description>路线引导远程功能。玩家用 Shift+左键 设定弹道路径锚点，子弹按路径分段飞行。</description>
+    <profession>BDP_ChipProfession_Shooter</profession>
+    <costList>
+      <Steel>55</Steel>
+      <ComponentIndustrial>7</ComponentIndustrial>
+    </costList>
+    <additionalWorkAmount>39000</additionalWorkAmount>
+    <config>
+      <Profile>
+        <Category>BDP_ChipCategory_Weapon</Category>
+        <Tags>
+        </Tags>
+      </Profile>
+      <Loadout>
+        <SlotRegion>MainSub</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <ActivationDelayTicks>60</ActivationDelayTicks>
+        <DeactivationDelayTicks>30</DeactivationDelayTicks>
+      </Loadout>
+      <Trion><CapacityCost>80</CapacityCost><ActivationCost>15</ActivationCost></Trion>
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement"><Minimum>1</Minimum></li>
+      </ActivationRequirements>
+      <Expression>
+        <Entries>
+          <li>
+            <Id>viper_primary</Id>
+            <DisplayLabel>毒蛇</DisplayLabel>
+            <EntryType>PrimaryVerb</EntryType>
+            <WeaponMode>Ranged</WeaponMode>
+            <Trion><UseCost>8</UseCost></Trion>
+            <Execution><Rhythm>Simultaneous</Rhythm></Execution>
+            <!-- 毒蛇的统一武器贴图由射手默认 Trion 立方体型提供。 -->
+            <VerbProps>
+              <verbClass>BDP.Core.Verbs.BdpVerb_Shoot</verbClass>
+              <hasStandardCommand>true</hasStandardCommand>
+              <label>毒蛇</label>
+              <defaultProjectile>BDP_Projectile_Variable</defaultProjectile>
+              <range>30.9</range>
+              <burstShotCount>1</burstShotCount>
+              <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+              <warmupTime>1.2</warmupTime>
+              <defaultCooldownTime>1.2</defaultCooldownTime>
+              <accuracyTouch>0.85</accuracyTouch>
+              <accuracyShort>0.75</accuracyShort>
+              <accuracyMedium>0.50</accuracyMedium>
+              <accuracyLong>0.22</accuracyLong>
+              <soundCast>BDP_Sound_ViperCast</soundCast>
+              <!-- 路线引导需要可瞄地面 -->
+              <targetParams>
+                <canTargetLocations>true</canTargetLocations>
+                <canTargetBuildings>true</canTargetBuildings>
+                <canTargetPawns>true</canTargetPawns>
+              </targetParams>
+            </VerbProps>
+            <DirectTargetLineOfSight>NotRequired</DirectTargetLineOfSight>
+            <RangedModules>
+              <!-- 毒蛇独立开启操控精度曲线，其他路线模块默认保持中性。 -->
+              <li>
+                <moduleDef>BDP_RoutePathModule</moduleDef>
+                <config Class="BDP.Content.RangedModules.RoutePath.RoutePathConfig">
+                  <!-- 允许最多8个锚点。 -->
+                  <MaxAnchors>8</MaxAnchors>
+                  <!-- 参照为健康20级常态的原版每格精度。 -->
+                  <AimReferenceAccuracy>0.99</AimReferenceAccuracy>
+                  <!-- 参照能力下的误差压缩强度。 -->
+                  <AimReferenceErrorPower>4.01188474</AimReferenceErrorPower>
+                  <!-- 高低操控能力的成长差距。 -->
+                  <AimErrorGrowthExponent>1.58275869</AimErrorGrowthExponent>
+                  <!-- 中间段基础散布半径，单位为格。 -->
+                  <IntermediateSpreadRadius>0.625</IntermediateSpreadRadius>
+                  <!-- 最终段基础散布半径，单位为格。 -->
+                  <FinalSpreadRadius>0.30</FinalSpreadRadius>
+                  <!-- 最高精度仍保留25%半径，维持有序散乱。 -->
+                  <HighAccuracySpreadScale>0.25</HighAccuracySpreadScale>
+                </config>
+              </li>
+            </RangedModules>
+          </li>
+        </Entries>
+      </Expression>
+      <!-- 玩家语义：远程攻击；路径引导由同一远程攻击实例的来源事实补充。 -->
+      <Features><!-- 玩家语义：远程攻击 -->
+        <!-- 显式功能实例或来源 Id，保持稳定且可追溯。 -->
+        <li><Id>viper_ranged_attack</Id><Feature>BDP_Feature_RangedAttack</Feature><Sources><li Class="BDP.Content.Information.Features.Sources.RangedAttackFeatureSourceConfig"><Id>viper_primary_source</Id><EntryId>viper_primary</EntryId></li></Sources></li></Features>
+      </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+
+  <!-- 猎犬：远程追踪功能。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+    <defName>BDP_ChipFunction_Hound</defName>
+    <!-- 建造或制造须满足所有研究；不影响现有装备使用。 -->
+    <researchPrerequisites><li>BDP_Research_TrajectoryControl</li></researchPrerequisites>
+    <label>猎犬</label>
+    <description>远程追踪功能。子弹发射后在有限轮次内持续追踪目标。</description>
+    <profession>BDP_ChipProfession_Shooter</profession>
+    <costList>
+      <Steel>55</Steel>
+      <ComponentIndustrial>7</ComponentIndustrial>
+    </costList>
+    <additionalWorkAmount>36000</additionalWorkAmount>
+    <config>
+      <Profile>
+        <Category>BDP_ChipCategory_Weapon</Category>
+        <Tags>
+        </Tags>
+      </Profile>
+      <Loadout>
+        <SlotRegion>MainSub</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <ActivationDelayTicks>60</ActivationDelayTicks>
+        <DeactivationDelayTicks>30</DeactivationDelayTicks>
+      </Loadout>
+      <Trion><CapacityCost>80</CapacityCost><ActivationCost>15</ActivationCost></Trion>
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement"><Minimum>1</Minimum></li>
+      </ActivationRequirements>
+      <Expression>
+        <Entries>
+          <li>
+            <Id>tracking_primary</Id>
+            <DisplayLabel>猎犬</DisplayLabel>
+            <EntryType>PrimaryVerb</EntryType>
+            <WeaponMode>Ranged</WeaponMode>
+            <Trion><UseCost>6</UseCost></Trion>
+            <Execution><Rhythm>Simultaneous</Rhythm></Execution>
+            <!-- 猎犬的统一武器贴图由射手默认 Trion 立方体型提供。 -->
+            <VerbProps>
+              <verbClass>BDP.Core.Verbs.BdpVerb_Shoot</verbClass>
+              <hasStandardCommand>true</hasStandardCommand>
+              <label>猎犬</label>
+              <defaultProjectile>BDP_Projectile_Tracking</defaultProjectile>
+              <range>30.9</range>
+              <burstShotCount>1</burstShotCount>
+              <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+              <warmupTime>1.6</warmupTime>
+              <defaultCooldownTime>1.4</defaultCooldownTime>
+              <accuracyTouch>0.85</accuracyTouch>
+              <accuracyShort>0.75</accuracyShort>
+              <accuracyMedium>0.50</accuracyMedium>
+              <accuracyLong>0.20</accuracyLong>
+              <soundCast>Shot_Revolver</soundCast>
+              <!-- 目标判定与原版枪械一致：不可瞄地面，可瞄单位/建筑 -->
+              <targetParams>
+                <canTargetLocations>false</canTargetLocations>
+                <canTargetBuildings>true</canTargetBuildings>
+                <canTargetPawns>true</canTargetPawns>
+              </targetParams>
+            </VerbProps>
+            <DirectTargetLineOfSight>Required</DirectTargetLineOfSight>
+            <DeclaredPermissionKeys>
+              <li>BDP.OperatorConsole.Active</li>
+            </DeclaredPermissionKeys>
+            <RangedModules>
+              <!-- 猎犬使用弱追踪配置：前 90% 直飞，转向与前导较弱，追丢不重锁。 -->
+              <li><moduleDef>BDP_HomingModule_Weak</moduleDef></li>
+              <!-- 不可视目标由独立高角射击模块切换到原版越顶飞行。 -->
+              <li><moduleDef>BDP_HighAngleShootingModule</moduleDef></li>
+            </RangedModules>
+          </li>
+        </Entries>
+      </Expression>
+      <!-- 玩家语义：远程攻击；追踪和高角模块仍由来源链提供事实。 -->
+      <Features><!-- 玩家语义：远程攻击 -->
+        <!-- 显式功能实例或来源 Id，保持稳定且可追溯。 -->
+        <li><Id>hound_ranged_attack</Id><Feature>BDP_Feature_RangedAttack</Feature><Sources><li Class="BDP.Content.Information.Features.Sources.RangedAttackFeatureSourceConfig"><Id>hound_primary_source</Id><EntryId>tracking_primary</EntryId></li></Sources></li></Features>
+      </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+
+  <!-- 卵之冠：固定预载的远程部位崩溃功能。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+    <!-- 芯片功能模板唯一名称；Alektor与触发体构型保持同一技术标识。 -->
+    <defName>BDP_ChipFunction_Alektor</defName>
+    <!-- 该芯片只由卵之冠触发体固定预载，不在芯片制作台显示。 -->
+    <showInManufacturing>false</showInManufacturing>
+    <!-- 缺少语言包时的中文回退名称。 -->
+    <label>卵之冠</label>
+    <labelKey>BDP_ChipFunction_Alektor</labelKey>
+    <!-- 缺少语言包时的中文回退说明。 -->
+    <description>远程部位崩溃功能。直接命中Pawn后不造成伤害，并在命中部位叠加标记；标记满层后移除该部位。</description>
+    <descriptionKey>BDP_ChipFunction_Alektor_Description</descriptionKey>
+    <!-- 复用猎犬的射手职业体系。 -->
+    <profession>BDP_ChipProfession_Shooter</profession>
+    <!-- 仅固定预载，没有制造入口，不声明制造材料与工作量。 -->
+    <config>
+      <!-- 卵之冠属于远程武装类芯片。 -->
+      <Profile>
+        <Category>BDP_ChipCategory_Weapon</Category>
+        <Tags>
+        </Tags>
+      </Profile>
+      <!-- 固定装载于特殊槽；特殊槽激活由战斗体激活事务自动处理。 -->
+      <Loadout>
+        <SlotRegion>Special</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <!-- 未另行指定装卸延迟，沿用固定特殊芯片的即时切换语义。 -->
+        <ActivationDelayTicks>0</ActivationDelayTicks>
+        <DeactivationDelayTicks>0</DeactivationDelayTicks>
+      </Loadout>
+      <!-- 沿用现有远程武装的Trion占用与激活成本档位。 -->
+      <Trion>
+        <CapacityCost>80</CapacityCost>
+        <ActivationCost>15</ActivationCost>
+      </Trion>
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement"><Minimum>1</Minimum></li>
+      </ActivationRequirements>
+      <Expression>
+        <Entries>
+          <li>
+            <!-- 远程武装唯一主攻击入口。 -->
+            <Id>alektor_primary</Id>
+            <DisplayLabel>卵之冠</DisplayLabel>
+            <DisplayLabelKey>BDP_Expression_Alektor</DisplayLabelKey>
+            <EntryType>PrimaryVerb</EntryType>
+            <WeaponMode>Ranged</WeaponMode>
+            <!-- 单发远程攻击；单发Trion消耗沿用猎犬。 -->
+            <Trion><UseCost>6</UseCost></Trion>
+            <Execution><Rhythm>Sequential</Rhythm></Execution>
+            <VerbProps>
+              <!-- 复用BDP统一远程投射物Verb。 -->
+              <verbClass>BDP.Core.Verbs.BdpVerb_Shoot</verbClass>
+              <hasStandardCommand>true</hasStandardCommand>
+              <label>卵之冠</label>
+              <defaultProjectile>BDP_Projectile_BodyCollapse</defaultProjectile>
+              <!-- 射程与现有突击步枪武装型一致。 -->
+              <range>30.9</range>
+              <!-- 单发，不引入额外连射机制。 -->
+              <burstShotCount>1</burstShotCount>
+              <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+              <!-- 远程预热时间：2秒。 -->
+              <warmupTime>2.0</warmupTime>
+              <!-- 远程攻击冷却时间：2秒。 -->
+              <defaultCooldownTime>2.0</defaultCooldownTime>
+              <!-- 全距离精度统一为0.8。 -->
+              <accuracyTouch>0.80</accuracyTouch>
+              <accuracyShort>0.80</accuracyShort>
+              <accuracyMedium>0.80</accuracyMedium>
+              <accuracyLong>0.80</accuracyLong>
+              <!-- 复用原版突击步枪音效，不新增音效资产。 -->
+              <soundCast>Shot_AssaultRifle</soundCast>
+              <!-- 该芯片只允许直接选择Pawn，不开放地面或建筑目标。 -->
+              <targetParams>
+                <canTargetLocations>false</canTargetLocations>
+                <canTargetBuildings>false</canTargetBuildings>
+                <canTargetPawns>true</canTargetPawns>
+              </targetParams>
+            </VerbProps>
+            <!-- 只接受发射者到Pawn目标的直接视线。 -->
+            <DirectTargetLineOfSight>Required</DirectTargetLineOfSight>
+            <RangedModules>
+              <!-- 直接复用猎犬的弱追踪参数，不复制追踪算法。 -->
+              <li><moduleDef>BDP_HomingModule_Weak</moduleDef></li>
+              <!-- 独立避开要害选择；通用减益宿主只附加崩解效果包。 -->
+              <li>
+                <moduleDef>BDP_VitalHitModule</moduleDef>
+                <config Class="BDP.Content.RangedModules.VitalHit.VitalHitConfig">
+                  <SelectionMode>AvoidVital</SelectionMode>
+                  <!-- 70%执行避开要害选择，其余30%完全交给原版随机部位。 -->
+                  <VitalHitChance>0.7</VitalHitChance>
+                </config>
+              </li>
+              <li>
+                <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                  <EffectDef>BDP_DebuffEffect_BodyPartDisintegration</EffectDef>
+                  <TargetScope>DirectHitThing</TargetScope>
+                  <TargetFilter>PawnsOnly</TargetFilter>
+                  <DamageSuppression>SuppressAllProjectileImpact</DamageSuppression>
+                  <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                  <InterceptedHitFeedback>VanillaPawn</InterceptedHitFeedback>
+                  <HasHitFeedbackColor>true</HasHitFeedbackColor>
+                  <HitFeedbackColor>(1.0, 0.90, 0.55, 1.0)</HitFeedbackColor>
+                  <BypassProjectileInterceptors>true</BypassProjectileInterceptors>
+                  <BypassRegisteredDamageShields>true</BypassRegisteredDamageShields>
+                </config>
+              </li>
+            </RangedModules>
+          </li>
+        </Entries>
+      </Expression>
+      <!-- 玩家语义：远程攻击；部位裂解作为该攻击整体的额外效果。 -->
+      <Features><!-- 玩家语义：远程攻击；部位裂解作为功能级额外效果子组。 -->
+        <li><Id>alektor_ranged_attack</Id><Feature>BDP_Feature_RangedAttack</Feature><Sources><li Class="BDP.Content.Information.Features.Sources.RangedAttackFeatureSourceConfig"><Id>alektor_primary_source</Id><EntryId>alektor_primary</EntryId></li></Sources><Subgroups>
+          <li><Id>alektor_body_part_disintegration</Id><Group>BDP_FeatureGroup_ExtraEffect</Group><LabelKey>BDP_Info_ExtraEffect_BodyPartDisintegration</LabelKey></li>
+        </Subgroups></li></Features>
+      </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+
+  <!-- 风刃·远程斩击：独立的远程 Ability 芯片功能，不参与现有芯片组合。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+    <!-- 芯片功能模板唯一名称。 -->
+    <defName>BDP_ChipFunction_FujinRangedStrike</defName>
+    <!-- 风刃·远程斩击由固定装载配置显式创建，不在玩家制作台功能列表中显示。 -->
+    <showInManufacturing>false</showInManufacturing>
+    <!-- 缺少语言包时的英文回退名称。 -->
+    <label>Fujin ranged strike</label>
+    <labelKey>BDP_ChipFunction_FujinRangedStrike</labelKey>
+    <!-- 缺少语言包时的英文回退说明。 -->
+    <description>Independent long-range wind blade ability. The projectile redirects toward its target and deals Cut damage on hit.</description>
+    <descriptionKey>BDP_ChipFunction_FujinRangedStrike_Description</descriptionKey>
+    <!-- 风刃·远程斩击属于射手职业体系。 -->
+    <profession>BDP_ChipProfession_Shooter</profession>
+    <!-- 仅固定预载，没有制造入口，不声明制造材料与工作量。 -->
+    <config>
+      <!-- 风刃·远程斩击属于能力类芯片。 -->
+      <Profile>
+        <Category>BDP_ChipCategory_GeneralSkill</Category>
+        <Tags>
+        </Tags>
+      </Profile>
+      <!-- 风刃·远程斩击装载于特殊槽单槽。 -->
+      <Loadout>
+        <SlotRegion>Special</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <ActivationDelayTicks>0</ActivationDelayTicks>
+        <DeactivationDelayTicks>0</DeactivationDelayTicks>
+      </Loadout>
+      <!-- 沿用远程武器的 Trion 占用与激活成本档位。 -->
+      <Trion>
+        <CapacityCost>80</CapacityCost>
+        <ActivationCost>15</ActivationCost>
+      </Trion>
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement"><Minimum>1</Minimum></li>
+      </ActivationRequirements>
+      <Expression>
+        <Entries>
+          <!-- 风刃·远程斩击的唯一正式入口是独立 Ability。 -->
+          <li>
+            <Id>fujin_ranged_strike</Id>
+            <DisplayLabel>Fujin ranged strike</DisplayLabel>
+            <DisplayLabelKey>BDP_Expression_FujinRangedStrike</DisplayLabelKey>
+            <EntryType>Ability</EntryType>
+            <AbilityDefName>BDP_Ability_FujinRangedStrike</AbilityDefName>
+            <WeaponMode>Ranged</WeaponMode>
+            <Trion>
+              <UseCost>8</UseCost>
+            </Trion>
+            <Execution>
+              <Rhythm>Simultaneous</Rhythm>
+              <!-- 风刃车道从发射后立即横向外张；发射层只保留所有发次共享的前向微偏移。 -->
+              <OriginSpread>
+                <LateralMin>-0.3</LateralMin>
+                <LateralMax>0.3</LateralMax>
+                <ForwardMin>0</ForwardMin>
+                <ForwardMax>0.105</ForwardMax>
+              </OriginSpread>
+            </Execution>
+            <!-- 要求施法者到目标存在直接视线；飞行段仍交给 BDP/原版拦截流程。 -->
+            <DirectTargetLineOfSight>Required</DirectTargetLineOfSight>
+            <!-- 显式接入操作员控制台许可；许可效果由 Content 业务接收器解释。 -->
+            <DeclaredPermissionKeys>
+              <li>BDP.OperatorConsole.Active</li>
+            </DeclaredPermissionKeys>
+            <RangedModules>
+              <!-- 按距离检查点逐段重定向。 -->
+              <li><moduleDef>BDP_RangedModule_DistanceRevector</moduleDef></li>
+              <!-- 真实命中 Pawn 后从脚边错峰生成六道刀刃。 -->
+              <li><moduleDef>BDP_RangedModule_ImpactVisual</moduleDef></li>
+              <!-- 主直接伤害优先命中目标当前身体的要害候选。 -->
+              <li><moduleDef>BDP_VitalHitModule</moduleDef></li>
+              <!-- 使用通用额外伤害模块；风刃专属参数在本挂载处声明。 -->
+              <li>
+                <moduleDef>BDP_RangedExtraDamageModule</moduleDef>
+                <config Class="BDP.Content.RangedModules.ExtraDamage.RangedExtraDamageConfig">
+                  <!-- 按实际命中部件最大生命值百分比计算。 -->
+                  <AmountMode>HitPartMaxHealthPercent</AmountMode>
+                  <!-- 风刃追加命中部件最大生命值的 10% 伤害。 -->
+                  <Ratio>0.10</Ratio>
+                  <!-- 风刃使用切割伤害类型。 -->
+                  <DamageDef>Cut</DamageDef>
+                  <!-- 额外伤害继承主伤害最终命中部位。 -->
+                  <HitPartResolutionMode>InheritImpactHitPart</HitPartResolutionMode>
+                  <!-- 风刃只对 Pawn 目标计算身体部件伤害。 -->
+                  <OnlyPawns>true</OnlyPawns>
+                </config>
+              </li>
+            </RangedModules>
+          </li>
+        </Entries>
+      </Expression>
+      <!-- 风刃远程斩击有独立能力释放与远程攻击结果。 -->
+      <Features>
+        <li>
+          <Id>fujin_ranged_strike_ability</Id>
+          <Feature>BDP_Feature_GenericAbility</Feature>
+          <Sources><li Class="BDP.Content.Information.Features.Sources.AbilityLifecycleFeatureSourceConfig"><Id>fujin_ranged_strike_lifecycle</Id><EntryId>fujin_ranged_strike</EntryId></li></Sources>
+          <Children>
+            <li><Id>fujin_ranged_attack</Id><Feature>BDP_Feature_RangedAttack</Feature><Sources><li Class="BDP.Content.Information.Features.Sources.RangedAttackFeatureSourceConfig"><Id>fujin_ranged_attack_source</Id><EntryId>fujin_ranged_strike</EntryId></li></Sources></li>
+          </Children>
+        </li>
+      </Features>
+      </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+
+  <!-- ===== 实体系/能力系/防护系功能模板 ===== -->
+
+  <!-- 光魂：默认防护形态；进攻形态分重刃、冲拳两种姿态。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+    <!-- 芯片功能模板唯一名称。 -->
+    <defName>BDP_ChipFunction_LightSoul</defName>
+    <!-- 建造或制造须满足所有研究；不影响现有装备使用。 -->
+    <researchPrerequisites><li>BDP_Research_DefensivePrinciples</li><li>BDP_Research_MorphingTechnology</li></researchPrerequisites>
+    <!-- 默认中文名称仍允许语言包覆盖。 -->
+    <label>光魂</label>
+    <!-- 玩家可见名称显式走 Keyed（键值语言包），避免自定义 Def 注入失效。 -->
+    <labelKey>BDP_ChipFunction_LightSoul</labelKey>
+    <!-- 缺少对应语言键时使用的默认中文说明。 -->
+    <description>默认展开光魂防护形态；进攻形态可在重刃姿态与冲拳姿态间切换。防护形态装备推进器后可组合为光魂推进。</description>
+    <!-- 玩家可见说明显式走 Keyed（键值语言包）。 -->
+    <descriptionKey>BDP_ChipFunction_LightSoul_Description</descriptionKey>
+    <!-- 光魂属于攻击手职业体系。 -->
+    <profession>BDP_ChipProfession_Attacker</profession>
+    <!-- 兼具大型防护与重型刃功能的材料增量。 -->
+    <costList>
+      <Steel>70</Steel>
+      <Plasteel>35</Plasteel>
+      <ComponentIndustrial>3</ComponentIndustrial>
+    </costList>
+    <!-- 额外制造工作量。 -->
+    <additionalWorkAmount>21000</additionalWorkAmount>
+    <!-- 芯片正式配置。 -->
+    <config>
+      <!-- 分类与标签。 -->
+      <Profile>
+        <!-- 主分类：防护。 -->
+        <Category>BDP_ChipCategory_Defense</Category>
+        <!-- 光魂以实体外形承载能量效果。 -->
+        <Tags>
+          <li>BDP_ChipTag_Entity</li>
+        </Tags>
+      </Profile>
+      <!-- 装载参数。 -->
+      <Loadout>
+        <!-- 可装入主手或副手槽。 -->
+        <SlotRegion>MainSub</SlotRegion>
+        <!-- 只占一个槽位。 -->
+        <SlotOccupancy>Single</SlotOccupancy>
+        <!-- 启用延迟。 -->
+        <ActivationDelayTicks>30</ActivationDelayTicks>
+        <!-- 停用延迟。 -->
+        <DeactivationDelayTicks>15</DeactivationDelayTicks>
+      </Loadout>
+      <!-- 容量与启用成本。 -->
+      <Trion><CapacityCost>100</CapacityCost><ActivationCost>15</ActivationCost></Trion>
+      <!-- 最低 Trion 强度要求。 -->
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement"><Minimum>1</Minimum></li>
+      </ActivationRequirements>
+      <!-- 统一表达目录、形态和姿态选择表。 -->
+      <Expression>
+        <!-- 全部可能启用的表达条目。 -->
+        <Entries>
+          <!-- 冲拳迁入原钝击：保留一击、伤害、冷却、穿透和共享盾组完好条件。 -->
+          <li>
+            <Id>light_soul_punch</Id>
+            <DisplayLabel>光魂冲拳</DisplayLabel>
+            <DisplayLabelKey>BDP_Expression_LightSoulPunch</DisplayLabelKey>
+            <EntryType>PrimaryVerb</EntryType>
+            <WeaponMode>Melee</WeaponMode>
+            <!-- 沿用迁移前的完好条件；切换进攻不会重置共享盾组的破损状态。 -->
+            <Conditions><li Class="BDP.Content.Shield.ShieldIntactExpressionCondition"><GroupKey>light_soul</GroupKey></li></Conditions>
+            <!-- 每轮只执行一次冲拳钝击。 -->
+            <Execution><HitCount>1</HitCount></Execution>
+            <tools>
+              <li>
+                <label>冲拳钝击</label>
+                <capacities><li>Blunt</li></capacities>
+                <power>5</power>
+                <cooldownTime>2.0</cooldownTime>
+                <armorPenetration>0</armorPenetration>
+                <chanceFactor>1.0</chanceFactor>
+              </li>
+            </tools>
+            <!-- 与上方 Tool 顺序对应的玩家可见攻击方式名称。 -->
+            <ToolLabelKeys><li>BDP_Tool_LightSoulPunch</li></ToolLabelKeys>
+          </li>
+          <!-- 防护形态护盾及其独立视觉。 -->
+          <li>
+            <Id>light_soul_defense_shield</Id>
+            <DisplayLabel>光魂防护</DisplayLabel>
+            <DisplayLabelKey>BDP_Expression_LightSoulDefenseShield</DisplayLabelKey>
+            <EntryType>Hediff</EntryType>
+            <HediffDefName>BDP_Hediff_LightSoulDefenseShield</HediffDefName>
+            <!-- 防护及盾面只在共享盾组完好时发布。 -->
+            <Conditions><li Class="BDP.Content.Shield.ShieldIntactExpressionCondition"><GroupKey>light_soul</GroupKey></li></Conditions>
+            <Presentation>
+              <VisualPresetDefName>BDP_Visual_LightSoulDefenseShield</VisualPresetDefName>
+              <!-- 与另一把真实武器共存时，切换到保持竖直且向手侧外移的盾面姿态。 -->
+              <CompositeVisualPresetDefName>BDP_Visual_LightSoulDefenseShield_Dual</CompositeVisualPresetDefName>
+            </Presentation>
+          </li>
+          <!-- 防护限制独立发布，不受破盾完好条件控制。 -->
+          <li>
+            <Id>light_soul_defense_state</Id>
+            <DisplayLabelKey>BDP_Expression_LightSoulDefenseState</DisplayLabelKey>
+            <EntryType>Hediff</EntryType>
+            <HediffDefName>BDP_Hediff_LightSoulDefenseState</HediffDefName>
+          </li>
+          <!-- 重刃近战表达；每轮只从两把 Tool 中择一攻击一次。 -->
+          <li>
+            <Id>light_soul_heavy_blade</Id>
+            <DisplayLabel>光魂重刃</DisplayLabel>
+            <!-- 手动攻击按钮显式走 Keyed（键值语言包）。 -->
+            <DisplayLabelKey>BDP_Expression_LightSoulHeavyBlade</DisplayLabelKey>
+            <EntryType>PrimaryVerb</EntryType>
+            <WeaponMode>Melee</WeaponMode>
+            <Execution><HitCount>1</HitCount></Execution>
+            <Presentation>
+              <VisualPresetDefName>BDP_Visual_LightSoulHeavyBlade</VisualPresetDefName>
+            </Presentation>
+            <tools>
+              <!-- 钝击：20 伤、0 穿透；权重 1.7，与伤害平方共同形成约 75% 概率。 -->
+              <li>
+                <label>光魂重刃钝击</label>
+                <capacities><li>Blunt</li></capacities>
+                <power>20</power>
+                <cooldownTime>2.0</cooldownTime>
+                <armorPenetration>0</armorPenetration>
+                <chanceFactor>1.7</chanceFactor>
+              </li>
+              <!-- 切割：15 伤、10% 穿透；较低基础权重。 -->
+              <li>
+                <label>光魂重刃切割</label>
+                <capacities><li>Cut</li></capacities>
+                <power>15</power>
+                <cooldownTime>2.0</cooldownTime>
+                <armorPenetration>0.10</armorPenetration>
+                <chanceFactor>1.0</chanceFactor>
+              </li>
+            </tools>
+            <!-- 与上方 tools 顺序对应的玩家可见攻击方式名称。 -->
+            <ToolLabelKeys>
+              <li>BDP_Tool_LightSoulHeavyBladeBash</li>
+              <li>BDP_Tool_LightSoulHeavyBladeEdge</li>
+            </ToolLabelKeys>
+          </li>
+        </Entries>
+        <!-- 默认进入防护形态；防护不下分姿态。 -->
+        <DefaultModeKey>defense</DefaultModeKey>
+        <!-- 防护、进攻两个形态；进攻姿态只激活对应的一条攻击。 -->
+        <Modes>
+          <!-- 防护：护盾完好时发布盾面；独立状态在破盾期间仍保留减速、远程限制与警戒。 -->
+          <li>
+            <ModeKey>defense</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_LightSoulDefense</DisplayLabelKey>
+            <ActiveEntryIds>
+              <li>light_soul_defense_shield</li>
+              <li>light_soul_defense_state</li>
+            </ActiveEntryIds>
+          </li>
+          <!-- 进攻：进入时默认重刃，冲拳承接原大盾的钝击参数。 -->
+          <li>
+            <ModeKey>attack</ModeKey>
+            <DisplayLabelKey>BDP_ChipMode_LightSoulAttack</DisplayLabelKey>
+            <!-- 解释器要求公共选择表存在；空表表示攻击完全由姿态选择。 -->
+            <ActiveEntryIds />
+            <DefaultStanceKey>heavy_blade</DefaultStanceKey>
+            <Stances>
+              <!-- 重刃姿态。 -->
+              <li>
+                <StanceKey>heavy_blade</StanceKey>
+                <DisplayLabelKey>BDP_ChipStance_LightSoulHeavyBlade</DisplayLabelKey>
+                <ActiveEntryIds><li>light_soul_heavy_blade</li></ActiveEntryIds>
+              </li>
+              <!-- 冲拳姿态。 -->
+              <li>
+                <StanceKey>punch</StanceKey>
+                <DisplayLabelKey>BDP_ChipStance_LightSoulPunch</DisplayLabelKey>
+                <ActiveEntryIds><li>light_soul_punch</li></ActiveEntryIds>
+              </li>
+            </Stances>
+          </li>
+        </Modes>
+      </Expression>
+      <!-- 防护显示护盾功能，进攻按当前姿态显示重刃或冲拳攻击方式。 -->
+      <Features>
+        <li>
+          <Id>light_soul_defense_shield</Id>
+          <Feature>BDP_Feature_Shield</Feature>
+          <!-- 防护形态的抵挡属性从护盾表达读取。 -->
+          <Sources>
+            <li Class="BDP.Content.Information.Features.Sources.ShieldFeatureSourceConfig">
+              <Id>light_soul_defense_shield_source</Id>
+              <EntryId>light_soul_defense_shield</EntryId>
+            </li>
+          </Sources>
+          <Subgroups>
+            <li><Id>defense_movement_reduction</Id><Group>BDP_FeatureGroup_ExtraEffect</Group><LabelKey>BDP_Info_ExtraEffect_LightSoulDefenseMovementReduction</LabelKey><Sources><li Class="BDP.Content.Information.Features.Sources.LightSoulDefenseMovementEffectFeatureSourceConfig"><Id>light_soul_defense_movement_effect</Id><EntryId>light_soul_defense_state</EntryId></li></Sources></li>
+            <li><Id>defense_attack_restriction</Id><Group>BDP_FeatureGroup_ExtraEffect</Group><LabelKey>BDP_Info_ExtraEffect_LightSoulDefenseAttackRestriction</LabelKey></li>
+          </Subgroups>
+        </li>
+        <li>
+          <Id>light_soul_punch_melee</Id>
+          <Feature>BDP_Feature_MeleeAttack</Feature>
+          <Groups><li><Id>punch</Id><Group>BDP_FeatureGroup_MeleeAttackMethod</Group><LabelKey>BDP_Tool_LightSoulPunch</LabelKey><Sources><li Class="BDP.Content.Information.Features.Sources.MeleeAttackMethodFeatureSourceConfig"><Id>light_soul_punch_method</Id><EntryId>light_soul_punch</EntryId><ToolIndex>0</ToolIndex></li></Sources></li></Groups>
+        </li>
+        <li>
+          <Id>light_soul_heavy_blade_melee</Id>
+          <Feature>BDP_Feature_MeleeAttack</Feature>
+          <Groups>
+            <li><Id>heavy_blade_blunt</Id><Group>BDP_FeatureGroup_MeleeAttackMethod</Group><LabelKey>BDP_Tool_LightSoulHeavyBladeBash</LabelKey><Sources><li Class="BDP.Content.Information.Features.Sources.MeleeAttackMethodFeatureSourceConfig"><Id>light_soul_heavy_blade_blunt_method</Id><EntryId>light_soul_heavy_blade</EntryId><ToolIndex>0</ToolIndex></li></Sources></li>
+            <li><Id>heavy_blade_cutting</Id><Group>BDP_FeatureGroup_MeleeAttackMethod</Group><LabelKey>BDP_Tool_LightSoulHeavyBladeEdge</LabelKey><Sources><li Class="BDP.Content.Information.Features.Sources.MeleeAttackMethodFeatureSourceConfig"><Id>light_soul_heavy_blade_cutting_method</Id><EntryId>light_soul_heavy_blade</EntryId><ToolIndex>1</ToolIndex></li></Sources></li>
+          </Groups>
+        </li>
+      </Features>
+      </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+
+  <!-- 推进器：独立配件来源，只通过光魂推进组合技提供主动能力。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+    <!-- 芯片功能模板唯一名称。 -->
+    <defName>BDP_ChipFunction_Thruster</defName>
+    <!-- 建造或制造须满足所有研究；不影响现有装备使用。 -->
+    <researchPrerequisites><li>BDP_Research_EnhancedOptionalFunctions</li><li>BDP_Research_DefensivePrinciples</li><li>BDP_Research_MorphingTechnology</li><li>BDP_Research_SpatialMobility</li></researchPrerequisites>
+    <!-- 默认中文名称仍允许语言包覆盖。 -->
+    <label>推进器</label>
+    <labelKey>BDP_ChipFunction_Thruster</labelKey>
+    <!-- 默认中文说明仍允许语言包覆盖。 -->
+    <description>提供地面冲刺推进能力，作为光魂推进组合的配件来源。</description>
+    <descriptionKey>BDP_ChipFunction_Thruster_Description</descriptionKey>
+    <!-- 配件沿用攻击手职业，供光魂组合使用。 -->
+    <profession>BDP_ChipProfession_Attacker</profession>
+    <!-- 推进器的精密材料增量，另计芯片基础。 -->
+    <costList>
+      <Steel>35</Steel>
+      <Plasteel>20</Plasteel>
+      <ComponentIndustrial>4</ComponentIndustrial>
+    </costList>
+    <!-- 额外制造工作量。 -->
+    <additionalWorkAmount>16000</additionalWorkAmount>
+    <!-- 芯片正式配置。 -->
+    <config>
+      <!-- 推进器属于配件分类。 -->
+      <Profile>
+        <Category>BDP_ChipCategory_Accessory</Category>
+        <Tags>
+          <li>BDP_ChipTag_Offensive</li>
+          <li>BDP_ChipTag_EnergyForm</li>
+        </Tags>
+      </Profile>
+      <!-- 与光魂组合使用同一主副槽区域和单槽占用。 -->
+      <Loadout>
+        <SlotRegion>MainSub</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <ActivationDelayTicks>15</ActivationDelayTicks>
+        <DeactivationDelayTicks>15</DeactivationDelayTicks>
+      </Loadout>
+      <!-- 推进器自身需要少量 Trion 容量和启用成本。 -->
+      <Trion><CapacityCost>20</CapacityCost><ActivationCost>5</ActivationCost></Trion>
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement"><Minimum>1</Minimum></li>
+      </ActivationRequirements>
+      <!-- 推进器只声明被动身份；主动结果由 ComboDef 提供。 -->
+      <Expression>
+        <Entries>
+          <li>
+            <Id>thruster_passive</Id>
+            <DisplayLabel>推进器</DisplayLabel>
+            <DisplayLabelKey>BDP_Expression_Thruster</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>bdp.thruster.passive</PassiveIdentityKey>
+          </li>
+        </Entries>
+      </Expression>
+      <!-- 推进器只作为光魂推进组合的部件，不声明虚构的独立玩家功能。 -->
+      <Features />
+      </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+
+  <!-- 弧月：近战实体武装。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+    <defName>BDP_ChipFunction_Kogetsu</defName>
+    <!-- 建造或制造须满足所有研究；不影响现有装备使用。 -->
+    <researchPrerequisites><li>BDP_Research_BasicTriggerEngineering</li></researchPrerequisites>
+    <descriptionKey>BDP_ChipFunction_Kogetsu_Description</descriptionKey>
+    <label>弧月</label>
+    <profession>BDP_ChipProfession_Attacker</profession>
+    <description>以实体弧月刃形成近战武装，并作为旋空弧月组合的主侧芯片。</description>
+    <costList>
+      <Steel>100</Steel>
+    </costList>
+    <additionalWorkAmount>18000</additionalWorkAmount>
+    <config>
+      <Profile>
+        <Category>BDP_ChipCategory_Weapon</Category>
+        <Tags>
+          <li>BDP_ChipTag_Entity</li>
+        </Tags>
+      </Profile>
+      <Loadout>
+        <SlotRegion>MainSub</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <ActivationDelayTicks>30</ActivationDelayTicks>
+        <DeactivationDelayTicks>15</DeactivationDelayTicks>
+      </Loadout>
+      <Trion><CapacityCost>50</CapacityCost><ActivationCost>15</ActivationCost></Trion>
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement"><Minimum>1</Minimum></li>
+      </ActivationRequirements>
+      <Expression>
+        <Entries>
+          <li>
+            <Id>kogetsu_primary</Id>
+            <DisplayLabel>弧月</DisplayLabel>
+            <EntryType>PrimaryVerb</EntryType>
+            <WeaponMode>Melee</WeaponMode>
+            <!-- 近战不适用 Trion 消耗 -->
+            <Presentation>
+              <VisualPresetDefName>BDP_Visual_Kogetsu</VisualPresetDefName>
+            </Presentation>
+            <tools>
+              <li>
+                <label>弧月刃</label>
+                <capacities><li>Cut</li></capacities>
+                <power>20</power>
+                <cooldownTime>2.0</cooldownTime>
+                <armorPenetration>0.15</armorPenetration>
+              </li>
+            </tools>
+          </li>
+        </Entries>
+      </Expression>
+      <!-- 弧月近战攻击以独立攻击方式组读取原版 Tool 有效属性。 -->
+      <Features>
+        <li><Id>kogetsu_melee_attack</Id><Feature>BDP_Feature_MeleeAttack</Feature><Groups><li><Id>kogetsu_blade</Id><Group>BDP_FeatureGroup_MeleeAttackMethod</Group><LabelKey>BDP_Tool_KogetsuBlade</LabelKey><Sources><li Class="BDP.Content.Information.Features.Sources.MeleeAttackMethodFeatureSourceConfig"><Id>kogetsu_blade_method</Id><EntryId>kogetsu_primary</EntryId><ToolIndex>0</ToolIndex></li></Sources></li></Groups></li>
+      </Features>
+      </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+
+  <!-- ===== 风刃：特殊槽实体近战刀，暂时复刻弧月 ===== -->
+
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+    <!-- 芯片功能模板唯一名称。 -->
+    <defName>BDP_ChipFunction_Fujin</defName>
+    <!-- 芯片由固定/测试来源提供，不在玩家制作台功能列表中显示。 -->
+    <showInManufacturing>false</showInManufacturing>
+    <!-- 缺少语言包时的回退名称。 -->
+    <label>Fujin</label>
+    <labelKey>BDP_ChipFunction_Fujin</labelKey>
+    <!-- 正式说明和名称走简体中文语言包。 -->
+    <description>以风刃色实体刀形成近战武装。</description>
+    <descriptionKey>BDP_ChipFunction_Fujin_Description</descriptionKey>
+    <!-- 属性暂时复刻弧月的攻击职业。 -->
+    <profession>BDP_ChipProfession_Attacker</profession>
+    <!-- 仅固定预载，没有制造入口，不声明制造材料与工作量。 -->
+    <config>
+      <Profile>
+        <Category>BDP_ChipCategory_Weapon</Category>
+        <Tags>
+          <li>BDP_ChipTag_Entity</li>
+        </Tags>
+      </Profile>
+      <!-- 风刃装入特殊槽，单槽占用。 -->
+      <Loadout>
+        <SlotRegion>Special</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <ActivationDelayTicks>0</ActivationDelayTicks>
+        <DeactivationDelayTicks>0</DeactivationDelayTicks>
+      </Loadout>
+      <Trion><CapacityCost>50</CapacityCost><ActivationCost>15</ActivationCost></Trion>
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement"><Minimum>1</Minimum></li>
+      </ActivationRequirements>
+      <Expression>
+        <Entries>
+          <li>
+            <Id>fujin_primary</Id>
+            <DisplayLabel>Fujin</DisplayLabel>
+            <DisplayLabelKey>BDP_Expression_Fujin</DisplayLabelKey>
+            <EntryType>PrimaryVerb</EntryType>
+            <WeaponMode>Melee</WeaponMode>
+            <!-- 主近战伤害优先命中目标当前身体的要害候选。 -->
+            <HitPartPolicy>
+              <PolicyKey>PreferVital</PolicyKey>
+              <Chance>1</Chance>
+            </HitPartPolicy>
+            <!-- 近战不适用 Trion 消耗 -->
+            <Presentation>
+              <VisualPresetDefName>BDP_Visual_Fujin</VisualPresetDefName>
+            </Presentation>
+            <tools>
+              <li>
+                <label>Real blade</label>
+                <capacities><li>Cut</li></capacities>
+                <power>30</power>
+                <cooldownTime>2.0</cooldownTime>
+                <armorPenetration>0.35</armorPenetration>
+              </li>
+            </tools>
+            <!-- 与 tools 顺序对应的玩家可见攻击工具名称。 -->
+            <ToolLabelKeys><li>BDP_Tool_FujinRealBlade</li></ToolLabelKeys>
+          </li>
+        </Entries>
+      </Expression>
+      <!-- 玩家语义：近战攻击；蝎子的 Tool 顺序和攻击参数由来源读取。 -->
+      <Features>
+        <li><Id>fujin_melee_attack</Id><Feature>BDP_Feature_MeleeAttack</Feature><Groups><li><Id>fujin_real_blade</Id><Group>BDP_FeatureGroup_MeleeAttackMethod</Group><LabelKey>BDP_Tool_FujinRealBlade</LabelKey><Sources><li Class="BDP.Content.Information.Features.Sources.MeleeAttackMethodFeatureSourceConfig"><Id>fujin_real_blade_method</Id><EntryId>fujin_primary</EntryId><ToolIndex>0</ToolIndex></li></Sources></li></Groups></li>
+      </Features>
+      </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+
+  <!-- 蝎子：弧月参数副本，唯一行为差异是一次攻击连续三击。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+    <!-- 蝎子芯片功能模板唯一名称。 -->
+    <defName>BDP_ChipFunction_Scorpion</defName>
+    <!-- 建造或制造须满足所有研究；不影响现有装备使用。 -->
+    <researchPrerequisites><li>BDP_Research_MorphingTechnology</li></researchPrerequisites>
+    <!-- 玩家可见名称和说明使用独立语言键。 -->
+    <label>蝎子</label>
+    <labelKey>BDP_ChipFunction_Scorpion</labelKey>
+    <description>以实体毒蝎刃形成近战武装；每次攻击连续进行三次，每击间隔 5 tick。</description>
+    <descriptionKey>BDP_ChipFunction_Scorpion_Description</descriptionKey>
+    <!-- 沿用弧月的攻击手职业。 -->
+    <profession>BDP_ChipProfession_Attacker</profession>
+    <!-- 形变功能的材料与加工工作量增量。 -->
+    <costList>
+      <Steel>80</Steel>
+      <Plasteel>10</Plasteel>
+      <ComponentIndustrial>1</ComponentIndustrial>
+    </costList>
+    <additionalWorkAmount>27000</additionalWorkAmount>
+    <config>
+      <!-- 沿用弧月的武装分类和实体标签。 -->
+      <Profile>
+        <Category>BDP_ChipCategory_Weapon</Category>
+        <Tags>
+          <li>BDP_ChipTag_Entity</li>
+        </Tags>
+      </Profile>
+      <!-- 沿用弧月的主副手单槽装载规则和切换延迟。 -->
+      <Loadout>
+        <SlotRegion>MainSub</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <ActivationDelayTicks>30</ActivationDelayTicks>
+        <DeactivationDelayTicks>15</DeactivationDelayTicks>
+      </Loadout>
+      <!-- 沿用弧月的 Trion 占用、激活成本和最低要求。 -->
+      <Trion><CapacityCost>50</CapacityCost><ActivationCost>15</ActivationCost></Trion>
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement"><Minimum>1</Minimum></li>
+      </ActivationRequirements>
+      <Expression>
+        <Entries>
+          <!-- 蝎子的唯一近战表达；只覆盖弧月的连续攻击次数和内部间隔。 -->
+          <li>
+            <Id>scorpion_primary</Id>
+            <DisplayLabel>蝎子</DisplayLabel>
+            <DisplayLabelKey>BDP_Expression_Scorpion</DisplayLabelKey>
+            <EntryType>PrimaryVerb</EntryType>
+            <WeaponMode>Melee</WeaponMode>
+            <Execution>
+              <!-- 使用已修正的原版 burst 语义：预热一次后连续命中三次。 -->
+              <HitCount>3</HitCount>
+              <!-- 两次连续命中之间间隔 5 tick。 -->
+              <HitIntervalTicks>5</HitIntervalTicks>
+            </Execution>
+            <!-- 近战不适用 Trion 消耗。 -->
+            <Presentation>
+              <!-- 使用蝎子专属主贴图与发光层。 -->
+              <VisualPresetDefName>BDP_Visual_Scorpion</VisualPresetDefName>
+              <!-- 主副槽组合时启用小型枪械标准左右分离量。 -->
+              <CompositeVisualPresetDefName>BDP_Visual_Scorpion_Dual</CompositeVisualPresetDefName>
+            </Presentation>
+            <tools>
+              <!-- 毒蝎刃完整复用弧月刃的原版 Tool 参数。 -->
+              <li>
+                <label>毒蝎刃</label>
+                <capacities><li>Cut</li></capacities>
+                <power>8</power>
+                <cooldownTime>2.0</cooldownTime>
+                <armorPenetration>0.05</armorPenetration>
+              </li>
+            </tools>
+            <!-- Tool 名称使用独立语言键，避免信息面板显示弧月刃。 -->
+            <ToolLabelKeys><li>BDP_Tool_ScorpionBlade</li></ToolLabelKeys>
+          </li>
+        </Entries>
+      </Expression>
+      <!-- 蝎子芯片独立声明近战攻击；攻击增强仍只是被动表达贡献，不作为独立功能。 -->
+      <Features>
+        <li><Id>scorpion_melee_attack</Id><Feature>BDP_Feature_MeleeAttack</Feature><Groups><li><Id>scorpion_blade</Id><Group>BDP_FeatureGroup_MeleeAttackMethod</Group><LabelKey>BDP_Tool_ScorpionBlade</LabelKey><Sources><li Class="BDP.Content.Information.Features.Sources.MeleeAttackMethodFeatureSourceConfig"><Id>scorpion_blade_method</Id><EntryId>scorpion_primary</EntryId><ToolIndex>0</ToolIndex></li></Sources></li></Groups></li>
+      </Features>
+      </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+
+  <!-- 旋空：能量体系能力，弧月专属副侧。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+    <defName>BDP_ChipFunction_Senku</defName>
+    <!-- 建造或制造须满足所有研究；不影响现有装备使用。 -->
+    <researchPrerequisites><li>BDP_Research_EnhancedOptionalFunctions</li></researchPrerequisites>
+    <label>旋空</label>
+    <description>以能量体形式参与旋空弧月组合，为组合结果提供进攻型副侧来源。</description>
+    <costList>
+      <Steel>35</Steel>
+      <ComponentIndustrial>3</ComponentIndustrial>
+    </costList>
+    <additionalWorkAmount>18000</additionalWorkAmount>
+    <config>
+      <Profile>
+        <Category>BDP_ChipCategory_Accessory</Category>
+        <Tags>
+          <li>BDP_ChipTag_Offensive</li>
+          <li>BDP_ChipTag_KogetsuExclusive</li>
+          <li>BDP_ChipTag_EnergyForm</li>
+        </Tags>
+      </Profile>
+      <Loadout>
+        <SlotRegion>MainSub</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <ActivationDelayTicks>15</ActivationDelayTicks>
+        <DeactivationDelayTicks>15</DeactivationDelayTicks>
+      </Loadout>
+      <Trion><CapacityCost>50</CapacityCost><ActivationCost>15</ActivationCost></Trion>
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement"><Minimum>4</Minimum></li>
+        <li Class="BDP.Core.Requirements.SkillLevelRequirement">
+          <Skill>Melee</Skill>
+          <MinimumLevel>10</MinimumLevel>
+        </li>
+        <li Class="BDP.Core.Requirements.SkillLevelRequirement">
+          <Skill>Shooting</Skill>
+          <MinimumLevel>6</MinimumLevel>
+        </li>
+      </ActivationRequirements>
+      <Expression>
+        <Entries>
+          <li>
+            <Id>senku_passive</Id>
+            <DisplayLabel>旋空</DisplayLabel>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>bdp.senku.passive</PassiveIdentityKey>
+            <Trion><UseCost>100</UseCost><MinimumRequired>100</MinimumRequired></Trion>
+          </li>
+        </Entries>
+      </Expression>
+      <!-- 旋空本体提供组合关系，不声明独立玩家功能。 -->
+      <Features />
+      </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+
+  <!-- 护盾：能量防护。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+    <defName>BDP_ChipFunction_EnergyShield</defName>
+    <!-- 建造或制造须满足所有研究；不影响现有装备使用。 -->
+    <researchPrerequisites><li>BDP_Research_DefensivePrinciples</li></researchPrerequisites>
+    <descriptionKey>BDP_ChipFunction_EnergyShield_Description</descriptionKey>
+    <label>护盾</label>
+    <description>形成正面能量护盾。单枚激活时覆盖正面 180 度；主、副槽各激活一枚时升级为全防御能量护盾。成功抵挡会消耗相当于伤害值 50% 的 Trion。</description>
+    <costList>
+      <Steel>50</Steel>
+      <Plasteel>25</Plasteel>
+      <ComponentIndustrial>1</ComponentIndustrial>
+    </costList>
+    <additionalWorkAmount>12000</additionalWorkAmount>
+    <config>
+      <Profile>
+        <Category>BDP_ChipCategory_Defense</Category>
+        <Tags>
+          <li>BDP_ChipTag_EnergyForm</li>
+        </Tags>
+      </Profile>
+      <Loadout>
+        <SlotRegion>MainSub</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <ActivationDelayTicks>60</ActivationDelayTicks>
+        <DeactivationDelayTicks>30</DeactivationDelayTicks>
+      </Loadout>
+      <Trion><CapacityCost>50</CapacityCost><ActivationCost>15</ActivationCost></Trion>
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement"><Minimum>1</Minimum></li>
+      </ActivationRequirements>
+      <Expression>
+        <Entries>
+          <li>
+            <Id>energy_shield_primary</Id>
+            <DisplayLabel>能量护盾</DisplayLabel>
+            <EntryType>Hediff</EntryType>
+            <HediffDefName>BDP_Hediff_EnergyShield</HediffDefName>
+            <!-- 防护及盾面只在共享盾组完好时发布。 -->
+            <Conditions><li Class="BDP.Content.Shield.ShieldIntactExpressionCondition"><GroupKey>energy_shield</GroupKey></li></Conditions>
+            <HediffApplyModeKey>countToSeverity</HediffApplyModeKey>
+          </li>
+        </Entries>
+      </Expression>
+      <!-- 玩家语义：护盾；自动触发与手动触发共享同一护盾契约。 -->
+      <Features>
+        <li>
+          <Id>energy_shield</Id>
+          <Feature>BDP_Feature_Shield</Feature>
+          <!-- 主护盾条目直接提供护盾功能属性。 -->
+          <Sources>
+            <li Class="BDP.Content.Information.Features.Sources.ShieldFeatureSourceConfig">
+              <Id>energy_shield_primary_source</Id>
+              <EntryId>energy_shield_primary</EntryId>
+            </li>
+          </Sources>
+        </li>
+      </Features>
+      </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+
+  <!-- 常驻型自动能量护盾：特殊槽专用，全方位防护，不聚合。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+    <defName>BDP_ChipFunction_EnergyShield_Auto</defName>
+    <!-- 建造或制造须满足所有研究；不影响现有装备使用。 -->
+    <researchPrerequisites><li>BDP_Research_SpecialTacticalFunctions</li><li>BDP_Research_DefensivePrinciples</li></researchPrerequisites>
+    <!-- 研究开放后可在制造台制作；固定装载仍可直接创建。 -->
+    <showInManufacturing>true</showInManufacturing>
+    <label>常驻型自动能量护盾</label>
+    <description>常驻型自动能量护盾，特殊槽专用。激活期间始终提供全方位防护，不随激活数量升级。格挡率 70%，成功抵挡消耗 75% 伤害值的 Trion。</description>
+    <costList>
+      <Steel>60</Steel>
+      <Plasteel>40</Plasteel>
+      <ComponentIndustrial>4</ComponentIndustrial>
+      <ComponentSpacer>1</ComponentSpacer>
+    </costList>
+    <additionalWorkAmount>24000</additionalWorkAmount>
+    <config>
+      <Profile>
+        <Category>BDP_ChipCategory_Defense</Category>
+        <Tags>
+          <li>BDP_ChipTag_EnergyForm</li>
+        </Tags>
+      </Profile>
+      <Loadout>
+        <SlotRegion>Special</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <!-- 特殊槽芯片秒开秒关。 -->
+        <ActivationDelayTicks>0</ActivationDelayTicks>
+        <DeactivationDelayTicks>0</DeactivationDelayTicks>
+      </Loadout>
+      <Trion><CapacityCost>300</CapacityCost><ActivationCost>0</ActivationCost></Trion>
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement"><Minimum>1</Minimum></li>
+      </ActivationRequirements>
+      <Expression>
+        <Entries>
+          <li>
+            <Id>energy_shield_auto</Id>
+            <DisplayLabel>常驻型自动能量护盾</DisplayLabel>
+            <EntryType>Hediff</EntryType>
+            <HediffDefName>BDP_Hediff_EnergyShield_Auto</HediffDefName>
+            <!-- 防护及盾面只在共享盾组完好时发布。 -->
+            <Conditions><li Class="BDP.Content.Shield.ShieldIntactExpressionCondition"><GroupKey>energy_shield_auto</GroupKey></li></Conditions>
+            <!-- 不设 HediffApplyModeKey：纯存在模式，不按数量叠加 Severity。 -->
+          </li>
+        </Entries>
+      </Expression>
+      <!-- 玩家语义：机动；紧急脱离的被动条目是事实来源。 -->
+      <Features>
+        <li>
+          <Id>energy_shield_auto</Id>
+          <Feature>BDP_Feature_Shield</Feature>
+          <!-- 自动护盾条目直接提供护盾功能属性。 -->
+          <Sources>
+            <li Class="BDP.Content.Information.Features.Sources.ShieldFeatureSourceConfig">
+              <Id>energy_shield_auto_primary_source</Id>
+              <EntryId>energy_shield_auto</EntryId>
+            </li>
+          </Sources>
+        </li>
+      </Features>
+      </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+
+  <!-- 紧急脱离：被动崩解时自动传送回安全位置。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+    <defName>BDP_ChipFunction_EmergencyEscape</defName>
+    <!-- 建造或制造须满足所有研究；不影响现有装备使用。 -->
+    <researchPrerequisites><li>BDP_Research_SpecialTacticalFunctions</li><li>BDP_Research_SpatialMobility</li></researchPrerequisites>
+    <!-- 研究开放后可在制造台制作；固定装载仍可直接创建。 -->
+    <showInManufacturing>true</showInManufacturing>
+    <descriptionKey>BDP_ChipFunction_EmergencyEscape_Description</descriptionKey>
+    <label>紧急脱离</label>
+    <description>被动芯片，特殊槽专用。战斗体因 Trion 见底而崩解时自动触发——将装备者传送至安全位置（优先信标锚点），芯片在触发后销毁。</description>
+    <costList>
+      <Steel>35</Steel>
+      <Plasteel>40</Plasteel>
+      <ComponentIndustrial>4</ComponentIndustrial>
+      <ComponentSpacer>2</ComponentSpacer>
+    </costList>
+    <additionalWorkAmount>44000</additionalWorkAmount>
+    <config>
+      <Profile>
+        <Category>BDP_ChipCategory_Accessory</Category>
+        <Tags>
+          <li>BDP_ChipTag_EnergyForm</li>
+        </Tags>
+      </Profile>
+      <Loadout>
+        <SlotRegion>Special</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <!-- 特殊槽芯片秒开秒关。 -->
+        <ActivationDelayTicks>0</ActivationDelayTicks>
+        <DeactivationDelayTicks>0</DeactivationDelayTicks>
+      </Loadout>
+      <Trion><CapacityCost>400</CapacityCost><ActivationCost>0</ActivationCost></Trion>
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement"><Minimum>1</Minimum></li>
+      </ActivationRequirements>
+      <Expression>
+        <Entries>
+          <li>
+            <Id>emergency_escape_passive</Id>
+            <DisplayLabel>紧急脱离</DisplayLabel>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>EmergencyEscape</PassiveIdentityKey>
+          </li>
+        </Entries>
+      </Expression>
+      <!-- 紧急脱离是机动语义；当前被动实现没有可复用的静态数值属性。 -->
+      <Features>
+        <li><Id>emergency_escape_movement</Id><Feature>BDP_Feature_Movement</Feature><Sources><li Class="BDP.Content.Information.Features.Sources.MovementMethodFeatureSourceConfig"><Id>emergency_escape_method</Id><EntryId>emergency_escape_passive</EntryId></li></Sources></li>
+      </Features>
+      </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+
+  <!-- 铅弹·改：开放式全侧被动远程增强，不绑定任何具体目标芯片。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+    <!-- 铅弹·改技术标识。 -->
+    <defName>BDP_ChipFunction_LeadShotModified</defName>
+    <!-- 建造或制造须满足所有研究；不影响现有装备使用。 -->
+    <researchPrerequisites><li>BDP_Research_ExperimentalEngineering</li><li>BDP_Research_ConventionalArmamentForms</li><li>BDP_Research_EnhancedOptionalFunctions</li></researchPrerequisites>
+    <!-- 铅弹·改玩家可见芯片名称。 -->
+    <label>铅弹·改</label>
+    <labelKey>BDP_ChipFunction_LeadShotModified</labelKey>
+    <!-- 铅弹·改玩家可见芯片说明。 -->
+    <description>被动远程增强。激活后，主、副两侧符合左轮手枪构型的有效远程武装的攻击入口前增加铅弹·改，并使命中目标承受铅块负重；本次投射物不造成伤害并尝试绕过已知护盾。</description>
+    <descriptionKey>BDP_ChipFunction_LeadShotModified_Description</descriptionKey>
+    <!-- 铅弹·改属于被动芯片分类。 -->
+    <!-- 已确认的功能材料增量；成品另计芯片基础与构型成本。 -->
+    <costList>
+      <Steel>35</Steel>
+      <Plasteel>20</Plasteel>
+      <ComponentIndustrial>4</ComponentIndustrial>
+      <ComponentSpacer>1</ComponentSpacer>
+    </costList>
+    <!-- 本功能加工工作量增量。 -->
+    <additionalWorkAmount>30000</additionalWorkAmount>
+    <config>
+      <!-- 分类与标签。 -->
+      <Profile>
+        <Category>BDP_ChipCategory_Accessory</Category>
+        <Tags>
+          <li>BDP_ChipTag_Offensive</li>
+        </Tags>
+      </Profile>
+      <!-- 铅弹·改使用主槽或副槽，不生成独立攻击按钮。 -->
+      <Loadout>
+        <SlotRegion>MainSub</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <ActivationDelayTicks>0</ActivationDelayTicks>
+        <DeactivationDelayTicks>0</DeactivationDelayTicks>
+      </Loadout>
+      <!-- 铅弹·改容量与激活参数。 -->
+      <Trion><CapacityCost>100</CapacityCost><ActivationCost>0</ActivationCost></Trion>
+      <!-- 激活最低 Trion 强度要求。 -->
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement"><Minimum>1</Minimum></li>
+      </ActivationRequirements>
+      <!-- 表达条目只发布开放式远程增强声明。 -->
+      <Expression>
+        <Entries>
+          <li>
+            <!-- 铅弹·改被动表达条目标识。 -->
+            <Id>lead_shot_modified_passive</Id>
+            <!-- 该名称也作为动态远程入口名称前缀来源。 -->
+            <DisplayLabel>铅弹·改</DisplayLabel>
+            <DisplayLabelKey>BDP_Expression_LeadShotModified</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP_LeadShotModified</PassiveIdentityKey>
+            <!-- 按远程武装能力匹配，不指定目标芯片。 -->
+            <RangedModuleAugmentations>
+              <li>
+                <!-- 符合左轮手枪构型白名单的有效远程武装结果可接收。 -->
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <!-- 全侧增强：主、副两侧均可接收。 -->
+                <Scope>AllSides</Scope>
+                <!-- 当前暂只允许左轮手枪武装构型接收。 -->
+                <AllowedSourceVariantKeys>
+                  <li>BDP_ArmamentForm_Revolver</li>
+                </AllowedSourceVariantKeys>
+                <!-- 名称前缀使用本表达条目的玩家可见名称。 -->
+                <DisplayNamePrefixMode>SourceExpressionLabel</DisplayNamePrefixMode>
+                <!-- 追加铅块负重命中模块。 -->
+                <Modules>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_LeadWeight</EffectDef>
+                      <TargetScope>AttackTargetEvents</TargetScope>
+                      <TargetFilter>PawnsOnly</TargetFilter>
+                      <DamageSuppression>SuppressAllProjectileImpact</DamageSuppression>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                      <HasHitFeedbackColor>true</HasHitFeedbackColor>
+                      <HitFeedbackColor>(0.12, 0.12, 0.12, 1)</HitFeedbackColor>
+                      <InterceptedHitFeedback>VanillaPawn</InterceptedHitFeedback>
+                      <HasProjectileTrailColor>true</HasProjectileTrailColor>
+                      <ProjectileTrailColor>(1.0, 0.35, 0.30, 0.775)</ProjectileTrailColor>
+                      <HasProjectileTrailCore>true</HasProjectileTrailCore>
+                      <ProjectileTrailCoreColor>(0.12, 0.12, 0.12, 1)</ProjectileTrailCoreColor>
+                      <ProjectileTrailCoreWidthRatio>0.60</ProjectileTrailCoreWidthRatio>
+                      <ProjectileTrailCoreOpacity>0.9</ProjectileTrailCoreOpacity>
+                      <ProjectileSpeedMultiplier>0.5</ProjectileSpeedMultiplier>
+                      <BypassProjectileInterceptors>true</BypassProjectileInterceptors>
+                      <BypassRegisteredDamageShields>true</BypassRegisteredDamageShields>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+        </Entries>
+      </Expression>
+      <!-- 铅弹·改只保留现有开放效果贡献关系。 -->
+      <Features />
+      </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+
+  <!-- 铅弹：开放式对侧被动远程增强，不绑定任何具体目标芯片。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+    <!-- 铅弹对侧分支技术标识。 -->
+    <defName>BDP_ChipFunction_LeadShotOppositeSide</defName>
+    <!-- 建造或制造须满足所有研究；不影响现有装备使用。 -->
+    <researchPrerequisites><li>BDP_Research_EnhancedOptionalFunctions</li></researchPrerequisites>
+    <!-- 铅弹玩家可见芯片名称。 -->
+    <label>铅弹</label>
+    <labelKey>BDP_ChipFunction_LeadShotOppositeSide</labelKey>
+    <!-- 铅弹玩家可见芯片说明。 -->
+    <description>能力类远程增强。激活后，只对另一侧有效远程武装的攻击入口前增加铅弹，并使命中目标承受铅块负重；本次投射物不造成伤害并尝试绕过已知护盾。</description>
+    <descriptionKey>BDP_ChipFunction_LeadShotOppositeSide_Description</descriptionKey>
+    <!-- 铅弹属于能力类芯片，但表达仍保持 Passive。 -->
+    <!-- 已确认的功能材料增量；成品另计芯片基础与构型成本。 -->
+    <costList>
+      <Steel>30</Steel>
+      <ComponentIndustrial>3</ComponentIndustrial>
+    </costList>
+    <!-- 本功能加工工作量增量。 -->
+    <additionalWorkAmount>18000</additionalWorkAmount>
+    <config>
+      <!-- 分类与标签。 -->
+      <Profile>
+        <Category>BDP_ChipCategory_GeneralSkill</Category>
+        <Tags>
+          <li>BDP_ChipTag_Offensive</li>
+        </Tags>
+      </Profile>
+      <!-- 铅弹使用主槽或副槽，不生成独立攻击按钮。 -->
+      <Loadout>
+        <SlotRegion>MainSub</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <ActivationDelayTicks>0</ActivationDelayTicks>
+        <DeactivationDelayTicks>0</DeactivationDelayTicks>
+      </Loadout>
+      <!-- 能力类铅弹容量与激活参数保持原铅弹设计。 -->
+      <Trion><CapacityCost>100</CapacityCost><ActivationCost>0</ActivationCost></Trion>
+      <!-- 激活最低 Trion 强度要求。 -->
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement"><Minimum>1</Minimum></li>
+      </ActivationRequirements>
+      <!-- 表达条目继续发布开放式远程增强声明。 -->
+      <Expression>
+        <Entries>
+          <li>
+            <!-- 铅弹对侧被动表达条目标识。 -->
+            <Id>lead_shot_opposite_side_passive</Id>
+            <!-- 该名称也作为动态远程入口名称前缀来源。 -->
+            <DisplayLabel>铅弹</DisplayLabel>
+            <DisplayLabelKey>BDP_Expression_LeadShotOppositeSide</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP_LeadShotOppositeSide</PassiveIdentityKey>
+            <!-- 按远程武装能力匹配，不指定目标芯片。 -->
+            <RangedModuleAugmentations>
+              <li>
+                <!-- 所有有效远程武装结果均可作为目标。 -->
+                <AppliesToCapability>RangedWeapon</AppliesToCapability>
+                <!-- 对侧增强：只作用于与来源不同的 Main/Sub 侧。 -->
+                <Scope>OppositeSide</Scope>
+                <!-- 名称前缀使用增强来源表达条目的玩家可见名称。 -->
+                <DisplayNamePrefixMode>SourceExpressionLabel</DisplayNamePrefixMode>
+                <!-- 追加铅块负重命中模块。 -->
+                <Modules>
+                  <li>
+                    <moduleDef>BDP_RangedDebuffModule</moduleDef>
+                    <config Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig">
+                      <EffectDef>BDP_DebuffEffect_LeadWeight</EffectDef>
+                      <TargetScope>AttackTargetEvents</TargetScope>
+                      <TargetFilter>PawnsOnly</TargetFilter>
+                      <DamageSuppression>SuppressAllProjectileImpact</DamageSuppression>
+                      <PreserveTargetResolutionWhenDamageSuppressed>true</PreserveTargetResolutionWhenDamageSuppressed>
+                      <HasHitFeedbackColor>true</HasHitFeedbackColor>
+                      <HitFeedbackColor>(0.12, 0.12, 0.12, 1)</HitFeedbackColor>
+                      <InterceptedHitFeedback>VanillaPawn</InterceptedHitFeedback>
+                      <HasProjectileTrailColor>true</HasProjectileTrailColor>
+                      <ProjectileTrailColor>(1.0, 0.35, 0.30, 0.775)</ProjectileTrailColor>
+                      <HasProjectileTrailCore>true</HasProjectileTrailCore>
+                      <ProjectileTrailCoreColor>(0.12, 0.12, 0.12, 1)</ProjectileTrailCoreColor>
+                      <ProjectileTrailCoreWidthRatio>0.60</ProjectileTrailCoreWidthRatio>
+                      <ProjectileTrailCoreOpacity>0.9</ProjectileTrailCoreOpacity>
+                      <ProjectileSpeedMultiplier>0.5</ProjectileSpeedMultiplier>
+                      <BypassProjectileInterceptors>true</BypassProjectileInterceptors>
+                      <BypassRegisteredDamageShields>true</BypassRegisteredDamageShields>
+                    </config>
+                  </li>
+                </Modules>
+              </li>
+            </RangedModuleAugmentations>
+          </li>
+        </Entries>
+      </Expression>
+      <!-- 铅弹只保留现有对侧效果贡献关系。 -->
+      <Features />
+      </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+
+  <!-- ===== 狙击功能模板 ===== -->
+
+  <!-- 朱鹮：超远距精确狙击。 -->
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+    <defName>BDP_ChipFunction_Toki</defName>
+    <!-- 建造或制造须满足所有研究；不影响现有装备使用。 -->
+    <researchPrerequisites><li>BDP_Research_SpecializedArmamentForms</li></researchPrerequisites>
+    <label>朱鹮</label>
+    <description>超远距精确狙击芯片。发射标准狙击弹，越远越准，单发高伤害，但预热极慢。</description>
+    <profession>BDP_ChipProfession_Sniper</profession>
+    <costList>
+      <Steel>60</Steel>
+      <ComponentIndustrial>8</ComponentIndustrial>
+    </costList>
+    <additionalWorkAmount>53000</additionalWorkAmount>
+    <config>
+      <Profile>
+        <Category>BDP_ChipCategory_Weapon</Category>
+        <Tags>
+        </Tags>
+      </Profile>
+      <Loadout>
+        <SlotRegion>MainSub</SlotRegion>
+        <!-- 临时测试朱鹮芯片的主副同号双槽装载效果。 -->
+        <SlotOccupancy>PairedHands</SlotOccupancy>
+        <ActivationDelayTicks>60</ActivationDelayTicks>
+        <DeactivationDelayTicks>30</DeactivationDelayTicks>
+      </Loadout>
+      <Trion><CapacityCost>80</CapacityCost><ActivationCost>30</ActivationCost></Trion>
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement"><Minimum>1</Minimum></li>
+      </ActivationRequirements>
+      <Expression>
+        <Entries>
+          <li>
+            <Id>toki_primary</Id>
+            <DisplayLabel>朱鹮</DisplayLabel>
+            <EntryType>PrimaryVerb</EntryType>
+            <WeaponMode>Ranged</WeaponMode>
+            <Trion><UseCost>15</UseCost></Trion>
+            <Execution><Rhythm>Sequential</Rhythm></Execution>
+            <VerbProps>
+              <verbClass>BDP.Core.Verbs.BdpVerb_Shoot</verbClass>
+              <hasStandardCommand>true</hasStandardCommand>
+              <label>朱鹮</label>
+              <defaultProjectile>BDP_Projectile_SniperStandard</defaultProjectile>
+              <range>69.9</range>
+              <burstShotCount>1</burstShotCount>
+              <warmupTime>3.5</warmupTime>
+              <defaultCooldownTime>1.5</defaultCooldownTime>
+              <accuracyTouch>0.50</accuracyTouch>
+              <accuracyShort>0.70</accuracyShort>
+              <accuracyMedium>0.88</accuracyMedium>
+              <accuracyLong>0.90</accuracyLong>
+              <soundCast>Shot_SniperRifle</soundCast>
+              <soundCastTail>GunTail_Heavy</soundCastTail>
+              <noiseRadius>25</noiseRadius>
+              <muzzleFlashScale>1.1</muzzleFlashScale>
+              <!-- 目标判定与原版枪械一致：不可瞄地面，可瞄单位/建筑 -->
+              <targetParams>
+                <canTargetLocations>false</canTargetLocations>
+                <canTargetBuildings>true</canTargetBuildings>
+                <canTargetPawns>true</canTargetPawns>
+              </targetParams>
+            </VerbProps>
+            <Presentation>
+              <VisualPresetDefName>BDP_Visual_SniperRifle</VisualPresetDefName>
+            </Presentation>
+            <!-- 朱鹮复用独立优先要害模块。 -->
+            <RangedModules><li><moduleDef>BDP_VitalHitModule</moduleDef></li></RangedModules>
+            <DirectTargetLineOfSight>Required</DirectTargetLineOfSight>
+          </li>
+        </Entries>
+      </Expression>
+      <Features><!-- 玩家语义：远程攻击 -->
+        <!-- 显式功能实例或来源 Id，保持稳定且可追溯。 -->
+        <li><Id>toki_ranged_attack</Id><Feature>BDP_Feature_RangedAttack</Feature><Sources><li Class="BDP.Content.Information.Features.Sources.RangedAttackFeatureSourceConfig"><Id>toki_primary_source</Id><EntryId>toki_primary</EntryId></li></Sources></li></Features>
+      </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+
+  <!-- ===== 蚱蜢：机动弹射能力 ===== -->
+
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+    <defName>BDP_ChipFunction_Grasshopper</defName>
+    <!-- 建造或制造须满足所有研究；不影响现有装备使用。 -->
+    <researchPrerequisites><li>BDP_Research_SpatialMobility</li></researchPrerequisites>
+    <descriptionKey>BDP_ChipFunction_Grasshopper_Description</descriptionKey>
+    <label>蚱蜢</label>
+    <description>机动型芯片。在脚下凝聚Trion弹射跳板，以爆发性速度弹向目标位置。冷却5秒，每次使用消耗30 Trion。</description>
+    <costList>
+      <Steel>35</Steel>
+      <Plasteel>50</Plasteel>
+      <ComponentIndustrial>6</ComponentIndustrial>
+    </costList>
+    <additionalWorkAmount>14000</additionalWorkAmount>
+    <config>
+      <Profile>
+        <!-- 能力类芯片 -->
+        <Category>BDP_ChipCategory_GeneralSkill</Category>
+        <Tags>
+        </Tags>
+      </Profile>
+      <Loadout>
+        <SlotRegion>MainSub</SlotRegion>                      <!-- 可装主槽或副槽 -->
+        <SlotOccupancy>Single</SlotOccupancy>
+        <ActivationDelayTicks>30</ActivationDelayTicks>       <!-- 0.5秒预热 -->
+        <DeactivationDelayTicks>15</DeactivationDelayTicks>   <!-- 0.25秒关闭延迟 -->
+      </Loadout>
+      <Trion>
+        <CapacityCost>100</CapacityCost>                      <!-- 常驻占用 100 Trion -->
+        <ActivationCost>15</ActivationCost>                   <!-- 激活时一次性消耗 15 Trion -->
+      </Trion>
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement"><Minimum>1</Minimum></li>
+      </ActivationRequirements>
+      <Expression>
+        <Entries>
+          <li>
+            <Id>grasshopper_ability</Id>
+            <DisplayLabel>蚱蜢</DisplayLabel>
+            <EntryType>Ability</EntryType>                              <!-- 能力类表达条目 -->
+            <AbilityDefName>BDP_Ability_Grasshopper</AbilityDefName>
+            <Trion>
+              <UseCost>20</UseCost>                           <!-- 每次跳跃消耗 20 Trion -->
+            </Trion>
+          </li>
+        </Entries>
+      </Expression>
+      <Features>
+        <li>
+          <Id>grasshopper_ability</Id>
+          <Feature>BDP_Feature_GenericAbility</Feature>
+          <Sources><li Class="BDP.Content.Information.Features.Sources.AbilityLifecycleFeatureSourceConfig"><Id>grasshopper_ability_lifecycle</Id><EntryId>grasshopper_ability</EntryId></li></Sources>
+          <Children>
+            <li><Id>grasshopper_movement</Id><Feature>BDP_Feature_Movement</Feature><Groups><li><Id>grasshopper_jump</Id><Group>BDP_FeatureGroup_MovementMethod</Group><Sources><li Class="BDP.Content.Information.Features.Sources.MovementMethodFeatureSourceConfig"><Id>grasshopper_movement_method</Id><EntryId>grasshopper_ability</EntryId></li></Sources></li></Groups></li>
+          </Children>
+        </li>
+      </Features>
+      </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+
+  <!-- ===== 变色龙：可在攻击后移除的隐秘状态 ===== -->
+
+  <!-- ===== 浮空：可控浮空移动能力 ===== -->
+
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+    <!-- 浮空不再开放玩家制造；保留功能定义供已有芯片和开发测试使用。 -->
+    <defName>BDP_ChipFunction_Floating</defName>
+    <showInManufacturing>false</showInManufacturing>
+    <label>浮空</label>
+    <labelKey>BDP_ChipFunction_Floating</labelKey>
+    <description>提供可控的浮空移动能力。征召后可在关闭浮空、仅移动时浮空和始终浮空之间切换；无法在屋顶区域飞行。</description>
+    <descriptionKey>BDP_ChipFunction_Floating_Description</descriptionKey>
+    <config>
+      <!-- 浮空属于通用技能，不绑定职业。 -->
+      <Profile>
+        <Category>BDP_ChipCategory_GeneralSkill</Category>
+        <Tags>
+        </Tags>
+      </Profile>
+      <!-- 浮空占用特殊槽单格。 -->
+      <Loadout>
+        <SlotRegion>Special</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <ActivationDelayTicks>0</ActivationDelayTicks>
+        <DeactivationDelayTicks>0</DeactivationDelayTicks>
+      </Loadout>
+      <!-- 首版只占用容量，不消耗启用 Trion。 -->
+      <Trion>
+        <CapacityCost>100</CapacityCost>
+        <ActivationCost>0</ActivationCost>
+      </Trion>
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement">
+          <Minimum>1</Minimum>
+        </li>
+      </ActivationRequirements>
+      <!-- 被动表达只发布能力身份，不自动添加实际飞行 Hediff。 -->
+      <Expression>
+        <Entries>
+          <li>
+            <Id>floating_flight_passive</Id>
+            <DisplayLabel>浮空</DisplayLabel>
+            <DisplayLabelKey>BDP_Expression_Floating</DisplayLabelKey>
+            <EntryType>Passive</EntryType>
+            <PassiveIdentityKey>BDP_FloatingFlight</PassiveIdentityKey>
+          </li>
+        </Entries>
+      </Expression>
+      <!-- 玩家语义：远程攻击；Ability 是入口，不是玩家功能分类。 -->
+      <Features>
+        <li><Id>floating_movement</Id><Feature>BDP_Feature_Movement</Feature><Sources><li Class="BDP.Content.Information.Features.Sources.MovementMethodFeatureSourceConfig"><Id>floating_flight_method</Id><EntryId>floating_flight_passive</EntryId></li></Sources></li>
+      </Features>
+      </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+
+  <BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+    <defName>BDP_ChipFunction_Chameleon</defName>
+    <!-- 建造或制造须满足所有研究；不影响现有装备使用。 -->
+    <researchPrerequisites><li>BDP_Research_BasicTacticalFunctions</li></researchPrerequisites>
+    <!-- 缺少语言键时使用的默认名称。 -->
+    <label>变色龙</label>
+    <!-- 正式名称走语言包。 -->
+    <labelKey>BDP_ChipFunction_Chameleon</labelKey>
+    <!-- 缺少语言键时使用的默认说明。 -->
+    <description>进入隐秘状态并隐藏自身；任意攻击动作完成后移除隐秘状态。</description>
+    <!-- 正式说明走语言包。 -->
+    <descriptionKey>BDP_ChipFunction_Chameleon_Description</descriptionKey>
+    <!-- 通用技能芯片不绑定攻击职业。 -->
+    <costList>
+      <Steel>25</Steel>
+      <ComponentIndustrial>4</ComponentIndustrial>
+    </costList>
+    <!-- 隐秘状态功能的加工工作量增量。 -->
+    <additionalWorkAmount>24000</additionalWorkAmount>
+    <config>
+      <!-- 变色龙只声明通用技能主分类。 -->
+      <Profile>
+        <Category>BDP_ChipCategory_GeneralSkill</Category>
+        <Tags>
+        </Tags>
+      </Profile>
+      <!-- 互斥组芯片必须走可切换的主副槽。 -->
+      <Loadout>
+        <SlotRegion>MainSub</SlotRegion>
+        <SlotOccupancy>Single</SlotOccupancy>
+        <ActivationExclusionGroups>
+          <li>BDP_ChipExclusionGroup_Stealth</li>
+        </ActivationExclusionGroups>
+        <ActivationDelayTicks>30</ActivationDelayTicks>
+        <DeactivationDelayTicks>0</DeactivationDelayTicks>
+      </Loadout>
+      <!-- 容量占用由战斗体生成/解除生命周期处理；激活费只在芯片正式激活时结算。 -->
+      <Trion>
+        <CapacityCost>100</CapacityCost>
+        <ActivationCost>15</ActivationCost>
+      </Trion>
+      <!-- 变色龙的最低 Trion 释放力门槛。 -->
+      <ActivationRequirements>
+        <li Class="BDP.Core.Requirements.TrionIntensityRequirement">
+          <Minimum>1</Minimum>
+        </li>
+      </ActivationRequirements>
+      <Expression>
+        <Entries>
+          <!-- 隐身状态由正式 Hediff 表达宿主承载。 -->
+          <li>
+            <Id>chameleon_stealth_state</Id>
+            <DisplayLabel>隐秘状态·变色龙</DisplayLabel>
+            <EntryType>Hediff</EntryType>
+            <HediffDefName>BDP_Hediff_Chameleon</HediffDefName>
+            <!-- Hediff 的实际释放交给同一芯片发布的 Ability 按钮。 -->
+            <HediffControlMode>AbilityButton</HediffControlMode>
+            <Trion>
+              <!-- 单枚有效来源时整组隐身效果每秒消耗 5 Trion。 -->
+              <SustainCostBySourceCount>
+                <li>
+                  <SourceCount>1</SourceCount>
+                  <TotalPerSecond>5</TotalPerSecond>
+                </li>
+              </SustainCostBySourceCount>
+            </Trion>
+          </li>
+          <!-- 通用能力按钮只释放实际 Hediff，不重复承载变色龙隐身业务。 -->
+          <li>
+            <Id>chameleon_stealth_toggle</Id>
+            <DisplayLabel>释放隐秘状态</DisplayLabel>
+            <DisplayLabelKey>BDP_Expression_ChameleonToggle</DisplayLabelKey>
+            <EntryType>Ability</EntryType>
+            <AbilityDefName>BDP_Ability_Chameleon</AbilityDefName>
+          </li>
+        </Entries>
+      </Expression>
+      <Features>
+        <li>
+          <Id>chameleon_ability</Id>
+          <Feature>BDP_Feature_GenericAbility</Feature>
+          <Sources>
+            <li Class="BDP.Content.Information.Features.Sources.AbilityLifecycleFeatureSourceConfig">
+              <Id>chameleon_ability_lifecycle</Id>
+              <EntryId>chameleon_stealth_toggle</EntryId>
+            </li>
+            <!-- 隐身状态本身携带持续消耗表，归入变色龙能力语义。 -->
+            <li Class="BDP.Content.Information.Features.Sources.AbilityLifecycleFeatureSourceConfig">
+              <Id>chameleon_stealth_sustain_cost</Id>
+              <EntryId>chameleon_stealth_state</EntryId>
+            </li>
+          </Sources>
+        </li>
+      </Features>
+      </config>
+  </BDP.Content.Assembly.ChipManufacturing.Defs.ChipManufacturingPresetDef>
+
+</Defs>

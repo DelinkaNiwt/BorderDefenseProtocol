@@ -60,32 +60,37 @@ namespace BDP.Core.Trigger
                     continue;
                 }
 
-                ChipDefinitionReadResult chipReadResult = ChipSurfaceAccess.Read(entry.chipDef);
-                if (chipReadResult == null
-                    || chipReadResult.Validation == null
-                    || !chipReadResult.Validation.IsValid
-                    || chipReadResult.Contract == null
-                    || chipReadResult.Contract.Loadout == null)
+                ChipSlotOccupancy occupancy = ChipSlotOccupancy.Single;
+                if (string.IsNullOrWhiteSpace(entry.initializationKey))
                 {
-                    yield return context + " chipDef " + entry.chipDef.defName + " must be a valid chip definition with Loadout.";
-                    continue;
+                    ChipDefinitionReadResult chipReadResult = ChipSurfaceAccess.Read(entry.chipDef);
+                    if (chipReadResult == null
+                        || chipReadResult.Validation == null
+                        || !chipReadResult.Validation.IsValid
+                        || chipReadResult.Contract == null
+                        || chipReadResult.Contract.Loadout == null)
+                    {
+                        yield return context + " chipDef " + entry.chipDef.defName + " must be a valid chip definition with Loadout.";
+                        continue;
+                    }
+
+                    ChipLoadoutContract loadout = chipReadResult.Contract.Loadout;
+                    occupancy = loadout.SlotOccupancy;
+                    if (!TriggerService.IsSlotOccupancyAllowed(loadout.SlotRegion, loadout.SlotOccupancy, entry.side))
+                    {
+                        yield return context + " chipDef " + entry.chipDef.defName + " is incompatible with side " + entry.side + ".";
+                        continue;
+                    }
+
+                    if (loadout.SlotOccupancy == ChipSlotOccupancy.PairedHands
+                        && !HasPairedPartnerSlot(properties, entry.side, slotIndex))
+                    {
+                        yield return context + " paired-hands chip requires the opposite-side slot " + entry.slotNumber + ".";
+                        continue;
+                    }
                 }
 
-                ChipLoadoutContract loadout = chipReadResult.Contract.Loadout;
-                if (!TriggerService.IsSlotOccupancyAllowed(loadout.SlotRegion, loadout.SlotOccupancy, entry.side))
-                {
-                    yield return context + " chipDef " + entry.chipDef.defName + " is incompatible with side " + entry.side + ".";
-                    continue;
-                }
-
-                if (loadout.SlotOccupancy == ChipSlotOccupancy.PairedHands
-                    && !HasPairedPartnerSlot(properties, entry.side, slotIndex))
-                {
-                    yield return context + " paired-hands chip requires the opposite-side slot " + entry.slotNumber + ".";
-                    continue;
-                }
-
-                List<string> physicalSlots = ResolvePhysicalSlotKeys(entry.side, slotIndex, loadout.SlotOccupancy);
+                List<string> physicalSlots = ResolvePhysicalSlotKeys(entry.side, slotIndex, occupancy);
                 bool duplicate = false;
                 for (int physicalIndex = 0; physicalIndex < physicalSlots.Count; physicalIndex++)
                 {

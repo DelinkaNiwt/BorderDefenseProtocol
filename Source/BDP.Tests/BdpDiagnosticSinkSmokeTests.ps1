@@ -75,16 +75,21 @@ Assert-True ($null -ne $registerMethod) "诊断接收器注册口缺少 Register
 Assert-True ($null -ne $unregisterMethod) "诊断接收器注册口缺少 Unregister。"
 Assert-True ($null -ne $writeMethod) "诊断接收器注册口缺少内部 Write。"
 
+$null = $registerMethod.Invoke($null, @($null))
+$null = $writeMethod.Invoke($null, @("before sink"))
+
 $recordingSink = [BdpRecordingDiagnosticSink]::new()
 $null = $registerMethod.Invoke($null, @($recordingSink))
+Assert-True ($recordingSink.Messages.Count -eq 1 -and $recordingSink.Messages[0] -eq "before sink") `
+    "接收器注册前产生的诊断消息必须在接收器就绪后补发。"
 $null = $writeMethod.Invoke($null, @("recorded"))
-Assert-True ($recordingSink.Messages.Count -eq 1 -and $recordingSink.Messages[0] -eq "recorded") `
+Assert-True ($recordingSink.Messages.Count -eq 2 -and $recordingSink.Messages[1] -eq "recorded") `
     "注册后必须把消息交给当前接收器。"
 
 $differentSink = [BdpRecordingDiagnosticSink]::new()
 $null = $unregisterMethod.Invoke($null, @($differentSink))
 $null = $writeMethod.Invoke($null, @("still registered"))
-Assert-True ($recordingSink.Messages.Count -eq 2) "不同实例不得注销当前接收器。"
+Assert-True ($recordingSink.Messages.Count -eq 3) "不同实例不得注销当前接收器。"
 
 $throwingSink = [BdpThrowingDiagnosticSink]::new()
 $null = $registerMethod.Invoke($null, @($throwingSink))

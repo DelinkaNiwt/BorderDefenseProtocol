@@ -63,6 +63,7 @@ namespace BDP.Core.Expressions
 
         /// <summary>
         /// 当前预设主贴图绘制缩放。
+        /// 贴图局部锚点会使用同一缩放。
         /// 0 或负数按 1 处理。
         /// </summary>
         public float DrawScale = 1f;

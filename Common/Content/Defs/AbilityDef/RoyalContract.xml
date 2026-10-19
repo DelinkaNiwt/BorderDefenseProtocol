@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 皇室基因供给的一次性手动契约；文案由语言包注入。 -->
+  <AbilityDef>
+    <defName>BDP_Ability_RoyalContract</defName>
+    <label>BDP_Ability_RoyalContract</label>
+    <description>BDP_Ability_RoyalContract.description</description>
+    <!-- 临时复用原版超凡基因图标。 -->
+    <iconPath>UI/Icons/Genes/Gene_ArchiteMetabolism</iconPath>
+    <!-- 玩家主动施放，不交由 AI 使用。 -->
+    <aiCanUse>false</aiCanUse>
+    <hostile>false</hostile>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+    <!-- 未征召时显示能力按钮。 -->
+    <displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+    <!-- 显式关闭原版未征召禁用门槛；按钮显示与能力可用是两项独立设置。 -->
+    <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+    <!-- 征召时也显示能力按钮。 -->
+    <showWhenDrafted>true</showWhenDrafted>
+    <!-- 复用语类能力的原版工作：先走到目标身旁，再施放；不从当前位置远程命中。 -->
+    <jobDef>CastAbilityOnThingMelee</jobDef>
+    <!-- 非正射程使原版目标选择检查接触可达性；保留原版视线字段与预热。 -->
+    <verbProperties>
+      <verbClass>RimWorld.Verb_CastAbility</verbClass>
+      <violent>false</violent>
+      <onlyManualCast>true</onlyManualCast>
+      <warmupTime>1</warmupTime>
+      <range>-1</range>
+      <requireLineOfSight>true</requireLineOfSight>
+      <targetParams>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetLocations>false</canTargetLocations>
+        <canTargetSelf>false</canTargetSelf>
+      </targetParams>
+    </verbProperties>
+    <!-- 基因授予和人物关系由内容侧专属效果负责。 -->
+    <comps>
+      <li Class="BDP.Content.Trion.Royalty.Contract.CompProperties_AbilityEffect_RoyalContract">
+        <royalGene>BDP_Gene_RoyalBloodline</royalGene>
+        <glandGene>BDP_Gene_TrionGland</glandGene>
+        <contractHediff>BDP_Hediff_RoyalContract</contractHediff>
+      </li>
+    </comps>
+  </AbilityDef>
+</Defs>

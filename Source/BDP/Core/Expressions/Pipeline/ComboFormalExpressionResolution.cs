@@ -25,28 +25,28 @@ namespace BDP.Core.Expressions
         public ChipExpressionEntryContract EntryContract { get; set; }
 
         /// <summary>
-        /// 当前 Combo 主来源材料。
-        /// 它代表该侧芯片与内部参数上下文，不等于主来源正式结果。
+        /// 当前 Combo 按 ComboDef firstSourceKey 绑定的第一来源材料。
+        /// 它代表实际第一来源芯片与内部参数上下文。
         /// </summary>
-        public ExpressionSourceMaterial MainSourceMaterial { get; set; }
+        public ExpressionSourceMaterial FirstSourceMaterial { get; set; }
 
         /// <summary>
-        /// 当前 Combo 副来源材料。
-        /// 它代表该侧芯片与内部参数上下文，不等于副来源正式结果。
+        /// 当前 Combo 按 ComboDef secondSourceKey 绑定的第二来源材料。
+        /// 它代表实际第二来源芯片与内部参数上下文。
         /// </summary>
-        public ExpressionSourceMaterial SubSourceMaterial { get; set; }
+        public ExpressionSourceMaterial SecondSourceMaterial { get; set; }
 
         /// <summary>
-        /// 当前 Combo 主来源结果。
+        /// 当前 Combo 第一来源结果。
         /// 它只服务 Verb / Execution 这类正式字段的补值回退。
         /// </summary>
-        public FormalExpressionResult MainSourceResult { get; set; }
+        public FormalExpressionResult FirstSourceResult { get; set; }
 
         /// <summary>
-        /// 当前 Combo 副来源结果。
+        /// 当前 Combo 第二来源结果。
         /// 它只服务 Verb / Execution 这类正式字段的补值回退。
         /// </summary>
-        public FormalExpressionResult SubSourceResult { get; set; }
+        public FormalExpressionResult SecondSourceResult { get; set; }
 
         /// <summary>
         /// 当前条目对应的 Verb 字段求值结果。

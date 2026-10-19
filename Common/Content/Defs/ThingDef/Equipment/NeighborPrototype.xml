@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 近界原型触发体：固定搭载三枚不可制造的小兵芯片。 -->
+  <ThingDef ParentName="BaseWeapon">
+    <!-- 原型触发体的唯一物品定义。 -->
+    <defName>BDP_TriggerBody_NeighborPrototype</defName>
+    <!-- 稳定技术占位名；玩家名称由简体中文语言包注入。 -->
+    <label>BDP_TriggerBody_NeighborPrototype</label>
+    <!-- 稳定技术占位说明；玩家说明由简体中文语言包注入。 -->
+    <description>BDP_TriggerBody_NeighborPrototype_Description</description>
+    <!-- 复用边境标准触发体的物品图像。 -->
+    <graphicData>
+      <!-- 物品贴图路径不带文件扩展名。 -->
+      <texPath>Things/Equipment/Trigger/BDP_BorderStandardTriggerBody</texPath>
+      <!-- 单贴图图像类。 -->
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <!-- 原型的原生科技档继续保留工业时代。 -->
+    <techLevel>Industrial</techLevel>
+    <!-- 唯一武器标签供近界宙域 PawnKind 固定选择此触发体。 -->
+    <weaponTags>
+      <li>BDP_NearRealmPrototype</li>
+    </weaponTags>
+    <!-- 基础属性沿用标准触发体，不在本轮另外平衡。 -->
+    <statBases>
+      <!-- 基础制作参考工作量；正常制造的实际工作量由配方配置。 -->
+      <WorkToMake>65000</WorkToMake>
+      <!-- 基础重量。 -->
+      <Mass>1.0</Mass>
+      <!-- 基础价值。 -->
+      <MarketValue>120</MarketValue>
+    </statBases>
+    <!-- 未启用芯片时的原版近战工具沿用标准触发体。 -->
+    <tools>
+      <!-- 单个基础钝击工具。 -->
+      <li>
+        <!-- 稳定技术占位标签；工具名称由语言包注入。 -->
+        <label>BDP_TriggerBody_NeighborPrototype_Bash</label>
+        <!-- 支持的近战能力。 -->
+        <capacities>
+          <!-- 基础钝击能力。 -->
+          <li>Blunt</li>
+        </capacities>
+        <!-- 基础近战威力。 -->
+        <power>4</power>
+        <!-- 基础攻击冷却时间。 -->
+        <cooldownTime>2.0</cooldownTime>
+      </li>
+    </tools>
+    <!-- 只保留标准触发体的通用组件；省略槽位管理面板扩展和独立资源容器。 -->
+    <comps Inherit="False">
+      <!-- 保留原版禁止交互能力。 -->
+      <li Class="CompProperties_Forbiddable" />
+      <!-- 按正式装载芯片合成触发体市场价值。 -->
+      <li Class="BDP.Content.Trigger.CompProperties_TriggerBodyMarketValue" />
+      <!-- 固定预载运行时；资源由使用者提供。 -->
+      <li Class="BDP.Core.Trigger.CompProperties_TriggerBody">
+        <!-- 所属近界触发器类别。 -->
+        <triggerCategory>BDP_TriggerCategory_Neighbor</triggerCategory>
+        <!-- 玩家不能装卸、替换或调整预载芯片。 -->
+        <loadoutControlMode>PlayerNonConfigurable</loadoutControlMode>
+        <!-- 主槽只提供一个固定位置。 -->
+        <mainSlotCount>1</mainSlotCount>
+        <!-- 副槽只提供一个固定位置。 -->
+        <subSlotCount>1</subSlotCount>
+        <!-- 特殊槽只提供一个固定位置。 -->
+        <specialSlotCount>1</specialSlotCount>
+        <!-- 首次生成时由已有成品工厂创建并装入三枚真实芯片。 -->
+        <fixedLoadout>
+          <!-- 主槽固定预载小兵短剑。 -->
+          <li>
+            <!-- 目标为主侧槽区。 -->
+            <side>Main</side>
+            <!-- 作者配置使用从一开始的槽位编号。 -->
+            <slotNumber>1</slotNumber>
+            <!-- 复用正式动态芯片物品定义。 -->
+            <chipDef>BDP_Chip_Custom</chipDef>
+            <!-- 使用不开放玩家制造的小兵短剑功能模板。 -->
+            <initializationKey>BDP_ChipFunction_SoldierShortSword</initializationKey>
+          </li>
+          <!-- 副槽固定预载小兵弹丸。 -->
+          <li>
+            <!-- 目标为副侧槽区。 -->
+            <side>Sub</side>
+            <!-- 作者配置使用从一开始的槽位编号。 -->
+            <slotNumber>1</slotNumber>
+            <!-- 复用正式动态芯片物品定义。 -->
+            <chipDef>BDP_Chip_Custom</chipDef>
+            <!-- 使用不开放玩家制造的小兵弹丸功能模板。 -->
+            <initializationKey>BDP_ChipFunction_SoldierBullet</initializationKey>
+          </li>
+          <!-- 特殊槽固定预载小兵护盾。 -->
+          <li>
+            <!-- 目标为特殊槽区。 -->
+            <side>Special</side>
+            <!-- 作者配置使用从一开始的槽位编号。 -->
+            <slotNumber>1</slotNumber>
+            <!-- 复用正式动态芯片物品定义。 -->
+            <chipDef>BDP_Chip_Custom</chipDef>
+            <!-- 使用不开放玩家制造的小兵护盾功能模板。 -->
+            <initializationKey>BDP_ChipFunction_SoldierShield</initializationKey>
+          </li>
+        </fixedLoadout>
+      </li>
+      <!-- 保留原版装备风格接口。 -->
+      <li Class="CompProperties_Styleable" />
+    </comps>
+  </ThingDef>
+
+</Defs>

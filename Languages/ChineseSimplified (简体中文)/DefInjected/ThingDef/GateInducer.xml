@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 建筑名称。 -->
+  <BDP_GateInducer.label>门诱导装置</BDP_GateInducer.label>
+  <!-- 门位限制与运行前提；不承诺将人物最终落地范围限制在10格内。 -->
+  <BDP_GateInducer.description>袭击或抵达事件规划黑洞门落点时，运作中的装置会尝试使门的最终落点位于装置附近。多台装置运作时，门会选择离其初始候选落点最近、符合诱导模式的装置。每扇门按装置成功率独立判定一次；失败或周围没有合法门位时保留原候选落点，不转交其它装置重试。需要电力和Trion中继核心的运作许可。默认仅诱导敌方袭击门，可切换为全部门；手动停运可停止参与后续事件的门位规划。已经确定的门位不会因装置停运而改变，读档不重新判定。</BDP_GateInducer.description>
+</LanguageData>

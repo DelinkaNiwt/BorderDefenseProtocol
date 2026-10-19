@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 正式门诱导建筑：参考轨道贸易信标的基础属性，不附带贸易功能。 -->
+  <ThingDef ParentName="BuildingBase">
+    <!-- 定义名称与运行类；组件负责诱导，建筑保持原版基础类型。 -->
+    <defName>BDP_GateInducer</defName>
+    <thingClass>Building</thingClass>
+    <!-- 名称和说明由根简体中文语言包覆盖。 -->
+    <label>BDP_GateInducer</label>
+    <description>BDP_GateInducer</description>
+    <!-- 放入生物科技建造分类，研究暂时沿用轨道贸易信标。 -->
+    <designationCategory>Biotech</designationCategory>
+    <researchPrerequisites><li>MicroelectronicsBasics</li></researchPrerequisites>
+    <!-- 原版可选择建筑，正常生成地图网格贴图。 -->
+    <category>Building</category>
+    <selectable>true</selectable>
+    <drawerType>MapMeshOnly</drawerType>
+    <altitudeLayer>Building</altitudeLayer>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <!-- 被动装置不需要刻更新；供电与故障由原版组件管理。 -->
+    <tickerType>Never</tickerType>
+    <!-- 先参考信标的单格体积，允许人物经过。 -->
+    <size>(1,1)</size>
+    <rotatable>false</rotatable>
+    <passability>Standable</passability>
+    <fillPercent>0.2</fillPercent>
+    <pathCost>10</pathCost>
+    <!-- 暂借原版信标贴图，后续可以单独替换。 -->
+    <graphicData>
+      <texPath>Things/Building/Misc/DropBeacon</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+    <!-- 基础数值暂时参考轨道贸易信标。 -->
+    <statBases>
+      <!-- 耐久。 --><MaxHitPoints>75</MaxHitPoints>
+      <!-- 建造工作量。 --><WorkToBuild>800</WorkToBuild>
+      <!-- 重量。 --><Mass>5</Mass>
+      <!-- 可燃程度。 --><Flammability>0.5</Flammability>
+    </statBases>
+    <!-- 暂定材料与信标一致。 -->
+    <costList>
+      <!-- 钢铁40。 --><Steel>40</Steel>
+      <!-- 工业零部件1。 --><ComponentIndustrial>1</ComponentIndustrial>
+    </costList>
+    <!-- 使用原版修理表现。 -->
+    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+    <repairEffect>Repair</repairEffect>
+    <comps>
+      <!-- 原版电力，参考信标40W；许可与供电分别判断。 -->
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>40</basePowerConsumption>
+      </li>
+      <!-- 手动停运使用原版开关，不另设关闭诱导模式。 -->
+      <li Class="CompProperties_Flickable" />
+      <!-- 信标同款故障组件，正常故障时停止诱导。 -->
+      <li Class="CompProperties_Breakdownable" />
+      <!-- 诱导半径与提案优先级可独立配置。 -->
+      <li Class="BDP.Content.Factions.GateArrival.CompProperties_GateInducer">
+        <!-- 门中心到装置中心最大10格。 --><radius>10</radius>
+        <!-- 每扇门初始规划时独立判定一次，90%成功；失败沿用原候选，不交给其它装置重试。 -->
+        <successChance>0.9</successChance>
+        <!-- 与未来其它诱导来源共同排序。 --><redirectPriority>100</redirectPriority>
+      </li>
+    </comps>
+  </ThingDef>
+</Defs>

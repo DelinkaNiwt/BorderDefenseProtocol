@@ -1,12 +1,14 @@
 using RimWorld;
 using Verse;
+using BDP.Content.Information.Features;
 
 namespace BDP.Content.BounceSlash
 {
     /// <summary>
     /// 弹射砍击 Ability 效果配置 — 继承蚱蜢 Props 并追加伤害相关字段。
     /// </summary>
-    public class CompProperties_BounceSlash : Grasshopper.CompProperties_GrasshopperJump
+    public class CompProperties_BounceSlash : Grasshopper.CompProperties_GrasshopperJump,
+        IAbilityMeleeAttackInformation
     {
         /// <summary>沿途碰撞伤害类型；由 XML 注入，运行期缺失时再回退为 Cut（切割）。</summary>
         public DamageDef damageDef;
@@ -16,6 +18,15 @@ namespace BDP.Content.BounceSlash
 
         /// <summary>护甲穿透。</summary>
         public float armorPenetration = 0f;
+
+        /// <summary>向只读信息解析提供当前近战伤害。</summary>
+        int IAbilityMeleeAttackInformation.DamageAmount => damageAmount;
+
+        /// <summary>向只读信息解析提供当前近战伤害类型。</summary>
+        DamageDef IAbilityMeleeAttackInformation.DamageDef => damageDef;
+
+        /// <summary>向只读信息解析提供当前近战护甲穿透。</summary>
+        float IAbilityMeleeAttackInformation.ArmorPenetration => armorPenetration;
 
         /// <summary>构造并绑定对应的 effect comp 类型。</summary>
         public CompProperties_BounceSlash()

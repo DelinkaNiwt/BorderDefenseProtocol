@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- BDP完整句式根节点；实际文案通过语言键提供，人物规则仍由原版产生。 -->
+  <RulePackDef>
+    <defName>BDP_PlayerLog_Sentence</defName>
+    <rulePack><rulesStrings><li>r_logentry->[bdp_sentence]</li></rulesStrings></rulePack>
+  </RulePackDef>
+  <!-- 共用附着结果，具体名称由本次实际效果定义提供。 -->
+  <RulePackDef>
+    <defName>BDP_PlayerLog_ResultEffect</defName>
+    <rulePack><rulesStrings><li>bdp_result->[bdp_result_effect]</li></rulesStrings></rulePack>
+  </RulePackDef>
+  <!-- 共用负重直接结果，实际增加才提交。 -->
+  <RulePackDef>
+    <defName>BDP_PlayerLog_ResultWeight</defName>
+    <rulePack><rulesStrings><li>bdp_result->[bdp_result_weight]</li></rulesStrings></rulePack>
+  </RulePackDef>
+  <!-- 共用部位移除重要结果，不依赖芯片或技能名。 -->
+  <RulePackDef>
+    <defName>BDP_PlayerLog_ResultPartRemoved</defName>
+    <rulePack><rulesStrings><li>bdp_result->[bdp_result_part]</li></rulesStrings></rulePack>
+  </RulePackDef>
+  <!-- 原版事件条目使用的人物关联根节点，文案从语言键读取。 -->
+  <RulePackDef>
+    <defName>BDP_PlayerLog_CombatBodyEvent</defName>
+    <rulePack><rulesStrings><li>r_logentry->[bdp_sentence]</li></rulesStrings></rulePack>
+  </RulePackDef>
+</Defs>

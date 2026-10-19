@@ -20,7 +20,7 @@ namespace BDP.Core.Expressions
                 {
                     FormalExpressionResult result = snapshot.Results[i];
                     if (result == null
-                        || result.ResultKind != ExpressionResultKind.Verb
+                        || result.OutputChannel != ExpressionOutputChannel.Verb
                         || !result.IsAvailable
                         || !result.CanProject)
                     {
@@ -62,7 +62,7 @@ namespace BDP.Core.Expressions
                         DisplayLabel = label,
                         ManualEntryIconTexPath = result.ManualEntryIconTexPath,
                         IsPrimary = true,
-                        ResultKind = result.ResultKind,
+                        OutputChannel = result.OutputChannel,
                         WeaponMode = result.WeaponMode
                     }
                 }

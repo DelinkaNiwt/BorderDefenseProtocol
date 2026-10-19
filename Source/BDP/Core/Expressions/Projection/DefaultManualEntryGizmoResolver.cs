@@ -133,8 +133,8 @@ namespace BDP.Core.Expressions
                 iconTexture,
                 targetingSource,
                 manualEntryGroupId);
-            // 原版武器按钮优先检查“禁止暴力”；BDP 攻击入口必须保持相同顺序，
-            // 避免按钮仍可进入目标选择，或被较次要的 Combo 条件遮盖真实禁用原因。
+            // 保持原因优先级：原版“禁止暴力” -> 通用攻击准入 -> Combo 使用条件。
+            // 准入直接检查按钮绑定的真实 Verb，让业务规则自然投影到按钮状态。
             if (pawn.WorkTagIsDisabled(WorkTags.Violent))
             {
                 command.DisableForUseRequirements(
@@ -142,13 +142,21 @@ namespace BDP.Core.Expressions
             }
             else
             {
-                PawnRequirementCheckResult requirementCheck =
-                    ComboUseRequirementService.Instance.Evaluate(pawn, result.ComboDefName);
-                if (!string.IsNullOrWhiteSpace(result.ComboDefName) && !requirementCheck.Satisfied)
+                AcceptanceReport attackAdmission = AttackAdmissionAccess.Evaluate(pawn, targetingSource.GetVerb);
+                if (!attackAdmission.Accepted)
                 {
-                    string disabledReason =
-                        ComboUseRequirementService.Instance.BuildFailureText(requirementCheck);
-                    command.DisableForUseRequirements(disabledReason);
+                    command.DisableForUseRequirements(attackAdmission.Reason);
+                }
+                else
+                {
+                    PawnRequirementCheckResult requirementCheck =
+                        ComboUseRequirementService.Instance.Evaluate(pawn, result.ComboDefName);
+                    if (!string.IsNullOrWhiteSpace(result.ComboDefName) && !requirementCheck.Satisfied)
+                    {
+                        string disabledReason =
+                            ComboUseRequirementService.Instance.BuildFailureText(requirementCheck);
+                        command.DisableForUseRequirements(disabledReason);
+                    }
                 }
             }
 
@@ -224,7 +232,7 @@ namespace BDP.Core.Expressions
 
         /// <summary>
         /// 构建当前按钮的紧凑显示名。
-        /// 双持复合入口显示"双持·xxx"，有枪械类别时追加"(XX型)"。
+        /// 双持复合入口显示"双持·xxx"，有来源变体时追加"·构型名"。
         /// fallbackLabel 可能已含"双持·"前缀（来自 DualWeapon 的 DisplayLabel），
         /// 这里统一剥离后再重建，避免"双持·双持·XX"冗余。
         /// </summary>
@@ -257,7 +265,7 @@ namespace BDP.Core.Expressions
                 return null;
             }
 
-            return "[" + label + "]";
+            return "BDP_SourceVariant_NameSeparator".Translate() + label;
         }
 
         /// <summary>

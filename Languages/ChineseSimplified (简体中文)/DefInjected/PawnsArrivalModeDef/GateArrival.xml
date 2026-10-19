@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 原版袭击信件附加的抵达方式描述。 -->
+  <BDP_NearRealmGate.textEnemy>他们正在通过黑洞门进入此地。</BDP_NearRealmGate.textEnemy>
+  <!-- 非敌对抵达时的原版信件描述。 -->
+  <BDP_NearRealmGate.textFriendly>他们正在通过黑洞门进入此地。</BDP_NearRealmGate.textFriendly>
+  <!-- 原版延迟袭击任务使用的预告文本。 -->
+  <BDP_NearRealmGate.textWillArrive>他们将通过黑洞门进入此地。</BDP_NearRealmGate.textWillArrive>
+  <!-- 空间突袭抵达方式的敌方说明。 -->
+  <BDP_SpaceRaid.textEnemy>敌人开启空间折跃门，尝试从防线内侧突入。</BDP_SpaceRaid.textEnemy>
+  <!-- 空间突袭抵达方式的友方说明备用值。 -->
+  <BDP_SpaceRaid.textFriendly>他们通过空间折跃门抵达。</BDP_SpaceRaid.textFriendly>
+  <!-- 空间突袭抵达方式的预告说明。 -->
+  <BDP_SpaceRaid.textWillArrive>他们将通过空间折跃门尝试从防线内侧突入。</BDP_SpaceRaid.textWillArrive>
+</LanguageData>

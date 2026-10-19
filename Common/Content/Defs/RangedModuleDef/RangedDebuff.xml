@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!-- 唯一远程减益宿主，具体攻击挂载时附加独立效果包。 -->
+  <BDP.Core.AttackExecution.BdpRangedAttackModuleDef>
+    <defName>BDP_RangedDebuffModule</defName>
+    <label>远程减益</label>
+    <runtimeClass>BDP.Content.RangedModules.Debuff.RangedDebuffModule</runtimeClass>
+    <defaultConfig Class="BDP.Content.RangedModules.Debuff.RangedDebuffConfig" />
+  </BDP.Core.AttackExecution.BdpRangedAttackModuleDef>
+</Defs>

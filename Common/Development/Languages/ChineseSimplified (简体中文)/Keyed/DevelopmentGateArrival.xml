@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 开发文件名与正式语言文件不同，避免原版按相对路径去重时屏蔽正式文案。 -->
+  <BDP_Dev_Gate_Menu>黑洞门出场测试</BDP_Dev_Gate_Menu>
+  <!-- 四种独立组合，均在鼠标处生成三门九人，十秒后开门。 -->
+  <BDP_Dev_Gate_ParallelBatch>同时开门／分批出兵</BDP_Dev_Gate_ParallelBatch>
+  <!-- 同时开门与全量出兵组合。 -->
+  <BDP_Dev_Gate_ParallelAll>同时开门／全部出兵</BDP_Dev_Gate_ParallelAll>
+  <!-- 依次开门与分批出兵组合。 -->
+  <BDP_Dev_Gate_SequentialBatch>依次开门／分批出兵</BDP_Dev_Gate_SequentialBatch>
+  <!-- 每扇门就绪后全量出兵，整波同步需另配置等待全部门就绪。 -->
+  <BDP_Dev_Gate_SequentialAll>依次开门／各门全部出兵</BDP_Dev_Gate_SequentialAll>
+  <!-- 三门在首门后的1.5秒窗口内随机出现，各门5秒后开始分批出兵。 -->
+  <BDP_Dev_Gate_RandomWindow>随机窗口开门／五秒后分批出兵</BDP_Dev_Gate_RandomWindow>
+  <!-- 十秒后开门，持续十秒，无人物与战斗。 -->
+  <BDP_Dev_Gate_Visual>纯视觉门／维持十秒</BDP_Dev_Gate_Visual>
+  <!-- 通过正式接口移动尚未开启的最近一扇门。 -->
+  <BDP_Dev_Gate_Redirect>重定向最近待开门到鼠标处</BDP_Dev_Gate_Redirect>
+  <!-- 读档、队伍及多波并发检查入口。 -->
+  <BDP_Dev_Gate_Output>输出当前地图门状态</BDP_Dev_Gate_Output>
+  <!-- 取消未落地人物，已经出场的人物仍参与战斗。 -->
+  <BDP_Dev_Gate_Cancel>取消当前地图全部门出场</BDP_Dev_Gate_Cancel>
+  <!-- 地图没有近界派系时的反馈。 -->
+  <BDP_Dev_Gate_NoFaction>当前没有可用的敌对近界宙域派系。</BDP_Dev_Gate_NoFaction>
+  <!-- 启动、点位或重定向校验失败时的反馈。 -->
+  <BDP_Dev_Gate_Rejected>操作未执行：需要未开启的门和有效的未遮蔽可站立格；生成测试需中心左右各四格均可用。</BDP_Dev_Gate_Rejected>
+  <!-- 调试异常信息。 -->
+  <BDP_Dev_Gate_Error>黑洞门测试失败：{0}</BDP_Dev_Gate_Error>
+  <!-- 当前游戏时点与波次数。 -->
+  <BDP_Dev_Gate_Header>黑洞门：游戏刻={0}，当前波数={1}</BDP_Dev_Gate_Header>
+  <!-- 单波进度。 -->
+  <BDP_Dev_Gate_Wave>波={0}，待出场={1}，出场完成={2}</BDP_Dev_Gate_Wave>
+  <!-- 单门进度。 -->
+  <BDP_Dev_Gate_Point>门={0}，位置={1}，已开启={2}，关闭中={3}，待出场={4}</BDP_Dev_Gate_Point>
+  <!-- 预定时点读档不变，实际时点可用于核查出兵相对延时。 -->
+  <BDP_Dev_Gate_Timing>，预定开门刻={0}，实际开门刻={1}，原定位置={2}</BDP_Dev_Gate_Timing>
+</LanguageData>

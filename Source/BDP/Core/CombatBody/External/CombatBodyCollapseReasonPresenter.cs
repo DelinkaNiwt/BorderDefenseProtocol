@@ -22,6 +22,8 @@ namespace BDP.Core.CombatBody
             {
                 case "TrionAvailableDepleted":
                     return "BDP_Message_CombatBody_CollapseReasonTrionDepleted".Translate();
+                case "FatalBodyCondition":
+                    return "BDP_Message_CombatBody_CollapseReasonFatalBodyCondition".Translate();
                 default:
                     return "BDP_Message_CombatBody_CollapseReasonOther".Translate(reason);
             }

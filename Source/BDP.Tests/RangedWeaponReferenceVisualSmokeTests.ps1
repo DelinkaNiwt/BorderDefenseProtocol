@@ -40,10 +40,10 @@ $mediumBase = $visualDefs.SelectSingleNode(
 $mediumDualBase = $visualDefs.SelectSingleNode(
     "/Defs/BDP.Core.Expressions.ExpressionVisualPresetDef[@Name='BDP_VisualBase_RangedMedium_Dual']")
 $preset = $visualDefs.SelectSingleNode(
-    "/Defs/BDP.Core.Expressions.ExpressionVisualPresetDef[defName='BDP_Visual_RangedWeaponReference']")
+    "/Defs/BDP.Core.Expressions.ExpressionVisualPresetDef[defName='BDP_Visual_AssaultRifle']")
 Assert-True ($null -ne $mediumBase) '必须定义中型枪械单武器抽象视觉基准。'
 Assert-True ($null -ne $mediumDualBase) '必须定义中型枪械双武器抽象视觉基准。'
-Assert-True ($null -ne $preset) '必须定义 BDP_Visual_RangedWeaponReference 视觉预设。'
+Assert-True ($null -ne $preset) '必须定义 BDP_Visual_AssaultRifle 视觉预设。'
 Assert-True (
     $preset.ParentName -eq 'BDP_VisualBase_RangedMedium' -and
     $preset.GraphicData.texPath -eq 'Things/Trigger/Visual/RangedWeaponReference' -and
@@ -59,7 +59,7 @@ Assert-True (
 ) '具体单武器预设必须只覆盖贴图，公共缩放、锚点和姿态由中型枪械基准提供。'
 
 $dualPreset = $visualDefs.SelectSingleNode(
-    "/Defs/BDP.Core.Expressions.ExpressionVisualPresetDef[defName='BDP_Visual_RangedWeaponReference_Dual']")
+    "/Defs/BDP.Core.Expressions.ExpressionVisualPresetDef[defName='BDP_Visual_AssaultRifle_Dual']")
 Assert-True ($null -ne $dualPreset) '必须定义双武器专用的远程武器基准视觉预设。'
 Assert-True (
     $dualPreset.ParentName -eq 'BDP_VisualBase_RangedMedium_Dual' -and
@@ -84,6 +84,13 @@ Assert-True (
     $mediumDualBase.EastWestPose.BackAltitudeOffset -eq '-0.05' -and
     $mediumDualBase.Grip.UseAsPoseOrigin -eq 'true'
 ) '中型枪械双武器基准必须保存已确认的四朝向姿态和握持定位。'
+
+Assert-True (
+    $null -eq $visualDefs.SelectSingleNode(
+        "/Defs/BDP.Core.Expressions.ExpressionVisualPresetDef[defName='BDP_Visual_RangedWeaponReference']") -and
+    $null -eq $visualDefs.SelectSingleNode(
+        "/Defs/BDP.Core.Expressions.ExpressionVisualPresetDef[defName='BDP_Visual_RangedWeaponReference_Dual']")
+) '突击步枪视觉重命名后不得保留旧的参考视觉 DefName。'
 Assert-True (
     $mediumBase.Muzzle.IsRangedWeapon -eq 'true' -and
     $mediumBase.Muzzle.MuzzleOffset -eq '(0, 0, 0.48828125)' -and
@@ -98,11 +105,16 @@ Assert-True (
 
 [xml]$armamentFormDefs = Get-Content -Raw -Encoding utf8 -LiteralPath $armamentFormDefsPath
 $assaultRifle = $armamentFormDefs.SelectSingleNode(
-    "/Defs/BDP.Content.Assembly.ChipManufacturing.Defs.ChipArmamentFormDef[defName='BDP_GunClass_AssaultRifle']")
+    "/Defs/BDP.Content.Assembly.ChipManufacturing.Defs.ChipArmamentFormDef[defName='BDP_ArmamentForm_AssaultRifle']")
 Assert-True ($null -ne $assaultRifle) '必须保留突击步枪枪壳预设。'
 Assert-True (
-    $assaultRifle.overrides.visualPresetDefName -eq 'BDP_Visual_RangedWeaponReference' -and
-    $assaultRifle.overrides.compositeVisualPresetDefName -eq 'BDP_Visual_RangedWeaponReference_Dual'
+    $assaultRifle.overrides.visualPresetDefName -eq 'BDP_Visual_AssaultRifle' -and
+    $assaultRifle.overrides.compositeVisualPresetDefName -eq 'BDP_Visual_AssaultRifle_Dual'
 ) '突击步枪枪壳必须分别使用单武器基准视觉和双武器专用基准视觉。'
+
+Assert-True (
+    @($visualDefs.Defs.'BDP.Core.Expressions.ExpressionVisualPresetDef' |
+        Where-Object { $_.defName -eq 'BDP_Visual_AssaultRifle' }).Count -eq 1
+) '突击步枪单武器视觉 DefName 必须只有一个定义。'
 
 Write-Output 'RangedWeaponReferenceVisualSmokeTests PASS'

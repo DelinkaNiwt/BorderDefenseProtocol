@@ -1,4 +1,5 @@
 using BDP.Core.Trigger.Runtime;
+using BDP.Core.Information;
 using System.Collections.Generic;
 using Verse;
 
@@ -20,7 +21,7 @@ namespace BDP.Core.Expressions
         /// 按类别读取指定 Pawn 当前已发布的正式表达结果。
         /// 这条口只做结果筛取，不参与结果生成。
         /// </summary>
-        IReadOnlyList<FormalExpressionResult> GetExpressionResults(Pawn pawn, ExpressionResultKind kind);
+        IReadOnlyList<FormalExpressionResult> GetExpressionResults(Pawn pawn, ExpressionOutputChannel outputChannel);
 
         /// <summary>
         /// 读取指定 Pawn 当前已发布的全部 Verb 结果。
@@ -43,19 +44,19 @@ namespace BDP.Core.Expressions
         IReadOnlyList<FormalExpressionResult> GetPassiveResults(Pawn pawn);
 
         /// <summary>
-        /// 按被动键读取指定 Pawn 当前已发布的 Passive 结果。
+        /// 按被动身份键读取指定 Pawn 当前已发布的 Passive 结果。
         /// </summary>
-        IReadOnlyList<FormalExpressionResult> GetPassiveResults(Pawn pawn, string passiveKey);
+        IReadOnlyList<FormalExpressionResult> GetPassiveResults(Pawn pawn, string passiveIdentityKey);
 
         /// <summary>
-        /// 判断指定 Pawn 当前是否存在可用的目标 PassiveKey。
+        /// 判断指定 Pawn 当前是否存在可用的目标 PassiveIdentityKey。
         /// </summary>
-        bool HasPassiveKey(Pawn pawn, string passiveKey);
+        bool HasPassiveIdentityKey(Pawn pawn, string passiveIdentityKey);
 
         /// <summary>
         /// 尝试读取指定 Pawn 当前第一条可用的目标 Passive 结果。
         /// </summary>
-        bool TryGetPassive(Pawn pawn, string passiveKey, out FormalExpressionResult result);
+        bool TryGetPassive(Pawn pawn, string passiveIdentityKey, out FormalExpressionResult result);
 
         /// <summary>
         /// 读取指定 Pawn 当前已发布的战斗投影。
@@ -63,11 +64,11 @@ namespace BDP.Core.Expressions
         /// </summary>
         TriggerCombatProjectionState GetCombatProjection(Pawn pawn);
 
-        /// <summary>
-        /// 读取指定 Pawn 当前说明投影结果。
-        /// 常规读取默认不附带芯片定义/契约诊断。
-        /// </summary>
-        ExpressionInfoProjection GetInfoProjection(Pawn pawn, bool includeDiagnostics = false);
+        /// <summary>读取指定 Pawn 当前全部激活芯片的信息模型。</summary>
+        IReadOnlyList<ChipInformationModel> GetChipInformations(Pawn pawn);
+
+        /// <summary>读取指定 Pawn 当前第一份芯片信息模型。</summary>
+        ChipInformationModel GetChipInformation(Pawn pawn);
 
         /// <summary>
         /// 读取指定 Pawn 当前手动入口投影结果。

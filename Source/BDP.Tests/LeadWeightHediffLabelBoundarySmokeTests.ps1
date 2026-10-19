@@ -2,6 +2,7 @@ $ErrorActionPreference = 'Stop'
 
 $modRoot = Join-Path $PSScriptRoot '..\..'
 $sourcePath = Join-Path $modRoot 'Source\BDP.Content\RangedModules\Debuff\Hediff_LeadWeight.cs'
+$utilityPath = Join-Path $modRoot 'Source\BDP.Content\Hediffs\HediffLabelUtility.cs'
 $hediffPath = Join-Path $modRoot '1.6\Content\Defs\HediffDef\RangedDebuff.xml'
 
 if (-not (Test-Path -LiteralPath $sourcePath)) {
@@ -12,17 +13,31 @@ if (-not (Test-Path -LiteralPath $hediffPath)) {
     throw '缺少铅块负重 Hediff XML。'
 }
 
+if (-not (Test-Path -LiteralPath $utilityPath)) {
+    throw '缺少 Hediff 严重度百分比标签工具。'
+}
+
 $sourceText = Get-Content -LiteralPath $sourcePath -Raw -Encoding UTF8
+$utilityText = Get-Content -LiteralPath $utilityPath -Raw -Encoding UTF8
 $hediffText = Get-Content -LiteralPath $hediffPath -Raw -Encoding UTF8
 
 foreach ($required in @(
         'public sealed class Hediff_LeadWeight : HediffWithComps',
         'public override string LabelBase',
         'base.LabelBase',
-        'Mathf.Clamp01(Severity)',
+        'HediffLabelUtility.AppendSeverityPercent')) {
+        if (-not $sourceText.Contains($required)) {
+            throw ('铅块负重标签实现缺少约束：' + $required)
+        }
+    }
+
+foreach ($required in @(
+        'internal static class HediffLabelUtility',
+        'AppendSeverityPercent',
+        'Mathf.Clamp01(severity)',
         'ToStringPercent("0")')) {
-    if (-not $sourceText.Contains($required)) {
-        throw ('铅块负重标签实现缺少约束：' + $required)
+    if (-not $utilityText.Contains($required)) {
+        throw ('Hediff 严重度百分比标签工具缺少约束：' + $required)
     }
 }
 

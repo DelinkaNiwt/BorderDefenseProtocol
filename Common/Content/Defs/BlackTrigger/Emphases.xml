@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!-- 侧重只概括已经匹配成功的完整候选，不参与形成条件判断。 -->
+  <BDP.Content.Trigger.Black.Formation.BlackTriggerEmphasisDef>
+    <defName>BDP_BlackTriggerEmphasis_Frontline</defName>
+    <label>正面压制</label>
+    <summaryKey>BDP_BlackTrigger_Emphasis_Frontline_Summary</summaryKey>
+    <detailKey>BDP_BlackTrigger_Emphasis_Frontline_Detail</detailKey>
+  </BDP.Content.Trigger.Black.Formation.BlackTriggerEmphasisDef>
+  <!-- 侧重：从安全距离持续施加战斗影响。 -->
+  <BDP.Content.Trigger.Black.Formation.BlackTriggerEmphasisDef>
+    <defName>BDP_BlackTriggerEmphasis_Ranged</defName>
+    <label>远程打击</label>
+    <summaryKey>BDP_BlackTrigger_Emphasis_Ranged_Summary</summaryKey>
+    <detailKey>BDP_BlackTrigger_Emphasis_Ranged_Detail</detailKey>
+  </BDP.Content.Trigger.Black.Formation.BlackTriggerEmphasisDef>
+  <!-- 侧重：以高价值目标和精确结果为中心。 -->
+  <BDP.Content.Trigger.Black.Formation.BlackTriggerEmphasisDef>
+    <defName>BDP_BlackTriggerEmphasis_Precision</defName>
+    <label>精确猎杀</label>
+    <summaryKey>BDP_BlackTrigger_Emphasis_Precision_Summary</summaryKey>
+    <detailKey>BDP_BlackTrigger_Emphasis_Precision_Detail</detailKey>
+  </BDP.Content.Trigger.Black.Formation.BlackTriggerEmphasisDef>
+  <!-- 侧重：依靠位置、速度和突入改变战局。 -->
+  <BDP.Content.Trigger.Black.Formation.BlackTriggerEmphasisDef>
+    <defName>BDP_BlackTriggerEmphasis_Mobility</defName>
+    <label>机动突袭</label>
+    <summaryKey>BDP_BlackTrigger_Emphasis_Mobility_Summary</summaryKey>
+    <detailKey>BDP_BlackTrigger_Emphasis_Mobility_Detail</detailKey>
+  </BDP.Content.Trigger.Black.Formation.BlackTriggerEmphasisDef>
+  <!-- 侧重：承受威胁并保护友军或阵地。 -->
+  <BDP.Content.Trigger.Black.Formation.BlackTriggerEmphasisDef>
+    <defName>BDP_BlackTriggerEmphasis_Defense</defName>
+    <label>防护承受</label>
+    <summaryKey>BDP_BlackTrigger_Emphasis_Defense_Summary</summaryKey>
+    <detailKey>BDP_BlackTrigger_Emphasis_Defense_Detail</detailKey>
+  </BDP.Content.Trigger.Black.Formation.BlackTriggerEmphasisDef>
+  <!-- 侧重：限制、削弱或扰乱敌方行动。 -->
+  <BDP.Content.Trigger.Black.Formation.BlackTriggerEmphasisDef>
+    <defName>BDP_BlackTriggerEmphasis_Control</defName>
+    <label>控制干扰</label>
+    <summaryKey>BDP_BlackTrigger_Emphasis_Control_Summary</summaryKey>
+    <detailKey>BDP_BlackTrigger_Emphasis_Control_Detail</detailKey>
+  </BDP.Content.Trigger.Black.Formation.BlackTriggerEmphasisDef>
+  <!-- 侧重：治疗、强化、补给或构筑战场优势。 -->
+  <BDP.Content.Trigger.Black.Formation.BlackTriggerEmphasisDef>
+    <defName>BDP_BlackTriggerEmphasis_Support</defName>
+    <label>支援构筑</label>
+    <summaryKey>BDP_BlackTrigger_Emphasis_Support_Summary</summaryKey>
+    <detailKey>BDP_BlackTrigger_Emphasis_Support_Detail</detailKey>
+  </BDP.Content.Trigger.Black.Formation.BlackTriggerEmphasisDef>
+  <!-- 侧重：通过侦察、信息和全局判断支配战斗。 -->
+  <BDP.Content.Trigger.Black.Formation.BlackTriggerEmphasisDef>
+    <defName>BDP_BlackTriggerEmphasis_Strategy</defName>
+    <label>战略侦察</label>
+    <summaryKey>BDP_BlackTrigger_Emphasis_Strategy_Summary</summaryKey>
+    <detailKey>BDP_BlackTrigger_Emphasis_Strategy_Detail</detailKey>
+  </BDP.Content.Trigger.Black.Formation.BlackTriggerEmphasisDef>
+</Defs>

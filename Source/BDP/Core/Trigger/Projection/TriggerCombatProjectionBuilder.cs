@@ -18,7 +18,8 @@ namespace BDP.Core.Trigger.Projection
         /// </summary>
         internal TriggerCombatProjectionState Build(TriggerProjectionBuildInput buildInput, Pawn ownerPawn, ExpressionService expressionService, int projectionVersion)
         {
-            if (buildInput == null || expressionService == null)
+            // 宿主停机仅撤下功能投影，不能清除固定装配或槽位激活事实。
+            if (!TriggerFunctionAvailability.Allows(ownerPawn) || buildInput == null || expressionService == null)
             {
                 return TriggerCombatProjectionState.CreateEmpty(projectionVersion);
             }

@@ -24,6 +24,8 @@ Assert-True (($rateStart -ge 0) -and ($rateEnd -gt $rateStart)) 'Gizmo_TrionStat
 $rateText = $gizmoText.Substring($rateStart, $rateEnd - $rateStart)
 
 Assert-True ($rateText -match 'reader\.TotalDrainPerSecond\s*>\s*0f') 'Rate text must display drain from the formal aggregate drain fact, including empty-chip combat bodies.'
+Assert-True ($rateText -match 'reader\.EffectiveRecoveryPerDay') 'Rate text must display the effective recovery rate after the actual recovery permission is applied.'
+Assert-True ($rateText -notmatch 'reader\.RecoveryPerDay\.ToString') 'Rate text must not display the raw stat recovery rate when the recovery gate denies recovery.'
 Assert-True ($rateText -notmatch 'reader\.Allocated') 'Rate text must not infer activity or drain from allocated capacity.'
 
 Write-Output 'TrionGizmoRateFactSmokeTests PASS'

@@ -139,7 +139,7 @@ Assert-True (
 ) 'Patch_Pawn_TryGetAttackVerb must receive original allowManualCastWeapons from Pawn.TryGetAttackVerb.'
 
 Assert-True (
-    $attackPatchText -match 'TryGetAutoRangedVerb\(__instance,\s*allowManualCastWeapons,'
+    $attackPatchText -match 'TryGetAutoRangedVerb\(\s*__instance,\s*allowManualCastWeapons,'
 ) 'Patch_Pawn_TryGetAttackVerb must pass allowManualCastWeapons into BDP auto-ranged selection.'
 
 Assert-True (
@@ -161,12 +161,14 @@ Assert-True (
 ) 'Patch_Pawn_TryGetAttackVerb must not preserve vanilla ranged picks when expression PrimaryRanged exists.'
 
 Assert-True (
-    $meleePatchText -match 'TryExecuteAutoMelee'
-) 'Patch_Pawn_MeleeVerbs_TryMeleeAttack must still bridge through the dedicated auto-melee accessor.'
+    $meleePatchText -match 'TryPrepareAutoMelee'
+) '自动近战必须通过默认攻击准备入口。'
 
 Assert-True (
-    $meleePatchText -match 'if \(!AttackExecutionSurfaceAccess\.TryExecuteAutoMelee\(__instance\.Pawn, target\)\)'
-) 'Auto-melee patch must only fall back to vanilla when no valid expression PrimaryMelee is available.'
+    ($meleePatchText -match 'public static void Prefix') -and
+    ($meleePatchText -match 'ref Verb verbToUse') -and
+    ($meleePatchText -match 'verbToUse = preparedVerb;')
+) '自动近战只注入攻击参数，原版方法必须继续执行。'
 
 Assert-True (
     $meleePatchText -match 'jobs\.curJob\.playerForced'

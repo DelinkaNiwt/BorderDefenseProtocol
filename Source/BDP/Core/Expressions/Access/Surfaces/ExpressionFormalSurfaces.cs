@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using BDP.Core.Chips;
+using BDP.Core.Information;
 using BDP.Core.Expressions.Runtime;
 using BDP.Core.Trigger;
 using BDP.Core.Trigger.Projection;
@@ -14,11 +15,6 @@ namespace BDP.Core.Expressions
     /// </summary>
     internal sealed class ExpressionService : IExpressionReader
     {
-        /// <summary>
-        /// 当前服务绑定的正式说明投影器。
-        /// </summary>
-        private readonly DefaultExpressionInfoProjector infoProjector;
-
         /// <summary>
         /// 当前服务绑定的正式手动入口投影器。
         /// </summary>
@@ -50,12 +46,16 @@ namespace BDP.Core.Expressions
         private readonly ExpressionRuntimeRepository runtimeRepository;
 
         /// <summary>
+        /// 防止宿主移除回调在当前同步过程中递归进入同一条同步链。
+        /// </summary>
+        private bool synchronizingProjectedHosts;
+
+        /// <summary>
         /// 初始化正式服务和长期复用的投影/同步依赖。
         /// </summary>
         public ExpressionService(ExpressionRuntimeRepository runtimeRepository)
         {
             this.runtimeRepository = runtimeRepository ?? new ExpressionRuntimeRepository();
-            infoProjector = new DefaultExpressionInfoProjector();
             manualProjector = new DefaultManualEntryProjector();
             visualProjector = new DefaultVisualProjectionBuilder();
             primarySelector = new DefaultPrimaryExpressionSelector();
@@ -87,17 +87,17 @@ namespace BDP.Core.Expressions
         /// <summary>
         /// 按类别读取指定 Pawn 当前已发布的正式表达结果。
         /// </summary>
-        public IReadOnlyList<FormalExpressionResult> GetExpressionResults(Pawn pawn, ExpressionResultKind kind)
+        public IReadOnlyList<FormalExpressionResult> GetExpressionResults(Pawn pawn, ExpressionOutputChannel outputChannel)
         {
-            switch (kind)
+            switch (outputChannel)
             {
-                case ExpressionResultKind.Verb:
+                case ExpressionOutputChannel.Verb:
                     return GetVerbResults(pawn);
-                case ExpressionResultKind.Ability:
+                case ExpressionOutputChannel.Ability:
                     return GetAbilityResults(pawn);
-                case ExpressionResultKind.Hediff:
+                case ExpressionOutputChannel.Hediff:
                     return GetHediffResults(pawn);
-                case ExpressionResultKind.Passive:
+                case ExpressionOutputChannel.Passive:
                     return GetPassiveResults(pawn);
                 default:
                     return new List<FormalExpressionResult>();
@@ -137,42 +137,42 @@ namespace BDP.Core.Expressions
         }
 
         /// <summary>
-        /// 按被动键读取指定 Pawn 当前已发布的 Passive 结果。
+        /// 按被动身份键读取指定 Pawn 当前已发布的 Passive 结果。
         /// </summary>
-        public IReadOnlyList<FormalExpressionResult> GetPassiveResults(Pawn pawn, string passiveKey)
+        public IReadOnlyList<FormalExpressionResult> GetPassiveResults(Pawn pawn, string passiveIdentityKey)
         {
-            if (string.IsNullOrWhiteSpace(passiveKey))
+            if (string.IsNullOrWhiteSpace(passiveIdentityKey))
             {
                 return new List<FormalExpressionResult>();
             }
 
             ExpressionChannelIndex channelIndex = GetPublishedChannelIndex(pawn);
-            if (channelIndex.PassiveResultsByKey == null)
+            if (channelIndex.PassiveResultsByIdentityKey == null)
             {
                 return new List<FormalExpressionResult>();
             }
 
             IReadOnlyList<FormalExpressionResult> results;
-            return channelIndex.PassiveResultsByKey.TryGetValue(passiveKey, out results)
+            return channelIndex.PassiveResultsByIdentityKey.TryGetValue(passiveIdentityKey, out results)
                 ? results ?? new List<FormalExpressionResult>()
                 : new List<FormalExpressionResult>();
         }
 
         /// <summary>
-        /// 判断指定 Pawn 当前是否存在可用的目标 PassiveKey。
+        /// 判断指定 Pawn 当前是否存在可用的目标 PassiveIdentityKey。
         /// </summary>
-        public bool HasPassiveKey(Pawn pawn, string passiveKey)
+        public bool HasPassiveIdentityKey(Pawn pawn, string passiveIdentityKey)
         {
-            return TryGetPassive(pawn, passiveKey, out FormalExpressionResult _);
+            return TryGetPassive(pawn, passiveIdentityKey, out FormalExpressionResult _);
         }
 
         /// <summary>
         /// 尝试读取指定 Pawn 当前第一条可用的目标 Passive 结果。
         /// </summary>
-        public bool TryGetPassive(Pawn pawn, string passiveKey, out FormalExpressionResult result)
+        public bool TryGetPassive(Pawn pawn, string passiveIdentityKey, out FormalExpressionResult result)
         {
             result = null;
-            IReadOnlyList<FormalExpressionResult> passiveResults = GetPassiveResults(pawn, passiveKey);
+            IReadOnlyList<FormalExpressionResult> passiveResults = GetPassiveResults(pawn, passiveIdentityKey);
             if (passiveResults == null)
             {
                 return false;
@@ -193,23 +193,24 @@ namespace BDP.Core.Expressions
             return false;
         }
 
-        /// <summary>
-        /// 读取指定 Pawn 当前说明投影结果。
-        /// 常规读取默认不附带诊断，避免把定义校验和契约解释压进普通 UI 热路径。
-        /// </summary>
-        public ExpressionInfoProjection GetInfoProjection(Pawn pawn, bool includeDiagnostics = false)
+        /// <summary>读取指定 Pawn 当前全部激活芯片的信息模型。</summary>
+        public IReadOnlyList<ChipInformationModel> GetChipInformations(Pawn pawn)
         {
-            ExpressionInfoProjection projection =
-                TryGetPublishedPresentationProjection(pawn, out TriggerPresentationState presentationState)
-                    ? presentationState.InfoProjection ?? CreateEmptyInfoProjection()
-                    : CreateEmptyInfoProjection();
-            if (includeDiagnostics)
-            {
-                projection = CloneInfoProjection(projection);
-                AttachContractDiagnostics(pawn, projection);
-            }
+            return TryGetPublishedPresentationProjection(
+                pawn,
+                out TriggerPresentationState presentationState)
+                && presentationState.ChipInformations != null
+                ? presentationState.ChipInformations
+                : new List<ChipInformationModel>();
+        }
 
-            return projection;
+        /// <summary>读取指定 Pawn 当前第一份芯片信息模型。</summary>
+        public ChipInformationModel GetChipInformation(Pawn pawn)
+        {
+            IReadOnlyList<ChipInformationModel> models = GetChipInformations(pawn);
+            return models != null && models.Count > 0
+                ? models[0]
+                : CreateEmptyChipInformation();
         }
 
         /// <summary>
@@ -232,14 +233,38 @@ namespace BDP.Core.Expressions
                 : CreateEmptyVisualProjection();
         }
 
-        /// <summary>
-        /// 从一份已选表达快照构建说明投影。
-        /// 这条口只给运行时发布 owner 使用，不作为普通 UI 读路径。
-        /// </summary>
-        internal ExpressionInfoProjection BuildPublishedInfoProjection(ExpressionSnapshot snapshot)
+        /// <summary>从正式表达结果和激活芯片定义共同生成逐芯片信息模型。</summary>
+        internal IReadOnlyList<ChipInformationModel> BuildPublishedChipInformations(
+            ExpressionSnapshot snapshot,
+            IReadOnlyList<ChipInformationParseInput> informationInputs)
         {
             EnsurePublicationSnapshot(snapshot);
-            return infoProjector.Build(snapshot);
+            List<ChipInformationModel> result = new List<ChipInformationModel>();
+            if (informationInputs == null || informationInputs.Count == 0)
+            {
+                result.Add(ChipInformationSurfaceAccess.Read(
+                    ChipInformationExpressionSnapshotAdapter.Create(snapshot)));
+                return result;
+            }
+
+            for (int index = 0; index < informationInputs.Count; index++)
+            {
+                ChipInformationParseInput input = informationInputs[index];
+                if (input == null)
+                {
+                    continue;
+                }
+
+                string chipThingId = input.Identity != null
+                    ? input.Identity.InstanceKey
+                    : null;
+                ChipInformationParseInput runtimeInput =
+                    ChipInformationExpressionSnapshotAdapter.Create(snapshot, chipThingId);
+                result.Add(ChipInformationSurfaceAccess.Read(
+                    ChipInformationInputComposer.Combine(runtimeInput, input)));
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -297,14 +322,22 @@ namespace BDP.Core.Expressions
         /// </summary>
         internal void SyncProjectedHosts(Pawn pawn, ExpressionSnapshot snapshot)
         {
-            if (pawn == null || snapshot == null)
+            if (pawn == null || snapshot == null || synchronizingProjectedHosts)
             {
                 return;
             }
 
-            EnsurePublicationSnapshot(snapshot);
-            hostSynchronizer?.Sync(pawn, snapshot);
-            sustainDrainService?.Reconcile(pawn, snapshot);
+            synchronizingProjectedHosts = true;
+            try
+            {
+                EnsurePublicationSnapshot(snapshot);
+                hostSynchronizer?.Sync(pawn, snapshot);
+                sustainDrainService?.Reconcile(pawn, snapshot);
+            }
+            finally
+            {
+                synchronizingProjectedHosts = false;
+            }
         }
 
         /// <summary>
@@ -359,35 +392,6 @@ namespace BDP.Core.Expressions
             CompTriggerBody triggerBody = TriggerSurfaceAccess.ResolveComp(pawn);
             projection = triggerBody != null ? triggerBody.PublishedPresentationProjection : null;
             return projection != null;
-        }
-
-        /// <summary>
-        /// 克隆一份说明投影，避免诊断读取污染已发布缓存对象。
-        /// </summary>
-        private static ExpressionInfoProjection CloneInfoProjection(ExpressionInfoProjection projection)
-        {
-            if (projection == null)
-            {
-                return CreateEmptyInfoProjection();
-            }
-
-            return new ExpressionInfoProjection
-            {
-                Lines = projection.Lines != null ? new List<string>(projection.Lines) : new List<string>(),
-                Entries = projection.Entries != null
-                    ? new List<ExpressionInfoProjectionEntry>(projection.Entries)
-                    : new List<ExpressionInfoProjectionEntry>(),
-                PrimaryRangedResultId = projection.PrimaryRangedResultId,
-                PrimaryMeleeResultId = projection.PrimaryMeleeResultId,
-                CurrentExecutingResultId = projection.CurrentExecutingResultId,
-                HasSpecialWeaponOverride = projection.HasSpecialWeaponOverride,
-                ContractDiagnostics = projection.ContractDiagnostics != null
-                    ? new List<ExpressionContractDiagnosticEntry>(projection.ContractDiagnostics)
-                    : new List<ExpressionContractDiagnosticEntry>(),
-                ChipDefinitionDiagnostics = projection.ChipDefinitionDiagnostics != null
-                    ? new List<ChipDefinitionDiagnosticEntry>(projection.ChipDefinitionDiagnostics)
-                    : new List<ChipDefinitionDiagnosticEntry>()
-            };
         }
 
         /// <summary>
@@ -639,19 +643,12 @@ namespace BDP.Core.Expressions
             }
         }
 
-        /// <summary>
-        /// 构建空说明投影。
-        /// 这是普通读路径在无已发布结果时的稳定兜底对象。
-        /// </summary>
-        private static ExpressionInfoProjection CreateEmptyInfoProjection()
+        /// <summary>构建空芯片信息模型，作为无已发布状态的稳定兜底。</summary>
+        private static ChipInformationModel CreateEmptyChipInformation()
         {
-            return new ExpressionInfoProjection
-            {
-                Lines = new List<string>(),
-                Entries = new List<ExpressionInfoProjectionEntry>(),
-                ContractDiagnostics = new List<ExpressionContractDiagnosticEntry>(),
-                ChipDefinitionDiagnostics = new List<ChipDefinitionDiagnosticEntry>()
-            };
+            return new ChipInformationModel(
+                new ChipInformationNode(null, "chip", null, null, 0, null, null),
+                null);
         }
 
         /// <summary>
@@ -683,250 +680,6 @@ namespace BDP.Core.Expressions
             };
         }
 
-        /// <summary>
-        /// 为说明投影补入当前活跃芯片契约诊断。
-        /// </summary>
-        private static void AttachContractDiagnostics(Pawn pawn, ExpressionInfoProjection projection)
-        {
-            if (projection == null)
-            {
-                return;
-            }
-
-            ITriggerLoadoutReader triggerLoadoutReader = TriggerSurfaceAccess.ResolveLoadoutReader(pawn);
-            if (triggerLoadoutReader == null)
-            {
-                projection.ContractDiagnostics = new List<ExpressionContractDiagnosticEntry>();
-                return;
-            }
-
-            ExpressionRuntimeRepository runtimeRepository = ExpressionSurfaceAccess.ResolveRuntimeRepository(pawn);
-            IChipDefinitionReader chipDefinitionReader = runtimeRepository != null ? runtimeRepository.ChipDefinitionReader : null;
-            IChipExpressionContractInterpreter contractInterpreter =
-                runtimeRepository != null ? runtimeRepository.ContractInterpreter : null;
-            if (chipDefinitionReader == null || contractInterpreter == null)
-            {
-                projection.ChipDefinitionDiagnostics = new List<ChipDefinitionDiagnosticEntry>();
-                projection.ContractDiagnostics = new List<ExpressionContractDiagnosticEntry>();
-                return;
-            }
-            List<ChipDefinitionDiagnosticEntry> chipDefinitionDiagnostics =
-                BuildChipDefinitionDiagnostics(triggerLoadoutReader, chipDefinitionReader);
-            List<ExpressionContractDiagnosticEntry> diagnostics =
-                BuildContractDiagnostics(triggerLoadoutReader, chipDefinitionReader, contractInterpreter);
-            projection.ChipDefinitionDiagnostics = chipDefinitionDiagnostics;
-            projection.ContractDiagnostics = diagnostics;
-
-            List<string> lines = projection.Lines != null
-                ? new List<string>(projection.Lines)
-                : new List<string>();
-            lines.Add("芯片定义诊断：count=" + chipDefinitionDiagnostics.Count);
-
-            for (int i = 0; i < chipDefinitionDiagnostics.Count; i++)
-            {
-                ChipDefinitionDiagnosticEntry diagnostic = chipDefinitionDiagnostics[i];
-                if (diagnostic == null)
-                {
-                    continue;
-                }
-
-                lines.Add(BuildChipDefinitionDiagnosticLine(diagnostic));
-            }
-
-            lines.Add("芯片契约诊断：count=" + diagnostics.Count);
-
-            for (int i = 0; i < diagnostics.Count; i++)
-            {
-                ExpressionContractDiagnosticEntry diagnostic = diagnostics[i];
-                if (diagnostic == null)
-                {
-                    continue;
-                }
-
-                lines.Add(BuildContractDiagnosticLine(diagnostic));
-            }
-
-            projection.Lines = lines;
-        }
-
-        /// <summary>
-        /// 汇总当前活跃芯片的定义层诊断。
-        /// </summary>
-        private static List<ChipDefinitionDiagnosticEntry> BuildChipDefinitionDiagnostics(
-            ITriggerLoadoutReader triggerLoadoutReader,
-            IChipDefinitionReader chipDefinitionReader)
-        {
-            List<ChipDefinitionDiagnosticEntry> diagnostics = new List<ChipDefinitionDiagnosticEntry>();
-            if (triggerLoadoutReader == null || chipDefinitionReader == null)
-            {
-                return diagnostics;
-            }
-
-            IEnumerable<ITriggerSlotState> activeSlots = triggerLoadoutReader.GetActiveSlots();
-            if (activeSlots == null)
-            {
-                return diagnostics;
-            }
-
-            HashSet<string> seenChipIds = new HashSet<string>();
-            foreach (ITriggerSlotState slot in activeSlots)
-            {
-                if (slot == null || slot.LoadedChip == null || slot.IsBindingMirror)
-                {
-                    continue;
-                }
-
-                if (!seenChipIds.Add(slot.LoadedChip.ThingID))
-                {
-                    continue;
-                }
-
-                ChipDefinitionReadResult chipReadResult = chipDefinitionReader.Read(slot.LoadedChip);
-                diagnostics.Add(new ChipDefinitionDiagnosticEntry
-                {
-                    ChipThingId = slot.LoadedChip.ThingID,
-                    ChipLabel = slot.LoadedChip.LabelCap.ToString(),
-                    IsValid = chipReadResult != null
-                        && chipReadResult.Validation != null
-                        && chipReadResult.Validation.IsValid,
-                    Errors = TranslateValidationMessages(
-                        chipReadResult != null ? chipReadResult.Validation?.Errors : null),
-                    Warnings = TranslateValidationMessages(
-                        chipReadResult != null ? chipReadResult.Validation?.Warnings : null)
-                });
-            }
-
-            return diagnostics;
-        }
-
-        /// <summary>
-        /// 汇总当前活跃芯片的契约诊断。
-        /// </summary>
-        private static List<ExpressionContractDiagnosticEntry> BuildContractDiagnostics(
-            ITriggerLoadoutReader triggerLoadoutReader,
-            IChipDefinitionReader chipDefinitionReader,
-            IChipExpressionContractInterpreter contractInterpreter)
-        {
-            List<ExpressionContractDiagnosticEntry> diagnostics = new List<ExpressionContractDiagnosticEntry>();
-            if (triggerLoadoutReader == null || chipDefinitionReader == null || contractInterpreter == null)
-            {
-                return diagnostics;
-            }
-
-            IEnumerable<ITriggerSlotState> activeSlots = triggerLoadoutReader.GetActiveSlots();
-            if (activeSlots == null)
-            {
-                return diagnostics;
-            }
-
-            HashSet<string> seenChipIds = new HashSet<string>();
-            foreach (ITriggerSlotState slot in activeSlots)
-            {
-                if (slot == null || slot.LoadedChip == null || slot.IsBindingMirror)
-                {
-                    continue;
-                }
-
-                if (!seenChipIds.Add(slot.LoadedChip.ThingID))
-                {
-                    continue;
-                }
-
-                ChipDefinitionReadResult chipReadResult = chipDefinitionReader.Read(slot.LoadedChip);
-                ChipExpressionConfig config = chipReadResult != null
-                    && chipReadResult.Contract != null
-                    && chipReadResult.Validation != null
-                    && chipReadResult.Validation.IsValid
-                    && chipReadResult.Contract.Expression != null
-                    && chipReadResult.Contract.Expression.HasExpressionBlock
-                    ? chipReadResult.Contract.Expression.Config
-                    : null;
-                ChipExpressionResolvedContract resolvedContract =
-                    config != null
-                        ? contractInterpreter.Resolve(slot.LoadedChip, config, triggerLoadoutReader)
-                        : null;
-                diagnostics.Add(new ExpressionContractDiagnosticEntry
-                {
-                    ChipThingId = slot.LoadedChip.ThingID,
-                    ChipLabel = slot.LoadedChip.LabelCap.ToString(),
-                    IsValid = resolvedContract != null
-                        && resolvedContract.Validation != null
-                        && resolvedContract.Validation.IsValid,
-                    AcceptedEntryCount = resolvedContract != null
-                        && resolvedContract.Contract != null
-                        && resolvedContract.Contract.Entries != null
-                        ? resolvedContract.Contract.Entries.Count
-                        : 0,
-                    Errors = resolvedContract != null && resolvedContract.Validation != null
-                        ? (IReadOnlyList<string>)resolvedContract.Validation.Errors
-                        : new List<string>(),
-                    Warnings = resolvedContract != null && resolvedContract.Validation != null
-                        ? (IReadOnlyList<string>)resolvedContract.Validation.Warnings
-                        : new List<string>()
-                });
-            }
-
-            return diagnostics;
-        }
-
-        /// <summary>
-        /// 构建单枚芯片的契约诊断说明行。
-        /// </summary>
-        private static string BuildContractDiagnosticLine(ExpressionContractDiagnosticEntry diagnostic)
-        {
-            string chipLabel = string.IsNullOrWhiteSpace(diagnostic.ChipLabel) ? "(未知芯片)" : diagnostic.ChipLabel;
-            int errorCount = diagnostic.Errors != null ? diagnostic.Errors.Count : 0;
-            int warningCount = diagnostic.Warnings != null ? diagnostic.Warnings.Count : 0;
-            return chipLabel
-                + " | valid=" + diagnostic.IsValid
-                + " | acceptedEntries=" + diagnostic.AcceptedEntryCount
-                + " | errors=" + errorCount
-                + " | warnings=" + warningCount;
-        }
-
-        /// <summary>
-        /// 构建单枚芯片的定义层诊断说明行。
-        /// </summary>
-        private static string BuildChipDefinitionDiagnosticLine(ChipDefinitionDiagnosticEntry diagnostic)
-        {
-            string chipLabel = string.IsNullOrWhiteSpace(diagnostic.ChipLabel) ? "(未知芯片)" : diagnostic.ChipLabel;
-            string firstError = diagnostic.Errors != null && diagnostic.Errors.Count > 0
-                ? diagnostic.Errors[0]
-                : "-";
-            string firstWarning = diagnostic.Warnings != null && diagnostic.Warnings.Count > 0
-                ? diagnostic.Warnings[0]
-                : "-";
-            return chipLabel
-                + " | valid=" + diagnostic.IsValid
-                + " | firstError=" + firstError
-                + " | firstWarning=" + firstWarning;
-        }
-
-        /// <summary>
-        /// 把芯片定义校验消息翻译成说明层字符串。
-        /// </summary>
-        private static IReadOnlyList<string> TranslateValidationMessages(
-            IReadOnlyList<BDP.Core.Chips.ChipDefinitionValidationMessage> messages)
-        {
-            List<string> result = new List<string>();
-            if (messages == null)
-            {
-                return result;
-            }
-
-            for (int i = 0; i < messages.Count; i++)
-            {
-                BDP.Core.Chips.ChipDefinitionValidationMessage message = messages[i];
-                if (message == null || string.IsNullOrWhiteSpace(message.Message))
-                {
-                    continue;
-                }
-
-                result.Add(message.Message);
-            }
-
-            return result;
-        }
     }
 
 }

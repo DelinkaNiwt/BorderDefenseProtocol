@@ -46,6 +46,12 @@ namespace BDP.Core.Trigger
         private bool isActive;
 
         /// <summary>
+        /// 当前槽位的独立切换过程数据。
+        /// 它只保存 Waiting/Activating/Deactivating（等待/激活中/关闭中）上下文，不是第二套激活真值。
+        /// </summary>
+        private SwitchContext slotSwitchContext;
+
+        /// <summary>
         /// 当前正式启用根槽所采用的芯片形态键。
         /// 未启用、单形态或镜像槽位必须为空。
         /// </summary>
@@ -156,6 +162,15 @@ namespace BDP.Core.Trigger
         }
 
         /// <summary>
+        /// 当前槽位的独立切换过程上下文。
+        /// 只保存多激活槽位所需的过程数据，正式激活真值仍由 IsActive 唯一表示。
+        /// </summary>
+        internal SwitchContext SlotSwitchContext
+        {
+            get { return slotSwitchContext; }
+        }
+
+        /// <summary>
         /// 当前正式启用根槽所采用的芯片形态键。
         /// 只供 Core（核心程序集）内部维护，外部统一通过正式读取面取得。
         /// </summary>
@@ -251,6 +266,7 @@ namespace BDP.Core.Trigger
 
             loadedChip = chip;
             loadedChipThingId = chip != null ? chip.ThingID : null;
+            slotSwitchContext = null;
         }
 
         /// <summary>
@@ -278,6 +294,7 @@ namespace BDP.Core.Trigger
             if (isDisabled)
             {
                 isActive = false;
+                slotSwitchContext = null;
                 currentModeKey = null;
                 currentStanceKey = null;
             }
@@ -299,6 +316,15 @@ namespace BDP.Core.Trigger
         internal void SetCurrentStanceKey(string stanceKey)
         {
             currentStanceKey = string.IsNullOrWhiteSpace(stanceKey) ? null : stanceKey;
+        }
+
+        /// <summary>
+        /// 写入独立切换过程上下文。
+        /// 这里只保存过程，不改变槽位正式激活真值。
+        /// </summary>
+        internal void SetSlotSwitchContext(SwitchContext context)
+        {
+            slotSwitchContext = context;
         }
 
         /// <summary>
@@ -350,6 +376,7 @@ namespace BDP.Core.Trigger
             Scribe_References.Look(ref loadedChip, "loadedChip");
             Scribe_Values.Look(ref loadedChipThingId, "loadedChipThingId");
             Scribe_Values.Look(ref isActive, "isActive", false);
+            Scribe_Deep.Look(ref slotSwitchContext, "slotSwitchContext");
             Scribe_Values.Look(ref currentModeKey, "currentModeKey");
             Scribe_Values.Look(ref currentStanceKey, "currentStanceKey");
             Scribe_Values.Look(ref isDisabled, "isDisabled", false);

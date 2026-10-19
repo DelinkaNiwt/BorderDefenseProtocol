@@ -23,6 +23,8 @@ $attackExecutionPath = Join-Path $repoRoot 'Source\BDP\Core\AttackExecution\Atta
 $formalExpressionResultPath = Join-Path $repoRoot 'Source\BDP\Core\Expressions\Model\FormalExpressionResult.cs'
 $compositeSetPath = Join-Path $repoRoot 'Source\BDP\Core\Expressions\Model\CompositeExpressionSet.cs'
 $compositeReferencePath = Join-Path $repoRoot 'Source\BDP\Core\Expressions\Model\CompositeExpressionReference.cs'
+$comboBindingPath = Join-Path $repoRoot 'Source\BDP\Core\Combos\Access\ComboSourceBinding.cs'
+$comboIndexPath = Join-Path $repoRoot 'Source\BDP\Core\Expressions\Runtime\ComboRuntimeIndex.cs'
 
 $comboDefPath = Join-Path $repoRoot 'Source\BDP\Core\Combos\Defs\ComboDef.cs'
 $comboConfigPath = Join-Path $repoRoot 'Source\BDP\Core\Combos\Config\ComboDefinitionConfig.cs'
@@ -54,6 +56,8 @@ $attackExecutionText = Get-Content -LiteralPath $attackExecutionPath -Raw -Encod
 $formalExpressionResultText = Get-Content -LiteralPath $formalExpressionResultPath -Raw -Encoding utf8
 $compositeSetText = Get-Content -LiteralPath $compositeSetPath -Raw -Encoding utf8
 $compositeReferenceText = Get-Content -LiteralPath $compositeReferencePath -Raw -Encoding utf8
+$comboBindingText = if (Test-Path -LiteralPath $comboBindingPath) { Get-Content -LiteralPath $comboBindingPath -Raw -Encoding utf8 } else { '' }
+$comboIndexText = if (Test-Path -LiteralPath $comboIndexPath) { Get-Content -LiteralPath $comboIndexPath -Raw -Encoding utf8 } else { '' }
 
 $comboDefExists = Test-Path -LiteralPath $comboDefPath
 $comboConfigExists = Test-Path -LiteralPath $comboConfigPath
@@ -117,8 +121,8 @@ Assert-True $comboResolveModeExists 'Combo resolve mode must exist.'
 Assert-True $comboContractExists 'Combo definition contract must exist.'
 Assert-True $comboExpressionHandleExists 'Combo expression contract handle must exist.'
 
-Assert-True ($comboConfigText -match 'firstSourceActionDefName') 'Combo definition config must declare the first source action definition name.'
-Assert-True ($comboConfigText -match 'secondSourceActionDefName') 'Combo definition config must declare the second source action definition name.'
+Assert-True ($comboConfigText -match 'firstSourceKey') 'Combo definition config must declare the first source key.'
+Assert-True ($comboConfigText -match 'secondSourceKey') 'Combo definition config must declare the second source key.'
 Assert-True ($comboConfigText -match 'Expression') 'Combo definition config must declare Expression block.'
 Assert-True ($comboExpressionConfigText -match 'Entries') 'Combo expression config must declare Entries.'
 Assert-True ($comboExpressionConfigText -match 'List<ComboExpressionEntryConfig>\s+Entries') 'Combo expression config entries must use combo-specific entry config.'
@@ -147,8 +151,8 @@ Assert-True ($comboReaderSurfaceText -match 'Read\s*\(') 'Combo definition reade
 Assert-True ($comboResolverText -match 'Resolve\s*\(') 'Combo definition resolver must exist.'
 Assert-True ($comboValidatorText -match 'Validate\s*\(') 'Combo definition validator must exist.'
 Assert-True ($comboSurfaceText -match 'ResolveDefinitionReader') 'Combo surface access must expose definition reader.'
-Assert-True ($comboValidatorText -match 'firstSourceActionDefName') 'Combo validator must validate the first source action definition name.'
-Assert-True ($comboValidatorText -match 'secondSourceActionDefName') 'Combo validator must validate the second source action definition name.'
+Assert-True ($comboValidatorText -match 'firstSourceKey') 'Combo validator must validate the first source key.'
+Assert-True ($comboValidatorText -match 'secondSourceKey') 'Combo validator must validate the second source key.'
 Assert-True ($comboValidatorText -match 'Expression') 'Combo validator must validate Expression.'
 
 Assert-True ($formalExpressionResultText -match 'ComboDefName') 'FormalExpressionResult must expose ComboDefName.'
@@ -160,6 +164,10 @@ Assert-True ($compositeResolverText -match 'ComboDefName') 'Composite resolver m
 Assert-True ($compositeResolverText -match 'ComboFormalExpressionResultFactory') 'Composite resolver must delegate combo result construction.'
 Assert-True ($compositeSetText -match 'ComboResults') 'CompositeExpressionSet must expose ComboResults.'
 Assert-True ($compositeReferenceText -match 'SourceResultIds') 'CompositeExpressionReference must keep source mapping.'
+Assert-True (Test-Path -LiteralPath $comboBindingPath) 'Combo runtime matching must expose concrete first/second source binding.'
+Assert-True ($comboBindingText -match 'FirstSourceChip') 'Combo source binding must expose the first source chip.'
+Assert-True ($comboBindingText -match 'SecondSourceChip') 'Combo source binding must expose the second source chip.'
+Assert-True ($comboIndexText -match 'Binding|SourceBinding') 'Combo runtime index must return concrete source binding.'
 
 Assert-True ($attackExecutionText -match 'BuildSingleResultCasts') 'Attack execution must keep consuming normal single results.'
 Assert-True ($attackExecutionText -match 'CompositeExpressionKind\.DualWeapon') 'DualWeapon special handling must remain explicit.'
@@ -171,8 +179,8 @@ Assert-True $comboSourceResolverExists 'Combo source field resolver must exist.'
 Assert-True ($comboResolutionText -match 'ComboDefinitionReadResult') 'Combo formal result resolution must retain combo read result.'
 Assert-True ($comboResolutionText -match 'ComboExpressionEntryConfig') 'Combo formal result resolution must retain combo entry config.'
 Assert-True ($comboResolutionText -match 'ChipExpressionEntryContract') 'Combo formal result resolution must retain interpreted entry contract.'
-Assert-True ($comboResolutionText -match 'MainSourceMaterial') 'Combo formal result resolution must retain main source material.'
-Assert-True ($comboResolutionText -match 'SubSourceMaterial') 'Combo formal result resolution must retain sub source material.'
+Assert-True ($comboResolutionText -match 'FirstSourceMaterial') 'Combo formal result resolution must expose first source material.'
+Assert-True ($comboResolutionText -match 'SecondSourceMaterial') 'Combo formal result resolution must expose second source material.'
 Assert-True ($comboSourceResolverText -match 'FollowFirstSource') 'Combo source resolver must support FollowFirstSource.'
 Assert-True ($comboSourceResolverText -match 'Average') 'Combo source resolver must support Average.'
 Assert-True ($comboResolverText -match 'ResolveVerbProps') 'Combo resolver must own verb prop resolution.'
@@ -187,15 +195,15 @@ Assert-True ($compositeResolverText -match 'BuildComboInterpreterEntries') 'Comp
 Assert-True ($comboSourceResolverText -match 'if\s*\(!mode\.HasValue\)') 'Combo source resolver must keep fields untouched when no resolve mode is explicitly declared.'
 Assert-True ($comboResolverText -notmatch 'declaredMode\s*\?\?\s*defaultMode') 'Combo resolver must not apply implicit default resolve modes.'
 Assert-True ($comboResolverText -match 'DefaultProjectile = overlay\?\.defaultProjectile') 'Combo resolver must only use an explicitly declared default projectile override.'
-Assert-True ($comboFactoryText -match 'ExpressionResultKind\.Verb') 'Combo factory must support Verb.'
-Assert-True ($comboFactoryText -match 'ExpressionResultKind\.Ability') 'Combo factory must support Ability.'
-Assert-True ($comboFactoryText -match 'ExpressionResultKind\.Hediff') 'Combo factory must support Hediff.'
-Assert-True ($comboFactoryText -match 'ExpressionResultKind\.Passive') 'Combo factory must support Passive.'
+Assert-True ($comboFactoryText -match 'ExpressionOutputChannel\.Verb') 'Combo factory must support Verb.'
+Assert-True ($comboFactoryText -match 'ExpressionOutputChannel\.Ability') 'Combo factory must support Ability.'
+Assert-True ($comboFactoryText -match 'ExpressionOutputChannel\.Hediff') 'Combo factory must support Hediff.'
+Assert-True ($comboFactoryText -match 'ExpressionOutputChannel\.Passive') 'Combo factory must support Passive.'
 Assert-True ($comboFactoryText -match 'AbilityDefName') 'Combo factory must carry AbilityDefName.'
 Assert-True ($comboFactoryText -match 'HediffDefName') 'Combo factory must carry HediffDefName.'
-Assert-True ($comboFactoryText -match 'PassiveKey') 'Combo factory must carry PassiveKey.'
-Assert-True ($devHarnessComboDefsText -match '<Kind>Ability</Kind>') 'DevHarness must include combo ability sample.'
-Assert-True ($devHarnessComboDefsText -match '<Kind>Hediff</Kind>') 'DevHarness must include combo hediff sample.'
-Assert-True ($devHarnessComboDefsText -match '<Kind>Passive</Kind>') 'DevHarness must include combo passive sample.'
+Assert-True ($comboFactoryText -match 'PassiveIdentityKey') 'Combo factory must carry PassiveIdentityKey.'
+Assert-True ($devHarnessComboDefsText -match '<Kind>Ability</Kind>') 'Retired DevHarness must retain its isolated legacy combo ability sample.'
+Assert-True ($devHarnessComboDefsText -match '<Kind>Hediff</Kind>') 'Retired DevHarness must retain its isolated legacy combo hediff sample.'
+Assert-True ($devHarnessComboDefsText -match '<Kind>Passive</Kind>') 'Retired DevHarness must retain its isolated legacy combo passive sample.'
 
 Write-Output 'ComboDefinitionBoundary PASS'

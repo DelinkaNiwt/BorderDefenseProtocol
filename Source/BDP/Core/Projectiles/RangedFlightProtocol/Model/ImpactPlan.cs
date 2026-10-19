@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using BDP.Core.Projectiles.RangedFlightProtocol.Impact;
 using UnityEngine;
+using Verse;
 
 namespace BDP.Core.Projectiles.RangedFlightProtocol.Model
 {
@@ -85,6 +86,15 @@ namespace BDP.Core.Projectiles.RangedFlightProtocol.Model
         /// 模块计划层的单体伤害计划。
         /// </summary>
         public DamagePlan DirectDamage { get; set; }
+
+        /// <summary>
+        /// 当前主直接伤害的命中部位覆盖值。
+        /// 为空时继续使用原版伤害工作器的随机部位选择。
+        /// </summary>
+        public BodyPartRecord HitPartOverride { get; set; }
+
+        /// <summary>已提交部位裁定，包括指定部位失效后的空结果。</summary>
+        public bool HasHitPartOverride { get; set; }
 
         /// <summary>
         /// 模块计划层是否应执行范围效果。

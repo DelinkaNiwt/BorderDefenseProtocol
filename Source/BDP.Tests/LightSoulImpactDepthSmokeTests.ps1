@@ -1,3 +1,4 @@
+param([Parameter(Mandatory)][ValidateSet('1.6','1.7')][string]$RimWorldVersion)
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 
@@ -5,9 +6,9 @@ Set-StrictMode -Version Latest
 $modRoot = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 
 # 光魂抵挡前后景所需正式文件。
-$impactDefsPath = Join-Path $modRoot '1.6\Content\Defs\Effects\LightSoulImpact.xml'
+$impactDefsPath = Join-Path $modRoot 'Common\Content\Defs\Effects\LightSoulImpact.xml'
 $impactLanguagePath = Join-Path $modRoot 'Languages\ChineseSimplified (简体中文)\DefInjected\ThingDef\LightSoulImpact.xml'
-$lightSoulPath = Join-Path $modRoot '1.6\Content\Defs\HediffDef\LightSoul.xml'
+$lightSoulPath = Join-Path $modRoot 'Common\Content\Defs\HediffDef\LightSoul.xml'
 $policyPath = Join-Path $modRoot 'Source\BDP.Content\Shield\EnergyShieldBlockPolicy.cs'
 $shieldPath = Join-Path $modRoot 'Source\BDP.Content\Shield\HediffComp_EnergyShield.cs'
 $propertiesPath = Join-Path $modRoot 'Source\BDP.Content\Shield\HediffCompProperties_EnergyShield.cs'
@@ -81,9 +82,9 @@ foreach ($defName in $backgroundFlecks | Where-Object { $_ -notmatch 'ExplosionF
 Assert-True ($backText -match '<moteDef>Mote_SparkThrownFast</moteDef>') '后景快速火花必须复用原版 Projectile 层定义。'
 Assert-True ($backText -match '<moteDef>Mote_LongSparkThrown</moteDef>') '后景长火花必须复用原版 Projectile 层定义。'
 
-# 两个光魂盾姿态必须显式启用同一套方向分层配置。
-$hediffs = @($lightSoulXml.Defs.HediffDef)
-Assert-True ($hediffs.Count -eq 2) '光魂必须保留灵活姿态和举盾姿态。'
+# 防护盾必须继续显式启用方向分层配置。
+$hediffs = @($lightSoulXml.SelectNodes('/Defs/HediffDef[comps/li[@Class="BDP.Content.Shield.HediffCompProperties_EnergyShield"]]'))
+Assert-True ($hediffs.Count -eq 1) '光魂只保留一个防护盾宿主；独立防护状态不参与命中分层。'
 foreach ($hediff in $hediffs) {
     $props = @($hediff.comps.li) | Where-Object {
         $_.Class -eq 'BDP.Content.Shield.HediffCompProperties_EnergyShield'
@@ -106,12 +107,9 @@ Assert-True ($propertiesText -match 'useDirectionalImpactDepth') '护盾配置�
 Assert-True ($effectPlayerText -match 'blockFlashFleckDef') '白闪播放器必须接受分层后的 Fleck 定义。'
 
 # 装入真实程序集，验证北、南、东、西四个来源方向。
-$managedRoot = 'C:\NiwtGames\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed'
-[Reflection.Assembly]::LoadFrom((Join-Path $managedRoot 'UnityEngine.CoreModule.dll')) | Out-Null
-[Reflection.Assembly]::LoadFrom((Join-Path $managedRoot 'UnityEngine.dll')) | Out-Null
-[Reflection.Assembly]::LoadFrom((Join-Path $managedRoot 'Assembly-CSharp.dll')) | Out-Null
-[Reflection.Assembly]::LoadFrom((Join-Path $modRoot '1.6\Assemblies\BDP.Core.dll')) | Out-Null
-$contentAssembly = [Reflection.Assembly]::LoadFrom((Join-Path $modRoot '1.6\Assemblies\BDP.Content.dll'))
+. (Join-Path $PSScriptRoot 'TestSupport/RangedVersionTestSupport.ps1')
+Initialize-RangedVersionTest -RimWorldVersion $RimWorldVersion
+$contentAssembly = $script:RangedContent
 $policyType = $contentAssembly.GetType('BDP.Content.Shield.EnergyShieldBlockPolicy', $true)
 $flags = [Reflection.BindingFlags]::Static -bor [Reflection.BindingFlags]::Public -bor [Reflection.BindingFlags]::NonPublic
 $depthMethod = $policyType.GetMethod('ShouldRenderImpactBehindPawn', $flags)

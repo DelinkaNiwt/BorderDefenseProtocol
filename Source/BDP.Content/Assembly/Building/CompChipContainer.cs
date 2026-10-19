@@ -60,6 +60,14 @@ namespace BDP.Content.Assembly
         }
 
         /// <summary>
+        /// 当前芯片仓的配置容量上限。
+        /// </summary>
+        internal int CapacityLimit
+        {
+            get { return ResolveMaxCapacity(); }
+        }
+
+        /// <summary>
         /// 生成后补齐内部容器。
         /// </summary>
         public override void PostPostMake()

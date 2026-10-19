@@ -8,6 +8,12 @@ namespace BDP.Core.CombatBody.Wounds
     /// </summary>
     public sealed class CombatBodyWoundTrionInfoHediffComp : HediffComp
     {
+        /// <summary>供外部显示层读取本伤口已发布流失；不重算、不发布或续期来源。</summary>
+        public bool TryGetPublishedDrainPerSecond(out float drainPerSecond)
+        {
+            return CombatBodyWoundTrionDrainUtility.TryResolvePublishedDrainPerSecond(parent, out drainPerSecond);
+        }
+
         /// <summary>
         /// 给伤口悬停提示追加当前 Trion 流失。
         /// 没有正数流失时返回 null，让普通伤口提示保持原样。
@@ -16,7 +22,7 @@ namespace BDP.Core.CombatBody.Wounds
         {
             get
             {
-                if (!CombatBodyWoundTrionDrainUtility.TryResolvePublishedDrainPerSecond(parent, out float drainPerSecond))
+                if (!TryGetPublishedDrainPerSecond(out float drainPerSecond))
                 {
                     return null;
                 }

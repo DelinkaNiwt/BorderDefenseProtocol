@@ -16,14 +16,14 @@ namespace BDP.Content.Assembly.ChipManufacturing.Validation
         private const string LogPrefix = "[BDP.ChipManufacturing.DefValidation] ";
 
         /// <summary>
-        /// 检查全部动作和武装型 Def；每个错误只报告，不阻断其它 Def 扫描。
+        /// 检查全部芯片功能定义和武装型 Def；每个错误只报告，不阻断其它 Def 扫描。
         /// </summary>
         public static void ValidateAll()
         {
-            List<ChipActionPresetDef> actions = DefDatabase<ChipActionPresetDef>.AllDefsListForReading;
-            for (int index = 0; index < actions.Count; index++)
+            List<ChipManufacturingPresetDef> functionDefs = DefDatabase<ChipManufacturingPresetDef>.AllDefsListForReading;
+            for (int index = 0; index < functionDefs.Count; index++)
             {
-                ValidateAction(actions[index]);
+                ValidateChipFunctionDef(functionDefs[index]);
             }
 
             List<ChipArmamentFormDef> forms = DefDatabase<ChipArmamentFormDef>.AllDefsListForReading;
@@ -40,34 +40,26 @@ namespace BDP.Content.Assembly.ChipManufacturing.Validation
             }
         }
 
-        /// <summary>检查单个动作预设。</summary>
-        private static void ValidateAction(ChipActionPresetDef action)
+        /// <summary>检查单个芯片功能模板。</summary>
+        private static void ValidateChipFunctionDef(ChipManufacturingPresetDef function)
         {
-            if (action == null)
+            if (function == null)
             {
                 return;
             }
 
-            if (action.config == null)
+            if (function.config == null)
             {
-                Report(action.defName, "缺少 config。");
+                Report(function.defName, "缺少 config。");
             }
-            else if (action.config.Profile != null
-                && action.config.Profile.Category != null
-                && action.config.Profile.Category.defName == "BDP_ChipCategory_Weapon"
-                && action.profession == null)
+            ValidateCosts(function.defName, function.costList);
+            if (function.additionalWorkAmount < 0f)
             {
-                Report(action.defName, "武装动作必须声明唯一职业。");
-            }
-
-            ValidateCosts(action.defName, action.costList);
-            if (action.additionalWorkAmount < 0f)
-            {
-                Report(action.defName, "附加工作量不得为负数。");
+                Report(function.defName, "附加工作量不得为负数。");
             }
         }
 
-        /// <summary>检查单个武装型预设。</summary>
+        /// <summary>检查单个武装构型定义。</summary>
         private static void ValidateArmamentForm(ChipArmamentFormDef form)
         {
             if (form == null)
@@ -80,9 +72,9 @@ namespace BDP.Content.Assembly.ChipManufacturing.Validation
                 Report(form.defName, "武装型必须声明至少一个兼容职业。");
             }
 
-            if (form.maxActionCount < 1)
+            if (form.maxFunctionCount < 1)
             {
-                Report(form.defName, "武装型最大动作数量必须大于零。");
+                Report(form.defName, "武装型最大功能数量必须大于零。");
             }
 
             ValidateCosts(form.defName, form.additionalCost);
@@ -91,38 +83,38 @@ namespace BDP.Content.Assembly.ChipManufacturing.Validation
                 Report(form.defName, "附加工作量不得为负数。");
             }
 
-            ValidateCompatibleActions(form);
+            ValidateCompatibleFunctions(form);
             ValidateOverrideLists(form);
         }
 
         /// <summary>
-        /// 检查武装型的动作适用范围；空列表表示不限制动作，非空列表必须全部指向现有动作。
+        /// 检查武装型的功能适用范围；空列表表示不限制芯片功能模板，非空列表必须全部指向现有芯片功能定义。
         /// </summary>
-        private static void ValidateCompatibleActions(ChipArmamentFormDef form)
+        private static void ValidateCompatibleFunctions(ChipArmamentFormDef form)
         {
-            if (form.compatibleActionPresetDefNames == null)
+            if (form.compatibleChipFunctionDefNames == null)
             {
                 return;
             }
 
             HashSet<string> names = new HashSet<string>(StringComparer.Ordinal);
-            for (int index = 0; index < form.compatibleActionPresetDefNames.Count; index++)
+            for (int index = 0; index < form.compatibleChipFunctionDefNames.Count; index++)
             {
-                string actionDefName = form.compatibleActionPresetDefNames[index];
-                if (string.IsNullOrWhiteSpace(actionDefName))
+                string functionDefName = form.compatibleChipFunctionDefNames[index];
+                if (string.IsNullOrWhiteSpace(functionDefName))
                 {
-                    Report(form.defName, "动作适用范围不得包含空动作 DefName。");
+                    Report(form.defName, "功能适用范围不得包含空芯片功能定义 DefName。");
                     continue;
                 }
 
-                if (!names.Add(actionDefName))
+                if (!names.Add(functionDefName))
                 {
-                    Report(form.defName, "动作适用范围不得重复引用动作：" + actionDefName);
+                    Report(form.defName, "功能适用范围不得重复引用芯片功能定义：" + functionDefName);
                 }
 
-                if (ChipManufacturingDefLookup.FindAction(actionDefName) == null)
+                if (ChipManufacturingDefLookup.FindChipFunctionDef(functionDefName) == null)
                 {
-                    Report(form.defName, "动作适用范围引用不存在的动作：" + actionDefName);
+                    Report(form.defName, "功能适用范围引用不存在的芯片功能定义：" + functionDefName);
                 }
             }
         }
@@ -184,9 +176,9 @@ namespace BDP.Content.Assembly.ChipManufacturing.Validation
                         continue;
                     }
 
-                    if (ProfessionsOverlap(left, right) && ActionScopesOverlap(left, right))
+                    if (ProfessionsOverlap(left, right) && FunctionScopesOverlap(left, right))
                     {
-                        Report(left.defName, "隐式默认型与 " + right.defName + " 的职业和动作范围重叠，默认解析顺序不明确。");
+                        Report(left.defName, "隐式默认型与 " + right.defName + " 的职业和功能范围重叠，默认解析顺序不明确。");
                     }
                 }
             }
@@ -212,20 +204,20 @@ namespace BDP.Content.Assembly.ChipManufacturing.Validation
             return false;
         }
 
-        /// <summary>判断两个武装型的动作范围是否有交集；空范围代表全部动作。</summary>
-        private static bool ActionScopesOverlap(ChipArmamentFormDef left, ChipArmamentFormDef right)
+        /// <summary>判断两个武装型的功能范围是否有交集；空范围代表全部芯片功能模板。</summary>
+        private static bool FunctionScopesOverlap(ChipArmamentFormDef left, ChipArmamentFormDef right)
         {
-            if (left.compatibleActionPresetDefNames == null
-                || left.compatibleActionPresetDefNames.Count == 0
-                || right.compatibleActionPresetDefNames == null
-                || right.compatibleActionPresetDefNames.Count == 0)
+            if (left.compatibleChipFunctionDefNames == null
+                || left.compatibleChipFunctionDefNames.Count == 0
+                || right.compatibleChipFunctionDefNames == null
+                || right.compatibleChipFunctionDefNames.Count == 0)
             {
                 return true;
             }
 
-            for (int leftIndex = 0; leftIndex < left.compatibleActionPresetDefNames.Count; leftIndex++)
+            for (int leftIndex = 0; leftIndex < left.compatibleChipFunctionDefNames.Count; leftIndex++)
             {
-                if (right.compatibleActionPresetDefNames.Contains(left.compatibleActionPresetDefNames[leftIndex]))
+                if (right.compatibleChipFunctionDefNames.Contains(left.compatibleChipFunctionDefNames[leftIndex]))
                 {
                     return true;
                 }
@@ -234,7 +226,7 @@ namespace BDP.Content.Assembly.ChipManufacturing.Validation
             return false;
         }
 
-        /// <summary>在 Content 边界检查组合技引用的动作来源仍然存在。</summary>
+        /// <summary>在 Content 边界检查组合技引用的芯片功能来源仍然存在。</summary>
         private static void ValidateComboSources(ComboDef combo)
         {
             if (combo == null)
@@ -242,16 +234,16 @@ namespace BDP.Content.Assembly.ChipManufacturing.Validation
                 return;
             }
 
-            if (!string.IsNullOrWhiteSpace(combo.firstSourceActionDefName)
-                && ChipManufacturingDefLookup.FindAction(combo.firstSourceActionDefName) == null)
+            if (!string.IsNullOrWhiteSpace(combo.firstSourceKey)
+                && ChipManufacturingDefLookup.FindChipFunctionDef(combo.firstSourceKey) == null)
             {
-                Report(combo.defName, "组合技第一来源动作 不存在：" + combo.firstSourceActionDefName);
+                Report(combo.defName, "组合技第一来源芯片功能定义不存在：" + combo.firstSourceKey);
             }
 
-            if (!string.IsNullOrWhiteSpace(combo.secondSourceActionDefName)
-                && ChipManufacturingDefLookup.FindAction(combo.secondSourceActionDefName) == null)
+            if (!string.IsNullOrWhiteSpace(combo.secondSourceKey)
+                && ChipManufacturingDefLookup.FindChipFunctionDef(combo.secondSourceKey) == null)
             {
-                Report(combo.defName, "组合技第二来源动作 不存在：" + combo.secondSourceActionDefName);
+                Report(combo.defName, "组合技第二来源芯片功能定义不存在：" + combo.secondSourceKey);
             }
         }
 

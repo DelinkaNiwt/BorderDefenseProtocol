@@ -25,21 +25,25 @@ $targetingSourceText = Read-Source $targetingSourcePath
 # 契约:无人接管时,远程候选目标必须回落到原版 Verb 的“现在能否命中”判定(射程+必要 LOS),
 # 恢复原版“不可直视即不可选”的悬停事实;近战保持原版“先选中再接近”语义,豁免命中检查。
 Assert-True (
-    $targetingSourceText -match 'IsMeleeAttack\s*\|\|\s*context\.Verb\.CanHitTarget\(target\)'
+    ($targetingSourceText -match 'IsMeleeAttack\s*\|\|\s*context\.Verb\.CanHitTarget\(target\)') -or
+    ($targetingSourceText -match 'if\s*\(context\.TargetingRecord\.IsMeleeAttack\)[\s\S]*?return true;[\s\S]*?return context\.Verb\.CanHitTarget\(target\);')
 ) 'Unmanaged ranged targets must fall back to vanilla Verb.CanHitTarget (range + required LOS) at the neutral targeting boundary, while melee stays exempt.'
 
 # 契约:确认边界同样回落原版 Verb 的点击校验(意识形态等),不再由适配层自造目标裁决。
 Assert-True (
-    $targetingSourceText -match 'IsMeleeAttack\s*\|\|\s*context\.Verb\.ValidateTarget\(target,\s*showMessages\)'
+    ($targetingSourceText -match 'IsMeleeAttack\s*\|\|\s*context\.Verb\.ValidateTarget\(target,\s*showMessages\)') -or
+    ($targetingSourceText -match 'context\.TargetingRecord\.IsMeleeAttack\s*\|\|\s*context\.Verb\.ValidateTarget\(target,\s*showMessages\)')
 ) 'Unmanaged ranged targets must fall back to vanilla Verb.ValidateTarget at the neutral confirmation boundary, while melee stays exempt.'
 
 # 契约:模块显式接管(如毒蛇路线引导的绕行裁定)必须优先于原版回落,且只在接管时生效。
+$unifiedLegalityPattern = "private bool TryEvaluateUnifiedTargetLegality\([\s\S]*?TryEvaluateCurrentTargetLegality[\s\S]*?CanEnterNeutralTargetingBoundary"
 Assert-True (
-    $targetingSourceText -match 'public bool CanHitTarget\(LocalTargetInfo target\)[\s\S]*?TryEvaluateCurrentTargetLegality\(context, target, false, out currentTargetLegality\)[\s\S]*?return currentTargetLegality;[\s\S]*?CanEnterNeutralTargetingBoundary\(context, target\);'
+    $targetingSourceText -match $unifiedLegalityPattern
 ) 'Module-explicit targeting legality must take precedence over the vanilla fallback in CanHitTarget.'
 
+$validateLegalityPattern = "public bool ValidateTarget\(LocalTargetInfo target, bool showMessages = true\)[\s\S]*?TryEvaluateUnifiedTargetLegality[\s\S]*?moduleHandled[\s\S]*?CanValidateTargetAtNeutralBoundary\(context, target, showMessages\);"
 Assert-True (
-    $targetingSourceText -match 'public bool ValidateTarget\(LocalTargetInfo target, bool showMessages = true\)[\s\S]*?TryEvaluateCurrentTargetLegality\(context, target, showMessages, out currentTargetLegality\)[\s\S]*?CanValidateTargetAtNeutralBoundary\(context, target, showMessages\);'
+    $targetingSourceText -match $validateLegalityPattern
 ) 'Module-explicit targeting legality must take precedence over the vanilla fallback in ValidateTarget.'
 
 # 契约:dual 复合结果仍走逐侧准入,不得落入单武器回落路径(避免把单侧 LOS 误当全体真值)。

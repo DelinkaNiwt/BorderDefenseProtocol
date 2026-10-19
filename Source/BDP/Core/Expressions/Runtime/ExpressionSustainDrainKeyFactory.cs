@@ -13,9 +13,9 @@ namespace BDP.Core.Expressions.Runtime
         /// </summary>
         internal static TrionDrainKey Create(FormalExpressionResult result)
         {
-            ExpressionResultKind resultKind = result != null
-                ? result.ResultKind
-                : ExpressionResultKind.Passive;
+            ExpressionOutputChannel resultKind = result != null
+                ? result.OutputChannel
+                : ExpressionOutputChannel.Passive;
             return new TrionDrainKey(
                 "Expression",
                 resultKind.ToString(),
@@ -34,15 +34,15 @@ namespace BDP.Core.Expressions.Runtime
                 return "missing";
             }
 
-            switch (result.ResultKind)
+            switch (result.OutputChannel)
             {
-                case ExpressionResultKind.Ability:
+                case ExpressionOutputChannel.Ability:
                     return ResolveOrFallback(result.AbilityDefName, result.Id);
-                case ExpressionResultKind.Hediff:
+                case ExpressionOutputChannel.Hediff:
                     return ResolveOrFallback(result.HediffDefName, result.Id);
-                case ExpressionResultKind.Passive:
-                    return ResolveOrFallback(result.PassiveKey, result.Id);
-                case ExpressionResultKind.Verb:
+                case ExpressionOutputChannel.Passive:
+                    return ResolveOrFallback(result.PassiveIdentityKey, result.Id);
+                case ExpressionOutputChannel.Verb:
                     if (!string.IsNullOrWhiteSpace(result.ComboDefName))
                     {
                         return "combo:" + result.ComboDefName + ":" + ResolveOrFallback(result.Id, "entry");

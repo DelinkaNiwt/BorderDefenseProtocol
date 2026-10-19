@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 开发者精确部位移除专用零伤害投射物。 -->
+  <ThingDef ParentName="BaseBullet">
+    <!-- 投射物只负责命中表现，真实效果由远程模块提交。 -->
+    <defName>BDP_Projectile_ExactBodyPartRemoval</defName>
+    <label>精确部位测试弹</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <thingClass>BDP.Core.Projectiles.BdpProjectile</thingClass>
+    <projectile>
+      <!-- 基础伤害为零，失败命中不会造成普通伤害。 -->
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>0</damageAmountBase>
+      <armorPenetrationBase>0</armorPenetrationBase>
+      <stoppingPower>0</stoppingPower>
+      <speed>120</speed>
+    </projectile>
+  </ThingDef>
+
+</Defs>

@@ -2,7 +2,7 @@
 
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
-**Goal:** 新增“光魂”芯片预设，并以中性的嵌套姿态设施支持“大形态内切换小姿态”；切换大形态时，小姿态重置为目标形态的默认值。
+**Goal:** 新增“光魂”芯片功能模板，并以中性的嵌套姿态设施支持“大形态内切换小姿态”；切换大形态时，小姿态重置为目标形态的默认值。
 
 **Architecture:** `BDP.Core`（核心程序集）只新增通用姿态状态、解析、切换事务与攻击约束支持；`BDP.Content`（内容程序集）承载光魂业务、姿态按钮、跳跃耗能分支及护盾扩展。形态有效条目由“形态公共条目 + 当前姿态条目”组成，姿态只属于一个形态，切换形态时不跨形态继承。
 
@@ -13,8 +13,8 @@
 ## Task 1: 嵌套姿态定义与表达解析
 
 **Files:**
-- Modify: `Source/BDP/Core/Definitions/ChipActionPresetDef.cs`
-- Modify: `Source/BDP/Core/Definitions/ChipActionPresetValidator.cs`
+- Modify: `Source/BDP.Content/Assembly/ChipManufacturing/Defs/ChipFunctionDef.cs`
+- Modify: `Source/BDP.Content/Assembly/ChipManufacturing/Validation/ChipManufacturingDefValidator.cs`
 - Modify: `Source/BDP/Core/Expression/ChipExpressionContract.cs`
 - Modify: `Source/BDP/Core/Expression/ChipExpressionContractInterpreter.cs`
 - Test: `Source/BDP.Tests/ChipNestedStanceDefinitionSmokeTests.ps1`
@@ -88,11 +88,11 @@
 ## Task 5: 光魂正式内容
 
 **Files:**
-- Modify: `1.6/Content/Defs/ChipActionPresetDef/Presets.xml`
+- Modify: `1.6/Content/Defs/ChipFunctionDef/Presets.xml`
 - Add: `1.6/Content/Defs/AbilityDef/LightSoulPropulsion.xml`
 - Add: `1.6/Content/Defs/HediffDef/LightSoul.xml`
 - Modify: `1.6/Content/Defs/WeaponVisualPresetDef/Visual.xml`
-- Modify: `1.6/Languages/ChineseSimplified/DefInjected/BDP.Core.ChipActionPresetDef/Presets.xml`
+- Modify: `1.6/Languages/ChineseSimplified/DefInjected/BDP.Core.ChipFunctionDef/Presets.xml`
 - Modify: `1.6/Languages/ChineseSimplified/DefInjected/AbilityDef/Abilities.xml`
 - Modify: `1.6/Languages/ChineseSimplified/DefInjected/HediffDef/Hediffs.xml`
 - Modify: `1.6/Languages/ChineseSimplified/Keyed/BDP_Content.xml`
@@ -104,11 +104,11 @@
 1. 先写覆盖分类、职业、形态、姿态、跳跃扣费、盾牌参数、禁攻减速及双伤害权重的失败测试。
 2. 新增光魂推进能力，复用短距跳跃飞行物与逻辑，配置 Trion 扣费。
 3. 新增灵活/举盾两个护盾 Hediff（健康状态），分别配置 180°/50%/禁近战与 120°/98%/允许近战；举盾阶段设置移动速度 ×0.6 和禁用暴力行为。
-4. 新增光魂预设：大盾形态公共持有推进能力，两个姿态各启用对应护盾；重刃形态启用推进能力与近战条目。
+4. 新增光魂芯片功能模板：大盾形态公共持有推进能力，两个姿态各启用对应护盾；重刃形态启用推进能力与近战功能模式。
 5. 重刃使用两个互斥 `Tool`（攻击工具）：钝伤 20、穿透 0、权重 1.7；切割 15、穿透 0.10、权重 1.0，约为 75%/25%。
 6. 配置三套独立视觉预设；在没有最终美术资源时仅复用现有正式资源，不虚构缺失贴图路径。
 7. 所有新增玩家文本进入语言包。
-8. 职业筛选只属于武装分类；防护等非武装分类直接显示该分类全部预设。光魂仍保留“攻击手”定义语义，但该字段不参与防护页筛选。
+8. 职业筛选只属于武装分类；防护等非武装分类直接显示该分类全部芯片功能模板。光魂仍保留“攻击手”定义语义，但该字段不参与防护页筛选。
 9. 运行测试并提交。
 
 ## Task 6: 集成验证、审查与日志

@@ -37,7 +37,7 @@ Assert-True (($chipText -match '<defName>BDP_Chip_Kogetsu</defName>') -and
     ($chipText -match '<li>BDP_ChipTag_AttackerUse</li>') -and
     ($chipText -match '<li>BDP_ChipTag_Entity</li>')) '弧月正式画像不完整。'
 Assert-True (($chipText -match '<defName>BDP_Chip_Senku</defName>') -and
-    ($chipText -match '<Category>BDP_ChipCategory_Ability</Category>') -and
+    ($chipText -match '<Category>BDP_ChipCategory_GeneralSkill</Category>') -and
     ($chipText -match '<li>BDP_ChipTag_Offensive</li>') -and
     ($chipText -match '<li>BDP_ChipTag_KogetsuExclusive</li>') -and
     ($chipText -match '<li>BDP_ChipTag_EnergyForm</li>')) '旋空正式画像不完整。'
